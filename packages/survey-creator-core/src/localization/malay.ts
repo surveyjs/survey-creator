@@ -369,6 +369,28 @@ export var msStrings = {
       name: "Nama",
       title: "Tajuk"
     },
+    masksettings: {
+      saveMaskedValue: "Simpan nilai bertopeng dalam hasil tinjauan"
+    },
+    patternmask: {
+      pattern: "Corak nilai"
+    },
+    datetimemask: {
+      min: "Nilai minimum",
+      max: "Nilai maksimum"
+    },
+    numericmask: {
+      allowNegativeValues: "Benarkan nilai negatif",
+      thousandsSeparator: "Pemisah beribu-ribu",
+      decimalSeparator: "Pemisah perpuluhan",
+      precision: "Ketepatan nilai",
+      min: "Nilai minimum",
+      max: "Nilai maksimum"
+    },
+    currencymask: {
+      prefix: "Awalan mata wang",
+      suffix: "Akhiran mata wang"
+    },
     imageHeight: "Tinggi imej",
     imageWidth: "Lebar imej",
     valueName: "Nama nilai",
@@ -609,6 +631,13 @@ export var msStrings = {
     autoGrowComment: "Kembangkan kawasan komen secara automatik jika perlu",
     allowResizeComment: "Benarkan pengguna mensaiz semula kawasan teks",
     textUpdateMode: "Mengemas kini nilai soalan teks",
+    maskType: "Input jenis topeng",
+    maskTypes: {
+      patternmask: "Corak",
+      numericmask: "Angka",
+      datetimemask: "Tarikh dan Masa",
+      currencymask: "Mata wang"
+    },
     focusOnFirstError: "Mengesetkan fokus pada jawapan tidak sah yang pertama",
     checkErrorsMode: "Jalankan pengesahihan",
     navigateToUrl: "Navigasi ke URL",
@@ -733,6 +762,7 @@ export var msStrings = {
       templateTitle: "Tajuk templat",
       totals: "Jumlah",
       logic: "Logik",
+      mask: "Seting Topeng Input",
       layout: {
         panel: "Susun atur",
         question: "Susun atur",
@@ -796,7 +826,11 @@ export var msStrings = {
     questionStartIndex_placeholder: "Ex.: a)",
     width_placeholder: "Ex.: 6in",
     minWidth_placeholder: "Ex.: 600px",
-    maxWidth_placeholder: "Ex.: 50%"
+    maxWidth_placeholder: "Ex.: 50%",
+    pattern_placeholder: "Ex.: +1(999)-999-99-99",
+    datetimepattern_placeholder: "Ex.: mm/dd/yyyy",
+    currencyprefix_placeholder: "Ex.: $",
+    currencysuffix_placeholder: "Ex.: USD"
   },
   // Property values
   pv: {
@@ -1011,7 +1045,8 @@ export var msStrings = {
     searchMode: {
       contains: "Mengandungi",
       startsWith: "Bermula dengan"
-    }
+    },
+    textWrapEnabled: "Pilihan balut"
   },
   // Operators
   op: {
@@ -1137,7 +1172,8 @@ export var msStrings = {
       },
       textUpdateMode: "Pilih daripada: \"Pada fokus yang hilang\" - nilai dikemas kini apabila medan input kehilangan fokus; \"Semasa menaip\" - nilai dikemas kini dalam masa nyata, semasa pengguna menaip. Pilihan \"Warisan\" menggunakan seting peringkat tinjauan (\"Pada fokus yang hilang\" secara lalai).",
       url: "Anda boleh menggunakan mana-mana perkhidmatan web sebagai sumber data untuk soalan pelbagai pilihan. Untuk mengisi nilai pilihan, masukkan URL perkhidmatan yang menyediakan data.",
-      searchMode: "Operasi perbandingan yang digunakan untuk menapis senarai juntai bawah."
+      searchMode: "Operasi perbandingan yang digunakan untuk menapis senarai juntai bawah.",
+      textWrapEnabled: "Teks panjang dalam pilihan pilihan akan menjana pemisah baris secara automatik agar muat dalam menu lungsur. Nyahpilih jika anda mahu teks klip."
     },
     signaturepad: {
       signatureWidth: "Mengesetkan lebar kawasan tandatangan yang dipaparkan dan imej yang terhasil.",
@@ -1278,7 +1314,25 @@ export var msStrings = {
     autocomplete: "Rujuk perihalan atribut [autolengkap](https://developer.mozilla.org/en-US/docs/Web/HTML/Atribut/autolengkap) untuk maklumat lanjut.",
     filePlaceholder: "Digunakan apabila \"Jenis sumber\" ialah \"Fail tempatan\" atau apabila kamera tidak tersedia",
     photoPlaceholder: "Digunakan apabila \"Jenis sumber\" ialah \"Kamera\".",
-    fileOrPhotoPlaceholder: "Digunakan apabila \"Jenis sumber\" ialah \"Fail atau kamera tempatan\"."
+    fileOrPhotoPlaceholder: "Digunakan apabila \"Jenis sumber\" ialah \"Fail atau kamera tempatan\".",
+    masksettings: {
+      saveMaskedValue: "Pilih jika anda ingin menyimpan nilai soalan dengan topeng yang digunakan dalam hasil tinjauan."
+    },
+    patternmask: {
+      pattern: "Corak boleh mengandungi literal rentetan dan ruang letak berikut: '9' - untuk digit; 'a' - untuk huruf besar atau kecil; '#' - untuk digit atau huruf besar atau huruf kecil. Gunakan tindak balas '\\' untuk melarikan diri daripada watak."
+    },
+    datetimemask: {
+      pattern: "Corak boleh mengandungi aksara pemisah dan ruang letak berikut: 'm' - untuk nombor bulan; 'mm' - untuk nombor bulan, dengan sifar utama untuk nilai satu digit; 'd' - untuk hari dalam bulan; 'dd' - untuk hari dalam bulan, dengan sifar utama untuk nilai satu digit; 'yy' - untuk dua digit terakhir tahun ini; 'yyyy' - untuk tahun empat angka."
+    },
+    numericmask: {
+      decimalSeparator: "Simbol yang digunakan untuk memisahkan bahagian pecahan daripada bahagian integer bagi nombor yang dipaparkan.",
+      thousandsSeparator: "Simbol yang digunakan untuk memisahkan digit nombor besar ke dalam kumpulan tiga.",
+      precision: "Hadkan bilangan digit untuk dikekalkan selepas titik perpuluhan bagi nombor yang dipaparkan."
+    },
+    currencymask: {
+      prefix: "Satu atau beberapa simbol yang akan dipaparkan sebelum nilai.",
+      suffix: "Satu atau beberapa simbol yang akan dipaparkan selepas nilai."
+    }
   },
   // Properties
   p: {
@@ -2377,3 +2431,35 @@ editorLocalization.locales["ms"] = msStrings;
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Teks ruang letak untuk kawasan penarafan"
 // pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "Lengkapkan tinjauan secara automatik"
 // pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Pilih jika anda mahu tinjauan selesai secara automatik selepas responden menjawab semua soalan."
+// masksettings.saveMaskedValue: "Save masked value in survey results" => "Simpan nilai bertopeng dalam hasil tinjauan"
+// patternmask.pattern: "Value pattern" => "Corak nilai"
+// datetimemask.min: "Minimum value" => "Nilai minimum"
+// datetimemask.max: "Maximum value" => "Nilai maksimum"
+// numericmask.allowNegativeValues: "Allow negative values" => "Benarkan nilai negatif"
+// numericmask.thousandsSeparator: "Thousands separator" => "Pemisah beribu-ribu"
+// numericmask.decimalSeparator: "Decimal separator" => "Pemisah perpuluhan"
+// numericmask.precision: "Value precision" => "Ketepatan nilai"
+// numericmask.min: "Minimum value" => "Nilai minimum"
+// numericmask.max: "Maximum value" => "Nilai maksimum"
+// currencymask.prefix: "Currency prefix" => "Awalan mata wang"
+// currencymask.suffix: "Currency suffix" => "Akhiran mata wang"
+// pe.maskType: "Input mask type" => "Input jenis topeng"
+// maskTypes.patternmask: "Pattern" => "Corak"
+// maskTypes.numericmask: "Numeric" => "Angka"
+// maskTypes.datetimemask: "Date and Time" => "Tarikh dan Masa"
+// maskTypes.currencymask: "Currency" => "Mata wang"
+// tabs.mask: "Input Mask Settings" => "Seting Topeng Input"
+// pe.pattern_placeholder: "Ex.: +1(999)-999-99-99" => "Ex.: +1(999)-999-99-99"
+// pe.datetimepattern_placeholder: "Ex.: mm/dd/yyyy" => "Ex.: mm/dd/yyyy"
+// pe.currencyprefix_placeholder: "Ex.: $" => "Ex.: $"
+// pe.currencysuffix_placeholder: "Ex.: USD" => "Ex.: USD"
+// pv.textWrapEnabled: "Wrap choices" => "Pilihan balut"
+// question.textWrapEnabled: "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip." => "Teks panjang dalam pilihan pilihan akan menjana pemisah baris secara automatik agar muat dalam menu lungsur. Nyahpilih jika anda mahu teks klip."
+// masksettings.saveMaskedValue: "Select if you want to store the question value with an applied mask in survey results." => "Pilih jika anda ingin menyimpan nilai soalan dengan topeng yang digunakan dalam hasil tinjauan."
+// patternmask.pattern: "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character." => "Corak boleh mengandungi literal rentetan dan ruang letak berikut: '9' - untuk digit; 'a' - untuk huruf besar atau kecil; '#' - untuk digit atau huruf besar atau huruf kecil. Gunakan tindak balas '\\' untuk melarikan diri daripada watak."
+// datetimemask.pattern: "The pattern can contain separator characters and the following placeholders: `m` - for month number; `mm` - for month number, with leading zero for single-digit values; `d` - for day of the month; `dd` - for day of the month, with leading zero for single-digit values; `yy` - for the last two digits of the year; `yyyy` - for a four-digit year." => "Corak boleh mengandungi aksara pemisah dan ruang letak berikut: 'm' - untuk nombor bulan; 'mm' - untuk nombor bulan, dengan sifar utama untuk nilai satu digit; 'd' - untuk hari dalam bulan; 'dd' - untuk hari dalam bulan, dengan sifar utama untuk nilai satu digit; 'yy' - untuk dua digit terakhir tahun ini; 'yyyy' - untuk tahun empat angka."
+// numericmask.decimalSeparator: "A symbol used to separate the fractional part from the integer part of a displayed number." => "Simbol yang digunakan untuk memisahkan bahagian pecahan daripada bahagian integer bagi nombor yang dipaparkan."
+// numericmask.thousandsSeparator: "A symbol used to separate the digits of a large number into groups of three." => "Simbol yang digunakan untuk memisahkan digit nombor besar ke dalam kumpulan tiga."
+// numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Hadkan bilangan digit untuk dikekalkan selepas titik perpuluhan bagi nombor yang dipaparkan."
+// currencymask.prefix: "One or several symbols to be displayed before the value." => "Satu atau beberapa simbol yang akan dipaparkan sebelum nilai."
+// currencymask.suffix: "One or several symbols to be displayed after the value." => "Satu atau beberapa simbol yang akan dipaparkan selepas nilai."

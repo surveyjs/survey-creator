@@ -369,6 +369,28 @@ export var indonesianStrings = {
       name: "Nama",
       title: "Titel"
     },
+    masksettings: {
+      saveMaskedValue: "Simpan nilai terselubung dalam hasil survei"
+    },
+    patternmask: {
+      pattern: "Pola nilai"
+    },
+    datetimemask: {
+      min: "Nilai minimum",
+      max: "Nilai maksimum"
+    },
+    numericmask: {
+      allowNegativeValues: "Izinkan nilai negatif",
+      thousandsSeparator: "Pemisah ribuan",
+      decimalSeparator: "Pemisah desimal",
+      precision: "Presisi nilai",
+      min: "Nilai minimum",
+      max: "Nilai maksimum"
+    },
+    currencymask: {
+      prefix: "Awalan mata uang",
+      suffix: "Akhiran mata uang"
+    },
     imageHeight: "Tinggi gambar",
     imageWidth: "Lebar gambar",
     valueName: "Nama nilai",
@@ -609,6 +631,13 @@ export var indonesianStrings = {
     autoGrowComment: "Perluas area komentar secara otomatis jika perlu",
     allowResizeComment: "Mengizinkan pengguna mengubah ukuran area teks",
     textUpdateMode: "Memperbarui nilai pertanyaan teks",
+    maskType: "Jenis masker input",
+    maskTypes: {
+      patternmask: "Pola",
+      numericmask: "Numerik",
+      datetimemask: "Tanggal dan Waktu",
+      currencymask: "Mata uang"
+    },
     focusOnFirstError: "Mengatur fokus pada jawaban pertama yang tidak valid",
     checkErrorsMode: "Jalankan validasi",
     navigateToUrl: "Arahkan ke URL",
@@ -733,6 +762,7 @@ export var indonesianStrings = {
       templateTitle: "Judul templat",
       totals: "Total",
       logic: "Logika",
+      mask: "Pengaturan Masker Input",
       layout: {
         panel: "Tata letak",
         question: "Tata letak",
@@ -796,7 +826,11 @@ export var indonesianStrings = {
     questionStartIndex_placeholder: "Mis.: a)",
     width_placeholder: "Contoh: 6in",
     minWidth_placeholder: "Contoh: 600px",
-    maxWidth_placeholder: "Contoh: 50%"
+    maxWidth_placeholder: "Contoh: 50%",
+    pattern_placeholder: "Contoh: +1(999)-999-99-99",
+    datetimepattern_placeholder: "Contoh: mm/dd/yyyy",
+    currencyprefix_placeholder: "Contoh.: $",
+    currencysuffix_placeholder: "Contoh: USD"
   },
   // Property values
   pv: {
@@ -1011,7 +1045,8 @@ export var indonesianStrings = {
     searchMode: {
       contains: "Berisi",
       startsWith: "Dimulai dengan"
-    }
+    },
+    textWrapEnabled: "Pilihan bungkus"
   },
   // Operators
   op: {
@@ -1137,7 +1172,8 @@ export var indonesianStrings = {
       },
       textUpdateMode: "Pilih dari: \"On lost focus\" - nilai diperbarui ketika bidang input kehilangan fokus; \"Saat mengetik\" - nilainya diperbarui secara real-time, saat pengguna mengetik. Opsi \"Warisi\" menerapkan pengaturan tingkat survei (\"Pada fokus yang hilang\" secara default).",
       url: "Anda dapat menggunakan layanan web apa pun sebagai sumber data untuk pertanyaan pilihan ganda. Untuk mengisi nilai pilihan, masukkan URL layanan yang menyediakan data.",
-      searchMode: "Operasi perbandingan yang digunakan untuk memfilter daftar turun bawah."
+      searchMode: "Operasi perbandingan yang digunakan untuk memfilter daftar turun bawah.",
+      textWrapEnabled: "Teks panjang dalam opsi pilihan akan secara otomatis menghasilkan jeda baris agar sesuai dengan menu tarik-turun. Batalkan pilihan jika Anda ingin teks dipotong."
     },
     signaturepad: {
       signatureWidth: "Mengatur lebar area tanda tangan yang ditampilkan dan gambar yang dihasilkan.",
@@ -1278,7 +1314,25 @@ export var indonesianStrings = {
     autocomplete: "Lihat deskripsi atribut [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) untuk informasi selengkapnya.",
     filePlaceholder: "Berlaku ketika \"Jenis sumber\" adalah \"File lokal\" atau ketika kamera tidak tersedia",
     photoPlaceholder: "Berlaku ketika \"Jenis sumber\" adalah \"Kamera\".",
-    fileOrPhotoPlaceholder: "Berlaku ketika \"Jenis sumber\" adalah \"File atau kamera lokal\"."
+    fileOrPhotoPlaceholder: "Berlaku ketika \"Jenis sumber\" adalah \"File atau kamera lokal\".",
+    masksettings: {
+      saveMaskedValue: "Pilih apakah Anda ingin menyimpan nilai pertanyaan dengan masker yang diterapkan dalam hasil survei."
+    },
+    patternmask: {
+      pattern: "Pola dapat berisi literal string dan placeholder berikut: '9' - untuk digit; 'a' - untuk huruf besar atau kecil; '#' - untuk digit atau huruf besar atau kecil. Gunakan garis miring terbalik '\\' untuk melarikan diri dari karakter."
+    },
+    datetimemask: {
+      pattern: "Pola dapat berisi karakter pemisah dan placeholder berikut: 'm' - untuk nomor bulan; 'mm' - untuk angka bulan, dengan nol di depannya untuk nilai satu digit; 'd' - untuk hari dalam sebulan; 'dd' - untuk hari dalam sebulan, dengan nol di depan untuk nilai satu digit; 'yy' - untuk dua digit terakhir tahun ini; 'yyyy' - untuk tahun empat digit."
+    },
+    numericmask: {
+      decimalSeparator: "Simbol yang digunakan untuk memisahkan bagian pecahan dari bagian bilangan bulat dari angka yang ditampilkan.",
+      thousandsSeparator: "Simbol yang digunakan untuk memisahkan digit angka besar menjadi kelompok tiga.",
+      precision: "Membatasi jumlah digit yang akan dipertahankan setelah koma desimal untuk angka yang ditampilkan."
+    },
+    currencymask: {
+      prefix: "Satu atau beberapa simbol yang akan ditampilkan sebelum nilai.",
+      suffix: "Satu atau beberapa simbol yang akan ditampilkan setelah nilai."
+    }
   },
   // Properties
   p: {
@@ -2578,3 +2632,35 @@ editorLocalization.locales["id"] = indonesianStrings;
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Teks tempat penampung untuk area peringkat"
 // pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "Selesaikan survei secara otomatis"
 // pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Pilih apakah Anda ingin survei selesai secara otomatis setelah responden menjawab semua pertanyaan."
+// masksettings.saveMaskedValue: "Save masked value in survey results" => "Simpan nilai terselubung dalam hasil survei"
+// patternmask.pattern: "Value pattern" => "Pola nilai"
+// datetimemask.min: "Minimum value" => "Nilai minimum"
+// datetimemask.max: "Maximum value" => "Nilai maksimum"
+// numericmask.allowNegativeValues: "Allow negative values" => "Izinkan nilai negatif"
+// numericmask.thousandsSeparator: "Thousands separator" => "Pemisah ribuan"
+// numericmask.decimalSeparator: "Decimal separator" => "Pemisah desimal"
+// numericmask.precision: "Value precision" => "Presisi nilai"
+// numericmask.min: "Minimum value" => "Nilai minimum"
+// numericmask.max: "Maximum value" => "Nilai maksimum"
+// currencymask.prefix: "Currency prefix" => "Awalan mata uang"
+// currencymask.suffix: "Currency suffix" => "Akhiran mata uang"
+// pe.maskType: "Input mask type" => "Jenis masker input"
+// maskTypes.patternmask: "Pattern" => "Pola"
+// maskTypes.numericmask: "Numeric" => "Numerik"
+// maskTypes.datetimemask: "Date and Time" => "Tanggal dan Waktu"
+// maskTypes.currencymask: "Currency" => "Mata uang"
+// tabs.mask: "Input Mask Settings" => "Pengaturan Masker Input"
+// pe.pattern_placeholder: "Ex.: +1(999)-999-99-99" => "Contoh: +1(999)-999-99-99"
+// pe.datetimepattern_placeholder: "Ex.: mm/dd/yyyy" => "Contoh: mm/dd/yyyy"
+// pe.currencyprefix_placeholder: "Ex.: $" => "Contoh.: $"
+// pe.currencysuffix_placeholder: "Ex.: USD" => "Contoh: USD"
+// pv.textWrapEnabled: "Wrap choices" => "Pilihan bungkus"
+// question.textWrapEnabled: "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip." => "Teks panjang dalam opsi pilihan akan secara otomatis menghasilkan jeda baris agar sesuai dengan menu tarik-turun. Batalkan pilihan jika Anda ingin teks dipotong."
+// masksettings.saveMaskedValue: "Select if you want to store the question value with an applied mask in survey results." => "Pilih apakah Anda ingin menyimpan nilai pertanyaan dengan masker yang diterapkan dalam hasil survei."
+// patternmask.pattern: "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character." => "Pola dapat berisi literal string dan placeholder berikut: '9' - untuk digit; 'a' - untuk huruf besar atau kecil; '#' - untuk digit atau huruf besar atau kecil. Gunakan garis miring terbalik '\\' untuk melarikan diri dari karakter."
+// datetimemask.pattern: "The pattern can contain separator characters and the following placeholders: `m` - for month number; `mm` - for month number, with leading zero for single-digit values; `d` - for day of the month; `dd` - for day of the month, with leading zero for single-digit values; `yy` - for the last two digits of the year; `yyyy` - for a four-digit year." => "Pola dapat berisi karakter pemisah dan placeholder berikut: 'm' - untuk nomor bulan; 'mm' - untuk angka bulan, dengan nol di depannya untuk nilai satu digit; 'd' - untuk hari dalam sebulan; 'dd' - untuk hari dalam sebulan, dengan nol di depan untuk nilai satu digit; 'yy' - untuk dua digit terakhir tahun ini; 'yyyy' - untuk tahun empat digit."
+// numericmask.decimalSeparator: "A symbol used to separate the fractional part from the integer part of a displayed number." => "Simbol yang digunakan untuk memisahkan bagian pecahan dari bagian bilangan bulat dari angka yang ditampilkan."
+// numericmask.thousandsSeparator: "A symbol used to separate the digits of a large number into groups of three." => "Simbol yang digunakan untuk memisahkan digit angka besar menjadi kelompok tiga."
+// numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Membatasi jumlah digit yang akan dipertahankan setelah koma desimal untuk angka yang ditampilkan."
+// currencymask.prefix: "One or several symbols to be displayed before the value." => "Satu atau beberapa simbol yang akan ditampilkan sebelum nilai."
+// currencymask.suffix: "One or several symbols to be displayed after the value." => "Satu atau beberapa simbol yang akan ditampilkan setelah nilai."

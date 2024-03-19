@@ -369,6 +369,28 @@ export var skStrings = {
       name: "Meno",
       title: "Titul"
     },
+    masksettings: {
+      saveMaskedValue: "Uložte maskovanú hodnotu do výsledkov prieskumu"
+    },
+    patternmask: {
+      pattern: "Hodnotový vzor"
+    },
+    datetimemask: {
+      min: "Minimálna hodnota",
+      max: "Maximálna hodnota"
+    },
+    numericmask: {
+      allowNegativeValues: "Povolenie záporných hodnôt",
+      thousandsSeparator: "Oddeľovač tisícov",
+      decimalSeparator: "Oddeľovač desatinných miest",
+      precision: "Presnosť hodnoty",
+      min: "Minimálna hodnota",
+      max: "Maximálna hodnota"
+    },
+    currencymask: {
+      prefix: "Predčíslievanie meny",
+      suffix: "Prípona meny"
+    },
     imageHeight: "Výška obrázka",
     imageWidth: "Šírka obrázka",
     valueName: "Názov hodnoty",
@@ -609,6 +631,13 @@ export var skStrings = {
     autoGrowComment: "V prípade potreby automaticky rozbaľte oblasť komentárov",
     allowResizeComment: "Povolenie používateľom meniť veľkosť textových oblastí",
     textUpdateMode: "Aktualizácia hodnoty textovej otázky",
+    maskType: "Typ vstupnej masky",
+    maskTypes: {
+      patternmask: "Vzorka",
+      numericmask: "Numerický",
+      datetimemask: "Dátum a čas",
+      currencymask: "Mena"
+    },
     focusOnFirstError: "Zameranie na prvú neplatnú odpoveď",
     checkErrorsMode: "Spustenie overenia pravosti",
     navigateToUrl: "Prejsť na adresu URL",
@@ -733,6 +762,7 @@ export var skStrings = {
       templateTitle: "Titul šablóny",
       totals: "Celkové hodnoty",
       logic: "Logický výraz",
+      mask: "Nastavenia vstupnej masky",
       layout: {
         panel: "Rozloženie",
         question: "Rozloženie",
@@ -796,7 +826,11 @@ export var skStrings = {
     questionStartIndex_placeholder: "Napr.: a)",
     width_placeholder: "Napr.: 6in",
     minWidth_placeholder: "Napríklad: 600px",
-    maxWidth_placeholder: "Napríklad: 50%"
+    maxWidth_placeholder: "Napríklad: 50%",
+    pattern_placeholder: "Napríklad: +1(999)-999-99-99",
+    datetimepattern_placeholder: "Napr.: mm/dd/rrrr",
+    currencyprefix_placeholder: "Napr.: $",
+    currencysuffix_placeholder: "Napríklad: USD"
   },
   // Property values
   pv: {
@@ -1011,7 +1045,8 @@ export var skStrings = {
     searchMode: {
       contains: "Obsahuje",
       startsWith: "Začína sa"
-    }
+    },
+    textWrapEnabled: "Možnosti zabalenia"
   },
   // Operators
   op: {
@@ -1137,7 +1172,8 @@ export var skStrings = {
       },
       textUpdateMode: "Vyberte si z: \"Pri strate zaostrenia\" - hodnota sa aktualizuje, keď vstupné pole stratí zaostrenie; \"Počas písania\" - hodnota sa aktualizuje v reálnom čase, keď používatelia píšu. Možnosť \"Zdediť\" použije nastavenie na úrovni prieskumu (\"Predvolene stratené zameranie\").",
       url: "Ako zdroj údajov môžete použiť ľubovoľnú webovú službu na otázky s voliteľnými odpoveďami. Ak chcete vyplniť hodnoty možností, zadajte adresu URL služby poskytujúcej údaje.",
-      searchMode: "Porovnávacia operácia použitá na filtrovanie rozbaľovacieho zoznamu."
+      searchMode: "Porovnávacia operácia použitá na filtrovanie rozbaľovacieho zoznamu.",
+      textWrapEnabled: "Dlhé texty v možnostiach výberu automaticky vygenerujú zlomy riadkov, aby sa zmestili do rozbaľovacej ponuky. Zrušte výber, či chcete texty vystrihnúť."
     },
     signaturepad: {
       signatureWidth: "Nastaví šírku zobrazenej oblasti podpisu a výsledného obrázka.",
@@ -1278,7 +1314,25 @@ export var skStrings = {
     autocomplete: "Ďalšie informácie nájdete v popise atribútu [automatické dopĺňanie](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete).",
     filePlaceholder: "Použije, keď \"Typ zdroja\" je \"Lokálne súbory\" alebo keď fotoaparát nie je k dispozícii",
     photoPlaceholder: "Používa sa, keď \"Typ zdroja\" je \"Fotoaparát\".",
-    fileOrPhotoPlaceholder: "Použije, keď \"Typ zdroja\" je \"Lokálne súbory alebo fotoaparát\"."
+    fileOrPhotoPlaceholder: "Použije, keď \"Typ zdroja\" je \"Lokálne súbory alebo fotoaparát\".",
+    masksettings: {
+      saveMaskedValue: "Vyberte, či chcete do výsledkov prieskumu uložiť hodnotu otázky s použitou maskou."
+    },
+    patternmask: {
+      pattern: "Vzor môže obsahovať reťazcové literály a nasledujúce zástupné symboly: \"9\" - pre číslicu; \"a\" - pre veľké alebo malé písmeno; '#' - pre číslicu alebo veľké alebo malé písmeno. Použite opačné lomítko \"\\\" na únik z postavy."
+    },
+    datetimemask: {
+      pattern: "Vzor môže obsahovať oddeľovacie znaky a nasledujúce zástupné symboly: \"m\" - pre číslo mesiaca; \"mm\" - pre číslo mesiaca, s úvodnou nulou pre jednociferné hodnoty; \"d\" - pre deň v mesiaci; \"dd\" - pre deň v mesiaci s počiatočnou nulou pre jednociferné hodnoty; \"yy\" - pre posledné dve číslice roka; \"rrrr\" - na štvorciferný rok."
+    },
+    numericmask: {
+      decimalSeparator: "Symbol používaný na oddelenie zlomkovej časti od celočíselnej časti zobrazeného čísla.",
+      thousandsSeparator: "Symbol používaný na oddelenie číslic veľkého čísla do skupín po troch.",
+      precision: "Obmedzuje, koľko číslic sa má zachovať za desatinnou čiarkou pre zobrazené číslo."
+    },
+    currencymask: {
+      prefix: "Jeden alebo niekoľko symbolov, ktoré sa majú zobraziť pred hodnotou.",
+      suffix: "Jeden alebo viac symbolov, ktoré sa zobrazia za hodnotou."
+    }
   },
   // Properties
   p: {
@@ -2377,3 +2431,35 @@ editorLocalization.locales["sk"] = skStrings;
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Zástupný text pre oblasť hodnotenia"
 // pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "Vyplňte prieskum automaticky"
 // pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Vyberte, či chcete, aby sa prieskum dokončil automaticky po tom, čo respondent odpovie na všetky otázky."
+// masksettings.saveMaskedValue: "Save masked value in survey results" => "Uložte maskovanú hodnotu do výsledkov prieskumu"
+// patternmask.pattern: "Value pattern" => "Hodnotový vzor"
+// datetimemask.min: "Minimum value" => "Minimálna hodnota"
+// datetimemask.max: "Maximum value" => "Maximálna hodnota"
+// numericmask.allowNegativeValues: "Allow negative values" => "Povolenie záporných hodnôt"
+// numericmask.thousandsSeparator: "Thousands separator" => "Oddeľovač tisícov"
+// numericmask.decimalSeparator: "Decimal separator" => "Oddeľovač desatinných miest"
+// numericmask.precision: "Value precision" => "Presnosť hodnoty"
+// numericmask.min: "Minimum value" => "Minimálna hodnota"
+// numericmask.max: "Maximum value" => "Maximálna hodnota"
+// currencymask.prefix: "Currency prefix" => "Predčíslievanie meny"
+// currencymask.suffix: "Currency suffix" => "Prípona meny"
+// pe.maskType: "Input mask type" => "Typ vstupnej masky"
+// maskTypes.patternmask: "Pattern" => "Vzorka"
+// maskTypes.numericmask: "Numeric" => "Numerický"
+// maskTypes.datetimemask: "Date and Time" => "Dátum a čas"
+// maskTypes.currencymask: "Currency" => "Mena"
+// tabs.mask: "Input Mask Settings" => "Nastavenia vstupnej masky"
+// pe.pattern_placeholder: "Ex.: +1(999)-999-99-99" => "Napríklad: +1(999)-999-99-99"
+// pe.datetimepattern_placeholder: "Ex.: mm/dd/yyyy" => "Napr.: mm/dd/rrrr"
+// pe.currencyprefix_placeholder: "Ex.: $" => "Napr.: $"
+// pe.currencysuffix_placeholder: "Ex.: USD" => "Napríklad: USD"
+// pv.textWrapEnabled: "Wrap choices" => "Možnosti zabalenia"
+// question.textWrapEnabled: "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip." => "Dlhé texty v možnostiach výberu automaticky vygenerujú zlomy riadkov, aby sa zmestili do rozbaľovacej ponuky. Zrušte výber, či chcete texty vystrihnúť."
+// masksettings.saveMaskedValue: "Select if you want to store the question value with an applied mask in survey results." => "Vyberte, či chcete do výsledkov prieskumu uložiť hodnotu otázky s použitou maskou."
+// patternmask.pattern: "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character." => "Vzor môže obsahovať reťazcové literály a nasledujúce zástupné symboly: \"9\" - pre číslicu; \"a\" - pre veľké alebo malé písmeno; '#' - pre číslicu alebo veľké alebo malé písmeno. Použite opačné lomítko \"\\\" na únik z postavy."
+// datetimemask.pattern: "The pattern can contain separator characters and the following placeholders: `m` - for month number; `mm` - for month number, with leading zero for single-digit values; `d` - for day of the month; `dd` - for day of the month, with leading zero for single-digit values; `yy` - for the last two digits of the year; `yyyy` - for a four-digit year." => "Vzor môže obsahovať oddeľovacie znaky a nasledujúce zástupné symboly: \"m\" - pre číslo mesiaca; \"mm\" - pre číslo mesiaca, s úvodnou nulou pre jednociferné hodnoty; \"d\" - pre deň v mesiaci; \"dd\" - pre deň v mesiaci s počiatočnou nulou pre jednociferné hodnoty; \"yy\" - pre posledné dve číslice roka; \"rrrr\" - na štvorciferný rok."
+// numericmask.decimalSeparator: "A symbol used to separate the fractional part from the integer part of a displayed number." => "Symbol používaný na oddelenie zlomkovej časti od celočíselnej časti zobrazeného čísla."
+// numericmask.thousandsSeparator: "A symbol used to separate the digits of a large number into groups of three." => "Symbol používaný na oddelenie číslic veľkého čísla do skupín po troch."
+// numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Obmedzuje, koľko číslic sa má zachovať za desatinnou čiarkou pre zobrazené číslo."
+// currencymask.prefix: "One or several symbols to be displayed before the value." => "Jeden alebo niekoľko symbolov, ktoré sa majú zobraziť pred hodnotou."
+// currencymask.suffix: "One or several symbols to be displayed after the value." => "Jeden alebo viac symbolov, ktoré sa zobrazia za hodnotou."

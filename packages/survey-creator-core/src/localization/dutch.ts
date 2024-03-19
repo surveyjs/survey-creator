@@ -369,6 +369,28 @@ export var nlStrings = {
       name: "Naam",
       title: "Titel"
     },
+    masksettings: {
+      saveMaskedValue: "Gemaskeerde waarde opslaan in enquêteresultaten"
+    },
+    patternmask: {
+      pattern: "Waardepatroon"
+    },
+    datetimemask: {
+      min: "Minimumwaarde",
+      max: "Maximale waarde"
+    },
+    numericmask: {
+      allowNegativeValues: "Negatieve waarden toestaan",
+      thousandsSeparator: "Scheidingsteken voor duizendtallen",
+      decimalSeparator: "Decimaalteken",
+      precision: "Waarde precisie",
+      min: "Minimumwaarde",
+      max: "Maximale waarde"
+    },
+    currencymask: {
+      prefix: "Valuta voorvoegsel",
+      suffix: "Valuta achtervoegsel"
+    },
     imageHeight: "Afbeelding hoogte",
     imageWidth: "Afbeelding breedte",
     valueName: "Waardenaam",
@@ -609,6 +631,13 @@ export var nlStrings = {
     autoGrowComment: "Commentaargebied indien nodig automatisch uitvouwen",
     allowResizeComment: "Gebruikers toestaan het formaat van tekstgebieden te wijzigen",
     textUpdateMode: "Modus tekstvernieuwing",
+    maskType: "Type invoermasker",
+    maskTypes: {
+      patternmask: "Patroon",
+      numericmask: "Numeriek",
+      datetimemask: "Datum en tijd",
+      currencymask: "Valuta"
+    },
     focusOnFirstError: "Focus op eerste fout zetten",
     checkErrorsMode: "Validatie uitvoeren",
     navigateToUrl: "Navigeer naar URL",
@@ -733,6 +762,7 @@ export var nlStrings = {
       templateTitle: "Sjabloontitel",
       totals: "Totalen",
       logic: "Logica",
+      mask: "Instellingen voor invoermasker",
       layout: {
         panel: "Indeling",
         question: "Indeling",
@@ -796,7 +826,11 @@ export var nlStrings = {
     questionStartIndex_placeholder: "Vb.: a)",
     width_placeholder: "Bijv.: 6in",
     minWidth_placeholder: "Bijv.: 600px",
-    maxWidth_placeholder: "Vb.: 50%"
+    maxWidth_placeholder: "Vb.: 50%",
+    pattern_placeholder: "Vb.: +1(999)-999-99-99",
+    datetimepattern_placeholder: "Bijv.: mm/dd/jjjj",
+    currencyprefix_placeholder: "Bijv.: $",
+    currencysuffix_placeholder: "Bijv.: USD"
   },
   // Property values
   pv: {
@@ -1011,7 +1045,8 @@ export var nlStrings = {
     searchMode: {
       contains: "Bevat",
       startsWith: "Begint met"
-    }
+    },
+    textWrapEnabled: "Wrap-keuzes"
   },
   // Operators
   op: {
@@ -1137,7 +1172,8 @@ export var nlStrings = {
       },
       textUpdateMode: "Kies uit: \"Bij verloren focus\" - de waarde wordt bijgewerkt wanneer het invoerveld de focus verliest; \"Tijdens het typen\" - de waarde wordt in realtime bijgewerkt, terwijl gebruikers typen. Met de optie \"Overerven\" wordt de instelling op enquêteniveau toegepast (\"Standaard bij verloren focus\").",
       url: "U kunt elke webservice gebruiken als gegevensbron voor meerkeuzevragen. Als u keuzewaarden wilt invullen, voert u de URL in van de service die de gegevens levert.",
-      searchMode: "Een vergelijkingsbewerking die wordt gebruikt om de vervolgkeuzelijst te filteren."
+      searchMode: "Een vergelijkingsbewerking die wordt gebruikt om de vervolgkeuzelijst te filteren.",
+      textWrapEnabled: "Lange teksten in keuze-opties genereren automatisch regeleinden die in het vervolgkeuzemenu passen. Schakel de selectie uit als u wilt dat de teksten worden afgekapt."
     },
     signaturepad: {
       signatureWidth: "Hiermee stelt u de breedte van het weergegeven handtekeninggebied en de resulterende afbeelding in.",
@@ -1278,7 +1314,25 @@ export var nlStrings = {
     autocomplete: "Raadpleeg de [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) kenmerkbeschrijving voor meer informatie.",
     filePlaceholder: "Van toepassing wanneer \"Brontype\" \"Lokale bestanden\" is of wanneer de camera niet beschikbaar is",
     photoPlaceholder: "Van toepassing wanneer \"Brontype\" \"Camera\" is.",
-    fileOrPhotoPlaceholder: "Van toepassing wanneer \"Brontype\" \"Lokale bestanden of camera\" is."
+    fileOrPhotoPlaceholder: "Van toepassing wanneer \"Brontype\" \"Lokale bestanden of camera\" is.",
+    masksettings: {
+      saveMaskedValue: "Selecteer of u de vraagwaarde met een toegepast masker wilt opslaan in enquêteresultaten."
+    },
+    patternmask: {
+      pattern: "Het patroon kan letterlijke tekenreeksen en de volgende tijdelijke aanduidingen bevatten: '9' - voor een cijfer; \"a\" - voor een hoofdletter of kleine letter; '#' - voor een cijfer of een hoofdletter of kleine letter. Gebruik backslash '\\' om een teken te escapen."
+    },
+    datetimemask: {
+      pattern: "Het patroon kan scheidingstekens en de volgende tijdelijke aanduidingen bevatten: 'm' - voor maandnummer; 'mm' - voor maandnummer, met voorloopnul voor eencijferige waarden; 'd' - voor dag van de maand; 'dd' - voor dag van de maand, met voorloopnul voor eencijferige waarden; \"yy\" - voor de laatste twee cijfers van het jaar; 'yyyy' - voor een jaar van vier cijfers."
+    },
+    numericmask: {
+      decimalSeparator: "Een symbool dat wordt gebruikt om het fractionele deel te scheiden van het gehele deel van een weergegeven getal.",
+      thousandsSeparator: "Een symbool dat wordt gebruikt om de cijfers van een groot getal in groepen van drie te scheiden.",
+      precision: "Hiermee beperkt u het aantal cijfers dat moet worden behouden na de komma voor een weergegeven getal."
+    },
+    currencymask: {
+      prefix: "Een of meer symbolen die vóór de waarde moeten worden weergegeven.",
+      suffix: "Een of meer symbolen die na de waarde moeten worden weergegeven."
+    }
   },
   // Properties
   p: {
@@ -2404,3 +2458,35 @@ editorLocalization.locales["nl"] = nlStrings;
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Tijdelijke tekst voor het rangschikkingsgebied"
 // pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "Vul de enquête automatisch in"
 // pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Selecteer of u wilt dat de enquête automatisch wordt ingevuld nadat een respondent alle vragen heeft beantwoord."
+// masksettings.saveMaskedValue: "Save masked value in survey results" => "Gemaskeerde waarde opslaan in enquêteresultaten"
+// patternmask.pattern: "Value pattern" => "Waardepatroon"
+// datetimemask.min: "Minimum value" => "Minimumwaarde"
+// datetimemask.max: "Maximum value" => "Maximale waarde"
+// numericmask.allowNegativeValues: "Allow negative values" => "Negatieve waarden toestaan"
+// numericmask.thousandsSeparator: "Thousands separator" => "Scheidingsteken voor duizendtallen"
+// numericmask.decimalSeparator: "Decimal separator" => "Decimaalteken"
+// numericmask.precision: "Value precision" => "Waarde precisie"
+// numericmask.min: "Minimum value" => "Minimumwaarde"
+// numericmask.max: "Maximum value" => "Maximale waarde"
+// currencymask.prefix: "Currency prefix" => "Valuta voorvoegsel"
+// currencymask.suffix: "Currency suffix" => "Valuta achtervoegsel"
+// pe.maskType: "Input mask type" => "Type invoermasker"
+// maskTypes.patternmask: "Pattern" => "Patroon"
+// maskTypes.numericmask: "Numeric" => "Numeriek"
+// maskTypes.datetimemask: "Date and Time" => "Datum en tijd"
+// maskTypes.currencymask: "Currency" => "Valuta"
+// tabs.mask: "Input Mask Settings" => "Instellingen voor invoermasker"
+// pe.pattern_placeholder: "Ex.: +1(999)-999-99-99" => "Vb.: +1(999)-999-99-99"
+// pe.datetimepattern_placeholder: "Ex.: mm/dd/yyyy" => "Bijv.: mm/dd/jjjj"
+// pe.currencyprefix_placeholder: "Ex.: $" => "Bijv.: $"
+// pe.currencysuffix_placeholder: "Ex.: USD" => "Bijv.: USD"
+// pv.textWrapEnabled: "Wrap choices" => "Wrap-keuzes"
+// question.textWrapEnabled: "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip." => "Lange teksten in keuze-opties genereren automatisch regeleinden die in het vervolgkeuzemenu passen. Schakel de selectie uit als u wilt dat de teksten worden afgekapt."
+// masksettings.saveMaskedValue: "Select if you want to store the question value with an applied mask in survey results." => "Selecteer of u de vraagwaarde met een toegepast masker wilt opslaan in enquêteresultaten."
+// patternmask.pattern: "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character." => "Het patroon kan letterlijke tekenreeksen en de volgende tijdelijke aanduidingen bevatten: '9' - voor een cijfer; \"a\" - voor een hoofdletter of kleine letter; '#' - voor een cijfer of een hoofdletter of kleine letter. Gebruik backslash '\\' om een teken te escapen."
+// datetimemask.pattern: "The pattern can contain separator characters and the following placeholders: `m` - for month number; `mm` - for month number, with leading zero for single-digit values; `d` - for day of the month; `dd` - for day of the month, with leading zero for single-digit values; `yy` - for the last two digits of the year; `yyyy` - for a four-digit year." => "Het patroon kan scheidingstekens en de volgende tijdelijke aanduidingen bevatten: 'm' - voor maandnummer; 'mm' - voor maandnummer, met voorloopnul voor eencijferige waarden; 'd' - voor dag van de maand; 'dd' - voor dag van de maand, met voorloopnul voor eencijferige waarden; \"yy\" - voor de laatste twee cijfers van het jaar; 'yyyy' - voor een jaar van vier cijfers."
+// numericmask.decimalSeparator: "A symbol used to separate the fractional part from the integer part of a displayed number." => "Een symbool dat wordt gebruikt om het fractionele deel te scheiden van het gehele deel van een weergegeven getal."
+// numericmask.thousandsSeparator: "A symbol used to separate the digits of a large number into groups of three." => "Een symbool dat wordt gebruikt om de cijfers van een groot getal in groepen van drie te scheiden."
+// numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Hiermee beperkt u het aantal cijfers dat moet worden behouden na de komma voor een weergegeven getal."
+// currencymask.prefix: "One or several symbols to be displayed before the value." => "Een of meer symbolen die vóór de waarde moeten worden weergegeven."
+// currencymask.suffix: "One or several symbols to be displayed after the value." => "Een of meer symbolen die na de waarde moeten worden weergegeven."

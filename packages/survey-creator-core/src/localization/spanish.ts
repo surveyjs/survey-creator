@@ -369,6 +369,28 @@ var spanishTranslation = {
       name: "Nombre",
       title: "Título"
     },
+    masksettings: {
+      saveMaskedValue: "Guardar el valor enmascarado en los resultados de la encuesta"
+    },
+    patternmask: {
+      pattern: "Patrón de valores"
+    },
+    datetimemask: {
+      min: "Valor mínimo",
+      max: "Valor máximo"
+    },
+    numericmask: {
+      allowNegativeValues: "Permitir valores negativos",
+      thousandsSeparator: "Separador de millares",
+      decimalSeparator: "Separador decimal",
+      precision: "Precisión de valor",
+      min: "Valor mínimo",
+      max: "Valor máximo"
+    },
+    currencymask: {
+      prefix: "Prefijo de moneda",
+      suffix: "Sufijo de moneda"
+    },
     imageHeight: "Altura de imagen",
     imageWidth: "Ancho de la imagen",
     valueName: "Nombre de valor",
@@ -609,6 +631,13 @@ var spanishTranslation = {
     autoGrowComment: "Auto-expand de comentario si es necesario",
     allowResizeComment: "Permitir a los usuarios cambiar el tamaño de las áreas de texto",
     textUpdateMode: "Actualizar valor del texto de la pregunta",
+    maskType: "Tipo de máscara de entrada",
+    maskTypes: {
+      patternmask: "Patrón",
+      numericmask: "Numérico",
+      datetimemask: "Fecha y hora",
+      currencymask: "Divisa"
+    },
     focusOnFirstError: "Fijar foco en la primera respuesta no válida",
     checkErrorsMode: "Ejecutar validación",
     navigateToUrl: "Navegar a URL",
@@ -733,6 +762,7 @@ var spanishTranslation = {
       templateTitle: "Título de la plantilla",
       totals: "Totales",
       logic: "Lógica",
+      mask: "Configuración de la máscara de entrada",
       layout: {
         panel: "Diseño",
         question: "Diseño",
@@ -796,7 +826,11 @@ var spanishTranslation = {
     questionStartIndex_placeholder: "Ej.: a)",
     width_placeholder: "Ej.: 6 pulgadas",
     minWidth_placeholder: "Ej.: 600px",
-    maxWidth_placeholder: "Ej.: 50%"
+    maxWidth_placeholder: "Ej.: 50%",
+    pattern_placeholder: "Ej.: +1(999)-999-99-99",
+    datetimepattern_placeholder: "Ej.: dd/mm/aaaa",
+    currencyprefix_placeholder: "Ej.: $",
+    currencysuffix_placeholder: "Ej.: USD"
   },
   // Property values
   pv: {
@@ -1011,7 +1045,8 @@ var spanishTranslation = {
     searchMode: {
       contains: "Contiene",
       startsWith: "Comienza con"
-    }
+    },
+    textWrapEnabled: "Opciones de envoltura"
   },
   // Operators
   op: {
@@ -1137,7 +1172,8 @@ var spanishTranslation = {
       },
       textUpdateMode: "Elija entre: \"Al perder el foco\": el valor se actualiza cuando el campo de entrada pierde el foco; \"Mientras escribes\": el valor se actualiza en tiempo real, a medida que los usuarios escriben. La opción \"Heredar\" aplica la configuración a nivel de encuesta (\"Al perder el foco\" de forma predeterminada).",
       url: "Puede utilizar cualquier servicio web como fuente de datos para preguntas de opción múltiple. Para rellenar los valores de opción, introduzca la dirección URL del servicio que proporciona los datos.",
-      searchMode: "Operación de comparación que se utiliza para filtrar la lista desplegable."
+      searchMode: "Operación de comparación que se utiliza para filtrar la lista desplegable.",
+      textWrapEnabled: "Los textos largos en las opciones de elección generarán automáticamente saltos de línea para que se ajusten al menú desplegable. Anule la selección si desea que los textos se recorten."
     },
     signaturepad: {
       signatureWidth: "Define la anchura del área de firma mostrada y de la imagen resultante.",
@@ -1278,7 +1314,25 @@ var spanishTranslation = {
     autocomplete: "Consulte la descripción del atributo [autocompletar](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) para obtener más información.",
     filePlaceholder: "Se aplica cuando \"Tipo de fuente\" es \"Archivos locales\" o cuando la cámara no está disponible",
     photoPlaceholder: "Se aplica cuando \"Tipo de fuente\" es \"Cámara\".",
-    fileOrPhotoPlaceholder: "Se aplica cuando \"Tipo de fuente\" es \"Archivos locales o cámara\"."
+    fileOrPhotoPlaceholder: "Se aplica cuando \"Tipo de fuente\" es \"Archivos locales o cámara\".",
+    masksettings: {
+      saveMaskedValue: "Seleccione si desea almacenar el valor de la pregunta con una máscara aplicada en los resultados de la encuesta."
+    },
+    patternmask: {
+      pattern: "El patrón puede contener literales de cadena y los siguientes marcadores de posición: '9': para un dígito; 'a' - para una letra mayúscula o minúscula; '#' - para un dígito o una letra mayúscula o minúscula. Use la barra invertida '\\' para escapar de un carácter."
+    },
+    datetimemask: {
+      pattern: "El patrón puede contener caracteres separadores y los siguientes marcadores de posición: 'm' - para el número de mes; 'mm' - para el número del mes, con cero a la izquierda para los valores de un solo dígito; 'd' - para el día del mes; 'dd': para el día del mes, con cero a la izquierda para valores de un solo dígito; 'yy' - para los dos últimos dígitos del año; 'yyyy' - para un año de cuatro dígitos."
+    },
+    numericmask: {
+      decimalSeparator: "Símbolo utilizado para separar la parte fraccionaria de la parte entera de un número mostrado.",
+      thousandsSeparator: "Símbolo que se utiliza para separar los dígitos de un número grande en grupos de tres.",
+      precision: "Limita el número de dígitos que se conservan después del punto decimal de un número mostrado."
+    },
+    currencymask: {
+      prefix: "Uno o varios símbolos que se mostrarán antes del valor.",
+      suffix: "Uno o varios símbolos que se mostrarán después del valor."
+    }
   },
   // Properties
   p: {
@@ -2198,3 +2252,35 @@ editorLocalization.locales["es"] = spanishTranslation;
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Texto de marcador de posición para el área de clasificación"
 // pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "Completar la encuesta automáticamente"
 // pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Seleccione si desea que la encuesta se complete automáticamente después de que un encuestado responda todas las preguntas."
+// masksettings.saveMaskedValue: "Save masked value in survey results" => "Guardar el valor enmascarado en los resultados de la encuesta"
+// patternmask.pattern: "Value pattern" => "Patrón de valores"
+// datetimemask.min: "Minimum value" => "Valor mínimo"
+// datetimemask.max: "Maximum value" => "Valor máximo"
+// numericmask.allowNegativeValues: "Allow negative values" => "Permitir valores negativos"
+// numericmask.thousandsSeparator: "Thousands separator" => "Separador de millares"
+// numericmask.decimalSeparator: "Decimal separator" => "Separador decimal"
+// numericmask.precision: "Value precision" => "Precisión de valor"
+// numericmask.min: "Minimum value" => "Valor mínimo"
+// numericmask.max: "Maximum value" => "Valor máximo"
+// currencymask.prefix: "Currency prefix" => "Prefijo de moneda"
+// currencymask.suffix: "Currency suffix" => "Sufijo de moneda"
+// pe.maskType: "Input mask type" => "Tipo de máscara de entrada"
+// maskTypes.patternmask: "Pattern" => "Patrón"
+// maskTypes.numericmask: "Numeric" => "Numérico"
+// maskTypes.datetimemask: "Date and Time" => "Fecha y hora"
+// maskTypes.currencymask: "Currency" => "Divisa"
+// tabs.mask: "Input Mask Settings" => "Configuración de la máscara de entrada"
+// pe.pattern_placeholder: "Ex.: +1(999)-999-99-99" => "Ej.: +1(999)-999-99-99"
+// pe.datetimepattern_placeholder: "Ex.: mm/dd/yyyy" => "Ej.: dd/mm/aaaa"
+// pe.currencyprefix_placeholder: "Ex.: $" => "Ej.: $"
+// pe.currencysuffix_placeholder: "Ex.: USD" => "Ej.: USD"
+// pv.textWrapEnabled: "Wrap choices" => "Opciones de envoltura"
+// question.textWrapEnabled: "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip." => "Los textos largos en las opciones de elección generarán automáticamente saltos de línea para que se ajusten al menú desplegable. Anule la selección si desea que los textos se recorten."
+// masksettings.saveMaskedValue: "Select if you want to store the question value with an applied mask in survey results." => "Seleccione si desea almacenar el valor de la pregunta con una máscara aplicada en los resultados de la encuesta."
+// patternmask.pattern: "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character." => "El patrón puede contener literales de cadena y los siguientes marcadores de posición: '9': para un dígito; 'a' - para una letra mayúscula o minúscula; '#' - para un dígito o una letra mayúscula o minúscula. Use la barra invertida '\\' para escapar de un carácter."
+// datetimemask.pattern: "The pattern can contain separator characters and the following placeholders: `m` - for month number; `mm` - for month number, with leading zero for single-digit values; `d` - for day of the month; `dd` - for day of the month, with leading zero for single-digit values; `yy` - for the last two digits of the year; `yyyy` - for a four-digit year." => "El patrón puede contener caracteres separadores y los siguientes marcadores de posición: 'm' - para el número de mes; 'mm' - para el número del mes, con cero a la izquierda para los valores de un solo dígito; 'd' - para el día del mes; 'dd': para el día del mes, con cero a la izquierda para valores de un solo dígito; 'yy' - para los dos últimos dígitos del año; 'yyyy' - para un año de cuatro dígitos."
+// numericmask.decimalSeparator: "A symbol used to separate the fractional part from the integer part of a displayed number." => "Símbolo utilizado para separar la parte fraccionaria de la parte entera de un número mostrado."
+// numericmask.thousandsSeparator: "A symbol used to separate the digits of a large number into groups of three." => "Símbolo que se utiliza para separar los dígitos de un número grande en grupos de tres."
+// numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Limita el número de dígitos que se conservan después del punto decimal de un número mostrado."
+// currencymask.prefix: "One or several symbols to be displayed before the value." => "Uno o varios símbolos que se mostrarán antes del valor."
+// currencymask.suffix: "One or several symbols to be displayed after the value." => "Uno o varios símbolos que se mostrarán después del valor."
