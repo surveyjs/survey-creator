@@ -858,7 +858,7 @@ export class ThemeEditorModel extends Base {
         }
         (q.parentQuestion ? q.parentQuestion.name + "." : "") + q.name;
         this.surveyProvider.chooseFiles(input, callback, { element: this.currentTheme as any, elementType: elementType, propertyName: themePropertyName });
-      }
+      };
     });
   }
 
