@@ -27,7 +27,7 @@ export class LogoImageViewModel extends Base {
       model.creator.survey.logo = link;
       fileInput.value = "";
       model.isUploading = false;
-    });
+    }, { element: model.creator.survey, elementType: "survey", propertyName: "logo" });
   }
   public chooseFile(model: LogoImageViewModel) {
     if (this.allowEdit) {
