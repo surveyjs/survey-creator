@@ -615,27 +615,27 @@ test("QuestionRatingAdornerViewModel controlsClassNames", () => {
   );
   expect(ratingAdorner.hasTopLabel).toBe(false);
   expect(ratingAdorner.controlsClassNames).toBe("svc-rating-question-controls svc-item-value-controls");
-  question.rateMinDescription = "min";
+  question.minRateDescription = "min";
   question.rateDescriptionLocation = "leftRight";
   expect(ratingAdorner.hasTopLabel).toBe(false);
   expect(ratingAdorner.controlsClassNames).toBe("svc-rating-question-controls svc-item-value-controls");
 
-  question.rateMinDescription = "min";
+  question.minRateDescription = "min";
   question.rateDescriptionLocation = "top";
   expect(ratingAdorner.hasTopLabel).toBe(true);
   expect(ratingAdorner.controlsClassNames).toBe("svc-rating-question-controls svc-item-value-controls svc-rating-question-controls--labels-top");
 
-  question.rateMinDescription = "min";
+  question.minRateDescription = "min";
   question.rateDescriptionLocation = "topBottom";
   expect(ratingAdorner.hasTopLabel).toBe(true);
   expect(ratingAdorner.controlsClassNames).toBe("svc-rating-question-controls svc-item-value-controls svc-rating-question-controls--labels-top");
 
-  question.rateMinDescription = "";
+  question.minRateDescription = "";
   question.rateDescriptionLocation = "top";
   expect(ratingAdorner.hasTopLabel).toBe(false);
   expect(ratingAdorner.controlsClassNames).toBe("svc-rating-question-controls svc-item-value-controls");
 
-  question.rateMinDescription = "";
+  question.minRateDescription = "";
   question.rateDescriptionLocation = "topBottom";
   expect(ratingAdorner.hasTopLabel).toBe(false);
   expect(ratingAdorner.controlsClassNames).toBe("svc-rating-question-controls svc-item-value-controls");

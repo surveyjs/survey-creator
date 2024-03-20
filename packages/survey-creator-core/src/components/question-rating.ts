@@ -136,7 +136,7 @@ export class QuestionRatingAdornerViewModel extends Base {
   public get hasTopLabel(): boolean {
     return (this.element.rateDescriptionLocation == "top" ||
             this.element.rateDescriptionLocation == "topBottom") &&
-            !!this.element.rateMinDescription;
+            !!this.element.minRateDescription;
   }
   public get controlsClassNames(): string {
     return new CssClassBuilder()
