@@ -660,9 +660,18 @@ export interface OpenFileChooserEvent {
 
 export interface UploadFileEvent {
   /**
-   * A question for which files are being uploaded.
+   * A survey element (question, panel, page, or survey) or a theme JSON schema for which this event is raised.
    */
-  question: Question;
+  element: Base | ITheme;
+  /**
+   * The type of the element passed as the `options.element` parameter.\
+   * Possible values: `"theme"`, `"header"`, or any value returned from the [`getType()`](https://surveyjs.io/form-library/documentation/api-reference/question#getType) method.
+   */
+  elementType: String;
+  /**
+   * The name of the survey element property or theme property for which files are being uploaded.
+   */
+  propertyName: String;
   /**
    * Files to upload.
    */
@@ -674,18 +683,9 @@ export interface UploadFileEvent {
    */
   callback: (status: string, fileUrl: string) => void;
   /**
-   * A survey element (question, panel, page, or survey) or a theme JSON schema for which this event is raised.
+   * Obsolete. Use the `options.element` parameter instead.
    */
-  element: Base | ITheme;
-  /**
-   * The type of the element passed as the `options.element` parameter.\
-   * Possible values: `"theme"`, `"header"`, or any value returned from the [`getType()`](https://surveyjs.io/form-library/documentation/api-reference/question#getType) method.
-   */
-  elementType: String;
-  /**
-   * The name of the survey element property or theme property for which files are being selected.
-   */
-  propertyName: String;
+  question: Question;
 }
 
 export interface TranslationStringVisibilityEvent {
