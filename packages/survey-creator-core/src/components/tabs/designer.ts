@@ -50,9 +50,10 @@ export class TabDesignerViewModel extends Base {
   }
   private get canShowNewPage(): boolean {
     if (!this.survey || this.creator.pageEditMode === "single" || !this.creator.allowModifyPages) return false;
-    if (this.creator.pageEditMode === "bypage") return true;
-    const pages: PageModel[] = this.survey.pages;
-    return pages.length === 0 || this.isModifiedPage(pages[pages.length - 1]);
+    return true;
+    // if (this.creator.pageEditMode === "bypage") return true;
+    // const pages: PageModel[] = this.survey.pages;
+    // return pages.length === 0 || this.isModifiedPage(pages[pages.length - 1]);
   }
   private isModifiedPage(page: PageModel) {
     return Object.keys(page.toJSON()).filter(key => key !== "name").length > 0;

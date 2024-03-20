@@ -704,16 +704,16 @@ test("Create new page on creating designer plugin", (): any => {
   creator = new CreatorTester();
   expect(creator.survey.pages).toHaveLength(1);
   designerPlugin = <TabDesignerPlugin>(creator.getPlugin("designer"));
-  expect(designerPlugin.model.newPage).toBeFalsy();
-  expect(designerPlugin.model.showNewPage).toBeFalsy();
+  expect(designerPlugin.model.newPage).toBeTruthy();
+  expect(designerPlugin.model.showNewPage).toBeTruthy();
 
   creator = new CreatorTester();
   creator.survey.pages[0].addNewQuestion("text", "question1");
   creator.survey.addNewPage("page2");
   expect(creator.survey.pages).toHaveLength(2);
   designerPlugin = <TabDesignerPlugin>(creator.getPlugin("designer"));
-  expect(designerPlugin.model.newPage).toBeFalsy();
-  expect(designerPlugin.model.showNewPage).toBeFalsy();
+  expect(designerPlugin.model.newPage).toBeTruthy();
+  expect(designerPlugin.model.showNewPage).toBeTruthy();
 
   creator.survey.pages[1].addNewQuestion("text", "question2");
   creator.survey.pages[1].title = "New page";
@@ -732,8 +732,8 @@ test("Create new page on creating designer plugin", (): any => {
   expect(designerPlugin.model.newPage.name).toBe("page2");
 
   creator.survey.addNewPage("page3");
-  expect(designerPlugin.model.newPage).toBeFalsy();
-  expect(designerPlugin.model.showNewPage).toBeFalsy();
+  expect(designerPlugin.model.newPage).toBeTruthy();
+  expect(designerPlugin.model.showNewPage).toBeTruthy();
 });
 test("Create new page with empty survey", (): any => {
   const creator = new CreatorTester();
@@ -742,7 +742,7 @@ test("Create new page with empty survey", (): any => {
     creator.getPlugin("designer")
   );
   expect(creator.survey.pages).toHaveLength(1);
-  expect(designerPlugin.model.newPage).toBeFalsy();
+  expect(designerPlugin.model.newPage).toBeTruthy();
   creator.survey.pages[0].addNewQuestion("text", "question1");
   expect(creator.survey.pages).toHaveLength(1);
   expect(designerPlugin.model.newPage).toBeTruthy();
@@ -753,6 +753,18 @@ test("Create new page with empty survey", (): any => {
   expect(creator.survey.pages[1].elements[0].name).toEqual("question2");
   expect(designerPlugin.model.newPage).toBeTruthy();
   expect(designerPlugin.model.newPage.elements).toHaveLength(0);
+});
+test("Ghost page always should be visible", (): any => {
+  const creator = new CreatorTester();
+  expect(creator.viewType).toEqual("designer");
+  const designerPlugin = <TabDesignerPlugin>(creator.getPlugin("designer"));
+  creator.survey.pages.splice(0, 1);
+  expect(creator.survey.pages).toHaveLength(0);
+  expect(designerPlugin.model.newPage).toBeTruthy();
+
+  creator.addPage();
+  expect(creator.survey.pages).toHaveLength(1);
+  expect(designerPlugin.model.newPage).toBeTruthy();
 });
 test("Create new page on changing title/description in ghost", (): any => {
   const creator = new CreatorTester();
@@ -884,7 +896,7 @@ test("Create new ghost on moving a question from one page to the ghost page", ()
   creator.survey.stopMovingQuestion();
   expect(creator.survey.getAllQuestions()).toHaveLength(1);
   expect(creator.survey.pages).toHaveLength(2);
-  expect(designerPlugin.model.newPage).toBeFalsy();
+  expect(designerPlugin.model.newPage).toBeTruthy();
 });
 test("Create new page, set empty JSON", (): any => {
   const creator = new CreatorTester();
@@ -894,7 +906,7 @@ test("Create new page, set empty JSON", (): any => {
     creator.getPlugin("designer")
   );
   expect(creator.survey.pages).toHaveLength(1);
-  expect(designerPlugin.model.newPage).toBeFalsy();
+  expect(designerPlugin.model.newPage).toBeTruthy();
 });
 test("Create new page, recreate designer survey via JSON", (): any => {
   const creator = new CreatorTester();
@@ -906,7 +918,7 @@ test("Create new page, recreate designer survey via JSON", (): any => {
   creator.JSON = {};
   creator.showDesigner();
   expect(creator.survey.pages).toHaveLength(1);
-  expect(designerPlugin.model.newPage).toBeFalsy();
+  expect(designerPlugin.model.newPage).toBeTruthy();
 });
 
 test("Check survey settings button ", (): any => {
@@ -1515,7 +1527,7 @@ test("getElementWrapperComponentName for inner component elements", () => {
       "type": "mypanel",
       "name": "question1"
     }]
-  });
+  }, "");
   const qCustom = <QuestionCustomModel>survey.getAllQuestions()[0];
   const q = <QuestionPanelDynamicModel>qCustom.contentQuestion;
   expect(q.name).toBe("myPanel1");
