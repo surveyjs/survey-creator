@@ -185,7 +185,7 @@ test("Add-remove toolbox items, #5271", (): any => {
     }
   });
   creator.currentAddQuestionType = "dropdown";
-  creator.addNewQuestionInPage(() => {}, undefined, "dropdown");
+  creator.addNewQuestionInPage(() => { }, undefined, "dropdown");
   expect(creator.getAddNewQuestionText()).toEqual("Add Question");
 });
 test("Add-remove toolbox items, #5067", (): any => {
@@ -204,4 +204,47 @@ test("Add-remove toolbox items, #5067", (): any => {
   expect(creator.selectedElement.getType()).toEqual("text");
   const adorner = new QuestionAdornerViewModel(creator, <SurveyElement>creator.selectedElement, undefined);
   expect(adorner.getConvertToTypesActions()).toHaveLength(0);
+});
+test("Doesn't duplicate custom toolbox items with built-in ones in convertTo", (): any => {
+  const creator = new CreatorTester();
+  creator.toolbox.addItem({
+    name: "country",
+    title: "Country",
+    json: {
+      type: "dropdown",
+      placeholder: "Select a country...",
+      choicesByUrl: {
+        url: "https://surveyjs.io/api/CountriesExample",
+      },
+    },
+  } as any);
+  creator.JSON = {
+    elements: [
+      { type: "radiogroup", name: "q1" }
+    ]
+  };
+  const question = creator.survey.getQuestionByName("q1");
+  creator.selectElement(question);
+  const questionModel = new QuestionAdornerViewModel(
+    creator,
+    question,
+    undefined as any
+  );
+
+  const items = questionModel.getConvertToTypesActions();
+  let counter = 0;
+  items.forEach(item => {
+    if (item.id === "dropdown") counter++;
+  });
+  expect(counter).toEqual(1);
+
+  const popup = questionModel.getActionById("convertTo").popupModel;
+  expect(popup).toBeTruthy();
+  const list = popup.contentComponentData.model;
+  expect(list).toBeTruthy();
+  counter = 0;
+  list.actions.forEach(item => {
+    if (item.id === "dropdown") counter++;
+  });
+  expect(counter).toEqual(1);
 });
