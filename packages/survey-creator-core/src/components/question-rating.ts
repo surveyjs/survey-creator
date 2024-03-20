@@ -132,11 +132,17 @@ export class QuestionRatingAdornerViewModel extends Base {
       .append("svc-item-value-controls__button--disabled", !this.enableRemove)
       .append("svc-item-value-controls__remove").toString();
   }
+
+  public get hasTopLabel(): boolean {
+    return (this.element.rateDescriptionLocation == "top" ||
+            this.element.rateDescriptionLocation == "topBottom") &&
+            !!this.element.rateMinDescription;
+  }
   public get controlsClassNames(): string {
     return new CssClassBuilder()
       .append("svc-rating-question-controls")
       .append("svc-item-value-controls")
-      .append("svc-rating-question-controls--labels-top", this.element.rateDescriptionLocation == "top" || this.element.rateDescriptionLocation == "topBottom").toString();
+      .append("svc-rating-question-controls--labels-top", this.hasTopLabel).toString();
   }
   get addTooltip() {
     return getLocString("pe.addItem");
