@@ -318,7 +318,8 @@ export interface ISurveyCreatorOptions {
   uploadFiles(
     files: File[],
     question: Question,
-    callback: (status: string, data: any) => any
+    callback: (status: string, data: any) => any,
+    context?: { element: Base, item?: any, elementType?: string, propertyName?: string }
   ): void;
   getHasMachineTranslation(): boolean;
   doMachineTranslation(fromLocale: string, toLocale: string, strings: Array<string>, callback: (translated: Array<string>) => void): void;
