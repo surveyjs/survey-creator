@@ -206,3 +206,12 @@ test("cells-editor for columns with number values should be created ok", () => {
     expect(e).toBeUndefined();
   }
 });
+test("Clear read-only and enbleIf column properties", () => {
+  var question = new QuestionMatrixDynamicModel("q1");
+  question.addColumn("col1").cellType = "text";
+  question.addColumn("col2").readOnly = true;
+  question.addColumn("col3").enableIf = "{row.col1} = 1";
+  const editor = new DefaultValueEditor(question, "defaultValue");
+  const editorQuestionJSON = editor["getQuestionJSON"]();
+  expect(editorQuestionJSON.columns).toEqual([{ name: "col1", cellType: "text" }, { name: "col2" }, { name: "col3" }]);
+});

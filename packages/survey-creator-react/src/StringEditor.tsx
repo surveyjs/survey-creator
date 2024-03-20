@@ -12,11 +12,11 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
     this.state = { changed: 0 };
     this.svStringEditorRef = React.createRef();
   }
-  protected createModel(): void {
+  protected createModel(props: any): void {
     if (this.baseModel) {
       this.baseModel.dispose();
     }
-    this.baseModel = new StringEditorViewModelBase(this.locString, this.creator);
+    this.baseModel = new StringEditorViewModelBase(props.locStr.locStr, props.locStr.creator);
   }
   protected getUpdatedModelProps(): string[] {
     return ["creator", "locString"];

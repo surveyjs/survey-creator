@@ -84,16 +84,18 @@ export class TestSurveyTabViewModel extends Base {
   }
 
   public updateSimulatorSurvey(json: any, theme: any) {
-    const newSurvey = this.surveyProvider.createSurvey(json || {}, "test", this);
-    newSurvey.applyTheme(this.surveyProvider.theme);
-    newSurvey.setCss(theme, false);
-    newSurvey.fitToContainer = true;
-    newSurvey.addLayoutElement({
-      id: "complete-customization",
-      container: "completePage" as any,
-      component: "svc-complete-page",
-      data: this
+    const newSurvey = this.surveyProvider.createSurvey(json || {}, "test", this, (survey: SurveyModel): void => {
+      survey.applyTheme(this.surveyProvider.theme);
+      survey.setCss(theme, false);
+      survey.fitToContainer = true;
+      survey.addLayoutElement({
+        id: "complete-customization",
+        container: "completePage" as any,
+        component: "svc-complete-page",
+        data: this
+      });
     });
+    const hasSurveyBefore = !!this.simulator.survey;
     this.simulator.survey = newSurvey;
     if (this.onSurveyCreatedCallback) this.onSurveyCreatedCallback(this.survey);
     this.survey.onComplete.add((sender: SurveyModel) => {
@@ -126,6 +128,9 @@ export class TestSurveyTabViewModel extends Base {
       this.updatePageItem(options.page);
       this.updatePrevNextPageActionState();
     });
+    if(hasSurveyBefore) {
+      this.show();
+    }
   }
 
   public setJSON(json: any, currTheme: any) {

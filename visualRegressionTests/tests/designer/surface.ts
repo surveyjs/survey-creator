@@ -1406,14 +1406,14 @@ test("String editor whitespaces and linedreaks", async (t) => {
   await setJSON({
     "elements": [
       {
-        "type": "text",
+        "type": "radiogroup",
         "name": "q1",
-        "title": "a\nb\nc"
+        "choices": ["a\nb\nc"]
       },
       {
-        "type": "text",
+        "type": "radiogroup",
         "name": "q2",
-        "title": "a\nb\nc"
+        "choices": ["a\nb\nc"]
       }
     ]
   });
@@ -1921,5 +1921,102 @@ test("Page placeholder without elements", async (t) => {
     });
 
     await takeElementScreenshot("page-placeholder-without-elements.png", Selector(".svc-page"), t, comparer);
+  });
+});
+
+test("Check minimal height", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1120, 900);
+    const root = Selector(".svc-creator");
+    await setJSON({});
+    await ClientFunction(() => {
+      const creator = document.getElementById("survey-creator");
+
+      creator.style.bottom = "";
+      creator.style.height = "1px";
+    })();
+    await takeElementScreenshot("creator-min-height.png", root, t, comparer);
+  });
+});
+
+test("Composite question - check no scroll", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await ClientFunction(() => {
+      window["Survey"].ComponentCollection.Instance.add({
+        name: "fullname",
+        title: "Full Name",
+        elementsJSON: [
+          {
+            type: "text",
+            name: "firstName",
+            title: "First Name",
+            isRequired: true,
+            minWidth: 200
+          },
+          {
+            type: "text",
+            name: "lastName",
+            title: "Last Name",
+            isRequired: true,
+            minWidth: 200,
+            startWithNewLine: false,
+          }
+        ],
+      });
+    })();
+    await t.resizeWindow(1120, 900);
+    await setJSON({
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "fullname",
+              "name": "question1"
+            }
+          ]
+        }
+      ]
+    });
+    await t.hover(".sd-input.sd-text");
+    await takeElementScreenshot("composite-question-no-scroll.png", Selector(".svc-question__adorner"), t, comparer);
+  });
+});
+
+test("Check adorner actions responsivity after convert", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1400, 900);
+    const root = Selector(".sd-page.sd-body__page");
+    await setJSON({
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "text",
+              "name": "question1"
+            },
+            {
+              "type": "text",
+              "name": "question2",
+              "startWithNewLine": false
+            },
+            {
+              "type": "text",
+              "name": "question3",
+              "startWithNewLine": false
+            }
+          ]
+        }
+      ]
+    });
+    await t.hover(Selector(".svc-question__adorner").nth(2), { offsetX: 10, offsetY: 10 }).click(Selector(".svc-question__adorner").nth(2), { offsetX: 10, offsetY: 10 }).click(Selector("#convertTo").nth(2))
+      .click(Selector("div[data-sv-drop-target-survey-element='question3'] .sv-list__item-body[title='Yes/No (Boolean)']"))
+      .hover(Selector(".svc-question__adorner").nth(1), { offsetX: 10, offsetY: 10 }).click(Selector(".svc-question__adorner").nth(1), { offsetX: 10, offsetY: 10 })
+      .hover(Selector(".svc-question__adorner").nth(2), { offsetX: 10, offsetY: 10 }).click(Selector(".svc-question__adorner").nth(2), { offsetX: 10, offsetY: 10 });
+    await ClientFunction(() => { document.body.focus(); })();
+    await t.wait(100);
+    await takeElementScreenshot("actions-on-converted-question.png", root.nth(0), t, comparer);
   });
 });

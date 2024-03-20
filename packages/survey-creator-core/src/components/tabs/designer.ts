@@ -71,7 +71,7 @@ export class TabDesignerViewModel extends Base {
     return this.pagesControllerValue;
   }
   public get isToolboxVisible(): boolean {
-    return this.creator.showToolboxValue && (this.creator.toolboxLocation === "right" || this.creator.toolboxLocation === "left");
+    return this.creator.showToolbox && (this.creator.toolboxLocation === "right" || this.creator.toolboxLocation === "left");
   }
   public get placeholderText(): string {
     return getLocString("ed.surveyPlaceHolder");
@@ -160,6 +160,7 @@ export class TabDesignerViewModel extends Base {
     if (this.showPlaceholder) {
       rootCss += " svc-tab-designer--with-place-holder";
     }
+    rootCss += " svc-tab-designer--" + this.creator.pageEditMode + "-mode";
     return rootCss;
   }
 }

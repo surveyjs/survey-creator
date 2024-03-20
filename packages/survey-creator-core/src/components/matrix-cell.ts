@@ -23,12 +23,13 @@ export class MatrixCellWrapperEditSurvey {
     this.creator = creator;
     let questionJSON = cellQuestion.toJSON();
     questionJSON.type = cellQuestion.getType();
-    this.surveyValue = creator.createSurvey({ questions: [questionJSON] }, "modal-question-editor", model);
-    this.survey.css = defaultV2Css;
-    this.survey.setDesignMode(true);
-    (<any>this.survey).isPopupEditorContent = true;
-    this.survey.showQuestionNumbers = "none";
-    this.survey.questionTitleLocation = "hidden";
+    this.surveyValue = creator.createSurvey({ questions: [questionJSON] }, "modal-question-editor", model, (survey: SurveyModel): void => {
+      survey.css = defaultV2Css;
+      survey.setDesignMode(true);
+      (<any>survey).isPopupEditorContent = true;
+      survey.showQuestionNumbers = "none";
+      survey.questionTitleLocation = "hidden";
+    });
     this.question.setSurveyImpl(this.survey);
     this.question.inMatrixMode = true;
     this.question.ownerObj = this.column;

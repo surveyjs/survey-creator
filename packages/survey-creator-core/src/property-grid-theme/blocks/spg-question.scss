@@ -168,3 +168,14 @@
 .spg-question__erbox--location--bottom {
   margin-top: calcSize(1);
 }
+
+.spg-restfull,
+.spg-masksettings {
+  .spg-panel__content {
+    gap: calcSize(2);
+
+    .spg-row {
+      margin-top: 0;
+    }
+  }
+}

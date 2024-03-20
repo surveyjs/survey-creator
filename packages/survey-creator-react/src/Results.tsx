@@ -13,9 +13,9 @@ export class SurveyResults extends CreatorModelElement<
   any
 > {
   model: SurveyResultsModel;
-  protected createModel(): void {
+  protected createModel(props: any): void {
     if (this.props.survey) {
-      this.model = new SurveyResultsModel(this.props.survey);
+      this.model = new SurveyResultsModel(props.survey);
     }
   }
   protected getUpdatedModelProps(): string[] {

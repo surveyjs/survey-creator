@@ -175,7 +175,7 @@ export var propertyGridCss = {
   },
   dropdown: {
     root: "",
-    popup: "",
+    popup: "spg-dropdown-popup",
     small: "spg-row__question--small sd-row__question--small",
     control: "spg-input spg-dropdown sd-input sd-dropdown",
     filterStringInput: "sd-dropdown__filter-string-input spg-dropdown__filter-string-input",
@@ -296,7 +296,10 @@ export var propertyGridCss = {
     content: "spg-question__content spg-question__nopadding spg-question-group"
   },
   propertygrid_restfull: {
-    content: "spg-question__content spg-question__nopadding"
+    content: "spg-question__content spg-question__nopadding spg-restfull"
+  },
+  propertygrid_masksettings: {
+    content: "spg-question__content spg-question__nopadding spg-masksettings"
   },
   saveData: {
     root: "",

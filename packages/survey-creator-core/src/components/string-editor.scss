@@ -234,3 +234,6 @@
 // .sv-title {
 //   position: relative;
 // }
+.svc-string-editor--multiline .sv-string-editor {
+  white-space: pre-wrap;
+}

@@ -253,6 +253,150 @@ export var msStrings = {
   },
   // Property Editors
   pe: {
+    panel: {
+      name: "Nama panel",
+      title: "Tajuk panel",
+      description: "Penerangan panel",
+      visibleIf: "Jadikan panel kelihatan jika",
+      requiredIf: "Buat panel diperlukan jika",
+      questionsOrder: "Tertib soalan dalam panel",
+      page: "Halaman induk",
+      startWithNewLine: "Paparkan panel pada baris baru",
+      state: "Keadaan panel runtuh",
+      width: "Lebar panel sebaris",
+      minWidth: "Lebar panel minimum",
+      maxWidth: "Lebar panel maksimum",
+      showNumber: "Panel nombor"
+    },
+    paneldynamic: {
+      name: "Nama panel",
+      title: "Tajuk panel",
+      description: "Penerangan panel",
+      visibleIf: "Jadikan panel kelihatan jika",
+      requiredIf: "Buat panel diperlukan jika",
+      page: "Mengalihkan panel ke halaman",
+      startWithNewLine: "Paparkan panel pada baris baru",
+      state: "Keadaan panel runtuh",
+      width: "Lebar panel sebaris",
+      minWidth: "Lebar panel minimum",
+      maxWidth: "Lebar panel maksimum",
+      confirmDelete: "Sahkan penghapusan panel",
+      templateDescription: "Corak perihalan panel",
+      templateTitle: "Corak tajuk panel",
+      noEntriesText: "Teks panel kosong",
+      templateTabTitle: "Corak tajuk tab",
+      templateVisibleIf: "Jadikan panel individu kelihatan jika",
+      hideNumber: "Sembunyikan nombor panel",
+      titleLocation: "Penjajaran tajuk panel",
+      descriptionLocation: "Penjajaran perihalan panel",
+      templateTitleLocation: "Penjajaran tajuk soalan",
+      templateErrorLocation: "Penjajaran mesej ralat",
+      newPanelPosition: "Lokasi panel baru",
+      keyName: "Mencegah jawapan pendua dalam soalan berikut"
+    },
+    question: {
+      name: "Nama soalan",
+      title: "Tajuk soalan",
+      description: "Penerangan soalan",
+      visibleIf: "Jadikan soalan kelihatan jika",
+      requiredIf: "Jadikan soalan diperlukan jika",
+      page: "Halaman induk",
+      state: "Keadaan kotak soalan runtuh",
+      hideNumber: "Sembunyikan nombor soalan",
+      titleLocation: "Penjajaran tajuk soalan",
+      descriptionLocation: "Penjajaran perihalan soalan",
+      errorLocation: "Penjajaran mesej ralat",
+      indent: "Meningkatkan inden dalaman",
+      width: "Lebar soalan sebaris",
+      minWidth: "Lebar soalan minimum",
+      maxWidth: "Lebar soalan maksimum",
+      textUpdateMode: "Mengemas kini nilai medan input"
+    },
+    signaturepad: {
+      signatureWidth: "Lebar kawasan tandatangan",
+      signatureHeight: "Ketinggian kawasan tandatangan",
+      signatureAutoScaleEnabled: "Menskalakan kawasan tandatangan secara automatik",
+      showPlaceholder: "Menunjukkan ruang letak",
+      placeholder: "Teks ruang letak",
+      allowClear: "Tunjukkan butang Kosongkan dalam kawasan tandatangan",
+      penMinWidth: "Lebar pen minimum",
+      penMaxWidth: "Lebar pen maksimum",
+      penColor: "Warna strok"
+    },
+    comment: {
+      rows: "Ketinggian medan input (dalam garisan)"
+    },
+    showQuestionNumbers: "Tunjukkan nombor soalan",
+    questionStartIndex: "Indeks mula soalan (1, 2 atau 'A', 'a')",
+    expression: {
+      name: "Nama ungkapan",
+      title: "Tajuk ungkapan",
+      description: "Perihalan ungkapan",
+      expression: "Ungkapan"
+    },
+    trigger: {
+      expression: "Ungkapan"
+    },
+    calculatedvalue: {
+      expression: "Ungkapan"
+    },
+    // survey templates
+    survey: {
+      title: "Tajuk",
+      description: "Penerangan tinjauan"
+    },
+    page: {
+      name: "Nama halaman",
+      title: "Tajuk",
+      description: "Perihalan halaman",
+      visibleIf: "Jadikan halaman kelihatan jika",
+      requiredIf: "Jadikan halaman diperlukan jika",
+      maxTimeToFinish: "Had masa untuk menyelesaikan halaman (dalam beberapa saat)",
+      questionsOrder: "Tertib soalan pada halaman"
+    },
+    matrixdropdowncolumn: {
+      name: "Nama lajur",
+      title: "Tajuk lajur",
+      isUnique: "Elakkan tindak balas pendua",
+      width: "Lebar lajur",
+      minWidth: "Lebar lajur minimum",
+      rows: "Ketinggian medan input (dalam garisan)",
+      visibleIf: "Jadikan lajur kelihatan jika",
+      requiredIf: "Jadikan lajur diperlukan jika",
+      showInMultipleColumns: "Setiap opsyen dalam lajur berasingan"
+    },
+    multipletextitem: {
+      name: "Nama",
+      title: "Tajuk"
+    },
+    masksettings: {
+      saveMaskedValue: "Simpan nilai bertopeng dalam hasil tinjauan"
+    },
+    patternmask: {
+      pattern: "Corak nilai"
+    },
+    datetimemask: {
+      min: "Nilai minimum",
+      max: "Nilai maksimum"
+    },
+    numericmask: {
+      allowNegativeValues: "Benarkan nilai negatif",
+      thousandsSeparator: "Pemisah beribu-ribu",
+      decimalSeparator: "Pemisah perpuluhan",
+      precision: "Ketepatan nilai",
+      min: "Nilai minimum",
+      max: "Nilai maksimum"
+    },
+    currencymask: {
+      prefix: "Awalan mata wang",
+      suffix: "Akhiran mata wang"
+    },
+    imageHeight: "Tinggi imej",
+    imageWidth: "Lebar imej",
+    valueName: "Nama nilai",
+    rateDescriptionLocation: "Penjajaran label",
+    size: "Saiz medan input (dalam aksara)",
+    cellErrorLocation: "Penjajaran mesej ralat sel",
     apply: "Guna",
     ok: "OK",
     save: "Simpan",
@@ -298,7 +442,6 @@ export var msStrings = {
     conditionSelectPage: "Pilih halaman...",
     conditionSelectPanel: "Pilih panel...",
     conditionValueQuestionTitle: "Sila masukkan/pilih nilai",
-    expressionHelp: "Anda boleh gunakan kurungan kerinting untuk mengakses nilai soalan: {soalan1} + {soalan2}, ({harga}*{kuantiti}) * (100 - {diskaun}). Anda boleh menggunakan fungsi seperti: iif(), today(), age(), min(), max(), count(), avg() dan lain-lain.",
     aceEditorHelp: "Tekan ctrl+space untuk mendapatkan petunjuk lengkapan ekspresi",
     aceEditorRowTitle: "Baris semasa",
     aceEditorPanelTitle: "Panel semasa",
@@ -314,7 +457,19 @@ export var msStrings = {
     propertyNameIsIncorrect: "Jangan gunakan perkataan terpelihara: \"item\", \"pilihan\", \"panel\", \"baris\".",
     listIsEmpty: "Tambahkan item baharu",
     "listIsEmpty@choices": "Tiada pilihan telah ditambah lagi",
+    "listIsEmpty@columns": "Anda belum mempunyai sebarang lajur",
+    "listIsEmpty@rows": "Anda belum mempunyai sebarang baris",
+    "listIsEmpty@validators": "Anda belum mempunyai sebarang peraturan pengesahihan",
+    "listIsEmpty@calculatedValues": "Anda belum mempunyai sebarang pemboleh ubah tersuai",
+    "listIsEmpty@triggers": "Anda belum mempunyai sebarang pencetus",
+    "listIsEmpty@navigateToUrlOnCondition": "Anda belum mempunyai pautan",
     "addNew@choices": "Tambah pilihan",
+    "addNew@columns": "Menambah lajur baru",
+    "addNew@rows": "Menambah baris baru",
+    "addNew@validators": "Tambah peraturan baru",
+    "addNew@calculatedValues": "Menambah pemboleh ubah baru",
+    "addNew@triggers": "Tambah pencetus baharu",
+    "addNew@navigateToUrlOnCondition": "Tambah URL baru",
     expressionIsEmpty: "Ekspresi kosong",
     value: "Nilai",
     text: "Teks",
@@ -324,8 +479,8 @@ export var msStrings = {
     itemEdit: "Edit item: {0}",
     url: "URL",
     path: "Laluan",
-    valueName: "Nama nilai",
     choicesbyurl: {
+      url: "URL perkhidmatan web",
       valueName: "Mendapatkan nilai daripada medan JSON berikut"
     },
     titleName: "Nama tajuk",
@@ -367,12 +522,10 @@ export var msStrings = {
     showPreview: "Tunjukkan kawasan pratonton",
     storeDataAsText: "Simpan kandungan fail dalam keputusan JSON sebagai teks",
     maxSize: "Maksimum saiz fail dalam bait",
-    imageHeight: "Tinggi imej",
-    imageWidth: "Lebar imej",
     rowCount: "Kiraan baris",
     columnLayout: "Tataletak lajur",
-    transposeData: "Mengubah urutan baris kepada lajur",
     addRowLocation: "Tambahkan lokasi butang baris",
+    transposeData: "Mengubah urutan baris kepada lajur",
     addRowText: "Tambahkan teks butang baris",
     removeRowText: "Alih keluar teks butang baris",
     rateMin: "Kadar minimum",
@@ -425,47 +578,25 @@ export var msStrings = {
     firstPageIsStarted: "Halaman pertama dalam tinjauan ialah halaman permulaan.",
     showCompletedPage: "Tunjukkan halaman lengkap pada hujung (HTML dilengkapkan)",
     goNextPageAutomatic: "Selepas menjawab semua soalan, pergi ke halaman seterusnya secara automatik",
+    allowCompleteSurveyAutomatic: "Lengkapkan tinjauan secara automatik",
     showProgressBar: "Tunjukkan bar perkembangan",
     questionTitleLocation: "Lokasi tajuk soalan",
     requiredText: "Soalan memerlukan simbol",
-    questionStartIndex: "Indeks mula soalan (1, 2 atau 'A', 'a')",
-    showQuestionNumbers: "Tunjukkan nombor soalan",
     questionTitleTemplate: "Templat tajuk soalan, lalai ialah: '{tidak}. {perlukan} {tajuk}'",
     questionErrorLocation: "Lokasi ralat soalan",
     focusFirstQuestionAutomatic: "Fokus soalan pertama pada perubahan halaman",
     questionsOrder: "Susunan elemen pada halaman",
     maxTimeToFinish: "Masa maksimum untuk menyelesaikan tinjauan",
     maxTimeToFinishPage: "Masa maksimum untuk menyelesaikan halaman dalam tinjauan",
-    image: {
-      imageHeight: "Ketinggian imej (dalam nilai diterima CSS)",
-      imageWidth: "Lebar imej (dalam nilai diterima CSS)"
-    },
-    // survey templates
-    survey: {
-      title: "Tajuk"
-    },
-    page: {
-      title: "Tajuk",
-      maxTimeToFinish: "Had masa untuk menyelesaikan halaman (dalam beberapa saat)"
-    },
-    question: {
-      page: "Halaman induk"
-    },
-    panel: {
-      page: "Halaman induk",
-      indent: "Menambah inden luaran"
-    },
     showTimerPanel: "Tunjukkan panel pemasa",
     showTimerPanelMode: "Tunjukkan mod panel pemasa",
     renderMode: "Mod penyampaian",
     allowAddPanel: "Benarkan menambahkan panel",
     allowRemovePanel: "Benarkan alih keluar panel",
-    noEntriesText: "Kosongkan teks entri",
     panelAddText: "Menambahkan teks panel",
     panelRemoveText: "Mengalih keluar teks panel",
     isSinglePage: "Tunjukkan semua elemen pada satu halaman",
     html: "HTML",
-    expression: "Ekspresi",
     setValue: "Jawapan",
     dataFormat: "Format imej",
     allowAddRows: "Benarkan menambah baris",
@@ -500,6 +631,13 @@ export var msStrings = {
     autoGrowComment: "Kembangkan kawasan komen secara automatik jika perlu",
     allowResizeComment: "Benarkan pengguna mensaiz semula kawasan teks",
     textUpdateMode: "Mengemas kini nilai soalan teks",
+    maskType: "Input jenis topeng",
+    maskTypes: {
+      patternmask: "Corak",
+      numericmask: "Angka",
+      datetimemask: "Tarikh dan Masa",
+      currencymask: "Mata wang"
+    },
     focusOnFirstError: "Mengesetkan fokus pada jawapan tidak sah yang pertama",
     checkErrorsMode: "Jalankan pengesahihan",
     navigateToUrl: "Navigasi ke URL",
@@ -528,19 +666,13 @@ export var msStrings = {
     maxRowCount: "Kiraan baris maksimum",
     confirmDelete: "Sahkan pemadaman baris",
     confirmDeleteText: "Mesej pengesahan",
-    paneldynamic: {
-      confirmDelete: "Sahkan penghapusan panel"
-    },
     panelCount: "Kiraan panel awal",
     minPanelCount: "Kiraan panel minimum",
     maxPanelCount: "Kiraan panel maksimum",
     panelsState: "Panel dalaman mengembangkan keadaan",
-    templateDescription: "Templat perihalan",
-    templateTitle: "Templat tajuk",
     panelPrevText: "Petua alat butang Panel Sebelumnya",
     panelNextText: "Petua alat butang Panel Seterusnya",
     showRangeInProgress: "Tunjukkan bar kemajuan",
-    templateTitleLocation: "Lokasi tajuk soalan",
     panelRemoveButtonLocation: "Alih keluar lokasi butang Panel",
     hideIfRowsEmpty: "Sembunyikan soalan jika tiada baris",
     hideColumnsIfEmpty: "Menyembunyikan lajur jika tiada baris",
@@ -548,7 +680,6 @@ export var msStrings = {
     rateCount: "Kiraan kadar",
     autoGenerate: "Bagaimana untuk menentukan nilai kadar?",
     hideIfChoicesEmpty: "Sembunyikan soalan jika ia tidak mengandungi pilihan",
-    hideNumber: "Sembunyikan nombor soalan",
     minWidth: "Lebar minimum (dalam nilai diterima CSS)",
     maxWidth: "Lebar maksimum (dalam nilai diterima CSS)",
     width: "Lebar (dalam nilai diterima CSS)",
@@ -565,28 +696,31 @@ export var msStrings = {
     minSelectedChoices: "Pilihan minimum yang dipilih",
     maxSelectedChoices: "Pilihan maksimum yang dipilih",
     showClearButton: "Tunjukkan butang Kosongkan",
-    showNumber: "Tunjukkan nombor panel",
     logoWidth: "Lebar logo (dalam nilai diterima CSS)",
     logoHeight: "Ketinggian logo (dalam nilai diterima CSS)",
     readOnly: "Baca sahaja",
     enableIf: "Boleh diedit jika",
     emptyRowsText: "Mesej \"Tiada baris\"",
-    size: "Saiz medan input (dalam aksara)",
     separateSpecialChoices: "Pilihan khas berasingan (Tiada, Lain-lain, Pilih Semua)",
     choicesFromQuestion: "Salin pilihan daripada soalan berikut",
     choicesFromQuestionMode: "Pilihan mana yang hendak disalin?",
+    progressBarShowPageTitles: "Paparkan tajuk halaman dalam bar kemajuan",
+    progressBarShowPageNumbers: "Paparkan nombor halaman dalam bar kemajuan",
     showCommentArea: "Tunjukkan kawasan komen",
     commentPlaceholder: "Ruang letak komen",
     displayRateDescriptionsAsExtremeItems: "Memaparkan perihalan kadar sebagai nilai melampau",
     rowsOrder: "Tertib baris",
     columnsLayout: "Tataletak lajur",
     columnColCount: "Kiraan lajur tersarang",
-    state: "Panel kembangkan negeri",
     correctAnswer: "Jawapan yang betul",
     defaultPanelValue: "Nilai Lalai",
     cells: "Teks sel",
     keyName: "Lajur utama",
     itemvalue: {
+      visibleIf: "Jadikan opsyen kelihatan jika",
+      enableIf: "Jadikan opsyen boleh dipilih jika"
+    },
+    imageitemvalue: {
       text: "Teks alt"
     },
     logoPosition: "Kedudukan logo",
@@ -600,6 +734,9 @@ export var msStrings = {
       bottom: "Di bawah"
     },
     tabs: {
+      panel: {
+        layout: "Tataletak Panel"
+      },
       general: "Umum",
       fileOptions: "Pilihan",
       html: "Editor HTML",
@@ -625,6 +762,7 @@ export var msStrings = {
       templateTitle: "Tajuk templat",
       totals: "Jumlah",
       logic: "Logik",
+      mask: "Seting Topeng Input",
       layout: {
         panel: "Susun atur",
         question: "Susun atur",
@@ -637,6 +775,7 @@ export var msStrings = {
       logo: "Logo dalam Tajuk Tinjauan",
       slider: "Penggelongsor",
       expression: "Ungkapan",
+      questionSettings: "Seting Soalan",
       others: "Lain-lain"
     },
     editProperty: "Edit ciri '{0}'",
@@ -645,7 +784,6 @@ export var msStrings = {
     choicesEnableIf: "Pilihan boleh dipilih jika",
     columnsEnableIf: "Lajur kelihatan jika",
     rowsEnableIf: "Baris boleh dilihat jika",
-    indent: "Menambah inden",
     innerIndent: "Menambah inden dalaman",
     defaultValueFromLastRow: "Mengambil nilai lalai daripada baris terakhir",
     defaultValueFromLastPanel: "Mengambil nilai lalai daripada panel terakhir",
@@ -674,26 +812,25 @@ export var msStrings = {
     searchEnabled: "Dayakan carian",
     hideSelectedItems: "Menyembunyikan item terpilih",
     closeOnSelect: "Menutup juntai bawah selepas pemilihan",
-    signatureWidth: "Lebar tandatangan",
-    signatureHeight: "Ketinggian tandatangan",
     verticalAlign: "Penjajaran menegak",
     alternateRows: "Baris alternatif",
     columnsVisibleIf: "Lajur kelihatan jika",
     rowsVisibleIf: "Baris boleh dilihat jika",
     otherPlaceholder: "Ruang letak komen",
-    signaturepad: {
-      showPlaceholder: "Menunjukkan ruang letak",
-      placeholder: "Teks ruang letak",
-      signatureWidth: "Lebar kawasan tandatangan",
-      signatureHeight: "Ketinggian kawasan tandatangan",
-      signatureAutoScaleEnabled: "Menskalakan kawasan tandatangan secara automatik",
-      penMinWidth: "Lebar pen minimum",
-      penMaxWidth: "Lebar pen maksimum"
-    },
     filePlaceholder: "Teks ruang letak fail",
     photoPlaceholder: "Teks ruang letak foto",
     fileOrPhotoPlaceholder: "Teks ruang letak fail atau foto",
-    rateType: "Jenis kadar"
+    rateType: "Jenis kadar",
+    url_placeholder: "Ex.: https://api.example.com/books",
+    path_placeholder: "Ex.: categories.fiction",
+    questionStartIndex_placeholder: "Ex.: a)",
+    width_placeholder: "Ex.: 6in",
+    minWidth_placeholder: "Ex.: 600px",
+    maxWidth_placeholder: "Ex.: 50%",
+    pattern_placeholder: "Ex.: +1(999)-999-99-99",
+    datetimepattern_placeholder: "Ex.: mm/dd/yyyy",
+    currencyprefix_placeholder: "Ex.: $",
+    currencysuffix_placeholder: "Ex.: USD"
   },
   // Property values
   pv: {
@@ -714,14 +851,13 @@ export var msStrings = {
     asc: "tertib menaik",
     desc: "menurun",
     indeterminate: "tidak tentu",
+    selected: "Dipilih",
+    unselected: "Tidak dipilih",
     decimal: "Perpuluhan",
     currency: "Mata wang",
     percent: "Peratus",
     firstExpanded: "Pertama dikembangkan",
     off: "mati",
-    onpanel: "Mulakan pada setiap panel",
-    onPanel: "Pada panel",
-    onSurvey: "Pada tinjauan",
     list: "senarai",
     progressTop: "Perkembangan atas",
     progressBottom: "Perkembangan bawah",
@@ -735,7 +871,9 @@ export var msStrings = {
     both: "kedua-duanya",
     left: "baki",
     right: "Kanan",
+    center: "Pusat",
     leftRight: "Kiri dan kanan",
+    middle: "Tengah",
     color: "Warna",
     date: "Tarikh",
     datetime: "masa tarikh",
@@ -751,17 +889,20 @@ export var msStrings = {
     url: "Url",
     week: "Minggu",
     hidden: "tersembunyi",
-    on: "pada",
-    onPage: "Pada halaman",
     edit: "edit",
     display: "paparan",
-    onComplete: "Pada selesai",
-    onHidden: "Pada tersembunyi",
-    onHiddenContainer: "Apabila soalan atau panel/halamannya menjadi tersembunyi",
     contain: "Mengandungi",
     cover: "Perlindungan",
     fill: "Mengisi",
+    next: "Seterusnya",
+    last: "Terakhir",
+    onComplete: "Pada selesai",
+    onHidden: "Pada tersembunyi",
+    onHiddenContainer: "Apabila soalan atau panel/halamannya menjadi tersembunyi",
     clearInvisibleValues: {
+      none: "Tidak pernah"
+    },
+    clearIfInvisible: {
       none: "Tidak pernah"
     },
     inputType: {
@@ -785,9 +926,11 @@ export var msStrings = {
     onNextPage: "Pada halaman berikutnya",
     onValueChanged: "Pada nilai berubah",
     onValueChanging: "Sebelum jawapan diubah",
-    standard: "standard",
-    singlePage: "halaman tunggal",
-    questionPerPage: "soalan bagi setiap halaman",
+    questionsOnPageMode: {
+      standard: "Struktur asal",
+      singlePage: "Tunjukkan semua soalan pada satu halaman",
+      questionPerPage: "Menunjukkan soalan tunggal bagi setiap halaman"
+    },
     noPreview: "tiada pratonton",
     showAllQuestions: "tunjukkan pratonton dengan semua soalan",
     showAnsweredQuestions: "tunjukkan pratonton dengan soalan dijawab",
@@ -802,11 +945,9 @@ export var msStrings = {
     onTyping: "Semasa menaip",
     underRow: "Di bawah baris",
     underRowSingle: "Di bawah baris, hanya satu panel boleh dilihat",
+    auto: "Auto",
     showNavigationButtons: {
       none: "Tersembunyi"
-    },
-    showProgressBar: {
-      off: "Tersembunyi"
     },
     showTimerPanel: {
       none: "Tersembunyi"
@@ -814,41 +955,35 @@ export var msStrings = {
     showTimerPanelMode: {
       all: "Kedua-duanya"
     },
-    detailPanelMode: {
-      none: "Tersembunyi"
-    },
     addRowLocation: {
       default: "Bergantung pada tataletak matriks"
     },
     panelsState: {
       default: "Pengguna tidak boleh mengembangkan atau meruntuhkan panel",
       collapsed: "Semua panel runtuh",
-      expanded: "Semua panel diperluaskan"
+      expanded: "Semua panel diperluaskan",
+      firstExpanded: "Mula-mula diperluaskan"
     },
     widthMode: {
-      auto: "Auto",
       static: "Statik",
       responsive: "Responsif"
     },
-    imageFit: {
-      none: "Tiada",
-      contain: "Mengandungi",
-      cover: "Perlindungan",
-      fill: "Mengisi"
-    },
     contentMode: {
-      auto: "Auto",
       image: "Imej",
       video: "Video",
       youtube: "Youtube"
     },
     displayMode: {
-      auto: "Auto",
       buttons: "Butang",
       dropdown: "Dropdown"
     },
     rateColorMode: {
-      default: "Lalai"
+      default: "Lalai",
+      scale: "Skala"
+    },
+    scaleColorMode: {
+      monochrome: "Monokrom",
+      colored: "Berwarna"
     },
     autoGenerate: {
       "true": "Menjana",
@@ -858,7 +993,60 @@ export var msStrings = {
       labels: "Label",
       stars: "Bintang",
       smileys: "Smileys"
-    }
+    },
+    state: {
+      default: "Dikunci"
+    },
+    showQuestionNumbers: {
+      default: "Penomboran automatik",
+      on: "Penomboran automatik",
+      onPage: "Mengeset semula pada setiap halaman",
+      onpanel: "Set semula pada setiap panel",
+      onPanel: "Set semula pada setiap panel",
+      onSurvey: "Teruskan merentasi tinjauan",
+      off: "Tiada penomboran"
+    },
+    descriptionLocation: {
+      underTitle: "Di bawah tajuk soalan",
+      underInput: "Di bawah medan input"
+    },
+    selectToRankAreasLayout: {
+      horizontal: "Di sebelah pilihan",
+      vertical: "Pilihan di atas"
+    },
+    displayStyle: {
+      decimal: "Perpuluhan",
+      currency: "Mata wang",
+      percent: "Peratusan",
+      date: "Tarikh"
+    },
+    totalDisplayStyle: {
+      decimal: "Perpuluhan",
+      currency: "Mata wang",
+      percent: "Peratusan",
+      date: "Tarikh"
+    },
+    rowsOrder: {
+      initial: "Asal"
+    },
+    questionsOrder: {
+      initial: "Asal"
+    },
+    showProgressBar: {
+      off: "Tersembunyi",
+      aboveHeader: "Di atas pengepala",
+      belowHeader: "Di bawah pengepala"
+    },
+    sum: "Jumlah",
+    count: "Kiraan",
+    min: "Min",
+    max: "Max",
+    avg: "Pur",
+    searchMode: {
+      contains: "Mengandungi",
+      startsWith: "Bermula dengan"
+    },
+    textWrapEnabled: "Pilihan balut"
   },
   // Operators
   op: {
@@ -923,21 +1111,228 @@ export var msStrings = {
     visibletrigger: "ubah kebolehlihatan (tidak digunakan lagi)"
   },
   pehelp: {
+    panel: {
+      name: "ID panel yang tidak kelihatan kepada responden.",
+      description: "Taipkan sari kata panel.",
+      visibleIf: "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang menentukan keterlihatan panel.",
+      enableIf: "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang melumpuhkan mod baca sahaja untuk panel.",
+      requiredIf: "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang menghalang penyerahan tinjauan melainkan sekurang-kurangnya satu soalan tersarang mempunyai jawapan.",
+      questionTitleLocation: "Digunakan untuk semua soalan dalam panel ini. Jika anda ingin mengubah seting ini, takrifkan peraturan penjajaran tajuk untuk soalan individu. Pilihan \"Warisan\" menggunakan peringkat halaman (jika ditetapkan) atau tetapan peringkat tinjauan (\"Atas\" secara lalai).",
+      questionErrorLocation: "Mengesetkan lokasi mesej ralat berhubung dengan semua soalan dalam panel. Opsyen \"Warisan\" menggunakan aras halaman (jika set) atau seting aras tinjauan.",
+      questionsOrder: "Mengekalkan susunan soalan asal atau rawak mereka. Opsyen \"Warisan\" menggunakan aras halaman (jika set) atau seting aras tinjauan.",
+      page: "Meletakkan semula panel di hujung halaman yang dipilih.",
+      innerIndent: "Menambah ruang atau jidar antara kandungan panel dan sempadan kiri kotak panel.",
+      startWithNewLine: "Nyahpilih untuk memaparkan panel dalam satu baris dengan soalan atau panel sebelumnya. Seting tidak digunakan jika panel ialah elemen pertama dalam borang anda.",
+      state: "Pilih daripada: \"Diperluaskan\" - panel dipaparkan sepenuhnya dan boleh runtuh; \"Runtuh\" - panel hanya memaparkan tajuk dan keterangan dan boleh diperluaskan; \"Dikunci\" - panel dipaparkan sepenuhnya dan tidak boleh runtuh.",
+      width: "Mengesetkan lebar panel mengikut kadar unsur tinjauan lain dalam baris yang sama. Menerima nilai CSS (px, %, dalam, pt, dll.)."
+    },
+    paneldynamic: {
+      name: "ID panel yang tidak kelihatan kepada responden.",
+      description: "Taipkan sari kata panel.",
+      visibleIf: "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang menentukan keterlihatan panel.",
+      enableIf: "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang melumpuhkan mod baca sahaja untuk panel.",
+      requiredIf: "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang menghalang penyerahan tinjauan melainkan sekurang-kurangnya satu soalan tersarang mempunyai jawapan.",
+      templateTitleLocation: "Digunakan untuk semua soalan dalam panel ini. Jika anda ingin mengubah seting ini, takrifkan peraturan penjajaran tajuk untuk soalan individu. Pilihan \"Warisan\" menggunakan peringkat halaman (jika ditetapkan) atau tetapan peringkat tinjauan (\"Atas\" secara lalai).",
+      templateErrorLocation: "Mengesetkan lokasi mesej ralat berhubung dengan soalan dengan input tidak sah. Pilih antara: \"Atas\" - teks ralat diletakkan di bahagian atas kotak soalan; \"Bawah\" - teks ralat diletakkan di bahagian bawah kotak soalan. Pilihan \"Warisan\" menggunakan peringkat halaman (jika ditetapkan) atau tetapan peringkat tinjauan (\"Atas\" secara lalai).",
+      errorLocation: "Mengesetkan lokasi mesej ralat berhubung dengan semua soalan dalam panel. Opsyen \"Warisan\" menggunakan aras halaman (jika set) atau seting aras tinjauan.",
+      page: "Meletakkan semula panel di hujung halaman yang dipilih.",
+      innerIndent: "Menambah ruang atau jidar antara kandungan panel dan sempadan kiri kotak panel.",
+      startWithNewLine: "Nyahpilih untuk memaparkan panel dalam satu baris dengan soalan atau panel sebelumnya. Seting tidak digunakan jika panel ialah elemen pertama dalam borang anda.",
+      state: "Pilih daripada: \"Diperluaskan\" - panel dipaparkan sepenuhnya dan boleh runtuh; \"Runtuh\" - panel hanya memaparkan tajuk dan keterangan dan boleh diperluaskan; \"Dikunci\" - panel dipaparkan sepenuhnya dan tidak boleh runtuh.",
+      width: "Mengesetkan lebar panel mengikut kadar unsur tinjauan lain dalam baris yang sama. Menerima nilai CSS (px, %, dalam, pt, dll.).",
+      templateTitle: "Taipkan templat untuk tajuk panel dinamik. Gunakan {panelIndex} untuk kedudukan umum panel dan {visiblePanelIndex} untuk pesanannya di kalangan panel yang kelihatan. Masukkan ruang letak ini ke dalam corak untuk menambah penomboran automatik.",
+      templateTabTitle: "Taipkan templat untuk tajuk tab. Gunakan {panelIndex} untuk kedudukan umum panel dan {visiblePanelIndex} untuk pesanannya di kalangan panel yang boleh dilihat. Masukkan ruang letak ini ke dalam corak untuk menambah penomboran automatik.",
+      templateVisibleIf: "Tetapan ini membolehkan anda mengawal penglihatan panel individu dalam panel dinamik. Gunakan ruang letak '{panel}' untuk merujuk panel semasa dalam ungkapan anda.",
+      titleLocation: "Tetapan ini diwarisi secara automatik oleh semua soalan dalam panel ini. Jika anda ingin mengubah seting ini, takrifkan peraturan penjajaran tajuk untuk soalan individu. Pilihan \"Warisan\" menggunakan peringkat halaman (jika ditetapkan) atau tetapan peringkat tinjauan (\"Atas\" secara lalai).",
+      descriptionLocation: "Opsyen \"Warisan\" menggunakan aras halaman (jika ditetapkan) atau seting aras tinjauan (\"Di bawah tajuk panel\" secara lalai).",
+      newPanelPosition: "Mentakrifkan kedudukan panel yang baru ditambah. Secara lalai, panel baru ditambahkan ke hujungnya. Pilih \"Seterusnya\" untuk memasukkan panel baru selepas yang semasa.",
+      defaultValueFromLastPanel: "Pendua jawapan daripada panel terakhir dan memberikannya kepada panel dinamik tambahan seterusnya.",
+      keyName: "Rujukan nama soalan untuk memerlukan pengguna memberikan jawapan yang unik untuk soalan ini dalam setiap panel."
+    },
+    defaultValueExpression: "Seting ini membolehkan anda memperuntukkan nilai jawapan lalai berdasarkan ungkapan. Ungkapan ini boleh termasuk pengiraan asas - '{q1_id} + {q2_id}', ungkapan Boolean, seperti '{age} > 60', dan fungsi: 'iif()', 'hari ini()', 'umur()', 'min()', 'max()', 'avg()', dsb. Nilai yang ditentukan oleh ungkapan ini berfungsi sebagai nilai lalai awal yang boleh diubah oleh input manual responden.",
+    resetValueIf: "Gunakan ikon tongkat ajaib untuk mengesetkan peraturan bersyarat yang menentukan masa input responden ditetapkan semula kepada nilai berdasarkan \"Ungkapan nilai lalai\" atau \"Setkan ungkapan nilai\" atau kepada nilai \"Jawapan lalai\" (jika sama ada ditetapkan).",
+    setValueIf: "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang menentukan masa untuk menjalankan \"Tetapkan ungkapan nilai\" dan secara dinamik memperuntukkan nilai yang terhasil sebagai respons.",
+    setValueExpression: "Tentukan ungkapan yang mentakrifkan nilai yang akan disetkan apabila syarat dalam peraturan \"Set nilai jika\" dipenuhi. Ungkapan ini boleh termasuk pengiraan asas - '{q1_id} + {q2_id}', ungkapan Boolean, seperti '{age} > 60', dan fungsi: 'iif()', 'hari ini()', 'umur()', 'min()', 'max()', 'avg()', dsb. Nilai yang ditentukan oleh ungkapan ini boleh diubah oleh input manual responden.",
+    question: {
+      name: "ID soalan yang tidak dapat dilihat oleh responden.",
+      description: "Taipkan sari kata soalan.",
+      visibleIf: "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang menentukan keterlihatan soalan.",
+      enableIf: "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang melumpuhkan mod baca sahaja untuk soalan itu.",
+      requiredIf: "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang menghalang tinjauan memajukan atau menyerahkan melainkan soalan itu mendapat jawapan.",
+      startWithNewLine: "Nyahpilih untuk memaparkan soalan dalam satu baris dengan soalan atau panel sebelumnya. Seting tidak digunakan jika soalan ialah unsur pertama dalam borang anda.",
+      page: "Letakkan semula soalan ke hujung halaman yang dipilih.",
+      state: "Pilih daripada: \"Diperluaskan\" - kotak soalan dipaparkan sepenuhnya dan boleh runtuh; \"Runtuh\" - kotak soalan hanya memaparkan tajuk dan keterangan dan boleh diperluaskan; \"Dikunci\" - kotak soalan dipaparkan sepenuhnya dan tidak boleh runtuh.",
+      titleLocation: "Mengatasi peraturan penjajaran tajuk yang ditakrifkan pada panel, halaman atau tahap tinjauan. Opsyen \"Warisan\" menggunakan sebarang seting aras lebih tinggi (jika ditetapkan) atau seting aras tinjauan (\"Atas\" secara lalai).",
+      descriptionLocation: "Opsyen \"Warisan\" menggunakan seting aras tinjauan (\"Di bawah tajuk soalan\" secara lalai).",
+      errorLocation: "Mengesetkan lokasi mesej ralat berhubung dengan soalan dengan input tidak sah. Pilih antara: \"Atas\" - teks ralat diletakkan di bahagian atas kotak soalan; \"Bawah\" - teks ralat diletakkan di bahagian bawah kotak soalan. Pilihan \"Warisan\" menggunakan tetapan peringkat tinjauan (\"Atas\" secara lalai).",
+      indent: "Menambah ruang atau jidar antara kandungan soalan dan sempadan kiri kotak soalan.",
+      width: "Menetapkan lebar soalan mengikut kadar unsur tinjauan lain dalam baris yang sama. Menerima nilai CSS (px, %, dalam, pt, dll.).",
+      surveyvalidator: {
+        expression: "Gunakan ikon tongkat ajaib untuk menetapkan peraturan pengesahan untuk soalan itu."
+      },
+      textUpdateMode: "Pilih daripada: \"Pada fokus yang hilang\" - nilai dikemas kini apabila medan input kehilangan fokus; \"Semasa menaip\" - nilai dikemas kini dalam masa nyata, semasa pengguna menaip. Pilihan \"Warisan\" menggunakan seting peringkat tinjauan (\"Pada fokus yang hilang\" secara lalai).",
+      url: "Anda boleh menggunakan mana-mana perkhidmatan web sebagai sumber data untuk soalan pelbagai pilihan. Untuk mengisi nilai pilihan, masukkan URL perkhidmatan yang menyediakan data.",
+      searchMode: "Operasi perbandingan yang digunakan untuk menapis senarai juntai bawah.",
+      textWrapEnabled: "Teks panjang dalam pilihan pilihan akan menjana pemisah baris secara automatik agar muat dalam menu lungsur. Nyahpilih jika anda mahu teks klip."
+    },
+    signaturepad: {
+      signatureWidth: "Mengesetkan lebar kawasan tandatangan yang dipaparkan dan imej yang terhasil.",
+      signatureHeight: "Mengesetkan ketinggian kawasan tandatangan yang dipaparkan dan imej yang terhasil.",
+      signatureAutoScaleEnabled: "Pilih jika anda inginkan kawasan tandatangan mengisi semua ruang yang tersedia dalam kotak soalan sambil mengekalkan nisbah aspek 3:2 lalai. Apabila nilai lebar dan ketinggian tersuai ditetapkan, seting akan mengekalkan nisbah aspek dimensi ini."
+    },
+    file: {
+      imageHeight: "Melaraskan ketinggian imej dalam hasil tinjauan.",
+      imageWidth: "Melaraskan lebar imej dalam hasil tinjauan."
+    },
+    imagepicker: {
+      imageHeight: "Mengatasi nilai ketinggian minimum dan maksimum.",
+      imageWidth: "Mengatasi nilai lebar minimum dan maksimum.",
+      choices: "\"Nilai\" berfungsi sebagai ID item yang digunakan dalam peraturan bersyarat; \"Teks\" dipaparkan kepada responden."
+    },
+    text: {
+      size: "Seting ini hanya mengubah saiz medan input dan tidak mempengaruhi lebar kotak soalan. Untuk mengehadkan panjang input yang diterima, pergi ke <b>Pengesahihan → Had aksara maksimum</b>."
+    },
+    comment: {
+      rows: "Mengesetkan bilangan baris yang dipaparkan dalam medan input. Jika input mengambil lebih banyak baris, bar skrol akan muncul."
+    },
+    // survey templates
+    survey: {
+      mode: "Pilih antara: \"Boleh diedit\" - membolehkan responden mengisi tinjauan anda; \"Baca sahaja\" - melumpuhkan penyuntingan borang."
+    },
+    matrixdropdowncolumn: {
+      name: "ID lajur yang tidak kelihatan kepada responden.",
+      isUnique: "Apabila didayakan untuk lajur, responden dikehendaki memberikan respons unik untuk setiap soalan dalam lajur ini.",
+      rows: "Mengesetkan bilangan baris yang dipaparkan dalam medan input. Jika input mengambil lebih banyak baris, bar skrol akan muncul.",
+      visibleIf: "Gunakan ikon tongkat ajaib untuk mengesetkan peraturan bersyarat yang menentukan keterlihatan lajur.",
+      enableIf: "Gunakan ikon tongkat ajaib untuk mengesetkan peraturan bersyarat yang menyahdayakan mod baca sahaja untuk lajur.",
+      requiredIf: "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang menghalang penyerahan tinjauan melainkan sekurang-kurangnya satu soalan tersarang mempunyai jawapan.",
+      showInMultipleColumns: "Apabila dipilih, cipta lajur individu untuk setiap opsyen pilihan."
+    },
+    widthMode: "Pilih daripada: \"Statik\" - menetapkan lebar tetap; \"Responsif\" - membuat tinjauan menduduki lebar penuh skrin; \"Auto\" - terpakai salah satu daripada kedua-duanya bergantung kepada jenis soalan yang digunakan.",
     cookieName: "Kuki menghalang pengguna daripada mengisi tinjauan yang sama dua kali.",
-    size: "Mensaiz semula kawasan medan input yang kelihatan. Sila gunakan <b>Pengesahan →</b> Tetapan panjang maksimum untuk mengehadkan panjang input.",
-    format: "Gunakan {0} sebagai ruang letak untuk nilai sebenar.",
+    logo: "Tampal pautan imej (tiada had saiz) atau klik ikon folder untuk menyemak lalu fail daripada komputer anda (sehingga 64KB).",
+    logoWidth: "Menetapkan lebar logo dalam unit CSS (px, %, in, pt, dll.).",
+    logoHeight: "Menetapkan ketinggian logo dalam unit CSS (px, %, in, pt, dll.).",
+    logoFit: "Pilih daripada: \"Tiada\" - imej mengekalkan saiz asalnya; \"Mengandungi\" - imej diubah saiznya agar sesuai sambil mengekalkan nisbah aspeknya; \"Cover\" - imej mengisi keseluruhan kotak sambil mengekalkan nisbah aspeknya; \"Isian\" - imej diregangkan untuk mengisi kotak tanpa mengekalkan nisbah aspeknya.",
+    goNextPageAutomatic: "Pilih jika anda ingin tinjauan diteruskan ke halaman berikut secara automatik selepas responden menjawab semua soalan pada halaman semasa.",
+    allowCompleteSurveyAutomatic: "Pilih jika anda mahu tinjauan selesai secara automatik selepas responden menjawab semua soalan.",
+    showNavigationButtons: "Mengesetkan kebolehlihatan dan lokasi butang navigasi pada halaman.",
+    showProgressBar: "Menetapkan kebolehlihatan dan lokasi bar kemajuan. Nilai \"Auto\" memaparkan bar kemajuan di atas atau di bawah pengepala tinjauan.",
+    showPreviewBeforeComplete: "Dayakan halaman pratonton dengan semua atau menjawab soalan sahaja.",
+    questionTitleLocation: "Digunakan untuk semua soalan dalam tinjauan. Tetapan ini boleh diubah oleh peraturan penjajaran tajuk pada tahap yang lebih rendah: panel, halaman atau soalan. Tetapan peringkat rendah akan mengatasi mereka yang berada pada tahap yang lebih tinggi.",
+    requiredText: "Simbol atau urutan simbol yang menunjukkan bahawa jawapan diperlukan.",
+    questionStartIndex: "Masukkan nombor atau huruf yang anda ingin mulakan penomboran.",
+    questionErrorLocation: "Mengesetkan lokasi mesej ralat berhubung dengan soalan dengan input tidak sah. Pilih antara: \"Atas\" - teks ralat diletakkan di bahagian atas kotak soalan; \"Bawah\" - teks ralat diletakkan di bahagian bawah kotak soalan.",
+    focusFirstQuestionAutomatic: "Pilih jika anda inginkan medan input pertama pada setiap halaman sedia untuk entri teks.",
+    questionsOrder: "Mengekalkan susunan soalan asal atau rawak mereka. Kesan seting ini hanya kelihatan dalam tab Pratonton.",
+    maxTextLength: "Untuk soalan entri teks sahaja.",
+    maxOthersLength: "Untuk komen soalan sahaja.",
+    autoGrowComment: "Pilih jika anda inginkan komen soalan dan soalan Teks Panjang untuk mengembangkan ketinggian automatik berdasarkan panjang teks yang dimasukkan.",
+    allowResizeComment: "Untuk komen soalan dan soalan Teks Panjang sahaja.",
+    calculatedValues: "Pemboleh ubah tersuai berfungsi sebagai pemboleh ubah perantaraan atau tambahan yang digunakan dalam pengiraan borang. Mereka mengambil input responden sebagai nilai sumber. Setiap pemboleh ubah tersuai mempunyai nama unik dan ungkapan yang berdasarkannya.",
+    includeIntoResult: "Pilih jika anda ingin nilai terhitung ungkapan disimpan bersama-sama dengan hasil tinjauan.",
+    triggers: "Pencetus ialah peristiwa atau keadaan yang berdasarkan ungkapan. Sebaik sahaja ungkapan dinilai kepada \"benar\", pencetus akan mematikan tindakan. Tindakan sedemikian secara pilihan boleh mempunyai soalan sasaran yang mempengaruhinya.",
+    clearInvisibleValues: "Pilih sama ada atau tidak untuk mengosongkan nilai untuk soalan yang tersembunyi oleh logik bersyarat dan bila untuk melakukannya.",
+    textUpdateMode: "Pilih daripada: \"Pada fokus yang hilang\" - nilai dikemas kini apabila medan input kehilangan fokus; \"Semasa menaip\" - nilai dikemas kini dalam masa nyata, semasa pengguna menaip.",
+    columns: "Nilai kiri berfungsi sebagai ID lajur yang digunakan dalam peraturan bersyarat, nilai kanan dipaparkan kepada responden.",
+    rows: "Nilai kiri berfungsi sebagai ID baris yang digunakan dalam peraturan bersyarat, nilai kanan dipaparkan kepada responden.",
+    columnMinWidth: "Menerima nilai CSS (px, %, dalam, pt, dll.).",
+    rowTitleWidth: "Menerima nilai CSS (px, %, dalam, pt, dll.).",
     totalText: "Boleh dilihat hanya apabila sekurang-kurangnya satu lajur mempunyai jenis Jumlah atau ungkapan Jumlah.",
-    acceptedTypes: "Rujuk perihalan atribut [terima](https://www.w3schools.com/tags/att_input_accept.asp) untuk maklumat lanjut.",
-    columnColCount: "Hanya digunakan untuk jenis sel Kumpulan Radio dan Kotak Semak.",
-    autocomplete: "Rujuk perihalan atribut [autolengkap](https://developer.mozilla.org/en-US/docs/Web/HTML/Atribut/autolengkap) untuk maklumat lanjut.",
+    cellErrorLocation: "Mengesetkan lokasi mesej ralat berhubung dengan sel dengan input tidak sah. Opsyen \"Warisan\" menggunakan seting daripada sifat \"Penjajaran mesej ralat\".",
+    keyDuplicationError: "Apabila sifat \"Mencegah respons pendua\" didayakan, responden yang cuba menyerahkan entri pendua akan menerima mesej ralat berikut.",
+    totalExpression: "Membolehkan anda mengira jumlah nilai berdasarkan ungkapan. Ungkapan ini boleh termasuk pengiraan asas ('{q1_id} + {q2_id}'), Ungkapan Boolean ('{age} > 60') dan fungsi ('iif()', 'hari ini()', 'umur()', 'min()', 'max()', 'avg()', dll.).",
+    confirmDelete: "Mencetuskan gesaan yang meminta untuk mengesahkan pemadaman baris.",
+    defaultValueFromLastRow: "Pendua jawapan dari baris terakhir dan menguntukkannya ke baris dinamik tambahan seterusnya.",
+    keyName: "Jika lajur yang ditentukan mengandungi nilai yang sama, tinjauan akan membuang ralat \"Nilai kunci bukan unik\".",
+    description: "Taipkan sari kata.",
+    locale: "Pilih bahasa untuk mula mencipta tinjauan anda. Untuk menambah terjemahan, tukar kepada bahasa baru dan terjemahkan teks asal di sini atau dalam tab Terjemahan.",
+    detailPanelMode: "Mengesetkan lokasi seksyen butiran berhubung dengan baris. Pilih daripada: \"Tiada\" - tiada pengembangan ditambah; \"Di bawah baris\" - pengembangan baris diletakkan di bawah setiap baris matriks; \"Di bawah baris, paparkan pengembangan satu baris sahaja\" - pengembangan dipaparkan di bawah satu baris sahaja, pengembangan baris yang tinggal runtuh.",
+    imageFit: "Pilih daripada: \"Tiada\" - imej mengekalkan saiz asalnya; \"Mengandungi\" - imej diubah saiznya agar sesuai sambil mengekalkan nisbah aspeknya; \"Cover\" - imej mengisi keseluruhan kotak sambil mengekalkan nisbah aspeknya; \"Isian\" - imej diregangkan untuk mengisi kotak tanpa mengekalkan nisbah aspeknya.",
+    autoGrow: "Secara beransur-ansur meningkatkan ketinggian medan input apabila data dimasukkan. Membatalkan seting \"Ketinggian medan input (dalam garisan)\".",
+    allowResize: "Pemegang saiz semula (atau cengkaman) muncul di sudut dan boleh diseret untuk mengubah saiz medan input.",
+    maxTimeToFinish: "Selang masa dalam beberapa saat selepas itu tinjauan secara automatik maju ke halaman Terima Kasih.",
+    maxTimeToFinishPage: "Selang masa dalam beberapa saat selepas itu tinjauan secara automatik maju ke halaman seterusnya.",
+    page: {
+      maxTimeToFinish: "Selang masa dalam beberapa saat selepas itu tinjauan secara automatik maju ke halaman seterusnya.",
+      visibleIf: "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang menentukan keterlihatan halaman.",
+      enableIf: "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang menyahdayakan mod baca sahaja untuk halaman.",
+      requiredIf: "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang menghalang penyerahan tinjauan melainkan sekurang-kurangnya satu soalan tersarang mempunyai jawapan.",
+      questionTitleLocation: "Digunakan untuk semua soalan dalam halaman ini. Jika anda ingin mengubah seting ini, takrifkan peraturan penjajaran tajuk untuk soalan atau panel individu. Pilihan \"Warisan\" menggunakan tetapan peringkat tinjauan (\"Atas\" secara lalai).",
+      questionErrorLocation: "Mengesetkan lokasi mesej ralat berhubung dengan soalan dengan input tidak sah. Pilih antara: \"Atas\" - teks ralat diletakkan di bahagian atas kotak soalan; \"Bawah\" - teks ralat diletakkan di bahagian bawah kotak soalan. Pilihan \"Warisan\" menggunakan tetapan peringkat tinjauan (\"Atas\" secara lalai).",
+      questionsOrder: "Mengekalkan susunan soalan asal atau rawak mereka. Pilihan \"Warisan\" menggunakan seting peringkat tinjauan (\"Asal\" secara lalai). Kesan seting ini hanya kelihatan dalam tab Pratonton.",
+      navigationButtonsVisibility: "Mengesetkan keterlihatan butang navigasi pada halaman. Opsyen \"Warisan\" menggunakan seting aras tinjauan, yang lalai kepada \"Boleh Dilihat\"."
+    },
+    showTimerPanel: "Mengesetkan kebolehlihatan dan lokasi pemasa pada halaman.",
+    panelsState: "Pilih daripada: \"Dikunci\" - pengguna tidak boleh mengembangkan atau meruntuhkan panel; \"Runtuhkan semua\" - semua panel bermula dalam keadaan runtuh; \"Kembangkan semua\" - semua panel bermula dalam keadaan yang diperluaskan; \"Pertama diperluaskan\" - hanya panel pertama yang pada mulanya diperluaskan.",
+    imageLinkName: "Masukkan nama sifat dikongsi dalam tatasusunan objek yang mengandungi URL fail imej atau video yang anda ingin paparkan dalam senarai pilihan.",
+    choices: "Nilai kiri berfungsi sebagai ID item yang digunakan dalam peraturan bersyarat, nilai yang betul dipaparkan kepada responden.",
+    title: "Taipkan tajuk mesra pengguna untuk dipaparkan.",
+    waitForUpload: "Memastikan pengguna tidak akan melengkapkan tinjauan sehingga fail dimuat naik.",
+    minWidth: "Menerima nilai CSS (px, %, dalam, pt, dll.).",
+    maxWidth: "Menerima nilai CSS (px, %, dalam, pt, dll.).",
+    width: "Menerima nilai CSS (px, %, dalam, pt, dll.).",
     valueName: "Jika anda tidak menetapkan sifat ini, jawapannya akan disimpan dalam medan yang ditentukan oleh sifat Nama.",
+    useDisplayValuesInDynamicTexts: "Dalam jenis soalan pilihan tunggal dan berbilang pilihan, setiap pilihan pilihan mempunyai ID dan nilai paparan. Apabila dipilih, seting ini menunjukkan nilai paparan dan bukannya nilai ID dalam soalan HTML dan tajuk dinamik serta perihalan unsur tinjauan.",
+    clearIfInvisible: "Pilih sama ada untuk mengosongkan nilai soalan yang tersembunyi oleh logik bersyarat dan bila untuk melakukannya. Pilihan \"Warisan\" menggunakan tetapan peringkat tinjauan (\"Setelah selesai tinjauan\" secara lalai).",
+    choicesFromQuestionMode: "Pilih daripada: \"Semua\" - menyalin semua pilihan pilihan daripada soalan yang dipilih; \"Dipilih\" - secara dinamik hanya menyalin pilihan pilihan yang dipilih; \"Tidak dipilih\" - secara dinamik menyalin hanya pilihan pilihan yang tidak dipilih. Pilihan \"Tiada\" dan \"Lain-lain\" disalin secara lalai jika didayakan dalam soalan sumber.",
+    showOtherItem: "Apabila dipilih, pengguna boleh memasukkan input tambahan dalam kotak komen berasingan.",
+    separateSpecialChoices: "Memaparkan setiap pilihan pilihan khas (\"Tiada\", \"Lain\", \"Pilih Semua\") pada baris baru, walaupun menggunakan tataletak berbilang lajur.",
+    path: "Tentukan lokasi dalam set data perkhidmatan yang lokasi tatasusunan sasaran objek. Biarkan kosong jika URL telah menuding ke tatasusunan.",
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "Jika lajur yang ditentukan mengandungi nilai yang sama, tinjauan akan membuang ralat \"Nilai kunci bukan unik\".",
+    titleName: "Masukkan nama sifat seragam dalam tatasusunan objek yang mengandungi nilai yang anda ingin paparkan dalam senarai pilihan.",
+    allowEmptyResponse: "Pilih untuk membenarkan perkhidmatan mengembalikan respons atau tatasusunan kosong.",
+    choicesVisibleIf: "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang menentukan keterlihatan semua pilihan pilihan.",
+    rateValues: "Nilai kiri berfungsi sebagai ID item yang digunakan dalam peraturan bersyarat, nilai yang betul dipaparkan kepada responden.",
+    rating: {
+      displayMode: "\"Auto\" memilih antara mod \"Butang\" dan \"Dropdown\" berdasarkan lebar yang tersedia. Apabila lebar tidak mencukupi untuk memaparkan butang, soalan memaparkan menu lungsur."
+    },
+    valuePropertyName: "Membolehkan anda menyambungkan soalan yang menghasilkan hasil dalam format yang berbeza. Apabila soalan tersebut dipautkan bersama menggunakan pengecam cantuman, sifat kongsi ini menyimpan nilai soalan terpilih.",
+    searchEnabled: "Pilih jika anda ingin mengemas kini kandungan menu juntai bawah agar sepadan dengan pertanyaan carian yang pengguna menaip dalam medan input.",
+    valueTrue: "Nilai untuk menyimpan hasil tinjauan apabila responden memberikan jawapan yang positif.",
+    valueFalse: "Nilai untuk menyimpan hasil tinjauan apabila responden memberikan jawapan negatif.",
+    showPreview: "Ia tidak disyorkan untuk menyahdayakan pilihan ini kerana ia mengubah imej Pratonton dan menyukarkan pengguna untuk memahami sama ada fail telah dimuat naik.",
+    needConfirmRemoveFile: "Mencetuskan gesaan yang meminta untuk mengesahkan penghapusan fail.",
+    selectToRankEnabled: "Membolehkan untuk menilai pilihan yang dipilih sahaja. Pengguna akan menyeret item terpilih dari senarai pilihan untuk memesannya dalam kawasan kedudukan.",
+    dataList: "Masukkan senarai pilihan yang akan dicadangkan kepada responden semasa input.",
+    itemSize: "Seting hanya mengubah saiz medan input dan tidak mempengaruhi lebar kotak soalan.",
+    itemTitleWidth: "Mengesetkan lebar yang konsisten untuk semua label item dalam piksel",
+    contentMode: "Pilihan \"Auto\" secara automatik menentukan mod yang sesuai untuk paparan - Imej, Video atau YouTube - berdasarkan URL sumber yang disediakan.",
+    altText: "Berfungsi sebagai pengganti apabila imej tidak boleh dipaparkan pada peranti pengguna dan untuk tujuan kebolehcapaian.",
+    rateColorMode: "Mentakrifkan warna emoji yang dipilih apabila jenis ikon Penarafan ditetapkan kepada \"Smileys\". Pilih antara: \"Lalai\" - emoji yang dipilih muncul dalam warna tinjauan lalai; \"Skala\" - emoji yang dipilih mewarisi warna dari skala penarafan.",
+    expression: {
+      name: "ID ungkapan yang tidak kelihatan kepada responden.",
+      description: "Taipkan sari kata ungkapan.",
+      expression: "Ungkapan boleh termasuk pengiraan asas ('{q1_id} + {q2_id}'), syarat ('{age} > 60'), dan fungsi ('iif()', 'hari ini()', 'umur()', 'min()', 'max()', 'pur()', dll.)."
+    },
+    storeOthersAsComment: "Pilih untuk menyimpan nilai pilihan \"Lain-lain\" sebagai harta berasingan dalam hasil tinjauan.",
+    format: "Gunakan {0} sebagai ruang letak untuk nilai sebenar.",
+    acceptedTypes: "Rujuk perihalan atribut [terima](https://www.w3schools.com/tags/att_input_accept.asp) untuk maklumat lanjut.",
+    columnColCount: "Hanya digunakan untuk jenis sel Kumpulan Radio dan Kotak Semak.",
+    autocomplete: "Rujuk perihalan atribut [autolengkap](https://developer.mozilla.org/en-US/docs/Web/HTML/Atribut/autolengkap) untuk maklumat lanjut.",
     filePlaceholder: "Digunakan apabila \"Jenis sumber\" ialah \"Fail tempatan\" atau apabila kamera tidak tersedia",
     photoPlaceholder: "Digunakan apabila \"Jenis sumber\" ialah \"Kamera\".",
-    fileOrPhotoPlaceholder: "Digunakan apabila \"Jenis sumber\" ialah \"Fail atau kamera tempatan\"."
+    fileOrPhotoPlaceholder: "Digunakan apabila \"Jenis sumber\" ialah \"Fail atau kamera tempatan\".",
+    masksettings: {
+      saveMaskedValue: "Pilih jika anda ingin menyimpan nilai soalan dengan topeng yang digunakan dalam hasil tinjauan."
+    },
+    patternmask: {
+      pattern: "Corak boleh mengandungi literal rentetan dan ruang letak berikut: '9' - untuk digit; 'a' - untuk huruf besar atau kecil; '#' - untuk digit atau huruf besar atau huruf kecil. Gunakan tindak balas '\\' untuk melarikan diri daripada watak."
+    },
+    datetimemask: {
+      pattern: "Corak boleh mengandungi aksara pemisah dan ruang letak berikut: 'm' - untuk nombor bulan; 'mm' - untuk nombor bulan, dengan sifar utama untuk nilai satu digit; 'd' - untuk hari dalam bulan; 'dd' - untuk hari dalam bulan, dengan sifar utama untuk nilai satu digit; 'yy' - untuk dua digit terakhir tahun ini; 'yyyy' - untuk tahun empat angka."
+    },
+    numericmask: {
+      decimalSeparator: "Simbol yang digunakan untuk memisahkan bahagian pecahan daripada bahagian integer bagi nombor yang dipaparkan.",
+      thousandsSeparator: "Simbol yang digunakan untuk memisahkan digit nombor besar ke dalam kumpulan tiga.",
+      precision: "Hadkan bilangan digit untuk dikekalkan selepas titik perpuluhan bagi nombor yang dipaparkan."
+    },
+    currencymask: {
+      prefix: "Satu atau beberapa simbol yang akan dipaparkan sebelum nilai.",
+      suffix: "Satu atau beberapa simbol yang akan dipaparkan selepas nilai."
+    }
   },
   // Properties
   p: {
@@ -947,6 +1342,7 @@ export var msStrings = {
     },
     multiSelect: "Pilih berbilang",
     showLabel: "Tunjukkan label",
+    swapOrder: "Tukar pesanan Ya dan Tidak",
     value: "Nilai",
     tabAlign: "Penjajaran tab",
     sourceType: "Jenis sumber",
@@ -970,8 +1366,6 @@ export var msStrings = {
     showBrandInfo: "Tunjukkan maklumat jenama",
     useDisplayValuesInDynamicTexts: "Guna nilai paparan dalam tajuk",
     visibleIf: "Boleh dilihat jika",
-    titleLocation: "Lokasi tajuk",
-    descriptionLocation: "Lokasi perihalan",
     defaultValueExpression: "Ekspresi nilai lalai",
     requiredIf: "Diperlukan jika",
     resetValueIf: "Mengeset semula nilai jika",
@@ -984,8 +1378,6 @@ export var msStrings = {
     choicesByUrl: "Pilihan melalui URL",
     currency: "mata wang",
     cellHint: "Petunjuk sel",
-    isUnique: "Unik",
-    showInMultipleColumns: "Tunjukkan dalam berbilang lajur",
     totalMaximumFractionDigits: "Jumlah digit pecahan maksimum",
     totalMinimumFractionDigits: "Jumlah digit pecahan minimum",
     columns: "lajur",
@@ -1004,6 +1396,7 @@ export var msStrings = {
     step: "langkah",
     dataList: "Senarai data",
     itemSize: "Saiz item",
+    itemTitleWidth: "Lebar label item (dalam piksel)",
     elements: "Unsur",
     content: "Kandungan",
     navigationButtonsVisibility: "Kebolehlihatan butang navigasi",
@@ -1037,11 +1430,11 @@ export var msStrings = {
     backgroundOpacity: "Kelegapan latar belakang",
     selectToRankEnabled: "Pilih untuk mendayakan kedudukan",
     selectToRankAreasLayout: "Pilih untuk menentukan tataletak kawasan",
+    selectToRankEmptyRankedAreaText: "Teks untuk ditunjukkan jika semua opsyen dipilih",
+    selectToRankEmptyUnrankedAreaText: "Teks ruang letak untuk kawasan penarafan",
     allowCameraAccess: "Benarkan capaian kamera",
     scaleColorMode: "Mod warna skala",
     rateColorMode: "Mod warna kadar",
-    templateTabTitle: "Tajuk tab templat",
-    templateVisibleIf: "Templat boleh dilihat jika",
     copyDisplayValue: "Nilai paparan salin"
   },
   theme: {
@@ -1724,3 +2117,349 @@ editorLocalization.locales["ms"] = msStrings;
 // layout.panel: "Layout" => "Susun atur"
 // layout.question: "Layout" => "Susun atur"
 // layout.base: "Layout" => "Susun atur"
+// panel.name: "Panel name" => "Nama panel"
+// panel.title: "Panel title" => "Tajuk panel"
+// panel.description: "Panel description" => "Penerangan panel"
+// panel.visibleIf: "Make the panel visible if" => "Jadikan panel kelihatan jika"
+// panel.requiredIf: "Make the panel required if" => "Buat panel diperlukan jika"
+// panel.questionsOrder: "Question order within the panel" => "Tertib soalan dalam panel"
+// panel.startWithNewLine: "Display the panel on a new line" => "Paparkan panel pada baris baru"
+// panel.state: "Panel collapse state" => "Keadaan panel runtuh"
+// panel.width: "Inline panel width" => "Lebar panel sebaris"
+// panel.minWidth: "Minimum panel width" => "Lebar panel minimum"
+// panel.maxWidth: "Maximum panel width" => "Lebar panel maksimum"
+// panel.showNumber: "Number panels" => "Panel nombor"
+// paneldynamic.name: "Panel name" => "Nama panel"
+// paneldynamic.title: "Panel title" => "Tajuk panel"
+// paneldynamic.description: "Panel description" => "Penerangan panel"
+// paneldynamic.visibleIf: "Make the panel visible if" => "Jadikan panel kelihatan jika"
+// paneldynamic.requiredIf: "Make the panel required if" => "Buat panel diperlukan jika"
+// paneldynamic.page: "Move the panel to page" => "Mengalihkan panel ke halaman"
+// paneldynamic.startWithNewLine: "Display the panel on a new line" => "Paparkan panel pada baris baru"
+// paneldynamic.state: "Panel collapse state" => "Keadaan panel runtuh"
+// paneldynamic.width: "Inline panel width" => "Lebar panel sebaris"
+// paneldynamic.minWidth: "Minimum panel width" => "Lebar panel minimum"
+// paneldynamic.maxWidth: "Maximum panel width" => "Lebar panel maksimum"
+// paneldynamic.templateDescription: "Panel description pattern" => "Corak perihalan panel"
+// paneldynamic.templateTitle: "Panel title pattern" => "Corak tajuk panel"
+// paneldynamic.noEntriesText: "Empty panel text" => "Teks panel kosong"
+// paneldynamic.templateTabTitle: "Tab title pattern" => "Corak tajuk tab"
+// paneldynamic.templateVisibleIf: "Make an individual panel visible if" => "Jadikan panel individu kelihatan jika"
+// paneldynamic.hideNumber: "Hide the panel number" => "Sembunyikan nombor panel"
+// paneldynamic.titleLocation: "Panel title alignment" => "Penjajaran tajuk panel"
+// paneldynamic.descriptionLocation: "Panel description alignment" => "Penjajaran perihalan panel"
+// paneldynamic.templateTitleLocation: "Question title alignment" => "Penjajaran tajuk soalan"
+// paneldynamic.templateErrorLocation: "Error message alignment" => "Penjajaran mesej ralat"
+// paneldynamic.newPanelPosition: "New panel location" => "Lokasi panel baru"
+// paneldynamic.keyName: "Prevent duplicate responses in the following question" => "Mencegah jawapan pendua dalam soalan berikut"
+// question.name: "Question name" => "Nama soalan"
+// question.title: "Question title" => "Tajuk soalan"
+// question.description: "Question description" => "Penerangan soalan"
+// question.visibleIf: "Make the question visible if" => "Jadikan soalan kelihatan jika"
+// question.requiredIf: "Make the question required if" => "Jadikan soalan diperlukan jika"
+// question.state: "Question box collapse state" => "Keadaan kotak soalan runtuh"
+// question.hideNumber: "Hide the question number" => "Sembunyikan nombor soalan"
+// question.titleLocation: "Question title alignment" => "Penjajaran tajuk soalan"
+// question.descriptionLocation: "Question description alignment" => "Penjajaran perihalan soalan"
+// question.errorLocation: "Error message alignment" => "Penjajaran mesej ralat"
+// question.indent: "Increase the inner indent" => "Meningkatkan inden dalaman"
+// question.width: "Inline question width" => "Lebar soalan sebaris"
+// question.minWidth: "Minimum question width" => "Lebar soalan minimum"
+// question.maxWidth: "Maximum question width" => "Lebar soalan maksimum"
+// question.textUpdateMode: "Update input field value" => "Mengemas kini nilai medan input"
+// signaturepad.allowClear: "Show the Clear button within signature area" => "Tunjukkan butang Kosongkan dalam kawasan tandatangan"
+// signaturepad.penColor: "Stroke color" => "Warna strok"
+// comment.rows: "Input field height (in lines)" => "Ketinggian medan input (dalam garisan)"
+// expression.name: "Expression name" => "Nama ungkapan"
+// expression.title: "Expression title" => "Tajuk ungkapan"
+// expression.description: "Expression description" => "Perihalan ungkapan"
+// expression.expression: "Expression" => "Ungkapan"
+// trigger.expression: "Expression" => "Ungkapan"
+// calculatedvalue.expression: "Expression" => "Ungkapan"
+// survey.description: "Survey description" => "Penerangan tinjauan"
+// page.name: "Page name" => "Nama halaman"
+// page.description: "Page description" => "Perihalan halaman"
+// page.visibleIf: "Make the page visible if" => "Jadikan halaman kelihatan jika"
+// page.requiredIf: "Make the page required if" => "Jadikan halaman diperlukan jika"
+// page.questionsOrder: "Question order on the page" => "Tertib soalan pada halaman"
+// matrixdropdowncolumn.name: "Column name" => "Nama lajur"
+// matrixdropdowncolumn.title: "Column title" => "Tajuk lajur"
+// matrixdropdowncolumn.isUnique: "Prevent duplicate responses" => "Elakkan tindak balas pendua"
+// matrixdropdowncolumn.width: "Column width" => "Lebar lajur"
+// matrixdropdowncolumn.minWidth: "Minimum column width" => "Lebar lajur minimum"
+// matrixdropdowncolumn.rows: "Input field height (in lines)" => "Ketinggian medan input (dalam garisan)"
+// matrixdropdowncolumn.visibleIf: "Make the column visible if" => "Jadikan lajur kelihatan jika"
+// matrixdropdowncolumn.requiredIf: "Make the column required if" => "Jadikan lajur diperlukan jika"
+// matrixdropdowncolumn.showInMultipleColumns: "Each option in a separate column" => "Setiap opsyen dalam lajur berasingan"
+// multipletextitem.name: "Name" => "Nama"
+// multipletextitem.title: "Title" => "Tajuk"
+// pe.rateDescriptionLocation: "Label alignment" => "Penjajaran label"
+// pe.cellErrorLocation: "Cell error message alignment" => "Penjajaran mesej ralat sel"
+// pe.listIsEmpty@columns: "You don't have any columns yet" => "Anda belum mempunyai sebarang lajur"
+// pe.listIsEmpty@rows: "You don't have any rows yet" => "Anda belum mempunyai sebarang baris"
+// pe.listIsEmpty@validators: "You don't have any validation rules yet" => "Anda belum mempunyai sebarang peraturan pengesahihan"
+// pe.listIsEmpty@calculatedValues: "You don't have any custom variables yet" => "Anda belum mempunyai sebarang pemboleh ubah tersuai"
+// pe.listIsEmpty@triggers: "You don't have any triggers yet" => "Anda belum mempunyai sebarang pencetus"
+// pe.listIsEmpty@navigateToUrlOnCondition: "You don't have any links yet" => "Anda belum mempunyai pautan"
+// pe.addNew@columns: "Add new column" => "Menambah lajur baru"
+// pe.addNew@rows: "Add new row" => "Menambah baris baru"
+// pe.addNew@validators: "Add new rule" => "Tambah peraturan baru"
+// pe.addNew@calculatedValues: "Add new variable" => "Menambah pemboleh ubah baru"
+// pe.addNew@triggers: "Add new trigger" => "Tambah pencetus baharu"
+// pe.addNew@navigateToUrlOnCondition: "Add new URL" => "Tambah URL baru"
+// choicesbyurl.url: "Web service's URL" => "URL perkhidmatan web"
+// pe.progressBarShowPageTitles: "Display page titles in progress bar" => "Paparkan tajuk halaman dalam bar kemajuan"
+// pe.progressBarShowPageNumbers: "Display page numbers in progress bar" => "Paparkan nombor halaman dalam bar kemajuan"
+// itemvalue.visibleIf: "Make the option visible if" => "Jadikan opsyen kelihatan jika"
+// itemvalue.enableIf: "Make the option selectable if" => "Jadikan opsyen boleh dipilih jika"
+// panel.layout: "Panel Layout" => "Tataletak Panel"
+// tabs.questionSettings: "Question Settings" => "Seting Soalan"
+// pe.url_placeholder: "Ex.: https://api.example.com/books" => "Ex.: https://api.example.com/books"
+// pe.path_placeholder: "Ex.: categories.fiction" => "Ex.: categories.fiction"
+// pe.questionStartIndex_placeholder: "Ex.: a)" => "Ex.: a)"
+// pe.width_placeholder: "Ex.: 6in" => "Ex.: 6in"
+// pe.minWidth_placeholder: "Ex.: 600px" => "Ex.: 600px"
+// pe.maxWidth_placeholder: "Ex.: 50%" => "Ex.: 50%"
+// pv.selected: "Selected" => "Dipilih"
+// pv.unselected: "Unselected" => "Tidak dipilih"
+// pv.center: "Center" => "Pusat"
+// pv.middle: "Middle" => "Tengah"
+// pv.next: "Next" => "Seterusnya"
+// pv.last: "Last" => "Terakhir"
+// clearIfInvisible.none: "Never" => "Tidak pernah"
+// questionsOnPageMode.standard: "Original structure" => "Struktur asal"
+// questionsOnPageMode.singlePage: "Show all questions on one page" => "Tunjukkan semua soalan pada satu halaman"
+// questionsOnPageMode.questionPerPage: "Show single question per page" => "Menunjukkan soalan tunggal bagi setiap halaman"
+// pv.auto: "Auto" => "Auto"
+// panelsState.firstExpanded: "First expanded" => "Mula-mula diperluaskan"
+// rateColorMode.scale: "Scale" => "Skala"
+// scaleColorMode.monochrome: "Monochrome" => "Monokrom"
+// scaleColorMode.colored: "Colored" => "Berwarna"
+// state.default: "Locked" => "Dikunci"
+// showQuestionNumbers.default: "Auto-numbering" => "Penomboran automatik"
+// showQuestionNumbers.on: "Auto-numbering" => "Penomboran automatik"
+// showQuestionNumbers.onPage: "Reset on each page" => "Mengeset semula pada setiap halaman"
+// showQuestionNumbers.onpanel: "Reset on each panel" => "Set semula pada setiap panel"
+// showQuestionNumbers.onPanel: "Reset on each panel" => "Set semula pada setiap panel"
+// showQuestionNumbers.onSurvey: "Continue across the survey" => "Teruskan merentasi tinjauan"
+// showQuestionNumbers.off: "No numbering" => "Tiada penomboran"
+// descriptionLocation.underTitle: "Under the question title" => "Di bawah tajuk soalan"
+// descriptionLocation.underInput: "Under the input field" => "Di bawah medan input"
+// selectToRankAreasLayout.horizontal: "Next to choices" => "Di sebelah pilihan"
+// selectToRankAreasLayout.vertical: "Above choices" => "Pilihan di atas"
+// displayStyle.decimal: "Decimal" => "Perpuluhan"
+// displayStyle.currency: "Currency" => "Mata wang"
+// displayStyle.percent: "Percentage" => "Peratusan"
+// displayStyle.date: "Date" => "Tarikh"
+// totalDisplayStyle.decimal: "Decimal" => "Perpuluhan"
+// totalDisplayStyle.currency: "Currency" => "Mata wang"
+// totalDisplayStyle.percent: "Percentage" => "Peratusan"
+// totalDisplayStyle.date: "Date" => "Tarikh"
+// rowsOrder.initial: "Original" => "Asal"
+// questionsOrder.initial: "Original" => "Asal"
+// showProgressBar.aboveHeader: "Above the header" => "Di atas pengepala"
+// showProgressBar.belowHeader: "Below the header" => "Di bawah pengepala"
+// pv.sum: "Sum" => "Jumlah"
+// pv.count: "Count" => "Kiraan"
+// pv.min: "Min" => "Min"
+// pv.max: "Max" => "Max"
+// pv.avg: "Avg" => "Pur"
+// searchMode.contains: "Contains" => "Mengandungi"
+// searchMode.startsWith: "Starts with" => "Bermula dengan"
+// panel.name: "A panel ID that is not visible to respondents." => "ID panel yang tidak kelihatan kepada responden."
+// panel.description: "Type a panel subtitle." => "Taipkan sari kata panel."
+// panel.visibleIf: "Use the magic wand icon to set a conditional rule that determines panel visibility." => "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang menentukan keterlihatan panel."
+// panel.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the panel." => "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang melumpuhkan mod baca sahaja untuk panel."
+// panel.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang menghalang penyerahan tinjauan melainkan sekurang-kurangnya satu soalan tersarang mempunyai jawapan."
+// panel.questionTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Digunakan untuk semua soalan dalam panel ini. Jika anda ingin mengubah seting ini, takrifkan peraturan penjajaran tajuk untuk soalan individu. Pilihan \"Warisan\" menggunakan peringkat halaman (jika ditetapkan) atau tetapan peringkat tinjauan (\"Atas\" secara lalai)."
+// panel.questionErrorLocation: "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "Mengesetkan lokasi mesej ralat berhubung dengan semua soalan dalam panel. Opsyen \"Warisan\" menggunakan aras halaman (jika set) atau seting aras tinjauan."
+// panel.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "Mengekalkan susunan soalan asal atau rawak mereka. Opsyen \"Warisan\" menggunakan aras halaman (jika set) atau seting aras tinjauan."
+// panel.page: "Repositions the panel to the end of a selected page." => "Meletakkan semula panel di hujung halaman yang dipilih."
+// panel.innerIndent: "Adds space or margin between the panel content and the left border of the panel box." => "Menambah ruang atau jidar antara kandungan panel dan sempadan kiri kotak panel."
+// panel.startWithNewLine: "Unselect to display the panel in one line with the previous question or panel. The setting doesn't apply if the panel is the first element in your form." => "Nyahpilih untuk memaparkan panel dalam satu baris dengan soalan atau panel sebelumnya. Seting tidak digunakan jika panel ialah elemen pertama dalam borang anda."
+// panel.state: "Choose from: \"Expanded\" - the panel is displayed in full and can be collapsed; \"Collapsed\" - the panel displays only the title and description and can be expanded; \"Locked\" - the panel is displayed in full and cannot be collapsed." => "Pilih daripada: \"Diperluaskan\" - panel dipaparkan sepenuhnya dan boleh runtuh; \"Runtuh\" - panel hanya memaparkan tajuk dan keterangan dan boleh diperluaskan; \"Dikunci\" - panel dipaparkan sepenuhnya dan tidak boleh runtuh."
+// panel.width: "Sets the width of the panel in proportion to other survey elements in the same line. Accepts CSS values (px, %, in, pt, etc.)." => "Mengesetkan lebar panel mengikut kadar unsur tinjauan lain dalam baris yang sama. Menerima nilai CSS (px, %, dalam, pt, dll.)."
+// paneldynamic.name: "A panel ID that is not visible to respondents." => "ID panel yang tidak kelihatan kepada responden."
+// paneldynamic.description: "Type a panel subtitle." => "Taipkan sari kata panel."
+// paneldynamic.visibleIf: "Use the magic wand icon to set a conditional rule that determines panel visibility." => "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang menentukan keterlihatan panel."
+// paneldynamic.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the panel." => "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang melumpuhkan mod baca sahaja untuk panel."
+// paneldynamic.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang menghalang penyerahan tinjauan melainkan sekurang-kurangnya satu soalan tersarang mempunyai jawapan."
+// paneldynamic.templateTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Digunakan untuk semua soalan dalam panel ini. Jika anda ingin mengubah seting ini, takrifkan peraturan penjajaran tajuk untuk soalan individu. Pilihan \"Warisan\" menggunakan peringkat halaman (jika ditetapkan) atau tetapan peringkat tinjauan (\"Atas\" secara lalai)."
+// paneldynamic.templateErrorLocation: "Sets the location of an error message in relation to a question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Mengesetkan lokasi mesej ralat berhubung dengan soalan dengan input tidak sah. Pilih antara: \"Atas\" - teks ralat diletakkan di bahagian atas kotak soalan; \"Bawah\" - teks ralat diletakkan di bahagian bawah kotak soalan. Pilihan \"Warisan\" menggunakan peringkat halaman (jika ditetapkan) atau tetapan peringkat tinjauan (\"Atas\" secara lalai)."
+// paneldynamic.errorLocation: "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "Mengesetkan lokasi mesej ralat berhubung dengan semua soalan dalam panel. Opsyen \"Warisan\" menggunakan aras halaman (jika set) atau seting aras tinjauan."
+// paneldynamic.page: "Repositions the panel to the end of a selected page." => "Meletakkan semula panel di hujung halaman yang dipilih."
+// paneldynamic.innerIndent: "Adds space or margin between the panel content and the left border of the panel box." => "Menambah ruang atau jidar antara kandungan panel dan sempadan kiri kotak panel."
+// paneldynamic.startWithNewLine: "Unselect to display the panel in one line with the previous question or panel. The setting doesn't apply if the panel is the first element in your form." => "Nyahpilih untuk memaparkan panel dalam satu baris dengan soalan atau panel sebelumnya. Seting tidak digunakan jika panel ialah elemen pertama dalam borang anda."
+// paneldynamic.state: "Choose from: \"Expanded\" - the panel is displayed in full and can be collapsed; \"Collapsed\" - the panel displays only the title and description and can be expanded; \"Locked\" - the panel is displayed in full and cannot be collapsed." => "Pilih daripada: \"Diperluaskan\" - panel dipaparkan sepenuhnya dan boleh runtuh; \"Runtuh\" - panel hanya memaparkan tajuk dan keterangan dan boleh diperluaskan; \"Dikunci\" - panel dipaparkan sepenuhnya dan tidak boleh runtuh."
+// paneldynamic.width: "Sets the width of the panel in proportion to other survey elements in the same line. Accepts CSS values (px, %, in, pt, etc.)." => "Mengesetkan lebar panel mengikut kadar unsur tinjauan lain dalam baris yang sama. Menerima nilai CSS (px, %, dalam, pt, dll.)."
+// paneldynamic.templateTitle: "Type in a template for dynamic panel titles. Use {panelIndex} for the panel's general position and {visiblePanelIndex} for its order among visible panels. Insert these placeholders into the pattern to add automatic numbering." => "Taipkan templat untuk tajuk panel dinamik. Gunakan {panelIndex} untuk kedudukan umum panel dan {visiblePanelIndex} untuk pesanannya di kalangan panel yang kelihatan. Masukkan ruang letak ini ke dalam corak untuk menambah penomboran automatik."
+// paneldynamic.templateTabTitle: "Type in a template for tab titles. Use {panelIndex} for a panel's general position and {visiblePanelIndex} for its order among visible panels. Insert these placeholders into the pattern to add automatic numbering." => "Taipkan templat untuk tajuk tab. Gunakan {panelIndex} untuk kedudukan umum panel dan {visiblePanelIndex} untuk pesanannya di kalangan panel yang boleh dilihat. Masukkan ruang letak ini ke dalam corak untuk menambah penomboran automatik."
+// paneldynamic.templateVisibleIf: "This setting allows you to control the visibility of individual panels within the dynamic panel. Use the `{panel}` placeholder to reference the current panel in your expression." => "Tetapan ini membolehkan anda mengawal penglihatan panel individu dalam panel dinamik. Gunakan ruang letak '{panel}' untuk merujuk panel semasa dalam ungkapan anda."
+// paneldynamic.titleLocation: "This setting is automatically inherited by all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Tetapan ini diwarisi secara automatik oleh semua soalan dalam panel ini. Jika anda ingin mengubah seting ini, takrifkan peraturan penjajaran tajuk untuk soalan individu. Pilihan \"Warisan\" menggunakan peringkat halaman (jika ditetapkan) atau tetapan peringkat tinjauan (\"Atas\" secara lalai)."
+// paneldynamic.descriptionLocation: "The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Under the panel title\" by default)." => "Opsyen \"Warisan\" menggunakan aras halaman (jika ditetapkan) atau seting aras tinjauan (\"Di bawah tajuk panel\" secara lalai)."
+// paneldynamic.newPanelPosition: "Defines the position of a newly added panel. By default, new panels are added to the end. Select \"Next\" to insert a new panel after the current one." => "Mentakrifkan kedudukan panel yang baru ditambah. Secara lalai, panel baru ditambahkan ke hujungnya. Pilih \"Seterusnya\" untuk memasukkan panel baru selepas yang semasa."
+// paneldynamic.defaultValueFromLastPanel: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "Pendua jawapan daripada panel terakhir dan memberikannya kepada panel dinamik tambahan seterusnya."
+// paneldynamic.keyName: "Reference a question name to require a user to provide a unique response for this question in each panel." => "Rujukan nama soalan untuk memerlukan pengguna memberikan jawapan yang unik untuk soalan ini dalam setiap panel."
+// pehelp.defaultValueExpression: "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input." => "Seting ini membolehkan anda memperuntukkan nilai jawapan lalai berdasarkan ungkapan. Ungkapan ini boleh termasuk pengiraan asas - '{q1_id} + {q2_id}', ungkapan Boolean, seperti '{age} > 60', dan fungsi: 'iif()', 'hari ini()', 'umur()', 'min()', 'max()', 'avg()', dsb. Nilai yang ditentukan oleh ungkapan ini berfungsi sebagai nilai lalai awal yang boleh diubah oleh input manual responden."
+// pehelp.resetValueIf: "Use the magic wand icon to set a conditional rule that determines when a respondent's input is reset to the value based on the \"Default value expression\" or \"Set value expression\" or to the \"Default answer\" value (if either is set)." => "Gunakan ikon tongkat ajaib untuk mengesetkan peraturan bersyarat yang menentukan masa input responden ditetapkan semula kepada nilai berdasarkan \"Ungkapan nilai lalai\" atau \"Setkan ungkapan nilai\" atau kepada nilai \"Jawapan lalai\" (jika sama ada ditetapkan)."
+// pehelp.setValueIf: "Use the magic wand icon to set a conditional rule that determines when to run the \"Set value expression\" and dynamically assign the resulting value as a response." => "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang menentukan masa untuk menjalankan \"Tetapkan ungkapan nilai\" dan secara dinamik memperuntukkan nilai yang terhasil sebagai respons."
+// pehelp.setValueExpression: "Specify an expression that defines the value to be set when the conditions in the \"Set value if\" rule are met. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression can be overridden by a respondent's manual input." => "Tentukan ungkapan yang mentakrifkan nilai yang akan disetkan apabila syarat dalam peraturan \"Set nilai jika\" dipenuhi. Ungkapan ini boleh termasuk pengiraan asas - '{q1_id} + {q2_id}', ungkapan Boolean, seperti '{age} > 60', dan fungsi: 'iif()', 'hari ini()', 'umur()', 'min()', 'max()', 'avg()', dsb. Nilai yang ditentukan oleh ungkapan ini boleh diubah oleh input manual responden."
+// question.name: "A question ID that is not visible to respondents." => "ID soalan yang tidak dapat dilihat oleh responden."
+// question.description: "Type a question subtitle." => "Taipkan sari kata soalan."
+// question.visibleIf: "Use the magic wand icon to set a conditional rule that determines question visibility." => "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang menentukan keterlihatan soalan."
+// question.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the question." => "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang melumpuhkan mod baca sahaja untuk soalan itu."
+// question.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey advancing or submission unless the question received an answer." => "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang menghalang tinjauan memajukan atau menyerahkan melainkan soalan itu mendapat jawapan."
+// question.startWithNewLine: "Unselect to display the question in one line with the previous question or panel. The setting doesn't apply if the question is the first element in your form." => "Nyahpilih untuk memaparkan soalan dalam satu baris dengan soalan atau panel sebelumnya. Seting tidak digunakan jika soalan ialah unsur pertama dalam borang anda."
+// question.page: "Repositions the question to the end of a selected page." => "Letakkan semula soalan ke hujung halaman yang dipilih."
+// question.state: "Choose from: \"Expanded\" - the question box is displayed in full and can be collapsed; \"Collapsed\" - the question box displays only the title and description and can be expanded; \"Locked\" - the question box is displayed in full and cannot be collapsed." => "Pilih daripada: \"Diperluaskan\" - kotak soalan dipaparkan sepenuhnya dan boleh runtuh; \"Runtuh\" - kotak soalan hanya memaparkan tajuk dan keterangan dan boleh diperluaskan; \"Dikunci\" - kotak soalan dipaparkan sepenuhnya dan tidak boleh runtuh."
+// question.titleLocation: "Overrides title alignment rules defined on a panel, page or survey level. The \"Inherit\" option applies any higher-level settings (if set) or survey-level setting (\"Top\" by default)." => "Mengatasi peraturan penjajaran tajuk yang ditakrifkan pada panel, halaman atau tahap tinjauan. Opsyen \"Warisan\" menggunakan sebarang seting aras lebih tinggi (jika ditetapkan) atau seting aras tinjauan (\"Atas\" secara lalai)."
+// question.descriptionLocation: "The \"Inherit\" option applies the survey-level setting (\"Under the question title\" by default)." => "Opsyen \"Warisan\" menggunakan seting aras tinjauan (\"Di bawah tajuk soalan\" secara lalai)."
+// question.errorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Mengesetkan lokasi mesej ralat berhubung dengan soalan dengan input tidak sah. Pilih antara: \"Atas\" - teks ralat diletakkan di bahagian atas kotak soalan; \"Bawah\" - teks ralat diletakkan di bahagian bawah kotak soalan. Pilihan \"Warisan\" menggunakan tetapan peringkat tinjauan (\"Atas\" secara lalai)."
+// question.indent: "Adds space or margin between the question content and the left border of the question box." => "Menambah ruang atau jidar antara kandungan soalan dan sempadan kiri kotak soalan."
+// question.width: "Sets the width of the question in proportion to other survey elements in the same line. Accepts CSS values (px, %, in, pt, etc.)." => "Menetapkan lebar soalan mengikut kadar unsur tinjauan lain dalam baris yang sama. Menerima nilai CSS (px, %, dalam, pt, dll.)."
+// surveyvalidator.expression: "Use the magic wand icon to set a validation rule for the question." => "Gunakan ikon tongkat ajaib untuk menetapkan peraturan pengesahan untuk soalan itu."
+// question.textUpdateMode: "Choose from: \"On lost focus\" - the value is updated when the input field loses focus; \"While typing\" - the value is updated in real-time, as users are typing. The \"Inherit\" option applies the survey-level setting (\"On lost focus\" by default)." => "Pilih daripada: \"Pada fokus yang hilang\" - nilai dikemas kini apabila medan input kehilangan fokus; \"Semasa menaip\" - nilai dikemas kini dalam masa nyata, semasa pengguna menaip. Pilihan \"Warisan\" menggunakan seting peringkat tinjauan (\"Pada fokus yang hilang\" secara lalai)."
+// question.url: "You can use any web service as a data source for multiple-choice questions. To populate choice values, enter the URL of the service providing the data." => "Anda boleh menggunakan mana-mana perkhidmatan web sebagai sumber data untuk soalan pelbagai pilihan. Untuk mengisi nilai pilihan, masukkan URL perkhidmatan yang menyediakan data."
+// question.searchMode: "A comparison operation used to filter the drop-down list." => "Operasi perbandingan yang digunakan untuk menapis senarai juntai bawah."
+// signaturepad.signatureWidth: "Sets the width of the displayed signature area and the resulting image." => "Mengesetkan lebar kawasan tandatangan yang dipaparkan dan imej yang terhasil."
+// signaturepad.signatureHeight: "Sets the height of the displayed signature area and the resulting image." => "Mengesetkan ketinggian kawasan tandatangan yang dipaparkan dan imej yang terhasil."
+// signaturepad.signatureAutoScaleEnabled: "Select if you want the signature area to fill all available space within the question box while maintaining the default 3:2 aspect ratio. When custom width and height values are set, the setting will keep the aspect ratio of these dimensions." => "Pilih jika anda inginkan kawasan tandatangan mengisi semua ruang yang tersedia dalam kotak soalan sambil mengekalkan nisbah aspek 3:2 lalai. Apabila nilai lebar dan ketinggian tersuai ditetapkan, seting akan mengekalkan nisbah aspek dimensi ini."
+// file.imageHeight: "Adjusts the height of the image in the survey results." => "Melaraskan ketinggian imej dalam hasil tinjauan."
+// file.imageWidth: "Adjusts the width of the image in the survey results." => "Melaraskan lebar imej dalam hasil tinjauan."
+// imagepicker.imageHeight: "Overrides the minimum and maximum height values." => "Mengatasi nilai ketinggian minimum dan maksimum."
+// imagepicker.imageWidth: "Overrides the minimum and maximum width values." => "Mengatasi nilai lebar minimum dan maksimum."
+// imagepicker.choices: "\"Value\" serves as an item ID used in conditional rules; \"Text\" is displayed to respondents." => "\"Nilai\" berfungsi sebagai ID item yang digunakan dalam peraturan bersyarat; \"Teks\" dipaparkan kepada responden."
+// text.size: "This setting only resizes the input field and doesn't affect the width of the question box. To limit the accepted input length, go to <b>Validation → Maximum character limit</b>." => "Seting ini hanya mengubah saiz medan input dan tidak mempengaruhi lebar kotak soalan. Untuk mengehadkan panjang input yang diterima, pergi ke <b>Pengesahihan → Had aksara maksimum</b>."
+// comment.rows: "Sets the number of displayed lines in the input field. If the input takes up more lines, the scroll bar will appear." => "Mengesetkan bilangan baris yang dipaparkan dalam medan input. Jika input mengambil lebih banyak baris, bar skrol akan muncul."
+// survey.mode: "Choose between: \"Editable\" - enables respondents to fill out your survey; \"Read-only\" - disables form editing." => "Pilih antara: \"Boleh diedit\" - membolehkan responden mengisi tinjauan anda; \"Baca sahaja\" - melumpuhkan penyuntingan borang."
+// matrixdropdowncolumn.name: "A column ID that is not visible to respondents." => "ID lajur yang tidak kelihatan kepada responden."
+// matrixdropdowncolumn.isUnique: "When enabled for a column, a respondent is required to provide a unique response for each question within this column." => "Apabila didayakan untuk lajur, responden dikehendaki memberikan respons unik untuk setiap soalan dalam lajur ini."
+// matrixdropdowncolumn.rows: "Sets the number of displayed lines in the input field. If the input takes up more lines, the scroll bar will appear." => "Mengesetkan bilangan baris yang dipaparkan dalam medan input. Jika input mengambil lebih banyak baris, bar skrol akan muncul."
+// matrixdropdowncolumn.visibleIf: "Use the magic wand icon to set a conditional rule that determines column visibility." => "Gunakan ikon tongkat ajaib untuk mengesetkan peraturan bersyarat yang menentukan keterlihatan lajur."
+// matrixdropdowncolumn.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the column." => "Gunakan ikon tongkat ajaib untuk mengesetkan peraturan bersyarat yang menyahdayakan mod baca sahaja untuk lajur."
+// matrixdropdowncolumn.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang menghalang penyerahan tinjauan melainkan sekurang-kurangnya satu soalan tersarang mempunyai jawapan."
+// matrixdropdowncolumn.showInMultipleColumns: "When selected, creates an individual column for each choice option." => "Apabila dipilih, cipta lajur individu untuk setiap opsyen pilihan."
+// pehelp.widthMode: "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used." => "Pilih daripada: \"Statik\" - menetapkan lebar tetap; \"Responsif\" - membuat tinjauan menduduki lebar penuh skrin; \"Auto\" - terpakai salah satu daripada kedua-duanya bergantung kepada jenis soalan yang digunakan."
+// pehelp.logo: "Paste an image link (no size limits) or click the folder icon to browse a file from your computer (up to 64KB)." => "Tampal pautan imej (tiada had saiz) atau klik ikon folder untuk menyemak lalu fail daripada komputer anda (sehingga 64KB)."
+// pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "Menetapkan lebar logo dalam unit CSS (px, %, in, pt, dll.)."
+// pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "Menetapkan ketinggian logo dalam unit CSS (px, %, in, pt, dll.)."
+// pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Pilih daripada: \"Tiada\" - imej mengekalkan saiz asalnya; \"Mengandungi\" - imej diubah saiznya agar sesuai sambil mengekalkan nisbah aspeknya; \"Cover\" - imej mengisi keseluruhan kotak sambil mengekalkan nisbah aspeknya; \"Isian\" - imej diregangkan untuk mengisi kotak tanpa mengekalkan nisbah aspeknya."
+// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "Pilih jika anda ingin tinjauan diteruskan ke halaman berikut secara automatik selepas responden menjawab semua soalan pada halaman semasa."
+// pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "Mengesetkan kebolehlihatan dan lokasi butang navigasi pada halaman."
+// pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Menetapkan kebolehlihatan dan lokasi bar kemajuan. Nilai \"Auto\" memaparkan bar kemajuan di atas atau di bawah pengepala tinjauan."
+// pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "Dayakan halaman pratonton dengan semua atau menjawab soalan sahaja."
+// pehelp.questionTitleLocation: "Applies to all questions within the survey. This setting can be overridden by title alignment rules at lower levels: panel, page, or question. A lower-level setting will override those on a higher level." => "Digunakan untuk semua soalan dalam tinjauan. Tetapan ini boleh diubah oleh peraturan penjajaran tajuk pada tahap yang lebih rendah: panel, halaman atau soalan. Tetapan peringkat rendah akan mengatasi mereka yang berada pada tahap yang lebih tinggi."
+// pehelp.requiredText: "A symbol or a sequence of symbols indicating that an answer is required." => "Simbol atau urutan simbol yang menunjukkan bahawa jawapan diperlukan."
+// pehelp.questionStartIndex: "Enter a number or letter with which you want to start numbering." => "Masukkan nombor atau huruf yang anda ingin mulakan penomboran."
+// pehelp.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box." => "Mengesetkan lokasi mesej ralat berhubung dengan soalan dengan input tidak sah. Pilih antara: \"Atas\" - teks ralat diletakkan di bahagian atas kotak soalan; \"Bawah\" - teks ralat diletakkan di bahagian bawah kotak soalan."
+// pehelp.focusFirstQuestionAutomatic: "Select if you want the first input field on each page ready for text entry." => "Pilih jika anda inginkan medan input pertama pada setiap halaman sedia untuk entri teks."
+// pehelp.questionsOrder: "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab." => "Mengekalkan susunan soalan asal atau rawak mereka. Kesan seting ini hanya kelihatan dalam tab Pratonton."
+// pehelp.maxTextLength: "For text entry questions only." => "Untuk soalan entri teks sahaja."
+// pehelp.maxOthersLength: "For question comments only." => "Untuk komen soalan sahaja."
+// pehelp.autoGrowComment: "Select if you want question comments and Long Text questions to auto-grow in height based on the entered text length." => "Pilih jika anda inginkan komen soalan dan soalan Teks Panjang untuk mengembangkan ketinggian automatik berdasarkan panjang teks yang dimasukkan."
+// pehelp.allowResizeComment: "For question comments and Long Text questions only." => "Untuk komen soalan dan soalan Teks Panjang sahaja."
+// pehelp.calculatedValues: "Custom variables serve as intermediate or auxiliary variables used in form calculations. They take respondent inputs as source values. Each custom variable has a unique name and an expression it's based on." => "Pemboleh ubah tersuai berfungsi sebagai pemboleh ubah perantaraan atau tambahan yang digunakan dalam pengiraan borang. Mereka mengambil input responden sebagai nilai sumber. Setiap pemboleh ubah tersuai mempunyai nama unik dan ungkapan yang berdasarkannya."
+// pehelp.includeIntoResult: "Select if you wish the calculated value of the expression to be saved along with survey results." => "Pilih jika anda ingin nilai terhitung ungkapan disimpan bersama-sama dengan hasil tinjauan."
+// pehelp.triggers: "A trigger is an event or condition that is based on an expression. Once the expression is evaluated to \"true\", a trigger sets off an action. Such an action can optionally have a target question it affects." => "Pencetus ialah peristiwa atau keadaan yang berdasarkan ungkapan. Sebaik sahaja ungkapan dinilai kepada \"benar\", pencetus akan mematikan tindakan. Tindakan sedemikian secara pilihan boleh mempunyai soalan sasaran yang mempengaruhinya."
+// pehelp.clearInvisibleValues: "Choose whether or not to clear values for questions hidden by conditional logic and when to do it." => "Pilih sama ada atau tidak untuk mengosongkan nilai untuk soalan yang tersembunyi oleh logik bersyarat dan bila untuk melakukannya."
+// pehelp.textUpdateMode: "Choose from: \"On lost focus\" - the value is updated when the input field loses focus; \"While typing\" - the value is updated in real-time, as users are typing." => "Pilih daripada: \"Pada fokus yang hilang\" - nilai dikemas kini apabila medan input kehilangan fokus; \"Semasa menaip\" - nilai dikemas kini dalam masa nyata, semasa pengguna menaip."
+// pehelp.columns: "The left value serves as a column ID used in conditional rules, the right value is displayed to respondents." => "Nilai kiri berfungsi sebagai ID lajur yang digunakan dalam peraturan bersyarat, nilai kanan dipaparkan kepada responden."
+// pehelp.rows: "The left value serves as a row ID used in conditional rules, the right value is displayed to respondents." => "Nilai kiri berfungsi sebagai ID baris yang digunakan dalam peraturan bersyarat, nilai kanan dipaparkan kepada responden."
+// pehelp.columnMinWidth: "Accepts CSS values (px, %, in, pt, etc.)." => "Menerima nilai CSS (px, %, dalam, pt, dll.)."
+// pehelp.rowTitleWidth: "Accepts CSS values (px, %, in, pt, etc.)." => "Menerima nilai CSS (px, %, dalam, pt, dll.)."
+// pehelp.cellErrorLocation: "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Mengesetkan lokasi mesej ralat berhubung dengan sel dengan input tidak sah. Opsyen \"Warisan\" menggunakan seting daripada sifat \"Penjajaran mesej ralat\"."
+// pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "Apabila sifat \"Mencegah respons pendua\" didayakan, responden yang cuba menyerahkan entri pendua akan menerima mesej ralat berikut."
+// pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Membolehkan anda mengira jumlah nilai berdasarkan ungkapan. Ungkapan ini boleh termasuk pengiraan asas ('{q1_id} + {q2_id}'), Ungkapan Boolean ('{age} > 60') dan fungsi ('iif()', 'hari ini()', 'umur()', 'min()', 'max()', 'avg()', dll.)."
+// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "Mencetuskan gesaan yang meminta untuk mengesahkan pemadaman baris."
+// pehelp.defaultValueFromLastRow: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Pendua jawapan dari baris terakhir dan menguntukkannya ke baris dinamik tambahan seterusnya."
+// pehelp.description: "Type a subtitle." => "Taipkan sari kata."
+// pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "Pilih bahasa untuk mula mencipta tinjauan anda. Untuk menambah terjemahan, tukar kepada bahasa baru dan terjemahkan teks asal di sini atau dalam tab Terjemahan."
+// pehelp.detailPanelMode: "Sets the location of a details section in relation to a row. Choose from: \"None\" - no expansion is added; \"Under the row\" - a row expansion is placed under each row of the matrix; \"Under the row, display one row expansion only\" - an expansion is displayed under a single row only, the remaining row expansions are collapsed." => "Mengesetkan lokasi seksyen butiran berhubung dengan baris. Pilih daripada: \"Tiada\" - tiada pengembangan ditambah; \"Di bawah baris\" - pengembangan baris diletakkan di bawah setiap baris matriks; \"Di bawah baris, paparkan pengembangan satu baris sahaja\" - pengembangan dipaparkan di bawah satu baris sahaja, pengembangan baris yang tinggal runtuh."
+// pehelp.imageFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Pilih daripada: \"Tiada\" - imej mengekalkan saiz asalnya; \"Mengandungi\" - imej diubah saiznya agar sesuai sambil mengekalkan nisbah aspeknya; \"Cover\" - imej mengisi keseluruhan kotak sambil mengekalkan nisbah aspeknya; \"Isian\" - imej diregangkan untuk mengisi kotak tanpa mengekalkan nisbah aspeknya."
+// pehelp.autoGrow: "Gradually increases the height of the input field as data is being entered. Overrides the \"Input field height (in lines)\" setting." => "Secara beransur-ansur meningkatkan ketinggian medan input apabila data dimasukkan. Membatalkan seting \"Ketinggian medan input (dalam garisan)\"."
+// pehelp.allowResize: "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field." => "Pemegang saiz semula (atau cengkaman) muncul di sudut dan boleh diseret untuk mengubah saiz medan input."
+// pehelp.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "Selang masa dalam beberapa saat selepas itu tinjauan secara automatik maju ke halaman Terima Kasih."
+// pehelp.maxTimeToFinishPage: "A time interval in seconds after which the survey auto-advances to the next page." => "Selang masa dalam beberapa saat selepas itu tinjauan secara automatik maju ke halaman seterusnya."
+// page.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the next page." => "Selang masa dalam beberapa saat selepas itu tinjauan secara automatik maju ke halaman seterusnya."
+// page.visibleIf: "Use the magic wand icon to set a conditional rule that determines page visibility." => "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang menentukan keterlihatan halaman."
+// page.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the page." => "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang menyahdayakan mod baca sahaja untuk halaman."
+// page.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang menghalang penyerahan tinjauan melainkan sekurang-kurangnya satu soalan tersarang mempunyai jawapan."
+// page.questionTitleLocation: "Applies to all questions within this page. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Digunakan untuk semua soalan dalam halaman ini. Jika anda ingin mengubah seting ini, takrifkan peraturan penjajaran tajuk untuk soalan atau panel individu. Pilihan \"Warisan\" menggunakan tetapan peringkat tinjauan (\"Atas\" secara lalai)."
+// page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Mengesetkan lokasi mesej ralat berhubung dengan soalan dengan input tidak sah. Pilih antara: \"Atas\" - teks ralat diletakkan di bahagian atas kotak soalan; \"Bawah\" - teks ralat diletakkan di bahagian bawah kotak soalan. Pilihan \"Warisan\" menggunakan tetapan peringkat tinjauan (\"Atas\" secara lalai)."
+// page.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Mengekalkan susunan soalan asal atau rawak mereka. Pilihan \"Warisan\" menggunakan seting peringkat tinjauan (\"Asal\" secara lalai). Kesan seting ini hanya kelihatan dalam tab Pratonton."
+// page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Mengesetkan keterlihatan butang navigasi pada halaman. Opsyen \"Warisan\" menggunakan seting aras tinjauan, yang lalai kepada \"Boleh Dilihat\"."
+// pehelp.showTimerPanel: "Sets the visibility and location of a timer on a page." => "Mengesetkan kebolehlihatan dan lokasi pemasa pada halaman."
+// pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "Pilih daripada: \"Dikunci\" - pengguna tidak boleh mengembangkan atau meruntuhkan panel; \"Runtuhkan semua\" - semua panel bermula dalam keadaan runtuh; \"Kembangkan semua\" - semua panel bermula dalam keadaan yang diperluaskan; \"Pertama diperluaskan\" - hanya panel pertama yang pada mulanya diperluaskan."
+// pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "Masukkan nama sifat dikongsi dalam tatasusunan objek yang mengandungi URL fail imej atau video yang anda ingin paparkan dalam senarai pilihan."
+// pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "Nilai kiri berfungsi sebagai ID item yang digunakan dalam peraturan bersyarat, nilai yang betul dipaparkan kepada responden."
+// pehelp.title: "Type a user-friendly title to display." => "Taipkan tajuk mesra pengguna untuk dipaparkan."
+// pehelp.waitForUpload: "Ensures that users won't complete the survey until files are uploaded." => "Memastikan pengguna tidak akan melengkapkan tinjauan sehingga fail dimuat naik."
+// pehelp.minWidth: "Accepts CSS values (px, %, in, pt, etc.)." => "Menerima nilai CSS (px, %, dalam, pt, dll.)."
+// pehelp.maxWidth: "Accepts CSS values (px, %, in, pt, etc.)." => "Menerima nilai CSS (px, %, dalam, pt, dll.)."
+// pehelp.width: "Accepts CSS values (px, %, in, pt, etc.)." => "Menerima nilai CSS (px, %, dalam, pt, dll.)."
+// pehelp.useDisplayValuesInDynamicTexts: "In single- and multiple-selection question types, each choice option has an ID and display value. When selected, this setting shows a display value instead of an ID value in HTML questions and dynamic titles and descriptions of survey elements." => "Dalam jenis soalan pilihan tunggal dan berbilang pilihan, setiap pilihan pilihan mempunyai ID dan nilai paparan. Apabila dipilih, seting ini menunjukkan nilai paparan dan bukannya nilai ID dalam soalan HTML dan tajuk dinamik serta perihalan unsur tinjauan."
+// pehelp.clearIfInvisible: "Choose whether or not to clear question values hidden by conditional logic and when to do it. The \"Inherit\" option applies the survey-level setting (\"Upon survey completion\" by default)." => "Pilih sama ada untuk mengosongkan nilai soalan yang tersembunyi oleh logik bersyarat dan bila untuk melakukannya. Pilihan \"Warisan\" menggunakan tetapan peringkat tinjauan (\"Setelah selesai tinjauan\" secara lalai)."
+// pehelp.choicesFromQuestionMode: "Choose from: \"All\" - copies all choice options from the selected question; \"Selected\" - dynamically copies only selected choice options; \"Unselected\" - dynamically copies only unselected choice options. The \"None\" and \"Other\" options are copied by default if enabled in the source question." => "Pilih daripada: \"Semua\" - menyalin semua pilihan pilihan daripada soalan yang dipilih; \"Dipilih\" - secara dinamik hanya menyalin pilihan pilihan yang dipilih; \"Tidak dipilih\" - secara dinamik menyalin hanya pilihan pilihan yang tidak dipilih. Pilihan \"Tiada\" dan \"Lain-lain\" disalin secara lalai jika didayakan dalam soalan sumber."
+// pehelp.showOtherItem: "When selected, users can include additional input in a separate comment box." => "Apabila dipilih, pengguna boleh memasukkan input tambahan dalam kotak komen berasingan."
+// pehelp.separateSpecialChoices: "Displays each special choice option (\"None\", \"Other\", \"Select All\") on a new line, even when using a multiple-column layout." => "Memaparkan setiap pilihan pilihan khas (\"Tiada\", \"Lain\", \"Pilih Semua\") pada baris baru, walaupun menggunakan tataletak berbilang lajur."
+// pehelp.path: "Specify the location within the service dataset where the target array of objects is located. Leave empty if the URL already points to the array." => "Tentukan lokasi dalam set data perkhidmatan yang lokasi tatasusunan sasaran objek. Biarkan kosong jika URL telah menuding ke tatasusunan."
+// pehelp.titleName: "Enter a uniform property name within the array of objects that contains the values you want to display in the choice list." => "Masukkan nama sifat seragam dalam tatasusunan objek yang mengandungi nilai yang anda ingin paparkan dalam senarai pilihan."
+// pehelp.allowEmptyResponse: "Select to allow the service to return an empty response or array." => "Pilih untuk membenarkan perkhidmatan mengembalikan respons atau tatasusunan kosong."
+// pehelp.choicesVisibleIf: "Use the magic wand icon to set a conditional rule that determines the visibility of all choice options." => "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang menentukan keterlihatan semua pilihan pilihan."
+// pehelp.rateValues: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "Nilai kiri berfungsi sebagai ID item yang digunakan dalam peraturan bersyarat, nilai yang betul dipaparkan kepada responden."
+// rating.displayMode: "\"Auto\" selects between the \"Buttons\" and \"Dropdown\" modes based on the available width. When the width is insufficient to display buttons, the question displays a dropdown." => "\"Auto\" memilih antara mod \"Butang\" dan \"Dropdown\" berdasarkan lebar yang tersedia. Apabila lebar tidak mencukupi untuk memaparkan butang, soalan memaparkan menu lungsur."
+// pehelp.valuePropertyName: "Allows you to connect questions that produce results in different formats. When such questions are linked together using a join identifier, this shared property stores selected question values." => "Membolehkan anda menyambungkan soalan yang menghasilkan hasil dalam format yang berbeza. Apabila soalan tersebut dipautkan bersama menggunakan pengecam cantuman, sifat kongsi ini menyimpan nilai soalan terpilih."
+// pehelp.searchEnabled: "Select if you want to update the drop-down menu contents to match the search query that a user is typing in the input field." => "Pilih jika anda ingin mengemas kini kandungan menu juntai bawah agar sepadan dengan pertanyaan carian yang pengguna menaip dalam medan input."
+// pehelp.valueTrue: "A value to save in survey results when respondents give a positive answer." => "Nilai untuk menyimpan hasil tinjauan apabila responden memberikan jawapan yang positif."
+// pehelp.valueFalse: "A value to save in survey results when respondents give a negative answer." => "Nilai untuk menyimpan hasil tinjauan apabila responden memberikan jawapan negatif."
+// pehelp.showPreview: "It's not recommended to disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded." => "Ia tidak disyorkan untuk menyahdayakan pilihan ini kerana ia mengubah imej Pratonton dan menyukarkan pengguna untuk memahami sama ada fail telah dimuat naik."
+// pehelp.needConfirmRemoveFile: "Triggers a prompt asking to confirm the file deletion." => "Mencetuskan gesaan yang meminta untuk mengesahkan penghapusan fail."
+// pehelp.selectToRankEnabled: "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area." => "Membolehkan untuk menilai pilihan yang dipilih sahaja. Pengguna akan menyeret item terpilih dari senarai pilihan untuk memesannya dalam kawasan kedudukan."
+// pehelp.dataList: "Enter a list of choices that will be suggested to the respondent during input." => "Masukkan senarai pilihan yang akan dicadangkan kepada responden semasa input."
+// pehelp.itemSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => "Seting hanya mengubah saiz medan input dan tidak mempengaruhi lebar kotak soalan."
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels in pixels" => "Mengesetkan lebar yang konsisten untuk semua label item dalam piksel"
+// pehelp.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "Pilihan \"Auto\" secara automatik menentukan mod yang sesuai untuk paparan - Imej, Video atau YouTube - berdasarkan URL sumber yang disediakan."
+// pehelp.altText: "Serves as a substitute when the image cannot be displayed on a user's device and for accessibility purposes." => "Berfungsi sebagai pengganti apabila imej tidak boleh dipaparkan pada peranti pengguna dan untuk tujuan kebolehcapaian."
+// pehelp.rateColorMode: "Defines the color of the selected emoji when the Rating icon type is set to \"Smileys\". Choose between: \"Default\" - the selected emoji appears in default survey color; \"Scale\" - the selected emoji inherits color from the rating scale." => "Mentakrifkan warna emoji yang dipilih apabila jenis ikon Penarafan ditetapkan kepada \"Smileys\". Pilih antara: \"Lalai\" - emoji yang dipilih muncul dalam warna tinjauan lalai; \"Skala\" - emoji yang dipilih mewarisi warna dari skala penarafan."
+// expression.name: "An expression ID that is not visible to respondents." => "ID ungkapan yang tidak kelihatan kepada responden."
+// expression.description: "Type an expression subtitle." => "Taipkan sari kata ungkapan."
+// expression.expression: "An expression can include basic calculations (`{q1_id} + {q2_id}`), conditions (`{age} > 60`), and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Ungkapan boleh termasuk pengiraan asas ('{q1_id} + {q2_id}'), syarat ('{age} > 60'), dan fungsi ('iif()', 'hari ini()', 'umur()', 'min()', 'max()', 'pur()', dll.)."
+// pehelp.storeOthersAsComment: "Select to store the \"Other\" option value as a separate property in survey results." => "Pilih untuk menyimpan nilai pilihan \"Lain-lain\" sebagai harta berasingan dalam hasil tinjauan."
+// p.swapOrder: "Swap the order of Yes and No" => "Tukar pesanan Ya dan Tidak"
+// p.itemTitleWidth: "Item label width (in px)" => "Lebar label item (dalam piksel)"
+// p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "Teks untuk ditunjukkan jika semua opsyen dipilih"
+// p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Teks ruang letak untuk kawasan penarafan"
+// pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "Lengkapkan tinjauan secara automatik"
+// pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Pilih jika anda mahu tinjauan selesai secara automatik selepas responden menjawab semua soalan."
+// masksettings.saveMaskedValue: "Save masked value in survey results" => "Simpan nilai bertopeng dalam hasil tinjauan"
+// patternmask.pattern: "Value pattern" => "Corak nilai"
+// datetimemask.min: "Minimum value" => "Nilai minimum"
+// datetimemask.max: "Maximum value" => "Nilai maksimum"
+// numericmask.allowNegativeValues: "Allow negative values" => "Benarkan nilai negatif"
+// numericmask.thousandsSeparator: "Thousands separator" => "Pemisah beribu-ribu"
+// numericmask.decimalSeparator: "Decimal separator" => "Pemisah perpuluhan"
+// numericmask.precision: "Value precision" => "Ketepatan nilai"
+// numericmask.min: "Minimum value" => "Nilai minimum"
+// numericmask.max: "Maximum value" => "Nilai maksimum"
+// currencymask.prefix: "Currency prefix" => "Awalan mata wang"
+// currencymask.suffix: "Currency suffix" => "Akhiran mata wang"
+// pe.maskType: "Input mask type" => "Input jenis topeng"
+// maskTypes.patternmask: "Pattern" => "Corak"
+// maskTypes.numericmask: "Numeric" => "Angka"
+// maskTypes.datetimemask: "Date and Time" => "Tarikh dan Masa"
+// maskTypes.currencymask: "Currency" => "Mata wang"
+// tabs.mask: "Input Mask Settings" => "Seting Topeng Input"
+// pe.pattern_placeholder: "Ex.: +1(999)-999-99-99" => "Ex.: +1(999)-999-99-99"
+// pe.datetimepattern_placeholder: "Ex.: mm/dd/yyyy" => "Ex.: mm/dd/yyyy"
+// pe.currencyprefix_placeholder: "Ex.: $" => "Ex.: $"
+// pe.currencysuffix_placeholder: "Ex.: USD" => "Ex.: USD"
+// pv.textWrapEnabled: "Wrap choices" => "Pilihan balut"
+// question.textWrapEnabled: "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip." => "Teks panjang dalam pilihan pilihan akan menjana pemisah baris secara automatik agar muat dalam menu lungsur. Nyahpilih jika anda mahu teks klip."
+// masksettings.saveMaskedValue: "Select if you want to store the question value with an applied mask in survey results." => "Pilih jika anda ingin menyimpan nilai soalan dengan topeng yang digunakan dalam hasil tinjauan."
+// patternmask.pattern: "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character." => "Corak boleh mengandungi literal rentetan dan ruang letak berikut: '9' - untuk digit; 'a' - untuk huruf besar atau kecil; '#' - untuk digit atau huruf besar atau huruf kecil. Gunakan tindak balas '\\' untuk melarikan diri daripada watak."
+// datetimemask.pattern: "The pattern can contain separator characters and the following placeholders: `m` - for month number; `mm` - for month number, with leading zero for single-digit values; `d` - for day of the month; `dd` - for day of the month, with leading zero for single-digit values; `yy` - for the last two digits of the year; `yyyy` - for a four-digit year." => "Corak boleh mengandungi aksara pemisah dan ruang letak berikut: 'm' - untuk nombor bulan; 'mm' - untuk nombor bulan, dengan sifar utama untuk nilai satu digit; 'd' - untuk hari dalam bulan; 'dd' - untuk hari dalam bulan, dengan sifar utama untuk nilai satu digit; 'yy' - untuk dua digit terakhir tahun ini; 'yyyy' - untuk tahun empat angka."
+// numericmask.decimalSeparator: "A symbol used to separate the fractional part from the integer part of a displayed number." => "Simbol yang digunakan untuk memisahkan bahagian pecahan daripada bahagian integer bagi nombor yang dipaparkan."
+// numericmask.thousandsSeparator: "A symbol used to separate the digits of a large number into groups of three." => "Simbol yang digunakan untuk memisahkan digit nombor besar ke dalam kumpulan tiga."
+// numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Hadkan bilangan digit untuk dikekalkan selepas titik perpuluhan bagi nombor yang dipaparkan."
+// currencymask.prefix: "One or several symbols to be displayed before the value." => "Satu atau beberapa simbol yang akan dipaparkan sebelum nilai."
+// currencymask.suffix: "One or several symbols to be displayed after the value." => "Satu atau beberapa simbol yang akan dipaparkan selepas nilai."

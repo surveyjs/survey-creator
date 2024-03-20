@@ -53,7 +53,7 @@ test("On the right side (default)", async (t) => {
 
 test("On the right side opened popup", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1920, 400);
+    await t.resizeWindow(1920, 500);
     await setJSON(json);
 
     await t.click(".svc-page-navigator__selector");
@@ -130,5 +130,563 @@ test("Page Navigator works with - scroll-behavior: smooth;", async (t) => {
 
     await t.wait(1000);
     await takeElementScreenshot("design-surface-navigated-to-3rd.png", Selector(".svc-creator-tab"), t, comparer);
+  });
+});
+
+test("Page navigator scrolling in bypage mode", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 1000);
+    await ClientFunction(() => {
+      window["creator"].pageEditMode = "bypage";
+    })();
+    await setJSON({
+      title: "NPS Survey Question",
+      pages: [
+        {
+          name: "page1",
+          elements: [
+            {
+              type: "rating",
+              name: "nps_score",
+              title:
+                "On a scale of zero to ten, how likely are you to recommend our product to a friend or colleague?",
+              isRequired: true,
+              rateCount: 11,
+              rateMin: 0,
+              rateMax: 10,
+              minRateDescription: "(Most unlikely)",
+              maxRateDescription: "(Most likely)",
+            },
+            {
+              type: "checkbox",
+              name: "promoter_features",
+              visibleIf: "{nps_score} >= 9",
+              title: "Which of the following features do you value the most?",
+              description: "Please select no more than three features.",
+              isRequired: true,
+              validators: [
+                {
+                  type: "answercount",
+                  text: "Please select no more than three features.",
+                  maxCount: 3,
+                },
+              ],
+              choices: [
+                "Performance",
+                "Stability",
+                "User interface",
+                "Complete functionality",
+                "Learning materials (documentation, demos, code examples)",
+                "Quality support",
+              ],
+              showOtherItem: true,
+              otherText: "Other features:",
+              colCount: 2,
+            },
+            {
+              type: "comment",
+              name: "passive_experience",
+              visibleIf: "{nps_score} >= 7  and {nps_score} <= 8",
+              title: "What can we do to make your experience more satisfying?",
+            },
+            {
+              type: "comment",
+              name: "disappointing_experience",
+              visibleIf: "{nps_score} <= 6",
+              title:
+                "Please let us know why you had such a disappointing experience with our product",
+            },
+          ],
+        },
+        {
+          name: "page2",
+          elements: [
+            {
+              type: "text",
+              name: "question1",
+            },
+            {
+              type: "text",
+              name: "question2",
+            },
+            {
+              type: "text",
+              name: "question3",
+            },
+          ],
+        },
+        {
+          name: "page3",
+          elements: [
+            {
+              type: "text",
+              name: "question4",
+            },
+            {
+              type: "text",
+              name: "question5",
+            },
+            {
+              type: "text",
+              name: "question6",
+            },
+            {
+              type: "text",
+              name: "question7",
+            },
+          ],
+        },
+        {
+          name: "page4",
+          elements: [
+            {
+              type: "text",
+              name: "question8",
+            },
+          ],
+        },
+        {
+          name: "page5",
+          elements: [
+            {
+              type: "text",
+              name: "question9",
+            },
+          ],
+        },
+        {
+          name: "page6",
+          elements: [
+            {
+              type: "text",
+              name: "question10",
+            },
+          ],
+        },
+        {
+          name: "page7",
+          elements: [
+            {
+              type: "text",
+              name: "question11",
+            },
+          ],
+        },
+        {
+          name: "page8",
+          elements: [
+            {
+              type: "text",
+              name: "question12",
+            },
+          ],
+        },
+        {
+          name: "page9",
+          elements: [
+            {
+              type: "text",
+              name: "question13",
+            },
+          ],
+        },
+        {
+          name: "page10",
+          elements: [
+            {
+              type: "text",
+              name: "question14",
+            },
+          ],
+        },
+        {
+          name: "page11",
+          elements: [
+            {
+              type: "text",
+              name: "question15",
+            },
+          ],
+        },
+        {
+          name: "page12",
+          elements: [
+            {
+              type: "text",
+              name: "question16",
+            },
+          ],
+        },
+        {
+          name: "page13",
+          elements: [
+            {
+              type: "text",
+              name: "question17",
+            },
+          ],
+        },
+        {
+          name: "page14",
+          elements: [
+            {
+              type: "text",
+              name: "question18",
+            },
+          ],
+        },
+        {
+          name: "page15",
+          elements: [
+            {
+              type: "text",
+              name: "question19",
+            },
+          ],
+        },
+        {
+          name: "page16",
+          elements: [
+            {
+              type: "text",
+              name: "question20",
+            },
+          ],
+        },
+        {
+          name: "page17",
+          elements: [
+            {
+              type: "text",
+              name: "question21",
+            },
+            {
+              type: "text",
+              name: "question22",
+            },
+          ],
+        },
+        {
+          name: "page18",
+          elements: [
+            {
+              type: "text",
+              name: "question23",
+            },
+          ],
+        },
+        {
+          name: "page19",
+          elements: [
+            {
+              type: "text",
+              name: "question24",
+            },
+          ],
+        },
+        {
+          name: "page20",
+          elements: [
+            {
+              type: "text",
+              name: "question25",
+            },
+          ],
+        },
+      ],
+      showQuestionNumbers: "off",
+    });
+    await t.wait(500);
+    // await ClientFunction(() => {
+    //   document.querySelector(".svc-tab-designer")!.scrollTop = 500;
+    // })();
+    // await t.wait(500);
+
+    const pageNavigatorElement = Selector(".svc-tab-designer__page-navigator");
+
+    await t.expect(pageNavigatorElement.visible).ok();
+    await takeElementScreenshot("page-navigator-bypage.png", pageNavigatorElement, t, comparer);
+  });
+});
+
+test("Page navigator has enough space to be shown", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1500, 800);
+    await setJSON({
+      title: "NPS Survey Question",
+      pages: [
+        {
+          name: "page1",
+          elements: [
+            {
+              type: "rating",
+              name: "nps_score",
+              title:
+                "On a scale of zero to ten, how likely are you to recommend our product to a friend or colleague?",
+              isRequired: true,
+              rateCount: 11,
+              rateMin: 0,
+              rateMax: 10,
+              minRateDescription: "(Most unlikely)",
+              maxRateDescription: "(Most likely)",
+            },
+            {
+              type: "checkbox",
+              name: "promoter_features",
+              visibleIf: "{nps_score} >= 9",
+              title: "Which of the following features do you value the most?",
+              description: "Please select no more than three features.",
+              isRequired: true,
+              validators: [
+                {
+                  type: "answercount",
+                  text: "Please select no more than three features.",
+                  maxCount: 3,
+                },
+              ],
+              choices: [
+                "Performance",
+                "Stability",
+                "User interface",
+                "Complete functionality",
+                "Learning materials (documentation, demos, code examples)",
+                "Quality support",
+              ],
+              showOtherItem: true,
+              otherText: "Other features:",
+              colCount: 2,
+            },
+            {
+              type: "comment",
+              name: "passive_experience",
+              visibleIf: "{nps_score} >= 7  and {nps_score} <= 8",
+              title: "What can we do to make your experience more satisfying?",
+            },
+            {
+              type: "comment",
+              name: "disappointing_experience",
+              visibleIf: "{nps_score} <= 6",
+              title:
+                "Please let us know why you had such a disappointing experience with our product",
+            },
+          ],
+        },
+        {
+          name: "page2",
+          elements: [
+            {
+              type: "text",
+              name: "question1",
+            },
+            {
+              type: "text",
+              name: "question2",
+            },
+            {
+              type: "text",
+              name: "question3",
+            },
+          ],
+        },
+      ],
+    });
+    await ClientFunction(() => { document.body.focus(); })();
+    await t.hover(Selector(".svc-designer-header"), { offsetX: 1, offsetY: 1 }).wait(500);
+    const designSurface = Selector(".svc-tab-designer--with-page-navigator");
+    await t.expect(designSurface.visible).ok();
+    await takeElementScreenshot("page-navigator-not-overlaped.png", designSurface, t, comparer);
+  });
+});
+test("Page navigator in by-page mode has enough space to be shown", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1500, 800);
+    await ClientFunction(() => {
+      window["creator"].pageEditMode = "bypage";
+    })();
+    await setJSON({
+      title: "NPS Survey Question",
+      pages: [
+        {
+          name: "page1",
+          elements: [
+            {
+              type: "rating",
+              name: "nps_score",
+              title:
+                "On a scale of zero to ten, how likely are you to recommend our product to a friend or colleague?",
+              isRequired: true,
+              rateCount: 11,
+              rateMin: 0,
+              rateMax: 10,
+              minRateDescription: "(Most unlikely)",
+              maxRateDescription: "(Most likely)",
+            },
+            {
+              type: "checkbox",
+              name: "promoter_features",
+              visibleIf: "{nps_score} >= 9",
+              title: "Which of the following features do you value the most?",
+              description: "Please select no more than three features.",
+              isRequired: true,
+              validators: [
+                {
+                  type: "answercount",
+                  text: "Please select no more than three features.",
+                  maxCount: 3,
+                },
+              ],
+              choices: [
+                "Performance",
+                "Stability",
+                "User interface",
+                "Complete functionality",
+                "Learning materials (documentation, demos, code examples)",
+                "Quality support",
+              ],
+              showOtherItem: true,
+              otherText: "Other features:",
+              colCount: 2,
+            },
+            {
+              type: "comment",
+              name: "passive_experience",
+              visibleIf: "{nps_score} >= 7  and {nps_score} <= 8",
+              title: "What can we do to make your experience more satisfying?",
+            },
+            {
+              type: "comment",
+              name: "disappointing_experience",
+              visibleIf: "{nps_score} <= 6",
+              title:
+                "Please let us know why you had such a disappointing experience with our product",
+            },
+          ],
+        },
+        {
+          name: "page2",
+          elements: [
+            {
+              type: "text",
+              name: "question1",
+            },
+            {
+              type: "text",
+              name: "question2",
+            },
+            {
+              type: "text",
+              name: "question3",
+            },
+          ],
+        },
+      ],
+    });
+    await ClientFunction(() => { document.body.focus(); })();
+    await t.hover(Selector(".svc-designer-header"), { offsetX: 1, offsetY: 1 }).wait(500);
+    const designSurface = Selector(".svc-tab-designer--with-page-navigator");
+    await t.expect(designSurface.visible).ok();
+    await takeElementScreenshot("page-navigator-by-page-not-overlaped.png", designSurface, t, comparer);
+  });
+});
+test("Page navigator scrolls to top of long page and centers small page", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1500, 800);
+    await setJSON({
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "text",
+              "name": "question1"
+            }
+          ]
+        },
+        {
+          "name": "page2",
+          "elements": [
+            {
+              "type": "text",
+              "name": "question2"
+            }
+          ]
+        },
+        {
+          "name": "page3",
+          "elements": [
+            {
+              "type": "text",
+              "name": "question3"
+            }
+          ]
+        },
+        {
+          "name": "page4",
+          "elements": [
+            {
+              "type": "text",
+              "name": "question4"
+            },
+            {
+              "type": "text",
+              "name": "question6"
+            },
+            {
+              "type": "text",
+              "name": "question7"
+            },
+            {
+              "type": "text",
+              "name": "question8"
+            },
+            {
+              "type": "text",
+              "name": "question9"
+            },
+            {
+              "type": "text",
+              "name": "question10"
+            },
+            {
+              "type": "text",
+              "name": "question11"
+            },
+            {
+              "type": "text",
+              "name": "question12"
+            },
+            {
+              "type": "text",
+              "name": "question13"
+            },
+            {
+              "type": "text",
+              "name": "question14"
+            },
+            {
+              "type": "text",
+              "name": "question15"
+            }
+          ]
+        },
+        {
+          "name": "page5",
+          "elements": [
+            {
+              "type": "text",
+              "name": "question5"
+            }
+          ]
+        }
+      ]
+    });
+    const designSurface = Selector(".svc-creator");
+    const pageSelector = Selector(".svc-page-navigator__selector");
+    const listItemSelector = Selector(".sv-list__item-body");
+    await t.click(pageSelector).click(listItemSelector.withText("page4")).wait(500);
+    await takeElementScreenshot("page-navigator-select-long-page.png", designSurface, t, comparer);
+    await t.click(pageSelector).click(listItemSelector.withText("page2")).wait(500);
+    await takeElementScreenshot("page-navigator-select-short-page.png", designSurface, t, comparer);
   });
 });

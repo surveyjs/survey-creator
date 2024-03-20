@@ -9,7 +9,9 @@ import { editorLocalization } from "../../src/editorLocalization";
 import "survey-core/survey.i18n";
 
 function getTestModel(creator: CreatorTester): TestSurveyTabViewModel {
-  creator.activeTab = "test";
+  if(creator.activeTab !== "test") {
+    creator.activeTab = "test";
+  }
   const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
   return testPlugin.model;
 }
@@ -168,6 +170,38 @@ test("Enable/disable nextPage action on page visibility change and page actions,
   model.survey.setValue("q1", 3);
   expect(pageList.actions[1].enabled).toBeTruthy(); //TestSurveyTabViewModel.enableInvisiblePages = true
   expect(nextPage.enabled).toBeFalsy();
+});
+test("Page action title when the preview shows only, Bug#5277", (): any => {
+  const creator: CreatorTester = new CreatorTester({
+    showJSONEditorTab: false,
+    showDesignerTab: false
+  });
+  creator.JSON = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "text",
+            name: "q1"
+          }
+        ]
+      },
+      {
+        name: "page2",
+        elements: [
+          {
+            type: "text",
+            name: "q2",
+          }
+        ]
+      }
+    ]
+  };
+  expect(creator.activeTab).toEqual("test");
+  const model: TestSurveyTabViewModel = getTestModel(creator);
+  const pageSelectorAction = model.pageActions.filter((item: IAction) => item.id === "pageSelector")[0];
+  expect(pageSelectorAction.title).toEqual("Page 1");
 });
 test("Show/hide device similator", (): any => {
   let creator: CreatorTester = new CreatorTester();
@@ -792,3 +826,31 @@ test("Update theme in active test/preview tab", (): any => {
   expect(creator.activeTab).toEqual("test");
   expect(testPlugin.model.survey.themeVariables["test"]).toBe("testVarValue");
 });
+test("Update theme in active test/preview tab", (): any => {
+  const creator = new CreatorTester();
+  let testBodyCss = "";
+  let previewBodyCss = "";
+  let instanceBodyCss = "";
+  let instanceArea = "";
+  creator.onTestSurveyCreated.add((sender, options) => {
+    testBodyCss = options.survey.css.body;
+  });
+  creator.onPreviewSurveyCreated.add((sender, options) => {
+    previewBodyCss = options.survey.css.body;
+  });
+  creator.onSurveyInstanceCreated.add((sender, options) => {
+    if(options.reason === "test") {
+      instanceBodyCss = options.survey.css.body;
+      instanceArea = options.area;
+    }
+  });
+  creator.JSON = {
+    elements: [{ type: "text", name: "q1" }]
+  };
+  creator.activeTab = "test";
+  expect(testBodyCss).toEqual("sd-body");
+  expect(previewBodyCss).toEqual("sd-body");
+  expect(instanceBodyCss).toEqual("sd-body");
+  expect(instanceArea).toEqual("preview-tab");
+});
+

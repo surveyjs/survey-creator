@@ -32,8 +32,8 @@ export class SurveyCreatorToolboxTool extends CreatorModelElement<
   constructor(props) {
     super(props);
   }
-  protected createModel(): void {
-    this.model = new ToolboxToolViewModel(this.item, this.props.creator);
+  protected createModel(props: any): void {
+    this.model = new ToolboxToolViewModel(props.item, props.creator);
   }
   protected getUpdatedModelProps(): string[] {
     return ["creator", "item"];
@@ -89,9 +89,9 @@ export class SurveyCreatorToolboxItem extends CreatorModelElement<
   constructor(props) {
     super(props);
   }
-  protected createModel(): void {
-    const toolboxItem: IQuestionToolboxItem = this.props.item;
-    this.model = new ToolboxToolViewModel(toolboxItem, this.props.creator);
+  protected createModel(props: any): void {
+    const toolboxItem: IQuestionToolboxItem = props.item;
+    this.model = new ToolboxToolViewModel(toolboxItem, props.creator);
   }
   protected getUpdatedModelProps(): string[] {
     return ["creator", "item"];

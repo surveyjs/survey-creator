@@ -20,8 +20,8 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
     this.filePresentationModel.acceptedTypes = "image/*";
     this.filePresentationModel.storeDataAsText = false;
     this.filePresentationModel.cssClasses.chooseFileIconId = "icon-choosefile";
-    surveyModel.onOpenFileChooser.add((s, o) => {
-      this.creator.chooseFiles(o.input, o.callback, { element: o.element as SurveyElement, item: o.item });
+    surveyModel.onOpenFileChooser.add((s, o: any) => {
+      this.creator.chooseFiles(o.input, o.callback, o.context);
     });
     surveyModel.onUploadFiles.add((s, o) => {
       const fileToUpload = o.files[0];
@@ -57,7 +57,7 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
         (<QuestionImageModel>model.surveyElement).imageLink = link;
         model.isUploading = false;
       });
-    }, { element: model.question });
+    }, { element: model.question, elementType: model.question.getType(), propertyName: "imageLink" });
   }
   public get acceptedTypes(): string {
     return getAcceptedTypesByContentMode((this.surveyElement as QuestionImageModel).contentMode);

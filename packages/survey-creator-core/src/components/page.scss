@@ -76,6 +76,10 @@ svc-page {
   }
 }
 
+.svc-page__add-new-question {
+  -webkit-tap-highlight-color: transparent;
+}
+
 .svc-page__question-type-selector {
   appearance: none;
   display: flex;

@@ -202,9 +202,11 @@ test("Implement machine translation for Creator", () => {
   expect(creator.getHasMachineTranslation()).toBeTruthy();
   editor = tabTranslation.model.createTranslationEditor("fr");
   actions = editor.translation.stringsSurvey.navigationBar.actions;
-  expect(actions).toHaveLength(3);
-  expect(actions[0].id).toBe("svc-translation-machine");
-  actions[0].action();
+  expect(actions).toHaveLength(4);
+  expect(actions[0].id).toBe("svc-translation-fromlocale");
+  expect(actions[0].visible).toBeFalsy();
+  expect(actions[1].id).toBe("svc-translation-machine");
+  actions[1].action();
   editor.apply();
   const q1 = creator.survey.getQuestionByName("q1");
   expect(q1.locTitle.getLocaleText("fr")).toBe("Title fr");
@@ -281,6 +283,7 @@ test("Machine translation from non default locale - UI", () => {
   expect(editor.fromLocales).toHaveLength(2);
   const actions = editor.translation.stringsSurvey.navigationBar.actions;
   expect(actions).toHaveLength(4);
+  expect(actions[1].visible).toBeTruthy();
 
   expect(editor.translation.root.allLocItems).toHaveLength(3);
   expect(editor.translation.getVisibleLocales()).toHaveLength(1);
@@ -410,4 +413,34 @@ test("Machine translation and cancel", () => {
     default: "Title 1",
     de: "de: Title 1"
   });
+});
+test("Modify translation strings survey in a dialog, remove actions", () => {
+  const creator = new CreatorTester();
+  const json = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "text",
+            name: "q1",
+            title: "Title 1",
+          }
+        ]
+      }
+    ]
+  };
+  creator.onMachineTranslate.add((sender, options) => {});
+  creator.onSurveyInstanceCreated.add((sender, options) => {
+    if(options.area === "translation-tab:table-popup-editor") {
+      const actions = options.survey.navigationBar.actions;
+      actions.splice(actions.length - 3, 3);
+    }
+  });
+  creator.JSON = json;
+  const tabTranslation = new TabTranslationPlugin(creator);
+  tabTranslation.activate();
+  const editor = tabTranslation.model.createTranslationEditor("de");
+  const actions = editor.translation.stringsSurvey.navigationBar.actions;
+  expect(actions).toHaveLength(1);
 });

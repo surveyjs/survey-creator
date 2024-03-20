@@ -156,8 +156,18 @@ class StringItemsNavigatorMatrix extends StringItemsNavigatorBase {
     return [this.question.columns, this.question.rows];
   }
   protected addNewItem(creator: SurveyCreatorModel, items: any, text: string = null) {
-    if (items == this.question.columns) this.question.addColumn(text || getNextValue("Column ", items.map(i => i.value)) as string);
-    if (items == this.question.rows) this.question.rows.push(text || new ItemValue(getNextValue("Row ", items.map(i => i.value)) as string));
+    let titleBase: string;
+    let propertyName: string;
+    if (items == this.question.columns) { titleBase = "Column "; propertyName = "columns"; }
+    if (items == this.question.rows) { titleBase = "Row "; propertyName = "rows"; }
+    const newItem = new ItemValue(getNextValue(titleBase, items.map(i => i.value)) as string);
+    items.push(text || newItem);
+    creator.onItemValueAddedCallback(
+      this.question,
+      propertyName,
+      newItem,
+      items
+    );
   }
   protected getItemsPropertyName(items: any) {
     if (items == this.question.columns) return "columns";
@@ -168,6 +178,14 @@ class StringItemsNavigatorMatrixDropdown extends StringItemsNavigatorMatrix {
   protected getItemLocString(items: any, item: any) {
     if (items == this.question.columns) return item.locTitle;
     return item.locText;
+  }
+  protected addNewItem(creator: SurveyCreatorModel, items: any, text: string = null) {
+    if (items == this.question.columns) {
+      var column = new MatrixDropdownColumn(text || getNextValue("Column ", items.map(i => i.value)) as string);
+      this.question.columns.push(column);
+      creator.onMatrixDropdownColumnAddedCallback(this.question, column, this.question.columns);
+    }
+    if (items == this.question.rows) super.addNewItem(creator, items, text);
   }
   protected addNewItems(creator: SurveyCreatorModel, items: any, startIndex: number, itemsToAdd: string[]) {
     if (items == this.question.columns) {
@@ -210,7 +228,7 @@ export class StringEditorViewModelBase extends Base {
   private blurredByEscape: boolean = false;
   private focusedProgram: boolean = false;
   private valueBeforeEdit: string;
-  private connector: StringEditorConnector
+  private connector: StringEditorConnector;
 
   public getEditorElement: () => HTMLElement;
   public characterCounter = new CharacterCounter();
@@ -323,7 +341,7 @@ export class StringEditorViewModelBase extends Base {
       const options = { value: event.target?.innerText, cancel: null };
       if (this.connector) this.connector.onTextChanging.fire(this, options);
       if (options.cancel) return;
-      sanitizeEditableContent(event.target);
+      sanitizeEditableContent(event.target, !this.locString.allowLineBreaks);
       if (this.maxLength >= 0 && event.target.innerText.length > this.maxLength) {
         event.target.innerText = event.target.innerText.substring(0, this.maxLength);
       }
@@ -361,7 +379,14 @@ export class StringEditorViewModelBase extends Base {
       this.creator.onHtmlToMarkdown.fire(this.creator, options);
       mdText = options.text;
     }
-    let clearedText = mdText || clearNewLines(this.locString.hasHtml ? event.target.innerHTML : event.target.innerText);
+    let clearedText;
+    if (mdText) {
+      clearedText = mdText;
+    } else {
+      let txt = this.locString.hasHtml ? event.target.innerHTML : event.target.innerText;
+      if (!this.locString.allowLineBreaks) txt = clearNewLines(txt);
+      clearedText = txt;
+    }
     let owner = this.locString.owner as any;
 
     var changingOptions = {
@@ -439,11 +464,11 @@ export class StringEditorViewModelBase extends Base {
       // get text representation of clipboard
       var text = event.clipboardData.getData("text/plain");
       // insert text manually
-      document.execCommand("insertHTML", false, text);
+      document.execCommand("insertText", false, text);
     }
   }
   public onKeyDown(event: KeyboardEvent): boolean {
-    if (event.keyCode === 13 && (this.editAsText || !event.shiftKey)) {
+    if (event.keyCode === 13 && !event.shiftKey) {
       this.blurEditor();
       if (!event.ctrlKey && !event.metaKey) {
         this.connector.onEditComplete.fire(this, {});
@@ -531,6 +556,7 @@ export class StringEditorViewModelBase extends Base {
       .append("svc-string-editor--hidden", text == "" && this.placeholder == "")
       .append("svc-string-editor--readonly", !this.contentEditable)
       .append("svc-string-editor--error", !!this.errorText)
+      .append("svc-string-editor--multiline", !!this.locString.allowLineBreaks)
       .toString();
   }
 }

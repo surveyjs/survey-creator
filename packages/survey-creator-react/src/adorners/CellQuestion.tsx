@@ -14,10 +14,10 @@ export class CellQuestionAdornerComponent extends CreatorModelElement<
   any
 > {
   model: QuestionAdornerViewModel;
-  protected createModel(): void {
+  protected createModel(props: any): void {
     this.model = new QuestionAdornerViewModel(
-      this.props.componentData,
-      this.props.question,
+      props.componentData,
+      props.question,
       null
     );
   }

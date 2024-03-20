@@ -1,5 +1,5 @@
 {
-  "version": "1.9.130",
+  "version": "1.9.134",
   "name": "survey-creator-core",
   "homepage": "https://surveyjs.io/Overview/Survey-Creator",
   "license": "SEE LICENSE IN LICENSE",
@@ -18,7 +18,8 @@
     "watch:prod": "webpack --env.buildType prod --watch",
     "release": "standard-version --message \"Release: %s [azurepipelines skip]\"",
     "remove-package-lock": "rimraf package-lock.json",
-    "lint": "eslint ./src"
+    "lint": "eslint ./src",
+    "test:postcss": "postcss build/survey-creator-core.css --silent  -u postcss-calc -u autoprefixer -u postcss-fail-on-warn -o survey-creator-core.postcss.css && rimraf survey-creator-core.postcss.css"
   },
   "dependencies": {
     "papaparse": "^5.2.0",
@@ -75,7 +76,12 @@
     "webpack-dev-server": "^3.11.0",
     "webpack-fix-style-only-entries": "^0.6.1",
     "webpack-merge": "^5.8.0",
-    "webpack-svgstore-plugin": "4.0.1"
+    "webpack-svgstore-plugin": "4.0.1",
+    "autoprefixer": "^10.4.17",
+    "postcss": "8.4.31",
+    "postcss-calc": "9.0.1",
+    "postcss-cli": "10.1.0",
+    "postcss-fail-on-warn": "0.2.1"
   },
   "overrides": {
     "karma-webpack": {

@@ -24,13 +24,13 @@ test("Test css", (): any => {
   });
   const locStrSurvey: LocalizableString = new LocalizableString(survey, false, "description");
   var stringEditorSurveyTitle = new StringEditorViewModelBase(locStrSurvey, creator);
-  expect(stringEditorSurveyTitle.className("")).toEqual("svc-string-editor");
+  expect(stringEditorSurveyTitle.className("")).toEqual("svc-string-editor svc-string-editor--multiline");
 
   const locStrQuestion: LocalizableString = new LocalizableString(survey.getQuestionByName("q"), false, "description");
   var stringEditorQuestion = new StringEditorViewModelBase(locStrQuestion, creator);
 
-  expect(stringEditorQuestion.className("")).toEqual("svc-string-editor svc-string-editor--hidden");
-  expect(stringEditorQuestion.className("desc")).toEqual("svc-string-editor");
+  expect(stringEditorQuestion.className("")).toEqual("svc-string-editor svc-string-editor--hidden svc-string-editor--multiline");
+  expect(stringEditorQuestion.className("desc")).toEqual("svc-string-editor svc-string-editor--multiline");
 });
 test("Test string editor content editable", (): any => {
   let creator = new CreatorTester();
@@ -63,10 +63,10 @@ test("Test string editor content editable", (): any => {
 
   var stringEditorQuestion1Description = new StringEditorViewModelBase(new LocalizableString(survey.getQuestionByName("q1"), false, "description"), creator);
   expect(stringEditorQuestion1Description.contentEditable).toEqual(true);
-  expect(stringEditorQuestion1Description.className("desc")).toEqual("svc-string-editor");
+  expect(stringEditorQuestion1Description.className("desc")).toEqual("svc-string-editor svc-string-editor--multiline");
   var stringEditorQuestion2Description = new StringEditorViewModelBase(new LocalizableString(survey.getQuestionByName("q2"), false, "description"), creator);
   expect(stringEditorQuestion2Description.contentEditable).toEqual(false);
-  expect(stringEditorQuestion2Description.className("desc")).toEqual("svc-string-editor svc-string-editor--readonly");
+  expect(stringEditorQuestion2Description.className("desc")).toEqual("svc-string-editor svc-string-editor--readonly svc-string-editor--multiline");
   var stringEditorQuestion3Description = new StringEditorViewModelBase(new LocalizableString(survey.getQuestionByName("q3"), false, "description"), creator);
   expect(stringEditorQuestion3Description.contentEditable).toEqual(false);
 });
@@ -723,6 +723,75 @@ test("StringEditorConnector for matrix questions (rows)", (): any => {
     connectorItem3.onBackspaceEmptyString.fire(null, {});
     expect(question.rows.map(c => c.value)).toEqual([]);
   }
+});
+
+test("StringEditorConnector for matrix - onItemValueAdded event", (): any => {
+  const creator = new CreatorTester();
+
+  var log = "";
+
+  creator.onItemValueAdded.add((sender, options) => {
+    log += (options.obj as QuestionMatrixModel).name + ":" + options.itemValues.map(c => c.title).join(",") + "+" + options.newItem.title;
+  });
+  creator.JSON = {
+    elements: [
+      { type: "matrix", name: "q1", columns: ["Column 1", "Column 2"], rows: ["Row 1", "Row 2"] },
+    ]
+  };
+  const question = creator.survey.getQuestionByName("q1") as any;
+  creator.selectElement(question);
+  const questionAdorner = new QuestionAdornerViewModel(
+    creator,
+    question,
+    <any>undefined
+  );
+
+  var connectorItemC1 = StringEditorConnector.get(question.columns[0].locText);
+  var connectorItemC2 = StringEditorConnector.get(question.columns[1].locText);
+  var connectorItemR1 = StringEditorConnector.get(question.rows[0].locText);
+  var connectorItemR2 = StringEditorConnector.get(question.rows[1].locText);
+
+  connectorItemC1.onEditComplete.fire(null, {});
+  expect(log).toEqual("");
+  connectorItemC2.onEditComplete.fire(null, {});
+  expect(log).toEqual("q1:Column 1,Column 2,Column 3+Column 3");
+
+  log = "";
+
+  connectorItemR1.onEditComplete.fire(null, {});
+  expect(log).toEqual("");
+  connectorItemR2.onEditComplete.fire(null, {});
+  expect(log).toEqual("q1:Row 1,Row 2,Row 3+Row 3");
+});
+
+test("StringEditorConnector for matrix - onMatrixColumnAdded event", (): any => {
+  const creator = new CreatorTester();
+
+  var log = "";
+
+  creator.onMatrixColumnAdded.add((sender, options) => {
+    log += options.matrix.name + ":" + options.columns.map(c => c.name).join(",") + "+" + options.newColumn.title;
+  });
+  creator.JSON = {
+    elements: [
+      { type: "matrixdropdown", name: "q1", columns: [{ name: "Column 1" }, { name: "Column 2" }], rows: ["Row 1", "Row 2"] },
+    ]
+  };
+  const question = creator.survey.getQuestionByName("q1") as any;
+  creator.selectElement(question);
+  const questionAdorner = new QuestionAdornerViewModel(
+    creator,
+    question,
+    <any>undefined
+  );
+
+  var connectorItemC1 = StringEditorConnector.get(question.columns[0].locTitle);
+  var connectorItemC2 = StringEditorConnector.get(question.columns[1].locTitle);
+
+  connectorItemC1.onEditComplete.fire(null, {});
+  expect(log).toEqual("");
+  connectorItemC2.onEditComplete.fire(null, {});
+  expect(log).toEqual("q1:Column 1,Column 2,Column 3+Column 3");
 });
 
 test("StringEditor on property value changing", () => {

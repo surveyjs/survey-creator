@@ -523,7 +523,7 @@ export class PropertyJSONGenerator {
       var prop = props[q.name];
       q.property = prop;
       q.obj = this.obj;
-      q.options = this.options;
+      q.creatorOptions = this.options;
       const eventVisibility = this.getVisibilityOnEvent(prop);
       q.readOnly = q.readOnly || this.isPropertyReadOnly(prop);
       q.visible = q.visible && eventVisibility;
@@ -580,8 +580,7 @@ export class PropertyJSONGenerator {
     linkValue.obj = question.obj;
     linkValue.visibleIf = "propertyEnableIf() = false";
     const overridingQuestion = panel.getQuestionByName(overridingProp);
-    const text = !!overridingQuestion ? overridingQuestion.title : overridingProp;
-    linkValue.linkValueText = editorLocalization.getString("pe.overridingPropertyPrefix") + text;
+    linkValue.linkValueText = editorLocalization.getString("pe.overridingPropertyPrefix");
     linkValue.titleLocation = "hidden";
     linkValue.onUpdateCssClassesCallback = (css: any) => {
       css.questionWrapper = "spg-link-wrapper--overriding";
@@ -637,12 +636,7 @@ export class PropertyJSONGenerator {
     var panel = this.createPanelJSON(tab.name, tab.title, isChild);
     for (var i = 0; i < tab.properties.length; i++) {
       var propDef = tab.properties[i];
-      var propJSON = this.createQuestionJSON(
-        <any>propDef.property,
-        propDef.title,
-        false,
-        context
-      );
+      var propJSON = this.createQuestionJSON(<any>propDef.property, "", propDef.title, false, context);
       if (propDef.onSameLine) {
         propJSON.startWithNewLine = false;
         this.updateQuestionJSONOnSameLine(propJSON);
@@ -684,6 +678,7 @@ export class PropertyJSONGenerator {
   }
   private createQuestionJSON(
     prop: JsonObjectProperty,
+    className: string,
     title: string,
     isColumn: boolean = false,
     context: string
@@ -695,7 +690,7 @@ export class PropertyJSONGenerator {
     );
     if (!json) return null;
     json.name = prop.name;
-    json.title = this.getQuestionTitle(prop, title);
+    json.title = this.getQuestionTitle(prop, className, title);
     if (this.isQuestionTitleHidden(prop)) {
       json.titleLocation = "hidden";
     }
@@ -719,7 +714,7 @@ export class PropertyJSONGenerator {
     if (!className) return null;
     var prop = Serializer.findProperty(className, propName);
     if (!prop) return null;
-    var json = this.createQuestionJSON(prop, "", true, undefined);
+    var json = this.createQuestionJSON(prop, className, "", true, undefined);
     if (!json) return null;
     if (prop.isUnique) {
       json.isUnique = prop.isUnique;
@@ -760,10 +755,10 @@ export class PropertyJSONGenerator {
     }
     return res;
   }
-  private getQuestionTitle(prop: JsonObjectProperty, title: string): string {
+  private getQuestionTitle(prop: JsonObjectProperty, className: string, title: string): string {
     if (!!prop.displayName) return prop.displayName;
     if (!!title && title !== prop.name) return title;
-    return editorLocalization.getPropertyNameInEditor(this.obj.getType(), prop.name);
+    return editorLocalization.getPropertyNameInEditor(className || this.obj.getType(), prop.name);
   }
   private isQuestionTitleHidden(prop: JsonObjectProperty): boolean {
     return prop.displayName === "";
@@ -857,22 +852,25 @@ export class PropertyGridModel {
       this.surveyValue.data = {};
       this.surveyValue.dispose();
     }
-    this.surveyValue = this.createSurvey(json);
-    this.surveyValue.questionErrorLocation = "bottom";
-    this.surveyValue.getCss().list = {};
-    this.surveyValue.css = propertyGridCss;
-    var page = this.surveyValue.createNewPage("p1");
-    if (!this.obj) return;
-    new PropertyJSONGenerator(this.obj, this.options, null, null, this.propertyGridDefinition).setupObjPanel(
-      page,
-      false
-    );
-    this.survey.enterKeyAction = "loseFocus";
-    this.survey.addPage(page);
-    this.survey.getAllQuestions().forEach(q => {
-      PropertyGridEditorCollection.onSetup(this.obj, q, q.property, this.options);
+    this.surveyValue = this.createSurvey(json, (survey: SurveyModel): void => {
+      survey.questionErrorLocation = "bottom";
+      survey.getCss().list = {};
+      survey.css = propertyGridCss;
+      var page = survey.createNewPage("p1");
+      if (!!this.obj) {
+        new PropertyJSONGenerator(this.obj, this.options, null, null, this.propertyGridDefinition).setupObjPanel(
+          page,
+          false
+        );
+        survey.enterKeyAction = "loseFocus";
+        survey.addPage(page);
+        survey.getAllQuestions().forEach(q => {
+          PropertyGridEditorCollection.onSetup(this.obj, q, q.property, this.options);
+        });
+        survey.checkErrorsMode = "onValueChanging";
+      }
     });
-    this.survey.checkErrorsMode = "onValueChanging";
+    if (!this.obj) return;
     this.survey.onValueChanged.add((sender, options) => {
       this.onValueChanged(options);
     });
@@ -1003,8 +1001,8 @@ export class PropertyGridModel {
       if (pnl !== panel && !pnl.parent.isPanel) pnl.collapse();
     });
   }
-  protected createSurvey(json: any): SurveyModel {
-    return this.options.createSurvey(json, "property-grid", this);
+  protected createSurvey(json: any, callback?: (survey: SurveyModel) => void): SurveyModel {
+    return this.options.createSurvey(json, "property-grid", this, callback);
   }
   protected getSurveyJSON(): any {
     var res = {};
@@ -1466,6 +1464,20 @@ export class PropertyGridEditorString extends PropertyGridEditorStringBase {
   }
 }
 
+export class PropertyGridEditorDateTime extends PropertyGridEditor {
+  public fit(prop: JsonObjectProperty): boolean {
+    return prop.type == "datetime";
+  }
+
+  public getJSON(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): any {
+    const res: any = {
+      type: "text",
+      inputType: "date"
+    };
+    return res;
+  }
+}
+
 export class PropertyGridLinkEditor extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type === "url" || prop.type === "file";
@@ -1492,7 +1504,7 @@ export class PropertyGridLinkEditor extends PropertyGridEditor {
       question.acceptedTypes = getAcceptedTypesByContentMode("image");
     }
     question.onChooseFilesCallback = ((input, callback) => {
-      options.chooseFiles(input, callback);
+      options.chooseFiles(input, callback, { element: obj, elementType: obj.getType(), propertyName: question.name });
     });
   }
 
@@ -1894,6 +1906,7 @@ PropertyGridEditorCollection.register(new PropertyGridEditorQuestionSelectBase()
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestionCarryForward());
 PropertyGridEditorCollection.register(new PropertyGridEditorImageSize());
 PropertyGridEditorCollection.register(new PropertyGridEditorColor());
+PropertyGridEditorCollection.register(new PropertyGridEditorDateTime());
 
 QuestionFactory.Instance.registerQuestion("buttongroup", (name) => {
   return new QuestionButtonGroupModel(name);

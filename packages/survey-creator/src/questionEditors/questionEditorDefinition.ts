@@ -245,6 +245,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "choicesMax", tab: "choices" },
         { name: "choicesStep", tab: "choices" },
         { name: "allowClear", tab: "choices" },
+        { name: "textWrapEnabled", tab: "choices" },
         { name: "searchMode", tab: "choices" }
       ],
     },
@@ -300,7 +301,12 @@ export class SurveyQuestionEditorDefinition {
         { name: "minErrorText", tab: "validation" },
         { name: "maxErrorText", tab: "validation" },
         { name: "textUpdateMode", tab: "data" },
+        { name: "maskType", tab: "mask" },
+        { name: "maskSettings", tab: "mask" },
       ],
+      tabs: [
+        { name: "mask", index: 250 }
+      ]
     },
     boolean: {
       properties: [
@@ -573,6 +579,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "showPrevButton", tab: "navigation" },
         { name: "firstPageIsStarted", tab: "navigation" },
         { name: "goNextPageAutomatic", tab: "navigation" },
+        { name: "allowCompleteSurveyAutomatic", tab: "navigation" },
         { name: "showProgressBar", tab: "navigation" },
         { name: "progressBarType", tab: "navigation" },
         { name: "questionsOnPageMode", tab: "navigation" },

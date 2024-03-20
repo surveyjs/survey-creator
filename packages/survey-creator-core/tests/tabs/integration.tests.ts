@@ -1,6 +1,6 @@
 import { Action } from "survey-core";
 import { TabDesignerPlugin } from "../../src/components/tabs/designer-plugin";
-import { ThemeBuilder } from "../../src/components/tabs/theme-builder";
+import { ThemeEditorModel } from "../../src/components/tabs/theme-builder";
 export { QuestionFileEditorModel } from "../../src/custom-questions/question-file";
 export { QuestionSpinEditorModel } from "../../src/custom-questions/question-spin-editor";
 export { QuestionColorModel } from "../../src/custom-questions/question-color";
@@ -37,7 +37,7 @@ test("saveSurvey and saveTheme actions integration", (): any => {
   expect(saveThemeAction.visible).toBeTruthy();
   expect(saveThemeAction.enabled).toBeFalsy();
 
-  const themeSurveyTab = themePlugin.model as ThemeBuilder;
+  const themeSurveyTab = themePlugin.model as ThemeEditorModel;
   const themeEditor = themeSurveyTab.themeEditorSurvey;
   themeEditor.getQuestionByName("--sjs-primary-backcolor").value = "some val";
   expect(saveSurveyAction.enabled).toBeTruthy();

@@ -18,10 +18,10 @@ export class RowWrapper extends CreatorModelElement<
   constructor(props: RowWrapperComponentProps) {
     super(props);
   }
-  protected createModel(): void {
+  protected createModel(props: any): void {
     this.model = new RowViewModel(
-      this.props.componentData.creator,
-      this.props.row,
+      props.componentData.creator,
+      props.row,
       null
     );
   }

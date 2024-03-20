@@ -25,11 +25,11 @@ export class ImageItemValueAdornerComponent extends CreatorModelElement<
     super(props);
     this.rootRef = React.createRef();
   }
-  protected createModel(): void {
+  protected createModel(props: any): void {
     this.model = new ImageItemValueWrapperViewModel(
-      this.props.componentData.creator,
-      this.props.question,
-      this.props.item,
+      props.componentData.creator,
+      props.question,
+      props.item,
       null,
       null
     );

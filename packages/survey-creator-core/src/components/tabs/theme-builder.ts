@@ -1,5 +1,5 @@
 import { SurveySimulatorModel } from "../simulator";
-import { surveyLocalization, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, createDropdownActionModel, ComponentCollection, ITheme, ItemValue, ImageFit, ImageAttachment, QuestionDropdownModel, ValueChangingEvent, ValueChangedEvent, EventBase, Cover, Serializer, Question, IHeader, PanelModelBase } from "survey-core";
+import { Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, ITheme, ItemValue, ImageFit, ImageAttachment, QuestionDropdownModel, ValueChangingEvent, ValueChangedEvent, EventBase, Serializer, Question, IHeader, IElement, PanelModel, PanelModelBase, QuestionFileModel } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { setSurveyJSONForPropertyGrid } from "../../property-grid";
@@ -10,10 +10,12 @@ import { DefaultFonts, fontsettingsFromCssVariable, fontsettingsToCssVariable } 
 import { elementSettingsFromCssVariable, elementSettingsToCssVariable } from "./theme-custom-questions/element-settings";
 import { UndoRedoManager } from "../../plugins/undo-redo/undo-redo-manager";
 import { PredefinedColors, PredefinedThemes, Themes } from "./themes";
-import { QuestionFileEditorModel } from "../../custom-questions/question-file";
 import { updateCustomQuestionJSONs } from "./theme-custom-questions";
 import * as LibraryThemes from "survey-core/themes";
 import { createBoxShadowReset } from "./theme-custom-questions/boxshadow-settings";
+import { QuestionFileEditorModel } from "../../custom-questions/question-file";
+import { SurveyHelper } from "../../survey-helper";
+import { IAddPropertyGridEditorParams } from "./theme-plugin";
 import { Switcher } from "../switcher/switcher";
 
 require("./theme-builder.scss");
@@ -29,7 +31,7 @@ Object.keys(LibraryThemes).forEach(libraryThemeName => {
 });
 
 export function getThemeFullName(theme: ITheme) {
-  const themeName = theme.themeName || ThemeBuilder.DefaultTheme.themeName || "default";
+  const themeName = theme.themeName || ThemeEditorModel.DefaultTheme.themeName || "default";
   let fullThemeName = themeName + "-" + (theme.colorPalette || "light");
   if (theme.isPanelless === true) {
     fullThemeName += "-panelless";
@@ -64,7 +66,7 @@ export function getThemeChanges(fullTheme: ITheme, baseTheme?: ITheme) {
       }
     }
   });
-  themeChanges.themeName = baseTheme.themeName || ThemeBuilder.DefaultTheme.themeName || "default";
+  themeChanges.themeName = baseTheme.themeName || ThemeEditorModel.DefaultTheme.themeName || "default";
   themeChanges.colorPalette = baseTheme.colorPalette || "light";
   themeChanges.isPanelless = !!baseTheme.isPanelless;
   return themeChanges;
@@ -88,11 +90,11 @@ export function findSuitableTheme(themeName: string, themePalette: string, theme
   if (!!suitableTheme) {
     return suitableTheme;
   }
-  const defaultNearestThemeFullName = getThemeFullName({ themeName: ThemeBuilder.DefaultTheme.themeName, colorPalette: themePalette || "light", isPanelless: themeMode === "lightweight" });
-  return Themes[defaultNearestThemeFullName] || ThemeBuilder.DefaultTheme;
+  const defaultNearestThemeFullName = getThemeFullName({ themeName: ThemeEditorModel.DefaultTheme.themeName, colorPalette: themePalette || "light", isPanelless: themeMode === "lightweight" });
+  return Themes[defaultNearestThemeFullName] || ThemeEditorModel.DefaultTheme;
 }
 
-export class ThemeBuilder extends Base {
+export class ThemeEditorModel extends Base {
   public static DefaultTheme = Themes["default-light"];
   private json: any;
   public pages: ActionContainer = new ActionContainer();
@@ -100,12 +102,19 @@ export class ThemeBuilder extends Base {
   public testAgainAction: Action;
   public nextPageAction: Action;
   public undoRedoManager: UndoRedoManager;
+  private advancedModeSwitcher: Switcher;
   private themeEditorSurveyValue: SurveyModel;
   private themeCssVariablesChanges: { [index: string]: string } = {};
   private colorCalculator = new ColorCalculator();
   private blockChanges = true;
   private _availableThemes = PredefinedThemes;
   private prevQuestionValues: { [index: string]: any } = {};
+
+  private _setPGEditorPropertyValue(editor: Question, propertyName: string, value): void {
+    if (!!editor) {
+      editor[propertyName] = value;
+    }
+  }
 
   onSurveyCreatedCallback: (survey: SurveyModel) => any;
 
@@ -118,20 +127,20 @@ export class ThemeBuilder extends Base {
   public simulator: SurveySimulatorModel;
   @property({
     defaultValue: false,
-    onSet: (val: boolean, target: ThemeBuilder) => {
+    onSet: (val: boolean, target: ThemeEditorModel) => {
       target.simulator.survey.showInvisibleElements = val;
     }
   })
   showInvisibleElements;
   @property({ defaultValue: true }) showPagesInTestSurveyTab;
   @property({
-    defaultValue: true, onSet: (value: boolean, target: ThemeBuilder) => {
+    defaultValue: true, onSet: (value: boolean, target: ThemeEditorModel) => {
       if (!!target.simulator) target.simulator.isRunning = value;
     }
   }) isRunning: boolean;
   @propertyArray() pageListItems: Array<IAction>;
   @property({
-    onSet: (val: PageModel, target: ThemeBuilder) => {
+    onSet: (val: PageModel, target: ThemeEditorModel) => {
       if (!!val) {
         const survey = target.simulator.survey;
         if (survey.firstPageIsStarted) {
@@ -152,22 +161,22 @@ export class ThemeBuilder extends Base {
   })
   activePage: PageModel;
   @property({
-    onSet: (newValue: string, _target: ThemeBuilder) => {
+    onSet: (newValue: string, _target: ThemeEditorModel) => {
       _target.currentTheme.backgroundImage = newValue;
     }
   }) backgroundImage;
   @property({
-    defaultValue: "cover", onSet: (newValue: ImageFit, _target: ThemeBuilder) => {
+    defaultValue: "cover", onSet: (newValue: ImageFit, _target: ThemeEditorModel) => {
       _target.currentTheme.backgroundImageFit = newValue;
     }
   }) backgroundImageFit;
   @property({
-    defaultValue: "scroll", onSet: (newValue: ImageAttachment, _target: ThemeBuilder) => {
+    defaultValue: "scroll", onSet: (newValue: ImageAttachment, _target: ThemeEditorModel) => {
       _target.currentTheme.backgroundImageAttachment = newValue;
     }
   }) backgroundImageAttachment;
   @property({
-    onSet: (newValue: number, _target: ThemeBuilder) => {
+    onSet: (newValue: number, _target: ThemeEditorModel) => {
       _target.currentTheme.backgroundOpacity = newValue / 100;
     }
   }) backgroundOpacity;
@@ -203,14 +212,14 @@ export class ThemeBuilder extends Base {
     return this.currentTheme.cssVariables || {};
   }
 
-  public onThemeSelected = new EventBase<ThemeBuilder, { theme: ITheme }>();
-  public onThemePropertyChanged = new EventBase<ThemeBuilder, { name: string, value: any }>();
-  public onAllowModifyTheme = new EventBase<ThemeBuilder, { theme: ITheme, allow: boolean }>();
+  public onThemeSelected = new EventBase<ThemeEditorModel, { theme: ITheme }>();
+  public onThemePropertyChanged = new EventBase<ThemeEditorModel, { name: string, value: any }>();
+  public onAllowModifyTheme = new EventBase<ThemeEditorModel, { theme: ITheme, allow: boolean }>();
 
   constructor(private surveyProvider: SurveyCreatorModel, private startThemeClasses: any = defaultV2Css) {
     super();
     this.simulator = new SurveySimulatorModel();
-    this.themeName = ThemeBuilder.DefaultTheme.themeName || "default";
+    this.themeName = ThemeEditorModel.DefaultTheme.themeName || "default";
     updateCustomQuestionJSONs();
     this.themeEditorSurveyValue = this.createThemeEditorSurvey();
     const surveyTheme = this.surveyProvider.theme;
@@ -249,7 +258,7 @@ export class ThemeBuilder extends Base {
       this.backgroundImageAttachment = theme.backgroundImageAttachment || this.backgroundImageAttachment;
 
       const effectiveThemeCssVariables = {};
-      assign(effectiveThemeCssVariables, ThemeBuilder.DefaultTheme.cssVariables || {}, baseTheme.cssVariables || {});
+      assign(effectiveThemeCssVariables, ThemeEditorModel.DefaultTheme.cssVariables || {}, baseTheme.cssVariables || {});
       assign(effectiveThemeCssVariables, theme.cssVariables || {}, this.themeCssVariablesChanges);
       this.trimCssVariables(effectiveThemeCssVariables);
       const effectiveTheme: ITheme = {
@@ -274,7 +283,7 @@ export class ThemeBuilder extends Base {
     }
   }
 
-  private _defaultSessionTheme = ThemeBuilder.DefaultTheme;
+  private _defaultSessionTheme = ThemeEditorModel.DefaultTheme;
   public get defaultSessionTheme() {
     return this._defaultSessionTheme;
   }
@@ -309,20 +318,23 @@ export class ThemeBuilder extends Base {
   }
 
   public updateSimulatorSurvey(json: any, theme: any) {
-    const newSurvey = this.surveyProvider.createSurvey(json || {}, "theme", this);
-    newSurvey.setCss(theme, false);
-    newSurvey.fitToContainer = true;
-    newSurvey.addLayoutElement({
-      id: "complete-customization",
-      container: "completePage" as any,
-      component: "svc-complete-page",
-      data: this
+    const newSurvey = this.surveyProvider.createSurvey(json || {}, "theme", this, (survey: SurveyModel): void => {
+      survey.setCss(theme, false);
+      survey.fitToContainer = true;
+      survey.addLayoutElement({
+        id: "complete-customization",
+        container: "completePage" as any,
+        component: "svc-complete-page",
+        data: this
+      });
+      if (!!json && !!json.locale) {
+        survey.locale = json.locale;
+      }
+      survey.applyTheme(this.currentTheme);
     });
-    newSurvey.locale = json.locale;
     this.simulator.survey = newSurvey;
-    this.updateSimulatorTheme();
     if (this.onSurveyCreatedCallback) this.onSurveyCreatedCallback(this.survey);
-    const self: ThemeBuilder = this;
+    const self: ThemeEditorModel = this;
     this.survey.onComplete.add((sender: SurveyModel) => {
       self.isRunning = false;
     });
@@ -363,6 +375,54 @@ export class ThemeBuilder extends Base {
       }
     }
     this.updateSimulatorSurvey(json, currTheme);
+  }
+
+  public getPropertyGridCategory(categoryName: string): IElement | undefined {
+    const themeEditorGroups = this.themeEditorSurvey.getPage(0).elements;
+    const group = themeEditorGroups.filter(group => group.name === categoryName)[0];
+    return group;
+  }
+
+  public removePropertyGridEditor(name: string): void {
+    const element = this.themeEditorSurvey.findQuestionByName(name);
+    if (!!element) {
+      this.themeEditorSurvey.getPage(0).removeElement(element);
+    }
+  }
+
+  public addPropertyGridEditor(params: IAddPropertyGridEditorParams): void {
+
+    let category;
+    let sibling;
+    let insertIndex = -1;
+
+    if (!!params.category) {
+      category = this.getPropertyGridCategory(params.category) as PanelModel;
+    }
+
+    if (!!params.insertBefore) {
+      sibling = (category || this.themeEditorSurvey).findQuestionByName(params.insertBefore);
+      if (!!sibling) {
+        insertIndex = sibling.parent.elements.indexOf(sibling) - 1;
+      }
+    }
+
+    if (!!params.insertAfter) {
+      sibling = (category || this.themeEditorSurvey).findQuestionByName(params.insertAfter);
+      if (!!sibling) {
+        insertIndex = sibling.parent.elements.indexOf(sibling) + 1;
+      }
+    }
+
+    if (!!params.element) {
+      if (!!sibling) {
+        sibling.parent.addElement(params.element, insertIndex);
+      } else if (!!category) {
+        category.addElement(params.element);
+      } else {
+        SurveyHelper.warnText("No source found to add.");
+      }
+    }
   }
 
   private creatorPropertyChanged = (sender, options) => {
@@ -504,9 +564,11 @@ export class ThemeBuilder extends Base {
     this._availableThemes = availebleThemes || [];
     if (this.themeEditorSurvey) {
       const themeChooser = this.themeEditorSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
-      themeChooser.choices = availebleThemes.map(theme => ({ value: theme, text: getLocString("theme.names." + theme) }));
-      if (availebleThemes.indexOf(themeChooser.value) === -1) {
-        themeChooser.value = ThemeBuilder.DefaultTheme.themeName;
+      if (!!themeChooser) {
+        themeChooser.choices = availebleThemes.map(theme => ({ value: theme, text: getLocString("theme.names." + theme) }));
+        if (availebleThemes.indexOf(themeChooser.value) === -1) {
+          themeChooser.value = ThemeEditorModel.DefaultTheme.themeName;
+        }
       }
       this.updatePropertyGridEditorsAvailability();
     }
@@ -632,7 +694,7 @@ export class ThemeBuilder extends Base {
       this.colorCalculator.calculateColors(options.value);
       this.themeEditorSurvey.setValue("--sjs-primary-backcolor-light", this.colorCalculator.colorSettings.newColorLight);
       this.themeEditorSurvey.setValue("--sjs-primary-backcolor-dark", this.colorCalculator.colorSettings.newColorDark);
-      this.themeEditorSurvey.getQuestionByName("generalPrimaryColor").value = options.value;
+      this._setPGEditorPropertyValue(this.themeEditorSurvey.getQuestionByName("generalPrimaryColor"), "value", options.value);
       return false;
     }
     return false;
@@ -645,16 +707,16 @@ export class ThemeBuilder extends Base {
   protected createThemeEditorSurvey(): SurveyModel {
     const json = this.getThemeEditorSurveyJSON();
     setSurveyJSONForPropertyGrid(json, true, false);
-    const themeEditorSurvey = this.surveyProvider.createSurvey({}, "theme_editor", this);
-    themeEditorSurvey.lazyRendering = true;
-    themeEditorSurvey.lazyRenderingFirstBatchSize = 1;
-    themeEditorSurvey.setJsonObject(json);
-    themeEditorSurvey.getCss().list = {};
-    const themeBuilderCss = { ...propertyGridCss };
-    themeBuilderCss.root += " spg-theme-builder-root";
-    themeEditorSurvey.css = themeBuilderCss;
-    themeEditorSurvey.enterKeyAction = "loseFocus";
-
+    const themeEditorSurvey = this.surveyProvider.createSurvey({}, "theme_editor", this, (survey: SurveyModel): void => {
+      survey.lazyRendering = true;
+      survey.lazyRenderingFirstBatchSize = 1;
+      survey.setJsonObject(json);
+      survey.getCss().list = {};
+      const themeBuilderCss = { ...propertyGridCss };
+      themeBuilderCss.root += " spg-theme-builder-root";
+      survey.css = themeBuilderCss;
+      survey.enterKeyAction = "loseFocus";
+    });
     themeEditorSurvey.onValueChanging.add((sender, options: ValueChangingEvent) => {
       if (this.blockChanges) return;
 
@@ -707,6 +769,18 @@ export class ThemeBuilder extends Base {
       }
     });
 
+    themeEditorSurvey.onOpenFileChooser.add((_, options) => {
+      const context: any = {};
+      assign(context, (options as any).context, { element: this.currentTheme as any, elementType: "theme" });
+      if (options.element) {
+        const question = options.element as QuestionFileModel;
+        context.propertyName = question.name;
+        if (question.parentQuestion) {
+          context.elementType = question.parentQuestion.name === "headerViewContainer" ? "header" : question.parentQuestion.name;
+        }
+      }
+      this.surveyProvider.chooseFiles(options.input, options.callback, context as any);
+    });
     themeEditorSurvey.onUploadFiles.add((_, options) => {
       const callback = (status: string, data: any) => options.callback(status, [{ content: data, file: options.files[0] }]);
       this.surveyProvider.uploadFiles(options.files, undefined, callback);
@@ -722,10 +796,9 @@ export class ThemeBuilder extends Base {
       }
     });
     themeEditorSurvey.onGetPanelTitleActions.add((sender, opt) => {
-      if (this.surveyProvider.isMobileView) return;
-
       if (opt.panel && opt.panel.name == "groupAppearance") {
-        opt.titleActions.push(this.createAppearanceAdvancedModeAction(opt.panel));
+        this.createAppearanceAdvancedModeAction(opt.panel);
+        opt.titleActions.push(this.advancedModeSwitcher);
       }
     });
     themeEditorSurvey.onUpdatePanelCssClasses.add((sender, options) => {
@@ -746,7 +819,7 @@ export class ThemeBuilder extends Base {
     return themeEditorSurvey;
   }
 
-  private createAppearanceAdvancedModeAction(panel: PanelModelBase) {
+  private createAppearanceAdvancedModeAction(panel: PanelModelBase): void {
     const advancedMode = new Switcher({
       id: "advancedMode",
       component: "svc-switcher",
@@ -754,9 +827,10 @@ export class ThemeBuilder extends Base {
       ariaRole: "checkbox",
       css: "sv-theme-group_title-action",
       title: getLocString("theme.advancedMode"),
+      visible: !this.surveyProvider.isMobileView,
       action: () => {
         this.groupAppearanceAdvancedMode = !this.groupAppearanceAdvancedMode;
-        panel.getQuestionByName("advancedMode").value = this.groupAppearanceAdvancedMode;
+        this._setPGEditorPropertyValue(panel.getQuestionByName("advancedMode"), "value", this.groupAppearanceAdvancedMode);
       }
     });
     this.registerFunctionOnPropertyValueChanged("groupAppearanceAdvancedMode",
@@ -766,7 +840,7 @@ export class ThemeBuilder extends Base {
       "groupAppearanceAdvancedMode"
     );
     advancedMode.checked = false;
-    return advancedMode;
+    this.advancedModeSwitcher = advancedMode;
   }
 
   findSuitableTheme(themeName: string): ITheme {
@@ -775,7 +849,17 @@ export class ThemeBuilder extends Base {
   }
   private patchFileEditors(survey: SurveyModel) {
     const questionsToPatch = survey.getAllQuestions(false, false, true).filter(q => q.getType() == "fileedit");
-    questionsToPatch.forEach(q => { (<QuestionFileEditorModel>q).onChooseFilesCallback = (input, callback) => this.surveyProvider.chooseFiles(input, callback); });
+    questionsToPatch.forEach(q => {
+      (<QuestionFileEditorModel>q).onChooseFilesCallback = (input, callback) => {
+        const themePropertyName = q.name;
+        let elementType = "theme";
+        if (q.parentQuestion) {
+          elementType = q.parentQuestion.name === "headerViewContainer" ? "header" : q.parentQuestion.name;
+        }
+        (q.parentQuestion ? q.parentQuestion.name + "." : "") + q.name;
+        this.surveyProvider.chooseFiles(input, callback, { element: this.currentTheme as any, elementType: elementType, propertyName: themePropertyName });
+      };
+    });
   }
 
   private getCoverJson(headerSettings: any): any {
@@ -824,23 +908,26 @@ export class ThemeBuilder extends Base {
   private updateVisibilityOfPropertyGridGroups() {
     const page = this.themeEditorSurvey.pages[0];
     page.getElementByName("groupHeader").visible = this.surveyProvider.isMobileView ? false : settings.theme.allowEditHeaderSettings;
+    if (this.advancedModeSwitcher) {
+      this.advancedModeSwitcher.visible = !this.surveyProvider.isMobileView;
+    }
   }
   private setCoverPropertiesFromSurvey(panel, themeCssVariables: { [index: string]: string }) {
-    panel.getQuestionByName("headerTitle").readOnly = !this.survey.hasTitle;
-    panel.getQuestionByName("headerDescription").readOnly = !this.survey.hasDescription;
+    this._setPGEditorPropertyValue(panel.getQuestionByName("headerTitle"), "readOnly", !this.survey.hasTitle);
+    this._setPGEditorPropertyValue(panel.getQuestionByName("headerDescription"), "readOnly", !this.survey.hasDescription);
 
-    panel.getQuestionByName("headerView").value = this.survey.headerView;
-    panel.getQuestionByName("logoPosition").value = this.survey.logoPosition;
+    this._setPGEditorPropertyValue(panel.getQuestionByName("headerView"), "value", this.survey.headerView);
+    this._setPGEditorPropertyValue(panel.getQuestionByName("logoPosition"), "value", this.survey.logoPosition);
 
-    panel.getQuestionByName("logoPositionX").readOnly = !this.survey.logo;
-    panel.getQuestionByName("logoPositionY").readOnly = !this.survey.logo;
-    panel.getQuestionByName("logoPosition").readOnly = !this.survey.logo;
+    this._setPGEditorPropertyValue(panel.getQuestionByName("logoPositionX"), "readOnly", !this.survey.logo);
+    this._setPGEditorPropertyValue(panel.getQuestionByName("logoPositionY"), "readOnly", !this.survey.logo);
+    this._setPGEditorPropertyValue(panel.getQuestionByName("logoPosition"), "readOnly", !this.survey.logo);
 
-    panel.getQuestionByName("titlePositionX").readOnly = !this.survey.title;
-    panel.getQuestionByName("titlePositionY").readOnly = !this.survey.title;
+    this._setPGEditorPropertyValue(panel.getQuestionByName("titlePositionX"), "readOnly", !this.survey.title);
+    this._setPGEditorPropertyValue(panel.getQuestionByName("titlePositionY"), "readOnly", !this.survey.title);
 
-    panel.getQuestionByName("descriptionPositionX").readOnly = !this.survey.description;
-    panel.getQuestionByName("descriptionPositionY").readOnly = !this.survey.description;
+    this._setPGEditorPropertyValue(panel.getQuestionByName("descriptionPositionX"), "readOnly", !this.survey.description);
+    this._setPGEditorPropertyValue(panel.getQuestionByName("descriptionPositionY"), "readOnly", !this.survey.description);
   }
   private setCoverColorsFromThemeVariables(question: Question, cssVariable: string) {
     if (!!question && !!cssVariable && cssVariable !== "transparent") {
@@ -851,14 +938,16 @@ export class ThemeBuilder extends Base {
     this.updateVisibilityOfPropertyGridGroups();
 
     const headerViewContainerQuestion = this.themeEditorSurvey.getQuestionByName("headerViewContainer");
+    if (!headerViewContainerQuestion) return;
+
     const panel = headerViewContainerQuestion.panels[0];
     panel.getQuestionByName("backgroundColor").choices = this.getPredefinedColorsItemValues();
 
     if (!!this.survey) {
       this.setCoverPropertiesFromSurvey(panel, themeCssVariables);
-      panel.getQuestionByName("surveyTitle").readOnly = !this.survey.hasTitle;
+      this._setPGEditorPropertyValue(panel.getQuestionByName("surveyTitle"), "readOnly", !this.survey.hasTitle);
       fontsettingsFromCssVariable(panel.getQuestionByName("surveyTitle"), themeCssVariables);
-      panel.getQuestionByName("surveyDescription").readOnly = !this.survey.hasDescription;
+      this._setPGEditorPropertyValue(panel.getQuestionByName("surveyDescription"), "readOnly", !this.survey.hasDescription);
       fontsettingsFromCssVariable(panel.getQuestionByName("surveyDescription"), themeCssVariables);
 
       fontsettingsFromCssVariable(panel.getElementByName("surveyTitle"), this.themeCssVariablesChanges);
@@ -870,17 +959,17 @@ export class ThemeBuilder extends Base {
     if (!!this.currentTheme.header) {
       Object.keys(this.currentTheme.header).forEach(key => {
         const question = panel.getQuestionByName(key);
-        if (!!question && key === "backgroundImageOpacity") {
-          question.value = this.currentTheme.header[key] * 100;
-        } else if (question) {
-          question.value = this.currentTheme.header[key];
+        if (key === "backgroundImageOpacity") {
+          this._setPGEditorPropertyValue(question, "value", this.currentTheme.header[key] * 100);
+        } else {
+          this._setPGEditorPropertyValue(question, "value", this.currentTheme.header[key]);
         }
       });
       this.setCoverColorsFromThemeVariables(panel.getQuestionByName("backgroundColor"), themeCssVariables["--sjs-header-backcolor"]);
 
       const backgroundColorValue = themeCssVariables["--sjs-header-backcolor"];
       if (!!backgroundColorValue) {
-        panel.getQuestionByName("backgroundColorSwitch").value = this.getBackgroundColorSwitchByValue(backgroundColorValue);
+        this._setPGEditorPropertyValue(panel.getQuestionByName("backgroundColorSwitch"), "value", this.getBackgroundColorSwitchByValue(backgroundColorValue));
       }
     }
   }
@@ -902,8 +991,8 @@ export class ThemeBuilder extends Base {
       let themePanelless = themePanels + "-panelless";
       customThemeHasModeVariations = registeredThemes.indexOf(themePanels) !== -1 && registeredThemes.indexOf(themePanelless) !== -1;
     }
-    this.themeEditorSurvey.getQuestionByName("themeMode").readOnly = isCustomTheme && !customThemeHasModeVariations;
-    this.themeEditorSurvey.getQuestionByName("themePalette").readOnly = isCustomTheme && !customThemeHasPaletteVariations;
+    this._setPGEditorPropertyValue(this.themeEditorSurvey.getQuestionByName("themeMode"), "readOnly", isCustomTheme && !customThemeHasModeVariations);
+    this._setPGEditorPropertyValue(this.themeEditorSurvey.getQuestionByName("themePalette"), "readOnly", isCustomTheme && !customThemeHasPaletteVariations);
 
     let canModify = !this.surveyProvider.readOnly;
     const options = {
@@ -913,25 +1002,29 @@ export class ThemeBuilder extends Base {
     this.onAllowModifyTheme.fire(this, options);
     this.themeEditorSurvey.getAllQuestions().forEach(q => {
       if (["themeName", "themePalette", "themeMode"].indexOf(q.name) === -1) {
-        q.readOnly = !options.allow;
+        this._setPGEditorPropertyValue(q, "readOnly", !options.allow);
       }
     });
 
     if (!!this.survey) {
       let pageElements = this.survey.isSinglePage ? this.survey.pages[0].elements : this.survey.pages;
-      this.themeEditorSurvey.getQuestionByName("pageTitle").readOnly = !pageElements.some(p => !!p.title);
-      this.themeEditorSurvey.getQuestionByName("pageDescription").readOnly = !pageElements.some(p => !!p.description);
+      this._setPGEditorPropertyValue(this.themeEditorSurvey.getQuestionByName("pageTitle"), "readOnly", !pageElements.some(p => !!p.title));
+      this._setPGEditorPropertyValue(this.themeEditorSurvey.getQuestionByName("pageDescription"), "readOnly", !pageElements.some(p => !!p.description));
     }
   }
 
   private updatePropertyGridEditors(themeEditorSurvey: SurveyModel) {
     const newCssVariables = {};
     assign(newCssVariables, this.currentTheme.cssVariables);
-    themeEditorSurvey.getQuestionByName("backgroundImage").value = this.currentTheme.backgroundImage;
-    themeEditorSurvey.getQuestionByName("backgroundImageFit").value = this.currentTheme.backgroundImageFit;
-    themeEditorSurvey.getQuestionByName("backgroundImageAttachment").value = this.currentTheme.backgroundImageAttachment;
-    themeEditorSurvey.getQuestionByName("backgroundOpacity").value = this.currentTheme.backgroundOpacity * 100;
-    themeEditorSurvey.getQuestionByName("generalPrimaryColor").value = themeEditorSurvey.getQuestionByName("--sjs-primary-backcolor").value;
+    this._setPGEditorPropertyValue(themeEditorSurvey.getQuestionByName("backgroundImage"), "value", this.currentTheme.backgroundImage);
+    this._setPGEditorPropertyValue(themeEditorSurvey.getQuestionByName("backgroundImageFit"), "value", this.currentTheme.backgroundImageFit);
+    this._setPGEditorPropertyValue(themeEditorSurvey.getQuestionByName("backgroundImageAttachment"), "value", this.currentTheme.backgroundImageAttachment);
+    this._setPGEditorPropertyValue(themeEditorSurvey.getQuestionByName("backgroundOpacity"), "value", this.currentTheme.backgroundOpacity * 100);
+
+    const primaryBackcolor = themeEditorSurvey.getQuestionByName("--sjs-primary-backcolor");
+    if (!!primaryBackcolor) {
+      this._setPGEditorPropertyValue(themeEditorSurvey.getQuestionByName("generalPrimaryColor"), "value", primaryBackcolor.value);
+    }
 
     this.updateHeaderViewContainerEditors(newCssVariables);
     elementSettingsFromCssVariable(themeEditorSurvey.getQuestionByName("questionPanel"), newCssVariables, newCssVariables["--sjs-general-backcolor"], newCssVariables["--sjs-general-backcolor-dark"]);
@@ -944,13 +1037,13 @@ export class ThemeBuilder extends Base {
     fontsettingsFromCssVariable(themeEditorSurvey.getQuestionByName("editorFont"), newCssVariables, newCssVariables["--sjs-general-forecolor"], newCssVariables["--sjs-general-forecolor-light"]);
 
     if (!!newCssVariables["--sjs-corner-radius"]) {
-      themeEditorSurvey.getQuestionByName("cornerRadius").value = parseFloat(newCssVariables["--sjs-corner-radius"]);
+      this._setPGEditorPropertyValue(themeEditorSurvey.getQuestionByName("cornerRadius"), "value", parseFloat(newCssVariables["--sjs-corner-radius"]));
     }
     if (!!newCssVariables["--sjs-base-unit"]) {
-      themeEditorSurvey.getQuestionByName("commonScale").value = parseFloat(newCssVariables["--sjs-base-unit"]) * 100 / 8;
+      this._setPGEditorPropertyValue(themeEditorSurvey.getQuestionByName("commonScale"), "value", parseFloat(newCssVariables["--sjs-base-unit"]) * 100 / 8);
     }
     if (!!newCssVariables["--sjs-font-size"]) {
-      themeEditorSurvey.getQuestionByName("commonFontSize").value = parseFloat(newCssVariables["--sjs-font-size"]) * 100 / 16;
+      this._setPGEditorPropertyValue(themeEditorSurvey.getQuestionByName("commonFontSize"), "value", parseFloat(newCssVariables["--sjs-font-size"]) * 100 / 16);
     }
 
     themeEditorSurvey.getAllQuestions().forEach(question => {
@@ -1061,7 +1154,7 @@ export class ThemeBuilder extends Base {
                     title: getLocString("theme.themeName"),
                     descriptionLocation: "hidden",
                     choices: this._availableThemes.map(theme => ({ value: theme, text: getLocString("theme.names." + theme) })),
-                    defaultValue: ThemeBuilder.DefaultTheme.themeName || "default",
+                    defaultValue: ThemeEditorModel.DefaultTheme.themeName || "default",
                     allowClear: false
                   },
                   {

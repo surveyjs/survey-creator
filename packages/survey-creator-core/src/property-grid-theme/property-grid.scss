@@ -113,23 +113,22 @@
 
   .spg-help-action {
     flex-grow: 1;
-  }
+    .spg-action-button--icon {
+      opacity: 0.5;
+      padding: calcSize(0.5);
+    }
 
-  .spg-action-button--icon {
-    opacity: 0.5;
-    padding: calcSize(0.5)
-  }
+    .spg-action-button--icon:focus,
+    .spg-action-button--icon:hover {
+      opacity: 1;
+    }
 
-  .spg-action-button--icon:focus,
-  .spg-action-button--icon:hover {
-    opacity: 1;
-  }
+    .spg-action-button:active {
+      opacity: 0.5;
+    }
 
-  .spg-action-button:active {
-    opacity: 0.5;
-  }
-
-  svg {
-    fill: $foreground-dim-light;
+    svg {
+      fill: $foreground-dim-light;
+    }
   }
 }

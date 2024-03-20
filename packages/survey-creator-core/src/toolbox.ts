@@ -16,7 +16,6 @@ import {
 } from "survey-core";
 import { SurveyCreatorModel, toolboxLocationType } from "./creator-base";
 import { editorLocalization, getLocString } from "./editorLocalization";
-import { localization } from "./entries";
 import { settings } from "./creator-settings";
 import { DragDropSurveyElements } from "./survey-elements";
 
@@ -80,6 +79,9 @@ export class QuestionToolboxCategory extends Base {
 export class QuestionToolboxItem extends Action implements IQuestionToolboxItem {
   constructor(private item: IQuestionToolboxItem) {
     super(item);
+    if(!this.id) {
+      this.id = this.name;
+    }
   }
   className: string;
   iconName: string;

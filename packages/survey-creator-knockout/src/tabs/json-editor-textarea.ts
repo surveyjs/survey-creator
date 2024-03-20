@@ -18,7 +18,7 @@ ko.components.register("svc-tab-json-editor-textarea", {
           model.textElement = els[0];
         }
       }
-      return model;
+      return { model };
     }
   },
   template: template

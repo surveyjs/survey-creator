@@ -109,15 +109,8 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this.actionContainer = new SurveyElementActionContainer();
     this.actionContainer.dotsItem.iconSize = 16;
     this.actionContainer.dotsItem.popupModel.horizontalPosition = "center";
-    var actions: Array<Action> = [];
-    this.buildActions(actions);
-    this.setSurveyElement(surveyElement, false);
-    if (this.surveyElement) {
-      this.creator.sidebar.onPropertyChanged.add(this.sidebarFlyoutModeChangedFunc);
-      this.creator.onElementMenuItemsChanged(this.surveyElement, actions);
-      this.actionContainer.setItems(actions);
-      this.updateActionsProperties();
-    }
+    this.setSurveyElement(surveyElement);
+    this.creator.sidebar.onPropertyChanged.add(this.sidebarFlyoutModeChangedFunc);
     this.setShowAddQuestionButton(true);
   }
 
@@ -131,11 +124,17 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       surveyElement.onPropertyChanged.add(this.selectedPropPageFunc);
     }
   }
-  protected setSurveyElement(surveyElement: T, updateActions: boolean = true): void {
+  protected setSurveyElement(surveyElement: T): void {
     this.detachElement(this.surveyElement);
     this.surveyElement = surveyElement;
     this.attachElement(this.surveyElement);
-    if (updateActions) {
+    if (this.surveyElement) {
+      var actions: Array<Action> = [];
+      this.buildActions(actions);
+      this.creator.onElementMenuItemsChanged(this.surveyElement, actions);
+      const prevActions = this.actionContainer.actions;
+      prevActions.forEach(action => action.dispose && action.dispose());
+      this.actionContainer.setItems(actions);
       this.updateActionsProperties();
     }
   }

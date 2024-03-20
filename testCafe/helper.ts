@@ -42,6 +42,24 @@ export const getItemValueByIndex = ClientFunction((questionName, index) => {
   return choices[index].value;
 });
 
+export const handleShiftEnter = ClientFunction((selector: string) => {
+  document.querySelector(selector).addEventListener("keypress", function (e: any) {
+    if (e.charCode === 13 && e.shiftKey) {
+      var editorEl = document.querySelector(selector) as any;
+      var selection = window.getSelection() as any;
+      var range = document.createRange();
+
+      editorEl.innerHTML += "<div><br/></div>";
+
+      range.setStart(editorEl, editorEl.childNodes.length);
+      range.setEnd(editorEl, editorEl.childNodes.length);
+
+      selection.removeAllRanges();
+      selection.addRange(range);
+    }
+  });
+});
+
 export const SingleInputToolboxItem = Selector("[aria-label='Single-Line Input']");
 export const RatingToolboxItem = Selector("[aria-label='Rating Scale']");
 
@@ -49,7 +67,8 @@ export const creatorTabDesignerName = "Designer";
 export const creatorTabPreviewName = "Preview";
 export const creatorTabLogicName = "Logic";
 export const generalGroupName = "General";
-export const logicGroupName = "Logic";
+export const logicGroupName = "Conditions";
+export const inputMaskSettingsGroupName = "Input Mask Settings";
 
 export const creatorContentSelector = Selector(".svc-creator__content-holder");
 

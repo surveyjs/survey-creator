@@ -11,7 +11,7 @@ ko.components.register("svc-tab-test", {
       const plugin: TabTestPlugin = params.data;
       new ImplementorBase(plugin.model.simulator);
       new ImplementorBase(plugin.model);
-      return plugin.model;
+      return { model: plugin.model };
     },
   },
   template: template
