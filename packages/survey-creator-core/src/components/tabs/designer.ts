@@ -128,8 +128,10 @@ export class TabDesignerViewModel extends Base {
     }
     if (updatePageController) {
       if (this.newPage) {
+        this.newPage.startLoadingFromJson();
         this.newPage.num = this.survey.pages.length + 1;
         this.newPage.name = SurveyHelper.getNewPageName(this.survey.pages);
+        this.newPage.endLoadingFromJson();
       }
       this.pagesController.raisePagesChanged();
     }

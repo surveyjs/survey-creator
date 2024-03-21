@@ -1188,12 +1188,13 @@ test("creator.onPageAdding", () => {
     options.allow = allowAdd;
   });
   creator.JSON = {};
+  expect(counter).toBe(1);
   expect(creator.survey.pages).toHaveLength(1);
   creator.addPage(new PageModel("p2"));
-  expect(counter).toBe(1);
+  expect(counter).toBe(2);
   expect(creator.survey.pages).toHaveLength(2);
   allowAdd = false;
   creator.addPage(new PageModel("p3"));
-  expect(counter).toBe(2);
+  expect(counter).toBe(3);
   expect(creator.survey.pages).toHaveLength(2);
 });

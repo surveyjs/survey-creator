@@ -2799,13 +2799,13 @@ export class SurveyCreatorModel extends Base
     if (objIndex == elements.length - 1) {
       objIndex--;
     }
-    if (parent.isPage && (this.pageEditMode === "single" || elements.length === 0)) {
-      parent = this.survey;
-    }
     if (obj["questions"]) {
       obj["questions"].forEach(q => this.updateConditionsOnRemove(q));
     }
     obj["delete"](false);
+    if (parent.isPage && (this.pageEditMode === "single" || elements.length === 0)) {
+      parent = this.survey;
+    }
     this.selectElement(objIndex > -1 ? elements[objIndex] : parent);
   }
   protected onCanShowObjectProperty(
