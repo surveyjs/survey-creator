@@ -342,7 +342,7 @@ test("Delete object and selectedElement property", () => {
   creator.deleteCurrentObject();
   expect(creator.selectedElementName).toEqual("q1");
   creator.deleteCurrentObject();
-  expect(creator.selectedElementName).toEqual("page1");
+  expect(creator.selectedElementName).toEqual("survey");
   const newQuestion = creator.survey.pages[0].addNewQuestion("text");
   creator.survey.pages[0].title = "";
   creator.selectElement(newQuestion);
