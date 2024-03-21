@@ -129,7 +129,7 @@ Serializer.addClass(
             if (!!property && property.onPropertyEditorUpdate) {
               property.onPropertyEditorUpdate(obj, editor);
             }
-          }
+          };
           for (var i = 0; i < questions.length; i++) {
             callback(questions[i]);
           }
