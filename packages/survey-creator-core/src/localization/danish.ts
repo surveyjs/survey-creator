@@ -369,6 +369,28 @@ export var danishStrings = {
       name: "Navn",
       title: "Titel"
     },
+    masksettings: {
+      saveMaskedValue: "Gem maskeret værdi i undersøgelsesresultater"
+    },
+    patternmask: {
+      pattern: "Værdimønster"
+    },
+    datetimemask: {
+      min: "Mindste værdi",
+      max: "Maksimal værdi"
+    },
+    numericmask: {
+      allowNegativeValues: "Tillad negative værdier",
+      thousandsSeparator: "Tusindtalsseparator",
+      decimalSeparator: "Decimalseparator",
+      precision: "Værdi præcision",
+      min: "Mindste værdi",
+      max: "Maksimal værdi"
+    },
+    currencymask: {
+      prefix: "Valutapræfiks",
+      suffix: "Suffiks for valuta"
+    },
     imageHeight: "Billedhøjde",
     imageWidth: "Billedbredde",
     valueName: "Værdiens navn",
@@ -609,6 +631,13 @@ export var danishStrings = {
     autoGrowComment: "Udvid automatisk kommentarområdet, hvis det er nødvendigt",
     allowResizeComment: "Tillad brugere at ændre størrelsen på tekstområder",
     textUpdateMode: "Opdater værdi for tekstspørgsmål",
+    maskType: "Type af inputmaske",
+    maskTypes: {
+      patternmask: "Mønster",
+      numericmask: "Numerisk",
+      datetimemask: "Dato og klokkeslæt",
+      currencymask: "Valuta"
+    },
     focusOnFirstError: "Sæt fokus på det første ugyldige svar",
     checkErrorsMode: "Kør validering",
     navigateToUrl: "Naviger til URL",
@@ -733,6 +762,7 @@ export var danishStrings = {
       templateTitle: "Skabelon titel",
       totals: "Totaler",
       logic: "Logik",
+      mask: "Indstillinger for inputmaske",
       layout: {
         panel: "Layout",
         question: "Layout",
@@ -796,7 +826,11 @@ export var danishStrings = {
     questionStartIndex_placeholder: "Eks.: a)",
     width_placeholder: "Eks.: 6in",
     minWidth_placeholder: "Eks.: 600px",
-    maxWidth_placeholder: "Eks.: 50%"
+    maxWidth_placeholder: "Eks.: 50%",
+    pattern_placeholder: "Eks.: +1(999)-999-99-99",
+    datetimepattern_placeholder: "Eks.: mm/dd/åååå",
+    currencyprefix_placeholder: "Eks.: $",
+    currencysuffix_placeholder: "Eks.: USD"
   },
   // Property values
   pv: {
@@ -1011,7 +1045,8 @@ export var danishStrings = {
     searchMode: {
       contains: "Indeholder",
       startsWith: "Begynder med"
-    }
+    },
+    textWrapEnabled: "Valg af wrap"
   },
   // Operators
   op: {
@@ -1137,7 +1172,8 @@ export var danishStrings = {
       },
       textUpdateMode: "Vælg mellem: \"Ved tabt fokus\" - værdien opdateres, når indtastningsfeltet mister fokus; \"Mens du skriver\" - værdien opdateres i realtid, da brugerne skriver. Indstillingen \"Nedarv\" anvender indstillingen på undersøgelsesniveau (\"Ved mistet fokus\" som standard).",
       url: "Du kan bruge enhver webtjeneste som datakilde til multiple choice-spørgsmål. Hvis du vil udfylde valgværdier, skal du angive URL-adressen på den tjeneste, der leverer dataene.",
-      searchMode: "En sammenligningshandling, der bruges til at filtrere rullelisten."
+      searchMode: "En sammenligningshandling, der bruges til at filtrere rullelisten.",
+      textWrapEnabled: "Lange tekster i valgmuligheder genererer automatisk linjeskift, så de passer ind i rullemenuen. Fjern markeringen, hvis teksterne skal klippes."
     },
     signaturepad: {
       signatureWidth: "Indstiller bredden på det viste signaturområde og det resulterende billede.",
@@ -1278,7 +1314,25 @@ export var danishStrings = {
     autocomplete: "Se beskrivelsen af attributten [autofuldførelse](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) for at få flere oplysninger.",
     filePlaceholder: "Gælder, når \"Kildetype\" er \"Lokale filer\", eller når kameraet ikke er tilgængeligt",
     photoPlaceholder: "Gælder, når \"Kildetype\" er \"Kamera\".",
-    fileOrPhotoPlaceholder: "Gælder, når \"Kildetype\" er \"Lokale filer eller kamera\"."
+    fileOrPhotoPlaceholder: "Gælder, når \"Kildetype\" er \"Lokale filer eller kamera\".",
+    masksettings: {
+      saveMaskedValue: "Vælg, om du vil gemme spørgsmålsværdien med en anvendt maske i undersøgelsesresultater."
+    },
+    patternmask: {
+      pattern: "Mønsteret kan indeholde strengkonstanter og følgende pladsholdere: '9' - for et ciffer; »a« - for store eller små bogstaver '#' - for et ciffer eller et stort eller lille bogstav. Brug omvendt skråstreg '\\' for at undslippe et tegn."
+    },
+    datetimemask: {
+      pattern: "Mønsteret kan indeholde separatortegn og følgende pladsholdere: 'm' - for månedsnummer; »mm« — for månedsnummer med foranstillet nul for encifrede værdier 'd' - for dag i måneden; 'dd' - for dag i måneden med foranstillet nul for encifrede værdier 'yy' - for de sidste to cifre i året; 'YYYY' - for et firecifret år."
+    },
+    numericmask: {
+      decimalSeparator: "Et symbol, der bruges til at adskille brøkdelen fra heltalsdelen af et vist tal.",
+      thousandsSeparator: "Et symbol, der bruges til at adskille cifrene i et stort tal i grupper på tre.",
+      precision: "Begrænser, hvor mange cifre der skal bevares efter decimaltegnet for et vist tal."
+    },
+    currencymask: {
+      prefix: "Et eller flere symboler, der skal vises før værdien.",
+      suffix: "Et eller flere symboler, der skal vises efter værdien."
+    }
   },
   // Properties
   p: {
@@ -2609,3 +2663,35 @@ editorLocalization.locales["da"] = danishStrings;
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Pladsholdertekst for rangeringsområdet"
 // pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "Udfyld undersøgelsen automatisk"
 // pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Vælg, om undersøgelsen skal fuldføres automatisk, når svarpersonen har besvaret alle spørgsmål."
+// masksettings.saveMaskedValue: "Save masked value in survey results" => "Gem maskeret værdi i undersøgelsesresultater"
+// patternmask.pattern: "Value pattern" => "Værdimønster"
+// datetimemask.min: "Minimum value" => "Mindste værdi"
+// datetimemask.max: "Maximum value" => "Maksimal værdi"
+// numericmask.allowNegativeValues: "Allow negative values" => "Tillad negative værdier"
+// numericmask.thousandsSeparator: "Thousands separator" => "Tusindtalsseparator"
+// numericmask.decimalSeparator: "Decimal separator" => "Decimalseparator"
+// numericmask.precision: "Value precision" => "Værdi præcision"
+// numericmask.min: "Minimum value" => "Mindste værdi"
+// numericmask.max: "Maximum value" => "Maksimal værdi"
+// currencymask.prefix: "Currency prefix" => "Valutapræfiks"
+// currencymask.suffix: "Currency suffix" => "Suffiks for valuta"
+// pe.maskType: "Input mask type" => "Type af inputmaske"
+// maskTypes.patternmask: "Pattern" => "Mønster"
+// maskTypes.numericmask: "Numeric" => "Numerisk"
+// maskTypes.datetimemask: "Date and Time" => "Dato og klokkeslæt"
+// maskTypes.currencymask: "Currency" => "Valuta"
+// tabs.mask: "Input Mask Settings" => "Indstillinger for inputmaske"
+// pe.pattern_placeholder: "Ex.: +1(999)-999-99-99" => "Eks.: +1(999)-999-99-99"
+// pe.datetimepattern_placeholder: "Ex.: mm/dd/yyyy" => "Eks.: mm/dd/åååå"
+// pe.currencyprefix_placeholder: "Ex.: $" => "Eks.: $"
+// pe.currencysuffix_placeholder: "Ex.: USD" => "Eks.: USD"
+// pv.textWrapEnabled: "Wrap choices" => "Valg af wrap"
+// question.textWrapEnabled: "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip." => "Lange tekster i valgmuligheder genererer automatisk linjeskift, så de passer ind i rullemenuen. Fjern markeringen, hvis teksterne skal klippes."
+// masksettings.saveMaskedValue: "Select if you want to store the question value with an applied mask in survey results." => "Vælg, om du vil gemme spørgsmålsværdien med en anvendt maske i undersøgelsesresultater."
+// patternmask.pattern: "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character." => "Mønsteret kan indeholde strengkonstanter og følgende pladsholdere: '9' - for et ciffer; »a« - for store eller små bogstaver '#' - for et ciffer eller et stort eller lille bogstav. Brug omvendt skråstreg '\\' for at undslippe et tegn."
+// datetimemask.pattern: "The pattern can contain separator characters and the following placeholders: `m` - for month number; `mm` - for month number, with leading zero for single-digit values; `d` - for day of the month; `dd` - for day of the month, with leading zero for single-digit values; `yy` - for the last two digits of the year; `yyyy` - for a four-digit year." => "Mønsteret kan indeholde separatortegn og følgende pladsholdere: 'm' - for månedsnummer; »mm« — for månedsnummer med foranstillet nul for encifrede værdier 'd' - for dag i måneden; 'dd' - for dag i måneden med foranstillet nul for encifrede værdier 'yy' - for de sidste to cifre i året; 'YYYY' - for et firecifret år."
+// numericmask.decimalSeparator: "A symbol used to separate the fractional part from the integer part of a displayed number." => "Et symbol, der bruges til at adskille brøkdelen fra heltalsdelen af et vist tal."
+// numericmask.thousandsSeparator: "A symbol used to separate the digits of a large number into groups of three." => "Et symbol, der bruges til at adskille cifrene i et stort tal i grupper på tre."
+// numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Begrænser, hvor mange cifre der skal bevares efter decimaltegnet for et vist tal."
+// currencymask.prefix: "One or several symbols to be displayed before the value." => "Et eller flere symboler, der skal vises før værdien."
+// currencymask.suffix: "One or several symbols to be displayed after the value." => "Et eller flere symboler, der skal vises efter værdien."

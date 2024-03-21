@@ -20,8 +20,8 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
     this.filePresentationModel.acceptedTypes = "image/*";
     this.filePresentationModel.storeDataAsText = false;
     this.filePresentationModel.cssClasses.chooseFileIconId = "icon-choosefile";
-    surveyModel.onOpenFileChooser.add((s, o) => {
-      this.creator.chooseFiles(o.input, o.callback, { element: o.element as SurveyElement, item: o.item });
+    surveyModel.onOpenFileChooser.add((s, o: any) => {
+      this.creator.chooseFiles(o.input, o.callback, o.context);
     });
     surveyModel.onUploadFiles.add((s, o) => {
       const fileToUpload = o.files[0];
@@ -29,7 +29,7 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
         this.creator.uploadFiles(o.files, this.question, (status, link) => {
           this.question.imageLink = link;
           o.callback(status, [{ content: link, file: o.files[0] }]);
-        });
+        }, { element: this.question, elementType: this.question.getType(), propertyName: "imageLink" });
       }
     });
   }
@@ -51,13 +51,14 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
 
   chooseFile(model: QuestionImageAdornerViewModel) {
     const fileInput = <HTMLInputElement>model.questionRoot.getElementsByClassName("svc-choose-file-input")[0];
+    const context = { element: model.question, elementType: model.question.getType(), propertyName: "imageLink" };
     model.creator.chooseFiles(fileInput, (files: File[]) => {
       model.isUploading = true;
       model.creator.uploadFiles(files, model.surveyElement as QuestionImageModel, (_, link) => {
         (<QuestionImageModel>model.surveyElement).imageLink = link;
         model.isUploading = false;
-      });
-    }, { element: model.question });
+      }, context);
+    }, context);
   }
   public get acceptedTypes(): string {
     return getAcceptedTypesByContentMode((this.surveyElement as QuestionImageModel).contentMode);

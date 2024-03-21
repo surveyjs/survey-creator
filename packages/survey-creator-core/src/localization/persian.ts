@@ -369,6 +369,28 @@ var persianStrings = {
       name: "نام",
       title: "عنوان"
     },
+    masksettings: {
+      saveMaskedValue: "ذخیره مقدار ماسک در نتایج نظرسنجی"
+    },
+    patternmask: {
+      pattern: "الگوی ارزش"
+    },
+    datetimemask: {
+      min: "حداقل مقدار",
+      max: "بیشینه مقدار"
+    },
+    numericmask: {
+      allowNegativeValues: "اجازه دادن مقادیر منفی",
+      thousandsSeparator: "هزار جداکننده",
+      decimalSeparator: "جداساز دهدهی",
+      precision: "دقت ارزش",
+      min: "حداقل مقدار",
+      max: "بیشینه مقدار"
+    },
+    currencymask: {
+      prefix: "پیشوند ارز",
+      suffix: "پسوند ارز"
+    },
     imageHeight: "ارتفاع تصویر",
     imageWidth: "عرض تصویر",
     valueName: "نام مقدار",
@@ -609,6 +631,13 @@ var persianStrings = {
     autoGrowComment: "گسترش خودکار منطقه نظر در صورت لزوم",
     allowResizeComment: "اجازه دادن به کاربران برای تغییر اندازه مناطق متن",
     textUpdateMode: "بههنگامسازی مقدار سؤال متن",
+    maskType: "نوع ماسک ورودی",
+    maskTypes: {
+      patternmask: "الگوی",
+      numericmask: "عددی",
+      datetimemask: "تاریخ و زمان",
+      currencymask: "ارز"
+    },
     focusOnFirstError: "تنظیم تمرکز روی اولین پاسخ نامعتبر",
     checkErrorsMode: "اجرای اعتبارسنجی",
     navigateToUrl: "حرکت به نشانی وب",
@@ -733,6 +762,7 @@ var persianStrings = {
       templateTitle: "عنوان قالب",
       totals: "جمع کل",
       logic: "منطق",
+      mask: "تنظیمات ماسک ورودی",
       layout: {
         panel: "طرح",
         question: "طرح",
@@ -796,7 +826,11 @@ var persianStrings = {
     questionStartIndex_placeholder: "سابق: الف)",
     width_placeholder: "سابق: 6in",
     minWidth_placeholder: "سابق: 600 پیکسل",
-    maxWidth_placeholder: "سابق: 50٪"
+    maxWidth_placeholder: "سابق: 50٪",
+    pattern_placeholder: "شماره تماس: +1 (999) -999-99-99",
+    datetimepattern_placeholder: "سابق: mm / dd / yyyyy",
+    currencyprefix_placeholder: "سابق: $",
+    currencysuffix_placeholder: "Ex.: دلار امریکا"
   },
   // Property values
   pv: {
@@ -1011,7 +1045,8 @@ var persianStrings = {
     searchMode: {
       contains: "شامل",
       startsWith: "شروع با"
-    }
+    },
+    textWrapEnabled: "انتخاب های بسته بندی"
   },
   // Operators
   op: {
@@ -1137,7 +1172,8 @@ var persianStrings = {
       },
       textUpdateMode: "انتخاب از: \"در تمرکز از دست رفته\" - مقدار به روز شده است زمانی که فیلد ورودی تمرکز خود را از دست می دهد؛ \"در هنگام تایپ\" - مقدار در زمان واقعی به روز می شود، زیرا کاربران تایپ می کنند. گزینه \"ارث\" تنظیم سطح نظرسنجی (\"در تمرکز از دست رفته\" به طور پیش فرض) اعمال می شود.",
       url: "شما می توانید از هر سرویس وب به عنوان منبع داده برای سوالات چند گزینه ای استفاده کنید. برای پر کردن مقادیر انتخاب، URL سرویس ارائه دهنده داده ها را وارد کنید.",
-      searchMode: "یک عملیات مقایسه ای که برای فیلتر کردن لیست کشویی استفاده می شود."
+      searchMode: "یک عملیات مقایسه ای که برای فیلتر کردن لیست کشویی استفاده می شود.",
+      textWrapEnabled: "متون طولانی در گزینه های انتخاب به طور خودکار شکستن خط را ایجاد می کنند تا در منوی کشویی قرار بگیرند. اگر می خواهید متن ها کلیپ شوند، انتخاب را لغو کنید."
     },
     signaturepad: {
       signatureWidth: "عرض ناحیه امضای نمایش داده شده و تصویر حاصل را تنظیم می کند.",
@@ -1278,7 +1314,25 @@ var persianStrings = {
     autocomplete: "برای اطلاعات بیشتر به شرح ویژگی [autocomplete] (https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) مراجعه کنید.",
     filePlaceholder: "اعمال می شود زمانی که \"نوع منبع\" است \"فایل های محلی\" و یا زمانی که دوربین در دسترس نیست",
     photoPlaceholder: "هنگامی که \"نوع منبع\" \"دوربین\" است، اعمال می شود.",
-    fileOrPhotoPlaceholder: "زمانی اعمال می شود که \"نوع منبع\" \"فایل های محلی یا دوربین\" باشد."
+    fileOrPhotoPlaceholder: "زمانی اعمال می شود که \"نوع منبع\" \"فایل های محلی یا دوربین\" باشد.",
+    masksettings: {
+      saveMaskedValue: "انتخاب کنید که ایا می خواهید مقدار سؤال را با یک ماسک کاربردی در نتایج نظرسنجی ذخیره کنید."
+    },
+    patternmask: {
+      pattern: "الگو می تواند شامل literals رشته و متغیرهای زیر باشد: '9' - برای یک رقم؛ 'a' - برای یک حرف بزرگ یا کوچک؛ \"#\" - برای یک رقم یا یک حرف بزرگ یا کوچک. استفاده از backslash '\\' برای فرار از یک شخصیت."
+    },
+    datetimemask: {
+      pattern: "الگو می تواند شامل کاراکترهای جداکننده و متغیرهای زیر باشد: \"m\" - برای شماره ماه؛ 'mm' - برای شماره ماه، با صفر پیشرو برای مقادیر تک رقمی؛ 'd' - برای روز ماه؛ 'dd' - برای روز ماه، با صفر پیشرو برای مقادیر تک رقمی؛ 'yy' - برای دو رقم اخر سال؛ 'yyyyy' - برای یک سال چهار رقمی."
+    },
+    numericmask: {
+      decimalSeparator: "نمادی که برای جدا کردن قسمت کسری از قسمت صحیح یک عدد نمایش داده شده استفاده می شود.",
+      thousandsSeparator: "نمادی که برای جدا کردن ارقام یک عدد بزرگ به گروه های سه نفره استفاده می شود.",
+      precision: "محدود کردن تعداد ارقام برای حفظ پس از نقطه اعشار برای یک عدد نمایش داده شده."
+    },
+    currencymask: {
+      prefix: "یک یا چند نماد قبل از مقدار نمایش داده می شود.",
+      suffix: "یک یا چند نماد بعد از مقدار نمایش داده می شود."
+    }
   },
   // Properties
   p: {
@@ -2379,3 +2433,35 @@ editorLocalization.locales["fa"] = persianStrings;
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "متن نگهدارنده برای منطقه رتبه بندی"
 // pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "بررسی را به طور خودکار تکمیل کنید"
 // pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "انتخاب کنید که ایا می خواهید نظرسنجی به طور خودکار پس از پاسخ دادن به تمام سوالات پاسخ دهد."
+// masksettings.saveMaskedValue: "Save masked value in survey results" => "ذخیره مقدار ماسک در نتایج نظرسنجی"
+// patternmask.pattern: "Value pattern" => "الگوی ارزش"
+// datetimemask.min: "Minimum value" => "حداقل مقدار"
+// datetimemask.max: "Maximum value" => "بیشینه مقدار"
+// numericmask.allowNegativeValues: "Allow negative values" => "اجازه دادن مقادیر منفی"
+// numericmask.thousandsSeparator: "Thousands separator" => "هزار جداکننده"
+// numericmask.decimalSeparator: "Decimal separator" => "جداساز دهدهی"
+// numericmask.precision: "Value precision" => "دقت ارزش"
+// numericmask.min: "Minimum value" => "حداقل مقدار"
+// numericmask.max: "Maximum value" => "بیشینه مقدار"
+// currencymask.prefix: "Currency prefix" => "پیشوند ارز"
+// currencymask.suffix: "Currency suffix" => "پسوند ارز"
+// pe.maskType: "Input mask type" => "نوع ماسک ورودی"
+// maskTypes.patternmask: "Pattern" => "الگوی"
+// maskTypes.numericmask: "Numeric" => "عددی"
+// maskTypes.datetimemask: "Date and Time" => "تاریخ و زمان"
+// maskTypes.currencymask: "Currency" => "ارز"
+// tabs.mask: "Input Mask Settings" => "تنظیمات ماسک ورودی"
+// pe.pattern_placeholder: "Ex.: +1(999)-999-99-99" => "شماره تماس: +1 (999) -999-99-99"
+// pe.datetimepattern_placeholder: "Ex.: mm/dd/yyyy" => "سابق: mm / dd / yyyyy"
+// pe.currencyprefix_placeholder: "Ex.: $" => "سابق: $"
+// pe.currencysuffix_placeholder: "Ex.: USD" => "Ex.: دلار امریکا"
+// pv.textWrapEnabled: "Wrap choices" => "انتخاب های بسته بندی"
+// question.textWrapEnabled: "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip." => "متون طولانی در گزینه های انتخاب به طور خودکار شکستن خط را ایجاد می کنند تا در منوی کشویی قرار بگیرند. اگر می خواهید متن ها کلیپ شوند، انتخاب را لغو کنید."
+// masksettings.saveMaskedValue: "Select if you want to store the question value with an applied mask in survey results." => "انتخاب کنید که ایا می خواهید مقدار سؤال را با یک ماسک کاربردی در نتایج نظرسنجی ذخیره کنید."
+// patternmask.pattern: "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character." => "الگو می تواند شامل literals رشته و متغیرهای زیر باشد: '9' - برای یک رقم؛ 'a' - برای یک حرف بزرگ یا کوچک؛ \"#\" - برای یک رقم یا یک حرف بزرگ یا کوچک. استفاده از backslash '\\' برای فرار از یک شخصیت."
+// datetimemask.pattern: "The pattern can contain separator characters and the following placeholders: `m` - for month number; `mm` - for month number, with leading zero for single-digit values; `d` - for day of the month; `dd` - for day of the month, with leading zero for single-digit values; `yy` - for the last two digits of the year; `yyyy` - for a four-digit year." => "الگو می تواند شامل کاراکترهای جداکننده و متغیرهای زیر باشد: \"m\" - برای شماره ماه؛ 'mm' - برای شماره ماه، با صفر پیشرو برای مقادیر تک رقمی؛ 'd' - برای روز ماه؛ 'dd' - برای روز ماه، با صفر پیشرو برای مقادیر تک رقمی؛ 'yy' - برای دو رقم اخر سال؛ 'yyyyy' - برای یک سال چهار رقمی."
+// numericmask.decimalSeparator: "A symbol used to separate the fractional part from the integer part of a displayed number." => "نمادی که برای جدا کردن قسمت کسری از قسمت صحیح یک عدد نمایش داده شده استفاده می شود."
+// numericmask.thousandsSeparator: "A symbol used to separate the digits of a large number into groups of three." => "نمادی که برای جدا کردن ارقام یک عدد بزرگ به گروه های سه نفره استفاده می شود."
+// numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "محدود کردن تعداد ارقام برای حفظ پس از نقطه اعشار برای یک عدد نمایش داده شده."
+// currencymask.prefix: "One or several symbols to be displayed before the value." => "یک یا چند نماد قبل از مقدار نمایش داده می شود."
+// currencymask.suffix: "One or several symbols to be displayed after the value." => "یک یا چند نماد بعد از مقدار نمایش داده می شود."

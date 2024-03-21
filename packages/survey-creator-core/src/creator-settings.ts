@@ -293,7 +293,7 @@ export interface ISurveyCreatorOptions {
   onGetElementEditorTitleCallback(obj: Base, title: string): string;
   startUndoRedoTransaction();
   stopUndoRedoTransaction();
-  createSurvey(json: any, reason: string, model?: any, callback?: (survey: SurveyModel)=> void, area?: string);
+  createSurvey(json: any, reason: string, model?: any, callback?: (survey: SurveyModel) => void, area?: string);
   onConditionQuestionsGetListCallback(
     propertyName: string,
     obj: Base,
@@ -318,14 +318,15 @@ export interface ISurveyCreatorOptions {
   uploadFiles(
     files: File[],
     question: Question,
-    callback: (status: string, data: any) => any
+    callback: (status: string, data: any) => any,
+    context?: { element: Base, item?: any, elementType?: string, propertyName?: string }
   ): void;
   getHasMachineTranslation(): boolean;
   doMachineTranslation(fromLocale: string, toLocale: string, strings: Array<string>, callback: (translated: Array<string>) => void): void;
   chooseFiles(
     input: HTMLInputElement,
     callback: (files: File[]) => void,
-    context?: { element: SurveyElement, item?: ItemValue }
+    context?: { element: Base, item?: any, elementType?: string, propertyName?: string }
   ): void;
 }
 
@@ -446,7 +447,7 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   stopUndoRedoTransaction() { }
   createSurvey(json: any, reason: string, model?: any, callback?: (survey: SurveyModel) => void, area?: string): SurveyModel {
     const survey = new SurveyModel(json);
-    if(!!callback) {
+    if (!!callback) {
       callback(survey);
     }
     return survey;
@@ -478,7 +479,7 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   ): void { }
   getHasMachineTranslation(): boolean { return this.machineTranslationValue; }
   doMachineTranslation(fromLocale: string, toLocale: string, strings: Array<string>, callback: (translated: Array<string>) => void): void { }
-  chooseFiles(input: HTMLInputElement, callback: (files: File[]) => void, context?: { element: SurveyElement, item?: ItemValue }): void { }
+  chooseFiles(input: HTMLInputElement, callback: (files: File[]) => void, context?: { element: Base, item?: any, elementType?: string, propertyName?: string }): void { }
 }
 
 StylesManager.applyTheme("defaultV2");

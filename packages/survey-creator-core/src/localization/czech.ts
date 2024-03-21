@@ -369,6 +369,28 @@ export var czStrings = {
       name: "Jméno",
       title: "Titul"
     },
+    masksettings: {
+      saveMaskedValue: "Uložit maskovanou hodnotu ve výsledcích průzkumu"
+    },
+    patternmask: {
+      pattern: "Vzor hodnoty"
+    },
+    datetimemask: {
+      min: "Minimální hodnota",
+      max: "Maximální hodnota"
+    },
+    numericmask: {
+      allowNegativeValues: "Povolit záporné hodnoty",
+      thousandsSeparator: "Oddělovač tisíců",
+      decimalSeparator: "Oddělovač desetinných míst",
+      precision: "Přesnost hodnoty",
+      min: "Minimální hodnota",
+      max: "Maximální hodnota"
+    },
+    currencymask: {
+      prefix: "Předpona měny",
+      suffix: "Přípona měny"
+    },
     imageHeight: "Výška obrázku",
     imageWidth: "Šířka obrázku",
     valueName: "Název hodnoty",
@@ -609,6 +631,13 @@ export var czStrings = {
     autoGrowComment: "V případě potřeby automaticky rozbalit komentář",
     allowResizeComment: "Povolit uživatelům změnit velikost textových polí",
     textUpdateMode: "Aktualizovat hodnotu textové otázky",
+    maskType: "Typ vstupní masky",
+    maskTypes: {
+      patternmask: "Vzor",
+      numericmask: "Číselný",
+      datetimemask: "Datum a čas",
+      currencymask: "Měna"
+    },
     focusOnFirstError: "Zvýraznit první neplatnou odpověď",
     checkErrorsMode: "Spustit ověření",
     navigateToUrl: "Přejít na URL",
@@ -733,6 +762,7 @@ export var czStrings = {
       templateTitle: "Název šablony",
       totals: "Součty",
       logic: "Logika",
+      mask: "Nastavení vstupní masky",
       layout: {
         panel: "Rozložení",
         question: "Rozložení",
@@ -796,7 +826,11 @@ export var czStrings = {
     questionStartIndex_placeholder: "Př.: a)",
     width_placeholder: "Př.: 6in",
     minWidth_placeholder: "Př.: 600px",
-    maxWidth_placeholder: "Př.: 50%"
+    maxWidth_placeholder: "Př.: 50%",
+    pattern_placeholder: "Př.: +1(999)-999-99-99",
+    datetimepattern_placeholder: "Př.: dd/mm/rrrr",
+    currencyprefix_placeholder: "Př.: $",
+    currencysuffix_placeholder: "Př.: USD"
   },
   // Property values
   pv: {
@@ -1011,7 +1045,8 @@ export var czStrings = {
     searchMode: {
       contains: "Obsahuje",
       startsWith: "Začíná na"
-    }
+    },
+    textWrapEnabled: "Možnosti obtékání"
   },
   // Operators
   op: {
@@ -1137,7 +1172,8 @@ export var czStrings = {
       },
       textUpdateMode: "Vyberte si z těchto možností: \"Při ztrátě fokusu\" - hodnota se aktualizuje, když vstupní pole ztratí fokus; \"Při psaní\" - hodnota se aktualizuje v reálném čase, jak uživatelé píší. Možnost \"Zdědit\" použije nastavení na úrovni průzkumu (ve výchozím nastavení \"Při ztrátě fokusu\").",
       url: "Jako zdroj dat pro otázky s výběrem odpovědí můžete použít libovolnou webovou službu. Pokud chcete naplnit hodnoty voleb, zadejte adresu URL služby, která data poskytuje.",
-      searchMode: "Operace porovnání, která se používá k filtrování rozevíracího seznamu."
+      searchMode: "Operace porovnání, která se používá k filtrování rozevíracího seznamu.",
+      textWrapEnabled: "Dlouhé texty v možnostech volby automaticky vygenerují zalomení řádků, aby se vešly do rozbalovací nabídky. Odznačte, pokud chcete, aby se texty ořízly."
     },
     signaturepad: {
       signatureWidth: "Nastaví šířku zobrazené oblasti podpisu a výsledného obrazu.",
@@ -1278,7 +1314,25 @@ export var czStrings = {
     autocomplete: "Pro více informací viz [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete).",
     filePlaceholder: "Platí, když je \"Typ zdroje\" nastaven na \"Místní soubory\" nebo když je kamera nedostupná",
     photoPlaceholder: "Platí, když je \"Typ zdroje\" nastaven na \"Fotoaparát\".",
-    fileOrPhotoPlaceholder: "Platí, když \"Typ zdroje\" je \"Místní soubory nebo kamera\"."
+    fileOrPhotoPlaceholder: "Platí, když \"Typ zdroje\" je \"Místní soubory nebo kamera\".",
+    masksettings: {
+      saveMaskedValue: "Vyberte, zda chcete uložit hodnotu otázky s použitou maskou do výsledků průzkumu."
+    },
+    patternmask: {
+      pattern: "Vzor může obsahovat řetězcové literály a následující zástupné symboly: \"9\" - pro číslici; \"a\" - pro velké nebo malé písmeno; '#' - pro číslici nebo velké či malé písmeno. Pomocí zpětného lomítka \\ můžete znak uvozovat."
+    },
+    datetimemask: {
+      pattern: "Vzor může obsahovat oddělovací znaky a následující zástupné symboly: 'm' - pro číslo měsíce; 'mm' - pro číslo měsíce, s úvodní nulou pro jednociferné hodnoty; \"d\" - pro den v měsíci; 'dd' - pro den v měsíci, s úvodní nulou pro jednociferné hodnoty; \"yy\" – pro poslední dvě číslice roku; \"rrrr\" – pro čtyřmístný rok."
+    },
+    numericmask: {
+      decimalSeparator: "Symbol používaný k oddělení zlomkové části od celočíselné části zobrazeného čísla.",
+      thousandsSeparator: "Symbol používaný k oddělení číslic velkého čísla do skupin po třech.",
+      precision: "Omezuje, kolik číslic se má zachovat za desetinnou čárkou zobrazeného čísla."
+    },
+    currencymask: {
+      prefix: "Jeden nebo více symbolů, které mají být zobrazeny před hodnotou.",
+      suffix: "Jeden nebo více symbolů, které se zobrazí za hodnotou."
+    }
   },
   // Properties
   p: {
@@ -1988,3 +2042,35 @@ editorLocalization.locales["cs"] = czStrings;
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Zástupný text pro oblast hodnocení"
 // pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "Automatické vyplnění dotazníku"
 // pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Vyberte, zda chcete, aby se průzkum vyplnil automaticky poté, co respondent odpoví na všechny otázky."
+// masksettings.saveMaskedValue: "Save masked value in survey results" => "Uložit maskovanou hodnotu ve výsledcích průzkumu"
+// patternmask.pattern: "Value pattern" => "Vzor hodnoty"
+// datetimemask.min: "Minimum value" => "Minimální hodnota"
+// datetimemask.max: "Maximum value" => "Maximální hodnota"
+// numericmask.allowNegativeValues: "Allow negative values" => "Povolit záporné hodnoty"
+// numericmask.thousandsSeparator: "Thousands separator" => "Oddělovač tisíců"
+// numericmask.decimalSeparator: "Decimal separator" => "Oddělovač desetinných míst"
+// numericmask.precision: "Value precision" => "Přesnost hodnoty"
+// numericmask.min: "Minimum value" => "Minimální hodnota"
+// numericmask.max: "Maximum value" => "Maximální hodnota"
+// currencymask.prefix: "Currency prefix" => "Předpona měny"
+// currencymask.suffix: "Currency suffix" => "Přípona měny"
+// pe.maskType: "Input mask type" => "Typ vstupní masky"
+// maskTypes.patternmask: "Pattern" => "Vzor"
+// maskTypes.numericmask: "Numeric" => "Číselný"
+// maskTypes.datetimemask: "Date and Time" => "Datum a čas"
+// maskTypes.currencymask: "Currency" => "Měna"
+// tabs.mask: "Input Mask Settings" => "Nastavení vstupní masky"
+// pe.pattern_placeholder: "Ex.: +1(999)-999-99-99" => "Př.: +1(999)-999-99-99"
+// pe.datetimepattern_placeholder: "Ex.: mm/dd/yyyy" => "Př.: dd/mm/rrrr"
+// pe.currencyprefix_placeholder: "Ex.: $" => "Př.: $"
+// pe.currencysuffix_placeholder: "Ex.: USD" => "Př.: USD"
+// pv.textWrapEnabled: "Wrap choices" => "Možnosti obtékání"
+// question.textWrapEnabled: "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip." => "Dlouhé texty v možnostech volby automaticky vygenerují zalomení řádků, aby se vešly do rozbalovací nabídky. Odznačte, pokud chcete, aby se texty ořízly."
+// masksettings.saveMaskedValue: "Select if you want to store the question value with an applied mask in survey results." => "Vyberte, zda chcete uložit hodnotu otázky s použitou maskou do výsledků průzkumu."
+// patternmask.pattern: "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character." => "Vzor může obsahovat řetězcové literály a následující zástupné symboly: \"9\" - pro číslici; \"a\" - pro velké nebo malé písmeno; '#' - pro číslici nebo velké či malé písmeno. Pomocí zpětného lomítka \\ můžete znak uvozovat."
+// datetimemask.pattern: "The pattern can contain separator characters and the following placeholders: `m` - for month number; `mm` - for month number, with leading zero for single-digit values; `d` - for day of the month; `dd` - for day of the month, with leading zero for single-digit values; `yy` - for the last two digits of the year; `yyyy` - for a four-digit year." => "Vzor může obsahovat oddělovací znaky a následující zástupné symboly: 'm' - pro číslo měsíce; 'mm' - pro číslo měsíce, s úvodní nulou pro jednociferné hodnoty; \"d\" - pro den v měsíci; 'dd' - pro den v měsíci, s úvodní nulou pro jednociferné hodnoty; \"yy\" – pro poslední dvě číslice roku; \"rrrr\" – pro čtyřmístný rok."
+// numericmask.decimalSeparator: "A symbol used to separate the fractional part from the integer part of a displayed number." => "Symbol používaný k oddělení zlomkové části od celočíselné části zobrazeného čísla."
+// numericmask.thousandsSeparator: "A symbol used to separate the digits of a large number into groups of three." => "Symbol používaný k oddělení číslic velkého čísla do skupin po třech."
+// numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Omezuje, kolik číslic se má zachovat za desetinnou čárkou zobrazeného čísla."
+// currencymask.prefix: "One or several symbols to be displayed before the value." => "Jeden nebo více symbolů, které mají být zobrazeny před hodnotou."
+// currencymask.suffix: "One or several symbols to be displayed after the value." => "Jeden nebo více symbolů, které se zobrazí za hodnotou."

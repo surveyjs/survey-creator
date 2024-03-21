@@ -54,9 +54,11 @@ test("Check file editor with onDownloadfile and onUploadFile callbacks", () => {
   question.loadFiles(<any>[{ name: "secondValue" }]);
   expect(question.value).toBe("secondValueBase64");
   expect(clearCallbackLog).toBe("->firstValue");
-  question.onInputBlur(<any>{ target: {
-    value: "url_from_input"
-  } });
+  question.onInputBlur(<any>{
+    target: {
+      value: "url_from_input"
+    }
+  });
   expect(question.value).toBe("url_from_input");
   expect(clearCallbackLog).toBe("->firstValue->secondValue");
   expect(question["loadedFilesValue"]).toBe(undefined);
@@ -64,13 +66,17 @@ test("Check file editor with onDownloadfile and onUploadFile callbacks", () => {
 
 test("Check file editor event callbacks", () => {
   const question: QuestionFileEditorModel = new QuestionFileEditorModel("q1");
-  question.onInputChange(<any>{ target: {
-    value: "first_base64"
-  } });
+  question.onInputChange(<any>{
+    target: {
+      value: "first_base64"
+    }
+  });
   expect(question.value).toBe("first_base64");
-  question.onInputBlur(<any>{ target: {
-    value: "second_url"
-  } });
+  question.onInputBlur(<any>{
+    target: {
+      value: "second_url"
+    }
+  });
   expect(question.value).toBe("second_url");
 });
 
@@ -103,8 +109,10 @@ test("Check PropertyGridLinkFileEditor acceptedTypes", () => {
 test("Check PropertyGridLinkFileEditor creator's onUploadFiles event", () => {
   const creator = new SurveyCreatorModel({ enableLinkFileEditor: true });
   let uploadCount = 0;
+  let lastUploadOptions;
   const question = new QuestionImageModel("q1");
   creator.onUploadFile.add((s, o) => {
+    lastUploadOptions = o;
     uploadCount++;
     o.callback("success", "test_url");
     expect(o.question.name).toBe("q1");
@@ -114,13 +122,19 @@ test("Check PropertyGridLinkFileEditor creator's onUploadFiles event", () => {
   questionEditor.loadFiles(<any>[{ type: "image", name: "test_name" }]);
   expect(uploadCount).toBe(1);
   expect(questionEditor.value).toBe("test_url");
+  expect(lastUploadOptions.question).toEqual(question);
+  expect(lastUploadOptions.element).toEqual(question);
+  expect(lastUploadOptions.elementType).toEqual("image");
+  expect(lastUploadOptions.propertyName).toEqual("imageLink");
 });
 
 test("Check PropertyGridLinkFileEditor creator's onUploadFiles event with signature pad", () => {
   const creator = new SurveyCreatorModel({ enableLinkFileEditor: true });
   let uploadCount = 0;
+  let lastUploadOptions;
   const question = new QuestionSignaturePadModel("q1");
   creator.onUploadFile.add((s, o) => {
+    lastUploadOptions = o;
     uploadCount++;
     o.callback("success", "test_url");
     expect(o.question.name).toBe("q1");
@@ -130,14 +144,20 @@ test("Check PropertyGridLinkFileEditor creator's onUploadFiles event with signat
   questionEditor.loadFiles(<any>[{ type: "image", name: "test_name" }]);
   expect(uploadCount).toBe(1);
   expect(questionEditor.value).toBe("test_url");
+  expect(lastUploadOptions.question).toEqual(question);
+  expect(lastUploadOptions.element).toEqual(question);
+  expect(lastUploadOptions.elementType).toEqual("signaturepad");
+  expect(lastUploadOptions.propertyName).toEqual("backgroundImage");
 });
 
 test("Check PropertyGridLinkFileEditor creator's onUploadFiles event with image item value", () => {
   const creator = new SurveyCreatorModel({ enableLinkFileEditor: true });
   let uploadCount = 0;
+  let lastUploadOptions;
   const question = new QuestionImagePickerModel("q1");
   question.choices = [{ value: "lion" }];
   creator.onUploadFile.add((s, o) => {
+    lastUploadOptions = o;
     uploadCount++;
     o.callback("success", "test_url");
     expect(o.question.name).toBe("q1");
@@ -147,22 +167,30 @@ test("Check PropertyGridLinkFileEditor creator's onUploadFiles event with image 
   questionEditor.loadFiles(<any>[{ type: "image", name: "test_name" }]);
   expect(uploadCount).toBe(1);
   expect(questionEditor.value).toBe("test_url");
+  expect(lastUploadOptions.question).toEqual(question);
+  expect(lastUploadOptions.element).toEqual(question.choices[0]);
+  expect(lastUploadOptions.elementType).toEqual("imageitemvalue");
+  expect(lastUploadOptions.propertyName).toEqual("imageLink");
 });
 
 test("Check PropertyGridLinkFileEditor creator's onUploadFiles event with logo image", () => {
   const creator = new SurveyCreatorModel({ enableLinkFileEditor: true });
-  const survey = new SurveyModel();
   let uploadCount = 0;
+  let lastUploadOptions;
   creator.onUploadFile.add((s, o) => {
+    lastUploadOptions = o;
     uploadCount++;
     o.callback("success", "test_url");
     expect(o.question).toBe(undefined);
   });
-  const propertyGrid = new PropertyGridModelTester(survey, creator);
+  const propertyGrid = new PropertyGridModelTester(creator.survey, creator);
   const questionEditor = <QuestionFileEditorModel>propertyGrid.survey.getQuestionByName("logo");
   questionEditor.loadFiles(<any>[{ type: "image", name: "test_name" }]);
   expect(uploadCount).toBe(1);
   expect(questionEditor.value).toBe("test_url");
+  expect(lastUploadOptions.element).toEqual(creator.survey);
+  expect(lastUploadOptions.elementType).toEqual("survey");
+  expect(lastUploadOptions.propertyName).toEqual("logo");
 });
 
 test("Check PropertyGridLinkFileEditor acceptedTypes", () => {
@@ -217,7 +245,7 @@ test("Check file editor placeholder and renderedValue", () => {
   expect(question.renderedValue).toBe("");
 });
 
-test("Check onOpenFileChooser called", () => {
+test("Check onOpenFileChooser called and onUploadFile context exists", () => {
   const creator = new CreatorTester();
   creator.JSON = {
     elements: [{ type: "image", name: "q1" }]
@@ -228,19 +256,29 @@ test("Check onOpenFileChooser called", () => {
   questionEditor["rootElement"] = <any>{ querySelectorAll: () => [{}] };
   let uploadCount = 0;
   let log = "";
+  let lastContext: any;
+  let lastUploadOptions;
   creator.onOpenFileChooser.add((s, o) => {
     log += "->openedFileChooser";
+    lastContext = (o as any).context;
     o.callback([{}]);
   });
   creator.onUploadFile.add((s, o) => {
     log += "->uploadFile";
+    lastUploadOptions = o;
     uploadCount++;
     o.callback("success", "url");
   });
   expect(uploadCount).toBe(0);
   expect(log).toBe("");
-  questionEditor.chooseFiles(<any>{ preventDefault: () => {}, stopPropagation: () => {} });
+  questionEditor.chooseFiles(<any>{ preventDefault: () => { }, stopPropagation: () => { } });
   expect(uploadCount).toBe(1);
   expect(log).toBe("->openedFileChooser->uploadFile");
   expect(questionEditor.value).toBe("url");
+  expect(lastContext.element).toEqual(question);
+  expect(lastContext.elementType).toEqual("image");
+  expect(lastContext.propertyName).toEqual("imageLink");
+  expect(lastUploadOptions.element).toEqual(question);
+  expect(lastUploadOptions.elementType).toEqual("image");
+  expect(lastUploadOptions.propertyName).toEqual("imageLink");
 });

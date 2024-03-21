@@ -369,6 +369,28 @@ export var bgStrings = {
       name: "Име",
       title: "Заглавие"
     },
+    masksettings: {
+      saveMaskedValue: "Запазване на маскирана стойност в резултатите от проучването"
+    },
+    patternmask: {
+      pattern: "Шаблон на стойност"
+    },
+    datetimemask: {
+      min: "Минимална стойност",
+      max: "Максимална стойност"
+    },
+    numericmask: {
+      allowNegativeValues: "Позволяване на отрицателни стойности",
+      thousandsSeparator: "Разделител за хиляди",
+      decimalSeparator: "Десетичен разделител",
+      precision: "Точност на стойността",
+      min: "Минимална стойност",
+      max: "Максимална стойност"
+    },
+    currencymask: {
+      prefix: "Валутен префикс",
+      suffix: "Валутен суфикс"
+    },
     imageHeight: "Височина на изображението",
     imageWidth: "Широчина на изображението",
     valueName: "Съхранявай отговорите в следното JSON поле.",
@@ -609,6 +631,13 @@ export var bgStrings = {
     autoGrowComment: "Автоматично разширяване на областта за коментари, ако е необходимо",
     allowResizeComment: "Позволява на потребителите да преоразмеряват текстови области",
     textUpdateMode: "Актуализиране стойността на текстовия въпрос",
+    maskType: "Тип маска за въвеждане",
+    maskTypes: {
+      patternmask: "Шарка",
+      numericmask: "Цифров",
+      datetimemask: "Дата и час",
+      currencymask: "Валута"
+    },
     focusOnFirstError: "Фокусиране върху първия невалиден отговор",
     checkErrorsMode: "Стартиране на валидацията",
     navigateToUrl: "Навигирай до URL",
@@ -733,6 +762,7 @@ export var bgStrings = {
       templateTitle: "Шаблон за заглавие",
       totals: "Общо",
       logic: "Логика",
+      mask: "Настройки на маската за въвеждане",
       layout: {
         panel: "Оформление",
         question: "Оформление",
@@ -796,7 +826,11 @@ export var bgStrings = {
     questionStartIndex_placeholder: "Напр.: а)",
     width_placeholder: "Пример: 6in",
     minWidth_placeholder: "Примерно: 600px",
-    maxWidth_placeholder: "Примерно: 50%"
+    maxWidth_placeholder: "Примерно: 50%",
+    pattern_placeholder: "Пример: +1(999)-999-99-99",
+    datetimepattern_placeholder: "Пример: мм/дд/гггг",
+    currencyprefix_placeholder: "Пример: $",
+    currencysuffix_placeholder: "Пример: USD"
   },
   // Property values
   pv: {
@@ -1011,7 +1045,8 @@ export var bgStrings = {
     searchMode: {
       contains: "Съдържа",
       startsWith: "Започва с"
-    }
+    },
+    textWrapEnabled: "Опции за обтичане"
   },
   // Operators
   op: {
@@ -1137,7 +1172,8 @@ export var bgStrings = {
       },
       textUpdateMode: "Изберете от: \"На загубен фокус\" - стойността се актуализира, когато входното поле загуби фокус; \"Докато пишете\" - стойността се актуализира в реално време, докато потребителите пишат. Опцията \"Наследяване\" прилага настройката на ниво проучване (\"На загубен фокус\" по подразбиране).",
       url: "Можете да използвате всяка уеб услуга като източник на данни за въпроси с множествен избор. За да попълните стойности за избор, въведете URL адреса на услугата, предоставяща данните.",
-      searchMode: "Операция за сравнение, използвана за филтриране на падащия списък."
+      searchMode: "Операция за сравнение, използвана за филтриране на падащия списък.",
+      textWrapEnabled: "Дългите текстове в опциите за избор автоматично ще генерират нови редове, за да се поберат в падащото меню. Премахнете отметката, ако искате текстовете да бъдат изрязани."
     },
     signaturepad: {
       signatureWidth: "Задава ширината на показаната област за подпис и полученото изображение.",
@@ -1278,7 +1314,25 @@ export var bgStrings = {
     autocomplete: "Направи справка с [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) за повече информация.",
     filePlaceholder: "Прилага се, когато \"Тип източник\" е \"Локални файлове\" или когато камерата не е налична",
     photoPlaceholder: "Прилага се, когато \"Тип източник\" е \"Камера\".",
-    fileOrPhotoPlaceholder: "Прилага се, когато \"Тип източник\" е \"Локални файлове или камера\"."
+    fileOrPhotoPlaceholder: "Прилага се, когато \"Тип източник\" е \"Локални файлове или камера\".",
+    masksettings: {
+      saveMaskedValue: "Изберете дали искате да съхраните стойността на въпроса с приложена маска в резултатите от проучването."
+    },
+    patternmask: {
+      pattern: "Шаблонът може да съдържа низови литерали и следните контейнери: '9' - за цифра; \"а\" - за главна или малка буква; \"#\" - за цифра или главна или малка буква. Използвайте обратно наклонена черта \"\\\", за да избягате от знак."
+    },
+    datetimemask: {
+      pattern: "Шаблонът може да съдържа разделителни знаци и следните контейнери: 'm' - за номер на месец; \"mm\" - за номер на месец, с водеща нула за едноцифрени стойности; \"d\" - за ден от месеца; \"dd\" - за ден от месеца, с водеща нула за едноцифрени стойности; \"yy\" - за последните две цифри на годината; 'гггг' - за четирицифрена година."
+    },
+    numericmask: {
+      decimalSeparator: "Символ, използван за отделяне на дробната част от целочислената част на показваното число.",
+      thousandsSeparator: "Символ, използван за разделяне на цифрите на голямо число в групи от по три.",
+      precision: "Ограничава колко цифри да се запазят след десетичната запетая за показваното число."
+    },
+    currencymask: {
+      prefix: "Един или няколко символа, които трябва да бъдат показани преди стойността.",
+      suffix: "Един или няколко символа, които трябва да се покажат след стойността."
+    }
   },
   // Properties
   p: {
@@ -1985,3 +2039,35 @@ editorLocalization.locales["bg"] = bgStrings;
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Текст в контейнер за областта за класиране"
 // pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "Попълване на анкетата автоматично"
 // pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Изберете дали искате проучването да завърши автоматично, след като респондентът отговори на всички въпроси."
+// masksettings.saveMaskedValue: "Save masked value in survey results" => "Запазване на маскирана стойност в резултатите от проучването"
+// patternmask.pattern: "Value pattern" => "Шаблон на стойност"
+// datetimemask.min: "Minimum value" => "Минимална стойност"
+// datetimemask.max: "Maximum value" => "Максимална стойност"
+// numericmask.allowNegativeValues: "Allow negative values" => "Позволяване на отрицателни стойности"
+// numericmask.thousandsSeparator: "Thousands separator" => "Разделител за хиляди"
+// numericmask.decimalSeparator: "Decimal separator" => "Десетичен разделител"
+// numericmask.precision: "Value precision" => "Точност на стойността"
+// numericmask.min: "Minimum value" => "Минимална стойност"
+// numericmask.max: "Maximum value" => "Максимална стойност"
+// currencymask.prefix: "Currency prefix" => "Валутен префикс"
+// currencymask.suffix: "Currency suffix" => "Валутен суфикс"
+// pe.maskType: "Input mask type" => "Тип маска за въвеждане"
+// maskTypes.patternmask: "Pattern" => "Шарка"
+// maskTypes.numericmask: "Numeric" => "Цифров"
+// maskTypes.datetimemask: "Date and Time" => "Дата и час"
+// maskTypes.currencymask: "Currency" => "Валута"
+// tabs.mask: "Input Mask Settings" => "Настройки на маската за въвеждане"
+// pe.pattern_placeholder: "Ex.: +1(999)-999-99-99" => "Пример: +1(999)-999-99-99"
+// pe.datetimepattern_placeholder: "Ex.: mm/dd/yyyy" => "Пример: мм/дд/гггг"
+// pe.currencyprefix_placeholder: "Ex.: $" => "Пример: $"
+// pe.currencysuffix_placeholder: "Ex.: USD" => "Пример: USD"
+// pv.textWrapEnabled: "Wrap choices" => "Опции за обтичане"
+// question.textWrapEnabled: "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip." => "Дългите текстове в опциите за избор автоматично ще генерират нови редове, за да се поберат в падащото меню. Премахнете отметката, ако искате текстовете да бъдат изрязани."
+// masksettings.saveMaskedValue: "Select if you want to store the question value with an applied mask in survey results." => "Изберете дали искате да съхраните стойността на въпроса с приложена маска в резултатите от проучването."
+// patternmask.pattern: "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character." => "Шаблонът може да съдържа низови литерали и следните контейнери: '9' - за цифра; \"а\" - за главна или малка буква; \"#\" - за цифра или главна или малка буква. Използвайте обратно наклонена черта \"\\\", за да избягате от знак."
+// datetimemask.pattern: "The pattern can contain separator characters and the following placeholders: `m` - for month number; `mm` - for month number, with leading zero for single-digit values; `d` - for day of the month; `dd` - for day of the month, with leading zero for single-digit values; `yy` - for the last two digits of the year; `yyyy` - for a four-digit year." => "Шаблонът може да съдържа разделителни знаци и следните контейнери: 'm' - за номер на месец; \"mm\" - за номер на месец, с водеща нула за едноцифрени стойности; \"d\" - за ден от месеца; \"dd\" - за ден от месеца, с водеща нула за едноцифрени стойности; \"yy\" - за последните две цифри на годината; 'гггг' - за четирицифрена година."
+// numericmask.decimalSeparator: "A symbol used to separate the fractional part from the integer part of a displayed number." => "Символ, използван за отделяне на дробната част от целочислената част на показваното число."
+// numericmask.thousandsSeparator: "A symbol used to separate the digits of a large number into groups of three." => "Символ, използван за разделяне на цифрите на голямо число в групи от по три."
+// numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Ограничава колко цифри да се запазят след десетичната запетая за показваното число."
+// currencymask.prefix: "One or several symbols to be displayed before the value." => "Един или няколко символа, които трябва да бъдат показани преди стойността."
+// currencymask.suffix: "One or several symbols to be displayed after the value." => "Един или няколко символа, които трябва да се покажат след стойността."

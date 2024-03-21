@@ -32,6 +32,7 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
 
   chooseFile(model: ImageItemValueWrapperViewModel) {
     const fileInput = <HTMLInputElement>model.itemsRoot.getElementsByClassName("svc-choose-file-input")[0];
+    const context = { element: model.question, item: model.item, elementType: model.question.getType(), propertyName: "imageLink" };
     model.creator.chooseFiles(fileInput, (files: File[]) => {
       model.isUploading = true;
       model.creator.uploadFiles(files, model.question, (status, link) => {
@@ -39,12 +40,13 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
           model.item.imageLink = link;
         }
         model.isUploading = false;
-      });
-    }, { element: model.question, item: model.item });
+      }, context);
+    }, context);
   }
 
   public uploadFiles(files) {
     this.isUploading = true;
+    const context = { element: this.question, item: undefined, elementType: this.question.getType(), propertyName: "imageLink" };
     this.creator.uploadFiles(files, this.question, (status, link) => {
       if (status === "success") {
         this.creator.createNewItemValue(this.question, this.isChoosingNewFile, (res: ItemValue): void => {
@@ -53,7 +55,7 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
       }
       this.isChoosingNewFile = false;
       this.isUploading = false;
-    });
+    }, context);
   }
 
   chooseNewFile(model: ImageItemValueWrapperViewModel) {
@@ -61,7 +63,7 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
     model.creator.chooseFiles(fileInput, (files: File[]) => {
       this.isChoosingNewFile = true;
       model.uploadFiles(files);
-    }, { element: model.question, item: model.item });
+    }, { element: model.question, item: model.item, elementType: model.question.getType(), propertyName: "imageLink" });
   }
   onDragOver = (event: any) => {
     this.isFileDragging = true;
@@ -86,59 +88,3 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
     return getAcceptedTypesByContentMode(this.question.contentMode);
   }
 }
-
-// chooseFiles() {
-//   editor.chooseFiles(fileInput, (files: File[]) => {
-//     var itemText = Survey.surveyLocalization.getString("choices_Item");
-//     var nextValue = getNextValue(
-//       itemText,
-//       (model.choices || []).map(c => c.value)
-//     );
-//     var itemValue = new (<any>Survey)["ItemValue"](
-//       nextValue,
-//       undefined,
-//       "imageitemvalue"
-//     );
-//     itemValue.locOwner = <any>{
-//       getLocale: () => {
-//         if (!!model["getLocale"]) return model.getLocale();
-//         return "";
-//       },
-//       getMarkdownHtml: (text: string) => {
-//         return text;
-//       },
-//       getProcessedText: (text: string) => {
-//         return text;
-//       }
-//     };
-//     model.choices = model.choices.concat([itemValue]);
-//     itemValue = model.choices[model.choices.length - 1];
-//     editor.onQuestionEditorChanged(model);
-//     editor.onItemValueAddedCallback(
-//       model,
-//       "choices",
-//       itemValue,
-//       model.choices
-//     );
-
-//     var property = Survey.Serializer.findProperty(
-//       "imageitemvalue",
-//       "imageLink"
-//     );
-//     editor.uploadFiles(files, (_, link) => {
-//       var options = {
-//         propertyName: property.name,
-//         obj: itemValue,
-//         value: link,
-//         newValue: null,
-//         doValidation: false
-//       };
-//       editor.onValueChangingCallback(options);
-//       link = options.newValue === null ? options.value : options.newValue;
-//       itemValue["imageLink"] = link;
-//       editor.onPropertyValueChanged(property, itemValue, link);
-//       editor.onQuestionEditorChanged(model);
-//     });
-//   });
-// });
-// }

@@ -600,6 +600,46 @@ test("QuestionRatingAdornerViewModel button styles", () => {
   expect(ratingAdorner.removeClassNames).toBe("svc-item-value-controls__button svc-item-value-controls__remove");
 });
 
+test("QuestionRatingAdornerViewModel controlsClassNames", () => {
+  const creator = new CreatorTester();
+  creator.maximumRateValues = 4;
+  creator.JSON = {
+    elements: [{ type: "rating", name: "q1", rateMax: 3 }]
+  };
+  const question = <QuestionRatingModel>creator.survey.getAllQuestions()[0];
+
+  const ratingAdorner = new QuestionRatingAdornerViewModel(
+    creator,
+    question,
+    <any>{}
+  );
+  expect(ratingAdorner.hasTopLabel).toBe(false);
+  expect(ratingAdorner.controlsClassNames).toBe("svc-rating-question-controls svc-item-value-controls");
+  question.minRateDescription = "min";
+  question.rateDescriptionLocation = "leftRight";
+  expect(ratingAdorner.hasTopLabel).toBe(false);
+  expect(ratingAdorner.controlsClassNames).toBe("svc-rating-question-controls svc-item-value-controls");
+
+  question.minRateDescription = "min";
+  question.rateDescriptionLocation = "top";
+  expect(ratingAdorner.hasTopLabel).toBe(true);
+  expect(ratingAdorner.controlsClassNames).toBe("svc-rating-question-controls svc-item-value-controls svc-rating-question-controls--labels-top");
+
+  question.minRateDescription = "min";
+  question.rateDescriptionLocation = "topBottom";
+  expect(ratingAdorner.hasTopLabel).toBe(true);
+  expect(ratingAdorner.controlsClassNames).toBe("svc-rating-question-controls svc-item-value-controls svc-rating-question-controls--labels-top");
+
+  question.minRateDescription = "";
+  question.rateDescriptionLocation = "top";
+  expect(ratingAdorner.hasTopLabel).toBe(false);
+  expect(ratingAdorner.controlsClassNames).toBe("svc-rating-question-controls svc-item-value-controls");
+
+  question.minRateDescription = "";
+  question.rateDescriptionLocation = "topBottom";
+  expect(ratingAdorner.hasTopLabel).toBe(false);
+  expect(ratingAdorner.controlsClassNames).toBe("svc-rating-question-controls svc-item-value-controls");
+});
 test("QuestionRatingAdornerViewModel respect maximumRateValues with rate values", () => {
   const creator = new CreatorTester();
   creator.maximumRateValues = 4;
@@ -987,8 +1027,10 @@ test("QuestionImageAdornerViewModel onOpenFileChooser event is raised", () => {
     elements: [{ type: "image", name: "q1" }]
   };
   let log = "";
+  let lastContext: any;
   creator.onOpenFileChooser.add((s, o) => {
     log += "->onOpenFileChooser";
+    lastContext = o.context;
     o.callback([]);
   });
   const question = <QuestionImageModel>creator.survey.getAllQuestions()[0];
@@ -997,6 +1039,9 @@ test("QuestionImageAdornerViewModel onOpenFileChooser event is raised", () => {
   const fileQuestionAdornerSurvey = imageAdorner.filePresentationModel.getSurvey();
 
   expect(log).toBe("");
-  fileQuestionAdornerSurvey.chooseFiles(document.createElement("input"), () => { });
+  fileQuestionAdornerSurvey.chooseFiles(document.createElement("input"), () => { }, { element: question, elementType: question.getType(), propertyName: "imageLink" });
   expect(log).toBe("->onOpenFileChooser");
+  expect(lastContext.element).toEqual(question);
+  expect(lastContext.elementType).toEqual("image");
+  expect(lastContext.propertyName).toEqual("imageLink");
 });
