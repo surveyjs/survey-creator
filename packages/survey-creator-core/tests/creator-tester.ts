@@ -9,11 +9,11 @@ const dummyQuestion = new QuestionLinkValueModel("q1");
 
 export class CreatorTester extends SurveyCreatorModel {
   constructor(options: ICreatorOptions = {}, options2?: ICreatorOptions, setOldDefaultNewSurveyJSON = true) {
-    super(options, options2);
-    this.autoSaveDelay = 0;
     if (setOldDefaultNewSurveyJSON) {
       creatorSetting.defaultNewSurveyJSON = { pages: [{ name: "page1" }] };
     }
+    super(options, options2);
+    this.autoSaveDelay = 0;
     this.onSurveyInstanceCreated.add((creator, options) => {
       options.survey.getRendererForString = (element: Base, name: string): any => {
         if (!this.readOnly && isStringEditable(element, name)) {

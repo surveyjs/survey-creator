@@ -1,9 +1,12 @@
 import { QuestionMatrixDynamicModel, Base, QuestionTextModel } from "survey-core";
 import { PropertyGridModelTester } from "./property-grid.base";
 import { CreatorTester } from "../creator-tester";
+import { settings } from "../../src/creator-settings";
 
 test("creator.onElementDeleting", () => {
-  const creator = new CreatorTester();
+  const savedNewJSON = settings.defaultNewSurveyJSON;
+  settings.defaultNewSurveyJSON = {};
+  const creator = new CreatorTester(undefined, undefined, false);
   creator.onElementDeleting.add((sender, options) => {
     if (options.element.isPage) {
       options.allowing = creator.survey.pages.indexOf(options.element) > 1;
@@ -24,6 +27,7 @@ test("creator.onElementDeleting", () => {
   expect(survey.pages).toHaveLength(3);
   pagesQuestion.removeRowUI(rows[2]);
   expect(survey.pages).toHaveLength(2);
+  settings.defaultNewSurveyJSON = savedNewJSON;
 });
 
 test("Test event prevent default on typing text update mode, fix undo/redo #4889", () => {
