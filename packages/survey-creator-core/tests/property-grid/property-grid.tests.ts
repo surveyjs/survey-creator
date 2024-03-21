@@ -3163,7 +3163,9 @@ test("category, parent property", () => {
 });
 
 test("check pages editor respects onPageAdding", () => {
-  const creator = new CreatorTester();
+  const savedNewJSON = settings.defaultNewSurveyJSON;
+  settings.defaultNewSurveyJSON = {};
+  const creator = new CreatorTester(undefined, undefined, false);
   let allowAdd = true;
   creator.onPageAdding.add((s, o) => {
     o.allow = allowAdd;
@@ -3183,6 +3185,7 @@ test("check pages editor respects onPageAdding", () => {
   allowAdd = false;
   addNewPageAction.action!();
   expect(creator.survey.pages.length).toBe(1);
+  settings.defaultNewSurveyJSON = savedNewJSON;
 });
 test("Set property name into correct category", () => {
   Serializer.addProperty("question", {
