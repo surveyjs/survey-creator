@@ -7,7 +7,6 @@ import { TabJsonEditorTextareaPlugin } from "../src/components/tabs/json-editor-
 import { TabTestPlugin } from "../src/components/tabs/test-plugin";
 
 surveySettings.supportCreatorV2 = true;
-creatorSetting.defaultNewSurveyJSON = {};
 
 const multipageJSON = {
   pages: [
@@ -44,6 +43,8 @@ const multipageJSON = {
 };
 
 test("the creator can be empty", () => {
+  const savedNewJSON = creatorSetting.defaultNewSurveyJSON;
+  creatorSetting.defaultNewSurveyJSON = {};
   const creator = new CreatorTester(undefined, undefined, false);
   creator.JSON = multipageJSON;
   creator.text = undefined;
@@ -52,18 +53,24 @@ test("the creator can be empty", () => {
   const designerPlugin = <TabDesignerPlugin>(creator.getPlugin("designer"));
   expect(designerPlugin.model.newPage).toBeTruthy();
   expect(designerPlugin.model.showNewPage).toBeTruthy();
+  creatorSetting.defaultNewSurveyJSON = savedNewJSON;
 });
 
 test("Create new page, set empty JSON", (): any => {
+  const savedNewJSON = creatorSetting.defaultNewSurveyJSON;
+  creatorSetting.defaultNewSurveyJSON = {};
   const creator = new CreatorTester(undefined, undefined, false);
   expect(creator.viewType).toEqual("designer");
   const designerPlugin = <TabDesignerPlugin>(creator.getPlugin("designer"));
   expect(creator.survey.pages).toHaveLength(0);
   expect(designerPlugin.model.newPage).toBeTruthy();
   expect(designerPlugin.model.showNewPage).toBeTruthy();
+  creatorSetting.defaultNewSurveyJSON = savedNewJSON;
 });
 
 test("Create new page, recreate designer survey via JSON", (): any => {
+  const savedNewJSON = creatorSetting.defaultNewSurveyJSON;
+  creatorSetting.defaultNewSurveyJSON = {};
   const creator = new CreatorTester(undefined, undefined, false);
   creator.JSON = { elements: [{ type: "text", name: "question1" }] };
   creator.showTestSurvey();
@@ -72,9 +79,12 @@ test("Create new page, recreate designer survey via JSON", (): any => {
   creator.showDesigner();
   expect(creator.survey.pages).toHaveLength(0);
   expect(designerPlugin.model.newPage).toBeTruthy();
+  creatorSetting.defaultNewSurveyJSON = savedNewJSON;
 });
 
 test("pageEditMode='single'", (): any => {
+  const savedNewJSON = creatorSetting.defaultNewSurveyJSON;
+  creatorSetting.defaultNewSurveyJSON = {};
   let creator = new CreatorTester(undefined, undefined, false);
   let designerPlugin = <TabDesignerPlugin>(creator.getPlugin("designer"));
   expect(creator.pageEditMode).toEqual("standard");
@@ -85,14 +95,16 @@ test("pageEditMode='single'", (): any => {
   designerPlugin = <TabDesignerPlugin>(creator.getPlugin("designer"));
   expect(designerPlugin.model.showNewPage).toBeTruthy();
   expect(designerPlugin.model.newPage).toBeTruthy();
+  creatorSetting.defaultNewSurveyJSON = savedNewJSON;
 });
 test("Create new ghost on adding a question", (): any => {
+  const savedNewJSON = creatorSetting.defaultNewSurveyJSON;
+  creatorSetting.defaultNewSurveyJSON = {};
   surveySettings.supportCreatorV2 = true;
-  const creator = new CreatorTester();
+  const creator = new CreatorTester(undefined, undefined, false);
   const undoredo = creator.getPlugin("undoredo");
   expect(undoredo.model).toBeTruthy();
   expect((<UndoRedoController>undoredo.model).undoRedoManager).toBeTruthy();
-  creatorSetting.defaultNewSurveyJSON = {};
   creator.JSON = {};
   expect(creator.survey.pages).toHaveLength(0);
   creator.clickToolboxItem({ type: "text" });
@@ -111,8 +123,11 @@ test("Create new ghost on adding a question", (): any => {
   creator.clickToolboxItem({ type: "text" });
   expect(creator.survey.pages).toHaveLength(1);
   expect(designerPlugin.model.newPage).toBeTruthy();
+  creatorSetting.defaultNewSurveyJSON = savedNewJSON;
 });
 test("setting empty JSON into creator do not update undo/redo survey and onModified stopped working", (): any => {
+  const savedNewJSON = creatorSetting.defaultNewSurveyJSON;
+  creatorSetting.defaultNewSurveyJSON = {};
   settings.defaultNewSurveyJSON = {};
   const creator = new CreatorTester();
   let counter = 0;
@@ -128,9 +143,12 @@ test("setting empty JSON into creator do not update undo/redo survey and onModif
   creator.JSON = {};
   creator.survey.title = "title2";
   expect(counter).toEqual(2);
+  creatorSetting.defaultNewSurveyJSON = savedNewJSON;
 });
 
 test("Change clearInvisibleValues  default value, bug#4229", (): any => {
+  const savedNewJSON = creatorSetting.defaultNewSurveyJSON;
+  creatorSetting.defaultNewSurveyJSON = {};
   const prop = Serializer.findProperty("survey", "clearInvisibleValues");
   const oldDefaultValue = prop.defaultValue;
   prop.defaultValue = "onHidden";
@@ -146,8 +164,11 @@ test("Change clearInvisibleValues  default value, bug#4229", (): any => {
   prop.defaultValue = oldDefaultValue;
   const survey2 = creator.createSurvey({ clearInvisibleValues: "onHidden" }, "dummy");
   expect(survey2.clearInvisibleValues).toBe("onHidden");
+  creatorSetting.defaultNewSurveyJSON = savedNewJSON;
 });
 test("Undo deleting a question that has been just added, bug#4479", (): any => {
+  const savedNewJSON = creatorSetting.defaultNewSurveyJSON;
+  creatorSetting.defaultNewSurveyJSON = {};
   const creator = new CreatorTester();
   creator.JSON = {};
   creator.clickToolboxItem({ type: "text" });
@@ -160,8 +181,11 @@ test("Undo deleting a question that has been just added, bug#4479", (): any => {
   page = creator.survey.pages[0];
   expect(page.questions).toHaveLength(1);
   expect(page.questions[0].name).toBe("question1");
+  creatorSetting.defaultNewSurveyJSON = savedNewJSON;
 });
 test("Create last question, delete page and select survey in property grid", (): any => {
+  const savedNewJSON = creatorSetting.defaultNewSurveyJSON;
+  creatorSetting.defaultNewSurveyJSON = {};
   const creator = new CreatorTester();
   creator.JSON = {};
   creator.clickToolboxItem({ type: "text" });
@@ -172,4 +196,5 @@ test("Create last question, delete page and select survey in property grid", ():
   expect(creator.survey.pages).toHaveLength(0);
   expect(creator.selectedElement.getType()).toBe("survey");
   expect(creator.propertyGrid.editingObj.getType()).toBe("survey");
+  creatorSetting.defaultNewSurveyJSON = savedNewJSON;
 });
