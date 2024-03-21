@@ -162,6 +162,11 @@ svc-question {
   .sv-action--convertTo-last {
     margin-inline-end: auto; // margin-right
   }
+  
+  .svc-action-bar-item--right:first-of-type
+  {
+   margin-inline-start: auto;
+  }
 
   .sv-dots {
     width: calcSize(4);
