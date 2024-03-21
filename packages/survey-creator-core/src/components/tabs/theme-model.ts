@@ -1,15 +1,68 @@
-import { Base, ItemValue, JsonObjectProperty, Question, Serializer, property } from "survey-core";
+import { Base, ITheme, ImageAttachment, ImageFit, ItemValue, JsonObjectProperty, Question, Serializer, property } from "survey-core";
 import { editorLocalization, getLocString } from "../../editorLocalization";
-import { PredefinedColors, PredefinedThemes } from "./themes";
+import { PredefinedColors, PredefinedThemes, Themes } from "./themes";
 import { ThemeEditorModel } from "./theme-builder";
 import { ISurveyCreatorOptions, settings } from "../../creator-settings";
 import { PropertyGridEditor, PropertyGridEditorCollection } from "../../property-grid";
 import { DefaultFonts } from "./theme-custom-questions/font-settings";
 import { HeaderModel } from "./header-model";
+import * as LibraryThemes from "survey-core/themes";
+import { assign } from "../../utils/utils";
+import { ISaveToJSONOptions } from "survey-core/typings/base-interfaces";
 export * from "./header-model";
 
+Object.keys(LibraryThemes).forEach(libraryThemeName => {
+  const libraryTheme: ITheme = LibraryThemes[libraryThemeName];
+  const creatorThemeVariables = {};
+  const creatorTheme = {};
+  assign(creatorThemeVariables, libraryTheme.cssVariables);
+  assign(creatorTheme, libraryTheme, { cssVariables: creatorThemeVariables });
+  const creatorThemeName = getThemeFullName(libraryTheme);
+  Themes[creatorThemeName] = creatorTheme;
+});
+
+function getThemeFullName(theme: ITheme) {
+  const themeName = theme.themeName || ThemeEditorModel.DefaultTheme.themeName || "default";
+  let fullThemeName = themeName + "-" + (theme.colorPalette || "light");
+  if (theme.isPanelless === true) {
+    fullThemeName += "-panelless";
+  }
+  return fullThemeName;
+}
+
 export class ThemeModel extends Base {
-  @property() themePalette: string;
+  public static DefaultTheme = Themes["default-light"];
+
+  @property({
+    onSet: (newValue: string, _target: ThemeEditorModel) => {
+      _target.currentTheme.backgroundImage = newValue;
+    }
+  }) backgroundImage;
+  @property({
+    onSet: (newValue: ImageFit, _target: ThemeEditorModel) => {
+      _target.currentTheme.backgroundImageFit = newValue;
+    }
+  }) backgroundImageFit;
+  @property({
+    onSet: (newValue: ImageAttachment, _target: ThemeEditorModel) => {
+      _target.currentTheme.backgroundImageAttachment = newValue;
+    }
+  }) backgroundImageAttachment;
+  @property({
+    onSet: (newValue: number, _target: ThemeEditorModel) => {
+      _target.currentTheme.backgroundOpacity = newValue / 100;
+    }
+  }) backgroundOpacity;
+  @property() themeName;
+  @property() themePalette;
+  @property() themeMode;
+  @property() groupAppearanceAdvancedMode: boolean;
+  @property() panelBackgroundTransparency: number;
+  @property() questionPanelBackground: string;
+  @property() questionBackgroundTransparency: number;
+  @property() commonScale: number;
+  @property() cornerRadius: number;
+
   header: HeaderModel;
 
   public getType(): string {
@@ -19,6 +72,12 @@ export class ThemeModel extends Base {
   constructor() {
     super();
     this.setPropertyValue("header", new HeaderModel());
+  }
+
+  toJSON(options?: ISaveToJSONOptions): any {
+    let result = super.toJSON(options);
+
+    return result;
   }
 
   getPredefinedChoices(propertyName: string): Array<ItemValue> {
@@ -37,7 +96,7 @@ Serializer.addClass(
       name: "themeName",
       displayName: getLocString("theme.themeName"),
       choices: PredefinedThemes.map(theme => ({ value: theme, text: getLocString("theme.names." + theme) })),
-      default: ThemeEditorModel.DefaultTheme.themeName || "default",
+      default: ThemeModel.DefaultTheme.themeName || "default",
       category: "general",
     }, {
       type: "buttongroup",
