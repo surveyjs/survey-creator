@@ -2721,7 +2721,8 @@ export class SurveyCreatorModel extends Base
   public uploadFiles(
     files: File[],
     question: Question,
-    callback: (status: string, data: any) => any
+    callback: (status: string, data: any) => any,
+    context?: { element: Base, item?: any, elementType?: string, propertyName?: string }
   ) {
     if (this.onUploadFile.isEmpty) {
       let fileReader = new FileReader();
@@ -2733,8 +2734,12 @@ export class SurveyCreatorModel extends Base
       this.onUploadFile.fire(this, {
         question: question,
         files: files || [],
-        callback: callback
-      });
+        callback: callback,
+        element: context && context.element || this.survey,
+        elementType: context && context.elementType,
+        propertyName: context && context.propertyName,
+        context: context
+      } as any);
     }
   }
 

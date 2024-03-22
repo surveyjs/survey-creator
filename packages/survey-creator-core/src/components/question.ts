@@ -203,7 +203,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       messageText: "",
       onClick: () => { }
     };
-    if(this.creator) {
+    if (this.creator) {
       this.creator.onCreateCustomMessagePanel.fire(this.creator, res);
     }
     res.text = res.messageText;
@@ -302,7 +302,11 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   public getConvertToTypesActions(): Array<IAction> {
     const availableItems = this.creator.getAvailableToolboxItems(this.element, false);
     const itemNames = [];
-    availableItems.forEach(item => itemNames.push(item.typeName));
+    availableItems.forEach(item => {
+      if (itemNames.indexOf(item.typeName) == -1) {
+        itemNames.push(item.typeName);
+      }
+    });
     const convertClasses: string[] = QuestionConverter.getConvertToClasses(
       this.currentType, itemNames, true
     );
@@ -310,7 +314,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     let lastItem = null;
     convertClasses.forEach((className: string) => {
       const items = this.creator.toolbox.items.filter(item => item.name == className);
-      if(Array.isArray(items) && items.length > 0) {
+      if (Array.isArray(items) && items.length > 0) {
         const item = items[0];
         const needSeparator = lastItem && item.category != lastItem.category;
         const action = this.creator.createIActionBarItemByClass(item.name, item.title, item.iconName, needSeparator);
@@ -418,7 +422,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       id: "isrequired",
       ariaChecked: <any>new ComputedUpdater<boolean>(() => this.isRequired),
       ariaRole: "checkbox",
-      css: "sv-action-bar-item--secondary",
+      css: "svc-action-bar-item--right sv-action-bar-item--secondary",
       title: this.creator.getLocString("pe.isRequired"),
       visibleIndex: 20,
       iconName: "icon-required",

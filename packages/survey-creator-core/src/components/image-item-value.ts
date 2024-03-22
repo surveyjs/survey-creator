@@ -32,6 +32,7 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
 
   chooseFile(model: ImageItemValueWrapperViewModel) {
     const fileInput = <HTMLInputElement>model.itemsRoot.getElementsByClassName("svc-choose-file-input")[0];
+    const context = { element: model.question, item: model.item, elementType: model.question.getType(), propertyName: "imageLink" };
     model.creator.chooseFiles(fileInput, (files: File[]) => {
       model.isUploading = true;
       model.creator.uploadFiles(files, model.question, (status, link) => {
@@ -39,12 +40,13 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
           model.item.imageLink = link;
         }
         model.isUploading = false;
-      });
-    }, { element: model.question, item: model.item, elementType: model.item.getType(), propertyName: "imageLink" });
+      }, context);
+    }, context);
   }
 
   public uploadFiles(files) {
     this.isUploading = true;
+    const context = { element: this.question, item: undefined, elementType: this.question.getType(), propertyName: "imageLink" };
     this.creator.uploadFiles(files, this.question, (status, link) => {
       if (status === "success") {
         this.creator.createNewItemValue(this.question, this.isChoosingNewFile, (res: ItemValue): void => {
@@ -53,7 +55,7 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
       }
       this.isChoosingNewFile = false;
       this.isUploading = false;
-    });
+    }, context);
   }
 
   chooseNewFile(model: ImageItemValueWrapperViewModel) {
@@ -61,7 +63,7 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
     model.creator.chooseFiles(fileInput, (files: File[]) => {
       this.isChoosingNewFile = true;
       model.uploadFiles(files);
-    }, { element: model.question, item: model.item, elementType: model.item.getType(), propertyName: "imageLink" });
+    }, { element: model.question, item: model.item, elementType: model.question.getType(), propertyName: "imageLink" });
   }
   onDragOver = (event: any) => {
     this.isFileDragging = true;

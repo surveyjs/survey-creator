@@ -783,7 +783,12 @@ export class ThemeEditorModel extends Base {
     });
     themeEditorSurvey.onUploadFiles.add((_, options) => {
       const callback = (status: string, data: any) => options.callback(status, [{ content: data, file: options.files[0] }]);
-      this.surveyProvider.uploadFiles(options.files, undefined, callback);
+      const context: any = {};
+      assign(context, (options as any).context, { element: this.currentTheme as any, elementType: "theme", propertyName: options.name });
+      if (options.question && options.question.parentQuestion) {
+        context.elementType = options.question.parentQuestion.name === "headerViewContainer" ? "header" : options.question.parentQuestion.name;
+      }
+      this.surveyProvider.uploadFiles(options.files, undefined, callback, context);
     });
     this.patchFileEditors(themeEditorSurvey);
     themeEditorSurvey.getAllQuestions().forEach(q => q.allowRootStyle = false);

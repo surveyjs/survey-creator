@@ -3141,13 +3141,17 @@ test("Check onOpenFileChooser is called and context is passed", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   let log = "";
   let lastContext;
+  let lastUploadContext;
+  let lastUploadOptions;
   creator.onOpenFileChooser.add((s, o) => {
     log += "->onOpenFileChooser";
-    lastContext = o.context;
+    lastContext = (o as any).context;
     o.callback([{} as File]);
   });
   creator.onUploadFile.add((s, o) => {
     log += "->uploadFile";
+    lastUploadOptions = o;
+    lastUploadContext = (o as any).context;
     o.callback("success", "url");
   });
 
@@ -3162,11 +3166,17 @@ test("Check onOpenFileChooser is called and context is passed", (): any => {
     backgroundImageEditor.chooseFile(new MouseEvent("click"));
     expect(log).toBe("->onOpenFileChooser->uploadFile");
     expect(lastContext).toStrictEqual({ element: themeBuilder.currentTheme, elementType: "theme", propertyName: "backgroundImage" });
+    expect(lastUploadContext).toStrictEqual({ element: themeBuilder.currentTheme, elementType: "theme", propertyName: "backgroundImage" });
+    expect(lastUploadOptions.elementType).toBe("theme");
+    expect(lastUploadOptions.propertyName).toBe("backgroundImage");
 
     const headerBackgroundImageEditor = themeEditorSurvey.getQuestionByName("headerViewContainer").panels[0].getQuestionByName("backgroundImage") as QuestionFileModel;
     headerBackgroundImageEditor.chooseFile(new MouseEvent("click"));
     expect(log).toBe("->onOpenFileChooser->uploadFile->onOpenFileChooser->uploadFile");
     expect(lastContext).toStrictEqual({ element: themeBuilder.currentTheme, elementType: "header", propertyName: "backgroundImage" });
+    expect(lastUploadContext).toStrictEqual({ element: themeBuilder.currentTheme, elementType: "header", propertyName: "backgroundImage" });
+    expect(lastUploadOptions.elementType).toBe("header");
+    expect(lastUploadOptions.propertyName).toBe("backgroundImage");
   } finally {
     document.getElementById = origGetElementById;
   }

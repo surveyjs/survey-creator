@@ -600,6 +600,46 @@ test("QuestionRatingAdornerViewModel button styles", () => {
   expect(ratingAdorner.removeClassNames).toBe("svc-item-value-controls__button svc-item-value-controls__remove");
 });
 
+test("QuestionRatingAdornerViewModel controlsClassNames", () => {
+  const creator = new CreatorTester();
+  creator.maximumRateValues = 4;
+  creator.JSON = {
+    elements: [{ type: "rating", name: "q1", rateMax: 3 }]
+  };
+  const question = <QuestionRatingModel>creator.survey.getAllQuestions()[0];
+
+  const ratingAdorner = new QuestionRatingAdornerViewModel(
+    creator,
+    question,
+    <any>{}
+  );
+  expect(ratingAdorner.hasTopLabel).toBe(false);
+  expect(ratingAdorner.controlsClassNames).toBe("svc-rating-question-controls svc-item-value-controls");
+  question.minRateDescription = "min";
+  question.rateDescriptionLocation = "leftRight";
+  expect(ratingAdorner.hasTopLabel).toBe(false);
+  expect(ratingAdorner.controlsClassNames).toBe("svc-rating-question-controls svc-item-value-controls");
+
+  question.minRateDescription = "min";
+  question.rateDescriptionLocation = "top";
+  expect(ratingAdorner.hasTopLabel).toBe(true);
+  expect(ratingAdorner.controlsClassNames).toBe("svc-rating-question-controls svc-item-value-controls svc-rating-question-controls--labels-top");
+
+  question.minRateDescription = "min";
+  question.rateDescriptionLocation = "topBottom";
+  expect(ratingAdorner.hasTopLabel).toBe(true);
+  expect(ratingAdorner.controlsClassNames).toBe("svc-rating-question-controls svc-item-value-controls svc-rating-question-controls--labels-top");
+
+  question.minRateDescription = "";
+  question.rateDescriptionLocation = "top";
+  expect(ratingAdorner.hasTopLabel).toBe(false);
+  expect(ratingAdorner.controlsClassNames).toBe("svc-rating-question-controls svc-item-value-controls");
+
+  question.minRateDescription = "";
+  question.rateDescriptionLocation = "topBottom";
+  expect(ratingAdorner.hasTopLabel).toBe(false);
+  expect(ratingAdorner.controlsClassNames).toBe("svc-rating-question-controls svc-item-value-controls");
+});
 test("QuestionRatingAdornerViewModel respect maximumRateValues with rate values", () => {
   const creator = new CreatorTester();
   creator.maximumRateValues = 4;
