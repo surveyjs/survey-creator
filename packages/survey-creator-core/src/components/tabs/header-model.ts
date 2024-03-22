@@ -3,6 +3,7 @@ import { ISurveyCreatorOptions, settings } from "../../creator-settings";
 import { PropertyGridEditor, PropertyGridEditorCollection, PropertyJSONGenerator } from "../../property-grid";
 import { ISurveyPropertyGridDefinition } from "../../question-editor/definition";
 import { editorLocalization, getLocString } from "../../editorLocalization";
+import { themeModelPropertyGridDefinition } from "./theme-model-definition";
 
 export class HeaderModel extends Base {
   // @property() themePalette: string;
@@ -44,6 +45,7 @@ function getVerticalAlignment(questionName: string, defaultValue: string): IJson
   return <IJsonPropertyInfo>{
     type: "buttongroup",
     name: questionName,
+    displayName: "",
     visibleIf: (obj) => obj.headerView === "advanced",
     choices: [
       { value: "top", text: getLocString("theme.verticalAlignmentTop") },
@@ -144,13 +146,12 @@ Serializer.addClass(
     {
       type: "color",
       name: "backgroundColor",
-      // enableIf: "{panel.backgroundColorSwitch} = 'custom'",
+      displayName: "",
       visibleIf: (obj) => obj.headerView === "advanced",
-      // enableIf: (obj) => { debugger; return obj.backgroundColorSwitch === "custom"; },
       onPropertyEditorUpdate: function (obj: any, editor: any) {
         if (!!editor) {
           editor.allowEmptyValue = true;
-          // editor.enableIf = "{backgroundColorSwitch} = 'custom'";
+          editor.enableIf = "{composite.backgroundColorSwitch} = 'custom'";
           editor.titleLocation = "hidden";
           editor.descriptionLocation = "hidden";
         }
@@ -171,6 +172,7 @@ Serializer.addClass(
     {
       type: "buttongroup",
       name: "backgroundImageFit",
+      displayName: "",
       choices: [
         { value: "cover", text: getLocString("theme.backgroundImageFitCover") },
         { value: "fill", text: getLocString("theme.backgroundImageFitFill") },
@@ -178,19 +180,16 @@ Serializer.addClass(
         { value: "tile", text: getLocString("theme.backgroundImageFitTile") },
       ],
       visibleIf: (obj) => obj.headerView === "advanced",
-      enableIf: (obj) => !!obj.backgroundImage,
       onPropertyEditorUpdate: function (obj: any, editor: any) {
         if (!!editor) {
           editor.titleLocation = "hidden";
-          // editor.enableIf = "{backgroundImage} notempty";
+          editor.enableIf = "{composite.backgroundImage} notempty";
         }
       }
     },
     {
       type: "spinedit",
       name: "backgroundImageOpacity",
-      // enableIf: "{panel.backgroundImage} notempty",
-      // enableIf: (obj) => { debugger; return !!obj.backgroundImage; },
       visibleIf: (obj) => obj.headerView === "advanced",
       displayName: getLocString("theme.backgroundOpacity"),
       onPropertyEditorUpdate: function (obj: any, editor: any) {
@@ -200,7 +199,7 @@ Serializer.addClass(
           editor.max = 100;
           editor.step = 5;
           editor.titleLocation = "left";
-          // editor.enableIf = "{backgroundImage} notempty";
+          editor.enableIf = "{composite.backgroundImage} notempty";
         }
       }
     },
@@ -279,7 +278,24 @@ export class PropertyGridEditorQuestionHeaderSettings extends PropertyGridEditor
     options: ISurveyCreatorOptions, propGridDefinition?: ISurveyPropertyGridDefinition): void {
     const panel = <PanelModel>question["contentPanel"];
     const headersettings = obj[prop.name];
-    new PropertyJSONGenerator(headersettings, options, obj, prop, propGridDefinition).setupObjPanel(panel, true);
+    const propertyGenerator = new PropertyJSONGenerator(headersettings, options, obj, prop, themeModelPropertyGridDefinition);
+    propertyGenerator.setupObjPanel(panel, true);
+
+    let settingsPanel;
+    var questions = panel.elements;
+
+    for (var i = 0; i < questions.length; i++) {
+      if (questions[i].name == "settings") {
+        settingsPanel = questions[i];
+      }
+    }
+    settingsPanel.state = undefined;
+    settingsPanel.title = "";
+
+    settingsPanel.elements.forEach(el => {
+      el.title = "";
+      el.state = undefined;
+    });
   }
   onValueChanged(obj: Base, prop: JsonObjectProperty, question: Question): void {
 

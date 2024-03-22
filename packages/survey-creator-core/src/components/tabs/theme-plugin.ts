@@ -1,4 +1,4 @@
-import { Action, ComputedUpdater, surveyCss, defaultV2ThemeName, ITheme, EventBase, Serializer, settings as surveySettings, Question, IElement, SurveyModel, PanelModelBase } from "survey-core";
+import { Action, ComputedUpdater, surveyCss, defaultV2ThemeName, ITheme, EventBase, Serializer, settings as surveySettings, Question, IElement, SurveyModel, PanelModelBase, PanelModel, QuestionHtmlModel } from "survey-core";
 import { settings } from "../../creator-settings";
 import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
@@ -11,6 +11,8 @@ import { PropertyGridModel } from "../../property-grid";
 import { PropertyGridViewModel } from "../../property-grid/property-grid-view-model";
 import { ThemeModel } from "./theme-model";
 import { Switcher } from "../switcher/switcher";
+import { themeModelPropertyGridDefinition } from "./theme-model-definition";
+import { propertyGridCss } from "../../property-grid-theme/property-grid";
 
 export interface IPropertyGridSurveyCreatedEvent {
   survey: SurveyModel;
@@ -96,6 +98,21 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.advancedModeSwitcher = advancedMode;
   }
 
+  private addSubGroupTitle(panel: PanelModel, titleId: string) {
+    const question = Serializer.createClass("html") as QuestionHtmlModel;
+    question.fromJSON({
+      visibleIf: "{advancedmode} = true",
+      html: `<div class='spg-theme-group-caption'>${getLocString(titleId)}</div>`
+    });
+    panel.addElement(question);
+  }
+  private addSubGroupTitles(survey: SurveyModel) {
+    this.addSubGroupTitle(survey.getPanelByName("appearanceprimarycolor"), "theme.pageTitle");
+    this.addSubGroupTitle(survey.getPanelByName("appearancepage"), "theme.questionTitle");
+    this.addSubGroupTitle(survey.getPanelByName("appearancequestion"), "theme.editorPanel");
+    this.addSubGroupTitle(survey.getPanelByName("appearanceinput"), "theme.lines");
+  }
+
   constructor(private creator: SurveyCreatorModel) {
     creator.addPluginTab("theme", this, "ed.themeSurvey");
     this.simulatorCssClasses = surveyCss[defaultV2ThemeName];
@@ -103,7 +120,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.sidebarTab = this.creator.sidebar.addTab("theme");
     this.sidebarTab.caption = editorLocalization.getString("ed.themePropertyGridTitle");
 
-    this.propertyGrid = new PropertyGridModel(undefined, creator);
+    this.propertyGrid = new PropertyGridModel(undefined, creator, themeModelPropertyGridDefinition);
     const propertyGridViewModel = new PropertyGridViewModel(this.propertyGrid, creator);
     this.propertyGridTab = this.creator.sidebar.addTab("propertyGrid2", "svc-property-grid", propertyGridViewModel);
     this.themeModel = new ThemeModel();
@@ -139,10 +156,29 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     // this.propertyGrid.obj = this.model;
     this.propertyGrid.obj = this.themeModel;
     this.propertyGrid.survey.setVariable("advancedmode", false);
+    const themeBuilderCss = { ...propertyGridCss };
+    themeBuilderCss.root += " spg-theme-builder-root";
+    this.propertyGrid.survey.css = themeBuilderCss;
+    this.addSubGroupTitles(this.propertyGrid.survey);
     this.propertyGrid.survey.onGetPanelTitleActions.add((sender, opt) => {
       if (opt.panel && opt.panel.name == "appearance") {
         this.createAppearanceAdvancedModeAction(opt.panel);
         opt.titleActions.push(this.advancedModeSwitcher);
+      }
+    });
+    this.propertyGrid.survey.onUpdatePanelCssClasses.add((sender, options) => {
+      if (options.panel.hasParent) {
+        const parent = (options.panel.parent ?? options.panel.parentQuestion);
+        if (!parent || parent.hasParent && !(parent.name === "settings" || parent.parentQuestion?.name === "settings")) {
+          options.cssClasses.panel.container = "spg-panel-group";
+          options.cssClasses.panel.content = "spg-panel-group__content";
+          options.cssClasses.panel.title = "spg-panel-group__title";
+        }
+        else {
+          options.cssClasses.panel.container = "spg-nested-panel";
+          options.cssClasses.panel.content = "spg-nested-panel__content";
+          options.cssClasses.panel.title = "spg-nested-panel__title";
+        }
       }
     });
 

@@ -15,6 +15,10 @@ function getNumericFromString(str: string): string {
   return num;
 }
 
+export function roundTo2Decimals(number: number): number {
+  return Math.round(number * 100) / 100;
+}
+
 const opositeValues = {
   true: "false",
   True: "False",

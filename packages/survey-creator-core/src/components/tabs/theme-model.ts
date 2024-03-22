@@ -1,4 +1,4 @@
-import { Base, ITheme, ImageAttachment, ImageFit, ItemValue, JsonObjectProperty, Question, Serializer, property } from "survey-core";
+import { Base, ITheme, ImageAttachment, ImageFit, ItemValue, JsonObjectProperty, Question, Serializer, property, ILoadFromJSONOptions, JsonObject, IHeader, QuestionCompositeModel } from "survey-core";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { PredefinedColors, PredefinedThemes, Themes } from "./themes";
 import { ThemeEditorModel } from "./theme-builder";
@@ -7,7 +7,7 @@ import { PropertyGridEditor, PropertyGridEditorCollection } from "../../property
 import { DefaultFonts } from "./theme-custom-questions/font-settings";
 import { HeaderModel } from "./header-model";
 import * as LibraryThemes from "survey-core/themes";
-import { assign } from "../../utils/utils";
+import { assign, ingectAlpha, parseColor, roundTo2Decimals } from "../../utils/utils";
 import { ISaveToJSONOptions } from "survey-core/typings/base-interfaces";
 export * from "./header-model";
 
@@ -30,8 +30,72 @@ function getThemeFullName(theme: ITheme) {
   return fullThemeName;
 }
 
+function findSuitableTheme(themeName: string, themePalette: string, themeMode: string, probeThemeFullName: string) {
+  let suitableTheme = Themes[probeThemeFullName];
+  if (!!suitableTheme) {
+    return suitableTheme;
+  }
+  const appropriateThemeNames = Object.keys(Themes).filter(fullName => fullName.indexOf(themeName + "-") === 0);
+  for (let fullThemeName of appropriateThemeNames) {
+    if (fullThemeName.indexOf(themeName + "-" + themePalette) === 0) {
+      probeThemeFullName = themeName + "-" + themePalette;
+    }
+    if (fullThemeName.indexOf(themeName + "-" + themePalette + (themeMode === "lightweight" ? "-panelless" : "")) === 0) {
+      probeThemeFullName = themeName + "-" + themePalette + (themeMode === "lightweight" ? "-panelless" : "");
+    }
+  }
+  suitableTheme = Themes[appropriateThemeNames[0]];
+  if (!!suitableTheme) {
+    return suitableTheme;
+  }
+  const defaultNearestThemeFullName = getThemeFullName({ themeName: ThemeEditorModel.DefaultTheme.themeName, colorPalette: themePalette || "light", isPanelless: themeMode === "lightweight" });
+  return Themes[defaultNearestThemeFullName] || ThemeEditorModel.DefaultTheme;
+}
+
+function getObjectDiffs(obj1: any, obj2: any = {}): any {
+  const result: any = {};
+  Object.keys(obj1).forEach(key => {
+    if (typeof obj1[key] === "object") {
+      result[key] = getObjectDiffs(obj1[key], obj2[key]);
+    } else {
+      if (obj1[key] !== undefined && obj1[key] != obj2[key]) {
+        result[key] = obj1[key];
+      }
+    }
+  });
+  return result;
+}
+
+function getThemeChanges(fullTheme: ITheme, baseTheme?: ITheme) {
+  if (!baseTheme) {
+    let probeThemeFullName = getThemeFullName(fullTheme);
+    baseTheme = findSuitableTheme(fullTheme.themeName, fullTheme.colorPalette, fullTheme.isPanelless ? "lightweight" : "panels", probeThemeFullName);
+  }
+  const themeChanges: ITheme = getObjectDiffs(fullTheme, baseTheme);
+  Object.keys(themeChanges).forEach(propertyName => {
+    if (propertyName.toLowerCase().indexOf("background") !== -1) {
+      if (themeChanges[propertyName] === "" || themeChanges[propertyName] === Serializer.findProperty("survey", propertyName).defaultValue) {
+        delete themeChanges[propertyName];
+      }
+    }
+  });
+  themeChanges.themeName = baseTheme.themeName || ThemeEditorModel.DefaultTheme.themeName || "default";
+  themeChanges.colorPalette = baseTheme.colorPalette || "light";
+  themeChanges.isPanelless = !!baseTheme.isPanelless;
+  return themeChanges;
+}
+
+function trimCssVariables(newCssVariables: { [index: string]: string }): void {
+  Object.keys(newCssVariables).forEach(key => {
+    if (newCssVariables[key] === undefined || newCssVariables[key] === null) {
+      delete newCssVariables[key];
+    }
+  });
+}
+
 export class ThemeModel extends Base {
   public static DefaultTheme = Themes["default-light"];
+  private themeCssVariablesChanges: { [index: string]: string } = {};
 
   @property({
     onSet: (newValue: string, _target: ThemeEditorModel) => {
@@ -62,8 +126,10 @@ export class ThemeModel extends Base {
   @property() questionBackgroundTransparency: number;
   @property() commonScale: number;
   @property() cornerRadius: number;
+  @property() commonFontSize: number;
 
   header: HeaderModel;
+  questionTitle: QuestionCompositeModel;
 
   public getType(): string {
     return "themebuilder";
@@ -72,12 +138,72 @@ export class ThemeModel extends Base {
   constructor() {
     super();
     this.setPropertyValue("header", new HeaderModel());
+    this.themeName = ThemeModel.DefaultTheme.themeName || "default";
+    this.loadTheme({ themeName: this.themeName });
   }
 
-  toJSON(options?: ISaveToJSONOptions): any {
-    let result = super.toJSON(options);
+  public loadTheme(theme: ITheme) {
+    // this.blockThemeChangedNotifications += 1;
+    try {
+      let probeThemeFullName = getThemeFullName(theme);
+      const baseTheme = findSuitableTheme(theme.themeName, theme.colorPalette, theme.isPanelless ? "lightweight" : "panels", probeThemeFullName);
+      const themeChanges = getThemeChanges(theme, baseTheme);
+      // if (this.currentTheme === theme) {
+      //   this.themeCssVariablesChanges = themeChanges.cssVariables || {};
+      // }
+      this.themeName = themeChanges.themeName;
+      this.themePalette = themeChanges.colorPalette;
+      this.themeMode = themeChanges.isPanelless === true ? "lightweight" : "panels";
 
-    return result;
+      this.backgroundImage = theme.backgroundImage || this.backgroundImage;
+      this.backgroundImageFit = theme.backgroundImageFit || this.backgroundImageFit;
+      this.backgroundImageAttachment = theme.backgroundImageAttachment || this.backgroundImageAttachment;
+
+      const effectiveThemeCssVariables = {};
+      assign(effectiveThemeCssVariables, ThemeEditorModel.DefaultTheme.cssVariables || {}, baseTheme.cssVariables || {});
+      assign(effectiveThemeCssVariables, theme.cssVariables || {}, this.themeCssVariablesChanges);
+      trimCssVariables(effectiveThemeCssVariables);
+      const effectiveTheme: ITheme = {
+        backgroundImage: this.backgroundImage || baseTheme.backgroundImage || "",
+        backgroundImageFit: this.backgroundImageFit || baseTheme.backgroundImageFit,
+        backgroundImageAttachment: this.backgroundImageAttachment || baseTheme.backgroundImageAttachment,
+        backgroundOpacity: (this.backgroundOpacity / 100) || baseTheme.backgroundOpacity,
+      };
+      const effectiveHeaderSettings: IHeader = {} as any;
+      // assign(effectiveHeaderSettings, baseTheme.header || {}, this.currentTheme.header || {});
+      if (Object.keys(effectiveHeaderSettings).length > 0) {
+        effectiveTheme.header = effectiveHeaderSettings;
+      }
+      assign(effectiveTheme, theme, { cssVariables: effectiveThemeCssVariables, themeName: this.themeName, colorPalette: this.themePalette, isPanelless: this.themeMode === "lightweight" });
+      // this.surveyProvider.theme = effectiveTheme;
+
+      // this.initializeColorCalculator();
+      // this.loadThemeIntoPropertyGrid();
+      this.fromJSON(effectiveTheme);
+    }
+    finally {
+      // this.blockThemeChangedNotifications -= 1;
+    }
+  }
+
+  protected onPropertyValueChanged(name: string, oldValue: any, newValue: any): void {
+    if (["themeName", "themeMode", "themePalette"].indexOf(name) !== -1) {
+      if (name === "themeName") {
+        this.loadTheme(this.findSuitableTheme(newValue) || { [name]: newValue, isPanelless: this.themeMode === "lightweight", colorPalette: this.themePalette });
+      }
+      if (name === "themeMode") {
+        this.loadTheme({ themeName: this.themeName, isPanelless: newValue === "lightweight", colorPalette: this.themePalette });
+      }
+      if (name === "themePalette") {
+        this.loadTheme({ themeName: this.themeName, isPanelless: this.themeMode === "lightweight", colorPalette: newValue });
+      }
+      // this.themeModified({ theme: this.currentTheme });
+    }
+  }
+
+  findSuitableTheme(themeName: string): ITheme {
+    let probeThemeFullName = getThemeFullName({ themeName: themeName, colorPalette: this.themePalette, isPanelless: this.themeMode === "lightweight" } as any);
+    return findSuitableTheme(themeName, this.themePalette, this.themeMode, probeThemeFullName);
   }
 
   getPredefinedChoices(propertyName: string): Array<ItemValue> {
@@ -86,6 +212,42 @@ export class ThemeModel extends Base {
         new ItemValue(PredefinedColors[this.themePalette][colorName], getLocString("theme.colors." + colorName))
       );
   }
+  fromJSON(json: ITheme, options?: ILoadFromJSONOptions): void {
+    if(json && json.cssVariables) {
+      super.fromJSON(json.cssVariables, options);
+
+      this.commonScale = roundTo2Decimals(parseFloat(this["--sjs-base-unit"]) * 100 / 8);
+      this.commonFontSize = roundTo2Decimals(parseFloat(this["--sjs-font-size"]) * 100 / 16);
+      this.cornerRadius = roundTo2Decimals(parseFloat(this["--sjs-corner-radius"]));
+    }
+  }
+
+  toJSON(options?: ISaveToJSONOptions): ITheme {
+    this["--sjs-base-unit"] = (this.commonScale * 8 / 100) + "px";
+    this["--sjs-font-size"] = (this.commonFontSize * 16 / 100) + "px";
+    this["--sjs-corner-radius"] = this.cornerRadius + "px";
+
+    if(this.questionBackgroundTransparency < 100) {
+      let backcolorDimLightColor = parseColor(this["--sjs-general-backcolor-dim-light"]).color;
+      this["--sjs-editor-background"] = ingectAlpha(backcolorDimLightColor, this.questionBackgroundTransparency / 100);
+    }
+    if(this.panelBackgroundTransparency < 100) {
+      let backcolor = parseColor(this["--sjs-general-backcolor"]).color;
+      this["--sjs-question-background"] = ingectAlpha(backcolor, this.panelBackgroundTransparency / 100);
+    }
+
+    const result = super.toJSON(options);
+    const cssVariables = {};
+    Object.keys(result).forEach(key => {
+      if(key.indexOf("--sjs") == 0) {
+        cssVariables[key] = result[key];
+        delete result[key];
+      }
+    });
+    result.cssVariables = cssVariables;
+    return result;
+  }
+
 }
 
 Serializer.addClass(
@@ -182,6 +344,12 @@ Serializer.addClass(
         if (!!editor) {
           const questions = editor.contentPanel.elements;
           const callback = (editor: Question) => {
+            if (editor.getType() === "panel") {
+              editor["elements"].forEach(el => {
+                callback(el);
+              });
+            }
+
             const obj: Base = (<any>editor).obj;
             if (!obj) return;
             const property: JsonObjectProperty = (<any>editor).property;
@@ -189,9 +357,9 @@ Serializer.addClass(
               property.onPropertyEditorUpdate(obj, editor);
             }
           };
-          for (var i = 0; i < questions.length; i++) {
-            callback(questions[i]);
-          }
+          questions.forEach(question => {
+            callback(question);
+          });
         }
       }
     }, {
@@ -260,6 +428,37 @@ Serializer.addClass(
         }
       }
     }, {
+      name: "--sjs-font-size", visible: false,
+      default: "16px",
+    }, {
+      name: "--sjs-corner-radius", visible: false,
+      default: "4px",
+    }, {
+      name: "--sjs-base-unit", visible: false,
+      default: "8px",
+    }, {
+      name: "--sjs-corner-radius",
+      default: "4px",
+      visible: false
+    },
+    { name: "--sjs-general-backcolor", visible: false },
+    { name: "--sjs-general-backcolor-dark", visible: false },
+    { name: "--sjs-general-backcolor-dim", visible: false },
+    { name: "--sjs-general-backcolor-dim-light", visible: false },
+    { name: "--sjs-general-backcolor-dim-dark", visible: false },
+    { name: "--sjs-general-forecolor", visible: false },
+    { name: "--sjs-general-forecolor-light", visible: false },
+    { name: "--sjs-general-dim-forecolor", visible: false },
+    { name: "--sjs-general-dim-forecolor-light", visible: false },
+    // { name: "--sjs-primary-backcolor", visible: false },
+    // { name: "--sjs-primary-backcolor-light", visible: false },
+    // { name: "--sjs-primary-backcolor-dark", visible: false },
+    // { name: "--sjs-primary-forecolor", visible: false },
+    // { name: "--sjs-primary-forecolor-light", visible: false },
+
+    { name: "--sjs-editor-background", visible: false },
+    { name: "--sjs-question-background", visible: false },
+    {
       type: "spinedit",
       name: "commonScale",
       displayName: getLocString("theme.scale"),
