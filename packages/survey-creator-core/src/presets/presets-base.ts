@@ -14,13 +14,21 @@ export class CreatorPresetEditableBase {
     });
   }
   public get path() { return this.preset.getPath(); }
+  protected getJsonPath(model: SurveyModel): string { return this.path; }
   public get fullPath() {
-    const prefix = this.parent ? this.parent.fullPath + "_" : "";
+    let prefix = this.parent ? this.parent.fullPath : "";
+    if(this.path && prefix) {
+      prefix += "_";
+    }
     return prefix + this.path;
   }
   public get pageName(): string { return "page_" + this.fullPath; }
   public createPages(): Array<any> {
-    const res = [this.createMainPage()];
+    const res = [];
+    const mainPage = this.createMainPage();
+    if(mainPage) {
+      res.push(mainPage);
+    }
     this.children.forEach(item => {
       const pages = item.createPages();
       if(Array.isArray(pages)) {
@@ -41,24 +49,25 @@ export class CreatorPresetEditableBase {
   }
   protected createMainPage(): any {
     const res = this.createMainPageCore();
-    res.name = this.pageName;
+    if(res) {
+      res.name = this.pageName;
+    }
     return res;
   }
   protected getBoolVisibleIf(name: string): string { return "{" + name + "}=true"; }
   protected getTextVisibleIf(name: string, val: string): string { return "{" + name + "}='" + val +"'"; }
   protected getNotEmptyVisibleIf(name: string): string { return "{" + name + "} notempty"; }
-  protected createMainPageCore(): any { return {}; }
+  protected createMainPageCore(): any { return undefined; }
   public getJsonValue(model: SurveyModel): any {
     const page = model.getPageByName(this.pageName);
-    if(!page.isVisible) return undefined;
-    const core = this.getJsonValueCore(model);
+    const core = page && page.isVisible ? this.getJsonValueCore(model) : undefined;
     let hasValue = !!core;
     const res = hasValue ? core : {};
     this.children.forEach(item => {
       const val = item.getJsonValue(model);
       if(!!val) {
         hasValue = true;
-        res[item.path] = val;
+        res[item.getJsonPath(model)] = val;
       }
     });
     return hasValue ? res : undefined;

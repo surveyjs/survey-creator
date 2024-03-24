@@ -150,11 +150,17 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     const parent = (<CreatorEditablePresetPropertyGrid>this.parent);
     return {
       title: "Property Grid categories",
-      visibleIf: this.getBoolVisibleIf(parent.nameDefinitionShow),
       elements: [
+        {
+          type: "boolean",
+          name: this.nameShow,
+          title: "Do you want to configure Property Grid categories and properties?"
+        },
         {
           type: "dropdown",
           name: this.nameSelector,
+          visibleIf: this.getBoolVisibleIf(this.nameShow),
+          clearIfInvisible: "onHidden",
           title: "Select element to setup a property grid for it",
         },
         {
@@ -195,6 +201,7 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     };
   }
   public getJsonValueCore(model: SurveyModel): any {
+    if(model.getValue(this.nameShow) !== true) return undefined;
     this.updateCurrentJson(model);
     return this.currentJson;
   }
@@ -284,12 +291,14 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     this.isContentVisibilityChanging = false;
   }
   protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
+    model.setValue(this.nameShow, !!json);
     if(!json) {
       json = this.copyJson(defaultPropertyGridDefinition);
     }
     this.currentJson = json;
     this.currentJson.autoGenerateProperties = false;
   }
+  private get nameShow() { return this.fullPath + "_show"; }
   private getMatrix(model: SurveyModel): QuestionMatrixDynamicModel { return <QuestionMatrixDynamicModel>model.getQuestionByName(this.nameMatrix); }
   private getSelector(model: SurveyModel): QuestionDropdownModel { return <QuestionDropdownModel>model.getQuestionByName(this.nameSelector); }
   private getPropertyGridQuestion(model: SurveyModel): QuestionEmbeddedSurveyModel { return <QuestionEmbeddedSurveyModel>model.getQuestionByName(this.namePropertyGrid); }
@@ -360,25 +369,6 @@ export class CreatorPresetPropertyGridDefinition extends CreatorPresetBase {
 }
 
 export class CreatorEditablePresetPropertyGrid extends CreatorPresetEditableBase {
-  public createMainPageCore(): any {
-    return {
-      title: "Setup Property Grid",
-      elements: [
-        {
-          type: "boolean",
-          name: this.nameDefinitionShow,
-          title: "Do you want to configure Property Grid categories and properties?"
-        }
-      ]
-    };
-  }
-  protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
-    json = json || {};
-    if(json["definition"]) {
-      model.setValue(this.nameDefinitionShow, true);
-    }
-  }
-  public get nameDefinitionShow() { return this.path + "_definition_show"; }
 }
 
 export class CreatorPresetPropertyGrid extends CreatorPresetBase {
