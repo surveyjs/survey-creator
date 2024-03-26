@@ -804,6 +804,18 @@ export var tgStrings = {
     runexpressiontrigger: "Иҷро кардани ишора",
     visibletrigger: "Тағйир кардани намоиш (тавсия дода намешавад)"
   },
+  peplaceholder: {
+    patternmask: {
+      pattern: "Ex.: +1(999)-999-99-99"
+    },
+    datetimemask: {
+      pattern: "Ex.: mm/dd/yyyy"
+    },
+    currencymask: {
+      prefix: "Ex.: $",
+      suffix: "Ex.: USD"
+    }
+  },
   pehelp: {
     // cookieName: "Cookies prevent users from filling out the same survey twice.",
     // format: "Use {0} as a placeholder for the actual value.",

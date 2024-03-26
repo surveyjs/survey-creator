@@ -826,11 +826,7 @@ export var arStrings = {
     questionStartIndex_placeholder: "مثال: أ)",
     width_placeholder: "مثال: 6 بوصة",
     minWidth_placeholder: "مثال: 600px",
-    maxWidth_placeholder: "مثال: 50٪",
-    pattern_placeholder: "مثال: +1 (999) -999-99-99",
-    datetimepattern_placeholder: "مثال: مم / يوم / سنة",
-    currencyprefix_placeholder: "مثال: $",
-    currencysuffix_placeholder: "مثال: الدولار الأمريكي"
+    maxWidth_placeholder: "مثال: 50٪"
   },
   // Property values
   pv: {
@@ -1109,6 +1105,18 @@ export var arStrings = {
     skiptrigger: "الإنتقال إلى سؤال",
     runexpressiontrigger: "تشغيل العملية الحسابية",
     visibletrigger: "تغيير الرؤية (مهمل)"
+  },
+  peplaceholder: {
+    patternmask: {
+      pattern: "مثال: +1 (999) -999-99-99"
+    },
+    datetimemask: {
+      pattern: "مثال: مم / يوم / سنة"
+    },
+    currencymask: {
+      prefix: "مثال: $",
+      suffix: "مثال: الدولار الأمريكي"
+    }
   },
   pehelp: {
     panel: {

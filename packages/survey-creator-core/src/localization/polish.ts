@@ -826,11 +826,7 @@ var polishStrings = {
     questionStartIndex_placeholder: "Np.: a)",
     width_placeholder: "Np.: 6 cali",
     minWidth_placeholder: "Przykład: 600 pikseli",
-    maxWidth_placeholder: "Przykład: 50%",
-    pattern_placeholder: "Np.: +1(999)-999-99-99",
-    datetimepattern_placeholder: "Np.: mm/dd/rrrr",
-    currencyprefix_placeholder: "Przykład: $",
-    currencysuffix_placeholder: "Np.: USD"
+    maxWidth_placeholder: "Przykład: 50%"
   },
   // Property values
   pv: {
@@ -1109,6 +1105,18 @@ var polishStrings = {
     skiptrigger: "Przejdź do pytania",
     runexpressiontrigger: "Uruchom wyrażenie",
     visibletrigger: "change visibility"
+  },
+  peplaceholder: {
+    patternmask: {
+      pattern: "Np.: +1(999)-999-99-99"
+    },
+    datetimemask: {
+      pattern: "Np.: mm/dd/rrrr"
+    },
+    currencymask: {
+      prefix: "Przykład: $",
+      suffix: "Np.: USD"
+    }
   },
   pehelp: {
     panel: {

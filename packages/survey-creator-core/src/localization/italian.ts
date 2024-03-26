@@ -826,11 +826,7 @@ var italianTranslation = {
     questionStartIndex_placeholder: "Es.: a)",
     width_placeholder: "Es.: 6 pollici",
     minWidth_placeholder: "Es.: 600px",
-    maxWidth_placeholder: "Es.: 50%",
-    pattern_placeholder: "Es.: +1(999)-999-99-99",
-    datetimepattern_placeholder: "Es.: gg/mm/aaaa",
-    currencyprefix_placeholder: "Es.: $",
-    currencysuffix_placeholder: "Es.: USD"
+    maxWidth_placeholder: "Es.: 50%"
   },
   // Property values
   pv: {
@@ -1109,6 +1105,18 @@ var italianTranslation = {
     skiptrigger: "Vai alla domanda",
     runexpressiontrigger: "Esegui espressione",
     visibletrigger: "Cambia visibilità"
+  },
+  peplaceholder: {
+    patternmask: {
+      pattern: "Es.: +1(999)-999-99-99"
+    },
+    datetimemask: {
+      pattern: "Es.: gg/mm/aaaa"
+    },
+    currencymask: {
+      prefix: "Es.: $",
+      suffix: "Es.: USD"
+    }
   },
   pehelp: {
     panel: {

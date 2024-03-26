@@ -826,11 +826,7 @@ var traditionalChineseTranslation = {
     questionStartIndex_placeholder: "例如：a）",
     width_placeholder: "例：6in",
     minWidth_placeholder: "例如：600px",
-    maxWidth_placeholder: "例：50%",
-    pattern_placeholder: "例如：+1（999）-999-99-99",
-    datetimepattern_placeholder: "例：mm/dd/yyyy",
-    currencyprefix_placeholder: "例：$",
-    currencysuffix_placeholder: "例如：美元"
+    maxWidth_placeholder: "例：50%"
   },
   // Property values
   pv: {
@@ -1109,6 +1105,18 @@ var traditionalChineseTranslation = {
     skiptrigger: "跳至問題",
     runexpressiontrigger: "運行表達式",
     visibletrigger: "修改可見性"
+  },
+  peplaceholder: {
+    patternmask: {
+      pattern: "例如：+1（999）-999-99-99"
+    },
+    datetimemask: {
+      pattern: "例：mm/dd/yyyy"
+    },
+    currencymask: {
+      prefix: "例：$",
+      suffix: "例如：美元"
+    }
   },
   pehelp: {
     panel: {

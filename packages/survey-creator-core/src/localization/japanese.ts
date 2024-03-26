@@ -1110,6 +1110,18 @@ export var jaStrings = {
     runexpressiontrigger: "数式を実行",
     visibletrigger: "可視性を変更 (非推奨)"
   },
+  peplaceholder: {
+    patternmask: {
+      pattern: "Ex.: +1(999)-999-99-99"
+    },
+    datetimemask: {
+      pattern: "Ex.: mm/dd/yyyy"
+    },
+    currencymask: {
+      prefix: "Ex.: $",
+      suffix: "Ex.: USD"
+    }
+  },
   pehelp: {
     panel: {
       name: "回答者には表示されないパネルID。",

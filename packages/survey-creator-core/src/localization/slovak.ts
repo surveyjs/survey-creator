@@ -826,11 +826,7 @@ export var skStrings = {
     questionStartIndex_placeholder: "Napr.: a)",
     width_placeholder: "Napr.: 6in",
     minWidth_placeholder: "Napríklad: 600px",
-    maxWidth_placeholder: "Napríklad: 50%",
-    pattern_placeholder: "Napríklad: +1(999)-999-99-99",
-    datetimepattern_placeholder: "Napr.: mm/dd/rrrr",
-    currencyprefix_placeholder: "Napr.: $",
-    currencysuffix_placeholder: "Napríklad: USD"
+    maxWidth_placeholder: "Napríklad: 50%"
   },
   // Property values
   pv: {
@@ -1109,6 +1105,18 @@ export var skStrings = {
     skiptrigger: "prejsť na otázku",
     runexpressiontrigger: "spustiť výraz",
     visibletrigger: "zmeniť viditeľnosť (zastarané)"
+  },
+  peplaceholder: {
+    patternmask: {
+      pattern: "Napríklad: +1(999)-999-99-99"
+    },
+    datetimemask: {
+      pattern: "Napr.: mm/dd/rrrr"
+    },
+    currencymask: {
+      prefix: "Napr.: $",
+      suffix: "Napríklad: USD"
+    }
   },
   pehelp: {
     panel: {

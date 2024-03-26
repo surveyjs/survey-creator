@@ -826,11 +826,7 @@ export var hebrewStrings = {
     questionStartIndex_placeholder: "לדוגמה: א)",
     width_placeholder: "לדוגמה: 6in",
     minWidth_placeholder: "לדוגמה: 600px",
-    maxWidth_placeholder: "לדוגמה: 50%",
-    pattern_placeholder: "לדוגמה: +1(999)-999-99-99",
-    datetimepattern_placeholder: "לדוגמה: mm/dd/yyyy",
-    currencyprefix_placeholder: "לדוגמה: $",
-    currencysuffix_placeholder: "לדוגמה: USD"
+    maxWidth_placeholder: "לדוגמה: 50%"
   },
   // Property values
   pv: {
@@ -1109,6 +1105,18 @@ export var hebrewStrings = {
     skiptrigger: "דלג לשאלה",
     runexpressiontrigger: "הפעל ביטוי",
     visibletrigger: "שנה נראות (לא מומלץ)"
+  },
+  peplaceholder: {
+    patternmask: {
+      pattern: "לדוגמה: +1(999)-999-99-99"
+    },
+    datetimemask: {
+      pattern: "לדוגמה: mm/dd/yyyy"
+    },
+    currencymask: {
+      prefix: "לדוגמה: $",
+      suffix: "לדוגמה: USD"
+    }
   },
   pehelp: {
     panel: {

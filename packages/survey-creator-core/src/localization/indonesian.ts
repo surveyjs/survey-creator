@@ -826,11 +826,7 @@ export var indonesianStrings = {
     questionStartIndex_placeholder: "Mis.: a)",
     width_placeholder: "Contoh: 6in",
     minWidth_placeholder: "Contoh: 600px",
-    maxWidth_placeholder: "Contoh: 50%",
-    pattern_placeholder: "Contoh: +1(999)-999-99-99",
-    datetimepattern_placeholder: "Contoh: mm/dd/yyyy",
-    currencyprefix_placeholder: "Contoh.: $",
-    currencysuffix_placeholder: "Contoh: USD"
+    maxWidth_placeholder: "Contoh: 50%"
   },
   // Property values
   pv: {
@@ -1109,6 +1105,18 @@ export var indonesianStrings = {
     skiptrigger: "Lanjut ke pertanyaan",
     runexpressiontrigger: "jalankan ekspresi",
     visibletrigger: "ubah visibilitas"
+  },
+  peplaceholder: {
+    patternmask: {
+      pattern: "Contoh: +1(999)-999-99-99"
+    },
+    datetimemask: {
+      pattern: "Contoh: mm/dd/yyyy"
+    },
+    currencymask: {
+      prefix: "Contoh.: $",
+      suffix: "Contoh: USD"
+    }
   },
   pehelp: {
     panel: {

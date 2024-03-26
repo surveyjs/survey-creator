@@ -826,11 +826,7 @@ export var nlStrings = {
     questionStartIndex_placeholder: "Vb.: a)",
     width_placeholder: "Bijv.: 6in",
     minWidth_placeholder: "Bijv.: 600px",
-    maxWidth_placeholder: "Vb.: 50%",
-    pattern_placeholder: "Vb.: +1(999)-999-99-99",
-    datetimepattern_placeholder: "Bijv.: mm/dd/jjjj",
-    currencyprefix_placeholder: "Bijv.: $",
-    currencysuffix_placeholder: "Bijv.: USD"
+    maxWidth_placeholder: "Vb.: 50%"
   },
   // Property values
   pv: {
@@ -1109,6 +1105,18 @@ export var nlStrings = {
     skiptrigger: "Ga naar de vraag",
     runexpressiontrigger: "Run expressie",
     visibletrigger: "Zichtbaarheid wijzigen (verouderd)"
+  },
+  peplaceholder: {
+    patternmask: {
+      pattern: "Vb.: +1(999)-999-99-99"
+    },
+    datetimemask: {
+      pattern: "Bijv.: mm/dd/jjjj"
+    },
+    currencymask: {
+      prefix: "Bijv.: $",
+      suffix: "Bijv.: USD"
+    }
   },
   pehelp: {
     panel: {

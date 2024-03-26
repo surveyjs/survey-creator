@@ -826,11 +826,7 @@ export var mnStrings = {
     questionStartIndex_placeholder: "Экс.: а)",
     width_placeholder: "Экс.: 6ин",
     minWidth_placeholder: "Экс: 600px",
-    maxWidth_placeholder: "Экс: 50%",
-    pattern_placeholder: "Экс.: +1(999)-999-99-99",
-    datetimepattern_placeholder: "Экс.: мм/д/yyy",
-    currencyprefix_placeholder: "Экс.: $",
-    currencysuffix_placeholder: "Экс.: USD"
+    maxWidth_placeholder: "Экс: 50%"
   },
   // Property values
   pv: {
@@ -1109,6 +1105,18 @@ export var mnStrings = {
     skiptrigger: "Асуулт руу үсрэх",
     runexpressiontrigger: "илэрхийлэл ажлуулах",
     visibletrigger: "Харагдах байдлыг өөрчлөх"
+  },
+  peplaceholder: {
+    patternmask: {
+      pattern: "Экс.: +1(999)-999-99-99"
+    },
+    datetimemask: {
+      pattern: "Экс.: мм/д/yyy"
+    },
+    currencymask: {
+      prefix: "Экс.: $",
+      suffix: "Экс.: USD"
+    }
   },
   pehelp: {
     panel: {

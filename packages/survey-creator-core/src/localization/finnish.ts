@@ -826,11 +826,7 @@ export var fiStrings = {
     questionStartIndex_placeholder: "Esim.: a)",
     width_placeholder: "Esimerkki: 6 tuumaa",
     minWidth_placeholder: "Esimerkki: 600 pikseliä",
-    maxWidth_placeholder: "Esimerkki: 50 %",
-    pattern_placeholder: "Esimerkki: +1(999)-999-99-99",
-    datetimepattern_placeholder: "Esimerkki: kk/pp/v",
-    currencyprefix_placeholder: "Esimerkki: $",
-    currencysuffix_placeholder: "Esimerkki: USD"
+    maxWidth_placeholder: "Esimerkki: 50 %"
   },
   // Property values
   pv: {
@@ -1109,6 +1105,18 @@ export var fiStrings = {
     skiptrigger: "siirry kysymykseen",
     runexpressiontrigger: "suorita lauseke",
     visibletrigger: "muuta näkyvyyttä (vanhentunut)"
+  },
+  peplaceholder: {
+    patternmask: {
+      pattern: "Esimerkki: +1(999)-999-99-99"
+    },
+    datetimemask: {
+      pattern: "Esimerkki: kk/pp/v"
+    },
+    currencymask: {
+      prefix: "Esimerkki: $",
+      suffix: "Esimerkki: USD"
+    }
   },
   pehelp: {
     panel: {

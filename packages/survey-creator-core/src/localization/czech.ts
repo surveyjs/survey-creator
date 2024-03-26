@@ -826,11 +826,7 @@ export var czStrings = {
     questionStartIndex_placeholder: "Př.: a)",
     width_placeholder: "Př.: 6in",
     minWidth_placeholder: "Př.: 600px",
-    maxWidth_placeholder: "Př.: 50%",
-    pattern_placeholder: "Př.: +1(999)-999-99-99",
-    datetimepattern_placeholder: "Př.: dd/mm/rrrr",
-    currencyprefix_placeholder: "Př.: $",
-    currencysuffix_placeholder: "Př.: USD"
+    maxWidth_placeholder: "Př.: 50%"
   },
   // Property values
   pv: {
@@ -1109,6 +1105,18 @@ export var czStrings = {
     skiptrigger: "přeskočit na otázku",
     runexpressiontrigger: "spustit výraz",
     visibletrigger: "změnit viditelnost (zastaralé)"
+  },
+  peplaceholder: {
+    patternmask: {
+      pattern: "Př.: +1(999)-999-99-99"
+    },
+    datetimemask: {
+      pattern: "Př.: dd/mm/rrrr"
+    },
+    currencymask: {
+      prefix: "Př.: $",
+      suffix: "Př.: USD"
+    }
   },
   pehelp: {
     panel: {

@@ -826,11 +826,7 @@ var portugueseTranslation = {
     questionStartIndex_placeholder: "Ex.: a)",
     width_placeholder: "Ex.: 6in",
     minWidth_placeholder: "Ex.: 600px",
-    maxWidth_placeholder: "Ex.: 50%",
-    pattern_placeholder: "Ex.: +1(999)-999-99-99",
-    datetimepattern_placeholder: "Ex.: dd/mm/aaaa",
-    currencyprefix_placeholder: "Ex.: $",
-    currencysuffix_placeholder: "Ex.: USD"
+    maxWidth_placeholder: "Ex.: 50%"
   },
   // Property values
   pv: {
@@ -1109,6 +1105,18 @@ var portugueseTranslation = {
     skiptrigger: "Saltar para questão",
     runexpressiontrigger: "rodar expressão",
     visibletrigger: "alterar visibilidade"
+  },
+  peplaceholder: {
+    patternmask: {
+      pattern: "Ex.: +1(999)-999-99-99"
+    },
+    datetimemask: {
+      pattern: "Ex.: dd/mm/aaaa"
+    },
+    currencymask: {
+      prefix: "Ex.: $",
+      suffix: "Ex.: USD"
+    }
   },
   pehelp: {
     panel: {

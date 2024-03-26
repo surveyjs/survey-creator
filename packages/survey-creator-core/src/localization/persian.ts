@@ -826,11 +826,7 @@ var persianStrings = {
     questionStartIndex_placeholder: "سابق: الف)",
     width_placeholder: "سابق: 6in",
     minWidth_placeholder: "سابق: 600 پیکسل",
-    maxWidth_placeholder: "سابق: 50٪",
-    pattern_placeholder: "شماره تماس: +1 (999) -999-99-99",
-    datetimepattern_placeholder: "سابق: mm / dd / yyyyy",
-    currencyprefix_placeholder: "سابق: $",
-    currencysuffix_placeholder: "Ex.: دلار امریکا"
+    maxWidth_placeholder: "سابق: 50٪"
   },
   // Property values
   pv: {
@@ -1109,6 +1105,18 @@ var persianStrings = {
     skiptrigger: "رد کردن سوال ",
     runexpressiontrigger: "اجرای عبارت",
     visibletrigger: "تغییر وضعیت دیده شدن"
+  },
+  peplaceholder: {
+    patternmask: {
+      pattern: "شماره تماس: +1 (999)-999-99-99"
+    },
+    datetimemask: {
+      pattern: "سابق: mm/dd/yyyyy"
+    },
+    currencymask: {
+      prefix: "سابق: $",
+      suffix: "Ex.: دلار امریکا"
+    }
   },
   pehelp: {
     panel: {
