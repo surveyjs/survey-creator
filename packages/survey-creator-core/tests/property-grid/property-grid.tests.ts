@@ -2695,13 +2695,13 @@ test("Image picker question imageHeight placeholder", () => {
   );
   expect(imageHeightQuestion.placeholder).toEqual("auto");
   var curStrings = editorLocalization.getLocale("");
-  curStrings.pe.auto = "Auto 2";
+  curStrings.pe.imageHeight_placeholder = "Auto 2";
   propertyGrid = new PropertyGridModelTester(question);
   imageHeightQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("imageHeight")
   );
   expect(imageHeightQuestion.placeholder).toEqual("Auto 2");
-  curStrings.pe.auto = "auto";
+  curStrings.pe.imageHeight_placeholder = "auto";
 });
 test("Add tab after general for survey object", () => {
   Serializer.addProperty("survey", { name: "region", category: "geoLocation", categoryIndex: 10 });

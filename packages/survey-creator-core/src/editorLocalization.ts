@@ -99,23 +99,23 @@ export class EditorLocalization {
     return this.getPropertyName(propName, defaultName);
   }
   public getPropertyHelpInEditor(typeName: string, propName: string, propType: string = undefined): string {
-    const res = this.getPropertyHelpInEditorCore(typeName, propName, "pehelp");
+    const res = this.getPropertyHelpInEditorCore(typeName, propName, this.peHelpByClass, "pehelp");
     if(!!res) return res;
     const loc = this.getLocale();
     return !!propType && !!loc && !!loc.pe ? loc.pe[propType + "Help"] : undefined;
   }
   public getPropertyPlaceholder(typeName: string, propName: string): string {
-    let str = this.getPropertyInfoInEditorByType(typeName, propName, this.pePlaceholderByClass, "peplaceholder");
+    let str = this.getPropertyHelpInEditorCore(typeName, propName, this.pePlaceholderByClass, "peplaceholder");
     if(!!str) return (str === " ") ? null: str;
     const loc = this.getLocale();
     if(!!loc && !!loc.peplaceholder) {
       str = loc.peplaceholder[propName];
     }
     if(!!str) return str;
-    return loc.pe[propName + "_placeholder"];
+    return !!loc && !!loc.pe ? loc.pe[propName + "_placeholder"] : undefined;
   }
-  private getPropertyHelpInEditorCore(typeName: string, propName: string, suffix: string): string {
-    let str = this.getPropertyInfoInEditorByType(typeName, propName, this.pePlaceholderByClass, suffix);
+  private getPropertyHelpInEditorCore(typeName: string, propName: string, data: any, suffix: string): string {
+    let str = this.getPropertyInfoInEditorByType(typeName, propName, data, suffix);
     if(!!str) return (str === " ") ? null: str;
     const loc = this.getLocale();
     return !!loc && !!loc[suffix] ? loc[suffix][propName] : undefined;

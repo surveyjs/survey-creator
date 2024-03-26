@@ -704,7 +704,7 @@ export class PropertyJSONGenerator {
       json.requiredErrorText = editorLocalization.getString("pe.propertyIsEmpty");
     }
 
-    const placeholder = editorLocalization.getPropertyPlaceholder(this.obj.getType(), prop.name, prop.type);
+    const placeholder = editorLocalization.getPropertyPlaceholder(this.obj.getType(), prop.name);
     if (!!placeholder) {
       json.placeholder = placeholder;
     }
