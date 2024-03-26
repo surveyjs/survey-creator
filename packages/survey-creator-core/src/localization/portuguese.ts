@@ -170,7 +170,6 @@ var portugueseTranslation = {
     imageChooseImage: "Escolha a imagem",
     addNewTypeQuestion: "Adicionar {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
-    auto: "auto",
     choices_Item: "Item ",
     lg: {
       addNewItem: "Adicionar nova regra",
@@ -826,7 +825,9 @@ var portugueseTranslation = {
     questionStartIndex_placeholder: "Ex.: a)",
     width_placeholder: "Ex.: 6in",
     minWidth_placeholder: "Ex.: 600px",
-    maxWidth_placeholder: "Ex.: 50%"
+    maxWidth_placeholder: "Ex.: 50%",
+    imageHeight_placeholder: "auto",
+    imageWidth_placeholder: "auto"
   },
   // Property values
   pv: {

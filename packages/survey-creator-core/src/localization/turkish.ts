@@ -170,7 +170,6 @@ export var turkishStrings = {
     imageChooseImage: "Resim Seç",
     addNewTypeQuestion: "{0} ekle", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
-    auto: "Otomatik",
     choices_Item: "Madde ",
     lg: {
       addNewItem: "Yeni Kural Ekle",
@@ -826,7 +825,9 @@ export var turkishStrings = {
     questionStartIndex_placeholder: "Örn.: a)",
     width_placeholder: "Ör.: 6 inç",
     minWidth_placeholder: "Ör.: 600 piksel",
-    maxWidth_placeholder: "Ör.: %50"
+    maxWidth_placeholder: "Ör.: %50",
+    imageHeight_placeholder: "Otomatik",
+    imageWidth_placeholder: "Otomatik"
   },
   // Property values
   pv: {

@@ -170,7 +170,6 @@ export var skStrings = {
     imageChooseImage: "Vyberte obrázok",
     addNewTypeQuestion: "Pridať {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
-    auto: "auto",
     choices_Item: "Položka ",
     lg: {
       addNewItem: "Pridať nové pravidlo",
@@ -826,7 +825,9 @@ export var skStrings = {
     questionStartIndex_placeholder: "Napr.: a)",
     width_placeholder: "Napr.: 6in",
     minWidth_placeholder: "Napríklad: 600px",
-    maxWidth_placeholder: "Napríklad: 50%"
+    maxWidth_placeholder: "Napríklad: 50%",
+    imageHeight_placeholder: "auto",
+    imageWidth_placeholder: "auto"
   },
   // Property values
   pv: {

@@ -170,7 +170,6 @@ var persianStrings = {
     imageChooseImage: "انتخاب تصویر",
     addNewTypeQuestion: "اضافه {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[لوگو]",
-    auto: "خودکار",
     choices_Item: "مورد ",
     lg: {
       addNewItem: "اضافه کردن آیتم جدید",
@@ -826,7 +825,9 @@ var persianStrings = {
     questionStartIndex_placeholder: "سابق: الف)",
     width_placeholder: "سابق: 6in",
     minWidth_placeholder: "سابق: 600 پیکسل",
-    maxWidth_placeholder: "سابق: 50٪"
+    maxWidth_placeholder: "سابق: 50٪",
+    imageHeight_placeholder: "خودکار",
+    imageWidth_placeholder: "خودکار"
   },
   // Property values
   pv: {

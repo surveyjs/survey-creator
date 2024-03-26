@@ -170,7 +170,6 @@ var simplifiedChineseTranslation = {
     imageChooseImage: "选择图像",
     addNewTypeQuestion: "添加{0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[徽标]",
-    auto: "自动",
     choices_Item: "项目",
     lg: {
       addNewItem: "添加新规则",
@@ -826,7 +825,9 @@ var simplifiedChineseTranslation = {
     questionStartIndex_placeholder: "例如：a）",
     width_placeholder: "例：6in",
     minWidth_placeholder: "例如：600px",
-    maxWidth_placeholder: "例：50%"
+    maxWidth_placeholder: "例：50%",
+    imageHeight_placeholder: "自动",
+    imageWidth_placeholder: "自动"
   },
   // Property values
   pv: {

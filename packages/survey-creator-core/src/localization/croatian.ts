@@ -170,7 +170,6 @@ export var hrStrings = {
     imageChooseImage: "Odabir slike",
     addNewTypeQuestion: "Dodaj {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
-    auto: "automobil",
     choices_Item: "Stavka ",
     lg: {
       addNewItem: "Dodaj novo pravilo",
@@ -826,7 +825,9 @@ export var hrStrings = {
     questionStartIndex_placeholder: "Npr.: a)",
     width_placeholder: "Npr.: 6 inča",
     minWidth_placeholder: "Npr.: 600px",
-    maxWidth_placeholder: "Npr.: 50%"
+    maxWidth_placeholder: "Npr.: 50%",
+    imageHeight_placeholder: "Автоматично",
+    imageWidth_placeholder: "Автоматично"
   },
   // Property values
   pv: {

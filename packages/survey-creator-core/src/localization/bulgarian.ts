@@ -170,7 +170,6 @@ export var bgStrings = {
     imageChooseImage: "Избери изображение.",
     addNewTypeQuestion: "Добави {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
-    auto: "Автоматично",
     choices_Item: "Елемент ",
     lg: {
       addNewItem: "Добавяне на ново правило",
@@ -826,7 +825,9 @@ export var bgStrings = {
     questionStartIndex_placeholder: "Напр.: а)",
     width_placeholder: "Пример: 6in",
     minWidth_placeholder: "Примерно: 600px",
-    maxWidth_placeholder: "Примерно: 50%"
+    maxWidth_placeholder: "Примерно: 50%",
+    imageHeight_placeholder: "Автоматично",
+    imageWidth_placeholder: "Автоматично"
   },
   // Property values
   pv: {

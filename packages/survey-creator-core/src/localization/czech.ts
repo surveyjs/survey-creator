@@ -170,7 +170,6 @@ export var czStrings = {
     imageChooseImage: "Vybrat obrázek",
     addNewTypeQuestion: "Přidat {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
-    auto: "automaticky",
     choices_Item: "Položka ",
     lg: {
       addNewItem: "Přidat nové pravidlo",
@@ -826,7 +825,9 @@ export var czStrings = {
     questionStartIndex_placeholder: "Př.: a)",
     width_placeholder: "Př.: 6in",
     minWidth_placeholder: "Př.: 600px",
-    maxWidth_placeholder: "Př.: 50%"
+    maxWidth_placeholder: "Př.: 50%",
+    imageHeight_placeholder: "automaticky",
+    imageWidth_placeholder: "automaticky"
   },
   // Property values
   pv: {

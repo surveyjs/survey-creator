@@ -170,7 +170,6 @@ export var nlStrings = {
     imageChooseImage: "Kies afbeelding",
     addNewTypeQuestion: "Voeg {0} toe", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
-    auto: "Auto",
     choices_Item: "Item ",
     lg: {
       addNewItem: "Nieuwe regel toevoegen",
@@ -826,7 +825,9 @@ export var nlStrings = {
     questionStartIndex_placeholder: "Vb.: a)",
     width_placeholder: "Bijv.: 6in",
     minWidth_placeholder: "Bijv.: 600px",
-    maxWidth_placeholder: "Vb.: 50%"
+    maxWidth_placeholder: "Vb.: 50%",
+    imageHeight_placeholder: "Auto",
+    imageWidth_placeholder: "Auto"
   },
   // Property values
   pv: {

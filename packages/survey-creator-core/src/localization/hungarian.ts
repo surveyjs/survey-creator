@@ -170,7 +170,6 @@ export var huStrings = {
     imageChooseImage: "Válassza a Kép lehetőséget",
     addNewTypeQuestion: "{0} hozzáadása", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGÓ]",
-    auto: "kocsi",
     choices_Item: "Cikk ",
     lg: {
       addNewItem: "Új szabály hozzáadása",
@@ -826,7 +825,9 @@ export var huStrings = {
     questionStartIndex_placeholder: "Pl.: a)",
     width_placeholder: "Pl.: 6 hüvelyk",
     minWidth_placeholder: "Pl.: 600px",
-    maxWidth_placeholder: "Pl.: 50%"
+    maxWidth_placeholder: "Pl.: 50%",
+    imageHeight_placeholder: "kocsi",
+    imageWidth_placeholder: "kocsi"
   },
   // Property values
   pv: {

@@ -170,7 +170,6 @@ export var indonesianStrings = {
     imageChooseImage: "Pilih Gambar",
     addNewTypeQuestion: "Tambahkan {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
-    auto: "Auto",
     choices_Item: "Benda ",
     lg: {
       addNewItem: "Tambahkan Aturan Baru",
@@ -826,7 +825,9 @@ export var indonesianStrings = {
     questionStartIndex_placeholder: "Mis.: a)",
     width_placeholder: "Contoh: 6in",
     minWidth_placeholder: "Contoh: 600px",
-    maxWidth_placeholder: "Contoh: 50%"
+    maxWidth_placeholder: "Contoh: 50%",
+    imageHeight_placeholder: "Auto",
+    imageWidth_placeholder: "Auto"
   },
   // Property values
   pv: {

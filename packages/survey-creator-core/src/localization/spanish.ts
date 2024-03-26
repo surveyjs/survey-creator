@@ -170,7 +170,6 @@ var spanishTranslation = {
     imageChooseImage: "Elegir imagen",
     addNewTypeQuestion: "Añadir {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGOTIPO]",
-    auto: "Automático",
     choices_Item: "Artículo ",
     lg: {
       addNewItem: "Añadir nueva regla",
@@ -826,7 +825,9 @@ var spanishTranslation = {
     questionStartIndex_placeholder: "Ej.: a)",
     width_placeholder: "Ej.: 6 pulgadas",
     minWidth_placeholder: "Ej.: 600px",
-    maxWidth_placeholder: "Ej.: 50%"
+    maxWidth_placeholder: "Ej.: 50%",
+    imageHeight_placeholder: "Automático",
+    imageWidth_placeholder: "Automático"
   },
   // Property values
   pv: {

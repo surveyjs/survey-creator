@@ -170,7 +170,6 @@ export var koreanStrings = {
     imageChooseImage: "이미지 선택",
     addNewTypeQuestion: "{0} 추가", //{0} is localizable question type
     chooseLogoPlaceholder: "[로고]",
-    auto: "자동",
     choices_Item: "항목 ",
     lg: {
       addNewItem: "새 규칙 추가",
@@ -826,7 +825,9 @@ export var koreanStrings = {
     questionStartIndex_placeholder: "예: a)",
     width_placeholder: "예: 6in",
     minWidth_placeholder: "예: 600px",
-    maxWidth_placeholder: "예: 50%"
+    maxWidth_placeholder: "예: 50%",
+    imageHeight_placeholder: "자동",
+    imageWidth_placeholder: "자동"
   },
   // Property values
   pv: {

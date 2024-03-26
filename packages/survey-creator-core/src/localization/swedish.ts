@@ -170,7 +170,6 @@ export let svStrings = {
     imageChooseImage: "Välj bild",
     addNewTypeQuestion: "Lägg till {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGOTYP]",
-    auto: "bil",
     choices_Item: "Sak ",
     lg: {
       addNewItem: "Lägg till ny regel",
@@ -826,7 +825,9 @@ export let svStrings = {
     questionStartIndex_placeholder: "Ex.: a)",
     width_placeholder: "Ex.: 6 tum",
     minWidth_placeholder: "Ex.: 600px",
-    maxWidth_placeholder: "Ex.: 50%"
+    maxWidth_placeholder: "Ex.: 50%",
+    imageHeight_placeholder: "bil",
+    imageWidth_placeholder: "bil"
   },
   // Property values
   pv: {

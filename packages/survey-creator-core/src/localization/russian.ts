@@ -170,7 +170,6 @@ export var ruStrings = {
     imageChooseImage: "Выберите изображение",
     addNewTypeQuestion: "Добавить {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[ЛОГОТИП]",
-    auto: "Авто",
     choices_Item: "Пункт ",
     lg: {
       addNewItem: "Добавить новое правило",
@@ -826,7 +825,9 @@ export var ruStrings = {
     questionStartIndex_placeholder: "Пример: а)",
     width_placeholder: "Пример: 6 дюймов",
     minWidth_placeholder: "Пример: 600px",
-    maxWidth_placeholder: "Пример: 50%"
+    maxWidth_placeholder: "Пример: 50%",
+    imageHeight_placeholder: "Авто",
+    imageWidth_placeholder: "Авто"
   },
   // Property values
   pv: {

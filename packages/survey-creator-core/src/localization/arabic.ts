@@ -170,7 +170,6 @@ export var arStrings = {
     imageChooseImage: "اختر صورة",
     addNewTypeQuestion: "Add {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[الشعار]",
-    auto: "تلقائي",
     choices_Item: "بند ",
     lg: {
       addNewItem: "إضافة قاعدة جديدة",
@@ -826,7 +825,9 @@ export var arStrings = {
     questionStartIndex_placeholder: "مثال: أ)",
     width_placeholder: "مثال: 6 بوصة",
     minWidth_placeholder: "مثال: 600px",
-    maxWidth_placeholder: "مثال: 50٪"
+    maxWidth_placeholder: "مثال: 50٪",
+    imageHeight_placeholder: "تلقائي",
+    imageWidth_placeholder: "تلقائي",
   },
   // Property values
   pv: {

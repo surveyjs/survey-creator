@@ -170,7 +170,6 @@ var polishStrings = {
     imageChooseImage: "Wybierz obraz",
     addNewTypeQuestion: "Dodaj {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
-    auto: "Automatycznie",
     choices_Item: "Przedmiot ",
     lg: {
       addNewItem: "Dodaj nową regułę",
@@ -826,7 +825,9 @@ var polishStrings = {
     questionStartIndex_placeholder: "Np.: a)",
     width_placeholder: "Np.: 6 cali",
     minWidth_placeholder: "Przykład: 600 pikseli",
-    maxWidth_placeholder: "Przykład: 50%"
+    maxWidth_placeholder: "Przykład: 50%",
+    imageHeight_placeholder: "Automatycznie",
+    imageWidth_placeholder: "Automatycznie"
   },
   // Property values
   pv: {

@@ -170,7 +170,6 @@ export var msStrings = {
     imageChooseImage: "Pilih Imej",
     addNewTypeQuestion: "Tambah {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
-    auto: "Auto",
     choices_Item: "Perkara ",
     lg: {
       addNewItem: "Tambah peraturan baru",
@@ -826,7 +825,9 @@ export var msStrings = {
     questionStartIndex_placeholder: "Ex.: a)",
     width_placeholder: "Ex.: 6in",
     minWidth_placeholder: "Ex.: 600px",
-    maxWidth_placeholder: "Ex.: 50%"
+    maxWidth_placeholder: "Ex.: 50%",
+    imageHeight_placeholder: "Auto",
+    imageWidth_placeholder: "Auto"
   },
   // Property values
   pv: {

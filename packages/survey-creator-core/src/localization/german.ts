@@ -826,7 +826,9 @@ var germanTranslation = {
     questionStartIndex_placeholder: "Bsp.: a)",
     width_placeholder: "Bsp.: 6in",
     minWidth_placeholder: "Bsp.: 600px",
-    maxWidth_placeholder: "Bsp.: 50%"
+    maxWidth_placeholder: "Bsp.: 50%",
+    imageHeight_placeholder: "auto",
+    imageWidth_placeholder: "auto"
   },
   // Property values
   pv: {

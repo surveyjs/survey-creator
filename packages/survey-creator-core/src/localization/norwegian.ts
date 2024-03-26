@@ -170,7 +170,6 @@ export var nbStrings = {
     imageChooseImage: "Velg bilde",
     addNewTypeQuestion: "Legg til {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
-    auto: "auto",
     choices_Item: "Vare ",
     lg: {
       addNewItem: "Legg til ny regel",
@@ -826,7 +825,9 @@ export var nbStrings = {
     questionStartIndex_placeholder: "Eks.: a)",
     width_placeholder: "Eks.: 6in",
     minWidth_placeholder: "Eksempel: 600 piksler",
-    maxWidth_placeholder: "Eks.: 50%"
+    maxWidth_placeholder: "Eks.: 50%",
+    imageHeight_placeholder: "auto",
+    imageWidth_placeholder: "auto"
   },
   // Property values
   pv: {

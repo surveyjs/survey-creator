@@ -170,7 +170,6 @@ export var fiStrings = {
     imageChooseImage: "Valitse kuva",
     addNewTypeQuestion: "Lisää {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
-    auto: "auto",
     choices_Item: "Kohta ",
     lg: {
       addNewItem: "Lisää uusi sääntö",
@@ -826,7 +825,9 @@ export var fiStrings = {
     questionStartIndex_placeholder: "Esim.: a)",
     width_placeholder: "Esimerkki: 6 tuumaa",
     minWidth_placeholder: "Esimerkki: 600 pikseliä",
-    maxWidth_placeholder: "Esimerkki: 50 %"
+    maxWidth_placeholder: "Esimerkki: 50 %",
+    imageHeight_placeholder: "auto",
+    imageWidth_placeholder: "auto"
   },
   // Property values
   pv: {

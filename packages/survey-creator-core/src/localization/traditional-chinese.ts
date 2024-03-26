@@ -170,7 +170,6 @@ var traditionalChineseTranslation = {
     imageChooseImage: "選擇圖像",
     addNewTypeQuestion: "新增{0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[徽標]",
-    auto: "自動",
     choices_Item: "專案",
     lg: {
       addNewItem: "添加新規則",
@@ -826,7 +825,9 @@ var traditionalChineseTranslation = {
     questionStartIndex_placeholder: "例如：a）",
     width_placeholder: "例：6in",
     minWidth_placeholder: "例如：600px",
-    maxWidth_placeholder: "例：50%"
+    maxWidth_placeholder: "例：50%",
+    imageHeight_placeholder: "自動",
+    imageWidth_placeholder: "自動"
   },
   // Property values
   pv: {

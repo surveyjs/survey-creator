@@ -170,7 +170,6 @@ export var mnStrings = {
     imageChooseImage: "Зураг сонгох",
     addNewTypeQuestion: "{0} нэмэх", //{0} is localizable question type
     chooseLogoPlaceholder: "[Лого]",
-    auto: "автомат",
     choices_Item: "Хэсэг ",
     lg: {
       addNewItem: "Шинэ дүрэм нэмэх",
@@ -826,7 +825,9 @@ export var mnStrings = {
     questionStartIndex_placeholder: "Экс.: а)",
     width_placeholder: "Экс.: 6ин",
     minWidth_placeholder: "Экс: 600px",
-    maxWidth_placeholder: "Экс: 50%"
+    maxWidth_placeholder: "Экс: 50%",
+    imageHeight_placeholder: "автомат",
+    imageWidth_placeholder: "автомат"
   },
   // Property values
   pv: {

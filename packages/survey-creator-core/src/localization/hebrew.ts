@@ -826,7 +826,9 @@ export var hebrewStrings = {
     questionStartIndex_placeholder: "לדוגמה: א)",
     width_placeholder: "לדוגמה: 6in",
     minWidth_placeholder: "לדוגמה: 600px",
-    maxWidth_placeholder: "לדוגמה: 50%"
+    maxWidth_placeholder: "לדוגמה: 50%",
+    imageHeight_placeholder: "אוטומטי",
+    imageWidth_placeholder: "אוטומטי"
   },
   // Property values
   pv: {

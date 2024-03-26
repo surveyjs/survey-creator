@@ -170,7 +170,6 @@ export var jaStrings = {
     imageChooseImage: "画像を選択",
     addNewTypeQuestion: "{0}を追加", //{0} is localizable question type
     chooseLogoPlaceholder: "[ロゴ]",
-    auto: "自動",
     choices_Item: "アイテム",
     lg: {
       addNewItem: "新しいルールを追加",
@@ -827,10 +826,8 @@ export var jaStrings = {
     width_placeholder: "例:6インチ",
     minWidth_placeholder: "例:600px",
     maxWidth_placeholder: "例:50%",
-    pattern_placeholder: "例:+1(999)-999-99-99",
-    datetimepattern_placeholder: "例:mm/dd/yyyy",
-    currencyprefix_placeholder: "例:$",
-    currencysuffix_placeholder: "例:米ドル"
+    imageHeight_placeholder: "自動",
+    imageWidth_placeholder: "自動"
   },
   // Property values
   pv: {

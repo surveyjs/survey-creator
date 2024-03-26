@@ -172,7 +172,6 @@ export var enStrings = {
     imageChooseImage: "Choose Image",
     addNewTypeQuestion: "Add {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
-    auto: "auto",
     choices_Item: "Item ",
     lg: {
       addNewItem: "Add New Rule",
