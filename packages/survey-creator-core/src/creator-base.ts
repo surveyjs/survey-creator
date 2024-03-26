@@ -2,7 +2,7 @@ import {
   Base, SurveyModel, ListModel, Question, PanelModel, PageModel, PopupModel, property, IElement, Serializer,
   JsonObjectProperty, ActionContainer, AdaptiveActionContainer, IAction, Action, IPanel, SurveyElement, ItemValue,
   QuestionSelectBase, QuestionRowModel, LocalizableString, ILocalizableString, ILocalizableOwner, PopupBaseViewModel,
-  EventBase, hasLicense, settings as SurveySettings, Event, Helpers as SurveyHelpers, MatrixDropdownColumn, JsonObject,
+  EventBase, hasLicense, slk, settings as SurveySettings, Event, Helpers as SurveyHelpers, MatrixDropdownColumn, JsonObject,
   dxSurveyService, ISurveyElement, PanelModelBase, surveyLocalization, QuestionMatrixDropdownModelBase, ITheme, Helpers,
   chooseFiles
 } from "survey-core";
@@ -208,6 +208,9 @@ export class SurveyCreatorModel extends Base
   }
   public get licenseText(): string {
     return this.getLocString("survey.license");
+  }
+  public slk(val: string): void {
+    slk(val);
   }
   /**
    * Specifies whether to automatically save a survey or theme JSON schema each time survey or theme settings are changed.
