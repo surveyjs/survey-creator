@@ -543,7 +543,7 @@ export class PropertyJSONGenerator {
         }
       }
       q.descriptionLocation = "hidden";
-      let helpText = editorLocalization.getPropertyHelpInEditor(this.obj.getType(), prop.name, prop.type);
+      const helpText = editorLocalization.getPropertyHelpInEditor(this.obj.getType(), prop.name, prop.type);
       if (!!helpText) {
         q.description = helpText;
       }
@@ -704,9 +704,9 @@ export class PropertyJSONGenerator {
       json.requiredErrorText = editorLocalization.getString("pe.propertyIsEmpty");
     }
 
-    const placeholder = SurveyQuestionProperties.getPropertyPlaceholder(this.obj.getType(), prop.name, this.propertyGridDefinition);
+    const placeholder = editorLocalization.getPropertyPlaceholder(this.obj.getType(), prop.name, prop.type);
     if (!!placeholder) {
-      json.placeholder = editorLocalization.getString("pe." + placeholder);
+      json.placeholder = placeholder;
     }
     return json;
   }

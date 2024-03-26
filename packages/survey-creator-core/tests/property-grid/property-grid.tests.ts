@@ -3216,3 +3216,9 @@ test("Set correct property grid category", () => {
   expect(propertyGrid.survey.getAllPanels().indexOf(panel)).toEqual(1);
   Serializer.removeProperty("question", "validation");
 });
+test("column title property editor, set placeholder", (): any => {
+  const panel = new PanelModel("p1");
+  const propertyGrid = new PropertyGridModelTester(panel);
+  const questionStartIndexPropertyEditor = <QuestionCommentModel>propertyGrid.survey.getQuestionByName("questionStartIndex");
+  expect(questionStartIndexPropertyEditor.placeholder).toEqual("Ex.: a)");
+});

@@ -9,9 +9,11 @@ export class EditorLocalization {
   public locales = {};
   private peByClass = {};
   private peHelpByClass = {};
+  private pePlaceholderByClass = {};
   public reset() : void {
     this.peByClass = {};
     this.peHelpByClass = {};
+    this.pePlaceholderByClass = {};
   }
   public get defaultLocale(): string { return this.defaultLocaleValue; }
   public set defaultLocale(val: string) {
@@ -105,6 +107,17 @@ export class EditorLocalization {
     }
     if(!!helpStr) return helpStr;
     if(!!propType && !!loc.pe) return loc.pe[propType + "Help"];
+    return undefined;
+  }
+  public getPropertyPlaceholder(typeName: string, propName: string, propType: string = undefined): string {
+    let str = this.getPropertyInfoInEditorByType(typeName, propName, this.pePlaceholderByClass, "peplaceholder");
+    if(!!str) return (str === " ") ? null: str;
+    const loc = this.getLocale();
+    if(!!loc && !!loc.pehelp) {
+      str = loc.pehelp[propName];
+    }
+    if(!!str) return str;
+    if(!!propType && !!loc.pe) return loc.pe[propType + "_placeholder"];
     return undefined;
   }
   private getPropertyInfoInEditorByType(typeName: string, propName: string, peInfoByClass: any, postFix: string): string {
