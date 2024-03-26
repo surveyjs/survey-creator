@@ -294,13 +294,16 @@ test("QuestionMultipleTextModel items property editor", () => {
   nameQuestion.value = "item11";
   expect(question.items[0].name).toEqual("item11");
   question.items[0].name = "item1";
-  rows[0].showDetailPanel();
-  var titleQ =
-    itemsQuestion.visibleRows[0].detailPanel.getQuestionByName("title");
+  propertyGrid.obj = rows[0].editingObj;
+  var titleQ = propertyGrid.survey.getQuestionByName("title");
   expect(titleQ).toBeTruthy();
   expect(titleQ.value).toEqual("Item 1");
   titleQ.value = "item 2";
+  propertyGrid.obj = question;
   expect(question.items[0].title).toEqual("item 2");
+  itemsQuestion = <QuestionMatrixDynamicModel>(propertyGrid.survey.getQuestionByName("items"));
+  var rows = itemsQuestion.visibleRows;
+  expect(rows).toHaveLength(1);
   itemsQuestion.addRow();
   expect(question.items).toHaveLength(2);
   expect(question.items[1].name).toEqual("item2");
@@ -314,10 +317,8 @@ test("QuestionMultipleTextModel items property editor + validators editor", () =
   );
   expect(itemsQuestion).toBeTruthy();
   var rows = itemsQuestion.visibleRows;
-  rows[0].showDetailPanel();
-  var validatorsQuestion = <QuestionMatrixDynamicModel>(
-    rows[0].detailPanel.getQuestionByName("validators")
-  );
+  propertyGrid.obj = rows[0].editingObj;
+  var validatorsQuestion = <QuestionMatrixDynamicModel>propertyGrid.survey.getQuestionByName("validators");
   expect(validatorsQuestion).toBeTruthy(); //visibleIf is here
   expect(validatorsQuestion.columns).toHaveLength(1);
   expect(validatorsQuestion.visibleRows).toHaveLength(0);
