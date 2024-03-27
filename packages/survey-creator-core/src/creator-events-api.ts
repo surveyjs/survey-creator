@@ -613,6 +613,10 @@ export interface NotifyEvent {
    * A message to display.
    */
   message: string;
+  /**
+   * Notification type: "info" or "error", "info" is the default value.
+   */
+  type: string;
 }
 
 export interface ElementFocusingEvent {

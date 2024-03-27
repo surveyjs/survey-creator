@@ -2133,7 +2133,7 @@ export class SurveyCreatorModel extends Base
       this.notifier.notify(message, type);
       // alert(message);
     } else {
-      this.onNotify.fire(this, { message: message });
+      this.onNotify.fire(this, { message, type });
     }
   }
 
