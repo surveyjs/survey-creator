@@ -12,7 +12,28 @@ test("Ghost Survey Element", async (t) => {
     await t.resizeWindow(2560, 1440);
     await setJSON({ pages: [{ name: "page1" }] });
 
-    const EmptyPage = Selector("[data-sv-drop-target-survey-element='page1']");
+    const patchDragDropToShowGhostElementAfterDrop = ClientFunction(() => {
+      window["creator"].dragDropSurveyElements.removeGhostElementFromSurvey = () => { };
+      window["creator"].dragDropSurveyElements.domAdapter.drop = () => { };
+      window["creator"].dragDropSurveyElements.domAdapter.clear = () => { };
+    });
+
+    await patchDragDropToShowGhostElementAfterDrop();
+
+    const ghostPage = Selector("[data-sv-drop-target-survey-element='newGhostPage']");
+    await t
+      .hover(RatingToolboxItem)
+      .dragToElement(RatingToolboxItem, ghostPage, { speed: 0.5 });
+
+    await takeElementScreenshot("drag-drop-survey-element-ghost.png", Selector(".svc-page--drag-over-empty"), t, comparer);
+  });
+});
+
+test("Empty page", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await setJSON({ pages: [{ name: "page1" }] });
+    await t.resizeWindow(2560, 1440);
+    await setJSON({ pages: [{ name: "page1" }] });
 
     const patchDragDropToShowGhostElementAfterDrop = ClientFunction(() => {
       window["creator"].dragDropSurveyElements.removeGhostElementFromSurvey = () => { };
@@ -22,11 +43,12 @@ test("Ghost Survey Element", async (t) => {
 
     await patchDragDropToShowGhostElementAfterDrop();
 
+    const EmptyPage = Selector("[data-sv-drop-target-survey-element='page1']");
     await t
       .hover(RatingToolboxItem)
       .dragToElement(RatingToolboxItem, EmptyPage, { speed: 0.5 });
 
-    await takeElementScreenshot("drag-drop-survey-element-ghost.png", Selector(".svc-page--drag-over-empty"), t, comparer);
+    await takeElementScreenshot("drag-drop-survey-element-empty-page.png", Selector(".svc-question__content--drag-over-inside"), t, comparer);
   });
 });
 

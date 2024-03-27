@@ -170,7 +170,6 @@ export var turkishStrings = {
     imageChooseImage: "Resim Seç",
     addNewTypeQuestion: "{0} ekle", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
-    auto: "Otomatik",
     choices_Item: "Madde ",
     lg: {
       addNewItem: "Yeni Kural Ekle",
@@ -368,6 +367,28 @@ export var turkishStrings = {
     multipletextitem: {
       name: "Ad",
       title: "Başlık"
+    },
+    masksettings: {
+      saveMaskedValue: "Anket sonuçlarında maskelenmiş değeri kaydetme"
+    },
+    patternmask: {
+      pattern: "Değer örüntüsü"
+    },
+    datetimemask: {
+      min: "Minimum değer",
+      max: "Maksimum değer"
+    },
+    numericmask: {
+      allowNegativeValues: "Negatif değerlere izin ver",
+      thousandsSeparator: "Binlik ayırıcı",
+      decimalSeparator: "Ondalık ayırıcı",
+      precision: "Değer hassasiyeti",
+      min: "Minimum değer",
+      max: "Maksimum değer"
+    },
+    currencymask: {
+      prefix: "Para birimi öneki",
+      suffix: "Para birimi son eki"
     },
     imageHeight: "Resim yüksekliği",
     imageWidth: "Resim genişliği",
@@ -609,6 +630,13 @@ export var turkishStrings = {
     autoGrowComment: "Gerekirse yorum alanını otomatik olarak genişletin",
     allowResizeComment: "Kullanıcıların metin alanlarını yeniden boyutlandırmasına izin verme",
     textUpdateMode: "Metin sorusu değerini güncelleme",
+    maskType: "Giriş maskesi türü",
+    maskTypes: {
+      patternmask: "Desen",
+      numericmask: "Sayısal",
+      datetimemask: "Tarih ve Saat",
+      currencymask: "Para birimi"
+    },
     focusOnFirstError: "İlk hataya odaklan",
     checkErrorsMode: "Çalıştırma doğrulaması",
     navigateToUrl: "URL'ye gidin",
@@ -733,6 +761,7 @@ export var turkishStrings = {
       templateTitle: "Şablon başlığı",
       totals: "Toplamlar",
       logic: "Mantık",
+      mask: "Giriş Maskesi Ayarları",
       layout: {
         panel: "Düzen",
         question: "Düzen",
@@ -796,7 +825,9 @@ export var turkishStrings = {
     questionStartIndex_placeholder: "Örn.: a)",
     width_placeholder: "Ör.: 6 inç",
     minWidth_placeholder: "Ör.: 600 piksel",
-    maxWidth_placeholder: "Ör.: %50"
+    maxWidth_placeholder: "Ör.: %50",
+    imageHeight_placeholder: "Otomatik",
+    imageWidth_placeholder: "Otomatik"
   },
   // Property values
   pv: {
@@ -1011,7 +1042,8 @@ export var turkishStrings = {
     searchMode: {
       contains: "Içerir",
       startsWith: "İle başlar"
-    }
+    },
+    textWrapEnabled: "Sarma seçenekleri"
   },
   // Operators
   op: {
@@ -1075,6 +1107,18 @@ export var turkishStrings = {
     runexpressiontrigger: "mantıksal ifadeyi çalıştır",
     visibletrigger: "görünürlüğü değiştir (kullanımdan kaldırıldı)"
   },
+  peplaceholder: {
+    patternmask: {
+      pattern: "Ör.: +1(999)-999-99-99"
+    },
+    datetimemask: {
+      pattern: "Ör.: aa/gg/yyyy"
+    },
+    currencymask: {
+      prefix: "Ör.: $",
+      suffix: "Ör.: USD"
+    }
+  },
   pehelp: {
     panel: {
       name: "Yanıtlayanlar tarafından görülemeyen bir panel kimliği.",
@@ -1137,7 +1181,8 @@ export var turkishStrings = {
       },
       textUpdateMode: "Şunlar arasından seçim yapın: \"Odak kaybolduğunda\" - giriş alanı odağı kaybettiğinde değer güncellenir; \"Yazarken\" - değer, kullanıcılar yazarken gerçek zamanlı olarak güncellenir. \"Devral\" seçeneği, anket düzeyindeki ayarı uygular (varsayılan olarak \"Odak kaybolduğunda\").",
       url: "Çoktan seçmeli sorular için herhangi bir web hizmetini veri kaynağı olarak kullanabilirsiniz. Seçim değerlerini doldurmak için, verileri sağlayan hizmetin URL'sini girin.",
-      searchMode: "Açılan listeyi filtrelemek için kullanılan bir karşılaştırma işlemi."
+      searchMode: "Açılan listeyi filtrelemek için kullanılan bir karşılaştırma işlemi.",
+      textWrapEnabled: "Seçim seçeneklerindeki uzun metinler, açılır menüye sığacak şekilde otomatik olarak satır sonları oluşturur. Metinlerin kırpılmasını istiyorsanız seçimi kaldırın."
     },
     signaturepad: {
       signatureWidth: "Görüntülenen imza alanının ve elde edilen görüntünün genişliğini ayarlar.",
@@ -1278,7 +1323,25 @@ export var turkishStrings = {
     autocomplete: "Daha fazla bilgi için [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) özellik açıklamasına bakın.",
     filePlaceholder: "\"Kaynak türü\" \"Yerel dosyalar\" olduğunda veya fotoğraf makinesi kullanılamadığında geçerlidir",
     photoPlaceholder: "\"Kaynak türü\" \"Kamera\" olduğunda geçerlidir.",
-    fileOrPhotoPlaceholder: "\"Kaynak türü\" \"Yerel dosyalar veya kamera\" olduğunda geçerlidir."
+    fileOrPhotoPlaceholder: "\"Kaynak türü\" \"Yerel dosyalar veya kamera\" olduğunda geçerlidir.",
+    masksettings: {
+      saveMaskedValue: "Soru değerini, anket sonuçlarında uygulanan bir maske ile saklamak istiyorsanız seçin."
+    },
+    patternmask: {
+      pattern: "Desen, dize değişmez değerlerini ve aşağıdaki yer tutucuları içerebilir: '9' - bir rakam için; 'a' - büyük veya küçük harf için; '#' - bir rakam veya büyük veya küçük harf için. Bir karakterden kaçmak için ters eğik çizgi '\\' kullanın."
+    },
+    datetimemask: {
+      pattern: "Desen, ayırıcı karakterler ve aşağıdaki yer tutucuları içerebilir: 'm' - ay numarası için; 'mm' - ay numarası için, tek basamaklı değerler için başında sıfır var; 'd' - ayın günü için; 'dd' - ayın günü için, tek basamaklı değerler için başında sıfır var; 'yy' - yılın son iki hanesi için; 'yyyy' - dört basamaklı bir yıl için."
+    },
+    numericmask: {
+      decimalSeparator: "Görüntülenen bir sayının kesirli kısmını tamsayı kısmından ayırmak için kullanılan bir sembol.",
+      thousandsSeparator: "Büyük bir sayının rakamlarını üçlü gruplara ayırmak için kullanılan bir sembol.",
+      precision: "Görüntülenen bir sayı için ondalık virgülden sonra kaç basamak tutulacağını sınırlar."
+    },
+    currencymask: {
+      prefix: "Değerden önce görüntülenecek bir veya birkaç sembol.",
+      suffix: "Değerden sonra görüntülenecek bir veya birkaç sembol."
+    }
   },
   // Properties
   p: {
@@ -2419,3 +2482,35 @@ editorLocalization.locales["tr"] = turkishStrings;
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Derecelendirme alanı için yer tutucu metin"
 // pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "Anketi otomatik olarak tamamlama"
 // pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Yanıtlayan tüm soruları yanıtladıktan sonra anketin otomatik olarak tamamlanmasını isteyip istemediğinizi seçin."
+// masksettings.saveMaskedValue: "Save masked value in survey results" => "Anket sonuçlarında maskelenmiş değeri kaydetme"
+// patternmask.pattern: "Value pattern" => "Değer örüntüsü"
+// datetimemask.min: "Minimum value" => "Minimum değer"
+// datetimemask.max: "Maximum value" => "Maksimum değer"
+// numericmask.allowNegativeValues: "Allow negative values" => "Negatif değerlere izin ver"
+// numericmask.thousandsSeparator: "Thousands separator" => "Binlik ayırıcı"
+// numericmask.decimalSeparator: "Decimal separator" => "Ondalık ayırıcı"
+// numericmask.precision: "Value precision" => "Değer hassasiyeti"
+// numericmask.min: "Minimum value" => "Minimum değer"
+// numericmask.max: "Maximum value" => "Maksimum değer"
+// currencymask.prefix: "Currency prefix" => "Para birimi öneki"
+// currencymask.suffix: "Currency suffix" => "Para birimi son eki"
+// pe.maskType: "Input mask type" => "Giriş maskesi türü"
+// maskTypes.patternmask: "Pattern" => "Desen"
+// maskTypes.numericmask: "Numeric" => "Sayısal"
+// maskTypes.datetimemask: "Date and Time" => "Tarih ve Saat"
+// maskTypes.currencymask: "Currency" => "Para birimi"
+// tabs.mask: "Input Mask Settings" => "Giriş Maskesi Ayarları"
+// pe.pattern_placeholder: "Ex.: +1(999)-999-99-99" => "Ör.: +1(999)-999-99-99"
+// pe.datetimepattern_placeholder: "Ex.: mm/dd/yyyy" => "Ör.: aa/gg/yyyy"
+// pe.currencyprefix_placeholder: "Ex.: $" => "Ör.: $"
+// pe.currencysuffix_placeholder: "Ex.: USD" => "Ör.: USD"
+// pv.textWrapEnabled: "Wrap choices" => "Sarma seçenekleri"
+// question.textWrapEnabled: "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip." => "Seçim seçeneklerindeki uzun metinler, açılır menüye sığacak şekilde otomatik olarak satır sonları oluşturur. Metinlerin kırpılmasını istiyorsanız seçimi kaldırın."
+// masksettings.saveMaskedValue: "Select if you want to store the question value with an applied mask in survey results." => "Soru değerini, anket sonuçlarında uygulanan bir maske ile saklamak istiyorsanız seçin."
+// patternmask.pattern: "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character." => "Desen, dize değişmez değerlerini ve aşağıdaki yer tutucuları içerebilir: '9' - bir rakam için; 'a' - büyük veya küçük harf için; '#' - bir rakam veya büyük veya küçük harf için. Bir karakterden kaçmak için ters eğik çizgi '\\' kullanın."
+// datetimemask.pattern: "The pattern can contain separator characters and the following placeholders: `m` - for month number; `mm` - for month number, with leading zero for single-digit values; `d` - for day of the month; `dd` - for day of the month, with leading zero for single-digit values; `yy` - for the last two digits of the year; `yyyy` - for a four-digit year." => "Desen, ayırıcı karakterler ve aşağıdaki yer tutucuları içerebilir: 'm' - ay numarası için; 'mm' - ay numarası için, tek basamaklı değerler için başında sıfır var; 'd' - ayın günü için; 'dd' - ayın günü için, tek basamaklı değerler için başında sıfır var; 'yy' - yılın son iki hanesi için; 'yyyy' - dört basamaklı bir yıl için."
+// numericmask.decimalSeparator: "A symbol used to separate the fractional part from the integer part of a displayed number." => "Görüntülenen bir sayının kesirli kısmını tamsayı kısmından ayırmak için kullanılan bir sembol."
+// numericmask.thousandsSeparator: "A symbol used to separate the digits of a large number into groups of three." => "Büyük bir sayının rakamlarını üçlü gruplara ayırmak için kullanılan bir sembol."
+// numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Görüntülenen bir sayı için ondalık virgülden sonra kaç basamak tutulacağını sınırlar."
+// currencymask.prefix: "One or several symbols to be displayed before the value." => "Değerden önce görüntülenecek bir veya birkaç sembol."
+// currencymask.suffix: "One or several symbols to be displayed after the value." => "Değerden sonra görüntülenecek bir veya birkaç sembol."

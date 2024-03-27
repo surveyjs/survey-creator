@@ -170,7 +170,6 @@ var italianTranslation = {
     imageChooseImage: "Scegli immagine",
     addNewTypeQuestion: "Aggiungi {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
-    auto: "Automatico",
     choices_Item: "Articolo ",
     lg: {
       addNewItem: "Aggiungi Nuova Regola",
@@ -368,6 +367,28 @@ var italianTranslation = {
     multipletextitem: {
       name: "Nome",
       title: "Titolo"
+    },
+    masksettings: {
+      saveMaskedValue: "Salvare il valore mascherato nei risultati dell'indagine"
+    },
+    patternmask: {
+      pattern: "Modello di valore"
+    },
+    datetimemask: {
+      min: "Valore minimo",
+      max: "Valore massimo"
+    },
+    numericmask: {
+      allowNegativeValues: "Consenti valori negativi",
+      thousandsSeparator: "Separatore delle migliaia",
+      decimalSeparator: "Separatore decimale",
+      precision: "Precisione del valore",
+      min: "Valore minimo",
+      max: "Valore massimo"
+    },
+    currencymask: {
+      prefix: "Prefisso di valuta",
+      suffix: "Suffisso valuta"
     },
     imageHeight: "Altezza immagine",
     imageWidth: "Larghezza immagine",
@@ -609,6 +630,13 @@ var italianTranslation = {
     autoGrowComment: "Espansione automatica dell'area dei commenti, se necessaria",
     allowResizeComment: "Consenti agli utenti di ridimensionare le aree di testo",
     textUpdateMode: "Aggiornare il valore del testo della domanda",
+    maskType: "Tipo di maschera di input",
+    maskTypes: {
+      patternmask: "Modello",
+      numericmask: "Numerico",
+      datetimemask: "Data e ora",
+      currencymask: "Valuta"
+    },
     focusOnFirstError: "Imposta il focus sulla prima risposta invalida",
     checkErrorsMode: "Esegui la convalida",
     navigateToUrl: "Naviga fino all'URL",
@@ -733,6 +761,7 @@ var italianTranslation = {
       templateTitle: "Template titolo",
       totals: "Totale",
       logic: "Logica",
+      mask: "Impostazioni della maschera di input",
       layout: {
         panel: "Impaginazione",
         question: "Impaginazione",
@@ -796,7 +825,9 @@ var italianTranslation = {
     questionStartIndex_placeholder: "Es.: a)",
     width_placeholder: "Es.: 6 pollici",
     minWidth_placeholder: "Es.: 600px",
-    maxWidth_placeholder: "Es.: 50%"
+    maxWidth_placeholder: "Es.: 50%",
+    imageHeight_placeholder: "Automatico",
+    imageWidth_placeholder: "Automatico"
   },
   // Property values
   pv: {
@@ -1011,7 +1042,8 @@ var italianTranslation = {
     searchMode: {
       contains: "Contiene",
       startsWith: "Inizia con"
-    }
+    },
+    textWrapEnabled: "Scelte di avvolgimento"
   },
   // Operators
   op: {
@@ -1075,6 +1107,18 @@ var italianTranslation = {
     runexpressiontrigger: "Esegui espressione",
     visibletrigger: "Cambia visibilità"
   },
+  peplaceholder: {
+    patternmask: {
+      pattern: "Es.: +1(999)-999-99-99"
+    },
+    datetimemask: {
+      pattern: "Es.: gg/mm/aaaa"
+    },
+    currencymask: {
+      prefix: "Es.: $",
+      suffix: "Es.: USD"
+    }
+  },
   pehelp: {
     panel: {
       name: "Un ID pannello che non è visibile ai rispondenti.",
@@ -1137,7 +1181,8 @@ var italianTranslation = {
       },
       textUpdateMode: "Scegli tra: \"In caso di perdita di messa a fuoco\" - il valore viene aggiornato quando il campo di immissione perde lo stato attivo; \"Durante la digitazione\": il valore viene aggiornato in tempo reale, mentre gli utenti digitano. L'opzione \"Eredita\" applica l'impostazione a livello di indagine (\"In caso di perdita di focus\" per impostazione predefinita).",
       url: "È possibile utilizzare qualsiasi servizio Web come origine dati per le domande a scelta multipla. Per popolare i valori di scelta, immettere l'URL del servizio che fornisce i dati.",
-      searchMode: "Operazione di confronto utilizzata per filtrare l'elenco a discesa."
+      searchMode: "Operazione di confronto utilizzata per filtrare l'elenco a discesa.",
+      textWrapEnabled: "I testi lunghi nelle opzioni di scelta genereranno automaticamente interruzioni di riga per adattarsi al menu a discesa. Deselezionare questa opzione se si desidera che i testi vengano ritagliati."
     },
     signaturepad: {
       signatureWidth: "Imposta la larghezza dell'area della firma visualizzata e dell'immagine risultante.",
@@ -1278,7 +1323,25 @@ var italianTranslation = {
     autocomplete: "Per ulteriori informazioni, consultare la descrizione dell'attributo [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete).",
     filePlaceholder: "Si applica quando \"Tipo di origine\" è \"File locali\" o quando la fotocamera non è disponibile",
     photoPlaceholder: "Si applica quando \"Tipo di sorgente\" è \"Fotocamera\".",
-    fileOrPhotoPlaceholder: "Si applica quando \"Tipo di origine\" è \"File locali o fotocamera\"."
+    fileOrPhotoPlaceholder: "Si applica quando \"Tipo di origine\" è \"File locali o fotocamera\".",
+    masksettings: {
+      saveMaskedValue: "Selezionare questa opzione se si desidera memorizzare il valore della domanda con una maschera applicata nei risultati dell'indagine."
+    },
+    patternmask: {
+      pattern: "Il modello può contenere valori letterali stringa e i segnaposto seguenti: '9' - per una cifra; 'a' - per una lettera maiuscola o minuscola; '#' - per una cifra o una lettera maiuscola o minuscola. Usa la barra rovesciata '\\' per eseguire l'escape di un carattere."
+    },
+    datetimemask: {
+      pattern: "Il modello può contenere caratteri separatori e i seguenti segnaposto: 'm' - per il numero del mese; 'mm' - per il numero del mese, con zero iniziale per i valori a una cifra; 'd' - per il giorno del mese; 'dd' - per il giorno del mese, con zero iniziale per i valori a una cifra; 'yy' - per le ultime due cifre dell'anno; 'yyyy' - per un anno a quattro cifre."
+    },
+    numericmask: {
+      decimalSeparator: "Simbolo utilizzato per separare la parte frazionaria dalla parte intera di un numero visualizzato.",
+      thousandsSeparator: "Simbolo utilizzato per separare le cifre di un numero elevato in gruppi di tre.",
+      precision: "Limita il numero di cifre da mantenere dopo la virgola decimale per un numero visualizzato."
+    },
+    currencymask: {
+      prefix: "Uno o più simboli da visualizzare prima del valore.",
+      suffix: "Uno o più simboli da visualizzare dopo il valore."
+    }
   },
   // Properties
   p: {
@@ -2182,3 +2245,35 @@ editorLocalization.locales["it"] = italianTranslation;
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Testo segnaposto per l'area di classificazione"
 // pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "Completa automaticamente il sondaggio"
 // pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Seleziona questa opzione se desideri che l'indagine venga completata automaticamente dopo che un rispondente ha risposto a tutte le domande."
+// masksettings.saveMaskedValue: "Save masked value in survey results" => "Salvare il valore mascherato nei risultati dell'indagine"
+// patternmask.pattern: "Value pattern" => "Modello di valore"
+// datetimemask.min: "Minimum value" => "Valore minimo"
+// datetimemask.max: "Maximum value" => "Valore massimo"
+// numericmask.allowNegativeValues: "Allow negative values" => "Consenti valori negativi"
+// numericmask.thousandsSeparator: "Thousands separator" => "Separatore delle migliaia"
+// numericmask.decimalSeparator: "Decimal separator" => "Separatore decimale"
+// numericmask.precision: "Value precision" => "Precisione del valore"
+// numericmask.min: "Minimum value" => "Valore minimo"
+// numericmask.max: "Maximum value" => "Valore massimo"
+// currencymask.prefix: "Currency prefix" => "Prefisso di valuta"
+// currencymask.suffix: "Currency suffix" => "Suffisso valuta"
+// pe.maskType: "Input mask type" => "Tipo di maschera di input"
+// maskTypes.patternmask: "Pattern" => "Modello"
+// maskTypes.numericmask: "Numeric" => "Numerico"
+// maskTypes.datetimemask: "Date and Time" => "Data e ora"
+// maskTypes.currencymask: "Currency" => "Valuta"
+// tabs.mask: "Input Mask Settings" => "Impostazioni della maschera di input"
+// pe.pattern_placeholder: "Ex.: +1(999)-999-99-99" => "Es.: +1(999)-999-99-99"
+// pe.datetimepattern_placeholder: "Ex.: mm/dd/yyyy" => "Es.: gg/mm/aaaa"
+// pe.currencyprefix_placeholder: "Ex.: $" => "Es.: $"
+// pe.currencysuffix_placeholder: "Ex.: USD" => "Es.: USD"
+// pv.textWrapEnabled: "Wrap choices" => "Scelte di avvolgimento"
+// question.textWrapEnabled: "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip." => "I testi lunghi nelle opzioni di scelta genereranno automaticamente interruzioni di riga per adattarsi al menu a discesa. Deselezionare questa opzione se si desidera che i testi vengano ritagliati."
+// masksettings.saveMaskedValue: "Select if you want to store the question value with an applied mask in survey results." => "Selezionare questa opzione se si desidera memorizzare il valore della domanda con una maschera applicata nei risultati dell'indagine."
+// patternmask.pattern: "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character." => "Il modello può contenere valori letterali stringa e i segnaposto seguenti: '9' - per una cifra; 'a' - per una lettera maiuscola o minuscola; '#' - per una cifra o una lettera maiuscola o minuscola. Usa la barra rovesciata '\\' per eseguire l'escape di un carattere."
+// datetimemask.pattern: "The pattern can contain separator characters and the following placeholders: `m` - for month number; `mm` - for month number, with leading zero for single-digit values; `d` - for day of the month; `dd` - for day of the month, with leading zero for single-digit values; `yy` - for the last two digits of the year; `yyyy` - for a four-digit year." => "Il modello può contenere caratteri separatori e i seguenti segnaposto: 'm' - per il numero del mese; 'mm' - per il numero del mese, con zero iniziale per i valori a una cifra; 'd' - per il giorno del mese; 'dd' - per il giorno del mese, con zero iniziale per i valori a una cifra; 'yy' - per le ultime due cifre dell'anno; 'yyyy' - per un anno a quattro cifre."
+// numericmask.decimalSeparator: "A symbol used to separate the fractional part from the integer part of a displayed number." => "Simbolo utilizzato per separare la parte frazionaria dalla parte intera di un numero visualizzato."
+// numericmask.thousandsSeparator: "A symbol used to separate the digits of a large number into groups of three." => "Simbolo utilizzato per separare le cifre di un numero elevato in gruppi di tre."
+// numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Limita il numero di cifre da mantenere dopo la virgola decimale per un numero visualizzato."
+// currencymask.prefix: "One or several symbols to be displayed before the value." => "Uno o più simboli da visualizzare prima del valore."
+// currencymask.suffix: "One or several symbols to be displayed after the value." => "Uno o più simboli da visualizzare dopo il valore."

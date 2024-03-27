@@ -170,7 +170,6 @@ export var mnStrings = {
     imageChooseImage: "Зураг сонгох",
     addNewTypeQuestion: "{0} нэмэх", //{0} is localizable question type
     chooseLogoPlaceholder: "[Лого]",
-    auto: "автомат",
     choices_Item: "Хэсэг ",
     lg: {
       addNewItem: "Шинэ дүрэм нэмэх",
@@ -368,6 +367,28 @@ export var mnStrings = {
     multipletextitem: {
       name: "Нэр",
       title: "Нүүр"
+    },
+    masksettings: {
+      saveMaskedValue: "Судалгааны үр дүнд багласан үнэ цэнийг хэмнэх"
+    },
+    patternmask: {
+      pattern: "Үнэ цэнийн загвар"
+    },
+    datetimemask: {
+      min: "Хамгийн бага үнэ цэнэ",
+      max: "Хамгийн их үнэ цэнэ"
+    },
+    numericmask: {
+      allowNegativeValues: "Сөрөг үнэт зүйлсийг зөвшөөр",
+      thousandsSeparator: "Мянга мянган тусгаарлагч",
+      decimalSeparator: "Decimal тусгаарлагч",
+      precision: "Үнэ цэнийн нарийвчлал",
+      min: "Хамгийн бага үнэ цэнэ",
+      max: "Хамгийн их үнэ цэнэ"
+    },
+    currencymask: {
+      prefix: "Валютын ханш",
+      suffix: "Валютын suffix"
     },
     imageHeight: "Зургийн өндөр",
     imageWidth: "Зургийн өргөн",
@@ -609,6 +630,13 @@ export var mnStrings = {
     autoGrowComment: "Шаардлагатай үед санал сэтгэгдлийн хэсгийг өргөсгөх",
     allowResizeComment: "Хэрэглэгчдэд текстийн газруудыг дахин ашиглах боломж олго",
     textUpdateMode: "Текст асуултын утгыг шинэчлэх",
+    maskType: "Оролтын багны төрөл",
+    maskTypes: {
+      patternmask: "Загвар",
+      numericmask: "Тоо нь",
+      datetimemask: "Огноо, цаг",
+      currencymask: "Валютын ханш"
+    },
     focusOnFirstError: "Анхны буруу хариулт руу чиглүүлэх",
     checkErrorsMode: "Баталгаажуулалт ажиллуулах",
     navigateToUrl: "URL-рүү чиглүүлэх",
@@ -733,6 +761,7 @@ export var mnStrings = {
       templateTitle: "Гарчигны загвар",
       totals: "Нийт",
       logic: "Логик",
+      mask: "Оролт Маск тохиргоо",
       layout: {
         panel: "Layout",
         question: "Layout",
@@ -796,7 +825,9 @@ export var mnStrings = {
     questionStartIndex_placeholder: "Экс.: а)",
     width_placeholder: "Экс.: 6ин",
     minWidth_placeholder: "Экс: 600px",
-    maxWidth_placeholder: "Экс: 50%"
+    maxWidth_placeholder: "Экс: 50%",
+    imageHeight_placeholder: "автомат",
+    imageWidth_placeholder: "автомат"
   },
   // Property values
   pv: {
@@ -1011,7 +1042,8 @@ export var mnStrings = {
     searchMode: {
       contains: "Агуулах",
       startsWith: "Эхлэл"
-    }
+    },
+    textWrapEnabled: "Боолт сонголт"
   },
   // Operators
   op: {
@@ -1075,6 +1107,18 @@ export var mnStrings = {
     runexpressiontrigger: "илэрхийлэл ажлуулах",
     visibletrigger: "Харагдах байдлыг өөрчлөх"
   },
+  peplaceholder: {
+    patternmask: {
+      pattern: "Экс.: +1(999)-999-99-99"
+    },
+    datetimemask: {
+      pattern: "Экс.: мм/д/yyy"
+    },
+    currencymask: {
+      prefix: "Экс.: $",
+      suffix: "Экс.: USD"
+    }
+  },
   pehelp: {
     panel: {
       name: "Хариулагчдад харагдахгүй панелийн ID.",
@@ -1137,7 +1181,8 @@ export var mnStrings = {
       },
       textUpdateMode: "Сонгоно уу: \"Алдагдсан фокус дээр\" - оролтын талбар анхаарлаа алдсан үед үнэ цэнэ нь шинэчлэгддэг; \"Цахимаар бичих\" - хэрэглэгчид бичихийн хэрээр үнэ цэнэ нь бодит цаг хугацаанд шинэчлэгддэг. \"Өв залгамж\" сонголт нь судалгааны түвшний тохиргоог (\"Алдагдсан фокус дээр\" дефолтоор) хэрэгжүүлдэг.",
       url: "Та ямар ч вэб үйлчилгээг олон сонголттой асуултуудад мэдээллийн эх сурвалж болгон ашиглаж болно. Сонголтын үнэт зүйлсийг хүн амлахын тулд өгөгдөл өгөх үйлчилгээний URL-ийг оруулна уу.",
-      searchMode: "Дуслын жагсаалтыг шүүлт хийхэд ашигладаг харьцуулах мэс засал."
+      searchMode: "Дуслын жагсаалтыг шүүлт хийхэд ашигладаг харьцуулах мэс засал.",
+      textWrapEnabled: "Сонголтын сонголтуудын урт текстүүд нь дусал цэсний дотор багтахын тулд автоматаар шугамын завсар үүсгэх болно. Хэрэв та бичвэрүүдийг хайчлахыг хүсвэл сонгогдоогүй."
     },
     signaturepad: {
       signatureWidth: "Үзүүлсэн гарын үсэг зурсан хэсгийн өргөнийг болон үүний үр дүнд бий болсон зургийг тогтоо.",
@@ -1278,7 +1323,25 @@ export var mnStrings = {
     autocomplete: "Аттрибутын талаар дэлгэрэнгүй мэдээллийг [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete)-ээс авна уу .",
     filePlaceholder: "\"Эх сурвалжийн төрөл\" нь \"Орон нутгийн файлууд\" эсвэл камер байхгүй үед хамаарна",
     photoPlaceholder: "\"Эх сурвалжийн төрөл\" \"Камер\" байхад хамаарна.",
-    fileOrPhotoPlaceholder: "\"Эх сурвалжийн төрөл\" нь \"Орон нутгийн файлууд буюу камер\" байхад хамаарна."
+    fileOrPhotoPlaceholder: "\"Эх сурвалжийн төрөл\" нь \"Орон нутгийн файлууд буюу камер\" байхад хамаарна.",
+    masksettings: {
+      saveMaskedValue: "Асуултын үнэ цэнийг судалгааны үр дүнд хэрэгжүүлсэн багаар хадгалахыг хүсэж байгаа эсэхээ сонго."
+    },
+    patternmask: {
+      pattern: "Загвар нь уянгын шууд болон дараах байрлагчийг агуулж болно: '9' - тоон хувьд; 'a' - дээд буюу доод талын үсгийн хувьд; '#' - цифр эсвэл дээд, эсвэл доод кейс үсгийн хувьд. Дүрээс зугтахын тулд backslash '\\' ашигла."
+    },
+    datetimemask: {
+      pattern: "Загвар нь тусгаарлагч үсэг болон дараах байрлагчуудыг агуулж болно: 'm' - сарын дугаараар; 'мм' - сарын тоогоор, ганц цифрээр үнэ цэнэтэй тэргүүлэх нөлөө бүхий; 'd' - сарын өдөр; 'dd' - ганц цифрээр үнэ цэнэд тэргүүлэх нөлөө бүхий сарын өдөр; 'yy' - жилийн сүүлийн хоёр цифрээр; 'yyyy' - дөрвөн цифрээр жил."
+    },
+    numericmask: {
+      decimalSeparator: "Жижиг хэсгийг үзүүлсэн дугаарын интежер хэсгээс салгахад ашигладаг бэлгэдэл.",
+      thousandsSeparator: "Том тооны тоонуудыг 3 бүлэг болгон салгахад хэрэглэгддэг бэлгэдэл.",
+      precision: "Үзүүлсэн дугаарын хувьд decimal цэгийн дараа хэдэн цифрийг хадгалахыг хязгаарлана."
+    },
+    currencymask: {
+      prefix: "Үнэ цэнийн өмнө үзүүлэх нэг эсвэл хэд хэдэн бэлгэдлүүдийг.",
+      suffix: "Үнэ цэнийн дараа үзүүлэх нэг эсвэл хэд хэдэн бэлгэдлүүдийг."
+    }
   },
   // Properties
   p: {
@@ -2080,3 +2143,35 @@ editorLocalization.locales["mn"] = mnStrings;
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Хаягийн бүсэд байрлах газар эзэмшигчийн текст"
 // pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "Судалгааг автоматаар дуусгах"
 // pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Асуултад хариулсан хүн бүх асуултанд хариулсны дараа судалгааг автоматаар дуусгахыг хүсвэл сонго."
+// masksettings.saveMaskedValue: "Save masked value in survey results" => "Судалгааны үр дүнд багласан үнэ цэнийг хэмнэх"
+// patternmask.pattern: "Value pattern" => "Үнэ цэнийн загвар"
+// datetimemask.min: "Minimum value" => "Хамгийн бага үнэ цэнэ"
+// datetimemask.max: "Maximum value" => "Хамгийн их үнэ цэнэ"
+// numericmask.allowNegativeValues: "Allow negative values" => "Сөрөг үнэт зүйлсийг зөвшөөр"
+// numericmask.thousandsSeparator: "Thousands separator" => "Мянга мянган тусгаарлагч"
+// numericmask.decimalSeparator: "Decimal separator" => "Decimal тусгаарлагч"
+// numericmask.precision: "Value precision" => "Үнэ цэнийн нарийвчлал"
+// numericmask.min: "Minimum value" => "Хамгийн бага үнэ цэнэ"
+// numericmask.max: "Maximum value" => "Хамгийн их үнэ цэнэ"
+// currencymask.prefix: "Currency prefix" => "Валютын ханш"
+// currencymask.suffix: "Currency suffix" => "Валютын suffix"
+// pe.maskType: "Input mask type" => "Оролтын багны төрөл"
+// maskTypes.patternmask: "Pattern" => "Загвар"
+// maskTypes.numericmask: "Numeric" => "Тоо нь"
+// maskTypes.datetimemask: "Date and Time" => "Огноо, цаг"
+// maskTypes.currencymask: "Currency" => "Валютын ханш"
+// tabs.mask: "Input Mask Settings" => "Оролт Маск тохиргоо"
+// pe.pattern_placeholder: "Ex.: +1(999)-999-99-99" => "Экс.: +1(999)-999-99-99"
+// pe.datetimepattern_placeholder: "Ex.: mm/dd/yyyy" => "Экс.: мм/д/yyy"
+// pe.currencyprefix_placeholder: "Ex.: $" => "Экс.: $"
+// pe.currencysuffix_placeholder: "Ex.: USD" => "Экс.: USD"
+// pv.textWrapEnabled: "Wrap choices" => "Боолт сонголт"
+// question.textWrapEnabled: "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip." => "Сонголтын сонголтуудын урт текстүүд нь дусал цэсний дотор багтахын тулд автоматаар шугамын завсар үүсгэх болно. Хэрэв та бичвэрүүдийг хайчлахыг хүсвэл сонгогдоогүй."
+// masksettings.saveMaskedValue: "Select if you want to store the question value with an applied mask in survey results." => "Асуултын үнэ цэнийг судалгааны үр дүнд хэрэгжүүлсэн багаар хадгалахыг хүсэж байгаа эсэхээ сонго."
+// patternmask.pattern: "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character." => "Загвар нь уянгын шууд болон дараах байрлагчийг агуулж болно: '9' - тоон хувьд; 'a' - дээд буюу доод талын үсгийн хувьд; '#' - цифр эсвэл дээд, эсвэл доод кейс үсгийн хувьд. Дүрээс зугтахын тулд backslash '\\' ашигла."
+// datetimemask.pattern: "The pattern can contain separator characters and the following placeholders: `m` - for month number; `mm` - for month number, with leading zero for single-digit values; `d` - for day of the month; `dd` - for day of the month, with leading zero for single-digit values; `yy` - for the last two digits of the year; `yyyy` - for a four-digit year." => "Загвар нь тусгаарлагч үсэг болон дараах байрлагчуудыг агуулж болно: 'm' - сарын дугаараар; 'мм' - сарын тоогоор, ганц цифрээр үнэ цэнэтэй тэргүүлэх нөлөө бүхий; 'd' - сарын өдөр; 'dd' - ганц цифрээр үнэ цэнэд тэргүүлэх нөлөө бүхий сарын өдөр; 'yy' - жилийн сүүлийн хоёр цифрээр; 'yyyy' - дөрвөн цифрээр жил."
+// numericmask.decimalSeparator: "A symbol used to separate the fractional part from the integer part of a displayed number." => "Жижиг хэсгийг үзүүлсэн дугаарын интежер хэсгээс салгахад ашигладаг бэлгэдэл."
+// numericmask.thousandsSeparator: "A symbol used to separate the digits of a large number into groups of three." => "Том тооны тоонуудыг 3 бүлэг болгон салгахад хэрэглэгддэг бэлгэдэл."
+// numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Үзүүлсэн дугаарын хувьд decimal цэгийн дараа хэдэн цифрийг хадгалахыг хязгаарлана."
+// currencymask.prefix: "One or several symbols to be displayed before the value." => "Үнэ цэнийн өмнө үзүүлэх нэг эсвэл хэд хэдэн бэлгэдлүүдийг."
+// currencymask.suffix: "One or several symbols to be displayed after the value." => "Үнэ цэнийн дараа үзүүлэх нэг эсвэл хэд хэдэн бэлгэдлүүдийг."

@@ -1705,6 +1705,30 @@ test("Question adorners for different sizes", async (t) => {
   });
 });
 
+test("Question adorner - hide converter", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1767, 1900);
+    await ClientFunction(() => {
+      (<any>window).creator.onDefineElementMenuItems.add((sender, options) => {
+        const convertToAction = options.items.filter(item => item.id === "convertTo")[0];
+        options.items.splice(options.items.indexOf(convertToAction), 1);
+      });
+    })();
+    const json = {
+      elements: [
+        {
+          type: "boolean",
+          name: "question1"
+        }
+      ]
+    };
+    await setJSON(json);
+    const qContent = Selector(".svc-question__content");
+    await t.click(qContent.nth(0), { offsetX: 5, offsetY: 5 });
+    await takeElementScreenshot("question-adorner-with-hidden-converter.png", qContent.nth(0), t, comparer);
+  });
+});
+
 test("Narrow question placeholder", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1000, 1000);
@@ -1905,6 +1929,22 @@ test("Panel title editor is fully visible", async (t) => {
     await setJSON(json);
     await t.click(Selector(".sv-string-editor").withText("Panel Title"));
     await takeElementScreenshot("panel-title-editing.png", Selector(".svc-question__content--panel"), t, comparer);
+  });
+});
+
+test("Page placeholder without elements", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(770, 900);
+    await setJSON({
+      "pages": [
+        {
+          "name": "page1",
+          "title": "Page1"
+        }
+      ]
+    });
+
+    await takeElementScreenshot("page-placeholder-without-elements.png", Selector(".svc-page"), t, comparer);
   });
 });
 

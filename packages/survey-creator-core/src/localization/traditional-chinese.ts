@@ -170,7 +170,6 @@ var traditionalChineseTranslation = {
     imageChooseImage: "選擇圖像",
     addNewTypeQuestion: "新增{0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[徽標]",
-    auto: "自動",
     choices_Item: "專案",
     lg: {
       addNewItem: "添加新規則",
@@ -368,6 +367,28 @@ var traditionalChineseTranslation = {
     multipletextitem: {
       name: "名字",
       title: "標題"
+    },
+    masksettings: {
+      saveMaskedValue: "在調查結果中保存掩碼值"
+    },
+    patternmask: {
+      pattern: "價值模式"
+    },
+    datetimemask: {
+      min: "最小值",
+      max: "最大值"
+    },
+    numericmask: {
+      allowNegativeValues: "允許負值",
+      thousandsSeparator: "千分隔符",
+      decimalSeparator: "小數點分隔符",
+      precision: "值精度",
+      min: "最小值",
+      max: "最大值"
+    },
+    currencymask: {
+      prefix: "貨幣前綴",
+      suffix: "貨幣後綴"
     },
     imageHeight: "圖片高度",
     imageWidth: "圖片寬度",
@@ -609,6 +630,13 @@ var traditionalChineseTranslation = {
     autoGrowComment: "如有必要，自動展開評論區域",
     allowResizeComment: "允許用戶調整文字區域的大小",
     textUpdateMode: "更新文字問題值",
+    maskType: "輸入掩碼類型",
+    maskTypes: {
+      patternmask: "模式",
+      numericmask: "數值的",
+      datetimemask: "日期和時間",
+      currencymask: "貨幣"
+    },
     focusOnFirstError: "將焦點放在第一個無效答案上",
     checkErrorsMode: "運行驗證",
     navigateToUrl: "導航到網址",
@@ -733,6 +761,7 @@ var traditionalChineseTranslation = {
       templateTitle: "標題範本",
       totals: "總數",
       logic: "邏輯",
+      mask: "輸入掩碼設置",
       layout: {
         panel: "佈局",
         question: "佈局",
@@ -796,7 +825,9 @@ var traditionalChineseTranslation = {
     questionStartIndex_placeholder: "例如：a）",
     width_placeholder: "例：6in",
     minWidth_placeholder: "例如：600px",
-    maxWidth_placeholder: "例：50%"
+    maxWidth_placeholder: "例：50%",
+    imageHeight_placeholder: "自動",
+    imageWidth_placeholder: "自動"
   },
   // Property values
   pv: {
@@ -1011,7 +1042,8 @@ var traditionalChineseTranslation = {
     searchMode: {
       contains: "包含",
       startsWith: "開頭為"
-    }
+    },
+    textWrapEnabled: "包裝選擇"
   },
   // Operators
   op: {
@@ -1075,6 +1107,18 @@ var traditionalChineseTranslation = {
     runexpressiontrigger: "運行表達式",
     visibletrigger: "修改可見性"
   },
+  peplaceholder: {
+    patternmask: {
+      pattern: "例如：+1（999）-999-99-99"
+    },
+    datetimemask: {
+      pattern: "例：mm/dd/yyyy"
+    },
+    currencymask: {
+      prefix: "例：$",
+      suffix: "例如：美元"
+    }
+  },
   pehelp: {
     panel: {
       name: "受訪者不可見的面板ID。",
@@ -1137,7 +1181,8 @@ var traditionalChineseTranslation = {
       },
       textUpdateMode: "從中選擇：「失焦時」 - 當輸入字段失去焦點時，該值會更新;“鍵入時” - 當使用者鍵入時，該值會即時更新。“繼承”選項將應用調查級別設置（預設為“失去焦點時”）。",
       url: "您可以使用任何 Web 服務作為多項選擇題的數據來源。要填充選項值，請輸入提供數據的服務的URL。",
-      searchMode: "用於篩選下拉清單的比較操作。"
+      searchMode: "用於篩選下拉清單的比較操作。",
+      textWrapEnabled: "選項選項中的長文本將自動生成換行符以適合下拉功能表。如果要剪裁文字，請取消選擇。"
     },
     signaturepad: {
       signatureWidth: "設置顯示的簽名區域和生成的圖像的寬度。",
@@ -1278,7 +1323,25 @@ var traditionalChineseTranslation = {
     autocomplete: "有關詳細資訊，請參閱 [autocomplete]（https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete） 屬性說明。",
     filePlaceholder: "當「源類型」為「本地檔」或相機不可用時適用",
     photoPlaceholder: "當「源類型」為「相機」時適用。",
-    fileOrPhotoPlaceholder: "當「源類型」為「本地檔或相機」時適用。"
+    fileOrPhotoPlaceholder: "當「源類型」為「本地檔或相機」時適用。",
+    masksettings: {
+      saveMaskedValue: "選擇是否要在調查結果中存儲帶有應用掩碼的問題值。"
+    },
+    patternmask: {
+      pattern: "該模式可以包含字串文字和以下佔位元： '9' - 表示數位;“a” - 表示大寫或小寫字母;'#' - 表示數位或大寫或小寫字母。使用反斜杠“\\”轉義字元。"
+    },
+    datetimemask: {
+      pattern: "該模式可以包含分隔符和以下佔位元：“m” - 表示月份數;'mm' - 表示月份數位，前導零表示個位數;'d' - 表示月份中的某一天;'dd' - 表示月份中的某一天，前導零表示個位數值;'yy' - 一年的最後兩位數位;'yyyy' - 表示四位數的年份。"
+    },
+    numericmask: {
+      decimalSeparator: "用於將顯示數位的小數部分與整數部分分開的符號。",
+      thousandsSeparator: "用於將大數的數位分成三組的符號。",
+      precision: "限制顯示數位的小數點後要保留的位數。"
+    },
+    currencymask: {
+      prefix: "要在值之前顯示的一個或多個符號。",
+      suffix: "要在值后顯示的一個或多個符號。"
+    }
   },
   // Properties
   p: {
@@ -2702,3 +2765,35 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "排名區域的佔位元文本"
 // pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "自動完成調查"
 // pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "選擇是否希望在受訪者回答所有問題後自動完成調查。"
+// masksettings.saveMaskedValue: "Save masked value in survey results" => "在調查結果中保存掩碼值"
+// patternmask.pattern: "Value pattern" => "價值模式"
+// datetimemask.min: "Minimum value" => "最小值"
+// datetimemask.max: "Maximum value" => "最大值"
+// numericmask.allowNegativeValues: "Allow negative values" => "允許負值"
+// numericmask.thousandsSeparator: "Thousands separator" => "千分隔符"
+// numericmask.decimalSeparator: "Decimal separator" => "小數點分隔符"
+// numericmask.precision: "Value precision" => "值精度"
+// numericmask.min: "Minimum value" => "最小值"
+// numericmask.max: "Maximum value" => "最大值"
+// currencymask.prefix: "Currency prefix" => "貨幣前綴"
+// currencymask.suffix: "Currency suffix" => "貨幣後綴"
+// pe.maskType: "Input mask type" => "輸入掩碼類型"
+// maskTypes.patternmask: "Pattern" => "模式"
+// maskTypes.numericmask: "Numeric" => "數值的"
+// maskTypes.datetimemask: "Date and Time" => "日期和時間"
+// maskTypes.currencymask: "Currency" => "貨幣"
+// tabs.mask: "Input Mask Settings" => "輸入掩碼設置"
+// pe.pattern_placeholder: "Ex.: +1(999)-999-99-99" => "例如：+1（999）-999-99-99"
+// pe.datetimepattern_placeholder: "Ex.: mm/dd/yyyy" => "例：mm/dd/yyyy"
+// pe.currencyprefix_placeholder: "Ex.: $" => "例：$"
+// pe.currencysuffix_placeholder: "Ex.: USD" => "例如：美元"
+// pv.textWrapEnabled: "Wrap choices" => "包裝選擇"
+// question.textWrapEnabled: "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip." => "選項選項中的長文本將自動生成換行符以適合下拉功能表。如果要剪裁文字，請取消選擇。"
+// masksettings.saveMaskedValue: "Select if you want to store the question value with an applied mask in survey results." => "選擇是否要在調查結果中存儲帶有應用掩碼的問題值。"
+// patternmask.pattern: "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character." => "該模式可以包含字串文字和以下佔位元： '9' - 表示數位;“a” - 表示大寫或小寫字母;'#' - 表示數位或大寫或小寫字母。使用反斜杠“\\”轉義字元。"
+// datetimemask.pattern: "The pattern can contain separator characters and the following placeholders: `m` - for month number; `mm` - for month number, with leading zero for single-digit values; `d` - for day of the month; `dd` - for day of the month, with leading zero for single-digit values; `yy` - for the last two digits of the year; `yyyy` - for a four-digit year." => "該模式可以包含分隔符和以下佔位元：“m” - 表示月份數;'mm' - 表示月份數位，前導零表示個位數;'d' - 表示月份中的某一天;'dd' - 表示月份中的某一天，前導零表示個位數值;'yy' - 一年的最後兩位數位;'yyyy' - 表示四位數的年份。"
+// numericmask.decimalSeparator: "A symbol used to separate the fractional part from the integer part of a displayed number." => "用於將顯示數位的小數部分與整數部分分開的符號。"
+// numericmask.thousandsSeparator: "A symbol used to separate the digits of a large number into groups of three." => "用於將大數的數位分成三組的符號。"
+// numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "限制顯示數位的小數點後要保留的位數。"
+// currencymask.prefix: "One or several symbols to be displayed before the value." => "要在值之前顯示的一個或多個符號。"
+// currencymask.suffix: "One or several symbols to be displayed after the value." => "要在值后顯示的一個或多個符號。"

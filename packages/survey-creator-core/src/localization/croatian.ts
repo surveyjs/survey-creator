@@ -170,7 +170,6 @@ export var hrStrings = {
     imageChooseImage: "Odabir slike",
     addNewTypeQuestion: "Dodaj {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
-    auto: "automobil",
     choices_Item: "Stavka ",
     lg: {
       addNewItem: "Dodaj novo pravilo",
@@ -368,6 +367,28 @@ export var hrStrings = {
     multipletextitem: {
       name: "Ime",
       title: "Naslov"
+    },
+    masksettings: {
+      saveMaskedValue: "Spremanje maskirane vrijednosti u rezultate upitnika"
+    },
+    patternmask: {
+      pattern: "Uzorak vrijednosti"
+    },
+    datetimemask: {
+      min: "Minimalna vrijednost",
+      max: "Maksimalna vrijednost"
+    },
+    numericmask: {
+      allowNegativeValues: "Dopusti negativne vrijednosti",
+      thousandsSeparator: "Razdjelnik tisućica",
+      decimalSeparator: "Decimalni razdjelnik",
+      precision: "Preciznost vrijednosti",
+      min: "Minimalna vrijednost",
+      max: "Maksimalna vrijednost"
+    },
+    currencymask: {
+      prefix: "Prefiks valute",
+      suffix: "Sufiks valute"
     },
     imageHeight: "Visina slike",
     imageWidth: "Širina slike",
@@ -609,6 +630,13 @@ export var hrStrings = {
     autoGrowComment: "Ako je potrebno, automatsko proširivanje područja komentara",
     allowResizeComment: "Dopusti korisnicima promjenu veličine tekstnih područja",
     textUpdateMode: "Ažuriranje vrijednosti tekstnog pitanja",
+    maskType: "Vrsta maske za unos",
+    maskTypes: {
+      patternmask: "Uzorak",
+      numericmask: "Brojčani",
+      datetimemask: "Datum i vrijeme",
+      currencymask: "Valuta"
+    },
     focusOnFirstError: "Postavljanje fokusa na prvi odgovor koji nije valjan",
     checkErrorsMode: "Pokreni provjeru valjanosti",
     navigateToUrl: "Navigacija do URL-a",
@@ -733,6 +761,7 @@ export var hrStrings = {
       templateTitle: "Naslov predloška",
       totals: "Zbrojeve",
       logic: "Logika",
+      mask: "Postavke maske za unos",
       layout: {
         panel: "Tlocrt",
         question: "Tlocrt",
@@ -796,7 +825,9 @@ export var hrStrings = {
     questionStartIndex_placeholder: "Npr.: a)",
     width_placeholder: "Npr.: 6 inča",
     minWidth_placeholder: "Npr.: 600px",
-    maxWidth_placeholder: "Npr.: 50%"
+    maxWidth_placeholder: "Npr.: 50%",
+    imageHeight_placeholder: "Автоматично",
+    imageWidth_placeholder: "Автоматично"
   },
   // Property values
   pv: {
@@ -1011,7 +1042,8 @@ export var hrStrings = {
     searchMode: {
       contains: "Sadržava",
       startsWith: "Počinje s"
-    }
+    },
+    textWrapEnabled: "Prelamanje izbora"
   },
   // Operators
   op: {
@@ -1075,6 +1107,18 @@ export var hrStrings = {
     runexpressiontrigger: "pokrenuti izraz",
     visibletrigger: "promjena vidljivosti (amortizirati)"
   },
+  peplaceholder: {
+    patternmask: {
+      pattern: "Npr.: +1(999)-999-99-99"
+    },
+    datetimemask: {
+      pattern: "Npr.: mm/dd/gggg"
+    },
+    currencymask: {
+      prefix: "Npr.: $",
+      suffix: "Npr.: USD"
+    }
+  },
   pehelp: {
     panel: {
       name: "ID ploče koji nije vidljiv ispitanicima.",
@@ -1137,7 +1181,8 @@ export var hrStrings = {
       },
       textUpdateMode: "Odaberite između: \"Na izgubljenom fokusu\" - vrijednost se ažurira kada polje za unos izgubi fokus; \"Tijekom tipkanja\" - vrijednost se ažurira u stvarnom vremenu, jer korisnici tipkaju. Opcija \"Naslijedi\" primjenjuje postavku na razini upitnika (\"Pri izgubljenom fokusu\" prema zadanim postavkama).",
       url: "Bilo koju web-uslugu možete koristiti kao izvor podataka za pitanja s višestrukim izborom odgovora. Da biste popunili vrijednosti izbora, unesite URL usluge koja pruža podatke.",
-      searchMode: "Operacija usporedbe koja se koristi za filtriranje padajućeg popisa."
+      searchMode: "Operacija usporedbe koja se koristi za filtriranje padajućeg popisa.",
+      textWrapEnabled: "Dugi tekstovi u mogućnostima izbora automatski će generirati prijelome redaka kako bi stali unutar padajućeg izbornika. Poništite odabir ako želite da se tekstovi izrežu."
     },
     signaturepad: {
       signatureWidth: "Postavlja širinu prikazanog područja potpisa i rezultirajuću sliku.",
@@ -1278,7 +1323,25 @@ export var hrStrings = {
     autocomplete: "Dodatne informacije potražite u opisu atributa [samodovršetak](https://developer.mozilla.org/en-US/docs/Web/HTML/atributi/samodovršetak).",
     filePlaceholder: "Primjenjuje se kada je \"Vrsta izvora\" \"Lokalne datoteke\" ili kada kamera nije dostupna",
     photoPlaceholder: "Primjenjuje se kada je \"Vrsta izvora\" \"Kamera\".",
-    fileOrPhotoPlaceholder: "Primjenjuje se kada je \"Vrsta izvora\" \"Lokalne datoteke ili kamera\"."
+    fileOrPhotoPlaceholder: "Primjenjuje se kada je \"Vrsta izvora\" \"Lokalne datoteke ili kamera\".",
+    masksettings: {
+      saveMaskedValue: "Odaberite želite li spremiti vrijednost pitanja s primijenjenom maskom u rezultatima upitnika."
+    },
+    patternmask: {
+      pattern: "Uzorak može sadržavati slovne dijelove niza i sljedeća rezervirana mjesta: '9' - za znamenku; \"a\" – za veliko ili malo slovo; '#' - za znamenku ili veliko ili malo slovo. Koristite obrnutu kosu crtu '\\' da biste izbjegli znak."
+    },
+    datetimemask: {
+      pattern: "Uzorak može sadržavati znakove razdjelnika i sljedeća rezervirana mjesta: 'm' - za broj mjeseca; 'mm' - za broj mjeseca, s početnom nulom za jednoznamenkaste vrijednosti; 'd' - za dan u mjesecu; \"dd\" – za dan u mjesecu, s početnom nulom za jednoznamenkaste vrijednosti; \"gg\" - za posljednje dvije znamenke godine; 'gggg' - za četveroznamenkastu godinu."
+    },
+    numericmask: {
+      decimalSeparator: "Simbol koji se koristi za odvajanje djelomičnog dijela od cijelog broja prikazanog broja.",
+      thousandsSeparator: "Simbol koji se koristi za odvajanje znamenki velikog broja u grupe od tri.",
+      precision: "Ograničava broj znamenki koje treba zadržati nakon decimalnog zareza za prikazani broj."
+    },
+    currencymask: {
+      prefix: "Jedan ili više simbola koji će se prikazati prije vrijednosti.",
+      suffix: "Jedan ili više simbola koji će se prikazati nakon vrijednosti."
+    }
   },
   // Properties
   p: {
@@ -2418,3 +2481,35 @@ editorLocalization.locales["hr"] = hrStrings;
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Tekst rezerviranog mjesta za područje rangiranja"
 // pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "Automatsko ispunjavanje upitnika"
 // pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Odaberite želite li da se anketa automatski dovrši nakon što ispitanik odgovori na sva pitanja."
+// masksettings.saveMaskedValue: "Save masked value in survey results" => "Spremanje maskirane vrijednosti u rezultate upitnika"
+// patternmask.pattern: "Value pattern" => "Uzorak vrijednosti"
+// datetimemask.min: "Minimum value" => "Minimalna vrijednost"
+// datetimemask.max: "Maximum value" => "Maksimalna vrijednost"
+// numericmask.allowNegativeValues: "Allow negative values" => "Dopusti negativne vrijednosti"
+// numericmask.thousandsSeparator: "Thousands separator" => "Razdjelnik tisućica"
+// numericmask.decimalSeparator: "Decimal separator" => "Decimalni razdjelnik"
+// numericmask.precision: "Value precision" => "Preciznost vrijednosti"
+// numericmask.min: "Minimum value" => "Minimalna vrijednost"
+// numericmask.max: "Maximum value" => "Maksimalna vrijednost"
+// currencymask.prefix: "Currency prefix" => "Prefiks valute"
+// currencymask.suffix: "Currency suffix" => "Sufiks valute"
+// pe.maskType: "Input mask type" => "Vrsta maske za unos"
+// maskTypes.patternmask: "Pattern" => "Uzorak"
+// maskTypes.numericmask: "Numeric" => "Brojčani"
+// maskTypes.datetimemask: "Date and Time" => "Datum i vrijeme"
+// maskTypes.currencymask: "Currency" => "Valuta"
+// tabs.mask: "Input Mask Settings" => "Postavke maske za unos"
+// pe.pattern_placeholder: "Ex.: +1(999)-999-99-99" => "Npr.: +1(999)-999-99-99"
+// pe.datetimepattern_placeholder: "Ex.: mm/dd/yyyy" => "Npr.: mm/dd/gggg"
+// pe.currencyprefix_placeholder: "Ex.: $" => "Npr.: $"
+// pe.currencysuffix_placeholder: "Ex.: USD" => "Npr.: USD"
+// pv.textWrapEnabled: "Wrap choices" => "Prelamanje izbora"
+// question.textWrapEnabled: "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip." => "Dugi tekstovi u mogućnostima izbora automatski će generirati prijelome redaka kako bi stali unutar padajućeg izbornika. Poništite odabir ako želite da se tekstovi izrežu."
+// masksettings.saveMaskedValue: "Select if you want to store the question value with an applied mask in survey results." => "Odaberite želite li spremiti vrijednost pitanja s primijenjenom maskom u rezultatima upitnika."
+// patternmask.pattern: "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character." => "Uzorak može sadržavati slovne dijelove niza i sljedeća rezervirana mjesta: '9' - za znamenku; \"a\" – za veliko ili malo slovo; '#' - za znamenku ili veliko ili malo slovo. Koristite obrnutu kosu crtu '\\' da biste izbjegli znak."
+// datetimemask.pattern: "The pattern can contain separator characters and the following placeholders: `m` - for month number; `mm` - for month number, with leading zero for single-digit values; `d` - for day of the month; `dd` - for day of the month, with leading zero for single-digit values; `yy` - for the last two digits of the year; `yyyy` - for a four-digit year." => "Uzorak može sadržavati znakove razdjelnika i sljedeća rezervirana mjesta: 'm' - za broj mjeseca; 'mm' - za broj mjeseca, s početnom nulom za jednoznamenkaste vrijednosti; 'd' - za dan u mjesecu; \"dd\" – za dan u mjesecu, s početnom nulom za jednoznamenkaste vrijednosti; \"gg\" - za posljednje dvije znamenke godine; 'gggg' - za četveroznamenkastu godinu."
+// numericmask.decimalSeparator: "A symbol used to separate the fractional part from the integer part of a displayed number." => "Simbol koji se koristi za odvajanje djelomičnog dijela od cijelog broja prikazanog broja."
+// numericmask.thousandsSeparator: "A symbol used to separate the digits of a large number into groups of three." => "Simbol koji se koristi za odvajanje znamenki velikog broja u grupe od tri."
+// numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Ograničava broj znamenki koje treba zadržati nakon decimalnog zareza za prikazani broj."
+// currencymask.prefix: "One or several symbols to be displayed before the value." => "Jedan ili više simbola koji će se prikazati prije vrijednosti."
+// currencymask.suffix: "One or several symbols to be displayed after the value." => "Jedan ili više simbola koji će se prikazati nakon vrijednosti."

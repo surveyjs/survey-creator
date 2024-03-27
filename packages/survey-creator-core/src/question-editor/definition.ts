@@ -2,7 +2,6 @@ export interface IPropertyEditorInfo {
   name: string;
   title?: string;
   tab?: string;
-  placeholder?: string;
 }
 
 export interface IPropertyTabInfo {
@@ -59,17 +58,14 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       {
         name: "width",
         tab: "layout",
-        placeholder: "width_placeholder"
       },
       {
         name: "minWidth",
         tab: "layout",
-        placeholder: "minWidth_placeholder"
       },
       {
         name: "maxWidth",
         tab: "layout",
-        placeholder: "maxWidth_placeholder"
       },
       { name: "valueName", tab: "data" },
       { name: "defaultValue", tab: "data" },
@@ -249,6 +245,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "choiceTextsFromQuestion", tab: "choices" },
       { name: "choicesOrder", tab: "choices" },
       { name: "colCount", tab: "layout" },
+      { name: "textWrapEnabled", tab: "choices" },
       { name: "showOtherItem", tab: "choices" },
       { name: "otherText", tab: "choices" },
       { name: "otherPlaceholder", tab: "choices" },
@@ -300,7 +297,6 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "choicesMax", tab: "choices" },
       { name: "choicesStep", tab: "choices" },
       { name: "allowClear", tab: "choices" },
-      { name: "textWrapEnabled", tab: "choices" },
       { name: "searchMode", tab: "choices" },
     ]
   },
@@ -312,7 +308,6 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "searchMode", tab: "choices" },
       { name: "hideSelectedItems", tab: "choices" },
       { name: "allowClear", tab: "choices" },
-      { name: "textWrapEnabled", tab: "choices" },
     ]
   },
   imagepicker: {
@@ -324,8 +319,8 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "maxImageWidth",
       "minImageHeight",
       "maxImageHeight",
-      { name: "imageHeight", placeholder: "auto" },
-      { name: "imageWidth", placeholder: "auto" },
+      "imageHeight",
+      "imageWidth",
       "multiSelect",
       "showLabel",
     ]
@@ -335,8 +330,8 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "imageLink",
       "contentMode",
       "imageFit",
-      { name: "imageHeight", placeholder: "auto" },
-      { name: "imageWidth", placeholder: "auto" },
+      "imageHeight",
+      "imageWidth",
       "text"
     ]
   },
@@ -584,14 +579,21 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "title",
       "inputType",
       "isRequired",
-      "maxLength",
       "size",
       "placeholder",
-      "requiredErrorText",
-      "validators",
+      { name: "maxLength", tab: "validation" },
+      { name: "requiredErrorText", tab: "validation" },
+      { name: "validators", tab: "validation" },
       { name: "defaultValueExpression", tab: "logic" },
       { name: "minValueExpression", tab: "logic" },
       { name: "maxValueExpression", tab: "logic" },
+      { name: "maskType", tab: "mask" },
+      { name: "maskSettings", tab: "mask" },
+    ],
+    tabs: [
+      { name: "logic", index: 200 },
+      { name: "mask", index: 250 },
+      { name: "validation", index: 300 }
     ]
   },
   "multipletext@items": {
@@ -664,28 +666,12 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "page", tab: "layout" },
       { name: "startWithNewLine", tab: "layout" },
       { name: "state", tab: "layout" },
-      {
-        name: "width",
-        tab: "layout",
-        placeholder: "width_placeholder"
-      },
-      {
-        name: "minWidth",
-        tab: "layout",
-        placeholder: "minWidth_placeholder"
-      },
-      {
-        name: "maxWidth",
-        tab: "layout",
-        placeholder: "maxWidth_placeholder"
-      },
+      { name: "width", tab: "layout" },
+      { name: "minWidth", tab: "layout" },
+      { name: "maxWidth", tab: "layout" },
       { name: "showNumber", tab: "numbering" },
       { name: "showQuestionNumbers", tab: "numbering" },
-      {
-        name: "questionStartIndex",
-        tab: "numbering",
-        placeholder: "questionStartIndex_placeholder"
-      }
+      { name: "questionStartIndex", tab: "numbering" }
     ],
     tabs: [{ name: "numbering", index: 350 }]
   },
@@ -737,11 +723,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "showQuestionNumbers", tab: "question" },
       { name: "questionTitlePattern", tab: "question" },
       { name: "requiredText", tab: "question" },
-      {
-        name: "questionStartIndex",
-        tab: "question",
-        placeholder: "questionStartIndex_placeholder"
-      },
+      { name: "questionStartIndex", tab: "question" },
       { name: "questionErrorLocation", tab: "question" },
       {
         name: "focusFirstQuestionAutomatic",
@@ -801,14 +783,8 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   },
   choicesByUrl: {
     properties: [
-      {
-        name: "url",
-        placeholder: "url_placeholder"
-      },
-      {
-        name: "path",
-        placeholder: "path_placeholder"
-      },
+      "url",
+      "path",
       "valueName",
       "titleName",
       "allowEmptyResponse"
@@ -853,33 +829,14 @@ const defaultProperties: ISurveyPropertiesDefinition = {
     ]
   },
   "patternmask": {
-    properties: [
-      {
-        name: "pattern",
-        placeholder: "pattern_placeholder"
-      },
-    ]
+    properties: ["pattern"]
   },
   "datetimemask": {
-    properties: [
-      {
-        name: "pattern",
-        placeholder: "datetimepattern_placeholder"
-      },
-    ]
+    properties: ["pattern"]
   },
   "currencymask": {
-    properties: [
-      {
-        name: "prefix",
-        placeholder: "currencyprefix_placeholder"
-      },
-      {
-        name: "suffix",
-        placeholder: "currencysuffix_placeholder"
-      },
-    ]
-  },
+    properties: ["prefix", "suffix"]
+  }
 };
 
 export const defaultPropertyGridDefinition: ISurveyPropertyGridDefinition = {

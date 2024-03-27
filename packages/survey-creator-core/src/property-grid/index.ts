@@ -543,7 +543,7 @@ export class PropertyJSONGenerator {
         }
       }
       q.descriptionLocation = "hidden";
-      let helpText = editorLocalization.getPropertyHelpInEditor(this.obj.getType(), prop.name, prop.type);
+      const helpText = editorLocalization.getPropertyHelpInEditor(this.obj.getType(), prop.name, prop.type);
       if (!!helpText) {
         q.description = helpText;
       }
@@ -704,9 +704,9 @@ export class PropertyJSONGenerator {
       json.requiredErrorText = editorLocalization.getString("pe.propertyIsEmpty");
     }
 
-    const placeholder = SurveyQuestionProperties.getPropertyPlaceholder(this.obj.getType(), prop.name, this.propertyGridDefinition);
+    const placeholder = editorLocalization.getPropertyPlaceholder(this.obj.getType(), prop.name);
     if (!!placeholder) {
-      json.placeholder = editorLocalization.getString("pe." + placeholder);
+      json.placeholder = placeholder;
     }
     return json;
   }
@@ -959,7 +959,8 @@ export class PropertyGridModel {
     this.survey.onUploadFiles.add((_, options) => {
       const callback = (status: string, data: any) => options.callback(status, [{ content: data, file: options.files[0] }]);
       const question = options.question.obj.getType() == "survey" ? undefined : (options.question.obj.getType() == "imageitemvalue" ? options.question.obj.locOwner : options.question.obj);
-      this.options.uploadFiles(options.files, question, callback);
+      const item = options.question.obj.getType() == "imageitemvalue" ? options.question.obj : undefined;
+      this.options.uploadFiles(options.files, question, callback, { element: options.question.obj, item: item, elementType: options.question.obj.getType(), propertyName: options.name });
     });
     this.survey.getAllQuestions().map(q => q.allowRootStyle = false);
     this.survey.onQuestionCreated.add((_, opt) => {
@@ -1513,7 +1514,7 @@ export class PropertyGridLinkEditor extends PropertyGridEditor {
       question.acceptedTypes = getAcceptedTypesByContentMode("image");
     }
     question.onChooseFilesCallback = ((input, callback) => {
-      options.chooseFiles(input, callback);
+      options.chooseFiles(input, callback, { element: obj, elementType: obj.getType(), propertyName: question.name });
     });
   }
 

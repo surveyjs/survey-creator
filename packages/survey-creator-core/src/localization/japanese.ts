@@ -170,7 +170,6 @@ export var jaStrings = {
     imageChooseImage: "画像を選択",
     addNewTypeQuestion: "{0}を追加", //{0} is localizable question type
     chooseLogoPlaceholder: "[ロゴ]",
-    auto: "自動",
     choices_Item: "アイテム",
     lg: {
       addNewItem: "新しいルールを追加",
@@ -368,6 +367,28 @@ export var jaStrings = {
     multipletextitem: {
       name: "名前",
       title: "タイトル"
+    },
+    masksettings: {
+      saveMaskedValue: "アンケート結果にマスクされた値を保存する"
+    },
+    patternmask: {
+      pattern: "値パターン"
+    },
+    datetimemask: {
+      min: "最小値",
+      max: "最大値"
+    },
+    numericmask: {
+      allowNegativeValues: "負の値を許可する",
+      thousandsSeparator: "1000 の位の区切り記号",
+      decimalSeparator: "小数点記号",
+      precision: "値の精度",
+      min: "最小値",
+      max: "最大値"
+    },
+    currencymask: {
+      prefix: "通貨接頭辞",
+      suffix: "通貨の接尾辞"
     },
     imageHeight: "イメージの高さ",
     imageWidth: "イメージの幅",
@@ -609,6 +630,13 @@ export var jaStrings = {
     autoGrowComment: "必要に応じてコメント領域を自動展開する",
     allowResizeComment: "ユーザーがテキスト領域のサイズを変更できるようにする",
     textUpdateMode: "テキストの質問値を更新する",
+    maskType: "定型入力の種類",
+    maskTypes: {
+      patternmask: "パターン",
+      numericmask: "数値",
+      datetimemask: "日付と時刻",
+      currencymask: "通貨"
+    },
     focusOnFirstError: "最初の無効な回答にフォーカスを設定する",
     checkErrorsMode: "検証の実行",
     navigateToUrl: "URL に移動します。",
@@ -733,6 +761,7 @@ export var jaStrings = {
       templateTitle: "テンプレートタイトル",
       totals: "合計",
       logic: "ロジック",
+      mask: "定型入力設定",
       layout: {
         panel: "レイアウト",
         question: "レイアウト",
@@ -796,7 +825,9 @@ export var jaStrings = {
     questionStartIndex_placeholder: "例:a)",
     width_placeholder: "例:6インチ",
     minWidth_placeholder: "例:600px",
-    maxWidth_placeholder: "例:50%"
+    maxWidth_placeholder: "例:50%",
+    imageHeight_placeholder: "自動",
+    imageWidth_placeholder: "自動"
   },
   // Property values
   pv: {
@@ -1011,7 +1042,8 @@ export var jaStrings = {
     searchMode: {
       contains: "含む",
       startsWith: "次で始まる"
-    }
+    },
+    textWrapEnabled: "ラップの選択肢"
   },
   // Operators
   op: {
@@ -1075,6 +1107,18 @@ export var jaStrings = {
     runexpressiontrigger: "数式を実行",
     visibletrigger: "可視性を変更 (非推奨)"
   },
+  peplaceholder: {
+    patternmask: {
+      pattern: "Ex.: +1(999)-999-99-99"
+    },
+    datetimemask: {
+      pattern: "Ex.: mm/dd/yyyy"
+    },
+    currencymask: {
+      prefix: "Ex.: $",
+      suffix: "Ex.: USD"
+    }
+  },
   pehelp: {
     panel: {
       name: "回答者には表示されないパネルID。",
@@ -1137,7 +1181,8 @@ export var jaStrings = {
       },
       textUpdateMode: "次から選択します: \"On lost focus\" - 入力フィールドがフォーカスを失ったときに値が更新されます。「入力中」 - ユーザーが入力しているときに、値がリアルタイムで更新されます。「継承」オプションは、アンケートレベルの設定(デフォルトでは「フォーカスを失ったとき」)を適用します。",
       url: "任意の Web サービスを多肢選択式の質問のデータ ソースとして使用できます。選択肢の値を入力するには、データを提供するサービスの URL を入力します。",
-      searchMode: "ドロップダウン リストをフィルター処理するために使用される比較演算。"
+      searchMode: "ドロップダウン リストをフィルター処理するために使用される比較演算。",
+      textWrapEnabled: "選択肢オプションのテキスト(長い)は、ドロップダウンメニュー内に収まるように改行を自動的に生成します。テキストをクリップする場合は、選択を解除します。"
     },
     signaturepad: {
       signatureWidth: "表示される署名領域と結果の画像の幅を設定します。",
@@ -1278,7 +1323,25 @@ export var jaStrings = {
     autocomplete: "詳細については、[オートコンプリート](https://developer.mozilla.org/en-US/docs/Web/HTML/属性/オートコンプリート) 属性の説明を参照してください。",
     filePlaceholder: "「ソースタイプ」が「ローカルファイル」の場合、またはカメラが利用できない場合に適用されます",
     photoPlaceholder: "「ソースタイプ」が「カメラ」の場合に適用されます。",
-    fileOrPhotoPlaceholder: "「ソースタイプ」が「ローカルファイルまたはカメラ」の場合に適用されます。"
+    fileOrPhotoPlaceholder: "「ソースタイプ」が「ローカルファイルまたはカメラ」の場合に適用されます。",
+    masksettings: {
+      saveMaskedValue: "マスクを適用した質問値をアンケート結果に保存する場合に選択します。"
+    },
+    patternmask: {
+      pattern: "パターンには、文字列リテラルと次のプレースホルダーを含めることができます: '9' - 数字の場合。'a' - 大文字または小文字。'#' - 数字または大文字または小文字。文字をエスケープするには、バックスラッシュ '\\' を使用します。"
+    },
+    datetimemask: {
+      pattern: "パターンには、区切り文字と次のプレースホルダーを含めることができます: 'm' - 月番号。'mm' - 月番号、1桁の値の場合は先頭にゼロを付けます。'd' - 日付'dd' - 日付、1桁の値の先頭にゼロを付けます。'yy' - 年の下2桁'yyyy' - 4 桁の年。"
+    },
+    numericmask: {
+      decimalSeparator: "表示される数値の小数部と整数部を区切るために使用される記号。",
+      thousandsSeparator: "大きな数字を 3 つのグループに区切るために使用される記号。",
+      precision: "表示される数値の小数点以下の桁数を制限します。"
+    },
+    currencymask: {
+      prefix: "値の前に表示される 1 つまたは複数のシンボル。",
+      suffix: "値の後に表示される 1 つまたは複数の記号。"
+    }
   },
   // Properties
   p: {
@@ -2423,3 +2486,35 @@ editorLocalization.locales["ja"] = jaStrings;
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "ランキングエリアのプレースホルダーテキスト"
 // pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "調査に自動的に回答する"
 // pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "回答者がすべての質問に回答した後にアンケートを自動的に完了する場合に選択します。"
+// masksettings.saveMaskedValue: "Save masked value in survey results" => "アンケート結果にマスクされた値を保存する"
+// patternmask.pattern: "Value pattern" => "値パターン"
+// datetimemask.min: "Minimum value" => "最小値"
+// datetimemask.max: "Maximum value" => "最大値"
+// numericmask.allowNegativeValues: "Allow negative values" => "負の値を許可する"
+// numericmask.thousandsSeparator: "Thousands separator" => "1000 の位の区切り記号"
+// numericmask.decimalSeparator: "Decimal separator" => "小数点記号"
+// numericmask.precision: "Value precision" => "値の精度"
+// numericmask.min: "Minimum value" => "最小値"
+// numericmask.max: "Maximum value" => "最大値"
+// currencymask.prefix: "Currency prefix" => "通貨接頭辞"
+// currencymask.suffix: "Currency suffix" => "通貨の接尾辞"
+// pe.maskType: "Input mask type" => "定型入力の種類"
+// maskTypes.patternmask: "Pattern" => "パターン"
+// maskTypes.numericmask: "Numeric" => "数値"
+// maskTypes.datetimemask: "Date and Time" => "日付と時刻"
+// maskTypes.currencymask: "Currency" => "通貨"
+// tabs.mask: "Input Mask Settings" => "定型入力設定"
+// pe.pattern_placeholder: "Ex.: +1(999)-999-99-99" => "例:+1(999)-999-99-99"
+// pe.datetimepattern_placeholder: "Ex.: mm/dd/yyyy" => "例:mm/dd/yyyy"
+// pe.currencyprefix_placeholder: "Ex.: $" => "例:$"
+// pe.currencysuffix_placeholder: "Ex.: USD" => "例:米ドル"
+// pv.textWrapEnabled: "Wrap choices" => "ラップの選択肢"
+// question.textWrapEnabled: "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip." => "選択肢オプションのテキスト(長い)は、ドロップダウンメニュー内に収まるように改行を自動的に生成します。テキストをクリップする場合は、選択を解除します。"
+// masksettings.saveMaskedValue: "Select if you want to store the question value with an applied mask in survey results." => "マスクを適用した質問値をアンケート結果に保存する場合に選択します。"
+// patternmask.pattern: "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character." => "パターンには、文字列リテラルと次のプレースホルダーを含めることができます: '9' - 数字の場合。'a' - 大文字または小文字。'#' - 数字または大文字または小文字。文字をエスケープするには、バックスラッシュ '\\' を使用します。"
+// datetimemask.pattern: "The pattern can contain separator characters and the following placeholders: `m` - for month number; `mm` - for month number, with leading zero for single-digit values; `d` - for day of the month; `dd` - for day of the month, with leading zero for single-digit values; `yy` - for the last two digits of the year; `yyyy` - for a four-digit year." => "パターンには、区切り文字と次のプレースホルダーを含めることができます: 'm' - 月番号。'mm' - 月番号、1桁の値の場合は先頭にゼロを付けます。'd' - 日付'dd' - 日付、1桁の値の先頭にゼロを付けます。'yy' - 年の下2桁'yyyy' - 4 桁の年。"
+// numericmask.decimalSeparator: "A symbol used to separate the fractional part from the integer part of a displayed number." => "表示される数値の小数部と整数部を区切るために使用される記号。"
+// numericmask.thousandsSeparator: "A symbol used to separate the digits of a large number into groups of three." => "大きな数字を 3 つのグループに区切るために使用される記号。"
+// numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "表示される数値の小数点以下の桁数を制限します。"
+// currencymask.prefix: "One or several symbols to be displayed before the value." => "値の前に表示される 1 つまたは複数のシンボル。"
+// currencymask.suffix: "One or several symbols to be displayed after the value." => "値の後に表示される 1 つまたは複数の記号。"

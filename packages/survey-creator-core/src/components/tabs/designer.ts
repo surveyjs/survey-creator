@@ -50,9 +50,13 @@ export class TabDesignerViewModel extends Base {
   }
   private get canShowNewPage(): boolean {
     if (!this.survey || this.creator.pageEditMode === "single" || !this.creator.allowModifyPages) return false;
-    if (this.creator.pageEditMode === "bypage") return true;
-    const pages: PageModel[] = this.survey.pages;
-    return pages.length === 0 || pages[pages.length - 1].elements.length > 0;
+    return true;
+    // if (this.creator.pageEditMode === "bypage") return true;
+    // const pages: PageModel[] = this.survey.pages;
+    // return pages.length === 0 || this.isModifiedPage(pages[pages.length - 1]);
+  }
+  private isModifiedPage(page: PageModel) {
+    return Object.keys(page.toJSON()).filter(key => key !== "name").length > 0;
   }
 
   constructor(creator: SurveyCreatorModel) {
@@ -125,7 +129,9 @@ export class TabDesignerViewModel extends Base {
     if (updatePageController) {
       if (this.newPage) {
         this.newPage.num = this.survey.pages.length + 1;
+        this.newPage.startLoadingFromJson();
         this.newPage.name = SurveyHelper.getNewPageName(this.survey.pages);
+        this.newPage.endLoadingFromJson();
       }
       this.pagesController.raisePagesChanged();
     }

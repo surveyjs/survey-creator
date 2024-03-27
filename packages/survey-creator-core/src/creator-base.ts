@@ -2,7 +2,7 @@ import {
   Base, SurveyModel, ListModel, Question, PanelModel, PageModel, PopupModel, property, IElement, Serializer,
   JsonObjectProperty, ActionContainer, AdaptiveActionContainer, IAction, Action, IPanel, SurveyElement, ItemValue,
   QuestionSelectBase, QuestionRowModel, LocalizableString, ILocalizableString, ILocalizableOwner, PopupBaseViewModel,
-  EventBase, hasLicense, settings as SurveySettings, Event, Helpers as SurveyHelpers, MatrixDropdownColumn, JsonObject,
+  EventBase, hasLicense, slk, settings as SurveySettings, Event, Helpers as SurveyHelpers, MatrixDropdownColumn, JsonObject,
   dxSurveyService, ISurveyElement, PanelModelBase, surveyLocalization, QuestionMatrixDropdownModelBase, ITheme, Helpers,
   chooseFiles
 } from "survey-core";
@@ -208,6 +208,9 @@ export class SurveyCreatorModel extends Base
   }
   public get licenseText(): string {
     return this.getLocString("survey.license");
+  }
+  public slk(val: string): void {
+    slk(val);
   }
   /**
    * Specifies whether to automatically save a survey or theme JSON schema each time survey or theme settings are changed.
@@ -2780,7 +2783,7 @@ export class SurveyCreatorModel extends Base
   public chooseFiles(
     input: HTMLInputElement,
     callback: (files: File[]) => void,
-    context?: { element: SurveyElement, item?: ItemValue }
+    context?: { element: Base, item?: any, elementType?: string, propertyName?: string }
   ) {
     if (this.onOpenFileChooser.isEmpty) {
       chooseFiles(input, callback);
@@ -2788,9 +2791,12 @@ export class SurveyCreatorModel extends Base
       this.onOpenFileChooser.fire(this, {
         input: input,
         element: context && context.element || this.survey,
+        elementType: context && context.elementType,
         item: context && context.item,
-        callback: callback
-      });
+        propertyName: context && context.propertyName,
+        callback: callback,
+        context: context
+      } as any);
     }
   }
   /**
@@ -2803,7 +2809,8 @@ export class SurveyCreatorModel extends Base
   public uploadFiles(
     files: File[],
     question: Question,
-    callback: (status: string, data: any) => any
+    callback: (status: string, data: any) => any,
+    context?: { element: Base, item?: any, elementType?: string, propertyName?: string }
   ) {
     if (this.onUploadFile.isEmpty) {
       let fileReader = new FileReader();
@@ -2815,8 +2822,12 @@ export class SurveyCreatorModel extends Base
       this.onUploadFile.fire(this, {
         question: question,
         files: files || [],
-        callback: callback
-      });
+        callback: callback,
+        element: context && context.element || this.survey,
+        elementType: context && context.elementType,
+        propertyName: context && context.propertyName,
+        context: context
+      } as any);
     }
   }
 
@@ -2881,13 +2892,13 @@ export class SurveyCreatorModel extends Base
     if (objIndex == elements.length - 1) {
       objIndex--;
     }
-    if (this.pageEditMode === "single" && parent.isPage) {
-      parent = this.survey;
-    }
     if (obj["questions"]) {
       obj["questions"].forEach(q => this.updateConditionsOnRemove(q));
     }
     obj["delete"](false);
+    if (parent.isPage && (this.pageEditMode === "single" || elements.length === 0)) {
+      parent = this.survey;
+    }
     this.selectElement(objIndex > -1 ? elements[objIndex] : parent);
   }
   protected onCanShowObjectProperty(

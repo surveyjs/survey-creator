@@ -168,11 +168,11 @@ export var enStrings = {
     htmlPlaceHolder: "HTML content will be here.",
     panelPlaceHolder: "Drop a question from the toolbox here.",
     surveyPlaceHolder: "The survey is empty. Drag an element from the toolbox or click the button below.",
+    pagePlaceHolder: "The page is empty. Drag an element from the toolbox or click the button below.",
     imagePlaceHolder: "Drag and drop an image here or click the button below and choose an image to upload",
     imageChooseImage: "Choose Image",
     addNewTypeQuestion: "Add {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
-    auto: "auto",
     choices_Item: "Item ",
     lg: {
       addNewItem: "Add New Rule",
@@ -844,10 +844,8 @@ export var enStrings = {
     width_placeholder: "Ex.: 6in",
     minWidth_placeholder: "Ex.: 600px",
     maxWidth_placeholder: "Ex.: 50%",
-    pattern_placeholder: "Ex.: +1(999)-999-99-99",
-    datetimepattern_placeholder: "Ex.: mm/dd/yyyy",
-    currencyprefix_placeholder: "Ex.: $",
-    currencysuffix_placeholder: "Ex.: USD",
+    imageHeight_placeholder: "auto",
+    imageWidth_placeholder: "auto"
   },
   // Property values
   pv: {
@@ -1062,7 +1060,8 @@ export var enStrings = {
     searchMode: {
       contains: "Contains",
       startsWith: "Starts with"
-    }
+    },
+    textWrapEnabled: "Wrap choices"
   },
   // Operators
   op: {
@@ -1125,6 +1124,18 @@ export var enStrings = {
     skiptrigger: "Skip to question",
     runexpressiontrigger: "Run expression",
     visibletrigger: "change visibility (deprecated)"
+  },
+  peplaceholder: {
+    patternmask: {
+      pattern: "Ex.: +1(999)-999-99-99"
+    },
+    datetimemask: {
+      pattern: "Ex.: mm/dd/yyyy"
+    },
+    currencymask: {
+      prefix: "Ex.: $",
+      suffix: "Ex.: USD"
+    }
   },
   pehelp: {
     panel: {
@@ -1191,7 +1202,8 @@ export var enStrings = {
       },
       textUpdateMode: "Choose from: \"On lost focus\" - the value is updated when the input field loses focus; \"While typing\" - the value is updated in real-time, as users are typing. The \"Inherit\" option applies the survey-level setting (\"On lost focus\" by default).",
       url: "You can use any web service as a data source for multiple-choice questions. To populate choice values, enter the URL of the service providing the data.",
-      searchMode: "A comparison operation used to filter the drop-down list."
+      searchMode: "A comparison operation used to filter the drop-down list.",
+      textWrapEnabled: "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
     },
     signaturepad: {
       signatureWidth: "Sets the width of the displayed signature area and the resulting image.",

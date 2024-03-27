@@ -101,6 +101,10 @@
           "Title": "Prevent Duplicate Form Submissions"
         },
         {
+          "Name": "end-user-guide-how-to-format-user-input-for-single-line-fields",
+          "Title": "Format User Input for Single-Line Fields"
+        },
+        {
           "Name": "end-user-guide-how-to-create-transfer-list",
           "Title": "Create a Transfer List"
         }

@@ -170,7 +170,6 @@ export var ruStrings = {
     imageChooseImage: "Выберите изображение",
     addNewTypeQuestion: "Добавить {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[ЛОГОТИП]",
-    auto: "Авто",
     choices_Item: "Пункт ",
     lg: {
       addNewItem: "Добавить новое правило",
@@ -368,6 +367,28 @@ export var ruStrings = {
     multipletextitem: {
       name: "Имя",
       title: "Титул"
+    },
+    masksettings: {
+      saveMaskedValue: "Сохранение замаскированного значения в результатах опроса"
+    },
+    patternmask: {
+      pattern: "Шаблон значения"
+    },
+    datetimemask: {
+      min: "Минимальное значение",
+      max: "Максимальное значение"
+    },
+    numericmask: {
+      allowNegativeValues: "Разрешить отрицательные значения",
+      thousandsSeparator: "Разделитель тысяч",
+      decimalSeparator: "Десятичный разделитель",
+      precision: "Точность значений",
+      min: "Минимальное значение",
+      max: "Максимальное значение"
+    },
+    currencymask: {
+      prefix: "Префикс валюты",
+      suffix: "Суффикс валюты"
     },
     imageHeight: "Высота изображения",
     imageWidth: "Ширина изображения",
@@ -609,6 +630,13 @@ export var ruStrings = {
     autoGrowComment: "При необходимости автоматически разверните область комментариев",
     allowResizeComment: "Разрешить пользователям изменять размер текстовых областей",
     textUpdateMode: "Обновление значения текстового вопроса",
+    maskType: "Тип входной маски",
+    maskTypes: {
+      patternmask: "Рисунок",
+      numericmask: "Числовой",
+      datetimemask: "Дата и время",
+      currencymask: "Валюта"
+    },
     focusOnFirstError: "Установка фокуса на первом недопустимом ответе",
     checkErrorsMode: "Запуск проверки",
     navigateToUrl: "Перейдите по URL-адресу",
@@ -733,6 +761,7 @@ export var ruStrings = {
       templateTitle: "Название шаблона",
       totals: "Итоги",
       logic: "Логика",
+      mask: "Настройки входной маски",
       layout: {
         panel: "Схема",
         question: "Схема",
@@ -796,7 +825,9 @@ export var ruStrings = {
     questionStartIndex_placeholder: "Пример: а)",
     width_placeholder: "Пример: 6 дюймов",
     minWidth_placeholder: "Пример: 600px",
-    maxWidth_placeholder: "Пример: 50%"
+    maxWidth_placeholder: "Пример: 50%",
+    imageHeight_placeholder: "Авто",
+    imageWidth_placeholder: "Авто"
   },
   // Property values
   pv: {
@@ -1011,7 +1042,8 @@ export var ruStrings = {
     searchMode: {
       contains: "Содержит",
       startsWith: "Начинается с"
-    }
+    },
+    textWrapEnabled: "Варианты обертывания"
   },
   // Operators
   op: {
@@ -1075,6 +1107,18 @@ export var ruStrings = {
     runexpressiontrigger: "Запустить выражение",
     visibletrigger: "Изменить видимость (не рекомендуется)"
   },
+  peplaceholder: {
+    patternmask: {
+      pattern: "Пример: +1(999)-999-99-99"
+    },
+    datetimemask: {
+      pattern: "Пример: мм/дд/гггг"
+    },
+    currencymask: {
+      prefix: "Пример: $",
+      suffix: "Пример: USD"
+    }
+  },
   pehelp: {
     panel: {
       name: "Идентификатор панели, который не виден респондентам.",
@@ -1137,7 +1181,8 @@ export var ruStrings = {
       },
       textUpdateMode: "Выберите из: \"При потере фокуса\" - значение обновляется при потере фокуса полем ввода; \"Во время набора\" - значение обновляется в режиме реального времени, по мере набора текста пользователями. Опция «Наследовать» применяет настройку на уровне опроса (по умолчанию «При потере фокуса»).",
       url: "Вы можете использовать любую веб-службу в качестве источника данных для вопросов с несколькими вариантами ответов. Чтобы заполнить значения выбора, введите URL-адрес службы, предоставляющей данные.",
-      searchMode: "Операция сравнения, используемая для фильтрации раскрывающегося списка."
+      searchMode: "Операция сравнения, используемая для фильтрации раскрывающегося списка.",
+      textWrapEnabled: "Длинные тексты в параметрах выбора будут автоматически создавать разрывы строк в соответствии с раскрывающимся меню. Снимите флажок, если вы хотите, чтобы тексты были обрезаны."
     },
     signaturepad: {
       signatureWidth: "Задает ширину отображаемой области подписи и результирующего изображения.",
@@ -1278,7 +1323,25 @@ export var ruStrings = {
     autocomplete: "Дополнительные сведения см. в описании атрибута [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete).",
     filePlaceholder: "Применяется, если \"Тип источника\" имеет значение \"Локальные файлы\" или когда камера недоступна",
     photoPlaceholder: "Применяется, если \"Тип источника\" имеет значение \"Камера\".",
-    fileOrPhotoPlaceholder: "Применяется, если \"Тип источника\" имеет значение \"Локальные файлы или камера\"."
+    fileOrPhotoPlaceholder: "Применяется, если \"Тип источника\" имеет значение \"Локальные файлы или камера\".",
+    masksettings: {
+      saveMaskedValue: "Выберите, хотите ли вы сохранить значение вопроса с примененной маской в результатах опроса."
+    },
+    patternmask: {
+      pattern: "Шаблон может содержать строковые литералы и следующие заполнители: '9' - для цифры; 'a' - для прописной или строчной буквы; '#' - для цифры или прописной или строчной буквы. Используйте обратную косую черту '\\' для экранирования символа."
+    },
+    datetimemask: {
+      pattern: "Шаблон может содержать символы-разделители и следующие заполнители: 'm' - номер месяца; 'mm' - номер месяца, с нулем в начале для однозначных значений; 'd' - день месяца; 'dd' - день месяца, с нулевым началом для однозначных значений; 'yy' - для последних двух цифр года; 'yyyy' - для четырехзначного года."
+    },
+    numericmask: {
+      decimalSeparator: "Символ, используемый для отделения дробной части от целой части отображаемого числа.",
+      thousandsSeparator: "Символ, используемый для разделения цифр большого числа на группы по три.",
+      precision: "Ограничивает количество цифр, сохраняемых после десятичной запятой для отображаемого числа."
+    },
+    currencymask: {
+      prefix: "Один или несколько символов, которые будут отображаться перед значением.",
+      suffix: "Один или несколько символов, которые будут отображаться после значения."
+    }
   },
   // Properties
   p: {
@@ -2484,3 +2547,35 @@ editorLocalization.locales["ru"] = ruStrings;
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Замещающий текст для области ранжирования"
 // pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "Автоматическое заполнение опроса"
 // pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Выберите, хотите ли Вы, чтобы опрос завершался автоматически после того, как респондент ответит на все вопросы."
+// masksettings.saveMaskedValue: "Save masked value in survey results" => "Сохранение замаскированного значения в результатах опроса"
+// patternmask.pattern: "Value pattern" => "Шаблон значения"
+// datetimemask.min: "Minimum value" => "Минимальное значение"
+// datetimemask.max: "Maximum value" => "Максимальное значение"
+// numericmask.allowNegativeValues: "Allow negative values" => "Разрешить отрицательные значения"
+// numericmask.thousandsSeparator: "Thousands separator" => "Разделитель тысяч"
+// numericmask.decimalSeparator: "Decimal separator" => "Десятичный разделитель"
+// numericmask.precision: "Value precision" => "Точность значений"
+// numericmask.min: "Minimum value" => "Минимальное значение"
+// numericmask.max: "Maximum value" => "Максимальное значение"
+// currencymask.prefix: "Currency prefix" => "Префикс валюты"
+// currencymask.suffix: "Currency suffix" => "Суффикс валюты"
+// pe.maskType: "Input mask type" => "Тип входной маски"
+// maskTypes.patternmask: "Pattern" => "Рисунок"
+// maskTypes.numericmask: "Numeric" => "Числовой"
+// maskTypes.datetimemask: "Date and Time" => "Дата и время"
+// maskTypes.currencymask: "Currency" => "Валюта"
+// tabs.mask: "Input Mask Settings" => "Настройки входной маски"
+// pe.pattern_placeholder: "Ex.: +1(999)-999-99-99" => "Пример: +1(999)-999-99-99"
+// pe.datetimepattern_placeholder: "Ex.: mm/dd/yyyy" => "Пример: мм/дд/гггг"
+// pe.currencyprefix_placeholder: "Ex.: $" => "Пример: $"
+// pe.currencysuffix_placeholder: "Ex.: USD" => "Пример: USD"
+// pv.textWrapEnabled: "Wrap choices" => "Варианты обертывания"
+// question.textWrapEnabled: "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip." => "Длинные тексты в параметрах выбора будут автоматически создавать разрывы строк в соответствии с раскрывающимся меню. Снимите флажок, если вы хотите, чтобы тексты были обрезаны."
+// masksettings.saveMaskedValue: "Select if you want to store the question value with an applied mask in survey results." => "Выберите, хотите ли вы сохранить значение вопроса с примененной маской в результатах опроса."
+// patternmask.pattern: "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character." => "Шаблон может содержать строковые литералы и следующие заполнители: '9' - для цифры; 'a' - для прописной или строчной буквы; '#' - для цифры или прописной или строчной буквы. Используйте обратную косую черту '\\' для экранирования символа."
+// datetimemask.pattern: "The pattern can contain separator characters and the following placeholders: `m` - for month number; `mm` - for month number, with leading zero for single-digit values; `d` - for day of the month; `dd` - for day of the month, with leading zero for single-digit values; `yy` - for the last two digits of the year; `yyyy` - for a four-digit year." => "Шаблон может содержать символы-разделители и следующие заполнители: 'm' - номер месяца; 'mm' - номер месяца, с нулем в начале для однозначных значений; 'd' - день месяца; 'dd' - день месяца, с нулевым началом для однозначных значений; 'yy' - для последних двух цифр года; 'yyyy' - для четырехзначного года."
+// numericmask.decimalSeparator: "A symbol used to separate the fractional part from the integer part of a displayed number." => "Символ, используемый для отделения дробной части от целой части отображаемого числа."
+// numericmask.thousandsSeparator: "A symbol used to separate the digits of a large number into groups of three." => "Символ, используемый для разделения цифр большого числа на группы по три."
+// numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Ограничивает количество цифр, сохраняемых после десятичной запятой для отображаемого числа."
+// currencymask.prefix: "One or several symbols to be displayed before the value." => "Один или несколько символов, которые будут отображаться перед значением."
+// currencymask.suffix: "One or several symbols to be displayed after the value." => "Один или несколько символов, которые будут отображаться после значения."
