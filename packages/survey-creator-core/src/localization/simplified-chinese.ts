@@ -170,7 +170,6 @@ var simplifiedChineseTranslation = {
     imageChooseImage: "选择图像",
     addNewTypeQuestion: "添加{0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[徽标]",
-    auto: "自动",
     choices_Item: "项目",
     lg: {
       addNewItem: "添加新规则",
@@ -827,10 +826,8 @@ var simplifiedChineseTranslation = {
     width_placeholder: "例：6in",
     minWidth_placeholder: "例如：600px",
     maxWidth_placeholder: "例：50%",
-    pattern_placeholder: "例如：+1（999）-999-99-99",
-    datetimepattern_placeholder: "例：mm/dd/yyyy",
-    currencyprefix_placeholder: "例：$",
-    currencysuffix_placeholder: "例如：美元"
+    imageHeight_placeholder: "自动",
+    imageWidth_placeholder: "自动"
   },
   // Property values
   pv: {
@@ -1109,6 +1106,18 @@ var simplifiedChineseTranslation = {
     skiptrigger: "跳至问题",
     runexpressiontrigger: "运行公式",
     visibletrigger: "修改可见性"
+  },
+  peplaceholder: {
+    patternmask: {
+      pattern: "例如：+1（999）-999-99-99"
+    },
+    datetimemask: {
+      pattern: "例：mm/dd/yyyy"
+    },
+    currencymask: {
+      prefix: "例：$",
+      suffix: "例如：美元"
+    }
   },
   pehelp: {
     panel: {

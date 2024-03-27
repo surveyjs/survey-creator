@@ -170,7 +170,6 @@ export var ruStrings = {
     imageChooseImage: "Выберите изображение",
     addNewTypeQuestion: "Добавить {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[ЛОГОТИП]",
-    auto: "Авто",
     choices_Item: "Пункт ",
     lg: {
       addNewItem: "Добавить новое правило",
@@ -827,10 +826,8 @@ export var ruStrings = {
     width_placeholder: "Пример: 6 дюймов",
     minWidth_placeholder: "Пример: 600px",
     maxWidth_placeholder: "Пример: 50%",
-    pattern_placeholder: "Пример: +1(999)-999-99-99",
-    datetimepattern_placeholder: "Пример: мм/дд/гггг",
-    currencyprefix_placeholder: "Пример: $",
-    currencysuffix_placeholder: "Пример: USD"
+    imageHeight_placeholder: "Авто",
+    imageWidth_placeholder: "Авто"
   },
   // Property values
   pv: {
@@ -1109,6 +1106,18 @@ export var ruStrings = {
     skiptrigger: "Перейти к вопросу",
     runexpressiontrigger: "Запустить выражение",
     visibletrigger: "Изменить видимость (не рекомендуется)"
+  },
+  peplaceholder: {
+    patternmask: {
+      pattern: "Пример: +1(999)-999-99-99"
+    },
+    datetimemask: {
+      pattern: "Пример: мм/дд/гггг"
+    },
+    currencymask: {
+      prefix: "Пример: $",
+      suffix: "Пример: USD"
+    }
   },
   pehelp: {
     panel: {

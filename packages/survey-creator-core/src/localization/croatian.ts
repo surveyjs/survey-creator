@@ -170,7 +170,6 @@ export var hrStrings = {
     imageChooseImage: "Odabir slike",
     addNewTypeQuestion: "Dodaj {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
-    auto: "automobil",
     choices_Item: "Stavka ",
     lg: {
       addNewItem: "Dodaj novo pravilo",
@@ -827,10 +826,8 @@ export var hrStrings = {
     width_placeholder: "Npr.: 6 inča",
     minWidth_placeholder: "Npr.: 600px",
     maxWidth_placeholder: "Npr.: 50%",
-    pattern_placeholder: "Npr.: +1(999)-999-99-99",
-    datetimepattern_placeholder: "Npr.: mm/dd/gggg",
-    currencyprefix_placeholder: "Npr.: $",
-    currencysuffix_placeholder: "Npr.: USD"
+    imageHeight_placeholder: "Автоматично",
+    imageWidth_placeholder: "Автоматично"
   },
   // Property values
   pv: {
@@ -1109,6 +1106,18 @@ export var hrStrings = {
     skiptrigger: "preskočiti na pitanje",
     runexpressiontrigger: "pokrenuti izraz",
     visibletrigger: "promjena vidljivosti (amortizirati)"
+  },
+  peplaceholder: {
+    patternmask: {
+      pattern: "Npr.: +1(999)-999-99-99"
+    },
+    datetimemask: {
+      pattern: "Npr.: mm/dd/gggg"
+    },
+    currencymask: {
+      prefix: "Npr.: $",
+      suffix: "Npr.: USD"
+    }
   },
   pehelp: {
     panel: {

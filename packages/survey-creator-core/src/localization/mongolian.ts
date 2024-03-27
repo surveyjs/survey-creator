@@ -170,7 +170,6 @@ export var mnStrings = {
     imageChooseImage: "Зураг сонгох",
     addNewTypeQuestion: "{0} нэмэх", //{0} is localizable question type
     chooseLogoPlaceholder: "[Лого]",
-    auto: "автомат",
     choices_Item: "Хэсэг ",
     lg: {
       addNewItem: "Шинэ дүрэм нэмэх",
@@ -827,10 +826,8 @@ export var mnStrings = {
     width_placeholder: "Экс.: 6ин",
     minWidth_placeholder: "Экс: 600px",
     maxWidth_placeholder: "Экс: 50%",
-    pattern_placeholder: "Экс.: +1(999)-999-99-99",
-    datetimepattern_placeholder: "Экс.: мм/д/yyy",
-    currencyprefix_placeholder: "Экс.: $",
-    currencysuffix_placeholder: "Экс.: USD"
+    imageHeight_placeholder: "автомат",
+    imageWidth_placeholder: "автомат"
   },
   // Property values
   pv: {
@@ -1109,6 +1106,18 @@ export var mnStrings = {
     skiptrigger: "Асуулт руу үсрэх",
     runexpressiontrigger: "илэрхийлэл ажлуулах",
     visibletrigger: "Харагдах байдлыг өөрчлөх"
+  },
+  peplaceholder: {
+    patternmask: {
+      pattern: "Экс.: +1(999)-999-99-99"
+    },
+    datetimemask: {
+      pattern: "Экс.: мм/д/yyy"
+    },
+    currencymask: {
+      prefix: "Экс.: $",
+      suffix: "Экс.: USD"
+    }
   },
   pehelp: {
     panel: {

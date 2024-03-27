@@ -2,7 +2,6 @@ export interface IPropertyEditorInfo {
   name: string;
   title?: string;
   tab?: string;
-  placeholder?: string;
 }
 
 export interface IPropertyTabInfo {
@@ -59,17 +58,14 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       {
         name: "width",
         tab: "layout",
-        placeholder: "width_placeholder"
       },
       {
         name: "minWidth",
         tab: "layout",
-        placeholder: "minWidth_placeholder"
       },
       {
         name: "maxWidth",
         tab: "layout",
-        placeholder: "maxWidth_placeholder"
       },
       { name: "valueName", tab: "data" },
       { name: "defaultValue", tab: "data" },
@@ -323,8 +319,8 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "maxImageWidth",
       "minImageHeight",
       "maxImageHeight",
-      { name: "imageHeight", placeholder: "auto" },
-      { name: "imageWidth", placeholder: "auto" },
+      "imageHeight",
+      "imageWidth",
       "multiSelect",
       "showLabel",
     ]
@@ -334,8 +330,8 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "imageLink",
       "contentMode",
       "imageFit",
-      { name: "imageHeight", placeholder: "auto" },
-      { name: "imageWidth", placeholder: "auto" },
+      "imageHeight",
+      "imageWidth",
       "text"
     ]
   },
@@ -663,28 +659,12 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "page", tab: "layout" },
       { name: "startWithNewLine", tab: "layout" },
       { name: "state", tab: "layout" },
-      {
-        name: "width",
-        tab: "layout",
-        placeholder: "width_placeholder"
-      },
-      {
-        name: "minWidth",
-        tab: "layout",
-        placeholder: "minWidth_placeholder"
-      },
-      {
-        name: "maxWidth",
-        tab: "layout",
-        placeholder: "maxWidth_placeholder"
-      },
+      { name: "width", tab: "layout" },
+      { name: "minWidth", tab: "layout" },
+      { name: "maxWidth", tab: "layout" },
       { name: "showNumber", tab: "numbering" },
       { name: "showQuestionNumbers", tab: "numbering" },
-      {
-        name: "questionStartIndex",
-        tab: "numbering",
-        placeholder: "questionStartIndex_placeholder"
-      }
+      { name: "questionStartIndex", tab: "numbering" }
     ],
     tabs: [{ name: "numbering", index: 350 }]
   },
@@ -736,11 +716,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "showQuestionNumbers", tab: "question" },
       { name: "questionTitlePattern", tab: "question" },
       { name: "requiredText", tab: "question" },
-      {
-        name: "questionStartIndex",
-        tab: "question",
-        placeholder: "questionStartIndex_placeholder"
-      },
+      { name: "questionStartIndex", tab: "question" },
       { name: "questionErrorLocation", tab: "question" },
       {
         name: "focusFirstQuestionAutomatic",
@@ -800,14 +776,8 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   },
   choicesByUrl: {
     properties: [
-      {
-        name: "url",
-        placeholder: "url_placeholder"
-      },
-      {
-        name: "path",
-        placeholder: "path_placeholder"
-      },
+      "url",
+      "path",
       "valueName",
       "titleName",
       "allowEmptyResponse"
@@ -852,33 +822,14 @@ const defaultProperties: ISurveyPropertiesDefinition = {
     ]
   },
   "patternmask": {
-    properties: [
-      {
-        name: "pattern",
-        placeholder: "pattern_placeholder"
-      },
-    ]
+    properties: ["pattern"]
   },
   "datetimemask": {
-    properties: [
-      {
-        name: "pattern",
-        placeholder: "datetimepattern_placeholder"
-      },
-    ]
+    properties: ["pattern"]
   },
   "currencymask": {
-    properties: [
-      {
-        name: "prefix",
-        placeholder: "currencyprefix_placeholder"
-      },
-      {
-        name: "suffix",
-        placeholder: "currencysuffix_placeholder"
-      },
-    ]
-  },
+    properties: ["prefix", "suffix"]
+  }
 };
 
 export const defaultPropertyGridDefinition: ISurveyPropertyGridDefinition = {

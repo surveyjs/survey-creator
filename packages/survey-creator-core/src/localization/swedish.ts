@@ -170,7 +170,6 @@ export let svStrings = {
     imageChooseImage: "Välj bild",
     addNewTypeQuestion: "Lägg till {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGOTYP]",
-    auto: "bil",
     choices_Item: "Sak ",
     lg: {
       addNewItem: "Lägg till ny regel",
@@ -827,10 +826,8 @@ export let svStrings = {
     width_placeholder: "Ex.: 6 tum",
     minWidth_placeholder: "Ex.: 600px",
     maxWidth_placeholder: "Ex.: 50%",
-    pattern_placeholder: "Ex.: +1(999)-999-99-99",
-    datetimepattern_placeholder: "Ex.: mm/dd/åååå",
-    currencyprefix_placeholder: "Ex.: $",
-    currencysuffix_placeholder: "Ex.: USD"
+    imageHeight_placeholder: "bil",
+    imageWidth_placeholder: "bil"
   },
   // Property values
   pv: {
@@ -1109,6 +1106,18 @@ export let svStrings = {
     skiptrigger: "Hoppa till fråga",
     runexpressiontrigger: "Kör uttryck",
     visibletrigger: "Ändra synlighet"
+  },
+  peplaceholder: {
+    patternmask: {
+      pattern: "Ex.: +1(999)-999-99-99"
+    },
+    datetimemask: {
+      pattern: "Ex.: mm/dd/åååå"
+    },
+    currencymask: {
+      prefix: "Ex.: $",
+      suffix: "Ex.: USD"
+    }
   },
   pehelp: {
     panel: {

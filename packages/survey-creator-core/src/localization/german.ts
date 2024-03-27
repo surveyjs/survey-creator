@@ -827,10 +827,8 @@ var germanTranslation = {
     width_placeholder: "Bsp.: 6in",
     minWidth_placeholder: "Bsp.: 600px",
     maxWidth_placeholder: "Bsp.: 50%",
-    pattern_placeholder: "Bsp.: +1(999)-999-99-99",
-    datetimepattern_placeholder: "Beispiel: mm/tt/jjjj",
-    currencyprefix_placeholder: "Bsp.: $",
-    currencysuffix_placeholder: "Bsp.: USD"
+    imageHeight_placeholder: "auto",
+    imageWidth_placeholder: "auto"
   },
   // Property values
   pv: {
@@ -1109,6 +1107,18 @@ var germanTranslation = {
     skiptrigger: "Frage wechseln",
     runexpressiontrigger: "Anweisung ausführen",
     visibletrigger: "Sichtbarkeit ändern (deprecated)"
+  },
+  peplaceholder: {
+    patternmask: {
+      pattern: "Bsp.: +1(999)-999-99-99"
+    },
+    datetimemask: {
+      pattern: "Beispiel: mm/tt/jjjj"
+    },
+    currencymask: {
+      prefix: "Bsp.: $",
+      suffix: "Bsp.: USD"
+    }
   },
   pehelp: {
     panel: {

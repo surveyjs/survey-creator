@@ -170,7 +170,6 @@ var portugueseTranslation = {
     imageChooseImage: "Escolha a imagem",
     addNewTypeQuestion: "Adicionar {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
-    auto: "auto",
     choices_Item: "Item ",
     lg: {
       addNewItem: "Adicionar nova regra",
@@ -827,10 +826,8 @@ var portugueseTranslation = {
     width_placeholder: "Ex.: 6in",
     minWidth_placeholder: "Ex.: 600px",
     maxWidth_placeholder: "Ex.: 50%",
-    pattern_placeholder: "Ex.: +1(999)-999-99-99",
-    datetimepattern_placeholder: "Ex.: dd/mm/aaaa",
-    currencyprefix_placeholder: "Ex.: $",
-    currencysuffix_placeholder: "Ex.: USD"
+    imageHeight_placeholder: "auto",
+    imageWidth_placeholder: "auto"
   },
   // Property values
   pv: {
@@ -1109,6 +1106,18 @@ var portugueseTranslation = {
     skiptrigger: "Saltar para questão",
     runexpressiontrigger: "rodar expressão",
     visibletrigger: "alterar visibilidade"
+  },
+  peplaceholder: {
+    patternmask: {
+      pattern: "Ex.: +1(999)-999-99-99"
+    },
+    datetimemask: {
+      pattern: "Ex.: dd/mm/aaaa"
+    },
+    currencymask: {
+      prefix: "Ex.: $",
+      suffix: "Ex.: USD"
+    }
   },
   pehelp: {
     panel: {

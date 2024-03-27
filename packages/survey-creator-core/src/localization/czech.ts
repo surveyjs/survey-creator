@@ -170,7 +170,6 @@ export var czStrings = {
     imageChooseImage: "Vybrat obrázek",
     addNewTypeQuestion: "Přidat {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
-    auto: "automaticky",
     choices_Item: "Položka ",
     lg: {
       addNewItem: "Přidat nové pravidlo",
@@ -827,10 +826,8 @@ export var czStrings = {
     width_placeholder: "Př.: 6in",
     minWidth_placeholder: "Př.: 600px",
     maxWidth_placeholder: "Př.: 50%",
-    pattern_placeholder: "Př.: +1(999)-999-99-99",
-    datetimepattern_placeholder: "Př.: dd/mm/rrrr",
-    currencyprefix_placeholder: "Př.: $",
-    currencysuffix_placeholder: "Př.: USD"
+    imageHeight_placeholder: "automaticky",
+    imageWidth_placeholder: "automaticky"
   },
   // Property values
   pv: {
@@ -1109,6 +1106,18 @@ export var czStrings = {
     skiptrigger: "přeskočit na otázku",
     runexpressiontrigger: "spustit výraz",
     visibletrigger: "změnit viditelnost (zastaralé)"
+  },
+  peplaceholder: {
+    patternmask: {
+      pattern: "Př.: +1(999)-999-99-99"
+    },
+    datetimemask: {
+      pattern: "Př.: dd/mm/rrrr"
+    },
+    currencymask: {
+      prefix: "Př.: $",
+      suffix: "Př.: USD"
+    }
   },
   pehelp: {
     panel: {

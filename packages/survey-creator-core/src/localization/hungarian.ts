@@ -170,7 +170,6 @@ export var huStrings = {
     imageChooseImage: "Válassza a Kép lehetőséget",
     addNewTypeQuestion: "{0} hozzáadása", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGÓ]",
-    auto: "kocsi",
     choices_Item: "Cikk ",
     lg: {
       addNewItem: "Új szabály hozzáadása",
@@ -827,10 +826,8 @@ export var huStrings = {
     width_placeholder: "Pl.: 6 hüvelyk",
     minWidth_placeholder: "Pl.: 600px",
     maxWidth_placeholder: "Pl.: 50%",
-    pattern_placeholder: "Pl.: +1(999)-999-99-99",
-    datetimepattern_placeholder: "Pl.: éééé/hh/nn",
-    currencyprefix_placeholder: "Pl.: $",
-    currencysuffix_placeholder: "Pl.: USD"
+    imageHeight_placeholder: "kocsi",
+    imageWidth_placeholder: "kocsi"
   },
   // Property values
   pv: {
@@ -1109,6 +1106,18 @@ export var huStrings = {
     skiptrigger: "Ugrás a kérdésre",
     runexpressiontrigger: "kifejezés futtatása",
     visibletrigger: "láthatóság megváltoztatása (már nincs használatban)"
+  },
+  peplaceholder: {
+    patternmask: {
+      pattern: "Pl.: +1(999)-999-99-99"
+    },
+    datetimemask: {
+      pattern: "Pl.: éééé/hh/nn"
+    },
+    currencymask: {
+      prefix: "Pl.: $",
+      suffix: "Pl.: USD"
+    }
   },
   pehelp: {
     panel: {

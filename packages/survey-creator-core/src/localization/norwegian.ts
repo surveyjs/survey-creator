@@ -170,7 +170,6 @@ export var nbStrings = {
     imageChooseImage: "Velg bilde",
     addNewTypeQuestion: "Legg til {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
-    auto: "auto",
     choices_Item: "Vare ",
     lg: {
       addNewItem: "Legg til ny regel",
@@ -827,10 +826,8 @@ export var nbStrings = {
     width_placeholder: "Eks.: 6in",
     minWidth_placeholder: "Eksempel: 600 piksler",
     maxWidth_placeholder: "Eks.: 50%",
-    pattern_placeholder: "Eks.: +1(999)-999-99-99",
-    datetimepattern_placeholder: "Eks.: mm/dd/åååå",
-    currencyprefix_placeholder: "Eks.: $",
-    currencysuffix_placeholder: "Eks.: USD"
+    imageHeight_placeholder: "auto",
+    imageWidth_placeholder: "auto"
   },
   // Property values
   pv: {
@@ -1109,6 +1106,18 @@ export var nbStrings = {
     skiptrigger: "hopp til spørsmål",
     runexpressiontrigger: "kjør formel",
     visibletrigger: "endre synlighet (deprecated)"
+  },
+  peplaceholder: {
+    patternmask: {
+      pattern: "Eks.: +1(999)-999-99-99"
+    },
+    datetimemask: {
+      pattern: "Eks.: mm/dd/åååå"
+    },
+    currencymask: {
+      prefix: "Eks.: $",
+      suffix: "Eks.: USD"
+    }
   },
   pehelp: {
     panel: {

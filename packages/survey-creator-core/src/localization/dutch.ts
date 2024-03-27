@@ -170,7 +170,6 @@ export var nlStrings = {
     imageChooseImage: "Kies afbeelding",
     addNewTypeQuestion: "Voeg {0} toe", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
-    auto: "Auto",
     choices_Item: "Item ",
     lg: {
       addNewItem: "Nieuwe regel toevoegen",
@@ -827,10 +826,8 @@ export var nlStrings = {
     width_placeholder: "Bijv.: 6in",
     minWidth_placeholder: "Bijv.: 600px",
     maxWidth_placeholder: "Vb.: 50%",
-    pattern_placeholder: "Vb.: +1(999)-999-99-99",
-    datetimepattern_placeholder: "Bijv.: mm/dd/jjjj",
-    currencyprefix_placeholder: "Bijv.: $",
-    currencysuffix_placeholder: "Bijv.: USD"
+    imageHeight_placeholder: "Auto",
+    imageWidth_placeholder: "Auto"
   },
   // Property values
   pv: {
@@ -1109,6 +1106,18 @@ export var nlStrings = {
     skiptrigger: "Ga naar de vraag",
     runexpressiontrigger: "Run expressie",
     visibletrigger: "Zichtbaarheid wijzigen (verouderd)"
+  },
+  peplaceholder: {
+    patternmask: {
+      pattern: "Vb.: +1(999)-999-99-99"
+    },
+    datetimemask: {
+      pattern: "Bijv.: mm/dd/jjjj"
+    },
+    currencymask: {
+      prefix: "Bijv.: $",
+      suffix: "Bijv.: USD"
+    }
   },
   pehelp: {
     panel: {

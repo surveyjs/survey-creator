@@ -170,7 +170,6 @@ export var msStrings = {
     imageChooseImage: "Pilih Imej",
     addNewTypeQuestion: "Tambah {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
-    auto: "Auto",
     choices_Item: "Perkara ",
     lg: {
       addNewItem: "Tambah peraturan baru",
@@ -827,10 +826,8 @@ export var msStrings = {
     width_placeholder: "Ex.: 6in",
     minWidth_placeholder: "Ex.: 600px",
     maxWidth_placeholder: "Ex.: 50%",
-    pattern_placeholder: "Ex.: +1(999)-999-99-99",
-    datetimepattern_placeholder: "Ex.: mm/dd/yyyy",
-    currencyprefix_placeholder: "Ex.: $",
-    currencysuffix_placeholder: "Ex.: USD"
+    imageHeight_placeholder: "Auto",
+    imageWidth_placeholder: "Auto"
   },
   // Property values
   pv: {
@@ -1109,6 +1106,18 @@ export var msStrings = {
     skiptrigger: "langkau kepada soalan",
     runexpressiontrigger: "jalankan ekspresi",
     visibletrigger: "ubah kebolehlihatan (tidak digunakan lagi)"
+  },
+  peplaceholder: {
+    patternmask: {
+      pattern: "Ex.: +1(999)-999-99-99"
+    },
+    datetimemask: {
+      pattern: "Ex.: mm/dd/yyyy"
+    },
+    currencymask: {
+      prefix: "Ex.: $",
+      suffix: "Ex.: USD"
+    }
   },
   pehelp: {
     panel: {

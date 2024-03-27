@@ -170,7 +170,6 @@ export var koreanStrings = {
     imageChooseImage: "이미지 선택",
     addNewTypeQuestion: "{0} 추가", //{0} is localizable question type
     chooseLogoPlaceholder: "[로고]",
-    auto: "자동",
     choices_Item: "항목 ",
     lg: {
       addNewItem: "새 규칙 추가",
@@ -827,10 +826,8 @@ export var koreanStrings = {
     width_placeholder: "예: 6in",
     minWidth_placeholder: "예: 600px",
     maxWidth_placeholder: "예: 50%",
-    pattern_placeholder: "예: +1(999)-999-99-99",
-    datetimepattern_placeholder: "예: mm/dd/yyyy",
-    currencyprefix_placeholder: "예: $",
-    currencysuffix_placeholder: "예.: USD"
+    imageHeight_placeholder: "자동",
+    imageWidth_placeholder: "자동"
   },
   // Property values
   pv: {
@@ -1109,6 +1106,18 @@ export var koreanStrings = {
     skiptrigger: "질문으로 건너뛰기",
     runexpressiontrigger: "표현식 실행",
     visibletrigger: "선명도 변경"
+  },
+  peplaceholder: {
+    patternmask: {
+      pattern: "예: +1(999)-999-99-99"
+    },
+    datetimemask: {
+      pattern: "예: mm/dd/yyyy"
+    },
+    currencymask: {
+      prefix: "예: $",
+      suffix: "예.: USD"
+    }
   },
   pehelp: {
     panel: {

@@ -68,6 +68,13 @@ test("Get property description from peHelp. based on class name", () => {
   expect(editorLocalization.getPropertyHelpInEditor("dropdown", "valueName", "string")).toBeTruthy();
   expect(editorLocalization.getPropertyHelpInEditor("choicesByUrl", "valueName", "string")).toBeTruthy();
 });
+test("Get property placeholder", () => {
+  defaultStrings.pe["valueName_placeholder"] = "pl_val1";
+  const definition: any = { question: { description: "pl_val2" } };
+  defaultStrings.peplaceholder = definition;
+  expect(editorLocalization.getPropertyPlaceholder("checkbox", "valueName")).toEqual("pl_val1");
+  expect(editorLocalization.getPropertyPlaceholder("checkbox", "description")).toEqual("pl_val2");
+});
 test("Get value name from pv. based on property name", () => {
   const pv: any = defaultStrings.pv;
   pv.testValue = "All";

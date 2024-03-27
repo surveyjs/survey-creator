@@ -170,7 +170,6 @@ export var bgStrings = {
     imageChooseImage: "Избери изображение.",
     addNewTypeQuestion: "Добави {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
-    auto: "Автоматично",
     choices_Item: "Елемент ",
     lg: {
       addNewItem: "Добавяне на ново правило",
@@ -827,10 +826,8 @@ export var bgStrings = {
     width_placeholder: "Пример: 6in",
     minWidth_placeholder: "Примерно: 600px",
     maxWidth_placeholder: "Примерно: 50%",
-    pattern_placeholder: "Пример: +1(999)-999-99-99",
-    datetimepattern_placeholder: "Пример: мм/дд/гггг",
-    currencyprefix_placeholder: "Пример: $",
-    currencysuffix_placeholder: "Пример: USD"
+    imageHeight_placeholder: "Автоматично",
+    imageWidth_placeholder: "Автоматично"
   },
   // Property values
   pv: {
@@ -1109,6 +1106,18 @@ export var bgStrings = {
     skiptrigger: "Преминаване към въпроса",
     runexpressiontrigger: "Стартиране на израз",
     visibletrigger: "промяна на видимостта (отхвърлено)"
+  },
+  peplaceholder: {
+    patternmask: {
+      pattern: "Пример: +1(999)-999-99-99"
+    },
+    datetimemask: {
+      pattern: "Пример: мм/дд/гггг"
+    },
+    currencymask: {
+      prefix: "Пример: $",
+      suffix: "Пример: USD"
+    }
   },
   pehelp: {
     panel: {

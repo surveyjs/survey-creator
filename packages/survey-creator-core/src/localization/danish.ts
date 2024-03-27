@@ -170,7 +170,6 @@ export var danishStrings = {
     imageChooseImage: "Vælg billede",
     addNewTypeQuestion: "Tilføj {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
-    auto: "auto",
     choices_Item: "Vare ",
     lg: {
       addNewItem: "Tilføj ny regel",
@@ -827,10 +826,8 @@ export var danishStrings = {
     width_placeholder: "Eks.: 6in",
     minWidth_placeholder: "Eks.: 600px",
     maxWidth_placeholder: "Eks.: 50%",
-    pattern_placeholder: "Eks.: +1(999)-999-99-99",
-    datetimepattern_placeholder: "Eks.: mm/dd/åååå",
-    currencyprefix_placeholder: "Eks.: $",
-    currencysuffix_placeholder: "Eks.: USD"
+    imageHeight_placeholder: "auto",
+    imageWidth_placeholder: "auto"
   },
   // Property values
   pv: {
@@ -1109,6 +1106,18 @@ export var danishStrings = {
     skiptrigger: "Spring til spørgsmål",
     runexpressiontrigger: "afvikl udtry",
     visibletrigger: "skift synlighed"
+  },
+  peplaceholder: {
+    patternmask: {
+      pattern: "Ex.: +1(999)-999-99-99"
+    },
+    datetimemask: {
+      pattern: "Ex.: mm/dd/yyyy"
+    },
+    currencymask: {
+      prefix: "Ex.: $",
+      suffix: "Ex.: USD"
+    }
   },
   pehelp: {
     panel: {
