@@ -1459,11 +1459,12 @@ export class TranslationEditor {
     this.translation.stringsHeaderSurvey.getAllQuestions().forEach(
       q => this.updateMatrixColumns(<QuestionMatrixDropdownModel>q)
     );
-    this.translation.stringsSurvey.getAllQuestions().forEach(
-      q => this.updateMatrixColumns(<QuestionMatrixDropdownModel>q)
-    );
+    const questions = this.translation.stringsSurvey.getAllQuestions();
+    for(let i = 0; i < questions.length; i ++) {
+      this.updateMatrixColumns(<QuestionMatrixDropdownModel>questions[i], i === 0);
+    }
   }
-  private updateMatrixColumns(matrix: QuestionMatrixDropdownModel): void {
+  private updateMatrixColumns(matrix: QuestionMatrixDropdownModel, updateHeader: boolean = false): void {
     const colIndex = 1;
     if (matrix.columns.length === 3) {
       matrix.columns.splice(colIndex, 1);
@@ -1474,6 +1475,18 @@ export class TranslationEditor {
       column.readOnly = true;
       matrix.columns.splice(colIndex, 0, column);
     }
+    if(updateHeader) {
+      matrix.showHeader = matrix.columns.length > 2;
+      if(matrix.showHeader) {
+        const cols = matrix.columns;
+        cols[0].title = this.translation.getLocaleName("");
+        cols[1].title = this.getHeaderTitle("translationSource", cols[1].name);
+        cols[2].title = this.getHeaderTitle("translationTarget", cols[2].name);
+      }
+    }
+  }
+  private getHeaderTitle(strName: string, locale: string): string {
+    return editorLocalization.getString("ed." + strName) + this.translation.getLocaleName(locale);
   }
   private fillFromLocales(): void {
     this.fromLocales = [];

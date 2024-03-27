@@ -146,6 +146,8 @@ export var czStrings = {
     translationDialogTitle: "Nepřeložené řetězce",
     translationMergeLocaleWithDefault: "Sloučit {0} s výchozím lokálem",
     translationPlaceHolder: "Překlad...",
+    translationSource: "Zdroj: ",
+    translationTarget: "Cíl: ",
     themeExportButton: "Vývoz",
     themeImportButton: "Dovoz",
     surveyJsonExportButton: "Vývoz",
@@ -2083,3 +2085,5 @@ editorLocalization.locales["cs"] = czStrings;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Omezuje, kolik číslic se má zachovat za desetinnou čárkou zobrazeného čísla."
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "Jeden nebo více symbolů, které mají být zobrazeny před hodnotou."
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "Jeden nebo více symbolů, které se zobrazí za hodnotou."
+// ed.translationSource: "Source: " => "Zdroj: "
+// ed.translationTarget: "Target: " => "Cíl: "

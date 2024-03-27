@@ -146,6 +146,8 @@ export var hrStrings = {
     translationDialogTitle: "Neprevedeni nizovi",
     translationMergeLocaleWithDefault: "Spajanje {0} sa zadanim lokalomwith default locale.",
     translationPlaceHolder: "Prevođenje...",
+    translationSource: "Izvor: ",
+    translationTarget: "Cilj: ",
     themeExportButton: "Izvoz",
     themeImportButton: "Uvoz",
     surveyJsonExportButton: "Izvoz",
@@ -2513,3 +2515,5 @@ editorLocalization.locales["hr"] = hrStrings;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Ograničava broj znamenki koje treba zadržati nakon decimalnog zareza za prikazani broj."
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "Jedan ili više simbola koji će se prikazati prije vrijednosti."
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "Jedan ili više simbola koji će se prikazati nakon vrijednosti."
+// ed.translationSource: "Source: " => "Izvor: "
+// ed.translationTarget: "Target: " => "Cilj: "

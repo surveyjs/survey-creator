@@ -146,6 +146,8 @@ var polishStrings = {
     translationDialogTitle: "Nieprzetłumaczone ciągi znaków",
     translationMergeLocaleWithDefault: "Scalanie {0} z domyślnymi ustawieniami regionalnymi",
     translationPlaceHolder: "Tłumaczenie...",
+    translationSource: "Źródło: ",
+    translationTarget: "Cel: ",
     themeExportButton: "Eksport",
     themeImportButton: "Import",
     surveyJsonExportButton: "Eksport",
@@ -2792,3 +2794,5 @@ editorLocalization.locales["pl"] = polishStrings;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Ogranicza liczbę cyfr, które mają być zachowywane po przecinku dziesiętnym wyświetlanej liczby."
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "Jeden lub kilka symboli, które mają być wyświetlane przed wartością."
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "Jeden lub kilka symboli, które mają być wyświetlane po wartości."
+// ed.translationSource: "Source: " => "Źródło: "
+// ed.translationTarget: "Target: " => "Cel: "

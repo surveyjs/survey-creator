@@ -146,6 +146,8 @@ export var msStrings = {
     translationDialogTitle: "Rentetan tidak diterjemahkan",
     translationMergeLocaleWithDefault: "Gabung {0} dengan tempatan lalai",
     translationPlaceHolder: "Penterjemahan...",
+    translationSource: "Sumber: ",
+    translationTarget: "Sasaran: ",
     themeExportButton: "Eksport",
     themeImportButton: "Import",
     surveyJsonExportButton: "Eksport",
@@ -2472,3 +2474,5 @@ editorLocalization.locales["ms"] = msStrings;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Hadkan bilangan digit untuk dikekalkan selepas titik perpuluhan bagi nombor yang dipaparkan."
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "Satu atau beberapa simbol yang akan dipaparkan sebelum nilai."
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "Satu atau beberapa simbol yang akan dipaparkan selepas nilai."
+// ed.translationSource: "Source: " => "Sumber: "
+// ed.translationTarget: "Target: " => "Sasaran: "

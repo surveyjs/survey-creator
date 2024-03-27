@@ -146,6 +146,8 @@ var spanishTranslation = {
     translationDialogTitle: "Cadenas sin traducir",
     translationMergeLocaleWithDefault: "Merge {0} con lugar predeterminado",
     translationPlaceHolder: "Traducción...",
+    translationSource: "Fuente: ",
+    translationTarget: "Blanco: ",
     themeExportButton: "Exportar",
     themeImportButton: "Importación",
     surveyJsonExportButton: "Exportar",
@@ -2293,3 +2295,5 @@ editorLocalization.locales["es"] = spanishTranslation;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Limita el número de dígitos que se conservan después del punto decimal de un número mostrado."
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "Uno o varios símbolos que se mostrarán antes del valor."
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "Uno o varios símbolos que se mostrarán después del valor."
+// ed.translationSource: "Source: " => "Fuente: "
+// ed.translationTarget: "Target: " => "Blanco: "

@@ -146,6 +146,8 @@ export var nlStrings = {
     translationDialogTitle: "Onvertaalde tekenreeksen",
     translationMergeLocaleWithDefault: "Voeg {0} samen met de standaardlandinstelling",
     translationPlaceHolder: "Vertaling...",
+    translationSource: "Bron: ",
+    translationTarget: "Doel: ",
     themeExportButton: "Exporteren",
     themeImportButton: "Importeren",
     surveyJsonExportButton: "Exporteren",
@@ -2499,3 +2501,5 @@ editorLocalization.locales["nl"] = nlStrings;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Hiermee beperkt u het aantal cijfers dat moet worden behouden na de komma voor een weergegeven getal."
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "Een of meer symbolen die vóór de waarde moeten worden weergegeven."
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "Een of meer symbolen die na de waarde moeten worden weergegeven."
+// ed.translationSource: "Source: " => "Bron: "
+// ed.translationTarget: "Target: " => "Doel: "

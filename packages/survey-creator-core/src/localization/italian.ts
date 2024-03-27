@@ -146,6 +146,8 @@ var italianTranslation = {
     translationDialogTitle: "Stringhe non tradotte",
     translationMergeLocaleWithDefault: "Unisci {0} con il predefinito",
     translationPlaceHolder: "Traduzione...",
+    translationSource: "Fonte: ",
+    translationTarget: "Bersaglio: ",
     themeExportButton: "Esportazione",
     themeImportButton: "Importazione",
     surveyJsonExportButton: "Esportazione",
@@ -2277,3 +2279,5 @@ editorLocalization.locales["it"] = italianTranslation;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Limita il numero di cifre da mantenere dopo la virgola decimale per un numero visualizzato."
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "Uno o più simboli da visualizzare prima del valore."
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "Uno o più simboli da visualizzare dopo il valore."
+// ed.translationSource: "Source: " => "Fonte: "
+// ed.translationTarget: "Target: " => "Bersaglio: "

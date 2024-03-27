@@ -146,6 +146,8 @@ export var hebrewStrings = {
     translationDialogTitle: "מחרוזות לא מתורגמות",
     translationMergeLocaleWithDefault: "מזג {0} עם הגדרות ברירת המחדל",
     translationPlaceHolder: "תרגום...",
+    translationSource: "מקור: ",
+    translationTarget: "יעד: ",
     themeExportButton: "ייצא",
     themeImportButton: "ייבא",
     surveyJsonExportButton: "ייצא",
@@ -170,7 +172,6 @@ export var hebrewStrings = {
     imageChooseImage: "בחר תמונה",
     addNewTypeQuestion: "הוסף {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[לוגו]",
-    auto: "אוטומטי",
     choices_Item: "פריט ",
     lg: {
       addNewItem: "הוספת כלל חדש",
@@ -2084,3 +2085,5 @@ editorLocalization.locales["he"] = hebrewStrings;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "מגביל את מספר הספרות שיש לשמור אחרי הנקודה העשרונית עבור מספר מוצג."
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "סימן אחד או יותר שיוצגו לפני הערך."
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "סימן אחד או יותר שיוצגו לאחר הערך."
+// ed.translationSource: "Source: " => "מקור: "
+// ed.translationTarget: "Target: " => "יעד: "

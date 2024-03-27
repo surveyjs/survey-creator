@@ -287,27 +287,37 @@ test("Machine translation from non default locale - UI", () => {
 
   expect(editor.translation.root.allLocItems).toHaveLength(3);
   expect(editor.translation.getVisibleLocales()).toHaveLength(1);
-  let matrix = editor.translation.stringsSurvey.getAllQuestions()[1];
+  let matrix = <QuestionMatrixDropdownModel>editor.translation.stringsSurvey.getAllQuestions()[0];
+  expect(matrix.showHeader).toBeFalsy();
   expect(matrix.columns).toHaveLength(2);
   expect(matrix.columns[1].name).toBe("es");
 
   editor.setFromLocale("de");
   expect(editor.translation.getVisibleLocales()).toHaveLength(1);
-  matrix = editor.translation.stringsSurvey.getAllQuestions()[1];
+  matrix = <QuestionMatrixDropdownModel>editor.translation.stringsSurvey.getAllQuestions()[0];
+  expect(matrix.showHeader).toBeTruthy();
   expect(matrix.columns).toHaveLength(3);
   expect(matrix.columns[1].name).toBe("de");
   expect(matrix.columns[2].name).toBe("es");
+  expect(matrix.columns[0].title).toBe("Default (English)");
+  expect(matrix.columns[1].title).toBe("Source: Deutsch");
+  expect(matrix.columns[2].title).toBe("Target: Español");
 
   editor.setFromLocale("fr");
   expect(editor.translation.getVisibleLocales()).toHaveLength(1);
-  matrix = editor.translation.stringsSurvey.getAllQuestions()[1];
+  matrix = <QuestionMatrixDropdownModel>editor.translation.stringsSurvey.getAllQuestions()[0];
+  expect(matrix.showHeader).toBeTruthy();
   expect(matrix.columns).toHaveLength(3);
   expect(matrix.columns[1].name).toBe("fr");
   expect(matrix.columns[2].name).toBe("es");
+  expect(matrix.columns[0].title).toBe("Default (English)");
+  expect(matrix.columns[1].title).toBe("Source: Français");
+  expect(matrix.columns[2].title).toBe("Target: Español");
 
   editor.setFromLocale("");
   expect(editor.translation.getVisibleLocales()).toHaveLength(1);
-  matrix = editor.translation.stringsSurvey.getAllQuestions()[1];
+  matrix = <QuestionMatrixDropdownModel>editor.translation.stringsSurvey.getAllQuestions()[0];
+  expect(matrix.showHeader).toBeFalsy();
   expect(matrix.columns).toHaveLength(2);
   expect(matrix.columns[1].name).toBe("es");
 });

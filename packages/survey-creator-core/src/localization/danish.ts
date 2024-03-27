@@ -146,6 +146,8 @@ export var danishStrings = {
     translationDialogTitle: "Uoversatte strenge",
     translationMergeLocaleWithDefault: "Flet {0} med standardsprog",
     translationPlaceHolder: "Oversættelse...",
+    translationSource: "Kilde: ",
+    translationTarget: "Mål: ",
     themeExportButton: "Eksport",
     themeImportButton: "Import",
     surveyJsonExportButton: "Eksport",
@@ -2704,3 +2706,5 @@ editorLocalization.locales["da"] = danishStrings;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Begrænser, hvor mange cifre der skal bevares efter decimaltegnet for et vist tal."
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "Et eller flere symboler, der skal vises før værdien."
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "Et eller flere symboler, der skal vises efter værdien."
+// ed.translationSource: "Source: " => "Kilde: "
+// ed.translationTarget: "Target: " => "Mål: "

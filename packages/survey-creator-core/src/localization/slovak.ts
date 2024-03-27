@@ -146,6 +146,8 @@ export var skStrings = {
     translationDialogTitle: "Nepreložené reťazce",
     translationMergeLocaleWithDefault: "Zlúčiť {0} s predvoleným miestnym nastavením",
     translationPlaceHolder: "Preklad...",
+    translationSource: "Zdroj: ",
+    translationTarget: "Cieľ: ",
     themeExportButton: "Vývoz",
     themeImportButton: "Import",
     surveyJsonExportButton: "Vývoz",
@@ -2472,3 +2474,5 @@ editorLocalization.locales["sk"] = skStrings;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Obmedzuje, koľko číslic sa má zachovať za desatinnou čiarkou pre zobrazené číslo."
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "Jeden alebo niekoľko symbolov, ktoré sa majú zobraziť pred hodnotou."
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "Jeden alebo viac symbolov, ktoré sa zobrazia za hodnotou."
+// ed.translationSource: "Source: " => "Zdroj: "
+// ed.translationTarget: "Target: " => "Cieľ: "

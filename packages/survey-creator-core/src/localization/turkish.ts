@@ -146,6 +146,8 @@ export var turkishStrings = {
     translationDialogTitle: "Çevrilmemiş dizeler",
     translationMergeLocaleWithDefault: "{0} varsayılan çeviri ile sıkıştır",
     translationPlaceHolder: "Çeviri...",
+    translationSource: "Kaynak: ",
+    translationTarget: "Hedef: ",
     themeExportButton: "Ihracat",
     themeImportButton: "Ithalat",
     surveyJsonExportButton: "Ihracat",
@@ -2514,3 +2516,5 @@ editorLocalization.locales["tr"] = turkishStrings;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Görüntülenen bir sayı için ondalık virgülden sonra kaç basamak tutulacağını sınırlar."
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "Değerden önce görüntülenecek bir veya birkaç sembol."
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "Değerden sonra görüntülenecek bir veya birkaç sembol."
+// ed.translationSource: "Source: " => "Kaynak: "
+// ed.translationTarget: "Target: " => "Hedef: "

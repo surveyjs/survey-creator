@@ -146,6 +146,8 @@ export var bgStrings = {
     translationDialogTitle: "Непреведени низове",
     translationMergeLocaleWithDefault: "Обединение {0} с локалната стойност по подразбиране",
     translationPlaceHolder: "Превод...",
+    translationSource: "Източник: ",
+    translationTarget: "Цел: ",
     themeExportButton: "Износ",
     themeImportButton: "Внос",
     surveyJsonExportButton: "Износ",
@@ -2080,3 +2082,5 @@ editorLocalization.locales["bg"] = bgStrings;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Ограничава колко цифри да се запазят след десетичната запетая за показваното число."
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "Един или няколко символа, които трябва да бъдат показани преди стойността."
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "Един или няколко символа, които трябва да се покажат след стойността."
+// ed.translationSource: "Source: " => "Източник: "
+// ed.translationTarget: "Target: " => "Цел: "

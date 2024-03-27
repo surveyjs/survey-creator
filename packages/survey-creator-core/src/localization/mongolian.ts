@@ -146,6 +146,8 @@ export var mnStrings = {
     translationDialogTitle: "Огт орчуулагдаагүй уяанууд",
     translationMergeLocaleWithDefault: "{0}-г суурь хэлтэй нэгтгэх",
     translationPlaceHolder: "Орчуулга...",
+    translationSource: "Эх сурвалж: ",
+    translationTarget: "Зорилго: ",
     themeExportButton: "Экспорт",
     themeImportButton: "Импорт",
     surveyJsonExportButton: "Экспорт",
@@ -2175,3 +2177,5 @@ editorLocalization.locales["mn"] = mnStrings;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Үзүүлсэн дугаарын хувьд decimal цэгийн дараа хэдэн цифрийг хадгалахыг хязгаарлана."
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "Үнэ цэнийн өмнө үзүүлэх нэг эсвэл хэд хэдэн бэлгэдлүүдийг."
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "Үнэ цэнийн дараа үзүүлэх нэг эсвэл хэд хэдэн бэлгэдлүүдийг."
+// ed.translationSource: "Source: " => "Эх сурвалж: "
+// ed.translationTarget: "Target: " => "Зорилго: "

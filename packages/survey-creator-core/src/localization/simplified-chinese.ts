@@ -146,6 +146,8 @@ var simplifiedChineseTranslation = {
     translationDialogTitle: "未翻译的字符串",
     translationMergeLocaleWithDefault: "同默认合并 {0} ",
     translationPlaceHolder: "译本。。。",
+    translationSource: "源：",
+    translationTarget: "目标：",
     themeExportButton: "出口",
     themeImportButton: "进口",
     surveyJsonExportButton: "出口",
@@ -2661,3 +2663,5 @@ editorLocalization.locales["zh-cn"] = simplifiedChineseTranslation;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "限制显示数字的小数点后要保留的位数。"
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "要在值之前显示的一个或多个符号。"
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "要在值后显示的一个或多个符号。"
+// ed.translationSource: "Source: " => "源："
+// ed.translationTarget: "Target: " => "目标："
