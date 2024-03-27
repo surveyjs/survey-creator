@@ -82,8 +82,19 @@ export class CreatorSurveyPageComponent extends CreatorModelElement<
       >
         {this.renderHeader()}
         {this.renderContent()}
+        {this.renderPlaceholder()}
         {this.renderFooter()}
       </div>)
+    );
+  }
+  protected renderPlaceholder(): JSX.Element {
+    if (!this.model.showPlaceholder) return null;
+    return (
+      <div className="svc-page__placeholder_frame">
+        <div className="svc-panel__placeholder_frame">
+          <div className="svc-panel__placeholder">{this.model.placeholderText}</div>
+        </div>
+      </div>
     );
   }
   protected renderContent(): JSX.Element {

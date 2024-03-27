@@ -1932,6 +1932,22 @@ test("Panel title editor is fully visible", async (t) => {
   });
 });
 
+test("Page placeholder without elements", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(770, 900);
+    await setJSON({
+      "pages": [
+        {
+          "name": "page1",
+          "title": "Page1"
+        }
+      ]
+    });
+
+    await takeElementScreenshot("page-placeholder-without-elements.png", Selector(".svc-page"), t, comparer);
+  });
+});
+
 test("Check minimal height", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1120, 900);
