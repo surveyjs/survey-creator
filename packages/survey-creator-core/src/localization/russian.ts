@@ -146,6 +146,8 @@ export var ruStrings = {
     translationDialogTitle: "Непереведенные строки",
     translationMergeLocaleWithDefault: "Объединить {0} с локалью по умолчанию",
     translationPlaceHolder: "Перевод...",
+    translationSource: "Источник: ",
+    translationTarget: "Цель: ",
     themeExportButton: "Экспорт",
     themeImportButton: "Импорт",
     surveyJsonExportButton: "Экспорт",
@@ -2579,3 +2581,5 @@ editorLocalization.locales["ru"] = ruStrings;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Ограничивает количество цифр, сохраняемых после десятичной запятой для отображаемого числа."
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "Один или несколько символов, которые будут отображаться перед значением."
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "Один или несколько символов, которые будут отображаться после значения."
+// ed.translationSource: "Source: " => "Источник: "
+// ed.translationTarget: "Target: " => "Цель: "

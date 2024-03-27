@@ -146,6 +146,8 @@ export var jaStrings = {
     translationDialogTitle: "未翻訳の文字列",
     translationMergeLocaleWithDefault: "{0}をデフォルトのロケールにマージする",
     translationPlaceHolder: "翻訳。。。",
+    translationSource: "源：",
+    translationTarget: "ターゲット：",
     themeExportButton: "輸出",
     themeImportButton: "輸入",
     surveyJsonExportButton: "輸出",
@@ -2518,3 +2520,5 @@ editorLocalization.locales["ja"] = jaStrings;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "表示される数値の小数点以下の桁数を制限します。"
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "値の前に表示される 1 つまたは複数のシンボル。"
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "値の後に表示される 1 つまたは複数の記号。"
+// ed.translationSource: "Source: " => "源："
+// ed.translationTarget: "Target: " => "ターゲット："

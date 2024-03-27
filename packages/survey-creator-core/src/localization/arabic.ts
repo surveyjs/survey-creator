@@ -146,6 +146,8 @@ export var arStrings = {
     translationDialogTitle: "النصوص غير المترجمة",
     translationMergeLocaleWithDefault: "Merge {0} with default locale",
     translationPlaceHolder: "Translation...",
+    translationSource: "مصدر: ",
+    translationTarget: "هدف: ",
     themeExportButton: "تصدير",
     themeImportButton: "استورد",
     surveyJsonExportButton: "تصدير",
@@ -827,7 +829,7 @@ export var arStrings = {
     minWidth_placeholder: "مثال: 600px",
     maxWidth_placeholder: "مثال: 50٪",
     imageHeight_placeholder: "تلقائي",
-    imageWidth_placeholder: "تلقائي",
+    imageWidth_placeholder: "تلقائي"
   },
   // Property values
   pv: {
@@ -2429,3 +2431,5 @@ editorLocalization.locales["ar"] = arStrings;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "يحد من عدد الأرقام التي سيتم الاحتفاظ بها بعد الفاصلة العشرية لرقم معروض."
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "رمز واحد أو عدة رموز ليتم عرضها قبل القيمة."
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "رمز واحد أو عدة رموز ليتم عرضها بعد القيمة."
+// ed.translationSource: "Source: " => "مصدر: "
+// ed.translationTarget: "Target: " => "هدف: "

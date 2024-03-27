@@ -146,6 +146,8 @@ export var nbStrings = {
     translationDialogTitle: "Uoversatte strenger",
     translationMergeLocaleWithDefault: "Flett {0} med standard språk",
     translationPlaceHolder: "Oversettelse...",
+    translationSource: "Kilde: ",
+    translationTarget: "Mål: ",
     themeExportButton: "Eksport",
     themeImportButton: "Importere",
     surveyJsonExportButton: "Eksport",
@@ -2522,3 +2524,5 @@ editorLocalization.locales["nb"] = nbStrings;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Begrenser hvor mange sifre som skal beholdes etter desimaltegnet for et tall som vises."
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "Ett eller flere symboler som skal vises før verdien."
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "Ett eller flere symboler som skal vises etter verdien."
+// ed.translationSource: "Source: " => "Kilde: "
+// ed.translationTarget: "Target: " => "Mål: "

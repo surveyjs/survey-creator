@@ -146,6 +146,8 @@ var persianStrings = {
     translationDialogTitle: "رشتههای ترجمهنشده",
     translationMergeLocaleWithDefault: "ادغام {0} با زبان پیش فرض",
     translationPlaceHolder: "در حال ترجمه...",
+    translationSource: "منبع: ",
+    translationTarget: "هدف: ",
     themeExportButton: "صادرات",
     themeImportButton: "واردات",
     surveyJsonExportButton: "صادرات",
@@ -2474,3 +2476,5 @@ editorLocalization.locales["fa"] = persianStrings;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "محدود کردن تعداد ارقام برای حفظ پس از نقطه اعشار برای یک عدد نمایش داده شده."
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "یک یا چند نماد قبل از مقدار نمایش داده می شود."
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "یک یا چند نماد بعد از مقدار نمایش داده می شود."
+// ed.translationSource: "Source: " => "منبع: "
+// ed.translationTarget: "Target: " => "هدف: "

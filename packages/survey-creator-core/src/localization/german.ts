@@ -146,6 +146,8 @@ var germanTranslation = {
     translationDialogTitle: "Nicht übersetzte Zeichenketten",
     translationMergeLocaleWithDefault: "Verschmelze {0} mit der Standardsprache",
     translationPlaceHolder: "Übersetzung ...",
+    translationSource: "Quelle: ",
+    translationTarget: "Ziel: ",
     themeExportButton: "Exportieren",
     themeImportButton: "Importieren",
     surveyJsonExportButton: "Exportieren",
@@ -170,7 +172,6 @@ var germanTranslation = {
     imageChooseImage: "Bild auswählen",
     addNewTypeQuestion: "Add {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
-    auto: "automatisch",
     choices_Item: "Artikel ",
     lg: {
       addNewItem: "Neue Regel hinzufügen",
@@ -2226,3 +2227,5 @@ editorLocalization.locales["de"] = germanTranslation;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Schränkt die Anzahl der Nachkommastellen für eine angezeigte Zahl ein."
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "Ein oder mehrere Symbole, die vor dem Wert angezeigt werden sollen."
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "Ein oder mehrere Symbole, die nach dem Wert angezeigt werden sollen."
+// ed.translationSource: "Source: " => "Quelle: "
+// ed.translationTarget: "Target: " => "Ziel: "

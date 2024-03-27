@@ -146,6 +146,8 @@ export var indonesianStrings = {
     translationDialogTitle: "String yang tidak diterjemahkan",
     translationMergeLocaleWithDefault: "Gabungkan {0} dengan default locale",
     translationPlaceHolder: "Terjemahan...",
+    translationSource: "Sumber: ",
+    translationTarget: "Target: ",
     themeExportButton: "Ekspor",
     themeImportButton: "Mengimpor",
     surveyJsonExportButton: "Ekspor",
@@ -2673,3 +2675,5 @@ editorLocalization.locales["id"] = indonesianStrings;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Membatasi jumlah digit yang akan dipertahankan setelah koma desimal untuk angka yang ditampilkan."
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "Satu atau beberapa simbol yang akan ditampilkan sebelum nilai."
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "Satu atau beberapa simbol yang akan ditampilkan setelah nilai."
+// ed.translationSource: "Source: " => "Sumber: "
+// ed.translationTarget: "Target: " => "Target: "

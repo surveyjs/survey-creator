@@ -146,6 +146,8 @@ var traditionalChineseTranslation = {
     translationDialogTitle: "未翻譯的字串",
     translationMergeLocaleWithDefault: "將{0}與預設區域設置合併",
     translationPlaceHolder: "譯本。。。",
+    translationSource: "源：",
+    translationTarget: "目標：",
     themeExportButton: "出口",
     themeImportButton: "進口",
     surveyJsonExportButton: "出口",
@@ -2797,3 +2799,5 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "限制顯示數位的小數點後要保留的位數。"
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "要在值之前顯示的一個或多個符號。"
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "要在值后顯示的一個或多個符號。"
+// ed.translationSource: "Source: " => "源："
+// ed.translationTarget: "Target: " => "目標："

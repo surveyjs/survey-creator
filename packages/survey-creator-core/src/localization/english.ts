@@ -148,6 +148,8 @@ export var enStrings = {
     translationDialogTitle: "Untranslated strings",
     translationMergeLocaleWithDefault: "Merge {0} with default locale",
     translationPlaceHolder: "Translation...",
+    translationSource: "Source: ",
+    translationTarget: "Target: ",
     themeExportButton: "Export",
     themeImportButton: "Import",
     surveyJsonExportButton: "Export",
