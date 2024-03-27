@@ -1,8 +1,9 @@
-import { ActionContainer, ComputedUpdater, DragTypeOverMeEnum, IAction, PageModel, property } from "survey-core";
+import { ActionContainer, ComputedUpdater, DragTypeOverMeEnum, IAction, IElement, PageModel, property } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { IPortableMouseEvent } from "../utils/events";
 import { SurveyElementAdornerBase } from "./action-container-view-model";
 import { toggleHovered } from "../utils/utils";
+import { getLocString } from "../editorLocalization";
 require("./page.scss");
 import { SurveyHelper } from "../survey-helper";
 import { settings } from "../creator-settings";
@@ -10,6 +11,7 @@ import { settings } from "../creator-settings";
 export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   @property({ defaultValue: false }) isSelected: boolean;
   @property({ defaultValue: true }) isPageLive: boolean;
+  @property() showPlaceholder: boolean;
   public onPageSelectedCallback: () => void;
   public questionTypeSelectorModel: any;
   @property({ defaultValue: "" }) currentAddQuestionType: string;
@@ -19,6 +21,10 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       this.dragTypeOverMe = this.page?.dragTypeOverMe;
     }
   }
+  private updateShowPlaceholder(elements?: Array<IElement>) {
+    this.showPlaceholder = !this.isGhost && (elements || this.page.elements).length === 0;
+  }
+
   constructor(creator: SurveyCreatorModel, page: PageModel) {
     super(creator, page);
     this.actionContainer.sizeMode = "small";
@@ -45,6 +51,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
           ["title", "description"],
           () => {
             this.addGhostPage();
+            this.updateShowPlaceholder();
           },
           "add_ghost"
         );
@@ -56,6 +63,10 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
           this.updateDragTypeOverMe();
         }
       );
+      surveyElement.registerFunctionOnPropertiesValueChanged(["elements"], (newValue: Array<IElement>) => {
+        this.updateShowPlaceholder(newValue);
+      });
+      this.updateShowPlaceholder();
       surveyElement.onFirstRendering();
       surveyElement.updateCustomWidgets();
       surveyElement.setWasShown(true);
@@ -66,16 +77,8 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
 
   protected detachElement(surveyElement: PageModel): void {
     if (!!surveyElement) {
-      surveyElement.unRegisterFunctionOnPropertiesValueChanged([
-        "dragTypeOverMe"
-      ]);
-      surveyElement.unRegisterFunctionOnPropertiesValueChanged(
-        [
-          "title",
-          "description"
-        ],
-        "add_ghost"
-      );
+      surveyElement.unRegisterFunctionOnPropertiesValueChanged(["dragTypeOverMe"]);
+      surveyElement.unRegisterFunctionOnPropertiesValueChanged(["title", "description"], "add_ghost");
       surveyElement["surveyChangedCallback"] = undefined;
     }
     super.detachElement(surveyElement);
@@ -114,6 +117,9 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   public get isGhost(): boolean {
     return this.calcIsGhostPage(this.page);
   }
+  public get placeholderText(): string {
+    return getLocString("ed.pagePlaceHolder");
+  }
   protected isOperationsAllow(): boolean {
     return super.isOperationsAllow() && !this.isGhost && this.creator.pageEditMode !== "single" && this.creator.allowModifyPages;
   }
@@ -127,17 +133,12 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   private addGhostPage = (selectCurrentPage: boolean = true) => {
     const currentPage = this.page;
     if (this.isGhost) {
-      if (!!this.creator.addPage(currentPage, selectCurrentPage, () => {
-        currentPage.unRegisterFunctionOnPropertiesValueChanged(
-          [
-            "title",
-            "description"
-          ],
-          "add_ghost"
-        );
+      const addedPage = !!this.creator.addPage(currentPage, selectCurrentPage, () => {
+        currentPage.unRegisterFunctionOnPropertiesValueChanged(["title", "description"], "add_ghost");
         currentPage.name = SurveyHelper.getNewPageName(this.creator.survey.pages);
         return true;
-      })) {
+      });
+      if (addedPage) {
         this.creator.survey.currentPage = currentPage;
       }
     }
@@ -170,7 +171,9 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
 
   get css(): string {
     let result = "";
-    if (!!this.dragTypeOverMe && this.page.elements.length === 0 && this.creator.survey.pages.length > 0) {
+    if (!!this.dragTypeOverMe && this.showPlaceholder) {
+      result = "svc-question__content--drag-over-inside";
+    } else if (!!this.dragTypeOverMe && this.page.elements.length === 0 && this.creator.survey.pages.length > 0) {
       result = "svc-page--drag-over-empty";
     }
     if (this.isGhost) {
