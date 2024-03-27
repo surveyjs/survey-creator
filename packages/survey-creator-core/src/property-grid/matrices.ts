@@ -718,10 +718,9 @@ export class PropertyGridEditorMatrixMutlipleTextItems extends PropertyGridEdito
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "textitem[]";
   }
-  /*
   protected getEditItemAsStandAlone(): boolean {
     return true;
-  }*/
+  }
   protected getColumnClassName(obj: Base, prop: JsonObjectProperty): string {
     return "multipletext@items";
   }

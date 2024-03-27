@@ -579,14 +579,21 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "title",
       "inputType",
       "isRequired",
-      "maxLength",
       "size",
       "placeholder",
-      "requiredErrorText",
-      "validators",
+      { name: "maxLength", tab: "validation" },
+      { name: "requiredErrorText", tab: "validation" },
+      { name: "validators", tab: "validation" },
       { name: "defaultValueExpression", tab: "logic" },
       { name: "minValueExpression", tab: "logic" },
       { name: "maxValueExpression", tab: "logic" },
+      { name: "maskType", tab: "mask" },
+      { name: "maskSettings", tab: "mask" },
+    ],
+    tabs: [
+      { name: "logic", index: 200 },
+      { name: "mask", index: 250 },
+      { name: "validation", index: 300 }
     ]
   },
   "multipletext@items": {
