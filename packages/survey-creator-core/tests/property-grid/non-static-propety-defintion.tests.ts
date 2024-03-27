@@ -1,4 +1,4 @@
-import { QuestionTextModel, QuestionDropdownModel, QuestionMatrixDynamicModel, QuestionMatrixDropdownModel } from "survey-core";
+import { QuestionTextModel, QuestionDropdownModel, QuestionMatrixDynamicModel, QuestionMatrixDropdownModel, Helpers } from "survey-core";
 import { PropertyGridModelTester } from "./property-grid.base";
 import { ISurveyPropertyGridDefinition } from "../../src/question-editor/definition";
 
@@ -78,4 +78,26 @@ test("Check columns matrix", () => {
   expect(choicesMatrix.columns).toHaveLength(2);
   expect(choicesMatrix.columns[0].name).toBe("title");
   expect(choicesMatrix.columns[1].name).toBe("name");
+});
+test("Update propertyGridDefintion", () => {
+  const question = new QuestionTextModel("q1");
+  const propertyGrid = new PropertyGridModelTester(question, undefined, defaultProperties);
+  let survey = propertyGrid.survey;
+  let panels = survey.getAllPanels();
+  expect(panels).toHaveLength(2);
+  expect(panels[0].name).toBe("general");
+  expect(panels[1].name).toBe("logic");
+  expect(panels[0].elements).toHaveLength(3);
+  expect(panels[1].elements).toHaveLength(2);
+  const newProps = Helpers.getUnbindValue(defaultProperties);
+  const props = newProps.classes.question.properties;
+  props?.push("description");
+  propertyGrid.setPropertyGridDefinition(newProps);
+  survey = propertyGrid.survey;
+  panels = survey.getAllPanels();
+  expect(panels).toHaveLength(2);
+  expect(panels[0].name).toBe("general");
+  expect(panels[1].name).toBe("logic");
+  expect(panels[0].elements).toHaveLength(4);
+  expect(panels[1].elements).toHaveLength(2);
 });

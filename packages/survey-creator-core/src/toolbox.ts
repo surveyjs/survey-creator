@@ -741,7 +741,24 @@ export class QuestionToolbox
    * @param useDefaultCategories Pass `true` if you want to create default categories.
    */
   public createDefaultItems(supportedQuestions: Array<string>, useDefaultCategories: boolean) {
+    supportedQuestions = supportedQuestions || this.supportedQuestions;
     this.clearItems();
+    this.getDefaultItems(supportedQuestions, useDefaultCategories, true, true).forEach(item => this.addToolBoxItem(item, this.actions));
+    this.onItemsChanged();
+  }
+  public getDefaultItems(supportedQuestions: Array<string>, useDefaultCategories: boolean,
+    includeCustomWidgets: boolean, includeComponents: boolean): Array<QuestionToolboxItem> {
+    let res = this.getDefaultQuestionItems(supportedQuestions, useDefaultCategories);
+    if(includeCustomWidgets) {
+      res = res.concat(this.getRegisterCustomWidgets());
+    }
+    if(includeComponents) {
+      res = res.concat(this.getRegisterComponentQuestions());
+    }
+    return res;
+  }
+  private getDefaultQuestionItems(supportedQuestions: Array<string>, useDefaultCategories: boolean): Array<QuestionToolboxItem> {
+    const res = [];
     const questions = this.getQuestionTypes(supportedQuestions);
     const defaultCategories = useDefaultCategories ? this.getDefaultQuestionCategories() : {};
 
@@ -765,39 +782,54 @@ export class QuestionToolbox
         isCopied: false,
         category: (defaultCategories[name] || "")
       };
-      this.actions.push(this.getActionByItem(item));
+      res.push(this.getActionByItem(item));
     }
-    this.registerCustomWidgets();
-    this.registerComponentQuestions();
-    this.onItemsChanged();
+    return res;
   }
-  private registerCustomWidgets() {
-    var inst = CustomWidgetCollection.Instance;
-    if (!inst.getActivatedBy) return;
-    var widgets = inst.widgets;
-    for (var i = 0; i < widgets.length; i++) {
-      if (widgets[i].canShowInToolbox) {
-        this.addItemFromJSON(widgets[i].widgetJson);
+  private getRegisterComponentQuestions(): Array<QuestionToolboxItem> {
+    const res = [];
+    ComponentCollection.Instance.items.forEach(item => {
+      const action = this.createToolboxItemFromJSON(item.json);
+      if(!!action) {
+        res.push(action);
+      }
+    });
+    return res;
+  }
+  private getRegisterCustomWidgets(): Array<QuestionToolboxItem> {
+    const res = [];
+    CustomWidgetCollection.Instance.widgets.forEach(widget => {
+      if(widget.canShowInToolbox) {
+        const action = this.createToolboxItemFromJSON(widget.widgetJson);
+        if(!!action) {
+          res.push(action);
+        }
+      }
+    });
+    return res;
+  }
+  private addToolBoxItem(action: QuestionToolboxItem, actions: QuestionToolboxItem[]): void {
+    if(!action) return;
+    const existingAction = this.getActionByIdFromArray(action.id, actions);
+    if (!!existingAction) {
+      actions.splice(actions.indexOf(existingAction), 1, action);
+    } else {
+      const index = Array.isArray(this.supportedQuestions) ? this.supportedQuestions.indexOf(action.id) : -1;
+      if (index > -1) {
+        actions.splice(index, 0, action);
+      } else {
+        actions.push(action);
       }
     }
   }
-  private registerComponentQuestions() {
-    var items = this.getComponentItems();
-    for (var i = 0; i < items.length; i++) {
-      this.addItemFromJSON(items[i].json);
+  private getActionByIdFromArray(id: string, actions: QuestionToolboxItem[]): QuestionToolboxItem {
+    for(let i = 0; i < actions.length; i++) {
+      if(actions[i].id === id) return actions[i];
     }
+    return undefined;
   }
-  private getComponentItems(): Array<any> {
-    var instanceOwner = undefined; // CustomQuestionCollection;
-    if (!instanceOwner) {
-      instanceOwner = ComponentCollection;
-    }
-    if (!instanceOwner) return [];
-    var items = instanceOwner.Instance["items"];
-    return !!items ? items : [];
-  }
-  private addItemFromJSON(json: any) {
-    if (json.showInToolbox === false) return;
+  private createToolboxItemFromJSON(json: any): QuestionToolboxItem {
+    if (json.showInToolbox === false || json.internal === true || !json.name) return undefined;
     const iconName: string = json.iconName ? json.iconName : QuestionToolbox.defaultIconName;
     let title: string = editorLocalization.getString("qt." + json.name);
     if (!title || title == json.name) {
@@ -822,18 +854,7 @@ export class QuestionToolbox
       isCopied: false,
       category: category
     });
-    const action = this.getActionByItem(item);
-    const existingAction = this.getActionById(item.id);
-    if (!!existingAction) {
-      this.actions.splice(this.actions.indexOf(existingAction), 1, action);
-    } else {
-      const index = Array.isArray(this.supportedQuestions) ? this.supportedQuestions.indexOf(item.id) : -1;
-      if (index > -1) {
-        this.actions.splice(index, 0, action);
-      } else {
-        this.actions.push(action);
-      }
-    }
+    return this.getActionByItem(item);
   }
   private getQuestionJSON(question: any): any {
     var json = new JsonObject().toJsonObject(question);

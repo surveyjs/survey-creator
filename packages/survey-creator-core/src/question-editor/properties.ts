@@ -37,6 +37,7 @@ export class SurveyQuestionProperties {
   private properties: Array<JsonObjectProperty>;
   private propertiesHash: any;
   private tabs: Array<SurveyQuestionEditorTabDefinition> = [];
+  private unusedProperties: Array<JsonObjectProperty> = [];
   constructor(
     public obj: any,
     public options: ISurveyCreatorOptions = null,
@@ -50,9 +51,28 @@ export class SurveyQuestionProperties {
       this.propertyGridDefinition = defaultPropertyGridDefinition;
     }
     this.showModeValue = showMode;
-    this.properties = Serializer.getPropertiesByObj(this.obj);
+    this.properties = this.initProperties(className);
     this.fillPropertiesHash();
     this.buildTabs(className);
+  }
+  public getAllVisiblePropertiesNames(includeUnused: boolean): Array<string> {
+    const res = [];
+    this.tabs.forEach(tab => {
+      tab.properties.forEach(prop => res.push(prop.name));
+    });
+    if(includeUnused) {
+      this.unusedProperties.forEach(prop => res.push(prop.name));
+    }
+    return res;
+  }
+  protected initProperties(className: string): Array<JsonObjectProperty> {
+    return Serializer.getPropertiesByObj(this.obj);
+  }
+  protected getIsPropertyVisible(prop: JsonObjectProperty): boolean {
+    return SurveyHelper.isPropertyVisible(this.obj, prop, this.options, this.showMode, this.parentObj, this.parentProperty);
+  }
+  protected getDynamicClassName(): string {
+    return !!this.obj && this.obj.isQuestion && !!this.obj.getDynamicType ? this.obj.getDynamicType() : "";
   }
   public getProperty(propertyName: string): JsonObjectProperty {
     var res = this.propertiesHash[propertyName];
@@ -82,14 +102,7 @@ export class SurveyQuestionProperties {
       var prop = this.properties[i];
       this.propertiesHash[prop.name] = {
         property: prop,
-        visible: SurveyHelper.isPropertyVisible(
-          this.obj,
-          prop,
-          this.options,
-          this.showMode,
-          this.parentObj,
-          this.parentProperty
-        ),
+        visible: this.getIsPropertyVisible(prop),
       };
     }
   }
@@ -116,7 +129,7 @@ export class SurveyQuestionProperties {
     return res;
   }
   private buildTabs(className: string) {
-    if (!className) {
+    if (!className && !!this.obj) {
       className = this.obj.getType();
     }
     var definitions = this.getAllDefinitionsByClass(className);
@@ -306,7 +319,7 @@ export class SurveyQuestionProperties {
       return result;
     }
     let hasNonTabDynamicProperties = false;
-    const dynamicClass = this.obj.isQuestion && !!this.obj.getDynamicType ? this.obj.getDynamicType() : "";
+    const dynamicClass = this.getDynamicClassName();
     if (dynamicClass) {
       hasNonTabDynamicProperties = this.getAllDefinitionsByClassCore(dynamicClass, usedProperties, result, className);
     }
@@ -374,18 +387,29 @@ export class SurveyQuestionProperties {
     if (!!jsonProperty.category) return jsonProperty.category;
     return null;
   }
+  private getUnusedProperties(usedProperties: any, isFormMode: boolean = false): Array<JsonObjectProperty> {
+    const res = [];
+    for (var i = 0; i < this.properties.length; i++) {
+      const prop = this.properties[i];
+      if (this.isJSONPropertyVisible(prop) && !usedProperties[prop.name] && (!isFormMode || prop.showMode === "form")) {
+        res.push(prop);
+      }
+    }
+    return res;
+  }
   private addNonTabProperties(
     tabs: Array<ISurveyQuestionEditorDefinition>,
     usedProperties: any, isFormMode: boolean = false
   ) {
-    if (!this.propertyGridDefinition.autoGenerateProperties) return;
+    const unusedProperties = this.getUnusedProperties(usedProperties, isFormMode);
+    if (!this.propertyGridDefinition.autoGenerateProperties) {
+      this.unusedProperties = unusedProperties;
+      return;
+    }
     let classRes: any = { properties: [], tabs: [] };
     let tabNames = [];
-    for (var i = 0; i < this.properties.length; i++) {
-      let prop = this.properties[i];
-      if (!this.isJSONPropertyVisible(prop) || !!usedProperties[prop.name] ||
-        (isFormMode && prop.showMode !== "form"))
-        continue;
+    for (var i = 0; i < unusedProperties.length; i++) {
+      const prop = unusedProperties[i];
       let propCategory = this.getJsonPropertyCategory(prop);
       let tabName = !!propCategory
         ? propCategory
@@ -407,7 +431,7 @@ export class SurveyQuestionProperties {
         }
       }
       classRes.properties.push({
-        name: this.properties[i].name,
+        name: prop.name,
         tab: tabName,
       });
     }
