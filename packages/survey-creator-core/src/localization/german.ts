@@ -155,7 +155,7 @@ var germanTranslation = {
     surveyJsonCopyButton: "In Zwischenablage kopieren",
     themeResetButton: "Theme-Einstellungen auf die Standardeinstellungen zurücksetzen",
     themeResetConfirmation: "Möchten Sie das Theme wirklich zurücksetzen? Alle Ihre Anpassungen gehen verloren.",
-    themeResetConfirmationOk: "Ja, setzen Sie das Design zurück",
+    themeResetConfirmationOk: "Ja, Design zurück setzen.",
     bold: "Fett",
     italic: "Kursiv",
     underline: "Unterstrichen",
