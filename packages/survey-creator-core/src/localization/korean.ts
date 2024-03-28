@@ -146,6 +146,8 @@ export var koreanStrings = {
     translationDialogTitle: "번역되지 않은 문자열",
     translationMergeLocaleWithDefault: "{0} 기본 로캘과 병합",
     translationPlaceHolder: "번역...",
+    translationSource: "근원: ",
+    translationTarget: "과녁: ",
     themeExportButton: "수출",
     themeImportButton: "수입",
     surveyJsonExportButton: "수출",
@@ -2723,3 +2725,5 @@ editorLocalization.locales["ko"] = koreanStrings;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "표시된 숫자의 소수점 뒤에 유지할 자릿수를 제한합니다."
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "값 앞에 표시할 하나 또는 여러 개의 기호입니다."
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "값 뒤에 표시할 하나 또는 여러 개의 기호입니다."
+// ed.translationSource: "Source: " => "근원: "
+// ed.translationTarget: "Target: " => "과녁: "

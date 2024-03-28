@@ -146,6 +146,8 @@ export var huStrings = {
     translationDialogTitle: "Lefordítatlan karakterláncok",
     translationMergeLocaleWithDefault: "{0} összefűzése az alapértelmezett szöveggel.",
     translationPlaceHolder: "Fordítás...",
+    translationSource: "Forrás: ",
+    translationTarget: "Cél: ",
     themeExportButton: "Kivitel",
     themeImportButton: "Importál",
     surveyJsonExportButton: "Kivitel",
@@ -2672,3 +2674,5 @@ editorLocalization.locales["hu"] = huStrings;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Korlátozza, hogy hány számjegy maradjon meg a megjelenített szám tizedesvesszője után."
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "Egy vagy több szimbólum jelenik meg az érték előtt."
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "Egy vagy több szimbólum jelenik meg az érték után."
+// ed.translationSource: "Source: " => "Forrás: "
+// ed.translationTarget: "Target: " => "Cél: "

@@ -146,6 +146,8 @@ export var fiStrings = {
     translationDialogTitle: "Kääntämättömät merkkijonot",
     translationMergeLocaleWithDefault: "Yhdistä {0} oletuskielellä",
     translationPlaceHolder: "Käännös...",
+    translationSource: "Lähde: ",
+    translationTarget: "Kohde: ",
     themeExportButton: "Vienti",
     themeImportButton: "Tuoda",
     surveyJsonExportButton: "Vienti",
@@ -2519,3 +2521,5 @@ editorLocalization.locales["fi"] = fiStrings;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Rajoittaa näytettävän luvun desimaalipilkun jälkeen säilytettävien numeroiden määrää."
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "Yksi tai useampi symboli, joka näytetään ennen arvoa."
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "Yksi tai useampi symboli, joka näytetään arvon jälkeen."
+// ed.translationSource: "Source: " => "Lähde: "
+// ed.translationTarget: "Target: " => "Kohde: "
