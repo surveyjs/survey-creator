@@ -965,7 +965,7 @@ var germanTranslation = {
     },
     widthMode: {
       static: "Statisch",
-      responsive: "Ansprechbar"
+      responsive: "Anpassend"
     },
     contentMode: {
       image: "Bild",
