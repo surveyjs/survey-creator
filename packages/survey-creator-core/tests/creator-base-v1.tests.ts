@@ -228,11 +228,14 @@ test("Editor state property", () => {
   //Add a case for Bug #1447
   creator.showErrorOnFailedSave = true;
   let notifyMessage;
+  let notifyType;
   creator.onNotify.add((sender: any, options: any) => {
     notifyMessage = options.message;
+    notifyType = options.type;
   });
   creator.doSaveFunc();
   expect(notifyMessage).toBeTruthy();
+  expect(notifyType).toEqual("error");
   expect(creator.state).toEqual("modified");
 });
 
