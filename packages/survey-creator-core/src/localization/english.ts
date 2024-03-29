@@ -652,6 +652,7 @@ export var enStrings = {
     textUpdateMode: "Update input field values",
     maskType: "Input mask type",
     maskTypes: {
+      none: "None",
       patternmask: "Pattern",
       numericmask: "Numeric",
       datetimemask: "Date and Time",

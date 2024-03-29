@@ -3241,3 +3241,29 @@ test("Check enableIf for nested proeprties", () => {
 
   prop.enableIf = oldEnableIf;
 });
+test("PropertyGridEditorMaskType editor", () => {
+  const question = new QuestionTextModel("q1");
+  const propertyGrid = new PropertyGridModelTester(question);
+  const maskTypeQuestion = propertyGrid.survey.getQuestionByName("maskType");
+  expect(maskTypeQuestion.getType()).toEqual("dropdown");
+  expect(maskTypeQuestion.selectedItem.value).toEqual("none");
+  expect(maskTypeQuestion.selectedItem.title).toEqual("None");
+
+  maskTypeQuestion.value = "pattern";
+  expect(maskTypeQuestion.selectedItem.value).toEqual("pattern");
+  expect(maskTypeQuestion.selectedItem.title).toEqual("Pattern");
+});
+test("PropertyGridEditorMaskType editor: localize item", () => {
+  const enLocale = editorLocalization.getLocale("");
+  const oldMaskTypesNone = enLocale.pe.maskTypes.none;
+  enLocale.pe.maskTypes.none = "Unmasked";
+
+  const question = new QuestionTextModel("q1");
+  const propertyGrid = new PropertyGridModelTester(question);
+  const maskTypeQuestion = propertyGrid.survey.getQuestionByName("maskType");
+  expect(maskTypeQuestion.getType()).toEqual("dropdown");
+  expect(maskTypeQuestion.selectedItem.value).toEqual("none");
+  expect(maskTypeQuestion.selectedItem.title).toEqual("Unmasked");
+
+  enLocale.pe.maskTypes.none = oldMaskTypesNone;
+});
