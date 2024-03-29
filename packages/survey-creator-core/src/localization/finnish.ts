@@ -146,6 +146,8 @@ export var fiStrings = {
     translationDialogTitle: "Kääntämättömät merkkijonot",
     translationMergeLocaleWithDefault: "Yhdistä {0} oletuskielellä",
     translationPlaceHolder: "Käännös...",
+    translationSource: "Lähde: ",
+    translationTarget: "Kohde: ",
     themeExportButton: "Vienti",
     themeImportButton: "Tuoda",
     surveyJsonExportButton: "Vienti",
@@ -170,7 +172,6 @@ export var fiStrings = {
     imageChooseImage: "Valitse kuva",
     addNewTypeQuestion: "Lisää {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
-    auto: "auto",
     choices_Item: "Kohta ",
     lg: {
       addNewItem: "Lisää uusi sääntö",
@@ -827,10 +828,8 @@ export var fiStrings = {
     width_placeholder: "Esimerkki: 6 tuumaa",
     minWidth_placeholder: "Esimerkki: 600 pikseliä",
     maxWidth_placeholder: "Esimerkki: 50 %",
-    pattern_placeholder: "Esimerkki: +1(999)-999-99-99",
-    datetimepattern_placeholder: "Esimerkki: kk/pp/v",
-    currencyprefix_placeholder: "Esimerkki: $",
-    currencysuffix_placeholder: "Esimerkki: USD"
+    imageHeight_placeholder: "auto",
+    imageWidth_placeholder: "auto"
   },
   // Property values
   pv: {
@@ -1109,6 +1108,18 @@ export var fiStrings = {
     skiptrigger: "siirry kysymykseen",
     runexpressiontrigger: "suorita lauseke",
     visibletrigger: "muuta näkyvyyttä (vanhentunut)"
+  },
+  peplaceholder: {
+    patternmask: {
+      pattern: "Esimerkki: +1(999)-999-99-99"
+    },
+    datetimemask: {
+      pattern: "Esimerkki: kk/pp/v"
+    },
+    currencymask: {
+      prefix: "Esimerkki: $",
+      suffix: "Esimerkki: USD"
+    }
   },
   pehelp: {
     panel: {
@@ -2510,3 +2521,5 @@ editorLocalization.locales["fi"] = fiStrings;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Rajoittaa näytettävän luvun desimaalipilkun jälkeen säilytettävien numeroiden määrää."
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "Yksi tai useampi symboli, joka näytetään ennen arvoa."
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "Yksi tai useampi symboli, joka näytetään arvon jälkeen."
+// ed.translationSource: "Source: " => "Lähde: "
+// ed.translationTarget: "Target: " => "Kohde: "

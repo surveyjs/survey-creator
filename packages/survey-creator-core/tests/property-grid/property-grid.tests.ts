@@ -2695,13 +2695,13 @@ test("Image picker question imageHeight placeholder", () => {
   );
   expect(imageHeightQuestion.placeholder).toEqual("auto");
   var curStrings = editorLocalization.getLocale("");
-  curStrings.pe.auto = "Auto 2";
+  curStrings.pe.imageHeight_placeholder = "Auto 2";
   propertyGrid = new PropertyGridModelTester(question);
   imageHeightQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("imageHeight")
   );
   expect(imageHeightQuestion.placeholder).toEqual("Auto 2");
-  curStrings.pe.auto = "auto";
+  curStrings.pe.imageHeight_placeholder = "auto";
 });
 test("Add tab after general for survey object", () => {
   Serializer.addProperty("survey", { name: "region", category: "geoLocation", categoryIndex: 10 });
@@ -3223,4 +3223,29 @@ test("Set correct property grid category", () => {
   expect(panel).toBeTruthy();
   expect(propertyGrid.survey.getAllPanels().indexOf(panel)).toEqual(1);
   Serializer.removeProperty("question", "validation");
+});
+test("column title property editor, set placeholder", (): any => {
+  const panel = new PanelModel("p1");
+  const propertyGrid = new PropertyGridModelTester(panel);
+  const questionStartIndexPropertyEditor = <QuestionCommentModel>propertyGrid.survey.getQuestionByName("questionStartIndex");
+  expect(questionStartIndexPropertyEditor.placeholder).toEqual("Ex.: a)");
+});
+test("Check enableIf for nested proeprties", () => {
+  const prop = Serializer.findProperty("choicesByUrl", "path");
+  const oldEnableIf = prop.enableIf;
+  prop.enableIf = (obj) => !!obj.url;
+  const question = new QuestionDropdownModel("q1");
+  const propertyGrid = new PropertyGridModelTester(question);
+  const restFullQuestion = <QuestionCompositeModel>(
+    propertyGrid.survey.getQuestionByName("choicesByUrl")
+  );
+  const urlQuestion = restFullQuestion.contentPanel.getQuestionByName("url");
+  const pathQuestion = restFullQuestion.contentPanel.getQuestionByName("path");
+  expect(pathQuestion.readOnly).toBeTruthy();
+  urlQuestion.value = "abc";
+  expect(pathQuestion.readOnly).toBeFalsy();
+  urlQuestion.clearValue();
+  expect(pathQuestion.readOnly).toBeTruthy();
+
+  prop.enableIf = oldEnableIf;
 });

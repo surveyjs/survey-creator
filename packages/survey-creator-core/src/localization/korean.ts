@@ -146,6 +146,8 @@ export var koreanStrings = {
     translationDialogTitle: "번역되지 않은 문자열",
     translationMergeLocaleWithDefault: "{0} 기본 로캘과 병합",
     translationPlaceHolder: "번역...",
+    translationSource: "근원: ",
+    translationTarget: "과녁: ",
     themeExportButton: "수출",
     themeImportButton: "수입",
     surveyJsonExportButton: "수출",
@@ -170,7 +172,6 @@ export var koreanStrings = {
     imageChooseImage: "이미지 선택",
     addNewTypeQuestion: "{0} 추가", //{0} is localizable question type
     chooseLogoPlaceholder: "[로고]",
-    auto: "자동",
     choices_Item: "항목 ",
     lg: {
       addNewItem: "새 규칙 추가",
@@ -827,10 +828,8 @@ export var koreanStrings = {
     width_placeholder: "예: 6in",
     minWidth_placeholder: "예: 600px",
     maxWidth_placeholder: "예: 50%",
-    pattern_placeholder: "예: +1(999)-999-99-99",
-    datetimepattern_placeholder: "예: mm/dd/yyyy",
-    currencyprefix_placeholder: "예: $",
-    currencysuffix_placeholder: "예.: USD"
+    imageHeight_placeholder: "자동",
+    imageWidth_placeholder: "자동"
   },
   // Property values
   pv: {
@@ -1109,6 +1108,18 @@ export var koreanStrings = {
     skiptrigger: "질문으로 건너뛰기",
     runexpressiontrigger: "표현식 실행",
     visibletrigger: "선명도 변경"
+  },
+  peplaceholder: {
+    patternmask: {
+      pattern: "예: +1(999)-999-99-99"
+    },
+    datetimemask: {
+      pattern: "예: mm/dd/yyyy"
+    },
+    currencymask: {
+      prefix: "예: $",
+      suffix: "예.: USD"
+    }
   },
   pehelp: {
     panel: {
@@ -2714,3 +2725,5 @@ editorLocalization.locales["ko"] = koreanStrings;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "표시된 숫자의 소수점 뒤에 유지할 자릿수를 제한합니다."
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "값 앞에 표시할 하나 또는 여러 개의 기호입니다."
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "값 뒤에 표시할 하나 또는 여러 개의 기호입니다."
+// ed.translationSource: "Source: " => "근원: "
+// ed.translationTarget: "Target: " => "과녁: "

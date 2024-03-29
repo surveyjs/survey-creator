@@ -2,7 +2,7 @@ import {
   Base, SurveyModel, ListModel, Question, PanelModel, PageModel, PopupModel, property, IElement, Serializer,
   JsonObjectProperty, ActionContainer, AdaptiveActionContainer, IAction, Action, IPanel, SurveyElement, ItemValue,
   QuestionSelectBase, QuestionRowModel, LocalizableString, ILocalizableString, ILocalizableOwner, PopupBaseViewModel,
-  EventBase, hasLicense, settings as SurveySettings, Event, Helpers as SurveyHelpers, MatrixDropdownColumn, JsonObject,
+  EventBase, hasLicense, slk, settings as SurveySettings, Event, Helpers as SurveyHelpers, MatrixDropdownColumn, JsonObject,
   dxSurveyService, ISurveyElement, PanelModelBase, surveyLocalization, QuestionMatrixDropdownModelBase, ITheme, Helpers,
   chooseFiles
 } from "survey-core";
@@ -208,6 +208,9 @@ export class SurveyCreatorModel extends Base
   }
   public get licenseText(): string {
     return this.getLocString("survey.license");
+  }
+  public slk(val: string): void {
+    slk(val);
   }
   /**
    * Specifies whether to automatically save a survey or theme JSON schema each time survey or theme settings are changed.
@@ -1549,6 +1552,7 @@ export class SurveyCreatorModel extends Base
     parentObj: Base,
     parentProperty: JsonObjectProperty
   ): boolean {
+    if(!property) return false;
     const proposedValue = this.readOnly || readOnly;
     if (this.onGetPropertyReadOnly.isEmpty) return proposedValue;
     const options = {
@@ -2130,7 +2134,7 @@ export class SurveyCreatorModel extends Base
       this.notifier.notify(message, type);
       // alert(message);
     } else {
-      this.onNotify.fire(this, { message: message });
+      this.onNotify.fire(this, { message, type });
     }
   }
 
@@ -2804,13 +2808,13 @@ export class SurveyCreatorModel extends Base
     if (objIndex == elements.length - 1) {
       objIndex--;
     }
-    if (this.pageEditMode === "single" && parent.isPage) {
-      parent = this.survey;
-    }
     if (obj["questions"]) {
       obj["questions"].forEach(q => this.updateConditionsOnRemove(q));
     }
     obj["delete"](false);
+    if (parent.isPage && (this.pageEditMode === "single" || elements.length === 0)) {
+      parent = this.survey;
+    }
     this.selectElement(objIndex > -1 ? elements[objIndex] : parent);
   }
   protected onCanShowObjectProperty(

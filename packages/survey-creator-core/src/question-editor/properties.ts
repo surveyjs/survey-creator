@@ -37,16 +37,6 @@ export class SurveyQuestionProperties {
   private properties: Array<JsonObjectProperty>;
   private propertiesHash: any;
   private tabs: Array<SurveyQuestionEditorTabDefinition> = [];
-  public static getPropertyPlaceholder(className: string, propName: string, propertyGridDefinition?: ISurveyPropertyGridDefinition): string {
-    if (!propertyGridDefinition) propertyGridDefinition = defaultPropertyGridDefinition;
-    const props = propertyGridDefinition.classes[className]?.properties;
-    if (!Array.isArray(props)) return "";
-    for (let i = 0; i < props.length; i++) {
-      const prop = props[i];
-      if (typeof prop === "object" && prop.name === propName) return prop.placeholder || "";
-    }
-    return "";
-  }
   constructor(
     public obj: any,
     public options: ISurveyCreatorOptions = null,

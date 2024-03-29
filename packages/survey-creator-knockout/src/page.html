@@ -7,6 +7,13 @@
   </div>
   <!-- ko template: { name: 'survey-page', data: page } -->
   <!-- /ko -->
+  <!-- ko if: $data.showPlaceholder -->
+  <div class="svc-page__placeholder_frame">
+    <div class="svc-panel__placeholder_frame">
+      <div class="svc-panel__placeholder" data-bind="text: $data.placeholderText"></div>
+    </div>
+  </div>
+  <!-- /ko -->
   <!-- ko component: { name: 'sv-action-bar', params: { model: footerActionsBar } } -->
   <!-- /ko -->
 </div>

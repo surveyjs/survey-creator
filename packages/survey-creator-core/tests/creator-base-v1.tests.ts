@@ -228,11 +228,14 @@ test("Editor state property", () => {
   //Add a case for Bug #1447
   creator.showErrorOnFailedSave = true;
   let notifyMessage;
+  let notifyType;
   creator.onNotify.add((sender: any, options: any) => {
     notifyMessage = options.message;
+    notifyType = options.type;
   });
   creator.doSaveFunc();
   expect(notifyMessage).toBeTruthy();
+  expect(notifyType).toEqual("error");
   expect(creator.state).toEqual("modified");
 });
 
@@ -342,7 +345,7 @@ test("Delete object and selectedElement property", () => {
   creator.deleteCurrentObject();
   expect(creator.selectedElementName).toEqual("q1");
   creator.deleteCurrentObject();
-  expect(creator.selectedElementName).toEqual("page1");
+  expect(creator.selectedElementName).toEqual("survey");
   const newQuestion = creator.survey.pages[0].addNewQuestion("text");
   creator.survey.pages[0].title = "";
   creator.selectElement(newQuestion);
@@ -1188,12 +1191,13 @@ test("creator.onPageAdding", () => {
     options.allow = allowAdd;
   });
   creator.JSON = {};
+  expect(counter).toBe(1);
   expect(creator.survey.pages).toHaveLength(1);
   creator.addPage(new PageModel("p2"));
-  expect(counter).toBe(1);
+  expect(counter).toBe(2);
   expect(creator.survey.pages).toHaveLength(2);
   allowAdd = false;
   creator.addPage(new PageModel("p3"));
-  expect(counter).toBe(2);
+  expect(counter).toBe(3);
   expect(creator.survey.pages).toHaveLength(2);
 });

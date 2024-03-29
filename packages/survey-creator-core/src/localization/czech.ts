@@ -146,6 +146,8 @@ export var czStrings = {
     translationDialogTitle: "Nepřeložené řetězce",
     translationMergeLocaleWithDefault: "Sloučit {0} s výchozím lokálem",
     translationPlaceHolder: "Překlad...",
+    translationSource: "Zdroj: ",
+    translationTarget: "Cíl: ",
     themeExportButton: "Vývoz",
     themeImportButton: "Dovoz",
     surveyJsonExportButton: "Vývoz",
@@ -170,7 +172,6 @@ export var czStrings = {
     imageChooseImage: "Vybrat obrázek",
     addNewTypeQuestion: "Přidat {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
-    auto: "automaticky",
     choices_Item: "Položka ",
     lg: {
       addNewItem: "Přidat nové pravidlo",
@@ -827,10 +828,8 @@ export var czStrings = {
     width_placeholder: "Př.: 6in",
     minWidth_placeholder: "Př.: 600px",
     maxWidth_placeholder: "Př.: 50%",
-    pattern_placeholder: "Př.: +1(999)-999-99-99",
-    datetimepattern_placeholder: "Př.: dd/mm/rrrr",
-    currencyprefix_placeholder: "Př.: $",
-    currencysuffix_placeholder: "Př.: USD"
+    imageHeight_placeholder: "automaticky",
+    imageWidth_placeholder: "automaticky"
   },
   // Property values
   pv: {
@@ -1109,6 +1108,18 @@ export var czStrings = {
     skiptrigger: "přeskočit na otázku",
     runexpressiontrigger: "spustit výraz",
     visibletrigger: "změnit viditelnost (zastaralé)"
+  },
+  peplaceholder: {
+    patternmask: {
+      pattern: "Př.: +1(999)-999-99-99"
+    },
+    datetimemask: {
+      pattern: "Př.: dd/mm/rrrr"
+    },
+    currencymask: {
+      prefix: "Př.: $",
+      suffix: "Př.: USD"
+    }
   },
   pehelp: {
     panel: {
@@ -2074,3 +2085,5 @@ editorLocalization.locales["cs"] = czStrings;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Omezuje, kolik číslic se má zachovat za desetinnou čárkou zobrazeného čísla."
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "Jeden nebo více symbolů, které mají být zobrazeny před hodnotou."
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "Jeden nebo více symbolů, které se zobrazí za hodnotou."
+// ed.translationSource: "Source: " => "Zdroj: "
+// ed.translationTarget: "Target: " => "Cíl: "

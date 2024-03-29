@@ -146,6 +146,8 @@ export var bgStrings = {
     translationDialogTitle: "Непреведени низове",
     translationMergeLocaleWithDefault: "Обединение {0} с локалната стойност по подразбиране",
     translationPlaceHolder: "Превод...",
+    translationSource: "Източник: ",
+    translationTarget: "Цел: ",
     themeExportButton: "Износ",
     themeImportButton: "Внос",
     surveyJsonExportButton: "Износ",
@@ -170,7 +172,6 @@ export var bgStrings = {
     imageChooseImage: "Избери изображение.",
     addNewTypeQuestion: "Добави {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
-    auto: "Автоматично",
     choices_Item: "Елемент ",
     lg: {
       addNewItem: "Добавяне на ново правило",
@@ -827,10 +828,8 @@ export var bgStrings = {
     width_placeholder: "Пример: 6in",
     minWidth_placeholder: "Примерно: 600px",
     maxWidth_placeholder: "Примерно: 50%",
-    pattern_placeholder: "Пример: +1(999)-999-99-99",
-    datetimepattern_placeholder: "Пример: мм/дд/гггг",
-    currencyprefix_placeholder: "Пример: $",
-    currencysuffix_placeholder: "Пример: USD"
+    imageHeight_placeholder: "Автоматично",
+    imageWidth_placeholder: "Автоматично"
   },
   // Property values
   pv: {
@@ -1109,6 +1108,18 @@ export var bgStrings = {
     skiptrigger: "Преминаване към въпроса",
     runexpressiontrigger: "Стартиране на израз",
     visibletrigger: "промяна на видимостта (отхвърлено)"
+  },
+  peplaceholder: {
+    patternmask: {
+      pattern: "Пример: +1(999)-999-99-99"
+    },
+    datetimemask: {
+      pattern: "Пример: мм/дд/гггг"
+    },
+    currencymask: {
+      prefix: "Пример: $",
+      suffix: "Пример: USD"
+    }
   },
   pehelp: {
     panel: {
@@ -2071,3 +2082,5 @@ editorLocalization.locales["bg"] = bgStrings;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Ограничава колко цифри да се запазят след десетичната запетая за показваното число."
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "Един или няколко символа, които трябва да бъдат показани преди стойността."
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "Един или няколко символа, които трябва да се покажат след стойността."
+// ed.translationSource: "Source: " => "Източник: "
+// ed.translationTarget: "Target: " => "Цел: "

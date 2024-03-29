@@ -146,6 +146,8 @@ export var danishStrings = {
     translationDialogTitle: "Uoversatte strenge",
     translationMergeLocaleWithDefault: "Flet {0} med standardsprog",
     translationPlaceHolder: "Oversættelse...",
+    translationSource: "Kilde: ",
+    translationTarget: "Mål: ",
     themeExportButton: "Eksport",
     themeImportButton: "Import",
     surveyJsonExportButton: "Eksport",
@@ -170,7 +172,6 @@ export var danishStrings = {
     imageChooseImage: "Vælg billede",
     addNewTypeQuestion: "Tilføj {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
-    auto: "auto",
     choices_Item: "Vare ",
     lg: {
       addNewItem: "Tilføj ny regel",
@@ -827,10 +828,8 @@ export var danishStrings = {
     width_placeholder: "Eks.: 6in",
     minWidth_placeholder: "Eks.: 600px",
     maxWidth_placeholder: "Eks.: 50%",
-    pattern_placeholder: "Eks.: +1(999)-999-99-99",
-    datetimepattern_placeholder: "Eks.: mm/dd/åååå",
-    currencyprefix_placeholder: "Eks.: $",
-    currencysuffix_placeholder: "Eks.: USD"
+    imageHeight_placeholder: "auto",
+    imageWidth_placeholder: "auto"
   },
   // Property values
   pv: {
@@ -1109,6 +1108,18 @@ export var danishStrings = {
     skiptrigger: "Spring til spørgsmål",
     runexpressiontrigger: "afvikl udtry",
     visibletrigger: "skift synlighed"
+  },
+  peplaceholder: {
+    patternmask: {
+      pattern: "Ex.: +1(999)-999-99-99"
+    },
+    datetimemask: {
+      pattern: "Ex.: mm/dd/yyyy"
+    },
+    currencymask: {
+      prefix: "Ex.: $",
+      suffix: "Ex.: USD"
+    }
   },
   pehelp: {
     panel: {
@@ -2695,3 +2706,5 @@ editorLocalization.locales["da"] = danishStrings;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Begrænser, hvor mange cifre der skal bevares efter decimaltegnet for et vist tal."
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "Et eller flere symboler, der skal vises før værdien."
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "Et eller flere symboler, der skal vises efter værdien."
+// ed.translationSource: "Source: " => "Kilde: "
+// ed.translationTarget: "Target: " => "Mål: "

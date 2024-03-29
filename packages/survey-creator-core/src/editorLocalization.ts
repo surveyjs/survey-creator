@@ -9,9 +9,11 @@ export class EditorLocalization {
   public locales = {};
   private peByClass = {};
   private peHelpByClass = {};
+  private pePlaceholderByClass = {};
   public reset() : void {
     this.peByClass = {};
     this.peHelpByClass = {};
+    this.pePlaceholderByClass = {};
   }
   public get defaultLocale(): string { return this.defaultLocaleValue; }
   public set defaultLocale(val: string) {
@@ -97,15 +99,26 @@ export class EditorLocalization {
     return this.getPropertyName(propName, defaultName);
   }
   public getPropertyHelpInEditor(typeName: string, propName: string, propType: string = undefined): string {
-    let helpStr = this.getPropertyInfoInEditorByType(typeName, propName, this.peHelpByClass, "pehelp");
-    if(!!helpStr) return (helpStr === " ") ? null: helpStr;
+    const res = this.getPropertyHelpInEditorCore(typeName, propName, this.peHelpByClass, "pehelp");
+    if(!!res) return res;
     const loc = this.getLocale();
-    if(!!loc && !!loc.pehelp) {
-      helpStr = loc.pehelp[propName];
+    return !!propType && !!loc && !!loc.pe ? loc.pe[propType + "Help"] : undefined;
+  }
+  public getPropertyPlaceholder(typeName: string, propName: string): string {
+    let str = this.getPropertyHelpInEditorCore(typeName, propName, this.pePlaceholderByClass, "peplaceholder");
+    if(!!str) return (str === " ") ? null: str;
+    const loc = this.getLocale();
+    if(!!loc && !!loc.peplaceholder) {
+      str = loc.peplaceholder[propName];
     }
-    if(!!helpStr) return helpStr;
-    if(!!propType && !!loc.pe) return loc.pe[propType + "Help"];
-    return undefined;
+    if(!!str) return str;
+    return !!loc && !!loc.pe ? loc.pe[propName + "_placeholder"] : undefined;
+  }
+  private getPropertyHelpInEditorCore(typeName: string, propName: string, data: any, suffix: string): string {
+    let str = this.getPropertyInfoInEditorByType(typeName, propName, data, suffix);
+    if(!!str) return (str === " ") ? null: str;
+    const loc = this.getLocale();
+    return !!loc && !!loc[suffix] ? loc[suffix][propName] : undefined;
   }
   private getPropertyInfoInEditorByType(typeName: string, propName: string, peInfoByClass: any, postFix: string): string {
     if(!typeName) return undefined;

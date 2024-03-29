@@ -146,6 +146,8 @@ var frenchTranslation = {
     translationDialogTitle: "Chaînes non traduites",
     translationMergeLocaleWithDefault: "Fusionner {0} avec langue par défaut",
     translationPlaceHolder: "Traduction...",
+    translationSource: "Source: ",
+    translationTarget: "Cible: ",
     themeExportButton: "Exportation",
     themeImportButton: "Importation",
     surveyJsonExportButton: "Exportation",
@@ -170,7 +172,6 @@ var frenchTranslation = {
     imageChooseImage: "Choisir une image",
     addNewTypeQuestion: "Ajouter {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
-    auto: "auto",
     choices_Item: "Article ",
     lg: {
       addNewItem: "Ajouter une nouvelle règle",
@@ -827,10 +828,8 @@ var frenchTranslation = {
     width_placeholder: "Ex. : 6po",
     minWidth_placeholder: "Ex. : 600px",
     maxWidth_placeholder: "Ex. : 50 %",
-    pattern_placeholder: "Ex. : +1(999)-999-99-99",
-    datetimepattern_placeholder: "Ex. : mm/jj/aaaa",
-    currencyprefix_placeholder: "Ex. : $",
-    currencysuffix_placeholder: "Ex. : USD"
+    imageHeight_placeholder: "auto",
+    imageWidth_placeholder: "auto"
   },
   // Property values
   pv: {
@@ -1109,6 +1108,18 @@ var frenchTranslation = {
     skiptrigger: "Sauter à la question",
     runexpressiontrigger: "Exécuter une expression",
     visibletrigger: "Modifier la visibilité"
+  },
+  peplaceholder: {
+    patternmask: {
+      pattern: "Ex. : +1(999)-999-99-99"
+    },
+    datetimemask: {
+      pattern: "Ex. : mm/jj/aaaa"
+    },
+    currencymask: {
+      prefix: "Ex. : $",
+      suffix: "Ex. : USD"
+    }
   },
   pehelp: {
     panel: {
@@ -2570,3 +2581,5 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Limite le nombre de chiffres à conserver après la virgule décimale pour un nombre affiché."
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "Un ou plusieurs symboles à afficher avant la valeur."
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "Un ou plusieurs symboles à afficher après la valeur."
+// ed.translationSource: "Source: " => "Source: "
+// ed.translationTarget: "Target: " => "Cible: "

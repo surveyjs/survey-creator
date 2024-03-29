@@ -146,6 +146,8 @@ export var jaStrings = {
     translationDialogTitle: "未翻訳の文字列",
     translationMergeLocaleWithDefault: "{0}をデフォルトのロケールにマージする",
     translationPlaceHolder: "翻訳。。。",
+    translationSource: "源：",
+    translationTarget: "ターゲット：",
     themeExportButton: "輸出",
     themeImportButton: "輸入",
     surveyJsonExportButton: "輸出",
@@ -170,7 +172,6 @@ export var jaStrings = {
     imageChooseImage: "画像を選択",
     addNewTypeQuestion: "{0}を追加", //{0} is localizable question type
     chooseLogoPlaceholder: "[ロゴ]",
-    auto: "自動",
     choices_Item: "アイテム",
     lg: {
       addNewItem: "新しいルールを追加",
@@ -827,10 +828,8 @@ export var jaStrings = {
     width_placeholder: "例:6インチ",
     minWidth_placeholder: "例:600px",
     maxWidth_placeholder: "例:50%",
-    pattern_placeholder: "例:+1(999)-999-99-99",
-    datetimepattern_placeholder: "例:mm/dd/yyyy",
-    currencyprefix_placeholder: "例:$",
-    currencysuffix_placeholder: "例:米ドル"
+    imageHeight_placeholder: "自動",
+    imageWidth_placeholder: "自動"
   },
   // Property values
   pv: {
@@ -1109,6 +1108,18 @@ export var jaStrings = {
     skiptrigger: "質問へスキップ",
     runexpressiontrigger: "数式を実行",
     visibletrigger: "可視性を変更 (非推奨)"
+  },
+  peplaceholder: {
+    patternmask: {
+      pattern: "Ex.: +1(999)-999-99-99"
+    },
+    datetimemask: {
+      pattern: "Ex.: mm/dd/yyyy"
+    },
+    currencymask: {
+      prefix: "Ex.: $",
+      suffix: "Ex.: USD"
+    }
   },
   pehelp: {
     panel: {
@@ -2509,3 +2520,5 @@ editorLocalization.locales["ja"] = jaStrings;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "表示される数値の小数点以下の桁数を制限します。"
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "値の前に表示される 1 つまたは複数のシンボル。"
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "値の後に表示される 1 つまたは複数の記号。"
+// ed.translationSource: "Source: " => "源："
+// ed.translationTarget: "Target: " => "ターゲット："

@@ -5,5 +5,10 @@
     <sv-action-bar [model]="adorner.actionContainer"></sv-action-bar>
   </div>
   <page [model]="model" [survey]="survey"></page>
+  <div *ngIf="adorner.showPlaceholder" class="svc-page__placeholder_frame">
+    <div class="svc-panel__placeholder_frame">
+      <div class="svc-panel__placeholder">{{adorner.placeholderText}}</div>
+    </div>
+  </div>
   <sv-action-bar [model]="adorner.footerActionsBar"></sv-action-bar>
 </div>

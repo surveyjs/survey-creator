@@ -146,6 +146,8 @@ var persianStrings = {
     translationDialogTitle: "رشتههای ترجمهنشده",
     translationMergeLocaleWithDefault: "ادغام {0} با زبان پیش فرض",
     translationPlaceHolder: "در حال ترجمه...",
+    translationSource: "منبع: ",
+    translationTarget: "هدف: ",
     themeExportButton: "صادرات",
     themeImportButton: "واردات",
     surveyJsonExportButton: "صادرات",
@@ -170,7 +172,6 @@ var persianStrings = {
     imageChooseImage: "انتخاب تصویر",
     addNewTypeQuestion: "اضافه {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[لوگو]",
-    auto: "خودکار",
     choices_Item: "مورد ",
     lg: {
       addNewItem: "اضافه کردن آیتم جدید",
@@ -827,10 +828,8 @@ var persianStrings = {
     width_placeholder: "سابق: 6in",
     minWidth_placeholder: "سابق: 600 پیکسل",
     maxWidth_placeholder: "سابق: 50٪",
-    pattern_placeholder: "شماره تماس: +1 (999) -999-99-99",
-    datetimepattern_placeholder: "سابق: mm / dd / yyyyy",
-    currencyprefix_placeholder: "سابق: $",
-    currencysuffix_placeholder: "Ex.: دلار امریکا"
+    imageHeight_placeholder: "خودکار",
+    imageWidth_placeholder: "خودکار"
   },
   // Property values
   pv: {
@@ -1109,6 +1108,18 @@ var persianStrings = {
     skiptrigger: "رد کردن سوال ",
     runexpressiontrigger: "اجرای عبارت",
     visibletrigger: "تغییر وضعیت دیده شدن"
+  },
+  peplaceholder: {
+    patternmask: {
+      pattern: "شماره تماس: +1 (999)-999-99-99"
+    },
+    datetimemask: {
+      pattern: "سابق: mm/dd/yyyyy"
+    },
+    currencymask: {
+      prefix: "سابق: $",
+      suffix: "Ex.: دلار امریکا"
+    }
   },
   pehelp: {
     panel: {
@@ -2465,3 +2476,5 @@ editorLocalization.locales["fa"] = persianStrings;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "محدود کردن تعداد ارقام برای حفظ پس از نقطه اعشار برای یک عدد نمایش داده شده."
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "یک یا چند نماد قبل از مقدار نمایش داده می شود."
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "یک یا چند نماد بعد از مقدار نمایش داده می شود."
+// ed.translationSource: "Source: " => "منبع: "
+// ed.translationTarget: "Target: " => "هدف: "

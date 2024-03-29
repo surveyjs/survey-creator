@@ -146,6 +146,8 @@ export let svStrings = {
     translationDialogTitle: "Oöversatta strängar",
     translationMergeLocaleWithDefault: "Mergea {0} med standard språk",
     translationPlaceHolder: "Översättning...",
+    translationSource: "Källa: ",
+    translationTarget: "Mål: ",
     themeExportButton: "Export",
     themeImportButton: "Import",
     surveyJsonExportButton: "Export",
@@ -170,7 +172,6 @@ export let svStrings = {
     imageChooseImage: "Välj bild",
     addNewTypeQuestion: "Lägg till {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGOTYP]",
-    auto: "bil",
     choices_Item: "Sak ",
     lg: {
       addNewItem: "Lägg till ny regel",
@@ -827,10 +828,8 @@ export let svStrings = {
     width_placeholder: "Ex.: 6 tum",
     minWidth_placeholder: "Ex.: 600px",
     maxWidth_placeholder: "Ex.: 50%",
-    pattern_placeholder: "Ex.: +1(999)-999-99-99",
-    datetimepattern_placeholder: "Ex.: mm/dd/åååå",
-    currencyprefix_placeholder: "Ex.: $",
-    currencysuffix_placeholder: "Ex.: USD"
+    imageHeight_placeholder: "bil",
+    imageWidth_placeholder: "bil"
   },
   // Property values
   pv: {
@@ -1109,6 +1108,18 @@ export let svStrings = {
     skiptrigger: "Hoppa till fråga",
     runexpressiontrigger: "Kör uttryck",
     visibletrigger: "Ändra synlighet"
+  },
+  peplaceholder: {
+    patternmask: {
+      pattern: "Ex.: +1(999)-999-99-99"
+    },
+    datetimemask: {
+      pattern: "Ex.: mm/dd/åååå"
+    },
+    currencymask: {
+      prefix: "Ex.: $",
+      suffix: "Ex.: USD"
+    }
   },
   pehelp: {
     panel: {
@@ -2687,3 +2698,5 @@ editorLocalization.locales["sv"] = svStrings;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Begränsar hur många siffror som ska behållas efter decimaltecknet för ett tal som visas."
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "En eller flera symboler som ska visas före värdet."
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "En eller flera symboler som ska visas efter värdet."
+// ed.translationSource: "Source: " => "Källa: "
+// ed.translationTarget: "Target: " => "Mål: "

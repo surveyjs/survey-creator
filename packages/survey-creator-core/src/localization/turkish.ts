@@ -146,6 +146,8 @@ export var turkishStrings = {
     translationDialogTitle: "Çevrilmemiş dizeler",
     translationMergeLocaleWithDefault: "{0} varsayılan çeviri ile sıkıştır",
     translationPlaceHolder: "Çeviri...",
+    translationSource: "Kaynak: ",
+    translationTarget: "Hedef: ",
     themeExportButton: "Ihracat",
     themeImportButton: "Ithalat",
     surveyJsonExportButton: "Ihracat",
@@ -170,7 +172,6 @@ export var turkishStrings = {
     imageChooseImage: "Resim Seç",
     addNewTypeQuestion: "{0} ekle", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
-    auto: "Otomatik",
     choices_Item: "Madde ",
     lg: {
       addNewItem: "Yeni Kural Ekle",
@@ -827,10 +828,8 @@ export var turkishStrings = {
     width_placeholder: "Ör.: 6 inç",
     minWidth_placeholder: "Ör.: 600 piksel",
     maxWidth_placeholder: "Ör.: %50",
-    pattern_placeholder: "Ör.: +1(999)-999-99-99",
-    datetimepattern_placeholder: "Ör.: aa/gg/yyyy",
-    currencyprefix_placeholder: "Ör.: $",
-    currencysuffix_placeholder: "Ör.: USD"
+    imageHeight_placeholder: "Otomatik",
+    imageWidth_placeholder: "Otomatik"
   },
   // Property values
   pv: {
@@ -1109,6 +1108,18 @@ export var turkishStrings = {
     skiptrigger: "soruyu atla",
     runexpressiontrigger: "mantıksal ifadeyi çalıştır",
     visibletrigger: "görünürlüğü değiştir (kullanımdan kaldırıldı)"
+  },
+  peplaceholder: {
+    patternmask: {
+      pattern: "Ör.: +1(999)-999-99-99"
+    },
+    datetimemask: {
+      pattern: "Ör.: aa/gg/yyyy"
+    },
+    currencymask: {
+      prefix: "Ör.: $",
+      suffix: "Ör.: USD"
+    }
   },
   pehelp: {
     panel: {
@@ -2505,3 +2516,5 @@ editorLocalization.locales["tr"] = turkishStrings;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Görüntülenen bir sayı için ondalık virgülden sonra kaç basamak tutulacağını sınırlar."
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "Değerden önce görüntülenecek bir veya birkaç sembol."
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "Değerden sonra görüntülenecek bir veya birkaç sembol."
+// ed.translationSource: "Source: " => "Kaynak: "
+// ed.translationTarget: "Target: " => "Hedef: "

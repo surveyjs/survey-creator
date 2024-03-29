@@ -146,6 +146,8 @@ export var indonesianStrings = {
     translationDialogTitle: "String yang tidak diterjemahkan",
     translationMergeLocaleWithDefault: "Gabungkan {0} dengan default locale",
     translationPlaceHolder: "Terjemahan...",
+    translationSource: "Sumber: ",
+    translationTarget: "Target: ",
     themeExportButton: "Ekspor",
     themeImportButton: "Mengimpor",
     surveyJsonExportButton: "Ekspor",
@@ -170,7 +172,6 @@ export var indonesianStrings = {
     imageChooseImage: "Pilih Gambar",
     addNewTypeQuestion: "Tambahkan {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
-    auto: "Auto",
     choices_Item: "Benda ",
     lg: {
       addNewItem: "Tambahkan Aturan Baru",
@@ -827,10 +828,8 @@ export var indonesianStrings = {
     width_placeholder: "Contoh: 6in",
     minWidth_placeholder: "Contoh: 600px",
     maxWidth_placeholder: "Contoh: 50%",
-    pattern_placeholder: "Contoh: +1(999)-999-99-99",
-    datetimepattern_placeholder: "Contoh: mm/dd/yyyy",
-    currencyprefix_placeholder: "Contoh.: $",
-    currencysuffix_placeholder: "Contoh: USD"
+    imageHeight_placeholder: "Auto",
+    imageWidth_placeholder: "Auto"
   },
   // Property values
   pv: {
@@ -1109,6 +1108,18 @@ export var indonesianStrings = {
     skiptrigger: "Lanjut ke pertanyaan",
     runexpressiontrigger: "jalankan ekspresi",
     visibletrigger: "ubah visibilitas"
+  },
+  peplaceholder: {
+    patternmask: {
+      pattern: "Contoh: +1(999)-999-99-99"
+    },
+    datetimemask: {
+      pattern: "Contoh: mm/dd/yyyy"
+    },
+    currencymask: {
+      prefix: "Contoh.: $",
+      suffix: "Contoh: USD"
+    }
   },
   pehelp: {
     panel: {
@@ -2664,3 +2675,5 @@ editorLocalization.locales["id"] = indonesianStrings;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Membatasi jumlah digit yang akan dipertahankan setelah koma desimal untuk angka yang ditampilkan."
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "Satu atau beberapa simbol yang akan ditampilkan sebelum nilai."
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "Satu atau beberapa simbol yang akan ditampilkan setelah nilai."
+// ed.translationSource: "Source: " => "Sumber: "
+// ed.translationTarget: "Target: " => "Target: "

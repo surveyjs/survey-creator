@@ -146,6 +146,8 @@ export var nlStrings = {
     translationDialogTitle: "Onvertaalde tekenreeksen",
     translationMergeLocaleWithDefault: "Voeg {0} samen met de standaardlandinstelling",
     translationPlaceHolder: "Vertaling...",
+    translationSource: "Bron: ",
+    translationTarget: "Doel: ",
     themeExportButton: "Exporteren",
     themeImportButton: "Importeren",
     surveyJsonExportButton: "Exporteren",
@@ -170,7 +172,6 @@ export var nlStrings = {
     imageChooseImage: "Kies afbeelding",
     addNewTypeQuestion: "Voeg {0} toe", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
-    auto: "Auto",
     choices_Item: "Item ",
     lg: {
       addNewItem: "Nieuwe regel toevoegen",
@@ -827,10 +828,8 @@ export var nlStrings = {
     width_placeholder: "Bijv.: 6in",
     minWidth_placeholder: "Bijv.: 600px",
     maxWidth_placeholder: "Vb.: 50%",
-    pattern_placeholder: "Vb.: +1(999)-999-99-99",
-    datetimepattern_placeholder: "Bijv.: mm/dd/jjjj",
-    currencyprefix_placeholder: "Bijv.: $",
-    currencysuffix_placeholder: "Bijv.: USD"
+    imageHeight_placeholder: "Auto",
+    imageWidth_placeholder: "Auto"
   },
   // Property values
   pv: {
@@ -1109,6 +1108,18 @@ export var nlStrings = {
     skiptrigger: "Ga naar de vraag",
     runexpressiontrigger: "Run expressie",
     visibletrigger: "Zichtbaarheid wijzigen (verouderd)"
+  },
+  peplaceholder: {
+    patternmask: {
+      pattern: "Vb.: +1(999)-999-99-99"
+    },
+    datetimemask: {
+      pattern: "Bijv.: mm/dd/jjjj"
+    },
+    currencymask: {
+      prefix: "Bijv.: $",
+      suffix: "Bijv.: USD"
+    }
   },
   pehelp: {
     panel: {
@@ -2490,3 +2501,5 @@ editorLocalization.locales["nl"] = nlStrings;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Hiermee beperkt u het aantal cijfers dat moet worden behouden na de komma voor een weergegeven getal."
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "Een of meer symbolen die vóór de waarde moeten worden weergegeven."
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "Een of meer symbolen die na de waarde moeten worden weergegeven."
+// ed.translationSource: "Source: " => "Bron: "
+// ed.translationTarget: "Target: " => "Doel: "

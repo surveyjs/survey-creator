@@ -146,6 +146,8 @@ export var arStrings = {
     translationDialogTitle: "النصوص غير المترجمة",
     translationMergeLocaleWithDefault: "Merge {0} with default locale",
     translationPlaceHolder: "Translation...",
+    translationSource: "مصدر: ",
+    translationTarget: "هدف: ",
     themeExportButton: "تصدير",
     themeImportButton: "استورد",
     surveyJsonExportButton: "تصدير",
@@ -170,7 +172,6 @@ export var arStrings = {
     imageChooseImage: "اختر صورة",
     addNewTypeQuestion: "Add {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[الشعار]",
-    auto: "تلقائي",
     choices_Item: "بند ",
     lg: {
       addNewItem: "إضافة قاعدة جديدة",
@@ -827,10 +828,8 @@ export var arStrings = {
     width_placeholder: "مثال: 6 بوصة",
     minWidth_placeholder: "مثال: 600px",
     maxWidth_placeholder: "مثال: 50٪",
-    pattern_placeholder: "مثال: +1 (999) -999-99-99",
-    datetimepattern_placeholder: "مثال: مم / يوم / سنة",
-    currencyprefix_placeholder: "مثال: $",
-    currencysuffix_placeholder: "مثال: الدولار الأمريكي"
+    imageHeight_placeholder: "تلقائي",
+    imageWidth_placeholder: "تلقائي"
   },
   // Property values
   pv: {
@@ -1109,6 +1108,18 @@ export var arStrings = {
     skiptrigger: "الإنتقال إلى سؤال",
     runexpressiontrigger: "تشغيل العملية الحسابية",
     visibletrigger: "تغيير الرؤية (مهمل)"
+  },
+  peplaceholder: {
+    patternmask: {
+      pattern: "مثال: +1 (999) -999-99-99"
+    },
+    datetimemask: {
+      pattern: "مثال: مم / يوم / سنة"
+    },
+    currencymask: {
+      prefix: "مثال: $",
+      suffix: "مثال: الدولار الأمريكي"
+    }
   },
   pehelp: {
     panel: {
@@ -2420,3 +2431,5 @@ editorLocalization.locales["ar"] = arStrings;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "يحد من عدد الأرقام التي سيتم الاحتفاظ بها بعد الفاصلة العشرية لرقم معروض."
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "رمز واحد أو عدة رموز ليتم عرضها قبل القيمة."
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "رمز واحد أو عدة رموز ليتم عرضها بعد القيمة."
+// ed.translationSource: "Source: " => "مصدر: "
+// ed.translationTarget: "Target: " => "هدف: "

@@ -148,6 +148,8 @@ export var enStrings = {
     translationDialogTitle: "Untranslated strings",
     translationMergeLocaleWithDefault: "Merge {0} with default locale",
     translationPlaceHolder: "Translation...",
+    translationSource: "Source: ",
+    translationTarget: "Target: ",
     themeExportButton: "Export",
     themeImportButton: "Import",
     surveyJsonExportButton: "Export",
@@ -168,11 +170,11 @@ export var enStrings = {
     htmlPlaceHolder: "HTML content will be here.",
     panelPlaceHolder: "Drop a question from the toolbox here.",
     surveyPlaceHolder: "The survey is empty. Drag an element from the toolbox or click the button below.",
+    pagePlaceHolder: "The page is empty. Drag an element from the toolbox or click the button below.",
     imagePlaceHolder: "Drag and drop an image here or click the button below and choose an image to upload",
     imageChooseImage: "Choose Image",
     addNewTypeQuestion: "Add {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
-    auto: "auto",
     choices_Item: "Item ",
     lg: {
       addNewItem: "Add New Rule",
@@ -847,10 +849,8 @@ export var enStrings = {
     width_placeholder: "Ex.: 6in",
     minWidth_placeholder: "Ex.: 600px",
     maxWidth_placeholder: "Ex.: 50%",
-    pattern_placeholder: "Ex.: +1(999)-999-99-99",
-    datetimepattern_placeholder: "Ex.: mm/dd/yyyy",
-    currencyprefix_placeholder: "Ex.: $",
-    currencysuffix_placeholder: "Ex.: USD",
+    imageHeight_placeholder: "auto",
+    imageWidth_placeholder: "auto"
   },
   // Property values
   pv: {
@@ -1129,6 +1129,18 @@ export var enStrings = {
     skiptrigger: "Skip to question",
     runexpressiontrigger: "Run expression",
     visibletrigger: "change visibility (deprecated)"
+  },
+  peplaceholder: {
+    patternmask: {
+      pattern: "Ex.: +1(999)-999-99-99"
+    },
+    datetimemask: {
+      pattern: "Ex.: mm/dd/yyyy"
+    },
+    currencymask: {
+      prefix: "Ex.: $",
+      suffix: "Ex.: USD"
+    }
   },
   pehelp: {
     panel: {
