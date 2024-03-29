@@ -3222,3 +3222,22 @@ test("column title property editor, set placeholder", (): any => {
   const questionStartIndexPropertyEditor = <QuestionCommentModel>propertyGrid.survey.getQuestionByName("questionStartIndex");
   expect(questionStartIndexPropertyEditor.placeholder).toEqual("Ex.: a)");
 });
+test("Check enableIf for nested proeprties", () => {
+  const prop = Serializer.findProperty("choicesByUrl", "path");
+  const oldEnableIf = prop.enableIf;
+  prop.enableIf = (obj) => !!obj.url;
+  const question = new QuestionDropdownModel("q1");
+  const propertyGrid = new PropertyGridModelTester(question);
+  const restFullQuestion = <QuestionCompositeModel>(
+    propertyGrid.survey.getQuestionByName("choicesByUrl")
+  );
+  const urlQuestion = restFullQuestion.contentPanel.getQuestionByName("url");
+  const pathQuestion = restFullQuestion.contentPanel.getQuestionByName("path");
+  expect(pathQuestion.readOnly).toBeTruthy();
+  urlQuestion.value = "abc";
+  expect(pathQuestion.readOnly).toBeFalsy();
+  urlQuestion.clearValue();
+  expect(pathQuestion.readOnly).toBeTruthy();
+
+  prop.enableIf = oldEnableIf;
+});
