@@ -10,10 +10,14 @@ $secondary-backcolor-semi-light: var(--sjs-secondary-backcolor-semi-light, rgba(
 $secondary-forecolor: var(--sjs-secondary-forecolor, #fff);
 $secondary-forecolor-light: var(--sjs-secondary-forecolor-light, rgba(#fff, 0.25));
 
-$editor-background: var(--sjs-editorpanel-backcolor,
-    var(--sjs-editor-background, var(--sjs-general-backcolor-dim-light, var(--background-dim-light, #f9f9f9))));
-$question-background: var(--sjs-questionpanel-backcolor,
-    var(--sjs-question-background, var(--sjs-general-backcolor, var(--background, #fff))));
+$editor-background: var(
+  --sjs-editorpanel-backcolor,
+  var(--sjs-editor-background, var(--sjs-general-backcolor-dim-light, var(--background-dim-light, #f9f9f9)))
+);
+$question-background: var(
+  --sjs-questionpanel-backcolor,
+  var(--sjs-question-background, var(--sjs-general-backcolor, var(--background, #fff)))
+);
 
 $background: var(--sjs-general-backcolor, var(--background, #fff));
 $background-dim: var(--sjs-general-backcolor-dim, var(--background-dim, #f3f3f3));
@@ -61,9 +65,7 @@ $sd-panel-medium-min-width: 176px;
   @if $multiplier ==1 {
     $result: #{$base-unit};
     @return $result;
-  }
-
-  @else {
+  } @else {
     $result: calc(#{$multiplier} * (#{$base-unit}));
     @return $result;
   }
@@ -148,5 +150,20 @@ $tab-min-height: var(--tab-min-height, auto);
     -moz-transition: none !important;
     -o-transition: none !important;
     transition: none !important;
+  }
+}
+
+@mixin disableAnimations {
+  .sd-row--fade-out,
+  .sd-row--fade-in {
+    animation: none;
+  }
+  .sd-element-wrapper--fade-out,
+  .sd-element-wrapper--fade-in {
+    animation: none;
+  }
+  .sd-element__content--fade-in,
+  .sd-element__content--fade-out {
+    animation: none;
   }
 }

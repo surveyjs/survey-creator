@@ -262,7 +262,7 @@
   margin: 0;
   font-weight: 600;
 
-  span+span {
+  span + span {
     display: none;
   }
 }
@@ -295,4 +295,8 @@
 
 .spg-comment.sl-comment {
   height: calcSize(17);
+}
+
+.sl-body {
+  @include disableAnimations;
 }
