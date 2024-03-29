@@ -45,7 +45,6 @@ function getVerticalAlignment(questionName: string, defaultValue: string): IJson
   return <IJsonPropertyInfo>{
     type: "buttongroup",
     name: questionName,
-    displayName: "",
     visibleIf: (obj) => obj.headerView === "advanced",
     choices: [
       { value: "top", text: getLocString("theme.verticalAlignmentTop") },
