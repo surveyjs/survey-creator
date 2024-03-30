@@ -168,6 +168,7 @@ export var mnStrings = {
     htmlPlaceHolder: "HTML агуулга энд байрлана.",
     panelPlaceHolder: "Энд хэрэглүүрээс асуулт чирнэ үү.",
     surveyPlaceHolder: "Санал асуулга хоосон байна. Хэрэглүүрээс асуулт чирнэ үү эсвэл доорх товчийг дарна уу.",
+    pagePlaceHolder: "Хуудас хоосон байна. Багажны хайрцагнаас элементийг чирэх эсвэл доорх товчийг дарна уу.",
     imagePlaceHolder: "Энд зураг чирж унагаах эсвэл доорх товчийг дарж татаж авах зургийг сонгоно уу",
     imageChooseImage: "Зураг сонгох",
     addNewTypeQuestion: "{0} нэмэх", //{0} is localizable question type
@@ -634,6 +635,7 @@ export var mnStrings = {
     textUpdateMode: "Текст асуултын утгыг шинэчлэх",
     maskType: "Оролтын багны төрөл",
     maskTypes: {
+      none: "Хэн ч биш",
       patternmask: "Загвар",
       numericmask: "Тоо нь",
       datetimemask: "Огноо, цаг",
@@ -720,6 +722,10 @@ export var mnStrings = {
     itemvalue: {
       visibleIf: "Хэрэв сонголтыг ил тод болго",
       enableIf: "Сонголтыг сонговол"
+    },
+    "itemvalue@rows": {
+      visibleIf: "Хэрэв эгнээг ил гаргах",
+      enableIf: "Хэрэв эгнээг хянан засварлах боломжтой болго"
     },
     imageitemvalue: {
       text: "Тайлбар"
@@ -2179,3 +2185,7 @@ editorLocalization.locales["mn"] = mnStrings;
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "Үнэ цэнийн дараа үзүүлэх нэг эсвэл хэд хэдэн бэлгэдлүүдийг."
 // ed.translationSource: "Source: " => "Эх сурвалж: "
 // ed.translationTarget: "Target: " => "Зорилго: "
+// ed.pagePlaceHolder: "The page is empty. Drag an element from the toolbox or click the button below." => "Хуудас хоосон байна. Багажны хайрцагнаас элементийг чирэх эсвэл доорх товчийг дарна уу."
+// maskTypes.none: "None" => "Хэн ч биш"
+// itemvalue@rows.visibleIf: "Make the row visible if" => "Хэрэв эгнээг ил гаргах"
+// itemvalue@rows.enableIf: "Make the row editable if" => "Хэрэв эгнээг хянан засварлах боломжтой болго"
