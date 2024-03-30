@@ -327,6 +327,7 @@ test("itemvalue[] property editor + detail panel", () => {
   row.showDetailPanel();
   expect(row.detailPanel).toBeTruthy(); //"Detail panel is showing");
   expect(row.detailPanel.getQuestionByName("visibleIf")).toBeTruthy(); //"visibleIf property is here"
+  expect(row.detailPanel.getQuestionByName("visibleIf").title).toBe("Make the option visible if");
 });
 test("itemvalue[] property editor + row actions", () => {
   var question = new QuestionDropdownModel("q1");
@@ -1040,6 +1041,8 @@ test("matrix dropdown rows, enableIf and visibleIf in row", () => {
   expect(visibleIfQuestion).toBeTruthy();
   expect(enableIfQuestion).toBeTruthy();
   expect(visibleIfQuestion.parent).toEqual(enableIfQuestion.parent);
+  expect(visibleIfQuestion.title).toBe("Make the row visible if");
+  expect(enableIfQuestion.title).toBe("Make the row editable if");
 });
 test("matrix rows/columns, enableIf and visibleIf in row", () => {
   const options = new EmptySurveyCreatorOptions();

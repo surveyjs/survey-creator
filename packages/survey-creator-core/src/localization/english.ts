@@ -740,6 +740,10 @@ export var enStrings = {
       visibleIf: "Make the option visible if",
       enableIf: "Make the option selectable if"
     },
+    "itemvalue@rows": {
+      visibleIf: "Make the row visible if",
+      enableIf: "Make the row editable if"
+    },
     imageitemvalue: {
       text: "Alt text",
     },
