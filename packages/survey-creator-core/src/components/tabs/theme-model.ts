@@ -99,22 +99,22 @@ export class ThemeModel extends Base {
 
   @property({
     onSet: (newValue: string, _target: ThemeEditorModel) => {
-      _target.currentTheme.backgroundImage = newValue;
+      // _target.currentTheme.backgroundImage = newValue;
     }
   }) backgroundImage;
   @property({
     onSet: (newValue: ImageFit, _target: ThemeEditorModel) => {
-      _target.currentTheme.backgroundImageFit = newValue;
+      // _target.currentTheme.backgroundImageFit = newValue;
     }
   }) backgroundImageFit;
   @property({
     onSet: (newValue: ImageAttachment, _target: ThemeEditorModel) => {
-      _target.currentTheme.backgroundImageAttachment = newValue;
+      // _target.currentTheme.backgroundImageAttachment = newValue;
     }
   }) backgroundImageAttachment;
   @property({
     onSet: (newValue: number, _target: ThemeEditorModel) => {
-      _target.currentTheme.backgroundOpacity = newValue / 100;
+      // _target.currentTheme.backgroundOpacity = newValue / 100;
     }
   }) backgroundOpacity;
   @property() themeName;
@@ -128,19 +128,39 @@ export class ThemeModel extends Base {
   @property() cornerRadius: number;
   @property() commonFontSize: number;
 
-  header: HeaderModel;
-  questionTitle: QuestionCompositeModel;
-
   public getType(): string {
     return "themebuilder";
   }
 
+  private setNewHeaderProperty() {
+    this.setPropertyValue("header", new HeaderModel());
+  }
+
   constructor() {
     super();
-    this.setPropertyValue("header", new HeaderModel());
+    this.setNewHeaderProperty();
     this.themeName = ThemeModel.DefaultTheme.themeName || "default";
     this.loadTheme({ themeName: this.themeName });
   }
+
+  public get header(): HeaderModel {
+    return this.getPropertyValue("header");
+  }
+  public set header(val: HeaderModel) {
+    if (!val) return;
+
+    this.setNewHeaderProperty();
+    this.header.fromJSON(val.toJSON());
+  }
+
+  @property() public questionPanel;
+  @property() public editorPanel;
+
+  @property() public pageTitle;
+  @property() public pageDescription;
+  @property() public questionTitle;
+  @property() public questionDescription;
+  @property() public editorFont;
 
   public loadTheme(theme: ITheme) {
     // this.blockThemeChangedNotifications += 1;
@@ -212,6 +232,23 @@ export class ThemeModel extends Base {
         new ItemValue(PredefinedColors[this.themePalette][colorName], getLocString("theme.colors." + colorName))
       );
   }
+
+  onSerializeFontSettingsValue(propertyName: string) {
+    const result = { ...this[propertyName] };
+    if(result.size != this.getPropertyByName(propertyName).defaultValue.size) {
+      result.size = result.size + "px";
+    }
+    return result;
+  }
+
+  onSerializeElementSettingsValue(propertyName: string) {
+    const result = { ...this[propertyName] };
+    if(result.cornerRadius != this.getPropertyByName(propertyName).defaultValue.cornerRadius) {
+      result.cornerRadius = result.cornerRadius + "px";
+    }
+    return result;
+  }
+
   fromJSON(json: ITheme, options?: ILoadFromJSONOptions): void {
     if(json && json.cssVariables) {
       super.fromJSON(json.cssVariables, options);
@@ -242,6 +279,12 @@ export class ThemeModel extends Base {
       if(key.indexOf("--sjs") == 0) {
         cssVariables[key] = result[key];
         delete result[key];
+      } else if(key !== "header" && typeof result[key] === "object") {
+        Object.keys(result[key]).forEach(property => {
+          cssVariables["--sjs-" + key.toLowerCase() + "-" + property] = result[key][property];
+        });
+        // --sjs-font-questiontitle-family
+        // --sjs-questionpanel-backcolor
       }
     });
     result.cssVariables = cssVariables;
@@ -321,7 +364,7 @@ Serializer.addClass(
       category: "background",
     }, {
       type: "spinedit",
-      name: "backgroundImageOpacity",
+      name: "backgroundOpacity",
       displayName: getLocString("theme.backgroundOpacity"),
       enableIf: function (obj) {
         return !!obj.backgroundImage;
@@ -559,6 +602,9 @@ Serializer.addClass(
           editor.visibleIf = "{advancedmode} = true";
           editor.descriptionLocation = "hidden";
         }
+      },
+      onSerializeValue: (obj: ThemeModel) => {
+        return obj.onSerializeFontSettingsValue("pageTitle");
       }
     }, {
       type: "fontsettings",
@@ -575,6 +621,9 @@ Serializer.addClass(
           editor.visibleIf = "{advancedmode} = true";
           editor.descriptionLocation = "hidden";
         }
+      },
+      onSerializeValue: (obj: ThemeModel) => {
+        return obj.onSerializeFontSettingsValue("pageDescription");
       }
     }, {
       type: "elementsettings",
@@ -583,14 +632,16 @@ Serializer.addClass(
       default: {
         backcolor: "rgba(255, 255, 255, 1)",
         hovercolor: "rgba(248, 248, 248, 1)",
-        cornerRadius: "4px",
-        corner: 4
+        cornerRadius: 4,
       },
       onPropertyEditorUpdate: function (obj: any, editor: any) {
         if (!!editor) {
           editor.visibleIf = "{advancedmode} = true";
           editor.descriptionLocation = "hidden";
         }
+      },
+      onSerializeValue: (obj: ThemeModel) => {
+        return obj.onSerializeElementSettingsValue("questionPanel");
       }
     }, {
       type: "boxshadowsettings",
@@ -627,6 +678,9 @@ Serializer.addClass(
           editor.visibleIf = "{advancedmode} = true";
           editor.descriptionLocation = "hidden";
         }
+      },
+      onSerializeValue: (obj: ThemeModel) => {
+        return obj.onSerializeFontSettingsValue("questionTitle");
       }
     }, {
       type: "fontsettings",
@@ -643,6 +697,9 @@ Serializer.addClass(
           editor.visibleIf = "{advancedmode} = true";
           editor.descriptionLocation = "hidden";
         }
+      },
+      onSerializeValue: (obj: ThemeModel) => {
+        return obj.onSerializeFontSettingsValue("questionDescription");
       }
     }, {
       type: "elementsettings",
@@ -652,13 +709,15 @@ Serializer.addClass(
         backcolor: "rgba(255, 255, 255, 1)",
         hovercolor: "rgba(248, 248, 248, 1)",
         cornerRadius: "4px",
-        corner: 4
       },
       onPropertyEditorUpdate: function (obj: any, editor: any) {
         if (!!editor) {
           editor.visibleIf = "{advancedmode} = true";
           editor.descriptionLocation = "hidden";
         }
+      },
+      onSerializeValue: (obj: ThemeModel) => {
+        return obj.onSerializeElementSettingsValue("editorPanel");
       }
     },
     {
@@ -696,6 +755,9 @@ Serializer.addClass(
           editor.visibleIf = "{advancedmode} = true";
           editor.descriptionLocation = "hidden";
         }
+      },
+      onSerializeValue: (obj: ThemeModel) => {
+        return obj.onSerializeFontSettingsValue("editorFont");
       }
     }, {
       type: "colorsettings",
@@ -723,7 +785,7 @@ Serializer.addClass(
         }
       }
     }
-  ]
+  ], (json) => { return new ThemeModel(); }
 );
 
 export class PropertyGridEditorSpinEdit extends PropertyGridEditor {

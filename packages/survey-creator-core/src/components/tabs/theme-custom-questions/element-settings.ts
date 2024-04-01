@@ -21,18 +21,12 @@ function getElementsJSON() {
     },
     {
       type: "spinedit",
-      name: "corner",
+      name: "cornerRadius",
       title: getLocString("theme.cornerRadius"),
       titleLocation: "left",
       descriptionLocation: "hidden",
       unit: "px",
       min: 0
-    },
-    {
-      type: "expression",
-      name: "cornerRadius",
-      expression: "iif({composite.corner} notempty, {composite.corner} + 'px', '')",
-      visible: false
     }
   ];
 }

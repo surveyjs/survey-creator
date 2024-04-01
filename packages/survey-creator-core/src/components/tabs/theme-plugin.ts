@@ -65,7 +65,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   public propertyGrid: PropertyGridModel;
   private propertyGridTab: SidebarTabModel;
   public model: ThemeEditorModel;
-  themeModel: ThemeModel;
+  public themeModel: ThemeModel;
 
   private createVisibleUpdater() {
     return <any>new ComputedUpdater<boolean>(() => { return this.creator.activeTab === "theme"; });
