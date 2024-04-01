@@ -2217,6 +2217,47 @@ test("ConvertTo & addNewQuestion for panel & maxNestedPanels ", (): any => {
   expect(creator.getAvailableToolboxItems()).toHaveLength(itemCount);
 });
 
+test("ConvertTo & addNewQuestion refresh items", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "dropdown", name: "q1" }]
+  };
+  creator.onQuestionAdded.add((sender, options) => {
+    if (options.question.getType() === "text") {
+      creator.toolbox.removeItem("text");
+    }
+  });
+
+  const q1 = creator.survey.getQuestionByName("q1");
+  const q1AdornerModel = new QuestionAdornerViewModel(creator, q1, undefined);
+  const pageModel = creator.survey.pages[0];
+  const pageAdornerModel = new PageAdorner(creator, pageModel);
+  const convertToAction = q1AdornerModel.actionContainer.actions.filter(action => action.id === "convertTo")[0];
+  const questionTypeSelectorModel = pageAdornerModel.questionTypeSelectorModel;
+  const questionTypeSelectorListModel = questionTypeSelectorModel.popupModel.contentComponentData.model as ListModel;
+
+  expect(convertToAction.data.actions).toHaveLength(20);
+  expect(questionTypeSelectorListModel.actions).toHaveLength(21);
+
+  convertToAction.popupModel.toggleVisibility();
+  expect(convertToAction.data.actions).toHaveLength(20);
+  convertToAction.popupModel.toggleVisibility();
+
+  questionTypeSelectorModel.popupModel.toggleVisibility();
+  expect(questionTypeSelectorListModel.actions).toHaveLength(21);
+  questionTypeSelectorModel.popupModel.toggleVisibility();
+
+  pageModel.addNewQuestion("text", "q1");
+
+  convertToAction.popupModel.toggleVisibility();
+  expect(convertToAction.data.actions).toHaveLength(19);
+  convertToAction.popupModel.toggleVisibility();
+
+  questionTypeSelectorModel.popupModel.toggleVisibility();
+  expect(questionTypeSelectorListModel.actions).toHaveLength(20);
+  questionTypeSelectorModel.popupModel.toggleVisibility();
+});
+
 test("ConverTo, change title of question item", (): any => {
   const creator = new CreatorTester();
   creator.toolbox.getItemByName("radiogroup").title = "Single selector";
