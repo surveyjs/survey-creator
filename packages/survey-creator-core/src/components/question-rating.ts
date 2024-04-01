@@ -30,7 +30,7 @@ export class QuestionRatingAdornerViewModel extends Base {
   }
 
   static useRateValues(element: any): boolean {
-    return element.useRateValues();
+    return !!element.useRateValues && element.useRateValues();
   }
 
   public addItem(model: QuestionRatingAdornerViewModel) {

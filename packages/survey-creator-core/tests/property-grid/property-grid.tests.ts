@@ -3267,3 +3267,20 @@ test("PropertyGridEditorMaskType editor: localize item", () => {
 
   enLocale.pe.maskTypes.none = oldMaskTypesNone;
 });
+test("PropertyGridEditorMaskType editor: localize item", () => {
+  ComponentCollection.Instance.add({
+    name: "CSAT",
+    inheritBaseProps: true,
+    questionJSON: {
+      type: "rating",
+      rateType: "labels"
+    }
+  });
+  const question = Serializer.createClass("CSAT", { name: "q1" });
+  expect(question.getType()).toBe("csat");
+  const propertyGrid = new PropertyGridModelTester(question);
+  const autoGenerateQuestion = propertyGrid.survey.getQuestionByName("autoGenerate");
+  expect(autoGenerateQuestion.value).toBeTruthy;
+
+  ComponentCollection.Instance.clear();
+});
