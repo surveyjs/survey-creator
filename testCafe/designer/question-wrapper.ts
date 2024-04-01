@@ -23,7 +23,7 @@ const dotsButton = Selector(".svc-question__content-actions .sv-action.sv-dots")
 const listItems = Selector(".sv-popup .sv-list__item").filterVisible();
 const popupContent = Selector(".sv-popup__content .sv-list").filterVisible();
 
-const convertPopupContent = "Radio Button Group\nRating Scale\nCheckboxes\nDropdown\nMulti-Select Dropdown\nYes/No (Boolean)\nFile Upload\nImage Picker\nRanking\nSingle-Line Input\nLong Text\nMultiple Textboxes\nDynamic Panel\nSingle-Select Matrix\nMulti-Select Matrix\nDynamic Matrix\nHTML\nExpression (read-only)\nImage\nSignature";
+const convertPopupContent = "Radio Button Group\nRating Scale\nCheckboxes\nDropdown\nMulti-Select Dropdown\nYes/No (Boolean)\nFile Upload\nImage Picker\nRanking\nSingle-Line Input\nLong Text\nMultiple Textboxes\nPanel\nDynamic Panel\nSingle-Select Matrix\nMulti-Select Matrix\nDynamic Matrix\nHTML\nExpression (read-only)\nImage\nSignature";
 const convertInputTypePopupContent = "Color\nDate\nDate and Time\nEmail\nMonth\nNumber\nPassword\nRange\nPhone Number\nText\nTime\nURL\nWeek";
 
 test("Single input question wrapper actions", async (t) => {
