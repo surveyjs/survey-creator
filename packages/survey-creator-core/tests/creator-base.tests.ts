@@ -2236,8 +2236,8 @@ test("ConvertTo & addNewQuestion refresh items", (): any => {
   const questionTypeSelectorModel = pageAdornerModel.questionTypeSelectorModel;
   const questionTypeSelectorListModel = questionTypeSelectorModel.popupModel.contentComponentData.model as ListModel;
 
-  expect(convertToAction.data.actions).toHaveLength(20);
-  expect(questionTypeSelectorListModel.actions).toHaveLength(21);
+  expect(convertToAction.data.actions).toHaveLength(0);
+  expect(questionTypeSelectorListModel.actions).toHaveLength(0);
 
   convertToAction.popupModel.toggleVisibility();
   expect(convertToAction.data.actions).toHaveLength(20);
@@ -2247,7 +2247,7 @@ test("ConvertTo & addNewQuestion refresh items", (): any => {
   expect(questionTypeSelectorListModel.actions).toHaveLength(21);
   questionTypeSelectorModel.popupModel.toggleVisibility();
 
-  pageModel.addNewQuestion("text", "q1");
+  pageModel.addNewQuestion("text", "q2");
 
   convertToAction.popupModel.toggleVisibility();
   expect(convertToAction.data.actions).toHaveLength(19);
@@ -2256,6 +2256,10 @@ test("ConvertTo & addNewQuestion refresh items", (): any => {
   questionTypeSelectorModel.popupModel.toggleVisibility();
   expect(questionTypeSelectorListModel.actions).toHaveLength(20);
   questionTypeSelectorModel.popupModel.toggleVisibility();
+
+  const q2AdornerModel = new QuestionAdornerViewModel(creator, creator.survey.getQuestionByName("q2"), undefined);
+  const convertToAction2 = q2AdornerModel.actionContainer.actions.filter(action => action.id === "convertTo")[0];
+  expect(convertToAction2.title).toBe("Single-Line Input");
 });
 
 test("ConverTo, change title of question item", (): any => {
