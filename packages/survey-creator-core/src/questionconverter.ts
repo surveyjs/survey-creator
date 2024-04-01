@@ -159,7 +159,6 @@ export class QuestionConverter {
   }
 }
 function getAllQuestionTypes(className: string, includeCurrent: boolean = false): Array<string> {
-  if(className === "panel") return includeCurrent ? ["panel", "paneldynamic"] : ["paneldynamic"];
   var classes = Serializer.getChildrenClasses("question", true);
   var res = [];
   for (var i = 0; i < classes.length; i++) {
@@ -167,7 +166,9 @@ function getAllQuestionTypes(className: string, includeCurrent: boolean = false)
       res.push(classes[i].name);
     }
   }
-  if(className === "paneldynamic") res.push("panel");
+  if(includeCurrent || className !== "panel") {
+    res.push("panel");
+  }
   const widgets = CustomWidgetCollection.Instance.widgets;
   for(var i = 0; i < widgets.length; i ++) {
     if (includeCurrent || widgets[i].name !== className) {
