@@ -56,7 +56,6 @@
     "@types/node": "7.0.4",
     "@types/react": "17.0.1",
     "@types/react-dom": "17.0.1",
-    "@types/mime": "3.0.4",
     "@types/react-test-renderer": "^17.0.1",
     "ajv": "6.12.3",
     "axe-core": "^3.5.6",
