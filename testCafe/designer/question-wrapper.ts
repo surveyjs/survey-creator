@@ -10,7 +10,7 @@ function normalize(str) {
   return str.replace(/\xa0/gi, " ").replace(/(?:\r\n|\r|\n)/g, "");
 }
 
-const convertQuestionTypesCount = 20;
+const convertQuestionTypesCount = 21;
 const convertTextQuestionInputTypesCount = 13;
 const requiredActionButton = questionToolbarActions.find('button[title="Required"]');
 const deleteActionButton = questionToolbarActions.find('button[title="Delete"]');
