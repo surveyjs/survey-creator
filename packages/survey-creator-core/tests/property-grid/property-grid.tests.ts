@@ -3280,7 +3280,7 @@ test("PropertyGridEditorMaskType editor: localize item", () => {
   expect(question.getType()).toBe("csat");
   const propertyGrid = new PropertyGridModelTester(question);
   const autoGenerateQuestion = propertyGrid.survey.getQuestionByName("autoGenerate");
-  expect(autoGenerateQuestion.value).toBeTruthy;
+  expect(autoGenerateQuestion.value).toBeTruthy();
 
   ComponentCollection.Instance.clear();
 });
