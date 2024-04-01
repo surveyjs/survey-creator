@@ -48,7 +48,7 @@
 
       <!-- ko if: pagesController.page2Display && creator.pageEditMode === 'bypage' -->
       <svc-page class="svc-page"
-        data-bind="attr: { 'data-sv-drop-target-survey-element': 'newGhostPage', 'data-sv-drop-target-page': pagesController.page2Display.name }"
+        data-bind="attr: { 'data-sv-drop-target-survey-element': pagesController.page2Display.name, 'data-sv-drop-target-page': pagesController.page2Display.name }"
         params="survey: survey, page: pagesController.page2Display, creator: creator"></svc-page>
       <!-- /ko -->
 

@@ -1,5 +1,7 @@
 <ng-template #template>
-  <div class="svc-page" [attr.data-sv-drop-target-survey-element]="'newGhostPage' " [attr.data-sv-drop-target-page]="model.pagesController.page2Display.name">
-    <ng-template [component]="{ name: 'svc-page', data: { model: model.pagesController.page2Display, creator, survey }}"></ng-template>
+  <div class="svc-page" [attr.data-sv-drop-target-survey-element]="model.pagesController.page2Display.name"
+    [attr.data-sv-drop-target-page]="model.pagesController.page2Display.name">
+    <ng-template
+      [component]="{ name: 'svc-page', data: { model: model.pagesController.page2Display, creator, survey }}"></ng-template>
   </div>
 </ng-template>
