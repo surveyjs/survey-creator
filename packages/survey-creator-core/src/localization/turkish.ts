@@ -168,6 +168,7 @@ export var turkishStrings = {
     htmlPlaceHolder: "HTML içeriği burada olacak.",
     panelPlaceHolder: "Araç kutusundan buraya bir soru bırakın.",
     surveyPlaceHolder: "Anket boş. Araç kutusundan bir öğeyi sürükleyin veya aşağıdaki düğmeyi tıklatın.",
+    pagePlaceHolder: "Sayfa boş. Araç kutusundan bir öğeyi sürükleyin veya aşağıdaki düğmeyi tıklatın.",
     imagePlaceHolder: "Bir resmi buraya sürükleyip bırakın veya aşağıdaki düğmeyi tıklayın ve yüklemek için bir resim seçin",
     imageChooseImage: "Resim Seç",
     addNewTypeQuestion: "{0} ekle", //{0} is localizable question type
@@ -634,6 +635,7 @@ export var turkishStrings = {
     textUpdateMode: "Metin sorusu değerini güncelleme",
     maskType: "Giriş maskesi türü",
     maskTypes: {
+      none: "Hiç kimse",
       patternmask: "Desen",
       numericmask: "Sayısal",
       datetimemask: "Tarih ve Saat",
@@ -720,6 +722,10 @@ export var turkishStrings = {
     itemvalue: {
       visibleIf: "Aşağıdaki durumlarda seçeneği görünür hale getirin",
       enableIf: "Aşağıdaki durumlarda seçeneği seçilebilir hale getirin"
+    },
+    "itemvalue@rows": {
+      visibleIf: "Aşağıdaki durumlarda satırı görünür hale getirin",
+      enableIf: "Aşağıdaki durumlarda satırı düzenlenebilir hale getirin"
     },
     imageitemvalue: {
       text: "Alternatif metin"
@@ -2518,3 +2524,7 @@ editorLocalization.locales["tr"] = turkishStrings;
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "Değerden sonra görüntülenecek bir veya birkaç sembol."
 // ed.translationSource: "Source: " => "Kaynak: "
 // ed.translationTarget: "Target: " => "Hedef: "
+// ed.pagePlaceHolder: "The page is empty. Drag an element from the toolbox or click the button below." => "Sayfa boş. Araç kutusundan bir öğeyi sürükleyin veya aşağıdaki düğmeyi tıklatın."
+// maskTypes.none: "None" => "Hiç kimse"
+// itemvalue@rows.visibleIf: "Make the row visible if" => "Aşağıdaki durumlarda satırı görünür hale getirin"
+// itemvalue@rows.enableIf: "Make the row editable if" => "Aşağıdaki durumlarda satırı düzenlenebilir hale getirin"

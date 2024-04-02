@@ -168,6 +168,7 @@ var polishStrings = {
     htmlPlaceHolder: "Zawartość HTML będzie tutaj.",
     panelPlaceHolder: "Upuść pytanie z przybornika tutaj.",
     surveyPlaceHolder: "Ankieta jest pusta. Przeciągnij element z przybornika lub kliknij przycisk poniżej.",
+    pagePlaceHolder: "Strona jest pusta. Przeciągnij element z przybornika lub kliknij przycisk poniżej.",
     imagePlaceHolder: "Przeciągnij i upuść obraz tutaj lub kliknij przycisk poniżej i wybierz obraz do przesłania",
     imageChooseImage: "Wybierz obraz",
     addNewTypeQuestion: "Dodaj {0}", //{0} is localizable question type
@@ -634,6 +635,7 @@ var polishStrings = {
     textUpdateMode: "Aktualizowanie wartości pytania tekstowego",
     maskType: "Typ maski wprowadzania",
     maskTypes: {
+      none: "Żaden",
       patternmask: "Deseń",
       numericmask: "Numeryczny",
       datetimemask: "Data i godzina",
@@ -720,6 +722,10 @@ var polishStrings = {
     itemvalue: {
       visibleIf: "Uwidocznij opcję, jeśli",
       enableIf: "Spraw, aby opcja była wybieralna, jeśli"
+    },
+    "itemvalue@rows": {
+      visibleIf: "Uwidocznij wiersz, jeśli",
+      enableIf: "Umożliwia edycję wiersza, jeśli"
     },
     imageitemvalue: {
       text: "Tekst alternatywny"
@@ -2796,3 +2802,7 @@ editorLocalization.locales["pl"] = polishStrings;
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "Jeden lub kilka symboli, które mają być wyświetlane po wartości."
 // ed.translationSource: "Source: " => "Źródło: "
 // ed.translationTarget: "Target: " => "Cel: "
+// ed.pagePlaceHolder: "The page is empty. Drag an element from the toolbox or click the button below." => "Strona jest pusta. Przeciągnij element z przybornika lub kliknij przycisk poniżej."
+// maskTypes.none: "None" => "Żaden"
+// itemvalue@rows.visibleIf: "Make the row visible if" => "Uwidocznij wiersz, jeśli"
+// itemvalue@rows.enableIf: "Make the row editable if" => "Umożliwia edycję wiersza, jeśli"

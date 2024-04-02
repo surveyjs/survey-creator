@@ -168,6 +168,7 @@ export let svStrings = {
     htmlPlaceHolder: "HTML-innehåll kommer att finnas här.",
     panelPlaceHolder: "Släpp en fråga från verktygslådan här.",
     surveyPlaceHolder: "Enkäten är tom. Dra ett element från verktygslådan eller klicka på knappen nedan.",
+    pagePlaceHolder: "Sidan är tom. Dra ett element från verktygslådan eller klicka på knappen nedan.",
     imagePlaceHolder: "Dra och släpp en bild här eller klicka på knappen nedan och välj en bild att ladda upp",
     imageChooseImage: "Välj bild",
     addNewTypeQuestion: "Lägg till {0}", //{0} is localizable question type
@@ -634,6 +635,7 @@ export let svStrings = {
     textUpdateMode: "Uppdatera textfrågevärde",
     maskType: "Typ av indatamask",
     maskTypes: {
+      none: "Ingen",
       patternmask: "Mönster",
       numericmask: "Numerisk",
       datetimemask: "Datum och tid",
@@ -720,6 +722,10 @@ export let svStrings = {
     itemvalue: {
       visibleIf: "Gör alternativet synligt om",
       enableIf: "Gör alternativet valbart om"
+    },
+    "itemvalue@rows": {
+      visibleIf: "Gör raden synlig om",
+      enableIf: "Gör raden redigerbar om"
     },
     imageitemvalue: {
       text: "Alt-text"
@@ -2700,3 +2706,7 @@ editorLocalization.locales["sv"] = svStrings;
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "En eller flera symboler som ska visas efter värdet."
 // ed.translationSource: "Source: " => "Källa: "
 // ed.translationTarget: "Target: " => "Mål: "
+// ed.pagePlaceHolder: "The page is empty. Drag an element from the toolbox or click the button below." => "Sidan är tom. Dra ett element från verktygslådan eller klicka på knappen nedan."
+// maskTypes.none: "None" => "Ingen"
+// itemvalue@rows.visibleIf: "Make the row visible if" => "Gör raden synlig om"
+// itemvalue@rows.enableIf: "Make the row editable if" => "Gör raden redigerbar om"
