@@ -82,7 +82,7 @@
               model.creator.pageEditMode === 'bypage'
             "
             class="svc-page"
-            :data-sv-drop-target-survey-element="model.pagesController.page2Display.name"
+            :data-sv-drop-target-survey-element="model.displayPageDropTarget"
             :data-sv-drop-target-page="model.pagesController.page2Display.name"
           >
             <svc-page
