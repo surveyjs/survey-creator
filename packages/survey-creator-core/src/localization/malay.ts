@@ -168,6 +168,7 @@ export var msStrings = {
     htmlPlaceHolder: "Kandungan HTML akan berada di sini.",
     panelPlaceHolder: "Lepaskan soalan dari kotak alat di sini.",
     surveyPlaceHolder: "Tinjauan itu kosong. Seret elemen dari kotak alat atau klik butang di bawah.",
+    pagePlaceHolder: "Halaman kosong. Seret elemen dari kotak alat atau klik butang di bawah.",
     imagePlaceHolder: "Seret dan lepaskan imej di sini atau klik butang di bawah dan pilih imej untuk dimuat naik",
     imageChooseImage: "Pilih Imej",
     addNewTypeQuestion: "Tambah {0}", //{0} is localizable question type
@@ -634,6 +635,7 @@ export var msStrings = {
     textUpdateMode: "Mengemas kini nilai soalan teks",
     maskType: "Input jenis topeng",
     maskTypes: {
+      none: "Tiada",
       patternmask: "Corak",
       numericmask: "Angka",
       datetimemask: "Tarikh dan Masa",
@@ -720,6 +722,10 @@ export var msStrings = {
     itemvalue: {
       visibleIf: "Jadikan opsyen kelihatan jika",
       enableIf: "Jadikan opsyen boleh dipilih jika"
+    },
+    "itemvalue@rows": {
+      visibleIf: "Jadikan baris kelihatan jika",
+      enableIf: "Jadikan baris boleh diedit jika"
     },
     imageitemvalue: {
       text: "Teks alt"
@@ -2476,3 +2482,7 @@ editorLocalization.locales["ms"] = msStrings;
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "Satu atau beberapa simbol yang akan dipaparkan selepas nilai."
 // ed.translationSource: "Source: " => "Sumber: "
 // ed.translationTarget: "Target: " => "Sasaran: "
+// ed.pagePlaceHolder: "The page is empty. Drag an element from the toolbox or click the button below." => "Halaman kosong. Seret elemen dari kotak alat atau klik butang di bawah."
+// maskTypes.none: "None" => "Tiada"
+// itemvalue@rows.visibleIf: "Make the row visible if" => "Jadikan baris kelihatan jika"
+// itemvalue@rows.enableIf: "Make the row editable if" => "Jadikan baris boleh diedit jika"

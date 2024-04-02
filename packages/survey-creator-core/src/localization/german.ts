@@ -168,6 +168,7 @@ var germanTranslation = {
     htmlPlaceHolder: "HTML wird hier dargestellt werden.",
     panelPlaceHolder: "Ziehe eine Frage aus der Toolbox hier her.",
     surveyPlaceHolder: "Die Umfrage enthält keine Frage. Ziehe ein Element aus der Toolbox hier her oder drücke den Button unten.",
+    pagePlaceHolder: "Die Seite ist leer. Ziehen Sie ein Element aus der Toolbox oder klicken Sie auf die Schaltfläche unten.",
     imagePlaceHolder: "Ziehen Sie ein Bild per Drag & Drop hierher oder klicken Sie auf die Schaltfläche unten und wählen Sie ein Bild zum Hochladen aus",
     imageChooseImage: "Bild auswählen",
     addNewTypeQuestion: "Add {0}", //{0} is localizable question type
@@ -634,6 +635,7 @@ var germanTranslation = {
     textUpdateMode: "Wert der Textfrage aktualisieren",
     maskType: "Typ der Eingabemaske",
     maskTypes: {
+      none: "Nichts",
       patternmask: "Muster",
       numericmask: "Numerisch",
       datetimemask: "Datum und Uhrzeit",
@@ -720,6 +722,10 @@ var germanTranslation = {
     itemvalue: {
       visibleIf: "Machen Sie die Option sichtbar, wenn",
       enableIf: "Machen Sie die Option auswählbar, wenn"
+    },
+    "itemvalue@rows": {
+      visibleIf: "Machen Sie die Zeile sichtbar, wenn",
+      enableIf: "Machen Sie die Zeile bearbeitbar, wenn"
     },
     imageitemvalue: {
       text: "Alt-Text"
@@ -2229,3 +2235,7 @@ editorLocalization.locales["de"] = germanTranslation;
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "Ein oder mehrere Symbole, die nach dem Wert angezeigt werden sollen."
 // ed.translationSource: "Source: " => "Quelle: "
 // ed.translationTarget: "Target: " => "Ziel: "
+// ed.pagePlaceHolder: "The page is empty. Drag an element from the toolbox or click the button below." => "Die Seite ist leer. Ziehen Sie ein Element aus der Toolbox oder klicken Sie auf die Schaltfläche unten."
+// maskTypes.none: "None" => "Nichts"
+// itemvalue@rows.visibleIf: "Make the row visible if" => "Machen Sie die Zeile sichtbar, wenn"
+// itemvalue@rows.enableIf: "Make the row editable if" => "Machen Sie die Zeile bearbeitbar, wenn"

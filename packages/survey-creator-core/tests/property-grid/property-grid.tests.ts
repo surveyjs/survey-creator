@@ -327,6 +327,7 @@ test("itemvalue[] property editor + detail panel", () => {
   row.showDetailPanel();
   expect(row.detailPanel).toBeTruthy(); //"Detail panel is showing");
   expect(row.detailPanel.getQuestionByName("visibleIf")).toBeTruthy(); //"visibleIf property is here"
+  expect(row.detailPanel.getQuestionByName("visibleIf").title).toBe("Make the option visible if");
 });
 test("itemvalue[] property editor + row actions", () => {
   var question = new QuestionDropdownModel("q1");
@@ -1040,6 +1041,8 @@ test("matrix dropdown rows, enableIf and visibleIf in row", () => {
   expect(visibleIfQuestion).toBeTruthy();
   expect(enableIfQuestion).toBeTruthy();
   expect(visibleIfQuestion.parent).toEqual(enableIfQuestion.parent);
+  expect(visibleIfQuestion.title).toBe("Make the row visible if");
+  expect(enableIfQuestion.title).toBe("Make the row editable if");
 });
 test("matrix rows/columns, enableIf and visibleIf in row", () => {
   const options = new EmptySurveyCreatorOptions();
@@ -3266,4 +3269,21 @@ test("PropertyGridEditorMaskType editor: localize item", () => {
   expect(maskTypeQuestion.selectedItem.title).toEqual("Unmasked");
 
   enLocale.pe.maskTypes.none = oldMaskTypesNone;
+});
+test("PropertyGridEditorMaskType editor: localize item", () => {
+  ComponentCollection.Instance.add({
+    name: "CSAT",
+    inheritBaseProps: true,
+    questionJSON: {
+      type: "rating",
+      rateType: "labels"
+    }
+  });
+  const question = Serializer.createClass("CSAT", { name: "q1" });
+  expect(question.getType()).toBe("csat");
+  const propertyGrid = new PropertyGridModelTester(question);
+  const autoGenerateQuestion = propertyGrid.survey.getQuestionByName("autoGenerate");
+  expect(autoGenerateQuestion.value).toBeTruthy();
+
+  ComponentCollection.Instance.clear();
 });

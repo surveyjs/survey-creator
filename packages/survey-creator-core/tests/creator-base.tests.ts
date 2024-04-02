@@ -2107,7 +2107,7 @@ test("ConvertTo, show the current question type selected", (): any => {
     undefined
   );
   const items = questionModel.getConvertToTypesActions();
-  expect(items).toHaveLength(20);
+  expect(items).toHaveLength(21);
   expect(items[0].id).toEqual("radiogroup");
   const popup = questionModel.getActionById("convertTo").popupModel;
   expect(popup).toBeTruthy();
@@ -2134,9 +2134,7 @@ test("ConvertTo, show it for a panel", (): any => {
     undefined
   );
   const items = panelModel.getConvertToTypesActions();
-  expect(items).toHaveLength(2);
-  expect(items[0].id).toEqual("panel");
-  expect(items[1].id).toEqual("paneldynamic");
+  expect(items).toHaveLength(21);
   const popup = panelModel.getActionById("convertTo").popupModel;
   expect(popup).toBeTruthy();
   const list = popup.contentComponentData.model;
@@ -2186,7 +2184,7 @@ test("ConvertTo & addNewQuestion for panel & maxNestedPanels ", (): any => {
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount);
   expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount);
   expect(panel6Model.getConvertToTypesActions()).toHaveLength(itemCount);
-  expect(panel5Model.getConvertToTypesActions()).toHaveLength(2);
+  expect(panel5Model.getConvertToTypesActions()).toHaveLength(21);
   creator.maxNestedPanels = 2;
   expect(creator.dragDropSurveyElements.maxNestedPanels).toBe(2);
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount - 1);
@@ -2209,7 +2207,7 @@ test("ConvertTo & addNewQuestion for panel & maxNestedPanels ", (): any => {
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount - 1);
   expect(panel6Model.getConvertToTypesActions()).toHaveLength(itemCount - 1);
-  expect(panel5Model.getConvertToTypesActions()).toHaveLength(2);
+  expect(panel5Model.getConvertToTypesActions()).toHaveLength(21);
   expect(creator.getAvailableToolboxItems(panel3)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel4)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel1)).toHaveLength(itemCount - 1);
@@ -2300,11 +2298,11 @@ test("ConvertTo separators", (): any => {
     undefined
   );
   const items = questionModel.getConvertToTypesActions();
-  expect(items).toHaveLength(20);
+  expect(items).toHaveLength(21);
   expect(items.filter(i => i.id == "text")[0].needSeparator).toBeTruthy();
   expect(items.filter(i => i.id == "comment")[0].needSeparator).toBeFalsy();
   expect(items.filter(i => i.id == "multipletext")[0].needSeparator).toBeFalsy();
-  expect(items.filter(i => i.id == "paneldynamic")[0].needSeparator).toBeTruthy();
+  expect(items.filter(i => i.id == "panel")[0].needSeparator).toBeTruthy();
 
   const panel = creator.survey.getPanelByName("panel");
   creator.selectElement(panel);
@@ -2315,10 +2313,7 @@ test("ConvertTo separators", (): any => {
     undefined
   );
   const items2 = panelModel.getConvertToTypesActions();
-  expect(items2).toHaveLength(2);
-  expect(items2[0].needSeparator).toBeFalsy();
-  expect(items2[1].needSeparator).toBeFalsy();
-
+  expect(items2).toHaveLength(21);
 });
 test("convertInputType, change inputType for a text question", (): any => {
   const creator = new CreatorTester();

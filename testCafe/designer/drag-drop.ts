@@ -1492,3 +1492,64 @@ test("Drag Drop on the right of Panel same row", async (t) => {
   const resultJson = await getJSON();
   await t.expect(resultJson).eql(expectedJson);
 });
+
+test("Drag Drop on the bottom of page in bypage mode", async (t) => {
+  await t.resizeWindow(1800, 900);
+  const json = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "q1"
+          }
+        ]
+      }
+    ]
+  };
+  const setOptions = ClientFunction(() => {
+    window["creator"].setOptions({
+      pageEditMode: "bypage"
+    });
+  });
+  await setOptions();
+  await setJSON(json);
+
+  const existingPegeSelector = Selector("[data-sv-drop-target-survey-element=\"page1\"]");
+  const ghostPageSelector = Selector("[data-sv-drop-target-survey-element=\"panel2\"]");
+
+  await t.expect(ghostPageSelector.visible).notOk();
+  await t.expect(existingPegeSelector.visible).ok();
+
+  await t
+    .dragToElement(SingleInputToolboxItem, existingPegeSelector, {
+      offsetX: 10,
+      offsetY: 10,
+      destinationOffsetY: -100,
+      destinationOffsetX: 150,
+      speed: 0.1
+    });
+
+  const expectedJson = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "q1"
+          },
+          {
+            "type": "text",
+            "name": "question1"
+          }
+        ]
+      }
+    ]
+  };
+  const resultJson = await getJSON();
+  await t.expect(resultJson).eql(expectedJson);
+});

@@ -168,6 +168,7 @@ var frenchTranslation = {
     htmlPlaceHolder: "Le contenu HTML se trouvera ici.",
     panelPlaceHolder: "Déposez une question de la boîte à outils ici.",
     surveyPlaceHolder: "Le sondage est vide. Faites glisser un élément de la boîte à outils ou cliquez sur le bouton ci-dessous.",
+    pagePlaceHolder: "La page est vide. Faites glisser un élément de la boîte à outils ou cliquez sur le bouton ci-dessous.",
     imagePlaceHolder: "Glissez et déposez une image ici ou cliquez sur le bouton ci-dessous pour choisir une image à télécharger",
     imageChooseImage: "Choisir une image",
     addNewTypeQuestion: "Ajouter {0}", //{0} is localizable question type
@@ -634,6 +635,7 @@ var frenchTranslation = {
     textUpdateMode: "Mettre à jour la valeur de la question textuelle",
     maskType: "Type de masque de saisie",
     maskTypes: {
+      none: "Aucun",
       patternmask: "Modèle",
       numericmask: "Numérique",
       datetimemask: "Date et heure",
@@ -720,6 +722,10 @@ var frenchTranslation = {
     itemvalue: {
       visibleIf: "Rendre l’option visible si",
       enableIf: "Rendez l’option sélectionnable si"
+    },
+    "itemvalue@rows": {
+      visibleIf: "Rendre la ligne visible si",
+      enableIf: "Rendez la ligne modifiable si"
     },
     imageitemvalue: {
       text: "Texte de remplacement"
@@ -2583,3 +2589,7 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "Un ou plusieurs symboles à afficher après la valeur."
 // ed.translationSource: "Source: " => "Source: "
 // ed.translationTarget: "Target: " => "Cible: "
+// ed.pagePlaceHolder: "The page is empty. Drag an element from the toolbox or click the button below." => "La page est vide. Faites glisser un élément de la boîte à outils ou cliquez sur le bouton ci-dessous."
+// maskTypes.none: "None" => "Aucun"
+// itemvalue@rows.visibleIf: "Make the row visible if" => "Rendre la ligne visible si"
+// itemvalue@rows.enableIf: "Make the row editable if" => "Rendez la ligne modifiable si"

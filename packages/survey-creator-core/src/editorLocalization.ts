@@ -140,8 +140,19 @@ export class EditorLocalization {
     const loc: any = this.getLocale();
     const pe = !!loc ? loc[postFix] : undefined;
     if(!pe) return undefined;
-    let classInfo = Serializer.findClass(typeName);
+    const propIndex = typeName.indexOf("@");
+    if(propIndex > -1) {
+      const parentRes = this.getObjInEditorByType(typeName.substring(0, propIndex), peInfoByClass, postFix);
+      if(!pe[typeName]) {
+        peInfoByClass[typeName] = parentRes;
+        return parentRes;
+      }
+      const res = { props: pe[typeName], parent: parentRes };
+      peInfoByClass[typeName] = res;
+      return res;
+    }
     const classNames = [];
+    let classInfo = Serializer.findClass(typeName);
     let res = undefined;
     while(!!classInfo) {
       const tName = classInfo.name;
