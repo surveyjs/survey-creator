@@ -81,7 +81,7 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
       if (!!page2Display) {
         let cachedPage = this.renderedPagesCache[page2Display.id];
         if (!cachedPage) {
-          cachedPage = this.createRenderedPage(page2Display, 0, true);
+          cachedPage = this.createRenderedPage(page2Display, 0, this.model.newPage === page2Display);
           this.renderedPagesCache[page2Display.id] = cachedPage;
         }
         renderedPages.push(cachedPage);
