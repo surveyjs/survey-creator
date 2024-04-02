@@ -120,6 +120,7 @@ test("Has one item type in convertTo", (): any => {
   const items = questionModel.getConvertToTypesActions();
   const popup = questionModel.getActionById("convertTo").popupModel;
   expect(popup).toBeTruthy();
+  popup.toggleVisibility();
   const list = popup.contentComponentData.model;
   expect(list).toBeTruthy();
   counter = 0;
@@ -240,6 +241,7 @@ test("Doesn't duplicate custom toolbox items with built-in ones in convertTo", (
 
   const popup = questionModel.getActionById("convertTo").popupModel;
   expect(popup).toBeTruthy();
+  popup.toggleVisibility();
   const list = popup.contentComponentData.model;
   expect(list).toBeTruthy();
   counter = 0;

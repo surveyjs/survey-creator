@@ -1214,8 +1214,8 @@ test("Question type selector", (): any => {
   expect(survey.getAllQuestions().length).toEqual(0);
   expect(creator.addNewQuestionText).toEqual("Add Question");
   const selectorModel = creator.getQuestionTypeSelectorModel(() => { });
-  const listModel: ListModel =
-    selectorModel.popupModel.contentComponentData.model;
+  const listModel: ListModel = selectorModel.popupModel.contentComponentData.model;
+  selectorModel.popupModel.toggleVisibility();
   const ratingItem = listModel.actions.filter((item) => item.id == "rating")[0];
   listModel.onItemClick(ratingItem);
   expect(creator.addNewQuestionText).toEqual("Add Rating Scale");
@@ -1254,8 +1254,8 @@ test("Question type custom widgets", (): any => {
   expect(survey.getAllQuestions().length).toEqual(0);
   expect(creator.addNewQuestionText).toEqual("Add Question");
   const selectorModel = creator.getQuestionTypeSelectorModel(() => { });
-  const listModel: ListModel =
-    selectorModel.popupModel.contentComponentData.model;
+  const listModel: ListModel = selectorModel.popupModel.contentComponentData.model;
+  selectorModel.popupModel.toggleVisibility();
   const customItem = listModel.actions.filter((item) => item.id == "test_widget")[0];
   expect(customItem.title).toEqual("Test Widget");
   expect(customItem.iconName).toEqual("icon-editor");
@@ -1280,8 +1280,8 @@ test("Question type selector localization", (): any => {
   const survey: SurveyModel = creator.survey;
   expect(creator.addNewQuestionText).toEqual("Add New Question");
   const selectorModel = creator.getQuestionTypeSelectorModel(() => { });
-  const listModel: ListModel =
-    selectorModel.popupModel.contentComponentData.model;
+  const listModel: ListModel = selectorModel.popupModel.contentComponentData.model;
+  selectorModel.popupModel.toggleVisibility();
   const ratingItem = listModel.actions.filter((item) => item.id == "rating")[0];
   listModel.onItemClick(ratingItem);
   expect(creator.addNewQuestionText).toEqual("Add New Rating Scale");
@@ -2111,6 +2111,7 @@ test("ConvertTo, show the current question type selected", (): any => {
   expect(items[0].id).toEqual("radiogroup");
   const popup = questionModel.getActionById("convertTo").popupModel;
   expect(popup).toBeTruthy();
+  popup.toggleVisibility();
   const list = popup.contentComponentData.model;
   expect(list).toBeTruthy();
   expect(list.selectedItem).toBeTruthy();
@@ -2137,6 +2138,7 @@ test("ConvertTo, show it for a panel", (): any => {
   expect(items).toHaveLength(21);
   const popup = panelModel.getActionById("convertTo").popupModel;
   expect(popup).toBeTruthy();
+  popup.toggleVisibility();
   const list = popup.contentComponentData.model;
   expect(list).toBeTruthy();
   expect(list.selectedItem).toBeTruthy();
@@ -2234,25 +2236,25 @@ test("ConvertTo & addNewQuestion refresh items", (): any => {
   const questionTypeSelectorModel = pageAdornerModel.questionTypeSelectorModel;
   const questionTypeSelectorListModel = questionTypeSelectorModel.popupModel.contentComponentData.model as ListModel;
 
-  expect(convertToAction.data.actions).toHaveLength(0);
-  expect(questionTypeSelectorListModel.actions).toHaveLength(0);
+  expect(convertToAction.data.actions.length).toBe(0);
+  expect(questionTypeSelectorListModel.actions.length).toBe(0);
 
   convertToAction.popupModel.toggleVisibility();
-  expect(convertToAction.data.actions).toHaveLength(20);
+  expect(convertToAction.data.actions.length).toBe(21);
   convertToAction.popupModel.toggleVisibility();
 
   questionTypeSelectorModel.popupModel.toggleVisibility();
-  expect(questionTypeSelectorListModel.actions).toHaveLength(21);
+  expect(questionTypeSelectorListModel.actions.length).toBe(21);
   questionTypeSelectorModel.popupModel.toggleVisibility();
 
   pageModel.addNewQuestion("text", "q2");
 
   convertToAction.popupModel.toggleVisibility();
-  expect(convertToAction.data.actions).toHaveLength(19);
+  expect(convertToAction.data.actions.length).toBe(20);
   convertToAction.popupModel.toggleVisibility();
 
   questionTypeSelectorModel.popupModel.toggleVisibility();
-  expect(questionTypeSelectorListModel.actions).toHaveLength(20);
+  expect(questionTypeSelectorListModel.actions.length).toBe(20);
   questionTypeSelectorModel.popupModel.toggleVisibility();
 
   const q2AdornerModel = new QuestionAdornerViewModel(creator, creator.survey.getQuestionByName("q2"), undefined);
@@ -2343,6 +2345,7 @@ test("convertInputType, change inputType for a text question", (): any => {
   expect(action.title).toBe("Text");
   const popup = action.popupModel;
   expect(popup).toBeTruthy();
+  popup.toggleVisibility();
   const list = popup.contentComponentData.model;
   expect(list).toBeTruthy();
   expect(list.selectedItem).toBeTruthy();
@@ -3018,6 +3021,7 @@ test("Add new question to Panel and Page", (): any => {
 
   const selectorModelPanel = panelAdornerModel.questionTypeSelectorModel;
   const listModelPanel: ListModel = selectorModelPanel.popupModel.contentComponentData.model;
+  selectorModelPanel.popupModel.toggleVisibility();
   const ratingItem = listModelPanel.actions.filter((item) => item.id == "rating")[0];
   listModelPanel.onItemClick(ratingItem);
 
@@ -3028,6 +3032,7 @@ test("Add new question to Panel and Page", (): any => {
 
   const selectorModelPanel2 = panelAdornerModel2.questionTypeSelectorModel;
   const listModelPanel2: ListModel = selectorModelPanel2.popupModel.contentComponentData.model;
+  selectorModelPanel2.popupModel.toggleVisibility();
   const commentItem = listModelPanel2.actions.filter((item) => item.id == "comment")[0];
   listModelPanel2.onItemClick(commentItem);
 
@@ -3038,6 +3043,7 @@ test("Add new question to Panel and Page", (): any => {
 
   const selectorModelPage = pageAdornerModel.questionTypeSelectorModel;
   const listModelPage: ListModel = selectorModelPage.popupModel.contentComponentData.model;
+  selectorModelPage.popupModel.toggleVisibility();
   const rankingItem = listModelPage.actions.filter((item) => item.id == "ranking")[0];
   listModelPage.onItemClick(rankingItem);
 
@@ -3048,6 +3054,7 @@ test("Add new question to Panel and Page", (): any => {
 
   const selectorModelPage2 = pageAdornerModel2.questionTypeSelectorModel;
   const listModelPage2: ListModel = selectorModelPage2.popupModel.contentComponentData.model;
+  selectorModelPage2.popupModel.toggleVisibility();
   const htmlItem = listModelPage2.actions.filter((item) => item.id == "html")[0];
   listModelPage2.onItemClick(htmlItem);
 

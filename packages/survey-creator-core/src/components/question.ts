@@ -330,12 +330,16 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   }
 
   private createConvertToAction() {
-    const allowChangeType: boolean = this.getConvertToTypesActions().length > 0;
+    const actions = this.getConvertToTypesActions();
+    const allowChangeType: boolean = actions.length > 0;
+    const selItem = this.getSelectedItem(actions, this.currentType);
+    let actionTitle = !!selItem ? selItem.title : editorLocalization.getString("qt." + this.currentType);
+
     const actionData: IAction = {
       id: "convertTo",
       enabled: allowChangeType,
       visibleIndex: 0,
-      title: editorLocalization.getString("qt." + this.currentType),
+      title: actionTitle,
       iconName: this.creator.toolbox.getItemByName(this.element.getType())?.iconName
     };
     const newAction = this.createDropdownModel(actionData,
