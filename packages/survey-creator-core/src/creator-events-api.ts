@@ -614,7 +614,7 @@ export interface NotifyEvent {
    */
   message: string;
   /**
-   * A notification type: `"info"` (default) or `"error"`.
+   * A notification type: `"info"` or `"error"`.
    */
   type: string;
 }
