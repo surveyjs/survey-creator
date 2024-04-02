@@ -103,9 +103,9 @@ test("Allow to convert to paneldynamic from panel and back", () => {
   classes = QuestionConverter.getConvertToClasses("paneldynamic", ["text", "checkbox", "panel", "paneldynamic"], true);
   expect(classes).toHaveLength(4);
   classes = QuestionConverter.getConvertToClasses("panel", ["text", "checkbox", "panel", "paneldynamic"]);
-  expect(classes).toHaveLength(1);
+  expect(classes).toHaveLength(3);
   classes = QuestionConverter.getConvertToClasses("panel", ["text", "checkbox", "panel", "paneldynamic"], true);
-  expect(classes).toHaveLength(2);
+  expect(classes).toHaveLength(4);
 });
 test("Convert to custom component", () => {
   ComponentCollection.Instance.add({
