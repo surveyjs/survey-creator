@@ -105,6 +105,10 @@
           "Title": "Format User Input for Single-Line Fields"
         },
         {
+          "Name": "end-user-guide-how-to-apply-input-mask-to-text-fields",
+          "Title": "Apply Input Masks"
+        },
+        {
           "Name": "end-user-guide-how-to-create-transfer-list",
           "Title": "Create a Transfer List"
         }
