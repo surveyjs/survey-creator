@@ -3384,7 +3384,7 @@ export class SurveyCreatorModel extends Base
       iconName: "icon-more",
       title: this.getLocString("ed.addNewQuestion"),
     }, {
-      items: [],
+      items: getActions(),
       onSelectionChanged: (item: any) => {
         this.currentAddQuestionType = item.id;
         this.addNewQuestionInPage(beforeAdd, panel);

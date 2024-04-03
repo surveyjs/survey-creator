@@ -342,7 +342,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       title: actionTitle,
       iconName: this.creator.toolbox.getItemByName(this.element.getType())?.iconName
     };
-    const newAction = this.createDropdownModel(actionData,
+    const newAction = this.createDropdownModel(actionData, actions,
       (listModel: ListModel) => {
         const newItems = this.getConvertToTypesActions();
         listModel.setItems(newItems);
@@ -375,7 +375,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       visibleIndex: 1,
       title: editorLocalization.getPropertyValueInEditor(prop.name, questionSubType),
     };
-    const newAction = this.createDropdownModel(actionData,
+    const newAction = this.createDropdownModel(actionData, getAvailableTypes(),
       (listModel: ListModel) => {
         const newItems = getAvailableTypes();
         listModel.setItems(newItems);
@@ -405,7 +405,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     const selectedItems = actions.filter(item => item.id === id);
     return selectedItems.length > 0 ? selectedItems[0] : undefined;
   }
-  private createDropdownModel(actionData: IAction, updateListModel: (listModel: ListModel) => void, onSelectionChanged: (item: any) => void): Action {
+  private createDropdownModel(actionData: IAction, items: Array<IAction>, updateListModel: (listModel: ListModel) => void, onSelectionChanged: (item: any) => void): Action {
     const newAction = createDropdownActionModel({
       id: actionData.id,
       css: "sv-action--convertTo sv-action-bar-item--secondary",
@@ -419,7 +419,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       action: (newType) => {
       },
     }, {
-      items: [],
+      items: items,
       onSelectionChanged: onSelectionChanged,
       allowSelection: true,
       horizontalPosition: "center",

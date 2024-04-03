@@ -2236,8 +2236,8 @@ test("ConvertTo & addNewQuestion refresh items", (): any => {
   const questionTypeSelectorModel = pageAdornerModel.questionTypeSelectorModel;
   const questionTypeSelectorListModel = questionTypeSelectorModel.popupModel.contentComponentData.model as ListModel;
 
-  expect(convertToAction.data.actions.length).toBe(0);
-  expect(questionTypeSelectorListModel.actions.length).toBe(0);
+  expect(convertToAction.data.actions.length).toBe(21);
+  expect(questionTypeSelectorListModel.actions.length).toBe(21);
 
   convertToAction.popupModel.toggleVisibility();
   expect(convertToAction.data.actions.length).toBe(21);
