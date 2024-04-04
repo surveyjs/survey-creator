@@ -369,7 +369,7 @@ export function parseColor(value: string): { color: string, opacity: number } {
       const hex = color.toString(16);
       return res + (hex.length == 1 ? "0" + hex : hex);
     }, "#");
-    return { color, opacity: opacity * 100 };
+    return { color, opacity: roundTo2Decimals(opacity * 100) };
   }
   else {
     return { color: value, opacity: 100 };

@@ -121,9 +121,32 @@ export class ThemeModel extends Base {
   @property() themePalette;
   @property() themeMode;
   @property() groupAppearanceAdvancedMode: boolean;
-  @property() panelBackgroundTransparency: number;
+  @property({
+    onSet: (newValue: any, target: ThemeModel) => {
+      let basecolor = parseColor(target.questionPanel.backcolor).color;
+      const newColor = ingectAlpha(basecolor, newValue / 100);
+      if(target.questionPanel.backcolor !== newColor) {
+        const newQuestionPanel = { ...target.questionPanel };
+        newQuestionPanel.backcolor = newColor;
+        target.questionPanel = newQuestionPanel;
+      }
+    }
+  }) panelBackgroundTransparency: number;
+
   @property() questionPanelBackground: string;
-  @property() questionBackgroundTransparency: number;
+
+  @property({
+    onSet: (newValue: any, target: ThemeModel) => {
+      let basecolor = parseColor(target.editorPanel.backcolor).color;
+      const newColor = ingectAlpha(basecolor, newValue / 100);
+      if(target.editorPanel.backcolor !== newColor) {
+        const newEditorPanel = { ...target.editorPanel };
+        newEditorPanel.backcolor = newColor;
+        target.editorPanel = newEditorPanel;
+      }
+    }
+  }) questionBackgroundTransparency: number;
+
   @property() commonScale: number;
   @property() cornerRadius: number;
   @property() commonFontSize: number;
@@ -153,8 +176,23 @@ export class ThemeModel extends Base {
     this.header.fromJSON(val.toJSON());
   }
 
-  @property() public questionPanel;
-  @property() public editorPanel;
+  @property({
+    onSet: (newValue: any, target: ThemeModel) => {
+      let opacity = parseColor(newValue.backcolor).opacity;
+      if(target.panelBackgroundTransparency !== opacity) {
+        target.panelBackgroundTransparency = opacity;
+      }
+    }
+  }) public questionPanel;
+
+  @property({
+    onSet: (newValue: any, target: ThemeModel) => {
+      let opacity = parseColor(newValue.backcolor).opacity;
+      if(target.questionBackgroundTransparency !== opacity) {
+        target.questionBackgroundTransparency = opacity;
+      }
+    }
+  }) public editorPanel;
 
   @property() public pageTitle;
   @property() public pageDescription;
@@ -263,15 +301,6 @@ export class ThemeModel extends Base {
     this["--sjs-base-unit"] = (this.commonScale * 8 / 100) + "px";
     this["--sjs-font-size"] = (this.commonFontSize * 16 / 100) + "px";
     this["--sjs-corner-radius"] = this.cornerRadius + "px";
-
-    if(this.questionBackgroundTransparency < 100) {
-      let backcolorDimLightColor = parseColor(this["--sjs-general-backcolor-dim-light"]).color;
-      this["--sjs-editor-background"] = ingectAlpha(backcolorDimLightColor, this.questionBackgroundTransparency / 100);
-    }
-    if(this.panelBackgroundTransparency < 100) {
-      let backcolor = parseColor(this["--sjs-general-backcolor"]).color;
-      this["--sjs-question-background"] = ingectAlpha(backcolor, this.panelBackgroundTransparency / 100);
-    }
 
     const result = super.toJSON(options);
     const cssVariables = {};
@@ -499,8 +528,6 @@ Serializer.addClass(
     // { name: "--sjs-primary-forecolor", visible: false },
     // { name: "--sjs-primary-forecolor-light", visible: false },
 
-    { name: "--sjs-editor-background", visible: false },
-    { name: "--sjs-question-background", visible: false },
     {
       type: "spinedit",
       name: "commonScale",

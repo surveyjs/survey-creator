@@ -64,7 +64,6 @@ const themeFromFile = {
     "--sjs-font-editorfont-weight": "600",
     "--sjs-font-editorfont-color": "rgba(204, 25, 25, 1)",
     "--sjs-font-editorfont-size": "17px",
-    "--sjs-editor-background": "rgba(45, 235, 223, 1)",
     "--sjs-editorpanel-backcolor": "rgba(45, 235, 223, 1)",
     "--sjs-editorpanel-hovercolor": "rgba(70, 143, 221, 1)",
     "--sjs-editorpanel-cornerRadius": "4px",
@@ -72,7 +71,6 @@ const themeFromFile = {
     "--sjs-font-questiontitle-weight": "700",
     "--sjs-font-questiontitle-color": "rgba(201, 90, 231, 0.91)",
     "--sjs-font-questiontitle-size": "18px",
-    "--sjs-question-background": "rgba(253, 255, 148, 1)",
     "--sjs-questionpanel-backcolor": "rgba(253, 255, 148, 0.5)",
     "--sjs-questionpanel-hovercolor": "rgba(237, 238, 186, 1)",
     "--sjs-questionpanel-cornerRadius": "6px"
@@ -156,30 +154,29 @@ test("Theme builder panelBackgroundTransparency", (): any => {
   const themeEditor = new ThemeModel();
 
   expect(themeEditor.panelBackgroundTransparency).toEqual(100);
-  expect(themeEditor.toJSON()["cssVariables"]["--sjs-question-background"]).toBeUndefined();
+  expect(themeEditor.questionPanel).toStrictEqual({ "backcolor": "rgba(255, 255, 255, 1)", "cornerRadius": 4, "hovercolor": "rgba(248, 248, 248, 1)" });
 
   themeEditor.panelBackgroundTransparency = 60;
-  expect(themeEditor.toJSON()["cssVariables"]["--sjs-question-background"]).toEqual("rgba(255, 255, 255, 0.6)");
+  expect(themeEditor.panelBackgroundTransparency).toEqual(60);
+  expect(themeEditor.questionPanel).toStrictEqual({ "backcolor": "rgba(255, 255, 255, 0.6)", "cornerRadius": 4, "hovercolor": "rgba(248, 248, 248, 1)" });
 
-  themeEditor.questionPanel.backcolor = "#eeeeee";
-  // expect(themeEditor.toJSON()["cssVariables"]["--sjs-question-background"]).toEqual("rgba(238, 238, 238, 0.6)");
-
-  // themeEditor.getQuestionByName("questionPanel").contentPanel.getQuestionByName("backcolor").value = "#eeeeee";
-  // expect(themeSurveyTab.currentThemeCssVariables["--sjs-question-background"]).toEqual("rgba(238, 238, 238, 0.6)");
+  themeEditor.questionPanel = { "backcolor": "rgba(238, 238, 238, 0.7)", "cornerRadius": 4, "hovercolor": "rgba(248, 248, 248, 1)" };
+  expect(themeEditor.panelBackgroundTransparency).toEqual(70);
+  expect(themeEditor.questionPanel).toStrictEqual({ "backcolor": "rgba(238, 238, 238, 0.7)", "cornerRadius": 4, "hovercolor": "rgba(248, 248, 248, 1)" });
 });
 
 test("Theme builder questionBackgroundTransparency", (): any => {
   const themeEditor = new ThemeModel();
-  // const questionBackgroundTransparency = themeEditor.getQuestionByName("questionBackgroundTransparency");
 
   expect(themeEditor.questionBackgroundTransparency).toEqual(100);
-  expect(themeEditor.toJSON()["cssVariables"]["--sjs-editor-background"]).toBeUndefined();
+  expect(themeEditor.editorPanel).toStrictEqual({ "backcolor": "rgba(255, 255, 255, 1)", "cornerRadius": "4px", "hovercolor": "rgba(248, 248, 248, 1)" });
 
   themeEditor.questionBackgroundTransparency = 60;
-  expect(themeEditor.toJSON()["cssVariables"]["--sjs-editor-background"]).toEqual("rgba(249, 249, 249, 0.6)");
+  expect(themeEditor.editorPanel).toStrictEqual({ "backcolor": "rgba(255, 255, 255, 0.6)", "cornerRadius": "4px", "hovercolor": "rgba(248, 248, 248, 1)" });
 
-  // themeEditor.getQuestionByName("editorPanel").contentPanel.getQuestionByName("backcolor").value = "#f7f7f7";
-  // expect(themeEditor.toJSON()["cssVariables"]["--sjs-editor-background"]).toEqual("rgba(247, 247, 247, 0.6)");
+  themeEditor.editorPanel = { "backcolor": "rgba(247, 247, 247, 0.7)", "cornerRadius": 4, "hovercolor": "rgba(248, 248, 248, 1)" };
+  expect(themeEditor.questionBackgroundTransparency).toEqual(70);
+  expect(themeEditor.editorPanel).toStrictEqual({ "backcolor": "rgba(247, 247, 247, 0.7)", "cornerRadius": 4, "hovercolor": "rgba(248, 248, 248, 1)" });
 });
 
 // test("Theme builder: survey settings", (): any => {
