@@ -215,6 +215,7 @@ export interface ISurveyCreatorOptions {
   enableLinkFileEditor: boolean;
   inplaceEditForValues: boolean;
   rootElement?: HTMLElement;
+  previewShowResults: boolean;
   getObjectDisplayName(obj: Base, area: string, reason: string, displayName: string): string;
   onCanShowPropertyCallback(
     object: any,
@@ -331,6 +332,7 @@ export interface ISurveyCreatorOptions {
 }
 
 export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
+  previewShowResults: boolean;
   rootElement: HTMLElement;
   enableLinkFileEditor: boolean;
   getProcessedTranslationItemText(locale: string, locString: ILocalizableString, newText: string, obj: any): string {

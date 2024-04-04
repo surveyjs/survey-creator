@@ -9,7 +9,7 @@ import { editorLocalization } from "../../src/editorLocalization";
 import "survey-core/survey.i18n";
 
 function getTestModel(creator: CreatorTester): TestSurveyTabViewModel {
-  if(creator.activeTab !== "test") {
+  if (creator.activeTab !== "test") {
     creator.activeTab = "test";
   }
   const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
@@ -839,7 +839,7 @@ test("Update theme in active test/preview tab", (): any => {
     previewBodyCss = options.survey.css.body;
   });
   creator.onSurveyInstanceCreated.add((sender, options) => {
-    if(options.reason === "test") {
+    if (options.reason === "test") {
       instanceBodyCss = options.survey.css.body;
       instanceArea = options.area;
     }
@@ -854,3 +854,44 @@ test("Update theme in active test/preview tab", (): any => {
   expect(instanceArea).toEqual("preview-tab");
 });
 
+test("showResults default behavior", (): any => {
+  const creator: CreatorTester = new CreatorTester();
+  creator.JSON = {
+    questions: [
+      {
+        type: "text",
+        name: "q1",
+      }
+    ]
+  };
+  expect(creator.previewShowResults).toBeTruthy();
+  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
+  testPlugin.activate();
+
+  const model: TestSurveyTabViewModel = testPlugin.model;
+  expect(model.showResults).toBeFalsy();
+
+  model.survey.doComplete();
+  expect(model.showResults).toBeTruthy();
+});
+
+test("showResults with previewShowResults false", (): any => {
+  const creator: CreatorTester = new CreatorTester({ previewShowResults: false });
+  creator.JSON = {
+    questions: [
+      {
+        type: "text",
+        name: "q1",
+      }
+    ]
+  };
+  expect(creator.previewShowResults).toBeFalsy();
+  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
+  testPlugin.activate();
+
+  const model: TestSurveyTabViewModel = testPlugin.model;
+  expect(model.showResults).toBeFalsy();
+
+  model.survey.doComplete();
+  expect(model.showResults).toBeFalsy();
+});

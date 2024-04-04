@@ -180,6 +180,12 @@ export class SurveyCreatorModel extends Base
    * @see showObjectTitles
    */
   @property({ defaultValue: false }) inplaceEditForValues: boolean;
+  /**
+   * Specifies whether to display a table with survey results after completing a survey in the Preview tab.
+   * 
+   * Default value: `true`
+   */
+  @property({ defaultValue: true }) previewShowResults: boolean;
   get allowEditSurveyTitle(): boolean {
     return this.getPropertyValue("allowEditSurveyTitle", true);
   }
@@ -1552,7 +1558,7 @@ export class SurveyCreatorModel extends Base
     parentObj: Base,
     parentProperty: JsonObjectProperty
   ): boolean {
-    if(!property) return false;
+    if (!property) return false;
     const proposedValue = this.readOnly || readOnly;
     if (this.onGetPropertyReadOnly.isEmpty) return proposedValue;
     const options = {
