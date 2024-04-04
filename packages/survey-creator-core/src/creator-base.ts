@@ -181,10 +181,9 @@ export class SurveyCreatorModel extends Base
    */
   @property({ defaultValue: false }) inplaceEditForValues: boolean;
   /**
-   * Allows users to view survey results on preview tab after survey completion.
+   * Specifies whether to display a table with survey results after completing a survey in the Preview tab.
    * 
-   * Default value: `true` (survey results will be shown)
-   * 
+   * Default value: `true`
    */
   @property({ defaultValue: true }) previewShowResults: boolean;
   get allowEditSurveyTitle(): boolean {
