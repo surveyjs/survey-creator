@@ -1,7 +1,6 @@
-import { Base, ITheme, ImageAttachment, ImageFit, ItemValue, JsonObjectProperty, Question, Serializer, property, ILoadFromJSONOptions, JsonObject, IHeader, QuestionCompositeModel } from "survey-core";
+import { Base, ITheme, ImageAttachment, ImageFit, ItemValue, JsonObjectProperty, Question, Serializer, property, ILoadFromJSONOptions, JsonObject, IHeader, QuestionCompositeModel, EventBase } from "survey-core";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { PredefinedColors, PredefinedThemes, Themes } from "./themes";
-import { ThemeEditorModel } from "./theme-builder";
 import { ISurveyCreatorOptions, settings } from "../../creator-settings";
 import { PropertyGridEditor, PropertyGridEditorCollection } from "../../property-grid";
 import { DefaultFonts } from "./theme-custom-questions/font-settings";
@@ -9,6 +8,7 @@ import { HeaderModel } from "./header-model";
 import * as LibraryThemes from "survey-core/themes";
 import { assign, ingectAlpha, parseColor, roundTo2Decimals } from "../../utils/utils";
 import { ISaveToJSONOptions } from "survey-core/typings/base-interfaces";
+import { SurveyCreatorModel } from "src/creator-base";
 export * from "./header-model";
 
 Object.keys(LibraryThemes).forEach(libraryThemeName => {
@@ -21,8 +21,8 @@ Object.keys(LibraryThemes).forEach(libraryThemeName => {
   Themes[creatorThemeName] = creatorTheme;
 });
 
-function getThemeFullName(theme: ITheme) {
-  const themeName = theme.themeName || ThemeEditorModel.DefaultTheme.themeName || "default";
+export function getThemeFullName(theme: ITheme) {
+  const themeName = theme.themeName || ThemeModel.DefaultTheme.themeName || "default";
   let fullThemeName = themeName + "-" + (theme.colorPalette || "light");
   if (theme.isPanelless === true) {
     fullThemeName += "-panelless";
@@ -30,7 +30,7 @@ function getThemeFullName(theme: ITheme) {
   return fullThemeName;
 }
 
-function findSuitableTheme(themeName: string, themePalette: string, themeMode: string, probeThemeFullName: string) {
+export function findSuitableTheme(themeName: string, themePalette: string, themeMode: string, probeThemeFullName: string) {
   let suitableTheme = Themes[probeThemeFullName];
   if (!!suitableTheme) {
     return suitableTheme;
@@ -48,11 +48,11 @@ function findSuitableTheme(themeName: string, themePalette: string, themeMode: s
   if (!!suitableTheme) {
     return suitableTheme;
   }
-  const defaultNearestThemeFullName = getThemeFullName({ themeName: ThemeEditorModel.DefaultTheme.themeName, colorPalette: themePalette || "light", isPanelless: themeMode === "lightweight" });
-  return Themes[defaultNearestThemeFullName] || ThemeEditorModel.DefaultTheme;
+  const defaultNearestThemeFullName = getThemeFullName({ themeName: ThemeModel.DefaultTheme.themeName, colorPalette: themePalette || "light", isPanelless: themeMode === "lightweight" });
+  return Themes[defaultNearestThemeFullName] || ThemeModel.DefaultTheme;
 }
 
-function getObjectDiffs(obj1: any, obj2: any = {}): any {
+export function getObjectDiffs(obj1: any, obj2: any = {}): any {
   const result: any = {};
   Object.keys(obj1).forEach(key => {
     if (typeof obj1[key] === "object") {
@@ -66,7 +66,7 @@ function getObjectDiffs(obj1: any, obj2: any = {}): any {
   return result;
 }
 
-function getThemeChanges(fullTheme: ITheme, baseTheme?: ITheme) {
+export function getThemeChanges(fullTheme: ITheme, baseTheme?: ITheme) {
   if (!baseTheme) {
     let probeThemeFullName = getThemeFullName(fullTheme);
     baseTheme = findSuitableTheme(fullTheme.themeName, fullTheme.colorPalette, fullTheme.isPanelless ? "lightweight" : "panels", probeThemeFullName);
@@ -79,7 +79,7 @@ function getThemeChanges(fullTheme: ITheme, baseTheme?: ITheme) {
       }
     }
   });
-  themeChanges.themeName = baseTheme.themeName || ThemeEditorModel.DefaultTheme.themeName || "default";
+  themeChanges.themeName = baseTheme.themeName || ThemeModel.DefaultTheme.themeName || "default";
   themeChanges.colorPalette = baseTheme.colorPalette || "light";
   themeChanges.isPanelless = !!baseTheme.isPanelless;
   return themeChanges;
@@ -98,22 +98,22 @@ export class ThemeModel extends Base {
   private themeCssVariablesChanges: { [index: string]: string } = {};
 
   @property({
-    onSet: (newValue: string, _target: ThemeEditorModel) => {
+    onSet: (newValue: string, _target: ThemeModel) => {
       // _target.currentTheme.backgroundImage = newValue;
     }
   }) backgroundImage;
   @property({
-    onSet: (newValue: ImageFit, _target: ThemeEditorModel) => {
+    onSet: (newValue: ImageFit, _target: ThemeModel) => {
       // _target.currentTheme.backgroundImageFit = newValue;
     }
   }) backgroundImageFit;
   @property({
-    onSet: (newValue: ImageAttachment, _target: ThemeEditorModel) => {
+    onSet: (newValue: ImageAttachment, _target: ThemeModel) => {
       // _target.currentTheme.backgroundImageAttachment = newValue;
     }
   }) backgroundImageAttachment;
   @property({
-    onSet: (newValue: number, _target: ThemeEditorModel) => {
+    onSet: (newValue: number, _target: ThemeModel) => {
       // _target.currentTheme.backgroundOpacity = newValue / 100;
     }
   }) backgroundOpacity;
@@ -151,6 +151,31 @@ export class ThemeModel extends Base {
   @property() cornerRadius: number;
   @property() commonFontSize: number;
 
+  getFullThemeName(_themeName?: string) {
+    if (this.themePalette === "light") {
+      return _themeName || this.themeName;
+    }
+    return (_themeName || this.themeName) + "-" + this.themePalette;
+  }
+
+  private _defaultSessionTheme = ThemeModel.DefaultTheme;
+  public get defaultSessionTheme() {
+    return this._defaultSessionTheme;
+  }
+  public set defaultSessionTheme(theme: ITheme) {
+    this._defaultSessionTheme = theme;
+  }
+
+  public get cssVariables(): { [index: string]: string} {
+    return this.toJSON()["cssVariables"] || {};
+  }
+
+  public get themeCssCustomizations() {
+    const customizations: { [index: string]: string } = {};
+    assign(customizations, this.themeCssVariablesChanges);
+    return customizations;
+  }
+
   public getType(): string {
     return "themebuilder";
   }
@@ -159,12 +184,235 @@ export class ThemeModel extends Base {
     this.setPropertyValue("header", new HeaderModel());
   }
 
+  // private updatePropertyGridEditors(themeEditorSurvey: SurveyModel) {
+  //   const newCssVariables = {};
+  //   assign(newCssVariables, this.currentTheme.cssVariables);
+  //   this._setPGEditorPropertyValue(themeEditorSurvey.getQuestionByName("backgroundImage"), "value", this.currentTheme.backgroundImage);
+  //   this._setPGEditorPropertyValue(themeEditorSurvey.getQuestionByName("backgroundImageFit"), "value", this.currentTheme.backgroundImageFit);
+  //   this._setPGEditorPropertyValue(themeEditorSurvey.getQuestionByName("backgroundImageAttachment"), "value", this.currentTheme.backgroundImageAttachment);
+  //   this._setPGEditorPropertyValue(themeEditorSurvey.getQuestionByName("backgroundOpacity"), "value", this.currentTheme.backgroundOpacity * 100);
+
+  //   const primaryBackcolor = themeEditorSurvey.getQuestionByName("--sjs-primary-backcolor");
+  //   if (!!primaryBackcolor) {
+  //     this._setPGEditorPropertyValue(themeEditorSurvey.getQuestionByName("generalPrimaryColor"), "value", primaryBackcolor.value);
+  //   }
+
+  //   this.updateHeaderViewContainerEditors(newCssVariables);
+  //   elementSettingsFromCssVariable(themeEditorSurvey.getQuestionByName("questionPanel"), newCssVariables, newCssVariables["--sjs-general-backcolor"], newCssVariables["--sjs-general-backcolor-dark"]);
+  //   elementSettingsFromCssVariable(themeEditorSurvey.getQuestionByName("editorPanel"), newCssVariables, newCssVariables["--sjs-general-backcolor-dim-light"], newCssVariables["--sjs-general-backcolor-dim-dark"]);
+
+  //   fontsettingsFromCssVariable(themeEditorSurvey.getQuestionByName("pageTitle"), newCssVariables, newCssVariables["--sjs-general-dim-forecolor"]);
+  //   fontsettingsFromCssVariable(themeEditorSurvey.getQuestionByName("pageDescription"), newCssVariables, newCssVariables["--sjs-general-dim-forecolor-light"]);
+  //   fontsettingsFromCssVariable(themeEditorSurvey.getQuestionByName("questionTitle"), newCssVariables, newCssVariables["--sjs-general-forecolor"]);
+  //   fontsettingsFromCssVariable(themeEditorSurvey.getQuestionByName("questionDescription"), newCssVariables, newCssVariables["--sjs-general-forecolor-light"]);
+  //   fontsettingsFromCssVariable(themeEditorSurvey.getQuestionByName("editorFont"), newCssVariables, newCssVariables["--sjs-general-forecolor"], newCssVariables["--sjs-general-forecolor-light"]);
+
+  //   if (!!newCssVariables["--sjs-corner-radius"]) {
+  //     this._setPGEditorPropertyValue(themeEditorSurvey.getQuestionByName("cornerRadius"), "value", parseFloat(newCssVariables["--sjs-corner-radius"]));
+  //   }
+  //   if (!!newCssVariables["--sjs-base-unit"]) {
+  //     this._setPGEditorPropertyValue(themeEditorSurvey.getQuestionByName("commonScale"), "value", parseFloat(newCssVariables["--sjs-base-unit"]) * 100 / 8);
+  //   }
+  //   if (!!newCssVariables["--sjs-font-size"]) {
+  //     this._setPGEditorPropertyValue(themeEditorSurvey.getQuestionByName("commonFontSize"), "value", parseFloat(newCssVariables["--sjs-font-size"]) * 100 / 16);
+  //   }
+
+  //   themeEditorSurvey.getAllQuestions().forEach(question => {
+  //     if (["color", "colorsettings"].indexOf(question.getType()) !== -1) {
+  //       (question as any).choices = this.getPredefinedColorsItemValues();
+  //     }
+  //   });
+  // }
+
+  // private updatePropertyGridEditorsAvailability() {
+  //   const isCustomTheme = PredefinedThemes.indexOf(this.themeName) === -1;
+  //   let customThemeHasModeVariations = false;
+  //   let customThemeHasPaletteVariations = false;
+  //   if (isCustomTheme) {
+  //     const registeredThemes = Object.keys(Themes);
+  //     let themeLight = this.themeName + "-light";
+  //     let themeDark = this.themeName + "-dark";
+  //     if (this.themeMode !== "panels") {
+  //       themeLight += "-panelless";
+  //       themeDark += "-panelless";
+  //     }
+  //     customThemeHasPaletteVariations = registeredThemes.indexOf(themeLight) !== -1 && registeredThemes.indexOf(themeDark) !== -1;
+
+  //     let themePanels = this.themeName + "-" + this.themePalette;
+  //     let themePanelless = themePanels + "-panelless";
+  //     customThemeHasModeVariations = registeredThemes.indexOf(themePanels) !== -1 && registeredThemes.indexOf(themePanelless) !== -1;
+  //   }
+  //   this._setPGEditorPropertyValue(this.themeEditorSurvey.getQuestionByName("themeMode"), "readOnly", isCustomTheme && !customThemeHasModeVariations);
+  //   this._setPGEditorPropertyValue(this.themeEditorSurvey.getQuestionByName("themePalette"), "readOnly", isCustomTheme && !customThemeHasPaletteVariations);
+
+  //   let canModify = !this.surveyProvider.readOnly;
+  //   const options = {
+  //     theme: this.currentTheme,
+  //     allow: canModify
+  //   };
+  //   this.onAllowModifyTheme.fire(this, options);
+  //   this.themeEditorSurvey.getAllQuestions().forEach(q => {
+  //     if (["themeName", "themePalette", "themeMode"].indexOf(q.name) === -1) {
+  //       this._setPGEditorPropertyValue(q, "readOnly", !options.allow);
+  //     }
+  //   });
+
+  //   if (!!this.survey) {
+  //     let pageElements = this.survey.isSinglePage ? this.survey.pages[0].elements : this.survey.pages;
+  //     this._setPGEditorPropertyValue(this.themeEditorSurvey.getQuestionByName("pageTitle"), "readOnly", !pageElements.some(p => !!p.title));
+  //     this._setPGEditorPropertyValue(this.themeEditorSurvey.getQuestionByName("pageDescription"), "readOnly", !pageElements.some(p => !!p.description));
+  //   }
+  // }
+
+  // private initializeColorCalculator() {
+  //   if (!this.currentTheme.cssVariables["--sjs-primary-backcolor"] ||
+  //     !this.currentTheme.cssVariables["--sjs-primary-backcolor-light"] ||
+  //     !this.currentTheme.cssVariables["--sjs-primary-backcolor-dark"]) {
+  //     return;
+  //   }
+
+  //   this.colorCalculator.initialize(
+  //     this.currentTheme.cssVariables["--sjs-primary-backcolor"],
+  //     this.currentTheme.cssVariables["--sjs-primary-backcolor-light"],
+  //     this.currentTheme.cssVariables["--sjs-primary-backcolor-dark"]
+  //   );
+  // }
+
+  // private shadowInnerPropertiesChanged(options: ValueChangedEvent) {
+  //   const name = options.name;
+  //   const value = options.value;
+  //   this.themeCssVariablesChanges[name + "-reset"] = createBoxShadowReset(value);
+  //   this.themeModified(options);
+  // }
+  // private cssVariablePropertiesChanged(options: ValueChangedEvent) {
+  //   if (options.name.indexOf("--") === 0) {
+  //     this.setThemeCssVariablesChanges(options.name, options.value, options.question);
+  //   }
+  //   if (options.name == "commonScale") {
+  //     this.survey.triggerResponsiveness(true);
+  //     this.setThemeCssVariablesChanges("--sjs-base-unit", (options.value * 8 / 100) + "px", options.question);
+  //   }
+  //   if (options.name == "commonFontSize") {
+  //     this.setThemeCssVariablesChanges("--sjs-font-size", (options.value * 16 / 100) + "px", options.question);
+  //   }
+  //   if (options.name == "cornerRadius") {
+  //     this.setThemeCssVariablesChanges("--sjs-corner-radius", options.value + "px", options.question);
+  //   }
+  //   if (options.name === "questionBackgroundTransparency" || options.name === "editorPanel") {
+  //     let baseColor = parseColor(this.themeEditorSurvey.getValue("--sjs-general-backcolor-dim-light")).color;
+  //     let questionBackgroundTransparencyValue = this.themeEditorSurvey.getValue("questionBackgroundTransparency");
+  //     this.setThemeCssVariablesChanges("--sjs-editor-background", ingectAlpha(baseColor, questionBackgroundTransparencyValue / 100), options.question);
+  //   }
+  //   if (options.name === "panelBackgroundTransparency" || options.name === "questionPanel") {
+  //     let baseColor = parseColor(this.themeEditorSurvey.getValue("--sjs-general-backcolor")).color;
+  //     let panelBackgroundTransparencyValue = this.themeEditorSurvey.getValue("panelBackgroundTransparency");
+  //     this.setThemeCssVariablesChanges("--sjs-question-background", ingectAlpha(baseColor, panelBackgroundTransparencyValue / 100), options.question);
+  //   }
+  //   if (options.question?.getType() === "fontsettings") {
+  //     fontsettingsToCssVariable(options.question, this.themeCssVariablesChanges);
+  //     this.themeModified(options);
+  //   }
+  //   if (options.question?.getType() === "elementsettings") {
+  //     elementSettingsToCssVariable(options.question, this.themeCssVariablesChanges);
+  //     this.themeModified(options);
+  //   }
+  // }
+  // private updateDependentQuestionValues(options: ValueChangedEvent) {
+  //   if (options.name === "generalPrimaryColor") {
+  //     this.themeEditorSurvey.setValue("--sjs-primary-backcolor", options.value);
+  //     return true;
+  //   }
+  //   if (options.name === "--sjs-primary-backcolor") {
+  //     this.colorCalculator.calculateColors(options.value);
+  //     this.themeEditorSurvey.setValue("--sjs-primary-backcolor-light", this.colorCalculator.colorSettings.newColorLight);
+  //     this.themeEditorSurvey.setValue("--sjs-primary-backcolor-dark", this.colorCalculator.colorSettings.newColorDark);
+  //     this._setPGEditorPropertyValue(this.themeEditorSurvey.getQuestionByName("generalPrimaryColor"), "value", options.value);
+  //     return false;
+  //   }
+  //   return false;
+  // }
+
+  // private setThemeCssVariablesChanges(variableName: string, value: any, question: any) {
+  //   this.themeCssVariablesChanges[variableName] = value;
+  //   this.themeModified({ name: variableName, value: value, question: question } as any);
+  // }
+
+  // private patchFileEditors(survey: SurveyModel) {
+  //   const questionsToPatch = survey.getAllQuestions(false, false, true).filter(q => q.getType() == "fileedit");
+  //   questionsToPatch.forEach(q => {
+  //     (<QuestionFileEditorModel>q).onChooseFilesCallback = (input, callback) => {
+  //       const themePropertyName = q.name;
+  //       let elementType = "theme";
+  //       if (q.parentQuestion) {
+  //         elementType = q.parentQuestion.name === "headerViewContainer" ? "header" : q.parentQuestion.name;
+  //       }
+  //       (q.parentQuestion ? q.parentQuestion.name + "." : "") + q.name;
+  //       this.surveyProvider.chooseFiles(input, callback, { element: this.currentTheme as any, elementType: elementType, propertyName: themePropertyName });
+  //     };
+  //   });
+  // }
+
+  // private loadThemeIntoPropertyGrid() {
+  //   this.blockChanges = true;
+  //   try {
+  //     this.themeEditorSurvey.clear(true);
+  //     this.themeEditorSurvey.mergeData(this.currentTheme.cssVariables);
+  //     this.themeEditorSurvey.setValue("themeName", this.themeName);
+  //     this.themeEditorSurvey.setValue("themeMode", this.themeMode);
+  //     this.themeEditorSurvey.setValue("themePalette", this.themePalette);
+  //     this.updatePropertyGridEditors(this.themeEditorSurvey);
+  //     this.updatePropertyGridEditorsAvailability();
+  //   }
+  //   finally {
+  //     this.blockChanges = false;
+  //   }
+  // }
+
+  private getBackgroundColorSwitchByValue(backgroundColor: string) {
+    if (!backgroundColor) return "accentColor";
+    if (backgroundColor === "transparent") return "none";
+    return "custom";
+  }
+
+  private getPredefinedColorsItemValues() {
+    return Object.keys(PredefinedColors[this.themePalette]).map(colorName =>
+      new ItemValue(PredefinedColors[this.themePalette][colorName], getLocString("theme.colors." + colorName))
+    );
+  }
+
   constructor() {
     super();
     this.setNewHeaderProperty();
     this.themeName = ThemeModel.DefaultTheme.themeName || "default";
     this.loadTheme({ themeName: this.themeName });
   }
+
+  init(surveyProvider: SurveyCreatorModel) {
+    const surveyTheme = surveyProvider.theme;
+    this.backgroundImage = surveyTheme.backgroundImage !== undefined ? surveyTheme.backgroundImage : surveyProvider.survey.backgroundImage;
+    this.backgroundImageFit = surveyTheme.backgroundImageFit !== undefined ? surveyTheme.backgroundImageFit : surveyProvider.survey.backgroundImageFit;
+    this.backgroundImageAttachment = surveyTheme.backgroundImageAttachment !== undefined ? surveyTheme.backgroundImageAttachment : surveyProvider.survey.backgroundImageAttachment;
+    this.backgroundOpacity = ((surveyTheme.backgroundOpacity !== undefined ? surveyTheme.backgroundOpacity : surveyProvider.survey.backgroundOpacity) || 1) * 100;
+    this.loadTheme(surveyTheme);
+    surveyProvider.hasPendingThemeChanges = false;
+  }
+
+  // public get availableThemes() {
+  //   return [].concat(this._availableThemes);
+  // }
+  // public set availableThemes(availebleThemes: string[]) {
+  //   this._availableThemes = availebleThemes || [];
+  //   if (this.themeEditorSurvey) {
+  //     const themeChooser = this.themeEditorSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
+  //     if (!!themeChooser) {
+  //       themeChooser.choices = availebleThemes.map(theme => ({ value: theme, text: getLocString("theme.names." + theme) }));
+  //       if (availebleThemes.indexOf(themeChooser.value) === -1) {
+  //         themeChooser.value = ThemeModel.DefaultTheme.themeName;
+  //       }
+  //     }
+  //     // this.updatePropertyGridEditorsAvailability();
+  //   }
+  // }
 
   public get header(): HeaderModel {
     return this.getPropertyValue("header");
@@ -200,6 +448,12 @@ export class ThemeModel extends Base {
   @property() public questionDescription;
   @property() public editorFont;
 
+  // public onThemeSelected = new EventBase<ThemeModel, { theme: ITheme }>();
+  // public onThemePropertyChanged = new EventBase<ThemeModel, { name: string, value: any }>();
+  // public onAllowModifyTheme = new EventBase<ThemeModel, { theme: ITheme, allow: boolean }>();
+  public onThemeModified = new EventBase<ThemeModel, { theme: ITheme }>();
+
+  private blockThemeChangedNotifications = 0;
   public loadTheme(theme: ITheme) {
     // this.blockThemeChangedNotifications += 1;
     try {
@@ -218,7 +472,7 @@ export class ThemeModel extends Base {
       this.backgroundImageAttachment = theme.backgroundImageAttachment || this.backgroundImageAttachment;
 
       const effectiveThemeCssVariables = {};
-      assign(effectiveThemeCssVariables, ThemeEditorModel.DefaultTheme.cssVariables || {}, baseTheme.cssVariables || {});
+      assign(effectiveThemeCssVariables, ThemeModel.DefaultTheme.cssVariables || {}, baseTheme.cssVariables || {});
       assign(effectiveThemeCssVariables, theme.cssVariables || {}, this.themeCssVariablesChanges);
       trimCssVariables(effectiveThemeCssVariables);
       const effectiveTheme: ITheme = {
@@ -244,6 +498,58 @@ export class ThemeModel extends Base {
     }
   }
 
+  public resetTheme() {
+    this.setTheme({ themeName: this.defaultSessionTheme.themeName, isPanelless: this.defaultSessionTheme.isPanelless, colorPalette: this.defaultSessionTheme.colorPalette });
+  }
+
+  public setTheme(theme: ITheme) {
+    this.iteratePropertiesHash((hash, key) => {
+      hash[key] = undefined;
+    });
+
+    // const headerBackgroundColorValue = this.currentTheme.cssVariables["--sjs-header-backcolor"];
+    this.themeCssVariablesChanges = {};
+    // if (headerBackgroundColorValue !== undefined) {
+    //   this.themeCssVariablesChanges["--sjs-header-backcolor"] = headerBackgroundColorValue;
+    // }
+    this.backgroundImage = "";
+    this.backgroundImageFit = "cover";
+    this.backgroundImageAttachment = "scroll";
+    this.backgroundOpacity = 100;
+    this.loadTheme(theme);
+    // this.themeModified({ theme });
+  }
+
+  public selectTheme(themeName: string, themePalette: string = "light", themeMode: string = "panels") {
+    this.themeName = themeName;
+    this.themePalette = themePalette;
+    this.themeMode = themeMode;
+    const theme = this.findSuitableTheme(themeName);
+    this.setTheme(theme);
+  }
+
+  // private generalPropertiesChanged(options: ValueChangedEvent): boolean {
+  //   if (["themeName", "themeMode", "themePalette"].indexOf(options.name) !== -1) {
+  //     if (options.name === "themeName") {
+  //       this.loadTheme(this.findSuitableTheme(options.value) || { [options.name]: options.value, isPanelless: this.themeMode === "lightweight", colorPalette: this.themePalette });
+  //     }
+  //     if (options.name === "themeMode") {
+  //       this.loadTheme({ themeName: this.themeName, isPanelless: options.value === "lightweight", colorPalette: this.themePalette });
+  //     }
+  //     if (options.name === "themePalette") {
+  //       this.loadTheme({ themeName: this.themeName, isPanelless: this.themeMode === "lightweight", colorPalette: options.value });
+  //     }
+  //     this.themeModified({ theme: this.currentTheme });
+  //     return true;
+  //   }
+  //   if (["backgroundImage", "backgroundImageFit", "backgroundImageAttachment", "backgroundOpacity"].indexOf(options.name) !== -1) {
+  //     this[options.name] = options.value;
+  //     this.themeModified(options);
+  //     return true;
+  //   }
+  //   return false;
+  // }
+
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any): void {
     if (["themeName", "themeMode", "themePalette"].indexOf(name) !== -1) {
       if (name === "themeName") {
@@ -256,6 +562,13 @@ export class ThemeModel extends Base {
         this.loadTheme({ themeName: this.themeName, isPanelless: this.themeMode === "lightweight", colorPalette: newValue });
       }
       // this.themeModified({ theme: this.currentTheme });
+      this.onThemeModified.fire(this, { theme: this.toJSON() });
+    }
+    if (["backgroundImage", "backgroundImageFit", "backgroundImageAttachment", "backgroundOpacity"].indexOf(name) !== -1) {
+      this[name] = newValue;
+      //     this.themeModified(options);
+      //     return true;
+      this.onThemeModified.fire(this, { theme: this.toJSON() });
     }
   }
 

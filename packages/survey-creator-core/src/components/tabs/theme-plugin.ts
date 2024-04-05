@@ -3,13 +3,13 @@ import { settings } from "../../creator-settings";
 import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
 import { editorLocalization, getLocString } from "../../editorLocalization";
-import { ThemeEditorModel, getThemeFullName, getThemeChanges } from "./theme-builder";
+import { ThemeEditorModel } from "./theme-builder";
 import { SidebarTabModel } from "../side-bar/side-bar-tab-model";
 import { PredefinedThemes, Themes } from "./themes";
 import { notShortCircuitAnd, saveToFileHandler } from "../../utils/utils";
 import { PropertyGridModel } from "../../property-grid";
 import { PropertyGridViewModel } from "../../property-grid/property-grid-view-model";
-import { ThemeModel } from "./theme-model";
+import { ThemeModel, getThemeChanges, getThemeFullName } from "./theme-model";
 import { Switcher } from "../switcher/switcher";
 import { themeModelPropertyGridDefinition } from "./theme-model-definition";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
@@ -59,7 +59,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   private advancedModeSwitcher: Action;
   private inputFileElement: HTMLInputElement;
   private simulatorCssClasses: any = surveyCss[defaultV2ThemeName];
-  private sidebarTab: SidebarTabModel;
+  // private sidebarTab: SidebarTabModel;
   private _availableThemes = [].concat(PredefinedThemes);
 
   public propertyGrid: PropertyGridModel;
@@ -117,12 +117,13 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     creator.addPluginTab("theme", this, "ed.themeSurvey");
     this.simulatorCssClasses = surveyCss[defaultV2ThemeName];
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
-    this.sidebarTab = this.creator.sidebar.addTab("theme");
-    this.sidebarTab.caption = editorLocalization.getString("ed.themePropertyGridTitle");
+    // this.sidebarTab = this.creator.sidebar.addTab("theme");
+    // this.sidebarTab.caption = editorLocalization.getString("ed.themePropertyGridTitle");
 
     this.propertyGrid = new PropertyGridModel(undefined, creator, themeModelPropertyGridDefinition);
     const propertyGridViewModel = new PropertyGridViewModel(this.propertyGrid, creator);
-    this.propertyGridTab = this.creator.sidebar.addTab("propertyGrid2", "svc-property-grid", propertyGridViewModel);
+    this.propertyGridTab = this.creator.sidebar.addTab("theme", "svc-property-grid", propertyGridViewModel);
+    this.propertyGridTab.caption = editorLocalization.getString("ed.themePropertyGridTitle");
     this.themeModel = new ThemeModel();
 
     creator.registerShortcut("undo_theme", {
@@ -152,8 +153,8 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   }
   public activate(): void {
     this.model = new ThemeEditorModel(this.creator, this.simulatorCssClasses);
+    this.themeModel.init(this.creator);
     this.update();
-    // this.propertyGrid.obj = this.model;
     this.propertyGrid.obj = this.themeModel;
     this.propertyGrid.survey.setVariable("advancedmode", false);
     const themeBuilderCss = { ...propertyGridCss };
@@ -182,26 +183,26 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       }
     });
 
-    if (!!this.model.themeEditorSurvey) {
-      const options = <IPropertyGridSurveyCreatedEvent>{
-        survey: this.model.themeEditorSurvey,
-        model: this.model,
-      };
-      this.onPropertyGridSurveyCreated.fire(this, options);
-    }
-    this.sidebarTab.model = this.model.themeEditorSurvey;
-    this.sidebarTab.componentName = "survey-widget";
-    this.creator.sidebar.activeTab = this.sidebarTab.id;
+    // if (!!this.model.themeEditorSurvey) {
+    //   const options = <IPropertyGridSurveyCreatedEvent>{
+    //     survey: this.model.themeEditorSurvey,
+    //     model: this.model,
+    //   };
+    //   this.onPropertyGridSurveyCreated.fire(this, options);
+    // }
+    // this.sidebarTab.model = this.model.themeEditorSurvey;
+    // this.sidebarTab.componentName = "survey-widget";
+    // this.creator.sidebar.activeTab = this.sidebarTab.id;
 
     this.propertyGridTab.visible = true;
-    this.sidebarTab.visible = !this.propertyGridTab.visible;
+    // this.sidebarTab.visible = !this.propertyGridTab.visible;
   }
   public update(): void {
     if (!this.model) return;
-    this.model.availableThemes = this.availableThemes;
+    // this.model.availableThemes = this.availableThemes;
     this.model.simulator.landscape = this.creator.previewOrientation != "portrait";
     this.model.testAgainAction = this.testAgainAction;
-    this.model.availableThemes = this.availableThemes;
+    // this.model.availableThemes = this.availableThemes;
     this.model.prevPageAction = this.prevPageAction;
     this.model.nextPageAction = this.nextPageAction;
     const options = {
@@ -226,33 +227,40 @@ export class ThemeTabPlugin implements ICreatorPlugin {
         this.testAgainAction.visible = !this.model.isRunning;
       }
     });
-    this.model.onThemeSelected.add((sender, options) => {
+    this.themeModel.onThemeModified.add((sender, options) => {
+      this.themeModified(options);
+    });
+    /*
+    this.themeModel.onThemeSelected.add((sender, options) => {
       this.resetTheme.enabled = getThemeFullName(sender.defaultSessionTheme) !== getThemeFullName(options.theme);
       this.saveThemeAction.enabled = true;
       this.onThemeSelected.fire(this, options);
     });
-    this.model.onThemePropertyChanged.add((sender, options) => {
+    this.themeModel.onThemePropertyChanged.add((sender, options) => {
       this.resetTheme.enabled = true;
       this.saveThemeAction.enabled = true;
       this.onThemePropertyChanged.fire(this, options);
     });
-    this.model.onAllowModifyTheme.add((sender, options) => {
+    this.themeModel.onAllowModifyTheme.add((sender, options) => {
       this.onAllowModifyTheme.fire(this, options);
     });
-    this.resetTheme.enabled = getThemeFullName(this.model.defaultSessionTheme) !== getThemeFullName(this.creator.theme) || this.isModified;
+    */
+    this.resetTheme.enabled = getThemeFullName(this.themeModel.defaultSessionTheme) !== getThemeFullName(this.creator.theme) || this.isModified;
   }
   public deactivate(): boolean {
     if (this.model) {
       this.simulatorCssClasses = this.model.simulator.survey.css;
       this.model.onPropertyChanged.clear();
-      this.model.onThemeSelected.clear();
-      this.model.onThemePropertyChanged.clear();
-      this.model.onAllowModifyTheme.clear();
+      this.themeModel.onThemeModified.clear();
+      // this.themeModel.onThemeSelected.clear();
+      // this.themeModel.onThemePropertyChanged.clear();
+      // this.themeModel.onAllowModifyTheme.clear();
       this.model.onSurveyCreatedCallback = undefined;
       this.model.dispose();
       this.model = undefined;
     }
-    this.sidebarTab.visible = false;
+    // this.sidebarTab.visible = false;
+    this.propertyGridTab.visible = false;
     this.testAgainAction.visible = false;
     this.invisibleToggleAction && (this.invisibleToggleAction.visible = false);
     return true;
@@ -270,8 +278,8 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     let fileReader = new FileReader();
     fileReader.onload = (e) => {
       const theme: ITheme = JSON.parse(fileReader.result as string);
-      if (!!this.model) {
-        this.model.setTheme(theme);
+      if (!!this.themeModel) {
+        this.themeModel.setTheme(theme);
       }
       callback && callback(theme);
     };
@@ -371,7 +379,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       action: () => {
         surveySettings.confirmActionAsync(getLocString("ed.themeResetConfirmation"), (confirm) => {
           if (confirm) {
-            this.model.resetTheme();
+            this.themeModel.resetTheme();
           }
         }, getLocString("ed.themeResetConfirmationOk"), editorLocalization.currentLocale);
       }
@@ -488,6 +496,67 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.creator.footerToolbar.actions.push(this.themeSettingsAction);
   }
 
+  private updateSimulatorTheme() {
+    if (!!this.model.survey) {
+      this.model.survey.applyTheme(this.themeModel.toJSON());
+    }
+  }
+
+  private _saveThemeFuncValue: (
+    no: number,
+    onSaveCallback: (no: number, isSuccess: boolean) => void
+  ) => void;
+  /**
+   * A function that is called [auto-save](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#isAutoSave) is triggered to save a theme JSON object.
+   * 
+   * For more information, refer to the [Save and Load Custom Themes](https://surveyjs.io/survey-creator/documentation/theme-editor#save-and-load-custom-themes) help topic.
+   */
+  public get saveThemeFunc() {
+    return this._saveThemeFuncValue;
+  }
+  public set saveThemeFunc(value: any) {
+    this._saveThemeFuncValue = value;
+  }
+
+  private autoSaveTimerId = null;
+  protected processAutoSave() {
+    let saveThemeFunc = this.saveThemeFunc;
+    if (!saveThemeFunc && this.creator.saveThemeFunc) {
+      saveThemeFunc = () => this.creator.saveTheme();
+    }
+    if (!saveThemeFunc) {
+      return;
+    }
+    if (this.creator.autoSaveDelay <= 0) {
+      saveThemeFunc();
+      return;
+    }
+    if (!!this.autoSaveTimerId) {
+      clearTimeout(this.autoSaveTimerId);
+    }
+    this.autoSaveTimerId = setTimeout(() => {
+      clearTimeout(this.autoSaveTimerId);
+      this.autoSaveTimerId = null;
+      saveThemeFunc && saveThemeFunc();
+    }, this.creator.autoSaveDelay);
+  }
+  protected themeModified(options: { theme: ITheme } | { name: string, value: any }) {
+    this.updateSimulatorTheme();
+    // if (this.blockThemeChangedNotifications == 0) {
+    if (!!options["theme"]) {
+      // this.themeModel.onThemeSelected.fire(this.themeModel, options as { theme: ITheme });
+      this.onThemeSelected.fire(this, options as { theme: ITheme });
+    } else {
+      this.creator.hasPendingThemeChanges = true;
+      // this.themeModel.onThemePropertyChanged.fire(this.themeModel, options as { name: string, value: any });
+      this.onThemePropertyChanged.fire(this, options as { name: string, value: any });
+    }
+    if (this.creator.isAutoSave) {
+      this.processAutoSave();
+    }
+    // }
+  }
+
   /**
    * A list of UI themes from which users can select. You can sort this list if you want to reorder themes in Theme Editor.
    * @see addTheme
@@ -498,9 +567,9 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   }
   public set availableThemes(availableThemes: string[]) {
     this._availableThemes = availableThemes || [];
-    if (!!this.model) {
-      this.model.availableThemes = availableThemes;
-    }
+    // if (!!this.model) {
+    //   this.model.availableThemes = availableThemes;
+    // }
   }
 
   /**
@@ -517,7 +586,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     if (this._availableThemes.indexOf(theme.themeName) === -1) {
       if (setAsDefault) {
         this.availableThemes = [theme.themeName].concat(this.availableThemes);
-        ThemeEditorModel.DefaultTheme = theme;
+        ThemeModel.DefaultTheme = theme;
       } else {
         this.availableThemes = this.availableThemes.concat([theme.themeName]);
       }
@@ -539,8 +608,8 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     const fullThemeName = typeof themeAccessor === "string" ? themeAccessor : getThemeFullName(themeToDelete);
     if (!!themeToDelete) {
       delete Themes[fullThemeName];
-      if (ThemeEditorModel.DefaultTheme === themeToDelete) {
-        ThemeEditorModel.DefaultTheme = Themes["default-light"] || Themes[Object.keys(Themes)[0]];
+      if (ThemeModel.DefaultTheme === themeToDelete) {
+        ThemeModel.DefaultTheme = Themes["default-light"] || Themes[Object.keys(Themes)[0]];
       }
       const registeredThemeNames = Object.keys(Themes);
       let themeModifications = registeredThemeNames.filter(themeName => themeName.indexOf(themeToDelete.themeName + "-") === 0);

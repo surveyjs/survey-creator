@@ -8,6 +8,116 @@ import { themeModelPropertyGridDefinition } from "./theme-model-definition";
 export class HeaderModel extends Base {
   // @property() themePalette: string;
 
+  // private updateVisibilityOfPropertyGridGroups() {
+  //   const page = this.themeEditorSurvey.pages[0];
+  //   page.getElementByName("groupHeader").visible = this.surveyProvider.isMobileView ? false : settings.theme.allowEditHeaderSettings;
+  //   if (this.advancedModeSwitcher) {
+  //     this.advancedModeSwitcher.visible = !this.surveyProvider.isMobileView;
+  //   }
+  // }
+  // private setCoverPropertiesFromSurvey(panel, themeCssVariables: { [index: string]: string }) {
+  //   this._setPGEditorPropertyValue(panel.getQuestionByName("headerTitle"), "readOnly", !this.survey.hasTitle);
+  //   this._setPGEditorPropertyValue(panel.getQuestionByName("headerDescription"), "readOnly", !this.survey.hasDescription);
+
+  //   this._setPGEditorPropertyValue(panel.getQuestionByName("headerView"), "value", this.survey.headerView);
+  //   this._setPGEditorPropertyValue(panel.getQuestionByName("logoPosition"), "value", this.survey.logoPosition);
+
+  //   this._setPGEditorPropertyValue(panel.getQuestionByName("logoPositionX"), "readOnly", !this.survey.logo);
+  //   this._setPGEditorPropertyValue(panel.getQuestionByName("logoPositionY"), "readOnly", !this.survey.logo);
+  //   this._setPGEditorPropertyValue(panel.getQuestionByName("logoPosition"), "readOnly", !this.survey.logo);
+
+  //   this._setPGEditorPropertyValue(panel.getQuestionByName("titlePositionX"), "readOnly", !this.survey.title);
+  //   this._setPGEditorPropertyValue(panel.getQuestionByName("titlePositionY"), "readOnly", !this.survey.title);
+
+  //   this._setPGEditorPropertyValue(panel.getQuestionByName("descriptionPositionX"), "readOnly", !this.survey.description);
+  //   this._setPGEditorPropertyValue(panel.getQuestionByName("descriptionPositionY"), "readOnly", !this.survey.description);
+  // }
+  // private setCoverColorsFromThemeVariables(question: Question, cssVariable: string) {
+  //   if (!!question && !!cssVariable && cssVariable !== "transparent") {
+  //     question.value = cssVariable;
+  //   }
+  // }
+  // private updateHeaderViewContainerEditors(themeCssVariables: { [index: string]: string }) {
+  //   this.updateVisibilityOfPropertyGridGroups();
+
+  //   const headerViewContainerQuestion = this.themeEditorSurvey.getQuestionByName("headerViewContainer");
+  //   if (!headerViewContainerQuestion) return;
+
+  //   const panel = headerViewContainerQuestion.panels[0];
+  //   panel.getQuestionByName("backgroundColor").choices = this.getPredefinedColorsItemValues();
+
+  //   if (!!this.survey) {
+  //     this.setCoverPropertiesFromSurvey(panel, themeCssVariables);
+  //     this._setPGEditorPropertyValue(panel.getQuestionByName("surveyTitle"), "readOnly", !this.survey.hasTitle);
+  //     fontsettingsFromCssVariable(panel.getQuestionByName("surveyTitle"), themeCssVariables);
+  //     this._setPGEditorPropertyValue(panel.getQuestionByName("surveyDescription"), "readOnly", !this.survey.hasDescription);
+  //     fontsettingsFromCssVariable(panel.getQuestionByName("surveyDescription"), themeCssVariables);
+
+  //     fontsettingsFromCssVariable(panel.getElementByName("surveyTitle"), this.themeCssVariablesChanges);
+  //     fontsettingsFromCssVariable(panel.getElementByName("surveyDescription"), this.themeCssVariablesChanges);
+  //     fontsettingsFromCssVariable(panel.getElementByName("headerTitle"), this.themeCssVariablesChanges);
+  //     fontsettingsFromCssVariable(panel.getElementByName("headerDescription"), this.themeCssVariablesChanges);
+  //   }
+
+  //   if (!!this.currentTheme.header) {
+  //     Object.keys(this.currentTheme.header).forEach(key => {
+  //       const question = panel.getQuestionByName(key);
+  //       if (key === "backgroundImageOpacity") {
+  //         this._setPGEditorPropertyValue(question, "value", this.currentTheme.header[key] * 100);
+  //       } else {
+  //         this._setPGEditorPropertyValue(question, "value", this.currentTheme.header[key]);
+  //       }
+  //     });
+  //     this.setCoverColorsFromThemeVariables(panel.getQuestionByName("backgroundColor"), themeCssVariables["--sjs-header-backcolor"]);
+
+  //     const backgroundColorValue = themeCssVariables["--sjs-header-backcolor"];
+  //     if (!!backgroundColorValue) {
+  //       this._setPGEditorPropertyValue(panel.getQuestionByName("backgroundColorSwitch"), "value", this.getBackgroundColorSwitchByValue(backgroundColorValue));
+  //     }
+  //   }
+  // }
+
+  // private headerViewContainerPropertiesChanged(options: ValueChangedEvent) {
+  //   const headerSettings = options.value[0];
+  //   this.survey.headerView = headerSettings["headerView"];
+  //   this.surveyProvider.survey.headerView = headerSettings["headerView"];
+  //   if (headerSettings["headerView"] === "basic") {
+  //     this.survey.logoPosition = headerSettings["logoPosition"];
+  //     this.surveyProvider.survey.logoPosition = headerSettings["logoPosition"];
+  //     fontsettingsToCssVariable(options.question.panels[0].getElementByName("surveyTitle"), this.themeCssVariablesChanges);
+  //     fontsettingsToCssVariable(options.question.panels[0].getElementByName("surveyDescription"), this.themeCssVariablesChanges);
+  //   } else {
+  //     this.currentTheme.header = this.getCoverJson(headerSettings);
+  //     this.setHeaderBackgroundColorCssVariable(headerSettings);
+  //     fontsettingsToCssVariable(options.question.panels[0].getElementByName("headerTitle"), this.themeCssVariablesChanges);
+  //     fontsettingsToCssVariable(options.question.panels[0].getElementByName("headerDescription"), this.themeCssVariablesChanges);
+  //   }
+  //   this.currentTheme.headerView = headerSettings["headerView"];
+  //   this.themeModified(options);
+  // }
+
+  // private getCoverJson(headerSettings: any): any {
+  //   const result = {};
+  //   Serializer.getProperties("cover").map(pr => pr.name)
+  //     .filter(key => headerSettings[key] !== undefined && headerSettings[key] !== null)
+  //     .forEach(key => {
+  //       result[key] = headerSettings[key];
+  //     });
+
+  //   result["backgroundImageOpacity"] = headerSettings["backgroundImageOpacity"] / 100;
+  //   return result;
+  // }
+
+  // private setHeaderBackgroundColorCssVariable(headerSettings: any) {
+  //   let headerBackgroundColorValue = undefined;
+  //   if (headerSettings["backgroundColorSwitch"] === "none") {
+  //     headerBackgroundColorValue = "transparent";
+  //   } else if (headerSettings["backgroundColorSwitch"] === "custom") {
+  //     headerBackgroundColorValue = headerSettings.backgroundColor ?? "transparent";
+  //   }
+  //   this.themeCssVariablesChanges["--sjs-header-backcolor"] = headerBackgroundColorValue;
+  // }
+
   public getType(): string {
     return "headersettings";
   }

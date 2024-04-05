@@ -90,30 +90,6 @@ test("assign function", (): any => {
   expect(result).toStrictEqual({});
 });
 
-test("Theme builder initialization", (): any => {
-  // const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-  // creator.JSON = { questions: [{ type: "text", name: "q1" }] };
-  // const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
-  // themePlugin.activate();
-  // const themeSurveyTab = themePlugin.model as ThemeModel;
-  const themeEditor = new ThemeModel();
-
-  expect(themeEditor.themeName).toEqual("default");
-  expect(themeEditor.themeMode).toEqual("panels");
-  expect(themeEditor.themePalette).toEqual("light");
-  expect(themeEditor.backgroundImage).toEqual(undefined);
-  expect(themeEditor.backgroundImageFit).toEqual("cover");
-  expect(themeEditor.backgroundOpacity).toEqual(100);
-  expect(themeEditor.panelBackgroundTransparency).toEqual(100);
-  expect(themeEditor.questionBackgroundTransparency).toEqual(100);
-  expect(themeEditor.commonScale).toEqual(100);
-  expect(themeEditor.cornerRadius).toEqual(4);
-
-  // const colorQuestions = themeEditor.getAllQuestions().filter(q => q.getType() === "color");
-  // expect(colorQuestions[0].choices.length).toEqual(7);
-  // expect(colorQuestions[0].choices.map(c => c.value)).toStrictEqual(Object.keys(PredefinedColors.light).map(key => PredefinedColors.light[key]));
-});
-
 test("Theme model de/serialization", (): any => {
   const themeEditor = new ThemeModel();
   const themeJson = {
@@ -229,28 +205,25 @@ test("Theme builder: composite question fontSettings", (): any => {
   const themeModel = new ThemeModel();
   expect(themeModel.questionTitle).toStrictEqual({ family: "Open Sans", color: "rgba(0, 0, 0, 0.91)", weight: "600", size: 16 });
 
-  let themeModelJSONCssVariables = themeModel.toJSON()["cssVariables"] || {};
-  expect(themeModelJSONCssVariables["--sjs-questiontitle-family"]).toBeUndefined();
-  expect(themeModelJSONCssVariables["--sjs-questiontitle-weight"]).toBeUndefined();
-  expect(themeModelJSONCssVariables["--sjs-questiontitle-color"]).toBeUndefined();
-  expect(themeModelJSONCssVariables["--sjs-questiontitle-size"]).toBeUndefined();
+  expect(themeModel.cssVariables["--sjs-questiontitle-family"]).toBeUndefined();
+  expect(themeModel.cssVariables["--sjs-questiontitle-weight"]).toBeUndefined();
+  expect(themeModel.cssVariables["--sjs-questiontitle-color"]).toBeUndefined();
+  expect(themeModel.cssVariables["--sjs-questiontitle-size"]).toBeUndefined();
 
   themeModel.questionTitle = { family: "Arial, sans-serif", weight: "500", size: 40 };
-  themeModelJSONCssVariables = themeModel.toJSON()["cssVariables"] || {};
 
-  //expect(themeModelJSONCssVariables["--sjs-font-questiontitle-family"]).toEqual("Arial, sans-serif");
-  expect(themeModelJSONCssVariables["--sjs-questiontitle-family"]).toEqual("Arial, sans-serif");
-  expect(themeModelJSONCssVariables["--sjs-questiontitle-weight"]).toEqual("500");
-  expect(themeModelJSONCssVariables["--sjs-questiontitle-color"]).toBeUndefined();
-  expect(themeModelJSONCssVariables["--sjs-questiontitle-size"]).toEqual("40px");
+  //expect(themeModel.cssVariables["--sjs-font-questiontitle-family"]).toEqual("Arial, sans-serif");
+  expect(themeModel.cssVariables["--sjs-questiontitle-family"]).toEqual("Arial, sans-serif");
+  expect(themeModel.cssVariables["--sjs-questiontitle-weight"]).toEqual("500");
+  expect(themeModel.cssVariables["--sjs-questiontitle-color"]).toBeUndefined();
+  expect(themeModel.cssVariables["--sjs-questiontitle-size"]).toEqual("40px");
 
   themeModel.questionTitle = { family: "Open Sans", color: "rgba(0, 0, 0, 0.91)", weight: "600", size: 16 };
-  themeModelJSONCssVariables = themeModel.toJSON()["cssVariables"] || {};
 
-  expect(themeModelJSONCssVariables["--sjs-questiontitle-family"]).toBeUndefined();
-  expect(themeModelJSONCssVariables["--sjs-questiontitle-weight"]).toBeUndefined();
-  expect(themeModelJSONCssVariables["--sjs-questiontitle-color"]).toBeUndefined();
-  expect(themeModelJSONCssVariables["--sjs-questiontitle-size"]).toBeUndefined();
+  expect(themeModel.cssVariables["--sjs-questiontitle-family"]).toBeUndefined();
+  expect(themeModel.cssVariables["--sjs-questiontitle-weight"]).toBeUndefined();
+  expect(themeModel.cssVariables["--sjs-questiontitle-color"]).toBeUndefined();
+  expect(themeModel.cssVariables["--sjs-questiontitle-size"]).toBeUndefined();
 });
 
 // test("Theme builder: composite question values are lost", (): any => {
@@ -263,149 +236,123 @@ test("Theme builder: composite question fontSettings", (): any => {
 //   const questionTitleFontSettings = themeEditor.getQuestionByName("questionTitle");
 //   const pageTitleFontSettings = themeEditor.getQuestionByName("pageTitle");
 
-//   expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-questiontitle-family"]).toBeUndefined();
-//   expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-questiontitle-weight"]).toBeUndefined();
-//   expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-questiontitle-color"]).toBeUndefined();
-//   expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-questiontitle-size"]).toBeUndefined();
-//   expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-pagetitle-family"]).toBeUndefined();
-//   expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-pagetitle-weight"]).toBeUndefined();
-//   expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-pagetitle-color"]).toBeUndefined();
-//   expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-pagetitle-size"]).toBeUndefined();
+//   expect(themeModel.cssVariables["--sjs-font-questiontitle-family"]).toBeUndefined();
+//   expect(themeModel.cssVariables["--sjs-font-questiontitle-weight"]).toBeUndefined();
+//   expect(themeModel.cssVariables["--sjs-font-questiontitle-color"]).toBeUndefined();
+//   expect(themeModel.cssVariables["--sjs-font-questiontitle-size"]).toBeUndefined();
+//   expect(themeModel.cssVariables["--sjs-font-pagetitle-family"]).toBeUndefined();
+//   expect(themeModel.cssVariables["--sjs-font-pagetitle-weight"]).toBeUndefined();
+//   expect(themeModel.cssVariables["--sjs-font-pagetitle-color"]).toBeUndefined();
+//   expect(themeModel.cssVariables["--sjs-font-pagetitle-size"]).toBeUndefined();
 
 //   questionTitleFontSettings.value = { family: "Arial, sans-serif", weight: "semiBold", color: "#fefefe", size: 40 };
 
-//   expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-questiontitle-family"]).toEqual("Arial, sans-serif");
-//   expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-questiontitle-weight"]).toEqual("semiBold");
-//   expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-questiontitle-color"]).toEqual("rgba(254, 254, 254, 1)");
-//   expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-questiontitle-size"]).toEqual("40px");
-//   expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-pagetitle-family"]).toBeUndefined();
-//   expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-pagetitle-weight"]).toBeUndefined();
-//   expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-pagetitle-color"]).toBeUndefined();
-//   expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-pagetitle-size"]).toBeUndefined();
+//   expect(themeModel.cssVariables["--sjs-font-questiontitle-family"]).toEqual("Arial, sans-serif");
+//   expect(themeModel.cssVariables["--sjs-font-questiontitle-weight"]).toEqual("semiBold");
+//   expect(themeModel.cssVariables["--sjs-font-questiontitle-color"]).toEqual("rgba(254, 254, 254, 1)");
+//   expect(themeModel.cssVariables["--sjs-font-questiontitle-size"]).toEqual("40px");
+//   expect(themeModel.cssVariables["--sjs-font-pagetitle-family"]).toBeUndefined();
+//   expect(themeModel.cssVariables["--sjs-font-pagetitle-weight"]).toBeUndefined();
+//   expect(themeModel.cssVariables["--sjs-font-pagetitle-color"]).toBeUndefined();
+//   expect(themeModel.cssVariables["--sjs-font-pagetitle-size"]).toBeUndefined();
 
 //   pageTitleFontSettings.value = { family: "Arial, sans-serif", weight: "semiBold", color: "#101010", size: 28 };
 
-//   expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-questiontitle-family"]).toEqual("Arial, sans-serif");
-//   expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-questiontitle-weight"]).toEqual("semiBold");
-//   expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-questiontitle-color"]).toEqual("rgba(254, 254, 254, 1)");
-//   expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-questiontitle-size"]).toEqual("40px");
-//   expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-pagetitle-family"]).toEqual("Arial, sans-serif");
-//   expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-pagetitle-weight"]).toEqual("semiBold");
-//   expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-pagetitle-color"]).toEqual("rgba(16, 16, 16, 1)");
-//   expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-pagetitle-size"]).toEqual("28px");
+//   expect(themeModel.cssVariables["--sjs-font-questiontitle-family"]).toEqual("Arial, sans-serif");
+//   expect(themeModel.cssVariables["--sjs-font-questiontitle-weight"]).toEqual("semiBold");
+//   expect(themeModel.cssVariables["--sjs-font-questiontitle-color"]).toEqual("rgba(254, 254, 254, 1)");
+//   expect(themeModel.cssVariables["--sjs-font-questiontitle-size"]).toEqual("40px");
+//   expect(themeModel.cssVariables["--sjs-font-pagetitle-family"]).toEqual("Arial, sans-serif");
+//   expect(themeModel.cssVariables["--sjs-font-pagetitle-weight"]).toEqual("semiBold");
+//   expect(themeModel.cssVariables["--sjs-font-pagetitle-color"]).toEqual("rgba(16, 16, 16, 1)");
+//   expect(themeModel.cssVariables["--sjs-font-pagetitle-size"]).toEqual("28px");
 // });
 
 test("Theme builder: composite question elementSettings", (): any => {
   const themeModel = new ThemeModel();
   expect(themeModel.questionPanel).toStrictEqual({ "backcolor": "rgba(255, 255, 255, 1)", "hovercolor": "rgba(248, 248, 248, 1)", cornerRadius: 4 });
 
-  let themeModelJSONCssVariables = themeModel.toJSON()["cssVariables"] || {};
-  expect(themeModelJSONCssVariables["--sjs-questionpanel-backcolor"]).toBeUndefined();
-  expect(themeModelJSONCssVariables["--sjs-questionpanel-hovercolor"]).toBeUndefined();
-  expect(themeModelJSONCssVariables["--sjs-questionpanel-cornerRadius"]).toBeUndefined();
+  expect(themeModel.cssVariables["--sjs-questionpanel-backcolor"]).toBeUndefined();
+  expect(themeModel.cssVariables["--sjs-questionpanel-hovercolor"]).toBeUndefined();
+  expect(themeModel.cssVariables["--sjs-questionpanel-cornerRadius"]).toBeUndefined();
 
   themeModel.questionPanel = { backcolor: "#ff44ff", hovercolor: "#969696", cornerRadius: 5 };
 
-  themeModelJSONCssVariables = themeModel.toJSON()["cssVariables"] || {};
-  expect(themeModelJSONCssVariables["--sjs-questionpanel-backcolor"]).toEqual("#ff44ff");
-  expect(themeModelJSONCssVariables["--sjs-questionpanel-hovercolor"]).toEqual("#969696");
-  expect(themeModelJSONCssVariables["--sjs-questionpanel-cornerRadius"]).toEqual("5px");
+  expect(themeModel.cssVariables["--sjs-questionpanel-backcolor"]).toEqual("#ff44ff");
+  expect(themeModel.cssVariables["--sjs-questionpanel-hovercolor"]).toEqual("#969696");
+  expect(themeModel.cssVariables["--sjs-questionpanel-cornerRadius"]).toEqual("5px");
 });
 
-// test("Theme builder reset to default", (): any => {
-//   const themeModel = new ThemeModel();
-//   const questionBackgroundTransparency = themeEditor.getQuestionByName("questionBackgroundTransparency");
+test("Theme builder reset to default", (): any => {
+  const themeModel = new ThemeModel();
+  expect(themeModel.questionBackgroundTransparency).toEqual(100);
 
-//   expect(questionBackgroundTransparency.value).toEqual(100);
-//   expect(themeSurveyTab.currentThemeCssVariables["--sjs-editor-background"]).toBeUndefined();
+  expect(themeModel.cssVariables["--sjs-editorpanel-backcolor"]).toBeUndefined();
 
-//   questionBackgroundTransparency.value = 60;
-//   themeEditor.getQuestionByName("editorPanel").contentPanel.getQuestionByName("backcolor").value = "#f7f7f7";
-//   expect(themeSurveyTab.currentThemeCssVariables["--sjs-editor-background"]).toEqual("rgba(247, 247, 247, 0.6)");
+  themeModel.questionBackgroundTransparency = 60;
 
-//   themeSurveyTab.resetTheme();
-//   expect(themeSurveyTab.currentThemeCssVariables["--sjs-editor-background"]).toBeUndefined();// rgba(249, 249, 249, 1)
-// });
+  expect(themeModel.cssVariables["--sjs-editorpanel-backcolor"]).toEqual("rgba(255, 255, 255, 0.6)");
 
-// test("Theme builder themeMode not change modified values ", (): any => {
-//   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-//   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
-//   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
-//   themePlugin.activate();
-//   const themeSurveyTab = themePlugin.model as ThemeEditorModel;
-//   const themeEditor = themeSurveyTab.themeEditorSurvey;
-//   const themeMode = themeEditor.getQuestionByName("themeMode");
-//   const questionBackgroundTransparency = themeEditor.getQuestionByName("questionBackgroundTransparency");
+  themeModel.resetTheme();
 
-//   expect(questionBackgroundTransparency.value).toEqual(100);
-//   expect(themeSurveyTab.currentThemeCssVariables["--sjs-editor-background"]).toBeUndefined();
+  expect(themeModel.cssVariables["--sjs-editorpanel-backcolor"]).toBeUndefined();
+});
 
-//   questionBackgroundTransparency.value = 60;
-//   themeEditor.getQuestionByName("editorPanel").contentPanel.getQuestionByName("backcolor").value = "#f7f7f7";
-//   expect(themeSurveyTab.currentThemeCssVariables["--sjs-editor-background"]).toEqual("rgba(247, 247, 247, 0.6)");
-//   expect(themeMode.value).toEqual("panels");
+test("Theme builder themeMode not change modified values ", (): any => {
+  const themeModel = new ThemeModel();
+  expect(themeModel.questionBackgroundTransparency).toEqual(100);
 
-//   themeMode.value = "lightweight";
-//   expect(themeSurveyTab.currentThemeCssVariables["--sjs-editor-background"]).toEqual("rgba(247, 247, 247, 0.6)");
-// });
+  expect(themeModel.cssVariables["--sjs-editorpanel-backcolor"]).toBeUndefined();
 
-// test("Theme builder export value from composite question", (): any => {
-//   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-//   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
-//   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
-//   themePlugin.activate();
-//   const themeSurveyTab = themePlugin.model as ThemeEditorModel;
-//   const themeEditor = themeSurveyTab.themeEditorSurvey;
-//   const questionDimLightBackground = themeEditor.getQuestionByName("--sjs-general-backcolor-dim-light");
+  themeModel.questionBackgroundTransparency = 60;
 
-//   expect(questionDimLightBackground.value).toEqual("rgba(249, 249, 249, 1)");
-//   expect(themeEditor.getQuestionByName("editorPanel").contentPanel.getQuestionByName("backcolor").value).toBe("rgba(249, 249, 249, 1)");
-//   expect(themeSurveyTab.currentThemeCssVariables["--sjs-general-backcolor-dim-light"]).toBe("rgba(249, 249, 249, 1)");
+  expect(themeModel.cssVariables["--sjs-editorpanel-backcolor"]).toEqual("rgba(255, 255, 255, 0.6)");
+  expect(themeModel.themeMode).toEqual("panels");
 
-//   themeEditor.getQuestionByName("themeName").value = "contrast";
-//   expect(questionDimLightBackground.value).toEqual("rgba(255, 216, 77, 1)");
-//   expect(themeEditor.getQuestionByName("editorPanel").contentPanel.getQuestionByName("backcolor").value).toBe("rgba(255, 216, 77, 1)");
-//   expect(themeSurveyTab.currentThemeCssVariables["--sjs-general-backcolor-dim-light"]).toBe("rgba(255, 216, 77, 1)");
-// });
+  themeModel.themeMode = "lightweight";
+  expect(themeModel.questionBackgroundTransparency).toEqual(60);
 
-// test("import theme from file", (done) => {
-//   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-//   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
-//   creator.isAutoSave = true;
-//   creator.autoSaveDelay = 0;
-//   let saveThemeCount = 0;
-//   creator.saveThemeFunc = (saveNo, callback) => {
-//     saveThemeCount++;
-//     callback(saveNo, "success");
-//   };
-//   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
-//   themePlugin.activate();
-//   const themeBuilder = themePlugin.model as ThemeEditorModel;
-//   const themeEditor = themeBuilder.themeEditorSurvey;
+  expect(themeModel.cssVariables["--sjs-editorpanel-backcolor"]).toEqual("rgba(255, 255, 255, 0.6)");
+});
 
-//   const data = JSON.stringify({
-//     "cssVariables": {
-//       "--sjs-general-backcolor": "rgba(150, 150, 255, 1)",
-//     },
-//     "backgroundImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABQCAYAAAC6aDOxAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAATkSURBVHgB5ZxNUhNBFIBf9xBBccFWQulwAvEAUuEEFidQTyCsXIonUE+gN9AbEEOVW3DnjlhGXRo3EBKm2+7AxEmnf2aGzLxX8G0IMxNIPV5/3fNeDwCE+XX78Q4gw4EovUZrQwA8AWRIBuj3UivmDfGRAfQBGZIBklzsS4AYGDsCZMgFqLe8+XYcHIVk0AVkFoAQP+9s7oGEF+n3USK7gAyZDNJSVl9eZY9JSLqADAMCaClPvJOhedJB/3wkMsgWHAW6oDXoAcpKOYuUEn2K16BK2pTyFBx/itegZZBNylm4wJ/iNSgZdCnlj9JzjWT4U7wGJYMcUp6+ZhR9BwLUHiCXlE1GyzdwiHmlPE1/vd8mMYvVlkEhKWdRUzyJGUxTSwblkXIWCmWOlFoCJFRwIId3JhAoc6RUPsS0lNWXjSLvoVDmSKk0QLqmzPxStg4lCmWOlMoCpKUsGXvjvEDAnusUhTJHSiUBSmvK7ivkh+ESf6derNjOrg6+kFgkaioJkLiYsWLrSQnd4a1otzFySpuMoDVzD5BXyjo4km/pRaDg9gBRKXOkzDVAISknjO+uD9pd/XrhXDywXkSkzJEytwDlkfL9k/anzG+ObZepAJPKoLksFMMrZfmhOTh4PX2MbegxZ7n2+mVQHinPHpbWGUwVyq6Xg/JK2XLO+p7BUvQVCHGltoqWss87CfDtKe9cooekyrpjII6U8LZ0BhWWcobzhQI3rngcrZ12dktJupyU/6Nmqhgoc6GGbf2yVAaVkXIWJh1rICLIc76drtcKByhQvug7pTwFK1T+qBOWwM7aqD1ZahQKUHClDPx5Gnnvh2D2m1RstJRXzzrvssdyz2JayqwhDp0XKCk3B53XQJTjldbK4lAcejoqR82TziPzYC5Jh6TMpPy06pEyBRojsef15qWUTXINsZCUzxaj50AY3W7yqSErZZNggOYjZTx+3G21wNNuMqVs4g3QvKSMhVZDJMR713mblE2ckr72UlZqaJ521kM/xyrpGyLlLciBdYjdZCmbzAwxLWWWb4NBrahadXvt9CD4V9dS5kLsOy8oqIapDMrR6EMjT78+j5SLenMSoGD5Apsc/XrvxiylBl2+gIKMJV109wUGoWL+eGOWvLqUTcYBKrz7AgHm2TMU2pg1lvKo3HqNl9l9gUGSRH9tx4Mbs5SUfSvlECQeRUjRi7tbQ/HHds72WILrEYYULeUy3slC6nGohXNnJlszoAopm5AKkHQU0mz9eu9u2StI2YTU82K6Xy9tg97YcVallE1oPXHo6tcD66avq5ayCakMCvXrQ+u1sZTnXGGg5aBAv74OKZvQyiBPv74XVbNSDhEBEcbDh8kdy6l+lKi7RICXrvcqKW89GLa/QQWQGWKBfn1tUjYhEyBPv97ZZCxTvigKoQAV7Ncr74wWeeVlX0KzWIF+vW9j1pyhk0EF+vVcymd1tZvIBEjdb+XLICXle4ODz1ATlBaKwQyqQ8omJALUW26Fs6cmKZvQ+NcUIf/UKGUTEgGKEvHQd75OKc/8bqAA96yia5ayCY0hJllsP16/lE1oZBCT8cwxJCmb0AiQeR+GKGUT9ADpVg8YayBMKZugB2im1YMsZRP0AGXXQBSkbIIeoMkaiIiUTQhImsWUpGyCHiBV5ogpSZkcvaXNp0CYf3BxyTNPele9AAAAAElFTkSuQmCC",
-//     "backgroundImageFit": "auto",
-//     "themeName": "My Theme",
-//     "themePalette": "light",
-//     "isPanelless": true
-//   } as any, null, 4);
-//   const blob = new Blob([data], { type: "application/json" });
-//   themePlugin.importFromFile(blob as any, () => {
-//     expect(themeEditor.getQuestionByName("themeName").value).toEqual("default");
-//     expect(themeEditor.getQuestionByName("themePalette").value).toEqual("light");
-//     expect(themeEditor.getQuestionByName("themeMode").value).toEqual("lightweight");
-//     expect(themeEditor.getQuestionByName("backgroundImage").value).toBeTruthy();
-//     expect(themeEditor.getQuestionByName("backgroundImageFit").value).toEqual("auto");
-//     expect(creator.theme.cssVariables!["--sjs-general-backcolor"]).toEqual("rgba(150, 150, 255, 1)");
-//     expect(themeBuilder.simulator.survey.themeVariables["--sjs-general-backcolor"]).toEqual("rgba(150, 150, 255, 1)");
-//     expect(saveThemeCount).toBe(1);
-//     done();
-//   });
-// });
+test("import theme from file", (done) => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.isAutoSave = true;
+  creator.autoSaveDelay = 0;
+  let saveThemeCount = 0;
+  creator.saveThemeFunc = (saveNo, callback) => {
+    saveThemeCount++;
+    callback(saveNo, "success");
+  };
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const themeModel = themePlugin.themeModel as ThemeModel;
+  // const themeEditor = themeBuilder.themeEditorSurvey;
+
+  const data = JSON.stringify({
+    "cssVariables": {
+      "--sjs-general-backcolor": "rgba(150, 150, 255, 1)",
+    },
+    "backgroundImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABQCAYAAAC6aDOxAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAATkSURBVHgB5ZxNUhNBFIBf9xBBccFWQulwAvEAUuEEFidQTyCsXIonUE+gN9AbEEOVW3DnjlhGXRo3EBKm2+7AxEmnf2aGzLxX8G0IMxNIPV5/3fNeDwCE+XX78Q4gw4EovUZrQwA8AWRIBuj3UivmDfGRAfQBGZIBklzsS4AYGDsCZMgFqLe8+XYcHIVk0AVkFoAQP+9s7oGEF+n3USK7gAyZDNJSVl9eZY9JSLqADAMCaClPvJOhedJB/3wkMsgWHAW6oDXoAcpKOYuUEn2K16BK2pTyFBx/itegZZBNylm4wJ/iNSgZdCnlj9JzjWT4U7wGJYMcUp6+ZhR9BwLUHiCXlE1GyzdwiHmlPE1/vd8mMYvVlkEhKWdRUzyJGUxTSwblkXIWCmWOlFoCJFRwIId3JhAoc6RUPsS0lNWXjSLvoVDmSKk0QLqmzPxStg4lCmWOlMoCpKUsGXvjvEDAnusUhTJHSiUBSmvK7ivkh+ESf6derNjOrg6+kFgkaioJkLiYsWLrSQnd4a1otzFySpuMoDVzD5BXyjo4km/pRaDg9gBRKXOkzDVAISknjO+uD9pd/XrhXDywXkSkzJEytwDlkfL9k/anzG+ObZepAJPKoLksFMMrZfmhOTh4PX2MbegxZ7n2+mVQHinPHpbWGUwVyq6Xg/JK2XLO+p7BUvQVCHGltoqWss87CfDtKe9cooekyrpjII6U8LZ0BhWWcobzhQI3rngcrZ12dktJupyU/6Nmqhgoc6GGbf2yVAaVkXIWJh1rICLIc76drtcKByhQvug7pTwFK1T+qBOWwM7aqD1ZahQKUHClDPx5Gnnvh2D2m1RstJRXzzrvssdyz2JayqwhDp0XKCk3B53XQJTjldbK4lAcejoqR82TziPzYC5Jh6TMpPy06pEyBRojsef15qWUTXINsZCUzxaj50AY3W7yqSErZZNggOYjZTx+3G21wNNuMqVs4g3QvKSMhVZDJMR713mblE2ckr72UlZqaJ521kM/xyrpGyLlLciBdYjdZCmbzAwxLWWWb4NBrahadXvt9CD4V9dS5kLsOy8oqIapDMrR6EMjT78+j5SLenMSoGD5Apsc/XrvxiylBl2+gIKMJV109wUGoWL+eGOWvLqUTcYBKrz7AgHm2TMU2pg1lvKo3HqNl9l9gUGSRH9tx4Mbs5SUfSvlECQeRUjRi7tbQ/HHds72WILrEYYULeUy3slC6nGohXNnJlszoAopm5AKkHQU0mz9eu9u2StI2YTU82K6Xy9tg97YcVallE1oPXHo6tcD66avq5ayCakMCvXrQ+u1sZTnXGGg5aBAv74OKZvQyiBPv74XVbNSDhEBEcbDh8kdy6l+lKi7RICXrvcqKW89GLa/QQWQGWKBfn1tUjYhEyBPv97ZZCxTvigKoQAV7Ncr74wWeeVlX0KzWIF+vW9j1pyhk0EF+vVcymd1tZvIBEjdb+XLICXle4ODz1ATlBaKwQyqQ8omJALUW26Fs6cmKZvQ+NcUIf/UKGUTEgGKEvHQd75OKc/8bqAA96yia5ayCY0hJllsP16/lE1oZBCT8cwxJCmb0AiQeR+GKGUT9ADpVg8YayBMKZugB2im1YMsZRP0AGXXQBSkbIIeoMkaiIiUTQhImsWUpGyCHiBV5ogpSZkcvaXNp0CYf3BxyTNPele9AAAAAElFTkSuQmCC",
+    "backgroundImageFit": "auto",
+    "themeName": "My Theme",
+    "themePalette": "light",
+    "isPanelless": true
+  } as any, null, 4);
+  const blob = new Blob([data], { type: "application/json" });
+  themePlugin.importFromFile(blob as any, () => {
+    expect(themeModel.themeName).toEqual("default");
+    expect(themeModel.themePalette).toEqual("light");
+    expect(themeModel.themeMode).toEqual("lightweight");
+    expect(themeModel.backgroundImage).toBeTruthy();
+    expect(themeModel.backgroundImageFit).toEqual("auto");
+    // expect(creator.theme.cssVariables!["--sjs-general-backcolor"]).toEqual("rgba(150, 150, 255, 1)");
+    // expect(themeBuilder.simulator.survey.themeVariables["--sjs-general-backcolor"]).toEqual("rgba(150, 150, 255, 1)");
+    // expect(saveThemeCount).toBe(1);
+    done();
+  });
+});
 
 // test("export theme to file", (done): any => {
 //   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
@@ -443,9 +390,9 @@ test("Theme builder: composite question elementSettings", (): any => {
 //   const themeEditor = themeSurveyTab.themeEditorSurvey;
 //   const questionPanelSettings = themeEditor.getQuestionByName("questionPanel");
 
-//   expect(themeSurveyTab.currentThemeCssVariables["--sjs-questionpanel-backcolor"]).toBeUndefined();
-//   expect(themeSurveyTab.currentThemeCssVariables["--sjs-questionpanel-hovercolor"]).toBeUndefined();
-//   expect(themeSurveyTab.currentThemeCssVariables["--sjs-questionpanel-cornerRadius"]).toBeUndefined();
+//   expect(themeModel.cssVariables["--sjs-questionpanel-backcolor"]).toBeUndefined();
+//   expect(themeModel.cssVariables["--sjs-questionpanel-hovercolor"]).toBeUndefined();
+//   expect(themeModel.cssVariables["--sjs-questionpanel-cornerRadius"]).toBeUndefined();
 
 //   expect(questionPanelSettings.value).toStrictEqual({
 //     "backcolor": "rgba(255, 255, 255, 1)",
@@ -458,9 +405,9 @@ test("Theme builder: composite question elementSettings", (): any => {
 //   assign(newTheme, themeFromFile);
 //   themeSurveyTab.loadTheme(newTheme as any);
 
-//   expect(themeSurveyTab.currentThemeCssVariables["--sjs-questionpanel-backcolor"]).toEqual("rgba(253, 255, 148, 0.5)");
-//   expect(themeSurveyTab.currentThemeCssVariables["--sjs-questionpanel-hovercolor"]).toEqual("rgba(237, 238, 186, 1)");
-//   expect(themeSurveyTab.currentThemeCssVariables["--sjs-questionpanel-cornerRadius"]).toEqual("6px");
+//   expect(themeModel.cssVariables["--sjs-questionpanel-backcolor"]).toEqual("rgba(253, 255, 148, 0.5)");
+//   expect(themeModel.cssVariables["--sjs-questionpanel-hovercolor"]).toEqual("rgba(237, 238, 186, 1)");
+//   expect(themeModel.cssVariables["--sjs-questionpanel-cornerRadius"]).toEqual("6px");
 
 //   expect(questionPanelSettings.value).toStrictEqual({
 //     "backcolor": "rgba(253, 255, 148, 0.5)",
@@ -478,10 +425,10 @@ test("Theme builder: composite question elementSettings", (): any => {
 //   const themeEditor = themeSurveyTab.themeEditorSurvey;
 //   const questionTitleFontSettings = themeEditor.getQuestionByName("questionTitle");
 
-//   expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-questiontitle-family"]).toBeUndefined();
-//   expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-questiontitle-weight"]).toBeUndefined();
-//   expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-questiontitle-color"]).toBeUndefined();
-//   expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-questiontitle-size"]).toBeUndefined();
+//   expect(themeModel.cssVariables["--sjs-font-questiontitle-family"]).toBeUndefined();
+//   expect(themeModel.cssVariables["--sjs-font-questiontitle-weight"]).toBeUndefined();
+//   expect(themeModel.cssVariables["--sjs-font-questiontitle-color"]).toBeUndefined();
+//   expect(themeModel.cssVariables["--sjs-font-questiontitle-size"]).toBeUndefined();
 
 //   expect(questionTitleFontSettings.value).toStrictEqual({
 //     "family": "Open Sans",
@@ -494,10 +441,10 @@ test("Theme builder: composite question elementSettings", (): any => {
 //   assign(newTheme, themeFromFile);
 //   themeSurveyTab.loadTheme(newTheme as any);
 
-//   expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-questiontitle-family"]).toEqual("Verdana, sans-serif");
-//   expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-questiontitle-weight"]).toEqual("700");
-//   expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-questiontitle-color"]).toEqual("rgba(201, 90, 231, 0.91)");
-//   expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-questiontitle-size"]).toEqual("18px");
+//   expect(themeModel.cssVariables["--sjs-font-questiontitle-family"]).toEqual("Verdana, sans-serif");
+//   expect(themeModel.cssVariables["--sjs-font-questiontitle-weight"]).toEqual("700");
+//   expect(themeModel.cssVariables["--sjs-font-questiontitle-color"]).toEqual("rgba(201, 90, 231, 0.91)");
+//   expect(themeModel.cssVariables["--sjs-font-questiontitle-size"]).toEqual("18px");
 
 //   expect(questionTitleFontSettings.value).toStrictEqual({
 //     "family": "Verdana, sans-serif",
@@ -669,7 +616,7 @@ test("Theme builder: composite question elementSettings", (): any => {
 
 //   questionBackgroundTransparency.value = 60;
 //   themeEditor.getQuestionByName("editorPanel").contentPanel.getQuestionByName("backcolor").value = "#f7f7f7";
-//   expect(themeSurveyTab.currentThemeCssVariables["--sjs-editor-background"]).toEqual("rgba(247, 247, 247, 0.6)");
+//   expect(themeModel.cssVariables["--sjs-editorpanel-backcolor"]).toEqual("rgba(247, 247, 247, 0.6)");
 
 //   const fullModifiedTheme = themePlugin.getCurrentTheme() || {};
 //   const modifiedThemeChanges = themePlugin.getCurrentTheme(true) || {};
@@ -679,7 +626,7 @@ test("Theme builder: composite question elementSettings", (): any => {
 //   expect(Object.keys(modifiedThemeChanges.cssVariables).length).toBe(4);
 //   expect(Object.keys(modifiedThemeChanges.cssVariables)).toStrictEqual([
 //     "--sjs-general-backcolor-dim-light",
-//     "--sjs-editor-background",
+//     "--sjs-editorpanel-backcolor",
 //     "--sjs-editorpanel-backcolor",
 //     "--sjs-editorpanel-hovercolor",
 //   ]);
@@ -920,16 +867,16 @@ test("Theme builder: composite question elementSettings", (): any => {
 //   const questionBackgroundTransparency = themeEditor.getQuestionByName("questionBackgroundTransparency");
 
 //   expect(questionBackgroundTransparency.value).toEqual(100);
-//   expect(themeSurveyTab.currentThemeCssVariables["--sjs-editor-background"]).toBeUndefined();
+//   expect(themeModel.cssVariables["--sjs-editorpanel-backcolor"]).toBeUndefined();
 
 //   questionBackgroundTransparency.value = 60;
 //   themeEditor.getQuestionByName("editorPanel").contentPanel.getQuestionByName("backcolor").value = "#f7f7f7";
-//   expect(themeSurveyTab.currentThemeCssVariables["--sjs-editor-background"]).toEqual("rgba(247, 247, 247, 0.6)");
+//   expect(themeModel.cssVariables["--sjs-editorpanel-backcolor"]).toEqual("rgba(247, 247, 247, 0.6)");
 
 //   themePlugin["resetTheme"].action();
 
 //   expect(questionBackgroundTransparency.value).toEqual(100);
-//   expect(themeSurveyTab.currentThemeCssVariables["--sjs-editor-background"]).toBeUndefined();
+//   expect(themeModel.cssVariables["--sjs-editorpanel-backcolor"]).toBeUndefined();
 
 //   expect(message).toBe("Do you really want to reset the theme? All your customizations will be lost.");
 //   surveySettings.confirmActionAsync = originalCallback;

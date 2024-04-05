@@ -2,6 +2,7 @@ import { QuestionCompositeModel } from "survey-core";
 import { ThemeModel } from "../../src/components/tabs/theme-model";
 import { ThemeTabPlugin } from "../../src/components/tabs/theme-plugin";
 import { CreatorTester } from "../creator-tester";
+import { PredefinedColors } from "../../src/components/tabs/themes";
 export { QuestionFileEditorModel } from "../../src/custom-questions/question-file";
 export { QuestionSpinEditorModel } from "../../src/custom-questions/question-spin-editor";
 export { QuestionColorModel } from "../../src/custom-questions/question-color";
@@ -9,6 +10,29 @@ export { elementSettingsFromCssVariable, elementSettingsToCssVariable } from "..
 export { fontsettingsToCssVariable, fontsettingsFromCssVariable } from "../../src/components/tabs/theme-custom-questions/font-settings";
 export { createColor } from "../../src/components/tabs/theme-custom-questions/color-settings";
 export { createBoxShadow, parseBoxShadow } from "../../src/components/tabs/theme-custom-questions/boxshadow-settings";
+
+test("Theme builder initialization", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const themeEditor = themePlugin.propertyGrid.survey;
+
+  expect(themeEditor.findQuestionByName("themeName").value).toEqual("default");
+  expect(themeEditor.findQuestionByName("themeMode").value).toEqual("panels");
+  expect(themeEditor.findQuestionByName("themePalette").value).toEqual("light");
+  expect(themeEditor.findQuestionByName("backgroundImage").value).toEqual(undefined);
+  expect(themeEditor.findQuestionByName("backgroundImageFit").value).toEqual("cover");
+  expect(themeEditor.findQuestionByName("backgroundOpacity").value).toEqual(100);
+  expect(themeEditor.findQuestionByName("panelBackgroundTransparency").value).toEqual(100);
+  expect(themeEditor.findQuestionByName("questionBackgroundTransparency").value).toEqual(100);
+  expect(themeEditor.findQuestionByName("commonScale").value).toEqual(100);
+  expect(themeEditor.findQuestionByName("cornerRadius").value).toEqual(4);
+
+  const colorQuestions = themeEditor.getAllQuestions().filter(q => q.getType() === "color");
+  expect(colorQuestions[0].choices.length).toEqual(7);
+  expect(colorQuestions[0].choices.map(c => c.value)).toStrictEqual(Object.keys(PredefinedColors.light).map(key => PredefinedColors.light[key]));
+});
 
 test("Theme builder: composite question fontSettings", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
@@ -145,6 +169,19 @@ test.skip("Check reset for sjs-shadow-inner due to animation", () => {
 
   themeModelJSONCssVariables = themeModel.toJSON()["cssVariables"] || {};
   expect(themeModelJSONCssVariables["--sjs-shadow-inner-reset"]).toBe("0px 0px 0px 0px rgba(0, 0, 0, 0.15), inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
+});
+
+test("Theme builder export value from composite question", (): any => {
+  const themeModel = new ThemeModel();
+
+  expect(themeModel.editorPanel.backcolor).toBe("rgba(249, 249, 249, 1)");
+  expect(themeModel.getPropertyValue("--sjs-general-backcolor-dim-light")).toEqual("rgba(249, 249, 249, 1)");
+  expect(themeModel.cssVariables["--sjs-general-backcolor-dim-light"]).toBe("rgba(249, 249, 249, 1)");
+
+  themeModel.themeName = "contrast";
+  expect(themeModel.editorPanel.backcolor).toBe("rgba(255, 216, 77, 1)");
+  expect(themeModel.getPropertyValue("--sjs-general-backcolor-dim-light")).toEqual("rgba(255, 216, 77, 1)");
+  expect(themeModel.cssVariables["--sjs-general-backcolor-dim-light"]).toBe("rgba(255, 216, 77, 1)");
 });
 
 // test("Add theme before activate", (): any => {
