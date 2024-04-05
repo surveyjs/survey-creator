@@ -759,7 +759,7 @@ export class PropertyJSONGenerator {
     if (!!prop.displayName) return prop.displayName;
     if (!!title && title !== prop.name) return title;
     let titleClass = className || this.obj.getType();
-    if(!!this.parentProperty) {
+    if (!!this.parentProperty) {
       titleClass += "@" + this.parentProperty.name;
     }
     return editorLocalization.getPropertyNameInEditor(titleClass, prop.name);
@@ -1408,8 +1408,10 @@ export abstract class PropertyGridEditorStringBase extends PropertyGridEditor {
     return json;
   }
   protected updateType(prop: JsonObjectProperty, obj: Base, json: any) {
-    if (!json.maxLength && obj.hasDefaultPropertyValue(prop.name)) {
+    const canUseObject = prop.classInfo && Serializer.isDescendantOf(obj.getType(), prop.classInfo.name);
+    if (!json.maxLength && (canUseObject && obj.hasDefaultPropertyValue(prop.name) || prop.defaultValue)) {
       json.type = `${json.type}withreset`;
+      json.renderAs = json.type;
     }
     return json;
   }
