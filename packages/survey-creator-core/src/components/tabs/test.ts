@@ -80,7 +80,7 @@ export class TestSurveyTabViewModel extends Base {
     return this.surveyProvider.isMobileView;
   }
   public get showResults() {
-    return !this.isRunning && !this.isMobileView;
+    return this.surveyProvider.previewShowResults && !this.isRunning && !this.isMobileView;
   }
 
   public updateSimulatorSurvey(json: any, theme: any) {
@@ -128,7 +128,7 @@ export class TestSurveyTabViewModel extends Base {
       this.updatePageItem(options.page);
       this.updatePrevNextPageActionState();
     });
-    if(hasSurveyBefore) {
+    if (hasSurveyBefore) {
       this.show();
     }
   }

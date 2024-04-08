@@ -32,7 +32,6 @@
     }
 
     .spg-checkbox--disabled {
-
       .spg-checkbox__rectangle,
       .spg-checkbox__rectangle:hover {
         background: $background-dim;
@@ -184,7 +183,7 @@ td.st-table__cell:first-of-type {
   margin-bottom: calcSize(4);
 }
 
-.st-translation-dialog .st-root-modern>.sd-root-modern__wrapper {
+.st-translation-dialog .st-root-modern > .sd-root-modern__wrapper {
   border-radius: 4px;
   box-shadow: $shadow-small;
   overflow: hidden;
@@ -194,4 +193,7 @@ td.st-table__cell:first-of-type {
   .sv-components-column--expandable {
     width: auto;
   }
+}
+.st-body {
+  @include disableAnimations;
 }

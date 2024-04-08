@@ -146,6 +146,8 @@ export var hebrewStrings = {
     translationDialogTitle: "מחרוזות לא מתורגמות",
     translationMergeLocaleWithDefault: "מזג {0} עם הגדרות ברירת המחדל",
     translationPlaceHolder: "תרגום...",
+    translationSource: "מקור: ",
+    translationTarget: "יעד: ",
     themeExportButton: "ייצא",
     themeImportButton: "ייבא",
     surveyJsonExportButton: "ייצא",
@@ -166,11 +168,11 @@ export var hebrewStrings = {
     htmlPlaceHolder: "התוכן של HTML יופיע כאן.",
     panelPlaceHolder: "גרר שאלה מתיק כלי הכלים לכאן.",
     surveyPlaceHolder: "הסקר ריק. גרור אלמנט מארגז הכלים או לחץ על הכפתור למטה.",
+    pagePlaceHolder: "הדף ריק. גרור רכיב מארגז הכלים או לחץ על הלחצן למטה.",
     imagePlaceHolder: "גרור ושחרר תמונה לכאן או לחץ על הכפתור למטה ובחר תמונה להעלאה",
     imageChooseImage: "בחר תמונה",
     addNewTypeQuestion: "הוסף {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[לוגו]",
-    auto: "אוטומטי",
     choices_Item: "פריט ",
     lg: {
       addNewItem: "הוספת כלל חדש",
@@ -633,6 +635,7 @@ export var hebrewStrings = {
     textUpdateMode: "עדכן את ערך הטקסט של השאלה",
     maskType: "סוג מסיכת קלט",
     maskTypes: {
+      none: "ללא",
       patternmask: "תבנית",
       numericmask: "מספריים",
       datetimemask: "תאריך ושעה",
@@ -719,6 +722,10 @@ export var hebrewStrings = {
     itemvalue: {
       visibleIf: "הפוך את האפשרות לגלויה אם",
       enableIf: "הפוך את האפשרות לניתנת לבחירה אם"
+    },
+    "itemvalue@rows": {
+      visibleIf: "הפיכת השורה לגלויה אם",
+      enableIf: "הפיכת השורה לניתנת לעריכה אם"
     },
     imageitemvalue: {
       text: "טקסט אלטרנטיבי"
@@ -2084,3 +2091,9 @@ editorLocalization.locales["he"] = hebrewStrings;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "מגביל את מספר הספרות שיש לשמור אחרי הנקודה העשרונית עבור מספר מוצג."
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "סימן אחד או יותר שיוצגו לפני הערך."
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "סימן אחד או יותר שיוצגו לאחר הערך."
+// ed.translationSource: "Source: " => "מקור: "
+// ed.translationTarget: "Target: " => "יעד: "
+// ed.pagePlaceHolder: "The page is empty. Drag an element from the toolbox or click the button below." => "הדף ריק. גרור רכיב מארגז הכלים או לחץ על הלחצן למטה."
+// maskTypes.none: "None" => "ללא"
+// itemvalue@rows.visibleIf: "Make the row visible if" => "הפיכת השורה לגלויה אם"
+// itemvalue@rows.enableIf: "Make the row editable if" => "הפיכת השורה לניתנת לעריכה אם"

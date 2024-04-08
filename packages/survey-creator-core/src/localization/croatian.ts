@@ -146,6 +146,8 @@ export var hrStrings = {
     translationDialogTitle: "Neprevedeni nizovi",
     translationMergeLocaleWithDefault: "Spajanje {0} sa zadanim lokalomwith default locale.",
     translationPlaceHolder: "Prevođenje...",
+    translationSource: "Izvor: ",
+    translationTarget: "Cilj: ",
     themeExportButton: "Izvoz",
     themeImportButton: "Uvoz",
     surveyJsonExportButton: "Izvoz",
@@ -166,6 +168,7 @@ export var hrStrings = {
     htmlPlaceHolder: "HTML sadržaj će biti ovdje.",
     panelPlaceHolder: "Ovdje ispustite pitanje iz kutije s alatima.",
     surveyPlaceHolder: "Anketa je prazna. Povucite element iz alatnog okvira ili kliknite donji gumb.",
+    pagePlaceHolder: "Stranica je prazna. Povucite element iz alatnog okvira ili kliknite donji gumb.",
     imagePlaceHolder: "Povucite i ispustite sliku ovdje ili kliknite donji gumb i odaberite sliku koju želite prenijeti",
     imageChooseImage: "Odabir slike",
     addNewTypeQuestion: "Dodaj {0}", //{0} is localizable question type
@@ -632,6 +635,7 @@ export var hrStrings = {
     textUpdateMode: "Ažuriranje vrijednosti tekstnog pitanja",
     maskType: "Vrsta maske za unos",
     maskTypes: {
+      none: "Nijedan",
       patternmask: "Uzorak",
       numericmask: "Brojčani",
       datetimemask: "Datum i vrijeme",
@@ -718,6 +722,10 @@ export var hrStrings = {
     itemvalue: {
       visibleIf: "Učini mogućnost vidljivom ako",
       enableIf: "Učini mogućnost odabranom ako"
+    },
+    "itemvalue@rows": {
+      visibleIf: "Učini redak vidljivim ako",
+      enableIf: "Učinite redak mogućim za uređivanje ako"
     },
     imageitemvalue: {
       text: "Zamjenski tekst"
@@ -2513,3 +2521,9 @@ editorLocalization.locales["hr"] = hrStrings;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Ograničava broj znamenki koje treba zadržati nakon decimalnog zareza za prikazani broj."
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "Jedan ili više simbola koji će se prikazati prije vrijednosti."
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "Jedan ili više simbola koji će se prikazati nakon vrijednosti."
+// ed.translationSource: "Source: " => "Izvor: "
+// ed.translationTarget: "Target: " => "Cilj: "
+// ed.pagePlaceHolder: "The page is empty. Drag an element from the toolbox or click the button below." => "Stranica je prazna. Povucite element iz alatnog okvira ili kliknite donji gumb."
+// maskTypes.none: "None" => "Nijedan"
+// itemvalue@rows.visibleIf: "Make the row visible if" => "Učini redak vidljivim ako"
+// itemvalue@rows.enableIf: "Make the row editable if" => "Učinite redak mogućim za uređivanje ako"

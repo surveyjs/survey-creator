@@ -146,6 +146,8 @@ export var danishStrings = {
     translationDialogTitle: "Uoversatte strenge",
     translationMergeLocaleWithDefault: "Flet {0} med standardsprog",
     translationPlaceHolder: "Oversættelse...",
+    translationSource: "Kilde: ",
+    translationTarget: "Mål: ",
     themeExportButton: "Eksport",
     themeImportButton: "Import",
     surveyJsonExportButton: "Eksport",
@@ -166,6 +168,7 @@ export var danishStrings = {
     htmlPlaceHolder: "HTML-indhold vil være her.",
     panelPlaceHolder: "Smid et spørgsmål fra værktøjskassen her.",
     surveyPlaceHolder: "Undersøgelsen er tom. Træk et element fra værktøjskassen, eller klik på knappen nedenfor.",
+    pagePlaceHolder: "Siden er tom. Træk et element fra værktøjskassen, eller klik på knappen nedenfor.",
     imagePlaceHolder: "Træk og slip et billede her, eller klik på knappen nedenfor, og vælg et billede, der skal uploades",
     imageChooseImage: "Vælg billede",
     addNewTypeQuestion: "Tilføj {0}", //{0} is localizable question type
@@ -632,6 +635,7 @@ export var danishStrings = {
     textUpdateMode: "Opdater værdi for tekstspørgsmål",
     maskType: "Type af inputmaske",
     maskTypes: {
+      none: "Ingen",
       patternmask: "Mønster",
       numericmask: "Numerisk",
       datetimemask: "Dato og klokkeslæt",
@@ -718,6 +722,10 @@ export var danishStrings = {
     itemvalue: {
       visibleIf: "Gør indstillingen synlig, hvis",
       enableIf: "Gør indstillingen valgbar, hvis"
+    },
+    "itemvalue@rows": {
+      visibleIf: "Gør rækken synlig, hvis",
+      enableIf: "Gør rækken redigerbar, hvis"
     },
     imageitemvalue: {
       text: "Alternativ tekst"
@@ -2704,3 +2712,9 @@ editorLocalization.locales["da"] = danishStrings;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Begrænser, hvor mange cifre der skal bevares efter decimaltegnet for et vist tal."
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "Et eller flere symboler, der skal vises før værdien."
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "Et eller flere symboler, der skal vises efter værdien."
+// ed.translationSource: "Source: " => "Kilde: "
+// ed.translationTarget: "Target: " => "Mål: "
+// ed.pagePlaceHolder: "The page is empty. Drag an element from the toolbox or click the button below." => "Siden er tom. Træk et element fra værktøjskassen, eller klik på knappen nedenfor."
+// maskTypes.none: "None" => "Ingen"
+// itemvalue@rows.visibleIf: "Make the row visible if" => "Gør rækken synlig, hvis"
+// itemvalue@rows.enableIf: "Make the row editable if" => "Gør rækken redigerbar, hvis"

@@ -146,6 +146,8 @@ export var fiStrings = {
     translationDialogTitle: "Kääntämättömät merkkijonot",
     translationMergeLocaleWithDefault: "Yhdistä {0} oletuskielellä",
     translationPlaceHolder: "Käännös...",
+    translationSource: "Lähde: ",
+    translationTarget: "Kohde: ",
     themeExportButton: "Vienti",
     themeImportButton: "Tuoda",
     surveyJsonExportButton: "Vienti",
@@ -166,6 +168,7 @@ export var fiStrings = {
     htmlPlaceHolder: "HTML-sisältö on täällä.",
     panelPlaceHolder: "Pudota kysymys työkalupakista tähän.",
     surveyPlaceHolder: "Kysely on tyhjä. Vedä elementti työkalupakista tai napsauta alla olevaa painiketta.",
+    pagePlaceHolder: "Sivu on tyhjä. Vedä elementti työkalupakista tai napsauta alla olevaa painiketta.",
     imagePlaceHolder: "Vedä ja pudota kuva tähän tai napsauta alla olevaa painiketta ja valitse ladattava kuva",
     imageChooseImage: "Valitse kuva",
     addNewTypeQuestion: "Lisää {0}", //{0} is localizable question type
@@ -632,6 +635,7 @@ export var fiStrings = {
     textUpdateMode: "Tekstikysymyksen arvon päivittäminen",
     maskType: "Syöttörajoitteen tyyppi",
     maskTypes: {
+      none: "Ei lainkaan",
       patternmask: "Kuvio",
       numericmask: "Numeerinen",
       datetimemask: "Päivämäärä ja kellonaika",
@@ -718,6 +722,10 @@ export var fiStrings = {
     itemvalue: {
       visibleIf: "Tee vaihtoehto näkyväksi, jos",
       enableIf: "Tee vaihtoehdosta valittava, jos"
+    },
+    "itemvalue@rows": {
+      visibleIf: "Tee rivistä näkyvä, jos",
+      enableIf: "Tee rivistä muokattava, jos"
     },
     imageitemvalue: {
       text: "Vaihtoehtoinen teksti"
@@ -2519,3 +2527,9 @@ editorLocalization.locales["fi"] = fiStrings;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Rajoittaa näytettävän luvun desimaalipilkun jälkeen säilytettävien numeroiden määrää."
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "Yksi tai useampi symboli, joka näytetään ennen arvoa."
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "Yksi tai useampi symboli, joka näytetään arvon jälkeen."
+// ed.translationSource: "Source: " => "Lähde: "
+// ed.translationTarget: "Target: " => "Kohde: "
+// ed.pagePlaceHolder: "The page is empty. Drag an element from the toolbox or click the button below." => "Sivu on tyhjä. Vedä elementti työkalupakista tai napsauta alla olevaa painiketta."
+// maskTypes.none: "None" => "Ei lainkaan"
+// itemvalue@rows.visibleIf: "Make the row visible if" => "Tee rivistä näkyvä, jos"
+// itemvalue@rows.enableIf: "Make the row editable if" => "Tee rivistä muokattava, jos"

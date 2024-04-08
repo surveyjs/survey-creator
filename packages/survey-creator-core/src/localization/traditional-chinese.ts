@@ -146,6 +146,8 @@ var traditionalChineseTranslation = {
     translationDialogTitle: "未翻譯的字串",
     translationMergeLocaleWithDefault: "將{0}與預設區域設置合併",
     translationPlaceHolder: "譯本。。。",
+    translationSource: "源：",
+    translationTarget: "目標：",
     themeExportButton: "出口",
     themeImportButton: "進口",
     surveyJsonExportButton: "出口",
@@ -166,6 +168,7 @@ var traditionalChineseTranslation = {
     htmlPlaceHolder: "HTML內容將在這裡。",
     panelPlaceHolder: "在此處從工具箱中刪除問題。",
     surveyPlaceHolder: "調查為空。從工具箱中拖動元素或按下下面的按鈕。",
+    pagePlaceHolder: "頁面為空。從工具箱中拖動元素或按下下面的按鈕。",
     imagePlaceHolder: "將圖像拖放到此處或按下下面的按鈕並選擇要上傳的圖像",
     imageChooseImage: "選擇圖像",
     addNewTypeQuestion: "新增{0}", //{0} is localizable question type
@@ -632,6 +635,7 @@ var traditionalChineseTranslation = {
     textUpdateMode: "更新文字問題值",
     maskType: "輸入掩碼類型",
     maskTypes: {
+      none: "沒有",
       patternmask: "模式",
       numericmask: "數值的",
       datetimemask: "日期和時間",
@@ -718,6 +722,10 @@ var traditionalChineseTranslation = {
     itemvalue: {
       visibleIf: "如果出現以下情況，則使該選項可見",
       enableIf: "如果出現以下情況，則使該選項可選"
+    },
+    "itemvalue@rows": {
+      visibleIf: "如果出現以下情況，則使行可見",
+      enableIf: "如果出現以下情況，則使行可編輯"
     },
     imageitemvalue: {
       text: "可選文字"
@@ -2797,3 +2805,9 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "限制顯示數位的小數點後要保留的位數。"
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "要在值之前顯示的一個或多個符號。"
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "要在值后顯示的一個或多個符號。"
+// ed.translationSource: "Source: " => "源："
+// ed.translationTarget: "Target: " => "目標："
+// ed.pagePlaceHolder: "The page is empty. Drag an element from the toolbox or click the button below." => "頁面為空。從工具箱中拖動元素或按下下面的按鈕。"
+// maskTypes.none: "None" => "沒有"
+// itemvalue@rows.visibleIf: "Make the row visible if" => "如果出現以下情況，則使行可見"
+// itemvalue@rows.enableIf: "Make the row editable if" => "如果出現以下情況，則使行可編輯"

@@ -146,6 +146,8 @@ var persianStrings = {
     translationDialogTitle: "رشتههای ترجمهنشده",
     translationMergeLocaleWithDefault: "ادغام {0} با زبان پیش فرض",
     translationPlaceHolder: "در حال ترجمه...",
+    translationSource: "منبع: ",
+    translationTarget: "هدف: ",
     themeExportButton: "صادرات",
     themeImportButton: "واردات",
     surveyJsonExportButton: "صادرات",
@@ -166,6 +168,7 @@ var persianStrings = {
     htmlPlaceHolder: "محتوای html اینجا خواهد بود",
     panelPlaceHolder: "سوالی را از داخل جعبه ابزار در اینجا قرار دهید",
     surveyPlaceHolder: "نظرسنجی خالی است. یک آیتم را از جعبه ابزار انتخاب یا روی دکمه ی زیر کلیک کنید",
+    pagePlaceHolder: "صفحه خالی است. یک عنصر را از جعبه ابزار بکشید یا روی دکمه زیر کلیک کنید.",
     imagePlaceHolder: "یک تصویر را در اینجا بکشید و رها کنید یا روی دکمه زیر کلیک کنید و تصویری را برای اپلود انتخاب کنید",
     imageChooseImage: "انتخاب تصویر",
     addNewTypeQuestion: "اضافه {0}", //{0} is localizable question type
@@ -632,6 +635,7 @@ var persianStrings = {
     textUpdateMode: "بههنگامسازی مقدار سؤال متن",
     maskType: "نوع ماسک ورودی",
     maskTypes: {
+      none: "هیچ کدام",
       patternmask: "الگوی",
       numericmask: "عددی",
       datetimemask: "تاریخ و زمان",
@@ -718,6 +722,10 @@ var persianStrings = {
     itemvalue: {
       visibleIf: "این گزینه قابل مشاهده است اگر",
       enableIf: "گزینه را انتخاب کنید اگر"
+    },
+    "itemvalue@rows": {
+      visibleIf: "سطر را مرئی کنید اگر",
+      enableIf: "ردیف را قابل ویرایش کنید اگر"
     },
     imageitemvalue: {
       text: "متن دگرساز"
@@ -2474,3 +2482,9 @@ editorLocalization.locales["fa"] = persianStrings;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "محدود کردن تعداد ارقام برای حفظ پس از نقطه اعشار برای یک عدد نمایش داده شده."
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "یک یا چند نماد قبل از مقدار نمایش داده می شود."
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "یک یا چند نماد بعد از مقدار نمایش داده می شود."
+// ed.translationSource: "Source: " => "منبع: "
+// ed.translationTarget: "Target: " => "هدف: "
+// ed.pagePlaceHolder: "The page is empty. Drag an element from the toolbox or click the button below." => "صفحه خالی است. یک عنصر را از جعبه ابزار بکشید یا روی دکمه زیر کلیک کنید."
+// maskTypes.none: "None" => "هیچ کدام"
+// itemvalue@rows.visibleIf: "Make the row visible if" => "سطر را مرئی کنید اگر"
+// itemvalue@rows.enableIf: "Make the row editable if" => "ردیف را قابل ویرایش کنید اگر"

@@ -146,6 +146,8 @@ var spanishTranslation = {
     translationDialogTitle: "Cadenas sin traducir",
     translationMergeLocaleWithDefault: "Merge {0} con lugar predeterminado",
     translationPlaceHolder: "Traducción...",
+    translationSource: "Fuente: ",
+    translationTarget: "Blanco: ",
     themeExportButton: "Exportar",
     themeImportButton: "Importación",
     surveyJsonExportButton: "Exportar",
@@ -166,6 +168,7 @@ var spanishTranslation = {
     htmlPlaceHolder: "Contenido HTML irá aquí.",
     panelPlaceHolder: "Arrastra aquí una pregunta desde la caja de herramientas.",
     surveyPlaceHolder: "La encuesta está vacía. Arrastra una pregunta desde la caja de herramientas o haz click en el botón de abajo.",
+    pagePlaceHolder: "La página está vacía. Arrastre un elemento desde la caja de herramientas o haga clic en el botón de abajo.",
     imagePlaceHolder: "Arrastre y suelte una imagen aquí o haga clic en el botón de abajo y elija una imagen para cargar",
     imageChooseImage: "Elegir imagen",
     addNewTypeQuestion: "Añadir {0}", //{0} is localizable question type
@@ -632,6 +635,7 @@ var spanishTranslation = {
     textUpdateMode: "Actualizar valor del texto de la pregunta",
     maskType: "Tipo de máscara de entrada",
     maskTypes: {
+      none: "Ninguno",
       patternmask: "Patrón",
       numericmask: "Numérico",
       datetimemask: "Fecha y hora",
@@ -718,6 +722,10 @@ var spanishTranslation = {
     itemvalue: {
       visibleIf: "Haga que la opción sea visible si",
       enableIf: "Haga que la opción sea seleccionable si"
+    },
+    "itemvalue@rows": {
+      visibleIf: "Haga que la fila sea visible si",
+      enableIf: "Hacer que la fila sea editable si"
     },
     imageitemvalue: {
       text: "Texto alternativo"
@@ -2293,3 +2301,9 @@ editorLocalization.locales["es"] = spanishTranslation;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Limita el número de dígitos que se conservan después del punto decimal de un número mostrado."
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "Uno o varios símbolos que se mostrarán antes del valor."
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "Uno o varios símbolos que se mostrarán después del valor."
+// ed.translationSource: "Source: " => "Fuente: "
+// ed.translationTarget: "Target: " => "Blanco: "
+// ed.pagePlaceHolder: "The page is empty. Drag an element from the toolbox or click the button below." => "La página está vacía. Arrastre un elemento desde la caja de herramientas o haga clic en el botón de abajo."
+// maskTypes.none: "None" => "Ninguno"
+// itemvalue@rows.visibleIf: "Make the row visible if" => "Haga que la fila sea visible si"
+// itemvalue@rows.enableIf: "Make the row editable if" => "Hacer que la fila sea editable si"

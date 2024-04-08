@@ -146,6 +146,8 @@ export var nlStrings = {
     translationDialogTitle: "Onvertaalde tekenreeksen",
     translationMergeLocaleWithDefault: "Voeg {0} samen met de standaardlandinstelling",
     translationPlaceHolder: "Vertaling...",
+    translationSource: "Bron: ",
+    translationTarget: "Doel: ",
     themeExportButton: "Exporteren",
     themeImportButton: "Importeren",
     surveyJsonExportButton: "Exporteren",
@@ -166,6 +168,7 @@ export var nlStrings = {
     htmlPlaceHolder: "HTML-inhoud zal hier zijn.",
     panelPlaceHolder: "Drop hier een vraag uit de toolbox.",
     surveyPlaceHolder: "De enquête is leeg. Sleep een element uit de gereedschapskist of klik op de onderstaande knop.",
+    pagePlaceHolder: "De pagina is leeg. Sleep een element uit de gereedschapskist of klik op de knop hieronder.",
     imagePlaceHolder: "Sleep een afbeelding hierheen of klik op de onderstaande knop en kies een afbeelding om te uploaden",
     imageChooseImage: "Kies afbeelding",
     addNewTypeQuestion: "Voeg {0} toe", //{0} is localizable question type
@@ -632,6 +635,7 @@ export var nlStrings = {
     textUpdateMode: "Modus tekstvernieuwing",
     maskType: "Type invoermasker",
     maskTypes: {
+      none: "Geen",
       patternmask: "Patroon",
       numericmask: "Numeriek",
       datetimemask: "Datum en tijd",
@@ -718,6 +722,10 @@ export var nlStrings = {
     itemvalue: {
       visibleIf: "Maak de optie zichtbaar als",
       enableIf: "Maak de optie selecteerbaar als"
+    },
+    "itemvalue@rows": {
+      visibleIf: "Maak de rij zichtbaar als",
+      enableIf: "De rij bewerkbaar maken als:"
     },
     imageitemvalue: {
       text: "Alternatieve tekst"
@@ -2499,3 +2507,9 @@ editorLocalization.locales["nl"] = nlStrings;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Hiermee beperkt u het aantal cijfers dat moet worden behouden na de komma voor een weergegeven getal."
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "Een of meer symbolen die vóór de waarde moeten worden weergegeven."
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "Een of meer symbolen die na de waarde moeten worden weergegeven."
+// ed.translationSource: "Source: " => "Bron: "
+// ed.translationTarget: "Target: " => "Doel: "
+// ed.pagePlaceHolder: "The page is empty. Drag an element from the toolbox or click the button below." => "De pagina is leeg. Sleep een element uit de gereedschapskist of klik op de knop hieronder."
+// maskTypes.none: "None" => "Geen"
+// itemvalue@rows.visibleIf: "Make the row visible if" => "Maak de rij zichtbaar als"
+// itemvalue@rows.enableIf: "Make the row editable if" => "De rij bewerkbaar maken als:"

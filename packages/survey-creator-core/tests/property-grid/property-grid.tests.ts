@@ -327,6 +327,7 @@ test("itemvalue[] property editor + detail panel", () => {
   row.showDetailPanel();
   expect(row.detailPanel).toBeTruthy(); //"Detail panel is showing");
   expect(row.detailPanel.getQuestionByName("visibleIf")).toBeTruthy(); //"visibleIf property is here"
+  expect(row.detailPanel.getQuestionByName("visibleIf").title).toBe("Make the option visible if");
 });
 test("itemvalue[] property editor + row actions", () => {
   var question = new QuestionDropdownModel("q1");
@@ -1040,6 +1041,8 @@ test("matrix dropdown rows, enableIf and visibleIf in row", () => {
   expect(visibleIfQuestion).toBeTruthy();
   expect(enableIfQuestion).toBeTruthy();
   expect(visibleIfQuestion.parent).toEqual(enableIfQuestion.parent);
+  expect(visibleIfQuestion.title).toBe("Make the row visible if");
+  expect(enableIfQuestion.title).toBe("Make the row editable if");
 });
 test("matrix rows/columns, enableIf and visibleIf in row", () => {
   const options = new EmptySurveyCreatorOptions();
@@ -3221,4 +3224,66 @@ test("column title property editor, set placeholder", (): any => {
   const propertyGrid = new PropertyGridModelTester(panel);
   const questionStartIndexPropertyEditor = <QuestionCommentModel>propertyGrid.survey.getQuestionByName("questionStartIndex");
   expect(questionStartIndexPropertyEditor.placeholder).toEqual("Ex.: a)");
+});
+test("Check enableIf for nested proeprties", () => {
+  const prop = Serializer.findProperty("choicesByUrl", "path");
+  const oldEnableIf = prop.enableIf;
+  prop.enableIf = (obj) => !!obj.url;
+  const question = new QuestionDropdownModel("q1");
+  const propertyGrid = new PropertyGridModelTester(question);
+  const restFullQuestion = <QuestionCompositeModel>(
+    propertyGrid.survey.getQuestionByName("choicesByUrl")
+  );
+  const urlQuestion = restFullQuestion.contentPanel.getQuestionByName("url");
+  const pathQuestion = restFullQuestion.contentPanel.getQuestionByName("path");
+  expect(pathQuestion.readOnly).toBeTruthy();
+  urlQuestion.value = "abc";
+  expect(pathQuestion.readOnly).toBeFalsy();
+  urlQuestion.clearValue();
+  expect(pathQuestion.readOnly).toBeTruthy();
+
+  prop.enableIf = oldEnableIf;
+});
+test("PropertyGridEditorMaskType editor", () => {
+  const question = new QuestionTextModel("q1");
+  const propertyGrid = new PropertyGridModelTester(question);
+  const maskTypeQuestion = propertyGrid.survey.getQuestionByName("maskType");
+  expect(maskTypeQuestion.getType()).toEqual("dropdown");
+  expect(maskTypeQuestion.selectedItem.value).toEqual("none");
+  expect(maskTypeQuestion.selectedItem.title).toEqual("None");
+
+  maskTypeQuestion.value = "pattern";
+  expect(maskTypeQuestion.selectedItem.value).toEqual("pattern");
+  expect(maskTypeQuestion.selectedItem.title).toEqual("Pattern");
+});
+test("PropertyGridEditorMaskType editor: localize item", () => {
+  const enLocale = editorLocalization.getLocale("");
+  const oldMaskTypesNone = enLocale.pe.maskTypes.none;
+  enLocale.pe.maskTypes.none = "Unmasked";
+
+  const question = new QuestionTextModel("q1");
+  const propertyGrid = new PropertyGridModelTester(question);
+  const maskTypeQuestion = propertyGrid.survey.getQuestionByName("maskType");
+  expect(maskTypeQuestion.getType()).toEqual("dropdown");
+  expect(maskTypeQuestion.selectedItem.value).toEqual("none");
+  expect(maskTypeQuestion.selectedItem.title).toEqual("Unmasked");
+
+  enLocale.pe.maskTypes.none = oldMaskTypesNone;
+});
+test("PropertyGridEditorMaskType editor: localize item", () => {
+  ComponentCollection.Instance.add({
+    name: "CSAT",
+    inheritBaseProps: true,
+    questionJSON: {
+      type: "rating",
+      rateType: "labels"
+    }
+  });
+  const question = Serializer.createClass("CSAT", { name: "q1" });
+  expect(question.getType()).toBe("csat");
+  const propertyGrid = new PropertyGridModelTester(question);
+  const autoGenerateQuestion = propertyGrid.survey.getQuestionByName("autoGenerate");
+  expect(autoGenerateQuestion.value).toBeTruthy();
+
+  ComponentCollection.Instance.clear();
 });

@@ -758,7 +758,11 @@ export class PropertyJSONGenerator {
   private getQuestionTitle(prop: JsonObjectProperty, className: string, title: string): string {
     if (!!prop.displayName) return prop.displayName;
     if (!!title && title !== prop.name) return title;
-    return editorLocalization.getPropertyNameInEditor(className || this.obj.getType(), prop.name);
+    let titleClass = className || this.obj.getType();
+    if(!!this.parentProperty) {
+      titleClass += "@" + this.parentProperty.name;
+    }
+    return editorLocalization.getPropertyNameInEditor(titleClass, prop.name);
   }
   private isQuestionTitleHidden(prop: JsonObjectProperty): boolean {
     return prop.displayName === "";

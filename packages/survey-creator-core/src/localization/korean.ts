@@ -146,6 +146,8 @@ export var koreanStrings = {
     translationDialogTitle: "번역되지 않은 문자열",
     translationMergeLocaleWithDefault: "{0} 기본 로캘과 병합",
     translationPlaceHolder: "번역...",
+    translationSource: "근원: ",
+    translationTarget: "과녁: ",
     themeExportButton: "수출",
     themeImportButton: "수입",
     surveyJsonExportButton: "수출",
@@ -166,6 +168,7 @@ export var koreanStrings = {
     htmlPlaceHolder: "HTML 콘텐츠가 여기에 있습니다.",
     panelPlaceHolder: "도구 상자에서 질문을 삭제하세요.",
     surveyPlaceHolder: "설문 조사가 비어 있습니다. 도구 상자에서 요소를 드래그하거나 아래 버튼을 클릭합니다.",
+    pagePlaceHolder: "페이지가 비어 있습니다. 도구 상자에서 요소를 드래그하거나 아래 버튼을 클릭합니다.",
     imagePlaceHolder: "여기에 이미지를 끌어다 놓거나 아래 버튼을 클릭하고 업로드할 이미지를 선택하세요.",
     imageChooseImage: "이미지 선택",
     addNewTypeQuestion: "{0} 추가", //{0} is localizable question type
@@ -632,6 +635,7 @@ export var koreanStrings = {
     textUpdateMode: "텍스트 질문 값 업데이트",
     maskType: "입력 마스크 유형",
     maskTypes: {
+      none: "없음",
       patternmask: "무늬",
       numericmask: "숫자",
       datetimemask: "날짜 및 시간",
@@ -718,6 +722,10 @@ export var koreanStrings = {
     itemvalue: {
       visibleIf: "다음과 같은 경우 옵션을 표시합니다.",
       enableIf: "다음과 같은 경우 옵션을 선택할 수 있도록 합니다."
+    },
+    "itemvalue@rows": {
+      visibleIf: "다음과 같은 경우 행을 표시합니다.",
+      enableIf: "다음과 같은 경우 행을 편집 가능하게 만듭니다."
     },
     imageitemvalue: {
       text: "대체 텍스트"
@@ -2723,3 +2731,9 @@ editorLocalization.locales["ko"] = koreanStrings;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "표시된 숫자의 소수점 뒤에 유지할 자릿수를 제한합니다."
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "값 앞에 표시할 하나 또는 여러 개의 기호입니다."
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "값 뒤에 표시할 하나 또는 여러 개의 기호입니다."
+// ed.translationSource: "Source: " => "근원: "
+// ed.translationTarget: "Target: " => "과녁: "
+// ed.pagePlaceHolder: "The page is empty. Drag an element from the toolbox or click the button below." => "페이지가 비어 있습니다. 도구 상자에서 요소를 드래그하거나 아래 버튼을 클릭합니다."
+// maskTypes.none: "None" => "없음"
+// itemvalue@rows.visibleIf: "Make the row visible if" => "다음과 같은 경우 행을 표시합니다."
+// itemvalue@rows.enableIf: "Make the row editable if" => "다음과 같은 경우 행을 편집 가능하게 만듭니다."

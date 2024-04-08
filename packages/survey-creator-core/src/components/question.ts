@@ -16,7 +16,8 @@ import {
   QuestionSelectBase,
   createDropdownActionModel,
   CssClassBuilder,
-  QuestionPanelDynamicModel
+  QuestionPanelDynamicModel,
+  ListModel
 } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { editorLocalization, getLocString } from "../editorLocalization";
@@ -329,10 +330,24 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   }
 
   private createConvertToAction() {
-    const availableTypes = this.getConvertToTypesActions();
-    const allowChangeType: boolean = availableTypes.length > 0;
-    const newAction = this.createDropdownModel("convertTo", availableTypes,
-      allowChangeType, 0, this.currentType,
+    const actions = this.getConvertToTypesActions();
+    const allowChangeType: boolean = actions.length > 0;
+    const selItem = this.getSelectedItem(actions, this.currentType);
+    let actionTitle = !!selItem ? selItem.title : editorLocalization.getString("qt." + this.currentType);
+
+    const actionData: IAction = {
+      id: "convertTo",
+      enabled: allowChangeType,
+      visibleIndex: 0,
+      title: actionTitle,
+      iconName: this.creator.toolbox.getItemByName(this.element.getType())?.iconName
+    };
+    const newAction = this.createDropdownModel(actionData, actions,
+      (listModel: ListModel) => {
+        const newItems = this.getConvertToTypesActions();
+        listModel.setItems(newItems);
+        listModel.selectedItem = this.getSelectedItem(newItems, this.currentType);
+      },
       (item: any) => {
         this.creator.convertCurrentQuestion(item.id);
       });
@@ -347,30 +362,34 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     const propName = prop.name;
     const questionSubType = this.surveyElement.getPropertyValue(propName);
     const items = prop.getChoices(this.surveyElement, (chs: any) => { });
-    const availableTypes = [];
-    items.forEach(item => {
-      availableTypes.push({ id: item, title: editorLocalization.getPropertyValueInEditor(prop.name, item) });
-    });
-    const newAction = this.createDropdownModel("convertInputType", availableTypes, true, 1, questionSubType,
+
+    const getAvailableTypes = () => {
+      const availableTypes = [];
+      items.forEach(item => {
+        availableTypes.push({ id: item, title: editorLocalization.getPropertyValueInEditor(prop.name, item) });
+      });
+      return availableTypes;
+    };
+    const actionData: IAction = {
+      id: "convertInputType",
+      visibleIndex: 1,
+      title: editorLocalization.getPropertyValueInEditor(prop.name, questionSubType),
+    };
+    const newAction = this.createDropdownModel(actionData, getAvailableTypes(),
+      (listModel: ListModel) => {
+        const newItems = getAvailableTypes();
+        listModel.setItems(newItems);
+        listModel.selectedItem = this.getSelectedItem(newItems, this.surveyElement.getPropertyValue(propName));
+      },
       (item: any) => {
         const newValue = this.getUpdatedPropertyValue(propName, item.id);
         this.surveyElement.setPropertyValue(propName, newValue);
-        let title = item.title;
-        if (newValue !== item.id) {
-          const popup = newAction.popupModel;
-          const list = popup.contentComponentData.model;
-          const newItem = list.getActionById(newValue);
-          if (newItem) {
-            title = newItem.title;
-          }
-        }
-        newAction.title = title;
       });
     newAction.disableShrink = true;
     this.surveyElement.registerFunctionOnPropertyValueChanged(
       propName,
       () => {
-        const item = this.getSelectedItem(availableTypes, this.surveyElement.getPropertyValue(propName));
+        const item = this.getSelectedItem(getAvailableTypes(), this.surveyElement.getPropertyValue(propName));
         if (!item) return;
         const popup = newAction.popupModel;
         const list = popup.contentComponentData.model;
@@ -386,30 +405,28 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     const selectedItems = actions.filter(item => item.id === id);
     return selectedItems.length > 0 ? selectedItems[0] : undefined;
   }
-  private createDropdownModel(id: string, actions: IAction[],
-    enabled: boolean, index: number, selValue: string,
-    onSelectionChanged: (item: any) => void): Action {
-    const selItem = this.getSelectedItem(actions, selValue);
-    let actionTitle = !!selItem ? selItem.title : selValue;
-
+  private createDropdownModel(actionData: IAction, items: Array<IAction>, updateListModel: (listModel: ListModel) => void, onSelectionChanged: (item: any) => void): Action {
     const newAction = createDropdownActionModel({
-      id: id,
+      id: actionData.id,
       css: "sv-action--convertTo sv-action-bar-item--secondary",
-      iconName: id == "convertTo" ? this.creator.toolbox.getItemByName(this.element.getType())?.iconName : undefined,
+      iconName: actionData.iconName,
       iconSize: 24,
-      title: actionTitle,
-      enabled: enabled,
-      visibleIndex: index,
+      title: actionData.title,
+      enabled: actionData.enabled,
+      visibleIndex: actionData.visibleIndex,
       disableShrink: false,
       location: "start",
       action: (newType) => {
       },
     }, {
-      items: actions,
+      items: items,
       onSelectionChanged: onSelectionChanged,
       allowSelection: true,
-      selectedItem: selItem,
-      horizontalPosition: "center"
+      horizontalPosition: "center",
+      onShow: () => {
+        const listModel = newAction.popupModel.contentComponentData.model;
+        updateListModel(listModel);
+      },
     });
     newAction.popupModel.displayMode = this.creator.isTouch ? "overlay" : "popup";
     newAction.data.locOwner = this.creator;

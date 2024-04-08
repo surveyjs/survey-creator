@@ -146,6 +146,8 @@ export var jaStrings = {
     translationDialogTitle: "未翻訳の文字列",
     translationMergeLocaleWithDefault: "{0}をデフォルトのロケールにマージする",
     translationPlaceHolder: "翻訳。。。",
+    translationSource: "源：",
+    translationTarget: "ターゲット：",
     themeExportButton: "輸出",
     themeImportButton: "輸入",
     surveyJsonExportButton: "輸出",
@@ -166,6 +168,7 @@ export var jaStrings = {
     htmlPlaceHolder: "HTMLコンテンツはここにあります。",
     panelPlaceHolder: "ここにツールボックスから質問をドロップします。",
     surveyPlaceHolder: "アンケートは空です。ツールボックスから要素をドラッグするか、下のボタンをクリックします。",
+    pagePlaceHolder: "ページは空です。ツールボックスから要素をドラッグするか、下のボタンをクリックします。",
     imagePlaceHolder: "ここに画像をドラッグ&ドロップするか、下のボタンをクリックしてアップロードする画像を選択してください",
     imageChooseImage: "画像を選択",
     addNewTypeQuestion: "{0}を追加", //{0} is localizable question type
@@ -632,6 +635,7 @@ export var jaStrings = {
     textUpdateMode: "テキストの質問値を更新する",
     maskType: "定型入力の種類",
     maskTypes: {
+      none: "何一つ",
       patternmask: "パターン",
       numericmask: "数値",
       datetimemask: "日付と時刻",
@@ -718,6 +722,10 @@ export var jaStrings = {
     itemvalue: {
       visibleIf: "次の場合にオプションを表示します",
       enableIf: "次の場合は、オプションを選択可能にします"
+    },
+    "itemvalue@rows": {
+      visibleIf: "次の場合に行を表示します。",
+      enableIf: "次の場合に行を編集可能にします"
     },
     imageitemvalue: {
       text: "代替テキスト"
@@ -2518,3 +2526,9 @@ editorLocalization.locales["ja"] = jaStrings;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "表示される数値の小数点以下の桁数を制限します。"
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "値の前に表示される 1 つまたは複数のシンボル。"
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "値の後に表示される 1 つまたは複数の記号。"
+// ed.translationSource: "Source: " => "源："
+// ed.translationTarget: "Target: " => "ターゲット："
+// ed.pagePlaceHolder: "The page is empty. Drag an element from the toolbox or click the button below." => "ページは空です。ツールボックスから要素をドラッグするか、下のボタンをクリックします。"
+// maskTypes.none: "None" => "何一つ"
+// itemvalue@rows.visibleIf: "Make the row visible if" => "次の場合に行を表示します。"
+// itemvalue@rows.enableIf: "Make the row editable if" => "次の場合に行を編集可能にします"

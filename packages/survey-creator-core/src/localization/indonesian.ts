@@ -146,6 +146,8 @@ export var indonesianStrings = {
     translationDialogTitle: "String yang tidak diterjemahkan",
     translationMergeLocaleWithDefault: "Gabungkan {0} dengan default locale",
     translationPlaceHolder: "Terjemahan...",
+    translationSource: "Sumber: ",
+    translationTarget: "Target: ",
     themeExportButton: "Ekspor",
     themeImportButton: "Mengimpor",
     surveyJsonExportButton: "Ekspor",
@@ -166,6 +168,7 @@ export var indonesianStrings = {
     htmlPlaceHolder: "Konten HTML akan ada di sini.",
     panelPlaceHolder: "Jatuhkan pertanyaan dari kotak alat di sini.",
     surveyPlaceHolder: "Survei kosong. Seret elemen dari kotak alat atau klik tombol di bawah.",
+    pagePlaceHolder: "Halaman kosong. Seret elemen dari kotak alat atau klik tombol di bawah.",
     imagePlaceHolder: "Seret dan lepas gambar di sini atau klik tombol di bawah ini dan pilih gambar untuk diunggah",
     imageChooseImage: "Pilih Gambar",
     addNewTypeQuestion: "Tambahkan {0}", //{0} is localizable question type
@@ -632,6 +635,7 @@ export var indonesianStrings = {
     textUpdateMode: "Memperbarui nilai pertanyaan teks",
     maskType: "Jenis masker input",
     maskTypes: {
+      none: "Tidak",
       patternmask: "Pola",
       numericmask: "Numerik",
       datetimemask: "Tanggal dan Waktu",
@@ -718,6 +722,10 @@ export var indonesianStrings = {
     itemvalue: {
       visibleIf: "Buat opsi terlihat jika",
       enableIf: "Buat opsi dapat dipilih jika"
+    },
+    "itemvalue@rows": {
+      visibleIf: "Membuat baris terlihat jika",
+      enableIf: "Membuat baris dapat diedit jika"
     },
     imageitemvalue: {
       text: "Teks alternatif"
@@ -2673,3 +2681,9 @@ editorLocalization.locales["id"] = indonesianStrings;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Membatasi jumlah digit yang akan dipertahankan setelah koma desimal untuk angka yang ditampilkan."
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "Satu atau beberapa simbol yang akan ditampilkan sebelum nilai."
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "Satu atau beberapa simbol yang akan ditampilkan setelah nilai."
+// ed.translationSource: "Source: " => "Sumber: "
+// ed.translationTarget: "Target: " => "Target: "
+// ed.pagePlaceHolder: "The page is empty. Drag an element from the toolbox or click the button below." => "Halaman kosong. Seret elemen dari kotak alat atau klik tombol di bawah."
+// maskTypes.none: "None" => "Tidak"
+// itemvalue@rows.visibleIf: "Make the row visible if" => "Membuat baris terlihat jika"
+// itemvalue@rows.enableIf: "Make the row editable if" => "Membuat baris dapat diedit jika"

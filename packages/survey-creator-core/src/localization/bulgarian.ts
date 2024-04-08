@@ -146,6 +146,8 @@ export var bgStrings = {
     translationDialogTitle: "Непреведени низове",
     translationMergeLocaleWithDefault: "Обединение {0} с локалната стойност по подразбиране",
     translationPlaceHolder: "Превод...",
+    translationSource: "Източник: ",
+    translationTarget: "Цел: ",
     themeExportButton: "Износ",
     themeImportButton: "Внос",
     surveyJsonExportButton: "Износ",
@@ -166,6 +168,7 @@ export var bgStrings = {
     htmlPlaceHolder: "HTML съдържанието ще бъде тук.",
     panelPlaceHolder: "Пусни въпроса от кутията с инструменти тук.",
     surveyPlaceHolder: "Анкетата е празна. Плъзни елемент от кутията с инструменти или щракни върху бутона по-долу.",
+    pagePlaceHolder: "Страницата е празна. Плъзнете елемент от кутията с инструменти или щракнете върху бутона по-долу.",
     imagePlaceHolder: "Плъзни и пусни изображение тук или щракни върху бутона по-долу и избери изображение за качване.",
     imageChooseImage: "Избери изображение.",
     addNewTypeQuestion: "Добави {0}", //{0} is localizable question type
@@ -632,6 +635,7 @@ export var bgStrings = {
     textUpdateMode: "Актуализиране стойността на текстовия въпрос",
     maskType: "Тип маска за въвеждане",
     maskTypes: {
+      none: "Никой",
       patternmask: "Шарка",
       numericmask: "Цифров",
       datetimemask: "Дата и час",
@@ -718,6 +722,10 @@ export var bgStrings = {
     itemvalue: {
       visibleIf: "Направете опцията видима, ако",
       enableIf: "Направете опцията избираема, ако"
+    },
+    "itemvalue@rows": {
+      visibleIf: "Направете реда видим, ако",
+      enableIf: "Направете реда редактируем, ако"
     },
     imageitemvalue: {
       text: "Алтернативен текст"
@@ -2080,3 +2088,9 @@ editorLocalization.locales["bg"] = bgStrings;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Ограничава колко цифри да се запазят след десетичната запетая за показваното число."
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "Един или няколко символа, които трябва да бъдат показани преди стойността."
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "Един или няколко символа, които трябва да се покажат след стойността."
+// ed.translationSource: "Source: " => "Източник: "
+// ed.translationTarget: "Target: " => "Цел: "
+// ed.pagePlaceHolder: "The page is empty. Drag an element from the toolbox or click the button below." => "Страницата е празна. Плъзнете елемент от кутията с инструменти или щракнете върху бутона по-долу."
+// maskTypes.none: "None" => "Никой"
+// itemvalue@rows.visibleIf: "Make the row visible if" => "Направете реда видим, ако"
+// itemvalue@rows.enableIf: "Make the row editable if" => "Направете реда редактируем, ако"

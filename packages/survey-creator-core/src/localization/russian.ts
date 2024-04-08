@@ -146,6 +146,8 @@ export var ruStrings = {
     translationDialogTitle: "Непереведенные строки",
     translationMergeLocaleWithDefault: "Объединить {0} с локалью по умолчанию",
     translationPlaceHolder: "Перевод...",
+    translationSource: "Источник: ",
+    translationTarget: "Цель: ",
     themeExportButton: "Экспорт",
     themeImportButton: "Импорт",
     surveyJsonExportButton: "Экспорт",
@@ -166,6 +168,7 @@ export var ruStrings = {
     htmlPlaceHolder: "HTML-контент будет здесь.",
     panelPlaceHolder: "Задайте вопрос с панели инструментов здесь.",
     surveyPlaceHolder: "Опрос пуст. Перетащите элемент с панели инструментов или нажмите кнопку ниже.",
+    pagePlaceHolder: "Страница пуста. Перетащите элемент с панели инструментов или нажмите кнопку ниже.",
     imagePlaceHolder: "Перетащите изображение сюда или нажмите кнопку ниже и выберите изображение для загрузки",
     imageChooseImage: "Выберите изображение",
     addNewTypeQuestion: "Добавить {0}", //{0} is localizable question type
@@ -632,6 +635,7 @@ export var ruStrings = {
     textUpdateMode: "Обновление значения текстового вопроса",
     maskType: "Тип входной маски",
     maskTypes: {
+      none: "Никакой",
       patternmask: "Рисунок",
       numericmask: "Числовой",
       datetimemask: "Дата и время",
@@ -718,6 +722,10 @@ export var ruStrings = {
     itemvalue: {
       visibleIf: "Сделайте опцию видимой, если",
       enableIf: "Сделайте опцию выбираемой, если"
+    },
+    "itemvalue@rows": {
+      visibleIf: "Сделайте строку видимой, если",
+      enableIf: "Сделайте строку редактируемой, если"
     },
     imageitemvalue: {
       text: "Замещающий текст"
@@ -2579,3 +2587,9 @@ editorLocalization.locales["ru"] = ruStrings;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Ограничивает количество цифр, сохраняемых после десятичной запятой для отображаемого числа."
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "Один или несколько символов, которые будут отображаться перед значением."
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "Один или несколько символов, которые будут отображаться после значения."
+// ed.translationSource: "Source: " => "Источник: "
+// ed.translationTarget: "Target: " => "Цель: "
+// ed.pagePlaceHolder: "The page is empty. Drag an element from the toolbox or click the button below." => "Страница пуста. Перетащите элемент с панели инструментов или нажмите кнопку ниже."
+// maskTypes.none: "None" => "Никакой"
+// itemvalue@rows.visibleIf: "Make the row visible if" => "Сделайте строку видимой, если"
+// itemvalue@rows.enableIf: "Make the row editable if" => "Сделайте строку редактируемой, если"

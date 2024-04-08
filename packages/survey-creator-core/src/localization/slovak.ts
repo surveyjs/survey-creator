@@ -146,6 +146,8 @@ export var skStrings = {
     translationDialogTitle: "Nepreložené reťazce",
     translationMergeLocaleWithDefault: "Zlúčiť {0} s predvoleným miestnym nastavením",
     translationPlaceHolder: "Preklad...",
+    translationSource: "Zdroj: ",
+    translationTarget: "Cieľ: ",
     themeExportButton: "Vývoz",
     themeImportButton: "Import",
     surveyJsonExportButton: "Vývoz",
@@ -166,6 +168,7 @@ export var skStrings = {
     htmlPlaceHolder: "Obsah HTML bude tu.",
     panelPlaceHolder: "Tu položte otázku z panela nástrojov.",
     surveyPlaceHolder: "Prieskum je prázdny. Potiahnite prvok z panela s nástrojmi alebo kliknite na tlačidlo nižšie.",
+    pagePlaceHolder: "Stránka je prázdna. Potiahnite prvok z panela s nástrojmi alebo kliknite na tlačidlo nižšie.",
     imagePlaceHolder: "Presuňte obrázok sem alebo kliknite na tlačidlo nižšie a vyberte obrázok, ktorý chcete nahrať",
     imageChooseImage: "Vyberte obrázok",
     addNewTypeQuestion: "Pridať {0}", //{0} is localizable question type
@@ -632,6 +635,7 @@ export var skStrings = {
     textUpdateMode: "Aktualizácia hodnoty textovej otázky",
     maskType: "Typ vstupnej masky",
     maskTypes: {
+      none: "Žiadny",
       patternmask: "Vzorka",
       numericmask: "Numerický",
       datetimemask: "Dátum a čas",
@@ -718,6 +722,10 @@ export var skStrings = {
     itemvalue: {
       visibleIf: "Možnosť zobraziť, ak",
       enableIf: "Túto možnosť nastavte tak, aby sa dala vybrať, ak"
+    },
+    "itemvalue@rows": {
+      visibleIf: "Nastavenie riadka ako viditeľného, ak",
+      enableIf: "Nastavte riadok tak, aby ho bolo možné upravovať, ak"
     },
     imageitemvalue: {
       text: "Alternatívny text"
@@ -2472,3 +2480,9 @@ editorLocalization.locales["sk"] = skStrings;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Obmedzuje, koľko číslic sa má zachovať za desatinnou čiarkou pre zobrazené číslo."
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "Jeden alebo niekoľko symbolov, ktoré sa majú zobraziť pred hodnotou."
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "Jeden alebo viac symbolov, ktoré sa zobrazia za hodnotou."
+// ed.translationSource: "Source: " => "Zdroj: "
+// ed.translationTarget: "Target: " => "Cieľ: "
+// ed.pagePlaceHolder: "The page is empty. Drag an element from the toolbox or click the button below." => "Stránka je prázdna. Potiahnite prvok z panela s nástrojmi alebo kliknite na tlačidlo nižšie."
+// maskTypes.none: "None" => "Žiadny"
+// itemvalue@rows.visibleIf: "Make the row visible if" => "Nastavenie riadka ako viditeľného, ak"
+// itemvalue@rows.enableIf: "Make the row editable if" => "Nastavte riadok tak, aby ho bolo možné upravovať, ak"

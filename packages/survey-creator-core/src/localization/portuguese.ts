@@ -146,6 +146,8 @@ var portugueseTranslation = {
     translationDialogTitle: "Cadeias de caracteres não traduzidas",
     translationMergeLocaleWithDefault: "Combinar {0} com o idioma pré-definido",
     translationPlaceHolder: "Tradução...",
+    translationSource: "Fonte: ",
+    translationTarget: "Alvo: ",
     themeExportButton: "Exportação",
     themeImportButton: "Importação",
     surveyJsonExportButton: "Exportação",
@@ -166,6 +168,7 @@ var portugueseTranslation = {
     htmlPlaceHolder: "O conteúdo HTML ficará aqui.",
     panelPlaceHolder: "Arraste uma questão da caixa de ferramentas aqui.",
     surveyPlaceHolder: "O questionário está vazio. Arraste um elemento da caixa de ferramentas ou clique no botão abaixo.",
+    pagePlaceHolder: "A página está vazia. Arraste um elemento da caixa de ferramentas ou clique no botão abaixo.",
     imagePlaceHolder: "Arraste e solte uma imagem aqui ou clique no botão abaixo e escolha uma imagem para carregar",
     imageChooseImage: "Escolha a imagem",
     addNewTypeQuestion: "Adicionar {0}", //{0} is localizable question type
@@ -632,6 +635,7 @@ var portugueseTranslation = {
     textUpdateMode: "Atualizar valor da pergunta de texto",
     maskType: "Tipo de máscara de entrada",
     maskTypes: {
+      none: "Nenhum",
       patternmask: "Padrão",
       numericmask: "Numérico",
       datetimemask: "Data e Hora",
@@ -718,6 +722,10 @@ var portugueseTranslation = {
     itemvalue: {
       visibleIf: "Torne a opção visível se",
       enableIf: "Torne a opção selecionável se"
+    },
+    "itemvalue@rows": {
+      visibleIf: "Tornar a linha visível se",
+      enableIf: "Tornar a linha editável se"
     },
     imageitemvalue: {
       text: "Texto alternativo"
@@ -2185,3 +2193,9 @@ editorLocalization.locales["pt"] = portugueseTranslation;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Limita quantos dígitos devem ser retidos após o ponto decimal de um número exibido."
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "Um ou vários símbolos a serem exibidos antes do valor."
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "Um ou vários símbolos a serem exibidos após o valor."
+// ed.translationSource: "Source: " => "Fonte: "
+// ed.translationTarget: "Target: " => "Alvo: "
+// ed.pagePlaceHolder: "The page is empty. Drag an element from the toolbox or click the button below." => "A página está vazia. Arraste um elemento da caixa de ferramentas ou clique no botão abaixo."
+// maskTypes.none: "None" => "Nenhum"
+// itemvalue@rows.visibleIf: "Make the row visible if" => "Tornar a linha visível se"
+// itemvalue@rows.enableIf: "Make the row editable if" => "Tornar a linha editável se"

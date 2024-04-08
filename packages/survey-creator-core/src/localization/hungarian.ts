@@ -146,6 +146,8 @@ export var huStrings = {
     translationDialogTitle: "Lefordítatlan karakterláncok",
     translationMergeLocaleWithDefault: "{0} összefűzése az alapértelmezett szöveggel.",
     translationPlaceHolder: "Fordítás...",
+    translationSource: "Forrás: ",
+    translationTarget: "Cél: ",
     themeExportButton: "Kivitel",
     themeImportButton: "Importál",
     surveyJsonExportButton: "Kivitel",
@@ -166,6 +168,7 @@ export var huStrings = {
     htmlPlaceHolder: "A HTML tartalom itt lesz.",
     panelPlaceHolder: "Itt dobjon el egy kérdést az eszköztárból.",
     surveyPlaceHolder: "A felmérés üres. Húzzon egy elemet az eszköztárról, vagy kattintson az alábbi gombra.",
+    pagePlaceHolder: "Az oldal üres. Húzzon egy elemet az eszköztárról, vagy kattintson az alábbi gombra.",
     imagePlaceHolder: "Húzzon ide egy képet, vagy kattintson az alábbi gombra, és válassza ki a feltölteni kívánt képet",
     imageChooseImage: "Válassza a Kép lehetőséget",
     addNewTypeQuestion: "{0} hozzáadása", //{0} is localizable question type
@@ -632,6 +635,7 @@ export var huStrings = {
     textUpdateMode: "Szöveges kérdés értékének frissítése",
     maskType: "Beviteli maszk típusa",
     maskTypes: {
+      none: "Egyik sem",
       patternmask: "Minta",
       numericmask: "Numerikus",
       datetimemask: "Dátum és idő",
@@ -718,6 +722,10 @@ export var huStrings = {
     itemvalue: {
       visibleIf: "Tegye láthatóvá a beállítást, ha",
       enableIf: "Tegye kiválaszthatóvá a beállítást, ha"
+    },
+    "itemvalue@rows": {
+      visibleIf: "Tegye láthatóvá a sort, ha",
+      enableIf: "Tegye szerkeszthetővé a sort, ha:"
     },
     imageitemvalue: {
       text: "Helyettesítő szöveg"
@@ -2672,3 +2680,9 @@ editorLocalization.locales["hu"] = huStrings;
 // numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Korlátozza, hogy hány számjegy maradjon meg a megjelenített szám tizedesvesszője után."
 // currencymask.prefix: "One or several symbols to be displayed before the value." => "Egy vagy több szimbólum jelenik meg az érték előtt."
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "Egy vagy több szimbólum jelenik meg az érték után."
+// ed.translationSource: "Source: " => "Forrás: "
+// ed.translationTarget: "Target: " => "Cél: "
+// ed.pagePlaceHolder: "The page is empty. Drag an element from the toolbox or click the button below." => "Az oldal üres. Húzzon egy elemet az eszköztárról, vagy kattintson az alábbi gombra."
+// maskTypes.none: "None" => "Egyik sem"
+// itemvalue@rows.visibleIf: "Make the row visible if" => "Tegye láthatóvá a sort, ha"
+// itemvalue@rows.enableIf: "Make the row editable if" => "Tegye szerkeszthetővé a sort, ha:"
