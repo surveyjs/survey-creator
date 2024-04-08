@@ -498,9 +498,10 @@ export class PropertyJSONGenerator {
     return this.createJSON(isNested, context);
   }
   public createColumnsJSON(className: string, names: Array<string>): any {
-    var res: Array<any> = [];
+    const res: Array<any> = [];
+    const obj = (className ? Serializer.createClass(className) : this.obj) || this.obj;
     for (var i = 0; i < names.length; i++) {
-      var columnJSON = this.getColumnPropertyJSON(className, names[i]);
+      var columnJSON = this.getColumnPropertyJSON(obj, names[i]);
       if (!!columnJSON) {
         res.push(columnJSON);
       }
@@ -636,7 +637,7 @@ export class PropertyJSONGenerator {
     var panel = this.createPanelJSON(tab.name, tab.title, isChild);
     for (var i = 0; i < tab.properties.length; i++) {
       var propDef = tab.properties[i];
-      var propJSON = this.createQuestionJSON(<any>propDef.property, "", propDef.title, false, context);
+      var propJSON = this.createQuestionJSON(this.obj, <any>propDef.property, propDef.title, false, context);
       if (propDef.onSameLine) {
         propJSON.startWithNewLine = false;
         this.updateQuestionJSONOnSameLine(propJSON);
@@ -677,8 +678,8 @@ export class PropertyJSONGenerator {
     return res;
   }
   private createQuestionJSON(
+    obj: Base,
     prop: JsonObjectProperty,
-    className: string,
     title: string,
     isColumn: boolean = false,
     context: string
@@ -686,11 +687,11 @@ export class PropertyJSONGenerator {
     var isVisible = this.isPropertyVisible(prop, isColumn ? "list" : "");
     if (!isVisible && isColumn) return null;
     var json = PropertyGridEditorCollection.getJSON(
-      this.obj, prop, this.options, context, this.propertyGridDefinition
+      obj, prop, this.options, context, this.propertyGridDefinition
     );
     if (!json) return null;
     json.name = prop.name;
-    json.title = this.getQuestionTitle(prop, className, title);
+    json.title = this.getQuestionTitle(prop, obj.getType(), title);
     if (this.isQuestionTitleHidden(prop)) {
       json.titleLocation = "hidden";
     }
@@ -704,17 +705,17 @@ export class PropertyJSONGenerator {
       json.requiredErrorText = editorLocalization.getString("pe.propertyIsEmpty");
     }
 
-    const placeholder = editorLocalization.getPropertyPlaceholder(this.obj.getType(), prop.name);
+    const placeholder = editorLocalization.getPropertyPlaceholder(obj.getType(), prop.name);
     if (!!placeholder) {
       json.placeholder = placeholder;
     }
     return json;
   }
-  private getColumnPropertyJSON(className: string, propName: string): any {
-    if (!className) return null;
-    var prop = Serializer.findProperty(className, propName);
+  private getColumnPropertyJSON(obj: Base, propName: string): any {
+    if (!obj) return null;
+    var prop = Serializer.findProperty(obj.getType(), propName);
     if (!prop) return null;
-    var json = this.createQuestionJSON(prop, className, "", true, undefined);
+    var json = this.createQuestionJSON(obj, prop, "", true, undefined);
     if (!json) return null;
     if (prop.isUnique) {
       json.isUnique = prop.isUnique;
@@ -758,8 +759,8 @@ export class PropertyJSONGenerator {
   private getQuestionTitle(prop: JsonObjectProperty, className: string, title: string): string {
     if (!!prop.displayName) return prop.displayName;
     if (!!title && title !== prop.name) return title;
-    let titleClass = className || this.obj.getType();
-    if(!!this.parentProperty) {
+    let titleClass = className;
+    if (!!this.parentProperty) {
       titleClass += "@" + this.parentProperty.name;
     }
     return editorLocalization.getPropertyNameInEditor(titleClass, prop.name);
@@ -1410,6 +1411,7 @@ export abstract class PropertyGridEditorStringBase extends PropertyGridEditor {
   protected updateType(prop: JsonObjectProperty, obj: Base, json: any) {
     if (!json.maxLength && obj.hasDefaultPropertyValue(prop.name)) {
       json.type = `${json.type}withreset`;
+      json.renderAs = json.type;
     }
     return json;
   }

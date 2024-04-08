@@ -41,7 +41,6 @@ export class QuestionTextWithReset extends QuestionTextWithResetModel {
   private _adornerImplementor: ImplementorBase;
   constructor(name: string) {
     super(name);
-    this.renderAs = "textwithreset";
   }
   protected createResetValueAdorner(): ResetValueAdorner {
     const adorner = new ResetValueAdorner(this);
@@ -60,7 +59,7 @@ export class QuestionTextWithReset extends QuestionTextWithResetModel {
     super.dispose();
   }
 }
-Serializer.overrideClassCreator("textwithreset", function() {
+Serializer.overrideClassCreator("textwithreset", function () {
   return new QuestionTextWithReset("");
 });
 
@@ -93,7 +92,7 @@ export class QuestionCommentWithReset extends QuestionCommentWithResetModel {
     super.dispose();
   }
 }
-Serializer.overrideClassCreator("commentwithreset", function() {
+Serializer.overrideClassCreator("commentwithreset", function () {
   return new QuestionCommentWithReset("");
 });
 

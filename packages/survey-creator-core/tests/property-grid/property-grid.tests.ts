@@ -3287,3 +3287,17 @@ test("PropertyGridEditorMaskType editor: localize item", () => {
 
   ComponentCollection.Instance.clear();
 });
+test("surveypages property editor & default value", () => {
+  Serializer.addProperty("survey", { name: "name", default: "test" });
+  const survey = new SurveyModel();
+  survey.addNewPage("page1");
+  survey.addNewPage("page2");
+  const propertyGrid = new PropertyGridModelTester(survey);
+  const pagesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("pages")
+  );
+  const col = pagesQuestion.getColumnByName("name");
+  expect(col.cellType).toEqual("text");
+
+  Serializer.removeProperty("survey", "name");
+});
