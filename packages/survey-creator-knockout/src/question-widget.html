@@ -3,10 +3,11 @@
   <!-- ko if: question.isInteractiveDesignElement -->
   <div class="svc-question__content" data-bind="click: koSelect, key2click, clickBubble: false, css: css()">
     <!-- ko if: allowDragging -->
-      <div class="svc-question__drag-area"
-        data-bind="visible:allowDragging, event: {pointerdown: (model, event)=>{onPointerDown(event)}}">
-        <div class="svc-question__drag-element"></div>
-      </div>
+    <div class="svc-question__drag-area"
+      data-bind="visible:allowDragging, event: {pointerdown: (model, event)=>{onPointerDown(event)}}">
+      <!-- ko component: { name: 'sv-svg-icon', params: { css: 'svc-question__drag-element', iconName: 'icon-drag-area-indicator_24x16', size: 24 } } -->
+      <!-- /ko -->
+    </div>
     <!-- /ko -->
     <div class="svc-widget__content">
       <!-- ko component: { name: 'sv-template-renderer', params: { componentData: null, templateData: templateData } } -->
