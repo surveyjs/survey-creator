@@ -499,8 +499,7 @@ export class PropertyJSONGenerator {
   }
   public createColumnsJSON(className: string, names: Array<string>): any {
     const res: Array<any> = [];
-    const obj = Serializer.createClass(className);
-    if(!obj) return res;
+    const obj = (className ? Serializer.createClass(className) : this.obj) || this.obj;
     for (var i = 0; i < names.length; i++) {
       var columnJSON = this.getColumnPropertyJSON(obj, names[i]);
       if (!!columnJSON) {
