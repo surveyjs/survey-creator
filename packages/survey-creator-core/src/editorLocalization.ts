@@ -32,7 +32,11 @@ export class EditorLocalization {
     }
   }
   public getString(strName: string, locale: string = null): string {
-    if(!locale) locale = this.currentLocale;
+    const path = strName.split(".");
+    return this.getStringByPath(path, locale);
+  }
+  public getStringByPath(path: string[], locale: string = null): string {
+    if (!locale) locale = this.currentLocale;
     const loc = this.getLocale(locale);
     const defaultLocale = this.getDefaultStrings();
     const locs = [];
@@ -45,17 +49,15 @@ export class EditorLocalization {
       locs.push(defaultLocale);
     }
     for(let i = 0; i < locs.length; i ++) {
-      const res = this.getStringByLocale(strName, locs[i]);
+      const res = this.getStringByLocale(path, locs[i]);
       if(!!res || res === "") return res;
     }
-    const path = strName.split(".");
     return path[path.length - 1];
   }
   public hasString(strName: string, locale: string = null): boolean {
-    return this.getStringByLocale(strName, this.getLocale(locale)) !== undefined;
+    return this.getStringByLocale(strName.split("."), this.getLocale(locale)) !== undefined;
   }
-  private getStringByLocale(strName: string, loc: any): string {
-    const path = strName.split(".");
+  private getStringByLocale(path: string[], loc: any): string {
     let obj = loc;
     for (let i = 0; i < path.length; i++) {
       if(typeof obj === "string") return undefined;
@@ -93,7 +95,7 @@ export class EditorLocalization {
   public getPropertyNameInEditor(typeName: string, propName: string, defaultName: string = null): string {
     let obj = this.getPropertyInfoInEditorByType(typeName, propName, this.peByClass, "pe");
     if(!obj) {
-      obj = this.getString("pe." + propName);
+      obj = this.getStringByPath(["pe", propName]);
     }
     if (this.stringsDiff(obj, propName)) return obj;
     return this.getPropertyName(propName, defaultName);
@@ -172,12 +174,12 @@ export class EditorLocalization {
     return res;
   }
   public getProperty(strName: string, defaultName: string = null): string {
-    var obj = this.getString("p." + strName);
+    var obj = this.getStringByPath(["p", strName]);
     if (this.stringsDiff(obj, strName)) return obj;
-    var pos = strName.indexOf("_");
+    var pos = (strName + "").indexOf("_");
     if (pos < -1) return this.getAutoPropertyName(obj, defaultName);
-    strName = strName.substring(pos + 1);
-    obj = this.getString("p." + strName);
+    strName = (strName + "").substring(pos + 1);
+    obj = this.getStringByPath(["p", strName]);
     if (this.stringsDiff(obj, strName)) return obj;
     return this.getAutoPropertyName(obj, defaultName);
   }
