@@ -31,7 +31,8 @@ import {
   QuestionCommentModel,
   QuestionImagePickerModel,
   ComponentCollection,
-  QuestionBooleanModel
+  QuestionBooleanModel,
+  QuestionRadiogroupModel
 } from "survey-core";
 import {
   EmptySurveyCreatorOptions,
@@ -3300,4 +3301,33 @@ test("surveypages property editor & default value", () => {
   expect(col.cellType).toEqual("text");
 
   Serializer.removeProperty("survey", "name");
+});
+test("showRefuseItem&showDontKnowItem in question&column", () => {
+  const question = new QuestionRadiogroupModel("q1");
+  const matrix = new QuestionMatrixDynamicModel("q2");
+  const column = matrix.addColumn("col1");
+  column.cellType = "dropdown";
+  const prop1 = Serializer.findProperty("selectbase", "showRefuseItem");
+  const prop2 = Serializer.findProperty("selectbase", "showDontKnowItem");
+  expect(prop1.visible).toBeFalsy();
+  let propertyGrid = new PropertyGridModelTester(question);
+  expect(propertyGrid.survey.getQuestionByName("showRefuseItem")).toBeFalsy();
+  prop1.visible = true;
+  prop2.visible = true;
+  propertyGrid = new PropertyGridModelTester(question);
+  let survey = propertyGrid.survey;
+  expect(survey.getQuestionByName("showRefuseItem")).toBeTruthy();
+  expect(survey.getQuestionByName("showDontKnowItem")).toBeTruthy();
+  expect(survey.getQuestionByName("refuseText")).toBeTruthy();
+  expect(survey.getQuestionByName("dontKnowText")).toBeTruthy();
+
+  propertyGrid = new PropertyGridModelTester(column);
+  survey = propertyGrid.survey;
+  expect(survey.getQuestionByName("showRefuseItem")).toBeTruthy();
+  expect(survey.getQuestionByName("showDontKnowItem")).toBeTruthy();
+  expect(survey.getQuestionByName("refuseText")).toBeTruthy();
+  expect(survey.getQuestionByName("dontKnowText")).toBeTruthy();
+
+  prop1.visible = false;
+  prop2.visible = false;
 });
