@@ -207,6 +207,7 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
   }
   protected setupQuestionsCore(model: SurveyModel, creator: SurveyCreatorModel): void {
     this.getSelector(model).choices = this.getSelectorChoices(creator);
+    this.getMatrix(model).lockedRowCount = 1;
   }
   protected updateOnMatrixDetailPanelVisibleChangedCore(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {
     if(options.question.name === this.nameMatrix) {
