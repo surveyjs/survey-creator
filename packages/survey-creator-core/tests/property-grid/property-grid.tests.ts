@@ -3331,3 +3331,15 @@ test("showRefuseItem&showDontKnowItem in question&column", () => {
   prop1.visible = false;
   prop2.visible = false;
 });
+test("It is impossible to clear value for numeric property, bug##5395", () => {
+  const question = new QuestionImagePickerModel("q1");
+  const propertyGrid = new PropertyGridModelTester(question);
+  const imageHeightQuestion = <QuestionTextModel>propertyGrid.survey.getQuestionByName("imageHeight");
+  imageHeightQuestion.value = 100;
+  expect(question.imageHeight).toEqual(100);
+  imageHeightQuestion.value = "";
+  expect(imageHeightQuestion.value).not.toBe(0);
+  expect(imageHeightQuestion.isEmpty()).toBeTruthy();
+  expect(question.imageHeight).not.toBe(0);
+  expect(question.imageHeight).toBeFalsy();
+});

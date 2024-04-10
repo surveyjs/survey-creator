@@ -1553,7 +1553,12 @@ export class PropertyGridEditorNumber extends PropertyGridEditor {
       if (prop.defaultValue !== undefined) {
         options.value = prop.defaultValue;
       } else {
-        options.value = prop.minValue !== undefined && prop.minValue > 0 ? prop.minValue : 0;
+        if(!prop.isRequired && options.value === "") {
+          options.value = undefined;
+        }
+        else {
+          options.value = prop.minValue !== undefined && prop.minValue > 0 ? prop.minValue : 0;
+        }
       }
     }
   }
