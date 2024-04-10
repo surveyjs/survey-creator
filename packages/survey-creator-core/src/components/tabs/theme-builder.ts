@@ -20,6 +20,7 @@ import { Switcher } from "../switcher/switcher";
 
 require("./theme-builder.scss");
 
+// TODO: rename to ThemeTabViewModel 
 export class ThemeEditorModel extends Base {
   // public static DefaultTheme = Themes["default-light"];
   private json: any;

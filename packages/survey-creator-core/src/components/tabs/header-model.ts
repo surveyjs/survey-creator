@@ -93,7 +93,7 @@ export class HeaderModel extends Base {
   //     fontsettingsToCssVariable(options.question.panels[0].getElementByName("headerDescription"), this.themeCssVariablesChanges);
   //   }
   //   this.currentTheme.headerView = headerSettings["headerView"];
-  //   this.themeModified(options);
+  //   this.themeModified(options); // => this.onThemePropertyChanged.fire(this, { name, value });
   // }
 
   // private getCoverJson(headerSettings: any): any {

@@ -42,7 +42,7 @@ test("Theme builder: composite question fontSettings", (): any => {
   const themeModel = themePlugin.themeModel as ThemeModel;
   const questionTitleFontSettings = themePlugin.propertyGrid.survey.findQuestionByName("questionTitle") as QuestionCompositeModel;
 
-  expect(themeModel.questionTitle).toStrictEqual({ family: "Open Sans", color: "rgba(0, 0, 0, 0.91)", weight: "600", size: 16 });
+  expect(themeModel["questionTitle"]).toStrictEqual({ family: "Open Sans", color: "rgba(0, 0, 0, 0.91)", weight: "600", size: 16 });
   expect(questionTitleFontSettings.contentPanel.getQuestionByName("color").value).toEqual("rgba(0, 0, 0, 0.91)");
   expect(questionTitleFontSettings.contentPanel.getQuestionByName("weight").value).toEqual("600");
   expect(questionTitleFontSettings.contentPanel.getQuestionByName("size").value).toEqual(16);
@@ -50,7 +50,7 @@ test("Theme builder: composite question fontSettings", (): any => {
 
   questionTitleFontSettings.value = { family: "Arial, sans-serif", weight: "500", size: 40 };
 
-  expect(themeModel.questionTitle).toStrictEqual({ family: "Arial, sans-serif", weight: "500", size: 40 });
+  expect(themeModel["questionTitle"]).toStrictEqual({ family: "Arial, sans-serif", weight: "500", size: 40 });
   expect(questionTitleFontSettings.contentPanel.getQuestionByName("color").value).toEqual(undefined);
   expect(questionTitleFontSettings.contentPanel.getQuestionByName("weight").value).toEqual("500");
   expect(questionTitleFontSettings.contentPanel.getQuestionByName("size").value).toEqual(40);
@@ -61,7 +61,7 @@ test("Theme builder: composite question fontSettings", (): any => {
   questionTitleFontSettings.contentPanel.getQuestionByName("size").value = 18;
   questionTitleFontSettings.contentPanel.getQuestionByName("family").value = "Some font";
 
-  expect(themeModel.questionTitle).toStrictEqual({ family: "Some font", weight: "450", size: 18, color: "#222222" });
+  expect(themeModel["questionTitle"]).toStrictEqual({ family: "Some font", weight: "450", size: 18, color: "#222222" });
 });
 
 test("Theme builder: composite question elementSettings", (): any => {

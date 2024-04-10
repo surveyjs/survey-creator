@@ -209,6 +209,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       showPagesInTestSurveyTab: this.creator.showPagesInTestSurveyTab,
     };
     this.model.initialize(this.creator.JSON, options);
+    this.updateSimulatorTheme();
 
     if (this.creator.showInvisibleElementsInTestSurveyTab) {
       this.invisibleToggleAction.css = this.model.showInvisibleElements ? "sv-action-bar-item--active" : "";
@@ -227,34 +228,37 @@ export class ThemeTabPlugin implements ICreatorPlugin {
         this.testAgainAction.visible = !this.model.isRunning;
       }
     });
-    this.themeModel.onThemeModified.add((sender, options) => {
-      this.themeModified(options);
-    });
-    /*
     this.themeModel.onThemeSelected.add((sender, options) => {
+      this.updateSimulatorTheme();
       this.resetTheme.enabled = getThemeFullName(sender.defaultSessionTheme) !== getThemeFullName(options.theme);
       this.saveThemeAction.enabled = true;
       this.onThemeSelected.fire(this, options);
+      if (this.creator.isAutoSave) {
+        this.processAutoSave();
+      }
     });
     this.themeModel.onThemePropertyChanged.add((sender, options) => {
+      this.updateSimulatorTheme();
       this.resetTheme.enabled = true;
       this.saveThemeAction.enabled = true;
       this.onThemePropertyChanged.fire(this, options);
+      if (this.creator.isAutoSave) {
+        this.processAutoSave();
+      }
     });
     this.themeModel.onAllowModifyTheme.add((sender, options) => {
       this.onAllowModifyTheme.fire(this, options);
     });
-    */
+
     this.resetTheme.enabled = getThemeFullName(this.themeModel.defaultSessionTheme) !== getThemeFullName(this.creator.theme) || this.isModified;
   }
   public deactivate(): boolean {
     if (this.model) {
       this.simulatorCssClasses = this.model.simulator.survey.css;
       this.model.onPropertyChanged.clear();
-      this.themeModel.onThemeModified.clear();
-      // this.themeModel.onThemeSelected.clear();
-      // this.themeModel.onThemePropertyChanged.clear();
-      // this.themeModel.onAllowModifyTheme.clear();
+      this.themeModel.onThemeSelected.clear();
+      this.themeModel.onThemePropertyChanged.clear();
+      this.themeModel.onAllowModifyTheme.clear();
       this.model.onSurveyCreatedCallback = undefined;
       this.model.dispose();
       this.model = undefined;
@@ -269,7 +273,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   public saveToFileHandler = saveToFileHandler;
 
   public exportToFile(fileName: string) {
-    const themeCopy = JSON.parse(JSON.stringify(this.creator.theme));
+    const themeCopy = JSON.parse(JSON.stringify(this.themeModel.toJSON()));
     const themeData = JSON.stringify(themeCopy, null, 4);
     const themeBlob = new Blob([themeData], { type: "application/json" });
     this.saveToFileHandler(fileName, themeBlob);
@@ -496,9 +500,9 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.creator.footerToolbar.actions.push(this.themeSettingsAction);
   }
 
-  private updateSimulatorTheme() {
+  private updateSimulatorTheme(theme?: ITheme) {
     if (!!this.model.survey) {
-      this.model.survey.applyTheme(this.themeModel.toJSON());
+      this.model.survey.applyTheme(theme || this.themeModel.toJSON());
     }
   }
 
@@ -540,22 +544,22 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       saveThemeFunc && saveThemeFunc();
     }, this.creator.autoSaveDelay);
   }
-  protected themeModified(options: { theme: ITheme } | { name: string, value: any }) {
-    this.updateSimulatorTheme();
-    // if (this.blockThemeChangedNotifications == 0) {
-    if (!!options["theme"]) {
-      // this.themeModel.onThemeSelected.fire(this.themeModel, options as { theme: ITheme });
-      this.onThemeSelected.fire(this, options as { theme: ITheme });
-    } else {
-      this.creator.hasPendingThemeChanges = true;
-      // this.themeModel.onThemePropertyChanged.fire(this.themeModel, options as { name: string, value: any });
-      this.onThemePropertyChanged.fire(this, options as { name: string, value: any });
-    }
-    if (this.creator.isAutoSave) {
-      this.processAutoSave();
-    }
-    // }
-  }
+  // protected themeModified(options: { theme: ITheme } | { name: string, value: any }) {
+  //   this.updateSimulatorTheme();
+  //   // if (this.blockThemeChangedNotifications == 0) {
+  //   if (!!options["theme"]) {
+  //     // this.themeModel.onThemeSelected.fire(this.themeModel, options as { theme: ITheme });
+  //     this.onThemeSelected.fire(this, options as { theme: ITheme });
+  //   } else {
+  //     this.creator.hasPendingThemeChanges = true;
+  //     // this.themeModel.onThemePropertyChanged.fire(this.themeModel, options as { name: string, value: any });
+  //     this.onThemePropertyChanged.fire(this, options as { name: string, value: any });
+  //   }
+  //   if (this.creator.isAutoSave) {
+  //     this.processAutoSave();
+  //   }
+  //   // }
+  // }
 
   /**
    * A list of UI themes from which users can select. You can sort this list if you want to reorder themes in Theme Editor.

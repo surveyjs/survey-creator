@@ -3,10 +3,12 @@ import { editorLocalization, getLocString } from "../../editorLocalization";
 import { PredefinedColors, PredefinedThemes, Themes } from "./themes";
 import { ISurveyCreatorOptions, settings } from "../../creator-settings";
 import { PropertyGridEditor, PropertyGridEditorCollection } from "../../property-grid";
-import { DefaultFonts } from "./theme-custom-questions/font-settings";
+import { DefaultFonts, fontsettingsFromCssVariable, fontsettingsToCssVariable } from "./theme-custom-questions/font-settings";
+import { elementSettingsFromCssVariable, elementSettingsToCssVariable } from "./theme-custom-questions/element-settings";
+import { createBoxShadowReset } from "./theme-custom-questions/boxshadow-settings";
 import { HeaderModel } from "./header-model";
 import * as LibraryThemes from "survey-core/themes";
-import { assign, ingectAlpha, parseColor, roundTo2Decimals } from "../../utils/utils";
+import { ColorCalculator, assign, ingectAlpha, parseColor, roundTo2Decimals } from "../../utils/utils";
 import { ISaveToJSONOptions } from "survey-core/typings/base-interfaces";
 import { SurveyCreatorModel } from "src/creator-base";
 export * from "./header-model";
@@ -96,6 +98,7 @@ function trimCssVariables(newCssVariables: { [index: string]: string }): void {
 export class ThemeModel extends Base {
   public static DefaultTheme = Themes["default-light"];
   private themeCssVariablesChanges: { [index: string]: string } = {};
+  private colorCalculator = new ColorCalculator();
 
   @property({
     onSet: (newValue: string, _target: ThemeModel) => {
@@ -132,8 +135,6 @@ export class ThemeModel extends Base {
       }
     }
   }) panelBackgroundTransparency: number;
-
-  @property() questionPanelBackground: string;
 
   @property({
     onSet: (newValue: any, target: ThemeModel) => {
@@ -264,78 +265,87 @@ export class ThemeModel extends Base {
   //   }
   // }
 
-  // private initializeColorCalculator() {
-  //   if (!this.currentTheme.cssVariables["--sjs-primary-backcolor"] ||
-  //     !this.currentTheme.cssVariables["--sjs-primary-backcolor-light"] ||
-  //     !this.currentTheme.cssVariables["--sjs-primary-backcolor-dark"]) {
-  //     return;
-  //   }
+  private initializeColorCalculator() {
+    if (!this["--sjs-primary-backcolor"] ||
+      !this["--sjs-primary-backcolor-light"] ||
+      !this["--sjs-primary-backcolor-dark"]) {
+      return;
+    }
 
-  //   this.colorCalculator.initialize(
-  //     this.currentTheme.cssVariables["--sjs-primary-backcolor"],
-  //     this.currentTheme.cssVariables["--sjs-primary-backcolor-light"],
-  //     this.currentTheme.cssVariables["--sjs-primary-backcolor-dark"]
-  //   );
-  // }
+    this.colorCalculator.initialize(
+      this["--sjs-primary-backcolor"],
+      this["--sjs-primary-backcolor-light"],
+      this["--sjs-primary-backcolor-dark"]
+    );
+  }
 
-  // private shadowInnerPropertiesChanged(options: ValueChangedEvent) {
-  //   const name = options.name;
-  //   const value = options.value;
-  //   this.themeCssVariablesChanges[name + "-reset"] = createBoxShadowReset(value);
-  //   this.themeModified(options);
-  // }
-  // private cssVariablePropertiesChanged(options: ValueChangedEvent) {
-  //   if (options.name.indexOf("--") === 0) {
-  //     this.setThemeCssVariablesChanges(options.name, options.value, options.question);
-  //   }
-  //   if (options.name == "commonScale") {
-  //     this.survey.triggerResponsiveness(true);
-  //     this.setThemeCssVariablesChanges("--sjs-base-unit", (options.value * 8 / 100) + "px", options.question);
-  //   }
-  //   if (options.name == "commonFontSize") {
-  //     this.setThemeCssVariablesChanges("--sjs-font-size", (options.value * 16 / 100) + "px", options.question);
-  //   }
-  //   if (options.name == "cornerRadius") {
-  //     this.setThemeCssVariablesChanges("--sjs-corner-radius", options.value + "px", options.question);
-  //   }
-  //   if (options.name === "questionBackgroundTransparency" || options.name === "editorPanel") {
-  //     let baseColor = parseColor(this.themeEditorSurvey.getValue("--sjs-general-backcolor-dim-light")).color;
-  //     let questionBackgroundTransparencyValue = this.themeEditorSurvey.getValue("questionBackgroundTransparency");
-  //     this.setThemeCssVariablesChanges("--sjs-editor-background", ingectAlpha(baseColor, questionBackgroundTransparencyValue / 100), options.question);
-  //   }
-  //   if (options.name === "panelBackgroundTransparency" || options.name === "questionPanel") {
-  //     let baseColor = parseColor(this.themeEditorSurvey.getValue("--sjs-general-backcolor")).color;
-  //     let panelBackgroundTransparencyValue = this.themeEditorSurvey.getValue("panelBackgroundTransparency");
-  //     this.setThemeCssVariablesChanges("--sjs-question-background", ingectAlpha(baseColor, panelBackgroundTransparencyValue / 100), options.question);
-  //   }
-  //   if (options.question?.getType() === "fontsettings") {
-  //     fontsettingsToCssVariable(options.question, this.themeCssVariablesChanges);
-  //     this.themeModified(options);
-  //   }
-  //   if (options.question?.getType() === "elementsettings") {
-  //     elementSettingsToCssVariable(options.question, this.themeCssVariablesChanges);
-  //     this.themeModified(options);
-  //   }
-  // }
-  // private updateDependentQuestionValues(options: ValueChangedEvent) {
-  //   if (options.name === "generalPrimaryColor") {
-  //     this.themeEditorSurvey.setValue("--sjs-primary-backcolor", options.value);
-  //     return true;
-  //   }
-  //   if (options.name === "--sjs-primary-backcolor") {
-  //     this.colorCalculator.calculateColors(options.value);
-  //     this.themeEditorSurvey.setValue("--sjs-primary-backcolor-light", this.colorCalculator.colorSettings.newColorLight);
-  //     this.themeEditorSurvey.setValue("--sjs-primary-backcolor-dark", this.colorCalculator.colorSettings.newColorDark);
-  //     this._setPGEditorPropertyValue(this.themeEditorSurvey.getQuestionByName("generalPrimaryColor"), "value", options.value);
-  //     return false;
-  //   }
-  //   return false;
-  // }
+  private shadowInnerPropertiesChanged(name: string, value: any) {
+    this.themeCssVariablesChanges[name + "-reset"] = createBoxShadowReset(value);
+    // this.themeModified(options);
+    this.onThemePropertyChanged.fire(this, { name, value });
+  }
+  private cssVariablePropertiesChanged(name: string, value: any) {
+    if (name.indexOf("--") === 0) {
+      this.setThemeCssVariablesChanges(name, value);
+    }
+    if (name == "commonScale") {
+      // this.survey.triggerResponsiveness(true);
+      this.setThemeCssVariablesChanges("--sjs-base-unit", (value * 8 / 100) + "px");
+    }
+    if (name == "commonFontSize") {
+      this.setThemeCssVariablesChanges("--sjs-font-size", (value * 16 / 100) + "px");
+    }
+    if (name == "cornerRadius") {
+      this.setThemeCssVariablesChanges("--sjs-corner-radius", value + "px");
+    }
+    if (name === "questionBackgroundTransparency" || name === "editorPanel") {
+      let baseColor = parseColor(this.getPropertyValue("--sjs-general-backcolor-dim-light")).color;
+      let questionBackgroundTransparencyValue = this.getPropertyValue("questionBackgroundTransparency");
+      this.setThemeCssVariablesChanges("--sjs-editor-background", ingectAlpha(baseColor, questionBackgroundTransparencyValue / 100));
+    }
+    if (name === "panelBackgroundTransparency" || name === "questionPanel") {
+      let baseColor = parseColor(this.getPropertyValue("--sjs-general-backcolor")).color;
+      let panelBackgroundTransparencyValue = this.getPropertyValue("panelBackgroundTransparency");
+      this.setThemeCssVariablesChanges("--sjs-question-background", ingectAlpha(baseColor, panelBackgroundTransparencyValue / 100));
+    }
+    const property = this.getPropertyByName(name);
+    if (property.type === "fontsettings") {
+      fontsettingsToCssVariable(value, property, this.themeCssVariablesChanges);
+      this.onThemePropertyChanged.fire(this, { name, value });
+    }
+    if (property.type === "elementsettings") {
+      elementSettingsToCssVariable(value, property, this.themeCssVariablesChanges);
+      this.onThemePropertyChanged.fire(this, { name, value });
+    }
+    // if (options.question?.getType() === "fontsettings") {
+    //   fontsettingsToCssVariable(options.question, this.themeCssVariablesChanges);
+    //   this.themeModified(options); // => this.onThemePropertyChanged.fire(this, { name, value });
+    // }
+    // if (options.question?.getType() === "elementsettings") {
+    //   elementSettingsToCssVariable(options.question, this.themeCssVariablesChanges);
+    //   this.themeModified(options); // => this.onThemePropertyChanged.fire(this, { name, value });
+    // }
+  }
+  private updateDependentQuestionValues(name: string, value: any) {
+    if (name === "generalPrimaryColor") {
+      this.setPropertyValue("--sjs-primary-backcolor", value);
+      return true;
+    }
+    if (name === "--sjs-primary-backcolor") {
+      this.colorCalculator.calculateColors(value);
+      this.setPropertyValue("--sjs-primary-backcolor-light", this.colorCalculator.colorSettings.newColorLight);
+      this.setPropertyValue("--sjs-primary-backcolor-dark", this.colorCalculator.colorSettings.newColorDark);
+      // this._setPGEditorPropertyValue(this.themeEditorSurvey.getQuestionByName("generalPrimaryColor"), "value", value);
+      return false;
+    }
+    return false;
+  }
 
-  // private setThemeCssVariablesChanges(variableName: string, value: any, question: any) {
-  //   this.themeCssVariablesChanges[variableName] = value;
-  //   this.themeModified({ name: variableName, value: value, question: question } as any);
-  // }
+  private setThemeCssVariablesChanges(name: string, value: any) {
+    this.themeCssVariablesChanges[name] = value;
+    // this.themeModified({ name: name, value: value, question: question } as any);
+    this.onThemePropertyChanged.fire(this, { name, value });
+  }
 
   // private patchFileEditors(survey: SurveyModel) {
   //   const questionsToPatch = survey.getAllQuestions(false, false, true).filter(q => q.getType() == "fileedit");
@@ -442,16 +452,9 @@ export class ThemeModel extends Base {
     }
   }) public editorPanel;
 
-  @property() public pageTitle;
-  @property() public pageDescription;
-  @property() public questionTitle;
-  @property() public questionDescription;
-  @property() public editorFont;
-
-  // public onThemeSelected = new EventBase<ThemeModel, { theme: ITheme }>();
-  // public onThemePropertyChanged = new EventBase<ThemeModel, { name: string, value: any }>();
-  // public onAllowModifyTheme = new EventBase<ThemeModel, { theme: ITheme, allow: boolean }>();
-  public onThemeModified = new EventBase<ThemeModel, { theme: ITheme }>();
+  public onThemeSelected = new EventBase<ThemeModel, { theme: ITheme }>();
+  public onThemePropertyChanged = new EventBase<ThemeModel, { name: string, value: any }>();
+  public onAllowModifyTheme = new EventBase<ThemeModel, { theme: ITheme, allow: boolean }>();
 
   private blockThemeChangedNotifications = 0;
   public loadTheme(theme: ITheme) {
@@ -489,7 +492,7 @@ export class ThemeModel extends Base {
       assign(effectiveTheme, theme, { cssVariables: effectiveThemeCssVariables, themeName: this.themeName, colorPalette: this.themePalette, isPanelless: this.themeMode === "lightweight" });
       // this.surveyProvider.theme = effectiveTheme;
 
-      // this.initializeColorCalculator();
+      this.initializeColorCalculator();
       // this.loadThemeIntoPropertyGrid();
       this.fromJSON(effectiveTheme);
     }
@@ -518,6 +521,7 @@ export class ThemeModel extends Base {
     this.backgroundOpacity = 100;
     this.loadTheme(theme);
     // this.themeModified({ theme });
+    this.onThemeSelected.fire(this, { theme: this.toJSON() });
   }
 
   public selectTheme(themeName: string, themePalette: string = "light", themeMode: string = "panels") {
@@ -528,47 +532,73 @@ export class ThemeModel extends Base {
     this.setTheme(theme);
   }
 
-  // private generalPropertiesChanged(options: ValueChangedEvent): boolean {
-  //   if (["themeName", "themeMode", "themePalette"].indexOf(options.name) !== -1) {
-  //     if (options.name === "themeName") {
-  //       this.loadTheme(this.findSuitableTheme(options.value) || { [options.name]: options.value, isPanelless: this.themeMode === "lightweight", colorPalette: this.themePalette });
-  //     }
-  //     if (options.name === "themeMode") {
-  //       this.loadTheme({ themeName: this.themeName, isPanelless: options.value === "lightweight", colorPalette: this.themePalette });
-  //     }
-  //     if (options.name === "themePalette") {
-  //       this.loadTheme({ themeName: this.themeName, isPanelless: this.themeMode === "lightweight", colorPalette: options.value });
-  //     }
-  //     this.themeModified({ theme: this.currentTheme });
-  //     return true;
-  //   }
-  //   if (["backgroundImage", "backgroundImageFit", "backgroundImageAttachment", "backgroundOpacity"].indexOf(options.name) !== -1) {
-  //     this[options.name] = options.value;
-  //     this.themeModified(options);
-  //     return true;
-  //   }
-  //   return false;
-  // }
-
-  protected onPropertyValueChanged(name: string, oldValue: any, newValue: any): void {
+  private generalPropertiesChanged(name: string, value: any): boolean {
     if (["themeName", "themeMode", "themePalette"].indexOf(name) !== -1) {
       if (name === "themeName") {
-        this.loadTheme(this.findSuitableTheme(newValue) || { [name]: newValue, isPanelless: this.themeMode === "lightweight", colorPalette: this.themePalette });
+        this.loadTheme(this.findSuitableTheme(value) || { [name]: value, isPanelless: this.themeMode === "lightweight", colorPalette: this.themePalette });
       }
       if (name === "themeMode") {
-        this.loadTheme({ themeName: this.themeName, isPanelless: newValue === "lightweight", colorPalette: this.themePalette });
+        this.loadTheme({ themeName: this.themeName, isPanelless: value === "lightweight", colorPalette: this.themePalette });
       }
       if (name === "themePalette") {
-        this.loadTheme({ themeName: this.themeName, isPanelless: this.themeMode === "lightweight", colorPalette: newValue });
+        this.loadTheme({ themeName: this.themeName, isPanelless: this.themeMode === "lightweight", colorPalette: value });
       }
-      // this.themeModified({ theme: this.currentTheme });
-      this.onThemeModified.fire(this, { theme: this.toJSON() });
+      this.onThemeSelected.fire(this, { theme: this.toJSON() });
+      return true;
     }
     if (["backgroundImage", "backgroundImageFit", "backgroundImageAttachment", "backgroundOpacity"].indexOf(name) !== -1) {
-      this[name] = newValue;
-      //     this.themeModified(options);
-      //     return true;
-      this.onThemeModified.fire(this, { theme: this.toJSON() });
+      this[name] = value;
+      this.onThemePropertyChanged.fire(this, { name, value });
+      return true;
+    }
+    return false;
+  }
+
+  protected onPropertyValueChanged(name: string, oldValue: any, newValue: any): void {
+    super.onPropertyValueChanged(name, oldValue, newValue);
+
+    // if (this.blockChanges) return;
+
+    // if (this.blockThemeChangedNotifications == 0) {
+    //   this.undoRedoManager.startTransaction(name + " changed");
+    // }
+    // this.undoRedoManager.onPropertyValueChanged("value", this.prevQuestionValues[name], newValue, options.question, undefined);
+
+    if (this.generalPropertiesChanged(name, newValue)) {
+      // if (this.blockThemeChangedNotifications == 0) {
+      //   this.undoRedoManager.stopTransaction();
+      // }
+      return;
+    }
+
+    /*if (name === "headerViewContainer") {
+      this.headerViewContainerPropertiesChanged(options);
+    }*/
+
+    if (name === "--sjs-shadow-inner" || name === "--sjs-shadow-small") {
+      this.shadowInnerPropertiesChanged(name, newValue);
+    }
+
+    this.cssVariablePropertiesChanged(name, newValue);
+
+    this.blockThemeChangedNotifications += 1;
+    const hasUpdatedDependentValues = this.updateDependentQuestionValues(name, newValue);
+
+    // const newCssVariables = {};
+    // assign(newCssVariables, this.currentTheme.cssVariables, this.themeCssVariablesChanges);
+    // this.trimCssVariables(newCssVariables);
+    // this.currentTheme.cssVariables = newCssVariables;
+
+    // this.blockThemeChangedNotifications -= 1;
+    // if (!!this.undoRedoManager && this.blockThemeChangedNotifications == 0) {
+    //   this.undoRedoManager.stopTransaction();
+    // }
+
+    if (hasUpdatedDependentValues) {
+      // this.themeModified(options); // => this.onThemePropertyChanged.fire(this, { name, value });
+      this.onThemePropertyChanged.fire(this, { name, value: newValue });
+    } else {
+      // this.updateSimulatorTheme();
     }
   }
 
@@ -607,6 +637,16 @@ export class ThemeModel extends Base {
       this.commonScale = roundTo2Decimals(parseFloat(this["--sjs-base-unit"]) * 100 / 8);
       this.commonFontSize = roundTo2Decimals(parseFloat(this["--sjs-font-size"]) * 100 / 16);
       this.cornerRadius = roundTo2Decimals(parseFloat(this["--sjs-corner-radius"]));
+
+      //   this.updateHeaderViewContainerEditors(json.cssVariables);
+      this["questionPanel"] = elementSettingsFromCssVariable(this.getPropertyByName("questionPanel"), json.cssVariables, "--sjs-general-backcolor", "--sjs-general-backcolor-dark", this.cornerRadius);
+      this["editorPanel"] = elementSettingsFromCssVariable(this.getPropertyByName("editorPanel"), json.cssVariables, "--sjs-general-backcolor-dim-light", "--sjs-general-backcolor-dim-dark", this.cornerRadius);
+
+      this["pageTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("pageTitle"), json.cssVariables, "--sjs-general-dim-forecolor");
+      this["pageDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("pageDescription"), json.cssVariables, "--sjs-general-dim-forecolor-light");
+      this["questionTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("questionTitle"), json.cssVariables, "--sjs-general-forecolor");
+      this["questionDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("questionDescription"), json.cssVariables, "--sjs-general-forecolor-light");
+      this["editorFont"] = fontsettingsFromCssVariable(this.getPropertyByName("editorFont"), json.cssVariables, "--sjs-general-forecolor", "--sjs-general-forecolor-light");
     }
   }
 
@@ -621,12 +661,15 @@ export class ThemeModel extends Base {
       if(key.indexOf("--sjs") == 0) {
         cssVariables[key] = result[key];
         delete result[key];
-      } else if(key !== "header" && typeof result[key] === "object") {
-        Object.keys(result[key]).forEach(property => {
-          cssVariables["--sjs-" + key.toLowerCase() + "-" + property] = result[key][property];
-        });
-        // --sjs-font-questiontitle-family
-        // --sjs-questionpanel-backcolor
+      } else if (key !== "header" && typeof result[key] === "object") {
+
+        const property = this.getPropertyByName(key);
+        if (property.type === "fontsettings") {
+          fontsettingsToCssVariable(result[key], property, cssVariables);
+        }
+        if (property.type === "elementsettings") {
+          elementSettingsToCssVariable(result[key], property, cssVariables);
+        }
       }
     });
     result.cssVariables = cssVariables;
@@ -643,7 +686,6 @@ Serializer.addClass(
       name: "themeName",
       displayName: getLocString("theme.themeName"),
       choices: PredefinedThemes.map(theme => ({ value: theme, text: getLocString("theme.names." + theme) })),
-      default: ThemeModel.DefaultTheme.themeName || "default",
       category: "general",
     }, {
       type: "buttongroup",
@@ -664,100 +706,50 @@ Serializer.addClass(
         { value: "lightweight", text: getLocString("theme.themeModeLightweight") }],
       default: "panels",
       category: "general",
-    }, {
-      type: "color",
-      name: "--sjs-general-backcolor-dim",
-      displayName: getLocString("theme.backgroundDimColor"),
-      category: "background",
-    }, {
-      name: "backgroundImage:file",
-      category: "background",
-      onPropertyEditorUpdate: function (obj: any, editor: any) {
-        if (!!editor) {
-          editor.storeDataAsText = false;
-          editor.acceptedTypes = "image/*";
-          editor.placeholder = "Browse...";
-        }
-      }
-    }, {
-      name: "backgroundImageFit",
-      displayName: "",
-      enableIf: function (obj) {
-        return !!obj.backgroundImage;
-      },
-      choices: [
-        { value: "auto", text: getLocString("theme.backgroundImageFitAuto") },
-        { value: "contain", text: getLocString("theme.backgroundImageFitContain") },
-        { value: "cover", text: getLocString("theme.backgroundImageFitCover") }
-      ],
-      default: "cover",
-      category: "background",
-    }, {
-      name: "backgroundImageAttachment",
-      displayName: "",
-      enableIf: function (obj) {
-        return !!obj.backgroundImage;
-      },
-      choices: [
-        { value: "fixed", text: getLocString("theme.backgroundImageAttachmentFixed") },
-        { value: "scroll", text: getLocString("theme.backgroundImageAttachmentScroll") }
-      ],
-      default: "scroll",
-      category: "background",
-    }, {
+    },
+    {
       type: "spinedit",
-      name: "backgroundOpacity",
-      displayName: getLocString("theme.backgroundOpacity"),
-      enableIf: function (obj) {
-        return !!obj.backgroundImage;
-      },
+      name: "commonScale",
+      displayName: getLocString("theme.scale"),
       default: 100,
-      category: "background",
       onPropertyEditorUpdate: function (obj: any, editor: any) {
         if (!!editor) {
           editor.unit = "%";
           editor.min = 0;
           editor.max = 100;
           editor.step = 5;
-          editor.titleLocation = "left";
-        }
-      }
-    }, {
-      type: "headersettings",
-      name: "header",
-      onPropertyEditorUpdate: function (obj: any, editor: any) {
-        if (!!editor) {
-          const questions = editor.contentPanel.elements;
-          const callback = (editor: Question) => {
-            if (editor.getType() === "panel") {
-              editor["elements"].forEach(el => {
-                callback(el);
-              });
-            }
-
-            const obj: Base = (<any>editor).obj;
-            if (!obj) return;
-            const property: JsonObjectProperty = (<any>editor).property;
-            if (!!property && property.onPropertyEditorUpdate) {
-              property.onPropertyEditorUpdate(obj, editor);
-            }
-          };
-          questions.forEach(question => {
-            callback(question);
-          });
-        }
-      }
-    }, {
-      type: "color",
-      name: "generalPrimaryColor",
-      displayName: getLocString("theme.primaryColor"),
-      onPropertyEditorUpdate: function (obj: any, editor: any) {
-        if (!!editor) {
-          editor.descriptionLocation = "hidden";
           editor.visibleIf = "{advancedmode} = false";
         }
       }
     }, {
+      type: "spinedit",
+      name: "cornerRadius",
+      displayName: getLocString("theme.cornerRadius"),
+      default: 4,
+      onPropertyEditorUpdate: function (obj: any, editor: any) {
+        if (!!editor) {
+          editor.unit = "px";
+          editor.min = 0;
+          editor.visibleIf = "{advancedmode} = false";
+        }
+      }
+    },
+    {
+      type: "spinedit",
+      name: "commonFontSize",
+      displayName: getLocString("theme.fontSize"),
+      default: 100,
+      onPropertyEditorUpdate: function (obj: any, editor: any) {
+        if (!!editor) {
+          editor.unit = "%";
+          editor.min = 0;
+          editor.max = 100;
+          editor.step = 5;
+          editor.visibleIf = "{advancedmode} = false";
+        }
+      }
+    },
+    {
       type: "spinedit",
       name: "panelBackgroundTransparency",
       displayName: getLocString("theme.panelBackgroundTransparency"),
@@ -785,271 +777,11 @@ Serializer.addClass(
           editor.visibleIf = "{advancedmode} = false";
         }
       }
-    }, {
-      type: "dropdown",
-      name: "--sjs-font-family",
-      displayName: getLocString("theme.fontFamily"),
-      choices: [].concat(DefaultFonts),
-      default: "Open Sans",
-      onPropertyEditorUpdate: function (obj: any, editor: any) {
-        if (!!editor) {
-          editor.descriptionLocation = "hidden";
-          editor.allowClear = false;
-          editor.visibleIf = "{advancedmode} = false";
-        }
-      }
-    }, {
-      type: "spinedit",
-      name: "commonFontSize",
-      displayName: getLocString("theme.fontSize"),
-      default: 100,
-      onPropertyEditorUpdate: function (obj: any, editor: any) {
-        if (!!editor) {
-          editor.unit = "%";
-          editor.min = 0;
-          editor.max = 100;
-          editor.step = 5;
-          editor.visibleIf = "{advancedmode} = false";
-        }
-      }
-    }, {
-      name: "--sjs-font-size", visible: false,
-      default: "16px",
-    }, {
-      name: "--sjs-corner-radius", visible: false,
-      default: "4px",
-    }, {
-      name: "--sjs-base-unit", visible: false,
-      default: "8px",
-    }, {
-      name: "--sjs-corner-radius",
-      default: "4px",
-      visible: false
     },
-    { name: "--sjs-general-backcolor", visible: false },
-    { name: "--sjs-general-backcolor-dark", visible: false },
-    { name: "--sjs-general-backcolor-dim", visible: false },
-    { name: "--sjs-general-backcolor-dim-light", visible: false },
-    { name: "--sjs-general-backcolor-dim-dark", visible: false },
-    { name: "--sjs-general-forecolor", visible: false },
-    { name: "--sjs-general-forecolor-light", visible: false },
-    { name: "--sjs-general-dim-forecolor", visible: false },
-    { name: "--sjs-general-dim-forecolor-light", visible: false },
-    // { name: "--sjs-primary-backcolor", visible: false },
-    // { name: "--sjs-primary-backcolor-light", visible: false },
-    // { name: "--sjs-primary-backcolor-dark", visible: false },
-    // { name: "--sjs-primary-forecolor", visible: false },
-    // { name: "--sjs-primary-forecolor-light", visible: false },
-
     {
-      type: "spinedit",
-      name: "commonScale",
-      displayName: getLocString("theme.scale"),
-      default: 100,
-      onPropertyEditorUpdate: function (obj: any, editor: any) {
-        if (!!editor) {
-          editor.unit = "%";
-          editor.min = 0;
-          editor.max = 100;
-          editor.step = 5;
-          editor.visibleIf = "{advancedmode} = false";
-        }
-      }
-    }, {
-      type: "spinedit",
-      name: "cornerRadius",
-      displayName: getLocString("theme.cornerRadius"),
-      default: 4,
-      onPropertyEditorUpdate: function (obj: any, editor: any) {
-        if (!!editor) {
-          editor.unit = "px";
-          editor.min = 0;
-          editor.visibleIf = "{advancedmode} = false";
-        }
-      }
-    }, {
-      type: "colorsettings",
-      name: "--sjs-primary-backcolor",
-      displayName: getLocString("theme.accentBackground"),
-      onPropertyEditorUpdate: function (obj: any, editor: any) {
-        if (!!editor) {
-          editor.visibleIf = "{advancedmode} = true";
-          editor.colorTitle = getLocString("theme.primaryDefaultColor");
-          editor.colorTitleLocation = "left";
-          editor.descriptionLocation = "hidden";
-        }
-      }
-    }, {
-      type: "colorsettings",
-      name: "--sjs-primary-backcolor-dark",
-      onPropertyEditorUpdate: function (obj: any, editor: any) {
-        if (!!editor) {
-          editor.visibleIf = "{advancedmode} = true";
-          editor.colorTitle = getLocString("theme.primaryDarkColor");
-          editor.colorTitleLocation = "left";
-          editor.titleLocation = "hidden";
-          editor.descriptionLocation = "hidden";
-        }
-      }
-    }, {
-      type: "colorsettings",
-      name: "--sjs-primary-backcolor-light",
-      onPropertyEditorUpdate: function (obj: any, editor: any) {
-        if (!!editor) {
-          editor.visibleIf = "{advancedmode} = true";
-          editor.colorTitle = getLocString("theme.primaryLightColor");
-          editor.colorTitleLocation = "left";
-          editor.titleLocation = "hidden";
-          editor.descriptionLocation = "hidden";
-        }
-      }
-    }, {
-      type: "colorsettings",
-      name: "--sjs-primary-forecolor",
-      displayName: getLocString("theme.accentForeground"),
-      onPropertyEditorUpdate: function (obj: any, editor: any) {
-        if (!!editor) {
-          editor.visibleIf = "{advancedmode} = true";
-          editor.colorTitle = getLocString("theme.primaryForecolor");
-          editor.colorTitleLocation = "left";
-          editor.descriptionLocation = "hidden";
-        }
-      }
-    }, {
-      type: "colorsettings",
-      name: "--sjs-primary-forecolor-light",
-      onPropertyEditorUpdate: function (obj: any, editor: any) {
-        if (!!editor) {
-          editor.visibleIf = "{advancedmode} = true";
-          editor.colorTitle = getLocString("theme.primaryForecolorLight");
-          editor.colorTitleLocation = "left";
-          editor.titleLocation = "hidden";
-          editor.descriptionLocation = "hidden";
-        }
-      }
-    }, {
-      type: "fontsettings",
-      name: "pageTitle",
-      displayName: getLocString("theme.titleFont"),
-      default: {
-        family: settings.theme.fontFamily,
-        color: "rgba(0, 0, 0, 0.91)",
-        weight: "700",
-        size: 24
-      },
-      onPropertyEditorUpdate: function (obj: any, editor: any) {
-        if (!!editor) {
-          editor.visibleIf = "{advancedmode} = true";
-          editor.descriptionLocation = "hidden";
-        }
-      },
-      onSerializeValue: (obj: ThemeModel) => {
-        return obj.onSerializeFontSettingsValue("pageTitle");
-      }
-    }, {
-      type: "fontsettings",
-      name: "pageDescription",
-      displayName: getLocString("theme.descriptionFont"),
-      default: {
-        family: settings.theme.fontFamily,
-        color: "rgba(0, 0, 0, 0.91)",
-        weight: "700",
-        size: 24
-      },
-      onPropertyEditorUpdate: function (obj: any, editor: any) {
-        if (!!editor) {
-          editor.visibleIf = "{advancedmode} = true";
-          editor.descriptionLocation = "hidden";
-        }
-      },
-      onSerializeValue: (obj: ThemeModel) => {
-        return obj.onSerializeFontSettingsValue("pageDescription");
-      }
-    }, {
-      type: "elementsettings",
-      name: "questionPanel",
-      displayName: getLocString("theme.backgroundCornerRadius"),
-      default: {
-        backcolor: "rgba(255, 255, 255, 1)",
-        hovercolor: "rgba(248, 248, 248, 1)",
-        cornerRadius: 4,
-      },
-      onPropertyEditorUpdate: function (obj: any, editor: any) {
-        if (!!editor) {
-          editor.visibleIf = "{advancedmode} = true";
-          editor.descriptionLocation = "hidden";
-        }
-      },
-      onSerializeValue: (obj: ThemeModel) => {
-        return obj.onSerializeElementSettingsValue("questionPanel");
-      }
-    }, {
-      type: "boxshadowsettings",
-      name: "--sjs-shadow-small",
-      displayName: getLocString("theme.shadow"),
-      default: [
-        {
-          x: 0,
-          y: 1,
-          blur: 2,
-          spread: 0,
-          isInset: false,
-          color: "rgba(0, 0, 0, 0.15)"
-        }
-      ],
-      onPropertyEditorUpdate: function (obj: any, editor: any) {
-        if (!!editor) {
-          editor.visibleIf = "{advancedmode} = true";
-          editor.descriptionLocation = "hidden";
-        }
-      }
-    }, {
-      type: "fontsettings",
-      name: "questionTitle",
-      displayName: getLocString("theme.titleFont"),
-      default: {
-        family: settings.theme.fontFamily,
-        color: "rgba(0, 0, 0, 0.91)",
-        weight: "600",
-        size: 16,
-      },
-      onPropertyEditorUpdate: function (obj: any, editor: any) {
-        if (!!editor) {
-          editor.visibleIf = "{advancedmode} = true";
-          editor.descriptionLocation = "hidden";
-        }
-      },
-      onSerializeValue: (obj: ThemeModel) => {
-        return obj.onSerializeFontSettingsValue("questionTitle");
-      }
-    }, {
-      type: "fontsettings",
-      name: "questionDescription",
-      displayName: getLocString("theme.descriptionFont"),
-      default: {
-        family: settings.theme.fontFamily,
-        color: "rgba(0, 0, 0, 0.45)",
-        weight: "400",
-        size: 16
-      },
-      onPropertyEditorUpdate: function (obj: any, editor: any) {
-        if (!!editor) {
-          editor.visibleIf = "{advancedmode} = true";
-          editor.descriptionLocation = "hidden";
-        }
-      },
-      onSerializeValue: (obj: ThemeModel) => {
-        return obj.onSerializeFontSettingsValue("questionDescription");
-      }
-    }, {
       type: "elementsettings",
       name: "editorPanel",
       displayName: getLocString("theme.backgroundCornerRadius"),
-      default: {
-        backcolor: "rgba(255, 255, 255, 1)",
-        hovercolor: "rgba(248, 248, 248, 1)",
-        cornerRadius: "4px",
-      },
       onPropertyEditorUpdate: function (obj: any, editor: any) {
         if (!!editor) {
           editor.visibleIf = "{advancedmode} = true";
@@ -1059,37 +791,10 @@ Serializer.addClass(
       onSerializeValue: (obj: ThemeModel) => {
         return obj.onSerializeElementSettingsValue("editorPanel");
       }
-    },
-    {
-      type: "boxshadowsettings",
-      name: "--sjs-shadow-inner",
-      displayName: getLocString("theme.shadow"),
-      default: [
-        {
-          x: 0,
-          y: 1,
-          blur: 2,
-          spread: 0,
-          isInset: true,
-          color: "rgba(0, 0, 0, 0.15)"
-        }
-      ],
-      onPropertyEditorUpdate: function (obj: any, editor: any) {
-        if (!!editor) {
-          editor.visibleIf = "{advancedmode} = true";
-          editor.descriptionLocation = "hidden";
-        }
-      }
     }, {
-      type: "fontsettings",
-      name: "editorFont",
-      displayName: getLocString("theme.font"),
-      default: {
-        family: settings.theme.fontFamily,
-        color: "rgba(0, 0, 0, 0.91)",
-        weight: "400",
-        size: 16
-      },
+      type: "elementsettings",
+      name: "questionPanel",
+      displayName: getLocString("theme.backgroundCornerRadius"),
       onPropertyEditorUpdate: function (obj: any, editor: any) {
         if (!!editor) {
           editor.visibleIf = "{advancedmode} = true";
@@ -1097,35 +802,426 @@ Serializer.addClass(
         }
       },
       onSerializeValue: (obj: ThemeModel) => {
-        return obj.onSerializeFontSettingsValue("editorFont");
-      }
-    }, {
-      type: "colorsettings",
-      name: "--sjs-border-default",
-      displayName: getLocString("theme.colorsTitle"),
-      onPropertyEditorUpdate: function (obj: any, editor: any) {
-        if (!!editor) {
-          editor.visibleIf = "{advancedmode} = true";
-          editor.colorTitle = getLocString("theme.borderDefault");
-          editor.colorTitleLocation = "left";
-          editor.descriptionLocation = "hidden";
-        }
+        return obj.onSerializeElementSettingsValue("questionPanel");
       }
     },
-    {
-      type: "colorsettings",
-      name: "--sjs-border-light",
-      onPropertyEditorUpdate: function (obj: any, editor: any) {
-        if (!!editor) {
-          editor.visibleIf = "{advancedmode} = true";
-          editor.colorTitle = getLocString("theme.borderLight");
-          editor.colorTitleLocation = "left";
-          editor.titleLocation = "hidden";
-          editor.descriptionLocation = "hidden";
-        }
+  ], (json) => { return new ThemeModel(); }
+);
+
+Serializer.addProperties("themebuilder",
+  [{
+    name: "backgroundImage:file",
+    category: "background",
+    onPropertyEditorUpdate: function (obj: any, editor: any) {
+      if (!!editor) {
+        editor.storeDataAsText = false;
+        editor.acceptedTypes = "image/*";
+        editor.placeholder = "Browse...";
       }
     }
-  ], (json) => { return new ThemeModel(); }
+  }, {
+    name: "backgroundImageFit",
+    displayName: "",
+    enableIf: function (obj) {
+      return !!obj.backgroundImage;
+    },
+    choices: [
+      { value: "auto", text: getLocString("theme.backgroundImageFitAuto") },
+      { value: "contain", text: getLocString("theme.backgroundImageFitContain") },
+      { value: "cover", text: getLocString("theme.backgroundImageFitCover") }
+    ],
+    default: "cover",
+    category: "background",
+  }, {
+    name: "backgroundImageAttachment",
+    displayName: "",
+    enableIf: function (obj) {
+      return !!obj.backgroundImage;
+    },
+    choices: [
+      { value: "fixed", text: getLocString("theme.backgroundImageAttachmentFixed") },
+      { value: "scroll", text: getLocString("theme.backgroundImageAttachmentScroll") }
+    ],
+    default: "scroll",
+    category: "background",
+  }, {
+    type: "spinedit",
+    name: "backgroundOpacity",
+    displayName: getLocString("theme.backgroundOpacity"),
+    enableIf: function (obj) {
+      return !!obj.backgroundImage;
+    },
+    default: 100,
+    category: "background",
+    onPropertyEditorUpdate: function (obj: any, editor: any) {
+      if (!!editor) {
+        editor.unit = "%";
+        editor.min = 0;
+        editor.max = 100;
+        editor.step = 5;
+        editor.titleLocation = "left";
+      }
+    }
+  }, {
+    type: "headersettings",
+    name: "header",
+    onPropertyEditorUpdate: function (obj: any, editor: any) {
+      if (!!editor) {
+        const questions = editor.contentPanel.elements;
+        const callback = (editor: Question) => {
+          if (editor.getType() === "panel") {
+            editor["elements"].forEach(el => {
+              callback(el);
+            });
+          }
+
+          const obj: Base = (<any>editor).obj;
+          if (!obj) return;
+          const property: JsonObjectProperty = (<any>editor).property;
+          if (!!property && property.onPropertyEditorUpdate) {
+            property.onPropertyEditorUpdate(obj, editor);
+          }
+        };
+        questions.forEach(question => {
+          callback(question);
+        });
+      }
+    }
+  }, {
+    type: "color",
+    name: "generalPrimaryColor",
+    displayName: getLocString("theme.primaryColor"),
+    onPropertyEditorUpdate: function (obj: any, editor: any) {
+      if (!!editor) {
+        editor.descriptionLocation = "hidden";
+        editor.visibleIf = "{advancedmode} = false";
+      }
+    }
+  }, {
+    type: "dropdown",
+    name: "--sjs-font-family",
+    displayName: getLocString("theme.fontFamily"),
+    choices: [].concat(DefaultFonts),
+    onPropertyEditorUpdate: function (obj: any, editor: any) {
+      if (!!editor) {
+        editor.descriptionLocation = "hidden";
+        editor.allowClear = false;
+        editor.visibleIf = "{advancedmode} = false";
+      }
+    }
+  },
+  {
+    name: "--sjs-font-size", visible: false,
+    default: "16px",
+  },
+  { name: "--sjs-corner-radius", visible: false },
+  { name: "--sjs-base-unit", visible: false },
+  { name: "--sjs-corner-radius", visible: false },
+  {
+    type: "fontsettings",
+    name: "pageTitle",
+    displayName: getLocString("theme.titleFont"),
+    default: {
+      family: settings.theme.fontFamily,
+      // color: "rgba(0, 0, 0, 0.91)",
+      weight: "700",
+      size: 24
+    },
+    onPropertyEditorUpdate: function (obj: any, editor: any) {
+      if (!!editor) {
+        editor.visibleIf = "{advancedmode} = true";
+        editor.descriptionLocation = "hidden";
+      }
+    },
+    onSerializeValue: (obj: ThemeModel) => {
+      return obj.onSerializeFontSettingsValue("pageTitle");
+    }
+  }, {
+    type: "fontsettings",
+    name: "pageDescription",
+    displayName: getLocString("theme.descriptionFont"),
+    default: {
+      family: settings.theme.fontFamily,
+      // color: "rgba(0, 0, 0, 0.91)",
+      weight: "700",
+      size: 24
+    },
+    onPropertyEditorUpdate: function (obj: any, editor: any) {
+      if (!!editor) {
+        editor.visibleIf = "{advancedmode} = true";
+        editor.descriptionLocation = "hidden";
+      }
+    },
+    onSerializeValue: (obj: ThemeModel) => {
+      return obj.onSerializeFontSettingsValue("pageDescription");
+    }
+  }, {
+    type: "boxshadowsettings",
+    name: "--sjs-shadow-small",
+    displayName: getLocString("theme.shadow"),
+    default: [
+      {
+        x: 0,
+        y: 1,
+        blur: 2,
+        spread: 0,
+        isInset: false,
+        color: "rgba(0, 0, 0, 0.15)"
+      }
+    ],
+    onPropertyEditorUpdate: function (obj: any, editor: any) {
+      if (!!editor) {
+        editor.visibleIf = "{advancedmode} = true";
+        editor.descriptionLocation = "hidden";
+      }
+    }
+  }, {
+    type: "fontsettings",
+    name: "questionTitle",
+    displayName: getLocString("theme.titleFont"),
+    default: {
+      family: settings.theme.fontFamily,
+      // color: "rgba(0, 0, 0, 0.91)",
+      weight: "600",
+      size: 16,
+    },
+    onPropertyEditorUpdate: function (obj: any, editor: any) {
+      if (!!editor) {
+        editor.visibleIf = "{advancedmode} = true";
+        editor.descriptionLocation = "hidden";
+      }
+    },
+    onSerializeValue: (obj: ThemeModel) => {
+      return obj.onSerializeFontSettingsValue("questionTitle");
+    }
+  }, {
+    type: "fontsettings",
+    name: "questionDescription",
+    displayName: getLocString("theme.descriptionFont"),
+    default: {
+      family: settings.theme.fontFamily,
+      // color: "rgba(0, 0, 0, 0.45)",
+      weight: "400",
+      size: 16
+    },
+    onPropertyEditorUpdate: function (obj: any, editor: any) {
+      if (!!editor) {
+        editor.visibleIf = "{advancedmode} = true";
+        editor.descriptionLocation = "hidden";
+      }
+    },
+    onSerializeValue: (obj: ThemeModel) => {
+      return obj.onSerializeFontSettingsValue("questionDescription");
+    }
+  },
+  {
+    type: "boxshadowsettings",
+    name: "--sjs-shadow-inner",
+    displayName: getLocString("theme.shadow"),
+    default: [
+      {
+        x: 0,
+        y: 1,
+        blur: 2,
+        spread: 0,
+        isInset: true,
+        color: "rgba(0, 0, 0, 0.15)"
+      }
+    ],
+    onPropertyEditorUpdate: function (obj: any, editor: any) {
+      if (!!editor) {
+        editor.visibleIf = "{advancedmode} = true";
+        editor.descriptionLocation = "hidden";
+      }
+    }
+  }, {
+    type: "fontsettings",
+    name: "editorFont",
+    displayName: getLocString("theme.font"),
+    default: {
+      family: settings.theme.fontFamily,
+      // color: "rgba(0, 0, 0, 0.91)",
+      weight: "400",
+      size: 16
+    },
+    onPropertyEditorUpdate: function (obj: any, editor: any) {
+      if (!!editor) {
+        editor.visibleIf = "{advancedmode} = true";
+        editor.descriptionLocation = "hidden";
+      }
+    },
+    onSerializeValue: (obj: ThemeModel) => {
+      return obj.onSerializeFontSettingsValue("editorFont");
+    }
+  }, {
+    type: "colorsettings",
+    name: "--sjs-border-default",
+    displayName: getLocString("theme.colorsTitle"),
+    onPropertyEditorUpdate: function (obj: any, editor: any) {
+      if (!!editor) {
+        editor.visibleIf = "{advancedmode} = true";
+        editor.colorTitle = getLocString("theme.borderDefault");
+        editor.colorTitleLocation = "left";
+        editor.descriptionLocation = "hidden";
+      }
+    }
+  },
+  {
+    type: "colorsettings",
+    name: "--sjs-border-light",
+    onPropertyEditorUpdate: function (obj: any, editor: any) {
+      if (!!editor) {
+        editor.visibleIf = "{advancedmode} = true";
+        editor.colorTitle = getLocString("theme.borderLight");
+        editor.colorTitleLocation = "left";
+        editor.titleLocation = "hidden";
+        editor.descriptionLocation = "hidden";
+      }
+    }
+  },
+
+  { name: "--sjs-general-backcolor", visible: false },
+  { name: "--sjs-general-backcolor-dark", visible: false },
+
+  { name: "--sjs-general-backcolor-dim-light", visible: false },
+  { name: "--sjs-general-backcolor-dim-dark", visible: false },
+  { name: "--sjs-general-forecolor", visible: false },
+  { name: "--sjs-general-forecolor-light", visible: false },
+  { name: "--sjs-general-dim-forecolor", visible: false },
+  { name: "--sjs-general-dim-forecolor-light", visible: false },
+
+  { name: "--sjs-secondary-backcolor", visible: false },
+  { name: "--sjs-secondary-backcolor-light", visible: false },
+  { name: "--sjs-secondary-backcolor-semi-light", visible: false },
+  { name: "--sjs-secondary-forecolor", visible: false },
+  { name: "--sjs-secondary-forecolor-light", visible: false },
+  { name: "--sjs-shadow-small-reset", visible: false },
+  { name: "--sjs-shadow-medium", visible: false },
+  { name: "--sjs-shadow-large", visible: false },
+  { name: "--sjs-shadow-inner-reset", visible: false },
+  { name: "--sjs-border-light", visible: false },
+  { name: "--sjs-border-default", visible: false },
+  { name: "--sjs-border-inside", visible: false },
+  { name: "--sjs-special-red", visible: false },
+  { name: "--sjs-special-red-light", visible: false },
+  { name: "--sjs-special-red-forecolor", visible: false },
+  { name: "--sjs-special-green", visible: false },
+  { name: "--sjs-special-green-light", visible: false },
+  { name: "--sjs-special-green-forecolor", visible: false },
+  { name: "--sjs-special-blue", visible: false },
+  { name: "--sjs-special-blue-light", visible: false },
+  { name: "--sjs-special-blue-forecolor", visible: false },
+  { name: "--sjs-special-yellow", visible: false },
+  { name: "--sjs-special-yellow-light", visible: false },
+  { name: "--sjs-special-yellow-forecolor", visible: false },
+  { name: "--sjs-article-font-xx-large-textDecoration", visible: false },
+  { name: "--sjs-article-font-xx-large-fontWeight", visible: false },
+  { name: "--sjs-article-font-xx-large-fontStyle", visible: false },
+  { name: "--sjs-article-font-xx-large-fontStretch", visible: false },
+  { name: "--sjs-article-font-xx-large-letterSpacing", visible: false },
+  { name: "--sjs-article-font-xx-large-lineHeight", visible: false },
+  { name: "--sjs-article-font-xx-large-paragraphIndent", visible: false },
+  { name: "--sjs-article-font-xx-large-textCase", visible: false },
+  { name: "--sjs-article-font-x-large-textDecoration", visible: false },
+  { name: "--sjs-article-font-x-large-fontWeight", visible: false },
+  { name: "--sjs-article-font-x-large-fontStyle", visible: false },
+  { name: "--sjs-article-font-x-large-fontStretch", visible: false },
+  { name: "--sjs-article-font-x-large-letterSpacing", visible: false },
+  { name: "--sjs-article-font-x-large-lineHeight", visible: false },
+  { name: "--sjs-article-font-x-large-paragraphIndent", visible: false },
+  { name: "--sjs-article-font-x-large-textCase", visible: false },
+  { name: "--sjs-article-font-large-textDecoration", visible: false },
+  { name: "--sjs-article-font-large-fontWeight", visible: false },
+  { name: "--sjs-article-font-large-fontStyle", visible: false },
+  { name: "--sjs-article-font-large-fontStretch", visible: false },
+  { name: "--sjs-article-font-large-letterSpacing", visible: false },
+  { name: "--sjs-article-font-large-lineHeight", visible: false },
+  { name: "--sjs-article-font-large-paragraphIndent", visible: false },
+  { name: "--sjs-article-font-large-textCase", visible: false },
+  { name: "--sjs-article-font-medium-textDecoration", visible: false },
+  { name: "--sjs-article-font-medium-fontWeight", visible: false },
+  { name: "--sjs-article-font-medium-fontStyle", visible: false },
+  { name: "--sjs-article-font-medium-fontStretch", visible: false },
+  { name: "--sjs-article-font-medium-letterSpacing", visible: false },
+  { name: "--sjs-article-font-medium-lineHeight", visible: false },
+  { name: "--sjs-article-font-medium-paragraphIndent", visible: false },
+  { name: "--sjs-article-font-medium-textCase", visible: false },
+  { name: "--sjs-article-font-default-textDecoration", visible: false },
+  { name: "--sjs-article-font-default-fontWeight", visible: false },
+  { name: "--sjs-article-font-default-fontStyle", visible: false },
+  { name: "--sjs-article-font-default-fontStretch", visible: false },
+  { name: "--sjs-article-font-default-letterSpacing", visible: false },
+  { name: "--sjs-article-font-default-lineHeight", visible: false },
+  { name: "--sjs-article-font-default-paragraphIndent", visible: false },
+  { name: "--sjs-article-font-default-textCase", visible: false },
+  {
+    type: "color",
+    name: "--sjs-general-backcolor-dim",
+    displayName: getLocString("theme.backgroundDimColor"),
+    category: "background",
+  },
+  {
+    type: "colorsettings",
+    name: "--sjs-primary-backcolor",
+    displayName: getLocString("theme.accentBackground"),
+    onPropertyEditorUpdate: function (obj: any, editor: any) {
+      if (!!editor) {
+        editor.visibleIf = "{advancedmode} = true";
+        editor.colorTitle = getLocString("theme.primaryDefaultColor");
+        editor.colorTitleLocation = "left";
+        editor.descriptionLocation = "hidden";
+      }
+    }
+  }, {
+    type: "colorsettings",
+    name: "--sjs-primary-backcolor-dark",
+    onPropertyEditorUpdate: function (obj: any, editor: any) {
+      if (!!editor) {
+        editor.visibleIf = "{advancedmode} = true";
+        editor.colorTitle = getLocString("theme.primaryDarkColor");
+        editor.colorTitleLocation = "left";
+        editor.titleLocation = "hidden";
+        editor.descriptionLocation = "hidden";
+      }
+    }
+  }, {
+    type: "colorsettings",
+    name: "--sjs-primary-backcolor-light",
+    onPropertyEditorUpdate: function (obj: any, editor: any) {
+      if (!!editor) {
+        editor.visibleIf = "{advancedmode} = true";
+        editor.colorTitle = getLocString("theme.primaryLightColor");
+        editor.colorTitleLocation = "left";
+        editor.titleLocation = "hidden";
+        editor.descriptionLocation = "hidden";
+      }
+    }
+  }, {
+    type: "colorsettings",
+    name: "--sjs-primary-forecolor",
+    displayName: getLocString("theme.accentForeground"),
+    onPropertyEditorUpdate: function (obj: any, editor: any) {
+      if (!!editor) {
+        editor.visibleIf = "{advancedmode} = true";
+        editor.colorTitle = getLocString("theme.primaryForecolor");
+        editor.colorTitleLocation = "left";
+        editor.descriptionLocation = "hidden";
+      }
+    }
+  }, {
+    type: "colorsettings",
+    name: "--sjs-primary-forecolor-light",
+    onPropertyEditorUpdate: function (obj: any, editor: any) {
+      if (!!editor) {
+        editor.visibleIf = "{advancedmode} = true";
+        editor.colorTitle = getLocString("theme.primaryForecolorLight");
+        editor.colorTitleLocation = "left";
+        editor.titleLocation = "hidden";
+        editor.descriptionLocation = "hidden";
+      }
+    }
+  },
+  ]
 );
 
 export class PropertyGridEditorSpinEdit extends PropertyGridEditor {
