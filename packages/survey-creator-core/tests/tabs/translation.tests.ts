@@ -1792,9 +1792,9 @@ test("Test settings.translation.maximumSelectedLocales in matrix dynamic", () =>
   expect(visLocales).toHaveLength(2);
   expect(visLocales[0]).toEqual("de");
   expect(visLocales[1]).toEqual("fr");
-  const rows = question.visibleRows;
-  const checkQuestion3 = rows[2].cells[0].question;
-  const checkQuestion4 = rows[3].cells[0].question;
+  let rows = question.visibleRows;
+  let checkQuestion3 = rows[2].cells[0].question;
+  let checkQuestion4 = rows[3].cells[0].question;
   expect(checkQuestion3.value).toBeTruthy();
   expect(checkQuestion3.isReadOnly).toBeFalsy();
   expect(checkQuestion4.value).toBeFalsy();
@@ -1806,6 +1806,9 @@ test("Test settings.translation.maximumSelectedLocales in matrix dynamic", () =>
   expect(checkQuestion4.value).toBeFalsy();
   expect(checkQuestion4.isReadOnly).toBeFalsy();
 
+  rows = question.visibleRows;
+  checkQuestion3 = rows[2].cells[0].question;
+  checkQuestion4 = rows[3].cells[0].question;
   checkQuestion4.value = true;
   expect(checkQuestion3.value).toBeFalsy();
   expect(checkQuestion3.isReadOnly).toBeTruthy();
