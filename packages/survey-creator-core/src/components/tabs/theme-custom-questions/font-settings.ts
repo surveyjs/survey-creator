@@ -107,18 +107,6 @@ export function updateFontSettingsJSON() {
   config.json.elementsJSON = getElementsJSON();
 }
 
-// export function fontsettingsToCssVariableOld(question: Question, themeCssVariables: { [index: string]: string }) {
-//   Object.keys(question.value).forEach(key => {
-//     const innerQ = (<QuestionCompositeModel>question).contentPanel.getQuestionByName(key);
-//     const propertyName = `--sjs-font-${question.name.toLocaleLowerCase()}-${key}`;
-//     if (!question.defaultValue || question.value[key] !== question.defaultValue[key]) {
-//       themeCssVariables[propertyName] = question.value[key] + (innerQ.unit?.toString() || "");
-//     } else {
-//       themeCssVariables[propertyName] = undefined;
-//     }
-//   });
-// }
-
 export function fontsettingsToCssVariable(value: any, property: JsonObjectProperty, themeCssVariables: { [index: string]: string }) {
   Object.keys(value).forEach(key => {
     const propertyName = `--sjs-font-${property.name.toLocaleLowerCase()}-${key}`;
@@ -129,26 +117,6 @@ export function fontsettingsToCssVariable(value: any, property: JsonObjectProper
     }
   });
 }
-
-// export function fontsettingsFromCssVariableOld(question: Question, themeCssVariables: { [index: string]: string }, defaultColorVariable?: string, defaultPlaceholderColorVariable?: string): void {
-//   if (!question) return;
-
-//   const compositeQuestion = <QuestionCompositeModel>question;
-//   const fontSettingsFromTheme = Object.keys(themeCssVariables).filter(key => key.indexOf(question.name.toLocaleLowerCase()) !== -1);
-//   fontSettingsFromTheme.forEach(key => {
-//     const propertyName = key.split("-").pop();
-//     compositeQuestion.contentPanel.getQuestionByName(propertyName).value = themeCssVariables[key];
-//   });
-
-//   if (fontSettingsFromTheme.length === 0) {
-//     if (!!defaultColorVariable) {
-//       compositeQuestion.contentPanel.getQuestionByName("color").value = defaultColorVariable;
-//     }
-//     if (!!defaultPlaceholderColorVariable) {
-//       compositeQuestion.contentPanel.getQuestionByName("placeholdercolor").value = defaultPlaceholderColorVariable;
-//     }
-//   }
-// }
 
 export function fontsettingsFromCssVariable(property: JsonObjectProperty, themeCssVariables: { [index: string]: string }, defaultColorVariableName?: string, defaultPlaceholderColorVariableName?: string): any {
   if (!property) return;

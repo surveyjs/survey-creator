@@ -6,8 +6,6 @@ import { PredefinedColors } from "../../src/components/tabs/themes";
 export { QuestionFileEditorModel } from "../../src/custom-questions/question-file";
 export { QuestionSpinEditorModel } from "../../src/custom-questions/question-spin-editor";
 export { QuestionColorModel } from "../../src/custom-questions/question-color";
-export { elementSettingsFromCssVariable, elementSettingsToCssVariable } from "../../src/components/tabs/theme-custom-questions/element-settings";
-export { fontsettingsToCssVariable, fontsettingsFromCssVariable } from "../../src/components/tabs/theme-custom-questions/font-settings";
 export { createColor } from "../../src/components/tabs/theme-custom-questions/color-settings";
 export { createBoxShadow, parseBoxShadow } from "../../src/components/tabs/theme-custom-questions/boxshadow-settings";
 
@@ -169,19 +167,6 @@ test.skip("Check reset for sjs-shadow-inner due to animation", () => {
 
   themeModelJSONCssVariables = themeModel.toJSON()["cssVariables"] || {};
   expect(themeModelJSONCssVariables["--sjs-shadow-inner-reset"]).toBe("0px 0px 0px 0px rgba(0, 0, 0, 0.15), inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
-});
-
-test("Theme builder export value from composite question", (): any => {
-  const themeModel = new ThemeModel();
-
-  expect(themeModel.editorPanel.backcolor).toBe("rgba(249, 249, 249, 1)");
-  expect(themeModel.getPropertyValue("--sjs-general-backcolor-dim-light")).toEqual("rgba(249, 249, 249, 1)");
-  expect(themeModel.cssVariables["--sjs-general-backcolor-dim-light"]).toBe("rgba(249, 249, 249, 1)");
-
-  themeModel.themeName = "contrast";
-  expect(themeModel.editorPanel.backcolor).toBe("rgba(255, 216, 77, 1)");
-  expect(themeModel.getPropertyValue("--sjs-general-backcolor-dim-light")).toEqual("rgba(255, 216, 77, 1)");
-  expect(themeModel.cssVariables["--sjs-general-backcolor-dim-light"]).toBe("rgba(255, 216, 77, 1)");
 });
 
 // test("Add theme before activate", (): any => {

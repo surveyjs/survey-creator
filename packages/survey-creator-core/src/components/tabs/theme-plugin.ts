@@ -153,7 +153,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   }
   public activate(): void {
     this.model = new ThemeEditorModel(this.creator, this.simulatorCssClasses);
-    this.themeModel.init(this.creator);
+    this.themeModel.initialize(this.creator.theme, this.creator.survey);
     this.update();
     this.propertyGrid.obj = this.themeModel;
     this.propertyGrid.survey.setVariable("advancedmode", false);

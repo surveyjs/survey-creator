@@ -2,8 +2,6 @@ import { CreatorTester } from "../creator-tester";
 export { QuestionFileEditorModel } from "../../src/custom-questions/question-file";
 export { QuestionSpinEditorModel } from "../../src/custom-questions/question-spin-editor";
 export { QuestionColorModel } from "../../src/custom-questions/question-color";
-import { elementSettingsFromCssVariable, elementSettingsToCssVariable } from "../../src/components/tabs/theme-custom-questions/element-settings";
-import { fontsettingsToCssVariable, fontsettingsFromCssVariable } from "../../src/components/tabs/theme-custom-questions/font-settings";
 import { createColor } from "../../src/components/tabs/theme-custom-questions/color-settings";
 import { createBoxShadow, parseBoxShadow } from "../../src/components/tabs/theme-custom-questions/boxshadow-settings";
 import { ThemeTabPlugin } from "../../src/components/tabs/theme-plugin";
@@ -116,6 +114,36 @@ test("Theme builder: set backcolor to simulator", (): any => {
   themeModel["--sjs-general-backcolor-dim"] = "red";
   expect(themeModel["--sjs-general-backcolor-dim"]).toBe("red");
   expect(themeTabViewModel.simulator.survey.themeVariables["--sjs-general-backcolor-dim"]).toEqual("red");
+});
+
+test("Theme builder: survey settings", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const themeSurveyTab = themePlugin.model as ThemeEditorModel;
+  const themeModel = themePlugin.themeModel as ThemeModel;
+  const simulatorSurvey = themeSurveyTab.survey;
+
+  expect(themeModel.backgroundImage).toEqual(undefined);
+  expect(themeModel.backgroundImageFit).toEqual("cover");
+  expect(themeModel.backgroundOpacity).toEqual(100);
+  expect(themeModel.themeMode).toEqual("panels");
+
+  expect(simulatorSurvey.backgroundImage).toBeFalsy();
+  expect(simulatorSurvey.backgroundImageFit).toEqual("cover");
+  expect(simulatorSurvey.backgroundOpacity).toEqual(1);
+  expect(simulatorSurvey["isCompact"]).toBe(false);
+
+  themeModel.backgroundImage = "image-url";
+  themeModel.backgroundImageFit = "auto";
+  themeModel.backgroundOpacity = 60;
+  themeModel.themeMode = "lightweight";
+
+  expect(simulatorSurvey.backgroundImage).toEqual("image-url");
+  expect(simulatorSurvey.backgroundImageFit).toEqual("auto");
+  expect(simulatorSurvey.backgroundOpacity).toEqual(0.6);
+  expect(simulatorSurvey["isCompact"]).toBe(true);
 });
 
 test("import theme from file", (done) => {

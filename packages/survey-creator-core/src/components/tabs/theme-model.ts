@@ -1,4 +1,4 @@
-import { Base, ITheme, ImageAttachment, ImageFit, ItemValue, JsonObjectProperty, Question, Serializer, property, ILoadFromJSONOptions, JsonObject, IHeader, QuestionCompositeModel, EventBase } from "survey-core";
+import { Base, ITheme, ImageAttachment, ImageFit, ItemValue, JsonObjectProperty, Question, Serializer, property, ILoadFromJSONOptions, JsonObject, IHeader, QuestionCompositeModel, EventBase, SurveyModel } from "survey-core";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { PredefinedColors, PredefinedThemes, Themes } from "./themes";
 import { ISurveyCreatorOptions, settings } from "../../creator-settings";
@@ -87,14 +87,6 @@ export function getThemeChanges(fullTheme: ITheme, baseTheme?: ITheme) {
   return themeChanges;
 }
 
-function trimCssVariables(newCssVariables: { [index: string]: string }): void {
-  Object.keys(newCssVariables).forEach(key => {
-    if (newCssVariables[key] === undefined || newCssVariables[key] === null) {
-      delete newCssVariables[key];
-    }
-  });
-}
-
 export class ThemeModel extends Base {
   public static DefaultTheme = Themes["default-light"];
   private themeCssVariablesChanges: { [index: string]: string } = {};
@@ -128,7 +120,7 @@ export class ThemeModel extends Base {
     onSet: (newValue: any, target: ThemeModel) => {
       let basecolor = parseColor(target.questionPanel.backcolor).color;
       const newColor = ingectAlpha(basecolor, newValue / 100);
-      if(target.questionPanel.backcolor !== newColor) {
+      if (target.questionPanel.backcolor !== newColor) {
         const newQuestionPanel = { ...target.questionPanel };
         newQuestionPanel.backcolor = newColor;
         target.questionPanel = newQuestionPanel;
@@ -140,7 +132,7 @@ export class ThemeModel extends Base {
     onSet: (newValue: any, target: ThemeModel) => {
       let basecolor = parseColor(target.editorPanel.backcolor).color;
       const newColor = ingectAlpha(basecolor, newValue / 100);
-      if(target.editorPanel.backcolor !== newColor) {
+      if (target.editorPanel.backcolor !== newColor) {
         const newEditorPanel = { ...target.editorPanel };
         newEditorPanel.backcolor = newColor;
         target.editorPanel = newEditorPanel;
@@ -167,7 +159,7 @@ export class ThemeModel extends Base {
     this._defaultSessionTheme = theme;
   }
 
-  public get cssVariables(): { [index: string]: string} {
+  public get cssVariables(): { [index: string]: string } {
     return this.toJSON()["cssVariables"] || {};
   }
 
@@ -265,17 +257,17 @@ export class ThemeModel extends Base {
   //   }
   // }
 
-  private initializeColorCalculator() {
-    if (!this["--sjs-primary-backcolor"] ||
-      !this["--sjs-primary-backcolor-light"] ||
-      !this["--sjs-primary-backcolor-dark"]) {
+  private initializeColorCalculator(cssVariables: { [index: string]: string }) {
+    if (!cssVariables["--sjs-primary-backcolor"] ||
+      !cssVariables["--sjs-primary-backcolor-light"] ||
+      !cssVariables["--sjs-primary-backcolor-dark"]) {
       return;
     }
 
     this.colorCalculator.initialize(
-      this["--sjs-primary-backcolor"],
-      this["--sjs-primary-backcolor-light"],
-      this["--sjs-primary-backcolor-dark"]
+      cssVariables["--sjs-primary-backcolor"],
+      cssVariables["--sjs-primary-backcolor-light"],
+      cssVariables["--sjs-primary-backcolor-dark"]
     );
   }
 
@@ -393,18 +385,14 @@ export class ThemeModel extends Base {
   constructor() {
     super();
     this.setNewHeaderProperty();
-    this.themeName = ThemeModel.DefaultTheme.themeName || "default";
-    this.loadTheme({ themeName: this.themeName });
   }
 
-  init(surveyProvider: SurveyCreatorModel) {
-    const surveyTheme = surveyProvider.theme;
-    this.backgroundImage = surveyTheme.backgroundImage !== undefined ? surveyTheme.backgroundImage : surveyProvider.survey.backgroundImage;
-    this.backgroundImageFit = surveyTheme.backgroundImageFit !== undefined ? surveyTheme.backgroundImageFit : surveyProvider.survey.backgroundImageFit;
-    this.backgroundImageAttachment = surveyTheme.backgroundImageAttachment !== undefined ? surveyTheme.backgroundImageAttachment : surveyProvider.survey.backgroundImageAttachment;
-    this.backgroundOpacity = ((surveyTheme.backgroundOpacity !== undefined ? surveyTheme.backgroundOpacity : surveyProvider.survey.backgroundOpacity) || 1) * 100;
+  initialize(surveyTheme: ITheme = {}, survey?: SurveyModel) {
+    this.backgroundImage = surveyTheme.backgroundImage !== undefined ? surveyTheme.backgroundImage : survey?.backgroundImage;
+    this.backgroundImageFit = surveyTheme.backgroundImageFit !== undefined ? surveyTheme.backgroundImageFit : survey?.backgroundImageFit;
+    this.backgroundImageAttachment = surveyTheme.backgroundImageAttachment !== undefined ? surveyTheme.backgroundImageAttachment : survey?.backgroundImageAttachment;
+    this.backgroundOpacity = ((surveyTheme.backgroundOpacity !== undefined ? surveyTheme.backgroundOpacity : survey?.backgroundOpacity) || 1) * 100;
     this.loadTheme(surveyTheme);
-    surveyProvider.hasPendingThemeChanges = false;
   }
 
   // public get availableThemes() {
@@ -437,7 +425,7 @@ export class ThemeModel extends Base {
   @property({
     onSet: (newValue: any, target: ThemeModel) => {
       let opacity = parseColor(newValue.backcolor).opacity;
-      if(target.panelBackgroundTransparency !== opacity) {
+      if (target.panelBackgroundTransparency !== opacity) {
         target.panelBackgroundTransparency = opacity;
       }
     }
@@ -446,7 +434,7 @@ export class ThemeModel extends Base {
   @property({
     onSet: (newValue: any, target: ThemeModel) => {
       let opacity = parseColor(newValue.backcolor).opacity;
-      if(target.questionBackgroundTransparency !== opacity) {
+      if (target.questionBackgroundTransparency !== opacity) {
         target.questionBackgroundTransparency = opacity;
       }
     }
@@ -458,7 +446,7 @@ export class ThemeModel extends Base {
 
   private blockThemeChangedNotifications = 0;
   public loadTheme(theme: ITheme) {
-    // this.blockThemeChangedNotifications += 1;
+    this.blockThemeChangedNotifications += 1;
     try {
       let probeThemeFullName = getThemeFullName(theme);
       const baseTheme = findSuitableTheme(theme.themeName, theme.colorPalette, theme.isPanelless ? "lightweight" : "panels", probeThemeFullName);
@@ -477,7 +465,6 @@ export class ThemeModel extends Base {
       const effectiveThemeCssVariables = {};
       assign(effectiveThemeCssVariables, ThemeModel.DefaultTheme.cssVariables || {}, baseTheme.cssVariables || {});
       assign(effectiveThemeCssVariables, theme.cssVariables || {}, this.themeCssVariablesChanges);
-      trimCssVariables(effectiveThemeCssVariables);
       const effectiveTheme: ITheme = {
         backgroundImage: this.backgroundImage || baseTheme.backgroundImage || "",
         backgroundImageFit: this.backgroundImageFit || baseTheme.backgroundImageFit,
@@ -492,12 +479,12 @@ export class ThemeModel extends Base {
       assign(effectiveTheme, theme, { cssVariables: effectiveThemeCssVariables, themeName: this.themeName, colorPalette: this.themePalette, isPanelless: this.themeMode === "lightweight" });
       // this.surveyProvider.theme = effectiveTheme;
 
-      this.initializeColorCalculator();
+      this.initializeColorCalculator(effectiveTheme.cssVariables);
       // this.loadThemeIntoPropertyGrid();
       this.fromJSON(effectiveTheme);
     }
     finally {
-      // this.blockThemeChangedNotifications -= 1;
+      this.blockThemeChangedNotifications -= 1;
     }
   }
 
@@ -546,11 +533,6 @@ export class ThemeModel extends Base {
       this.onThemeSelected.fire(this, { theme: this.toJSON() });
       return true;
     }
-    if (["backgroundImage", "backgroundImageFit", "backgroundImageAttachment", "backgroundOpacity"].indexOf(name) !== -1) {
-      this[name] = value;
-      this.onThemePropertyChanged.fire(this, { name, value });
-      return true;
-    }
     return false;
   }
 
@@ -558,6 +540,7 @@ export class ThemeModel extends Base {
     super.onPropertyValueChanged(name, oldValue, newValue);
 
     // if (this.blockChanges) return;
+    if (this.blockThemeChangedNotifications > 0) return;
 
     // if (this.blockThemeChangedNotifications == 0) {
     //   this.undoRedoManager.startTransaction(name + " changed");
@@ -571,25 +554,24 @@ export class ThemeModel extends Base {
       return;
     }
 
-    /*if (name === "headerViewContainer") {
-      this.headerViewContainerPropertiesChanged(options);
-    }*/
+    this.blockThemeChangedNotifications += 1;
 
-    if (name === "--sjs-shadow-inner" || name === "--sjs-shadow-small") {
-      this.shadowInnerPropertiesChanged(name, newValue);
+    if (["backgroundImage", "backgroundImageFit", "backgroundImageAttachment", "backgroundOpacity"].indexOf(name) !== -1) {
+      this[name] = newValue;
+      this.onThemePropertyChanged.fire(this, { name, value: newValue });
+      this.blockThemeChangedNotifications -= 1;
+      return;
     }
 
     this.cssVariablePropertiesChanged(name, newValue);
 
-    this.blockThemeChangedNotifications += 1;
     const hasUpdatedDependentValues = this.updateDependentQuestionValues(name, newValue);
 
     // const newCssVariables = {};
     // assign(newCssVariables, this.currentTheme.cssVariables, this.themeCssVariablesChanges);
-    // this.trimCssVariables(newCssVariables);
     // this.currentTheme.cssVariables = newCssVariables;
 
-    // this.blockThemeChangedNotifications -= 1;
+    this.blockThemeChangedNotifications -= 1;
     // if (!!this.undoRedoManager && this.blockThemeChangedNotifications == 0) {
     //   this.undoRedoManager.stopTransaction();
     // }
@@ -616,7 +598,7 @@ export class ThemeModel extends Base {
 
   onSerializeFontSettingsValue(propertyName: string) {
     const result = { ...this[propertyName] };
-    if(result.size != this.getPropertyByName(propertyName).defaultValue.size) {
+    if (result.size != this.getPropertyByName(propertyName).defaultValue?.size) {
       result.size = result.size + "px";
     }
     return result;
@@ -624,14 +606,14 @@ export class ThemeModel extends Base {
 
   onSerializeElementSettingsValue(propertyName: string) {
     const result = { ...this[propertyName] };
-    if(result.cornerRadius != this.getPropertyByName(propertyName).defaultValue.cornerRadius) {
+    if (result.cornerRadius != this.getPropertyByName(propertyName).defaultValue?.cornerRadius) {
       result.cornerRadius = result.cornerRadius + "px";
     }
     return result;
   }
 
   fromJSON(json: ITheme, options?: ILoadFromJSONOptions): void {
-    if(json && json.cssVariables) {
+    if (json && json.cssVariables) {
       super.fromJSON(json.cssVariables, options);
 
       this.commonScale = roundTo2Decimals(parseFloat(this["--sjs-base-unit"]) * 100 / 8);
@@ -651,14 +633,20 @@ export class ThemeModel extends Base {
   }
 
   toJSON(options?: ISaveToJSONOptions): ITheme {
-    this["--sjs-base-unit"] = (this.commonScale * 8 / 100) + "px";
-    this["--sjs-font-size"] = (this.commonFontSize * 16 / 100) + "px";
-    this["--sjs-corner-radius"] = this.cornerRadius + "px";
+    if (this.commonScale !== undefined) {
+      this["--sjs-base-unit"] = (this.commonScale * 8 / 100) + "px";
+    }
+    if (this.commonFontSize !== undefined) {
+      this["--sjs-font-size"] = (this.commonFontSize * 16 / 100) + "px";
+    }
+    if (this.cornerRadius !== undefined) {
+      this["--sjs-corner-radius"] = this.cornerRadius + "px";
+    }
 
     const result = super.toJSON(options);
     const cssVariables = {};
     Object.keys(result).forEach(key => {
-      if(key.indexOf("--sjs") == 0) {
+      if (key.indexOf("--sjs") == 0) {
         cssVariables[key] = result[key];
         delete result[key];
       } else if (key !== "header" && typeof result[key] === "object") {
@@ -695,7 +683,7 @@ Serializer.addClass(
         { value: "light", text: getLocString("theme.themePaletteLight") },
         { value: "dark", text: getLocString("theme.themePaletteDark") }
       ],
-      default: "light",
+      // default: "light",
       category: "general",
     }, {
       type: "buttongroup",
@@ -704,19 +692,18 @@ Serializer.addClass(
       choices: [
         { value: "panels", text: getLocString("theme.themeModePanels") },
         { value: "lightweight", text: getLocString("theme.themeModeLightweight") }],
-      default: "panels",
+      // default: "panels",
       category: "general",
     },
     {
       type: "spinedit",
       name: "commonScale",
       displayName: getLocString("theme.scale"),
-      default: 100,
+      // default: 100,
       onPropertyEditorUpdate: function (obj: any, editor: any) {
         if (!!editor) {
           editor.unit = "%";
           editor.min = 0;
-          editor.max = 100;
           editor.step = 5;
           editor.visibleIf = "{advancedmode} = false";
         }
@@ -725,7 +712,7 @@ Serializer.addClass(
       type: "spinedit",
       name: "cornerRadius",
       displayName: getLocString("theme.cornerRadius"),
-      default: 4,
+      // default: 4,
       onPropertyEditorUpdate: function (obj: any, editor: any) {
         if (!!editor) {
           editor.unit = "px";
@@ -738,12 +725,11 @@ Serializer.addClass(
       type: "spinedit",
       name: "commonFontSize",
       displayName: getLocString("theme.fontSize"),
-      default: 100,
+      // default: 100,
       onPropertyEditorUpdate: function (obj: any, editor: any) {
         if (!!editor) {
           editor.unit = "%";
           editor.min = 0;
-          editor.max = 100;
           editor.step = 5;
           editor.visibleIf = "{advancedmode} = false";
         }
@@ -923,7 +909,6 @@ Serializer.addProperties("themebuilder",
     displayName: getLocString("theme.titleFont"),
     default: {
       family: settings.theme.fontFamily,
-      // color: "rgba(0, 0, 0, 0.91)",
       weight: "700",
       size: 24
     },
@@ -942,7 +927,6 @@ Serializer.addProperties("themebuilder",
     displayName: getLocString("theme.descriptionFont"),
     default: {
       family: settings.theme.fontFamily,
-      // color: "rgba(0, 0, 0, 0.91)",
       weight: "700",
       size: 24
     },
@@ -981,7 +965,6 @@ Serializer.addProperties("themebuilder",
     displayName: getLocString("theme.titleFont"),
     default: {
       family: settings.theme.fontFamily,
-      // color: "rgba(0, 0, 0, 0.91)",
       weight: "600",
       size: 16,
     },
@@ -1000,7 +983,6 @@ Serializer.addProperties("themebuilder",
     displayName: getLocString("theme.descriptionFont"),
     default: {
       family: settings.theme.fontFamily,
-      // color: "rgba(0, 0, 0, 0.45)",
       weight: "400",
       size: 16
     },
@@ -1040,7 +1022,6 @@ Serializer.addProperties("themebuilder",
     displayName: getLocString("theme.font"),
     default: {
       family: settings.theme.fontFamily,
-      // color: "rgba(0, 0, 0, 0.91)",
       weight: "400",
       size: 16
     },

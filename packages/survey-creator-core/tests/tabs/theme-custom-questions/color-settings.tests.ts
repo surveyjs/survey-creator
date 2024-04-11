@@ -9,7 +9,7 @@ export { QuestionColorModel } from "../../../src/custom-questions/question-color
 test("Check parseColor and createColor functions", () => {
   let color = "#673241";
   let parsedColor = parseColor(color);
-  expect(parsedColor).toEqual({
+  expect(parsedColor).toStrictEqual({
     color: "#673241",
     opacity: 100
   });
@@ -17,7 +17,7 @@ test("Check parseColor and createColor functions", () => {
   expect(createdColor).toBe("rgba(103, 50, 65, 1)");
   color = "rgb(103, 50, 65)";
   parsedColor = parseColor(color);
-  expect(parsedColor).toEqual({
+  expect(parsedColor).toStrictEqual({
     color: "#673241",
     opacity: 100
   });
@@ -25,7 +25,7 @@ test("Check parseColor and createColor functions", () => {
   expect(createdColor).toBe("rgba(103, 50, 65, 1)");
   color = "rgb(103, 50, 65, 0.75)";
   parsedColor = parseColor(color);
-  expect(parsedColor).toEqual({
+  expect(parsedColor).toStrictEqual({
     color: "#673241",
     opacity: 75
   });
@@ -41,7 +41,7 @@ test("Check colorsettings question", () => {
     }]
   });
   const question = survey.getAllQuestions()[0];
-  expect(survey.data).toEqual({});
+  expect(survey.data).toStrictEqual({});
   survey.data = {
     "test": "rgba(103, 50, 65, 0.75)"
   };
@@ -54,13 +54,13 @@ test("Check colorsettings question", () => {
     "opacity": 50
   };
   expect(question.value).toEqual("rgba(103, 63, 255, 0.5)");
-  expect(survey.data).toEqual({ "test": "rgba(103, 63, 255, 0.5)" });
+  expect(survey.data).toStrictEqual({ "test": "rgba(103, 63, 255, 0.5)" });
 
   question.contentPanel.questions[0].value = "#673000";
   question.contentPanel.questions[1].value = 25;
 
   expect(question.value).toEqual("rgba(103, 48, 0, 0.25)");
-  expect(survey.data).toEqual({ test: "rgba(103, 48, 0, 0.25)" });
+  expect(survey.data).toStrictEqual({ test: "rgba(103, 48, 0, 0.25)" });
 });
 
 test("Check colorsettings + another composite questions", () => {
@@ -89,7 +89,7 @@ test("Check colorsettings + another composite questions", () => {
   const question = survey.getAllQuestions()[0];
 
   expect(question.contentPanel.questions[0].value).toBe("rgba(68, 69, 67, 0.5)");
-  expect(survey.data).toEqual({ test: { backcolor: "rgba(68, 69, 67, 0.5)" } });
+  expect(survey.data).toStrictEqual({ test: { backcolor: "rgba(68, 69, 67, 0.5)" } });
 
   expect(question.contentPanel.questions[0].contentPanel.questions[0].value).toBe("#444543");
   expect(question.contentPanel.questions[0].contentPanel.questions[1].value).toBe(50);
@@ -100,13 +100,13 @@ test("Check colorsettings + another composite questions", () => {
     }
   };
   expect(question.contentPanel.questions[0].value).toBe("rgba(255, 255, 240, 1)");
-  expect(survey.data).toEqual({ test: { backcolor: "#fffff0" } });
+  expect(survey.data).toStrictEqual({ test: { backcolor: "#fffff0" } });
 
   question.contentPanel.questions[0].contentPanel.questions[0].value = "#19b000";
   question.contentPanel.questions[0].contentPanel.questions[1].value = 40;
 
   expect(question.contentPanel.questions[0].value).toBe("rgba(25, 176, 0, 0.4)");
-  expect(survey.data).toEqual({ test: { backcolor: "rgba(25, 176, 0, 0.4)" } });
+  expect(survey.data).toStrictEqual({ test: { backcolor: "rgba(25, 176, 0, 0.4)" } });
 
   Serializer.removeClass("elementsettingstest");
 });

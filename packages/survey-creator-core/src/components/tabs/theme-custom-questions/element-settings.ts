@@ -60,41 +60,6 @@ export function elementSettingsToCssVariable(value: any, property: JsonObjectPro
   });
 }
 
-// export function elementSettingsToCssVariableOld(question: Question, themeCssVariables: { [index: string]: string }) {
-//   Object.keys(question.value).forEach(key => {
-//     if (key === "corner") return;
-
-//     const propertyName = `--sjs-${question.name.toLocaleLowerCase()}-${key}`;
-//     if (!question.defaultValue || question.value[key] !== (question as Question).defaultValue[key]) {
-//       themeCssVariables[propertyName] = question.value[key];
-//     } else {
-//       themeCssVariables[propertyName] = undefined;
-//     }
-//   });
-// }
-
-// export function elementSettingsFromCssVariableOld(question: Question, themeCssVariables: { [index: string]: string }, defaultBackcolorVariable: string, defaultHovercolorVariable: string): void {
-//   if (!question) return;
-
-//   const compositeQuestion = <QuestionCompositeModel>question;
-//   const elementSettingsFromTheme = Object.keys(themeCssVariables).filter(key => key.indexOf(question.name.toLocaleLowerCase()) !== -1);
-
-//   elementSettingsFromTheme.forEach(key => {
-//     const propertyName = key.split("-").pop();
-
-//     if (propertyName === "cornerRadius" && themeCssVariables[key] !== undefined) {
-//       compositeQuestion.contentPanel.getQuestionByName("corner").value = parseFloat(themeCssVariables[key].toString());
-//     } else {
-//       compositeQuestion.contentPanel.getQuestionByName(propertyName).value = themeCssVariables[key];
-//     }
-//   });
-
-//   if (elementSettingsFromTheme.length === 0) {
-//     (<QuestionCompositeModel>question).contentPanel.getQuestionByName("backcolor").value = defaultBackcolorVariable;
-//     (<QuestionCompositeModel>question).contentPanel.getQuestionByName("hovercolor").value = defaultHovercolorVariable;
-//   }
-// }
-
 export function elementSettingsFromCssVariable(property: JsonObjectProperty, themeCssVariables: { [index: string]: string }, defaultBackcolorVariableName: string, defaultHovercolorVariableName: string, defaultCornerRadius: number): any {
   if (!property) return;
 

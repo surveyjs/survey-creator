@@ -75,8 +75,7 @@ test("Check createBoxShadow and parseBoxShadow functions", () => {
   expect(createdBoxShadow).toBe("inset 2px 3px 4px 6px rgb(103, 50, 65), 1px 1px 1px 1px rgb(22, 21, 23), 3px 3px 3px 3px rgb(32, 31, 33)");
 
   createdBoxShadow = createBoxShadow([{}]);
-  expect(createdBoxShadow).toBe("0px 0px 0px 0px #000000");
-
+  expect(createdBoxShadow).toBeFalsy();
 });
 
 test("Check boxshadowsettings question", () => {
@@ -87,7 +86,7 @@ test("Check boxshadowsettings question", () => {
     }]
   });
   const question = survey.getAllQuestions()[0];
-  expect(survey.data).toEqual({});
+  expect(survey.data).toStrictEqual({});
   survey.data = {
     "test": "2px 3px 4px 6px rgba(103, 50, 65, 0.75)"
   };
@@ -108,7 +107,7 @@ test("Check boxshadowsettings question", () => {
     "y": 10,
   }];
   question.contentQuestion.panels[0].getQuestionByName("color").contentPanel.getQuestionByName("opacity").value = 7;
-  expect(survey.data).toEqual({ "test": "inset 5px 10px 6px 8px rgba(103, 63, 255, 0.07)" });
+  expect(survey.data).toStrictEqual({ "test": "inset 5px 10px 6px 8px rgba(103, 63, 255, 0.07)" });
 });
 
 test("boxshadowsettings should exists after ComponentCollection.Instance.clear()", () => {
