@@ -12,7 +12,7 @@
 <a href="https://github.com/surveyjs/survey-creator/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aclosed+">
 <img alt="Closed issues" title="Closed Issues" src="https://img.shields.io/github/issues-closed/surveyjs/survey-creator.svg">
 </a>
-<a href="https://github.com/surveyjs/survey-creator/releases/">
+<a href="https://surveyjs.io/stay-updated/release-notes">
 <img alt="GitHub Release" src="https://img.shields.io/github/v/release/surveyjs/survey-creator">
 </a>
 
@@ -45,7 +45,11 @@ It features a drag-and-drop UI, CSS Theme Editor, and GUI for conditional logic 
 
 </br>
 
-![Survey Creator / Form Builder by SurveyJS](docs/images/survey-creator-overview.png)
+
+
+https://github.com/surveyjs/survey-creator/assets/102306951/afb8a75d-921e-4e5f-89bb-961b9b89388d
+
+
 
 ## Features
 
