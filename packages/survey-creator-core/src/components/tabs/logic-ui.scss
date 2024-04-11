@@ -73,7 +73,7 @@
 .svc-logic-operator.svc-logic-operator {
   &:hover,
   &:focus {
-    color: #ffffff;
+    color: $primary-foreground;
     outline: none;
     box-shadow: none;
   }

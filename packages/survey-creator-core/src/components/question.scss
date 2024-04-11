@@ -27,7 +27,7 @@ svc-question {
 
         &:active {
           opacity: 0.5;
-          background-color: var(--background-dim, #f3f3f3);
+          background-color: $background-dim;
         }
       }
     }

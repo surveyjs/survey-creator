@@ -25,7 +25,7 @@
 
 .svc-notifier.svc-notifier--error {
   background-color: $red;
-  color: #ffffff;
+  color: $red-forecolor;
   opacity: 1;
 }
 

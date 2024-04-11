@@ -3,7 +3,7 @@
 .svd-test-results {
   font-family: $font-family;
   border-radius: 4px;
-  box-shadow: inset 0px 1px 0px 0px var(--sjs-border-inside, var(--border-inside, rgba(0, 0, 0, 0.16)));
+  box-shadow: $shadow-inner;
   padding: calc(12 * var(--sjs-base-unit, var(--base-unit, 8px)));
 
   .svd-test-results__header {

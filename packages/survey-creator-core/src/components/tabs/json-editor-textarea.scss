@@ -38,7 +38,7 @@ svc-tab-json-editor-textarea {
   padding: $base-unit;
 
   background-color: $background;
-  background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.1));
+  background-image: linear-gradient(to bottom, transparent, $border-inside);
   border: 1px solid $border;
   border-radius: 1px;
 
