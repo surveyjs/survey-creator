@@ -334,6 +334,7 @@ export var enStrings = {
       signatureAutoScaleEnabled: "Auto-scale the signature area",
       showPlaceholder: "Show a placeholder within signature area",
       placeholder: "Placeholder text",
+      placeholderReadOnly: "Placeholder text in read-only or preview mode",
       allowClear: "Show the Clear button within signature area",
       penMinWidth: "Minimum stroke width",
       penMaxWidth: "Maximum stroke width",
@@ -652,6 +653,7 @@ export var enStrings = {
     textUpdateMode: "Update input field values",
     maskType: "Input mask type",
     maskTypes: {
+      none: "None",
       patternmask: "Pattern",
       numericmask: "Numeric",
       datetimemask: "Date and Time",
@@ -738,6 +740,10 @@ export var enStrings = {
     itemvalue: {
       visibleIf: "Make the option visible if",
       enableIf: "Make the option selectable if"
+    },
+    "itemvalue@rows": {
+      visibleIf: "Make the row visible if",
+      enableIf: "Make the row editable if"
     },
     imageitemvalue: {
       text: "Alt text",
@@ -1219,10 +1225,14 @@ export var enStrings = {
       imageHeight: "Adjusts the height of the image in the survey results.",
       imageWidth: "Adjusts the width of the image in the survey results.",
     },
+    image: {
+      contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided."
+    },
     imagepicker: {
       imageHeight: "Overrides the minimum and maximum height values.",
       imageWidth: "Overrides the minimum and maximum width values.",
       choices: "\"Value\" serves as an item ID used in conditional rules; \"Text\" is displayed to respondents.",
+      contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options."
     },
     text: {
       size: "This setting only resizes the input field and doesn't affect the width of the question box. To limit the accepted input length, go to <b>Validation → Maximum character limit</b>."
@@ -1335,7 +1345,6 @@ export var enStrings = {
     dataList: "Enter a list of choices that will be suggested to the respondent during input.",
     itemSize: "The setting only resizes the input fields and doesn't affect the width of the question box.",
     itemTitleWidth: "Sets consistent width for all item labels in pixels",
-    contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided.",
     altText: "Serves as a substitute when the image cannot be displayed on a user's device and for accessibility purposes.",
     rateColorMode: "Defines the color of the selected emoji when the Rating icon type is set to \"Smileys\". Choose between: \"Default\" - the selected emoji appears in default survey color; \"Scale\" - the selected emoji inherits color from the rating scale.",
     expression: {

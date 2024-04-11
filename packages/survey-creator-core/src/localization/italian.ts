@@ -168,6 +168,7 @@ var italianTranslation = {
     htmlPlaceHolder: "Il contenuto HTML sarà qui.",
     panelPlaceHolder: "Trascina una domanda dalla toolbox qui.",
     surveyPlaceHolder: "Il sondaggio è vuoto. Trascina un elemento dalla toolbox o clicca sul tasto sottostante.",
+    pagePlaceHolder: "La pagina è vuota. Trascinare un elemento dalla casella degli strumenti o fare clic sul pulsante sottostante.",
     imagePlaceHolder: "Trascina e rilascia un'immagine qui o fai clic sul pulsante qui sotto e scegli un'immagine da caricare",
     imageChooseImage: "Scegli immagine",
     addNewTypeQuestion: "Aggiungi {0}", //{0} is localizable question type
@@ -634,6 +635,7 @@ var italianTranslation = {
     textUpdateMode: "Aggiornare il valore del testo della domanda",
     maskType: "Tipo di maschera di input",
     maskTypes: {
+      none: "Nessuno",
       patternmask: "Modello",
       numericmask: "Numerico",
       datetimemask: "Data e ora",
@@ -720,6 +722,10 @@ var italianTranslation = {
     itemvalue: {
       visibleIf: "Rendi visibile l'opzione se",
       enableIf: "Rendere l'opzione selezionabile se"
+    },
+    "itemvalue@rows": {
+      visibleIf: "Rendi visibile la riga se",
+      enableIf: "Rendi la riga modificabile se"
     },
     imageitemvalue: {
       text: "Testo alternativo"
@@ -2281,3 +2287,7 @@ editorLocalization.locales["it"] = italianTranslation;
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "Uno o più simboli da visualizzare dopo il valore."
 // ed.translationSource: "Source: " => "Fonte: "
 // ed.translationTarget: "Target: " => "Bersaglio: "
+// ed.pagePlaceHolder: "The page is empty. Drag an element from the toolbox or click the button below." => "La pagina è vuota. Trascinare un elemento dalla casella degli strumenti o fare clic sul pulsante sottostante."
+// maskTypes.none: "None" => "Nessuno"
+// itemvalue@rows.visibleIf: "Make the row visible if" => "Rendi visibile la riga se"
+// itemvalue@rows.enableIf: "Make the row editable if" => "Rendi la riga modificabile se"

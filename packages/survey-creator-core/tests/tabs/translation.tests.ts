@@ -1954,3 +1954,28 @@ test("Translation: readOnly & onMachineTranslate", () => {
   creator.activeTab = "designer";
   expect(creator.readOnly).toBeTruthy();
 });
+
+test("Complex value text in TranslationItem", () => {
+  const survey = new SurveyModel({});
+  const translation: Translation = new Translation(survey);
+
+  const itemValueJson = {
+    value:
+      "Les attentes concernant l'évaluation ont été clairement expliquées (type d'évaluation, durée, délais, critères d'évaluation, etc.)",
+    text: {
+      en: "Expectations regarding assessment have been explained (assessment mode, length, deadlines, correction criteria, etc.).",
+    },
+  };
+  const itemValue = new ItemValue(itemValueJson.value);
+  itemValue.fromJSON(itemValueJson);
+  const ti = new TranslationItem(
+    itemValue.value,
+    itemValue.locText,
+    itemValue.value,
+    translation,
+    itemValue
+  );
+
+  expect(ti.localizableName).toBe(itemValueJson.value);
+  expect(ti.text).toBe(itemValueJson.value);
+});

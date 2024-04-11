@@ -31,7 +31,8 @@ import {
   QuestionCommentModel,
   QuestionImagePickerModel,
   ComponentCollection,
-  QuestionBooleanModel
+  QuestionBooleanModel,
+  QuestionRadiogroupModel
 } from "survey-core";
 import {
   EmptySurveyCreatorOptions,
@@ -327,6 +328,7 @@ test("itemvalue[] property editor + detail panel", () => {
   row.showDetailPanel();
   expect(row.detailPanel).toBeTruthy(); //"Detail panel is showing");
   expect(row.detailPanel.getQuestionByName("visibleIf")).toBeTruthy(); //"visibleIf property is here"
+  expect(row.detailPanel.getQuestionByName("visibleIf").title).toBe("Make the option visible if");
 });
 test("itemvalue[] property editor + row actions", () => {
   var question = new QuestionDropdownModel("q1");
@@ -1040,6 +1042,8 @@ test("matrix dropdown rows, enableIf and visibleIf in row", () => {
   expect(visibleIfQuestion).toBeTruthy();
   expect(enableIfQuestion).toBeTruthy();
   expect(visibleIfQuestion.parent).toEqual(enableIfQuestion.parent);
+  expect(visibleIfQuestion.title).toBe("Make the row visible if");
+  expect(enableIfQuestion.title).toBe("Make the row editable if");
 });
 test("matrix rows/columns, enableIf and visibleIf in row", () => {
   const options = new EmptySurveyCreatorOptions();
@@ -3248,4 +3252,102 @@ test("Check enableIf for nested proeprties", () => {
   expect(pathQuestion.readOnly).toBeTruthy();
 
   prop.enableIf = oldEnableIf;
+});
+test("PropertyGridEditorMaskType editor", () => {
+  const question = new QuestionTextModel("q1");
+  const propertyGrid = new PropertyGridModelTester(question);
+  const maskTypeQuestion = propertyGrid.survey.getQuestionByName("maskType");
+  expect(maskTypeQuestion.getType()).toEqual("dropdown");
+  expect(maskTypeQuestion.selectedItem.value).toEqual("none");
+  expect(maskTypeQuestion.selectedItem.title).toEqual("None");
+
+  maskTypeQuestion.value = "pattern";
+  expect(maskTypeQuestion.selectedItem.value).toEqual("pattern");
+  expect(maskTypeQuestion.selectedItem.title).toEqual("Pattern");
+});
+test("PropertyGridEditorMaskType editor: localize item", () => {
+  const enLocale = editorLocalization.getLocale("");
+  const oldMaskTypesNone = enLocale.pe.maskTypes.none;
+  enLocale.pe.maskTypes.none = "Unmasked";
+
+  const question = new QuestionTextModel("q1");
+  const propertyGrid = new PropertyGridModelTester(question);
+  const maskTypeQuestion = propertyGrid.survey.getQuestionByName("maskType");
+  expect(maskTypeQuestion.getType()).toEqual("dropdown");
+  expect(maskTypeQuestion.selectedItem.value).toEqual("none");
+  expect(maskTypeQuestion.selectedItem.title).toEqual("Unmasked");
+
+  enLocale.pe.maskTypes.none = oldMaskTypesNone;
+});
+test("PropertyGridEditorMaskType editor: localize item", () => {
+  ComponentCollection.Instance.add({
+    name: "CSAT",
+    inheritBaseProps: true,
+    questionJSON: {
+      type: "rating",
+      rateType: "labels"
+    }
+  });
+  const question = Serializer.createClass("CSAT", { name: "q1" });
+  expect(question.getType()).toBe("csat");
+  const propertyGrid = new PropertyGridModelTester(question);
+  const autoGenerateQuestion = propertyGrid.survey.getQuestionByName("autoGenerate");
+  expect(autoGenerateQuestion.value).toBeTruthy();
+
+  ComponentCollection.Instance.clear();
+});
+test("surveypages property editor & default value", () => {
+  Serializer.addProperty("survey", { name: "name", default: "test" });
+  const survey = new SurveyModel();
+  survey.addNewPage("page1");
+  survey.addNewPage("page2");
+  const propertyGrid = new PropertyGridModelTester(survey);
+  const pagesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("pages")
+  );
+  const col = pagesQuestion.getColumnByName("name");
+  expect(col.cellType).toEqual("text");
+
+  Serializer.removeProperty("survey", "name");
+});
+test("showRefuseItem&showDontKnowItem in question&column", () => {
+  const question = new QuestionRadiogroupModel("q1");
+  const matrix = new QuestionMatrixDynamicModel("q2");
+  const column = matrix.addColumn("col1");
+  column.cellType = "dropdown";
+  const prop1 = Serializer.findProperty("selectbase", "showRefuseItem");
+  const prop2 = Serializer.findProperty("selectbase", "showDontKnowItem");
+  expect(prop1.visible).toBeFalsy();
+  let propertyGrid = new PropertyGridModelTester(question);
+  expect(propertyGrid.survey.getQuestionByName("showRefuseItem")).toBeFalsy();
+  prop1.visible = true;
+  prop2.visible = true;
+  propertyGrid = new PropertyGridModelTester(question);
+  let survey = propertyGrid.survey;
+  expect(survey.getQuestionByName("showRefuseItem")).toBeTruthy();
+  expect(survey.getQuestionByName("showDontKnowItem")).toBeTruthy();
+  expect(survey.getQuestionByName("refuseText")).toBeTruthy();
+  expect(survey.getQuestionByName("dontKnowText")).toBeTruthy();
+
+  propertyGrid = new PropertyGridModelTester(column);
+  survey = propertyGrid.survey;
+  expect(survey.getQuestionByName("showRefuseItem")).toBeTruthy();
+  expect(survey.getQuestionByName("showDontKnowItem")).toBeTruthy();
+  expect(survey.getQuestionByName("refuseText")).toBeTruthy();
+  expect(survey.getQuestionByName("dontKnowText")).toBeTruthy();
+
+  prop1.visible = false;
+  prop2.visible = false;
+});
+test("It is impossible to clear value for numeric property, bug##5395", () => {
+  const question = new QuestionImagePickerModel("q1");
+  const propertyGrid = new PropertyGridModelTester(question);
+  const imageHeightQuestion = <QuestionTextModel>propertyGrid.survey.getQuestionByName("imageHeight");
+  imageHeightQuestion.value = 100;
+  expect(question.imageHeight).toEqual(100);
+  imageHeightQuestion.value = "";
+  expect(imageHeightQuestion.value).not.toBe(0);
+  expect(imageHeightQuestion.isEmpty()).toBeTruthy();
+  expect(question.imageHeight).not.toBe(0);
+  expect(question.imageHeight).toBeFalsy();
 });

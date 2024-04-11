@@ -212,6 +212,7 @@ test("actions and creator.onPropertyValueChanging", () => {
   expect(action).toBeTruthy();
   const popup = action.popupModel;
   expect(popup).toBeTruthy();
+  popup.toggleVisibility();
   const list = popup.contentComponentData.model;
   list.onSelectionChanged(list.actions.filter(item => item.id === "tel")[0]);
   expect(q1.inputType).toBe("date");

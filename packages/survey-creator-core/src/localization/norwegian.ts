@@ -168,6 +168,7 @@ export var nbStrings = {
     htmlPlaceHolder: "HTML-innhold vil være her.",
     panelPlaceHolder: "Slipp et spørsmål fra verktøykassen her.",
     surveyPlaceHolder: "Undersøkelsen er tom. Dra et element fra verktøykassen, eller klikk på knappen nedenfor.",
+    pagePlaceHolder: "Siden er tom. Dra et element fra verktøykassen, eller klikk på knappen nedenfor.",
     imagePlaceHolder: "Dra og slipp et bilde her, eller klikk på knappen nedenfor og velg et bilde du vil laste opp",
     imageChooseImage: "Velg bilde",
     addNewTypeQuestion: "Legg til {0}", //{0} is localizable question type
@@ -634,6 +635,7 @@ export var nbStrings = {
     textUpdateMode: "Oppdatere tekstspørsmålsverdi",
     maskType: "Type inndatamaske",
     maskTypes: {
+      none: "Ingen",
       patternmask: "Mønster",
       numericmask: "Numerisk",
       datetimemask: "Dato og klokkeslett",
@@ -720,6 +722,10 @@ export var nbStrings = {
     itemvalue: {
       visibleIf: "Gjøre alternativet synlig hvis",
       enableIf: "Gjør alternativet valgbart hvis"
+    },
+    "itemvalue@rows": {
+      visibleIf: "Gjøre raden synlig hvis",
+      enableIf: "Gjøre raden redigerbar hvis"
     },
     imageitemvalue: {
       text: "Alternativ tekst"
@@ -2526,3 +2532,7 @@ editorLocalization.locales["nb"] = nbStrings;
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "Ett eller flere symboler som skal vises etter verdien."
 // ed.translationSource: "Source: " => "Kilde: "
 // ed.translationTarget: "Target: " => "Mål: "
+// ed.pagePlaceHolder: "The page is empty. Drag an element from the toolbox or click the button below." => "Siden er tom. Dra et element fra verktøykassen, eller klikk på knappen nedenfor."
+// maskTypes.none: "None" => "Ingen"
+// itemvalue@rows.visibleIf: "Make the row visible if" => "Gjøre raden synlig hvis"
+// itemvalue@rows.enableIf: "Make the row editable if" => "Gjøre raden redigerbar hvis"

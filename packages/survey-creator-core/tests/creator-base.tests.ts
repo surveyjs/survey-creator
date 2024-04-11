@@ -1214,8 +1214,8 @@ test("Question type selector", (): any => {
   expect(survey.getAllQuestions().length).toEqual(0);
   expect(creator.addNewQuestionText).toEqual("Add Question");
   const selectorModel = creator.getQuestionTypeSelectorModel(() => { });
-  const listModel: ListModel =
-    selectorModel.popupModel.contentComponentData.model;
+  const listModel: ListModel = selectorModel.popupModel.contentComponentData.model;
+  selectorModel.popupModel.toggleVisibility();
   const ratingItem = listModel.actions.filter((item) => item.id == "rating")[0];
   listModel.onItemClick(ratingItem);
   expect(creator.addNewQuestionText).toEqual("Add Rating Scale");
@@ -1254,8 +1254,8 @@ test("Question type custom widgets", (): any => {
   expect(survey.getAllQuestions().length).toEqual(0);
   expect(creator.addNewQuestionText).toEqual("Add Question");
   const selectorModel = creator.getQuestionTypeSelectorModel(() => { });
-  const listModel: ListModel =
-    selectorModel.popupModel.contentComponentData.model;
+  const listModel: ListModel = selectorModel.popupModel.contentComponentData.model;
+  selectorModel.popupModel.toggleVisibility();
   const customItem = listModel.actions.filter((item) => item.id == "test_widget")[0];
   expect(customItem.title).toEqual("Test Widget");
   expect(customItem.iconName).toEqual("icon-editor");
@@ -1280,8 +1280,8 @@ test("Question type selector localization", (): any => {
   const survey: SurveyModel = creator.survey;
   expect(creator.addNewQuestionText).toEqual("Add New Question");
   const selectorModel = creator.getQuestionTypeSelectorModel(() => { });
-  const listModel: ListModel =
-    selectorModel.popupModel.contentComponentData.model;
+  const listModel: ListModel = selectorModel.popupModel.contentComponentData.model;
+  selectorModel.popupModel.toggleVisibility();
   const ratingItem = listModel.actions.filter((item) => item.id == "rating")[0];
   listModel.onItemClick(ratingItem);
   expect(creator.addNewQuestionText).toEqual("Add New Rating Scale");
@@ -2107,10 +2107,11 @@ test("ConvertTo, show the current question type selected", (): any => {
     undefined
   );
   const items = questionModel.getConvertToTypesActions();
-  expect(items).toHaveLength(20);
+  expect(items).toHaveLength(21);
   expect(items[0].id).toEqual("radiogroup");
   const popup = questionModel.getActionById("convertTo").popupModel;
   expect(popup).toBeTruthy();
+  popup.toggleVisibility();
   const list = popup.contentComponentData.model;
   expect(list).toBeTruthy();
   expect(list.selectedItem).toBeTruthy();
@@ -2134,11 +2135,10 @@ test("ConvertTo, show it for a panel", (): any => {
     undefined
   );
   const items = panelModel.getConvertToTypesActions();
-  expect(items).toHaveLength(2);
-  expect(items[0].id).toEqual("panel");
-  expect(items[1].id).toEqual("paneldynamic");
+  expect(items).toHaveLength(21);
   const popup = panelModel.getActionById("convertTo").popupModel;
   expect(popup).toBeTruthy();
+  popup.toggleVisibility();
   const list = popup.contentComponentData.model;
   expect(list).toBeTruthy();
   expect(list.selectedItem).toBeTruthy();
@@ -2186,7 +2186,7 @@ test("ConvertTo & addNewQuestion for panel & maxNestedPanels ", (): any => {
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount);
   expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount);
   expect(panel6Model.getConvertToTypesActions()).toHaveLength(itemCount);
-  expect(panel5Model.getConvertToTypesActions()).toHaveLength(2);
+  expect(panel5Model.getConvertToTypesActions()).toHaveLength(21);
   creator.maxNestedPanels = 2;
   expect(creator.dragDropSurveyElements.maxNestedPanels).toBe(2);
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount - 1);
@@ -2209,12 +2209,57 @@ test("ConvertTo & addNewQuestion for panel & maxNestedPanels ", (): any => {
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount - 1);
   expect(panel6Model.getConvertToTypesActions()).toHaveLength(itemCount - 1);
-  expect(panel5Model.getConvertToTypesActions()).toHaveLength(2);
+  expect(panel5Model.getConvertToTypesActions()).toHaveLength(21);
   expect(creator.getAvailableToolboxItems(panel3)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel4)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel1)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel2)).toHaveLength(itemCount);
   expect(creator.getAvailableToolboxItems()).toHaveLength(itemCount);
+});
+
+test("ConvertTo & addNewQuestion refresh items", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "dropdown", name: "q1" }]
+  };
+  creator.onQuestionAdded.add((sender, options) => {
+    if (options.question.getType() === "text") {
+      creator.toolbox.removeItem("text");
+    }
+  });
+
+  const q1 = creator.survey.getQuestionByName("q1");
+  const q1AdornerModel = new QuestionAdornerViewModel(creator, q1, undefined);
+  const pageModel = creator.survey.pages[0];
+  const pageAdornerModel = new PageAdorner(creator, pageModel);
+  const convertToAction = q1AdornerModel.actionContainer.actions.filter(action => action.id === "convertTo")[0];
+  const questionTypeSelectorModel = pageAdornerModel.questionTypeSelectorModel;
+  const questionTypeSelectorListModel = questionTypeSelectorModel.popupModel.contentComponentData.model as ListModel;
+
+  expect(convertToAction.data.actions.length).toBe(21);
+  expect(questionTypeSelectorListModel.actions.length).toBe(21);
+
+  convertToAction.popupModel.toggleVisibility();
+  expect(convertToAction.data.actions.length).toBe(21);
+  convertToAction.popupModel.toggleVisibility();
+
+  questionTypeSelectorModel.popupModel.toggleVisibility();
+  expect(questionTypeSelectorListModel.actions.length).toBe(21);
+  questionTypeSelectorModel.popupModel.toggleVisibility();
+
+  pageModel.addNewQuestion("text", "q2");
+
+  convertToAction.popupModel.toggleVisibility();
+  expect(convertToAction.data.actions.length).toBe(20);
+  convertToAction.popupModel.toggleVisibility();
+
+  questionTypeSelectorModel.popupModel.toggleVisibility();
+  expect(questionTypeSelectorListModel.actions.length).toBe(20);
+  questionTypeSelectorModel.popupModel.toggleVisibility();
+
+  const q2AdornerModel = new QuestionAdornerViewModel(creator, creator.survey.getQuestionByName("q2"), undefined);
+  const convertToAction2 = q2AdornerModel.actionContainer.actions.filter(action => action.id === "convertTo")[0];
+  expect(convertToAction2.title).toBe("Single-Line Input");
 });
 
 test("ConverTo, change title of question item", (): any => {
@@ -2255,11 +2300,11 @@ test("ConvertTo separators", (): any => {
     undefined
   );
   const items = questionModel.getConvertToTypesActions();
-  expect(items).toHaveLength(20);
+  expect(items).toHaveLength(21);
   expect(items.filter(i => i.id == "text")[0].needSeparator).toBeTruthy();
   expect(items.filter(i => i.id == "comment")[0].needSeparator).toBeFalsy();
   expect(items.filter(i => i.id == "multipletext")[0].needSeparator).toBeFalsy();
-  expect(items.filter(i => i.id == "paneldynamic")[0].needSeparator).toBeTruthy();
+  expect(items.filter(i => i.id == "panel")[0].needSeparator).toBeTruthy();
 
   const panel = creator.survey.getPanelByName("panel");
   creator.selectElement(panel);
@@ -2270,10 +2315,7 @@ test("ConvertTo separators", (): any => {
     undefined
   );
   const items2 = panelModel.getConvertToTypesActions();
-  expect(items2).toHaveLength(2);
-  expect(items2[0].needSeparator).toBeFalsy();
-  expect(items2[1].needSeparator).toBeFalsy();
-
+  expect(items2).toHaveLength(21);
 });
 test("convertInputType, change inputType for a text question", (): any => {
   const creator = new CreatorTester();
@@ -2303,6 +2345,7 @@ test("convertInputType, change inputType for a text question", (): any => {
   expect(action.title).toBe("Text");
   const popup = action.popupModel;
   expect(popup).toBeTruthy();
+  popup.toggleVisibility();
   const list = popup.contentComponentData.model;
   expect(list).toBeTruthy();
   expect(list.selectedItem).toBeTruthy();
@@ -2978,6 +3021,7 @@ test("Add new question to Panel and Page", (): any => {
 
   const selectorModelPanel = panelAdornerModel.questionTypeSelectorModel;
   const listModelPanel: ListModel = selectorModelPanel.popupModel.contentComponentData.model;
+  selectorModelPanel.popupModel.toggleVisibility();
   const ratingItem = listModelPanel.actions.filter((item) => item.id == "rating")[0];
   listModelPanel.onItemClick(ratingItem);
 
@@ -2988,6 +3032,7 @@ test("Add new question to Panel and Page", (): any => {
 
   const selectorModelPanel2 = panelAdornerModel2.questionTypeSelectorModel;
   const listModelPanel2: ListModel = selectorModelPanel2.popupModel.contentComponentData.model;
+  selectorModelPanel2.popupModel.toggleVisibility();
   const commentItem = listModelPanel2.actions.filter((item) => item.id == "comment")[0];
   listModelPanel2.onItemClick(commentItem);
 
@@ -2998,6 +3043,7 @@ test("Add new question to Panel and Page", (): any => {
 
   const selectorModelPage = pageAdornerModel.questionTypeSelectorModel;
   const listModelPage: ListModel = selectorModelPage.popupModel.contentComponentData.model;
+  selectorModelPage.popupModel.toggleVisibility();
   const rankingItem = listModelPage.actions.filter((item) => item.id == "ranking")[0];
   listModelPage.onItemClick(rankingItem);
 
@@ -3008,6 +3054,7 @@ test("Add new question to Panel and Page", (): any => {
 
   const selectorModelPage2 = pageAdornerModel2.questionTypeSelectorModel;
   const listModelPage2: ListModel = selectorModelPage2.popupModel.contentComponentData.model;
+  selectorModelPage2.popupModel.toggleVisibility();
   const htmlItem = listModelPage2.actions.filter((item) => item.id == "html")[0];
   listModelPage2.onItemClick(htmlItem);
 

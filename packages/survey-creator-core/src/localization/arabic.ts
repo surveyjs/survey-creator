@@ -168,6 +168,7 @@ export var arStrings = {
     htmlPlaceHolder: "محتوى HTML سيكون هنا",
     panelPlaceHolder: "قم بإسقاط السؤال من صندوق الأدوات إلى هنا",
     surveyPlaceHolder: "الاستطلاع فارغ. اسحب عنصرا من صندوق الأدوات أو انقر فوق الزر أدناه.",
+    pagePlaceHolder: "الصفحة فارغة. اسحب عنصرا من صندوق الأدوات أو انقر فوق الزر أدناه.",
     imagePlaceHolder: "قم بسحب وإسقاط صورة هنا أو انقر فوق الزر أدناه واختر صورة لتحميلها",
     imageChooseImage: "اختر صورة",
     addNewTypeQuestion: "Add {0}", //{0} is localizable question type
@@ -634,6 +635,7 @@ export var arStrings = {
     textUpdateMode: "تحديث قيمة السؤال النصي",
     maskType: "نوع قناع الإدخال",
     maskTypes: {
+      none: "اي",
       patternmask: "رسم",
       numericmask: "عددي",
       datetimemask: "التاريخ والوقت",
@@ -720,6 +722,10 @@ export var arStrings = {
     itemvalue: {
       visibleIf: "اجعل الخيار مرئيا إذا",
       enableIf: "اجعل الخيار قابلا للتحديد إذا"
+    },
+    "itemvalue@rows": {
+      visibleIf: "اجعل الصف مرئيا إذا",
+      enableIf: "اجعل الصف قابلا للتحرير إذا"
     },
     imageitemvalue: {
       text: "نص بديل"
@@ -2433,3 +2439,7 @@ editorLocalization.locales["ar"] = arStrings;
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "رمز واحد أو عدة رموز ليتم عرضها بعد القيمة."
 // ed.translationSource: "Source: " => "مصدر: "
 // ed.translationTarget: "Target: " => "هدف: "
+// ed.pagePlaceHolder: "The page is empty. Drag an element from the toolbox or click the button below." => "الصفحة فارغة. اسحب عنصرا من صندوق الأدوات أو انقر فوق الزر أدناه."
+// maskTypes.none: "None" => "اي"
+// itemvalue@rows.visibleIf: "Make the row visible if" => "اجعل الصف مرئيا إذا"
+// itemvalue@rows.enableIf: "Make the row editable if" => "اجعل الصف قابلا للتحرير إذا"

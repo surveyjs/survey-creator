@@ -168,6 +168,7 @@ export var czStrings = {
     htmlPlaceHolder: "Zde bude HTML obsah.",
     panelPlaceHolder: "Sem přetáhněte otázku z panelu nástrojů.",
     surveyPlaceHolder: "Průzkum je prázdný. Přetáhněte prvek z panelu nástrojů nebo klikněte na tlačítko níže.",
+    pagePlaceHolder: "Stránka je prázdná. Přetáhněte prvek z palety nástrojů nebo klikněte na tlačítko níže.",
     imagePlaceHolder: "Obrázek můžete vložit jeho přetažením na toto místo nebo kliknutím na tlačítko níže",
     imageChooseImage: "Vybrat obrázek",
     addNewTypeQuestion: "Přidat {0}", //{0} is localizable question type
@@ -634,6 +635,7 @@ export var czStrings = {
     textUpdateMode: "Aktualizovat hodnotu textové otázky",
     maskType: "Typ vstupní masky",
     maskTypes: {
+      none: "Žádný",
       patternmask: "Vzor",
       numericmask: "Číselný",
       datetimemask: "Datum a čas",
@@ -720,6 +722,10 @@ export var czStrings = {
     itemvalue: {
       visibleIf: "Zviditelněte tuto možnost, pokud",
       enableIf: "Zajistěte, aby byla možnost vybratelná, pokud"
+    },
+    "itemvalue@rows": {
+      visibleIf: "Zviditelněte řádek, pokud",
+      enableIf: "Zajistěte, aby byl řádek upravitelný, pokud"
     },
     imageitemvalue: {
       text: "Alternativní text"
@@ -2087,3 +2093,7 @@ editorLocalization.locales["cs"] = czStrings;
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "Jeden nebo více symbolů, které se zobrazí za hodnotou."
 // ed.translationSource: "Source: " => "Zdroj: "
 // ed.translationTarget: "Target: " => "Cíl: "
+// ed.pagePlaceHolder: "The page is empty. Drag an element from the toolbox or click the button below." => "Stránka je prázdná. Přetáhněte prvek z palety nástrojů nebo klikněte na tlačítko níže."
+// maskTypes.none: "None" => "Žádný"
+// itemvalue@rows.visibleIf: "Make the row visible if" => "Zviditelněte řádek, pokud"
+// itemvalue@rows.enableIf: "Make the row editable if" => "Zajistěte, aby byl řádek upravitelný, pokud"
