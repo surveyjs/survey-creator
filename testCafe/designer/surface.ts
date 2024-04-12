@@ -187,3 +187,9 @@ test("Check page navigator is visually hidden", async (t) => {
   await setJSON(json);
   await t.expect(Selector(".svc-tab-designer__page-navigator").visible).notOk();
 });
+test("Check sidebar shadow height", async (t) => {
+  await t.resizeWindow(1000, 300);
+  await setJSON({});
+  await t.click('button[title="Survey settings"]');
+  await t.expect(Selector(".svc-side-bar__shadow").offsetHeight).lte(480);
+});
