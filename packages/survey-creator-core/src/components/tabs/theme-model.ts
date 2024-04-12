@@ -32,25 +32,25 @@ export function getThemeFullName(theme: ITheme) {
   return fullThemeName;
 }
 
-export function findSuitableTheme(themeName: string, themePalette: string, themeMode: string, probeThemeFullName: string) {
+export function findSuitableTheme(themeName: string, colorPalette: string, isPanelless: boolean, probeThemeFullName: string) {
   let suitableTheme = Themes[probeThemeFullName];
   if (!!suitableTheme) {
     return suitableTheme;
   }
   const appropriateThemeNames = Object.keys(Themes).filter(fullName => fullName.indexOf(themeName + "-") === 0);
   for (let fullThemeName of appropriateThemeNames) {
-    if (fullThemeName.indexOf(themeName + "-" + themePalette) === 0) {
-      probeThemeFullName = themeName + "-" + themePalette;
+    if (fullThemeName.indexOf(themeName + "-" + colorPalette) === 0) {
+      probeThemeFullName = themeName + "-" + colorPalette;
     }
-    if (fullThemeName.indexOf(themeName + "-" + themePalette + (themeMode === "lightweight" ? "-panelless" : "")) === 0) {
-      probeThemeFullName = themeName + "-" + themePalette + (themeMode === "lightweight" ? "-panelless" : "");
+    if (fullThemeName.indexOf(themeName + "-" + colorPalette + (isPanelless ? "-panelless" : "")) === 0) {
+      probeThemeFullName = themeName + "-" + colorPalette + (isPanelless ? "-panelless" : "");
     }
   }
   suitableTheme = Themes[appropriateThemeNames[0]];
   if (!!suitableTheme) {
     return suitableTheme;
   }
-  const defaultNearestThemeFullName = getThemeFullName({ themeName: ThemeModel.DefaultTheme.themeName, colorPalette: themePalette || "light", isPanelless: themeMode === "lightweight" });
+  const defaultNearestThemeFullName = getThemeFullName({ themeName: ThemeModel.DefaultTheme.themeName, colorPalette: colorPalette || "light", isPanelless: isPanelless });
   return Themes[defaultNearestThemeFullName] || ThemeModel.DefaultTheme;
 }
 
@@ -71,7 +71,7 @@ export function getObjectDiffs(obj1: any, obj2: any = {}): any {
 export function getThemeChanges(fullTheme: ITheme, baseTheme?: ITheme) {
   if (!baseTheme) {
     let probeThemeFullName = getThemeFullName(fullTheme);
-    baseTheme = findSuitableTheme(fullTheme.themeName, fullTheme.colorPalette, fullTheme.isPanelless ? "lightweight" : "panels", probeThemeFullName);
+    baseTheme = findSuitableTheme(fullTheme.themeName, fullTheme.colorPalette, fullTheme.isPanelless, probeThemeFullName);
   }
   const themeChanges: ITheme = getObjectDiffs(fullTheme, baseTheme);
   Object.keys(themeChanges).forEach(propertyName => {
@@ -92,29 +92,14 @@ export class ThemeModel extends Base {
   private themeCssVariablesChanges: { [index: string]: string } = {};
   private colorCalculator = new ColorCalculator();
 
-  @property({
-    onSet: (newValue: string, _target: ThemeModel) => {
-      // _target.currentTheme.backgroundImage = newValue;
-    }
-  }) backgroundImage;
-  @property({
-    onSet: (newValue: ImageFit, _target: ThemeModel) => {
-      // _target.currentTheme.backgroundImageFit = newValue;
-    }
-  }) backgroundImageFit;
-  @property({
-    onSet: (newValue: ImageAttachment, _target: ThemeModel) => {
-      // _target.currentTheme.backgroundImageAttachment = newValue;
-    }
-  }) backgroundImageAttachment;
-  @property({
-    onSet: (newValue: number, _target: ThemeModel) => {
-      // _target.currentTheme.backgroundOpacity = newValue / 100;
-    }
-  }) backgroundOpacity;
-  @property() themeName;
-  @property() themePalette;
-  @property() themeMode;
+  @property() backgroundImage: string;
+  @property() backgroundImageFit: "auto" | "contain" | "cover";
+  @property() backgroundImageAttachment: "fixed" | "scroll";
+  @property() backgroundOpacity: number;
+  @property() themeName: string;
+  @property() colorPalette: "light" | "dark" | string;
+  // @property() themeMode: "panels" | "lightweight" | string;
+  @property() isPanelless: boolean;
   @property() groupAppearanceAdvancedMode: boolean;
   @property({
     onSet: (newValue: any, target: ThemeModel) => {
@@ -145,10 +130,10 @@ export class ThemeModel extends Base {
   @property() commonFontSize: number;
 
   getFullThemeName(_themeName?: string) {
-    if (this.themePalette === "light") {
+    if (this.colorPalette === "light") {
       return _themeName || this.themeName;
     }
-    return (_themeName || this.themeName) + "-" + this.themePalette;
+    return (_themeName || this.themeName) + "-" + this.colorPalette;
   }
 
   private _defaultSessionTheme = ThemeModel.DefaultTheme;
@@ -231,12 +216,12 @@ export class ThemeModel extends Base {
   //     }
   //     customThemeHasPaletteVariations = registeredThemes.indexOf(themeLight) !== -1 && registeredThemes.indexOf(themeDark) !== -1;
 
-  //     let themePanels = this.themeName + "-" + this.themePalette;
+  //     let themePanels = this.themeName + "-" + this.colorPalette;
   //     let themePanelless = themePanels + "-panelless";
   //     customThemeHasModeVariations = registeredThemes.indexOf(themePanels) !== -1 && registeredThemes.indexOf(themePanelless) !== -1;
   //   }
   //   this._setPGEditorPropertyValue(this.themeEditorSurvey.getQuestionByName("themeMode"), "readOnly", isCustomTheme && !customThemeHasModeVariations);
-  //   this._setPGEditorPropertyValue(this.themeEditorSurvey.getQuestionByName("themePalette"), "readOnly", isCustomTheme && !customThemeHasPaletteVariations);
+  //   this._setPGEditorPropertyValue(this.themeEditorSurvey.getQuestionByName("colorPalette"), "readOnly", isCustomTheme && !customThemeHasPaletteVariations);
 
   //   let canModify = !this.surveyProvider.readOnly;
   //   const options = {
@@ -245,7 +230,7 @@ export class ThemeModel extends Base {
   //   };
   //   this.onAllowModifyTheme.fire(this, options);
   //   this.themeEditorSurvey.getAllQuestions().forEach(q => {
-  //     if (["themeName", "themePalette", "themeMode"].indexOf(q.name) === -1) {
+  //     if (["themeName", "colorPalette", "themeMode"].indexOf(q.name) === -1) {
   //       this._setPGEditorPropertyValue(q, "readOnly", !options.allow);
   //     }
   //   });
@@ -361,7 +346,7 @@ export class ThemeModel extends Base {
   //     this.themeEditorSurvey.mergeData(this.currentTheme.cssVariables);
   //     this.themeEditorSurvey.setValue("themeName", this.themeName);
   //     this.themeEditorSurvey.setValue("themeMode", this.themeMode);
-  //     this.themeEditorSurvey.setValue("themePalette", this.themePalette);
+  //     this.themeEditorSurvey.setValue("colorPalette", this.colorPalette);
   //     this.updatePropertyGridEditors(this.themeEditorSurvey);
   //     this.updatePropertyGridEditorsAvailability();
   //   }
@@ -377,8 +362,8 @@ export class ThemeModel extends Base {
   }
 
   private getPredefinedColorsItemValues() {
-    return Object.keys(PredefinedColors[this.themePalette]).map(colorName =>
-      new ItemValue(PredefinedColors[this.themePalette][colorName], getLocString("theme.colors." + colorName))
+    return Object.keys(PredefinedColors[this.colorPalette]).map(colorName =>
+      new ItemValue(PredefinedColors[this.colorPalette][colorName], getLocString("theme.colors." + colorName))
     );
   }
 
@@ -449,14 +434,15 @@ export class ThemeModel extends Base {
     this.blockThemeChangedNotifications += 1;
     try {
       let probeThemeFullName = getThemeFullName(theme);
-      const baseTheme = findSuitableTheme(theme.themeName, theme.colorPalette, theme.isPanelless ? "lightweight" : "panels", probeThemeFullName);
+      const baseTheme = findSuitableTheme(theme.themeName, theme.colorPalette, theme.isPanelless, probeThemeFullName);
       const themeChanges = getThemeChanges(theme, baseTheme);
       // if (this.currentTheme === theme) {
       //   this.themeCssVariablesChanges = themeChanges.cssVariables || {};
       // }
       this.themeName = themeChanges.themeName;
-      this.themePalette = themeChanges.colorPalette;
-      this.themeMode = themeChanges.isPanelless === true ? "lightweight" : "panels";
+      this.colorPalette = themeChanges.colorPalette as any;
+      // this.themeMode = themeChanges.isPanelless === true ? "lightweight" : "panels";
+      this.isPanelless = themeChanges.isPanelless;
 
       this.backgroundImage = theme.backgroundImage || this.backgroundImage;
       this.backgroundImageFit = theme.backgroundImageFit || this.backgroundImageFit;
@@ -476,7 +462,8 @@ export class ThemeModel extends Base {
       if (Object.keys(effectiveHeaderSettings).length > 0) {
         effectiveTheme.header = effectiveHeaderSettings;
       }
-      assign(effectiveTheme, theme, { cssVariables: effectiveThemeCssVariables, themeName: this.themeName, colorPalette: this.themePalette, isPanelless: this.themeMode === "lightweight" });
+      // assign(effectiveTheme, theme, { cssVariables: effectiveThemeCssVariables, themeName: this.themeName, colorPalette: this.colorPalette, isPanelless: this.themeMode === "lightweight" });
+      assign(effectiveTheme, theme, { cssVariables: effectiveThemeCssVariables, themeName: this.themeName, colorPalette: this.colorPalette, isPanelless: this.isPanelless });
       // this.surveyProvider.theme = effectiveTheme;
 
       this.initializeColorCalculator(effectiveTheme.cssVariables);
@@ -511,24 +498,28 @@ export class ThemeModel extends Base {
     this.onThemeSelected.fire(this, { theme: this.toJSON() });
   }
 
-  public selectTheme(themeName: string, themePalette: string = "light", themeMode: string = "panels") {
+  public selectTheme(themeName: string, colorPalette: string = "light", themeMode: string = "panels") {
     this.themeName = themeName;
-    this.themePalette = themePalette;
-    this.themeMode = themeMode;
+    this.colorPalette = colorPalette;
+    // this.themeMode = themeMode;
+    this.isPanelless = themeMode === "lightweight";
     const theme = this.findSuitableTheme(themeName);
     this.setTheme(theme);
   }
 
   private generalPropertiesChanged(name: string, value: any): boolean {
-    if (["themeName", "themeMode", "themePalette"].indexOf(name) !== -1) {
+    if (["themeName", "themeMode", "isPanelless", "colorPalette"].indexOf(name) !== -1) {
       if (name === "themeName") {
-        this.loadTheme(this.findSuitableTheme(value) || { [name]: value, isPanelless: this.themeMode === "lightweight", colorPalette: this.themePalette });
+        // this.loadTheme(this.findSuitableTheme(value) || { [name]: value, isPanelless: this.themeMode === "lightweight", colorPalette: this.colorPalette });
+        this.loadTheme(this.findSuitableTheme(value) || { [name]: value, isPanelless: this.isPanelless, colorPalette: this.colorPalette });
       }
-      if (name === "themeMode") {
-        this.loadTheme({ themeName: this.themeName, isPanelless: value === "lightweight", colorPalette: this.themePalette });
+      if (name === "isPanelless") {
+        // this.loadTheme({ themeName: this.themeName, isPanelless: value === "lightweight", colorPalette: this.colorPalette });
+        this.loadTheme({ themeName: this.themeName, isPanelless: value, colorPalette: this.colorPalette });
       }
-      if (name === "themePalette") {
-        this.loadTheme({ themeName: this.themeName, isPanelless: this.themeMode === "lightweight", colorPalette: value });
+      if (name === "colorPalette") {
+        // this.loadTheme({ themeName: this.themeName, isPanelless: this.themeMode === "lightweight", colorPalette: value });
+        this.loadTheme({ themeName: this.themeName, isPanelless: this.isPanelless, colorPalette: value });
       }
       this.onThemeSelected.fire(this, { theme: this.toJSON() });
       return true;
@@ -585,14 +576,16 @@ export class ThemeModel extends Base {
   }
 
   findSuitableTheme(themeName: string): ITheme {
-    let probeThemeFullName = getThemeFullName({ themeName: themeName, colorPalette: this.themePalette, isPanelless: this.themeMode === "lightweight" } as any);
-    return findSuitableTheme(themeName, this.themePalette, this.themeMode, probeThemeFullName);
+    // let probeThemeFullName = getThemeFullName({ themeName: themeName, colorPalette: this.colorPalette, isPanelless: this.themeMode === "lightweight" } as any);
+    // return findSuitableTheme(themeName, this.colorPalette, this.themeMode, probeThemeFullName);
+    let probeThemeFullName = getThemeFullName({ themeName: themeName, colorPalette: this.colorPalette, isPanelless: this.isPanelless } as any);
+    return findSuitableTheme(themeName, this.colorPalette, this.isPanelless, probeThemeFullName);
   }
 
   getPredefinedChoices(propertyName: string): Array<ItemValue> {
     if (propertyName === "--sjs-general-backcolor-dim" || propertyName === "generalPrimaryColor")
-      return Object.keys(PredefinedColors[this.themePalette]).map(colorName =>
-        new ItemValue(PredefinedColors[this.themePalette][colorName], getLocString("theme.colors." + colorName))
+      return Object.keys(PredefinedColors[this.colorPalette]).map(colorName =>
+        new ItemValue(PredefinedColors[this.colorPalette][colorName], getLocString("theme.colors." + colorName))
       );
   }
 
@@ -613,12 +606,16 @@ export class ThemeModel extends Base {
   }
 
   fromJSON(json: ITheme, options?: ILoadFromJSONOptions): void {
-    if (json && json.cssVariables) {
+    if (!json) return;
+    super.fromJSON(json, options);
+
+    if (json.cssVariables) {
       super.fromJSON(json.cssVariables, options);
 
       this.commonScale = roundTo2Decimals(parseFloat(this["--sjs-base-unit"]) * 100 / 8);
       this.commonFontSize = roundTo2Decimals(parseFloat(this["--sjs-font-size"]) * 100 / 16);
       this.cornerRadius = roundTo2Decimals(parseFloat(this["--sjs-corner-radius"]));
+      if (!!json["backgroundOpacity"]) this.backgroundOpacity = json["backgroundOpacity"] * 100;
 
       //   this.updateHeaderViewContainerEditors(json.cssVariables);
       this["questionPanel"] = elementSettingsFromCssVariable(this.getPropertyByName("questionPanel"), json.cssVariables, "--sjs-general-backcolor", "--sjs-general-backcolor-dark", this.cornerRadius);
@@ -677,29 +674,26 @@ Serializer.addClass(
       category: "general",
     }, {
       type: "buttongroup",
-      name: "themePalette",
+      name: "colorPalette",
       displayName: "",
       choices: [
         { value: "light", text: getLocString("theme.themePaletteLight") },
         { value: "dark", text: getLocString("theme.themePaletteDark") }
       ],
-      // default: "light",
       category: "general",
     }, {
       type: "buttongroup",
-      name: "themeMode",
+      name: "isPanelless",
       displayName: getLocString("theme.themeMode"),
       choices: [
-        { value: "panels", text: getLocString("theme.themeModePanels") },
-        { value: "lightweight", text: getLocString("theme.themeModeLightweight") }],
-      // default: "panels",
+        { value: false, text: getLocString("theme.themeModePanels") },
+        { value: true, text: getLocString("theme.themeModeLightweight") }],
       category: "general",
     },
     {
       type: "spinedit",
       name: "commonScale",
       displayName: getLocString("theme.scale"),
-      // default: 100,
       onPropertyEditorUpdate: function (obj: any, editor: any) {
         if (!!editor) {
           editor.unit = "%";
@@ -712,7 +706,6 @@ Serializer.addClass(
       type: "spinedit",
       name: "cornerRadius",
       displayName: getLocString("theme.cornerRadius"),
-      // default: 4,
       onPropertyEditorUpdate: function (obj: any, editor: any) {
         if (!!editor) {
           editor.unit = "px";
@@ -725,7 +718,6 @@ Serializer.addClass(
       type: "spinedit",
       name: "commonFontSize",
       displayName: getLocString("theme.fontSize"),
-      // default: 100,
       onPropertyEditorUpdate: function (obj: any, editor: any) {
         if (!!editor) {
           editor.unit = "%";
@@ -847,6 +839,9 @@ Serializer.addProperties("themebuilder",
         editor.step = 5;
         editor.titleLocation = "left";
       }
+    },
+    onSerializeValue: (obj: ThemeModel) => {
+      return obj.backgroundOpacity / 100;
     }
   }, {
     type: "headersettings",

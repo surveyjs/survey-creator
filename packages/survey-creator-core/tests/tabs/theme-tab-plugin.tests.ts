@@ -125,10 +125,10 @@ test("Theme builder: survey settings", (): any => {
   const themeModel = themePlugin.themeModel as ThemeModel;
   const simulatorSurvey = themeSurveyTab.survey;
 
-  expect(themeModel.backgroundImage).toEqual(undefined);
+  expect(themeModel.backgroundImage).toEqual("");
   expect(themeModel.backgroundImageFit).toEqual("cover");
   expect(themeModel.backgroundOpacity).toEqual(100);
-  expect(themeModel.themeMode).toEqual("panels");
+  expect(themeModel.isPanelless).toEqual(false);
 
   expect(simulatorSurvey.backgroundImage).toBeFalsy();
   expect(simulatorSurvey.backgroundImageFit).toEqual("cover");
@@ -138,7 +138,7 @@ test("Theme builder: survey settings", (): any => {
   themeModel.backgroundImage = "image-url";
   themeModel.backgroundImageFit = "auto";
   themeModel.backgroundOpacity = 60;
-  themeModel.themeMode = "lightweight";
+  themeModel.isPanelless = true;
 
   expect(simulatorSurvey.backgroundImage).toEqual("image-url");
   expect(simulatorSurvey.backgroundImageFit).toEqual("auto");
@@ -168,14 +168,14 @@ test("import theme from file", (done) => {
     "backgroundImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABQCAYAAAC6aDOxAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAATkSURBVHgB5ZxNUhNBFIBf9xBBccFWQulwAvEAUuEEFidQTyCsXIonUE+gN9AbEEOVW3DnjlhGXRo3EBKm2+7AxEmnf2aGzLxX8G0IMxNIPV5/3fNeDwCE+XX78Q4gw4EovUZrQwA8AWRIBuj3UivmDfGRAfQBGZIBklzsS4AYGDsCZMgFqLe8+XYcHIVk0AVkFoAQP+9s7oGEF+n3USK7gAyZDNJSVl9eZY9JSLqADAMCaClPvJOhedJB/3wkMsgWHAW6oDXoAcpKOYuUEn2K16BK2pTyFBx/itegZZBNylm4wJ/iNSgZdCnlj9JzjWT4U7wGJYMcUp6+ZhR9BwLUHiCXlE1GyzdwiHmlPE1/vd8mMYvVlkEhKWdRUzyJGUxTSwblkXIWCmWOlFoCJFRwIId3JhAoc6RUPsS0lNWXjSLvoVDmSKk0QLqmzPxStg4lCmWOlMoCpKUsGXvjvEDAnusUhTJHSiUBSmvK7ivkh+ESf6derNjOrg6+kFgkaioJkLiYsWLrSQnd4a1otzFySpuMoDVzD5BXyjo4km/pRaDg9gBRKXOkzDVAISknjO+uD9pd/XrhXDywXkSkzJEytwDlkfL9k/anzG+ObZepAJPKoLksFMMrZfmhOTh4PX2MbegxZ7n2+mVQHinPHpbWGUwVyq6Xg/JK2XLO+p7BUvQVCHGltoqWss87CfDtKe9cooekyrpjII6U8LZ0BhWWcobzhQI3rngcrZ12dktJupyU/6Nmqhgoc6GGbf2yVAaVkXIWJh1rICLIc76drtcKByhQvug7pTwFK1T+qBOWwM7aqD1ZahQKUHClDPx5Gnnvh2D2m1RstJRXzzrvssdyz2JayqwhDp0XKCk3B53XQJTjldbK4lAcejoqR82TziPzYC5Jh6TMpPy06pEyBRojsef15qWUTXINsZCUzxaj50AY3W7yqSErZZNggOYjZTx+3G21wNNuMqVs4g3QvKSMhVZDJMR713mblE2ckr72UlZqaJ521kM/xyrpGyLlLciBdYjdZCmbzAwxLWWWb4NBrahadXvt9CD4V9dS5kLsOy8oqIapDMrR6EMjT78+j5SLenMSoGD5Apsc/XrvxiylBl2+gIKMJV109wUGoWL+eGOWvLqUTcYBKrz7AgHm2TMU2pg1lvKo3HqNl9l9gUGSRH9tx4Mbs5SUfSvlECQeRUjRi7tbQ/HHds72WILrEYYULeUy3slC6nGohXNnJlszoAopm5AKkHQU0mz9eu9u2StI2YTU82K6Xy9tg97YcVallE1oPXHo6tcD66avq5ayCakMCvXrQ+u1sZTnXGGg5aBAv74OKZvQyiBPv74XVbNSDhEBEcbDh8kdy6l+lKi7RICXrvcqKW89GLa/QQWQGWKBfn1tUjYhEyBPv97ZZCxTvigKoQAV7Ncr74wWeeVlX0KzWIF+vW9j1pyhk0EF+vVcymd1tZvIBEjdb+XLICXle4ODz1ATlBaKwQyqQ8omJALUW26Fs6cmKZvQ+NcUIf/UKGUTEgGKEvHQd75OKc/8bqAA96yia5ayCY0hJllsP16/lE1oZBCT8cwxJCmb0AiQeR+GKGUT9ADpVg8YayBMKZugB2im1YMsZRP0AGXXQBSkbIIeoMkaiIiUTQhImsWUpGyCHiBV5ogpSZkcvaXNp0CYf3BxyTNPele9AAAAAElFTkSuQmCC",
     "backgroundImageFit": "auto",
     "themeName": "My Theme",
-    "themePalette": "light",
+    "colorPalette": "light",
     "isPanelless": true
   } as any, null, 4);
   const blob = new Blob([data], { type: "application/json" });
   themePlugin.importFromFile(blob as any, () => {
     expect(themeModel.themeName).toEqual("default");
-    expect(themeModel.themePalette).toEqual("light");
-    expect(themeModel.themeMode).toEqual("lightweight");
+    expect(themeModel.colorPalette).toEqual("light");
+    expect(themeModel.isPanelless).toEqual(true);
     expect(themeModel.backgroundImage).toBeTruthy();
     expect(themeModel.backgroundImageFit).toEqual("auto");
     expect(themeModel["--sjs-general-backcolor"]).toEqual("rgba(150, 150, 255, 1)");
@@ -488,7 +488,7 @@ test("Theme builder: restore questionTitle switch tabs", (): any => {
 //   const themeBuilder = themePlugin.model as ThemeEditorModel;
 //   const themeEditorSurvey = themeBuilder.themeEditorSurvey;
 //   const themeChooser = themeEditorSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
-//   const themePalette = themeEditorSurvey.getQuestionByName("themePalette");
+//   const colorPalette = themeEditorSurvey.getQuestionByName("colorPalette");
 //   const primaryBackColor = themeEditorSurvey.getQuestionByName("--sjs-primary-backcolor");
 //   const backgroundDimColor = themeEditorSurvey.getQuestionByName("--sjs-general-backcolor-dim");
 //   const generalPrimaryColor = themeEditorSurvey.getQuestionByName("generalPrimaryColor");
@@ -539,18 +539,18 @@ test("Theme builder: restore questionTitle switch tabs", (): any => {
 //   const themeBuilder = themePlugin.model as ThemeEditorModel;
 //   const themeEditorSurvey = themeBuilder.themeEditorSurvey;
 //   const themeChooser = themeEditorSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
-//   const themePalette = themeEditorSurvey.getQuestionByName("themePalette");
+//   const colorPalette = themeEditorSurvey.getQuestionByName("colorPalette");
 //   const primaryBackColor = themeEditorSurvey.getQuestionByName("--sjs-primary-backcolor");
 //   const backgroundDimColor = themeEditorSurvey.getQuestionByName("--sjs-general-backcolor-dim");
 
 //   expect(themeChooser.isReadOnly).toBeFalsy();
-//   expect(themePalette.isReadOnly).toBeFalsy();
+//   expect(colorPalette.isReadOnly).toBeFalsy();
 //   expect(primaryBackColor.isReadOnly).toBeTruthy();
 //   expect(backgroundDimColor.isReadOnly).toBeTruthy();
 
 //   themeChooser.value = "flat";
 //   expect(themeChooser.isReadOnly).toBeFalsy();
-//   expect(themePalette.isReadOnly).toBeFalsy();
+//   expect(colorPalette.isReadOnly).toBeFalsy();
 //   expect(primaryBackColor.isReadOnly).toBeFalsy();
 //   expect(backgroundDimColor.isReadOnly).toBeFalsy();
 // });
@@ -691,7 +691,7 @@ test("Theme builder: restore questionTitle switch tabs", (): any => {
 //   const themeEditorSurvey = themeBuilder.themeEditorSurvey;
 //   const themeChooser = themeEditorSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
 //   const themeMode = themeEditorSurvey.getQuestionByName("themeMode") as QuestionButtonGroupModel;
-//   const themePalette = themeEditorSurvey.getQuestionByName("themePalette") as QuestionButtonGroupModel;
+//   const colorPalette = themeEditorSurvey.getQuestionByName("colorPalette") as QuestionButtonGroupModel;
 //   const backgroundImage = themeEditorSurvey.getQuestionByName("backgroundImage");
 //   const primaryBackColor = themeEditorSurvey.getQuestionByName("--sjs-primary-backcolor");
 
@@ -710,11 +710,11 @@ test("Theme builder: restore questionTitle switch tabs", (): any => {
 //   expect(resetThemeAction.enabled).toBeFalsy();
 //   expect(themeMode.value).toBe("panels");
 
-//   themePalette.value = "dark";
+//   colorPalette.value = "dark";
 //   expect(resetThemeAction.enabled).toBeTruthy();
 //   resetThemeAction.action();
 //   expect(resetThemeAction.enabled).toBeFalsy();
-//   expect(themePalette.value).toBe("light");
+//   expect(colorPalette.value).toBe("light");
 
 //   backgroundImage.value = "image.png";
 //   expect(resetThemeAction.enabled).toBeTruthy();

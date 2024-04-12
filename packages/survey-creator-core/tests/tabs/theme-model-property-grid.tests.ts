@@ -17,9 +17,9 @@ test("Theme builder initialization", (): any => {
   const themeEditor = themePlugin.propertyGrid.survey;
 
   expect(themeEditor.findQuestionByName("themeName").value).toEqual("default");
-  expect(themeEditor.findQuestionByName("themeMode").value).toEqual("panels");
-  expect(themeEditor.findQuestionByName("themePalette").value).toEqual("light");
-  expect(themeEditor.findQuestionByName("backgroundImage").value).toEqual(undefined);
+  expect(themeEditor.findQuestionByName("isPanelless").value).toEqual(false);
+  expect(themeEditor.findQuestionByName("colorPalette").value).toEqual("light");
+  expect(themeEditor.findQuestionByName("backgroundImage").value).toEqual("");
   expect(themeEditor.findQuestionByName("backgroundImageFit").value).toEqual("cover");
   expect(themeEditor.findQuestionByName("backgroundOpacity").value).toEqual(100);
   expect(themeEditor.findQuestionByName("panelBackgroundTransparency").value).toEqual(100);

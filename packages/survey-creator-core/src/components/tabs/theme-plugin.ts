@@ -229,7 +229,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       }
     });
     this.themeModel.onThemeSelected.add((sender, options) => {
-      this.updateSimulatorTheme();
+      this.updateSimulatorTheme(options.theme);
       this.resetTheme.enabled = getThemeFullName(sender.defaultSessionTheme) !== getThemeFullName(options.theme);
       this.saveThemeAction.enabled = true;
       this.onThemeSelected.fire(this, options);

@@ -93,7 +93,14 @@ test("Theme model de/serialization", (): any => {
   let result = themeModel.cssVariables || {};
   expect(Object.keys(result).length).toBe(0);
 
-  const themeJson = {
+  const themeJson: ITheme = {
+    themeName: "custom",
+    colorPalette: "light",
+    isPanelless: true,
+    backgroundImage: "image.png",
+    backgroundImageFit: "cover",
+    backgroundImageAttachment: "fixed",
+    backgroundOpacity: 0.7,
     cssVariables: {
       "--sjs-base-unit": "6px",
       "--sjs-corner-radius": "20px",
@@ -120,8 +127,16 @@ test("Theme model de/serialization", (): any => {
   expect(themeModel.cornerRadius).toBe(20);
   expect(themeModel.commonFontSize).toBe(110);
 
+  expect(themeModel.themeName).toBe("custom");
+  expect(themeModel.colorPalette).toBe("light");
+  expect(themeModel.isPanelless).toBe(true);
+  expect(themeModel.backgroundImage).toBe("image.png");
+  expect(themeModel.backgroundImageFit).toBe("cover");
+  expect(themeModel.backgroundImageAttachment).toBe("fixed");
+  expect(themeModel.backgroundOpacity).toBe(70);
+
   result = themeModel.cssVariables || {};
-  expect(result).toStrictEqual(themeJson.cssVariables);
+  expect(result).toStrictEqual(themeJson.cssVariables || {});
   expect(result["--sjs-base-unit"]).toBe("6px");
   expect(result["--sjs-corner-radius"]).toBe("20px");
   expect(result["--sjs-font-size"]).toBe("17.6px");
@@ -176,11 +191,11 @@ test("Theme builder switch themes", (): any => {
   const themeModel = new ThemeModel();
   themeModel.initialize();
 
-  expect(themeModel.themePalette).toEqual("light");
+  expect(themeModel.colorPalette).toEqual("light");
   expect(themeModel["--sjs-primary-backcolor"]).toEqual("rgba(25, 179, 148, 1)");
   expect(themeModel["--sjs-general-backcolor-dim"]).toEqual("rgba(243, 243, 243, 1)");
 
-  themeModel.themePalette = "dark";
+  themeModel.colorPalette = "dark";
   expect(themeModel["--sjs-primary-backcolor"]).toEqual("rgba(255, 152, 20, 1)");
   expect(themeModel["--sjs-general-backcolor-dim"]).toEqual("rgba(36, 36, 36, 1)");
 });
@@ -298,9 +313,11 @@ test("Theme builder themeMode not change modified values ", (): any => {
 
   themeModel.questionBackgroundTransparency = 60;
   expect(themeModel.cssVariables["--sjs-editorpanel-backcolor"]).toEqual("rgba(249, 249, 249, 0.6)");
-  expect(themeModel.themeMode).toEqual("panels");
+  // expect(themeModel.themeMode).toEqual("panels");
+  expect(themeModel.isPanelless).toEqual(false);
 
-  themeModel.themeMode = "lightweight";
+  // themeModel.themeMode = "lightweight";
+  themeModel.isPanelless = true;
   expect(themeModel.questionBackgroundTransparency).toEqual(60);
   expect(themeModel.cssVariables["--sjs-editorpanel-backcolor"]).toEqual("rgba(249, 249, 249, 0.6)");
 });
@@ -375,7 +392,7 @@ test("Keep theme css changes throgh the different themes choosen", (): any => {
   const themeModel = new ThemeModel();
   themeModel.initialize();
 
-  expect(themeModel.themePalette).toEqual("light");
+  expect(themeModel.colorPalette).toEqual("light");
   expect(themeModel["--sjs-primary-backcolor"]).toEqual("rgba(25, 179, 148, 1)");
   expect(themeModel["--sjs-primary-backcolor-light"]).toEqual("rgba(25, 179, 148, 0.1)");
   expect(themeModel["--sjs-primary-backcolor-dark"]).toEqual("rgba(20, 164, 139, 1)");
@@ -383,7 +400,7 @@ test("Keep theme css changes throgh the different themes choosen", (): any => {
   expect(themeModel.themeCssCustomizations).toStrictEqual({});
 
   themeModel["--sjs-primary-backcolor"] = fefefeColor;
-  expect(themeModel.themePalette).toEqual("light");
+  expect(themeModel.colorPalette).toEqual("light");
   expect(themeModel["--sjs-primary-backcolor"]).toEqual(fefefeColor);
   expect(themeModel["--sjs-general-backcolor-dim"]).toEqual("rgba(243, 243, 243, 1)");
   expect(themeModel.themeCssCustomizations).toStrictEqual({
@@ -392,8 +409,8 @@ test("Keep theme css changes throgh the different themes choosen", (): any => {
     "--sjs-primary-backcolor-light": "rgba(254, 254, 254, 0.1)",
   });
 
-  themeModel.themePalette = "dark";
-  expect(themeModel.themePalette).toEqual("dark");
+  themeModel.colorPalette = "dark";
+  expect(themeModel.colorPalette).toEqual("dark");
   expect(themeModel["--sjs-primary-backcolor"]).toEqual(fefefeColor);
   expect(themeModel["--sjs-general-backcolor-dim"]).toEqual("rgba(36, 36, 36, 1)");
   expect(themeModel.themeCssCustomizations).toStrictEqual({
@@ -403,7 +420,7 @@ test("Keep theme css changes throgh the different themes choosen", (): any => {
   });
 
   themeModel.resetTheme();
-  expect(themeModel.themePalette).toEqual("light");
+  expect(themeModel.colorPalette).toEqual("light");
   expect(themeModel["--sjs-primary-backcolor"]).toEqual("rgba(25, 179, 148, 1)");
   expect(themeModel["--sjs-general-backcolor-dim"]).toEqual("rgba(243, 243, 243, 1)");
   expect(themeModel.themeCssCustomizations).toStrictEqual({});
@@ -435,14 +452,14 @@ test("selectTheme", (): any => {
   themeModel.initialize();
 
   expect(themeModel.themeName).toEqual("default");
-  expect(themeModel.themePalette).toEqual("light");
+  expect(themeModel.colorPalette).toEqual("light");
   expect(themeModel["--sjs-primary-backcolor"]).toEqual("rgba(25, 179, 148, 1)");
   expect(themeModel["--sjs-general-backcolor-dim"]).toEqual("rgba(243, 243, 243, 1)");
   expect(themeModel.themeCssCustomizations).toStrictEqual({});
 
   themeModel.selectTheme("contrast");
   expect(themeModel.themeName).toEqual("contrast");
-  expect(themeModel.themePalette).toEqual("light");
+  expect(themeModel.colorPalette).toEqual("light");
   expect(themeModel["--sjs-primary-backcolor"]).toEqual("rgba(0, 0, 0, 1)");
   expect(themeModel["--sjs-general-backcolor-dim"]).toEqual("rgba(255, 216, 77, 1)");
   expect(themeModel.themeCssCustomizations).toStrictEqual({});
