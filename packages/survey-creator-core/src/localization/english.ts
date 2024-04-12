@@ -1137,7 +1137,7 @@ export var enStrings = {
       pattern: "Ex.: +1(999)-999-99-99"
     },
     datetimemask: {
-      pattern: "Ex.: mm/dd/yyyy"
+      pattern: "Ex.: mm/dd/yyyy HH:MM"
     },
     currencymask: {
       prefix: "Ex.: $",
@@ -1364,7 +1364,7 @@ export var enStrings = {
       pattern: "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character.",
     },
     datetimemask: {
-      pattern: "The pattern can contain separator characters and the following placeholders: `m` - for month number; `mm` - for month number, with leading zero for single-digit values; `d` - for day of the month; `dd` - for day of the month, with leading zero for single-digit values; `yy` - for the last two digits of the year; `yyyy` - for a four-digit year.",
+      pattern: "The pattern can contain separator characters and the following placeholders:<br>`m` - for month number;<br>`mm` - for month number, with leading zero for single-digit values;<br>`d` - for day of the month;<br>`dd` - for day of the month, with leading zero for single-digit values;<br>`yy` - for the last two digits of the year;<br>`yyyy` - for a four-digit year;<br>`H` - for hour (24-hours format);<br>`HH` - for hour, with leading zero for single-digit values (24-hours format);<br>`h` - for hour (12-hours format);<br>`hh` - for hour, with leading zero for single-digit values (12-hours format);<br>`MM` - for minute;<br>`SS` - for second;<br>`TT` - for upper-case time marker (AM/PM);<br>`tt` - for lower-case time marker (AM/PM).",
     },
     numericmask: {
       decimalSeparator: "A symbol used to separate the fractional part from the integer part of a displayed number.",
