@@ -1,8 +1,8 @@
-import { Base, ITheme, ImageAttachment, ImageFit, ItemValue, JsonObjectProperty, Question, Serializer, property, ILoadFromJSONOptions, JsonObject, IHeader, QuestionCompositeModel, EventBase, SurveyModel } from "survey-core";
-import { editorLocalization, getLocString } from "../../editorLocalization";
+import { Base, ITheme, ItemValue, JsonObjectProperty, Question, Serializer, property, ILoadFromJSONOptions, IHeader, EventBase, SurveyModel } from "survey-core";
+import { getLocString } from "../../editorLocalization";
 import { PredefinedColors, PredefinedThemes, Themes } from "./themes";
-import { ISurveyCreatorOptions, settings } from "../../creator-settings";
-import { PropertyGridEditor, PropertyGridEditorCollection } from "../../property-grid";
+import { settings } from "../../creator-settings";
+
 import { DefaultFonts, fontsettingsFromCssVariable, fontsettingsToCssVariable } from "./theme-custom-questions/font-settings";
 import { elementSettingsFromCssVariable, elementSettingsToCssVariable } from "./theme-custom-questions/element-settings";
 import { createBoxShadowReset } from "./theme-custom-questions/boxshadow-settings";
@@ -10,7 +10,7 @@ import { HeaderModel } from "./header-model";
 import * as LibraryThemes from "survey-core/themes";
 import { ColorCalculator, assign, ingectAlpha, parseColor, roundTo2Decimals } from "../../utils/utils";
 import { ISaveToJSONOptions } from "survey-core/typings/base-interfaces";
-import { SurveyCreatorModel } from "src/creator-base";
+
 export * from "./header-model";
 
 Object.keys(LibraryThemes).forEach(libraryThemeName => {
@@ -256,15 +256,7 @@ export class ThemeModel extends Base {
     );
   }
 
-  private shadowInnerPropertiesChanged(name: string, value: any) {
-    this.themeCssVariablesChanges[name + "-reset"] = createBoxShadowReset(value);
-    // this.themeModified(options);
-    this.onThemePropertyChanged.fire(this, { name, value });
-  }
   private cssVariablePropertiesChanged(name: string, value: any) {
-    if (name.indexOf("--") === 0) {
-      this.setThemeCssVariablesChanges(name, value);
-    }
     if (name == "commonScale") {
       // this.survey.triggerResponsiveness(true);
       this.setThemeCssVariablesChanges("--sjs-base-unit", (value * 8 / 100) + "px");
@@ -314,6 +306,9 @@ export class ThemeModel extends Base {
       this.setPropertyValue("--sjs-primary-backcolor-dark", this.colorCalculator.colorSettings.newColorDark);
       // this._setPGEditorPropertyValue(this.themeEditorSurvey.getQuestionByName("generalPrimaryColor"), "value", value);
       return false;
+    }
+    if (name === "--sjs-shadow-inner" || name === "--sjs-shadow-small") {
+      this.setPropertyValue(name + "-reset", createBoxShadowReset(value));
     }
     return false;
   }
@@ -529,6 +524,9 @@ export class ThemeModel extends Base {
 
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any): void {
     super.onPropertyValueChanged(name, oldValue, newValue);
+    if (name.indexOf("--") === 0) {
+      this.setThemeCssVariablesChanges(name, newValue);
+    }
 
     // if (this.blockChanges) return;
     if (this.blockThemeChangedNotifications > 0) return;
@@ -641,6 +639,9 @@ export class ThemeModel extends Base {
     }
 
     const result = super.toJSON(options);
+    if (this.backgroundOpacity !== 100) {
+      result["backgroundOpacity"] = this.backgroundOpacity / 100;
+    }
     const cssVariables = {};
     Object.keys(result).forEach(key => {
       if (key.indexOf("--sjs") == 0) {
@@ -651,10 +652,14 @@ export class ThemeModel extends Base {
         const property = this.getPropertyByName(key);
         if (property.type === "fontsettings") {
           fontsettingsToCssVariable(result[key], property, cssVariables);
+          delete result[key];
         }
         if (property.type === "elementsettings") {
           elementSettingsToCssVariable(result[key], property, cssVariables);
+          delete result[key];
         }
+      } else if (key === "header") {
+        delete result[key];
       }
     });
     result.cssVariables = cssVariables;
@@ -692,6 +697,7 @@ Serializer.addClass(
     },
     {
       type: "spinedit",
+      isSerializable: false,
       name: "commonScale",
       displayName: getLocString("theme.scale"),
       onPropertyEditorUpdate: function (obj: any, editor: any) {
@@ -704,6 +710,7 @@ Serializer.addClass(
       }
     }, {
       type: "spinedit",
+      isSerializable: false,
       name: "cornerRadius",
       displayName: getLocString("theme.cornerRadius"),
       onPropertyEditorUpdate: function (obj: any, editor: any) {
@@ -716,6 +723,7 @@ Serializer.addClass(
     },
     {
       type: "spinedit",
+      isSerializable: false,
       name: "commonFontSize",
       displayName: getLocString("theme.fontSize"),
       onPropertyEditorUpdate: function (obj: any, editor: any) {
@@ -729,6 +737,7 @@ Serializer.addClass(
     },
     {
       type: "spinedit",
+      isSerializable: false,
       name: "panelBackgroundTransparency",
       displayName: getLocString("theme.panelBackgroundTransparency"),
       default: 100,
@@ -743,6 +752,7 @@ Serializer.addClass(
       }
     }, {
       type: "spinedit",
+      isSerializable: false,
       name: "questionBackgroundTransparency",
       displayName: getLocString("theme.questionBackgroundTransparency"),
       default: 100,
@@ -824,6 +834,7 @@ Serializer.addProperties("themebuilder",
     category: "background",
   }, {
     type: "spinedit",
+    isSerializable: false,
     name: "backgroundOpacity",
     displayName: getLocString("theme.backgroundOpacity"),
     enableIf: function (obj) {
@@ -839,9 +850,6 @@ Serializer.addProperties("themebuilder",
         editor.step = 5;
         editor.titleLocation = "left";
       }
-    },
-    onSerializeValue: (obj: ThemeModel) => {
-      return obj.backgroundOpacity / 100;
     }
   }, {
     type: "headersettings",
@@ -870,6 +878,7 @@ Serializer.addProperties("themebuilder",
     }
   }, {
     type: "color",
+    isSerializable: false,
     name: "generalPrimaryColor",
     displayName: getLocString("theme.primaryColor"),
     onPropertyEditorUpdate: function (obj: any, editor: any) {
@@ -938,16 +947,6 @@ Serializer.addProperties("themebuilder",
     type: "boxshadowsettings",
     name: "--sjs-shadow-small",
     displayName: getLocString("theme.shadow"),
-    default: [
-      {
-        x: 0,
-        y: 1,
-        blur: 2,
-        spread: 0,
-        isInset: false,
-        color: "rgba(0, 0, 0, 0.15)"
-      }
-    ],
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
         editor.visibleIf = "{advancedmode} = true";
@@ -995,16 +994,6 @@ Serializer.addProperties("themebuilder",
     type: "boxshadowsettings",
     name: "--sjs-shadow-inner",
     displayName: getLocString("theme.shadow"),
-    default: [
-      {
-        x: 0,
-        y: 1,
-        blur: 2,
-        spread: 0,
-        isInset: true,
-        color: "rgba(0, 0, 0, 0.15)"
-      }
-    ],
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
         editor.visibleIf = "{advancedmode} = true";
@@ -1199,86 +1188,3 @@ Serializer.addProperties("themebuilder",
   },
   ]
 );
-
-export class PropertyGridEditorSpinEdit extends PropertyGridEditor {
-  public fit(prop: JsonObjectProperty): boolean {
-    return prop.type == "spinedit";
-  }
-  public getJSON(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): any {
-    const res: any = { type: "spinedit", descriptionLocation: "hidden" };
-    return res;
-  }
-}
-PropertyGridEditorCollection.register(new PropertyGridEditorSpinEdit());
-
-export class PropertyGridEditorColorSettings extends PropertyGridEditor {
-  public fit(prop: JsonObjectProperty): boolean {
-    return prop.type == "colorsettings";
-  }
-  public getJSON(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): any {
-    return { type: "colorsettings", descriptionLocation: "hidden" };
-  }
-  public onCreated(obj: Base, question: Question, prop: JsonObjectProperty) {
-    question.valueFromDataCallback = function (val: any): any {
-      return val;
-    };
-    question.valueToDataCallback = function (val: any): any {
-      return val;
-    };
-  }
-}
-PropertyGridEditorCollection.register(new PropertyGridEditorColorSettings());
-
-export class PropertyGridEditorFontSettings extends PropertyGridEditor {
-  public fit(prop: JsonObjectProperty): boolean {
-    return prop.type == "fontsettings";
-  }
-  public getJSON(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): any {
-    return { type: "fontSettings", descriptionLocation: "hidden" };
-  }
-  public onCreated(obj: Base, question: Question, prop: JsonObjectProperty) {
-    question.valueFromDataCallback = function (val: any): any {
-      return val;
-    };
-    question.valueToDataCallback = function (val: any): any {
-      return val;
-    };
-  }
-}
-PropertyGridEditorCollection.register(new PropertyGridEditorFontSettings());
-
-export class PropertyGridEditorElementSettings extends PropertyGridEditor {
-  public fit(prop: JsonObjectProperty): boolean {
-    return prop.type == "elementsettings";
-  }
-  public getJSON(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): any {
-    return { type: "elementsettings", descriptionLocation: "hidden" };
-  }
-  public onCreated(obj: Base, question: Question, prop: JsonObjectProperty) {
-    question.valueFromDataCallback = function (val: any): any {
-      return val;
-    };
-    question.valueToDataCallback = function (val: any): any {
-      return val;
-    };
-  }
-}
-PropertyGridEditorCollection.register(new PropertyGridEditorElementSettings());
-
-export class PropertyGridEditorBoxShadowSettings extends PropertyGridEditor {
-  public fit(prop: JsonObjectProperty): boolean {
-    return prop.type == "boxshadowsettings";
-  }
-  public getJSON(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): any {
-    return { type: "boxshadowsettings", descriptionLocation: "hidden" };
-  }
-  public onCreated(obj: Base, question: Question, prop: JsonObjectProperty) {
-    question.valueFromDataCallback = function (val: any): any {
-      return val;
-    };
-    question.valueToDataCallback = function (val: any): any {
-      return val;
-    };
-  }
-}
-PropertyGridEditorCollection.register(new PropertyGridEditorBoxShadowSettings());

@@ -3,11 +3,14 @@ import { ThemeModel } from "../../src/components/tabs/theme-model";
 import { ThemeTabPlugin } from "../../src/components/tabs/theme-plugin";
 import { CreatorTester } from "../creator-tester";
 import { PredefinedColors } from "../../src/components/tabs/themes";
+import { QuestionFileEditorModel } from "../../src/custom-questions/question-file";
 export { QuestionFileEditorModel } from "../../src/custom-questions/question-file";
 export { QuestionSpinEditorModel } from "../../src/custom-questions/question-spin-editor";
 export { QuestionColorModel } from "../../src/custom-questions/question-color";
 export { createColor } from "../../src/components/tabs/theme-custom-questions/color-settings";
 export { createBoxShadow, parseBoxShadow } from "../../src/components/tabs/theme-custom-questions/boxshadow-settings";
+export * from "../../src/components/tabs/theme-custom-questions/boxshadow-settings";
+export * from "../../src/property-grid/theme-settings";
 
 test("Theme builder initialization", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
@@ -88,85 +91,130 @@ test("Theme builder: composite question elementSettings", (): any => {
   expect(themeModel.questionPanel).toStrictEqual({ backcolor: "#ff44ff", hovercolor: "#969696", cornerRadius: 5 });
 });
 
-test.skip("Check reset for sjs-shadow-inner due to animation", () => {
+test("Check shadow settings editor", () => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.activeTab = "theme";
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
-  themePlugin.activate();
   const themeModel = themePlugin.themeModel as ThemeModel;
   const shadowSmallEditor = themePlugin.propertyGrid.survey.findQuestionByName("--sjs-shadow-small") as QuestionCompositeModel;
   const shadowInnerEditor = themePlugin.propertyGrid.survey.findQuestionByName("--sjs-shadow-inner") as QuestionCompositeModel;
 
-  // let shadowSmallEditor = themeModel["--sjs-shadow-small"];
-  // let shadowInnerEditor = themeModel["--sjs-shadow-inner"];
-
-  let themeModelJSONCssVariables = themeModel.toJSON()["cssVariables"] || {};
-  expect(themeModelJSONCssVariables["--sjs-shadow-small-reset"]).toBe("0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
-  expect(themeModelJSONCssVariables["--sjs-shadow-inner-reset"]).toBe("inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
+  let cssVariables: any = creator?.theme?.cssVariables;
+  expect(themeModel["--sjs-shadow-small"]).toBe("0px 1px 2px 0px rgba(0, 0, 0, 0.15)");
+  expect(themeModel["--sjs-shadow-small-reset"]).toBe("0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
+  expect(themeModel["--sjs-shadow-inner"]).toBe("inset 0px 1px 2px 0px rgba(0, 0, 0, 0.15)");
+  expect(themeModel["--sjs-shadow-inner-reset"]).toBe("inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
 
   shadowSmallEditor.value = [
     {
       x: 0,
-      y: 1,
-      blur: 2,
+      y: 2,
+      blur: 3,
       spread: 0,
       isInset: false,
       color: "rgba(0, 0, 0, 0.15)"
     }
   ];
-
-  themeModelJSONCssVariables = themeModel.toJSON()["cssVariables"] || {};
-  expect(themeModelJSONCssVariables["--sjs-shadow-small-reset"]).toBe("0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
+  cssVariables = creator?.theme?.cssVariables;
+  expect(cssVariables["--sjs-shadow-small"]).toBe("0px 2px 3px 0px rgba(0, 0, 0, 0.15)");
+  expect(cssVariables["--sjs-shadow-small-reset"]).toBe("0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
+  expect(themeModel["--sjs-shadow-small"]).toBe("0px 2px 3px 0px rgba(0, 0, 0, 0.15)");
+  expect(themeModel["--sjs-shadow-small-reset"]).toBe("0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
 
   shadowInnerEditor.value = [
     {
       x: 0,
-      y: 1,
-      blur: 2,
+      y: 3,
+      blur: 4,
       spread: 0,
       isInset: false,
       color: "rgba(0, 0, 0, 0.15)"
     }
   ];
-
-  themeModelJSONCssVariables = themeModel.toJSON()["cssVariables"] || {};
-  expect(themeModelJSONCssVariables["--sjs-shadow-inner-reset"]).toBe("0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
+  cssVariables = creator?.theme?.cssVariables;
+  expect(cssVariables["--sjs-shadow-inner"]).toBe("0px 3px 4px 0px rgba(0, 0, 0, 0.15)");
+  expect(cssVariables["--sjs-shadow-inner-reset"]).toBe("0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
+  expect(themeModel.cssVariables["--sjs-shadow-inner"]).toBe("0px 3px 4px 0px rgba(0, 0, 0, 0.15)");
+  expect(themeModel.cssVariables["--sjs-shadow-inner-reset"]).toBe("0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
 
   shadowInnerEditor.value = [
     {
       x: 0,
-      y: 1,
-      blur: 2,
+      y: 3,
+      blur: 4,
       spread: 0,
       isInset: true,
       color: "rgba(0, 0, 0, 0.15)"
     }
   ];
-
-  themeModelJSONCssVariables = themeModel.toJSON()["cssVariables"] || {};
-  expect(themeModelJSONCssVariables["--sjs-shadow-inner-reset"]).toBe("inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
+  cssVariables = creator?.theme?.cssVariables;
+  expect(cssVariables["--sjs-shadow-inner"]).toBe("inset 0px 3px 4px 0px rgba(0, 0, 0, 0.15)");
+  expect(cssVariables["--sjs-shadow-inner-reset"]).toBe("inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
+  expect(themeModel.cssVariables["--sjs-shadow-inner"]).toBe("inset 0px 3px 4px 0px rgba(0, 0, 0, 0.15)");
+  expect(themeModel.cssVariables["--sjs-shadow-inner-reset"]).toBe("inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
 
   shadowInnerEditor.value = [
     {
       x: 0,
-      y: 1,
-      blur: 2,
+      y: 3,
+      blur: 4,
       spread: 0,
       isInset: false,
       color: "rgba(0, 0, 0, 0.15)"
     },
     {
       x: 0,
-      y: 1,
-      blur: 2,
+      y: 5,
+      blur: 6,
       spread: 0,
       isInset: true,
       color: "rgba(0, 0, 0, 0.15)"
     }
   ];
 
-  themeModelJSONCssVariables = themeModel.toJSON()["cssVariables"] || {};
-  expect(themeModelJSONCssVariables["--sjs-shadow-inner-reset"]).toBe("0px 0px 0px 0px rgba(0, 0, 0, 0.15), inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
+  cssVariables = creator?.theme?.cssVariables;
+  expect(cssVariables["--sjs-shadow-inner"]).toBe("0px 3px 4px 0px rgba(0, 0, 0, 0.15), inset 0px 5px 6px 0px rgba(0, 0, 0, 0.15)");
+  expect(cssVariables["--sjs-shadow-inner-reset"]).toBe("0px 0px 0px 0px rgba(0, 0, 0, 0.15), inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
+  expect(themeModel.cssVariables["--sjs-shadow-inner"]).toBe("0px 3px 4px 0px rgba(0, 0, 0, 0.15), inset 0px 5px 6px 0px rgba(0, 0, 0, 0.15)");
+  expect(themeModel.cssVariables["--sjs-shadow-inner-reset"]).toBe("0px 0px 0px 0px rgba(0, 0, 0, 0.15), inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
+});
+
+test("Check all file edit questions has onChooseFiles callback", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const backgroundImageEditor = themePlugin.propertyGrid.survey.findQuestionByName("backgroundImage") as QuestionFileEditorModel;
+  expect(!!backgroundImageEditor.onChooseFilesCallback).toBeTruthy();
+  // expect(!!(<QuestionPanelDynamicModel>themeEditorSurvey.getPanelByName("groupHeader").questions[0]).panels[0].getQuestionByName("backgroundImage").onChooseFilesCallback).toBeTruthy();
+});
+
+test("Theme builder: restore questionTitle switch tabs", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  creator.activeTab = "theme";
+  let questionTitleFontSettings = themePlugin.propertyGrid.survey.findQuestionByName("questionTitle") as QuestionCompositeModel;
+  const questionTitleValue = {
+    "family": "Open Sans",
+    "weight": "600",
+    "color": "rgba(0, 0, 0, 0.91)",
+    "size": 16
+  };
+
+  expect(questionTitleFontSettings.value).toEqual(questionTitleValue);
+  expect(themePlugin.themeModel["questionTitle"]).toEqual(questionTitleValue);
+
+  questionTitleValue.color = "rgba(201, 90, 231, 0.91)";
+  questionTitleFontSettings.value = questionTitleValue;
+  expect(questionTitleFontSettings.value).toEqual(questionTitleValue);
+  expect(themePlugin.themeModel["questionTitle"]).toEqual(questionTitleValue);
+
+  creator.activeTab = "designer";
+  creator.activeTab = "theme";
+  questionTitleFontSettings = themePlugin.propertyGrid.survey.findQuestionByName("questionTitle") as QuestionCompositeModel;
+  expect(questionTitleFontSettings.value).toEqual(questionTitleValue);
+  expect(themePlugin.themeModel["questionTitle"]).toEqual(questionTitleValue);
 });
 
 // test("Add theme before activate", (): any => {

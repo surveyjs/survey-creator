@@ -69,6 +69,7 @@ export * from "../property-grid/bindings";
 export * from "../property-grid/property-grid-view-model";
 export * from "../property-grid/object-selector";
 export * from "../property-grid/restfull";
+export * from "../property-grid/theme-settings";
 export * from "../property-grid/values";
 export * from "../property-grid/search-manager";
 export * from "../property-grid/maskSettings";

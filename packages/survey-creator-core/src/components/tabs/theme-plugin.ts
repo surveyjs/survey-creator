@@ -229,7 +229,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       }
     });
     this.themeModel.onThemeSelected.add((sender, options) => {
-      this.updateSimulatorTheme(options.theme);
+      this.syncTheme(options.theme);
       this.resetTheme.enabled = getThemeFullName(sender.defaultSessionTheme) !== getThemeFullName(options.theme);
       this.saveThemeAction.enabled = true;
       this.onThemeSelected.fire(this, options);
@@ -238,7 +238,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       }
     });
     this.themeModel.onThemePropertyChanged.add((sender, options) => {
-      this.updateSimulatorTheme();
+      this.syncTheme();
       this.resetTheme.enabled = true;
       this.saveThemeAction.enabled = true;
       this.onThemePropertyChanged.fire(this, options);
@@ -500,6 +500,11 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.creator.footerToolbar.actions.push(this.themeSettingsAction);
   }
 
+  private syncTheme(theme?: ITheme) {
+    const newTheme = theme || this.themeModel.toJSON();
+    this.creator.theme = newTheme;
+    this.updateSimulatorTheme(newTheme);
+  }
   private updateSimulatorTheme(theme?: ITheme) {
     if (!!this.model.survey) {
       this.model.survey.applyTheme(theme || this.themeModel.toJSON());
