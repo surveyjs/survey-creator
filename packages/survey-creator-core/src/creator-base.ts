@@ -3176,7 +3176,7 @@ export class SurveyCreatorModel extends Base
       this.onMachineTranslate.fire(this, { fromLocale: fromLocale, toLocale: toLocale, strings: strings, callback: callback });
     }
   }
-
+  translationLocalesOrder: Array<string> = [];
   /**
    * A delay between changing survey settings and saving the survey JSON schema, measured in milliseconds. Applies only when the [`isAutoSave`](#isAutoSave) property is `true`.
    * 
