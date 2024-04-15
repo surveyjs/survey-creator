@@ -124,6 +124,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "signatureAutoScaleEnabled",
       "showPlaceholder",
       "placeholder",
+      "placeholderReadOnly",
       "allowClear",
       "backgroundImage",
       "backgroundColor",

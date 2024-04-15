@@ -334,6 +334,7 @@ export var enStrings = {
       signatureAutoScaleEnabled: "Auto-scale the signature area",
       showPlaceholder: "Show a placeholder within signature area",
       placeholder: "Placeholder text",
+      placeholderReadOnly: "Placeholder text in read-only or preview mode",
       allowClear: "Show the Clear button within signature area",
       penMinWidth: "Minimum stroke width",
       penMaxWidth: "Maximum stroke width",
