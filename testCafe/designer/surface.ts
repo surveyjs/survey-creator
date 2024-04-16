@@ -151,8 +151,8 @@ test("Check imagepicker add/delete files title", async (t) => {
   });
 
   await t
-    .hover(".sd-imagepicker__image-container [title='Select a file']")
-    .hover(".sd-imagepicker__image-container [title='Remove the file']");
+    .hover(".svc-image-item-value-wrapper [title='Select a file']")
+    .hover(".svc-image-item-value-wrapper [title='Remove the file']");
 });
 
 test("Focus on new panel added", async (t) => {

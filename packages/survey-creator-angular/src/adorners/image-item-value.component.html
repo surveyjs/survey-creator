@@ -20,11 +20,11 @@
           <ng-container *ngIf="adorner.allowRemove && !adorner.isUploading">
             <span class="svc-context-button" (click)="adorner.chooseFile(adorner)" [key2click] [attr.title]="undefined"
               [attr.aria-label]="undefined">
-              <svg [iconName]="'icon-file'" [size]="24" sv-ng-svg-icon></svg>
+              <svg [iconName]="'icon-file'" [size]="24" [title]="adorner.selectFileTitle" sv-ng-svg-icon></svg>
             </span>
             <span class="svc-context-button svc-context-button--danger" (click)="adorner.remove(adorner)" [key2click]
               [attr.title]="undefined" [attr.aria-label]="undefined">
-              <svg [iconName]="'icon-delete'" [size]="24" sv-ng-svg-icon></svg>
+              <svg [iconName]="'icon-delete'" [size]="24" [title]="adorner.removeFileTitle" sv-ng-svg-icon></svg>
             </span>
           </ng-container>
         </div>
