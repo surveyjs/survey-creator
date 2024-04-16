@@ -320,6 +320,7 @@ export var nlStrings = {
       signatureAutoScaleEnabled: "Het handtekeninggebied automatisch schalen",
       showPlaceholder: "De tijdelijke aanduiding weergeven",
       placeholder: "Tijdelijke aanduiding voor tekst",
+      placeholderReadOnly: "Tijdelijke tekst in de modus Alleen-lezen of voorvertoning",
       allowClear: "De knop Wissen weergeven in het handtekeninggebied",
       penMinWidth: "Minimale penbreedte",
       penMaxWidth: "Maximale breedte van het hok",
@@ -494,6 +495,7 @@ export var nlStrings = {
     descriptionPlaceholder: "Voer een omschrijving in",
     surveyDescriptionPlaceholder: "Voer een onderzoeksbeschrijving in",
     pageDescriptionPlaceholder: "Voer een paginabeschrijving in",
+    textWrapEnabled: "Wrap-keuzes",
     showOtherItem: "Heeft de 'Anders:'-optie",
     otherText: "Titel 'Anders:'-optie",
     showNoneItem: "Heeft de 'Geen'-optie",
@@ -1050,8 +1052,7 @@ export var nlStrings = {
     searchMode: {
       contains: "Bevat",
       startsWith: "Begint met"
-    },
-    textWrapEnabled: "Wrap-keuzes"
+    }
   },
   // Operators
   op: {
@@ -1201,10 +1202,14 @@ export var nlStrings = {
       imageHeight: "Hiermee past u de hoogte van de afbeelding in de enquêteresultaten aan.",
       imageWidth: "Hiermee past u de breedte van de afbeelding in de enquêteresultaten aan."
     },
+    image: {
+      contentMode: "De optie \"Auto\" bepaalt automatisch de geschikte modus voor weergave - Afbeelding, Video of YouTube - op basis van de opgegeven bron-URL."
+    },
     imagepicker: {
       imageHeight: "Hiermee worden de minimum- en maximumhoogtewaarden overschreven.",
       imageWidth: "Hiermee worden de waarden voor de minimum- en maximumbreedte overschreven.",
-      choices: "\"Waarde\" dient als een item-ID die wordt gebruikt in voorwaardelijke regels; \"Tekst\" wordt getoond aan respondenten."
+      choices: "\"Waarde\" dient als een item-ID die wordt gebruikt in voorwaardelijke regels; \"Tekst\" wordt getoond aan respondenten.",
+      contentMode: "Kies tussen \"Afbeelding\" en \"Video\" om de inhoudsmodus van de mediakiezer in te stellen. Als \"Afbeelding\" is geselecteerd, zorg er dan voor dat alle beschikbare opties afbeeldingsbestanden zijn in de volgende formaten: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Evenzo, als \"Video\" is geselecteerd, zorg er dan voor dat alle opties directe links zijn naar videobestanden in de volgende formaten: MP4, MOV, WMV, FLV, AVI, MKV. Houd er rekening mee dat YouTube-links niet worden ondersteund voor video-opties."
     },
     text: {
       size: "Deze instelling wijzigt alleen de grootte van het invoerveld en heeft geen invloed op de breedte van het vraagvak. Als u de geaccepteerde invoerlengte wilt beperken, gaat u naar <b>Validatie → Maximale tekenlimiet</b>."
@@ -1316,7 +1321,6 @@ export var nlStrings = {
     dataList: "Voer een lijst met keuzes in die tijdens de invoer aan de respondent worden voorgesteld.",
     itemSize: "De instelling wijzigt alleen de grootte van de invoervelden en heeft geen invloed op de breedte van het vraagvak.",
     itemTitleWidth: "Hiermee stelt u een consistente breedte in voor alle artikellabels in pixels",
-    contentMode: "De optie \"Auto\" bepaalt automatisch de geschikte modus voor weergave - Afbeelding, Video of YouTube - op basis van de opgegeven bron-URL.",
     altText: "Dient als vervanging wanneer de afbeelding niet kan worden weergegeven op het apparaat van een gebruiker en voor toegankelijkheidsdoeleinden.",
     rateColorMode: "Definieert de kleur van de geselecteerde emoji wanneer het type Beoordelingspictogram is ingesteld op \"Smileys\". Kies tussen: \"Standaard\" - de geselecteerde emoji verschijnt in de standaard enquêtekleur; \"Schaal\" - de geselecteerde emoji erft de kleur van de beoordelingsschaal.",
     expression: {
@@ -1339,7 +1343,7 @@ export var nlStrings = {
       pattern: "Het patroon kan letterlijke tekenreeksen en de volgende tijdelijke aanduidingen bevatten: '9' - voor een cijfer; \"a\" - voor een hoofdletter of kleine letter; '#' - voor een cijfer of een hoofdletter of kleine letter. Gebruik backslash '\\' om een teken te escapen."
     },
     datetimemask: {
-      pattern: "Het patroon kan scheidingstekens en de volgende tijdelijke aanduidingen bevatten: 'm' - voor maandnummer; 'mm' - voor maandnummer, met voorloopnul voor eencijferige waarden; 'd' - voor dag van de maand; 'dd' - voor dag van de maand, met voorloopnul voor eencijferige waarden; \"yy\" - voor de laatste twee cijfers van het jaar; 'yyyy' - voor een jaar van vier cijfers."
+      pattern: "Het patroon kan scheidingstekens en de volgende tijdelijke aanduidingen bevatten:<br>'m' - Maandnummer.<br>'mm' - Maandnummer, met voorloopnul voor eencijferige waarden. <br>'d' - Dag van de maand. <br>'dd' - Dag van de maand, met voorloopnul voor eencijferige waarden. <br>'yy' - De laatste twee cijfers van het jaar. <br>'yyyy' - Viercijferig jaartal. <br>'H' - Uren in 24-uursnotatie. <br>'HH' - Uren in 24-uursnotatie, met voorloopnul voor eencijferige waarden. <br>'h' - Uren in 12-uurs notatie. <br>'hh' - Uren in 12-uursnotatie, met voorloopnul voor eencijferige waarden. <br>\"MM\" - Notulen. <br>'ss' - Seconden. <br>'TT' - 12-uurs kloktijd in hoofdletters (AM/PM). <br>'tt' - 12-uurs kloktijd in kleine letters (am/pm)."
     },
     numericmask: {
       decimalSeparator: "Een symbool dat wordt gebruikt om het fractionele deel te scheiden van het gehele deel van een weergegeven getal.",
@@ -2513,3 +2517,7 @@ editorLocalization.locales["nl"] = nlStrings;
 // maskTypes.none: "None" => "Geen"
 // itemvalue@rows.visibleIf: "Make the row visible if" => "Maak de rij zichtbaar als"
 // itemvalue@rows.enableIf: "Make the row editable if" => "De rij bewerkbaar maken als:"
+// signaturepad.placeholderReadOnly: "Placeholder text in read-only or preview mode" => "Tijdelijke tekst in de modus Alleen-lezen of voorvertoning"
+// pe.textWrapEnabled: "Wrap choices" => "Wrap-keuzes"
+// image.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "De optie \"Auto\" bepaalt automatisch de geschikte modus voor weergave - Afbeelding, Video of YouTube - op basis van de opgegeven bron-URL."
+// imagepicker.contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options." => "Kies tussen \"Afbeelding\" en \"Video\" om de inhoudsmodus van de mediakiezer in te stellen. Als \"Afbeelding\" is geselecteerd, zorg er dan voor dat alle beschikbare opties afbeeldingsbestanden zijn in de volgende formaten: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Evenzo, als \"Video\" is geselecteerd, zorg er dan voor dat alle opties directe links zijn naar videobestanden in de volgende formaten: MP4, MOV, WMV, FLV, AVI, MKV. Houd er rekening mee dat YouTube-links niet worden ondersteund voor video-opties."

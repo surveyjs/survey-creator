@@ -320,6 +320,7 @@ export let svStrings = {
       signatureAutoScaleEnabled: "Skala signaturområdet automatiskt",
       showPlaceholder: "Visa platshållaren",
       placeholder: "Platshållartext",
+      placeholderReadOnly: "Platshållartext i skrivskyddat läge eller förhandsgranskningsläge",
       allowClear: "Visa knappen Rensa i signaturområdet",
       penMinWidth: "Minsta pennbredd",
       penMaxWidth: "Maximal pennbredd",
@@ -494,6 +495,7 @@ export let svStrings = {
     descriptionPlaceholder: "Beskrivning",
     surveyDescriptionPlaceholder: "Beskrivning",
     pageDescriptionPlaceholder: "Beskrivning",
+    textWrapEnabled: "Radbryt val",
     showOtherItem: "Har annat element",
     otherText: "Annat",
     showNoneItem: "Tillåt alternativet Ingen",
@@ -1050,8 +1052,7 @@ export let svStrings = {
     searchMode: {
       contains: "Innehåller",
       startsWith: "Börjar med"
-    },
-    textWrapEnabled: "Radbryt val"
+    }
   },
   // Operators
   op: {
@@ -1201,10 +1202,14 @@ export let svStrings = {
       imageHeight: "Justerar höjden på bilden i undersökningsresultaten.",
       imageWidth: "Justerar bredden på bilden i undersökningsresultaten."
     },
+    image: {
+      contentMode: "Alternativet \"Auto\" bestämmer automatiskt vilket läge som är lämpligt för visning - bild, video eller YouTube - baserat på den angivna källadressen."
+    },
     imagepicker: {
       imageHeight: "Åsidosätter värdena för lägsta och högsta höjd.",
       imageWidth: "Åsidosätter värdena för minsta och största bredd.",
-      choices: "\"Värde\" fungerar som ett objekt-ID som används i villkorsregler. \"Text\" visas för respondenterna."
+      choices: "\"Värde\" fungerar som ett objekt-ID som används i villkorsregler. \"Text\" visas för respondenterna.",
+      contentMode: "Välj mellan \"Bild\" och \"Video\" för att ställa in innehållsläget för medieväljaren. Om \"Bild\" är valt, se till att alla alternativ som tillhandahålls är bildfiler i följande format: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. På samma sätt, om \"Video\" är valt, se till att alla alternativ är direktlänkar till videofiler i följande format: MP4, MOV, WMV, FLV, AVI, MKV. Observera att YouTube-länkar inte stöds för videoalternativ."
     },
     text: {
       size: "Den här inställningen ändrar bara storleken på inmatningsfältet och påverkar inte frågerutans bredd. Om du vill begränsa den godkända indatalängden går du till <b>Validering → Maximal teckengräns</b>."
@@ -1316,7 +1321,6 @@ export let svStrings = {
     dataList: "Ange en lista med alternativ som kommer att föreslås för respondenten under inmatningen.",
     itemSize: "Inställningen ändrar bara storleken på inmatningsfälten och påverkar inte frågerutans bredd.",
     itemTitleWidth: "Anger konsekvent bredd för alla objektetiketter i pixlar",
-    contentMode: "Alternativet \"Auto\" bestämmer automatiskt vilket läge som är lämpligt för visning - bild, video eller YouTube - baserat på den angivna källadressen.",
     altText: "Fungerar som ersättning när bilden inte kan visas på en användares enhet och i tillgänglighetssyfte.",
     rateColorMode: "Definierar färgen på den valda emojin när typen av betygsikon är inställd på \"Smileys\". Välj mellan: \"Standard\" - den valda emojin visas i standardundersökningsfärgen; \"Skala\" - den valda emojin ärver färg från betygsskalan.",
     expression: {
@@ -1339,7 +1343,7 @@ export let svStrings = {
       pattern: "Mönstret kan innehålla strängliteraler och följande platshållare: \"9\" – för en siffra; \"a\" - för en stor eller liten bokstav; \"#\" – för en siffra eller en stor eller liten bokstav. Använd omvänt snedstreck \"\\\" för att undvika ett tecken."
     },
     datetimemask: {
-      pattern: "Mönstret kan innehålla avgränsningstecken och följande platshållare: \"m\" – för månadsnummer; \"mm\" – för månadsnummer, med inledande nolla för ensiffriga värden. \"d\" - för dag i månaden; \"dd\" – för dag i månaden, med inledande nolla för ensiffriga värden. \"yy\" – för de två sista siffrorna i årtalet. \"yyyy\" – för ett fyrsiffrigt årtal."
+      pattern: "Mönstret kan innehålla avgränsningstecken och följande platshållare:<br>'m' – Månadsnummer.<br>\"mm\" – Månadsnummer, med inledande nolla för ensiffriga värden. <br>\"d\" – Dag i månaden. <br>\"dd\" – Dag i månaden, med inledande noll för ensiffriga värden. <br>\"yy\" – De två sista siffrorna i årtalet. <br>\"yyyy\" – Fyrsiffrigt årtal. <br>\"H\" – Timmar i 24-timmarsformat. <br>\"HH\" – Timmar i 24-timmarsformat, med inledande nolla för ensiffriga värden. <br>\"h\" – Timmar i 12-timmarsformat. <br>\"hh\" – Timmar i 12-timmarsformat, med inledande nolla för ensiffriga värden. <br>\"MM\" - Minuter. <br>\"ss\" – sekunder. <br>\"TT\" - 12-timmars klockperiod med versaler (AM/PM). <br>\"tt\" - 12-timmars klockperiod med gemener (am/pm)."
     },
     numericmask: {
       decimalSeparator: "En symbol som används för att skilja bråkdelen från heltalsdelen av ett visat tal.",
@@ -2710,3 +2714,7 @@ editorLocalization.locales["sv"] = svStrings;
 // maskTypes.none: "None" => "Ingen"
 // itemvalue@rows.visibleIf: "Make the row visible if" => "Gör raden synlig om"
 // itemvalue@rows.enableIf: "Make the row editable if" => "Gör raden redigerbar om"
+// signaturepad.placeholderReadOnly: "Placeholder text in read-only or preview mode" => "Platshållartext i skrivskyddat läge eller förhandsgranskningsläge"
+// pe.textWrapEnabled: "Wrap choices" => "Radbryt val"
+// image.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "Alternativet \"Auto\" bestämmer automatiskt vilket läge som är lämpligt för visning - bild, video eller YouTube - baserat på den angivna källadressen."
+// imagepicker.contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options." => "Välj mellan \"Bild\" och \"Video\" för att ställa in innehållsläget för medieväljaren. Om \"Bild\" är valt, se till att alla alternativ som tillhandahålls är bildfiler i följande format: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. På samma sätt, om \"Video\" är valt, se till att alla alternativ är direktlänkar till videofiler i följande format: MP4, MOV, WMV, FLV, AVI, MKV. Observera att YouTube-länkar inte stöds för videoalternativ."
