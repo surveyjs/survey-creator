@@ -320,6 +320,7 @@ var traditionalChineseTranslation = {
       signatureAutoScaleEnabled: "自動縮放簽名區域",
       showPlaceholder: "顯示佔位元",
       placeholder: "佔位元文本",
+      placeholderReadOnly: "唯讀或預覽模式下的佔位元文本",
       allowClear: "在簽名區域內顯示「清除」 按鈕",
       penMinWidth: "最小筆寬",
       penMaxWidth: "最大筆寬",
@@ -494,6 +495,7 @@ var traditionalChineseTranslation = {
     descriptionPlaceholder: "描述",
     surveyDescriptionPlaceholder: "描述",
     pageDescriptionPlaceholder: "描述",
+    textWrapEnabled: "換行選項",
     showOtherItem: "可添加其他答案?",
     otherText: "其他答案文本",
     showNoneItem: "允許“無”選項",
@@ -1050,8 +1052,7 @@ var traditionalChineseTranslation = {
     searchMode: {
       contains: "包含",
       startsWith: "開頭為"
-    },
-    textWrapEnabled: "包裝選擇"
+    }
   },
   // Operators
   op: {
@@ -1201,10 +1202,14 @@ var traditionalChineseTranslation = {
       imageHeight: "調整調查結果中圖像的高度。",
       imageWidth: "調整調查結果中圖像的寬度。"
     },
+    image: {
+      contentMode: "“自動”選項會根據提供的源URL自動確定適合的顯示模式 - 圖像、視頻或YouTube。"
+    },
     imagepicker: {
       imageHeight: "覆蓋最小和最大高度值。",
       imageWidth: "覆蓋最小和最大寬度值。",
-      choices: "“值”用作條件規則中使用的專案ID;向受訪者顯示“文本”。"
+      choices: "“值”用作條件規則中使用的專案ID;向受訪者顯示“文本”。",
+      contentMode: "在「圖像」和「視頻」之間進行選擇以設置媒體選擇器的內容模式。如果選擇「圖像」，請確保提供的所有選項都是以下格式的圖像檔：JPEG、GIF、PNG、APNG、SVG、BMP、ICO。同樣，如果選擇「視頻」，請確保所有選項都是指向以下格式的視頻檔的直接連結：MP4、MOV、WMV、FLV、AVI、MKV。請注意，視頻選項不支援 YouTube 連結。"
     },
     text: {
       size: "此設置僅調整輸入欄位的大小，不會影響問題框的寬度。要限制接受的輸入長度，請轉到<b>驗證→最大字元限制</b>。"
@@ -1316,7 +1321,6 @@ var traditionalChineseTranslation = {
     dataList: "輸入將在輸入期間向受訪者建議的選項清單。",
     itemSize: "該設置僅調整輸入欄位的大小，不會影響問題框的寬度。",
     itemTitleWidth: "為所有項目標籤設定一致的寬度（以像素為單位）",
-    contentMode: "“自動”選項會根據提供的源URL自動確定合適的顯示模式 - 圖像、視頻或YouTube。",
     altText: "當圖像無法在使用者設備上顯示時，出於輔助功能的目的，可作為替代。",
     rateColorMode: "定義當評級圖示類型設置為「笑臉」時所選表情符號的顏色。選擇：「預設」 - 選取表情符號以預設調查顏色顯示;“比例” - 所選的表情符號繼承了評分量表的顏色。",
     expression: {
@@ -1339,7 +1343,7 @@ var traditionalChineseTranslation = {
       pattern: "該模式可以包含字串文字和以下佔位元： '9' - 表示數位;“a” - 表示大寫或小寫字母;'#' - 表示數位或大寫或小寫字母。使用反斜杠“\\”轉義字元。"
     },
     datetimemask: {
-      pattern: "該模式可以包含分隔符和以下佔位元：“m” - 表示月份數;'mm' - 表示月份數位，前導零表示個位數;'d' - 表示月份中的某一天;'dd' - 表示月份中的某一天，前導零表示個位數值;'yy' - 一年的最後兩位數位;'yyyy' - 表示四位數的年份。"
+      pattern: "模式可以包含分隔符和以下佔位元：“<br>m”- 月份編號。<br>'mm' - 月份編號，前導零表示個位數值。<br>'d' - 月份中的某一天。<br>'dd' - 月份的某一天，個位數值的前導為零。<br>'yy' - 年份的最後兩位數位。<br>'yyyy' - 四位數年份。<br>“H” - 24 小時制的小時數。<br>“HH” - 24 小時制的小時數，個位數值的前導為零。<br>'h' - 以 12 小時為制的小時數。<br>'hh' - 12 小時制的小時數，個位數值的前導為零。<br>'MM' - 分鐘。<br>'ss' - 秒。<br>“TT” - 大寫 （AM/PM） 的 12 小時制週期。<br>'tt' - 小寫 （am/pm） 的 12 小時制週期。"
     },
     numericmask: {
       decimalSeparator: "用於將顯示數位的小數部分與整數部分分開的符號。",
@@ -2811,3 +2815,7 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // maskTypes.none: "None" => "沒有"
 // itemvalue@rows.visibleIf: "Make the row visible if" => "如果出現以下情況，則使行可見"
 // itemvalue@rows.enableIf: "Make the row editable if" => "如果出現以下情況，則使行可編輯"
+// signaturepad.placeholderReadOnly: "Placeholder text in read-only or preview mode" => "唯讀或預覽模式下的佔位元文本"
+// pe.textWrapEnabled: "Wrap choices" => "換行選項"
+// image.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "“自動”選項會根據提供的源URL自動確定適合的顯示模式 - 圖像、視頻或YouTube。"
+// imagepicker.contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options." => "在「圖像」和「視頻」之間進行選擇以設置媒體選擇器的內容模式。如果選擇「圖像」，請確保提供的所有選項都是以下格式的圖像檔：JPEG、GIF、PNG、APNG、SVG、BMP、ICO。同樣，如果選擇「視頻」，請確保所有選項都是指向以下格式的視頻檔的直接連結：MP4、MOV、WMV、FLV、AVI、MKV。請注意，視頻選項不支援 YouTube 連結。"
