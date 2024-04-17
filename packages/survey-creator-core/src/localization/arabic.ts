@@ -320,6 +320,7 @@ export var arStrings = {
       signatureAutoScaleEnabled: "تغيير حجم منطقة التوقيع تلقائيا",
       showPlaceholder: "إظهار العنصر النائب",
       placeholder: "نص العنصر النائب",
+      placeholderReadOnly: "نص العنصر النائب في وضع القراءة فقط أو المعاينة",
       allowClear: "إظهار الزر مسح داخل منطقة التوقيع",
       penMinWidth: "الحد الأدنى لعرض القلم",
       penMaxWidth: "الحد الأقصى لعرض القلم",
@@ -494,6 +495,7 @@ export var arStrings = {
     descriptionPlaceholder: "Enter a description",
     surveyDescriptionPlaceholder: "أدخل وصف للإستبيان",
     pageDescriptionPlaceholder: "أدخل وصف للصفحة",
+    textWrapEnabled: "خيارات الالتفاف",
     showOtherItem: "هل هناك خيار أخرى",
     otherText: "نص خيار أخرى",
     showNoneItem: "هل هناك خيار بلا",
@@ -1050,8 +1052,7 @@ export var arStrings = {
     searchMode: {
       contains: "يحتوي",
       startsWith: "يبدأ ب"
-    },
-    textWrapEnabled: "خيارات الالتفاف"
+    }
   },
   // Operators
   op: {
@@ -1201,10 +1202,14 @@ export var arStrings = {
       imageHeight: "يضبط ارتفاع الصورة في نتائج الاستطلاع.",
       imageWidth: "يضبط عرض الصورة في نتائج الاستطلاع."
     },
+    image: {
+      contentMode: "يحدد الخيار \"تلقائي\" تلقائيا الوضع المناسب للعرض - الصورة أو الفيديو أو YouTube - بناء على عنوان URL المصدر المقدم."
+    },
     imagepicker: {
       imageHeight: "يتخطى قيم الحد الأدنى والحد الأقصى للارتفاع.",
       imageWidth: "يتخطى قيم الحد الأدنى والحد الأقصى للعرض.",
-      choices: "تعمل \"القيمة\" كمعرف عنصر مستخدم في القواعد الشرطية ؛ يتم عرض \"النص\" للمستجيبين."
+      choices: "تعمل \"القيمة\" كمعرف عنصر مستخدم في القواعد الشرطية ؛ يتم عرض \"النص\" للمستجيبين.",
+      contentMode: "اختر بين \"صورة\" و \"فيديو\" لتعيين وضع المحتوى لمحدد الوسائط. إذا تم تحديد \"صورة\" ، فتأكد من أن جميع الخيارات المتوفرة هي ملفات صور بالتنسيقات التالية: JPEG و GIF و PNG و APNG و SVG و BMP و ICO. وبالمثل ، إذا تم تحديد \"فيديو\" ، فتأكد من أن جميع الخيارات هي روابط مباشرة لملفات الفيديو بالتنسيقات التالية: MP4 و MOV و WMV و FLV و AVI و MKV. يرجى ملاحظة أن روابط YouTube غير مدعومة لخيارات الفيديو."
     },
     text: {
       size: "يغير هذا الإعداد حجم حقل الإدخال فقط ولا يؤثر على عرض مربع السؤال. للحد من طول الإدخال المقبول، انتقل إلى <b>التحقق من الصحة → الحد الأقصى لعدد الأحرف</b>."
@@ -1316,7 +1321,6 @@ export var arStrings = {
     dataList: "أدخل قائمة بالخيارات التي سيتم اقتراحها على المستجيب أثناء الإدخال.",
     itemSize: "يغير الإعداد حجم حقول الإدخال فقط ولا يؤثر على عرض مربع السؤال.",
     itemTitleWidth: "يضبط عرضا متناسقا لكل تسميات العناصر بالبكسل",
-    contentMode: "يحدد الخيار \"تلقائي\" تلقائيا الوضع المناسب للعرض - الصورة أو الفيديو أو YouTube - بناء على عنوان URL المصدر المقدم.",
     altText: "يعمل كبديل عندما يتعذر عرض الصورة على جهاز المستخدم ولأغراض إمكانية الوصول.",
     rateColorMode: "يحدد لون الرموز التعبيرية المحددة عند تعيين نوع رمز التقييم على \"الوجوه الضاحكة\". اختر بين: \"افتراضي\" - يظهر الرمز التعبيري المحدد بلون الاستطلاع الافتراضي ؛ \"مقياس\" - يرث الرمز التعبيري المحدد اللون من مقياس التصنيف.",
     expression: {
@@ -1339,7 +1343,7 @@ export var arStrings = {
       pattern: "يمكن أن يحتوي النمط على حرفي السلسلة والعناصر النائبة التالية: \"9\" - للرقم ؛ \"a\" - لحرف كبير أو صغير ؛ '#' - لرقم أو حرف كبير أو صغير. استخدم الشرطة المائلة للخلف '\\' للهروب من حرف."
     },
     datetimemask: {
-      pattern: "يمكن أن يحتوي النمط على أحرف فاصلة والعناصر النائبة التالية: \"m\" - لرقم الشهر ؛ \"mm\" - لرقم الشهر ، مع صفر بادئ للقيم المكونة من رقم واحد ؛ \"d\" - ليوم من الشهر ؛ \"dd\" - ليوم من الشهر ، مع صفر بادئ للقيم المكونة من رقم واحد ؛ \"yy\" - لآخر رقمين من السنة ؛ \"YYYY\" - لمدة عام مكون من أربعة أرقام."
+      pattern: "يمكن أن يحتوي النمط على أحرف فاصلة والعناصر النائبة التالية:<br>'m' - رقم الشهر.<br>\"mm\" - رقم الشهر ، مع صفر بادئ للقيم المكونة من رقم واحد. <br>'d' - يوم من الشهر. <br>\"dd\" - يوم من الشهر ، مع صفر بادئ للقيم المكونة من رقم واحد. <br>\"yy\" - آخر رقمين من السنة. <br>\"yyyy\" - سنة مكونة من أربعة أرقام. <br>\"H\" - ساعات بتنسيق 24 ساعة. <br>\"HH\" - ساعات بتنسيق 24 ساعة ، مع صفر بادئ للقيم المكونة من رقم واحد. <br>\"h\" - ساعات بتنسيق 12 ساعة. <br>\"hh\" - ساعات بتنسيق 12 ساعة ، مع صفر بادئ للقيم المكونة من رقم واحد. <br>\"مم\" - دقائق. <br>'ss' - ثواني. <br>\"TT\" - فترة ساعة 12 ساعة بأحرف كبيرة (صباحا / مساء). <br>\"TT\" - فترة ساعة 12 ساعة بأحرف صغيرة (صباحا / مساء)."
     },
     numericmask: {
       decimalSeparator: "رمز يستخدم لفصل الجزء الكسري عن الجزء الصحيح من الرقم المعروض.",
@@ -2443,3 +2447,7 @@ editorLocalization.locales["ar"] = arStrings;
 // maskTypes.none: "None" => "اي"
 // itemvalue@rows.visibleIf: "Make the row visible if" => "اجعل الصف مرئيا إذا"
 // itemvalue@rows.enableIf: "Make the row editable if" => "اجعل الصف قابلا للتحرير إذا"
+// signaturepad.placeholderReadOnly: "Placeholder text in read-only or preview mode" => "نص العنصر النائب في وضع القراءة فقط أو المعاينة"
+// pe.textWrapEnabled: "Wrap choices" => "خيارات الالتفاف"
+// image.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "يحدد الخيار \"تلقائي\" تلقائيا الوضع المناسب للعرض - الصورة أو الفيديو أو YouTube - بناء على عنوان URL المصدر المقدم."
+// imagepicker.contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options." => "اختر بين \"صورة\" و \"فيديو\" لتعيين وضع المحتوى لمحدد الوسائط. إذا تم تحديد \"صورة\" ، فتأكد من أن جميع الخيارات المتوفرة هي ملفات صور بالتنسيقات التالية: JPEG و GIF و PNG و APNG و SVG و BMP و ICO. وبالمثل ، إذا تم تحديد \"فيديو\" ، فتأكد من أن جميع الخيارات هي روابط مباشرة لملفات الفيديو بالتنسيقات التالية: MP4 و MOV و WMV و FLV و AVI و MKV. يرجى ملاحظة أن روابط YouTube غير مدعومة لخيارات الفيديو."

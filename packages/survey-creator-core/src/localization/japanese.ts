@@ -320,6 +320,7 @@ export var jaStrings = {
       signatureAutoScaleEnabled: "署名領域の自動スケーリング",
       showPlaceholder: "プレースホルダーを表示する",
       placeholder: "プレースホルダテキスト",
+      placeholderReadOnly: "読み取り専用モードまたはプレビューモードのプレースホルダーテキスト",
       allowClear: "署名領域内に [クリア] ボタンを表示する",
       penMinWidth: "最小ペン幅",
       penMaxWidth: "ペンの最大幅",
@@ -494,6 +495,7 @@ export var jaStrings = {
     descriptionPlaceholder: "詳細を入力",
     surveyDescriptionPlaceholder: "調査の詳細を入力",
     pageDescriptionPlaceholder: "ページの詳細を入力",
+    textWrapEnabled: "ラップの選択肢",
     showOtherItem: "他のアイテム",
     otherText: "他のアイテムのテキスト",
     showNoneItem: "ノーアイテム",
@@ -1050,8 +1052,7 @@ export var jaStrings = {
     searchMode: {
       contains: "含む",
       startsWith: "次で始まる"
-    },
-    textWrapEnabled: "ラップの選択肢"
+    }
   },
   // Operators
   op: {
@@ -1201,10 +1202,14 @@ export var jaStrings = {
       imageHeight: "アンケート結果の画像の高さを調整します。",
       imageWidth: "アンケート結果の画像の幅を調整します。"
     },
+    image: {
+      contentMode: "「自動」オプションでは、指定されたソースURLに基づいて、表示に適したモード(画像、動画、YouTube)が自動的に決定されます。"
+    },
     imagepicker: {
       imageHeight: "高さの最小値と最大値の値を上書きします。",
       imageWidth: "幅の最小値と最大値を上書きします。",
-      choices: "\"Value\" は、条件付きルールで使用される項目 ID として機能します。回答者に「テキスト」が表示されます。"
+      choices: "\"Value\" は、条件付きルールで使用される項目 ID として機能します。回答者に「テキスト」が表示されます。",
+      contentMode: "「画像」と「動画」のどちらかを選択して、メディアセレクタのコンテンツモードを設定します。「画像」を選択した場合は、提供されるすべてのオプションが、JPEG、GIF、PNG、APNG、SVG、BMP、ICO形式の画像ファイルであることを確認してください。同様に、「ビデオ」を選択した場合は、すべてのオプションがMP4、MOV、WMV、FLV、AVI、MKV形式のビデオファイルへの直接リンクであることを確認してください。YouTubeのリンクは動画オプションではサポートされていませんのでご注意ください。"
     },
     text: {
       size: "この設定では、入力フィールドのサイズが変更されるだけで、質問ボックスの幅には影響しません。許容される入力長を制限するには、<b>検証→最大文字数制限</b>に移動します。"
@@ -1316,7 +1321,6 @@ export var jaStrings = {
     dataList: "入力時に回答者に提案される選択肢のリストを入力します。",
     itemSize: "この設定では、入力フィールドのサイズが変更されるだけで、質問ボックスの幅には影響しません。",
     itemTitleWidth: "すべてのアイテムラベルの幅をピクセル単位で統一します。",
-    contentMode: "「自動」オプションでは、指定されたソースURLに基づいて、表示に適したモード(画像、動画、YouTube)が自動的に決定されます。",
     altText: "ユーザーのデバイスに画像を表示できない場合や、アクセシビリティの目的で代用します。",
     rateColorMode: "レーティングアイコンの種類が「スマイリー」に設定されている場合に選択した絵文字の色を定義します。以下から選択します: \"デフォルト\" - 選択した絵文字はデフォルトのアンケートカラーで表示されます。「スケール」 - 選択した絵文字は、評価スケールから色を継承します。",
     expression: {
@@ -1339,7 +1343,7 @@ export var jaStrings = {
       pattern: "パターンには、文字列リテラルと次のプレースホルダーを含めることができます: '9' - 数字の場合。'a' - 大文字または小文字。'#' - 数字または大文字または小文字。文字をエスケープするには、バックスラッシュ '\\' を使用します。"
     },
     datetimemask: {
-      pattern: "パターンには、区切り文字と次のプレースホルダーを含めることができます: 'm' - 月番号。'mm' - 月番号、1桁の値の場合は先頭にゼロを付けます。'd' - 日付'dd' - 日付、1桁の値の先頭にゼロを付けます。'yy' - 年の下2桁'yyyy' - 4 桁の年。"
+      pattern: "パターンには、区切り文字と次のプレースホルダーを含めることができます<br>:'m' - 月番号。<br>'mm' - 月番号 (先頭に 0 を付けて 1 桁の値)。<br>'d' - 日付。<br>'dd' - 日付で、1 桁の値の先頭に 0 が付きます。<br>'yy' - 年の最後の 2 桁。<br>'yyyy' - 4 桁の年。<br>'H' - 24 時間形式の時間。<br>'HH' - 24 時間形式の時間で、1 桁の値の先頭に 0 が付きます。<br>'h' - 12 時間形式の時間。<br>'hh' - 12 時間形式の時間で、1 桁の値の先頭に 0 が付きます。<br>'MM' - 分。<br>'ss' - 秒。<br>'TT' - 大文字の 12 時間制 (AM/PM)。<br>'tt' - 小文字の 12 時間制 (am/pm)。"
     },
     numericmask: {
       decimalSeparator: "表示される数値の小数部と整数部を区切るために使用される記号。",
@@ -2532,3 +2536,7 @@ editorLocalization.locales["ja"] = jaStrings;
 // maskTypes.none: "None" => "何一つ"
 // itemvalue@rows.visibleIf: "Make the row visible if" => "次の場合に行を表示します。"
 // itemvalue@rows.enableIf: "Make the row editable if" => "次の場合に行を編集可能にします"
+// signaturepad.placeholderReadOnly: "Placeholder text in read-only or preview mode" => "読み取り専用モードまたはプレビューモードのプレースホルダーテキスト"
+// pe.textWrapEnabled: "Wrap choices" => "ラップの選択肢"
+// image.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "「自動」オプションでは、指定されたソースURLに基づいて、表示に適したモード(画像、動画、YouTube)が自動的に決定されます。"
+// imagepicker.contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options." => "「画像」と「動画」のどちらかを選択して、メディアセレクタのコンテンツモードを設定します。「画像」を選択した場合は、提供されるすべてのオプションが、JPEG、GIF、PNG、APNG、SVG、BMP、ICO形式の画像ファイルであることを確認してください。同様に、「ビデオ」を選択した場合は、すべてのオプションがMP4、MOV、WMV、FLV、AVI、MKV形式のビデオファイルへの直接リンクであることを確認してください。YouTubeのリンクは動画オプションではサポートされていませんのでご注意ください。"
