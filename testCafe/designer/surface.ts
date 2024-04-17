@@ -151,8 +151,8 @@ test("Check imagepicker add/delete files title", async (t) => {
   });
 
   await t
-    .hover(".svc-image-item-value-wrapper [title='Select a file']")
-    .hover(".svc-image-item-value-wrapper [title='Remove the file']");
+    .hover(Selector(".svc-image-item-value-wrapper svg title").withExactText("Select a file"))
+    .hover(Selector(".svc-image-item-value-wrapper svg title").withExactText("Remove the file"));
 });
 
 test("Focus on new panel added", async (t) => {
