@@ -320,6 +320,7 @@ export var hrStrings = {
       signatureAutoScaleEnabled: "Automatsko mijenjanje područja potpisa",
       showPlaceholder: "Pokaži rezervirano mjesto",
       placeholder: "Tekst rezerviranog mjesta",
+      placeholderReadOnly: "Tekst rezerviranog mjesta u načinu samo za čitanje ili pretpregledu",
       allowClear: "Prikaz gumba Očisti unutar područja za potpis",
       penMinWidth: "Minimalna širina olovke",
       penMaxWidth: "Maksimalna širina olovke",
@@ -494,6 +495,7 @@ export var hrStrings = {
     descriptionPlaceholder: "Unesite opis",
     surveyDescriptionPlaceholder: "Unesite opis ankete",
     pageDescriptionPlaceholder: "Unesite opis stranice",
+    textWrapEnabled: "Prelamanje izbora",
     showOtherItem: "Ima i drugu stavku",
     otherText: "Tekst druge stavke",
     showNoneItem: "Nema stavku",
@@ -1050,8 +1052,7 @@ export var hrStrings = {
     searchMode: {
       contains: "Sadržava",
       startsWith: "Počinje s"
-    },
-    textWrapEnabled: "Prelamanje izbora"
+    }
   },
   // Operators
   op: {
@@ -1201,10 +1202,14 @@ export var hrStrings = {
       imageHeight: "Podešava visinu slike u rezultatima upitnika.",
       imageWidth: "Podešava širinu slike u rezultatima upitnika."
     },
+    image: {
+      contentMode: "Opcija \"Automatski\" automatski određuje odgovarajući način prikaza - Slika, Videozapis ili YouTube - na temelju navedenog izvornog URL-a."
+    },
     imagepicker: {
       imageHeight: "Nadjačava vrijednosti minimalne i maksimalne visine.",
       imageWidth: "Nadjačava vrijednosti minimalne i maksimalne širine.",
-      choices: "\"Vrijednost\" služi kao ID stavke koji se koristi u uvjetnim pravilima; \"Tekst\" se prikazuje ispitanicima."
+      choices: "\"Vrijednost\" služi kao ID stavke koji se koristi u uvjetnim pravilima; \"Tekst\" se prikazuje ispitanicima.",
+      contentMode: "Odaberite između \"Slika\" i \"Videozapis\" da biste postavili način sadržaja birača medija. Ako je odabrana opcija \"Slika\", provjerite jesu li sve ponuđene opcije slikovne datoteke u sljedećim formatima: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Slično tome, ako je odabran \"Video\", provjerite jesu li sve opcije izravne veze na video datoteke u sljedećim formatima: MP4, MOV, WMV, FLV, AVI, MKV. Napominjemo da veze na YouTube nisu podržane za opcije videozapisa."
     },
     text: {
       size: "Ova postavka samo mijenja veličinu polja unosa i ne utječe na širinu okvira pitanja. Da biste ograničili prihvaćenu duljinu unosa, idite na <b>Provjera valjanosti → Maksimalno ograničenje znaka</b>."
@@ -1316,7 +1321,6 @@ export var hrStrings = {
     dataList: "Unesite popis izbora koji će se predložiti ispitaniku tijekom unosa.",
     itemSize: "Postavka samo mijenja veličinu ulaznih polja i ne utječe na širinu okvira pitanja.",
     itemTitleWidth: "Postavlja dosljednu širinu za sve natpise stavki u pikselima",
-    contentMode: "Opcija \"Automatski\" automatski određuje odgovarajući način prikaza - Slika, Videozapis ili YouTube - na temelju navedenog izvornog URL-a.",
     altText: "Služi kao zamjena kada se slika ne može prikazati na korisnikovom uređaju i u svrhu pristupačnosti.",
     rateColorMode: "Definira boju odabranog emojija kada je vrsta ikone Ocjena postavljena na \"Smajlići\". Odaberite između: \"Zadano\" - odabrani emoji pojavljuje se u zadanoj boji ankete; \"Skala\" - odabrani emoji nasljeđuje boju od ljestvice ocjenjivanja.",
     expression: {
@@ -1339,7 +1343,7 @@ export var hrStrings = {
       pattern: "Uzorak može sadržavati slovne dijelove niza i sljedeća rezervirana mjesta: '9' - za znamenku; \"a\" – za veliko ili malo slovo; '#' - za znamenku ili veliko ili malo slovo. Koristite obrnutu kosu crtu '\\' da biste izbjegli znak."
     },
     datetimemask: {
-      pattern: "Uzorak može sadržavati znakove razdjelnika i sljedeća rezervirana mjesta: 'm' - za broj mjeseca; 'mm' - za broj mjeseca, s početnom nulom za jednoznamenkaste vrijednosti; 'd' - za dan u mjesecu; \"dd\" – za dan u mjesecu, s početnom nulom za jednoznamenkaste vrijednosti; \"gg\" - za posljednje dvije znamenke godine; 'gggg' - za četveroznamenkastu godinu."
+      pattern: "Uzorak može sadržavati znakove razdjelnika i sljedeća rezervirana mjesta:<br>'m' - Broj mjeseca.<br>'mm' - Broj mjeseca, s početnom nulom za jednoznamenkaste vrijednosti. <br>'d' - Dan u mjesecu. <br>'dd' - Dan u mjesecu, s početnom nulom za jednoznamenkaste vrijednosti. <br>'yy' - Posljednje dvije znamenke godine. <br>'gggg' - Četveroznamenkasta godina. <br>'H' - Sati u 24-satnom formatu. <br>'HH' - Sati u 24-satnom formatu, s početnom nulom za jednoznamenkaste vrijednosti. <br>'h' - Sati u 12-satnom formatu. <br>'hh' - Sati u 12-satnom formatu, s početnom nulom za jednoznamenkaste vrijednosti. <br>'MM' - Minute. <br>'ss' - Sekunde. <br>\"TT\" – razdoblje od 12 sati velikim slovima (AM/PM). <br>\"TT\" – 12-satno razdoblje u malim slovima (am/pm)."
     },
     numericmask: {
       decimalSeparator: "Simbol koji se koristi za odvajanje djelomičnog dijela od cijelog broja prikazanog broja.",
@@ -2527,3 +2531,7 @@ editorLocalization.locales["hr"] = hrStrings;
 // maskTypes.none: "None" => "Nijedan"
 // itemvalue@rows.visibleIf: "Make the row visible if" => "Učini redak vidljivim ako"
 // itemvalue@rows.enableIf: "Make the row editable if" => "Učinite redak mogućim za uređivanje ako"
+// signaturepad.placeholderReadOnly: "Placeholder text in read-only or preview mode" => "Tekst rezerviranog mjesta u načinu samo za čitanje ili pretpregledu"
+// pe.textWrapEnabled: "Wrap choices" => "Prelamanje izbora"
+// image.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "Opcija \"Automatski\" automatski određuje odgovarajući način prikaza - Slika, Videozapis ili YouTube - na temelju navedenog izvornog URL-a."
+// imagepicker.contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options." => "Odaberite između \"Slika\" i \"Videozapis\" da biste postavili način sadržaja birača medija. Ako je odabrana opcija \"Slika\", provjerite jesu li sve ponuđene opcije slikovne datoteke u sljedećim formatima: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Slično tome, ako je odabran \"Video\", provjerite jesu li sve opcije izravne veze na video datoteke u sljedećim formatima: MP4, MOV, WMV, FLV, AVI, MKV. Napominjemo da veze na YouTube nisu podržane za opcije videozapisa."

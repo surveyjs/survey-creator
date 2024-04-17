@@ -514,6 +514,7 @@ export var enStrings = {
     descriptionPlaceholder: "Description",
     surveyDescriptionPlaceholder: "Description",
     pageDescriptionPlaceholder: "Description",
+    textWrapEnabled: "Wrap choices",
     showOtherItem: "Enable the \"Other\" option",
     otherText: "Rename the \"Other\" option",
     showNoneItem: "Enable the \"None\" option",
@@ -1071,7 +1072,6 @@ export var enStrings = {
       contains: "Contains",
       startsWith: "Starts with"
     },
-    textWrapEnabled: "Wrap choices"
   },
   // Operators
   op: {

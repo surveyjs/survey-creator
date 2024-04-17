@@ -320,6 +320,7 @@ var germanTranslation = {
       signatureAutoScaleEnabled: "Automatisches Skalieren des Signaturbereichs",
       showPlaceholder: "Platzhalter anzeigen",
       placeholder: "Platzhaltertext",
+      placeholderReadOnly: "Platzhaltertext im schreibgeschützten oder Vorschaumodus",
       allowClear: "Zeigen Sie die Schaltfläche \"Löschen\" im Signaturbereich an",
       penMinWidth: "Minimale Stiftbreite",
       penMaxWidth: "Maximale Stiftbreite",
@@ -494,6 +495,7 @@ var germanTranslation = {
     descriptionPlaceholder: "Beschreibung eingeben",
     surveyDescriptionPlaceholder: "Umfragebeschreibung eingeben",
     pageDescriptionPlaceholder: "Seitenbeschreibung eingeben",
+    textWrapEnabled: "Auswahl an Wraps",
     showOtherItem: "Sonstiges auswählbar?",
     otherText: "Text für Sonstiges",
     showNoneItem: "Alle Elemente abwählbar?",
@@ -1050,8 +1052,7 @@ var germanTranslation = {
     searchMode: {
       contains: "Enthält",
       startsWith: "Beginnt mit"
-    },
-    textWrapEnabled: "Auswahl an Wraps"
+    }
   },
   // Operators
   op: {
@@ -1201,10 +1202,14 @@ var germanTranslation = {
       imageHeight: "Passt die Höhe des Bildes in den Umfrageergebnissen an.",
       imageWidth: "Passt die Breite des Bildes in den Umfrageergebnissen an."
     },
+    image: {
+      contentMode: "Die Option \"Auto\" bestimmt automatisch den geeigneten Anzeigemodus - Bild, Video oder YouTube - basierend auf der bereitgestellten Quell-URL."
+    },
     imagepicker: {
       imageHeight: "Überschreibt die minimalen und maximalen Höhenwerte.",
       imageWidth: "Überschreibt die minimalen und maximalen Breitenwerte.",
-      choices: "\"Wert\" dient als Element-ID, die in bedingten Regeln verwendet wird. Den Befragten wird \"Text\" angezeigt."
+      choices: "\"Wert\" dient als Element-ID, die in bedingten Regeln verwendet wird. Den Befragten wird \"Text\" angezeigt.",
+      contentMode: "Wählen Sie zwischen \"Bild\" und \"Video\", um den Inhaltsmodus der Medienauswahl festzulegen. Wenn \"Bild\" ausgewählt ist, stellen Sie sicher, dass es sich bei allen bereitgestellten Optionen um Bilddateien in den folgenden Formaten handelt: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Wenn \"Video\" ausgewählt ist, stellen Sie sicher, dass alle Optionen direkte Links zu Videodateien in den folgenden Formaten sind: MP4, MOV, WMV, FLV, AVI, MKV. Bitte beachten Sie, dass YouTube-Links für Videooptionen nicht unterstützt werden."
     },
     text: {
       size: "Diese Einstellung ändert nur die Größe des Eingabefelds und wirkt sich nicht auf die Breite des Fragefelds aus. Um die zulässige Eingabelänge zu begrenzen, gehen Sie zu <b>Validierung → Maximales Zeichenlimit</b>."
@@ -1316,7 +1321,6 @@ var germanTranslation = {
     dataList: "Geben Sie eine Liste mit Auswahlmöglichkeiten ein, die dem Befragten während der Eingabe vorgeschlagen werden.",
     itemSize: "Die Einstellung ändert nur die Größe der Eingabefelder und wirkt sich nicht auf die Breite des Fragefelds aus.",
     itemTitleWidth: "Legt eine konsistente Breite für alle Elementbeschriftungen in Pixeln fest",
-    contentMode: "Die Option \"Auto\" bestimmt automatisch den geeigneten Anzeigemodus - Bild, Video oder YouTube - basierend auf der bereitgestellten Quell-URL.",
     altText: "Dient als Ersatz, wenn das Bild nicht auf dem Gerät eines Benutzers angezeigt werden kann, und aus Gründen der Barrierefreiheit.",
     rateColorMode: "Definiert die Farbe des ausgewählten Emojis, wenn der Symboltyp \"Bewertung\" auf \"Smileys\" eingestellt ist. Wählen Sie zwischen: \"Standard\" - das ausgewählte Emoji erscheint in der Standardfarbe der Umfrage; \"Skala\" - das ausgewählte Emoji erbt die Farbe von der Bewertungsskala.",
     expression: {
@@ -1339,7 +1343,7 @@ var germanTranslation = {
       pattern: "Das Muster kann Zeichenfolgenliterale und die folgenden Platzhalter enthalten: '9' - für eine Ziffer; \"a\" - für einen Groß- oder Kleinbuchstaben; '#' - für eine Ziffer oder einen Groß- oder Kleinbuchstaben. Verwenden Sie den umgekehrten Schrägstrich '\\', um ein Zeichen mit Escapezeichen zu versehen."
     },
     datetimemask: {
-      pattern: "Das Muster kann Trennzeichen und die folgenden Platzhalter enthalten: 'm' - für Monatsnummer; 'mm' - für Monatszahl, mit führender Null für einstellige Werte; 'd' - für Tag des Monats; 'dd' - für Tag des Monats, mit führender Null für einstellige Werte; 'yy' - für die letzten beiden Ziffern des Jahres; 'yyyy' - für ein vierstelliges Jahr."
+      pattern: "Das Muster kann Trennzeichen und die folgenden Platzhalter enthalten:<br>'m' - Monatszahl.<br>'mm' - Monatszahl mit führender Null für einstellige Werte. <br>'d' - Tag des Monats. <br>'dd' - Tag des Monats mit führender Null für einstellige Werte. <br>'yy' - Die letzten beiden Ziffern des Jahres. <br>'yyyy' - Vierstellige Jahreszahl. <br>'H' - Stunden im 24-Stunden-Format. <br>'HH' - Stunden im 24-Stunden-Format, mit führender Null für einstellige Werte. <br>'h' - Stunden im 12-Stunden-Format. <br>'hh' - Stunden im 12-Stunden-Format, mit führender Null für einstellige Werte. <br>'MM' - Minuten. <br>'ss' - Sekunden. <br>'TT' - 12-Stunden-Takt in Großbuchstaben (AM/PM). <br>'tt' - 12-Stunden-Takt in Kleinbuchstaben (am/pm)."
     },
     numericmask: {
       decimalSeparator: "Ein Symbol, das verwendet wird, um den Bruchteil vom ganzzahligen Teil einer angezeigten Zahl zu trennen.",
@@ -2239,3 +2243,7 @@ editorLocalization.locales["de"] = germanTranslation;
 // maskTypes.none: "None" => "Nichts"
 // itemvalue@rows.visibleIf: "Make the row visible if" => "Machen Sie die Zeile sichtbar, wenn"
 // itemvalue@rows.enableIf: "Make the row editable if" => "Machen Sie die Zeile bearbeitbar, wenn"
+// signaturepad.placeholderReadOnly: "Placeholder text in read-only or preview mode" => "Platzhaltertext im schreibgeschützten oder Vorschaumodus"
+// pe.textWrapEnabled: "Wrap choices" => "Auswahl an Wraps"
+// image.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "Die Option \"Auto\" bestimmt automatisch den geeigneten Anzeigemodus - Bild, Video oder YouTube - basierend auf der bereitgestellten Quell-URL."
+// imagepicker.contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options." => "Wählen Sie zwischen \"Bild\" und \"Video\", um den Inhaltsmodus der Medienauswahl festzulegen. Wenn \"Bild\" ausgewählt ist, stellen Sie sicher, dass es sich bei allen bereitgestellten Optionen um Bilddateien in den folgenden Formaten handelt: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Wenn \"Video\" ausgewählt ist, stellen Sie sicher, dass alle Optionen direkte Links zu Videodateien in den folgenden Formaten sind: MP4, MOV, WMV, FLV, AVI, MKV. Bitte beachten Sie, dass YouTube-Links für Videooptionen nicht unterstützt werden."
