@@ -6,7 +6,7 @@ export { QuestionColorModel } from "../../src/custom-questions/question-color";
 import { ThemeTabPlugin } from "../../src/components/tabs/theme-plugin";
 import { assign } from "../../src/utils/utils";
 import { CreatorTester } from "../creator-tester";
-import { ThemeModel } from "../../src/components/tabs/theme-model";
+import { ThemeModel, getThemeChanges } from "../../src/components/tabs/theme-model";
 
 import "survey-core/survey.i18n";
 
@@ -156,6 +156,8 @@ test("Theme model backgroundImage serialization", (): any => {
 });
 
 test("Theme model load custom theme", (): any => {
+  Serializer.addProperty("theme", { name: "--a-var", visible: false });
+
   const themeModel = new ThemeModel();
   const customeTheme: ITheme = {
     themeName: "custom",
@@ -173,6 +175,8 @@ test("Theme model load custom theme", (): any => {
 
   const json = themeModel.toJSON();
   expect(json).toStrictEqual(customeTheme);
+
+  Serializer.removeProperty("theme", "--a-var");
 });
 
 test("Theme builder panelBackgroundTransparency", (): any => {
@@ -478,6 +482,57 @@ test("findSuitableTheme", (): any => {
   expect(themeModel.findSuitableTheme("custom").themeName).toEqual("default");
   expect(themeModel.findSuitableTheme("custom").colorPalette).toEqual("light");
   expect(themeModel.findSuitableTheme("custom").isPanelless).toEqual(false);
+});
+
+test("getThemeChanges", (): any => {
+  let themeChanges = getThemeChanges({
+    themeName: "default",
+    cssVariables: {
+      "--sjs-primary-backcolor": "rgba(255, 0, 0, 1)"
+    }
+  });
+  expect(themeChanges.themeName).toBe("default");
+  expect(themeChanges.colorPalette).toBe("light");
+  expect(themeChanges.isPanelless).toBe(false);
+  expect(Object.keys(themeChanges.cssVariables!)).toStrictEqual(["--sjs-primary-backcolor"]);
+  expect(themeChanges.cssVariables!["--sjs-primary-backcolor"]).toBe("rgba(255, 0, 0, 1)");
+
+  themeChanges = getThemeChanges({
+    cssVariables: {
+      "--sjs-primary-backcolor": "rgba(255, 0, 0, 1)"
+    }
+  });
+  expect(themeChanges.themeName).toBe("default");
+  expect(themeChanges.colorPalette).toBe("light");
+  expect(themeChanges.isPanelless).toBe(false);
+  expect(Object.keys(themeChanges.cssVariables!)).toStrictEqual(["--sjs-primary-backcolor"]);
+  expect(themeChanges.cssVariables!["--sjs-primary-backcolor"]).toBe("rgba(255, 0, 0, 1)");
+
+  themeChanges = getThemeChanges({
+    themeName: "default_exported",
+    cssVariables: {
+      "--sjs-primary-backcolor": "rgba(255, 0, 0, 1)"
+    }
+  });
+  expect(themeChanges.themeName).toBe("default");
+  expect(themeChanges.colorPalette).toBe("light");
+  expect(themeChanges.isPanelless).toBe(false);
+  expect(Object.keys(themeChanges.cssVariables!)).toStrictEqual(["--sjs-primary-backcolor"]);
+  expect(themeChanges.cssVariables!["--sjs-primary-backcolor"]).toBe("rgba(255, 0, 0, 1)");
+
+  themeChanges = getThemeChanges({
+    themeName: "default_exported",
+    colorPalette: "dark",
+    isPanelless: true,
+    cssVariables: {
+      "--sjs-primary-backcolor": "rgba(255, 0, 0, 1)"
+    }
+  });
+  expect(themeChanges.themeName).toBe("default");
+  expect(themeChanges.colorPalette).toBe("dark");
+  expect(themeChanges.isPanelless).toBe(true);
+  expect(Object.keys(themeChanges.cssVariables!)).toStrictEqual(["--sjs-primary-backcolor"]);
+  expect(themeChanges.cssVariables!["--sjs-primary-backcolor"]).toBe("rgba(255, 0, 0, 1)");
 });
 
 test("selectTheme", (): any => {

@@ -236,6 +236,8 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       if (this.creator.isAutoSave) {
         this.processAutoSave();
       }
+      this.propertyGrid.survey.editingObj = undefined;
+      this.propertyGrid.survey.editingObj = sender;
     });
     this.themeModel.onThemePropertyChanged.add((sender, options) => {
       this.syncTheme();
@@ -619,6 +621,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       delete Themes[fullThemeName];
       if (ThemeModel.DefaultTheme === themeToDelete) {
         ThemeModel.DefaultTheme = Themes["default-light"] || Themes[Object.keys(Themes)[0]];
+        this.themeModel.defaultSessionTheme = ThemeModel.DefaultTheme;
       }
       const registeredThemeNames = Object.keys(Themes);
       let themeModifications = registeredThemeNames.filter(themeName => themeName.indexOf(themeToDelete.themeName + "-") === 0);
@@ -632,6 +635,9 @@ export class ThemeTabPlugin implements ICreatorPlugin {
           availableThemes.splice(themeIndex, 1);
           this.availableThemes = availableThemes;
         }
+      }
+      if (this.themeModel.themeName === themeToDelete.themeName) {
+        this.themeModel.setTheme(this.themeModel.defaultSessionTheme);
       }
     }
   }

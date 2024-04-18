@@ -1,7 +1,7 @@
 import { ISurveyPropertiesDefinition, ISurveyPropertyGridDefinition } from "../../question-editor/definition";
 
 const themeModelProperties: ISurveyPropertiesDefinition = {
-  "themebuilder": {
+  "theme": {
     properties: [
       { name: "header", tab: "header" },
       { name: "generalPrimaryColor", tab: "appearancecolor" },

@@ -155,7 +155,7 @@ export class ThemeModel extends Base {
   }
 
   public getType(): string {
-    return "themebuilder";
+    return "theme";
   }
 
   private setNewHeaderProperty() {
@@ -367,6 +367,7 @@ export class ThemeModel extends Base {
   }
 
   initialize(surveyTheme: ITheme = {}, survey?: SurveyModel) {
+    this._defaultSessionTheme = ThemeModel.DefaultTheme;
     this.backgroundImage = "backgroundImage" in surveyTheme ? surveyTheme.backgroundImage : survey?.backgroundImage;
     this.backgroundImageFit = surveyTheme.backgroundImageFit !== undefined ? surveyTheme.backgroundImageFit : survey?.backgroundImageFit;
     this.backgroundImageAttachment = surveyTheme.backgroundImageAttachment !== undefined ? surveyTheme.backgroundImageAttachment : survey?.backgroundImageAttachment;
@@ -483,6 +484,7 @@ export class ThemeModel extends Base {
       this.iteratePropertiesHash((hash, key) => {
         this.setPropertyValue(key, undefined);
       });
+      this.setNewHeaderProperty();
     } finally {
       this.blockThemeChangedNotifications -= 1;
     }
@@ -614,17 +616,9 @@ export class ThemeModel extends Base {
     if (json.cssVariables) {
       super.fromJSON(json.cssVariables, options);
 
-      // this.backgroundOpacity = !!json["backgroundOpacity"] ? json["backgroundOpacity"] * 100 : 100;
-      // this.backgroundImageAttachment = json["backgroundImageAttachment"] || "scroll";
-      // this.backgroundImageFit = json["backgroundImageFit"] || "cover";
-      /*
-      this.commonScale = roundTo2Decimals(parseFloat(this["--sjs-base-unit"]) * 100 / 8);
-      this.commonFontSize = roundTo2Decimals(parseFloat(this["--sjs-font-size"]) * 100 / 16);
-      this.cornerRadius = roundTo2Decimals(parseFloat(this["--sjs-corner-radius"]));
-      */
-      this.commonScale = !!this["--sjs-base-unit"] ? roundTo2Decimals(parseFloat(this["--sjs-base-unit"]) * 100 / 8) : 100;
-      this.commonFontSize = !!this["--sjs-font-size"] ? roundTo2Decimals(parseFloat(this["--sjs-font-size"]) * 100 / 16) : 100;
-      this.cornerRadius = this["--sjs-corner-radius"] ? roundTo2Decimals(parseFloat(this["--sjs-corner-radius"])) : 4;
+      this.commonScale = !!this["--sjs-base-unit"] ? roundTo2Decimals(parseFloat(this["--sjs-base-unit"]) * 100 / 8) : undefined;
+      this.commonFontSize = !!this["--sjs-font-size"] ? roundTo2Decimals(parseFloat(this["--sjs-font-size"]) * 100 / 16) : undefined;
+      this.cornerRadius = this["--sjs-corner-radius"] ? roundTo2Decimals(parseFloat(this["--sjs-corner-radius"])) : undefined;
       if (!!json["backgroundOpacity"]) this.backgroundOpacity = json["backgroundOpacity"] * 100;
 
       //   this.updateHeaderViewContainerEditors(json.cssVariables);
@@ -658,7 +652,7 @@ export class ThemeModel extends Base {
 
     const cssVariables = {};
     Object.keys(result).forEach(key => {
-      if (key.indexOf("--sjs") == 0) {
+      if (key.indexOf("--") == 0) {
         cssVariables[key] = result[key];
         delete result[key];
       } else if (key !== "header" && typeof result[key] === "object") {
@@ -683,7 +677,7 @@ export class ThemeModel extends Base {
 }
 
 Serializer.addClass(
-  "themebuilder",
+  "theme",
   [
     {
       type: "dropdown",
@@ -810,7 +804,7 @@ Serializer.addClass(
   ], (json) => { return new ThemeModel(); }
 );
 
-Serializer.addProperties("themebuilder",
+Serializer.addProperties("theme",
   [{
     name: "backgroundImage:file",
     category: "background",

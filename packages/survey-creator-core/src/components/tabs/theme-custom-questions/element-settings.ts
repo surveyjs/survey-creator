@@ -61,7 +61,7 @@ export function elementSettingsToCssVariable(value: any = {}, property: JsonObje
   });
 }
 
-export function elementSettingsFromCssVariable(property: JsonObjectProperty, themeCssVariables: { [index: string]: string }, defaultBackcolorVariableName: string, defaultHovercolorVariableName: string, defaultCornerRadius: number): any {
+export function elementSettingsFromCssVariable(property: JsonObjectProperty, themeCssVariables: { [index: string]: string }, defaultBackcolorVariableName: string, defaultHovercolorVariableName: string, defaultCornerRadius: number = 4): any {
   if (!property) return;
 
   if (!property.defaultValue) property.defaultValue = {};
