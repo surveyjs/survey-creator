@@ -1,5 +1,5 @@
 //Uncomment this line on creating a translation file
-import { editorLocalization, defaultStrings } from "../editorLocalization";
+import { editorLocalization } from "../editorLocalization";
 
 export var nlStrings = {
   //survey templates
@@ -94,7 +94,7 @@ export var nlStrings = {
     //editSelObject: "Bewerk het geselecteerde object",
     correctJSON: "Corrigeer JSON.",
     surveyResults: "Enquêteresultaat: ",
-    surveyResultsTable: "Als tafel",
+    surveyResultsTable: "Als tabel",
     surveyResultsJson: "Als JSON",
     resultsTitle: "Vraag titel",
     resultsName: "Vraag naam",
@@ -270,9 +270,9 @@ export var nlStrings = {
     surveyDescriptionPlaceholder: "Voer een onderzoeksbeschrijving in",
     pageDescriptionPlaceholder: "Voer een paginabeschrijving in",
 
-    showOtherItem: "Heeft de 'Anders:'-optie",
+    showOtherItem: "De optie 'Anders' tonen",
     otherText: "Titel 'Anders:'-optie",
-    showNoneItem: "Heeft de 'Geen'-optie",
+    showNoneItem: "De optie 'Geen' tonen",
     noneText: "Titel 'Geen'-optie",
     hasSelectAll: "Heeft de 'Alles selecteren'-optie",
     selectAllText: "Titel 'Alles selecteren'-optie",
@@ -285,8 +285,8 @@ export var nlStrings = {
     cellType: "Celtype",
     colCount: "Kolom tellen",
     choicesOrder: "Volgorde opties",
-    visible: "Is zichtbaar?",
-    isRequired: "Is verplicht?",
+    visible: "Zichtbaar",
+    isRequired: "Verplicht",
     defaultValueExpression: "Expressie standaardwaarde",
     isAllRowRequired: "Antwoord vereisen voor alle rijen",
     requiredErrorText: "Tekst bij niet-ingevulde verplichte vraag",
@@ -630,7 +630,7 @@ export var nlStrings = {
     questionDescriptionLocation: "Plek vraagomschrijving",
     description: "Omschrijving",
     state: "Staat",
-    isRequired: "Is benodigd",
+    isRequired: "Verplicht",
     requiredIf: "Vereist als",
     indent: "Inspringen",
     requiredErrorText: "Vereiste fouttekst",
@@ -764,7 +764,7 @@ export var nlStrings = {
     mode: "Modus",
     goNextPageAutomatic: "Ga automatisch naar de volgende pagina",
     checkErrorsMode: "Modus foutcontrole",
-    clearInvisibleValues: "Duidelijke onzichtbare waarden",
+    clearInvisibleValues: "Verwijder onzichtbare waarden",
     startSurveyText: "Start enquêtetekst",
     pagePrevText: "Pagina vorige tekst",
     pageNextText: "Pagina volgende tekst",
