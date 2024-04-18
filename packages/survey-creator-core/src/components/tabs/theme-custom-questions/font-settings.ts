@@ -1,5 +1,6 @@
 import { ComponentCollection, JsonObjectProperty, Question, QuestionCompositeModel, Serializer } from "survey-core";
 import { getLocString } from "../../../editorLocalization";
+import { assign } from "../../../utils/utils";
 
 export const DefaultFonts = [
   "Open Sans",
@@ -107,7 +108,7 @@ export function updateFontSettingsJSON() {
   config.json.elementsJSON = getElementsJSON();
 }
 
-export function fontsettingsToCssVariable(value: any, property: JsonObjectProperty, themeCssVariables: { [index: string]: string }) {
+export function fontsettingsToCssVariable(value: any = {}, property: JsonObjectProperty, themeCssVariables: { [index: string]: string }) {
   Object.keys(value).forEach(key => {
     const propertyName = `--sjs-font-${property.name.toLocaleLowerCase()}-${key}`;
     if (!property.defaultValue || value[key] !== property.defaultValue[key]) {
@@ -118,16 +119,14 @@ export function fontsettingsToCssVariable(value: any, property: JsonObjectProper
   });
 }
 
-export function fontsettingsFromCssVariable(property: JsonObjectProperty, themeCssVariables: { [index: string]: string }, defaultColorVariableName?: string, defaultPlaceholderColorVariableName?: string): any {
+export function fontsettingsFromCssVariable(property: JsonObjectProperty, themeCssVariables: { [index: string]: string }, defaultColorVariableName: string, defaultPlaceholderColorVariableName?: string): any {
   if (!property) return;
 
   if (!property.defaultValue) property.defaultValue = {};
-  if (!!defaultColorVariableName) {
-    property.defaultValue["color"] = themeCssVariables[defaultColorVariableName];
-  }
-  if (!!defaultPlaceholderColorVariableName) {
-    property.defaultValue["placeholdercolor"] = themeCssVariables[defaultPlaceholderColorVariableName];
-  }
+  assign(property.defaultValue, {
+    color: themeCssVariables[defaultColorVariableName],
+    placeholdercolor: !!defaultPlaceholderColorVariableName ? themeCssVariables[defaultPlaceholderColorVariableName] : undefined,
+  });
   if (!property.defaultValue["size"]) {
     property.defaultValue["size"] = parseFloat(themeCssVariables["--sjs-font-size"]);
   }

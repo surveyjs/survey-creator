@@ -349,7 +349,7 @@ export function convertRgbaToString(rgbValues: Array<number>, alpha: number): st
   return `rgba(${rgbValues[0]}, ${rgbValues[1]}, ${rgbValues[2]}, ${alpha})`;
 }
 
-export function parseRgbaFromString(value: string): Array<number> {
+export function parseRgbaFromString(value: string = ""): Array<number> {
   const matchRgb = value.match(/\((.*)\)/);
   if (matchRgb) {
     return matchRgb[1].split(",").map(i => parseFloat(i));
@@ -358,7 +358,7 @@ export function parseRgbaFromString(value: string): Array<number> {
   }
 }
 
-export function parseColor(value: string): { color: string, opacity: number } {
+export function parseColor(value: string = ""): { color: string, opacity: number } {
   const rgbValues = parseRgbaFromString(value);
   if (rgbValues.length !== 0) {
     let opacity = 1;

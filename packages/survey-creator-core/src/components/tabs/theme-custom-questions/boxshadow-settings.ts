@@ -93,7 +93,7 @@ export function createBoxShadowReset(value: string): string {
   return createBoxShadow(resetValue);
 }
 
-export function parseBoxShadow(value: string): Array<Object> {
+export function parseBoxShadow(value: string = ""): Array<Object> {
   return value.split(/,(?![^(]*\))/).map(value => {
     const color = value.match(/#[a-zA-Z0-9]+|rgba?\(.*?\)/);
     const isInset = value.indexOf("inset") > -1;

@@ -332,7 +332,7 @@ test("Get theme changes only", (): any => {
   expect(themeModel.cssVariables["--sjs-editorpanel-backcolor"]).toEqual("rgba(249, 249, 249, 0.6)");
 
   const fullModifiedTheme = themePlugin.getCurrentTheme() || {};
-  expect(Object.keys(fullModifiedTheme).length).toBe(4);
+  expect(Object.keys(fullModifiedTheme).length).toBe(8);
   expect(Object.keys(fullModifiedTheme.cssVariables).length).toBe(85);
 
   const modifiedThemeChanges = themePlugin.getCurrentTheme(true) || {};
@@ -342,11 +342,15 @@ test("Get theme changes only", (): any => {
 
   themeModel.resetTheme();
   const fullThemeReset = themePlugin.getCurrentTheme();
-  expect(Object.keys(fullThemeReset).length).toBe(4);
+  expect(Object.keys(fullThemeReset).length).toBe(8);
   expect(Object.keys(fullThemeReset)).toStrictEqual([
     "themeName",
     "colorPalette",
     "isPanelless",
+    "backgroundImage",
+    "backgroundOpacity",
+    "backgroundImageAttachment",
+    "backgroundImageFit",
     "cssVariables",
   ]);
   expect(Object.keys(fullThemeReset.cssVariables).length).toBe(82);
@@ -374,19 +378,18 @@ test("Pass background image from survey to theme editor and back", (): any => {
   themePlugin.activate();
   let themeTabViewModel = themePlugin.model as ThemeEditorModel;
   let themeModel = themePlugin.themeModel as ThemeModel;
-  expect(creator.theme.backgroundImage).toBe(lionImage);
+  let backgroundImageEditor = themePlugin.propertyGrid.survey.findQuestionByName("backgroundImage");
+  expect(creator.theme.backgroundImage).toBe(undefined);
   expect(themeModel.backgroundImage).toBe(lionImage);
-  // expect(themeEditorSurvey.getQuestionByName("backgroundImage").value).toBe(lionImage);
+  expect(backgroundImageEditor.value).toBe(lionImage);
   expect(themeTabViewModel.simulator.survey.backgroundImage).toBe(lionImage);
 
-  // themeEditorSurvey.getQuestionByName("backgroundImage").value = "";
-  themeModel.backgroundImage = "";
+  backgroundImageEditor.value = "";
   expect(creator.theme.backgroundImage).toBe("");
   expect(themeModel.backgroundImage).toBe("");
   expect(themeTabViewModel.simulator.survey.backgroundImage).toBe("");
 
-  // themeEditorSurvey.getQuestionByName("backgroundImage").value = camelImage;
-  themeModel.backgroundImage = camelImage;
+  backgroundImageEditor.value = camelImage;
   expect(creator.theme.backgroundImage).toBe(camelImage);
   expect(themeModel.backgroundImage).toBe(camelImage);
   expect(themeTabViewModel.simulator.survey.backgroundImage).toBe(camelImage);
@@ -394,14 +397,17 @@ test("Pass background image from survey to theme editor and back", (): any => {
   themeModel.resetTheme();
   expect(creator.theme.backgroundImage).toBe("");
   expect(themeModel.backgroundImage).toBe("");
+  expect(backgroundImageEditor.value).toBe(undefined);
   expect(themeTabViewModel.simulator.survey.backgroundImage).toBe("");
 
   themePlugin.deactivate();
   themePlugin.activate();
   themeTabViewModel = themePlugin.model as ThemeEditorModel;
   themeModel = themePlugin.themeModel as ThemeModel;
+  backgroundImageEditor = themePlugin.propertyGrid.survey.findQuestionByName("backgroundImage");
   expect(creator.theme.backgroundImage).toBe("");
   expect(themeModel.backgroundImage).toBe("");
+  expect(backgroundImageEditor.value).toBe(undefined);
   expect(themeTabViewModel.simulator.survey.backgroundImage).toBe("");
 });
 
@@ -413,41 +419,35 @@ test("Keep background image in theme modifications", (): any => {
   };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  // let themeBuilder = themePlugin.model as ThemeEditorModel;
-  // let themeEditorSurvey = themeBuilder.themeEditorSurvey;
   let themeTabViewModel = themePlugin.model as ThemeEditorModel;
   let themeModel = themePlugin.themeModel as ThemeModel;
+  let backgroundImageEditor = themePlugin.propertyGrid.survey.findQuestionByName("backgroundImage");
 
-  // const themeChooser = themeEditorSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
   expect(creator.theme.backgroundImage).toBe(undefined);
   expect(themeModel.backgroundImage).toBe("");
-  expect(themeTabViewModel.simulator.survey.backgroundImage).toBe(undefined);
+  expect(themeTabViewModel.simulator.survey.backgroundImage).toBe("");
 
-  // themeEditorSurvey.getQuestionByName("backgroundImage").value = lionImage;
-  themeModel.backgroundImage = lionImage;
+  backgroundImageEditor.value = lionImage;
   expect(creator.theme.backgroundImage).toBe(lionImage);
   expect(themeModel.backgroundImage).toBe(lionImage);
-  // expect(themeEditorSurvey.getQuestionByName("backgroundImage").value).toBe(lionImage);
   expect(themeTabViewModel.simulator.survey.backgroundImage).toBe(lionImage);
 
-  // themeChooser.value = "flat";
   themeModel.themeName = "flat";
   expect(creator.theme.backgroundImage).toBe(lionImage);
   expect(themeModel.backgroundImage).toBe(lionImage);
-  // expect(themeEditorSurvey.getQuestionByName("backgroundImage").value).toBe(lionImage);
+  expect(backgroundImageEditor.value).toBe(lionImage);
   expect(themeTabViewModel.simulator.survey.backgroundImage).toBe(lionImage);
 
   themePlugin.deactivate();
   expect(creator.theme.backgroundImage).toBe(lionImage);
 
   themePlugin.activate();
-  // themeBuilder = themePlugin.model as ThemeEditorModel;
-  // themeEditorSurvey = themeBuilder.themeEditorSurvey;
   themeTabViewModel = themePlugin.model as ThemeEditorModel;
   themeModel = themePlugin.themeModel as ThemeModel;
+  backgroundImageEditor = themePlugin.propertyGrid.survey.findQuestionByName("backgroundImage");
   expect(creator.theme.backgroundImage).toBe(lionImage);
   expect(themeModel.backgroundImage).toBe(lionImage);
-  // expect(themeEditorSurvey.getQuestionByName("backgroundImage").value).toBe(lionImage);
+  expect(backgroundImageEditor.value).toBe(lionImage);
   expect(themeTabViewModel.simulator.survey.backgroundImage).toBe(lionImage);
 });
 
@@ -514,12 +514,8 @@ test("Set and use custom default theme", (): any => {
   expect(themePlugin.availableThemes).toStrictEqual(["custom"].concat(themes));
 
   themePlugin.activate();
-  // let themeBuilder = themePlugin.model;
   let themeTabViewModel = themePlugin.model as ThemeEditorModel;
   let themeModel = themePlugin.themeModel as ThemeModel;
-  // let themeEditorSurvey = themeBuilder.themeEditorSurvey;
-  // let themeChooser = themeEditorSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
-
   expect(themeModel.themeName).toBe("custom");
   expect(creator.theme.cssVariables["--a-var"]).toBe("aVal");
   expect(themeTabViewModel.simulator.survey.themeVariables["--a-var"]).toBe("aVal");
@@ -540,9 +536,6 @@ test("Set and use custom default theme", (): any => {
   expect(creator.theme.cssVariables["--a-var"]).toBe("aVal");
 
   themePlugin.activate();
-  // themeBuilder = themePlugin.model as ThemeEditorModel;
-  // themeEditorSurvey = themeBuilder.themeEditorSurvey;
-  // themeChooser = themeEditorSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
   themeTabViewModel = themePlugin.model as ThemeEditorModel;
   themeModel = themePlugin.themeModel as ThemeModel;
   expect(themeModel.themeName).toBe("custom");

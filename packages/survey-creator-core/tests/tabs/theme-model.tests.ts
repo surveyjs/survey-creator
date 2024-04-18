@@ -137,6 +137,44 @@ test("Theme model de/serialization", (): any => {
   expect(result["--sjs-font-size"]).toBe("17.6px");
 });
 
+test("Theme model backgroundImage serialization", (): any => {
+  const themeModel = new ThemeModel();
+  const initialJson = themeModel.toJSON();
+  expect(Object.keys(initialJson)).toStrictEqual([
+    "backgroundImage",
+    "backgroundOpacity",
+    "backgroundImageAttachment",
+    "backgroundImageFit",
+    "cssVariables"]);
+  expect(initialJson.backgroundImage).toBe("");
+  themeModel.backgroundImage = "image";
+  const modifiedJson = themeModel.toJSON();
+  expect(modifiedJson.backgroundImage).toBe("image");
+  themeModel.resetTheme();
+  const resetJson = themeModel.toJSON();
+  expect(resetJson.backgroundImage).toBe("");
+});
+
+test("Theme model load custom theme", (): any => {
+  const themeModel = new ThemeModel();
+  const customeTheme: ITheme = {
+    themeName: "custom",
+    colorPalette: "light",
+    isPanelless: false,
+    backgroundImage: "",
+    backgroundImageAttachment: "scroll",
+    backgroundImageFit: "cover",
+    backgroundOpacity: 1,
+    cssVariables: {
+      "--a-var": "aVal"
+    },
+  };
+  themeModel.fromJSON(customeTheme);
+
+  const json = themeModel.toJSON();
+  expect(json).toStrictEqual(customeTheme);
+});
+
 test("Theme builder panelBackgroundTransparency", (): any => {
   const themeModel = new ThemeModel();
   themeModel.initialize();

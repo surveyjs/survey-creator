@@ -1,5 +1,6 @@
 import { ComponentCollection, JsonObjectProperty, Question, QuestionCompositeModel } from "survey-core";
 import { getLocString } from "../../../editorLocalization";
+import { assign } from "../../../utils/utils";
 
 function getElementsJSON() {
   return [
@@ -49,7 +50,7 @@ export function updateElementSettingsJSON() {
   config.json.elementsJSON = getElementsJSON();
 }
 
-export function elementSettingsToCssVariable(value: any, property: JsonObjectProperty, themeCssVariables: { [index: string]: string }) {
+export function elementSettingsToCssVariable(value: any = {}, property: JsonObjectProperty, themeCssVariables: { [index: string]: string }) {
   Object.keys(value).forEach(key => {
     const propertyName = `--sjs-${property.name.toLocaleLowerCase()}-${key}`;
     if (!property.defaultValue || value[key] !== property.defaultValue[key]) {
@@ -64,9 +65,11 @@ export function elementSettingsFromCssVariable(property: JsonObjectProperty, the
   if (!property) return;
 
   if (!property.defaultValue) property.defaultValue = {};
-  property.defaultValue["backcolor"] = themeCssVariables[defaultBackcolorVariableName];
-  property.defaultValue["hovercolor"] = themeCssVariables[defaultHovercolorVariableName];
-  property.defaultValue["cornerRadius"] = defaultCornerRadius;
+  assign(property.defaultValue, {
+    backcolor: themeCssVariables[defaultBackcolorVariableName],
+    hovercolor: themeCssVariables[defaultHovercolorVariableName],
+    cornerRadius: defaultCornerRadius
+  });
 
   const result = { ...property.defaultValue };
   const elementSettingsFromTheme = Object.keys(themeCssVariables).filter(key => key.indexOf(property.name.toLocaleLowerCase()) !== -1);

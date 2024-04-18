@@ -286,29 +286,28 @@ export class ThemeModel extends Base {
       elementSettingsToCssVariable(value, property, this.themeCssVariablesChanges);
       this.onThemePropertyChanged.fire(this, { name, value });
     }
-    // if (options.question?.getType() === "fontsettings") {
-    //   fontsettingsToCssVariable(options.question, this.themeCssVariablesChanges);
-    //   this.themeModified(options); // => this.onThemePropertyChanged.fire(this, { name, value });
-    // }
-    // if (options.question?.getType() === "elementsettings") {
-    //   elementSettingsToCssVariable(options.question, this.themeCssVariablesChanges);
-    //   this.themeModified(options); // => this.onThemePropertyChanged.fire(this, { name, value });
-    // }
   }
   private updateDependentQuestionValues(name: string, value: any) {
     if (name === "generalPrimaryColor") {
       this.setPropertyValue("--sjs-primary-backcolor", value);
-      return true;
     }
     if (name === "--sjs-primary-backcolor") {
+      this["generalPrimaryColor"] = value;
+    }
+
+    if (name === "--sjs-primary-backcolor" || name === "generalPrimaryColor") {
+      this.setThemeCssVariablesChanges("--sjs-primary-backcolor", value);
       this.colorCalculator.calculateColors(value);
       this.setPropertyValue("--sjs-primary-backcolor-light", this.colorCalculator.colorSettings.newColorLight);
       this.setPropertyValue("--sjs-primary-backcolor-dark", this.colorCalculator.colorSettings.newColorDark);
-      // this._setPGEditorPropertyValue(this.themeEditorSurvey.getQuestionByName("generalPrimaryColor"), "value", value);
+      this.setThemeCssVariablesChanges("--sjs-primary-backcolor-light", this.colorCalculator.colorSettings.newColorLight);
+      this.setThemeCssVariablesChanges("--sjs-primary-backcolor-dark", this.colorCalculator.colorSettings.newColorDark);
       return false;
     }
     if (name === "--sjs-shadow-inner" || name === "--sjs-shadow-small") {
-      this.setPropertyValue(name + "-reset", createBoxShadowReset(value));
+      const newBoxShadowReset = createBoxShadowReset(value);
+      this.setPropertyValue(name + "-reset", newBoxShadowReset);
+      this.setThemeCssVariablesChanges(name + "-reset", newBoxShadowReset);
     }
     return false;
   }
@@ -368,7 +367,7 @@ export class ThemeModel extends Base {
   }
 
   initialize(surveyTheme: ITheme = {}, survey?: SurveyModel) {
-    this.backgroundImage = surveyTheme.backgroundImage !== undefined ? surveyTheme.backgroundImage : survey?.backgroundImage;
+    this.backgroundImage = "backgroundImage" in surveyTheme ? surveyTheme.backgroundImage : survey?.backgroundImage;
     this.backgroundImageFit = surveyTheme.backgroundImageFit !== undefined ? surveyTheme.backgroundImageFit : survey?.backgroundImageFit;
     this.backgroundImageAttachment = surveyTheme.backgroundImageAttachment !== undefined ? surveyTheme.backgroundImageAttachment : survey?.backgroundImageAttachment;
     this.backgroundOpacity = ((surveyTheme.backgroundOpacity !== undefined ? surveyTheme.backgroundOpacity : survey?.backgroundOpacity) || 1) * 100;
@@ -471,23 +470,28 @@ export class ThemeModel extends Base {
   }
 
   public resetTheme() {
-    this.setTheme({ themeName: this.defaultSessionTheme.themeName, isPanelless: this.defaultSessionTheme.isPanelless, colorPalette: this.defaultSessionTheme.colorPalette });
+    this.setTheme({
+      themeName: this.defaultSessionTheme.themeName,
+      isPanelless: this.defaultSessionTheme.isPanelless,
+      colorPalette: this.defaultSessionTheme.colorPalette
+    });
   }
 
   public setTheme(theme: ITheme) {
-    this.iteratePropertiesHash((hash, key) => {
-      hash[key] = undefined;
-    });
+    try {
+      this.blockThemeChangedNotifications += 1;
+      this.iteratePropertiesHash((hash, key) => {
+        this.setPropertyValue(key, undefined);
+      });
+    } finally {
+      this.blockThemeChangedNotifications -= 1;
+    }
 
     // const headerBackgroundColorValue = this.currentTheme.cssVariables["--sjs-header-backcolor"];
     this.themeCssVariablesChanges = {};
     // if (headerBackgroundColorValue !== undefined) {
     //   this.themeCssVariablesChanges["--sjs-header-backcolor"] = headerBackgroundColorValue;
     // }
-    this.backgroundImage = "";
-    this.backgroundImageFit = "cover";
-    this.backgroundImageAttachment = "scroll";
-    this.backgroundOpacity = 100;
     this.loadTheme(theme);
     // this.themeModified({ theme });
     this.onThemeSelected.fire(this, { theme: this.toJSON() });
@@ -524,12 +528,12 @@ export class ThemeModel extends Base {
 
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any): void {
     super.onPropertyValueChanged(name, oldValue, newValue);
-    if (name.indexOf("--") === 0) {
-      this.setThemeCssVariablesChanges(name, newValue);
-    }
 
     // if (this.blockChanges) return;
     if (this.blockThemeChangedNotifications > 0) return;
+    if (name.indexOf("--") === 0) {
+      this.setThemeCssVariablesChanges(name, newValue);
+    }
 
     // if (this.blockThemeChangedNotifications == 0) {
     //   this.undoRedoManager.startTransaction(name + " changed");
@@ -610,9 +614,17 @@ export class ThemeModel extends Base {
     if (json.cssVariables) {
       super.fromJSON(json.cssVariables, options);
 
+      // this.backgroundOpacity = !!json["backgroundOpacity"] ? json["backgroundOpacity"] * 100 : 100;
+      // this.backgroundImageAttachment = json["backgroundImageAttachment"] || "scroll";
+      // this.backgroundImageFit = json["backgroundImageFit"] || "cover";
+      /*
       this.commonScale = roundTo2Decimals(parseFloat(this["--sjs-base-unit"]) * 100 / 8);
       this.commonFontSize = roundTo2Decimals(parseFloat(this["--sjs-font-size"]) * 100 / 16);
       this.cornerRadius = roundTo2Decimals(parseFloat(this["--sjs-corner-radius"]));
+      */
+      this.commonScale = !!this["--sjs-base-unit"] ? roundTo2Decimals(parseFloat(this["--sjs-base-unit"]) * 100 / 8) : 100;
+      this.commonFontSize = !!this["--sjs-font-size"] ? roundTo2Decimals(parseFloat(this["--sjs-font-size"]) * 100 / 16) : 100;
+      this.cornerRadius = this["--sjs-corner-radius"] ? roundTo2Decimals(parseFloat(this["--sjs-corner-radius"])) : 4;
       if (!!json["backgroundOpacity"]) this.backgroundOpacity = json["backgroundOpacity"] * 100;
 
       //   this.updateHeaderViewContainerEditors(json.cssVariables);
@@ -639,9 +651,11 @@ export class ThemeModel extends Base {
     }
 
     const result = super.toJSON(options);
-    if (this.backgroundOpacity !== 100) {
-      result["backgroundOpacity"] = this.backgroundOpacity / 100;
-    }
+    result["backgroundImage"] = this.backgroundImage || "";
+    result["backgroundOpacity"] = this.backgroundOpacity / 100;
+    result["backgroundImageAttachment"] = this.backgroundImageAttachment;
+    result["backgroundImageFit"] = this.backgroundImageFit;
+
     const cssVariables = {};
     Object.keys(result).forEach(key => {
       if (key.indexOf("--sjs") == 0) {

@@ -1,5 +1,6 @@
 import { ComponentCollection, ITheme, Question, QuestionButtonGroupModel, QuestionCompositeModel, QuestionDropdownModel, QuestionFileModel, QuestionPanelDynamicModel, Serializer, SurveyElement, SurveyModel, settings as surveySettings } from "survey-core";
 import { ThemeEditorModel } from "../../src/components/tabs/theme-builder";
+import { ThemeModel } from "../../src/components/tabs/theme-model";
 import { PredefinedColors, PredefinedThemes, Themes } from "../../src/components/tabs/themes";
 export { QuestionFileEditorModel } from "../../src/custom-questions/question-file";
 export { QuestionSpinEditorModel } from "../../src/custom-questions/question-spin-editor";
@@ -78,7 +79,7 @@ const themeFromFile = {
 };
 
 beforeEach(() => {
-  ThemeEditorModel.DefaultTheme = Themes["default-light"];
+  ThemeModel.DefaultTheme = Themes["default-light"];
 });
 
 test("assign function", (): any => {
