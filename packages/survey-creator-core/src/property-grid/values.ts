@@ -16,7 +16,11 @@ export abstract class PropertyGridValueEditorBase extends PropertyGridEditor {
     obj: Base,
     prop: JsonObjectProperty,
     options: ISurveyCreatorOptions
-  ): any {
+  ): {
+    type: "linkvalue",
+    showValueInLink: false,
+    titleLocation: "hidden"
+  } {
     return {
       type: "linkvalue",
       showValueInLink: false,
