@@ -1,4 +1,4 @@
-import { editorLocalization } from "survey-creator-core";
+import { editorLocalization, defaultStrings } from "survey-creator-core";
 
 export var nlStrings = {
   // survey templates
