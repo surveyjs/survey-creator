@@ -26,7 +26,7 @@ var banner = [
 
 var dts_banner = [
   "Type definitions for SurveyJS Creator JavaScript library v" +
-  packageJson.version,
+    packageJson.version,
   "(c) 2015-" + year + " Devsoft Baltic OÜ - http://surveyjs.io/",
   "Github: https://github.com/surveyjs/survey-creator",
   "License: https://surveyjs.io/Licenses#SurveyCreator",
@@ -49,9 +49,7 @@ var buildPlatformJson = {
   ],
   homepage: "https://surveyjs.io/Overview/Survey-Creator",
   license: "https://surveyjs.io/Licenses#SurveyCreator",
-  files: [
-    "**/*"
-  ],
+  files: ["**/*"],
   main: packageJson.name + ".js",
   repository: {
     type: "git",
@@ -66,18 +64,18 @@ var buildPlatformJson = {
   },
   peerDependenciesMeta: {
     "ace-builds": {
-      "optional": true
-    }
+      optional: true,
+    },
   },
   dependencies: {
-    "survey-core": packageJson.version
+    "survey-core": packageJson.version,
   },
   devDependencies: {},
 };
 
 module.exports = function (options) {
   var buildPath = __dirname + "/build/";
-  var isProductionBuild = options.buildType === "prod";
+  var isProductionBuild = true; //options.buildType === "prod";
 
   function createSVGBundle() {
     var options = {
@@ -119,12 +117,12 @@ module.exports = function (options) {
   async function createStylesBundleWithFonts() {
     const getdir = (filename) => {
       return buildPath + filename;
-    }
+    };
 
     let outputPath = getdir("survey-creator-core.css");
     let inputPathList = [
       getdir("fonts.fontless.css"),
-      getdir("survey-creator-core.fontless.css")
+      getdir("survey-creator-core.fontless.css"),
     ];
     // status: true or false
     let status = await mergeFiles(inputPathList, outputPath);
@@ -137,7 +135,7 @@ module.exports = function (options) {
     outputPath = getdir("survey-creator-core.min.css");
     inputPathList = [
       getdir("fonts.fontless.min.css"),
-      getdir("survey-creator-core.fontless.min.css")
+      getdir("survey-creator-core.fontless.min.css"),
     ];
     // status: true or false
     status = await mergeFiles(inputPathList, outputPath);
@@ -176,7 +174,7 @@ module.exports = function (options) {
     mode: isProductionBuild ? "production" : "development",
     entry: {
       [packageJson.name]: path.resolve(__dirname, "./src/entries/index.ts"),
-      "fonts": path.resolve(__dirname, "./src/entries/fonts.scss")
+      fonts: path.resolve(__dirname, "./src/entries/fonts.scss"),
     },
     resolve: {
       extensions: [".ts", ".js", ".tsx", ".scss"],
@@ -196,7 +194,7 @@ module.exports = function (options) {
         },
         {
           test: /\.css$/,
-          loader: [
+          use: [
             MiniCssExtractPlugin.loader,
             {
               loader: "css-loader",
@@ -208,8 +206,8 @@ module.exports = function (options) {
         },
         {
           test: /\.s(c|a)ss$/,
-          loader: [
-            MiniCssExtractPlugin.loader,
+          use: [
+            // MiniCssExtractPlugin.loader,
             {
               loader: "css-loader",
               options: {
@@ -233,22 +231,24 @@ module.exports = function (options) {
           oneOf: [
             {
               exclude: path.resolve(__dirname, "./src/images/simulator/"),
-              use: "svg-inline-loader"
+              use: "svg-inline-loader",
             },
             {
               include: path.resolve(__dirname, "./src/images/simulator/"),
-              use: "url-loader"
+              use: "url-loader",
             },
-          ]
+          ],
         },
       ],
     },
     output: {
       path: buildPath,
       filename: "[name]" + (isProductionBuild ? ".min" : "") + ".js",
-      library: options.libraryName || "SurveyCreatorCore",
-      libraryTarget: "umd",
-      globalObject: 'this',
+      library: {
+        name: options.libraryName || "SurveyCreatorCore",
+        type: "umd",
+      },
+      globalObject: "this",
       umdNamedDefine: true,
     },
     externals: {
@@ -270,17 +270,21 @@ module.exports = function (options) {
       new DtsGeneratorPlugin({
         webpack: webpack,
         filePath: "build/survey-creator-core.d.ts",
-        moduleName: "survey-creator-core"
+        moduleName: "survey-creator-core",
       }),
       new webpack.DefinePlugin({
         "process.env.ENVIRONMENT": JSON.stringify(options.buildType),
         "process.env.VERSION": JSON.stringify(packageJson.version),
       }),
-      new FixStyleOnlyEntriesPlugin(),
+      // new FixStyleOnlyEntriesPlugin(),
       new MiniCssExtractPlugin({
-        filename: isProductionBuild ? "[name].fontless.min.css" : "[name].fontless.css",
+        filename: isProductionBuild
+          ? "[name].fontless.min.css"
+          : "[name].fontless.css",
       }),
-      new webpack.WatchIgnorePlugin([/svgbundle\.html/]),
+      new webpack.WatchIgnorePlugin({
+        paths: [/svgbundle\.html/],
+      }),
       new webpack.BannerPlugin({
         banner: banner,
       }),
@@ -295,6 +299,5 @@ module.exports = function (options) {
       new webpack.LoaderOptionsPlugin({ debug: true }),
     ]);
   }
-
   return config;
 };
