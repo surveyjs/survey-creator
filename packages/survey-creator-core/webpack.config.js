@@ -77,43 +77,6 @@ module.exports = function (options) {
   var buildPath = __dirname + "/build/";
   var isProductionBuild = true; //options.buildType === "prod";
 
-  function createSVGBundle() {
-    var options = {
-      fileName: path.resolve(__dirname, "./src/svgbundle.html"),
-      template: path.resolve(__dirname, "./svgbundle.pug"),
-      svgoOptions: {
-        plugins: [{ removeTitle: true }],
-      },
-      prefix: "icon-",
-    };
-
-    svgStoreUtils.filesMap(path.join("./src/images/**/*.svg"), (files) => {
-      const fileContent = svgStoreUtils.createSprite(
-        svgStoreUtils.parseFiles(files, options),
-        options.template
-      );
-
-      fs.writeFileSync(options.fileName, fileContent);
-    });
-  }
-
-  function removeLines(fileName, regex) {
-    replace.sync(
-      {
-        files: fileName,
-        from: regex,
-        to: "",
-      },
-      (error, changes) => {
-        if (error) {
-          return console.error("Error occurred:", error);
-        }
-        console.log("check me :     " + fileName);
-        console.log("Modified files:", changes.join(", "));
-      }
-    );
-  }
-
   async function createStylesBundleWithFonts() {
     const getdir = (filename) => {
       return buildPath + filename;
