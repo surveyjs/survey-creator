@@ -10,6 +10,7 @@ import { HeaderModel } from "./header-model";
 import * as LibraryThemes from "survey-core/themes";
 import { ColorCalculator, assign, ingectAlpha, parseColor, roundTo2Decimals } from "../../utils/utils";
 import { ISaveToJSONOptions } from "survey-core/typings/base-interfaces";
+import { UndoRedoManager } from "../../plugins/undo-redo/undo-redo-manager";
 
 export * from "./header-model";
 
@@ -89,6 +90,7 @@ export function getThemeChanges(fullTheme: ITheme, baseTheme?: ITheme) {
 
 export class ThemeModel extends Base {
   public static DefaultTheme = Themes["default-light"];
+  public undoRedoManager: UndoRedoManager;
   private themeCssVariablesChanges: { [index: string]: string } = {};
   private colorCalculator = new ColorCalculator();
 
@@ -98,7 +100,6 @@ export class ThemeModel extends Base {
   @property() backgroundOpacity: number;
   @property() themeName: string;
   @property() colorPalette: "light" | "dark" | string;
-  // @property() themeMode: "panels" | "lightweight" | string;
   @property() isPanelless: boolean;
   @property() groupAppearanceAdvancedMode: boolean;
   @property({
@@ -258,7 +259,6 @@ export class ThemeModel extends Base {
 
   private cssVariablePropertiesChanged(name: string, value: any) {
     if (name == "commonScale") {
-      // this.survey.triggerResponsiveness(true);
       this.setThemeCssVariablesChanges("--sjs-base-unit", (value * 8 / 100) + "px");
     }
     if (name == "commonFontSize") {
@@ -373,6 +373,7 @@ export class ThemeModel extends Base {
     this.backgroundImageAttachment = surveyTheme.backgroundImageAttachment !== undefined ? surveyTheme.backgroundImageAttachment : survey?.backgroundImageAttachment;
     this.backgroundOpacity = ((surveyTheme.backgroundOpacity !== undefined ? surveyTheme.backgroundOpacity : survey?.backgroundOpacity) || 1) * 100;
     this.loadTheme(surveyTheme);
+    this.undoRedoManager = new UndoRedoManager();
   }
 
   // public get availableThemes() {
@@ -436,7 +437,6 @@ export class ThemeModel extends Base {
       // }
       this.themeName = themeChanges.themeName;
       this.colorPalette = themeChanges.colorPalette as any;
-      // this.themeMode = themeChanges.isPanelless === true ? "lightweight" : "panels";
       this.isPanelless = themeChanges.isPanelless;
 
       this.backgroundImage = theme.backgroundImage || this.backgroundImage;
@@ -457,7 +457,6 @@ export class ThemeModel extends Base {
       if (Object.keys(effectiveHeaderSettings).length > 0) {
         effectiveTheme.header = effectiveHeaderSettings;
       }
-      // assign(effectiveTheme, theme, { cssVariables: effectiveThemeCssVariables, themeName: this.themeName, colorPalette: this.colorPalette, isPanelless: this.themeMode === "lightweight" });
       assign(effectiveTheme, theme, { cssVariables: effectiveThemeCssVariables, themeName: this.themeName, colorPalette: this.colorPalette, isPanelless: this.isPanelless });
       // this.surveyProvider.theme = effectiveTheme;
 
@@ -502,24 +501,20 @@ export class ThemeModel extends Base {
   public selectTheme(themeName: string, colorPalette: string = "light", themeMode: string = "panels") {
     this.themeName = themeName;
     this.colorPalette = colorPalette;
-    // this.themeMode = themeMode;
     this.isPanelless = themeMode === "lightweight";
     const theme = this.findSuitableTheme(themeName);
     this.setTheme(theme);
   }
 
   private generalPropertiesChanged(name: string, value: any): boolean {
-    if (["themeName", "themeMode", "isPanelless", "colorPalette"].indexOf(name) !== -1) {
+    if (["themeName", "isPanelless", "colorPalette"].indexOf(name) !== -1) {
       if (name === "themeName") {
-        // this.loadTheme(this.findSuitableTheme(value) || { [name]: value, isPanelless: this.themeMode === "lightweight", colorPalette: this.colorPalette });
         this.loadTheme(this.findSuitableTheme(value) || { [name]: value, isPanelless: this.isPanelless, colorPalette: this.colorPalette });
       }
       if (name === "isPanelless") {
-        // this.loadTheme({ themeName: this.themeName, isPanelless: value === "lightweight", colorPalette: this.colorPalette });
         this.loadTheme({ themeName: this.themeName, isPanelless: value, colorPalette: this.colorPalette });
       }
       if (name === "colorPalette") {
-        // this.loadTheme({ themeName: this.themeName, isPanelless: this.themeMode === "lightweight", colorPalette: value });
         this.loadTheme({ themeName: this.themeName, isPanelless: this.isPanelless, colorPalette: value });
       }
       this.onThemeSelected.fire(this, { theme: this.toJSON() });
@@ -531,21 +526,23 @@ export class ThemeModel extends Base {
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any): void {
     super.onPropertyValueChanged(name, oldValue, newValue);
 
+    if (!!this.undoRedoManager) {
+      if (this.blockThemeChangedNotifications == 0) {
+        this.undoRedoManager.startTransaction(name + " changed");
+      }
+      this.undoRedoManager.onPropertyValueChanged(name, oldValue, newValue, this, undefined);
+    }
+
     // if (this.blockChanges) return;
     if (this.blockThemeChangedNotifications > 0) return;
     if (name.indexOf("--") === 0) {
       this.setThemeCssVariablesChanges(name, newValue);
     }
 
-    // if (this.blockThemeChangedNotifications == 0) {
-    //   this.undoRedoManager.startTransaction(name + " changed");
-    // }
-    // this.undoRedoManager.onPropertyValueChanged("value", this.prevQuestionValues[name], newValue, options.question, undefined);
-
     if (this.generalPropertiesChanged(name, newValue)) {
-      // if (this.blockThemeChangedNotifications == 0) {
-      //   this.undoRedoManager.stopTransaction();
-      // }
+      if (!!this.undoRedoManager && this.blockThemeChangedNotifications == 0) {
+        this.undoRedoManager.stopTransaction();
+      }
       return;
     }
 
@@ -555,6 +552,9 @@ export class ThemeModel extends Base {
       this[name] = newValue;
       this.onThemePropertyChanged.fire(this, { name, value: newValue });
       this.blockThemeChangedNotifications -= 1;
+      if (!!this.undoRedoManager && this.blockThemeChangedNotifications == 0) {
+        this.undoRedoManager.stopTransaction();
+      }
       return;
     }
 
@@ -567,9 +567,9 @@ export class ThemeModel extends Base {
     // this.currentTheme.cssVariables = newCssVariables;
 
     this.blockThemeChangedNotifications -= 1;
-    // if (!!this.undoRedoManager && this.blockThemeChangedNotifications == 0) {
-    //   this.undoRedoManager.stopTransaction();
-    // }
+    if (!!this.undoRedoManager && this.blockThemeChangedNotifications == 0) {
+      this.undoRedoManager.stopTransaction();
+    }
 
     if (hasUpdatedDependentValues) {
       // this.themeModified(options); // => this.onThemePropertyChanged.fire(this, { name, value });
@@ -580,8 +580,6 @@ export class ThemeModel extends Base {
   }
 
   findSuitableTheme(themeName: string): ITheme {
-    // let probeThemeFullName = getThemeFullName({ themeName: themeName, colorPalette: this.colorPalette, isPanelless: this.themeMode === "lightweight" } as any);
-    // return findSuitableTheme(themeName, this.colorPalette, this.themeMode, probeThemeFullName);
     let probeThemeFullName = getThemeFullName({ themeName: themeName, colorPalette: this.colorPalette, isPanelless: this.isPanelless } as any);
     return findSuitableTheme(themeName, this.colorPalette, this.isPanelless, probeThemeFullName);
   }
@@ -614,6 +612,7 @@ export class ThemeModel extends Base {
     super.fromJSON(json, options);
 
     if (json.cssVariables) {
+      this["generalPrimaryColor"] = json.cssVariables["--sjs-primary-backcolor"];
       super.fromJSON(json.cssVariables, options);
 
       this.commonScale = !!this["--sjs-base-unit"] ? roundTo2Decimals(parseFloat(this["--sjs-base-unit"]) * 100 / 8) : undefined;

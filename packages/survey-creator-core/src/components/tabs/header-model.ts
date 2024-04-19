@@ -8,13 +8,6 @@ import { themeModelPropertyGridDefinition } from "./theme-model-definition";
 export class HeaderModel extends Base {
   // @property() themePalette: string;
 
-  // private updateVisibilityOfPropertyGridGroups() {
-  //   const page = this.themeEditorSurvey.pages[0];
-  //   page.getElementByName("groupHeader").visible = this.surveyProvider.isMobileView ? false : settings.theme.allowEditHeaderSettings;
-  //   if (this.advancedModeSwitcher) {
-  //     this.advancedModeSwitcher.visible = !this.surveyProvider.isMobileView;
-  //   }
-  // }
   // private setCoverPropertiesFromSurvey(panel, themeCssVariables: { [index: string]: string }) {
   //   this._setPGEditorPropertyValue(panel.getQuestionByName("headerTitle"), "readOnly", !this.survey.hasTitle);
   //   this._setPGEditorPropertyValue(panel.getQuestionByName("headerDescription"), "readOnly", !this.survey.hasDescription);

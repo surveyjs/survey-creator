@@ -26,7 +26,6 @@ export class ThemeEditorModel extends Base {
   public prevPageAction: Action;
   public testAgainAction: Action;
   public nextPageAction: Action;
-  public undoRedoManager: UndoRedoManager;
   private advancedModeSwitcher: Switcher;
   // private themeEditorSurveyValue: SurveyModel;
   private themeCssVariablesChanges: { [index: string]: string } = {};
@@ -107,7 +106,6 @@ export class ThemeEditorModel extends Base {
     updateCustomQuestionJSONs();
     // this.themeEditorSurveyValue = this.createThemeEditorSurvey();
 
-    this.undoRedoManager = new UndoRedoManager();
     // this.surveyProvider.onPropertyChanged.add(this.creatorPropertyChanged);
   }
 
@@ -303,11 +301,6 @@ export class ThemeEditorModel extends Base {
   //   }
   // }
 
-  // private creatorPropertyChanged = (sender, options) => {
-  //   if (options.name === "isMobileView") {
-  //     this.updateVisibilityOfPropertyGridGroups();
-  //   }
-  // }
   private blockThemeChangedNotifications = 0;
   public initialize(json: any, options: any) {
     this.blockChanges = true;

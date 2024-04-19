@@ -112,6 +112,21 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.addSubGroupTitle(survey.getPanelByName("appearancequestion"), "theme.editorPanel");
     this.addSubGroupTitle(survey.getPanelByName("appearanceinput"), "theme.lines");
   }
+  private updateVisibilityOfPropertyGridGroups() {
+    const page = this.propertyGrid.survey.pages[0];
+    if (page) {
+      const header = page.getElementByName("header");
+      header.visible = this.creator.isMobileView ? false : settings.theme.allowEditHeaderSettings;
+    }
+    if (this.advancedModeSwitcher) {
+      this.advancedModeSwitcher.visible = !this.creator.isMobileView;
+    }
+  }
+  private creatorPropertyChanged = (sender, options) => {
+    if (options.name === "isMobileView") {
+      this.updateVisibilityOfPropertyGridGroups();
+    }
+  }
 
   constructor(private creator: SurveyCreatorModel) {
     creator.addPluginTab("theme", this, "ed.themeSurvey");
@@ -150,6 +165,8 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       },
       execute: () => this.redo()
     });
+
+    creator.onPropertyChanged.add(this.creatorPropertyChanged);
   }
   public activate(): void {
     this.model = new ThemeEditorModel(this.creator, this.simulatorCssClasses);
@@ -194,6 +211,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     // this.sidebarTab.componentName = "survey-widget";
     // this.creator.sidebar.activeTab = this.sidebarTab.id;
 
+    this.updateVisibilityOfPropertyGridGroups();
     this.propertyGridTab.visible = true;
     // this.sidebarTab.visible = !this.propertyGridTab.visible;
   }
@@ -217,7 +235,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     }
 
     this.updateUndeRedoActions();
-    this.model.undoRedoManager.canUndoRedoCallback = () => {
+    this.themeModel.undoRedoManager.canUndoRedoCallback = () => {
       this.updateUndeRedoActions();
     };
 
@@ -241,6 +259,9 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     });
     this.themeModel.onThemePropertyChanged.add((sender, options) => {
       this.syncTheme();
+      if (options.name == "--sjs-base-unit") {
+        this.model.survey.triggerResponsiveness(true);
+      }
       this.resetTheme.enabled = true;
       this.saveThemeAction.enabled = true;
       this.onThemePropertyChanged.fire(this, options);
@@ -468,7 +489,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   }
 
   public undo() {
-    const _undoRedoManager = this.model && this.model.undoRedoManager;
+    const _undoRedoManager = this.model && this.themeModel.undoRedoManager;
     if (!_undoRedoManager) return;
     _undoRedoManager.suspend();
     if (_undoRedoManager.canUndo()) {
@@ -478,7 +499,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   }
 
   public redo() {
-    const _undoRedoManager = this.model && this.model.undoRedoManager;
+    const _undoRedoManager = this.model && this.themeModel.undoRedoManager;
     if (!_undoRedoManager) return;
     _undoRedoManager.suspend();
     if (_undoRedoManager.canRedo()) {
@@ -488,7 +509,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   }
 
   private updateUndeRedoActions() {
-    const _undoRedoManager = this.model.undoRedoManager;
+    const _undoRedoManager = this.themeModel.undoRedoManager;
     this.undoAction.enabled = _undoRedoManager.canUndo();
     this.redoAction.enabled = _undoRedoManager.canRedo();
   }

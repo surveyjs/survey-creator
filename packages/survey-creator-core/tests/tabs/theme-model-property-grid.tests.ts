@@ -1,4 +1,4 @@
-import { QuestionCompositeModel } from "survey-core";
+import { QuestionCompositeModel, SurveyElement } from "survey-core";
 import { ThemeModel } from "../../src/components/tabs/theme-model";
 import { ThemeTabPlugin } from "../../src/components/tabs/theme-plugin";
 import { CreatorTester } from "../creator-tester";
@@ -186,7 +186,7 @@ test("Check all file edit questions has onChooseFiles callback", (): any => {
   themePlugin.activate();
   const backgroundImageEditor = themePlugin.propertyGrid.survey.findQuestionByName("backgroundImage") as QuestionFileEditorModel;
   expect(!!backgroundImageEditor.onChooseFilesCallback).toBeTruthy();
-  // expect(!!(<QuestionPanelDynamicModel>themeEditorSurvey.getPanelByName("groupHeader").questions[0]).panels[0].getQuestionByName("backgroundImage").onChooseFilesCallback).toBeTruthy();
+  // expect(!!(<QuestionPanelDynamicModel>themeEditorSurvey.getPanelByName("header").questions[0]).panels[0].getQuestionByName("backgroundImage").onChooseFilesCallback).toBeTruthy();
 });
 
 test("Theme builder: restore questionTitle switch tabs", (): any => {
@@ -215,6 +215,63 @@ test("Theme builder: restore questionTitle switch tabs", (): any => {
   questionTitleFontSettings = themePlugin.propertyGrid.survey.findQuestionByName("questionTitle") as QuestionCompositeModel;
   expect(questionTitleFontSettings.value).toEqual(questionTitleValue);
   expect(themePlugin.themeModel["questionTitle"]).toEqual(questionTitleValue);
+});
+
+test("Desktop mode: add advanced mode switcher", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { logo: "Logo", pages: [{ questions: [{ type: "text", name: "q1" }] }] };
+
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const propertyGrid = themePlugin.propertyGrid.survey;
+  const propertyGridGroups = propertyGrid.pages[0].elements;
+  expect(propertyGridGroups.length).toBe(4);
+  expect(propertyGridGroups[0].visible).toBeTruthy();
+  expect(propertyGridGroups[1].visible).toBeTruthy();
+  expect(propertyGridGroups[2].visible).toBeTruthy();
+  expect(propertyGridGroups[3].visible).toBeTruthy();
+
+  const actions = (propertyGridGroups[3] as any as SurveyElement).getTitleActions();
+  expect(actions.length).toBe(1);
+  expect(actions[0].visible).toBeTruthy();
+});
+
+test("Mobile mode: hide advanced settings in property grid", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.isMobileView = true;
+
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const propertyGrid = themePlugin.propertyGrid.survey;
+  const propertyGridGroups = propertyGrid.pages[0].elements;
+  expect(propertyGridGroups.length).toBe(4);
+  expect(propertyGridGroups[0].visible).toBeTruthy();
+  expect(propertyGridGroups[1].visible).toBeFalsy();
+  expect(propertyGridGroups[2].visible).toBeTruthy();
+  expect(propertyGridGroups[3].visible).toBeTruthy();
+
+  const actions = (propertyGridGroups[3] as any as SurveyElement).getTitleActions();
+  expect(actions.length).toBe(1);
+  expect(actions[0].visible).toBeFalsy();
+});
+
+test("Change advancedModeSwitcher visibility", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { logo: "Logo", pages: [{ questions: [{ type: "text", name: "q1" }] }] };
+
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const propertyGrid = themePlugin.propertyGrid.survey;
+  const propertyGridGroups = propertyGrid.pages[0].elements;
+  expect(propertyGridGroups.length).toBe(4);
+  const actions = (propertyGridGroups[3] as any as SurveyElement).getTitleActions();
+
+  expect(actions.length).toBe(1);
+  expect(actions[0].visible).toBeTruthy();
+
+  creator.isMobileView = true;
+  expect(actions[0].visible).toBeFalsy();
 });
 
 // test("Add theme before activate", (): any => {
