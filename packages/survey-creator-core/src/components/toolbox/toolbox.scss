@@ -14,6 +14,12 @@ svc-toolbox {
   direction: rtl;
   scrollbar-gutter: stable both-edges;
 }
+.svc-side-bar,
+.svc-creator__toolbox--right {
+  .svc-toolbox {
+    direction: ltr;
+  }
+}
 
 _::-webkit-full-page-media,
 _:future,
@@ -22,11 +28,18 @@ _:future,
 }
 
 .svc-toolbox--compact {
-  width: calcSize(10.5);
-  overflow: visible;
-  direction: ltr;
+  width: 100vw;
+  margin-right: calc(-100vw + calcSize(10.5));
+  overflow-y: scroll;
   scrollbar-gutter: auto;
-  padding: calcSize(2);
+  padding: calcSize(0.5);
+}
+.svc-creator__toolbox--right {
+  .svc-toolbox--compact {
+    margin-right: 0;
+    margin-left: calc(-100vw + calcSize(10.5));
+    direction: ltr;
+  }
 }
 
 .svc-toolbox__container {
