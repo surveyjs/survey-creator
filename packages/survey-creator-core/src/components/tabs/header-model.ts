@@ -1,11 +1,26 @@
-import { Base, ComponentCollection, IJsonPropertyInfo, JsonObjectProperty, PanelModel, Question, Serializer } from "survey-core";
+import { Base, ComponentCollection, IHeader, IJsonPropertyInfo, JsonObjectProperty, PanelModel, Question, Serializer } from "survey-core";
 import { ISurveyCreatorOptions, settings } from "../../creator-settings";
 import { PropertyGridEditor, PropertyGridEditorCollection, PropertyJSONGenerator } from "../../property-grid";
 import { ISurveyPropertyGridDefinition } from "../../question-editor/definition";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { themeModelPropertyGridDefinition } from "./theme-model-definition";
+import { HorizontalAlignment, VerticalAlignment } from "survey-core/typings/base-interfaces";
 
-export class HeaderModel extends Base {
+export class HeaderModel extends Base implements IHeader {
+  height: number;
+  inheritWidthFrom: "survey" | "container";
+  textAreaWidth: number;
+  overlapEnabled: boolean;
+  backgroundImage: string;
+  backgroundImageOpacity: number;
+  backgroundImageFit: "contain" | "cover" | "fill" | "tile";
+  logoPositionX: HorizontalAlignment;
+  logoPositionY: VerticalAlignment;
+  titlePositionX: HorizontalAlignment;
+  titlePositionY: VerticalAlignment;
+  descriptionPositionX: HorizontalAlignment;
+  descriptionPositionY: VerticalAlignment;
+
   // @property() themePalette: string;
 
   // private setCoverPropertiesFromSurvey(panel, themeCssVariables: { [index: string]: string }) {
