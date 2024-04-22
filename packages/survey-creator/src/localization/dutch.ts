@@ -1,5 +1,5 @@
 //Uncomment this line on creating a translation file
-import { editorLocalization, defaultStrings } from "survey-creator-core";
+import { editorLocalization, defaultStrings } from "../editorLocalization";
 
 export var nlStrings = {
   //survey templates
