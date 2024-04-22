@@ -3,34 +3,35 @@
   -moz-appearance: none;
   appearance: none;
   display: block;
-  background-color: $background;
+  background-color: var(--ctr-editor-background-color, $background);
   box-sizing: border-box;
   width: 100%;
   height: calcSize(6);
   border: none;
-  box-shadow: inset 0 0 0 1px $border-inside;
+  box-shadow: inset 0 0 0 var(--ctr-editor-border-width, 1px) var(--ctr-editor-border-color, $border-inside);
+
   padding: calcSize(1.5) calcSize(2);
   outline: none;
   font-size: calcSize(2);
   font-family: $font-family;
-  color: $foreground;
+  color: var(--ctr-editor-content-text-color, $foreground);
 }
 
 .spg-input::placeholder {
-  color: $foreground-light;
+  color: var(--ctr-editor-content-text-color-placeholder, $foreground-light);
 }
 
 .spg-input:focus,
 .spg-input.spg-dropdown:focus,
 .spg-input.spg-dropdown:focus-within,
 .spg-input-container:focus-within {
-  box-shadow: inset 0 0 0 2px $primary;
+  box-shadow: inset 0 0 0 var(--ctr-editor-border-width-focused, 2px) var(--ctr-editor-border-color-focused, $primary);
 }
 
 .spg-input:disabled,
 .spg-input:disabled::placeholder {
-  color: $foreground;
-  opacity: 0.25;
+  color: var(--ctr-editor-content-text-color-disabled, $foreground);
+  opacity: var(--ctr-editor-content-text-opacity-disabled, 0.25);
 }
 
 .spg-input[type="color"] {
@@ -43,7 +44,7 @@
   position: relative;
   box-sizing: border-box;
   appearance: none;
-  background: $background;
+  background: var(--ctr-editor-background-color, $background);
   border: none;
   outline: none;
   width: calcSize(5);
@@ -53,28 +54,28 @@
 
   &:focus,
   &:hover {
-    background: $background-dim;
+    background: var(--ctr-editor-button-background-color-hovered, $background-dim);
   }
 
   &:active {
-    opacity: 0.5;
+    opacity: var(--ctr-editor-button-icon-opacity-pressed, 0.5);
   }
 
   &.spg-input__edit-button--disabled,
   &:disabled {
-    opacity: 0.25;
-    background: $background;
+    opacity: var(--ctr-editor-button-icon-opacity-disabled, 0.25);
+    background: var(--ctr-editor-background-color, $background);
   }
 
   svg {
     height: 24px;
     width: 24px;
-    fill: $foreground-dim-light;
+    fill: var(--ctr-editor-button-icon-color, $foreground-dim-light);
   }
 }
 
 .spg-input.spg-input--error {
-  box-shadow: 0 0 0 1px inset $red;
+  box-shadow: 0 0 0 1px inset var(--ctr-editor-border-color-error, $red);
 }
 
 .spg-input-container {
@@ -84,7 +85,7 @@
   padding: calcSize(0.5);
   align-items: center;
   gap: calcSize(0.5);
-  box-shadow: 0 0 0 1px inset $border-inside;
+  box-shadow: inset 0 0 0 var(--ctr-editor-border-width, 1px) var(--ctr-editor-border-color, $border-inside);
 }
 
 .spg-input-container--multiline {
@@ -107,7 +108,7 @@
   flex-grow: 1;
   width: 100%;
   padding: calcSize(1) calcSize(1.5);
-  color: $foreground;
+  color: var(--ctr-editor-content-text-color, $foreground);
   font-size: calcSize(2);
   font-family: $font-family;
   outline: none;
@@ -117,7 +118,7 @@
 }
 
 .spg-input-container__input:disabled {
-  opacity: 0.25;
+  opacity: var(--ctr-editor-content-text-opacity-disabled, 0.25);
 }
 
 .spg-input-container__buttons-container {
