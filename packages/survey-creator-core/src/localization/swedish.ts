@@ -174,6 +174,8 @@ export let svStrings = {
     addNewTypeQuestion: "Lägg till {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGOTYP]",
     choices_Item: "Sak ",
+    selectFile: "Välj en fil",
+    removeFile: "Ta bort filen",
     lg: {
       addNewItem: "Lägg till ny regel",
       empty_tab: "Skapa en regel för att anpassa undersökningens flöde.",
@@ -656,6 +658,7 @@ export let svStrings = {
     labelTrue: "Etiketten \"Sant\"",
     labelFalse: "Etiketten \"Falskt\"",
     allowClear: "Visa knappen Rensa",
+    searchMode: "Sökläge",
     displayStyle: "Visningsformat för värde",
     format: "Formaterad sträng",
     maximumFractionDigits: "Maximala bråktal",
@@ -2718,3 +2721,6 @@ editorLocalization.locales["sv"] = svStrings;
 // pe.textWrapEnabled: "Wrap choices" => "Radbryt val"
 // image.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "Alternativet \"Auto\" bestämmer automatiskt vilket läge som är lämpligt för visning - bild, video eller YouTube - baserat på den angivna källadressen."
 // imagepicker.contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options." => "Välj mellan \"Bild\" och \"Video\" för att ställa in innehållsläget för medieväljaren. Om \"Bild\" är valt, se till att alla alternativ som tillhandahålls är bildfiler i följande format: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. På samma sätt, om \"Video\" är valt, se till att alla alternativ är direktlänkar till videofiler i följande format: MP4, MOV, WMV, FLV, AVI, MKV. Observera att YouTube-länkar inte stöds för videoalternativ."
+// ed.selectFile: "Select a file" => "Välj en fil"
+// ed.removeFile: "Remove the file" => "Ta bort filen"
+// pe.searchMode: "Search Mode" => "Sökläge"

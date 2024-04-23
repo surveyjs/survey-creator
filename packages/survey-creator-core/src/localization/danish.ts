@@ -174,6 +174,8 @@ export var danishStrings = {
     addNewTypeQuestion: "Tilføj {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
     choices_Item: "Vare ",
+    selectFile: "Vælg en fil",
+    removeFile: "Fjern filen",
     lg: {
       addNewItem: "Tilføj ny regel",
       empty_tab: "Opret en regel for at tilpasse undersøgelsens flow.",
@@ -656,6 +658,7 @@ export var danishStrings = {
     labelTrue: "\"True\" etiket",
     labelFalse: "Etiketten \"Falsk\"",
     allowClear: "Vis knappen Ryd",
+    searchMode: "Søgetilstand",
     displayStyle: "Værdi visningsstil",
     format: "Formateret streng",
     maximumFractionDigits: "Maksimalt antal brøkdele",
@@ -2726,3 +2729,6 @@ editorLocalization.locales["da"] = danishStrings;
 // pe.textWrapEnabled: "Wrap choices" => "Valg af wrap"
 // image.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "Indstillingen \"Auto\" bestemmer automatisk den passende tilstand til visning - Billede, Video eller YouTube - baseret på den angivne kilde-URL."
 // imagepicker.contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options." => "Vælg mellem \"Billede\" og \"Video\" for at indstille medievælgerens indholdstilstand. Hvis \"Billede\" er valgt, skal du sikre dig, at alle angivne indstillinger er billedfiler i følgende formater: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Tilsvarende, hvis \"Video\" er valgt, skal du sikre dig, at alle indstillinger er direkte links til videofiler i følgende formater: MP4, MOV, WMV, FLV, AVI, MKV. Bemærk, at YouTube-links ikke understøttes for videoindstillinger."
+// ed.selectFile: "Select a file" => "Vælg en fil"
+// ed.removeFile: "Remove the file" => "Fjern filen"
+// pe.searchMode: "Search Mode" => "Søgetilstand"

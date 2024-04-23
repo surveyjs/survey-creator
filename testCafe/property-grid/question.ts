@@ -24,3 +24,32 @@ test("Change question name and select another question", async (t) => {
     .expect(Selector("[data-name=\"ABC\"]").exists).ok();
 });
 
+test("Change rating auto-generate", async (t) => {
+  const json = {
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "rating",
+            "name": "question1",
+          }
+        ]
+      }
+    ]
+  };
+  await setJSON(json);
+
+  const question1 = Selector("[data-name=\"question1\"]");
+  const choicesTab = Selector("h4").withExactText("Rating Values");
+  const items = Selector("[data-name=\"rateValues\"]");
+
+  await t
+    .click(question1)
+    .click(choicesTab)
+    .expect(items.visible).notOk()
+    .click(Selector(".sv-button-group__item-caption").withExactText("Manual"))
+    .expect(items.visible).ok()
+    .click(Selector(".sv-button-group__item-caption").withExactText("Auto-generate"))
+    .expect(items.visible).notOk();
+});
