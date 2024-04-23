@@ -174,6 +174,8 @@ export var nlStrings = {
     addNewTypeQuestion: "Voeg {0} toe", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
     choices_Item: "Item ",
+    selectFile: "Selecteer een bestand",
+    removeFile: "Verwijder het bestand",
     lg: {
       addNewItem: "Nieuwe regel toevoegen",
       empty_tab: "Maak een regel om de stroom van de enquête aan te passen.",
@@ -656,6 +658,7 @@ export var nlStrings = {
     labelTrue: "Label \"Waar\"",
     labelFalse: "Label 'Onwaar'",
     allowClear: "De knop Wissen weergeven",
+    searchMode: "Zoekmodus",
     displayStyle: "Waarde weergavestijl",
     format: "Opgemaakte tekenreeks",
     maximumFractionDigits: "Maximum fractionele cijfers",
@@ -2521,3 +2524,6 @@ editorLocalization.locales["nl"] = nlStrings;
 // pe.textWrapEnabled: "Wrap choices" => "Wrap-keuzes"
 // image.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "De optie \"Auto\" bepaalt automatisch de geschikte modus voor weergave - Afbeelding, Video of YouTube - op basis van de opgegeven bron-URL."
 // imagepicker.contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options." => "Kies tussen \"Afbeelding\" en \"Video\" om de inhoudsmodus van de mediakiezer in te stellen. Als \"Afbeelding\" is geselecteerd, zorg er dan voor dat alle beschikbare opties afbeeldingsbestanden zijn in de volgende formaten: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Evenzo, als \"Video\" is geselecteerd, zorg er dan voor dat alle opties directe links zijn naar videobestanden in de volgende formaten: MP4, MOV, WMV, FLV, AVI, MKV. Houd er rekening mee dat YouTube-links niet worden ondersteund voor video-opties."
+// ed.selectFile: "Select a file" => "Selecteer een bestand"
+// ed.removeFile: "Remove the file" => "Verwijder het bestand"
+// pe.searchMode: "Search Mode" => "Zoekmodus"

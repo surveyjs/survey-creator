@@ -174,6 +174,8 @@ export var indonesianStrings = {
     addNewTypeQuestion: "Tambahkan {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
     choices_Item: "Benda ",
+    selectFile: "Pilih file",
+    removeFile: "Menghapus file",
     lg: {
       addNewItem: "Tambahkan Aturan Baru",
       empty_tab: "Buat aturan untuk menyesuaikan alur survei.",
@@ -656,6 +658,7 @@ export var indonesianStrings = {
     labelTrue: "Label \"Benar\"",
     labelFalse: "Label \"Salah\"",
     allowClear: "Tampilkan tombol Hapus",
+    searchMode: "Mode Pencarian",
     displayStyle: "Gaya tampilan nilai",
     format: "String yang diformat",
     maximumFractionDigits: "Digit pecahan maksimum",
@@ -2695,3 +2698,6 @@ editorLocalization.locales["id"] = indonesianStrings;
 // pe.textWrapEnabled: "Wrap choices" => "Pilihan bungkus"
 // image.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "Opsi \"Otomatis\" secara otomatis menentukan mode yang sesuai untuk tampilan - Gambar, Video, atau YouTube - berdasarkan URL sumber yang disediakan."
 // imagepicker.contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options." => "Pilih antara \"Gambar\" dan \"Video\" untuk mengatur mode konten pemilih media. Jika \"Gambar\" dipilih, pastikan bahwa semua opsi yang disediakan adalah file gambar dalam format berikut: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Demikian pula, jika \"Video\" dipilih, pastikan bahwa semua opsi adalah tautan langsung ke file video dalam format berikut: MP4, MOV, WMV, FLV, AVI, MKV. Perhatikan bahwa tautan YouTube tidak didukung untuk opsi video."
+// ed.selectFile: "Select a file" => "Pilih file"
+// ed.removeFile: "Remove the file" => "Menghapus file"
+// pe.searchMode: "Search Mode" => "Mode Pencarian"

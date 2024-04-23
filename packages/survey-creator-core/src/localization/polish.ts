@@ -174,6 +174,8 @@ var polishStrings = {
     addNewTypeQuestion: "Dodaj {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
     choices_Item: "Przedmiot ",
+    selectFile: "Wybierz plik",
+    removeFile: "Usuń plik",
     lg: {
       addNewItem: "Dodaj nową regułę",
       empty_tab: "Utwórz regułę, aby dostosować przepływ ankiety.",
@@ -656,6 +658,7 @@ var polishStrings = {
     labelTrue: "Etykieta \"prawdziwa\"",
     labelFalse: "Etykieta \"Fałsz\"",
     allowClear: "Pokaż przycisk Wyczyść",
+    searchMode: "Tryb wyszukiwania",
     displayStyle: "Styl wyświetlania wartości",
     format: "Sformatowany ciąg znaków",
     maximumFractionDigits: "Maksymalna liczba cyfr ułamkowych",
@@ -2814,3 +2817,6 @@ editorLocalization.locales["pl"] = polishStrings;
 // pe.textWrapEnabled: "Wrap choices" => "Opcje zawijania"
 // image.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "Opcja \"Auto\" automatycznie określa odpowiedni tryb wyświetlania - Obraz, Wideo lub YouTube - na podstawie podanego źródłowego adresu URL."
 // imagepicker.contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options." => "Wybierz pomiędzy \"Obraz\" i \"Wideo\", aby ustawić tryb zawartości selektora multimediów. W przypadku wybrania opcji \"Obraz\" upewnij się, że wszystkie dostępne opcje są plikami graficznymi w następujących formatach: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Podobnie, jeśli wybrana jest opcja \"Wideo\", upewnij się, że wszystkie opcje są bezpośrednimi linkami do plików wideo w następujących formatach: MP4, MOV, WMV, FLV, AVI, MKV. Należy pamiętać, że linki do YouTube nie są obsługiwane w przypadku opcji wideo."
+// ed.selectFile: "Select a file" => "Wybierz plik"
+// ed.removeFile: "Remove the file" => "Usuń plik"
+// pe.searchMode: "Search Mode" => "Tryb wyszukiwania"
