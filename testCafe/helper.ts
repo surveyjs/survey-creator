@@ -153,6 +153,13 @@ export async function changeToolboxLocation(newVal: string) {
     window["creator"].toolboxLocation = newVal;
   })(newVal);
 }
+
+export async function changeToolboxScrolling(hasScroll: boolean) {
+  await ClientFunction((newVal) => {
+    window["creator"].toolbox.isResponsivenessDisabled = newVal;
+  })(hasScroll);
+}
+
 export async function setShowSidebar(newVal: boolean) {
   await ClientFunction((newVal) => {
     window["creator"].showSidebar = newVal;
