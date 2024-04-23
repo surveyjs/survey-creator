@@ -561,6 +561,11 @@ svc-question,
   }
 }
 
+.sd-paneldynamic__panels-container {
+  padding-bottom: 2px;
+  margin-bottom: -2px;
+}
+
 .svc-panel__placeholder_frame {
   border: 1px dashed $border;
   width: 100%;
@@ -777,6 +782,8 @@ svc-question,
     padding-left: calcSize(5);
     padding-right: calcSize(5);
     overflow-x: auto;
+    padding-bottom: 2px;
+    margin-bottom: -2px;
   }
 
   .sd-composite {
