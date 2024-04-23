@@ -3379,9 +3379,14 @@ export class SurveyCreatorModel extends Base
   }
   public getQuestionTypeSelectorModel(beforeAdd: (type: string) => void, element?: SurveyElement) {
     let panel = !!element && element.isPanel ? <PanelModel>element : null;
+    const onSelectionChanged = (questionType: string, subtype?: string) => {
+      this.currentAddQuestionType = questionType;
+      this.addNewQuestionInPage(beforeAdd, panel, questionType, subtype);
+      newAction.popupModel.isVisible = false;
+    };
     const getActions = () => {
       const availableTypes = this.getAvailableToolboxItems(element).map((item) => {
-        return this.createIActionBarItemByClass(item.name, item.title, item.iconName, item.needSeparator);
+        return this.createIActionBarItemByClass(item.name, item.title, item.iconName, item.needSeparator, onSelectionChanged);
       });
       return availableTypes;
     };
@@ -3392,8 +3397,7 @@ export class SurveyCreatorModel extends Base
     }, {
       items: getActions(),
       onSelectionChanged: (item: any) => {
-        this.currentAddQuestionType = item.id;
-        this.addNewQuestionInPage(beforeAdd, panel);
+        onSelectionChanged(item.id);
       },
       onShow: () => {
         const listModel = newAction.popupModel.contentComponentData.model;
@@ -3419,7 +3423,7 @@ export class SurveyCreatorModel extends Base
   }
 
   @undoRedoTransaction()
-  public addNewQuestionInPage(beforeAdd: (string) => void, panel: IPanel = null, type: string = null) {
+  public addNewQuestionInPage(beforeAdd: (string) => void, panel: IPanel = null, type: string = null, subtype: string = null) {
     if (!type)
       type = this.currentAddQuestionType;
     if (!type) type = settings.designer.defaultAddQuestionType;
@@ -3430,14 +3434,24 @@ export class SurveyCreatorModel extends Base
       json = toolboxItem.json;
     }
     let newElement = this.createNewElement(json);
+    (newElement as Question).setPropertyValue("inputType", subtype);
     this.clickToolboxItem(newElement, panel, "ADDED_FROM_PAGEBUTTON");
   }
-  createIActionBarItemByClass(className: string, title: string, iconName: string, needSeparator: boolean): Action {
+
+  createIActionBarItemByClass(className: string, title: string, iconName: string, needSeparator: boolean, onSelectionChanged?: (questionType: string, subtype?: string) => void): Action {
     const action = new Action({
       title: title,
       id: className,
       iconName: iconName,
     });
+    if (className === "text") {
+      const prop = Serializer.findProperty("text", "inputType");
+      if (prop) {
+        action.setItems(prop.choices.map(ch => new Action({ id: ch, title: editorLocalization.getPropertyValueInEditor("inputType", ch) })), (o, e) => {
+          onSelectionChanged("text", o.id);
+        });
+      }
+    }
     action.needSeparator = needSeparator;
     return action;
   }
