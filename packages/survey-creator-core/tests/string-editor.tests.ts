@@ -378,7 +378,7 @@ test("Sanitizing in compostion input", (): any => {
   stringEditorSurveyTitle.onInput({ target: null });
   stringEditorSurveyTitle.onInput({ target: null });
   stringEditorSurveyTitle.onInput({ target: null });
-  expect(sanitizeEditableContent).toBeCalledTimes(4);
+  expect(sanitizeEditableContent).toBeCalledTimes(0); // no sanitizer calls according new new approach
 
   stringEditorSurveyTitle.onCompositionStart({ target: null });
   stringEditorSurveyTitle.onInput({ target: null });
@@ -386,7 +386,7 @@ test("Sanitizing in compostion input", (): any => {
   stringEditorSurveyTitle.onInput({ target: null });
   stringEditorSurveyTitle.onInput({ target: null });
   stringEditorSurveyTitle.onCompositionEnd({ target: null });
-  expect(sanitizeEditableContent).toBeCalledTimes(5);
+  expect(sanitizeEditableContent).toBeCalledTimes(0); // no sanitizer calls according new new approach
 });
 
 test("Maxlen check", (): any => {
