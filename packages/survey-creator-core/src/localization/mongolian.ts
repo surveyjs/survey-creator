@@ -174,6 +174,8 @@ export var mnStrings = {
     addNewTypeQuestion: "{0} нэмэх", //{0} is localizable question type
     chooseLogoPlaceholder: "[Лого]",
     choices_Item: "Хэсэг ",
+    selectFile: "Файлыг сонгох",
+    removeFile: "Файлыг хасах",
     lg: {
       addNewItem: "Шинэ дүрэм нэмэх",
       empty_tab: "Санал асуулгын урсгалыг өөрчлөх дүрэм үүсгэнэ үү.",
@@ -656,6 +658,7 @@ export var mnStrings = {
     labelTrue: "\"Тийм\" шошго",
     labelFalse: "\"Үгүй\" шошго",
     allowClear: "Цэвэрлэх товч харуулах",
+    searchMode: "Хайлтын Мод",
     displayStyle: "Утга харуулах хэв маяг",
     format: "Хэлбэржүүлсэн текст",
     maximumFractionDigits: "Оронгийн нарийвчлалын дээд утга",
@@ -2197,3 +2200,6 @@ editorLocalization.locales["mn"] = mnStrings;
 // pe.textWrapEnabled: "Wrap choices" => "Боолт сонголт"
 // image.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "\"Авто\" сонголт нь эх сурвалж URL-д суурилсан зураг, видео, эсвэл YouTube - харуулах тохиромжтой хэв маягийг автоматаар тодорхойлдог."
 // imagepicker.contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options." => "Хэвлэл мэдээллийн хэрэгслийн сонгогчийн агуулгын хэв маягийг тогтоохын тулд \"Image\" болон \"Video\" хоёрын аль нэгийг сонго. Хэрэв \"Зураг\" гэж сонгосон бол өгөгдсөн бүх хувилбарууд нь дараах форматаар зургийн файлууд болохыг анхаарна уу: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Үүнтэй адилаар \"Video\" нь сонгогдвол бүх сонголт нь дараах форматаар видео файлуудын шууд холбоосууд болох MP4, MOV, WMV, FLV, AVI, MKV гэсэн форматаар байгаа эсэхийг баталгаажуулаарай. YouTube-ийн холбоосууд видео хувилбараар дэмжигдээгүйг анхаарна уу."
+// ed.selectFile: "Select a file" => "Файлыг сонгох"
+// ed.removeFile: "Remove the file" => "Файлыг хасах"
+// pe.searchMode: "Search Mode" => "Хайлтын Мод"

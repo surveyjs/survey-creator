@@ -174,6 +174,8 @@ export var ruStrings = {
     addNewTypeQuestion: "Добавить {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[ЛОГОТИП]",
     choices_Item: "Пункт ",
+    selectFile: "Выберите файл",
+    removeFile: "Удалите файл",
     lg: {
       addNewItem: "Добавить новое правило",
       empty_tab: "Создайте правило для настройки потока опроса.",
@@ -656,6 +658,7 @@ export var ruStrings = {
     labelTrue: "Метка «Истина»",
     labelFalse: "«Ложный» ярлык",
     allowClear: "Показать кнопку «Очистить»",
+    searchMode: "Режим поиска",
     displayStyle: "Стиль отображения значений",
     format: "Форматированная строка",
     maximumFractionDigits: "Максимальное количество дробных цифр",
@@ -2601,3 +2604,6 @@ editorLocalization.locales["ru"] = ruStrings;
 // pe.textWrapEnabled: "Wrap choices" => "Варианты обертывания"
 // image.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "Опция \"Авто\" автоматически определяет подходящий режим отображения - Изображение, Видео или YouTube - на основе предоставленного исходного URL-адреса."
 // imagepicker.contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options." => "Выберите между «Изображением» и «Видео», чтобы установить режим содержимого селектора мультимедиа. Если выбран параметр «Изображение», убедитесь, что все предоставленные параметры представляют собой файлы изображений в следующих форматах: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Точно так же, если выбран «Видео», убедитесь, что все параметры являются прямыми ссылками на видеофайлы в следующих форматах: MP4, MOV, WMV, FLV, AVI, MKV. Обратите внимание, что ссылки на YouTube не поддерживаются для параметров видео."
+// ed.selectFile: "Select a file" => "Выберите файл"
+// ed.removeFile: "Remove the file" => "Удалите файл"
+// pe.searchMode: "Search Mode" => "Режим поиска"

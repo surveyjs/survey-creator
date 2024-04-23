@@ -174,6 +174,8 @@ export var jaStrings = {
     addNewTypeQuestion: "{0}を追加", //{0} is localizable question type
     chooseLogoPlaceholder: "[ロゴ]",
     choices_Item: "アイテム",
+    selectFile: "ファイルを選択",
+    removeFile: "ファイルを削除する",
     lg: {
       addNewItem: "新しいルールを追加",
       empty_tab: "調査のフローをカスタマイズするルールを作成します。",
@@ -656,6 +658,7 @@ export var jaStrings = {
     labelTrue: "「真の」ラベル",
     labelFalse: "「虚偽」ラベル",
     allowClear: "オプションのキャプションを表示する",
+    searchMode: "検索モード",
     displayStyle: "値の表示スタイル",
     format: "書式設定された文字列",
     maximumFractionDigits: "小数部の最大数桁数",
@@ -2540,3 +2543,6 @@ editorLocalization.locales["ja"] = jaStrings;
 // pe.textWrapEnabled: "Wrap choices" => "ラップの選択肢"
 // image.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "「自動」オプションでは、指定されたソースURLに基づいて、表示に適したモード(画像、動画、YouTube)が自動的に決定されます。"
 // imagepicker.contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options." => "「画像」と「動画」のどちらかを選択して、メディアセレクタのコンテンツモードを設定します。「画像」を選択した場合は、提供されるすべてのオプションが、JPEG、GIF、PNG、APNG、SVG、BMP、ICO形式の画像ファイルであることを確認してください。同様に、「ビデオ」を選択した場合は、すべてのオプションがMP4、MOV、WMV、FLV、AVI、MKV形式のビデオファイルへの直接リンクであることを確認してください。YouTubeのリンクは動画オプションではサポートされていませんのでご注意ください。"
+// ed.selectFile: "Select a file" => "ファイルを選択"
+// ed.removeFile: "Remove the file" => "ファイルを削除する"
+// pe.searchMode: "Search Mode" => "検索モード"

@@ -174,6 +174,8 @@ export var turkishStrings = {
     addNewTypeQuestion: "{0} ekle", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
     choices_Item: "Madde ",
+    selectFile: "Bir dosya seçin",
+    removeFile: "Dosyayı kaldır",
     lg: {
       addNewItem: "Yeni Kural Ekle",
       empty_tab: "Anketin akışını özelleştirmek için bir kural oluşturun.",
@@ -656,6 +658,7 @@ export var turkishStrings = {
     labelTrue: "\"Doğru\" etiketi",
     labelFalse: "\"Yanlış\" etiketi",
     allowClear: "Seçeneklerin başlığını göster",
+    searchMode: "Arama Modu",
     displayStyle: "Değer görüntüleme stili",
     format: "Biçimlendirilmiş dize",
     maximumFractionDigits: "Maksimum kesirli basamaklar",
@@ -2536,3 +2539,6 @@ editorLocalization.locales["tr"] = turkishStrings;
 // pe.textWrapEnabled: "Wrap choices" => "Sarma seçenekleri"
 // image.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "\"Otomatik\" seçeneği, sağlanan kaynak URL'ye göre görüntüleme için uygun modu (Resim, Video veya YouTube) otomatik olarak belirler."
 // imagepicker.contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options." => "Medya seçicinin içerik modunu ayarlamak için \"Görüntü\" ve \"Video\" arasında seçim yapın. \"Resim\" seçilirse, sağlanan tüm seçeneklerin şu biçimlerdeki resim dosyaları olduğundan emin olun: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Benzer şekilde, \"Video\" seçilirse, tüm seçeneklerin aşağıdaki formatlardaki video dosyalarına doğrudan bağlantılar olduğundan emin olun: MP4, MOV, WMV, FLV, AVI, MKV. Video seçenekleri için YouTube bağlantılarının desteklenmediğini lütfen unutmayın."
+// ed.selectFile: "Select a file" => "Bir dosya seçin"
+// ed.removeFile: "Remove the file" => "Dosyayı kaldır"
+// pe.searchMode: "Search Mode" => "Arama Modu"
