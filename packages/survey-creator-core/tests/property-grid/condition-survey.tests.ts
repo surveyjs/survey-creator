@@ -1741,7 +1741,7 @@ test("Remove valuePropertyName", () => {
   var survey = new SurveyModel({
     questions: [
       { type: "checkbox", name: "q1", choices: ["apple", "banana", "orange"], valuePropertyName: "fruit" },
-      { type: "text", name: "q2", "visibleIf": "{q1} allof ['apple', 'orange']" }
+      { type: "text", name: "q2", "visibleIf": "{q1-unwrapped} allof ['apple', 'orange']" }
     ]
   });
   const q2 = survey.getQuestionByName("q2");
@@ -1756,7 +1756,7 @@ test("Remove valuePropertyName", () => {
   expect(qValue.value[1]).toBe("orange");
   qValue.renderedValue = ["banana"];
   editor.apply();
-  expect(q2.visibleIf).toBe("{q1} allof ['banana']");
+  expect(q2.visibleIf).toBe("{q1-unwrapped} allof ['banana']");
 });
 test("Condition editor and question value cssClasses", () => {
   ComponentCollection.Instance.add({ name: "comp1", questionJSON: { "type": "dropdown", name: "q", choices: [1, 2, 3] } });
