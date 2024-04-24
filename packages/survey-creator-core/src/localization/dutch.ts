@@ -119,7 +119,7 @@ export var nlStrings = {
     toolboxMiscCategory: "MISC",
     correctJSON: "Corrigeer JSON.",
     surveyResults: "Enquêteresultaat: ",
-    surveyResultsTable: "Als tafel",
+    surveyResultsTable: "Als tabel",
     surveyResultsJson: "Als JSON",
     resultsTitle: "Vraag titel",
     resultsName: "Vraag naam",
@@ -231,7 +231,7 @@ export var nlStrings = {
       setValueExpressionPlaceholder: " Een expressie waarvan het resultaat wordt toegewezen aan de doelvraag.",
       trigger_completeText: "Enquête wordt voltooid",
       trigger_setvalueText: "Stel de vraag: {0} waarde {1}", //{0} question name, {1} setValue
-      trigger_setvalueEmptyText: "duidelijke vraagwaarde: {0}", //{0} question name
+      trigger_setvalueEmptyText: "verwijder vraagwaarde: {0}", //{0} question name
       trigger_copyvalueText: "Kopieer naar vraag: {0} waarde uit vraag {1}", //{0} and {1} question names
       trigger_skipText: "Enquête ga verder met de vraag {0}", //{0} question name
       trigger_runExpressionText1: "Uitdrukking uitvoeren: '{0}'", //{0} the expression
@@ -405,7 +405,7 @@ export var nlStrings = {
     apply: "Van toepassing zijn",
     ok: "OK",
     save: "Opslaan",
-    clear: "Duidelijk",
+    clear: "Verwijder alles",
     saveTooltip: "Opslaan",
     cancel: "Annuleren",
     set: "Set",
@@ -498,9 +498,9 @@ export var nlStrings = {
     surveyDescriptionPlaceholder: "Voer een onderzoeksbeschrijving in",
     pageDescriptionPlaceholder: "Voer een paginabeschrijving in",
     textWrapEnabled: "Wrap-keuzes",
-    showOtherItem: "Heeft de 'Anders:'-optie",
+    showOtherItem: "De optie 'Anders' tonen",
     otherText: "Titel 'Anders:'-optie",
-    showNoneItem: "Heeft de 'Geen'-optie",
+    showNoneItem: "De optie 'Geen' tonen",
     showRefuseItem: "De optie Weigeren om te antwoorden toestaan",
     showDontKnowItem: "De optie 'Weet niet' toestaan",
     noneText: "Titel 'Geen'-optie",
@@ -828,10 +828,10 @@ export var nlStrings = {
     alternateRows: "Alternatieve rijen",
     columnsVisibleIf: "Kolommen zijn zichtbaar als",
     rowsVisibleIf: "Rijen zijn zichtbaar als",
-    otherPlaceholder: "Tijdelijke aanduiding voor het opmerkingengebied",
-    filePlaceholder: "Tijdelijke tekst voor bestanden",
-    photoPlaceholder: "Tijdelijke tekst voor foto's",
-    fileOrPhotoPlaceholder: "Tijdelijke tekst voor bestanden of foto's",
+    otherPlaceholder: "Plaatshouder tekst voor het invulveld",
+    filePlaceholder: "Plaatshouder tekst voor bestanden",
+    photoPlaceholder: "Plaatshouder tekst voor foto's",
+    fileOrPhotoPlaceholder: "Plaatshouder tekst voor bestanden of foto's",
     rateType: "Type tarief",
     url_placeholder: "Vb.: https://api.example.com/books",
     path_placeholder: "Vb.: categories.fiction",
@@ -1301,7 +1301,7 @@ export var nlStrings = {
     useDisplayValuesInDynamicTexts: "In vraagtypen met enkelvoudige en meervoudige selectie heeft elke keuzeoptie een ID en weergavewaarde. Als deze instelling is geselecteerd, wordt een weergavewaarde weergegeven in plaats van een ID-waarde in HTML-vragen en dynamische titels en beschrijvingen van enquête-elementen.",
     clearIfInvisible: "Kies of vraagwaarden die verborgen zijn door voorwaardelijke logica al dan niet moeten worden gewist en wanneer u dit wilt doen. Met de optie \"Overnemen\" wordt de instelling op enquêteniveau toegepast (\"Na voltooiing van de enquête\" standaard).",
     choicesFromQuestionMode: "Kies uit: \"Alle\" - kopieert alle keuzemogelijkheden van de geselecteerde vraag; \"Geselecteerd\" - kopieert dynamisch alleen geselecteerde keuzeopties; \"Niet geselecteerd\" - kopieert dynamisch alleen niet-geselecteerde keuzeopties. De opties \"Geen\" en \"Overig\" worden standaard gekopieerd als deze zijn ingeschakeld in de bronvraag.",
-    showOtherItem: "Als deze optie is geselecteerd, kunnen gebruikers extra invoer opnemen in een apart opmerkingenvak.",
+    showOtherItem: "Als deze optie is geselecteerd, kunnen gebruikers extra invoer invullen in een apart invulveld.",
     separateSpecialChoices: "Geeft elke speciale keuzeoptie ('Geen', 'Overig', 'Alles selecteren') weer op een nieuwe regel, zelfs bij gebruik van een lay-out met meerdere kolommen.",
     path: "Geef de locatie binnen de servicegegevensset op waar de doelmatrix met objecten zich bevindt. Laat leeg als de URL al naar de array verwijst.",
     choicesbyurl: {
@@ -1639,14 +1639,14 @@ editorLocalization.locales["nl"] = nlStrings;
 // lg.column_visibilityText: "make column {0} of question {1} visible" => "Kolom {0} van vraag {1} zichtbaar maken"
 // lg.column_enableText: "make column {0} of question {1} enable" => "Kolom {0} van vraag maken {1} inschakelen"
 // lg.column_requireText: "make column {0} of question {1} required" => "Kolom {0} met vraag {1} verplicht maken"
-// lg.trigger_setvalueEmptyText: "clear question value: {0}" => "duidelijke vraagwaarde: {0}"
+// lg.trigger_setvalueEmptyText: "clear question value: {0}" => "verwijder vraagwaarde: {0}"
 // lg.showAllQuestions: "All Questions" => "Alle vragen"
 // lg.showAllActionTypes: "All Action Types" => "Alle actietypen"
 // lg.uncompletedRule_title: "Logical rules are incomplete" => "Logische regels zijn onvolledig"
 // lg.uncompletedRule_text: "You have not completed some of the logical rules. If you leave the tab now, the changes will be lost. Do you still want to leave the tab without completing the changes?" => "U hebt een aantal van de logische regels niet voltooid. Als u het tabblad nu verlaat, gaan de wijzigingen verloren. Wilt u het tabblad nog steeds verlaten zonder de wijzigingen te voltooien?"
 // lg.uncompletedRule_apply: "Yes" => "Ja"
 // lg.uncompletedRule_cancel: "No, I want to complete the rules" => "Nee, ik wil de regels invullen"
-// pe.clear: "Clear" => "Duidelijk"
+// pe.clear: "Clear" => "Verwijder alles"
 // pe.set: "Set" => "Set"
 // pe.change: "Change" => "Veranderen"
 // pe.close: "Close" => "Sluiten"
@@ -2451,7 +2451,7 @@ editorLocalization.locales["nl"] = nlStrings;
 // pehelp.useDisplayValuesInDynamicTexts: "In single- and multiple-selection question types, each choice option has an ID and display value. When selected, this setting shows a display value instead of an ID value in HTML questions and dynamic titles and descriptions of survey elements." => "In vraagtypen met enkelvoudige en meervoudige selectie heeft elke keuzeoptie een ID en weergavewaarde. Als deze instelling is geselecteerd, wordt een weergavewaarde weergegeven in plaats van een ID-waarde in HTML-vragen en dynamische titels en beschrijvingen van enquête-elementen."
 // pehelp.clearIfInvisible: "Choose whether or not to clear question values hidden by conditional logic and when to do it. The \"Inherit\" option applies the survey-level setting (\"Upon survey completion\" by default)." => "Kies of vraagwaarden die verborgen zijn door voorwaardelijke logica al dan niet moeten worden gewist en wanneer u dit wilt doen. Met de optie \"Overnemen\" wordt de instelling op enquêteniveau toegepast (\"Na voltooiing van de enquête\" standaard)."
 // pehelp.choicesFromQuestionMode: "Choose from: \"All\" - copies all choice options from the selected question; \"Selected\" - dynamically copies only selected choice options; \"Unselected\" - dynamically copies only unselected choice options. The \"None\" and \"Other\" options are copied by default if enabled in the source question." => "Kies uit: \"Alle\" - kopieert alle keuzemogelijkheden van de geselecteerde vraag; \"Geselecteerd\" - kopieert dynamisch alleen geselecteerde keuzeopties; \"Niet geselecteerd\" - kopieert dynamisch alleen niet-geselecteerde keuzeopties. De opties \"Geen\" en \"Overig\" worden standaard gekopieerd als deze zijn ingeschakeld in de bronvraag."
-// pehelp.showOtherItem: "When selected, users can include additional input in a separate comment box." => "Als deze optie is geselecteerd, kunnen gebruikers extra invoer opnemen in een apart opmerkingenvak."
+// pehelp.showOtherItem: "When selected, users can include additional input in a separate comment box." => "Als deze optie is geselecteerd, kunnen gebruikers extra invoer invullen in een apart invulveld."
 // pehelp.separateSpecialChoices: "Displays each special choice option (\"None\", \"Other\", \"Select All\") on a new line, even when using a multiple-column layout." => "Geeft elke speciale keuzeoptie ('Geen', 'Overig', 'Alles selecteren') weer op een nieuwe regel, zelfs bij gebruik van een lay-out met meerdere kolommen."
 // pehelp.path: "Specify the location within the service dataset where the target array of objects is located. Leave empty if the URL already points to the array." => "Geef de locatie binnen de servicegegevensset op waar de doelmatrix met objecten zich bevindt. Laat leeg als de URL al naar de array verwijst."
 // pehelp.titleName: "Enter a uniform property name within the array of objects that contains the values you want to display in the choice list." => "Voer een uniforme eigenschapsnaam in binnen de matrix met objecten die de waarden bevat die u in de keuzelijst wilt weergeven."
