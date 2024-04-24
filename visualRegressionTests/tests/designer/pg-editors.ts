@@ -783,3 +783,31 @@ test("Check property grid mask settings", async (t) => {
     await takeElementScreenshot("pg-input-mask-settings-pattern.png", expandedGroup, t, comparer);
   });
 });
+
+test("renderAs works in matrix questions for textwithreset", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1600, 800);
+    await ClientFunction(() => {
+      window["Survey"].Serializer.findProperty("page", "name").defaultValue = "test";
+      // window["Survey"].Serializer.addProperty("survey", {
+      //   name: "name",
+      //   default: "test"
+      // });
+    })();
+    const json = {
+      "elements": [
+        {
+          "type": "text",
+          "name": "question1"
+        }
+      ]
+    };
+    await setJSON(json);
+
+    await t
+      .click(getPropertyGridCategory("Pages"));
+    const expandedGroup = Selector(".spg-root-modern .spg-panel.sd-element--expanded");
+    await ClientFunction(() => { document.body.focus(); })();
+    await takeElementScreenshot("pg-pages-with-reset.png", expandedGroup, t, comparer);
+  });
+});

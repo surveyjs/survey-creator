@@ -176,6 +176,8 @@ export var enStrings = {
     addNewTypeQuestion: "Add {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
     choices_Item: "Item ",
+    selectFile: "Select a file",
+    removeFile: "Remove the file",
     lg: {
       addNewItem: "Add New Rule",
       empty_tab: "Create a rule to customize the flow of the survey.",
@@ -334,6 +336,7 @@ export var enStrings = {
       signatureAutoScaleEnabled: "Auto-scale the signature area",
       showPlaceholder: "Show a placeholder within signature area",
       placeholder: "Placeholder text",
+      placeholderReadOnly: "Placeholder text in read-only or preview mode",
       allowClear: "Show the Clear button within signature area",
       penMinWidth: "Minimum stroke width",
       penMaxWidth: "Maximum stroke width",
@@ -511,6 +514,7 @@ export var enStrings = {
     descriptionPlaceholder: "Description",
     surveyDescriptionPlaceholder: "Description",
     pageDescriptionPlaceholder: "Description",
+    textWrapEnabled: "Wrap choices",
     showOtherItem: "Enable the \"Other\" option",
     otherText: "Rename the \"Other\" option",
     showNoneItem: "Enable the \"None\" option",
@@ -652,6 +656,7 @@ export var enStrings = {
     textUpdateMode: "Update input field values",
     maskType: "Input mask type",
     maskTypes: {
+      none: "None",
       patternmask: "Pattern",
       numericmask: "Numeric",
       datetimemask: "Date and Time",
@@ -670,6 +675,7 @@ export var enStrings = {
     labelTrue: "Label for \"True\"",
     labelFalse: "Label for \"False\"",
     allowClear: "Show the Clear button",
+    searchMode: "Search Mode",
     displayStyle: "Display format",
     format: "Formatted string",
     maximumFractionDigits: "Maximum fractional digits",
@@ -738,6 +744,10 @@ export var enStrings = {
     itemvalue: {
       visibleIf: "Make the option visible if",
       enableIf: "Make the option selectable if"
+    },
+    "itemvalue@rows": {
+      visibleIf: "Make the row visible if",
+      enableIf: "Make the row editable if"
     },
     imageitemvalue: {
       text: "Alt text",
@@ -1063,7 +1073,6 @@ export var enStrings = {
       contains: "Contains",
       startsWith: "Starts with"
     },
-    textWrapEnabled: "Wrap choices"
   },
   // Operators
   op: {
@@ -1132,7 +1141,7 @@ export var enStrings = {
       pattern: "Ex.: +1(999)-999-99-99"
     },
     datetimemask: {
-      pattern: "Ex.: mm/dd/yyyy"
+      pattern: "Ex.: mm/dd/yyyy HH:MM:ss"
     },
     currencymask: {
       prefix: "Ex.: $",
@@ -1216,10 +1225,14 @@ export var enStrings = {
       imageHeight: "Adjusts the height of the image in the survey results.",
       imageWidth: "Adjusts the width of the image in the survey results.",
     },
+    image: {
+      contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided."
+    },
     imagepicker: {
       imageHeight: "Overrides the minimum and maximum height values.",
       imageWidth: "Overrides the minimum and maximum width values.",
       choices: "\"Value\" serves as an item ID used in conditional rules; \"Text\" is displayed to respondents.",
+      contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options."
     },
     text: {
       size: "This setting only resizes the input field and doesn't affect the width of the question box. To limit the accepted input length, go to <b>Validation → Maximum character limit</b>."
@@ -1332,7 +1345,6 @@ export var enStrings = {
     dataList: "Enter a list of choices that will be suggested to the respondent during input.",
     itemSize: "The setting only resizes the input fields and doesn't affect the width of the question box.",
     itemTitleWidth: "Sets consistent width for all item labels in pixels",
-    contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided.",
     altText: "Serves as a substitute when the image cannot be displayed on a user's device and for accessibility purposes.",
     rateColorMode: "Defines the color of the selected emoji when the Rating icon type is set to \"Smileys\". Choose between: \"Default\" - the selected emoji appears in default survey color; \"Scale\" - the selected emoji inherits color from the rating scale.",
     expression: {
@@ -1356,7 +1368,7 @@ export var enStrings = {
       pattern: "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character.",
     },
     datetimemask: {
-      pattern: "The pattern can contain separator characters and the following placeholders: `m` - for month number; `mm` - for month number, with leading zero for single-digit values; `d` - for day of the month; `dd` - for day of the month, with leading zero for single-digit values; `yy` - for the last two digits of the year; `yyyy` - for a four-digit year.",
+      pattern: "The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year.<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in upper case (AM/PM).<br>`tt` - 12-hour clock period in lower case (am/pm).",
     },
     numericmask: {
       decimalSeparator: "A symbol used to separate the fractional part from the integer part of a displayed number.",

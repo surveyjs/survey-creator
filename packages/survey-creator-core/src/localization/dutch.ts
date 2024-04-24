@@ -119,7 +119,7 @@ export var nlStrings = {
     toolboxMiscCategory: "MISC",
     correctJSON: "Corrigeer JSON.",
     surveyResults: "Enquêteresultaat: ",
-    surveyResultsTable: "Als tafel",
+    surveyResultsTable: "Als tabel",
     surveyResultsJson: "Als JSON",
     resultsTitle: "Vraag titel",
     resultsName: "Vraag naam",
@@ -168,11 +168,14 @@ export var nlStrings = {
     htmlPlaceHolder: "HTML-inhoud zal hier zijn.",
     panelPlaceHolder: "Drop hier een vraag uit de toolbox.",
     surveyPlaceHolder: "De enquête is leeg. Sleep een element uit de gereedschapskist of klik op de onderstaande knop.",
+    pagePlaceHolder: "De pagina is leeg. Sleep een element uit de gereedschapskist of klik op de knop hieronder.",
     imagePlaceHolder: "Sleep een afbeelding hierheen of klik op de onderstaande knop en kies een afbeelding om te uploaden",
     imageChooseImage: "Kies afbeelding",
     addNewTypeQuestion: "Voeg {0} toe", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
     choices_Item: "Item ",
+    selectFile: "Selecteer een bestand",
+    removeFile: "Verwijder het bestand",
     lg: {
       addNewItem: "Nieuwe regel toevoegen",
       empty_tab: "Maak een regel om de stroom van de enquête aan te passen.",
@@ -228,7 +231,7 @@ export var nlStrings = {
       setValueExpressionPlaceholder: " Een expressie waarvan het resultaat wordt toegewezen aan de doelvraag.",
       trigger_completeText: "Enquête wordt voltooid",
       trigger_setvalueText: "Stel de vraag: {0} waarde {1}", //{0} question name, {1} setValue
-      trigger_setvalueEmptyText: "duidelijke vraagwaarde: {0}", //{0} question name
+      trigger_setvalueEmptyText: "verwijder vraagwaarde: {0}", //{0} question name
       trigger_copyvalueText: "Kopieer naar vraag: {0} waarde uit vraag {1}", //{0} and {1} question names
       trigger_skipText: "Enquête ga verder met de vraag {0}", //{0} question name
       trigger_runExpressionText1: "Uitdrukking uitvoeren: '{0}'", //{0} the expression
@@ -319,6 +322,7 @@ export var nlStrings = {
       signatureAutoScaleEnabled: "Het handtekeninggebied automatisch schalen",
       showPlaceholder: "De tijdelijke aanduiding weergeven",
       placeholder: "Tijdelijke aanduiding voor tekst",
+      placeholderReadOnly: "Tijdelijke tekst in de modus Alleen-lezen of voorvertoning",
       allowClear: "De knop Wissen weergeven in het handtekeninggebied",
       penMinWidth: "Minimale penbreedte",
       penMaxWidth: "Maximale breedte van het hok",
@@ -401,7 +405,7 @@ export var nlStrings = {
     apply: "Van toepassing zijn",
     ok: "OK",
     save: "Opslaan",
-    clear: "Duidelijk",
+    clear: "Verwijder alles",
     saveTooltip: "Opslaan",
     cancel: "Annuleren",
     set: "Set",
@@ -493,9 +497,10 @@ export var nlStrings = {
     descriptionPlaceholder: "Voer een omschrijving in",
     surveyDescriptionPlaceholder: "Voer een onderzoeksbeschrijving in",
     pageDescriptionPlaceholder: "Voer een paginabeschrijving in",
-    showOtherItem: "Heeft de 'Anders:'-optie",
+    textWrapEnabled: "Wrap-keuzes",
+    showOtherItem: "De optie 'Anders' tonen",
     otherText: "Titel 'Anders:'-optie",
-    showNoneItem: "Heeft de 'Geen'-optie",
+    showNoneItem: "De optie 'Geen' tonen",
     showRefuseItem: "De optie Weigeren om te antwoorden toestaan",
     showDontKnowItem: "De optie 'Weet niet' toestaan",
     noneText: "Titel 'Geen'-optie",
@@ -634,6 +639,7 @@ export var nlStrings = {
     textUpdateMode: "Modus tekstvernieuwing",
     maskType: "Type invoermasker",
     maskTypes: {
+      none: "Geen",
       patternmask: "Patroon",
       numericmask: "Numeriek",
       datetimemask: "Datum en tijd",
@@ -652,6 +658,7 @@ export var nlStrings = {
     labelTrue: "Label \"Waar\"",
     labelFalse: "Label 'Onwaar'",
     allowClear: "De knop Wissen weergeven",
+    searchMode: "Zoekmodus",
     displayStyle: "Waarde weergavestijl",
     format: "Opgemaakte tekenreeks",
     maximumFractionDigits: "Maximum fractionele cijfers",
@@ -720,6 +727,10 @@ export var nlStrings = {
     itemvalue: {
       visibleIf: "Maak de optie zichtbaar als",
       enableIf: "Maak de optie selecteerbaar als"
+    },
+    "itemvalue@rows": {
+      visibleIf: "Maak de rij zichtbaar als",
+      enableIf: "De rij bewerkbaar maken als:"
     },
     imageitemvalue: {
       text: "Alternatieve tekst"
@@ -817,10 +828,10 @@ export var nlStrings = {
     alternateRows: "Alternatieve rijen",
     columnsVisibleIf: "Kolommen zijn zichtbaar als",
     rowsVisibleIf: "Rijen zijn zichtbaar als",
-    otherPlaceholder: "Tijdelijke aanduiding voor het opmerkingengebied",
-    filePlaceholder: "Tijdelijke tekst voor bestanden",
-    photoPlaceholder: "Tijdelijke tekst voor foto's",
-    fileOrPhotoPlaceholder: "Tijdelijke tekst voor bestanden of foto's",
+    otherPlaceholder: "Plaatshouder tekst voor het invulveld",
+    filePlaceholder: "Plaatshouder tekst voor bestanden",
+    photoPlaceholder: "Plaatshouder tekst voor foto's",
+    fileOrPhotoPlaceholder: "Plaatshouder tekst voor bestanden of foto's",
     rateType: "Type tarief",
     url_placeholder: "Vb.: https://api.example.com/books",
     path_placeholder: "Vb.: categories.fiction",
@@ -1044,8 +1055,7 @@ export var nlStrings = {
     searchMode: {
       contains: "Bevat",
       startsWith: "Begint met"
-    },
-    textWrapEnabled: "Wrap-keuzes"
+    }
   },
   // Operators
   op: {
@@ -1195,10 +1205,14 @@ export var nlStrings = {
       imageHeight: "Hiermee past u de hoogte van de afbeelding in de enquêteresultaten aan.",
       imageWidth: "Hiermee past u de breedte van de afbeelding in de enquêteresultaten aan."
     },
+    image: {
+      contentMode: "De optie \"Auto\" bepaalt automatisch de geschikte modus voor weergave - Afbeelding, Video of YouTube - op basis van de opgegeven bron-URL."
+    },
     imagepicker: {
       imageHeight: "Hiermee worden de minimum- en maximumhoogtewaarden overschreven.",
       imageWidth: "Hiermee worden de waarden voor de minimum- en maximumbreedte overschreven.",
-      choices: "\"Waarde\" dient als een item-ID die wordt gebruikt in voorwaardelijke regels; \"Tekst\" wordt getoond aan respondenten."
+      choices: "\"Waarde\" dient als een item-ID die wordt gebruikt in voorwaardelijke regels; \"Tekst\" wordt getoond aan respondenten.",
+      contentMode: "Kies tussen \"Afbeelding\" en \"Video\" om de inhoudsmodus van de mediakiezer in te stellen. Als \"Afbeelding\" is geselecteerd, zorg er dan voor dat alle beschikbare opties afbeeldingsbestanden zijn in de volgende formaten: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Evenzo, als \"Video\" is geselecteerd, zorg er dan voor dat alle opties directe links zijn naar videobestanden in de volgende formaten: MP4, MOV, WMV, FLV, AVI, MKV. Houd er rekening mee dat YouTube-links niet worden ondersteund voor video-opties."
     },
     text: {
       size: "Deze instelling wijzigt alleen de grootte van het invoerveld en heeft geen invloed op de breedte van het vraagvak. Als u de geaccepteerde invoerlengte wilt beperken, gaat u naar <b>Validatie → Maximale tekenlimiet</b>."
@@ -1287,7 +1301,7 @@ export var nlStrings = {
     useDisplayValuesInDynamicTexts: "In vraagtypen met enkelvoudige en meervoudige selectie heeft elke keuzeoptie een ID en weergavewaarde. Als deze instelling is geselecteerd, wordt een weergavewaarde weergegeven in plaats van een ID-waarde in HTML-vragen en dynamische titels en beschrijvingen van enquête-elementen.",
     clearIfInvisible: "Kies of vraagwaarden die verborgen zijn door voorwaardelijke logica al dan niet moeten worden gewist en wanneer u dit wilt doen. Met de optie \"Overnemen\" wordt de instelling op enquêteniveau toegepast (\"Na voltooiing van de enquête\" standaard).",
     choicesFromQuestionMode: "Kies uit: \"Alle\" - kopieert alle keuzemogelijkheden van de geselecteerde vraag; \"Geselecteerd\" - kopieert dynamisch alleen geselecteerde keuzeopties; \"Niet geselecteerd\" - kopieert dynamisch alleen niet-geselecteerde keuzeopties. De opties \"Geen\" en \"Overig\" worden standaard gekopieerd als deze zijn ingeschakeld in de bronvraag.",
-    showOtherItem: "Als deze optie is geselecteerd, kunnen gebruikers extra invoer opnemen in een apart opmerkingenvak.",
+    showOtherItem: "Als deze optie is geselecteerd, kunnen gebruikers extra invoer invullen in een apart invulveld.",
     separateSpecialChoices: "Geeft elke speciale keuzeoptie ('Geen', 'Overig', 'Alles selecteren') weer op een nieuwe regel, zelfs bij gebruik van een lay-out met meerdere kolommen.",
     path: "Geef de locatie binnen de servicegegevensset op waar de doelmatrix met objecten zich bevindt. Laat leeg als de URL al naar de array verwijst.",
     choicesbyurl: {
@@ -1310,7 +1324,6 @@ export var nlStrings = {
     dataList: "Voer een lijst met keuzes in die tijdens de invoer aan de respondent worden voorgesteld.",
     itemSize: "De instelling wijzigt alleen de grootte van de invoervelden en heeft geen invloed op de breedte van het vraagvak.",
     itemTitleWidth: "Hiermee stelt u een consistente breedte in voor alle artikellabels in pixels",
-    contentMode: "De optie \"Auto\" bepaalt automatisch de geschikte modus voor weergave - Afbeelding, Video of YouTube - op basis van de opgegeven bron-URL.",
     altText: "Dient als vervanging wanneer de afbeelding niet kan worden weergegeven op het apparaat van een gebruiker en voor toegankelijkheidsdoeleinden.",
     rateColorMode: "Definieert de kleur van de geselecteerde emoji wanneer het type Beoordelingspictogram is ingesteld op \"Smileys\". Kies tussen: \"Standaard\" - de geselecteerde emoji verschijnt in de standaard enquêtekleur; \"Schaal\" - de geselecteerde emoji erft de kleur van de beoordelingsschaal.",
     expression: {
@@ -1333,7 +1346,7 @@ export var nlStrings = {
       pattern: "Het patroon kan letterlijke tekenreeksen en de volgende tijdelijke aanduidingen bevatten: '9' - voor een cijfer; \"a\" - voor een hoofdletter of kleine letter; '#' - voor een cijfer of een hoofdletter of kleine letter. Gebruik backslash '\\' om een teken te escapen."
     },
     datetimemask: {
-      pattern: "Het patroon kan scheidingstekens en de volgende tijdelijke aanduidingen bevatten: 'm' - voor maandnummer; 'mm' - voor maandnummer, met voorloopnul voor eencijferige waarden; 'd' - voor dag van de maand; 'dd' - voor dag van de maand, met voorloopnul voor eencijferige waarden; \"yy\" - voor de laatste twee cijfers van het jaar; 'yyyy' - voor een jaar van vier cijfers."
+      pattern: "Het patroon kan scheidingstekens en de volgende tijdelijke aanduidingen bevatten:<br>'m' - Maandnummer.<br>'mm' - Maandnummer, met voorloopnul voor eencijferige waarden. <br>'d' - Dag van de maand. <br>'dd' - Dag van de maand, met voorloopnul voor eencijferige waarden. <br>'yy' - De laatste twee cijfers van het jaar. <br>'yyyy' - Viercijferig jaartal. <br>'H' - Uren in 24-uursnotatie. <br>'HH' - Uren in 24-uursnotatie, met voorloopnul voor eencijferige waarden. <br>'h' - Uren in 12-uurs notatie. <br>'hh' - Uren in 12-uursnotatie, met voorloopnul voor eencijferige waarden. <br>\"MM\" - Notulen. <br>'ss' - Seconden. <br>'TT' - 12-uurs kloktijd in hoofdletters (AM/PM). <br>'tt' - 12-uurs kloktijd in kleine letters (am/pm)."
     },
     numericmask: {
       decimalSeparator: "Een symbool dat wordt gebruikt om het fractionele deel te scheiden van het gehele deel van een weergegeven getal.",
@@ -1626,14 +1639,14 @@ editorLocalization.locales["nl"] = nlStrings;
 // lg.column_visibilityText: "make column {0} of question {1} visible" => "Kolom {0} van vraag {1} zichtbaar maken"
 // lg.column_enableText: "make column {0} of question {1} enable" => "Kolom {0} van vraag maken {1} inschakelen"
 // lg.column_requireText: "make column {0} of question {1} required" => "Kolom {0} met vraag {1} verplicht maken"
-// lg.trigger_setvalueEmptyText: "clear question value: {0}" => "duidelijke vraagwaarde: {0}"
+// lg.trigger_setvalueEmptyText: "clear question value: {0}" => "verwijder vraagwaarde: {0}"
 // lg.showAllQuestions: "All Questions" => "Alle vragen"
 // lg.showAllActionTypes: "All Action Types" => "Alle actietypen"
 // lg.uncompletedRule_title: "Logical rules are incomplete" => "Logische regels zijn onvolledig"
 // lg.uncompletedRule_text: "You have not completed some of the logical rules. If you leave the tab now, the changes will be lost. Do you still want to leave the tab without completing the changes?" => "U hebt een aantal van de logische regels niet voltooid. Als u het tabblad nu verlaat, gaan de wijzigingen verloren. Wilt u het tabblad nog steeds verlaten zonder de wijzigingen te voltooien?"
 // lg.uncompletedRule_apply: "Yes" => "Ja"
 // lg.uncompletedRule_cancel: "No, I want to complete the rules" => "Nee, ik wil de regels invullen"
-// pe.clear: "Clear" => "Duidelijk"
+// pe.clear: "Clear" => "Verwijder alles"
 // pe.set: "Set" => "Set"
 // pe.change: "Change" => "Veranderen"
 // pe.close: "Close" => "Sluiten"
@@ -2438,7 +2451,7 @@ editorLocalization.locales["nl"] = nlStrings;
 // pehelp.useDisplayValuesInDynamicTexts: "In single- and multiple-selection question types, each choice option has an ID and display value. When selected, this setting shows a display value instead of an ID value in HTML questions and dynamic titles and descriptions of survey elements." => "In vraagtypen met enkelvoudige en meervoudige selectie heeft elke keuzeoptie een ID en weergavewaarde. Als deze instelling is geselecteerd, wordt een weergavewaarde weergegeven in plaats van een ID-waarde in HTML-vragen en dynamische titels en beschrijvingen van enquête-elementen."
 // pehelp.clearIfInvisible: "Choose whether or not to clear question values hidden by conditional logic and when to do it. The \"Inherit\" option applies the survey-level setting (\"Upon survey completion\" by default)." => "Kies of vraagwaarden die verborgen zijn door voorwaardelijke logica al dan niet moeten worden gewist en wanneer u dit wilt doen. Met de optie \"Overnemen\" wordt de instelling op enquêteniveau toegepast (\"Na voltooiing van de enquête\" standaard)."
 // pehelp.choicesFromQuestionMode: "Choose from: \"All\" - copies all choice options from the selected question; \"Selected\" - dynamically copies only selected choice options; \"Unselected\" - dynamically copies only unselected choice options. The \"None\" and \"Other\" options are copied by default if enabled in the source question." => "Kies uit: \"Alle\" - kopieert alle keuzemogelijkheden van de geselecteerde vraag; \"Geselecteerd\" - kopieert dynamisch alleen geselecteerde keuzeopties; \"Niet geselecteerd\" - kopieert dynamisch alleen niet-geselecteerde keuzeopties. De opties \"Geen\" en \"Overig\" worden standaard gekopieerd als deze zijn ingeschakeld in de bronvraag."
-// pehelp.showOtherItem: "When selected, users can include additional input in a separate comment box." => "Als deze optie is geselecteerd, kunnen gebruikers extra invoer opnemen in een apart opmerkingenvak."
+// pehelp.showOtherItem: "When selected, users can include additional input in a separate comment box." => "Als deze optie is geselecteerd, kunnen gebruikers extra invoer invullen in een apart invulveld."
 // pehelp.separateSpecialChoices: "Displays each special choice option (\"None\", \"Other\", \"Select All\") on a new line, even when using a multiple-column layout." => "Geeft elke speciale keuzeoptie ('Geen', 'Overig', 'Alles selecteren') weer op een nieuwe regel, zelfs bij gebruik van een lay-out met meerdere kolommen."
 // pehelp.path: "Specify the location within the service dataset where the target array of objects is located. Leave empty if the URL already points to the array." => "Geef de locatie binnen de servicegegevensset op waar de doelmatrix met objecten zich bevindt. Laat leeg als de URL al naar de array verwijst."
 // pehelp.titleName: "Enter a uniform property name within the array of objects that contains the values you want to display in the choice list." => "Voer een uniforme eigenschapsnaam in binnen de matrix met objecten die de waarden bevat die u in de keuzelijst wilt weergeven."
@@ -2503,3 +2516,14 @@ editorLocalization.locales["nl"] = nlStrings;
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "Een of meer symbolen die na de waarde moeten worden weergegeven."
 // ed.translationSource: "Source: " => "Bron: "
 // ed.translationTarget: "Target: " => "Doel: "
+// ed.pagePlaceHolder: "The page is empty. Drag an element from the toolbox or click the button below." => "De pagina is leeg. Sleep een element uit de gereedschapskist of klik op de knop hieronder."
+// maskTypes.none: "None" => "Geen"
+// itemvalue@rows.visibleIf: "Make the row visible if" => "Maak de rij zichtbaar als"
+// itemvalue@rows.enableIf: "Make the row editable if" => "De rij bewerkbaar maken als:"
+// signaturepad.placeholderReadOnly: "Placeholder text in read-only or preview mode" => "Tijdelijke tekst in de modus Alleen-lezen of voorvertoning"
+// pe.textWrapEnabled: "Wrap choices" => "Wrap-keuzes"
+// image.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "De optie \"Auto\" bepaalt automatisch de geschikte modus voor weergave - Afbeelding, Video of YouTube - op basis van de opgegeven bron-URL."
+// imagepicker.contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options." => "Kies tussen \"Afbeelding\" en \"Video\" om de inhoudsmodus van de mediakiezer in te stellen. Als \"Afbeelding\" is geselecteerd, zorg er dan voor dat alle beschikbare opties afbeeldingsbestanden zijn in de volgende formaten: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Evenzo, als \"Video\" is geselecteerd, zorg er dan voor dat alle opties directe links zijn naar videobestanden in de volgende formaten: MP4, MOV, WMV, FLV, AVI, MKV. Houd er rekening mee dat YouTube-links niet worden ondersteund voor video-opties."
+// ed.selectFile: "Select a file" => "Selecteer een bestand"
+// ed.removeFile: "Remove the file" => "Verwijder het bestand"
+// pe.searchMode: "Search Mode" => "Zoekmodus"

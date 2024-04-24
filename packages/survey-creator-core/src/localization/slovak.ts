@@ -168,11 +168,14 @@ export var skStrings = {
     htmlPlaceHolder: "Obsah HTML bude tu.",
     panelPlaceHolder: "Tu položte otázku z panela nástrojov.",
     surveyPlaceHolder: "Prieskum je prázdny. Potiahnite prvok z panela s nástrojmi alebo kliknite na tlačidlo nižšie.",
+    pagePlaceHolder: "Stránka je prázdna. Potiahnite prvok z panela s nástrojmi alebo kliknite na tlačidlo nižšie.",
     imagePlaceHolder: "Presuňte obrázok sem alebo kliknite na tlačidlo nižšie a vyberte obrázok, ktorý chcete nahrať",
     imageChooseImage: "Vyberte obrázok",
     addNewTypeQuestion: "Pridať {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
     choices_Item: "Položka ",
+    selectFile: "Vyberte súbor",
+    removeFile: "Odstránenie súboru",
     lg: {
       addNewItem: "Pridať nové pravidlo",
       empty_tab: "Vytvorte pravidlo na prispôsobenie toku prieskumu.",
@@ -319,6 +322,7 @@ export var skStrings = {
       signatureAutoScaleEnabled: "Automatická zmena mierky oblasti podpisu",
       showPlaceholder: "Zobrazenie zástupného symbolu",
       placeholder: "Zástupný text",
+      placeholderReadOnly: "Zástupný text v režime iba na čítanie alebo v režime ukážky",
       allowClear: "Zobrazenie tlačidla Vymazať v oblasti podpisu",
       penMinWidth: "Minimálna šírka pera",
       penMaxWidth: "Maximálna šírka pera",
@@ -493,6 +497,7 @@ export var skStrings = {
     descriptionPlaceholder: "Zadať opis",
     surveyDescriptionPlaceholder: "Zadať opis prieskumu",
     pageDescriptionPlaceholder: "Zadať opis stránky",
+    textWrapEnabled: "Možnosti zabalenia",
     showOtherItem: "Obsahuje inú položku",
     otherText: "Text inej položky",
     showNoneItem: "Neobsahuje žiadnu položku",
@@ -634,6 +639,7 @@ export var skStrings = {
     textUpdateMode: "Aktualizácia hodnoty textovej otázky",
     maskType: "Typ vstupnej masky",
     maskTypes: {
+      none: "Žiadny",
       patternmask: "Vzorka",
       numericmask: "Numerický",
       datetimemask: "Dátum a čas",
@@ -652,6 +658,7 @@ export var skStrings = {
     labelTrue: "Označenie \"Pravda\"",
     labelFalse: "Označenie \"False\"",
     allowClear: "Zobraziť titulok možností",
+    searchMode: "Režim vyhľadávania",
     displayStyle: "Štýl zobrazenia hodnoty",
     format: "Formátovaný reťazec",
     maximumFractionDigits: "Maximálny zlomkový počet číslic",
@@ -720,6 +727,10 @@ export var skStrings = {
     itemvalue: {
       visibleIf: "Možnosť zobraziť, ak",
       enableIf: "Túto možnosť nastavte tak, aby sa dala vybrať, ak"
+    },
+    "itemvalue@rows": {
+      visibleIf: "Nastavenie riadka ako viditeľného, ak",
+      enableIf: "Nastavte riadok tak, aby ho bolo možné upravovať, ak"
     },
     imageitemvalue: {
       text: "Alternatívny text"
@@ -1044,8 +1055,7 @@ export var skStrings = {
     searchMode: {
       contains: "Obsahuje",
       startsWith: "Začína sa"
-    },
-    textWrapEnabled: "Možnosti zabalenia"
+    }
   },
   // Operators
   op: {
@@ -1195,10 +1205,14 @@ export var skStrings = {
       imageHeight: "Upraví výšku obrázka vo výsledkoch prieskumu.",
       imageWidth: "Upraví šírku obrázka vo výsledkoch prieskumu."
     },
+    image: {
+      contentMode: "Možnosť \"Auto\" automaticky určuje vhodný režim zobrazenia - obrázok, video alebo YouTube - na základe poskytnutej zdrojovej adresy URL."
+    },
     imagepicker: {
       imageHeight: "Prepíše hodnoty minimálnej a maximálnej výšky.",
       imageWidth: "Prepíše hodnoty minimálnej a maximálnej šírky.",
-      choices: "\"Hodnota\" slúži ako ID položky používané v podmienených pravidlách; \"Text\" sa zobrazuje respondentom."
+      choices: "\"Hodnota\" slúži ako ID položky používané v podmienených pravidlách; \"Text\" sa zobrazuje respondentom.",
+      contentMode: "Vyberte si medzi \"Obrázok\" a \"Video\" a nastavte režim obsahu výberu médií. Ak je vybratá možnosť \"Obrázok\", uistite sa, že všetky poskytnuté možnosti sú obrazové súbory v nasledujúcich formátoch: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Podobne, ak je vybratá možnosť \"Video\", uistite sa, že všetky možnosti sú priamymi odkazmi na video súbory v nasledujúcich formátoch: MP4, MOV, WMV, FLV, AVI, MKV. Upozorňujeme, že možnosti videí nie sú podporované odkazmi na YouTube."
     },
     text: {
       size: "Toto nastavenie zmení iba veľkosť vstupného poľa a neovplyvní šírku poľa otázky. Ak chcete obmedziť akceptovanú vstupnú dĺžku, prejdite na <b>Overenie → Maximálny počet znakov</b>."
@@ -1310,7 +1324,6 @@ export var skStrings = {
     dataList: "Zadajte zoznam možností, ktoré budú respondentovi navrhnuté počas vstupu.",
     itemSize: "Toto nastavenie zmení iba veľkosť vstupných polí a neovplyvní šírku poľa otázok.",
     itemTitleWidth: "Nastavuje konzistentnú šírku pre všetky štítky položiek v pixeloch",
-    contentMode: "Možnosť \"Auto\" automaticky určuje vhodný režim zobrazenia - obrázok, video alebo YouTube - na základe poskytnutej zdrojovej adresy URL.",
     altText: "Slúži ako náhrada, keď obrázok nie je možné zobraziť na zariadení používateľa a na účely prístupnosti.",
     rateColorMode: "Definuje farbu vybraných emodži, keď je typ ikony hodnotenia nastavený na \"Smajlíky\". Vyberte si medzi: \"Predvolené\" - vybrané emodži sa zobrazia v predvolenej farbe prieskumu; \"Mierka\" - vybrané emodži zdedí farbu z hodnotiacej stupnice.",
     expression: {
@@ -1333,7 +1346,7 @@ export var skStrings = {
       pattern: "Vzor môže obsahovať reťazcové literály a nasledujúce zástupné symboly: \"9\" - pre číslicu; \"a\" - pre veľké alebo malé písmeno; '#' - pre číslicu alebo veľké alebo malé písmeno. Použite opačné lomítko \"\\\" na únik z postavy."
     },
     datetimemask: {
-      pattern: "Vzor môže obsahovať oddeľovacie znaky a nasledujúce zástupné symboly: \"m\" - pre číslo mesiaca; \"mm\" - pre číslo mesiaca, s úvodnou nulou pre jednociferné hodnoty; \"d\" - pre deň v mesiaci; \"dd\" - pre deň v mesiaci s počiatočnou nulou pre jednociferné hodnoty; \"yy\" - pre posledné dve číslice roka; \"rrrr\" - na štvorciferný rok."
+      pattern: "Vzor môže obsahovať oddeľovacie znaky a nasledujúce zástupné symboly:<br>\"m\" - číslo mesiaca.<br>′mm′ — číslo mesiaca s nulou na začiatku pre jednociferné hodnoty. <br>\"d\" - Deň v mesiaci. <br>\"dd\" - Deň v mesiaci s počiatočnou nulou pre jednociferné hodnoty. <br>\"yy\" - posledné dve číslice roka. <br>\"rrrr\" - štvormiestny rok. <br>\"H\" - hodiny v 24-hodinovom formáte. <br>\"HH\" - hodiny v 24-hodinovom formáte s úvodnou nulou pre jednociferné hodnoty. <br>\"h\" - hodiny v 12-hodinovom formáte. <br>\"hh\" - hodiny v 12-hodinovom formáte s úvodnou nulou pre jednociferné hodnoty. <br>\"MM\" - minúty. <br>\"ss\" - sekundy. <br>\"TT\" - 12-hodinový časový úsek veľkými písmenami (AM/PM). <br>\"TT\" - 12-hodinová perióda malých písmen (dopoludnia/popoludní)."
     },
     numericmask: {
       decimalSeparator: "Symbol používaný na oddelenie zlomkovej časti od celočíselnej časti zobrazeného čísla.",
@@ -2476,3 +2489,14 @@ editorLocalization.locales["sk"] = skStrings;
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "Jeden alebo viac symbolov, ktoré sa zobrazia za hodnotou."
 // ed.translationSource: "Source: " => "Zdroj: "
 // ed.translationTarget: "Target: " => "Cieľ: "
+// ed.pagePlaceHolder: "The page is empty. Drag an element from the toolbox or click the button below." => "Stránka je prázdna. Potiahnite prvok z panela s nástrojmi alebo kliknite na tlačidlo nižšie."
+// maskTypes.none: "None" => "Žiadny"
+// itemvalue@rows.visibleIf: "Make the row visible if" => "Nastavenie riadka ako viditeľného, ak"
+// itemvalue@rows.enableIf: "Make the row editable if" => "Nastavte riadok tak, aby ho bolo možné upravovať, ak"
+// signaturepad.placeholderReadOnly: "Placeholder text in read-only or preview mode" => "Zástupný text v režime iba na čítanie alebo v režime ukážky"
+// pe.textWrapEnabled: "Wrap choices" => "Možnosti zabalenia"
+// image.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "Možnosť \"Auto\" automaticky určuje vhodný režim zobrazenia - obrázok, video alebo YouTube - na základe poskytnutej zdrojovej adresy URL."
+// imagepicker.contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options." => "Vyberte si medzi \"Obrázok\" a \"Video\" a nastavte režim obsahu výberu médií. Ak je vybratá možnosť \"Obrázok\", uistite sa, že všetky poskytnuté možnosti sú obrazové súbory v nasledujúcich formátoch: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Podobne, ak je vybratá možnosť \"Video\", uistite sa, že všetky možnosti sú priamymi odkazmi na video súbory v nasledujúcich formátoch: MP4, MOV, WMV, FLV, AVI, MKV. Upozorňujeme, že možnosti videí nie sú podporované odkazmi na YouTube."
+// ed.selectFile: "Select a file" => "Vyberte súbor"
+// ed.removeFile: "Remove the file" => "Odstránenie súboru"
+// pe.searchMode: "Search Mode" => "Režim vyhľadávania"

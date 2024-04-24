@@ -43,7 +43,7 @@
             :title="undefined"
             :aria-label="undefined"
           >
-            <sv-svg-icon :iconName="'icon-file'" :size="24"></sv-svg-icon>
+            <sv-svg-icon role="button" :iconName="'icon-file'" :size="24" :title="adorner.selectFileTitle"></sv-svg-icon>
           </span>
           <span
             class="svc-context-button svc-context-button--danger"
@@ -52,7 +52,7 @@
             :title="undefined"
             :aria-label="undefined"
           >
-            <sv-svg-icon :iconName="'icon-delete'" :size="24"></sv-svg-icon>
+            <sv-svg-icon role="button" :iconName="'icon-delete'" :size="24" :title="adorner.removeFileTitle"></sv-svg-icon>
           </span>
         </div>
       </template>

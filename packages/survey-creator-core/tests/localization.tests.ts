@@ -48,6 +48,7 @@ test("Get property description from peHelp. based on class name", () => {
   peHelp.testProperty2 = "Help_All2";
   peHelp.survey = { testProperty: "Help_Survey" };
   peHelp.question = { testProperty: "Help_Question", testProperty2: "Help_Question2", testProperty3: "Help_Question3" };
+  peHelp["question@row"] = { testProperty: "Help_Question@Row" };
   peHelp.text = { testProperty: "Help_Text" };
   expect(editorLocalization.getPropertyHelpInEditor("base", "testProperty")).toEqual("Help_All");
   expect(editorLocalization.getPropertyHelpInEditor("page", "testProperty")).toEqual("Help_All");
@@ -67,6 +68,10 @@ test("Get property description from peHelp. based on class name", () => {
   expect(editorLocalization.getPropertyHelpInEditor("text", "test", "expression")).toBeFalsy();
   expect(editorLocalization.getPropertyHelpInEditor("dropdown", "valueName", "string")).toBeTruthy();
   expect(editorLocalization.getPropertyHelpInEditor("choicesByUrl", "valueName", "string")).toBeTruthy();
+
+  expect(editorLocalization.getPropertyHelpInEditor("question@row", "testProperty")).toEqual("Help_Question@Row");
+  expect(editorLocalization.getPropertyHelpInEditor("question@row", "testProperty2")).toEqual("Help_Question2");
+  expect(editorLocalization.getPropertyHelpInEditor("text@row", "testProperty")).toEqual("Help_Text");
 });
 test("Get property placeholder", () => {
   defaultStrings.pe["valueName_placeholder"] = "pl_val1";

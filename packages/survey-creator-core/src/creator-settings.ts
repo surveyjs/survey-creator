@@ -215,6 +215,7 @@ export interface ISurveyCreatorOptions {
   enableLinkFileEditor: boolean;
   inplaceEditForValues: boolean;
   rootElement?: HTMLElement;
+  previewShowResults: boolean;
   getObjectDisplayName(obj: Base, area: string, reason: string, displayName: string): string;
   onCanShowPropertyCallback(
     object: any,
@@ -328,9 +329,11 @@ export interface ISurveyCreatorOptions {
     callback: (files: File[]) => void,
     context?: { element: Base, item?: any, elementType?: string, propertyName?: string }
   ): void;
+  translationLocalesOrder: Array<string>;
 }
 
 export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
+  previewShowResults: boolean;
   rootElement: HTMLElement;
   enableLinkFileEditor: boolean;
   getProcessedTranslationItemText(locale: string, locString: ILocalizableString, newText: string, obj: any): string {
@@ -480,6 +483,7 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   getHasMachineTranslation(): boolean { return this.machineTranslationValue; }
   doMachineTranslation(fromLocale: string, toLocale: string, strings: Array<string>, callback: (translated: Array<string>) => void): void { }
   chooseFiles(input: HTMLInputElement, callback: (files: File[]) => void, context?: { element: Base, item?: any, elementType?: string, propertyName?: string }): void { }
+  translationLocalesOrder: Array<string> = [];
 }
 
 StylesManager.applyTheme("defaultV2");

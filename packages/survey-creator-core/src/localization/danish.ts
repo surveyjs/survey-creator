@@ -168,11 +168,14 @@ export var danishStrings = {
     htmlPlaceHolder: "HTML-indhold vil være her.",
     panelPlaceHolder: "Smid et spørgsmål fra værktøjskassen her.",
     surveyPlaceHolder: "Undersøgelsen er tom. Træk et element fra værktøjskassen, eller klik på knappen nedenfor.",
+    pagePlaceHolder: "Siden er tom. Træk et element fra værktøjskassen, eller klik på knappen nedenfor.",
     imagePlaceHolder: "Træk og slip et billede her, eller klik på knappen nedenfor, og vælg et billede, der skal uploades",
     imageChooseImage: "Vælg billede",
     addNewTypeQuestion: "Tilføj {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
     choices_Item: "Vare ",
+    selectFile: "Vælg en fil",
+    removeFile: "Fjern filen",
     lg: {
       addNewItem: "Tilføj ny regel",
       empty_tab: "Opret en regel for at tilpasse undersøgelsens flow.",
@@ -319,6 +322,7 @@ export var danishStrings = {
       signatureAutoScaleEnabled: "Skaler signaturområdet automatisk",
       showPlaceholder: "Vis pladsholderen",
       placeholder: "Pladsholdertekst",
+      placeholderReadOnly: "Pladsholdertekst i skrivebeskyttet tilstand eller eksempeltilstand",
       allowClear: "Vis knappen Ryd i signaturområdet",
       penMinWidth: "Mindste bredde på pennen",
       penMaxWidth: "Maksimal bredde på pennen",
@@ -493,6 +497,7 @@ export var danishStrings = {
     descriptionPlaceholder: "Beskrivelse",
     surveyDescriptionPlaceholder: "Beskrivelse",
     pageDescriptionPlaceholder: "Beskrivelse",
+    textWrapEnabled: "Valg af wrap",
     showOtherItem: "Har andet element",
     otherText: "Andet element tekst",
     showNoneItem: "Tillad indstillingen Ingen",
@@ -634,6 +639,7 @@ export var danishStrings = {
     textUpdateMode: "Opdater værdi for tekstspørgsmål",
     maskType: "Type af inputmaske",
     maskTypes: {
+      none: "Ingen",
       patternmask: "Mønster",
       numericmask: "Numerisk",
       datetimemask: "Dato og klokkeslæt",
@@ -652,6 +658,7 @@ export var danishStrings = {
     labelTrue: "\"True\" etiket",
     labelFalse: "Etiketten \"Falsk\"",
     allowClear: "Vis knappen Ryd",
+    searchMode: "Søgetilstand",
     displayStyle: "Værdi visningsstil",
     format: "Formateret streng",
     maximumFractionDigits: "Maksimalt antal brøkdele",
@@ -720,6 +727,10 @@ export var danishStrings = {
     itemvalue: {
       visibleIf: "Gør indstillingen synlig, hvis",
       enableIf: "Gør indstillingen valgbar, hvis"
+    },
+    "itemvalue@rows": {
+      visibleIf: "Gør rækken synlig, hvis",
+      enableIf: "Gør rækken redigerbar, hvis"
     },
     imageitemvalue: {
       text: "Alternativ tekst"
@@ -1044,8 +1055,7 @@ export var danishStrings = {
     searchMode: {
       contains: "Indeholder",
       startsWith: "Begynder med"
-    },
-    textWrapEnabled: "Valg af wrap"
+    }
   },
   // Operators
   op: {
@@ -1195,10 +1205,14 @@ export var danishStrings = {
       imageHeight: "Justerer billedets højde i undersøgelsesresultaterne.",
       imageWidth: "Justerer billedets bredde i undersøgelsesresultaterne."
     },
+    image: {
+      contentMode: "Indstillingen \"Auto\" bestemmer automatisk den passende tilstand til visning - Billede, Video eller YouTube - baseret på den angivne kilde-URL."
+    },
     imagepicker: {
       imageHeight: "Tilsidesætter minimum- og maksimumhøjdeværdierne.",
       imageWidth: "Tilsidesætter værdierne for minimum- og maksimumbredde.",
-      choices: "\"Værdi\" fungerer som et vare-id, der bruges i betingede regler; \"Tekst\" vises til respondenterne."
+      choices: "\"Værdi\" fungerer som et vare-id, der bruges i betingede regler; \"Tekst\" vises til respondenterne.",
+      contentMode: "Vælg mellem \"Billede\" og \"Video\" for at indstille medievælgerens indholdstilstand. Hvis \"Billede\" er valgt, skal du sikre dig, at alle angivne indstillinger er billedfiler i følgende formater: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Tilsvarende, hvis \"Video\" er valgt, skal du sikre dig, at alle indstillinger er direkte links til videofiler i følgende formater: MP4, MOV, WMV, FLV, AVI, MKV. Bemærk, at YouTube-links ikke understøttes for videoindstillinger."
     },
     text: {
       size: "Denne indstilling ændrer kun størrelsen på inputfeltet og påvirker ikke bredden af spørgsmålsfeltet. Hvis du vil begrænse den accepterede inputlængde, skal du gå til <b>Validering → Maksimal tegngrænse</b>."
@@ -1310,7 +1324,6 @@ export var danishStrings = {
     dataList: "Angiv en liste over valgmuligheder, der vil blive foreslået svarpersonen under input.",
     itemSize: "Indstillingen ændrer kun størrelsen på inputfelterne og påvirker ikke bredden af spørgsmålsfeltet.",
     itemTitleWidth: "Angiver ensartet bredde for alle vareetiketter i pixel",
-    contentMode: "Indstillingen \"Auto\" bestemmer automatisk den passende tilstand til visning - Billede, Video eller YouTube - baseret på den angivne kilde-URL.",
     altText: "Fungerer som erstatning, når billedet ikke kan vises på en brugers enhed og af tilgængelighedshensyn.",
     rateColorMode: "Definerer farven på den valgte emoji, når ikontypen Vurdering er indstillet til \"Smileys\". Vælg mellem: \"Standard\" - den valgte emoji vises i standard undersøgelsesfarve; \"Skala\" - den valgte emoji arver farve fra vurderingsskalaen.",
     expression: {
@@ -1333,7 +1346,7 @@ export var danishStrings = {
       pattern: "Mønsteret kan indeholde strengkonstanter og følgende pladsholdere: '9' - for et ciffer; »a« - for store eller små bogstaver '#' - for et ciffer eller et stort eller lille bogstav. Brug omvendt skråstreg '\\' for at undslippe et tegn."
     },
     datetimemask: {
-      pattern: "Mønsteret kan indeholde separatortegn og følgende pladsholdere: 'm' - for månedsnummer; »mm« — for månedsnummer med foranstillet nul for encifrede værdier 'd' - for dag i måneden; 'dd' - for dag i måneden med foranstillet nul for encifrede værdier 'yy' - for de sidste to cifre i året; 'YYYY' - for et firecifret år."
+      pattern: "Mønsteret kan indeholde separatortegn og følgende pladsholdere:<br>'m' - Månedsnummer.<br>'mm' – Månedstal med foranstillet nul for encifrede værdier. <br>'d' - Dag i måneden. <br>'dd' – Dag i måneden med foranstillet nul for encifrede værdier. <br>'yy' - De sidste to cifre i året. <br>'åååå' - Firecifret årstal. <br>'H' - Timer i 24-timers format. <br>'HH' – timer i 24-timers format med foranstillet nul for encifrede værdier. <br>'h' - Timer i 12-timers format. <br>'hh' – Timer i 12-timers format med foranstillet nul for encifrede værdier. <br>»MM« - Minutter. <br>'ss' - sekunder. <br>'TT' - 12-timers urperiode med store bogstaver (AM/PM). <br>'TT' - 12-timers urperiode med små bogstaver (am / pm)."
     },
     numericmask: {
       decimalSeparator: "Et symbol, der bruges til at adskille brøkdelen fra heltalsdelen af et vist tal.",
@@ -2708,3 +2721,14 @@ editorLocalization.locales["da"] = danishStrings;
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "Et eller flere symboler, der skal vises efter værdien."
 // ed.translationSource: "Source: " => "Kilde: "
 // ed.translationTarget: "Target: " => "Mål: "
+// ed.pagePlaceHolder: "The page is empty. Drag an element from the toolbox or click the button below." => "Siden er tom. Træk et element fra værktøjskassen, eller klik på knappen nedenfor."
+// maskTypes.none: "None" => "Ingen"
+// itemvalue@rows.visibleIf: "Make the row visible if" => "Gør rækken synlig, hvis"
+// itemvalue@rows.enableIf: "Make the row editable if" => "Gør rækken redigerbar, hvis"
+// signaturepad.placeholderReadOnly: "Placeholder text in read-only or preview mode" => "Pladsholdertekst i skrivebeskyttet tilstand eller eksempeltilstand"
+// pe.textWrapEnabled: "Wrap choices" => "Valg af wrap"
+// image.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "Indstillingen \"Auto\" bestemmer automatisk den passende tilstand til visning - Billede, Video eller YouTube - baseret på den angivne kilde-URL."
+// imagepicker.contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options." => "Vælg mellem \"Billede\" og \"Video\" for at indstille medievælgerens indholdstilstand. Hvis \"Billede\" er valgt, skal du sikre dig, at alle angivne indstillinger er billedfiler i følgende formater: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Tilsvarende, hvis \"Video\" er valgt, skal du sikre dig, at alle indstillinger er direkte links til videofiler i følgende formater: MP4, MOV, WMV, FLV, AVI, MKV. Bemærk, at YouTube-links ikke understøttes for videoindstillinger."
+// ed.selectFile: "Select a file" => "Vælg en fil"
+// ed.removeFile: "Remove the file" => "Fjern filen"
+// pe.searchMode: "Search Mode" => "Søgetilstand"
