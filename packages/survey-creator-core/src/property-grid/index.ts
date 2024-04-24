@@ -1323,7 +1323,6 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
     surveyLocalization.currentLocale = prevCurrentLocale;
     this.onModalPropertyEditorShown(editor, property, question, options);
     options.onPropertyGridShowModalCallback(obj, property, question, surveyPropertyEditor, popupModel);
-    return;
   }
   protected onModalPropertyEditorShown(editor: IPropertyGridEditor,
     property: JsonObjectProperty, question: Question,
