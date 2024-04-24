@@ -174,6 +174,8 @@ export var msStrings = {
     addNewTypeQuestion: "Tambah {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
     choices_Item: "Perkara ",
+    selectFile: "Pilih fail",
+    removeFile: "Mengalih keluar fail",
     lg: {
       addNewItem: "Tambah peraturan baru",
       empty_tab: "Cipta peraturan untuk menyesuaikan aliran tinjauan.",
@@ -656,6 +658,7 @@ export var msStrings = {
     labelTrue: "Label \"Benar\"",
     labelFalse: "Label \"Palsu\"",
     allowClear: "Tunjukkan kapsyen pilihan",
+    searchMode: "Mod Carian",
     displayStyle: "Gaya paparan nilai",
     format: "Rentetan yang diformatkan",
     maximumFractionDigits: "Nombor pecahan maksimum",
@@ -2494,3 +2497,6 @@ editorLocalization.locales["ms"] = msStrings;
 // pe.textWrapEnabled: "Wrap choices" => "Pilihan balut"
 // image.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "Pilihan \"Auto\" secara automatik menentukan mod yang sesuai untuk paparan - Imej, Video atau YouTube - berdasarkan URL sumber yang disediakan."
 // imagepicker.contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options." => "Pilih antara \"Imej\" dan \"Video\" untuk menetapkan mod kandungan pemilih media. Jika \"Imej\" dipilih, pastikan semua pilihan yang disediakan adalah fail imej dalam format berikut: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Begitu juga, jika \"Video\" dipilih, pastikan semua pilihan adalah pautan langsung ke fail video dalam format berikut: MP4, MOV, WMV, FLV, AVI, MKV. Sila ambil perhatian bahawa pautan YouTube tidak disokong untuk pilihan video."
+// ed.selectFile: "Select a file" => "Pilih fail"
+// ed.removeFile: "Remove the file" => "Mengalih keluar fail"
+// pe.searchMode: "Search Mode" => "Mod Carian"

@@ -174,6 +174,8 @@ export var koreanStrings = {
     addNewTypeQuestion: "{0} 추가", //{0} is localizable question type
     chooseLogoPlaceholder: "[로고]",
     choices_Item: "항목 ",
+    selectFile: "파일 선택",
+    removeFile: "파일 제거",
     lg: {
       addNewItem: "새 규칙 추가",
       empty_tab: "설문 조사의 흐름을 사용자 지정하는 규칙을 만듭니다.",
@@ -656,6 +658,7 @@ export var koreanStrings = {
     labelTrue: "\"True\" 레이블",
     labelFalse: "\"거짓\" 레이블",
     allowClear: "지우기 단추 표시",
+    searchMode: "검색 모드",
     displayStyle: "값 표시 스타일",
     format: "서식이 지정된 문자열",
     maximumFractionDigits: "최대 소수 자릿수",
@@ -2745,3 +2748,6 @@ editorLocalization.locales["ko"] = koreanStrings;
 // pe.textWrapEnabled: "Wrap choices" => "줄 바꿈 선택"
 // image.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "\"자동\" 옵션은 제공된 소스 URL을 기반으로 표시에 적합한 모드(이미지, 비디오 또는 YouTube)를 자동으로 결정합니다."
 // imagepicker.contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options." => "\"이미지\"와 \"비디오\" 중에서 선택하여 미디어 선택기의 콘텐츠 모드를 설정합니다. \"이미지\"를 선택한 경우 제공된 모든 옵션이 JPEG, GIF, PNG, APNG, SVG, BMP, ICO 형식의 이미지 파일인지 확인하십시오. 마찬가지로 \"비디오\"를 선택한 경우 모든 옵션이 MP4, MOV, WMV, FLV, AVI, MKV 형식의 비디오 파일에 대한 직접 링크인지 확인하십시오. YouTube 링크는 비디오 옵션에서 지원되지 않습니다."
+// ed.selectFile: "Select a file" => "파일 선택"
+// ed.removeFile: "Remove the file" => "파일 제거"
+// pe.searchMode: "Search Mode" => "검색 모드"

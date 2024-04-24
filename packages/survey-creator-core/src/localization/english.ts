@@ -675,6 +675,7 @@ export var enStrings = {
     labelTrue: "Label for \"True\"",
     labelFalse: "Label for \"False\"",
     allowClear: "Show the Clear button",
+    searchMode: "Search Mode",
     displayStyle: "Display format",
     format: "Formatted string",
     maximumFractionDigits: "Maximum fractional digits",

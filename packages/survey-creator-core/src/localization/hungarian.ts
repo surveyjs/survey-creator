@@ -174,6 +174,8 @@ export var huStrings = {
     addNewTypeQuestion: "{0} hozzáadása", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGÓ]",
     choices_Item: "Cikk ",
+    selectFile: "Válasszon ki egy fájlt",
+    removeFile: "A fájl eltávolítása",
     lg: {
       addNewItem: "Új szabály hozzáadása",
       empty_tab: "Hozzon létre egy szabályt a felmérés folyamatának testreszabásához.",
@@ -656,6 +658,7 @@ export var huStrings = {
     labelTrue: "\"Igaz\" címke",
     labelFalse: "\"Hamis\" címke",
     allowClear: "A Törlés gomb megjelenítése",
+    searchMode: "Keresési mód",
     displayStyle: "Értékmegjelenítési stílus",
     format: "Formázott karakterlánc",
     maximumFractionDigits: "Tört számjegyek maximális száma",
@@ -2694,3 +2697,6 @@ editorLocalization.locales["hu"] = huStrings;
 // pe.textWrapEnabled: "Wrap choices" => "Tördelési lehetőségek"
 // image.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "Az \"Automatikus\" opció automatikusan meghatározza a megjelenítéshez megfelelő módot - Kép, Videó vagy YouTube - a megadott forrás URL alapján."
 // imagepicker.contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options." => "Válasszon a \"Kép\" és a \"Videó\" között a médiaválasztó tartalommódjának beállításához. Ha a \"Kép\" van kiválasztva, győződjön meg arról, hogy az összes rendelkezésre álló opció a következő formátumú képfájlok: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Hasonlóképpen, ha a \"Video\" van kiválasztva, győződjön meg arról, hogy az összes opció közvetlen link a következő formátumú videofájlokhoz: MP4, MOV, WMV, FLV, AVI, MKV. Felhívjuk figyelmét, hogy a YouTube-linkek nem támogatottak a videóbeállításoknál."
+// ed.selectFile: "Select a file" => "Válasszon ki egy fájlt"
+// ed.removeFile: "Remove the file" => "A fájl eltávolítása"
+// pe.searchMode: "Search Mode" => "Keresési mód"
