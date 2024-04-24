@@ -174,6 +174,8 @@ export var skStrings = {
     addNewTypeQuestion: "Pridať {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
     choices_Item: "Položka ",
+    selectFile: "Vyberte súbor",
+    removeFile: "Odstránenie súboru",
     lg: {
       addNewItem: "Pridať nové pravidlo",
       empty_tab: "Vytvorte pravidlo na prispôsobenie toku prieskumu.",
@@ -656,6 +658,7 @@ export var skStrings = {
     labelTrue: "Označenie \"Pravda\"",
     labelFalse: "Označenie \"False\"",
     allowClear: "Zobraziť titulok možností",
+    searchMode: "Režim vyhľadávania",
     displayStyle: "Štýl zobrazenia hodnoty",
     format: "Formátovaný reťazec",
     maximumFractionDigits: "Maximálny zlomkový počet číslic",
@@ -2494,3 +2497,6 @@ editorLocalization.locales["sk"] = skStrings;
 // pe.textWrapEnabled: "Wrap choices" => "Možnosti zabalenia"
 // image.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "Možnosť \"Auto\" automaticky určuje vhodný režim zobrazenia - obrázok, video alebo YouTube - na základe poskytnutej zdrojovej adresy URL."
 // imagepicker.contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options." => "Vyberte si medzi \"Obrázok\" a \"Video\" a nastavte režim obsahu výberu médií. Ak je vybratá možnosť \"Obrázok\", uistite sa, že všetky poskytnuté možnosti sú obrazové súbory v nasledujúcich formátoch: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Podobne, ak je vybratá možnosť \"Video\", uistite sa, že všetky možnosti sú priamymi odkazmi na video súbory v nasledujúcich formátoch: MP4, MOV, WMV, FLV, AVI, MKV. Upozorňujeme, že možnosti videí nie sú podporované odkazmi na YouTube."
+// ed.selectFile: "Select a file" => "Vyberte súbor"
+// ed.removeFile: "Remove the file" => "Odstránenie súboru"
+// pe.searchMode: "Search Mode" => "Režim vyhľadávania"
