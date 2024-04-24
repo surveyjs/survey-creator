@@ -168,11 +168,14 @@ export var koreanStrings = {
     htmlPlaceHolder: "HTML 콘텐츠가 여기에 있습니다.",
     panelPlaceHolder: "도구 상자에서 질문을 삭제하세요.",
     surveyPlaceHolder: "설문 조사가 비어 있습니다. 도구 상자에서 요소를 드래그하거나 아래 버튼을 클릭합니다.",
+    pagePlaceHolder: "페이지가 비어 있습니다. 도구 상자에서 요소를 드래그하거나 아래 버튼을 클릭합니다.",
     imagePlaceHolder: "여기에 이미지를 끌어다 놓거나 아래 버튼을 클릭하고 업로드할 이미지를 선택하세요.",
     imageChooseImage: "이미지 선택",
     addNewTypeQuestion: "{0} 추가", //{0} is localizable question type
     chooseLogoPlaceholder: "[로고]",
     choices_Item: "항목 ",
+    selectFile: "파일 선택",
+    removeFile: "파일 제거",
     lg: {
       addNewItem: "새 규칙 추가",
       empty_tab: "설문 조사의 흐름을 사용자 지정하는 규칙을 만듭니다.",
@@ -319,6 +322,7 @@ export var koreanStrings = {
       signatureAutoScaleEnabled: "서명 영역 자동 크기 조정",
       showPlaceholder: "자리 표시자 표시",
       placeholder: "자리 표시자 텍스트",
+      placeholderReadOnly: "읽기 전용 또는 미리 보기 모드의 자리 표시자 텍스트",
       allowClear: "서명 영역 내에 지우기 단추 표시",
       penMinWidth: "최소 펜 너비",
       penMaxWidth: "최대 펜 너비",
@@ -493,6 +497,7 @@ export var koreanStrings = {
     descriptionPlaceholder: "묘사",
     surveyDescriptionPlaceholder: "묘사",
     pageDescriptionPlaceholder: "묘사",
+    textWrapEnabled: "줄 바꿈 선택",
     showOtherItem: "다른 항목이 있습니다",
     otherText: "기타 항목 텍스트",
     showNoneItem: "없음 옵션 허용",
@@ -634,6 +639,7 @@ export var koreanStrings = {
     textUpdateMode: "텍스트 질문 값 업데이트",
     maskType: "입력 마스크 유형",
     maskTypes: {
+      none: "없음",
       patternmask: "무늬",
       numericmask: "숫자",
       datetimemask: "날짜 및 시간",
@@ -652,6 +658,7 @@ export var koreanStrings = {
     labelTrue: "\"True\" 레이블",
     labelFalse: "\"거짓\" 레이블",
     allowClear: "지우기 단추 표시",
+    searchMode: "검색 모드",
     displayStyle: "값 표시 스타일",
     format: "서식이 지정된 문자열",
     maximumFractionDigits: "최대 소수 자릿수",
@@ -720,6 +727,10 @@ export var koreanStrings = {
     itemvalue: {
       visibleIf: "다음과 같은 경우 옵션을 표시합니다.",
       enableIf: "다음과 같은 경우 옵션을 선택할 수 있도록 합니다."
+    },
+    "itemvalue@rows": {
+      visibleIf: "다음과 같은 경우 행을 표시합니다.",
+      enableIf: "다음과 같은 경우 행을 편집 가능하게 만듭니다."
     },
     imageitemvalue: {
       text: "대체 텍스트"
@@ -1044,8 +1055,7 @@ export var koreanStrings = {
     searchMode: {
       contains: "포함",
       startsWith: "다음으로 시작"
-    },
-    textWrapEnabled: "줄 바꿈 선택"
+    }
   },
   // Operators
   op: {
@@ -1195,10 +1205,14 @@ export var koreanStrings = {
       imageHeight: "현장조사 결과에서 이미지의 높이를 조정합니다.",
       imageWidth: "현장조사 결과에서 이미지의 너비를 조정합니다."
     },
+    image: {
+      contentMode: "\"자동\" 옵션은 제공된 소스 URL을 기반으로 표시에 적합한 모드(이미지, 비디오 또는 YouTube)를 자동으로 결정합니다."
+    },
     imagepicker: {
       imageHeight: "최소 및 최대 높이 값을 재정의합니다.",
       imageWidth: "최소 및 최대 너비 값을 재정의합니다.",
-      choices: "\"Value\"는 조건부 규칙에 사용되는 항목 ID로 사용됩니다. 응답자에게 \"텍스트\"가 표시됩니다."
+      choices: "\"Value\"는 조건부 규칙에 사용되는 항목 ID로 사용됩니다. 응답자에게 \"텍스트\"가 표시됩니다.",
+      contentMode: "\"이미지\"와 \"비디오\" 중에서 선택하여 미디어 선택기의 콘텐츠 모드를 설정합니다. \"이미지\"를 선택한 경우 제공된 모든 옵션이 JPEG, GIF, PNG, APNG, SVG, BMP, ICO 형식의 이미지 파일인지 확인하십시오. 마찬가지로 \"비디오\"를 선택한 경우 모든 옵션이 MP4, MOV, WMV, FLV, AVI, MKV 형식의 비디오 파일에 대한 직접 링크인지 확인하십시오. YouTube 링크는 비디오 옵션에서 지원되지 않습니다."
     },
     text: {
       size: "이 설정은 입력 필드의 크기만 조정하며 질문 상자의 너비에는 영향을 주지 않습니다. 허용되는 입력 길이를 제한하려면 <b>유효성 검사 → 최대 문자 제한</b>으로 이동합니다."
@@ -1310,7 +1324,6 @@ export var koreanStrings = {
     dataList: "입력 시 응답자에게 제안될 선택 사항 목록을 입력합니다.",
     itemSize: "이 설정은 입력 필드의 크기만 조정하며 질문 상자의 너비에는 영향을 주지 않습니다.",
     itemTitleWidth: "모든 항목 레이블에 대해 일관된 너비를 픽셀 단위로 설정합니다.",
-    contentMode: "\"자동\" 옵션은 제공된 소스 URL을 기반으로 표시에 적합한 모드(이미지, 비디오 또는 YouTube)를 자동으로 결정합니다.",
     altText: "사용자의 장치에 이미지를 표시할 수 없는 경우 접근성을 위해 대신 사용할 수 있습니다.",
     rateColorMode: "등급 아이콘 유형이 \"스마일리\"로 설정된 경우 선택한 이모티콘의 색상을 정의합니다. 다음 중 하나를 선택합니다. \"기본값\" - 선택한 이모티콘이 기본 설문조사 색상으로 표시됩니다. \"척도\"-선택한 이모티콘은 등급 척도에서 색상을 상속합니다.",
     expression: {
@@ -1333,7 +1346,7 @@ export var koreanStrings = {
       pattern: "패턴에는 문자열 리터럴과 다음 자리 표시자가 포함될 수 있습니다. '9' - 숫자의 경우; 'a' - 대문자 또는 소문자의 경우; '#' - 숫자 또는 대문자 또는 소문자의 경우. 백슬래시 '\\'를 사용하여 문자를 이스케이프합니다."
     },
     datetimemask: {
-      pattern: "패턴에는 구분 기호와 다음 자리 표시자가 포함될 수 있습니다. 'm' - 월 번호; 'mm' - 월 번호의 경우, 한 자리 값의 경우 선행 0이 있습니다. 'd' - 해당 월의 날짜; 'dd' - 한 달 중 일, 한 자리 값의 경우 선행 0이 있습니다. 'yy' - 연도의 마지막 두 자리 숫자; 'yyyy' - 4자리 연도입니다."
+      pattern: "패턴에는 구분 기호와 다음 자리 표시자가 포함될 수 있습니다<br>.'m' - 월 번호입니다.<br>'mm' - 월 숫자 값으로, 한 자리 값의 경우 앞에 0이 옵니다. <br>'d' - 해당 월의 일. <br>'dd' - 한 자리 값의 경우 앞에 0이 오는 월의 일입니다. <br>'yy' - 연도의 마지막 두 자리 숫자입니다. <br>'yyyy' - 4자리 연도입니다. <br>'H' - 24시간 형식의 시간입니다. <br>'HH' - 24시간 형식의 시간으로, 한 자리 값의 경우 앞에 0이 옵니다. <br>'h' - 12시간 형식의 시간입니다. <br>'hh' - 12시간 형식의 시간으로, 한 자리 값의 경우 앞에 0이 옵니다. <br>'MM' - 분. <br>'ss' - 초. <br>'TT' - 대문자로 된 12시간제 기간(AM/PM)입니다. <br>'tt' - 소문자로 된 12시간제 기간(오전/오후)입니다."
     },
     numericmask: {
       decimalSeparator: "표시된 숫자의 정수 부분에서 소수 부분을 구분하는 데 사용되는 기호입니다.",
@@ -2727,3 +2740,14 @@ editorLocalization.locales["ko"] = koreanStrings;
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "값 뒤에 표시할 하나 또는 여러 개의 기호입니다."
 // ed.translationSource: "Source: " => "근원: "
 // ed.translationTarget: "Target: " => "과녁: "
+// ed.pagePlaceHolder: "The page is empty. Drag an element from the toolbox or click the button below." => "페이지가 비어 있습니다. 도구 상자에서 요소를 드래그하거나 아래 버튼을 클릭합니다."
+// maskTypes.none: "None" => "없음"
+// itemvalue@rows.visibleIf: "Make the row visible if" => "다음과 같은 경우 행을 표시합니다."
+// itemvalue@rows.enableIf: "Make the row editable if" => "다음과 같은 경우 행을 편집 가능하게 만듭니다."
+// signaturepad.placeholderReadOnly: "Placeholder text in read-only or preview mode" => "읽기 전용 또는 미리 보기 모드의 자리 표시자 텍스트"
+// pe.textWrapEnabled: "Wrap choices" => "줄 바꿈 선택"
+// image.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "\"자동\" 옵션은 제공된 소스 URL을 기반으로 표시에 적합한 모드(이미지, 비디오 또는 YouTube)를 자동으로 결정합니다."
+// imagepicker.contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options." => "\"이미지\"와 \"비디오\" 중에서 선택하여 미디어 선택기의 콘텐츠 모드를 설정합니다. \"이미지\"를 선택한 경우 제공된 모든 옵션이 JPEG, GIF, PNG, APNG, SVG, BMP, ICO 형식의 이미지 파일인지 확인하십시오. 마찬가지로 \"비디오\"를 선택한 경우 모든 옵션이 MP4, MOV, WMV, FLV, AVI, MKV 형식의 비디오 파일에 대한 직접 링크인지 확인하십시오. YouTube 링크는 비디오 옵션에서 지원되지 않습니다."
+// ed.selectFile: "Select a file" => "파일 선택"
+// ed.removeFile: "Remove the file" => "파일 제거"
+// pe.searchMode: "Search Mode" => "검색 모드"

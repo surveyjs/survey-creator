@@ -1,7 +1,7 @@
 import { Serializer, SurveyModel, surveyLocalization, Base, QuestionDropdownModel, PanelModel, QuestionMatrixDropdownModel, QuestionTextModel, QuestionCommentModel, ListModel, Action, IAction, ItemValue, QuestionMatrixDynamicModel } from "survey-core";
 import { Translation, TranslationItem } from "../../src/components/tabs/translation";
 import { TabTranslationPlugin } from "../../src/components/tabs/translation-plugin";
-import { settings } from "../../src/creator-settings";
+import { EmptySurveyCreatorOptions, settings } from "../../src/creator-settings";
 import { CreatorTester } from "../creator-tester";
 import { parse } from "papaparse";
 import "survey-core/survey.i18n";
@@ -115,10 +115,8 @@ test("create locales question", () => {
   surveyLocalization.supportedLocales = ["fr", "de"];
   const translation = new Translation(survey);
   translation.reset();
-  const localesQuestion = <QuestionDropdownModel>(
-    translation.settingsSurvey.getQuestionByName("locales")
-  );
   expect(translation.locales).toHaveLength(4);
+  expect(translation.localesQuestion.allowRowsDragAndDrop).toBeTruthy();
   const visChoices = translation.getVisibleLocales();
   expect(visChoices).toHaveLength(3);
   expect(visChoices[0]).toEqual("fr");
@@ -1304,6 +1302,7 @@ test("Import from array, onTraslationItemImport", () => {
   ]);
   expect(counter).toEqual(1);
   expect(translation.localesQuestion.visibleRows).toHaveLength(1 + 1);
+  expect(translation.localesQuestion.allowRowsDragAndDrop).toBeFalsy();
   const page = creator.survey.pages[0];
   const question = creator.survey.getQuestionByName("q1");
   expect(page.locTitle.getLocaleText("")).toEqual("page en");
@@ -1793,9 +1792,9 @@ test("Test settings.translation.maximumSelectedLocales in matrix dynamic", () =>
   expect(visLocales).toHaveLength(2);
   expect(visLocales[0]).toEqual("de");
   expect(visLocales[1]).toEqual("fr");
-  const rows = question.visibleRows;
-  const checkQuestion3 = rows[2].cells[0].question;
-  const checkQuestion4 = rows[3].cells[0].question;
+  let rows = question.visibleRows;
+  let checkQuestion3 = rows[2].cells[0].question;
+  let checkQuestion4 = rows[3].cells[0].question;
   expect(checkQuestion3.value).toBeTruthy();
   expect(checkQuestion3.isReadOnly).toBeFalsy();
   expect(checkQuestion4.value).toBeFalsy();
@@ -1807,6 +1806,9 @@ test("Test settings.translation.maximumSelectedLocales in matrix dynamic", () =>
   expect(checkQuestion4.value).toBeFalsy();
   expect(checkQuestion4.isReadOnly).toBeFalsy();
 
+  rows = question.visibleRows;
+  checkQuestion3 = rows[2].cells[0].question;
+  checkQuestion4 = rows[3].cells[0].question;
   checkQuestion4.value = true;
   expect(checkQuestion3.value).toBeFalsy();
   expect(checkQuestion3.isReadOnly).toBeTruthy();
@@ -1953,4 +1955,100 @@ test("Translation: readOnly & onMachineTranslate", () => {
   expect(translation.localesQuestion.visibleRows).toHaveLength(2);
   creator.activeTab = "designer";
   expect(creator.readOnly).toBeTruthy();
+});
+
+test("Complex value text in TranslationItem", () => {
+  const survey = new SurveyModel({});
+  const translation: Translation = new Translation(survey);
+
+  const itemValueJson = {
+    value:
+      "Les attentes concernant l'évaluation ont été clairement expliquées (type d'évaluation, durée, délais, critères d'évaluation, etc.)",
+    text: {
+      en: "Expectations regarding assessment have been explained (assessment mode, length, deadlines, correction criteria, etc.).",
+    },
+  };
+  const itemValue = new ItemValue(itemValueJson.value);
+  itemValue.fromJSON(itemValueJson);
+  const ti = new TranslationItem(
+    itemValue.value,
+    itemValue.locText,
+    itemValue.value,
+    translation,
+    itemValue
+  );
+
+  expect(ti.localizableName).toBe(itemValueJson.value);
+  expect(ti.text).toBe(itemValueJson.value);
+});
+test("Store locales order", () => {
+  const survey1 = new SurveyModel({
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "checkbox",
+            name: "question1",
+            title: {
+              default: "question 1",
+              fr: "quéstion 1",
+              it: "quéstion 1",
+              es: "quéstion 1"
+            },
+            choices: ["item1", "item2", "item3"]
+          }
+        ]
+      }
+    ]
+  });
+  const options = new EmptySurveyCreatorOptions();
+  const translation1 = new Translation(survey1, options);
+  translation1.reset();
+  expect(translation1.locales).toHaveLength(4);
+  let visChoices1 = translation1.getVisibleLocales();
+  expect(visChoices1).toHaveLength(3);
+  expect(visChoices1[0]).toEqual("fr");
+  expect(visChoices1[1]).toEqual("it");
+  expect(visChoices1[2]).toEqual("es");
+  const val = translation1.localesQuestion.value;
+  const rowVal = val[2];
+  val.splice(2, 1);
+  val.splice(1, 0, rowVal);
+  translation1.localesQuestion.value = val;
+  visChoices1 = translation1.getVisibleLocales();
+  expect(visChoices1).toHaveLength(3);
+  expect(visChoices1[0]).toEqual("it");
+  expect(visChoices1[1]).toEqual("fr");
+  expect(visChoices1[2]).toEqual("es");
+  const survey2 = new SurveyModel({
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "checkbox",
+            name: "question1",
+            title: {
+              es: "quéstion 1",
+              default: "question 1",
+              de: "question de",
+              fr: "quéstion 1",
+              it: "quéstion 1"
+            },
+            choices: ["item1", "item2", "item3"]
+          }
+        ]
+      }
+    ]
+  });
+  const translation2 = new Translation(survey2, options);
+  translation2.reset();
+  expect(translation2.locales).toHaveLength(5);
+  let visChoices2 = translation2.getVisibleLocales();
+  expect(visChoices2).toHaveLength(4);
+  expect(visChoices2[0]).toEqual("it");
+  expect(visChoices2[1]).toEqual("fr");
+  expect(visChoices2[2]).toEqual("es");
+  expect(visChoices2[3]).toEqual("de");
 });

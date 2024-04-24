@@ -285,8 +285,12 @@ export class StringEditorViewModelBase extends Base {
         event.preventDefault();
       }
     }
+    if (event.keyCode == 13 && !this.locString.allowLineBreaks) {
+      event.preventDefault();
+    }
+
     if (event.ctrlKey || event.metaKey) {
-      if ([89, 90].indexOf(event.keyCode) !== -1) {
+      if ([89, 90, 66, 73].indexOf(event.keyCode) !== -1) {
         event.stopImmediatePropagation();
         event.preventDefault();
       }
@@ -341,7 +345,6 @@ export class StringEditorViewModelBase extends Base {
       const options = { value: event.target?.innerText, cancel: null };
       if (this.connector) this.connector.onTextChanging.fire(this, options);
       if (options.cancel) return;
-      sanitizeEditableContent(event.target, !this.locString.allowLineBreaks);
       if (this.maxLength >= 0 && event.target.innerText.length > this.maxLength) {
         event.target.innerText = event.target.innerText.substring(0, this.maxLength);
       }
@@ -462,9 +465,15 @@ export class StringEditorViewModelBase extends Base {
     if (this.editAsText) {
       event.preventDefault();
       // get text representation of clipboard
-      var text = event.clipboardData.getData("text/plain");
+      let text = event.clipboardData.getData("text/plain");
+      if (!this.locString.allowLineBreaks) text = clearNewLines(text);
       // insert text manually
-      document.execCommand("insertText", false, text);
+      const selection = window.getSelection();
+      if (!selection.rangeCount) return;
+      selection.deleteFromDocument();
+      selection.getRangeAt(0).insertNode(document.createTextNode(text));
+      selection.collapseToEnd();
+      event.target.dispatchEvent(new Event("input", { bubbles: true }));
     }
   }
   public onKeyDown(event: KeyboardEvent): boolean {

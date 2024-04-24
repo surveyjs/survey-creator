@@ -116,6 +116,10 @@ svc-page {
   height: 2px;
 }
 
+.svc-page--drag-over-empty-no-add-button:after {
+  bottom: auto;
+}
+
 .svc-page__placeholder_frame {
   min-width: auto;
   max-width: 100%;

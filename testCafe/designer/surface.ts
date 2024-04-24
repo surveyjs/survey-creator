@@ -136,6 +136,25 @@ test("Check imagepicker delete item", async (t) => {
     .expect(Selector(".svc-image-item-value:not(.svc-image-item-value--new)").count).eql(1);
 });
 
+test("Check imagepicker add/delete files title", async (t) => {
+  await t.resizeWindow(1920, 1080);
+  await explicitErrorHandler();
+  await setJSON({
+    elements: [{
+      type: "imagepicker", name: "q1", choices: [
+        {
+          "value": "lion",
+          "imageLink": "lion.jpg"
+        }
+      ]
+    }]
+  });
+
+  await t
+    .hover(Selector(".svc-image-item-value-wrapper svg title").withExactText("Select a file"))
+    .hover(Selector(".svc-image-item-value-wrapper svg title").withExactText("Remove the file"));
+});
+
 test("Focus on new panel added", async (t) => {
   await t.resizeWindow(1920, 1080);
   const EmptyPage = Selector("[data-sv-drop-target-survey-element='newGhostPage']");
@@ -186,4 +205,10 @@ test("Check page navigator is visually hidden", async (t) => {
   };
   await setJSON(json);
   await t.expect(Selector(".svc-tab-designer__page-navigator").visible).notOk();
+});
+test("Check sidebar shadow height", async (t) => {
+  await t.resizeWindow(1000, 300);
+  await setJSON({});
+  await t.click('button[title="Survey settings"]');
+  await t.expect(Selector(".svc-side-bar__shadow").offsetHeight).lte(480);
 });

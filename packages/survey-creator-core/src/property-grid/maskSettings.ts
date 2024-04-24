@@ -1,4 +1,4 @@
-import { Base, JsonObjectProperty, ComponentCollection, Question, PanelModel, QuestionHtmlModel, InputMaskBase, Serializer, JsonMetadataClass } from "survey-core";
+import { Base, JsonObjectProperty, ComponentCollection, Question, PanelModel, QuestionHtmlModel, InputMaskBase, Serializer, JsonMetadataClass, InputMaskDateTime } from "survey-core";
 import { PropertyGridEditorCollection, PropertyJSONGenerator, PropertyGridEditor, } from "./index";
 import { ISurveyCreatorOptions } from "../creator-settings";
 import { getLocString } from "../editorLocalization";
@@ -46,12 +46,26 @@ export class PropertyGridEditorQuestionMaskSettings extends PropertyGridEditor {
   updatePanel(obj: Base, question: Question, prop: JsonObjectProperty) {
     const panel = <PanelModel>question["contentPanel"];
     const masksettings = obj[prop.name] as InputMaskBase;
+
     if (this._prevMaskType !== obj["maskType"]) {
       this._propertyGrid.obj = masksettings;
       this._propertyGrid.setupObjPanel(panel, true);
       this._prevMaskType = obj["maskType"];
     }
+
+    if (masksettings.getType() == "datetimemask") {
+      this.updateDateTimeMinMaxInputType(masksettings, panel);
+    }
+
     this.updatePreviewQuestion(masksettings, panel);
+  }
+
+  private updateDateTimeMinMaxInputType(masksettings: InputMaskBase, panel: PanelModel) {
+    let inputType = "datetime-local";
+    if (!(masksettings as InputMaskDateTime).hasDatePart) inputType = "time";
+    if (!(masksettings as InputMaskDateTime).hasTimePart) inputType = "date";
+    panel.getQuestionByName("min").inputType = inputType;
+    panel.getQuestionByName("max").inputType = inputType;
   }
 
   updatePreviewQuestion(masksettings: InputMaskBase, panel: PanelModel) {
@@ -65,23 +79,22 @@ export class PropertyGridEditorQuestionMaskSettings extends PropertyGridEditor {
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestionMaskSettings());
 
 export class PropertyGridEditorMaskType extends PropertyGridEditor {
-  private _noneItem = { value: "none", text: getLocString("pv.none") };
-
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "masktype";
   }
   public getJSON(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): any {
+    const noneItemValue = "none";
     const result = {
       type: "dropdown",
       // optionsCaption: editorLocalization.getString("pe.conditionSelectQuestion"),
-      default: this._noneItem.value,
+      default: noneItemValue,
       allowClear: false,
       searchEnabled: false,
-      choices: this.getChoices(obj, prop, options)
+      choices: this.getChoices(noneItemValue)
     };
     return result;
   }
-  private getChoices(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): Array<any> {
+  private getChoices(noneItemValue: string): Array<any> {
     const classes = Serializer.getChildrenClasses("masksettings") || [];
     const choices = classes.map((cl: JsonMetadataClass) => {
       let value = cl.name;
@@ -90,7 +103,8 @@ export class PropertyGridEditorMaskType extends PropertyGridEditor {
       }
       return { value: value, text: getLocString("pe.maskTypes." + cl.name) };
     });
-    choices.splice(0, 0, this._noneItem);
+    const noneItem = { value: noneItemValue, text: getLocString("pe.maskTypes.none") };
+    choices.splice(0, 0, noneItem);
     return choices;
   }
 }

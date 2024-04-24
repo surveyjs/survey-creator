@@ -168,11 +168,14 @@ export var mnStrings = {
     htmlPlaceHolder: "HTML агуулга энд байрлана.",
     panelPlaceHolder: "Энд хэрэглүүрээс асуулт чирнэ үү.",
     surveyPlaceHolder: "Санал асуулга хоосон байна. Хэрэглүүрээс асуулт чирнэ үү эсвэл доорх товчийг дарна уу.",
+    pagePlaceHolder: "Хуудас хоосон байна. Багажны хайрцагнаас элементийг чирэх эсвэл доорх товчийг дарна уу.",
     imagePlaceHolder: "Энд зураг чирж унагаах эсвэл доорх товчийг дарж татаж авах зургийг сонгоно уу",
     imageChooseImage: "Зураг сонгох",
     addNewTypeQuestion: "{0} нэмэх", //{0} is localizable question type
     chooseLogoPlaceholder: "[Лого]",
     choices_Item: "Хэсэг ",
+    selectFile: "Файлыг сонгох",
+    removeFile: "Файлыг хасах",
     lg: {
       addNewItem: "Шинэ дүрэм нэмэх",
       empty_tab: "Санал асуулгын урсгалыг өөрчлөх дүрэм үүсгэнэ үү.",
@@ -319,6 +322,7 @@ export var mnStrings = {
       signatureAutoScaleEnabled: "Авто замын тэмдэг тэмдэглэгээний талбай",
       showPlaceholder: "Эзэмшигчийг үзүүл",
       placeholder: "Placeholder текст",
+      placeholderReadOnly: "Зөвхөн унших эсвэл урьдчилан харах хэлбэрээр placeholder текст",
       allowClear: "Гарын үсэг зурах хэсэгт Clear товчийг харуул",
       penMinWidth: "Хамгийн бага үзэгний өргөн",
       penMaxWidth: "Хамгийн их үзэгний өргөн",
@@ -493,6 +497,7 @@ export var mnStrings = {
     descriptionPlaceholder: "Тайлбар",
     surveyDescriptionPlaceholder: "Тайлбар",
     pageDescriptionPlaceholder: "Тайлбар",
+    textWrapEnabled: "Боолт сонголт",
     showOtherItem: "Өөр сонголт зөвшөөрөх",
     otherText: "Өөр сонголтын текст",
     showNoneItem: "None сонголтыг зөвшөөрөх",
@@ -634,6 +639,7 @@ export var mnStrings = {
     textUpdateMode: "Текст асуултын утгыг шинэчлэх",
     maskType: "Оролтын багны төрөл",
     maskTypes: {
+      none: "Хэн ч биш",
       patternmask: "Загвар",
       numericmask: "Тоо нь",
       datetimemask: "Огноо, цаг",
@@ -652,6 +658,7 @@ export var mnStrings = {
     labelTrue: "\"Тийм\" шошго",
     labelFalse: "\"Үгүй\" шошго",
     allowClear: "Цэвэрлэх товч харуулах",
+    searchMode: "Хайлтын Мод",
     displayStyle: "Утга харуулах хэв маяг",
     format: "Хэлбэржүүлсэн текст",
     maximumFractionDigits: "Оронгийн нарийвчлалын дээд утга",
@@ -720,6 +727,10 @@ export var mnStrings = {
     itemvalue: {
       visibleIf: "Хэрэв сонголтыг ил тод болго",
       enableIf: "Сонголтыг сонговол"
+    },
+    "itemvalue@rows": {
+      visibleIf: "Хэрэв эгнээг ил гаргах",
+      enableIf: "Хэрэв эгнээг хянан засварлах боломжтой болго"
     },
     imageitemvalue: {
       text: "Тайлбар"
@@ -1044,8 +1055,7 @@ export var mnStrings = {
     searchMode: {
       contains: "Агуулах",
       startsWith: "Эхлэл"
-    },
-    textWrapEnabled: "Боолт сонголт"
+    }
   },
   // Operators
   op: {
@@ -1195,10 +1205,14 @@ export var mnStrings = {
       imageHeight: "Судалгааны үр дүнгээр дүрсний өндрийг тохируулна.",
       imageWidth: "Судалгааны үр дүн дэх зургийн өргөнийг тохируулна."
     },
+    image: {
+      contentMode: "\"Авто\" сонголт нь эх сурвалж URL-д суурилсан зураг, видео, эсвэл YouTube - харуулах тохиромжтой хэв маягийг автоматаар тодорхойлдог."
+    },
     imagepicker: {
       imageHeight: "Хамгийн бага болон хамгийн их өндөр үнэ цэнийг давхардна.",
       imageWidth: "Хамгийн бага, хамгийн их өргөний үнэ цэнийг давхардалд оруулах.",
-      choices: "\"Үнэ цэнэ\" гэж нөхцөлийн дүрэмд хэрэглэгддэг эд зүйлийн ID-ээр үйлчилдэг; \"Текст\" гэж хариулагчдад тавигддаг."
+      choices: "\"Үнэ цэнэ\" гэж нөхцөлийн дүрэмд хэрэглэгддэг эд зүйлийн ID-ээр үйлчилдэг; \"Текст\" гэж хариулагчдад тавигддаг.",
+      contentMode: "Хэвлэл мэдээллийн хэрэгслийн сонгогчийн агуулгын хэв маягийг тогтоохын тулд \"Image\" болон \"Video\" хоёрын аль нэгийг сонго. Хэрэв \"Зураг\" гэж сонгосон бол өгөгдсөн бүх хувилбарууд нь дараах форматаар зургийн файлууд болохыг анхаарна уу: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Үүнтэй адилаар \"Video\" нь сонгогдвол бүх сонголт нь дараах форматаар видео файлуудын шууд холбоосууд болох MP4, MOV, WMV, FLV, AVI, MKV гэсэн форматаар байгаа эсэхийг баталгаажуулаарай. YouTube-ийн холбоосууд видео хувилбараар дэмжигдээгүйг анхаарна уу."
     },
     text: {
       size: "Энэ тохиргоо нь зөвхөн оролтын талбарыг дахин тохируулдаг бөгөөд асуултын хайрцагны өргөнд нөлөөлдөггүй. Хүлээн зөвшөөрөгдсөн оролтын уртыг хязгаарлахын тулд <b>Validation→ Maximum character limit</b> руу орно уу."
@@ -1310,7 +1324,6 @@ export var mnStrings = {
     dataList: "Санал болгох сонголтуудын жагсаалтыг оруулах үед хариулагчид санал болгох болно.",
     itemSize: "Тохиргоо нь зөвхөн оролтын талбаруудыг дахин тохируулдаг бөгөөд асуултын хайрцагны өргөнд нөлөөлдөггүй.",
     itemTitleWidth: "Пикселд бүх зүйлийн шошгоны тогтмол өргөнийг тогтоох",
-    contentMode: "\"Авто\" сонголт нь эх сурвалж URL-д суурилсан зураг, видео, эсвэл YouTube - харуулах тохиромжтой хэв маягийг автоматаар тодорхойлдог.",
     altText: "Хэрэглэгчийн төхөөрөмж дээр болон хүртээмжийн зорилгоор дүрсийг харуулах боломжгүй үед орлуулагчаар үйлчилнэ.",
     rateColorMode: "Rating icon төрлийн \"Smileys\" гэж тогтооход сонгосон эможигийн өнгийг тодорхойлно. Аль нэгийг нь сонгоно уу: \"Default\" - сонгосон эможи нь стандарт судалгааны өнгөөр гарч ирдэг; \"Scale\" - сонгосон эможи нь үнэлгээний хэмжүүрээс өнгийг өвлөн авдаг.",
     expression: {
@@ -1333,7 +1346,7 @@ export var mnStrings = {
       pattern: "Загвар нь уянгын шууд болон дараах байрлагчийг агуулж болно: '9' - тоон хувьд; 'a' - дээд буюу доод талын үсгийн хувьд; '#' - цифр эсвэл дээд, эсвэл доод кейс үсгийн хувьд. Дүрээс зугтахын тулд backslash '\\' ашигла."
     },
     datetimemask: {
-      pattern: "Загвар нь тусгаарлагч үсэг болон дараах байрлагчуудыг агуулж болно: 'm' - сарын дугаараар; 'мм' - сарын тоогоор, ганц цифрээр үнэ цэнэтэй тэргүүлэх нөлөө бүхий; 'd' - сарын өдөр; 'dd' - ганц цифрээр үнэ цэнэд тэргүүлэх нөлөө бүхий сарын өдөр; 'yy' - жилийн сүүлийн хоёр цифрээр; 'yyyy' - дөрвөн цифрээр жил."
+      pattern: "Загвар нь тусгаарлагч үсэг болон дараах байрлагчуудыг агуулж болно:<br>'m' - Сарын дугаар.<br>'мм' - Сарын дугаар, ганц цифрээр үнэ цэнэтэй тэргүүлэх нөлөө бүхий. <br>''д'' - Сарын нэг өдөр. <br>'dd' - Ганц цифрээр үнэ цэнэд тэргүүлэх нөлөө бүхий сарын өдөр. <br>'yy' - Жилийн сүүлийн хоёр цифр. <br>''yyyy'' - Дөрвөн цифр бүхий жил. <br>'H' - 24 цагийн форматаар цаг. <br>'HH' - 24 цагийн форматаар хэдэн цаг, ганц цифрээр үнэ цэнэтэй тэргүүлэх нөлөө. <br>'h' - 12 цагийн форматаар цаг. <br>'hh' - 12 цагийн форматаар хэдэн цаг, ганц цифрээр үнэ цэнэд тэргүүлэх нөлөөгүй. <br>'ММ' - Минут. <br>'ss' - Секунд. <br>'ТТ' - Дээд тохиолдолд 12 цагийн цаг (АМ/ЦАГ). <br>'tt' - доод тохиолдолд 12 цагийн цаг (ам/цаг) цаг."
     },
     numericmask: {
       decimalSeparator: "Жижиг хэсгийг үзүүлсэн дугаарын интежер хэсгээс салгахад ашигладаг бэлгэдэл.",
@@ -2179,3 +2192,14 @@ editorLocalization.locales["mn"] = mnStrings;
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "Үнэ цэнийн дараа үзүүлэх нэг эсвэл хэд хэдэн бэлгэдлүүдийг."
 // ed.translationSource: "Source: " => "Эх сурвалж: "
 // ed.translationTarget: "Target: " => "Зорилго: "
+// ed.pagePlaceHolder: "The page is empty. Drag an element from the toolbox or click the button below." => "Хуудас хоосон байна. Багажны хайрцагнаас элементийг чирэх эсвэл доорх товчийг дарна уу."
+// maskTypes.none: "None" => "Хэн ч биш"
+// itemvalue@rows.visibleIf: "Make the row visible if" => "Хэрэв эгнээг ил гаргах"
+// itemvalue@rows.enableIf: "Make the row editable if" => "Хэрэв эгнээг хянан засварлах боломжтой болго"
+// signaturepad.placeholderReadOnly: "Placeholder text in read-only or preview mode" => "Зөвхөн унших эсвэл урьдчилан харах хэлбэрээр placeholder текст"
+// pe.textWrapEnabled: "Wrap choices" => "Боолт сонголт"
+// image.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "\"Авто\" сонголт нь эх сурвалж URL-д суурилсан зураг, видео, эсвэл YouTube - харуулах тохиромжтой хэв маягийг автоматаар тодорхойлдог."
+// imagepicker.contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options." => "Хэвлэл мэдээллийн хэрэгслийн сонгогчийн агуулгын хэв маягийг тогтоохын тулд \"Image\" болон \"Video\" хоёрын аль нэгийг сонго. Хэрэв \"Зураг\" гэж сонгосон бол өгөгдсөн бүх хувилбарууд нь дараах форматаар зургийн файлууд болохыг анхаарна уу: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Үүнтэй адилаар \"Video\" нь сонгогдвол бүх сонголт нь дараах форматаар видео файлуудын шууд холбоосууд болох MP4, MOV, WMV, FLV, AVI, MKV гэсэн форматаар байгаа эсэхийг баталгаажуулаарай. YouTube-ийн холбоосууд видео хувилбараар дэмжигдээгүйг анхаарна уу."
+// ed.selectFile: "Select a file" => "Файлыг сонгох"
+// ed.removeFile: "Remove the file" => "Файлыг хасах"
+// pe.searchMode: "Search Mode" => "Хайлтын Мод"

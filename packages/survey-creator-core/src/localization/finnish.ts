@@ -168,11 +168,14 @@ export var fiStrings = {
     htmlPlaceHolder: "HTML-sisältö on täällä.",
     panelPlaceHolder: "Pudota kysymys työkalupakista tähän.",
     surveyPlaceHolder: "Kysely on tyhjä. Vedä elementti työkalupakista tai napsauta alla olevaa painiketta.",
+    pagePlaceHolder: "Sivu on tyhjä. Vedä elementti työkalupakista tai napsauta alla olevaa painiketta.",
     imagePlaceHolder: "Vedä ja pudota kuva tähän tai napsauta alla olevaa painiketta ja valitse ladattava kuva",
     imageChooseImage: "Valitse kuva",
     addNewTypeQuestion: "Lisää {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
     choices_Item: "Kohta ",
+    selectFile: "Valitse tiedosto",
+    removeFile: "Poista tiedosto",
     lg: {
       addNewItem: "Lisää uusi sääntö",
       empty_tab: "Luo sääntö kyselyn kulun mukauttamista varten.",
@@ -319,6 +322,7 @@ export var fiStrings = {
       signatureAutoScaleEnabled: "Allekirjoitusalueen automaattinen skaalaus",
       showPlaceholder: "Paikkamerkin näyttäminen",
       placeholder: "Paikkamerkkiteksti",
+      placeholderReadOnly: "Paikkamerkkiteksti vain luku -tilassa tai esikatselutilassa",
       allowClear: "Näytä Tyhjennä-painike allekirjoitusalueella",
       penMinWidth: "Kynän vähimmäisleveys",
       penMaxWidth: "Kynän enimmäisleveys",
@@ -493,6 +497,7 @@ export var fiStrings = {
     descriptionPlaceholder: "Lisää kuvaus",
     surveyDescriptionPlaceholder: "Lisää kyselyn kuvaus",
     pageDescriptionPlaceholder: "Lisää sivun kuvaus",
+    textWrapEnabled: "Kääri valinnat",
     showOtherItem: "On muu",
     otherText: "Muu teksti",
     showNoneItem: "Ei mitään",
@@ -634,6 +639,7 @@ export var fiStrings = {
     textUpdateMode: "Tekstikysymyksen arvon päivittäminen",
     maskType: "Syöttörajoitteen tyyppi",
     maskTypes: {
+      none: "Ei lainkaan",
       patternmask: "Kuvio",
       numericmask: "Numeerinen",
       datetimemask: "Päivämäärä ja kellonaika",
@@ -652,6 +658,7 @@ export var fiStrings = {
     labelTrue: "\"True\"-merkintä",
     labelFalse: "Epätosi-tunniste",
     allowClear: "Näytä Tyhjennä-painike",
+    searchMode: "Hakutila",
     displayStyle: "Arvon näyttötyyli",
     format: "Muotoiltu merkkijono",
     maximumFractionDigits: "Murtolukujen enimmäismäärä",
@@ -720,6 +727,10 @@ export var fiStrings = {
     itemvalue: {
       visibleIf: "Tee vaihtoehto näkyväksi, jos",
       enableIf: "Tee vaihtoehdosta valittava, jos"
+    },
+    "itemvalue@rows": {
+      visibleIf: "Tee rivistä näkyvä, jos",
+      enableIf: "Tee rivistä muokattava, jos"
     },
     imageitemvalue: {
       text: "Vaihtoehtoinen teksti"
@@ -1044,8 +1055,7 @@ export var fiStrings = {
     searchMode: {
       contains: "Sisältää",
       startsWith: "Alkaa"
-    },
-    textWrapEnabled: "Kääri valinnat"
+    }
   },
   // Operators
   op: {
@@ -1195,10 +1205,14 @@ export var fiStrings = {
       imageHeight: "Säätää kuvan korkeutta kyselyn tuloksissa.",
       imageWidth: "Säätää kuvan leveyttä kyselyn tuloksissa."
     },
+    image: {
+      contentMode: "\"Auto\" -vaihtoehto määrittää automaattisesti sopivan näyttötilan - Kuva, Video tai YouTube - annetun lähde-URL-osoitteen perusteella."
+    },
     imagepicker: {
       imageHeight: "Ohittaa vähimmäis- ja enimmäiskorkeusarvot.",
       imageWidth: "Ohittaa vähimmäis- ja enimmäisleveysarvot.",
-      choices: "\"Arvo\" toimii ehdollisissa säännöissä käytettynä tuotetunnuksena; \"Teksti\" näkyy vastaajille."
+      choices: "\"Arvo\" toimii ehdollisissa säännöissä käytettynä tuotetunnuksena; \"Teksti\" näkyy vastaajille.",
+      contentMode: "Valitse \"Kuva\" tai \"Video\" asettaaksesi mediavalitsimen sisältötilan. Jos \"Kuva\" on valittuna, varmista, että kaikki annetut vaihtoehdot ovat kuvatiedostoja seuraavissa muodoissa: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Samoin, jos \"Video\" on valittuna, varmista, että kaikki vaihtoehdot ovat suoria linkkejä videotiedostoihin seuraavissa muodoissa: MP4, MOV, WMV, FLV, AVI, MKV. Huomaa, että YouTube-linkkejä ei tueta videoasetuksissa."
     },
     text: {
       size: "Tämä asetus muuttaa vain syöttökentän kokoa eikä vaikuta kysymysruudun leveyteen. Jos haluat rajoittaa hyväksyttyä syötteen pituutta, siirry kohtaan <b>Vahvistus → merkkien enimmäismäärä</b>."
@@ -1310,7 +1324,6 @@ export var fiStrings = {
     dataList: "Kirjoita luettelo vaihtoehdoista, joita vastaajalle ehdotetaan syötteen aikana.",
     itemSize: "Asetus muuttaa vain syöttökenttien kokoa eikä vaikuta kysymysruudun leveyteen.",
     itemTitleWidth: "Määrittää yhdenmukaisen leveyden kaikille tuoteotsikoille kuvapisteinä",
-    contentMode: "\"Auto\" -vaihtoehto määrittää automaattisesti sopivan näyttötilan - Kuva, Video tai YouTube - annetun lähde-URL-osoitteen perusteella.",
     altText: "Toimii korvikkeena, kun kuvaa ei voida näyttää käyttäjän laitteella, ja esteettömyyssyistä.",
     rateColorMode: "Määrittää valitun emojin värin, kun luokituskuvakkeen tyypiksi on asetettu \"Hymiöt\". Valitse seuraavista: \"Oletus\" - valittu emoji näkyy kyselyn oletusvärillä; \"Scale\" - valittu emoji perii värin luokitusasteikolta.",
     expression: {
@@ -1333,7 +1346,7 @@ export var fiStrings = {
       pattern: "Kuvio voi sisältää merkkijonoliteraaleja ja seuraavia paikkamerkkejä: '9' - numerolle; \"a\" - isoille tai pienille kirjaimille; '#' - numerolle tai isolle tai pienelle kirjaimelle. Käytä kenoviivaa '\\' paetaksesi hahmoa."
     },
     datetimemask: {
-      pattern: "Kuvio voi sisältää erotinmerkkejä ja seuraavia paikkamerkkejä: 'm' - kuukauden numero; 'mm' - kuukauden numero, jonka alussa on nolla yksinumeroisille arvoille; \"d\" - kuukauden päivä; 'dd' - kuukauden päivä, jonka alussa on nolla yksinumeroisille arvoille; \"yy\" - vuoden kaksi viimeistä numeroa; \"VVVV\" - nelinumeroinen vuosi."
+      pattern: "Kuvio voi sisältää erotinmerkkejä ja seuraavia paikkamerkkejä:<br>'m' - Kuukauden numero.<br>'mm' - Kuukauden numero, jonka alussa on nolla yksinumeroisille arvoille. <br>'d' - kuukauden päivä. <br>'dd' - kuukauden päivä, jonka alussa on nolla yksinumeroisille arvoille. <br>'yy' - Vuoden kaksi viimeistä numeroa. <br>\"yyyy\" - nelinumeroinen vuosi. <br>'H' - Tunnit 24 tunnin muodossa. <br>\"HH\" - Tunnit 24 tunnin muodossa, jonka alussa on nolla yksinumeroisille arvoille. <br>'h' - Tunnit 12 tunnin muodossa. <br>\"hh\" - Tunnit 12 tunnin muodossa, jonka alussa on nolla yksinumeroisille arvoille. <br>'MM' - Pöytäkirja. <br>'ss' - sekuntia. <br>\"TT\" - 12 tunnin kellojakso isoilla kirjaimilla (AM/PM). <br>'TT' - 12 tunnin kellonaika pienillä kirjaimilla (am/pm)."
     },
     numericmask: {
       decimalSeparator: "Symboli, jota käytetään erottamaan murto-osa näytetyn luvun kokonaislukuosasta.",
@@ -2523,3 +2536,14 @@ editorLocalization.locales["fi"] = fiStrings;
 // currencymask.suffix: "One or several symbols to be displayed after the value." => "Yksi tai useampi symboli, joka näytetään arvon jälkeen."
 // ed.translationSource: "Source: " => "Lähde: "
 // ed.translationTarget: "Target: " => "Kohde: "
+// ed.pagePlaceHolder: "The page is empty. Drag an element from the toolbox or click the button below." => "Sivu on tyhjä. Vedä elementti työkalupakista tai napsauta alla olevaa painiketta."
+// maskTypes.none: "None" => "Ei lainkaan"
+// itemvalue@rows.visibleIf: "Make the row visible if" => "Tee rivistä näkyvä, jos"
+// itemvalue@rows.enableIf: "Make the row editable if" => "Tee rivistä muokattava, jos"
+// signaturepad.placeholderReadOnly: "Placeholder text in read-only or preview mode" => "Paikkamerkkiteksti vain luku -tilassa tai esikatselutilassa"
+// pe.textWrapEnabled: "Wrap choices" => "Kääri valinnat"
+// image.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "\"Auto\" -vaihtoehto määrittää automaattisesti sopivan näyttötilan - Kuva, Video tai YouTube - annetun lähde-URL-osoitteen perusteella."
+// imagepicker.contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options." => "Valitse \"Kuva\" tai \"Video\" asettaaksesi mediavalitsimen sisältötilan. Jos \"Kuva\" on valittuna, varmista, että kaikki annetut vaihtoehdot ovat kuvatiedostoja seuraavissa muodoissa: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Samoin, jos \"Video\" on valittuna, varmista, että kaikki vaihtoehdot ovat suoria linkkejä videotiedostoihin seuraavissa muodoissa: MP4, MOV, WMV, FLV, AVI, MKV. Huomaa, että YouTube-linkkejä ei tueta videoasetuksissa."
+// ed.selectFile: "Select a file" => "Valitse tiedosto"
+// ed.removeFile: "Remove the file" => "Poista tiedosto"
+// pe.searchMode: "Search Mode" => "Hakutila"

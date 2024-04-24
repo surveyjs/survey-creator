@@ -5,6 +5,9 @@
     @mouseover="activateZoom()"
     @mouseout="deactivateZoom()"
   >
+    <div v-if="!model.hasFrame" class="svd-simulator-content">
+      <survey-widget :model="model.survey"></survey-widget>
+    </div>
     <div
       v-if="model.hasFrame"
       class="svd-simulator-wrapper"
@@ -27,9 +30,6 @@
           <survey-widget :model="model.survey"></survey-widget>
         </div>
       </div>
-    </div>
-    <div v-if="!model.hasFrame" class="svd-simulator-content">
-      <survey-widget :model="model.survey"></survey-widget>
     </div>
   </div>
 </template>

@@ -4,7 +4,7 @@ import {
   QuestionSelectBase, QuestionRowModel, LocalizableString, ILocalizableString, ILocalizableOwner, PopupBaseViewModel,
   EventBase, hasLicense, slk, settings as SurveySettings, Event, Helpers as SurveyHelpers, MatrixDropdownColumn, JsonObject,
   dxSurveyService, ISurveyElement, PanelModelBase, surveyLocalization, QuestionMatrixDropdownModelBase, ITheme, Helpers,
-  chooseFiles
+  chooseFiles, createDropdownActionModel
 } from "survey-core";
 import { ICreatorPlugin, ISurveyCreatorOptions, settings, ICollectionItemAllowOperations } from "./creator-settings";
 import { editorLocalization } from "./editorLocalization";
@@ -180,6 +180,12 @@ export class SurveyCreatorModel extends Base
    * @see showObjectTitles
    */
   @property({ defaultValue: false }) inplaceEditForValues: boolean;
+  /**
+   * Specifies whether to display a table with survey results after completing a survey in the Preview tab.
+   * 
+   * Default value: `true`
+   */
+  @property({ defaultValue: true }) previewShowResults: boolean;
   get allowEditSurveyTitle(): boolean {
     return this.getPropertyValue("allowEditSurveyTitle", true);
   }
@@ -1552,6 +1558,7 @@ export class SurveyCreatorModel extends Base
     parentObj: Base,
     parentProperty: JsonObjectProperty
   ): boolean {
+    if (!property) return false;
     const proposedValue = this.readOnly || readOnly;
     if (this.onGetPropertyReadOnly.isEmpty) return proposedValue;
     const options = {
@@ -2133,7 +2140,7 @@ export class SurveyCreatorModel extends Base
       this.notifier.notify(message, type);
       // alert(message);
     } else {
-      this.onNotify.fire(this, { message: message });
+      this.onNotify.fire(this, { message, type });
     }
   }
 
@@ -3169,7 +3176,7 @@ export class SurveyCreatorModel extends Base
       this.onMachineTranslate.fire(this, { fromLocale: fromLocale, toLocale: toLocale, strings: strings, callback: callback });
     }
   }
-
+  translationLocalesOrder: Array<string> = [];
   /**
    * A delay between changing survey settings and saving the survey JSON schema, measured in milliseconds. Applies only when the [`isAutoSave`](#isAutoSave) property is `true`.
    * 
@@ -3372,34 +3379,33 @@ export class SurveyCreatorModel extends Base
   }
   public getQuestionTypeSelectorModel(beforeAdd: (type: string) => void, element?: SurveyElement) {
     let panel = !!element && element.isPanel ? <PanelModel>element : null;
-    var availableTypes = this.getAvailableToolboxItems(element).map((item) => {
-      return this.createIActionBarItemByClass(item.name, item.title, item.iconName, item.needSeparator);
-    });
-    const listModel = new ListModel(
-      availableTypes,
-      (item: any) => {
-        this.currentAddQuestionType = item.id;
-        this.addNewQuestionInPage(beforeAdd, panel);
-        popupModel.toggleVisibility();
-      },
-      false
-    );
-    listModel.locOwner = this;
-    const popupModel = new PopupModel(
-      "sv-list", { model: listModel },
-      "bottom",
-      "center"
-    );
-    popupModel.displayMode = this.isTouch ? "overlay" : "popup";
+    const getActions = () => {
+      const availableTypes = this.getAvailableToolboxItems(element).map((item) => {
+        return this.createIActionBarItemByClass(item.name, item.title, item.iconName, item.needSeparator);
+      });
+      return availableTypes;
+    };
 
-    return <any>{
+    const newAction = createDropdownActionModel({
       iconName: "icon-more",
       title: this.getLocString("ed.addNewQuestion"),
-      action: () => {
-        popupModel.toggleVisibility();
+    }, {
+      items: getActions(),
+      onSelectionChanged: (item: any) => {
+        this.currentAddQuestionType = item.id;
+        this.addNewQuestionInPage(beforeAdd, panel);
       },
-      popupModel: popupModel
-    };
+      onShow: () => {
+        const listModel = newAction.popupModel.contentComponentData.model;
+        listModel.setItems(getActions());
+      },
+      allowSelection: false,
+      verticalPosition: "bottom",
+      horizontalPosition: "center",
+      displayMode: this.isTouch ? "overlay" : "popup"
+    });
+
+    return newAction;
   }
 
   public getUpdatedPageAdornerFooterActions(pageAdorner: PageAdorner, actions: Array<IAction>) {

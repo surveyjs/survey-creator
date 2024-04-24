@@ -1,6 +1,8 @@
 if (!window["%hammerhead%"]) {
   // SurveyCreator.SurveyJSONEditor.aceBasePath = "https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.10/";
 
+  Survey.Serializer.findProperty("page", "name").defaultValue = "test";
+
   SurveyCreator.localization.currentLocale = "en";
   let options = {
     // showTestSurveyTab: false,

@@ -115,13 +115,13 @@ export class ImageItemValueAdornerComponent extends CreatorModelElement<
                   className="svc-context-button"
                   onClick={() => this.model.chooseFile(this.model)}
                 >
-                  <SvgIcon size={24} iconName={"icon-file"}></SvgIcon>
+                  <SvgIcon role="button" size={24} iconName={"icon-file"} title={this.model.selectFileTitle}></SvgIcon>
                 </span>) : null}
                 {this.model.allowRemove && !this.model.isUploading ? attachKey2click(<span
                   className="svc-context-button svc-context-button--danger"
                   onClick={() => this.model.remove(this.model)}
                 >
-                  <SvgIcon size={24} iconName={"icon-delete"}></SvgIcon>
+                  <SvgIcon role="button" size={24} iconName={"icon-delete"} title={this.model.removeFileTitle}></SvgIcon>
                 </span>) : null}
               </div>
               : null

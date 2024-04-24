@@ -72,6 +72,10 @@ export function updateBoxShadowSettingsJSON() {
 }
 
 export function createBoxShadow(value: Array<any>): string {
+  if(!Array.isArray(value)) return undefined;
+  let hasValue = false;
+  value.forEach(val => { for(let key in val) { hasValue = true; } });
+  if(!hasValue) return undefined;
   return value.map((val => `${val.isInset == true ? "inset " : ""}${val.x ?? 0}px ${val.y ?? 0}px ${val.blur ?? 0}px ${val.spread ?? 0}px ${val.color ?? "#000000"}`
   )).join(", ");
 }

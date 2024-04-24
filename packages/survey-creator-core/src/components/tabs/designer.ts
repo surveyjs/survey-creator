@@ -19,6 +19,10 @@ export class TabDesignerViewModel extends Base {
   @property() showPlaceholder: boolean;
   public creator: SurveyCreatorModel;
 
+  public get displayPageDropTarget() {
+    return this.pagesController.page2Display === this.newPage ? "newGhostPage" : this.pagesController.page2Display.name;
+  }
+
   private createNewPage() {
     if (!this.creator.canAddPage()) {
       return null;
