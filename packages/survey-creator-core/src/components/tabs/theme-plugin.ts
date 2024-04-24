@@ -1,4 +1,4 @@
-import { Action, ComputedUpdater, surveyCss, defaultV2ThemeName, ITheme, EventBase, Serializer, settings as surveySettings, Question, IElement, SurveyModel, PanelModelBase, PanelModel, QuestionHtmlModel, QuestionFileModel } from "survey-core";
+import { Action, ComputedUpdater, surveyCss, defaultV2ThemeName, ITheme, EventBase, Serializer, settings as surveySettings, Question, IElement, SurveyModel, PanelModelBase, PanelModel, QuestionHtmlModel, QuestionFileModel, QuestionDropdownModel } from "survey-core";
 import { settings } from "../../creator-settings";
 import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
@@ -43,6 +43,7 @@ export interface IAddPropertyGridEditorParams {
  */
 export class ThemeTabPlugin implements ICreatorPlugin {
   public static DefaultTheme = Themes["default-light"];
+  private allowModifyTheme: boolean = true;
   private previewAction: Action;
   private invisibleToggleAction: Action;
   private testAgainAction: Action;
@@ -170,6 +171,10 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.update();
     this.propertyGrid.survey.onOpenFileChooser.clear();
     this.propertyGrid.obj = this.themeModel;
+    this.propertyGrid.survey.mode = "edit";
+    this.propertyGrid.survey.getAllQuestions().forEach(q => q.readOnly = false);
+    this.onAvailableThemesChanged(this.availableThemes);
+    this.updateAllowModifyTheme();
     this.propertyGrid.survey.setVariable("advancedmode", false);
     const themeBuilderCss = { ...propertyGridCss };
     themeBuilderCss.root += " spg-theme-builder-root";
@@ -222,7 +227,6 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   }
   public update(): void {
     if (!this.model) return;
-    // this.model.availableThemes = this.availableThemes;
     this.model.simulator.landscape = this.creator.previewOrientation != "portrait";
     this.model.testAgainAction = this.testAgainAction;
     this.model.prevPageAction = this.prevPageAction;
@@ -260,6 +264,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       }
       this.propertyGrid.survey.editingObj = undefined;
       this.propertyGrid.survey.editingObj = sender;
+      this.updateAllowModifyTheme();
     });
     this.themeModel.onThemePropertyChanged.add((sender, options) => {
       this.syncTheme();
@@ -278,6 +283,16 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     });
 
     this.resetTheme.enabled = getThemeFullName(this.themeModel.defaultSessionTheme) !== getThemeFullName(this.creator.theme) || this.isModified;
+  }
+  private updateAllowModifyTheme() {
+    const opt: { theme: ITheme, allow: boolean } = { theme: this.themeModel, allow: !this.creator.readOnly };
+    this.onAllowModifyTheme.fire(this, opt);
+
+    this.propertyGrid.survey.getAllQuestions().forEach(q => {
+      if (["themeName", "colorPalette", "isPanelless"].indexOf(q.name) === -1) {
+        q.readOnly = this.creator.onIsPropertyReadOnlyCallback(this.themeModel, this.themeModel.getPropertyByName(q.name), !opt.allow, undefined, undefined, false);
+      }
+    });
   }
   public deactivate(): boolean {
     if (this.model) {
@@ -603,9 +618,19 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   }
   public set availableThemes(availableThemes: string[]) {
     this._availableThemes = availableThemes || [];
-    // if (!!this.model) {
-    //   this.model.availableThemes = availableThemes;
-    // }
+    this.onAvailableThemesChanged(availableThemes);
+    this.updateAllowModifyTheme();
+  }
+
+  private onAvailableThemesChanged(availableThemes: string[]) {
+    const themeChooser = this.propertyGrid.survey.getQuestionByName("themeName") as QuestionDropdownModel;
+    if (!!themeChooser) {
+      themeChooser.choices = availableThemes.map(theme => ({ value: theme, text: getLocString("theme.names." + theme) }));
+      if (availableThemes.indexOf(themeChooser.value) === -1) {
+        this.themeModel.setTheme(this.themeModel.defaultSessionTheme);
+      }
+    }
+    this.propertyGrid.survey.runExpressions();
   }
 
   /**
@@ -660,9 +685,6 @@ export class ThemeTabPlugin implements ICreatorPlugin {
           availableThemes.splice(themeIndex, 1);
           this.availableThemes = availableThemes;
         }
-      }
-      if (this.themeModel.themeName === themeToDelete.themeName) {
-        this.themeModel.setTheme(this.themeModel.defaultSessionTheme);
       }
     }
   }

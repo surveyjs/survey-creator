@@ -1,3 +1,22 @@
+import { QuestionButtonGroupModel, QuestionCompositeModel, QuestionDropdownModel, SurveyElement } from "survey-core";
+import { ThemeModel } from "../../src/components/tabs/theme-model";
+import { ThemeTabPlugin } from "../../src/components/tabs/theme-plugin";
+import { CreatorTester } from "../creator-tester";
+import { PredefinedColors, PredefinedThemes, Themes } from "../../src/components/tabs/themes";
+import { QuestionFileEditorModel } from "../../src/custom-questions/question-file";
+import { editorLocalization } from "../../src/editorLocalization";
+export { QuestionFileEditorModel } from "../../src/custom-questions/question-file";
+export { QuestionSpinEditorModel } from "../../src/custom-questions/question-spin-editor";
+export { QuestionColorModel } from "../../src/custom-questions/question-color";
+export { createColor } from "../../src/components/tabs/theme-custom-questions/color-settings";
+export { createBoxShadow, parseBoxShadow } from "../../src/components/tabs/theme-custom-questions/boxshadow-settings";
+export * from "../../src/components/tabs/theme-custom-questions/boxshadow-settings";
+export * from "../../src/property-grid/theme-settings";
+
+test("IHeader de/serialization", (): any => {
+  const themeModel = new ThemeModel();
+
+});
 
 // test("headerViewContainer init state", (): any => {
 //   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });

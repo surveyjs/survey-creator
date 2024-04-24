@@ -1556,10 +1556,14 @@ export class SurveyCreatorModel extends Base
     property: JsonObjectProperty,
     readOnly: boolean,
     parentObj: Base,
-    parentProperty: JsonObjectProperty
+    parentProperty: JsonObjectProperty,
+    creatorReadOnly?: boolean
   ): boolean {
     if (!property) return false;
-    const proposedValue = this.readOnly || readOnly;
+    if (creatorReadOnly === undefined) {
+      creatorReadOnly = this.readOnly;
+    }
+    const proposedValue = creatorReadOnly || readOnly;
     if (this.onGetPropertyReadOnly.isEmpty) return proposedValue;
     const options = {
       obj: obj,

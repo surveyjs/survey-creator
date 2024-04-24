@@ -202,6 +202,27 @@ export class ThemeModel extends Base implements ITheme {
   //     }
   //   });
   // }
+  public hasVariations(palette: boolean): boolean {
+    let themeHasModeVariations = false;
+    let themeHasPaletteVariations = false;
+    const registeredThemes = Object.keys(Themes);
+    let themeLight = this.themeName + "-light";
+    let themeDark = this.themeName + "-dark";
+    if (this.isPanelless) {
+      themeLight += "-panelless";
+      themeDark += "-panelless";
+    }
+    themeHasPaletteVariations = registeredThemes.indexOf(themeLight) !== -1 && registeredThemes.indexOf(themeDark) !== -1;
+
+    let themePanels = this.themeName + "-" + this.colorPalette;
+    let themePanelless = themePanels + "-panelless";
+    themeHasModeVariations = registeredThemes.indexOf(themePanels) !== -1 && registeredThemes.indexOf(themePanelless) !== -1;
+    if (palette) {
+      return themeHasPaletteVariations;
+    } else {
+      return themeHasModeVariations;
+    }
+  }
 
   // private updatePropertyGridEditorsAvailability() {
   //   const isCustomTheme = PredefinedThemes.indexOf(this.themeName) === -1;
@@ -368,23 +389,6 @@ export class ThemeModel extends Base implements ITheme {
     this.loadTheme(surveyTheme);
     this.undoRedoManager = new UndoRedoManager();
   }
-
-  // public get availableThemes() {
-  //   return [].concat(this._availableThemes);
-  // }
-  // public set availableThemes(availebleThemes: string[]) {
-  //   this._availableThemes = availebleThemes || [];
-  //   if (this.themeEditorSurvey) {
-  //     const themeChooser = this.themeEditorSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
-  //     if (!!themeChooser) {
-  //       themeChooser.choices = availebleThemes.map(theme => ({ value: theme, text: getLocString("theme.names." + theme) }));
-  //       if (availebleThemes.indexOf(themeChooser.value) === -1) {
-  //         themeChooser.value = ThemeModel.DefaultTheme.themeName;
-  //       }
-  //     }
-  //     // this.updatePropertyGridEditorsAvailability();
-  //   }
-  // }
 
   public get header(): IHeader {
     return this.getPropertyValue("header");
@@ -677,6 +681,9 @@ Serializer.addClass(
         { value: "dark", text: getLocString("theme.themePaletteDark") }
       ],
       category: "general",
+      enableIf: (obj: ThemeModel): boolean => {
+        return !obj || obj.hasVariations(true);
+      },
     }, {
       type: "buttongroup",
       name: "isPanelless",
@@ -685,6 +692,9 @@ Serializer.addClass(
         { value: false, text: getLocString("theme.themeModePanels") },
         { value: true, text: getLocString("theme.themeModeLightweight") }],
       category: "general",
+      enableIf: (obj: ThemeModel): boolean => {
+        return !obj || obj.hasVariations(false);
+      },
     },
     {
       type: "spinedit",
