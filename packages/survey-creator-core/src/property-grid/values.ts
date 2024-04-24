@@ -19,7 +19,7 @@ export abstract class PropertyGridValueEditorBase extends PropertyGridEditor {
   ): {
     type: "linkvalue",
     showValueInLink: false,
-    titleLocation: "hidden"
+    titleLocation: "hidden",
   } {
     return {
       type: "linkvalue",

@@ -670,8 +670,8 @@ export class PropertyJSONGenerator {
     type: "panel",
     name: string,
     title: string,
-    elements: Array<unknown>
-    state?: "collapsed"
+    elements: Array<unknown>,
+    state?: "collapsed",
   } {
     const res: any = {
       type: "panel",
