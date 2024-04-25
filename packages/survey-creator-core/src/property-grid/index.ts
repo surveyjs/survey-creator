@@ -137,7 +137,7 @@ export interface IPropertyGridEditor {
     property: JsonObjectProperty,
     question: Question,
     options: ISurveyCreatorOptions
-  ) => void;
+  ) => IPropertyEditorSetup;
   onCreated?: (obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions,
     propGridDefinition?: ISurveyPropertyGridDefinition) => void;
   onSetup?: (obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions) => void;
@@ -408,6 +408,18 @@ export class PropertyGridTitleActionsCreator {
       }
     };
   }
+  private showModalPropertyEditor(
+    editor: IPropertyGridEditor,
+    property: JsonObjectProperty,
+    question: Question
+  ) {
+    return editor.showModalPropertyEditor(
+      editor,
+      property,
+      question,
+      this.options
+    );
+  }
 
   private createEditorSetupAction(
     editor: IPropertyGridEditor,
@@ -421,13 +433,8 @@ export class PropertyGridTitleActionsCreator {
       enabled: enabled,
       title: getLocString("pe.edit"),
       showTitle: false,
-      action() {
-        editor.showModalPropertyEditor(
-          editor,
-          property,
-          question,
-          this.options
-        );
+      action: () => {
+        return this.showModalPropertyEditor(editor, property, question);
       }
     };
     return setupAction;
@@ -1274,7 +1281,7 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
     question: Question,
     options: ISurveyCreatorOptions,
     onClose?: (reason: "apply" | "cancel") => void
-  ): void {
+  ): IPropertyEditorSetup {
     const obj = (<any>question).obj;
     const surveyPropertyEditor = editor.createPropertyEditorSetup(
       obj,
@@ -1282,14 +1289,14 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
       question,
       options
     );
-    if (!surveyPropertyEditor) return;
+    if (!surveyPropertyEditor) return null;
     if (property.type !== "condition") {
       surveyPropertyEditor.editSurvey.css = defaultV2Css;
     }
     if (question.isReadOnly) {
       surveyPropertyEditor.editSurvey.mode = "display";
     }
-    if (!settings.showDialog) return;
+    if (!settings.showDialog) return surveyPropertyEditor;
     const prevCurrentLocale = surveyLocalization.currentLocale;
     const locale = editorLocalization.currentLocale;
     surveyLocalization.currentLocale = locale;
@@ -1323,6 +1330,7 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
     surveyLocalization.currentLocale = prevCurrentLocale;
     this.onModalPropertyEditorShown(editor, property, question, options);
     options.onPropertyGridShowModalCallback(obj, property, question, surveyPropertyEditor, popupModel);
+    return surveyPropertyEditor;
   }
   protected onModalPropertyEditorShown(editor: IPropertyGridEditor,
     property: JsonObjectProperty, question: Question,
@@ -1545,7 +1553,7 @@ export class PropertyGridEditorNumber extends PropertyGridEditor {
       if (prop.defaultValue !== undefined) {
         options.value = prop.defaultValue;
       } else {
-        if (!prop.isRequired && options.value === "") {
+        if(!prop.isRequired && options.value === "") {
           options.value = undefined;
         }
         else {
