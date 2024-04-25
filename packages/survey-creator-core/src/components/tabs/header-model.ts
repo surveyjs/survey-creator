@@ -1,10 +1,12 @@
-import { Base, ComponentCollection, IHeader, IJsonPropertyInfo, JsonObjectProperty, PanelModel, Question, Serializer } from "survey-core";
+import { Base, ComponentCollection, IHeader, IJsonPropertyInfo, ITheme, JsonObjectProperty, PanelModel, Question, Serializer } from "survey-core";
 import { ISurveyCreatorOptions, settings } from "../../creator-settings";
 import { PropertyGridEditor, PropertyGridEditorCollection, PropertyJSONGenerator } from "../../property-grid";
 import { ISurveyPropertyGridDefinition } from "../../question-editor/definition";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { themeModelPropertyGridDefinition } from "./theme-model-definition";
-import { HorizontalAlignment, VerticalAlignment } from "survey-core/typings/base-interfaces";
+import { HorizontalAlignment, ILoadFromJSONOptions, ISaveToJSONOptions, VerticalAlignment } from "survey-core/typings/base-interfaces";
+import { fontsettingsFromCssVariable, fontsettingsToCssVariable, onSerializeFontSettingsValue } from "./theme-custom-questions/font-settings";
+import { assign } from "../../utils/utils";
 
 export class HeaderModel extends Base implements IHeader {
   height: number;
@@ -23,6 +25,53 @@ export class HeaderModel extends Base implements IHeader {
 
   // @property() themePalette: string;
 
+  fromJSON(json: any, options?: ILoadFromJSONOptions): void {
+    super.fromJSON(json, options);
+    if (!!json["backgroundImageOpacity"]) this.backgroundImageOpacity = json["backgroundImageOpacity"] * 100;
+
+    if (json.cssVariables) {
+      this["surveyTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("surveyTitle"), json.cssVariables);
+      this["surveyDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("surveyDescription"), json.cssVariables);
+    }
+    // this["surveyTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("surveyTitle"), this.themeCssVariablesChanges);
+    // this["surveyDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("surveyDescription"), this.themeCssVariablesChanges);
+    // this["headerTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("headerTitle"), this.themeCssVariablesChanges);
+    // this["headerDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("headerDescription"), this.themeCssVariablesChanges);
+
+  }
+
+  toJSON(options?: ISaveToJSONOptions) {
+    const result = super.toJSON(options);
+    delete result.type;
+
+    if (this.backgroundImageOpacity !== 100) {
+      result["backgroundImageOpacity"] = this.backgroundImageOpacity / 100;
+    }
+
+    const cssVariables = {};
+    Object.keys(result).forEach(key => {
+      if (typeof result[key] === "object") {
+        const property = this.getPropertyByName(key);
+        if (property.type === "fontsettings") {
+          fontsettingsToCssVariable(result[key], property, cssVariables);
+          delete result[key];
+        }
+
+      }
+    });
+    result.cssVariables = cssVariables;
+    return result;
+  }
+
+  public saveToThemeJSON(json: ITheme, options?: ISaveToJSONOptions) {
+    const result = this.toJSON(options);
+    assign(json.cssVariables, result.cssVariables);
+    delete result.cssVariables;
+    if (Object.keys(result).length > 0) {
+      json.header = result;
+    }
+  }
+
   // private setCoverPropertiesFromSurvey(panel, themeCssVariables: { [index: string]: string }) {
   //   this._setPGEditorPropertyValue(panel.getQuestionByName("headerTitle"), "readOnly", !this.survey.hasTitle);
   //   this._setPGEditorPropertyValue(panel.getQuestionByName("headerDescription"), "readOnly", !this.survey.hasDescription);
@@ -40,11 +89,13 @@ export class HeaderModel extends Base implements IHeader {
   //   this._setPGEditorPropertyValue(panel.getQuestionByName("descriptionPositionX"), "readOnly", !this.survey.description);
   //   this._setPGEditorPropertyValue(panel.getQuestionByName("descriptionPositionY"), "readOnly", !this.survey.description);
   // }
+
   // private setCoverColorsFromThemeVariables(question: Question, cssVariable: string) {
   //   if (!!question && !!cssVariable && cssVariable !== "transparent") {
   //     question.value = cssVariable;
   //   }
   // }
+
   // private updateHeaderViewContainerEditors(themeCssVariables: { [index: string]: string }) {
   //   this.updateVisibilityOfPropertyGridGroups();
 
@@ -196,6 +247,7 @@ Serializer.addClass(
       name: "logoPosition",
       displayName: getLocString("theme.logoPosition"),
       visibleIf: (obj) => obj.headerView === "basic",
+      default: "left",
       choices: [
         { value: "left", text: getLocString("theme.horizontalAlignmentLeft") },
         { value: "right", text: getLocString("theme.horizontalAlignmentRight") }
@@ -207,19 +259,26 @@ Serializer.addClass(
       displayName: getLocString("theme.surveyTitle"),
       visibleIf: (obj) => obj.headerView === "basic",
       default: getDefaultTitleSetting(),
+      onSerializeValue: (obj: HeaderModel) => {
+        return onSerializeFontSettingsValue(obj, "surveyTitle");
+      }
     },
     {
       type: "fontsettings",
       name: "surveyDescription",
       displayName: getLocString("theme.surveyDescription"),
       visibleIf: (obj) => obj.headerView === "basic",
-      default: getDefaultDescriptionSetting()
+      default: getDefaultDescriptionSetting(),
+      onSerializeValue: (obj: HeaderModel) => {
+        return onSerializeFontSettingsValue(obj, "surveyDescription");
+      }
     },
     {
       type: "spinedit",
       name: "height",
       displayName: getLocString("p.height"),
       visibleIf: (obj) => obj.headerView === "advanced",
+      default: 256,
       onPropertyEditorUpdate: function (obj: any, editor: any) {
         if (!!editor) {
           editor.unit = "px";
@@ -232,6 +291,7 @@ Serializer.addClass(
       name: "inheritWidthFrom",
       displayName: getLocString("theme.coverInheritWidthFrom"),
       visibleIf: (obj) => obj.headerView === "advanced",
+      default: "container",
       choices: [
         { value: "survey", text: getLocString("theme.coverInheritWidthFromSurvey") },
         { value: "container", text: getLocString("theme.coverInheritWidthFromContainer") }
@@ -242,6 +302,7 @@ Serializer.addClass(
       name: "textAreaWidth",
       displayName: getLocString("theme.coverTextAreaWidth"),
       visibleIf: (obj) => obj.headerView === "advanced",
+      default: 512,
       onPropertyEditorUpdate: function (obj: any, editor: any) {
         if (!!editor) {
           editor.unit = "px";
@@ -254,6 +315,8 @@ Serializer.addClass(
       name: "backgroundColorSwitch",
       displayName: getLocString("theme.coverBackgroundColorSwitch"),
       visibleIf: (obj) => obj.headerView === "advanced",
+      isSerializable: false,
+      default: "accentColor",
       choices: [
         { value: "none", text: getLocString("theme.coverBackgroundColorNone") },
         { value: "accentColor", text: getLocString("theme.coverBackgroundColorAccentColor") },
@@ -265,6 +328,7 @@ Serializer.addClass(
       name: "backgroundColor",
       displayName: "",
       visibleIf: (obj) => obj.headerView === "advanced",
+      isSerializable: false,
       onPropertyEditorUpdate: function (obj: any, editor: any) {
         if (!!editor) {
           editor.allowEmptyValue = true;
@@ -296,6 +360,7 @@ Serializer.addClass(
         { value: "contain", text: getLocString("theme.backgroundImageFitContain") },
         { value: "tile", text: getLocString("theme.backgroundImageFitTile") },
       ],
+      default: "cover",
       visibleIf: (obj) => obj.headerView === "advanced",
       onPropertyEditorUpdate: function (obj: any, editor: any) {
         if (!!editor) {
@@ -308,6 +373,7 @@ Serializer.addClass(
       type: "spinedit",
       name: "backgroundImageOpacity",
       visibleIf: (obj) => obj.headerView === "advanced",
+      default: 100,
       displayName: getLocString("theme.backgroundOpacity"),
       onPropertyEditorUpdate: function (obj: any, editor: any) {
         if (!!editor) {
@@ -344,6 +410,9 @@ Serializer.addClass(
           editor.descriptionLocation = "hidden";
           editor.allowEmptyColorValue = true;
         }
+      },
+      onSerializeValue: (obj: HeaderModel) => {
+        return onSerializeFontSettingsValue(obj, "headerTitle");
       }
     },
     {
@@ -357,6 +426,9 @@ Serializer.addClass(
           editor.descriptionLocation = "hidden";
           editor.allowEmptyColorValue = true;
         }
+      },
+      onSerializeValue: (obj: HeaderModel) => {
+        return onSerializeFontSettingsValue(obj, "headerDescription");
       }
     },
     getHorizontalAlignment("logoPositionX", getLocString("theme.logoPosition"), "right"),
@@ -366,58 +438,4 @@ Serializer.addClass(
     getHorizontalAlignment("descriptionPositionX", getLocString("theme.coverDescriptionPosition"), "left"),
     getVerticalAlignment("descriptionPositionY", "bottom"),
   ]);
-
-var json = {
-  name: "propertygrid_headersettings",
-  showInToolbox: false,
-  internal: true,
-  createElements: function (panel) {
-    //tell ComponentCollection that it is composite question
-  }
-};
-
-if (!ComponentCollection.Instance.getCustomQuestionByName(json.name)) {
-  ComponentCollection.Instance.add(json as any);
-}
-
-export class PropertyGridEditorQuestionHeaderSettings extends PropertyGridEditor {
-
-  public fit(prop: JsonObjectProperty): boolean {
-    return prop.type == "headersettings";
-  }
-  public getJSON(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): any {
-    return {
-      type: "propertygrid_headersettings",
-      titleLocation: "hidden"
-    };
-  }
-  onCreated(obj: Base, question: Question, prop: JsonObjectProperty,
-    options: ISurveyCreatorOptions, propGridDefinition?: ISurveyPropertyGridDefinition): void {
-    const panel = <PanelModel>question["contentPanel"];
-    const headersettings = obj[prop.name];
-    const propertyGenerator = new PropertyJSONGenerator(headersettings, options, obj, prop, themeModelPropertyGridDefinition);
-    propertyGenerator.setupObjPanel(panel, true);
-
-    let settingsPanel;
-    var questions = panel.elements;
-
-    for (var i = 0; i < questions.length; i++) {
-      if (questions[i].name == "settings") {
-        settingsPanel = questions[i];
-      }
-    }
-    settingsPanel.state = undefined;
-    settingsPanel.title = "";
-
-    settingsPanel.elements.forEach(el => {
-      el.title = "";
-      el.state = undefined;
-    });
-  }
-  onValueChanged(obj: Base, prop: JsonObjectProperty, question: Question): void {
-
-  }
-}
-
-PropertyGridEditorCollection.register(new PropertyGridEditorQuestionHeaderSettings());
 

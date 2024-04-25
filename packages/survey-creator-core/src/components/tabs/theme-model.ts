@@ -3,7 +3,7 @@ import { getLocString } from "../../editorLocalization";
 import { PredefinedColors, PredefinedThemes, Themes } from "./themes";
 import { settings } from "../../creator-settings";
 
-import { DefaultFonts, fontsettingsFromCssVariable, fontsettingsToCssVariable } from "./theme-custom-questions/font-settings";
+import { DefaultFonts, fontsettingsFromCssVariable, fontsettingsToCssVariable, onSerializeFontSettingsValue } from "./theme-custom-questions/font-settings";
 import { elementSettingsFromCssVariable, elementSettingsToCssVariable } from "./theme-custom-questions/element-settings";
 import { createBoxShadowReset } from "./theme-custom-questions/boxshadow-settings";
 import { HeaderModel } from "./header-model";
@@ -579,14 +579,6 @@ export class ThemeModel extends Base implements ITheme {
       );
   }
 
-  onSerializeFontSettingsValue(propertyName: string) {
-    const result = { ...this[propertyName] };
-    if (result.size != this.getPropertyByName(propertyName).defaultValue?.size) {
-      result.size = result.size + "px";
-    }
-    return result;
-  }
-
   onSerializeElementSettingsValue(propertyName: string) {
     const result = { ...this[propertyName] };
     if (result.cornerRadius != this.getPropertyByName(propertyName).defaultValue?.cornerRadius) {
@@ -598,6 +590,9 @@ export class ThemeModel extends Base implements ITheme {
   fromJSON(json: ITheme, options?: ILoadFromJSONOptions): void {
     if (!json) return;
     super.fromJSON(json, options);
+    const headerModel = new HeaderModel();
+    headerModel.fromJSON(json.header || {});
+    this.header = headerModel;
 
     if (json.cssVariables) {
       this["generalPrimaryColor"] = json.cssVariables["--sjs-primary-backcolor"];
@@ -608,7 +603,6 @@ export class ThemeModel extends Base implements ITheme {
       this.cornerRadius = this["--sjs-corner-radius"] ? roundTo2Decimals(parseFloat(this["--sjs-corner-radius"])) : undefined;
       if (!!json["backgroundOpacity"]) this.backgroundOpacity = json["backgroundOpacity"] * 100;
 
-      //   this.updateHeaderViewContainerEditors(json.cssVariables);
       this["questionPanel"] = elementSettingsFromCssVariable(this.getPropertyByName("questionPanel"), json.cssVariables, "--sjs-general-backcolor", "--sjs-general-backcolor-dark", this.cornerRadius);
       this["editorPanel"] = elementSettingsFromCssVariable(this.getPropertyByName("editorPanel"), json.cssVariables, "--sjs-general-backcolor-dim-light", "--sjs-general-backcolor-dim-dark", this.cornerRadius);
 
@@ -642,7 +636,7 @@ export class ThemeModel extends Base implements ITheme {
       if (key.indexOf("--") == 0) {
         cssVariables[key] = result[key];
         delete result[key];
-      } else if (key !== "header" && typeof result[key] === "object") {
+      } else if (typeof result[key] === "object") {
 
         const property = this.getPropertyByName(key);
         if (property.type === "fontsettings") {
@@ -653,11 +647,10 @@ export class ThemeModel extends Base implements ITheme {
           elementSettingsToCssVariable(result[key], property, cssVariables);
           delete result[key];
         }
-      } else if (key === "header") {
-        delete result[key];
       }
     });
     result.cssVariables = cssVariables;
+    (this.header as HeaderModel).saveToThemeJSON(result, options);
     return result;
   }
 
@@ -855,6 +848,7 @@ Serializer.addProperties("theme",
   }, {
     type: "headersettings",
     name: "header",
+    isSerializable: false,
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
         const questions = editor.contentPanel.elements;
@@ -924,7 +918,7 @@ Serializer.addProperties("theme",
       }
     },
     onSerializeValue: (obj: ThemeModel) => {
-      return obj.onSerializeFontSettingsValue("pageTitle");
+      return onSerializeFontSettingsValue(obj, "pageTitle");
     }
   }, {
     type: "fontsettings",
@@ -942,7 +936,7 @@ Serializer.addProperties("theme",
       }
     },
     onSerializeValue: (obj: ThemeModel) => {
-      return obj.onSerializeFontSettingsValue("pageDescription");
+      return onSerializeFontSettingsValue(obj, "pageDescription");
     }
   }, {
     type: "boxshadowsettings",
@@ -970,7 +964,7 @@ Serializer.addProperties("theme",
       }
     },
     onSerializeValue: (obj: ThemeModel) => {
-      return obj.onSerializeFontSettingsValue("questionTitle");
+      return onSerializeFontSettingsValue(obj, "questionTitle");
     }
   }, {
     type: "fontsettings",
@@ -988,7 +982,7 @@ Serializer.addProperties("theme",
       }
     },
     onSerializeValue: (obj: ThemeModel) => {
-      return obj.onSerializeFontSettingsValue("questionDescription");
+      return onSerializeFontSettingsValue(obj, "questionDescription");
     }
   },
   {
@@ -1017,7 +1011,7 @@ Serializer.addProperties("theme",
       }
     },
     onSerializeValue: (obj: ThemeModel) => {
-      return obj.onSerializeFontSettingsValue("editorFont");
+      return onSerializeFontSettingsValue(obj, "editorFont");
     }
   }, {
     type: "colorsettings",

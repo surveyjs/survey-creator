@@ -1,5 +1,5 @@
-import { QuestionButtonGroupModel, QuestionCompositeModel, QuestionDropdownModel, SurveyElement } from "survey-core";
-import { ThemeModel } from "../../src/components/tabs/theme-model";
+import { ITheme, QuestionButtonGroupModel, QuestionCompositeModel, QuestionDropdownModel, SurveyElement } from "survey-core";
+import { HeaderModel, ThemeModel } from "../../src/components/tabs/theme-model";
 import { ThemeTabPlugin } from "../../src/components/tabs/theme-plugin";
 import { CreatorTester } from "../creator-tester";
 import { PredefinedColors, PredefinedThemes, Themes } from "../../src/components/tabs/themes";
@@ -15,96 +15,57 @@ export * from "../../src/property-grid/theme-settings";
 
 test("IHeader de/serialization", (): any => {
   const themeModel = new ThemeModel();
+  expect(themeModel.toJSON().header).toBe(undefined);
 
+  const themeJson = <ITheme>{
+    themeName: "custom",
+    colorPalette: "light",
+    isPanelless: true,
+    header: {
+      "height": 300,
+      "inheritWidthFrom": "survey",
+      "textAreaWidth": 600,
+      "overlapEnabled": true,
+      "backgroundImage": "https://t4.ftcdn.net/jpg/02/83/13/61/360_F_283136113_b3VRHNiOPFMOluzYJPpfuoH8Czh9c743.jpg",
+      "backgroundImageOpacity": 0.5,
+      "backgroundImageFit": "fill",
+      "logoPositionX": "center",
+      "logoPositionY": "middle",
+      "titlePositionX": "center",
+      "titlePositionY": "middle",
+      "descriptionPositionX": "center",
+      "descriptionPositionY": "middle"
+    }
+  };
+  themeModel.fromJSON(themeJson);
+  const result = themeModel.toJSON();
+  expect(result.header).toStrictEqual(themeJson.header!);
 });
 
-// test("headerViewContainer init state", (): any => {
-//   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-//   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
-//   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+test("set headerViewContainer basic", (): any => {
+  const themeModel = new ThemeModel();
+  themeModel.initialize();
+  const header = themeModel.header as HeaderModel;
 
-//   themePlugin.activate();
-//   const themeBuilder = themePlugin.model as ThemeEditorModel;
-//   const themeEditorSurvey = themeBuilder.themeEditorSurvey;
-//   const headerViewContainer = themeEditorSurvey.getQuestionByName("headerViewContainer");
+  let currentThemeCssVariables = themeModel.cssVariables;
+  expect(currentThemeCssVariables["--sjs-font-surveytitle-family"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs-font-surveytitle-weight"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs-font-surveytitle-size"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs-font-surveydescription-family"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs-font-surveydescription-weight"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs-font-surveydescription-size"]).toBeUndefined();
 
-//   expect(headerViewContainer.value[0]).toStrictEqual({
-//     "headerView": "basic",
-//     "logoPosition": "left",
-//     "inheritWidthFrom": "container",
-//     "overlapEnabled": false,
-//     "backgroundColorSwitch": "accentColor",
-//     "backgroundImageFit": "cover",
-//     "backgroundImageOpacity": 100,
-//     "logoPositionX": "right",
-//     "logoPositionY": "top",
-//     "titlePositionX": "left",
-//     "titlePositionY": "bottom",
-//     "descriptionPositionX": "left",
-//     "descriptionPositionY": "bottom",
-//     "textAreaWidth": 512,
-//     "height": 256,
-//     "headerDescription": {
-//       "family": "Open Sans",
-//       "size": 16,
-//       "weight": "600",
-//     },
-//     "headerTitle": {
-//       "family": "Open Sans",
-//       "size": 32,
-//       "weight": "700",
-//     },
-//     "surveyDescription": {
-//       "family": "Open Sans",
-//       "size": 16,
-//       "weight": "400",
-//     },
-//     "surveyTitle": {
-//       "family": "Open Sans",
-//       "size": 32,
-//       "weight": "700",
-//     },
-//   });
-// });
+  header["surveyTitle"] = { family: "Courier New", weight: "400", size: 41 };
+  header["surveyDescription"] = { family: "Trebuchet MS", weight: "800", size: 21 };
 
-// test("set headerViewContainer basic", (): any => {
-//   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-//   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
-
-//   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
-//   themePlugin.activate();
-//   const themeBuilder = themePlugin.model as ThemeEditorModel;
-//   const themeEditorSurvey = themeBuilder.themeEditorSurvey;
-//   const headerViewContainer = themeEditorSurvey.getQuestionByName("headerViewContainer").panels[0];
-//   const surveyTitleQuestion = headerViewContainer.getElementByName("surveyTitle");
-//   const surveyDescriptionQuestion = headerViewContainer.getElementByName("surveyDescription");
-//   let currentThemeCssVariables = creator.theme.cssVariables || {};
-//   expect(currentThemeCssVariables["--sjs-font-surveytitle-family"]).toBeUndefined();
-//   expect(currentThemeCssVariables["--sjs-font-surveytitle-weight"]).toBeUndefined();
-//   expect(currentThemeCssVariables["--sjs-font-surveytitle-size"]).toBeUndefined();
-//   expect(currentThemeCssVariables["--sjs-font-surveydescription-family"]).toBeUndefined();
-//   expect(currentThemeCssVariables["--sjs-font-surveydescription-weight"]).toBeUndefined();
-//   expect(currentThemeCssVariables["--sjs-font-surveydescription-size"]).toBeUndefined();
-//   expect(creator.survey.logoPosition).toEqual("left");
-
-//   headerViewContainer.getElementByName("logoPosition").value = "right";
-//   surveyTitleQuestion.contentPanel.getQuestionByName("weight").value = "400";
-//   surveyTitleQuestion.contentPanel.getQuestionByName("size").value = 41;
-//   surveyTitleQuestion.contentPanel.getQuestionByName("family").value = "Courier New";
-//   surveyDescriptionQuestion.contentPanel.getQuestionByName("weight").value = "800";
-//   surveyDescriptionQuestion.contentPanel.getQuestionByName("size").value = 21;
-//   surveyDescriptionQuestion.contentPanel.getQuestionByName("family").value = "Trebuchet MS";
-
-//   currentThemeCssVariables = creator.theme.cssVariables || {};
-//   expect(currentThemeCssVariables["--sjs-font-surveytitle-family"]).toBe("Courier New");
-//   expect(currentThemeCssVariables["--sjs-font-surveytitle-weight"]).toBe("400");
-//   expect(currentThemeCssVariables["--sjs-font-surveytitle-size"]).toBe("41px");
-//   expect(currentThemeCssVariables["--sjs-font-surveydescription-family"]).toBe("Trebuchet MS");
-//   expect(currentThemeCssVariables["--sjs-font-surveydescription-weight"]).toBe("800");
-//   expect(currentThemeCssVariables["--sjs-font-surveydescription-size"]).toBe("21px");
-//   expect(creator.theme.header).toBeUndefined();
-//   expect(creator.survey.logoPosition).toEqual("right");
-// });
+  currentThemeCssVariables = themeModel.cssVariables;
+  expect(currentThemeCssVariables["--sjs-font-surveytitle-family"]).toBe("Courier New");
+  expect(currentThemeCssVariables["--sjs-font-surveytitle-weight"]).toBe("400");
+  expect(currentThemeCssVariables["--sjs-font-surveytitle-size"]).toBe("41px");
+  expect(currentThemeCssVariables["--sjs-font-surveydescription-family"]).toBe("Trebuchet MS");
+  expect(currentThemeCssVariables["--sjs-font-surveydescription-weight"]).toBe("800");
+  expect(currentThemeCssVariables["--sjs-font-surveydescription-size"]).toBe("21px");
+});
 
 // test("set headerViewContainer advanced", (): any => {
 //   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
@@ -297,41 +258,39 @@ test("IHeader de/serialization", (): any => {
 //   });
 // });
 
-// test("headerViewContainer get color values from theme", (): any => {
-//   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-//   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
-//   creator.theme = {
-//     "cssVariables": {
-//       "--sjs-font-headertitle-color": "rgba(219, 15, 15, 0.91)",
-//       "--sjs-font-headerdescription-color": "rgba(50, 16, 218, 0.45)",
-//     },
-//     "header": {
-//       "backgroundImage": "",
-//       "height": 256,
-//       "inheritWidthFrom": "container",
-//       "textAreaWidth": 512,
-//       "overlapEnabled": false,
-//       "backgroundImageOpacity": 1,
-//       "backgroundImageFit": "cover",
-//       "logoPositionX": "right",
-//       "logoPositionY": "top",
-//       "titlePositionX": "left",
-//       "titlePositionY": "bottom",
-//       "descriptionPositionX": "left",
-//       "descriptionPositionY": "bottom"
-//     }
-//   };
-//   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
-//   themePlugin.activate();
-//   const themeBuilder = themePlugin.model as ThemeEditorModel;
-//   const themeEditorSurvey = themeBuilder.themeEditorSurvey;
-//   const headerViewContainer = themeEditorSurvey.getQuestionByName("headerViewContainer").panels[0];
-//   const headerTitleQuestion = headerViewContainer.getElementByName("headerTitle");
-//   const headerDescriptionQuestion = headerViewContainer.getElementByName("headerDescription");
+test("headerViewContainer get color values from theme", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.theme = {
+    "cssVariables": {
+      "--sjs-font-headertitle-color": "rgba(219, 15, 15, 0.91)",
+      "--sjs-font-headerdescription-color": "rgba(50, 16, 218, 0.45)",
+    },
+    "header": {
+      "backgroundImage": "",
+      "height": 256,
+      "inheritWidthFrom": "container",
+      "textAreaWidth": 512,
+      "overlapEnabled": false,
+      "backgroundImageOpacity": 1,
+      "backgroundImageFit": "cover",
+      "logoPositionX": "right",
+      "logoPositionY": "top",
+      "titlePositionX": "left",
+      "titlePositionY": "bottom",
+      "descriptionPositionX": "left",
+      "descriptionPositionY": "bottom"
+    }
+  };
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const groupHeader = themePlugin.propertyGrid.survey.pages[0].getElementByName("header");
+  const headerTitleQuestion = groupHeader.elements[0].contentPanel.getElementByName("headerTitle");
+  const headerDescriptionQuestion = groupHeader.elements[0].contentPanel.getElementByName("headerDescription");
 
-//   expect(headerTitleQuestion.contentPanel.getQuestionByName("color").value).toEqual("rgba(219, 15, 15, 0.91)");
-//   expect(headerDescriptionQuestion.contentPanel.getQuestionByName("color").value).toEqual("rgba(50, 16, 218, 0.45)");
-// });
+  expect(headerTitleQuestion.contentPanel.getQuestionByName("color").value).toEqual("rgba(219, 15, 15, 0.91)");
+  expect(headerDescriptionQuestion.contentPanel.getQuestionByName("color").value).toEqual("rgba(50, 16, 218, 0.45)");
+});
 
 // test("headerViewContainer: restore backgroundColorSwitch", (): any => {
 //   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });

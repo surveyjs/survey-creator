@@ -1,4 +1,4 @@
-import { ComponentCollection, JsonObjectProperty, Question, QuestionCompositeModel, Serializer } from "survey-core";
+import { Base, ComponentCollection, JsonObjectProperty, Question, QuestionCompositeModel, Serializer } from "survey-core";
 import { getLocString } from "../../../editorLocalization";
 import { assign } from "../../../utils/utils";
 
@@ -108,6 +108,14 @@ export function updateFontSettingsJSON() {
   config.json.elementsJSON = getElementsJSON();
 }
 
+export function onSerializeFontSettingsValue(obj: Base, propertyName: string) {
+  const result = { ...obj[propertyName] };
+  if (result.size != obj.getPropertyByName(propertyName).defaultValue?.size) {
+    result.size = result.size + "px";
+  }
+  return result;
+}
+
 export function fontsettingsToCssVariable(value: any = {}, property: JsonObjectProperty, themeCssVariables: { [index: string]: string }) {
   Object.keys(value).forEach(key => {
     const propertyName = `--sjs-font-${property.name.toLocaleLowerCase()}-${key}`;
@@ -119,7 +127,7 @@ export function fontsettingsToCssVariable(value: any = {}, property: JsonObjectP
   });
 }
 
-export function fontsettingsFromCssVariable(property: JsonObjectProperty, themeCssVariables: { [index: string]: string }, defaultColorVariableName: string, defaultPlaceholderColorVariableName?: string): any {
+export function fontsettingsFromCssVariable(property: JsonObjectProperty, themeCssVariables: { [index: string]: string }, defaultColorVariableName?: string, defaultPlaceholderColorVariableName?: string): any {
   if (!property) return;
 
   if (!property.defaultValue) property.defaultValue = {};

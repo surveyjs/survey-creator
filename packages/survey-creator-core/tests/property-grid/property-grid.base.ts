@@ -12,6 +12,7 @@ export * from "../../src/property-grid/condition";
 export * from "../../src/property-grid/restfull";
 export * from "../../src/property-grid/theme-settings";
 export * from "../../src/property-grid/maskSettings";
+export * from "../../src/property-grid/header-settings";
 export * from "../../src/custom-questions/question-text-with-reset";
 export * from "../../src/components/link-value";
 

@@ -221,55 +221,6 @@ test("disable page settings if single page mode", (): any => {
   expect(themeEditorSurvey.getQuestionByName("pageDescription").isReadOnly).toBeFalsy();
 });
 
-test("headerViewContainer init state", (): any => {
-  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
-  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
-
-  themePlugin.activate();
-  const themeBuilder = themePlugin.model as ThemeEditorModel;
-  const themeEditorSurvey = themeBuilder.themeEditorSurvey;
-  const headerViewContainer = themeEditorSurvey.getQuestionByName("headerViewContainer");
-
-  expect(headerViewContainer.value[0]).toEqual({
-    "headerView": "basic",
-    "logoPosition": "left",
-    "inheritWidthFrom": "container",
-    "overlapEnabled": false,
-    "backgroundColorSwitch": "accentColor",
-    "backgroundImageFit": "cover",
-    "backgroundImageOpacity": 100,
-    "logoPositionX": "right",
-    "logoPositionY": "top",
-    "titlePositionX": "left",
-    "titlePositionY": "bottom",
-    "descriptionPositionX": "left",
-    "descriptionPositionY": "bottom",
-    "textAreaWidth": 512,
-    "height": 256,
-    "headerDescription": {
-      "family": "Open Sans",
-      "size": 16,
-      "weight": "600",
-    },
-    "headerTitle": {
-      "family": "Open Sans",
-      "size": 32,
-      "weight": "700",
-    },
-    "surveyDescription": {
-      "family": "Open Sans",
-      "size": 16,
-      "weight": "400",
-    },
-    "surveyTitle": {
-      "family": "Open Sans",
-      "size": 32,
-      "weight": "700",
-    },
-  });
-});
-
 test("set headerViewContainer basic", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };

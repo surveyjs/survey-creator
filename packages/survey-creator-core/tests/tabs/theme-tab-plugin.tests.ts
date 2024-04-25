@@ -333,7 +333,7 @@ test("Get theme changes only", (): any => {
 
   const fullModifiedTheme = themePlugin.getCurrentTheme() || {};
   expect(Object.keys(fullModifiedTheme).length).toBe(8);
-  expect(Object.keys(fullModifiedTheme.cssVariables).length).toBe(85);
+  expect(Object.keys(fullModifiedTheme.cssVariables).length).toBe(83);
 
   const modifiedThemeChanges = themePlugin.getCurrentTheme(true) || {};
   expect(Object.keys(modifiedThemeChanges).length).toBe(4);

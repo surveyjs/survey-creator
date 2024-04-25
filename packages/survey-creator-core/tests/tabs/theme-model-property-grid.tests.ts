@@ -1,5 +1,5 @@
 import { QuestionButtonGroupModel, QuestionCompositeModel, QuestionDropdownModel, SurveyElement } from "survey-core";
-import { ThemeModel } from "../../src/components/tabs/theme-model";
+import { HeaderModel, ThemeModel } from "../../src/components/tabs/theme-model";
 import { ThemeTabPlugin } from "../../src/components/tabs/theme-plugin";
 import { CreatorTester } from "../creator-tester";
 import { PredefinedColors, PredefinedThemes, Themes } from "../../src/components/tabs/themes";
@@ -759,3 +759,84 @@ test("Disable/enable themeMode property for custom theme variations in theme pro
 //   themeChooser.value = "flat";
 //   expect(themeEditorSurvey.getAllQuestions()).toHaveLength(3);
 // });
+
+test("headerViewContainer init state", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+
+  themePlugin.activate();
+  const groupHeader = themePlugin.propertyGrid.survey.pages[0].getElementByName("header");
+  const headerViewContainer = groupHeader.elements[0].contentPanel;
+
+  expect(headerViewContainer.getValue()).toStrictEqual({
+    "headerView": "basic",
+    "logoPosition": "left",
+    "inheritWidthFrom": "container",
+    "overlapEnabled": false,
+    "backgroundColorSwitch": "accentColor",
+    "backgroundImageFit": "cover",
+    "backgroundImageOpacity": 100,
+    "logoPositionX": "right",
+    "logoPositionY": "top",
+    "titlePositionX": "left",
+    "titlePositionY": "bottom",
+    "descriptionPositionX": "left",
+    "descriptionPositionY": "bottom",
+    "textAreaWidth": 512,
+    "height": 256,
+    "headerDescription": {
+      "family": "Open Sans",
+      "size": 16,
+      "weight": "600",
+    },
+    "headerTitle": {
+      "family": "Open Sans",
+      "size": 32,
+      "weight": "700",
+    },
+    "surveyDescription": {
+      "family": "Open Sans",
+      "size": 16,
+      "weight": "400",
+    },
+    "surveyTitle": {
+      "family": "Open Sans",
+      "size": 32,
+      "weight": "700",
+    },
+  });
+});
+
+test("set headerViewContainer basic", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const themeModel = themePlugin.themeModel as ThemeModel;
+  // const themeBuilder = themePlugin.model as ThemeEditorModel;
+  // const themeEditorSurvey = themeBuilder.themeEditorSurvey;
+  // const headerViewContainer = themeEditorSurvey.getQuestionByName("headerViewContainer").panels[0];
+  // const surveyTitleQuestion = headerViewContainer.getElementByName("surveyTitle");
+  // const surveyDescriptionQuestion = headerViewContainer.getElementByName("surveyDescription");
+  const header = themeModel.header as HeaderModel;
+
+  expect(header["surveyTitle"]).toStrictEqual({});
+  expect(header["surveyDescription"]).toStrictEqual({});
+
+  // expect(creator.survey.logoPosition).toEqual("left");
+
+  // headerViewContainer.getElementByName("logoPosition").value = "right";
+  // surveyTitleQuestion.contentPanel.getQuestionByName("weight").value = "400";
+  // surveyTitleQuestion.contentPanel.getQuestionByName("size").value = 41;
+  // surveyTitleQuestion.contentPanel.getQuestionByName("family").value = "Courier New";
+  // surveyDescriptionQuestion.contentPanel.getQuestionByName("weight").value = "800";
+  // surveyDescriptionQuestion.contentPanel.getQuestionByName("size").value = 21;
+  // surveyDescriptionQuestion.contentPanel.getQuestionByName("family").value = "Trebuchet MS";
+  expect(header["surveyTitle"]).toStrictEqual({ family: "Courier New", weight: "400", size: 41 });
+  expect(header["surveyDescription"]).toStrictEqual({ family: "Trebuchet MS", weight: "800", size: 21 });
+
+  // expect(creator.theme.header).toBeUndefined();
+  // expect(creator.survey.logoPosition).toEqual("right");
+});
