@@ -1044,8 +1044,9 @@ export var czStrings = {
     },
     showProgressBar: {
       off: "Skrytý",
-      aboveHeader: "Nad záhlavím",
-      belowHeader: "Pod záhlavím"
+      topbottom: "nahoře a dole",
+      aboveheader: "Nad záhlavím",
+      belowheader: "Pod záhlavím"
     },
     sum: "Součet",
     count: "Počítat",
@@ -1892,8 +1893,8 @@ editorLocalization.locales["cs"] = czStrings;
 // totalDisplayStyle.date: "Date" => "Rande"
 // rowsOrder.initial: "Original" => "Původní"
 // questionsOrder.initial: "Original" => "Původní"
-// showProgressBar.aboveHeader: "Above the header" => "Nad záhlavím"
-// showProgressBar.belowHeader: "Below the header" => "Pod záhlavím"
+// showProgressBar.aboveheader: "Above the header" => "Nad záhlavím"
+// showProgressBar.belowheader: "Below the header" => "Pod záhlavím"
 // pv.sum: "Sum" => "Součet"
 // pv.count: "Count" => "Počítat"
 // pv.min: "Min" => "Min"

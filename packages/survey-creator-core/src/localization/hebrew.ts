@@ -1044,8 +1044,9 @@ export var hebrewStrings = {
     },
     showProgressBar: {
       off: "מוסתר",
-      aboveHeader: "מעל הכותרת העליונה",
-      belowHeader: "מתחת לכותרת העליונה"
+      topbottom: "עליון ותחתון",
+      aboveheader: "מעל הכותרת העליונה",
+      belowheader: "מתחת לכותרת העליונה"
     },
     sum: "סכום",
     count: "מנה",
@@ -1892,8 +1893,8 @@ editorLocalization.locales["he"] = hebrewStrings;
 // totalDisplayStyle.date: "Date" => "תמר"
 // rowsOrder.initial: "Original" => "מקורי"
 // questionsOrder.initial: "Original" => "מקורי"
-// showProgressBar.aboveHeader: "Above the header" => "מעל הכותרת העליונה"
-// showProgressBar.belowHeader: "Below the header" => "מתחת לכותרת העליונה"
+// showProgressBar.aboveheader: "Above the header" => "מעל הכותרת העליונה"
+// showProgressBar.belowheader: "Below the header" => "מתחת לכותרת העליונה"
 // pv.sum: "Sum" => "סכום"
 // pv.count: "Count" => "מנה"
 // pv.min: "Min" => "דקות"

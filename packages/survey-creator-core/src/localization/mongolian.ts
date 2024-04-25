@@ -1044,8 +1044,9 @@ export var mnStrings = {
     },
     showProgressBar: {
       off: "Нуусан",
-      aboveHeader: "Толгой дээгүүр",
-      belowHeader: "Гарчигны доор"
+      topbottom: "Дээд ба доод",
+      aboveheader: "Толгой дээгүүр",
+      belowheader: "Гарчигны доор"
     },
     sum: "Сум",
     count: "Тооллого",
@@ -1984,8 +1985,8 @@ editorLocalization.locales["mn"] = mnStrings;
 // totalDisplayStyle.date: "Date" => "Огноо"
 // rowsOrder.initial: "Original" => "Оргил"
 // questionsOrder.initial: "Original" => "Оргил"
-// showProgressBar.aboveHeader: "Above the header" => "Толгой дээгүүр"
-// showProgressBar.belowHeader: "Below the header" => "Гарчигны доор"
+// showProgressBar.aboveheader: "Above the header" => "Толгой дээгүүр"
+// showProgressBar.belowheader: "Below the header" => "Гарчигны доор"
 // pv.sum: "Sum" => "Сум"
 // pv.count: "Count" => "Тооллого"
 // pv.min: "Min" => "Мин"

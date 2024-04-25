@@ -1044,8 +1044,9 @@ export var turkishStrings = {
     },
     showProgressBar: {
       off: "Gizli",
-      aboveHeader: "Başlığın üstünde",
-      belowHeader: "Başlığın altında"
+      topbottom: "Üst ve alt",
+      aboveheader: "Başlığın üstünde",
+      belowheader: "Başlığın altında"
     },
     sum: "Toplam",
     count: "Saymak",
@@ -2323,8 +2324,8 @@ editorLocalization.locales["tr"] = turkishStrings;
 // totalDisplayStyle.date: "Date" => "Tarih"
 // rowsOrder.initial: "Original" => "Özgün"
 // questionsOrder.initial: "Original" => "Özgün"
-// showProgressBar.aboveHeader: "Above the header" => "Başlığın üstünde"
-// showProgressBar.belowHeader: "Below the header" => "Başlığın altında"
+// showProgressBar.aboveheader: "Above the header" => "Başlığın üstünde"
+// showProgressBar.belowheader: "Below the header" => "Başlığın altında"
 // pv.sum: "Sum" => "Toplam"
 // pv.count: "Count" => "Saymak"
 // pv.min: "Min" => "Min"

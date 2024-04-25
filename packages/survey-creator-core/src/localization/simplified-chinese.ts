@@ -1044,8 +1044,9 @@ var simplifiedChineseTranslation = {
     },
     showProgressBar: {
       off: "隐藏",
-      aboveHeader: "标题上方",
-      belowHeader: "在标题下方"
+      topbottom: "顶和底",
+      aboveheader: "标题上方",
+      belowheader: "在标题下方"
     },
     sum: "和",
     count: "计数",
@@ -2470,8 +2471,8 @@ editorLocalization.locales["zh-cn"] = simplifiedChineseTranslation;
 // totalDisplayStyle.date: "Date" => "日期"
 // rowsOrder.initial: "Original" => "源语言"
 // questionsOrder.initial: "Original" => "源语言"
-// showProgressBar.aboveHeader: "Above the header" => "标题上方"
-// showProgressBar.belowHeader: "Below the header" => "在标题下方"
+// showProgressBar.aboveheader: "Above the header" => "标题上方"
+// showProgressBar.belowheader: "Below the header" => "在标题下方"
 // pv.sum: "Sum" => "和"
 // pv.count: "Count" => "计数"
 // pv.min: "Min" => "最小值"

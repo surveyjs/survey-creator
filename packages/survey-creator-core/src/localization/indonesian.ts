@@ -1044,8 +1044,9 @@ export var indonesianStrings = {
     },
     showProgressBar: {
       off: "Sembunyi",
-      aboveHeader: "Di atas header",
-      belowHeader: "Di bawah header"
+      topbottom: "atas dan bawah",
+      aboveheader: "Di atas header",
+      belowheader: "Di bawah header"
     },
     sum: "Jumlah",
     count: "Hitung",
@@ -2482,8 +2483,8 @@ editorLocalization.locales["id"] = indonesianStrings;
 // totalDisplayStyle.date: "Date" => "Tanggal"
 // rowsOrder.initial: "Original" => "Asli"
 // questionsOrder.initial: "Original" => "Asli"
-// showProgressBar.aboveHeader: "Above the header" => "Di atas header"
-// showProgressBar.belowHeader: "Below the header" => "Di bawah header"
+// showProgressBar.aboveheader: "Above the header" => "Di atas header"
+// showProgressBar.belowheader: "Below the header" => "Di bawah header"
 // pv.sum: "Sum" => "Jumlah"
 // pv.count: "Count" => "Hitung"
 // pv.min: "Min" => "Min"

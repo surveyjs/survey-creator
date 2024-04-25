@@ -1044,8 +1044,9 @@ export let svStrings = {
     },
     showProgressBar: {
       off: "Dold",
-      aboveHeader: "Ovanför sidhuvudet",
-      belowHeader: "Nedanför rubriken"
+      topbottom: "top and bottom",
+      aboveheader: "Ovanför sidhuvudet",
+      belowheader: "Nedanför rubriken"
     },
     sum: "Summa",
     count: "Räkna",
@@ -2505,8 +2506,8 @@ editorLocalization.locales["sv"] = svStrings;
 // totalDisplayStyle.date: "Date" => "Datum"
 // rowsOrder.initial: "Original" => "Original"
 // questionsOrder.initial: "Original" => "Original"
-// showProgressBar.aboveHeader: "Above the header" => "Ovanför sidhuvudet"
-// showProgressBar.belowHeader: "Below the header" => "Nedanför rubriken"
+// showProgressBar.aboveheader: "Above the header" => "Ovanför sidhuvudet"
+// showProgressBar.belowheader: "Below the header" => "Nedanför rubriken"
 // pv.sum: "Sum" => "Summa"
 // pv.count: "Count" => "Räkna"
 // pv.min: "Min" => "Min"

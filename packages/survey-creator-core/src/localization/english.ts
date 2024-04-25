@@ -1061,8 +1061,9 @@ export var enStrings = {
     },
     showProgressBar: {
       off: "Hidden",
-      aboveHeader: "Above the header",
-      belowHeader: "Below the header"
+      topbottom: "Top and bottom",
+      aboveheader: "Above the header",
+      belowheader: "Below the header"
     },
     sum: "Sum",
     count: "Count",
