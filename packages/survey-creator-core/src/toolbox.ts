@@ -19,6 +19,8 @@ import { editorLocalization, getLocString } from "./editorLocalization";
 import { settings } from "./creator-settings";
 import { DragDropSurveyElements } from "./survey-elements";
 
+export type overflowBehaviorType = "hideInMenu" | "scroll";
+
 /**
  * The Toolbox item description.
  */
@@ -172,6 +174,24 @@ export class QuestionToolbox
   @property({ defaultValue: false }) hasCategories: boolean;
   @property({ defaultValue: true }) canCollapseCategories: boolean;
 
+  public updateResponsiveness(isCompact: boolean, overflowBehavior: overflowBehaviorType) {
+    if (overflowBehavior == "scroll" && !this.creator.isTouch) {
+      this.isResponsivenessDisabled = true;
+      return;
+    }
+    if (this.hasCategories && this.showCategoryTitles) {
+      if (isCompact) {
+        this.isResponsivenessDisabled = false;
+        this.raiseUpdate(true);
+      } else {
+        this.isResponsivenessDisabled = true;
+        this.setActionsMode("large");
+      }
+      return;
+    }
+    this.isResponsivenessDisabled = false;
+    this.raiseUpdate(true);
+  }
   /**
    * Indicates whether the toolbox is currently in compact mode.
    * @see forceCompact
@@ -179,17 +199,18 @@ export class QuestionToolbox
   @property({
     defaultValue: false,
     onSet: (val: boolean, target: QuestionToolbox) => {
-      if (target.hasCategories && target.showCategoryTitles) {
-        if (val) {
-          target.isResponsivenessDisabled = false;
-          target.raiseUpdate(true);
-        } else {
-          target.isResponsivenessDisabled = true;
-          target.setActionsMode("large");
-        }
-      }
+      target.updateResponsiveness(val, target.overflowBehavior);
     }
   }) isCompact: boolean;
+  /**
+   * Indicates whether the toolbox is currently can have scrollbar.
+   */
+  @property({
+    defaultValue: "scroll",
+    onSet: (val: overflowBehaviorType, target: QuestionToolbox) => {
+      target.updateResponsiveness(target.isCompact, val);
+    }
+  }) overflowBehavior: overflowBehaviorType;
   /**
    * Specifies whether the toolbox should be in compact or full mode.
    * Accepts the following values:
@@ -206,6 +227,7 @@ export class QuestionToolbox
     useDefaultCategories = false
   ) {
     super();
+    this.updateResponsiveness(this.isCompact, this.overflowBehavior);
     this.createDefaultItems(supportedQuestions, useDefaultCategories);
     this.initDotsItem();
   }
