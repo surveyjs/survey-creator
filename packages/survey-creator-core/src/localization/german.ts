@@ -155,7 +155,7 @@ var germanTranslation = {
     surveyJsonCopyButton: "In Zwischenablage kopieren",
     themeResetButton: "Theme-Einstellungen auf die Standardeinstellungen zurücksetzen",
     themeResetConfirmation: "Möchten Sie das Theme wirklich zurücksetzen? Alle Ihre Anpassungen gehen verloren.",
-    themeResetConfirmationOk: "Ja, setzen Sie das Design zurück",
+    themeResetConfirmationOk: "Ja, Design zurück setzen.",
     bold: "Fett",
     italic: "Kursiv",
     underline: "Unterstrichen",
@@ -174,6 +174,8 @@ var germanTranslation = {
     addNewTypeQuestion: "Add {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
     choices_Item: "Artikel ",
+    selectFile: "Wählen Sie eine Datei aus",
+    removeFile: "Entfernen Sie die Datei",
     lg: {
       addNewItem: "Neue Regel hinzufügen",
       empty_tab: "Erstelle eine Regel erstellen, um den Fluss der Umfrage anzupassen.",
@@ -205,7 +207,7 @@ var germanTranslation = {
       question_visibilityDescription: "Mache die Frage sichtbar, wenn der logische Ausdruck wahr ergibt. Andernfalls lass sie unsichtbar.",
       question_enableDescription: "Aktiviere die Frage, wenn der logische Ausdruck wahr ergibt. Andernfalls lass sie deaktiviert.",
       question_requireDescription: "Frage wird erforderlich, wenn der logische Ausdruck wahr ergibt.",
-      trigger_completeDescription: "Wenn der logische Ausdruck wahr ergibt, wir die Umfrage abgeschlossen und der Benutzer sieht die Abschlussseite der Umfrage.",
+      trigger_completeDescription: "Wenn der logische Ausdruck wahr ergibt, wird die Umfrage abgeschlossen und der Benutzer sieht die Abschlussseite der Umfrage.",
       trigger_setvalueDescription: "Wenn Werte, die im logischen Ausdruck verwendet werden, geändert werden und der logische Ausdruck wahr ergibt, dann wird der Wert in die ausgewählte Frage eingesetzt.",
       trigger_copyvalueDescription: "Wenn Werte, die im logischen Ausdruck verwendet werden, geändert werden und der logische Ausdruck wahr ergibt, dann wird der Wert einer ausgewählte Fragen kopiert und in eine andere ausgewählte Frage eingesetzt.",
       trigger_skipDescription: "Wenn der logische Ausdruck wahr ergibt, springt die Umfrage zur ausgewählten Frage.",
@@ -656,6 +658,7 @@ var germanTranslation = {
     labelTrue: "Bezeichner \"Wahr\".",
     labelFalse: "Bezeichner \"Falsch\"",
     allowClear: "Überschrift der Auswahlmöglichkeiten anzeigen",
+    searchMode: "Suchmodus",
     displayStyle: "Wertanzeigestil",
     format: "Formatierte Zeichenfolge",
     maximumFractionDigits: "Maximale Nachkommastellen",
@@ -973,7 +976,7 @@ var germanTranslation = {
     },
     widthMode: {
       static: "Statisch",
-      responsive: "Ansprechbar"
+      responsive: "Anpassend"
     },
     contentMode: {
       image: "Bild",
@@ -1041,8 +1044,9 @@ var germanTranslation = {
     },
     showProgressBar: {
       off: "Versteckt",
-      aboveHeader: "Über der Kopfzeile",
-      belowHeader: "Unterhalb der Kopfzeile"
+      topbottom: "oben und unten",
+      aboveheader: "Über der Kopfzeile",
+      belowheader: "Unterhalb der Kopfzeile"
     },
     sum: "Summe",
     count: "Zählen",
@@ -2031,8 +2035,8 @@ editorLocalization.locales["de"] = germanTranslation;
 // totalDisplayStyle.date: "Date" => "Datum"
 // rowsOrder.initial: "Original" => "Original"
 // questionsOrder.initial: "Original" => "Original"
-// showProgressBar.aboveHeader: "Above the header" => "Über der Kopfzeile"
-// showProgressBar.belowHeader: "Below the header" => "Unterhalb der Kopfzeile"
+// showProgressBar.aboveheader: "Above the header" => "Über der Kopfzeile"
+// showProgressBar.belowheader: "Below the header" => "Unterhalb der Kopfzeile"
 // pv.sum: "Sum" => "Summe"
 // pv.count: "Count" => "Zählen"
 // pv.min: "Min" => "Min"
@@ -2247,3 +2251,6 @@ editorLocalization.locales["de"] = germanTranslation;
 // pe.textWrapEnabled: "Wrap choices" => "Auswahl an Wraps"
 // image.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "Die Option \"Auto\" bestimmt automatisch den geeigneten Anzeigemodus - Bild, Video oder YouTube - basierend auf der bereitgestellten Quell-URL."
 // imagepicker.contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options." => "Wählen Sie zwischen \"Bild\" und \"Video\", um den Inhaltsmodus der Medienauswahl festzulegen. Wenn \"Bild\" ausgewählt ist, stellen Sie sicher, dass es sich bei allen bereitgestellten Optionen um Bilddateien in den folgenden Formaten handelt: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Wenn \"Video\" ausgewählt ist, stellen Sie sicher, dass alle Optionen direkte Links zu Videodateien in den folgenden Formaten sind: MP4, MOV, WMV, FLV, AVI, MKV. Bitte beachten Sie, dass YouTube-Links für Videooptionen nicht unterstützt werden."
+// ed.selectFile: "Select a file" => "Wählen Sie eine Datei aus"
+// ed.removeFile: "Remove the file" => "Entfernen Sie die Datei"
+// pe.searchMode: "Search Mode" => "Suchmodus"

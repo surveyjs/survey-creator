@@ -176,6 +176,8 @@ export var enStrings = {
     addNewTypeQuestion: "Add {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
     choices_Item: "Item ",
+    selectFile: "Select a file",
+    removeFile: "Remove the file",
     lg: {
       addNewItem: "Add New Rule",
       empty_tab: "Create a rule to customize the flow of the survey.",
@@ -673,6 +675,7 @@ export var enStrings = {
     labelTrue: "Label for \"True\"",
     labelFalse: "Label for \"False\"",
     allowClear: "Show the Clear button",
+    searchMode: "Search Mode",
     displayStyle: "Display format",
     format: "Formatted string",
     maximumFractionDigits: "Maximum fractional digits",
@@ -1058,8 +1061,9 @@ export var enStrings = {
     },
     showProgressBar: {
       off: "Hidden",
-      aboveHeader: "Above the header",
-      belowHeader: "Below the header"
+      topbottom: "Top and bottom",
+      aboveheader: "Above the header",
+      belowheader: "Below the header"
     },
     sum: "Sum",
     count: "Count",

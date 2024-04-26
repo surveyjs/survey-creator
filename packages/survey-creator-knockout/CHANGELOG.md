@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.10.1](https://github.com/surveyjs/survey-creator/compare/v1.9.139...v1.10.1) (2024-04-25)
+
+
+### Bug Fixes
+
+* remove unused return value from showModalPropertyEditor ([#5421](https://github.com/surveyjs/survey-creator/issues/5421)) ([5a2a0ea](https://github.com/surveyjs/survey-creator/commit/5a2a0eaf7883c2b1ba472d87a85bb09b57f075a6))
+* remove unused return value from showModalPropertyEditor ([#5421](https://github.com/surveyjs/survey-creator/issues/5421)) ([0ec293c](https://github.com/surveyjs/survey-creator/commit/0ec293c2467fb950a0bfac9832721ac95f90e597))
+
 ### [1.9.139](https://github.com/surveyjs/survey-creator/compare/v1.9.138...v1.9.139) (2024-04-16)
 
 ### [1.9.138](https://github.com/surveyjs/survey-creator/compare/v1.9.137...v1.9.138) (2024-04-09)

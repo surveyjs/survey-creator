@@ -174,6 +174,8 @@ export var hrStrings = {
     addNewTypeQuestion: "Dodaj {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
     choices_Item: "Stavka ",
+    selectFile: "Odabir datoteke",
+    removeFile: "Uklanjanje datoteke",
     lg: {
       addNewItem: "Dodaj novo pravilo",
       empty_tab: "Stvorite pravilo za prilagodbu tijeka upitnika.",
@@ -656,6 +658,7 @@ export var hrStrings = {
     labelTrue: "Oznaka \"True\"",
     labelFalse: "Oznaka \"False\"",
     allowClear: "Prikaz gumba Očisti",
+    searchMode: "Način pretraživanja",
     displayStyle: "Stil prikaza vrijednosti",
     format: "Oblikovani niz",
     maximumFractionDigits: "Maksimalne djelomične znamenke",
@@ -1041,8 +1044,9 @@ export var hrStrings = {
     },
     showProgressBar: {
       off: "Skriven",
-      aboveHeader: "Iznad zaglavlja",
-      belowHeader: "Ispod zaglavlja"
+      topbottom: "top and bottom",
+      aboveheader: "Iznad zaglavlja",
+      belowheader: "Ispod zaglavlja"
     },
     sum: "Suma",
     count: "Brojati",
@@ -2319,8 +2323,8 @@ editorLocalization.locales["hr"] = hrStrings;
 // totalDisplayStyle.date: "Date" => "Datum"
 // rowsOrder.initial: "Original" => "Originalan"
 // questionsOrder.initial: "Original" => "Originalan"
-// showProgressBar.aboveHeader: "Above the header" => "Iznad zaglavlja"
-// showProgressBar.belowHeader: "Below the header" => "Ispod zaglavlja"
+// showProgressBar.aboveheader: "Above the header" => "Iznad zaglavlja"
+// showProgressBar.belowheader: "Below the header" => "Ispod zaglavlja"
 // pv.sum: "Sum" => "Suma"
 // pv.count: "Count" => "Brojati"
 // pv.min: "Min" => "Min"
@@ -2535,3 +2539,6 @@ editorLocalization.locales["hr"] = hrStrings;
 // pe.textWrapEnabled: "Wrap choices" => "Prelamanje izbora"
 // image.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "Opcija \"Automatski\" automatski određuje odgovarajući način prikaza - Slika, Videozapis ili YouTube - na temelju navedenog izvornog URL-a."
 // imagepicker.contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options." => "Odaberite između \"Slika\" i \"Videozapis\" da biste postavili način sadržaja birača medija. Ako je odabrana opcija \"Slika\", provjerite jesu li sve ponuđene opcije slikovne datoteke u sljedećim formatima: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Slično tome, ako je odabran \"Video\", provjerite jesu li sve opcije izravne veze na video datoteke u sljedećim formatima: MP4, MOV, WMV, FLV, AVI, MKV. Napominjemo da veze na YouTube nisu podržane za opcije videozapisa."
+// ed.selectFile: "Select a file" => "Odabir datoteke"
+// ed.removeFile: "Remove the file" => "Uklanjanje datoteke"
+// pe.searchMode: "Search Mode" => "Način pretraživanja"
