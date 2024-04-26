@@ -174,6 +174,8 @@ export var nbStrings = {
     addNewTypeQuestion: "Legg til {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
     choices_Item: "Vare ",
+    selectFile: "Velg en fil",
+    removeFile: "Fjern filen",
     lg: {
       addNewItem: "Legg til ny regel",
       empty_tab: "Opprett en regel for å tilpasse flyten i evalueringen.",
@@ -656,6 +658,7 @@ export var nbStrings = {
     labelTrue: "Etiketten «True»",
     labelFalse: "\"False\" etikett",
     allowClear: "Vis Fjern-knappen",
+    searchMode: "Søkemodus",
     displayStyle: "Visningsstil for verdi",
     format: "Formatert streng",
     maximumFractionDigits: "Maksimalt antall brøksifre",
@@ -2544,3 +2547,6 @@ editorLocalization.locales["nb"] = nbStrings;
 // pe.textWrapEnabled: "Wrap choices" => "Valg for innpakning"
 // image.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "Alternativet \"Auto\" bestemmer automatisk passende modus for visning - Bilde, Video eller YouTube - basert på kildens URL som er oppgitt."
 // imagepicker.contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options." => "Velg mellom \"Image\" og \"Video\" for å stille inn innholdsmodusen til medievelgeren. Hvis \"Bilde\" er valgt, må du kontrollere at alle alternativene som er oppgitt, er bildefiler i følgende formater: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. På samme måte, hvis \"Video\" er valgt, må du sørge for at alle alternativene er direkte koblinger til videofiler i følgende formater: MP4, MOV, WMV, FLV, AVI, MKV. Vær oppmerksom på at YouTube-koblinger ikke støttes for videoalternativer."
+// ed.selectFile: "Select a file" => "Velg en fil"
+// ed.removeFile: "Remove the file" => "Fjern filen"
+// pe.searchMode: "Search Mode" => "Søkemodus"

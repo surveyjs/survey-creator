@@ -174,6 +174,8 @@ export var fiStrings = {
     addNewTypeQuestion: "Lisää {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
     choices_Item: "Kohta ",
+    selectFile: "Valitse tiedosto",
+    removeFile: "Poista tiedosto",
     lg: {
       addNewItem: "Lisää uusi sääntö",
       empty_tab: "Luo sääntö kyselyn kulun mukauttamista varten.",
@@ -656,6 +658,7 @@ export var fiStrings = {
     labelTrue: "\"True\"-merkintä",
     labelFalse: "Epätosi-tunniste",
     allowClear: "Näytä Tyhjennä-painike",
+    searchMode: "Hakutila",
     displayStyle: "Arvon näyttötyyli",
     format: "Muotoiltu merkkijono",
     maximumFractionDigits: "Murtolukujen enimmäismäärä",
@@ -2541,3 +2544,6 @@ editorLocalization.locales["fi"] = fiStrings;
 // pe.textWrapEnabled: "Wrap choices" => "Kääri valinnat"
 // image.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "\"Auto\" -vaihtoehto määrittää automaattisesti sopivan näyttötilan - Kuva, Video tai YouTube - annetun lähde-URL-osoitteen perusteella."
 // imagepicker.contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options." => "Valitse \"Kuva\" tai \"Video\" asettaaksesi mediavalitsimen sisältötilan. Jos \"Kuva\" on valittuna, varmista, että kaikki annetut vaihtoehdot ovat kuvatiedostoja seuraavissa muodoissa: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Samoin, jos \"Video\" on valittuna, varmista, että kaikki vaihtoehdot ovat suoria linkkejä videotiedostoihin seuraavissa muodoissa: MP4, MOV, WMV, FLV, AVI, MKV. Huomaa, että YouTube-linkkejä ei tueta videoasetuksissa."
+// ed.selectFile: "Select a file" => "Valitse tiedosto"
+// ed.removeFile: "Remove the file" => "Poista tiedosto"
+// pe.searchMode: "Search Mode" => "Hakutila"
