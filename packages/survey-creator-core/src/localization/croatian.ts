@@ -1044,8 +1044,9 @@ export var hrStrings = {
     },
     showProgressBar: {
       off: "Skriven",
-      aboveHeader: "Iznad zaglavlja",
-      belowHeader: "Ispod zaglavlja"
+      topbottom: "top and bottom",
+      aboveheader: "Iznad zaglavlja",
+      belowheader: "Ispod zaglavlja"
     },
     sum: "Suma",
     count: "Brojati",
@@ -2322,8 +2323,8 @@ editorLocalization.locales["hr"] = hrStrings;
 // totalDisplayStyle.date: "Date" => "Datum"
 // rowsOrder.initial: "Original" => "Originalan"
 // questionsOrder.initial: "Original" => "Originalan"
-// showProgressBar.aboveHeader: "Above the header" => "Iznad zaglavlja"
-// showProgressBar.belowHeader: "Below the header" => "Ispod zaglavlja"
+// showProgressBar.aboveheader: "Above the header" => "Iznad zaglavlja"
+// showProgressBar.belowheader: "Below the header" => "Ispod zaglavlja"
 // pv.sum: "Sum" => "Suma"
 // pv.count: "Count" => "Brojati"
 // pv.min: "Min" => "Min"

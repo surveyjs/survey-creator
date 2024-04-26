@@ -1044,8 +1044,9 @@ export var bgStrings = {
     },
     showProgressBar: {
       off: "Скрит",
-      aboveHeader: "Над горния колонтитул",
-      belowHeader: "Под заглавката"
+      topbottom: "Отгоре и отдолу",
+      aboveheader: "Над горния колонтитул",
+      belowheader: "Под заглавката"
     },
     sum: "Сума",
     count: "Граф",
@@ -1889,8 +1890,8 @@ editorLocalization.locales["bg"] = bgStrings;
 // totalDisplayStyle.date: "Date" => "Дата"
 // rowsOrder.initial: "Original" => "Оригинален"
 // questionsOrder.initial: "Original" => "Оригинален"
-// showProgressBar.aboveHeader: "Above the header" => "Над горния колонтитул"
-// showProgressBar.belowHeader: "Below the header" => "Под заглавката"
+// showProgressBar.aboveheader: "Above the header" => "Над горния колонтитул"
+// showProgressBar.belowheader: "Below the header" => "Под заглавката"
 // pv.sum: "Sum" => "Сума"
 // pv.count: "Count" => "Граф"
 // pv.min: "Min" => "Мин"
