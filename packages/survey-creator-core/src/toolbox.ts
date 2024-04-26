@@ -175,7 +175,7 @@ export class QuestionToolbox
   @property({ defaultValue: true }) canCollapseCategories: boolean;
 
   public updateResponsiveness(isCompact: boolean, overflowBehavior: overflowBehaviorType) {
-    if (overflowBehavior == "scroll" && !this.creator.isTouch) {
+    if (overflowBehavior == "scroll" && this.creator && !this.creator.isTouch) {
       this.isResponsivenessDisabled = true;
       return;
     }

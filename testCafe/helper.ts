@@ -156,7 +156,7 @@ export async function changeToolboxLocation(newVal: string) {
 
 export async function changeToolboxScrolling(hasScroll: boolean) {
   await ClientFunction((newVal) => {
-    window["creator"].toolbox.isResponsivenessDisabled = newVal;
+    window["creator"].toolbox.overflowBehavior = newVal ? "hideInMenu" : "scroll";
   })(hasScroll);
 }
 
