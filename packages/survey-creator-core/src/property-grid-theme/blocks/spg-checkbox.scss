@@ -11,20 +11,20 @@
   }
 
   .spg-checkbox__caption {
-    color: $foreground-light;
+    color: var(--ctr-checkbox-text-color-disabled, $foreground-light);
   }
 }
 
 .spg-checkbox__caption {
   font-family: $font-family;
   font-size: calcSize(2);
-  color: $foreground;
+  color: var(--ctr-checkbox-text-color, $foreground);
   line-height: calcSize(3);
 }
 
 .spg-checkbox__rectangle {
-  background: $background;
-  border: 1px solid $border;
+  background: var(--ctr-checkbox-background-color, $background);
+  border: 1px solid var(--ctr-checkbox-border-color, $border);
   box-sizing: border-box;
   width: calcSize(3);
   height: calcSize(3);
@@ -35,18 +35,18 @@
 
 .spg-checkbox:hover {
   .spg-checkbox__rectangle {
-    background-color: $background-dim;
+    background-color: var(--ctr-checkbox-background-color-hovered, $background-dim);
   }
 }
 
 .spg-checkbox--disabled {
   .spg-checkbox__rectangle:hover {
-    background: $background;
+    background: var(--ctr-checkbox-background-color-disabled, $background);
   }
 }
 
 .spg-checkbox__control:focus+.spg-checkbox__rectangle {
-  outline: 2px solid $primary;
+  outline: 2px solid var(--ctr-checkbox-border-color-focused, $primary);
   outline-offset: -2px;
 }
 
@@ -60,11 +60,11 @@
   height: calcSize(2.5);
   background-repeat: no-repeat;
   background-size: calcSize(2) calcSize(2);
-  fill: $primary;
+  fill: var(--ctr-checkbox-button-check-mark-color, $primary);
 }
 
 .spg-checkbox--disabled.spg-checkbox--checked .spg-checkbox__svg {
-  fill: $border;
+  fill: var(--ctr-checkbox-button-check-mark-color-disabled, $border);
 }
 
 .spg-checkbox__control {
