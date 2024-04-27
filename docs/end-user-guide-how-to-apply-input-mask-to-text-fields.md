@@ -19,7 +19,7 @@ Input masks serve as templates that show respondents exactly how to enter their 
 Allows you to define a custom pattern using characters and symbols, ensuring that respondents enter data according to your specified format. For example, you can create a pattern for credit card numbers, such as 1234 4567 7891 1234.
 
 - Date and Time         
-Guides respondents to enter dates and times in a specific format, such as `mm/dd/yyyy` for dates and `hh:mm` for times. This helps ensure consistency and accuracy in date and time entries.
+Guides respondents to enter dates and times in a specific format, such as `mm/dd/yyyy` for dates and `HH:MM` for times. This helps ensure consistency and accuracy in date and time entries.
 
 - Numeric           
 Restricts input to numerical values only, allowing respondents to enter numbers without any additional characters. This is useful for collecting data like age, quantity, or measurements.

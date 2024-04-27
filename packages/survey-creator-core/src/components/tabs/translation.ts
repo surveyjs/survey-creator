@@ -713,9 +713,7 @@ export class Translation extends Base implements ITranslationLocales {
         this.updateLocales();
       }
     });
-    res.onMatrixRenderRemoveButton.add((sender, options) => {
-      options.allow = options.rowIndex > 0;
-    });
+    res.getQuestionByName("locales").lockedRowCount = 1;
     res.onMatrixRowRemoving.add((sender, options) => {
       this.removingLocale = options.question.value[options.rowIndex].name;
     });
@@ -758,9 +756,11 @@ export class Translation extends Base implements ITranslationLocales {
     var res = [""];
     var val = this.getSelectedLocales();
     if (!Array.isArray(val)) val = [];
+    this.options.translationLocalesOrder = val;
     val.forEach(lc => res.push(lc));
     this.locales = res;
     this.canMergeLocaleWithDefault = this.hasLocale(this.defaultLocale);
+    this.localesQuestion.allowRowsDragAndDrop = res.length > 2;
   }
   private getSettingsSurveyJSON(): any {
     return {
@@ -1133,6 +1133,20 @@ export class Translation extends Base implements ITranslationLocales {
   public resetLocales(): void {
     var locales = [""];
     this.root.fillLocales(locales);
+    const sortedLocales = this.options.translationLocalesOrder;
+    if(Array.isArray(sortedLocales) && sortedLocales.length > 0) {
+      const sortFunc = (a: string, b: string, arr: Array<string>): number => {
+        let i1 = arr.indexOf(a);
+        let i2 = arr.indexOf(b);
+        if(i1 < 0) i1 = 100;
+        if(i2 < 0) i2 = 100;
+        return i1 < i2 ? -1 : (i1> i2 ? 1 : 0);
+      };
+      locales.sort((a: string, b: string): number => {
+        const res = sortFunc(a, b, sortedLocales);
+        return res === 0 ? sortFunc(a, b, locales) : res;
+      });
+    }
     this.setSelectedAndVisibleLocales(locales, this.getSelectedLocales(), true);
   }
   public getSelectedLocales(): Array<string> {

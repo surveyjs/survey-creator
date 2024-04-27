@@ -174,6 +174,8 @@ var portugueseTranslation = {
     addNewTypeQuestion: "Adicionar {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
     choices_Item: "Item ",
+    selectFile: "Selecione um arquivo",
+    removeFile: "Remover o arquivo",
     lg: {
       addNewItem: "Adicionar nova regra",
       empty_tab: "Crie uma regra para personalizar o fluxo do questionário.",
@@ -320,6 +322,7 @@ var portugueseTranslation = {
       signatureAutoScaleEnabled: "Dimensionar automaticamente a área de assinatura",
       showPlaceholder: "Mostrar o espaço reservado",
       placeholder: "Texto de espaço reservado",
+      placeholderReadOnly: "Texto de espaço reservado no modo somente leitura ou de visualização",
       allowClear: "Mostrar o botão Limpar na área de assinatura",
       penMinWidth: "Largura mínima da caneta",
       penMaxWidth: "Largura máxima da caneta",
@@ -494,6 +497,7 @@ var portugueseTranslation = {
     descriptionPlaceholder: "Descrição",
     surveyDescriptionPlaceholder: "Descrição",
     pageDescriptionPlaceholder: "Descrição",
+    textWrapEnabled: "Opções de encapsulamento",
     showOtherItem: "Tem item 'outros'",
     otherText: "Texto do item 'outros'",
     showNoneItem: "Permitir a opção Nenhum",
@@ -654,6 +658,7 @@ var portugueseTranslation = {
     labelTrue: "\"Verdadeiro\" rótulo",
     labelFalse: "\"Falso\" rótulo",
     allowClear: "Mostrar o botão Limpar",
+    searchMode: "Modo de pesquisa",
     displayStyle: "Estilo de exibição de valor",
     format: "String formatada",
     maximumFractionDigits: "Máximo de dígitos fracionários",
@@ -1039,8 +1044,9 @@ var portugueseTranslation = {
     },
     showProgressBar: {
       off: "Escondido",
-      aboveHeader: "Acima do cabeçalho",
-      belowHeader: "Abaixo do cabeçalho"
+      topbottom: "superior and bottom",
+      aboveheader: "Acima do cabeçalho",
+      belowheader: "Abaixo do cabeçalho"
     },
     sum: "Soma",
     count: "Contar",
@@ -1050,8 +1056,7 @@ var portugueseTranslation = {
     searchMode: {
       contains: "Contém",
       startsWith: "Começa com"
-    },
-    textWrapEnabled: "Opções de encapsulamento"
+    }
   },
   // Operators
   op: {
@@ -1201,10 +1206,14 @@ var portugueseTranslation = {
       imageHeight: "Ajusta a altura da imagem nos resultados da pesquisa.",
       imageWidth: "Ajusta a largura da imagem nos resultados da pesquisa."
     },
+    image: {
+      contentMode: "A opção \"Auto\" determina automaticamente o modo adequado para exibição - Imagem, Vídeo ou YouTube - com base no URL de origem fornecido."
+    },
     imagepicker: {
       imageHeight: "Substitui os valores de altura mínima e máxima.",
       imageWidth: "Substitui os valores de largura mínima e máxima.",
-      choices: "\"Valor\" serve como um ID de item usado em regras condicionais; \"Texto\" é exibido aos respondentes."
+      choices: "\"Valor\" serve como um ID de item usado em regras condicionais; \"Texto\" é exibido aos respondentes.",
+      contentMode: "Escolha entre \"Imagem\" e \"Vídeo\" para definir o modo de conteúdo do seletor de mídia. Se \"Imagem\" estiver selecionado, certifique-se de que todas as opções fornecidas são arquivos de imagem nos seguintes formatos: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Da mesma forma, se \"Vídeo\" estiver selecionado, certifique-se de que todas as opções sejam links diretos para arquivos de vídeo nos seguintes formatos: MP4, MOV, WMV, FLV, AVI, MKV. Observe que os links do YouTube não são compatíveis com as opções de vídeo."
     },
     text: {
       size: "Essa configuração redimensiona apenas o campo de entrada e não afeta a largura da caixa de pergunta. Para limitar o comprimento de entrada aceito, vá para <b>Validação → Limite máximo de caracteres</b>."
@@ -1316,7 +1325,6 @@ var portugueseTranslation = {
     dataList: "Insira uma lista de opções que serão sugeridas ao respondente durante a entrada.",
     itemSize: "A configuração redimensiona apenas os campos de entrada e não afeta a largura da caixa de pergunta.",
     itemTitleWidth: "Define largura consistente para todos os rótulos de item em pixels",
-    contentMode: "A opção \"Auto\" determina automaticamente o modo adequado para exibição - Imagem, Vídeo ou YouTube - com base no URL de origem fornecido.",
     altText: "Serve como um substituto quando a imagem não pode ser exibida no dispositivo de um usuário e para fins de acessibilidade.",
     rateColorMode: "Define a cor do emoji selecionado quando o tipo de ícone Classificação é definido como \"Smileys\". Escolha entre: \"Padrão\" - o emoji selecionado aparece na cor padrão do questionário; \"Escala\" - o emoji selecionado herda a cor da escala de classificação.",
     expression: {
@@ -1339,7 +1347,7 @@ var portugueseTranslation = {
       pattern: "O padrão pode conter literais de cadeia de caracteres e os seguintes espaços reservados: '9' - para um dígito; «a» - para uma letra maiúscula ou minúscula; '#' - para um dígito ou uma letra maiúscula ou minúscula. Use barra invertida '\\' para escapar de um personagem."
     },
     datetimemask: {
-      pattern: "O padrão pode conter caracteres separadores e os seguintes espaços reservados: 'm' - para o número do mês; 'mm' - para o número do mês, com zero à esquerda para valores de um dígito; 'd' - para o dia do mês; 'dd' - para o dia do mês, com zero à esquerda para valores de um dígito; 'yy' - para os dois últimos dígitos do ano; 'yyyy' - por um ano de quatro dígitos."
+      pattern: "O padrão pode conter caracteres separadores e os seguintes espaços reservados:<br>'m' - Número do mês.<br>'mm' - Número do mês, com zero à esquerda para valores de um dígito. <br>'d' - Dia do mês. <br>'dd' - Dia do mês, com zero à esquerda para valores de um dígito. <br>'yy' - Os dois últimos dígitos do ano. <br>'yyyy' - Ano de quatro dígitos. <br>'H' - Horas em formato de 24 horas. <br>'HH' - Horas em formato de 24 horas, com zero à esquerda para valores de um dígito. <br>'h' - Horas em formato de 12 horas. <br>'hh' - Horas em formato de 12 horas, com zero à esquerda para valores de um dígito. <br>'MM' - Minutos. <br>'ss' - Segundos. <br>'TT' - Relógio de 12 horas em caixa alta (AM/PM). <br>'tt' - Relógio de 12 horas em minúsculas (am/pm)."
     },
     numericmask: {
       decimalSeparator: "Um símbolo usado para separar a parte fracionária da parte inteira de um número exibido.",
@@ -1987,8 +1995,8 @@ editorLocalization.locales["pt"] = portugueseTranslation;
 // totalDisplayStyle.date: "Date" => "Data"
 // rowsOrder.initial: "Original" => "Original"
 // questionsOrder.initial: "Original" => "Original"
-// showProgressBar.aboveHeader: "Above the header" => "Acima do cabeçalho"
-// showProgressBar.belowHeader: "Below the header" => "Abaixo do cabeçalho"
+// showProgressBar.aboveheader: "Above the header" => "Acima do cabeçalho"
+// showProgressBar.belowheader: "Below the header" => "Abaixo do cabeçalho"
 // pv.sum: "Sum" => "Soma"
 // pv.count: "Count" => "Contar"
 // pv.min: "Min" => "Min"
@@ -2199,3 +2207,10 @@ editorLocalization.locales["pt"] = portugueseTranslation;
 // maskTypes.none: "None" => "Nenhum"
 // itemvalue@rows.visibleIf: "Make the row visible if" => "Tornar a linha visível se"
 // itemvalue@rows.enableIf: "Make the row editable if" => "Tornar a linha editável se"
+// signaturepad.placeholderReadOnly: "Placeholder text in read-only or preview mode" => "Texto de espaço reservado no modo somente leitura ou de visualização"
+// pe.textWrapEnabled: "Wrap choices" => "Opções de encapsulamento"
+// image.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "A opção \"Auto\" determina automaticamente o modo adequado para exibição - Imagem, Vídeo ou YouTube - com base no URL de origem fornecido."
+// imagepicker.contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options." => "Escolha entre \"Imagem\" e \"Vídeo\" para definir o modo de conteúdo do seletor de mídia. Se \"Imagem\" estiver selecionado, certifique-se de que todas as opções fornecidas são arquivos de imagem nos seguintes formatos: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Da mesma forma, se \"Vídeo\" estiver selecionado, certifique-se de que todas as opções sejam links diretos para arquivos de vídeo nos seguintes formatos: MP4, MOV, WMV, FLV, AVI, MKV. Observe que os links do YouTube não são compatíveis com as opções de vídeo."
+// ed.selectFile: "Select a file" => "Selecione um arquivo"
+// ed.removeFile: "Remove the file" => "Remover o arquivo"
+// pe.searchMode: "Search Mode" => "Modo de pesquisa"

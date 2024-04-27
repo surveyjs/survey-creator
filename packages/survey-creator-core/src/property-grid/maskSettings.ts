@@ -1,4 +1,4 @@
-import { Base, JsonObjectProperty, ComponentCollection, Question, PanelModel, QuestionHtmlModel, InputMaskBase, Serializer, JsonMetadataClass } from "survey-core";
+import { Base, JsonObjectProperty, ComponentCollection, Question, PanelModel, QuestionHtmlModel, InputMaskBase, Serializer, JsonMetadataClass, InputMaskDateTime } from "survey-core";
 import { PropertyGridEditorCollection, PropertyJSONGenerator, PropertyGridEditor, } from "./index";
 import { ISurveyCreatorOptions } from "../creator-settings";
 import { getLocString } from "../editorLocalization";
@@ -46,12 +46,26 @@ export class PropertyGridEditorQuestionMaskSettings extends PropertyGridEditor {
   updatePanel(obj: Base, question: Question, prop: JsonObjectProperty) {
     const panel = <PanelModel>question["contentPanel"];
     const masksettings = obj[prop.name] as InputMaskBase;
+
     if (this._prevMaskType !== obj["maskType"]) {
       this._propertyGrid.obj = masksettings;
       this._propertyGrid.setupObjPanel(panel, true);
       this._prevMaskType = obj["maskType"];
     }
+
+    if (masksettings.getType() == "datetimemask") {
+      this.updateDateTimeMinMaxInputType(masksettings, panel);
+    }
+
     this.updatePreviewQuestion(masksettings, panel);
+  }
+
+  private updateDateTimeMinMaxInputType(masksettings: InputMaskBase, panel: PanelModel) {
+    let inputType = "datetime-local";
+    if (!(masksettings as InputMaskDateTime).hasDatePart) inputType = "time";
+    if (!(masksettings as InputMaskDateTime).hasTimePart) inputType = "date";
+    panel.getQuestionByName("min").inputType = inputType;
+    panel.getQuestionByName("max").inputType = inputType;
   }
 
   updatePreviewQuestion(masksettings: InputMaskBase, panel: PanelModel) {

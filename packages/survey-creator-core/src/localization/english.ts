@@ -176,6 +176,8 @@ export var enStrings = {
     addNewTypeQuestion: "Add {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
     choices_Item: "Item ",
+    selectFile: "Select a file",
+    removeFile: "Remove the file",
     lg: {
       addNewItem: "Add New Rule",
       empty_tab: "Create a rule to customize the flow of the survey.",
@@ -512,6 +514,7 @@ export var enStrings = {
     descriptionPlaceholder: "Description",
     surveyDescriptionPlaceholder: "Description",
     pageDescriptionPlaceholder: "Description",
+    textWrapEnabled: "Wrap choices",
     showOtherItem: "Enable the \"Other\" option",
     otherText: "Rename the \"Other\" option",
     showNoneItem: "Enable the \"None\" option",
@@ -672,6 +675,7 @@ export var enStrings = {
     labelTrue: "Label for \"True\"",
     labelFalse: "Label for \"False\"",
     allowClear: "Show the Clear button",
+    searchMode: "Search Mode",
     displayStyle: "Display format",
     format: "Formatted string",
     maximumFractionDigits: "Maximum fractional digits",
@@ -1060,8 +1064,9 @@ export var enStrings = {
     },
     showProgressBar: {
       off: "Hidden",
-      aboveHeader: "Above the header",
-      belowHeader: "Below the header"
+      topbottom: "Top and bottom",
+      aboveheader: "Above the header",
+      belowheader: "Below the header"
     },
     sum: "Sum",
     count: "Count",
@@ -1072,7 +1077,6 @@ export var enStrings = {
       contains: "Contains",
       startsWith: "Starts with"
     },
-    textWrapEnabled: "Wrap choices"
   },
   // Operators
   op: {
@@ -1141,7 +1145,7 @@ export var enStrings = {
       pattern: "Ex.: +1(999)-999-99-99"
     },
     datetimemask: {
-      pattern: "Ex.: mm/dd/yyyy"
+      pattern: "Ex.: mm/dd/yyyy HH:MM:ss"
     },
     currencymask: {
       prefix: "Ex.: $",
@@ -1368,7 +1372,7 @@ export var enStrings = {
       pattern: "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character.",
     },
     datetimemask: {
-      pattern: "The pattern can contain separator characters and the following placeholders: `m` - for month number; `mm` - for month number, with leading zero for single-digit values; `d` - for day of the month; `dd` - for day of the month, with leading zero for single-digit values; `yy` - for the last two digits of the year; `yyyy` - for a four-digit year.",
+      pattern: "The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year.<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in upper case (AM/PM).<br>`tt` - 12-hour clock period in lower case (am/pm).",
     },
     numericmask: {
       decimalSeparator: "A symbol used to separate the fractional part from the integer part of a displayed number.",

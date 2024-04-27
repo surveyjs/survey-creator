@@ -174,6 +174,8 @@ export var czStrings = {
     addNewTypeQuestion: "Přidat {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
     choices_Item: "Položka ",
+    selectFile: "Vyberte soubor",
+    removeFile: "Odebrání souboru",
     lg: {
       addNewItem: "Přidat nové pravidlo",
       empty_tab: "Vytvořte pravidlo pro přizpůsobení průběhu průzkumu.",
@@ -320,6 +322,7 @@ export var czStrings = {
       signatureAutoScaleEnabled: "Automatické škálování oblasti podpisu",
       showPlaceholder: "Zobrazení zástupného symbolu",
       placeholder: "Zástupný text",
+      placeholderReadOnly: "Zástupný text v režimu jen pro čtení nebo v režimu náhledu",
       allowClear: "Zobrazení tlačítka Vymazat v oblasti podpisu",
       penMinWidth: "Minimální šířka pera",
       penMaxWidth: "Maximální šířka pera",
@@ -494,6 +497,7 @@ export var czStrings = {
     descriptionPlaceholder: "Zadejte popis",
     surveyDescriptionPlaceholder: "Zadejte popis průzkumu",
     pageDescriptionPlaceholder: "Zadejte popis stránky",
+    textWrapEnabled: "Možnosti obtékání",
     showOtherItem: "Má jinou položku",
     otherText: "Další text položky",
     showNoneItem: "Nemá žádnou položku",
@@ -654,6 +658,7 @@ export var czStrings = {
     labelTrue: "Popisek \"pravdivé\" hodnoty",
     labelFalse: "Popisek \"nepravdivé\" hodnoty",
     allowClear: "Zobrazit popisek možností",
+    searchMode: "Režim vyhledávání",
     displayStyle: "Styl zobrazení hodnoty",
     format: "Formátovaný řetězec",
     maximumFractionDigits: "Maximální počet desetinných míst",
@@ -1039,8 +1044,9 @@ export var czStrings = {
     },
     showProgressBar: {
       off: "Skrytý",
-      aboveHeader: "Nad záhlavím",
-      belowHeader: "Pod záhlavím"
+      topbottom: "nahoře a dole",
+      aboveheader: "Nad záhlavím",
+      belowheader: "Pod záhlavím"
     },
     sum: "Součet",
     count: "Počítat",
@@ -1050,8 +1056,7 @@ export var czStrings = {
     searchMode: {
       contains: "Obsahuje",
       startsWith: "Začíná na"
-    },
-    textWrapEnabled: "Možnosti obtékání"
+    }
   },
   // Operators
   op: {
@@ -1201,10 +1206,14 @@ export var czStrings = {
       imageHeight: "Upraví výšku obrázku ve výsledcích měření.",
       imageWidth: "Upraví šířku obrázku ve výsledcích měření."
     },
+    image: {
+      contentMode: "Možnost \"Auto\" automaticky určí vhodný režim pro zobrazení – Obrázek, Video nebo YouTube – na základě zadané zdrojové adresy URL."
+    },
     imagepicker: {
       imageHeight: "Přepíše minimální a maximální hodnoty výšky.",
       imageWidth: "Přepíše minimální a maximální hodnoty šířky.",
-      choices: "\"Hodnota\" slouží jako ID položky používané v podmíněných pravidlech; Respondentům se zobrazí \"Text\"."
+      choices: "\"Hodnota\" slouží jako ID položky používané v podmíněných pravidlech; Respondentům se zobrazí \"Text\".",
+      contentMode: "Vyberte si mezi \"Obrazem\" a \"Video\" a nastavte režim obsahu voliče médií. Pokud je vybrána možnost \"Obrázek\", ujistěte se, že všechny nabízené možnosti jsou obrazové soubory v následujících formátech: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Podobně, pokud je vybráno \"Video\", ujistěte se, že všechny možnosti jsou přímými odkazy na video soubory v následujících formátech: MP4, MOV, WMV, FLV, AVI, MKV. Upozorňujeme, že odkazy na YouTube nejsou podporovány u možností videa."
     },
     text: {
       size: "Toto nastavení pouze mění velikost vstupního pole a nemá vliv na šířku pole s otázkou. Chcete-li omezit přijatelnou délku vstupu, přejděte na <b>Ověření → Maximální limit znaků</b>."
@@ -1316,7 +1325,6 @@ export var czStrings = {
     dataList: "Zadejte seznam možností, které budou respondentovi navrženy během vstupu.",
     itemSize: "Nastavení mění pouze velikost vstupních polí a nemá vliv na šířku pole pro otázky.",
     itemTitleWidth: "Nastaví konzistentní šířku pro všechny popisky položek v pixelech",
-    contentMode: "Možnost \"Auto\" automaticky určí vhodný režim pro zobrazení – Obrázek, Video nebo YouTube – na základě zadané zdrojové adresy URL.",
     altText: "Slouží jako náhrada v případě, že obrázek nelze zobrazit na zařízení uživatele, a pro účely usnadnění.",
     rateColorMode: "Definuje barvu vybraného emotikonu, když je typ ikony Hodnocení nastaven na \"Smajlíky\". Vyberte si mezi: \"Výchozí\" - vybraný emotikon se zobrazí ve výchozí barvě průzkumu; \"Měřítko\" - vybraný emotikon zdědí barvu ze stupnice hodnocení.",
     expression: {
@@ -1339,7 +1347,7 @@ export var czStrings = {
       pattern: "Vzor může obsahovat řetězcové literály a následující zástupné symboly: \"9\" - pro číslici; \"a\" - pro velké nebo malé písmeno; '#' - pro číslici nebo velké či malé písmeno. Pomocí zpětného lomítka \\ můžete znak uvozovat."
     },
     datetimemask: {
-      pattern: "Vzor může obsahovat oddělovací znaky a následující zástupné symboly: 'm' - pro číslo měsíce; 'mm' - pro číslo měsíce, s úvodní nulou pro jednociferné hodnoty; \"d\" - pro den v měsíci; 'dd' - pro den v měsíci, s úvodní nulou pro jednociferné hodnoty; \"yy\" – pro poslední dvě číslice roku; \"rrrr\" – pro čtyřmístný rok."
+      pattern: "Vzor může obsahovat oddělovací znaky a následující zástupné symboly:<br>'m' - Číslo měsíce.<br>'mm' - Číslo měsíce s úvodní nulou pro jednociferné hodnoty. <br>\"d\" - Den v měsíci. <br>'dd' - Den v měsíci, s úvodní nulou pro jednociferné hodnoty. <br>\"yy\" – poslední dvě číslice roku. <br>\"yyyy\" – čtyřmístný rok. <br>\"H\" – hodiny ve 24hodinovém formátu. <br>\"HH\" – hodiny ve 24hodinovém formátu, s úvodní nulou pro jednociferné hodnoty. <br>\"h\" – hodiny ve 12hodinovém formátu. <br>'hh' - Hodiny ve 12hodinovém formátu, s úvodní nulou pro jednociferné hodnoty. <br>'MM' - Zápisy. <br>'ss' - Sekundy. <br>\"TT\" – 12hodinový časový interval psaný velkými písmeny (AM/PM). <br>'tt' - 12hodinový časový interval psaný malými písmeny (am/pm)."
     },
     numericmask: {
       decimalSeparator: "Symbol používaný k oddělení zlomkové části od celočíselné části zobrazeného čísla.",
@@ -1885,8 +1893,8 @@ editorLocalization.locales["cs"] = czStrings;
 // totalDisplayStyle.date: "Date" => "Rande"
 // rowsOrder.initial: "Original" => "Původní"
 // questionsOrder.initial: "Original" => "Původní"
-// showProgressBar.aboveHeader: "Above the header" => "Nad záhlavím"
-// showProgressBar.belowHeader: "Below the header" => "Pod záhlavím"
+// showProgressBar.aboveheader: "Above the header" => "Nad záhlavím"
+// showProgressBar.belowheader: "Below the header" => "Pod záhlavím"
 // pv.sum: "Sum" => "Součet"
 // pv.count: "Count" => "Počítat"
 // pv.min: "Min" => "Min"
@@ -2097,3 +2105,10 @@ editorLocalization.locales["cs"] = czStrings;
 // maskTypes.none: "None" => "Žádný"
 // itemvalue@rows.visibleIf: "Make the row visible if" => "Zviditelněte řádek, pokud"
 // itemvalue@rows.enableIf: "Make the row editable if" => "Zajistěte, aby byl řádek upravitelný, pokud"
+// signaturepad.placeholderReadOnly: "Placeholder text in read-only or preview mode" => "Zástupný text v režimu jen pro čtení nebo v režimu náhledu"
+// pe.textWrapEnabled: "Wrap choices" => "Možnosti obtékání"
+// image.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "Možnost \"Auto\" automaticky určí vhodný režim pro zobrazení – Obrázek, Video nebo YouTube – na základě zadané zdrojové adresy URL."
+// imagepicker.contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options." => "Vyberte si mezi \"Obrazem\" a \"Video\" a nastavte režim obsahu voliče médií. Pokud je vybrána možnost \"Obrázek\", ujistěte se, že všechny nabízené možnosti jsou obrazové soubory v následujících formátech: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Podobně, pokud je vybráno \"Video\", ujistěte se, že všechny možnosti jsou přímými odkazy na video soubory v následujících formátech: MP4, MOV, WMV, FLV, AVI, MKV. Upozorňujeme, že odkazy na YouTube nejsou podporovány u možností videa."
+// ed.selectFile: "Select a file" => "Vyberte soubor"
+// ed.removeFile: "Remove the file" => "Odebrání souboru"
+// pe.searchMode: "Search Mode" => "Režim vyhledávání"

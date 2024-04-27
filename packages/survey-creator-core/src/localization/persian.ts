@@ -174,6 +174,8 @@ var persianStrings = {
     addNewTypeQuestion: "اضافه {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[لوگو]",
     choices_Item: "مورد ",
+    selectFile: "یک پرونده انتخاب کنید",
+    removeFile: "حذف پرونده",
     lg: {
       addNewItem: "اضافه کردن آیتم جدید",
       empty_tab: "یک آیتم را برای سفارشی کردن جریان نظرسنجی انتخاب کنید",
@@ -320,6 +322,7 @@ var persianStrings = {
       signatureAutoScaleEnabled: "مقیاس خودکار منطقه امضا",
       showPlaceholder: "نشان دادن نگهدارندهی مکان",
       placeholder: "متن ذی نفع",
+      placeholderReadOnly: "متن نگهدارنده در حالت فقط خواندنی یا پیشنمایش",
       allowClear: "نمایش دکمه پاک کردن در منطقه امضا",
       penMinWidth: "حداقل عرض قلم",
       penMaxWidth: "حداکثر عرض قلم",
@@ -494,6 +497,7 @@ var persianStrings = {
     descriptionPlaceholder: "توضیحات را وارد کنید",
     surveyDescriptionPlaceholder: "توضیحات نظرسنجی را وارد کنید",
     pageDescriptionPlaceholder: "توضیحات صفحه را وارد کنید",
+    textWrapEnabled: "انتخاب های بسته بندی",
     showOtherItem: "دارای آیتم دیگر",
     otherText: "سایر آیتم های متن",
     showNoneItem: "هیچ آیتمی ندارد",
@@ -654,6 +658,7 @@ var persianStrings = {
     labelTrue: "برچسب \"True\"",
     labelFalse: "برچسب \"غلط\"",
     allowClear: "نشان دادن دکمهی Clear",
+    searchMode: "حالت جستجو",
     displayStyle: "سبک نمایش ارزش",
     format: "رشتۀ قالببندی شده",
     maximumFractionDigits: "بیشینه رقم کسری",
@@ -1039,8 +1044,9 @@ var persianStrings = {
     },
     showProgressBar: {
       off: "پنهان",
-      aboveHeader: "بالای سرصفحه",
-      belowHeader: "زیر سرایند"
+      topbottom: "بالا و پایین",
+      aboveheader: "بالای سرصفحه",
+      belowheader: "زیر سرایند"
     },
     sum: "مجموع",
     count: "تعداد",
@@ -1050,8 +1056,7 @@ var persianStrings = {
     searchMode: {
       contains: "شامل",
       startsWith: "شروع با"
-    },
-    textWrapEnabled: "انتخاب های بسته بندی"
+    }
   },
   // Operators
   op: {
@@ -1201,10 +1206,14 @@ var persianStrings = {
       imageHeight: "ارتفاع تصویر را در نتایج نظرسنجی تنظیم می کند.",
       imageWidth: "عرض تصویر را در نتایج نظرسنجی تنظیم می کند."
     },
+    image: {
+      contentMode: "گزینه \"Auto\" به طور خودکار حالت مناسب برای نمایش - تصویر، ویدئو یا یوتیوب - را بر اساس URL منبع ارائه شده تعیین می کند."
+    },
     imagepicker: {
       imageHeight: "مقادیر حداقل و حداکثر ارتفاع را نادیده می گیرد.",
       imageWidth: "مقادیر حداقل و حداکثر عرض را نادیده می گیرد.",
-      choices: "\"ارزش\" به عنوان یک شناسه مورد استفاده در قوانین شرطی عمل می کند. \"متن\" به پاسخ دهندگان نمایش داده می شود."
+      choices: "\"ارزش\" به عنوان یک شناسه مورد استفاده در قوانین شرطی عمل می کند. \"متن\" به پاسخ دهندگان نمایش داده می شود.",
+      contentMode: "بین \"تصویر\" و \"ویدئو\" را انتخاب کنید تا حالت محتوا را انتخاب کنید. اگر \"تصویر\" انتخاب شده است، اطمینان حاصل کنید که تمام گزینه های ارائه شده فایل های تصویری در فرمت های زیر هستند: JPEG، GIF، PNG، APNG، SVG، BMP، ICO. به طور مشابه، اگر \"ویدئو\" انتخاب شده است، اطمینان حاصل کنید که تمام گزینه ها لینک مستقیم به فایل های ویدئویی در فرمت های زیر هستند: MP4، MOV، WMV، FLV، AVI، MKV. لطفا توجه داشته باشید که پیوندهای YouTube برای گزینه های ویدیویی پشتیبانی نمی شوند."
     },
     text: {
       size: "این تنظیم فقط فیلد ورودی را تغییر اندازه می دهد و روی عرض جعبه پرسش تاثیر نمی گذارد. برای محدود کردن طول ورودی پذیرفته شده، به <b>Validation → Maximum character limit</b> بروید."
@@ -1316,7 +1325,6 @@ var persianStrings = {
     dataList: "لیستی از انتخاب هایی را وارد کنید که در طول ورودی به مخاطب پیشنهاد می شود.",
     itemSize: "تنظیم فقط زمینه های ورودی را تغییر می دهد و بر عرض جعبه سوال تاثیر نمی گذارد.",
     itemTitleWidth: "عرض سازگار را برای همۀ برچسبهای فقره به تصویردانه تنظیم میکند",
-    contentMode: "گزینه \"Auto\" به طور خودکار حالت مناسب برای نمایش - تصویر، ویدئو یا یوتیوب - را بر اساس URL منبع ارائه شده تعیین می کند.",
     altText: "به عنوان یک جایگزین زمانی که تصویر نمی تواند بر روی دستگاه کاربر و برای اهداف دسترسی نمایش داده شود.",
     rateColorMode: "رنگ ایموجی انتخاب شده را هنگامی که نوع نماد رتبه بندی روی \"Smileys\" تنظیم شده است، تعریف می کند. انتخاب بین: \"پیش فرض\" - ایموجی انتخاب شده در رنگ پیش فرض بررسی ظاهر می شود؛ \"Scale\" - ایموجی انتخاب شده رنگ را از مقیاس رتبه بندی به ارث می برد.",
     expression: {
@@ -1339,7 +1347,7 @@ var persianStrings = {
       pattern: "الگو می تواند شامل literals رشته و متغیرهای زیر باشد: '9' - برای یک رقم؛ 'a' - برای یک حرف بزرگ یا کوچک؛ \"#\" - برای یک رقم یا یک حرف بزرگ یا کوچک. استفاده از backslash '\\' برای فرار از یک شخصیت."
     },
     datetimemask: {
-      pattern: "الگو می تواند شامل کاراکترهای جداکننده و متغیرهای زیر باشد: \"m\" - برای شماره ماه؛ 'mm' - برای شماره ماه، با صفر پیشرو برای مقادیر تک رقمی؛ 'd' - برای روز ماه؛ 'dd' - برای روز ماه، با صفر پیشرو برای مقادیر تک رقمی؛ 'yy' - برای دو رقم اخر سال؛ 'yyyyy' - برای یک سال چهار رقمی."
+      pattern: "این الگو می تواند شامل کاراکترهای جداکننده و متغیرهای زیر باشد: <br>'m' - شماره ماه.<br>'mm' - شماره ماه، با صفر پیشرو برای مقادیر تک رقمی. <br>\"D\" - روز ماه. <br>'dd' - روز ماه، با صفر پیشرو برای مقادیر تک رقمی. <br>'yy' - دو رقم اخر سال. <br>'yyyyy' - سال چهار رقمی. <br>\"H\" - ساعت در فرمت 24 ساعته. <br>'HH' - ساعت در فرمت 24 ساعته، با صفر پیشرو برای مقادیر تک رقمی. <br>'h' - ساعت در فرمت 12 ساعته. <br>'hh' - ساعت در فرمت 12 ساعته، با صفر پیشرو برای مقادیر تک رقمی. <br>\"MM\" - دقیقه. <br>SS ثانیه <br>\"TT\" - دوره ساعت 12 ساعته در حالت بزرگ (AM / PM). <br>'tt' - دوره ساعت 12 ساعته در حروف کوچک (am / pm)."
     },
     numericmask: {
       decimalSeparator: "نمادی که برای جدا کردن قسمت کسری از قسمت صحیح یک عدد نمایش داده شده استفاده می شود.",
@@ -2276,8 +2284,8 @@ editorLocalization.locales["fa"] = persianStrings;
 // totalDisplayStyle.date: "Date" => "تاریخ"
 // rowsOrder.initial: "Original" => "اصلی"
 // questionsOrder.initial: "Original" => "اصلی"
-// showProgressBar.aboveHeader: "Above the header" => "بالای سرصفحه"
-// showProgressBar.belowHeader: "Below the header" => "زیر سرایند"
+// showProgressBar.aboveheader: "Above the header" => "بالای سرصفحه"
+// showProgressBar.belowheader: "Below the header" => "زیر سرایند"
 // pv.sum: "Sum" => "مجموع"
 // pv.count: "Count" => "تعداد"
 // pv.min: "Min" => "دقیقه"
@@ -2488,3 +2496,10 @@ editorLocalization.locales["fa"] = persianStrings;
 // maskTypes.none: "None" => "هیچ کدام"
 // itemvalue@rows.visibleIf: "Make the row visible if" => "سطر را مرئی کنید اگر"
 // itemvalue@rows.enableIf: "Make the row editable if" => "ردیف را قابل ویرایش کنید اگر"
+// signaturepad.placeholderReadOnly: "Placeholder text in read-only or preview mode" => "متن نگهدارنده در حالت فقط خواندنی یا پیشنمایش"
+// pe.textWrapEnabled: "Wrap choices" => "انتخاب های بسته بندی"
+// image.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "گزینه \"Auto\" به طور خودکار حالت مناسب برای نمایش - تصویر، ویدئو یا یوتیوب - را بر اساس URL منبع ارائه شده تعیین می کند."
+// imagepicker.contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options." => "بین \"تصویر\" و \"ویدئو\" را انتخاب کنید تا حالت محتوا را انتخاب کنید. اگر \"تصویر\" انتخاب شده است، اطمینان حاصل کنید که تمام گزینه های ارائه شده فایل های تصویری در فرمت های زیر هستند: JPEG، GIF، PNG، APNG، SVG، BMP، ICO. به طور مشابه، اگر \"ویدئو\" انتخاب شده است، اطمینان حاصل کنید که تمام گزینه ها لینک مستقیم به فایل های ویدئویی در فرمت های زیر هستند: MP4، MOV، WMV، FLV، AVI، MKV. لطفا توجه داشته باشید که پیوندهای YouTube برای گزینه های ویدیویی پشتیبانی نمی شوند."
+// ed.selectFile: "Select a file" => "یک پرونده انتخاب کنید"
+// ed.removeFile: "Remove the file" => "حذف پرونده"
+// pe.searchMode: "Search Mode" => "حالت جستجو"

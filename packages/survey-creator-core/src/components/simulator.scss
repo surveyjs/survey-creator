@@ -50,6 +50,7 @@
 
     .sv-popup:not(.sv-popup--overlay):not(.sv-popup--modal) {
       width: auto;
+      right: 0;
     }
   }
 }

@@ -174,6 +174,8 @@ var frenchTranslation = {
     addNewTypeQuestion: "Ajouter {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
     choices_Item: "Article ",
+    selectFile: "Sélectionner un fichier",
+    removeFile: "Supprimer le fichier",
     lg: {
       addNewItem: "Ajouter une nouvelle règle",
       empty_tab: "Créez une règle pour personnaliser le déroulement du sondage.",
@@ -320,6 +322,7 @@ var frenchTranslation = {
       signatureAutoScaleEnabled: "Mise à l’échelle automatique de la zone de signature",
       showPlaceholder: "Afficher l’espace réservé",
       placeholder: "Texte d’espace réservé",
+      placeholderReadOnly: "Texte d’espace réservé en lecture seule ou en mode d’aperçu",
       allowClear: "Afficher le bouton Effacer dans la zone de signature",
       penMinWidth: "Largeur minimale du stylo",
       penMaxWidth: "Largeur maximale du stylo",
@@ -494,6 +497,7 @@ var frenchTranslation = {
     descriptionPlaceholder: "Entrez une description",
     surveyDescriptionPlaceholder: "Entrez une description pour l'enquête",
     pageDescriptionPlaceholder: "Entrez une description pour la page",
+    textWrapEnabled: "Choix d’enveloppes",
     showOtherItem: "Contient choix \"Autre\"",
     otherText: "Texte du choix \"Autre\"",
     showNoneItem: "Contient un choix \"Aucun\"",
@@ -654,6 +658,7 @@ var frenchTranslation = {
     labelTrue: "Texte du bouton « Vrai »",
     labelFalse: "Texte du bouton « Faux »",
     allowClear: "Afficher le bouton Effacer",
+    searchMode: "Mode de recherche",
     displayStyle: "Style d’affichage de la valeur",
     format: "Chaîne de caractères formatée",
     maximumFractionDigits: "Nombre maximal de décimales",
@@ -1039,8 +1044,9 @@ var frenchTranslation = {
     },
     showProgressBar: {
       off: "Masqué",
-      aboveHeader: "Au-dessus de l’en-tête",
-      belowHeader: "Sous l’en-tête"
+      topbottom: "Haut et bas",
+      aboveheader: "Au-dessus de l’en-tête",
+      belowheader: "Sous l’en-tête"
     },
     sum: "Somme",
     count: "Compter",
@@ -1050,8 +1056,7 @@ var frenchTranslation = {
     searchMode: {
       contains: "Contient",
       startsWith: "Commence par"
-    },
-    textWrapEnabled: "Choix d’enveloppes"
+    }
   },
   // Operators
   op: {
@@ -1201,10 +1206,14 @@ var frenchTranslation = {
       imageHeight: "Ajuste la hauteur de l’image dans les résultats de l’enquête.",
       imageWidth: "Ajuste la largeur de l’image dans les résultats de l’enquête."
     },
+    image: {
+      contentMode: "L’option « Auto » détermine automatiquement le mode d’affichage approprié - Image, Vidéo ou YouTube - en fonction de l’URL source fournie."
+    },
     imagepicker: {
       imageHeight: "Remplace les valeurs de hauteur minimale et maximale.",
       imageWidth: "Remplace les valeurs de largeur minimale et maximale.",
-      choices: "« Valeur » sert d’ID d’élément utilisé dans les règles conditionnelles ; La mention « Texte » s’affiche pour les personnes interrogées."
+      choices: "« Valeur » sert d’ID d’élément utilisé dans les règles conditionnelles ; La mention « Texte » s’affiche pour les personnes interrogées.",
+      contentMode: "Choisissez entre « Image » et « Vidéo » pour définir le mode de contenu du sélecteur de médias. Si « Image » est sélectionné, assurez-vous que toutes les options fournies sont des fichiers image dans les formats suivants : JPEG, GIF, PNG, APNG, SVG, BMP, ICO. De même, si « Vidéo » est sélectionné, assurez-vous que toutes les options sont des liens directs vers des fichiers vidéo dans les formats suivants : MP4, MOV, WMV, FLV, AVI, MKV. Veuillez noter que les liens YouTube ne sont pas pris en charge pour les options vidéo."
     },
     text: {
       size: "Ce paramètre ne redimensionne que le champ de saisie et n’affecte pas la largeur de la zone de question. Pour limiter la longueur d’entrée acceptée, reportez-vous à <b>Validation → Limite maximale de caractères</b>."
@@ -1316,7 +1325,6 @@ var frenchTranslation = {
     dataList: "Entrez une liste de choix qui seront suggérés au répondant lors de la saisie.",
     itemSize: "Le paramètre ne redimensionne que les champs de saisie et n’affecte pas la largeur de la zone de question.",
     itemTitleWidth: "Définit une largeur cohérente pour toutes les étiquettes d’élément en pixels",
-    contentMode: "L’option « Auto » détermine automatiquement le mode d’affichage approprié - Image, Vidéo ou YouTube - en fonction de l’URL source fournie.",
     altText: "Sert de substitut lorsque l’image ne peut pas être affichée sur l’appareil d’un utilisateur et à des fins d’accessibilité.",
     rateColorMode: "Définit la couleur de l’emoji sélectionné lorsque le type d’icône d’évaluation est défini sur « Smileys ». Choisissez entre : « Par défaut » - l’emoji sélectionné apparaît dans la couleur par défaut de l’enquête ; « Échelle » - l’emoji sélectionné hérite de la couleur de l’échelle d’évaluation.",
     expression: {
@@ -1339,7 +1347,7 @@ var frenchTranslation = {
       pattern: "Le modèle peut contenir des littéraux de chaîne et les espaces réservés suivants : '9' - pour un chiffre ; 'a' - pour une lettre majuscule ou minuscule ; '#' - pour un chiffre ou une lettre majuscule ou minuscule. Utilisez la barre oblique inverse '\\' pour échapper un caractère."
     },
     datetimemask: {
-      pattern: "Le modèle peut contenir des caractères de séparation et les espaces réservés suivants : 'm' - pour le numéro du mois ; 'mm' - pour le numéro du mois, avec un zéro non significatif pour les valeurs à un chiffre ; 'd' - pour le jour du mois ; 'dd' - pour le jour du mois, avec zéro en tête pour les valeurs à un chiffre ; 'yy' - pour les deux derniers chiffres de l’année ; 'yyyy' - pour une année à quatre chiffres."
+      pattern: "Le modèle peut contenir des caractères de séparation et les espaces réservés suivants :<br>'m' - Numéro du mois.<br>'mm' - Numéro du mois, avec zéro non significatif pour les valeurs à un chiffre. <br>'d' - Jour du mois. <br>'dd' - Jour du mois, avec zéro non significatif pour les valeurs à un chiffre. <br>'yy' - Les deux derniers chiffres de l’année. <br>'yyyy' - Année à quatre chiffres. <br>'H' - Heures au format 24 heures. <br>'HH' - Heures au format 24 heures, avec zéro non significatif pour les valeurs à un chiffre. <br>'h' - Heures au format 12 heures. <br>'hh' - Heures au format 12 heures, avec zéro non significatif pour les valeurs à un chiffre. <br>'MM' - Procès-verbaux. <br>'ss' - Secondes. <br>'TT' - Période d’horloge de 12 heures en majuscules (AM/PM). <br>'tt' - Période d’horloge de 12 heures en minuscules (AM/PM)."
     },
     numericmask: {
       decimalSeparator: "Symbole utilisé pour séparer la partie fractionnaire de la partie entière d’un nombre affiché.",
@@ -2381,8 +2389,8 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // totalDisplayStyle.date: "Date" => "Date"
 // rowsOrder.initial: "Original" => "Langue source"
 // questionsOrder.initial: "Original" => "Langue source"
-// showProgressBar.aboveHeader: "Above the header" => "Au-dessus de l’en-tête"
-// showProgressBar.belowHeader: "Below the header" => "Sous l’en-tête"
+// showProgressBar.aboveheader: "Above the header" => "Au-dessus de l’en-tête"
+// showProgressBar.belowheader: "Below the header" => "Sous l’en-tête"
 // pv.sum: "Sum" => "Somme"
 // pv.count: "Count" => "Compter"
 // pv.min: "Min" => "Min"
@@ -2593,3 +2601,11 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // maskTypes.none: "None" => "Aucun"
 // itemvalue@rows.visibleIf: "Make the row visible if" => "Rendre la ligne visible si"
 // itemvalue@rows.enableIf: "Make the row editable if" => "Rendez la ligne modifiable si"
+// signaturepad.placeholderReadOnly: "Placeholder text in read-only or preview mode" => "Texte d’espace réservé en lecture seule ou en mode d’aperçu"
+// pe.textWrapEnabled: "Wrap choices" => "Choix d’enveloppes"
+// image.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "L’option «Auto» détermine automatiquement le mode d’affichage approprié - Image, Vidéo ou YouTube - en fonction de l’URL source fournie."
+// imagepicker.contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options." => "Choisissez entre «Image» et «Vidéo» pour définir le mode de contenu du sélecteur de médias. Si «Image» est sélectionné, assurez-vous que toutes les options fournies sont des fichiers image dans les formats suivants : JPEG, GIF, PNG, APNG, SVG, BMP, ICO. De même, si «Vidéo» est sélectionné, assurez-vous que toutes les options sont des liens directs vers des fichiers vidéo dans les formats suivants : MP4, MOV, WMV, FLV, AVI, MKV. Veuillez noter que les liens YouTube ne sont pas pris en charge pour les options vidéo."
+
+// ed.selectFile: "Select a file" => "Sélectionner un fichier"
+// ed.removeFile: "Remove the file" => "Supprimer le fichier"
+// pe.searchMode: "Search Mode" => "Mode de recherche"

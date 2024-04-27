@@ -174,6 +174,8 @@ var polishStrings = {
     addNewTypeQuestion: "Dodaj {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
     choices_Item: "Przedmiot ",
+    selectFile: "Wybierz plik",
+    removeFile: "Usuń plik",
     lg: {
       addNewItem: "Dodaj nową regułę",
       empty_tab: "Utwórz regułę, aby dostosować przepływ ankiety.",
@@ -320,6 +322,7 @@ var polishStrings = {
       signatureAutoScaleEnabled: "Automatyczne skalowanie obszaru podpisu",
       showPlaceholder: "Pokazywanie symbolu zastępczego",
       placeholder: "Tekst zastępczy",
+      placeholderReadOnly: "Tekst zastępczy w trybie tylko do odczytu lub podglądu",
       allowClear: "Pokaż przycisk Wyczyść w obszarze podpisu",
       penMinWidth: "Minimalna szerokość pisaka",
       penMaxWidth: "Maksymalna szerokość pisaka",
@@ -494,6 +497,7 @@ var polishStrings = {
     descriptionPlaceholder: "Opis",
     surveyDescriptionPlaceholder: "Opis",
     pageDescriptionPlaceholder: "Opis",
+    textWrapEnabled: "Opcje zawijania",
     showOtherItem: "Czy możliwa własna odpowiedź",
     otherText: "Other item text",
     showNoneItem: "Zezwalaj na opcję Brak",
@@ -654,6 +658,7 @@ var polishStrings = {
     labelTrue: "Etykieta \"prawdziwa\"",
     labelFalse: "Etykieta \"Fałsz\"",
     allowClear: "Pokaż przycisk Wyczyść",
+    searchMode: "Tryb wyszukiwania",
     displayStyle: "Styl wyświetlania wartości",
     format: "Sformatowany ciąg znaków",
     maximumFractionDigits: "Maksymalna liczba cyfr ułamkowych",
@@ -1039,8 +1044,9 @@ var polishStrings = {
     },
     showProgressBar: {
       off: "Ukryty",
-      aboveHeader: "Nad nagłówkiem",
-      belowHeader: "Pod nagłówkiem"
+      topbottom: "Góra i dół",
+      aboveheader: "Nad nagłówkiem",
+      belowheader: "Pod nagłówkiem"
     },
     sum: "Suma",
     count: "Hrabia",
@@ -1050,8 +1056,7 @@ var polishStrings = {
     searchMode: {
       contains: "Contains",
       startsWith: "Zaczyna się od"
-    },
-    textWrapEnabled: "Opcje zawijania"
+    }
   },
   // Operators
   op: {
@@ -1201,10 +1206,14 @@ var polishStrings = {
       imageHeight: "Dostosowuje wysokość obrazu w wynikach ankiety.",
       imageWidth: "Dostosowuje szerokość obrazu w wynikach ankiety."
     },
+    image: {
+      contentMode: "Opcja \"Auto\" automatycznie określa odpowiedni tryb wyświetlania - Obraz, Wideo lub YouTube - na podstawie podanego źródłowego adresu URL."
+    },
     imagepicker: {
       imageHeight: "Zastępuje minimalne i maksymalne wartości wysokości.",
       imageWidth: "Zastępuje minimalne i maksymalne wartości szerokości.",
-      choices: "\"Wartość\" służy jako identyfikator elementu używany w regułach warunkowych; Respondentom wyświetla się \"Tekst\"."
+      choices: "\"Wartość\" służy jako identyfikator elementu używany w regułach warunkowych; Respondentom wyświetla się \"Tekst\".",
+      contentMode: "Wybierz pomiędzy \"Obraz\" i \"Wideo\", aby ustawić tryb zawartości selektora multimediów. W przypadku wybrania opcji \"Obraz\" upewnij się, że wszystkie dostępne opcje są plikami graficznymi w następujących formatach: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Podobnie, jeśli wybrana jest opcja \"Wideo\", upewnij się, że wszystkie opcje są bezpośrednimi linkami do plików wideo w następujących formatach: MP4, MOV, WMV, FLV, AVI, MKV. Należy pamiętać, że linki do YouTube nie są obsługiwane w przypadku opcji wideo."
     },
     text: {
       size: "To ustawienie zmienia tylko rozmiar pola wejściowego i nie wpływa na szerokość pola pytania. Aby ograniczyć akceptowaną długość danych wejściowych, przejdź do <b>sekcji Walidacja → Maksymalny limit znaków</b>."
@@ -1316,7 +1325,6 @@ var polishStrings = {
     dataList: "Wprowadź listę opcji, które zostaną zasugerowane respondentowi podczas wprowadzania danych.",
     itemSize: "To ustawienie zmienia tylko rozmiar pól wejściowych i nie wpływa na szerokość pola pytania.",
     itemTitleWidth: "Ustawia stałą szerokość dla wszystkich etykiet elementów w pikselach",
-    contentMode: "Opcja \"Auto\" automatycznie określa odpowiedni tryb wyświetlania - Obraz, Wideo lub YouTube - na podstawie podanego źródłowego adresu URL.",
     altText: "Służy jako substytut, gdy obraz nie może być wyświetlany na urządzeniu użytkownika oraz w celu ułatwienia dostępu.",
     rateColorMode: "Określa kolor wybranego emoji, gdy typ ikony oceny jest ustawiony na \"Emotikony\". Wybierz pomiędzy: \"Domyślny\" - wybrany emoji pojawia się w domyślnym kolorze ankiety; \"Skala\" - wybrany emoji dziedziczy kolor ze skali ocen.",
     expression: {
@@ -1339,7 +1347,7 @@ var polishStrings = {
       pattern: "Wzorzec może zawierać literały ciągu i następujące symbole zastępcze: \"9\" — dla cyfry; 'a' - dla wielkiej lub małej litery; '#' - dla cyfry lub wielkiej lub małej litery. Użyj ukośnika odwrotnego \"\\\", aby uciec od znaku."
     },
     datetimemask: {
-      pattern: "Wzorzec może zawierać znaki separatora i następujące symbole zastępcze: \"m\" - dla numeru miesiąca; 'mm' - dla numeru miesiąca, z zerem wiodącym dla wartości jednocyfrowych; 'd' - dzień miesiąca; 'dd' - dla dnia miesiąca, z zerem wiodącym dla wartości jednocyfrowych; 'yy' - dla dwóch ostatnich cyfr roku; \"yyyy\" - dla roku czterocyfrowego."
+      pattern: "Wzorzec może zawierać znaki separatora i następujące symbole zastępcze:<br>'m' - Numer miesiąca.<br>'mm' - Numer miesiąca z zerem wiodącym dla wartości jednocyfrowych. <br>'d' - Dzień miesiąca. <br>'dd' — dzień miesiąca, z zerem wiodącym dla wartości jednocyfrowych. <br>'yy' - Dwie ostatnie cyfry roku. <br>'yyyy' - Rok czterocyfrowy. <br>\"H\" - Godziny w formacie 24-godzinnym. <br>\"HH\" — godziny w formacie 24-godzinnym, z zerem wiodącym dla wartości jednocyfrowych. <br>'h' - Godziny w formacie 12-godzinnym. <br>\"hh\" — godziny w formacie 12-godzinnym, z zerem wiodącym dla wartości jednocyfrowych. <br>'MM' - minuty. <br>'ss' - Sekundy. <br>\"TT\" - 12-godzinny okres zegara pisany wielkimi literami (AM/PM). <br>'tt' - 12-godzinny okres zegara pisany małymi literami (am/pm)."
     },
     numericmask: {
       decimalSeparator: "Symbol używany do oddzielenia części ułamkowej od części całkowitej wyświetlanej liczby.",
@@ -2594,8 +2602,8 @@ editorLocalization.locales["pl"] = polishStrings;
 // totalDisplayStyle.date: "Date" => "Data"
 // rowsOrder.initial: "Original" => "Oryginał"
 // questionsOrder.initial: "Original" => "Oryginał"
-// showProgressBar.aboveHeader: "Above the header" => "Nad nagłówkiem"
-// showProgressBar.belowHeader: "Below the header" => "Pod nagłówkiem"
+// showProgressBar.aboveheader: "Above the header" => "Nad nagłówkiem"
+// showProgressBar.belowheader: "Below the header" => "Pod nagłówkiem"
 // pv.sum: "Sum" => "Suma"
 // pv.count: "Count" => "Hrabia"
 // pv.min: "Min" => "Min"
@@ -2806,3 +2814,10 @@ editorLocalization.locales["pl"] = polishStrings;
 // maskTypes.none: "None" => "Żaden"
 // itemvalue@rows.visibleIf: "Make the row visible if" => "Uwidocznij wiersz, jeśli"
 // itemvalue@rows.enableIf: "Make the row editable if" => "Umożliwia edycję wiersza, jeśli"
+// signaturepad.placeholderReadOnly: "Placeholder text in read-only or preview mode" => "Tekst zastępczy w trybie tylko do odczytu lub podglądu"
+// pe.textWrapEnabled: "Wrap choices" => "Opcje zawijania"
+// image.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "Opcja \"Auto\" automatycznie określa odpowiedni tryb wyświetlania - Obraz, Wideo lub YouTube - na podstawie podanego źródłowego adresu URL."
+// imagepicker.contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options." => "Wybierz pomiędzy \"Obraz\" i \"Wideo\", aby ustawić tryb zawartości selektora multimediów. W przypadku wybrania opcji \"Obraz\" upewnij się, że wszystkie dostępne opcje są plikami graficznymi w następujących formatach: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Podobnie, jeśli wybrana jest opcja \"Wideo\", upewnij się, że wszystkie opcje są bezpośrednimi linkami do plików wideo w następujących formatach: MP4, MOV, WMV, FLV, AVI, MKV. Należy pamiętać, że linki do YouTube nie są obsługiwane w przypadku opcji wideo."
+// ed.selectFile: "Select a file" => "Wybierz plik"
+// ed.removeFile: "Remove the file" => "Usuń plik"
+// pe.searchMode: "Search Mode" => "Tryb wyszukiwania"

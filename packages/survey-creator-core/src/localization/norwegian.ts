@@ -174,6 +174,8 @@ export var nbStrings = {
     addNewTypeQuestion: "Legg til {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
     choices_Item: "Vare ",
+    selectFile: "Velg en fil",
+    removeFile: "Fjern filen",
     lg: {
       addNewItem: "Legg til ny regel",
       empty_tab: "Opprett en regel for å tilpasse flyten i evalueringen.",
@@ -320,6 +322,7 @@ export var nbStrings = {
       signatureAutoScaleEnabled: "Skalere signaturområdet automatisk",
       showPlaceholder: "Vise plassholderen",
       placeholder: "Plassholdertekst",
+      placeholderReadOnly: "Plassholdertekst i skrivebeskyttet modus eller forhåndsvisningsmodus",
       allowClear: "Vise Fjern-knappen i signaturområdet",
       penMinWidth: "Minimum pennebredde",
       penMaxWidth: "Maksimal pennebredde",
@@ -494,6 +497,7 @@ export var nbStrings = {
     descriptionPlaceholder: "Skriv beskrivelse",
     surveyDescriptionPlaceholder: "Skriv skjema-beskrivelse",
     pageDescriptionPlaceholder: "Skriv side-beskrivelse",
+    textWrapEnabled: "Valg for innpakning",
     showOtherItem: "Har annet element",
     otherText: "Annet element-tekst",
     showNoneItem: "Har velg ingen",
@@ -654,6 +658,7 @@ export var nbStrings = {
     labelTrue: "Etiketten «True»",
     labelFalse: "\"False\" etikett",
     allowClear: "Vis Fjern-knappen",
+    searchMode: "Søkemodus",
     displayStyle: "Visningsstil for verdi",
     format: "Formatert streng",
     maximumFractionDigits: "Maksimalt antall brøksifre",
@@ -1039,8 +1044,9 @@ export var nbStrings = {
     },
     showProgressBar: {
       off: "Skjult",
-      aboveHeader: "Over overskriften",
-      belowHeader: "Under overskriften"
+      topbottom: "top and bottom",
+      aboveheader: "Over overskriften",
+      belowheader: "Under overskriften"
     },
     sum: "Sum",
     count: "Greve",
@@ -1050,8 +1056,7 @@ export var nbStrings = {
     searchMode: {
       contains: "Inneholder",
       startsWith: "Starter med"
-    },
-    textWrapEnabled: "Valg for innpakning"
+    }
   },
   // Operators
   op: {
@@ -1201,10 +1206,14 @@ export var nbStrings = {
       imageHeight: "Justerer høyden på bildet i undersøkelsesresultatene.",
       imageWidth: "Justerer bredden på bildet i undersøkelsesresultatene."
     },
+    image: {
+      contentMode: "Alternativet \"Auto\" bestemmer automatisk passende modus for visning - Bilde, Video eller YouTube - basert på kildens URL som er oppgitt."
+    },
     imagepicker: {
       imageHeight: "Overstyrer minimums- og maksimumshøydeverdiene.",
       imageWidth: "Overstyrer verdiene for minimums- og maksimumsbredde.",
-      choices: "\"Verdi\" fungerer som en vare-ID som brukes i betingede regler; \"Tekst\" vises for respondentene."
+      choices: "\"Verdi\" fungerer som en vare-ID som brukes i betingede regler; \"Tekst\" vises for respondentene.",
+      contentMode: "Velg mellom \"Image\" og \"Video\" for å stille inn innholdsmodusen til medievelgeren. Hvis \"Bilde\" er valgt, må du kontrollere at alle alternativene som er oppgitt, er bildefiler i følgende formater: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. På samme måte, hvis \"Video\" er valgt, må du sørge for at alle alternativene er direkte koblinger til videofiler i følgende formater: MP4, MOV, WMV, FLV, AVI, MKV. Vær oppmerksom på at YouTube-koblinger ikke støttes for videoalternativer."
     },
     text: {
       size: "Denne innstillingen endrer bare størrelsen på inndatafeltet og påvirker ikke bredden på spørsmålsboksen. Hvis du vil begrense den godkjente inndatalengden, går du til <b>Validering → Maksimal tegngrense</b>."
@@ -1316,7 +1325,6 @@ export var nbStrings = {
     dataList: "Angi en liste over valg som skal foreslås for respondenten under inndata.",
     itemSize: "Innstillingen endrer bare størrelsen på inndatafeltene og påvirker ikke bredden på spørsmålsboksen.",
     itemTitleWidth: "Angir konsekvent bredde for alle elementetiketter i piksler",
-    contentMode: "Alternativet \"Auto\" bestemmer automatisk passende modus for visning - Bilde, Video eller YouTube - basert på kildens URL som er oppgitt.",
     altText: "Fungerer som en erstatning når bildet ikke kan vises på en brukers enhet og av tilgjengelighetshensyn.",
     rateColorMode: "Definerer fargen på den valgte emojien når Vurdering-ikontypen er satt til \"Smileys\". Velg mellom: \"Standard\" - den valgte emojien vises i standard undersøkelsesfarge; \"Skala\" - den valgte emojien arver farge fra vurderingsskalaen.",
     expression: {
@@ -1339,7 +1347,7 @@ export var nbStrings = {
       pattern: "Mønsteret kan inneholde strenglitteraler og følgende plassholdere: '9' - for et siffer; 'a' - for en stor eller liten bokstav; '#' - for et siffer eller en stor eller liten bokstav. Bruk omvendt skråstrek '\\' for å unnslippe et tegn."
     },
     datetimemask: {
-      pattern: "Mønsteret kan inneholde skilletegn og følgende plassholdere: 'm' - for månedsnummer; 'mm' - for månedsnummer, med ledende null for ensifrede verdier; 'd' - for dagen i måneden; 'dd' - for dagen i måneden, med ledende null for ensifrede verdier; 'yy' - for de to siste sifrene i året; 'åååå' - i et firesifret år."
+      pattern: "Mønsteret kan inneholde skilletegn og følgende plassholdere:<br>'m' – Månedsnummer.<br>'mm' - Månedsnummer, med foranstilt null for ensifrede verdier. <br>'d' - Dag i måneden. <br>'dd' - Dagen i måneden, med foranstilt null for ensifrede verdier. <br>'yy' - De to siste sifrene i året. <br>'yyyy' - Firesifret år. <br>'H' - Timer i 24-timers format. <br>'HH' - Timer i 24-timers format, med foranstilt null for ensifrede verdier. <br>'h' - Timer i 12-timers format. <br>'hh' - Timer i 12-timers format, med ledende null for ensifrede verdier. <br>'MM' - minutter. <br>'ss' - Sekunder. <br>'TT' - 12-timers klokkeperiode med store bokstaver (AM / PM). <br>'TT' - 12-timers klokkeperiode med små bokstaver (AM / PM)."
     },
     numericmask: {
       decimalSeparator: "Et symbol som brukes til å skille brøkdelen fra heltallsdelen av et tall som vises.",
@@ -2324,8 +2332,8 @@ editorLocalization.locales["nb"] = nbStrings;
 // totalDisplayStyle.date: "Date" => "Daddel"
 // rowsOrder.initial: "Original" => "Original"
 // questionsOrder.initial: "Original" => "Original"
-// showProgressBar.aboveHeader: "Above the header" => "Over overskriften"
-// showProgressBar.belowHeader: "Below the header" => "Under overskriften"
+// showProgressBar.aboveheader: "Above the header" => "Over overskriften"
+// showProgressBar.belowheader: "Below the header" => "Under overskriften"
 // pv.sum: "Sum" => "Sum"
 // pv.count: "Count" => "Greve"
 // pv.min: "Min" => "Min"
@@ -2536,3 +2544,10 @@ editorLocalization.locales["nb"] = nbStrings;
 // maskTypes.none: "None" => "Ingen"
 // itemvalue@rows.visibleIf: "Make the row visible if" => "Gjøre raden synlig hvis"
 // itemvalue@rows.enableIf: "Make the row editable if" => "Gjøre raden redigerbar hvis"
+// signaturepad.placeholderReadOnly: "Placeholder text in read-only or preview mode" => "Plassholdertekst i skrivebeskyttet modus eller forhåndsvisningsmodus"
+// pe.textWrapEnabled: "Wrap choices" => "Valg for innpakning"
+// image.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "Alternativet \"Auto\" bestemmer automatisk passende modus for visning - Bilde, Video eller YouTube - basert på kildens URL som er oppgitt."
+// imagepicker.contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options." => "Velg mellom \"Image\" og \"Video\" for å stille inn innholdsmodusen til medievelgeren. Hvis \"Bilde\" er valgt, må du kontrollere at alle alternativene som er oppgitt, er bildefiler i følgende formater: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. På samme måte, hvis \"Video\" er valgt, må du sørge for at alle alternativene er direkte koblinger til videofiler i følgende formater: MP4, MOV, WMV, FLV, AVI, MKV. Vær oppmerksom på at YouTube-koblinger ikke støttes for videoalternativer."
+// ed.selectFile: "Select a file" => "Velg en fil"
+// ed.removeFile: "Remove the file" => "Fjern filen"
+// pe.searchMode: "Search Mode" => "Søkemodus"
