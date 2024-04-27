@@ -172,6 +172,10 @@ export var enStrings = {
     surveyPlaceHolder: "The survey is empty. Drag an element from the toolbox or click the button below.",
     pagePlaceHolder: "The page is empty. Drag an element from the toolbox or click the button below.",
     imagePlaceHolder: "Drag and drop an image here or click the button below and choose an image to upload",
+    surveyPlaceHolderMobile: "Click the \"Add Question\" button below to start creating your form.",
+    pagePlaceHolderMobile: "Click the \"Add Question\" button below to add a new form element.",
+    panelPlaceHolderMobile: "Click the \"Add Question\" button below to add a new form element.",
+    imagePlaceHolderMobile: "Click the button below and choose an image to upload",
     imageChooseImage: "Choose Image",
     addNewTypeQuestion: "Add {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",

@@ -78,6 +78,8 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
   }
 
   public get placeholderText(): string {
+    if (this.creator.isMobileView)
+      return getLocString("ed.imagePlaceHolderMobile");
     return getLocString("ed.imagePlaceHolder");
   }
 
