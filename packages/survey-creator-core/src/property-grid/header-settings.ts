@@ -51,9 +51,9 @@ export class PropertyGridEditorQuestionHeaderSettings extends PropertyGridEditor
       el.state = undefined;
     });
   }
-  onValueChanged(obj: Base, prop: JsonObjectProperty, question: Question): void {
-
-  }
+  // onValueChanged(obj: Base, prop: JsonObjectProperty, question: Question): void {
+  //   debugger;
+  // }
 }
 
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestionHeaderSettings());

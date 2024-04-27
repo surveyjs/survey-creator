@@ -597,6 +597,7 @@ export class ThemeModel extends Base implements ITheme {
     if (json.cssVariables) {
       this["generalPrimaryColor"] = json.cssVariables["--sjs-primary-backcolor"];
       super.fromJSON(json.cssVariables, options);
+      headerModel.setCssVariables(json.cssVariables);
 
       this.commonScale = !!this["--sjs-base-unit"] ? roundTo2Decimals(parseFloat(this["--sjs-base-unit"]) * 100 / 8) : undefined;
       this.commonFontSize = !!this["--sjs-font-size"] ? roundTo2Decimals(parseFloat(this["--sjs-font-size"]) * 100 / 16) : undefined;

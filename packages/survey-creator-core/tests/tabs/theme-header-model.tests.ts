@@ -12,6 +12,7 @@ export { createColor } from "../../src/components/tabs/theme-custom-questions/co
 export { createBoxShadow, parseBoxShadow } from "../../src/components/tabs/theme-custom-questions/boxshadow-settings";
 export * from "../../src/components/tabs/theme-custom-questions/boxshadow-settings";
 export * from "../../src/property-grid/theme-settings";
+export * from "../../src/property-grid/header-settings";
 
 test("IHeader de/serialization", (): any => {
   const themeModel = new ThemeModel();

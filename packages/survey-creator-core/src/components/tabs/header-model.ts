@@ -23,20 +23,28 @@ export class HeaderModel extends Base implements IHeader {
   descriptionPositionX: HorizontalAlignment;
   descriptionPositionY: VerticalAlignment;
 
-  // @property() themePalette: string;
+  protected onPropertyValueChanged(name: string, oldValue: any, newValue: any): void {
+    super.onPropertyValueChanged(name, oldValue, newValue);
+  }
 
   fromJSON(json: any, options?: ILoadFromJSONOptions): void {
     super.fromJSON(json, options);
     if (!!json["backgroundImageOpacity"]) this.backgroundImageOpacity = json["backgroundImageOpacity"] * 100;
 
-    if (json.cssVariables) {
-      this["surveyTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("surveyTitle"), json.cssVariables);
-      this["surveyDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("surveyDescription"), json.cssVariables);
-    }
     // this["surveyTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("surveyTitle"), this.themeCssVariablesChanges);
     // this["surveyDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("surveyDescription"), this.themeCssVariablesChanges);
     // this["headerTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("headerTitle"), this.themeCssVariablesChanges);
     // this["headerDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("headerDescription"), this.themeCssVariablesChanges);
+
+  }
+
+  public setCssVariables(cssVariables?: { [index: string]: string }) {
+    if (cssVariables) {
+      this["surveyTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("surveyTitle"), cssVariables);
+      this["surveyDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("surveyDescription"), cssVariables);
+      this["headerTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("headerTitle"), cssVariables);
+      this["headerDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("headerDescription"), cssVariables);
+    }
 
   }
 
