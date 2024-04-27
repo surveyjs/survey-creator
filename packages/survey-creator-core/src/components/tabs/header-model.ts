@@ -22,6 +22,11 @@ export class HeaderModel extends Base implements IHeader {
   titlePositionY: VerticalAlignment;
   descriptionPositionX: HorizontalAlignment;
   descriptionPositionY: VerticalAlignment;
+  public owner: ITheme;
+
+  public getSurvey(live: boolean = false): ISurvey {
+    return this.owner as any;
+  }
 
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any): void {
     super.onPropertyValueChanged(name, oldValue, newValue);
@@ -262,26 +267,6 @@ Serializer.addClass(
       ],
     },
     {
-      type: "fontsettings",
-      name: "surveyTitle",
-      displayName: getLocString("theme.surveyTitle"),
-      visibleIf: (obj) => obj.headerView === "basic",
-      default: getDefaultTitleSetting(),
-      onSerializeValue: (obj: HeaderModel) => {
-        return onSerializeFontSettingsValue(obj, "surveyTitle");
-      }
-    },
-    {
-      type: "fontsettings",
-      name: "surveyDescription",
-      displayName: getLocString("theme.surveyDescription"),
-      visibleIf: (obj) => obj.headerView === "basic",
-      default: getDefaultDescriptionSetting(),
-      onSerializeValue: (obj: HeaderModel) => {
-        return onSerializeFontSettingsValue(obj, "surveyDescription");
-      }
-    },
-    {
       type: "spinedit",
       name: "height",
       displayName: getLocString("p.height"),
@@ -407,38 +392,7 @@ Serializer.addClass(
         }
       }
     },
-    {
-      type: "fontsettings",
-      name: "headerTitle",
-      displayName: getLocString("theme.surveyTitle"),
-      default: getDefaultTitleSetting(),
-      visibleIf: (obj) => obj.headerView === "advanced",
-      onPropertyEditorUpdate: function (obj: any, editor: any) {
-        if (!!editor) {
-          editor.descriptionLocation = "hidden";
-          editor.allowEmptyColorValue = true;
-        }
-      },
-      onSerializeValue: (obj: HeaderModel) => {
-        return onSerializeFontSettingsValue(obj, "headerTitle");
-      }
-    },
-    {
-      type: "fontsettings",
-      name: "headerDescription",
-      displayName: getLocString("theme.surveyDescription"),
-      default: getDefaultDescriptionSetting(true),
-      visibleIf: (obj) => obj.headerView === "advanced",
-      onPropertyEditorUpdate: function (obj: any, editor: any) {
-        if (!!editor) {
-          editor.descriptionLocation = "hidden";
-          editor.allowEmptyColorValue = true;
-        }
-      },
-      onSerializeValue: (obj: HeaderModel) => {
-        return onSerializeFontSettingsValue(obj, "headerDescription");
-      }
-    },
+
     getHorizontalAlignment("logoPositionX", getLocString("theme.logoPosition"), "right"),
     getVerticalAlignment("logoPositionY", "top"),
     getHorizontalAlignment("titlePositionX", getLocString("theme.coverTitlePosition"), "left"),
@@ -447,3 +401,57 @@ Serializer.addClass(
     getVerticalAlignment("descriptionPositionY", "bottom"),
   ]);
 
+Serializer.addProperties("headersettings", [
+  {
+    type: "fontsettings",
+    name: "surveyTitle",
+    displayName: getLocString("theme.surveyTitle"),
+    visibleIf: (obj) => obj.headerView === "basic",
+    default: getDefaultTitleSetting(),
+    onSerializeValue: (obj: HeaderModel) => {
+      return onSerializeFontSettingsValue(obj, "surveyTitle");
+    }
+  },
+  {
+    type: "fontsettings",
+    name: "surveyDescription",
+    displayName: getLocString("theme.surveyDescription"),
+    visibleIf: (obj) => obj.headerView === "basic",
+    default: getDefaultDescriptionSetting(),
+    onSerializeValue: (obj: HeaderModel) => {
+      return onSerializeFontSettingsValue(obj, "surveyDescription");
+    }
+  },
+  {
+    type: "fontsettings",
+    name: "headerTitle",
+    displayName: getLocString("theme.surveyTitle"),
+    default: getDefaultTitleSetting(),
+    visibleIf: (obj) => obj.headerView === "advanced",
+    onPropertyEditorUpdate: function (obj: any, editor: any) {
+      if (!!editor) {
+        editor.descriptionLocation = "hidden";
+        editor.allowEmptyColorValue = true;
+      }
+    },
+    onSerializeValue: (obj: HeaderModel) => {
+      return onSerializeFontSettingsValue(obj, "headerTitle");
+    }
+  },
+  {
+    type: "fontsettings",
+    name: "headerDescription",
+    displayName: getLocString("theme.surveyDescription"),
+    default: getDefaultDescriptionSetting(true),
+    visibleIf: (obj) => obj.headerView === "advanced",
+    onPropertyEditorUpdate: function (obj: any, editor: any) {
+      if (!!editor) {
+        editor.descriptionLocation = "hidden";
+        editor.allowEmptyColorValue = true;
+      }
+    },
+    onSerializeValue: (obj: HeaderModel) => {
+      return onSerializeFontSettingsValue(obj, "headerDescription");
+    }
+  },
+]);

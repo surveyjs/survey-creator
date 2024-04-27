@@ -160,7 +160,9 @@ export class ThemeModel extends Base implements ITheme {
   }
 
   private setNewHeaderProperty() {
-    this.setPropertyValue("header", new HeaderModel());
+    const header = new HeaderModel();
+    header.owner = this;
+    this.setPropertyValue("header", header);
   }
 
   // private updatePropertyGridEditors(themeEditorSurvey: SurveyModel) {
@@ -592,6 +594,7 @@ export class ThemeModel extends Base implements ITheme {
     super.fromJSON(json, options);
     const headerModel = new HeaderModel();
     headerModel.fromJSON(json.header || {});
+    headerModel.owner = this;
     this.header = headerModel;
 
     if (json.cssVariables) {
