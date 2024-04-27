@@ -2,7 +2,8 @@ import { ClientFunction, Selector } from "testcafe";
 import {
   collapseButtonSelector, expandButtonSelector, getBarItemByTitle,
   getTabbedMenuItemByText, pageNavigator, propertyGridSelector, questions, questionToolbarActions,
-  setJSON, toolbox, toolboxItemIcons, toolboxItemTitles, url, creatorTabDesignerName, creatorTabPreviewName, objectSelectorButton, getPropertyGridCategory, generalGroupName, getAddNewQuestionButton, selectedObjectTextSelector, surveySettingsButtonSelector
+  setJSON, toolbox, toolboxItemIcons, toolboxItemTitles, url, creatorTabDesignerName, creatorTabPreviewName, objectSelectorButton, getPropertyGridCategory, generalGroupName, getAddNewQuestionButton, selectedObjectTextSelector, surveySettingsButtonSelector,
+  changeToolboxScrolling
 } from "../helper";
 const title = "Responsiveness";
 
@@ -28,6 +29,7 @@ test("Check base responsiveness for tabbed menu", async (t) => {
 });
 
 test("Check base responsiveness for toolbox", async (t) => {
+  await changeToolboxScrolling(false);
   const tabbedMenuItemSelector = Selector(".svc-toolbox .svc-toolbox__tool:nth-of-type(20)");
   await t
     .resizeWindow(1280, 1200)

@@ -1,4 +1,4 @@
-import { url, getJSON, toolboxItems, explicitErrorHandler, setJSON } from "../helper";
+import { url, getJSON, toolboxItems, explicitErrorHandler, setJSON, changeToolboxScrolling } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Toolbox";
 
@@ -94,6 +94,8 @@ test("Categories large mode", async (t) => {
 test.before(async (t) => {
   await t.resizeWindow(1200, 605);
 })("Categories Responsiveness small -> large", async (t) => {
+  await changeToolboxScrolling(false);
+
   await setupCategories(t, 1110);
   await t
     .expect(Selector(".svc-toolbox .sv-dots__item").visible).ok()
@@ -114,6 +116,7 @@ test.before(async (t) => {
 test.before(async (t) => {
   await t.resizeWindow(1900, 600);
 })("Categories Responsiveness large -> small", async (t) => {
+  await changeToolboxScrolling(false);
 
   await setupCategories(t);
   await t
@@ -189,6 +192,8 @@ test("Categories keepAllCategoriesExpanded property", async (t) => {
 });
 
 test("add question from toolbox popup items", async (t) => {
+  await changeToolboxScrolling(false);
+
   const popup = Selector(".sv-popup__container").filterVisible();
 
   await t
@@ -205,6 +210,7 @@ test("add question from toolbox popup items", async (t) => {
 });
 
 test("check toolbox scroll", async (t) => {
+  await changeToolboxScrolling(false);
   await explicitErrorHandler();
   await t.resizeWindow(1900, 800);
   const hasNoScroll = ClientFunction(() => {
@@ -230,6 +236,8 @@ test("check toolbox css", async (t) => {
 });
 
 test("toolbar responsiveness in compact mode", async (t) => {
+  await changeToolboxScrolling(false);
+
   await explicitErrorHandler();
   await t.resizeWindow(1920, 605);
   const addCustomeButtonIntoQuestionToolbar = ClientFunction(() => {
