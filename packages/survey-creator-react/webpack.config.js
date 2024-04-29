@@ -54,9 +54,7 @@ const buildPlatformJson = {
   peerDependenciesMeta: {
     "ace-builds": {
       "optional": true
-    }
-  },
-  dependencies: {
+    },
     "survey-core": packageJson.version,
     "survey-react-ui": packageJson.version,
     "survey-creator-core": packageJson.version

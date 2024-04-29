@@ -67,9 +67,7 @@ var buildPlatformJson = {
   peerDependenciesMeta: {
     "ace-builds": {
       "optional": true
-    }
-  },
-  dependencies: {
+    },
     "survey-core": packageJson.version
   },
   devDependencies: {},

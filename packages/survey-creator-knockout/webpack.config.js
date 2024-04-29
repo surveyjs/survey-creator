@@ -52,12 +52,12 @@ const buildPlatformJson = {
   peerDependenciesMeta: {
     "ace-builds": {
       "optional": true
-    }
-  },
-  dependencies: {
+    },
     "survey-core": packageJson.version,
     "survey-knockout-ui": packageJson.version,
     "survey-creator-core": packageJson.version,
+  },
+  dependencies: {
     knockout: "^3.5.0"
   },
   devDependencies: {}
