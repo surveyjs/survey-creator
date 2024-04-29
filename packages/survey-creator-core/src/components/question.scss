@@ -90,10 +90,13 @@ svc-question {
 }
 
 .svc-question__content {
-  .sd-panel__content {
-    overflow: auto;
+  .sd-question:not(.sd-question--paneldynamic) {
+    .sd-panel__content {
+      overflow: auto;
+    }
   }
 }
+
 
 .svc-panel__placeholder {
   color: $foreground-light;
