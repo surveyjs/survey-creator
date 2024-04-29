@@ -174,6 +174,8 @@ var simplifiedChineseTranslation = {
     addNewTypeQuestion: "添加{0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[徽标]",
     choices_Item: "项目",
+    selectFile: "选择文件",
+    removeFile: "删除文件",
     lg: {
       addNewItem: "添加新规则",
       empty_tab: "创建规则以自定义调查流。",
@@ -656,6 +658,7 @@ var simplifiedChineseTranslation = {
     labelTrue: "“真实”标签",
     labelFalse: "“虚假”标签",
     allowClear: "显示“清除”按钮",
+    searchMode: "搜索模式",
     displayStyle: "值显示样式",
     format: "带格式的字符串",
     maximumFractionDigits: "最大小数位数",
@@ -1041,8 +1044,9 @@ var simplifiedChineseTranslation = {
     },
     showProgressBar: {
       off: "隐藏",
-      aboveHeader: "标题上方",
-      belowHeader: "在标题下方"
+      topbottom: "顶和底",
+      aboveheader: "标题上方",
+      belowheader: "在标题下方"
     },
     sum: "和",
     count: "计数",
@@ -2467,8 +2471,8 @@ editorLocalization.locales["zh-cn"] = simplifiedChineseTranslation;
 // totalDisplayStyle.date: "Date" => "日期"
 // rowsOrder.initial: "Original" => "源语言"
 // questionsOrder.initial: "Original" => "源语言"
-// showProgressBar.aboveHeader: "Above the header" => "标题上方"
-// showProgressBar.belowHeader: "Below the header" => "在标题下方"
+// showProgressBar.aboveheader: "Above the header" => "标题上方"
+// showProgressBar.belowheader: "Below the header" => "在标题下方"
 // pv.sum: "Sum" => "和"
 // pv.count: "Count" => "计数"
 // pv.min: "Min" => "最小值"
@@ -2683,3 +2687,6 @@ editorLocalization.locales["zh-cn"] = simplifiedChineseTranslation;
 // pe.textWrapEnabled: "Wrap choices" => "换行选项"
 // image.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "“自动”选项会根据提供的源 URL 自动确定适合的显示模式 - 图像、视频或 YouTube。"
 // imagepicker.contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options." => "在“图像”和“视频”之间进行选择以设置媒体选择器的内容模式。如果选择“图像”，请确保提供的所有选项都是以下格式的图像文件：JPEG、GIF、PNG、APNG、SVG、BMP、ICO。同样，如果选择“视频”，请确保所有选项都是指向以下格式的视频文件的直接链接：MP4、MOV、WMV、FLV、AVI、MKV。请注意，视频选项不支持 YouTube 链接。"
+// ed.selectFile: "Select a file" => "选择文件"
+// ed.removeFile: "Remove the file" => "删除文件"
+// pe.searchMode: "Search Mode" => "搜索模式"

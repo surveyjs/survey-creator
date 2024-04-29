@@ -174,6 +174,8 @@ export var hebrewStrings = {
     addNewTypeQuestion: "הוסף {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[לוגו]",
     choices_Item: "פריט ",
+    selectFile: "בחר קובץ",
+    removeFile: "הסרת הקובץ",
     lg: {
       addNewItem: "הוספת כלל חדש",
       empty_tab: "צור כלל כדי להתאים אישית את זרימת הסקר.",
@@ -656,6 +658,7 @@ export var hebrewStrings = {
     labelTrue: "תוית 'נכון'",
     labelFalse: "תוית 'לא נכון'",
     allowClear: "הצג את לחצן הניקוי",
+    searchMode: "מצב חיפוש",
     displayStyle: "סגנון תצוגת ערך",
     format: "מחרוזת מסוגננת",
     maximumFractionDigits: "ספרות עשרוניות מקסימליות",
@@ -1041,8 +1044,9 @@ export var hebrewStrings = {
     },
     showProgressBar: {
       off: "מוסתר",
-      aboveHeader: "מעל הכותרת העליונה",
-      belowHeader: "מתחת לכותרת העליונה"
+      topbottom: "עליון ותחתון",
+      aboveheader: "מעל הכותרת העליונה",
+      belowheader: "מתחת לכותרת העליונה"
     },
     sum: "סכום",
     count: "מנה",
@@ -1889,8 +1893,8 @@ editorLocalization.locales["he"] = hebrewStrings;
 // totalDisplayStyle.date: "Date" => "תמר"
 // rowsOrder.initial: "Original" => "מקורי"
 // questionsOrder.initial: "Original" => "מקורי"
-// showProgressBar.aboveHeader: "Above the header" => "מעל הכותרת העליונה"
-// showProgressBar.belowHeader: "Below the header" => "מתחת לכותרת העליונה"
+// showProgressBar.aboveheader: "Above the header" => "מעל הכותרת העליונה"
+// showProgressBar.belowheader: "Below the header" => "מתחת לכותרת העליונה"
 // pv.sum: "Sum" => "סכום"
 // pv.count: "Count" => "מנה"
 // pv.min: "Min" => "דקות"
@@ -2105,3 +2109,6 @@ editorLocalization.locales["he"] = hebrewStrings;
 // pe.textWrapEnabled: "Wrap choices" => "אפשרויות גלישה"
 // image.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "האפשרות \"אוטומטי\" קובעת אוטומטית את המצב המתאים לתצוגה - תמונה, וידאו או YouTube - בהתבסס על כתובת האתר המקורית שסופקה."
 // imagepicker.contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options." => "בחר בין \"תמונה\" ו\"וידאו\" כדי להגדיר את מצב התוכן של בורר המדיה. אם נבחרה האפשרות \"תמונה\", ודא שכל האפשרויות שסופקו הן קובצי תמונה בתבניות הבאות: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. באופן דומה, אם נבחר \"וידאו\", ודא שכל האפשרויות הן קישורים ישירים לקבצי וידאו בפורמטים הבאים: MP4, MOV, WMV, FLV, AVI, MKV. שים לב שקישורי YouTube אינם נתמכים עבור אפשרויות וידאו."
+// ed.selectFile: "Select a file" => "בחר קובץ"
+// ed.removeFile: "Remove the file" => "הסרת הקובץ"
+// pe.searchMode: "Search Mode" => "מצב חיפוש"

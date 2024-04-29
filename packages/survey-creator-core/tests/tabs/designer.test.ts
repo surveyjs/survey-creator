@@ -169,6 +169,70 @@ test("StringEditorViewModelBase skip undo/redo hot keys", () => {
   editor.checkConstraints(event);
   expect(result).toBe("->ip->pd->ip->pd");
 });
+
+test("StringEditorViewModelBase skip formatting keys and enter key", () => {
+  let survey: SurveyModel = new SurveyModel({
+    pages: [
+      {
+        elements: [
+          { type: "text" }
+        ]
+      }
+    ]
+  });
+
+  let editor: StringEditorViewModelBase = new StringEditorViewModelBase(survey.locTitle, null);
+  let result = "";
+  const event = {
+    keyCode: 70,
+    ctrlKey: true,
+    stopImmediatePropagation: () => result += "->ip",
+    preventDefault: () => result += "->pd"
+  };
+  expect(result).toBe("");
+  editor.checkConstraints(event);
+  expect(result).toBe("");
+  event.keyCode = 66;
+  editor.checkConstraints(event);
+  expect(result).toBe("->ip->pd");
+  event.keyCode = 73;
+  editor.checkConstraints(event);
+  expect(result).toBe("->ip->pd->ip->pd");
+
+  result = "";
+  const eventMac = {
+    keyCode: 70,
+    metaKey: true,
+    stopImmediatePropagation: () => result += "->ip",
+    preventDefault: () => result += "->pd"
+  };
+  expect(result).toBe("");
+  editor.checkConstraints(eventMac);
+  expect(result).toBe("");
+  eventMac.keyCode = 66;
+  editor.checkConstraints(eventMac);
+  expect(result).toBe("->ip->pd");
+  eventMac.keyCode = 73;
+  editor.checkConstraints(eventMac);
+  expect(result).toBe("->ip->pd->ip->pd");
+
+  result = "";
+  const eventEnter = {
+    keyCode: 13,
+    stopImmediatePropagation: () => result += "->ip",
+    preventDefault: () => result += "->pd"
+  };
+  expect(result).toBe("");
+  editor.checkConstraints(eventEnter);
+  expect(result).toBe("->pd");
+
+  let editor2: StringEditorViewModelBase = new StringEditorViewModelBase(survey.locDescription, null);
+  result = "";
+  expect(result).toBe("");
+  editor2.checkConstraints(eventEnter);
+  expect(result).toBe("");
+});
+
 test("Property Grid and logic tab, Bug#4877", () => {
   const creator = new CreatorTester({ showLogicTab: true });
   creator.selectElement(creator.survey);

@@ -675,6 +675,7 @@ export var enStrings = {
     labelTrue: "Label for \"True\"",
     labelFalse: "Label for \"False\"",
     allowClear: "Show the Clear button",
+    searchMode: "Search Mode",
     displayStyle: "Display format",
     format: "Formatted string",
     maximumFractionDigits: "Maximum fractional digits",
@@ -1060,8 +1061,9 @@ export var enStrings = {
     },
     showProgressBar: {
       off: "Hidden",
-      aboveHeader: "Above the header",
-      belowHeader: "Below the header"
+      topbottom: "Top and bottom",
+      aboveheader: "Above the header",
+      belowheader: "Below the header"
     },
     sum: "Sum",
     count: "Count",

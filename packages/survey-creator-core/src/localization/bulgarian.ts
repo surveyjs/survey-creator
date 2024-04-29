@@ -174,6 +174,8 @@ export var bgStrings = {
     addNewTypeQuestion: "Добави {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
     choices_Item: "Елемент ",
+    selectFile: "Изберете файл",
+    removeFile: "Премахване на файла",
     lg: {
       addNewItem: "Добавяне на ново правило",
       empty_tab: "Създай правило за персонализиране на анкетата.",
@@ -656,6 +658,7 @@ export var bgStrings = {
     labelTrue: "\"Вярно\" етикет",
     labelFalse: "\"Невярно\" етикет",
     allowClear: "Показване на бутона Изчистване",
+    searchMode: "Режим на търсене",
     displayStyle: "Стил за изобразяване на стойността",
     format: "Форматиран низ",
     maximumFractionDigits: "Максимален брой дробни цифри",
@@ -1041,8 +1044,9 @@ export var bgStrings = {
     },
     showProgressBar: {
       off: "Скрит",
-      aboveHeader: "Над горния колонтитул",
-      belowHeader: "Под заглавката"
+      topbottom: "Отгоре и отдолу",
+      aboveheader: "Над горния колонтитул",
+      belowheader: "Под заглавката"
     },
     sum: "Сума",
     count: "Граф",
@@ -1886,8 +1890,8 @@ editorLocalization.locales["bg"] = bgStrings;
 // totalDisplayStyle.date: "Date" => "Дата"
 // rowsOrder.initial: "Original" => "Оригинален"
 // questionsOrder.initial: "Original" => "Оригинален"
-// showProgressBar.aboveHeader: "Above the header" => "Над горния колонтитул"
-// showProgressBar.belowHeader: "Below the header" => "Под заглавката"
+// showProgressBar.aboveheader: "Above the header" => "Над горния колонтитул"
+// showProgressBar.belowheader: "Below the header" => "Под заглавката"
 // pv.sum: "Sum" => "Сума"
 // pv.count: "Count" => "Граф"
 // pv.min: "Min" => "Мин"
@@ -2102,3 +2106,6 @@ editorLocalization.locales["bg"] = bgStrings;
 // pe.textWrapEnabled: "Wrap choices" => "Опции за обтичане"
 // image.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "Опцията \"Auto\" автоматично определя подходящия режим за показване - Image, Video или YouTube - въз основа на предоставения URL адрес на източника."
 // imagepicker.contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options." => "Изберете между \"Изображение\" и \"Видео\", за да зададете режима на съдържание на селектора на мултимедия. Ако е избрано \"Изображение\", уверете се, че всички предоставени опции са файлове с изображения в следните формати: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. По същия начин, ако е избрано \"Видео\", уверете се, че всички опции са директни връзки към видео файлове в следните формати: MP4, MOV, WMV, FLV, AVI, MKV. Моля, имайте предвид, че връзките в YouTube не се поддържат за опции за видео."
+// ed.selectFile: "Select a file" => "Изберете файл"
+// ed.removeFile: "Remove the file" => "Премахване на файла"
+// pe.searchMode: "Search Mode" => "Режим на търсене"

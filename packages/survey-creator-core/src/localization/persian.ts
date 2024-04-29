@@ -174,6 +174,8 @@ var persianStrings = {
     addNewTypeQuestion: "اضافه {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[لوگو]",
     choices_Item: "مورد ",
+    selectFile: "یک پرونده انتخاب کنید",
+    removeFile: "حذف پرونده",
     lg: {
       addNewItem: "اضافه کردن آیتم جدید",
       empty_tab: "یک آیتم را برای سفارشی کردن جریان نظرسنجی انتخاب کنید",
@@ -656,6 +658,7 @@ var persianStrings = {
     labelTrue: "برچسب \"True\"",
     labelFalse: "برچسب \"غلط\"",
     allowClear: "نشان دادن دکمهی Clear",
+    searchMode: "حالت جستجو",
     displayStyle: "سبک نمایش ارزش",
     format: "رشتۀ قالببندی شده",
     maximumFractionDigits: "بیشینه رقم کسری",
@@ -1041,8 +1044,9 @@ var persianStrings = {
     },
     showProgressBar: {
       off: "پنهان",
-      aboveHeader: "بالای سرصفحه",
-      belowHeader: "زیر سرایند"
+      topbottom: "بالا و پایین",
+      aboveheader: "بالای سرصفحه",
+      belowheader: "زیر سرایند"
     },
     sum: "مجموع",
     count: "تعداد",
@@ -2280,8 +2284,8 @@ editorLocalization.locales["fa"] = persianStrings;
 // totalDisplayStyle.date: "Date" => "تاریخ"
 // rowsOrder.initial: "Original" => "اصلی"
 // questionsOrder.initial: "Original" => "اصلی"
-// showProgressBar.aboveHeader: "Above the header" => "بالای سرصفحه"
-// showProgressBar.belowHeader: "Below the header" => "زیر سرایند"
+// showProgressBar.aboveheader: "Above the header" => "بالای سرصفحه"
+// showProgressBar.belowheader: "Below the header" => "زیر سرایند"
 // pv.sum: "Sum" => "مجموع"
 // pv.count: "Count" => "تعداد"
 // pv.min: "Min" => "دقیقه"
@@ -2496,3 +2500,6 @@ editorLocalization.locales["fa"] = persianStrings;
 // pe.textWrapEnabled: "Wrap choices" => "انتخاب های بسته بندی"
 // image.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "گزینه \"Auto\" به طور خودکار حالت مناسب برای نمایش - تصویر، ویدئو یا یوتیوب - را بر اساس URL منبع ارائه شده تعیین می کند."
 // imagepicker.contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options." => "بین \"تصویر\" و \"ویدئو\" را انتخاب کنید تا حالت محتوا را انتخاب کنید. اگر \"تصویر\" انتخاب شده است، اطمینان حاصل کنید که تمام گزینه های ارائه شده فایل های تصویری در فرمت های زیر هستند: JPEG، GIF، PNG، APNG، SVG، BMP، ICO. به طور مشابه، اگر \"ویدئو\" انتخاب شده است، اطمینان حاصل کنید که تمام گزینه ها لینک مستقیم به فایل های ویدئویی در فرمت های زیر هستند: MP4، MOV، WMV، FLV، AVI، MKV. لطفا توجه داشته باشید که پیوندهای YouTube برای گزینه های ویدیویی پشتیبانی نمی شوند."
+// ed.selectFile: "Select a file" => "یک پرونده انتخاب کنید"
+// ed.removeFile: "Remove the file" => "حذف پرونده"
+// pe.searchMode: "Search Mode" => "حالت جستجو"

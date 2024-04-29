@@ -174,6 +174,8 @@ export var arStrings = {
     addNewTypeQuestion: "Add {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[الشعار]",
     choices_Item: "بند ",
+    selectFile: "حدد ملفا",
+    removeFile: "إزالة الملف",
     lg: {
       addNewItem: "إضافة قاعدة جديدة",
       empty_tab: "قم بإنشاء إرتباط لتخصيص تدفق الإستبيان",
@@ -656,6 +658,7 @@ export var arStrings = {
     labelTrue: "تسمية \"صحيح\"",
     labelFalse: "تسمية \"خطأ\"",
     allowClear: "Show options caption",
+    searchMode: "وضع البحث",
     displayStyle: "نمط عرض القيمة",
     format: "سلسلة منسقة",
     maximumFractionDigits: "الحد الأقصى للأرقام الكسرية",
@@ -1041,8 +1044,9 @@ export var arStrings = {
     },
     showProgressBar: {
       off: "مخفي",
-      aboveHeader: "فوق الرأس",
-      belowHeader: "أسفل الرأس"
+      topbottom: "الاعلى والأسفل",
+      aboveheader: "فوق الرأس",
+      belowheader: "أسفل الرأس"
     },
     sum: "مجموع",
     count: "عد",
@@ -2235,8 +2239,8 @@ editorLocalization.locales["ar"] = arStrings;
 // totalDisplayStyle.date: "Date" => "تاريخ"
 // rowsOrder.initial: "Original" => "اللغة الأصلية"
 // questionsOrder.initial: "Original" => "اللغة الأصلية"
-// showProgressBar.aboveHeader: "Above the header" => "فوق الرأس"
-// showProgressBar.belowHeader: "Below the header" => "أسفل الرأس"
+// showProgressBar.aboveheader: "Above the header" => "فوق الرأس"
+// showProgressBar.belowheader: "Below the header" => "أسفل الرأس"
 // pv.sum: "Sum" => "مجموع"
 // pv.count: "Count" => "عد"
 // pv.min: "Min" => "دقيقه"
@@ -2451,3 +2455,6 @@ editorLocalization.locales["ar"] = arStrings;
 // pe.textWrapEnabled: "Wrap choices" => "خيارات الالتفاف"
 // image.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "يحدد الخيار \"تلقائي\" تلقائيا الوضع المناسب للعرض - الصورة أو الفيديو أو YouTube - بناء على عنوان URL المصدر المقدم."
 // imagepicker.contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options." => "اختر بين \"صورة\" و \"فيديو\" لتعيين وضع المحتوى لمحدد الوسائط. إذا تم تحديد \"صورة\" ، فتأكد من أن جميع الخيارات المتوفرة هي ملفات صور بالتنسيقات التالية: JPEG و GIF و PNG و APNG و SVG و BMP و ICO. وبالمثل ، إذا تم تحديد \"فيديو\" ، فتأكد من أن جميع الخيارات هي روابط مباشرة لملفات الفيديو بالتنسيقات التالية: MP4 و MOV و WMV و FLV و AVI و MKV. يرجى ملاحظة أن روابط YouTube غير مدعومة لخيارات الفيديو."
+// ed.selectFile: "Select a file" => "حدد ملفا"
+// ed.removeFile: "Remove the file" => "إزالة الملف"
+// pe.searchMode: "Search Mode" => "وضع البحث"

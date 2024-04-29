@@ -174,6 +174,8 @@ var italianTranslation = {
     addNewTypeQuestion: "Aggiungi {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
     choices_Item: "Articolo ",
+    selectFile: "Seleziona un file",
+    removeFile: "Rimuovere il file",
     lg: {
       addNewItem: "Aggiungi Nuova Regola",
       empty_tab: "Crea una regola per personalizzare il percorso del sondaggio.",
@@ -656,6 +658,7 @@ var italianTranslation = {
     labelTrue: "Etichetta \"Vero\"",
     labelFalse: "Etichetta \"Falso\"",
     allowClear: "Mostra il tasto Cancella",
+    searchMode: "Modalità di ricerca",
     displayStyle: "Stile di visualizzazione del valore",
     format: "Stringa formattata",
     maximumFractionDigits: "Numero massimo di cifre frazionarie",
@@ -1041,8 +1044,9 @@ var italianTranslation = {
     },
     showProgressBar: {
       off: "Nascosto",
-      aboveHeader: "Sopra l'intestazione",
-      belowHeader: "Sotto l'intestazione"
+      topbottom: "In alto e in basso",
+      aboveheader: "Sopra l'intestazione",
+      belowheader: "Sotto l'intestazione"
     },
     sum: "Somma",
     count: "Contare",
@@ -2083,8 +2087,8 @@ editorLocalization.locales["it"] = italianTranslation;
 // totalDisplayStyle.date: "Date" => "Dattero"
 // rowsOrder.initial: "Original" => "Originale"
 // questionsOrder.initial: "Original" => "Originale"
-// showProgressBar.aboveHeader: "Above the header" => "Sopra l'intestazione"
-// showProgressBar.belowHeader: "Below the header" => "Sotto l'intestazione"
+// showProgressBar.aboveheader: "Above the header" => "Sopra l'intestazione"
+// showProgressBar.belowheader: "Below the header" => "Sotto l'intestazione"
 // pv.sum: "Sum" => "Somma"
 // pv.count: "Count" => "Contare"
 // pv.min: "Min" => "Min"
@@ -2299,3 +2303,6 @@ editorLocalization.locales["it"] = italianTranslation;
 // pe.textWrapEnabled: "Wrap choices" => "Scelte di avvolgimento"
 // image.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "L'opzione \"Auto\" determina automaticamente la modalità di visualizzazione adatta - Immagine, Video o YouTube - in base all'URL di origine fornito."
 // imagepicker.contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options." => "Scegli tra \"Immagine\" e \"Video\" per impostare la modalità contenuto del selettore multimediale. Se è selezionata l'opzione \"Immagine\", assicurarsi che tutte le opzioni fornite siano file immagine nei seguenti formati: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Allo stesso modo, se è selezionato \"Video\", assicurarsi che tutte le opzioni siano collegamenti diretti a file video nei seguenti formati: MP4, MOV, WMV, FLV, AVI, MKV. Tieni presente che i link di YouTube non sono supportati per le opzioni video."
+// ed.selectFile: "Select a file" => "Seleziona un file"
+// ed.removeFile: "Remove the file" => "Rimuovere il file"
+// pe.searchMode: "Search Mode" => "Modalità di ricerca"

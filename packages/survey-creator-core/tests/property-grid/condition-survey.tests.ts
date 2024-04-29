@@ -1737,7 +1737,7 @@ test("Change the default operator", () => {
   expect(panel.getQuestionByName("operator").value).toEqual("anyof");
   settings.logic.defaultOperator = "equal";
 });
-test("Remove valuePropertyName", () => {
+test("Add unwrapped value if checkbox valuePropertyName is set", () => {
   var survey = new SurveyModel({
     questions: [
       { type: "checkbox", name: "q1", choices: ["apple", "banana", "orange"], valuePropertyName: "fruit" },
@@ -1749,6 +1749,10 @@ test("Remove valuePropertyName", () => {
   expect(editor.panel.panels).toHaveLength(1);
   var panel = editor.panel.panels[0];
   expect(panel.getQuestionByName("operator").value).toEqual("allof");
+  const qName = <QuestionCheckboxModel>panel.getQuestionByName("questionName");
+  expect(qName.choices).toHaveLength(1);
+  expect(qName.choices[0].value).toBe("q1-unwrapped");
+  expect(qName.choices[0].text).toBe("q1");
   const qValue = <QuestionCheckboxModel>panel.getQuestionByName("questionValue");
   expect(qValue.valuePropertyName).toBeFalsy();
   expect(qValue.value).toHaveLength(2);
