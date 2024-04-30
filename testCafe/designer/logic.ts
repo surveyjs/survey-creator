@@ -187,7 +187,7 @@ test("Create logic rule", async (t) => {
     .click(getListItemByText("Complete survey"))
 
     .click(doneButton)
-    .expect(errorNotifyBalloonSelector.innerText).eql("Please fix problems in your action(s).")
+    .expect(errorNotifyBalloonSelector.innerText).eql("Please fix issues in your action(s).")
     .expect(Selector(".svc-logic-operator.svc-logic-operator--question.svc-logic-operator--error").filterVisible().count).eql(2)
 
     .hover(logicActionSelector)
