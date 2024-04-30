@@ -721,8 +721,8 @@ test("Displaying correct text for logic action", () => {
   expect(findOp("trigger_copyvalue").text).toEqual("copy into question: {q1} value from question {q2}");
   expect(findOp("trigger_skip").text).toEqual("survey skip to the question {q2}");
   expect(findOp("trigger_runExpression").text).toEqual("run expression: '{q2} + 1' and set its result into question: {q3}");
-  expect(findOp("completedHtmlOnCondition").text).toEqual("show custom text for the 'Thank you page'.");
-  expect(findOp("page_visibility").name).toEqual("Show (hide) page");
+  expect(findOp("completedHtmlOnCondition").text).toEqual("show custom text for the \"Thank You\" page.");
+  expect(findOp("page_visibility").name).toEqual("Show/hide page");
 });
 
 test("Logic editing errors", () => {
