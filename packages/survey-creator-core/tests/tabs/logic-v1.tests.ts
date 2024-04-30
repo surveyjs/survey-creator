@@ -709,7 +709,7 @@ test("Displaying correct text for logic action", () => {
   for (var i = 0; i < logicTypes.length; i++) {
     expect(findOp(logicTypes[i])).toBeTruthy();
   }
-  expect(logic.items[0].getDisplayText()).toEqual("If 'q1' == 1, make page 'page1' visible, make question 'q2' visible, make question 'q3' enable, make question 'q4' required, make panel 'panel1' visible, make panel 'panel1' enable, survey becomes completed, survey skip to the question 'q2', run expression: ''q2' + 1' and set its result into question: 'q3', copy into question: 'q1' value from question 'q2', set into question: 'q2' value q2Value, show custom text for the 'Thank you page'.");
+  expect(logic.items[0].getDisplayText()).toEqual("If 'q1' == 1, make page 'page1' visible, make question 'q2' visible, make question 'q3' enable, make question 'q4' required, make panel 'panel1' visible, make panel 'panel1' enable, survey becomes completed, survey skip to the question 'q2', run expression: ''q2' + 1' and set its result into question: 'q3', copy into question: 'q1' value from question 'q2', set into question: 'q2' value q2Value, show custom text for the \"Thank You\" page.");
   expect(findOp("page_visibility").text).toEqual("make page {page1} visible");
   expect(findOp("panel_visibility").text).toEqual("make panel {panel1} visible");
   expect(findOp("panel_enable").text).toEqual("make panel {panel1} enable");
@@ -745,12 +745,12 @@ test("Logic editing errors", () => {
   );
   logic.expressionEditor.text = "{q1} = 1";
   expect(logic.saveEditableItem()).toBeFalsy();
-  expect(logic.errorText).toEqual("Please, fix problems in your action(s).");
+  expect(logic.errorText).toEqual("Please fix issues in your action(s).");
   var panel = logic.itemEditor.panels[0];
   panel.getQuestionByName("logicTypeName").value = "question_visibility";
   panel.getQuestionByName("elementSelector").value = "";
   expect(logic.saveEditableItem()).toBeFalsy();
-  expect(logic.errorText).toEqual("Please, fix problems in your action(s).");
+  expect(logic.errorText).toEqual("Please fix issues in your action(s).");
   panel.getQuestionByName("elementSelector").value = "q2";
   expect(logic.saveEditableItem()).toBeTruthy();
   expect(logic.errorText).toBeFalsy();

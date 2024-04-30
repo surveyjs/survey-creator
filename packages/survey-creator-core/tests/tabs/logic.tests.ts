@@ -1502,7 +1502,7 @@ test("LogicItemEditorUI: getUsedActionTypes", () => {
 
   expect(types).toHaveLength(3);
   expect(types[0].name).toEqual("question_visibility");
-  expect(types[0].displayName).toEqual("Show (hide) question");
+  expect(types[0].displayName).toEqual("Show/hide question");
   expect(types[1].name).toEqual("trigger_skip");
   expect(types[1].displayName).toEqual("Skip to question");
   expect(types[2].name).toEqual("trigger_copyvalue");
@@ -1552,7 +1552,7 @@ test("LogicPlugin: question & action types are sorted ", () => {
   expect(actionTypes).toHaveLength(4);
   expect(actionTypes[0].title).toEqual("All Action Types");
   expect(actionTypes[1].title).toEqual("Copy answer");
-  expect(actionTypes[2].title).toEqual("Show (hide) question");
+  expect(actionTypes[2].title).toEqual("Show/hide question");
   expect(actionTypes[3].title).toEqual("Skip to question");
 
   filterQuestion.action();
@@ -1920,7 +1920,7 @@ test("LogicUI: edit matrix column visibleIf", () => {
   const actionPanel = itemEditor.panels[0];
   const logicTypeName = actionPanel.getQuestionByName("logicTypeName");
   expect(logicTypeName.value).toEqual("column_visibility");
-  expect(logicTypeName.displayValue).toEqual("Show (hide) column");
+  expect(logicTypeName.displayValue).toEqual("Show/hide column");
   const colSelector = <QuestionDropdownModel>(actionPanel.getQuestionByName("elementSelector"));
   expect(colSelector.choices).toHaveLength(3);
   expect(colSelector.choices[0].text).toEqual("q1.col1");
