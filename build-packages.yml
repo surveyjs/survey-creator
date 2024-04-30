@@ -323,8 +323,12 @@ jobs:
   - task: CopyFiles@2
     inputs:
       SourceFolder: '$(Build.SourcesDirectory)/survey-creator/docs'
+      Contents: |
+        classes.json
+        pmes.json
+        surveyjs_definition.json
       TargetFolder: '$(Build.SourcesDirectory)/service/surveyjs.io/App_Data/DocsEditor'
-      CleanTargetFolder: true
+      CleanTargetFolder: false
     displayName: 'Copy root docs to the local surveyjs/service repo'
 
   - task: CopyFiles@2
