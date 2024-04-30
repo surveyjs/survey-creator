@@ -2097,7 +2097,7 @@ test("LogicUI: edit visibleIf property for panel dynamic question template", () 
   const actionPanel = itemEditor.panels[0];
   const logicTypeName = actionPanel.getQuestionByName("logicTypeName");
   expect(logicTypeName.value).toEqual("question_visibility");
-  expect(logicTypeName.displayValue).toEqual("Show (hide) question");
+  expect(logicTypeName.displayValue).toEqual("Show/hide question");
   const colSelector = <QuestionDropdownModel>(actionPanel.getQuestionByName("elementSelector"));
   expect(colSelector.choices).toHaveLength(3);
   expect(colSelector.choices[0].text).toEqual("q1.q1_col1");
@@ -2293,7 +2293,7 @@ test("LogicUI: edit visibleIf property for panel dynamic question template when 
   const actionPanel = itemEditor.panels[0];
   const logicTypeName = actionPanel.getQuestionByName("logicTypeName");
   expect(logicTypeName.value).toEqual("question_visibility");
-  expect(logicTypeName.displayValue).toEqual("Show (hide) question");
+  expect(logicTypeName.displayValue).toEqual("Show/hide question");
   const colSelector = <QuestionDropdownModel>(actionPanel.getQuestionByName("elementSelector"));
   expect(colSelector.choices).toHaveLength(4);
   expect(colSelector.choices[1].text).toEqual("q1.q1_col1");
