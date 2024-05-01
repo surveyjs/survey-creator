@@ -225,6 +225,7 @@ test("Left toolbox - scroll", async (t) => {
     await t
       .hover(translationTab) // move cursor from toolboxItem
       .resizeWindow(1240, 870);
+    await t.expect(Selector(".svc-toolbox--compact").visible).ok();
     await takeElementScreenshot("toolbox-left-scroll-compact.png", toolboxElement, t, comparer);
 
     await t.hover(toolboxItem);
