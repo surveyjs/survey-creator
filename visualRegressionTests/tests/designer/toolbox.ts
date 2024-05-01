@@ -217,6 +217,7 @@ test("Left toolbox - scroll", async (t) => {
 
     const toolboxItem = Selector(".svc-toolbox__item").nth(5);
     const toolboxElement = Selector(".svc-toolbox");
+    const creatorTabElement = Selector(".svc-creator-tab");
 
     await t
       .resizeWindow(1510, 870);
@@ -226,10 +227,10 @@ test("Left toolbox - scroll", async (t) => {
       .hover(translationTab) // move cursor from toolboxItem
       .resizeWindow(1240, 870);
     await t.expect(Selector(".svc-toolbox--compact").visible).ok();
-    await takeElementScreenshot("toolbox-left-scroll-compact.png", toolboxElement, t, comparer);
+    await takeElementScreenshot("toolbox-left-scroll-compact.png", creatorTabElement, t, comparer);
 
     await t.hover(toolboxItem);
-    await takeElementScreenshot("toolbox-left-scroll-compact-hover-item.png", toolboxElement, t, comparer);
+    await takeElementScreenshot("toolbox-left-scroll-compact-hover-item.png", creatorTabElement, t, comparer);
 
     await t.resizeWindow(2560, 1440);
   });
