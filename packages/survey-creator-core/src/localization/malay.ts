@@ -1044,8 +1044,9 @@ export var msStrings = {
     },
     showProgressBar: {
       off: "Tersembunyi",
-      aboveHeader: "Di atas pengepala",
-      belowHeader: "Di bawah pengepala"
+      topbottom: "atas dan bawah",
+      aboveheader: "Di atas pengepala",
+      belowheader: "Di bawah pengepala"
     },
     sum: "Jumlah",
     count: "Kiraan",
@@ -2281,8 +2282,8 @@ editorLocalization.locales["ms"] = msStrings;
 // totalDisplayStyle.date: "Date" => "Tarikh"
 // rowsOrder.initial: "Original" => "Asal"
 // questionsOrder.initial: "Original" => "Asal"
-// showProgressBar.aboveHeader: "Above the header" => "Di atas pengepala"
-// showProgressBar.belowHeader: "Below the header" => "Di bawah pengepala"
+// showProgressBar.aboveheader: "Above the header" => "Di atas pengepala"
+// showProgressBar.belowheader: "Below the header" => "Di bawah pengepala"
 // pv.sum: "Sum" => "Jumlah"
 // pv.count: "Count" => "Kiraan"
 // pv.min: "Min" => "Min"

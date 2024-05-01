@@ -1044,8 +1044,9 @@ var persianStrings = {
     },
     showProgressBar: {
       off: "پنهان",
-      aboveHeader: "بالای سرصفحه",
-      belowHeader: "زیر سرایند"
+      topbottom: "بالا و پایین",
+      aboveheader: "بالای سرصفحه",
+      belowheader: "زیر سرایند"
     },
     sum: "مجموع",
     count: "تعداد",
@@ -2283,8 +2284,8 @@ editorLocalization.locales["fa"] = persianStrings;
 // totalDisplayStyle.date: "Date" => "تاریخ"
 // rowsOrder.initial: "Original" => "اصلی"
 // questionsOrder.initial: "Original" => "اصلی"
-// showProgressBar.aboveHeader: "Above the header" => "بالای سرصفحه"
-// showProgressBar.belowHeader: "Below the header" => "زیر سرایند"
+// showProgressBar.aboveheader: "Above the header" => "بالای سرصفحه"
+// showProgressBar.belowheader: "Below the header" => "زیر سرایند"
 // pv.sum: "Sum" => "مجموع"
 // pv.count: "Count" => "تعداد"
 // pv.min: "Min" => "دقیقه"

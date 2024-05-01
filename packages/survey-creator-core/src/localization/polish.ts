@@ -1044,8 +1044,9 @@ var polishStrings = {
     },
     showProgressBar: {
       off: "Ukryty",
-      aboveHeader: "Nad nagłówkiem",
-      belowHeader: "Pod nagłówkiem"
+      topbottom: "Góra i dół",
+      aboveheader: "Nad nagłówkiem",
+      belowheader: "Pod nagłówkiem"
     },
     sum: "Suma",
     count: "Hrabia",
@@ -2601,8 +2602,8 @@ editorLocalization.locales["pl"] = polishStrings;
 // totalDisplayStyle.date: "Date" => "Data"
 // rowsOrder.initial: "Original" => "Oryginał"
 // questionsOrder.initial: "Original" => "Oryginał"
-// showProgressBar.aboveHeader: "Above the header" => "Nad nagłówkiem"
-// showProgressBar.belowHeader: "Below the header" => "Pod nagłówkiem"
+// showProgressBar.aboveheader: "Above the header" => "Nad nagłówkiem"
+// showProgressBar.belowheader: "Below the header" => "Pod nagłówkiem"
 // pv.sum: "Sum" => "Suma"
 // pv.count: "Count" => "Hrabia"
 // pv.min: "Min" => "Min"

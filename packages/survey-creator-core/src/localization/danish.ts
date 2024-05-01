@@ -1044,8 +1044,9 @@ export var danishStrings = {
     },
     showProgressBar: {
       off: "Skjult",
-      aboveHeader: "Over overskriften",
-      belowHeader: "Under overskriften"
+      topbottom: "top and bottom",
+      aboveheader: "Over overskriften",
+      belowheader: "Under overskriften"
     },
     sum: "Sum",
     count: "Tælle",
@@ -2513,8 +2514,8 @@ editorLocalization.locales["da"] = danishStrings;
 // totalDisplayStyle.date: "Date" => "Dato"
 // rowsOrder.initial: "Original" => "Oprindelig"
 // questionsOrder.initial: "Original" => "Oprindelig"
-// showProgressBar.aboveHeader: "Above the header" => "Over overskriften"
-// showProgressBar.belowHeader: "Below the header" => "Under overskriften"
+// showProgressBar.aboveheader: "Above the header" => "Over overskriften"
+// showProgressBar.belowheader: "Below the header" => "Under overskriften"
 // pv.sum: "Sum" => "Sum"
 // pv.count: "Count" => "Tælle"
 // pv.min: "Min" => "Min."

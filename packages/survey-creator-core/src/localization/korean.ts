@@ -1044,8 +1044,9 @@ export var koreanStrings = {
     },
     showProgressBar: {
       off: "숨겨진",
-      aboveHeader: "머리글 위",
-      belowHeader: "머리글 아래"
+      topbottom: "위아래",
+      aboveheader: "머리글 위",
+      belowheader: "머리글 아래"
     },
     sum: "합계",
     count: "세다",
@@ -2532,8 +2533,8 @@ editorLocalization.locales["ko"] = koreanStrings;
 // totalDisplayStyle.date: "Date" => "날짜"
 // rowsOrder.initial: "Original" => "원문 언어"
 // questionsOrder.initial: "Original" => "원문 언어"
-// showProgressBar.aboveHeader: "Above the header" => "머리글 위"
-// showProgressBar.belowHeader: "Below the header" => "머리글 아래"
+// showProgressBar.aboveheader: "Above the header" => "머리글 위"
+// showProgressBar.belowheader: "Below the header" => "머리글 아래"
 // pv.sum: "Sum" => "합계"
 // pv.count: "Count" => "세다"
 // pv.min: "Min" => "분"

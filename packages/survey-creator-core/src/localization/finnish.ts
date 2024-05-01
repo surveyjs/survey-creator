@@ -1044,8 +1044,9 @@ export var fiStrings = {
     },
     showProgressBar: {
       off: "Piilevä",
-      aboveHeader: "Otsikon yläpuolella",
-      belowHeader: "Otsikon alapuolella"
+      topbottom: "top and bottom",
+      aboveheader: "Otsikon yläpuolella",
+      belowheader: "Otsikon alapuolella"
     },
     sum: "Summa",
     count: "Kreivi",
@@ -2328,8 +2329,8 @@ editorLocalization.locales["fi"] = fiStrings;
 // totalDisplayStyle.date: "Date" => "Päivämäärä"
 // rowsOrder.initial: "Original" => "Alkuperäinen"
 // questionsOrder.initial: "Original" => "Alkuperäinen"
-// showProgressBar.aboveHeader: "Above the header" => "Otsikon yläpuolella"
-// showProgressBar.belowHeader: "Below the header" => "Otsikon alapuolella"
+// showProgressBar.aboveheader: "Above the header" => "Otsikon yläpuolella"
+// showProgressBar.belowheader: "Below the header" => "Otsikon alapuolella"
 // pv.sum: "Sum" => "Summa"
 // pv.count: "Count" => "Kreivi"
 // pv.min: "Min" => "Min"

@@ -1044,8 +1044,9 @@ export var ruStrings = {
     },
     showProgressBar: {
       off: "Скрытый",
-      aboveHeader: "Над заголовком",
-      belowHeader: "Под заголовком"
+      topbottom: "Сверху и снизу",
+      aboveheader: "Над заголовком",
+      belowheader: "Под заголовком"
     },
     sum: "Сумма",
     count: "Считать",
@@ -2388,8 +2389,8 @@ editorLocalization.locales["ru"] = ruStrings;
 // totalDisplayStyle.date: "Date" => "Дата"
 // rowsOrder.initial: "Original" => "Исходный текст"
 // questionsOrder.initial: "Original" => "Исходный текст"
-// showProgressBar.aboveHeader: "Above the header" => "Над заголовком"
-// showProgressBar.belowHeader: "Below the header" => "Под заголовком"
+// showProgressBar.aboveheader: "Above the header" => "Над заголовком"
+// showProgressBar.belowheader: "Below the header" => "Под заголовком"
 // pv.sum: "Sum" => "Сумма"
 // pv.count: "Count" => "Считать"
 // pv.min: "Min" => "Мин"

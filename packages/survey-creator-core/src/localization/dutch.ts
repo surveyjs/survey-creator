@@ -1044,8 +1044,9 @@ export var nlStrings = {
     },
     showProgressBar: {
       off: "Verborgen",
-      aboveHeader: "Boven de koptekst",
-      belowHeader: "Onder de kop"
+      topbottom: "Top en beneden",
+      aboveheader: "Boven de koptekst",
+      belowheader: "Onder de kop"
     },
     sum: "Som",
     count: "Tellen",
@@ -2308,8 +2309,8 @@ editorLocalization.locales["nl"] = nlStrings;
 // totalDisplayStyle.date: "Date" => "Datum"
 // rowsOrder.initial: "Original" => "Origineel"
 // questionsOrder.initial: "Original" => "Origineel"
-// showProgressBar.aboveHeader: "Above the header" => "Boven de koptekst"
-// showProgressBar.belowHeader: "Below the header" => "Onder de kop"
+// showProgressBar.aboveheader: "Above the header" => "Boven de koptekst"
+// showProgressBar.belowheader: "Below the header" => "Onder de kop"
 // pv.sum: "Sum" => "Som"
 // pv.count: "Count" => "Tellen"
 // pv.min: "Min" => "Min"

@@ -1044,8 +1044,9 @@ export var jaStrings = {
     },
     showProgressBar: {
       off: "隠れた",
-      aboveHeader: "ヘッダーの上",
-      belowHeader: "ヘッダーの下"
+      topbottom: "上と下",
+      aboveheader: "ヘッダーの上",
+      belowheader: "ヘッダーの下"
     },
     sum: "和",
     count: "数える",
@@ -2327,8 +2328,8 @@ editorLocalization.locales["ja"] = jaStrings;
 // totalDisplayStyle.date: "Date" => "日付"
 // rowsOrder.initial: "Original" => "翻訳元"
 // questionsOrder.initial: "Original" => "翻訳元"
-// showProgressBar.aboveHeader: "Above the header" => "ヘッダーの上"
-// showProgressBar.belowHeader: "Below the header" => "ヘッダーの下"
+// showProgressBar.aboveheader: "Above the header" => "ヘッダーの上"
+// showProgressBar.belowheader: "Below the header" => "ヘッダーの下"
 // pv.sum: "Sum" => "和"
 // pv.count: "Count" => "数える"
 // pv.min: "Min" => "分"
