@@ -1044,8 +1044,9 @@ export var huStrings = {
     },
     showProgressBar: {
       off: "Rejtett",
-      aboveHeader: "A fejléc felett",
-      belowHeader: "A fejléc alatt"
+      topbottom: "fent és lent",
+      aboveheader: "A fejléc felett",
+      belowheader: "A fejléc alatt"
     },
     sum: "Összeg",
     count: "Gróf",
@@ -2481,8 +2482,8 @@ editorLocalization.locales["hu"] = huStrings;
 // totalDisplayStyle.date: "Date" => "Dátum"
 // rowsOrder.initial: "Original" => "Eredeti"
 // questionsOrder.initial: "Original" => "Eredeti"
-// showProgressBar.aboveHeader: "Above the header" => "A fejléc felett"
-// showProgressBar.belowHeader: "Below the header" => "A fejléc alatt"
+// showProgressBar.aboveheader: "Above the header" => "A fejléc felett"
+// showProgressBar.belowheader: "Below the header" => "A fejléc alatt"
 // pv.sum: "Sum" => "Összeg"
 // pv.count: "Count" => "Gróf"
 // pv.min: "Min" => "Min"

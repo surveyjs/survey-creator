@@ -1044,8 +1044,9 @@ export var skStrings = {
     },
     showProgressBar: {
       off: "Skrytý",
-      aboveHeader: "Nad hlavičkou",
-      belowHeader: "Pod hlavičkou"
+      topbottom: "hore a dolu",
+      aboveheader: "Nad hlavičkou",
+      belowheader: "Pod hlavičkou"
     },
     sum: "Súčet",
     count: "Počítať",
@@ -2281,8 +2282,8 @@ editorLocalization.locales["sk"] = skStrings;
 // totalDisplayStyle.date: "Date" => "Dátum"
 // rowsOrder.initial: "Original" => "Originál"
 // questionsOrder.initial: "Original" => "Originál"
-// showProgressBar.aboveHeader: "Above the header" => "Nad hlavičkou"
-// showProgressBar.belowHeader: "Below the header" => "Pod hlavičkou"
+// showProgressBar.aboveheader: "Above the header" => "Nad hlavičkou"
+// showProgressBar.belowheader: "Below the header" => "Pod hlavičkou"
 // pv.sum: "Sum" => "Súčet"
 // pv.count: "Count" => "Počítať"
 // pv.min: "Min" => "Min"

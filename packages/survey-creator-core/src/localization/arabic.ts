@@ -1044,8 +1044,9 @@ export var arStrings = {
     },
     showProgressBar: {
       off: "مخفي",
-      aboveHeader: "فوق الرأس",
-      belowHeader: "أسفل الرأس"
+      topbottom: "الاعلى والأسفل",
+      aboveheader: "فوق الرأس",
+      belowheader: "أسفل الرأس"
     },
     sum: "مجموع",
     count: "عد",
@@ -2238,8 +2239,8 @@ editorLocalization.locales["ar"] = arStrings;
 // totalDisplayStyle.date: "Date" => "تاريخ"
 // rowsOrder.initial: "Original" => "اللغة الأصلية"
 // questionsOrder.initial: "Original" => "اللغة الأصلية"
-// showProgressBar.aboveHeader: "Above the header" => "فوق الرأس"
-// showProgressBar.belowHeader: "Below the header" => "أسفل الرأس"
+// showProgressBar.aboveheader: "Above the header" => "فوق الرأس"
+// showProgressBar.belowheader: "Below the header" => "أسفل الرأس"
 // pv.sum: "Sum" => "مجموع"
 // pv.count: "Count" => "عد"
 // pv.min: "Min" => "دقيقه"

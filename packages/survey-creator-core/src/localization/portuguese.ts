@@ -1044,8 +1044,9 @@ var portugueseTranslation = {
     },
     showProgressBar: {
       off: "Escondido",
-      aboveHeader: "Acima do cabeçalho",
-      belowHeader: "Abaixo do cabeçalho"
+      topbottom: "superior and bottom",
+      aboveheader: "Acima do cabeçalho",
+      belowheader: "Abaixo do cabeçalho"
     },
     sum: "Soma",
     count: "Contar",
@@ -1994,8 +1995,8 @@ editorLocalization.locales["pt"] = portugueseTranslation;
 // totalDisplayStyle.date: "Date" => "Data"
 // rowsOrder.initial: "Original" => "Original"
 // questionsOrder.initial: "Original" => "Original"
-// showProgressBar.aboveHeader: "Above the header" => "Acima do cabeçalho"
-// showProgressBar.belowHeader: "Below the header" => "Abaixo do cabeçalho"
+// showProgressBar.aboveheader: "Above the header" => "Acima do cabeçalho"
+// showProgressBar.belowheader: "Below the header" => "Abaixo do cabeçalho"
 // pv.sum: "Sum" => "Soma"
 // pv.count: "Count" => "Contar"
 // pv.min: "Min" => "Min"

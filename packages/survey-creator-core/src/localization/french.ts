@@ -1044,8 +1044,9 @@ var frenchTranslation = {
     },
     showProgressBar: {
       off: "Masqué",
-      aboveHeader: "Au-dessus de l’en-tête",
-      belowHeader: "Sous l’en-tête"
+      topbottom: "Haut et bas",
+      aboveheader: "Au-dessus de l’en-tête",
+      belowheader: "Sous l’en-tête"
     },
     sum: "Somme",
     count: "Compter",
@@ -2388,8 +2389,8 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // totalDisplayStyle.date: "Date" => "Date"
 // rowsOrder.initial: "Original" => "Langue source"
 // questionsOrder.initial: "Original" => "Langue source"
-// showProgressBar.aboveHeader: "Above the header" => "Au-dessus de l’en-tête"
-// showProgressBar.belowHeader: "Below the header" => "Sous l’en-tête"
+// showProgressBar.aboveheader: "Above the header" => "Au-dessus de l’en-tête"
+// showProgressBar.belowheader: "Below the header" => "Sous l’en-tête"
 // pv.sum: "Sum" => "Somme"
 // pv.count: "Count" => "Compter"
 // pv.min: "Min" => "Min"
