@@ -118,6 +118,8 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     return this.calcIsGhostPage(this.page);
   }
   public get placeholderText(): string {
+    if (this.creator.isMobileView)
+      return getLocString("ed.pagePlaceHolderMobile");
     return getLocString("ed.pagePlaceHolder");
   }
   protected isOperationsAllow(): boolean {
