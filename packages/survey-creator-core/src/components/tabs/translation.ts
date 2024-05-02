@@ -1576,9 +1576,9 @@ export class TranslationEditor {
         actionTypesPopupModel.toggleVisibility();
       }, true);
     const actionTypesPopupModel = new PopupModel<{ model: ListModel<BaseAction> }>(
-      "sv-list", { model: actionTypesListModel }, "bottom", "center",
-      undefined, undefined, undefined, undefined, undefined, onActionTypesPopupShow
-    );
+      "sv-list", { model: actionTypesListModel }, "bottom", "center");
+
+    actionTypesPopupModel.onShow = onActionTypesPopupShow;
     action.popupModel = actionTypesPopupModel;
     action.title = defaultLocaleTitle;
     action.action = () => { actionTypesPopupModel.toggleVisibility(); };
