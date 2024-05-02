@@ -54,17 +54,19 @@ function getQuestionJSON() {
   };
 }
 
-ComponentCollection.Instance.add({
-  name: "boxshadowsettings",
-  showInToolbox: false,
-  internal: true,
-  questionJSON: getQuestionJSON(),
-  onCreated(question: QuestionCustomModel) {
-    question.valueFromDataCallback = (value: string | Array<Object>): Array<Object> => typeof value == "string" ? parseBoxShadow(value) : value;
-    question.valueToDataCallback = (value: string | Array<Object>): string => !!value ? (typeof value == "string" ? value : createBoxShadow(Array.isArray(value) ? value : [value])) : "";
-    (<QuestionPanelDynamicModel>question.contentQuestion).panels.forEach(p => p.questions.forEach(q => q.allowRootStyle = false));
-  },
-});
+if(!ComponentCollection.Instance.getCustomQuestionByName("boxshadowsettings")) {
+  ComponentCollection.Instance.add({
+    name: "boxshadowsettings",
+    showInToolbox: false,
+    internal: true,
+    questionJSON: getQuestionJSON(),
+    onCreated(question: QuestionCustomModel) {
+      question.valueFromDataCallback = (value: string | Array<Object>): Array<Object> => typeof value == "string" ? parseBoxShadow(value) : value;
+      question.valueToDataCallback = (value: string | Array<Object>): string => !!value ? (typeof value == "string" ? value : createBoxShadow(Array.isArray(value) ? value : [value])) : "";
+      (<QuestionPanelDynamicModel>question.contentQuestion).panels.forEach(p => p.questions.forEach(q => q.allowRootStyle = false));
+    },
+  });
+}
 
 export function updateBoxShadowSettingsJSON() {
   const config = ComponentCollection.Instance.getCustomQuestionByName("boxshadowsettings");
