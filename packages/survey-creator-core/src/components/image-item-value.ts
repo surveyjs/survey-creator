@@ -38,6 +38,10 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
     return this.creator.getLocString("ed.removeFile");
   }
 
+  public get addFileTitle() {
+    return this.creator.getLocString("ed.selectFile");
+  }
+
   chooseFile(model: ImageItemValueWrapperViewModel) {
     const fileInput = <HTMLInputElement>model.itemsRoot.getElementsByClassName("svc-choose-file-input")[0];
     const context = { element: model.question, item: model.item, elementType: model.question.getType(), propertyName: "imageLink" };

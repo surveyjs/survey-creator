@@ -65,36 +65,37 @@ function getElementsJSON() {
   ];
 }
 
-ComponentCollection.Instance.add({
-  name: "fontsettings",
-  showInToolbox: false,
-  internal: true,
-  elementsJSON: getElementsJSON(),
-  onInit() {
-    Serializer.addProperties("fontsettings", [
-      {
-        name: "allowEmptyColorValue:boolean",
-        default: false,
-        visible: false
-      },
-    ]);
-  },
-  onLoaded(question) {
-    syncPropertiesFromComposite(question, "allowEmptyColorValue", question.allowEmptyColorValue);
-  },
-  onPropertyChanged(question, propertyName, newValue) {
-    syncPropertiesFromComposite(question, propertyName, newValue);
-  },
-  onCreated(question) {
-    const color = question.contentPanel.getQuestionByName("color");
-    color.visible = question.name !== "surveyTitle" && question.name !== "surveyDescription";
-    const placeholderColor = question.contentPanel.getQuestionByName("placeholdercolor");
-    placeholderColor.visible = question.name === "editorFont";
-  },
-  onValueChanged(question, name, newValue) {
-  },
-});
-
+if(!ComponentCollection.Instance.getCustomQuestionByName("fontsettings")) {
+  ComponentCollection.Instance.add({
+    name: "fontsettings",
+    showInToolbox: false,
+    internal: true,
+    elementsJSON: getElementsJSON(),
+    onInit() {
+      Serializer.addProperties("fontsettings", [
+        {
+          name: "allowEmptyColorValue:boolean",
+          default: false,
+          visible: false
+        },
+      ]);
+    },
+    onLoaded(question) {
+      syncPropertiesFromComposite(question, "allowEmptyColorValue", question.allowEmptyColorValue);
+    },
+    onPropertyChanged(question, propertyName, newValue) {
+      syncPropertiesFromComposite(question, propertyName, newValue);
+    },
+    onCreated(question) {
+      const color = question.contentPanel.getQuestionByName("color");
+      color.visible = question.name !== "surveyTitle" && question.name !== "surveyDescription";
+      const placeholderColor = question.contentPanel.getQuestionByName("placeholdercolor");
+      placeholderColor.visible = question.name === "editorFont";
+    },
+    onValueChanged(question, name, newValue) {
+    },
+  });
+}
 function syncPropertiesFromComposite(question: Question, propertyName: string, newValue: any) {
   const colorQuestion = question.contentPanel.questions[2];
   if (propertyName == "allowEmptyColorValue") {

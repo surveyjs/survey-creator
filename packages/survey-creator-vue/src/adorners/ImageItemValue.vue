@@ -90,7 +90,7 @@
             :title="undefined"
             :aria-label="undefined"
           >
-            <sv-svg-icon :iconName="'icon-add-lg'" :size="24"></sv-svg-icon>
+            <sv-svg-icon :iconName="'icon-add-lg'" :size="24" :title="adorner.addFileTitle"></sv-svg-icon>
           </span>
         </div>
       </template>
