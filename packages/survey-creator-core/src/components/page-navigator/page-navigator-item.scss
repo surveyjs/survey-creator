@@ -46,11 +46,11 @@ svc-page-navigator-item,
   box-sizing: content-box;
   position: absolute;
   border-radius: 50%;
-  width: 6px;
-  height: 6px;
+  width: var(--ctr-page-navigator-item-dot-radius-small, 6px);
+  height: var(--ctr-page-navigator-item-dot-radius-small, 6px);
   right: calc(50% - 6px / 2);
   top: calc(50% - 6px / 2);
-  background: $border;
+  background: var(--ctr-page-navigator-item-dot-color-default, $border);
 }
 
 .svc-page-navigator-item--selected {
@@ -59,8 +59,8 @@ svc-page-navigator-item,
     height: calcSize(1);
     right: calc(50% - 1.5 * #{$base-unit} / 2);
     top: calc(50% - 1.5 * #{$base-unit} / 2);
-    background: $background;
-    border: calcSize(0.25) solid $primary;
+    background: var(--ctr-page-navigator-item-background-color-hovered, $background);
+    border: calcSize(0.25) solid var(--ctr-page-navigator-item-dot-color-selected, $primary);
   }
 }
 
@@ -105,7 +105,7 @@ svc-page-navigator-item,
       width: calcSize(1);
       height: calcSize(1);
       border: none;
-      background: $primary;
+      background: var(--ctr-page-navigator-item-dot-color-hovered, $primary);
     }
   }
 }

@@ -15,7 +15,7 @@ svc-page-navigator,
   cursor: pointer;
 
   use {
-    fill: $foreground-light;
+    fill: var(--ctr-page-navigator-button-icon-color, $foreground-light);
   }
 }
 
@@ -34,10 +34,10 @@ survey-creator,
       outline: none;
 
       .svc-page-navigator__navigator-icon {
-        background-color: $primary-light;
+        background-color: var(--ctr-page-navigator-button-background-color-hovered, $primary-light);
 
         use {
-          fill: $primary;
+          fill: var(--ctr-page-navigator-button-icon-color-hovered, $primary);
         }
       }
     }
@@ -47,10 +47,10 @@ survey-creator,
 .svc-page-navigator__selector--opened {
   .svc-page-navigator__navigator-icon {
     background-color: $primary-light;
-    opacity: 0.5;
+    opacity: var(--ctr-page-navigator-button-opacity-pressed, 0.5);
 
     use {
-      fill: $primary;
+      fill: var(--ctr-page-navigator-button-icon-color-hovered, $primary);
     }
   }
 }
