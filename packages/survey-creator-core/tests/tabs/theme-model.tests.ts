@@ -3,6 +3,7 @@ import { Themes } from "../../src/components/tabs/themes";
 export { QuestionFileEditorModel } from "../../src/custom-questions/question-file";
 export { QuestionSpinEditorModel } from "../../src/custom-questions/question-spin-editor";
 export { QuestionColorModel } from "../../src/custom-questions/question-color";
+export * from "../../src/property-grid/header-settings";
 import { ThemeTabPlugin } from "../../src/components/tabs/theme-plugin";
 import { assign } from "../../src/utils/utils";
 import { CreatorTester } from "../creator-tester";

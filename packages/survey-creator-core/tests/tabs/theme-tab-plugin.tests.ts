@@ -3,6 +3,7 @@ export { QuestionSpinEditorModel } from "../../src/custom-questions/question-spi
 export { QuestionColorModel } from "../../src/custom-questions/question-color";
 export { createColor } from "../../src/components/tabs/theme-custom-questions/color-settings";
 export { createBoxShadow, parseBoxShadow } from "../../src/components/tabs/theme-custom-questions/boxshadow-settings";
+export * from "../../src/property-grid/header-settings";
 
 import { ITheme, QuestionButtonGroupModel, QuestionCompositeModel, QuestionDropdownModel, QuestionFileModel, Serializer, SurveyElement, settings as surveySettings } from "survey-core";
 import { CreatorTester } from "../creator-tester";

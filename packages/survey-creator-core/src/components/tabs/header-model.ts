@@ -4,7 +4,7 @@ import { PropertyGridEditor, PropertyGridEditorCollection, PropertyJSONGenerator
 import { ISurveyPropertyGridDefinition } from "../../question-editor/definition";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { themeModelPropertyGridDefinition } from "./theme-model-definition";
-import { HorizontalAlignment, ILoadFromJSONOptions, ISaveToJSONOptions, VerticalAlignment } from "survey-core/typings/base-interfaces";
+import { HorizontalAlignment, ILoadFromJSONOptions, ISaveToJSONOptions, ISurvey, VerticalAlignment } from "survey-core/typings/base-interfaces";
 import { fontsettingsFromCssVariable, fontsettingsToCssVariable, onSerializeFontSettingsValue } from "./theme-custom-questions/font-settings";
 import { assign } from "../../utils/utils";
 
@@ -36,6 +36,13 @@ export class HeaderModel extends Base implements IHeader {
     super.fromJSON(json, options);
     if (!!json["backgroundImageOpacity"]) this.backgroundImageOpacity = json["backgroundImageOpacity"] * 100;
 
+    const backgroundColorValue = json["--sjs-header-backcolor"];
+    if (!!backgroundColorValue) {
+      this["backgroundColor"] = backgroundColorValue;
+      this["backgroundColorSwitch"] = this.getBackgroundColorSwitchByValue(backgroundColorValue);
+      // this._setPGEditorPropertyValue(panel.getQuestionByName("backgroundColorSwitch"), "value", this.getBackgroundColorSwitchByValue(backgroundColorValue));
+    }
+
     // this["surveyTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("surveyTitle"), this.themeCssVariablesChanges);
     // this["surveyDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("surveyDescription"), this.themeCssVariablesChanges);
     // this["headerTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("headerTitle"), this.themeCssVariablesChanges);
@@ -56,6 +63,7 @@ export class HeaderModel extends Base implements IHeader {
   toJSON(options?: ISaveToJSONOptions) {
     const result = super.toJSON(options);
     delete result.type;
+    delete result.logoPosition;
 
     if (this.backgroundImageOpacity !== 100) {
       result["backgroundImageOpacity"] = this.backgroundImageOpacity / 100;
@@ -72,8 +80,22 @@ export class HeaderModel extends Base implements IHeader {
 
       }
     });
+    this.setHeaderBackgroundColorCssVariable(cssVariables);
     result.cssVariables = cssVariables;
+
+    delete result.backgroundColorSwitch;
+    delete result.backgroundColor;
     return result;
+  }
+
+  private setHeaderBackgroundColorCssVariable(cssVariables: any) {
+    let headerBackgroundColorValue = undefined;
+    if (this["backgroundColorSwitch"] === "none") {
+      headerBackgroundColorValue = "transparent";
+    } else if (this["backgroundColorSwitch"] === "custom") {
+      headerBackgroundColorValue = this["backgroundColor"] ?? "transparent";
+    }
+    cssVariables["--sjs-header-backcolor"] = headerBackgroundColorValue;
   }
 
   public saveToThemeJSON(json: ITheme, options?: ISaveToJSONOptions) {
@@ -83,6 +105,12 @@ export class HeaderModel extends Base implements IHeader {
     if (Object.keys(result).length > 0) {
       json.header = result;
     }
+  }
+
+  private getBackgroundColorSwitchByValue(backgroundColor: string) {
+    if (!backgroundColor) return "accentColor";
+    if (backgroundColor === "transparent") return "none";
+    return "custom";
   }
 
   // private setCoverPropertiesFromSurvey(panel, themeCssVariables: { [index: string]: string }) {
@@ -180,20 +208,9 @@ export class HeaderModel extends Base implements IHeader {
   //   return result;
   // }
 
-  // private setHeaderBackgroundColorCssVariable(headerSettings: any) {
-  //   let headerBackgroundColorValue = undefined;
-  //   if (headerSettings["backgroundColorSwitch"] === "none") {
-  //     headerBackgroundColorValue = "transparent";
-  //   } else if (headerSettings["backgroundColorSwitch"] === "custom") {
-  //     headerBackgroundColorValue = headerSettings.backgroundColor ?? "transparent";
-  //   }
-  //   this.themeCssVariablesChanges["--sjs-header-backcolor"] = headerBackgroundColorValue;
-  // }
-
   public getType(): string {
     return "headersettings";
   }
-
 }
 
 function getDefaultTitleSetting() {

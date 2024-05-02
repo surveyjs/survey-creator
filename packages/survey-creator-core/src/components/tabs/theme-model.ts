@@ -1,4 +1,4 @@
-import { Base, ITheme, ItemValue, JsonObjectProperty, Question, Serializer, property, ILoadFromJSONOptions, IHeader, EventBase, SurveyModel } from "survey-core";
+import { Base, ITheme, ItemValue, JsonObjectProperty, Question, Serializer, property, ILoadFromJSONOptions, IHeader, EventBase, SurveyModel, ArrayChanges } from "survey-core";
 import { getLocString } from "../../editorLocalization";
 import { PredefinedColors, PredefinedThemes, Themes } from "./themes";
 import { settings } from "../../creator-settings";
@@ -280,7 +280,7 @@ export class ThemeModel extends Base implements ITheme {
     );
   }
 
-  private cssVariablePropertiesChanged(name: string, value: any) {
+  private cssVariablePropertiesChanged(name: string, value: any, property: JsonObjectProperty) {
     if (name === "generalPrimaryColor") {
       this.setPropertyValue("--sjs-primary-backcolor", value);
       this.setThemeCssVariablesChanges("--sjs-primary-backcolor", value);
@@ -318,7 +318,6 @@ export class ThemeModel extends Base implements ITheme {
       let panelBackgroundTransparencyValue = this.getPropertyValue("panelBackgroundTransparency");
       this.setThemeCssVariablesChanges("--sjs-question-background", ingectAlpha(baseColor, panelBackgroundTransparencyValue / 100));
     }
-    const property = this.getPropertyByName(name);
     if (property.type === "fontsettings") {
       fontsettingsToCssVariable(value, property, this.themeCssVariablesChanges);
       this.onThemePropertyChanged.fire(this, { name, value });
@@ -365,12 +364,6 @@ export class ThemeModel extends Base implements ITheme {
   //   }
   // }
 
-  private getBackgroundColorSwitchByValue(backgroundColor: string) {
-    if (!backgroundColor) return "accentColor";
-    if (backgroundColor === "transparent") return "none";
-    return "custom";
-  }
-
   private getPredefinedColorsItemValues() {
     return Object.keys(PredefinedColors[this.colorPalette]).map(colorName =>
       new ItemValue(PredefinedColors[this.colorPalette][colorName], getLocString("theme.colors." + colorName))
@@ -380,6 +373,21 @@ export class ThemeModel extends Base implements ITheme {
   constructor() {
     super();
     this.setNewHeaderProperty();
+    this.onPropertyValueChangedCallback = (
+      name: string,
+      oldValue: any,
+      newValue: any,
+      sender: Base,
+      arrayChanges: ArrayChanges
+    ) => {
+      this.onThemePropertyValueChangedCallback(
+        name,
+        oldValue,
+        newValue,
+        sender,
+        arrayChanges
+      );
+    };
   }
 
   initialize(surveyTheme: ITheme = {}, survey?: SurveyModel) {
@@ -521,15 +529,16 @@ export class ThemeModel extends Base implements ITheme {
     }
     return false;
   }
-
-  protected onPropertyValueChanged(name: string, oldValue: any, newValue: any): void {
-    super.onPropertyValueChanged(name, oldValue, newValue);
-
+  private onThemePropertyValueChangedCallback(name: string, oldValue: any, newValue: any, sender: Base, arrayChanges: ArrayChanges) {
     if (!!this.undoRedoManager) {
       if (this.blockThemeChangedNotifications == 0) {
         this.undoRedoManager.startTransaction(name + " changed");
       }
-      this.undoRedoManager.onPropertyValueChanged(name, oldValue, newValue, this, undefined);
+      this.undoRedoManager.onPropertyValueChanged(name, oldValue, newValue, sender, arrayChanges);
+    }
+
+    if (this !== sender) {
+      this.onThemePropertyChanged.fire(this, { name, value: newValue });
     }
 
     // if (this.blockChanges) return;
@@ -557,7 +566,7 @@ export class ThemeModel extends Base implements ITheme {
       return;
     }
 
-    this.cssVariablePropertiesChanged(name, newValue);
+    this.cssVariablePropertiesChanged(name, newValue, sender.getPropertyByName(name));
 
     // const newCssVariables = {};
     // assign(newCssVariables, this.currentTheme.cssVariables, this.themeCssVariablesChanges);

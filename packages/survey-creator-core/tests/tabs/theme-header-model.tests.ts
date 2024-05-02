@@ -5,6 +5,7 @@ import { CreatorTester } from "../creator-tester";
 import { PredefinedColors, PredefinedThemes, Themes } from "../../src/components/tabs/themes";
 import { QuestionFileEditorModel } from "../../src/custom-questions/question-file";
 import { editorLocalization } from "../../src/editorLocalization";
+import { settings } from "../../src/creator-settings";
 export { QuestionFileEditorModel } from "../../src/custom-questions/question-file";
 export { QuestionSpinEditorModel } from "../../src/custom-questions/question-spin-editor";
 export { QuestionColorModel } from "../../src/custom-questions/question-color";
@@ -58,6 +59,7 @@ test("set headerViewContainer basic", (): any => {
 
   header["surveyTitle"] = { family: "Courier New", weight: "400", size: 41 };
   header["surveyDescription"] = { family: "Trebuchet MS", weight: "800", size: 21 };
+  header["logoPosition"] = "right";
 
   currentThemeCssVariables = themeModel.cssVariables;
   expect(currentThemeCssVariables["--sjs-font-surveytitle-family"]).toBe("Courier New");
@@ -66,198 +68,94 @@ test("set headerViewContainer basic", (): any => {
   expect(currentThemeCssVariables["--sjs-font-surveydescription-family"]).toBe("Trebuchet MS");
   expect(currentThemeCssVariables["--sjs-font-surveydescription-weight"]).toBe("800");
   expect(currentThemeCssVariables["--sjs-font-surveydescription-size"]).toBe("21px");
+
+  const result = themeModel.toJSON();
+  expect(result.header).toBeUndefined();
 });
 
-// test("set headerViewContainer advanced", (): any => {
-//   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-//   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+test("set headerViewContainer advanced", (): any => {
+  const themeModel = new ThemeModel();
+  themeModel.initialize();
+  const header = themeModel.header as HeaderModel;
 
-//   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
-//   themePlugin.activate();
-//   const themeBuilder = themePlugin.model as ThemeEditorModel;
-//   const themeEditorSurvey = themeBuilder.themeEditorSurvey;
-//   const headerViewContainer = themeEditorSurvey.getQuestionByName("headerViewContainer").panels[0];
-//   const headerTitleQuestion = headerViewContainer.getElementByName("headerTitle");
-//   const headerDescriptionQuestion = headerViewContainer.getElementByName("headerDescription");
+  let currentThemeCssVariables = themeModel.cssVariables;
+  expect(currentThemeCssVariables["--sjs-font-headertitle-family"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs-font-headertitle-weight"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs-font-headertitle-size"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs-font-headertitle-color"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs-font-headerdescription-family"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs-font-headerdescription-weight"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs-font-headerdescription-size"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs-font-headerdescription-color"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs-header-backcolor"]).toBeUndefined();
 
-//   let currentThemeCssVariables = creator.theme.cssVariables || {};
-//   expect(currentThemeCssVariables["--sjs-font-headertitle-family"]).toBeUndefined();
-//   expect(currentThemeCssVariables["--sjs-font-headertitle-weight"]).toBeUndefined();
-//   expect(currentThemeCssVariables["--sjs-font-headertitle-size"]).toBeUndefined();
-//   expect(currentThemeCssVariables["--sjs-font-headertitle-color"]).toBeUndefined();
-//   expect(currentThemeCssVariables["--sjs-font-headerdescription-family"]).toBeUndefined();
-//   expect(currentThemeCssVariables["--sjs-font-headerdescription-weight"]).toBeUndefined();
-//   expect(currentThemeCssVariables["--sjs-font-headerdescription-size"]).toBeUndefined();
-//   expect(currentThemeCssVariables["--sjs-font-headerdescription-color"]).toBeUndefined();
-//   expect(currentThemeCssVariables["--sjs-header-backcolor"]).toBeUndefined();
+  header["headerView"] = "advanced";
+  header.height = 300;
+  header.inheritWidthFrom = "survey";
+  header.textAreaWidth = 600;
+  header["backgroundColorSwitch"] = "custom";
+  header["backgroundColor"] = "#5094ed";
+  header.backgroundImage = "https://t4.ftcdn.net/jpg/02/83/13/61/360_F_283136113_b3VRHNiOPFMOluzYJPpfuoH8Czh9c743.jpg";
+  header.backgroundImageFit = "fill";
+  header.backgroundImageOpacity = 50;
+  header.overlapEnabled = true;
+  header.logoPositionX = "center";
+  header.logoPositionY = "middle";
+  header.titlePositionX = "center";
+  header.titlePositionY = "middle";
+  header.descriptionPositionX = "center";
+  header.descriptionPositionY = "middle";
 
-//   headerViewContainer.getElementByName("logoPosition").value = "right";
-//   headerViewContainer.getElementByName("headerView").value = "advanced";
-//   headerViewContainer.getElementByName("height").value = 300;
-//   headerViewContainer.getElementByName("inheritWidthFrom").value = "container";
-//   headerViewContainer.getElementByName("textAreaWidth").value = 600;
-//   headerViewContainer.getElementByName("backgroundColorSwitch").value = "custom";
-//   headerViewContainer.getElementByName("backgroundColor").value = "#5094ed";
-//   headerViewContainer.getElementByName("backgroundImage").value = "https://t4.ftcdn.net/jpg/02/83/13/61/360_F_283136113_b3VRHNiOPFMOluzYJPpfuoH8Czh9c743.jpg";
-//   headerViewContainer.getElementByName("backgroundImageFit").value = "fill";
-//   headerViewContainer.getElementByName("backgroundImageOpacity").value = 50;
-//   headerViewContainer.getElementByName("overlapEnabled").value = true;
-//   headerViewContainer.getElementByName("logoPositionX").value = "center";
-//   headerViewContainer.getElementByName("logoPositionY").value = "middle";
-//   headerViewContainer.getElementByName("titlePositionX").value = "center";
-//   headerViewContainer.getElementByName("titlePositionY").value = "middle";
-//   headerViewContainer.getElementByName("descriptionPositionX").value = "center";
-//   headerViewContainer.getElementByName("descriptionPositionY").value = "middle";
-//   headerTitleQuestion.contentPanel.getQuestionByName("color").value = "#FBFF24";
-//   headerTitleQuestion.contentPanel.getQuestionByName("weight").value = "400";
-//   headerTitleQuestion.contentPanel.getQuestionByName("size").value = 39;
-//   headerTitleQuestion.contentPanel.getQuestionByName("family").value = "Georgia";
-//   headerDescriptionQuestion.contentPanel.getQuestionByName("color").value = "rgba(50, 16, 218, 0.45)";
-//   headerDescriptionQuestion.contentPanel.getQuestionByName("weight").value = "800";
-//   headerDescriptionQuestion.contentPanel.getQuestionByName("size").value = 19;
-//   headerDescriptionQuestion.contentPanel.getQuestionByName("family").value = "Verdana";
+  header["headerTitle"] = { color: "#FBFF24", weight: "400", size: 39, family: "Georgia" };
+  header["headerDescription"] = { color: "rgba(50, 16, 218, 0.45)", weight: "800", size: 19, family: "Verdana" };
 
-//   expect(creator.theme.header).toStrictEqual({
-//     "height": 300,
-//     "inheritWidthFrom": "container",
-//     "textAreaWidth": 600,
-//     "overlapEnabled": true,
-//     "backgroundImage": "https://t4.ftcdn.net/jpg/02/83/13/61/360_F_283136113_b3VRHNiOPFMOluzYJPpfuoH8Czh9c743.jpg",
-//     "backgroundImageOpacity": 0.5,
-//     "backgroundImageFit": "fill",
-//     "logoPositionX": "center",
-//     "logoPositionY": "middle",
-//     "titlePositionX": "center",
-//     "titlePositionY": "middle",
-//     "descriptionPositionX": "center",
-//     "descriptionPositionY": "middle"
-//   });
+  const result = themeModel.toJSON();
+  expect(result.header).toStrictEqual({
+    "headerView": "advanced",
+    "height": 300,
+    "inheritWidthFrom": "survey",
+    "textAreaWidth": 600,
+    "overlapEnabled": true,
+    "backgroundImage": "https://t4.ftcdn.net/jpg/02/83/13/61/360_F_283136113_b3VRHNiOPFMOluzYJPpfuoH8Czh9c743.jpg",
+    "backgroundImageOpacity": 0.5,
+    "backgroundImageFit": "fill",
+    "logoPositionX": "center",
+    "logoPositionY": "middle",
+    "titlePositionX": "center",
+    "titlePositionY": "middle",
+    "descriptionPositionX": "center",
+    "descriptionPositionY": "middle"
+  });
 
-//   currentThemeCssVariables = creator.theme.cssVariables || {};
-//   expect(currentThemeCssVariables["--sjs-font-headertitle-family"]).toBe("Georgia");
-//   expect(currentThemeCssVariables["--sjs-font-headertitle-weight"]).toBe("400");
-//   expect(currentThemeCssVariables["--sjs-font-headertitle-color"]).toBe("rgba(251, 255, 36, 1)");
-//   expect(currentThemeCssVariables["--sjs-font-headertitle-size"]).toBe("39px");
-//   expect(currentThemeCssVariables["--sjs-font-headerdescription-family"]).toBe("Verdana");
-//   expect(currentThemeCssVariables["--sjs-font-headerdescription-weight"]).toBe("800");
-//   expect(currentThemeCssVariables["--sjs-font-headerdescription-color"]).toBe("rgba(50, 16, 218, 0.45)");
-//   expect(currentThemeCssVariables["--sjs-font-headerdescription-size"]).toBe("19px");
-//   expect(currentThemeCssVariables["--sjs-header-backcolor"]).toBe("#5094ed");
-// });
+  currentThemeCssVariables = themeModel.cssVariables;
+  expect(currentThemeCssVariables["--sjs-font-headertitle-family"]).toBe("Georgia");
+  expect(currentThemeCssVariables["--sjs-font-headertitle-weight"]).toBe("400");
+  expect(currentThemeCssVariables["--sjs-font-headertitle-color"]).toBe("#FBFF24");
+  expect(currentThemeCssVariables["--sjs-font-headertitle-size"]).toBe("39px");
+  expect(currentThemeCssVariables["--sjs-font-headerdescription-family"]).toBe("Verdana");
+  expect(currentThemeCssVariables["--sjs-font-headerdescription-weight"]).toBe("800");
+  expect(currentThemeCssVariables["--sjs-font-headerdescription-color"]).toBe("rgba(50, 16, 218, 0.45)");
+  expect(currentThemeCssVariables["--sjs-font-headerdescription-size"]).toBe("19px");
+  expect(currentThemeCssVariables["--sjs-header-backcolor"]).toBe("#5094ed");
+});
 
-// test("headerViewContainer survey title & description", (): any => {
-//   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-//   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+test("headerViewContainer survey title & description", (): any => {
+  const themeModel = new ThemeModel();
+  themeModel.initialize();
+  const header = themeModel.header as HeaderModel;
 
-//   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
-//   themePlugin.activate();
-//   const themeBuilder = themePlugin.model as ThemeEditorModel;
-//   const themeEditorSurvey = themeBuilder.themeEditorSurvey;
-//   const headerViewContainer = themeEditorSurvey.getQuestionByName("headerViewContainer").panels[0];
-//   const headerTitleQuestion = headerViewContainer.getElementByName("headerTitle");
-//   const headerDescriptionQuestion = headerViewContainer.getElementByName("headerDescription");
+  let currentThemeCssVariables = themeModel.cssVariables;
+  expect(currentThemeCssVariables["--sjs-font-headertitle-color"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs-font-headerdescription-color"]).toBeUndefined();
 
-//   let currentThemeCssVariables = creator.theme.cssVariables || {};
-//   expect(currentThemeCssVariables["--sjs-font-headertitle-color"]).toBeUndefined();
-//   expect(currentThemeCssVariables["--sjs-font-headerdescription-color"]).toBeUndefined();
+  header["headerView"] = "advanced";
+  header["headerTitle"] = { family: settings.theme.fontFamily, weight: "700", size: 32, color: "rgba(255, 255, 255, 1)" };
+  header["headerDescription"] = { family: settings.theme.fontFamily, weight: "400", size: 16, color: "rgba(255, 255, 255, 1)" };
 
-//   headerViewContainer.getElementByName("headerView").value = "advanced";
-//   headerTitleQuestion.contentPanel.getQuestionByName("color").value = "rgba(255, 255, 255, 1)";
-//   headerDescriptionQuestion.contentPanel.getQuestionByName("color").value = "rgba(255, 255, 255, 1)";
-
-//   currentThemeCssVariables = creator.theme.cssVariables || {};
-//   expect(currentThemeCssVariables["--sjs-font-headertitle-color"]).toBe("rgba(255, 255, 255, 1)");
-//   expect(currentThemeCssVariables["--sjs-font-headerdescription-color"]).toBe("rgba(255, 255, 255, 1)");
-// });
-
-// test("restore headerViewContainer values", (): any => {
-//   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-//   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
-//   creator.theme = {
-//     "cssVariables": {
-//       "--sjs-corner-radius": "20px",
-//       "--sjs-base-unit": "9.6px",
-//       "--sjs-font-size": "17.6px",
-//       "--sjs-header-backcolor": "#5094ed",
-//       "--sjs-font-surveytitle-family": "Courier New",
-//       "--sjs-font-surveytitle-weight": "400",
-//       "--sjs-font-surveytitle-size": "41px",
-//       "--sjs-font-surveydescription-family": "Trebuchet MS",
-//       "--sjs-font-surveydescription-weight": "800",
-//       "--sjs-font-surveydescription-size": "21px",
-//       "--sjs-font-headertitle-family": "Georgia",
-//       "--sjs-font-headertitle-weight": "800",
-//       "--sjs-font-headertitle-color": "rgba(219, 15, 15, 0.91)",
-//       "--sjs-font-headertitle-size": "39px",
-//       "--sjs-font-headerdescription-family": "Verdana",
-//       "--sjs-font-headerdescription-weight": "800",
-//       "--sjs-font-headerdescription-color": "rgba(50, 16, 218, 0.45)",
-//       "--sjs-font-headerdescription-size": "19px"
-//     },
-//     "header": {
-//       "height": 300,
-//       "inheritWidthFrom": "container",
-//       "textAreaWidth": 600,
-//       "backgroundImage": "https://t4.ftcdn.net/jpg/02/83/13/61/360_F_283136113_b3VRHNiOPFMOluzYJPpfuoH8Czh9c743.jpg",
-//       "backgroundImageOpacity": 0.5,
-//       "backgroundImageFit": "fill",
-//       "overlapEnabled": true,
-//       "logoPositionX": "center",
-//       "logoPositionY": "middle",
-//       "titlePositionX": "center",
-//       "titlePositionY": "middle",
-//       "descriptionPositionX": "center",
-//       "descriptionPositionY": "middle"
-//     }
-//   };
-//   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
-//   themePlugin.activate();
-//   const themeBuilder = themePlugin.model as ThemeEditorModel;
-//   const themeEditorSurvey = themeBuilder.themeEditorSurvey;
-//   const headerViewContainer = themeEditorSurvey.getQuestionByName("headerViewContainer");
-
-//   expect(headerViewContainer.value[0]).toStrictEqual({
-//     "headerView": "basic",
-//     "logoPosition": "left",
-//     "inheritWidthFrom": "container",
-//     "backgroundColor": "#5094ed",
-//     "backgroundColorSwitch": "custom",
-//     "backgroundImage": "https://t4.ftcdn.net/jpg/02/83/13/61/360_F_283136113_b3VRHNiOPFMOluzYJPpfuoH8Czh9c743.jpg",
-//     "backgroundImageFit": "fill",
-//     "backgroundImageOpacity": 50,
-//     "overlapEnabled": true,
-//     "logoPositionX": "center",
-//     "logoPositionY": "middle",
-//     "titlePositionX": "center",
-//     "titlePositionY": "middle",
-//     "descriptionPositionX": "center",
-//     "descriptionPositionY": "middle",
-//     "textAreaWidth": 600,
-//     "height": 300,
-//     "headerDescription": {
-//       "color": "rgba(50, 16, 218, 0.45)",
-//       "family": "Verdana",
-//       "size": 19,
-//       "weight": "800",
-//     },
-//     "headerTitle": {
-//       "color": "rgba(219, 15, 15, 0.91)",
-//       "family": "Georgia",
-//       "size": 39,
-//       "weight": "800",
-//     },
-//     "surveyDescription": {
-//       "family": "Trebuchet MS",
-//       "size": 21,
-//       "weight": "800",
-//     },
-//     "surveyTitle": {
-//       "family": "Courier New",
-//       "size": 41,
-//       "weight": "400",
-//     },
-//   });
-// });
+  currentThemeCssVariables = themeModel.cssVariables || {};
+  expect(currentThemeCssVariables["--sjs-font-headertitle-color"]).toBe("rgba(255, 255, 255, 1)");
+  expect(currentThemeCssVariables["--sjs-font-headerdescription-color"]).toBe("rgba(255, 255, 255, 1)");
+});
 
 test("headerViewContainer get color values from theme", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
@@ -293,45 +191,44 @@ test("headerViewContainer get color values from theme", (): any => {
   expect(headerDescriptionQuestion.contentPanel.getQuestionByName("color").value).toEqual("rgba(50, 16, 218, 0.45)");
 });
 
-// test("headerViewContainer: restore backgroundColorSwitch", (): any => {
-//   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-//   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+test("headerViewContainer: restore backgroundColorSwitch", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
 
-//   creator.activeTab = "theme";
-//   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
-//   let themeBuilder = themePlugin.model as ThemeEditorModel;
-//   let headerViewContainer = themeBuilder.themeEditorSurvey.getQuestionByName("headerViewContainer").panels[0];
+  creator.activeTab = "theme";
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  let themeModel = themePlugin.themeModel as ThemeModel;
+  let header = themeModel.header as HeaderModel;
 
-//   headerViewContainer.getElementByName("headerView").value = "advanced";
-//   expect(headerViewContainer.getElementByName("backgroundColorSwitch").value).toEqual("accentColor");
-//   expect(headerViewContainer.getElementByName("backgroundColor").value).toBeUndefined();
+  header["headerView"] = "advanced";
+  expect(header["backgroundColorSwitch"]).toEqual("accentColor");
+  expect(header["backgroundColor"]).toBeUndefined();
 
-//   headerViewContainer.getElementByName("backgroundColorSwitch").value = "none";
-//   expect(headerViewContainer.getElementByName("backgroundColor").value).toBeUndefined();
+  header["backgroundColorSwitch"] = "none";
+  expect(header["backgroundColor"]).toBeUndefined();
 
-//   creator.activeTab = "designer";
-//   expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBe("transparent");
+  creator.activeTab = "designer";
+  expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBe("transparent");
 
-//   creator.activeTab = "theme";
-//   themeBuilder = themePlugin.model as ThemeEditorModel;
-//   headerViewContainer = themeBuilder.themeEditorSurvey.getQuestionByName("headerViewContainer").panels[0];
+  creator.activeTab = "theme";
+  header = themeModel.header as HeaderModel;
 
-//   expect(headerViewContainer.getQuestionByName("backgroundColorSwitch").value).toEqual("none");
-//   expect(headerViewContainer.getQuestionByName("backgroundColor").value).toBeUndefined();
+  expect(header["backgroundColorSwitch"]).toEqual("none");
+  expect(header["backgroundColor"]).toBeUndefined();
 
-//   headerViewContainer.getElementByName("backgroundColorSwitch").value = "custom";
-//   expect(headerViewContainer.getElementByName("backgroundColor").value).toBeUndefined();
-//   headerViewContainer.getElementByName("backgroundColor").value = "#ff0000";
+  header["backgroundColorSwitch"] = "custom";
+  expect(header["backgroundColor"]).toBeUndefined();
+  header["backgroundColor"] = "#ff0000";
 
-//   creator.activeTab = "designer";
-//   expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBe("#ff0000");
+  creator.activeTab = "designer";
+  expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBe("#ff0000");
 
-//   creator.activeTab = "theme";
-//   themeBuilder = themePlugin.model as ThemeEditorModel;
-//   headerViewContainer = themeBuilder.themeEditorSurvey.getQuestionByName("headerViewContainer").panels[0];
-//   expect(headerViewContainer.getQuestionByName("backgroundColorSwitch").value).toEqual("custom");
-//   expect(headerViewContainer.getQuestionByName("backgroundColor").value).toBe("#ff0000");
-// });
+  creator.activeTab = "theme";
+  header = themeModel.header as HeaderModel;
+
+  expect(header["backgroundColorSwitch"]).toEqual("custom");
+  expect(header["backgroundColor"]).toBe("#ff0000");
+});
 
 // test("headerViewContainer: background color", (): any => {
 //   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
@@ -343,19 +240,19 @@ test("headerViewContainer get color values from theme", (): any => {
 //   let headerViewContainer = themeBuilder.themeEditorSurvey.getQuestionByName("headerViewContainer").panels[0];
 
 //   headerViewContainer.getElementByName("headerView").value = "advanced";
-//   expect(headerViewContainer.getElementByName("backgroundColorSwitch").value).toBe("accentColor");
+//   expect(header["backgroundColorSwitch"]).toBe("accentColor");
 //   expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBeUndefined();
 
-//   headerViewContainer.getElementByName("backgroundColorSwitch").value = "none";
+//   header["backgroundColorSwitch"] = "none";
 //   expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBe("transparent");
 
-//   headerViewContainer.getElementByName("backgroundColorSwitch").value = "custom";
+//   header["backgroundColorSwitch"] = "custom";
 //   expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBe("transparent");
 
-//   headerViewContainer.getElementByName("backgroundColor").value = "#5094ed";
+//   header["backgroundColor"] = "#5094ed";
 //   expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBe("#5094ed");
 
-//   headerViewContainer.getElementByName("backgroundColorSwitch").value = "accentColor";
+//   header["backgroundColorSwitch"] = "accentColor";
 //   expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBeUndefined();
 // });
 
@@ -373,12 +270,12 @@ test("headerViewContainer get color values from theme", (): any => {
 //   expect(primaryBackColor.value).toEqual("rgba(25, 179, 148, 1)");
 
 //   headerViewContainer.getElementByName("headerView").value = "advanced";
-//   expect(headerViewContainer.getElementByName("backgroundColorSwitch").value).toEqual("accentColor");
-//   expect(headerViewContainer.getElementByName("backgroundColor").value).toBeUndefined();
+//   expect(header["backgroundColorSwitch"]).toEqual("accentColor");
+//   expect(header["backgroundColor"]).toBeUndefined();
 
-//   headerViewContainer.getElementByName("backgroundColorSwitch").value = "custom";
-//   expect(headerViewContainer.getElementByName("backgroundColor").value).toBeUndefined();
-//   headerViewContainer.getElementByName("backgroundColor").value = "#ff0000";
+//   header["backgroundColorSwitch"] = "custom";
+//   expect(header["backgroundColor"]).toBeUndefined();
+//   header["backgroundColor"] = "#ff0000";
 
 //   creator.activeTab = "designer";
 //   expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBe("#ff0000");
@@ -391,14 +288,14 @@ test("headerViewContainer get color values from theme", (): any => {
 
 //   expect(themeChooser.value).toEqual("default");
 //   expect(primaryBackColor.value).toEqual("rgba(25, 179, 148, 1)");
-//   expect(headerViewContainer.getQuestionByName("backgroundColorSwitch").value).toEqual("custom");
-//   expect(headerViewContainer.getQuestionByName("backgroundColor").value).toBe("#ff0000");
+//   expect(header["backgroundColorSwitch"]).toEqual("custom");
+//   expect(header["backgroundColor"]).toBe("#ff0000");
 
 //   themeBuilder.selectTheme("contrast");
 //   expect(themeChooser.value).toEqual("contrast");
 //   expect(primaryBackColor.value).toEqual("rgba(0, 0, 0, 1)");
-//   expect(headerViewContainer.getQuestionByName("backgroundColorSwitch").value).toEqual("custom");
-//   expect(headerViewContainer.getQuestionByName("backgroundColor").value).toBe("#ff0000");
+//   expect(header["backgroundColorSwitch"]).toEqual("custom");
+//   expect(header["backgroundColor"]).toBe("#ff0000");
 
 //   creator.activeTab = "designer";
 //   expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBe("#ff0000");
@@ -411,6 +308,6 @@ test("headerViewContainer get color values from theme", (): any => {
 
 //   expect(themeChooser.value).toEqual("contrast");
 //   expect(primaryBackColor.value).toEqual("rgba(0, 0, 0, 1)");
-//   expect(headerViewContainer.getQuestionByName("backgroundColorSwitch").value).toEqual("custom");
-//   expect(headerViewContainer.getQuestionByName("backgroundColor").value).toBe("#ff0000");
+//   expect(header["backgroundColorSwitch"]).toEqual("custom");
+//   expect(header["backgroundColor"]).toBe("#ff0000");
 // });

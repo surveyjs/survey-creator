@@ -92,6 +92,9 @@ ComponentCollection.Instance.add({
     const placeholderColor = question.contentPanel.getQuestionByName("placeholdercolor");
     placeholderColor.visible = question.name === "editorFont";
   },
+  valueToQuestion(value) {
+    return JSON.parse(JSON.stringify(value));
+  },
   onValueChanged(question, name, newValue) {
   },
 });

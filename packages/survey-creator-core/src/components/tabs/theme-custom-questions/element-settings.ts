@@ -41,6 +41,9 @@ ComponentCollection.Instance.add({
   },
   onCreated(question) {
   },
+  valueToQuestion(value) {
+    return JSON.parse(JSON.stringify(value));
+  },
   onValueChanged(question, name, newValue) {
   },
 });
