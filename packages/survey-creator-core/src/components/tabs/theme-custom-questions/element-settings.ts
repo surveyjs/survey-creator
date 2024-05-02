@@ -37,18 +37,20 @@ function getElementsJSON() {
   ];
 }
 
-ComponentCollection.Instance.add({
-  name: "elementsettings",
-  showInToolbox: false,
-  internal: true,
-  elementsJSON: getElementsJSON(),
-  onInit() {
-  },
-  onCreated(question) {
-  },
-  onValueChanged(question, name, newValue) {
-  },
-});
+if(!ComponentCollection.Instance.getCustomQuestionByName("elementsettings")) {
+  ComponentCollection.Instance.add({
+    name: "elementsettings",
+    showInToolbox: false,
+    internal: true,
+    elementsJSON: getElementsJSON(),
+    onInit() {
+    },
+    onCreated(question) {
+    },
+    onValueChanged(question, name, newValue) {
+    },
+  });
+}
 
 export function updateElementSettingsJSON() {
   const config = ComponentCollection.Instance.getCustomQuestionByName("elementsettings");

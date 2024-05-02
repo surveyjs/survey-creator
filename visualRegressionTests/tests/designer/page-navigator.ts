@@ -1,5 +1,5 @@
 import { Selector, ClientFunction } from "testcafe";
-import { url, setJSON, changeToolboxLocation, wrapVisualTest, takeElementScreenshot } from "../../helper";
+import { url, setJSON, changeToolboxLocation, changeToolboxScrolling, wrapVisualTest, takeElementScreenshot } from "../../helper";
 
 const title = "Page Navigator Screenshot";
 
@@ -53,6 +53,8 @@ test("On the right side (default)", async (t) => {
 
 test("On the right side opened popup", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    await changeToolboxScrolling(false);
+
     await t.resizeWindow(1920, 500);
     await setJSON(json);
 
@@ -110,6 +112,7 @@ test("On the left side (rtl)", async (t) => {
 
 test("Page Navigator works with - scroll-behavior: smooth;", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    changeToolboxScrolling(false);
     await t.resizeWindow(1400, 800);
     await ClientFunction(() => {
       document.documentElement.style["scroll-behavior"] = "smooth";
@@ -590,6 +593,7 @@ test("Page navigator in by-page mode has enough space to be shown", async (t) =>
 });
 test("Page navigator scrolls to top of long page and centers small page", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    changeToolboxScrolling(false);
     await t.resizeWindow(1500, 800);
     await setJSON({
       "logoPosition": "right",
