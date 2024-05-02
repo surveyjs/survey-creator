@@ -174,6 +174,8 @@ export var bgStrings = {
     addNewTypeQuestion: "Добави {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
     choices_Item: "Елемент ",
+    selectFile: "Изберете файл",
+    removeFile: "Премахване на файла",
     lg: {
       addNewItem: "Добавяне на ново правило",
       empty_tab: "Създай правило за персонализиране на анкетата.",
@@ -320,6 +322,7 @@ export var bgStrings = {
       signatureAutoScaleEnabled: "Автоматично мащабиране на областта за подписи",
       showPlaceholder: "Показване на контейнера",
       placeholder: "Текст в контейнер",
+      placeholderReadOnly: "Текст в контейнер в режим само за четене или визуализация",
       allowClear: "Показване на бутона \"Изчисти\" в областта за подписи",
       penMinWidth: "Минимална ширина на писалката",
       penMaxWidth: "Максимална ширина на перото",
@@ -494,6 +497,7 @@ export var bgStrings = {
     descriptionPlaceholder: "Описание",
     surveyDescriptionPlaceholder: "Описание",
     pageDescriptionPlaceholder: "Описание",
+    textWrapEnabled: "Опции за обтичане",
     showOtherItem: "Достъп до опция Друго",
     otherText: "Текст на опция Друго",
     showNoneItem: "Достъп до опция Няма",
@@ -654,6 +658,7 @@ export var bgStrings = {
     labelTrue: "\"Вярно\" етикет",
     labelFalse: "\"Невярно\" етикет",
     allowClear: "Показване на бутона Изчистване",
+    searchMode: "Режим на търсене",
     displayStyle: "Стил за изобразяване на стойността",
     format: "Форматиран низ",
     maximumFractionDigits: "Максимален брой дробни цифри",
@@ -1039,8 +1044,9 @@ export var bgStrings = {
     },
     showProgressBar: {
       off: "Скрит",
-      aboveHeader: "Над горния колонтитул",
-      belowHeader: "Под заглавката"
+      topbottom: "Отгоре и отдолу",
+      aboveheader: "Над горния колонтитул",
+      belowheader: "Под заглавката"
     },
     sum: "Сума",
     count: "Граф",
@@ -1050,8 +1056,7 @@ export var bgStrings = {
     searchMode: {
       contains: "Съдържа",
       startsWith: "Започва с"
-    },
-    textWrapEnabled: "Опции за обтичане"
+    }
   },
   // Operators
   op: {
@@ -1201,10 +1206,14 @@ export var bgStrings = {
       imageHeight: "Регулира височината на изображението в резултатите от проучването.",
       imageWidth: "Регулира ширината на изображението в резултатите от проучването."
     },
+    image: {
+      contentMode: "Опцията \"Auto\" автоматично определя подходящия режим за показване - Image, Video или YouTube - въз основа на предоставения URL адрес на източника."
+    },
     imagepicker: {
       imageHeight: "Отменя минималните и максималните стойности на височината.",
       imageWidth: "Отменя минималните и максималните стойности на ширината.",
-      choices: "\"Стойност\" служи като ИД на артикул, използван в условни правила; \"Текст\" се показва на респондентите."
+      choices: "\"Стойност\" служи като ИД на артикул, използван в условни правила; \"Текст\" се показва на респондентите.",
+      contentMode: "Изберете между \"Изображение\" и \"Видео\", за да зададете режима на съдържание на селектора на мултимедия. Ако е избрано \"Изображение\", уверете се, че всички предоставени опции са файлове с изображения в следните формати: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. По същия начин, ако е избрано \"Видео\", уверете се, че всички опции са директни връзки към видео файлове в следните формати: MP4, MOV, WMV, FLV, AVI, MKV. Моля, имайте предвид, че връзките в YouTube не се поддържат за опции за видео."
     },
     text: {
       size: "Тази настройка само преоразмерява входното поле и не влияе на ширината на полето за въпроси. За да ограничите приетата дължина на въвеждане, отидете на <b>Проверка → Максимален брой знаци</b>."
@@ -1316,7 +1325,6 @@ export var bgStrings = {
     dataList: "Въведете списък с възможности за избор, които ще бъдат предложени на респондента по време на въвеждането.",
     itemSize: "Настройката само преоразмерява входните полета и не влияе на ширината на полето за въпроси.",
     itemTitleWidth: "Задава еднаква ширина за всички етикети на елементи в пиксели",
-    contentMode: "Опцията \"Auto\" автоматично определя подходящия режим за показване - Image, Video или YouTube - въз основа на предоставения URL адрес на източника.",
     altText: "Служи като заместител, когато изображението не може да бъде показано на устройството на потребителя и за целите на достъпността.",
     rateColorMode: "Определя цвета на избрания емотикон, когато типът на иконата за оценка е зададен на \"Усмивки\". Изберете между: \"По подразбиране\" - избраният емотикон се появява в цвета на проучването по подразбиране; \"Скала\" - избраният емотикон наследява цвят от рейтинговата скала.",
     expression: {
@@ -1339,7 +1347,7 @@ export var bgStrings = {
       pattern: "Шаблонът може да съдържа низови литерали и следните контейнери: '9' - за цифра; \"а\" - за главна или малка буква; \"#\" - за цифра или главна или малка буква. Използвайте обратно наклонена черта \"\\\", за да избягате от знак."
     },
     datetimemask: {
-      pattern: "Шаблонът може да съдържа разделителни знаци и следните контейнери: 'm' - за номер на месец; \"mm\" - за номер на месец, с водеща нула за едноцифрени стойности; \"d\" - за ден от месеца; \"dd\" - за ден от месеца, с водеща нула за едноцифрени стойности; \"yy\" - за последните две цифри на годината; 'гггг' - за четирицифрена година."
+      pattern: "Шаблонът може да съдържа разделителни знаци и следните контейнери:<br>'m' - Номер на месец.<br>'mm' - Число на месеца, с водеща нула за едноцифрени стойности. <br>\"d\" - Ден от месеца. <br>'dd' - Ден от месеца, с водеща нула за едноцифрени стойности. <br>'yy' - Последните две цифри на годината. <br>'гггг' - Четирицифрена година. <br>'H' - Часове в 24-часов формат. <br>'HH' - Часове в 24-часов формат, с водеща нула за едноцифрени стойности. <br>'h' - Часове в 12-часов формат. <br>'hh' - Часове в 12-часов формат, с водеща нула за едноцифрени стойности. <br>'ММ' - Минути. <br>'ss' - секунди. <br>\"TT\" - 12-часов период на часовника с главни букви (AM/PM). <br>'tt' - 12-часов период на часовника с малки букви (am/pm)."
     },
     numericmask: {
       decimalSeparator: "Символ, използван за отделяне на дробната част от целочислената част на показваното число.",
@@ -1882,8 +1890,8 @@ editorLocalization.locales["bg"] = bgStrings;
 // totalDisplayStyle.date: "Date" => "Дата"
 // rowsOrder.initial: "Original" => "Оригинален"
 // questionsOrder.initial: "Original" => "Оригинален"
-// showProgressBar.aboveHeader: "Above the header" => "Над горния колонтитул"
-// showProgressBar.belowHeader: "Below the header" => "Под заглавката"
+// showProgressBar.aboveheader: "Above the header" => "Над горния колонтитул"
+// showProgressBar.belowheader: "Below the header" => "Под заглавката"
 // pv.sum: "Sum" => "Сума"
 // pv.count: "Count" => "Граф"
 // pv.min: "Min" => "Мин"
@@ -2094,3 +2102,10 @@ editorLocalization.locales["bg"] = bgStrings;
 // maskTypes.none: "None" => "Никой"
 // itemvalue@rows.visibleIf: "Make the row visible if" => "Направете реда видим, ако"
 // itemvalue@rows.enableIf: "Make the row editable if" => "Направете реда редактируем, ако"
+// signaturepad.placeholderReadOnly: "Placeholder text in read-only or preview mode" => "Текст в контейнер в режим само за четене или визуализация"
+// pe.textWrapEnabled: "Wrap choices" => "Опции за обтичане"
+// image.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "Опцията \"Auto\" автоматично определя подходящия режим за показване - Image, Video или YouTube - въз основа на предоставения URL адрес на източника."
+// imagepicker.contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options." => "Изберете между \"Изображение\" и \"Видео\", за да зададете режима на съдържание на селектора на мултимедия. Ако е избрано \"Изображение\", уверете се, че всички предоставени опции са файлове с изображения в следните формати: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. По същия начин, ако е избрано \"Видео\", уверете се, че всички опции са директни връзки към видео файлове в следните формати: MP4, MOV, WMV, FLV, AVI, MKV. Моля, имайте предвид, че връзките в YouTube не се поддържат за опции за видео."
+// ed.selectFile: "Select a file" => "Изберете файл"
+// ed.removeFile: "Remove the file" => "Премахване на файла"
+// pe.searchMode: "Search Mode" => "Режим на търсене"

@@ -174,6 +174,8 @@ var simplifiedChineseTranslation = {
     addNewTypeQuestion: "添加{0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[徽标]",
     choices_Item: "项目",
+    selectFile: "选择文件",
+    removeFile: "删除文件",
     lg: {
       addNewItem: "添加新规则",
       empty_tab: "创建规则以自定义调查流。",
@@ -320,6 +322,7 @@ var simplifiedChineseTranslation = {
       signatureAutoScaleEnabled: "自动缩放签名区域",
       showPlaceholder: "显示占位符",
       placeholder: "占位符文本",
+      placeholderReadOnly: "只读或预览模式下的占位符文本",
       allowClear: "在签名区域内显示“清除”按钮",
       penMinWidth: "最小笔宽",
       penMaxWidth: "最大笔宽",
@@ -494,6 +497,7 @@ var simplifiedChineseTranslation = {
     descriptionPlaceholder: "描述",
     surveyDescriptionPlaceholder: "描述",
     pageDescriptionPlaceholder: "描述",
+    textWrapEnabled: "换行选项",
     showOtherItem: "可添加其他答案?",
     otherText: "其他答案文本",
     showNoneItem: "无",
@@ -654,6 +658,7 @@ var simplifiedChineseTranslation = {
     labelTrue: "“真实”标签",
     labelFalse: "“虚假”标签",
     allowClear: "显示“清除”按钮",
+    searchMode: "搜索模式",
     displayStyle: "值显示样式",
     format: "带格式的字符串",
     maximumFractionDigits: "最大小数位数",
@@ -1039,8 +1044,9 @@ var simplifiedChineseTranslation = {
     },
     showProgressBar: {
       off: "隐藏",
-      aboveHeader: "标题上方",
-      belowHeader: "在标题下方"
+      topbottom: "顶和底",
+      aboveheader: "标题上方",
+      belowheader: "在标题下方"
     },
     sum: "和",
     count: "计数",
@@ -1050,8 +1056,7 @@ var simplifiedChineseTranslation = {
     searchMode: {
       contains: "包含",
       startsWith: "开头为"
-    },
-    textWrapEnabled: "包装选择"
+    }
   },
   // Operators
   op: {
@@ -1201,10 +1206,14 @@ var simplifiedChineseTranslation = {
       imageHeight: "调整调查结果中图像的高度。",
       imageWidth: "调整调查结果中图像的宽度。"
     },
+    image: {
+      contentMode: "“自动”选项会根据提供的源 URL 自动确定适合的显示模式 - 图像、视频或 YouTube。"
+    },
     imagepicker: {
       imageHeight: "覆盖最小和最大高度值。",
       imageWidth: "覆盖最小和最大宽度值。",
-      choices: "“值”用作条件规则中使用的项目 ID;向受访者显示“文本”。"
+      choices: "“值”用作条件规则中使用的项目 ID;向受访者显示“文本”。",
+      contentMode: "在“图像”和“视频”之间进行选择以设置媒体选择器的内容模式。如果选择“图像”，请确保提供的所有选项都是以下格式的图像文件：JPEG、GIF、PNG、APNG、SVG、BMP、ICO。同样，如果选择“视频”，请确保所有选项都是指向以下格式的视频文件的直接链接：MP4、MOV、WMV、FLV、AVI、MKV。请注意，视频选项不支持 YouTube 链接。"
     },
     text: {
       size: "此设置仅调整输入字段的大小，不会影响问题框的宽度。要限制接受的输入长度，请转到<b>验证→最大字符限制</b>。"
@@ -1316,7 +1325,6 @@ var simplifiedChineseTranslation = {
     dataList: "输入将在输入期间向受访者建议的选项列表。",
     itemSize: "该设置仅调整输入字段的大小，不会影响问题框的宽度。",
     itemTitleWidth: "为所有项目标签设置一致的宽度（以像素为单位）",
-    contentMode: "“自动”选项会根据提供的源 URL 自动确定合适的显示模式 - 图像、视频或 YouTube。",
     altText: "当图像无法在用户设备上显示时，出于辅助功能的目的，可作为替代。",
     rateColorMode: "定义当评级图标类型设置为“笑脸”时所选表情符号的颜色。选择：“默认” - 所选表情符号以默认调查颜色显示;“比例” - 所选的表情符号继承了评分量表的颜色。",
     expression: {
@@ -1339,7 +1347,7 @@ var simplifiedChineseTranslation = {
       pattern: "该模式可以包含字符串文字和以下占位符： '9' - 表示数字;“a” - 表示大写或小写字母;'#' - 表示数字或大写或小写字母。使用反斜杠“\\”转义字符。"
     },
     datetimemask: {
-      pattern: "该模式可以包含分隔符和以下占位符：“m” - 表示月份数;'mm' - 表示月份数字，前导零表示个位数;'d' - 表示月份中的某一天;'dd' - 表示月份中的某一天，前导零表示个位数值;'yy' - 一年的最后两位数字;'yyyy' - 表示四位数的年份。"
+      pattern: "模式可以包含分隔符和以下占位符：“<br>m”- 月份编号。<br>'mm' - 月份编号，前导零表示个位数值。<br>'d' - 月份中的某一天。<br>'dd' - 月份的某一天，个位数值的前导为零。<br>'yy' - 年份的最后两位数字。<br>'yyyy' - 四位数年份。<br>“H” - 24 小时制的小时数。<br>“HH” - 24 小时制的小时数，个位数值的前导为零。<br>'h' - 以 12 小时为制的小时数。<br>'hh' - 12 小时制的小时数，个位数值的前导为零。<br>'MM' - 分钟。<br>'ss' - 秒。<br>“TT” - 大写 （AM/PM） 的 12 小时制周期。<br>'tt' - 小写 （am/pm） 的 12 小时制周期。"
     },
     numericmask: {
       decimalSeparator: "用于将显示数字的小数部分与整数部分分开的符号。",
@@ -2463,8 +2471,8 @@ editorLocalization.locales["zh-cn"] = simplifiedChineseTranslation;
 // totalDisplayStyle.date: "Date" => "日期"
 // rowsOrder.initial: "Original" => "源语言"
 // questionsOrder.initial: "Original" => "源语言"
-// showProgressBar.aboveHeader: "Above the header" => "标题上方"
-// showProgressBar.belowHeader: "Below the header" => "在标题下方"
+// showProgressBar.aboveheader: "Above the header" => "标题上方"
+// showProgressBar.belowheader: "Below the header" => "在标题下方"
 // pv.sum: "Sum" => "和"
 // pv.count: "Count" => "计数"
 // pv.min: "Min" => "最小值"
@@ -2675,3 +2683,10 @@ editorLocalization.locales["zh-cn"] = simplifiedChineseTranslation;
 // maskTypes.none: "None" => "没有"
 // itemvalue@rows.visibleIf: "Make the row visible if" => "如果出现以下情况，则使行可见"
 // itemvalue@rows.enableIf: "Make the row editable if" => "如果出现以下情况，则使行可编辑"
+// signaturepad.placeholderReadOnly: "Placeholder text in read-only or preview mode" => "只读或预览模式下的占位符文本"
+// pe.textWrapEnabled: "Wrap choices" => "换行选项"
+// image.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "“自动”选项会根据提供的源 URL 自动确定适合的显示模式 - 图像、视频或 YouTube。"
+// imagepicker.contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options." => "在“图像”和“视频”之间进行选择以设置媒体选择器的内容模式。如果选择“图像”，请确保提供的所有选项都是以下格式的图像文件：JPEG、GIF、PNG、APNG、SVG、BMP、ICO。同样，如果选择“视频”，请确保所有选项都是指向以下格式的视频文件的直接链接：MP4、MOV、WMV、FLV、AVI、MKV。请注意，视频选项不支持 YouTube 链接。"
+// ed.selectFile: "Select a file" => "选择文件"
+// ed.removeFile: "Remove the file" => "删除文件"
+// pe.searchMode: "Search Mode" => "搜索模式"

@@ -166,4 +166,16 @@ $tab-min-height: var(--tab-min-height, auto);
   .sd-element__content--fade-out {
     animation: none;
   }
+  .sd-paneldynamic__panel-wrapper--fade-in,
+  .sd-paneldynamic__panel-wrapper--fade-out,
+  .sd-paneldynamic__panel-wrapper--fade-out-left,
+  .sd-paneldynamic__panel-wrapper--fade-out-right,
+  .sd-paneldynamic__panel-wrapper--fade-in-left,
+  .sd-paneldynamic__panel-wrapper--fade-in-right {
+    animation: none;
+  }
+  .sd-table__row--fade-out,
+  .sd-table__row--fade-in {
+    animation: none;
+  }
 }

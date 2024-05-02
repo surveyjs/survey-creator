@@ -665,6 +665,8 @@ export class ConditionEditor extends PropertyEditorSetupValue {
           if (!!valueName && name.indexOf(valueName) == 0) {
             name = name.replace(valueName, question.name);
           }
+          const unwrappedValueText = "-unwrapped";
+          name = name.replace(unwrappedValueText, "");
           res[i].text = this.options.getObjectDisplayName(question, "condition-editor", "condition", name);
         }
         this.addConditionQuestionsHash[res[i].name] = question;

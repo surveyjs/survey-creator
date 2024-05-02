@@ -174,6 +174,8 @@ export var hebrewStrings = {
     addNewTypeQuestion: "הוסף {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[לוגו]",
     choices_Item: "פריט ",
+    selectFile: "בחר קובץ",
+    removeFile: "הסרת הקובץ",
     lg: {
       addNewItem: "הוספת כלל חדש",
       empty_tab: "צור כלל כדי להתאים אישית את זרימת הסקר.",
@@ -320,6 +322,7 @@ export var hebrewStrings = {
       signatureAutoScaleEnabled: "שינוי גודל אוטומטי של אזור החתימה",
       showPlaceholder: "הצגת מציין המיקום",
       placeholder: "טקסט מציין מיקום",
+      placeholderReadOnly: "טקסט מציין מיקום במצב קריאה בלבד או תצוגה מקדימה",
       allowClear: "הצגת לחצן 'נקה' בתוך אזור החתימה",
       penMinWidth: "רוחב עט מינימלי",
       penMaxWidth: "רוחב עט מרבי",
@@ -494,6 +497,7 @@ export var hebrewStrings = {
     descriptionPlaceholder: "תיאור",
     surveyDescriptionPlaceholder: "תיאור הסקר",
     pageDescriptionPlaceholder: "תיאור העמוד",
+    textWrapEnabled: "אפשרויות גלישה",
     showOtherItem: "אפשר אפשרות אחרת",
     otherText: "טקסט לאפשרות אחרת",
     showNoneItem: "אפשר אפשרות 'אף אחד'",
@@ -654,6 +658,7 @@ export var hebrewStrings = {
     labelTrue: "תוית 'נכון'",
     labelFalse: "תוית 'לא נכון'",
     allowClear: "הצג את לחצן הניקוי",
+    searchMode: "מצב חיפוש",
     displayStyle: "סגנון תצוגת ערך",
     format: "מחרוזת מסוגננת",
     maximumFractionDigits: "ספרות עשרוניות מקסימליות",
@@ -1039,8 +1044,9 @@ export var hebrewStrings = {
     },
     showProgressBar: {
       off: "מוסתר",
-      aboveHeader: "מעל הכותרת העליונה",
-      belowHeader: "מתחת לכותרת העליונה"
+      topbottom: "עליון ותחתון",
+      aboveheader: "מעל הכותרת העליונה",
+      belowheader: "מתחת לכותרת העליונה"
     },
     sum: "סכום",
     count: "מנה",
@@ -1050,8 +1056,7 @@ export var hebrewStrings = {
     searchMode: {
       contains: "מכיל",
       startsWith: "מתחיל ב"
-    },
-    textWrapEnabled: "אפשרויות גלישה"
+    }
   },
   // Operators
   op: {
@@ -1201,10 +1206,14 @@ export var hebrewStrings = {
       imageHeight: "התאמת גובה התמונה בתוצאות הסקר.",
       imageWidth: "התאמת רוחב התמונה בתוצאות הסקר."
     },
+    image: {
+      contentMode: "האפשרות \"אוטומטי\" קובעת אוטומטית את המצב המתאים לתצוגה - תמונה, וידאו או YouTube - בהתבסס על כתובת האתר המקורית שסופקה."
+    },
     imagepicker: {
       imageHeight: "דורס את ערכי הגובה המינימליים והמרביים.",
       imageWidth: "דורס את ערכי הרוחב המינימליים והמרביים.",
-      choices: "\"ערך\" משמש כמזהה פריט המשמש בכללים מותנים; \"טקסט\" מוצג למשיבים."
+      choices: "\"ערך\" משמש כמזהה פריט המשמש בכללים מותנים; \"טקסט\" מוצג למשיבים.",
+      contentMode: "בחר בין \"תמונה\" ו\"וידאו\" כדי להגדיר את מצב התוכן של בורר המדיה. אם נבחרה האפשרות \"תמונה\", ודא שכל האפשרויות שסופקו הן קובצי תמונה בתבניות הבאות: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. באופן דומה, אם נבחר \"וידאו\", ודא שכל האפשרויות הן קישורים ישירים לקבצי וידאו בפורמטים הבאים: MP4, MOV, WMV, FLV, AVI, MKV. שים לב שקישורי YouTube אינם נתמכים עבור אפשרויות וידאו."
     },
     text: {
       size: "הגדרה זו משנה את גודל שדה הקלט בלבד ואינה משפיעה על רוחב תיבת השאלה. כדי להגביל את אורך הקלט המקובל, עבור אל <b>אימות → מגבלת תווים מרבית</b>."
@@ -1316,7 +1325,6 @@ export var hebrewStrings = {
     dataList: "הזן רשימה של אפשרויות שיוצעו למשיב במהלך הקלט.",
     itemSize: "ההגדרה משנה את גודל שדות הקלט בלבד ואינה משפיעה על רוחב תיבת השאלה.",
     itemTitleWidth: "קובע רוחב עקבי לכל תוויות הפריטים בפיקסלים",
-    contentMode: "האפשרות \"אוטומטי\" קובעת אוטומטית את המצב המתאים לתצוגה - תמונה, וידאו או YouTube - בהתבסס על כתובת האתר המקורית שסופקה.",
     altText: "משמש כתחליף כאשר לא ניתן להציג את התמונה במכשיר המשתמש ולמטרות נגישות.",
     rateColorMode: "מגדיר את צבע האמוג'י שנבחר כשסוג סמל הדירוג מוגדר ל\"סמיילי\". בחר בין: \"ברירת מחדל\" - האמוג'י שנבחר מופיע בצבע סקר ברירת מחדל; \"קנה מידה\" - האמוג'י שנבחר יורש צבע מסולם הדירוג.",
     expression: {
@@ -1339,7 +1347,7 @@ export var hebrewStrings = {
       pattern: "התבנית יכולה להכיל מילולי מחרוזת ואת מצייני המיקום הבאים: '9' - עבור ספרה; 'a' - עבור אות גדולה או קטנה; '#' - עבור ספרה או אות גדולה או קטנה. השתמש בקו נטוי הפוך '\\' כדי לברוח מתו."
     },
     datetimemask: {
-      pattern: "התבנית יכולה להכיל תווים מפרידים ואת מצייני המיקום הבאים: 'm' - עבור מספר חודש; 'mm' - עבור מספר חודש, עם אפס מוביל עבור ערכים חד-ספרתיים; 'ד' - ליום בחודש; 'dd' - עבור יום בחודש, עם אפס מוביל עבור ערכים חד-ספרתיים; 'yy' - עבור שתי הספרות האחרונות של השנה; 'yyyy' - לשנה בת ארבע ספרות."
+      pattern: "התבנית יכולה להכיל תווים מפרידים ואת מצייני המיקום הבאים:<br>'m' - מספר חודש.<br>'mm' - מספר חודש, עם אפס מוביל עבור ערכים חד-ספרתיים. <br>'ד' - יום בחודש. <br>'dd' - יום בחודש, עם אפס מוביל עבור ערכים חד-ספרתיים. <br>'yy' - שתי הספרות האחרונות של השנה. <br>'yyyy' - שנה בת ארבע ספרות. <br>'H' - שעות בפורמט של 24 שעות. <br>'HH' - שעות בתבנית של 24 שעות, עם אפס מוביל עבור ערכים חד-ספרתיים. <br>'h' - שעות בפורמט של 12 שעות. <br>'hh' - שעות בתבנית של 12 שעות, עם אפס מוביל עבור ערכים חד-ספרתיים. <br>'ממ' - דקות. <br>'ss' - שניות. <br>'TT' - שעון של 12 שעות באותיות גדולות (AM/PM). <br>'tt' - שעון של 12 שעות באותיות קטנות (AM / PM)."
     },
     numericmask: {
       decimalSeparator: "סמל המשמש להפרדת חלק השבר מהחלק השלם של מספר מוצג.",
@@ -1885,8 +1893,8 @@ editorLocalization.locales["he"] = hebrewStrings;
 // totalDisplayStyle.date: "Date" => "תמר"
 // rowsOrder.initial: "Original" => "מקורי"
 // questionsOrder.initial: "Original" => "מקורי"
-// showProgressBar.aboveHeader: "Above the header" => "מעל הכותרת העליונה"
-// showProgressBar.belowHeader: "Below the header" => "מתחת לכותרת העליונה"
+// showProgressBar.aboveheader: "Above the header" => "מעל הכותרת העליונה"
+// showProgressBar.belowheader: "Below the header" => "מתחת לכותרת העליונה"
 // pv.sum: "Sum" => "סכום"
 // pv.count: "Count" => "מנה"
 // pv.min: "Min" => "דקות"
@@ -2097,3 +2105,10 @@ editorLocalization.locales["he"] = hebrewStrings;
 // maskTypes.none: "None" => "ללא"
 // itemvalue@rows.visibleIf: "Make the row visible if" => "הפיכת השורה לגלויה אם"
 // itemvalue@rows.enableIf: "Make the row editable if" => "הפיכת השורה לניתנת לעריכה אם"
+// signaturepad.placeholderReadOnly: "Placeholder text in read-only or preview mode" => "טקסט מציין מיקום במצב קריאה בלבד או תצוגה מקדימה"
+// pe.textWrapEnabled: "Wrap choices" => "אפשרויות גלישה"
+// image.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "האפשרות \"אוטומטי\" קובעת אוטומטית את המצב המתאים לתצוגה - תמונה, וידאו או YouTube - בהתבסס על כתובת האתר המקורית שסופקה."
+// imagepicker.contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options." => "בחר בין \"תמונה\" ו\"וידאו\" כדי להגדיר את מצב התוכן של בורר המדיה. אם נבחרה האפשרות \"תמונה\", ודא שכל האפשרויות שסופקו הן קובצי תמונה בתבניות הבאות: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. באופן דומה, אם נבחר \"וידאו\", ודא שכל האפשרויות הן קישורים ישירים לקבצי וידאו בפורמטים הבאים: MP4, MOV, WMV, FLV, AVI, MKV. שים לב שקישורי YouTube אינם נתמכים עבור אפשרויות וידאו."
+// ed.selectFile: "Select a file" => "בחר קובץ"
+// ed.removeFile: "Remove the file" => "הסרת הקובץ"
+// pe.searchMode: "Search Mode" => "מצב חיפוש"

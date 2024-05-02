@@ -19,6 +19,7 @@
   height: calcSize(60);
   min-height: calcSize(60);
   flex-grow: 1;
+  position: relative;
 }
 .svc-flex-row__element--growing {
   flex: 1;

@@ -22,12 +22,12 @@
   width: 100%;
   border-right: 1px solid $border;
   box-sizing: border-box;
+  @include disableAnimations;
 }
 
 .spg-container {
   width: 100%;
   @include disableTransitionAnimations;
-  @include disableAnimations;
 }
 
 .spg-container.spg-container_search {

@@ -174,6 +174,8 @@ export var indonesianStrings = {
     addNewTypeQuestion: "Tambahkan {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
     choices_Item: "Benda ",
+    selectFile: "Pilih file",
+    removeFile: "Menghapus file",
     lg: {
       addNewItem: "Tambahkan Aturan Baru",
       empty_tab: "Buat aturan untuk menyesuaikan alur survei.",
@@ -320,6 +322,7 @@ export var indonesianStrings = {
       signatureAutoScaleEnabled: "Menskalakan area tanda tangan secara otomatis",
       showPlaceholder: "Memperlihatkan tempat penampung",
       placeholder: "Teks tempat penampung",
+      placeholderReadOnly: "Teks tempat penampung dalam mode baca-saja atau pratinjau",
       allowClear: "Perlihatkan tombol Hapus di dalam area tanda tangan",
       penMinWidth: "Lebar pena minimum",
       penMaxWidth: "Lebar pena maksimum",
@@ -494,6 +497,7 @@ export var indonesianStrings = {
     descriptionPlaceholder: "Deskripsi",
     surveyDescriptionPlaceholder: "Deskripsi",
     pageDescriptionPlaceholder: "Deskripsi",
+    textWrapEnabled: "Pilihan bungkus",
     showOtherItem: "Memiliki item lain",
     otherText: "Teks item lain",
     showNoneItem: "Perbolehkan opsi Tidak Ada",
@@ -654,6 +658,7 @@ export var indonesianStrings = {
     labelTrue: "Label \"Benar\"",
     labelFalse: "Label \"Salah\"",
     allowClear: "Tampilkan tombol Hapus",
+    searchMode: "Mode Pencarian",
     displayStyle: "Gaya tampilan nilai",
     format: "String yang diformat",
     maximumFractionDigits: "Digit pecahan maksimum",
@@ -1039,8 +1044,9 @@ export var indonesianStrings = {
     },
     showProgressBar: {
       off: "Sembunyi",
-      aboveHeader: "Di atas header",
-      belowHeader: "Di bawah header"
+      topbottom: "atas dan bawah",
+      aboveheader: "Di atas header",
+      belowheader: "Di bawah header"
     },
     sum: "Jumlah",
     count: "Hitung",
@@ -1050,8 +1056,7 @@ export var indonesianStrings = {
     searchMode: {
       contains: "Berisi",
       startsWith: "Dimulai dengan"
-    },
-    textWrapEnabled: "Pilihan bungkus"
+    }
   },
   // Operators
   op: {
@@ -1201,10 +1206,14 @@ export var indonesianStrings = {
       imageHeight: "Menyesuaikan tinggi gambar dalam hasil survei.",
       imageWidth: "Menyesuaikan lebar gambar dalam hasil survei."
     },
+    image: {
+      contentMode: "Opsi \"Otomatis\" secara otomatis menentukan mode yang sesuai untuk tampilan - Gambar, Video, atau YouTube - berdasarkan URL sumber yang disediakan."
+    },
     imagepicker: {
       imageHeight: "Mengganti nilai tinggi minimum dan maksimum.",
       imageWidth: "Mengganti nilai lebar minimum dan maksimum.",
-      choices: "\"Nilai\" berfungsi sebagai ID item yang digunakan dalam aturan bersyarat; \"Teks\" ditampilkan kepada responden."
+      choices: "\"Nilai\" berfungsi sebagai ID item yang digunakan dalam aturan bersyarat; \"Teks\" ditampilkan kepada responden.",
+      contentMode: "Pilih antara \"Gambar\" dan \"Video\" untuk mengatur mode konten pemilih media. Jika \"Gambar\" dipilih, pastikan bahwa semua opsi yang disediakan adalah file gambar dalam format berikut: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Demikian pula, jika \"Video\" dipilih, pastikan bahwa semua opsi adalah tautan langsung ke file video dalam format berikut: MP4, MOV, WMV, FLV, AVI, MKV. Perhatikan bahwa tautan YouTube tidak didukung untuk opsi video."
     },
     text: {
       size: "Pengaturan ini hanya mengubah ukuran bidang input dan tidak memengaruhi lebar kotak pertanyaan. Untuk membatasi panjang input yang diterima, buka <b>Validasi → Batas karakter maksimum</b>."
@@ -1316,7 +1325,6 @@ export var indonesianStrings = {
     dataList: "Masukkan daftar pilihan yang akan disarankan kepada responden saat masukan.",
     itemSize: "Pengaturan hanya mengubah ukuran bidang input dan tidak memengaruhi lebar kotak pertanyaan.",
     itemTitleWidth: "Mengatur lebar yang konsisten untuk semua label item dalam piksel",
-    contentMode: "Opsi \"Otomatis\" secara otomatis menentukan mode yang sesuai untuk tampilan - Gambar, Video, atau YouTube - berdasarkan URL sumber yang disediakan.",
     altText: "Berfungsi sebagai pengganti ketika gambar tidak dapat ditampilkan pada perangkat pengguna dan untuk tujuan aksesibilitas.",
     rateColorMode: "Menentukan warna emoji yang dipilih saat jenis ikon Peringkat diatur ke \"Smiley\". Pilih antara: \"Default\" - emoji yang dipilih muncul dalam warna survei default; \"Skala\" - emoji yang dipilih mewarisi warna dari skala peringkat.",
     expression: {
@@ -1339,7 +1347,7 @@ export var indonesianStrings = {
       pattern: "Pola dapat berisi literal string dan placeholder berikut: '9' - untuk digit; 'a' - untuk huruf besar atau kecil; '#' - untuk digit atau huruf besar atau kecil. Gunakan garis miring terbalik '\\' untuk melarikan diri dari karakter."
     },
     datetimemask: {
-      pattern: "Pola dapat berisi karakter pemisah dan placeholder berikut: 'm' - untuk nomor bulan; 'mm' - untuk angka bulan, dengan nol di depannya untuk nilai satu digit; 'd' - untuk hari dalam sebulan; 'dd' - untuk hari dalam sebulan, dengan nol di depan untuk nilai satu digit; 'yy' - untuk dua digit terakhir tahun ini; 'yyyy' - untuk tahun empat digit."
+      pattern: "Pola dapat berisi karakter pemisah dan placeholder berikut:<br>'m' - Nomor bulan.<br>'mm' - Angka bulan, dengan nol di depannya untuk nilai satu digit. <br>'d' - Hari dalam sebulan. <br>'dd' - Hari dalam sebulan, dengan nol di depan untuk nilai satu digit. <br>'yy' - Dua digit terakhir tahun ini. <br>'yyyy' - Tahun empat digit. <br>'H' - Jam dalam format 24 jam. <br>'HH' - Jam dalam format 24 jam, dengan nol di depannya untuk nilai satu digit. <br>'h' - Jam dalam format 12 jam. <br>'hh' - Jam dalam format 12 jam, dengan nol di depannya untuk nilai satu digit. <br>'MM' - Menit. <br>'ss' - Detik. <br>'TT' - Periode jam 12 jam dalam huruf besar (AM / PM). <br>'tt' - Periode jam 12 jam dalam huruf kecil (am/pm)."
     },
     numericmask: {
       decimalSeparator: "Simbol yang digunakan untuk memisahkan bagian pecahan dari bagian bilangan bulat dari angka yang ditampilkan.",
@@ -2475,8 +2483,8 @@ editorLocalization.locales["id"] = indonesianStrings;
 // totalDisplayStyle.date: "Date" => "Tanggal"
 // rowsOrder.initial: "Original" => "Asli"
 // questionsOrder.initial: "Original" => "Asli"
-// showProgressBar.aboveHeader: "Above the header" => "Di atas header"
-// showProgressBar.belowHeader: "Below the header" => "Di bawah header"
+// showProgressBar.aboveheader: "Above the header" => "Di atas header"
+// showProgressBar.belowheader: "Below the header" => "Di bawah header"
 // pv.sum: "Sum" => "Jumlah"
 // pv.count: "Count" => "Hitung"
 // pv.min: "Min" => "Min"
@@ -2687,3 +2695,10 @@ editorLocalization.locales["id"] = indonesianStrings;
 // maskTypes.none: "None" => "Tidak"
 // itemvalue@rows.visibleIf: "Make the row visible if" => "Membuat baris terlihat jika"
 // itemvalue@rows.enableIf: "Make the row editable if" => "Membuat baris dapat diedit jika"
+// signaturepad.placeholderReadOnly: "Placeholder text in read-only or preview mode" => "Teks tempat penampung dalam mode baca-saja atau pratinjau"
+// pe.textWrapEnabled: "Wrap choices" => "Pilihan bungkus"
+// image.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "Opsi \"Otomatis\" secara otomatis menentukan mode yang sesuai untuk tampilan - Gambar, Video, atau YouTube - berdasarkan URL sumber yang disediakan."
+// imagepicker.contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options." => "Pilih antara \"Gambar\" dan \"Video\" untuk mengatur mode konten pemilih media. Jika \"Gambar\" dipilih, pastikan bahwa semua opsi yang disediakan adalah file gambar dalam format berikut: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Demikian pula, jika \"Video\" dipilih, pastikan bahwa semua opsi adalah tautan langsung ke file video dalam format berikut: MP4, MOV, WMV, FLV, AVI, MKV. Perhatikan bahwa tautan YouTube tidak didukung untuk opsi video."
+// ed.selectFile: "Select a file" => "Pilih file"
+// ed.removeFile: "Remove the file" => "Menghapus file"
+// pe.searchMode: "Search Mode" => "Mode Pencarian"

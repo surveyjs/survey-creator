@@ -152,8 +152,8 @@ export class ObjectSelectorModel extends Base {
       this.listModelValue = new ListModel<Action>(
         this.selector.items,
         (item: IAction) => { onClose(item.data); },
-        true, selectedItem,
-        (text: string) => { this.selector.filterByText(text); });
+        true, selectedItem);
+      this.listModelValue.setOnFilterStringChangedCallback((text: string) => { this.selector.filterByText(text); });
     } else {
       this.listModelValue.setItems(this.selector.items);
       this.listModelValue.selectedItem = selectedItem;

@@ -1,5 +1,5 @@
 import { Selector, ClientFunction } from "testcafe";
-import { url, setJSON, takeElementScreenshot, explicitErrorHandler, getPropertyGridCategory, generalGroupName, patchDragDropToDisableDrop, wrapVisualTest, resetHoverToCreator, getPagesLength, RatingToolboxItem } from "../../helper";
+import { url, setJSON, takeElementScreenshot, explicitErrorHandler, getPropertyGridCategory, changeToolboxScrolling, patchDragDropToDisableDrop, wrapVisualTest, resetHoverToCreator, getPagesLength, RatingToolboxItem } from "../../helper";
 
 const title = "DragDrop Screenshot";
 
@@ -408,6 +408,7 @@ test("Drag Drop ImagePicker (choices) drop to invalid area", async (t) => {
 // https://github.com/surveyjs/survey-creator/issues/3234
 test("Drag Drop to Multiline from Toolbox", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    changeToolboxScrolling(false);
     await explicitErrorHandler();
     await t.resizeWindow(2560, 1440);
 

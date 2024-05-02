@@ -234,10 +234,25 @@ jobs:
       npm run remove-package-lock
     displayName: 'npm run remove-package-lock'
 
+# set release specific version
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCoreAngularJquery/'
+      Contents: 'version.txt'
+      TargetFolder: '$(Build.SourcesDirectory)/'
+      OverWrite: true
+    displayName: 'Copy build artifact - SurveyJSVersion File'
+
+  - powershell: |
+      $version = Get-Content $(Build.SourcesDirectory)/version.txt
+      Write-Host "##vso[task.setvariable variable=SurveyJSVersion;]$version"
+    displayName: 'Setup SurveyJSVersion variable from SurveyJSVersionFile'
+
   - powershell: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
-      npm run release
+      npm run release -- --release-as $(SurveyJSVersion)
     displayName: 'Release specific version survey-creator-core'
+# EO set release specific version
 
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
@@ -305,16 +320,20 @@ jobs:
       npm run doc_gen
     displayName: 'Generate docs'
 
-  - task: CopyFiles@2
-    inputs:
-      SourceFolder: '$(Build.SourcesDirectory)/survey-creator/docs'
-      TargetFolder: '$(Build.SourcesDirectory)/service/surveyjs.io/App_Data/DocsEditor'
-      CleanTargetFolder: true
-    displayName: 'Copy root docs to the local surveyjs/service repo'
+  # - task: CopyFiles@2
+  #   inputs:
+  #     SourceFolder: '$(Build.SourcesDirectory)/survey-creator/docs'
+  #     TargetFolder: '$(Build.SourcesDirectory)/service/surveyjs.io/App_Data/DocsEditor'
+  #     CleanTargetFolder: true
+  #   displayName: 'Copy root docs to the local surveyjs/service repo'
 
   - task: CopyFiles@2
     inputs:
       SourceFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/docs'
+      Contents: |
+        classes.json
+        pmes.json
+        surveyjs_definition.json
       TargetFolder: '$(Build.SourcesDirectory)/service/surveyjs.io/App_Data/DocsEditor'
       CleanTargetFolder: false
     displayName: 'Copy generated docs to the local surveyjs/service repo'
@@ -506,10 +525,25 @@ jobs:
       OverWrite: true
     displayName: 'copy @types into library directory'
 
+# set release specific version
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCoreAngularJquery/'
+      Contents: 'version.txt'
+      TargetFolder: '$(Build.SourcesDirectory)/'
+      OverWrite: true
+    displayName: 'Copy build artifact - SurveyJSVersion File'
+
+  - powershell: |
+      $version = Get-Content $(Build.SourcesDirectory)/version.txt
+      Write-Host "##vso[task.setvariable variable=SurveyJSVersion;]$version"
+    displayName: 'Setup SurveyJSVersion variable from SurveyJSVersionFile'
+
   - powershell: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
-      npm run release
+      npm run release -- --release-as $(SurveyJSVersion)
     displayName: 'Release specific version survey-creator-react'
+# EO set release specific version
 
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
@@ -717,10 +751,25 @@ jobs:
     condition: ne(variables.NPM_CACHE_RESTORED, 'false')
     displayName: 'copy knockout from node_modules for survey-knockout-ui'
 
+# set release specific version
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCoreAngularJquery/'
+      Contents: 'version.txt'
+      TargetFolder: '$(Build.SourcesDirectory)/'
+      OverWrite: true
+    displayName: 'Copy build artifact - SurveyJSVersion File'
+
+  - powershell: |
+      $version = Get-Content $(Build.SourcesDirectory)/version.txt
+      Write-Host "##vso[task.setvariable variable=SurveyJSVersion;]$version"
+    displayName: 'Setup SurveyJSVersion variable from SurveyJSVersionFile'
+
   - powershell: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
-      npm run release
+      npm run release -- --release-as $(SurveyJSVersion)
     displayName: 'Release specific version survey-creator-knockout'
+# EO set release specific version
 
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
@@ -835,10 +884,25 @@ jobs:
       OverWrite: true
     displayName: 'copy survey-angular-ui in node_modules'
 
+# set release specific version
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCoreAngularJquery/'
+      Contents: 'version.txt'
+      TargetFolder: '$(Build.SourcesDirectory)/'
+      OverWrite: true
+    displayName: 'Copy build artifact - SurveyJSVersion File'
+
+  - powershell: |
+      $version = Get-Content $(Build.SourcesDirectory)/version.txt
+      Write-Host "##vso[task.setvariable variable=SurveyJSVersion;]$version"
+    displayName: 'Setup SurveyJSVersion variable from SurveyJSVersionFile'
+
   - powershell: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
-      npm run release
+      npm run release -- --release-as $(SurveyJSVersion)
     displayName: 'Release specific version survey-creator-angular'
+# EO set release specific version
 
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
@@ -963,10 +1027,25 @@ jobs:
       OverWrite: true
     displayName: 'copy survey-vue3-ui in node_modules'
 
+# set release specific version
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCoreAngularJquery/'
+      Contents: 'version.txt'
+      TargetFolder: '$(Build.SourcesDirectory)/'
+      OverWrite: true
+    displayName: 'Copy build artifact - SurveyJSVersion File'
+
+  - powershell: |
+      $version = Get-Content $(Build.SourcesDirectory)/version.txt
+      Write-Host "##vso[task.setvariable variable=SurveyJSVersion;]$version"
+    displayName: 'Setup SurveyJSVersion variable from SurveyJSVersionFile'
+
   - powershell: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue
-      npm run release
+      npm run release -- --release-as $(SurveyJSVersion)
     displayName: 'Release specific version survey-creator-vue'
+# EO set release specific version
 
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue

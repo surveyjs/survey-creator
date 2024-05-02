@@ -174,6 +174,8 @@ var italianTranslation = {
     addNewTypeQuestion: "Aggiungi {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
     choices_Item: "Articolo ",
+    selectFile: "Seleziona un file",
+    removeFile: "Rimuovere il file",
     lg: {
       addNewItem: "Aggiungi Nuova Regola",
       empty_tab: "Crea una regola per personalizzare il percorso del sondaggio.",
@@ -320,6 +322,7 @@ var italianTranslation = {
       signatureAutoScaleEnabled: "Ridimensionamento automatico dell'area della firma",
       showPlaceholder: "Visualizzare il segnaposto",
       placeholder: "Testo segnaposto",
+      placeholderReadOnly: "Testo segnaposto in modalità di sola lettura o anteprima",
       allowClear: "Mostra il pulsante Cancella all'interno dell'area della firma",
       penMinWidth: "Larghezza minima della penna",
       penMaxWidth: "Larghezza massima della penna",
@@ -494,6 +497,7 @@ var italianTranslation = {
     descriptionPlaceholder: "Descrizione",
     surveyDescriptionPlaceholder: "Descrizione",
     pageDescriptionPlaceholder: "Descrizione",
+    textWrapEnabled: "Scelte di avvolgimento",
     showOtherItem: "Consenti l'opzione Altro",
     otherText: "Testo dell'opzione Altro",
     showNoneItem: "Consenti l'opzione Nessuno",
@@ -654,6 +658,7 @@ var italianTranslation = {
     labelTrue: "Etichetta \"Vero\"",
     labelFalse: "Etichetta \"Falso\"",
     allowClear: "Mostra il tasto Cancella",
+    searchMode: "Modalità di ricerca",
     displayStyle: "Stile di visualizzazione del valore",
     format: "Stringa formattata",
     maximumFractionDigits: "Numero massimo di cifre frazionarie",
@@ -1039,8 +1044,9 @@ var italianTranslation = {
     },
     showProgressBar: {
       off: "Nascosto",
-      aboveHeader: "Sopra l'intestazione",
-      belowHeader: "Sotto l'intestazione"
+      topbottom: "In alto e in basso",
+      aboveheader: "Sopra l'intestazione",
+      belowheader: "Sotto l'intestazione"
     },
     sum: "Somma",
     count: "Contare",
@@ -1050,8 +1056,7 @@ var italianTranslation = {
     searchMode: {
       contains: "Contiene",
       startsWith: "Inizia con"
-    },
-    textWrapEnabled: "Scelte di avvolgimento"
+    }
   },
   // Operators
   op: {
@@ -1201,10 +1206,14 @@ var italianTranslation = {
       imageHeight: "Regola l'altezza dell'immagine nei risultati del rilevamento.",
       imageWidth: "Regola la larghezza dell'immagine nei risultati del rilevamento."
     },
+    image: {
+      contentMode: "L'opzione \"Auto\" determina automaticamente la modalità di visualizzazione adatta - Immagine, Video o YouTube - in base all'URL di origine fornito."
+    },
     imagepicker: {
       imageHeight: "Sostituisce i valori di altezza minima e massima.",
       imageWidth: "Sostituisce i valori di larghezza minima e massima.",
-      choices: "\"Valore\" funge da ID elemento utilizzato nelle regole condizionali; \"Testo\" viene visualizzato ai rispondenti."
+      choices: "\"Valore\" funge da ID elemento utilizzato nelle regole condizionali; \"Testo\" viene visualizzato ai rispondenti.",
+      contentMode: "Scegli tra \"Immagine\" e \"Video\" per impostare la modalità contenuto del selettore multimediale. Se è selezionata l'opzione \"Immagine\", assicurarsi che tutte le opzioni fornite siano file immagine nei seguenti formati: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Allo stesso modo, se è selezionato \"Video\", assicurarsi che tutte le opzioni siano collegamenti diretti a file video nei seguenti formati: MP4, MOV, WMV, FLV, AVI, MKV. Tieni presente che i link di YouTube non sono supportati per le opzioni video."
     },
     text: {
       size: "Questa impostazione ridimensiona solo il campo di input e non influisce sulla larghezza della casella della domanda. Per limitare la lunghezza di input accettata, passare a <b>Convalida → Limite massimo di caratteri</b>."
@@ -1316,7 +1325,6 @@ var italianTranslation = {
     dataList: "Inserisci un elenco di scelte che verranno suggerite al rispondente durante l'inserimento.",
     itemSize: "L'impostazione ridimensiona solo i campi di input e non influisce sulla larghezza della casella della domanda.",
     itemTitleWidth: "Imposta una larghezza coerente per tutte le etichette degli elementi in pixel",
-    contentMode: "L'opzione \"Auto\" determina automaticamente la modalità di visualizzazione adatta - Immagine, Video o YouTube - in base all'URL di origine fornito.",
     altText: "Funge da sostituto quando l'immagine non può essere visualizzata sul dispositivo di un utente e per motivi di accessibilità.",
     rateColorMode: "Definisce il colore dell'emoji selezionata quando il tipo di icona Valutazione è impostato su \"Smiley\". Scegli tra: \"Predefinito\" - l'emoji selezionata appare nel colore predefinito del sondaggio; \"Scala\": l'emoji selezionata eredita il colore dalla scala di valutazione.",
     expression: {
@@ -1339,7 +1347,7 @@ var italianTranslation = {
       pattern: "Il modello può contenere valori letterali stringa e i segnaposto seguenti: '9' - per una cifra; 'a' - per una lettera maiuscola o minuscola; '#' - per una cifra o una lettera maiuscola o minuscola. Usa la barra rovesciata '\\' per eseguire l'escape di un carattere."
     },
     datetimemask: {
-      pattern: "Il modello può contenere caratteri separatori e i seguenti segnaposto: 'm' - per il numero del mese; 'mm' - per il numero del mese, con zero iniziale per i valori a una cifra; 'd' - per il giorno del mese; 'dd' - per il giorno del mese, con zero iniziale per i valori a una cifra; 'yy' - per le ultime due cifre dell'anno; 'yyyy' - per un anno a quattro cifre."
+      pattern: "Il modello può contenere caratteri separatori e i seguenti segnaposto:<br>'m' - Numero del mese.<br>'mm' - Numero del mese, con zero iniziale per i valori a una cifra. <br>'d' - Giorno del mese. <br>'dd' - Giorno del mese, con zero iniziale per i valori a una cifra. <br>'yy' - Le ultime due cifre dell'anno. <br>'yyyy' - Anno a quattro cifre. <br>'H' - Ore nel formato 24 ore. <br>'HH' - Ore nel formato 24 ore, con zero iniziale per i valori a una cifra. <br>'h' - Ore nel formato 12 ore. <br>'hh' - Ore nel formato 12 ore, con zero iniziale per i valori a una cifra. <br>«MM» - Processo verbale. <br>'ss' - Secondi. <br>'TT' - Periodo di 12 ore in maiuscolo (AM/PM). <br>'TT' - Periodo di 12 ore in minuscolo (AM/PM)."
     },
     numericmask: {
       decimalSeparator: "Simbolo utilizzato per separare la parte frazionaria dalla parte intera di un numero visualizzato.",
@@ -2079,8 +2087,8 @@ editorLocalization.locales["it"] = italianTranslation;
 // totalDisplayStyle.date: "Date" => "Dattero"
 // rowsOrder.initial: "Original" => "Originale"
 // questionsOrder.initial: "Original" => "Originale"
-// showProgressBar.aboveHeader: "Above the header" => "Sopra l'intestazione"
-// showProgressBar.belowHeader: "Below the header" => "Sotto l'intestazione"
+// showProgressBar.aboveheader: "Above the header" => "Sopra l'intestazione"
+// showProgressBar.belowheader: "Below the header" => "Sotto l'intestazione"
 // pv.sum: "Sum" => "Somma"
 // pv.count: "Count" => "Contare"
 // pv.min: "Min" => "Min"
@@ -2291,3 +2299,10 @@ editorLocalization.locales["it"] = italianTranslation;
 // maskTypes.none: "None" => "Nessuno"
 // itemvalue@rows.visibleIf: "Make the row visible if" => "Rendi visibile la riga se"
 // itemvalue@rows.enableIf: "Make the row editable if" => "Rendi la riga modificabile se"
+// signaturepad.placeholderReadOnly: "Placeholder text in read-only or preview mode" => "Testo segnaposto in modalità di sola lettura o anteprima"
+// pe.textWrapEnabled: "Wrap choices" => "Scelte di avvolgimento"
+// image.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "L'opzione \"Auto\" determina automaticamente la modalità di visualizzazione adatta - Immagine, Video o YouTube - in base all'URL di origine fornito."
+// imagepicker.contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options." => "Scegli tra \"Immagine\" e \"Video\" per impostare la modalità contenuto del selettore multimediale. Se è selezionata l'opzione \"Immagine\", assicurarsi che tutte le opzioni fornite siano file immagine nei seguenti formati: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Allo stesso modo, se è selezionato \"Video\", assicurarsi che tutte le opzioni siano collegamenti diretti a file video nei seguenti formati: MP4, MOV, WMV, FLV, AVI, MKV. Tieni presente che i link di YouTube non sono supportati per le opzioni video."
+// ed.selectFile: "Select a file" => "Seleziona un file"
+// ed.removeFile: "Remove the file" => "Rimuovere il file"
+// pe.searchMode: "Search Mode" => "Modalità di ricerca"

@@ -31,7 +31,8 @@ import {
   QuestionCommentModel,
   QuestionImagePickerModel,
   ComponentCollection,
-  QuestionBooleanModel
+  QuestionBooleanModel,
+  QuestionRadiogroupModel
 } from "survey-core";
 import {
   EmptySurveyCreatorOptions,
@@ -3286,4 +3287,59 @@ test("PropertyGridEditorMaskType editor: localize item", () => {
   expect(autoGenerateQuestion.value).toBeTruthy();
 
   ComponentCollection.Instance.clear();
+});
+test("surveypages property editor & default value", () => {
+  Serializer.addProperty("survey", { name: "name", default: "test" });
+  const survey = new SurveyModel();
+  survey.addNewPage("page1");
+  survey.addNewPage("page2");
+  const propertyGrid = new PropertyGridModelTester(survey);
+  const pagesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("pages")
+  );
+  const col = pagesQuestion.getColumnByName("name");
+  expect(col.cellType).toEqual("text");
+
+  Serializer.removeProperty("survey", "name");
+});
+test("showRefuseItem&showDontKnowItem in question&column", () => {
+  const question = new QuestionRadiogroupModel("q1");
+  const matrix = new QuestionMatrixDynamicModel("q2");
+  const column = matrix.addColumn("col1");
+  column.cellType = "dropdown";
+  const prop1 = Serializer.findProperty("selectbase", "showRefuseItem");
+  const prop2 = Serializer.findProperty("selectbase", "showDontKnowItem");
+  expect(prop1.visible).toBeFalsy();
+  let propertyGrid = new PropertyGridModelTester(question);
+  expect(propertyGrid.survey.getQuestionByName("showRefuseItem")).toBeFalsy();
+  prop1.visible = true;
+  prop2.visible = true;
+  propertyGrid = new PropertyGridModelTester(question);
+  let survey = propertyGrid.survey;
+  expect(survey.getQuestionByName("showRefuseItem")).toBeTruthy();
+  expect(survey.getQuestionByName("showDontKnowItem")).toBeTruthy();
+  expect(survey.getQuestionByName("refuseText")).toBeTruthy();
+  expect(survey.getQuestionByName("dontKnowText")).toBeTruthy();
+
+  propertyGrid = new PropertyGridModelTester(column);
+  survey = propertyGrid.survey;
+  expect(survey.getQuestionByName("showRefuseItem")).toBeTruthy();
+  expect(survey.getQuestionByName("showDontKnowItem")).toBeTruthy();
+  expect(survey.getQuestionByName("refuseText")).toBeTruthy();
+  expect(survey.getQuestionByName("dontKnowText")).toBeTruthy();
+
+  prop1.visible = false;
+  prop2.visible = false;
+});
+test("It is impossible to clear value for numeric property, bug##5395", () => {
+  const question = new QuestionImagePickerModel("q1");
+  const propertyGrid = new PropertyGridModelTester(question);
+  const imageHeightQuestion = <QuestionTextModel>propertyGrid.survey.getQuestionByName("imageHeight");
+  imageHeightQuestion.value = 100;
+  expect(question.imageHeight).toEqual(100);
+  imageHeightQuestion.value = "";
+  expect(imageHeightQuestion.value).not.toBe(0);
+  expect(imageHeightQuestion.isEmpty()).toBeTruthy();
+  expect(question.imageHeight).not.toBe(0);
+  expect(question.imageHeight).toBeFalsy();
 });

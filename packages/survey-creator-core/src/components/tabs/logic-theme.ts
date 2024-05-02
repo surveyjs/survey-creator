@@ -53,6 +53,8 @@ export var logicCss = {
     progressText: "",
     separator: "sv-hidden",
     panelWrapper: "",
+    panelsContainer: "",
+    panelWrapperList: "",
     panelWrapperInRow: "sl-panel-wrapper--in-row"
   },
   progress: "",

@@ -54,17 +54,19 @@ function getQuestionJSON() {
   };
 }
 
-ComponentCollection.Instance.add({
-  name: "boxshadowsettings",
-  showInToolbox: false,
-  internal: true,
-  questionJSON: getQuestionJSON(),
-  onCreated(question: QuestionCustomModel) {
-    question.valueFromDataCallback = (value: string | Array<Object>): Array<Object> => typeof value == "string" ? parseBoxShadow(value) : value;
-    question.valueToDataCallback = (value: string | Array<Object>): string => !!value ? (typeof value == "string" ? value : createBoxShadow(Array.isArray(value) ? value : [value])) : "";
-    (<QuestionPanelDynamicModel>question.contentQuestion).panels.forEach(p => p.questions.forEach(q => q.allowRootStyle = false));
-  },
-});
+if(!ComponentCollection.Instance.getCustomQuestionByName("boxshadowsettings")) {
+  ComponentCollection.Instance.add({
+    name: "boxshadowsettings",
+    showInToolbox: false,
+    internal: true,
+    questionJSON: getQuestionJSON(),
+    onCreated(question: QuestionCustomModel) {
+      question.valueFromDataCallback = (value: string | Array<Object>): Array<Object> => typeof value == "string" ? parseBoxShadow(value) : value;
+      question.valueToDataCallback = (value: string | Array<Object>): string => !!value ? (typeof value == "string" ? value : createBoxShadow(Array.isArray(value) ? value : [value])) : "";
+      (<QuestionPanelDynamicModel>question.contentQuestion).panels.forEach(p => p.questions.forEach(q => q.allowRootStyle = false));
+    },
+  });
+}
 
 export function updateBoxShadowSettingsJSON() {
   const config = ComponentCollection.Instance.getCustomQuestionByName("boxshadowsettings");
@@ -72,6 +74,10 @@ export function updateBoxShadowSettingsJSON() {
 }
 
 export function createBoxShadow(value: Array<any>): string {
+  if(!Array.isArray(value)) return undefined;
+  let hasValue = false;
+  value.forEach(val => { for(let key in val) { hasValue = true; } });
+  if(!hasValue) return undefined;
   return value.map((val => `${val.isInset == true ? "inset " : ""}${val.x ?? 0}px ${val.y ?? 0}px ${val.blur ?? 0}px ${val.spread ?? 0}px ${val.color ?? "#000000"}`
   )).join(", ");
 }

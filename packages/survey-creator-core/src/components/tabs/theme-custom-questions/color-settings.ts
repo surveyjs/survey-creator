@@ -20,53 +20,53 @@ function getElementsJSON() {
     }
   ];
 }
-
-ComponentCollection.Instance.add({
-  name: "colorsettings",
-  showInToolbox: false,
-  internal: true,
-  elementsJSON: getElementsJSON(),
-  onInit() {
-    Serializer.addProperties("colorsettings", [{
-      name: "choices:itemvalue[]",
-      visible: false
+if(!ComponentCollection.Instance.getCustomQuestionByName("colorsettings")) {
+  ComponentCollection.Instance.add({
+    name: "colorsettings",
+    showInToolbox: false,
+    internal: true,
+    elementsJSON: getElementsJSON(),
+    onInit() {
+      Serializer.addProperties("colorsettings", [{
+        name: "choices:itemvalue[]",
+        visible: false
+      },
+      {
+        name: "colorTitleLocation:string",
+        default: "hidden",
+        visible: false
+      },
+      {
+        name: "allowEmptyValue:boolean",
+        default: false,
+        visible: false
+      },
+      {
+        name: "colorTitle:string",
+        visible: false
+      }
+      ]);
     },
-    {
-      name: "colorTitleLocation:string",
-      default: "hidden",
-      visible: false
+    onLoaded(question) {
+      syncPropertiesFromCompositeToColor(question, "colorTitle", question.colorTitle);
+      syncPropertiesFromCompositeToColor(question, "colorTitleLocation", question.colorTitleLocation);
+      syncPropertiesFromCompositeToColor(question, "choices", question.choices);
+      syncPropertiesFromCompositeToColor(question, "allowEmptyValue", question.allowEmptyValue);
     },
-    {
-      name: "allowEmptyValue:boolean",
-      default: false,
-      visible: false
+    onPropertyChanged(question, propertyName, newValue) {
+      syncPropertiesFromCompositeToColor(question, propertyName, newValue);
     },
-    {
-      name: "colorTitle:string",
-      visible: false
+    valueToQuestion(value) {
+      return !!value ? createColor(value) : "";
+    },
+    valueFromQuestion(value) {
+      return typeof value == "string" ? parseColor(value) : value;
+    },
+    onCreated(question: QuestionCompositeModel) {
+      question.contentPanel.questions.forEach(q => q.allowRootStyle = false);
     }
-    ]);
-  },
-  onLoaded(question) {
-    syncPropertiesFromCompositeToColor(question, "colorTitle", question.colorTitle);
-    syncPropertiesFromCompositeToColor(question, "colorTitleLocation", question.colorTitleLocation);
-    syncPropertiesFromCompositeToColor(question, "choices", question.choices);
-    syncPropertiesFromCompositeToColor(question, "allowEmptyValue", question.allowEmptyValue);
-  },
-  onPropertyChanged(question, propertyName, newValue) {
-    syncPropertiesFromCompositeToColor(question, propertyName, newValue);
-  },
-  valueToQuestion(value) {
-    return !!value ? createColor(value) : "";
-  },
-  valueFromQuestion(value) {
-    return typeof value == "string" ? parseColor(value) : value;
-  },
-  onCreated(question: QuestionCompositeModel) {
-    question.contentPanel.questions.forEach(q => q.allowRootStyle = false);
-  }
-});
-
+  });
+}
 export function updateColorSettingsJSON() {
   const config = ComponentCollection.Instance.getCustomQuestionByName("colorsettings");
   config.json.elementsJSON = getElementsJSON();

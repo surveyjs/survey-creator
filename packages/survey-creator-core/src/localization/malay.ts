@@ -174,6 +174,8 @@ export var msStrings = {
     addNewTypeQuestion: "Tambah {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
     choices_Item: "Perkara ",
+    selectFile: "Pilih fail",
+    removeFile: "Mengalih keluar fail",
     lg: {
       addNewItem: "Tambah peraturan baru",
       empty_tab: "Cipta peraturan untuk menyesuaikan aliran tinjauan.",
@@ -320,6 +322,7 @@ export var msStrings = {
       signatureAutoScaleEnabled: "Menskalakan kawasan tandatangan secara automatik",
       showPlaceholder: "Menunjukkan ruang letak",
       placeholder: "Teks ruang letak",
+      placeholderReadOnly: "Teks ruang letak dalam mod baca sahaja atau pratonton",
       allowClear: "Tunjukkan butang Kosongkan dalam kawasan tandatangan",
       penMinWidth: "Lebar pen minimum",
       penMaxWidth: "Lebar pen maksimum",
@@ -494,6 +497,7 @@ export var msStrings = {
     descriptionPlaceholder: "Masukkan perihalan",
     surveyDescriptionPlaceholder: "Masukkan perihalan tinjauan",
     pageDescriptionPlaceholder: "Masukkan perihalan halaman",
+    textWrapEnabled: "Pilihan balut",
     showOtherItem: "Ada item lain",
     otherText: "Teks item lain",
     showNoneItem: "Tiada item",
@@ -654,6 +658,7 @@ export var msStrings = {
     labelTrue: "Label \"Benar\"",
     labelFalse: "Label \"Palsu\"",
     allowClear: "Tunjukkan kapsyen pilihan",
+    searchMode: "Mod Carian",
     displayStyle: "Gaya paparan nilai",
     format: "Rentetan yang diformatkan",
     maximumFractionDigits: "Nombor pecahan maksimum",
@@ -1039,8 +1044,9 @@ export var msStrings = {
     },
     showProgressBar: {
       off: "Tersembunyi",
-      aboveHeader: "Di atas pengepala",
-      belowHeader: "Di bawah pengepala"
+      topbottom: "atas dan bawah",
+      aboveheader: "Di atas pengepala",
+      belowheader: "Di bawah pengepala"
     },
     sum: "Jumlah",
     count: "Kiraan",
@@ -1050,8 +1056,7 @@ export var msStrings = {
     searchMode: {
       contains: "Mengandungi",
       startsWith: "Bermula dengan"
-    },
-    textWrapEnabled: "Pilihan balut"
+    }
   },
   // Operators
   op: {
@@ -1201,10 +1206,14 @@ export var msStrings = {
       imageHeight: "Melaraskan ketinggian imej dalam hasil tinjauan.",
       imageWidth: "Melaraskan lebar imej dalam hasil tinjauan."
     },
+    image: {
+      contentMode: "Pilihan \"Auto\" secara automatik menentukan mod yang sesuai untuk paparan - Imej, Video atau YouTube - berdasarkan URL sumber yang disediakan."
+    },
     imagepicker: {
       imageHeight: "Mengatasi nilai ketinggian minimum dan maksimum.",
       imageWidth: "Mengatasi nilai lebar minimum dan maksimum.",
-      choices: "\"Nilai\" berfungsi sebagai ID item yang digunakan dalam peraturan bersyarat; \"Teks\" dipaparkan kepada responden."
+      choices: "\"Nilai\" berfungsi sebagai ID item yang digunakan dalam peraturan bersyarat; \"Teks\" dipaparkan kepada responden.",
+      contentMode: "Pilih antara \"Imej\" dan \"Video\" untuk menetapkan mod kandungan pemilih media. Jika \"Imej\" dipilih, pastikan semua pilihan yang disediakan adalah fail imej dalam format berikut: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Begitu juga, jika \"Video\" dipilih, pastikan semua pilihan adalah pautan langsung ke fail video dalam format berikut: MP4, MOV, WMV, FLV, AVI, MKV. Sila ambil perhatian bahawa pautan YouTube tidak disokong untuk pilihan video."
     },
     text: {
       size: "Seting ini hanya mengubah saiz medan input dan tidak mempengaruhi lebar kotak soalan. Untuk mengehadkan panjang input yang diterima, pergi ke <b>Pengesahihan → Had aksara maksimum</b>."
@@ -1316,7 +1325,6 @@ export var msStrings = {
     dataList: "Masukkan senarai pilihan yang akan dicadangkan kepada responden semasa input.",
     itemSize: "Seting hanya mengubah saiz medan input dan tidak mempengaruhi lebar kotak soalan.",
     itemTitleWidth: "Mengesetkan lebar yang konsisten untuk semua label item dalam piksel",
-    contentMode: "Pilihan \"Auto\" secara automatik menentukan mod yang sesuai untuk paparan - Imej, Video atau YouTube - berdasarkan URL sumber yang disediakan.",
     altText: "Berfungsi sebagai pengganti apabila imej tidak boleh dipaparkan pada peranti pengguna dan untuk tujuan kebolehcapaian.",
     rateColorMode: "Mentakrifkan warna emoji yang dipilih apabila jenis ikon Penarafan ditetapkan kepada \"Smileys\". Pilih antara: \"Lalai\" - emoji yang dipilih muncul dalam warna tinjauan lalai; \"Skala\" - emoji yang dipilih mewarisi warna dari skala penarafan.",
     expression: {
@@ -1339,7 +1347,7 @@ export var msStrings = {
       pattern: "Corak boleh mengandungi literal rentetan dan ruang letak berikut: '9' - untuk digit; 'a' - untuk huruf besar atau kecil; '#' - untuk digit atau huruf besar atau huruf kecil. Gunakan tindak balas '\\' untuk melarikan diri daripada watak."
     },
     datetimemask: {
-      pattern: "Corak boleh mengandungi aksara pemisah dan ruang letak berikut: 'm' - untuk nombor bulan; 'mm' - untuk nombor bulan, dengan sifar utama untuk nilai satu digit; 'd' - untuk hari dalam bulan; 'dd' - untuk hari dalam bulan, dengan sifar utama untuk nilai satu digit; 'yy' - untuk dua digit terakhir tahun ini; 'yyyy' - untuk tahun empat angka."
+      pattern: "Corak boleh mengandungi aksara pemisah dan ruang letak berikut:<br>'m' - Nombor bulan.<br>'mm' - Nombor bulan, dengan sifar awalan untuk nilai satu digit. <br>'d' - Hari dalam bulan. <br>'dd' - Hari dalam bulan, dengan sifar utama untuk nilai satu digit. <br>'yy' - Dua digit terakhir tahun ini. <br>'yyyy' - Tahun empat angka. <br>'H' - Jam dalam format 24 jam. <br>'HH' - Jam dalam format 24 jam, dengan sifar utama untuk nilai satu digit. <br>'h' - Jam dalam format 12 jam. <br>'hh' - Jam dalam format 12 jam, dengan sifar utama untuk nilai satu digit. <br>'MM' - Minit. <br>'ss' - Saat. <br>'TT' - Tempoh jam 12 jam dalam kes atas (AM / PM). <br>'TT' - Tempoh jam 12 jam dalam kes yang lebih rendah (AM / PM)."
     },
     numericmask: {
       decimalSeparator: "Simbol yang digunakan untuk memisahkan bahagian pecahan daripada bahagian integer bagi nombor yang dipaparkan.",
@@ -2274,8 +2282,8 @@ editorLocalization.locales["ms"] = msStrings;
 // totalDisplayStyle.date: "Date" => "Tarikh"
 // rowsOrder.initial: "Original" => "Asal"
 // questionsOrder.initial: "Original" => "Asal"
-// showProgressBar.aboveHeader: "Above the header" => "Di atas pengepala"
-// showProgressBar.belowHeader: "Below the header" => "Di bawah pengepala"
+// showProgressBar.aboveheader: "Above the header" => "Di atas pengepala"
+// showProgressBar.belowheader: "Below the header" => "Di bawah pengepala"
 // pv.sum: "Sum" => "Jumlah"
 // pv.count: "Count" => "Kiraan"
 // pv.min: "Min" => "Min"
@@ -2486,3 +2494,10 @@ editorLocalization.locales["ms"] = msStrings;
 // maskTypes.none: "None" => "Tiada"
 // itemvalue@rows.visibleIf: "Make the row visible if" => "Jadikan baris kelihatan jika"
 // itemvalue@rows.enableIf: "Make the row editable if" => "Jadikan baris boleh diedit jika"
+// signaturepad.placeholderReadOnly: "Placeholder text in read-only or preview mode" => "Teks ruang letak dalam mod baca sahaja atau pratonton"
+// pe.textWrapEnabled: "Wrap choices" => "Pilihan balut"
+// image.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "Pilihan \"Auto\" secara automatik menentukan mod yang sesuai untuk paparan - Imej, Video atau YouTube - berdasarkan URL sumber yang disediakan."
+// imagepicker.contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options." => "Pilih antara \"Imej\" dan \"Video\" untuk menetapkan mod kandungan pemilih media. Jika \"Imej\" dipilih, pastikan semua pilihan yang disediakan adalah fail imej dalam format berikut: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Begitu juga, jika \"Video\" dipilih, pastikan semua pilihan adalah pautan langsung ke fail video dalam format berikut: MP4, MOV, WMV, FLV, AVI, MKV. Sila ambil perhatian bahawa pautan YouTube tidak disokong untuk pilihan video."
+// ed.selectFile: "Select a file" => "Pilih fail"
+// ed.removeFile: "Remove the file" => "Mengalih keluar fail"
+// pe.searchMode: "Search Mode" => "Mod Carian"

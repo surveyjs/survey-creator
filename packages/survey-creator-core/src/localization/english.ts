@@ -1,4 +1,4 @@
-// Please, uncomment the line below if you create a custom dictionary
+// Uncomment the line below if you create a custom dictionary
 // import { editorLocalization } from "survey-creator-core";
 
 export var enStrings = {
@@ -140,7 +140,7 @@ export var enStrings = {
     translationShowAllStrings: "All Strings",
     translationShowUsedStringsOnly: "Used Strings Only",
     translationShowAllPages: "All Pages",
-    translationNoStrings: "No strings to translate. Please, change the filter.",
+    translationNoStrings: "No strings to translate. Please change the filter.",
     translationExportToSCVButton: "Export to CSV",
     translationImportFromSCVButton: "Import from CSV",
     translateUsigAI: "Auto-translate All",
@@ -176,22 +176,24 @@ export var enStrings = {
     addNewTypeQuestion: "Add {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
     choices_Item: "Item ",
+    selectFile: "Select a file",
+    removeFile: "Remove the file",
     lg: {
       addNewItem: "Add New Rule",
       empty_tab: "Create a rule to customize the flow of the survey.",
-      page_visibilityName: "Show (hide) page",
-      page_enableName: "Enable (disable) page",
+      page_visibilityName: "Show/hide page",
+      page_enableName: "Enable/disable page",
       page_requireName: "Make page required",
-      panel_visibilityName: "Show (hide) panel",
-      panel_enableName: "Enable (disable) panel",
-      panel_requireName: "Make page required",
-      question_visibilityName: "Show (hide) question",
-      question_enableName: "Enable (disable) question",
+      panel_visibilityName: "Show/hide panel",
+      panel_enableName: "Enable/disable panel",
+      panel_requireName: "Make panel required",
+      question_visibilityName: "Show/hide question",
+      question_enableName: "Enable/disable question",
       question_requireName: "Make question required",
       question_resetValueName: "Reset question value",
       question_setValueName: "Set question value",
-      column_visibilityName: "Show (hide) column",
-      column_enableName: "Enable (disable) column",
+      column_visibilityName: "Show/hide column",
+      column_enableName: "Enable/disable column",
       column_requireName: "Make column required",
       column_resetValueName: "Reset column value",
       column_setValueName: "Set column value",
@@ -201,18 +203,18 @@ export var enStrings = {
       trigger_skipName: "Skip to question",
       trigger_runExpressionName: "Run expression",
       completedHtmlOnConditionName: "Set \"Thank You\" page markup",
-      page_visibilityDescription: "Make the page visible when the logic expression returns true. Otherwise keep it invisible.",
-      panel_visibilityDescription: "Make the panel visible when the logic expression returns true. Otherwise keep it invisible.",
-      panel_enableDescription: "Make the panel, and all elements inside it, enable when the logic expression returns true. Otherwise keep them disabled.",
-      question_visibilityDescription: "Make the question visible when the logic expression returns true. Otherwise keep it invisible.",
-      question_enableDescription: "Make the question enable when the logic expression returns true. Otherwise keep it disabled.",
-      question_requireDescription: "Question becomes required when the logic expression returns true.",
-      trigger_completeDescription: "When the logic expression returns true then the survey becomes completed and an end-user see the 'Thank you page'.",
-      trigger_setvalueDescription: "When question values, that are used in the logic expression, are changed and the logic expression returns true, then the value is set to the selected question.",
-      trigger_copyvalueDescription: "When question values, that are used in the logic expression, are changed and the logic expression returns true, then the value of one selected question is copied to another selected question.",
-      trigger_skipDescription: "When the logic expression returns true then the survey skip to / focus the selected question.",
-      trigger_runExpressionDescription: "When the logic expression returns true, then the custom expression is performed. You may optionally set this expression result into the selected question",
-      completedHtmlOnConditionDescription: "If the logic expression returns true, then the default text for the 'Thank you page' is changed to the given one.",
+      page_visibilityDescription: "Make the page visible when the logical expression evaluates to true. Otherwise, keep the page invisible.",
+      panel_visibilityDescription: "Make the page visible when the logical expression evaluates to true. Otherwise, keep the panel invisible.",
+      panel_enableDescription: "Make the panel and all elements inside it enabled when the logical expression evaluates to true. Otherwise, keep them disabled.",
+      question_visibilityDescription: "Make the question visible when the logical expression evaluates to true. Otherwise, keep the question invisible.",
+      question_enableDescription: "Make the question enabled when the logical expression evaluates to true. Otherwise, keep the question disabled.",
+      question_requireDescription: "Question becomes required when the logical expression evaluates to true.",
+      trigger_completeDescription: "When the logical expression evaluates to true, the survey ends, and the respondent sees the \"Thank you\" page.",
+      trigger_setvalueDescription: "When question values used in the logical expression are changed, and the expression evaluates to true, the specified value is assigned to the selected question.",
+      trigger_copyvalueDescription: "When question values used in the logical expression are changed, and the expression evaluates to true, the value of the selected question is copied to another question.",
+      trigger_skipDescription: "When the logical expression evaluates to true, the survey focuses/jumps to the selected question.",
+      trigger_runExpressionDescription: "When the logical expression evaluates to true, the survey evaluates another expression. Optionally, the result of the latter expression can be assigned as a value to the selected question",
+      completedHtmlOnConditionDescription: "If the logical expression evaluates to true, the \"Thank You\" page displays the specified content.",
       itemExpressionText: "When expression: '{0}' returns true", //{0} - the expression
       itemEmptyExpressionText: "New rule",
       page_visibilityText: "make page {0} visible", //{0} page name
@@ -236,7 +238,7 @@ export var enStrings = {
       trigger_skipText: "survey skip to the question {0}", //{0} question name
       trigger_runExpressionText1: "run expression: '{0}'", //{0} the expression
       trigger_runExpressionText2: " and set its result into question: {0}", //{0} question name
-      completedHtmlOnConditionText: "show custom text for the 'Thank you page'.",
+      completedHtmlOnConditionText: "show custom text for the \"Thank You\" page.",
       showAllQuestions: "All Questions",
       showAllActionTypes: "All Action Types",
       conditions: "Condition(s)",
@@ -247,8 +249,8 @@ export var enStrings = {
       addNewAction: "Add Action",
       selectedActionCaption: "Select action...",
       expressionInvalid: "The logic expression is empty or invalid. Please correct it.",
-      noActionError: "Please, add at least one action.",
-      actionInvalid: "Please, fix problems in your action(s).",
+      noActionError: "Please add at least one action.",
+      actionInvalid: "Please fix issues in your action(s).",
       uncompletedRule_title: "Logical rules are incomplete",
       uncompletedRule_text: "You have not completed some of the logical rules. If you leave the tab now, the changes will be lost. Do you still want to leave the tab without completing the changes?",
       uncompletedRule_apply: "Yes",
@@ -334,6 +336,7 @@ export var enStrings = {
       signatureAutoScaleEnabled: "Auto-scale the signature area",
       showPlaceholder: "Show a placeholder within signature area",
       placeholder: "Placeholder text",
+      placeholderReadOnly: "Placeholder text in read-only or preview mode",
       allowClear: "Show the Clear button within signature area",
       penMinWidth: "Minimum stroke width",
       penMaxWidth: "Maximum stroke width",
@@ -499,7 +502,7 @@ export var enStrings = {
     url: "URL",
     path: "Path to data",
     choicesbyurl: {
-      url: "Web service's URL",
+      url: "Web service URL",
       valueName: "Get value to store from the following property"
     },
     titleName: "Get value to display from the following property",
@@ -511,6 +514,7 @@ export var enStrings = {
     descriptionPlaceholder: "Description",
     surveyDescriptionPlaceholder: "Description",
     pageDescriptionPlaceholder: "Description",
+    textWrapEnabled: "Wrap choices",
     showOtherItem: "Enable the \"Other\" option",
     otherText: "Rename the \"Other\" option",
     showNoneItem: "Enable the \"None\" option",
@@ -592,10 +596,10 @@ export var enStrings = {
     previewText: "\"Review Answers\" button text",
     editText: "\"Edit Answer\" button text",
     startSurveyText: "\"Start Survey\" button text",
-    showNavigationButtons: "Show / hide navigation buttons",
-    showPrevButton: "Show the Previous Page button",
+    showNavigationButtons: "Show/hide navigation buttons",
+    showPrevButton: "Show the \"Previous Page\" button",
     firstPageIsStarted: "First page is a start page",
-    showCompletedPage: "Show the Thank You page",
+    showCompletedPage: "Show the \"Thank You\" page",
     goNextPageAutomatic: "Auto-advance to the next page",
     allowCompleteSurveyAutomatic: "Complete the survey automatically",
     showProgressBar: "Progress bar alignment",
@@ -663,14 +667,15 @@ export var enStrings = {
     navigateToUrl: "Redirect to an external link after submission",
     navigateToUrlOnCondition: "Dynamic external link",
     completedBeforeHtml: "Markup to show if the user already filled out this survey",
-    completedHtml: "Thank You page markup",
-    completedHtmlOnCondition: "Dynamic Thank You page markup",
+    completedHtml: "\"Thank You\" page markup",
+    completedHtmlOnCondition: "Dynamic \"Thank You\" page markup",
     loadingHtml: "Markup to show while survey model is loading",
     commentText: "Comment area text",
     autocomplete: "Autocomplete type",
     labelTrue: "Label for \"True\"",
     labelFalse: "Label for \"False\"",
     allowClear: "Show the Clear button",
+    searchMode: "Search Mode",
     displayStyle: "Display format",
     format: "Formatted string",
     maximumFractionDigits: "Maximum fractional digits",
@@ -795,7 +800,7 @@ export var enStrings = {
       data: "Data",
       validation: "Validation",
       cells: "Individual Cell Texts",
-      showOnCompleted: "Thank You Page",
+      showOnCompleted: "\"Thank You\" Page",
       logo: "Logo in the Survey Header",
       slider: "Slider",
       expression: "Expression",
@@ -811,7 +816,7 @@ export var enStrings = {
     innerIndent: "Increase the inner indent",
     defaultValueFromLastRow: "Use answers from the last row as default",
     defaultValueFromLastPanel: "Use answers from the last panel as default",
-    enterNewValue: "Please, enter the value.",
+    enterNewValue: "Please enter a value.",
     noquestions: "There are no questions in the survey.",
     createtrigger: "Please create a trigger",
     titleKeyboardAdornerTip: "Press enter button to edit",
@@ -819,7 +824,7 @@ export var enStrings = {
     triggerOn: "On ",
     triggerMakePagesVisible: "Make pages visible",
     triggerMakeQuestionsVisible: "Make elements visible",
-    triggerCompleteText: "Complete the survey if succeed.",
+    triggerCompleteText: "Complete the survey if successful.",
     triggerNotSet: "The trigger is not set",
     triggerRunIf: "Run if",
     triggerSetToName: "Change value of: ",
@@ -830,7 +835,7 @@ export var enStrings = {
     triggerIsVariable: "Do not put the variable into the survey result.",
     triggerRunExpressionEmpty: "Please enter a valid expression",
     emptyExpressionPlaceHolder: "Type expression here...",
-    noFile: "No file choosen",
+    noFile: "No file chosen",
     clearIfInvisible: "Clear hidden question values",
     valuePropertyName: "Store values in the following property",
     searchEnabled: "Enable search-as-you-type",
@@ -1056,8 +1061,9 @@ export var enStrings = {
     },
     showProgressBar: {
       off: "Hidden",
-      aboveHeader: "Above the header",
-      belowHeader: "Below the header"
+      topbottom: "Top and bottom",
+      aboveheader: "Above the header",
+      belowheader: "Below the header"
     },
     sum: "Sum",
     count: "Count",
@@ -1068,7 +1074,6 @@ export var enStrings = {
       contains: "Contains",
       startsWith: "Starts with"
     },
-    textWrapEnabled: "Wrap choices"
   },
   // Operators
   op: {
@@ -1137,7 +1142,7 @@ export var enStrings = {
       pattern: "Ex.: +1(999)-999-99-99"
     },
     datetimemask: {
-      pattern: "Ex.: mm/dd/yyyy"
+      pattern: "Ex.: mm/dd/yyyy HH:MM:ss"
     },
     currencymask: {
       prefix: "Ex.: $",
@@ -1291,7 +1296,7 @@ export var enStrings = {
     imageFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio.",
     autoGrow: "Gradually increases the height of the input field as data is being entered. Overrides the \"Input field height (in lines)\" setting.",
     allowResize: "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field.",
-    maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the Thank You page.",
+    maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the \"Thank You\" page.",
     maxTimeToFinishPage: "A time interval in seconds after which the survey auto-advances to the next page.",
     page: {
       maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the next page.",
@@ -1335,7 +1340,7 @@ export var enStrings = {
     searchEnabled: "Select if you want to update the drop-down menu contents to match the search query that a user is typing in the input field.",
     valueTrue: "A value to save in survey results when respondents give a positive answer.",
     valueFalse: "A value to save in survey results when respondents give a negative answer.",
-    showPreview: "It's not recommended to disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded.",
+    showPreview: "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded.",
     needConfirmRemoveFile: "Triggers a prompt asking to confirm the file deletion.",
     selectToRankEnabled: "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area.",
     dataList: "Enter a list of choices that will be suggested to the respondent during input.",
@@ -1364,7 +1369,7 @@ export var enStrings = {
       pattern: "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character.",
     },
     datetimemask: {
-      pattern: "The pattern can contain separator characters and the following placeholders: `m` - for month number; `mm` - for month number, with leading zero for single-digit values; `d` - for day of the month; `dd` - for day of the month, with leading zero for single-digit values; `yy` - for the last two digits of the year; `yyyy` - for a four-digit year.",
+      pattern: "The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year.<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in upper case (AM/PM).<br>`tt` - 12-hour clock period in lower case (am/pm).",
     },
     numericmask: {
       decimalSeparator: "A symbol used to separate the fractional part from the integer part of a displayed number.",
@@ -1441,7 +1446,7 @@ export var enStrings = {
     itemTitleWidth: "Item label width (in px)",
     elements: "Elements", // Auto-generated string
     content: "Content", // Auto-generated string
-    navigationButtonsVisibility: "Show / hide navigation buttons",
+    navigationButtonsVisibility: "Show/hide navigation buttons",
     navigationTitle: "Navigation title", // Auto-generated string
     navigationDescription: "Navigation description", // Auto-generated string
     longTap: "Long tap", // Auto-generated string

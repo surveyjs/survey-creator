@@ -174,6 +174,8 @@ export var turkishStrings = {
     addNewTypeQuestion: "{0} ekle", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
     choices_Item: "Madde ",
+    selectFile: "Bir dosya seçin",
+    removeFile: "Dosyayı kaldır",
     lg: {
       addNewItem: "Yeni Kural Ekle",
       empty_tab: "Anketin akışını özelleştirmek için bir kural oluşturun.",
@@ -320,6 +322,7 @@ export var turkishStrings = {
       signatureAutoScaleEnabled: "İmza alanını otomatik ölçeklendirme",
       showPlaceholder: "Yer tutucuyu gösterme",
       placeholder: "Yer tutucu metin",
+      placeholderReadOnly: "Salt okunur veya önizleme modunda yer tutucu metin",
       allowClear: "İmza alanı içinde Temizle düğmesini gösterme",
       penMinWidth: "Minimum kalem genişliği",
       penMaxWidth: "Maksimum kalem genişliği",
@@ -494,6 +497,7 @@ export var turkishStrings = {
     descriptionPlaceholder: "Bir açıklama giriniz",
     surveyDescriptionPlaceholder: "Anket açıklaması giriniz",
     pageDescriptionPlaceholder: "Sayfa açıklaması giriniz",
+    textWrapEnabled: "Sarma seçenekleri",
     showOtherItem: "Başka bir öğeye sahip",
     otherText: "Diğer eleman metni",
     showNoneItem: "Hiçbir elemana sahip değil",
@@ -654,6 +658,7 @@ export var turkishStrings = {
     labelTrue: "\"Doğru\" etiketi",
     labelFalse: "\"Yanlış\" etiketi",
     allowClear: "Seçeneklerin başlığını göster",
+    searchMode: "Arama Modu",
     displayStyle: "Değer görüntüleme stili",
     format: "Biçimlendirilmiş dize",
     maximumFractionDigits: "Maksimum kesirli basamaklar",
@@ -1039,8 +1044,9 @@ export var turkishStrings = {
     },
     showProgressBar: {
       off: "Gizli",
-      aboveHeader: "Başlığın üstünde",
-      belowHeader: "Başlığın altında"
+      topbottom: "Üst ve alt",
+      aboveheader: "Başlığın üstünde",
+      belowheader: "Başlığın altında"
     },
     sum: "Toplam",
     count: "Saymak",
@@ -1050,8 +1056,7 @@ export var turkishStrings = {
     searchMode: {
       contains: "Içerir",
       startsWith: "İle başlar"
-    },
-    textWrapEnabled: "Sarma seçenekleri"
+    }
   },
   // Operators
   op: {
@@ -1201,10 +1206,14 @@ export var turkishStrings = {
       imageHeight: "Anket sonuçlarındaki görüntünün yüksekliğini ayarlar.",
       imageWidth: "Anket sonuçlarındaki görüntünün genişliğini ayarlar."
     },
+    image: {
+      contentMode: "\"Otomatik\" seçeneği, sağlanan kaynak URL'ye göre görüntüleme için uygun modu (Resim, Video veya YouTube) otomatik olarak belirler."
+    },
     imagepicker: {
       imageHeight: "Minimum ve maksimum yükseklik değerlerini geçersiz kılar.",
       imageWidth: "Minimum ve maksimum genişlik değerlerini geçersiz kılar.",
-      choices: "\"Değer\", koşullu kurallarda kullanılan bir öğe kimliği görevi görür; Yanıtlayanlara \"Metin\" gösterilir."
+      choices: "\"Değer\", koşullu kurallarda kullanılan bir öğe kimliği görevi görür; Yanıtlayanlara \"Metin\" gösterilir.",
+      contentMode: "Medya seçicinin içerik modunu ayarlamak için \"Görüntü\" ve \"Video\" arasında seçim yapın. \"Resim\" seçilirse, sağlanan tüm seçeneklerin şu biçimlerdeki resim dosyaları olduğundan emin olun: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Benzer şekilde, \"Video\" seçilirse, tüm seçeneklerin aşağıdaki formatlardaki video dosyalarına doğrudan bağlantılar olduğundan emin olun: MP4, MOV, WMV, FLV, AVI, MKV. Video seçenekleri için YouTube bağlantılarının desteklenmediğini lütfen unutmayın."
     },
     text: {
       size: "Bu ayar yalnızca giriş alanını yeniden boyutlandırır ve soru kutusunun genişliğini etkilemez. Kabul edilen giriş uzunluğunu sınırlamak için <b>Doğrulama → Maksimum karakter sınırı'na</b> gidin."
@@ -1316,7 +1325,6 @@ export var turkishStrings = {
     dataList: "Giriş sırasında yanıtlayana önerilecek seçeneklerin bir listesini girin.",
     itemSize: "Bu ayar yalnızca giriş alanlarını yeniden boyutlandırır ve soru kutusunun genişliğini etkilemez.",
     itemTitleWidth: "Piksel cinsinden tüm öğe etiketleri için tutarlı genişlik ayarlar",
-    contentMode: "\"Otomatik\" seçeneği, sağlanan kaynak URL'ye göre görüntüleme için uygun modu (Resim, Video veya YouTube) otomatik olarak belirler.",
     altText: "Görüntü, kullanıcının cihazında görüntülenemediğinde ve erişilebilirlik amacıyla yedek olarak görev yapar.",
     rateColorMode: "Derecelendirme simgesi türü \"Suratlar\" olarak ayarlandığında seçilen emojinin rengini tanımlar. Şunlar arasından seçim yapın: \"Varsayılan\" - seçilen emoji varsayılan anket renginde görünür; \"Ölçek\" - seçilen emoji, derecelendirme ölçeğinden rengi devralır.",
     expression: {
@@ -1339,7 +1347,7 @@ export var turkishStrings = {
       pattern: "Desen, dize değişmez değerlerini ve aşağıdaki yer tutucuları içerebilir: '9' - bir rakam için; 'a' - büyük veya küçük harf için; '#' - bir rakam veya büyük veya küçük harf için. Bir karakterden kaçmak için ters eğik çizgi '\\' kullanın."
     },
     datetimemask: {
-      pattern: "Desen, ayırıcı karakterler ve aşağıdaki yer tutucuları içerebilir: 'm' - ay numarası için; 'mm' - ay numarası için, tek basamaklı değerler için başında sıfır var; 'd' - ayın günü için; 'dd' - ayın günü için, tek basamaklı değerler için başında sıfır var; 'yy' - yılın son iki hanesi için; 'yyyy' - dört basamaklı bir yıl için."
+      pattern: "Desen, ayırıcı karakterler ve aşağıdaki yer tutucuları içerebilir:<br>'m' - Ay numarası.<br>'mm' - Tek basamaklı değerler için başında sıfır olan ay numarası. <br>'d' - Ayın günü. <br>'dd' - Tek basamaklı değerler için başında sıfır olan ayın günü. <br>'yy' - Yılın son iki basamağı. <br>'yyyy' - Dört basamaklı yıl. <br>'H' - 24 saat biçimindeki saatler. <br>'SS' - 24 saat biçiminde, tek basamaklı değerler için başında sıfır olan saatler. <br>'h' - 12 saat biçimindeki saatler. <br>'ss' - 12 saat biçiminde, tek basamaklı değerler için başında sıfır olan saatler. <br>'MM' - Dakika. <br>'ss' - Saniye. <br>'TT' - büyük harfle 12 saatlik zaman dilimi (/PM). <br>'tt' - küçük harfle 12 saatlik zaman dilimi (/pm)."
     },
     numericmask: {
       decimalSeparator: "Görüntülenen bir sayının kesirli kısmını tamsayı kısmından ayırmak için kullanılan bir sembol.",
@@ -2316,8 +2324,8 @@ editorLocalization.locales["tr"] = turkishStrings;
 // totalDisplayStyle.date: "Date" => "Tarih"
 // rowsOrder.initial: "Original" => "Özgün"
 // questionsOrder.initial: "Original" => "Özgün"
-// showProgressBar.aboveHeader: "Above the header" => "Başlığın üstünde"
-// showProgressBar.belowHeader: "Below the header" => "Başlığın altında"
+// showProgressBar.aboveheader: "Above the header" => "Başlığın üstünde"
+// showProgressBar.belowheader: "Below the header" => "Başlığın altında"
 // pv.sum: "Sum" => "Toplam"
 // pv.count: "Count" => "Saymak"
 // pv.min: "Min" => "Min"
@@ -2528,3 +2536,10 @@ editorLocalization.locales["tr"] = turkishStrings;
 // maskTypes.none: "None" => "Hiç kimse"
 // itemvalue@rows.visibleIf: "Make the row visible if" => "Aşağıdaki durumlarda satırı görünür hale getirin"
 // itemvalue@rows.enableIf: "Make the row editable if" => "Aşağıdaki durumlarda satırı düzenlenebilir hale getirin"
+// signaturepad.placeholderReadOnly: "Placeholder text in read-only or preview mode" => "Salt okunur veya önizleme modunda yer tutucu metin"
+// pe.textWrapEnabled: "Wrap choices" => "Sarma seçenekleri"
+// image.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "\"Otomatik\" seçeneği, sağlanan kaynak URL'ye göre görüntüleme için uygun modu (Resim, Video veya YouTube) otomatik olarak belirler."
+// imagepicker.contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options." => "Medya seçicinin içerik modunu ayarlamak için \"Görüntü\" ve \"Video\" arasında seçim yapın. \"Resim\" seçilirse, sağlanan tüm seçeneklerin şu biçimlerdeki resim dosyaları olduğundan emin olun: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Benzer şekilde, \"Video\" seçilirse, tüm seçeneklerin aşağıdaki formatlardaki video dosyalarına doğrudan bağlantılar olduğundan emin olun: MP4, MOV, WMV, FLV, AVI, MKV. Video seçenekleri için YouTube bağlantılarının desteklenmediğini lütfen unutmayın."
+// ed.selectFile: "Select a file" => "Bir dosya seçin"
+// ed.removeFile: "Remove the file" => "Dosyayı kaldır"
+// pe.searchMode: "Search Mode" => "Arama Modu"

@@ -174,6 +174,8 @@ export var huStrings = {
     addNewTypeQuestion: "{0} hozzáadása", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGÓ]",
     choices_Item: "Cikk ",
+    selectFile: "Válasszon ki egy fájlt",
+    removeFile: "A fájl eltávolítása",
     lg: {
       addNewItem: "Új szabály hozzáadása",
       empty_tab: "Hozzon létre egy szabályt a felmérés folyamatának testreszabásához.",
@@ -320,6 +322,7 @@ export var huStrings = {
       signatureAutoScaleEnabled: "Az aláírási terület automatikus méretezése",
       showPlaceholder: "A helyőrző megjelenítése",
       placeholder: "Helyőrző szöveg",
+      placeholderReadOnly: "Helyőrző szöveg írásvédett vagy előnézeti módban",
       allowClear: "A Törlés gomb megjelenítése az aláírási területen belül",
       penMinWidth: "Tollszélesség minimális",
       penMaxWidth: "Maximális tollszélesség",
@@ -494,6 +497,7 @@ export var huStrings = {
     descriptionPlaceholder: "Leírás: __________",
     surveyDescriptionPlaceholder: "Leírás: __________",
     pageDescriptionPlaceholder: "Leírás: __________",
+    textWrapEnabled: "Tördelési lehetőségek",
     showOtherItem: "Rendelkezik egyéb értékkel",
     otherText: "Az egyéb érték szövege",
     showNoneItem: "A Nincs lehetőség engedélyezése",
@@ -654,6 +658,7 @@ export var huStrings = {
     labelTrue: "\"Igaz\" címke",
     labelFalse: "\"Hamis\" címke",
     allowClear: "A Törlés gomb megjelenítése",
+    searchMode: "Keresési mód",
     displayStyle: "Értékmegjelenítési stílus",
     format: "Formázott karakterlánc",
     maximumFractionDigits: "Tört számjegyek maximális száma",
@@ -1039,8 +1044,9 @@ export var huStrings = {
     },
     showProgressBar: {
       off: "Rejtett",
-      aboveHeader: "A fejléc felett",
-      belowHeader: "A fejléc alatt"
+      topbottom: "fent és lent",
+      aboveheader: "A fejléc felett",
+      belowheader: "A fejléc alatt"
     },
     sum: "Összeg",
     count: "Gróf",
@@ -1050,8 +1056,7 @@ export var huStrings = {
     searchMode: {
       contains: "Tartalmaz",
       startsWith: "Ezzel kezdődik"
-    },
-    textWrapEnabled: "Tördelési lehetőségek"
+    }
   },
   // Operators
   op: {
@@ -1201,10 +1206,14 @@ export var huStrings = {
       imageHeight: "Beállítja a kép magasságát a felmérés eredményeiben.",
       imageWidth: "Beállítja a kép szélességét a felmérés eredményeiben."
     },
+    image: {
+      contentMode: "Az \"Automatikus\" opció automatikusan meghatározza a megjelenítéshez megfelelő módot - Kép, Videó vagy YouTube - a megadott forrás URL alapján."
+    },
     imagepicker: {
       imageHeight: "Felülbírálja a minimális és maximális magassági értékeket.",
       imageWidth: "Felülbírálja a minimális és maximális szélességi értékeket.",
-      choices: "Az \"érték\" a feltételes szabályokban használt elemazonosítóként szolgál; A \"Szöveg\" felirat jelenik meg a válaszadók számára."
+      choices: "Az \"érték\" a feltételes szabályokban használt elemazonosítóként szolgál; A \"Szöveg\" felirat jelenik meg a válaszadók számára.",
+      contentMode: "Válasszon a \"Kép\" és a \"Videó\" között a médiaválasztó tartalommódjának beállításához. Ha a \"Kép\" van kiválasztva, győződjön meg arról, hogy az összes rendelkezésre álló opció a következő formátumú képfájlok: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Hasonlóképpen, ha a \"Video\" van kiválasztva, győződjön meg arról, hogy az összes opció közvetlen link a következő formátumú videofájlokhoz: MP4, MOV, WMV, FLV, AVI, MKV. Felhívjuk figyelmét, hogy a YouTube-linkek nem támogatottak a videóbeállításoknál."
     },
     text: {
       size: "Ez a beállítás csak a beviteli mezőt méretezi át, és nincs hatással a kérdésmező szélességére. Az elfogadott bemeneti hossz korlátozásához lépjen az <b>Érvényesítés → Maximális karakterkorlát</b> elemre."
@@ -1316,7 +1325,6 @@ export var huStrings = {
     dataList: "Adja meg azoknak a választási lehetőségeknek a listáját, amelyeket a rendszer javasolni fog a válaszadónak a bevitel során.",
     itemSize: "A beállítás csak a beviteli mezőket méretezi át, és nincs hatással a kérdésmező szélességére.",
     itemTitleWidth: "Konzisztens szélességet állít be az összes elemfelirathoz képpontban",
-    contentMode: "Az \"Automatikus\" opció automatikusan meghatározza a megjelenítéshez megfelelő módot - Kép, Videó vagy YouTube - a megadott forrás URL alapján.",
     altText: "Helyettesítőként szolgál, ha a kép nem jeleníthető meg a felhasználó eszközén, valamint kisegítő lehetőségek céljából.",
     rateColorMode: "Meghatározza a kiválasztott hangulatjel színét, ha az Értékelés ikon típusa \"Hangulatjelek\". Válasszon a következők közül: \"Alapértelmezett\" - a kiválasztott hangulatjel alapértelmezett felmérési színben jelenik meg; \"Skála\" - a kiválasztott hangulatjel örökli a színt a minősítési skálától.",
     expression: {
@@ -1339,7 +1347,7 @@ export var huStrings = {
       pattern: "A minta karakterlánc-konstansokat és a következő helyőrzőket tartalmazhatja: \"9\" - egy számjegyhez; \"a\" - kis- vagy nagybetű esetében; '#' - számjegy vagy kis- vagy nagybetű. A fordított perjel használata \"\\\" a karakter elhagyásához."
     },
     datetimemask: {
-      pattern: "A minta elválasztó karaktereket és a következő helyőrzőket tartalmazhatja: \"m\" - a hónap száma; \"mm\" – a hónap száma, az első nullával az egyjegyű értékek esetében; \"d\" - a hónap napja; \"dd\" – a hónap napja, az első nullával az egyjegyű értékek esetében; \"yy\" – az év utolsó két számjegye; \"yyyy\" – négy számjegyű évre."
+      pattern: "A minta elválasztó karaktereket és a következő helyőrzőket tartalmazhatja:<br>'m' - Hónap száma.<br>\"mm\" – A hónap száma, az első nullával az egyjegyű értékek esetében. <br>'d' - a hónap napja. <br>'dd' – A hónap napja, az első nullával az egyjegyű értékek esetében. <br>\"yy\" – Az év utolsó két számjegye. <br>\"yyyy\" – négy számjegyű évszám. <br>\"H\" – órák száma 24 órás formátumban. <br>'HH' – Órák 24 órás formátumban, az első nullával az egyjegyű értékek esetében. <br>\"h\" – órák száma 12 órás formátumban. <br>'hh' – Órák 12 órás formátumban, az első nullával az egyjegyű értékek esetében. <br>\"MM\" - perc. <br>'ss' - másodperc. <br>\"TT\" – 12 órás időszámítás nagybetűvel (AM/PM). <br>\"tt\" - 12 órás időtartam kisbetűvel (am/pm)."
     },
     numericmask: {
       decimalSeparator: "A törtrész és a megjelenített szám egész részének elválasztására szolgáló szimbólum.",
@@ -2474,8 +2482,8 @@ editorLocalization.locales["hu"] = huStrings;
 // totalDisplayStyle.date: "Date" => "Dátum"
 // rowsOrder.initial: "Original" => "Eredeti"
 // questionsOrder.initial: "Original" => "Eredeti"
-// showProgressBar.aboveHeader: "Above the header" => "A fejléc felett"
-// showProgressBar.belowHeader: "Below the header" => "A fejléc alatt"
+// showProgressBar.aboveheader: "Above the header" => "A fejléc felett"
+// showProgressBar.belowheader: "Below the header" => "A fejléc alatt"
 // pv.sum: "Sum" => "Összeg"
 // pv.count: "Count" => "Gróf"
 // pv.min: "Min" => "Min"
@@ -2686,3 +2694,10 @@ editorLocalization.locales["hu"] = huStrings;
 // maskTypes.none: "None" => "Egyik sem"
 // itemvalue@rows.visibleIf: "Make the row visible if" => "Tegye láthatóvá a sort, ha"
 // itemvalue@rows.enableIf: "Make the row editable if" => "Tegye szerkeszthetővé a sort, ha:"
+// signaturepad.placeholderReadOnly: "Placeholder text in read-only or preview mode" => "Helyőrző szöveg írásvédett vagy előnézeti módban"
+// pe.textWrapEnabled: "Wrap choices" => "Tördelési lehetőségek"
+// image.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "Az \"Automatikus\" opció automatikusan meghatározza a megjelenítéshez megfelelő módot - Kép, Videó vagy YouTube - a megadott forrás URL alapján."
+// imagepicker.contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options." => "Válasszon a \"Kép\" és a \"Videó\" között a médiaválasztó tartalommódjának beállításához. Ha a \"Kép\" van kiválasztva, győződjön meg arról, hogy az összes rendelkezésre álló opció a következő formátumú képfájlok: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Hasonlóképpen, ha a \"Video\" van kiválasztva, győződjön meg arról, hogy az összes opció közvetlen link a következő formátumú videofájlokhoz: MP4, MOV, WMV, FLV, AVI, MKV. Felhívjuk figyelmét, hogy a YouTube-linkek nem támogatottak a videóbeállításoknál."
+// ed.selectFile: "Select a file" => "Válasszon ki egy fájlt"
+// ed.removeFile: "Remove the file" => "A fájl eltávolítása"
+// pe.searchMode: "Search Mode" => "Keresési mód"
