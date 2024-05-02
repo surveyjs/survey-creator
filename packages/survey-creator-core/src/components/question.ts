@@ -318,7 +318,15 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       if (Array.isArray(items) && items.length > 0) {
         const item = items[0];
         const needSeparator = lastItem && item.category != lastItem.category;
-        const action = this.creator.createIActionBarItemByClass(item.name, item.title, item.iconName, needSeparator);
+        const action = this.creator.createIActionBarItemByClass(item.name, item.title, item.iconName, needSeparator, (questionType: string, subtype?: string) => {
+          if (this.surveyElement.getType() !== questionType) {
+            this.creator.convertCurrentQuestion(questionType);
+          }
+          if ("inputType" in this.creator.selectedElement) {
+            // const newValue = this.getUpdatedPropertyValue(propName, item.id);
+            this.creator.selectedElement.setPropertyValue("inputType", subtype);
+          }
+        });
         lastItem = item;
         res.push(action);
       }
