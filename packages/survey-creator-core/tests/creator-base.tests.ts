@@ -4311,7 +4311,7 @@ test("Check the placeholders of the survey items if isMobileView is true", (): a
   expect(imageQuestionModelAdorner.placeholderText).toBe("Drag and drop an image here or click the button below and choose an image to upload");
 
   creator.isMobileView = true;
-  expect(pageModelAdorner.placeholderText).toBe("Click the \"Add Question\" button below to add a new form element.");
-  expect(panelModelAdorner.placeholderText).toBe("Click the \"Add Question\" button below to add a new form element.");
+  expect(pageModelAdorner.placeholderText).toBe("Click the \"Add Question\" button below to add a new element to the page.");
+  expect(panelModelAdorner.placeholderText).toBe("Click the \"Add Question\" button below to add a new element to the panel.");
   expect(imageQuestionModelAdorner.placeholderText).toBe("Click the button below and choose an image to upload");
 });

@@ -192,7 +192,7 @@ test("property grid for mobile devices", async (t) => {
     .expect(Selector(selectedObjectTextSelector).innerText).eql("Survey")
 
     .click(Selector(".svd-grid-hide"))
-    .click(Selector("span").withText("Add Question"))
+    .click(getAddNewQuestionButton())
     .click(getBarItemByTitle("Open settings").filterVisible().nth(0))
     .expect(Selector(selectedObjectTextSelector).innerText).eql("question1")
 
