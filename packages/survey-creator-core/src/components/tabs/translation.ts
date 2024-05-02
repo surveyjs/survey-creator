@@ -1392,8 +1392,9 @@ export class TranslationEditor {
     this.fillFromLocales();
     const action = this.translation.stringsSurvey.navigationBar.getActionById("svc-translation-fromlocale");
     if(!!action) {
-      action.visible = this.fromLocales.length > 0;
+      action.enabled = this.fromLocales.length > 0;
     }
+    this.updateMatricesColumns();
   }
   public get translation(): Translation { return this.translationValue; }
   public showDialog(): void {
@@ -1490,12 +1491,14 @@ export class TranslationEditor {
       matrix.columns.splice(colIndex, 0, column);
     }
     if(updateHeader) {
-      matrix.showHeader = matrix.columns.length > 2;
-      if(matrix.showHeader) {
-        const cols = matrix.columns;
-        cols[0].title = this.translation.getLocaleName("");
+      matrix.showHeader = true;
+      const cols = matrix.columns;
+      cols[0].title = this.translation.getLocaleName("");
+      if(cols.length > 2) {
         cols[1].title = this.getHeaderTitle("translationSource", cols[1].name);
         cols[2].title = this.getHeaderTitle("translationTarget", cols[2].name);
+      } else {
+        cols[1].title = this.getHeaderTitle("translationTarget", cols[1].name);
       }
     }
   }
@@ -1512,19 +1515,24 @@ export class TranslationEditor {
   private setupNavigationButtons(survey: SurveyModel): void {
     const actions = survey.navigationBar.actions;
     actions.splice(0, actions.length);
+    survey.addNavigationItem(this.createLocaleFromAction());
+    const actionCss = "svc-action-bar-item--right sv-action-bar-item--secondary";
     if (this.options.getHasMachineTranslation()) {
-      survey.addNavigationItem(this.createLocaleFromAction());
       survey.addNavigationItem(new Action({
         id: "svc-translation-machine",
         iconName: "icon-language",
-        css: "svc-translation-machine",
+        css: actionCss,
         locTitleName: "ed.translateUsigAI",
         component: "sv-action-bar-item",
         action: () => { this.doMachineTranslation(); }
       }));
     }
-    survey.addNavigationItem(createImportCSVAction(() => { this.translation.importFromCSVFileDOM(); }, false, true));
-    survey.addNavigationItem(createExportCSVAction(() => { this.translation.exportToCSVFileUI(); }, true));
+    const importAction = createImportCSVAction(() => { this.translation.importFromCSVFileDOM(); }, false, true);
+    importAction.css = actionCss;
+    const exportAction = createExportCSVAction(() => { this.translation.exportToCSVFileUI(); }, true);
+    exportAction.css = actionCss;
+    survey.addNavigationItem(importAction);
+    survey.addNavigationItem(exportAction);
     survey.showNavigationButtons = "top";
   }
   private createStringsToTranslate(): Array<TranslationItem> {

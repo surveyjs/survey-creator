@@ -194,8 +194,10 @@ test("Implement machine translation for Creator", () => {
   tabTranslation.activate();
   let editor = tabTranslation.model.createTranslationEditor("fr");
   let actions = editor.translation.stringsSurvey.navigationBar.actions;
-  expect(actions).toHaveLength(2);
-  expect(actions[0].id).toBe("svc-translation-import");
+  expect(actions).toHaveLength(3);
+  expect(actions[0].id).toBe("svc-translation-fromlocale");
+  expect(actions[0].enabled).toBeFalsy();
+  expect(actions[1].id).toBe("svc-translation-import");
   creator.onMachineTranslate.add((sender, options) => {
     options.callback(["Title fr", "Desc fr"]);
   });
@@ -204,7 +206,7 @@ test("Implement machine translation for Creator", () => {
   actions = editor.translation.stringsSurvey.navigationBar.actions;
   expect(actions).toHaveLength(4);
   expect(actions[0].id).toBe("svc-translation-fromlocale");
-  expect(actions[0].visible).toBeFalsy();
+  expect(actions[0].enabled).toBeFalsy();
   expect(actions[1].id).toBe("svc-translation-machine");
   actions[1].action();
   editor.apply();
@@ -288,7 +290,7 @@ test("Machine translation from non default locale - UI", () => {
   expect(editor.translation.root.allLocItems).toHaveLength(3);
   expect(editor.translation.getVisibleLocales()).toHaveLength(1);
   let matrix = <QuestionMatrixDropdownModel>editor.translation.stringsSurvey.getAllQuestions()[0];
-  expect(matrix.showHeader).toBeFalsy();
+  expect(matrix.showHeader).toBeTruthy();
   expect(matrix.columns).toHaveLength(2);
   expect(matrix.columns[1].name).toBe("es");
 
@@ -317,7 +319,7 @@ test("Machine translation from non default locale - UI", () => {
   editor.setFromLocale("");
   expect(editor.translation.getVisibleLocales()).toHaveLength(1);
   matrix = <QuestionMatrixDropdownModel>editor.translation.stringsSurvey.getAllQuestions()[0];
-  expect(matrix.showHeader).toBeFalsy();
+  expect(matrix.showHeader).toBeTruthy();
   expect(matrix.columns).toHaveLength(2);
   expect(matrix.columns[1].name).toBe("es");
 });
