@@ -184,7 +184,6 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
                   type: "ranking",
                   name: "items",
                   selectToRankEnabled: true,
-                  minSelectedChoices: 1,
                   selectToRankAreasLayout: "horizontal",
                   visible: false
                 }
