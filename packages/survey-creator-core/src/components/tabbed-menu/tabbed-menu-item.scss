@@ -6,30 +6,30 @@
   line-height: calcSize(4);
   box-sizing: border-box;
   cursor: pointer;
+  color: var(--ctr-menu-item-text-color, $foreground);
   &:hover,
   &:focus {
-    background-color: $background-dim;
+    background-color: var(--ctr-menu-item-background-color-hovered, $background-dim);
     box-shadow: inset 0px -1px 0px $border;
     outline: none;
   }
 }
 
 .svc-tabbed-menu-item--selected {
-  background: $background;
-  box-shadow: inset 0px -2px 0px $primary;
+  background: var(--ctr-menu-item-background-color, $background);
+  box-shadow: inset 0px -2px 0px var(--ctr-menu-item-border-color-selected, $primary);
   &:hover,
   &:focus {
-    background: $background;
-    box-shadow: inset 0px -2px 0px $primary;
+    background: var(--ctr-menu-item-background-color, $background);
+    box-shadow: inset 0px -2px 0px var(--ctr-menu-item-border-color-selected, $primary);
   }
 }
 
 .svc-tabbed-menu-item--disabled {
   cursor: default;
-  color: $foreground;
-  opacity: 0.25;
+  opacity: var(--ctr-menu-item-opacity-disabled, 0.25);
   &:hover {
-    background-color: $background;
+    background-color: var(--ctr-menu-item-background-color, $background);
   }
 }
 
