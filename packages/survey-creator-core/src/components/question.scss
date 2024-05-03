@@ -94,6 +94,12 @@ svc-question {
     .sd-panel__content {
       overflow: auto;
     }
+
+    .sd-table__cell--detail-panel {
+      .sd-panel__content {
+        overflow: unset;
+      }
+    }
   }
 }
 
