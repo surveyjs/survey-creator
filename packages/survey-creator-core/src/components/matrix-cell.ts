@@ -8,11 +8,14 @@ import {
   QuestionMatrixDropdownModelBase,
   Helpers,
   IDialogOptions,
+  PopupBaseViewModel,
+  surveyLocalization,
 } from "survey-core";
-import { SurveyCreatorModel } from "../creator-base";
 import { defaultV2Css } from "survey-core";
+import { SurveyCreatorModel } from "../creator-base";
 import { toggleHovered } from "../utils/utils";
 import { SurveyHelper } from "../survey-helper";
+import { editorLocalization } from "../editorLocalization";
 
 require("./matrix-cell.scss");
 
@@ -78,7 +81,11 @@ export class MatrixCellWrapperViewModel extends Base {
   public editQuestion(model: MatrixCellWrapperViewModel, event: MouseEvent) {
     const editSurvey = new MatrixCellWrapperEditSurvey(model.creator, model.question, model.column, this);
     editSurvey.question.cellOwner = model;
-    settings.showDialog(
+
+    const prevCurrentLocale = surveyLocalization.currentLocale;
+    const locale = editorLocalization.currentLocale;
+    surveyLocalization.currentLocale = locale;
+    const popupModel: PopupBaseViewModel = settings.showDialog(
       <IDialogOptions>{
         componentName: "svc-question-editor-content",
         data: {
@@ -94,6 +101,9 @@ export class MatrixCellWrapperViewModel extends Base {
         displayMode: this.creator.isMobileView ? "overlay" : "popup"
       }, model.creator.rootElement
     );
+    popupModel.locale = locale;
+    surveyLocalization.currentLocale = prevCurrentLocale;
+
     event.stopPropagation();
     model.creator.selectElement(model.column);
   }

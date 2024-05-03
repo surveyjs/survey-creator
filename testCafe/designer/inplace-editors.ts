@@ -742,21 +742,17 @@ test("Image question inplace editor - choose image via inplace editor", async (t
 });
 
 test("Matrix dropdown question inplace popup editor", async (t) => {
-  const showControl = ClientFunction(() => {
-    const el: any = document.querySelectorAll("td:nth-of-type(2) .svc-matrix-cell .svc-matrix-cell__question-controls")[0];
-    el.style.display = "block";
-  });
   const row1Column1Cell = Selector("tbody .svc-matrix-cell").filterVisible().nth(1);
+  const editColumnButton = Selector(".svc-matrix-cell__question-controls-button").filterVisible();
+
   await t.expect(Selector(".svc-question__content").exists).notOk();
   await addQuestionByAddQuestionButton(t, "Multi-Select Matrix");
   await t
     .expect(Selector(".svc-question__content").exists).ok()
     .hover(row1Column1Cell, { speed: 0.5 });
 
-  // TODO: remove this line after TestCafe implements workig hover
-  await showControl();
-
-  await t.click(Selector(".svc-matrix-cell__question-controls-button"))
+  await t
+    .click(editColumnButton)
     .expect(Selector(".svc-question__content--in-popup").visible).ok()
     .expect(Selector(".sv-popup__content .sd-header__text").exists).notOk()
     .expect(Selector(".sv-popup__content .sd-page__title").exists).notOk()
