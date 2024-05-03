@@ -1,6 +1,8 @@
 
 <div align="center">
 ![Creator](https://github.com/surveyjs/survey-creator/assets/102306951/3782475d-5d3c-45fc-8a53-9f8450767ec8)
+
+    
 </div>
 
 <div align="center">
