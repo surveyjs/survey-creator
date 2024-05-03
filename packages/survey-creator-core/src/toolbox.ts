@@ -382,7 +382,18 @@ export class QuestionToolbox
     }
     else {
       item.iconName = item.iconName ? item.iconName : QuestionToolbox.defaultIconName;
-      return new QuestionToolboxItem(item);
+      const newItem = new QuestionToolboxItem(item);
+      let prop = null;
+      if (item.id === "text") prop = Serializer.findProperty("text", "inputType");
+      if (item.id === "rating") prop = Serializer.findProperty("rating", "rateDisplayMode");
+      if (!!prop) {
+        const propName = prop.name;
+        newItem.setItems(prop.choices.map(ch => new Action({ id: ch, title: editorLocalization.getPropertyValueInEditor(propName, ch) })), (o, e) => {
+          newItem.action(o, e);
+        });
+      }
+
+      return newItem;
     }
   }
   public addItem(item: IQuestionToolboxItem, index?: number) {

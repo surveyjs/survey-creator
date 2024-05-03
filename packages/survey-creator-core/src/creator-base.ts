@@ -3367,11 +3367,13 @@ export class SurveyCreatorModel extends Base
   public getAvailableToolboxItems(element?: SurveyElement, isAddNew: boolean = true): Array<QuestionToolboxItem> {
     const res: Array<QuestionToolboxItem> = [].concat(this.toolbox.items);
     if (!element || this.maxNestedPanels < 0) return res;
-    if (!isAddNew && element.isPanel) return res;
-    if (this.maxNestedPanels < SurveyHelper.getElementDeepLength(element)) {
-      for (let i = res.length - 1; i >= 0; i--) {
-        if (res[i].isPanel) {
-          res.splice(i, 1);
+
+    if ((isAddNew && element.isPanel) || (!isAddNew && !element.isPanel)) {
+      if (this.maxNestedPanels < SurveyHelper.getElementDeepLength(element)) {
+        for (let i = res.length - 1; i >= 0; i--) {
+          if (res[i].isPanel) {
+            res.splice(i, 1);
+          }
         }
       }
     }

@@ -17,7 +17,8 @@ import {
   createDropdownActionModel,
   CssClassBuilder,
   QuestionPanelDynamicModel,
-  ListModel
+  ListModel,
+  QuestionTextModel
 } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { editorLocalization, getLocString } from "../editorLocalization";
@@ -33,6 +34,7 @@ require("./question.scss");
 import { settings } from "../creator-settings";
 import { StringEditorConnector, StringItemsNavigatorBase } from "./string-editor";
 import { DragDropSurveyElements } from "../survey-elements";
+import { QuestionToolboxItem } from "../toolbox";
 
 export interface QuestionBannerParams {
   text: string;
@@ -300,7 +302,8 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     this.dragDropHelper.startDragSurveyElement(event, element, isElementSelected);
     return true;
   }
-  public getConvertToTypesActions(): Array<IAction> {
+
+  private getConvertToTypes(): Array<QuestionToolboxItem> {
     const availableItems = this.creator.getAvailableToolboxItems(this.element, false);
     const itemNames = [];
     availableItems.forEach(item => {
@@ -308,28 +311,36 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
         itemNames.push(item.typeName);
       }
     });
-    const convertClasses: string[] = QuestionConverter.getConvertToClasses(
-      this.currentType, itemNames, true
-    );
+    const convertClasses: string[] = QuestionConverter.getConvertToClasses(this.currentType, itemNames, true);
+
     const res = [];
-    let lastItem = null;
     convertClasses.forEach((className: string) => {
       const items = this.creator.toolbox.items.filter(item => item.name == className);
       if (Array.isArray(items) && items.length > 0) {
         const item = items[0];
-        const needSeparator = lastItem && item.category != lastItem.category;
-        const action = this.creator.createIActionBarItemByClass(item.name, item.title, item.iconName, needSeparator, (questionType: string, subtype?: string) => {
-          if (this.surveyElement.getType() !== questionType) {
-            this.creator.convertCurrentQuestion(questionType);
-          }
-          if ("inputType" in this.creator.selectedElement) {
-            // const newValue = this.getUpdatedPropertyValue(propName, item.id);
-            this.creator.selectedElement.setPropertyValue("inputType", subtype);
-          }
-        });
-        lastItem = item;
-        res.push(action);
+        res.push(item);
       }
+    });
+    return res;
+  }
+  public getConvertToTypesActions(): Array<IAction> {
+    const availableItems = this.getConvertToTypes();
+
+    const res = [];
+    let lastItem = null;
+    availableItems.forEach((item: QuestionToolboxItem) => {
+      const needSeparator = lastItem && item.category != lastItem.category;
+      const action = this.creator.createIActionBarItemByClass(item.name, item.title, item.iconName, needSeparator, (questionType: string, subtype?: string) => {
+        if (this.surveyElement.getType() !== questionType) {
+          this.creator.convertCurrentQuestion(questionType);
+        }
+        if (this.creator.selectedElement instanceof QuestionTextModel) {
+          // const newValue = this.getUpdatedPropertyValue(propName, item.id);
+          this.creator.selectedElement.setPropertyValue("inputType", subtype);
+        }
+      });
+      lastItem = item;
+      res.push(action);
     });
     return res;
   }
@@ -507,8 +518,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     this.creator.addNewQuestionInPage((type) => { }, this.surveyElement instanceof PanelModelBase ? this.surveyElement : null,
       this.currentAddQuestionType || settings.designer.defaultAddQuestionType);
   }
-  questionTypeSelectorModel = this.creator.getQuestionTypeSelectorModel(
-    (type) => { this.currentAddQuestionType = type; }, this.surveyElement);
+  questionTypeSelectorModel = this.creator.getQuestionTypeSelectorModel((type) => { this.currentAddQuestionType = type; }, this.surveyElement);
   public get addNewQuestionText(): string {
     if (!this.currentAddQuestionType && this.creator)
       return this.creator.getLocString("ed.addNewQuestion");
