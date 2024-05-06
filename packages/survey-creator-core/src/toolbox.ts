@@ -387,10 +387,28 @@ export class QuestionToolbox
       if (item.id === "text") prop = Serializer.findProperty("text", "inputType");
       if (item.id === "rating") prop = Serializer.findProperty("rating", "rateDisplayMode");
       if (!!prop) {
-        const propName = prop.name;
-        newItem.setItems(prop.choices.map(ch => new Action({ id: ch, title: editorLocalization.getPropertyValueInEditor(propName, ch) })), (o, e) => {
+        newItem.setItems(prop.choices.map(ch => {
+          const propName = prop.name;
+          const newJson = { ...item };
+          newJson[propName] = ch;
+
+          const newItem = new QuestionToolboxItem({
+            id: ch,
+            name: ch,
+            title: editorLocalization.getPropertyValueInEditor(propName, ch),
+            className: item.className,
+            json: newJson,
+            iconName: null,
+            category: null,
+            isCopied: false,
+            component: "svc-toolbox-item"
+          });
+          return newItem;
+        }), (o, e) => {
           newItem.action(o, e);
         });
+        newItem.component = "svc-toolbox-item-group";
+        newItem.popupModel.cssClass += " toolbox-subtypes";
       }
 
       return newItem;
@@ -906,5 +924,15 @@ export class QuestionToolbox
     return questions;
   }
 
+  public hideAllInnerPopups() {
+    this.actions.forEach(action => {
+      if (!!action.popupModel && action.popupModel.isVisible) {
+        action.popupModel.isVisible = false;
+      }
+    });
+  }
+  public onScroll(model, event) {
+    this.hideAllInnerPopups();
+  }
   //public dispose(): void { } Don't we need to dispose toolbox?
 }

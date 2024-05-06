@@ -21,6 +21,14 @@ export class ToolboxToolViewModel extends Base {
     return !this.creator.readOnly;
   }
 
+  public onMouseOver(itemValue, mouseoverEvent) {
+    if (mouseoverEvent.type === "mouseover") {
+      this.creator.toolbox.hideAllInnerPopups();
+      if (!!itemValue.popupModel) {
+        itemValue.popupModel.isVisible = true;
+      }
+    }
+  }
   public onPointerDown(pointerDownEvent) {
     if (!this.allowAdd) return;
     if (this.item.id.indexOf("dotsItem-id") === 0) return true; //toolbox responsive popup

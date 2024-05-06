@@ -13,7 +13,7 @@ export class KnockoutToolboxToolViewModel extends ToolboxToolViewModel {
   constructor(
     protected item: IQuestionToolboxItem,
     protected creator: SurveyCreator,
-    public isCompact = true
+    public isCompact = false
   ) {
     super(item, creator);
   }

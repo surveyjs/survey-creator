@@ -1,4 +1,4 @@
-<div class="svc-toolbox" data-bind="css: { 'svc-toolbox--compact': $data.toolbox.isCompact }">
+<div class="svc-toolbox" data-bind="css: { 'svc-toolbox--compact': $data.toolbox.isCompact }, event:{ scroll: function(model, event) { $data.toolbox.onScroll(model, event); return true; } }">
   <div class="svc-toolbox__container">
     <!-- ko ifnot: $data.toolbox.isCompact || categories().length == 1 || !$data.toolbox.showCategoryTitles -->
     <!-- ko foreach: categories -->
