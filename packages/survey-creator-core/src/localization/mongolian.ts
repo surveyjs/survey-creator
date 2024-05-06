@@ -170,6 +170,10 @@ export var mnStrings = {
     surveyPlaceHolder: "Санал асуулга хоосон байна. Хэрэглүүрээс асуулт чирнэ үү эсвэл доорх товчийг дарна уу.",
     pagePlaceHolder: "Хуудас хоосон байна. Багажны хайрцагнаас элементийг чирэх эсвэл доорх товчийг дарна уу.",
     imagePlaceHolder: "Энд зураг чирж унагаах эсвэл доорх товчийг дарж татаж авах зургийг сонгоно уу",
+    surveyPlaceHolderMobile: "Доорх \"Асуулт нэмэх\" товчийг дарж формоо үүсгэж эхэлнэ.",
+    pagePlaceHolderMobile: "Хуудас дээр шинэ элемент нэмэхийн тулд доорх \"Асуулт нэмэх\" товчийг дарна уу.",
+    panelPlaceHolderMobile: "Доорх \"Асуулт нэмэх\" товчийг дарж панел дээр шинэ элемент нэмнэ.",
+    imagePlaceHolderMobile: "Доорх товчийг дарж татаж авах зургийг сонгоно уу",
     imageChooseImage: "Зураг сонгох",
     addNewTypeQuestion: "{0} нэмэх", //{0} is localizable question type
     chooseLogoPlaceholder: "[Лого]",
@@ -2204,3 +2208,7 @@ editorLocalization.locales["mn"] = mnStrings;
 // ed.selectFile: "Select a file" => "Файлыг сонгох"
 // ed.removeFile: "Remove the file" => "Файлыг хасах"
 // pe.searchMode: "Search Mode" => "Хайлтын Мод"
+// ed.surveyPlaceHolderMobile: "Click the \"Add Question\" button below to start creating your form." => "Доорх \"Асуулт нэмэх\" товчийг дарж формоо үүсгэж эхэлнэ."
+// ed.pagePlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the page." => "Хуудас дээр шинэ элемент нэмэхийн тулд доорх \"Асуулт нэмэх\" товчийг дарна уу."
+// ed.panelPlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the panel." => "Доорх \"Асуулт нэмэх\" товчийг дарж панел дээр шинэ элемент нэмнэ."
+// ed.imagePlaceHolderMobile: "Click the button below and choose an image to upload" => "Доорх товчийг дарж татаж авах зургийг сонгоно уу"

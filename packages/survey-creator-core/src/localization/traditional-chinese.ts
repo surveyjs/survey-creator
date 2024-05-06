@@ -170,6 +170,10 @@ var traditionalChineseTranslation = {
     surveyPlaceHolder: "調查為空。從工具箱中拖動元素或按下下面的按鈕。",
     pagePlaceHolder: "頁面為空。從工具箱中拖動元素或按下下面的按鈕。",
     imagePlaceHolder: "將圖像拖放到此處或按下下面的按鈕並選擇要上傳的圖像",
+    surveyPlaceHolderMobile: "按兩下下面的「添加問題」 按鈕開始創建表單。",
+    pagePlaceHolderMobile: "按兩下下面的「添加問題」 按鈕，向頁面添加新元素。",
+    panelPlaceHolderMobile: "按下下面的「添加問題」 按鈕，將新元素添加到面板中。",
+    imagePlaceHolderMobile: "點擊下面的按鈕，選擇要上傳的圖片",
     imageChooseImage: "選擇圖像",
     addNewTypeQuestion: "新增{0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[徽標]",
@@ -2826,3 +2830,7 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // ed.selectFile: "Select a file" => "選擇檔案"
 // ed.removeFile: "Remove the file" => "刪除檔案"
 // pe.searchMode: "Search Mode" => "搜索模式"
+// ed.surveyPlaceHolderMobile: "Click the \"Add Question\" button below to start creating your form." => "按兩下下面的「添加問題」 按鈕開始創建表單。"
+// ed.pagePlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the page." => "按兩下下面的「添加問題」 按鈕，向頁面添加新元素。"
+// ed.panelPlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the panel." => "按下下面的「添加問題」 按鈕，將新元素添加到面板中。"
+// ed.imagePlaceHolderMobile: "Click the button below and choose an image to upload" => "點擊下面的按鈕，選擇要上傳的圖片"

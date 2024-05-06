@@ -170,6 +170,10 @@ export var hebrewStrings = {
     surveyPlaceHolder: "הסקר ריק. גרור אלמנט מארגז הכלים או לחץ על הכפתור למטה.",
     pagePlaceHolder: "הדף ריק. גרור רכיב מארגז הכלים או לחץ על הלחצן למטה.",
     imagePlaceHolder: "גרור ושחרר תמונה לכאן או לחץ על הכפתור למטה ובחר תמונה להעלאה",
+    surveyPlaceHolderMobile: "לחץ על הלחצן \"הוסף שאלה\" למטה כדי להתחיל ליצור את הטופס שלך.",
+    pagePlaceHolderMobile: "לחץ על כפתור \"הוסף שאלה\" למטה כדי להוסיף אלמנט חדש לדף.",
+    panelPlaceHolderMobile: "לחץ על הלחצן \"הוסף שאלה\" למטה כדי להוסיף אלמנט חדש לחלונית.",
+    imagePlaceHolderMobile: "לחץ על הלחצן למטה ובחר תמונה להעלאה",
     imageChooseImage: "בחר תמונה",
     addNewTypeQuestion: "הוסף {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[לוגו]",
@@ -2112,3 +2116,7 @@ editorLocalization.locales["he"] = hebrewStrings;
 // ed.selectFile: "Select a file" => "בחר קובץ"
 // ed.removeFile: "Remove the file" => "הסרת הקובץ"
 // pe.searchMode: "Search Mode" => "מצב חיפוש"
+// ed.surveyPlaceHolderMobile: "Click the \"Add Question\" button below to start creating your form." => "לחץ על הלחצן \"הוסף שאלה\" למטה כדי להתחיל ליצור את הטופס שלך."
+// ed.pagePlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the page." => "לחץ על כפתור \"הוסף שאלה\" למטה כדי להוסיף אלמנט חדש לדף."
+// ed.panelPlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the panel." => "לחץ על הלחצן \"הוסף שאלה\" למטה כדי להוסיף אלמנט חדש לחלונית."
+// ed.imagePlaceHolderMobile: "Click the button below and choose an image to upload" => "לחץ על הלחצן למטה ובחר תמונה להעלאה"

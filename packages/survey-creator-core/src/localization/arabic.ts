@@ -170,6 +170,10 @@ export var arStrings = {
     surveyPlaceHolder: "الاستطلاع فارغ. اسحب عنصرا من صندوق الأدوات أو انقر فوق الزر أدناه.",
     pagePlaceHolder: "الصفحة فارغة. اسحب عنصرا من صندوق الأدوات أو انقر فوق الزر أدناه.",
     imagePlaceHolder: "قم بسحب وإسقاط صورة هنا أو انقر فوق الزر أدناه واختر صورة لتحميلها",
+    surveyPlaceHolderMobile: "انقر فوق الزر \"إضافة سؤال\" أدناه لبدء إنشاء النموذج الخاص بك.",
+    pagePlaceHolderMobile: "انقر فوق الزر \"إضافة سؤال\" أدناه لإضافة عنصر جديد إلى الصفحة.",
+    panelPlaceHolderMobile: "انقر فوق الزر \"إضافة سؤال\" أدناه لإضافة عنصر جديد إلى اللوحة.",
+    imagePlaceHolderMobile: "انقر فوق الزر أدناه واختر صورة لتحميلها",
     imageChooseImage: "اختر صورة",
     addNewTypeQuestion: "Add {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[الشعار]",
@@ -2458,3 +2462,7 @@ editorLocalization.locales["ar"] = arStrings;
 // ed.selectFile: "Select a file" => "حدد ملفا"
 // ed.removeFile: "Remove the file" => "إزالة الملف"
 // pe.searchMode: "Search Mode" => "وضع البحث"
+// ed.surveyPlaceHolderMobile: "Click the \"Add Question\" button below to start creating your form." => "انقر فوق الزر \"إضافة سؤال\" أدناه لبدء إنشاء النموذج الخاص بك."
+// ed.pagePlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the page." => "انقر فوق الزر \"إضافة سؤال\" أدناه لإضافة عنصر جديد إلى الصفحة."
+// ed.panelPlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the panel." => "انقر فوق الزر \"إضافة سؤال\" أدناه لإضافة عنصر جديد إلى اللوحة."
+// ed.imagePlaceHolderMobile: "Click the button below and choose an image to upload" => "انقر فوق الزر أدناه واختر صورة لتحميلها"
