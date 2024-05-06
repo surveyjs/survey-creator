@@ -537,12 +537,15 @@ export class ThemeModel extends Base implements ITheme {
       this.undoRedoManager.onPropertyValueChanged(name, oldValue, newValue, sender, arrayChanges);
     }
 
-    if (this !== sender) {
-      this.onThemePropertyChanged.fire(this, { name, value: newValue });
-    }
-
     // if (this.blockChanges) return;
     if (this.blockThemeChangedNotifications > 0) return;
+    if (this !== sender) {
+      const senderJSON = sender.toJSON();
+      if (!!senderJSON.cssVariables) {
+        Object.keys(senderJSON.cssVariables).forEach(key => this.setThemeCssVariablesChanges(key, senderJSON.cssVariables[key]));
+      }
+      this.onThemePropertyChanged.fire(this, { name, value: newValue });
+    }
     if (name.indexOf("--") === 0) {
       this.setThemeCssVariablesChanges(name, newValue);
     }

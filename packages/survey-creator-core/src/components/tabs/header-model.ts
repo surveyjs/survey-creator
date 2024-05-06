@@ -36,13 +36,6 @@ export class HeaderModel extends Base implements IHeader {
     super.fromJSON(json, options);
     if (!!json["backgroundImageOpacity"]) this.backgroundImageOpacity = json["backgroundImageOpacity"] * 100;
 
-    const backgroundColorValue = json["--sjs-header-backcolor"];
-    if (!!backgroundColorValue) {
-      this["backgroundColor"] = backgroundColorValue;
-      this["backgroundColorSwitch"] = this.getBackgroundColorSwitchByValue(backgroundColorValue);
-      // this._setPGEditorPropertyValue(panel.getQuestionByName("backgroundColorSwitch"), "value", this.getBackgroundColorSwitchByValue(backgroundColorValue));
-    }
-
     // this["surveyTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("surveyTitle"), this.themeCssVariablesChanges);
     // this["surveyDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("surveyDescription"), this.themeCssVariablesChanges);
     // this["headerTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("headerTitle"), this.themeCssVariablesChanges);
@@ -58,6 +51,12 @@ export class HeaderModel extends Base implements IHeader {
       this["headerDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("headerDescription"), cssVariables);
     }
 
+    const backgroundColorValue = cssVariables["--sjs-header-backcolor"];
+    if (!!backgroundColorValue) {
+      this["backgroundColorSwitch"] = this.getBackgroundColorSwitchByValue(backgroundColorValue);
+      this["backgroundColor"] = this["backgroundColorSwitch"] === "custom" ? backgroundColorValue : undefined;
+      // this._setPGEditorPropertyValue(panel.getQuestionByName("backgroundColorSwitch"), "value", this.getBackgroundColorSwitchByValue(backgroundColorValue));
+    }
   }
 
   toJSON(options?: ISaveToJSONOptions) {
@@ -88,6 +87,15 @@ export class HeaderModel extends Base implements IHeader {
     return result;
   }
 
+  public saveToThemeJSON(json: ITheme, options?: ISaveToJSONOptions) {
+    const result = this.toJSON(options);
+    assign(json.cssVariables, result.cssVariables);
+    delete result.cssVariables;
+    if (Object.keys(result).length > 0) {
+      json.header = result;
+    }
+  }
+
   private setHeaderBackgroundColorCssVariable(cssVariables: any) {
     let headerBackgroundColorValue = undefined;
     if (this["backgroundColorSwitch"] === "none") {
@@ -96,15 +104,6 @@ export class HeaderModel extends Base implements IHeader {
       headerBackgroundColorValue = this["backgroundColor"] ?? "transparent";
     }
     cssVariables["--sjs-header-backcolor"] = headerBackgroundColorValue;
-  }
-
-  public saveToThemeJSON(json: ITheme, options?: ISaveToJSONOptions) {
-    const result = this.toJSON(options);
-    assign(json.cssVariables, result.cssVariables);
-    delete result.cssVariables;
-    if (Object.keys(result).length > 0) {
-      json.header = result;
-    }
   }
 
   private getBackgroundColorSwitchByValue(backgroundColor: string) {

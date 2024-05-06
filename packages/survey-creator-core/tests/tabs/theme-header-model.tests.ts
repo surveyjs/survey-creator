@@ -230,84 +230,81 @@ test("headerViewContainer: restore backgroundColorSwitch", (): any => {
   expect(header["backgroundColor"]).toBe("#ff0000");
 });
 
-// test("headerViewContainer: background color", (): any => {
-//   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-//   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+test("headerViewContainer: background color", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
 
-//   creator.activeTab = "theme";
-//   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
-//   let themeBuilder = themePlugin.model as ThemeEditorModel;
-//   let headerViewContainer = themeBuilder.themeEditorSurvey.getQuestionByName("headerViewContainer").panels[0];
+  creator.activeTab = "theme";
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  let themeModel = themePlugin.themeModel as ThemeModel;
+  let header = themeModel.header as HeaderModel;
 
-//   headerViewContainer.getElementByName("headerView").value = "advanced";
-//   expect(header["backgroundColorSwitch"]).toBe("accentColor");
-//   expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBeUndefined();
+  header["headerView"] = "advanced";
+  expect(header["backgroundColorSwitch"]).toBe("accentColor");
+  expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBeUndefined();
 
-//   header["backgroundColorSwitch"] = "none";
-//   expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBe("transparent");
+  header["backgroundColorSwitch"] = "none";
+  expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBe("transparent");
 
-//   header["backgroundColorSwitch"] = "custom";
-//   expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBe("transparent");
+  header["backgroundColorSwitch"] = "custom";
+  expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBe("transparent");
 
-//   header["backgroundColor"] = "#5094ed";
-//   expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBe("#5094ed");
+  header["backgroundColor"] = "#5094ed";
+  expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBe("#5094ed");
 
-//   header["backgroundColorSwitch"] = "accentColor";
-//   expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBeUndefined();
-// });
+  header["backgroundColorSwitch"] = "accentColor";
+  expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBeUndefined();
+});
 
-// test("header custom background color and theme changes", (): any => {
-//   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-//   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+test("header custom background color and theme changes", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
 
-//   creator.activeTab = "theme";
-//   let themeBuilder = themePlugin.model as ThemeEditorModel;
-//   let headerViewContainer = themeBuilder.themeEditorSurvey.getQuestionByName("headerViewContainer").panels[0];
-//   let themeChooser = themeBuilder.themeEditorSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
-//   let primaryBackColor = themeBuilder.themeEditorSurvey.getQuestionByName("--sjs-primary-backcolor");
+  creator.activeTab = "theme";
+  let themeModel = themePlugin.themeModel as ThemeModel;
+  let header = themeModel.header as HeaderModel;
+  const propertyGridSurvey = themePlugin.propertyGrid.survey;
+  let themeChooser = propertyGridSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
+  let primaryBackColor = propertyGridSurvey.getQuestionByName("--sjs-primary-backcolor");
 
-//   expect(themeChooser.value).toEqual("default");
-//   expect(primaryBackColor.value).toEqual("rgba(25, 179, 148, 1)");
+  expect(themeChooser.value).toEqual("default");
+  expect(primaryBackColor.value).toEqual("rgba(25, 179, 148, 1)");
 
-//   headerViewContainer.getElementByName("headerView").value = "advanced";
-//   expect(header["backgroundColorSwitch"]).toEqual("accentColor");
-//   expect(header["backgroundColor"]).toBeUndefined();
+  header["headerView"] = "advanced";
+  expect(header["backgroundColorSwitch"]).toEqual("accentColor");
+  expect(header["backgroundColor"]).toBeUndefined();
 
-//   header["backgroundColorSwitch"] = "custom";
-//   expect(header["backgroundColor"]).toBeUndefined();
-//   header["backgroundColor"] = "#ff0000";
+  header["backgroundColorSwitch"] = "custom";
+  expect(header["backgroundColor"]).toBeUndefined();
+  header["backgroundColor"] = "#ff0000";
 
-//   creator.activeTab = "designer";
-//   expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBe("#ff0000");
+  creator.activeTab = "designer";
+  expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBe("#ff0000");
 
-//   creator.activeTab = "theme";
-//   themeBuilder = themePlugin.model as ThemeEditorModel;
-//   themeChooser = themeBuilder.themeEditorSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
-//   primaryBackColor = themeBuilder.themeEditorSurvey.getQuestionByName("--sjs-primary-backcolor");
-//   headerViewContainer = themeBuilder.themeEditorSurvey.getQuestionByName("headerViewContainer").panels[0];
+  creator.activeTab = "theme";
+  themeChooser = propertyGridSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
+  primaryBackColor = propertyGridSurvey.getQuestionByName("--sjs-primary-backcolor");
 
-//   expect(themeChooser.value).toEqual("default");
-//   expect(primaryBackColor.value).toEqual("rgba(25, 179, 148, 1)");
-//   expect(header["backgroundColorSwitch"]).toEqual("custom");
-//   expect(header["backgroundColor"]).toBe("#ff0000");
+  expect(themeChooser.value).toEqual("default");
+  expect(primaryBackColor.value).toEqual("rgba(25, 179, 148, 1)");
+  expect(header["backgroundColorSwitch"]).toEqual("custom");
+  expect(header["backgroundColor"]).toBe("#ff0000");
 
-//   themeBuilder.selectTheme("contrast");
-//   expect(themeChooser.value).toEqual("contrast");
-//   expect(primaryBackColor.value).toEqual("rgba(0, 0, 0, 1)");
-//   expect(header["backgroundColorSwitch"]).toEqual("custom");
-//   expect(header["backgroundColor"]).toBe("#ff0000");
+  themeModel.selectTheme("contrast");
+  expect(themeChooser.value).toEqual("contrast");
+  expect(primaryBackColor.value).toEqual("rgba(0, 0, 0, 1)");
+  expect(header["backgroundColorSwitch"]).toEqual("custom");
+  expect(header["backgroundColor"]).toBe("#ff0000");
 
-//   creator.activeTab = "designer";
-//   expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBe("#ff0000");
+  creator.activeTab = "designer";
+  expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBe("#ff0000");
 
-//   creator.activeTab = "theme";
-//   themeBuilder = themePlugin.model as ThemeEditorModel;
-//   themeChooser = themeBuilder.themeEditorSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
-//   primaryBackColor = themeBuilder.themeEditorSurvey.getQuestionByName("--sjs-primary-backcolor");
-//   headerViewContainer = themeBuilder.themeEditorSurvey.getQuestionByName("headerViewContainer").panels[0];
+  creator.activeTab = "theme";
+  themeChooser = propertyGridSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
+  primaryBackColor = propertyGridSurvey.getQuestionByName("--sjs-primary-backcolor");
 
-//   expect(themeChooser.value).toEqual("contrast");
-//   expect(primaryBackColor.value).toEqual("rgba(0, 0, 0, 1)");
-//   expect(header["backgroundColorSwitch"]).toEqual("custom");
-//   expect(header["backgroundColor"]).toBe("#ff0000");
-// });
+  expect(themeChooser.value).toEqual("contrast");
+  expect(primaryBackColor.value).toEqual("rgba(0, 0, 0, 1)");
+  expect(header["backgroundColorSwitch"]).toEqual("custom");
+  expect(header["backgroundColor"]).toBe("#ff0000");
+});
