@@ -14,6 +14,8 @@ export class SurveyQuestionEditorPropertyDefinition {
   public category: string;
   public createdFromTabName: boolean;
   public onSameLine: boolean;
+  public index: number;
+  public definedIndex: number;
   public get name(): string {
     return !!this.property ? this.property.name : "";
   }
@@ -213,6 +215,9 @@ export class SurveyQuestionProperties {
       !isString && !!defProperty.category ? defProperty.category : "";
     propertyDefinition.title =
       !isString && !!defProperty.title ? defProperty.title : "";
+    if(defProperty.index !== undefined) {
+      propertyDefinition.definedIndex = defProperty.index;
+    }
     propertyDefinition.onSameLine = this.isPropertyOnSameLine(propRes.property.nextToProperty);
     propertyDefinition.createdFromTabName = isTab;
     let tab = this.getTabOrCreate(tabName);
@@ -443,16 +448,26 @@ export class SurveyQuestionProperties {
     properties: Array<SurveyQuestionEditorPropertyDefinition>
   ) {
     if (!Array.isArray(properties)) return;
-    var props: Array<SurveyQuestionEditorPropertyDefinition> = [].concat(
-      properties
-    );
-    for (var i = 0; i < props.length; i++) {
-      var index = props[i].property.visibleIndex;
+    let index = 0;
+    properties.forEach(prop => {
+      prop.index = prop.definedIndex !== undefined ? prop.definedIndex : index;
+      index ++;
+    });
+    properties.sort((prop1, prop2): number => {
+      if(prop1.index === prop2.index) return 0;
+      return prop1.index < prop2.index ? -1 : 1;
+    });
+    this.insertProperteisWithVisibleIndex(properties);
+  }
+  private insertProperteisWithVisibleIndex(properties: Array<SurveyQuestionEditorPropertyDefinition>): void {
+    const props: Array<SurveyQuestionEditorPropertyDefinition> = [].concat(properties);
+    for (let i = 0; i < props.length; i++) {
+      let index = props[i].property.visibleIndex;
       if (props[i].createdFromTabName && index < 0) {
         index = 0;
       }
-      if (index < 0) continue;
-      var curIndex = properties.indexOf(props[i]);
+      if (index < 0 || props[i].definedIndex !== undefined) continue;
+      let curIndex = properties.indexOf(props[i]);
       if (curIndex > -1) {
         properties.splice(curIndex, 1);
       }

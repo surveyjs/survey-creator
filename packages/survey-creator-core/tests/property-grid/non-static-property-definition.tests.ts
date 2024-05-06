@@ -1,4 +1,4 @@
-import { QuestionTextModel, QuestionDropdownModel, QuestionMatrixDynamicModel, QuestionMatrixDropdownModel, Helpers } from "survey-core";
+import { QuestionTextModel, QuestionDropdownModel, QuestionMatrixDynamicModel, QuestionMatrixDropdownModel, Helpers, Serializer } from "survey-core";
 import { PropertyGridModelTester } from "./property-grid.base";
 import { ISurveyPropertyGridDefinition } from "../../src/question-editor/definition";
 
@@ -100,4 +100,53 @@ test("Update propertyGridDefintion", () => {
   expect(panels[1].name).toBe("logic");
   expect(panels[0].elements).toHaveLength(4);
   expect(panels[1].elements).toHaveLength(2);
+});
+const defaultProperties2 : ISurveyPropertyGridDefinition = {
+  autoGenerateProperties: false,
+  classes: {
+    question: {
+      properties: [
+        { name: "name", index: 5 },
+        { name: "title", index: 3 },
+        { name: "indent", index: 1 },
+        { name: "visibleIf", tab: "logic" },
+        { name: "enableIf", tab: "logic" },
+      ],
+      tabs: [
+        { name: "logic", index: 15 }
+      ]
+    },
+    selectbase: {
+      properties: [
+        { name: "hideIfChoicesEmpty", index: 2 },
+        { name: "choicesMin", tab: "choices" }
+      ],
+      tabs: [
+        { name: "choices", index: 5 }
+      ]
+    },
+    dropdown: {
+      properties: [
+        { name: "allowClear", index: 4 }
+      ],
+    }
+  }
+};
+test("Add support for property info index", () => {
+  const question = new QuestionDropdownModel("q1");
+  const propertyGrid = new PropertyGridModelTester(question, undefined, defaultProperties2);
+  const survey = propertyGrid.survey;
+  const panels = survey.getAllPanels();
+  expect(panels).toHaveLength(3);
+  expect(panels[0].name).toBe("general");
+  expect(panels[1].name).toBe("choices");
+  expect(panels[2].name).toBe("logic");
+
+  const generalQuestions = panels[0].elements;
+  expect(generalQuestions).toHaveLength(5);
+  expect(generalQuestions[0].name).toBe("indent");
+  expect(generalQuestions[1].name).toBe("hideIfChoicesEmpty");
+  expect(generalQuestions[2].name).toBe("title");
+  expect(generalQuestions[3].name).toBe("allowClear");
+  expect(generalQuestions[4].name).toBe("name");
 });

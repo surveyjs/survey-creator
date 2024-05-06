@@ -1,5 +1,6 @@
 export interface IPropertyEditorInfo {
   name: string;
+  index?: number;
   title?: string;
   tab?: string;
 }
