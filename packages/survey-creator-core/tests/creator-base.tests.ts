@@ -25,6 +25,7 @@ import {
 } from "survey-core";
 import { PageAdorner } from "../src/components/page";
 import { QuestionAdornerViewModel } from "../src/components/question";
+import { QuestionImageAdornerViewModel } from "../src/components/question-image";
 import { QuestionDropdownAdornerViewModel } from "../src/components/question-dropdown";
 import { SurveyElementAdornerBase } from "../src/components/action-container-view-model";
 import { PageNavigatorViewModel } from "../src/components/page-navigator/page-navigator";
@@ -4260,9 +4261,57 @@ test("New ghost page shouldn't be created if onPageAdding sets allow to false", 
   expect(desigerTab.newPage).toBeFalsy();
   expect(desigerTab.showNewPage).toBeFalsy();
 });
-test("Do not raise error on undefined proeprty in onIsPropertyReadOnlyCallback", (): any => {
+test("Do not raise error on undefined property in onIsPropertyReadOnlyCallback", (): any => {
   const creator = new CreatorTester();
   creator.onGetPropertyReadOnly.add((_, options) => { });
   let counter = 0;
   expect(creator.onIsPropertyReadOnlyCallback(creator.survey, undefined, false, undefined, undefined)).toBeFalsy();
+});
+
+test("Check designer tab placeholder if isMobileView is true", (): any => {
+  const creator = new CreatorTester();
+  const desigerTab = creator.getPlugin("designer").model as TabDesignerViewModel;
+  expect(desigerTab.placeholderText).toBe("The survey is empty. Drag an element from the toolbox or click the button below.");
+
+  creator.isMobileView = true;
+  expect(desigerTab.placeholderText).toBe("Click the \"Add Question\" button below to start creating your form.");
+});
+
+test("Check the placeholders of the survey items if isMobileView is true", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "panel",
+            "name": "panel1"
+          },
+          {
+            "type": "image",
+            "name": "question1",
+            "imageFit": "cover",
+            "imageHeight": "auto",
+            "imageWidth": "100%"
+          }
+        ]
+      },
+      {
+        "name": "page2"
+      }
+    ]
+  };
+  const pageModelAdorner = new PageAdorner(creator, creator.survey.pages[1]);
+  const panelModelAdorner = new QuestionAdornerViewModel(creator, creator.survey.getPanelByName("panel1"), undefined);
+  const imageQuestionModelAdorner = new QuestionImageAdornerViewModel(creator, creator.survey.getQuestionByName("question1"), <any>{}, null);
+
+  expect(pageModelAdorner.placeholderText).toBe("The page is empty. Drag an element from the toolbox or click the button below.");
+  expect(panelModelAdorner.placeholderText).toBe("Drop a question from the toolbox here.");
+  expect(imageQuestionModelAdorner.placeholderText).toBe("Drag and drop an image here or click the button below and choose an image to upload");
+
+  creator.isMobileView = true;
+  expect(pageModelAdorner.placeholderText).toBe("Click the \"Add Question\" button below to add a new element to the page.");
+  expect(panelModelAdorner.placeholderText).toBe("Click the \"Add Question\" button below to add a new element to the panel.");
+  expect(imageQuestionModelAdorner.placeholderText).toBe("Click the button below and choose an image to upload");
 });
