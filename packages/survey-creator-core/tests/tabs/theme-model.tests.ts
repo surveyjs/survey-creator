@@ -146,7 +146,8 @@ test("Theme model backgroundImage serialization", (): any => {
     "backgroundOpacity",
     "backgroundImageAttachment",
     "backgroundImageFit",
-    "cssVariables"]);
+    "cssVariables",
+    "headerView"]);
   expect(initialJson.backgroundImage).toBe("");
   themeModel.backgroundImage = "image";
   const modifiedJson = themeModel.toJSON();
@@ -175,6 +176,7 @@ test("Theme model load custom theme", (): any => {
   themeModel.fromJSON(customeTheme);
 
   const json = themeModel.toJSON();
+  customeTheme.headerView = "basic";
   expect(json).toStrictEqual(customeTheme);
 
   Serializer.removeProperty("theme", "--a-var");
@@ -351,10 +353,8 @@ test("Theme builder themeMode not change modified values ", (): any => {
 
   themeModel.questionBackgroundTransparency = 60;
   expect(themeModel.cssVariables["--sjs-editorpanel-backcolor"]).toEqual("rgba(249, 249, 249, 0.6)");
-  // expect(themeModel.themeMode).toEqual("panels");
   expect(themeModel.isPanelless).toEqual(false);
 
-  // themeModel.themeMode = "lightweight";
   themeModel.isPanelless = true;
   expect(themeModel.questionBackgroundTransparency).toEqual(60);
   expect(themeModel.cssVariables["--sjs-editorpanel-backcolor"]).toEqual("rgba(249, 249, 249, 0.6)");
@@ -425,7 +425,7 @@ test("Theme builder: restore values of fontsettings from loadTheme", (): any => 
   });
 });
 
-test("Keep theme css changes throgh the different themes choosen", (): any => {
+test("Keep theme css changes through the different themes choosen", (): any => {
   const fefefeColor = "rgba(254, 254, 254, 1)";
   const themeModel = new ThemeModel();
   themeModel.initialize();

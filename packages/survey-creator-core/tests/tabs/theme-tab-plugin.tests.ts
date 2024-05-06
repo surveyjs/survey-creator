@@ -236,9 +236,7 @@ test("Theme onModified and saveThemeFunc", (): any => {
     modificationsLog += "->THEME_MODIFIED";
   });
   themePlugin.activate();
-  // const themeBuilder = themePlugin.model as ThemeEditorModel;
   const themeModel = themePlugin.themeModel as ThemeModel;
-  // const themeEditor = themeBuilder.themeEditorSurvey;
 
   expect(modificationsLog).toBe("");
   expect(saveCount).toBe(0);
@@ -246,7 +244,6 @@ test("Theme onModified and saveThemeFunc", (): any => {
   expect(creator.hasPendingThemeChanges).toBeFalsy();
   expect(themePlugin.isModified).toBeFalsy();
 
-  // themeEditor.getQuestionByName("--sjs-border-default").value = "#ff0000";
   themeModel["--sjs-border-default"] = "#ff0000";
 
   expect(modificationsLog).toBe("->THEME_MODIFIED");
@@ -263,7 +260,6 @@ test("Theme onModified and saveThemeFunc", (): any => {
   expect(creator.hasPendingThemeChanges).toBeFalsy();
   expect(themePlugin.isModified).toBeFalsy();
 
-  // themeEditor.getQuestionByName("backgroundImage").value = [{ name: "pic1.png", type: "", content: "http://site.org/images/pic1.png" }];
   themeModel.backgroundImage = "http://site.org/images/pic1.png";
 
   expect(modificationsLog).toBe("->THEME_MODIFIED->THEME_SELECTED->THEME_MODIFIED");
@@ -272,7 +268,6 @@ test("Theme onModified and saveThemeFunc", (): any => {
   expect(creator.hasPendingThemeChanges).toBeFalsy();
   expect(themePlugin.isModified).toBeTruthy();
 
-  // themeEditor.getQuestionByName("--sjs-general-backcolor-dim").value = "#ff0000";
   themeModel["--sjs-general-backcolor-dim"] = "#ff0000";
 
   expect(modificationsLog).toBe("->THEME_MODIFIED->THEME_SELECTED->THEME_MODIFIED->THEME_MODIFIED");
@@ -281,12 +276,12 @@ test("Theme onModified and saveThemeFunc", (): any => {
   expect(creator.hasPendingThemeChanges).toBeFalsy();
   expect(themePlugin.isModified).toBeTruthy();
 
-  // themeEditor.getQuestionByName("headerViewContainer").value = [{ headerView: "advanced" }];
-  // expect(modificationsLog).toBe("->THEME_MODIFIED->THEME_SELECTED->THEME_MODIFIED->THEME_MODIFIED->THEME_MODIFIED");
-  // expect(saveCount).toBe(1);
-  // expect(saveThemeCount).toBe(5);
-  // expect(creator.hasPendingThemeChanges).toBeFalsy();
-  // expect(themePlugin.isModified).toBeTruthy();
+  themeModel.header["headerView"] = "advanced";
+  expect(modificationsLog).toBe("->THEME_MODIFIED->THEME_SELECTED->THEME_MODIFIED->THEME_MODIFIED->THEME_MODIFIED");
+  expect(saveCount).toBe(0);
+  expect(saveThemeCount).toBe(5);
+  expect(creator.hasPendingThemeChanges).toBeFalsy();
+  expect(themePlugin.isModified).toBeTruthy();
 });
 
 test("loadTheme fill all theme parameters: name, mode and compactness", (): any => {
@@ -333,17 +328,17 @@ test("Get theme changes only", (): any => {
   expect(themeModel.cssVariables["--sjs-editorpanel-backcolor"]).toEqual("rgba(249, 249, 249, 0.6)");
 
   const fullModifiedTheme = themePlugin.getCurrentTheme() || {};
-  expect(Object.keys(fullModifiedTheme).length).toBe(8);
+  expect(Object.keys(fullModifiedTheme).length).toBe(9);
   expect(Object.keys(fullModifiedTheme.cssVariables).length).toBe(83);
 
   const modifiedThemeChanges = themePlugin.getCurrentTheme(true) || {};
-  expect(Object.keys(modifiedThemeChanges).length).toBe(4);
+  expect(Object.keys(modifiedThemeChanges).length).toBe(5);
   expect(Object.keys(modifiedThemeChanges.cssVariables).length).toBe(1);
   expect(Object.keys(modifiedThemeChanges.cssVariables)).toStrictEqual(["--sjs-editorpanel-backcolor"]);
 
   themeModel.resetTheme();
   const fullThemeReset = themePlugin.getCurrentTheme();
-  expect(Object.keys(fullThemeReset).length).toBe(8);
+  expect(Object.keys(fullThemeReset).length).toBe(9);
   expect(Object.keys(fullThemeReset)).toStrictEqual([
     "themeName",
     "colorPalette",
@@ -353,16 +348,18 @@ test("Get theme changes only", (): any => {
     "backgroundImageAttachment",
     "backgroundImageFit",
     "cssVariables",
+    "headerView"
   ]);
   expect(Object.keys(fullThemeReset.cssVariables).length).toBe(82);
 
   const themeChangesReset = themePlugin.getCurrentTheme(true);
-  expect(Object.keys(themeChangesReset).length).toBe(4);
+  expect(Object.keys(themeChangesReset).length).toBe(5);
   expect(Object.keys(themeChangesReset)).toStrictEqual([
     "cssVariables",
+    "headerView",
     "themeName",
     "colorPalette",
-    "isPanelless"
+    "isPanelless",
   ]);
   expect(Object.keys(themeChangesReset.cssVariables).length).toBe(0);
 });
@@ -465,17 +462,11 @@ test("Keep theme modifications between edit sessions", (): any => {
   };
   let themePlugin: ThemeTabPlugin = creator.getPlugin<ThemeTabPlugin>("theme");
   themePlugin.activate();
-  // let themeBuilder = themePlugin.model as ThemeEditorModel;
-  // let themeEditorSurvey = themeBuilder.themeEditorSurvey;
-  // let primaryBackColor = themeEditorSurvey.getQuestionByName("--sjs-primary-backcolor");
-  // let themeChooser = themeEditorSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
   let themeTabViewModel = themePlugin.model as ThemeEditorModel;
   let themeModel = themePlugin.themeModel as ThemeModel;
 
   themeModel.themeName = "layered";
   themeModel["--sjs-primary-backcolor"] = "#0000ff";
-  // themeChooser.value = "layered";
-  // primaryBackColor.value = "#0000ff";
   expect(savedTheme.cssVariables["--sjs-primary-backcolor"]).toBe("#0000ff");
 
   creator = new CreatorTester({ showThemeTab: true });
@@ -485,17 +476,11 @@ test("Keep theme modifications between edit sessions", (): any => {
   creator.theme = savedTheme;
   themePlugin = creator.getPlugin<ThemeTabPlugin>("theme");
   themePlugin.activate();
-  // themeEditorSurvey = themeBuilder.themeEditorSurvey;
-  // primaryBackColor = themeEditorSurvey.getQuestionByName("--sjs-primary-backcolor");
-  // themeChooser = themeEditorSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
 
   themeTabViewModel = themePlugin.model as ThemeEditorModel;
   expect(themeModel.themeName).toBe("layered");
   expect(themeModel["--sjs-primary-backcolor"]).toBe("#0000ff");
   expect(themeTabViewModel.survey.themeVariables["--sjs-primary-backcolor"]).toBe("#0000ff");
-  // expect(themeChooser.value).toBe("layered");
-  // expect(primaryBackColor.value).toBe("rgba(0, 0, 255, 1)");
-  // expect(themeBuilder.survey.themeVariables["--sjs-primary-backcolor"]).toBe("#0000ff");
 });
 
 test("Set and use custom default theme", (): any => {
@@ -1037,6 +1022,7 @@ test("Check onOpenFileChooser is called and context is passed", (): any => {
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
   const propertyGridSurvey = themePlugin.propertyGrid.survey;
+  const themeModel = themePlugin.themeModel;
   const origGetElementById = document.getElementById;
   document.getElementById = () => ({} as any);
   try {
@@ -1048,15 +1034,14 @@ test("Check onOpenFileChooser is called and context is passed", (): any => {
     expect(lastUploadOptions.elementType).toBe("theme");
     expect(lastUploadOptions.propertyName).toBe("backgroundImage");
 
-    // const headerBackgroundImageEditor = propertyGridSurvey.pages[0].elements[1].getQuestionByName("backgroundImage") as QuestionFileModel;
     const groupHeader = themePlugin.propertyGrid.survey.pages[0].getElementByName("header");
     const headerBackgroundImageEditor = groupHeader.elements[0].contentPanel.getElementByName("backgroundImage");
     headerBackgroundImageEditor.chooseFile(new MouseEvent("click"));
     expect(log).toBe("->onOpenFileChooser->uploadFile->onOpenFileChooser->uploadFile");
-    // expect(lastContext).toStrictEqual({ element: themeBuilder.currentTheme, elementType: "header", propertyName: "backgroundImage" });
-    // expect(lastUploadContext).toStrictEqual({ element: themeBuilder.currentTheme, elementType: "header", propertyName: "backgroundImage" });
-    // expect(lastUploadOptions.elementType).toBe("header");
-    // expect(lastUploadOptions.propertyName).toBe("backgroundImage");
+    expect(lastContext).toStrictEqual({ element: themeModel.header, elementType: "headersettings", propertyName: "backgroundImage" });
+    expect(lastUploadContext).toStrictEqual({ element: themeModel.header, elementType: "headersettings", propertyName: "backgroundImage", item: undefined });
+    expect(lastUploadOptions.elementType).toBe("headersettings");
+    expect(lastUploadOptions.propertyName).toBe("backgroundImage");
   } finally {
     document.getElementById = origGetElementById;
   }

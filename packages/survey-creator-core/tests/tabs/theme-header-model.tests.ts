@@ -111,7 +111,6 @@ test("set headerViewContainer advanced", (): any => {
 
   const result = themeModel.toJSON();
   expect(result.header).toStrictEqual({
-    "headerView": "advanced",
     "height": 300,
     "inheritWidthFrom": "survey",
     "textAreaWidth": 600,
@@ -285,6 +284,7 @@ test("header custom background color and theme changes", (): any => {
   themeChooser = propertyGridSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
   primaryBackColor = propertyGridSurvey.getQuestionByName("--sjs-primary-backcolor");
 
+  expect(themeModel.themeCssCustomizations["--sjs-header-backcolor"]).toBe("#ff0000");
   expect(themeChooser.value).toEqual("default");
   expect(primaryBackColor.value).toEqual("rgba(25, 179, 148, 1)");
   expect(header["backgroundColorSwitch"]).toEqual("custom");
@@ -292,6 +292,7 @@ test("header custom background color and theme changes", (): any => {
 
   themeModel.selectTheme("contrast");
   expect(themeChooser.value).toEqual("contrast");
+  expect(themeModel.themeCssCustomizations["--sjs-header-backcolor"]).toBe("#ff0000");
   expect(primaryBackColor.value).toEqual("rgba(0, 0, 0, 1)");
   expect(header["backgroundColorSwitch"]).toEqual("custom");
   expect(header["backgroundColor"]).toBe("#ff0000");

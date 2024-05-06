@@ -63,9 +63,10 @@ export class HeaderModel extends Base implements IHeader {
     const result = super.toJSON(options);
     delete result.type;
     delete result.logoPosition;
+    delete result.headerView;
 
     if (this.backgroundImageOpacity !== 100) {
-      result["backgroundImageOpacity"] = this.backgroundImageOpacity / 100;
+      result.backgroundImageOpacity = this.backgroundImageOpacity / 100;
     }
 
     const cssVariables = {};
@@ -94,16 +95,15 @@ export class HeaderModel extends Base implements IHeader {
     if (Object.keys(result).length > 0) {
       json.header = result;
     }
+    json.headerView = this["headerView"];
   }
 
   private setHeaderBackgroundColorCssVariable(cssVariables: any) {
-    let headerBackgroundColorValue = undefined;
     if (this["backgroundColorSwitch"] === "none") {
-      headerBackgroundColorValue = "transparent";
+      cssVariables["--sjs-header-backcolor"] = "transparent";
     } else if (this["backgroundColorSwitch"] === "custom") {
-      headerBackgroundColorValue = this["backgroundColor"] ?? "transparent";
+      cssVariables["--sjs-header-backcolor"] = this["backgroundColor"] ?? "transparent";
     }
-    cssVariables["--sjs-header-backcolor"] = headerBackgroundColorValue;
   }
 
   private getBackgroundColorSwitchByValue(backgroundColor: string) {

@@ -333,21 +333,6 @@ export class ThemeModel extends Base implements ITheme {
     this.onThemePropertyChanged.fire(this, { name, value });
   }
 
-  // private patchFileEditors(survey: SurveyModel) {
-  //   const questionsToPatch = survey.getAllQuestions(false, false, true).filter(q => q.getType() == "fileedit");
-  //   questionsToPatch.forEach(q => {
-  //     (<QuestionFileEditorModel>q).onChooseFilesCallback = (input, callback) => {
-  //       const themePropertyName = q.name;
-  //       let elementType = "theme";
-  //       if (q.parentQuestion) {
-  //         elementType = q.parentQuestion.name === "headerViewContainer" ? "header" : q.parentQuestion.name;
-  //       }
-  //       (q.parentQuestion ? q.parentQuestion.name + "." : "") + q.name;
-  //       this.surveyProvider.chooseFiles(input, callback, { element: this.currentTheme as any, elementType: elementType, propertyName: themePropertyName });
-  //     };
-  //   });
-  // }
-
   // private loadThemeIntoPropertyGrid() {
   //   this.blockChanges = true;
   //   try {
@@ -397,6 +382,7 @@ export class ThemeModel extends Base implements ITheme {
     this.backgroundImageAttachment = surveyTheme.backgroundImageAttachment !== undefined ? surveyTheme.backgroundImageAttachment : survey?.backgroundImageAttachment;
     this.backgroundOpacity = ((surveyTheme.backgroundOpacity !== undefined ? surveyTheme.backgroundOpacity : survey?.backgroundOpacity) || 1) * 100;
     this.loadTheme(surveyTheme);
+    this.header["logoPosition"] = survey?.logoPosition;
     this.undoRedoManager = new UndoRedoManager();
   }
 
@@ -439,9 +425,6 @@ export class ThemeModel extends Base implements ITheme {
       let probeThemeFullName = getThemeFullName(theme);
       const baseTheme = findSuitableTheme(theme.themeName, theme.colorPalette, theme.isPanelless, probeThemeFullName);
       const themeChanges = getThemeChanges(theme, baseTheme);
-      // if (this.currentTheme === theme) {
-      //   this.themeCssVariablesChanges = themeChanges.cssVariables || {};
-      // }
       this.themeName = themeChanges.themeName;
       this.colorPalette = themeChanges.colorPalette as any;
       this.isPanelless = themeChanges.isPanelless;
@@ -485,9 +468,26 @@ export class ThemeModel extends Base implements ITheme {
   }
 
   public setTheme(theme: ITheme) {
+    // let probeThemeFullName = getThemeFullName(theme);
+    // const baseTheme = findSuitableTheme(theme.themeName, theme.colorPalette, theme.isPanelless, probeThemeFullName);
+    // const themeChanges = getThemeChanges(theme, baseTheme);
+    // if (themeChanges.themeName === theme.themeName && themeChanges.colorPalette === theme.colorPalette && themeChanges.isPanelless === theme.isPanelless) {
+    //   this.themeCssVariablesChanges = themeChanges.cssVariables || {};
+    // }
+    const headerBackgroundColorValue = this.themeCssVariablesChanges["--sjs-header-backcolor"];
+    this.themeCssVariablesChanges = {};
+    if (headerBackgroundColorValue !== undefined) {
+      this.themeCssVariablesChanges["--sjs-header-backcolor"] = headerBackgroundColorValue;
+    }
+
     try {
       this.blockThemeChangedNotifications += 1;
+      let skipKeyCount = 0;
       this.iteratePropertiesHash((hash, key) => {
+        if (key.indexOf("shadow") !== -1) {
+          skipKeyCount++;
+          return;
+        }
         this.setPropertyValue(key, undefined);
       });
       this.setNewHeaderProperty();
@@ -495,13 +495,7 @@ export class ThemeModel extends Base implements ITheme {
       this.blockThemeChangedNotifications -= 1;
     }
 
-    // const headerBackgroundColorValue = this.currentTheme.cssVariables["--sjs-header-backcolor"];
-    this.themeCssVariablesChanges = {};
-    // if (headerBackgroundColorValue !== undefined) {
-    //   this.themeCssVariablesChanges["--sjs-header-backcolor"] = headerBackgroundColorValue;
-    // }
     this.loadTheme(theme);
-    // this.themeModified({ theme });
     this.onThemeSelected.fire(this, { theme: this.toJSON() });
   }
 

@@ -112,6 +112,31 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.addSubGroupTitle(survey.getPanelByName("appearancequestion"), "theme.editorPanel");
     this.addSubGroupTitle(survey.getPanelByName("appearanceinput"), "theme.lines");
   }
+  private updatePropertyGridEditorsAvailability() {
+    const simulatorSurvey = this.model.simulator.survey;
+    const page = this.propertyGrid.survey.pages[0];
+    if (page) {
+      const header = page.getElementByName("header");
+      const headerViewContainer = header.elements[0].contentPanel;
+      const surveyTitleQuestion = headerViewContainer.getElementByName("surveyTitle");
+      if (!!surveyTitleQuestion) {
+        surveyTitleQuestion.readOnly = !simulatorSurvey.hasTitle;
+      }
+      const surveyDescriptionQuestion = headerViewContainer.getElementByName("surveyDescription");
+      if (!!surveyDescriptionQuestion) {
+        surveyDescriptionQuestion.readOnly = !simulatorSurvey.hasDescription;
+      }
+    }
+    const pageTitleQuestion = this.propertyGrid.survey.getQuestionByName("pageTitle");
+    let pageElements = simulatorSurvey.isSinglePage ? simulatorSurvey.pages[0].elements : simulatorSurvey.pages;
+    if (!!pageTitleQuestion) {
+      pageTitleQuestion.readOnly = !pageElements.some(p => !!p.title);
+    }
+    const pageDescriptionQuestion = this.propertyGrid.survey.getQuestionByName("pageDescription");
+    if (pageDescriptionQuestion) {
+      pageDescriptionQuestion.readOnly = !pageElements.some(p => !!p.description);
+    }
+  }
   private updateVisibilityOfPropertyGridGroups() {
     const page = this.propertyGrid.survey.pages[0];
     if (page) {
@@ -192,8 +217,9 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       if (options.element) {
         const question = options.element as QuestionFileModel;
         context.propertyName = question.name;
-        if (question.parentQuestion) {
-          context.elementType = question.parentQuestion.name === "headerViewContainer" ? "header" : question.parentQuestion.name;
+        if (question?.parent?.parent?.name === "settings") {
+          context.elementType = "headersettings";
+          context.element = context.element.header;
         }
       }
       this.creator.chooseFiles(options.input, options.callback, context as any);
@@ -222,6 +248,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     //   this.onPropertyGridSurveyCreated.fire(this, options);
     // }
 
+    this.updatePropertyGridEditorsAvailability();
     this.updateVisibilityOfPropertyGridGroups();
     this.propertyGridTab.visible = true;
   }
@@ -270,6 +297,9 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       this.syncTheme();
       if (options.name == "--sjs-base-unit") {
         this.model.survey.triggerResponsiveness(true);
+      }
+      if (options.name == "logoPosition") {
+        this.creator.survey.logoPosition = options.value;
       }
       this.resetTheme.enabled = true;
       this.saveThemeAction.enabled = true;
