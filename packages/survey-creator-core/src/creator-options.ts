@@ -45,9 +45,11 @@ export interface ICreatorOptions {
    */
   showTranslationTab?: boolean;
   /**
-   * Specifies whether to display the Theme tab.
+   * Specifies whether to display the Themes tab.
    *
    * Default value: `false`
+   *
+   * [Theme Editor](https://surveyjs.io/survey-creator/documentation/theme-editor (linkStyle))
    */
   showThemeTab?: boolean;
   /**
