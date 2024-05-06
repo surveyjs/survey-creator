@@ -145,6 +145,10 @@
   border-radius: calcSize(0.5);
   line-height: calcSize(3);
 
+}
+
+.spg-question__erbox,
+sv-question-error {
   &>div {
     display: flex;
     gap: calcSize(1);

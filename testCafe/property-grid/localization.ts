@@ -52,3 +52,48 @@ test("visibleIf property in de localization", async (t) => {
     .typeText(question2Text, "val1")
     .click(applyBtn);
 });
+
+test("Matrix column editor in de localization", async (t) => {
+  const json = {
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "matrixdropdown",
+            "name": "question1",
+            "columns": [
+              { "name": "Column 1" },
+              { "name": "Column 2" },
+              { "name": "Column 3" }
+            ],
+            "choices": [1, 2, 3, 4, 5],
+            "rows": ["Row 1", "Row 2"]
+          }
+        ]
+      }
+    ]
+  };
+  await setJSON(json);
+  await setDELocale();
+
+  const row1Column1Cell = Selector(".sd-table__row").nth(0).find(".svc-matrix-cell").filterVisible().nth(1);
+  const editColumnButton = Selector(".svc-matrix-cell__question-controls-button").filterVisible();
+  const popup = Selector(".svc-matrix-cell__popup.sv-popup--modal .sv-popup__body-content");
+  const applyBtn = Selector("button").withExactText("Anwenden");
+  const cancelBtn = Selector("button").withExactText("Abbrechen");
+
+  await t
+    .expect(Selector(".svc-question__content").exists).ok()
+    .hover(row1Column1Cell, { speed: 0.5 })
+    .click(editColumnButton)
+
+    .expect(popup.visible).ok()
+    .expect(applyBtn.exists).ok()
+    .expect(applyBtn.visible).ok()
+    .expect(cancelBtn.exists).ok()
+    .expect(cancelBtn.visible).ok()
+
+    .click(applyBtn)
+    .expect(popup.visible).notOk();
+});

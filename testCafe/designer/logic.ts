@@ -187,7 +187,7 @@ test("Create logic rule", async (t) => {
     .click(getListItemByText("Complete survey"))
 
     .click(doneButton)
-    .expect(errorNotifyBalloonSelector.innerText).eql("Please, fix problems in your action(s).")
+    .expect(errorNotifyBalloonSelector.innerText).eql("Please fix issues in your action(s).")
     .expect(Selector(".svc-logic-operator.svc-logic-operator--question.svc-logic-operator--error").filterVisible().count).eql(2)
 
     .hover(logicActionSelector)
@@ -378,7 +378,7 @@ async function check2Rule(t: TestController) {
     .expect(logicQuestionSelector.textContent).contains("q1")
     .expect(logicOperatorSelector.textContent).contains("Equals")
     .expect(getDropdownValue(logicDropdownValueSelector)).eql("Item 2")
-    .expect(logicActionSelector.textContent).contains("Show (hide) question")
+    .expect(logicActionSelector.textContent).contains("Show/hide question")
     .expect(logicQuestionSelector.nth(1).textContent).contains("q3");
 }
 
@@ -412,7 +412,7 @@ test("Modified rules without saving", async (t) => {
     .click(logicDropdownValueSelector)
     .click(getListItemByText("Item 2"))
     .click(logicActionSelector)
-    .click(getListItemByText("Show (hide) question"))
+    .click(getListItemByText("Show/hide question"))
     .click(logicQuestionSelector.nth(1))
     .click(getListItemByText("q3"));
   await check2Rule(t);

@@ -1,5 +1,5 @@
 import { ClientFunction, Selector } from "testcafe";
-import { url, setJSON, takeElementScreenshot, addQuestionByAddQuestionButton, wrapVisualTest, getTabbedMenuItemByText, creatorTabPreviewName, creatorTabDesignerName, resetHoverToCreator, getToolboxItemByText, getPropertyGridCategory, generalGroupName, getListItemByText, surveySettingsButtonSelector } from "../../helper";
+import { url, setJSON, takeElementScreenshot, addQuestionByAddQuestionButton, wrapVisualTest, getTabbedMenuItemByText, creatorTabPreviewName, creatorTabDesignerName, resetHoverToCreator, getToolboxItemByText, getPropertyGridCategory, generalGroupName, getListItemByText, surveySettingsButtonSelector, changeToolboxScrolling } from "../../helper";
 
 const title = "Designer surface";
 
@@ -204,20 +204,11 @@ test("Matrix column editor", async (t) => {
     const row1Column1Cell = Selector(".sd-table__row").nth(0).find(".svc-matrix-cell").filterVisible().nth(1);
     const editColumnButton = Selector(".svc-matrix-cell__question-controls-button").filterVisible();
 
-    const showControl = ClientFunction(() => {
-      const el: any = document.querySelectorAll("td:nth-of-type(2) .svc-matrix-cell .svc-matrix-cell__question-controls")[0];
-      el.style.display = "block";
-    });
-
     await t
       .expect(Selector(".svc-question__content").exists).ok()
       .hover(row1Column1Cell, { speed: 0.5 });
 
-    // TODO: remove this line after TestCafe implements workig hover
-    await showControl();
-
     await t.click(editColumnButton);
-
     await takeElementScreenshot("matrix-cell-edit.png", Selector(".svc-matrix-cell__popup .sv-popup__container"), t, comparer);
   });
 });
@@ -349,19 +340,11 @@ test("Matrix column editor boolean", async (t) => {
     };
     await setJSON(surveyJSON);
     const row1Column1Cell = Selector(".sd-table__row").nth(0).find(".svc-matrix-cell").filterVisible().nth(1);
-    const editColumnButton = Selector(".svc-matrix-cell__question-controls-button").filterVisible();
-
-    const showControl = ClientFunction(() => {
-      const el: any = document.querySelectorAll("td:nth-of-type(2) .svc-matrix-cell .svc-matrix-cell__question-controls")[0];
-      el.style.display = "block";
-    });
 
     await t
       .expect(Selector(".svc-question__content").exists).ok()
       .hover(row1Column1Cell, { speed: 0.5 });
 
-    // TODO: remove this line after TestCafe implements workig hover
-    await showControl();
     await takeElementScreenshot("matrix-cell-edit-bool.png", row1Column1Cell, t, comparer);
   });
 });
@@ -1007,6 +990,7 @@ test("Check survey layout in mobile mode", async (t) => {
 
 test("Check property grid flyout", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    changeToolboxScrolling(false);
     await t.resizeWindow(1120, 900);
     const root = Selector(".svc-creator");
     await setJSON({});
@@ -1311,6 +1295,7 @@ test("Question actions", async (t) => {
 
 test("Keep scroll to selected on tab changed", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    changeToolboxScrolling(false);
     await t.resizeWindow(1600, 900);
     const json = {
       "logoPosition": "right",
@@ -1950,6 +1935,7 @@ test("Page placeholder without elements", async (t) => {
 
 test("Check minimal height", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    changeToolboxScrolling(false);
     await t.resizeWindow(1120, 900);
     const root = Selector(".svc-creator");
     await setJSON({});

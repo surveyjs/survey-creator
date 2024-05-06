@@ -32,21 +32,23 @@ function getElementsJSON() {
   ];
 }
 
-ComponentCollection.Instance.add({
-  name: "elementsettings",
-  showInToolbox: false,
-  internal: true,
-  elementsJSON: getElementsJSON(),
-  onInit() {
-  },
-  onCreated(question) {
-  },
-  valueToQuestion(value) {
-    return JSON.parse(JSON.stringify(value));
-  },
-  onValueChanged(question, name, newValue) {
-  },
-});
+if (!ComponentCollection.Instance.getCustomQuestionByName("elementsettings")) {
+  ComponentCollection.Instance.add({
+    name: "elementsettings",
+    showInToolbox: false,
+    internal: true,
+    elementsJSON: getElementsJSON(),
+    onInit() {
+    },
+    onCreated(question) {
+    },
+    valueToQuestion(value) {
+      return JSON.parse(JSON.stringify(value));
+    },
+    onValueChanged(question, name, newValue) {
+    },
+  });
+}
 
 export function updateElementSettingsJSON() {
   const config = ComponentCollection.Instance.getCustomQuestionByName("elementsettings");

@@ -50,7 +50,7 @@
     <div class="svc-image-item-value-controls" data-bind="event: { pointerdown: blockEvent }">
       <!-- ko if: allowAdd && !isUploading -->
       <sv-svg-icon class="svc-context-button svc-image-item-value-controls__add"
-        data-bind="click: chooseNewFile, key2click, clickBubble: false" params="iconName: 'icon-add-lg', size: 24">
+        data-bind="click: chooseNewFile, key2click, clickBubble: false" params="iconName: 'icon-add-lg', size: 24, title: addFileTitle">
       </sv-svg-icon>
       <!-- /ko -->
     </div>
