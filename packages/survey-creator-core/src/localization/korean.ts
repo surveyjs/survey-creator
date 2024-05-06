@@ -170,6 +170,10 @@ export var koreanStrings = {
     surveyPlaceHolder: "설문 조사가 비어 있습니다. 도구 상자에서 요소를 드래그하거나 아래 버튼을 클릭합니다.",
     pagePlaceHolder: "페이지가 비어 있습니다. 도구 상자에서 요소를 드래그하거나 아래 버튼을 클릭합니다.",
     imagePlaceHolder: "여기에 이미지를 끌어다 놓거나 아래 버튼을 클릭하고 업로드할 이미지를 선택하세요.",
+    surveyPlaceHolderMobile: "아래의 \"질문 추가\" 버튼을 클릭하여 양식 작성을 시작하십시오.",
+    pagePlaceHolderMobile: "아래의 \"질문 추가\" 버튼을 클릭하여 페이지에 새 요소를 추가하세요.",
+    panelPlaceHolderMobile: "아래의 \"질문 추가\" 버튼을 클릭하여 패널에 새 요소를 추가합니다.",
+    imagePlaceHolderMobile: "아래 버튼을 클릭하고 업로드할 이미지를 선택하세요.",
     imageChooseImage: "이미지 선택",
     addNewTypeQuestion: "{0} 추가", //{0} is localizable question type
     chooseLogoPlaceholder: "[로고]",
@@ -2752,3 +2756,7 @@ editorLocalization.locales["ko"] = koreanStrings;
 // ed.selectFile: "Select a file" => "파일 선택"
 // ed.removeFile: "Remove the file" => "파일 제거"
 // pe.searchMode: "Search Mode" => "검색 모드"
+// ed.surveyPlaceHolderMobile: "Click the \"Add Question\" button below to start creating your form." => "아래의 \"질문 추가\" 버튼을 클릭하여 양식 작성을 시작하십시오."
+// ed.pagePlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the page." => "아래의 \"질문 추가\" 버튼을 클릭하여 페이지에 새 요소를 추가하세요."
+// ed.panelPlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the panel." => "아래의 \"질문 추가\" 버튼을 클릭하여 패널에 새 요소를 추가합니다."
+// ed.imagePlaceHolderMobile: "Click the button below and choose an image to upload" => "아래 버튼을 클릭하고 업로드할 이미지를 선택하세요."

@@ -170,6 +170,10 @@ export var jaStrings = {
     surveyPlaceHolder: "アンケートは空です。ツールボックスから要素をドラッグするか、下のボタンをクリックします。",
     pagePlaceHolder: "ページは空です。ツールボックスから要素をドラッグするか、下のボタンをクリックします。",
     imagePlaceHolder: "ここに画像をドラッグ&ドロップするか、下のボタンをクリックしてアップロードする画像を選択してください",
+    surveyPlaceHolderMobile: "下の「質問を追加」ボタンをクリックして、フォームの作成を開始してください。",
+    pagePlaceHolderMobile: "下の「質問を追加」ボタンをクリックして、ページに新しい要素を追加します。",
+    panelPlaceHolderMobile: "下の「質問を追加」ボタンをクリックして、パネルに新しい要素を追加します。",
+    imagePlaceHolderMobile: "下のボタンをクリックして、アップロードする画像を選択してください",
     imageChooseImage: "画像を選択",
     addNewTypeQuestion: "{0}を追加", //{0} is localizable question type
     chooseLogoPlaceholder: "[ロゴ]",
@@ -2547,3 +2551,7 @@ editorLocalization.locales["ja"] = jaStrings;
 // ed.selectFile: "Select a file" => "ファイルを選択"
 // ed.removeFile: "Remove the file" => "ファイルを削除する"
 // pe.searchMode: "Search Mode" => "検索モード"
+// ed.surveyPlaceHolderMobile: "Click the \"Add Question\" button below to start creating your form." => "下の「質問を追加」ボタンをクリックして、フォームの作成を開始してください。"
+// ed.pagePlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the page." => "下の「質問を追加」ボタンをクリックして、ページに新しい要素を追加します。"
+// ed.panelPlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the panel." => "下の「質問を追加」ボタンをクリックして、パネルに新しい要素を追加します。"
+// ed.imagePlaceHolderMobile: "Click the button below and choose an image to upload" => "下のボタンをクリックして、アップロードする画像を選択してください"

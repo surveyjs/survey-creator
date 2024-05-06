@@ -170,6 +170,10 @@ export var hrStrings = {
     surveyPlaceHolder: "Anketa je prazna. Povucite element iz alatnog okvira ili kliknite donji gumb.",
     pagePlaceHolder: "Stranica je prazna. Povucite element iz alatnog okvira ili kliknite donji gumb.",
     imagePlaceHolder: "Povucite i ispustite sliku ovdje ili kliknite donji gumb i odaberite sliku koju želite prenijeti",
+    surveyPlaceHolderMobile: "Kliknite donji gumb \"Dodaj pitanje\" da biste započeli stvaranje obrasca.",
+    pagePlaceHolderMobile: "Kliknite donji gumb \"Dodaj pitanje\" da biste na stranicu dodali novi element.",
+    panelPlaceHolderMobile: "Kliknite donji gumb \"Dodaj pitanje\" da biste na ploču dodali novi element.",
+    imagePlaceHolderMobile: "Kliknite donji gumb i odaberite sliku koju želite prenijeti",
     imageChooseImage: "Odabir slike",
     addNewTypeQuestion: "Dodaj {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
@@ -2542,3 +2546,7 @@ editorLocalization.locales["hr"] = hrStrings;
 // ed.selectFile: "Select a file" => "Odabir datoteke"
 // ed.removeFile: "Remove the file" => "Uklanjanje datoteke"
 // pe.searchMode: "Search Mode" => "Način pretraživanja"
+// ed.surveyPlaceHolderMobile: "Click the \"Add Question\" button below to start creating your form." => "Kliknite donji gumb \"Dodaj pitanje\" da biste započeli stvaranje obrasca."
+// ed.pagePlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the page." => "Kliknite donji gumb \"Dodaj pitanje\" da biste na stranicu dodali novi element."
+// ed.panelPlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the panel." => "Kliknite donji gumb \"Dodaj pitanje\" da biste na ploču dodali novi element."
+// ed.imagePlaceHolderMobile: "Click the button below and choose an image to upload" => "Kliknite donji gumb i odaberite sliku koju želite prenijeti"

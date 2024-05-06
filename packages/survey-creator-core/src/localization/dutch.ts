@@ -170,6 +170,10 @@ export var nlStrings = {
     surveyPlaceHolder: "De enquête is leeg. Sleep een element uit de gereedschapskist of klik op de onderstaande knop.",
     pagePlaceHolder: "De pagina is leeg. Sleep een element uit de gereedschapskist of klik op de knop hieronder.",
     imagePlaceHolder: "Sleep een afbeelding hierheen of klik op de onderstaande knop en kies een afbeelding om te uploaden",
+    surveyPlaceHolderMobile: "Klik hieronder op de knop \"Vraag toevoegen\" om te beginnen met het maken van uw formulier.",
+    pagePlaceHolderMobile: "Klik op de knop \"Vraag toevoegen\" hieronder om een nieuw element aan de pagina toe te voegen.",
+    panelPlaceHolderMobile: "Klik op de knop \"Vraag toevoegen\" hieronder om een nieuw element aan het paneel toe te voegen.",
+    imagePlaceHolderMobile: "Klik op de onderstaande knop en kies een afbeelding om te uploaden",
     imageChooseImage: "Kies afbeelding",
     addNewTypeQuestion: "Voeg {0} toe", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
@@ -2528,3 +2532,8 @@ editorLocalization.locales["nl"] = nlStrings;
 // ed.selectFile: "Select a file" => "Selecteer een bestand"
 // ed.removeFile: "Remove the file" => "Verwijder het bestand"
 // pe.searchMode: "Search Mode" => "Zoekmodus"
+
+// ed.surveyPlaceHolderMobile: "Click the \"Add Question\" button below to start creating your form." => "Klik hieronder op de knop \"Vraag toevoegen\" om te beginnen met het maken van uw formulier."
+// ed.pagePlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the page." => "Klik op de knop \"Vraag toevoegen\" hieronder om een nieuw element aan de pagina toe te voegen."
+// ed.panelPlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the panel." => "Klik op de knop \"Vraag toevoegen\" hieronder om een nieuw element aan het paneel toe te voegen."
+// ed.imagePlaceHolderMobile: "Click the button below and choose an image to upload" => "Klik op de onderstaande knop en kies een afbeelding om te uploaden"

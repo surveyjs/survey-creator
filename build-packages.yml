@@ -320,16 +320,20 @@ jobs:
       npm run doc_gen
     displayName: 'Generate docs'
 
-  - task: CopyFiles@2
-    inputs:
-      SourceFolder: '$(Build.SourcesDirectory)/survey-creator/docs'
-      TargetFolder: '$(Build.SourcesDirectory)/service/surveyjs.io/App_Data/DocsEditor'
-      CleanTargetFolder: true
-    displayName: 'Copy root docs to the local surveyjs/service repo'
+  # - task: CopyFiles@2
+  #   inputs:
+  #     SourceFolder: '$(Build.SourcesDirectory)/survey-creator/docs'
+  #     TargetFolder: '$(Build.SourcesDirectory)/service/surveyjs.io/App_Data/DocsEditor'
+  #     CleanTargetFolder: true
+  #   displayName: 'Copy root docs to the local surveyjs/service repo'
 
   - task: CopyFiles@2
     inputs:
       SourceFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/docs'
+      Contents: |
+        classes.json
+        pmes.json
+        surveyjs_definition.json
       TargetFolder: '$(Build.SourcesDirectory)/service/surveyjs.io/App_Data/DocsEditor'
       CleanTargetFolder: false
     displayName: 'Copy generated docs to the local surveyjs/service repo'

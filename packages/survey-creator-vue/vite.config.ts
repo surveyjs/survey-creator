@@ -7,7 +7,9 @@ import generatePackageJson from "rollup-plugin-generate-package-json";
 const json = require("./publish/package.json");
 const packageJson = require("./package.json");
 json.version = packageJson.version;
-// json.dependencies["survey-core"] = json.version;
+json.peerDependencies["survey-core"] = json.version;
+json.peerDependencies["survey-vue3-ui"] = json.version;
+json.peerDependencies["survey-creator-core"] = json.version;
 
 const libraryName = "survey-creator-vue";
 

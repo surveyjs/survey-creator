@@ -87,7 +87,7 @@ export class ImageItemValueAdornerComponent extends CreatorModelElement<
 
         <div className="svc-image-item-value-controls">
           {this.model.allowAdd && !this.model.isUploading ? attachKey2click(<span className="svc-context-button svc-image-item-value-controls__add" onClick={() => this.model.chooseNewFile(this.model)}>
-            <SvgIcon size={24} iconName={"icon-add-lg"}></SvgIcon>
+            <SvgIcon size={24} iconName={"icon-add-lg"} title={this.model.addFileTitle}></SvgIcon>
           </span>) : null}
         </div>
       </>);

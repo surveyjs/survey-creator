@@ -79,6 +79,8 @@ export class TabDesignerViewModel extends Base {
     return this.creator.showToolbox && (this.creator.toolboxLocation === "right" || this.creator.toolboxLocation === "left");
   }
   public get placeholderText(): string {
+    if (this.creator.isMobileView)
+      return getLocString("ed.surveyPlaceHolderMobile");
     return getLocString("ed.surveyPlaceHolder");
   }
   private isUpdatingNewPage: boolean;

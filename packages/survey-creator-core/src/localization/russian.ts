@@ -170,6 +170,10 @@ export var ruStrings = {
     surveyPlaceHolder: "Опрос пуст. Перетащите элемент с панели инструментов или нажмите кнопку ниже.",
     pagePlaceHolder: "Страница пуста. Перетащите элемент с панели инструментов или нажмите кнопку ниже.",
     imagePlaceHolder: "Перетащите изображение сюда или нажмите кнопку ниже и выберите изображение для загрузки",
+    surveyPlaceHolderMobile: "Нажмите кнопку «Добавить вопрос» ниже, чтобы начать создание формы.",
+    pagePlaceHolderMobile: "Нажмите кнопку «Добавить вопрос» ниже, чтобы добавить новый элемент на страницу.",
+    panelPlaceHolderMobile: "Нажмите кнопку «Добавить вопрос» ниже, чтобы добавить новый элемент на панель.",
+    imagePlaceHolderMobile: "Нажмите кнопку ниже и выберите изображение для загрузки",
     imageChooseImage: "Выберите изображение",
     addNewTypeQuestion: "Добавить {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[ЛОГОТИП]",
@@ -2608,3 +2612,7 @@ editorLocalization.locales["ru"] = ruStrings;
 // ed.selectFile: "Select a file" => "Выберите файл"
 // ed.removeFile: "Remove the file" => "Удалите файл"
 // pe.searchMode: "Search Mode" => "Режим поиска"
+// ed.surveyPlaceHolderMobile: "Click the \"Add Question\" button below to start creating your form." => "Нажмите кнопку «Добавить вопрос» ниже, чтобы начать создание формы."
+// ed.pagePlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the page." => "Нажмите кнопку «Добавить вопрос» ниже, чтобы добавить новый элемент на страницу."
+// ed.panelPlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the panel." => "Нажмите кнопку «Добавить вопрос» ниже, чтобы добавить новый элемент на панель."
+// ed.imagePlaceHolderMobile: "Click the button below and choose an image to upload" => "Нажмите кнопку ниже и выберите изображение для загрузки"

@@ -105,9 +105,8 @@ export class TabLogicPlugin implements ICreatorPlugin {
       }, true);
     questionListModel.locOwner = this.creator;
     const questionPopupModel = new PopupModel<{ model: ListModel<BaseAction> }>(
-      "sv-list", { model: questionListModel }, "bottom", "center",
-      undefined, undefined, undefined, undefined, undefined, onQuestionPopupShow
-    );
+      "sv-list", { model: questionListModel }, "bottom", "center");
+    questionPopupModel.onShow = onQuestionPopupShow;
 
     this.filterQuestionAction = new Action({
       id: "svc-logic-filter-question",
@@ -131,9 +130,8 @@ export class TabLogicPlugin implements ICreatorPlugin {
       }, true);
     actionTypesListModel.locOwner = this.creator;
     const actionTypesPopupModel = new PopupModel<{ model: ListModel<BaseAction> }>(
-      "sv-list", { model: actionTypesListModel }, "bottom", "center",
-      undefined, undefined, undefined, undefined, undefined, onActionTypesPopupShow
-    );
+      "sv-list", { model: actionTypesListModel }, "bottom", "center");
+    actionTypesPopupModel.onShow = onActionTypesPopupShow;
 
     this.filterActionTypeAction = new Action({
       id: "svc-logic-filter-actiontype",
