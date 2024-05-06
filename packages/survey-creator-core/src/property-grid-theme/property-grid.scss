@@ -16,6 +16,7 @@
 @import "blocks/spg-theme-builder.scss";
 @import "blocks/spg-overriding.scss";
 @import "blocks/spg-search-editor.scss";
+@import "blocks/spg-buttongroup.scss";
 
 .spg-root-modern {
   position: relative;
@@ -114,6 +115,7 @@
 
   .spg-help-action {
     flex-grow: 1;
+
     .spg-action-button--icon {
       opacity: 0.5;
       padding: calcSize(0.5);
