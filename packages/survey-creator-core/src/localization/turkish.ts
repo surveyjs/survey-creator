@@ -170,6 +170,10 @@ export var turkishStrings = {
     surveyPlaceHolder: "Anket boş. Araç kutusundan bir öğeyi sürükleyin veya aşağıdaki düğmeyi tıklatın.",
     pagePlaceHolder: "Sayfa boş. Araç kutusundan bir öğeyi sürükleyin veya aşağıdaki düğmeyi tıklatın.",
     imagePlaceHolder: "Bir resmi buraya sürükleyip bırakın veya aşağıdaki düğmeyi tıklayın ve yüklemek için bir resim seçin",
+    surveyPlaceHolderMobile: "Formunuzu oluşturmaya başlamak için aşağıdaki \"Soru Ekle\" butonuna tıklayın.",
+    pagePlaceHolderMobile: "Sayfaya yeni bir öğe eklemek için aşağıdaki \"Soru Ekle\" düğmesini tıklayın.",
+    panelPlaceHolderMobile: "Panele yeni bir öğe eklemek için aşağıdaki \"Soru Ekle\" düğmesini tıklayın.",
+    imagePlaceHolderMobile: "Aşağıdaki düğmeyi tıklayın ve yüklemek için bir resim seçin",
     imageChooseImage: "Resim Seç",
     addNewTypeQuestion: "{0} ekle", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
@@ -2543,3 +2547,7 @@ editorLocalization.locales["tr"] = turkishStrings;
 // ed.selectFile: "Select a file" => "Bir dosya seçin"
 // ed.removeFile: "Remove the file" => "Dosyayı kaldır"
 // pe.searchMode: "Search Mode" => "Arama Modu"
+// ed.surveyPlaceHolderMobile: "Click the \"Add Question\" button below to start creating your form." => "Formunuzu oluşturmaya başlamak için aşağıdaki \"Soru Ekle\" butonuna tıklayın."
+// ed.pagePlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the page." => "Sayfaya yeni bir öğe eklemek için aşağıdaki \"Soru Ekle\" düğmesini tıklayın."
+// ed.panelPlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the panel." => "Panele yeni bir öğe eklemek için aşağıdaki \"Soru Ekle\" düğmesini tıklayın."
+// ed.imagePlaceHolderMobile: "Click the button below and choose an image to upload" => "Aşağıdaki düğmeyi tıklayın ve yüklemek için bir resim seçin"

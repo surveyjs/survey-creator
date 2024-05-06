@@ -170,6 +170,10 @@ var spanishTranslation = {
     surveyPlaceHolder: "La encuesta está vacía. Arrastra una pregunta desde la caja de herramientas o haz click en el botón de abajo.",
     pagePlaceHolder: "La página está vacía. Arrastre un elemento desde la caja de herramientas o haga clic en el botón de abajo.",
     imagePlaceHolder: "Arrastre y suelte una imagen aquí o haga clic en el botón de abajo y elija una imagen para cargar",
+    surveyPlaceHolderMobile: "Haga clic en el botón \"Agregar pregunta\" a continuación para comenzar a crear su formulario.",
+    pagePlaceHolderMobile: "Haga clic en el botón \"Agregar pregunta\" a continuación para agregar un nuevo elemento a la página.",
+    panelPlaceHolderMobile: "Haga clic en el botón \"Agregar pregunta\" a continuación para agregar un nuevo elemento al panel.",
+    imagePlaceHolderMobile: "Haga clic en el botón de abajo y elija una imagen para cargar",
     imageChooseImage: "Elegir imagen",
     addNewTypeQuestion: "Añadir {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGOTIPO]",
@@ -2322,3 +2326,7 @@ editorLocalization.locales["es"] = spanishTranslation;
 // ed.selectFile: "Select a file" => "Seleccionar un archivo"
 // ed.removeFile: "Remove the file" => "Eliminar el archivo"
 // pe.searchMode: "Search Mode" => "Modo de búsqueda"
+// ed.surveyPlaceHolderMobile: "Click the \"Add Question\" button below to start creating your form." => "Haga clic en el botón \"Agregar pregunta\" a continuación para comenzar a crear su formulario."
+// ed.pagePlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the page." => "Haga clic en el botón \"Agregar pregunta\" a continuación para agregar un nuevo elemento a la página."
+// ed.panelPlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the panel." => "Haga clic en el botón \"Agregar pregunta\" a continuación para agregar un nuevo elemento al panel."
+// ed.imagePlaceHolderMobile: "Click the button below and choose an image to upload" => "Haga clic en el botón de abajo y elija una imagen para cargar"
