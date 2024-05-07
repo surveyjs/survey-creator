@@ -94,6 +94,7 @@ require("../components/property-panel/property-panel.scss");
 require("../components/tabbed-menu/tabbed-menu-item.scss");
 require("../components/tabbed-menu/tabbed-menu.scss");
 require("../components/toolbox/toolbox-tool.scss");
+require("../components/toolbox/toolbox-search.scss");
 require("../components/question-dropdown.scss");
 require("../components/toolbox/toolbox.scss");
 require("../components/side-bar/side-bar.scss");

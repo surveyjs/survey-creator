@@ -8,11 +8,17 @@ svc-toolbox {
 
 .svc-toolbox {
   height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.svc-toolbox__scroller {
   padding: calcSize(2) calc(calcSize(2) - 12px);
   box-sizing: border-box;
   overflow-y: auto;
   direction: rtl;
   scrollbar-gutter: stable both-edges;
+  flex-grow: 1;
 }
 .svc-side-bar {
   .svc-toolbox {

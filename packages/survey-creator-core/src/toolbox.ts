@@ -103,6 +103,11 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
     const type = this.typeName;
     return !!type && Serializer.isDescendantOf(type, "panelbase");
   }
+  public hasText(text: string) {
+    if (!text) return;
+    const textLowerCase = text.toLowerCase();
+    return this.title.toLowerCase().indexOf(textLowerCase) >= 0 || this.name.toLowerCase().indexOf(textLowerCase) >= 0;
+  }
 }
 
 /**
@@ -220,6 +225,17 @@ export class QuestionToolbox
    * @see isCompact
    */
   @property() forceCompact: boolean;
+
+  public filterStringPlaceholder = getLocString("ed.toolboxFilteredTextPlaceholder");
+  @property() searchEnabled: boolean;
+  @property({
+    onSet: (val: string, target: QuestionToolbox) => {
+      target.items.forEach(item => item.visible = item.hasText(val));
+    }
+  }) filterString: string;
+  public clearFilterString() {
+    this.filterString = "";
+  }
 
   constructor(
     private supportedQuestions: Array<string> = null,

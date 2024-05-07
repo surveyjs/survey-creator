@@ -673,3 +673,14 @@ test("Use custom widgets in questionTypes array to keep them in correct order in
   CustomWidgetCollection.Instance.clear();
   ComponentCollection.Instance.clear();
 });
+
+test("Toolbox search", (): any => {
+  const creator = new CreatorTester();
+  creator.toolbox.searchEnabled = true;
+  creator.toolbox.filterString = "dRoP";
+  expect(creator.toolbox.items.filter(item => item.visible).map(item => item.name)).toEqual(["dropdown", "tagbox", "matrixdropdown"]);
+  creator.toolbox.filterString = "xdRoP";
+  expect(creator.toolbox.items.filter(item => item.visible).map(item => item.name)).toEqual(["matrixdropdown"]);
+  creator.toolbox.filterString = "read";
+  expect(creator.toolbox.items.filter(item => item.visible).map(item => item.name)).toEqual(["expression"]);
+});
