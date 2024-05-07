@@ -12,7 +12,8 @@ import {
   Question,
   Serializer,
   SurveyModel,
-  DragOrClickHelper
+  DragOrClickHelper,
+  PopupModel
 } from "survey-core";
 import { SurveyCreatorModel, toolboxLocationType } from "./creator-base";
 import { editorLocalization, getLocString } from "./editorLocalization";
@@ -389,7 +390,7 @@ export class QuestionToolbox
       if (!!prop) {
         newItem.setItems(prop.choices.map(ch => {
           const propName = prop.name;
-          const newJson = { ...item };
+          const newJson = { ...item.json };
           newJson[propName] = ch;
 
           const newItem = new QuestionToolboxItem({
@@ -409,6 +410,8 @@ export class QuestionToolbox
         });
         newItem.component = "svc-toolbox-item-group";
         newItem.popupModel.cssClass += " toolbox-subtypes";
+        const popup = newItem.popupModel as PopupModel;
+        popup.contentComponentName = "svc-toolbox-list";
       }
 
       return newItem;
