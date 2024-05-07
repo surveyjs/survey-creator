@@ -170,6 +170,10 @@ var italianTranslation = {
     surveyPlaceHolder: "Il sondaggio è vuoto. Trascina un elemento dalla toolbox o clicca sul tasto sottostante.",
     pagePlaceHolder: "La pagina è vuota. Trascinare un elemento dalla casella degli strumenti o fare clic sul pulsante sottostante.",
     imagePlaceHolder: "Trascina e rilascia un'immagine qui o fai clic sul pulsante qui sotto e scegli un'immagine da caricare",
+    surveyPlaceHolderMobile: "Fai clic sul pulsante \"Aggiungi domanda\" qui sotto per iniziare a creare il tuo modulo.",
+    pagePlaceHolderMobile: "Fai clic sul pulsante \"Aggiungi domanda\" in basso per aggiungere un nuovo elemento alla pagina.",
+    panelPlaceHolderMobile: "Fai clic sul pulsante \"Aggiungi domanda\" in basso per aggiungere un nuovo elemento al pannello.",
+    imagePlaceHolderMobile: "Clicca sul pulsante qui sotto e scegli un'immagine da caricare",
     imageChooseImage: "Scegli immagine",
     addNewTypeQuestion: "Aggiungi {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
@@ -2306,3 +2310,7 @@ editorLocalization.locales["it"] = italianTranslation;
 // ed.selectFile: "Select a file" => "Seleziona un file"
 // ed.removeFile: "Remove the file" => "Rimuovere il file"
 // pe.searchMode: "Search Mode" => "Modalità di ricerca"
+// ed.surveyPlaceHolderMobile: "Click the \"Add Question\" button below to start creating your form." => "Fai clic sul pulsante \"Aggiungi domanda\" qui sotto per iniziare a creare il tuo modulo."
+// ed.pagePlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the page." => "Fai clic sul pulsante \"Aggiungi domanda\" in basso per aggiungere un nuovo elemento alla pagina."
+// ed.panelPlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the panel." => "Fai clic sul pulsante \"Aggiungi domanda\" in basso per aggiungere un nuovo elemento al pannello."
+// ed.imagePlaceHolderMobile: "Click the button below and choose an image to upload" => "Clicca sul pulsante qui sotto e scegli un'immagine da caricare"

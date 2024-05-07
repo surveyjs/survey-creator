@@ -276,6 +276,8 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     if (this.surveyElement instanceof QuestionHtmlModel) {
       return getLocString("ed.htmlPlaceHolder");
     }
+    if (this.creator.isMobileView)
+      return getLocString("ed.panelPlaceHolderMobile");
     return getLocString("ed.panelPlaceHolder");
   }
 

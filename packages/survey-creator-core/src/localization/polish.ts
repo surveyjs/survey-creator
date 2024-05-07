@@ -170,6 +170,10 @@ var polishStrings = {
     surveyPlaceHolder: "Ankieta jest pusta. Przeciągnij element z przybornika lub kliknij przycisk poniżej.",
     pagePlaceHolder: "Strona jest pusta. Przeciągnij element z przybornika lub kliknij przycisk poniżej.",
     imagePlaceHolder: "Przeciągnij i upuść obraz tutaj lub kliknij przycisk poniżej i wybierz obraz do przesłania",
+    surveyPlaceHolderMobile: "Kliknij przycisk \"Dodaj pytanie\" poniżej, aby rozpocząć tworzenie formularza.",
+    pagePlaceHolderMobile: "Kliknij przycisk \"Dodaj pytanie\" poniżej, aby dodać nowy element do strony.",
+    panelPlaceHolderMobile: "Kliknij przycisk \"Dodaj pytanie\" poniżej, aby dodać nowy element do panelu.",
+    imagePlaceHolderMobile: "Kliknij poniższy przycisk i wybierz obraz do przesłania",
     imageChooseImage: "Wybierz obraz",
     addNewTypeQuestion: "Dodaj {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
@@ -2821,3 +2825,7 @@ editorLocalization.locales["pl"] = polishStrings;
 // ed.selectFile: "Select a file" => "Wybierz plik"
 // ed.removeFile: "Remove the file" => "Usuń plik"
 // pe.searchMode: "Search Mode" => "Tryb wyszukiwania"
+// ed.surveyPlaceHolderMobile: "Click the \"Add Question\" button below to start creating your form." => "Kliknij przycisk \"Dodaj pytanie\" poniżej, aby rozpocząć tworzenie formularza."
+// ed.pagePlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the page." => "Kliknij przycisk \"Dodaj pytanie\" poniżej, aby dodać nowy element do strony."
+// ed.panelPlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the panel." => "Kliknij przycisk \"Dodaj pytanie\" poniżej, aby dodać nowy element do panelu."
+// ed.imagePlaceHolderMobile: "Click the button below and choose an image to upload" => "Kliknij poniższy przycisk i wybierz obraz do przesłania"

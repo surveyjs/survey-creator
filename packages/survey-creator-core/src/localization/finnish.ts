@@ -170,6 +170,10 @@ export var fiStrings = {
     surveyPlaceHolder: "Kysely on tyhjä. Vedä elementti työkalupakista tai napsauta alla olevaa painiketta.",
     pagePlaceHolder: "Sivu on tyhjä. Vedä elementti työkalupakista tai napsauta alla olevaa painiketta.",
     imagePlaceHolder: "Vedä ja pudota kuva tähän tai napsauta alla olevaa painiketta ja valitse ladattava kuva",
+    surveyPlaceHolderMobile: "Napsauta alla olevaa Lisää kysymys -painiketta aloittaaksesi lomakkeen luomisen.",
+    pagePlaceHolderMobile: "Napsauta alla olevaa Lisää kysymys -painiketta lisätäksesi sivulle uuden elementin.",
+    panelPlaceHolderMobile: "Napsauta alla olevaa Lisää kysymys -painiketta lisätäksesi uuden elementin paneeliin.",
+    imagePlaceHolderMobile: "Klikkaa alla olevaa painiketta ja valitse ladattava kuva",
     imageChooseImage: "Valitse kuva",
     addNewTypeQuestion: "Lisää {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
@@ -2548,3 +2552,7 @@ editorLocalization.locales["fi"] = fiStrings;
 // ed.selectFile: "Select a file" => "Valitse tiedosto"
 // ed.removeFile: "Remove the file" => "Poista tiedosto"
 // pe.searchMode: "Search Mode" => "Hakutila"
+// ed.surveyPlaceHolderMobile: "Click the \"Add Question\" button below to start creating your form." => "Napsauta alla olevaa Lisää kysymys -painiketta aloittaaksesi lomakkeen luomisen."
+// ed.pagePlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the page." => "Napsauta alla olevaa Lisää kysymys -painiketta lisätäksesi sivulle uuden elementin."
+// ed.panelPlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the panel." => "Napsauta alla olevaa Lisää kysymys -painiketta lisätäksesi uuden elementin paneeliin."
+// ed.imagePlaceHolderMobile: "Click the button below and choose an image to upload" => "Klikkaa alla olevaa painiketta ja valitse ladattava kuva"
