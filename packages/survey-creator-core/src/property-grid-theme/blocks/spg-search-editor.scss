@@ -1,11 +1,13 @@
 .spg-editor--highlighted {
+
   .spg-input,
   .spg-input-container,
   .spg-question--location--left,
   .spg-table__cell:not(.spg-table__cell--detail-panel) .spg-input {
     box-shadow: 0 0 0 2px $secondary;
   }
-  .spg-checkbox__control:focus + .spg-checkbox__rectangle,
+
+  .spg-checkbox__control:focus+.spg-checkbox__rectangle,
   .spg-matrixdynamic__content.spg-text__content {
     outline: 2px solid $secondary;
     outline-offset: -2px;
@@ -14,14 +16,17 @@
       box-shadow: none;
     }
   }
+
   .svc-action-button {
     background-color: $secondary-light;
   }
+
   .sv-button-group {
     box-shadow: 0 0 0 1px $secondary;
     border-color: $secondary;
   }
-  .spg-checkbox__control + .spg-checkbox__rectangle {
+
+  .spg-checkbox__control+.spg-checkbox__rectangle {
     outline: 2px solid $secondary;
     outline-offset: -2px;
   }
@@ -34,8 +39,8 @@
 
 .spg-search-editor_container {
   position: absolute;
-  border-bottom: 1px solid $border;
-  background: $background-dim;
+  border-bottom: 1px solid var(--ctr-property-grid-search-border-color, $border);
+  background: var(--ctr-property-grid-search-background-color, $background-dim);
   padding: calcSize(2);
   height: calcSize(3);
   width: calc(100% - calc(4 * #{$base-unit}));
@@ -45,7 +50,7 @@
 
 .spg-search-editor_input {
   @include textEllipsis;
-  color: $foreground;
+  color: var(--ctr-property-grid-search-text-color, $foreground);
 
   font-family: $font-family;
   font-size: calcSize(1.5);
@@ -73,7 +78,7 @@
 }
 
 .spg-search-editor_input::placeholder {
-  color: $foreground-light;
+  color: var(--ctr-property-grid-search-text-color-placeholder, $foreground-light);
 }
 
 .spg-search-editor_toolbar {
@@ -83,6 +88,7 @@
   align-items: center;
   flex-shrink: 0;
 }
+
 .spg-search-editor_toolbar .sv-action-bar {
   gap: calcSize(0.5);
   margin: 0;
@@ -99,8 +105,12 @@
   margin: 0;
 }
 
+.spg-search-editor_toolbar .sv-action-bar-item__icon use {
+  fill: var(--ctr-property-grid-search-button-icon-color, $foreground-light)
+}
+
 .spg-search-editor_toolbar-counter {
-  color: $foreground-light;
+  color: var(--ctr-property-grid-search-count-text-color, $foreground-light);
 
   font-family: $font-family;
   font-style: normal;
@@ -120,7 +130,7 @@
     height: calcSize(3);
 
     use {
-      fill: $foreground-light;
+      fill: var(--ctr-property-grid-search-icon-color, $foreground-light);
     }
   }
 }
