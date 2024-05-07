@@ -170,6 +170,10 @@ var frenchTranslation = {
     surveyPlaceHolder: "Le sondage est vide. Faites glisser un élément de la boîte à outils ou cliquez sur le bouton ci-dessous.",
     pagePlaceHolder: "La page est vide. Faites glisser un élément de la boîte à outils ou cliquez sur le bouton ci-dessous.",
     imagePlaceHolder: "Glissez et déposez une image ici ou cliquez sur le bouton ci-dessous pour choisir une image à télécharger",
+    surveyPlaceHolderMobile: "Cliquez sur le bouton « Ajouter une question » ci-dessous pour commencer à créer votre formulaire.",
+    pagePlaceHolderMobile: "Cliquez sur le bouton « Ajouter une question » ci-dessous pour ajouter un nouvel élément à la page.",
+    panelPlaceHolderMobile: "Cliquez sur le bouton « Ajouter une question » ci-dessous pour ajouter un nouvel élément au panneau.",
+    imagePlaceHolderMobile: "Cliquez sur le bouton ci-dessous et choisissez une image à télécharger",
     imageChooseImage: "Choisir une image",
     addNewTypeQuestion: "Ajouter {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
@@ -2609,3 +2613,7 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // ed.selectFile: "Select a file" => "Sélectionner un fichier"
 // ed.removeFile: "Remove the file" => "Supprimer le fichier"
 // pe.searchMode: "Search Mode" => "Mode de recherche"
+// ed.surveyPlaceHolderMobile: "Click the \"Add Question\" button below to start creating your form." => "Cliquez sur le bouton « Ajouter une question » ci-dessous pour commencer à créer votre formulaire."
+// ed.pagePlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the page." => "Cliquez sur le bouton « Ajouter une question » ci-dessous pour ajouter un nouvel élément à la page."
+// ed.panelPlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the panel." => "Cliquez sur le bouton « Ajouter une question » ci-dessous pour ajouter un nouvel élément au panneau."
+// ed.imagePlaceHolderMobile: "Click the button below and choose an image to upload" => "Cliquez sur le bouton ci-dessous et choisissez une image à télécharger"
