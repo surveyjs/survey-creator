@@ -1,4 +1,4 @@
-import { Action, ComputedUpdater, surveyCss, defaultV2ThemeName, ITheme, EventBase, Serializer, settings as surveySettings, Question, IElement, SurveyModel, PanelModelBase, PanelModel, QuestionHtmlModel, QuestionFileModel, QuestionDropdownModel } from "survey-core";
+import { Action, ComputedUpdater, surveyCss, defaultV2ThemeName, ITheme, EventBase, Serializer, settings as surveySettings, Question, IElement, SurveyModel, PanelModelBase, PanelModel, QuestionHtmlModel, QuestionFileModel, QuestionDropdownModel, QuestionCompositeModel } from "survey-core";
 import { settings } from "../../creator-settings";
 import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
@@ -116,13 +116,13 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     const simulatorSurvey = this.model.simulator.survey;
     const page = this.propertyGrid.survey.pages[0];
     if (page) {
-      const header = page.getElementByName("header");
-      const headerViewContainer = header.elements[0].contentPanel;
-      const surveyTitleQuestion = headerViewContainer.getElementByName("surveyTitle");
+      const header = page.getElementByName("header") as PanelModel;
+      const headerViewContainer = (header?.elements[0] as QuestionCompositeModel).contentPanel;
+      const surveyTitleQuestion = headerViewContainer?.getQuestionByName("surveyTitle");
       if (!!surveyTitleQuestion) {
         surveyTitleQuestion.readOnly = !simulatorSurvey.hasTitle;
       }
-      const surveyDescriptionQuestion = headerViewContainer.getElementByName("surveyDescription");
+      const surveyDescriptionQuestion = headerViewContainer?.getQuestionByName("surveyDescription");
       if (!!surveyDescriptionQuestion) {
         surveyDescriptionQuestion.readOnly = !simulatorSurvey.hasDescription;
       }
