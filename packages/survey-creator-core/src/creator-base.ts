@@ -2555,7 +2555,7 @@ export class SurveyCreatorModel extends Base
 
   //#region Obsolete designerPropertyGrid
   protected get designerPropertyGrid(): PropertyGridModel {
-    const propertyGridTab = this.sidebar.getTabById("propertyGrid");
+    const propertyGridTab = this.sidebar.getTabById(this.sidebar.activeTab);
     if (!propertyGridTab) return null;
     return propertyGridTab.model ? (propertyGridTab.model.propertyGridModel as any as PropertyGridModel) : null;
   }
@@ -2650,7 +2650,7 @@ export class SurveyCreatorModel extends Base
     }
     return "";
   }
-  private expandCategoryIfNeeded(): void {
+  public expandCategoryIfNeeded(): void {
     const expandedTabName = settings.propertyGrid.defaultExpandedTabName;
     if (!!expandedTabName && !this.getPropertyGridExpandedCategory() && !this.survey.isEmpty) {
       const panel = <PanelModel>this.designerPropertyGrid.survey.getPanelByName(expandedTabName);

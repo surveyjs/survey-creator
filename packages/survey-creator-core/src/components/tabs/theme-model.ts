@@ -1,4 +1,4 @@
-import { Base, ITheme, ItemValue, JsonObjectProperty, Question, Serializer, property, ILoadFromJSONOptions, IHeader, EventBase, SurveyModel, ArrayChanges } from "survey-core";
+import { Base, ITheme, ItemValue, JsonObjectProperty, Question, Serializer, property, ILoadFromJSONOptions, ISaveToJSONOptions, IHeader, EventBase, SurveyModel, ArrayChanges } from "survey-core";
 import { getLocString } from "../../editorLocalization";
 import { PredefinedColors, PredefinedThemes, Themes } from "./themes";
 import { settings } from "../../creator-settings";
@@ -9,7 +9,6 @@ import { createBoxShadowReset } from "./theme-custom-questions/boxshadow-setting
 import { HeaderModel } from "./header-model";
 import * as LibraryThemes from "survey-core/themes";
 import { ColorCalculator, assign, ingectAlpha, parseColor, roundTo2Decimals } from "../../utils/utils";
-import { ISaveToJSONOptions } from "survey-core/typings/base-interfaces";
 import { UndoRedoManager } from "../../plugins/undo-redo/undo-redo-manager";
 
 export * from "./header-model";
@@ -896,6 +895,7 @@ Serializer.addProperties("theme",
     type: "dropdown",
     name: "--sjs-font-family",
     displayName: getLocString("theme.fontFamily"),
+    default: settings.theme.fontFamily,
     choices: [].concat(DefaultFonts),
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {

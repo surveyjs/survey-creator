@@ -1,10 +1,9 @@
-import { Base, ComponentCollection, IHeader, IJsonPropertyInfo, ITheme, JsonObjectProperty, PanelModel, Question, Serializer } from "survey-core";
+import { Base, ComponentCollection, IHeader, IJsonPropertyInfo, ILoadFromJSONOptions, ISaveToJSONOptions, ISurvey, ITheme, JsonObjectProperty, PanelModel, Question, Serializer, HorizontalAlignment, VerticalAlignment } from "survey-core";
 import { ISurveyCreatorOptions, settings } from "../../creator-settings";
 import { PropertyGridEditor, PropertyGridEditorCollection, PropertyJSONGenerator } from "../../property-grid";
 import { ISurveyPropertyGridDefinition } from "../../question-editor/definition";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { themeModelPropertyGridDefinition } from "./theme-model-definition";
-import { HorizontalAlignment, ILoadFromJSONOptions, ISaveToJSONOptions, ISurvey, VerticalAlignment } from "survey-core/typings/base-interfaces";
 import { fontsettingsFromCssVariable, fontsettingsToCssVariable, onSerializeFontSettingsValue } from "./theme-custom-questions/font-settings";
 import { assign } from "../../utils/utils";
 

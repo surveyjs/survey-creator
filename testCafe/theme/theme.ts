@@ -39,7 +39,6 @@ test("Editors, loose focus on enter", async (t) => {
   await setJSON(json);
 
   await t.click(getTabbedMenuItemByText("Themes"));
-  await t.click(getPropertyGridCategory("Background"));
   await t.click(getPropertyGridCategory("Appearance"));
 
   const colorQuestionInputSelector = Selector("div[data-name=generalPrimaryColor] input.spg-color-editor__input");
@@ -57,6 +56,7 @@ test("Editors, loose focus on enter", async (t) => {
     .pressKey("enter")
     .expect(backgroundOpacityInputSelector.focused).notOk();
 
+  await t.click(getPropertyGridCategory("Background"));
   await t
     .click(backgroundImageQuestionInputSelector)
     .expect(backgroundImageQuestionInputSelector.focused).ok()

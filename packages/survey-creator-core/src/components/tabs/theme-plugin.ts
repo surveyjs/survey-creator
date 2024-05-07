@@ -250,7 +250,9 @@ export class ThemeTabPlugin implements ICreatorPlugin {
 
     this.updatePropertyGridEditorsAvailability();
     this.updateVisibilityOfPropertyGridGroups();
+    this.creator.sidebar.activeTab = this.propertyGridTab.id;
     this.propertyGridTab.visible = true;
+    this.creator.expandCategoryIfNeeded();
   }
   public update(): void {
     if (!this.model) return;
