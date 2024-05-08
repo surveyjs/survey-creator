@@ -1,21 +1,76 @@
 import { Action, ActionContainer, Base, ComputedUpdater, IElement, Question, SurveyModel, property, settings } from "survey-core";
 import { getLocString } from "../editorLocalization";
 import { scrollElementIntoView } from "../utils/utils";
+import { QuestionToolbox } from "src/toolbox";
 
-export class SearchManager extends Base {
+export abstract class SearchManagerBase extends Base {
+  public searchActionBar: ActionContainer = new ActionContainer();
+  @property() filterString: string;
+  @property() isVisible: boolean;
+
+  initActionBar() {
+    const searchActions = [];
+    searchActions.push(new Action({
+      id: "svd-grid-search-close",
+      iconName: "icon-clear_16x16",
+      component: "sv-action-bar-item",
+      title: getLocString("ed.close"),
+      showTitle: false,
+      iconSize: 16,
+      innerCss: "spg-search-editor_bar-item",
+      visible: <any>new ComputedUpdater(() => !!this.filterString),
+      action: () => {
+        this.clearFilterString();
+      }
+    }));
+
+    this.searchActionBar.setItems(searchActions);
+  }
+  public clearFilterString(): void {
+    this.filterString = "";
+  }
+
+  protected abstract setFiterString(newValue: string);
+
+  protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
+    super.onPropertyValueChanged(name, oldValue, newValue);
+
+    if (name === "filterString") {
+      this.setFiterString(newValue);
+    }
+  }
+
+  constructor() {
+    super();
+    this.initActionBar();
+  }
+
+  dispose(): void {
+    this.searchActionBar.dispose();
+    super.dispose();
+  }
+}
+
+export class SearchManagerToolbox extends SearchManagerBase {
+  @property() toolbox: QuestionToolbox;
+  public filterStringPlaceholder = getLocString("ed.toolboxFilteredTextPlaceholder");
+  protected setFiterString(newValue: string) {
+    this.toolbox.items.forEach(item => item.visible = item.hasText(newValue));
+  }
+}
+
+export class SearchManager extends SearchManagerBase {
   private highlightedEditorClass = " spg-editor--highlighted";
 
   private currentMatchIndex: number;
   private currentMatch: Question;
-  public searchActionBar: ActionContainer = new ActionContainer();
   public filterStringPlaceholder = getLocString("ed.propertyGridFilteredTextPlaceholder");
   public propertyGridNoResultsFound = getLocString("ed.propertyGridNoResultsFound");
 
   @property() survey: SurveyModel;
   @property() isVisible: boolean;
-  @property() filterString: string;
   @property() matchCounterText: string;
-  @property() allMatches: Array<Question> = [];
+  @property({ defaultValue: [] }) allMatches: Array<Question>;
 
   private expandAllParents(element: IElement) {
     if (!element) return;
@@ -74,7 +129,7 @@ export class SearchManager extends Base {
       return srcString.indexOf(newValueInLow) !== -1;
     });
   }
-  private setFiterString(newValue: string) {
+  protected setFiterString(newValue: string) {
     if(!newValue) {
       this.reset();
       return;
@@ -99,25 +154,9 @@ export class SearchManager extends Base {
   }
 
   initActionBar() {
-    const searchActions = [];
+    const searchActions = [...this.searchActionBar.actions];
 
-    searchActions.push(new Action({
-      id: "svd-grid-search-prev",
-      iconName: "icon-previous_16x16",
-      component: "sv-action-bar-item",
-      title: getLocString("ed.prevFocus"),
-      showTitle: false,
-      iconSize: 16,
-      innerCss: "spg-search-editor_bar-item",
-      visible: <any>new ComputedUpdater(() => this.allMatches.length > 1),
-      action: () => {
-        if (this.allMatches.length > 0) {
-          this.navigateToEditor(this.currentMatchIndex - 1);
-        }
-      }
-    }));
-
-    searchActions.push(new Action({
+    searchActions.unshift(new Action({
       id: "svd-grid-search-next",
       iconName: "icon-next_16x16",
       component: "sv-action-bar-item",
@@ -133,17 +172,19 @@ export class SearchManager extends Base {
       }
     }));
 
-    searchActions.push(new Action({
-      id: "svd-grid-search-close",
-      iconName: "icon-clear_16x16",
+    searchActions.unshift(new Action({
+      id: "svd-grid-search-prev",
+      iconName: "icon-previous_16x16",
       component: "sv-action-bar-item",
-      title: getLocString("ed.close"),
+      title: getLocString("ed.prevFocus"),
       showTitle: false,
       iconSize: 16,
       innerCss: "spg-search-editor_bar-item",
-      visible: <any>new ComputedUpdater(() => !!this.filterString),
+      visible: <any>new ComputedUpdater(() => this.allMatches.length > 1),
       action: () => {
-        this.clearFilterString();
+        if (this.allMatches.length > 0) {
+          this.navigateToEditor(this.currentMatchIndex - 1);
+        }
       }
     }));
 
@@ -166,21 +207,5 @@ export class SearchManager extends Base {
         }
       });
     }
-  }
-  public clearFilterString(): void {
-    this.filterString = "";
-  }
-
-  protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
-    super.onPropertyValueChanged(name, oldValue, newValue);
-
-    if (name === "filterString") {
-      this.setFiterString(newValue);
-    }
-  }
-
-  dispose(): void {
-    this.searchActionBar.dispose();
-    super.dispose();
   }
 }

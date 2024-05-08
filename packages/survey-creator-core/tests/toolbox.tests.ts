@@ -677,10 +677,10 @@ test("Use custom widgets in questionTypes array to keep them in correct order in
 test("Toolbox search", (): any => {
   const creator = new CreatorTester();
   creator.toolbox.searchEnabled = true;
-  creator.toolbox.filterString = "dRoP";
+  creator.toolbox.searchManager.filterString = "dRoP";
   expect(creator.toolbox.items.filter(item => item.visible).map(item => item.name)).toEqual(["dropdown", "tagbox", "matrixdropdown"]);
-  creator.toolbox.filterString = "xdRoP";
+  creator.toolbox.searchManager.filterString = "xdRoP";
   expect(creator.toolbox.items.filter(item => item.visible).map(item => item.name)).toEqual(["matrixdropdown"]);
-  creator.toolbox.filterString = "read";
+  creator.toolbox.searchManager.filterString = "read";
   expect(creator.toolbox.items.filter(item => item.visible).map(item => item.name)).toEqual(["expression"]);
 });

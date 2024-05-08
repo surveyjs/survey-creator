@@ -1,15 +1,6 @@
 <div class="svc-toolbox" data-bind="css: { 'svc-toolbox--compact': $data.toolbox.isCompact }">
-  <!-- ko if: $data.toolbox.searchEnabled -->
-  <div class="svc-toolbox__search svc-toolbox-search">
-    <div class="svc-toolbox-search__icon">
-      <!-- ko component: { name: 'sv-svg-icon', params: { iconName: 'icon-search', size: 'auto' }  } -->
-      <!-- /ko -->
-    </div>
-    <input class="svc-toolbox-search__input"
-      data-bind="textInput: toolbox.filterString, attr: { placeholder: toolbox.filterStringPlaceholder, 'aria-label': toolbox.filterStringPlaceholder }">
-  </div>
+  <!-- ko component: { name: 'svc-search', params: { model: $data.toolbox.searchManager } } -->
   <!-- /ko -->
-  
   <div class="svc-toolbox__scroller">
     <div class="svc-toolbox__container">
       <!-- ko ifnot: $data.toolbox.isCompact || categories().length == 1 || !$data.toolbox.showCategoryTitles -->

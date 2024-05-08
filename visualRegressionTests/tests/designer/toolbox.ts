@@ -291,3 +291,20 @@ test("Right toolbox (rtl) - scroll", async (t) => {
     await takeElementScreenshot("toolbox-right-rtl-scroll-compact-hover-item.png", toolboxElement, t, comparer);
   });
 });
+test("Toolbox with search", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    const toolboxItem = Selector(".svc-toolbox__item");
+    const toolboxItemDots = Selector(".svc-toolbox__tool .sv-dots__item");
+    const toolboxElement = Selector(".svc-toolbox");
+
+    await setJSON({ pages: [{ name: "page1" }] });
+    await ClientFunction(() => {
+      window["creator"].toolbox.searchEnabled = true;
+    })();
+
+    await t.resizeWindow(2560, 1440);
+    await takeElementScreenshot("toolbox-search.png", toolboxElement, t, comparer);
+    await t.typeText(Selector(".svc-toolbox input"), "single");
+    await takeElementScreenshot("toolbox-search-entered.png", toolboxElement, t, comparer);
+  });
+});

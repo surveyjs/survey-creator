@@ -18,6 +18,7 @@ import { SurveyCreatorModel, toolboxLocationType } from "./creator-base";
 import { editorLocalization, getLocString } from "./editorLocalization";
 import { settings } from "./creator-settings";
 import { DragDropSurveyElements } from "./survey-elements";
+import { SearchManagerToolbox } from "./entries";
 
 export type overflowBehaviorType = "hideInMenu" | "scroll";
 
@@ -226,16 +227,13 @@ export class QuestionToolbox
    */
   @property() forceCompact: boolean;
 
-  public filterStringPlaceholder = getLocString("ed.toolboxFilteredTextPlaceholder");
-  @property() searchEnabled: boolean;
   @property({
-    onSet: (val: string, target: QuestionToolbox) => {
-      target.items.forEach(item => item.visible = item.hasText(val));
+    onSet: (val: boolean, target: QuestionToolbox) => {
+      target.searchManager.isVisible = val;
     }
-  }) filterString: string;
-  public clearFilterString() {
-    this.filterString = "";
-  }
+  }) searchEnabled: boolean;
+
+  public searchManager = new SearchManagerToolbox();
 
   constructor(
     private supportedQuestions: Array<string> = null,
@@ -243,6 +241,8 @@ export class QuestionToolbox
     useDefaultCategories = false
   ) {
     super();
+    this.searchManager.isVisible = this.searchEnabled;
+    this.searchManager.toolbox = this;
     this.updateResponsiveness(this.isCompact, this.overflowBehavior);
     this.createDefaultItems(supportedQuestions, useDefaultCategories);
     this.initDotsItem();

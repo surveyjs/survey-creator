@@ -10,10 +10,14 @@ svc-toolbox {
   height: 100%;
   display: flex;
   flex-direction: column;
+  .spg-search-editor_container {
+      padding-left: calcSize(3.5);
+    }
 }
 
 .svc-toolbox__scroller {
-  padding: calcSize(2) calc(calcSize(2) - 12px);
+  margin-top: calcSize(1);
+    padding: 0 calc(calcSize(2) - 12px) calcSize(2);
   box-sizing: border-box;
   overflow-y: auto;
   direction: rtl;
