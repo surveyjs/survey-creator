@@ -52,38 +52,41 @@ if (!window["%hammerhead%"]) {
 
 
   let json = {
-    "logoPosition": "right",
-    "pages": [
-      {
-        "name": "page1",
-        "elements": [
-          {
-            "type": "paneldynamic",
-            "name": "question1",
-            "defaultValue": [
-
-              {},
-              {}
-            ],
-            "templateElements": [
-              {
-                "type": "text",
-                "name": "question2"
-              }
-            ],
-            "renderMode": "tab"
-          }
-        ]
+    "elements": [{
+      "type": "dropdown",
+      "name": "country",
+      "title": "Select a country",
+      "description": "A full list of countries is queried from a RESTful web service.",
+      "choicesByUrl": {
+        "url": "https://surveyjs.io/api/CountriesExample",
+        "valueName": "name"
       }
-    ]
+    }, {
+        "type": "panel",
+        "name": "countriesByRegion",
+        "title": "Filter countries by selected region",
+        "description": "Only countries from the selected region are queried.",
+        "elements": [{
+          "type": "dropdown",
+          "name": "region",
+          "title": "Select a region",
+          "choices": ["Africa", "Americas", "Asia", "Europe", "Oceania"]
+        }, {
+            "type": "dropdown",
+            "name": "reg_country",
+            "title": "Select a country",
+            "choicesByUrl": {
+              "url": "https://surveyjs.io/api/CountriesExample?region={region}",
+              "valueName": "name"
+            }
+          }]
+      }],
+    "showQuestionNumbers": false
   };
-  creator.toolbox.searchEnabled = true;
+
   window.creator = creator;
   // ko.applyBindings({ creator: creator });
   creator.render("surveyCreator");
-  //creator.toolbox.isResponsivenessDisabled = true;
-  //  creator.toolboxLocation = "right";
-  //document.dir = "rtl";
 
   function setJSON() {
     window.creator.JSON = json;
