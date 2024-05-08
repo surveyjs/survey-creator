@@ -28,8 +28,8 @@
 }
 
 .svc-side-bar__container-header {
-  background: $background;
-  box-shadow: inset 0px -2px 0px $primary;
+  background: var(--ctr-property-grid-header-background-color, $background);
+  box-shadow: inset 0px -2px 0px var(--ctr-property-grid-header-border-color, $primary);
   // text-align: right;
   line-height: calcSize(3);
   display: flex;
@@ -159,6 +159,7 @@
   .svc-flyout-side-bar .svc-side-bar__wrapper {
     width: 100%;
   }
+
   .svc-side-bar__container {
     width: 100%;
   }

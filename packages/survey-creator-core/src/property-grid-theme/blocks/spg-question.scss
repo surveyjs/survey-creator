@@ -16,7 +16,7 @@
   line-height: calcSize(3);
   font-size: calcSize(2);
   font-family: $font-family;
-  color: $foreground-light;
+  color: var(--ctr-label-text-color, $foreground-light);
   font-weight: normal;
   box-sizing: border-box;
 }

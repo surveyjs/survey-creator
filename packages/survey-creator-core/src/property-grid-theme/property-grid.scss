@@ -127,7 +127,7 @@
     }
 
     .spg-action-button:active {
-      opacity: 0.5;
+      opacity: var(--ctr-actionbar-button-opacity-pressed, 0.5);
     }
 
     svg {
