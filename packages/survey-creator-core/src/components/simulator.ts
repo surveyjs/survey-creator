@@ -167,8 +167,8 @@ export var simulatorDevices: {
     deviceType: string,
     title: string,
     cssClass?: string,
-    visibleIndex?: number
-  }
+    visibleIndex?: number,
+  },
 } = {
   desktop: {
     deviceType: "desktop",
