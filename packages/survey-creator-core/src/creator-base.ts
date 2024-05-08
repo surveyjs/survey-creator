@@ -447,7 +447,7 @@ export class SurveyCreatorModel extends Base
    * [View Demo](https://surveyjs.io/survey-creator/examples/hide-category-from-property-grid/ (linkStyle))
    */
   public onShowingProperty: EventBase<SurveyCreatorModel, PropertyAddingEvent> = this.addCreatorEvent<SurveyCreatorModel, PropertyAddingEvent>();
-  public onCanShowProperty: EventBase<SurveyCreatorModel, PropertyAddingEvent> = this.onShowingProperty;
+  public onCanShowProperty: EventBase<SurveyCreatorModel, any> = this.onShowingProperty;
   /**
    * This event is obsolete. Use the [`onSurveyInstanceCreated`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onSurveyInstanceCreated) event instead.
    * @deprecated
@@ -1744,15 +1744,15 @@ export class SurveyCreatorModel extends Base
    * @see onDragEnd
    * @see onDragDropAllow
    */
-  public onDragStart: EventBase<any, DragStartEndEvent> = new EventBase<any, DragStartEndEvent>();
-  public onBeforeDrop: EventBase<any, DragStartEndEvent> = this.onDragStart;
+  public onDragStart: EventBase<SurveyCreatorModel, DragStartEndEvent> = this.addCreatorEvent<SurveyCreatorModel, DragStartEndEvent>();
+  public onBeforeDrop: EventBase<SurveyCreatorModel, any> = this.onDragStart;
   /**
    * An event that is raised when users finish dragging a survey element within the design surface.
    * @see onDragStart
    * @see onDragDropAllow
    */
-  public onDragEnd: EventBase<any, DragStartEndEvent> = new EventBase<any, DragStartEndEvent>();
-  public onAfterDrop: EventBase<any, DragStartEndEvent> = this.onDragEnd;
+  public onDragEnd: EventBase<SurveyCreatorModel, DragStartEndEvent> = this.addCreatorEvent<SurveyCreatorModel, DragStartEndEvent>();
+  public onAfterDrop: EventBase<SurveyCreatorModel, any> = this.onDragEnd;
   private initDragDropSurveyElements() {
     DragDropSurveyElements.restrictDragQuestionBetweenPages =
       settings.dragDrop.restrictDragQuestionBetweenPages;
