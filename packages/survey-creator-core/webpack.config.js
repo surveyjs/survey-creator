@@ -63,14 +63,12 @@ var buildPlatformJson = {
   typings: packageJson.name + ".d.ts",
   peerDependencies: {
     "ace-builds": "^1.4.12",
+    "survey-core": packageJson.version
   },
   peerDependenciesMeta: {
     "ace-builds": {
       "optional": true
-    }
-  },
-  dependencies: {
-    "survey-core": packageJson.version
+    },
   },
   devDependencies: {},
 };

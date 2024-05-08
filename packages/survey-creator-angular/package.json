@@ -1,6 +1,6 @@
 {
   "name": "survey-creator-angular",
-  "version": "1.10.2",
+  "version": "1.10.3",
   "description": "Use SurveyJS Creator to create or edit JSON for SurveyJS Form Library.",
   "homepage": "https://surveyjs.io/Overview/Survey-Creator",
   "license": "https://surveyjs.io/Licenses#SurveyCreator",
@@ -69,7 +69,7 @@
     "standard-version": "^8.0.2"
   },
   "scripts": {
-    "build": "ng build",
+    "build": "ng build && node ./update-version.js",
     "serve:example": "ng serve",
     "testcafe": "testcafe chrome ../../testCafe/ --app \"http-server ./dist/angular-ui --proxy http://localhost:8080? -p 8080\" --selector-timeout 1500 --reporter minimal --env=angular",
     "testcafe:ci": "testcafe -c 4 -q attemptLimit=5,successThreshold=1 chrome:headless ../../testCafe/ --app \"http-server ./dist/angular-ui --proxy http://localhost:8080? -p 8080\" --selector-timeout 1500 --reporter minimal --env=angular",

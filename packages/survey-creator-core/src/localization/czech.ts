@@ -170,6 +170,10 @@ export var czStrings = {
     surveyPlaceHolder: "Průzkum je prázdný. Přetáhněte prvek z panelu nástrojů nebo klikněte na tlačítko níže.",
     pagePlaceHolder: "Stránka je prázdná. Přetáhněte prvek z palety nástrojů nebo klikněte na tlačítko níže.",
     imagePlaceHolder: "Obrázek můžete vložit jeho přetažením na toto místo nebo kliknutím na tlačítko níže",
+    surveyPlaceHolderMobile: "Kliknutím na tlačítko \"Přidat otázku\" níže zahájíte vytváření formuláře.",
+    pagePlaceHolderMobile: "Kliknutím na tlačítko \"Přidat otázku\" níže přidáte na stránku nový prvek.",
+    panelPlaceHolderMobile: "Kliknutím na tlačítko \"Přidat otázku\" níže přidáte do panelu nový prvek.",
+    imagePlaceHolderMobile: "Klikněte na tlačítko níže a vyberte obrázek, který chcete nahrát",
     imageChooseImage: "Vybrat obrázek",
     addNewTypeQuestion: "Přidat {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
@@ -2112,3 +2116,7 @@ editorLocalization.locales["cs"] = czStrings;
 // ed.selectFile: "Select a file" => "Vyberte soubor"
 // ed.removeFile: "Remove the file" => "Odebrání souboru"
 // pe.searchMode: "Search Mode" => "Režim vyhledávání"
+// ed.surveyPlaceHolderMobile: "Click the \"Add Question\" button below to start creating your form." => "Kliknutím na tlačítko \"Přidat otázku\" níže zahájíte vytváření formuláře."
+// ed.pagePlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the page." => "Kliknutím na tlačítko \"Přidat otázku\" níže přidáte na stránku nový prvek."
+// ed.panelPlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the panel." => "Kliknutím na tlačítko \"Přidat otázku\" níže přidáte do panelu nový prvek."
+// ed.imagePlaceHolderMobile: "Click the button below and choose an image to upload" => "Klikněte na tlačítko níže a vyberte obrázek, který chcete nahrát"
