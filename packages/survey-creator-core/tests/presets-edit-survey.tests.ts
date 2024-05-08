@@ -434,3 +434,24 @@ test("Preset edit model, live property grid & modify value", () => {
   expect(panels[0].elements).toHaveLength(1);
   expect(panels[0].elements[0].name).toBe("widthMode");
 });
+test("Preset edit model, live property grid & visible indexes", () => {
+  const preset = new CreatorPreset({});
+  const survey = preset.createEditModel();
+  survey.setValue("propertyGrid_definition_show", true);
+  survey.currentPage = survey.getPageByName("page_propertyGrid_definition");
+  survey.setValue("propertyGrid_definition_selector", "text");
+  let matrix = <QuestionMatrixDynamicModel>survey.getQuestionByName("propertyGrid_definition_matrix");
+  matrix.value = [{ name: "general", items: ["name", "inputType", "title", "placeholder", "description"] }];
+  const embeddedSurvey = <QuestionEmbeddedSurveyModel>survey.getQuestionByName("propertyGrid_definition_propgrid");
+  let propSurvey = embeddedSurvey.embeddedSurvey;
+  let panels = propSurvey.getAllPanels();
+  expect(panels).toHaveLength(1);
+  expect(panels[0].name).toBe("general");
+  const elements = panels[0].elements;
+  expect(elements).toHaveLength(5);
+  expect(elements[0].name).toBe("name");
+  expect(elements[1].name).toBe("inputType");
+  expect(elements[2].name).toBe("title");
+  expect(elements[3].name).toBe("placeholder");
+  expect(elements[4].name).toBe("description");
+});

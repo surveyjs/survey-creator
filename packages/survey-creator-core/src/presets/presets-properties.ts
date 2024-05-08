@@ -103,18 +103,35 @@ export class SurveyQuestionPresetPropertiesDetail {
   private updateCurrentJsonClass(curJsonClasses: ISurveyPropertiesDefinition, val: Array<any>, clName: string, tabNames: Array<string>): void {
     const properties = [];
     const tabs = [];
-    const step = 100;
+    const tabStep = 100;
+
     val.forEach(tab => {
       const clVal = tab.items;
       if(Array.isArray(clVal)) {
+        const classesIndeces = [];
+        this.classes.forEach(cl => classesIndeces.push(0));
+        const propertiesIndeces = {};
+        for(let i = 0; i < clVal.length; i ++) {
+          const clName = this.propertiesHash[clVal[i]];
+          let clIndex = this.classes.indexOf(clName);
+          if(clIndex < 0) continue;
+          const nextStep = 10000 / Math.pow(10, clIndex);
+          let max = 0;
+          for(let j = 0; j <= clIndex; j ++) {
+            if(classesIndeces[j] > max) max = classesIndeces[j];
+          }
+          const visIndex = max + nextStep;
+          propertiesIndeces[clVal[i]] = visIndex;
+          classesIndeces[clIndex] = visIndex;
+        }
         clVal.forEach(propName => {
           if(this.propertiesHash[propName] === clName) {
             const tabName = tab.name !== "general" ? tab.name : undefined;
             if(!!tabName && tabNames.indexOf(tab.name) < 0) {
               tabNames.push(tab.name);
-              tabs.push({ name: tab.name, index: tabNames.length * step });
+              tabs.push({ name: tab.name, index: tabNames.length * tabStep });
             }
-            const item: any = { name: propName };
+            const item: any = { name: propName, index: propertiesIndeces[propName] };
             if(!!tabName) {
               item.tab = tabName;
             }

@@ -215,7 +215,7 @@ export class SurveyQuestionProperties {
       !isString && !!defProperty.category ? defProperty.category : "";
     propertyDefinition.title =
       !isString && !!defProperty.title ? defProperty.title : "";
-    if(defProperty.index !== undefined) {
+    if(!isTab && defProperty.index !== undefined) {
       propertyDefinition.definedIndex = defProperty.index;
     }
     propertyDefinition.onSameLine = this.isPropertyOnSameLine(propRes.property.nextToProperty);
