@@ -115,9 +115,9 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   private updatePropertyGridEditorsAvailability() {
     const simulatorSurvey = this.model.simulator.survey;
     const page = this.propertyGrid.survey.pages[0];
-    if (page) {
-      const header = page.getElementByName("header") as PanelModel;
-      const headerViewContainer = (header?.elements[0] as QuestionCompositeModel).contentPanel;
+    const header = page?.getElementByName("header") as PanelModel;
+    if (header) {
+      const headerViewContainer = (header.elements[0] as QuestionCompositeModel).contentPanel;
       const surveyTitleQuestion = headerViewContainer?.getQuestionByName("surveyTitle");
       if (!!surveyTitleQuestion) {
         surveyTitleQuestion.readOnly = !simulatorSurvey.hasTitle;
@@ -139,8 +139,8 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   }
   private updateVisibilityOfPropertyGridGroups() {
     const page = this.propertyGrid.survey.pages[0];
-    if (page) {
-      const header = page.getElementByName("header");
+    const header = page?.getElementByName("header");
+    if (header) {
       header.visible = this.creator.isMobileView ? false : settings.theme.allowEditHeaderSettings;
     }
     if (this.advancedModeSwitcher) {
@@ -239,6 +239,11 @@ export class ThemeTabPlugin implements ICreatorPlugin {
         }
       }
     });
+    // this.propertyGrid.survey.onUpdateQuestionCssClasses.add((sender, options) => {
+    //   if (options.question.titleLocation === "hidden") {
+    //     options.cssClasses.mainRoot += " spg-row-narrow__question";
+    //   }
+    // });
 
     // if (!!this.model.themeEditorSurvey) {
     //   const options = <IPropertyGridSurveyCreatedEvent>{
