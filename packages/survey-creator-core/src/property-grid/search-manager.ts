@@ -8,9 +8,8 @@ export abstract class SearchManagerBase extends Base {
   @property() filterString: string;
   @property() isVisible: boolean;
 
-  initActionBar() {
-    const searchActions = [];
-    searchActions.push(new Action({
+  protected getSearchActions() {
+    return [new Action({
       id: "svd-grid-search-close",
       iconName: "icon-clear_16x16",
       component: "sv-action-bar-item",
@@ -22,9 +21,10 @@ export abstract class SearchManagerBase extends Base {
       action: () => {
         this.clearFilterString();
       }
-    }));
-
-    this.searchActionBar.setItems(searchActions);
+    })];
+  }
+  initActionBar() {
+    this.searchActionBar.setItems(this.getSearchActions());
   }
   public clearFilterString(): void {
     this.filterString = "";
@@ -153,8 +153,8 @@ export class SearchManager extends SearchManagerBase {
     this.updatedMatchCounterText(-1);
   }
 
-  initActionBar() {
-    const searchActions = [...this.searchActionBar.actions];
+  getSearchActions() {
+    const searchActions = super.getSearchActions();
 
     searchActions.unshift(new Action({
       id: "svd-grid-search-next",
@@ -187,8 +187,7 @@ export class SearchManager extends SearchManagerBase {
         }
       }
     }));
-
-    this.searchActionBar.setItems(searchActions);
+    return searchActions;
   }
 
   constructor() {
