@@ -27,10 +27,6 @@ export class HeaderModel extends Base implements IHeader {
     return this.owner as any;
   }
 
-  protected onPropertyValueChanged(name: string, oldValue: any, newValue: any): void {
-    super.onPropertyValueChanged(name, oldValue, newValue);
-  }
-
   fromJSON(json: any, options?: ILoadFromJSONOptions): void {
     super.fromJSON(json, options);
     if (!!json["backgroundImageOpacity"]) this.backgroundImageOpacity = json["backgroundImageOpacity"] * 100;
@@ -110,24 +106,6 @@ export class HeaderModel extends Base implements IHeader {
     if (backgroundColor === "transparent") return "none";
     return "custom";
   }
-
-  // private setCoverPropertiesFromSurvey(panel, themeCssVariables: { [index: string]: string }) {
-  //   this._setPGEditorPropertyValue(panel.getQuestionByName("headerTitle"), "readOnly", !this.survey.hasTitle);
-  //   this._setPGEditorPropertyValue(panel.getQuestionByName("headerDescription"), "readOnly", !this.survey.hasDescription);
-
-  //   this._setPGEditorPropertyValue(panel.getQuestionByName("headerView"), "value", this.survey.headerView);
-  //   this._setPGEditorPropertyValue(panel.getQuestionByName("logoPosition"), "value", this.survey.logoPosition);
-
-  //   this._setPGEditorPropertyValue(panel.getQuestionByName("logoPositionX"), "readOnly", !this.survey.logo);
-  //   this._setPGEditorPropertyValue(panel.getQuestionByName("logoPositionY"), "readOnly", !this.survey.logo);
-  //   this._setPGEditorPropertyValue(panel.getQuestionByName("logoPosition"), "readOnly", !this.survey.logo);
-
-  //   this._setPGEditorPropertyValue(panel.getQuestionByName("titlePositionX"), "readOnly", !this.survey.title);
-  //   this._setPGEditorPropertyValue(panel.getQuestionByName("titlePositionY"), "readOnly", !this.survey.title);
-
-  //   this._setPGEditorPropertyValue(panel.getQuestionByName("descriptionPositionX"), "readOnly", !this.survey.description);
-  //   this._setPGEditorPropertyValue(panel.getQuestionByName("descriptionPositionY"), "readOnly", !this.survey.description);
-  // }
 
   // private setCoverColorsFromThemeVariables(question: Question, cssVariable: string) {
   //   if (!!question && !!cssVariable && cssVariable !== "transparent") {

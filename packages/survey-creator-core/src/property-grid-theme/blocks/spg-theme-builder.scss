@@ -146,6 +146,10 @@
   .sd-panel__header.sd-element__header .spg-action-bar {
     pointer-events: none;
   }
+
+  .spg-row-narrow__question {
+    margin-top: calcSize(-1);
+  }
 }
 
 .sv-mobile-side-bar .spg-theme-builder-root {

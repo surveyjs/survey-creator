@@ -116,16 +116,9 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     const simulatorSurvey = this.model.simulator.survey;
     const page = this.propertyGrid.survey.pages[0];
     const header = page?.getElementByName("header") as PanelModel;
-    if (header) {
+    if (header && header.elements.length > 0) {
       const headerViewContainer = (header.elements[0] as QuestionCompositeModel).contentPanel;
-      const surveyTitleQuestion = headerViewContainer?.getQuestionByName("surveyTitle");
-      if (!!surveyTitleQuestion) {
-        surveyTitleQuestion.readOnly = !simulatorSurvey.hasTitle;
-      }
-      const surveyDescriptionQuestion = headerViewContainer?.getQuestionByName("surveyDescription");
-      if (!!surveyDescriptionQuestion) {
-        surveyDescriptionQuestion.readOnly = !simulatorSurvey.hasDescription;
-      }
+      this.setCoverPropertiesFromSurvey(headerViewContainer, simulatorSurvey);
     }
     const pageTitleQuestion = this.propertyGrid.survey.getQuestionByName("pageTitle");
     let pageElements = simulatorSurvey.isSinglePage ? simulatorSurvey.pages[0].elements : simulatorSurvey.pages;
@@ -137,6 +130,34 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       pageDescriptionQuestion.readOnly = !pageElements.some(p => !!p.description);
     }
   }
+
+  private _setPGEditorPropertyValue(editor: Question, propertyName: string, value): void {
+    if (!!editor) {
+      editor[propertyName] = value;
+    }
+  }
+
+  private setCoverPropertiesFromSurvey(panel, survey) {
+    this._setPGEditorPropertyValue(panel.getQuestionByName("headerView"), "value", survey.headerView);
+    this._setPGEditorPropertyValue(panel.getQuestionByName("logoPosition"), "value", survey.logoPosition);
+
+    this._setPGEditorPropertyValue(panel.getQuestionByName("surveyTitle"), "readOnly", !survey.hasTitle);
+    this._setPGEditorPropertyValue(panel.getQuestionByName("surveyDescription"), "readOnly", !survey.hasDescription);
+
+    this._setPGEditorPropertyValue(panel.getQuestionByName("headerTitle"), "readOnly", !survey.hasTitle);
+    this._setPGEditorPropertyValue(panel.getQuestionByName("headerDescription"), "readOnly", !survey.hasDescription);
+
+    this._setPGEditorPropertyValue(panel.getQuestionByName("logoPositionX"), "readOnly", !survey.logo);
+    this._setPGEditorPropertyValue(panel.getQuestionByName("logoPositionY"), "readOnly", !survey.logo);
+    this._setPGEditorPropertyValue(panel.getQuestionByName("logoPosition"), "readOnly", !survey.logo);
+
+    this._setPGEditorPropertyValue(panel.getQuestionByName("titlePositionX"), "readOnly", !survey.title);
+    this._setPGEditorPropertyValue(panel.getQuestionByName("titlePositionY"), "readOnly", !survey.title);
+
+    this._setPGEditorPropertyValue(panel.getQuestionByName("descriptionPositionX"), "readOnly", !survey.description);
+    this._setPGEditorPropertyValue(panel.getQuestionByName("descriptionPositionY"), "readOnly", !survey.description);
+  }
+
   private updateVisibilityOfPropertyGridGroups() {
     const page = this.propertyGrid.survey.pages[0];
     const header = page?.getElementByName("header");
@@ -239,11 +260,11 @@ export class ThemeTabPlugin implements ICreatorPlugin {
         }
       }
     });
-    // this.propertyGrid.survey.onUpdateQuestionCssClasses.add((sender, options) => {
-    //   if (options.question.titleLocation === "hidden") {
-    //     options.cssClasses.mainRoot += " spg-row-narrow__question";
-    //   }
-    // });
+    this.propertyGrid.survey.onUpdateQuestionCssClasses.add((sender, options) => {
+      if (!options.question.parentQuestion && !!options.question.page && options.question.titleLocation === "hidden") {
+        options.cssClasses.mainRoot += " spg-row-narrow__question";
+      }
+    });
 
     // if (!!this.model.themeEditorSurvey) {
     //   const options = <IPropertyGridSurveyCreatedEvent>{
