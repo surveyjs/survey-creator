@@ -301,7 +301,7 @@ test("Preset edit model, property grid, setup", () => {
   expect(rows).toHaveLength(10);
   expect(rows[0].getValue("name")).toEqual("general");
   rows[0].showDetailPanel();
-  const itemsQuestion = rows[0].getQuestionByName("survey");
+  const itemsQuestion = rows[0].getQuestionByName("items");
   expect(itemsQuestion.value.length > 0).toBeTruthy();
   expect(itemsQuestion.choices.length >= itemsQuestion.value.length).toBeTruthy();
 });
@@ -313,15 +313,15 @@ test("Preset edit model, property grid, setup items in detail panels => survey",
   const matrix = <QuestionMatrixDynamicModel>survey.getQuestionByName("propertyGrid_definition_matrix");
   const rows = matrix.visibleRows;
   rows[1].showDetailPanel();
-  let itemsQuestion = rows[1].getQuestionByName("survey");
+  let itemsQuestion = rows[1].getQuestionByName("items");
   const row1choicesCount = itemsQuestion.choices.length;
   rows[0].showDetailPanel();
-  itemsQuestion = rows[0].getQuestionByName("survey");
+  itemsQuestion = rows[0].getQuestionByName("items");
   const val = [].concat(itemsQuestion.value);
   val.splice(0, 3);
   itemsQuestion.value = val;
   rows[1].showDetailPanel();
-  itemsQuestion = rows[1].getQuestionByName("survey");
+  itemsQuestion = rows[1].getQuestionByName("items");
   expect(itemsQuestion.choices).toHaveLength(row1choicesCount + 3);
 });
 test("Preset edit model, property grid, SurveyQuestionPresetPropertiesDetail", () => {
@@ -330,8 +330,9 @@ test("Preset edit model, property grid, SurveyQuestionPresetPropertiesDetail", (
   const rows = properties.getRows();
   expect(rows).toHaveLength(7);
   expect(rows[0].name).toEqual("general");
-  expect(rows[0].question).toBeTruthy();
-  expect(rows[0].selectbase).toBeTruthy();
+  expect(rows[0].items).toBeTruthy();
+  expect(rows[0].question).toBeFalsy();
+  expect(rows[0].selectbase).toBeFalsy();
 });
 test("Preset edit model, property grid, setup items in detail panels => radiogroup", () => {
   const preset = new CreatorPreset({});
@@ -342,13 +343,9 @@ test("Preset edit model, property grid, setup items in detail panels => radiogro
   const rows = matrix.visibleRows;
   rows[0].showDetailPanel();
   const detailPanel = rows[0].detailPanel;
-  expect(detailPanel.elements).toHaveLength(4);
-  expect(detailPanel.elements[0].visible).toBeFalsy();
-  expect(detailPanel.elements[1].visible).toBeTruthy();
-  expect(detailPanel.elements[2].visible).toBeTruthy();
-  expect(detailPanel.elements[3].visible).toBeFalsy();
-  expect(detailPanel.elements[1].name).toEqual("question");
-  expect(detailPanel.elements[2].name).toEqual("selectbase");
+  expect(detailPanel.elements).toHaveLength(1);
+  expect(detailPanel.elements[0].visible).toBeTruthy();
+  expect(detailPanel.elements[0].name).toBe("items");
 });
 test("Preset edit model, property grid, apply", () => {
   const preset = new CreatorPreset({});
@@ -357,8 +354,8 @@ test("Preset edit model, property grid, apply", () => {
   survey.currentPage = survey.getPageByName("page_propertyGrid_definition");
   survey.setValue("propertyGrid_definition_selector", "survey");
   let matrix = <QuestionMatrixDynamicModel>survey.getQuestionByName("propertyGrid_definition_matrix");
-  matrix.value = [{ name: "general", survey: ["title", "description"] },
-    { name: "second", survey: ["pages", "locale"] }];
+  matrix.value = [{ name: "general", items: ["title", "description"] },
+    { name: "second", items: ["pages", "locale"] }];
   const creator = new CreatorTester();
   expect(preset.applyFromSurveyModel(survey, creator)).toBeTruthy();
   const propDef = preset.getJson().propertyGrid?.definition;
@@ -376,7 +373,7 @@ test("Preset edit model, property grid, apply", () => {
 
   survey.setValue("propertyGrid_definition_selector", "page");
   matrix = <QuestionMatrixDynamicModel>survey.getQuestionByName("propertyGrid_definition_matrix");
-  matrix.value = [{ name: "general", panelbase: ["name", "title", "description"] }];
+  matrix.value = [{ name: "general", items: ["name", "title", "description"] }];
   survey.setValue("propertyGrid_definition_selector", "survey");
   expect(preset.applyFromSurveyModel(survey, creator)).toBeTruthy();
   const pageProps = propDef?.classes["page"];
@@ -398,8 +395,8 @@ test("Preset edit model, live property grid", () => {
   survey.currentPage = survey.getPageByName("page_propertyGrid_definition");
   survey.setValue("propertyGrid_definition_selector", "survey");
   let matrix = <QuestionMatrixDynamicModel>survey.getQuestionByName("propertyGrid_definition_matrix");
-  matrix.value = [{ name: "general", survey: ["title", "description"] },
-    { name: "second", survey: ["pages", "locale"] }];
+  matrix.value = [{ name: "general", items: ["title", "description"] },
+    { name: "second", items: ["pages", "locale"] }];
   const embeddedSurvey = <QuestionEmbeddedSurveyModel>survey.getQuestionByName("propertyGrid_definition_propgrid");
   let propSurvey = embeddedSurvey.embeddedSurvey;
   let panels = propSurvey.getAllPanels();
@@ -416,4 +413,24 @@ test("Preset edit model, live property grid", () => {
   expect(matrix.visibleRows[1].isDetailPanelShowing).toBeTruthy();
   panels[1].collapse();
   expect(matrix.visibleRows[1].isDetailPanelShowing).toBeFalsy();
+});
+test("Preset edit model, live property grid & modify value", () => {
+  const preset = new CreatorPreset({});
+  const survey = preset.createEditModel();
+  survey.setValue("propertyGrid_definition_show", true);
+  survey.currentPage = survey.getPageByName("page_propertyGrid_definition");
+  survey.setValue("propertyGrid_definition_selector", "survey");
+  let matrix = <QuestionMatrixDynamicModel>survey.getQuestionByName("propertyGrid_definition_matrix");
+  matrix.value = [{ name: "general", items: ["title", "description"] },
+    { name: "second", items: ["pages", "locale"] }];
+  const embeddedSurvey = <QuestionEmbeddedSurveyModel>survey.getQuestionByName("propertyGrid_definition_propgrid");
+  let propSurvey = embeddedSurvey.embeddedSurvey;
+  let panels = propSurvey.getAllPanels();
+  expect(panels).toHaveLength(2);
+  expect(panels[0].name).toBe("general");
+  expect(panels[0].elements).toHaveLength(2);
+  matrix.visibleRows[0].showDetailPanel();
+  matrix.visibleRows[0].getQuestionByName("items").value = ["widthMode"];
+  expect(panels[0].elements).toHaveLength(1);
+  expect(panels[0].elements[0].name).toBe("widthMode");
 });

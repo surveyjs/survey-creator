@@ -27,10 +27,12 @@ export class SurveyQuestionPresetPropertiesDetail {
   public classes = new Array<string>();
   private properties: SurveyQuestionPresetProperties;
   private propertyGridValue: PropertyGridModel;
+  private allPropertiesNames: Array<string>;
   constructor(private className: string, private currentJson: ISurveyPropertyGridDefinition) {
     const cls = {};
     this.properties = new SurveyQuestionPresetProperties(className, currentJson);
-    this.properties.getAllVisiblePropertiesNames(true).forEach(name => {
+    this.allPropertiesNames = this.properties.getAllVisiblePropertiesNames(true);
+    this.allPropertiesNames.forEach(name => {
       const prop = Serializer.findProperty(className, name);
       if(prop) {
         const propClassName = this.getPropClassName(prop);
@@ -55,40 +57,30 @@ export class SurveyQuestionPresetPropertiesDetail {
   public getRows(): Array<any> {
     const rows = [];
     this.properties.getTabs().forEach(tab => {
-      const row: any = { name: tab.name };
+      const row: any = { name: tab.name, items: [] };
       tab.properties.forEach(prop => {
-        const clName = this.propertiesHash[prop.name];
-        if(!row[clName]) {
-          row[clName] = [];
-        }
-        row[clName].push(prop.name);
+        row.items.push(prop.name);
       });
       rows.push(row);
     });
     return rows;
   }
-  public getRankingChoices(matrix: QuestionMatrixDynamicModel, row: MatrixDropdownRowModelBase, className: string): Array<ItemValue> {
-    const res = [];
-    const allProperties = [];
-    for(let key in this.propertiesHash) {
-      if(this.propertiesHash[key] == className) {
-        allProperties.push(key);
-      }
-    }
+  public getRankingChoices(matrix: QuestionMatrixDynamicModel, row: MatrixDropdownRowModelBase): Array<ItemValue> {
     const val = matrix.value;
     const usedItems = {};
     if(Array.isArray(val)) {
       const rowIndex = matrix.visibleRows.indexOf(row);
       for(let i = 0; i < val.length; i ++) {
-        const items = val[i][className];
+        const items = val[i].items;
         if(i !== rowIndex && Array.isArray(items)) {
           items.forEach(v => usedItems[v] = true);
         }
       }
     }
-    allProperties.forEach(name => {
+    const res = [];
+    this.allPropertiesNames.forEach(name => {
       if(!usedItems[name]) {
-        res.push(new ItemValue(name, editorLocalization.getPropertyNameInEditor(className, name)));
+        res.push(new ItemValue(name, editorLocalization.getPropertyNameInEditor(this.className, name)));
       }
     });
     return res;
@@ -113,31 +105,33 @@ export class SurveyQuestionPresetPropertiesDetail {
     const tabs = [];
     const step = 100;
     val.forEach(tab => {
-      const clVal = tab[clName];
+      const clVal = tab.items;
       if(Array.isArray(clVal)) {
-        if(tab.name === "general") {
-          clVal.forEach(item => properties.push(item));
-          properties.concat(clVal);
-        } else {
-          if(tabNames.indexOf(tab.name) < 0) {
-            tabNames.push(tab.name);
-            tabs.push({ name: tab.name, index: tabNames.length * step });
+        clVal.forEach(propName => {
+          if(this.propertiesHash[propName] === clName) {
+            const tabName = tab.name !== "general" ? tab.name : undefined;
+            if(!!tabName && tabNames.indexOf(tab.name) < 0) {
+              tabNames.push(tab.name);
+              tabs.push({ name: tab.name, index: tabNames.length * step });
+            }
+            const item: any = { name: propName };
+            if(!!tabName) {
+              item.tab = tabName;
+            }
+            properties.push(item);
           }
-          clVal.forEach(item => {
-            properties.push({ name: item, tab: tab.name });
-          });
-        }
+        });
       }
     });
     curJsonClasses[clName] = { properties: properties, tabs: tabs };
   }
   private getPropClassName(prop: JsonObjectProperty): string {
     const clName = prop.classInfo.name;
-    if(clName === this.className) return this.className;
     for(let i = 1; i < presetPropertiesBaseClasses.length; i ++) {
       const cl = presetPropertiesBaseClasses[i];
       if(clName === cl || Serializer.isDescendantOf(clName, cl)) return cl;
     }
+    if(clName === this.className) return this.className;
     return "question";
   }
 }
@@ -184,8 +178,7 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
                   type: "ranking",
                   name: "items",
                   selectToRankEnabled: true,
-                  selectToRankAreasLayout: "horizontal",
-                  visible: false
+                  selectToRankAreasLayout: "horizontal"
                 }
               ]
             },
@@ -237,7 +230,6 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     const matrix = this.getMatrix(model);
     this.currentProperties = new SurveyQuestionPresetPropertiesDetail(this.currentClassName, this.currentJson);
     matrix.rowCount = 0;
-    this.updateDetailPanel(matrix);
     matrix.value = this.currentProperties.getRows();
     this.updateEmbeddedSurvey(model);
     this.isMatrixValueChanged = false;
@@ -305,30 +297,12 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
   private get nameMatrix() { return this.fullPath + "_matrix"; }
   private get nameSelector() { return this.fullPath + "_selector"; }
   private get namePropertyGrid() { return this.fullPath + "_propgrid"; }
-  private updateDetailPanel(matrix: QuestionMatrixDynamicModel): void {
-    const panel = matrix.detailPanel;
-    for(let i = panel.elements.length - 1; i >= 1; i --) {
-      panel.removeElement(panel.elements[i]);
-    }
-    const itemsQ = panel.getQuestionByName("items");
-    const classes = this.currentProperties.classes;
-    classes.forEach(clName => {
-      const q = panel.addNewQuestion(itemsQ.getType());
-      const json = itemsQ.toJSON();
-      json.name = clName;
-      q.fromJSON(json);
-    });
-  }
   private onDetailPanelShowingChanged(model: SurveyModel, row: MatrixDropdownRowModelBase): void {
     if(!row.isDetailPanelShowing || !this.currentProperties) return;
     const classes = this.currentProperties.classes;
     const matrix = this.getMatrix(model);
-    classes.forEach(clName => {
-      const q = row.detailPanel.getQuestionByName(clName);
-      const choices = this.currentProperties.getRankingChoices(matrix, row, clName);
-      q.choices = choices;
-      q.visible = choices.length > 0;
-    });
+    const q = row.detailPanel.getQuestionByName("items");
+    q.choices = this.currentProperties.getRankingChoices(matrix, row);
   }
   private getSelectorChoices(creator: SurveyCreatorModel): Array<ItemValue> {
     const classes = ["survey", "page", "panel"];
