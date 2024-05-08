@@ -487,6 +487,7 @@ export interface ModifiedEvent {
   */
   type: string;
   question?: Question;
+  name?: string;
 
   oldValue?: any;
   newValue?: any;
