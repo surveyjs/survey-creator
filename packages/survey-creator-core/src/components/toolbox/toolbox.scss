@@ -12,12 +12,13 @@ svc-toolbox {
   flex-direction: column;
   .spg-search-editor_container {
       padding-left: calcSize(3.5);
+      margin-bottom: calcSize(-1);
     }
 }
 
 .svc-toolbox__scroller {
   margin-top: calcSize(1);
-    padding: 0 calc(calcSize(2) - 12px) calcSize(2);
+  padding: calcSize(1) calc(calcSize(2) - 12px) calcSize(2);
   box-sizing: border-box;
   overflow-y: auto;
   direction: rtl;
