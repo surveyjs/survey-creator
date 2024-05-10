@@ -195,7 +195,10 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
                   type: "ranking",
                   name: "items",
                   selectToRankEnabled: true,
-                  selectToRankAreasLayout: "horizontal"
+                  selectToRankAreasLayout: "horizontal",
+                  titleLocation: "hidden",
+                  selectToRankEmptyRankedAreaText: "Drag properties to hide them",
+                  selectToRankEmptyUnrankedAreaText: "Drag properties here"
                 }
               ]
             },
