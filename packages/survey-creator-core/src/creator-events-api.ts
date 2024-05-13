@@ -487,6 +487,7 @@ export interface ModifiedEvent {
   */
   type: string;
   question?: Question;
+  name?: string;
 
   oldValue?: any;
   newValue?: any;
@@ -685,7 +686,7 @@ export interface UploadFileEvent {
    * @param status A string value that indicates a successful or failed file upload: `"success"` or `"error"`.
    * @param fileUrl The URL of a successfully uploaded file.
    */
-  callback: (status: string, fileUrl: string) => void;
+  callback: (status: string, fileUrl?: string) => void;
   /**
    * Obsolete. Use the `options.element` parameter instead.
    */
