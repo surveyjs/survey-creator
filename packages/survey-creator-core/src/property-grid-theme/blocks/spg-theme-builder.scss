@@ -61,9 +61,11 @@
 
     .spg-question__title {
       white-space: nowrap;
+
       .sv-string-viewer {
-          white-space: nowrap;
-        }
+        white-space: nowrap;
+      }
+
       overflow: hidden;
       text-overflow: ellipsis;
     }
@@ -130,7 +132,7 @@
 
   .spg-theme-group-caption {
     @include defaultBold;
-    color: $foreground-dim;
+    color: var(--ctr-property-grid-group-caption-text-color, $foreground-dim);
 
     position: relative;
     top: calc(4 * #{$base-unit});
