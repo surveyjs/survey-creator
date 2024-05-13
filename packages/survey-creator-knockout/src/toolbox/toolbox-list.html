@@ -1,30 +1,6 @@
 <div data-bind="css: model.cssClasses.root">
-  <!-- ko if: $data.model.showFilter -->
-  <div data-bind="css: model.cssClasses.filter">
-    <div data-bind="css: model.cssClasses.filterIcon">
-      <!-- ko component: { name: 'sv-svg-icon', params: { iconName: 'icon-search', size: 'auto' }  } -->
-      <!-- /ko -->
-    </div>
-    <input type="text"
-      data-bind="css: model.cssClasses.filterInput, textInput: model.filterString, attr: { placeholder: model.filterStringPlaceholder, 'aria-label': model.filterStringPlaceholder }, event: { keyup: function (model, event) { $data.model.goToItems(event); } }"></input>
-    <!-- ko if: $data.model.showSearchClearButton && !!$data.model.filterString -->
-    <button
-      data-bind="event: { click: (_, event) => { model.onClickSearchClearButton(event); } }, css: model.cssClasses.searchClearButtonIcon">
-      <!-- ko component: { name: 'sv-svg-icon', params: { iconName: 'icon-searchclear', size: 'auto' }  } -->
-      <!-- /ko -->
-    </button>
-    <!-- /ko -->
-  </div>
-  <!-- /ko -->
-  <div data-bind="css: model.cssClasses.emptyContainer, visible: $data.model.isEmpty">
-    <div
-      data-bind="css: model.cssClasses.emptyText, text: model.emptyMessage, attr: { 'aria-label': model.emptyMessage }">
-    </div>
-  </div>
-  <!-- ko if: $data.model.renderElements -->
   <!-- ko template: { foreach: model.renderedActions, afterRender: $data.afterItemRender } -->
-  <!-- ko component: { name: 'svc-toolbox-tool', params: { item: $data, creator: $root.creator, isCompact: false } } -->
-  <!-- /ko -->
+  <!-- ko component: { name: 'svc-toolbox-tool', params: { item: $data, creator: $root.creator, model: $parent.model, isCompact: false } } -->
   <!-- /ko -->
   <!-- /ko -->
 </div>

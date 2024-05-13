@@ -1,4 +1,4 @@
-import { Base, SurveyModel, DragOrClickHelper } from "survey-core";
+import { Base, SurveyModel, DragOrClickHelper, ActionContainer } from "survey-core";
 import { IQuestionToolboxItem } from "../../toolbox";
 import { SurveyCreatorModel } from "../../creator-base";
 import { DragDropSurveyElements } from "../../survey-elements";
@@ -6,7 +6,8 @@ export class ToolboxToolViewModel extends Base {
   private dragOrClickHelper: DragOrClickHelper;
   constructor(
     protected item: IQuestionToolboxItem,
-    protected creator: SurveyCreatorModel
+    protected creator: SurveyCreatorModel,
+    protected model: ActionContainer
   ) {
     super();
     this.dragOrClickHelper = new DragOrClickHelper(this.startDragToolboxItem);
@@ -23,10 +24,16 @@ export class ToolboxToolViewModel extends Base {
 
   public onMouseOver(itemValue, mouseoverEvent) {
     if (mouseoverEvent.type === "mouseover") {
-      this.creator.toolbox.hideAllInnerPopups();
-      if (!!itemValue.popupModel) {
-        itemValue.popupModel.isVisible = true;
-      }
+      this.model.actions.forEach(action => {
+        if (action === itemValue && !!itemValue.popupModel) {
+          itemValue.popupModel.isVisible = true;
+        } else if (!!action.popupModel && action.popupModel.isVisible) {
+          action.popupModel.isVisible = false;
+        }
+      });
+      mouseoverEvent.stopPropagation();
+    } else {
+      // debugger;
     }
   }
   public onPointerDown(pointerDownEvent) {
