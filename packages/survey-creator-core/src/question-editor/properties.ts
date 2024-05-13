@@ -316,11 +316,16 @@ export class SurveyQuestionProperties {
       const clName = className.substring(prefix.length);
       const classes = [];
       let classInfo = Serializer.findClass(clName);
+      if(!classInfo) {
+        classes.push(className);
+      }
       while(!!classInfo && classInfo.name !== "question") {
         classes.unshift(prefix + classInfo.name);
         classInfo = !!classInfo.parentName ? Serializer.findClass(classInfo.parentName) : undefined;
       }
-      classes.unshift(prefix + "default");
+      if(classes.indexOf(prefix + "default") < 0) {
+        classes.unshift(prefix + "default");
+      }
       classes.forEach(cl => {
         const def = this.getClassDefintion(cl);
         if(def) {
