@@ -3,7 +3,7 @@ import { TestSurveyTabViewModel } from "../../src/components/tabs/test";
 import { SurveyResultsItemModel, SurveyResultsModel } from "../../src/components/results";
 import { IAction, ListModel, Question, QuestionDropdownModel, SurveyModel, StylesManager } from "survey-core";
 import { TabTestPlugin } from "../../src/components/tabs/test-plugin";
-import { SurveySimulatorModel } from "../../src/components/simulator";
+import { SurveySimulatorModel, simulatorDevices } from "../../src/components/simulator";
 import { editorLocalization } from "../../src/editorLocalization";
 
 import "survey-core/survey.i18n";
@@ -894,4 +894,62 @@ test("showResults with previewShowResults false", (): any => {
 
   model.survey.doComplete();
   expect(model.showResults).toBeFalsy();
+});
+
+test("devices selector dropdown items default order", (): any => {
+  const creator: CreatorTester = new CreatorTester({ previewShowResults: false });
+  creator.JSON = {
+    questions: [
+      {
+        type: "text",
+        name: "q1",
+      }
+    ]
+  };
+  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
+  testPlugin.activate();
+
+  const deviceSelectorAction = testPlugin["deviceSelectorAction"];
+  const dropdownDeviceActions = deviceSelectorAction.data.actions as IAction[];
+  expect(dropdownDeviceActions.length).toBe(9);
+  expect(dropdownDeviceActions[0].id).toBe("desktop");
+  expect(dropdownDeviceActions[0].visibleIndex).toBe(Number.MAX_VALUE);
+  expect(dropdownDeviceActions[7].id).toBe("androidTablet");
+  expect(dropdownDeviceActions[7].visibleIndex).toBe(Number.MAX_VALUE);
+  expect(dropdownDeviceActions[8].id).toBe("msSurface");
+  expect(dropdownDeviceActions[8].visibleIndex).toBe(Number.MAX_VALUE);
+});
+test("change devices selector dropdown items order", (): any => {
+  try {
+    simulatorDevices.msSurface.visibleIndex = 0;
+    simulatorDevices.androidTablet.visibleIndex = 1;
+
+    const creator: CreatorTester = new CreatorTester({ previewShowResults: false });
+    creator.JSON = {
+      questions: [
+        {
+          type: "text",
+          name: "q1",
+        }
+      ]
+    };
+    const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
+    testPlugin.activate();
+
+    const deviceSelectorAction = testPlugin["deviceSelectorAction"];
+    const dropdownDeviceActions = deviceSelectorAction.data.actions as IAction[];
+    expect(dropdownDeviceActions.length).toBe(9);
+    expect(dropdownDeviceActions[0].id).toBe("msSurface");
+    expect(dropdownDeviceActions[0].visibleIndex).toBe(0);
+    expect(dropdownDeviceActions[1].id).toBe("androidTablet");
+    expect(dropdownDeviceActions[1].visibleIndex).toBe(1);
+    expect(dropdownDeviceActions[2].id).toBe("desktop");
+    expect(dropdownDeviceActions[2].visibleIndex).toBe(Number.MAX_VALUE);
+    expect(dropdownDeviceActions[8].id).toBe("androidPhone");
+    expect(dropdownDeviceActions[8].visibleIndex).toBe(Number.MAX_VALUE);
+  }
+  finally {
+    simulatorDevices.msSurface.visibleIndex = undefined;
+    simulatorDevices.androidTablet.visibleIndex = undefined;
+  }
 });

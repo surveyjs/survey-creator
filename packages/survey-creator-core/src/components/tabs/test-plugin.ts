@@ -145,7 +145,7 @@ export class TabTestPlugin implements ICreatorPlugin {
     if (this.creator.showSimulatorInTestSurveyTab) {
       const deviceSelectorItems = Object.keys(simulatorDevices)
         .filter((key) => !!simulatorDevices[key].title)
-        .map((key) => ({ id: key, title: simulatorDevices[key].title }));
+        .map((key) => ({ id: key, title: simulatorDevices[key].title, visibleIndex: simulatorDevices[key].visibleIndex ?? Number.MAX_VALUE }));
       this.deviceSelectorAction = createDropdownActionModel({
         id: "deviceSelector",
         iconName: "icon-device-desktop",
