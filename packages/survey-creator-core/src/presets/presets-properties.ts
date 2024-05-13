@@ -1,5 +1,6 @@
 import { JsonObjectProperty, ItemValue, MatrixDropdownRowModelBase, QuestionDropdownModel,
-  QuestionMatrixDynamicModel, QuestionRankingModel, Serializer, SurveyModel, ElementContentVisibilityChangedEvent } from "survey-core";
+  QuestionMatrixDynamicModel, Base, Serializer, SurveyModel, ElementContentVisibilityChangedEvent,
+  matrixDropdownColumnTypes } from "survey-core";
 import { ICreatorPreset, CreatorPresetBase, CreatorPresetEditableBase } from "./presets-base";
 import { SurveyCreatorModel } from "../creator-base";
 import { defaultPropertyGridDefinition, ISurveyPropertyGridDefinition, ISurveyPropertiesDefinition } from "../question-editor/definition";
@@ -9,18 +10,15 @@ import { PropertyGridModel } from "../../src/property-grid";
 import { QuestionEmbeddedSurveyModel } from "../components/embedded-survey";
 
 export class SurveyQuestionPresetProperties extends SurveyQuestionProperties {
-  constructor(className: string, propertyGridDefinition: ISurveyPropertyGridDefinition) {
-    super(null, null, className, null, null, null, propertyGridDefinition);
-  }
-  protected initProperties(className: string): Array<JsonObjectProperty> {
-    return Serializer.getProperties(className);
+  constructor(obj, className: string, propertyGridDefinition: ISurveyPropertyGridDefinition) {
+    super(obj, null, className, null, null, null, propertyGridDefinition);
   }
   protected getIsPropertyVisible(prop: JsonObjectProperty): boolean {
     return prop.visible !== false;
   }
 }
 
-const presetPropertiesBaseClasses = ["question", "matrixdropdownbase", "selectbase", "panelbase"];
+const presetPropertiesBaseClasses = ["question", "matrixdropdownbase", "selectbase", "panelbase", "matrixdropdowncolumn@default", "matrixdropdowncolumn@selectbase"];
 
 export class SurveyQuestionPresetPropertiesDetail {
   private propertiesHash = {};
@@ -30,10 +28,13 @@ export class SurveyQuestionPresetPropertiesDetail {
   private allPropertiesNames: Array<string>;
   constructor(private className: string, private currentJson: ISurveyPropertyGridDefinition) {
     const cls = {};
-    this.properties = new SurveyQuestionPresetProperties(className, currentJson);
+    const obj = this.createObj();
+    this.properties = new SurveyQuestionPresetProperties(obj, className, currentJson);
     this.allPropertiesNames = this.properties.getAllVisiblePropertiesNames(true);
+    const objProps = {};
+    Serializer.getPropertiesByObj(obj).forEach(prop => objProps[prop.name] = prop);
     this.allPropertiesNames.forEach(name => {
-      const prop = Serializer.findProperty(className, name);
+      const prop = objProps[name];
       if(prop) {
         const propClassName = this.getPropClassName(prop);
         this.propertiesHash[name] = propClassName;
@@ -46,9 +47,22 @@ export class SurveyQuestionPresetPropertiesDetail {
         this.classes.push(cl);
       }
     }
-    this.classes.push(className);
-    const obj = className === "survey"? new SurveyModel() : Serializer.createClass(className);
+    if(this.classes.indexOf(className) < 0) {
+      this.classes.push(className);
+    }
     this.propertyGridValue = new PropertyGridModel(obj, undefined, this.currentJson);
+  }
+  private createObj(): Base {
+    if(this.className === "survey") return new SurveyModel();
+    const ind = this.className.indexOf("@");
+    if(ind < 0) return Serializer.createClass(this.className);
+    const clName = this.className.substring(0, ind);
+    const postFix = this.className.substring(ind + 1);
+    const res = Serializer.createClass(clName);
+    if(res.cellType) {
+      res.cellType = postFix;
+    }
+    return res;
   }
   public dispose(): void {
     //TODO
@@ -146,10 +160,19 @@ export class SurveyQuestionPresetPropertiesDetail {
     const clName = prop.classInfo.name;
     for(let i = 1; i < presetPropertiesBaseClasses.length; i ++) {
       const cl = presetPropertiesBaseClasses[i];
-      if(clName === cl || Serializer.isDescendantOf(clName, cl)) return cl;
+      if(clName === cl || Serializer.isDescendantOf(clName, cl)) return this.getClassName(cl);
     }
     if(clName === this.className) return this.className;
-    return "question";
+    return this.getClassName("question");
+  }
+  private getClassName(className: string): string {
+    const ind = this.className.indexOf("@");
+    if(ind < 0) return className;
+    const clName = this.className.substring(0, ind);
+    if(clName === className || className === "question") {
+      className = "default";
+    }
+    return clName + "@" + className;
   }
 }
 
@@ -338,12 +361,22 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     });
     const res = [];
     classes.forEach(str => res.push(new ItemValue(str, this.getSelectorItemTitle(str))));
+    const columnPrefix = "matrixdropdowncolumn@";
+    res.push(new ItemValue(columnPrefix + "default", this.getColumnItemTitle("")));
+    for(let key in matrixDropdownColumnTypes) {
+      res.push(new ItemValue(columnPrefix + key, this.getColumnItemTitle(key)));
+    }
     return res;
   }
   private getSelectorItemTitle(name: string): string {
     if(name === "survey") return editorLocalization.getString("ed.surveyTypeName");
     if(name === "page") return editorLocalization.getString("ed.pageTypeName");
     return editorLocalization.getString("qt." + name);
+  }
+  private getColumnItemTitle(name: string): string {
+    const columnTitle = editorLocalization.getString("ed.columnTypeName");
+    const postFix = !name ? "default" : this.getSelectorItemTitle(name);
+    return columnTitle + ": " + postFix;
   }
   private updateCurrentJson(model: SurveyModel): void {
     if(!this.isMatrixValueChanged) return;

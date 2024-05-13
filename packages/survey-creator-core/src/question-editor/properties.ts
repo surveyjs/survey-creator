@@ -53,7 +53,7 @@ export class SurveyQuestionProperties {
       this.propertyGridDefinition = defaultPropertyGridDefinition;
     }
     this.showModeValue = showMode;
-    this.properties = this.initProperties(className);
+    this.properties = this.initProperties();
     this.fillPropertiesHash();
     this.buildTabs(className);
   }
@@ -67,7 +67,7 @@ export class SurveyQuestionProperties {
     }
     return res;
   }
-  protected initProperties(className: string): Array<JsonObjectProperty> {
+  protected initProperties(): Array<JsonObjectProperty> {
     return Serializer.getPropertiesByObj(this.obj);
   }
   protected getIsPropertyVisible(prop: JsonObjectProperty): boolean {
@@ -312,13 +312,21 @@ export class SurveyQuestionProperties {
     var result = [];
     var usedProperties = {};
     if (className.indexOf("@") > -1 && this.getClassDefintion(className)) {
-      var defaultName =
-        className.substring(0, className.indexOf("@") + 1) + "default";
-      if (defaultName != className && !!this.getClassDefintion(defaultName)
-      ) {
-        result.push(this.getClassDefintion(defaultName));
+      const prefix = className.substring(0, className.indexOf("@") + 1);
+      const clName = className.substring(prefix.length);
+      const classes = [];
+      let classInfo = Serializer.findClass(clName);
+      while(!!classInfo && classInfo.name !== "question") {
+        classes.unshift(prefix + classInfo.name);
+        classInfo = !!classInfo.parentName ? Serializer.findClass(classInfo.parentName) : undefined;
       }
-      result.push(this.getClassDefintion(className));
+      classes.unshift(prefix + "default");
+      classes.forEach(cl => {
+        const def = this.getClassDefintion(cl);
+        if(def) {
+          result.push(def);
+        }
+      });
       this.setUsedProperties(result, usedProperties);
       this.addNonTabProperties(result, usedProperties, true);
       return result;

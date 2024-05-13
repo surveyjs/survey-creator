@@ -129,7 +129,26 @@ const defaultProperties2 : ISurveyPropertyGridDefinition = {
       properties: [
         { name: "allowClear", index: 4 }
       ],
-    }
+    },
+    "matrixdropdowncolumn@default": {
+      properties: [
+        "name", "title", "cellType"
+      ]
+    },
+    "matrixdropdowncolumn@selectbase": {
+      properties: [
+        { name: "choices", tab: "choices" },
+        { name: "choicesFromQuestion", tab: "choices" }
+      ],
+      tabs: [
+        { name: "choices", index: 5 }
+      ]
+    },
+    "matrixdropdowncolumn@checkbox": {
+      properties: [
+        { name: "showSelectAllItem", tab: "choices" }
+      ],
+    },
   }
 };
 test("Add support for property info index", () => {
@@ -149,4 +168,26 @@ test("Add support for property info index", () => {
   expect(generalQuestions[2].name).toBe("title");
   expect(generalQuestions[3].name).toBe("allowClear");
   expect(generalQuestions[4].name).toBe("name");
+});
+test("Support matrixdropdowncolumn@selectbase", () => {
+  const matrix = new QuestionMatrixDynamicModel("q1");
+  const column = matrix.addColumn("col1");
+  column.cellType = "checkbox";
+  const propertyGrid = new PropertyGridModelTester(column, undefined, defaultProperties2);
+  const survey = propertyGrid.survey;
+  const panels = survey.getAllPanels();
+  expect(panels).toHaveLength(2);
+  expect(panels[0].name).toBe("general");
+  expect(panels[1].name).toBe("choices");
+
+  const generalQuestions = panels[0].elements;
+  expect(generalQuestions).toHaveLength(3);
+  expect(generalQuestions[0].name).toBe("name");
+  expect(generalQuestions[1].name).toBe("title");
+  expect(generalQuestions[2].name).toBe("cellType");
+  const choicesQuestions = panels[1].elements;
+  expect(choicesQuestions).toHaveLength(3);
+  expect(choicesQuestions[0].name).toBe("choices");
+  expect(choicesQuestions[1].name).toBe("choicesFromQuestion");
+  expect(choicesQuestions[2].name).toBe("showSelectAllItem");
 });

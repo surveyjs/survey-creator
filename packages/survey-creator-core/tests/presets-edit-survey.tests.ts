@@ -1,7 +1,7 @@
 import { CreatorTester } from "./creator-tester";
 import { CreatorPreset, ICreatorPresetData } from "../src/presets/presets";
 import { QuestionToolbox } from "../src/toolbox";
-import { QuestionDropdownModel, QuestionMatrixDynamicModel } from "survey-core";
+import { ItemValue, QuestionDropdownModel, QuestionMatrixDynamicModel } from "survey-core";
 import { defaultPropertyGridDefinition, ISurveyPropertyGridDefinition } from "../src/question-editor/definition";
 import { SurveyQuestionPresetPropertiesDetail } from "../src/presets/presets-properties";
 import { QuestionEmbeddedSurveyModel } from "../src/components/embedded-survey";
@@ -454,4 +454,76 @@ test("Preset edit model, live property grid & visible indexes", () => {
   expect(elements[2].name).toBe("title");
   expect(elements[3].name).toBe("placeholder");
   expect(elements[4].name).toBe("description");
+});
+test("Preset edit model, include columns types", () => {
+  const preset = new CreatorPreset({});
+  const survey = preset.createEditModel();
+  survey.setValue("propertyGrid_definition_show", true);
+  survey.currentPage = survey.getPageByName("page_propertyGrid_definition");
+  const question = <QuestionDropdownModel>survey.getQuestionByName("propertyGrid_definition_selector");
+  expect(ItemValue.getItemByValue(question.choices, "matrixdropdowncolumn@default")).toBeTruthy();
+  expect(ItemValue.getItemByValue(question.choices, "matrixdropdowncolumn@checkbox")).toBeTruthy();
+});
+test("Preset edit model, edit matrixdropdowncolumn@default", () => {
+  const preset = new CreatorPreset({});
+  const survey = preset.createEditModel();
+  survey.setValue("propertyGrid_definition_show", true);
+  survey.currentPage = survey.getPageByName("page_propertyGrid_definition");
+  survey.setValue("propertyGrid_definition_selector", "matrixdropdowncolumn@default");
+  const matrix = <QuestionMatrixDynamicModel>survey.getQuestionByName("propertyGrid_definition_matrix");
+  const rows = matrix.visibleRows;
+  expect(rows).toHaveLength(3);
+  rows[0].showDetailPanel();
+  expect(rows[0].getQuestionByName("items").choices).toHaveLength(10);
+  rows[1].showDetailPanel();
+  expect(rows[1].getQuestionByName("items").choices).toHaveLength(7);
+});
+test("Preset edit model, live property grid & matrixdropdowncolumn@default", () => {
+  const preset = new CreatorPreset({});
+  const survey = preset.createEditModel();
+  survey.setValue("propertyGrid_definition_show", true);
+  survey.currentPage = survey.getPageByName("page_propertyGrid_definition");
+  survey.setValue("propertyGrid_definition_selector", "matrixdropdowncolumn@default");
+  let matrix = <QuestionMatrixDynamicModel>survey.getQuestionByName("propertyGrid_definition_matrix");
+  matrix.value = [{ name: "general", items: ["name", "title"] },
+    { name: "logic", items: ["visibleIf"] }];
+  const embeddedSurvey = <QuestionEmbeddedSurveyModel>survey.getQuestionByName("propertyGrid_definition_propgrid");
+  let propSurvey = embeddedSurvey.embeddedSurvey;
+  let panels = propSurvey.getAllPanels();
+  expect(panels).toHaveLength(2);
+  expect(panels[0].name).toBe("general");
+  expect(panels[0].elements).toHaveLength(2);
+  expect(panels[0].elements[0].name).toBe("name");
+  expect(panels[0].elements[1].name).toBe("title");
+  matrix.visibleRows[0].showDetailPanel();
+  matrix.visibleRows[0].getQuestionByName("items").value = ["cellType"];
+  expect(panels[0].elements).toHaveLength(1);
+  expect(panels[0].elements[0].name).toBe("cellType");
+});
+test("Preset edit model, live property grid & matrixdropdowncolumn@checkbox", () => {
+  const preset = new CreatorPreset({});
+  const survey = preset.createEditModel();
+  survey.setValue("propertyGrid_definition_show", true);
+  survey.currentPage = survey.getPageByName("page_propertyGrid_definition");
+  survey.setValue("propertyGrid_definition_selector", "matrixdropdowncolumn@checkbox");
+  let matrix = <QuestionMatrixDynamicModel>survey.getQuestionByName("propertyGrid_definition_matrix");
+  matrix.value = [{ name: "general", items: ["name", "title"] },
+    { name: "choices", items: ["choices", "showSelectAllItem"] }];
+  const embeddedSurvey = <QuestionEmbeddedSurveyModel>survey.getQuestionByName("propertyGrid_definition_propgrid");
+  let propSurvey = embeddedSurvey.embeddedSurvey;
+  let panels = propSurvey.getAllPanels();
+  expect(panels).toHaveLength(2);
+  expect(panels[0].name).toBe("general");
+  expect(panels[0].elements).toHaveLength(2);
+  expect(panels[0].elements[0].name).toBe("name");
+  expect(panels[0].elements[1].name).toBe("title");
+  matrix.visibleRows[0].showDetailPanel();
+  matrix.visibleRows[0].getQuestionByName("items").value = ["cellType"];
+  expect(panels[0].elements).toHaveLength(1);
+  expect(panels[0].elements[0].name).toBe("cellType");
+  matrix.visibleRows[1].showDetailPanel();
+  matrix.visibleRows[1].getQuestionByName("items").value = ["choices", "maxSelectedChoices"];
+  expect(panels[1].elements).toHaveLength(2);
+  expect(panels[1].elements[0].name).toBe("choices");
+  expect(panels[1].elements[1].name).toBe("maxSelectedChoices");
 });
