@@ -53,7 +53,7 @@ export class SurveyQuestionProperties {
       this.propertyGridDefinition = defaultPropertyGridDefinition;
     }
     this.showModeValue = showMode;
-    this.properties = this.initProperties();
+    this.properties = Serializer.getPropertiesByObj(this.obj);
     this.fillPropertiesHash();
     this.buildTabs(className);
   }
@@ -66,9 +66,6 @@ export class SurveyQuestionProperties {
       this.unusedProperties.forEach(prop => res.push(prop.name));
     }
     return res;
-  }
-  protected initProperties(): Array<JsonObjectProperty> {
-    return Serializer.getPropertiesByObj(this.obj);
   }
   protected getIsPropertyVisible(prop: JsonObjectProperty): boolean {
     return SurveyHelper.isPropertyVisible(this.obj, prop, this.options, this.showMode, this.parentObj, this.parentProperty);
@@ -316,12 +313,12 @@ export class SurveyQuestionProperties {
       const clName = className.substring(prefix.length);
       const classes = [];
       let classInfo = Serializer.findClass(clName);
-      if(!classInfo) {
-        classes.push(className);
-      }
       while(!!classInfo && classInfo.name !== "question") {
         classes.unshift(prefix + classInfo.name);
         classInfo = !!classInfo.parentName ? Serializer.findClass(classInfo.parentName) : undefined;
+      }
+      if(classes.indexOf(className) < 0) {
+        classes.unshift(className);
       }
       if(classes.indexOf(prefix + "default") < 0) {
         classes.unshift(prefix + "default");
