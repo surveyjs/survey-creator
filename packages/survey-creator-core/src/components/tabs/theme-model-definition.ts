@@ -4,6 +4,13 @@ const themeModelProperties: ISurveyPropertiesDefinition = {
   "theme": {
     properties: [
       { name: "header", tab: "header" },
+
+      { name: "--sjs-general-backcolor-dim", tab: "background" },
+      { name: "backgroundImage", tab: "background" },
+      { name: "backgroundImageFit", tab: "background" },
+      { name: "backgroundImageAttachment", tab: "background" },
+      { name: "backgroundOpacity", tab: "background" },
+
       { name: "generalPrimaryColor", tab: "appearancecolor" },
       { name: "panelBackgroundTransparency", tab: "appearancecolor" },
       { name: "questionBackgroundTransparency", tab: "appearancecolor" },

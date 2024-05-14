@@ -802,7 +802,6 @@ Serializer.addClass(
 Serializer.addProperties("theme",
   [{
     name: "backgroundImage:file",
-    category: "background",
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
         editor.storeDataAsText = false;
@@ -822,7 +821,6 @@ Serializer.addProperties("theme",
       { value: "cover", text: getLocString("theme.backgroundImageFitCover") }
     ],
     default: "cover",
-    category: "background",
   }, {
     name: "backgroundImageAttachment",
     displayName: "",
@@ -834,7 +832,6 @@ Serializer.addProperties("theme",
       { value: "scroll", text: getLocString("theme.backgroundImageAttachmentScroll") }
     ],
     default: "scroll",
-    category: "background",
   }, {
     type: "spinedit",
     isSerializable: false,
@@ -844,7 +841,6 @@ Serializer.addProperties("theme",
       return !!obj.backgroundImage;
     },
     default: 100,
-    category: "background",
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
         editor.unit = "%";
@@ -1039,12 +1035,12 @@ Serializer.addProperties("theme",
   {
     type: "colorsettings",
     name: "--sjs-border-light",
+    displayName: "",
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
         editor.visibleIf = "{advancedmode} = true";
         editor.colorTitle = getLocString("theme.borderLight");
         editor.colorTitleLocation = "left";
-        editor.titleLocation = "hidden";
         editor.descriptionLocation = "hidden";
       }
     }
@@ -1128,7 +1124,6 @@ Serializer.addProperties("theme",
     type: "color",
     name: "--sjs-general-backcolor-dim",
     displayName: getLocString("theme.backgroundDimColor"),
-    category: "background",
   },
   {
     type: "colorsettings",
@@ -1145,24 +1140,24 @@ Serializer.addProperties("theme",
   }, {
     type: "colorsettings",
     name: "--sjs-primary-backcolor-dark",
+    displayName: "",
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
         editor.visibleIf = "{advancedmode} = true";
         editor.colorTitle = getLocString("theme.primaryDarkColor");
         editor.colorTitleLocation = "left";
-        editor.titleLocation = "hidden";
         editor.descriptionLocation = "hidden";
       }
     }
   }, {
     type: "colorsettings",
     name: "--sjs-primary-backcolor-light",
+    displayName: "",
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
         editor.visibleIf = "{advancedmode} = true";
         editor.colorTitle = getLocString("theme.primaryLightColor");
         editor.colorTitleLocation = "left";
-        editor.titleLocation = "hidden";
         editor.descriptionLocation = "hidden";
       }
     }
@@ -1181,12 +1176,12 @@ Serializer.addProperties("theme",
   }, {
     type: "colorsettings",
     name: "--sjs-primary-forecolor-light",
+    displayName: "",
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
         editor.visibleIf = "{advancedmode} = true";
         editor.colorTitle = getLocString("theme.primaryForecolorLight");
         editor.colorTitleLocation = "left";
-        editor.titleLocation = "hidden";
         editor.descriptionLocation = "hidden";
       }
     }

@@ -220,6 +220,7 @@ function getVerticalAlignment(questionName: string, defaultValue: string): IJson
   return <IJsonPropertyInfo>{
     type: "buttongroup",
     name: questionName,
+    displayName: "",
     visibleIf: (obj) => obj.headerView === "advanced",
     choices: [
       { value: "top", text: getLocString("theme.verticalAlignmentTop") },
@@ -227,11 +228,6 @@ function getVerticalAlignment(questionName: string, defaultValue: string): IJson
       { value: "bottom", text: getLocString("theme.verticalAlignmentBottom") },
     ],
     default: defaultValue,
-    onPropertyEditorUpdate: function (obj: any, editor: any) {
-      if (!!editor) {
-        editor.titleLocation = "hidden";
-      }
-    }
   };
 }
 
@@ -319,7 +315,6 @@ Serializer.addClass(
         if (!!editor) {
           editor.allowEmptyValue = true;
           editor.enableIf = "{composite.backgroundColorSwitch} = 'custom'";
-          editor.titleLocation = "hidden";
           editor.descriptionLocation = "hidden";
         }
       }
@@ -350,7 +345,6 @@ Serializer.addClass(
       visibleIf: (obj) => obj.headerView === "advanced",
       onPropertyEditorUpdate: function (obj: any, editor: any) {
         if (!!editor) {
-          editor.titleLocation = "hidden";
           editor.enableIf = "{composite.backgroundImage} notempty";
         }
       }
@@ -375,12 +369,11 @@ Serializer.addClass(
     {
       type: "boolean",
       name: "overlapEnabled",
-      displayName: getLocString("theme.coverOverlapEnabled"),
+      displayName: "",
       visibleIf: (obj) => obj.headerView === "advanced",
       onPropertyEditorUpdate: function (obj: any, editor: any) {
         if (!!editor) {
           editor.renderAs = "checkbox";
-          editor.titleLocation = "hidden";
           editor.descriptionLocation = "hidden";
         }
       }
