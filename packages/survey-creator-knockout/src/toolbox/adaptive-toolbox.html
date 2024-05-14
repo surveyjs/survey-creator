@@ -1,4 +1,5 @@
-<div class="svc-toolbox" data-bind="css: { 'svc-toolbox--compact': $data.toolbox.isCompact }">
+<div class="svc-toolbox"
+  data-bind="css: { 'svc-toolbox--compact': $data.toolbox.isCompact, 'svc-toolbox--scrollable': $data.toolbox.isResponsivenessDisabled }">
   <!-- ko component: { name: 'svc-search', params: { model: $data.toolbox.searchManager } } -->
   <!-- /ko -->
   <div class="svc-toolbox__scroller">
