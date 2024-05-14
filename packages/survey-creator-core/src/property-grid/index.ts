@@ -1529,12 +1529,6 @@ export class PropertyGridEditorColor extends PropertyGridEditor {
     const res: any = { type: "color", allowEmptyValue: true };
     return res;
   }
-
-  onSetup(obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions): void {
-    if (!!obj["getPredefinedChoices"]) {
-      question.choices = obj["getPredefinedChoices"](question.name);
-    }
-  }
 }
 
 export class PropertyGridEditorColorSettings extends PropertyGridEditor {

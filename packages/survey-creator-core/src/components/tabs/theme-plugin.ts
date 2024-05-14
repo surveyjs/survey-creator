@@ -1,11 +1,11 @@
-import { Action, ComputedUpdater, surveyCss, defaultV2ThemeName, ITheme, EventBase, Serializer, settings as surveySettings, Question, IElement, SurveyModel, PanelModelBase, PanelModel, QuestionHtmlModel, QuestionFileModel, QuestionDropdownModel, QuestionCompositeModel } from "survey-core";
+import { Action, ComputedUpdater, surveyCss, defaultV2ThemeName, ITheme, EventBase, Serializer, settings as surveySettings, Question, IElement, SurveyModel, PanelModelBase, PanelModel, QuestionHtmlModel, QuestionFileModel, QuestionDropdownModel, QuestionCompositeModel, ItemValue, QuestionSelectBase } from "survey-core";
 import { settings } from "../../creator-settings";
 import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { ThemeEditorModel } from "./theme-builder";
 import { SidebarTabModel } from "../side-bar/side-bar-tab-model";
-import { PredefinedThemes, Themes } from "./themes";
+import { PredefinedColors, PredefinedThemes, Themes } from "./themes";
 import { assign, notShortCircuitAnd, saveToFileHandler } from "../../utils/utils";
 import { PropertyGridModel } from "../../property-grid";
 import { PropertyGridViewModel } from "../../property-grid/property-grid-view-model";
@@ -129,6 +129,28 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     if (pageDescriptionQuestion) {
       pageDescriptionQuestion.readOnly = !pageElements.some(p => !!p.description);
     }
+  }
+  private getPredefinedColorsItemValues() {
+    return Object.keys(PredefinedColors[this.themeModel.colorPalette]).map(colorName =>
+      new ItemValue(PredefinedColors[this.themeModel.colorPalette][colorName], getLocString("theme.colors." + colorName))
+    );
+  }
+  private updatePropertyGridColorEditorWithPredefinedColors() {
+    const page = this.propertyGrid.survey.pages[0];
+    const header = page?.getElementByName("header") as PanelModel;
+    if (header && header.elements.length > 0) {
+      const headerViewContainer = (header.elements[0] as QuestionCompositeModel).contentPanel;
+      const headerBackgroundQuestion = headerViewContainer.getQuestionByName("backgroundColor") as QuestionSelectBase;
+      if (!!headerBackgroundQuestion) {
+        headerBackgroundQuestion.choices = this.getPredefinedColorsItemValues();
+      }
+    }
+
+    this.propertyGrid.survey.getAllQuestions().forEach(question => {
+      if (["color", "colorsettings"].indexOf(question.getType()) !== -1) {
+        (question as any).choices = this.getPredefinedColorsItemValues();
+      }
+    });
   }
 
   private _setPGEditorPropertyValue(editor: Question, propertyName: string, value): void {
@@ -260,11 +282,12 @@ export class ThemeTabPlugin implements ICreatorPlugin {
         }
       }
     });
-    this.propertyGrid.survey.onUpdateQuestionCssClasses.add((sender, options) => {
-      if (!options.question.parentQuestion && !!options.question.page && options.question.titleLocation === "hidden") {
-        options.cssClasses.mainRoot += " spg-row-narrow__question";
-      }
-    });
+    // this.propertyGrid.survey.onUpdateQuestionCssClasses.add((sender, options) => {
+    //   const q = options.question;
+    //   if (!q.parentQuestion && !!q.page && (q.titleLocation === "hidden" || q.titleLocation === "left") && q.name !== "header") {
+    //     options.cssClasses.mainRoot += " spg-row-narrow__question";
+    //   }
+    // });
 
     // if (!!this.model.themeEditorSurvey) {
     //   const options = <IPropertyGridSurveyCreatedEvent>{
@@ -276,6 +299,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
 
     this.updatePropertyGridEditorsAvailability();
     this.updateVisibilityOfPropertyGridGroups();
+    this.updatePropertyGridColorEditorWithPredefinedColors();
     this.creator.sidebar.activeTab = this.propertyGridTab.id;
     this.propertyGridTab.visible = true;
     this.creator.expandCategoryIfNeeded();
@@ -320,6 +344,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       this.propertyGrid.survey.editingObj = undefined;
       this.propertyGrid.survey.editingObj = sender;
       this.updateAllowModifyTheme();
+      this.updatePropertyGridColorEditorWithPredefinedColors();
     });
     this.themeModel.onThemePropertyChanged.add((sender, options) => {
       this.syncTheme();

@@ -1,9 +1,6 @@
-import { Base, ComponentCollection, IHeader, IJsonPropertyInfo, ILoadFromJSONOptions, ISaveToJSONOptions, ISurvey, ITheme, JsonObjectProperty, PanelModel, Question, Serializer, HorizontalAlignment, VerticalAlignment } from "survey-core";
-import { ISurveyCreatorOptions, settings } from "../../creator-settings";
-import { PropertyGridEditor, PropertyGridEditorCollection, PropertyJSONGenerator } from "../../property-grid";
-import { ISurveyPropertyGridDefinition } from "../../question-editor/definition";
-import { editorLocalization, getLocString } from "../../editorLocalization";
-import { themeModelPropertyGridDefinition } from "./theme-model-definition";
+import { Base, IHeader, IJsonPropertyInfo, ILoadFromJSONOptions, ISaveToJSONOptions, ISurvey, ITheme, Serializer, HorizontalAlignment, VerticalAlignment } from "survey-core";
+import { settings } from "../../creator-settings";
+import { getLocString } from "../../editorLocalization";
 import { fontsettingsFromCssVariable, fontsettingsToCssVariable, onSerializeFontSettingsValue } from "./theme-custom-questions/font-settings";
 import { assign } from "../../utils/utils";
 
@@ -327,7 +324,6 @@ Serializer.addClass(
         if (!!editor) {
           editor.storeDataAsText = false;
           editor.acceptedTypes = "image/*";
-          editor.placeholder = "Browse...";
         }
       }
     },

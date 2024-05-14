@@ -1,6 +1,6 @@
-import { Base, ITheme, ItemValue, JsonObjectProperty, Question, Serializer, property, ILoadFromJSONOptions, ISaveToJSONOptions, IHeader, EventBase, SurveyModel, ArrayChanges } from "survey-core";
+import { Base, ITheme, JsonObjectProperty, Question, Serializer, property, ILoadFromJSONOptions, ISaveToJSONOptions, IHeader, EventBase, SurveyModel, ArrayChanges } from "survey-core";
 import { getLocString } from "../../editorLocalization";
-import { PredefinedColors, PredefinedThemes, Themes } from "./themes";
+import { PredefinedThemes, Themes } from "./themes";
 import { settings } from "../../creator-settings";
 
 import { DefaultFonts, fontsettingsFromCssVariable, fontsettingsToCssVariable, onSerializeFontSettingsValue } from "./theme-custom-questions/font-settings";
@@ -348,12 +348,6 @@ export class ThemeModel extends Base implements ITheme {
   //   }
   // }
 
-  private getPredefinedColorsItemValues() {
-    return Object.keys(PredefinedColors[this.colorPalette]).map(colorName =>
-      new ItemValue(PredefinedColors[this.colorPalette][colorName], getLocString("theme.colors." + colorName))
-    );
-  }
-
   constructor() {
     super();
     this.setNewHeaderProperty();
@@ -579,13 +573,6 @@ export class ThemeModel extends Base implements ITheme {
     return findSuitableTheme(themeName, this.colorPalette, this.isPanelless, probeThemeFullName);
   }
 
-  getPredefinedChoices(propertyName: string): Array<ItemValue> {
-    if (propertyName === "--sjs-general-backcolor-dim" || propertyName === "generalPrimaryColor")
-      return Object.keys(PredefinedColors[this.colorPalette]).map(colorName =>
-        new ItemValue(PredefinedColors[this.colorPalette][colorName], getLocString("theme.colors." + colorName))
-      );
-  }
-
   onSerializeElementSettingsValue(propertyName: string) {
     const result = { ...this[propertyName] };
     if (result.cornerRadius != this.getPropertyByName(propertyName).defaultValue?.cornerRadius) {
@@ -806,7 +793,6 @@ Serializer.addProperties("theme",
       if (!!editor) {
         editor.storeDataAsText = false;
         editor.acceptedTypes = "image/*";
-        editor.placeholder = "Browse...";
       }
     }
   }, {
