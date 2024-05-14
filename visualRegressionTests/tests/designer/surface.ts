@@ -2030,3 +2030,36 @@ test("Check adorner actions responsivity after convert", async (t) => {
     await takeElementScreenshot("actions-on-converted-question.png", root.nth(0), t, comparer);
   });
 });
+test("Progress button", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 1080);
+
+    const surveyJSON = {
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "name": "q1",
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "name": "page2",
+          "elements": [
+            {
+              "name": "q2",
+              "type": "text"
+            }
+          ]
+        },
+      ],
+      "progressBarType": "buttons",
+      "showProgressBar": "top"
+    };
+
+    await setJSON(surveyJSON);
+    await takeElementScreenshot("designer-progress-buttons.png", Selector(".sd-progress-buttons"), t, comparer);
+  });
+});
