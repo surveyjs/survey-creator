@@ -76,7 +76,7 @@ test("Rating adorners", async (t) => {
 
 test("Rating adorners - disabled buttons", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1920, 1080);
+    await t.resizeWindow(1916, 1080);
     await setJSON({
       elements: [
         {
@@ -225,7 +225,7 @@ test("Rating min/max editing", async (t) => {
       ]
     }
     );
-    await t.resizeWindow(1900, 1000);
+    await t.resizeWindow(1896, 1000);
     const question = Selector("div[data-name=question1]");
     await t.click(question.find("span").withText("min"));
     await takeElementScreenshot("rating-editing-min.png", question, t, comparer);

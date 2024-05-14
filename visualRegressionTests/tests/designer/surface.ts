@@ -310,7 +310,7 @@ test("Matrix column vertical", async (t) => {
 
 test("Matrix column editor boolean", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1920, 900);
+    await t.resizeWindow(1916, 900);
     const surveyJSON = {
       "pages": [
         {
@@ -674,7 +674,7 @@ test("Panel gap between items", async (t) => {
 
 test("Panel multi-question row", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1920, 900);
+    await t.resizeWindow(1916, 900);
     const json = {
       "logoPosition": "right",
       "pages": [
@@ -1085,7 +1085,7 @@ test("Check question adorner width", async (t) => {
       "widthMode": "static",
       "width": "1400"
     });
-    await t.resizeWindow(1920, 1080);
+    await t.resizeWindow(1916, 1080);
     const root = Selector(".sd-page");
     await takeElementScreenshot("question-adorner-width.png", root, t, comparer);
   });
