@@ -2052,7 +2052,8 @@ test("Store locales order", () => {
   expect(visChoices2[2]).toEqual("es");
   expect(visChoices2[3]).toEqual("de");
 });
-test("Change test themes list actions titles on changing locale", (): any => {
+test("Change translation list actions titles on changing locale", (): any => {
+  editorLocalization.currentLocale = "";
   const deutschStrings: any = {
     ed: {
       translationShowAllStrings: "Show All de",
@@ -2075,4 +2076,5 @@ test("Change test themes list actions titles on changing locale", (): any => {
   expect(actions).toHaveLength(2);
   expect(actions[0].title).toBe("Show All de");
   expect(actions[1].title).toBe("Used Strings Only de");
+  creator.locale = "";
 });
