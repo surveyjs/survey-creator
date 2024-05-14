@@ -308,19 +308,12 @@ export var propertyGridCss = {
     content: "spg-question__content spg-question__nopadding"
   },
   colorsettings: {
-    mainRoot: "spg-question--composite spg-colorsettings",
     content: "spg-question__content spg-question__nopadding spg-question__content-colorsettings"
   },
   fontsettings: {
-    mainRoot: "spg-question--composite spg-fontsettings",
-    content: "spg-question__content spg-question__nopadding spg-question-composite__content spg-question__content-fontsettings"
-  },
-  elementsettings: {
-    mainRoot: "spg-question--composite spg-elementsettings",
     content: "spg-question__content spg-question__nopadding spg-question-composite__content"
   },
-  boxshadowsettings: {
-    root: "spg-paneldynamic spg-question--composite spg-boxshadowsettings",
+  elementsettings: {
     content: "spg-question__content spg-question__nopadding spg-question-composite__content"
   },
   saveData: {

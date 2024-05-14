@@ -273,21 +273,12 @@ export class ThemeTabPlugin implements ICreatorPlugin {
         if (!parent || parent.hasParent && !(parent.name === "settings" || parent.parentQuestion?.name === "settings")) {
           options.cssClasses.panel.container = "spg-panel-group";
           options.cssClasses.panel.content = "spg-panel-group__content";
-          options.cssClasses.panel.title = "spg-panel-group__title";
-        }
-        else {
+        } else {
           options.cssClasses.panel.container = "spg-nested-panel";
           options.cssClasses.panel.content = "spg-nested-panel__content";
-          options.cssClasses.panel.title = "spg-nested-panel__title";
         }
       }
     });
-    // this.propertyGrid.survey.onUpdateQuestionCssClasses.add((sender, options) => {
-    //   const q = options.question;
-    //   if (!q.parentQuestion && !!q.page && (q.titleLocation === "hidden" || q.titleLocation === "left") && q.name !== "header") {
-    //     options.cssClasses.mainRoot += " spg-row-narrow__question";
-    //   }
-    // });
 
     // if (!!this.model.themeEditorSurvey) {
     //   const options = <IPropertyGridSurveyCreatedEvent>{

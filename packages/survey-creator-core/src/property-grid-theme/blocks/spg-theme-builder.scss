@@ -85,35 +85,8 @@
     }
   }
 
-  .spg-nested-panel__content {
-    // padding: 0;
-    // box-shadow: none;
-
-    & > .spg-row {
-      // margin-top: calcSize(2);
-      -margin-top: calcSize(1);
-
-      &:first-of-type {
-        margin-top: 0;
-      }
-    }
-  }
-
-  .spg-panel-group__content {
-    // padding-bottom: 0;
-
-    // &::after {
-    //   content: none;
-    // }
-
-    .spg-row:first-of-type {
-      -margin-top: 0;
-    }
-  }
-
-  .spg-panel-group__title,
-  .spg-nested-panel__title {
-    @include question_tile;
+  .spg-nested-panel__content > .spg-row:first-of-type {
+    margin-top: 0;
   }
 
   .spg-paneldynamic__panel-wrapper > .spg-nested-panel,
@@ -124,34 +97,6 @@
       content: none;
     }
   }
-
-  // .spg-paneldynamic__panel-wrapper .spg-row.spg-row--multiple {
-  //   margin-top: calcSize(2);
-  // }
-
-  .sd-question--title-top .spg-paneldynamic {
-    margin-top: calcSize(-1);
-  }
-
-  .spg-row.spg-row--multiple .spg-row {
-    -margin-top: 0;
-  }
-
-  .spg-row--multiple .spg-question.spg-row__question:not(.sd-question--title-top):not(.spg-question--boolean) {
-    -margin-top: 0;
-  }
-
-  // .spg-question--composite {
-  //   .spg-panel-group {
-  //     .spg-row {
-  //       margin-top: calcSize(1);
-
-  //       &:first-of-type {
-  //         margin-top: 0;
-  //       }
-  //     }
-  //   }
-  // }
 
   .spg-theme-group-caption {
     @include defaultBold;
@@ -175,31 +120,18 @@
   .spg-headersettings {
     margin-top: calcSize(-2);
   }
-
-  // .spg-row-narrow__question {
-  //   margin-top: calcSize(-1);
-  // }
-
-  .spg-question.spg-row__question:not(.sd-question--title-top) {
-    -margin-top: calcSize(-1);
+  .sd-question--title-top .spg-paneldynamic {
+    margin-top: calcSize(-1);
   }
-  .spg-theme-builder-root .spg-question.spg-row__question.sd-question--title-top {
-    -margin-top: 0;
-  }
-
   .spg-question.spg-row__question:not(.sd-question--title-top):not(.spg-question--boolean) {
     margin-top: calcSize(-1);
   }
   .spg-row--multiple .spg-question.spg-row__question:not(.sd-question--title-top) {
     margin-top: 0;
   }
-  .spg-question--composite .spg-panel-group__content > .spg-row:not(.spg-row--multiple) {
-    -margin-top: calcSize(1);
-  }
-  .spg-colorsettings .spg-question__content-colorsettings {
+  .spg-question__content-colorsettings {
     margin-top: calcSize(-1);
   }
-  .spg-question__content-fontsettings .spg-row:first-of-type,
   .spg-question-composite__content .spg-row:first-of-type {
     margin-top: calcSize(1);
   }
