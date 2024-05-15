@@ -247,7 +247,7 @@ export class ItemValueWrapperViewModel extends Base {
     if(!Helpers.isNumber(val)) return false;
     const min = this.question.choicesMin;
     const max = this.question.choicesMax;
-    if(!Helpers.isNumber(min) || !Helpers.isNumber(max)) return false;
+    if(!Helpers.isNumber(min) || !Helpers.isNumber(max) || min === max && min === 0) return false;
     return val >= min && val <= max;
   }
 }
