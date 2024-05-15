@@ -313,6 +313,7 @@ test(`rating add item from property grid`, async (t) => {
     .eql("new item")
     .wait(200)
     .click(`.svd_question`)
+    .wait(200)
     .click(`[data-title='Rate Values']`)
     .expect(Selector(`input[aria-label~=Text]`).exists)
     .ok()
