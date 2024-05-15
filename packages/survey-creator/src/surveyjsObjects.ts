@@ -270,12 +270,20 @@ export function createAfterRenderHandler(
       }
     });
     domElement.onclick = function (e) {
-      if (!e["markEvent"]) {
+      if (!e["markEvent"] && (!survey || !survey.selectedOnClick)) {
         e["markEvent"] = true;
         if (surveyElement.parent) {
           surveyElement.selectedOnClick = true;
+          if (!!survey) {
+            survey.selectedOnClick = true;
+          }
           getSurvey(surveyElement)["selectedElement"] = surveyElement;
           surveyElement.selectedOnClick = false;
+          setTimeout(() => {
+            if (!!survey) {
+              survey.selectedOnClick = undefined;
+            }
+          }, 150);
         }
       }
     };
@@ -346,7 +354,7 @@ export function createAfterRenderPageHandler(
       page.renderedElement = domElement;
       domElement.classList.add("svd_page");
       domElement.onclick = function (e) {
-        if (!e["markEvent"]) {
+        if (!e["markEvent"] && (!survey || !survey.selectedOnClick)) {
           e["markEvent"] = true;
           getSurvey(page)["selectedElement"] = page;
         }
@@ -572,7 +580,7 @@ questionPrototype["onSelectedElementChanged"] = function () {
 Survey.QuestionSelectBaseImplementor.prototype["onCreated"] = function () {
   var q: any = this.question;
   var updateTriggerFunction = function () {
-    if(!!q && !!q.survey && !q.survey.isDesignMode) return;
+    if (!!q && !!q.survey && !q.survey.isDesignMode) return;
     setTimeout(() => q["koElementType"].notifySubscribers(), 0);
   };
   [
