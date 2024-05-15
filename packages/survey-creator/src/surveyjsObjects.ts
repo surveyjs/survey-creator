@@ -270,24 +270,18 @@ export function createAfterRenderHandler(
       }
     });
     domElement.onclick = function (e) {
-      if (!e["markEvent"] && (!survey || !survey.selectedOnClick)) {
+      if (!e["markEvent"]) {
         e["markEvent"] = true;
         if (surveyElement.parent) {
           surveyElement.selectedOnClick = true;
-          if (!!survey) {
-            survey.selectedOnClick = true;
-          }
           getSurvey(surveyElement)["selectedElement"] = surveyElement;
           surveyElement.selectedOnClick = false;
-          setTimeout(() => {
-            if (!!survey) {
-              survey.selectedOnClick = undefined;
-            }
-          }, 150);
         }
       }
     };
-    domElement.onpointerdown = domElement.onclick;
+    if (Survey.IsTouch) {
+      domElement.onpointerdown = domElement.onclick;
+    }
     if (!isPanel) {
       var childs = domElement.childNodes;
       for (var i = 0; i < childs.length; i++) {
@@ -354,7 +348,7 @@ export function createAfterRenderPageHandler(
       page.renderedElement = domElement;
       domElement.classList.add("svd_page");
       domElement.onclick = function (e) {
-        if (!e["markEvent"] && (!survey || !survey.selectedOnClick)) {
+        if (!e["markEvent"]) {
           e["markEvent"] = true;
           getSurvey(page)["selectedElement"] = page;
         }
