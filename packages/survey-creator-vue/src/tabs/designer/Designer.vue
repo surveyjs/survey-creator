@@ -53,12 +53,13 @@
           >
             <survey-header :survey="model.creator.survey"></survey-header>
           </div>
+          <!--
           <component
             v-if="survey.isShowProgressBarOnTop"
             :is="model.creator.survey.getProgressTypeComponent()"
             :survey="model.creator.survey"
           ></component>
-
+          -->
           <template v-if="model.creator.pageEditMode !== 'bypage'">
             <div
               v-for="page in pages"
@@ -90,11 +91,13 @@
               :creator="model.creator"
             ></svc-page>
           </div>
+          <!--
           <component
             v-if="survey.isShowProgressBarOnBottom"
             :is="model.creator.survey.getProgressTypeComponent()"
             :survey="model.creator.survey"
           ></component>
+          -->
         </div>
         <div
           v-if="model.creator.showPageNavigator"
