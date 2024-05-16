@@ -37,6 +37,8 @@ export class ToolboxToolViewModel extends Base {
     }
   }
   public onPointerDown(pointerDownEvent) {
+    pointerDownEvent.stopPropagation();
+
     if (!this.allowAdd) return;
     if (this.item.id.indexOf("dotsItem-id") === 0) return true; //toolbox responsive popup
     this.dragOrClickHelper.onPointerDown(pointerDownEvent);
