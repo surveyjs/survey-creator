@@ -21,17 +21,18 @@
 </template>
 <script lang="ts" setup>
 import { ToolboxToolViewModel, type SurveyCreatorModel } from "survey-creator-core";
-import type { Action } from "survey-core";
+import type { Action, ActionContainer } from "survey-core";
 import { useCreatorModel } from "@/creator-model";
 import { computed } from "vue";
 import { useBase } from "survey-vue3-ui";
 const props = defineProps<{
   creator: SurveyCreatorModel;
   item: Action;
+  parentModel: ActionContainer;
   isCompact: boolean;
 }>();
 const model = useCreatorModel(
-  () => new ToolboxToolViewModel(props.item as any, props.creator),
+  () => new ToolboxToolViewModel(props.item as any, props.creator, props.parentModel),
   [() => props.creator, () => props.item],
   (model) => {
     model.dispose();

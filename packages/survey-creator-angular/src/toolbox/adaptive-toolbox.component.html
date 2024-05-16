@@ -6,7 +6,7 @@
       </ng-container>
       <ng-container *ngIf="model.isCompact || model.categories.length == 1 || !model.showCategoryTitles">
         <div class="svc-toolbox__category">
-          <svc-toolbox-tool *ngFor="let item of model.renderedActions" [creator]="creator" [item]="item" [isCompact]="model.isCompact"></svc-toolbox-tool>
+          <svc-toolbox-tool *ngFor="let item of model.renderedActions" [creator]="creator" [item]="item" [parentModel]="model" [isCompact]="model.isCompact"></svc-toolbox-tool>
         </div>
       </ng-container>
     </div>

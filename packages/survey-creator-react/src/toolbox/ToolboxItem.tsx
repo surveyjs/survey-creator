@@ -7,6 +7,7 @@ import React, { CSSProperties } from "react";
 import { ToolboxToolViewModel } from "survey-creator-core";
 import {
   Action,
+  ActionContainer,
   Base,
   SurveyModel
 } from "survey-core";
@@ -20,6 +21,7 @@ import { CreatorModelElement } from "../ModelElement";
 export interface ISurveyCreatorToolboxItemProps {
   item: IQuestionToolboxItem;
   creator: SurveyCreatorModel;
+  parentModel: ActionContainer;
   isCompact: boolean;
 }
 
@@ -33,7 +35,7 @@ export class SurveyCreatorToolboxTool extends CreatorModelElement<
     super(props);
   }
   protected createModel(props: any): void {
-    this.model = new ToolboxToolViewModel(props.item, props.creator);
+    this.model = new ToolboxToolViewModel(props.item, props.creator, props.parentModel);
   }
   protected getUpdatedModelProps(): string[] {
     return ["creator", "item"];
@@ -60,6 +62,7 @@ export class SurveyCreatorToolboxTool extends CreatorModelElement<
       {
         item: this.item,
         creator: this.creator,
+        parentModel: this.creator.toolbox,
         isCompact: this.isCompact
       }
     );
@@ -91,7 +94,7 @@ export class SurveyCreatorToolboxItem extends CreatorModelElement<
   }
   protected createModel(props: any): void {
     const toolboxItem: IQuestionToolboxItem = props.item;
-    this.model = new ToolboxToolViewModel(toolboxItem, props.creator);
+    this.model = new ToolboxToolViewModel(toolboxItem, props.creator, props.parentModel);
   }
   protected getUpdatedModelProps(): string[] {
     return ["creator", "item"];

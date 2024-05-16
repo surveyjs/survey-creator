@@ -1,7 +1,7 @@
 import { Component, Input } from "@angular/core";
 import { CreatorModelComponent } from "../creator-model.component";
 import { SurveyCreatorModel, IQuestionToolboxItem, ToolboxToolViewModel } from "survey-creator-core";
-import { Action } from "survey-core";
+import { Action, ActionContainer } from "survey-core";
 
 @Component({
   selector: "svc-toolbox-tool",
@@ -11,10 +11,11 @@ import { Action } from "survey-core";
 export class ToolboxToolComponent extends CreatorModelComponent<Action> {
   @Input() creator!: SurveyCreatorModel;
   @Input() item!: Action;
+  @Input() parentModel!: ActionContainer;
   @Input() isCompact: boolean = false;
   public model!: ToolboxToolViewModel;
   createModel() {
-    this.model = new ToolboxToolViewModel(<any>this.item, this.creator);
+    this.model = new ToolboxToolViewModel(<any>this.item, this.creator, this.parentModel);
   }
   protected getPropertiesToTrack(): string[] {
     return ["creator", "item"];

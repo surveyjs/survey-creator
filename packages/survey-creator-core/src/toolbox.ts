@@ -405,9 +405,7 @@ export class QuestionToolbox
             component: "svc-toolbox-item"
           });
           return newItem;
-        }), (o, e) => {
-          newItem.action(o, e);
-        });
+        }), (o, e) => { popup.hide(); });
         newItem.component = "svc-toolbox-item-group";
         newItem.popupModel.cssClass += " toolbox-subtypes";
         const popup = newItem.popupModel as PopupModel;
@@ -930,9 +928,7 @@ export class QuestionToolbox
 
   public hideAllInnerPopups() {
     this.actions.forEach(action => {
-      if (!!action.popupModel && action.popupModel.isVisible) {
-        action.popupModel.isVisible = false;
-      }
+      action.hidePopup();
     });
   }
   public onScroll(model, event) {

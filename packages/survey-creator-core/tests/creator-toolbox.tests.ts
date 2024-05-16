@@ -30,7 +30,7 @@ test("Reason of question Added from toolbox, onclicking add question button, on 
   expect(reason[4]).toEqual("ELEMENT_COPIED");
   expect(reason[5]).toEqual("ELEMENT_COPIED");
 
-  const toolboxViwer = new ToolboxToolViewModel(creator.toolbox.items[0], creator);
+  const toolboxViwer = new ToolboxToolViewModel(creator.toolbox.items[0], creator, creator.toolbox);
   toolboxViwer.click({});
   expect(reason).toHaveLength(7);
   expect(reason[6]).toEqual("ADDED_FROM_TOOLBOX");

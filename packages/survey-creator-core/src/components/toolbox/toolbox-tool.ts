@@ -1,4 +1,4 @@
-import { Base, SurveyModel, DragOrClickHelper, ActionContainer } from "survey-core";
+import { Base, SurveyModel, DragOrClickHelper, ActionContainer, ListModel, BaseAction } from "survey-core";
 import { IQuestionToolboxItem } from "../../toolbox";
 import { SurveyCreatorModel } from "../../creator-base";
 import { DragDropSurveyElements } from "../../survey-elements";
@@ -16,6 +16,7 @@ export class ToolboxToolViewModel extends Base {
   public click = (event) => {
     if (!this.allowAdd) return;
     this.creator.clickToolboxItem(this.item.json);
+    this.hidePopup();
   };
 
   public get allowAdd() {
@@ -23,22 +24,19 @@ export class ToolboxToolViewModel extends Base {
   }
 
   public onMouseOver(itemValue, mouseoverEvent) {
-    if (mouseoverEvent.type === "mouseover") {
-      this.model.actions.forEach(action => {
-        if (action === itemValue && !!itemValue.popupModel) {
-          itemValue.popupModel.isVisible = true;
-        } else if (!!action.popupModel && action.popupModel.isVisible) {
-          action.popupModel.isVisible = false;
-        }
-      });
-      mouseoverEvent.stopPropagation();
-    } else {
-      // debugger;
-    }
+    this.model.actions.forEach(action => {
+      if (action === itemValue) {
+        itemValue.showPopup();
+      } else {
+        action.hidePopup();
+      }
+    });
+    mouseoverEvent.stopPropagation();
   }
   public onPointerDown(pointerDownEvent) {
     pointerDownEvent.stopPropagation();
 
+    this.hidePopup();
     if (!this.allowAdd) return;
     if (this.item.id.indexOf("dotsItem-id") === 0) return true; //toolbox responsive popup
     this.dragOrClickHelper.onPointerDown(pointerDownEvent);
@@ -61,6 +59,13 @@ export class ToolboxToolViewModel extends Base {
     this.dragDropHelper.startDragToolboxItem(pointerDownEvent, json, this.item);
     return true;
   };
+
+  private hidePopup() {
+    this.item.hidePopup();
+    if (this.model instanceof ListModel) {
+      this.model.onItemClick(this.item);
+    }
+  }
 
   private get dragDropHelper(): DragDropSurveyElements {
     return this.creator.dragDropSurveyElements;
