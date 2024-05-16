@@ -3,6 +3,7 @@ export { QuestionSpinEditorModel } from "../../src/custom-questions/question-spi
 export { QuestionColorModel } from "../../src/custom-questions/question-color";
 export { createColor } from "../../src/components/tabs/theme-custom-questions/color-settings";
 export { createBoxShadow, parseBoxShadow } from "../../src/components/tabs/theme-custom-questions/boxshadow-settings";
+export * from "../../src/property-grid/theme-settings";
 export * from "../../src/property-grid/header-settings";
 
 import { ITheme, QuestionButtonGroupModel, QuestionCompositeModel, QuestionDropdownModel, QuestionFileModel, Serializer, SurveyElement, settings as surveySettings } from "survey-core";
@@ -13,6 +14,7 @@ import { ThemeEditorModel } from "../../src/components/tabs/theme-builder";
 import { settings } from "../../src/creator-settings";
 import { assign, parseColor } from "../../src/utils/utils";
 import { PredefinedThemes, Themes } from "../../src/components/tabs/themes";
+import { onSerializeFontSettingsValue } from "../../src/components/tabs/theme-custom-questions/font-settings";
 
 test("Creator top action bar: only theme tab", (): any => {
   const themeBuilderButtonOrder = ["action-undo-theme", "action-redo-theme", "svc-reset-theme", "svc-theme-settings", "svc-theme-import", "svc-theme-export"].join("|");
@@ -1044,5 +1046,109 @@ test("Check onOpenFileChooser is called and context is passed", (): any => {
     expect(lastUploadOptions.propertyName).toBe("backgroundImage");
   } finally {
     document.getElementById = origGetElementById;
+  }
+});
+
+test("Modify property grid: add/hide properties", (): any => {
+  Serializer.addProperty("theme", {
+    name: "custom-question-title",
+    type: "fontsettings",
+    displayName: "Question title font",
+    default: {
+      family: "Open Sans",
+      weight: "600",
+      size: 16,
+    },
+    onPropertyEditorUpdate: function (obj: any, editor: any) {
+      if (!!editor) {
+        editor.visibleIf = "{advancedmode} = true";
+        editor.descriptionLocation = "hidden";
+      }
+    },
+    onSerializeValue: (obj: ThemeModel) => {
+      return onSerializeFontSettingsValue(obj, "custom-question-title");
+    }
+  });
+
+  Serializer.addProperty("theme", {
+    name: "matrix-title",
+    type: "fontsettings",
+    displayName: "Matrix title font",
+    default: {
+      family: "Open Sans",
+      weight: "600",
+      size: 16,
+    },
+    onPropertyEditorUpdate: function (obj: any, editor: any) {
+      if (!!editor) {
+        editor.visibleIf = "{advancedmode} = true";
+        editor.descriptionLocation = "hidden";
+      }
+    },
+    onSerializeValue: (obj: ThemeModel) => {
+      return onSerializeFontSettingsValue(obj, "matrix-title");
+    }
+  });
+
+  Serializer.getProperty("theme", "questionTitle").visible = false;
+
+  try {
+    const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+    creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+
+    creator.themeEditor.activate();
+    const themeModel = creator.themeEditor.themeModel as ThemeModel;
+    const propertyGridSurvey = creator.themeEditor.propertyGrid.survey;
+
+    expect(propertyGridSurvey.getQuestionByName("questionTitle") === null).toBeTruthy();
+    expect(propertyGridSurvey.getQuestionByName("custom-question-title") !== null).toBeTruthy();
+    expect(propertyGridSurvey.getQuestionByName("matrix-title") !== null).toBeTruthy();
+
+    themeModel["custom-question-title"] = { family: "Courier New", weight: "400", size: 41, color: "#787878" };
+    themeModel["matrix-title"] = { family: "Trebuchet MS", weight: "800", size: 21, color: "#232323" };
+
+    expect(themeModel.cssVariables["--sjs-font-questiontitle-family"]).toBeUndefined();
+    expect(themeModel.cssVariables["--sjs-font-questiontitle-weight"]).toBeUndefined();
+    expect(themeModel.cssVariables["--sjs-font-questiontitle-color"]).toBeUndefined();
+    expect(themeModel.cssVariables["--sjs-font-questiontitle-size"]).toBeUndefined();
+
+    expect(themeModel.cssVariables["--sjs-font-custom-question-title-family"]).toBe("Courier New");
+    expect(themeModel.cssVariables["--sjs-font-custom-question-title-weight"]).toBe("400");
+    expect(themeModel.cssVariables["--sjs-font-custom-question-title-color"]).toBe("#787878");
+    expect(themeModel.cssVariables["--sjs-font-custom-question-title-size"]).toBe("41px");
+
+    expect(themeModel.cssVariables["--sjs-font-matrix-title-family"]).toBe("Trebuchet MS");
+    expect(themeModel.cssVariables["--sjs-font-matrix-title-weight"]).toBe("800");
+    expect(themeModel.cssVariables["--sjs-font-matrix-title-color"]).toBe("#232323");
+    expect(themeModel.cssVariables["--sjs-font-matrix-title-size"]).toBe("21px");
+  } finally {
+    Serializer.getProperty("theme", "questionTitle").visible = true;
+    Serializer.removeProperty("theme", "custom-question-title");
+    Serializer.removeProperty("theme", "matrix-title");
+  }
+});
+
+test("Modify property grid & switch themeName", (): any => {
+  try {
+    Serializer.addProperty("theme", { name: "matrix-title", type: "fontsettings" });
+
+    const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+    creator.onShowingProperty.add(function (sender, options) {
+      if (options.obj.getType() == "theme") {
+        options.canShow = options.property.name == "themeName" || options.property.name == "matrix-title";
+      }
+    });
+
+    creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+    creator.themeEditor.activate();
+    const propertyGridSurvey = creator.themeEditor.propertyGrid.survey;
+
+    expect(propertyGridSurvey.getAllQuestions().filter(q => q.isVisible).length).toBe(9); //should be 2
+    const themeChooser = propertyGridSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
+
+    themeChooser.value = "flat";
+    expect(propertyGridSurvey.getAllQuestions().filter(q => q.isVisible).length).toBe(9); //should be 2
+  } finally {
+    Serializer.removeProperty("theme", "matrix-title");
   }
 });
