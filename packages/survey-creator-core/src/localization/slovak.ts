@@ -170,6 +170,10 @@ export var skStrings = {
     surveyPlaceHolder: "Prieskum je prázdny. Potiahnite prvok z panela s nástrojmi alebo kliknite na tlačidlo nižšie.",
     pagePlaceHolder: "Stránka je prázdna. Potiahnite prvok z panela s nástrojmi alebo kliknite na tlačidlo nižšie.",
     imagePlaceHolder: "Presuňte obrázok sem alebo kliknite na tlačidlo nižšie a vyberte obrázok, ktorý chcete nahrať",
+    surveyPlaceHolderMobile: "Kliknite na tlačidlo \"Pridať otázku\" nižšie a začnite vytvárať formulár.",
+    pagePlaceHolderMobile: "Kliknite na tlačidlo \"Pridať otázku\" nižšie a pridajte na stránku nový prvok.",
+    panelPlaceHolderMobile: "Kliknite na tlačidlo \"Pridať otázku\" nižšie a pridajte na panel nový prvok.",
+    imagePlaceHolderMobile: "Kliknite na tlačidlo nižšie a vyberte obrázok, ktorý chcete nahrať",
     imageChooseImage: "Vyberte obrázok",
     addNewTypeQuestion: "Pridať {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
@@ -2501,3 +2505,7 @@ editorLocalization.locales["sk"] = skStrings;
 // ed.selectFile: "Select a file" => "Vyberte súbor"
 // ed.removeFile: "Remove the file" => "Odstránenie súboru"
 // pe.searchMode: "Search Mode" => "Režim vyhľadávania"
+// ed.surveyPlaceHolderMobile: "Click the \"Add Question\" button below to start creating your form." => "Kliknite na tlačidlo \"Pridať otázku\" nižšie a začnite vytvárať formulár."
+// ed.pagePlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the page." => "Kliknite na tlačidlo \"Pridať otázku\" nižšie a pridajte na stránku nový prvok."
+// ed.panelPlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the panel." => "Kliknite na tlačidlo \"Pridať otázku\" nižšie a pridajte na panel nový prvok."
+// ed.imagePlaceHolderMobile: "Click the button below and choose an image to upload" => "Kliknite na tlačidlo nižšie a vyberte obrázok, ktorý chcete nahrať"

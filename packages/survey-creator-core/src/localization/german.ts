@@ -170,6 +170,10 @@ var germanTranslation = {
     surveyPlaceHolder: "Die Umfrage enthält keine Frage. Ziehen Sie ein Element aus der Toolbox hier her oder drücken Sie auf die Schaltfläche unten.",
     pagePlaceHolder: "Die Seite ist leer. Ziehen Sie ein Element aus der Toolbox oder klicken Sie auf die Schaltfläche unten.",
     imagePlaceHolder: "Ziehen Sie ein Bild per Drag & Drop hierher oder klicken Sie auf die Schaltfläche unten und wählen Sie ein Bild zum Hochladen aus",
+    surveyPlaceHolderMobile: "Klicken Sie unten auf die Schaltfläche \"Frage hinzufügen\", um mit der Erstellung Ihres Formulars zu beginnen.",
+    pagePlaceHolderMobile: "Klicken Sie unten auf die Schaltfläche \"Frage hinzufügen\", um der Seite ein neues Element hinzuzufügen.",
+    panelPlaceHolderMobile: "Klicken Sie unten auf die Schaltfläche \"Frage hinzufügen\", um dem Bedienfeld ein neues Element hinzuzufügen.",
+    imagePlaceHolderMobile: "Klicken Sie auf die Schaltfläche unten und wählen Sie ein Bild zum Hochladen aus",
     imageChooseImage: "Bild auswählen",
     addNewTypeQuestion: "Add {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
@@ -2254,3 +2258,8 @@ editorLocalization.locales["de"] = germanTranslation;
 // ed.selectFile: "Select a file" => "Wählen Sie eine Datei aus"
 // ed.removeFile: "Remove the file" => "Entfernen Sie die Datei"
 // pe.searchMode: "Search Mode" => "Suchmodus"
+
+// ed.surveyPlaceHolderMobile: "Click the \"Add Question\" button below to start creating your form." => "Klicken Sie unten auf die Schaltfläche \"Frage hinzufügen\", um mit der Erstellung Ihres Formulars zu beginnen."
+// ed.pagePlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the page." => "Klicken Sie unten auf die Schaltfläche \"Frage hinzufügen\", um der Seite ein neues Element hinzuzufügen."
+// ed.panelPlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the panel." => "Klicken Sie unten auf die Schaltfläche \"Frage hinzufügen\", um dem Bedienfeld ein neues Element hinzuzufügen."
+// ed.imagePlaceHolderMobile: "Click the button below and choose an image to upload" => "Klicken Sie auf die Schaltfläche unten und wählen Sie ein Bild zum Hochladen aus"

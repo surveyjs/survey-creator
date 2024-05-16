@@ -170,6 +170,10 @@ export var indonesianStrings = {
     surveyPlaceHolder: "Survei kosong. Seret elemen dari kotak alat atau klik tombol di bawah.",
     pagePlaceHolder: "Halaman kosong. Seret elemen dari kotak alat atau klik tombol di bawah.",
     imagePlaceHolder: "Seret dan lepas gambar di sini atau klik tombol di bawah ini dan pilih gambar untuk diunggah",
+    surveyPlaceHolderMobile: "Klik tombol \"Tambahkan Pertanyaan\" di bawah ini untuk mulai membuat formulir Anda.",
+    pagePlaceHolderMobile: "Klik tombol \"Tambahkan Pertanyaan\" di bawah ini untuk menambahkan elemen baru ke halaman.",
+    panelPlaceHolderMobile: "Klik tombol \"Tambahkan Pertanyaan\" di bawah ini untuk menambahkan elemen baru ke panel.",
+    imagePlaceHolderMobile: "Klik tombol di bawah ini dan pilih gambar untuk diunggah",
     imageChooseImage: "Pilih Gambar",
     addNewTypeQuestion: "Tambahkan {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
@@ -2702,3 +2706,7 @@ editorLocalization.locales["id"] = indonesianStrings;
 // ed.selectFile: "Select a file" => "Pilih file"
 // ed.removeFile: "Remove the file" => "Menghapus file"
 // pe.searchMode: "Search Mode" => "Mode Pencarian"
+// ed.surveyPlaceHolderMobile: "Click the \"Add Question\" button below to start creating your form." => "Klik tombol \"Tambahkan Pertanyaan\" di bawah ini untuk mulai membuat formulir Anda."
+// ed.pagePlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the page." => "Klik tombol \"Tambahkan Pertanyaan\" di bawah ini untuk menambahkan elemen baru ke halaman."
+// ed.panelPlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the panel." => "Klik tombol \"Tambahkan Pertanyaan\" di bawah ini untuk menambahkan elemen baru ke panel."
+// ed.imagePlaceHolderMobile: "Click the button below and choose an image to upload" => "Klik tombol di bawah ini dan pilih gambar untuk diunggah"

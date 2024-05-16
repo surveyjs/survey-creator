@@ -170,6 +170,10 @@ export var nbStrings = {
     surveyPlaceHolder: "Undersøkelsen er tom. Dra et element fra verktøykassen, eller klikk på knappen nedenfor.",
     pagePlaceHolder: "Siden er tom. Dra et element fra verktøykassen, eller klikk på knappen nedenfor.",
     imagePlaceHolder: "Dra og slipp et bilde her, eller klikk på knappen nedenfor og velg et bilde du vil laste opp",
+    surveyPlaceHolderMobile: "Klikk på \"Legg til spørsmål\" -knappen nedenfor for å begynne å lage skjemaet ditt.",
+    pagePlaceHolderMobile: "Klikk på \"Legg til spørsmål\" -knappen nedenfor for å legge til et nytt element på siden.",
+    panelPlaceHolderMobile: "Klikk på \"Legg til spørsmål\" -knappen nedenfor for å legge til et nytt element i panelet.",
+    imagePlaceHolderMobile: "Klikk på knappen nedenfor og velg et bilde du vil laste opp",
     imageChooseImage: "Velg bilde",
     addNewTypeQuestion: "Legg til {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
@@ -2551,3 +2555,7 @@ editorLocalization.locales["nb"] = nbStrings;
 // ed.selectFile: "Select a file" => "Velg en fil"
 // ed.removeFile: "Remove the file" => "Fjern filen"
 // pe.searchMode: "Search Mode" => "Søkemodus"
+// ed.surveyPlaceHolderMobile: "Click the \"Add Question\" button below to start creating your form." => "Klikk på \"Legg til spørsmål\" -knappen nedenfor for å begynne å lage skjemaet ditt."
+// ed.pagePlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the page." => "Klikk på \"Legg til spørsmål\" -knappen nedenfor for å legge til et nytt element på siden."
+// ed.panelPlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the panel." => "Klikk på \"Legg til spørsmål\" -knappen nedenfor for å legge til et nytt element i panelet."
+// ed.imagePlaceHolderMobile: "Click the button below and choose an image to upload" => "Klikk på knappen nedenfor og velg et bilde du vil laste opp"

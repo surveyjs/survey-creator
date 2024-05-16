@@ -447,7 +447,7 @@ export class SurveyCreatorModel extends Base
    * [View Demo](https://surveyjs.io/survey-creator/examples/hide-category-from-property-grid/ (linkStyle))
    */
   public onShowingProperty: EventBase<SurveyCreatorModel, PropertyAddingEvent> = this.addCreatorEvent<SurveyCreatorModel, PropertyAddingEvent>();
-  public onCanShowProperty: EventBase<SurveyCreatorModel, PropertyAddingEvent> = this.onShowingProperty;
+  public onCanShowProperty: EventBase<SurveyCreatorModel, any> = this.onShowingProperty;
   /**
    * This event is obsolete. Use the [`onSurveyInstanceCreated`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onSurveyInstanceCreated) event instead.
    * @deprecated
@@ -2560,7 +2560,7 @@ export class SurveyCreatorModel extends Base
   }
   /**
    * Collapses a specified category in Property Grid.
-   * @param name A [category name](https://surveyjs.io/survey-creator/documentation/property-grid-customization#category).
+   * @param name A [category name](https://surveyjs.io/form-library/documentation/customize-question-types/add-custom-properties-to-a-form#category).
    * @see expandPropertyGridCategory
    */
   public collapsePropertyGridCategory(name: string) {
@@ -2570,7 +2570,7 @@ export class SurveyCreatorModel extends Base
   }
   /**
    * Expands a specified category in Property Grid.
-   * @param name A [category name](https://surveyjs.io/survey-creator/documentation/property-grid-customization#category).
+   * @param name A [category name](https://surveyjs.io/form-library/documentation/customize-question-types/add-custom-properties-to-a-form#category).
    * @see collapsePropertyGridCategory
    */
   public expandPropertyGridCategory(name: string) {

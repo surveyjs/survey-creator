@@ -2052,3 +2052,29 @@ test("Store locales order", () => {
   expect(visChoices2[2]).toEqual("es");
   expect(visChoices2[3]).toEqual("de");
 });
+test("Change translation list actions titles on changing locale", (): any => {
+  editorLocalization.currentLocale = "";
+  const deutschStrings: any = {
+    ed: {
+      translationShowAllStrings: "Show All de",
+      translationShowUsedStringsOnly: "Used Strings Only de"
+    }
+  };
+  editorLocalization.locales["de"] = deutschStrings;
+  const creator = new CreatorTester({ showTranslationTab: true });
+  const dropdownAction = creator.getActionBarItem("svc-translation-show-all-strings");
+  expect(dropdownAction).toBeTruthy();
+  expect(dropdownAction.visible).toBeFalsy();
+  const listModel = <ListModel>dropdownAction.popupModel.contentComponentData.model;
+  const actions = listModel.actions;
+  expect(actions).toHaveLength(2);
+  expect(actions[0].title).toBe("All Strings");
+  expect(actions[1].title).toBe("Used Strings Only");
+  creator.locale = "de";
+  creator.activeTab = "translation";
+  expect(dropdownAction.visible).toBeTruthy();
+  expect(actions).toHaveLength(2);
+  expect(actions[0].title).toBe("Show All de");
+  expect(actions[1].title).toBe("Used Strings Only de");
+  creator.locale = "";
+});

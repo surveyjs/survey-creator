@@ -170,6 +170,10 @@ export var bgStrings = {
     surveyPlaceHolder: "Анкетата е празна. Плъзни елемент от кутията с инструменти или щракни върху бутона по-долу.",
     pagePlaceHolder: "Страницата е празна. Плъзнете елемент от кутията с инструменти или щракнете върху бутона по-долу.",
     imagePlaceHolder: "Плъзни и пусни изображение тук или щракни върху бутона по-долу и избери изображение за качване.",
+    surveyPlaceHolderMobile: "Кликнете върху бутона \"Добавяне на въпрос\" по-долу, за да започнете да създавате своя формуляр.",
+    pagePlaceHolderMobile: "Кликнете върху бутона \"Добавяне на въпрос\" по-долу, за да добавите нов елемент към страницата.",
+    panelPlaceHolderMobile: "Кликнете върху бутона \"Добавяне на въпрос\" по-долу, за да добавите нов елемент към панела.",
+    imagePlaceHolderMobile: "Кликнете върху бутона по-долу и изберете изображение за качване",
     imageChooseImage: "Избери изображение.",
     addNewTypeQuestion: "Добави {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
@@ -2109,3 +2113,7 @@ editorLocalization.locales["bg"] = bgStrings;
 // ed.selectFile: "Select a file" => "Изберете файл"
 // ed.removeFile: "Remove the file" => "Премахване на файла"
 // pe.searchMode: "Search Mode" => "Режим на търсене"
+// ed.surveyPlaceHolderMobile: "Click the \"Add Question\" button below to start creating your form." => "Кликнете върху бутона \"Добавяне на въпрос\" по-долу, за да започнете да създавате своя формуляр."
+// ed.pagePlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the page." => "Кликнете върху бутона \"Добавяне на въпрос\" по-долу, за да добавите нов елемент към страницата."
+// ed.panelPlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the panel." => "Кликнете върху бутона \"Добавяне на въпрос\" по-долу, за да добавите нов елемент към панела."
+// ed.imagePlaceHolderMobile: "Click the button below and choose an image to upload" => "Кликнете върху бутона по-долу и изберете изображение за качване"

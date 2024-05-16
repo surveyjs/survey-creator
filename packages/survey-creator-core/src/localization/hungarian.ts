@@ -170,6 +170,10 @@ export var huStrings = {
     surveyPlaceHolder: "A felmérés üres. Húzzon egy elemet az eszköztárról, vagy kattintson az alábbi gombra.",
     pagePlaceHolder: "Az oldal üres. Húzzon egy elemet az eszköztárról, vagy kattintson az alábbi gombra.",
     imagePlaceHolder: "Húzzon ide egy képet, vagy kattintson az alábbi gombra, és válassza ki a feltölteni kívánt képet",
+    surveyPlaceHolderMobile: "Kattintson az alábbi \"Kérdés hozzáadása\" gombra az űrlap létrehozásának megkezdéséhez.",
+    pagePlaceHolderMobile: "Kattintson az alábbi \"Kérdés hozzáadása\" gombra, hogy új elemet adjon az oldalhoz.",
+    panelPlaceHolderMobile: "Kattintson az alábbi \"Kérdés hozzáadása\" gombra, hogy új elemet adjon a panelhez.",
+    imagePlaceHolderMobile: "Kattintson az alábbi gombra, és válassza ki a feltölteni kívánt képet",
     imageChooseImage: "Válassza a Kép lehetőséget",
     addNewTypeQuestion: "{0} hozzáadása", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGÓ]",
@@ -2701,3 +2705,7 @@ editorLocalization.locales["hu"] = huStrings;
 // ed.selectFile: "Select a file" => "Válasszon ki egy fájlt"
 // ed.removeFile: "Remove the file" => "A fájl eltávolítása"
 // pe.searchMode: "Search Mode" => "Keresési mód"
+// ed.surveyPlaceHolderMobile: "Click the \"Add Question\" button below to start creating your form." => "Kattintson az alábbi \"Kérdés hozzáadása\" gombra az űrlap létrehozásának megkezdéséhez."
+// ed.pagePlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the page." => "Kattintson az alábbi \"Kérdés hozzáadása\" gombra, hogy új elemet adjon az oldalhoz."
+// ed.panelPlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the panel." => "Kattintson az alábbi \"Kérdés hozzáadása\" gombra, hogy új elemet adjon a panelhez."
+// ed.imagePlaceHolderMobile: "Click the button below and choose an image to upload" => "Kattintson az alábbi gombra, és válassza ki a feltölteni kívánt képet"
