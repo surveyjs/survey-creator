@@ -870,7 +870,7 @@ test("set headerViewContainer advanced", (): any => {
   expect(currentThemeCssVariables["--sjs-font-headerdescription-size"]).toBe("19px");
   expect(currentThemeCssVariables["--sjs-header-backcolor"]).toBe("#5094ed");
 });
-/*
+
 test("restore headerViewContainer values", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
@@ -915,49 +915,45 @@ test("restore headerViewContainer values", (): any => {
   themePlugin.activate();
   const groupHeader = themePlugin.propertyGrid.survey.pages[0].getElementByName("header");
   const headerViewContainer = groupHeader.elements[0].contentPanel;
-  // const themeBuilder = themePlugin.model as ThemeEditorModel;
-  // const themeEditorSurvey = themeBuilder.themeEditorSurvey;
-  // const headerViewContainer = themeEditorSurvey.getQuestionByName("headerViewContainer");
+  headerViewContainer.getQuestionByName("");
 
-  expect(headerViewContainer.value[0]).toStrictEqual({
-    "headerView": "basic",
-    "logoPosition": "left",
-    "inheritWidthFrom": "container",
-    "backgroundColor": "#5094ed",
-    "backgroundColorSwitch": "custom",
-    "backgroundImage": "https://t4.ftcdn.net/jpg/02/83/13/61/360_F_283136113_b3VRHNiOPFMOluzYJPpfuoH8Czh9c743.jpg",
-    "backgroundImageFit": "fill",
-    "backgroundImageOpacity": 50,
-    "overlapEnabled": true,
-    "logoPositionX": "center",
-    "logoPositionY": "middle",
-    "titlePositionX": "center",
-    "titlePositionY": "middle",
-    "descriptionPositionX": "center",
-    "descriptionPositionY": "middle",
-    "textAreaWidth": 600,
-    "height": 300,
-    "headerDescription": {
-      "color": "rgba(50, 16, 218, 0.45)",
-      "family": "Verdana",
-      "size": 19,
-      "weight": "800",
-    },
-    "headerTitle": {
-      "color": "rgba(219, 15, 15, 0.91)",
-      "family": "Georgia",
-      "size": 39,
-      "weight": "800",
-    },
-    "surveyDescription": {
-      "family": "Trebuchet MS",
-      "size": 21,
-      "weight": "800",
-    },
-    "surveyTitle": {
-      "family": "Courier New",
-      "size": 41,
-      "weight": "400",
-    },
+  expect(headerViewContainer.getQuestionByName("headerView").value).toBe("basic");
+  expect(headerViewContainer.getQuestionByName("logoPosition").value).toBe("left");
+  expect(headerViewContainer.getQuestionByName("inheritWidthFrom").value).toBe("container");
+  expect(headerViewContainer.getQuestionByName("backgroundColor").value).toBe("#5094ed");
+  expect(headerViewContainer.getQuestionByName("backgroundColorSwitch").value).toBe("custom");
+  expect(headerViewContainer.getQuestionByName("backgroundImage").value).toBe("https://t4.ftcdn.net/jpg/02/83/13/61/360_F_283136113_b3VRHNiOPFMOluzYJPpfuoH8Czh9c743.jpg");
+  expect(headerViewContainer.getQuestionByName("backgroundImageFit").value).toBe("fill");
+  expect(headerViewContainer.getQuestionByName("backgroundImageOpacity").value).toBe(50);
+  expect(headerViewContainer.getQuestionByName("overlapEnabled").value).toBe(true);
+  expect(headerViewContainer.getQuestionByName("logoPositionX").value).toBe("center");
+  expect(headerViewContainer.getQuestionByName("logoPositionY").value).toBe("middle");
+  expect(headerViewContainer.getQuestionByName("titlePositionX").value).toBe("center");
+  expect(headerViewContainer.getQuestionByName("titlePositionY").value).toBe("middle");
+  expect(headerViewContainer.getQuestionByName("descriptionPositionX").value).toBe("center");
+  expect(headerViewContainer.getQuestionByName("descriptionPositionY").value).toBe("middle");
+  expect(headerViewContainer.getQuestionByName("textAreaWidth").value).toBe(600);
+  expect(headerViewContainer.getQuestionByName("height").value).toBe(300);
+  expect(headerViewContainer.getQuestionByName("headerDescription").value).toStrictEqual({
+    "color": "rgba(50, 16, 218, 0.45)",
+    "family": "Verdana",
+    "size": 19,
+    "weight": "800",
   });
-});*/
+  expect(headerViewContainer.getQuestionByName("headerTitle").value).toStrictEqual({
+    "color": "rgba(219, 15, 15, 0.91)",
+    "family": "Georgia",
+    "size": 39,
+    "weight": "800",
+  });
+  expect(headerViewContainer.getQuestionByName("surveyDescription").value).toStrictEqual({
+    "family": "Trebuchet MS",
+    "size": 21,
+    "weight": "800",
+  });
+  expect(headerViewContainer.getQuestionByName("surveyTitle").value).toStrictEqual({
+    "family": "Courier New",
+    "size": 41,
+    "weight": "400",
+  });
+});

@@ -269,48 +269,6 @@ test("Theme builder: composite question fontSettings", (): any => {
   expect(cssVariables["--sjs-font-questiontitle-size"]).toBeUndefined();
 });
 
-// test("Theme builder: composite question values are lost", (): any => {
-//   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-//   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
-//   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
-//   themePlugin.activate();
-//   const themeSurveyTab = themePlugin.model as ThemeEditorModel;
-//   const themeEditor = themeSurveyTab.themeEditorSurvey;
-//   const questionTitleFontSettings = themeEditor.getQuestionByName("questionTitle");
-//   const pageTitleFontSettings = themeEditor.getQuestionByName("pageTitle");
-
-//   expect(themeModel.cssVariables["--sjs-font-questiontitle-family"]).toBeUndefined();
-//   expect(themeModel.cssVariables["--sjs-font-questiontitle-weight"]).toBeUndefined();
-//   expect(themeModel.cssVariables["--sjs-font-questiontitle-color"]).toBeUndefined();
-//   expect(themeModel.cssVariables["--sjs-font-questiontitle-size"]).toBeUndefined();
-//   expect(themeModel.cssVariables["--sjs-font-pagetitle-family"]).toBeUndefined();
-//   expect(themeModel.cssVariables["--sjs-font-pagetitle-weight"]).toBeUndefined();
-//   expect(themeModel.cssVariables["--sjs-font-pagetitle-color"]).toBeUndefined();
-//   expect(themeModel.cssVariables["--sjs-font-pagetitle-size"]).toBeUndefined();
-
-//   questionTitleFontSettings.value = { family: "Arial, sans-serif", weight: "semiBold", color: "#fefefe", size: 40 };
-
-//   expect(themeModel.cssVariables["--sjs-font-questiontitle-family"]).toEqual("Arial, sans-serif");
-//   expect(themeModel.cssVariables["--sjs-font-questiontitle-weight"]).toEqual("semiBold");
-//   expect(themeModel.cssVariables["--sjs-font-questiontitle-color"]).toEqual("rgba(254, 254, 254, 1)");
-//   expect(themeModel.cssVariables["--sjs-font-questiontitle-size"]).toEqual("40px");
-//   expect(themeModel.cssVariables["--sjs-font-pagetitle-family"]).toBeUndefined();
-//   expect(themeModel.cssVariables["--sjs-font-pagetitle-weight"]).toBeUndefined();
-//   expect(themeModel.cssVariables["--sjs-font-pagetitle-color"]).toBeUndefined();
-//   expect(themeModel.cssVariables["--sjs-font-pagetitle-size"]).toBeUndefined();
-
-//   pageTitleFontSettings.value = { family: "Arial, sans-serif", weight: "semiBold", color: "#101010", size: 28 };
-
-//   expect(themeModel.cssVariables["--sjs-font-questiontitle-family"]).toEqual("Arial, sans-serif");
-//   expect(themeModel.cssVariables["--sjs-font-questiontitle-weight"]).toEqual("semiBold");
-//   expect(themeModel.cssVariables["--sjs-font-questiontitle-color"]).toEqual("rgba(254, 254, 254, 1)");
-//   expect(themeModel.cssVariables["--sjs-font-questiontitle-size"]).toEqual("40px");
-//   expect(themeModel.cssVariables["--sjs-font-pagetitle-family"]).toEqual("Arial, sans-serif");
-//   expect(themeModel.cssVariables["--sjs-font-pagetitle-weight"]).toEqual("semiBold");
-//   expect(themeModel.cssVariables["--sjs-font-pagetitle-color"]).toEqual("rgba(16, 16, 16, 1)");
-//   expect(themeModel.cssVariables["--sjs-font-pagetitle-size"]).toEqual("28px");
-// });
-
 test("Theme builder: composite question elementSettings", (): any => {
   const themeModel = new ThemeModel();
   themeModel.initialize();
