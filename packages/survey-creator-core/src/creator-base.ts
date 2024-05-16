@@ -346,11 +346,21 @@ export class SurveyCreatorModel extends Base
 
   protected plugins: { [name: string]: ICreatorPlugin } = {};
 
+  /**
+   * Adds a custom tab to Survey Creator.
+   * 
+   * [View Demo](https://surveyjs.io/survey-creator/examples/modify-tab-bar/ (linkStyle))
+   * @param name A unique tab ID. 
+   * @param plugin An object that allows you to handle user interactions with the tab.
+   * @param title A tab caption. If `title` is undefined, the `name` argument value is displayed instead.
+   * @param componentName The name of the component that renders tab markup. Default value: `"svc-tab-" + name`.
+   * @param index A zero-based index that specifies the tab's position relative to other tabs.
+   */
   public addPluginTab(
     name: string,
     plugin: ICreatorPlugin,
     title?: string,
-    componentContent?: string,
+    componentName?: string,
     index?: number
   ) {
     const locStrName = !title ? "ed." + name : (title.indexOf("ed.") == 0 ? title : "");
@@ -361,7 +371,7 @@ export class SurveyCreatorModel extends Base
       id: name,
       locTitleName: locStrName,
       title: title,
-      componentContent: componentContent ? componentContent : "svc-tab-" + name,
+      componentContent: componentName ? componentName : "svc-tab-" + name,
       data: plugin,
       action: () => { this.makeNewViewActive(name); },
       active: this.viewType === name,
