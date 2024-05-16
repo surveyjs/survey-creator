@@ -265,6 +265,7 @@ svc-question {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  box-sizing: content-box;
 }
 
 .svc-dragged-element-shortcut .sv-svg-icon use {
