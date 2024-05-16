@@ -3388,7 +3388,7 @@ export class SurveyCreatorModel extends Base
     };
     const getActions = () => {
       const availableTypes = this.getAvailableToolboxItems(element).map((item) => {
-        return this.createIActionBarItemByClass(item.name, item.title, item.iconName, item.needSeparator, onSelectionChanged);
+        return this.createIActionBarItemByClass(item, item.needSeparator, onSelectionChanged);
       });
       return availableTypes;
     };
@@ -3440,21 +3440,20 @@ export class SurveyCreatorModel extends Base
     this.clickToolboxItem(newElement, panel, "ADDED_FROM_PAGEBUTTON");
   }
 
-  createIActionBarItemByClass(className: string, title: string, iconName: string, needSeparator: boolean, onSelectionChanged?: (questionType: string, subtype?: string) => void): Action {
+  createIActionBarItemByClass(item: QuestionToolboxItem, needSeparator: boolean, onSelectionChanged?: (questionType: string, subtype?: string) => void): Action {
     const action = new Action({
-      title: title,
-      id: className,
-      iconName: iconName,
+      title: item.title,
+      id: item.name,
+      iconName: item.iconName,
+      needSeparator: needSeparator
     });
-    if (className === "text") {
-      const prop = Serializer.findProperty("text", "inputType");
-      if (prop) {
-        action.setItems(prop.choices.map(ch => new Action({ id: ch, title: editorLocalization.getPropertyValueInEditor("inputType", ch) })), (o, e) => {
-          onSelectionChanged("text", o.id);
-        });
-      }
+    if (!!item.items && item.items.length > 0) {
+      const innerItems = item.items.map(item => new Action({ id: item.id, title: item.title }));
+      action.setItems(innerItems, (o, e) => {
+        onSelectionChanged(item.typeName, o.id);
+        action.hidePopup();
+      });
     }
-    action.needSeparator = needSeparator;
     return action;
   }
 

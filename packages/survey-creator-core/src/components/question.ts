@@ -332,13 +332,14 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     let lastItem = null;
     availableItems.forEach((item: QuestionToolboxItem) => {
       const needSeparator = lastItem && item.category != lastItem.category;
-      const action = this.creator.createIActionBarItemByClass(item.name, item.title, item.iconName, needSeparator, (questionType: string, subtype?: string) => {
+      const action = this.creator.createIActionBarItemByClass(item, needSeparator, (questionType: string, subtype?: string) => {
         if (this.surveyElement.getType() !== questionType) {
           this.creator.convertCurrentQuestion(questionType);
-        }
-        if (this.creator.selectedElement instanceof QuestionTextModel) {
-          // const newValue = this.getUpdatedPropertyValue(propName, item.id);
-          this.creator.selectedElement.setPropertyValue("inputType", subtype);
+        } else {
+          let propertyName = "";
+          if (questionType === "text") propertyName = "inputType";
+          if (questionType === "rating") propertyName = "rateDisplayMode";
+          if (!!property) this.creator.selectedElement.setPropertyValue(propertyName, subtype);
         }
       });
       lastItem = item;
@@ -376,25 +377,36 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     return newAction;
   }
   private createConvertInputType() {
-    let prop = null;
+    const questionType = this.surveyElement.getType();
+    const toolboxItem = this.creator.toolbox.items.filter(item => item.id === questionType)[0];
+    if (!toolboxItem || !toolboxItem.items || toolboxItem.items.length < 1) return null;
+
+    /*let prop = null;
     if (this.surveyElement.getType() === "text") prop = Serializer.findProperty("text", "inputType");
     if (this.surveyElement.getType() === "rating") prop = Serializer.findProperty("rating", "rateDisplayMode");
     if (!prop || !isPropertyVisible(this.surveyElement, prop.name)) return null;
     const propName = prop.name;
     const questionSubType = this.surveyElement.getPropertyValue(propName);
-    const items = prop.getChoices(this.surveyElement, (chs: any) => { });
+    const items = prop.getChoices(this.surveyElement, (chs: any) => { });*/
+
+    let propName = "";
+    if (questionType === "text") propName = "inputType";
+    if (questionType === "rating") propName = "rateDisplayMode";
+
+    const questionSubType = this.surveyElement.getPropertyValue(propName);
 
     const getAvailableTypes = () => {
-      const availableTypes = [];
-      items.forEach(item => {
-        availableTypes.push({ id: item, title: editorLocalization.getPropertyValueInEditor(prop.name, item) });
-      });
-      return availableTypes;
+      // const availableTypes = [];
+      // items.forEach(item => {
+      //   availableTypes.push({ id: item, title: editorLocalization.getPropertyValueInEditor(prop.name, item) });
+      // });
+      // return availableTypes;
+      return toolboxItem.items.map(item => { return { id: item.id, title: item.title }; });
     };
     const actionData: IAction = {
       id: "convertInputType",
       visibleIndex: 1,
-      title: editorLocalization.getPropertyValueInEditor(prop.name, questionSubType),
+      title: editorLocalization.getPropertyValueInEditor(propName, questionSubType),
     };
     const newAction = this.createDropdownModel(actionData, getAvailableTypes(),
       (listModel: ListModel) => {

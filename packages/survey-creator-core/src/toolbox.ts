@@ -384,38 +384,49 @@ export class QuestionToolbox
     else {
       item.iconName = item.iconName ? item.iconName : QuestionToolbox.defaultIconName;
       const newItem = new QuestionToolboxItem(item);
-      let prop = null;
-      if (item.id === "text") prop = Serializer.findProperty("text", "inputType");
-      if (item.id === "rating") prop = Serializer.findProperty("rating", "rateDisplayMode");
-      if (!!prop) {
-        newItem.setItems(prop.choices.map(ch => {
-          const propName = prop.name;
-          const newJson = { ...item.json };
-          newJson[propName] = ch;
-
-          const newItem = new QuestionToolboxItem({
-            id: ch,
-            name: ch,
-            title: editorLocalization.getPropertyValueInEditor(propName, ch),
-            className: item.className,
-            json: newJson,
-            iconName: null,
-            category: null,
-            isCopied: false,
-            component: "svc-toolbox-item"
-          });
-          return newItem;
-        }), (o, e) => { popup.hide(); });
-        newItem.component = "svc-toolbox-item-group";
-        newItem.popupModel.cssClass += " toolbox-subtypes";
-        const popup = newItem.popupModel as PopupModel;
-        popup.contentComponentName = "svc-toolbox-list";
-        popup.isFocusedContent = false;
-      }
+      this.addSubTypes(newItem);
 
       return newItem;
     }
   }
+  private addSubTypes(parentItem: QuestionToolboxItem) {
+    let prop = null;
+    if (parentItem.id === "text") prop = Serializer.findProperty("text", "inputType");
+    if (parentItem.id === "rating") prop = Serializer.findProperty("rating", "rateDisplayMode");
+    if (!prop) return;
+
+    const propName = prop.name;
+    const property = Serializer.findProperty(parentItem.id, propName);
+    if (!property || !property.visible) return;
+
+    const newItems = prop.choices.map(ch => {
+      const newJson = { ...parentItem.json };
+      newJson[propName] = ch;
+
+      const innerItem = new QuestionToolboxItem({
+        id: ch,
+        name: ch,
+        title: editorLocalization.getPropertyValueInEditor(propName, ch),
+        className: parentItem.className,
+        json: newJson,
+        iconName: null,
+        category: null,
+        isCopied: false,
+        component: "svc-toolbox-item"
+      });
+      return innerItem;
+    });
+    parentItem.setItems(newItems, (o, e) => {
+      popup.hide();
+    });
+    parentItem.component = "svc-toolbox-item-group";
+    parentItem.popupModel.cssClass += " toolbox-subtypes";
+    const popup = parentItem.popupModel as PopupModel;
+    popup.contentComponentName = "svc-toolbox-list";
+    popup.isFocusedContent = false;
+
+  }
+
   public addItem(item: IQuestionToolboxItem, index?: number) {
     this.correctItem(item);
     const action = this.getActionByItem(item);
