@@ -651,6 +651,11 @@ export class ThemeModel extends Base implements ITheme {
   }
 
 }
+function setAdvancedModeFilter(question: Question, val: boolean): void {
+  if(question.visible) {
+    question.visibleIf = "{advancedmode} = " + val ? "true" : "false";
+  }
+}
 
 Serializer.addClass(
   "theme",
@@ -695,7 +700,7 @@ Serializer.addClass(
           editor.unit = "%";
           editor.min = 0;
           editor.step = 5;
-          editor.visibleIf = "{advancedmode} = false";
+          setAdvancedModeFilter(editor, false);
         }
       }
     }, {
@@ -707,7 +712,7 @@ Serializer.addClass(
         if (!!editor) {
           editor.unit = "px";
           editor.min = 0;
-          editor.visibleIf = "{advancedmode} = false";
+          setAdvancedModeFilter(editor, false);
         }
       }
     },
@@ -721,7 +726,7 @@ Serializer.addClass(
           editor.unit = "%";
           editor.min = 0;
           editor.step = 5;
-          editor.visibleIf = "{advancedmode} = false";
+          setAdvancedModeFilter(editor, false);
         }
       }
     },
@@ -737,7 +742,7 @@ Serializer.addClass(
           editor.min = 0;
           editor.max = 100;
           editor.step = 5;
-          editor.visibleIf = "{advancedmode} = false";
+          setAdvancedModeFilter(editor, false);
         }
       }
     }, {
@@ -752,7 +757,7 @@ Serializer.addClass(
           editor.min = 0;
           editor.max = 100;
           editor.step = 5;
-          editor.visibleIf = "{advancedmode} = false";
+          setAdvancedModeFilter(editor, false);
         }
       }
     },
@@ -762,7 +767,7 @@ Serializer.addClass(
       displayName: getLocString("theme.backgroundCornerRadius"),
       onPropertyEditorUpdate: function (obj: any, editor: any) {
         if (!!editor) {
-          editor.visibleIf = "{advancedmode} = true";
+          setAdvancedModeFilter(editor, true);
           editor.descriptionLocation = "hidden";
         }
       },
@@ -775,7 +780,7 @@ Serializer.addClass(
       displayName: getLocString("theme.backgroundCornerRadius"),
       onPropertyEditorUpdate: function (obj: any, editor: any) {
         if (!!editor) {
-          editor.visibleIf = "{advancedmode} = true";
+          setAdvancedModeFilter(editor, true);
           editor.descriptionLocation = "hidden";
         }
       },
@@ -870,7 +875,7 @@ Serializer.addProperties("theme",
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
         editor.descriptionLocation = "hidden";
-        editor.visibleIf = "{advancedmode} = false";
+        setAdvancedModeFilter(editor, false);
       }
     }
   }, {
@@ -883,7 +888,7 @@ Serializer.addProperties("theme",
       if (!!editor) {
         editor.descriptionLocation = "hidden";
         editor.allowClear = false;
-        editor.visibleIf = "{advancedmode} = false";
+        setAdvancedModeFilter(editor, false);
       }
     }
   },
@@ -905,7 +910,7 @@ Serializer.addProperties("theme",
     },
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
-        editor.visibleIf = "{advancedmode} = true";
+        setAdvancedModeFilter(editor, true);
         editor.descriptionLocation = "hidden";
       }
     },
@@ -923,7 +928,7 @@ Serializer.addProperties("theme",
     },
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
-        editor.visibleIf = "{advancedmode} = true";
+        setAdvancedModeFilter(editor, true);
         editor.descriptionLocation = "hidden";
       }
     },
@@ -936,7 +941,7 @@ Serializer.addProperties("theme",
     displayName: getLocString("theme.shadow"),
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
-        editor.visibleIf = "{advancedmode} = true";
+        setAdvancedModeFilter(editor, true);
         editor.descriptionLocation = "hidden";
       }
     }
@@ -951,7 +956,7 @@ Serializer.addProperties("theme",
     },
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
-        editor.visibleIf = "{advancedmode} = true";
+        setAdvancedModeFilter(editor, true);
         editor.descriptionLocation = "hidden";
       }
     },
@@ -969,7 +974,7 @@ Serializer.addProperties("theme",
     },
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
-        editor.visibleIf = "{advancedmode} = true";
+        setAdvancedModeFilter(editor, true);
         editor.descriptionLocation = "hidden";
       }
     },
@@ -983,7 +988,7 @@ Serializer.addProperties("theme",
     displayName: getLocString("theme.shadow"),
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
-        editor.visibleIf = "{advancedmode} = true";
+        setAdvancedModeFilter(editor, true);
         editor.descriptionLocation = "hidden";
       }
     }
@@ -998,7 +1003,7 @@ Serializer.addProperties("theme",
     },
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
-        editor.visibleIf = "{advancedmode} = true";
+        setAdvancedModeFilter(editor, true);
         editor.descriptionLocation = "hidden";
       }
     },
@@ -1011,7 +1016,7 @@ Serializer.addProperties("theme",
     displayName: getLocString("theme.colorsTitle"),
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
-        editor.visibleIf = "{advancedmode} = true";
+        setAdvancedModeFilter(editor, true);
         editor.colorTitle = getLocString("theme.borderDefault");
         editor.colorTitleLocation = "left";
         editor.descriptionLocation = "hidden";
@@ -1024,7 +1029,7 @@ Serializer.addProperties("theme",
     displayName: "",
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
-        editor.visibleIf = "{advancedmode} = true";
+        setAdvancedModeFilter(editor, true);
         editor.colorTitle = getLocString("theme.borderLight");
         editor.colorTitleLocation = "left";
         editor.descriptionLocation = "hidden";
@@ -1117,7 +1122,7 @@ Serializer.addProperties("theme",
     displayName: getLocString("theme.accentBackground"),
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
-        editor.visibleIf = "{advancedmode} = true";
+        setAdvancedModeFilter(editor, true);
         editor.colorTitle = getLocString("theme.primaryDefaultColor");
         editor.colorTitleLocation = "left";
         editor.descriptionLocation = "hidden";
@@ -1129,7 +1134,7 @@ Serializer.addProperties("theme",
     displayName: "",
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
-        editor.visibleIf = "{advancedmode} = true";
+        setAdvancedModeFilter(editor, true);
         editor.colorTitle = getLocString("theme.primaryDarkColor");
         editor.colorTitleLocation = "left";
         editor.descriptionLocation = "hidden";
@@ -1141,7 +1146,7 @@ Serializer.addProperties("theme",
     displayName: "",
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
-        editor.visibleIf = "{advancedmode} = true";
+        setAdvancedModeFilter(editor, true);
         editor.colorTitle = getLocString("theme.primaryLightColor");
         editor.colorTitleLocation = "left";
         editor.descriptionLocation = "hidden";
@@ -1153,7 +1158,7 @@ Serializer.addProperties("theme",
     displayName: getLocString("theme.accentForeground"),
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
-        editor.visibleIf = "{advancedmode} = true";
+        setAdvancedModeFilter(editor, true);
         editor.colorTitle = getLocString("theme.primaryForecolor");
         editor.colorTitleLocation = "left";
         editor.descriptionLocation = "hidden";
@@ -1165,7 +1170,7 @@ Serializer.addProperties("theme",
     displayName: "",
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
-        editor.visibleIf = "{advancedmode} = true";
+        setAdvancedModeFilter(editor, true);
         editor.colorTitle = getLocString("theme.primaryForecolorLight");
         editor.colorTitleLocation = "left";
         editor.descriptionLocation = "hidden";
