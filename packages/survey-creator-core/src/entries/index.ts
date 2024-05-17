@@ -26,6 +26,7 @@ export * from "../components/tabs/theme-custom-questions/element-settings";
 export * from "../components/tabs/themes";
 export * from "../components/tabs/theme-builder";
 export * from "../components/tabs/theme-plugin";
+export * from "../components/tabs/theme-model-definition";
 export * from "../components/tabs/logic";
 export * from "../components/tabs/translation";
 export * from "../components/tabs/translation-theme";
