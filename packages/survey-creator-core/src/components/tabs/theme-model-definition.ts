@@ -97,3 +97,7 @@ export const themeModelPropertyGridDefinition: ISurveyPropertyGridDefinition = {
   autoGenerateProperties: true,
   classes: themeModelProperties
 };
+
+export class ThemeModelEditorDefinition {
+  public static definition: ISurveyPropertiesDefinition = themeModelProperties;
+}
