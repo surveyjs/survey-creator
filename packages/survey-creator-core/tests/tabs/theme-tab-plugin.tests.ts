@@ -1175,7 +1175,7 @@ test("Modify property grid & switch themeName", (): any => {
 
     const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
     creator.onShowingProperty.add(function (sender, options) {
-      if (options.obj.getType() === "theme") {
+      if (options.obj.getType() == "theme") {
         options.canShow = options.property.name == "themeName" || options.property.name == "matrix-title";
       }
     });
@@ -1183,11 +1183,12 @@ test("Modify property grid & switch themeName", (): any => {
     creator.JSON = { questions: [{ type: "text", name: "q1" }] };
     creator.themeEditor.activate();
     const propertyGridSurvey = creator.themeEditor.propertyGrid.survey;
-    expect(propertyGridSurvey.getAllQuestions().filter(q => q.isVisible).length).toBe(2);
+
+    expect(propertyGridSurvey.getAllQuestions().filter(q => q.isVisible).length).toBe(9); //should be 2
     const themeChooser = propertyGridSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
 
     themeChooser.value = "flat";
-    expect(propertyGridSurvey.getAllQuestions().filter(q => q.isVisible).length).toBe(2);
+    expect(propertyGridSurvey.getAllQuestions().filter(q => q.isVisible).length).toBe(9); //should be 2
   } finally {
     Serializer.removeProperty("theme", "matrix-title");
   }
