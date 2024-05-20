@@ -133,6 +133,12 @@ export class QuestionToolbox
     if (!settings.toolbox || !settings.toolbox.defaultJSON) return undefined;
     return settings.toolbox.defaultJSON[questionType];
   }
+  public static getSubTypePropertyName(questionType: string): string {
+    let propertyName = "";
+    if (questionType === "text") propertyName = "inputType";
+    if (questionType === "rating") propertyName = "rateType";
+    return propertyName;
+  }
   /**
    * Modify this array to change the toolbox items order.
    */
@@ -390,16 +396,12 @@ export class QuestionToolbox
     }
   }
   private addSubTypes(parentItem: QuestionToolboxItem) {
-    let prop = null;
-    if (parentItem.id === "text") prop = Serializer.findProperty("text", "inputType");
-    if (parentItem.id === "rating") prop = Serializer.findProperty("rating", "rateDisplayMode");
-    if (!prop) return;
-
-    const propName = prop.name;
-    const property = Serializer.findProperty(parentItem.id, propName);
+    let property = null;
+    const propName = QuestionToolbox.getSubTypePropertyName(parentItem.id);
+    if (propName) property = Serializer.findProperty(parentItem.id, propName);
     if (!property || !property.visible) return;
 
-    const newItems = prop.choices.map(ch => {
+    const newItems = property.choices.map(ch => {
       const newJson = { ...parentItem.json };
       newJson[propName] = ch;
 
@@ -424,7 +426,6 @@ export class QuestionToolbox
     const popup = parentItem.popupModel as PopupModel;
     popup.contentComponentName = "svc-toolbox-list";
     popup.isFocusedContent = false;
-
   }
 
   public addItem(item: IQuestionToolboxItem, index?: number) {

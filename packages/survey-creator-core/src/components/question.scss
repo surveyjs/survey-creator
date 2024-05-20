@@ -255,7 +255,6 @@ svc-question {
   background-color: $background;
   color: $foreground;
   padding: calcSize(1) calcSize(1.5);
-  padding-right: calcSize(3.5);
   cursor: grabbing;
   position: absolute;
   z-index: 1000;
@@ -268,10 +267,6 @@ svc-question {
   box-sizing: content-box;
 }
 
-.svc-dragged-element-shortcut--has-icon {
-  padding-right: calcSize(3.5);
-}
-
 .svc-dragged-element-shortcut .sv-svg-icon use {
   fill: $primary;
 }
@@ -282,8 +277,19 @@ svc-question {
 
 .svc-dragged-element-shortcut__text {
   @include smallBold;
-  margin-left: calcSize(4);
   line-height: calcSize(3);
+  padding-inline-start: calcSize(1);
+  padding-inline-end: calcSize(1.5);
+}
+
+.svc-dragged-element-shortcut--has-icon {
+  padding-inline-end: calcSize(3.5);
+
+  .svc-dragged-element-shortcut__text {
+    margin-inline-start: calcSize(4);
+    padding-inline-start: 0;
+    padding-inline-end: 0;
+  }
 }
 
 .svc-dragged-element-shortcut__icon {

@@ -3426,8 +3426,7 @@ export class SurveyCreatorModel extends Base
 
   @undoRedoTransaction()
   public addNewQuestionInPage(beforeAdd: (string) => void, panel: IPanel = null, type: string = null, subtype: string = null) {
-    if (!type)
-      type = this.currentAddQuestionType;
+    if (!type) type = this.currentAddQuestionType;
     if (!type) type = settings.designer.defaultAddQuestionType;
     beforeAdd(type);
     let json = { type: type };
@@ -3436,7 +3435,10 @@ export class SurveyCreatorModel extends Base
       json = toolboxItem.json;
     }
     let newElement = this.createNewElement(json);
-    (newElement as Question).setPropertyValue("inputType", subtype);
+
+    let propertyName = QuestionToolbox.getSubTypePropertyName(type);
+    if (!!propertyName && !!subtype) (newElement as Question).setPropertyValue(propertyName, subtype);
+
     this.clickToolboxItem(newElement, panel, "ADDED_FROM_PAGEBUTTON");
   }
 
