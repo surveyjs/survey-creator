@@ -103,7 +103,7 @@ export class ThemeEditorModel extends Base {
     super();
     this.simulator = new SurveySimulatorModel();
     // this.themeName = ThemeEditorModel.DefaultTheme.themeName || "default";
-    updateCustomQuestionJSONs();
+    // updateCustomQuestionJSONs();
     // this.themeEditorSurveyValue = this.createThemeEditorSurvey();
 
     // this.surveyProvider.onPropertyChanged.add(this.creatorPropertyChanged);

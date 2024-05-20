@@ -10,6 +10,7 @@ import { HeaderModel } from "./header-model";
 import * as LibraryThemes from "survey-core/themes";
 import { ColorCalculator, assign, ingectAlpha, parseColor, roundTo2Decimals } from "../../utils/utils";
 import { UndoRedoManager } from "../../plugins/undo-redo/undo-redo-manager";
+import { updateCustomQuestionJSONs } from "./theme-custom-questions";
 
 export * from "./header-model";
 
@@ -350,6 +351,7 @@ export class ThemeModel extends Base implements ITheme {
 
   constructor() {
     super();
+    updateCustomQuestionJSONs();
     this.setNewHeaderProperty();
     this.onPropertyValueChangedCallback = (
       name: string,
@@ -475,12 +477,7 @@ export class ThemeModel extends Base implements ITheme {
 
     try {
       this.blockThemeChangedNotifications += 1;
-      let skipKeyCount = 0;
       this.iteratePropertiesHash((hash, key) => {
-        if (key.indexOf("shadow") !== -1) {
-          skipKeyCount++;
-          return;
-        }
         this.setPropertyValue(key, undefined);
       });
       this.setNewHeaderProperty();
