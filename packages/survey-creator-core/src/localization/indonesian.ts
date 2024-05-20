@@ -42,6 +42,14 @@ export var indonesianStrings = {
     signaturepad: "Tanda tangan",
     buttongroup: "Grup Tombol"
   },
+  toolbox_categories: {
+    general: "Umum",
+    choice: "Pertanyaan Pilihan",
+    text: "Pertanyaan Input Teks",
+    containers: "Wadah",
+    matrix: "Pertanyaan Matriks",
+    misc: "Misc",
+  },
   // Strings in SurveyJS Creator
   ed: {
     defaultLocale: "Default ({0})",
@@ -111,12 +119,6 @@ export var indonesianStrings = {
     "property-grid": "Properti",
     propertyGridFilteredTextPlaceholder: "Ketik untuk mencari...",
     propertyGridNoResultsFound: "Tidak ada hasil yang ditemukan",
-    toolboxGeneralCategory: "Umum",
-    toolboxChoiceCategory: "Pertanyaan Pilihan",
-    toolboxTextCategory: "Pertanyaan Input Teks",
-    toolboxContainersCategory: "Wadah",
-    toolboxMatrixCategory: "Pertanyaan Matriks",
-    toolboxMiscCategory: "Misc",
     correctJSON: "Please correct JSON.",
     surveyResults: "Hasil survei: ",
     surveyResultsTable: "Sebagai tabel",

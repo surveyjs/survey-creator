@@ -174,26 +174,35 @@ test("Change Creator locale property", (): any => {
     },
     pe: {
       title: "Titel",
-      format: "Format de"
+      format: "Format de",
+      survey: {
+        title: "Survey titel",
+      }
     },
     qt: {
       text: "Text"
+    },
+    toolbox_categories: {
+      choice: "Choices de"
     }
   };
   editorLocalization.locales["de"] = deutschStrings;
   const creator = new CreatorTester({ showLogicTab: true, showTranslationTab: true });
+  creator.toolbox.showCategoryTitles = true;
   creator.JSON = { pages: [{ name: "page1", elements: [{ type: "text", name: "q1" }, { type: "expression", name: "q2" }] }] };
-  expect(creator.propertyGrid.getQuestionByName("title").title).toEqual("Title");
   const tabButton = creator.tabs.filter(item => item.title === "Logic")[0];
   const tabPreview = creator.tabs.filter(item => item.title === "Preview")[0];
   const textQuestion = creator.toolbox.actions.filter(item => item.title === "Single-Line Input")[0];
   const saveAction = creator.toolbar.actions.filter(item => item.title === "Save Survey")[0];
+  const choiceCategory = creator.toolbox.categories.filter(item => item.name === "choice")[0];
   expect(tabPreview).toBeTruthy();
+  const surveyTitle = creator.propertyGrid.getQuestionByName("title").title;
 
   creator.locale = "de";
-  expect(creator.propertyGrid.getQuestionByName("title").title).toEqual("Titel");
+  expect(creator.propertyGrid.getQuestionByName("title").title).toEqual("Survey titel");
   expect(tabButton.title).toEqual("Logik");
   expect(textQuestion.title).toEqual("Text");
+  expect(choiceCategory.title).toEqual("Choices de");
   expect(textQuestion.innerItem.title).toEqual("Text");
   expect(saveAction.locTitle.text).toEqual("Umfrage speichern");
   creator.selectElement(creator.survey.getQuestionByName("q2"));
@@ -201,8 +210,9 @@ test("Change Creator locale property", (): any => {
   creator.selectElement(creator.survey);
 
   creator.locale = "";
-  expect(creator.propertyGrid.getQuestionByName("title").title).toEqual("Title");
+  expect(creator.propertyGrid.getQuestionByName("title").title).toEqual(surveyTitle);
   expect(tabButton.title).toEqual("Logic");
+  expect(choiceCategory.title).toEqual("Choice Questions");
   expect(textQuestion.title).toEqual("Single-Line Input");
   expect(textQuestion.innerItem.title).toEqual("Single-Line Input");
   expect(saveAction.title).toEqual("Save Survey");

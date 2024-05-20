@@ -42,6 +42,14 @@ export let svStrings = {
     signaturepad: "Underskrift",
     buttongroup: "Knappgrupp"
   },
+  toolbox_categories: {
+    general: "Generellt",
+    choice: "Frågor om val",
+    text: "Frågor om textinmatning",
+    containers: "Behållare",
+    matrix: "Matris frågor",
+    misc: "Misc",
+  },
   // Strings in SurveyJS Creator
   ed: {
     defaultLocale: "Standard ({0})",
@@ -111,12 +119,6 @@ export let svStrings = {
     "property-grid": "Egenskaper",
     propertyGridFilteredTextPlaceholder: "Skriv för att söka...",
     propertyGridNoResultsFound: "Inga resultat hittades",
-    toolboxGeneralCategory: "Generellt",
-    toolboxChoiceCategory: "Frågor om val",
-    toolboxTextCategory: "Frågor om textinmatning",
-    toolboxContainersCategory: "Behållare",
-    toolboxMatrixCategory: "Matris frågor",
-    toolboxMiscCategory: "Misc",
     correctJSON: "Var vänligen korrigera JSON.",
     surveyResults: "Enkät resultat: ",
     surveyResultsTable: "Som tabell",

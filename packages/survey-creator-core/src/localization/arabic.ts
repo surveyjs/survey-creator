@@ -42,6 +42,14 @@ export var arStrings = {
     signaturepad: "لوحة توقيع",
     buttongroup: "Button group"
   },
+  toolbox_categories: {
+    feneral: "قائمة العام",
+    choice: "أسئلة الاختيار",
+    text: "أسئلة إدخال النص",
+    containers: "حاويات",
+    matrix: "أسئلة المصفوفة",
+    misc: "متفرقات",
+  },
   // Strings in SurveyJS Creator
   ed: {
     defaultLocale: "إفتراضي ({0})",
@@ -111,12 +119,6 @@ export var arStrings = {
     "property-grid": "Properties",
     propertyGridFilteredTextPlaceholder: "Type to search...",
     propertyGridNoResultsFound: "لم يتم العثور على نتائج",
-    toolboxGeneralCategory: "قائمة العام",
-    toolboxChoiceCategory: "أسئلة الاختيار",
-    toolboxTextCategory: "أسئلة إدخال النص",
-    toolboxContainersCategory: "حاويات",
-    toolboxMatrixCategory: "أسئلة المصفوفة",
-    toolboxMiscCategory: "متفرقات",
     correctJSON: "Please correct JSON.",
     surveyResults: "Survey Results ",
     surveyResultsTable: "As Table",

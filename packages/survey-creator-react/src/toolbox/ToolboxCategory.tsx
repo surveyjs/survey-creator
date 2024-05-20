@@ -43,7 +43,7 @@ export class SurveyCreatorToolboxCategory extends SurveyElementBase<ISurveyCreat
     }
     return attachKey2click(
       <div className={className} onClick={e => this.category.toggleState()}>
-        <span className="svc-toolbox__category-title">{this.category.name}</span>
+        <span className="svc-toolbox__category-title">{this.category.title}</span>
         {this.renderButton()}
       </div>
     );
