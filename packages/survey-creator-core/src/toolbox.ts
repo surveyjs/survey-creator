@@ -12,7 +12,8 @@ import {
   Question,
   Serializer,
   SurveyModel,
-  DragOrClickHelper
+  DragOrClickHelper,
+  HashTable
 } from "survey-core";
 import { SurveyCreatorModel, toolboxLocationType } from "./creator-base";
 import { editorLocalization, getLocString } from "./editorLocalization";
@@ -62,6 +63,7 @@ export interface IQuestionToolbox {
 
 export interface IToolboxCategoryDefinition {
   category: string;
+  title?: string;
   items: Array<string | { name: string, title?: string }>;
 }
 
@@ -221,6 +223,7 @@ export class QuestionToolbox
    * @see isCompact
    */
   @property() forceCompact: boolean;
+  private categoriesTitles: HashTable<string> = {};
 
   constructor(
     private supportedQuestions: Array<string> = null,
@@ -262,6 +265,7 @@ export class QuestionToolbox
     return questionCategoryMap;
   }
   private getCategoryTitle(name: string): string {
+    if(this.categoriesTitles[name]) return this.categoriesTitles[name];
     return getLocString("toolbox_categories." + name);
   }
   private onActiveCategoryChanged(newValue: string) {
@@ -496,9 +500,11 @@ export class QuestionToolbox
       this.updateActionTitle(action);
       this.updateActionTitle(action.innerItem);
     });
-    this.categories.forEach(category => {
-      category.title = this.getCategoryTitle(category.name);
-    });
+    if(Array.isArray(this.categories)) {
+      this.categories.forEach(category => {
+        category.title = this.getCategoryTitle(category.name);
+      });
+    }
   }
   private updateActionTitle(action: IAction): void {
     const newTitle = editorLocalization.getString("qt." + action.id);
@@ -576,8 +582,12 @@ export class QuestionToolbox
     this.actions.forEach(item => {
       item.visible = false;
     });
+    this.categoriesTitles = {};
     const actionList = new Array<IQuestionToolboxItem>();
     categories.forEach(category => {
+      if(!!category.category && !!category.title) {
+        this.categoriesTitles[category.category] = category.title;
+      }
       if (!Array.isArray(category.items)) return;
       category.items.forEach(obj => {
         let name = undefined;

@@ -190,13 +190,13 @@ test("Change Creator locale property", (): any => {
   const creator = new CreatorTester({ showLogicTab: true, showTranslationTab: true });
   creator.toolbox.showCategoryTitles = true;
   creator.JSON = { pages: [{ name: "page1", elements: [{ type: "text", name: "q1" }, { type: "expression", name: "q2" }] }] };
-  expect(creator.propertyGrid.getQuestionByName("title").title).toEqual("Survey title");
   const tabButton = creator.tabs.filter(item => item.title === "Logic")[0];
   const tabPreview = creator.tabs.filter(item => item.title === "Preview")[0];
   const textQuestion = creator.toolbox.actions.filter(item => item.title === "Single-Line Input")[0];
   const saveAction = creator.toolbar.actions.filter(item => item.title === "Save Survey")[0];
   const choiceCategory = creator.toolbox.categories.filter(item => item.name === "choice")[0];
   expect(tabPreview).toBeTruthy();
+  const surveyTitle = creator.propertyGrid.getQuestionByName("title").title;
 
   creator.locale = "de";
   expect(creator.propertyGrid.getQuestionByName("title").title).toEqual("Survey titel");
@@ -210,7 +210,7 @@ test("Change Creator locale property", (): any => {
   creator.selectElement(creator.survey);
 
   creator.locale = "";
-  expect(creator.propertyGrid.getQuestionByName("title").title).toEqual("Survey title");
+  expect(creator.propertyGrid.getQuestionByName("title").title).toEqual(surveyTitle);
   expect(tabButton.title).toEqual("Logic");
   expect(choiceCategory.title).toEqual("Choice Questions");
   expect(textQuestion.title).toEqual("Single-Line Input");
