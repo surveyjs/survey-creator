@@ -44,6 +44,14 @@ export var enStrings = {
     signaturepad: "Signature",
     buttongroup: "Button Group"
   },
+  toolbox_categories: {
+    general: "General",
+    choice: "Choice Questions",
+    text: "Text Input Questions",
+    containers: "Containers",
+    matrix: "Matrix Questions",
+    misc: "Misc",
+  },
   // Strings in SurveyJS Creator
   ed: {
     defaultLocale: "Default ({0})",
@@ -113,12 +121,6 @@ export var enStrings = {
     "property-grid": "Properties",
     propertyGridFilteredTextPlaceholder: "Type to search...",
     propertyGridNoResultsFound: "No results found",
-    toolboxGeneralCategory: "General",
-    toolboxChoiceCategory: "Choice Questions",
-    toolboxTextCategory: "Text Input Questions",
-    toolboxContainersCategory: "Containers",
-    toolboxMatrixCategory: "Matrix Questions",
-    toolboxMiscCategory: "Misc",
     correctJSON: "Please correct JSON.",
     surveyResults: "Survey Results ",
     surveyResultsTable: "As Table",

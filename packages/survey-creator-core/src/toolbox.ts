@@ -70,6 +70,7 @@ export class QuestionToolboxCategory extends Base {
     super();
   }
   @property() name: string;
+  @property() title: string;
   @propertyArray() items: Array<QuestionToolboxItem>;
   @property({ defaultValue: false }) collapsed: boolean;
   public toggleState() {
@@ -114,11 +115,11 @@ export class QuestionToolbox
   static hiddenTypes = ["buttongroup", "linkvalue", "embeddedsurvey", "spinedit", "color", "fileedit", "textwithreset", "commentwithreset"];
   static defaultIconName = "icon-default";
   static defaultCategories = {
-    toolboxChoiceCategory: ["radiogroup", "rating", "checkbox", "dropdown", "tagbox", "boolean", "file", "imagepicker", "ranking"],
-    toolboxTextCategory: ["text", "comment", "multipletext"],
-    toolboxContainersCategory: ["panel", "paneldynamic"],
-    toolboxMatrixCategory: ["matrix", "matrixdropdown", "matrixdynamic"],
-    toolboxMiscCategory: ["html", "expression", "image", "signaturepad"]
+    choice: ["radiogroup", "rating", "checkbox", "dropdown", "tagbox", "boolean", "file", "imagepicker", "ranking"],
+    text: ["text", "comment", "multipletext"],
+    containers: ["panel", "paneldynamic"],
+    matrix: ["matrix", "matrixdropdown", "matrixdynamic"],
+    misc: ["html", "expression", "image", "signaturepad"]
   }
   private _orderedQuestions = [
     "radiogroup", "rating", "checkbox", "dropdown", "tagbox", "boolean", "file", "imagepicker", "ranking",
@@ -254,13 +255,15 @@ export class QuestionToolbox
       const cat = QuestionToolbox.defaultCategories[key];
       cat.forEach((name) => {
         if (!this.supportedQuestions || this.supportedQuestions.indexOf(name) != -1) {
-          questionCategoryMap[name] = getLocString("ed." + key);
+          questionCategoryMap[name] = key;
         }
       });
     });
     return questionCategoryMap;
   }
-
+  private getCategoryTitle(name: string): string {
+    return getLocString("toolbox_categories." + name);
+  }
   private onActiveCategoryChanged(newValue: string) {
     const categories: Array<QuestionToolboxCategory> = this.categories;
     //if(!this.allowExpandMultipleCategories) {
@@ -493,6 +496,9 @@ export class QuestionToolbox
       this.updateActionTitle(action);
       this.updateActionTitle(action.innerItem);
     });
+    this.categories.forEach(category => {
+      category.title = this.getCategoryTitle(category.name);
+    });
   }
   private updateActionTitle(action: IAction): void {
     const newTitle = editorLocalization.getString("qt." + action.id);
@@ -597,7 +603,7 @@ export class QuestionToolbox
       if(!item.visible) {
         if(displayMisc) {
           item.visible = true;
-          item.category = editorLocalization.getString("ed.toolboxMiscCategory");
+          item.category = "misc";
         }
         actionList.push(item);
       }
@@ -678,7 +684,7 @@ export class QuestionToolbox
       categories[i].collapsed = isCollapsed;
     }
   }
-  private getCategoryByName(categoryName: string): any {
+  public getCategoryByName(categoryName: string): QuestionToolboxCategory {
     const categories = this.categories;
     for (var i = 0; i < categories.length; i++) {
       var category = <any>categories[i];
@@ -693,10 +699,11 @@ export class QuestionToolbox
     for (let i = 0; i < this.actions.length; i++) {
       const item = this.actions[i];
       if(item.visible === false) continue;
-      const categoryName = item.category ? item.category : editorLocalization.getString("ed.toolboxGeneralCategory");
+      const categoryName = item.category ? item.category : "general";
       if (!categoriesHash[categoryName]) {
         const category = this.createCategory();
         category.name = categoryName;
+        category.title = this.getCategoryTitle(categoryName);
         category.collapsed = categoryName !== prevActiveCategory && !this.keepAllCategoriesExpanded;
         categoriesHash[categoryName] = category;
         categories.push(category);

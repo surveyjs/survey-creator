@@ -42,6 +42,14 @@ export var skStrings = {
     signaturepad: "Priestor na podpis",
     buttongroup: "Skupina tlačidiel"
   },
+  toolbox_categories: {
+    general: "Všeobecné",
+    choice: "Voľba Otázky",
+    text: "Otázky na zadávanie textu",
+    containers: "Kontajnery",
+    matrix: "Maticové otázky",
+    misc: "Misc",
+  },
   // Strings in SurveyJS Creator
   ed: {
     defaultLocale: "Predvolené ({0})",
@@ -111,12 +119,6 @@ export var skStrings = {
     "property-grid": "Vlastnosti",
     propertyGridFilteredTextPlaceholder: "Zadajte reťazec pre vyhľadávanie...",
     propertyGridNoResultsFound: "Nenašli sa žiadne výsledky",
-    toolboxGeneralCategory: "Všeobecné",
-    toolboxChoiceCategory: "Voľba Otázky",
-    toolboxTextCategory: "Otázky na zadávanie textu",
-    toolboxContainersCategory: "Kontajnery",
-    toolboxMatrixCategory: "Maticové otázky",
-    toolboxMiscCategory: "Misc",
     correctJSON: "Opravte JSON.",
     surveyResults: "Výsledok prieskumu: ",
     surveyResultsTable: "Ako tabuľku",

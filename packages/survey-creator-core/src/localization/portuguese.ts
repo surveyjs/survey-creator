@@ -42,6 +42,14 @@ var portugueseTranslation = {
     signaturepad: "Caixa de Assinatura",
     buttongroup: "Grupo de Botões"
   },
+  toolbox_categories: {
+    general: "Geral",
+    choice: "Questões de Escolha",
+    text: "Questões de Texto",
+    containers: "Áreas",
+    matrix: "Questões em Matriz",
+    misc: "Diversos",
+  },
   // Strings in SurveyJS Creator
   ed: {
     defaultLocale: "Pré-definido ({0})",
@@ -111,12 +119,6 @@ var portugueseTranslation = {
     "property-grid": "Propriedades",
     propertyGridFilteredTextPlaceholder: "Escreva para pesquisar...",
     propertyGridNoResultsFound: "Nenhum resultado encontrado",
-    toolboxGeneralCategory: "Geral",
-    toolboxChoiceCategory: "Questões de Escolha",
-    toolboxTextCategory: "Questões de Texto",
-    toolboxContainersCategory: "Áreas",
-    toolboxMatrixCategory: "Questões em Matriz",
-    toolboxMiscCategory: "Diversos",
     correctJSON: "Por favor corrija o JSON.",
     surveyResults: "Resultado da pesquisa: ",
     surveyResultsTable: "Como Tabela",

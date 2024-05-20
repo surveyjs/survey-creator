@@ -42,6 +42,14 @@ var persianStrings = {
     signaturepad: "قسمت امضا",
     buttongroup: "گروه دکمه"
   },
+  toolbox_categories: {
+    general: "عمومی",
+    choice: "سوالات انتخاب",
+    text: "سوالات ورودی متن",
+    containers: "ظروف",
+    matrix: "سوالات ماتریکس",
+    misc: "متفرقه",
+  },
   // Strings in SurveyJS Creator
   ed: {
     defaultLocale: "پیش فرض ({0})",
@@ -111,12 +119,6 @@ var persianStrings = {
     "property-grid": "ویژگی ها",
     propertyGridFilteredTextPlaceholder: "جستجو...",
     propertyGridNoResultsFound: "نتیجه ای یافت نشد",
-    toolboxGeneralCategory: "عمومی",
-    toolboxChoiceCategory: "سوالات انتخاب",
-    toolboxTextCategory: "سوالات ورودی متن",
-    toolboxContainersCategory: "ظروف",
-    toolboxMatrixCategory: "سوالات ماتریکس",
-    toolboxMiscCategory: "متفرقه",
     correctJSON: "لطفا JSON را تصحیح کنید.",
     surveyResults: "نتایج نظرسنجی: ",
     surveyResultsTable: "به صورت جدول",
