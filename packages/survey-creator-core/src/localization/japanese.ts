@@ -42,6 +42,14 @@ export var jaStrings = {
     signaturepad: "署名パッド",
     buttongroup: "ボタングループ"
   },
+  toolboxCategories: {
+    general: "一般",
+    choice: "選択の質問",
+    text: "テキスト入力の質問",
+    containers: "コンテナー",
+    matrix: "マトリックスの質問",
+    misc: "雑貨",
+  },
   // Strings in SurveyJS Creator
   ed: {
     defaultLocale: "デフォルト（{0}）",
@@ -111,12 +119,6 @@ export var jaStrings = {
     "property-grid": "プロパティ",
     propertyGridFilteredTextPlaceholder: "検索するタイプ...",
     propertyGridNoResultsFound: "結果が見つかりませんでした",
-    toolboxGeneralCategory: "一般",
-    toolboxChoiceCategory: "選択の質問",
-    toolboxTextCategory: "テキスト入力の質問",
-    toolboxContainersCategory: "コンテナー",
-    toolboxMatrixCategory: "マトリックスの質問",
-    toolboxMiscCategory: "雑貨",
     correctJSON: "JSONを修正してください。",
     surveyResults: "アンケート結果： ",
     surveyResultsTable: "表として",

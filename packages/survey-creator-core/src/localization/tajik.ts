@@ -44,6 +44,14 @@ export var tgStrings = {
     // signaturepad: "Signature",
     // buttongroup: "Button Group"
   },
+  toolboxCategories: {
+    general: "Умумӣ",
+    // choice: "Choice Questions",
+    // text: "Text Input Questions",
+    // containers: "Containers",
+    // matrix: "Matrix Questions",
+    // misc: "Misc",
+  },
   // Strings in SurveyJS Creator
   ed: {
     defaultLocale: "Бо нобаёнӣ ({0})",
@@ -105,12 +113,6 @@ export var tgStrings = {
     toolbox: "Бастаи асбобҳо",
     // "property-grid": "Properties",
     // propertyGridFilteredTextPlaceholder: "Type to search...",
-    toolboxGeneralCategory: "Умумӣ",
-    // toolboxChoiceCategory: "Choice Questions",
-    // toolboxTextCategory: "Text Input Questions",
-    // toolboxContainersCategory: "Containers",
-    // toolboxMatrixCategory: "Matrix Questions",
-    // toolboxMiscCategory: "Misc",
     correctJSON: "Илтимос, JSON-ро дуруст кунед.",
     surveyResults: "Натиҷаи ташхис:",
     surveyResultsTable: "Ҳамчун ҷадвал",

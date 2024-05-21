@@ -42,6 +42,14 @@ export var bgStrings = {
     signaturepad: "Подпис",
     buttongroup: "Група бутони"
   },
+  toolboxCategories: {
+    general: "Общ",
+    choice: "Въпроси за избор",
+    text: "Въпроси с въвеждане на текст",
+    containers: "Контейнери",
+    matrix: "Матрица с въпроси",
+    misc: "Разни",
+  },
   // Strings in SurveyJS Creator
   ed: {
     defaultLocale: "По подразбиране ({0})",
@@ -111,12 +119,6 @@ export var bgStrings = {
     "property-grid": "Свойства",
     propertyGridFilteredTextPlaceholder: "Въведи за търсене...",
     propertyGridNoResultsFound: "Няма намерени резултати",
-    toolboxGeneralCategory: "Общ",
-    toolboxChoiceCategory: "Въпроси за избор",
-    toolboxTextCategory: "Въпроси с въвеждане на текст",
-    toolboxContainersCategory: "Контейнери",
-    toolboxMatrixCategory: "Матрица с въпроси",
-    toolboxMiscCategory: "Разни",
     correctJSON: "Моля, коригирай JSON.",
     surveyResults: "Резултати от анкетата ",
     surveyResultsTable: "Като таблица",

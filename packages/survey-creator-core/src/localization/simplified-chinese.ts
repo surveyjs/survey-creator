@@ -42,6 +42,14 @@ var simplifiedChineseTranslation = {
     signaturepad: "签名",
     buttongroup: "按钮组"
   },
+  toolboxCategories: {
+    general: "一般",
+    choice: "选择题",
+    text: "文本输入问题",
+    containers: "器皿",
+    matrix: "矩阵问题",
+    misc: "杂项",
+  },
   // Strings in SurveyJS Creator
   ed: {
     defaultLocale: "默认语言 ({0})",
@@ -111,12 +119,6 @@ var simplifiedChineseTranslation = {
     "property-grid": "性能",
     propertyGridFilteredTextPlaceholder: "键入以搜索...",
     propertyGridNoResultsFound: "未找到结果",
-    toolboxGeneralCategory: "一般",
-    toolboxChoiceCategory: "选择题",
-    toolboxTextCategory: "文本输入问题",
-    toolboxContainersCategory: "器皿",
-    toolboxMatrixCategory: "矩阵问题",
-    toolboxMiscCategory: "杂项",
     correctJSON: "请修正 JSON 数据",
     surveyResults: "问卷结果: ",
     surveyResultsTable: "表格形式",
