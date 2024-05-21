@@ -43,7 +43,7 @@ export var arStrings = {
     buttongroup: "Button group"
   },
   toolboxCategories: {
-    feneral: "قائمة العام",
+    general: "قائمة العام",
     choice: "أسئلة الاختيار",
     text: "أسئلة إدخال النص",
     containers: "حاويات",
