@@ -1,7 +1,10 @@
-import { SurveyCreatorModel } from "../creator-base";
-import { CreatorPreset, ICreatorPresetData } from "./presets";
+import { SurveyCreatorModel } from "../../creator-base";
+import { CreatorPreset, ICreatorPresetData } from "../presets";
 import { SurveyModel } from "survey-core";
-import { CreatorPresetEditableBase } from "./presets-base";
+import { CreatorPresetEditableBase } from "./presets-editable-base";
+import { CreatorPresetEditableToolbox, CreatorPresetEditableToolboxConfigurator, CreatorPresetEditableToolboxDefinition } from "./presets-editable-toolbox";
+import { CreatorPresetEditableTabs } from "./presets-editable-tabs";
+import { CreatorEditablePresetPropertyGrid, CreatorPresetEditablePropertyGridDefinition } from "./presets-editable-properties";
 
 export class CreatorPresetEditor {
   private presetValue: CreatorPreset;
@@ -67,10 +70,32 @@ export class CreatorPresetEditor {
     }
     return true;
   }
+  private createEditableCore(preset: CreatorPreset, fullPath: string): CreatorPresetEditableBase {
+    if(fullPath === "tabs") return new CreatorPresetEditableTabs(preset);
+    if(fullPath === "toolbox") return new CreatorPresetEditableToolbox(preset);
+    if(fullPath === "toolbox_definition") return new CreatorPresetEditableToolboxDefinition(preset);
+    if(fullPath === "toolbox_") return new CreatorPresetEditableToolboxConfigurator(preset);
+    if(fullPath === "propertyGrid") return new CreatorEditablePresetPropertyGrid(preset);
+    if(fullPath === "propertyGrid_definition") return new CreatorPresetEditablePropertyGridDefinition(preset);
+    return undefined;
+  }
+  private createEditable(preset: CreatorPreset, parent: CreatorPresetEditableBase, fullPath: string): CreatorPresetEditableBase {
+    const editable = this.createEditableCore(preset, fullPath);
+    if(editable) {
+      preset.children.forEach(item => {
+        const child = this.createEditable(<CreatorPreset>item, editable, fullPath + "_" + item.getPath());
+        if(child) {
+          editable.children.push(child);
+          child.parent = editable;
+        }
+      });
+    }
+    return editable;
+  }
   private createEditablePresets(): Array<CreatorPresetEditableBase> {
     const res = [];
     this.preset.children.forEach(preset => {
-      const editable = preset.createEditable();
+      const editable = this.createEditable(<CreatorPreset>preset, undefined, preset.getPath());
       if (editable) {
         res.push(editable);
       }

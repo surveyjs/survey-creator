@@ -1,11 +1,11 @@
 import { CreatorTester } from "./creator-tester";
-import { CreatorPreset, ICreatorPresetData } from "../src/presets/presets";
+import { ICreatorPresetData } from "../src/presets/presets";
 import { QuestionToolbox } from "../src/toolbox";
 import { ItemValue, QuestionDropdownModel, QuestionMatrixDynamicModel } from "survey-core";
-import { defaultPropertyGridDefinition, ISurveyPropertyGridDefinition } from "../src/question-editor/definition";
-import { SurveyQuestionPresetPropertiesDetail } from "../src/presets/presets-properties";
+import { defaultPropertyGridDefinition } from "../src/question-editor/definition";
+import { SurveyQuestionPresetPropertiesDetail } from "../src/presets/editable/presets-editable-properties";
 import { QuestionEmbeddedSurveyModel } from "../src/components/embedded-survey";
-import { CreatorPresetEditor } from "../src/presets/presets-editor";
+import { CreatorPresetEditor } from "../src/presets/editable/presets-editor";
 
 export * from "../src/components/embedded-survey";
 
