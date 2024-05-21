@@ -42,6 +42,14 @@ export var hrStrings = {
     signaturepad: "Jastučić za potpis",
     buttongroup: "Grupa gumba"
   },
+  toolbox_categories: {
+    general: "Općenito",
+    choice: "Pitanja o izboru",
+    text: "Pitanja o unosu teksta",
+    containers: "Kontejnere",
+    matrix: "Matrična pitanja",
+    misc: "Ostalo",
+  },
   // Strings in SurveyJS Creator
   ed: {
     defaultLocale: "Zadani ({0})",
@@ -111,12 +119,6 @@ export var hrStrings = {
     "property-grid": "Svojstva",
     propertyGridFilteredTextPlaceholder: "Upišite za pretraživanje...",
     propertyGridNoResultsFound: "Nisu pronađeni rezultati",
-    toolboxGeneralCategory: "Općenito",
-    toolboxChoiceCategory: "Pitanja o izboru",
-    toolboxTextCategory: "Pitanja o unosu teksta",
-    toolboxContainersCategory: "Kontejnere",
-    toolboxMatrixCategory: "Matrična pitanja",
-    toolboxMiscCategory: "Ostalo",
     correctJSON: "Ispravite JSON.",
     surveyResults: "Rezultat ankete: ",
     surveyResultsTable: "Kao tablica",

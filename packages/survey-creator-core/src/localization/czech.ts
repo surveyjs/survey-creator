@@ -42,6 +42,14 @@ export var czStrings = {
     signaturepad: "Podpisová podložka",
     buttongroup: "Skupina tlačítek"
   },
+  toolbox_categories: {
+    general: "Obecné",
+    choice: "Výběrové otázky",
+    text: "Textové otázky",
+    containers: "Kontejnery",
+    matrix: "Maticové otázky",
+    misc: "Ostatní",
+  },
   // Strings in SurveyJS Creator
   ed: {
     defaultLocale: "Výchozí ({0})",
@@ -111,12 +119,6 @@ export var czStrings = {
     "property-grid": "Vlastnosti",
     propertyGridFilteredTextPlaceholder: "Zadejte hledaný text...",
     propertyGridNoResultsFound: "Nebyly nalezeny žádné výsledky",
-    toolboxGeneralCategory: "Obecné",
-    toolboxChoiceCategory: "Výběrové otázky",
-    toolboxTextCategory: "Textové otázky",
-    toolboxContainersCategory: "Kontejnery",
-    toolboxMatrixCategory: "Maticové otázky",
-    toolboxMiscCategory: "Ostatní",
     correctJSON: "Opravte JSON.",
     surveyResults: "Výsledek průzkumu: ",
     surveyResultsTable: "Jako tabulka",

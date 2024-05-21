@@ -42,6 +42,14 @@ export var mnStrings = {
     signaturepad: "Гарын үсэг",
     buttongroup: "Багц товч"
   },
+  toolbox_categories: {
+    general: "Ерөнхий",
+    choice: "Сонголттой асуултууд",
+    text: "Хариулт бичих асуултууд",
+    containers: "Сав",
+    matrix: "Матрицан асуултууд",
+    misc: "Бусад",
+  },
   // Strings in SurveyJS Creator
   ed: {
     defaultLocale: "Үндсэн ({0})",
@@ -111,12 +119,6 @@ export var mnStrings = {
     "property-grid": "Өмнөх",
     propertyGridFilteredTextPlaceholder: "Хайхын тулд бичнэ үү.....",
     propertyGridNoResultsFound: "Ямар ч үр дүн олдсонгүй",
-    toolboxGeneralCategory: "Ерөнхий",
-    toolboxChoiceCategory: "Сонголттой асуултууд",
-    toolboxTextCategory: "Хариулт бичих асуултууд",
-    toolboxContainersCategory: "Сав",
-    toolboxMatrixCategory: "Матрицан асуултууд",
-    toolboxMiscCategory: "Бусад",
     correctJSON: "JSON засна уу.",
     surveyResults: "Санал асуулгын хариу",
     surveyResultsTable: "Санал асуулгын хариултыг хүснэгтээр харуулах",

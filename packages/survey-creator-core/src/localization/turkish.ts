@@ -42,6 +42,14 @@ export var turkishStrings = {
     signaturepad: "İmza Defteri",
     buttongroup: "Düğme Grubu"
   },
+  toolbox_categories: {
+    general: "Genel",
+    choice: "Seçim Soruları",
+    text: "Metin Girişi Soruları",
+    containers: "Konteyner",
+    matrix: "Matris Soruları",
+    misc: "Misc",
+  },
   // Strings in SurveyJS Creator
   ed: {
     defaultLocale: "Varyayılan ({0})",
@@ -111,12 +119,6 @@ export var turkishStrings = {
     "property-grid": "Özellikler",
     propertyGridFilteredTextPlaceholder: "Aramak için yazın...",
     propertyGridNoResultsFound: "Sonuç bulunamadı",
-    toolboxGeneralCategory: "Genel",
-    toolboxChoiceCategory: "Seçim Soruları",
-    toolboxTextCategory: "Metin Girişi Soruları",
-    toolboxContainersCategory: "Konteyner",
-    toolboxMatrixCategory: "Matris Soruları",
-    toolboxMiscCategory: "Misc",
     correctJSON: "JSON nesnesini doğrular.",
     surveyResults: "Anket Sonucu: ",
     surveyResultsTable: "Tablo olarak",

@@ -1309,6 +1309,39 @@ test("matrix columns and rows has column value with isUnique property set to tru
   const rowsQuestion = <QuestionMatrixDynamicModel>propertyGrid.survey.getQuestionByName("rows");
   expect(columnsQuestion.getColumnByName("value").isUnique).toBeTruthy();
   expect(rowsQuestion.getColumnByName("value").isUnique).toBeTruthy();
+  expect(columnsQuestion.keyName).toBe("value");
+  expect(rowsQuestion.keyName).toBe("value");
+});
+test("choices values check on unique", () => {
+  const question = new QuestionDropdownModel("q1");
+  question.choices = ["item1", "item2", "item3"];
+  const propertyGrid = new PropertyGridModelTester(question);
+  const matrix = <QuestionMatrixDynamicModel>propertyGrid.survey.getQuestionByName("choices");
+  expect(matrix.keyName).toBe("value");
+  const cellQuestion = matrix.visibleRows[0].getQuestionByColumnName("value");
+  expect(cellQuestion.errors).toHaveLength(0);
+  cellQuestion.value = "item2";
+  expect(cellQuestion.errors).toHaveLength(1);
+  cellQuestion.value = "item4";
+  expect(cellQuestion.errors).toHaveLength(0);
+});
+test("choices values check on unique when value is the detail panel", () => {
+  const prop = Serializer.findProperty("itemvalue", "value");
+  const prevShowMode = prop.showMode;
+  prop.showMode = "form";
+  const question = new QuestionDropdownModel("q1");
+  question.choices = ["item1", "item2", "item3"];
+  const propertyGrid = new PropertyGridModelTester(question);
+  const matrix = <QuestionMatrixDynamicModel>propertyGrid.survey.getQuestionByName("choices");
+  expect(matrix.keyName).toBe("value");
+  matrix.visibleRows[0].showDetailPanel();
+  const cellQuestion = matrix.visibleRows[0].detailPanel.getQuestionByName("value");
+  expect(cellQuestion.errors).toHaveLength(0);
+  cellQuestion.value = "item2";
+  expect(cellQuestion.errors).toHaveLength(1);
+  cellQuestion.value = "item4";
+  expect(cellQuestion.errors).toHaveLength(0);
+  prop.showMode = prevShowMode;
 });
 test("matrix dropdown rows has column value with isUnique property set to true", () => {
   const question = new QuestionMatrixDropdownModel("q1");

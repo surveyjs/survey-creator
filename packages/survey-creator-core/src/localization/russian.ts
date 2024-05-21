@@ -42,6 +42,14 @@ export var ruStrings = {
     signaturepad: "Подпись",
     buttongroup: "Группа кнопок"
   },
+  toolbox_categories: {
+    general: "Общие",
+    choice: "Вопросы выбора",
+    text: "Вопросы для ввода текста",
+    containers: "Контейнеры",
+    matrix: "Матричные вопросы",
+    misc: "Разное",
+  },
   // Strings in SurveyJS Creator
   ed: {
     defaultLocale: "По умолчанию ({0})",
@@ -111,12 +119,6 @@ export var ruStrings = {
     "property-grid": "Свойства",
     propertyGridFilteredTextPlaceholder: "Введите для поиска...",
     propertyGridNoResultsFound: "Никаких результатов не найдено",
-    toolboxGeneralCategory: "Общие",
-    toolboxChoiceCategory: "Вопросы выбора",
-    toolboxTextCategory: "Вопросы для ввода текста",
-    toolboxContainersCategory: "Контейнеры",
-    toolboxMatrixCategory: "Матричные вопросы",
-    toolboxMiscCategory: "Разное",
     correctJSON: "Пожалуйста, исправьте JSON.",
     surveyResults: "Результаты обследования",
     surveyResultsTable: "Как таблица",
