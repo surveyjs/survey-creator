@@ -989,7 +989,7 @@ test("export theme to file", (done): any => {
   themePlugin.saveToFileHandler = async (fileName: string, blob: Blob) => {
     let fileReader = new FileReader();
     fileReader.onload = (e) => {
-      expect(fileName).toBe(settings.theme.exportFileName);
+      expect(fileName).toBe(settings.themeEditor.exportFileName);
       const theme: ITheme = JSON.parse(fileReader.result as string);
       expect(theme.themeName).toEqual("default");
       expect(theme.cssVariables).toEqual(expectations);
@@ -997,7 +997,7 @@ test("export theme to file", (done): any => {
     };
     fileReader.readAsText(blob);
   };
-  themePlugin.exportToFile(settings.theme.exportFileName);
+  themePlugin.exportToFile(settings.themeEditor.exportFileName);
 });
 
 test("Theme builder: restore values of elementSettings from file", (): any => {
