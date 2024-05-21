@@ -187,12 +187,12 @@ export class HeaderModel extends Base implements IHeader {
 }
 
 function getDefaultTitleSetting() {
-  const result = { family: settings.theme.fontFamily, weight: "700", size: 32 };
+  const result = { family: settings.themeEditor.defaultFontFamily, weight: "700", size: 32 };
   return result;
 }
 
 function getDefaultDescriptionSetting(isAdvanced?: boolean) {
-  const result = { family: settings.theme.fontFamily, weight: "400", size: 16 };
+  const result = { family: settings.themeEditor.defaultFontFamily, weight: "400", size: 16 };
   if (isAdvanced) {
     result["weight"] = "600";
   }

@@ -184,7 +184,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     const page = this.propertyGrid.survey.pages[0];
     const header = page?.getElementByName("header");
     if (header) {
-      header.visible = this.creator.isMobileView ? false : settings.theme.allowEditHeaderSettings;
+      header.visible = !this.creator.isMobileView;
     }
     if (this.advancedModeSwitcher) {
       this.advancedModeSwitcher.visible = !this.creator.isMobileView;
@@ -558,7 +558,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       mode: "small",
       component: "sv-action-bar-item",
       action: () => {
-        this.exportToFile(settings.theme.exportFileName);
+        this.exportToFile(settings.themeEditor.exportFileName);
       }
     });
     items.push(this.exportAction);

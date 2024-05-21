@@ -237,7 +237,7 @@ test("export theme to file", (done): any => {
   themePlugin.activate();
   const themeModel = themePlugin.themeModel as ThemeModel;
 
-  themeModel["questionTitle"] = { family: settings.theme.fontFamily, color: "rgba(0, 0, 0, 0.91)", weight: "600", size: 19 };
+  themeModel["questionTitle"] = { family: settings.themeEditor.defaultFontFamily, color: "rgba(0, 0, 0, 0.91)", weight: "600", size: 19 };
 
   const expectations = {};
   assign(expectations, Themes["default-light"].cssVariables, { "--sjs-font-questiontitle-size": "19px" });
@@ -245,7 +245,7 @@ test("export theme to file", (done): any => {
   themePlugin.saveToFileHandler = async (fileName: string, blob: Blob) => {
     let fileReader = new FileReader();
     fileReader.onload = (e) => {
-      expect(fileName).toBe(settings.theme.exportFileName);
+      expect(fileName).toBe(settings.themeEditor.exportFileName);
       const theme: ITheme = JSON.parse(fileReader.result as string);
       expect(theme.themeName).toEqual("default");
       expect(theme.cssVariables).toStrictEqual(expectations);
@@ -253,7 +253,7 @@ test("export theme to file", (done): any => {
     };
     fileReader.readAsText(blob);
   };
-  themePlugin.exportToFile(settings.theme.exportFileName);
+  themePlugin.exportToFile(settings.themeEditor.exportFileName);
 });
 
 test("Theme onModified and saveThemeFunc", (): any => {

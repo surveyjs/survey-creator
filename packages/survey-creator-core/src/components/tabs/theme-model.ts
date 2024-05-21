@@ -874,7 +874,7 @@ Serializer.addProperties("theme",
     type: "dropdown",
     name: "--sjs-font-family",
     displayName: getLocString("theme.fontFamily"),
-    default: settings.theme.fontFamily,
+    default: settings.themeEditor.defaultFontFamily,
     choices: [].concat(DefaultFonts),
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
@@ -896,7 +896,7 @@ Serializer.addProperties("theme",
     name: "pageTitle",
     displayName: getLocString("theme.titleFont"),
     default: {
-      family: settings.theme.fontFamily,
+      family: settings.themeEditor.defaultFontFamily,
       weight: "700",
       size: 24
     },
@@ -914,7 +914,7 @@ Serializer.addProperties("theme",
     name: "pageDescription",
     displayName: getLocString("theme.descriptionFont"),
     default: {
-      family: settings.theme.fontFamily,
+      family: settings.themeEditor.defaultFontFamily,
       weight: "700",
       size: 24
     },
@@ -942,7 +942,7 @@ Serializer.addProperties("theme",
     name: "questionTitle",
     displayName: getLocString("theme.titleFont"),
     default: {
-      family: settings.theme.fontFamily,
+      family: settings.themeEditor.defaultFontFamily,
       weight: "600",
       size: 16,
     },
@@ -960,7 +960,7 @@ Serializer.addProperties("theme",
     name: "questionDescription",
     displayName: getLocString("theme.descriptionFont"),
     default: {
-      family: settings.theme.fontFamily,
+      family: settings.themeEditor.defaultFontFamily,
       weight: "400",
       size: 16
     },
@@ -989,7 +989,7 @@ Serializer.addProperties("theme",
     name: "editorFont",
     displayName: getLocString("theme.font"),
     default: {
-      family: settings.theme.fontFamily,
+      family: settings.themeEditor.defaultFontFamily,
       weight: "400",
       size: 16
     },

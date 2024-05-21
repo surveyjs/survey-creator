@@ -148,8 +148,8 @@ test("headerViewContainer survey title & description", (): any => {
   expect(currentThemeCssVariables["--sjs-font-headerdescription-color"]).toBeUndefined();
 
   header["headerView"] = "advanced";
-  header["headerTitle"] = { family: settings.theme.fontFamily, weight: "700", size: 32, color: "rgba(255, 255, 255, 1)" };
-  header["headerDescription"] = { family: settings.theme.fontFamily, weight: "400", size: 16, color: "rgba(255, 255, 255, 1)" };
+  header["headerTitle"] = { family: settings.themeEditor.defaultFontFamily, weight: "700", size: 32, color: "rgba(255, 255, 255, 1)" };
+  header["headerDescription"] = { family: settings.themeEditor.defaultFontFamily, weight: "400", size: 16, color: "rgba(255, 255, 255, 1)" };
 
   currentThemeCssVariables = themeModel.cssVariables || {};
   expect(currentThemeCssVariables["--sjs-font-headertitle-color"]).toBe("rgba(255, 255, 255, 1)");
