@@ -26,7 +26,7 @@ export class ToolboxToolViewModel extends Base {
   public onMouseOver(itemValue, mouseoverEvent) {
     this.model.actions.forEach(action => {
       if (action === itemValue) {
-        itemValue.showPopup();
+        setTimeout(() => itemValue.showPopup(), 300);
       } else {
         action.hidePopup();
       }

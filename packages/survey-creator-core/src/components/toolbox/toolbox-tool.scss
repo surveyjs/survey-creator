@@ -6,7 +6,7 @@
   align-items: center;
   z-index: 20;
   outline: none;
-  padding: calcSize(1) calcSize(1.5);
+  padding: 0 calcSize(1.5);
 
   sv-svg-icon,
   .sv-svg-icon {
@@ -22,6 +22,7 @@
   .sv-svg-icon use {
     fill: $foreground-light;
   }
+    padding: calcSize(1) 0;
 }
 
 //is visible only on hover
@@ -31,7 +32,8 @@
   box-sizing: border-box;
   align-items: center;
   margin-right: 0;
-  margin-left: calcSize(-1.5);
+  margin-left: calcSize(-4.5);
+    height: calcSize(5);
 
   .svc-toolbox__item-icon {
     position: absolute;
@@ -102,7 +104,7 @@
   color: $foreground-light;
 }
 
-.svc-toolbox__item:hover,
+.svc-toolbox__tool:hover,
 .svc-toolbox__item:focus {
   .svc-toolbox__item-banner {
     max-width: calcSize(100);
