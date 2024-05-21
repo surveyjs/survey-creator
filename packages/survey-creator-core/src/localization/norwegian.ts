@@ -42,6 +42,14 @@ export var nbStrings = {
     signaturepad: "Signatur",
     buttongroup: "Knappegruppe"
   },
+  toolboxCategories: {
+    general: "Generelt",
+    choice: "Choice Spørsmål",
+    text: "Spørsmål om tekstinndata",
+    containers: "Beholdere",
+    matrix: "Matrise Spørsmål",
+    misc: "Misc",
+  },
   // Strings in SurveyJS Creator
   ed: {
     defaultLocale: "Standard ({0})",
@@ -111,12 +119,6 @@ export var nbStrings = {
     "property-grid": "Innstillinger",
     propertyGridFilteredTextPlaceholder: "Skriv for å søke ...",
     propertyGridNoResultsFound: "Fant ingen resultater",
-    toolboxGeneralCategory: "Generelt",
-    toolboxChoiceCategory: "Choice Spørsmål",
-    toolboxTextCategory: "Spørsmål om tekstinndata",
-    toolboxContainersCategory: "Beholdere",
-    toolboxMatrixCategory: "Matrise Spørsmål",
-    toolboxMiscCategory: "Misc",
     correctJSON: "Vennligst korriger JSON.",
     surveyResults: "Skjemaresultat: ",
     surveyResultsTable: "Som tabell",

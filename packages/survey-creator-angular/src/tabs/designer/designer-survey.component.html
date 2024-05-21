@@ -4,10 +4,6 @@
       <div *ngIf="survey.renderedHasHeader" [class]="survey.css.header" [survey]="survey" sv-ng-survey-header></div>
     </div>
 
-    <!-- ko if: survey.isShowProgressBarOnTop -->
-    <!-- ko component: { name: survey.getProgressTypeComponent(), params: { model: survey } } -->
-    <!-- /ko -->
-    <!-- /ko -->
     <ng-container *ngIf="creator.pageEditMode !== 'bypage'">
       <ng-container *ngFor="let page of survey.pages">
         <ng-container *ngIf="!model.showNewPage || page !== model.newPage">
@@ -22,10 +18,6 @@
       <svc-designer-pages [model]="model"></svc-designer-pages>
     </ng-container>
 
-    <!-- ko if: survey.isShowProgressBarOnBottom -->
-    <!-- ko component: { name: survey.getProgressTypeComponent(), params: { model: survey } } -->
-    <!-- /ko -->
-    <!-- /ko -->
   </div>
 
   <div *ngIf="creator.showPageNavigator" class="svc-tab-designer__page-navigator">

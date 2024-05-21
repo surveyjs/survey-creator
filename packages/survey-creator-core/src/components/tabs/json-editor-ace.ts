@@ -107,7 +107,7 @@ export class TabJsonEditorAcePlugin
     creator.addPluginTab(
       "editor",
       this,
-      getLocString("ed.jsonEditor"),
+      "ed.jsonEditor",
       "svc-tab-json-editor-ace"
     );
   }

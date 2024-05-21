@@ -42,6 +42,14 @@ var traditionalChineseTranslation = {
     signaturepad: "簽名",
     buttongroup: "按鈕組"
   },
+  toolboxCategories: {
+    general: "常規",
+    choice: "選擇題",
+    text: "文本輸入問題",
+    containers: "器皿",
+    matrix: "矩陣問題",
+    misc: "雜項",
+  },
   // Strings in SurveyJS Creator
   ed: {
     defaultLocale: "預設值 （{0}）",
@@ -111,12 +119,6 @@ var traditionalChineseTranslation = {
     "property-grid": "性能",
     propertyGridFilteredTextPlaceholder: "鍵入以搜尋...",
     propertyGridNoResultsFound: "未找到結果",
-    toolboxGeneralCategory: "常規",
-    toolboxChoiceCategory: "選擇題",
-    toolboxTextCategory: "文本輸入問題",
-    toolboxContainersCategory: "器皿",
-    toolboxMatrixCategory: "矩陣問題",
-    toolboxMiscCategory: "雜項",
     correctJSON: "修正 JSON",
     surveyResults: "問卷結果: ",
     surveyResultsTable: "如表",
@@ -1642,12 +1644,6 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // ed.pasteTooltip: "Paste from clipboard" => "從剪貼簿粘貼"
 // ed.property-grid: "Properties" => "性能"
 // ed.propertyGridFilteredTextPlaceholder: "Type to search..." => "鍵入以搜尋..."
-// ed.toolboxGeneralCategory: "General" => "常規"
-// ed.toolboxChoiceCategory: "Choice Questions" => "選擇題"
-// ed.toolboxTextCategory: "Text Input Questions" => "文本輸入問題"
-// ed.toolboxContainersCategory: "Containers" => "器皿"
-// ed.toolboxMatrixCategory: "Matrix Questions" => "矩陣問題"
-// ed.toolboxMiscCategory: "Misc" => "雜項"
 // ed.surveyResultsTable: "As Table" => "如表"
 // ed.surveyResultsJson: "As JSON" => "作為 JSON"
 // ed.resultsTitle: "Question Title" => "問題標題"

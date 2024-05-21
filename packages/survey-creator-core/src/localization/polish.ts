@@ -42,6 +42,14 @@ var polishStrings = {
     signaturepad: "Podpis",
     buttongroup: "Grupa przycisków"
   },
+  toolboxCategories: {
+    general: "Ogólne",
+    choice: "Pytania wyboru",
+    text: "Pytania dotyczące wprowadzania tekstu",
+    containers: "Pojemniki",
+    matrix: "Pytania macierzowe",
+    misc: "Różne",
+  },
   // Strings in SurveyJS Creator
   ed: {
     defaultLocale: "Domyślne ({0})",
@@ -111,12 +119,6 @@ var polishStrings = {
     "property-grid": "Właściwości",
     propertyGridFilteredTextPlaceholder: "Wpisz, aby wyszukać...",
     propertyGridNoResultsFound: "Nie znaleziono wyników",
-    toolboxGeneralCategory: "Ogólne",
-    toolboxChoiceCategory: "Pytania wyboru",
-    toolboxTextCategory: "Pytania dotyczące wprowadzania tekstu",
-    toolboxContainersCategory: "Pojemniki",
-    toolboxMatrixCategory: "Pytania macierzowe",
-    toolboxMiscCategory: "Różne",
     correctJSON: "Please correct JSON.",
     surveyResults: "Wynik ankiety: ",
     surveyResultsTable: "Jako tabela",
@@ -1642,12 +1644,6 @@ editorLocalization.locales["pl"] = polishStrings;
 // ed.pasteTooltip: "Paste from clipboard" => "Wklejanie ze schowka"
 // ed.property-grid: "Properties" => "Właściwości"
 // ed.propertyGridFilteredTextPlaceholder: "Type to search..." => "Wpisz, aby wyszukać..."
-// ed.toolboxGeneralCategory: "General" => "Ogólne"
-// ed.toolboxChoiceCategory: "Choice Questions" => "Pytania wyboru"
-// ed.toolboxTextCategory: "Text Input Questions" => "Pytania dotyczące wprowadzania tekstu"
-// ed.toolboxContainersCategory: "Containers" => "Pojemniki"
-// ed.toolboxMatrixCategory: "Matrix Questions" => "Pytania macierzowe"
-// ed.toolboxMiscCategory: "Misc" => "Różne"
 // ed.surveyResultsTable: "As Table" => "Jako tabela"
 // ed.surveyResultsJson: "As JSON" => "Jako JSON"
 // ed.resultsTitle: "Question Title" => "Tytuł pytania"

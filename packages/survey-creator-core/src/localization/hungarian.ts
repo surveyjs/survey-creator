@@ -42,6 +42,14 @@ export var huStrings = {
     signaturepad: "Aláírás",
     buttongroup: "Gombcsoport"
   },
+  toolboxCategories: {
+    general: "Általános",
+    choice: "Választási kérdések",
+    text: "Szövegbeviteli kérdések",
+    containers: "Konténerek",
+    matrix: "Mátrix kérdések",
+    misc: "Misc",
+  },
   // Strings in SurveyJS Creator
   ed: {
     defaultLocale: "Alapértelmezett ({0})",
@@ -111,12 +119,6 @@ export var huStrings = {
     "property-grid": "Kellékek",
     propertyGridFilteredTextPlaceholder: "Írja be a kereséshez...",
     propertyGridNoResultsFound: "Nincs találat",
-    toolboxGeneralCategory: "Általános",
-    toolboxChoiceCategory: "Választási kérdések",
-    toolboxTextCategory: "Szövegbeviteli kérdések",
-    toolboxContainersCategory: "Konténerek",
-    toolboxMatrixCategory: "Mátrix kérdések",
-    toolboxMiscCategory: "Misc",
     correctJSON: "Kérem javítsa a JSON-t.",
     surveyResults: "Kérdőív eredménye: ",
     surveyResultsTable: "Táblaként",
