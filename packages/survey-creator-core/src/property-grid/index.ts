@@ -110,7 +110,7 @@ export abstract class PropertyEditorSetupValue implements IPropertyEditorSetup {
   }
   protected createSurvey(): SurveyModel {
     var json = this.getSurveyJSON();
-    setSurveyJSONForPropertyGrid(json, true, false);
+    setSurveyJSONForPropertyGrid(json, false, false);
     return this.options.createSurvey(json, this.getSurveyCreationReason(), this);
   }
   protected abstract getSurveyJSON(): any;
