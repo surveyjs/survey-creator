@@ -142,7 +142,8 @@ export class CreatorPresetToolboxDefinition extends CreatorPresetBase {
   private applyDefinition(creator: SurveyCreatorModel, defintion: Array<ICreatorPresetToolboxItem>): void {
     if (!Array.isArray(defintion)) return;
     const tb = creator.toolbox;
-    defintion.forEach(item => {
+    const def: Array<ICreatorPresetToolboxItem> = JSON.parse(JSON.stringify(defintion));
+    def.forEach(item => {
       if (typeof item === "object" && !!item.name) {
         const action = tb.getItemByName(item.name);
         if (action) {

@@ -1,37 +1,6 @@
 Survey.ComponentCollection.Instance.add({ name: "newrating", title: "SuperRating", elementsJSON: [{ "type": "rating", "name": "superrating", "title": "1", "isRequired": true, "rateMin": 0, "rateMax": 10, "minRateDescription": "1", "maxRateDescription": "2" }] });
 Survey.ComponentCollection.Instance.add({ name: "d2", title: "DDD", questionJSON: { "type": "dropdown", "name": "superrating", "title": "1", "isRequired": true, choices: [1, 2, 3] } });
 
-let confSurvey;
-function getConfSurvey() {
-  if (!confSurvey) {
-    const preset = new SurveyCreatorCore.CreatorPreset();
-    confSurvey = preset.createEditModel(getCreator());
-    preset.onApplied.add((sender, options) => {
-      const json = preset.getJson();
-      if (!!json.tabs && !!json.tabs.items) {
-        const creator = getCreator();
-        creator.addPluginTab("configurator", configuratorPlugin, "Configurator", "svc-tab-configurator", 0);
-      }
-    });
-  }
-  return confSurvey;
-}
-class ConfiguratorTemplateComponent extends React.Component {
-  render() {
-    return (<React.StrictMode>
-      <SurveyReact.Survey model={getConfSurvey()} />
-    </React.StrictMode>);
-  }
-}
-
-SurveyReact.ReactElementFactory.Instance.registerElement(
-  "svc-tab-configurator",
-  (props) => {
-    return React.createElement(ConfiguratorTemplateComponent, props);
-  }
-);
-
-
 let json = {
   completedHtml:
     "<h3>Thank you for your feedback.</h3> <h5>Your thoughts and ideas will help us to create a great product!</h5>",
@@ -182,15 +151,49 @@ SurveyReact.ReactElementFactory.Instance.registerElement(
   }
 );
 
-const creator = new SurveyCreator.SurveyCreator(options);
-function getCreator() { return creator; }
-const configuratorPlugin = {
-  activate: () => { },
-  deactivate: () => { return true; }
-};
-//Add plug-in. We do nothing on activate/deactivate. Place it as first tab and set to "svc-tab-template" the component name
-creator.addPluginTab("configurator", configuratorPlugin, "Configurator", "svc-tab-configurator", 0);
+// class CustomPropertyGridWrapper extends React.Component {
+//   constructor(props) {
+//       super(props);
+//       this.btnClick = this
+//           .btnClick
+//           .bind(this);
+//   }
+//   btnClick() {
+//       alert("The Button is clicked");
+//   }
+//   render() {
+//       const model = this.props.model;
+//       if (!model) 
+//           return null;
+//       const btnStyle = {
+//           width: "100%",
+//           height: "32px"
+//       };
+//       return <div>
+//           <button onClick={this.btnClick} style={btnStyle}>Click me...</button>
+//           <SurveyCreator.PropertyGridComponent model={model}></SurveyCreator.PropertyGridComponent>
+//       </div>;
+//   }
+// }
 
+// SurveyReact
+//   .ReactElementFactory
+//   .Instance
+//   .registerElement("svc-property-grid", (props) => {
+//       return React.createElement(CustomPropertyGridWrapper, props);
+//   });
+/*
+class CreatorSurveyPageComponent2 extends SurveyCreator.CreatorSurveyPageComponent {
+  renderFooter() {
+    return (<div>Some Text {super.renderFooter()}</div>);
+  }
+}
+
+SurveyReact.ReactElementFactory.Instance.registerElement("svc-page", (props) => {
+  return React.createElement(CreatorSurveyPageComponent2, props);
+});
+*/
+const creator = new SurveyCreator.SurveyCreator(options);
 creator.onModified.add((sender, options) => {
   console.log(JSON.stringify(options, null, 3));
 });
