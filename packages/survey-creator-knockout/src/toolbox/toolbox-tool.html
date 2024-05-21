@@ -1,9 +1,6 @@
 <div class="svc-toolbox__tool"
-    data-bind="css: { 'sv-action--hidden': !$data.item.isVisible }, class: $data.item.css, event: { pointerdown: (model, event)=>{onPointerDown(event); return true;}, mouseover: function(model, event) { onMouseOver(model.item, event); return true; }, mouseleave: function(model, event) { onMouseOver(null, event); return true; } }">
+    data-bind="css: { 'sv-action--hidden': !$data.item.isVisible }, class: $data.item.css, event: { pointerdown: (model, event)=>{onPointerDown(event); return true;}, mouseenter: function(model, event) { onMouseEnter(model.item, event); return true; }, mouseleave: function(model, event) { onMouseLeave(null, event); return true; } }">
     <div class="sv-action__content">
-        <!-- ko if: $data.item.needSeparator && !$data.creator.toolbox.showCategoryTitles-->
-        <div class="svc-toolbox__category-separator"></div>
-        <!-- /ko -->
         <!-- ko component: { name: $data.item.component || 'svc-toolbox-item', params: { model: $data, item: $data.item, creator: $data.creator, isCompact: $data.isCompact } } -->
         <!-- /ko -->
     </div>

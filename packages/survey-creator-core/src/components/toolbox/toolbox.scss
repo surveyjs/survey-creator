@@ -75,7 +75,7 @@ _:future,
   height: 1px;
   width: calcSize(6);
   background-color: $border;
-  margin: calcSize(1) 0 calcSize(1.5);
+  margin: calcSize(1) 0;
 }
 
 .svc-toolbox__category-header {
@@ -127,7 +127,7 @@ _:future,
 
   .sv-action__content {
     display: flex;
-    padding-top: calcSize(0.5);
+    padding: calcSize(0.25) 0;
     flex-direction: column;
     align-items: flex-start;
   }

@@ -105,6 +105,7 @@
 }
 
 .svc-toolbox__tool:hover,
+.svc-toolbox__tool--hovered,
 .svc-toolbox__item:focus {
   .svc-toolbox__item-banner {
     max-width: calcSize(100);

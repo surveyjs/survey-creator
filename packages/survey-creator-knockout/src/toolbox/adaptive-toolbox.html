@@ -28,6 +28,9 @@
     <!-- ko if: $data.toolbox.isCompact || categories().length == 1 || !$data.toolbox.showCategoryTitles -->
     <div class="svc-toolbox__category">
       <!-- ko foreach: $data.toolbox.renderedActions -->
+      <!-- ko if: $data.needSeparator && !$parent.toolbox.showCategoryTitles-->
+      <div class="svc-toolbox__category-separator"></div>
+      <!-- /ko -->
       <!-- ko component: { name: 'svc-toolbox-tool', params: { item: $data, creator: $parent.creator, model: $parent.toolbox, isCompact: $parent.toolbox.isCompact } } -->
       <!-- /ko -->
       <!-- /ko -->

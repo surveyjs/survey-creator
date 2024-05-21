@@ -104,6 +104,32 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
     const type = this.typeName;
     return !!type && Serializer.isDescendantOf(type, "panelbase");
   }
+
+  private needToShow = false;
+  private needToHide = false;
+  public showPopupDelayed(delay: number) {
+    this.needToShow = true;
+    this.needToHide = false;
+    setTimeout(() => {
+      if (this.needToShow) {
+        this.needToShow = false;
+        this.showPopup();
+      }
+    }, delay);
+  }
+
+  public hidePopupDelayed(delay: number) {
+    if (this.popupModel?.isVisible) {
+      this.needToHide = true;
+      this.needToShow = false;
+      setTimeout(() => {
+        if (this.needToHide) {
+          this.needToHide = false;
+          this.hidePopup();
+        }
+      }, delay);
+    }
+  }
 }
 
 /**
@@ -180,6 +206,9 @@ export class QuestionToolbox
   activeCategory: string;
   @property({ defaultValue: false }) hasCategories: boolean;
   @property({ defaultValue: true }) canCollapseCategories: boolean;
+
+  @property({ defaultValue: 300 }) subItemsShowDelay: number;
+  @property({ defaultValue: 200 }) subItemsHideDelay: number;
 
   public updateResponsiveness(isCompact: boolean, overflowBehavior: overflowBehaviorType) {
     if (overflowBehavior == "scroll" && this.creator && !this.creator.isTouch) {
