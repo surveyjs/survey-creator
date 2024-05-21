@@ -42,6 +42,14 @@ export var nlStrings = {
     signaturepad: "Handtekening",
     buttongroup: "Knoppengroep"
   },
+  toolboxCategories: {
+    general: "Algemeen",
+    choice: "Keuzevragen",
+    text: "Vragen over tekstinvoer",
+    containers: "Containers",
+    matrix: "Matrix vragen",
+    misc: "MISC",
+  },
   // Strings in SurveyJS Creator
   ed: {
     defaultLocale: "Standaard ({0})",
@@ -111,12 +119,6 @@ export var nlStrings = {
     "property-grid": "Eigenschappen",
     propertyGridFilteredTextPlaceholder: "Typ om te zoeken...",
     propertyGridNoResultsFound: "Geen resultaten gevonden",
-    toolboxGeneralCategory: "Algemeen",
-    toolboxChoiceCategory: "Keuzevragen",
-    toolboxTextCategory: "Vragen over tekstinvoer",
-    toolboxContainersCategory: "Containers",
-    toolboxMatrixCategory: "Matrix vragen",
-    toolboxMiscCategory: "MISC",
     correctJSON: "Corrigeer JSON.",
     surveyResults: "Enquêteresultaat: ",
     surveyResultsTable: "Als tabel",
