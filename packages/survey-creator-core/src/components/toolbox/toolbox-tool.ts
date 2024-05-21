@@ -23,21 +23,24 @@ export class ToolboxToolViewModel extends Base {
     return !this.creator.readOnly;
   }
 
-  public onMouseEnter(itemValue, mouseoverEvent) {
+  private popupHideCompleteCallback = () => {
+    this._node?.classList.remove("svc-toolbox__tool--hovered");
+  }
+  public onMouseOver(itemValue, mouseoverEvent) {
     this._node = mouseoverEvent.currentTarget;
     this._node.classList.add("svc-toolbox__tool--hovered");
     this.model.actions.forEach((action: any) => {
       if (action === itemValue) {
         action.showPopupDelayed(this.creator.toolbox.subItemsShowDelay);
       } else {
-        action.hidePopupDelayed(this.creator.toolbox.subItemsHideDelay);
+        action.hidePopup();
       }
     });
     //mouseoverEvent.stopPropagation();
   }
 
   public onMouseLeave(itemValue, mouseoverEvent) {
-    itemValue.hidePopupDelayed(this.creator.toolbox.subItemsHideDelay);
+    itemValue.hidePopupDelayed(this.creator.toolbox.subItemsHideDelay, this.popupHideCompleteCallback);
   }
 
   public onPointerDown(pointerDownEvent) {
@@ -69,7 +72,7 @@ export class ToolboxToolViewModel extends Base {
 
   private hidePopup() {
     this.item.hidePopup();
-    this._node.classList.remove("svc-toolbox__tool--hovered");
+    this.popupHideCompleteCallback ();
     if (this.model instanceof ListModel) {
       this.model.onItemClick(this.item);
     }

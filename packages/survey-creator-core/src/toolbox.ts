@@ -105,29 +105,37 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
     return !!type && Serializer.isDescendantOf(type, "panelbase");
   }
 
-  private needToShow = false;
-  private needToHide = false;
+  private showPopupTimeout;
+  private hidePopupTimeout;
+  private clearPopupTimeouts() {
+    if(this.showPopupTimeout) clearTimeout(this.showPopupTimeout);
+    if(this.hidePopupTimeout) clearTimeout(this.hidePopupTimeout);
+  }
   public showPopupDelayed(delay: number) {
-    this.needToShow = true;
-    this.needToHide = false;
-    setTimeout(() => {
-      if (this.needToShow) {
-        this.needToShow = false;
-        this.showPopup();
-      }
+
+    this.clearPopupTimeouts();
+    this.showPopupTimeout = setTimeout(() => {
+      this.clearPopupTimeouts();
+
+      this.showPopup();
+
     }, delay);
   }
 
-  public hidePopupDelayed(delay: number) {
+  public hidePopupDelayed(delay: number, endCallback: ()=>{}) {
     if (this.popupModel?.isVisible) {
-      this.needToHide = true;
-      this.needToShow = false;
-      setTimeout(() => {
-        if (this.needToHide) {
-          this.needToHide = false;
-          this.hidePopup();
-        }
+
+      this.clearPopupTimeouts();
+      this.hidePopupTimeout = setTimeout(() => {
+        this.clearPopupTimeouts();
+
+        this.hidePopup();
+        endCallback();
+
       }, delay);
+    } else {
+      this.clearPopupTimeouts();
+      endCallback();
     }
   }
 }
@@ -208,7 +216,7 @@ export class QuestionToolbox
   @property({ defaultValue: true }) canCollapseCategories: boolean;
 
   @property({ defaultValue: 300 }) subItemsShowDelay: number;
-  @property({ defaultValue: 200 }) subItemsHideDelay: number;
+  @property({ defaultValue: 1000 }) subItemsHideDelay: number;
 
   public updateResponsiveness(isCompact: boolean, overflowBehavior: overflowBehaviorType) {
     if (overflowBehavior == "scroll" && this.creator && !this.creator.isTouch) {
