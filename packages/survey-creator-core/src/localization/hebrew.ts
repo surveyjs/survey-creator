@@ -42,7 +42,7 @@ export var hebrewStrings = {
     signaturepad: "חתימה",
     buttongroup: "קבוצת כפתורים"
   },
-  toolbox_categories: {
+  toolboxCategories: {
     general: "כללי",
     choice: "שאלות עם בחירה",
     text: "שאלות טקסטואליות",

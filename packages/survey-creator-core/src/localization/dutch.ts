@@ -42,7 +42,7 @@ export var nlStrings = {
     signaturepad: "Handtekening",
     buttongroup: "Knoppengroep"
   },
-  toolbox_categories: {
+  toolboxCategories: {
     general: "Algemeen",
     choice: "Keuzevragen",
     text: "Vragen over tekstinvoer",

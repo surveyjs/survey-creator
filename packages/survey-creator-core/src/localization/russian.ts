@@ -42,7 +42,7 @@ export var ruStrings = {
     signaturepad: "Подпись",
     buttongroup: "Группа кнопок"
   },
-  toolbox_categories: {
+  toolboxCategories: {
     general: "Общие",
     choice: "Вопросы выбора",
     text: "Вопросы для ввода текста",

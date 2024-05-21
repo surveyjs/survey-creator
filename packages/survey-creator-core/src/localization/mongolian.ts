@@ -42,7 +42,7 @@ export var mnStrings = {
     signaturepad: "Гарын үсэг",
     buttongroup: "Багц товч"
   },
-  toolbox_categories: {
+  toolboxCategories: {
     general: "Ерөнхий",
     choice: "Сонголттой асуултууд",
     text: "Хариулт бичих асуултууд",

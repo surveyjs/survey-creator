@@ -42,7 +42,7 @@ export var huStrings = {
     signaturepad: "Aláírás",
     buttongroup: "Gombcsoport"
   },
-  toolbox_categories: {
+  toolboxCategories: {
     general: "Általános",
     choice: "Választási kérdések",
     text: "Szövegbeviteli kérdések",

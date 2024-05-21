@@ -42,7 +42,7 @@ var spanishTranslation = {
     signaturepad: "Almohadilla de firma",
     buttongroup: "Grupo de botones"
   },
-  toolbox_categories: {
+  toolboxCategories: {
     general: "general",
     choice: "Preguntas de selección",
     text: "Preguntas entrada de texto",

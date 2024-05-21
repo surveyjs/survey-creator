@@ -42,7 +42,7 @@ var polishStrings = {
     signaturepad: "Podpis",
     buttongroup: "Grupa przycisków"
   },
-  toolbox_categories: {
+  toolboxCategories: {
     general: "Ogólne",
     choice: "Pytania wyboru",
     text: "Pytania dotyczące wprowadzania tekstu",

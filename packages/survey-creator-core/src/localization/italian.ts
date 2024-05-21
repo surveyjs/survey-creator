@@ -42,7 +42,7 @@ var italianTranslation = {
     signaturepad: "Pad per la firma",
     buttongroup: "Gruppo di pulsanti"
   },
-  toolbox_categories: {
+  toolboxCategories: {
     general: "Generale",
     choice: "Domande a scelta",
     text: "Domande sull'input di testo",

@@ -42,7 +42,7 @@ export var czStrings = {
     signaturepad: "Podpisová podložka",
     buttongroup: "Skupina tlačítek"
   },
-  toolbox_categories: {
+  toolboxCategories: {
     general: "Obecné",
     choice: "Výběrové otázky",
     text: "Textové otázky",

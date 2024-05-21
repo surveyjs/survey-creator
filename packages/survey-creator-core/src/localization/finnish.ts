@@ -42,7 +42,7 @@ export var fiStrings = {
     signaturepad: "Allekirjoitusalusta",
     buttongroup: "Painike-ryhmä"
   },
-  toolbox_categories: {
+  toolboxCategories: {
     general: "Yleinen",
     choice: "Valintaa koskevat kysymykset",
     text: "Tekstinsyöttökysymykset",

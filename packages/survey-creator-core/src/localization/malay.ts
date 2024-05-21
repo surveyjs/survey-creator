@@ -42,7 +42,7 @@ export var msStrings = {
     signaturepad: "Pad tandatangan",
     buttongroup: "Kumpulan Butang"
   },
-  toolbox_categories: {
+  toolboxCategories: {
     general: "Umum",
     choice: "Soalan Pilihan",
     text: "Soalan Input Teks",

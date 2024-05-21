@@ -42,7 +42,7 @@ export var turkishStrings = {
     signaturepad: "İmza Defteri",
     buttongroup: "Düğme Grubu"
   },
-  toolbox_categories: {
+  toolboxCategories: {
     general: "Genel",
     choice: "Seçim Soruları",
     text: "Metin Girişi Soruları",

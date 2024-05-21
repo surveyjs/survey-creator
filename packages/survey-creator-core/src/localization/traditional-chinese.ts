@@ -42,7 +42,7 @@ var traditionalChineseTranslation = {
     signaturepad: "簽名",
     buttongroup: "按鈕組"
   },
-  toolbox_categories: {
+  toolboxCategories: {
     general: "常規",
     choice: "選擇題",
     text: "文本輸入問題",
