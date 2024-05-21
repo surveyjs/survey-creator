@@ -633,11 +633,12 @@ test("Test options.allowEditExpressionsInTextEditor", () => {
   options.allowEditExpressionsInTextEditor = false;
   var propertyGrid = new PropertyGridModelTester(question, options);
   var conditionQuestion = propertyGrid.survey.getQuestionByName("visibleIf");
-  var expressionQuestion = propertyGrid.survey.getQuestionByName(
-    "defaultValueExpression"
-  );
+  var expressionQuestion = propertyGrid.survey.getQuestionByName("defaultValueExpression");
   expect(conditionQuestion.isReadOnly).toBeTruthy();
   expect(expressionQuestion.isReadOnly).toBeFalsy();
+  expect(conditionQuestion.getTitleToolbar()).toBeTruthy();
+  expect(conditionQuestion.titleActions).toHaveLength(3);
+  expect(conditionQuestion.titleActions[2].enabled).toBeTruthy();
 
   options.allowEditExpressionsInTextEditor = true;
   propertyGrid = new PropertyGridModelTester(question, options);

@@ -50,6 +50,9 @@ export class PropertyGridEditorCondition extends PropertyGridEditorExpression {
   ): IPropertyEditorSetup {
     return new ConditionEditor((<any>obj).getSurvey(), obj, options, prop.name);
   }
+  public isPropertyEditorSetupEnabled(obj: Base, prop: JsonObjectProperty, question: Question, options: ISurveyCreatorOptions): boolean {
+    return true;
+  }
 }
 
 PropertyGridEditorCollection.register(new PropertyGridEditorExpression());
