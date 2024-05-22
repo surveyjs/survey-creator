@@ -13,7 +13,8 @@ import {
   Serializer,
   SurveyModel,
   DragOrClickHelper,
-  PopupModel
+  PopupModel,
+  CssClassBuilder
 } from "survey-core";
 import { SurveyCreatorModel, toolboxLocationType } from "./creator-base";
 import { editorLocalization, getLocString } from "./editorLocalization";
@@ -105,6 +106,18 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
     return !!type && Serializer.isDescendantOf(type, "panelbase");
   }
 
+  @property({ defaultValue: false }) isPressed: boolean;
+  @property({ defaultValue: false }) isHovered: boolean;
+
+  public get classNames(): string {
+    return new CssClassBuilder()
+      .append("svc-toolbox__tool")
+      .append(this.css)
+      .append("svc-toolbox__tool--hovered", this.isHovered)
+      .append("svc-toolbox__tool--pressed", this.isPressed)
+      .toString();
+  }
+
   private showPopupTimeout;
   private hidePopupTimeout;
   private clearPopupTimeouts() {
@@ -130,12 +143,12 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
         this.clearPopupTimeouts();
 
         this.hidePopup();
-        endCallback();
+        this.isHovered = false;
 
       }, delay);
     } else {
       this.clearPopupTimeouts();
-      endCallback();
+      this.isHovered = false;
     }
   }
 }
@@ -216,7 +229,7 @@ export class QuestionToolbox
   @property({ defaultValue: true }) canCollapseCategories: boolean;
 
   @property({ defaultValue: 300 }) subItemsShowDelay: number;
-  @property({ defaultValue: 1000 }) subItemsHideDelay: number;
+  @property({ defaultValue: 300 }) subItemsHideDelay: number;
 
   public updateResponsiveness(isCompact: boolean, overflowBehavior: overflowBehaviorType) {
     if (overflowBehavior == "scroll" && this.creator && !this.creator.isTouch) {

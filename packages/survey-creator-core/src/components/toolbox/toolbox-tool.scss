@@ -121,6 +121,7 @@
 
 .svc-toolbox:not(.svc-toolbox--compact) {
   .svc-toolbox__item:not(.sv-dots):focus,
+  .svc-toolbox__tool--hovered:not(.sv-dots),
   .svc-toolbox__item:not(.sv-dots):hover {
     overflow: hidden;
     border-radius: calcSize(12.5);

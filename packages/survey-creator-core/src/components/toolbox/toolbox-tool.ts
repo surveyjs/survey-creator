@@ -1,5 +1,5 @@
-import { Base, SurveyModel, DragOrClickHelper, ActionContainer, ListModel, BaseAction } from "survey-core";
-import { IQuestionToolboxItem } from "../../toolbox";
+import { Base, SurveyModel, DragOrClickHelper, ActionContainer, ListModel, BaseAction, property, CssClassBuilder } from "survey-core";
+import { IQuestionToolboxItem, QuestionToolboxItem } from "../../toolbox";
 import { SurveyCreatorModel } from "../../creator-base";
 import { DragDropSurveyElements } from "../../survey-elements";
 export class ToolboxToolViewModel extends Base {
@@ -19,28 +19,28 @@ export class ToolboxToolViewModel extends Base {
     this.hidePopup();
   };
 
+  public get toolboxItem() {
+    return this.item as QuestionToolboxItem;
+  }
+
   public get allowAdd() {
     return !this.creator.readOnly;
   }
 
-  private popupHideCompleteCallback = () => {
-    this._node?.classList.remove("svc-toolbox__tool--hovered");
-  }
   public onMouseOver(itemValue, mouseoverEvent) {
-    this._node = mouseoverEvent.currentTarget;
-    this._node.classList.add("svc-toolbox__tool--hovered");
+    this.toolboxItem.isHovered = true;
     this.model.actions.forEach((action: any) => {
       if (action === itemValue) {
         action.showPopupDelayed(this.creator.toolbox.subItemsShowDelay);
       } else {
-        action.hidePopup();
+        action.hidePopupDelayed(this.creator.toolbox.subItemsHideDelay);
       }
     });
     //mouseoverEvent.stopPropagation();
   }
 
   public onMouseLeave(itemValue, mouseoverEvent) {
-    itemValue.hidePopupDelayed(this.creator.toolbox.subItemsHideDelay, this.popupHideCompleteCallback);
+    itemValue.hidePopupDelayed(this.creator.toolbox.subItemsHideDelay);
   }
 
   public onPointerDown(pointerDownEvent) {
@@ -51,16 +51,13 @@ export class ToolboxToolViewModel extends Base {
     if (this.item.id.indexOf("dotsItem-id") === 0) return true; //toolbox responsive popup
     this.dragOrClickHelper.onPointerDown(pointerDownEvent);
 
-    this._node = pointerDownEvent.currentTarget;
-    this._node.classList.add("svc-toolbox__tool--pressed");
+    this.toolboxItem.isPressed = true;
     document.addEventListener("pointerup", this.onPointerUp);
     this.creator?.onDragDropItemStart();
   }
 
-  private _node: any
   private onPointerUp = (pointerUpEvent) => {
-    this._node.classList.remove("svc-toolbox__tool--pressed");
-    this._node = null;
+    this.toolboxItem.isPressed = false;
     document.removeEventListener("pointerup", this.onPointerUp);
   }
 
@@ -71,8 +68,8 @@ export class ToolboxToolViewModel extends Base {
   };
 
   private hidePopup() {
-    this.item.hidePopup();
-    this.popupHideCompleteCallback ();
+    this.toolboxItem.hidePopup();
+    this.toolboxItem.isHovered = false;
     if (this.model instanceof ListModel) {
       this.model.onItemClick(this.item);
     }
