@@ -340,7 +340,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       mode: "small",
       component: "sv-action-bar-item",
       action: () => {
-        this.exportToFile(settings.theme.exportFileName);
+        this.exportToFile(settings.themeEditor.exportFileName);
       }
     });
     items.push(this.exportAction);
