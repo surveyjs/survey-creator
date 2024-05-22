@@ -312,7 +312,6 @@ Serializer.addClass(
         if (!!editor) {
           editor.allowEmptyValue = true;
           editor.enableIf = "{composite.backgroundColorSwitch} = 'custom'";
-          editor.descriptionLocation = "hidden";
         }
       }
     },
@@ -370,7 +369,6 @@ Serializer.addClass(
       onPropertyEditorUpdate: function (obj: any, editor: any) {
         if (!!editor) {
           editor.renderAs = "checkbox";
-          editor.descriptionLocation = "hidden";
         }
       }
     },
@@ -406,7 +404,6 @@ Serializer.addProperties("headersettings", [
     visibleIf: (obj) => obj.headerView === "advanced",
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
-        editor.descriptionLocation = "hidden";
         editor.allowEmptyColorValue = true;
       }
     },
@@ -419,7 +416,6 @@ Serializer.addProperties("headersettings", [
     visibleIf: (obj) => obj.headerView === "advanced",
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
-        editor.descriptionLocation = "hidden";
         editor.allowEmptyColorValue = true;
       }
     },

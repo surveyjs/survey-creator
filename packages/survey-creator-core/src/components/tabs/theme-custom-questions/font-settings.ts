@@ -113,7 +113,6 @@ export function updateFontSettingsJSON() {
   config.json.elementsJSON = getElementsJSON();
 }
 
-
 export function fontsettingsToCssVariable(value: any = {}, property: JsonObjectProperty, themeCssVariables: { [index: string]: string }) {
   Object.keys(value).forEach(key => {
     const propertyName = `--sjs-font-${property.name.toLocaleLowerCase()}-${key}`;

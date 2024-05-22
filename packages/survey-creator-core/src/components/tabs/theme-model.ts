@@ -744,20 +744,10 @@ Serializer.addClass(
       type: "elementsettings",
       name: "editorPanel",
       displayName: getLocString("theme.backgroundCornerRadius"),
-      onPropertyEditorUpdate: function (obj: any, editor: any) {
-        if (!!editor) {
-          editor.descriptionLocation = "hidden";
-        }
-      },
     }, {
       type: "elementsettings",
       name: "questionPanel",
       displayName: getLocString("theme.backgroundCornerRadius"),
-      onPropertyEditorUpdate: function (obj: any, editor: any) {
-        if (!!editor) {
-          editor.descriptionLocation = "hidden";
-        }
-      },
     },
   ], (json) => { return new ThemeModel(); }
 );
@@ -843,11 +833,6 @@ Serializer.addProperties("theme",
     isSerializable: false,
     name: "generalPrimaryColor",
     displayName: getLocString("theme.primaryColor"),
-    onPropertyEditorUpdate: function (obj: any, editor: any) {
-      if (!!editor) {
-        editor.descriptionLocation = "hidden";
-      }
-    }
   }, {
     type: "dropdown",
     name: "--sjs-font-family",
@@ -856,7 +841,6 @@ Serializer.addProperties("theme",
     choices: [].concat(DefaultFonts),
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
-        editor.descriptionLocation = "hidden";
         editor.allowClear = false;
       }
     }
@@ -877,11 +861,6 @@ Serializer.addProperties("theme",
       weight: "700",
       size: 24
     },
-    onPropertyEditorUpdate: function (obj: any, editor: any) {
-      if (!!editor) {
-        editor.descriptionLocation = "hidden";
-      }
-    },
   }, {
     type: "fontsettings",
     name: "pageDescription",
@@ -891,20 +870,10 @@ Serializer.addProperties("theme",
       weight: "700",
       size: 24
     },
-    onPropertyEditorUpdate: function (obj: any, editor: any) {
-      if (!!editor) {
-        editor.descriptionLocation = "hidden";
-      }
-    },
   }, {
     type: "boxshadowsettings",
     name: "--sjs-shadow-small",
     displayName: getLocString("theme.shadow"),
-    onPropertyEditorUpdate: function (obj: any, editor: any) {
-      if (!!editor) {
-        editor.descriptionLocation = "hidden";
-      }
-    }
   }, {
     type: "fontsettings",
     name: "questionTitle",
@@ -913,11 +882,6 @@ Serializer.addProperties("theme",
       family: settings.themeEditor.defaultFontFamily,
       weight: "600",
       size: 16,
-    },
-    onPropertyEditorUpdate: function (obj: any, editor: any) {
-      if (!!editor) {
-        editor.descriptionLocation = "hidden";
-      }
     },
   }, {
     type: "fontsettings",
@@ -928,21 +892,11 @@ Serializer.addProperties("theme",
       weight: "400",
       size: 16
     },
-    onPropertyEditorUpdate: function (obj: any, editor: any) {
-      if (!!editor) {
-        editor.descriptionLocation = "hidden";
-      }
-    },
   },
   {
     type: "boxshadowsettings",
     name: "--sjs-shadow-inner",
     displayName: getLocString("theme.shadow"),
-    onPropertyEditorUpdate: function (obj: any, editor: any) {
-      if (!!editor) {
-        editor.descriptionLocation = "hidden";
-      }
-    }
   }, {
     type: "fontsettings",
     name: "editorFont",
@@ -952,11 +906,6 @@ Serializer.addProperties("theme",
       weight: "400",
       size: 16
     },
-    onPropertyEditorUpdate: function (obj: any, editor: any) {
-      if (!!editor) {
-        editor.descriptionLocation = "hidden";
-      }
-    },
   }, {
     type: "colorsettings",
     name: "--sjs-border-default",
@@ -965,7 +914,6 @@ Serializer.addProperties("theme",
       if (!!editor) {
         editor.colorTitle = getLocString("theme.borderDefault");
         editor.colorTitleLocation = "left";
-        editor.descriptionLocation = "hidden";
       }
     }
   },
@@ -977,7 +925,6 @@ Serializer.addProperties("theme",
       if (!!editor) {
         editor.colorTitle = getLocString("theme.borderLight");
         editor.colorTitleLocation = "left";
-        editor.descriptionLocation = "hidden";
       }
     }
   },
@@ -1069,7 +1016,6 @@ Serializer.addProperties("theme",
       if (!!editor) {
         editor.colorTitle = getLocString("theme.primaryDefaultColor");
         editor.colorTitleLocation = "left";
-        editor.descriptionLocation = "hidden";
       }
     }
   }, {
@@ -1080,7 +1026,6 @@ Serializer.addProperties("theme",
       if (!!editor) {
         editor.colorTitle = getLocString("theme.primaryDarkColor");
         editor.colorTitleLocation = "left";
-        editor.descriptionLocation = "hidden";
       }
     }
   }, {
@@ -1091,7 +1036,6 @@ Serializer.addProperties("theme",
       if (!!editor) {
         editor.colorTitle = getLocString("theme.primaryLightColor");
         editor.colorTitleLocation = "left";
-        editor.descriptionLocation = "hidden";
       }
     }
   }, {
@@ -1102,7 +1046,6 @@ Serializer.addProperties("theme",
       if (!!editor) {
         editor.colorTitle = getLocString("theme.primaryForecolor");
         editor.colorTitleLocation = "left";
-        editor.descriptionLocation = "hidden";
       }
     }
   }, {
@@ -1113,7 +1056,6 @@ Serializer.addProperties("theme",
       if (!!editor) {
         editor.colorTitle = getLocString("theme.primaryForecolorLight");
         editor.colorTitleLocation = "left";
-        editor.descriptionLocation = "hidden";
       }
     }
   },

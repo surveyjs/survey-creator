@@ -1099,12 +1099,6 @@ test("Modify property grid: add/hide properties", (): any => {
       weight: "600",
       size: 16,
     },
-    onPropertyEditorUpdate: function (obj: any, editor: any) {
-      if (!!editor) {
-        editor.visibleIf = "{advancedmode} = true";
-        editor.descriptionLocation = "hidden";
-      }
-    },
   });
 
   Serializer.addProperty("theme", {
@@ -1115,12 +1109,6 @@ test("Modify property grid: add/hide properties", (): any => {
       family: "Open Sans",
       weight: "600",
       size: 16,
-    },
-    onPropertyEditorUpdate: function (obj: any, editor: any) {
-      if (!!editor) {
-        editor.visibleIf = "{advancedmode} = true";
-        editor.descriptionLocation = "hidden";
-      }
     },
   });
 
