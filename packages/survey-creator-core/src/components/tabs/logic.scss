@@ -25,11 +25,11 @@
 
   &:hover:enabled,
   &.sv-focused--by-key {
-    background-color: $primary-light;
+    background-color: var(--ctr-collapse-button-background-color-hovered, $primary-light);
     outline: none;
 
     use {
-      fill: $primary;
+      fill: var(--ctr-collapse-button-icon-color-hovered, $primary);
     }
   }
 }
@@ -41,11 +41,11 @@
 
   &:hover:enabled,
   &.sv-focused--by-key {
-    background-color: $red-light;
+    background-color: var(--ctr-library-action-button-background-color-negative-hovered, $red-light);
     outline: none;
 
     use {
-      fill: $red;
+      fill: var(--lbr-action-button-icon-color-negative, $red);
     }
   }
 }
@@ -67,7 +67,7 @@
   }
 
   .sv-action-bar-item__icon use {
-    fill: $red;
+    fill: var(--lbr-action-button-icon-color-negative, $red);
   }
 }
 
@@ -192,8 +192,8 @@
   button.sl-panel__done-button {
     width: 100%;
     margin: calcSize(2) 0 calcSize(10) 0;
-    color: $primary;
-    background-color: $primary-light;
+    color: var(--ctr-expression-item-text-color-button, $primary);
+    background-color: var(--ctr-expression-item-background-color-button, $primary-light);
 
     font-family: $font-family;
     font-size: calcSize(2);
@@ -208,8 +208,8 @@
   }
 
   button:hover:enabled {
-    background-color: $primary;
-    color: $primary-foreground;
+    background-color: var(--ctr-expression-item-background-color-button-hovered, $primary);
+    color: var(--ctr-expression-item-text-color-button-hovered, $primary-foreground);
   }
 
   .sv-action-bar-item__title {
@@ -255,14 +255,15 @@
     margin: -2px;
   }
 }
+
 .sl-question__title {
-  color: $foreground;
+  color: var(--ctr-expression-item-text-color-function, $foreground);
   font-size: calcSize(2);
   line-height: calcSize(3);
   margin: 0;
   font-weight: 600;
 
-  span + span {
+  span+span {
     display: none;
   }
 }

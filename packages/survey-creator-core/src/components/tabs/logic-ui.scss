@@ -145,7 +145,7 @@
 
 .svc-logic-condition-remove.svc-icon-remove:hover,
 .svc-logic-condition-remove.svc-icon-remove:focus {
-  background-color: $red-light;
+  background-color: var(--ctr-library-action-button-background-color-negative-hovered, $red-light);
 }
 
 .svc-logic-condition-remove-question {
@@ -202,8 +202,8 @@
   }
 
   .svc-logic-tab__content-action--disabled .svc-text {
-    color: $foreground;
-    opacity: 0.25;
+    color: var(--ctr-button-text-color-disabled, $foreground);
+    opacity: var(--ctr-button-text-opacity-disabled, 0.25);
   }
 
   .sd-paneldynamic__panel-wrapper--in-row {
@@ -298,7 +298,7 @@
 }
 
 .svc-logic-tab__leave-apply-button {
-  background-color: $red;
+  background-color: var(--ctr-button-background-color-danger, $red);
 }
 
 .sl-list {
