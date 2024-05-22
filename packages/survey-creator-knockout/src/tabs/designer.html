@@ -29,7 +29,7 @@
       </div>
       <!-- /ko -->
 
-      <!-- ko if: survey.isShowProgressBarOnTop -->
+      <!-- ko if: false && survey.isShowProgressBarOnTop -->
       <!-- ko component: { name: survey.getProgressTypeComponent(), params: { model: survey } } -->
       <!-- /ko -->
       <!-- /ko -->
@@ -52,7 +52,7 @@
         params="survey: survey, page: pagesController.page2Display, creator: creator"></svc-page>
       <!-- /ko -->
 
-      <!-- ko if: survey.isShowProgressBarOnBottom -->
+      <!-- ko if: false && survey.isShowProgressBarOnBottom -->
       <!-- ko component: { name: survey.getProgressTypeComponent(), params: { model: survey } } -->
       <!-- /ko -->
       <!-- /ko -->

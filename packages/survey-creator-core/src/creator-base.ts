@@ -346,11 +346,21 @@ export class SurveyCreatorModel extends Base
 
   protected plugins: { [name: string]: ICreatorPlugin } = {};
 
+  /**
+   * Adds a custom tab to Survey Creator.
+   * 
+   * [View Demo](https://surveyjs.io/survey-creator/examples/modify-tab-bar/ (linkStyle))
+   * @param name A unique tab ID. 
+   * @param plugin An object that allows you to handle user interactions with the tab.
+   * @param title A tab caption. If `title` is undefined, the `name` argument value is displayed instead. To localize the caption, add its translations to the `ed` object within [localization dictionaries](https://github.com/surveyjs/survey-creator/tree/master/packages/survey-creator-core/src/localization) and pass `ed.propertyName` as the `title` argument.
+   * @param componentName The name of the component that renders tab markup. Default value: `"svc-tab-" + name`.
+   * @param index A zero-based index that specifies the tab's position relative to other tabs.
+   */
   public addPluginTab(
     name: string,
     plugin: ICreatorPlugin,
     title?: string,
-    componentContent?: string,
+    componentName?: string,
     index?: number
   ) {
     const locStrName = !title ? "ed." + name : (title.indexOf("ed.") == 0 ? title : "");
@@ -361,7 +371,7 @@ export class SurveyCreatorModel extends Base
       id: name,
       locTitleName: locStrName,
       title: title,
-      componentContent: componentContent ? componentContent : "svc-tab-" + name,
+      componentContent: componentName ? componentName : "svc-tab-" + name,
       data: plugin,
       action: () => { this.makeNewViewActive(name); },
       active: this.viewType === name,
@@ -447,7 +457,7 @@ export class SurveyCreatorModel extends Base
    * [View Demo](https://surveyjs.io/survey-creator/examples/hide-category-from-property-grid/ (linkStyle))
    */
   public onShowingProperty: EventBase<SurveyCreatorModel, PropertyAddingEvent> = this.addCreatorEvent<SurveyCreatorModel, PropertyAddingEvent>();
-  public onCanShowProperty: EventBase<SurveyCreatorModel, PropertyAddingEvent> = this.onShowingProperty;
+  public onCanShowProperty: EventBase<SurveyCreatorModel, any> = this.onShowingProperty;
   /**
    * This event is obsolete. Use the [`onSurveyInstanceCreated`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onSurveyInstanceCreated) event instead.
    * @deprecated
@@ -2560,7 +2570,7 @@ export class SurveyCreatorModel extends Base
   }
   /**
    * Collapses a specified category in Property Grid.
-   * @param name A [category name](https://surveyjs.io/survey-creator/documentation/property-grid-customization#category).
+   * @param name A [category name](https://surveyjs.io/form-library/documentation/customize-question-types/add-custom-properties-to-a-form#category).
    * @see expandPropertyGridCategory
    */
   public collapsePropertyGridCategory(name: string) {
@@ -2570,7 +2580,7 @@ export class SurveyCreatorModel extends Base
   }
   /**
    * Expands a specified category in Property Grid.
-   * @param name A [category name](https://surveyjs.io/survey-creator/documentation/property-grid-customization#category).
+   * @param name A [category name](https://surveyjs.io/form-library/documentation/customize-question-types/add-custom-properties-to-a-form#category).
    * @see collapsePropertyGridCategory
    */
   public expandPropertyGridCategory(name: string) {

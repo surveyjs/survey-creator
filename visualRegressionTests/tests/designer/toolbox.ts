@@ -190,10 +190,10 @@ test("Toolbox category collapsed", async (t) => {
     await t.resizeWindow(2560, 1440);
     const toolboxElement = Selector(".svc-toolbox");
     await setJSON({ pages: [{ name: "page1" }] });
-    await ClientFunction(() => { window["creator"].toolbox.changeCategories([{ name: "matrixdropdown", category: "matrix" }]); })();
+    await ClientFunction(() => { window["creator"].toolbox.changeCategories([{ name: "matrixdropdown", category: "matrix-custom" }]); })();
     await ClientFunction(() => { window["creator"].toolbox.showCategoryTitles = true; })();
     await ClientFunction(() => { window["creator"].toolbox.allowExpandMultipleCategories = true; })();
-    await t.expect(Selector(".svc-toolbox__category-header--collapsed").withText("matrix").visible).ok();
+    await t.expect(Selector(".svc-toolbox__category-header--collapsed").withText("matrix-custom").visible).ok();
     await takeElementScreenshot("toolbox-categories-collapsed.png", toolboxElement, t, comparer);
   });
 });

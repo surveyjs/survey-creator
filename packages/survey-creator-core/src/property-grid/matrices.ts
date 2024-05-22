@@ -79,20 +79,6 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     this.initializePlaceholder(rowObj, q, options.columnName);
     q.property = Serializer.findProperty(rowObj.getType(), options.columnName);
   }
-  public onMatrixCellValueChanged(obj: Base, options: any) {
-    const matrix = options.question;
-    const column = options.column;
-    if (matrix && column && column.isUnique) {
-      matrix.visibleRows.forEach(row => {
-        if (row !== options.row) {
-          const question = <Question>row.getQuestionByColumnName(options.columnName);
-          if (question && question.errors.length > 0 && !question.isEmpty()) {
-            matrix.checkIfValueInRowDuplicated(row, question);
-          }
-        }
-      });
-    }
-  }
   public onGetMatrixRowAction(
     obj: Base,
     options: any,
@@ -348,12 +334,13 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     if (!className) {
       className = prop.baseClassName;
     }
-    var columns = this.getColumnsJSON(obj, prop, propNames, options, propGridDefinition);
-    var res: any = {
+    const columns = this.getColumnsJSON(obj, prop, propNames, options, propGridDefinition);
+    const res: any = {
       type: "matrixdynamic",
       detailPanelMode: "underRow",
       cellType: "text",
       rowCount: 0,
+      keyName: this.getKeyName(prop),
       columns: columns,
       showHeader: columns.length > 1,
       hideColumnsIfEmpty: true,
@@ -393,15 +380,23 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
   protected filterPropertyNames(propNames: Array<string>, options: ISurveyCreatorOptions): Array<string> {
     return propNames;
   }
+  private getClassNameByProp(prop: JsonObjectProperty): string {
+    return !!prop.className ? prop.className: prop.baseClassName;
+  }
+  private getKeyName(prop: JsonObjectProperty): string {
+    const className = this.getClassNameByProp(prop);
+    if(!className) return "";
+    const props = Serializer.getProperties(className);
+    for(let i = 0; i < props.length; i ++) {
+      if(props[i].isUnique) return props[i].name;
+    }
+    return "";
+  }
   protected getColumnsJSON(obj: Base, prop: JsonObjectProperty, propNames: Array<string>,
     options: ISurveyCreatorOptions, propGridDefinition: ISurveyPropertyGridDefinition
   ) {
-    var className = prop.className;
-    if (!className) {
-      className = prop.baseClassName;
-    }
     var res = new PropertyJSONGenerator(obj, options, undefined, undefined, propGridDefinition).createColumnsJSON(
-      className,
+      this.getClassNameByProp(prop),
       this.filterPropertyNames(propNames, options)
     );
     for (var i = 0; i < res.length; i++) {
@@ -573,7 +568,6 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
     }
   }
   public onMatrixCellValueChanged(obj: Base, options: any) {
-    super.onMatrixCellValueChanged(obj, options);
     if (obj instanceof QuestionRatingModel && options.columnName == "icon") {
       //options.cellQuestion.html = "<svg style='fill: red'><use xlink:href=\"#" + options.cellQuestion.value + "\"></use></svg>";
       options.cellQuestion.html = options.cellQuestion.value;
@@ -786,7 +780,6 @@ export abstract class PropertyGridEditorMatrixMultipleTypes extends PropertyGrid
     }
   }
   public onMatrixCellValueChanged(obj: Base, options: any) {
-    super.onMatrixCellValueChanged(obj, options);
     if (options.columnName !== this.getObjTypeName()) return;
     var index = options.question.visibleRows.indexOf(options.row);
     if (index < 0) return;

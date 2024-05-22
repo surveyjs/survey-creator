@@ -127,8 +127,10 @@ export class LogicActionTriggerModel extends LogicActionModelBase {
     const newQuestion = tempPanel.getQuestionByName(name);
     if (!!newQuestion) {
       let index = triggerEditorPanel.elements.indexOf(oldQuestion);
+      triggerEditorPanel.blockAnimations();
       triggerEditorPanel.addElement(newQuestion, index);
       oldQuestion.delete();
+      triggerEditorPanel.releaseAnimations();
     }
     if (newQuestion.name === "setValue") {
       this.updateSetValueQuestion(newQuestion);

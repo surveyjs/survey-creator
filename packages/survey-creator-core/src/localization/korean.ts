@@ -42,6 +42,14 @@ export var koreanStrings = {
     signaturepad: "서명",
     buttongroup: "단추 그룹"
   },
+  toolboxCategories: {
+    general: "일반",
+    choice: "선택 질문",
+    text: "텍스트 입력 질문",
+    containers: "컨테이너",
+    matrix: "행렬 질문",
+    misc: "기타",
+  },
   // Strings in SurveyJS Creator
   ed: {
     defaultLocale: "기본값({0})",
@@ -111,12 +119,6 @@ export var koreanStrings = {
     "property-grid": "속성",
     propertyGridFilteredTextPlaceholder: "검색하려면 입력...",
     propertyGridNoResultsFound: "결과를 찾을 수 없습니다.",
-    toolboxGeneralCategory: "일반",
-    toolboxChoiceCategory: "선택 질문",
-    toolboxTextCategory: "텍스트 입력 질문",
-    toolboxContainersCategory: "컨테이너",
-    toolboxMatrixCategory: "행렬 질문",
-    toolboxMiscCategory: "기타",
     correctJSON: "JSON 데이터를 수정하십시오.",
     surveyResults: "설문 결과: ",
     surveyResultsTable: "테이블로",

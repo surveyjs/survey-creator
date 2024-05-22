@@ -335,6 +335,7 @@ jobs:
         pmes.json
         surveyjs_definition.json
       TargetFolder: '$(Build.SourcesDirectory)/service/surveyjs.io/App_Data/DocsEditor'
+      OverWrite: true
       CleanTargetFolder: false
     displayName: 'Copy generated docs to the local surveyjs/service repo'
 

@@ -130,9 +130,9 @@ test("toolbox default categories calculator", (): any => {
     "matrix"
   ]);
   expect(toolbox["getDefaultQuestionCategories"]()).toEqual({
-    "radiogroup": "Choice Questions",
-    "dropdown": "Choice Questions",
-    "matrix": "Matrix Questions" });
+    "radiogroup": "choice",
+    "dropdown": "choice",
+    "matrix": "matrix" });
 });
 
 test("toolbox default categories actions separator", (): any => {
@@ -233,7 +233,7 @@ test("toolbox categories + allowExpandMultipleCategories property", (): any => {
     { name: "comment", category: "comment" },
     { name: "matrix", category: "matrix" }
   ]);
-  expect(toolbox.activeCategory).toEqual("General");
+  expect(toolbox.activeCategory).toEqual("general");
   expect(toolbox.categories[0].collapsed).toBeFalsy();
   toolbox.allowExpandMultipleCategories = true;
   expect(toolbox.categories[0].collapsed).toBeTruthy();
@@ -283,7 +283,7 @@ test("toolbox categories + keepAllCategoriesExpanded property", (): any => {
     { name: "comment", category: "comment" },
     { name: "matrix", category: "matrix" }
   ]);
-  expect(toolbox.activeCategory).toEqual("General");
+  expect(toolbox.activeCategory).toEqual("general");
   expect(toolbox.canCollapseCategories).toBeTruthy();
   toolbox.keepAllCategoriesExpanded = true;
   expect(toolbox.activeCategory).toBeFalsy();
@@ -347,13 +347,14 @@ test("toolbox categories defineCategories, #2", (): any => {
   expect(items[1].name).toBe("comment");
 
   toolbox.defineCategories([
-    { category: "text", items: [{ name: "text" }, "comment"] },
+    { category: "text", title: "Single text item", items: [{ name: "text" }, "comment"] },
     { category: "select", items: ["dropdown", "checkbox", "radiogroup"] },
   ], true);
   expect(toolbox.categories).toHaveLength(3);
   expect(toolbox.categories[0].name).toBe("text");
+  expect(toolbox.categories[0].title).toBe("Single text item");
   expect(toolbox.categories[1].name).toBe("select");
-  expect(toolbox.categories[2].name).toBe("Misc");
+  expect(toolbox.categories[2].name).toBe("misc");
   items = toolbox.categories[0].items;
   expect(items).toHaveLength(2);
   expect(items[0].name).toBe("text");

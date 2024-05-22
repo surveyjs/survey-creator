@@ -184,7 +184,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       visible: false,
       mode: "small",
     }, {
-      items: [{ id: "show-all-strings", title: this.showAllStringsText }, { id: "show-used-strings-only", title: this.showUsedStringsOnlyText }],
+      items: [{ id: "show-all-strings", locTitleName: "ed.translationShowAllStrings" }, { id: "show-used-strings-only", locTitleName: "ed.translationShowUsedStringsOnly" }],
       allowSelection: true,
       onSelectionChanged: (item: IAction) => {
         this.model.showAllStrings = item.id === "show-all-strings";

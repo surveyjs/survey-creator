@@ -25,10 +25,9 @@ export var settings = {
      */
     exportFileName: "survey_translation.csv"
   },
-  theme: {
+  themeEditor: {
     exportFileName: "survey_theme.json",
-    fontFamily: "Open Sans",
-    allowEditHeaderSettings: true,
+    defaultFontFamily: "Open Sans",
   },
   operators: {
     empty: [],

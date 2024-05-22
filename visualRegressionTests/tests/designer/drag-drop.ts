@@ -350,6 +350,55 @@ test("Matrix: Property Grid: Choices", async (t) => {
     await takeElementScreenshot("drag-drop-matrix-pg-choices.png", Selector("[data-name=\"choices\"]"), t, comparer);
   });
 });
+
+test("Matrix: Property Grid: Choices: Scroll", async (t) => {
+  //https://github.com/surveyjs/survey-creator/issues/5484
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1500, 500);
+
+    const patchMatrixDragDropToDisableDrop = ClientFunction(() => {
+      const matrix = window["creator"].designerPropertyGrid.survey.getAllQuestions().filter((q) => q.name === "choices")[0];
+      matrix.dragDropMatrixRows.drop = () => { };
+      matrix.dragDropMatrixRows.domAdapter.drop = () => { };
+    });
+
+    const json = {
+      pages: [
+        {
+          name: "page1",
+          elements: [
+            {
+              "type": "checkbox",
+              "name": "question1",
+              "choices": [
+                "Item 1",
+                "Item 2",
+                "Item 3"
+              ]
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(json);
+
+    await t
+      .click(Selector("[data-name=\"question1\"]"), { speed: 0.5 })
+      .click(getPropertyGridCategory("Choice Options"));
+
+    await patchMatrixDragDropToDisableDrop();
+
+    const Item1 = Selector("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(0);
+    const Item2 = Selector("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(1);
+    const Item3 = Selector("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(2);
+
+    let DragZoneItem2 = Selector("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(1).find(".spg-drag-element__svg");
+    await t.dragToElement(DragZoneItem2, DragZoneItem2, { destinationOffsetX: -1, speed: 0.1 });
+
+    await takeElementScreenshot("drag-drop-matrix-pg-choices-scroll.png", Selector("[data-name=\"choices\"]"), t, comparer);
+  });
+});
+
 // https://github.com/surveyjs/survey-creator/issues/3113
 test("Drag Drop ImagePicker (choices) drop to invalid area", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
