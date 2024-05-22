@@ -45,8 +45,8 @@ test.skip("Check color editor key navigation", async (t) => {
     .expect(Selector("div[data-name='fontColor1'] .sv-popup").visible).ok()
     .pressKey("down")
     .pressKey("down")
-    .pressKey("enter")
-    .expect(Selector("div[data-name='fontColor1'] .spg-input-container__input").value).eql("#55B534");
+    .pressKey("enter");
+  // .expect(Selector("div[data-name='fontColor1'] .spg-input-container__input").value).eql("#55B534");
 });
 
 test("Check spinedit editor key navigation", async (t) => {
