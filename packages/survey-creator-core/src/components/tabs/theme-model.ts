@@ -3,7 +3,7 @@ import { getLocString } from "../../editorLocalization";
 import { PredefinedThemes, Themes } from "./themes";
 import { settings } from "../../creator-settings";
 
-import { DefaultFonts, fontsettingsFromCssVariable, fontsettingsToCssVariable, onSerializeFontSettingsValue } from "./theme-custom-questions/font-settings";
+import { DefaultFonts, fontsettingsFromCssVariable, fontsettingsToCssVariable } from "./theme-custom-questions/font-settings";
 import { elementSettingsFromCssVariable, elementSettingsToCssVariable } from "./theme-custom-questions/element-settings";
 import { createBoxShadowReset } from "./theme-custom-questions/boxshadow-settings";
 import { HeaderModel } from "./header-model";
@@ -570,14 +570,6 @@ export class ThemeModel extends Base implements ITheme {
     return findSuitableTheme(themeName, this.colorPalette, this.isPanelless, probeThemeFullName);
   }
 
-  onSerializeElementSettingsValue(propertyName: string) {
-    const result = { ...this[propertyName] };
-    if (result.cornerRadius != this.getPropertyByName(propertyName).defaultValue?.cornerRadius) {
-      result.cornerRadius = result.cornerRadius + "px";
-    }
-    return result;
-  }
-
   fromJSON(json: ITheme, options?: ILoadFromJSONOptions): void {
     if (!json) return;
     super.fromJSON(json, options);
@@ -763,9 +755,6 @@ Serializer.addClass(
           editor.descriptionLocation = "hidden";
         }
       },
-      onSerializeValue: (obj: ThemeModel) => {
-        return obj.onSerializeElementSettingsValue("editorPanel");
-      }
     }, {
       type: "elementsettings",
       name: "questionPanel",
@@ -776,9 +765,6 @@ Serializer.addClass(
           editor.descriptionLocation = "hidden";
         }
       },
-      onSerializeValue: (obj: ThemeModel) => {
-        return obj.onSerializeElementSettingsValue("questionPanel");
-      }
     },
   ], (json) => { return new ThemeModel(); }
 );
@@ -906,9 +892,6 @@ Serializer.addProperties("theme",
         editor.descriptionLocation = "hidden";
       }
     },
-    onSerializeValue: (obj: ThemeModel) => {
-      return onSerializeFontSettingsValue(obj, "pageTitle");
-    }
   }, {
     type: "fontsettings",
     name: "pageDescription",
@@ -924,9 +907,6 @@ Serializer.addProperties("theme",
         editor.descriptionLocation = "hidden";
       }
     },
-    onSerializeValue: (obj: ThemeModel) => {
-      return onSerializeFontSettingsValue(obj, "pageDescription");
-    }
   }, {
     type: "boxshadowsettings",
     name: "--sjs-shadow-small",
@@ -952,9 +932,6 @@ Serializer.addProperties("theme",
         editor.descriptionLocation = "hidden";
       }
     },
-    onSerializeValue: (obj: ThemeModel) => {
-      return onSerializeFontSettingsValue(obj, "questionTitle");
-    }
   }, {
     type: "fontsettings",
     name: "questionDescription",
@@ -970,9 +947,6 @@ Serializer.addProperties("theme",
         editor.descriptionLocation = "hidden";
       }
     },
-    onSerializeValue: (obj: ThemeModel) => {
-      return onSerializeFontSettingsValue(obj, "questionDescription");
-    }
   },
   {
     type: "boxshadowsettings",
@@ -999,9 +973,6 @@ Serializer.addProperties("theme",
         editor.descriptionLocation = "hidden";
       }
     },
-    onSerializeValue: (obj: ThemeModel) => {
-      return onSerializeFontSettingsValue(obj, "editorFont");
-    }
   }, {
     type: "colorsettings",
     name: "--sjs-border-default",

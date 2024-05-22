@@ -1,7 +1,7 @@
 import { Base, IHeader, IJsonPropertyInfo, ILoadFromJSONOptions, ISaveToJSONOptions, ISurvey, ITheme, Serializer, HorizontalAlignment, VerticalAlignment } from "survey-core";
 import { settings } from "../../creator-settings";
 import { getLocString } from "../../editorLocalization";
-import { fontsettingsFromCssVariable, fontsettingsToCssVariable, onSerializeFontSettingsValue } from "./theme-custom-questions/font-settings";
+import { fontsettingsFromCssVariable, fontsettingsToCssVariable } from "./theme-custom-questions/font-settings";
 import { assign } from "../../utils/utils";
 
 export class HeaderModel extends Base implements IHeader {
@@ -390,9 +390,6 @@ Serializer.addProperties("headersettings", [
     displayName: getLocString("theme.surveyTitle"),
     visibleIf: (obj) => obj.headerView === "basic",
     default: getDefaultTitleSetting(),
-    onSerializeValue: (obj: HeaderModel) => {
-      return onSerializeFontSettingsValue(obj, "surveyTitle");
-    }
   },
   {
     type: "fontsettings",
@@ -400,9 +397,6 @@ Serializer.addProperties("headersettings", [
     displayName: getLocString("theme.surveyDescription"),
     visibleIf: (obj) => obj.headerView === "basic",
     default: getDefaultDescriptionSetting(),
-    onSerializeValue: (obj: HeaderModel) => {
-      return onSerializeFontSettingsValue(obj, "surveyDescription");
-    }
   },
   {
     type: "fontsettings",
@@ -416,9 +410,6 @@ Serializer.addProperties("headersettings", [
         editor.allowEmptyColorValue = true;
       }
     },
-    onSerializeValue: (obj: HeaderModel) => {
-      return onSerializeFontSettingsValue(obj, "headerTitle");
-    }
   },
   {
     type: "fontsettings",
@@ -432,8 +423,5 @@ Serializer.addProperties("headersettings", [
         editor.allowEmptyColorValue = true;
       }
     },
-    onSerializeValue: (obj: HeaderModel) => {
-      return onSerializeFontSettingsValue(obj, "headerDescription");
-    }
   },
 ]);

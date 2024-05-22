@@ -113,19 +113,12 @@ export function updateFontSettingsJSON() {
   config.json.elementsJSON = getElementsJSON();
 }
 
-export function onSerializeFontSettingsValue(obj: Base, propertyName: string) {
-  const result = { ...obj[propertyName] };
-  if (result.size != obj.getPropertyByName(propertyName).defaultValue?.size) {
-    result.size = result.size + "px";
-  }
-  return result;
-}
 
 export function fontsettingsToCssVariable(value: any = {}, property: JsonObjectProperty, themeCssVariables: { [index: string]: string }) {
   Object.keys(value).forEach(key => {
     const propertyName = `--sjs-font-${property.name.toLocaleLowerCase()}-${key}`;
     if (!property.defaultValue || value[key] !== property.defaultValue[key]) {
-      themeCssVariables[propertyName] = value[key];
+      themeCssVariables[propertyName] = value[key] + (key === "size" ? "px" : "");
     } else {
       themeCssVariables[propertyName] = undefined;
     }

@@ -14,7 +14,6 @@ import { ThemeEditorModel } from "../../src/components/tabs/theme-builder";
 import { settings } from "../../src/creator-settings";
 import { assign, parseColor } from "../../src/utils/utils";
 import { PredefinedThemes, Themes } from "../../src/components/tabs/themes";
-import { onSerializeFontSettingsValue } from "../../src/components/tabs/theme-custom-questions/font-settings";
 
 test("Creator top action bar: only theme tab", (): any => {
   const themeBuilderButtonOrder = ["action-undo-theme", "action-redo-theme", "svc-reset-theme", "svc-theme-settings", "svc-theme-import", "svc-theme-export"].join("|");
@@ -1106,9 +1105,6 @@ test("Modify property grid: add/hide properties", (): any => {
         editor.descriptionLocation = "hidden";
       }
     },
-    onSerializeValue: (obj: ThemeModel) => {
-      return onSerializeFontSettingsValue(obj, "custom-question-title");
-    }
   });
 
   Serializer.addProperty("theme", {
@@ -1126,9 +1122,6 @@ test("Modify property grid: add/hide properties", (): any => {
         editor.descriptionLocation = "hidden";
       }
     },
-    onSerializeValue: (obj: ThemeModel) => {
-      return onSerializeFontSettingsValue(obj, "matrix-title");
-    }
   });
 
   Serializer.getProperty("theme", "questionTitle").visible = false;

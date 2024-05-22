@@ -59,7 +59,7 @@ export function elementSettingsToCssVariable(value: any = {}, property: JsonObje
   Object.keys(value).forEach(key => {
     const propertyName = `--sjs-${property.name.toLocaleLowerCase()}-${key}`;
     if (!property.defaultValue || value[key] !== property.defaultValue[key]) {
-      themeCssVariables[propertyName] = value[key];
+      themeCssVariables[propertyName] = value[key] + (key === "cornerRadius" ? "px" : "");
     } else {
       themeCssVariables[propertyName] = undefined;
     }
