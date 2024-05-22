@@ -22,6 +22,7 @@ import {
   QuestionCustomModel,
   PageModel,
   ComputedUpdater,
+  PopupDropdownViewModel,
 } from "survey-core";
 import { PageAdorner } from "../src/components/page";
 import { QuestionAdornerViewModel } from "../src/components/question";
@@ -2093,6 +2094,7 @@ test("QuestionAdornerViewModel and onElementAllowOperations on new elements", ()
   expect(newQuestionModel.getActionById("isrequired").visible).toBeFalsy();
 });
 test("ConvertTo, show the current question type selected", (): any => {
+  surveySettings.animationEnabled = false;
   const creator = new CreatorTester();
   creator.JSON = {
     elements: [
@@ -2112,6 +2114,7 @@ test("ConvertTo, show the current question type selected", (): any => {
   expect(items[0].id).toEqual("radiogroup");
   const popup = questionModel.getActionById("convertTo").popupModel;
   expect(popup).toBeTruthy();
+  const popupViewModel = new PopupDropdownViewModel(popup); // need for popupModel.onShow
   popup.toggleVisibility();
   const list = popup.contentComponentData.model;
   expect(list).toBeTruthy();
@@ -2121,6 +2124,7 @@ test("ConvertTo, show the current question type selected", (): any => {
   expect((<any>creator.selectedElement).id).toEqual(question.id);
 });
 test("ConvertTo, show it for a panel", (): any => {
+  surveySettings.animationEnabled = false;
   const creator = new CreatorTester();
   creator.JSON = {
     elements: [
@@ -2138,6 +2142,7 @@ test("ConvertTo, show it for a panel", (): any => {
   const items = panelModel.getConvertToTypesActions();
   expect(items).toHaveLength(21);
   const popup = panelModel.getActionById("convertTo").popupModel;
+  const popupViewModel = new PopupDropdownViewModel(popup); // need for popupModel.onShow
   expect(popup).toBeTruthy();
   popup.toggleVisibility();
   const list = popup.contentComponentData.model;
@@ -2219,6 +2224,7 @@ test("ConvertTo & addNewQuestion for panel & maxNestedPanels ", (): any => {
 });
 
 test("ConvertTo & addNewQuestion refresh items", (): any => {
+  surveySettings.animationEnabled = false;
   const creator = new CreatorTester();
   creator.JSON = {
     elements: [{ type: "dropdown", name: "q1" }]
@@ -2234,7 +2240,9 @@ test("ConvertTo & addNewQuestion refresh items", (): any => {
   const pageModel = creator.survey.pages[0];
   const pageAdornerModel = new PageAdorner(creator, pageModel);
   const convertToAction = q1AdornerModel.actionContainer.actions.filter(action => action.id === "convertTo")[0];
+  const convertToActionPopupViewModel = new PopupDropdownViewModel(convertToAction.popupModel); // need for popupModel.onShow
   const questionTypeSelectorModel = pageAdornerModel.questionTypeSelectorModel;
+  const questionTypeSelectorModelPopupViewModel = new PopupDropdownViewModel(questionTypeSelectorModel.popupModel); // need for popupModel.onShow
   const questionTypeSelectorListModel = questionTypeSelectorModel.popupModel.contentComponentData.model as ListModel;
 
   expect(convertToAction.data.actions.length).toBe(21);
@@ -2319,6 +2327,7 @@ test("ConvertTo separators", (): any => {
   expect(items2).toHaveLength(21);
 });
 test("convertInputType, change inputType for a text question", (): any => {
+  surveySettings.animationEnabled = false;
   const creator = new CreatorTester();
 
   creator.JSON = {
@@ -2345,6 +2354,7 @@ test("convertInputType, change inputType for a text question", (): any => {
   expect(action.css.indexOf("sv-action--convertTo-last") > -1).toBeTruthy();
   expect(action.title).toBe("Text");
   const popup = action.popupModel;
+  const popupViewModel = new PopupDropdownViewModel(popup); // need for popupModel.onShow
   expect(popup).toBeTruthy();
   popup.toggleVisibility();
   const list = popup.contentComponentData.model;
