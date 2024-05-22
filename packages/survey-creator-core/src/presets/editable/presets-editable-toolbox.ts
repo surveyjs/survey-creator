@@ -132,6 +132,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
         {
           type: "boolean",
           name: this.nameCategoriesShow,
+          defaultValue: false,
           title: "Setup toolbox items and categories"
         },
         {
@@ -162,7 +163,9 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
               titleLocation: "hidden",
               selectToRankEnabled: true,
               minSelectedChoices: 1,
-              selectToRankAreasLayout: "horizontal"
+              selectToRankAreasLayout: "horizontal",
+              selectToRankEmptyRankedAreaText: "Drag toolbox items to hide them",
+              selectToRankEmptyUnrankedAreaText: "Drag toolbox items here"
             }
           ]
         },
@@ -174,6 +177,8 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
           selectToRankEnabled: true,
           minSelectedChoices: 1,
           selectToRankAreasLayout: "horizontal",
+          selectToRankEmptyRankedAreaText: "Drag toolbox items to hide them",
+          selectToRankEmptyUnrankedAreaText: "Drag toolbox items here"
         }
       ]
     };

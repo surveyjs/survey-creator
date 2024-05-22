@@ -5,23 +5,22 @@ import { ItemValue, QuestionDropdownModel, QuestionMatrixDynamicModel } from "su
 import { defaultPropertyGridDefinition } from "../src/question-editor/definition";
 import { SurveyQuestionPresetPropertiesDetail } from "../src/presets/editable/presets-editable-properties";
 import { QuestionEmbeddedSurveyModel } from "../src/components/embedded-survey";
-import { CreatorPresetEditor } from "../src/presets/editable/presets-editor";
+import { CreatorPresetEditorModel } from "../src/presets/editable/presets-editor";
 
 export * from "../src/components/embedded-survey";
 
 test("Preset edit model, create pages", () => {
-  const editor = new CreatorPresetEditor();
+  const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
-  expect(survey.pages).toHaveLength(5);
-  expect(survey.visiblePages).toHaveLength(5);
+  expect(survey.pages).toHaveLength(4);
+  expect(survey.visiblePages).toHaveLength(4);
   expect(survey.pages[0].name).toEqual("page_tabs");
   expect(survey.pages[1].name).toEqual("page_toolbox_definition");
   expect(survey.pages[2].name).toEqual("page_toolbox");
   expect(survey.pages[3].name).toEqual("page_propertyGrid_definition");
-  expect(survey.pages[4].name).toEqual("page_result");
 });
 test("Preset edit model, page component", () => {
-  const editor = new CreatorPresetEditor({ tabs: { items: [] } });
+  const editor = new CreatorPresetEditorModel({ tabs: { items: [] } });
   const survey = editor.model;
   const boolQuestion = survey.getQuestionByName("tabs_show");
   expect(boolQuestion).toBeTruthy();
@@ -51,7 +50,7 @@ test("Preset edit model, page component", () => {
 });
 test("Preset edit model, tabs page with creator, default items", () => {
   const creator = new CreatorTester();
-  const editor = new CreatorPresetEditor({}, creator);
+  const editor = new CreatorPresetEditorModel({}, creator);
   const survey = editor.model;
   const boolQuestion = survey.getQuestionByName("tabs_show");
   boolQuestion.value = true;
@@ -68,7 +67,7 @@ test("Preset edit model, tabs page with creator, default items", () => {
   expect(creator.activeTab).toBe("logic");
 });
 test("Preset edit model, tabs page with creator, default items", () => {
-  const editor = new CreatorPresetEditor({ tabs: { items: ["designer", "logic"], activeTab: "logic" } });
+  const editor = new CreatorPresetEditorModel({ tabs: { items: ["designer", "logic"], activeTab: "logic" } });
   const survey = editor.model;
   const boolQuestion = survey.getQuestionByName("tabs_show");
   boolQuestion.value = true;
@@ -79,7 +78,7 @@ test("Preset edit model, tabs page with creator, default items", () => {
   expect(activeTabQuestion.value).toEqual("logic");
 });
 test("Preset edit model, toolbox page", () => {
-  const editor = new CreatorPresetEditor();
+  const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
   const boolDefinitionQuestion = survey.getQuestionByName("toolbox_definition_show");
   const boolSetupQuestion = survey.getQuestionByName("toolbox_show");
@@ -87,7 +86,7 @@ test("Preset edit model, toolbox page", () => {
   expect(boolDefinitionQuestion).toBeTruthy();
   expect(boolDefinitionQuestion.value).toBeFalsy();
   expect(boolSetupQuestion).toBeTruthy();
-  expect(boolSetupQuestion.value).toBeFalsy();
+  expect(boolSetupQuestion.value).toEqual(false);
   expect(boolSetupCategoriesQuestion).toBeTruthy();
   expect(boolSetupCategoriesQuestion.isVisible).toBeFalsy();
   expect(boolSetupCategoriesQuestion.value).toBeFalsy();
@@ -96,7 +95,7 @@ test("Preset edit model, toolbox page", () => {
   expect(boolSetupCategoriesQuestion.isVisible).toBeTruthy();
 });
 test("Preset edit model, toolbox definition page", () => {
-  const editor = new CreatorPresetEditor();
+  const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
   const page = survey.getPageByName("page_toolbox_definition");
   const matrixQuestion = survey.getQuestionByName("toolbox_definition_matrix");
@@ -105,7 +104,7 @@ test("Preset edit model, toolbox definition page", () => {
   expect(page.isVisible).toBeTruthy();
 });
 test("Preset edit model, toolbox definition page, validate name/json", () => {
-  const editor = new CreatorPresetEditor();
+  const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
   survey.setValue("toolbox_definition_show", true);
   const matrixQuestion = survey.getQuestionByName("toolbox_definition_matrix");
@@ -137,7 +136,7 @@ test("Preset edit model, toolbox definition page, default values", () => {
       ]
     }
   };
-  const editor = new CreatorPresetEditor(presetJson);
+  const editor = new CreatorPresetEditorModel(presetJson);
   const survey = editor.model;
   expect(survey.getValue("toolbox_definition_show")).toBeTruthy();
   const matrixQuestion = survey.getQuestionByName("toolbox_definition_matrix");
@@ -160,7 +159,7 @@ test("Preset edit model, toolbox definition page, default values", () => {
   expect(val[2]["json"]).toBeFalsy();
 });
 test("Preset edit model, toolbox definition page, apply", () => {
-  const editor = new CreatorPresetEditor();
+  const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
   survey.setValue("toolbox_definition_show", true);
   const matrixQuestion = survey.getQuestionByName("toolbox_definition_matrix");
@@ -186,7 +185,7 @@ test("Preset edit model, toolbox definition page, apply", () => {
   expect(testJson).toEqual(etalon);
 });
 test("Preset edit model, toolbox items, default value and apply", () => {
-  const editor = new CreatorPresetEditor();
+  const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
   survey.setValue("toolbox_show", true);
   survey.setValue("toolbox_mode", "items");
@@ -206,7 +205,7 @@ test("Preset edit model, toolbox items, default value and apply", () => {
   expect(testJson).toEqual(etalon);
 });
 test("Preset edit model, toolbox categories, default value and apply", () => {
-  const editor = new CreatorPresetEditor();
+  const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
   survey.setValue("toolbox_show", true);
   survey.setValue("toolbox_mode", "categories");
@@ -244,7 +243,7 @@ test("Preset edit model, toolbox categories, default value and apply", () => {
   expect(category.count).toBeFalsy();
 });
 test("Preset edit model, toolbox items & definition page", () => {
-  const editor = new CreatorPresetEditor();
+  const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
   survey.setValue("toolbox_definition_show", true);
   survey.setValue("toolbox_show", true);
@@ -271,7 +270,7 @@ test("Preset edit model, toolbox items & definition page", () => {
   expect(itemsQuestion.choices[0].text).toEqual("Radiogroup_New");
 });
 test("Preset edit model, property grid, setup", () => {
-  const editor = new CreatorPresetEditor();
+  const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
   expect(survey.getPageByName("page_propertyGrid_definition").visible).toBeTruthy();
   survey.setValue("propertyGrid_definition_show", true);
@@ -307,7 +306,7 @@ test("Preset edit model, property grid, setup", () => {
   expect(itemsQuestion.choices.length >= itemsQuestion.value.length).toBeTruthy();
 });
 test("Preset edit model, property grid, setup items in detail panels => survey", () => {
-  const editor = new CreatorPresetEditor();
+  const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
   survey.setValue("propertyGrid_definition_show", true);
   survey.setValue("propertyGrid_definition_selector", "survey");
@@ -336,7 +335,7 @@ test("Preset edit model, property grid, SurveyQuestionPresetPropertiesDetail", (
   expect(rows[0].selectbase).toBeFalsy();
 });
 test("Preset edit model, property grid, setup items in detail panels => radiogroup", () => {
-  const editor = new CreatorPresetEditor();
+  const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
   survey.setValue("propertyGrid_definition_show", true);
   survey.setValue("propertyGrid_definition_selector", "radiogroup");
@@ -349,7 +348,7 @@ test("Preset edit model, property grid, setup items in detail panels => radiogro
   expect(detailPanel.elements[0].name).toBe("items");
 });
 test("Preset edit model, property grid, apply", () => {
-  const editor = new CreatorPresetEditor();
+  const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
   survey.setValue("propertyGrid_definition_show", true);
   survey.currentPage = survey.getPageByName("page_propertyGrid_definition");
@@ -390,7 +389,7 @@ test("Preset edit model, property grid, apply", () => {
   expect(panels2[0].elements).toHaveLength(3);
 });
 test("Preset edit model, live property grid", () => {
-  const editor = new CreatorPresetEditor();
+  const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
   survey.setValue("propertyGrid_definition_show", true);
   survey.currentPage = survey.getPageByName("page_propertyGrid_definition");
@@ -416,7 +415,7 @@ test("Preset edit model, live property grid", () => {
   expect(matrix.visibleRows[1].isDetailPanelShowing).toBeFalsy();
 });
 test("Preset edit model, live property grid & modify value", () => {
-  const editor = new CreatorPresetEditor();
+  const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
   survey.setValue("propertyGrid_definition_show", true);
   survey.currentPage = survey.getPageByName("page_propertyGrid_definition");
@@ -436,7 +435,7 @@ test("Preset edit model, live property grid & modify value", () => {
   expect(panels[0].elements[0].name).toBe("widthMode");
 });
 test("Preset edit model, live property grid & visible indexes", () => {
-  const editor = new CreatorPresetEditor();
+  const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
   survey.setValue("propertyGrid_definition_show", true);
   survey.currentPage = survey.getPageByName("page_propertyGrid_definition");
@@ -457,7 +456,7 @@ test("Preset edit model, live property grid & visible indexes", () => {
   expect(elements[4].name).toBe("description");
 });
 test("Preset edit model, include columns types", () => {
-  const editor = new CreatorPresetEditor();
+  const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
   survey.setValue("propertyGrid_definition_show", true);
   survey.currentPage = survey.getPageByName("page_propertyGrid_definition");
@@ -466,7 +465,7 @@ test("Preset edit model, include columns types", () => {
   expect(ItemValue.getItemByValue(question.choices, "matrixdropdowncolumn@checkbox")).toBeTruthy();
 });
 test("Preset edit model, edit matrixdropdowncolumn@default", () => {
-  const editor = new CreatorPresetEditor();
+  const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
   survey.setValue("propertyGrid_definition_show", true);
   survey.currentPage = survey.getPageByName("page_propertyGrid_definition");
@@ -480,7 +479,7 @@ test("Preset edit model, edit matrixdropdowncolumn@default", () => {
   expect(rows[1].getQuestionByName("items").choices).toHaveLength(7);
 });
 test("Preset edit model, live property grid & matrixdropdowncolumn@default", () => {
-  const editor = new CreatorPresetEditor();
+  const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
   survey.setValue("propertyGrid_definition_show", true);
   survey.currentPage = survey.getPageByName("page_propertyGrid_definition");
@@ -502,7 +501,7 @@ test("Preset edit model, live property grid & matrixdropdowncolumn@default", () 
   expect(panels[0].elements[0].name).toBe("cellType");
 });
 test("Preset edit model, live property grid & matrixdropdowncolumn@checkbox", () => {
-  const editor = new CreatorPresetEditor();
+  const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
   survey.setValue("propertyGrid_definition_show", true);
   survey.currentPage = survey.getPageByName("page_propertyGrid_definition");
@@ -527,4 +526,19 @@ test("Preset edit model, live property grid & matrixdropdowncolumn@checkbox", ()
   expect(panels[1].elements).toHaveLength(2);
   expect(panels[1].elements[0].name).toBe("choices");
   expect(panels[1].elements[1].name).toBe("maxSelectedChoices");
+});
+test("Editor: activeTab & navigationBar", () => {
+  const editor = new CreatorPresetEditorModel();
+  expect(editor.activeTab).toEqual("preset");
+  expect(editor.navigationBar.actions[0].active).toBeTruthy();
+  const survey = editor.model;
+  const boolQuestion = survey.getQuestionByName("tabs_show");
+  const itemsQuestion = survey.getQuestionByName("tabs_items");
+  boolQuestion.value = true;
+  itemsQuestion.value = ["designer", "translation"];
+  editor.navigationBar.actions[1].action();
+  expect(editor.activeTab).toEqual("creator");
+  expect(editor.creator.tabs).toHaveLength(2);
+  expect(editor.creator.tabs[0].id).toEqual("designer");
+  expect(editor.creator.tabs[1].id).toEqual("translation");
 });

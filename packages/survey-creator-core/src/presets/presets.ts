@@ -1,4 +1,4 @@
-import { CreatorPresetBase, ICreatorPreset, CreatorPresetEditableBase } from "./presets-base";
+import { CreatorPresetBase, ICreatorPreset } from "./presets-base";
 import { CreatorPresetToolbox, ICreatorPresetToolboxItem } from "./presets-toolbox";
 import { CreatorPresetTabs } from "./presets-tabs";
 import { CreatorPresetPropertyGrid } from "./presets-properties";

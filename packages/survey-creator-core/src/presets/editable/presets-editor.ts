@@ -1,36 +1,66 @@
 import { SurveyCreatorModel } from "../../creator-base";
 import { CreatorPreset, ICreatorPresetData } from "../presets";
-import { SurveyModel } from "survey-core";
+import { ActionContainer, Base, ComputedUpdater, SurveyModel } from "survey-core";
 import { CreatorPresetEditableBase } from "./presets-editable-base";
 import { CreatorPresetEditableToolbox, CreatorPresetEditableToolboxConfigurator, CreatorPresetEditableToolboxDefinition } from "./presets-editable-toolbox";
 import { CreatorPresetEditableTabs } from "./presets-editable-tabs";
 import { CreatorEditablePresetPropertyGrid, CreatorPresetEditablePropertyGridDefinition } from "./presets-editable-properties";
 
-export class CreatorPresetEditor {
+export class CreatorPresetEditorModel extends Base {
   private presetValue: CreatorPreset;
   private creatorValue: SurveyCreatorModel;
   private modelValue: SurveyModel;
+  private navigationBarValue: ActionContainer;
   constructor(json?: ICreatorPresetData, creator?: SurveyCreatorModel) {
+    super();
     this.presetValue = new CreatorPreset(json);
-    this.creatorValue = creator || new SurveyCreatorModel({});
+    this.creatorValue = creator || this.createCreator();
     this.modelValue = this.createModel();
+    this.navigationBarValue = new ActionContainer();
+    this.addNavigationAction("preset", "Edit Preset");
+    this.addNavigationAction("creator", "Review Creator");
+    this.addNavigationAction("results", "Preset JSON");
+    this.activeTab = this.navigationBar.actions[0].id;
   }
   public get preset(): CreatorPreset { return this.presetValue; }
   public get creator(): SurveyCreatorModel { return this.creatorValue; }
   public get model(): SurveyModel { return this.modelValue; }
+  public get navigationBar(): ActionContainer { return this.navigationBarValue; }
+  public get activeTab(): string {
+    return this.getPropertyValue("activeTab");
+  }
+  public set activeTab(val: string) {
+    this.setPropertyValue("activeTab", val);
+  }
+  public get json(): ICreatorPresetData {
+    return this.preset.getJson();
+  }
+  public set json(val: ICreatorPresetData) {
+    this.preset.setJson(val);
+  }
+  protected onPropertyValueChanged(name: string, oldValue: any, newValue: any): void {
+    if(name === "activeTab" && oldValue === "preset") {
+      this.applyFromSurveyModel();
+    }
+  }
+  protected createCreator(): SurveyCreatorModel {
+    return new SurveyCreatorModel({});
+  }
+  private addNavigationAction(id: string, title: string): void {
+    const actionInfo = {
+      id: id,
+      title: title,
+      active: <any>new ComputedUpdater<boolean>(() => this.activeTab === id),
+      action: () => { this.activeTab = id; }
+    };
+    this.navigationBar.addAction(actionInfo);
+  }
   protected createModel(): SurveyModel {
     const editablePresets = this.createEditablePresets();
     const model = new SurveyModel(this.getEditModelJson(editablePresets));
     model.editablePresets = editablePresets;
-    model.showCompleteButton = false;
     model.keepIncorrectValues = true;
-    model.addNavigationItem({
-      id: "preset_save",
-      title: "Save", //TODO
-      action: () => {
-        this.applyFromSurveyModel();
-      }
-    });
+    model.showNavigationButtons = false;
     editablePresets.forEach(item => item.setupQuestions(model, this.creator));
     const json = this.preset.getJson() || {};
     editablePresets.forEach(item => item.setupQuestionsValue(model, json[item.path], this.creator));
@@ -109,13 +139,6 @@ export class CreatorPresetEditor {
       if (Array.isArray(pages)) {
         pages.forEach(page => modelJson.pages.push(page));
       }
-    });
-    modelJson.pages.push({
-      name: "page_result",
-      title: "Preset JSON result",
-      elements: [
-        { type: "comment", rows: 40, name: "json_result", titleLocation: "hidden", placeholder: "Please click on the 'Save' button" }
-      ]
     });
     return modelJson;
   }
