@@ -99,14 +99,19 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   }
 
   private addSubGroupTitle(panel: PanelModel, titleId: string) {
+    if (!!panel.getQuestionByName(titleId)) return;
+
     const question = Serializer.createClass("html") as QuestionHtmlModel;
     question.fromJSON({
-      visibleIf: "{advancedmode} = true",
+      name: titleId,
       html: `<div class='spg-theme-group-caption'>${getLocString(titleId)}</div>`
     });
     panel.addElement(question);
   }
-  private addSubGroupTitles(survey: SurveyModel) {
+  private updateSubGroups(survey: SurveyModel) {
+    ["appearancelines", "appearanceinput", "appearancequestion", "appearancepage", "appearanceprimarycolor"].forEach(panelName => this.setVisibleIf(panelName, true));
+    ["appearancecolor", "appearancefont", "appearanceother"].forEach(panelName => this.setVisibleIf(panelName, false));
+
     this.addSubGroupTitle(survey.getPanelByName("appearanceprimarycolor"), "theme.pageTitle");
     this.addSubGroupTitle(survey.getPanelByName("appearancepage"), "theme.questionTitle");
     this.addSubGroupTitle(survey.getPanelByName("appearancequestion"), "theme.editorPanel");
@@ -195,6 +200,12 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       this.updateVisibilityOfPropertyGridGroups();
     }
   }
+  private setVisibleIf(panelName: string, visibilityValue: boolean) {
+    const panel = this.propertyGrid.survey.getPanelByName(panelName);
+    if (!!panel) {
+      panel.visibleIf = `{advancedmode} = ${visibilityValue}`;
+    }
+  }
 
   constructor(private creator: SurveyCreatorModel) {
     creator.addPluginTab("theme", this, "ed.themeSurvey");
@@ -247,7 +258,8 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     const themeBuilderCss = { ...propertyGridCss };
     themeBuilderCss.root += " spg-theme-builder-root";
     this.propertyGrid.survey.css = themeBuilderCss;
-    this.addSubGroupTitles(this.propertyGrid.survey);
+    this.updateSubGroups(this.propertyGrid.survey);
+
     this.propertyGrid.survey.onGetPanelTitleActions.add((sender, opt) => {
       if (opt.panel && opt.panel.name == "appearance") {
         this.createAppearanceAdvancedModeAction(opt.panel);

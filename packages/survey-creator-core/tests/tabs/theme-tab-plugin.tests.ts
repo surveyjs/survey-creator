@@ -1164,7 +1164,7 @@ test("Modify property grid: add/hide properties", (): any => {
 
 test("Modify property grid & switch themeName", (): any => {
   try {
-    Serializer.addProperty("theme", { name: "matrix-title", type: "fontsettings" });
+    Serializer.addProperty("theme", { name: "matrix-title", type: "fontsettings", category: "appearancequestion" });
 
     const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
     creator.onShowingProperty.add(function (sender, options) {
@@ -1177,11 +1177,11 @@ test("Modify property grid & switch themeName", (): any => {
     creator.themeEditor.activate();
     const propertyGridSurvey = creator.themeEditor.propertyGrid.survey;
 
-    expect(propertyGridSurvey.getAllQuestions().filter(q => q.isVisible).length).toBe(9); //should be 2
+    expect(propertyGridSurvey.getAllQuestions().filter(q => q.isVisible).length).toBe(2);
     const themeChooser = propertyGridSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
 
     themeChooser.value = "flat";
-    expect(propertyGridSurvey.getAllQuestions().filter(q => q.isVisible).length).toBe(9); //should be 2
+    expect(propertyGridSurvey.getAllQuestions().filter(q => q.isVisible).length).toBe(2);
   } finally {
     Serializer.removeProperty("theme", "matrix-title");
   }
