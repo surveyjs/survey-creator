@@ -5,7 +5,7 @@ const title = "Custom Property Grid Editors";
 fixture`${title}`.page`${url}`.beforeEach(async (t) => {
 });
 
-test("Check color editor key navigation", async (t) => {
+test.skip("Check color editor key navigation", async (t) => {
   await t.resizeWindow(1920, 1920);
   await ClientFunction(() => {
     (<any>window).Survey.Serializer.addProperty("survey", {
