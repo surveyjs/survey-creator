@@ -42,6 +42,14 @@ export var fiStrings = {
     signaturepad: "Allekirjoitusalusta",
     buttongroup: "Painike-ryhmä"
   },
+  toolboxCategories: {
+    general: "Yleinen",
+    choice: "Valintaa koskevat kysymykset",
+    text: "Tekstinsyöttökysymykset",
+    containers: "Säiliöt",
+    matrix: "Matriisin kysymykset",
+    misc: "Muut",
+  },
   // Strings in SurveyJS Creator
   ed: {
     defaultLocale: "Vakio ({0})",
@@ -111,12 +119,6 @@ export var fiStrings = {
     "property-grid": "Properties",
     propertyGridFilteredTextPlaceholder: "Kirjoita etsiäksesi...",
     propertyGridNoResultsFound: "Tuloksia ei löytynyt",
-    toolboxGeneralCategory: "Yleinen",
-    toolboxChoiceCategory: "Valintaa koskevat kysymykset",
-    toolboxTextCategory: "Tekstinsyöttökysymykset",
-    toolboxContainersCategory: "Säiliöt",
-    toolboxMatrixCategory: "Matriisin kysymykset",
-    toolboxMiscCategory: "Muut",
     correctJSON: "Korjaa JSON.",
     surveyResults: "Kyselyn tulos:",
     surveyResultsTable: "Taulukossa",

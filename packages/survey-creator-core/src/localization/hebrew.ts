@@ -42,6 +42,14 @@ export var hebrewStrings = {
     signaturepad: "חתימה",
     buttongroup: "קבוצת כפתורים"
   },
+  toolboxCategories: {
+    general: "כללי",
+    choice: "שאלות עם בחירה",
+    text: "שאלות טקסטואליות",
+    containers: "מכילים",
+    matrix: "שאלות מטריצה",
+    misc: "שונות",
+  },
   // Strings in SurveyJS Creator
   ed: {
     defaultLocale: "ברירת מחדל ({0})",
@@ -111,12 +119,6 @@ export var hebrewStrings = {
     "property-grid": "מאפיינים",
     propertyGridFilteredTextPlaceholder: "הקלד כדי לחפש...",
     propertyGridNoResultsFound: "לא נמצאו תוצאות",
-    toolboxGeneralCategory: "כללי",
-    toolboxChoiceCategory: "שאלות עם בחירה",
-    toolboxTextCategory: "שאלות טקסטואליות",
-    toolboxContainersCategory: "מכילים",
-    toolboxMatrixCategory: "שאלות מטריצה",
-    toolboxMiscCategory: "שונות",
     correctJSON: "אנא תקנו את ה-JSON.",
     surveyResults: "תוצאות הסקר",
     surveyResultsTable: "כטבלה",

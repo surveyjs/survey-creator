@@ -42,6 +42,14 @@ export var msStrings = {
     signaturepad: "Pad tandatangan",
     buttongroup: "Kumpulan Butang"
   },
+  toolboxCategories: {
+    general: "Umum",
+    choice: "Soalan Pilihan",
+    text: "Soalan Input Teks",
+    containers: "Bekas",
+    matrix: "Soalan Matriks",
+    misc: "Misc",
+  },
   // Strings in SurveyJS Creator
   ed: {
     defaultLocale: "Lalai ({0})",
@@ -111,12 +119,6 @@ export var msStrings = {
     "property-grid": "Ciri",
     propertyGridFilteredTextPlaceholder: "Taip untuk mencari...",
     propertyGridNoResultsFound: "Tiada keputusan ditemui",
-    toolboxGeneralCategory: "Umum",
-    toolboxChoiceCategory: "Soalan Pilihan",
-    toolboxTextCategory: "Soalan Input Teks",
-    toolboxContainersCategory: "Bekas",
-    toolboxMatrixCategory: "Soalan Matriks",
-    toolboxMiscCategory: "Misc",
     correctJSON: "Pilih JSON yang betul.",
     surveyResults: "Keputusan Tinjauan: ",
     surveyResultsTable: "Sebagai Jadual",

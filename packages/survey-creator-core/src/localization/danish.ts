@@ -42,6 +42,14 @@ export var danishStrings = {
     signaturepad: "Underskrift",
     buttongroup: "Knap gruppe"
   },
+  toolboxCategories: {
+    general: "Generelt",
+    choice: "Spørgsmål om valg",
+    text: "Spørgsmål om tekstinput",
+    containers: "Containere",
+    matrix: "Matrix spørgsmål",
+    misc: "Misc",
+  },
   // Strings in SurveyJS Creator
   ed: {
     defaultLocale: "Standard ({0})",
@@ -111,12 +119,6 @@ export var danishStrings = {
     "property-grid": "Egenskaber",
     propertyGridFilteredTextPlaceholder: "Skriv for at søge...",
     propertyGridNoResultsFound: "Ingen resultater fundet",
-    toolboxGeneralCategory: "Generelt",
-    toolboxChoiceCategory: "Spørgsmål om valg",
-    toolboxTextCategory: "Spørgsmål om tekstinput",
-    toolboxContainersCategory: "Containere",
-    toolboxMatrixCategory: "Matrix spørgsmål",
-    toolboxMiscCategory: "Misc",
     correctJSON: "Ret venligst JSON.",
     surveyResults: "Undersøgelsesresultat: ",
     surveyResultsTable: "Som tabel",
