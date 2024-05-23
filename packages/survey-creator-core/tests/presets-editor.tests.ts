@@ -210,6 +210,9 @@ test("Preset edit model, toolbox categories, default value and apply", () => {
   survey.setValue("toolbox_show", true);
   survey.setValue("toolbox_mode", "categories");
   const question = <QuestionMatrixDynamicModel>survey.getQuestionByName("toolbox_categories");
+  const showTitlesQuestion = survey.getQuestionByName("toolbox_showCategoryTitles");
+  expect(showTitlesQuestion.value).toBeFalsy();
+  showTitlesQuestion.value = true;
   expect(question).toBeTruthy();
   const categoryCount = 5;
   expect(question.rowCount).toEqual(categoryCount);
@@ -228,7 +231,7 @@ test("Preset edit model, toolbox categories, default value and apply", () => {
   itemsQuestion.value = items;
   question.addRow();
   const newRow = question.visibleRows[question.rowCount - 1];
-  newRow.getQuestionByName("name").value = "NewCategory";
+  newRow.getQuestionByName("category").value = "NewCategory";
   newRow.showDetailPanel();
   itemsQuestion = newRow.getQuestionByName("items");
   expect(itemsQuestion.choices).toHaveLength(3);
@@ -238,9 +241,11 @@ test("Preset edit model, toolbox categories, default value and apply", () => {
   expect(json.toolbox.items).toBeFalsy();
   expect(json.toolbox.categories).toHaveLength(categoryCount + 1);
   const category = json.toolbox?.categories[categoryCount];
-  expect(category.name).toEqual("NewCategory");
+  expect(category.category).toEqual("NewCategory");
   expect(category.items).toHaveLength(3);
   expect(category.count).toBeFalsy();
+  expect(editor.creator.toolbox.hasCategories).toBeTruthy();
+  expect(editor.creator.toolbox.showCategoryTitles).toBeTruthy();
 });
 test("Preset edit model, toolbox items & definition page", () => {
   const editor = new CreatorPresetEditorModel();

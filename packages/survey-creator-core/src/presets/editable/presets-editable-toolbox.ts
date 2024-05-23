@@ -2,6 +2,7 @@ import { ItemValue, MatrixDropdownRowModelBase, QuestionMatrixDynamicModel, Ques
 import { CreatorPresetEditableBase } from "./presets-editable-base";
 import { SurveyCreatorModel } from "../../creator-base";
 import { SurveyJSON5 } from "../../json5";
+import { title } from "process";
 
 export class CreatorPresetEditableToolboxDefinition extends CreatorPresetEditableBase {
   public createMainPageCore(): any {
@@ -145,14 +146,23 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
           clearIfInvisible: "onHidden",
         },
         {
+          type: "boolean",
+          name: this.nameShowCategoryTitles,
+          defaultValue: false,
+          visibleIf: this.getTextVisibleIf(this.nameCategoriesMode, "categories"),
+          title: "Show Categories Titles"
+        },
+        {
           type: "matrixdynamic",
           name: this.nameCategories,
+          title: "Setup Toolbox categories and items",
           visibleIf: this.getTextVisibleIf(this.nameCategoriesMode, "categories"),
           minRowCount: 1,
           allowRowsDragAndDrop: true,
           showHeader: false,
+          addRowText: "Add new Category",
           columns: [
-            { cellType: "text", name: "name", title: "Category Name", isUnique: true, isRequired: true },
+            { cellType: "text", name: "category", title: "Category Name", isUnique: true, isRequired: true },
             { cellType: "expression", name: "count", title: "Number of items in category", expression: "{row.items.length}" }
           ],
           detailPanelMode: "underRowSingle",
@@ -187,6 +197,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
   public get nameCategoriesMode() { return this.fullPath + "_mode"; }
   private get nameItems() { return this.fullPath + "_items"; }
   private get nameCategories() { return this.fullPath + "_categories"; }
+  private get nameShowCategoryTitles() { return this.fullPath + "_showCategoryTitles"; }
   protected getJsonPath(model: SurveyModel): string {
     return model.getValue(this.nameCategoriesMode);
   }
@@ -194,6 +205,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     const mode = model.getValue(this.nameCategoriesMode);
     if(mode === "items") return model.getValue(this.nameItems);
     if(mode === "categories") return this.getCategoriesJson(model);
+    return undefined;
   }
   private getCategoriesJson(model: SurveyModel): any {
     const res = model.getValue(this.nameCategories);
@@ -226,7 +238,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
       const category = item.category;
       if(!!category) {
         if(!nameCategories[category]) {
-          const row = { name: category, items: [item.name] };
+          const row = { category: category, items: [item.name] };
           nameCategories[category] = row;
           categories.push(row);
         } else {
@@ -293,4 +305,12 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     return res;
   }
 }
-export class CreatorPresetEditableToolbox extends CreatorPresetEditableBase {}
+export class CreatorPresetEditableToolbox extends CreatorPresetEditableBase {
+  public getJsonValueCore(model: SurveyModel): any {
+    const val = model.getValue(this.fullPath + "_showCategoryTitles");
+    if(val) {
+      return { showCategoryTitles: true };
+    }
+    return undefined;
+  }
+}

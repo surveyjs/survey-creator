@@ -17,6 +17,7 @@ export interface ICreatorPresetData {
     definition?: Array<ICreatorPresetToolboxItem>,
     categories?: Array<IToolboxCategoryDefinition>,
     items?: Array<string>,
+    showCategoryTitles?: boolean,
   };
 }
 

@@ -42,18 +42,19 @@ export class CreatorPresetToolboxConfigurator extends CreatorPresetBase {
   protected applyCore(creator: SurveyCreatorModel): void {
     if(!this.json) return;
     super.applyCore(creator);
+    creator.toolbox.showCategoryTitles = this.json.showCategoryTitles;
     this.applyItems(creator, this.json["items"]);
     this.applyCategories(creator, this.json["categories"]);
   }
   private applyItems(creator: SurveyCreatorModel, items: Array<string>): void {
     if (!Array.isArray(items)) return;
-    creator.toolbox.defineCategories([{ category: "general", items: items }]);
     creator.toolbox.hasCategories = false;
+    creator.toolbox.defineCategories([{ category: "general", items: items }]);
   }
   private applyCategories(creator: SurveyCreatorModel, categories: Array<IToolboxCategoryDefinition>): void {
     if (!Array.isArray(categories)) return;
-    creator.toolbox.defineCategories(categories);
     creator.toolbox.hasCategories = true;
+    creator.toolbox.defineCategories(categories);
   }
 }
 export class CreatorPresetToolbox extends CreatorPresetBase {
