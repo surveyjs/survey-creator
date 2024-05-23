@@ -1,6 +1,6 @@
 import { Action } from "survey-core";
 import { TabDesignerPlugin } from "../../src/components/tabs/designer-plugin";
-import { ThemeEditorModel } from "../../src/components/tabs/theme-builder";
+import { ThemeTabViewModel } from "../../src/components/tabs/theme-builder";
 export { QuestionFileEditorModel } from "../../src/custom-questions/question-file";
 export { QuestionSpinEditorModel } from "../../src/custom-questions/question-spin-editor";
 export { QuestionColorModel } from "../../src/custom-questions/question-color";

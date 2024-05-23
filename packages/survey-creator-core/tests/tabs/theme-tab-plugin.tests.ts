@@ -10,7 +10,7 @@ import { ITheme, QuestionButtonGroupModel, QuestionCompositeModel, QuestionDropd
 import { CreatorTester } from "../creator-tester";
 import { ThemeTabPlugin } from "../../src/components/tabs/theme-plugin";
 import { ThemeModel } from "../../src/components/tabs/theme-model";
-import { ThemeEditorModel } from "../../src/components/tabs/theme-builder";
+import { ThemeTabViewModel } from "../../src/components/tabs/theme-builder";
 import { settings } from "../../src/creator-settings";
 import { assign, parseColor } from "../../src/utils/utils";
 import { PredefinedThemes, Themes } from "../../src/components/tabs/themes";
@@ -109,7 +109,7 @@ test("Theme builder: set backcolor to simulator", (): any => {
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
   const themeModel = themePlugin.themeModel as ThemeModel;
-  const themeTabViewModel = themePlugin.model as ThemeEditorModel;
+  const themeTabViewModel = themePlugin.model as ThemeTabViewModel;
 
   expect(themeModel["--sjs-general-backcolor-dim"]).toBe("rgba(243, 243, 243, 1)");
   expect(themeTabViewModel.survey.themeVariables["--sjs-general-backcolor-dim"]).toEqual("rgba(243, 243, 243, 1)");
@@ -124,7 +124,7 @@ test("Theme builder: survey settings", (): any => {
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const themeSurveyTab = themePlugin.model as ThemeEditorModel;
+  const themeSurveyTab = themePlugin.model as ThemeTabViewModel;
   const themeModel = themePlugin.themeModel as ThemeModel;
   const simulatorSurvey = themeSurveyTab.survey;
 
@@ -203,7 +203,7 @@ test("import theme from file", (done) => {
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
   const themeModel = themePlugin.themeModel as ThemeModel;
-  const themeTabViewModel = themePlugin.model as ThemeEditorModel;
+  const themeTabViewModel = themePlugin.model as ThemeTabViewModel;
 
   const data = JSON.stringify({
     "cssVariables": {
@@ -416,7 +416,7 @@ test("Pass background image from survey to theme editor and back", (): any => {
   };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  let themeTabViewModel = themePlugin.model as ThemeEditorModel;
+  let themeTabViewModel = themePlugin.model as ThemeTabViewModel;
   let themeModel = themePlugin.themeModel as ThemeModel;
   let backgroundImageEditor = themePlugin.propertyGrid.survey.findQuestionByName("backgroundImage");
   expect(creator.theme.backgroundImage).toBe(undefined);
@@ -442,7 +442,7 @@ test("Pass background image from survey to theme editor and back", (): any => {
 
   themePlugin.deactivate();
   themePlugin.activate();
-  themeTabViewModel = themePlugin.model as ThemeEditorModel;
+  themeTabViewModel = themePlugin.model as ThemeTabViewModel;
   themeModel = themePlugin.themeModel as ThemeModel;
   backgroundImageEditor = themePlugin.propertyGrid.survey.findQuestionByName("backgroundImage");
   expect(creator.theme.backgroundImage).toBe("");
@@ -459,7 +459,7 @@ test("Keep background image in theme modifications", (): any => {
   };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  let themeTabViewModel = themePlugin.model as ThemeEditorModel;
+  let themeTabViewModel = themePlugin.model as ThemeTabViewModel;
   let themeModel = themePlugin.themeModel as ThemeModel;
   let backgroundImageEditor = themePlugin.propertyGrid.survey.findQuestionByName("backgroundImage");
 
@@ -482,7 +482,7 @@ test("Keep background image in theme modifications", (): any => {
   expect(creator.theme.backgroundImage).toBe(lionImage);
 
   themePlugin.activate();
-  themeTabViewModel = themePlugin.model as ThemeEditorModel;
+  themeTabViewModel = themePlugin.model as ThemeTabViewModel;
   themeModel = themePlugin.themeModel as ThemeModel;
   backgroundImageEditor = themePlugin.propertyGrid.survey.findQuestionByName("backgroundImage");
   expect(creator.theme.backgroundImage).toBe(lionImage);
@@ -504,7 +504,7 @@ test("Keep theme modifications between edit sessions", (): any => {
   };
   let themePlugin: ThemeTabPlugin = creator.getPlugin<ThemeTabPlugin>("theme");
   themePlugin.activate();
-  let themeTabViewModel = themePlugin.model as ThemeEditorModel;
+  let themeTabViewModel = themePlugin.model as ThemeTabViewModel;
   let themeModel = themePlugin.themeModel as ThemeModel;
 
   themeModel.themeName = "layered";
@@ -519,7 +519,7 @@ test("Keep theme modifications between edit sessions", (): any => {
   themePlugin = creator.getPlugin<ThemeTabPlugin>("theme");
   themePlugin.activate();
 
-  themeTabViewModel = themePlugin.model as ThemeEditorModel;
+  themeTabViewModel = themePlugin.model as ThemeTabViewModel;
   expect(themeModel.themeName).toBe("layered");
   expect(themeModel["--sjs-primary-backcolor"]).toBe("#0000ff");
   expect(themeTabViewModel.survey.themeVariables["--sjs-primary-backcolor"]).toBe("#0000ff");
@@ -543,7 +543,7 @@ test("Set and use custom default theme", (): any => {
   expect(themePlugin.availableThemes).toStrictEqual(["custom"].concat(themes));
 
   themePlugin.activate();
-  let themeTabViewModel = themePlugin.model as ThemeEditorModel;
+  let themeTabViewModel = themePlugin.model as ThemeTabViewModel;
   let themeModel = themePlugin.themeModel as ThemeModel;
   expect(themeModel.themeName).toBe("custom");
   expect(creator.theme.cssVariables["--a-var"]).toBe(undefined);
@@ -564,7 +564,7 @@ test("Set and use custom default theme", (): any => {
   expect(creator.theme.cssVariables["--a-var"]).toBe("aVal");
 
   themePlugin.activate();
-  themeTabViewModel = themePlugin.model as ThemeEditorModel;
+  themeTabViewModel = themePlugin.model as ThemeTabViewModel;
   themeModel = themePlugin.themeModel as ThemeModel;
   expect(themeModel.themeName).toBe("custom");
   expect(creator.theme.cssVariables["--a-var"]).toBe("aVal");
@@ -626,7 +626,7 @@ test("Keep background image on reset theme action for default session theme", ()
   creator.theme = customTheme;
 
   themePlugin.activate();
-  let themeTabViewModel = themePlugin.model as ThemeEditorModel;
+  let themeTabViewModel = themePlugin.model as ThemeTabViewModel;
   let themeModel = themePlugin.themeModel as ThemeModel;
 
   expect(themeModel.defaultSessionTheme).toStrictEqual(Themes["default-light"]);
@@ -658,7 +658,7 @@ test("Reset theme to default one", (): any => {
   creator.theme = customTheme;
 
   themePlugin.activate();
-  let themeTabViewModel = themePlugin.model as ThemeEditorModel;
+  let themeTabViewModel = themePlugin.model as ThemeTabViewModel;
   let themeModel = themePlugin.themeModel as ThemeModel;
   expect(themeModel.defaultSessionTheme).toStrictEqual(Themes["default-light"]);
   expect(themeModel.themeName).toEqual("custom");
@@ -848,7 +848,7 @@ test("Theme builder: trigger responsiveness", (): any => {
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  let themeTabViewModel = themePlugin.model as ThemeEditorModel;
+  let themeTabViewModel = themePlugin.model as ThemeTabViewModel;
   const propertyGridSurvey = themePlugin.propertyGrid.survey;
   let log = "";
   themeTabViewModel.survey.triggerResponsiveness = (hard: boolean) => {
@@ -963,7 +963,7 @@ test("Simulator survey should respect survey current locale", (): any => {
   };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const themeBuilder = themePlugin.model as ThemeEditorModel;
+  const themeBuilder = themePlugin.model as ThemeTabViewModel;
   expect(themeBuilder.simulator.survey.locale).toBe(creator.survey.locale);
   expect(themeBuilder.simulator.survey.locLogo.renderedHtml).toBe("FR logo");
 });

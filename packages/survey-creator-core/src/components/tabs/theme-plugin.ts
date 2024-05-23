@@ -3,7 +3,7 @@ import { settings } from "../../creator-settings";
 import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
 import { editorLocalization, getLocString } from "../../editorLocalization";
-import { ThemeEditorModel } from "./theme-builder";
+import { ThemeTabViewModel } from "./theme-builder";
 import { SidebarTabModel } from "../side-bar/side-bar-tab-model";
 import { PredefinedColors, PredefinedThemes, Themes } from "./themes";
 import { assign, notShortCircuitAnd, saveToFileHandler } from "../../utils/utils";
@@ -16,7 +16,7 @@ import { propertyGridCss } from "../../property-grid-theme/property-grid";
 
 export interface IPropertyGridSurveyCreatedEvent {
   survey: SurveyModel;
-  model: ThemeEditorModel;
+  model: ThemeTabViewModel;
 }
 export interface IAddPropertyGridEditorParams {
   element: IElement;
@@ -64,7 +64,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
 
   public propertyGrid: PropertyGridModel;
   private propertyGridTab: SidebarTabModel;
-  public model: ThemeEditorModel;
+  public model: ThemeTabViewModel;
   public themeModel: ThemeModel;
 
   private createVisibleUpdater() {
@@ -246,7 +246,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     creator.onPropertyChanged.add(this.creatorPropertyChanged);
   }
   public activate(): void {
-    this.model = new ThemeEditorModel(this.creator, this.simulatorCssClasses);
+    this.model = new ThemeTabViewModel(this.creator, this.simulatorCssClasses);
     this.themeModel.initialize(this.creator.theme, this.creator.survey);
     this.update();
     this.propertyGrid.survey.onOpenFileChooser.clear();
@@ -854,7 +854,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
    * A `ThemeTabPlugin` instance that raised the event.
    * - `options.survey`: `SurveyModel`\
    * A survey that represents the Property Grid.
-   * - `options.model`: `ThemeEditorModel`\
+   * - `options.model`: `ThemeTabViewModel`\
    * A Theme Editor model.
    */
   public onPropertyGridSurveyCreated = new EventBase<ThemeTabPlugin, IPropertyGridSurveyCreatedEvent>();

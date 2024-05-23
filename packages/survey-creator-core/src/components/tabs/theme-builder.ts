@@ -18,8 +18,7 @@ import { Switcher } from "../switcher/switcher";
 
 require("./theme-builder.scss");
 
-// TODO: rename to ThemeTabViewModel 
-export class ThemeEditorModel extends Base {
+export class ThemeTabViewModel extends Base {
   // public static DefaultTheme = Themes["default-light"];
   private json: any;
   public pages: ActionContainer = new ActionContainer();
@@ -45,20 +44,20 @@ export class ThemeEditorModel extends Base {
   public simulator: SurveySimulatorModel;
   @property({
     defaultValue: false,
-    onSet: (val: boolean, target: ThemeEditorModel) => {
+    onSet: (val: boolean, target: ThemeTabViewModel) => {
       target.simulator.survey.showInvisibleElements = val;
     }
   })
   showInvisibleElements;
   @property({ defaultValue: true }) showPagesInTestSurveyTab;
   @property({
-    defaultValue: true, onSet: (value: boolean, target: ThemeEditorModel) => {
+    defaultValue: true, onSet: (value: boolean, target: ThemeTabViewModel) => {
       if (!!target.simulator) target.simulator.isRunning = value;
     }
   }) isRunning: boolean;
   @propertyArray() pageListItems: Array<IAction>;
   @property({
-    onSet: (val: PageModel, target: ThemeEditorModel) => {
+    onSet: (val: PageModel, target: ThemeTabViewModel) => {
       if (!!val) {
         const survey = target.simulator.survey;
         if (survey.firstPageIsStarted) {
@@ -102,7 +101,7 @@ export class ThemeEditorModel extends Base {
   constructor(private surveyProvider: SurveyCreatorModel, private startThemeClasses: any = defaultV2Css) {
     super();
     this.simulator = new SurveySimulatorModel();
-    // this.themeName = ThemeEditorModel.DefaultTheme.themeName || "default";
+    // this.themeName = ThemeTabViewModel.DefaultTheme.themeName || "default";
     // updateCustomQuestionJSONs();
     // this.themeEditorSurveyValue = this.createThemeEditorSurvey();
 
@@ -134,7 +133,7 @@ export class ThemeEditorModel extends Base {
   //     this.backgroundImageAttachment = theme.backgroundImageAttachment || this.backgroundImageAttachment;
 
   //     const effectiveThemeCssVariables = {};
-  //     assign(effectiveThemeCssVariables, ThemeEditorModel.DefaultTheme.cssVariables || {}, baseTheme.cssVariables || {});
+  //     assign(effectiveThemeCssVariables, ThemeTabViewModel.DefaultTheme.cssVariables || {}, baseTheme.cssVariables || {});
   //     assign(effectiveThemeCssVariables, theme.cssVariables || {}, this.themeCssVariablesChanges);
   //     this.trimCssVariables(effectiveThemeCssVariables);
   //     const effectiveTheme: ITheme = {
@@ -159,7 +158,7 @@ export class ThemeEditorModel extends Base {
   //   }
   // }
 
-  // private _defaultSessionTheme = ThemeEditorModel.DefaultTheme;
+  // private _defaultSessionTheme = ThemeTabViewModel.DefaultTheme;
   // public get defaultSessionTheme() {
   //   return this._defaultSessionTheme;
   // }
@@ -210,7 +209,7 @@ export class ThemeEditorModel extends Base {
     });
     this.simulator.survey = newSurvey;
     if (this.onSurveyCreatedCallback) this.onSurveyCreatedCallback(this.survey);
-    const self: ThemeEditorModel = this;
+    const self: ThemeTabViewModel = this;
     this.survey.onComplete.add((sender: SurveyModel) => {
       self.isRunning = false;
     });
