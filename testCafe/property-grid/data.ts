@@ -123,5 +123,5 @@ test("Impossible to specify the default value for a masked Date field", async (t
     .expect(Selector("span").withExactText("Change Default Answer").visible).ok();
 
   const resultJson = await getJSON();
-  await t.expect(resultJson.pages[0].elements[0].defaultValue).eql("02/04/1998");
+  await t.expect(resultJson.pages[0].elements[0].defaultValue).eql("1998-02-04");
 });
