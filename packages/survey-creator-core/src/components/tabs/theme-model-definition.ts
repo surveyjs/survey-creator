@@ -14,6 +14,7 @@ const themeModelProperties: ISurveyPropertiesDefinition = {
       { name: "generalPrimaryColor", tab: "appearancecolor" },
       { name: "panelBackgroundTransparency", tab: "appearancecolor" },
       { name: "questionBackgroundTransparency", tab: "appearancecolor" },
+
       { name: "--sjs-primary-backcolor", tab: "appearanceprimarycolor" },
       { name: "--sjs-primary-backcolor-dark", tab: "appearanceprimarycolor" },
       { name: "--sjs-primary-backcolor-light", tab: "appearanceprimarycolor" },
@@ -46,14 +47,14 @@ const themeModelProperties: ISurveyPropertiesDefinition = {
       { name: "header", index: 100 },
       { name: "background", index: 200 },
       { name: "appearance", index: 300 },
-      { name: "appearancelines", parent: "appearance" },
-      { name: "appearanceinput", parent: "appearance" },
-      { name: "appearancequestion", parent: "appearance" },
-      { name: "appearancepage", parent: "appearance" },
-      { name: "appearanceother", parent: "appearance" },
-      { name: "appearancefont", parent: "appearance" },
-      { name: "appearancecolor", parent: "appearance" },
-      { name: "appearanceprimarycolor", parent: "appearance" },
+      { name: "appearancecolor", parent: "appearance", index: 100 },
+      { name: "appearancefont", parent: "appearance", index: 200 },
+      { name: "appearanceother", parent: "appearance", index: 300 },
+      { name: "appearanceprimarycolor", parent: "appearance", index: 400 },
+      { name: "appearancepage", parent: "appearance", index: 500 },
+      { name: "appearancequestion", parent: "appearance", index: 600 },
+      { name: "appearanceinput", parent: "appearance", index: 700 },
+      { name: "appearancelines", parent: "appearance", index: 800 },
     ]
   },
   "headersettings@header": {
@@ -85,10 +86,10 @@ const themeModelProperties: ISurveyPropertiesDefinition = {
     ],
     tabs: [
       { name: "settings" },
-      { name: "positions", parent: "settings" },
-      { name: "header", parent: "settings" },
-      { name: "background", parent: "settings" },
-      { name: "layout", parent: "settings" },
+      { name: "layout", parent: "settings", index: 100 },
+      { name: "background", parent: "settings", index: 200 },
+      { name: "header", parent: "settings", index: 300 },
+      { name: "positions", parent: "settings", index: 400 },
     ]
   },
 };

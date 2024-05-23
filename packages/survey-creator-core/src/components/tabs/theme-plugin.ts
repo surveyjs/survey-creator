@@ -104,6 +104,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     const question = Serializer.createClass("html") as QuestionHtmlModel;
     question.fromJSON({
       name: titleId,
+      visibleIf: "{advancedmode} = true",
       html: `<div class='spg-theme-group-caption'>${getLocString(titleId)}</div>`
     });
     panel.addElement(question);

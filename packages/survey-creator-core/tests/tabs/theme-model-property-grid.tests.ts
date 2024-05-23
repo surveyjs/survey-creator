@@ -1,4 +1,4 @@
-import { QuestionButtonGroupModel, QuestionCompositeModel, QuestionDropdownModel, SurveyElement } from "survey-core";
+import { QuestionButtonGroupModel, QuestionCompositeModel, QuestionDropdownModel, Serializer, SurveyElement } from "survey-core";
 import { HeaderModel, ThemeModel } from "../../src/components/tabs/theme-model";
 import { ThemeTabPlugin } from "../../src/components/tabs/theme-plugin";
 import { CreatorTester } from "../creator-tester";
@@ -956,4 +956,37 @@ test("restore headerViewContainer values", (): any => {
     "size": 41,
     "weight": "400",
   });
+});
+
+test("Check subcategory order", (): any => {
+  Serializer.addProperty("theme", {
+    name: "custom-question-title",
+    type: "fontsettings",
+    category: "appearancequestion",
+  });
+
+  Serializer.addProperty("theme", {
+    name: "matrix-title",
+    type: "fontsettings",
+    category: "appearancequestion",
+  });
+
+  try {
+    Serializer.getProperty("theme", "questionTitle").visible = false;
+
+    const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+    const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+    creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+
+    themePlugin.activate();
+    let propertyGridSurvey = themePlugin.propertyGrid.survey;
+    const subcategoriesTrueOrder = ["appearancecolor", "appearancefont", "appearanceother", "appearanceprimarycolor", "appearancepage", "appearancequestion", "appearanceinput", "appearancelines"];
+    const subcategories = propertyGridSurvey.getPanelByName("appearance").elements.filter(pe => pe.isPanel).map(pe => pe.name);
+
+    expect(subcategories).toStrictEqual(subcategoriesTrueOrder);
+  } finally {
+    Serializer.removeProperty("theme", "custom-question-title");
+    Serializer.removeProperty("theme", "matrix-title");
+    Serializer.getProperty("theme", "questionTitle").visible = true;
+  }
 });

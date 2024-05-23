@@ -158,6 +158,9 @@ export class SurveyQuestionProperties {
       return a.index < b.index ? -1 : a.index > b.index ? 1 : 0;
     });
     this.setParentTabs();
+    this.tabs.forEach(tab => {
+      tab.tabs?.sort((a, b) => a.index - b.index);
+    });
   }
   private setParentTabs(): void {
     for(let i = this.tabs.length - 1; i >= 0; i --) {
