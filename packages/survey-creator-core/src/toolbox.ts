@@ -13,7 +13,10 @@ import {
   Serializer,
   SurveyModel,
   DragOrClickHelper,
-  HashTable
+  HashTable,
+  ComputedUpdater,
+  CssClassBuilder,
+  surveyLocalization
 } from "survey-core";
 import { SurveyCreatorModel, toolboxLocationType } from "./creator-base";
 import { editorLocalization, getLocString } from "./editorLocalization";
@@ -211,6 +214,10 @@ export class QuestionToolbox
       target.updateResponsiveness(val, target.overflowBehavior);
     }
   }) isCompact: boolean;
+
+  @property({
+    defaultValue: false,
+  }) isFocused: boolean;
   /**
    * Indicates whether the toolbox is currently can have scrollbar.
    */
@@ -247,6 +254,18 @@ export class QuestionToolbox
     super();
     this.searchManager.isVisible = this.searchEnabled;
     this.searchManager.toolbox = this;
+    this.searchItem = new Action({
+      id: "searchItem-id",
+      css: "svc-toolbox__search-button",
+      innerCss: "sv-dots__item",
+      iconName: "icon-search",
+      component: "sv-action-bar-item",
+      tooltip: surveyLocalization.getString("search"),
+      action: () => {
+        (document.querySelector(".svc-toolbox__panel input") as HTMLInputElement).focus();
+        this.isFocused = true;
+      }
+    });
     this.updateResponsiveness(this.isCompact, this.overflowBehavior);
     this.createDefaultItems(supportedQuestions, useDefaultCategories);
     this.initDotsItem();
@@ -292,6 +311,29 @@ export class QuestionToolbox
       category.collapsed = category.name !== newValue;
     }
     //}
+  }
+
+  //@property() isCompactRendered: boolean;
+  public get isCompactRendered() {
+    return this.isCompact && !this.isFocused;
+  }
+  public focusOut(e) {
+    if (e.relatedTarget !== e.currentTarget &&
+      !e.currentTarget.contains(e.relatedTarget)) {
+      this.isFocused = false;
+      this.searchManager.filterString = "";
+    }
+  }
+
+  public searchItem: IAction;
+
+  public get classNames() {
+    return new CssClassBuilder()
+      .append("svc-toolbox")
+      .append("svc-toolbox--searchable", this.searchEnabled)
+      .append("svc-toolbox--compact", this.isCompactRendered)
+      .append("svc-toolbox--flyout", this.isCompact && this.isFocused)
+      .append("svc-toolbox--scrollable", this.isResponsivenessDisabled).toString();
   }
   public setLocation(toolboxLocation: toolboxLocationType) {
     if (toolboxLocation === "sidebar") {

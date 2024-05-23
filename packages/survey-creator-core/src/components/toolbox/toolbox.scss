@@ -10,9 +10,11 @@ svc-toolbox {
   height: 100%;
   display: flex;
   flex-direction: column;
+
   .spg-search-editor_container {
-      padding-left: calcSize(3);
-    }
+    padding: calcSize(1.5) calcSize(2) calcSize(2.5) calcSize(1.5);
+    width: unset;
+  }
 }
 
 .svc-toolbox__scroller {
@@ -22,6 +24,7 @@ svc-toolbox {
   direction: rtl;
   flex-grow: 1;
 }
+
 .svc-side-bar {
   .svc-toolbox {
     direction: ltr;
@@ -37,27 +40,75 @@ _:future,
 .svc-toolbox--compact {
   width: 100vw;
   margin-right: calc(-100vw + calcSize(10.5));
+
   .svc-toolbox__scroller {
     scrollbar-gutter: auto;
   }
+  .spg-search-editor_container {
+    opacity: 0;
+    position: absolute;
+  }
+  .svc-toolbox__category-separator--search {
+    margin-left: 0;
+    margin-bottom: 0;
+    margin-top: calcSize(1.5);
+    min-height: 1px;
+  }
 }
+.svc-toolbox__tool.svc-toolbox__search-button {
+  .sv-dots__item {
+    margin-top: 0;
+  }
+}
+
+.svc-toolbox--flyout {
+  width: 100vw;
+  margin-right: calc(-100vw + calcSize(10.5));
+  overflow: visible;
+  .spg-search-editor_container {
+    opacity: 1;
+    position: relative;
+  }
+  .svc-toolbox__panel {
+    z-index: 200;
+    position: relative;
+    background: $background-dim;
+    width: fit-content;
+    border-right: 1px solid $border;
+    box-shadow: $shadow-large;
+
+    .svc-toolbox__scroller {
+      scrollbar-gutter: auto;
+    }
+  }
+}
+
 .svc-toolbox--scrollable {
   .svc-toolbox__scroller {
     overflow-y: auto;
   }
 }
+
+.svc-toolbox__panel {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 .svc-creator__toolbox--right,
-[dir='rtl'],
-[style*='direction:rtl'],
-[style*='direction: rtl'] {
+[dir="rtl"],
+[style*="direction:rtl"],
+[style*="direction: rtl"] {
   .svc-toolbox__scroller {
     direction: ltr;
   }
+
   .svc-toolbox--compact {
     margin-right: 0;
     margin-left: calc(-100vw + calcSize(10.5));
     direction: ltr;
   }
+
   .svc-toolbox__tool {
     .sv-action__content {
       align-items: flex-end;
@@ -68,7 +119,15 @@ _:future,
 .svc-toolbox__container {
   direction: ltr;
 }
-
+.svc-toolbox__search-container {
+  direction: ltr;
+  position: sticky;
+  top: 0;
+  background-color: $background-dim;
+  margin-bottom: calcSize(1);
+  margin-right: calcSize(-1);
+  background-color: $background-dim;
+}
 .svc-toolbox__category {
   display: flex;
   flex-direction: column;
@@ -123,7 +182,6 @@ _:future,
   right: calcSize(1);
   top: calcSize(1);
   display: none;
-
 }
 
 .svc-toolbox__category-header__button {
