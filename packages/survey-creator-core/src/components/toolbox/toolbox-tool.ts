@@ -28,14 +28,7 @@ export class ToolboxToolViewModel extends Base {
   }
 
   public onMouseOver(itemValue, mouseoverEvent) {
-    this.toolboxItem.isHovered = true;
-    this.model.actions.forEach((action: any) => {
-      if (action === itemValue) {
-        action.showPopupDelayed(this.creator.toolbox.subItemsShowDelay);
-      } else {
-        action.hidePopupDelayed(this.creator.toolbox.subItemsHideDelay);
-      }
-    });
+    this.model.mouseOverHandler(itemValue);
     //mouseoverEvent.stopPropagation();
   }
 
