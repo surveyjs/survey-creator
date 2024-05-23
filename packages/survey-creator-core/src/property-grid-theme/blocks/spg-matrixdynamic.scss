@@ -68,18 +68,18 @@
   color: $foreground-light;
 }
 
-// .spg-matrixdynamic__add-btn {
-//   display: none;
-//   appearance: none;
-//   border: none;
-//   margin-top: calcSize(0.5);
-//   background: transparent;
-//   color: $primary;
-//   font-family: $font-family;
-//   font-size: calcSize(2);
-//   font-weight: 600;
-//   line-height: calcSize(3);
-// }
+.spg-matrixdynamic__add-btn {
+  display: none;
+  appearance: none;
+  border: none;
+  margin-top: calcSize(0.5);
+  background: transparent;
+  color: $primary;
+  font-family: $font-family;
+  font-size: calcSize(2);
+  font-weight: 600;
+  line-height: calcSize(3);
+}
 
 .spg-smiley-icon {
   width: calcSize(3);
