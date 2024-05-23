@@ -103,9 +103,9 @@ test("options.onFastEntryFastEntryCallback in FastEntry editor", () => {
   expect(result).toBeTruthy();
   const choices = originalElement.choices;
   expect(choices).toHaveLength(3);
-  expect(choices[0].value).toBe("1");
+  expect(choices[0].value).toBe(1);
   expect(choices[0].text).toBe("Option-1");
-  expect(choices[2].value).toBe("3");
+  expect(choices[2].value).toBe(3);
   expect(choices[2].text).toBe("Option-3");
 });
 

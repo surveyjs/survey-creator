@@ -5,41 +5,6 @@ import { editorLocalization } from "../editorLocalization";
 
 export class FastEntryEditorBase extends PropertyEditorSetupValue {
   protected commentValue: QuestionCommentModel;
-
-  protected static calcBeforeApplyItemsArray(
-    dest: Array<any>,
-    src: Array<any>,
-    names: Array<string>
-  ): void {
-    if (!src || src.length == 0) {
-      dest.splice(0, dest.length);
-      return;
-    }
-    if (dest.length > src.length) {
-      dest.splice(src.length, dest.length - src.length);
-    }
-    if (dest.length < src.length) {
-      var insertedArray = [];
-      for (var i = dest.length; i < src.length; i++) {
-        insertedArray.push(src[i]);
-      }
-      dest.splice.apply(dest, [dest.length, 0].concat(insertedArray));
-    }
-  }
-
-  public static applyItemsArray(
-    dest: Array<any>,
-    src: Array<any>,
-    names: Array<string> = []
-  ): void {
-    this.calcBeforeApplyItemsArray(dest, src, names);
-    for (var i = 0; i < dest.length; i++) {
-      names.forEach((name) => {
-        dest[i][name] = src[i][name];
-      });
-    }
-  }
-
   constructor(
     public choices: Array<any>,
     options: ISurveyCreatorOptions = null,
@@ -80,7 +45,30 @@ export class FastEntryEditorBase extends PropertyEditorSetupValue {
       }
     });
   }
-
+  protected calcBeforeApplyItemsArray(dest: Array<any>, src: Array<any>, names: Array<string>): void {
+    if (!src || src.length == 0) {
+      dest.splice(0, dest.length);
+      return;
+    }
+    if (dest.length > src.length) {
+      dest.splice(src.length, dest.length - src.length);
+    }
+    if (dest.length < src.length) {
+      var insertedArray = [];
+      for (var i = dest.length; i < src.length; i++) {
+        insertedArray.push(src[i]);
+      }
+      dest.splice.apply(dest, [dest.length, 0].concat(insertedArray));
+    }
+  }
+  public applyItemValueArray(dest: Array<any>, src: Array<any>, names: Array<string> = []): void {
+    this.calcBeforeApplyItemsArray(dest, src, names);
+    for (var i = 0; i < dest.length; i++) {
+      names.forEach((name) => {
+        dest[i][name] = src[i][name];
+      });
+    }
+  }
   protected getSurveyJSON(): any {
     return {
       elements: [
@@ -108,7 +96,7 @@ export class FastEntryEditorBase extends PropertyEditorSetupValue {
     const texts = text.split("\n") || [];
     let items = this.convertTextToItemValues(texts);
     items = this.options.onFastEntryCallback(items, texts);
-    FastEntryEditorBase.applyItemsArray(<any>this.choices, items, this.names);
+    this.applyItemValueArray(<any>this.choices, items, this.names);
     return true;
   }
 
@@ -195,11 +183,18 @@ export class FastEntryEditorBase extends PropertyEditorSetupValue {
 }
 
 export class FastEntryEditor extends FastEntryEditorBase {
-  public static applyItemValueArray(
-    dest: Array<ItemValue>,
-    src: Array<ItemValue>,
-    names: Array<string> = []
-  ): void {
+  constructor(
+    public choices: Array<ItemValue>,
+    options: ISurveyCreatorOptions = null,
+    protected className: string = "itemvalue",
+    protected names: Array<string> = ["value", "text"]
+  ) {
+    super(choices, options, className, names);
+  }
+  public apply(): boolean {
+    return this.applyCore();
+  }
+  public applyItemValueArray(dest: Array<ItemValue>, src: Array<ItemValue>, names: Array<string> = []): void {
     this.calcBeforeApplyItemsArray(dest, src, names);
     for (var i = 0; i < dest.length; i++) {
       if (dest[i].value != src[i].value) {
@@ -211,18 +206,6 @@ export class FastEntryEditor extends FastEntryEditorBase {
         dest[i][name] = src[i][name];
       });
     }
-  }
-
-  constructor(
-    public choices: Array<ItemValue>,
-    options: ISurveyCreatorOptions = null,
-    protected className: string = "itemvalue",
-    protected names: Array<string> = ["value", "text"]
-  ) {
-    super(choices, options, className, names);
-  }
-  public apply(): boolean {
-    return this.applyCore();
   }
   protected convertItemValuesToText(): string {
     var text = "";
