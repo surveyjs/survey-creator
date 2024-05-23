@@ -42,7 +42,7 @@ import { PageAdorner } from "./components/page";
 import {
   ElementDeletingEvent, PropertyGetReadOnlyEvent, ElementGetDisplayNameEvent, HtmlToMarkdownEvent, ElementAllowOperationsEvent,
   ElementGetActionsEvent, PropertyAddingEvent, PropertyGridSurveyCreatedEvent, PropertyEditorCreatedEvent, PropertyEditorUpdateTitleActionsEvent,
-  PropertyGridShowPopupEvent, CollectionItemAllowOperationsEvent, CollectionItemAddedEvent, MatrixColumnAddedEvent, ConfigureTablePropertyEditorEvent,
+  PropertyGridShowPopupEvent, CollectionItemAllowOperationsEvent, CollectionItemAddedEvent, FastEntryItemsEvent, MatrixColumnAddedEvent, ConfigureTablePropertyEditorEvent,
   PropertyDisplayCustomErrorEvent, PropertyValueChangingEvent, PropertyValueChangedEvent, ConditionGetQuestionListEvent, GetConditionOperatorEvent,
   LogicRuleGetDisplayTextEvent, ModifiedEvent, QuestionAddedEvent, PanelAddedEvent, PageAddedEvent,
   PageGetFooterActionsEvent, SurveyInstanceCreatedEvent, DesignerSurveyCreatedEvent, PreviewSurveyCreatedEvent, NotifyEvent, ElementFocusingEvent,
@@ -493,6 +493,7 @@ export class SurveyCreatorModel extends Base
    * @see onCollectionItemAllowOperations
    */
   public onItemValueAdded: EventBase<SurveyCreatorModel, CollectionItemAddedEvent> = this.addCreatorEvent<SurveyCreatorModel, CollectionItemAddedEvent>();
+  public onFasterEntryItems: EventBase<SurveyCreatorModel, FastEntryItemsEvent> = this.addCreatorEvent<SurveyCreatorModel, FastEntryItemsEvent>();
   /**
    * An event that is raised when users add a new column to a [Multi-Select Matrix](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-with-dropdown-list) or [Dynamic Matrix](https://surveyjs.io/form-library/documentation/api-reference/dynamic-matrix-table-question-model). Use this event to modify this column.
    * 
@@ -3040,7 +3041,7 @@ export class SurveyCreatorModel extends Base
     propertyName: string,
     itemValue: ItemValue,
     itemValues: Array<ItemValue>
-  ) {
+  ): void {
     var options = {
       obj: obj,
       propertyName: propertyName,
@@ -3048,6 +3049,14 @@ export class SurveyCreatorModel extends Base
       itemValues: itemValues
     };
     this.onItemValueAdded.fire(this, options);
+  }
+  onFastEntryCallback(items: Array<ItemValue>, lines: Array<string>): Array<ItemValue> {
+    const options = {
+      items: items,
+      lines: lines
+    };
+    this.onFasterEntryItems.fire(this, options);
+    return options.items;
   }
   onMatrixDropdownColumnAddedCallback(
     matrix: Question,

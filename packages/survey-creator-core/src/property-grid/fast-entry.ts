@@ -1,4 +1,4 @@
-import { ItemValue, QuestionCommentModel, QuestionTextBase, Serializer } from "survey-core";
+import { ItemValue, QuestionCommentModel, QuestionTextBase, Serializer, Base } from "survey-core";
 import { PropertyEditorSetupValue } from "./index";
 import { ISurveyCreatorOptions } from "../creator-settings";
 import { editorLocalization } from "../editorLocalization";
@@ -100,17 +100,20 @@ export class FastEntryEditorBase extends PropertyEditorSetupValue {
 
   public apply(): boolean {
     if (this.comment.isEmpty()) return false;
+    return this.applyCore();
+  }
+  protected applyCore(): boolean {
     if (this.editSurvey.hasErrors(true)) return false;
-    const items = this.convertTextToItemValues(this.comment.value);
+    const text = this.comment.value || "";
+    const texts = text.split("\n") || [];
+    let items = this.convertTextToItemValues(texts);
+    items = this.options.onFastEntryCallback(items, texts);
     FastEntryEditorBase.applyItemsArray(<any>this.choices, items, this.names);
     return true;
   }
 
-  protected convertTextToItemValues(text: string): ItemValue[] {
-    var items = [];
-    if (!text) return items;
-
-    var texts = text.split("\n");
+  protected convertTextToItemValues(texts: Array<string>): ItemValue[] {
+    const items = [];
     for (var i = 0; i < texts.length; i++) {
       if (!texts[i]) continue;
       var elements = texts[i].split(ItemValue.Separator);
@@ -218,15 +221,9 @@ export class FastEntryEditor extends FastEntryEditorBase {
   ) {
     super(choices, options, className, names);
   }
-
   public apply(): boolean {
-    //if (this.comment.isEmpty()) return false;
-    if (this.editSurvey.hasErrors(true)) return false;
-    const items = this.convertTextToItemValues(this.comment.value);
-    FastEntryEditor.applyItemValueArray(<any>this.choices, items, this.names);
-    return true;
+    return this.applyCore();
   }
-
   protected convertItemValuesToText(): string {
     var text = "";
     this.choices.forEach((item) => {

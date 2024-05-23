@@ -280,6 +280,10 @@ export interface CollectionItemAddedEvent {
    */
   itemValues: ItemValue[];
 }
+export interface FastEntryItemsEvent {
+  items: ItemValue[];
+  lines: string[];
+}
 
 export interface MatrixColumnAddedEvent {
   /**
