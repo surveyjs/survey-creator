@@ -7,7 +7,7 @@
 }
 
 
-.sv-popup--overlay {
+.sv-popup--overlay:not(.sv-popup--dropdown-overlay) {
   .sv-popup__container {
     background: var(--ctr-popup-haze-background-color, $background-semitransparent);
   }

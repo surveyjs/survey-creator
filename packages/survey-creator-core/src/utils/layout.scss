@@ -112,11 +112,11 @@
     opacity: var(--ctr-menu-toolbar-button-opacity-disabled, 0.25);
   }
 
-  // .sv-action-bar-item--secondary {
-  //   .sv-action-bar-item__icon use {
-  //     fill: $secondary;
-  //   }
-  // }
+  .sv-action-bar-item--secondary {
+    .sv-action-bar-item__icon use {
+      fill: $secondary;
+    }
+  }
 
   .sv-action-bar-item--active {
     .sv-action-bar-item__icon use {
@@ -135,19 +135,19 @@
   }
 }
 
-// .svc-footer-bar {
-//   .svc-toolbar-wrapper {
-//     height: calcSize(6);
+.svc-footer-bar {
+  .svc-toolbar-wrapper {
+    height: calcSize(6);
 
-//     .sv-action-bar {
-//       justify-content: center;
-//       padding: 0;
-//       width: 100%;
+    .sv-action-bar {
+      justify-content: center;
+      padding: 0;
+      width: 100%;
 
-//       height: calc(6 * #{$base-unit});
-//       background: $background;
-//       border-top: 1px solid $border;
-//       box-sizing: border-box;
-//     }
-//   }
-// }
+      height: calc(6 * #{$base-unit});
+      background: $background;
+      border-top: 1px solid $border;
+      box-sizing: border-box;
+    }
+  }
+}
