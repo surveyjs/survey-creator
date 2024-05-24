@@ -564,3 +564,14 @@ test("Editor: do not allow to change the activeTab if there is an error", () => 
   editor.navigationBar.actions[1].action();
   expect(editor.activeTab).toEqual("creator");
 });
+test("Editor: get/set locale", () => {
+  const editor = new CreatorPresetEditorModel();
+  expect(editor.locale).toBe("en");
+  expect(editor.creator.locale).toBe("en");
+  expect(editor.model.locale).toBe("");
+  expect(editor.navigationBar.actions[3].title).toBe("English");
+  editor.locale = "de";
+  expect(editor.creator.locale).toBe("de");
+  expect(editor.model.locale).toBe("de");
+  expect(editor.navigationBar.actions[3].title).toBe("de");
+});

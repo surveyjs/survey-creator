@@ -1,10 +1,11 @@
 import { SurveyCreatorModel } from "../../creator-base";
 import { CreatorPreset, ICreatorPresetData } from "../presets";
-import { ActionContainer, Base, ComputedUpdater, SurveyModel } from "survey-core";
+import { ActionContainer, Base, ComputedUpdater, SurveyModel, createDropdownActionModel } from "survey-core";
 import { CreatorPresetEditableBase } from "./presets-editable-base";
 import { CreatorPresetEditableToolbox, CreatorPresetEditableToolboxConfigurator, CreatorPresetEditableToolboxDefinition } from "./presets-editable-toolbox";
 import { CreatorPresetEditableTabs } from "./presets-editable-tabs";
 import { CreatorEditablePresetPropertyGrid, CreatorPresetEditablePropertyGridDefinition } from "./presets-editable-properties";
+import { editorLocalization } from "../../editorLocalization";
 
 export class CreatorPresetEditorModel extends Base {
   private presetValue: CreatorPreset;
@@ -16,10 +17,12 @@ export class CreatorPresetEditorModel extends Base {
     this.presetValue = new CreatorPreset(json);
     this.creatorValue = creator || this.createCreator();
     this.modelValue = this.createModel();
+    this.locale = "en";
     this.navigationBarValue = new ActionContainer();
     this.addNavigationAction("preset", "Edit Preset");
     this.addNavigationAction("creator", "Review Creator");
     this.addNavigationAction("results", "Preset JSON");
+    this.addLocaleDropdown();
     this.activeTab = this.navigationBar.actions[0].id;
   }
   public get preset(): CreatorPreset { return this.presetValue; }
@@ -36,6 +39,13 @@ export class CreatorPresetEditorModel extends Base {
     if(this.activeTab === "preset" && !this.model.validate(true, true)) return false;
     this.activeTab = val;
     return true;
+  }
+  public get locale(): string {
+    return this.creator.locale;
+  }
+  public set locale(val: string) {
+    this.creator.locale = val;
+    this.model.locale = val;
   }
   public get json(): ICreatorPresetData {
     return this.preset.getJson();
@@ -59,6 +69,21 @@ export class CreatorPresetEditorModel extends Base {
       action: () => { this.setActiveTab(id); }
     };
     this.navigationBar.addAction(actionInfo);
+  }
+  private addLocaleDropdown(): void {
+    const locales = editorLocalization.getLocales();
+
+    const items = locales.map((loc) => ({ id: loc || "en", title: editorLocalization.getLocaleName(loc || "en") }));
+    const action = createDropdownActionModel({
+      id: "locales",
+      mode: "small",
+      title: <any>new ComputedUpdater<string>(() => editorLocalization.getLocaleName(this.locale))
+    }, {
+      items: items,
+      allowSelection: true,
+      onSelectionChanged: (item: any) => { this.locale = item.id; },
+    });
+    this.navigationBar.addAction(action);
   }
   protected createModel(): SurveyModel {
     const editablePresets = this.createEditablePresets();
