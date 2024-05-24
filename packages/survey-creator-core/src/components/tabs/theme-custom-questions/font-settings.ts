@@ -39,7 +39,7 @@ function getElementsJSON() {
       ],
     },
     {
-      type: "colorsettings",
+      type: "coloralpha",
       name: "color",
       colorTitle: getLocString("theme.color"),
       colorTitleLocation: "left",
@@ -47,7 +47,7 @@ function getElementsJSON() {
       descriptionLocation: "hidden"
     },
     {
-      type: "colorsettings",
+      type: "coloralpha",
       name: "placeholdercolor",
       colorTitle: getLocString("theme.placeholderColor"),
       colorTitleLocation: "left",
@@ -66,14 +66,14 @@ function getElementsJSON() {
   ];
 }
 
-if (!ComponentCollection.Instance.getCustomQuestionByName("fontsettings")) {
+if (!ComponentCollection.Instance.getCustomQuestionByName("font")) {
   ComponentCollection.Instance.add({
-    name: "fontsettings",
+    name: "font",
     showInToolbox: false,
     internal: true,
     elementsJSON: getElementsJSON(),
     onInit() {
-      Serializer.addProperties("fontsettings", [
+      Serializer.addProperties("font", [
         {
           name: "allowEmptyColorValue:boolean",
           default: false,
@@ -109,7 +109,7 @@ function syncPropertiesFromComposite(question: Question, propertyName: string, n
 }
 
 export function updateFontSettingsJSON() {
-  const config = ComponentCollection.Instance.getCustomQuestionByName("fontsettings");
+  const config = ComponentCollection.Instance.getCustomQuestionByName("font");
   config.json.elementsJSON = getElementsJSON();
 }
 

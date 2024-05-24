@@ -794,6 +794,9 @@ export var turkishStrings = {
       slider: "Kaydırıcı",
       expression: "İfade",
       questionSettings: "Soru Ayarları",
+      header: "Üstbilgi",
+      background: "Arka plan",
+      appearance: "Görünüş",
       others: "Diğer"
     },
     editProperty: "Özelliği düzenle '{0}'",
@@ -1475,10 +1478,6 @@ export var turkishStrings = {
     "--foreground": "Ön plan rengi",
     "--base-unit": "Temel ünite",
     advancedMode: "Gelişmiş mod",
-    groupGeneral: "Genel",
-    groupHeader: "Üstbilgi",
-    groupBackground: "Arka plan",
-    groupAppearance: "Görünüş",
     themeName: "Tema",
     themeMode: "Soru görünümü",
     themeModePanels: "Temerrüt",
@@ -1489,9 +1488,6 @@ export var turkishStrings = {
     primaryDefaultColor: "Temerrüt",
     primaryDarkColor: "Hover",
     primaryLightColor: "Seçilmiş",
-    coverTitleForecolor: "Başlık ön rengi",
-    coverDescriptionForecolor: "Açıklama ön renk",
-    coverOverlapEnabled: "Örtüş",
     backgroundDimColor: "Arka plan rengi",
     backgroundImage: "Arka plan resmi",
     backgroundImageFitAuto: "Otomatik",
@@ -1530,8 +1526,8 @@ export var turkishStrings = {
     fontWeightBold: "Kalın",
     scale: "Ölçeklemek",
     cornerRadius: "Köşe yarıçapı",
-    surveyTitle: "Anket başlığı yazı tipi",
-    surveyDescription: "Anket açıklaması yazı tipi",
+    surveyTitleFont: "Anket başlığı yazı tipi",
+    surveyDescriptionFont: "Anket açıklaması yazı tipi",
     pageTitle: "Sayfa başlığı yazı tipi",
     titleFont: "Başlık yazı tipi",
     descriptionFont: "Açıklama yazı tipi",
@@ -1547,14 +1543,14 @@ export var turkishStrings = {
     headerView: "Görünüm",
     headerViewBasic: "Temel",
     headerViewAdvanced: "İleri",
-    coverInheritWidthFrom: "İçerik alanı genişliği",
-    coverInheritWidthFromSurvey: "Anketle aynı",
-    coverInheritWidthFromContainer: "Konteynere sığdır",
-    coverTextAreaWidth: "Metin genişliği",
-    coverBackgroundColorSwitch: "Arka plan rengi",
-    coverBackgroundColorNone: "Hiç kimse",
-    coverBackgroundColorAccentColor: "Vurgu rengi",
-    coverBackgroundColorCustom: "Töre",
+    headerInheritWidthFrom: "İçerik alanı genişliği",
+    headerInheritWidthFromSurvey: "Anketle aynı",
+    headerInheritWidthFromContainer: "Konteynere sığdır",
+    headerTextAreaWidth: "Metin genişliği",
+    headerBackgroundColorSwitch: "Arka plan rengi",
+    headerBackgroundColorNone: "Hiç kimse",
+    headerBackgroundColorAccentColor: "Vurgu rengi",
+    headerBackgroundColorCustom: "Töre",
     horizontalAlignmentLeft: "Sol",
     horizontalAlignmentCenter: "Orta",
     horizontalAlignmentRight: "Sağ",
@@ -1562,8 +1558,8 @@ export var turkishStrings = {
     verticalAlignmentMiddle: "Orta",
     verticalAlignmentBottom: "Dip",
     logoPosition: "Logo konumu",
-    coverTitlePosition: "Unvan pozisyonu",
-    coverDescriptionPosition: "Açıklama konumu",
+    headerTitlePosition: "Unvan pozisyonu",
+    headerDescriptionPosition: "Açıklama konumu",
     names: {
       default: "Temerrüt",
       sharp: "Keskin",
@@ -1991,7 +1987,6 @@ editorLocalization.locales["tr"] = turkishStrings;
 // theme.--primary-foreground: "Primary foreground color" => "Birincil ön plan rengi"
 // theme.--foreground: "Foreground color" => "Ön plan rengi"
 // theme.--base-unit: "Base unit" => "Temel ünite"
-// theme.groupGeneral: "General" => "Genel"
 // theme.groupAdvanced: "Advanced" => "İleri"
 // theme.themeName: "Theme" => "Tema"
 // theme.themeMode: "Question appearance" => "Soru görünümü"
@@ -2038,7 +2033,7 @@ editorLocalization.locales["tr"] = turkishStrings;
 // theme.fontWeightBold: "Bold" => "Kalın"
 // theme.scale: "Scale" => "Ölçeklemek"
 // theme.cornerRadius: "Corner radius" => "Köşe yarıçapı"
-// theme.surveyTitle: "Survey title font" => "Anket başlığı yazı tipi"
+// theme.surveyTitleFont: "Survey title font" => "Anket başlığı yazı tipi"
 // theme.pageTitle: "Page title font" => "Sayfa başlığı yazı tipi"
 // theme.pageDescription: "Page description font" => "Sayfa açıklaması yazı tipi"
 // theme.boxShadowX: "X" => "X"
@@ -2099,22 +2094,20 @@ editorLocalization.locales["tr"] = turkishStrings;
 // survey.title: "Title" => "Başlık"
 // page.title: "Title" => "Başlık"
 // p.setValueIf: "Set value if" => "Değeri ayarla"
-// theme.groupHeader: "Header" => "Üstbilgi"
-// theme.coverTitleForecolor: "Title forecolor" => "Başlık ön rengi"
-// theme.coverOverlapEnabled: "Overlap" => "Örtüş"
+// theme.header: "Header" => "Üstbilgi"
 // theme.backgroundImageFitFill: "Stretch" => "Uzatmak"
 // theme.backgroundImageFitTile: "Tile" => "Kiremit"
 // theme.headerView: "View" => "Görünüm"
 // theme.headerViewBasic: "Basic" => "Temel"
 // theme.headerViewAdvanced: "Advanced" => "İleri"
-// theme.coverInheritWidthFrom: "Content area width" => "İçerik alanı genişliği"
-// theme.coverInheritWidthFromSurvey: "Same as survey" => "Anketle aynı"
-// theme.coverInheritWidthFromPage: "Fit to page" => "Sayfaya sığdır"
-// theme.coverTextAreaWidth: "Text width" => "Metin genişliği"
-// theme.coverBackgroundColorSwitch: "Background color" => "Arka plan rengi"
-// theme.coverBackgroundColorNone: "None" => "Hiç kimse"
-// theme.coverBackgroundColorAccentColor: "Accent color" => "Vurgu rengi"
-// theme.coverBackgroundColorCustom: "Custom" => "Töre"
+// theme.headerInheritWidthFrom: "Content area width" => "İçerik alanı genişliği"
+// theme.headerInheritWidthFromSurvey: "Same as survey" => "Anketle aynı"
+// theme.headerInheritWidthFromPage: "Fit to page" => "Sayfaya sığdır"
+// theme.headerTextAreaWidth: "Text width" => "Metin genişliği"
+// theme.headerBackgroundColorSwitch: "Background color" => "Arka plan rengi"
+// theme.headerBackgroundColorNone: "None" => "Hiç kimse"
+// theme.headerBackgroundColorAccentColor: "Accent color" => "Vurgu rengi"
+// theme.headerBackgroundColorCustom: "Custom" => "Töre"
 // theme.horizontalAlignmentLeft: "Left" => "Sol"
 // theme.horizontalAlignmentCenter: "Center" => "Orta"
 // theme.horizontalAlignmentRight: "Right" => "Sağ"
@@ -2134,18 +2127,14 @@ editorLocalization.locales["tr"] = turkishStrings;
 // pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "\"Kaynak türü\" \"Yerel dosyalar\" olduğunda veya fotoğraf makinesi kullanılamadığında geçerlidir"
 // pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "\"Kaynak türü\" \"Kamera\" olduğunda geçerlidir."
 // pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "\"Kaynak türü\" \"Yerel dosyalar veya kamera\" olduğunda geçerlidir."
-// theme.groupBackground: "Background" => "Arka plan"
-// theme.groupAppearance: "Appearance" => "Görünüş"
-// theme.coverDescriptionForecolor: "Description forecolor" => "Açıklama ön renk"
+// theme.background: "Background" => "Arka plan"
+// theme.appearance: "Appearance" => "Görünüş"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Temayı gerçekten sıfırlamak istiyor musunuz? Tüm özelleştirmeleriniz kaybolacak."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "Evet, temayı sıfırlayın"
-// theme.groupBackground: "Background" => "Arka plan"
-// theme.groupAppearance: "Appearance" => "Görünüş"
-// theme.coverDescriptionForecolor: "Description forecolor" => "Açıklama ön renk"
-// theme.coverInheritWidthFromContainer: "Fit to container" => "Konteynere sığdır"
+// theme.headerInheritWidthFromContainer: "Fit to container" => "Konteynere sığdır"
 // signaturepad.showPlaceholder: "Show the placeholder" => "Yer tutucuyu gösterme"
 // signaturepad.placeholder: "Placeholder text" => "Yer tutucu metin"
-// theme.surveyDescription: "Survey description font" => "Anket açıklaması yazı tipi"
+// theme.surveyDescriptionFont: "Survey description font" => "Anket açıklaması yazı tipi"
 // ed.prevFocus: "Focus previous" => "Öncesine odaklan"
 // ed.nextFocus: "Focus next" => "Sonrakine odaklan"
 // ed.saveTheme: "Save Theme" => "Temayı Kaydet"
@@ -2158,8 +2147,8 @@ editorLocalization.locales["tr"] = turkishStrings;
 // signaturepad.penMinWidth: "Minimum pen width" => "Minimum kalem genişliği"
 // signaturepad.penMaxWidth: "Maximum pen width" => "Maksimum kalem genişliği"
 // theme.logoPosition: "Logo position" => "Logo konumu"
-// theme.coverTitlePosition: "Title position" => "Unvan pozisyonu"
-// theme.coverDescriptionPosition: "Description position" => "Açıklama konumu"
+// theme.headerTitlePosition: "Title position" => "Unvan pozisyonu"
+// theme.headerDescriptionPosition: "Description position" => "Açıklama konumu"
 // ed.propertyGridNoResultsFound: "No results found" => "Sonuç bulunamadı"
 // pv.leftRight: "Left and right" => "Sol ve sağ"
 // p.sourceType: "Source type" => "Kaynak türü"

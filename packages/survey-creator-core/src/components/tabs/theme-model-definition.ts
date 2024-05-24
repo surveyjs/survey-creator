@@ -57,7 +57,7 @@ const themeModelProperties: ISurveyPropertiesDefinition = {
       { name: "appearancelines", parent: "appearance", index: 800 },
     ]
   },
-  "headersettings@header": {
+  "header@header": {
     properties: [
       { name: "headerView" },
       { name: "logoPosition" },
@@ -67,7 +67,7 @@ const themeModelProperties: ISurveyPropertiesDefinition = {
       { name: "inheritWidthFrom", tab: "layout" },
       { name: "textAreaWidth", tab: "layout" },
 
-      { name: "backgroundColorSwitch", tab: "background" },
+      { name: "backgroundColorType", tab: "background" },
       { name: "backgroundColor", tab: "background" },
       { name: "backgroundImage", tab: "background" },
       { name: "backgroundImageFit", tab: "background" },

@@ -794,6 +794,9 @@ var germanTranslation = {
       slider: "Slider",
       expression: "Ausdruck",
       questionSettings: "Einstellungen für Fragen",
+      header: "Titelzeile",
+      background: "Hintergrund",
+      appearance: "Erscheinungsbild",
       others: "Weiteres"
     },
     editProperty: "Eigenschaft bearbeiten '{0}'",
@@ -1475,10 +1478,6 @@ var germanTranslation = {
     "--foreground": "Vordergrundfarbe",
     "--base-unit": "Basiseinheit",
     advancedMode: "Erweiterter Modus",
-    groupGeneral: "Allgemein",
-    groupHeader: "Titelzeile",
-    groupBackground: "Hintergrund",
-    groupAppearance: "Erscheinungsbild",
     themeName: "Thema",
     themeMode: "Erscheinungsbild der Frage",
     themeModePanels: "Standard",
@@ -1489,9 +1488,6 @@ var germanTranslation = {
     primaryDefaultColor: "Standard",
     primaryDarkColor: "Schweben",
     primaryLightColor: "Ausgewählt",
-    coverTitleForecolor: "Vorfarbe des Titels",
-    coverDescriptionForecolor: "Beschreibung Vorfarbe",
-    coverOverlapEnabled: "Überlappung",
     backgroundDimColor: "Hintergrundfarbe",
     backgroundImage: "Hintergrundbild",
     backgroundImageFitAuto: "Auto",
@@ -1530,8 +1526,8 @@ var germanTranslation = {
     fontWeightBold: "Fett",
     scale: "Maßstab",
     cornerRadius: "Eckenradius",
-    surveyTitle: "Schriftart für den Umfragetitel",
-    surveyDescription: "Schriftart der Umfragebeschreibung",
+    surveyTitleFont: "Schriftart für den Umfragetitel",
+    surveyDescriptionFont: "Schriftart der Umfragebeschreibung",
     pageTitle: "Schriftart des Seitentitels",
     titleFont: "Schriftart des Titels",
     descriptionFont: "Beschreibung Schriftart",
@@ -1547,14 +1543,14 @@ var germanTranslation = {
     headerView: "Ansehen",
     headerViewBasic: "Grundlegend",
     headerViewAdvanced: "Fortgeschritten",
-    coverInheritWidthFrom: "Breite des Inhaltsbereichs",
-    coverInheritWidthFromSurvey: "Wie Umfrage",
-    coverInheritWidthFromContainer: "Passend zum Container",
-    coverTextAreaWidth: "Textbreite",
-    coverBackgroundColorSwitch: "Hintergrundfarbe",
-    coverBackgroundColorNone: "Keine",
-    coverBackgroundColorAccentColor: "Akzentfarbe",
-    coverBackgroundColorCustom: "Bentzerdefiniert",
+    headerInheritWidthFrom: "Breite des Inhaltsbereichs",
+    headerInheritWidthFromSurvey: "Wie Umfrage",
+    headerInheritWidthFromContainer: "Passend zum Container",
+    headerTextAreaWidth: "Textbreite",
+    headerBackgroundColorSwitch: "Hintergrundfarbe",
+    headerBackgroundColorNone: "Keine",
+    headerBackgroundColorAccentColor: "Akzentfarbe",
+    headerBackgroundColorCustom: "Bentzerdefiniert",
     horizontalAlignmentLeft: "Links",
     horizontalAlignmentCenter: "Mitte",
     horizontalAlignmentRight: "Rechts",
@@ -1562,8 +1558,8 @@ var germanTranslation = {
     verticalAlignmentMiddle: "Mitte",
     verticalAlignmentBottom: "Unten",
     logoPosition: "Position des Logos",
-    coverTitlePosition: "Position des Titels",
-    coverDescriptionPosition: "Beschreibung Position",
+    headerTitlePosition: "Position des Titels",
+    headerDescriptionPosition: "Beschreibung Position",
     names: {
       default: "Default",
       sharp: "Scharf",
@@ -1720,7 +1716,6 @@ editorLocalization.locales["de"] = germanTranslation;
 // theme.--primary-foreground: "Primary foreground color" => "Primäre Vordergrundfarbe"
 // theme.--foreground: "Foreground color" => "Vordergrundfarbe"
 // theme.--base-unit: "Base unit" => "Basiseinheit"
-// theme.groupGeneral: "General" => "Allgemein"
 // theme.groupAdvanced: "Advanced" => "Fortgeschritten"
 // theme.themeName: "Theme" => "Thema"
 // theme.themeMode: "Question appearance" => "Erscheinungsbild der Frage"
@@ -1759,7 +1754,7 @@ editorLocalization.locales["de"] = germanTranslation;
 // theme.fontWeightSemiBold: "Semi-bold" => "Halbfett"
 // theme.scale: "Scale" => "Maßstab"
 // theme.cornerRadius: "Corner radius" => "Eckenradius"
-// theme.surveyTitle: "Survey title font" => "Schriftart für den Umfragetitel"
+// theme.surveyTitleFont: "Survey title font" => "Schriftart für den Umfragetitel"
 // theme.pageTitle: "Page title font" => "Schriftart des Seitentitels"
 // theme.pageDescription: "Page description font" => "Schriftart für die Seitenbeschreibung"
 // theme.boxShadowX: "X" => "X"
@@ -1816,25 +1811,23 @@ editorLocalization.locales["de"] = germanTranslation;
 // survey.title: "Title" => "Titel"
 // page.title: "Title" => "Titel"
 // p.setValueIf: "Set value if" => "Wert setzen, wenn"
-// theme.coverTitleForecolor: "Title forecolor" => "Vorfarbe des Titels"
-// theme.coverOverlapEnabled: "Overlap" => "Überlappung"
 // theme.backgroundImageFitFill: "Stretch" => "Strecken"
 // theme.headerView: "View" => "Ansehen"
 // theme.headerViewBasic: "Basic" => "Grundlegend"
 // theme.headerViewAdvanced: "Advanced" => "Fortgeschritten"
-// theme.coverInheritWidthFrom: "Content area width" => "Breite des Inhaltsbereichs"
-// theme.coverInheritWidthFromSurvey: "Same as survey" => "Wie Umfrage"
-// theme.coverInheritWidthFromPage: "Fit to page" => "An Seite anpassen"
-// theme.coverTextAreaWidth: "Text width" => "Textbreite"
-// theme.coverBackgroundColorSwitch: "Background color" => "Hintergrundfarbe"
-// theme.coverBackgroundColorAccentColor: "Accent color" => "Akzentfarbe"
+// theme.headerInheritWidthFrom: "Content area width" => "Breite des Inhaltsbereichs"
+// theme.headerInheritWidthFromSurvey: "Same as survey" => "Wie Umfrage"
+// theme.headerInheritWidthFromPage: "Fit to page" => "An Seite anpassen"
+// theme.headerTextAreaWidth: "Text width" => "Textbreite"
+// theme.headerBackgroundColorSwitch: "Background color" => "Hintergrundfarbe"
+// theme.headerBackgroundColorAccentColor: "Accent color" => "Akzentfarbe"
 // theme.horizontalAlignmentLeft: "Left" => "Links"
 // theme.horizontalAlignmentCenter: "Center" => "Mitte"
 // theme.horizontalAlignmentRight: "Right" => "Rechts"
 // theme.verticalAlignmentMiddle: "Middle" => "Mitte"
 // theme.logoPosition: "Logo Position" => "Position des Logos"
-// theme.coverTitlePosition: "Title Position" => "Position des Titels"
-// theme.coverDescriptionPosition: "Description Position" => "Beschreibung Position"
+// theme.headerTitlePosition: "Title Position" => "Position des Titels"
+// theme.headerDescriptionPosition: "Description Position" => "Beschreibung Position"
 // lg.question_resetValueText: "reset value for question: {0}" => "Reset-Wert für Frage: {0}"
 // lg.question_setValueText: "assign value: {1} to question: {0}" => "Wert zuweisen: {1} zu fragen: {0}"
 // lg.column_resetValueText: "reset cell value for column: {0}" => "Zellenwert für Spalte zurücksetzen: {0}"
@@ -1848,16 +1841,14 @@ editorLocalization.locales["de"] = germanTranslation;
 // pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "Gilt, wenn \"Quelltyp\" \"Lokale Dateien\" ist oder wenn die Kamera nicht verfügbar ist"
 // pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "Gilt, wenn der \"Quellentyp\" auf \"Kamera\" festgelegt ist."
 // pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "Gilt, wenn \"Quelltyp\" \"Lokale Dateien oder Kamera\" ist."
-// theme.groupBackground: "Background" => "Hintergrund"
-// theme.coverDescriptionForecolor: "Description forecolor" => "Beschreibung Vorfarbe"
+// theme.background: "Background" => "Hintergrund"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Möchten Sie das Theme wirklich zurücksetzen? Alle Ihre Anpassungen gehen verloren."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "Ja, setzen Sie das Design zurück"
-// theme.groupBackground: "Background" => "Hintergrund"
-// theme.groupAppearance: "Appearance" => "Aussehen"
-// theme.coverDescriptionForecolor: "Description forecolor" => "Beschreibung Vorfarbe"
+// theme.background: "Background" => "Hintergrund"
+// theme.appearance: "Appearance" => "Aussehen"
 // signaturepad.showPlaceholder: "Show the placeholder" => "Platzhalter anzeigen"
 // signaturepad.placeholder: "Placeholder text" => "Platzhaltertext"
-// theme.surveyDescription: "Survey description font" => "Schriftart der Umfragebeschreibung"
+// theme.surveyDescriptionFont: "Survey description font" => "Schriftart der Umfragebeschreibung"
 
 // ed.prevFocus: "Focus previous" => "Fokus zurück"
 // ed.nextFocus: "Focus next" => "Weiter fokussieren"

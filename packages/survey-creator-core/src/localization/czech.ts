@@ -794,6 +794,9 @@ export var czStrings = {
       slider: "Posuvník",
       expression: "Výraz",
       questionSettings: "Nastavení otázek",
+      header: "Záhlaví",
+      background: "Pozadí",
+      appearance: "Vzhled",
       others: "Ostatní"
     },
     editProperty: "Upravit vlastnost „{0}“",
@@ -1475,10 +1478,6 @@ export var czStrings = {
     "--foreground": "Barva popředí",
     "--base-unit": "Základní jednotka",
     advancedMode: "Pokročilý režim",
-    groupGeneral: "Obecné",
-    groupHeader: "Záhlaví",
-    groupBackground: "Pozadí",
-    groupAppearance: "Vzhled",
     themeName: "Motivy",
     themeMode: "Režimy",
     themeModePanels: "Panely",
@@ -1489,9 +1488,6 @@ export var czStrings = {
     primaryDefaultColor: "Výchozí",
     primaryDarkColor: "Hover",
     primaryLightColor: "Vybraný",
-    coverTitleForecolor: "Nadpis křestní barvy",
-    coverDescriptionForecolor: "Popis předbarvení",
-    coverOverlapEnabled: "Překrytí",
     backgroundDimColor: "Barva pozadí",
     backgroundImage: "Obrázek na pozadí",
     backgroundImageFitAuto: "Auto",
@@ -1530,8 +1526,8 @@ export var czStrings = {
     fontWeightBold: "Bold",
     scale: "Škála",
     cornerRadius: "Poloměr rohu",
-    surveyTitle: "Font nadpisu průzkumu",
-    surveyDescription: "Písmo popisu průzkumu",
+    surveyTitleFont: "Font nadpisu průzkumu",
+    surveyDescriptionFont: "Písmo popisu průzkumu",
     pageTitle: "Font nadpisu stránky",
     titleFont: "Písmo nadpisu",
     descriptionFont: "Popisné písmo",
@@ -1555,6 +1551,14 @@ export var czStrings = {
     coverBackgroundColorNone: "Žádný",
     coverBackgroundColorAccentColor: "Barva zvýraznění",
     coverBackgroundColorCustom: "Zvyk",
+    headerInheritWidthFrom: "Šířka oblasti obsahu",
+    headerInheritWidthFromSurvey: "Stejné jako průzkum",
+    headerInheritWidthFromContainer: "Vhodné pro kontejner",
+    headerTextAreaWidth: "Šířka textu",
+    headerBackgroundColorSwitch: "Barva pozadí",
+    headerBackgroundColorNone: "Žádný",
+    headerBackgroundColorAccentColor: "Barva zvýraznění",
+    headerBackgroundColorCustom: "Zvyk",
     horizontalAlignmentLeft: "Vlevo",
     horizontalAlignmentCenter: "Střed",
     horizontalAlignmentRight: "Vpravo",
@@ -1562,8 +1566,8 @@ export var czStrings = {
     verticalAlignmentMiddle: "Prostřední",
     verticalAlignmentBottom: "Dno",
     logoPosition: "Pozice loga",
-    coverTitlePosition: "Titulní pozice",
-    coverDescriptionPosition: "Popis pozice",
+    headerTitlePosition: "Titulní pozice",
+    headerDescriptionPosition: "Popis pozice",
     names: {
       default: "Výchozí",
       sharp: "Ostrý",
@@ -1668,9 +1672,7 @@ editorLocalization.locales["cs"] = czStrings;
 // survey.title: "Title" => "Titul"
 // page.title: "Title" => "Titul"
 // p.setValueIf: "Set value if" => "Nastavte hodnotu, pokud"
-// theme.groupHeader: "Header" => "Záhlaví"
-// theme.coverTitleForecolor: "Title forecolor" => "Nadpis křestní barvy"
-// theme.coverOverlapEnabled: "Overlap" => "Překrytí"
+// theme.header: "Header" => "Záhlaví"
 // theme.backgroundImageFitFill: "Stretch" => "Natáhnout"
 // theme.backgroundImageFitTile: "Tile" => "Dlaždice"
 // theme.headerView: "View" => "Pohled"
@@ -1684,6 +1686,14 @@ editorLocalization.locales["cs"] = czStrings;
 // theme.coverBackgroundColorNone: "None" => "Žádný"
 // theme.coverBackgroundColorAccentColor: "Accent color" => "Barva zvýraznění"
 // theme.coverBackgroundColorCustom: "Custom" => "Zvyk"
+// theme.headerInheritWidthFrom: "Content area width" => "Šířka oblasti obsahu"
+// theme.headerInheritWidthFromSurvey: "Same as survey" => "Stejné jako průzkum"
+// theme.headerInheritWidthFromPage: "Fit to page" => "Přizpůsobit stránce"
+// theme.headerTextAreaWidth: "Text width" => "Šířka textu"
+// theme.headerBackgroundColorSwitch: "Background color" => "Barva pozadí"
+// theme.headerBackgroundColorNone: "None" => "Žádný"
+// theme.headerBackgroundColorAccentColor: "Accent color" => "Barva zvýraznění"
+// theme.headerBackgroundColorCustom: "Custom" => "Zvyk"
 // theme.horizontalAlignmentLeft: "Left" => "Vlevo"
 // theme.horizontalAlignmentCenter: "Center" => "Střed"
 // theme.horizontalAlignmentRight: "Right" => "Vpravo"
@@ -1692,6 +1702,7 @@ editorLocalization.locales["cs"] = czStrings;
 // theme.verticalAlignmentBottom: "Bottom" => "Dno"
 // theme.logoPosition: "Logo Position" => "Pozice loga"
 // theme.coverTitlePosition: "Title Position" => "Titulní pozice"
+// theme.headerTitlePosition: "Title Position" => "Titulní pozice"
 // lg.question_resetValueText: "reset value for question: {0}" => "Resetovat hodnotu pro otázku: {0}"
 // lg.question_setValueText: "assign value: {1} to question: {0}" => "přiřadit hodnotu: {1} na otázku: {0}"
 // lg.column_resetValueText: "reset cell value for column: {0}" => "Obnovit hodnotu buňky pro sloupec: {0}"
@@ -1705,18 +1716,14 @@ editorLocalization.locales["cs"] = czStrings;
 // pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "Platí, když je \"Typ zdroje\" nastaven na \"Místní soubory\" nebo když je kamera nedostupná"
 // pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "Platí, když je \"Typ zdroje\" nastaven na \"Fotoaparát\"."
 // pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "Platí, když \"Typ zdroje\" je \"Místní soubory nebo kamera\"."
-// theme.groupBackground: "Background" => "Pozadí"
-// theme.groupAppearance: "Appearance" => "Vzhled"
-// theme.coverDescriptionForecolor: "Description forecolor" => "Popis předbarvení"
+// theme.background: "Background" => "Pozadí"
+// theme.appearance: "Appearance" => "Vzhled"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Opravdu chcete resetovat motiv? Všechna vaše přizpůsobení budou ztracena."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "Ano, resetovat motiv"
-// theme.groupBackground: "Background" => "Pozadí"
-// theme.groupAppearance: "Appearance" => "Vzhled"
-// theme.coverDescriptionForecolor: "Description forecolor" => "Popis předbarvení"
-// theme.coverInheritWidthFromContainer: "Fit to container" => "Vhodné pro kontejner"
+// theme.headerInheritWidthFromContainer: "Fit to container" => "Vhodné pro kontejner"
 // signaturepad.showPlaceholder: "Show the placeholder" => "Zobrazení zástupného symbolu"
 // signaturepad.placeholder: "Placeholder text" => "Zástupný text"
-// theme.surveyDescription: "Survey description font" => "Písmo popisu průzkumu"
+// theme.surveyDescriptionFont: "Survey description font" => "Písmo popisu průzkumu"
 // ed.prevFocus: "Focus previous" => "Zaostřeno předchozí"
 // ed.nextFocus: "Focus next" => "Zaostřit na další"
 // ed.saveTheme: "Save Theme" => "Uložit motiv"
@@ -1728,7 +1735,7 @@ editorLocalization.locales["cs"] = czStrings;
 // signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "Automatické škálování oblasti podpisu"
 // signaturepad.penMinWidth: "Minimum pen width" => "Minimální šířka pera"
 // signaturepad.penMaxWidth: "Maximum pen width" => "Maximální šířka pera"
-// theme.coverDescriptionPosition: "Description position" => "Popis pozice"
+// theme.headerDescriptionPosition: "Description position" => "Popis pozice"
 // ed.propertyGridNoResultsFound: "No results found" => "Nebyly nalezeny žádné výsledky"
 // pv.leftRight: "Left and right" => "Vlevo a vpravo"
 // p.sourceType: "Source type" => "Typ zdroje"

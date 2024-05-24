@@ -794,6 +794,9 @@ var portugueseTranslation = {
       slider: "Slider",
       expression: "Expressão",
       questionSettings: "Configurações da pergunta",
+      header: "Cabeçalho",
+      background: "Fundo",
+      appearance: "Aparência",
       others: "Outros"
     },
     editProperty: "Editar propriedade '{0}'",
@@ -1475,10 +1478,6 @@ var portugueseTranslation = {
     "--foreground": "Cor de primeiro plano",
     "--base-unit": "Unidade base",
     advancedMode: "Modo avançado",
-    groupGeneral: "Geral",
-    groupHeader: "Cabeçalho",
-    groupBackground: "Fundo",
-    groupAppearance: "Aparência",
     themeName: "Tema",
     themeMode: "Aparência da pergunta",
     themeModePanels: "Inadimplência",
@@ -1489,9 +1488,6 @@ var portugueseTranslation = {
     primaryDefaultColor: "Inadimplência",
     primaryDarkColor: "Pairar",
     primaryLightColor: "Selecionado",
-    coverTitleForecolor: "Precolor do título",
-    coverDescriptionForecolor: "Descrição forecolor",
-    coverOverlapEnabled: "Sobrepor",
     backgroundDimColor: "Cor de fundo",
     backgroundImage: "Imagem de fundo",
     backgroundImageFitAuto: "Automático",
@@ -1530,8 +1526,8 @@ var portugueseTranslation = {
     fontWeightBold: "Ousado",
     scale: "Escala",
     cornerRadius: "Raio de canto",
-    surveyTitle: "Fonte do título do questionário",
-    surveyDescription: "Fonte da descrição da pesquisa",
+    surveyTitleFont: "Fonte do título do questionário",
+    surveyDescriptionFont: "Fonte da descrição da pesquisa",
     pageTitle: "Fonte do título da página",
     titleFont: "Fonte do título",
     descriptionFont: "Fonte de descrição",
@@ -1547,14 +1543,14 @@ var portugueseTranslation = {
     headerView: "Vista",
     headerViewBasic: "Básico",
     headerViewAdvanced: "Avançado",
-    coverInheritWidthFrom: "Largura da área de conteúdo",
-    coverInheritWidthFromSurvey: "O mesmo que pesquisa",
-    coverInheritWidthFromContainer: "Ajuste ao contêiner",
-    coverTextAreaWidth: "Largura do texto",
-    coverBackgroundColorSwitch: "Cor de fundo",
-    coverBackgroundColorNone: "Nenhum",
-    coverBackgroundColorAccentColor: "Cor de destaque",
-    coverBackgroundColorCustom: "Costume",
+    headerInheritWidthFrom: "Largura da área de conteúdo",
+    headerInheritWidthFromSurvey: "O mesmo que pesquisa",
+    headerInheritWidthFromContainer: "Ajuste ao contêiner",
+    headerTextAreaWidth: "Largura do texto",
+    headerBackgroundColorSwitch: "Cor de fundo",
+    headerBackgroundColorNone: "Nenhum",
+    headerBackgroundColorAccentColor: "Cor de destaque",
+    headerBackgroundColorCustom: "Costume",
     horizontalAlignmentLeft: "Esquerda",
     horizontalAlignmentCenter: "Centro",
     horizontalAlignmentRight: "Direita",
@@ -1562,8 +1558,8 @@ var portugueseTranslation = {
     verticalAlignmentMiddle: "Meio",
     verticalAlignmentBottom: "Fundo",
     logoPosition: "Posição do logotipo",
-    coverTitlePosition: "Posição do título",
-    coverDescriptionPosition: "Descrição da posição",
+    headerTitlePosition: "Posição do título",
+    headerDescriptionPosition: "Descrição da posição",
     names: {
       default: "Inadimplência",
       sharp: "Afiado",
@@ -1661,7 +1657,6 @@ editorLocalization.locales["pt"] = portugueseTranslation;
 // theme.--primary-foreground: "Primary foreground color" => "Cor primária de primeiro plano"
 // theme.--foreground: "Foreground color" => "Cor de primeiro plano"
 // theme.--base-unit: "Base unit" => "Unidade base"
-// theme.groupGeneral: "General" => "Geral"
 // theme.groupAdvanced: "Advanced" => "Avançado"
 // theme.themeName: "Theme" => "Tema"
 // theme.themeMode: "Question appearance" => "Aparência da pergunta"
@@ -1708,7 +1703,7 @@ editorLocalization.locales["pt"] = portugueseTranslation;
 // theme.fontWeightBold: "Bold" => "Ousado"
 // theme.scale: "Scale" => "Escala"
 // theme.cornerRadius: "Corner radius" => "Raio de canto"
-// theme.surveyTitle: "Survey title font" => "Fonte do título do questionário"
+// theme.surveyTitleFont: "Survey title font" => "Fonte do título do questionário"
 // theme.pageTitle: "Page title font" => "Fonte do título da página"
 // theme.pageDescription: "Page description font" => "Fonte da descrição da página"
 // theme.boxShadowX: "X" => "X"
@@ -1769,22 +1764,20 @@ editorLocalization.locales["pt"] = portugueseTranslation;
 // survey.title: "Title" => "Título"
 // page.title: "Title" => "Título"
 // p.setValueIf: "Set value if" => "Defina o valor se"
-// theme.groupHeader: "Header" => "Cabeçalho"
-// theme.coverTitleForecolor: "Title forecolor" => "Precolor do título"
-// theme.coverOverlapEnabled: "Overlap" => "Sobrepor"
+// theme.header: "Header" => "Cabeçalho"
 // theme.backgroundImageFitFill: "Stretch" => "Esticar"
 // theme.backgroundImageFitTile: "Tile" => "Telha"
 // theme.headerView: "View" => "Vista"
 // theme.headerViewBasic: "Basic" => "Básico"
 // theme.headerViewAdvanced: "Advanced" => "Avançado"
-// theme.coverInheritWidthFrom: "Content area width" => "Largura da área de conteúdo"
-// theme.coverInheritWidthFromSurvey: "Same as survey" => "O mesmo que pesquisa"
-// theme.coverInheritWidthFromPage: "Fit to page" => "Ajustar à página"
-// theme.coverTextAreaWidth: "Text width" => "Largura do texto"
-// theme.coverBackgroundColorSwitch: "Background color" => "Cor de fundo"
-// theme.coverBackgroundColorNone: "None" => "Nenhum"
-// theme.coverBackgroundColorAccentColor: "Accent color" => "Cor de destaque"
-// theme.coverBackgroundColorCustom: "Custom" => "Costume"
+// theme.headerInheritWidthFrom: "Content area width" => "Largura da área de conteúdo"
+// theme.headerInheritWidthFromSurvey: "Same as survey" => "O mesmo que pesquisa"
+// theme.headerInheritWidthFromPage: "Fit to page" => "Ajustar à página"
+// theme.headerTextAreaWidth: "Text width" => "Largura do texto"
+// theme.headerBackgroundColorSwitch: "Background color" => "Cor de fundo"
+// theme.headerBackgroundColorNone: "None" => "Nenhum"
+// theme.headerBackgroundColorAccentColor: "Accent color" => "Cor de destaque"
+// theme.headerBackgroundColorCustom: "Custom" => "Costume"
 // theme.horizontalAlignmentLeft: "Left" => "Esquerda"
 // theme.horizontalAlignmentCenter: "Center" => "Centro"
 // theme.horizontalAlignmentRight: "Right" => "Direita"
@@ -1805,18 +1798,14 @@ editorLocalization.locales["pt"] = portugueseTranslation;
 // pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "Aplica-se quando \"Tipo de origem\" é \"Arquivos locais\" ou quando a câmera não está disponível"
 // pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "Aplica-se quando \"Tipo de origem\" é \"Câmera\"."
 // pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "Aplica-se quando \"Tipo de origem\" é \"Arquivos locais ou câmera\"."
-// theme.groupBackground: "Background" => "Fundo"
-// theme.groupAppearance: "Appearance" => "Aparência"
-// theme.coverDescriptionForecolor: "Description forecolor" => "Descrição forecolor"
+// theme.background: "Background" => "Fundo"
+// theme.appearance: "Appearance" => "Aparência"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Você realmente quer redefinir o tema? Todas as suas personalizações serão perdidas."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "Sim, redefinir o tema"
-// theme.groupBackground: "Background" => "Fundo"
-// theme.groupAppearance: "Appearance" => "Aparência"
-// theme.coverDescriptionForecolor: "Description forecolor" => "Descrição forecolor"
-// theme.coverInheritWidthFromContainer: "Fit to container" => "Ajuste ao contêiner"
+// theme.headerInheritWidthFromContainer: "Fit to container" => "Ajuste ao contêiner"
 // signaturepad.showPlaceholder: "Show the placeholder" => "Mostrar o espaço reservado"
 // signaturepad.placeholder: "Placeholder text" => "Texto de espaço reservado"
-// theme.surveyDescription: "Survey description font" => "Fonte da descrição da pesquisa"
+// theme.surveyDescriptionFont: "Survey description font" => "Fonte da descrição da pesquisa"
 
 // ed.prevFocus: "Focus previous" => "Foco anterior"
 // ed.nextFocus: "Focus next" => "Foco a seguir"
@@ -1829,8 +1818,8 @@ editorLocalization.locales["pt"] = portugueseTranslation;
 // signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "Dimensionar automaticamente a área de assinatura"
 // signaturepad.penMinWidth: "Minimum pen width" => "Largura mínima da caneta"
 // signaturepad.penMaxWidth: "Maximum pen width" => "Largura máxima da caneta"
-// theme.coverTitlePosition: "Title position" => "Posição do título"
-// theme.coverDescriptionPosition: "Description position" => "Descrição da posição"
+// theme.headerTitlePosition: "Title position" => "Posição do título"
+// theme.headerDescriptionPosition: "Description position" => "Descrição da posição"
 // ed.propertyGridNoResultsFound: "No results found" => "Nenhum resultado encontrado"
 // pv.leftRight: "Left and right" => "Esquerda e direita"
 // p.sourceType: "Source type" => "Tipo de origem"

@@ -794,6 +794,9 @@ export var huStrings = {
       slider: "Csúszka",
       expression: "Kifejezés",
       questionSettings: "Kérdés beállítások",
+      header: "Fejléc",
+      background: "Háttér",
+      appearance: "Megjelenés",
       others: "Mások"
     },
     editProperty: "Tulajdonság szerkesztése '{0}'",
@@ -1475,10 +1478,6 @@ export var huStrings = {
     "--foreground": "Festőszín",
     "--base-unit": "Alapegység",
     advancedMode: "Speciális mód",
-    groupGeneral: "Általános",
-    groupHeader: "Fejléc",
-    groupBackground: "Háttér",
-    groupAppearance: "Megjelenés",
     themeName: "Téma",
     themeMode: "Kérdés megjelenése",
     themeModePanels: "Alapértelmezett",
@@ -1489,9 +1488,6 @@ export var huStrings = {
     primaryDefaultColor: "Alapértelmezett",
     primaryDarkColor: "Lebeg",
     primaryLightColor: "Kiválasztott",
-    coverTitleForecolor: "Cím előszíne",
-    coverDescriptionForecolor: "Leírás előszín",
-    coverOverlapEnabled: "Átfed",
     backgroundDimColor: "Háttérszín",
     backgroundImage: "Háttérkép",
     backgroundImageFitAuto: "Kocsi",
@@ -1530,8 +1526,8 @@ export var huStrings = {
     fontWeightBold: "Merész",
     scale: "Hangsor",
     cornerRadius: "Sarok sugara",
-    surveyTitle: "Felmérés címének betűtípusa",
-    surveyDescription: "Felmérés leírásának betűtípusa",
+    surveyTitleFont: "Felmérés címének betűtípusa",
+    surveyDescriptionFont: "Felmérés leírásának betűtípusa",
     pageTitle: "Oldalcím betűtípusa",
     titleFont: "Cím betűtípusa",
     descriptionFont: "Leírás betűtípus",
@@ -1547,14 +1543,14 @@ export var huStrings = {
     headerView: "Nézet",
     headerViewBasic: "Alapvető",
     headerViewAdvanced: "Haladó",
-    coverInheritWidthFrom: "Tartalomterület szélessége",
-    coverInheritWidthFromSurvey: "Ugyanaz, mint a felmérés",
-    coverInheritWidthFromContainer: "Tárolóhoz igazítás",
-    coverTextAreaWidth: "Szöveg szélessége",
-    coverBackgroundColorSwitch: "Háttérszín",
-    coverBackgroundColorNone: "Egyik sem",
-    coverBackgroundColorAccentColor: "Kiemelő szín",
-    coverBackgroundColorCustom: "Szokás",
+    headerInheritWidthFrom: "Tartalomterület szélessége",
+    headerInheritWidthFromSurvey: "Ugyanaz, mint a felmérés",
+    headerInheritWidthFromContainer: "Tárolóhoz igazítás",
+    headerTextAreaWidth: "Szöveg szélessége",
+    headerBackgroundColorSwitch: "Háttérszín",
+    headerBackgroundColorNone: "Egyik sem",
+    headerBackgroundColorAccentColor: "Kiemelő szín",
+    headerBackgroundColorCustom: "Szokás",
     horizontalAlignmentLeft: "Balra",
     horizontalAlignmentCenter: "Központ",
     horizontalAlignmentRight: "Jobbra",
@@ -1562,8 +1558,8 @@ export var huStrings = {
     verticalAlignmentMiddle: "Középső",
     verticalAlignmentBottom: "Fenék",
     logoPosition: "Logó pozíciója",
-    coverTitlePosition: "Cím pozíciója",
-    coverDescriptionPosition: "Leírás pozíciója",
+    headerTitlePosition: "Cím pozíciója",
+    headerDescriptionPosition: "Leírás pozíciója",
     names: {
       default: "Alapértelmezett",
       sharp: "Éles",
@@ -2149,7 +2145,6 @@ editorLocalization.locales["hu"] = huStrings;
 // theme.--primary-foreground: "Primary foreground color" => "Elsődleges festőszín"
 // theme.--foreground: "Foreground color" => "Festőszín"
 // theme.--base-unit: "Base unit" => "Alapegység"
-// theme.groupGeneral: "General" => "Általános"
 // theme.groupAdvanced: "Advanced" => "Haladó"
 // theme.themeName: "Theme" => "Téma"
 // theme.themeMode: "Question appearance" => "Kérdés megjelenése"
@@ -2196,7 +2191,7 @@ editorLocalization.locales["hu"] = huStrings;
 // theme.fontWeightBold: "Bold" => "Merész"
 // theme.scale: "Scale" => "Hangsor"
 // theme.cornerRadius: "Corner radius" => "Sarok sugara"
-// theme.surveyTitle: "Survey title font" => "Felmérés címének betűtípusa"
+// theme.surveyTitleFont: "Survey title font" => "Felmérés címének betűtípusa"
 // theme.pageTitle: "Page title font" => "Oldalcím betűtípusa"
 // theme.pageDescription: "Page description font" => "Oldalleíró betűtípus"
 // theme.boxShadowX: "X" => "X"
@@ -2257,22 +2252,20 @@ editorLocalization.locales["hu"] = huStrings;
 // survey.title: "Title" => "Cím"
 // page.title: "Title" => "Cím"
 // p.setValueIf: "Set value if" => "Érték beállítása, ha"
-// theme.groupHeader: "Header" => "Fejléc"
-// theme.coverTitleForecolor: "Title forecolor" => "Cím előszíne"
-// theme.coverOverlapEnabled: "Overlap" => "Átfed"
+// theme.header: "Header" => "Fejléc"
 // theme.backgroundImageFitFill: "Stretch" => "Nyúlik"
 // theme.backgroundImageFitTile: "Tile" => "Cserép"
 // theme.headerView: "View" => "Nézet"
 // theme.headerViewBasic: "Basic" => "Alapvető"
 // theme.headerViewAdvanced: "Advanced" => "Haladó"
-// theme.coverInheritWidthFrom: "Content area width" => "Tartalomterület szélessége"
-// theme.coverInheritWidthFromSurvey: "Same as survey" => "Ugyanaz, mint a felmérés"
-// theme.coverInheritWidthFromPage: "Fit to page" => "Laphoz igazítás"
-// theme.coverTextAreaWidth: "Text width" => "Szöveg szélessége"
-// theme.coverBackgroundColorSwitch: "Background color" => "Háttérszín"
-// theme.coverBackgroundColorNone: "None" => "Egyik sem"
-// theme.coverBackgroundColorAccentColor: "Accent color" => "Kiemelő szín"
-// theme.coverBackgroundColorCustom: "Custom" => "Szokás"
+// theme.headerInheritWidthFrom: "Content area width" => "Tartalomterület szélessége"
+// theme.headerInheritWidthFromSurvey: "Same as survey" => "Ugyanaz, mint a felmérés"
+// theme.headerInheritWidthFromPage: "Fit to page" => "Laphoz igazítás"
+// theme.headerTextAreaWidth: "Text width" => "Szöveg szélessége"
+// theme.headerBackgroundColorSwitch: "Background color" => "Háttérszín"
+// theme.headerBackgroundColorNone: "None" => "Egyik sem"
+// theme.headerBackgroundColorAccentColor: "Accent color" => "Kiemelő szín"
+// theme.headerBackgroundColorCustom: "Custom" => "Szokás"
 // theme.horizontalAlignmentLeft: "Left" => "Balra"
 // theme.horizontalAlignmentCenter: "Center" => "Központ"
 // theme.horizontalAlignmentRight: "Right" => "Jobbra"
@@ -2280,7 +2273,7 @@ editorLocalization.locales["hu"] = huStrings;
 // theme.verticalAlignmentMiddle: "Middle" => "Középső"
 // theme.verticalAlignmentBottom: "Bottom" => "Fenék"
 // theme.logoPosition: "Logo Position" => "Logó pozíciója"
-// theme.coverTitlePosition: "Title Position" => "Cím pozíciója"
+// theme.headerTitlePosition: "Title Position" => "Cím pozíciója"
 // lg.question_resetValueText: "reset value for question: {0}" => "Kérdés visszaállítási értéke: {0}"
 // lg.question_setValueText: "assign value: {1} to question: {0}" => "Érték hozzárendelése: {1} a kérdéshez: {0}"
 // lg.column_resetValueText: "reset cell value for column: {0}" => "Az oszlop cellaértékének visszaállítása: {0}"
@@ -2294,18 +2287,14 @@ editorLocalization.locales["hu"] = huStrings;
 // pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "Akkor érvényes, ha a \"Forrás típusa\" \"Helyi fájlok\", vagy ha a kamera nem érhető el"
 // pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "Akkor érvényes, ha a \"Forrás típusa\" a \"Kamera\"."
 // pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "Akkor érvényes, ha a \"Forrás típusa\" értéke \"Helyi fájlok vagy kamera\"."
-// theme.groupBackground: "Background" => "Háttér"
-// theme.groupAppearance: "Appearance" => "Megjelenés"
-// theme.coverDescriptionForecolor: "Description forecolor" => "Leírás előszín"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Tényleg vissza akarja állítani a témát? Az összes testreszabás elvész."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "Igen, állítsa vissza a témát"
-// theme.groupBackground: "Background" => "Háttér"
-// theme.groupAppearance: "Appearance" => "Megjelenés"
-// theme.coverDescriptionForecolor: "Description forecolor" => "Leírás előszín"
-// theme.coverInheritWidthFromContainer: "Fit to container" => "Tárolóhoz igazítás"
+// theme.background: "Background" => "Háttér"
+// theme.appearance: "Appearance" => "Megjelenés"
+// theme.headerInheritWidthFromContainer: "Fit to container" => "Tárolóhoz igazítás"
 // signaturepad.showPlaceholder: "Show the placeholder" => "A helyőrző megjelenítése"
 // signaturepad.placeholder: "Placeholder text" => "Helyőrző szöveg"
-// theme.surveyDescription: "Survey description font" => "Felmérés leírásának betűtípusa"
+// theme.surveyDescriptionFont: "Survey description font" => "Felmérés leírásának betűtípusa"
 // ed.prevFocus: "Focus previous" => "Fókusz előző"
 // ed.nextFocus: "Focus next" => "Fókusz következő"
 // ed.saveTheme: "Save Theme" => "Téma mentése"
@@ -2317,7 +2306,7 @@ editorLocalization.locales["hu"] = huStrings;
 // signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "Az aláírási terület automatikus méretezése"
 // signaturepad.penMinWidth: "Minimum pen width" => "Tollszélesség minimális"
 // signaturepad.penMaxWidth: "Maximum pen width" => "Maximális tollszélesség"
-// theme.coverDescriptionPosition: "Description position" => "Leírás pozíciója"
+// theme.headerDescriptionPosition: "Description position" => "Leírás pozíciója"
 // ed.propertyGridNoResultsFound: "No results found" => "Nincs találat"
 // pv.leftRight: "Left and right" => "Balra és jobbra"
 // p.sourceType: "Source type" => "Forrás típusa"

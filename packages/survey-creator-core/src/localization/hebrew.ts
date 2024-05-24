@@ -794,6 +794,9 @@ export var hebrewStrings = {
       slider: "מחוון",
       expression: "ביטוי",
       questionSettings: "הגדרות שאלה",
+      header: "כותרת",
+      background: "רקע",
+      appearance: "מראה",
       others: "אחרים"
     },
     editProperty: "עריכת מאפיין '{0}'",
@@ -1475,10 +1478,6 @@ export var hebrewStrings = {
     "--foreground": "צבע קדמי",
     "--base-unit": "יחידת בסיס",
     advancedMode: "מצב מתקדם",
-    groupGeneral: "כללי",
-    groupHeader: "כותרת",
-    groupBackground: "רקע",
-    groupAppearance: "מראה",
     themeName: "ערכת נושא",
     themeMode: "מצב שאלון",
     themeModePanels: "ברירת מחדל",
@@ -1489,9 +1488,6 @@ export var hebrewStrings = {
     primaryDefaultColor: "ברירת מחדל",
     primaryDarkColor: "עכבר",
     primaryLightColor: "נבחר",
-    coverTitleForecolor: "צביעת כותרת מראש",
-    coverDescriptionForecolor: "תיאור צבע קדמי",
-    coverOverlapEnabled: "חופפים",
     backgroundDimColor: "צבע רקע",
     backgroundImage: "תמונת רקע",
     backgroundImageFitAuto: "אוטומטי",
@@ -1530,8 +1526,8 @@ export var hebrewStrings = {
     fontWeightBold: "מודגש",
     scale: "קנה מידה",
     cornerRadius: "רדיוס פינה",
-    surveyTitle: "גופן כותרת שאלון",
-    surveyDescription: "גופן תיאור סקר",
+    surveyTitleFont: "גופן כותרת שאלון",
+    surveyDescriptionFont: "גופן תיאור סקר",
     pageTitle: "גופן כותרת עמוד",
     titleFont: "גופן כותרת",
     descriptionFont: "גופן תיאור",
@@ -1547,14 +1543,14 @@ export var hebrewStrings = {
     headerView: "נוף",
     headerViewBasic: "בסיסי",
     headerViewAdvanced: "מתקדמים",
-    coverInheritWidthFrom: "רוחב אזור תוכן",
-    coverInheritWidthFromSurvey: "זהה לסקר",
-    coverInheritWidthFromContainer: "התאמה למיכל",
-    coverTextAreaWidth: "רוחב טקסט",
-    coverBackgroundColorSwitch: "צבע רקע",
-    coverBackgroundColorNone: "ללא",
-    coverBackgroundColorAccentColor: "צבע הדגשה",
-    coverBackgroundColorCustom: "מנהג",
+    headerInheritWidthFrom: "רוחב אזור תוכן",
+    headerInheritWidthFromSurvey: "זהה לסקר",
+    headerInheritWidthFromContainer: "התאמה למיכל",
+    headerTextAreaWidth: "רוחב טקסט",
+    headerBackgroundColorSwitch: "צבע רקע",
+    headerBackgroundColorNone: "ללא",
+    headerBackgroundColorAccentColor: "צבע הדגשה",
+    headerBackgroundColorCustom: "מנהג",
     horizontalAlignmentLeft: "שמאל",
     horizontalAlignmentCenter: "מרכז",
     horizontalAlignmentRight: "ימין",
@@ -1562,8 +1558,8 @@ export var hebrewStrings = {
     verticalAlignmentMiddle: "אמצע",
     verticalAlignmentBottom: "ישבן",
     logoPosition: "מיקום הלוגו",
-    coverTitlePosition: "מיקום בתפקיד",
-    coverDescriptionPosition: "תיאור מיקום",
+    headerTitlePosition: "מיקום בתפקיד",
+    headerDescriptionPosition: "תיאור מיקום",
     names: {
       default: "ברירת מחדל",
       sharp: "חד",
@@ -1710,33 +1706,30 @@ editorLocalization.locales["he"] = hebrewStrings;
 // p.resetValueIf: "Reset value if" => "איפוס ערך אם"
 // p.setValueIf: "Set value if" => "הגדר ערך אם"
 // theme.advancedMode: "Advanced mode" => "מצב מתקדם"
-// theme.groupHeader: "Header" => "כותרת"
-// theme.groupBackground: "Background" => "רקע"
-// theme.groupAppearance: "Appearance" => "מראה"
-// theme.coverTitleForecolor: "Title forecolor" => "צביעת כותרת מראש"
-// theme.coverDescriptionForecolor: "Description forecolor" => "תיאור צבע קדמי"
-// theme.coverOverlapEnabled: "Overlap" => "חופפים"
+// theme.header: "Header" => "כותרת"
+// theme.background: "Background" => "רקע"
+// theme.appearance: "Appearance" => "מראה"
 // theme.backgroundImageFitFill: "Stretch" => "מתיחה"
 // theme.backgroundImageFitTile: "Tile" => "אריח"
 // theme.backgroundCornerRadius: "Background and corner radius" => "רקע ורדיוס פינה"
 // theme.colorsTitle: "Colors" => "צבעים"
 // theme.font: "Font" => "גופן"
 // theme.lines: "Lines" => "קווים"
-// theme.surveyDescription: "Survey description font" => "גופן תיאור סקר"
+// theme.surveyDescriptionFont: "Survey description font" => "גופן תיאור סקר"
 // theme.titleFont: "Title font" => "גופן כותרת"
 // theme.descriptionFont: "Description font" => "גופן תיאור"
 // theme.shadow: "Shadow effects" => "אפקטי צל"
 // theme.headerView: "View" => "נוף"
 // theme.headerViewBasic: "Basic" => "בסיסי"
 // theme.headerViewAdvanced: "Advanced" => "מתקדמים"
-// theme.coverInheritWidthFrom: "Content area width" => "רוחב אזור תוכן"
-// theme.coverInheritWidthFromSurvey: "Same as survey" => "זהה לסקר"
-// theme.coverInheritWidthFromContainer: "Fit to container" => "התאמה למיכל"
-// theme.coverTextAreaWidth: "Text width" => "רוחב טקסט"
-// theme.coverBackgroundColorSwitch: "Background color" => "צבע רקע"
-// theme.coverBackgroundColorNone: "None" => "ללא"
-// theme.coverBackgroundColorAccentColor: "Accent color" => "צבע הדגשה"
-// theme.coverBackgroundColorCustom: "Custom" => "מנהג"
+// theme.headerInheritWidthFrom: "Content area width" => "רוחב אזור תוכן"
+// theme.headerInheritWidthFromSurvey: "Same as survey" => "זהה לסקר"
+// theme.headerInheritWidthFromContainer: "Fit to container" => "התאמה למיכל"
+// theme.headerTextAreaWidth: "Text width" => "רוחב טקסט"
+// theme.headerBackgroundColorSwitch: "Background color" => "צבע רקע"
+// theme.headerBackgroundColorNone: "None" => "ללא"
+// theme.headerBackgroundColorAccentColor: "Accent color" => "צבע הדגשה"
+// theme.headerBackgroundColorCustom: "Custom" => "מנהג"
 // theme.horizontalAlignmentLeft: "Left" => "שמאל"
 // theme.horizontalAlignmentCenter: "Center" => "מרכז"
 // theme.horizontalAlignmentRight: "Right" => "ימין"
@@ -1744,8 +1737,8 @@ editorLocalization.locales["he"] = hebrewStrings;
 // theme.verticalAlignmentMiddle: "Middle" => "אמצע"
 // theme.verticalAlignmentBottom: "Bottom" => "ישבן"
 // theme.logoPosition: "Logo position" => "מיקום הלוגו"
-// theme.coverTitlePosition: "Title position" => "מיקום בתפקיד"
-// theme.coverDescriptionPosition: "Description position" => "תיאור מיקום"
+// theme.headerTitlePosition: "Title position" => "מיקום בתפקיד"
+// theme.headerDescriptionPosition: "Description position" => "תיאור מיקום"
 // ed.translateUsigAIFrom: "Translate from: " => "תרגם מ: "
 // pe.showRefuseItem: "Allow the Refuse to Answer option" => "אפשר את האפשרות סרב לענות"
 // pe.showDontKnowItem: "Allow the Don't Know option" => "אפשר את האפשרות 'לא יודע'"

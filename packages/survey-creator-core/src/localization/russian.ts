@@ -794,6 +794,9 @@ export var ruStrings = {
       slider: "Ползун",
       expression: "Выражение",
       questionSettings: "Настройки вопроса",
+      header: "Заголовок",
+      background: "Фон",
+      appearance: "Внешний вид",
       others: "Другие"
     },
     editProperty: "Редактировать свойство '{0}'",
@@ -1475,10 +1478,6 @@ export var ruStrings = {
     "--foreground": "Цвет переднего плана",
     "--base-unit": "Базовый блок",
     advancedMode: "Расширенный режим",
-    groupGeneral: "Общее",
-    groupHeader: "Заголовок",
-    groupBackground: "Фон",
-    groupAppearance: "Внешний вид",
     themeName: "Тема",
     themeMode: "Внешний вид вопроса",
     themeModePanels: "По умолчанию",
@@ -1489,9 +1488,6 @@ export var ruStrings = {
     primaryDefaultColor: "По умолчанию",
     primaryDarkColor: "Парить",
     primaryLightColor: "Выбранный",
-    coverTitleForecolor: "Цвет заголовка",
-    coverDescriptionForecolor: "Цвет описания",
-    coverOverlapEnabled: "Перекрытие",
     backgroundDimColor: "Цвет фона",
     backgroundImage: "Фоновое изображение",
     backgroundImageFitAuto: "Авто",
@@ -1530,8 +1526,8 @@ export var ruStrings = {
     fontWeightBold: "Смелый",
     scale: "Шкала",
     cornerRadius: "Радиус угла",
-    surveyTitle: "Шрифт заголовка опроса",
-    surveyDescription: "Шрифт описания опроса",
+    surveyTitleFont: "Шрифт заголовка опроса",
+    surveyDescriptionFont: "Шрифт описания опроса",
     pageTitle: "Шрифт заголовка страницы",
     titleFont: "Шрифт заголовка",
     descriptionFont: "Описание шрифта",
@@ -1547,14 +1543,14 @@ export var ruStrings = {
     headerView: "Вид",
     headerViewBasic: "Основной",
     headerViewAdvanced: "Продвинутый",
-    coverInheritWidthFrom: "Ширина области содержимого",
-    coverInheritWidthFromSurvey: "То же, что и опрос",
-    coverInheritWidthFromContainer: "Подходит для контейнера",
-    coverTextAreaWidth: "Ширина текста",
-    coverBackgroundColorSwitch: "Цвет фона",
-    coverBackgroundColorNone: "Никакой",
-    coverBackgroundColorAccentColor: "Акцентный цвет",
-    coverBackgroundColorCustom: "Обычай",
+    headerInheritWidthFrom: "Ширина области содержимого",
+    headerInheritWidthFromSurvey: "То же, что и опрос",
+    headerInheritWidthFromContainer: "Подходит для контейнера",
+    headerTextAreaWidth: "Ширина текста",
+    headerBackgroundColorSwitch: "Цвет фона",
+    headerBackgroundColorNone: "Никакой",
+    headerBackgroundColorAccentColor: "Акцентный цвет",
+    headerBackgroundColorCustom: "Обычай",
     horizontalAlignmentLeft: "Налево",
     horizontalAlignmentCenter: "Центр",
     horizontalAlignmentRight: "Правильно",
@@ -1562,8 +1558,8 @@ export var ruStrings = {
     verticalAlignmentMiddle: "Середина",
     verticalAlignmentBottom: "Дно",
     logoPosition: "Положение логотипа",
-    coverTitlePosition: "Титульная позиция",
-    coverDescriptionPosition: "Описание позиции",
+    headerTitlePosition: "Титульная позиция",
+    headerDescriptionPosition: "Описание позиции",
     names: {
       default: "По умолчанию",
       sharp: "Чёткая",
@@ -2058,7 +2054,6 @@ editorLocalization.locales["ru"] = ruStrings;
 // theme.--primary-foreground: "Primary foreground color" => "Основной цвет переднего плана"
 // theme.--foreground: "Foreground color" => "Цвет переднего плана"
 // theme.--base-unit: "Base unit" => "Базовый блок"
-// theme.groupGeneral: "General" => "Общее"
 // theme.groupAdvanced: "Advanced" => "Продвинутый"
 // theme.themeName: "Theme" => "Тема"
 // theme.themeMode: "Question appearance" => "Внешний вид вопроса"
@@ -2105,7 +2100,7 @@ editorLocalization.locales["ru"] = ruStrings;
 // theme.fontWeightBold: "Bold" => "Смелый"
 // theme.scale: "Scale" => "Шкала"
 // theme.cornerRadius: "Corner radius" => "Радиус угла"
-// theme.surveyTitle: "Survey title font" => "Шрифт заголовка опроса"
+// theme.surveyTitleFont: "Survey title font" => "Шрифт заголовка опроса"
 // theme.pageTitle: "Page title font" => "Шрифт заголовка страницы"
 // theme.pageDescription: "Page description font" => "Шрифт описания страницы"
 // theme.boxShadowX: "X" => "X"
@@ -2166,20 +2161,18 @@ editorLocalization.locales["ru"] = ruStrings;
 // survey.title: "Title" => "Титул"
 // page.title: "Title" => "Титул"
 // p.setValueIf: "Set value if" => "Установите значение, если"
-// theme.groupHeader: "Header" => "Заголовок"
-// theme.coverTitleForecolor: "Title forecolor" => "Цвет заголовка"
-// theme.coverOverlapEnabled: "Overlap" => "Перекрытие"
+// theme.header: "Header" => "Заголовок"
 // theme.headerView: "View" => "Вид"
 // theme.headerViewBasic: "Basic" => "Основной"
 // theme.headerViewAdvanced: "Advanced" => "Продвинутый"
-// theme.coverInheritWidthFrom: "Content area width" => "Ширина области содержимого"
-// theme.coverInheritWidthFromSurvey: "Same as survey" => "То же, что и опрос"
-// theme.coverInheritWidthFromPage: "Fit to page" => "По размеру страницы"
-// theme.coverTextAreaWidth: "Text width" => "Ширина текста"
-// theme.coverBackgroundColorSwitch: "Background color" => "Цвет фона"
-// theme.coverBackgroundColorNone: "None" => "Никакой"
-// theme.coverBackgroundColorAccentColor: "Accent color" => "Акцентный цвет"
-// theme.coverBackgroundColorCustom: "Custom" => "Обычай"
+// theme.headerInheritWidthFrom: "Content area width" => "Ширина области содержимого"
+// theme.headerInheritWidthFromSurvey: "Same as survey" => "То же, что и опрос"
+// theme.headerInheritWidthFromPage: "Fit to page" => "По размеру страницы"
+// theme.headerTextAreaWidth: "Text width" => "Ширина текста"
+// theme.headerBackgroundColorSwitch: "Background color" => "Цвет фона"
+// theme.headerBackgroundColorNone: "None" => "Никакой"
+// theme.headerBackgroundColorAccentColor: "Accent color" => "Акцентный цвет"
+// theme.headerBackgroundColorCustom: "Custom" => "Обычай"
 // theme.horizontalAlignmentLeft: "Left" => "Налево"
 // theme.horizontalAlignmentCenter: "Center" => "Центр"
 // theme.horizontalAlignmentRight: "Right" => "Правильно"
@@ -2187,7 +2180,7 @@ editorLocalization.locales["ru"] = ruStrings;
 // theme.verticalAlignmentMiddle: "Middle" => "Середина"
 // theme.verticalAlignmentBottom: "Bottom" => "Дно"
 // theme.logoPosition: "Logo Position" => "Положение логотипа"
-// theme.coverTitlePosition: "Title Position" => "Титульная позиция"
+// theme.headerTitlePosition: "Title Position" => "Титульная позиция"
 // lg.question_resetValueText: "reset value for question: {0}" => "Сброс значения для вопроса: {0}"
 // lg.question_setValueText: "assign value: {1} to question: {0}" => "присвоить значение: {1} к вопросу: {0}"
 // lg.column_resetValueText: "reset cell value for column: {0}" => "Сброс значения ячейки для столбца: {0}"
@@ -2201,18 +2194,14 @@ editorLocalization.locales["ru"] = ruStrings;
 // pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "Применяется, когда \"Тип источника\" имеет значение \"Локальные файлы\" или когда камера недоступна"
 // pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "Применяется, если \"Тип источника\" имеет значение \"Камера\"."
 // pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "Применяется, если \"Тип источника\" имеет значение \"Локальные файлы или камера\"."
-// theme.groupBackground: "Background" => "Фон"
-// theme.groupAppearance: "Appearance" => "Внешность"
-// theme.coverDescriptionForecolor: "Description forecolor" => "Описание форколора"
+// theme.background: "Background" => "Фон"
+// theme.appearance: "Appearance" => "Внешность"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Вы действительно хотите сбросить тему? Все ваши настройки будут потеряны."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "Да, сбросьте тему"
-// theme.groupBackground: "Background" => "Фон"
-// theme.groupAppearance: "Appearance" => "Внешность"
-// theme.coverDescriptionForecolor: "Description forecolor" => "Описание форколора"
-// theme.coverInheritWidthFromContainer: "Fit to container" => "Подходит для контейнера"
+// theme.headerInheritWidthFromContainer: "Fit to container" => "Подходит для контейнера"
 // signaturepad.showPlaceholder: "Show the placeholder" => "Показать заполнитель"
 // signaturepad.placeholder: "Placeholder text" => "Замещающий текст"
-// theme.surveyDescription: "Survey description font" => "Шрифт описания опроса"
+// theme.surveyDescriptionFont: "Survey description font" => "Шрифт описания опроса"
 // ed.prevFocus: "Focus previous" => "Фокусировка предыдущая"
 // ed.nextFocus: "Focus next" => "Сосредоточьтесь на следующем"
 // ed.saveTheme: "Save Theme" => "Сохранить тему"
@@ -2224,7 +2213,7 @@ editorLocalization.locales["ru"] = ruStrings;
 // signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "Автоматическое масштабирование области подписи"
 // signaturepad.penMinWidth: "Minimum pen width" => "Минимальная ширина пера"
 // signaturepad.penMaxWidth: "Maximum pen width" => "Максимальная ширина пера"
-// theme.coverDescriptionPosition: "Description position" => "Описание позиции"
+// theme.headerDescriptionPosition: "Description position" => "Описание позиции"
 // ed.propertyGridNoResultsFound: "No results found" => "Никаких результатов не найдено"
 // pv.leftRight: "Left and right" => "Влево и вправо"
 // p.sourceType: "Source type" => "Тип источника"

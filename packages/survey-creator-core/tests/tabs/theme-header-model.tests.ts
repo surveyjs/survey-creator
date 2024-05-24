@@ -93,7 +93,7 @@ test("set headerViewContainer advanced", (): any => {
   header.height = 300;
   header.inheritWidthFrom = "survey";
   header.textAreaWidth = 600;
-  header["backgroundColorSwitch"] = "custom";
+  header["backgroundColorType"] = "custom";
   header["backgroundColor"] = "#5094ed";
   header.backgroundImage = "https://t4.ftcdn.net/jpg/02/83/13/61/360_F_283136113_b3VRHNiOPFMOluzYJPpfuoH8Czh9c743.jpg";
   header.backgroundImageFit = "fill";
@@ -190,7 +190,7 @@ test("headerViewContainer get color values from theme", (): any => {
   expect(headerDescriptionQuestion.contentPanel.getQuestionByName("color").value).toEqual("rgba(50, 16, 218, 0.45)");
 });
 
-test("headerViewContainer: restore backgroundColorSwitch", (): any => {
+test("headerViewContainer: restore backgroundColorType", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
 
@@ -200,10 +200,10 @@ test("headerViewContainer: restore backgroundColorSwitch", (): any => {
   let header = themeModel.header as HeaderModel;
 
   header["headerView"] = "advanced";
-  expect(header["backgroundColorSwitch"]).toEqual("accentColor");
+  expect(header["backgroundColorType"]).toEqual("accentColor");
   expect(header["backgroundColor"]).toBeUndefined();
 
-  header["backgroundColorSwitch"] = "none";
+  header["backgroundColorType"] = "none";
   expect(header["backgroundColor"]).toBeUndefined();
 
   creator.activeTab = "designer";
@@ -212,10 +212,10 @@ test("headerViewContainer: restore backgroundColorSwitch", (): any => {
   creator.activeTab = "theme";
   header = themeModel.header as HeaderModel;
 
-  expect(header["backgroundColorSwitch"]).toEqual("none");
+  expect(header["backgroundColorType"]).toEqual("none");
   expect(header["backgroundColor"]).toBeUndefined();
 
-  header["backgroundColorSwitch"] = "custom";
+  header["backgroundColorType"] = "custom";
   expect(header["backgroundColor"]).toBeUndefined();
   header["backgroundColor"] = "#ff0000";
 
@@ -225,7 +225,7 @@ test("headerViewContainer: restore backgroundColorSwitch", (): any => {
   creator.activeTab = "theme";
   header = themeModel.header as HeaderModel;
 
-  expect(header["backgroundColorSwitch"]).toEqual("custom");
+  expect(header["backgroundColorType"]).toEqual("custom");
   expect(header["backgroundColor"]).toBe("#ff0000");
 });
 
@@ -239,19 +239,19 @@ test("headerViewContainer: background color", (): any => {
   let header = themeModel.header as HeaderModel;
 
   header["headerView"] = "advanced";
-  expect(header["backgroundColorSwitch"]).toBe("accentColor");
+  expect(header["backgroundColorType"]).toBe("accentColor");
   expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBeUndefined();
 
-  header["backgroundColorSwitch"] = "none";
+  header["backgroundColorType"] = "none";
   expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBe("transparent");
 
-  header["backgroundColorSwitch"] = "custom";
+  header["backgroundColorType"] = "custom";
   expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBe("transparent");
 
   header["backgroundColor"] = "#5094ed";
   expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBe("#5094ed");
 
-  header["backgroundColorSwitch"] = "accentColor";
+  header["backgroundColorType"] = "accentColor";
   expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBeUndefined();
 });
 
@@ -270,10 +270,10 @@ test("header custom background color and theme changes", (): any => {
   expect(primaryBackColor.value).toEqual("rgba(25, 179, 148, 1)");
 
   header["headerView"] = "advanced";
-  expect(header["backgroundColorSwitch"]).toEqual("accentColor");
+  expect(header["backgroundColorType"]).toEqual("accentColor");
   expect(header["backgroundColor"]).toBeUndefined();
 
-  header["backgroundColorSwitch"] = "custom";
+  header["backgroundColorType"] = "custom";
   expect(header["backgroundColor"]).toBeUndefined();
   header["backgroundColor"] = "#ff0000";
 
@@ -287,14 +287,14 @@ test("header custom background color and theme changes", (): any => {
   expect(themeModel.themeCssCustomizations["--sjs-header-backcolor"]).toBe("#ff0000");
   expect(themeChooser.value).toEqual("default");
   expect(primaryBackColor.value).toEqual("rgba(25, 179, 148, 1)");
-  expect(header["backgroundColorSwitch"]).toEqual("custom");
+  expect(header["backgroundColorType"]).toEqual("custom");
   expect(header["backgroundColor"]).toBe("#ff0000");
 
   themeModel.selectTheme("contrast");
   expect(themeChooser.value).toEqual("contrast");
   expect(themeModel.themeCssCustomizations["--sjs-header-backcolor"]).toBe("#ff0000");
   expect(primaryBackColor.value).toEqual("rgba(0, 0, 0, 1)");
-  expect(header["backgroundColorSwitch"]).toEqual("custom");
+  expect(header["backgroundColorType"]).toEqual("custom");
   expect(header["backgroundColor"]).toBe("#ff0000");
 
   creator.activeTab = "designer";
@@ -306,6 +306,6 @@ test("header custom background color and theme changes", (): any => {
 
   expect(themeChooser.value).toEqual("contrast");
   expect(primaryBackColor.value).toEqual("rgba(0, 0, 0, 1)");
-  expect(header["backgroundColorSwitch"]).toEqual("custom");
+  expect(header["backgroundColorType"]).toEqual("custom");
   expect(header["backgroundColor"]).toBe("#ff0000");
 });

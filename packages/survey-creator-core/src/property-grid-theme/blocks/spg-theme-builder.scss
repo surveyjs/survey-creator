@@ -117,7 +117,7 @@
     pointer-events: none;
   }
 
-  .spg-headersettings {
+  .spg-header {
     margin-top: calcSize(-2);
   }
   .sd-question--title-top .spg-paneldynamic {
@@ -129,7 +129,7 @@
   .spg-row--multiple .spg-question.spg-row__question:not(.sd-question--title-top) {
     margin-top: 0;
   }
-  .spg-question__content-colorsettings {
+  .spg-question__content-coloralpha {
     margin-top: calcSize(-1);
   }
   .spg-question-composite__content .spg-row:first-of-type {

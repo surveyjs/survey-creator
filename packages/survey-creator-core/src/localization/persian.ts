@@ -794,6 +794,9 @@ var persianStrings = {
       slider: "اسلایدر",
       expression: "بیان",
       questionSettings: "تنظیمات پرسش",
+      header: "هدر",
+      background: "پس زمینه",
+      appearance: "ظاهر",
       others: "باقی موارد"
     },
     editProperty: "ویرایش خصوصیت '{0}'",
@@ -1475,10 +1478,6 @@ var persianStrings = {
     "--foreground": "رنگ پیشزمینه",
     "--base-unit": "واحد پایه",
     advancedMode: "حالت پیشرفته",
-    groupGeneral: "عمومی",
-    groupHeader: "هدر",
-    groupBackground: "پس زمینه",
-    groupAppearance: "ظاهر",
     themeName: "تم",
     themeMode: "ظاهر سوال",
     themeModePanels: "پیش فرض",
@@ -1489,9 +1488,6 @@ var persianStrings = {
     primaryDefaultColor: "پیش فرض",
     primaryDarkColor: "شناور",
     primaryLightColor: "انتخاب",
-    coverTitleForecolor: "پیش زمینه عنوانcolor",
-    coverDescriptionForecolor: "توصیف پیشرنگ",
-    coverOverlapEnabled: "همپوشانی",
     backgroundDimColor: "رنگ پسزمینه",
     backgroundImage: "تصویر زمینه",
     backgroundImageFitAuto: "خودکار",
@@ -1530,8 +1526,8 @@ var persianStrings = {
     fontWeightBold: "جسورانه",
     scale: "مقیاس",
     cornerRadius: "شعاع گوشه",
-    surveyTitle: "قلم عنوان نظرسنجی",
-    surveyDescription: "قلم توصیف نظرسنجی",
+    surveyTitleFont: "قلم عنوان نظرسنجی",
+    surveyDescriptionFont: "قلم توصیف نظرسنجی",
     pageTitle: "قلم عنوان صفحه",
     titleFont: "قلم عنوان",
     descriptionFont: "قلم توصیف",
@@ -1547,14 +1543,14 @@ var persianStrings = {
     headerView: "مشاهده",
     headerViewBasic: "اساسی",
     headerViewAdvanced: "پیشرفته",
-    coverInheritWidthFrom: "عرض منطقه محتوا",
-    coverInheritWidthFromSurvey: "همانند نظرسنجی",
-    coverInheritWidthFromContainer: "مناسب برای ظرف",
-    coverTextAreaWidth: "عرض متن",
-    coverBackgroundColorSwitch: "رنگ پسزمینه",
-    coverBackgroundColorNone: "هیچ کدام",
-    coverBackgroundColorAccentColor: "رنگ لهجه",
-    coverBackgroundColorCustom: "سفارشی",
+    headerInheritWidthFrom: "عرض منطقه محتوا",
+    headerInheritWidthFromSurvey: "همانند نظرسنجی",
+    headerInheritWidthFromContainer: "مناسب برای ظرف",
+    headerTextAreaWidth: "عرض متن",
+    headerBackgroundColorSwitch: "رنگ پسزمینه",
+    headerBackgroundColorNone: "هیچ کدام",
+    headerBackgroundColorAccentColor: "رنگ لهجه",
+    headerBackgroundColorCustom: "سفارشی",
     horizontalAlignmentLeft: "چپ",
     horizontalAlignmentCenter: "مرکز",
     horizontalAlignmentRight: "راست",
@@ -1562,8 +1558,8 @@ var persianStrings = {
     verticalAlignmentMiddle: "میانه",
     verticalAlignmentBottom: "پایین",
     logoPosition: "موقعیت لوگو",
-    coverTitlePosition: "موقعیت عنوان",
-    coverDescriptionPosition: "شرح موقعیت",
+    headerTitlePosition: "موقعیت عنوان",
+    headerDescriptionPosition: "شرح موقعیت",
     names: {
       default: "پیش فرض",
       sharp: "تیز",
@@ -1950,7 +1946,6 @@ editorLocalization.locales["fa"] = persianStrings;
 // theme.--primary-foreground: "Primary foreground color" => "رنگ پیشزمینه اصلی"
 // theme.--foreground: "Foreground color" => "رنگ پیشزمینه"
 // theme.--base-unit: "Base unit" => "واحد پایه"
-// theme.groupGeneral: "General" => "عمومی"
 // theme.groupAdvanced: "Advanced" => "پیشرفته"
 // theme.themeName: "Theme" => "تم"
 // theme.themeMode: "Question appearance" => "ظاهر سوال"
@@ -1997,7 +1992,7 @@ editorLocalization.locales["fa"] = persianStrings;
 // theme.fontWeightBold: "Bold" => "جسورانه"
 // theme.scale: "Scale" => "مقیاس"
 // theme.cornerRadius: "Corner radius" => "شعاع گوشه"
-// theme.surveyTitle: "Survey title font" => "قلم عنوان نظرسنجی"
+// theme.surveyTitleFont: "Survey title font" => "قلم عنوان نظرسنجی"
 // theme.pageTitle: "Page title font" => "قلم عنوان صفحه"
 // theme.pageDescription: "Page description font" => "قلم توصیف صفحه"
 // theme.boxShadowX: "X" => "X"
@@ -2058,22 +2053,20 @@ editorLocalization.locales["fa"] = persianStrings;
 // survey.title: "Title" => "عنوان"
 // page.title: "Title" => "عنوان"
 // p.setValueIf: "Set value if" => "تنظیم مقدار اگر"
-// theme.groupHeader: "Header" => "هدر"
-// theme.coverTitleForecolor: "Title forecolor" => "پیش زمینه عنوانcolor"
-// theme.coverOverlapEnabled: "Overlap" => "همپوشانی"
+// theme.header: "Header" => "هدر"
 // theme.backgroundImageFitFill: "Stretch" => "کشش"
 // theme.backgroundImageFitTile: "Tile" => "کاشی"
 // theme.headerView: "View" => "مشاهده"
 // theme.headerViewBasic: "Basic" => "اساسی"
 // theme.headerViewAdvanced: "Advanced" => "پیشرفته"
-// theme.coverInheritWidthFrom: "Content area width" => "عرض منطقه محتوا"
-// theme.coverInheritWidthFromSurvey: "Same as survey" => "همانند نظرسنجی"
-// theme.coverInheritWidthFromPage: "Fit to page" => "متناسب با صفحه"
-// theme.coverTextAreaWidth: "Text width" => "عرض متن"
-// theme.coverBackgroundColorSwitch: "Background color" => "رنگ پسزمینه"
-// theme.coverBackgroundColorNone: "None" => "هیچ کدام"
-// theme.coverBackgroundColorAccentColor: "Accent color" => "رنگ لهجه"
-// theme.coverBackgroundColorCustom: "Custom" => "سفارشی"
+// theme.headerInheritWidthFrom: "Content area width" => "عرض منطقه محتوا"
+// theme.headerInheritWidthFromSurvey: "Same as survey" => "همانند نظرسنجی"
+// theme.headerInheritWidthFromPage: "Fit to page" => "متناسب با صفحه"
+// theme.headerTextAreaWidth: "Text width" => "عرض متن"
+// theme.headerBackgroundColorSwitch: "Background color" => "رنگ پسزمینه"
+// theme.headerBackgroundColorNone: "None" => "هیچ کدام"
+// theme.headerBackgroundColorAccentColor: "Accent color" => "رنگ لهجه"
+// theme.headerBackgroundColorCustom: "Custom" => "سفارشی"
 // theme.horizontalAlignmentLeft: "Left" => "چپ"
 // theme.horizontalAlignmentCenter: "Center" => "مرکز"
 // theme.horizontalAlignmentRight: "Right" => "راست"
@@ -2093,18 +2086,14 @@ editorLocalization.locales["fa"] = persianStrings;
 // pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "اعمال می شود زمانی که \"نوع منبع\" است \"فایل های محلی\" و یا زمانی که دوربین در دسترس نیست"
 // pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "هنگامی که \"نوع منبع\" \"دوربین\" است، اعمال می شود."
 // pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "زمانی اعمال می شود که \"نوع منبع\" \"فایل های محلی یا دوربین\" باشد."
-// theme.groupBackground: "Background" => "پس زمینه"
-// theme.groupAppearance: "Appearance" => "ظاهر"
-// theme.coverDescriptionForecolor: "Description forecolor" => "توصیف پیشرنگ"
+// theme.background: "Background" => "پس زمینه"
+// theme.appearance: "Appearance" => "ظاهر"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "ایا واقعا می خواهید موضوع را دوباره تنظیم کنید؟ تمام سفارشی سازی های شما از دست خواهد رفت."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "بله، موضوع را تنظیم مجدد کنید"
-// theme.groupBackground: "Background" => "پس زمینه"
-// theme.groupAppearance: "Appearance" => "ظاهر"
-// theme.coverDescriptionForecolor: "Description forecolor" => "توصیف پیشرنگ"
-// theme.coverInheritWidthFromContainer: "Fit to container" => "مناسب برای ظرف"
+// theme.headerInheritWidthFromContainer: "Fit to container" => "مناسب برای ظرف"
 // signaturepad.showPlaceholder: "Show the placeholder" => "نشان دادن نگهدارندهی مکان"
 // signaturepad.placeholder: "Placeholder text" => "متن ذی نفع"
-// theme.surveyDescription: "Survey description font" => "قلم توصیف نظرسنجی"
+// theme.surveyDescriptionFont: "Survey description font" => "قلم توصیف نظرسنجی"
 
 // ed.prevFocus: "Focus previous" => "تمرکز قبلی"
 // ed.nextFocus: "Focus next" => "تمرکز بعدی"
@@ -2118,8 +2107,8 @@ editorLocalization.locales["fa"] = persianStrings;
 // signaturepad.penMinWidth: "Minimum pen width" => "حداقل عرض قلم"
 // signaturepad.penMaxWidth: "Maximum pen width" => "حداکثر عرض قلم"
 // theme.logoPosition: "Logo position" => "موقعیت لوگو"
-// theme.coverTitlePosition: "Title position" => "موقعیت عنوان"
-// theme.coverDescriptionPosition: "Description position" => "شرح موقعیت"
+// theme.headerTitlePosition: "Title position" => "موقعیت عنوان"
+// theme.headerDescriptionPosition: "Description position" => "شرح موقعیت"
 // ed.propertyGridNoResultsFound: "No results found" => "نتیجه ای یافت نشد"
 // pv.leftRight: "Left and right" => "چپ و راست"
 // p.sourceType: "Source type" => "نوع منبع"

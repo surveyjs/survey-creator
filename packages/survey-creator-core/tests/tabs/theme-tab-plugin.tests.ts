@@ -1080,9 +1080,9 @@ test("Check onOpenFileChooser is called and context is passed", (): any => {
     const headerBackgroundImageEditor = groupHeader.elements[0].contentPanel.getElementByName("backgroundImage");
     headerBackgroundImageEditor.chooseFile(new MouseEvent("click"));
     expect(log).toBe("->onOpenFileChooser->uploadFile->onOpenFileChooser->uploadFile");
-    expect(lastContext).toStrictEqual({ element: themeModel.header, elementType: "headersettings", propertyName: "backgroundImage" });
-    expect(lastUploadContext).toStrictEqual({ element: themeModel.header, elementType: "headersettings", propertyName: "backgroundImage", item: undefined });
-    expect(lastUploadOptions.elementType).toBe("headersettings");
+    expect(lastContext).toStrictEqual({ element: themeModel.header, elementType: "header", propertyName: "backgroundImage" });
+    expect(lastUploadContext).toStrictEqual({ element: themeModel.header, elementType: "header", propertyName: "backgroundImage", item: undefined });
+    expect(lastUploadOptions.elementType).toBe("header");
     expect(lastUploadOptions.propertyName).toBe("backgroundImage");
   } finally {
     document.getElementById = origGetElementById;
@@ -1092,7 +1092,7 @@ test("Check onOpenFileChooser is called and context is passed", (): any => {
 test("Modify property grid: add/hide properties", (): any => {
   Serializer.addProperty("theme", {
     name: "custom-question-title",
-    type: "fontsettings",
+    type: "font",
     displayName: "Question title font",
     default: {
       family: "Open Sans",
@@ -1103,7 +1103,7 @@ test("Modify property grid: add/hide properties", (): any => {
 
   Serializer.addProperty("theme", {
     name: "matrix-title",
-    type: "fontsettings",
+    type: "font",
     displayName: "Matrix title font",
     default: {
       family: "Open Sans",
@@ -1152,7 +1152,7 @@ test("Modify property grid: add/hide properties", (): any => {
 
 test("Modify property grid & switch themeName", (): any => {
   try {
-    Serializer.addProperty("theme", { name: "matrix-title", type: "fontsettings", category: "appearancequestion" });
+    Serializer.addProperty("theme", { name: "matrix-title", type: "font", category: "appearancequestion" });
 
     const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
     creator.onShowingProperty.add(function (sender, options) {

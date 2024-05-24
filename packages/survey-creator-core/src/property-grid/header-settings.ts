@@ -5,7 +5,7 @@ import { ISurveyCreatorOptions } from "../creator-settings";
 import { themeModelPropertyGridDefinition } from "../components/tabs/theme-model-definition";
 
 var json = {
-  name: "propertygrid_headersettings",
+  name: "propertygrid_header",
   showInToolbox: false,
   internal: true,
   createElements: function (panel) {
@@ -17,22 +17,22 @@ if (!ComponentCollection.Instance.getCustomQuestionByName(json.name)) {
   ComponentCollection.Instance.add(json as any);
 }
 
-export class PropertyGridEditorQuestionHeaderSettings extends PropertyGridEditor {
+export class PropertyGridEditorQuestionHeader extends PropertyGridEditor {
 
   public fit(prop: JsonObjectProperty): boolean {
-    return prop.type == "headersettings";
+    return prop.type == "header";
   }
   public getJSON(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): any {
     return {
-      type: "propertygrid_headersettings",
+      type: "propertygrid_header",
       titleLocation: "hidden"
     };
   }
   onCreated(obj: Base, question: Question, prop: JsonObjectProperty,
     options: ISurveyCreatorOptions, propGridDefinition?: ISurveyPropertyGridDefinition): void {
     const panel = <PanelModel>question["contentPanel"];
-    const headersettings = obj[prop.name];
-    const propertyGenerator = new PropertyJSONGenerator(headersettings, options, obj, prop, themeModelPropertyGridDefinition);
+    const header = obj[prop.name];
+    const propertyGenerator = new PropertyJSONGenerator(header, options, obj, prop, themeModelPropertyGridDefinition);
     propertyGenerator.setupObjPanel(panel, true);
 
     let settingsPanel;
@@ -56,4 +56,4 @@ export class PropertyGridEditorQuestionHeaderSettings extends PropertyGridEditor
   // }
 }
 
-PropertyGridEditorCollection.register(new PropertyGridEditorQuestionHeaderSettings());
+PropertyGridEditorCollection.register(new PropertyGridEditorQuestionHeader());

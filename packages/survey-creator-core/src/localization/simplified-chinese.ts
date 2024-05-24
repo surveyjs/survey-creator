@@ -794,6 +794,9 @@ var simplifiedChineseTranslation = {
       slider: "滑 块",
       expression: "表达",
       questionSettings: "问题设置",
+      header: "页眉",
+      background: "背景",
+      appearance: "外观",
       others: "别人"
     },
     editProperty: "编辑属性: '{0}'",
@@ -1475,10 +1478,6 @@ var simplifiedChineseTranslation = {
     "--foreground": "前景色",
     "--base-unit": "基本单元",
     advancedMode: "高级模式",
-    groupGeneral: "常规",
-    groupHeader: "页眉",
-    groupBackground: "背景",
-    groupAppearance: "外观",
     themeName: "主题",
     themeMode: "问题外观",
     themeModePanels: "违约",
@@ -1489,9 +1488,6 @@ var simplifiedChineseTranslation = {
     primaryDefaultColor: "违约",
     primaryDarkColor: "悬停",
     primaryLightColor: "选择",
-    coverTitleForecolor: "标题前彩",
-    coverDescriptionForecolor: "描述前彩",
-    coverOverlapEnabled: "重叠",
     backgroundDimColor: "背景色",
     backgroundImage: "背景图片",
     backgroundImageFitAuto: "自动",
@@ -1530,8 +1526,8 @@ var simplifiedChineseTranslation = {
     fontWeightBold: "大胆",
     scale: "规模",
     cornerRadius: "拐角半径",
-    surveyTitle: "调查标题字体",
-    surveyDescription: "调查描述字体",
+    surveyTitleFont: "调查标题字体",
+    surveyDescriptionFont: "调查描述字体",
     pageTitle: "页面标题字体",
     titleFont: "标题字体",
     descriptionFont: "描述字体",
@@ -1547,14 +1543,14 @@ var simplifiedChineseTranslation = {
     headerView: "视图",
     headerViewBasic: "基本",
     headerViewAdvanced: "高深",
-    coverInheritWidthFrom: "内容区域宽度",
-    coverInheritWidthFromSurvey: "与调查相同",
-    coverInheritWidthFromContainer: "适合容器",
-    coverTextAreaWidth: "文本宽度",
-    coverBackgroundColorSwitch: "背景色",
-    coverBackgroundColorNone: "没有",
-    coverBackgroundColorAccentColor: "强调文字颜色",
-    coverBackgroundColorCustom: "习惯",
+    headerInheritWidthFrom: "内容区域宽度",
+    headerInheritWidthFromSurvey: "与调查相同",
+    headerInheritWidthFromContainer: "适合容器",
+    headerTextAreaWidth: "文本宽度",
+    headerBackgroundColorSwitch: "背景色",
+    headerBackgroundColorNone: "没有",
+    headerBackgroundColorAccentColor: "强调文字颜色",
+    headerBackgroundColorCustom: "习惯",
     horizontalAlignmentLeft: "左",
     horizontalAlignmentCenter: "中心",
     horizontalAlignmentRight: "右",
@@ -1562,8 +1558,8 @@ var simplifiedChineseTranslation = {
     verticalAlignmentMiddle: "中间",
     verticalAlignmentBottom: "底",
     logoPosition: "徽标位置",
-    coverTitlePosition: "职称位置",
-    coverDescriptionPosition: "描述位置",
+    headerTitlePosition: "职称位置",
+    headerDescriptionPosition: "描述位置",
     names: {
       default: "违约",
       sharp: "锋利",
@@ -2138,7 +2134,6 @@ editorLocalization.locales["zh-cn"] = simplifiedChineseTranslation;
 // theme.--primary-foreground: "Primary foreground color" => "原色前景色"
 // theme.--foreground: "Foreground color" => "前景色"
 // theme.--base-unit: "Base unit" => "基本单元"
-// theme.groupGeneral: "General" => "常规"
 // theme.groupAdvanced: "Advanced" => "高深"
 // theme.themeName: "Theme" => "主题"
 // theme.themeMode: "Question appearance" => "问题外观"
@@ -2185,7 +2180,7 @@ editorLocalization.locales["zh-cn"] = simplifiedChineseTranslation;
 // theme.fontWeightBold: "Bold" => "大胆"
 // theme.scale: "Scale" => "规模"
 // theme.cornerRadius: "Corner radius" => "拐角半径"
-// theme.surveyTitle: "Survey title font" => "调查标题字体"
+// theme.surveyTitleFont: "Survey title font" => "调查标题字体"
 // theme.pageTitle: "Page title font" => "页面标题字体"
 // theme.pageDescription: "Page description font" => "页面描述字体"
 // theme.boxShadowX: "X" => "X"
@@ -2246,22 +2241,20 @@ editorLocalization.locales["zh-cn"] = simplifiedChineseTranslation;
 // survey.title: "Title" => "标题"
 // page.title: "Title" => "标题"
 // p.setValueIf: "Set value if" => "设置值，如果"
-// theme.groupHeader: "Header" => "页眉"
-// theme.coverTitleForecolor: "Title forecolor" => "标题前彩"
-// theme.coverOverlapEnabled: "Overlap" => "重叠"
+// theme.header: "Header" => "页眉"
 // theme.backgroundImageFitFill: "Stretch" => "伸展"
 // theme.backgroundImageFitTile: "Tile" => "瓦"
 // theme.headerView: "View" => "视图"
 // theme.headerViewBasic: "Basic" => "基本"
 // theme.headerViewAdvanced: "Advanced" => "高深"
-// theme.coverInheritWidthFrom: "Content area width" => "内容区域宽度"
-// theme.coverInheritWidthFromSurvey: "Same as survey" => "与调查相同"
-// theme.coverInheritWidthFromPage: "Fit to page" => "适合页面"
-// theme.coverTextAreaWidth: "Text width" => "文本宽度"
-// theme.coverBackgroundColorSwitch: "Background color" => "背景色"
-// theme.coverBackgroundColorNone: "None" => "没有"
-// theme.coverBackgroundColorAccentColor: "Accent color" => "强调文字颜色"
-// theme.coverBackgroundColorCustom: "Custom" => "习惯"
+// theme.headerInheritWidthFrom: "Content area width" => "内容区域宽度"
+// theme.headerInheritWidthFromSurvey: "Same as survey" => "与调查相同"
+// theme.headerInheritWidthFromPage: "Fit to page" => "适合页面"
+// theme.headerTextAreaWidth: "Text width" => "文本宽度"
+// theme.headerBackgroundColorSwitch: "Background color" => "背景色"
+// theme.headerBackgroundColorNone: "None" => "没有"
+// theme.headerBackgroundColorAccentColor: "Accent color" => "强调文字颜色"
+// theme.headerBackgroundColorCustom: "Custom" => "习惯"
 // theme.horizontalAlignmentLeft: "Left" => "左"
 // theme.horizontalAlignmentCenter: "Center" => "中心"
 // theme.horizontalAlignmentRight: "Right" => "右"
@@ -2281,18 +2274,14 @@ editorLocalization.locales["zh-cn"] = simplifiedChineseTranslation;
 // pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "当“源类型”为“本地文件”或相机不可用时适用"
 // pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "当“源类型”为“相机”时适用。"
 // pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "当“源类型”为“本地文件或相机”时适用。"
-// theme.groupBackground: "Background" => "背景"
-// theme.groupAppearance: "Appearance" => "外观"
-// theme.coverDescriptionForecolor: "Description forecolor" => "描述前彩"
+// theme.background: "Background" => "背景"
+// theme.appearance: "Appearance" => "外观"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "你真的要重置主题吗？您的所有自定义项都将丢失。"
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "是，重置主题"
-// theme.groupBackground: "Background" => "背景"
-// theme.groupAppearance: "Appearance" => "外观"
-// theme.coverDescriptionForecolor: "Description forecolor" => "描述前彩"
-// theme.coverInheritWidthFromContainer: "Fit to container" => "适合容器"
+// theme.headerInheritWidthFromContainer: "Fit to container" => "适合容器"
 // signaturepad.showPlaceholder: "Show the placeholder" => "显示占位符"
 // signaturepad.placeholder: "Placeholder text" => "占位符文本"
-// theme.surveyDescription: "Survey description font" => "调查描述字体"
+// theme.surveyDescriptionFont: "Survey description font" => "调查描述字体"
 // ed.prevFocus: "Focus previous" => "焦点 上一页"
 // ed.nextFocus: "Focus next" => "接下来的重点"
 // ed.saveTheme: "Save Theme" => "保存主题"
@@ -2305,8 +2294,8 @@ editorLocalization.locales["zh-cn"] = simplifiedChineseTranslation;
 // signaturepad.penMinWidth: "Minimum pen width" => "最小笔宽"
 // signaturepad.penMaxWidth: "Maximum pen width" => "最大笔宽"
 // theme.logoPosition: "Logo position" => "徽标位置"
-// theme.coverTitlePosition: "Title position" => "职称位置"
-// theme.coverDescriptionPosition: "Description position" => "描述位置"
+// theme.headerTitlePosition: "Title position" => "职称位置"
+// theme.headerDescriptionPosition: "Description position" => "描述位置"
 // ed.propertyGridNoResultsFound: "No results found" => "未找到结果"
 // pv.leftRight: "Left and right" => "左和右"
 // p.sourceType: "Source type" => "源类型"

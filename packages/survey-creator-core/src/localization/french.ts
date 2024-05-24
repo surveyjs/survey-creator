@@ -794,6 +794,9 @@ var frenchTranslation = {
       slider: "Curseur",
       expression: "Condition",
       questionSettings: "Paramètres de la question",
+      header: "En-tête",
+      background: "Arrière-plan",
+      appearance: "Apparence",
       others: "Autres"
     },
     editProperty: "Éditer la propriété \"{0}\"",
@@ -1475,10 +1478,6 @@ var frenchTranslation = {
     "--foreground": "Couleur de premier plan",
     "--base-unit": "Unité de base",
     advancedMode: "Mode avancé",
-    groupGeneral: "Généralités",
-    groupHeader: "En-tête",
-    groupBackground: "Arrière-plan",
-    groupAppearance: "Apparence",
     themeName: "Thème",
     themeMode: "Apparence de la question",
     themeModePanels: "Par défaut",
@@ -1489,9 +1488,6 @@ var frenchTranslation = {
     primaryDefaultColor: "Faire défaut",
     primaryDarkColor: "Au survol",
     primaryLightColor: "Sélectionné",
-    coverTitleForecolor: "Précouleur du titre",
-    coverDescriptionForecolor: "Description de la couleur avant",
-    coverOverlapEnabled: "Chevauchement",
     backgroundDimColor: "Couleur d’arrière-plan",
     backgroundImage: "Image d’arrière-plan",
     backgroundImageFitAuto: "Auto",
@@ -1530,8 +1526,8 @@ var frenchTranslation = {
     fontWeightBold: "Gras",
     scale: "Échelle",
     cornerRadius: "Angle",
-    surveyTitle: "Police du titre du sondage",
-    surveyDescription: "Police de description de l’enquête",
+    surveyTitleFont: "Police du titre du sondage",
+    surveyDescriptionFont: "Police de description de l’enquête",
     pageTitle: "Police du titre de la page",
     titleFont: "Police du titre",
     descriptionFont: "Police de description",
@@ -1547,14 +1543,14 @@ var frenchTranslation = {
     headerView: "Vue",
     headerViewBasic: "Basique",
     headerViewAdvanced: "Avancé",
-    coverInheritWidthFrom: "Largeur de la zone de contenu",
-    coverInheritWidthFromSurvey: "Identique à l’enquête",
-    coverInheritWidthFromContainer: "S’adapte au conteneur",
-    coverTextAreaWidth: "Largeur du texte",
-    coverBackgroundColorSwitch: "Couleur d’arrière-plan",
-    coverBackgroundColorNone: "Aucun",
-    coverBackgroundColorAccentColor: "Couleur d’accentuation",
-    coverBackgroundColorCustom: "Coutume",
+    headerInheritWidthFrom: "Largeur de la zone de contenu",
+    headerInheritWidthFromSurvey: "Identique à l’enquête",
+    headerInheritWidthFromContainer: "S’adapte au conteneur",
+    headerTextAreaWidth: "Largeur du texte",
+    headerBackgroundColorSwitch: "Couleur d’arrière-plan",
+    headerBackgroundColorNone: "Aucun",
+    headerBackgroundColorAccentColor: "Couleur d’accentuation",
+    headerBackgroundColorCustom: "Coutume",
     horizontalAlignmentLeft: "Gauche",
     horizontalAlignmentCenter: "Centre",
     horizontalAlignmentRight: "Droite",
@@ -1562,8 +1558,8 @@ var frenchTranslation = {
     verticalAlignmentMiddle: "Milieu",
     verticalAlignmentBottom: "Fond",
     logoPosition: "Position du logo",
-    coverTitlePosition: "Position du titre",
-    coverDescriptionPosition: "Description du poste",
+    headerTitlePosition: "Position du titre",
+    headerDescriptionPosition: "Description du poste",
     names: {
       default: "Par défaut",
       sharp: "Tranchant",
@@ -2056,7 +2052,6 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // theme.--primary-foreground: "Primary foreground color" => "Couleur de premier plan primaire"
 // theme.--foreground: "Foreground color" => "Couleur de premier plan"
 // theme.--base-unit: "Base unit" => "Unité de base"
-// theme.groupGeneral: "General" => "Généralités"
 // theme.groupAdvanced: "Advanced" => "Avancé"
 // theme.themeName: "Theme" => "Thème"
 // theme.themeMode: "Question appearance" => "Apparence de la question"
@@ -2103,7 +2098,7 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // theme.fontWeightBold: "Bold" => "Audacieux"
 // theme.scale: "Scale" => "Écaille"
 // theme.cornerRadius: "Corner radius" => "Rayon d’angle"
-// theme.surveyTitle: "Survey title font" => "Police du titre de l’enquête"
+// theme.surveyTitleFont: "Survey title font" => "Police du titre de l’enquête"
 // theme.pageTitle: "Page title font" => "Police du titre de la page"
 // theme.pageDescription: "Page description font" => "Police de description de page"
 // theme.boxShadowX: "X" => "X"
@@ -2163,30 +2158,28 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // lg.column_setValueName: "Set column value" => "Définition de la valeur de colonne"
 // lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => " Expression dont le résultat sera affecté à la question cible."
 // p.setValueIf: "Set value if" => "Définir la valeur si"
-// theme.groupHeader: "Header" => "En-tête"
-// theme.coverTitleForecolor: "Title forecolor" => "Précouleur du titre"
-// theme.coverOverlapEnabled: "Overlap" => "Chevauchement"
+// theme.header: "Header" => "En-tête"
 // theme.backgroundImageFitFill: "Stretch" => "Étirer"
 // theme.backgroundImageFitTile: "Tile" => "Carreau"
 // theme.headerView: "View" => "Vue"
 // theme.headerViewBasic: "Basic" => "Basique"
 // theme.headerViewAdvanced: "Advanced" => "Avancé"
-// theme.coverInheritWidthFrom: "Content area width" => "Largeur de la zone de contenu"
-// theme.coverInheritWidthFromSurvey: "Same as survey" => "Identique à l’enquête"
-// theme.coverInheritWidthFromPage: "Fit to page" => "Ajuster à la page"
-// theme.coverTextAreaWidth: "Text width" => "Largeur du texte"
-// theme.coverBackgroundColorSwitch: "Background color" => "Couleur d’arrière-plan"
-// theme.coverBackgroundColorNone: "None" => "Aucun"
-// theme.coverBackgroundColorAccentColor: "Accent color" => "Couleur d’accentuation"
-// theme.coverBackgroundColorCustom: "Custom" => "Coutume"
+// theme.headerInheritWidthFrom: "Content area width" => "Largeur de la zone de contenu"
+// theme.headerInheritWidthFromSurvey: "Same as survey" => "Identique à l’enquête"
+// theme.headerInheritWidthFromPage: "Fit to page" => "Ajuster à la page"
+// theme.headerTextAreaWidth: "Text width" => "Largeur du texte"
+// theme.headerBackgroundColorSwitch: "Background color" => "Couleur d’arrière-plan"
+// theme.headerBackgroundColorNone: "None" => "Aucun"
+// theme.headerBackgroundColorAccentColor: "Accent color" => "Couleur d’accentuation"
+// theme.headerBackgroundColorCustom: "Custom" => "Coutume"
 // theme.horizontalAlignmentLeft: "Left" => "Gauche"
 // theme.horizontalAlignmentCenter: "Center" => "Centre"
 // theme.horizontalAlignmentRight: "Right" => "Droite"
 // theme.verticalAlignmentTop: "Top" => "Retour au début"
 // theme.verticalAlignmentMiddle: "Middle" => "Milieu"
 // theme.verticalAlignmentBottom: "Bottom" => "Fond"
-// theme.coverTitlePosition: "Title Position" => "Position du titre"
-// theme.coverDescriptionPosition: "Description Position" => "Description du poste"
+// theme.headerTitlePosition: "Title Position" => "Position du titre"
+// theme.headerDescriptionPosition: "Description Position" => "Description du poste"
 // lg.question_resetValueText: "reset value for question: {0}" => "Réinitialisez la valeur pour la question : {0}"
 // lg.question_setValueText: "assign value: {1} to question: {0}" => "Attribuer une valeur : {1} à la question : {0}"
 // lg.column_resetValueText: "reset cell value for column: {0}" => "Réinitialiser la valeur de la cellule pour la colonne : {0}"
@@ -2200,18 +2193,14 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "S’applique lorsque le « Type de source » est « Fichiers locaux » ou lorsque l’appareil photo n’est pas disponible"
 // pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "S’applique lorsque le «Type de source» est «Appareil photo»."
 // pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "S’applique lorsque le «Type de source» est «Fichiers locaux ou appareil photo»."
-// theme.groupBackground: "Background" => "Arrière-plan"
-// theme.groupAppearance: "Appearance" => "Apparence"
-// theme.coverDescriptionForecolor: "Description forecolor" => "Description de la couleur avant"
+// theme.background: "Background" => "Arrière-plan"
+// theme.appearance: "Appearance" => "Apparence"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Voulez-vous vraiment réinitialiser le thème ? Toutes vos personnalisations seront perdues."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "Oui, réinitialisez le thème"
-// theme.groupBackground: "Background" => "Arrière-plan"
-// theme.groupAppearance: "Appearance" => "Apparence"
-// theme.coverDescriptionForecolor: "Description forecolor" => "Description de la couleur avant"
-// theme.coverInheritWidthFromContainer: "Fit to container" => "S’adapte au conteneur"
+// theme.headerInheritWidthFromContainer: "Fit to container" => "S’adapte au conteneur"
 // signaturepad.showPlaceholder: "Show the placeholder" => "Afficher l’espace réservé"
 // signaturepad.placeholder: "Placeholder text" => "Texte d’espace réservé"
-// theme.surveyDescription: "Survey description font" => "Police de description de l’enquête"
+// theme.surveyDescriptionFont: "Survey description font" => "Police de description de l’enquête"
 
 // ed.prevFocus: "Focus previous" => "Mise au point précédente"
 // ed.nextFocus: "Focus next" => "Focus suivant"

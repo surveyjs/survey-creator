@@ -8,9 +8,9 @@ import { editorLocalization } from "../../src/editorLocalization";
 export { QuestionFileEditorModel } from "../../src/custom-questions/question-file";
 export { QuestionSpinEditorModel } from "../../src/custom-questions/question-spin-editor";
 export { QuestionColorModel } from "../../src/custom-questions/question-color";
-export { createColor } from "../../src/components/tabs/theme-custom-questions/color-settings";
-export { createBoxShadow, parseBoxShadow } from "../../src/components/tabs/theme-custom-questions/boxshadow-settings";
-export * from "../../src/components/tabs/theme-custom-questions/boxshadow-settings";
+export { createColor } from "../../src/components/tabs/theme-custom-questions/color-alpha";
+export { createBoxShadow, parseBoxShadow } from "../../src/components/tabs/theme-custom-questions/shadow-effects";
+export * from "../../src/components/tabs/theme-custom-questions/shadow-effects";
 export * from "../../src/property-grid/theme-settings";
 export * from "../../src/property-grid/header-settings";
 
@@ -37,7 +37,7 @@ test("Theme builder initialization", (): any => {
   expect(colorQuestions[0].choices.map(c => c.value)).toStrictEqual(Object.keys(PredefinedColors.light).map(key => PredefinedColors.light[key]));
 });
 
-test("Theme builder: composite question fontSettings", (): any => {
+test("Theme builder: composite question font", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
@@ -67,7 +67,7 @@ test("Theme builder: composite question fontSettings", (): any => {
   expect(themeModel["questionTitle"]).toStrictEqual({ family: "Some font", weight: "450", size: 18, color: "#222222" });
 });
 
-test("Theme builder: composite question elementSettings", (): any => {
+test("Theme builder: composite question backgroundcornerradius", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
@@ -740,7 +740,7 @@ test("headerViewContainer init state", (): any => {
     "logoPosition": "left",
     "inheritWidthFrom": "container",
     "overlapEnabled": false,
-    "backgroundColorSwitch": "accentColor",
+    "backgroundColorType": "accentColor",
     "backgroundImageFit": "cover",
     "backgroundImageOpacity": 100,
     "logoPositionX": "right",
@@ -846,7 +846,7 @@ test("set headerViewContainer advanced", (): any => {
   headerViewContainer.getElementByName("height").value = 300;
   headerViewContainer.getElementByName("inheritWidthFrom").value = "survey";
   headerViewContainer.getElementByName("textAreaWidth").value = 600;
-  headerViewContainer.getElementByName("backgroundColorSwitch").value = "custom";
+  headerViewContainer.getElementByName("backgroundColorType").value = "custom";
   headerViewContainer.getElementByName("backgroundColor").value = "#5094ed";
   headerViewContainer.getElementByName("backgroundImage").value = "https://t4.ftcdn.net/jpg/02/83/13/61/360_F_283136113_b3VRHNiOPFMOluzYJPpfuoH8Czh9c743.jpg";
   headerViewContainer.getElementByName("backgroundImageFit").value = "fill";
@@ -945,7 +945,7 @@ test("restore headerViewContainer values", (): any => {
   expect(headerViewContainer.getQuestionByName("logoPosition").value).toBe("left");
   expect(headerViewContainer.getQuestionByName("inheritWidthFrom").value).toBe("container");
   expect(headerViewContainer.getQuestionByName("backgroundColor").value).toBe("#5094ed");
-  expect(headerViewContainer.getQuestionByName("backgroundColorSwitch").value).toBe("custom");
+  expect(headerViewContainer.getQuestionByName("backgroundColorType").value).toBe("custom");
   expect(headerViewContainer.getQuestionByName("backgroundImage").value).toBe("https://t4.ftcdn.net/jpg/02/83/13/61/360_F_283136113_b3VRHNiOPFMOluzYJPpfuoH8Czh9c743.jpg");
   expect(headerViewContainer.getQuestionByName("backgroundImageFit").value).toBe("fill");
   expect(headerViewContainer.getQuestionByName("backgroundImageOpacity").value).toBe(50);
@@ -985,13 +985,13 @@ test("restore headerViewContainer values", (): any => {
 test("Check subcategory order", (): any => {
   Serializer.addProperty("theme", {
     name: "custom-question-title",
-    type: "fontsettings",
+    type: "font",
     category: "appearancequestion",
   });
 
   Serializer.addProperty("theme", {
     name: "matrix-title",
-    type: "fontsettings",
+    type: "font",
     category: "appearancequestion",
   });
 

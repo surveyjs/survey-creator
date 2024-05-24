@@ -4,10 +4,10 @@ import { ISurveyCreatorOptions } from "../creator-settings";
 
 export class PropertyGridEditorFontSettings extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
-    return prop.type == "fontsettings";
+    return prop.type == "font";
   }
   public getJSON(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): any {
-    return { type: "fontSettings", descriptionLocation: "hidden" };
+    return { type: "font", descriptionLocation: "hidden" };
   }
   public onCreated(obj: Base, question: Question, prop: JsonObjectProperty) {
     question.valueFromDataCallback = function (val: any): any {
@@ -20,12 +20,12 @@ export class PropertyGridEditorFontSettings extends PropertyGridEditor {
 }
 PropertyGridEditorCollection.register(new PropertyGridEditorFontSettings());
 
-export class PropertyGridEditorElementSettings extends PropertyGridEditor {
+export class PropertyGridEditorBackgroundCornerRadius extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
-    return prop.type == "elementsettings";
+    return prop.type == "backgroundcornerradius";
   }
   public getJSON(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): any {
-    return { type: "elementsettings", descriptionLocation: "hidden" };
+    return { type: "backgroundcornerradius", descriptionLocation: "hidden" };
   }
   public onCreated(obj: Base, question: Question, prop: JsonObjectProperty) {
     question.valueFromDataCallback = function (val: any): any {
@@ -36,16 +36,16 @@ export class PropertyGridEditorElementSettings extends PropertyGridEditor {
     };
   }
 }
-PropertyGridEditorCollection.register(new PropertyGridEditorElementSettings());
+PropertyGridEditorCollection.register(new PropertyGridEditorBackgroundCornerRadius());
 
-export class PropertyGridEditorBoxShadowSettings extends PropertyGridEditor {
+export class PropertyGridEditorShadowEffects extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
-    return prop.type == "boxshadowsettings";
+    return prop.type == "shadoweffects";
   }
   public getJSON(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): any {
-    return { type: "boxshadowsettings", descriptionLocation: "hidden" };
+    return { type: "shadoweffects", descriptionLocation: "hidden" };
   }
   // public onCreated(obj: Base, question: Question, prop: JsonObjectProperty) {
   // }
 }
-PropertyGridEditorCollection.register(new PropertyGridEditorBoxShadowSettings());
+PropertyGridEditorCollection.register(new PropertyGridEditorShadowEffects());

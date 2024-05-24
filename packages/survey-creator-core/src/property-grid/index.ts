@@ -1524,12 +1524,12 @@ export class PropertyGridEditorColor extends PropertyGridEditor {
   }
 }
 
-export class PropertyGridEditorColorSettings extends PropertyGridEditor {
+export class PropertyGridEditorColorWithAlpha extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
-    return prop.type == "colorsettings";
+    return prop.type == "coloralpha";
   }
   public getJSON(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): any {
-    return { type: "colorsettings", descriptionLocation: "hidden" };
+    return { type: "coloralpha", descriptionLocation: "hidden" };
   }
   public onCreated(obj: Base, question: Question, prop: JsonObjectProperty) {
     question.valueFromDataCallback = function (val: any): any {
@@ -1940,7 +1940,7 @@ PropertyGridEditorCollection.register(new PropertyGridEditorQuestionSelectBase()
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestionCarryForward());
 PropertyGridEditorCollection.register(new PropertyGridEditorImageSize());
 PropertyGridEditorCollection.register(new PropertyGridEditorColor());
-PropertyGridEditorCollection.register(new PropertyGridEditorColorSettings());
+PropertyGridEditorCollection.register(new PropertyGridEditorColorWithAlpha());
 PropertyGridEditorCollection.register(new PropertyGridEditorDateTime());
 
 QuestionFactory.Instance.registerQuestion("buttongroup", (name) => {

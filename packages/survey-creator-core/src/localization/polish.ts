@@ -794,6 +794,9 @@ var polishStrings = {
       slider: "Suwak",
       expression: "Wyrażenie",
       questionSettings: "Ustawienia pytań",
+      header: "Nagłówek",
+      background: "Tło",
+      appearance: "Wygląd",
       others: "Inni"
     },
     editProperty: "Edit property '{0}'",
@@ -1475,10 +1478,6 @@ var polishStrings = {
     "--foreground": "Kolor pierwszego planu",
     "--base-unit": "Jednostka bazowa",
     advancedMode: "Tryb zaawansowany",
-    groupGeneral: "Ogólne",
-    groupHeader: "Nagłówek",
-    groupBackground: "Tło",
-    groupAppearance: "Wygląd",
     themeName: "Kompozycja",
     themeMode: "Wygląd pytania",
     themeModePanels: "Domyślny",
@@ -1489,9 +1488,6 @@ var polishStrings = {
     primaryDefaultColor: "Domyślny",
     primaryDarkColor: "Hover",
     primaryLightColor: "Wybrany",
-    coverTitleForecolor: "Kolor przedniego tytułu",
-    coverDescriptionForecolor: "Opis przedbarwy",
-    coverOverlapEnabled: "Zachodzić na siebie",
     backgroundDimColor: "Kolor tła",
     backgroundImage: "Obraz tła",
     backgroundImageFitAuto: "Automatycznie",
@@ -1530,8 +1526,8 @@ var polishStrings = {
     fontWeightBold: "Śmiały",
     scale: "Skala",
     cornerRadius: "Promień narożnika",
-    surveyTitle: "Czcionka tytułu ankiety",
-    surveyDescription: "Czcionka opisu ankiety",
+    surveyTitleFont: "Czcionka tytułu ankiety",
+    surveyDescriptionFont: "Czcionka opisu ankiety",
     pageTitle: "Czcionka tytułu strony",
     titleFont: "Czcionka tytułu",
     descriptionFont: "Czcionka opisu",
@@ -1547,14 +1543,14 @@ var polishStrings = {
     headerView: "Widok",
     headerViewBasic: "Podstawowy",
     headerViewAdvanced: "Zaawansowany",
-    coverInheritWidthFrom: "Szerokość obszaru zawartości",
-    coverInheritWidthFromSurvey: "Tak samo jak ankieta",
-    coverInheritWidthFromContainer: "Pasuje do pojemnika",
-    coverTextAreaWidth: "Szerokość tekstu",
-    coverBackgroundColorSwitch: "Kolor tła",
-    coverBackgroundColorNone: "Żaden",
-    coverBackgroundColorAccentColor: "Kolor wiodący",
-    coverBackgroundColorCustom: "Zwyczaj",
+    headerInheritWidthFrom: "Szerokość obszaru zawartości",
+    headerInheritWidthFromSurvey: "Tak samo jak ankieta",
+    headerInheritWidthFromContainer: "Pasuje do pojemnika",
+    headerTextAreaWidth: "Szerokość tekstu",
+    headerBackgroundColorSwitch: "Kolor tła",
+    headerBackgroundColorNone: "Żaden",
+    headerBackgroundColorAccentColor: "Kolor wiodący",
+    headerBackgroundColorCustom: "Zwyczaj",
     horizontalAlignmentLeft: "Lewy",
     horizontalAlignmentCenter: "Centrum",
     horizontalAlignmentRight: "Prawy",
@@ -1562,8 +1558,8 @@ var polishStrings = {
     verticalAlignmentMiddle: "Środek",
     verticalAlignmentBottom: "Dno",
     logoPosition: "Pozycja logo",
-    coverTitlePosition: "Pozycja tytułu",
-    coverDescriptionPosition: "Opis pozycja",
+    headerTitlePosition: "Pozycja tytułu",
+    headerDescriptionPosition: "Opis pozycja",
     names: {
       default: "Domyślny",
       sharp: "Ostry",
@@ -2263,7 +2259,6 @@ editorLocalization.locales["pl"] = polishStrings;
 // theme.--primary-foreground: "Primary foreground color" => "Podstawowy kolor pierwszego planu"
 // theme.--foreground: "Foreground color" => "Kolor pierwszego planu"
 // theme.--base-unit: "Base unit" => "Jednostka bazowa"
-// theme.groupGeneral: "General" => "Ogólne"
 // theme.groupAdvanced: "Advanced" => "Zaawansowany"
 // theme.themeName: "Theme" => "Kompozycja"
 // theme.themeMode: "Question appearance" => "Wygląd pytania"
@@ -2310,7 +2305,7 @@ editorLocalization.locales["pl"] = polishStrings;
 // theme.fontWeightBold: "Bold" => "Śmiały"
 // theme.scale: "Scale" => "Skala"
 // theme.cornerRadius: "Corner radius" => "Promień narożnika"
-// theme.surveyTitle: "Survey title font" => "Czcionka tytułu ankiety"
+// theme.surveyTitleFont: "Survey title font" => "Czcionka tytułu ankiety"
 // theme.pageTitle: "Page title font" => "Czcionka tytułu strony"
 // theme.pageDescription: "Page description font" => "Czcionka opisu strony"
 // theme.boxShadowX: "X" => "X"
@@ -2371,22 +2366,20 @@ editorLocalization.locales["pl"] = polishStrings;
 // survey.title: "Title" => "Tytuł"
 // page.title: "Title" => "Tytuł"
 // p.setValueIf: "Set value if" => "Ustaw wartość, jeśli"
-// theme.groupHeader: "Header" => "Nagłówek"
-// theme.coverTitleForecolor: "Title forecolor" => "Kolor przedniego tytułu"
-// theme.coverOverlapEnabled: "Overlap" => "Zachodzić na siebie"
+// theme.header: "Header" => "Nagłówek"
 // theme.backgroundImageFitFill: "Stretch" => "Rozciągnąć"
 // theme.backgroundImageFitTile: "Tile" => "Kafelek"
 // theme.headerView: "View" => "Widok"
 // theme.headerViewBasic: "Basic" => "Podstawowy"
 // theme.headerViewAdvanced: "Advanced" => "Zaawansowany"
-// theme.coverInheritWidthFrom: "Content area width" => "Szerokość obszaru zawartości"
-// theme.coverInheritWidthFromSurvey: "Same as survey" => "Tak samo jak ankieta"
-// theme.coverInheritWidthFromPage: "Fit to page" => "Dopasuj do strony"
-// theme.coverTextAreaWidth: "Text width" => "Szerokość tekstu"
-// theme.coverBackgroundColorSwitch: "Background color" => "Kolor tła"
-// theme.coverBackgroundColorNone: "None" => "Żaden"
-// theme.coverBackgroundColorAccentColor: "Accent color" => "Kolor wiodący"
-// theme.coverBackgroundColorCustom: "Custom" => "Zwyczaj"
+// theme.headerInheritWidthFrom: "Content area width" => "Szerokość obszaru zawartości"
+// theme.headerInheritWidthFromSurvey: "Same as survey" => "Tak samo jak ankieta"
+// theme.headerInheritWidthFromPage: "Fit to page" => "Dopasuj do strony"
+// theme.headerTextAreaWidth: "Text width" => "Szerokość tekstu"
+// theme.headerBackgroundColorSwitch: "Background color" => "Kolor tła"
+// theme.headerBackgroundColorNone: "None" => "Żaden"
+// theme.headerBackgroundColorAccentColor: "Accent color" => "Kolor wiodący"
+// theme.headerBackgroundColorCustom: "Custom" => "Zwyczaj"
 // theme.horizontalAlignmentLeft: "Left" => "Lewy"
 // theme.horizontalAlignmentCenter: "Center" => "Centrum"
 // theme.horizontalAlignmentRight: "Right" => "Prawy"
@@ -2394,7 +2387,7 @@ editorLocalization.locales["pl"] = polishStrings;
 // theme.verticalAlignmentMiddle: "Middle" => "Środek"
 // theme.verticalAlignmentBottom: "Bottom" => "Dno"
 // theme.logoPosition: "Logo Position" => "Pozycja logo"
-// theme.coverTitlePosition: "Title Position" => "Pozycja tytułu"
+// theme.headerTitlePosition: "Title Position" => "Pozycja tytułu"
 // lg.question_resetValueText: "reset value for question: {0}" => "Zresetuj wartość dla pytania: {0}"
 // lg.question_setValueText: "assign value: {1} to question: {0}" => "Przypisz wartość: {1} do pytania: {0}"
 // lg.column_resetValueText: "reset cell value for column: {0}" => "Zresetuj wartość komórki dla kolumny: {0}"
@@ -2408,18 +2401,14 @@ editorLocalization.locales["pl"] = polishStrings;
 // pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "Ma zastosowanie, gdy \"Typ źródła\" to \"Pliki lokalne\" lub gdy kamera jest niedostępna"
 // pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "Ma zastosowanie, gdy \"Typ źródła\" to \"Kamera\"."
 // pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "Ma zastosowanie, gdy \"Typ źródła\" to \"Pliki lokalne lub kamera\"."
-// theme.groupBackground: "Background" => "Tło"
-// theme.groupAppearance: "Appearance" => "Wygląd"
-// theme.coverDescriptionForecolor: "Description forecolor" => "Opis przedbarwy"
+// theme.background: "Background" => "Tło"
+// theme.appearance: "Appearance" => "Wygląd"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Czy naprawdę chcesz zresetować motyw? Wszystkie Twoje dostosowania zostaną utracone."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "Tak, zresetuj motyw"
-// theme.groupBackground: "Background" => "Tło"
-// theme.groupAppearance: "Appearance" => "Wygląd"
-// theme.coverDescriptionForecolor: "Description forecolor" => "Opis przedbarwy"
-// theme.coverInheritWidthFromContainer: "Fit to container" => "Pasuje do pojemnika"
+// theme.headerInheritWidthFromContainer: "Fit to container" => "Pasuje do pojemnika"
 // signaturepad.showPlaceholder: "Show the placeholder" => "Pokazywanie symbolu zastępczego"
 // signaturepad.placeholder: "Placeholder text" => "Tekst zastępczy"
-// theme.surveyDescription: "Survey description font" => "Czcionka opisu ankiety"
+// theme.surveyDescriptionFont: "Survey description font" => "Czcionka opisu ankiety"
 // ed.prevFocus: "Focus previous" => "Fokus poprzedni"
 // ed.nextFocus: "Focus next" => "Ostrość następna"
 // ed.saveTheme: "Save Theme" => "Zapisz motyw"
@@ -2431,7 +2420,7 @@ editorLocalization.locales["pl"] = polishStrings;
 // signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "Automatyczne skalowanie obszaru podpisu"
 // signaturepad.penMinWidth: "Minimum pen width" => "Minimalna szerokość pisaka"
 // signaturepad.penMaxWidth: "Maximum pen width" => "Maksymalna szerokość pisaka"
-// theme.coverDescriptionPosition: "Description position" => "Opis pozycja"
+// theme.headerDescriptionPosition: "Description position" => "Opis pozycja"
 // ed.propertyGridNoResultsFound: "No results found" => "Nie znaleziono wyników"
 // pv.leftRight: "Left and right" => "Lewy i prawy"
 // p.sourceType: "Source type" => "Typ źródła"

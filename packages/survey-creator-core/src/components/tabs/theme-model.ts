@@ -4,8 +4,8 @@ import { PredefinedThemes, Themes } from "./themes";
 import { settings } from "../../creator-settings";
 
 import { DefaultFonts, fontsettingsFromCssVariable, fontsettingsToCssVariable } from "./theme-custom-questions/font-settings";
-import { elementSettingsFromCssVariable, elementSettingsToCssVariable } from "./theme-custom-questions/element-settings";
-import { createBoxShadowReset } from "./theme-custom-questions/boxshadow-settings";
+import { backgroundCornerRadiusFromCssVariable, backgroundCornerRadiusToCssVariable } from "./theme-custom-questions/background-corner-radius";
+import { createBoxShadowReset } from "./theme-custom-questions/shadow-effects";
 import { HeaderModel } from "./header-model";
 import * as LibraryThemes from "survey-core/themes";
 import { ColorCalculator, assign, ingectAlpha, parseColor, roundTo2Decimals } from "../../utils/utils";
@@ -199,7 +199,7 @@ export class ThemeModel extends Base implements ITheme {
   //   }
 
   //   themeEditorSurvey.getAllQuestions().forEach(question => {
-  //     if (["color", "colorsettings"].indexOf(question.getType()) !== -1) {
+  //     if (["color", "coloralpha"].indexOf(question.getType()) !== -1) {
   //       (question as any).choices = this.getPredefinedColorsItemValues();
   //     }
   //   });
@@ -318,12 +318,12 @@ export class ThemeModel extends Base implements ITheme {
       let panelBackgroundTransparencyValue = this.getPropertyValue("panelBackgroundTransparency");
       this.setThemeCssVariablesChanges("--sjs-question-background", ingectAlpha(baseColor, panelBackgroundTransparencyValue / 100));
     }
-    if (property.type === "fontsettings") {
+    if (property.type === "font") {
       fontsettingsToCssVariable(value, property, this.themeCssVariablesChanges);
       this.onThemePropertyChanged.fire(this, { name, value });
     }
-    if (property.type === "elementsettings") {
-      elementSettingsToCssVariable(value, property, this.themeCssVariablesChanges);
+    if (property.type === "backgroundcornerradius") {
+      backgroundCornerRadiusToCssVariable(value, property, this.themeCssVariablesChanges);
       this.onThemePropertyChanged.fire(this, { name, value });
     }
   }
@@ -437,10 +437,10 @@ export class ThemeModel extends Base implements ITheme {
         backgroundImageAttachment: this.backgroundImageAttachment || baseTheme.backgroundImageAttachment,
         backgroundOpacity: (this.backgroundOpacity / 100) || baseTheme.backgroundOpacity,
       };
-      const effectiveHeaderSettings: IHeader = {} as any;
+      const effectiveHeader: IHeader = {} as any;
       // assign(effectiveHeaderSettings, baseTheme.header || {}, this.currentTheme.header || {});
-      if (Object.keys(effectiveHeaderSettings).length > 0) {
-        effectiveTheme.header = effectiveHeaderSettings;
+      if (Object.keys(effectiveHeader).length > 0) {
+        effectiveTheme.header = effectiveHeader;
       }
       assign(effectiveTheme, theme, { cssVariables: effectiveThemeCssVariables, themeName: this.themeName, colorPalette: this.colorPalette, isPanelless: this.isPanelless });
       // this.surveyProvider.theme = effectiveTheme;
@@ -588,8 +588,8 @@ export class ThemeModel extends Base implements ITheme {
       this.cornerRadius = this["--sjs-corner-radius"] ? roundTo2Decimals(parseFloat(this["--sjs-corner-radius"])) : undefined;
       if (!!json["backgroundOpacity"]) this.backgroundOpacity = json["backgroundOpacity"] * 100;
 
-      this["questionPanel"] = elementSettingsFromCssVariable(this.getPropertyByName("questionPanel"), json.cssVariables, "--sjs-general-backcolor", "--sjs-general-backcolor-dark", this.cornerRadius);
-      this["editorPanel"] = elementSettingsFromCssVariable(this.getPropertyByName("editorPanel"), json.cssVariables, "--sjs-general-backcolor-dim-light", "--sjs-general-backcolor-dim-dark", this.cornerRadius);
+      this["questionPanel"] = backgroundCornerRadiusFromCssVariable(this.getPropertyByName("questionPanel"), json.cssVariables, "--sjs-general-backcolor", "--sjs-general-backcolor-dark", this.cornerRadius);
+      this["editorPanel"] = backgroundCornerRadiusFromCssVariable(this.getPropertyByName("editorPanel"), json.cssVariables, "--sjs-general-backcolor-dim-light", "--sjs-general-backcolor-dim-dark", this.cornerRadius);
 
       this["pageTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("pageTitle"), json.cssVariables, "--sjs-general-dim-forecolor");
       this["pageDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("pageDescription"), json.cssVariables, "--sjs-general-dim-forecolor-light");
@@ -624,12 +624,12 @@ export class ThemeModel extends Base implements ITheme {
       } else if (typeof result[key] === "object") {
 
         const property = this.getPropertyByName(key);
-        if (property.type === "fontsettings") {
+        if (property.type === "font") {
           fontsettingsToCssVariable(result[key], property, cssVariables);
           delete result[key];
         }
-        if (property.type === "elementsettings") {
-          elementSettingsToCssVariable(result[key], property, cssVariables);
+        if (property.type === "backgroundcornerradius") {
+          backgroundCornerRadiusToCssVariable(result[key], property, cssVariables);
           delete result[key];
         }
       }
@@ -741,11 +741,11 @@ Serializer.addClass(
       }
     },
     {
-      type: "elementsettings",
+      type: "backgroundcornerradius",
       name: "editorPanel",
       displayName: getLocString("theme.backgroundCornerRadius"),
     }, {
-      type: "elementsettings",
+      type: "backgroundcornerradius",
       name: "questionPanel",
       displayName: getLocString("theme.backgroundCornerRadius"),
     },
@@ -803,7 +803,7 @@ Serializer.addProperties("theme",
       }
     }
   }, {
-    type: "headersettings",
+    type: "header",
     name: "header",
     isSerializable: false,
     onPropertyEditorUpdate: function (obj: any, editor: any) {
@@ -853,7 +853,7 @@ Serializer.addProperties("theme",
   { name: "--sjs-base-unit", visible: false },
   { name: "--sjs-corner-radius", visible: false },
   {
-    type: "fontsettings",
+    type: "font",
     name: "pageTitle",
     displayName: getLocString("theme.titleFont"),
     default: {
@@ -862,7 +862,7 @@ Serializer.addProperties("theme",
       size: 24
     },
   }, {
-    type: "fontsettings",
+    type: "font",
     name: "pageDescription",
     displayName: getLocString("theme.descriptionFont"),
     default: {
@@ -871,11 +871,11 @@ Serializer.addProperties("theme",
       size: 24
     },
   }, {
-    type: "boxshadowsettings",
+    type: "shadoweffects",
     name: "--sjs-shadow-small",
     displayName: getLocString("theme.shadow"),
   }, {
-    type: "fontsettings",
+    type: "font",
     name: "questionTitle",
     displayName: getLocString("theme.titleFont"),
     default: {
@@ -884,7 +884,7 @@ Serializer.addProperties("theme",
       size: 16,
     },
   }, {
-    type: "fontsettings",
+    type: "font",
     name: "questionDescription",
     displayName: getLocString("theme.descriptionFont"),
     default: {
@@ -894,11 +894,11 @@ Serializer.addProperties("theme",
     },
   },
   {
-    type: "boxshadowsettings",
+    type: "shadoweffects",
     name: "--sjs-shadow-inner",
     displayName: getLocString("theme.shadow"),
   }, {
-    type: "fontsettings",
+    type: "font",
     name: "editorFont",
     displayName: getLocString("theme.font"),
     default: {
@@ -907,7 +907,7 @@ Serializer.addProperties("theme",
       size: 16
     },
   }, {
-    type: "colorsettings",
+    type: "coloralpha",
     name: "--sjs-border-default",
     displayName: getLocString("theme.colorsTitle"),
     onPropertyEditorUpdate: function (obj: any, editor: any) {
@@ -918,7 +918,7 @@ Serializer.addProperties("theme",
     }
   },
   {
-    type: "colorsettings",
+    type: "coloralpha",
     name: "--sjs-border-light",
     displayName: "",
     onPropertyEditorUpdate: function (obj: any, editor: any) {
@@ -1009,7 +1009,7 @@ Serializer.addProperties("theme",
     displayName: getLocString("theme.backgroundDimColor"),
   },
   {
-    type: "colorsettings",
+    type: "coloralpha",
     name: "--sjs-primary-backcolor",
     displayName: getLocString("theme.accentBackground"),
     onPropertyEditorUpdate: function (obj: any, editor: any) {
@@ -1019,7 +1019,7 @@ Serializer.addProperties("theme",
       }
     }
   }, {
-    type: "colorsettings",
+    type: "coloralpha",
     name: "--sjs-primary-backcolor-dark",
     displayName: "",
     onPropertyEditorUpdate: function (obj: any, editor: any) {
@@ -1029,7 +1029,7 @@ Serializer.addProperties("theme",
       }
     }
   }, {
-    type: "colorsettings",
+    type: "coloralpha",
     name: "--sjs-primary-backcolor-light",
     displayName: "",
     onPropertyEditorUpdate: function (obj: any, editor: any) {
@@ -1039,7 +1039,7 @@ Serializer.addProperties("theme",
       }
     }
   }, {
-    type: "colorsettings",
+    type: "coloralpha",
     name: "--sjs-primary-forecolor",
     displayName: getLocString("theme.accentForeground"),
     onPropertyEditorUpdate: function (obj: any, editor: any) {
@@ -1049,7 +1049,7 @@ Serializer.addProperties("theme",
       }
     }
   }, {
-    type: "colorsettings",
+    type: "coloralpha",
     name: "--sjs-primary-forecolor-light",
     displayName: "",
     onPropertyEditorUpdate: function (obj: any, editor: any) {

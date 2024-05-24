@@ -143,7 +143,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     }
 
     this.propertyGrid.survey.getAllQuestions().forEach(question => {
-      if (["color", "colorsettings"].indexOf(question.getType()) !== -1) {
+      if (["color", "coloralpha"].indexOf(question.getType()) !== -1) {
         (question as any).choices = this.getPredefinedColorsItemValues();
       }
     });
@@ -264,7 +264,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
         const question = options.element as QuestionFileModel;
         context.propertyName = question.name;
         if (question?.parent?.parent?.name === "settings") {
-          context.elementType = "headersettings";
+          context.elementType = "header";
           context.element = context.element.header;
         }
       }

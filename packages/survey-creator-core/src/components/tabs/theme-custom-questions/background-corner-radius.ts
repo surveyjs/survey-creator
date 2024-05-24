@@ -5,7 +5,7 @@ import { assign } from "../../../utils/utils";
 function getElementsJSON() {
   return [
     {
-      type: "colorsettings",
+      type: "coloralpha",
       name: "backcolor",
       colorTitle: getLocString("theme.backcolor"),
       colorTitleLocation: "left",
@@ -13,7 +13,7 @@ function getElementsJSON() {
       descriptionLocation: "hidden"
     },
     {
-      type: "colorsettings",
+      type: "coloralpha",
       name: "hovercolor",
       colorTitle: getLocString("theme.hovercolor"),
       colorTitleLocation: "left",
@@ -32,9 +32,9 @@ function getElementsJSON() {
   ];
 }
 
-if (!ComponentCollection.Instance.getCustomQuestionByName("elementsettings")) {
+if (!ComponentCollection.Instance.getCustomQuestionByName("backgroundcornerradius")) {
   ComponentCollection.Instance.add({
-    name: "elementsettings",
+    name: "backgroundcornerradius",
     showInToolbox: false,
     internal: true,
     elementsJSON: getElementsJSON(),
@@ -50,12 +50,12 @@ if (!ComponentCollection.Instance.getCustomQuestionByName("elementsettings")) {
   });
 }
 
-export function updateElementSettingsJSON() {
-  const config = ComponentCollection.Instance.getCustomQuestionByName("elementsettings");
+export function updateBackgroundCornerRadiusJSON() {
+  const config = ComponentCollection.Instance.getCustomQuestionByName("backgroundcornerradius");
   config.json.elementsJSON = getElementsJSON();
 }
 
-export function elementSettingsToCssVariable(value: any = {}, property: JsonObjectProperty, themeCssVariables: { [index: string]: string }) {
+export function backgroundCornerRadiusToCssVariable(value: any = {}, property: JsonObjectProperty, themeCssVariables: { [index: string]: string }) {
   Object.keys(value).forEach(key => {
     const propertyName = `--sjs-${property.name.toLocaleLowerCase()}-${key}`;
     if (!property.defaultValue || value[key] !== property.defaultValue[key]) {
@@ -66,7 +66,7 @@ export function elementSettingsToCssVariable(value: any = {}, property: JsonObje
   });
 }
 
-export function elementSettingsFromCssVariable(property: JsonObjectProperty, themeCssVariables: { [index: string]: string }, defaultBackcolorVariableName: string, defaultHovercolorVariableName: string, defaultCornerRadius: number = 4): any {
+export function backgroundCornerRadiusFromCssVariable(property: JsonObjectProperty, themeCssVariables: { [index: string]: string }, defaultBackcolorVariableName: string, defaultHovercolorVariableName: string, defaultCornerRadius: number = 4): any {
   if (!property) return;
 
   if (!property.defaultValue) property.defaultValue = {};
@@ -77,9 +77,9 @@ export function elementSettingsFromCssVariable(property: JsonObjectProperty, the
   });
 
   const result = { ...property.defaultValue };
-  const elementSettingsFromTheme = Object.keys(themeCssVariables).filter(key => key.indexOf(property.name.toLocaleLowerCase()) !== -1);
+  const objFromTheme = Object.keys(themeCssVariables).filter(key => key.indexOf(property.name.toLocaleLowerCase()) !== -1);
 
-  elementSettingsFromTheme.forEach(key => {
+  objFromTheme.forEach(key => {
     const propertyName = key.split("-").pop();
     if (propertyName === "cornerRadius" && themeCssVariables[key] !== undefined) {
       result[propertyName] = parseFloat(themeCssVariables[key].toString());

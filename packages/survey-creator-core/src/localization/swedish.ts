@@ -794,6 +794,9 @@ export let svStrings = {
       slider: "Skjutreglage",
       expression: "Uttryck",
       questionSettings: "Inställningar för frågor",
+      header: "Rubrik",
+      background: "Bakgrund",
+      appearance: "Utseende",
       others: "Andra"
     },
     editProperty: "Redigera egenskap '{0}'",
@@ -1475,10 +1478,6 @@ export let svStrings = {
     "--foreground": "Förgrundsfärg",
     "--base-unit": "Basenhet",
     advancedMode: "Avancerat läge",
-    groupGeneral: "Allmänt",
-    groupHeader: "Rubrik",
-    groupBackground: "Bakgrund",
-    groupAppearance: "Utseende",
     themeName: "Tema",
     themeMode: "Fråga utseende",
     themeModePanels: "Standard",
@@ -1489,9 +1488,6 @@ export let svStrings = {
     primaryDefaultColor: "Standard",
     primaryDarkColor: "Sväva",
     primaryLightColor: "Vald",
-    coverTitleForecolor: "Titel förfärg",
-    coverDescriptionForecolor: "Beskrivning förfärg",
-    coverOverlapEnabled: "Överlappa",
     backgroundDimColor: "Bakgrundsfärg",
     backgroundImage: "Bakgrundsbild",
     backgroundImageFitAuto: "Bil",
@@ -1530,8 +1526,8 @@ export let svStrings = {
     fontWeightBold: "Djärv",
     scale: "Skala",
     cornerRadius: "Hörnradie",
-    surveyTitle: "Teckensnitt för undersökningstitel",
-    surveyDescription: "Teckensnitt för undersökningsbeskrivning",
+    surveyTitleFont: "Teckensnitt för undersökningstitel",
+    surveyDescriptionFont: "Teckensnitt för undersökningsbeskrivning",
     pageTitle: "Teckensnitt för sidtitel",
     titleFont: "Titel typsnitt",
     descriptionFont: "Beskrivning teckensnitt",
@@ -1547,14 +1543,14 @@ export let svStrings = {
     headerView: "Utsikt",
     headerViewBasic: "Grundläggande",
     headerViewAdvanced: "Avancerad",
-    coverInheritWidthFrom: "Innehållets bredd",
-    coverInheritWidthFromSurvey: "Samma som undersökning",
-    coverInheritWidthFromContainer: "Passa till behållare",
-    coverTextAreaWidth: "Textens bredd",
-    coverBackgroundColorSwitch: "Bakgrundsfärg",
-    coverBackgroundColorNone: "Ingen",
-    coverBackgroundColorAccentColor: "Accentfärg",
-    coverBackgroundColorCustom: "Sed",
+    headerInheritWidthFrom: "Innehållets bredd",
+    headerInheritWidthFromSurvey: "Samma som undersökning",
+    headerInheritWidthFromContainer: "Passa till behållare",
+    headerTextAreaWidth: "Textens bredd",
+    headerBackgroundColorSwitch: "Bakgrundsfärg",
+    headerBackgroundColorNone: "Ingen",
+    headerBackgroundColorAccentColor: "Accentfärg",
+    headerBackgroundColorCustom: "Sed",
     horizontalAlignmentLeft: "Vänster",
     horizontalAlignmentCenter: "Centrum",
     horizontalAlignmentRight: "Höger",
@@ -1562,8 +1558,8 @@ export let svStrings = {
     verticalAlignmentMiddle: "Mitt",
     verticalAlignmentBottom: "Botten",
     logoPosition: "Logotypens placering",
-    coverTitlePosition: "Titel position",
-    coverDescriptionPosition: "Beskrivning position",
+    headerTitlePosition: "Titel position",
+    headerDescriptionPosition: "Beskrivning position",
     names: {
       default: "Standard",
       sharp: "Skarp",
@@ -2173,7 +2169,6 @@ editorLocalization.locales["sv"] = svStrings;
 // theme.--primary-foreground: "Primary foreground color" => "Primär förgrundsfärg"
 // theme.--foreground: "Foreground color" => "Förgrundsfärg"
 // theme.--base-unit: "Base unit" => "Basenhet"
-// theme.groupGeneral: "General" => "Allmänt"
 // theme.groupAdvanced: "Advanced" => "Avancerad"
 // theme.themeName: "Theme" => "Tema"
 // theme.themeMode: "Question appearance" => "Fråga utseende"
@@ -2220,7 +2215,7 @@ editorLocalization.locales["sv"] = svStrings;
 // theme.fontWeightBold: "Bold" => "Djärv"
 // theme.scale: "Scale" => "Skala"
 // theme.cornerRadius: "Corner radius" => "Hörnradie"
-// theme.surveyTitle: "Survey title font" => "Teckensnitt för undersökningstitel"
+// theme.surveyTitleFont: "Survey title font" => "Teckensnitt för undersökningstitel"
 // theme.pageTitle: "Page title font" => "Teckensnitt för sidtitel"
 // theme.pageDescription: "Page description font" => "Teckensnitt för sidbeskrivning"
 // theme.boxShadowX: "X" => "X"
@@ -2281,22 +2276,20 @@ editorLocalization.locales["sv"] = svStrings;
 // survey.title: "Title" => "Titel"
 // page.title: "Title" => "Titel"
 // p.setValueIf: "Set value if" => "Ange värde om"
-// theme.groupHeader: "Header" => "Rubrik"
-// theme.coverTitleForecolor: "Title forecolor" => "Titel förfärg"
-// theme.coverOverlapEnabled: "Overlap" => "Överlappa"
+// theme.header: "Header" => "Rubrik"
 // theme.backgroundImageFitFill: "Stretch" => "Tänja"
 // theme.backgroundImageFitTile: "Tile" => "Kakel"
 // theme.headerView: "View" => "Utsikt"
 // theme.headerViewBasic: "Basic" => "Grundläggande"
 // theme.headerViewAdvanced: "Advanced" => "Avancerad"
-// theme.coverInheritWidthFrom: "Content area width" => "Innehållets bredd"
-// theme.coverInheritWidthFromSurvey: "Same as survey" => "Samma som undersökning"
-// theme.coverInheritWidthFromPage: "Fit to page" => "Anpassa till sida"
-// theme.coverTextAreaWidth: "Text width" => "Textens bredd"
-// theme.coverBackgroundColorSwitch: "Background color" => "Bakgrundsfärg"
-// theme.coverBackgroundColorNone: "None" => "Ingen"
-// theme.coverBackgroundColorAccentColor: "Accent color" => "Accentfärg"
-// theme.coverBackgroundColorCustom: "Custom" => "Sed"
+// theme.headerInheritWidthFrom: "Content area width" => "Innehållets bredd"
+// theme.headerInheritWidthFromSurvey: "Same as survey" => "Samma som undersökning"
+// theme.headerInheritWidthFromPage: "Fit to page" => "Anpassa till sida"
+// theme.headerTextAreaWidth: "Text width" => "Textens bredd"
+// theme.headerBackgroundColorSwitch: "Background color" => "Bakgrundsfärg"
+// theme.headerBackgroundColorNone: "None" => "Ingen"
+// theme.headerBackgroundColorAccentColor: "Accent color" => "Accentfärg"
+// theme.headerBackgroundColorCustom: "Custom" => "Sed"
 // theme.horizontalAlignmentLeft: "Left" => "Vänster"
 // theme.horizontalAlignmentCenter: "Center" => "Centrum"
 // theme.horizontalAlignmentRight: "Right" => "Höger"
@@ -2317,18 +2310,14 @@ editorLocalization.locales["sv"] = svStrings;
 // pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "Gäller när \"Källtyp\" är \"Lokala filer\" eller när kameran inte är tillgänglig"
 // pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "Gäller när \"Källtyp\" är \"Kamera\"."
 // pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "Gäller när \"Källtyp\" är \"Lokala filer eller kamera\"."
-// theme.groupBackground: "Background" => "Bakgrund"
-// theme.groupAppearance: "Appearance" => "Utseende"
-// theme.coverDescriptionForecolor: "Description forecolor" => "Beskrivning förfärg"
+// theme.background: "Background" => "Bakgrund"
+// theme.appearance: "Appearance" => "Utseende"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Vill du verkligen återställa temat? Alla dina anpassningar kommer att gå förlorade."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "Ja, återställ temat"
-// theme.groupBackground: "Background" => "Bakgrund"
-// theme.groupAppearance: "Appearance" => "Utseende"
-// theme.coverDescriptionForecolor: "Description forecolor" => "Beskrivning förfärg"
-// theme.coverInheritWidthFromContainer: "Fit to container" => "Passa till behållare"
+// theme.headerInheritWidthFromContainer: "Fit to container" => "Passa till behållare"
 // signaturepad.showPlaceholder: "Show the placeholder" => "Visa platshållaren"
 // signaturepad.placeholder: "Placeholder text" => "Platshållartext"
-// theme.surveyDescription: "Survey description font" => "Teckensnitt för undersökningsbeskrivning"
+// theme.surveyDescriptionFont: "Survey description font" => "Teckensnitt för undersökningsbeskrivning"
 // ed.prevFocus: "Focus previous" => "Fokus föregående"
 // ed.nextFocus: "Focus next" => "Fokus nästa"
 // ed.saveTheme: "Save Theme" => "Spara tema"
@@ -2340,8 +2329,8 @@ editorLocalization.locales["sv"] = svStrings;
 // signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "Skala signaturområdet automatiskt"
 // signaturepad.penMinWidth: "Minimum pen width" => "Minsta pennbredd"
 // signaturepad.penMaxWidth: "Maximum pen width" => "Maximal pennbredd"
-// theme.coverTitlePosition: "Title position" => "Titel position"
-// theme.coverDescriptionPosition: "Description position" => "Beskrivning position"
+// theme.headerTitlePosition: "Title position" => "Titel position"
+// theme.headerDescriptionPosition: "Description position" => "Beskrivning position"
 // ed.propertyGridNoResultsFound: "No results found" => "Inga resultat hittades"
 // pv.leftRight: "Left and right" => "Vänster och höger"
 // p.sourceType: "Source type" => "Typ av källa"

@@ -78,10 +78,10 @@ test("Check createBoxShadow and parseBoxShadow functions", () => {
   expect(createdBoxShadow).toBeFalsy();
 });
 
-test("Check boxshadowsettings question", () => {
+test("Check shadoweffects question", () => {
   const survey = new SurveyModel({
     elements: [{
-      type: "boxshadowsettings",
+      type: "shadoweffects",
       name: "test",
     }]
   });
@@ -110,14 +110,14 @@ test("Check boxshadowsettings question", () => {
   expect(survey.data).toStrictEqual({ "test": "inset 5px 10px 6px 8px rgba(103, 63, 255, 0.07)" });
 });
 
-test("boxshadowsettings should exists after ComponentCollection.Instance.clear()", () => {
+test("shadoweffects should exists after ComponentCollection.Instance.clear()", () => {
   ComponentCollection.Instance.clear();
   const survey = new SurveyModel({
     elements: [{
-      type: "boxshadowsettings",
+      type: "shadoweffects",
       name: "test",
     }]
   });
   const question = survey.getAllQuestions()[0];
-  expect(question.getType()).toBe("boxshadowsettings");
+  expect(question.getType()).toBe("shadoweffects");
 });

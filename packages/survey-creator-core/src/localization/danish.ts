@@ -794,6 +794,9 @@ export var danishStrings = {
       slider: "Skyderen",
       expression: "Udtryk",
       questionSettings: "Indstillinger for spørgsmål",
+      header: "Header",
+      background: "Baggrund",
+      appearance: "Udseende",
       others: "Andre"
     },
     editProperty: "Rediger egenskab '{0}'",
@@ -1475,10 +1478,6 @@ export var danishStrings = {
     "--foreground": "Forgrundsfarve",
     "--base-unit": "Basisenhed",
     advancedMode: "Avanceret tilstand",
-    groupGeneral: "Generel",
-    groupHeader: "Header",
-    groupBackground: "Baggrund",
-    groupAppearance: "Udseende",
     themeName: "Tema",
     themeMode: "Spørgsmål udseende",
     themeModePanels: "Standard",
@@ -1489,9 +1488,6 @@ export var danishStrings = {
     primaryDefaultColor: "Standard",
     primaryDarkColor: "Hover",
     primaryLightColor: "Valgte",
-    coverTitleForecolor: "Titel forfarve",
-    coverDescriptionForecolor: "Beskrivelse forfarve",
-    coverOverlapEnabled: "Overlapning",
     backgroundDimColor: "Baggrundsfarve",
     backgroundImage: "Baggrundsbillede",
     backgroundImageFitAuto: "Auto",
@@ -1530,8 +1526,8 @@ export var danishStrings = {
     fontWeightBold: "Modig",
     scale: "Skæl",
     cornerRadius: "Hjørne radius",
-    surveyTitle: "Skrifttype for undersøgelsestitel",
-    surveyDescription: "Skrifttype til undersøgelsesbeskrivelse",
+    surveyTitleFont: "Skrifttype for undersøgelsestitel",
+    surveyDescriptionFont: "Skrifttype til undersøgelsesbeskrivelse",
     pageTitle: "Sidetitel skrifttype",
     titleFont: "Titel skrifttype",
     descriptionFont: "Beskrivelse skrifttype",
@@ -1547,14 +1543,14 @@ export var danishStrings = {
     headerView: "Udsigt",
     headerViewBasic: "Grundlæggende",
     headerViewAdvanced: "Avanceret",
-    coverInheritWidthFrom: "Bredde på indholdsområde",
-    coverInheritWidthFromSurvey: "Samme som undersøgelse",
-    coverInheritWidthFromContainer: "Passer til beholder",
-    coverTextAreaWidth: "Tekstbredde",
-    coverBackgroundColorSwitch: "Baggrundsfarve",
-    coverBackgroundColorNone: "Ingen",
-    coverBackgroundColorAccentColor: "Accent farve",
-    coverBackgroundColorCustom: "Sædvane",
+    headerInheritWidthFrom: "Bredde på indholdsområde",
+    headerInheritWidthFromSurvey: "Samme som undersøgelse",
+    headerInheritWidthFromContainer: "Passer til beholder",
+    headerTextAreaWidth: "Tekstbredde",
+    headerBackgroundColorSwitch: "Baggrundsfarve",
+    headerBackgroundColorNone: "Ingen",
+    headerBackgroundColorAccentColor: "Accent farve",
+    headerBackgroundColorCustom: "Sædvane",
     horizontalAlignmentLeft: "Venstre",
     horizontalAlignmentCenter: "Midte",
     horizontalAlignmentRight: "Højre",
@@ -1562,8 +1558,8 @@ export var danishStrings = {
     verticalAlignmentMiddle: "Midte",
     verticalAlignmentBottom: "Bund",
     logoPosition: "Logo position",
-    coverTitlePosition: "Titel position",
-    coverDescriptionPosition: "Beskrivelse position",
+    headerTitlePosition: "Titel position",
+    headerDescriptionPosition: "Beskrivelse position",
     names: {
       default: "Standard",
       sharp: "Skarp",
@@ -2181,7 +2177,6 @@ editorLocalization.locales["da"] = danishStrings;
 // theme.--primary-foreground: "Primary foreground color" => "Primær forgrundsfarve"
 // theme.--foreground: "Foreground color" => "Forgrundsfarve"
 // theme.--base-unit: "Base unit" => "Basisenhed"
-// theme.groupGeneral: "General" => "Generel"
 // theme.groupAdvanced: "Advanced" => "Avanceret"
 // theme.themeName: "Theme" => "Tema"
 // theme.themeMode: "Question appearance" => "Spørgsmål udseende"
@@ -2228,7 +2223,7 @@ editorLocalization.locales["da"] = danishStrings;
 // theme.fontWeightBold: "Bold" => "Modig"
 // theme.scale: "Scale" => "Skæl"
 // theme.cornerRadius: "Corner radius" => "Hjørne radius"
-// theme.surveyTitle: "Survey title font" => "Skrifttype for undersøgelsestitel"
+// theme.surveyTitleFont: "Survey title font" => "Skrifttype for undersøgelsestitel"
 // theme.pageTitle: "Page title font" => "Sidetitel skrifttype"
 // theme.pageDescription: "Page description font" => "Sidebeskrivelse skrifttype"
 // theme.boxShadowX: "X" => "X"
@@ -2289,22 +2284,20 @@ editorLocalization.locales["da"] = danishStrings;
 // survey.title: "Title" => "Titel"
 // page.title: "Title" => "Titel"
 // p.setValueIf: "Set value if" => "Angiv værdi, hvis"
-// theme.groupHeader: "Header" => "Header"
-// theme.coverTitleForecolor: "Title forecolor" => "Titel forfarve"
-// theme.coverOverlapEnabled: "Overlap" => "Overlapning"
+// theme.header: "Header" => "Header"
 // theme.backgroundImageFitFill: "Stretch" => "Stræk"
 // theme.backgroundImageFitTile: "Tile" => "Flise"
 // theme.headerView: "View" => "Udsigt"
 // theme.headerViewBasic: "Basic" => "Grundlæggende"
 // theme.headerViewAdvanced: "Advanced" => "Avanceret"
-// theme.coverInheritWidthFrom: "Content area width" => "Bredde på indholdsområde"
-// theme.coverInheritWidthFromSurvey: "Same as survey" => "Samme som undersøgelse"
-// theme.coverInheritWidthFromPage: "Fit to page" => "Tilpas til side"
-// theme.coverTextAreaWidth: "Text width" => "Tekstbredde"
-// theme.coverBackgroundColorSwitch: "Background color" => "Baggrundsfarve"
-// theme.coverBackgroundColorNone: "None" => "Ingen"
-// theme.coverBackgroundColorAccentColor: "Accent color" => "Accent farve"
-// theme.coverBackgroundColorCustom: "Custom" => "Sædvane"
+// theme.headerInheritWidthFrom: "Content area width" => "Bredde på indholdsområde"
+// theme.headerInheritWidthFromSurvey: "Same as survey" => "Samme som undersøgelse"
+// theme.headerInheritWidthFromPage: "Fit to page" => "Tilpas til side"
+// theme.headerTextAreaWidth: "Text width" => "Tekstbredde"
+// theme.headerBackgroundColorSwitch: "Background color" => "Baggrundsfarve"
+// theme.headerBackgroundColorNone: "None" => "Ingen"
+// theme.headerBackgroundColorAccentColor: "Accent color" => "Accent farve"
+// theme.headerBackgroundColorCustom: "Custom" => "Sædvane"
 // theme.horizontalAlignmentLeft: "Left" => "Venstre"
 // theme.horizontalAlignmentCenter: "Center" => "Midte"
 // theme.horizontalAlignmentRight: "Right" => "Højre"
@@ -2324,18 +2317,14 @@ editorLocalization.locales["da"] = danishStrings;
 // pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "Gælder, når \"Kildetype\" er \"Lokale filer\", eller når kameraet ikke er tilgængeligt"
 // pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "Gælder, når \"Kildetype\" er \"Kamera\"."
 // pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "Gælder, når \"Kildetype\" er \"Lokale filer eller kamera\"."
-// theme.groupBackground: "Background" => "Baggrund"
-// theme.groupAppearance: "Appearance" => "Udseende"
-// theme.coverDescriptionForecolor: "Description forecolor" => "Beskrivelse forfarve"
+// theme.background: "Background" => "Baggrund"
+// theme.appearance: "Appearance" => "Udseende"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Vil du virkelig nulstille temaet? Alle dine tilpasninger går tabt."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "Ja, nulstil temaet"
-// theme.groupBackground: "Background" => "Baggrund"
-// theme.groupAppearance: "Appearance" => "Udseende"
-// theme.coverDescriptionForecolor: "Description forecolor" => "Beskrivelse forfarve"
-// theme.coverInheritWidthFromContainer: "Fit to container" => "Passer til beholder"
+// theme.headerInheritWidthFromContainer: "Fit to container" => "Passer til beholder"
 // signaturepad.showPlaceholder: "Show the placeholder" => "Vis pladsholderen"
 // signaturepad.placeholder: "Placeholder text" => "Pladsholdertekst"
-// theme.surveyDescription: "Survey description font" => "Skrifttype til undersøgelsesbeskrivelse"
+// theme.surveyDescriptionFont: "Survey description font" => "Skrifttype til undersøgelsesbeskrivelse"
 // ed.prevFocus: "Focus previous" => "Fokus forrige"
 // ed.nextFocus: "Focus next" => "Fokuser næste"
 // ed.saveTheme: "Save Theme" => "Gem tema"
@@ -2348,8 +2337,8 @@ editorLocalization.locales["da"] = danishStrings;
 // signaturepad.penMinWidth: "Minimum pen width" => "Mindste bredde på pennen"
 // signaturepad.penMaxWidth: "Maximum pen width" => "Maksimal bredde på pennen"
 // theme.logoPosition: "Logo position" => "Logo position"
-// theme.coverTitlePosition: "Title position" => "Titel position"
-// theme.coverDescriptionPosition: "Description position" => "Beskrivelse position"
+// theme.headerTitlePosition: "Title position" => "Titel position"
+// theme.headerDescriptionPosition: "Description position" => "Beskrivelse position"
 // ed.propertyGridNoResultsFound: "No results found" => "Ingen resultater fundet"
 // pv.leftRight: "Left and right" => "Venstre og højre"
 // p.sourceType: "Source type" => "Kilde type"

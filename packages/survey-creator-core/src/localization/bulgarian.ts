@@ -794,6 +794,9 @@ export var bgStrings = {
       slider: "Плъзгач",
       expression: "Израз (фраза)",
       questionSettings: "Настройки на въпроси",
+      header: "Заглавка",
+      background: "Фон",
+      appearance: "Външен вид",
       others: "Други"
     },
     editProperty: "Редактиране на свойства '{0}'",
@@ -1475,10 +1478,6 @@ export var bgStrings = {
     "--foreground": "Цвят на преден план",
     "--base-unit": "Базова единица",
     advancedMode: "Разширен режим",
-    groupGeneral: "Общ",
-    groupHeader: "Заглавка",
-    groupBackground: "Фон",
-    groupAppearance: "Външен вид",
     themeName: "Тема",
     themeMode: "Режими",
     themeModePanels: "Панели",
@@ -1489,9 +1488,6 @@ export var bgStrings = {
     primaryDefaultColor: "По подразбиране",
     primaryDarkColor: "Върху",
     primaryLightColor: "Селектиран",
-    coverTitleForecolor: "Цвят на предния план на заглавието",
-    coverDescriptionForecolor: "Описание цвят на предния цвят",
-    coverOverlapEnabled: "Припокриване",
     backgroundDimColor: "Цвят на фона",
     backgroundImage: "Фоново изображение",
     backgroundImageFitAuto: "Автоматичен",
@@ -1530,8 +1526,8 @@ export var bgStrings = {
     fontWeightBold: "Удебелен",
     scale: "Мащаб",
     cornerRadius: "Радиус на ъгъла",
-    surveyTitle: "Шрифт на заглавието на анкетата",
-    surveyDescription: "Шрифт за описание на проучването",
+    surveyTitleFont: "Шрифт на заглавието на анкетата",
+    surveyDescriptionFont: "Шрифт за описание на проучването",
     pageTitle: "Шрифт на заглавието на страницата",
     titleFont: "Шрифт на заглавието",
     descriptionFont: "Шрифт за описание",
@@ -1547,14 +1543,14 @@ export var bgStrings = {
     headerView: "Изглед",
     headerViewBasic: "Основен",
     headerViewAdvanced: "Напреднал",
-    coverInheritWidthFrom: "Ширина на областта на съдържанието",
-    coverInheritWidthFromSurvey: "Същото като проучването",
-    coverInheritWidthFromContainer: "Побиране в контейнера",
-    coverTextAreaWidth: "Ширина на текста",
-    coverBackgroundColorSwitch: "Цвят на фона",
-    coverBackgroundColorNone: "Никой",
-    coverBackgroundColorAccentColor: "Цвят за акцентиране",
-    coverBackgroundColorCustom: "Обичай",
+    headerInheritWidthFrom: "Ширина на областта на съдържанието",
+    headerInheritWidthFromSurvey: "Същото като проучването",
+    headerInheritWidthFromContainer: "Побиране в контейнера",
+    headerTextAreaWidth: "Ширина на текста",
+    headerBackgroundColorSwitch: "Цвят на фона",
+    headerBackgroundColorNone: "Никой",
+    headerBackgroundColorAccentColor: "Цвят за акцентиране",
+    headerBackgroundColorCustom: "Обичай",
     horizontalAlignmentLeft: "Ляво",
     horizontalAlignmentCenter: "Център",
     horizontalAlignmentRight: "Дясно",
@@ -1562,8 +1558,8 @@ export var bgStrings = {
     verticalAlignmentMiddle: "Среда",
     verticalAlignmentBottom: "Дъно",
     logoPosition: "Позиция на логото",
-    coverTitlePosition: "Позиция на заглавието",
-    coverDescriptionPosition: "Описание позиция",
+    headerTitlePosition: "Позиция на заглавието",
+    headerDescriptionPosition: "Описание позиция",
     names: {
       default: "По подразбиране",
       sharp: "Остър",
@@ -1665,22 +1661,20 @@ editorLocalization.locales["bg"] = bgStrings;
 // survey.title: "Title" => "Заглавие"
 // page.title: "Title" => "Заглавие"
 // p.setValueIf: "Set value if" => "Задайте стойност, ако"
-// theme.groupHeader: "Header" => "Заглавка"
-// theme.coverTitleForecolor: "Title forecolor" => "Цвят на предния план на заглавието"
-// theme.coverOverlapEnabled: "Overlap" => "Припокриване"
+// theme.header: "Header" => "Заглавка"
 // theme.backgroundImageFitFill: "Stretch" => "Участък"
 // theme.backgroundImageFitTile: "Tile" => "Плочки"
 // theme.headerView: "View" => "Изглед"
 // theme.headerViewBasic: "Basic" => "Основен"
 // theme.headerViewAdvanced: "Advanced" => "Напреднал"
-// theme.coverInheritWidthFrom: "Content area width" => "Ширина на областта на съдържанието"
-// theme.coverInheritWidthFromSurvey: "Same as survey" => "Същото като проучването"
-// theme.coverInheritWidthFromPage: "Fit to page" => "Побери в страницата"
-// theme.coverTextAreaWidth: "Text width" => "Ширина на текста"
-// theme.coverBackgroundColorSwitch: "Background color" => "Цвят на фона"
-// theme.coverBackgroundColorNone: "None" => "Никой"
-// theme.coverBackgroundColorAccentColor: "Accent color" => "Цвят за акцентиране"
-// theme.coverBackgroundColorCustom: "Custom" => "Обичай"
+// theme.headerInheritWidthFrom: "Content area width" => "Ширина на областта на съдържанието"
+// theme.headerInheritWidthFromSurvey: "Same as survey" => "Същото като проучването"
+// theme.headerInheritWidthFromPage: "Fit to page" => "Побери в страницата"
+// theme.headerTextAreaWidth: "Text width" => "Ширина на текста"
+// theme.headerBackgroundColorSwitch: "Background color" => "Цвят на фона"
+// theme.headerBackgroundColorNone: "None" => "Никой"
+// theme.headerBackgroundColorAccentColor: "Accent color" => "Цвят за акцентиране"
+// theme.headerBackgroundColorCustom: "Custom" => "Обичай"
 // theme.horizontalAlignmentLeft: "Left" => "Ляво"
 // theme.horizontalAlignmentCenter: "Center" => "Център"
 // theme.horizontalAlignmentRight: "Right" => "Дясно"
@@ -1700,18 +1694,15 @@ editorLocalization.locales["bg"] = bgStrings;
 // pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "Прилага се, когато \"Тип източник\" е \"Локални файлове\" или когато камерата не е налична"
 // pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "Прилага се, когато \"Тип източник\" е \"Камера\"."
 // pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "Прилага се, когато \"Тип източник\" е \"Локални файлове или камера\"."
-// theme.groupBackground: "Background" => "Фон"
-// theme.groupAppearance: "Appearance" => "Външен вид"
-// theme.coverDescriptionForecolor: "Description forecolor" => "Описание цвят на предния цвят"
+// theme.background: "Background" => "Фон"
+// theme.appearance: "Appearance" => "Външен вид"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Наистина ли искате да нулирате темата? Всички ваши персонализации ще бъдат загубени."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "Да, нулирайте темата"
-// theme.groupBackground: "Background" => "Фон"
-// theme.groupAppearance: "Appearance" => "Външен вид"
-// theme.coverDescriptionForecolor: "Description forecolor" => "Описание цвят на предния цвят"
-// theme.coverInheritWidthFromContainer: "Fit to container" => "Побиране в контейнера"
+// theme.headerDescriptionForecolor: "Description forecolor" => "Описание цвят на предния цвят"
+// theme.headerInheritWidthFromContainer: "Fit to container" => "Побиране в контейнера"
 // signaturepad.showPlaceholder: "Show the placeholder" => "Показване на контейнера"
 // signaturepad.placeholder: "Placeholder text" => "Текст в контейнер"
-// theme.surveyDescription: "Survey description font" => "Шрифт за описание на проучването"
+// theme.surveyDescriptionFont: "Survey description font" => "Шрифт за описание на проучването"
 // ed.prevFocus: "Focus previous" => "Фокус предишен"
 // ed.nextFocus: "Focus next" => "Фокусирай се върху следващия"
 // ed.saveTheme: "Save Theme" => "Запиши темата"
@@ -1724,8 +1715,8 @@ editorLocalization.locales["bg"] = bgStrings;
 // signaturepad.penMinWidth: "Minimum pen width" => "Минимална ширина на писалката"
 // signaturepad.penMaxWidth: "Maximum pen width" => "Максимална ширина на перото"
 // theme.logoPosition: "Logo position" => "Позиция на логото"
-// theme.coverTitlePosition: "Title position" => "Позиция на заглавието"
-// theme.coverDescriptionPosition: "Description position" => "Описание позиция"
+// theme.headerTitlePosition: "Title position" => "Позиция на заглавието"
+// theme.headerDescriptionPosition: "Description position" => "Описание позиция"
 // ed.propertyGridNoResultsFound: "No results found" => "Няма намерени резултати"
 // pv.leftRight: "Left and right" => "Наляво и надясно"
 // p.sourceType: "Source type" => "Тип източник"

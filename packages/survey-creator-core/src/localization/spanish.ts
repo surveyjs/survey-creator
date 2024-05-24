@@ -794,6 +794,9 @@ var spanishTranslation = {
       slider: "Slider",
       expression: "Expresión",
       questionSettings: "Configuración de la pregunta",
+      header: "Encabezado",
+      background: "Fondo",
+      appearance: "Apariencia",
       others: "Otras"
     },
     editProperty: "Editar propiedad '{0}'",
@@ -1475,10 +1478,6 @@ var spanishTranslation = {
     "--foreground": "Color de primer plano",
     "--base-unit": "Unidad base",
     advancedMode: "Modo avanzado",
-    groupGeneral: "General",
-    groupHeader: "Encabezado",
-    groupBackground: "Fondo",
-    groupAppearance: "Apariencia",
     themeName: "Tema",
     themeMode: "Apariencia de la pregunta",
     themeModePanels: "Predeterminado",
@@ -1489,9 +1488,6 @@ var spanishTranslation = {
     primaryDefaultColor: "Predeterminado",
     primaryDarkColor: "Cernerse",
     primaryLightColor: "Seleccionado",
-    coverTitleForecolor: "Título de color anterior",
-    coverDescriptionForecolor: "Descripción forecolor",
-    coverOverlapEnabled: "Solapar",
     backgroundDimColor: "Color de fondo",
     backgroundImage: "Imagen de fondo",
     backgroundImageFitAuto: "Automático",
@@ -1530,8 +1526,8 @@ var spanishTranslation = {
     fontWeightBold: "Audaz",
     scale: "Escama",
     cornerRadius: "Radio de esquina",
-    surveyTitle: "Fuente del título de la encuesta",
-    surveyDescription: "Fuente de descripción de la encuesta",
+    surveyTitleFont: "Fuente del título de la encuesta",
+    surveyDescriptionFont: "Fuente de descripción de la encuesta",
     pageTitle: "Fuente del título de la página",
     titleFont: "Fuente del título",
     descriptionFont: "Fuente descriptiva",
@@ -1547,14 +1543,14 @@ var spanishTranslation = {
     headerView: "Vista",
     headerViewBasic: "Básico",
     headerViewAdvanced: "Avanzado",
-    coverInheritWidthFrom: "Ancho del área de contenido",
-    coverInheritWidthFromSurvey: "Igual que la encuesta",
-    coverInheritWidthFromContainer: "Ajuste al contenedor",
-    coverTextAreaWidth: "Ancho del texto",
-    coverBackgroundColorSwitch: "Color de fondo",
-    coverBackgroundColorNone: "Ninguno",
-    coverBackgroundColorAccentColor: "Color de acento",
-    coverBackgroundColorCustom: "Costumbre",
+    headerInheritWidthFrom: "Ancho del área de contenido",
+    headerInheritWidthFromSurvey: "Igual que la encuesta",
+    headerInheritWidthFromContainer: "Ajuste al contenedor",
+    headerTextAreaWidth: "Ancho del texto",
+    headerBackgroundColorSwitch: "Color de fondo",
+    headerBackgroundColorNone: "Ninguno",
+    headerBackgroundColorAccentColor: "Color de acento",
+    headerBackgroundColorCustom: "Costumbre",
     horizontalAlignmentLeft: "Izquierda",
     horizontalAlignmentCenter: "Centro",
     horizontalAlignmentRight: "Derecha",
@@ -1562,8 +1558,8 @@ var spanishTranslation = {
     verticalAlignmentMiddle: "Medio",
     verticalAlignmentBottom: "Fondo",
     logoPosition: "Posición del logotipo",
-    coverTitlePosition: "Posición del título",
-    coverDescriptionPosition: "Descripción posición",
+    headerTitlePosition: "Posición del título",
+    headerDescriptionPosition: "Descripción posición",
     names: {
       default: "Predeterminado",
       sharp: "Afilado",
@@ -1770,7 +1766,6 @@ editorLocalization.locales["es"] = spanishTranslation;
 // theme.--primary-foreground: "Primary foreground color" => "Color primario de primer plano"
 // theme.--foreground: "Foreground color" => "Color de primer plano"
 // theme.--base-unit: "Base unit" => "Unidad base"
-// theme.groupGeneral: "General" => "General"
 // theme.groupAdvanced: "Advanced" => "Avanzado"
 // theme.themeName: "Theme" => "Tema"
 // theme.themeMode: "Question appearance" => "Apariencia de la pregunta"
@@ -1817,7 +1812,7 @@ editorLocalization.locales["es"] = spanishTranslation;
 // theme.fontWeightBold: "Bold" => "Audaz"
 // theme.scale: "Scale" => "Escama"
 // theme.cornerRadius: "Corner radius" => "Radio de esquina"
-// theme.surveyTitle: "Survey title font" => "Fuente del título de la encuesta"
+// theme.surveyTitleFont: "Survey title font" => "Fuente del título de la encuesta"
 // theme.pageTitle: "Page title font" => "Fuente del título de la página"
 // theme.pageDescription: "Page description font" => "Fuente de descripción de la página"
 // theme.boxShadowX: "X" => "X"
@@ -1878,22 +1873,20 @@ editorLocalization.locales["es"] = spanishTranslation;
 // survey.title: "Title" => "Título"
 // page.title: "Title" => "Título"
 // p.setValueIf: "Set value if" => "Establezca el valor si"
-// theme.groupHeader: "Header" => "Encabezado"
-// theme.coverTitleForecolor: "Title forecolor" => "Título de color anterior"
-// theme.coverOverlapEnabled: "Overlap" => "Solapar"
+// theme.header: "Header" => "Encabezado"
 // theme.backgroundImageFitFill: "Stretch" => "Elasticidad"
 // theme.backgroundImageFitTile: "Tile" => "Teja"
 // theme.headerView: "View" => "Vista"
 // theme.headerViewBasic: "Basic" => "Básico"
 // theme.headerViewAdvanced: "Advanced" => "Avanzado"
-// theme.coverInheritWidthFrom: "Content area width" => "Ancho del área de contenido"
-// theme.coverInheritWidthFromSurvey: "Same as survey" => "Igual que la encuesta"
-// theme.coverInheritWidthFromPage: "Fit to page" => "Ajustar a la página"
-// theme.coverTextAreaWidth: "Text width" => "Ancho del texto"
-// theme.coverBackgroundColorSwitch: "Background color" => "Color de fondo"
-// theme.coverBackgroundColorNone: "None" => "Ninguno"
-// theme.coverBackgroundColorAccentColor: "Accent color" => "Color de acento"
-// theme.coverBackgroundColorCustom: "Custom" => "Costumbre"
+// theme.headerInheritWidthFrom: "Content area width" => "Ancho del área de contenido"
+// theme.headerInheritWidthFromSurvey: "Same as survey" => "Igual que la encuesta"
+// theme.headerInheritWidthFromPage: "Fit to page" => "Ajustar a la página"
+// theme.headerTextAreaWidth: "Text width" => "Ancho del texto"
+// theme.headerBackgroundColorSwitch: "Background color" => "Color de fondo"
+// theme.headerBackgroundColorNone: "None" => "Ninguno"
+// theme.headerBackgroundColorAccentColor: "Accent color" => "Color de acento"
+// theme.headerBackgroundColorCustom: "Custom" => "Costumbre"
 // theme.horizontalAlignmentLeft: "Left" => "Izquierda"
 // theme.horizontalAlignmentCenter: "Center" => "Centro"
 // theme.horizontalAlignmentRight: "Right" => "Derecha"
@@ -1901,7 +1894,7 @@ editorLocalization.locales["es"] = spanishTranslation;
 // theme.verticalAlignmentMiddle: "Middle" => "Medio"
 // theme.verticalAlignmentBottom: "Bottom" => "Fondo"
 // theme.logoPosition: "Logo Position" => "Posición del logotipo"
-// theme.coverTitlePosition: "Title Position" => "Posición del título"
+// theme.headerTitlePosition: "Title Position" => "Posición del título"
 // lg.question_resetValueText: "reset value for question: {0}" => "Restablecer valor para la pregunta: {0}"
 // lg.question_setValueText: "assign value: {1} to question: {0}" => "Asignar valor: {1} a la pregunta: {0}"
 // lg.column_resetValueText: "reset cell value for column: {0}" => "Restablecer el valor de celda de la columna: {0}"
@@ -1915,18 +1908,14 @@ editorLocalization.locales["es"] = spanishTranslation;
 // pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "Se aplica cuando \"Tipo de fuente\" es \"Archivos locales\" o cuando la cámara no está disponible"
 // pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "Se aplica cuando \"Tipo de fuente\" es \"Cámara\"."
 // pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "Se aplica cuando \"Tipo de fuente\" es \"Archivos locales o cámara\"."
-// theme.groupBackground: "Background" => "Fondo"
-// theme.groupAppearance: "Appearance" => "Apariencia"
-// theme.coverDescriptionForecolor: "Description forecolor" => "Descripción forecolor"
+// theme.background: "Background" => "Fondo"
+// theme.appearance: "Appearance" => "Apariencia"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "¿Realmente quieres resetear el tema? Todas tus personalizaciones se perderán."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "Sí, restablece el tema"
-// theme.groupBackground: "Background" => "Fondo"
-// theme.groupAppearance: "Appearance" => "Apariencia"
-// theme.coverDescriptionForecolor: "Description forecolor" => "Descripción forecolor"
-// theme.coverInheritWidthFromContainer: "Fit to container" => "Ajuste al contenedor"
+// theme.headerInheritWidthFromContainer: "Fit to container" => "Ajuste al contenedor"
 // signaturepad.showPlaceholder: "Show the placeholder" => "Mostrar el marcador de posición"
 // signaturepad.placeholder: "Placeholder text" => "Texto de marcador de posición"
-// theme.surveyDescription: "Survey description font" => "Fuente de descripción de la encuesta"
+// theme.surveyDescriptionFont: "Survey description font" => "Fuente de descripción de la encuesta"
 // ed.prevFocus: "Focus previous" => "Enfoque anterior"
 // ed.nextFocus: "Focus next" => "Enfoque siguiente"
 // ed.saveTheme: "Save Theme" => "Guardar tema"
@@ -1938,7 +1927,7 @@ editorLocalization.locales["es"] = spanishTranslation;
 // signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "Escalado automático del área de firma"
 // signaturepad.penMinWidth: "Minimum pen width" => "Ancho mínimo del lápiz"
 // signaturepad.penMaxWidth: "Maximum pen width" => "Ancho máximo del lápiz"
-// theme.coverDescriptionPosition: "Description position" => "Descripción posición"
+// theme.headerDescriptionPosition: "Description position" => "Descripción posición"
 // ed.propertyGridNoResultsFound: "No results found" => "No se han encontrado resultados"
 // pv.leftRight: "Left and right" => "Izquierda y derecha"
 // p.sourceType: "Source type" => "Tipo de origen"

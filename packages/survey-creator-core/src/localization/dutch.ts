@@ -794,6 +794,9 @@ export var nlStrings = {
       slider: "Schuifregelaar",
       expression: "Uitdrukking",
       questionSettings: "Vraag-instellingen",
+      header: "Rubriek",
+      background: "Achtergrond",
+      appearance: "Uiterlijk",
       others: "Anderen"
     },
     editProperty: "Eigenschap '{0}' bewerken",
@@ -1475,10 +1478,6 @@ export var nlStrings = {
     "--foreground": "Voorgrondkleur",
     "--base-unit": "Basiseenheid",
     advancedMode: "Geavanceerde modus",
-    groupGeneral: "Algemeen",
-    groupHeader: "Rubriek",
-    groupBackground: "Achtergrond",
-    groupAppearance: "Uiterlijk",
     themeName: "Thema",
     themeMode: "Uiterlijk van de vraag",
     themeModePanels: "Verstek",
@@ -1489,9 +1488,6 @@ export var nlStrings = {
     primaryDefaultColor: "Verstek",
     primaryDarkColor: "Zweven",
     primaryLightColor: "Uitverkoren",
-    coverTitleForecolor: "Voorkleur titel",
-    coverDescriptionForecolor: "Beschrijving voorkleur",
-    coverOverlapEnabled: "Overlappen",
     backgroundDimColor: "Achtergrondkleur",
     backgroundImage: "Achtergrondafbeelding",
     backgroundImageFitAuto: "Auto",
@@ -1530,8 +1526,8 @@ export var nlStrings = {
     fontWeightBold: "Brutaal",
     scale: "Schub",
     cornerRadius: "Hoekradius",
-    surveyTitle: "Lettertype voor enquêtetitel",
-    surveyDescription: "Lettertype met enquêtebeschrijving",
+    surveyTitleFont: "Lettertype voor enquêtetitel",
+    surveyDescriptionFont: "Lettertype met enquêtebeschrijving",
     pageTitle: "Lettertype voor paginatitel",
     titleFont: "Titel lettertype",
     descriptionFont: "Beschrijving lettertype",
@@ -1547,14 +1543,14 @@ export var nlStrings = {
     headerView: "Bekijken",
     headerViewBasic: "Basisch",
     headerViewAdvanced: "Geavanceerd",
-    coverInheritWidthFrom: "Breedte van het inhoudsgebied",
-    coverInheritWidthFromSurvey: "Hetzelfde als enquête",
-    coverInheritWidthFromContainer: "Geschikt voor containers",
-    coverTextAreaWidth: "Tekstbreedte",
-    coverBackgroundColorSwitch: "Achtergrondkleur",
-    coverBackgroundColorNone: "Geen",
-    coverBackgroundColorAccentColor: "Accentkleur",
-    coverBackgroundColorCustom: "Gewoonte",
+    headerInheritWidthFrom: "Breedte van het inhoudsgebied",
+    headerInheritWidthFromSurvey: "Hetzelfde als enquête",
+    headerInheritWidthFromContainer: "Geschikt voor containers",
+    headerTextAreaWidth: "Tekstbreedte",
+    headerBackgroundColorSwitch: "Achtergrondkleur",
+    headerBackgroundColorNone: "Geen",
+    headerBackgroundColorAccentColor: "Accentkleur",
+    headerBackgroundColorCustom: "Gewoonte",
     horizontalAlignmentLeft: "Links",
     horizontalAlignmentCenter: "Middelpunt",
     horizontalAlignmentRight: "Rechts",
@@ -1562,8 +1558,8 @@ export var nlStrings = {
     verticalAlignmentMiddle: "Midden",
     verticalAlignmentBottom: "Bodem",
     logoPosition: "Logo positie",
-    coverTitlePosition: "Titel positie",
-    coverDescriptionPosition: "Beschrijving positie",
+    headerTitlePosition: "Titel positie",
+    headerDescriptionPosition: "Beschrijving positie",
     names: {
       default: "Verstek",
       sharp: "Scherp",
@@ -1975,7 +1971,6 @@ editorLocalization.locales["nl"] = nlStrings;
 // theme.--primary-foreground: "Primary foreground color" => "Primaire voorgrondkleur"
 // theme.--foreground: "Foreground color" => "Voorgrondkleur"
 // theme.--base-unit: "Base unit" => "Basiseenheid"
-// theme.groupGeneral: "General" => "Algemeen"
 // theme.groupAdvanced: "Advanced" => "Geavanceerd"
 // theme.themeName: "Theme" => "Thema"
 // theme.themeMode: "Question appearance" => "Uiterlijk van de vraag"
@@ -2022,7 +2017,7 @@ editorLocalization.locales["nl"] = nlStrings;
 // theme.fontWeightBold: "Bold" => "Brutaal"
 // theme.scale: "Scale" => "Schub"
 // theme.cornerRadius: "Corner radius" => "Hoekradius"
-// theme.surveyTitle: "Survey title font" => "Lettertype voor enquêtetitel"
+// theme.surveyTitleFont: "Survey title font" => "Lettertype voor enquêtetitel"
 // theme.pageTitle: "Page title font" => "Lettertype voor paginatitel"
 // theme.pageDescription: "Page description font" => "Lettertype paginabeschrijving"
 // theme.boxShadowX: "X" => "X"
@@ -2083,22 +2078,20 @@ editorLocalization.locales["nl"] = nlStrings;
 // survey.title: "Title" => "Titel"
 // page.title: "Title" => "Titel"
 // p.setValueIf: "Set value if" => "Stel de waarde in als"
-// theme.groupHeader: "Header" => "Rubriek"
-// theme.coverTitleForecolor: "Title forecolor" => "Voorkleur titel"
-// theme.coverOverlapEnabled: "Overlap" => "Overlappen"
+// theme.header: "Header" => "Rubriek"
 // theme.backgroundImageFitFill: "Stretch" => "Strekken"
 // theme.backgroundImageFitTile: "Tile" => "Tegel"
 // theme.headerView: "View" => "Bekijken"
 // theme.headerViewBasic: "Basic" => "Basisch"
 // theme.headerViewAdvanced: "Advanced" => "Geavanceerd"
-// theme.coverInheritWidthFrom: "Content area width" => "Breedte van het inhoudsgebied"
-// theme.coverInheritWidthFromSurvey: "Same as survey" => "Hetzelfde als enquête"
-// theme.coverInheritWidthFromPage: "Fit to page" => "Aanpassen aan pagina"
-// theme.coverTextAreaWidth: "Text width" => "Tekstbreedte"
-// theme.coverBackgroundColorSwitch: "Background color" => "Achtergrondkleur"
-// theme.coverBackgroundColorNone: "None" => "Geen"
-// theme.coverBackgroundColorAccentColor: "Accent color" => "Accentkleur"
-// theme.coverBackgroundColorCustom: "Custom" => "Gewoonte"
+// theme.headerInheritWidthFrom: "Content area width" => "Breedte van het inhoudsgebied"
+// theme.headerInheritWidthFromSurvey: "Same as survey" => "Hetzelfde als enquête"
+// theme.headerInheritWidthFromPage: "Fit to page" => "Aanpassen aan pagina"
+// theme.headerTextAreaWidth: "Text width" => "Tekstbreedte"
+// theme.headerBackgroundColorSwitch: "Background color" => "Achtergrondkleur"
+// theme.headerBackgroundColorNone: "None" => "Geen"
+// theme.headerBackgroundColorAccentColor: "Accent color" => "Accentkleur"
+// theme.headerBackgroundColorCustom: "Custom" => "Gewoonte"
 // theme.horizontalAlignmentLeft: "Left" => "Links"
 // theme.horizontalAlignmentCenter: "Center" => "Middelpunt"
 // theme.horizontalAlignmentRight: "Right" => "Rechts"
@@ -2106,7 +2099,7 @@ editorLocalization.locales["nl"] = nlStrings;
 // theme.verticalAlignmentMiddle: "Middle" => "Midden"
 // theme.verticalAlignmentBottom: "Bottom" => "Bodem"
 // theme.logoPosition: "Logo Position" => "Logo positie"
-// theme.coverTitlePosition: "Title Position" => "Titel positie"
+// theme.headerTitlePosition: "Title Position" => "Titel positie"
 // lg.question_resetValueText: "reset value for question: {0}" => "Resetwaarde voor vraag: {0}"
 // lg.question_setValueText: "assign value: {1} to question: {0}" => "Waarde: {1} toewijzen aan vraag: {0}"
 // lg.column_resetValueText: "reset cell value for column: {0}" => "Celwaarde voor kolom opnieuw instellen: {0}"
@@ -2120,18 +2113,14 @@ editorLocalization.locales["nl"] = nlStrings;
 // pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "Van toepassing wanneer \"Brontype\" \"Lokale bestanden\" is of wanneer de camera niet beschikbaar is"
 // pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "Van toepassing wanneer \"Brontype\" \"Camera\" is."
 // pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "Van toepassing wanneer \"Brontype\" \"Lokale bestanden of camera\" is."
-// theme.groupBackground: "Background" => "Achtergrond"
-// theme.groupAppearance: "Appearance" => "Uiterlijk"
-// theme.coverDescriptionForecolor: "Description forecolor" => "Beschrijving voorkleur"
+// theme.background: "Background" => "Achtergrond"
+// theme.appearance: "Appearance" => "Uiterlijk"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Wil je het thema echt resetten? Al uw aanpassingen gaan verloren."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "Ja, reset het thema"
-// theme.groupBackground: "Background" => "Achtergrond"
-// theme.groupAppearance: "Appearance" => "Uiterlijk"
-// theme.coverDescriptionForecolor: "Description forecolor" => "Beschrijving voorkleur"
-// theme.coverInheritWidthFromContainer: "Fit to container" => "Geschikt voor containers"
+// theme.headerInheritWidthFromContainer: "Fit to container" => "Geschikt voor containers"
 // signaturepad.showPlaceholder: "Show the placeholder" => "De tijdelijke aanduiding weergeven"
 // signaturepad.placeholder: "Placeholder text" => "Tijdelijke aanduiding voor tekst"
-// theme.surveyDescription: "Survey description font" => "Lettertype met enquêtebeschrijving"
+// theme.surveyDescriptionFont: "Survey description font" => "Lettertype met enquêtebeschrijving"
 
 // ed.prevFocus: "Focus previous" => "Focus vorige"
 // ed.nextFocus: "Focus next" => "Focus volgende"
@@ -2144,7 +2133,7 @@ editorLocalization.locales["nl"] = nlStrings;
 // signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "Het handtekeninggebied automatisch schalen"
 // signaturepad.penMinWidth: "Minimum pen width" => "Minimale penbreedte"
 // signaturepad.penMaxWidth: "Maximum pen width" => "Maximale breedte van het hok"
-// theme.coverDescriptionPosition: "Description position" => "Beschrijving positie"
+// theme.headerDescriptionPosition: "Description position" => "Beschrijving positie"
 // ed.propertyGridNoResultsFound: "No results found" => "Geen resultaten gevonden"
 // pv.leftRight: "Left and right" => "Links en rechts"
 // p.sourceType: "Source type" => "Type bron"

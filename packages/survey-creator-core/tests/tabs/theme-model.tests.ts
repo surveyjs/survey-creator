@@ -240,7 +240,7 @@ test("Theme builder switch themes", (): any => {
   expect(themeModel["--sjs-general-backcolor-dim"]).toEqual("rgba(36, 36, 36, 1)");
 });
 
-test("Theme builder: composite question fontSettings", (): any => {
+test("Theme builder: composite question font", (): any => {
   const themeModel = new ThemeModel();
   themeModel.initialize();
 
@@ -269,7 +269,7 @@ test("Theme builder: composite question fontSettings", (): any => {
   expect(cssVariables["--sjs-font-questiontitle-size"]).toBeUndefined();
 });
 
-test("Theme builder: composite question elementSettings", (): any => {
+test("Theme builder: composite question backgroundcornerradius", (): any => {
   const themeModel = new ThemeModel();
   themeModel.initialize();
 
@@ -318,7 +318,7 @@ test("Theme builder themeMode not change modified values ", (): any => {
   expect(themeModel.cssVariables["--sjs-editorpanel-backcolor"]).toEqual("rgba(249, 249, 249, 0.6)");
 });
 
-test("Theme builder: restore values of elementSettings from loadTheme", (): any => {
+test("Theme builder: restore values of backgroundcornerradius from loadTheme", (): any => {
   const themeModel = new ThemeModel();
   themeModel.initialize();
 
@@ -348,7 +348,7 @@ test("Theme builder: restore values of elementSettings from loadTheme", (): any 
     "cornerRadius": 6
   });
 });
-test("Theme builder: restore values of fontsettings from loadTheme", (): any => {
+test("Theme builder: restore values of font from loadTheme", (): any => {
   const themeModel = new ThemeModel();
   themeModel.initialize();
 

@@ -33,10 +33,10 @@ test("Check parseColor and createColor functions", () => {
   expect(createdColor).toBe("rgba(103, 50, 65, 0.75)");
 });
 
-test("Check colorsettings question", () => {
+test("Check coloralpha question", () => {
   const survey = new SurveyModel({
     elements: [{
-      type: "colorsettings",
+      type: "coloralpha",
       name: "test",
     }]
   });
@@ -63,13 +63,13 @@ test("Check colorsettings question", () => {
   expect(survey.data).toStrictEqual({ test: "rgba(103, 48, 0, 0.25)" });
 });
 
-test("Check colorsettings + another composite questions", () => {
+test("Check coloralpha + another composite questions", () => {
   const json = {
     name: "elementsettingstest",
     showInToolbox: false,
     elementsJSON: [
       {
-        type: "colorsettings",
+        type: "coloralpha",
         name: "backcolor",
         titleLocation: "left",
         descriptionLocation: "hidden"
@@ -111,10 +111,10 @@ test("Check colorsettings + another composite questions", () => {
   Serializer.removeClass("elementsettingstest");
 });
 
-test("Check colorsettings question passes some properties to color question", () => {
+test("Check coloralpha question passes some properties to color question", () => {
   const survey = new SurveyModel({
     elements: [{
-      type: "colorsettings",
+      type: "coloralpha",
       colorTitleLocation: "left",
       colorTitle: "Test",
       titleLocation: "hidden",

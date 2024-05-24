@@ -794,6 +794,9 @@ export var koreanStrings = {
       slider: "슬라이더",
       expression: "식",
       questionSettings: "질문 설정",
+      header: "머리글",
+      background: "배경",
+      appearance: "외관",
       others: "다른"
     },
     editProperty: "편집 속성 '{0}'",
@@ -1475,10 +1478,6 @@ export var koreanStrings = {
     "--foreground": "전경색",
     "--base-unit": "베이스 유닛",
     advancedMode: "어드밴스드 모드",
-    groupGeneral: "일반",
-    groupHeader: "머리글",
-    groupBackground: "배경",
-    groupAppearance: "외관",
     themeName: "주제",
     themeMode: "질문 모양",
     themeModePanels: "기본값",
@@ -1489,9 +1488,6 @@ export var koreanStrings = {
     primaryDefaultColor: "기본값",
     primaryDarkColor: "호버",
     primaryLightColor: "선택한",
-    coverTitleForecolor: "제목 forecolor",
-    coverDescriptionForecolor: "설명 forecolor",
-    coverOverlapEnabled: "겹침",
     backgroundDimColor: "배경색",
     backgroundImage: "배경 이미지",
     backgroundImageFitAuto: "자동",
@@ -1530,8 +1526,8 @@ export var koreanStrings = {
     fontWeightBold: "대담한",
     scale: "저울",
     cornerRadius: "코너 반경",
-    surveyTitle: "설문조사 제목 글꼴",
-    surveyDescription: "설문조사 설명 글꼴",
+    surveyTitleFont: "설문조사 제목 글꼴",
+    surveyDescriptionFont: "설문조사 설명 글꼴",
     pageTitle: "페이지 제목 글꼴",
     titleFont: "제목 글꼴",
     descriptionFont: "설명 글꼴",
@@ -1547,14 +1543,14 @@ export var koreanStrings = {
     headerView: "보기",
     headerViewBasic: "기초의",
     headerViewAdvanced: "고급",
-    coverInheritWidthFrom: "콘텐츠 영역 너비",
-    coverInheritWidthFromSurvey: "설문조사와 동일",
-    coverInheritWidthFromContainer: "콘테이너에 적합",
-    coverTextAreaWidth: "텍스트 너비",
-    coverBackgroundColorSwitch: "배경색",
-    coverBackgroundColorNone: "없음",
-    coverBackgroundColorAccentColor: "강조 색상",
-    coverBackgroundColorCustom: "관습",
+    headerInheritWidthFrom: "콘텐츠 영역 너비",
+    headerInheritWidthFromSurvey: "설문조사와 동일",
+    headerInheritWidthFromContainer: "콘테이너에 적합",
+    headerTextAreaWidth: "텍스트 너비",
+    headerBackgroundColorSwitch: "배경색",
+    headerBackgroundColorNone: "없음",
+    headerBackgroundColorAccentColor: "강조 색상",
+    headerBackgroundColorCustom: "관습",
     horizontalAlignmentLeft: "왼쪽",
     horizontalAlignmentCenter: "중",
     horizontalAlignmentRight: "오른쪽",
@@ -1562,8 +1558,8 @@ export var koreanStrings = {
     verticalAlignmentMiddle: "중간",
     verticalAlignmentBottom: "밑바닥",
     logoPosition: "로고 위치",
-    coverTitlePosition: "타이틀 포지션",
-    coverDescriptionPosition: "설명 위치",
+    headerTitlePosition: "타이틀 포지션",
+    headerDescriptionPosition: "설명 위치",
     names: {
       default: "기본값",
       sharp: "날카로운",
@@ -2199,7 +2195,6 @@ editorLocalization.locales["ko"] = koreanStrings;
 // theme.--primary-foreground: "Primary foreground color" => "기본 전경색"
 // theme.--foreground: "Foreground color" => "전경색"
 // theme.--base-unit: "Base unit" => "베이스 유닛"
-// theme.groupGeneral: "General" => "일반"
 // theme.groupAdvanced: "Advanced" => "고급"
 // theme.themeName: "Theme" => "주제"
 // theme.themeMode: "Question appearance" => "질문 모양"
@@ -2246,7 +2241,7 @@ editorLocalization.locales["ko"] = koreanStrings;
 // theme.fontWeightBold: "Bold" => "대담한"
 // theme.scale: "Scale" => "저울"
 // theme.cornerRadius: "Corner radius" => "코너 반경"
-// theme.surveyTitle: "Survey title font" => "설문조사 제목 글꼴"
+// theme.surveyTitleFont: "Survey title font" => "설문조사 제목 글꼴"
 // theme.pageTitle: "Page title font" => "페이지 제목 글꼴"
 // theme.pageDescription: "Page description font" => "페이지 설명 글꼴"
 // theme.boxShadowX: "X" => "X"
@@ -2308,22 +2303,20 @@ editorLocalization.locales["ko"] = koreanStrings;
 // survey.title: "Title" => "타이틀"
 // page.title: "Title" => "타이틀"
 // p.setValueIf: "Set value if" => "다음과 같은 경우 값을 설정합니다."
-// theme.groupHeader: "Header" => "머리글"
-// theme.coverTitleForecolor: "Title forecolor" => "제목 forecolor"
-// theme.coverOverlapEnabled: "Overlap" => "겹침"
+// theme.header: "Header" => "머리글"
 // theme.backgroundImageFitFill: "Stretch" => "뻗다"
 // theme.backgroundImageFitTile: "Tile" => "타일"
 // theme.headerView: "View" => "보기"
 // theme.headerViewBasic: "Basic" => "기초의"
 // theme.headerViewAdvanced: "Advanced" => "고급"
-// theme.coverInheritWidthFrom: "Content area width" => "콘텐츠 영역 너비"
-// theme.coverInheritWidthFromSurvey: "Same as survey" => "설문조사와 동일"
-// theme.coverInheritWidthFromPage: "Fit to page" => "페이지에 맞추기"
-// theme.coverTextAreaWidth: "Text width" => "텍스트 너비"
-// theme.coverBackgroundColorSwitch: "Background color" => "배경색"
-// theme.coverBackgroundColorNone: "None" => "없음"
-// theme.coverBackgroundColorAccentColor: "Accent color" => "강조 색상"
-// theme.coverBackgroundColorCustom: "Custom" => "관습"
+// theme.headerInheritWidthFrom: "Content area width" => "콘텐츠 영역 너비"
+// theme.headerInheritWidthFromSurvey: "Same as survey" => "설문조사와 동일"
+// theme.headerInheritWidthFromPage: "Fit to page" => "페이지에 맞추기"
+// theme.headerTextAreaWidth: "Text width" => "텍스트 너비"
+// theme.headerBackgroundColorSwitch: "Background color" => "배경색"
+// theme.headerBackgroundColorNone: "None" => "없음"
+// theme.headerBackgroundColorAccentColor: "Accent color" => "강조 색상"
+// theme.headerBackgroundColorCustom: "Custom" => "관습"
 // theme.horizontalAlignmentLeft: "Left" => "왼쪽"
 // theme.horizontalAlignmentCenter: "Center" => "중"
 // theme.horizontalAlignmentRight: "Right" => "오른쪽"
@@ -2331,8 +2324,8 @@ editorLocalization.locales["ko"] = koreanStrings;
 // theme.verticalAlignmentMiddle: "Middle" => "중간"
 // theme.verticalAlignmentBottom: "Bottom" => "밑바닥"
 // theme.logoPosition: "Logo Position" => "로고 위치"
-// theme.coverTitlePosition: "Title Position" => "타이틀 포지션"
-// theme.coverDescriptionPosition: "Description Position" => "설명 위치"
+// theme.headerTitlePosition: "Title Position" => "타이틀 포지션"
+// theme.headerDescriptionPosition: "Description Position" => "설명 위치"
 // lg.question_resetValueText: "reset value for question: {0}" => "질문에 대한 재설정 값: {0}"
 // lg.question_setValueText: "assign value: {1} to question: {0}" => "할당 값: {1} 질문: {0}"
 // lg.column_resetValueText: "reset cell value for column: {0}" => "열의 셀 값 재설정: {0}"
@@ -2346,18 +2339,14 @@ editorLocalization.locales["ko"] = koreanStrings;
 // pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "\"소스 유형\"이 \"로컬 파일\"이거나 카메라를 사용할 수 없는 경우에 적용됩니다."
 // pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "\"소스 유형\"이 \"카메라\"인 경우에 적용됩니다."
 // pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "\"소스 유형\"이 \"로컬 파일 또는 카메라\"인 경우에 적용됩니다."
-// theme.groupBackground: "Background" => "배경"
-// theme.groupAppearance: "Appearance" => "외관"
-// theme.coverDescriptionForecolor: "Description forecolor" => "설명 forecolor"
+// theme.background: "Background" => "배경"
+// theme.appearance: "Appearance" => "외관"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "테마를 재설정 하시겠습니까? 모든 사용자 지정이 손실됩니다."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "예, 테마를 재설정합니다."
-// theme.groupBackground: "Background" => "배경"
-// theme.groupAppearance: "Appearance" => "외관"
-// theme.coverDescriptionForecolor: "Description forecolor" => "설명 forecolor"
-// theme.coverInheritWidthFromContainer: "Fit to container" => "콘테이너에 적합"
+// theme.headerInheritWidthFromContainer: "Fit to container" => "콘테이너에 적합"
 // signaturepad.showPlaceholder: "Show the placeholder" => "자리 표시자 표시"
 // signaturepad.placeholder: "Placeholder text" => "자리 표시자 텍스트"
-// theme.surveyDescription: "Survey description font" => "설문조사 설명 글꼴"
+// theme.surveyDescriptionFont: "Survey description font" => "설문조사 설명 글꼴"
 // ed.prevFocus: "Focus previous" => "포커스 이전"
 // ed.nextFocus: "Focus next" => "다음 초점"
 // ed.saveTheme: "Save Theme" => "테마 저장"

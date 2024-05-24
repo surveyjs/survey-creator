@@ -794,6 +794,9 @@ export var nbStrings = {
       slider: "Slider",
       expression: "Uttrykk",
       questionSettings: "Spørsmål Innstillinger",
+      header: "Topptekst",
+      background: "Bakgrunn",
+      appearance: "Utseende",
       others: "Andre"
     },
     editProperty: "Rediger verdi '{0}'",
@@ -1475,10 +1478,6 @@ export var nbStrings = {
     "--foreground": "Forgrunnsfarge",
     "--base-unit": "Basisenhet",
     advancedMode: "Avansert modus",
-    groupGeneral: "Generelt",
-    groupHeader: "Topptekst",
-    groupBackground: "Bakgrunn",
-    groupAppearance: "Utseende",
     themeName: "Tema",
     themeMode: "Spørsmål utseende",
     themeModePanels: "Standard",
@@ -1489,9 +1488,6 @@ export var nbStrings = {
     primaryDefaultColor: "Standard",
     primaryDarkColor: "Sveve",
     primaryLightColor: "Utvalgt",
-    coverTitleForecolor: "Tittel forfarge",
-    coverDescriptionForecolor: "Beskrivelse forfarge",
-    coverOverlapEnabled: "Overlappe",
     backgroundDimColor: "Bakgrunnsfarge",
     backgroundImage: "Bakgrunnsbilde",
     backgroundImageFitAuto: "Auto",
@@ -1530,8 +1526,8 @@ export var nbStrings = {
     fontWeightBold: "Fet",
     scale: "Skala",
     cornerRadius: "Hjørne radius",
-    surveyTitle: "Skrift for undersøkelsestittel",
-    surveyDescription: "Skrift for undersøkelsesbeskrivelse",
+    surveyTitleFont: "Skrift for undersøkelsestittel",
+    surveyDescriptionFont: "Skrift for undersøkelsesbeskrivelse",
     pageTitle: "Skrift for sidetittel",
     titleFont: "Tittel skrift",
     descriptionFont: "Beskrivelse font",
@@ -1547,14 +1543,14 @@ export var nbStrings = {
     headerView: "Utsikt",
     headerViewBasic: "Grunnleggende",
     headerViewAdvanced: "Avansert",
-    coverInheritWidthFrom: "Bredde på innholdsområdet",
-    coverInheritWidthFromSurvey: "Samme som undersøkelse",
-    coverInheritWidthFromContainer: "Tilpass til container",
-    coverTextAreaWidth: "Tekstbredde",
-    coverBackgroundColorSwitch: "Bakgrunnsfarge",
-    coverBackgroundColorNone: "Ingen",
-    coverBackgroundColorAccentColor: "Uthevingsfarge",
-    coverBackgroundColorCustom: "Skikk",
+    headerInheritWidthFrom: "Bredde på innholdsområdet",
+    headerInheritWidthFromSurvey: "Samme som undersøkelse",
+    headerInheritWidthFromContainer: "Tilpass til container",
+    headerTextAreaWidth: "Tekstbredde",
+    headerBackgroundColorSwitch: "Bakgrunnsfarge",
+    headerBackgroundColorNone: "Ingen",
+    headerBackgroundColorAccentColor: "Uthevingsfarge",
+    headerBackgroundColorCustom: "Skikk",
     horizontalAlignmentLeft: "Venstre",
     horizontalAlignmentCenter: "Sentrum",
     horizontalAlignmentRight: "Høyre",
@@ -1562,8 +1558,8 @@ export var nbStrings = {
     verticalAlignmentMiddle: "Midt",
     verticalAlignmentBottom: "Bunn",
     logoPosition: "Logo posisjon",
-    coverTitlePosition: "Tittelposisjon",
-    coverDescriptionPosition: "Beskrivelse posisjon",
+    headerTitlePosition: "Tittelposisjon",
+    headerDescriptionPosition: "Beskrivelse posisjon",
     names: {
       default: "Standard",
       sharp: "Skarp",
@@ -1999,7 +1995,6 @@ editorLocalization.locales["nb"] = nbStrings;
 // theme.--primary-foreground: "Primary foreground color" => "Primær forgrunnsfarge"
 // theme.--foreground: "Foreground color" => "Forgrunnsfarge"
 // theme.--base-unit: "Base unit" => "Basisenhet"
-// theme.groupGeneral: "General" => "Generelt"
 // theme.groupAdvanced: "Advanced" => "Avansert"
 // theme.themeName: "Theme" => "Tema"
 // theme.themeMode: "Question appearance" => "Spørsmål utseende"
@@ -2046,7 +2041,7 @@ editorLocalization.locales["nb"] = nbStrings;
 // theme.fontWeightBold: "Bold" => "Fet"
 // theme.scale: "Scale" => "Skala"
 // theme.cornerRadius: "Corner radius" => "Hjørne radius"
-// theme.surveyTitle: "Survey title font" => "Skrift for undersøkelsestittel"
+// theme.surveyTitleFont: "Survey title font" => "Skrift for undersøkelsestittel"
 // theme.pageTitle: "Page title font" => "Skrift for sidetittel"
 // theme.pageDescription: "Page description font" => "Skrift for sidebeskrivelse"
 // theme.boxShadowX: "X" => "X"
@@ -2107,22 +2102,20 @@ editorLocalization.locales["nb"] = nbStrings;
 // survey.title: "Title" => "Tittel"
 // page.title: "Title" => "Tittel"
 // p.setValueIf: "Set value if" => "Angi verdi hvis"
-// theme.groupHeader: "Header" => "Topptekst"
-// theme.coverTitleForecolor: "Title forecolor" => "Tittel forfarge"
-// theme.coverOverlapEnabled: "Overlap" => "Overlappe"
+// theme.header: "Header" => "Topptekst"
 // theme.backgroundImageFitFill: "Stretch" => "Strekning"
 // theme.backgroundImageFitTile: "Tile" => "Flis"
 // theme.headerView: "View" => "Utsikt"
 // theme.headerViewBasic: "Basic" => "Grunnleggende"
 // theme.headerViewAdvanced: "Advanced" => "Avansert"
-// theme.coverInheritWidthFrom: "Content area width" => "Bredde på innholdsområdet"
-// theme.coverInheritWidthFromSurvey: "Same as survey" => "Samme som undersøkelse"
-// theme.coverInheritWidthFromPage: "Fit to page" => "Tilpass til side"
-// theme.coverTextAreaWidth: "Text width" => "Tekstbredde"
-// theme.coverBackgroundColorSwitch: "Background color" => "Bakgrunnsfarge"
-// theme.coverBackgroundColorNone: "None" => "Ingen"
-// theme.coverBackgroundColorAccentColor: "Accent color" => "Uthevingsfarge"
-// theme.coverBackgroundColorCustom: "Custom" => "Skikk"
+// theme.headerInheritWidthFrom: "Content area width" => "Bredde på innholdsområdet"
+// theme.headerInheritWidthFromSurvey: "Same as survey" => "Samme som undersøkelse"
+// theme.headerInheritWidthFromPage: "Fit to page" => "Tilpass til side"
+// theme.headerTextAreaWidth: "Text width" => "Tekstbredde"
+// theme.headerBackgroundColorSwitch: "Background color" => "Bakgrunnsfarge"
+// theme.headerBackgroundColorNone: "None" => "Ingen"
+// theme.headerBackgroundColorAccentColor: "Accent color" => "Uthevingsfarge"
+// theme.headerBackgroundColorCustom: "Custom" => "Skikk"
 // theme.horizontalAlignmentLeft: "Left" => "Venstre"
 // theme.horizontalAlignmentCenter: "Center" => "Sentrum"
 // theme.horizontalAlignmentRight: "Right" => "Høyre"
@@ -2142,18 +2135,14 @@ editorLocalization.locales["nb"] = nbStrings;
 // pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "Gjelder når \"Kildetype\" er \"Lokale filer\" eller når kameraet er utilgjengelig"
 // pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "Gjelder når \"Kildetype\" er \"Kamera\"."
 // pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "Gjelder når \"Kildetype\" er \"Lokale filer eller kamera\"."
-// theme.groupBackground: "Background" => "Bakgrunn"
-// theme.groupAppearance: "Appearance" => "Utseende"
-// theme.coverDescriptionForecolor: "Description forecolor" => "Beskrivelse forfarge"
+// theme.background: "Background" => "Bakgrunn"
+// theme.appearance: "Appearance" => "Utseende"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Vil du virkelig tilbakestille temaet? Alle tilpasningene dine vil gå tapt."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "Ja, tilbakestill temaet"
-// theme.groupBackground: "Background" => "Bakgrunn"
-// theme.groupAppearance: "Appearance" => "Utseende"
-// theme.coverDescriptionForecolor: "Description forecolor" => "Beskrivelse forfarge"
-// theme.coverInheritWidthFromContainer: "Fit to container" => "Tilpass til container"
+// theme.headerInheritWidthFromContainer: "Fit to container" => "Tilpass til container"
 // signaturepad.showPlaceholder: "Show the placeholder" => "Vise plassholderen"
 // signaturepad.placeholder: "Placeholder text" => "Plassholdertekst"
-// theme.surveyDescription: "Survey description font" => "Skrift for undersøkelsesbeskrivelse"
+// theme.surveyDescriptionFont: "Survey description font" => "Skrift for undersøkelsesbeskrivelse"
 // ed.prevFocus: "Focus previous" => "Fokus forrige"
 // ed.nextFocus: "Focus next" => "Fokus neste"
 // ed.saveTheme: "Save Theme" => "Lagre tema"
@@ -2166,8 +2155,8 @@ editorLocalization.locales["nb"] = nbStrings;
 // signaturepad.penMinWidth: "Minimum pen width" => "Minimum pennebredde"
 // signaturepad.penMaxWidth: "Maximum pen width" => "Maksimal pennebredde"
 // theme.logoPosition: "Logo position" => "Logo posisjon"
-// theme.coverTitlePosition: "Title position" => "Tittelposisjon"
-// theme.coverDescriptionPosition: "Description position" => "Beskrivelse posisjon"
+// theme.headerTitlePosition: "Title position" => "Tittelposisjon"
+// theme.headerDescriptionPosition: "Description position" => "Beskrivelse posisjon"
 // ed.propertyGridNoResultsFound: "No results found" => "Fant ingen resultater"
 // pv.leftRight: "Left and right" => "Venstre og høyre"
 // p.sourceType: "Source type" => "Type kilde"

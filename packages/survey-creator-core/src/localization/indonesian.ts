@@ -794,6 +794,9 @@ export var indonesianStrings = {
       slider: "Slider",
       expression: "Ekspresi",
       questionSettings: "Pengaturan Pertanyaan",
+      header: "Header",
+      background: "Latar",
+      appearance: "Rupa",
       others: "Lain"
     },
     editProperty: "Ubah properti '{0}'",
@@ -1475,10 +1478,6 @@ export var indonesianStrings = {
     "--foreground": "Warna latar depan",
     "--base-unit": "Unit dasar",
     advancedMode: "Mode lanjutan",
-    groupGeneral: "Umum",
-    groupHeader: "Header",
-    groupBackground: "Latar",
-    groupAppearance: "Rupa",
     themeName: "Tema",
     themeMode: "Penampilan pertanyaan",
     themeModePanels: "Default",
@@ -1489,9 +1488,6 @@ export var indonesianStrings = {
     primaryDefaultColor: "Default",
     primaryDarkColor: "Hover",
     primaryLightColor: "Dipilih",
-    coverTitleForecolor: "Warna depan judul",
-    coverDescriptionForecolor: "Deskripsi forecolor",
-    coverOverlapEnabled: "Tumpang tindih",
     backgroundDimColor: "Warna latar belakang",
     backgroundImage: "Gambar latar belakang",
     backgroundImageFitAuto: "Auto",
@@ -1530,8 +1526,8 @@ export var indonesianStrings = {
     fontWeightBold: "Berani",
     scale: "Sisik",
     cornerRadius: "Radius sudut",
-    surveyTitle: "Font judul survei",
-    surveyDescription: "Font deskripsi survei",
+    surveyTitleFont: "Font judul survei",
+    surveyDescriptionFont: "Font deskripsi survei",
     pageTitle: "Font judul halaman",
     titleFont: "Font judul",
     descriptionFont: "Font deskripsi",
@@ -1547,14 +1543,14 @@ export var indonesianStrings = {
     headerView: "Melihat",
     headerViewBasic: "Dasar",
     headerViewAdvanced: "Maju",
-    coverInheritWidthFrom: "Lebar area konten",
-    coverInheritWidthFromSurvey: "Sama seperti survei",
-    coverInheritWidthFromContainer: "Sesuai dengan kontainer",
-    coverTextAreaWidth: "Lebar teks",
-    coverBackgroundColorSwitch: "Warna latar belakang",
-    coverBackgroundColorNone: "Tidak",
-    coverBackgroundColorAccentColor: "Warna aksen",
-    coverBackgroundColorCustom: "Adat",
+    headerInheritWidthFrom: "Lebar area konten",
+    headerInheritWidthFromSurvey: "Sama seperti survei",
+    headerInheritWidthFromContainer: "Sesuai dengan kontainer",
+    headerTextAreaWidth: "Lebar teks",
+    headerBackgroundColorSwitch: "Warna latar belakang",
+    headerBackgroundColorNone: "Tidak",
+    headerBackgroundColorAccentColor: "Warna aksen",
+    headerBackgroundColorCustom: "Adat",
     horizontalAlignmentLeft: "Kiri",
     horizontalAlignmentCenter: "Pusat",
     horizontalAlignmentRight: "Kanan",
@@ -1562,8 +1558,8 @@ export var indonesianStrings = {
     verticalAlignmentMiddle: "Tengah",
     verticalAlignmentBottom: "Dasar",
     logoPosition: "Posisi logo",
-    coverTitlePosition: "Posisi judul",
-    coverDescriptionPosition: "Deskripsi posisi",
+    headerTitlePosition: "Posisi judul",
+    headerDescriptionPosition: "Deskripsi posisi",
     names: {
       default: "Default",
       sharp: "Tajam",
@@ -2150,7 +2146,6 @@ editorLocalization.locales["id"] = indonesianStrings;
 // theme.--primary-foreground: "Primary foreground color" => "Warna latar depan primer"
 // theme.--foreground: "Foreground color" => "Warna latar depan"
 // theme.--base-unit: "Base unit" => "Unit dasar"
-// theme.groupGeneral: "General" => "Umum"
 // theme.groupAdvanced: "Advanced" => "Maju"
 // theme.themeName: "Theme" => "Tema"
 // theme.themeMode: "Question appearance" => "Penampilan pertanyaan"
@@ -2197,7 +2192,7 @@ editorLocalization.locales["id"] = indonesianStrings;
 // theme.fontWeightBold: "Bold" => "Berani"
 // theme.scale: "Scale" => "Sisik"
 // theme.cornerRadius: "Corner radius" => "Radius sudut"
-// theme.surveyTitle: "Survey title font" => "Font judul survei"
+// theme.surveyTitleFont: "Survey title font" => "Font judul survei"
 // theme.pageTitle: "Page title font" => "Font judul halaman"
 // theme.pageDescription: "Page description font" => "Font deskripsi halaman"
 // theme.boxShadowX: "X" => "X"
@@ -2258,22 +2253,20 @@ editorLocalization.locales["id"] = indonesianStrings;
 // survey.title: "Title" => "Titel"
 // page.title: "Title" => "Titel"
 // p.setValueIf: "Set value if" => "Tetapkan nilai jika"
-// theme.groupHeader: "Header" => "Header"
-// theme.coverTitleForecolor: "Title forecolor" => "Warna depan judul"
-// theme.coverOverlapEnabled: "Overlap" => "Tumpang tindih"
+// theme.header: "Header" => "Header"
 // theme.backgroundImageFitFill: "Stretch" => "Merentangkan"
 // theme.backgroundImageFitTile: "Tile" => "Ubin"
 // theme.headerView: "View" => "Melihat"
 // theme.headerViewBasic: "Basic" => "Dasar"
 // theme.headerViewAdvanced: "Advanced" => "Maju"
-// theme.coverInheritWidthFrom: "Content area width" => "Lebar area konten"
-// theme.coverInheritWidthFromSurvey: "Same as survey" => "Sama seperti survei"
-// theme.coverInheritWidthFromPage: "Fit to page" => "Paskan dengan halaman"
-// theme.coverTextAreaWidth: "Text width" => "Lebar teks"
-// theme.coverBackgroundColorSwitch: "Background color" => "Warna latar belakang"
-// theme.coverBackgroundColorNone: "None" => "Tidak"
-// theme.coverBackgroundColorAccentColor: "Accent color" => "Warna aksen"
-// theme.coverBackgroundColorCustom: "Custom" => "Adat"
+// theme.headerInheritWidthFrom: "Content area width" => "Lebar area konten"
+// theme.headerInheritWidthFromSurvey: "Same as survey" => "Sama seperti survei"
+// theme.headerInheritWidthFromPage: "Fit to page" => "Paskan dengan halaman"
+// theme.headerTextAreaWidth: "Text width" => "Lebar teks"
+// theme.headerBackgroundColorSwitch: "Background color" => "Warna latar belakang"
+// theme.headerBackgroundColorNone: "None" => "Tidak"
+// theme.headerBackgroundColorAccentColor: "Accent color" => "Warna aksen"
+// theme.headerBackgroundColorCustom: "Custom" => "Adat"
 // theme.horizontalAlignmentLeft: "Left" => "Kiri"
 // theme.horizontalAlignmentCenter: "Center" => "Pusat"
 // theme.horizontalAlignmentRight: "Right" => "Kanan"
@@ -2293,18 +2286,14 @@ editorLocalization.locales["id"] = indonesianStrings;
 // pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "Berlaku ketika \"Jenis sumber\" adalah \"File lokal\" atau ketika kamera tidak tersedia"
 // pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "Berlaku ketika \"Jenis sumber\" adalah \"Kamera\"."
 // pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "Berlaku ketika \"Jenis sumber\" adalah \"File atau kamera lokal\"."
-// theme.groupBackground: "Background" => "Latar"
-// theme.groupAppearance: "Appearance" => "Rupa"
-// theme.coverDescriptionForecolor: "Description forecolor" => "Deskripsi forecolor"
+// theme.background: "Background" => "Latar"
+// theme.appearance: "Appearance" => "Rupa"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Apakah Anda benar-benar ingin mengatur ulang tema? Semua penyesuaian Anda akan hilang."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "Ya, atur ulang tema"
-// theme.groupBackground: "Background" => "Latar"
-// theme.groupAppearance: "Appearance" => "Rupa"
-// theme.coverDescriptionForecolor: "Description forecolor" => "Deskripsi forecolor"
-// theme.coverInheritWidthFromContainer: "Fit to container" => "Sesuai dengan kontainer"
+// theme.headerInheritWidthFromContainer: "Fit to container" => "Sesuai dengan kontainer"
 // signaturepad.showPlaceholder: "Show the placeholder" => "Memperlihatkan tempat penampung"
 // signaturepad.placeholder: "Placeholder text" => "Teks tempat penampung"
-// theme.surveyDescription: "Survey description font" => "Font deskripsi survei"
+// theme.surveyDescriptionFont: "Survey description font" => "Font deskripsi survei"
 // ed.prevFocus: "Focus previous" => "Fokus sebelumnya"
 // ed.nextFocus: "Focus next" => "Fokus berikutnya"
 // ed.saveTheme: "Save Theme" => "Simpan Tema"
@@ -2317,8 +2306,8 @@ editorLocalization.locales["id"] = indonesianStrings;
 // signaturepad.penMinWidth: "Minimum pen width" => "Lebar pena minimum"
 // signaturepad.penMaxWidth: "Maximum pen width" => "Lebar pena maksimum"
 // theme.logoPosition: "Logo position" => "Posisi logo"
-// theme.coverTitlePosition: "Title position" => "Posisi judul"
-// theme.coverDescriptionPosition: "Description position" => "Deskripsi posisi"
+// theme.headerTitlePosition: "Title position" => "Posisi judul"
+// theme.headerDescriptionPosition: "Description position" => "Deskripsi posisi"
 // ed.propertyGridNoResultsFound: "No results found" => "Tidak ada hasil yang ditemukan"
 // pv.leftRight: "Left and right" => "Kiri dan kanan"
 // p.sourceType: "Source type" => "Jenis sumber"
