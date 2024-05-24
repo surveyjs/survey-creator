@@ -9,9 +9,9 @@ import { settings } from "../../src/creator-settings";
 export { QuestionFileEditorModel } from "../../src/custom-questions/question-file";
 export { QuestionSpinEditorModel } from "../../src/custom-questions/question-spin-editor";
 export { QuestionColorModel } from "../../src/custom-questions/question-color";
-export { createColor } from "../../src/components/tabs/theme-custom-questions/color-settings";
-export { createBoxShadow, parseBoxShadow } from "../../src/components/tabs/theme-custom-questions/boxshadow-settings";
-export * from "../../src/components/tabs/theme-custom-questions/boxshadow-settings";
+export { createColor } from "../../src/components/tabs/theme-custom-questions/color-alpha";
+export { createBoxShadow, parseBoxShadow } from "../../src/components/tabs/theme-custom-questions/shadow-effects";
+export * from "../../src/components/tabs/theme-custom-questions/shadow-effects";
 export * from "../../src/property-grid/theme-settings";
 export * from "../../src/property-grid/header-settings";
 

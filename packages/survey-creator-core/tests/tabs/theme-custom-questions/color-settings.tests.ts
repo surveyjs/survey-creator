@@ -1,5 +1,5 @@
 import { ComponentCollection, Serializer, SurveyModel } from "survey-core";
-import { createColor } from "../../../src/components/tabs/theme-custom-questions/color-settings";
+import { createColor } from "../../../src/components/tabs/theme-custom-questions/color-alpha";
 import { parseColor } from "../../../src/utils/utils";
 
 export { QuestionFileEditorModel } from "../../../src/custom-questions/question-file";
