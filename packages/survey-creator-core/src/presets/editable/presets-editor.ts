@@ -32,6 +32,11 @@ export class CreatorPresetEditorModel extends Base {
   public set activeTab(val: string) {
     this.setPropertyValue("activeTab", val);
   }
+  public setActiveTab(val: string): boolean {
+    if(this.activeTab === "preset" && !this.model.validate(true, true)) return false;
+    this.activeTab = val;
+    return true;
+  }
   public get json(): ICreatorPresetData {
     return this.preset.getJson();
   }
@@ -51,7 +56,7 @@ export class CreatorPresetEditorModel extends Base {
       id: id,
       title: title,
       active: <any>new ComputedUpdater<boolean>(() => this.activeTab === id),
-      action: () => { this.activeTab = id; }
+      action: () => { this.setActiveTab(id); }
     };
     this.navigationBar.addAction(actionInfo);
   }

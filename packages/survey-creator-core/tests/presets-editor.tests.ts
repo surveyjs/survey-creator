@@ -547,3 +547,20 @@ test("Editor: activeTab & navigationBar", () => {
   expect(editor.creator.tabs[0].id).toEqual("designer");
   expect(editor.creator.tabs[1].id).toEqual("translation");
 });
+test("Editor: do not allow to change the activeTab if there is an error", () => {
+  const editor = new CreatorPresetEditorModel();
+  expect(editor.activeTab).toEqual("preset");
+  const survey = editor.model;
+  survey.setValue("toolbox_definition_show", true);
+  const matrixQuestion = <QuestionMatrixDynamicModel>survey.getQuestionByName("toolbox_definition_matrix");
+  expect(matrixQuestion.isVisible).toBeTruthy();
+  matrixQuestion.addRow();
+  survey.currentPageNo = 0;
+  expect(survey.currentPageNo).toBe(0);
+  editor.navigationBar.actions[1].action();
+  expect(editor.activeTab).toEqual("preset");
+  expect(survey.currentPageNo).toBe(1);
+  matrixQuestion.removeRow(0);
+  editor.navigationBar.actions[1].action();
+  expect(editor.activeTab).toEqual("creator");
+});
