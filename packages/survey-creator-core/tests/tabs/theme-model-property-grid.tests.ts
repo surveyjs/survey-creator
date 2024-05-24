@@ -274,6 +274,30 @@ test("Change advancedModeSwitcher visibility", (): any => {
   expect(actions[0].visible).toBeFalsy();
 });
 
+test("advancedModeSwitcher state after switch tabs", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { logo: "Logo", pages: [{ questions: [{ type: "text", name: "q1" }] }] };
+
+  creator.activeTab = "theme";
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  const propertyGridSurvey = themePlugin.propertyGrid.survey;
+  const propertyGridGroups = propertyGridSurvey.pages[0].elements;
+  expect(propertyGridGroups.length).toBe(4);
+  const actions = (propertyGridGroups[3] as any as SurveyElement).getTitleActions();
+  expect(actions.length).toBe(1);
+  expect(actions[0].checked).toBeFalsy();
+  expect(propertyGridSurvey.getVariable("advancedmode")).toBeFalsy();
+
+  actions[0].action();
+  expect(actions[0].checked).toBeTruthy();
+  expect(propertyGridSurvey.getVariable("advancedmode")).toBeTruthy();
+
+  creator.activeTab = "designer";
+  creator.activeTab = "theme";
+  expect(actions[0].checked).toBeTruthy();
+  expect(propertyGridSurvey.getVariable("advancedmode")).toBeTruthy();
+});
+
 test("onAllowModifyTheme events + use creator.readOnly", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.readOnly = true;

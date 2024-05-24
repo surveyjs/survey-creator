@@ -57,7 +57,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   private exportAction: Action;
   private undoAction: Action;
   private redoAction: Action;
-  private advancedModeSwitcher: Action;
+  private advancedModeSwitcher: Switcher;
   private inputFileElement: HTMLInputElement;
   private simulatorCssClasses: any = surveyCss[defaultV2ThemeName];
   private _availableThemes = [].concat(PredefinedThemes);
@@ -71,11 +71,10 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     return <any>new ComputedUpdater<boolean>(() => { return this.creator.activeTab === "theme"; });
   }
 
-  private createAppearanceAdvancedModeAction(panel: PanelModelBase): void {
+  private createAppearanceAdvancedModeAction(): void {
     const advancedMode = new Switcher({
       id: "advancedMode",
       component: "svc-switcher",
-      // ariaChecked: <any>new ComputedUpdater<boolean>(() => this.groupAppearanceAdvancedMode),
       ariaRole: "checkbox",
       css: "sv-theme-group_title-action",
       title: getLocString("theme.advancedMode"),
@@ -83,18 +82,9 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       action: () => {
         advancedMode.checked = !advancedMode.checked;
         this.propertyGrid.survey.setVariable("advancedmode", advancedMode.checked);
-
-        // this.groupAppearanceAdvancedMode = !this.groupAppearanceAdvancedMode;
-        // this._setPGEditorPropertyValue(panel.getQuestionByName("advancedMode"), "value", this.groupAppearanceAdvancedMode);
       }
     });
-    // this.registerFunctionOnPropertyValueChanged("groupAppearanceAdvancedMode",
-    //   () => {
-    //     advancedMode.checked = !advancedMode.checked;
-    //   },
-    //   "groupAppearanceAdvancedMode"
-    // );
-    advancedMode.checked = false;
+    advancedMode.checked = !!this.propertyGrid.survey.getVariable("advancedmode");
     this.advancedModeSwitcher = advancedMode;
   }
 
@@ -255,7 +245,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.propertyGrid.survey.getAllQuestions().forEach(q => q.readOnly = false);
     this.onAvailableThemesChanged(this.availableThemes);
     this.updateAllowModifyTheme();
-    this.propertyGrid.survey.setVariable("advancedmode", false);
+    this.propertyGrid.survey.setVariable("advancedmode", !!this.advancedModeSwitcher?.checked);
     const themeBuilderCss = { ...propertyGridCss };
     themeBuilderCss.root += " spg-theme-builder-root";
     this.propertyGrid.survey.css = themeBuilderCss;
@@ -263,7 +253,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
 
     this.propertyGrid.survey.onGetPanelTitleActions.add((sender, opt) => {
       if (opt.panel && opt.panel.name == "appearance") {
-        this.createAppearanceAdvancedModeAction(opt.panel);
+        this.createAppearanceAdvancedModeAction();
         opt.titleActions.push(this.advancedModeSwitcher);
       }
     });

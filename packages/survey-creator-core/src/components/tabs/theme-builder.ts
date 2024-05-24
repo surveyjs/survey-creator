@@ -2,42 +2,20 @@ import { SurveySimulatorModel } from "../simulator";
 import { Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, ITheme, ItemValue, ImageFit, ImageAttachment, QuestionDropdownModel, ValueChangingEvent, ValueChangedEvent, EventBase, Serializer, Question, IHeader, IElement, PanelModel, PanelModelBase, QuestionFileModel } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
-import { setSurveyJSONForPropertyGrid } from "../../property-grid";
-import { propertyGridCss } from "../../property-grid-theme/property-grid";
-import { ColorCalculator, assign, ingectAlpha, notShortCircuitAnd, parseColor } from "../../utils/utils";
-import { settings } from "../../creator-settings";
-import { UndoRedoManager } from "../../plugins/undo-redo/undo-redo-manager";
-import { PredefinedColors, PredefinedThemes, Themes } from "./themes";
-import { updateCustomQuestionJSONs } from "./theme-custom-questions";
-import * as LibraryThemes from "survey-core/themes";
-import { createBoxShadowReset } from "./theme-custom-questions/boxshadow-settings";
-import { QuestionFileEditorModel } from "../../custom-questions/question-file";
-import { SurveyHelper } from "../../survey-helper";
-import { IAddPropertyGridEditorParams } from "./theme-plugin";
-import { Switcher } from "../switcher/switcher";
+import { notShortCircuitAnd } from "../../utils/utils";
 
 require("./theme-builder.scss");
 
 export class ThemeTabViewModel extends Base {
-  // public static DefaultTheme = Themes["default-light"];
   private json: any;
   public pages: ActionContainer = new ActionContainer();
   public prevPageAction: Action;
   public testAgainAction: Action;
   public nextPageAction: Action;
-  private advancedModeSwitcher: Switcher;
   // private themeEditorSurveyValue: SurveyModel;
   private themeCssVariablesChanges: { [index: string]: string } = {};
-  private colorCalculator = new ColorCalculator();
   private blockChanges = true;
-  private _availableThemes = PredefinedThemes;
   private prevQuestionValues: { [index: string]: any } = {};
-
-  // private _setPGEditorPropertyValue(editor: Question, propertyName: string, value): void {
-  //   if (!!editor) {
-  //     editor[propertyName] = value;
-  //   }
-  // }
 
   onSurveyCreatedCallback: (survey: SurveyModel) => any;
 
@@ -252,54 +230,6 @@ export class ThemeTabViewModel extends Base {
     this.updateSimulatorSurvey(json, currTheme);
   }
 
-  // public getPropertyGridCategory(categoryName: string): IElement | undefined {
-  //   const themeEditorGroups = this.themeEditorSurvey.getPage(0).elements;
-  //   const group = themeEditorGroups.filter(group => group.name === categoryName)[0];
-  //   return group;
-  // }
-
-  // public removePropertyGridEditor(name: string): void {
-  //   const element = this.themeEditorSurvey.findQuestionByName(name);
-  //   if (!!element) {
-  //     this.themeEditorSurvey.getPage(0).removeElement(element);
-  //   }
-  // }
-
-  // public addPropertyGridEditor(params: IAddPropertyGridEditorParams): void {
-
-  //   let category;
-  //   let sibling;
-  //   let insertIndex = -1;
-
-  //   if (!!params.category) {
-  //     category = this.getPropertyGridCategory(params.category) as PanelModel;
-  //   }
-
-  //   if (!!params.insertBefore) {
-  //     sibling = (category || this.themeEditorSurvey).findQuestionByName(params.insertBefore);
-  //     if (!!sibling) {
-  //       insertIndex = sibling.parent.elements.indexOf(sibling) - 1;
-  //     }
-  //   }
-
-  //   if (!!params.insertAfter) {
-  //     sibling = (category || this.themeEditorSurvey).findQuestionByName(params.insertAfter);
-  //     if (!!sibling) {
-  //       insertIndex = sibling.parent.elements.indexOf(sibling) + 1;
-  //     }
-  //   }
-
-  //   if (!!params.element) {
-  //     if (!!sibling) {
-  //       sibling.parent.addElement(params.element, insertIndex);
-  //     } else if (!!category) {
-  //       category.addElement(params.element);
-  //     } else {
-  //       SurveyHelper.warnText("No source found to add.");
-  //     }
-  //   }
-  // }
-
   private blockThemeChangedNotifications = 0;
   public initialize(json: any, options: any) {
     this.blockChanges = true;
@@ -442,150 +372,120 @@ export class ThemeTabViewModel extends Base {
   }
 
   /*
-  protected createThemeEditorSurvey(): SurveyModel {
-    const json = this.getThemeEditorSurveyJSON();
-    setSurveyJSONForPropertyGrid(json, true, false);
-    const themeEditorSurvey = this.surveyProvider.createSurvey({}, "theme_editor", this, (survey: SurveyModel): void => {
-      survey.lazyRendering = true;
-      survey.lazyRenderingFirstBatchSize = 1;
-      survey.setJsonObject(json);
-      survey.getCss().list = {};
-      const themeBuilderCss = { ...propertyGridCss };
-      themeBuilderCss.root += " spg-theme-builder-root";
-      survey.css = themeBuilderCss;
-      survey.enterKeyAction = "loseFocus";
-    });
-    themeEditorSurvey.onValueChanging.add((sender, options: ValueChangingEvent) => {
-      if (this.blockChanges) return;
+ protected createThemeEditorSurvey(): SurveyModel {
+   const json = this.getThemeEditorSurveyJSON();
+   setSurveyJSONForPropertyGrid(json, true, false);
+   const themeEditorSurvey = this.surveyProvider.createSurvey({}, "theme_editor", this, (survey: SurveyModel): void => {
+     survey.lazyRendering = true;
+     survey.lazyRenderingFirstBatchSize = 1;
+     survey.setJsonObject(json);
+     survey.getCss().list = {};
+     const themeBuilderCss = { ...propertyGridCss };
+     themeBuilderCss.root += " spg-theme-builder-root";
+     survey.css = themeBuilderCss;
+     survey.enterKeyAction = "loseFocus";
+   });
+   themeEditorSurvey.onValueChanging.add((sender, options: ValueChangingEvent) => {
+     if (this.blockChanges) return;
 
-      this.prevQuestionValues[options.name] = options.oldValue;
-    });
+     this.prevQuestionValues[options.name] = options.oldValue;
+   });
 
-    themeEditorSurvey.onValueChanged.add((sender, options: ValueChangedEvent) => {
-      if (options.name === "advancedMode") return;
-      if (this.blockChanges) return;
+   themeEditorSurvey.onValueChanged.add((sender, options: ValueChangedEvent) => {
+     if (options.name === "advancedMode") return;
+     if (this.blockChanges) return;
 
-      if (this.blockThemeChangedNotifications == 0) {
-        this.undoRedoManager.startTransaction(options.name + " changed");
-      }
-      this.undoRedoManager.onPropertyValueChanged("value", this.prevQuestionValues[options.name], options.value, options.question, undefined);
+     if (this.blockThemeChangedNotifications == 0) {
+       this.undoRedoManager.startTransaction(options.name + " changed");
+     }
+     this.undoRedoManager.onPropertyValueChanged("value", this.prevQuestionValues[options.name], options.value, options.question, undefined);
 
-      if (this.generalPropertiesChanged(options)) {
-        if (this.blockThemeChangedNotifications == 0) {
-          this.undoRedoManager.stopTransaction();
-        }
-        return;
-      }
+     if (this.generalPropertiesChanged(options)) {
+       if (this.blockThemeChangedNotifications == 0) {
+         this.undoRedoManager.stopTransaction();
+       }
+       return;
+     }
 
-      if (options.name === "headerViewContainer") {
-        this.headerViewContainerPropertiesChanged(options);
-      }
+     if (options.name === "headerViewContainer") {
+       this.headerViewContainerPropertiesChanged(options);
+     }
 
-      if (options.name === "--sjs-shadow-inner" || options.name === "--sjs-shadow-small") {
-        this.shadowInnerPropertiesChanged(options);
-      }
+     if (options.name === "--sjs-shadow-inner" || options.name === "--sjs-shadow-small") {
+       this.shadowInnerPropertiesChanged(options);
+     }
 
-      this.cssVariablePropertiesChanged(options);
+     this.cssVariablePropertiesChanged(options);
 
-      this.blockThemeChangedNotifications += 1;
-      const hasUpdatedDependentValues = this.updateDependentQuestionValues(options);
+     this.blockThemeChangedNotifications += 1;
+     const hasUpdatedDependentValues = this.updateDependentQuestionValues(options);
 
-      const newCssVariables = {};
-      assign(newCssVariables, this.currentTheme.cssVariables, this.themeCssVariablesChanges);
-      this.trimCssVariables(newCssVariables);
-      this.currentTheme.cssVariables = newCssVariables;
+     const newCssVariables = {};
+     assign(newCssVariables, this.currentTheme.cssVariables, this.themeCssVariablesChanges);
+     this.trimCssVariables(newCssVariables);
+     this.currentTheme.cssVariables = newCssVariables;
 
-      this.blockThemeChangedNotifications -= 1;
-      if (!!this.undoRedoManager && this.blockThemeChangedNotifications == 0) {
-        this.undoRedoManager.stopTransaction();
-      }
+     this.blockThemeChangedNotifications -= 1;
+     if (!!this.undoRedoManager && this.blockThemeChangedNotifications == 0) {
+       this.undoRedoManager.stopTransaction();
+     }
 
-      if (hasUpdatedDependentValues) {
-        this.themeModified(options);
-      } else {
-        this.updateSimulatorTheme();
-      }
-    });
+     if (hasUpdatedDependentValues) {
+       this.themeModified(options);
+     } else {
+       this.updateSimulatorTheme();
+     }
+   });
 
-    themeEditorSurvey.onOpenFileChooser.add((_, options) => {
-      const context: any = {};
-      assign(context, (options as any).context, { element: this.currentTheme as any, elementType: "theme" });
-      if (options.element) {
-        const question = options.element as QuestionFileModel;
-        context.propertyName = question.name;
-        if (question.parentQuestion) {
-          context.elementType = question.parentQuestion.name === "headerViewContainer" ? "header" : question.parentQuestion.name;
-        }
-      }
-      this.surveyProvider.chooseFiles(options.input, options.callback, context as any);
-    });
-    themeEditorSurvey.onUploadFiles.add((_, options) => {
-      const callback = (status: string, data: any) => options.callback(status, [{ content: data, file: options.files[0] }]);
-      const context: any = {};
-      assign(context, (options as any).context, { element: this.currentTheme as any, elementType: "theme", propertyName: options.name });
-      if (options.question && options.question.parentQuestion) {
-        context.elementType = options.question.parentQuestion.name === "headerViewContainer" ? "header" : options.question.parentQuestion.name;
-      }
-      this.surveyProvider.uploadFiles(options.files, undefined, callback, context);
-    });
-    this.patchFileEditors(themeEditorSurvey);
-    themeEditorSurvey.getAllQuestions().forEach(q => q.allowRootStyle = false);
-    themeEditorSurvey.onQuestionCreated.add((_, opt) => {
-      opt.question.allowRootStyle = false;
-    });
-    themeEditorSurvey.onGetPanelFooterActions.add((sender, opt) => {
-      if (opt.question && opt.question.name == "headerViewContainer") {
-        opt.actions = [];
-      }
-    });
-    themeEditorSurvey.onGetPanelTitleActions.add((sender, opt) => {
-      if (opt.panel && opt.panel.name == "groupAppearance") {
-        this.createAppearanceAdvancedModeAction(opt.panel);
-        opt.titleActions.push(this.advancedModeSwitcher);
-      }
-    });
-    themeEditorSurvey.onUpdatePanelCssClasses.add((sender, options) => {
-      if (options.panel.hasParent) {
-        const parent = (options.panel.parent ?? options.panel.parentQuestion);
-        if (!parent || parent.hasParent && !(parent.name === "headerViewContainer" || parent.parentQuestion?.name === "headerViewContainer")) {
-          options.cssClasses.panel.container = "spg-panel-group";
-          options.cssClasses.panel.content = "spg-panel-group__content";
-          options.cssClasses.panel.title = "spg-panel-group__title";
-        }
-        else {
-          options.cssClasses.panel.container = "spg-nested-panel";
-          options.cssClasses.panel.content = "spg-nested-panel__content";
-          options.cssClasses.panel.title = "spg-nested-panel__title";
-        }
-      }
-    });
-    return themeEditorSurvey;
-  }
+   themeEditorSurvey.onOpenFileChooser.add((_, options) => {
+     const context: any = {};
+     assign(context, (options as any).context, { element: this.currentTheme as any, elementType: "theme" });
+     if (options.element) {
+       const question = options.element as QuestionFileModel;
+       context.propertyName = question.name;
+       if (question.parentQuestion) {
+         context.elementType = question.parentQuestion.name === "headerViewContainer" ? "header" : question.parentQuestion.name;
+       }
+     }
+     this.surveyProvider.chooseFiles(options.input, options.callback, context as any);
+   });
+   themeEditorSurvey.onUploadFiles.add((_, options) => {
+     const callback = (status: string, data: any) => options.callback(status, [{ content: data, file: options.files[0] }]);
+     const context: any = {};
+     assign(context, (options as any).context, { element: this.currentTheme as any, elementType: "theme", propertyName: options.name });
+     if (options.question && options.question.parentQuestion) {
+       context.elementType = options.question.parentQuestion.name === "headerViewContainer" ? "header" : options.question.parentQuestion.name;
+     }
+     this.surveyProvider.uploadFiles(options.files, undefined, callback, context);
+   });
+   this.patchFileEditors(themeEditorSurvey);
+   themeEditorSurvey.getAllQuestions().forEach(q => q.allowRootStyle = false);
+   themeEditorSurvey.onQuestionCreated.add((_, opt) => {
+     opt.question.allowRootStyle = false;
+   });
+   themeEditorSurvey.onGetPanelFooterActions.add((sender, opt) => {
+     if (opt.question && opt.question.name == "headerViewContainer") {
+       opt.actions = [];
+     }
+   });
+   themeEditorSurvey.onUpdatePanelCssClasses.add((sender, options) => {
+     if (options.panel.hasParent) {
+       const parent = (options.panel.parent ?? options.panel.parentQuestion);
+       if (!parent || parent.hasParent && !(parent.name === "headerViewContainer" || parent.parentQuestion?.name === "headerViewContainer")) {
+         options.cssClasses.panel.container = "spg-panel-group";
+         options.cssClasses.panel.content = "spg-panel-group__content";
+         options.cssClasses.panel.title = "spg-panel-group__title";
+       }
+       else {
+         options.cssClasses.panel.container = "spg-nested-panel";
+         options.cssClasses.panel.content = "spg-nested-panel__content";
+         options.cssClasses.panel.title = "spg-nested-panel__title";
+       }
+     }
+   });
+   return themeEditorSurvey;
+ }
 */
-  // private createAppearanceAdvancedModeAction(panel: PanelModelBase): void {
-  //   const advancedMode = new Switcher({
-  //     id: "advancedMode",
-  //     component: "svc-switcher",
-  //     ariaChecked: <any>new ComputedUpdater<boolean>(() => this.groupAppearanceAdvancedMode),
-  //     ariaRole: "checkbox",
-  //     css: "sv-theme-group_title-action",
-  //     title: getLocString("theme.advancedMode"),
-  //     visible: !this.surveyProvider.isMobileView,
-  //     action: () => {
-  //       this.groupAppearanceAdvancedMode = !this.groupAppearanceAdvancedMode;
-  //       this._setPGEditorPropertyValue(panel.getQuestionByName("advancedMode"), "value", this.groupAppearanceAdvancedMode);
-  //     }
-  //   });
-  //   this.registerFunctionOnPropertyValueChanged("groupAppearanceAdvancedMode",
-  //     () => {
-  //       advancedMode.checked = !advancedMode.checked;
-  //     },
-  //     "groupAppearanceAdvancedMode"
-  //   );
-  //   advancedMode.checked = false;
-  //   this.advancedModeSwitcher = advancedMode;
-  // }
-
   public dispose(): void {
     // this.surveyProvider.onPropertyChanged.remove(this.creatorPropertyChanged);
     // this.themeEditorSurveyValue?.dispose();
