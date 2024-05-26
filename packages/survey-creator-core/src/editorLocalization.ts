@@ -5,6 +5,7 @@ import { surveyLocalization, Serializer } from "survey-core";
 export class EditorLocalization {
   private defaultLocaleValue: string = "en";
   private currentLocaleValue: string = "";
+  private presetStringsValues: any;
   public camelCaseBreaking = true;
   public locales = {};
   private peByClass = {};
@@ -31,6 +32,11 @@ export class EditorLocalization {
       this.reset();
     }
   }
+  public get presetStrings(): any { return this.presetStringsValues; }
+  public set presetStrings(val: any) {
+    this.presetStringsValues= val;
+    this.reset();
+  }
   public getString(strName: string, locale: string = null): string {
     const path = strName.split(".");
     return this.getStringByPath(path, locale);
@@ -47,6 +53,10 @@ export class EditorLocalization {
     }
     if(locs.length === 0 || locs[locs.length - 1] !== defaultLocale) {
       locs.push(defaultLocale);
+    }
+    const presetLoc = this.getPresetLocale(locale);
+    if(!!presetLoc) {
+      locs.unshift(presetLoc);
     }
     for(let i = 0; i < locs.length; i ++) {
       const res = this.getStringByLocale(path, locs[i]);
@@ -119,14 +129,26 @@ export class EditorLocalization {
   private getPropertyHelpInEditorCore(typeName: string, propName: string, data: any, suffix: string): string {
     let str = this.getPropertyInfoInEditorByType(typeName, propName, data, suffix);
     if(!!str) return (str === " ") ? null: str;
-    const loc = this.getLocale();
-    return !!loc && !!loc[suffix] ? loc[suffix][propName] : undefined;
+    const locs = this.getLocalesWithPreset();
+    for(let i = 0; i < locs.length; i ++) {
+      const loc = locs[i];
+      if(!!loc[suffix] && loc[suffix][propName]) return loc[suffix][propName];
+    }
+    return undefined;
   }
   private getPropertyInfoInEditorByType(typeName: string, propName: string, peInfoByClass: any, postFix: string): string {
     if(!typeName) return undefined;
+    const locs = this.getLocalesWithPreset();
+    for(let i = 0; i < locs.length; i ++) {
+      const res = this.getPropertyInfoInEditorByTypeCore(typeName, propName, peInfoByClass, postFix, locs[i]);
+      if(!!res) return res;
+    }
+    return undefined;
+  }
+  private getPropertyInfoInEditorByTypeCore(typeName: string, propName: string, peInfoByClass: any, postFix: string, loc: any): string {
     let peClass = peInfoByClass[typeName];
     if(peClass === undefined) {
-      peClass = this.getObjInEditorByType(typeName, peInfoByClass, postFix);
+      peClass = this.getObjInEditorByTypeCore(typeName, peInfoByClass, postFix, loc);
     }
     while(!!peClass) {
       const res = peClass.props[propName];
@@ -135,16 +157,15 @@ export class EditorLocalization {
     }
     return undefined;
   }
-  private getObjInEditorByType(typeName: string, peInfoByClass: any, postFix: string): any {
+  private getObjInEditorByTypeCore(typeName: string, peInfoByClass: any, postFix: string, loc: any): any {
     if(!typeName) return undefined;
     const peClass = peInfoByClass[typeName];
     if(peClass !== undefined) peClass;
-    const loc: any = this.getLocale();
     const pe = !!loc ? loc[postFix] : undefined;
     if(!pe) return undefined;
     const propIndex = typeName.indexOf("@");
     if(propIndex > -1) {
-      const parentRes = this.getObjInEditorByType(typeName.substring(0, propIndex), peInfoByClass, postFix);
+      const parentRes = this.getObjInEditorByTypeCore(typeName.substring(0, propIndex), peInfoByClass, postFix, loc);
       if(!pe[typeName]) {
         peInfoByClass[typeName] = parentRes;
         return parentRes;
@@ -162,7 +183,7 @@ export class EditorLocalization {
       if(!!res) break;
       classNames.push(tName);
       if(pe[tName]) {
-        res = { props: pe[tName], parent: this.getObjInEditorByType(classInfo.parentName, peInfoByClass, postFix) };
+        res = { props: pe[tName], parent: this.getObjInEditorByTypeCore(classInfo.parentName, peInfoByClass, postFix, loc) };
         break;
       }
       if(!classInfo.parentName) break;
@@ -241,6 +262,23 @@ export class EditorLocalization {
     var strs = locale ? this.locales[locale] : this.getDefaultStrings();
     if (!strs) strs = this.getDefaultStrings();
     return strs;
+  }
+  private getPresetLocale(locale?: string): any {
+    if(!this.presetStrings) return undefined;
+    const presetLoc = locale || this.currentLocale || this.defaultLocale;
+    return this.presetStrings[presetLoc];
+  }
+  private getLocalesWithPreset(locale?: string): any {
+    const res = [];
+    const presetLoc = this.getPresetLocale(locale);
+    if(presetLoc) {
+      res.push(presetLoc);
+    }
+    const loc = this.getLocale(locale);
+    if(loc) {
+      res.push(loc);
+    }
+    return res;
   }
   private getValueInternal(value: any, prefix: string, locale: string = null): string {
     if (value === "" || value === null || value === undefined) return "";
