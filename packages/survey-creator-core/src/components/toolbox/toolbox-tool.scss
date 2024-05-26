@@ -111,6 +111,7 @@
     max-width: calcSize(100);
     padding-left: calcSize(1.5);
     padding-right: calcSize(2);
+    margin-right: calcSize(-2);
     opacity: 1;
 
     .svc-toolbox__item-title {
@@ -121,7 +122,7 @@
 
 .svc-toolbox:not(.svc-toolbox--compact) {
   .svc-toolbox__item:not(.sv-dots):focus,
-  .svc-toolbox__tool--hovered:not(.sv-dots),
+  .svc-toolbox__tool--hovered .svc-toolbox__item:not(.sv-dots),
   .svc-toolbox__item:not(.sv-dots):hover {
     overflow: hidden;
     border-radius: calcSize(12.5);
@@ -203,6 +204,10 @@
 
   .sv-popup__body-content {
     background: unset;
+    padding: 0;
+  }
+  .sv-popup__scrolling-content {
+    padding: calcSize(1) calcSize(2);
   }
 
   .sv-list__item:hover > .sv-list__item-body,
@@ -219,6 +224,9 @@
     box-shadow: $shadow-medium;
     transition: 0.1s ease-in-out;
 
+    &:hover,&:focus{
+      background-color: $background;
+    }
     .svc-toolbox__item-title {
       color: $foreground-dim;
     }
