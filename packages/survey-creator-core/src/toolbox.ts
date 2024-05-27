@@ -105,6 +105,15 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
     const type = this.typeName;
     return !!type && Serializer.isDescendantOf(type, "panelbase");
   }
+
+  public get classNames(): string {
+    return new CssClassBuilder()
+      .append("svc-toolbox__tool")
+      .append(this.css)
+      .append("svc-toolbox__tool--hovered", this.isHovered)
+      .append("svc-toolbox__tool--pressed", this.isPressed)
+      .toString();
+  }
 }
 
 /**
