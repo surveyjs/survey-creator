@@ -281,7 +281,7 @@ export class TabTestPlugin implements ICreatorPlugin {
       iconName: "icon-preview",
       active: true,
       visible: this.createVisibleUpdater(),
-      locTitleName: "ed.testSurvey",
+      locTitleName: "tabs.preview",
       showTitle: false,
       action: () => { }
     });

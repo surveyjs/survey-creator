@@ -12,7 +12,7 @@ export class TextareaJsonEditorModel extends JsonEditorBaseModel {
   @property({ defaultValue: "", onSet: (_, target) => target.onTextChanged() })
   protected _text: string;
   @propertyArray() private _errors: any[];
-  public ariaLabel: string = getLocString("ed.jsonEditor");
+  public ariaLabel: string = getLocString("tabs.editor");
   public textElement: HTMLTextAreaElement;
   @property({ defaultValue: false }) canShowErrors: boolean;
 
