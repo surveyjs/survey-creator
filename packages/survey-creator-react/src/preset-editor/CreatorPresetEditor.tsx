@@ -2,7 +2,7 @@ import React from "react";
 import { Base } from "survey-core";
 import { SurveyActionBar, SurveyElementBase, Survey } from "survey-react-ui";
 import { CreatorPresetEditorModel, SurveyCreatorModel } from "survey-creator-core";
-import { SurveyCreator, SurveyCreatorComponent } from "./SurveyCreator";
+import { SurveyCreator, SurveyCreatorComponent } from "../SurveyCreator";
 
 export class CreatorPresetEditor extends CreatorPresetEditorModel {
   protected createCreator(): SurveyCreatorModel {
