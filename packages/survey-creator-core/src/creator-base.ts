@@ -363,7 +363,8 @@ export class SurveyCreatorModel extends Base
     componentName?: string,
     index?: number
   ) {
-    const locStrName = !title ? "ed." + name : (title.indexOf("ed.") == 0 ? title : "");
+    const tabName = name === "test" ? "preview" : name;
+    const locStrName = !title ? "tabs." + tabName : (title.indexOf("ed.") == 0 ? title : "");
     if (!!locStrName) {
       title = undefined;
     }

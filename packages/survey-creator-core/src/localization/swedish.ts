@@ -16,6 +16,15 @@ export let svStrings = {
     convertTo: "Konvertera till",
     drag: "Dra element",
   },
+  // Creator tabs
+  tabs: {
+    preview: "Test enkät",
+    theme: "Teman",
+    translation: "Översättning",
+    designer: "Enkät Designer",
+    editor: "JSON Redigering",
+    logic: "Logik"
+  },
   // Question types
   qt: {
     default: "Standard",
@@ -48,7 +57,7 @@ export let svStrings = {
     text: "Frågor om textinmatning",
     containers: "Behållare",
     matrix: "Matris frågor",
-    misc: "Misc",
+    misc: "Misc"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -81,23 +90,16 @@ export let svStrings = {
     newQuestionName: "fråga",
     newPanelName: "panel",
     newTextItemName: "SMS",
-    testSurvey: "Test enkät",
-    themeSurvey: "Teman",
     defaultV2Theme: "Standard",
     modernTheme: "Modern",
     defaultTheme: "Standard (äldre)",
     testSurveyAgain: "Testa enkät igen",
     testSurveyWidth: "Enkät bredd: ",
     navigateToMsg: "Du var tvungen att navigera till",
-    logic: "Logik",
-    embedSurvey: "Integrerad Enkät",
-    translation: "Översättning",
     saveSurvey: "Spara Enkät",
     saveSurveyTooltip: "Spara undersökning",
     saveTheme: "Spara tema",
     saveThemeTooltip: "Spara tema",
-    designer: "Enkät Designer",
-    jsonEditor: "JSON Redigering",
     jsonHideErrors: "Dölj fel",
     jsonShowErrors: "Visa fel",
     undo: "Ångra",
@@ -227,13 +229,13 @@ export let svStrings = {
       question_visibilityText: "Gör frågan {0} synlig", //{0} question name
       question_enableText: "Gör frågan {0} aktivera", //{0} question name
       question_requireText: "Gör frågan {0} krävs", //{0} question name
-      question_resetValueText: "Återställ värde för fråga: {0}",
+      question_resetValueText: "Återställ värde för fråga: {0}", //{0} question name.
       question_setValueText: "Tilldela värde: {1} till fråga: {0}",
       column_visibilityText: "Synliggör kolumn {0} av fråga {1}", //{0} column name, {1} question name
       column_enableText: "Gör kolumn {0} av fråga {1} aktivera", //{0} column name, {1} question name
       column_requireText: "Gör kolumn {0} av fråga {1} krävs", //{0} column name, {1} question name
-      column_resetValueText: "Återställ cellvärde för kolumn: {0}",
-      column_setValueText: "Tilldela cellvärde: {1} till kolumn: {0}",
+      column_resetValueText: "Återställ cellvärde för kolumn: {0}", //{0} column name
+      column_setValueText: "Tilldela cellvärde: {1} till kolumn: {0}", //{0} column name and {1} setValueExpression
       setValueExpressionPlaceholder: " Ett uttryck vars resultat kommer att tilldelas målfrågan.",
       trigger_completeText: "Undersökningen blir slutförd",
       trigger_setvalueText: "ifrågasätts: {0} värde {1}", //{0} question name, {1} setValue
@@ -751,6 +753,7 @@ export let svStrings = {
       top: "På toppen",
       bottom: "I botten"
     },
+    // Creator tabs
     tabs: {
       panel: {
         layout: "Panelens layout"

@@ -16,6 +16,15 @@ export var huStrings = {
     convertTo: "Konvertálás",
     drag: "Elem mozgatása",
   },
+  // Creator tabs
+  tabs: {
+    preview: "Próba",
+    theme: "Témák",
+    translation: "Fordítás",
+    designer: "Kérdőívtervező",
+    editor: "JSON szerkesztő",
+    logic: "Logika"
+  },
   // Question types
   qt: {
     default: "Alapértelmezett",
@@ -48,7 +57,7 @@ export var huStrings = {
     text: "Szövegbeviteli kérdések",
     containers: "Konténerek",
     matrix: "Mátrix kérdések",
-    misc: "Misc",
+    misc: "Misc"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -81,23 +90,16 @@ export var huStrings = {
     newQuestionName: "kérdés",
     newPanelName: "panel",
     newTextItemName: "szöveg",
-    testSurvey: "Próba",
-    themeSurvey: "Témák",
     defaultV2Theme: "Alapértelmezett",
     modernTheme: "Modern",
     defaultTheme: "Alapértelmezett (örökölt)",
     testSurveyAgain: "Próba ismét",
     testSurveyWidth: "Kérdőív szélessége: ",
     navigateToMsg: "Navigálnia kellett",
-    logic: "Logika",
-    embedSurvey: "Kérdőív beágyazása",
-    translation: "Fordítás",
     saveSurvey: "Kérdőív mentése",
     saveSurveyTooltip: "Felmérés mentése",
     saveTheme: "Téma mentése",
     saveThemeTooltip: "Téma mentése",
-    designer: "Kérdőívtervező",
-    jsonEditor: "JSON szerkesztő",
     jsonHideErrors: "Hibák elrejtése",
     jsonShowErrors: "Hibák megjelenítése",
     undo: "Mégse",
@@ -227,13 +229,13 @@ export var huStrings = {
       question_visibilityText: "tegye láthatóvá a {0} kérdést", //{0} question name
       question_enableText: "Kérdés {0} engedélyezése", //{0} question name
       question_requireText: "Tegye fel a kérdést {0} szükséges", //{0} question name
-      question_resetValueText: "Kérdés visszaállítási értéke: {0}",
+      question_resetValueText: "Kérdés visszaállítási értéke: {0}", //{0} question name.
       question_setValueText: "Érték hozzárendelése: {1} a kérdéshez: {0}",
       column_visibilityText: "A {1}. kérdés {0} oszlopának láthatóvá tétele", //{0} column name, {1} question name
       column_enableText: "A kérdés {0} oszlopának engedélyezése {1} engedélyezése", //{0} column name, {1} question name
       column_requireText: "Tegye kötelezővé a kérdés {0} oszlopát {1}", //{0} column name, {1} question name
-      column_resetValueText: "Az oszlop cellaértékének visszaállítása: {0}",
-      column_setValueText: "Cellaérték hozzárendelése: {1} oszlophoz: {0}",
+      column_resetValueText: "Az oszlop cellaértékének visszaállítása: {0}", //{0} column name
+      column_setValueText: "Cellaérték hozzárendelése: {1} oszlophoz: {0}", //{0} column name and {1} setValueExpression
       setValueExpressionPlaceholder: " Olyan kifejezés, amelynek eredménye a célkérdéshez lesz rendelve.",
       trigger_completeText: "A felmérés befejeződött",
       trigger_setvalueText: "Kérdéses érték: {0} érték {1}", //{0} question name, {1} setValue
@@ -751,6 +753,7 @@ export var huStrings = {
       top: "A tetején",
       bottom: "Alul"
     },
+    // Creator tabs
     tabs: {
       panel: {
         layout: "Panel elrendezése"

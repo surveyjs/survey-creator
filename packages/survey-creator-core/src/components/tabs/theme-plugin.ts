@@ -62,7 +62,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   }
 
   constructor(private creator: SurveyCreatorModel) {
-    creator.addPluginTab("theme", this, "ed.themeSurvey");
+    creator.addPluginTab("theme", this);
     this.simulatorCssClasses = surveyCss[defaultV2ThemeName];
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
     this.sidebarTab = this.creator.sidebar.addTab("theme");
