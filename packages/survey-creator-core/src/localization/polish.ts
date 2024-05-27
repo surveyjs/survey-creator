@@ -1479,9 +1479,9 @@ var polishStrings = {
     "--base-unit": "Jednostka bazowa",
     advancedMode: "Tryb zaawansowany",
     themeName: "Kompozycja",
-    themeMode: "Wygląd pytania",
-    themeModePanels: "Domyślny",
-    themeModeLightweight: "Bez paneli",
+    isPanelless: "Wygląd pytania",
+    isPanellessPanels: "Domyślny",
+    isPanellessLightweight: "Bez paneli",
     themePaletteLight: "Światło",
     themePaletteDark: "Ciemny",
     primaryColor: "Kolor wiodący",
@@ -2261,9 +2261,9 @@ editorLocalization.locales["pl"] = polishStrings;
 // theme.--base-unit: "Base unit" => "Jednostka bazowa"
 // theme.groupAdvanced: "Advanced" => "Zaawansowany"
 // theme.themeName: "Theme" => "Kompozycja"
-// theme.themeMode: "Question appearance" => "Wygląd pytania"
-// theme.themeModePanels: "Default" => "Domyślny"
-// theme.themeModeLightweight: "Without Panels" => "Bez paneli"
+// theme.isPanellessss: "Question appearance" => "Wygląd pytania"
+// theme.isPanellessPanels: "Default" => "Domyślny"
+// theme.isPanellessLightweight: "Without Panels" => "Bez paneli"
 // theme.themePaletteLight: "Light" => "Światło"
 // theme.themePaletteDark: "Dark" => "Ciemny"
 // theme.primaryColor: "Accent color" => "Kolor wiodący"

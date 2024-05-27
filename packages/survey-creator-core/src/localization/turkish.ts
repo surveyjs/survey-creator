@@ -1479,9 +1479,9 @@ export var turkishStrings = {
     "--base-unit": "Temel ünite",
     advancedMode: "Gelişmiş mod",
     themeName: "Tema",
-    themeMode: "Soru görünümü",
-    themeModePanels: "Temerrüt",
-    themeModeLightweight: "Panelsiz",
+    isPanelless: "Soru görünümü",
+    isPanellessPanels: "Temerrüt",
+    isPanellessLightweight: "Panelsiz",
     themePaletteLight: "Işık",
     themePaletteDark: "Koyu",
     primaryColor: "Vurgu rengi",
@@ -1989,9 +1989,9 @@ editorLocalization.locales["tr"] = turkishStrings;
 // theme.--base-unit: "Base unit" => "Temel ünite"
 // theme.groupAdvanced: "Advanced" => "İleri"
 // theme.themeName: "Theme" => "Tema"
-// theme.themeMode: "Question appearance" => "Soru görünümü"
-// theme.themeModePanels: "Default" => "Temerrüt"
-// theme.themeModeLightweight: "Without Panels" => "Panelsiz"
+// theme.isPanellessss: "Question appearance" => "Soru görünümü"
+// theme.isPanellessPanels: "Default" => "Temerrüt"
+// theme.isPanellessLightweight: "Without Panels" => "Panelsiz"
 // theme.themePaletteLight: "Light" => "Işık"
 // theme.themePaletteDark: "Dark" => "Koyu"
 // theme.primaryColor: "Accent color" => "Vurgu rengi"

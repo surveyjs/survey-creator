@@ -1479,9 +1479,9 @@ export var fiStrings = {
     "--base-unit": "Perusyksikkö",
     advancedMode: "Edistynyt tila",
     themeName: "Teema",
-    themeMode: "Kysymyksen ulkonäkö",
-    themeModePanels: "Laiminlyönti",
-    themeModeLightweight: "Ilman paneeleja",
+    isPanelless: "Kysymyksen ulkonäkö",
+    isPanellessPanels: "Laiminlyönti",
+    isPanellessLightweight: "Ilman paneeleja",
     themePaletteLight: "Valo",
     themePaletteDark: "Tumma",
     primaryColor: "Korostusväri",
@@ -1993,9 +1993,9 @@ editorLocalization.locales["fi"] = fiStrings;
 // theme.--base-unit: "Base unit" => "Perusyksikkö"
 // theme.groupAdvanced: "Advanced" => "Edistynyt"
 // theme.themeName: "Theme" => "Teema"
-// theme.themeMode: "Question appearance" => "Kysymyksen ulkonäkö"
-// theme.themeModePanels: "Default" => "Laiminlyönti"
-// theme.themeModeLightweight: "Without Panels" => "Ilman paneeleja"
+// theme.isPanellessss: "Question appearance" => "Kysymyksen ulkonäkö"
+// theme.isPanellessPanels: "Default" => "Laiminlyönti"
+// theme.isPanellessLightweight: "Without Panels" => "Ilman paneeleja"
 // theme.themePaletteLight: "Light" => "Valo"
 // theme.themePaletteDark: "Dark" => "Tumma"
 // theme.primaryColor: "Accent color" => "Korostusväri"

@@ -1479,9 +1479,9 @@ export var skStrings = {
     "--base-unit": "Základná jednotka",
     advancedMode: "Rozšírený režim",
     themeName: "Téma",
-    themeMode: "Vzhľad otázky",
-    themeModePanels: "Predvolený",
-    themeModeLightweight: "Bez panelov",
+    isPanelless: "Vzhľad otázky",
+    isPanellessPanels: "Predvolený",
+    isPanellessLightweight: "Bez panelov",
     themePaletteLight: "Svetlo",
     themePaletteDark: "Tmavý",
     primaryColor: "Farba akcentu",
@@ -1947,9 +1947,9 @@ editorLocalization.locales["sk"] = skStrings;
 // theme.--base-unit: "Base unit" => "Základná jednotka"
 // theme.groupAdvanced: "Advanced" => "Pokročilý"
 // theme.themeName: "Theme" => "Téma"
-// theme.themeMode: "Question appearance" => "Vzhľad otázky"
-// theme.themeModePanels: "Default" => "Predvolený"
-// theme.themeModeLightweight: "Without Panels" => "Bez panelov"
+// theme.isPanellessss: "Question appearance" => "Vzhľad otázky"
+// theme.isPanellessPanels: "Default" => "Predvolený"
+// theme.isPanellessLightweight: "Without Panels" => "Bez panelov"
 // theme.themePaletteLight: "Light" => "Svetlo"
 // theme.themePaletteDark: "Dark" => "Tmavý"
 // theme.primaryColor: "Accent color" => "Farba akcentu"

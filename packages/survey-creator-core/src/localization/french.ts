@@ -1479,9 +1479,9 @@ var frenchTranslation = {
     "--base-unit": "Unité de base",
     advancedMode: "Mode avancé",
     themeName: "Thème",
-    themeMode: "Apparence de la question",
-    themeModePanels: "Par défaut",
-    themeModeLightweight: "Sans section",
+    isPanelless: "Apparence de la question",
+    isPanellessPanels: "Par défaut",
+    isPanellessLightweight: "Sans section",
     themePaletteLight: "Clair",
     themePaletteDark: "Sombre",
     primaryColor: "Couleur d’accentuation",
@@ -2054,9 +2054,9 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // theme.--base-unit: "Base unit" => "Unité de base"
 // theme.groupAdvanced: "Advanced" => "Avancé"
 // theme.themeName: "Theme" => "Thème"
-// theme.themeMode: "Question appearance" => "Apparence de la question"
-// theme.themeModePanels: "Default" => "Faire défaut"
-// theme.themeModeLightweight: "Without Panels" => "Sans panneaux"
+// theme.isPanellessss: "Question appearance" => "Apparence de la question"
+// theme.isPanellessPanels: "Default" => "Faire défaut"
+// theme.isPanellessLightweight: "Without Panels" => "Sans panneaux"
 // theme.themePaletteLight: "Light" => "Lumière"
 // theme.themePaletteDark: "Dark" => "Sombre"
 // theme.primaryColor: "Accent color" => "Couleur d’accentuation"

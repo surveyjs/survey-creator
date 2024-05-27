@@ -1479,9 +1479,9 @@ export var hrStrings = {
     "--base-unit": "Osnovna jedinica",
     advancedMode: "Napredni način rada",
     themeName: "Tema",
-    themeMode: "Izgled pitanja",
-    themeModePanels: "Propust",
-    themeModeLightweight: "Bez panela",
+    isPanelless: "Izgled pitanja",
+    isPanellessPanels: "Propust",
+    isPanellessLightweight: "Bez panela",
     themePaletteLight: "Svjetlo",
     themePaletteDark: "Mračan",
     primaryColor: "Boja isticanja",
@@ -1987,9 +1987,9 @@ editorLocalization.locales["hr"] = hrStrings;
 // theme.--base-unit: "Base unit" => "Osnovna jedinica"
 // theme.groupAdvanced: "Advanced" => "Napredan"
 // theme.themeName: "Theme" => "Tema"
-// theme.themeMode: "Question appearance" => "Izgled pitanja"
-// theme.themeModePanels: "Default" => "Propust"
-// theme.themeModeLightweight: "Without Panels" => "Bez panela"
+// theme.isPanellessss: "Question appearance" => "Izgled pitanja"
+// theme.isPanellessPanels: "Default" => "Propust"
+// theme.isPanellessLightweight: "Without Panels" => "Bez panela"
 // theme.themePaletteLight: "Light" => "Svjetlo"
 // theme.themePaletteDark: "Dark" => "Mračan"
 // theme.primaryColor: "Accent color" => "Boja isticanja"

@@ -1479,9 +1479,9 @@ export var koreanStrings = {
     "--base-unit": "베이스 유닛",
     advancedMode: "어드밴스드 모드",
     themeName: "주제",
-    themeMode: "질문 모양",
-    themeModePanels: "기본값",
-    themeModeLightweight: "패널 없음",
+    isPanelless: "질문 모양",
+    isPanellessPanels: "기본값",
+    isPanellessLightweight: "패널 없음",
     themePaletteLight: "광",
     themePaletteDark: "어둠",
     primaryColor: "강조 색상",
@@ -2197,9 +2197,9 @@ editorLocalization.locales["ko"] = koreanStrings;
 // theme.--base-unit: "Base unit" => "베이스 유닛"
 // theme.groupAdvanced: "Advanced" => "고급"
 // theme.themeName: "Theme" => "주제"
-// theme.themeMode: "Question appearance" => "질문 모양"
-// theme.themeModePanels: "Default" => "기본값"
-// theme.themeModeLightweight: "Without Panels" => "패널 없음"
+// theme.isPanellessss: "Question appearance" => "질문 모양"
+// theme.isPanellessPanels: "Default" => "기본값"
+// theme.isPanellessLightweight: "Without Panels" => "패널 없음"
 // theme.themePaletteLight: "Light" => "광"
 // theme.themePaletteDark: "Dark" => "어둠"
 // theme.primaryColor: "Accent color" => "강조 색상"

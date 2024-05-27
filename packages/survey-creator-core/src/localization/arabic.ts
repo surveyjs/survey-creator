@@ -1479,9 +1479,9 @@ export var arStrings = {
     "--base-unit": "وحدة القاعدة",
     advancedMode: "الوضع المتقدم",
     themeName: "موضوع",
-    themeMode: "مظهر السؤال",
-    themeModePanels: "افتراضي",
-    themeModeLightweight: "بدون لوحات",
+    isPanelless: "مظهر السؤال",
+    isPanellessPanels: "افتراضي",
+    isPanellessLightweight: "بدون لوحات",
     themePaletteLight: "ضوء",
     themePaletteDark: "داكن",
     primaryColor: "لون التمييز",
@@ -1903,9 +1903,9 @@ editorLocalization.locales["ar"] = arStrings;
 // theme.--base-unit: "Base unit" => "وحدة القاعدة"
 // theme.groupAdvanced: "Advanced" => "متقدم"
 // theme.themeName: "Theme" => "موضوع"
-// theme.themeMode: "Question appearance" => "مظهر السؤال"
-// theme.themeModePanels: "Default" => "افتراضي"
-// theme.themeModeLightweight: "Without Panels" => "بدون لوحات"
+// theme.isPanellessss: "Question appearance" => "مظهر السؤال"
+// theme.isPanellessPanels: "Default" => "افتراضي"
+// theme.isPanellessLightweight: "Without Panels" => "بدون لوحات"
 // theme.themePaletteLight: "Light" => "ضوء"
 // theme.themePaletteDark: "Dark" => "داكن"
 // theme.primaryColor: "Accent color" => "لون التمييز"

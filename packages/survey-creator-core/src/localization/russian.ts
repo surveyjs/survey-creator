@@ -1469,7 +1469,13 @@ export var ruStrings = {
     allowCameraAccess: "Разрешить доступ к камере",
     scaleColorMode: "Цветовой режим масштабирования",
     rateColorMode: "Оцените цветовой режим",
-    copyDisplayValue: "Копирование отображаемого значения"
+    copyDisplayValue: "Копирование отображаемого значения",
+    surveyTitleFont: "Шрифт заголовка опроса",
+    surveyDescriptionFont: "Шрифт описания опроса",
+    panelBackgroundTransparency: "Непрозрачность фона панели",
+    questionBackgroundTransparency: "Непрозрачность фона вопроса",
+    accentBackground: "Акцентный фон",
+    accentForeground: "Акцент на переднем плане",
   },
   theme: {
     "--background": "Цвет фона",
@@ -1479,9 +1485,9 @@ export var ruStrings = {
     "--base-unit": "Базовый блок",
     advancedMode: "Расширенный режим",
     themeName: "Тема",
-    themeMode: "Внешний вид вопроса",
-    themeModePanels: "По умолчанию",
-    themeModeLightweight: "Без панелей",
+    isPanelless: "Внешний вид вопроса",
+    isPanellessPanels: "По умолчанию",
+    isPanellessLightweight: "Без панелей",
     themePaletteLight: "Свет",
     themePaletteDark: "Темный",
     primaryColor: "Акцентный цвет",
@@ -1498,16 +1504,12 @@ export var ruStrings = {
     backgroundOpacity: "Непрозрачность",
     backgroundImageAttachmentFixed: "Зафиксировать",
     backgroundImageAttachmentScroll: "Прокручивать",
-    panelBackgroundTransparency: "Непрозрачность фона панели",
-    questionBackgroundTransparency: "Непрозрачность фона вопроса",
     questionTitle: "Шрифт заголовка вопроса",
     editorPanel: "Элемент ввода",
     backgroundCornerRadius: "Радиус фона и угла",
     backcolor: "Фон по умолчанию",
     hovercolor: "Фон при наведении курсора",
     borderDecoration: "Оформление бордюра",
-    accentBackground: "Акцентный фон",
-    accentForeground: "Акцент на переднем плане",
     primaryForecolor: "Цвет по умолчанию",
     primaryForecolorLight: "Отключенный цвет",
     colorsTitle: "Знамя",
@@ -1526,8 +1528,6 @@ export var ruStrings = {
     fontWeightBold: "Смелый",
     scale: "Шкала",
     cornerRadius: "Радиус угла",
-    surveyTitleFont: "Шрифт заголовка опроса",
-    surveyDescriptionFont: "Шрифт описания опроса",
     pageTitle: "Шрифт заголовка страницы",
     titleFont: "Шрифт заголовка",
     descriptionFont: "Описание шрифта",
@@ -2056,9 +2056,9 @@ editorLocalization.locales["ru"] = ruStrings;
 // theme.--base-unit: "Base unit" => "Базовый блок"
 // theme.groupAdvanced: "Advanced" => "Продвинутый"
 // theme.themeName: "Theme" => "Тема"
-// theme.themeMode: "Question appearance" => "Внешний вид вопроса"
-// theme.themeModePanels: "Default" => "По умолчанию"
-// theme.themeModeLightweight: "Without Panels" => "Без панелей"
+// theme.isPanelless: "Question appearance" => "Внешний вид вопроса"
+// theme.isPanellessPanels: "Default" => "По умолчанию"
+// theme.isPanellessLightweight: "Without Panels" => "Без панелей"
 // theme.themePaletteLight: "Light" => "Свет"
 // theme.themePaletteDark: "Dark" => "Темный"
 // theme.primaryColor: "Accent color" => "Акцентный цвет"

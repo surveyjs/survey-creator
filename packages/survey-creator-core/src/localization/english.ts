@@ -1491,7 +1491,9 @@ export var enStrings = {
     allowCameraAccess: "Allow camera access", // Auto-generated string
     scaleColorMode: "Rating icon color mode",
     rateColorMode: "Smileys color scheme",
-    copyDisplayValue: "Copy display value" // Auto-generated string
+    copyDisplayValue: "Copy display value", // Auto-generated string
+    surveyTitleFont: "Survey title font",
+    surveyDescriptionFont: "Survey description font",
   },
   theme: {
     "--background": "Background color",
@@ -1501,9 +1503,9 @@ export var enStrings = {
     "--base-unit": "Base unit",
     advancedMode: "Advanced mode",
     themeName: "Theme",
-    themeMode: "Question appearance",
-    themeModePanels: "Default",
-    themeModeLightweight: "Without Panels",
+    isPanelless: "Question appearance",
+    isPanellessPanels: "Default",
+    isPanellessLightweight: "Without Panels",
     themePaletteLight: "Light",
     themePaletteDark: "Dark",
     primaryColor: "Accent color",
@@ -1548,8 +1550,6 @@ export var enStrings = {
     fontWeightBold: "Bold",
     scale: "Scale",
     cornerRadius: "Corner radius",
-    surveyTitleFont: "Survey title font",
-    surveyDescriptionFont: "Survey description font",
     pageTitle: "Page",
     titleFont: "Title font",
     descriptionFont: "Description font",

@@ -1479,9 +1479,9 @@ export let svStrings = {
     "--base-unit": "Basenhet",
     advancedMode: "Avancerat läge",
     themeName: "Tema",
-    themeMode: "Fråga utseende",
-    themeModePanels: "Standard",
-    themeModeLightweight: "Utan paneler",
+    isPanelless: "Fråga utseende",
+    isPanellessPanels: "Standard",
+    isPanellessLightweight: "Utan paneler",
     themePaletteLight: "Ljus",
     themePaletteDark: "Mörk",
     primaryColor: "Accentfärg",
@@ -2171,9 +2171,9 @@ editorLocalization.locales["sv"] = svStrings;
 // theme.--base-unit: "Base unit" => "Basenhet"
 // theme.groupAdvanced: "Advanced" => "Avancerad"
 // theme.themeName: "Theme" => "Tema"
-// theme.themeMode: "Question appearance" => "Fråga utseende"
-// theme.themeModePanels: "Default" => "Standard"
-// theme.themeModeLightweight: "Without Panels" => "Utan paneler"
+// theme.isPanellessss: "Question appearance" => "Fråga utseende"
+// theme.isPanellessPanels: "Default" => "Standard"
+// theme.isPanellessLightweight: "Without Panels" => "Utan paneler"
 // theme.themePaletteLight: "Light" => "Ljus"
 // theme.themePaletteDark: "Dark" => "Mörk"
 // theme.primaryColor: "Accent color" => "Accentfärg"

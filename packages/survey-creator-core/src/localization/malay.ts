@@ -1479,9 +1479,9 @@ export var msStrings = {
     "--base-unit": "Unit asas",
     advancedMode: "Mod lanjutan",
     themeName: "Tema",
-    themeMode: "Penampilan soalan",
-    themeModePanels: "Lalai",
-    themeModeLightweight: "Tanpa Panel",
+    isPanelless: "Penampilan soalan",
+    isPanellessPanels: "Lalai",
+    isPanellessLightweight: "Tanpa Panel",
     themePaletteLight: "Cahaya",
     themePaletteDark: "Gelap",
     primaryColor: "Warna aksen",
@@ -1947,9 +1947,9 @@ editorLocalization.locales["ms"] = msStrings;
 // theme.--base-unit: "Base unit" => "Unit asas"
 // theme.groupAdvanced: "Advanced" => "Lanjutan"
 // theme.themeName: "Theme" => "Tema"
-// theme.themeMode: "Question appearance" => "Penampilan soalan"
-// theme.themeModePanels: "Default" => "Lalai"
-// theme.themeModeLightweight: "Without Panels" => "Tanpa Panel"
+// theme.isPanellessss: "Question appearance" => "Penampilan soalan"
+// theme.isPanellessPanels: "Default" => "Lalai"
+// theme.isPanellessLightweight: "Without Panels" => "Tanpa Panel"
 // theme.themePaletteLight: "Light" => "Cahaya"
 // theme.themePaletteDark: "Dark" => "Gelap"
 // theme.primaryColor: "Accent color" => "Warna aksen"

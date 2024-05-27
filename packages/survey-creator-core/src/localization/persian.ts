@@ -1479,9 +1479,9 @@ var persianStrings = {
     "--base-unit": "واحد پایه",
     advancedMode: "حالت پیشرفته",
     themeName: "تم",
-    themeMode: "ظاهر سوال",
-    themeModePanels: "پیش فرض",
-    themeModeLightweight: "بدون پانل",
+    isPanelless: "ظاهر سوال",
+    isPanellessPanels: "پیش فرض",
+    isPanellessLightweight: "بدون پانل",
     themePaletteLight: "نور",
     themePaletteDark: "تاریک",
     primaryColor: "رنگ لهجه",
@@ -1948,9 +1948,9 @@ editorLocalization.locales["fa"] = persianStrings;
 // theme.--base-unit: "Base unit" => "واحد پایه"
 // theme.groupAdvanced: "Advanced" => "پیشرفته"
 // theme.themeName: "Theme" => "تم"
-// theme.themeMode: "Question appearance" => "ظاهر سوال"
-// theme.themeModePanels: "Default" => "پیش فرض"
-// theme.themeModeLightweight: "Without Panels" => "بدون پانل"
+// theme.isPanellessss: "Question appearance" => "ظاهر سوال"
+// theme.isPanellessPanels: "Default" => "پیش فرض"
+// theme.isPanellessLightweight: "Without Panels" => "بدون پانل"
 // theme.themePaletteLight: "Light" => "نور"
 // theme.themePaletteDark: "Dark" => "تاریک"
 // theme.primaryColor: "Accent color" => "رنگ لهجه"

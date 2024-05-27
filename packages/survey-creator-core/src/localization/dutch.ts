@@ -1479,9 +1479,9 @@ export var nlStrings = {
     "--base-unit": "Basiseenheid",
     advancedMode: "Geavanceerde modus",
     themeName: "Thema",
-    themeMode: "Uiterlijk van de vraag",
-    themeModePanels: "Verstek",
-    themeModeLightweight: "Zonder panelen",
+    isPanelless: "Uiterlijk van de vraag",
+    isPanellessPanels: "Verstek",
+    isPanellessLightweight: "Zonder panelen",
     themePaletteLight: "Licht",
     themePaletteDark: "Donker",
     primaryColor: "Accentkleur",
@@ -1973,9 +1973,9 @@ editorLocalization.locales["nl"] = nlStrings;
 // theme.--base-unit: "Base unit" => "Basiseenheid"
 // theme.groupAdvanced: "Advanced" => "Geavanceerd"
 // theme.themeName: "Theme" => "Thema"
-// theme.themeMode: "Question appearance" => "Uiterlijk van de vraag"
-// theme.themeModePanels: "Default" => "Verstek"
-// theme.themeModeLightweight: "Without Panels" => "Zonder panelen"
+// theme.isPanellessss: "Question appearance" => "Uiterlijk van de vraag"
+// theme.isPanellessPanels: "Default" => "Verstek"
+// theme.isPanellessLightweight: "Without Panels" => "Zonder panelen"
 // theme.themePaletteLight: "Light" => "Licht"
 // theme.themePaletteDark: "Dark" => "Donker"
 // theme.primaryColor: "Accent color" => "Accentkleur"

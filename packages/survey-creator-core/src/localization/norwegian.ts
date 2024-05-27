@@ -1479,9 +1479,9 @@ export var nbStrings = {
     "--base-unit": "Basisenhet",
     advancedMode: "Avansert modus",
     themeName: "Tema",
-    themeMode: "Spørsmål utseende",
-    themeModePanels: "Standard",
-    themeModeLightweight: "Uten paneler",
+    isPanelless: "Spørsmål utseende",
+    isPanellessPanels: "Standard",
+    isPanellessLightweight: "Uten paneler",
     themePaletteLight: "Lys",
     themePaletteDark: "Mørk",
     primaryColor: "Uthevingsfarge",
@@ -1997,9 +1997,9 @@ editorLocalization.locales["nb"] = nbStrings;
 // theme.--base-unit: "Base unit" => "Basisenhet"
 // theme.groupAdvanced: "Advanced" => "Avansert"
 // theme.themeName: "Theme" => "Tema"
-// theme.themeMode: "Question appearance" => "Spørsmål utseende"
-// theme.themeModePanels: "Default" => "Standard"
-// theme.themeModeLightweight: "Without Panels" => "Uten paneler"
+// theme.isPanellessss: "Question appearance" => "Spørsmål utseende"
+// theme.isPanellessPanels: "Default" => "Standard"
+// theme.isPanellessLightweight: "Without Panels" => "Uten paneler"
 // theme.themePaletteLight: "Light" => "Lys"
 // theme.themePaletteDark: "Dark" => "Mørk"
 // theme.primaryColor: "Accent color" => "Uthevingsfarge"

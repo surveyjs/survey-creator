@@ -1479,9 +1479,9 @@ export var mnStrings = {
     "--base-unit": "Үндсэн нэгж",
     advancedMode: "Дэвшилтэт хэв маяг",
     themeName: "Сэдэв",
-    themeMode: "Асуулт хариултын төрх",
-    themeModePanels: "Дефолт",
-    themeModeLightweight: "Панелгүйгээр",
+    isPanelless: "Асуулт хариултын төрх",
+    isPanellessPanels: "Дефолт",
+    isPanellessLightweight: "Панелгүйгээр",
     themePaletteLight: "Гэрэл",
     themePaletteDark: "Харанхуй",
     primaryColor: "Акцент өнгө",
@@ -1649,9 +1649,9 @@ editorLocalization.locales["mn"] = mnStrings;
 // theme.--base-unit: "Base unit" => "Үндсэн нэгж"
 // theme.groupAdvanced: "Advanced" => "Өндөр хөгжсөн"
 // theme.themeName: "Theme" => "Сэдэв"
-// theme.themeMode: "Question appearance" => "Асуулт хариултын төрх"
-// theme.themeModePanels: "Default" => "Дефолт"
-// theme.themeModeLightweight: "Without Panels" => "Панелгүйгээр"
+// theme.isPanellessss: "Question appearance" => "Асуулт хариултын төрх"
+// theme.isPanellessPanels: "Default" => "Дефолт"
+// theme.isPanellessLightweight: "Without Panels" => "Панелгүйгээр"
 // theme.themePaletteLight: "Light" => "Гэрэл"
 // theme.themePaletteDark: "Dark" => "Харанхуй"
 // theme.primaryColor: "Accent color" => "Акцент өнгө"

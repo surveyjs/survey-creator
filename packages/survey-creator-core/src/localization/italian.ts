@@ -1479,9 +1479,9 @@ var italianTranslation = {
     "--base-unit": "Unità base",
     advancedMode: "Modalità avanzata",
     themeName: "Tema",
-    themeMode: "Aspetto della domanda",
-    themeModePanels: "Default",
-    themeModeLightweight: "Senza pannelli",
+    isPanelless: "Aspetto della domanda",
+    isPanellessPanels: "Default",
+    isPanellessLightweight: "Senza pannelli",
     themePaletteLight: "Leggero",
     themePaletteDark: "Oscuro",
     primaryColor: "Colore principale",
@@ -1751,9 +1751,9 @@ editorLocalization.locales["it"] = italianTranslation;
 // theme.--base-unit: "Base unit" => "Unità base"
 // theme.groupAdvanced: "Advanced" => "Avanzato"
 // theme.themeName: "Theme" => "Tema"
-// theme.themeMode: "Question appearance" => "Aspetto della domanda"
-// theme.themeModePanels: "Default" => "Default"
-// theme.themeModeLightweight: "Without Panels" => "Senza pannelli"
+// theme.isPanellessss: "Question appearance" => "Aspetto della domanda"
+// theme.isPanellessPanels: "Default" => "Default"
+// theme.isPanellessLightweight: "Without Panels" => "Senza pannelli"
 // theme.themePaletteLight: "Light" => "Leggero"
 // theme.themePaletteDark: "Dark" => "Oscuro"
 // theme.primaryColor: "Accent color" => "Colore principale"

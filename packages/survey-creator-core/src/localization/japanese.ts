@@ -1479,9 +1479,9 @@ export var jaStrings = {
     "--base-unit": "ベースユニット",
     advancedMode: "詳細モード",
     themeName: "テーマ",
-    themeMode: "質問の外観",
-    themeModePanels: "デフォルト",
-    themeModeLightweight: "パネルなし",
+    isPanelless: "質問の外観",
+    isPanellessPanels: "デフォルト",
+    isPanellessLightweight: "パネルなし",
     themePaletteLight: "光",
     themePaletteDark: "暗い",
     primaryColor: "アクセントカラー",
@@ -1993,9 +1993,9 @@ editorLocalization.locales["ja"] = jaStrings;
 // theme.--base-unit: "Base unit" => "ベースユニット"
 // theme.groupAdvanced: "Advanced" => "アドバンスド"
 // theme.themeName: "Theme" => "テーマ"
-// theme.themeMode: "Question appearance" => "質問の外観"
-// theme.themeModePanels: "Default" => "デフォルト"
-// theme.themeModeLightweight: "Without Panels" => "パネルなし"
+// theme.isPanellessss: "Question appearance" => "質問の外観"
+// theme.isPanellessPanels: "Default" => "デフォルト"
+// theme.isPanellessLightweight: "Without Panels" => "パネルなし"
 // theme.themePaletteLight: "Light" => "光"
 // theme.themePaletteDark: "Dark" => "暗い"
 // theme.primaryColor: "Accent color" => "アクセントカラー"

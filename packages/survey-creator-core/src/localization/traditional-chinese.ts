@@ -1479,9 +1479,9 @@ var traditionalChineseTranslation = {
     "--base-unit": "基本單元",
     advancedMode: "高級模式",
     themeName: "主題",
-    themeMode: "問題外觀",
-    themeModePanels: "違約",
-    themeModeLightweight: "不帶面板",
+    isPanelless: "問題外觀",
+    isPanellessPanels: "違約",
+    isPanellessLightweight: "不帶面板",
     themePaletteLight: "光",
     themePaletteDark: "黑暗",
     primaryColor: "強調文字顏色",
@@ -2266,9 +2266,9 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // theme.--base-unit: "Base unit" => "基本單元"
 // theme.groupAdvanced: "Advanced" => "高深"
 // theme.themeName: "Theme" => "主題"
-// theme.themeMode: "Question appearance" => "問題外觀"
-// theme.themeModePanels: "Default" => "違約"
-// theme.themeModeLightweight: "Without Panels" => "不帶面板"
+// theme.isPanellessss: "Question appearance" => "問題外觀"
+// theme.isPanellessPanels: "Default" => "違約"
+// theme.isPanellessLightweight: "Without Panels" => "不帶面板"
 // theme.themePaletteLight: "Light" => "光"
 // theme.themePaletteDark: "Dark" => "黑暗"
 // theme.primaryColor: "Accent color" => "強調文字顏色"

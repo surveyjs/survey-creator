@@ -665,10 +665,10 @@ Serializer.addClass(
     }, {
       type: "buttongroup",
       name: "isPanelless",
-      displayName: getLocString("theme.themeMode"),
+      displayName: getLocString("theme.isPanelless"),
       choices: [
-        { value: false, text: getLocString("theme.themeModePanels") },
-        { value: true, text: getLocString("theme.themeModeLightweight") }],
+        { value: false, text: getLocString("theme.isPanellessPanels") },
+        { value: true, text: getLocString("theme.isPanellessLightweight") }],
       category: "general",
       enableIf: (obj: ThemeModel): boolean => {
         return !obj || obj.hasVariations(false);

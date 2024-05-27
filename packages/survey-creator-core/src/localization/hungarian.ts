@@ -1479,9 +1479,9 @@ export var huStrings = {
     "--base-unit": "Alapegység",
     advancedMode: "Speciális mód",
     themeName: "Téma",
-    themeMode: "Kérdés megjelenése",
-    themeModePanels: "Alapértelmezett",
-    themeModeLightweight: "Panelek nélkül",
+    isPanelless: "Kérdés megjelenése",
+    isPanellessPanels: "Alapértelmezett",
+    isPanellessLightweight: "Panelek nélkül",
     themePaletteLight: "Fény",
     themePaletteDark: "Sötét",
     primaryColor: "Kiemelő szín",
@@ -2147,9 +2147,9 @@ editorLocalization.locales["hu"] = huStrings;
 // theme.--base-unit: "Base unit" => "Alapegység"
 // theme.groupAdvanced: "Advanced" => "Haladó"
 // theme.themeName: "Theme" => "Téma"
-// theme.themeMode: "Question appearance" => "Kérdés megjelenése"
-// theme.themeModePanels: "Default" => "Alapértelmezett"
-// theme.themeModeLightweight: "Without Panels" => "Panelek nélkül"
+// theme.isPanellessss: "Question appearance" => "Kérdés megjelenése"
+// theme.isPanellessPanels: "Default" => "Alapértelmezett"
+// theme.isPanellessLightweight: "Without Panels" => "Panelek nélkül"
 // theme.themePaletteLight: "Light" => "Fény"
 // theme.themePaletteDark: "Dark" => "Sötét"
 // theme.primaryColor: "Accent color" => "Kiemelő szín"
