@@ -266,7 +266,7 @@ export class QuestionToolbox
   }
   private getCategoryTitle(name: string): string {
     if(this.categoriesTitles[name]) return this.categoriesTitles[name];
-    return getLocString("toolbox_categories." + name);
+    return getLocString("toolboxCategories." + name);
   }
   private onActiveCategoryChanged(newValue: string) {
     const categories: Array<QuestionToolboxCategory> = this.categories;

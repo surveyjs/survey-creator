@@ -42,7 +42,7 @@ var germanTranslation = {
     signaturepad: "Unterschrift",
     buttongroup: "Schaltfläche-Gruppe"
   },
-  toolbox_categories: {
+  toolboxCategories: {
     general: "Allgemein",
     choice: "Auswahl-Fragen",
     text: "Text-Eingabe-Fragen",

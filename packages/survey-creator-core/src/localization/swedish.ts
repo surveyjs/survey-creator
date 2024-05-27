@@ -42,7 +42,7 @@ export let svStrings = {
     signaturepad: "Underskrift",
     buttongroup: "Knappgrupp"
   },
-  toolbox_categories: {
+  toolboxCategories: {
     general: "Generellt",
     choice: "Frågor om val",
     text: "Frågor om textinmatning",

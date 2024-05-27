@@ -42,7 +42,7 @@ var persianStrings = {
     signaturepad: "قسمت امضا",
     buttongroup: "گروه دکمه"
   },
-  toolbox_categories: {
+  toolboxCategories: {
     general: "عمومی",
     choice: "سوالات انتخاب",
     text: "سوالات ورودی متن",

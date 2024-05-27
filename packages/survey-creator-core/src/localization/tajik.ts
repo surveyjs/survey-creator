@@ -44,7 +44,7 @@ export var tgStrings = {
     // signaturepad: "Signature",
     // buttongroup: "Button Group"
   },
-  toolbox_categories: {
+  toolboxCategories: {
     general: "Умумӣ",
     // choice: "Choice Questions",
     // text: "Text Input Questions",

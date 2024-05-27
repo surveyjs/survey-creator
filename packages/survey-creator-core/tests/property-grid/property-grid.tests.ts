@@ -628,25 +628,29 @@ test("Show property editor for condition/expression", () => {
   ).toBeTruthy(); //defaultValueExpression is here
 });
 test("Test options.allowEditExpressionsInTextEditor", () => {
-  var question = new QuestionTextModel("q1");
-  var options = new EmptySurveyCreatorOptions();
+  const question = new QuestionTextModel("q1");
+  question.visibleIf = "{q2} = 'abc'";
+  const options = new EmptySurveyCreatorOptions();
   options.allowEditExpressionsInTextEditor = false;
   var propertyGrid = new PropertyGridModelTester(question, options);
-  var conditionQuestion = propertyGrid.survey.getQuestionByName("visibleIf");
-  var expressionQuestion = propertyGrid.survey.getQuestionByName(
-    "defaultValueExpression"
-  );
-  expect(conditionQuestion.isReadOnly).toBeTruthy();
-  expect(expressionQuestion.isReadOnly).toBeFalsy();
+  var conditionQuestion = <QuestionCommentModel>propertyGrid.survey.getQuestionByName("visibleIf");
+  var expressionQuestion = <QuestionCommentModel>propertyGrid.survey.getQuestionByName("defaultValueExpression");
+  expect(conditionQuestion.onKeyDownPreprocess).toBeTruthy();
+  expect(expressionQuestion.onKeyDownPreprocess).toBeFalsy();
+  expect(conditionQuestion.getTitleToolbar()).toBeTruthy();
+  expect(conditionQuestion.titleActions).toHaveLength(2);
+  expect(conditionQuestion.titleActions[1].enabled).toBeTruthy();
 
   options.allowEditExpressionsInTextEditor = true;
   propertyGrid = new PropertyGridModelTester(question, options);
-  conditionQuestion = propertyGrid.survey.getQuestionByName("visibleIf");
-  expressionQuestion = propertyGrid.survey.getQuestionByName(
-    "defaultValueExpression"
-  );
-  expect(conditionQuestion.isReadOnly).toBeFalsy();
-  expect(expressionQuestion.isReadOnly).toBeFalsy();
+  conditionQuestion = <QuestionCommentModel>propertyGrid.survey.getQuestionByName("visibleIf");
+  expressionQuestion = <QuestionCommentModel>propertyGrid.survey.getQuestionByName("defaultValueExpression");
+  expect(conditionQuestion.onKeyDownPreprocess).toBeFalsy();
+  expect(expressionQuestion.onKeyDownPreprocess).toBeFalsy();
+  expect(conditionQuestion.getTitleToolbar()).toBeTruthy();
+  expect(conditionQuestion.titleActions).toHaveLength(3);
+  expect(conditionQuestion.titleActions[1].enabled).toBeTruthy();
+  expect(conditionQuestion.titleActions[2].enabled).toBeTruthy();
 });
 
 test("Support question property editor", () => {
@@ -3375,4 +3379,22 @@ test("It is impossible to clear value for numeric property, bug##5395", () => {
   expect(imageHeightQuestion.isEmpty()).toBeTruthy();
   expect(question.imageHeight).not.toBe(0);
   expect(question.imageHeight).toBeFalsy();
+});
+test("Show commentText & commentPlaceholder on setting showCommentArea, bug##5527", () => {
+  const question = new QuestionImagePickerModel("q1");
+  const propertyGrid = new PropertyGridModelTester(question);
+  const showCommentAreaQuestion = propertyGrid.survey.getQuestionByName("showCommentArea");
+  const commentTextQuestion = propertyGrid.survey.getQuestionByName("commentText");
+  const commentPlaceholderAreaQuestion = propertyGrid.survey.getQuestionByName("commentPlaceholder");
+  expect(showCommentAreaQuestion).toBeTruthy();
+  expect(commentTextQuestion).toBeTruthy();
+  expect(commentPlaceholderAreaQuestion).toBeTruthy();
+  expect(showCommentAreaQuestion.isVisible).toBeTruthy();
+  expect(commentTextQuestion.isVisible).toBeFalsy();
+  expect(commentPlaceholderAreaQuestion.isVisible).toBeFalsy();
+  showCommentAreaQuestion.value = true;
+  expect(question.showCommentArea).toBeTruthy();
+  expect(showCommentAreaQuestion.isVisible).toBeTruthy();
+  expect(commentTextQuestion.isVisible).toBeTruthy();
+  expect(commentPlaceholderAreaQuestion.isVisible).toBeTruthy();
 });

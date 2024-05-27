@@ -44,7 +44,7 @@ export var enStrings = {
     signaturepad: "Signature",
     buttongroup: "Button Group"
   },
-  toolbox_categories: {
+  toolboxCategories: {
     general: "General",
     choice: "Choice Questions",
     text: "Text Input Questions",

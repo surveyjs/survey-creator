@@ -38,9 +38,21 @@ export class PropertyGridEditorCondition extends PropertyGridEditorExpression {
   ): any {
     return {
       type: "comment",
-      showOptionsCaption: false,
-      readOnly: options.allowEditExpressionsInTextEditor === false
+      showOptionsCaption: false
     };
+  }
+  public canClearPropertyValue(obj: Base, prop: JsonObjectProperty, question: Question, options: ISurveyCreatorOptions): boolean {
+    return options.allowEditExpressionsInTextEditor !== false;
+  }
+  public onSetup(obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions) {
+    if(options.allowEditExpressionsInTextEditor === false) {
+      question.onKeyDownPreprocess = (event: any) => {
+        const allowed = ["Tab", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Home", "End"];
+        if (!event.ctrlKey && allowed.indexOf(event.key) < 0) {
+          event.preventDefault();
+        }
+      };
+    }
   }
   public createPropertyEditorSetup(
     obj: Base,

@@ -42,7 +42,7 @@ export var hrStrings = {
     signaturepad: "Jastučić za potpis",
     buttongroup: "Grupa gumba"
   },
-  toolbox_categories: {
+  toolboxCategories: {
     general: "Općenito",
     choice: "Pitanja o izboru",
     text: "Pitanja o unosu teksta",

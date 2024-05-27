@@ -42,7 +42,7 @@ export var jaStrings = {
     signaturepad: "署名パッド",
     buttongroup: "ボタングループ"
   },
-  toolbox_categories: {
+  toolboxCategories: {
     general: "一般",
     choice: "選択の質問",
     text: "テキスト入力の質問",

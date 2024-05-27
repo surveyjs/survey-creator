@@ -42,8 +42,8 @@ export var arStrings = {
     signaturepad: "لوحة توقيع",
     buttongroup: "Button group"
   },
-  toolbox_categories: {
-    feneral: "قائمة العام",
+  toolboxCategories: {
+    general: "قائمة العام",
     choice: "أسئلة الاختيار",
     text: "أسئلة إدخال النص",
     containers: "حاويات",

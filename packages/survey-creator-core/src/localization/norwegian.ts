@@ -42,7 +42,7 @@ export var nbStrings = {
     signaturepad: "Signatur",
     buttongroup: "Knappegruppe"
   },
-  toolbox_categories: {
+  toolboxCategories: {
     general: "Generelt",
     choice: "Choice Spørsmål",
     text: "Spørsmål om tekstinndata",

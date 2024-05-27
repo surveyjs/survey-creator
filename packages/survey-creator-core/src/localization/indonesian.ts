@@ -42,7 +42,7 @@ export var indonesianStrings = {
     signaturepad: "Tanda tangan",
     buttongroup: "Grup Tombol"
   },
-  toolbox_categories: {
+  toolboxCategories: {
     general: "Umum",
     choice: "Pertanyaan Pilihan",
     text: "Pertanyaan Input Teks",

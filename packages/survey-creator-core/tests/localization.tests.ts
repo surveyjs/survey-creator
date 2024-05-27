@@ -182,7 +182,7 @@ test("Change Creator locale property", (): any => {
     qt: {
       text: "Text"
     },
-    toolbox_categories: {
+    toolboxCategories: {
       choice: "Choices de"
     }
   };

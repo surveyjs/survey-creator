@@ -912,7 +912,7 @@ export class ThemeEditorModel extends Base {
   }
   private updateVisibilityOfPropertyGridGroups() {
     const page = this.themeEditorSurvey.pages[0];
-    page.getElementByName("groupHeader").visible = this.surveyProvider.isMobileView ? false : settings.theme.allowEditHeaderSettings;
+    page.getElementByName("groupHeader").visible = !this.surveyProvider.isMobileView;
     if (this.advancedModeSwitcher) {
       this.advancedModeSwitcher.visible = !this.surveyProvider.isMobileView;
     }
@@ -1126,11 +1126,11 @@ export class ThemeEditorModel extends Base {
   }
 
   private getDefaultTitleSetting() {
-    const result = { family: settings.theme.fontFamily, weight: "700", size: 32 };
+    const result = { family: settings.themeEditor.defaultFontFamily, weight: "700", size: 32 };
     return result;
   }
   private getDefaultDescriptionSetting(isAdvanced?: boolean) {
-    const result = { family: settings.theme.fontFamily, weight: "400", size: 16 };
+    const result = { family: settings.themeEditor.defaultFontFamily, weight: "400", size: 16 };
     if (isAdvanced) {
       result["weight"] = "600";
     }
@@ -1558,7 +1558,7 @@ export class ThemeEditorModel extends Base {
                 title: getLocString("theme.fontFamily"),
                 descriptionLocation: "hidden",
                 choices: [].concat(DefaultFonts),
-                defaultValue: "Open Sans",
+                defaultValue: settings.themeEditor.defaultFontFamily,
                 allowClear: false
               },
               {
@@ -1666,7 +1666,7 @@ export class ThemeEditorModel extends Base {
                 title: getLocString("theme.titleFont"),
                 descriptionLocation: "hidden",
                 defaultValue: {
-                  family: settings.theme.fontFamily,
+                  family: settings.themeEditor.defaultFontFamily,
                   color: "rgba(0, 0, 0, 0.91)",
                   weight: "700",
                   size: 24
@@ -1677,7 +1677,7 @@ export class ThemeEditorModel extends Base {
                 title: getLocString("theme.descriptionFont"),
                 descriptionLocation: "hidden",
                 defaultValue: {
-                  family: settings.theme.fontFamily,
+                  family: settings.themeEditor.defaultFontFamily,
                   color: "rgba(0, 0, 0, 0.45)",
                   weight: "400",
                   size: 16
@@ -1731,7 +1731,7 @@ export class ThemeEditorModel extends Base {
                 title: getLocString("theme.titleFont"),
                 descriptionLocation: "hidden",
                 defaultValue: {
-                  family: settings.theme.fontFamily,
+                  family: settings.themeEditor.defaultFontFamily,
                   color: "rgba(0, 0, 0, 0.91)",
                   weight: "600",
                   size: 16,
@@ -1742,7 +1742,7 @@ export class ThemeEditorModel extends Base {
                 title: getLocString("theme.descriptionFont"),
                 descriptionLocation: "hidden",
                 defaultValue: {
-                  family: settings.theme.fontFamily,
+                  family: settings.themeEditor.defaultFontFamily,
                   color: "rgba(0, 0, 0, 0.45)",
                   weight: "400",
                   size: 16
@@ -1796,7 +1796,7 @@ export class ThemeEditorModel extends Base {
                 title: getLocString("theme.font"),
                 descriptionLocation: "hidden",
                 defaultValue: {
-                  family: settings.theme.fontFamily,
+                  family: settings.themeEditor.defaultFontFamily,
                   color: "rgba(0, 0, 0, 0.91)",
                   weight: "400",
                   size: 16

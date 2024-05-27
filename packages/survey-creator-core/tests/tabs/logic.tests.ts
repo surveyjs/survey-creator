@@ -16,7 +16,9 @@ import {
   QuestionCommentModel,
   QuestionRadiogroupModel,
   SurveyTrigger,
-  Serializer
+  Serializer,
+  settings as surveySettings,
+  PopupDropdownViewModel
 } from "survey-core";
 import { SurveyLogic } from "../../src/components/tabs/logic";
 import { SurveyLogicUI } from "../../src/components/tabs/logic-ui";
@@ -1510,6 +1512,7 @@ test("LogicItemEditorUI: getUsedActionTypes", () => {
 });
 
 test("LogicPlugin: question & action types are sorted ", () => {
+  surveySettings.animationEnabled = false;
   const creator = new CreatorTester({ showLogicTab: true });
   creator.JSON = {
     pages: [
@@ -1539,8 +1542,10 @@ test("LogicPlugin: question & action types are sorted ", () => {
   const logicPlugin = <TabLogicPlugin>(creator.getPlugin("logic"));
   const filterActionType = creator.getActionBarItem("svc-logic-filter-actiontype");
   const actionTypes = filterActionType.popupModel.contentComponentData.model.actions;
+  const filterActionTypePopupViewModel = new PopupDropdownViewModel(filterActionType.popupModel); // need for popupModel.onShow
   const filterQuestion = creator.getActionBarItem("svc-logic-filter-question");
   const questions = filterQuestion.popupModel.contentComponentData.model.actions;
+  const filterQuestionTypePopupViewModel = new PopupDropdownViewModel(filterQuestion.popupModel); // need for popupModel.onShow
 
   logicPlugin.activate();
   expect(actionTypes).toHaveLength(1);
@@ -1568,6 +1573,7 @@ test("LogicPlugin: question & action types are sorted ", () => {
   expect(filterActionType.title).toEqual("Copy answer");
 });
 test("LogicPlugin: actions titles support localization", () => {
+  surveySettings.animationEnabled = false;
   const creator = new CreatorTester({ showLogicTab: true });
   creator.JSON = {
     pages: [
@@ -1597,6 +1603,7 @@ test("LogicPlugin: actions titles support localization", () => {
   const logicPlugin = <TabLogicPlugin>(creator.getPlugin("logic"));
   const filterActionType = creator.getActionBarItem("svc-logic-filter-actiontype");
   const actionTypes = filterActionType.popupModel.contentComponentData.model.actions;
+  const filterActionTypePopupViewModel = new PopupDropdownViewModel(filterActionType.popupModel); // need for popupModel.onShow
   const filterActionQuestion = creator.getActionBarItem("svc-logic-filter-question");
 
   logicPlugin.activate();

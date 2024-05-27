@@ -42,7 +42,7 @@ export var bgStrings = {
     signaturepad: "Подпис",
     buttongroup: "Група бутони"
   },
-  toolbox_categories: {
+  toolboxCategories: {
     general: "Общ",
     choice: "Въпроси за избор",
     text: "Въпроси с въвеждане на текст",

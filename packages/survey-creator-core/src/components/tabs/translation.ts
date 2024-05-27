@@ -1425,7 +1425,7 @@ export class TranslationEditor {
           this.apply();
           return true;
         },
-        onCancel: () => {
+        onHide: () => {
           this.dispose();
         },
         cssClass: "sv-property-editor st-translation-dialog",
@@ -1456,7 +1456,6 @@ export class TranslationEditor {
     if (this.onApply) {
       this.onApply();
     }
-    this.dispose();
   }
   public cancel(): void {
     this.dispose();

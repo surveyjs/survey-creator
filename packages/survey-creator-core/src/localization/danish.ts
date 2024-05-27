@@ -42,7 +42,7 @@ export var danishStrings = {
     signaturepad: "Underskrift",
     buttongroup: "Knap gruppe"
   },
-  toolbox_categories: {
+  toolboxCategories: {
     general: "Generelt",
     choice: "Spørgsmål om valg",
     text: "Spørgsmål om tekstinput",

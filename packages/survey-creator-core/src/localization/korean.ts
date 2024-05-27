@@ -42,7 +42,7 @@ export var koreanStrings = {
     signaturepad: "서명",
     buttongroup: "단추 그룹"
   },
-  toolbox_categories: {
+  toolboxCategories: {
     general: "일반",
     choice: "선택 질문",
     text: "텍스트 입력 질문",

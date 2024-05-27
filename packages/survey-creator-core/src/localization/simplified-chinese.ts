@@ -42,7 +42,7 @@ var simplifiedChineseTranslation = {
     signaturepad: "签名",
     buttongroup: "按钮组"
   },
-  toolbox_categories: {
+  toolboxCategories: {
     general: "一般",
     choice: "选择题",
     text: "文本输入问题",

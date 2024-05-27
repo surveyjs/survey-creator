@@ -1,45 +1,10 @@
-import { ItemValue, QuestionCommentModel, QuestionTextBase, Serializer } from "survey-core";
+import { ItemValue, QuestionCommentModel, QuestionTextBase, Serializer, Base } from "survey-core";
 import { PropertyEditorSetupValue } from "./index";
 import { ISurveyCreatorOptions } from "../creator-settings";
 import { editorLocalization } from "../editorLocalization";
 
 export class FastEntryEditorBase extends PropertyEditorSetupValue {
   protected commentValue: QuestionCommentModel;
-
-  protected static calcBeforeApplyItemsArray(
-    dest: Array<any>,
-    src: Array<any>,
-    names: Array<string>
-  ): void {
-    if (!src || src.length == 0) {
-      dest.splice(0, dest.length);
-      return;
-    }
-    if (dest.length > src.length) {
-      dest.splice(src.length, dest.length - src.length);
-    }
-    if (dest.length < src.length) {
-      var insertedArray = [];
-      for (var i = dest.length; i < src.length; i++) {
-        insertedArray.push(src[i]);
-      }
-      dest.splice.apply(dest, [dest.length, 0].concat(insertedArray));
-    }
-  }
-
-  public static applyItemsArray(
-    dest: Array<any>,
-    src: Array<any>,
-    names: Array<string> = []
-  ): void {
-    this.calcBeforeApplyItemsArray(dest, src, names);
-    for (var i = 0; i < dest.length; i++) {
-      names.forEach((name) => {
-        dest[i][name] = src[i][name];
-      });
-    }
-  }
-
   constructor(
     public choices: Array<any>,
     options: ISurveyCreatorOptions = null,
@@ -80,7 +45,30 @@ export class FastEntryEditorBase extends PropertyEditorSetupValue {
       }
     });
   }
-
+  protected calcBeforeApplyItemsArray(dest: Array<any>, src: Array<any>, names: Array<string>): void {
+    if (!src || src.length == 0) {
+      dest.splice(0, dest.length);
+      return;
+    }
+    if (dest.length > src.length) {
+      dest.splice(src.length, dest.length - src.length);
+    }
+    if (dest.length < src.length) {
+      var insertedArray = [];
+      for (var i = dest.length; i < src.length; i++) {
+        insertedArray.push(src[i]);
+      }
+      dest.splice.apply(dest, [dest.length, 0].concat(insertedArray));
+    }
+  }
+  public applyItemValueArray(dest: Array<any>, src: Array<any>, names: Array<string> = []): void {
+    this.calcBeforeApplyItemsArray(dest, src, names);
+    for (var i = 0; i < dest.length; i++) {
+      names.forEach((name) => {
+        dest[i][name] = src[i][name];
+      });
+    }
+  }
   protected getSurveyJSON(): any {
     return {
       elements: [
@@ -100,17 +88,20 @@ export class FastEntryEditorBase extends PropertyEditorSetupValue {
 
   public apply(): boolean {
     if (this.comment.isEmpty()) return false;
+    return this.applyCore();
+  }
+  protected applyCore(): boolean {
     if (this.editSurvey.hasErrors(true)) return false;
-    const items = this.convertTextToItemValues(this.comment.value);
-    FastEntryEditorBase.applyItemsArray(<any>this.choices, items, this.names);
+    const text = this.comment.value || "";
+    const texts = text.split("\n") || [];
+    let items = this.convertTextToItemValues(texts);
+    items = this.options.onFastEntryCallback(items, texts);
+    this.applyItemValueArray(<any>this.choices, items, this.names);
     return true;
   }
 
-  protected convertTextToItemValues(text: string): ItemValue[] {
-    var items = [];
-    if (!text) return items;
-
-    var texts = text.split("\n");
+  protected convertTextToItemValues(texts: Array<string>): ItemValue[] {
+    const items = [];
     for (var i = 0; i < texts.length; i++) {
       if (!texts[i]) continue;
       var elements = texts[i].split(ItemValue.Separator);
@@ -192,11 +183,18 @@ export class FastEntryEditorBase extends PropertyEditorSetupValue {
 }
 
 export class FastEntryEditor extends FastEntryEditorBase {
-  public static applyItemValueArray(
-    dest: Array<ItemValue>,
-    src: Array<ItemValue>,
-    names: Array<string> = []
-  ): void {
+  constructor(
+    public choices: Array<ItemValue>,
+    options: ISurveyCreatorOptions = null,
+    protected className: string = "itemvalue",
+    protected names: Array<string> = ["value", "text"]
+  ) {
+    super(choices, options, className, names);
+  }
+  public apply(): boolean {
+    return this.applyCore();
+  }
+  public applyItemValueArray(dest: Array<ItemValue>, src: Array<ItemValue>, names: Array<string> = []): void {
     this.calcBeforeApplyItemsArray(dest, src, names);
     for (var i = 0; i < dest.length; i++) {
       if (dest[i].value != src[i].value) {
@@ -209,24 +207,6 @@ export class FastEntryEditor extends FastEntryEditorBase {
       });
     }
   }
-
-  constructor(
-    public choices: Array<ItemValue>,
-    options: ISurveyCreatorOptions = null,
-    protected className: string = "itemvalue",
-    protected names: Array<string> = ["value", "text"]
-  ) {
-    super(choices, options, className, names);
-  }
-
-  public apply(): boolean {
-    //if (this.comment.isEmpty()) return false;
-    if (this.editSurvey.hasErrors(true)) return false;
-    const items = this.convertTextToItemValues(this.comment.value);
-    FastEntryEditor.applyItemValueArray(<any>this.choices, items, this.names);
-    return true;
-  }
-
   protected convertItemValuesToText(): string {
     var text = "";
     this.choices.forEach((item) => {

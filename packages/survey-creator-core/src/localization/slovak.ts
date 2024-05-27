@@ -42,7 +42,7 @@ export var skStrings = {
     signaturepad: "Priestor na podpis",
     buttongroup: "Skupina tlačidiel"
   },
-  toolbox_categories: {
+  toolboxCategories: {
     general: "Všeobecné",
     choice: "Voľba Otázky",
     text: "Otázky na zadávanie textu",

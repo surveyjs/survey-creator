@@ -110,7 +110,7 @@ export abstract class PropertyEditorSetupValue implements IPropertyEditorSetup {
   }
   protected createSurvey(): SurveyModel {
     var json = this.getSurveyJSON();
-    setSurveyJSONForPropertyGrid(json, true, false);
+    setSurveyJSONForPropertyGrid(json, false, false);
     return this.options.createSurvey(json, this.getSurveyCreationReason(), this);
   }
   protected abstract getSurveyJSON(): any;
@@ -356,15 +356,8 @@ export class PropertyGridTitleActionsCreator {
     }
     if ((<any>question).allowBatchEdit !== false) {
       if (!!editor.createPropertyEditorSetup) {
-        if (enabled) {
-          enabled =
-            !editor.isPropertyEditorSetupEnabled ||
-            editor.isPropertyEditorSetupEnabled(
-              this.obj,
-              property,
-              options.question,
-              this.options
-            );
+        if (!!editor.isPropertyEditorSetupEnabled) {
+          enabled = editor.isPropertyEditorSetupEnabled(this.obj, property, options.question, this.options);
         }
         actions.push(
           this.createEditorSetupAction(editor, property, question, enabled)

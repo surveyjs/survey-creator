@@ -113,7 +113,7 @@ export class QuestionColorModel extends QuestionTextModel {
   protected onTextKeyDownHandler(event: any): void {
     const popupModel = <PopupModel>this.dropdownAction.popupModel;
     if(event.key === "ArrowDown") {
-      (popupModel).isVisible = true;
+      this.dropdownAction.action();
     }
     if(!popupModel.isVisible) {
       super.onTextKeyDownHandler(event);

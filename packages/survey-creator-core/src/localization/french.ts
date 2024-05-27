@@ -42,7 +42,7 @@ var frenchTranslation = {
     signaturepad: "Signature",
     buttongroup: "Groupe de boutons"
   },
-  toolbox_categories: {
+  toolboxCategories: {
     general: "Général",
     choice: "Questions à choix",
     text: "Questions de saisie libre",
