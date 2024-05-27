@@ -3380,3 +3380,21 @@ test("It is impossible to clear value for numeric property, bug##5395", () => {
   expect(question.imageHeight).not.toBe(0);
   expect(question.imageHeight).toBeFalsy();
 });
+test("Show commentText & commentPlaceholder on setting showCommentArea, bug##5527", () => {
+  const question = new QuestionImagePickerModel("q1");
+  const propertyGrid = new PropertyGridModelTester(question);
+  const showCommentAreaQuestion = propertyGrid.survey.getQuestionByName("showCommentArea");
+  const commentTextQuestion = propertyGrid.survey.getQuestionByName("commentText");
+  const commentPlaceholderAreaQuestion = propertyGrid.survey.getQuestionByName("commentPlaceholder");
+  expect(showCommentAreaQuestion).toBeTruthy();
+  expect(commentTextQuestion).toBeTruthy();
+  expect(commentPlaceholderAreaQuestion).toBeTruthy();
+  expect(showCommentAreaQuestion.isVisible).toBeTruthy();
+  expect(commentTextQuestion.isVisible).toBeFalsy();
+  expect(commentPlaceholderAreaQuestion.isVisible).toBeFalsy();
+  showCommentAreaQuestion.value = true;
+  expect(question.showCommentArea).toBeTruthy();
+  expect(showCommentAreaQuestion.isVisible).toBeTruthy();
+  expect(commentTextQuestion.isVisible).toBeTruthy();
+  expect(commentPlaceholderAreaQuestion.isVisible).toBeTruthy();
+});
