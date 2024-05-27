@@ -42,7 +42,7 @@ import { PageAdorner } from "./components/page";
 import {
   ElementDeletingEvent, PropertyGetReadOnlyEvent, ElementGetDisplayNameEvent, HtmlToMarkdownEvent, ElementAllowOperationsEvent,
   ElementGetActionsEvent, PropertyAddingEvent, PropertyGridSurveyCreatedEvent, PropertyEditorCreatedEvent, PropertyEditorUpdateTitleActionsEvent,
-  PropertyGridShowPopupEvent, CollectionItemAllowOperationsEvent, CollectionItemAddedEvent, MatrixColumnAddedEvent, ConfigureTablePropertyEditorEvent,
+  PropertyGridShowPopupEvent, CollectionItemAllowOperationsEvent, CollectionItemAddedEvent, FastEntryItemsEvent as FastEntryFinishedEvent, MatrixColumnAddedEvent, ConfigureTablePropertyEditorEvent,
   PropertyDisplayCustomErrorEvent, PropertyValueChangingEvent, PropertyValueChangedEvent, ConditionGetQuestionListEvent, GetConditionOperatorEvent,
   LogicRuleGetDisplayTextEvent, ModifiedEvent, QuestionAddedEvent, PanelAddedEvent, PageAddedEvent,
   PageGetFooterActionsEvent, SurveyInstanceCreatedEvent, DesignerSurveyCreatedEvent, PreviewSurveyCreatedEvent, NotifyEvent, ElementFocusingEvent,
@@ -490,9 +490,16 @@ export class SurveyCreatorModel extends Base
    * For information on event handler parameters, refer to descriptions within the interface.
    * 
    * > This event is not raised when users add a new column to a [Multi-Select Matrix](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-with-dropdown-list) or [Dynamic Matrix](https://surveyjs.io/form-library/documentation/api-reference/dynamic-matrix-table-question-model). For these cases, handle the [`onMatrixColumnAdded`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onMatrixColumnAdded) event instead.
+   * @see onFastEntryFinished
    * @see onCollectionItemAllowOperations
    */
   public onItemValueAdded: EventBase<SurveyCreatorModel, CollectionItemAddedEvent> = this.addCreatorEvent<SurveyCreatorModel, CollectionItemAddedEvent>();
+  /**
+   * An event that is raised when users finish editing collection items (choices, rows, columns) in a pop-up window.
+   * 
+   * Survey authors can specify collection items using a table UI in Property Grid (see the [`onItemValueAdded`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onItemValueAdded) event) or a multi-line text editor in a pop-up window. Each line in the editor specifies the value and display text of one collection item in the following format: `value|text`. Use the `onFastEntryFinished` event to process the entered text lines as required.
+   */
+  public onFastEntryFinished: EventBase<SurveyCreatorModel, FastEntryFinishedEvent> = this.addCreatorEvent<SurveyCreatorModel, FastEntryFinishedEvent>();
   /**
    * An event that is raised when users add a new column to a [Multi-Select Matrix](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-with-dropdown-list) or [Dynamic Matrix](https://surveyjs.io/form-library/documentation/api-reference/dynamic-matrix-table-question-model). Use this event to modify this column.
    * 
@@ -3040,7 +3047,7 @@ export class SurveyCreatorModel extends Base
     propertyName: string,
     itemValue: ItemValue,
     itemValues: Array<ItemValue>
-  ) {
+  ): void {
     var options = {
       obj: obj,
       propertyName: propertyName,
@@ -3048,6 +3055,14 @@ export class SurveyCreatorModel extends Base
       itemValues: itemValues
     };
     this.onItemValueAdded.fire(this, options);
+  }
+  onFastEntryCallback(items: Array<ItemValue>, lines: Array<string>): Array<ItemValue> {
+    const options = {
+      items: items,
+      lines: lines
+    };
+    this.onFastEntryFinished.fire(this, options);
+    return options.items;
   }
   onMatrixDropdownColumnAddedCallback(
     matrix: Question,
