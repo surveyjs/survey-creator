@@ -48,7 +48,10 @@ function getQuestionJSON() {
         "type": "buttongroup",
         "name": "isInset",
         "titleLocation": "hidden",
-        "choices": [{ text: getLocString("theme.boxShadowDrop"), value: false }, { text: getLocString("theme.boxShadowInner"), value: true }]
+        "choices": [
+          { text: getLocString("theme.boxShadowDrop"), value: false },
+          { text: getLocString("theme.boxShadowInner"), value: true }
+        ]
       }
     ]
   };

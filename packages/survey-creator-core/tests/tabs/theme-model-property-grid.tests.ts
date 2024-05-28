@@ -29,7 +29,7 @@ test("Theme builder initialization", (): any => {
   expect(themeEditor.findQuestionByName("backgroundOpacity").value).toEqual(100);
   expect(themeEditor.findQuestionByName("panelBackgroundTransparency").value).toEqual(100);
   expect(themeEditor.findQuestionByName("questionBackgroundTransparency").value).toEqual(100);
-  expect(themeEditor.findQuestionByName("commonScale").value).toEqual(100);
+  expect(themeEditor.findQuestionByName("scale").value).toEqual(100);
   expect(themeEditor.findQuestionByName("cornerRadius").value).toEqual(4);
 
   const colorQuestions = themeEditor.getAllQuestions().filter(q => q.getType() === "color");
@@ -740,7 +740,7 @@ test("headerViewContainer init state", (): any => {
     "logoPosition": "left",
     "inheritWidthFrom": "container",
     "overlapEnabled": false,
-    "backgroundColorType": "accentColor",
+    "backgroundColorSwitch": "accentColor",
     "backgroundImageFit": "cover",
     "backgroundImageOpacity": 100,
     "logoPositionX": "right",
@@ -846,7 +846,7 @@ test("set headerViewContainer advanced", (): any => {
   headerViewContainer.getElementByName("height").value = 300;
   headerViewContainer.getElementByName("inheritWidthFrom").value = "survey";
   headerViewContainer.getElementByName("textAreaWidth").value = 600;
-  headerViewContainer.getElementByName("backgroundColorType").value = "custom";
+  headerViewContainer.getElementByName("backgroundColorSwitch").value = "custom";
   headerViewContainer.getElementByName("backgroundColor").value = "#5094ed";
   headerViewContainer.getElementByName("backgroundImage").value = "https://t4.ftcdn.net/jpg/02/83/13/61/360_F_283136113_b3VRHNiOPFMOluzYJPpfuoH8Czh9c743.jpg";
   headerViewContainer.getElementByName("backgroundImageFit").value = "fill";
@@ -945,7 +945,7 @@ test("restore headerViewContainer values", (): any => {
   expect(headerViewContainer.getQuestionByName("logoPosition").value).toBe("left");
   expect(headerViewContainer.getQuestionByName("inheritWidthFrom").value).toBe("container");
   expect(headerViewContainer.getQuestionByName("backgroundColor").value).toBe("#5094ed");
-  expect(headerViewContainer.getQuestionByName("backgroundColorType").value).toBe("custom");
+  expect(headerViewContainer.getQuestionByName("backgroundColorSwitch").value).toBe("custom");
   expect(headerViewContainer.getQuestionByName("backgroundImage").value).toBe("https://t4.ftcdn.net/jpg/02/83/13/61/360_F_283136113_b3VRHNiOPFMOluzYJPpfuoH8Czh9c743.jpg");
   expect(headerViewContainer.getQuestionByName("backgroundImageFit").value).toBe("fill");
   expect(headerViewContainer.getQuestionByName("backgroundImageOpacity").value).toBe(50);

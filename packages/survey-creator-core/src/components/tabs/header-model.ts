@@ -1,6 +1,5 @@
 import { Base, IHeader, IJsonPropertyInfo, ILoadFromJSONOptions, ISaveToJSONOptions, ISurvey, ITheme, Serializer, HorizontalAlignment, VerticalAlignment } from "survey-core";
 import { settings } from "../../creator-settings";
-import { getLocString } from "../../editorLocalization";
 import { fontsettingsFromCssVariable, fontsettingsToCssVariable } from "./theme-custom-questions/font-settings";
 import { assign } from "../../utils/utils";
 
@@ -45,9 +44,9 @@ export class HeaderModel extends Base implements IHeader {
 
     const backgroundColorValue = cssVariables["--sjs-header-backcolor"];
     if (!!backgroundColorValue) {
-      this["backgroundColorType"] = this.getBackgroundColorSwitchByValue(backgroundColorValue);
-      this["backgroundColor"] = this["backgroundColorType"] === "custom" ? backgroundColorValue : undefined;
-      // this._setPGEditorPropertyValue(panel.getQuestionByName("backgroundColorType"), "value", this.getBackgroundColorSwitchByValue(backgroundColorValue));
+      this["backgroundColorSwitch"] = this.getBackgroundColorSwitchByValue(backgroundColorValue);
+      this["backgroundColor"] = this["backgroundColorSwitch"] === "custom" ? backgroundColorValue : undefined;
+      // this._setPGEditorPropertyValue(panel.getQuestionByName("backgroundColorSwitch"), "value", this.getBackgroundColorSwitchByValue(backgroundColorValue));
     }
   }
 
@@ -75,7 +74,7 @@ export class HeaderModel extends Base implements IHeader {
     this.setHeaderBackgroundColorCssVariable(cssVariables);
     result.cssVariables = cssVariables;
 
-    delete result.backgroundColorType;
+    delete result.backgroundColorSwitch;
     delete result.backgroundColor;
     return result;
   }
@@ -91,9 +90,9 @@ export class HeaderModel extends Base implements IHeader {
   }
 
   private setHeaderBackgroundColorCssVariable(cssVariables: any) {
-    if (this["backgroundColorType"] === "none") {
+    if (this["backgroundColorSwitch"] === "none") {
       cssVariables["--sjs-header-backcolor"] = "transparent";
-    } else if (this["backgroundColorType"] === "custom") {
+    } else if (this["backgroundColorSwitch"] === "custom") {
       cssVariables["--sjs-header-backcolor"] = this["backgroundColor"] ?? "transparent";
     }
   }
@@ -145,7 +144,7 @@ export class HeaderModel extends Base implements IHeader {
 
   //     const backgroundColorValue = themeCssVariables["--sjs-header-backcolor"];
   //     if (!!backgroundColorValue) {
-  //       this._setPGEditorPropertyValue(panel.getQuestionByName("backgroundColorType"), "value", this.getBackgroundColorSwitchByValue(backgroundColorValue));
+  //       this._setPGEditorPropertyValue(panel.getQuestionByName("backgroundColorSwitch"), "value", this.getBackgroundColorSwitchByValue(backgroundColorValue));
   //     }
   //   }
   // }
@@ -199,16 +198,15 @@ function getDefaultDescriptionSetting(isAdvanced?: boolean) {
   return result;
 }
 
-function getHorizontalAlignment(questionName: string, title: string, defaultValue: string): IJsonPropertyInfo {
+function getHorizontalAlignment(questionName: string, defaultValue: string): IJsonPropertyInfo {
   return <IJsonPropertyInfo>{
     type: "buttongroup",
     name: questionName,
-    displayName: title,
     visibleIf: (obj) => obj.headerView === "advanced",
     choices: [
-      { value: "left", text: getLocString("theme.horizontalAlignmentLeft") },
-      { value: "center", text: getLocString("theme.horizontalAlignmentCenter") },
-      { value: "right", text: getLocString("theme.horizontalAlignmentRight") },
+      { value: "left" },
+      { value: "center" },
+      { value: "right", },
     ],
     default: defaultValue,
   };
@@ -220,9 +218,9 @@ function getVerticalAlignment(questionName: string, defaultValue: string): IJson
     displayName: "",
     visibleIf: (obj) => obj.headerView === "advanced",
     choices: [
-      { value: "top", text: getLocString("theme.verticalAlignmentTop") },
-      { value: "middle", text: getLocString("theme.verticalAlignmentMiddle") },
-      { value: "bottom", text: getLocString("theme.verticalAlignmentBottom") },
+      { value: "top" },
+      { value: "middle" },
+      { value: "bottom" },
     ],
     default: defaultValue,
   };
@@ -234,28 +232,25 @@ Serializer.addClass(
     {
       type: "buttongroup",
       name: "headerView",
-      displayName: getLocString("theme.headerView"),
       default: "basic",
       choices: [
-        { value: "basic", text: getLocString("theme.headerViewBasic") },
-        { value: "advanced", text: getLocString("theme.headerViewAdvanced") }
+        { value: "basic" },
+        { value: "advanced" }
       ]
     },
     {
       type: "buttongroup",
       name: "logoPosition",
-      displayName: getLocString("theme.logoPosition"),
       visibleIf: (obj) => obj.headerView === "basic",
       default: "left",
       choices: [
-        { value: "left", text: getLocString("theme.horizontalAlignmentLeft") },
-        { value: "right", text: getLocString("theme.horizontalAlignmentRight") }
+        { value: "left" },
+        { value: "right" }
       ],
     },
     {
       type: "spinedit",
       name: "height",
-      displayName: getLocString("p.height"),
       visibleIf: (obj) => obj.headerView === "advanced",
       default: 256,
       onPropertyEditorUpdate: function (obj: any, editor: any) {
@@ -268,18 +263,16 @@ Serializer.addClass(
     {
       type: "buttongroup",
       name: "inheritWidthFrom",
-      displayName: getLocString("theme.headerInheritWidthFrom"),
       visibleIf: (obj) => obj.headerView === "advanced",
       default: "container",
       choices: [
-        { value: "survey", text: getLocString("theme.headerInheritWidthFromSurvey") },
-        { value: "container", text: getLocString("theme.headerInheritWidthFromContainer") }
+        { value: "survey" },
+        { value: "container" }
       ],
     },
     {
       type: "spinedit",
       name: "textAreaWidth",
-      displayName: getLocString("theme.headerTextAreaWidth"),
       visibleIf: (obj) => obj.headerView === "advanced",
       default: 512,
       onPropertyEditorUpdate: function (obj: any, editor: any) {
@@ -291,15 +284,14 @@ Serializer.addClass(
     },
     {
       type: "buttongroup",
-      name: "backgroundColorType",
-      displayName: getLocString("theme.headerBackgroundColorSwitch"),
+      name: "backgroundColorSwitch",
       visibleIf: (obj) => obj.headerView === "advanced",
       isSerializable: false,
       default: "accentColor",
       choices: [
-        { value: "none", text: getLocString("theme.headerBackgroundColorNone") },
-        { value: "accentColor", text: getLocString("theme.headerBackgroundColorAccentColor") },
-        { value: "custom", text: getLocString("theme.headerBackgroundColorCustom") },
+        { value: "none" },
+        { value: "accentColor" },
+        { value: "custom" },
       ],
     },
     {
@@ -311,13 +303,12 @@ Serializer.addClass(
       onPropertyEditorUpdate: function (obj: any, editor: any) {
         if (!!editor) {
           editor.allowEmptyValue = true;
-          editor.enableIf = "{composite.backgroundColorType} = 'custom'";
+          editor.enableIf = "{composite.backgroundColorSwitch} = 'custom'";
         }
       }
     },
     {
       name: "backgroundImage:file",
-      displayName: getLocString("theme.backgroundImage"),
       visibleIf: (obj) => obj.headerView === "advanced",
       onPropertyEditorUpdate: function (obj: any, editor: any) {
         if (!!editor) {
@@ -331,10 +322,10 @@ Serializer.addClass(
       name: "backgroundImageFit",
       displayName: "",
       choices: [
-        { value: "cover", text: getLocString("theme.backgroundImageFitCover") },
-        { value: "fill", text: getLocString("theme.backgroundImageFitFill") },
-        { value: "contain", text: getLocString("theme.backgroundImageFitContain") },
-        { value: "tile", text: getLocString("theme.backgroundImageFitTile") },
+        { value: "cover" },
+        { value: "fill" },
+        { value: "contain" },
+        { value: "tile" },
       ],
       default: "cover",
       visibleIf: (obj) => obj.headerView === "advanced",
@@ -349,7 +340,6 @@ Serializer.addClass(
       name: "backgroundImageOpacity",
       visibleIf: (obj) => obj.headerView === "advanced",
       default: 100,
-      displayName: getLocString("theme.backgroundOpacity"),
       onPropertyEditorUpdate: function (obj: any, editor: any) {
         if (!!editor) {
           editor.unit = "%";
@@ -373,11 +363,11 @@ Serializer.addClass(
       }
     },
 
-    getHorizontalAlignment("logoPositionX", getLocString("theme.logoPosition"), "right"),
+    getHorizontalAlignment("logoPositionX", "right"),
     getVerticalAlignment("logoPositionY", "top"),
-    getHorizontalAlignment("titlePositionX", getLocString("theme.headerTitlePosition"), "left"),
+    getHorizontalAlignment("titlePositionX", "left"),
     getVerticalAlignment("titlePositionY", "bottom"),
-    getHorizontalAlignment("descriptionPositionX", getLocString("theme.headerDescriptionPosition"), "left"),
+    getHorizontalAlignment("descriptionPositionX", "left"),
     getVerticalAlignment("descriptionPositionY", "bottom"),
   ]);
 
@@ -385,21 +375,18 @@ Serializer.addProperties("header", [
   {
     type: "font",
     name: "surveyTitle",
-    displayName: getLocString("theme.surveyTitleFont"),
     visibleIf: (obj) => obj.headerView === "basic",
     default: getDefaultTitleSetting(),
   },
   {
     type: "font",
     name: "surveyDescription",
-    displayName: getLocString("theme.surveyDescriptionFont"),
     visibleIf: (obj) => obj.headerView === "basic",
     default: getDefaultDescriptionSetting(),
   },
   {
     type: "font",
     name: "headerTitle",
-    displayName: getLocString("theme.surveyTitleFont"),
     default: getDefaultTitleSetting(),
     visibleIf: (obj) => obj.headerView === "advanced",
     onPropertyEditorUpdate: function (obj: any, editor: any) {
@@ -411,7 +398,6 @@ Serializer.addProperties("header", [
   {
     type: "font",
     name: "headerDescription",
-    displayName: getLocString("theme.surveyDescriptionFont"),
     default: getDefaultDescriptionSetting(true),
     visibleIf: (obj) => obj.headerView === "advanced",
     onPropertyEditorUpdate: function (obj: any, editor: any) {

@@ -11,7 +11,7 @@ const themeModelProperties: ISurveyPropertiesDefinition = {
       { name: "backgroundImageAttachment", tab: "background" },
       { name: "backgroundOpacity", tab: "background" },
 
-      { name: "generalPrimaryColor", tab: "appearancecolor" },
+      { name: "primaryColor", tab: "appearancecolor" },
       { name: "panelBackgroundTransparency", tab: "appearancecolor" },
       { name: "questionBackgroundTransparency", tab: "appearancecolor" },
 
@@ -22,9 +22,9 @@ const themeModelProperties: ISurveyPropertiesDefinition = {
       { name: "--sjs-primary-forecolor-light", tab: "appearanceprimarycolor" },
 
       { name: "--sjs-font-family", tab: "appearancefont" },
-      { name: "commonFontSize", tab: "appearancefont" },
+      { name: "fontSize", tab: "appearancefont" },
 
-      { name: "commonScale", tab: "appearanceother" },
+      { name: "scale", tab: "appearanceother" },
       { name: "cornerRadius", tab: "appearanceother" },
 
       { name: "pageTitle", tab: "appearancepage" },
@@ -67,7 +67,7 @@ const themeModelProperties: ISurveyPropertiesDefinition = {
       { name: "inheritWidthFrom", tab: "layout" },
       { name: "textAreaWidth", tab: "layout" },
 
-      { name: "backgroundColorType", tab: "background" },
+      { name: "backgroundColorSwitch", tab: "background" },
       { name: "backgroundColor", tab: "background" },
       { name: "backgroundImage", tab: "background" },
       { name: "backgroundImageFit", tab: "background" },

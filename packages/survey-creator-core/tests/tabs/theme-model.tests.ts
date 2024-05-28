@@ -119,9 +119,9 @@ test("Theme model de/serialization", (): any => {
   };
   themeModel.fromJSON(themeJson);
 
-  expect(themeModel.commonScale).toBe(75);
+  expect(themeModel.scale).toBe(75);
   expect(themeModel.cornerRadius).toBe(20);
-  expect(themeModel.commonFontSize).toBe(110);
+  expect(themeModel.fontSize).toBe(110);
 
   expect(themeModel.themeName).toBe("custom");
   expect(themeModel.colorPalette).toBe("light");

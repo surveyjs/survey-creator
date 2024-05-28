@@ -762,7 +762,7 @@ test("Theme undo redo calculated questions", (): any => {
   expect(accentColorQuestion.value).toBe("rgba(25, 179, 148, 1)");
   expect(accentColorDarkQuestion.value).toBe("rgba(20, 164, 139, 1)");
   expect(accentColorLightQuestion.value).toBe("rgba(25, 179, 148, 0.1)");
-  expect(themeModel["generalPrimaryColor"]).toBe("rgba(25, 179, 148, 1)");
+  expect(themeModel["primaryColor"]).toBe("rgba(25, 179, 148, 1)");
   expect(themeModel["--sjs-primary-backcolor"]).toBe("rgba(25, 179, 148, 1)");
   expect(themeModel["--sjs-primary-backcolor-dark"]).toBe("rgba(20, 164, 139, 1)");
   expect(themeModel["--sjs-primary-backcolor-light"]).toBe("rgba(25, 179, 148, 0.1)");
@@ -775,7 +775,7 @@ test("Theme undo redo calculated questions", (): any => {
   expect(accentColorQuestion.value).toBe("#2772cb");
   expect(accentColorDarkQuestion.value).toBe("rgba(36, 106, 188, 1)");
   expect(accentColorLightQuestion.value).toBe("rgba(39, 114, 203, 0.1)");
-  expect(themeModel["generalPrimaryColor"]).toBe("#2772cb");
+  expect(themeModel["primaryColor"]).toBe("#2772cb");
   expect(themeModel["--sjs-primary-backcolor"]).toBe("#2772cb");
   expect(themeModel["--sjs-primary-backcolor-dark"]).toBe("rgba(36, 106, 188, 1)");
   expect(themeModel["--sjs-primary-backcolor-light"]).toBe("rgba(39, 114, 203, 0.1)");
@@ -787,7 +787,7 @@ test("Theme undo redo calculated questions", (): any => {
   expect(accentColorQuestion.value).toBe("rgba(25, 179, 148, 1)");
   expect(accentColorDarkQuestion.value).toBe("rgba(20, 164, 139, 1)");
   expect(accentColorLightQuestion.value).toBe("rgba(25, 179, 148, 0.1)");
-  expect(themeModel["generalPrimaryColor"]).toBe("rgba(25, 179, 148, 1)");
+  expect(themeModel["primaryColor"]).toBe("rgba(25, 179, 148, 1)");
   expect(themeModel["--sjs-primary-backcolor"]).toBe("rgba(25, 179, 148, 1)");
   expect(themeModel["--sjs-primary-backcolor-dark"]).toBe("rgba(20, 164, 139, 1)");
   expect(themeModel["--sjs-primary-backcolor-light"]).toBe("rgba(25, 179, 148, 0.1)");
@@ -799,7 +799,7 @@ test("Theme undo redo calculated questions", (): any => {
   expect(accentColorQuestion.value).toBe("#2772cb");
   expect(accentColorDarkQuestion.value).toBe("rgba(36, 106, 188, 1)");
   expect(accentColorLightQuestion.value).toBe("rgba(39, 114, 203, 0.1)");
-  expect(themeModel["generalPrimaryColor"]).toBe("#2772cb");
+  expect(themeModel["primaryColor"]).toBe("#2772cb");
   expect(themeModel["--sjs-primary-backcolor"]).toBe("#2772cb");
   expect(themeModel["--sjs-primary-backcolor-dark"]).toBe("rgba(36, 106, 188, 1)");
   expect(themeModel["--sjs-primary-backcolor-light"]).toBe("rgba(39, 114, 203, 0.1)");
@@ -812,34 +812,34 @@ test("Theme undo redo expression questions", (): any => {
   themePlugin.activate();
   const themeModel = themePlugin.themeModel as ThemeModel;
   const propertyGridSurvey = themePlugin.propertyGrid.survey;
-  const commonFontSizeQuestion = propertyGridSurvey.getQuestionByName("commonFontSize");
+  const fontSizeQuestion = propertyGridSurvey.getQuestionByName("fontSize");
 
   expect(themeModel.undoRedoManager.canUndo()).toBe(false);
   expect(themeModel.undoRedoManager.canRedo()).toBe(false);
   expect(themeModel["blockThemeChangedNotifications"]).toBe(0);
-  expect(commonFontSizeQuestion.value).toBe(100);
+  expect(fontSizeQuestion.value).toBe(100);
   expect(themeModel.cssVariables["--sjs-font-size"]).toBe(undefined);
 
-  commonFontSizeQuestion.value = 150;
+  fontSizeQuestion.value = 150;
 
   expect(themeModel.undoRedoManager.canUndo()).toBe(true);
   expect(themeModel.undoRedoManager.canRedo()).toBe(false);
   expect(themeModel["blockThemeChangedNotifications"]).toBe(0);
-  expect(commonFontSizeQuestion.value).toBe(150);
+  expect(fontSizeQuestion.value).toBe(150);
   expect(themeModel.cssVariables["--sjs-font-size"]).toBe("24px");
 
   themePlugin.undo();
   expect(themeModel.undoRedoManager.canUndo()).toBe(false);
   expect(themeModel.undoRedoManager.canRedo()).toBe(true);
   expect(themeModel["blockThemeChangedNotifications"]).toBe(0);
-  expect(commonFontSizeQuestion.value).toBe(100);
+  expect(fontSizeQuestion.value).toBe(100);
   expect(themeModel.cssVariables["--sjs-font-size"]).toBe(undefined);
 
   themePlugin.redo();
   expect(themeModel.undoRedoManager.canUndo()).toBe(true);
   expect(themeModel.undoRedoManager.canRedo()).toBe(false);
   expect(themeModel["blockThemeChangedNotifications"]).toBe(0);
-  expect(commonFontSizeQuestion.value).toBe(150);
+  expect(fontSizeQuestion.value).toBe(150);
   expect(themeModel.cssVariables["--sjs-font-size"]).toBe("24px");
 });
 
@@ -856,9 +856,9 @@ test("Theme builder: trigger responsiveness", (): any => {
   };
   propertyGridSurvey.getQuestionByName("--sjs-primary-backcolor").value = "#ffffff";
   expect(log).toBe("");
-  propertyGridSurvey.getQuestionByName("commonScale").value = 90;
+  propertyGridSurvey.getQuestionByName("scale").value = 90;
   expect(log).toBe("->called:true");
-  propertyGridSurvey.getQuestionByName("commonScale").value = 80;
+  propertyGridSurvey.getQuestionByName("scale").value = 80;
   expect(log).toBe("->called:true->called:true");
 });
 
@@ -872,7 +872,7 @@ test("onThemeSelected + onThemePropertyChanged events", (): any => {
   const colorPalette = propertyGridSurvey.getQuestionByName("colorPalette");
   const primaryBackColor = propertyGridSurvey.getQuestionByName("--sjs-primary-backcolor");
   const backgroundDimColor = propertyGridSurvey.getQuestionByName("--sjs-general-backcolor-dim");
-  const generalPrimaryColor = propertyGridSurvey.getQuestionByName("generalPrimaryColor");
+  const primaryColor = propertyGridSurvey.getQuestionByName("primaryColor");
 
   let pluginThemeSelectedCount = 0;
   let pluginThemeModifiedCount = 0;
@@ -901,7 +901,7 @@ test("onThemeSelected + onThemePropertyChanged events", (): any => {
   expect(builderThemeModifiedCount).toBe(4);
   expect(builderThemeSelectedCount).toBe(1);
 
-  generalPrimaryColor.value = "#7a46bb";
+  primaryColor.value = "#7a46bb";
   expect(pluginThemeModifiedCount).toBe(5);
   expect(pluginThemeSelectedCount).toBe(1);
   expect(builderThemeModifiedCount).toBe(5);
