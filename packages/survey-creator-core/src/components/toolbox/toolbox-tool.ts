@@ -27,6 +27,10 @@ export class ToolboxToolViewModel extends Base {
     return !this.creator.readOnly;
   }
 
+  public getArea(target: HTMLElement) {
+    return target.closest("#scrollableDiv-designer");
+  }
+
   public onMouseOver(itemValue, mouseoverEvent) {
     this.model.mouseOverHandler(itemValue);
     //mouseoverEvent.stopPropagation();
