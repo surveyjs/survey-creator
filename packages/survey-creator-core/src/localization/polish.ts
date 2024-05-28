@@ -48,7 +48,7 @@ var polishStrings = {
     text: "Pytania dotyczące wprowadzania tekstu",
     containers: "Pojemniki",
     matrix: "Pytania macierzowe",
-    misc: "Różne",
+    misc: "Różne"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -849,7 +849,49 @@ var polishStrings = {
     minWidth_placeholder: "Przykład: 600 pikseli",
     maxWidth_placeholder: "Przykład: 50%",
     imageHeight_placeholder: "Automatycznie",
-    imageWidth_placeholder: "Automatycznie"
+    imageWidth_placeholder: "Automatycznie",
+    theme: {
+      themeName: "Kompozycja",
+      isPanelless: "Wygląd pytania",
+      editorPanel: "Tło i promień narożnika",
+      questionPanel: "Tło i promień narożnika",
+      primaryColor: "Kolor akcentujący",
+      panelBackgroundTransparency: "Krycie tła panelu",
+      questionBackgroundTransparency: "Nieprzezroczystość tła pytania",
+      fontSize: "Rozmiar czcionki",
+      scale: "Skala",
+      cornerRadius: "Promień naroża",
+      pageTitle: "Czcionka tytułu",
+      pageDescription: "Czcionka opisu",
+      questionTitle: "Czcionka tytułu",
+      questionDescription: "Czcionka opisu",
+      editorFont: "Czcionka",
+      backgroundOpacity: "Nieprzezroczystość",
+      "--sjs-font-family": "Rodzina czcionek",
+      "--sjs-general-backcolor-dim": "Kolor tła",
+      "--sjs-primary-backcolor": "Tło akcentu",
+      "--sjs-primary-forecolor": "Akcent na pierwszym planie",
+      "--sjs-shadow-small": "Efekty cienia",
+      "--sjs-shadow-inner": "Efekty cienia",
+      "--sjs-border-default": "Kolory"
+    },
+    "header@header": {
+      headerView: "Widok",
+      logoPosition: "Pozycja logo",
+      surveyTitle: "Czcionka tytułu ankiety",
+      surveyDescription: "Czcionka opisu ankiety",
+      headerTitle: "Czcionka tytułu ankiety",
+      headerDescription: "Czcionka opisu ankiety",
+      inheritWidthFrom: "Szerokość obszaru zawartości",
+      textAreaWidth: "Szerokość tekstu",
+      backgroundColorSwitch: "Kolor tła",
+      backgroundImage: "Obraz w tle",
+      backgroundImageOpacity: "Nieprzezroczystość",
+      overlapEnabled: "Zachodzić na siebie",
+      logoPositionX: "Pozycja logo",
+      titlePositionX: "Pozycja tytułu",
+      descriptionPositionX: "Opis pozycja"
+    }
   },
   // Property values
   pv: {
@@ -1065,6 +1107,38 @@ var polishStrings = {
     searchMode: {
       contains: "Contains",
       startsWith: "Zaczyna się od"
+    },
+    backgroundImageFit: {
+      auto: "Automatycznie",
+      cover: "Pokryć",
+      contain: "Zawierać",
+      fill: "Rozciągnąć",
+      tile: "Kafelek"
+    },
+    backgroundImageAttachment: {
+      fixed: "Stały",
+      scroll: "Przewijać"
+    },
+    headerView: {
+      basic: "Podstawowy",
+      advanced: "Zaawansowany"
+    },
+    inheritWidthFrom: {
+      survey: "Tak samo jak ankieta",
+      container: "Pasuje do pojemnika"
+    },
+    backgroundColorSwitch: {
+      none: "Żaden",
+      accentColor: "Kolor akcentujący",
+      custom: "Zwyczaj"
+    },
+    colorPalette: {
+      light: "Światło",
+      dark: "Ciemny"
+    },
+    isPanelless: {
+      "false": "Domyślny",
+      "true": "Bez paneli"
     }
   },
   // Operators
@@ -1472,94 +1546,40 @@ var polishStrings = {
     copyDisplayValue: "Kopiowanie wyświetlanej wartości"
   },
   theme: {
-    "--background": "Kolor tła",
-    "--background-dim-light": "Słaby kolor światła tła",
-    "--primary-foreground": "Podstawowy kolor pierwszego planu",
-    "--foreground": "Kolor pierwszego planu",
-    "--base-unit": "Jednostka bazowa",
     advancedMode: "Tryb zaawansowany",
-    themeName: "Kompozycja",
-    isPanelless: "Wygląd pytania",
-    isPanellessPanels: "Domyślny",
-    isPanellessLightweight: "Bez paneli",
-    themePaletteLight: "Światło",
-    themePaletteDark: "Ciemny",
-    primaryColor: "Kolor wiodący",
+    pageTitle: "Czcionka tytułu strony",
+    questionTitle: "Czcionka tytułu pytania",
+    editorPanel: "Element wejściowy",
+    lines: "Linie",
     primaryDefaultColor: "Domyślny",
     primaryDarkColor: "Hover",
     primaryLightColor: "Wybrany",
     backgroundDimColor: "Kolor tła",
-    backgroundImage: "Obraz tła",
-    backgroundImageFitAuto: "Automatycznie",
-    backgroundImageFitCover: "Pokryć",
-    backgroundImageFitContain: "Zawierać",
-    backgroundImageFitFill: "Rozciągnąć",
-    backgroundImageFitTile: "Kafelek",
-    backgroundOpacity: "Nieprzezroczystość",
-    backgroundImageAttachmentFixed: "Stały",
-    backgroundImageAttachmentScroll: "Przewijać",
-    panelBackgroundTransparency: "Krycie tła panelu",
-    questionBackgroundTransparency: "Nieprzezroczystość tła pytania",
-    questionTitle: "Czcionka tytułu pytania",
-    editorPanel: "Element wejściowy",
-    backgroundCornerRadius: "Tło i promień narożnika",
+    cornerRadius: "Promień naroża",
     backcolor: "Domyślne tło",
     hovercolor: "Najedź kursorem na tło",
     borderDecoration: "Dekoracja obramowania",
-    accentBackground: "Tło akcentu",
-    accentForeground: "Akcent na pierwszym planie",
     primaryForecolor: "Kolor domyślny",
     primaryForecolorLight: "Kolor wyłączony",
-    colorsTitle: "Kolory",
     font: "Czcionka",
-    lines: "Linie",
     borderDefault: "Ciemniejsze",
     borderLight: "Zapalniczka",
     fontFamily: "Rodzina czcionek",
-    fontSize: "Rozmiar czcionki",
-    color: "Kolor",
-    placeholderColor: "Kolor zastępczy",
-    size: "Rozmiar",
     fontWeightRegular: "Regularny",
     fontWeightHeavy: "Ciężki",
     fontWeightSemiBold: "Półpogrubienie",
     fontWeightBold: "Śmiały",
-    scale: "Skala",
-    cornerRadius: "Promień narożnika",
-    surveyTitleFont: "Czcionka tytułu ankiety",
-    surveyDescriptionFont: "Czcionka opisu ankiety",
-    pageTitle: "Czcionka tytułu strony",
-    titleFont: "Czcionka tytułu",
-    descriptionFont: "Czcionka opisu",
+    color: "Kolor",
+    placeholderColor: "Kolor symbolu zastępczego",
+    size: "Rozmiar",
+    opacity: "Nieprzezroczystość",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Dodaj efekt cienia",
-    opacity: "Nieprzezroczystość",
     boxShadowBlur: "Zacierać",
     boxShadowSpread: "Rozprzestrzenianie się",
     boxShadowDrop: "Kropla",
     boxShadowInner: "Wewnętrzny",
-    shadow: "Efekty cienia",
-    headerView: "Widok",
-    headerViewBasic: "Podstawowy",
-    headerViewAdvanced: "Zaawansowany",
-    headerInheritWidthFrom: "Szerokość obszaru zawartości",
-    headerInheritWidthFromSurvey: "Tak samo jak ankieta",
-    headerInheritWidthFromContainer: "Pasuje do pojemnika",
-    headerTextAreaWidth: "Szerokość tekstu",
-    headerBackgroundColorSwitch: "Kolor tła",
-    headerBackgroundColorNone: "Żaden",
-    headerBackgroundColorAccentColor: "Kolor wiodący",
-    headerBackgroundColorCustom: "Zwyczaj",
-    horizontalAlignmentLeft: "Lewy",
-    horizontalAlignmentCenter: "Centrum",
-    horizontalAlignmentRight: "Prawy",
-    verticalAlignmentTop: "Do góry",
-    verticalAlignmentMiddle: "Środek",
-    verticalAlignmentBottom: "Dno",
-    logoPosition: "Pozycja logo",
-    headerTitlePosition: "Pozycja tytułu",
-    headerDescriptionPosition: "Opis pozycja",
     names: {
       default: "Domyślny",
       sharp: "Ostry",
@@ -2814,3 +2834,78 @@ editorLocalization.locales["pl"] = polishStrings;
 // ed.pagePlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the page." => "Kliknij przycisk \"Dodaj pytanie\" poniżej, aby dodać nowy element do strony."
 // ed.panelPlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the panel." => "Kliknij przycisk \"Dodaj pytanie\" poniżej, aby dodać nowy element do panelu."
 // ed.imagePlaceHolderMobile: "Click the button below and choose an image to upload" => "Kliknij poniższy przycisk i wybierz obraz do przesłania"
+// coloralpha.opacity: "Opacity" => "Nieprzezroczystość"
+// font.family: "Font family" => "Rodzina czcionek"
+// font.color: "Color" => "Kolor"
+// font.placeholderColor: "Placeholder color" => "Kolor symbolu zastępczego"
+// font.size: "Size" => "Rozmiar"
+// theme.themeName: "Theme" => "Kompozycja"
+// theme.isPanelless: "Question appearance" => "Wygląd pytania"
+// theme.editorPanel: "Background and corner radius" => "Tło i promień narożnika"
+// theme.questionPanel: "Background and corner radius" => "Tło i promień narożnika"
+// theme.primaryColor: "Accent color" => "Kolor akcentujący"
+// theme.panelBackgroundTransparency: "Panel background opacity" => "Krycie tła panelu"
+// theme.questionBackgroundTransparency: "Question background opacity" => "Nieprzezroczystość tła pytania"
+// theme.fontSize: "Font size" => "Rozmiar czcionki"
+// theme.scale: "Scale" => "Skala"
+// theme.cornerRadius: "Corner radius" => "Promień naroża"
+// theme.pageTitle: "Title font" => "Czcionka tytułu"
+// theme.pageDescription: "Description font" => "Czcionka opisu"
+// theme.questionTitle: "Title font" => "Czcionka tytułu"
+// theme.questionDescription: "Description font" => "Czcionka opisu"
+// theme.editorFont: "Font" => "Czcionka"
+// theme.backgroundOpacity: "Opacity" => "Nieprzezroczystość"
+// theme.--sjs-font-family: "Font family" => "Rodzina czcionek"
+// theme.--sjs-general-backcolor-dim: "Background color" => "Kolor tła"
+// theme.--sjs-primary-backcolor: "Accent background" => "Tło akcentu"
+// theme.--sjs-primary-forecolor: "Accent foreground" => "Akcent na pierwszym planie"
+// theme.--sjs-shadow-small: "Shadow effects" => "Efekty cienia"
+// theme.--sjs-shadow-inner: "Shadow effects" => "Efekty cienia"
+// theme.--sjs-border-default: "Colors" => "Kolory"
+// header@header.headerView: "View" => "Widok"
+// header@header.logoPosition: "Logo position" => "Pozycja logo"
+// header@header.surveyTitle: "Survey title font" => "Czcionka tytułu ankiety"
+// header@header.surveyDescription: "Survey description font" => "Czcionka opisu ankiety"
+// header@header.headerTitle: "Survey title font" => "Czcionka tytułu ankiety"
+// header@header.headerDescription: "Survey description font" => "Czcionka opisu ankiety"
+// header@header.inheritWidthFrom: "Content area width" => "Szerokość obszaru zawartości"
+// header@header.textAreaWidth: "Text width" => "Szerokość tekstu"
+// header@header.backgroundColorSwitch: "Background color" => "Kolor tła"
+// header@header.backgroundImage: "Background image" => "Obraz w tle"
+// header@header.backgroundImageOpacity: "Opacity" => "Nieprzezroczystość"
+// header@header.overlapEnabled: "Overlap" => "Zachodzić na siebie"
+// header@header.logoPositionX: "Logo position" => "Pozycja logo"
+// header@header.titlePositionX: "Title position" => "Pozycja tytułu"
+// header@header.descriptionPositionX: "Description position" => "Opis pozycja"
+// weight.400: "Regular" => "Regularny"
+// weight.600: "Heavy" => "Ciężki"
+// weight.700: "Semi-bold" => "Półpogrubienie"
+// weight.800: "Bold" => "Śmiały"
+// backgroundImageFit.auto: "Auto" => "Automatycznie"
+// backgroundImageFit.cover: "Cover" => "Pokryć"
+// backgroundImageFit.contain: "Contain" => "Zawierać"
+// backgroundImageFit.fill: "Stretch" => "Rozciągnąć"
+// backgroundImageFit.tile: "Tile" => "Kafelek"
+// backgroundImageAttachment.fixed: "Fixed" => "Stały"
+// backgroundImageAttachment.scroll: "Scroll" => "Przewijać"
+// headerView.basic: "Basic" => "Podstawowy"
+// headerView.advanced: "Advanced" => "Zaawansowany"
+// inheritWidthFrom.survey: "Same as survey" => "Tak samo jak ankieta"
+// inheritWidthFrom.container: "Fit to container" => "Pasuje do pojemnika"
+// backgroundColorSwitch.none: "None" => "Żaden"
+// backgroundColorSwitch.accentColor: "Accent color" => "Kolor akcentujący"
+// backgroundColorSwitch.custom: "Custom" => "Zwyczaj"
+// colorPalette.light: "Light" => "Światło"
+// colorPalette.dark: "Dark" => "Ciemny"
+// isPanelless.false: "Default" => "Domyślny"
+// isPanelless.true: "Without Panels" => "Bez paneli"
+// theme.cornerRadius: "Corner radius" => "Promień naroża"
+// theme.fontFamily: "Font family" => "Rodzina czcionek"
+// theme.fontWeightRegular: "Regular" => "Regularny"
+// theme.fontWeightHeavy: "Heavy" => "Ciężki"
+// theme.fontWeightSemiBold: "Semi-bold" => "Półpogrubienie"
+// theme.fontWeightBold: "Bold" => "Śmiały"
+// theme.color: "Color" => "Kolor"
+// theme.placeholderColor: "Placeholder color" => "Kolor symbolu zastępczego"
+// theme.size: "Size" => "Rozmiar"
+// theme.opacity: "Opacity" => "Nieprzezroczystość"

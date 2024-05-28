@@ -48,7 +48,7 @@ export var czStrings = {
     text: "Textové otázky",
     containers: "Kontejnery",
     matrix: "Maticové otázky",
-    misc: "Ostatní",
+    misc: "Ostatní"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -849,7 +849,49 @@ export var czStrings = {
     minWidth_placeholder: "Př.: 600px",
     maxWidth_placeholder: "Př.: 50%",
     imageHeight_placeholder: "automaticky",
-    imageWidth_placeholder: "automaticky"
+    imageWidth_placeholder: "automaticky",
+    theme: {
+      themeName: "Téma",
+      isPanelless: "Vzhled otázky",
+      editorPanel: "Pozadí a poloměr rohů",
+      questionPanel: "Pozadí a poloměr rohů",
+      primaryColor: "Barva zvýraznění",
+      panelBackgroundTransparency: "Neprůhlednost pozadí panelu",
+      questionBackgroundTransparency: "Neprůhlednost pozadí otázky",
+      fontSize: "Velikost písma",
+      scale: "Škála",
+      cornerRadius: "Poloměr rohu",
+      pageTitle: "Písmo nadpisu",
+      pageDescription: "Popisné písmo",
+      questionTitle: "Písmo nadpisu",
+      questionDescription: "Popisné písmo",
+      editorFont: "Písmo",
+      backgroundOpacity: "Neprůhlednost",
+      "--sjs-font-family": "Rodina písem",
+      "--sjs-general-backcolor-dim": "Barva pozadí",
+      "--sjs-primary-backcolor": "Zvýraznění pozadí",
+      "--sjs-primary-forecolor": "Zvýraznění popředí",
+      "--sjs-shadow-small": "Stínové efekty",
+      "--sjs-shadow-inner": "Stínové efekty",
+      "--sjs-border-default": "Barvy"
+    },
+    "header@header": {
+      headerView: "Pohled",
+      logoPosition: "Umístění loga",
+      surveyTitle: "Písmo názvu průzkumu",
+      surveyDescription: "Písmo popisu průzkumu",
+      headerTitle: "Písmo názvu průzkumu",
+      headerDescription: "Písmo popisu průzkumu",
+      inheritWidthFrom: "Šířka oblasti obsahu",
+      textAreaWidth: "Šířka textu",
+      backgroundColorSwitch: "Barva pozadí",
+      backgroundImage: "Obrázek na pozadí",
+      backgroundImageOpacity: "Neprůhlednost",
+      overlapEnabled: "Překrytí",
+      logoPositionX: "Umístění loga",
+      titlePositionX: "Pozice v titulu",
+      descriptionPositionX: "Popis pozice"
+    }
   },
   // Property values
   pv: {
@@ -1065,6 +1107,38 @@ export var czStrings = {
     searchMode: {
       contains: "Obsahuje",
       startsWith: "Začíná na"
+    },
+    backgroundImageFit: {
+      auto: "Auto",
+      cover: "Krýt",
+      contain: "Obsahovat",
+      fill: "Natáhnout",
+      tile: "Dlaždice"
+    },
+    backgroundImageAttachment: {
+      fixed: "Stabilní",
+      scroll: "Svitek"
+    },
+    headerView: {
+      basic: "Základní",
+      advanced: "Pokročilý"
+    },
+    inheritWidthFrom: {
+      survey: "Stejné jako průzkum",
+      container: "Vhodné pro kontejner"
+    },
+    backgroundColorSwitch: {
+      none: "Žádný",
+      accentColor: "Barva zvýraznění",
+      custom: "Zvyk"
+    },
+    colorPalette: {
+      light: "Světlo",
+      dark: "Temný"
+    },
+    isPanelless: {
+      "false": "Výchozí",
+      "true": "Bez panelů"
     }
   },
   // Operators
@@ -1472,102 +1546,40 @@ export var czStrings = {
     copyDisplayValue: "Kopírovat zobrazovanou hodnotu"
   },
   theme: {
-    "--background": "Barva pozadí",
-    "--background-dim-light": "Světlejší odstín tlumené barvy pozadí",
-    "--primary-foreground": "Hlavní barva popředí",
-    "--foreground": "Barva popředí",
-    "--base-unit": "Základní jednotka",
     advancedMode: "Pokročilý režim",
-    themeName: "Motivy",
-    isPanelless: "Režimy",
-    isPanellessPanels: "Panely",
-    isPanellessLightweight: "Lehký",
-    themePaletteLight: "Světlý",
-    themePaletteDark: "Tmavý",
-    primaryColor: "Barva zvýraznění",
+    pageTitle: "Font nadpisu stránky",
+    questionTitle: "Font nadpisu otázky",
+    editorPanel: "Editor",
+    lines: "Řádky",
     primaryDefaultColor: "Výchozí",
     primaryDarkColor: "Hover",
     primaryLightColor: "Vybraný",
     backgroundDimColor: "Barva pozadí",
-    backgroundImage: "Obrázek na pozadí",
-    backgroundImageFitAuto: "Auto",
-    backgroundImageFitCover: "Pokrýt",
-    backgroundImageFitContain: "Obsahuje",
-    backgroundImageFitFill: "Natáhnout",
-    backgroundImageFitTile: "Dlaždice",
-    backgroundOpacity: "Průhlednost",
-    backgroundImageAttachmentFixed: "Stabilní",
-    backgroundImageAttachmentScroll: "Svitek",
-    panelBackgroundTransparency: "Průhlednost pozadí panelu",
-    questionBackgroundTransparency: "Průhlednost pozadí otázek",
-    questionTitle: "Font nadpisu otázky",
-    editorPanel: "Editor",
-    backgroundCornerRadius: "Pozadí a poloměr rohů",
+    cornerRadius: "Poloměr rohu",
     backcolor: "Výchozí pozadí",
     hovercolor: "Pozadí při přejetí myší",
     borderDecoration: "Dekorace hran",
-    accentBackground: "Pozadí zvýraznění",
-    accentForeground: "Zvýraznění popředí",
     primaryForecolor: "Výchozí barva",
     primaryForecolorLight: "Barva vypnutého pole",
-    colorsTitle: "Barvy",
     font: "Písmo",
-    lines: "Řádky",
     borderDefault: "Hlavní",
     borderLight: "Vedlejší",
-    fontFamily: "Font",
-    fontSize: "Velikost fontu",
-    color: "Barva",
-    placeholderColor: "Zástupná barva",
-    size: "Velikost",
-    fontWeightRegular: "Běžný",
+    fontFamily: "Rodina písem",
+    fontWeightRegular: "Pravidelný",
     fontWeightHeavy: "Těžký",
-    fontWeightSemiBold: "Semi-Bold",
-    fontWeightBold: "Bold",
-    scale: "Škála",
-    cornerRadius: "Poloměr rohu",
-    surveyTitleFont: "Font nadpisu průzkumu",
-    surveyDescriptionFont: "Písmo popisu průzkumu",
-    pageTitle: "Font nadpisu stránky",
-    titleFont: "Písmo nadpisu",
-    descriptionFont: "Popisné písmo",
+    fontWeightSemiBold: "Polotučné písmo",
+    fontWeightBold: "Tučný",
+    color: "Barva",
+    placeholderColor: "Barva zástupného symbolu",
+    size: "Velikost",
+    opacity: "Neprůhlednost",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Přidat stínový efekt",
-    opacity: "Průhlednost",
     boxShadowBlur: "Blur",
     boxShadowSpread: "Rozšíření",
     boxShadowDrop: "Kapka",
     boxShadowInner: "Vnitřní",
-    shadow: "Stínové efekty",
-    headerView: "Pohled",
-    headerViewBasic: "Základní",
-    headerViewAdvanced: "Pokročilý",
-    coverInheritWidthFrom: "Šířka oblasti obsahu",
-    coverInheritWidthFromSurvey: "Stejné jako průzkum",
-    coverInheritWidthFromContainer: "Vhodné pro kontejner",
-    coverTextAreaWidth: "Šířka textu",
-    coverBackgroundColorSwitch: "Barva pozadí",
-    coverBackgroundColorNone: "Žádný",
-    coverBackgroundColorAccentColor: "Barva zvýraznění",
-    coverBackgroundColorCustom: "Zvyk",
-    headerInheritWidthFrom: "Šířka oblasti obsahu",
-    headerInheritWidthFromSurvey: "Stejné jako průzkum",
-    headerInheritWidthFromContainer: "Vhodné pro kontejner",
-    headerTextAreaWidth: "Šířka textu",
-    headerBackgroundColorSwitch: "Barva pozadí",
-    headerBackgroundColorNone: "Žádný",
-    headerBackgroundColorAccentColor: "Barva zvýraznění",
-    headerBackgroundColorCustom: "Zvyk",
-    horizontalAlignmentLeft: "Vlevo",
-    horizontalAlignmentCenter: "Střed",
-    horizontalAlignmentRight: "Vpravo",
-    verticalAlignmentTop: "Vrchol",
-    verticalAlignmentMiddle: "Prostřední",
-    verticalAlignmentBottom: "Dno",
-    logoPosition: "Pozice loga",
-    headerTitlePosition: "Titulní pozice",
-    headerDescriptionPosition: "Popis pozice",
     names: {
       default: "Výchozí",
       sharp: "Ostrý",
@@ -2129,3 +2141,78 @@ editorLocalization.locales["cs"] = czStrings;
 // ed.pagePlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the page." => "Kliknutím na tlačítko \"Přidat otázku\" níže přidáte na stránku nový prvek."
 // ed.panelPlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the panel." => "Kliknutím na tlačítko \"Přidat otázku\" níže přidáte do panelu nový prvek."
 // ed.imagePlaceHolderMobile: "Click the button below and choose an image to upload" => "Klikněte na tlačítko níže a vyberte obrázek, který chcete nahrát"
+// coloralpha.opacity: "Opacity" => "Neprůhlednost"
+// font.family: "Font family" => "Rodina písem"
+// font.color: "Color" => "Barva"
+// font.placeholderColor: "Placeholder color" => "Barva zástupného symbolu"
+// font.size: "Size" => "Velikost"
+// theme.themeName: "Theme" => "Téma"
+// theme.isPanelless: "Question appearance" => "Vzhled otázky"
+// theme.editorPanel: "Background and corner radius" => "Pozadí a poloměr rohů"
+// theme.questionPanel: "Background and corner radius" => "Pozadí a poloměr rohů"
+// theme.primaryColor: "Accent color" => "Barva zvýraznění"
+// theme.panelBackgroundTransparency: "Panel background opacity" => "Neprůhlednost pozadí panelu"
+// theme.questionBackgroundTransparency: "Question background opacity" => "Neprůhlednost pozadí otázky"
+// theme.fontSize: "Font size" => "Velikost písma"
+// theme.scale: "Scale" => "Škála"
+// theme.cornerRadius: "Corner radius" => "Poloměr rohu"
+// theme.pageTitle: "Title font" => "Písmo nadpisu"
+// theme.pageDescription: "Description font" => "Popisné písmo"
+// theme.questionTitle: "Title font" => "Písmo nadpisu"
+// theme.questionDescription: "Description font" => "Popisné písmo"
+// theme.editorFont: "Font" => "Písmo"
+// theme.backgroundOpacity: "Opacity" => "Neprůhlednost"
+// theme.--sjs-font-family: "Font family" => "Rodina písem"
+// theme.--sjs-general-backcolor-dim: "Background color" => "Barva pozadí"
+// theme.--sjs-primary-backcolor: "Accent background" => "Zvýraznění pozadí"
+// theme.--sjs-primary-forecolor: "Accent foreground" => "Zvýraznění popředí"
+// theme.--sjs-shadow-small: "Shadow effects" => "Stínové efekty"
+// theme.--sjs-shadow-inner: "Shadow effects" => "Stínové efekty"
+// theme.--sjs-border-default: "Colors" => "Barvy"
+// header@header.headerView: "View" => "Pohled"
+// header@header.logoPosition: "Logo position" => "Umístění loga"
+// header@header.surveyTitle: "Survey title font" => "Písmo názvu průzkumu"
+// header@header.surveyDescription: "Survey description font" => "Písmo popisu průzkumu"
+// header@header.headerTitle: "Survey title font" => "Písmo názvu průzkumu"
+// header@header.headerDescription: "Survey description font" => "Písmo popisu průzkumu"
+// header@header.inheritWidthFrom: "Content area width" => "Šířka oblasti obsahu"
+// header@header.textAreaWidth: "Text width" => "Šířka textu"
+// header@header.backgroundColorSwitch: "Background color" => "Barva pozadí"
+// header@header.backgroundImage: "Background image" => "Obrázek na pozadí"
+// header@header.backgroundImageOpacity: "Opacity" => "Neprůhlednost"
+// header@header.overlapEnabled: "Overlap" => "Překrytí"
+// header@header.logoPositionX: "Logo position" => "Umístění loga"
+// header@header.titlePositionX: "Title position" => "Pozice v titulu"
+// header@header.descriptionPositionX: "Description position" => "Popis pozice"
+// weight.400: "Regular" => "Pravidelný"
+// weight.600: "Heavy" => "Těžký"
+// weight.700: "Semi-bold" => "Polotučné písmo"
+// weight.800: "Bold" => "Tučný"
+// backgroundImageFit.auto: "Auto" => "Auto"
+// backgroundImageFit.cover: "Cover" => "Krýt"
+// backgroundImageFit.contain: "Contain" => "Obsahovat"
+// backgroundImageFit.fill: "Stretch" => "Natáhnout"
+// backgroundImageFit.tile: "Tile" => "Dlaždice"
+// backgroundImageAttachment.fixed: "Fixed" => "Stabilní"
+// backgroundImageAttachment.scroll: "Scroll" => "Svitek"
+// headerView.basic: "Basic" => "Základní"
+// headerView.advanced: "Advanced" => "Pokročilý"
+// inheritWidthFrom.survey: "Same as survey" => "Stejné jako průzkum"
+// inheritWidthFrom.container: "Fit to container" => "Vhodné pro kontejner"
+// backgroundColorSwitch.none: "None" => "Žádný"
+// backgroundColorSwitch.accentColor: "Accent color" => "Barva zvýraznění"
+// backgroundColorSwitch.custom: "Custom" => "Zvyk"
+// colorPalette.light: "Light" => "Světlo"
+// colorPalette.dark: "Dark" => "Temný"
+// isPanelless.false: "Default" => "Výchozí"
+// isPanelless.true: "Without Panels" => "Bez panelů"
+// theme.cornerRadius: "Corner radius" => "Poloměr rohu"
+// theme.fontFamily: "Font family" => "Rodina písem"
+// theme.fontWeightRegular: "Regular" => "Pravidelný"
+// theme.fontWeightHeavy: "Heavy" => "Těžký"
+// theme.fontWeightSemiBold: "Semi-bold" => "Polotučné písmo"
+// theme.fontWeightBold: "Bold" => "Tučný"
+// theme.color: "Color" => "Barva"
+// theme.placeholderColor: "Placeholder color" => "Barva zástupného symbolu"
+// theme.size: "Size" => "Velikost"
+// theme.opacity: "Opacity" => "Neprůhlednost"

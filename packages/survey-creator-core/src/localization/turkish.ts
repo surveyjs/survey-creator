@@ -48,7 +48,7 @@ export var turkishStrings = {
     text: "Metin Girişi Soruları",
     containers: "Konteyner",
     matrix: "Matris Soruları",
-    misc: "Misc",
+    misc: "Misc"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -849,7 +849,49 @@ export var turkishStrings = {
     minWidth_placeholder: "Ör.: 600 piksel",
     maxWidth_placeholder: "Ör.: %50",
     imageHeight_placeholder: "Otomatik",
-    imageWidth_placeholder: "Otomatik"
+    imageWidth_placeholder: "Otomatik",
+    theme: {
+      themeName: "Tema",
+      isPanelless: "Soru görünümü",
+      editorPanel: "Arka plan ve köşe yarıçapı",
+      questionPanel: "Arka plan ve köşe yarıçapı",
+      primaryColor: "Vurgu rengi",
+      panelBackgroundTransparency: "Panel arka plan opaklığı",
+      questionBackgroundTransparency: "Soru arka plan opaklığı",
+      fontSize: "Yazı boyutu",
+      scale: "Ölçeklemek",
+      cornerRadius: "Köşe yarıçapı",
+      pageTitle: "Başlık yazı tipi",
+      pageDescription: "Açıklama yazı tipi",
+      questionTitle: "Başlık yazı tipi",
+      questionDescription: "Açıklama yazı tipi",
+      editorFont: "Yazı tipi",
+      backgroundOpacity: "Opak -lık",
+      "--sjs-font-family": "Yazı tipi ailesi",
+      "--sjs-general-backcolor-dim": "Arka plan rengi",
+      "--sjs-primary-backcolor": "Vurgu arka planı",
+      "--sjs-primary-forecolor": "Vurgu ön planı",
+      "--sjs-shadow-small": "Gölge efektleri",
+      "--sjs-shadow-inner": "Gölge efektleri",
+      "--sjs-border-default": "Renk"
+    },
+    "header@header": {
+      headerView: "Görünüm",
+      logoPosition: "Logo konumu",
+      surveyTitle: "Anket başlığı yazı tipi",
+      surveyDescription: "Anket açıklaması yazı tipi",
+      headerTitle: "Anket başlığı yazı tipi",
+      headerDescription: "Anket açıklaması yazı tipi",
+      inheritWidthFrom: "İçerik alanı genişliği",
+      textAreaWidth: "Metin genişliği",
+      backgroundColorSwitch: "Arka plan rengi",
+      backgroundImage: "Arka plan resmi",
+      backgroundImageOpacity: "Opak -lık",
+      overlapEnabled: "Örtüş",
+      logoPositionX: "Logo konumu",
+      titlePositionX: "Unvan pozisyonu",
+      descriptionPositionX: "Açıklama konumu"
+    }
   },
   // Property values
   pv: {
@@ -1065,6 +1107,38 @@ export var turkishStrings = {
     searchMode: {
       contains: "Içerir",
       startsWith: "İle başlar"
+    },
+    backgroundImageFit: {
+      auto: "Otomatik",
+      cover: "Örtmek",
+      contain: "Kapsamak",
+      fill: "Uzatmak",
+      tile: "Kiremit"
+    },
+    backgroundImageAttachment: {
+      fixed: "Sabit",
+      scroll: "Tomar"
+    },
+    headerView: {
+      basic: "Temel",
+      advanced: "İleri"
+    },
+    inheritWidthFrom: {
+      survey: "Anketle aynı",
+      container: "Konteynere sığdır"
+    },
+    backgroundColorSwitch: {
+      none: "Hiç kimse",
+      accentColor: "Vurgu rengi",
+      custom: "Töre"
+    },
+    colorPalette: {
+      light: "Işık",
+      dark: "Koyu"
+    },
+    isPanelless: {
+      "false": "Temerrüt",
+      "true": "Panelsiz"
     }
   },
   // Operators
@@ -1472,94 +1546,40 @@ export var turkishStrings = {
     copyDisplayValue: "Görüntüleme değerini kopyala"
   },
   theme: {
-    "--background": "Arka plan rengi",
-    "--background-dim-light": "Arka plan loş ışık rengi",
-    "--primary-foreground": "Birincil ön plan rengi",
-    "--foreground": "Ön plan rengi",
-    "--base-unit": "Temel ünite",
     advancedMode: "Gelişmiş mod",
-    themeName: "Tema",
-    isPanelless: "Soru görünümü",
-    isPanellessPanels: "Temerrüt",
-    isPanellessLightweight: "Panelsiz",
-    themePaletteLight: "Işık",
-    themePaletteDark: "Koyu",
-    primaryColor: "Vurgu rengi",
+    pageTitle: "Sayfa başlığı yazı tipi",
+    questionTitle: "Soru başlığı yazı tipi",
+    editorPanel: "Giriş öğesi",
+    lines: "Satır",
     primaryDefaultColor: "Temerrüt",
     primaryDarkColor: "Hover",
     primaryLightColor: "Seçilmiş",
     backgroundDimColor: "Arka plan rengi",
-    backgroundImage: "Arka plan resmi",
-    backgroundImageFitAuto: "Otomatik",
-    backgroundImageFitCover: "Örtmek",
-    backgroundImageFitContain: "Kapsamak",
-    backgroundImageFitFill: "Uzatmak",
-    backgroundImageFitTile: "Kiremit",
-    backgroundOpacity: "Opak -lık",
-    backgroundImageAttachmentFixed: "Sabit",
-    backgroundImageAttachmentScroll: "Tomar",
-    panelBackgroundTransparency: "Panel arka plan opaklığı",
-    questionBackgroundTransparency: "Soru arka planı opaklığı",
-    questionTitle: "Soru başlığı yazı tipi",
-    editorPanel: "Giriş öğesi",
-    backgroundCornerRadius: "Arka plan ve köşe yarıçapı",
+    cornerRadius: "Köşe yarıçapı",
     backcolor: "Varsayılan arka plan",
     hovercolor: "Arka planın üzerine gelin",
     borderDecoration: "Bordür dekorasyonu",
-    accentBackground: "Aksan arka planı",
-    accentForeground: "Vurgu ön planı",
     primaryForecolor: "Varsayılan renk",
     primaryForecolorLight: "Devre dışı bırakılmış renk",
-    colorsTitle: "Renk",
     font: "Yazı tipi",
-    lines: "Satır",
     borderDefault: "Koyu",
     borderLight: "Çakmak",
-    fontFamily: "Font ailesi",
-    fontSize: "Yazı tipi boyutu",
-    color: "Renk",
-    placeholderColor: "Yer tutucu rengi",
-    size: "Boyut",
+    fontFamily: "Yazı tipi ailesi",
     fontWeightRegular: "Düzenli",
     fontWeightHeavy: "Ağır",
     fontWeightSemiBold: "Yarı kalın",
     fontWeightBold: "Kalın",
-    scale: "Ölçeklemek",
-    cornerRadius: "Köşe yarıçapı",
-    surveyTitleFont: "Anket başlığı yazı tipi",
-    surveyDescriptionFont: "Anket açıklaması yazı tipi",
-    pageTitle: "Sayfa başlığı yazı tipi",
-    titleFont: "Başlık yazı tipi",
-    descriptionFont: "Açıklama yazı tipi",
+    color: "Renk",
+    placeholderColor: "Yer tutucu rengi",
+    size: "Boyut",
+    opacity: "Opak -lık",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Gölge Efekti Ekle",
-    opacity: "Opak -lık",
     boxShadowBlur: "Bulanıklaştır",
     boxShadowSpread: "Yaymak",
     boxShadowDrop: "Damla",
     boxShadowInner: "İç",
-    shadow: "Gölge efektleri",
-    headerView: "Görünüm",
-    headerViewBasic: "Temel",
-    headerViewAdvanced: "İleri",
-    headerInheritWidthFrom: "İçerik alanı genişliği",
-    headerInheritWidthFromSurvey: "Anketle aynı",
-    headerInheritWidthFromContainer: "Konteynere sığdır",
-    headerTextAreaWidth: "Metin genişliği",
-    headerBackgroundColorSwitch: "Arka plan rengi",
-    headerBackgroundColorNone: "Hiç kimse",
-    headerBackgroundColorAccentColor: "Vurgu rengi",
-    headerBackgroundColorCustom: "Töre",
-    horizontalAlignmentLeft: "Sol",
-    horizontalAlignmentCenter: "Orta",
-    horizontalAlignmentRight: "Sağ",
-    verticalAlignmentTop: "Sayfanın Üstü",
-    verticalAlignmentMiddle: "Orta",
-    verticalAlignmentBottom: "Dip",
-    logoPosition: "Logo konumu",
-    headerTitlePosition: "Unvan pozisyonu",
-    headerDescriptionPosition: "Açıklama konumu",
     names: {
       default: "Temerrüt",
       sharp: "Keskin",
@@ -2542,3 +2562,78 @@ editorLocalization.locales["tr"] = turkishStrings;
 // ed.pagePlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the page." => "Sayfaya yeni bir öğe eklemek için aşağıdaki \"Soru Ekle\" düğmesini tıklayın."
 // ed.panelPlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the panel." => "Panele yeni bir öğe eklemek için aşağıdaki \"Soru Ekle\" düğmesini tıklayın."
 // ed.imagePlaceHolderMobile: "Click the button below and choose an image to upload" => "Aşağıdaki düğmeyi tıklayın ve yüklemek için bir resim seçin"
+// coloralpha.opacity: "Opacity" => "Opak -lık"
+// font.family: "Font family" => "Yazı tipi ailesi"
+// font.color: "Color" => "Renk"
+// font.placeholderColor: "Placeholder color" => "Yer tutucu rengi"
+// font.size: "Size" => "Boyut"
+// theme.themeName: "Theme" => "Tema"
+// theme.isPanelless: "Question appearance" => "Soru görünümü"
+// theme.editorPanel: "Background and corner radius" => "Arka plan ve köşe yarıçapı"
+// theme.questionPanel: "Background and corner radius" => "Arka plan ve köşe yarıçapı"
+// theme.primaryColor: "Accent color" => "Vurgu rengi"
+// theme.panelBackgroundTransparency: "Panel background opacity" => "Panel arka plan opaklığı"
+// theme.questionBackgroundTransparency: "Question background opacity" => "Soru arka plan opaklığı"
+// theme.fontSize: "Font size" => "Yazı boyutu"
+// theme.scale: "Scale" => "Ölçeklemek"
+// theme.cornerRadius: "Corner radius" => "Köşe yarıçapı"
+// theme.pageTitle: "Title font" => "Başlık yazı tipi"
+// theme.pageDescription: "Description font" => "Açıklama yazı tipi"
+// theme.questionTitle: "Title font" => "Başlık yazı tipi"
+// theme.questionDescription: "Description font" => "Açıklama yazı tipi"
+// theme.editorFont: "Font" => "Yazı tipi"
+// theme.backgroundOpacity: "Opacity" => "Opak -lık"
+// theme.--sjs-font-family: "Font family" => "Yazı tipi ailesi"
+// theme.--sjs-general-backcolor-dim: "Background color" => "Arka plan rengi"
+// theme.--sjs-primary-backcolor: "Accent background" => "Vurgu arka planı"
+// theme.--sjs-primary-forecolor: "Accent foreground" => "Vurgu ön planı"
+// theme.--sjs-shadow-small: "Shadow effects" => "Gölge efektleri"
+// theme.--sjs-shadow-inner: "Shadow effects" => "Gölge efektleri"
+// theme.--sjs-border-default: "Colors" => "Renk"
+// header@header.headerView: "View" => "Görünüm"
+// header@header.logoPosition: "Logo position" => "Logo konumu"
+// header@header.surveyTitle: "Survey title font" => "Anket başlığı yazı tipi"
+// header@header.surveyDescription: "Survey description font" => "Anket açıklaması yazı tipi"
+// header@header.headerTitle: "Survey title font" => "Anket başlığı yazı tipi"
+// header@header.headerDescription: "Survey description font" => "Anket açıklaması yazı tipi"
+// header@header.inheritWidthFrom: "Content area width" => "İçerik alanı genişliği"
+// header@header.textAreaWidth: "Text width" => "Metin genişliği"
+// header@header.backgroundColorSwitch: "Background color" => "Arka plan rengi"
+// header@header.backgroundImage: "Background image" => "Arka plan resmi"
+// header@header.backgroundImageOpacity: "Opacity" => "Opak -lık"
+// header@header.overlapEnabled: "Overlap" => "Örtüş"
+// header@header.logoPositionX: "Logo position" => "Logo konumu"
+// header@header.titlePositionX: "Title position" => "Unvan pozisyonu"
+// header@header.descriptionPositionX: "Description position" => "Açıklama konumu"
+// weight.400: "Regular" => "Düzenli"
+// weight.600: "Heavy" => "Ağır"
+// weight.700: "Semi-bold" => "Yarı kalın"
+// weight.800: "Bold" => "Kalın"
+// backgroundImageFit.auto: "Auto" => "Otomatik"
+// backgroundImageFit.cover: "Cover" => "Örtmek"
+// backgroundImageFit.contain: "Contain" => "Kapsamak"
+// backgroundImageFit.fill: "Stretch" => "Uzatmak"
+// backgroundImageFit.tile: "Tile" => "Kiremit"
+// backgroundImageAttachment.fixed: "Fixed" => "Sabit"
+// backgroundImageAttachment.scroll: "Scroll" => "Tomar"
+// headerView.basic: "Basic" => "Temel"
+// headerView.advanced: "Advanced" => "İleri"
+// inheritWidthFrom.survey: "Same as survey" => "Anketle aynı"
+// inheritWidthFrom.container: "Fit to container" => "Konteynere sığdır"
+// backgroundColorSwitch.none: "None" => "Hiç kimse"
+// backgroundColorSwitch.accentColor: "Accent color" => "Vurgu rengi"
+// backgroundColorSwitch.custom: "Custom" => "Töre"
+// colorPalette.light: "Light" => "Işık"
+// colorPalette.dark: "Dark" => "Koyu"
+// isPanelless.false: "Default" => "Temerrüt"
+// isPanelless.true: "Without Panels" => "Panelsiz"
+// theme.cornerRadius: "Corner radius" => "Köşe yarıçapı"
+// theme.fontFamily: "Font family" => "Yazı tipi ailesi"
+// theme.fontWeightRegular: "Regular" => "Düzenli"
+// theme.fontWeightHeavy: "Heavy" => "Ağır"
+// theme.fontWeightSemiBold: "Semi-bold" => "Yarı kalın"
+// theme.fontWeightBold: "Bold" => "Kalın"
+// theme.color: "Color" => "Renk"
+// theme.placeholderColor: "Placeholder color" => "Yer tutucu rengi"
+// theme.size: "Size" => "Boyut"
+// theme.opacity: "Opacity" => "Opak -lık"

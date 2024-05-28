@@ -48,7 +48,7 @@ export var mnStrings = {
     text: "Хариулт бичих асуултууд",
     containers: "Сав",
     matrix: "Матрицан асуултууд",
-    misc: "Бусад",
+    misc: "Бусад"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -849,7 +849,49 @@ export var mnStrings = {
     minWidth_placeholder: "Экс: 600px",
     maxWidth_placeholder: "Экс: 50%",
     imageHeight_placeholder: "автомат",
-    imageWidth_placeholder: "автомат"
+    imageWidth_placeholder: "автомат",
+    theme: {
+      themeName: "Сэдэв",
+      isPanelless: "Асуулт хариултын төрх",
+      editorPanel: "Ар талын болон булангийн радиус",
+      questionPanel: "Ар талын болон булангийн радиус",
+      primaryColor: "Акцент өнгө",
+      panelBackgroundTransparency: "Панелийн ар талын харанхуй байдал",
+      questionBackgroundTransparency: "Асуулт хариултын нөхцөл байдал",
+      fontSize: "Фонтын хэмжээ",
+      scale: "Хэмжүүр",
+      cornerRadius: "Булангийн радиус",
+      pageTitle: "Нүүр фонт",
+      pageDescription: "Дүрслэлийн фонт",
+      questionTitle: "Нүүр фонт",
+      questionDescription: "Дүрслэлийн фонт",
+      editorFont: "Фонт",
+      backgroundOpacity: "Бүдүүлэг байдал",
+      "--sjs-font-family": "Фонтын гэр бүл",
+      "--sjs-general-backcolor-dim": "Ар талын өнгө",
+      "--sjs-primary-backcolor": "Акцентийн гарал үүсэл",
+      "--sjs-primary-forecolor": "Акцентийн өмнө",
+      "--sjs-shadow-small": "Сүүдрийн нөлөө",
+      "--sjs-shadow-inner": "Сүүдрийн нөлөө",
+      "--sjs-border-default": "Өнгө"
+    },
+    "header@header": {
+      headerView: "Үзэх",
+      logoPosition: "Лого байрлал",
+      surveyTitle: "Судалгааны нэрийн фонт",
+      surveyDescription: "Судалгааны тодорхойлолтын фонт",
+      headerTitle: "Судалгааны нэрийн фонт",
+      headerDescription: "Судалгааны тодорхойлолтын фонт",
+      inheritWidthFrom: "Агуулгын бүсийн өргөн",
+      textAreaWidth: "Текстийн өргөн",
+      backgroundColorSwitch: "Ар талын өнгө",
+      backgroundImage: "Ар талын зураг",
+      backgroundImageOpacity: "Бүдүүлэг байдал",
+      overlapEnabled: "Давхар",
+      logoPositionX: "Лого байрлал",
+      titlePositionX: "Нүүр албан тушаал",
+      descriptionPositionX: "Тодорхойлолтын байрлал"
+    }
   },
   // Property values
   pv: {
@@ -1065,6 +1107,38 @@ export var mnStrings = {
     searchMode: {
       contains: "Агуулах",
       startsWith: "Эхлэл"
+    },
+    backgroundImageFit: {
+      auto: "Авто",
+      cover: "Хөшиг",
+      contain: "Агуулах",
+      fill: "Шээс",
+      tile: "Тил"
+    },
+    backgroundImageAttachment: {
+      fixed: "Зассан",
+      scroll: "Хуйлмал бичиг"
+    },
+    headerView: {
+      basic: "Үндсэн",
+      advanced: "Өндөр хөгжсөн"
+    },
+    inheritWidthFrom: {
+      survey: "Судалгаатай адил",
+      container: "Сав баглаа боодолд тохирно"
+    },
+    backgroundColorSwitch: {
+      none: "Хэн ч биш",
+      accentColor: "Акцент өнгө",
+      custom: "Үйлчилгээ"
+    },
+    colorPalette: {
+      light: "Гэрэл",
+      dark: "Харанхуй"
+    },
+    isPanelless: {
+      "false": "Дефолт",
+      "true": "Панелгүйгээр"
     }
   },
   // Operators
@@ -1472,94 +1546,40 @@ export var mnStrings = {
     copyDisplayValue: "Copy display value"
   },
   theme: {
-    "--background": "Ар талын өнгө",
-    "--background-dim-light": "Ар талын бүдэг гэрэл өнгө",
-    "--primary-foreground": "Хүүхдийн хэсгийн өмнөх өнгө",
-    "--foreground": "Өнгөө",
-    "--base-unit": "Үндсэн нэгж",
     advancedMode: "Дэвшилтэт хэв маяг",
-    themeName: "Сэдэв",
-    isPanelless: "Асуулт хариултын төрх",
-    isPanellessPanels: "Дефолт",
-    isPanellessLightweight: "Панелгүйгээр",
-    themePaletteLight: "Гэрэл",
-    themePaletteDark: "Харанхуй",
-    primaryColor: "Акцент өнгө",
+    pageTitle: "Хуудасны нэрийн фонт",
+    questionTitle: "Асуулт нэрийн фонт",
+    editorPanel: "Оролтын элемент",
+    lines: "Шугам",
     primaryDefaultColor: "Дефолт",
     primaryDarkColor: "Ховер",
     primaryLightColor: "Сонгосон",
     backgroundDimColor: "Ар талын өнгө",
-    backgroundImage: "Ар талын зураг",
-    backgroundImageFitAuto: "Авто",
-    backgroundImageFitCover: "Хөшиг",
-    backgroundImageFitContain: "Агуулах",
-    backgroundImageFitFill: "Сэнгэрч",
-    backgroundImageFitTile: "Тил",
-    backgroundOpacity: "Бүдүүлэг байдал",
-    backgroundImageAttachmentFixed: "Зассан",
-    backgroundImageAttachmentScroll: "Хуйлмал бичиг",
-    panelBackgroundTransparency: "Панелийн ар талын харанхуй байдал",
-    questionBackgroundTransparency: "Асуулт хариултын нөхцөл байдал",
-    questionTitle: "Асуулт нэрийн фонт",
-    editorPanel: "Оролтын элемент",
-    backgroundCornerRadius: "Ар талын болон булангийн радиус",
+    cornerRadius: "Булангийн радиус",
     backcolor: "Дефолт нөхцөл байдал",
     hovercolor: "Hover-ийн гарал үүсэл",
     borderDecoration: "Хилийн чимэг",
-    accentBackground: "Акцентийн гарал үүсэл",
-    accentForeground: "Акцентийн өмнө",
     primaryForecolor: "Дефолт өнгө",
     primaryForecolorLight: "Хөгжлийн бэрхшээлтэй хүний өнгө",
-    colorsTitle: "Өнгө",
     font: "Фонт",
-    lines: "Шугам",
     borderDefault: "Илүү харанхуй",
     borderLight: "Гэрэлтэй",
     fontFamily: "Фонтын гэр бүл",
-    fontSize: "Фонтын хэмжээ",
-    color: "Өнгө",
-    placeholderColor: "Газар эзэмшигчийн өнгө",
-    size: "Хэмжээ",
     fontWeightRegular: "Тогтмол",
     fontWeightHeavy: "Хүнд",
     fontWeightSemiBold: "Хагас зоригтой",
     fontWeightBold: "Болд",
-    scale: "Хэмжүүр",
-    cornerRadius: "Булангийн радиус",
-    surveyTitleFont: "Судалгааны нэрийн фонт",
-    surveyDescriptionFont: "Судалгааны тодорхойлолтын фонт",
-    pageTitle: "Хуудасны нэрийн фонт",
-    titleFont: "Нүүр фонт",
-    descriptionFont: "Дүрслэлийн фонт",
+    color: "Өнгө",
+    placeholderColor: "Газар эзэмшигчийн өнгө",
+    size: "Хэмжээ",
+    opacity: "Бүдүүлэг байдал",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Сүүдрийн эффект нэмэх",
-    opacity: "Бүдүүлэг байдал",
     boxShadowBlur: "Блур",
     boxShadowSpread: "Тархалт",
     boxShadowDrop: "Дусал",
     boxShadowInner: "Дотоод",
-    shadow: "Сүүдрийн нөлөө",
-    headerView: "Үзэх",
-    headerViewBasic: "Үндсэн",
-    headerViewAdvanced: "Өндөр хөгжсөн",
-    headerInheritWidthFrom: "Агуулгын бүсийн өргөн",
-    headerInheritWidthFromSurvey: "Судалгаатай адил",
-    headerInheritWidthFromContainer: "Сав баглаа боодолд тохирно",
-    headerTextAreaWidth: "Текстийн өргөн",
-    headerBackgroundColorSwitch: "Ар талын өнгө",
-    headerBackgroundColorNone: "Хэн ч биш",
-    headerBackgroundColorAccentColor: "Акцент өнгө",
-    headerBackgroundColorCustom: "Үйлчилгээ",
-    horizontalAlignmentLeft: "Зүүн",
-    horizontalAlignmentCenter: "Төв",
-    horizontalAlignmentRight: "Баруун талд",
-    verticalAlignmentTop: "Дээд",
-    verticalAlignmentMiddle: "Дунд",
-    verticalAlignmentBottom: "Доод",
-    logoPosition: "Лого байрлал",
-    headerTitlePosition: "Нүүр албан тушаал",
-    headerDescriptionPosition: "Тодорхойлолтын байрлал",
     names: {
       default: "Дефолт",
       sharp: "Хурц",
@@ -2203,3 +2223,78 @@ editorLocalization.locales["mn"] = mnStrings;
 // ed.pagePlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the page." => "Хуудас дээр шинэ элемент нэмэхийн тулд доорх \"Асуулт нэмэх\" товчийг дарна уу."
 // ed.panelPlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the panel." => "Доорх \"Асуулт нэмэх\" товчийг дарж панел дээр шинэ элемент нэмнэ."
 // ed.imagePlaceHolderMobile: "Click the button below and choose an image to upload" => "Доорх товчийг дарж татаж авах зургийг сонгоно уу"
+// coloralpha.opacity: "Opacity" => "Бүдүүлэг байдал"
+// font.family: "Font family" => "Фонтын гэр бүл"
+// font.color: "Color" => "Өнгө"
+// font.placeholderColor: "Placeholder color" => "Газар эзэмшигчийн өнгө"
+// font.size: "Size" => "Хэмжээ"
+// theme.themeName: "Theme" => "Сэдэв"
+// theme.isPanelless: "Question appearance" => "Асуулт хариултын төрх"
+// theme.editorPanel: "Background and corner radius" => "Ар талын болон булангийн радиус"
+// theme.questionPanel: "Background and corner radius" => "Ар талын болон булангийн радиус"
+// theme.primaryColor: "Accent color" => "Акцент өнгө"
+// theme.panelBackgroundTransparency: "Panel background opacity" => "Панелийн ар талын харанхуй байдал"
+// theme.questionBackgroundTransparency: "Question background opacity" => "Асуулт хариултын нөхцөл байдал"
+// theme.fontSize: "Font size" => "Фонтын хэмжээ"
+// theme.scale: "Scale" => "Хэмжүүр"
+// theme.cornerRadius: "Corner radius" => "Булангийн радиус"
+// theme.pageTitle: "Title font" => "Нүүр фонт"
+// theme.pageDescription: "Description font" => "Дүрслэлийн фонт"
+// theme.questionTitle: "Title font" => "Нүүр фонт"
+// theme.questionDescription: "Description font" => "Дүрслэлийн фонт"
+// theme.editorFont: "Font" => "Фонт"
+// theme.backgroundOpacity: "Opacity" => "Бүдүүлэг байдал"
+// theme.--sjs-font-family: "Font family" => "Фонтын гэр бүл"
+// theme.--sjs-general-backcolor-dim: "Background color" => "Ар талын өнгө"
+// theme.--sjs-primary-backcolor: "Accent background" => "Акцентийн гарал үүсэл"
+// theme.--sjs-primary-forecolor: "Accent foreground" => "Акцентийн өмнө"
+// theme.--sjs-shadow-small: "Shadow effects" => "Сүүдрийн нөлөө"
+// theme.--sjs-shadow-inner: "Shadow effects" => "Сүүдрийн нөлөө"
+// theme.--sjs-border-default: "Colors" => "Өнгө"
+// header@header.headerView: "View" => "Үзэх"
+// header@header.logoPosition: "Logo position" => "Лого байрлал"
+// header@header.surveyTitle: "Survey title font" => "Судалгааны нэрийн фонт"
+// header@header.surveyDescription: "Survey description font" => "Судалгааны тодорхойлолтын фонт"
+// header@header.headerTitle: "Survey title font" => "Судалгааны нэрийн фонт"
+// header@header.headerDescription: "Survey description font" => "Судалгааны тодорхойлолтын фонт"
+// header@header.inheritWidthFrom: "Content area width" => "Агуулгын бүсийн өргөн"
+// header@header.textAreaWidth: "Text width" => "Текстийн өргөн"
+// header@header.backgroundColorSwitch: "Background color" => "Ар талын өнгө"
+// header@header.backgroundImage: "Background image" => "Ар талын зураг"
+// header@header.backgroundImageOpacity: "Opacity" => "Бүдүүлэг байдал"
+// header@header.overlapEnabled: "Overlap" => "Давхар"
+// header@header.logoPositionX: "Logo position" => "Лого байрлал"
+// header@header.titlePositionX: "Title position" => "Нүүр албан тушаал"
+// header@header.descriptionPositionX: "Description position" => "Тодорхойлолтын байрлал"
+// weight.400: "Regular" => "Тогтмол"
+// weight.600: "Heavy" => "Хүнд"
+// weight.700: "Semi-bold" => "Хагас зоригтой"
+// weight.800: "Bold" => "Болд"
+// backgroundImageFit.auto: "Auto" => "Авто"
+// backgroundImageFit.cover: "Cover" => "Хөшиг"
+// backgroundImageFit.contain: "Contain" => "Агуулах"
+// backgroundImageFit.fill: "Stretch" => "Шээс"
+// backgroundImageFit.tile: "Tile" => "Тил"
+// backgroundImageAttachment.fixed: "Fixed" => "Зассан"
+// backgroundImageAttachment.scroll: "Scroll" => "Хуйлмал бичиг"
+// headerView.basic: "Basic" => "Үндсэн"
+// headerView.advanced: "Advanced" => "Өндөр хөгжсөн"
+// inheritWidthFrom.survey: "Same as survey" => "Судалгаатай адил"
+// inheritWidthFrom.container: "Fit to container" => "Сав баглаа боодолд тохирно"
+// backgroundColorSwitch.none: "None" => "Хэн ч биш"
+// backgroundColorSwitch.accentColor: "Accent color" => "Акцент өнгө"
+// backgroundColorSwitch.custom: "Custom" => "Үйлчилгээ"
+// colorPalette.light: "Light" => "Гэрэл"
+// colorPalette.dark: "Dark" => "Харанхуй"
+// isPanelless.false: "Default" => "Дефолт"
+// isPanelless.true: "Without Panels" => "Панелгүйгээр"
+// theme.cornerRadius: "Corner radius" => "Булангийн радиус"
+// theme.fontFamily: "Font family" => "Фонтын гэр бүл"
+// theme.fontWeightRegular: "Regular" => "Тогтмол"
+// theme.fontWeightHeavy: "Heavy" => "Хүнд"
+// theme.fontWeightSemiBold: "Semi-bold" => "Хагас зоригтой"
+// theme.fontWeightBold: "Bold" => "Болд"
+// theme.color: "Color" => "Өнгө"
+// theme.placeholderColor: "Placeholder color" => "Газар эзэмшигчийн өнгө"
+// theme.size: "Size" => "Хэмжээ"
+// theme.opacity: "Opacity" => "Бүдүүлэг байдал"

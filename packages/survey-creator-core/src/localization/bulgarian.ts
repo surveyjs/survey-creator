@@ -48,7 +48,7 @@ export var bgStrings = {
     text: "Въпроси с въвеждане на текст",
     containers: "Контейнери",
     matrix: "Матрица с въпроси",
-    misc: "Разни",
+    misc: "Разни"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -849,7 +849,49 @@ export var bgStrings = {
     minWidth_placeholder: "Примерно: 600px",
     maxWidth_placeholder: "Примерно: 50%",
     imageHeight_placeholder: "Автоматично",
-    imageWidth_placeholder: "Автоматично"
+    imageWidth_placeholder: "Автоматично",
+    theme: {
+      themeName: "Тема",
+      isPanelless: "Външен вид на въпроса",
+      editorPanel: "Фон и радиус на ъгъла",
+      questionPanel: "Фон и радиус на ъгъла",
+      primaryColor: "Цвят за акцентиране",
+      panelBackgroundTransparency: "Непрозрачност на фона на панела",
+      questionBackgroundTransparency: "Непрозрачност на фона на въпроса",
+      fontSize: "Размер на шрифта",
+      scale: "Мащаб",
+      cornerRadius: "Радиус на ъгъла",
+      pageTitle: "Шрифт на заглавието",
+      pageDescription: "Шрифт за описание",
+      questionTitle: "Шрифт на заглавието",
+      questionDescription: "Шрифт за описание",
+      editorFont: "Шрифт",
+      backgroundOpacity: "Непрозрачност",
+      "--sjs-font-family": "Семейство шрифтове",
+      "--sjs-general-backcolor-dim": "Цвят на фона",
+      "--sjs-primary-backcolor": "Фон за акцентиране",
+      "--sjs-primary-forecolor": "Акцентиране на преден план",
+      "--sjs-shadow-small": "Ефекти на сянка",
+      "--sjs-shadow-inner": "Ефекти на сянка",
+      "--sjs-border-default": "Цветове"
+    },
+    "header@header": {
+      headerView: "Изглед",
+      logoPosition: "Позиция на логото",
+      surveyTitle: "Шрифт за заглавие на проучване",
+      surveyDescription: "Шрифт за описание на проучването",
+      headerTitle: "Шрифт за заглавие на проучване",
+      headerDescription: "Шрифт за описание на проучването",
+      inheritWidthFrom: "Ширина на областта на съдържанието",
+      textAreaWidth: "Ширина на текста",
+      backgroundColorSwitch: "Цвят на фона",
+      backgroundImage: "Фоново изображение",
+      backgroundImageOpacity: "Непрозрачност",
+      overlapEnabled: "Припокриване",
+      logoPositionX: "Позиция на логото",
+      titlePositionX: "Позиция на заглавието",
+      descriptionPositionX: "Описание позиция"
+    }
   },
   // Property values
   pv: {
@@ -1065,6 +1107,38 @@ export var bgStrings = {
     searchMode: {
       contains: "Съдържа",
       startsWith: "Започва с"
+    },
+    backgroundImageFit: {
+      auto: "Авто",
+      cover: "Капак",
+      contain: "Съдържам",
+      fill: "Участък",
+      tile: "Плочки"
+    },
+    backgroundImageAttachment: {
+      fixed: "Неподвижен",
+      scroll: "Свитък"
+    },
+    headerView: {
+      basic: "Основен",
+      advanced: "Напреднал"
+    },
+    inheritWidthFrom: {
+      survey: "Същото като проучването",
+      container: "Побиране в контейнера"
+    },
+    backgroundColorSwitch: {
+      none: "Никой",
+      accentColor: "Цвят за акцентиране",
+      custom: "Обичай"
+    },
+    colorPalette: {
+      light: "Светлина",
+      dark: "Тъмен"
+    },
+    isPanelless: {
+      "false": "По подразбиране",
+      "true": "Без панели"
     }
   },
   // Operators
@@ -1472,94 +1546,40 @@ export var bgStrings = {
     copyDisplayValue: "Копиране на показваната стойност"
   },
   theme: {
-    "--background": "Цвят на фона",
-    "--background-dim-light": "Цвят на приглушената светлина на фона",
-    "--primary-foreground": "Основен цвят на преден план",
-    "--foreground": "Цвят на преден план",
-    "--base-unit": "Базова единица",
     advancedMode: "Разширен режим",
-    themeName: "Тема",
-    isPanelless: "Режими",
-    isPanellessPanels: "Панели",
-    isPanellessLightweight: "Лек",
-    themePaletteLight: "Светло",
-    themePaletteDark: "Тъмно",
-    primaryColor: "Цвят на акцента",
+    pageTitle: "Шрифт на заглавието на страницата",
+    questionTitle: "Шрифт на заглавието на въпроса",
+    editorPanel: "Редактор",
+    lines: "Линии",
     primaryDefaultColor: "По подразбиране",
     primaryDarkColor: "Върху",
     primaryLightColor: "Селектиран",
     backgroundDimColor: "Цвят на фона",
-    backgroundImage: "Фоново изображение",
-    backgroundImageFitAuto: "Автоматичен",
-    backgroundImageFitCover: "Корица",
-    backgroundImageFitContain: "Съдържание",
-    backgroundImageFitFill: "Участък",
-    backgroundImageFitTile: "Плочки",
-    backgroundOpacity: "Непрозрачност",
-    backgroundImageAttachmentFixed: "Неподвижен",
-    backgroundImageAttachmentScroll: "Свитък",
-    panelBackgroundTransparency: "Прозрачност на фона на панела",
-    questionBackgroundTransparency: "Прозрачност на фона на въпроса",
-    questionTitle: "Шрифт на заглавието на въпроса",
-    editorPanel: "Редактор",
-    backgroundCornerRadius: "Фон и радиус на ъгъла",
+    cornerRadius: "Радиус на ъгъла",
     backcolor: "Фон по подразбиране",
     hovercolor: "Фон под курсора на мишката",
     borderDecoration: "Декорация на контура",
-    accentBackground: "Акцентен фон",
-    accentForeground: "Акцентен преден план",
     primaryForecolor: "Цвят по подразбиране",
     primaryForecolorLight: "Деактивиран цвят",
-    colorsTitle: "Цветове",
     font: "Шрифт",
-    lines: "Линии",
     borderDefault: "Преобладаващ",
     borderLight: "Незначителен",
-    fontFamily: "Шрифтово семейство",
-    fontSize: "Размер на шрифта",
+    fontFamily: "Семейство шрифтове",
+    fontWeightRegular: "Редовни",
+    fontWeightHeavy: "Тежък",
+    fontWeightSemiBold: "Полу-полу-получер",
+    fontWeightBold: "Безочлив",
     color: "Цвят",
     placeholderColor: "Цвят на контейнера",
-    size: "Размер",
-    fontWeightRegular: "Същински (обичаен)",
-    fontWeightHeavy: "Тежък",
-    fontWeightSemiBold: "Полудебел",
-    fontWeightBold: "Удебелен",
-    scale: "Мащаб",
-    cornerRadius: "Радиус на ъгъла",
-    surveyTitleFont: "Шрифт на заглавието на анкетата",
-    surveyDescriptionFont: "Шрифт за описание на проучването",
-    pageTitle: "Шрифт на заглавието на страницата",
-    titleFont: "Шрифт на заглавието",
-    descriptionFont: "Шрифт за описание",
+    size: "Големина",
+    opacity: "Непрозрачност",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Добавяне на ефект на сянка",
-    opacity: "Непрозрачност",
     boxShadowBlur: "Замъгляване",
     boxShadowSpread: "Разпространение",
     boxShadowDrop: "Капка",
     boxShadowInner: "Вътрешен",
-    shadow: "Ефекти на сянка",
-    headerView: "Изглед",
-    headerViewBasic: "Основен",
-    headerViewAdvanced: "Напреднал",
-    headerInheritWidthFrom: "Ширина на областта на съдържанието",
-    headerInheritWidthFromSurvey: "Същото като проучването",
-    headerInheritWidthFromContainer: "Побиране в контейнера",
-    headerTextAreaWidth: "Ширина на текста",
-    headerBackgroundColorSwitch: "Цвят на фона",
-    headerBackgroundColorNone: "Никой",
-    headerBackgroundColorAccentColor: "Цвят за акцентиране",
-    headerBackgroundColorCustom: "Обичай",
-    horizontalAlignmentLeft: "Ляво",
-    horizontalAlignmentCenter: "Център",
-    horizontalAlignmentRight: "Дясно",
-    verticalAlignmentTop: "Връх",
-    verticalAlignmentMiddle: "Среда",
-    verticalAlignmentBottom: "Дъно",
-    logoPosition: "Позиция на логото",
-    headerTitlePosition: "Позиция на заглавието",
-    headerDescriptionPosition: "Описание позиция",
     names: {
       default: "По подразбиране",
       sharp: "Остър",
@@ -2110,3 +2130,78 @@ editorLocalization.locales["bg"] = bgStrings;
 // ed.pagePlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the page." => "Кликнете върху бутона \"Добавяне на въпрос\" по-долу, за да добавите нов елемент към страницата."
 // ed.panelPlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the panel." => "Кликнете върху бутона \"Добавяне на въпрос\" по-долу, за да добавите нов елемент към панела."
 // ed.imagePlaceHolderMobile: "Click the button below and choose an image to upload" => "Кликнете върху бутона по-долу и изберете изображение за качване"
+// coloralpha.opacity: "Opacity" => "Непрозрачност"
+// font.family: "Font family" => "Семейство шрифтове"
+// font.color: "Color" => "Цвят"
+// font.placeholderColor: "Placeholder color" => "Цвят на контейнера"
+// font.size: "Size" => "Големина"
+// theme.themeName: "Theme" => "Тема"
+// theme.isPanelless: "Question appearance" => "Външен вид на въпроса"
+// theme.editorPanel: "Background and corner radius" => "Фон и радиус на ъгъла"
+// theme.questionPanel: "Background and corner radius" => "Фон и радиус на ъгъла"
+// theme.primaryColor: "Accent color" => "Цвят за акцентиране"
+// theme.panelBackgroundTransparency: "Panel background opacity" => "Непрозрачност на фона на панела"
+// theme.questionBackgroundTransparency: "Question background opacity" => "Непрозрачност на фона на въпроса"
+// theme.fontSize: "Font size" => "Размер на шрифта"
+// theme.scale: "Scale" => "Мащаб"
+// theme.cornerRadius: "Corner radius" => "Радиус на ъгъла"
+// theme.pageTitle: "Title font" => "Шрифт на заглавието"
+// theme.pageDescription: "Description font" => "Шрифт за описание"
+// theme.questionTitle: "Title font" => "Шрифт на заглавието"
+// theme.questionDescription: "Description font" => "Шрифт за описание"
+// theme.editorFont: "Font" => "Шрифт"
+// theme.backgroundOpacity: "Opacity" => "Непрозрачност"
+// theme.--sjs-font-family: "Font family" => "Семейство шрифтове"
+// theme.--sjs-general-backcolor-dim: "Background color" => "Цвят на фона"
+// theme.--sjs-primary-backcolor: "Accent background" => "Фон за акцентиране"
+// theme.--sjs-primary-forecolor: "Accent foreground" => "Акцентиране на преден план"
+// theme.--sjs-shadow-small: "Shadow effects" => "Ефекти на сянка"
+// theme.--sjs-shadow-inner: "Shadow effects" => "Ефекти на сянка"
+// theme.--sjs-border-default: "Colors" => "Цветове"
+// header@header.headerView: "View" => "Изглед"
+// header@header.logoPosition: "Logo position" => "Позиция на логото"
+// header@header.surveyTitle: "Survey title font" => "Шрифт за заглавие на проучване"
+// header@header.surveyDescription: "Survey description font" => "Шрифт за описание на проучването"
+// header@header.headerTitle: "Survey title font" => "Шрифт за заглавие на проучване"
+// header@header.headerDescription: "Survey description font" => "Шрифт за описание на проучването"
+// header@header.inheritWidthFrom: "Content area width" => "Ширина на областта на съдържанието"
+// header@header.textAreaWidth: "Text width" => "Ширина на текста"
+// header@header.backgroundColorSwitch: "Background color" => "Цвят на фона"
+// header@header.backgroundImage: "Background image" => "Фоново изображение"
+// header@header.backgroundImageOpacity: "Opacity" => "Непрозрачност"
+// header@header.overlapEnabled: "Overlap" => "Припокриване"
+// header@header.logoPositionX: "Logo position" => "Позиция на логото"
+// header@header.titlePositionX: "Title position" => "Позиция на заглавието"
+// header@header.descriptionPositionX: "Description position" => "Описание позиция"
+// weight.400: "Regular" => "Редовни"
+// weight.600: "Heavy" => "Тежък"
+// weight.700: "Semi-bold" => "Полу-полу-получер"
+// weight.800: "Bold" => "Безочлив"
+// backgroundImageFit.auto: "Auto" => "Авто"
+// backgroundImageFit.cover: "Cover" => "Капак"
+// backgroundImageFit.contain: "Contain" => "Съдържам"
+// backgroundImageFit.fill: "Stretch" => "Участък"
+// backgroundImageFit.tile: "Tile" => "Плочки"
+// backgroundImageAttachment.fixed: "Fixed" => "Неподвижен"
+// backgroundImageAttachment.scroll: "Scroll" => "Свитък"
+// headerView.basic: "Basic" => "Основен"
+// headerView.advanced: "Advanced" => "Напреднал"
+// inheritWidthFrom.survey: "Same as survey" => "Същото като проучването"
+// inheritWidthFrom.container: "Fit to container" => "Побиране в контейнера"
+// backgroundColorSwitch.none: "None" => "Никой"
+// backgroundColorSwitch.accentColor: "Accent color" => "Цвят за акцентиране"
+// backgroundColorSwitch.custom: "Custom" => "Обичай"
+// colorPalette.light: "Light" => "Светлина"
+// colorPalette.dark: "Dark" => "Тъмен"
+// isPanelless.false: "Default" => "По подразбиране"
+// isPanelless.true: "Without Panels" => "Без панели"
+// theme.cornerRadius: "Corner radius" => "Радиус на ъгъла"
+// theme.fontFamily: "Font family" => "Семейство шрифтове"
+// theme.fontWeightRegular: "Regular" => "Редовни"
+// theme.fontWeightHeavy: "Heavy" => "Тежък"
+// theme.fontWeightSemiBold: "Semi-bold" => "Полу-полу-получер"
+// theme.fontWeightBold: "Bold" => "Безочлив"
+// theme.color: "Color" => "Цвят"
+// theme.placeholderColor: "Placeholder color" => "Цвят на контейнера"
+// theme.size: "Size" => "Големина"
+// theme.opacity: "Opacity" => "Непрозрачност"

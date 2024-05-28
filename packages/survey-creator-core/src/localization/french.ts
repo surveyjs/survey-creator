@@ -48,7 +48,7 @@ var frenchTranslation = {
     text: "Questions de saisie libre",
     containers: "Conteneurs",
     matrix: "Questions matricielles",
-    misc: "Divers",
+    misc: "Divers"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -849,7 +849,49 @@ var frenchTranslation = {
     minWidth_placeholder: "Ex. : 600px",
     maxWidth_placeholder: "Ex. : 50 %",
     imageHeight_placeholder: "auto",
-    imageWidth_placeholder: "auto"
+    imageWidth_placeholder: "auto",
+    theme: {
+      themeName: "Thème",
+      isPanelless: "Apparence de la question",
+      editorPanel: "Arrière-plan et rayon d’angle",
+      questionPanel: "Arrière-plan et rayon d’angle",
+      primaryColor: "Couleur d’accentuation",
+      panelBackgroundTransparency: "Opacité de l’arrière-plan du panneau",
+      questionBackgroundTransparency: "Opacité de l’arrière-plan de la question",
+      fontSize: "Taille de la police",
+      scale: "Écaille",
+      cornerRadius: "Rayon d’angle",
+      pageTitle: "Police de titre",
+      pageDescription: "Police de description",
+      questionTitle: "Police de titre",
+      questionDescription: "Police de description",
+      editorFont: "Police",
+      backgroundOpacity: "Opacité",
+      "--sjs-font-family": "Famille de polices",
+      "--sjs-general-backcolor-dim": "Couleur de fond",
+      "--sjs-primary-backcolor": "Fond d’accent",
+      "--sjs-primary-forecolor": "Premier plan accentué",
+      "--sjs-shadow-small": "Effets d’ombre",
+      "--sjs-shadow-inner": "Effets d’ombre",
+      "--sjs-border-default": "Couleurs"
+    },
+    "header@header": {
+      headerView: "Vue",
+      logoPosition: "Position du logo",
+      surveyTitle: "Police de titre de l’enquête",
+      surveyDescription: "Police de description de l’enquête",
+      headerTitle: "Police de titre de l’enquête",
+      headerDescription: "Police de description de l’enquête",
+      inheritWidthFrom: "Largeur de la zone de contenu",
+      textAreaWidth: "Largeur du texte",
+      backgroundColorSwitch: "Couleur de fond",
+      backgroundImage: "Image d’arrière-plan",
+      backgroundImageOpacity: "Opacité",
+      overlapEnabled: "Chevauchement",
+      logoPositionX: "Position du logo",
+      titlePositionX: "Position du titre",
+      descriptionPositionX: "Description du poste"
+    }
   },
   // Property values
   pv: {
@@ -1065,6 +1107,38 @@ var frenchTranslation = {
     searchMode: {
       contains: "Contient",
       startsWith: "Commence par"
+    },
+    backgroundImageFit: {
+      auto: "Auto",
+      cover: "Couvrir",
+      contain: "Contenir",
+      fill: "Étirer",
+      tile: "Carreau"
+    },
+    backgroundImageAttachment: {
+      fixed: "Fixe",
+      scroll: "Faire défiler"
+    },
+    headerView: {
+      basic: "Basique",
+      advanced: "Avancé"
+    },
+    inheritWidthFrom: {
+      survey: "Identique à l’enquête",
+      container: "Adapter au conteneur"
+    },
+    backgroundColorSwitch: {
+      none: "Aucun",
+      accentColor: "Couleur d’accentuation",
+      custom: "Coutume"
+    },
+    colorPalette: {
+      light: "Lumière",
+      dark: "Sombre"
+    },
+    isPanelless: {
+      "false": "Faire défaut",
+      "true": "Sans panneaux"
     }
   },
   // Operators
@@ -1472,94 +1546,40 @@ var frenchTranslation = {
     copyDisplayValue: "Copier la valeur d’affichage"
   },
   theme: {
-    "--background": "Couleur d’arrière-plan",
-    "--background-dim-light": "Couleur de lumière faible d’arrière-plan",
-    "--primary-foreground": "Couleur de premier plan primaire",
-    "--foreground": "Couleur de premier plan",
-    "--base-unit": "Unité de base",
     advancedMode: "Mode avancé",
-    themeName: "Thème",
-    isPanelless: "Apparence de la question",
-    isPanellessPanels: "Par défaut",
-    isPanellessLightweight: "Sans section",
-    themePaletteLight: "Clair",
-    themePaletteDark: "Sombre",
-    primaryColor: "Couleur d’accentuation",
+    pageTitle: "Police du titre de la page",
+    questionTitle: "Police du titre de la question",
+    editorPanel: "Champs de réponse",
+    lines: "Lignes",
     primaryDefaultColor: "Faire défaut",
     primaryDarkColor: "Au survol",
     primaryLightColor: "Sélectionné",
     backgroundDimColor: "Couleur d’arrière-plan",
-    backgroundImage: "Image d’arrière-plan",
-    backgroundImageFitAuto: "Auto",
-    backgroundImageFitCover: "Remplir",
-    backgroundImageFitContain: "Ajuster",
-    backgroundImageFitFill: "Étirer",
-    backgroundImageFitTile: "Carreau",
-    backgroundOpacity: "Opacité",
-    backgroundImageAttachmentFixed: "Fixe",
-    backgroundImageAttachmentScroll: "Défilable",
-    panelBackgroundTransparency: "Opacité de l’arrière-plan des sections",
-    questionBackgroundTransparency: "Opacité de l’arrière-plan des questions",
-    questionTitle: "Police du titre de la question",
-    editorPanel: "Champs de réponse",
-    backgroundCornerRadius: "Arrière-plan et rayon d’angle",
+    cornerRadius: "Rayon d’angle",
     backcolor: "Arrière-plan par défaut",
     hovercolor: "Arrière-plan du survol",
     borderDecoration: "Décoration de bordure",
-    accentBackground: "Accentuation de l'arrière plan",
-    accentForeground: "Accentuation du premier plan",
     primaryForecolor: "Couleur par défaut",
     primaryForecolorLight: "Couleur Désactivée",
-    colorsTitle: "Couleurs",
     font: "Police",
-    lines: "Lignes",
     borderDefault: "Sombre",
     borderLight: "Clair",
     fontFamily: "Famille de polices",
-    fontSize: "Taille de police",
-    color: "Couleur",
-    placeholderColor: "Couleur de l’espace réservé",
-    size: "Taille",
     fontWeightRegular: "Régulier",
     fontWeightHeavy: "Lourd",
     fontWeightSemiBold: "Semi-gras",
-    fontWeightBold: "Gras",
-    scale: "Échelle",
-    cornerRadius: "Angle",
-    surveyTitleFont: "Police du titre du sondage",
-    surveyDescriptionFont: "Police de description de l’enquête",
-    pageTitle: "Police du titre de la page",
-    titleFont: "Police du titre",
-    descriptionFont: "Police de description",
+    fontWeightBold: "Audacieux",
+    color: "Couleur",
+    placeholderColor: "Couleur de l’espace réservé",
+    size: "Taille",
+    opacity: "Opacité",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Ajouter un effet d’ombre",
-    opacity: "Opacité",
     boxShadowBlur: "Flou",
     boxShadowSpread: "Propagation",
     boxShadowDrop: "Extérieur",
     boxShadowInner: "Intérieur",
-    shadow: "Effets d’ombre",
-    headerView: "Vue",
-    headerViewBasic: "Basique",
-    headerViewAdvanced: "Avancé",
-    headerInheritWidthFrom: "Largeur de la zone de contenu",
-    headerInheritWidthFromSurvey: "Identique à l’enquête",
-    headerInheritWidthFromContainer: "S’adapte au conteneur",
-    headerTextAreaWidth: "Largeur du texte",
-    headerBackgroundColorSwitch: "Couleur d’arrière-plan",
-    headerBackgroundColorNone: "Aucun",
-    headerBackgroundColorAccentColor: "Couleur d’accentuation",
-    headerBackgroundColorCustom: "Coutume",
-    horizontalAlignmentLeft: "Gauche",
-    horizontalAlignmentCenter: "Centre",
-    horizontalAlignmentRight: "Droite",
-    verticalAlignmentTop: "Retour au début",
-    verticalAlignmentMiddle: "Milieu",
-    verticalAlignmentBottom: "Fond",
-    logoPosition: "Position du logo",
-    headerTitlePosition: "Position du titre",
-    headerDescriptionPosition: "Description du poste",
     names: {
       default: "Par défaut",
       sharp: "Tranchant",
@@ -2608,3 +2628,78 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // ed.pagePlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the page." => "Cliquez sur le bouton « Ajouter une question » ci-dessous pour ajouter un nouvel élément à la page."
 // ed.panelPlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the panel." => "Cliquez sur le bouton « Ajouter une question » ci-dessous pour ajouter un nouvel élément au panneau."
 // ed.imagePlaceHolderMobile: "Click the button below and choose an image to upload" => "Cliquez sur le bouton ci-dessous et choisissez une image à télécharger"
+// coloralpha.opacity: "Opacity" => "Opacité"
+// font.family: "Font family" => "Famille de polices"
+// font.color: "Color" => "Couleur"
+// font.placeholderColor: "Placeholder color" => "Couleur de l’espace réservé"
+// font.size: "Size" => "Taille"
+// theme.themeName: "Theme" => "Thème"
+// theme.isPanelless: "Question appearance" => "Apparence de la question"
+// theme.editorPanel: "Background and corner radius" => "Arrière-plan et rayon d’angle"
+// theme.questionPanel: "Background and corner radius" => "Arrière-plan et rayon d’angle"
+// theme.primaryColor: "Accent color" => "Couleur d’accentuation"
+// theme.panelBackgroundTransparency: "Panel background opacity" => "Opacité de l’arrière-plan du panneau"
+// theme.questionBackgroundTransparency: "Question background opacity" => "Opacité de l’arrière-plan de la question"
+// theme.fontSize: "Font size" => "Taille de la police"
+// theme.scale: "Scale" => "Écaille"
+// theme.cornerRadius: "Corner radius" => "Rayon d’angle"
+// theme.pageTitle: "Title font" => "Police de titre"
+// theme.pageDescription: "Description font" => "Police de description"
+// theme.questionTitle: "Title font" => "Police de titre"
+// theme.questionDescription: "Description font" => "Police de description"
+// theme.editorFont: "Font" => "Police"
+// theme.backgroundOpacity: "Opacity" => "Opacité"
+// theme.--sjs-font-family: "Font family" => "Famille de polices"
+// theme.--sjs-general-backcolor-dim: "Background color" => "Couleur de fond"
+// theme.--sjs-primary-backcolor: "Accent background" => "Fond d’accent"
+// theme.--sjs-primary-forecolor: "Accent foreground" => "Premier plan accentué"
+// theme.--sjs-shadow-small: "Shadow effects" => "Effets d’ombre"
+// theme.--sjs-shadow-inner: "Shadow effects" => "Effets d’ombre"
+// theme.--sjs-border-default: "Colors" => "Couleurs"
+// header@header.headerView: "View" => "Vue"
+// header@header.logoPosition: "Logo position" => "Position du logo"
+// header@header.surveyTitle: "Survey title font" => "Police de titre de l’enquête"
+// header@header.surveyDescription: "Survey description font" => "Police de description de l’enquête"
+// header@header.headerTitle: "Survey title font" => "Police de titre de l’enquête"
+// header@header.headerDescription: "Survey description font" => "Police de description de l’enquête"
+// header@header.inheritWidthFrom: "Content area width" => "Largeur de la zone de contenu"
+// header@header.textAreaWidth: "Text width" => "Largeur du texte"
+// header@header.backgroundColorSwitch: "Background color" => "Couleur de fond"
+// header@header.backgroundImage: "Background image" => "Image d’arrière-plan"
+// header@header.backgroundImageOpacity: "Opacity" => "Opacité"
+// header@header.overlapEnabled: "Overlap" => "Chevauchement"
+// header@header.logoPositionX: "Logo position" => "Position du logo"
+// header@header.titlePositionX: "Title position" => "Position du titre"
+// header@header.descriptionPositionX: "Description position" => "Description du poste"
+// weight.400: "Regular" => "Régulier"
+// weight.600: "Heavy" => "Lourd"
+// weight.700: "Semi-bold" => "Semi-gras"
+// weight.800: "Bold" => "Audacieux"
+// backgroundImageFit.auto: "Auto" => "Auto"
+// backgroundImageFit.cover: "Cover" => "Couvrir"
+// backgroundImageFit.contain: "Contain" => "Contenir"
+// backgroundImageFit.fill: "Stretch" => "Étirer"
+// backgroundImageFit.tile: "Tile" => "Carreau"
+// backgroundImageAttachment.fixed: "Fixed" => "Fixe"
+// backgroundImageAttachment.scroll: "Scroll" => "Faire défiler"
+// headerView.basic: "Basic" => "Basique"
+// headerView.advanced: "Advanced" => "Avancé"
+// inheritWidthFrom.survey: "Same as survey" => "Identique à l’enquête"
+// inheritWidthFrom.container: "Fit to container" => "Adapter au conteneur"
+// backgroundColorSwitch.none: "None" => "Aucun"
+// backgroundColorSwitch.accentColor: "Accent color" => "Couleur d’accentuation"
+// backgroundColorSwitch.custom: "Custom" => "Coutume"
+// colorPalette.light: "Light" => "Lumière"
+// colorPalette.dark: "Dark" => "Sombre"
+// isPanelless.false: "Default" => "Faire défaut"
+// isPanelless.true: "Without Panels" => "Sans panneaux"
+// theme.cornerRadius: "Corner radius" => "Rayon d’angle"
+// theme.fontFamily: "Font family" => "Famille de polices"
+// theme.fontWeightRegular: "Regular" => "Régulier"
+// theme.fontWeightHeavy: "Heavy" => "Lourd"
+// theme.fontWeightSemiBold: "Semi-bold" => "Semi-gras"
+// theme.fontWeightBold: "Bold" => "Audacieux"
+// theme.color: "Color" => "Couleur"
+// theme.placeholderColor: "Placeholder color" => "Couleur de l’espace réservé"
+// theme.size: "Size" => "Taille"
+// theme.opacity: "Opacity" => "Opacité"

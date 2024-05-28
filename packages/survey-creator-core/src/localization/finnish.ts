@@ -48,7 +48,7 @@ export var fiStrings = {
     text: "Tekstinsyöttökysymykset",
     containers: "Säiliöt",
     matrix: "Matriisin kysymykset",
-    misc: "Muut",
+    misc: "Muut"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -849,7 +849,49 @@ export var fiStrings = {
     minWidth_placeholder: "Esimerkki: 600 pikseliä",
     maxWidth_placeholder: "Esimerkki: 50 %",
     imageHeight_placeholder: "auto",
-    imageWidth_placeholder: "auto"
+    imageWidth_placeholder: "auto",
+    theme: {
+      themeName: "Teema",
+      isPanelless: "Kysymyksen ulkonäkö",
+      editorPanel: "Taustan ja kulman säde",
+      questionPanel: "Taustan ja kulman säde",
+      primaryColor: "Korostusväri",
+      panelBackgroundTransparency: "Paneelin taustan peittävyys",
+      questionBackgroundTransparency: "Taustan peittävyyden kyseenalaistaminen",
+      fontSize: "Kirjasinkoko",
+      scale: "Mittakaava",
+      cornerRadius: "Kulman säde",
+      pageTitle: "Otsikon fontti",
+      pageDescription: "Kuvauksen fontti",
+      questionTitle: "Otsikon fontti",
+      questionDescription: "Kuvauksen fontti",
+      editorFont: "Fontti",
+      backgroundOpacity: "Läpikuultamattomuus",
+      "--sjs-font-family": "Fonttiperhe",
+      "--sjs-general-backcolor-dim": "Taustaväri",
+      "--sjs-primary-backcolor": "Aksentti tausta",
+      "--sjs-primary-forecolor": "Aksentti etualalla",
+      "--sjs-shadow-small": "Varjo-tehosteet",
+      "--sjs-shadow-inner": "Varjo-tehosteet",
+      "--sjs-border-default": "Värit"
+    },
+    "header@header": {
+      headerView: "Näkymä",
+      logoPosition: "Logon sijainti",
+      surveyTitle: "Kyselyn otsikon fontti",
+      surveyDescription: "Kyselyn kuvauksen fontti",
+      headerTitle: "Kyselyn otsikon fontti",
+      headerDescription: "Kyselyn kuvauksen fontti",
+      inheritWidthFrom: "Sisältöalueen leveys",
+      textAreaWidth: "Tekstin leveys",
+      backgroundColorSwitch: "Taustaväri",
+      backgroundImage: "Taustakuvan",
+      backgroundImageOpacity: "Läpikuultamattomuus",
+      overlapEnabled: "Limittyä",
+      logoPositionX: "Logon sijainti",
+      titlePositionX: "Otsikon sijainti",
+      descriptionPositionX: "Kuvauksen sijainti"
+    }
   },
   // Property values
   pv: {
@@ -1065,6 +1107,38 @@ export var fiStrings = {
     searchMode: {
       contains: "Sisältää",
       startsWith: "Alkaa"
+    },
+    backgroundImageFit: {
+      auto: "Auto",
+      cover: "Kansi",
+      contain: "Sisältää",
+      fill: "Venyä",
+      tile: "Laatta"
+    },
+    backgroundImageAttachment: {
+      fixed: "Kiinteä",
+      scroll: "Vierittää"
+    },
+    headerView: {
+      basic: "Emäksinen",
+      advanced: "Edistynyt"
+    },
+    inheritWidthFrom: {
+      survey: "Sama kuin kyselyssä",
+      container: "Sovita konttiin"
+    },
+    backgroundColorSwitch: {
+      none: "Ei lainkaan",
+      accentColor: "Korostusväri",
+      custom: "Tapa"
+    },
+    colorPalette: {
+      light: "Valo",
+      dark: "Tumma"
+    },
+    isPanelless: {
+      "false": "Laiminlyönti",
+      "true": "Ilman paneeleja"
     }
   },
   // Operators
@@ -1472,94 +1546,40 @@ export var fiStrings = {
     copyDisplayValue: "Kopioi näyttöarvo"
   },
   theme: {
-    "--background": "Taustaväri",
-    "--background-dim-light": "Taustan himmeä vaalea väri",
-    "--primary-foreground": "Ensisijainen etualan väri",
-    "--foreground": "Edustan väri",
-    "--base-unit": "Perusyksikkö",
     advancedMode: "Edistynyt tila",
-    themeName: "Teema",
-    isPanelless: "Kysymyksen ulkonäkö",
-    isPanellessPanels: "Laiminlyönti",
-    isPanellessLightweight: "Ilman paneeleja",
-    themePaletteLight: "Valo",
-    themePaletteDark: "Tumma",
-    primaryColor: "Korostusväri",
+    pageTitle: "Sivun otsikon fontti",
+    questionTitle: "Kysymyksen otsikon fontti",
+    editorPanel: "Syötä elementti",
+    lines: "Rivit",
     primaryDefaultColor: "Laiminlyönti",
     primaryDarkColor: "Häilyä",
     primaryLightColor: "Valittu",
     backgroundDimColor: "Taustaväri",
-    backgroundImage: "Taustakuvan",
-    backgroundImageFitAuto: "Auto",
-    backgroundImageFitCover: "Kansi",
-    backgroundImageFitContain: "Sisältää",
-    backgroundImageFitFill: "Venyä",
-    backgroundImageFitTile: "Laatta",
-    backgroundOpacity: "Läpikuultamattomuus",
-    backgroundImageAttachmentFixed: "Kiinteä",
-    backgroundImageAttachmentScroll: "Vierittää",
-    panelBackgroundTransparency: "Paneelin taustan peittävyys",
-    questionBackgroundTransparency: "Taustan peittävyyden kyseenalaistaminen",
-    questionTitle: "Kysymyksen otsikon fontti",
-    editorPanel: "Syötä elementti",
-    backgroundCornerRadius: "Taustan ja kulman säde",
+    cornerRadius: "Kulman säde",
     backcolor: "Oletustausta",
     hovercolor: "Vie hiiri taustalle",
     borderDecoration: "Reunusten koristelu",
-    accentBackground: "Aksentti tausta",
-    accentForeground: "Aksentti etualalla",
     primaryForecolor: "Oletusväri",
     primaryForecolorLight: "Käytöstä poistettu väri",
-    colorsTitle: "Värit",
     font: "Fontti",
-    lines: "Rivit",
     borderDefault: "Tummempi",
     borderLight: "Sytytin",
     fontFamily: "Fonttiperhe",
-    fontSize: "Kirjasinkoko",
-    color: "Väri",
-    placeholderColor: "Paikkamerkin väri",
-    size: "Koko",
     fontWeightRegular: "Säännöllinen",
     fontWeightHeavy: "Raskas",
     fontWeightSemiBold: "Puoliksi lihavoitu",
     fontWeightBold: "Rohkea",
-    scale: "Mittakaava",
-    cornerRadius: "Kulman säde",
-    surveyTitleFont: "Kyselyn otsikon fontti",
-    surveyDescriptionFont: "Kyselyn kuvauksen fontti",
-    pageTitle: "Sivun otsikon fontti",
-    titleFont: "Otsikon fontti",
-    descriptionFont: "Kuvauksen fontti",
+    color: "Väri",
+    placeholderColor: "Paikkamerkin väri",
+    size: "Koko",
+    opacity: "Läpikuultamattomuus",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Lisää varjotehoste",
-    opacity: "Läpikuultamattomuus",
     boxShadowBlur: "Hämärtyä",
     boxShadowSpread: "Leviäminen",
     boxShadowDrop: "Pisara",
     boxShadowInner: "Sisäinen",
-    shadow: "Varjo-tehosteet",
-    headerView: "Näkymä",
-    headerViewBasic: "Emäksinen",
-    headerViewAdvanced: "Edistynyt",
-    headerInheritWidthFrom: "Sisältöalueen leveys",
-    headerInheritWidthFromSurvey: "Sama kuin kyselyssä",
-    headerInheritWidthFromContainer: "Sovita konttiin",
-    headerTextAreaWidth: "Tekstin leveys",
-    headerBackgroundColorSwitch: "Taustaväri",
-    headerBackgroundColorNone: "Ei lainkaan",
-    headerBackgroundColorAccentColor: "Korostusväri",
-    headerBackgroundColorCustom: "Tapa",
-    horizontalAlignmentLeft: "Vasen",
-    horizontalAlignmentCenter: "Keskus",
-    horizontalAlignmentRight: "Oikea",
-    verticalAlignmentTop: "Huippu",
-    verticalAlignmentMiddle: "Keskus",
-    verticalAlignmentBottom: "Pohja",
-    logoPosition: "Logon sijainti",
-    headerTitlePosition: "Otsikon sijainti",
-    headerDescriptionPosition: "Kuvauksen sijainti",
     names: {
       default: "Laiminlyönti",
       sharp: "Terävä",
@@ -2547,3 +2567,78 @@ editorLocalization.locales["fi"] = fiStrings;
 // ed.pagePlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the page." => "Napsauta alla olevaa Lisää kysymys -painiketta lisätäksesi sivulle uuden elementin."
 // ed.panelPlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the panel." => "Napsauta alla olevaa Lisää kysymys -painiketta lisätäksesi uuden elementin paneeliin."
 // ed.imagePlaceHolderMobile: "Click the button below and choose an image to upload" => "Klikkaa alla olevaa painiketta ja valitse ladattava kuva"
+// coloralpha.opacity: "Opacity" => "Läpikuultamattomuus"
+// font.family: "Font family" => "Fonttiperhe"
+// font.color: "Color" => "Väri"
+// font.placeholderColor: "Placeholder color" => "Paikkamerkin väri"
+// font.size: "Size" => "Koko"
+// theme.themeName: "Theme" => "Teema"
+// theme.isPanelless: "Question appearance" => "Kysymyksen ulkonäkö"
+// theme.editorPanel: "Background and corner radius" => "Taustan ja kulman säde"
+// theme.questionPanel: "Background and corner radius" => "Taustan ja kulman säde"
+// theme.primaryColor: "Accent color" => "Korostusväri"
+// theme.panelBackgroundTransparency: "Panel background opacity" => "Paneelin taustan peittävyys"
+// theme.questionBackgroundTransparency: "Question background opacity" => "Taustan peittävyyden kyseenalaistaminen"
+// theme.fontSize: "Font size" => "Kirjasinkoko"
+// theme.scale: "Scale" => "Mittakaava"
+// theme.cornerRadius: "Corner radius" => "Kulman säde"
+// theme.pageTitle: "Title font" => "Otsikon fontti"
+// theme.pageDescription: "Description font" => "Kuvauksen fontti"
+// theme.questionTitle: "Title font" => "Otsikon fontti"
+// theme.questionDescription: "Description font" => "Kuvauksen fontti"
+// theme.editorFont: "Font" => "Fontti"
+// theme.backgroundOpacity: "Opacity" => "Läpikuultamattomuus"
+// theme.--sjs-font-family: "Font family" => "Fonttiperhe"
+// theme.--sjs-general-backcolor-dim: "Background color" => "Taustaväri"
+// theme.--sjs-primary-backcolor: "Accent background" => "Aksentti tausta"
+// theme.--sjs-primary-forecolor: "Accent foreground" => "Aksentti etualalla"
+// theme.--sjs-shadow-small: "Shadow effects" => "Varjo-tehosteet"
+// theme.--sjs-shadow-inner: "Shadow effects" => "Varjo-tehosteet"
+// theme.--sjs-border-default: "Colors" => "Värit"
+// header@header.headerView: "View" => "Näkymä"
+// header@header.logoPosition: "Logo position" => "Logon sijainti"
+// header@header.surveyTitle: "Survey title font" => "Kyselyn otsikon fontti"
+// header@header.surveyDescription: "Survey description font" => "Kyselyn kuvauksen fontti"
+// header@header.headerTitle: "Survey title font" => "Kyselyn otsikon fontti"
+// header@header.headerDescription: "Survey description font" => "Kyselyn kuvauksen fontti"
+// header@header.inheritWidthFrom: "Content area width" => "Sisältöalueen leveys"
+// header@header.textAreaWidth: "Text width" => "Tekstin leveys"
+// header@header.backgroundColorSwitch: "Background color" => "Taustaväri"
+// header@header.backgroundImage: "Background image" => "Taustakuvan"
+// header@header.backgroundImageOpacity: "Opacity" => "Läpikuultamattomuus"
+// header@header.overlapEnabled: "Overlap" => "Limittyä"
+// header@header.logoPositionX: "Logo position" => "Logon sijainti"
+// header@header.titlePositionX: "Title position" => "Otsikon sijainti"
+// header@header.descriptionPositionX: "Description position" => "Kuvauksen sijainti"
+// weight.400: "Regular" => "Säännöllinen"
+// weight.600: "Heavy" => "Raskas"
+// weight.700: "Semi-bold" => "Puoliksi lihavoitu"
+// weight.800: "Bold" => "Rohkea"
+// backgroundImageFit.auto: "Auto" => "Auto"
+// backgroundImageFit.cover: "Cover" => "Kansi"
+// backgroundImageFit.contain: "Contain" => "Sisältää"
+// backgroundImageFit.fill: "Stretch" => "Venyä"
+// backgroundImageFit.tile: "Tile" => "Laatta"
+// backgroundImageAttachment.fixed: "Fixed" => "Kiinteä"
+// backgroundImageAttachment.scroll: "Scroll" => "Vierittää"
+// headerView.basic: "Basic" => "Emäksinen"
+// headerView.advanced: "Advanced" => "Edistynyt"
+// inheritWidthFrom.survey: "Same as survey" => "Sama kuin kyselyssä"
+// inheritWidthFrom.container: "Fit to container" => "Sovita konttiin"
+// backgroundColorSwitch.none: "None" => "Ei lainkaan"
+// backgroundColorSwitch.accentColor: "Accent color" => "Korostusväri"
+// backgroundColorSwitch.custom: "Custom" => "Tapa"
+// colorPalette.light: "Light" => "Valo"
+// colorPalette.dark: "Dark" => "Tumma"
+// isPanelless.false: "Default" => "Laiminlyönti"
+// isPanelless.true: "Without Panels" => "Ilman paneeleja"
+// theme.cornerRadius: "Corner radius" => "Kulman säde"
+// theme.fontFamily: "Font family" => "Fonttiperhe"
+// theme.fontWeightRegular: "Regular" => "Säännöllinen"
+// theme.fontWeightHeavy: "Heavy" => "Raskas"
+// theme.fontWeightSemiBold: "Semi-bold" => "Puoliksi lihavoitu"
+// theme.fontWeightBold: "Bold" => "Rohkea"
+// theme.color: "Color" => "Väri"
+// theme.placeholderColor: "Placeholder color" => "Paikkamerkin väri"
+// theme.size: "Size" => "Koko"
+// theme.opacity: "Opacity" => "Läpikuultamattomuus"

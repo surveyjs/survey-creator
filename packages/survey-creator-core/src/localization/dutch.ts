@@ -48,7 +48,7 @@ export var nlStrings = {
     text: "Vragen over tekstinvoer",
     containers: "Containers",
     matrix: "Matrix vragen",
-    misc: "MISC",
+    misc: "MISC"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -849,7 +849,49 @@ export var nlStrings = {
     minWidth_placeholder: "Bijv.: 600px",
     maxWidth_placeholder: "Vb.: 50%",
     imageHeight_placeholder: "Auto",
-    imageWidth_placeholder: "Auto"
+    imageWidth_placeholder: "Auto",
+    theme: {
+      themeName: "Thema",
+      isPanelless: "Weergave van de vraag",
+      editorPanel: "Achtergrond en hoekradius",
+      questionPanel: "Achtergrond en hoekradius",
+      primaryColor: "Accent kleur",
+      panelBackgroundTransparency: "Dekking van de achtergrond van het deelvenster",
+      questionBackgroundTransparency: "Ondoorzichtigheid van de achtergrond van de vraag",
+      fontSize: "Tekengrootte",
+      scale: "Schub",
+      cornerRadius: "De straal van de hoek",
+      pageTitle: "Titel lettertype",
+      pageDescription: "Beschrijving lettertype",
+      questionTitle: "Titel lettertype",
+      questionDescription: "Beschrijving lettertype",
+      editorFont: "Lettertype",
+      backgroundOpacity: "Dekking",
+      "--sjs-font-family": "Lettertype familie",
+      "--sjs-general-backcolor-dim": "Achtergrondkleur",
+      "--sjs-primary-backcolor": "De achtergrond van het accent",
+      "--sjs-primary-forecolor": "Accent voorgrond",
+      "--sjs-shadow-small": "Schaduweffecten",
+      "--sjs-shadow-inner": "Schaduweffecten",
+      "--sjs-border-default": "Kleuren"
+    },
+    "header@header": {
+      headerView: "Bekijken",
+      logoPosition: "Positie van het logo",
+      surveyTitle: "Lettertype van de titel van de enquête",
+      surveyDescription: "Lettertype voor enquêtebeschrijving",
+      headerTitle: "Lettertype van de titel van de enquête",
+      headerDescription: "Lettertype voor enquêtebeschrijving",
+      inheritWidthFrom: "Breedte inhoudsgebied",
+      textAreaWidth: "Breedte van de tekst",
+      backgroundColorSwitch: "Achtergrondkleur",
+      backgroundImage: "Achtergrondafbeelding",
+      backgroundImageOpacity: "Dekking",
+      overlapEnabled: "Overlappen",
+      logoPositionX: "Positie van het logo",
+      titlePositionX: "Titel positie",
+      descriptionPositionX: "Beschrijving positie"
+    }
   },
   // Property values
   pv: {
@@ -1065,6 +1107,38 @@ export var nlStrings = {
     searchMode: {
       contains: "Bevat",
       startsWith: "Begint met"
+    },
+    backgroundImageFit: {
+      auto: "Auto",
+      cover: "Bedekken",
+      contain: "Bevatten",
+      fill: "Strekken",
+      tile: "Tegel"
+    },
+    backgroundImageAttachment: {
+      fixed: "Vast",
+      scroll: "Scrollen"
+    },
+    headerView: {
+      basic: "Basisch",
+      advanced: "Geavanceerd"
+    },
+    inheritWidthFrom: {
+      survey: "Zelfde als enquête",
+      container: "Aanpassen aan container"
+    },
+    backgroundColorSwitch: {
+      none: "Geen",
+      accentColor: "Accent kleur",
+      custom: "Gewoonte"
+    },
+    colorPalette: {
+      light: "Licht",
+      dark: "Donker"
+    },
+    isPanelless: {
+      "false": "Verstek",
+      "true": "Zonder panelen"
     }
   },
   // Operators
@@ -1472,94 +1546,40 @@ export var nlStrings = {
     copyDisplayValue: "Weergavewaarde kopiëren"
   },
   theme: {
-    "--background": "Achtergrondkleur",
-    "--background-dim-light": "Achtergrond dim licht kleur",
-    "--primary-foreground": "Primaire voorgrondkleur",
-    "--foreground": "Voorgrondkleur",
-    "--base-unit": "Basiseenheid",
     advancedMode: "Geavanceerde modus",
-    themeName: "Thema",
-    isPanelless: "Uiterlijk van de vraag",
-    isPanellessPanels: "Verstek",
-    isPanellessLightweight: "Zonder panelen",
-    themePaletteLight: "Licht",
-    themePaletteDark: "Donker",
-    primaryColor: "Accentkleur",
+    pageTitle: "Lettertype voor paginatitel",
+    questionTitle: "Lettertype voor de titel van de vraag",
+    editorPanel: "Invoerelement",
+    lines: "Lijnen",
     primaryDefaultColor: "Verstek",
     primaryDarkColor: "Zweven",
     primaryLightColor: "Uitverkoren",
     backgroundDimColor: "Achtergrondkleur",
-    backgroundImage: "Achtergrondafbeelding",
-    backgroundImageFitAuto: "Auto",
-    backgroundImageFitCover: "Bedekken",
-    backgroundImageFitContain: "Bevatten",
-    backgroundImageFitFill: "Strekken",
-    backgroundImageFitTile: "Tegel",
-    backgroundOpacity: "Dekking",
-    backgroundImageAttachmentFixed: "Vast",
-    backgroundImageAttachmentScroll: "Scrollen",
-    panelBackgroundTransparency: "Dekking van de achtergrond van het deelvenster",
-    questionBackgroundTransparency: "Ondoorzichtigheid van de vraagachtergrond",
-    questionTitle: "Lettertype voor de titel van de vraag",
-    editorPanel: "Invoerelement",
-    backgroundCornerRadius: "Achtergrond en hoekradius",
+    cornerRadius: "De straal van de hoek",
     backcolor: "Standaard achtergrond",
     hovercolor: "Achtergrond aanwijzen",
     borderDecoration: "Randdecoratie",
-    accentBackground: "Accentachtergrond",
-    accentForeground: "Accent voorgrond",
     primaryForecolor: "Standaardkleur",
     primaryForecolorLight: "Uitgeschakelde kleur",
-    colorsTitle: "Kleuren",
     font: "Lettertype",
-    lines: "Lijnen",
     borderDefault: "Donkerder",
     borderLight: "Aansteker",
-    fontFamily: "Lettertypefamilie",
-    fontSize: "Tekengrootte",
-    color: "Kleur",
-    placeholderColor: "Kleur van tijdelijke aanduiding",
-    size: "Grootte",
+    fontFamily: "Lettertype familie",
     fontWeightRegular: "Regelmatig",
     fontWeightHeavy: "Zwaar",
     fontWeightSemiBold: "Semi-vet",
     fontWeightBold: "Brutaal",
-    scale: "Schub",
-    cornerRadius: "Hoekradius",
-    surveyTitleFont: "Lettertype voor enquêtetitel",
-    surveyDescriptionFont: "Lettertype met enquêtebeschrijving",
-    pageTitle: "Lettertype voor paginatitel",
-    titleFont: "Titel lettertype",
-    descriptionFont: "Beschrijving lettertype",
+    color: "Kleur",
+    placeholderColor: "Tijdelijke aanduiding voor kleur",
+    size: "Grootte",
+    opacity: "Dekking",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Schaduweffect toevoegen",
-    opacity: "Dekking",
     boxShadowBlur: "Vervagen",
     boxShadowSpread: "Verspreiden",
     boxShadowDrop: "Druppel",
     boxShadowInner: "Binnenste",
-    shadow: "Schaduweffecten",
-    headerView: "Bekijken",
-    headerViewBasic: "Basisch",
-    headerViewAdvanced: "Geavanceerd",
-    headerInheritWidthFrom: "Breedte van het inhoudsgebied",
-    headerInheritWidthFromSurvey: "Hetzelfde als enquête",
-    headerInheritWidthFromContainer: "Geschikt voor containers",
-    headerTextAreaWidth: "Tekstbreedte",
-    headerBackgroundColorSwitch: "Achtergrondkleur",
-    headerBackgroundColorNone: "Geen",
-    headerBackgroundColorAccentColor: "Accentkleur",
-    headerBackgroundColorCustom: "Gewoonte",
-    horizontalAlignmentLeft: "Links",
-    horizontalAlignmentCenter: "Middelpunt",
-    horizontalAlignmentRight: "Rechts",
-    verticalAlignmentTop: "Boven",
-    verticalAlignmentMiddle: "Midden",
-    verticalAlignmentBottom: "Bodem",
-    logoPosition: "Logo positie",
-    headerTitlePosition: "Titel positie",
-    headerDescriptionPosition: "Beschrijving positie",
     names: {
       default: "Verstek",
       sharp: "Scherp",
@@ -2528,3 +2548,78 @@ editorLocalization.locales["nl"] = nlStrings;
 // ed.pagePlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the page." => "Klik op de knop \"Vraag toevoegen\" hieronder om een nieuw element aan de pagina toe te voegen."
 // ed.panelPlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the panel." => "Klik op de knop \"Vraag toevoegen\" hieronder om een nieuw element aan het paneel toe te voegen."
 // ed.imagePlaceHolderMobile: "Click the button below and choose an image to upload" => "Klik op de onderstaande knop en kies een afbeelding om te uploaden"
+// coloralpha.opacity: "Opacity" => "Dekking"
+// font.family: "Font family" => "Lettertype familie"
+// font.color: "Color" => "Kleur"
+// font.placeholderColor: "Placeholder color" => "Tijdelijke aanduiding voor kleur"
+// font.size: "Size" => "Grootte"
+// theme.themeName: "Theme" => "Thema"
+// theme.isPanelless: "Question appearance" => "Weergave van de vraag"
+// theme.editorPanel: "Background and corner radius" => "Achtergrond en hoekradius"
+// theme.questionPanel: "Background and corner radius" => "Achtergrond en hoekradius"
+// theme.primaryColor: "Accent color" => "Accent kleur"
+// theme.panelBackgroundTransparency: "Panel background opacity" => "Dekking van de achtergrond van het deelvenster"
+// theme.questionBackgroundTransparency: "Question background opacity" => "Ondoorzichtigheid van de achtergrond van de vraag"
+// theme.fontSize: "Font size" => "Tekengrootte"
+// theme.scale: "Scale" => "Schub"
+// theme.cornerRadius: "Corner radius" => "De straal van de hoek"
+// theme.pageTitle: "Title font" => "Titel lettertype"
+// theme.pageDescription: "Description font" => "Beschrijving lettertype"
+// theme.questionTitle: "Title font" => "Titel lettertype"
+// theme.questionDescription: "Description font" => "Beschrijving lettertype"
+// theme.editorFont: "Font" => "Lettertype"
+// theme.backgroundOpacity: "Opacity" => "Dekking"
+// theme.--sjs-font-family: "Font family" => "Lettertype familie"
+// theme.--sjs-general-backcolor-dim: "Background color" => "Achtergrondkleur"
+// theme.--sjs-primary-backcolor: "Accent background" => "De achtergrond van het accent"
+// theme.--sjs-primary-forecolor: "Accent foreground" => "Accent voorgrond"
+// theme.--sjs-shadow-small: "Shadow effects" => "Schaduweffecten"
+// theme.--sjs-shadow-inner: "Shadow effects" => "Schaduweffecten"
+// theme.--sjs-border-default: "Colors" => "Kleuren"
+// header@header.headerView: "View" => "Bekijken"
+// header@header.logoPosition: "Logo position" => "Positie van het logo"
+// header@header.surveyTitle: "Survey title font" => "Lettertype van de titel van de enquête"
+// header@header.surveyDescription: "Survey description font" => "Lettertype voor enquêtebeschrijving"
+// header@header.headerTitle: "Survey title font" => "Lettertype van de titel van de enquête"
+// header@header.headerDescription: "Survey description font" => "Lettertype voor enquêtebeschrijving"
+// header@header.inheritWidthFrom: "Content area width" => "Breedte inhoudsgebied"
+// header@header.textAreaWidth: "Text width" => "Breedte van de tekst"
+// header@header.backgroundColorSwitch: "Background color" => "Achtergrondkleur"
+// header@header.backgroundImage: "Background image" => "Achtergrondafbeelding"
+// header@header.backgroundImageOpacity: "Opacity" => "Dekking"
+// header@header.overlapEnabled: "Overlap" => "Overlappen"
+// header@header.logoPositionX: "Logo position" => "Positie van het logo"
+// header@header.titlePositionX: "Title position" => "Titel positie"
+// header@header.descriptionPositionX: "Description position" => "Beschrijving positie"
+// weight.400: "Regular" => "Regelmatig"
+// weight.600: "Heavy" => "Zwaar"
+// weight.700: "Semi-bold" => "Semi-vet"
+// weight.800: "Bold" => "Brutaal"
+// backgroundImageFit.auto: "Auto" => "Auto"
+// backgroundImageFit.cover: "Cover" => "Bedekken"
+// backgroundImageFit.contain: "Contain" => "Bevatten"
+// backgroundImageFit.fill: "Stretch" => "Strekken"
+// backgroundImageFit.tile: "Tile" => "Tegel"
+// backgroundImageAttachment.fixed: "Fixed" => "Vast"
+// backgroundImageAttachment.scroll: "Scroll" => "Scrollen"
+// headerView.basic: "Basic" => "Basisch"
+// headerView.advanced: "Advanced" => "Geavanceerd"
+// inheritWidthFrom.survey: "Same as survey" => "Zelfde als enquête"
+// inheritWidthFrom.container: "Fit to container" => "Aanpassen aan container"
+// backgroundColorSwitch.none: "None" => "Geen"
+// backgroundColorSwitch.accentColor: "Accent color" => "Accent kleur"
+// backgroundColorSwitch.custom: "Custom" => "Gewoonte"
+// colorPalette.light: "Light" => "Licht"
+// colorPalette.dark: "Dark" => "Donker"
+// isPanelless.false: "Default" => "Verstek"
+// isPanelless.true: "Without Panels" => "Zonder panelen"
+// theme.cornerRadius: "Corner radius" => "De straal van de hoek"
+// theme.fontFamily: "Font family" => "Lettertype familie"
+// theme.fontWeightRegular: "Regular" => "Regelmatig"
+// theme.fontWeightHeavy: "Heavy" => "Zwaar"
+// theme.fontWeightSemiBold: "Semi-bold" => "Semi-vet"
+// theme.fontWeightBold: "Bold" => "Brutaal"
+// theme.color: "Color" => "Kleur"
+// theme.placeholderColor: "Placeholder color" => "Tijdelijke aanduiding voor kleur"
+// theme.size: "Size" => "Grootte"
+// theme.opacity: "Opacity" => "Dekking"

@@ -48,7 +48,7 @@ export var msStrings = {
     text: "Soalan Input Teks",
     containers: "Bekas",
     matrix: "Soalan Matriks",
-    misc: "Misc",
+    misc: "Misc"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -849,7 +849,49 @@ export var msStrings = {
     minWidth_placeholder: "Ex.: 600px",
     maxWidth_placeholder: "Ex.: 50%",
     imageHeight_placeholder: "Auto",
-    imageWidth_placeholder: "Auto"
+    imageWidth_placeholder: "Auto",
+    theme: {
+      themeName: "Tema",
+      isPanelless: "Penampilan soalan",
+      editorPanel: "Latar belakang dan jejari sudut",
+      questionPanel: "Latar belakang dan jejari sudut",
+      primaryColor: "Warna aksen",
+      panelBackgroundTransparency: "Kelegapan latar belakang panel",
+      questionBackgroundTransparency: "Kelegapan latar belakang soalan",
+      fontSize: "Saiz fon",
+      scale: "Skala",
+      cornerRadius: "Jejari penjuru",
+      pageTitle: "Fon tajuk",
+      pageDescription: "Fon perihalan",
+      questionTitle: "Fon tajuk",
+      questionDescription: "Fon perihalan",
+      editorFont: "Fon",
+      backgroundOpacity: "Kelegapan",
+      "--sjs-font-family": "Keluarga fon",
+      "--sjs-general-backcolor-dim": "Warna latar belakang",
+      "--sjs-primary-backcolor": "Latar belakang aksen",
+      "--sjs-primary-forecolor": "Aksen latar depan",
+      "--sjs-shadow-small": "Kesan bayang",
+      "--sjs-shadow-inner": "Kesan bayang",
+      "--sjs-border-default": "Warna"
+    },
+    "header@header": {
+      headerView: "Lihat",
+      logoPosition: "Kedudukan logo",
+      surveyTitle: "Fon tajuk tinjauan",
+      surveyDescription: "Fon perihalan tinjauan",
+      headerTitle: "Fon tajuk tinjauan",
+      headerDescription: "Fon perihalan tinjauan",
+      inheritWidthFrom: "Lebar kawasan kandungan",
+      textAreaWidth: "Lebar teks",
+      backgroundColorSwitch: "Warna latar belakang",
+      backgroundImage: "Imej latar belakang",
+      backgroundImageOpacity: "Kelegapan",
+      overlapEnabled: "Bertindih",
+      logoPositionX: "Kedudukan logo",
+      titlePositionX: "Kedudukan tajuk",
+      descriptionPositionX: "Kedudukan perihalan"
+    }
   },
   // Property values
   pv: {
@@ -1065,6 +1107,38 @@ export var msStrings = {
     searchMode: {
       contains: "Mengandungi",
       startsWith: "Bermula dengan"
+    },
+    backgroundImageFit: {
+      auto: "Auto",
+      cover: "Perlindungan",
+      contain: "Mengandungi",
+      fill: "Regangan",
+      tile: "Jubin"
+    },
+    backgroundImageAttachment: {
+      fixed: "Tetap",
+      scroll: "Tatal"
+    },
+    headerView: {
+      basic: "Asas",
+      advanced: "Lanjutan"
+    },
+    inheritWidthFrom: {
+      survey: "Sama seperti tinjauan",
+      container: "Muat ke bekas"
+    },
+    backgroundColorSwitch: {
+      none: "Tiada",
+      accentColor: "Warna aksen",
+      custom: "Tersuai"
+    },
+    colorPalette: {
+      light: "Cahaya",
+      dark: "Gelap"
+    },
+    isPanelless: {
+      "false": "Lalai",
+      "true": "Tanpa Panel"
     }
   },
   // Operators
@@ -1472,94 +1546,40 @@ export var msStrings = {
     copyDisplayValue: "Nilai paparan salin"
   },
   theme: {
-    "--background": "Warna latar belakang",
-    "--background-dim-light": "Warna cahaya malap latar belakang",
-    "--primary-foreground": "Warna latar depan utama",
-    "--foreground": "Warna latar depan",
-    "--base-unit": "Unit asas",
     advancedMode: "Mod lanjutan",
-    themeName: "Tema",
-    isPanelless: "Penampilan soalan",
-    isPanellessPanels: "Lalai",
-    isPanellessLightweight: "Tanpa Panel",
-    themePaletteLight: "Cahaya",
-    themePaletteDark: "Gelap",
-    primaryColor: "Warna aksen",
+    pageTitle: "Fon tajuk halaman",
+    questionTitle: "Fon tajuk soalan",
+    editorPanel: "Unsur input",
+    lines: "Garisan",
     primaryDefaultColor: "Lalai",
     primaryDarkColor: "Hover",
     primaryLightColor: "Dipilih",
     backgroundDimColor: "Warna latar belakang",
-    backgroundImage: "Imej latar belakang",
-    backgroundImageFitAuto: "Auto",
-    backgroundImageFitCover: "Perlindungan",
-    backgroundImageFitContain: "Mengandungi",
-    backgroundImageFitFill: "Regangan",
-    backgroundImageFitTile: "Jubin",
-    backgroundOpacity: "Kelegapan",
-    backgroundImageAttachmentFixed: "Tetap",
-    backgroundImageAttachmentScroll: "Tatal",
-    panelBackgroundTransparency: "Kelegapan latar belakang panel",
-    questionBackgroundTransparency: "Kelegapan latar belakang soalan",
-    questionTitle: "Fon tajuk soalan",
-    editorPanel: "Unsur input",
-    backgroundCornerRadius: "Latar belakang dan jejari sudut",
+    cornerRadius: "Jejari penjuru",
     backcolor: "Latar belakang lalai",
     hovercolor: "Latarbelakang penuding",
     borderDecoration: "Hiasan sempadan",
-    accentBackground: "Latar belakang aksen",
-    accentForeground: "Aksen latar depan",
     primaryForecolor: "Warna lalai",
     primaryForecolorLight: "Warna dinyahdayakan",
-    colorsTitle: "Warna",
     font: "Fon",
-    lines: "Garisan",
     borderDefault: "Gelap",
     borderLight: "Lebih ringan",
     fontFamily: "Keluarga fon",
-    fontSize: "Saiz fon",
-    color: "Warna",
-    placeholderColor: "Warna ruang letak",
-    size: "Saiz",
     fontWeightRegular: "Tetap",
     fontWeightHeavy: "Berat",
     fontWeightSemiBold: "Separa berani",
     fontWeightBold: "Berani",
-    scale: "Skala",
-    cornerRadius: "Jejari penjuru",
-    surveyTitleFont: "Fon tajuk tinjauan",
-    surveyDescriptionFont: "Fon perihalan tinjauan",
-    pageTitle: "Fon tajuk halaman",
-    titleFont: "Fon tajuk",
-    descriptionFont: "Fon perihalan",
+    color: "Warna",
+    placeholderColor: "Warna ruang letak",
+    size: "Saiz",
+    opacity: "Kelegapan",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Menambah Kesan Bayang",
-    opacity: "Kelegapan",
     boxShadowBlur: "Kabur",
     boxShadowSpread: "Penyebaran",
     boxShadowDrop: "Singgah",
     boxShadowInner: "Dalaman",
-    shadow: "Kesan bayang",
-    headerView: "Lihat",
-    headerViewBasic: "Asas",
-    headerViewAdvanced: "Lanjutan",
-    headerInheritWidthFrom: "Lebar kawasan kandungan",
-    headerInheritWidthFromSurvey: "Sama seperti tinjauan",
-    headerInheritWidthFromContainer: "Muat ke bekas",
-    headerTextAreaWidth: "Lebar teks",
-    headerBackgroundColorSwitch: "Warna latar belakang",
-    headerBackgroundColorNone: "Tiada",
-    headerBackgroundColorAccentColor: "Warna aksen",
-    headerBackgroundColorCustom: "Tersuai",
-    horizontalAlignmentLeft: "Kiri",
-    horizontalAlignmentCenter: "Pusat",
-    horizontalAlignmentRight: "Kanan",
-    verticalAlignmentTop: "Atas",
-    verticalAlignmentMiddle: "Tengah",
-    verticalAlignmentBottom: "Bawah",
-    logoPosition: "Kedudukan logo",
-    headerTitlePosition: "Kedudukan tajuk",
-    headerDescriptionPosition: "Kedudukan perihalan",
     names: {
       default: "Lalai",
       sharp: "Tajam",
@@ -2500,3 +2520,78 @@ editorLocalization.locales["ms"] = msStrings;
 // ed.pagePlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the page." => "Klik butang \"Tambah Soalan\" di bawah untuk menambah elemen baru ke halaman."
 // ed.panelPlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the panel." => "Klik butang \"Tambah Soalan\" di bawah untuk menambah elemen baru ke panel."
 // ed.imagePlaceHolderMobile: "Click the button below and choose an image to upload" => "Klik butang di bawah dan pilih imej untuk dimuat naik"
+// coloralpha.opacity: "Opacity" => "Kelegapan"
+// font.family: "Font family" => "Keluarga fon"
+// font.color: "Color" => "Warna"
+// font.placeholderColor: "Placeholder color" => "Warna ruang letak"
+// font.size: "Size" => "Saiz"
+// theme.themeName: "Theme" => "Tema"
+// theme.isPanelless: "Question appearance" => "Penampilan soalan"
+// theme.editorPanel: "Background and corner radius" => "Latar belakang dan jejari sudut"
+// theme.questionPanel: "Background and corner radius" => "Latar belakang dan jejari sudut"
+// theme.primaryColor: "Accent color" => "Warna aksen"
+// theme.panelBackgroundTransparency: "Panel background opacity" => "Kelegapan latar belakang panel"
+// theme.questionBackgroundTransparency: "Question background opacity" => "Kelegapan latar belakang soalan"
+// theme.fontSize: "Font size" => "Saiz fon"
+// theme.scale: "Scale" => "Skala"
+// theme.cornerRadius: "Corner radius" => "Jejari penjuru"
+// theme.pageTitle: "Title font" => "Fon tajuk"
+// theme.pageDescription: "Description font" => "Fon perihalan"
+// theme.questionTitle: "Title font" => "Fon tajuk"
+// theme.questionDescription: "Description font" => "Fon perihalan"
+// theme.editorFont: "Font" => "Fon"
+// theme.backgroundOpacity: "Opacity" => "Kelegapan"
+// theme.--sjs-font-family: "Font family" => "Keluarga fon"
+// theme.--sjs-general-backcolor-dim: "Background color" => "Warna latar belakang"
+// theme.--sjs-primary-backcolor: "Accent background" => "Latar belakang aksen"
+// theme.--sjs-primary-forecolor: "Accent foreground" => "Aksen latar depan"
+// theme.--sjs-shadow-small: "Shadow effects" => "Kesan bayang"
+// theme.--sjs-shadow-inner: "Shadow effects" => "Kesan bayang"
+// theme.--sjs-border-default: "Colors" => "Warna"
+// header@header.headerView: "View" => "Lihat"
+// header@header.logoPosition: "Logo position" => "Kedudukan logo"
+// header@header.surveyTitle: "Survey title font" => "Fon tajuk tinjauan"
+// header@header.surveyDescription: "Survey description font" => "Fon perihalan tinjauan"
+// header@header.headerTitle: "Survey title font" => "Fon tajuk tinjauan"
+// header@header.headerDescription: "Survey description font" => "Fon perihalan tinjauan"
+// header@header.inheritWidthFrom: "Content area width" => "Lebar kawasan kandungan"
+// header@header.textAreaWidth: "Text width" => "Lebar teks"
+// header@header.backgroundColorSwitch: "Background color" => "Warna latar belakang"
+// header@header.backgroundImage: "Background image" => "Imej latar belakang"
+// header@header.backgroundImageOpacity: "Opacity" => "Kelegapan"
+// header@header.overlapEnabled: "Overlap" => "Bertindih"
+// header@header.logoPositionX: "Logo position" => "Kedudukan logo"
+// header@header.titlePositionX: "Title position" => "Kedudukan tajuk"
+// header@header.descriptionPositionX: "Description position" => "Kedudukan perihalan"
+// weight.400: "Regular" => "Tetap"
+// weight.600: "Heavy" => "Berat"
+// weight.700: "Semi-bold" => "Separa berani"
+// weight.800: "Bold" => "Berani"
+// backgroundImageFit.auto: "Auto" => "Auto"
+// backgroundImageFit.cover: "Cover" => "Perlindungan"
+// backgroundImageFit.contain: "Contain" => "Mengandungi"
+// backgroundImageFit.fill: "Stretch" => "Regangan"
+// backgroundImageFit.tile: "Tile" => "Jubin"
+// backgroundImageAttachment.fixed: "Fixed" => "Tetap"
+// backgroundImageAttachment.scroll: "Scroll" => "Tatal"
+// headerView.basic: "Basic" => "Asas"
+// headerView.advanced: "Advanced" => "Lanjutan"
+// inheritWidthFrom.survey: "Same as survey" => "Sama seperti tinjauan"
+// inheritWidthFrom.container: "Fit to container" => "Muat ke bekas"
+// backgroundColorSwitch.none: "None" => "Tiada"
+// backgroundColorSwitch.accentColor: "Accent color" => "Warna aksen"
+// backgroundColorSwitch.custom: "Custom" => "Tersuai"
+// colorPalette.light: "Light" => "Cahaya"
+// colorPalette.dark: "Dark" => "Gelap"
+// isPanelless.false: "Default" => "Lalai"
+// isPanelless.true: "Without Panels" => "Tanpa Panel"
+// theme.cornerRadius: "Corner radius" => "Jejari penjuru"
+// theme.fontFamily: "Font family" => "Keluarga fon"
+// theme.fontWeightRegular: "Regular" => "Tetap"
+// theme.fontWeightHeavy: "Heavy" => "Berat"
+// theme.fontWeightSemiBold: "Semi-bold" => "Separa berani"
+// theme.fontWeightBold: "Bold" => "Berani"
+// theme.color: "Color" => "Warna"
+// theme.placeholderColor: "Placeholder color" => "Warna ruang letak"
+// theme.size: "Size" => "Saiz"
+// theme.opacity: "Opacity" => "Kelegapan"

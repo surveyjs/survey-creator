@@ -48,7 +48,7 @@ export var nbStrings = {
     text: "Spørsmål om tekstinndata",
     containers: "Beholdere",
     matrix: "Matrise Spørsmål",
-    misc: "Misc",
+    misc: "Misc"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -849,7 +849,49 @@ export var nbStrings = {
     minWidth_placeholder: "Eksempel: 600 piksler",
     maxWidth_placeholder: "Eks.: 50%",
     imageHeight_placeholder: "auto",
-    imageWidth_placeholder: "auto"
+    imageWidth_placeholder: "auto",
+    theme: {
+      themeName: "Tema",
+      isPanelless: "Spørsmål utseende",
+      editorPanel: "Bakgrunn og hjørneradius",
+      questionPanel: "Bakgrunn og hjørneradius",
+      primaryColor: "Uthevingsfarge",
+      panelBackgroundTransparency: "Tetthet i panelbakgrunn",
+      questionBackgroundTransparency: "Spørsmål om bakgrunnstetthet",
+      fontSize: "Skriftstørrelse",
+      scale: "Skala",
+      cornerRadius: "Hjørne radius",
+      pageTitle: "Tittel skrift",
+      pageDescription: "Beskrivelse font",
+      questionTitle: "Tittel skrift",
+      questionDescription: "Beskrivelse font",
+      editorFont: "Font",
+      backgroundOpacity: "Ugjennomsiktighet",
+      "--sjs-font-family": "Skriftfamilie",
+      "--sjs-general-backcolor-dim": "Bakgrunnsfarge",
+      "--sjs-primary-backcolor": "Bakgrunn med aksent",
+      "--sjs-primary-forecolor": "Aksent i forgrunnen",
+      "--sjs-shadow-small": "Skygge effekter",
+      "--sjs-shadow-inner": "Skygge effekter",
+      "--sjs-border-default": "Farger"
+    },
+    "header@header": {
+      headerView: "Utsikt",
+      logoPosition: "Logo posisjon",
+      surveyTitle: "Skrift for undersøkelsestittel",
+      surveyDescription: "Skrift for undersøkelsesbeskrivelse",
+      headerTitle: "Skrift for undersøkelsestittel",
+      headerDescription: "Skrift for undersøkelsesbeskrivelse",
+      inheritWidthFrom: "Bredde på innholdsområdet",
+      textAreaWidth: "Tekstbredde",
+      backgroundColorSwitch: "Bakgrunnsfarge",
+      backgroundImage: "Bakgrunnsbilde",
+      backgroundImageOpacity: "Ugjennomsiktighet",
+      overlapEnabled: "Overlappe",
+      logoPositionX: "Logo posisjon",
+      titlePositionX: "Tittelposisjon",
+      descriptionPositionX: "Beskrivelse posisjon"
+    }
   },
   // Property values
   pv: {
@@ -1065,6 +1107,38 @@ export var nbStrings = {
     searchMode: {
       contains: "Inneholder",
       startsWith: "Starter med"
+    },
+    backgroundImageFit: {
+      auto: "Auto",
+      cover: "Lokk",
+      contain: "Inneholde",
+      fill: "Strekning",
+      tile: "Flis"
+    },
+    backgroundImageAttachment: {
+      fixed: "Fast",
+      scroll: "Bla"
+    },
+    headerView: {
+      basic: "Grunnleggende",
+      advanced: "Avansert"
+    },
+    inheritWidthFrom: {
+      survey: "Samme som undersøkelse",
+      container: "Tilpass til container"
+    },
+    backgroundColorSwitch: {
+      none: "Ingen",
+      accentColor: "Uthevingsfarge",
+      custom: "Skikk"
+    },
+    colorPalette: {
+      light: "Lys",
+      dark: "Mørk"
+    },
+    isPanelless: {
+      "false": "Standard",
+      "true": "Uten paneler"
     }
   },
   // Operators
@@ -1472,94 +1546,40 @@ export var nbStrings = {
     copyDisplayValue: "Kopier visningsverdi"
   },
   theme: {
-    "--background": "Bakgrunnsfarge",
-    "--background-dim-light": "Svak lys farge i bakgrunnen",
-    "--primary-foreground": "Primær forgrunnsfarge",
-    "--foreground": "Forgrunnsfarge",
-    "--base-unit": "Basisenhet",
     advancedMode: "Avansert modus",
-    themeName: "Tema",
-    isPanelless: "Spørsmål utseende",
-    isPanellessPanels: "Standard",
-    isPanellessLightweight: "Uten paneler",
-    themePaletteLight: "Lys",
-    themePaletteDark: "Mørk",
-    primaryColor: "Uthevingsfarge",
+    pageTitle: "Skrift for sidetittel",
+    questionTitle: "Spørsmål tittel skrift",
+    editorPanel: "Inndata-element",
+    lines: "Linjer",
     primaryDefaultColor: "Standard",
     primaryDarkColor: "Sveve",
     primaryLightColor: "Utvalgt",
     backgroundDimColor: "Bakgrunnsfarge",
-    backgroundImage: "Bakgrunnsbilde",
-    backgroundImageFitAuto: "Auto",
-    backgroundImageFitCover: "Lokk",
-    backgroundImageFitContain: "Inneholde",
-    backgroundImageFitFill: "Strekning",
-    backgroundImageFitTile: "Flis",
-    backgroundOpacity: "Ugjennomsiktighet",
-    backgroundImageAttachmentFixed: "Fast",
-    backgroundImageAttachmentScroll: "Bla",
-    panelBackgroundTransparency: "Tetthet i panelbakgrunn",
-    questionBackgroundTransparency: "Spørsmål om bakgrunnstetthet",
-    questionTitle: "Spørsmål tittel skrift",
-    editorPanel: "Inndata-element",
-    backgroundCornerRadius: "Bakgrunn og hjørneradius",
+    cornerRadius: "Hjørne radius",
     backcolor: "Standard bakgrunn",
     hovercolor: "Pekerfølsom bakgrunn",
     borderDecoration: "Grense dekorasjon",
-    accentBackground: "Bakgrunn med aksent",
-    accentForeground: "Uthevingsforgrunn",
     primaryForecolor: "Standardfarge",
     primaryForecolorLight: "Deaktivert farge",
-    colorsTitle: "Farger",
     font: "Font",
-    lines: "Linjer",
     borderDefault: "Mørkere",
     borderLight: "Lekter",
     fontFamily: "Skriftfamilie",
-    fontSize: "Skriftstørrelse",
-    color: "Farge",
-    placeholderColor: "Plassholderfarge",
-    size: "Størrelse",
     fontWeightRegular: "Regelmessig",
     fontWeightHeavy: "Tung",
     fontWeightSemiBold: "Halvmodig",
     fontWeightBold: "Fet",
-    scale: "Skala",
-    cornerRadius: "Hjørne radius",
-    surveyTitleFont: "Skrift for undersøkelsestittel",
-    surveyDescriptionFont: "Skrift for undersøkelsesbeskrivelse",
-    pageTitle: "Skrift for sidetittel",
-    titleFont: "Tittel skrift",
-    descriptionFont: "Beskrivelse font",
+    color: "Farge",
+    placeholderColor: "Plassholderfarge",
+    size: "Størrelse",
+    opacity: "Ugjennomsiktighet",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Legg til skyggeeffekt",
-    opacity: "Ugjennomsiktighet",
     boxShadowBlur: "Dimme",
     boxShadowSpread: "Spredning",
     boxShadowDrop: "Dråpe",
     boxShadowInner: "Indre",
-    shadow: "Skygge effekter",
-    headerView: "Utsikt",
-    headerViewBasic: "Grunnleggende",
-    headerViewAdvanced: "Avansert",
-    headerInheritWidthFrom: "Bredde på innholdsområdet",
-    headerInheritWidthFromSurvey: "Samme som undersøkelse",
-    headerInheritWidthFromContainer: "Tilpass til container",
-    headerTextAreaWidth: "Tekstbredde",
-    headerBackgroundColorSwitch: "Bakgrunnsfarge",
-    headerBackgroundColorNone: "Ingen",
-    headerBackgroundColorAccentColor: "Uthevingsfarge",
-    headerBackgroundColorCustom: "Skikk",
-    horizontalAlignmentLeft: "Venstre",
-    horizontalAlignmentCenter: "Sentrum",
-    horizontalAlignmentRight: "Høyre",
-    verticalAlignmentTop: "Topp",
-    verticalAlignmentMiddle: "Midt",
-    verticalAlignmentBottom: "Bunn",
-    logoPosition: "Logo posisjon",
-    headerTitlePosition: "Tittelposisjon",
-    headerDescriptionPosition: "Beskrivelse posisjon",
     names: {
       default: "Standard",
       sharp: "Skarp",
@@ -2550,3 +2570,78 @@ editorLocalization.locales["nb"] = nbStrings;
 // ed.pagePlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the page." => "Klikk på \"Legg til spørsmål\" -knappen nedenfor for å legge til et nytt element på siden."
 // ed.panelPlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the panel." => "Klikk på \"Legg til spørsmål\" -knappen nedenfor for å legge til et nytt element i panelet."
 // ed.imagePlaceHolderMobile: "Click the button below and choose an image to upload" => "Klikk på knappen nedenfor og velg et bilde du vil laste opp"
+// coloralpha.opacity: "Opacity" => "Ugjennomsiktighet"
+// font.family: "Font family" => "Skriftfamilie"
+// font.color: "Color" => "Farge"
+// font.placeholderColor: "Placeholder color" => "Plassholderfarge"
+// font.size: "Size" => "Størrelse"
+// theme.themeName: "Theme" => "Tema"
+// theme.isPanelless: "Question appearance" => "Spørsmål utseende"
+// theme.editorPanel: "Background and corner radius" => "Bakgrunn og hjørneradius"
+// theme.questionPanel: "Background and corner radius" => "Bakgrunn og hjørneradius"
+// theme.primaryColor: "Accent color" => "Uthevingsfarge"
+// theme.panelBackgroundTransparency: "Panel background opacity" => "Tetthet i panelbakgrunn"
+// theme.questionBackgroundTransparency: "Question background opacity" => "Spørsmål om bakgrunnstetthet"
+// theme.fontSize: "Font size" => "Skriftstørrelse"
+// theme.scale: "Scale" => "Skala"
+// theme.cornerRadius: "Corner radius" => "Hjørne radius"
+// theme.pageTitle: "Title font" => "Tittel skrift"
+// theme.pageDescription: "Description font" => "Beskrivelse font"
+// theme.questionTitle: "Title font" => "Tittel skrift"
+// theme.questionDescription: "Description font" => "Beskrivelse font"
+// theme.editorFont: "Font" => "Font"
+// theme.backgroundOpacity: "Opacity" => "Ugjennomsiktighet"
+// theme.--sjs-font-family: "Font family" => "Skriftfamilie"
+// theme.--sjs-general-backcolor-dim: "Background color" => "Bakgrunnsfarge"
+// theme.--sjs-primary-backcolor: "Accent background" => "Bakgrunn med aksent"
+// theme.--sjs-primary-forecolor: "Accent foreground" => "Aksent i forgrunnen"
+// theme.--sjs-shadow-small: "Shadow effects" => "Skygge effekter"
+// theme.--sjs-shadow-inner: "Shadow effects" => "Skygge effekter"
+// theme.--sjs-border-default: "Colors" => "Farger"
+// header@header.headerView: "View" => "Utsikt"
+// header@header.logoPosition: "Logo position" => "Logo posisjon"
+// header@header.surveyTitle: "Survey title font" => "Skrift for undersøkelsestittel"
+// header@header.surveyDescription: "Survey description font" => "Skrift for undersøkelsesbeskrivelse"
+// header@header.headerTitle: "Survey title font" => "Skrift for undersøkelsestittel"
+// header@header.headerDescription: "Survey description font" => "Skrift for undersøkelsesbeskrivelse"
+// header@header.inheritWidthFrom: "Content area width" => "Bredde på innholdsområdet"
+// header@header.textAreaWidth: "Text width" => "Tekstbredde"
+// header@header.backgroundColorSwitch: "Background color" => "Bakgrunnsfarge"
+// header@header.backgroundImage: "Background image" => "Bakgrunnsbilde"
+// header@header.backgroundImageOpacity: "Opacity" => "Ugjennomsiktighet"
+// header@header.overlapEnabled: "Overlap" => "Overlappe"
+// header@header.logoPositionX: "Logo position" => "Logo posisjon"
+// header@header.titlePositionX: "Title position" => "Tittelposisjon"
+// header@header.descriptionPositionX: "Description position" => "Beskrivelse posisjon"
+// weight.400: "Regular" => "Regelmessig"
+// weight.600: "Heavy" => "Tung"
+// weight.700: "Semi-bold" => "Halvmodig"
+// weight.800: "Bold" => "Fet"
+// backgroundImageFit.auto: "Auto" => "Auto"
+// backgroundImageFit.cover: "Cover" => "Lokk"
+// backgroundImageFit.contain: "Contain" => "Inneholde"
+// backgroundImageFit.fill: "Stretch" => "Strekning"
+// backgroundImageFit.tile: "Tile" => "Flis"
+// backgroundImageAttachment.fixed: "Fixed" => "Fast"
+// backgroundImageAttachment.scroll: "Scroll" => "Bla"
+// headerView.basic: "Basic" => "Grunnleggende"
+// headerView.advanced: "Advanced" => "Avansert"
+// inheritWidthFrom.survey: "Same as survey" => "Samme som undersøkelse"
+// inheritWidthFrom.container: "Fit to container" => "Tilpass til container"
+// backgroundColorSwitch.none: "None" => "Ingen"
+// backgroundColorSwitch.accentColor: "Accent color" => "Uthevingsfarge"
+// backgroundColorSwitch.custom: "Custom" => "Skikk"
+// colorPalette.light: "Light" => "Lys"
+// colorPalette.dark: "Dark" => "Mørk"
+// isPanelless.false: "Default" => "Standard"
+// isPanelless.true: "Without Panels" => "Uten paneler"
+// theme.cornerRadius: "Corner radius" => "Hjørne radius"
+// theme.fontFamily: "Font family" => "Skriftfamilie"
+// theme.fontWeightRegular: "Regular" => "Regelmessig"
+// theme.fontWeightHeavy: "Heavy" => "Tung"
+// theme.fontWeightSemiBold: "Semi-bold" => "Halvmodig"
+// theme.fontWeightBold: "Bold" => "Fet"
+// theme.color: "Color" => "Farge"
+// theme.placeholderColor: "Placeholder color" => "Plassholderfarge"
+// theme.size: "Size" => "Størrelse"
+// theme.opacity: "Opacity" => "Ugjennomsiktighet"

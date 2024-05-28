@@ -48,7 +48,7 @@ export var danishStrings = {
     text: "Spørgsmål om tekstinput",
     containers: "Containere",
     matrix: "Matrix spørgsmål",
-    misc: "Misc",
+    misc: "Misc"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -849,7 +849,49 @@ export var danishStrings = {
     minWidth_placeholder: "Eks.: 600px",
     maxWidth_placeholder: "Eks.: 50%",
     imageHeight_placeholder: "auto",
-    imageWidth_placeholder: "auto"
+    imageWidth_placeholder: "auto",
+    theme: {
+      themeName: "Tema",
+      isPanelless: "Spørgsmål udseende",
+      editorPanel: "Baggrund og hjørneradius",
+      questionPanel: "Baggrund og hjørneradius",
+      primaryColor: "Accent farve",
+      panelBackgroundTransparency: "Opacitet af panelets baggrund",
+      questionBackgroundTransparency: "Spørgsmål baggrundsuigennemsigtighed",
+      fontSize: "Skrifttypestørrelse",
+      scale: "Skæl",
+      cornerRadius: "Hjørne radius",
+      pageTitle: "Titel skrifttype",
+      pageDescription: "Beskrivelse skrifttype",
+      questionTitle: "Titel skrifttype",
+      questionDescription: "Beskrivelse skrifttype",
+      editorFont: "Skrifttype",
+      backgroundOpacity: "Opacitet",
+      "--sjs-font-family": "Skrifttypefamilie",
+      "--sjs-general-backcolor-dim": "Baggrundsfarve",
+      "--sjs-primary-backcolor": "Accent baggrund",
+      "--sjs-primary-forecolor": "Accent forgrund",
+      "--sjs-shadow-small": "Skyggeeffekter",
+      "--sjs-shadow-inner": "Skyggeeffekter",
+      "--sjs-border-default": "Farver"
+    },
+    "header@header": {
+      headerView: "Udsigt",
+      logoPosition: "Logo position",
+      surveyTitle: "Skrifttype for undersøgelsestitel",
+      surveyDescription: "Skrifttype til undersøgelsesbeskrivelse",
+      headerTitle: "Skrifttype for undersøgelsestitel",
+      headerDescription: "Skrifttype til undersøgelsesbeskrivelse",
+      inheritWidthFrom: "Bredde på indholdsområde",
+      textAreaWidth: "Tekstbredde",
+      backgroundColorSwitch: "Baggrundsfarve",
+      backgroundImage: "Baggrundsbillede",
+      backgroundImageOpacity: "Opacitet",
+      overlapEnabled: "Overlapning",
+      logoPositionX: "Logo position",
+      titlePositionX: "Titel position",
+      descriptionPositionX: "Beskrivelse position"
+    }
   },
   // Property values
   pv: {
@@ -1065,6 +1107,38 @@ export var danishStrings = {
     searchMode: {
       contains: "Indeholder",
       startsWith: "Begynder med"
+    },
+    backgroundImageFit: {
+      auto: "Auto",
+      cover: "Dække",
+      contain: "Indeholde",
+      fill: "Stræk",
+      tile: "Flise"
+    },
+    backgroundImageAttachment: {
+      fixed: "Fast",
+      scroll: "Rulle"
+    },
+    headerView: {
+      basic: "Grundlæggende",
+      advanced: "Avanceret"
+    },
+    inheritWidthFrom: {
+      survey: "Samme som undersøgelse",
+      container: "Passer til beholder"
+    },
+    backgroundColorSwitch: {
+      none: "Ingen",
+      accentColor: "Accent farve",
+      custom: "Sædvane"
+    },
+    colorPalette: {
+      light: "Lys",
+      dark: "Mørk"
+    },
+    isPanelless: {
+      "false": "Standard",
+      "true": "Uden paneler"
     }
   },
   // Operators
@@ -1472,94 +1546,40 @@ export var danishStrings = {
     copyDisplayValue: "Kopiér visningsværdi"
   },
   theme: {
-    "--background": "Baggrundsfarve",
-    "--background-dim-light": "Baggrund svag lys farve",
-    "--primary-foreground": "Primær forgrundsfarve",
-    "--foreground": "Forgrundsfarve",
-    "--base-unit": "Basisenhed",
     advancedMode: "Avanceret tilstand",
-    themeName: "Tema",
-    isPanelless: "Spørgsmål udseende",
-    isPanellessPanels: "Standard",
-    isPanellessLightweight: "Uden paneler",
-    themePaletteLight: "Lys",
-    themePaletteDark: "Mørk",
-    primaryColor: "Accent farve",
+    pageTitle: "Sidetitel skrifttype",
+    questionTitle: "Skrifttype for spørgsmålstitel",
+    editorPanel: "Input element",
+    lines: "Linjer",
     primaryDefaultColor: "Standard",
     primaryDarkColor: "Hover",
     primaryLightColor: "Valgte",
     backgroundDimColor: "Baggrundsfarve",
-    backgroundImage: "Baggrundsbillede",
-    backgroundImageFitAuto: "Auto",
-    backgroundImageFitCover: "Dække",
-    backgroundImageFitContain: "Indeholde",
-    backgroundImageFitFill: "Stræk",
-    backgroundImageFitTile: "Flise",
-    backgroundOpacity: "Opacitet",
-    backgroundImageAttachmentFixed: "Fast",
-    backgroundImageAttachmentScroll: "Rulle",
-    panelBackgroundTransparency: "Opacitet af panelets baggrund",
-    questionBackgroundTransparency: "Spørgsmål baggrundsuigennemsigtighed",
-    questionTitle: "Skrifttype for spørgsmålstitel",
-    editorPanel: "Input element",
-    backgroundCornerRadius: "Baggrund og hjørneradius",
+    cornerRadius: "Hjørne radius",
     backcolor: "Standard baggrund",
     hovercolor: "Hold markøren over baggrunden",
     borderDecoration: "Kant dekoration",
-    accentBackground: "Accent baggrund",
-    accentForeground: "Accent forgrund",
     primaryForecolor: "Standardfarve",
     primaryForecolorLight: "Deaktiveret farve",
-    colorsTitle: "Farver",
     font: "Skrifttype",
-    lines: "Linjer",
     borderDefault: "Mørkere",
     borderLight: "Lighter",
     fontFamily: "Skrifttypefamilie",
-    fontSize: "Skrifttypestørrelse",
-    color: "Farve",
-    placeholderColor: "Pladsholderfarve",
-    size: "Størrelse",
     fontWeightRegular: "Regelmæssig",
     fontWeightHeavy: "Tung",
     fontWeightSemiBold: "Halvfed skrift",
     fontWeightBold: "Modig",
-    scale: "Skæl",
-    cornerRadius: "Hjørne radius",
-    surveyTitleFont: "Skrifttype for undersøgelsestitel",
-    surveyDescriptionFont: "Skrifttype til undersøgelsesbeskrivelse",
-    pageTitle: "Sidetitel skrifttype",
-    titleFont: "Titel skrifttype",
-    descriptionFont: "Beskrivelse skrifttype",
+    color: "Farve",
+    placeholderColor: "Pladsholderfarve",
+    size: "Størrelse",
+    opacity: "Opacitet",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Tilføj skyggeeffekt",
-    opacity: "Opacitet",
     boxShadowBlur: "Sløring",
     boxShadowSpread: "Spredning",
     boxShadowDrop: "Dråbe",
     boxShadowInner: "Indre",
-    shadow: "Skyggeeffekter",
-    headerView: "Udsigt",
-    headerViewBasic: "Grundlæggende",
-    headerViewAdvanced: "Avanceret",
-    headerInheritWidthFrom: "Bredde på indholdsområde",
-    headerInheritWidthFromSurvey: "Samme som undersøgelse",
-    headerInheritWidthFromContainer: "Passer til beholder",
-    headerTextAreaWidth: "Tekstbredde",
-    headerBackgroundColorSwitch: "Baggrundsfarve",
-    headerBackgroundColorNone: "Ingen",
-    headerBackgroundColorAccentColor: "Accent farve",
-    headerBackgroundColorCustom: "Sædvane",
-    horizontalAlignmentLeft: "Venstre",
-    horizontalAlignmentCenter: "Midte",
-    horizontalAlignmentRight: "Højre",
-    verticalAlignmentTop: "Top",
-    verticalAlignmentMiddle: "Midte",
-    verticalAlignmentBottom: "Bund",
-    logoPosition: "Logo position",
-    headerTitlePosition: "Titel position",
-    headerDescriptionPosition: "Beskrivelse position",
     names: {
       default: "Standard",
       sharp: "Skarp",
@@ -2732,3 +2752,78 @@ editorLocalization.locales["da"] = danishStrings;
 // ed.pagePlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the page." => "Klik på knappen \"Tilføj spørgsmål\" nedenfor for at tilføje et nyt element til siden."
 // ed.panelPlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the panel." => "Klik på knappen \"Tilføj spørgsmål\" nedenfor for at tilføje et nyt element til panelet."
 // ed.imagePlaceHolderMobile: "Click the button below and choose an image to upload" => "Klik på knappen nedenfor, og vælg et billede, der skal uploades"
+// coloralpha.opacity: "Opacity" => "Opacitet"
+// font.family: "Font family" => "Skrifttypefamilie"
+// font.color: "Color" => "Farve"
+// font.placeholderColor: "Placeholder color" => "Pladsholderfarve"
+// font.size: "Size" => "Størrelse"
+// theme.themeName: "Theme" => "Tema"
+// theme.isPanelless: "Question appearance" => "Spørgsmål udseende"
+// theme.editorPanel: "Background and corner radius" => "Baggrund og hjørneradius"
+// theme.questionPanel: "Background and corner radius" => "Baggrund og hjørneradius"
+// theme.primaryColor: "Accent color" => "Accent farve"
+// theme.panelBackgroundTransparency: "Panel background opacity" => "Opacitet af panelets baggrund"
+// theme.questionBackgroundTransparency: "Question background opacity" => "Spørgsmål baggrundsuigennemsigtighed"
+// theme.fontSize: "Font size" => "Skrifttypestørrelse"
+// theme.scale: "Scale" => "Skæl"
+// theme.cornerRadius: "Corner radius" => "Hjørne radius"
+// theme.pageTitle: "Title font" => "Titel skrifttype"
+// theme.pageDescription: "Description font" => "Beskrivelse skrifttype"
+// theme.questionTitle: "Title font" => "Titel skrifttype"
+// theme.questionDescription: "Description font" => "Beskrivelse skrifttype"
+// theme.editorFont: "Font" => "Skrifttype"
+// theme.backgroundOpacity: "Opacity" => "Opacitet"
+// theme.--sjs-font-family: "Font family" => "Skrifttypefamilie"
+// theme.--sjs-general-backcolor-dim: "Background color" => "Baggrundsfarve"
+// theme.--sjs-primary-backcolor: "Accent background" => "Accent baggrund"
+// theme.--sjs-primary-forecolor: "Accent foreground" => "Accent forgrund"
+// theme.--sjs-shadow-small: "Shadow effects" => "Skyggeeffekter"
+// theme.--sjs-shadow-inner: "Shadow effects" => "Skyggeeffekter"
+// theme.--sjs-border-default: "Colors" => "Farver"
+// header@header.headerView: "View" => "Udsigt"
+// header@header.logoPosition: "Logo position" => "Logo position"
+// header@header.surveyTitle: "Survey title font" => "Skrifttype for undersøgelsestitel"
+// header@header.surveyDescription: "Survey description font" => "Skrifttype til undersøgelsesbeskrivelse"
+// header@header.headerTitle: "Survey title font" => "Skrifttype for undersøgelsestitel"
+// header@header.headerDescription: "Survey description font" => "Skrifttype til undersøgelsesbeskrivelse"
+// header@header.inheritWidthFrom: "Content area width" => "Bredde på indholdsområde"
+// header@header.textAreaWidth: "Text width" => "Tekstbredde"
+// header@header.backgroundColorSwitch: "Background color" => "Baggrundsfarve"
+// header@header.backgroundImage: "Background image" => "Baggrundsbillede"
+// header@header.backgroundImageOpacity: "Opacity" => "Opacitet"
+// header@header.overlapEnabled: "Overlap" => "Overlapning"
+// header@header.logoPositionX: "Logo position" => "Logo position"
+// header@header.titlePositionX: "Title position" => "Titel position"
+// header@header.descriptionPositionX: "Description position" => "Beskrivelse position"
+// weight.400: "Regular" => "Regelmæssig"
+// weight.600: "Heavy" => "Tung"
+// weight.700: "Semi-bold" => "Halvfed skrift"
+// weight.800: "Bold" => "Modig"
+// backgroundImageFit.auto: "Auto" => "Auto"
+// backgroundImageFit.cover: "Cover" => "Dække"
+// backgroundImageFit.contain: "Contain" => "Indeholde"
+// backgroundImageFit.fill: "Stretch" => "Stræk"
+// backgroundImageFit.tile: "Tile" => "Flise"
+// backgroundImageAttachment.fixed: "Fixed" => "Fast"
+// backgroundImageAttachment.scroll: "Scroll" => "Rulle"
+// headerView.basic: "Basic" => "Grundlæggende"
+// headerView.advanced: "Advanced" => "Avanceret"
+// inheritWidthFrom.survey: "Same as survey" => "Samme som undersøgelse"
+// inheritWidthFrom.container: "Fit to container" => "Passer til beholder"
+// backgroundColorSwitch.none: "None" => "Ingen"
+// backgroundColorSwitch.accentColor: "Accent color" => "Accent farve"
+// backgroundColorSwitch.custom: "Custom" => "Sædvane"
+// colorPalette.light: "Light" => "Lys"
+// colorPalette.dark: "Dark" => "Mørk"
+// isPanelless.false: "Default" => "Standard"
+// isPanelless.true: "Without Panels" => "Uden paneler"
+// theme.cornerRadius: "Corner radius" => "Hjørne radius"
+// theme.fontFamily: "Font family" => "Skrifttypefamilie"
+// theme.fontWeightRegular: "Regular" => "Regelmæssig"
+// theme.fontWeightHeavy: "Heavy" => "Tung"
+// theme.fontWeightSemiBold: "Semi-bold" => "Halvfed skrift"
+// theme.fontWeightBold: "Bold" => "Modig"
+// theme.color: "Color" => "Farve"
+// theme.placeholderColor: "Placeholder color" => "Pladsholderfarve"
+// theme.size: "Size" => "Størrelse"
+// theme.opacity: "Opacity" => "Opacitet"

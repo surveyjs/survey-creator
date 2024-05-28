@@ -1580,6 +1580,7 @@ export var enStrings = {
     primaryLightColor: "Selected",
     backgroundDimColor: "Background color",
 
+    cornerRadius: "Corner radius",
     backcolor: "Default background",
     hovercolor: "Hover background",
     borderDecoration: "Border decoration",
@@ -1589,6 +1590,15 @@ export var enStrings = {
     font: "Font",
     borderDefault: "Darker",
     borderLight: "Lighter",
+
+    fontFamily: "Font family",
+    fontWeightRegular: "Regular",
+    fontWeightHeavy: "Heavy",
+    fontWeightSemiBold: "Semi-bold",
+    fontWeightBold: "Bold",
+    color: "Color",
+    placeholderColor: "Placeholder color",
+    size: "Size",
 
     opacity: "Opacity",
     boxShadowX: "X",

@@ -48,7 +48,7 @@ var germanTranslation = {
     text: "Text-Eingabe-Fragen",
     containers: "Kontainer",
     matrix: "Matrix-Fragen",
-    misc: "Verschiedenes",
+    misc: "Verschiedenes"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -849,7 +849,49 @@ var germanTranslation = {
     minWidth_placeholder: "Bsp.: 600px",
     maxWidth_placeholder: "Bsp.: 50%",
     imageHeight_placeholder: "auto",
-    imageWidth_placeholder: "auto"
+    imageWidth_placeholder: "auto",
+    theme: {
+      themeName: "Thema",
+      isPanelless: "Aussehen der Frage",
+      editorPanel: "Hintergrund und Eckenradius",
+      questionPanel: "Hintergrund und Eckenradius",
+      primaryColor: "Akzentfarbe",
+      panelBackgroundTransparency: "Deckkraft des Bedienfeldhintergrunds",
+      questionBackgroundTransparency: "Deckkraft des Hintergrunds der Frage",
+      fontSize: "Schriftgrad",
+      scale: "Maßstab",
+      cornerRadius: "Ecken-Radius",
+      pageTitle: "Schriftart des Titels",
+      pageDescription: "Beschreibung Schriftart",
+      questionTitle: "Schriftart des Titels",
+      questionDescription: "Beschreibung Schriftart",
+      editorFont: "Schriftart",
+      backgroundOpacity: "Undurchsichtigkeit",
+      "--sjs-font-family": "Schriftfamilie",
+      "--sjs-general-backcolor-dim": "Hintergrundfarbe",
+      "--sjs-primary-backcolor": "Akzent-Hintergrund",
+      "--sjs-primary-forecolor": "Akzent Vordergrund",
+      "--sjs-shadow-small": "Schatten-Effekte",
+      "--sjs-shadow-inner": "Schatten-Effekte",
+      "--sjs-border-default": "Farben"
+    },
+    "header@header": {
+      headerView: "Ansehen",
+      logoPosition: "Logo-Position",
+      surveyTitle: "Schriftart des Umfragetitels",
+      surveyDescription: "Schriftart der Umfragebeschreibung",
+      headerTitle: "Schriftart des Umfragetitels",
+      headerDescription: "Schriftart der Umfragebeschreibung",
+      inheritWidthFrom: "Breite des Inhaltsbereichs",
+      textAreaWidth: "Textbreite",
+      backgroundColorSwitch: "Hintergrundfarbe",
+      backgroundImage: "Hintergrundbild",
+      backgroundImageOpacity: "Undurchsichtigkeit",
+      overlapEnabled: "Überlappung",
+      logoPositionX: "Logo-Position",
+      titlePositionX: "Titelposition",
+      descriptionPositionX: "Beschreibung Position"
+    }
   },
   // Property values
   pv: {
@@ -1065,6 +1107,38 @@ var germanTranslation = {
     searchMode: {
       contains: "Enthält",
       startsWith: "Beginnt mit"
+    },
+    backgroundImageFit: {
+      auto: "Auto",
+      cover: "Deckel",
+      contain: "Enthalten",
+      fill: "Strecken",
+      tile: "Fliese"
+    },
+    backgroundImageAttachment: {
+      fixed: "Fest",
+      scroll: "Schriftrolle"
+    },
+    headerView: {
+      basic: "Grundlegend",
+      advanced: "Fortgeschritten"
+    },
+    inheritWidthFrom: {
+      survey: "Wie bei der Umfrage",
+      container: "An Container anpassen"
+    },
+    backgroundColorSwitch: {
+      none: "Nichts",
+      accentColor: "Akzentfarbe",
+      custom: "Gewohnheit"
+    },
+    colorPalette: {
+      light: "Licht",
+      dark: "Dunkel"
+    },
+    isPanelless: {
+      "false": "Vorgabe",
+      "true": "Ohne Paneele"
     }
   },
   // Operators
@@ -1472,94 +1546,40 @@ var germanTranslation = {
     copyDisplayValue: "Anzeigewert kopieren"
   },
   theme: {
-    "--background": "Hintergrundfarbe",
-    "--background-dim-light": "Hintergrund schwache Lichtfarbe",
-    "--primary-foreground": "Primäre Vordergrundfarbe",
-    "--foreground": "Vordergrundfarbe",
-    "--base-unit": "Basiseinheit",
     advancedMode: "Erweiterter Modus",
-    themeName: "Thema",
-    isPanelless: "Erscheinungsbild der Frage",
-    isPanellessPanels: "Standard",
-    isPanellessLightweight: "Ohne Paneele",
-    themePaletteLight: "Hell",
-    themePaletteDark: "Dunkel",
-    primaryColor: "Akzentfarbe",
+    pageTitle: "Schriftart des Seitentitels",
+    questionTitle: "Schriftart des Fragetitels",
+    editorPanel: "Eingabeelement",
+    lines: "Linien",
     primaryDefaultColor: "Standard",
     primaryDarkColor: "Schweben",
     primaryLightColor: "Ausgewählt",
     backgroundDimColor: "Hintergrundfarbe",
-    backgroundImage: "Hintergrundbild",
-    backgroundImageFitAuto: "Auto",
-    backgroundImageFitCover: "Abdecken",
-    backgroundImageFitContain: "Enthalten",
-    backgroundImageFitFill: "Strecken",
-    backgroundImageFitTile: "Kachel",
-    backgroundOpacity: "Deckkraft",
-    backgroundImageAttachmentFixed: "Fixiert",
-    backgroundImageAttachmentScroll: "Scrollen",
-    panelBackgroundTransparency: "Deckkraft des Panel-Hintergrunds",
-    questionBackgroundTransparency: "Deckkraft des Hintergrunds der Frage",
-    questionTitle: "Schriftart des Fragetitels",
-    editorPanel: "Eingabeelement",
-    backgroundCornerRadius: "Hintergrund und Eckenradius",
+    cornerRadius: "Ecken-Radius",
     backcolor: "Standard-Hintergrund",
     hovercolor: "Hover-Hintergrund",
     borderDecoration: "Bordüren-Verzierung",
-    accentBackground: "Akzent-Hintergrund",
-    accentForeground: "Akzent Vordergrund",
     primaryForecolor: "Standardfarbe",
     primaryForecolorLight: "Deaktivierte Farbe",
-    colorsTitle: "Farben",
     font: "Schriftart",
-    lines: "Linien",
     borderDefault: "Dunkler",
     borderLight: "Heller",
     fontFamily: "Schriftfamilie",
-    fontSize: "Schriftgrad",
-    color: "Farbe",
-    placeholderColor: "Farbe des Platzhalters",
-    size: "Größe",
     fontWeightRegular: "Regelmäßig",
     fontWeightHeavy: "Schwer",
     fontWeightSemiBold: "Halbfett",
-    fontWeightBold: "Fett",
-    scale: "Maßstab",
-    cornerRadius: "Eckenradius",
-    surveyTitleFont: "Schriftart für den Umfragetitel",
-    surveyDescriptionFont: "Schriftart der Umfragebeschreibung",
-    pageTitle: "Schriftart des Seitentitels",
-    titleFont: "Schriftart des Titels",
-    descriptionFont: "Beschreibung Schriftart",
+    fontWeightBold: "Kühn",
+    color: "Farbe",
+    placeholderColor: "Platzhalterfarbe",
+    size: "Größe",
+    opacity: "Undurchsichtigkeit",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Schatteneffekt hinzufügen",
-    opacity: "Undurchsichtigkeit",
     boxShadowBlur: "Verwischen",
     boxShadowSpread: "Verbreitung",
     boxShadowDrop: "Tropfen",
     boxShadowInner: "Inner",
-    shadow: "Schatten-Effekte",
-    headerView: "Ansehen",
-    headerViewBasic: "Grundlegend",
-    headerViewAdvanced: "Fortgeschritten",
-    headerInheritWidthFrom: "Breite des Inhaltsbereichs",
-    headerInheritWidthFromSurvey: "Wie Umfrage",
-    headerInheritWidthFromContainer: "Passend zum Container",
-    headerTextAreaWidth: "Textbreite",
-    headerBackgroundColorSwitch: "Hintergrundfarbe",
-    headerBackgroundColorNone: "Keine",
-    headerBackgroundColorAccentColor: "Akzentfarbe",
-    headerBackgroundColorCustom: "Bentzerdefiniert",
-    horizontalAlignmentLeft: "Links",
-    horizontalAlignmentCenter: "Mitte",
-    horizontalAlignmentRight: "Rechts",
-    verticalAlignmentTop: "Oben",
-    verticalAlignmentMiddle: "Mitte",
-    verticalAlignmentBottom: "Unten",
-    logoPosition: "Position des Logos",
-    headerTitlePosition: "Position des Titels",
-    headerDescriptionPosition: "Beschreibung Position",
     names: {
       default: "Default",
       sharp: "Scharf",
@@ -2256,3 +2276,78 @@ editorLocalization.locales["de"] = germanTranslation;
 // ed.pagePlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the page." => "Klicken Sie unten auf die Schaltfläche \"Frage hinzufügen\", um der Seite ein neues Element hinzuzufügen."
 // ed.panelPlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the panel." => "Klicken Sie unten auf die Schaltfläche \"Frage hinzufügen\", um dem Bedienfeld ein neues Element hinzuzufügen."
 // ed.imagePlaceHolderMobile: "Click the button below and choose an image to upload" => "Klicken Sie auf die Schaltfläche unten und wählen Sie ein Bild zum Hochladen aus"
+// coloralpha.opacity: "Opacity" => "Undurchsichtigkeit"
+// font.family: "Font family" => "Schriftfamilie"
+// font.color: "Color" => "Farbe"
+// font.placeholderColor: "Placeholder color" => "Platzhalterfarbe"
+// font.size: "Size" => "Größe"
+// theme.themeName: "Theme" => "Thema"
+// theme.isPanelless: "Question appearance" => "Aussehen der Frage"
+// theme.editorPanel: "Background and corner radius" => "Hintergrund und Eckenradius"
+// theme.questionPanel: "Background and corner radius" => "Hintergrund und Eckenradius"
+// theme.primaryColor: "Accent color" => "Akzentfarbe"
+// theme.panelBackgroundTransparency: "Panel background opacity" => "Deckkraft des Bedienfeldhintergrunds"
+// theme.questionBackgroundTransparency: "Question background opacity" => "Deckkraft des Hintergrunds der Frage"
+// theme.fontSize: "Font size" => "Schriftgrad"
+// theme.scale: "Scale" => "Maßstab"
+// theme.cornerRadius: "Corner radius" => "Ecken-Radius"
+// theme.pageTitle: "Title font" => "Schriftart des Titels"
+// theme.pageDescription: "Description font" => "Beschreibung Schriftart"
+// theme.questionTitle: "Title font" => "Schriftart des Titels"
+// theme.questionDescription: "Description font" => "Beschreibung Schriftart"
+// theme.editorFont: "Font" => "Schriftart"
+// theme.backgroundOpacity: "Opacity" => "Undurchsichtigkeit"
+// theme.--sjs-font-family: "Font family" => "Schriftfamilie"
+// theme.--sjs-general-backcolor-dim: "Background color" => "Hintergrundfarbe"
+// theme.--sjs-primary-backcolor: "Accent background" => "Akzent-Hintergrund"
+// theme.--sjs-primary-forecolor: "Accent foreground" => "Akzent Vordergrund"
+// theme.--sjs-shadow-small: "Shadow effects" => "Schatten-Effekte"
+// theme.--sjs-shadow-inner: "Shadow effects" => "Schatten-Effekte"
+// theme.--sjs-border-default: "Colors" => "Farben"
+// header@header.headerView: "View" => "Ansehen"
+// header@header.logoPosition: "Logo position" => "Logo-Position"
+// header@header.surveyTitle: "Survey title font" => "Schriftart des Umfragetitels"
+// header@header.surveyDescription: "Survey description font" => "Schriftart der Umfragebeschreibung"
+// header@header.headerTitle: "Survey title font" => "Schriftart des Umfragetitels"
+// header@header.headerDescription: "Survey description font" => "Schriftart der Umfragebeschreibung"
+// header@header.inheritWidthFrom: "Content area width" => "Breite des Inhaltsbereichs"
+// header@header.textAreaWidth: "Text width" => "Textbreite"
+// header@header.backgroundColorSwitch: "Background color" => "Hintergrundfarbe"
+// header@header.backgroundImage: "Background image" => "Hintergrundbild"
+// header@header.backgroundImageOpacity: "Opacity" => "Undurchsichtigkeit"
+// header@header.overlapEnabled: "Overlap" => "Überlappung"
+// header@header.logoPositionX: "Logo position" => "Logo-Position"
+// header@header.titlePositionX: "Title position" => "Titelposition"
+// header@header.descriptionPositionX: "Description position" => "Beschreibung Position"
+// weight.400: "Regular" => "Regelmäßig"
+// weight.600: "Heavy" => "Schwer"
+// weight.700: "Semi-bold" => "Halbfett"
+// weight.800: "Bold" => "Kühn"
+// backgroundImageFit.auto: "Auto" => "Auto"
+// backgroundImageFit.cover: "Cover" => "Deckel"
+// backgroundImageFit.contain: "Contain" => "Enthalten"
+// backgroundImageFit.fill: "Stretch" => "Strecken"
+// backgroundImageFit.tile: "Tile" => "Fliese"
+// backgroundImageAttachment.fixed: "Fixed" => "Fest"
+// backgroundImageAttachment.scroll: "Scroll" => "Schriftrolle"
+// headerView.basic: "Basic" => "Grundlegend"
+// headerView.advanced: "Advanced" => "Fortgeschritten"
+// inheritWidthFrom.survey: "Same as survey" => "Wie bei der Umfrage"
+// inheritWidthFrom.container: "Fit to container" => "An Container anpassen"
+// backgroundColorSwitch.none: "None" => "Nichts"
+// backgroundColorSwitch.accentColor: "Accent color" => "Akzentfarbe"
+// backgroundColorSwitch.custom: "Custom" => "Gewohnheit"
+// colorPalette.light: "Light" => "Licht"
+// colorPalette.dark: "Dark" => "Dunkel"
+// isPanelless.false: "Default" => "Vorgabe"
+// isPanelless.true: "Without Panels" => "Ohne Paneele"
+// theme.cornerRadius: "Corner radius" => "Ecken-Radius"
+// theme.fontFamily: "Font family" => "Schriftfamilie"
+// theme.fontWeightRegular: "Regular" => "Regelmäßig"
+// theme.fontWeightHeavy: "Heavy" => "Schwer"
+// theme.fontWeightSemiBold: "Semi-bold" => "Halbfett"
+// theme.fontWeightBold: "Bold" => "Kühn"
+// theme.color: "Color" => "Farbe"
+// theme.placeholderColor: "Placeholder color" => "Platzhalterfarbe"
+// theme.size: "Size" => "Größe"
+// theme.opacity: "Opacity" => "Undurchsichtigkeit"

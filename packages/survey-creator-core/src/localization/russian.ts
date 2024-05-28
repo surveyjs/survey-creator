@@ -48,7 +48,7 @@ export var ruStrings = {
     text: "Вопросы для ввода текста",
     containers: "Контейнеры",
     matrix: "Матричные вопросы",
-    misc: "Разное",
+    misc: "Разное"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -849,7 +849,49 @@ export var ruStrings = {
     minWidth_placeholder: "Пример: 600px",
     maxWidth_placeholder: "Пример: 50%",
     imageHeight_placeholder: "Авто",
-    imageWidth_placeholder: "Авто"
+    imageWidth_placeholder: "Авто",
+    theme: {
+      themeName: "Тема",
+      isPanelless: "Внешний вид вопроса",
+      editorPanel: "Радиус фона и угла",
+      questionPanel: "Радиус фона и угла",
+      primaryColor: "Акцентный цвет",
+      panelBackgroundTransparency: "Непрозрачность фона панели",
+      questionBackgroundTransparency: "Непрозрачность фона вопроса",
+      fontSize: "Размер шрифта",
+      scale: "Шкала",
+      cornerRadius: "Радиус закругления угла",
+      pageTitle: "Шрифт заголовка",
+      pageDescription: "Описание шрифта",
+      questionTitle: "Шрифт заголовка",
+      questionDescription: "Описание шрифта",
+      editorFont: "Шрифт",
+      backgroundOpacity: "Непрозрачность",
+      "--sjs-font-family": "Семейство шрифтов",
+      "--sjs-general-backcolor-dim": "Цвет фона",
+      "--sjs-primary-backcolor": "Акцентный фон",
+      "--sjs-primary-forecolor": "Акцент на переднем плане",
+      "--sjs-shadow-small": "Эффекты теней",
+      "--sjs-shadow-inner": "Эффекты теней",
+      "--sjs-border-default": "Знамя"
+    },
+    "header@header": {
+      headerView: "Вид",
+      logoPosition: "Расположение логотипа",
+      surveyTitle: "Шрифт заголовка опроса",
+      surveyDescription: "Шрифт описания опроса",
+      headerTitle: "Шрифт заголовка опроса",
+      headerDescription: "Шрифт описания опроса",
+      inheritWidthFrom: "Ширина области содержимого",
+      textAreaWidth: "Ширина текста",
+      backgroundColorSwitch: "Цвет фона",
+      backgroundImage: "Фоновое изображение",
+      backgroundImageOpacity: "Непрозрачность",
+      overlapEnabled: "Перекрытие",
+      logoPositionX: "Расположение логотипа",
+      titlePositionX: "Титульная позиция",
+      descriptionPositionX: "Описание позиции"
+    }
   },
   // Property values
   pv: {
@@ -1065,6 +1107,38 @@ export var ruStrings = {
     searchMode: {
       contains: "Содержит",
       startsWith: "Начинается с"
+    },
+    backgroundImageFit: {
+      auto: "Авто",
+      cover: "Крышка",
+      contain: "Содержать",
+      fill: "Натягивать",
+      tile: "Кафель"
+    },
+    backgroundImageAttachment: {
+      fixed: "Неподвижный",
+      scroll: "Свиток"
+    },
+    headerView: {
+      basic: "Основной",
+      advanced: "Продвинутый"
+    },
+    inheritWidthFrom: {
+      survey: "То же, что и опрос",
+      container: "Подходит для контейнера"
+    },
+    backgroundColorSwitch: {
+      none: "Никакой",
+      accentColor: "Акцентный цвет",
+      custom: "Обычай"
+    },
+    colorPalette: {
+      light: "Свет",
+      dark: "Темный"
+    },
+    isPanelless: {
+      "false": "По умолчанию",
+      "true": "Без панелей"
     }
   },
   // Operators
@@ -1469,97 +1543,43 @@ export var ruStrings = {
     allowCameraAccess: "Разрешить доступ к камере",
     scaleColorMode: "Цветовой режим масштабирования",
     rateColorMode: "Оцените цветовой режим",
-    copyDisplayValue: "Копирование отображаемого значения",
-    surveyTitleFont: "Шрифт заголовка опроса",
-    surveyDescriptionFont: "Шрифт описания опроса",
-    panelBackgroundTransparency: "Непрозрачность фона панели",
-    questionBackgroundTransparency: "Непрозрачность фона вопроса",
-    accentBackground: "Акцентный фон",
-    accentForeground: "Акцент на переднем плане",
+    copyDisplayValue: "Копирование отображаемого значения"
   },
   theme: {
-    "--background": "Цвет фона",
-    "--background-dim-light": "Фон тусклый цвет света",
-    "--primary-foreground": "Основной цвет переднего плана",
-    "--foreground": "Цвет переднего плана",
-    "--base-unit": "Базовый блок",
     advancedMode: "Расширенный режим",
-    themeName: "Тема",
-    isPanelless: "Внешний вид вопроса",
-    isPanellessPanels: "По умолчанию",
-    isPanellessLightweight: "Без панелей",
-    themePaletteLight: "Свет",
-    themePaletteDark: "Темный",
-    primaryColor: "Акцентный цвет",
+    pageTitle: "Шрифт заголовка страницы",
+    questionTitle: "Шрифт заголовка вопроса",
+    editorPanel: "Элемент ввода",
+    lines: "Обводы",
     primaryDefaultColor: "По умолчанию",
     primaryDarkColor: "Парить",
     primaryLightColor: "Выбранный",
     backgroundDimColor: "Цвет фона",
-    backgroundImage: "Фоновое изображение",
-    backgroundImageFitAuto: "Авто",
-    backgroundImageFitCover: "Заполнение",
-    backgroundImageFitContain: "По размеру",
-    backgroundImageFitFill: "Растянуть",
-    backgroundImageFitTile: "Замостить",
-    backgroundOpacity: "Непрозрачность",
-    backgroundImageAttachmentFixed: "Зафиксировать",
-    backgroundImageAttachmentScroll: "Прокручивать",
-    questionTitle: "Шрифт заголовка вопроса",
-    editorPanel: "Элемент ввода",
-    backgroundCornerRadius: "Радиус фона и угла",
+    cornerRadius: "Радиус закругления угла",
     backcolor: "Фон по умолчанию",
     hovercolor: "Фон при наведении курсора",
     borderDecoration: "Оформление бордюра",
     primaryForecolor: "Цвет по умолчанию",
     primaryForecolorLight: "Отключенный цвет",
-    colorsTitle: "Знамя",
     font: "Шрифт",
-    lines: "Обводы",
     borderDefault: "Темнее",
     borderLight: "Зажигалка",
     fontFamily: "Семейство шрифтов",
-    fontSize: "Размер шрифта",
-    color: "Цвет",
-    placeholderColor: "Цвет заполнителя",
-    size: "Размер",
     fontWeightRegular: "Регулярный",
     fontWeightHeavy: "Тяжелый",
     fontWeightSemiBold: "Полужирный",
     fontWeightBold: "Смелый",
-    scale: "Шкала",
-    cornerRadius: "Радиус угла",
-    pageTitle: "Шрифт заголовка страницы",
-    titleFont: "Шрифт заголовка",
-    descriptionFont: "Описание шрифта",
+    color: "Цвет",
+    placeholderColor: "Цвет заполнителя",
+    size: "Размер",
+    opacity: "Непрозрачность",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Добавить эффект тени",
-    opacity: "Непрозрачность",
     boxShadowBlur: "Смазывать",
     boxShadowSpread: "Распространение",
     boxShadowDrop: "Капля",
     boxShadowInner: "Внутренний",
-    shadow: "Эффекты теней",
-    headerView: "Вид",
-    headerViewBasic: "Основной",
-    headerViewAdvanced: "Продвинутый",
-    headerInheritWidthFrom: "Ширина области содержимого",
-    headerInheritWidthFromSurvey: "То же, что и опрос",
-    headerInheritWidthFromContainer: "Подходит для контейнера",
-    headerTextAreaWidth: "Ширина текста",
-    headerBackgroundColorSwitch: "Цвет фона",
-    headerBackgroundColorNone: "Никакой",
-    headerBackgroundColorAccentColor: "Акцентный цвет",
-    headerBackgroundColorCustom: "Обычай",
-    horizontalAlignmentLeft: "Налево",
-    horizontalAlignmentCenter: "Центр",
-    horizontalAlignmentRight: "Правильно",
-    verticalAlignmentTop: "Вверх",
-    verticalAlignmentMiddle: "Середина",
-    verticalAlignmentBottom: "Дно",
-    logoPosition: "Положение логотипа",
-    headerTitlePosition: "Титульная позиция",
-    headerDescriptionPosition: "Описание позиции",
     names: {
       default: "По умолчанию",
       sharp: "Чёткая",
@@ -2607,3 +2627,78 @@ editorLocalization.locales["ru"] = ruStrings;
 // ed.pagePlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the page." => "Нажмите кнопку «Добавить вопрос» ниже, чтобы добавить новый элемент на страницу."
 // ed.panelPlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the panel." => "Нажмите кнопку «Добавить вопрос» ниже, чтобы добавить новый элемент на панель."
 // ed.imagePlaceHolderMobile: "Click the button below and choose an image to upload" => "Нажмите кнопку ниже и выберите изображение для загрузки"
+// coloralpha.opacity: "Opacity" => "Непрозрачность"
+// font.family: "Font family" => "Семейство шрифтов"
+// font.color: "Color" => "Цвет"
+// font.placeholderColor: "Placeholder color" => "Цвет заполнителя"
+// font.size: "Size" => "Размер"
+// theme.themeName: "Theme" => "Тема"
+// theme.isPanelless: "Question appearance" => "Внешний вид вопроса"
+// theme.editorPanel: "Background and corner radius" => "Радиус фона и угла"
+// theme.questionPanel: "Background and corner radius" => "Радиус фона и угла"
+// theme.primaryColor: "Accent color" => "Акцентный цвет"
+// theme.panelBackgroundTransparency: "Panel background opacity" => "Непрозрачность фона панели"
+// theme.questionBackgroundTransparency: "Question background opacity" => "Непрозрачность фона вопроса"
+// theme.fontSize: "Font size" => "Размер шрифта"
+// theme.scale: "Scale" => "Шкала"
+// theme.cornerRadius: "Corner radius" => "Радиус закругления угла"
+// theme.pageTitle: "Title font" => "Шрифт заголовка"
+// theme.pageDescription: "Description font" => "Описание шрифта"
+// theme.questionTitle: "Title font" => "Шрифт заголовка"
+// theme.questionDescription: "Description font" => "Описание шрифта"
+// theme.editorFont: "Font" => "Шрифт"
+// theme.backgroundOpacity: "Opacity" => "Непрозрачность"
+// theme.--sjs-font-family: "Font family" => "Семейство шрифтов"
+// theme.--sjs-general-backcolor-dim: "Background color" => "Цвет фона"
+// theme.--sjs-primary-backcolor: "Accent background" => "Акцентный фон"
+// theme.--sjs-primary-forecolor: "Accent foreground" => "Акцент на переднем плане"
+// theme.--sjs-shadow-small: "Shadow effects" => "Эффекты теней"
+// theme.--sjs-shadow-inner: "Shadow effects" => "Эффекты теней"
+// theme.--sjs-border-default: "Colors" => "Знамя"
+// header@header.headerView: "View" => "Вид"
+// header@header.logoPosition: "Logo position" => "Расположение логотипа"
+// header@header.surveyTitle: "Survey title font" => "Шрифт заголовка опроса"
+// header@header.surveyDescription: "Survey description font" => "Шрифт описания опроса"
+// header@header.headerTitle: "Survey title font" => "Шрифт заголовка опроса"
+// header@header.headerDescription: "Survey description font" => "Шрифт описания опроса"
+// header@header.inheritWidthFrom: "Content area width" => "Ширина области содержимого"
+// header@header.textAreaWidth: "Text width" => "Ширина текста"
+// header@header.backgroundColorSwitch: "Background color" => "Цвет фона"
+// header@header.backgroundImage: "Background image" => "Фоновое изображение"
+// header@header.backgroundImageOpacity: "Opacity" => "Непрозрачность"
+// header@header.overlapEnabled: "Overlap" => "Перекрытие"
+// header@header.logoPositionX: "Logo position" => "Расположение логотипа"
+// header@header.titlePositionX: "Title position" => "Титульная позиция"
+// header@header.descriptionPositionX: "Description position" => "Описание позиции"
+// weight.400: "Regular" => "Регулярный"
+// weight.600: "Heavy" => "Тяжелый"
+// weight.700: "Semi-bold" => "Полужирный"
+// weight.800: "Bold" => "Смелый"
+// backgroundImageFit.auto: "Auto" => "Авто"
+// backgroundImageFit.cover: "Cover" => "Крышка"
+// backgroundImageFit.contain: "Contain" => "Содержать"
+// backgroundImageFit.fill: "Stretch" => "Натягивать"
+// backgroundImageFit.tile: "Tile" => "Кафель"
+// backgroundImageAttachment.fixed: "Fixed" => "Неподвижный"
+// backgroundImageAttachment.scroll: "Scroll" => "Свиток"
+// headerView.basic: "Basic" => "Основной"
+// headerView.advanced: "Advanced" => "Продвинутый"
+// inheritWidthFrom.survey: "Same as survey" => "То же, что и опрос"
+// inheritWidthFrom.container: "Fit to container" => "Подходит для контейнера"
+// backgroundColorSwitch.none: "None" => "Никакой"
+// backgroundColorSwitch.accentColor: "Accent color" => "Акцентный цвет"
+// backgroundColorSwitch.custom: "Custom" => "Обычай"
+// colorPalette.light: "Light" => "Свет"
+// colorPalette.dark: "Dark" => "Темный"
+// isPanelless.false: "Default" => "По умолчанию"
+// isPanelless.true: "Without Panels" => "Без панелей"
+// theme.cornerRadius: "Corner radius" => "Радиус закругления угла"
+// theme.fontFamily: "Font family" => "Семейство шрифтов"
+// theme.fontWeightRegular: "Regular" => "Регулярный"
+// theme.fontWeightHeavy: "Heavy" => "Тяжелый"
+// theme.fontWeightSemiBold: "Semi-bold" => "Полужирный"
+// theme.fontWeightBold: "Bold" => "Смелый"
+// theme.color: "Color" => "Цвет"
+// theme.placeholderColor: "Placeholder color" => "Цвет заполнителя"
+// theme.size: "Size" => "Размер"
+// theme.opacity: "Opacity" => "Непрозрачность"

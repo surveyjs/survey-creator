@@ -48,7 +48,7 @@ var traditionalChineseTranslation = {
     text: "文本輸入問題",
     containers: "器皿",
     matrix: "矩陣問題",
-    misc: "雜項",
+    misc: "雜項"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -849,7 +849,49 @@ var traditionalChineseTranslation = {
     minWidth_placeholder: "例如：600px",
     maxWidth_placeholder: "例：50%",
     imageHeight_placeholder: "自動",
-    imageWidth_placeholder: "自動"
+    imageWidth_placeholder: "自動",
+    theme: {
+      themeName: "主題",
+      isPanelless: "問題外觀",
+      editorPanel: "背景和拐角半徑",
+      questionPanel: "背景和拐角半徑",
+      primaryColor: "強調色",
+      panelBackgroundTransparency: "面板背景不透明度",
+      questionBackgroundTransparency: "問題背景不透明度",
+      fontSize: "字體大小",
+      scale: "規模",
+      cornerRadius: "拐角半徑",
+      pageTitle: "標題字體",
+      pageDescription: "描述字體",
+      questionTitle: "標題字體",
+      questionDescription: "描述字體",
+      editorFont: "字體",
+      backgroundOpacity: "不透明度",
+      "--sjs-font-family": "字體家族",
+      "--sjs-general-backcolor-dim": "背景顏色",
+      "--sjs-primary-backcolor": "重音背景",
+      "--sjs-primary-forecolor": "重音前景",
+      "--sjs-shadow-small": "陰影效果",
+      "--sjs-shadow-inner": "陰影效果",
+      "--sjs-border-default": "顏色"
+    },
+    "header@header": {
+      headerView: "視圖",
+      logoPosition: "徽標位置",
+      surveyTitle: "調查標題字體",
+      surveyDescription: "調查描述字體",
+      headerTitle: "調查標題字體",
+      headerDescription: "調查描述字體",
+      inheritWidthFrom: "內容區寬度",
+      textAreaWidth: "文本寬度",
+      backgroundColorSwitch: "背景顏色",
+      backgroundImage: "背景圖片",
+      backgroundImageOpacity: "不透明度",
+      overlapEnabled: "重疊",
+      logoPositionX: "徽標位置",
+      titlePositionX: "標題位置",
+      descriptionPositionX: "描述位置"
+    }
   },
   // Property values
   pv: {
@@ -1065,6 +1107,38 @@ var traditionalChineseTranslation = {
     searchMode: {
       contains: "包含",
       startsWith: "開頭為"
+    },
+    backgroundImageFit: {
+      auto: "自動",
+      cover: "蓋",
+      contain: "包含",
+      fill: "伸展",
+      tile: "瓦"
+    },
+    backgroundImageAttachment: {
+      fixed: "固定",
+      scroll: "滾動"
+    },
+    headerView: {
+      basic: "基本",
+      advanced: "高深"
+    },
+    inheritWidthFrom: {
+      survey: "與調查相同",
+      container: "適合容器"
+    },
+    backgroundColorSwitch: {
+      none: "沒有",
+      accentColor: "強調色",
+      custom: "習慣"
+    },
+    colorPalette: {
+      light: "光",
+      dark: "黑暗"
+    },
+    isPanelless: {
+      "false": "違約",
+      "true": "不帶面板"
     }
   },
   // Operators
@@ -1472,94 +1546,40 @@ var traditionalChineseTranslation = {
     copyDisplayValue: "複製顯示值"
   },
   theme: {
-    "--background": "背景色",
-    "--background-dim-light": "背景昏暗的光線顏色",
-    "--primary-foreground": "原色前景色",
-    "--foreground": "前景色",
-    "--base-unit": "基本單元",
     advancedMode: "高級模式",
-    themeName: "主題",
-    isPanelless: "問題外觀",
-    isPanellessPanels: "違約",
-    isPanellessLightweight: "不帶面板",
-    themePaletteLight: "光",
-    themePaletteDark: "黑暗",
-    primaryColor: "強調文字顏色",
+    pageTitle: "頁面標題字體",
+    questionTitle: "問題標題字體",
+    editorPanel: "輸入元素",
+    lines: "線",
     primaryDefaultColor: "違約",
     primaryDarkColor: "懸停",
     primaryLightColor: "選擇",
     backgroundDimColor: "背景色",
-    backgroundImage: "背景圖片",
-    backgroundImageFitAuto: "自動",
-    backgroundImageFitCover: "蓋",
-    backgroundImageFitContain: "包含",
-    backgroundImageFitFill: "伸展",
-    backgroundImageFitTile: "瓦",
-    backgroundOpacity: "不透明度",
-    backgroundImageAttachmentFixed: "固定",
-    backgroundImageAttachmentScroll: "滾動",
-    panelBackgroundTransparency: "面板背景不透明度",
-    questionBackgroundTransparency: "問題背景不透明度",
-    questionTitle: "問題標題字體",
-    editorPanel: "輸入元素",
-    backgroundCornerRadius: "背景和圓角半徑",
+    cornerRadius: "拐角半徑",
     backcolor: "默認背景",
     hovercolor: "懸停背景",
     borderDecoration: "邊框裝飾",
-    accentBackground: "強調文字背景",
-    accentForeground: "強調文字前景",
     primaryForecolor: "默認顏色",
     primaryForecolorLight: "禁用顏色",
-    colorsTitle: "顏色",
     font: "字體",
-    lines: "線",
     borderDefault: "暗",
     borderLight: "打火機",
-    fontFamily: "字體系列",
-    fontSize: "字體大小",
-    color: "顏色",
-    placeholderColor: "佔位元顏色",
-    size: "大小",
+    fontFamily: "字體家族",
     fontWeightRegular: "定期",
     fontWeightHeavy: "重",
     fontWeightSemiBold: "半粗體",
     fontWeightBold: "大膽",
-    scale: "規模",
-    cornerRadius: "拐角半徑",
-    surveyTitleFont: "調查標題字體",
-    surveyDescriptionFont: "調查描述字體",
-    pageTitle: "頁面標題字體",
-    titleFont: "標題字體",
-    descriptionFont: "描述字體",
+    color: "顏色",
+    placeholderColor: "佔位元顏色",
+    size: "大小",
+    opacity: "不透明度",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "添加陰影效果",
-    opacity: "不透明度",
     boxShadowBlur: "模糊",
     boxShadowSpread: "傳播",
     boxShadowDrop: "落",
     boxShadowInner: "內",
-    shadow: "陰影效果",
-    headerView: "視圖",
-    headerViewBasic: "基本",
-    headerViewAdvanced: "高深",
-    headerInheritWidthFrom: "內容區域寬度",
-    headerInheritWidthFromSurvey: "與調查相同",
-    headerInheritWidthFromContainer: "適合容器",
-    headerTextAreaWidth: "文本寬度",
-    headerBackgroundColorSwitch: "背景色",
-    headerBackgroundColorNone: "沒有",
-    headerBackgroundColorAccentColor: "強調文字顏色",
-    headerBackgroundColorCustom: "習慣",
-    horizontalAlignmentLeft: "左",
-    horizontalAlignmentCenter: "中心",
-    horizontalAlignmentRight: "右",
-    verticalAlignmentTop: "返回頁首",
-    verticalAlignmentMiddle: "中間",
-    verticalAlignmentBottom: "底",
-    logoPosition: "徽標位置",
-    headerTitlePosition: "職稱位置",
-    headerDescriptionPosition: "描述位置",
     names: {
       default: "違約",
       sharp: "鋒利",
@@ -2819,3 +2839,78 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // ed.pagePlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the page." => "按兩下下面的「添加問題」 按鈕，向頁面添加新元素。"
 // ed.panelPlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the panel." => "按下下面的「添加問題」 按鈕，將新元素添加到面板中。"
 // ed.imagePlaceHolderMobile: "Click the button below and choose an image to upload" => "點擊下面的按鈕，選擇要上傳的圖片"
+// coloralpha.opacity: "Opacity" => "不透明度"
+// font.family: "Font family" => "字體家族"
+// font.color: "Color" => "顏色"
+// font.placeholderColor: "Placeholder color" => "佔位元顏色"
+// font.size: "Size" => "大小"
+// theme.themeName: "Theme" => "主題"
+// theme.isPanelless: "Question appearance" => "問題外觀"
+// theme.editorPanel: "Background and corner radius" => "背景和拐角半徑"
+// theme.questionPanel: "Background and corner radius" => "背景和拐角半徑"
+// theme.primaryColor: "Accent color" => "強調色"
+// theme.panelBackgroundTransparency: "Panel background opacity" => "面板背景不透明度"
+// theme.questionBackgroundTransparency: "Question background opacity" => "問題背景不透明度"
+// theme.fontSize: "Font size" => "字體大小"
+// theme.scale: "Scale" => "規模"
+// theme.cornerRadius: "Corner radius" => "拐角半徑"
+// theme.pageTitle: "Title font" => "標題字體"
+// theme.pageDescription: "Description font" => "描述字體"
+// theme.questionTitle: "Title font" => "標題字體"
+// theme.questionDescription: "Description font" => "描述字體"
+// theme.editorFont: "Font" => "字體"
+// theme.backgroundOpacity: "Opacity" => "不透明度"
+// theme.--sjs-font-family: "Font family" => "字體家族"
+// theme.--sjs-general-backcolor-dim: "Background color" => "背景顏色"
+// theme.--sjs-primary-backcolor: "Accent background" => "重音背景"
+// theme.--sjs-primary-forecolor: "Accent foreground" => "重音前景"
+// theme.--sjs-shadow-small: "Shadow effects" => "陰影效果"
+// theme.--sjs-shadow-inner: "Shadow effects" => "陰影效果"
+// theme.--sjs-border-default: "Colors" => "顏色"
+// header@header.headerView: "View" => "視圖"
+// header@header.logoPosition: "Logo position" => "徽標位置"
+// header@header.surveyTitle: "Survey title font" => "調查標題字體"
+// header@header.surveyDescription: "Survey description font" => "調查描述字體"
+// header@header.headerTitle: "Survey title font" => "調查標題字體"
+// header@header.headerDescription: "Survey description font" => "調查描述字體"
+// header@header.inheritWidthFrom: "Content area width" => "內容區寬度"
+// header@header.textAreaWidth: "Text width" => "文本寬度"
+// header@header.backgroundColorSwitch: "Background color" => "背景顏色"
+// header@header.backgroundImage: "Background image" => "背景圖片"
+// header@header.backgroundImageOpacity: "Opacity" => "不透明度"
+// header@header.overlapEnabled: "Overlap" => "重疊"
+// header@header.logoPositionX: "Logo position" => "徽標位置"
+// header@header.titlePositionX: "Title position" => "標題位置"
+// header@header.descriptionPositionX: "Description position" => "描述位置"
+// weight.400: "Regular" => "定期"
+// weight.600: "Heavy" => "重"
+// weight.700: "Semi-bold" => "半粗體"
+// weight.800: "Bold" => "大膽"
+// backgroundImageFit.auto: "Auto" => "自動"
+// backgroundImageFit.cover: "Cover" => "蓋"
+// backgroundImageFit.contain: "Contain" => "包含"
+// backgroundImageFit.fill: "Stretch" => "伸展"
+// backgroundImageFit.tile: "Tile" => "瓦"
+// backgroundImageAttachment.fixed: "Fixed" => "固定"
+// backgroundImageAttachment.scroll: "Scroll" => "滾動"
+// headerView.basic: "Basic" => "基本"
+// headerView.advanced: "Advanced" => "高深"
+// inheritWidthFrom.survey: "Same as survey" => "與調查相同"
+// inheritWidthFrom.container: "Fit to container" => "適合容器"
+// backgroundColorSwitch.none: "None" => "沒有"
+// backgroundColorSwitch.accentColor: "Accent color" => "強調色"
+// backgroundColorSwitch.custom: "Custom" => "習慣"
+// colorPalette.light: "Light" => "光"
+// colorPalette.dark: "Dark" => "黑暗"
+// isPanelless.false: "Default" => "違約"
+// isPanelless.true: "Without Panels" => "不帶面板"
+// theme.cornerRadius: "Corner radius" => "拐角半徑"
+// theme.fontFamily: "Font family" => "字體家族"
+// theme.fontWeightRegular: "Regular" => "定期"
+// theme.fontWeightHeavy: "Heavy" => "重"
+// theme.fontWeightSemiBold: "Semi-bold" => "半粗體"
+// theme.fontWeightBold: "Bold" => "大膽"
+// theme.color: "Color" => "顏色"
+// theme.placeholderColor: "Placeholder color" => "佔位元顏色"
+// theme.size: "Size" => "大小"
+// theme.opacity: "Opacity" => "不透明度"
