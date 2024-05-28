@@ -90,6 +90,7 @@ export * from "../plugins/undo-redo/undo-redo-manager";
 export * from "../pages-controller";
 export * from "../presets/presets";
 export * from "../presets/editable/presets-editor";
+export * from "../presets/editable/preset-question-ranking";
 
 require("../components/property-panel/property-panel-item.scss");
 require("../components/property-panel/property-panel.scss");

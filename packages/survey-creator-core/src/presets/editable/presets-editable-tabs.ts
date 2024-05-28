@@ -16,7 +16,7 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableBase {
           title: "Do you want to setup Creator tabs?",
         },
         {
-          type: "ranking",
+          type: "presetranking",
           name: this.nameItems,
           title: "Please order the Creator tabs",
           selectToRankEnabled: true,
