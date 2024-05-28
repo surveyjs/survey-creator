@@ -1,7 +1,7 @@
 import { ItemValue, QuestionRankingModel, SurveyModel } from "survey-core";
 import { ReactQuestionFactory, SurveyQuestionRanking,
   SurveyQuestionRankingItem, ReactSurveyElementsWrapper } from "survey-react-ui";
-import { QuestionPresetRankingModel, PresetItemValue } from "survey-creator-core";  
+//import { PresetItemValue } from "survey-creator-core";
 import * as React from "react";
 
 export class SurveyQuestionPresetRanking extends SurveyQuestionRanking {
