@@ -63,10 +63,7 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableBase {
     model.setValue(this.nameActiveTab, json["activeTab"] || creator.activeTab);
   }
   private getTabTitle(name: string): string {
-    if(name === "preview") name = "testSurvey";
-    if(name === "editor") name = "jsonEditor";
-    if(name === "theme") name = "themeSurvey";
-    return editorLocalization.getString("ed." + name);
+    return editorLocalization.getString("tabs." + name);
   }
   private get nameShow() { return this.path + "_show"; }
   private get nameItems() { return this.path + "_items"; }
