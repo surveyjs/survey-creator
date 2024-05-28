@@ -6,6 +6,7 @@ import { defaultPropertyGridDefinition } from "../src/question-editor/definition
 import { SurveyQuestionPresetPropertiesDetail } from "../src/presets/editable/presets-editable-properties";
 import { QuestionEmbeddedSurveyModel } from "../src/components/embedded-survey";
 import { CreatorPresetEditorModel } from "../src/presets/editable/presets-editor";
+export * from "../src/presets/editable/preset-question-ranking";
 
 export * from "../src/components/embedded-survey";
 
