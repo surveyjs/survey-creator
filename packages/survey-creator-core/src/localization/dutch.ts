@@ -16,6 +16,15 @@ export var nlStrings = {
     convertTo: "Omzetten naar",
     drag: "Sleep element",
   },
+  // Creator tabs
+  tabs: {
+    preview: "Test de enquête",
+    theme: "Thema 's",
+    translation: "Vertaling",
+    designer: "Enquête-ontwerper",
+    editor: "JSON-editor",
+    logic: "Onderzoekslogica"
+  },
   // Question types
   qt: {
     default: "Standaard",
@@ -48,7 +57,7 @@ export var nlStrings = {
     text: "Vragen over tekstinvoer",
     containers: "Containers",
     matrix: "Matrix vragen",
-    misc: "MISC",
+    misc: "MISC"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -81,23 +90,16 @@ export var nlStrings = {
     newQuestionName: "Vraag",
     newPanelName: "Paneel",
     newTextItemName: "Tekst",
-    testSurvey: "Test de enquête",
-    themeSurvey: "Thema 's",
     defaultV2Theme: "Verstek",
     modernTheme: "Modern",
     defaultTheme: "Standaard (verouderd)",
     testSurveyAgain: "Test de enquête opnieuw",
     testSurveyWidth: "Onderzoeksbreedte: ",
     navigateToMsg: "Je moest navigeren naar:",
-    logic: "Onderzoekslogica",
-    embedSurvey: "Enquête insluiten",
-    translation: "Vertaling",
     saveSurvey: "Enquête opslaan",
     saveSurveyTooltip: "Enquête opslaan",
     saveTheme: "Thema opslaan",
     saveThemeTooltip: "Thema opslaan",
-    designer: "Enquête-ontwerper",
-    jsonEditor: "JSON-editor",
     jsonHideErrors: "Fouten verbergen",
     jsonShowErrors: "Toon fouten",
     undo: "Ongedaan maken",
@@ -227,13 +229,13 @@ export var nlStrings = {
       question_visibilityText: "Maak vraag {0} zichtbaar", //{0} question name
       question_enableText: "Schakel vraag {0} in", //{0} question name
       question_requireText: "Stel vraag {0} verplicht", //{0} question name
-      question_resetValueText: "Resetwaarde voor vraag: {0}",
+      question_resetValueText: "Resetwaarde voor vraag: {0}", //{0} question name.
       question_setValueText: "Waarde: {1} toewijzen aan vraag: {0}",
       column_visibilityText: "Kolom {0} van vraag {1} zichtbaar maken", //{0} column name, {1} question name
       column_enableText: "Kolom {0} van vraag maken {1} inschakelen", //{0} column name, {1} question name
       column_requireText: "Kolom {0} met vraag {1} verplicht maken", //{0} column name, {1} question name
-      column_resetValueText: "Celwaarde voor kolom opnieuw instellen: {0}",
-      column_setValueText: "Celwaarde: {1} toewijzen aan kolom: {0}",
+      column_resetValueText: "Celwaarde voor kolom opnieuw instellen: {0}", //{0} column name
+      column_setValueText: "Celwaarde: {1} toewijzen aan kolom: {0}", //{0} column name and {1} setValueExpression
       setValueExpressionPlaceholder: " Een expressie waarvan het resultaat wordt toegewezen aan de doelvraag.",
       trigger_completeText: "Enquête wordt voltooid",
       trigger_setvalueText: "Stel de vraag: {0} waarde {1}", //{0} question name, {1} setValue
@@ -751,6 +753,7 @@ export var nlStrings = {
       top: "Bovenop",
       bottom: "Onder aan"
     },
+    // Creator tabs
     tabs: {
       panel: {
         layout: "Paneel Lay-out"

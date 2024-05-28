@@ -16,6 +16,15 @@ export var jaStrings = {
     convertTo: "に変換する",
     drag: "要素をドラッグする",
   },
+  // Creator tabs
+  tabs: {
+    preview: "アンケートをテストする",
+    theme: "テーマ",
+    translation: "翻訳",
+    designer: "アンケートの設計者",
+    editor: "JSONエディタ",
+    logic: "アンケートのロジック"
+  },
   // Question types
   qt: {
     default: "デフォルト",
@@ -48,7 +57,7 @@ export var jaStrings = {
     text: "テキスト入力の質問",
     containers: "コンテナー",
     matrix: "マトリックスの質問",
-    misc: "雑貨",
+    misc: "雑貨"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -81,23 +90,16 @@ export var jaStrings = {
     newQuestionName: "質問",
     newPanelName: "パネル",
     newTextItemName: "テキスト",
-    testSurvey: "アンケートをテストする",
-    themeSurvey: "テーマ",
     defaultV2Theme: "デフォルト",
     modernTheme: "モダン",
     defaultTheme: "デフォルト (レガシー)",
     testSurveyAgain: "アンケートを再度テストする",
     testSurveyWidth: "アンケートの幅： ",
     navigateToMsg: "次の場所に移動する必要がありました：",
-    logic: "アンケートのロジック",
-    embedSurvey: "アンケートを埋め込む",
-    translation: "翻訳",
     saveSurvey: "アンケートを保存する",
     saveSurveyTooltip: "アンケートを保存する",
     saveTheme: "テーマを保存",
     saveThemeTooltip: "テーマを保存",
-    designer: "アンケートの設計者",
-    jsonEditor: "JSONエディタ",
     jsonHideErrors: "エラーを隠す",
     jsonShowErrors: "エラーを表示",
     undo: "元に戻す",
@@ -227,13 +229,13 @@ export var jaStrings = {
       question_visibilityText: "質問{0}を表示にする", //{0} question name
       question_enableText: "質問{0}を有効にする", //{0} question name
       question_requireText: "質問{0}を必須にする", //{0} question name
-      question_resetValueText: "質問のリセット値:{0}",
+      question_resetValueText: "質問のリセット値:{0}", //{0} question name.
       question_setValueText: "値の割り当て: 質問への{1}: {0}",
       column_visibilityText: "質問{1}の列{0}を表示する", //{0} column name, {1} question name
       column_enableText: "質問の列{0}を有効にする{1}", //{0} column name, {1} question name
       column_requireText: "質問{1}の列{0}を必須にする", //{0} column name, {1} question name
-      column_resetValueText: "列のセル値をリセット:{0}",
-      column_setValueText: "セル値の割り当て:列への{1}:{0}",
+      column_resetValueText: "列のセル値をリセット:{0}", //{0} column name
+      column_setValueText: "セル値の割り当て:列への{1}:{0}", //{0} column name and {1} setValueExpression
       setValueExpressionPlaceholder: "結果が対象の質問に割り当てられる式。",
       trigger_completeText: "アンケートが完了する",
       trigger_setvalueText: "質問：{0}値{1}に設定する", //{0} question name, {1} setValue
@@ -751,6 +753,7 @@ export var jaStrings = {
       top: "上に",
       bottom: "下に"
     },
+    // Creator tabs
     tabs: {
       panel: {
         layout: "パネルレイアウト"
