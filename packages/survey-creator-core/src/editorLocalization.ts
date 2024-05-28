@@ -2,6 +2,14 @@ import { enStrings } from "./localization/english";
 import { capitalize } from "./utils/utils";
 import { surveyLocalization, Serializer } from "survey-core";
 
+const renamedKeys = {};
+renamedKeys["tabs.preview"] = "ed.testSurvey";
+renamedKeys["tabs.theme"] = "ed.themeSurvey";
+renamedKeys["tabs.translation"] = "ed.translation";
+renamedKeys["tabs.designer"] = "ed.designer";
+renamedKeys["tabs.editor"] = "ed.jsonEditor";
+renamedKeys["tabs.logic"] = "ed.logic";
+
 export class EditorLocalization {
   private defaultLocaleValue: string = "en";
   private currentLocaleValue: string = "";
@@ -38,6 +46,8 @@ export class EditorLocalization {
     this.reset();
   }
   public getString(strName: string, locale: string = null): string {
+    const oldVal = this.getOldKeysString(strName, locale);
+    if(!!oldVal) return oldVal;
     const path = strName.split(".");
     return this.getStringByPath(path, locale);
   }
@@ -308,6 +318,13 @@ export class EditorLocalization {
   private stringsDiff(str1: any, str2: any): boolean {
     if(typeof str1 === "function" || typeof str2 === "function") return false;
     return str1 !== str2;
+  }
+  private getOldKeysString(str: string, locale: string = null): string {
+    const reNamedVal = renamedKeys[str];
+    if(!reNamedVal) return undefined;
+    const path = reNamedVal.split(".");
+    const res = this.getStringByPath(path, locale);
+    return res !== path[path.length - 1] ? res : undefined;
   }
 }
 

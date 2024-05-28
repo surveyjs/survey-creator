@@ -16,6 +16,15 @@ export var hrStrings = {
     convertTo: "Pretvorite u",
     drag: "Povucite element",
   },
+  // Creator tabs
+  tabs: {
+    preview: "Ispitna anketa",
+    theme: "Teme",
+    translation: "Prijevod",
+    designer: "Dizajner ankete",
+    editor: "JSON urednik",
+    logic: "Logika ankete"
+  },
   // Question types
   qt: {
     default: "Zadani",
@@ -48,7 +57,7 @@ export var hrStrings = {
     text: "Pitanja o unosu teksta",
     containers: "Kontejnere",
     matrix: "Matrična pitanja",
-    misc: "Ostalo",
+    misc: "Ostalo"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -81,23 +90,16 @@ export var hrStrings = {
     newQuestionName: "pitanje",
     newPanelName: "ploča",
     newTextItemName: "tekst",
-    testSurvey: "Ispitna anketa",
-    themeSurvey: "Teme",
     defaultV2Theme: "Propust",
     modernTheme: "Moderan",
     defaultTheme: "Zadano (naslijeđeno)",
     testSurveyAgain: "Ponovno probna anketa",
     testSurveyWidth: "Širina ankete: ",
     navigateToMsg: "Morao si navigirati do:",
-    logic: "Logika ankete",
-    embedSurvey: "Ugrađena anketa",
-    translation: "Prijevod",
     saveSurvey: "Spremi anketu",
     saveSurveyTooltip: "Spremi anketu",
     saveTheme: "Spremi temu",
     saveThemeTooltip: "Spremi temu",
-    designer: "Dizajner ankete",
-    jsonEditor: "JSON urednik",
     jsonHideErrors: "Sakrij pogreške",
     jsonShowErrors: "Pokaži pogreške",
     undo: "Poništiti",
@@ -227,13 +229,13 @@ export var hrStrings = {
       question_visibilityText: "Učinite pitanje {0} vidljivim", //{0} question name
       question_enableText: "Omogući pitanje {0}", //{0} question name
       question_requireText: "Neka pitanje {0} bude potrebno", //{0} question name
-      question_resetValueText: "Vrati izvornu vrijednost za pitanje: {0}",
+      question_resetValueText: "Vrati izvornu vrijednost za pitanje: {0}", //{0} question name.
       question_setValueText: "Dodijeli vrijednost: {1} pitanje: {0}",
       column_visibilityText: "učiniti stupac {0} pitanja vidljivim {1}", //{0} column name, {1} question name
       column_enableText: "{1} omogućivanje stupca {0} pitanja", //{0} column name, {1} question name
       column_requireText: "Učinite stupac {0} pitanja {1} potrebnim", //{0} column name, {1} question name
-      column_resetValueText: "Vrati izvornu vrijednost ćelije za stupac: {0}",
-      column_setValueText: "Dodijeli vrijednost ćelije: {1} stupcu: {0}",
+      column_resetValueText: "Vrati izvornu vrijednost ćelije za stupac: {0}", //{0} column name
+      column_setValueText: "Dodijeli vrijednost ćelije: {1} stupcu: {0}", //{0} column name and {1} setValueExpression
       setValueExpressionPlaceholder: " Izraz čiji će rezultat biti dodijeljen ciljnom pitanju.",
       trigger_completeText: "Anketa se dovrša",
       trigger_setvalueText: "Postavljeno u pitanje: {0} vrijednost {1}", //{0} question name, {1} setValue
@@ -751,6 +753,7 @@ export var hrStrings = {
       top: "Na vrhu",
       bottom: "Na dnu"
     },
+    // Creator tabs
     tabs: {
       panel: {
         layout: "Izgled ploče"

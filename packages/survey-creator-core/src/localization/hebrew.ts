@@ -16,6 +16,15 @@ export var hebrewStrings = {
     convertTo: "המרה ל",
     drag: "גרירת אלמנט",
   },
+  // Creator tabs
+  tabs: {
+    preview: "תצוגה מקדימה",
+    theme: "ערכות נושא",
+    translation: "תרגום",
+    designer: "מעצב",
+    editor: "עורך JSON",
+    logic: "לוגיקה"
+  },
   // Question types
   qt: {
     default: "ברירת מחדל",
@@ -48,7 +57,7 @@ export var hebrewStrings = {
     text: "שאלות טקסטואליות",
     containers: "מכילים",
     matrix: "שאלות מטריצה",
-    misc: "שונות",
+    misc: "שונות"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -81,23 +90,16 @@ export var hebrewStrings = {
     newQuestionName: "שאלה",
     newPanelName: "לוח",
     newTextItemName: "טקסט",
-    testSurvey: "תצוגה מקדימה",
-    themeSurvey: "ערכות נושא",
     defaultV2Theme: "ברירת מחדל",
     modernTheme: "מודרני",
     defaultTheme: "ברירת מחדל (ירושה)",
     testSurveyAgain: "תצוגה מקדימה שוב",
     testSurveyWidth: "רוחב הסקר: ",
     navigateToMsg: "הייתם צריכים לנווט אל",
-    logic: "לוגיקה",
-    embedSurvey: "הטמע סקר",
-    translation: "תרגום",
     saveSurvey: "שמור סקר",
     saveSurveyTooltip: "שמור סקר",
     saveTheme: "שמור ערכת נושא",
     saveThemeTooltip: "שמור ערכת נושא",
-    designer: "מעצב",
-    jsonEditor: "עורך JSON",
     jsonHideErrors: "הסתר שגיאות",
     jsonShowErrors: "הצג שגיאות",
     undo: "בטל",
@@ -227,13 +229,13 @@ export var hebrewStrings = {
       question_visibilityText: "הפוך את {0} השאלה לגלויה", //{0} question name
       question_enableText: "הפוך שאלה {0} לזמינה", //{0} question name
       question_requireText: "יש צורך בשאלה {0}", //{0} question name
-      question_resetValueText: "אפס ערך עבור שאלה: {0}",
+      question_resetValueText: "אפס ערך עבור שאלה: {0}", //{0} question name.
       question_setValueText: "הקצאת ערך: {1} לשאלה: {0}",
       column_visibilityText: "הפוך את {0} העמודות של {1} השאלה לגלויות", //{0} column name, {1} question name
       column_enableText: "הפיכת עמודה {0} של שאלה לזמינה {1}", //{0} column name, {1} question name
       column_requireText: "הפוך את {0} העמודות של השאלה {1} לנדרש", //{0} column name, {1} question name
-      column_resetValueText: "איפוס ערך תא עבור עמודה: {0}",
-      column_setValueText: "הקצאת ערך תא: {1} לעמודה: {0}",
+      column_resetValueText: "איפוס ערך תא עבור עמודה: {0}", //{0} column name
+      column_setValueText: "הקצאת ערך תא: {1} לעמודה: {0}", //{0} column name and {1} setValueExpression
       setValueExpressionPlaceholder: "ביטוי שתוצאתו תוקצה לשאלת היעד.",
       trigger_completeText: "הסקר הושלם",
       trigger_setvalueText: "העמידו בסימן שאלה: ערך {0} {1}", //{0} question name, {1} setValue
@@ -751,6 +753,7 @@ export var hebrewStrings = {
       top: "מלמעלה",
       bottom: "מלמטה"
     },
+    // Creator tabs
     tabs: {
       panel: {
         layout: "פריסת חלונית"

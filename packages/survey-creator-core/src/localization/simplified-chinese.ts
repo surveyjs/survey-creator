@@ -16,6 +16,15 @@ var simplifiedChineseTranslation = {
     convertTo: "转变为",
     drag: "拖放元件",
   },
+  // Creator tabs
+  tabs: {
+    preview: "测试问卷",
+    theme: "主题",
+    translation: "转换",
+    designer: "问卷设计器",
+    editor: "JSON 编辑器",
+    logic: "逻辑"
+  },
   // Question types
   qt: {
     default: "默认",
@@ -48,7 +57,7 @@ var simplifiedChineseTranslation = {
     text: "文本输入问题",
     containers: "器皿",
     matrix: "矩阵问题",
-    misc: "杂项",
+    misc: "杂项"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -81,23 +90,16 @@ var simplifiedChineseTranslation = {
     newQuestionName: "问题",
     newPanelName: "面板",
     newTextItemName: "文本",
-    testSurvey: "测试问卷",
-    themeSurvey: "主题",
     defaultV2Theme: "违约",
     modernTheme: "摩登",
     defaultTheme: "默认（旧版）",
     testSurveyAgain: "再次测试问卷",
     testSurveyWidth: "问卷宽度: ",
     navigateToMsg: "你必须导航到",
-    logic: "逻辑",
-    embedSurvey: "将问卷嵌入网页",
-    translation: "转换",
     saveSurvey: "保存问卷",
     saveSurveyTooltip: "保存调查",
     saveTheme: "保存主题",
     saveThemeTooltip: "保存主题",
-    designer: "问卷设计器",
-    jsonEditor: "JSON 编辑器",
     jsonHideErrors: "隐藏错误",
     jsonShowErrors: "显示错误",
     undo: "撤销",
@@ -227,13 +229,13 @@ var simplifiedChineseTranslation = {
       question_visibilityText: "使问题{0}可见", //{0} question name
       question_enableText: "使问题{0}启用", //{0} question name
       question_requireText: "将问题{0}为必填项", //{0} question name
-      question_resetValueText: "重置问题的值：{0}",
+      question_resetValueText: "重置问题的值：{0}", //{0} question name.
       question_setValueText: "分配值：{1}问题：{0}",
       column_visibilityText: "使问题{1}的列{0}可见", //{0} column name, {1} question name
       column_enableText: "使问题{1}列{0}启用", //{0} column name, {1} question name
       column_requireText: "{0}将问题{1}列为必填项", //{0} column name, {1} question name
-      column_resetValueText: "重置列的单元格值：{0}",
-      column_setValueText: "将单元格值：{1}分配给列：{0}",
+      column_resetValueText: "重置列的单元格值：{0}", //{0} column name
+      column_setValueText: "将单元格值：{1}分配给列：{0}", //{0} column name and {1} setValueExpression
       setValueExpressionPlaceholder: "其结果将分配给目标问题的表达式。",
       trigger_completeText: "调查完成",
       trigger_setvalueText: "受到质疑：{0}价值{1}", //{0} question name, {1} setValue
@@ -751,6 +753,7 @@ var simplifiedChineseTranslation = {
       top: "在顶部",
       bottom: "在底部"
     },
+    // Creator tabs
     tabs: {
       panel: {
         layout: "面板布局"

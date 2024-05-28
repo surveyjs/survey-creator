@@ -158,8 +158,8 @@ test("getPropertyValue and spaces", () => {
 test("Update innerItem on changign title", (): any => {
   const item: any = {
     id: "test",
-    locTitleName: "ed.designer",
-    locTooltipName: "ed.designer"
+    locTitleName: "tabs.designer",
+    locTooltipName: "tabs.designer"
   };
   const action = new Action(item);
   expect(action.locTitle.text).toEqual("Designer");

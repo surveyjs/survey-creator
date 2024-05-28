@@ -16,6 +16,15 @@ export var skStrings = {
     convertTo: "Konvertovať na",
     drag: "Presunúť prvok",
   },
+  // Creator tabs
+  tabs: {
+    preview: "Textový prieskum",
+    theme: "Témy",
+    translation: "Preklad",
+    designer: "Návrhár prieskumov",
+    editor: "Editor JSON",
+    logic: "Logika prieskumu"
+  },
   // Question types
   qt: {
     default: "Predvolené",
@@ -48,7 +57,7 @@ export var skStrings = {
     text: "Otázky na zadávanie textu",
     containers: "Kontajnery",
     matrix: "Maticové otázky",
-    misc: "Misc",
+    misc: "Misc"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -81,23 +90,16 @@ export var skStrings = {
     newQuestionName: "otázka",
     newPanelName: "panel",
     newTextItemName: "text",
-    testSurvey: "Textový prieskum",
-    themeSurvey: "Témy",
     defaultV2Theme: "Predvolený",
     modernTheme: "Moderný",
     defaultTheme: "Predvolené nastavenie (staršia verzia)",
     testSurveyAgain: "Ďalší textový prieskum",
     testSurveyWidth: "Šírka prieskumu: ",
     navigateToMsg: "Museli ste prejsť na:",
-    logic: "Logika prieskumu",
-    embedSurvey: "Začleniť prieskum",
-    translation: "Preklad",
     saveSurvey: "Uložiť prieskum",
     saveSurveyTooltip: "Uložiť prieskum",
     saveTheme: "Uložiť motív",
     saveThemeTooltip: "Uložiť motív",
-    designer: "Návrhár prieskumov",
-    jsonEditor: "Editor JSON",
     jsonHideErrors: "Skryť chyby",
     jsonShowErrors: "Zobraziť chyby",
     undo: "Späť",
@@ -227,13 +229,13 @@ export var skStrings = {
       question_visibilityText: "Otázka {0} bude viditeľná", //{0} question name
       question_enableText: "Otázka {0} bude povolená", //{0} question name
       question_requireText: "Otázka {0} sa bude vyžadovať", //{0} question name
-      question_resetValueText: "Resetovať hodnotu pre otázku: {0}",
+      question_resetValueText: "Resetovať hodnotu pre otázku: {0}", //{0} question name.
       question_setValueText: "Priradiť hodnotu: {1} otázku: {0}",
       column_visibilityText: "Zviditeľnenie stĺpcových {0} otázok {1}", //{0} column name, {1} question name
       column_enableText: "Nastavenie {0}  otázky {1} povolenie", //{0} column name, {1} question name
       column_requireText: "Urobiť stĺpec {0} otázky {1} povinné", //{0} column name, {1} question name
-      column_resetValueText: "Obnoviť hodnotu bunky pre stĺpec: {0}",
-      column_setValueText: "Priradenie hodnoty bunky: {1} do stĺpca: {0}",
+      column_resetValueText: "Obnoviť hodnotu bunky pre stĺpec: {0}", //{0} column name
+      column_setValueText: "Priradenie hodnoty bunky: {1} do stĺpca: {0}", //{0} column name and {1} setValueExpression
       setValueExpressionPlaceholder: " Výraz, ktorého výsledok bude priradený k cieľovej otázke.",
       trigger_completeText: "Prieskum bude dokončený",
       trigger_setvalueText: "Nastaviť v otázke: {0} hodnotu {1}", //{0} question name, {1} setValue
@@ -751,6 +753,7 @@ export var skStrings = {
       top: "V hornej časti",
       bottom: "V spodnej časti"
     },
+    // Creator tabs
     tabs: {
       panel: {
         layout: "Rozloženie panela"

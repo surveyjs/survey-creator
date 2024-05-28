@@ -16,6 +16,15 @@ export var msStrings = {
     convertTo: "Tukar kepada",
     drag: "Seret unsur",
   },
+  // Creator tabs
+  tabs: {
+    preview: "Uji Tinjauan",
+    theme: "Tema",
+    translation: "Terjemahan",
+    designer: "Pereka Bentuk Tinjauan",
+    editor: "Editor JSON",
+    logic: "Logik Tinjauan"
+  },
   // Question types
   qt: {
     default: "Lalai",
@@ -48,7 +57,7 @@ export var msStrings = {
     text: "Soalan Input Teks",
     containers: "Bekas",
     matrix: "Soalan Matriks",
-    misc: "Misc",
+    misc: "Misc"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -81,23 +90,16 @@ export var msStrings = {
     newQuestionName: "soalan",
     newPanelName: "panel",
     newTextItemName: "teks",
-    testSurvey: "Uji Tinjauan",
-    themeSurvey: "Tema",
     defaultV2Theme: "Lalai",
     modernTheme: "Moden",
     defaultTheme: "Lalai (warisan)",
     testSurveyAgain: "Uji Tinjauan Semula",
     testSurveyWidth: "Lebar tinjauan: ",
     navigateToMsg: "Anda perlu navigasi ke:",
-    logic: "Logik Tinjauan",
-    embedSurvey: "Benamkan Tinjauan",
-    translation: "Terjemahan",
     saveSurvey: "Simpan Tinjauan",
     saveSurveyTooltip: "Simpan Tinjauan",
     saveTheme: "Simpan Tema",
     saveThemeTooltip: "Simpan Tema",
-    designer: "Pereka Bentuk Tinjauan",
-    jsonEditor: "Editor JSON",
     jsonHideErrors: "Sembunyikan ralat",
     jsonShowErrors: "Tunjukkan ralat",
     undo: "Buat Asal",
@@ -227,13 +229,13 @@ export var msStrings = {
       question_visibilityText: "Jadikan soalan {0} boleh dilihat", //{0} question name
       question_enableText: "Jadikan soalan {0} didayakan", //{0} question name
       question_requireText: "Jadikan soalan {0} diperlukan", //{0} question name
-      question_resetValueText: "Tetapkan semula nilai untuk soalan: {0}",
+      question_resetValueText: "Tetapkan semula nilai untuk soalan: {0}", //{0} question name.
       question_setValueText: "Berikan nilai: {1} kepada soalan: {0}",
       column_visibilityText: "menjadikan {0} lajur soalan {1} kelihatan", //{0} column name, {1} question name
       column_enableText: "menjadikan lajur {0} soalan {1} mendayakan", //{0} column name, {1} question name
       column_requireText: "menjadikan lajur {0} soalan {1} diperlukan", //{0} column name, {1} question name
-      column_resetValueText: "Set semula nilai sel untuk lajur: {0}",
-      column_setValueText: "Peruntukkan nilai sel: {1} kepada lajur: {0}",
+      column_resetValueText: "Set semula nilai sel untuk lajur: {0}", //{0} column name
+      column_setValueText: "Peruntukkan nilai sel: {1} kepada lajur: {0}", //{0} column name and {1} setValueExpression
       setValueExpressionPlaceholder: " Ungkapan yang hasilnya akan diberikan kepada soalan sasaran.",
       trigger_completeText: "Tinjauan dilengkapkan",
       trigger_setvalueText: "Tetapkan kepada soalan: {0} nilai {1}", //{0} question name, {1} setValue
@@ -751,6 +753,7 @@ export var msStrings = {
       top: "Di atas",
       bottom: "Di bawah"
     },
+    // Creator tabs
     tabs: {
       panel: {
         layout: "Tataletak Panel"
