@@ -16,6 +16,15 @@ export var indonesianStrings = {
     convertTo: "Mengubah ke",
     drag: "Tarik elemen",
   },
+  // Creator tabs
+  tabs: {
+    preview: "Coba Survei",
+    theme: "Tema",
+    translation: "Terjemahan",
+    designer: "Rancangan Survei",
+    editor: "Pengubah JSON",
+    logic: "Logika"
+  },
   // Question types
   qt: {
     default: "Default",
@@ -81,23 +90,16 @@ export var indonesianStrings = {
     newQuestionName: "pertanyaan",
     newPanelName: "panel",
     newTextItemName: "Teks",
-    testSurvey: "Coba Survei",
-    themeSurvey: "Tema",
     defaultV2Theme: "Default",
     modernTheme: "Modern",
     defaultTheme: "Default (warisan)",
     testSurveyAgain: "Coba Survei Lagi",
     testSurveyWidth: "Lebar survei: ",
     navigateToMsg: "Anda harus menavigasi ke",
-    logic: "Logika",
-    embedSurvey: "Embed Survei",
-    translation: "Terjemahan",
     saveSurvey: "Simpan Survei",
     saveSurveyTooltip: "Simpan Survei",
     saveTheme: "Simpan Tema",
     saveThemeTooltip: "Simpan Tema",
-    designer: "Rancangan Survei",
-    jsonEditor: "Pengubah JSON",
     jsonHideErrors: "Menyembunyikan kesalahan",
     jsonShowErrors: "Tampilkan kesalahan",
     undo: "Urungkan",
@@ -227,13 +229,13 @@ export var indonesianStrings = {
       question_visibilityText: "Buat pertanyaan {0} terlihat", //{0} question name
       question_enableText: "Buat pertanyaan {0} aktifkan", //{0} question name
       question_requireText: "Buat pertanyaan {0} diperlukan", //{0} question name
-      question_resetValueText: "reset nilai untuk pertanyaan: {0}",
+      question_resetValueText: "reset nilai untuk pertanyaan: {0}", //{0} question name.
       question_setValueText: "Tetapkan nilai: {1} pertanyaan: {0}",
       column_visibilityText: "Membuat kolom {0} pertanyaan {1} terlihat", //{0} column name, {1} question name
       column_enableText: "Buat kolom {0} pertanyaan {1} aktifkan", //{0} column name, {1} question name
       column_requireText: "membuat kolom {0} pertanyaan {1} diperlukan", //{0} column name, {1} question name
-      column_resetValueText: "Setel ulang nilai sel untuk kolom: {0}",
-      column_setValueText: "Menetapkan nilai sel: {1} ke kolom: {0}",
+      column_resetValueText: "Setel ulang nilai sel untuk kolom: {0}", //{0} column name
+      column_setValueText: "Menetapkan nilai sel: {1} ke kolom: {0}", //{0} column name and {1} setValueExpression
       setValueExpressionPlaceholder: " Ekspresi yang hasilnya akan ditetapkan ke pertanyaan target.",
       trigger_completeText: "Survei menjadi selesai",
       trigger_setvalueText: "Pertanyaan: {0} nilai {1}", //{0} question name, {1} setValue
@@ -751,6 +753,7 @@ export var indonesianStrings = {
       top: "Di atas",
       bottom: "Di bagian bawah"
     },
+    // Creator tabs
     tabs: {
       panel: {
         layout: "Tata Letak Panel"

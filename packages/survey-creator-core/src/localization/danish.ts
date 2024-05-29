@@ -16,6 +16,15 @@ export var danishStrings = {
     convertTo: "Konverter til",
     drag: "Træk element",
   },
+  // Creator tabs
+  tabs: {
+    preview: "Afprøv undersøgelse",
+    theme: "Temaer",
+    translation: "Oversættelse",
+    designer: "Undersøgelsesdesigner",
+    editor: "JSON Editor",
+    logic: "Logik"
+  },
   // Question types
   qt: {
     default: "Standard",
@@ -81,23 +90,16 @@ export var danishStrings = {
     newQuestionName: "spørgsmål",
     newPanelName: "panel",
     newTextItemName: "Tekst",
-    testSurvey: "Afprøv undersøgelse",
-    themeSurvey: "Temaer",
     defaultV2Theme: "Standard",
     modernTheme: "Moderne",
     defaultTheme: "Standard (ældre)",
     testSurveyAgain: "Afprøv undersøgelse igen",
     testSurveyWidth: "Bredde af undersøgelse: ",
     navigateToMsg: "Du var nødt til at navigere til",
-    logic: "Logik",
-    embedSurvey: "Indlejr undersøgelse",
-    translation: "Oversættelse",
     saveSurvey: "Gem undersøgelse",
     saveSurveyTooltip: "Gem undersøgelse",
     saveTheme: "Gem tema",
     saveThemeTooltip: "Gem tema",
-    designer: "Undersøgelsesdesigner",
-    jsonEditor: "JSON Editor",
     jsonHideErrors: "Skjul fejl",
     jsonShowErrors: "Vis fejl",
     undo: "Fortryd",
@@ -227,13 +229,13 @@ export var danishStrings = {
       question_visibilityText: "Gør spørgsmål {0} synlige", //{0} question name
       question_enableText: "Foretag spørgsmål{0} aktiver", //{0} question name
       question_requireText: "Gør spørgsmål {0} påkrævet", //{0} question name
-      question_resetValueText: "Nulstil værdi for spørgsmål: {0}",
+      question_resetValueText: "Nulstil værdi for spørgsmål: {0}", //{0} question name.
       question_setValueText: "Tildel værdi: {1} til spørgsmål: {0}",
       column_visibilityText: "Gør kolonne {0} af spørgsmål {1} synlig", //{0} column name, {1} question name
       column_enableText: "Få kolonne {0} af spørgsmål {1} aktivere", //{0} column name, {1} question name
       column_requireText: "Gøre kolonne {0} af spørgsmål {1} påkrævet", //{0} column name, {1} question name
-      column_resetValueText: "Nulstil celleværdi for kolonne: {0}",
-      column_setValueText: "Tildel celleværdi: {1} til kolonne: {0}",
+      column_resetValueText: "Nulstil celleværdi for kolonne: {0}", //{0} column name
+      column_setValueText: "Tildel celleværdi: {1} til kolonne: {0}", //{0} column name and {1} setValueExpression
       setValueExpressionPlaceholder: " Et udtryk, hvis resultat vil blive tildelt målspørgsmålet.",
       trigger_completeText: "Undersøgelsen bliver afsluttet",
       trigger_setvalueText: "Sæt spørgsmålstegn ved: {0} værdi {1}", //{0} question name, {1} setValue
@@ -751,6 +753,7 @@ export var danishStrings = {
       top: "På toppen",
       bottom: "I bunden"
     },
+    // Creator tabs
     tabs: {
       panel: {
         layout: "Panel Layout"

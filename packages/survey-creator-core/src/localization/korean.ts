@@ -16,6 +16,15 @@ export var koreanStrings = {
     convertTo: "다음으로 변경",
     drag: "항목 끌어오기",
   },
+  // Creator tabs
+  tabs: {
+    preview: "테스트 설문지",
+    theme: "테마",
+    translation: "번역",
+    designer: "설문지 디자인",
+    editor: "JSON 편집기",
+    logic: "논리학"
+  },
   // Question types
   qt: {
     default: "기본값",
@@ -81,23 +90,16 @@ export var koreanStrings = {
     newQuestionName: "질문",
     newPanelName: "패널",
     newTextItemName: "문자 메시지",
-    testSurvey: "테스트 설문지",
-    themeSurvey: "테마",
     defaultV2Theme: "기본값",
     modernTheme: "현대의",
     defaultTheme: "기본값(레거시)",
     testSurveyAgain: "테스트 설문지 다시하기",
     testSurveyWidth: "설문지 너비: ",
     navigateToMsg: "다음으로 이동해야 했습니다.",
-    logic: "논리학",
-    embedSurvey: "내장 설문지",
-    translation: "번역",
     saveSurvey: "설문지 저장",
     saveSurveyTooltip: "설문조사 저장",
     saveTheme: "테마 저장",
     saveThemeTooltip: "테마 저장",
-    designer: "설문지 디자인",
-    jsonEditor: "JSON 편집기",
     jsonHideErrors: "오류 숨기기",
     jsonShowErrors: "오류 표시",
     undo: "실행 취소",
@@ -227,13 +229,13 @@ export var koreanStrings = {
       question_visibilityText: "질문 {0} 표시", //{0} question name
       question_enableText: "질문 {0} 사용 설정", //{0} question name
       question_requireText: "질문 {0} 필수", //{0} question name
-      question_resetValueText: "질문에 대한 재설정 값: {0}",
+      question_resetValueText: "질문에 대한 재설정 값: {0}", //{0} question name.
       question_setValueText: "할당 값: {1} 질문: {0}",
       column_visibilityText: "질문의 열 {0} {1} 표시", //{0} column name, {1} question name
       column_enableText: "질문의 열 {0} {1} 사용하도록 설정", //{0} column name, {1} question name
       column_requireText: "질문의 열 {0} {1} 필수", //{0} column name, {1} question name
-      column_resetValueText: "열의 셀 값 재설정: {0}",
-      column_setValueText: "셀 값 할당 : {1} 열 : {0}",
+      column_resetValueText: "열의 셀 값 재설정: {0}", //{0} column name
+      column_setValueText: "셀 값 할당 : {1} 열 : {0}", //{0} column name and {1} setValueExpression
       setValueExpressionPlaceholder: " 결과가 대상 질문에 할당되는 식입니다.",
       trigger_completeText: "조사가 완료됩니다",
       trigger_setvalueText: "질문으로 설정: {0} 값 {1}", //{0} question name, {1} setValue
@@ -751,6 +753,7 @@ export var koreanStrings = {
       top: "맨 위에",
       bottom: "하단에"
     },
+    // Creator tabs
     tabs: {
       panel: {
         layout: "패널 레이아웃"

@@ -16,6 +16,15 @@ var italianTranslation = {
     convertTo: "Converti in",
     drag: "Trascina l'elemento",
   },
+  // Creator tabs
+  tabs: {
+    preview: "Anteprima del sondaggio",
+    theme: "Temi",
+    translation: "Traduzione",
+    designer: "Progetta il sondaggio",
+    editor: "Modifica JSON",
+    logic: "Logica"
+  },
   // Question types
   qt: {
     default: "Default",
@@ -81,23 +90,16 @@ var italianTranslation = {
     newQuestionName: "Domanda",
     newPanelName: "Pannello",
     newTextItemName: "Testo",
-    testSurvey: "Anteprima del sondaggio",
-    themeSurvey: "Temi",
     defaultV2Theme: "Default",
     modernTheme: "Tema Moderno",
     defaultTheme: "Default (legacy)",
     testSurveyAgain: "Prova il sondaggio di nuovo",
     testSurveyWidth: "Larghezza sondaggio:",
     navigateToMsg: "Bisogna navigare fino a:",
-    logic: "Logica",
-    embedSurvey: "Includi sondaggio",
-    translation: "Traduzione",
     saveSurvey: "Salva sondaggio",
     saveSurveyTooltip: "Salva sondaggio",
     saveTheme: "Salva tema",
     saveThemeTooltip: "Salva tema",
-    designer: "Progetta il sondaggio",
-    jsonEditor: "Modifica JSON",
     jsonHideErrors: "Nascondi gli errori",
     jsonShowErrors: "Mostra gli errori",
     undo: "Annulla",
@@ -227,13 +229,13 @@ var italianTranslation = {
       question_visibilityText: "rendi la domanda {0} visibile", //{0} question name
       question_enableText: "rendi la domanda {0} abilitata", //{0} question name
       question_requireText: "rendi la domanda {0} obbligatoria", //{0} question name
-      question_resetValueText: "Valore di ripristino per la domanda: {0}",
+      question_resetValueText: "Valore di ripristino per la domanda: {0}", //{0} question name.
       question_setValueText: "Assegna valore: {1} alla domanda: {0}",
       column_visibilityText: "rendi la colonna {0} della domanda {1} visibile", //{0} column name, {1} question name
       column_enableText: "rendi la colonna {0} della domanda {1} abilitata", //{0} column name, {1} question name
       column_requireText: "rendi la colonna {0} della domanda {1} obbligatoria", //{0} column name, {1} question name
-      column_resetValueText: "Reimposta il valore della cella per la colonna: {0}",
-      column_setValueText: "Assegna valore cella: {1} alla colonna: {0}",
+      column_resetValueText: "Reimposta il valore della cella per la colonna: {0}", //{0} column name
+      column_setValueText: "Assegna valore cella: {1} alla colonna: {0}", //{0} column name and {1} setValueExpression
       setValueExpressionPlaceholder: " Espressione il cui risultato verrà assegnato alla domanda di destinazione.",
       trigger_completeText: "il sondaggio viene completato",
       trigger_setvalueText: "imposta nella domanda: {0} valore {1}", //{0} question name, {1} setValue
@@ -751,6 +753,7 @@ var italianTranslation = {
       top: "In alto",
       bottom: "In basso"
     },
+    // Creator tabs
     tabs: {
       panel: {
         layout: "Layout del pannello"

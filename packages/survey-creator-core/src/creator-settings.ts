@@ -274,6 +274,7 @@ export interface ISurveyCreatorOptions {
     itemValue: ItemValue,
     itemValues: Array<ItemValue>
   );
+  onFastEntryCallback(items: Array<ItemValue>, lines: Array<string>): Array<ItemValue>;
   onMatrixDropdownColumnAddedCallback(
     matrix: Question,
     column: MatrixDropdownColumn,
@@ -424,6 +425,9 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
     itemValue: ItemValue,
     itemValues: Array<ItemValue>
   ) { }
+  onFastEntryCallback(items: Array<ItemValue>, lines: Array<string>): Array<ItemValue> {
+    return items;
+  }
   onMatrixDropdownColumnAddedCallback(
     matrix: Question,
     column: MatrixDropdownColumn,

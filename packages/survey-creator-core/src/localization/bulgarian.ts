@@ -16,6 +16,15 @@ export var bgStrings = {
     convertTo: "Преобразуване",
     drag: "Изтегляне на елемент",
   },
+  // Creator tabs
+  tabs: {
+    preview: "Преглед",
+    theme: "Теми",
+    translation: "Превод",
+    designer: "Дизайнер",
+    editor: "JSON редактор",
+    logic: "Логика"
+  },
   // Question types
   qt: {
     default: "По подразбиране",
@@ -81,23 +90,16 @@ export var bgStrings = {
     newQuestionName: "въпрос",
     newPanelName: "панел",
     newTextItemName: "текст",
-    testSurvey: "Преглед",
-    themeSurvey: "Теми",
     defaultV2Theme: "По подразбиране",
     modernTheme: "Модерен",
     defaultTheme: "По подразбиране (по наследство)",
     testSurveyAgain: "Прегледай анкетата отново",
     testSurveyWidth: "Широчина на анкетата: ",
     navigateToMsg: "Трябва да навигираш до",
-    logic: "Логика",
-    embedSurvey: "Вграждане на анкета",
-    translation: "Превод",
     saveSurvey: "Запазване на анкетата",
     saveSurveyTooltip: "Запазване на анкетата",
     saveTheme: "Запиши темата",
     saveThemeTooltip: "Запиши темата",
-    designer: "Дизайнер",
-    jsonEditor: "JSON редактор",
     jsonHideErrors: "Скриване на грешки",
     jsonShowErrors: "Показване на грешки",
     undo: "Отмяна",
@@ -227,13 +229,13 @@ export var bgStrings = {
       question_visibilityText: "направи въпрос {0} видим", //{0} question name
       question_enableText: "направи въпрос {0} активен", //{0} question name
       question_requireText: "направи въпрос {0} задължителен", //{0} question name
-      question_resetValueText: "нулиране на стойността за въпрос: {0}",
+      question_resetValueText: "нулиране на стойността за въпрос: {0}", //{0} question name.
       question_setValueText: "присвояване на стойност: {1} на въпрос: {0}",
       column_visibilityText: "направи колона {0} на въпрос {1} видима", //{0} column name, {1} question name
       column_enableText: "направи колона {0} на въпрос {1} активна", //{0} column name, {1} question name
       column_requireText: "направи колона {0} на въпрос {1} задължителна", //{0} column name, {1} question name
-      column_resetValueText: "Нулиране на стойността на клетката за колона: {0}",
-      column_setValueText: "Присвояване на стойност на клетка: {1} на колона: {0}",
+      column_resetValueText: "Нулиране на стойността на клетката за колона: {0}", //{0} column name
+      column_setValueText: "Присвояване на стойност на клетка: {1} на колона: {0}", //{0} column name and {1} setValueExpression
       setValueExpressionPlaceholder: " Израз, чийто резултат ще бъде присвоен на целевия въпрос.",
       trigger_completeText: "анкетата е завършена",
       trigger_setvalueText: "задай на въпрос: {0} стойност {1}", //{0} question name, {1} setValue
@@ -751,6 +753,7 @@ export var bgStrings = {
       top: "Отгоре",
       bottom: "Отдолу"
     },
+    // Creator tabs
     tabs: {
       panel: {
         layout: "Оформление на панела"

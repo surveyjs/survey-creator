@@ -16,6 +16,15 @@ export var nbStrings = {
     convertTo: "Konverter til",
     drag: "Dra element",
   },
+  // Creator tabs
+  tabs: {
+    preview: "Test skjema",
+    theme: "Temaer",
+    translation: "Oversettelse",
+    designer: "Skjemadesigner",
+    editor: "JSON-redigering",
+    logic: "Skjemalogikk"
+  },
   // Question types
   qt: {
     default: "Standard",
@@ -81,23 +90,16 @@ export var nbStrings = {
     newQuestionName: "spørsmål",
     newPanelName: "panel",
     newTextItemName: "tekst",
-    testSurvey: "Test skjema",
-    themeSurvey: "Temaer",
     defaultV2Theme: "Standard",
     modernTheme: "Moderne",
     defaultTheme: "Standard (eldre)",
     testSurveyAgain: "Test skjema igjen",
     testSurveyWidth: "Skjemabredde: ",
     navigateToMsg: "Du måtte navigere til:",
-    logic: "Skjemalogikk",
-    embedSurvey: "Integrer skjema",
-    translation: "Oversettelse",
     saveSurvey: "Lagre skjema",
     saveSurveyTooltip: "Lagre skjema",
     saveTheme: "Lagre tema",
     saveThemeTooltip: "Lagre tema",
-    designer: "Skjemadesigner",
-    jsonEditor: "JSON-redigering",
     jsonHideErrors: "Skjul feil",
     jsonShowErrors: "Vis feil",
     undo: "Angre",
@@ -227,13 +229,13 @@ export var nbStrings = {
       question_visibilityText: "Gjør spørsmål {0} synlig", //{0} question name
       question_enableText: "Gjør spørsmål {0} aktivert", //{0} question name
       question_requireText: "Gjør spørsmål {0} påkrevd", //{0} question name
-      question_resetValueText: "Tilbakestill verdi for spørsmål: {0}",
+      question_resetValueText: "Tilbakestill verdi for spørsmål: {0}", //{0} question name.
       question_setValueText: "tilordne verdi: {1} til spørsmålet: {0}",
       column_visibilityText: "Gjør kolonne {0} av spørsmålet {1} synlig", //{0} column name, {1} question name
       column_enableText: "Gjør kolonne {0} av spørsmålet {1} aktiver", //{0} column name, {1} question name
       column_requireText: "Gjør kolonne {0} av spørsmålet {1} nødvendig", //{0} column name, {1} question name
-      column_resetValueText: "Tilbakestill celleverdi for kolonne: {0}",
-      column_setValueText: "Tilordne celleverdi: {1} til kolonne: {0}",
+      column_resetValueText: "Tilbakestill celleverdi for kolonne: {0}", //{0} column name
+      column_setValueText: "Tilordne celleverdi: {1} til kolonne: {0}", //{0} column name and {1} setValueExpression
       setValueExpressionPlaceholder: " Et uttrykk der resultatet tilordnes målspørsmålet.",
       trigger_completeText: "Skjemaet blir fullført",
       trigger_setvalueText: "Sett inn: {0} verdi {1}", //{0} question name, {1} setValue
@@ -751,6 +753,7 @@ export var nbStrings = {
       top: "Topp",
       bottom: "Bunn"
     },
+    // Creator tabs
     tabs: {
       panel: {
         layout: "Panel Oppsett"

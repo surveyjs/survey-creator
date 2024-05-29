@@ -199,7 +199,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   }
 
   constructor(private creator: SurveyCreatorModel) {
-    creator.addPluginTab("theme", this, "ed.themeSurvey");
+    creator.addPluginTab("theme", this);
     this.simulatorCssClasses = surveyCss[defaultV2ThemeName];
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
     this.propertyGrid = new PropertyGridModel(undefined, creator, themeModelPropertyGridDefinition);
@@ -441,7 +441,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       iconName: "icon-preview",
       active: true,
       visible: this.createVisibleUpdater(),
-      locTitleName: "ed.testSurvey",
+      locTitleName: "tabs.preview",
       showTitle: false,
       action: () => { }
     });

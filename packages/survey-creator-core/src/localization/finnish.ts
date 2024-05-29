@@ -16,6 +16,15 @@ export var fiStrings = {
     convertTo: "Konvertoi",
     drag: "Vedä elementtiä",
   },
+  // Creator tabs
+  tabs: {
+    preview: "Testaa kysely",
+    theme: "Teemoja",
+    translation: "Käännös",
+    designer: "Kyselyn suunnittelija",
+    editor: "JSON Editori",
+    logic: "Kysely logiikka"
+  },
   // Question types
   qt: {
     default: "Oletusarvo",
@@ -81,23 +90,16 @@ export var fiStrings = {
     newQuestionName: "kysymys",
     newPanelName: "paneeli",
     newTextItemName: "teksti",
-    testSurvey: "Testaa kysely",
-    themeSurvey: "Teemoja",
     defaultV2Theme: "Laiminlyönti",
     modernTheme: "Nykyaikainen",
     defaultTheme: "Oletus (vanha)",
     testSurveyAgain: "Testaa kysely uudestaan",
     testSurveyWidth: "Kyselyn laajuus: ",
     navigateToMsg: "Sinun piti navigoida:",
-    logic: "Kysely logiikka",
-    embedSurvey: "Upota kysely",
-    translation: "Käännös",
     saveSurvey: "Tallenna kysely",
     saveSurveyTooltip: "Tallenna kysely",
     saveTheme: "Tallenna teema",
     saveThemeTooltip: "Tallenna teema",
-    designer: "Kyselyn suunnittelija",
-    jsonEditor: "JSON Editori",
     jsonHideErrors: "Piilota virheet",
     jsonShowErrors: "Näytä virheet",
     undo: "Kumoa",
@@ -227,13 +229,13 @@ export var fiStrings = {
       question_visibilityText: "Tee kysymys {0} näkyväksi", //{0} question name
       question_enableText: "Ota kysymys {0} käyttöön", //{0} question name
       question_requireText: "Tee kysymyksestä {0} pakollinen", //{0} question name
-      question_resetValueText: "nollaa kysymyksen arvo: {0}",
+      question_resetValueText: "nollaa kysymyksen arvo: {0}", //{0} question name.
       question_setValueText: "Määritä arvo: {1} kysymykseen: {0}",
       column_visibilityText: "Tee kysymyksen {1} sarakkeesta {0} näkyvä", //{0} column name, {1} question name
       column_enableText: "Ota kysymyksen sarake {0} {1} käyttöön", //{0} column name, {1} question name
       column_requireText: "Tee kysymyksen sarake {0} {1} pakollinen", //{0} column name, {1} question name
-      column_resetValueText: "Palauta sarakkeen soluarvo: {0}",
-      column_setValueText: "Määritä solun arvo: {1} sarakkeeseen: {0}",
+      column_resetValueText: "Palauta sarakkeen soluarvo: {0}", //{0} column name
+      column_setValueText: "Määritä solun arvo: {1} sarakkeeseen: {0}", //{0} column name and {1} setValueExpression
       setValueExpressionPlaceholder: " Lauseke, jonka tulos määritetään kohdekysymykselle.",
       trigger_completeText: "Kyselystä tulee täytetty",
       trigger_setvalueText: "Laita arvo {1} kysymykseen {0}", //{0} question name, {1} setValue
@@ -751,6 +753,7 @@ export var fiStrings = {
       top: "Päällä",
       bottom: "Alla"
     },
+    // Creator tabs
     tabs: {
       panel: {
         layout: "Paneelin asettelu"

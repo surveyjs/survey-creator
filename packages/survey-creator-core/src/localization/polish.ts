@@ -16,6 +16,15 @@ var polishStrings = {
     convertTo: "Konwertuj na",
     drag: "Przeciągnij element",
   },
+  // Creator tabs
+  tabs: {
+    preview: "Testuj ankietę",
+    theme: "Tematy",
+    translation: "Tłumaczenie",
+    designer: "Projektant ankiety",
+    editor: "JSON Editor",
+    logic: "Logika"
+  },
   // Question types
   qt: {
     default: "Domyślny",
@@ -81,23 +90,16 @@ var polishStrings = {
     newQuestionName: "pytanie",
     newPanelName: "panel",
     newTextItemName: "Tekst",
-    testSurvey: "Testuj ankietę",
-    themeSurvey: "Tematy",
     defaultV2Theme: "Domyślny",
     modernTheme: "Nowoczesny",
     defaultTheme: "Domyślne (starsze)",
     testSurveyAgain: "Testuj ponownie",
     testSurveyWidth: "Szerokość ankiety: ",
     navigateToMsg: "Trzeba było nawigować do",
-    logic: "Logika",
-    embedSurvey: "Embed Survey",
-    translation: "Tłumaczenie",
     saveSurvey: "Zapisz ankietę",
     saveSurveyTooltip: "Zapisz ankietę",
     saveTheme: "Zapisz motyw",
     saveThemeTooltip: "Zapisz motyw",
-    designer: "Projektant ankiety",
-    jsonEditor: "JSON Editor",
     jsonHideErrors: "Ukryj błędy",
     jsonShowErrors: "Pokaż błędy",
     undo: "Cofnij",
@@ -227,13 +229,13 @@ var polishStrings = {
       question_visibilityText: "Uczyń {0} pytań widocznymi", //{0} question name
       question_enableText: "Utwórz pytanie {0} włącz", //{0} question name
       question_requireText: "Pytanie {0} wymagane", //{0} question name
-      question_resetValueText: "Zresetuj wartość dla pytania: {0}",
+      question_resetValueText: "Zresetuj wartość dla pytania: {0}", //{0} question name.
       question_setValueText: "Przypisz wartość: {1} do pytania: {0}",
       column_visibilityText: "Uwidocznienie {0}  {1}pytania", //{0} column name, {1} question name
       column_enableText: "Ustaw kolumnę {0} pytania{1} włączyć", //{0} column name, {1} question name
       column_requireText: "Ustaw kolumnę {0} pytania {1} wymagane", //{0} column name, {1} question name
-      column_resetValueText: "Zresetuj wartość komórki dla kolumny: {0}",
-      column_setValueText: "Przypisz wartość komórki: {1} do kolumny: {0}",
+      column_resetValueText: "Zresetuj wartość komórki dla kolumny: {0}", //{0} column name
+      column_setValueText: "Przypisz wartość komórki: {1} do kolumny: {0}", //{0} column name and {1} setValueExpression
       setValueExpressionPlaceholder: " Wyrażenie, którego wynik zostanie przypisany do pytania docelowego.",
       trigger_completeText: "Ankieta zostaje zakończona",
       trigger_setvalueText: "Ustaw pod znakiem zapytania: {0} wartość {1}", //{0} question name, {1} setValue
@@ -751,6 +753,7 @@ var polishStrings = {
       top: "Na górze",
       bottom: "Na dole"
     },
+    // Creator tabs
     tabs: {
       panel: {
         layout: "Układ panelu"

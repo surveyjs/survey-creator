@@ -16,6 +16,15 @@ export var arStrings = {
     convertTo: "تحويل إلى",
     drag: "إسحب العنصر",
   },
+  // Creator tabs
+  tabs: {
+    preview: "تجربة الإستبيان",
+    theme: "المواضيع",
+    translation: "Translation",
+    designer: "تصميم الإستبيان",
+    editor: "JSON Editor",
+    logic: "منطق الإستبيان"
+  },
   // Question types
   qt: {
     default: "الإفتراضي",
@@ -81,23 +90,16 @@ export var arStrings = {
     newQuestionName: "السؤال",
     newPanelName: "اللوحة",
     newTextItemName: "text",
-    testSurvey: "تجربة الإستبيان",
-    themeSurvey: "المواضيع",
     defaultV2Theme: "افتراضي",
     modernTheme: "حديث",
     defaultTheme: "الافتراضي (القديم)",
     testSurveyAgain: "Test Survey Again",
     testSurveyWidth: "Survey width: ",
     navigateToMsg: "You had to navigate to:",
-    logic: "منطق الإستبيان",
-    embedSurvey: "Embed Survey",
-    translation: "Translation",
     saveSurvey: "Save Survey",
     saveSurveyTooltip: "Save Survey",
     saveTheme: "حفظ السمة",
     saveThemeTooltip: "حفظ السمة",
-    designer: "تصميم الإستبيان",
-    jsonEditor: "JSON Editor",
     jsonHideErrors: "Hide errors",
     jsonShowErrors: "Show errors",
     undo: "Undo",
@@ -227,13 +229,13 @@ export var arStrings = {
       question_visibilityText: "جعل السؤال {0} مرئي", //{0} question name
       question_enableText: "جعل السؤال {0} مفعل", //{0} question name
       question_requireText: "جعل السؤال {0} إلزامي", //{0} question name
-      question_resetValueText: "إعادة تعيين قيمة السؤال: {0}",
+      question_resetValueText: "إعادة تعيين قيمة السؤال: {0}", //{0} question name.
       question_setValueText: "تعيين قيمة: {1} السؤال: {0}",
       column_visibilityText: "جعل العمود {0} السؤال {1} مرئيا", //{0} column name, {1} question name
       column_enableText: "تمكين {0} عمود السؤال {1}", //{0} column name, {1} question name
       column_requireText: "جعل العمود {0} السؤال {1} مطلوبا", //{0} column name, {1} question name
-      column_resetValueText: "إعادة تعيين قيمة الخلية للعمود: {0}",
-      column_setValueText: "تعيين قيمة الخلية: {1} إلى العمود: {0}",
+      column_resetValueText: "إعادة تعيين قيمة الخلية للعمود: {0}", //{0} column name
+      column_setValueText: "تعيين قيمة الخلية: {1} إلى العمود: {0}", //{0} column name and {1} setValueExpression
       setValueExpressionPlaceholder: " تعبير سيتم تعيين نتيجته للسؤال الهدف.",
       trigger_completeText: "الإستبيان سيصبح مكتمل",
       trigger_setvalueText: "تثبيت إلى السؤال: {0} القيمة {1}", //{0} question name, {1} setValue
@@ -751,6 +753,7 @@ export var arStrings = {
       top: "في الأعلى",
       bottom: "في الأسفل"
     },
+    // Creator tabs
     tabs: {
       panel: {
         layout: "تخطيط اللوحة"

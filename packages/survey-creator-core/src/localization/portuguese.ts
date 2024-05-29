@@ -16,6 +16,15 @@ var portugueseTranslation = {
     convertTo: "Converter para",
     drag: "Arrastar elemento",
   },
+  // Creator tabs
+  tabs: {
+    preview: "Testar questionário",
+    theme: "Temas",
+    translation: "Tradução",
+    designer: "Designer de Questionário",
+    editor: "Editor de JSON",
+    logic: "Lógica"
+  },
   // Question types
   qt: {
     default: "Pré-definido",
@@ -81,23 +90,16 @@ var portugueseTranslation = {
     newQuestionName: "pergunta",
     newPanelName: "painel",
     newTextItemName: "texto",
-    testSurvey: "Testar questionário",
-    themeSurvey: "Temas",
     defaultV2Theme: "Pré-definifido",
     modernTheme: "Moderno",
     defaultTheme: "Pré-definido (antigo)",
     testSurveyAgain: "Testar questionário novamente",
     testSurveyWidth: "Tamanho do questionário: ",
     navigateToMsg: "Tem que navegar para",
-    logic: "Lógica",
-    embedSurvey: "Incorporar Questionário",
-    translation: "Tradução",
     saveSurvey: "Salvar Questionário",
     saveSurveyTooltip: "Gravar Questionário",
     saveTheme: "Salvar tema",
     saveThemeTooltip: "Salvar tema",
-    designer: "Designer de Questionário",
-    jsonEditor: "Editor de JSON",
     jsonHideErrors: "Esconder erros",
     jsonShowErrors: "Mostrar erros",
     undo: "Desfazer",
@@ -227,13 +229,13 @@ var portugueseTranslation = {
       question_visibilityText: "torna questão {0} visível", //{0} question name
       question_enableText: "tornar questão {0} ativa", //{0} question name
       question_requireText: "tornar questão {0} obrigatória", //{0} question name
-      question_resetValueText: "redefinir valor da pergunta: {0}",
+      question_resetValueText: "redefinir valor da pergunta: {0}", //{0} question name.
       question_setValueText: "atribuir valor: {1} à pergunta: {0}",
       column_visibilityText: "tornar coluna {0} da questão {1} visível", //{0} column name, {1} question name
       column_enableText: "tornar coluna {0} da questão {1} ativa", //{0} column name, {1} question name
       column_requireText: "torna coluna {0} da questão {1} obrigatória", //{0} column name, {1} question name
-      column_resetValueText: "Redefinir o valor da célula para a coluna: {0}",
-      column_setValueText: "Atribuir valor de célula: {1} à coluna: {0}",
+      column_resetValueText: "Redefinir o valor da célula para a coluna: {0}", //{0} column name
+      column_setValueText: "Atribuir valor de célula: {1} à coluna: {0}", //{0} column name and {1} setValueExpression
       setValueExpressionPlaceholder: " Uma expressão cujo resultado será atribuído à pergunta de destino.",
       trigger_completeText: "o questionário fica completo",
       trigger_setvalueText: "Colocar em questão: {0} valor {1}", //{0} question name, {1} setValue
@@ -751,6 +753,7 @@ var portugueseTranslation = {
       top: "No cabeçalho",
       bottom: "No rodapé"
     },
+    // Creator tabs
     tabs: {
       panel: {
         layout: "Layout do painel"

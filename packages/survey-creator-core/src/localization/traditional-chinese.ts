@@ -16,6 +16,15 @@ var traditionalChineseTranslation = {
     convertTo: "轉變為",
     drag: "拖動元素",
   },
+  // Creator tabs
+  tabs: {
+    preview: "測試問卷",
+    theme: "主題",
+    translation: "譯本",
+    designer: "問卷設計器",
+    editor: "JSON 編輯器",
+    logic: "邏輯"
+  },
   // Question types
   qt: {
     default: "違約",
@@ -81,23 +90,16 @@ var traditionalChineseTranslation = {
     newQuestionName: "問題",
     newPanelName: "面板",
     newTextItemName: "發簡訊",
-    testSurvey: "測試問卷",
-    themeSurvey: "主題",
     defaultV2Theme: "違約",
     modernTheme: "摩登",
     defaultTheme: "預設（舊版）",
     testSurveyAgain: "再次測試問卷",
     testSurveyWidth: "問卷寬度: ",
     navigateToMsg: "你必須導航到",
-    logic: "邏輯",
-    embedSurvey: "將問卷嵌入網頁",
-    translation: "譯本",
     saveSurvey: "保存問卷",
     saveSurveyTooltip: "保存調查",
     saveTheme: "保存主題",
     saveThemeTooltip: "保存主題",
-    designer: "問卷設計器",
-    jsonEditor: "JSON 編輯器",
     jsonHideErrors: "隱藏錯誤",
     jsonShowErrors: "顯示錯誤",
     undo: "還原",
@@ -227,13 +229,13 @@ var traditionalChineseTranslation = {
       question_visibilityText: "使問題{0}可見", //{0} question name
       question_enableText: "使問題{0}啟用", //{0} question name
       question_requireText: "將問題{0}為必填項", //{0} question name
-      question_resetValueText: "重置問題的值：{0}",
+      question_resetValueText: "重置問題的值：{0}", //{0} question name.
       question_setValueText: "分配值：{1}問題：{0}",
       column_visibilityText: "使問題{1}的列{0}可見", //{0} column name, {1} question name
       column_enableText: "使問題{1}列{0}啟用", //{0} column name, {1} question name
       column_requireText: "{0}將問題{1}列為必填項", //{0} column name, {1} question name
-      column_resetValueText: "重置列的儲存格值：{0}",
-      column_setValueText: "將儲存格值：{1}分配給列：{0}",
+      column_resetValueText: "重置列的儲存格值：{0}", //{0} column name
+      column_setValueText: "將儲存格值：{1}分配給列：{0}", //{0} column name and {1} setValueExpression
       setValueExpressionPlaceholder: "其結果將分配給目標問題的表達式。",
       trigger_completeText: "調查完成",
       trigger_setvalueText: "受到質疑：{0}價值{1}", //{0} question name, {1} setValue
@@ -751,6 +753,7 @@ var traditionalChineseTranslation = {
       top: "在頂部",
       bottom: "在底部"
     },
+    // Creator tabs
     tabs: {
       panel: {
         layout: "面板佈局"

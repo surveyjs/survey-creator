@@ -16,6 +16,15 @@ export var turkishStrings = {
     convertTo: "Çevir",
     drag: "Nesne sürükleyin",
   },
+  // Creator tabs
+  tabs: {
+    preview: "Anketi Test Et",
+    theme: "Temalar",
+    translation: "Çeviri",
+    designer: "Anket Tasarımı",
+    editor: "JSON Editor",
+    logic: "Mantıksal Anket"
+  },
   // Question types
   qt: {
     default: "Varsayılan",
@@ -81,23 +90,16 @@ export var turkishStrings = {
     newQuestionName: "Soru",
     newPanelName: "Panel",
     newTextItemName: "Yazı",
-    testSurvey: "Anketi Test Et",
-    themeSurvey: "Temalar",
     defaultV2Theme: "Temerrüt",
     modernTheme: "Modern",
     defaultTheme: "Varsayılan (eski)",
     testSurveyAgain: "Anketi Tekrar Test Et",
     testSurveyWidth: "Anket genişliği: ",
     navigateToMsg: "Şuraya git:",
-    logic: "Mantıksal Anket",
-    embedSurvey: "Gömülü Anket",
-    translation: "Çeviri",
     saveSurvey: "Anketi Kaydet",
     saveSurveyTooltip: "Anketi Kaydet",
     saveTheme: "Temayı Kaydet",
     saveThemeTooltip: "Temayı Kaydet",
-    designer: "Anket Tasarımı",
-    jsonEditor: "JSON Editor",
     jsonHideErrors: "Hataları gizleme",
     jsonShowErrors: "Hataları göster",
     undo: "Geri",
@@ -227,13 +229,13 @@ export var turkishStrings = {
       question_visibilityText: "{0} soruyu görünür yap", //{0} question name
       question_enableText: "{0} soruyu aktif yap", //{0} question name
       question_requireText: "{0} cevabı zorunlu yap", //{0} question name
-      question_resetValueText: "Soru için sıfırlama değeri: {0}",
+      question_resetValueText: "Soru için sıfırlama değeri: {0}", //{0} question name.
       question_setValueText: "Değer atayın: Soruya {1}: {0}",
       column_visibilityText: "Soru {1} sütununu {0} görünür hale getirme", //{0} column name, {1} question name
       column_enableText: "Sütunun {0} soru {1} etkinleştirin", //{0} column name, {1} question name
       column_requireText: "Sütun {0} soru {1} gerekli hale getirmek", //{0} column name, {1} question name
-      column_resetValueText: "Sütun için hücre değerini sıfırla: {0}",
-      column_setValueText: "Hücre değeri atayın: Sütuna {1}: {0}",
+      column_resetValueText: "Sütun için hücre değerini sıfırla: {0}", //{0} column name
+      column_setValueText: "Hücre değeri atayın: Sütuna {1}: {0}", //{0} column name and {1} setValueExpression
       setValueExpressionPlaceholder: " Sonucu hedef soruya atanacak bir ifade.",
       trigger_completeText: "Anket tamamlandı",
       trigger_setvalueText: "Sorunun içine: {0} değer {1}", //{0} question name, {1} setValue
@@ -751,6 +753,7 @@ export var turkishStrings = {
       top: "Üstte",
       bottom: "Altta"
     },
+    // Creator tabs
     tabs: {
       panel: {
         layout: "Panel Düzeni"

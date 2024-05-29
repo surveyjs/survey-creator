@@ -16,6 +16,15 @@ var persianStrings = {
     convertTo: "تبدیل به",
     drag: "المان را بکشید",
   },
+  // Creator tabs
+  tabs: {
+    preview: "آزمایش نظرسنجی",
+    theme: "تم",
+    translation: "ترجمه",
+    designer: "طراح نظرسنجی",
+    editor: "ویرایشگر JSON",
+    logic: "منطق نظرسنجی"
+  },
   // Question types
   qt: {
     default: "پیش فرض",
@@ -81,23 +90,16 @@ var persianStrings = {
     newQuestionName: "سوال",
     newPanelName: "پنل",
     newTextItemName: "متن",
-    testSurvey: "آزمایش نظرسنجی",
-    themeSurvey: "تم",
     defaultV2Theme: "پیش فرض",
     modernTheme: "مدرن",
     defaultTheme: "پیش فرض (legacy)",
     testSurveyAgain: "آزمایش دوباره نظرسنجی",
     testSurveyWidth: "عرض نظرسنجی: ",
     navigateToMsg: "شما باید به موارد زیر بروید:",
-    logic: "منطق نظرسنجی",
-    embedSurvey: "نظرسنجی توکار",
-    translation: "ترجمه",
     saveSurvey: "ذخیره نظرسنجی",
     saveSurveyTooltip: "ذخیره نظرسنجی",
     saveTheme: "ذخیرۀ تم",
     saveThemeTooltip: "ذخیرۀ تم",
-    designer: "طراح نظرسنجی",
-    jsonEditor: "ویرایشگر JSON",
     jsonHideErrors: "پنهان کردن خطاها",
     jsonShowErrors: "نمایش خطاها",
     undo: "بازگردانی",
@@ -227,13 +229,13 @@ var persianStrings = {
       question_visibilityText: "سوال {0} را قابل مشاهده کنید.", //{0} question name
       question_enableText: "فعال کردن سوال {0}", //{0} question name
       question_requireText: "ایجاد سوال {0} اجباری", //{0} question name
-      question_resetValueText: "بازنشانی مقدار برای سوال: {0}",
+      question_resetValueText: "بازنشانی مقدار برای سوال: {0}", //{0} question name.
       question_setValueText: "اختصاص مقدار: {1} به سوال: {0}",
       column_visibilityText: "ستون {0} سوال {1} را قابل مشاهده کنید", //{0} column name, {1} question name
       column_enableText: "ستون {0} سوال {1} را فعال کنید", //{0} column name, {1} question name
       column_requireText: "ستون {0} سوال {1} را الزامی کنید", //{0} column name, {1} question name
-      column_resetValueText: "تنظیم مجدد مقدار سلول برای ستون: {0}",
-      column_setValueText: "اختصاص مقدار سلول: {1} به ستون: {0}",
+      column_resetValueText: "تنظیم مجدد مقدار سلول برای ستون: {0}", //{0} column name
+      column_setValueText: "اختصاص مقدار سلول: {1} به ستون: {0}", //{0} column name and {1} setValueExpression
       setValueExpressionPlaceholder: " یک عبارت که نتیجه ان به سوال هدف اختصاص داده خواهد شد.",
       trigger_completeText: "بررسی نظرسنجی تمام شد",
       trigger_setvalueText: "در سوال {0} مقدار {1} را قرار دهید", //{0} question name, {1} setValue
@@ -751,6 +753,7 @@ var persianStrings = {
       top: "بخش بالا",
       bottom: "بخش پایین"
     },
+    // Creator tabs
     tabs: {
       panel: {
         layout: "چیدمان پنل"
