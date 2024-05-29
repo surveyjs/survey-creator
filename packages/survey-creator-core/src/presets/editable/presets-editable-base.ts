@@ -64,6 +64,7 @@ export class CreatorPresetEditableBase {
         res[item.getJsonPath(model)] = val;
       }
     });
+    return hasValue ? res : undefined;
   }
   public setJsonLocalizationStrings(model: SurveyModel, locStrs: any): any {
     this.setJsonLocalizationStringsCore(model, locStrs);
