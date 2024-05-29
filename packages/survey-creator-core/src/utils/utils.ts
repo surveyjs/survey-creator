@@ -15,6 +15,10 @@ function getNumericFromString(str: string): string {
   return num;
 }
 
+export function roundTo2Decimals(number: number): number {
+  return Math.round(number * 100) / 100;
+}
+
 const opositeValues = {
   true: "false",
   True: "False",
@@ -345,7 +349,7 @@ export function convertRgbaToString(rgbValues: Array<number>, alpha: number): st
   return `rgba(${rgbValues[0]}, ${rgbValues[1]}, ${rgbValues[2]}, ${alpha})`;
 }
 
-export function parseRgbaFromString(value: string): Array<number> {
+export function parseRgbaFromString(value: string = ""): Array<number> {
   const matchRgb = value.match(/\((.*)\)/);
   if (matchRgb) {
     return matchRgb[1].split(",").map(i => parseFloat(i));
@@ -354,7 +358,7 @@ export function parseRgbaFromString(value: string): Array<number> {
   }
 }
 
-export function parseColor(value: string): { color: string, opacity: number } {
+export function parseColor(value: string = ""): { color: string, opacity: number } {
   const rgbValues = parseRgbaFromString(value);
   if (rgbValues.length !== 0) {
     let opacity = 1;
@@ -365,7 +369,7 @@ export function parseColor(value: string): { color: string, opacity: number } {
       const hex = color.toString(16);
       return res + (hex.length == 1 ? "0" + hex : hex);
     }, "#");
-    return { color, opacity: opacity * 100 };
+    return { color, opacity: roundTo2Decimals(opacity * 100) };
   }
   else {
     return { color: value, opacity: 100 };
@@ -390,6 +394,14 @@ export function RGBToHSB(r, g, b) {
   return [60 * (h < 0 ? h + 6 : h), v && (n / v) * 100, v * 100];
 }
 
+export function trimEmptyFields(object: { [index: string]: string }): void {
+  Object.keys(object).forEach(key => {
+    if (object[key] === undefined || object[key] === null) {
+      delete object[key];
+    }
+  });
+}
+
 export function assign(...inputs: Array<any>) {
   const objects = (inputs || []).filter(obj => !!obj);
   if (objects.length <= 1) {
@@ -397,6 +409,7 @@ export function assign(...inputs: Array<any>) {
   }
   if (objects.length == 2) {
     Object.keys(objects[1]).forEach(key => objects[0][key] = objects[1][key]);
+    trimEmptyFields(inputs[0]);
     return;
   }
   for (let i = 1; i < objects.length; i++) {

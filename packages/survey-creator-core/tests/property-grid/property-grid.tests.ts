@@ -3171,6 +3171,14 @@ test("category, parent property", () => {
 
   const question = new QuestionDropdownModel("q1");
   const propertyGrid = new PropertyGridModelTester(question);
+  const tabsFistLevel = propertyGrid.survey.pages[0].elements.map(el => el.name);
+  const tabsSecondLevel = propertyGrid.survey.pages[0].elements[0].elements.map(el => el.name);
+  expect(tabsFistLevel.indexOf("sub1")).toBe(-1);
+  expect(tabsFistLevel.indexOf("sub2")).toBe(-1);
+
+  expect(tabsSecondLevel.indexOf("sub1")).toBeGreaterThan(-1);
+  expect(tabsSecondLevel.indexOf("sub2")).toBeGreaterThan(-1);
+
   const generalPanel = propertyGrid.survey.getPanelByName("general");
   generalPanel.expand();
   generalPanel.collapse();

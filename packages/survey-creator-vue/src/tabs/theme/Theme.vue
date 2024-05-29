@@ -21,8 +21,8 @@
   </div>
 </template>
 <script lang="ts" setup>
-import type { ThemeEditorModel } from "survey-creator-core";
+import type { ThemeTabViewModel } from "survey-creator-core";
 import { useBase } from "survey-vue3-ui";
-const props = defineProps<{ model: ThemeEditorModel }>();
+const props = defineProps<{ model: ThemeTabViewModel }>();
 useBase(() => props.model);
 </script>

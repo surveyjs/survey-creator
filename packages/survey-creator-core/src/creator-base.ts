@@ -1574,10 +1574,14 @@ export class SurveyCreatorModel extends Base
     property: JsonObjectProperty,
     readOnly: boolean,
     parentObj: Base,
-    parentProperty: JsonObjectProperty
+    parentProperty: JsonObjectProperty,
+    creatorReadOnly?: boolean
   ): boolean {
     if (!property) return false;
-    const proposedValue = this.readOnly || readOnly;
+    if (creatorReadOnly === undefined) {
+      creatorReadOnly = this.readOnly;
+    }
+    const proposedValue = creatorReadOnly || readOnly;
     if (this.onGetPropertyReadOnly.isEmpty) return proposedValue;
     const options = {
       obj: obj,
@@ -2569,7 +2573,7 @@ export class SurveyCreatorModel extends Base
 
   //#region Obsolete designerPropertyGrid
   protected get designerPropertyGrid(): PropertyGridModel {
-    const propertyGridTab = this.sidebar.getTabById("propertyGrid");
+    const propertyGridTab = this.sidebar.getTabById(this.sidebar.activeTab);
     if (!propertyGridTab) return null;
     return propertyGridTab.model ? (propertyGridTab.model.propertyGridModel as any as PropertyGridModel) : null;
   }
@@ -2664,7 +2668,7 @@ export class SurveyCreatorModel extends Base
     }
     return "";
   }
-  private expandCategoryIfNeeded(): void {
+  public expandCategoryIfNeeded(): void {
     const expandedTabName = settings.propertyGrid.defaultExpandedTabName;
     if (!!expandedTabName && !this.getPropertyGridExpandedCategory() && !this.survey.isEmpty) {
       const panel = <PanelModel>this.designerPropertyGrid.survey.getPanelByName(expandedTabName);
