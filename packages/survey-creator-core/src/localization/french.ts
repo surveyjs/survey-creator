@@ -16,6 +16,15 @@ var frenchTranslation = {
     convertTo: "Convertir en",
     drag: "Élément Drag",
   },
+  // Creator tabs
+  tabs: {
+    preview: "Tester le sondage",
+    theme: "Thèmes",
+    translation: "Traduction",
+    designer: "Éditeur de sondage",
+    editor: "Éditeur JSON",
+    logic: "Condition"
+  },
   // Question types
   qt: {
     default: "Par défaut",
@@ -48,7 +57,7 @@ var frenchTranslation = {
     text: "Questions de saisie libre",
     containers: "Conteneurs",
     matrix: "Questions matricielles",
-    misc: "Divers",
+    misc: "Divers"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -81,23 +90,16 @@ var frenchTranslation = {
     newQuestionName: "question",
     newPanelName: "panneau",
     newTextItemName: "texte",
-    testSurvey: "Tester le sondage",
-    themeSurvey: "Thèmes",
     defaultV2Theme: "Défaut",
     modernTheme: "Moderne",
     defaultTheme: "Valeur par défaut (héritée)",
     testSurveyAgain: "Tester à nouveau le sondage",
     testSurveyWidth: "Largeur du sondage : ",
     navigateToMsg: "Vous deviez naviguer vers",
-    logic: "Condition",
-    embedSurvey: "Intégrer le sondage",
-    translation: "Traduction",
     saveSurvey: "Sauvegarder le sondage",
     saveSurveyTooltip: "Enregistrer le sondage",
     saveTheme: "Enregistrer le thème",
     saveThemeTooltip: "Enregistrer le thème",
-    designer: "Éditeur de sondage",
-    jsonEditor: "Éditeur JSON",
     jsonHideErrors: "Masquer les erreurs",
     jsonShowErrors: "Afficher les erreurs",
     undo: "Annuler",
@@ -227,13 +229,13 @@ var frenchTranslation = {
       question_visibilityText: "Rendre la question {0} visible", //{0} question name
       question_enableText: "Activer la question {0}", //{0} question name
       question_requireText: "Rendre la question {0} obligatoire", //{0} question name
-      question_resetValueText: "Réinitialisez la valeur pour la question : {0}",
+      question_resetValueText: "Réinitialisez la valeur pour la question : {0}", //{0} question name.
       question_setValueText: "Attribuer une valeur : {1} à la question : {0}",
       column_visibilityText: "Rendre visible les {0} de la colonne de questions {1}", //{0} column name, {1} question name
       column_enableText: "Activer la {0} de la colonne de questions {1}", //{0} column name, {1} question name
       column_requireText: "rendre obligatoire la colonne {0} de la question {1}", //{0} column name, {1} question name
-      column_resetValueText: "Réinitialiser la valeur de la cellule pour la colonne : {0}",
-      column_setValueText: "Affecter la valeur de la cellule : {1} à la colonne : {0}",
+      column_resetValueText: "Réinitialiser la valeur de la cellule pour la colonne : {0}", //{0} column name
+      column_setValueText: "Affecter la valeur de la cellule : {1} à la colonne : {0}", //{0} column name and {1} setValueExpression
       setValueExpressionPlaceholder: " Expression dont le résultat sera affecté à la question cible.",
       trigger_completeText: "Le sondage se termine.",
       trigger_setvalueText: "Définir dans la question: {0} valeur {1}", //{0} question name, {1} setValue
@@ -751,6 +753,7 @@ var frenchTranslation = {
       top: "Au dessus",
       bottom: "En dessous"
     },
+    // Creator tabs
     tabs: {
       panel: {
         layout: "Disposition du panneau"

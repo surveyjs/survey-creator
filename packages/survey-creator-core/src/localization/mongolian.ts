@@ -16,6 +16,15 @@ export var mnStrings = {
     convertTo: "Хувиргах",
     drag: "Чирэх",
   },
+  // Creator tabs
+  tabs: {
+    preview: "Урьдчилан харах",
+    theme: "Сэдвүүд",
+    translation: "Орчуулга",
+    designer: "Удирдлага",
+    editor: "JSON засварлагч",
+    logic: "Логик"
+  },
   // Question types
   qt: {
     default: "Нэг сонголттой",
@@ -48,7 +57,7 @@ export var mnStrings = {
     text: "Хариулт бичих асуултууд",
     containers: "Сав",
     matrix: "Матрицан асуултууд",
-    misc: "Бусад",
+    misc: "Бусад"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -81,23 +90,16 @@ export var mnStrings = {
     newQuestionName: "Асуулт",
     newPanelName: "Панелийн нэр",
     newTextItemName: "Текст",
-    testSurvey: "Урьдчилан харах",
-    themeSurvey: "Сэдвүүд",
     defaultV2Theme: "Үндсэн",
     modernTheme: "Орчийн үеийн",
     defaultTheme: "Үндсэн (legacy)",
     testSurveyAgain: "Санал асуулгыг дахин урьдчилан харах",
     testSurveyWidth: "Санал асуулгын өргөн: ",
     navigateToMsg: "You had to navigate to",
-    logic: "Логик",
-    embedSurvey: "Санал асуулгыг оруулах",
-    translation: "Орчуулга",
     saveSurvey: "Санал асуулга хадгалах",
     saveSurveyTooltip: "Санал асуулга хадгалах",
     saveTheme: "Сэдэв хадгалах",
     saveThemeTooltip: "Сэдэв хадгалах",
-    designer: "Удирдлага",
-    jsonEditor: "JSON засварлагч",
     jsonHideErrors: "Алдааг нуух",
     jsonShowErrors: "Алдааг харуулах",
     undo: "Буцаах",
@@ -227,13 +229,13 @@ export var mnStrings = {
       question_visibilityText: "{0} асуултыг харагддаг болгох", //{0} question name
       question_enableText: "{0} асуултыг идэвхжүүлэх", //{0} question name
       question_requireText: "{0} асуултыг заавал бөглөх болгох", //{0} question name
-      question_resetValueText: "асуултын үнэ цэнийг дахин тогтоох нь: {0}",
+      question_resetValueText: "асуултын үнэ цэнийг дахин тогтоох нь: {0}", //{0} question name.
       question_setValueText: "үнэ цэнийг даалгах нь: {1} асуулт: {0}",
       column_visibilityText: "{0} баганын {1} асуултыг харагддаг болгох", //{0} column name, {1} question name
       column_enableText: "{0} баганын {1} асуултыг идэвхжүүлэх", //{0} column name, {1} question name
       column_requireText: "{0} баганын {1} асуултыг заавал бөглөх болгох", //{0} column name, {1} question name
-      column_resetValueText: "баганын эсийн үнэ цэнийг дахин тогтоох: {0}",
-      column_setValueText: "эсийн үнэ цэнийг хуваарил: {1} багана: {0}",
+      column_resetValueText: "баганын эсийн үнэ цэнийг дахин тогтоох: {0}", //{0} column name
+      column_setValueText: "эсийн үнэ цэнийг хуваарил: {1} багана: {0}", //{0} column name and {1} setValueExpression
       setValueExpressionPlaceholder: " Үр дүн нь ямар байгааг байгсад асуултад хариулах илэрхийлэл.",
       trigger_completeText: "Санал асуулга амжилттай бөглөсөн.",
       trigger_setvalueText: "{0} Асуултад оруулах утга: {1}", //{0} question name, {1} setValue
@@ -751,6 +753,7 @@ export var mnStrings = {
       top: "Дээр",
       bottom: "Доор"
     },
+    // Creator tabs
     tabs: {
       panel: {
         layout: "Panel Layout"

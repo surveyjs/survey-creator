@@ -39,6 +39,7 @@
 .svc-logic-paneldynamic div.svc-logic-operator {
   height: calcSize(3);
   box-sizing: content-box;
+  max-width: calcSize(40);
 }
 
 .svc-logic-paneldynamic .svc-logic-operator {

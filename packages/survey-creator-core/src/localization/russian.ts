@@ -16,6 +16,15 @@ export var ruStrings = {
     convertTo: "Преобразовать в",
     drag: "Перетянуть элемент",
   },
+  // Creator tabs
+  tabs: {
+    preview: "Тестировать опросник",
+    theme: "Темы",
+    translation: "Перевод",
+    designer: "Обзор конструктора",
+    editor: "JSON редактор",
+    logic: "Логика опросника"
+  },
   // Question types
   qt: {
     default: "По умолчанию",
@@ -48,7 +57,7 @@ export var ruStrings = {
     text: "Вопросы для ввода текста",
     containers: "Контейнеры",
     matrix: "Матричные вопросы",
-    misc: "Разное",
+    misc: "Разное"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -81,23 +90,16 @@ export var ruStrings = {
     newQuestionName: "вопрос",
     newPanelName: "панель",
     newTextItemName: "текст",
-    testSurvey: "Тестировать опросник",
-    themeSurvey: "Темы",
     defaultV2Theme: "По умолчанию",
     modernTheme: "Современный",
     defaultTheme: "По умолчанию (устаревшая)",
     testSurveyAgain: "Тестировать еще раз",
     testSurveyWidth: "Ширина опросника",
     navigateToMsg: "Вы должны были перейти к",
-    logic: "Логика опросника",
-    embedSurvey: "Вставить опросник",
-    translation: "Перевод",
     saveSurvey: "Сохранить опросник",
     saveSurveyTooltip: "Сохранить опрос",
     saveTheme: "Сохранить тему",
     saveThemeTooltip: "Сохранить тему",
-    designer: "Обзор конструктора",
-    jsonEditor: "JSON редактор",
     jsonHideErrors: "Скрыть ошибки",
     jsonShowErrors: "Показать ошибки",
     undo: "Отменить",
@@ -227,13 +229,13 @@ export var ruStrings = {
       question_visibilityText: "Сделать вопрос {0} видимым", //{0} question name
       question_enableText: "Сделать вопрос {0} включенным", //{0} question name
       question_requireText: "Сделать вопрос {0} обязательным", //{0} question name
-      question_resetValueText: "Сброс значения для вопроса: {0}",
+      question_resetValueText: "Сброс значения для вопроса: {0}", //{0} question name.
       question_setValueText: "присвоить значение: {1} к вопросу: {0}",
       column_visibilityText: "Сделайте видимым {0} {1} в столбце вопроса", //{0} column name, {1} question name
       column_enableText: "Сделайте столбец {0} вопроса {1} включите", //{0} column name, {1} question name
       column_requireText: "Сделайте {0} вопроса {1} обязательным для заполнения", //{0} column name, {1} question name
-      column_resetValueText: "Сброс значения ячейки для столбца: {0}",
-      column_setValueText: "Присвойте значение ячейки: {1} столбцу: {0}",
+      column_resetValueText: "Сброс значения ячейки для столбца: {0}", //{0} column name
+      column_setValueText: "Присвойте значение ячейки: {1} столбцу: {0}", //{0} column name and {1} setValueExpression
       setValueExpressionPlaceholder: " Выражение, результат которого будет присвоен целевому вопросу.",
       trigger_completeText: "Опрос становится завершенным",
       trigger_setvalueText: "Установить в вопрос: {0} значение {1}", //{0} question name, {1} setValue
@@ -751,6 +753,7 @@ export var ruStrings = {
       top: "Сверху",
       bottom: "Снизу"
     },
+    // Creator tabs
     tabs: {
       panel: {
         layout: "Компоновка панелей"

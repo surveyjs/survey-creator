@@ -16,6 +16,15 @@ var germanTranslation = {
     convertTo: "Konvertieren zu",
     drag: "Element ziehen",
   },
+  // Creator tabs
+  tabs: {
+    preview: "Test",
+    theme: "Themen",
+    translation: "Übersetzung",
+    designer: "Designer",
+    editor: "JSON",
+    logic: "Logik"
+  },
   // Question types
   qt: {
     default: "Standard",
@@ -48,7 +57,7 @@ var germanTranslation = {
     text: "Text-Eingabe-Fragen",
     containers: "Kontainer",
     matrix: "Matrix-Fragen",
-    misc: "Verschiedenes",
+    misc: "Verschiedenes"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -81,23 +90,16 @@ var germanTranslation = {
     newQuestionName: "Frage",
     newPanelName: "Panel",
     newTextItemName: "Text",
-    testSurvey: "Test",
-    themeSurvey: "Themen",
     defaultV2Theme: "Standard",
     modernTheme: "Modern",
     defaultTheme: "Standard (veraltet)",
     testSurveyAgain: "Testumfrage wiederholen",
     testSurveyWidth: "Umfragebreite: ",
     navigateToMsg: "Sie werden weitergeleitet: ",
-    logic: "Logik",
-    embedSurvey: "Umfrage einfügen",
-    translation: "Übersetzung",
     saveSurvey: "Umfrage speichern",
     saveSurveyTooltip: "Umfrage speichern",
     saveTheme: "Theme speichern",
     saveThemeTooltip: "Theme speichern",
-    designer: "Designer",
-    jsonEditor: "JSON",
     jsonHideErrors: "Fehler verstecken",
     jsonShowErrors: "Fehler anzeigen",
     undo: "Rückgängig",
@@ -227,13 +229,13 @@ var germanTranslation = {
       question_visibilityText: "Frage {0} sichtbar machen", //{0} question name
       question_enableText: "Frage {0} aktivieren", //{0} question name
       question_requireText: "Frage {0} erforderlich machen", //{0} question name
-      question_resetValueText: "Reset-Wert für Frage: {0}",
+      question_resetValueText: "Reset-Wert für Frage: {0}", //{0} question name.
       question_setValueText: "Wert zuweisen: {1} zu fragen: {0}",
       column_visibilityText: "Spalte {0} von Frage {1} sichtbar machen", //{0} column name, {1} question name
       column_enableText: "Spalte {0} von Frage {1} aktivieren", //{0} column name, {1} question name
       column_requireText: "Spalte {0} von Frage {1} erforderlich machen", //{0} column name, {1} question name
-      column_resetValueText: "Zellenwert für Spalte zurücksetzen: {0}",
-      column_setValueText: "Zellenwert zuweisen: {1} zur Spalte: {0}",
+      column_resetValueText: "Zellenwert für Spalte zurücksetzen: {0}", //{0} column name
+      column_setValueText: "Zellenwert zuweisen: {1} zur Spalte: {0}", //{0} column name and {1} setValueExpression
       setValueExpressionPlaceholder: "Ein Ausdruck, dessen Ergebnis der Zielfrage zugewiesen wird.",
       trigger_completeText: "Umfrage abschließen",
       trigger_setvalueText: " In Frage {0} den Wert {1} einsetzen", //{0} question name, {1} setValue
@@ -751,6 +753,7 @@ var germanTranslation = {
       top: "oben",
       bottom: "unten"
     },
+    // Creator tabs
     tabs: {
       panel: {
         layout: "Panel-Layout"

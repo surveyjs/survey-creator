@@ -47,3 +47,4 @@ visualRegressionTests/artifacts
 .angular
 
 junit.xml
+packages/survey-creator-core/.vscode/launch.json

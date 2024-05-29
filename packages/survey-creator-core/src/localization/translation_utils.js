@@ -182,6 +182,7 @@ module.exports = {
   alternativeNames: {},
   keyComments: {
     survey: "survey templates",
+    tabs: "Creator tabs",
     qt: "Question types",
     ed: "Strings in SurveyJS Creator",
     pe: "Property Editors",
@@ -208,6 +209,9 @@ module.exports = {
     trigger_copyvalueText: "{0} and {1} question names",
     trigger_skipText: "{0} question name",
     trigger_runExpressionText1: "{0} the expression",
-    trigger_runExpressionText2: "{0} question name"
+    trigger_runExpressionText2: "{0} question name",
+    question_resetValueText: "{0} question name.",
+    column_resetValueText: "{0} column name",
+    column_setValueText: "{0} column name and {1} setValueExpression"
   }
 };

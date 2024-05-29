@@ -16,6 +16,15 @@ export var czStrings = {
     convertTo: "Převést na",
     drag: "Přetáhnout prvek",
   },
+  // Creator tabs
+  tabs: {
+    preview: "Otestovat průzkum",
+    theme: "Motivy",
+    translation: "Překlad",
+    designer: "Návrhář průzkumů",
+    editor: "Editor JSON",
+    logic: "Logika průzkumu"
+  },
   // Question types
   qt: {
     default: "Výchozí",
@@ -48,7 +57,7 @@ export var czStrings = {
     text: "Textové otázky",
     containers: "Kontejnery",
     matrix: "Maticové otázky",
-    misc: "Ostatní",
+    misc: "Ostatní"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -81,23 +90,16 @@ export var czStrings = {
     newQuestionName: "otázka",
     newPanelName: "panel",
     newTextItemName: "text",
-    testSurvey: "Otestovat průzkum",
-    themeSurvey: "Motivy",
     defaultV2Theme: "Výchozí",
     modernTheme: "Moderní",
     defaultTheme: "Výchozí (původní)",
     testSurveyAgain: "Znovu otestovat průzkum",
     testSurveyWidth: "Šířka průzkumu: ",
     navigateToMsg: "Museli jste přejít na:",
-    logic: "Logika průzkumu",
-    embedSurvey: "Vložit průzkum",
-    translation: "Překlad",
     saveSurvey: "Uložit průzkum",
     saveSurveyTooltip: "Uložit průzkum",
     saveTheme: "Uložit motiv",
     saveThemeTooltip: "Uložit motiv",
-    designer: "Návrhář průzkumů",
-    jsonEditor: "Editor JSON",
     jsonHideErrors: "Skrýt chyby",
     jsonShowErrors: "Zobrazit chyby",
     undo: "Zrušit",
@@ -227,13 +229,13 @@ export var czStrings = {
       question_visibilityText: "Zobrazit otázku {0}", //{0} question name
       question_enableText: "Povolit otázku {0}", //{0} question name
       question_requireText: "Otázka {0} je povinná", //{0} question name
-      question_resetValueText: "Resetovat hodnotu pro otázku: {0}",
+      question_resetValueText: "Resetovat hodnotu pro otázku: {0}", //{0} question name.
       question_setValueText: "přiřadit hodnotu: {1} na otázku: {0}",
       column_visibilityText: "zviditelnit sloupec {0} úlohy {1}", //{0} column name, {1} question name
       column_enableText: "povolit sloupec {0} otázky {1}", //{0} column name, {1} question name
       column_requireText: "povinný sloupec {0} otázky {1}", //{0} column name, {1} question name
-      column_resetValueText: "Obnovit hodnotu buňky pro sloupec: {0}",
-      column_setValueText: "Přiřaďte hodnotu buňky: {1} sloupci: {0}",
+      column_resetValueText: "Obnovit hodnotu buňky pro sloupec: {0}", //{0} column name
+      column_setValueText: "Přiřaďte hodnotu buňky: {1} sloupci: {0}", //{0} column name and {1} setValueExpression
       setValueExpressionPlaceholder: " Výraz, jehož výsledek bude přiřazen cílové otázce.",
       trigger_completeText: "Průzkum se stává dokončeným",
       trigger_setvalueText: "Zpochybnit: {0} hodnota {1}", //{0} question name, {1} setValue
@@ -751,6 +753,7 @@ export var czStrings = {
       top: "Nahoře",
       bottom: "Dole"
     },
+    // Creator tabs
     tabs: {
       panel: {
         layout: "Rozvržení panelu"
