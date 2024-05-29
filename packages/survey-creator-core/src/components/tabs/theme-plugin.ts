@@ -14,17 +14,6 @@ import { Switcher } from "../switcher/switcher";
 import { themeModelPropertyGridDefinition } from "./theme-model-definition";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
 
-export interface IPropertyGridSurveyCreatedEvent {
-  survey: SurveyModel;
-  model: ThemeTabViewModel;
-}
-export interface IAddPropertyGridEditorParams {
-  element: IElement;
-  category?: string;
-  insertAfter?: string;
-  insertBefore?: string;
-}
-
 /**
  * An object that enables you to modify, add, and remove UI themes and handle theme-related events. To access this object, use the [`themeEditor`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#themeEditor) property on a Survey Creator instance:
  * 
@@ -810,17 +799,4 @@ export class ThemeTabPlugin implements ICreatorPlugin {
    * A Boolean property that you can set to `false` if you want to disallow theme modifications.
    */
   public onAllowModifyTheme = new EventBase<ThemeTabPlugin, { theme: ITheme, allow: boolean }>();
-  /**
-   * An event that is raised when a [survey that represents the Property Grid](https://surveyjs.io/survey-creator/documentation/creator-v2-whats-new#survey-creator-ui-elements-are-surveys) is instantiated. Handle this event to customize the Property Grid.
-   * 
-   * Parameters:
-   * 
-   * - `sender`: `ThemeTabPlugin`\
-   * A `ThemeTabPlugin` instance that raised the event.
-   * - `options.survey`: `SurveyModel`\
-   * A survey that represents the Property Grid.
-   * - `options.model`: `ThemeTabViewModel`\
-   * A Theme Editor model.
-   */
-  public onPropertyGridSurveyCreated = new EventBase<ThemeTabPlugin, IPropertyGridSurveyCreatedEvent>();
 }
