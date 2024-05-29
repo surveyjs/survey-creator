@@ -12,13 +12,30 @@ svc-toolbox {
   flex-direction: column;
 
   .spg-search-editor_container {
-    padding: calcSize(1.5) calcSize(2) calcSize(2.5) calcSize(2.5);
+    padding: calcSize(1.5) calcSize(2) calcSize(2.5) calcSize(3);
     width: unset;
+    flex-grow: 1;
+  }
+  .spg-search-editor_input {
+    width: 0;
+    flex-grow: 1;
+  }
+  .spg-search-editor_toolbar-counter {
+    display: none;
+  }
+  .spg-search-editor_bar-item.sv-action-bar-item:not(.sv-action-bar-item--pressed) {
+    &:hover:enabled{
+      background-color: $red-light;
+      border-radius: 100px;
+      svg use {
+        fill: $red;
+      }
+    }
   }
 }
 
 .svc-toolbox__scroller {
-  padding: calcSize(1) calcSize(1) calcSize(2);
+  padding: calcSize(1) calcSize(1.5) calcSize(2);
   box-sizing: border-box;
   overflow: hidden;
   direction: rtl;
@@ -60,9 +77,11 @@ _:future,
   }
 }
 .svc-toolbox__tool.svc-toolbox__search-button {
+  z-index: 20;
   .sv-dots__item {
     margin-top: 0;
     margin-left: calcSize(1);
+    width: calcSize(5);
   }
 }
 
@@ -79,8 +98,8 @@ _:future,
     position: relative;
     background: $background-dim;
     width: fit-content;
-    border-right: 1px solid $border;
-    box-shadow: $shadow-large;
+    border-right: 1px solid $border-inside;
+    box-shadow: $shadow-medium, $shadow-large;
 
     .svc-toolbox__scroller {
       scrollbar-gutter: auto;
@@ -130,17 +149,28 @@ _:future,
 .svc-toolbox__container {
   direction: ltr;
 }
+
+.svc-toolbox--compact:not(.svc-toolbox--flyout) {
+  .svc-toolbox__search-container {
+    max-width: fit-content;
+    margin-left: calcSize(-0.5);
+  }
+}
+
 .svc-toolbox__search-container {
   direction: ltr;
   position: sticky;
   top: 0;
   z-index: 30;
-  max-width: fit-content;
   background-color: $background-dim;
   padding-top: calcSize(1);
   margin-bottom: calcSize(1);
-  margin-right: calcSize(-1);
-  margin-left: calcSize(-1);
+  margin-right: calcSize(-1.5);
+  margin-left: calcSize(-1.5);
+  display: flex;
+  flex-direction: column;
+  width: calc(100% + calcSize(3));
+  box-sizing: border-box;
 }
 .svc-toolbox__category {
   display: flex;
@@ -160,9 +190,15 @@ _:future,
 
 .svc-toolbox__category-separator {
   height: 1px;
-  width: calcSize(6);
+  width: calcSize(5);
   background-color: $border;
-  margin: calcSize(1) 0 calcSize(1.5);
+  margin: calcSize(1) calcSize(0.5) calcSize(1.5);
+}
+
+.svc-toolbox--filtering {
+  .svc-toolbox__category-separator {
+    display: none;
+  }
 }
 
 .svc-toolbox__category-header {
@@ -224,4 +260,8 @@ _:future,
     height: 0;
     visibility: hidden;
   }
+}
+.svc-toolbox__category--empty {
+  height: 0;
+  visibility: hidden;
 }

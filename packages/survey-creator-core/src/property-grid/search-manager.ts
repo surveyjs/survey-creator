@@ -16,6 +16,7 @@ export abstract class SearchManagerBase extends Base {
       title: getLocString("ed.close"),
       showTitle: false,
       iconSize: 16,
+      disableTabStop: true,
       innerCss: "spg-search-editor_bar-item",
       visible: <any>new ComputedUpdater(() => !!this.filterString),
       action: () => {
@@ -56,6 +57,7 @@ export class SearchManagerToolbox extends SearchManagerBase {
   public filterStringPlaceholder = getLocString("ed.toolboxFilteredTextPlaceholder");
   protected setFiterString(newValue: string) {
     this.toolbox.items.forEach(item => item.visible = item.hasText(newValue));
+    this.toolbox.categories.forEach(category => category.forceExpand = !!newValue);
   }
 }
 

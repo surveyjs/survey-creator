@@ -13,7 +13,7 @@
       <div class="svc-toolbox__container">
         <!-- ko ifnot: $data.toolbox.isCompactRendered || categories().length == 1 || !$data.toolbox.showCategoryTitles -->
         <!-- ko foreach: categories -->
-        <div class="svc-toolbox__category" data-bind="css: { 'svc-toolbox__category--collapsed': $data.collapsed }">
+        <div data-bind="css: { 'svc-toolbox__category--collapsed': $data.collapsed, 'svc-toolbox__category--empty': $data.empty }">
           <!-- ko if: $parent.categories().length > 1 -->
           <div class="svc-toolbox__category-header"
             data-bind="click: toggleState, key2click, css: { 'svc-toolbox__category-header--collapsed': $data.toolbox.canCollapseCategories }">

@@ -242,7 +242,7 @@ export class SurveyCreatorModel extends Base
     this.startEditTitleOnQuestionAddedValue = value;
   }
   public get startEditTitleOnQuestionAdded() {
-    return !this.isMobileView && !this.toolbox.isFocused && this.startEditTitleOnQuestionAddedValue;
+    return !this.isMobileView && !this.toolbox.searchManager.filterString && this.startEditTitleOnQuestionAddedValue;
   }
   private startEditTitleOnQuestionAddedValue: boolean = true;
   private isRTLValue: boolean = false;
@@ -2696,7 +2696,7 @@ export class SurveyCreatorModel extends Base
       }
       this.survey.lazyRendering = false;
       this.doClickQuestionCore(newElement, modifiedType, -1, panel);
-      this.selectElement(newElement, null, !this.toolbox.isFocused, this.startEditTitleOnQuestionAdded);
+      this.selectElement(newElement, null, !this.toolbox.searchManager.filterString, this.startEditTitleOnQuestionAdded);
     }
   }
   public getJSONForNewElement(json: any): any {

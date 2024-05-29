@@ -78,7 +78,19 @@ export class QuestionToolboxCategory extends Base {
   @property() name: string;
   @property() title: string;
   @propertyArray() items: Array<QuestionToolboxItem>;
-  @property({ defaultValue: false }) collapsed: boolean;
+  @property({ defaultValue: false }) collapsedValue: boolean;
+  @property({ defaultValue: false }) forceExpand: boolean;
+  public get collapsed(): boolean {
+    return !this.forceExpand && this.collapsedValue;
+  }
+  public set collapsed(val: boolean) {
+    this.collapsedValue = val;
+  }
+
+  public get empty() {
+    return this.items.filter(item => item.visible).length == 0;
+  }
+
   public toggleState() {
     if (this.toolbox) {
       this.toolbox.toggleCategoryState(this.name);
@@ -139,6 +151,7 @@ export class QuestionToolbox
     "matrix", "matrixdropdown", "matrixdynamic",
     "html", "expression", "image", "signaturepad"
   ];
+  private _containerElementValue: HTMLElement;
 
   public static getQuestionDefaultSettings(questionType: string): any {
     if (!settings.toolbox || !settings.toolbox.defaultJSON) return undefined;
@@ -317,6 +330,11 @@ export class QuestionToolbox
   public get isCompactRendered() {
     return this.isCompact && !this.isFocused;
   }
+
+  public setContainerElement(element: HTMLElement) {
+    this._containerElementValue = element;
+  }
+
   public focusOut(e) {
     if (e.relatedTarget !== e.currentTarget &&
       !e.currentTarget.contains(e.relatedTarget)) {
@@ -331,6 +349,7 @@ export class QuestionToolbox
     return new CssClassBuilder()
       .append("svc-toolbox")
       .append("svc-toolbox--searchable", this.searchEnabled)
+      .append("svc-toolbox--filtering", !!this.searchManager.filterString)
       .append("svc-toolbox--compact", this.isCompactRendered)
       .append("svc-toolbox--flyout", this.isCompact && this.isFocused)
       .append("svc-toolbox--scrollable", this.isResponsivenessDisabled).toString();
