@@ -45,7 +45,5 @@ export class PropertyGridEditorShadowEffects extends PropertyGridEditor {
   public getJSON(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): any {
     return { type: "shadoweffects", descriptionLocation: "hidden" };
   }
-  // public onCreated(obj: Base, question: Question, prop: JsonObjectProperty) {
-  // }
 }
 PropertyGridEditorCollection.register(new PropertyGridEditorShadowEffects());

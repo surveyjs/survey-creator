@@ -26,12 +26,6 @@ export class HeaderModel extends Base implements IHeader {
   fromJSON(json: any, options?: ILoadFromJSONOptions): void {
     super.fromJSON(json, options);
     if (!!json["backgroundImageOpacity"]) this.backgroundImageOpacity = json["backgroundImageOpacity"] * 100;
-
-    // this["surveyTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("surveyTitle"), this.themeCssVariablesChanges);
-    // this["surveyDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("surveyDescription"), this.themeCssVariablesChanges);
-    // this["headerTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("headerTitle"), this.themeCssVariablesChanges);
-    // this["headerDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("headerDescription"), this.themeCssVariablesChanges);
-
   }
 
   public setCssVariables(cssVariables?: { [index: string]: string }) {
@@ -46,7 +40,6 @@ export class HeaderModel extends Base implements IHeader {
     if (!!backgroundColorValue) {
       this["backgroundColorSwitch"] = this.getBackgroundColorSwitchByValue(backgroundColorValue);
       this["backgroundColor"] = this["backgroundColorSwitch"] === "custom" ? backgroundColorValue : undefined;
-      // this._setPGEditorPropertyValue(panel.getQuestionByName("backgroundColorSwitch"), "value", this.getBackgroundColorSwitchByValue(backgroundColorValue));
     }
   }
 
@@ -102,83 +95,6 @@ export class HeaderModel extends Base implements IHeader {
     if (backgroundColor === "transparent") return "none";
     return "custom";
   }
-
-  // private setCoverColorsFromThemeVariables(question: Question, cssVariable: string) {
-  //   if (!!question && !!cssVariable && cssVariable !== "transparent") {
-  //     question.value = cssVariable;
-  //   }
-  // }
-
-  // private updateHeaderViewContainerEditors(themeCssVariables: { [index: string]: string }) {
-  //   this.updateVisibilityOfPropertyGridGroups();
-
-  //   const headerViewContainerQuestion = this.themeEditorSurvey.getQuestionByName("headerViewContainer");
-  //   if (!headerViewContainerQuestion) return;
-
-  //   const panel = headerViewContainerQuestion.panels[0];
-  //   panel.getQuestionByName("backgroundColor").choices = this.getPredefinedColorsItemValues();
-
-  //   if (!!this.survey) {
-  //     this.setCoverPropertiesFromSurvey(panel, themeCssVariables);
-  //     this._setPGEditorPropertyValue(panel.getQuestionByName("surveyTitle"), "readOnly", !this.survey.hasTitle);
-  //     fontsettingsFromCssVariable(panel.getQuestionByName("surveyTitle"), themeCssVariables);
-  //     this._setPGEditorPropertyValue(panel.getQuestionByName("surveyDescription"), "readOnly", !this.survey.hasDescription);
-  //     fontsettingsFromCssVariable(panel.getQuestionByName("surveyDescription"), themeCssVariables);
-
-  //     fontsettingsFromCssVariable(panel.getElementByName("surveyTitle"), this.themeCssVariablesChanges);
-  //     fontsettingsFromCssVariable(panel.getElementByName("surveyDescription"), this.themeCssVariablesChanges);
-  //     fontsettingsFromCssVariable(panel.getElementByName("headerTitle"), this.themeCssVariablesChanges);
-  //     fontsettingsFromCssVariable(panel.getElementByName("headerDescription"), this.themeCssVariablesChanges);
-  //   }
-
-  //   if (!!this.currentTheme.header) {
-  //     Object.keys(this.currentTheme.header).forEach(key => {
-  //       const question = panel.getQuestionByName(key);
-  //       if (key === "backgroundImageOpacity") {
-  //         this._setPGEditorPropertyValue(question, "value", this.currentTheme.header[key] * 100);
-  //       } else {
-  //         this._setPGEditorPropertyValue(question, "value", this.currentTheme.header[key]);
-  //       }
-  //     });
-  //     this.setCoverColorsFromThemeVariables(panel.getQuestionByName("backgroundColor"), themeCssVariables["--sjs-header-backcolor"]);
-
-  //     const backgroundColorValue = themeCssVariables["--sjs-header-backcolor"];
-  //     if (!!backgroundColorValue) {
-  //       this._setPGEditorPropertyValue(panel.getQuestionByName("backgroundColorSwitch"), "value", this.getBackgroundColorSwitchByValue(backgroundColorValue));
-  //     }
-  //   }
-  // }
-
-  // private headerViewContainerPropertiesChanged(options: ValueChangedEvent) {
-  //   const headerSettings = options.value[0];
-  //   this.survey.headerView = headerSettings["headerView"];
-  //   this.surveyProvider.survey.headerView = headerSettings["headerView"];
-  //   if (headerSettings["headerView"] === "basic") {
-  //     this.survey.logoPosition = headerSettings["logoPosition"];
-  //     this.surveyProvider.survey.logoPosition = headerSettings["logoPosition"];
-  //     fontsettingsToCssVariable(options.question.panels[0].getElementByName("surveyTitle"), this.themeCssVariablesChanges);
-  //     fontsettingsToCssVariable(options.question.panels[0].getElementByName("surveyDescription"), this.themeCssVariablesChanges);
-  //   } else {
-  //     this.currentTheme.header = this.getCoverJson(headerSettings);
-  //     this.setHeaderBackgroundColorCssVariable(headerSettings);
-  //     fontsettingsToCssVariable(options.question.panels[0].getElementByName("headerTitle"), this.themeCssVariablesChanges);
-  //     fontsettingsToCssVariable(options.question.panels[0].getElementByName("headerDescription"), this.themeCssVariablesChanges);
-  //   }
-  //   this.currentTheme.headerView = headerSettings["headerView"];
-  //   this.themeModified(options); // => this.onThemePropertyChanged.fire(this, { name, value });
-  // }
-
-  // private getCoverJson(headerSettings: any): any {
-  //   const result = {};
-  //   Serializer.getProperties("cover").map(pr => pr.name)
-  //     .filter(key => headerSettings[key] !== undefined && headerSettings[key] !== null)
-  //     .forEach(key => {
-  //       result[key] = headerSettings[key];
-  //     });
-
-  //   result["backgroundImageOpacity"] = headerSettings["backgroundImageOpacity"] / 100;
-  //   return result;
-  // }
 
   public getType(): string {
     return "header";

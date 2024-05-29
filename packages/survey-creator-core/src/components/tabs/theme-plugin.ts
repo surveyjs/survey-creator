@@ -283,14 +283,6 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       }
     });
 
-    // if (!!this.model.themeEditorSurvey) {
-    //   const options = <IPropertyGridSurveyCreatedEvent>{
-    //     survey: this.model.themeEditorSurvey,
-    //     model: this.model,
-    //   };
-    //   this.onPropertyGridSurveyCreated.fire(this, options);
-    // }
-
     this.updatePropertyGridEditorsAvailability();
     this.updateVisibilityOfPropertyGridGroups();
     this.updatePropertyGridColorEditorWithPredefinedColors();
@@ -382,7 +374,6 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       this.model.dispose();
       this.model = undefined;
     }
-    // this.sidebarTab.visible = false;
     this.propertyGridTab.visible = false;
     this.testAgainAction.visible = false;
     this.invisibleToggleAction && (this.invisibleToggleAction.visible = false);
@@ -668,22 +659,6 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       saveThemeFunc && saveThemeFunc();
     }, this.creator.autoSaveDelay);
   }
-  // protected themeModified(options: { theme: ITheme } | { name: string, value: any }) {
-  //   this.updateSimulatorTheme();
-  //   // if (this.blockThemeChangedNotifications == 0) {
-  //   if (!!options["theme"]) {
-  //     // this.themeModel.onThemeSelected.fire(this.themeModel, options as { theme: ITheme });
-  //     this.onThemeSelected.fire(this, options as { theme: ITheme });
-  //   } else {
-  //     this.creator.hasPendingThemeChanges = true;
-  //     // this.themeModel.onThemePropertyChanged.fire(this.themeModel, options as { name: string, value: any });
-  //     this.onThemePropertyChanged.fire(this, options as { name: string, value: any });
-  //   }
-  //   if (this.creator.isAutoSave) {
-  //     this.processAutoSave();
-  //   }
-  //   // }
-  // }
 
   /**
    * A list of UI themes from which users can select. You can sort this list if you want to reorder themes in Theme Editor.

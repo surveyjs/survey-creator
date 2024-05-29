@@ -165,45 +165,6 @@ export class ThemeModel extends Base implements ITheme {
     this.setPropertyValue("header", header);
   }
 
-  // private updatePropertyGridEditors(themeEditorSurvey: SurveyModel) {
-  //   const newCssVariables = {};
-  //   assign(newCssVariables, this.currentTheme.cssVariables);
-  //   this._setPGEditorPropertyValue(themeEditorSurvey.getQuestionByName("backgroundImage"), "value", this.currentTheme.backgroundImage);
-  //   this._setPGEditorPropertyValue(themeEditorSurvey.getQuestionByName("backgroundImageFit"), "value", this.currentTheme.backgroundImageFit);
-  //   this._setPGEditorPropertyValue(themeEditorSurvey.getQuestionByName("backgroundImageAttachment"), "value", this.currentTheme.backgroundImageAttachment);
-  //   this._setPGEditorPropertyValue(themeEditorSurvey.getQuestionByName("backgroundOpacity"), "value", this.currentTheme.backgroundOpacity * 100);
-
-  //   const primaryBackcolor = themeEditorSurvey.getQuestionByName("--sjs-primary-backcolor");
-  //   if (!!primaryBackcolor) {
-  //     this._setPGEditorPropertyValue(themeEditorSurvey.getQuestionByName("primaryColor"), "value", primaryBackcolor.value);
-  //   }
-
-  //   this.updateHeaderViewContainerEditors(newCssVariables);
-  //   elementSettingsFromCssVariable(themeEditorSurvey.getQuestionByName("questionPanel"), newCssVariables, newCssVariables["--sjs-general-backcolor"], newCssVariables["--sjs-general-backcolor-dark"]);
-  //   elementSettingsFromCssVariable(themeEditorSurvey.getQuestionByName("editorPanel"), newCssVariables, newCssVariables["--sjs-general-backcolor-dim-light"], newCssVariables["--sjs-general-backcolor-dim-dark"]);
-
-  //   fontsettingsFromCssVariable(themeEditorSurvey.getQuestionByName("pageTitle"), newCssVariables, newCssVariables["--sjs-general-dim-forecolor"]);
-  //   fontsettingsFromCssVariable(themeEditorSurvey.getQuestionByName("pageDescription"), newCssVariables, newCssVariables["--sjs-general-dim-forecolor-light"]);
-  //   fontsettingsFromCssVariable(themeEditorSurvey.getQuestionByName("questionTitle"), newCssVariables, newCssVariables["--sjs-general-forecolor"]);
-  //   fontsettingsFromCssVariable(themeEditorSurvey.getQuestionByName("questionDescription"), newCssVariables, newCssVariables["--sjs-general-forecolor-light"]);
-  //   fontsettingsFromCssVariable(themeEditorSurvey.getQuestionByName("editorFont"), newCssVariables, newCssVariables["--sjs-general-forecolor"], newCssVariables["--sjs-general-forecolor-light"]);
-
-  //   if (!!newCssVariables["--sjs-corner-radius"]) {
-  //     this._setPGEditorPropertyValue(themeEditorSurvey.getQuestionByName("cornerRadius"), "value", parseFloat(newCssVariables["--sjs-corner-radius"]));
-  //   }
-  //   if (!!newCssVariables["--sjs-base-unit"]) {
-  //     this._setPGEditorPropertyValue(themeEditorSurvey.getQuestionByName("scale"), "value", parseFloat(newCssVariables["--sjs-base-unit"]) * 100 / 8);
-  //   }
-  //   if (!!newCssVariables["--sjs-font-size"]) {
-  //     this._setPGEditorPropertyValue(themeEditorSurvey.getQuestionByName("fontSize"), "value", parseFloat(newCssVariables["--sjs-font-size"]) * 100 / 16);
-  //   }
-
-  //   themeEditorSurvey.getAllQuestions().forEach(question => {
-  //     if (["color", "coloralpha"].indexOf(question.getType()) !== -1) {
-  //       (question as any).choices = this.getPredefinedColorsItemValues();
-  //     }
-  //   });
-  // }
   public hasVariations(palette: boolean): boolean {
     let themeHasModeVariations = false;
     let themeHasPaletteVariations = false;
@@ -225,46 +186,6 @@ export class ThemeModel extends Base implements ITheme {
       return themeHasModeVariations;
     }
   }
-
-  // private updatePropertyGridEditorsAvailability() {
-  //   const isCustomTheme = PredefinedThemes.indexOf(this.themeName) === -1;
-  //   let customThemeHasModeVariations = false;
-  //   let customThemeHasPaletteVariations = false;
-  //   if (isCustomTheme) {
-  //     const registeredThemes = Object.keys(Themes);
-  //     let themeLight = this.themeName + "-light";
-  //     let themeDark = this.themeName + "-dark";
-  //     if (this.themeMode !== "panels") {
-  //       themeLight += "-panelless";
-  //       themeDark += "-panelless";
-  //     }
-  //     customThemeHasPaletteVariations = registeredThemes.indexOf(themeLight) !== -1 && registeredThemes.indexOf(themeDark) !== -1;
-
-  //     let themePanels = this.themeName + "-" + this.colorPalette;
-  //     let themePanelless = themePanels + "-panelless";
-  //     customThemeHasModeVariations = registeredThemes.indexOf(themePanels) !== -1 && registeredThemes.indexOf(themePanelless) !== -1;
-  //   }
-  //   this._setPGEditorPropertyValue(this.themeEditorSurvey.getQuestionByName("themeMode"), "readOnly", isCustomTheme && !customThemeHasModeVariations);
-  //   this._setPGEditorPropertyValue(this.themeEditorSurvey.getQuestionByName("colorPalette"), "readOnly", isCustomTheme && !customThemeHasPaletteVariations);
-
-  //   let canModify = !this.surveyProvider.readOnly;
-  //   const options = {
-  //     theme: this.currentTheme,
-  //     allow: canModify
-  //   };
-  //   this.onAllowModifyTheme.fire(this, options);
-  //   this.themeEditorSurvey.getAllQuestions().forEach(q => {
-  //     if (["themeName", "colorPalette", "themeMode"].indexOf(q.name) === -1) {
-  //       this._setPGEditorPropertyValue(q, "readOnly", !options.allow);
-  //     }
-  //   });
-
-  //   if (!!this.survey) {
-  //     let pageElements = this.survey.isSinglePage ? this.survey.pages[0].elements : this.survey.pages;
-  //     this._setPGEditorPropertyValue(this.themeEditorSurvey.getQuestionByName("pageTitle"), "readOnly", !pageElements.some(p => !!p.title));
-  //     this._setPGEditorPropertyValue(this.themeEditorSurvey.getQuestionByName("pageDescription"), "readOnly", !pageElements.some(p => !!p.description));
-  //   }
-  // }
 
   private initializeColorCalculator(cssVariables: { [index: string]: string }) {
     if (!cssVariables["--sjs-primary-backcolor"] ||
@@ -332,22 +253,6 @@ export class ThemeModel extends Base implements ITheme {
     this.themeCssVariablesChanges[name] = value;
     this.onThemePropertyChanged.fire(this, { name, value });
   }
-
-  // private loadThemeIntoPropertyGrid() {
-  //   this.blockChanges = true;
-  //   try {
-  //     this.themeEditorSurvey.clear(true);
-  //     this.themeEditorSurvey.mergeData(this.currentTheme.cssVariables);
-  //     this.themeEditorSurvey.setValue("themeName", this.themeName);
-  //     this.themeEditorSurvey.setValue("themeMode", this.themeMode);
-  //     this.themeEditorSurvey.setValue("colorPalette", this.colorPalette);
-  //     this.updatePropertyGridEditors(this.themeEditorSurvey);
-  //     this.updatePropertyGridEditorsAvailability();
-  //   }
-  //   finally {
-  //     this.blockChanges = false;
-  //   }
-  // }
 
   constructor() {
     super();
@@ -438,15 +343,12 @@ export class ThemeModel extends Base implements ITheme {
         backgroundOpacity: (this.backgroundOpacity / 100) || baseTheme.backgroundOpacity,
       };
       const effectiveHeader: IHeader = {} as any;
-      // assign(effectiveHeaderSettings, baseTheme.header || {}, this.currentTheme.header || {});
       if (Object.keys(effectiveHeader).length > 0) {
         effectiveTheme.header = effectiveHeader;
       }
       assign(effectiveTheme, theme, { cssVariables: effectiveThemeCssVariables, themeName: this.themeName, colorPalette: this.colorPalette, isPanelless: this.isPanelless });
-      // this.surveyProvider.theme = effectiveTheme;
 
       this.initializeColorCalculator(effectiveTheme.cssVariables);
-      // this.loadThemeIntoPropertyGrid();
       this.fromJSON(effectiveTheme);
     }
     finally {
@@ -463,12 +365,6 @@ export class ThemeModel extends Base implements ITheme {
   }
 
   public setTheme(theme: ITheme) {
-    // let probeThemeFullName = getThemeFullName(theme);
-    // const baseTheme = findSuitableTheme(theme.themeName, theme.colorPalette, theme.isPanelless, probeThemeFullName);
-    // const themeChanges = getThemeChanges(theme, baseTheme);
-    // if (themeChanges.themeName === theme.themeName && themeChanges.colorPalette === theme.colorPalette && themeChanges.isPanelless === theme.isPanelless) {
-    //   this.themeCssVariablesChanges = themeChanges.cssVariables || {};
-    // }
     const headerBackgroundColorValue = this.themeCssVariablesChanges["--sjs-header-backcolor"];
     this.themeCssVariablesChanges = {};
     if (headerBackgroundColorValue !== undefined) {
@@ -521,7 +417,6 @@ export class ThemeModel extends Base implements ITheme {
       this.undoRedoManager.onPropertyValueChanged(name, oldValue, newValue, sender, arrayChanges);
     }
 
-    // if (this.blockChanges) return;
     if (this.blockThemeChangedNotifications > 0) return;
     if (this !== sender) {
       const senderJSON = sender.toJSON();
@@ -554,10 +449,6 @@ export class ThemeModel extends Base implements ITheme {
     }
 
     this.cssVariablePropertiesChanged(name, newValue, sender.getPropertyByName(name));
-
-    // const newCssVariables = {};
-    // assign(newCssVariables, this.currentTheme.cssVariables, this.themeCssVariablesChanges);
-    // this.currentTheme.cssVariables = newCssVariables;
 
     this.blockThemeChangedNotifications -= 1;
     if (!!this.undoRedoManager && this.blockThemeChangedNotifications == 0) {

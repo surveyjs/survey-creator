@@ -51,9 +51,6 @@ export class PropertyGridEditorQuestionHeader extends PropertyGridEditor {
       el.state = undefined;
     });
   }
-  // onValueChanged(obj: Base, prop: JsonObjectProperty, question: Question): void {
-  //   debugger;
-  // }
 }
 
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestionHeader());
