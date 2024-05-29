@@ -56,6 +56,7 @@ export class SearchManagerToolbox extends SearchManagerBase {
   @property() toolbox: QuestionToolbox;
   public filterStringPlaceholder = getLocString("ed.toolboxFilteredTextPlaceholder");
   protected setFiterString(newValue: string) {
+    if (!!this.filterString != !!newValue) this.toolbox.lockScrollBar(!!newValue);
     this.toolbox.items.forEach(item => item.visible = item.hasText(newValue));
     this.toolbox.categories.forEach(category => category.forceExpand = !!newValue);
   }

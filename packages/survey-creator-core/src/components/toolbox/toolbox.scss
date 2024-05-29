@@ -113,6 +113,12 @@ _:future,
   }
 }
 
+.svc-toolbox--scrollable.svc-toolbox--scroll-locked {
+  .svc-toolbox__scroller {
+    overflow: scroll;
+  }
+}
+
 .svc-toolbox--searchable {
   .svc-toolbox__scroller {
     padding-top: 0;

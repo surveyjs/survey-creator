@@ -256,7 +256,10 @@ export class QuestionToolbox
       target.searchManager.isVisible = val;
     }
   }) searchEnabled: boolean;
-
+  @property() isScrollLocked: boolean;
+  public lockScrollBar(val: boolean) {
+    this.isScrollLocked = val && this._containerElementValue.scrollHeight > this._containerElementValue.clientHeight;
+  }
   public searchManager = new SearchManagerToolbox();
 
   constructor(
@@ -351,6 +354,7 @@ export class QuestionToolbox
       .append("svc-toolbox--searchable", this.searchEnabled)
       .append("svc-toolbox--filtering", !!this.searchManager.filterString)
       .append("svc-toolbox--compact", this.isCompactRendered)
+      .append("svc-toolbox--scroll-locked", this.isScrollLocked)
       .append("svc-toolbox--flyout", this.isCompact && this.isFocused)
       .append("svc-toolbox--scrollable", this.isResponsivenessDisabled).toString();
   }
