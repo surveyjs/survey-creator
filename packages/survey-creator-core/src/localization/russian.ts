@@ -1113,14 +1113,14 @@ export var ruStrings = {
     },
     backgroundImageFit: {
       auto: "Авто",
-      cover: "Крышка",
-      contain: "Содержать",
-      fill: "Натягивать",
-      tile: "Кафель"
+      cover: "Заполнение",
+      contain: "По размеру",
+      fill: "Растянуть",
+      tile: "Замостить",
     },
     backgroundImageAttachment: {
-      fixed: "Неподвижный",
-      scroll: "Свиток"
+      fixed: "Зафиксировать",
+      scroll: "Прокручивать",
     },
     headerView: {
       basic: "Основной",
