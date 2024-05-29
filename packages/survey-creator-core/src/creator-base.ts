@@ -42,7 +42,7 @@ import { PageAdorner } from "./components/page";
 import {
   ElementDeletingEvent, PropertyGetReadOnlyEvent, ElementGetDisplayNameEvent, HtmlToMarkdownEvent, ElementAllowOperationsEvent,
   ElementGetActionsEvent, PropertyAddingEvent, PropertyGridSurveyCreatedEvent, PropertyEditorCreatedEvent, PropertyEditorUpdateTitleActionsEvent,
-  PropertyGridShowPopupEvent, CollectionItemAllowOperationsEvent, CollectionItemAddedEvent, MatrixColumnAddedEvent, ConfigureTablePropertyEditorEvent,
+  PropertyGridShowPopupEvent, CollectionItemAllowOperationsEvent, CollectionItemAddedEvent, FastEntryItemsEvent as FastEntryFinishedEvent, MatrixColumnAddedEvent, ConfigureTablePropertyEditorEvent,
   PropertyDisplayCustomErrorEvent, PropertyValueChangingEvent, PropertyValueChangedEvent, ConditionGetQuestionListEvent, GetConditionOperatorEvent,
   LogicRuleGetDisplayTextEvent, ModifiedEvent, QuestionAddedEvent, PanelAddedEvent, PageAddedEvent,
   PageGetFooterActionsEvent, SurveyInstanceCreatedEvent, DesignerSurveyCreatedEvent, PreviewSurveyCreatedEvent, NotifyEvent, ElementFocusingEvent,
@@ -354,14 +354,25 @@ export class SurveyCreatorModel extends Base
 
   protected plugins: { [name: string]: ICreatorPlugin } = {};
 
+  /**
+   * Adds a custom tab to Survey Creator.
+   * 
+   * [View Demo](https://surveyjs.io/survey-creator/examples/modify-tab-bar/ (linkStyle))
+   * @param name A unique tab ID. 
+   * @param plugin An object that allows you to handle user interactions with the tab.
+   * @param title A tab caption. If `title` is undefined, the `name` argument value is displayed instead. To localize the caption, add its translations to the `ed` object within [localization dictionaries](https://github.com/surveyjs/survey-creator/tree/master/packages/survey-creator-core/src/localization) and pass `ed.propertyName` as the `title` argument.
+   * @param componentName The name of the component that renders tab markup. Default value: `"svc-tab-" + name`.
+   * @param index A zero-based index that specifies the tab's position relative to other tabs.
+   */
   public addPluginTab(
     name: string,
     plugin: ICreatorPlugin,
     title?: string,
-    componentContent?: string,
+    componentName?: string,
     index?: number
   ) {
-    const locStrName = !title ? "ed." + name : (title.indexOf("ed.") == 0 ? title : "");
+    const tabName = name === "test" ? "preview" : name;
+    const locStrName = !title ? "tabs." + tabName : (title.indexOf("ed.") == 0 ? title : "");
     if (!!locStrName) {
       title = undefined;
     }
@@ -369,7 +380,7 @@ export class SurveyCreatorModel extends Base
       id: name,
       locTitleName: locStrName,
       title: title,
-      componentContent: componentContent ? componentContent : "svc-tab-" + name,
+      componentContent: componentName ? componentName : "svc-tab-" + name,
       data: plugin,
       action: () => { this.makeNewViewActive(name); },
       active: this.viewType === name,
@@ -455,7 +466,7 @@ export class SurveyCreatorModel extends Base
    * [View Demo](https://surveyjs.io/survey-creator/examples/hide-category-from-property-grid/ (linkStyle))
    */
   public onShowingProperty: EventBase<SurveyCreatorModel, PropertyAddingEvent> = this.addCreatorEvent<SurveyCreatorModel, PropertyAddingEvent>();
-  public onCanShowProperty: EventBase<SurveyCreatorModel, PropertyAddingEvent> = this.onShowingProperty;
+  public onCanShowProperty: EventBase<SurveyCreatorModel, any> = this.onShowingProperty;
   /**
    * This event is obsolete. Use the [`onSurveyInstanceCreated`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onSurveyInstanceCreated) event instead.
    * @deprecated
@@ -488,9 +499,16 @@ export class SurveyCreatorModel extends Base
    * For information on event handler parameters, refer to descriptions within the interface.
    * 
    * > This event is not raised when users add a new column to a [Multi-Select Matrix](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-with-dropdown-list) or [Dynamic Matrix](https://surveyjs.io/form-library/documentation/api-reference/dynamic-matrix-table-question-model). For these cases, handle the [`onMatrixColumnAdded`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onMatrixColumnAdded) event instead.
+   * @see onFastEntryFinished
    * @see onCollectionItemAllowOperations
    */
   public onItemValueAdded: EventBase<SurveyCreatorModel, CollectionItemAddedEvent> = this.addCreatorEvent<SurveyCreatorModel, CollectionItemAddedEvent>();
+  /**
+   * An event that is raised when users finish editing collection items (choices, rows, columns) in a pop-up window.
+   * 
+   * Survey authors can specify collection items using a table UI in Property Grid (see the [`onItemValueAdded`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onItemValueAdded) event) or a multi-line text editor in a pop-up window. Each line in the editor specifies the value and display text of one collection item in the following format: `value|text`. Use the `onFastEntryFinished` event to process the entered text lines as required.
+   */
+  public onFastEntryFinished: EventBase<SurveyCreatorModel, FastEntryFinishedEvent> = this.addCreatorEvent<SurveyCreatorModel, FastEntryFinishedEvent>();
   /**
    * An event that is raised when users add a new column to a [Multi-Select Matrix](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-with-dropdown-list) or [Dynamic Matrix](https://surveyjs.io/form-library/documentation/api-reference/dynamic-matrix-table-question-model). Use this event to modify this column.
    * 
@@ -1564,10 +1582,14 @@ export class SurveyCreatorModel extends Base
     property: JsonObjectProperty,
     readOnly: boolean,
     parentObj: Base,
-    parentProperty: JsonObjectProperty
+    parentProperty: JsonObjectProperty,
+    creatorReadOnly?: boolean
   ): boolean {
     if (!property) return false;
-    const proposedValue = this.readOnly || readOnly;
+    if (creatorReadOnly === undefined) {
+      creatorReadOnly = this.readOnly;
+    }
+    const proposedValue = creatorReadOnly || readOnly;
     if (this.onGetPropertyReadOnly.isEmpty) return proposedValue;
     const options = {
       obj: obj,
@@ -2562,7 +2584,7 @@ export class SurveyCreatorModel extends Base
 
   //#region Obsolete designerPropertyGrid
   protected get designerPropertyGrid(): PropertyGridModel {
-    const propertyGridTab = this.sidebar.getTabById("propertyGrid");
+    const propertyGridTab = this.sidebar.getTabById(this.sidebar.activeTab);
     if (!propertyGridTab) return null;
     return propertyGridTab.model ? (propertyGridTab.model.propertyGridModel as any as PropertyGridModel) : null;
   }
@@ -2571,7 +2593,7 @@ export class SurveyCreatorModel extends Base
   }
   /**
    * Collapses a specified category in Property Grid.
-   * @param name A [category name](https://surveyjs.io/survey-creator/documentation/property-grid-customization#category).
+   * @param name A [category name](https://surveyjs.io/form-library/documentation/customize-question-types/add-custom-properties-to-a-form#category).
    * @see expandPropertyGridCategory
    */
   public collapsePropertyGridCategory(name: string) {
@@ -2581,7 +2603,7 @@ export class SurveyCreatorModel extends Base
   }
   /**
    * Expands a specified category in Property Grid.
-   * @param name A [category name](https://surveyjs.io/survey-creator/documentation/property-grid-customization#category).
+   * @param name A [category name](https://surveyjs.io/form-library/documentation/customize-question-types/add-custom-properties-to-a-form#category).
    * @see collapsePropertyGridCategory
    */
   public expandPropertyGridCategory(name: string) {
@@ -2657,7 +2679,7 @@ export class SurveyCreatorModel extends Base
     }
     return "";
   }
-  private expandCategoryIfNeeded(): void {
+  public expandCategoryIfNeeded(): void {
     const expandedTabName = settings.propertyGrid.defaultExpandedTabName;
     if (!!expandedTabName && !this.getPropertyGridExpandedCategory() && !this.survey.isEmpty) {
       const panel = <PanelModel>this.designerPropertyGrid.survey.getPanelByName(expandedTabName);
@@ -3041,7 +3063,7 @@ export class SurveyCreatorModel extends Base
     propertyName: string,
     itemValue: ItemValue,
     itemValues: Array<ItemValue>
-  ) {
+  ): void {
     var options = {
       obj: obj,
       propertyName: propertyName,
@@ -3049,6 +3071,14 @@ export class SurveyCreatorModel extends Base
       itemValues: itemValues
     };
     this.onItemValueAdded.fire(this, options);
+  }
+  onFastEntryCallback(items: Array<ItemValue>, lines: Array<string>): Array<ItemValue> {
+    const options = {
+      items: items,
+      lines: lines
+    };
+    this.onFastEntryFinished.fire(this, options);
+    return options.items;
   }
   onMatrixDropdownColumnAddedCallback(
     matrix: Question,

@@ -16,6 +16,15 @@ export var arStrings = {
     convertTo: "تحويل إلى",
     drag: "إسحب العنصر",
   },
+  // Creator tabs
+  tabs: {
+    preview: "تجربة الإستبيان",
+    theme: "المواضيع",
+    translation: "Translation",
+    designer: "تصميم الإستبيان",
+    editor: "JSON Editor",
+    logic: "منطق الإستبيان"
+  },
   // Question types
   qt: {
     default: "الإفتراضي",
@@ -41,6 +50,14 @@ export var arStrings = {
     expression: "عملية حسابية (للقرائة فقط)",
     signaturepad: "لوحة توقيع",
     buttongroup: "Button group"
+  },
+  toolboxCategories: {
+    general: "قائمة العام",
+    choice: "أسئلة الاختيار",
+    text: "أسئلة إدخال النص",
+    containers: "حاويات",
+    matrix: "أسئلة المصفوفة",
+    misc: "متفرقات"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -73,23 +90,16 @@ export var arStrings = {
     newQuestionName: "السؤال",
     newPanelName: "اللوحة",
     newTextItemName: "text",
-    testSurvey: "تجربة الإستبيان",
-    themeSurvey: "المواضيع",
     defaultV2Theme: "افتراضي",
     modernTheme: "حديث",
     defaultTheme: "الافتراضي (القديم)",
     testSurveyAgain: "Test Survey Again",
     testSurveyWidth: "Survey width: ",
     navigateToMsg: "You had to navigate to:",
-    logic: "منطق الإستبيان",
-    embedSurvey: "Embed Survey",
-    translation: "Translation",
     saveSurvey: "Save Survey",
     saveSurveyTooltip: "Save Survey",
     saveTheme: "حفظ السمة",
     saveThemeTooltip: "حفظ السمة",
-    designer: "تصميم الإستبيان",
-    jsonEditor: "JSON Editor",
     jsonHideErrors: "Hide errors",
     jsonShowErrors: "Show errors",
     undo: "Undo",
@@ -111,12 +121,6 @@ export var arStrings = {
     "property-grid": "Properties",
     propertyGridFilteredTextPlaceholder: "Type to search...",
     propertyGridNoResultsFound: "لم يتم العثور على نتائج",
-    toolboxGeneralCategory: "قائمة العام",
-    toolboxChoiceCategory: "أسئلة الاختيار",
-    toolboxTextCategory: "أسئلة إدخال النص",
-    toolboxContainersCategory: "حاويات",
-    toolboxMatrixCategory: "أسئلة المصفوفة",
-    toolboxMiscCategory: "متفرقات",
     correctJSON: "Please correct JSON.",
     surveyResults: "Survey Results ",
     surveyResultsTable: "As Table",
@@ -170,6 +174,10 @@ export var arStrings = {
     surveyPlaceHolder: "الاستطلاع فارغ. اسحب عنصرا من صندوق الأدوات أو انقر فوق الزر أدناه.",
     pagePlaceHolder: "الصفحة فارغة. اسحب عنصرا من صندوق الأدوات أو انقر فوق الزر أدناه.",
     imagePlaceHolder: "قم بسحب وإسقاط صورة هنا أو انقر فوق الزر أدناه واختر صورة لتحميلها",
+    surveyPlaceHolderMobile: "انقر فوق الزر \"إضافة سؤال\" أدناه لبدء إنشاء النموذج الخاص بك.",
+    pagePlaceHolderMobile: "انقر فوق الزر \"إضافة سؤال\" أدناه لإضافة عنصر جديد إلى الصفحة.",
+    panelPlaceHolderMobile: "انقر فوق الزر \"إضافة سؤال\" أدناه لإضافة عنصر جديد إلى اللوحة.",
+    imagePlaceHolderMobile: "انقر فوق الزر أدناه واختر صورة لتحميلها",
     imageChooseImage: "اختر صورة",
     addNewTypeQuestion: "Add {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[الشعار]",
@@ -221,13 +229,13 @@ export var arStrings = {
       question_visibilityText: "جعل السؤال {0} مرئي", //{0} question name
       question_enableText: "جعل السؤال {0} مفعل", //{0} question name
       question_requireText: "جعل السؤال {0} إلزامي", //{0} question name
-      question_resetValueText: "إعادة تعيين قيمة السؤال: {0}",
+      question_resetValueText: "إعادة تعيين قيمة السؤال: {0}", //{0} question name.
       question_setValueText: "تعيين قيمة: {1} السؤال: {0}",
       column_visibilityText: "جعل العمود {0} السؤال {1} مرئيا", //{0} column name, {1} question name
       column_enableText: "تمكين {0} عمود السؤال {1}", //{0} column name, {1} question name
       column_requireText: "جعل العمود {0} السؤال {1} مطلوبا", //{0} column name, {1} question name
-      column_resetValueText: "إعادة تعيين قيمة الخلية للعمود: {0}",
-      column_setValueText: "تعيين قيمة الخلية: {1} إلى العمود: {0}",
+      column_resetValueText: "إعادة تعيين قيمة الخلية للعمود: {0}", //{0} column name
+      column_setValueText: "تعيين قيمة الخلية: {1} إلى العمود: {0}", //{0} column name and {1} setValueExpression
       setValueExpressionPlaceholder: " تعبير سيتم تعيين نتيجته للسؤال الهدف.",
       trigger_completeText: "الإستبيان سيصبح مكتمل",
       trigger_setvalueText: "تثبيت إلى السؤال: {0} القيمة {1}", //{0} question name, {1} setValue
@@ -745,6 +753,7 @@ export var arStrings = {
       top: "في الأعلى",
       bottom: "في الأسفل"
     },
+    // Creator tabs
     tabs: {
       panel: {
         layout: "تخطيط اللوحة"
@@ -788,6 +797,9 @@ export var arStrings = {
       slider: "Slider",
       expression: "تعبير",
       questionSettings: "إعدادات السؤال",
+      header: "راس",
+      background: "خلفية",
+      appearance: "مظهر",
       others: "غير ذلك"
     },
     editProperty: "Edit property '{0}'",
@@ -840,7 +852,49 @@ export var arStrings = {
     minWidth_placeholder: "مثال: 600px",
     maxWidth_placeholder: "مثال: 50٪",
     imageHeight_placeholder: "تلقائي",
-    imageWidth_placeholder: "تلقائي"
+    imageWidth_placeholder: "تلقائي",
+    theme: {
+      themeName: "موضوع",
+      isPanelless: "مظهر السؤال",
+      editorPanel: "الخلفية ونصف قطر الزاوية",
+      questionPanel: "الخلفية ونصف قطر الزاوية",
+      primaryColor: "لون التمييز",
+      panelBackgroundTransparency: "عتامة خلفية اللوحة",
+      questionBackgroundTransparency: "عتامة خلفية السؤال",
+      fontSize: "حجم الخط",
+      scale: "مِيزَان",
+      cornerRadius: "نصف قطر الزاوية",
+      pageTitle: "خط العنوان",
+      pageDescription: "خط الوصف",
+      questionTitle: "خط العنوان",
+      questionDescription: "خط الوصف",
+      editorFont: "الخط",
+      backgroundOpacity: "العتامه",
+      "--sjs-font-family": "عائلة الخط",
+      "--sjs-general-backcolor-dim": "لون الخلفية",
+      "--sjs-primary-backcolor": "خلفية لهجة",
+      "--sjs-primary-forecolor": "لهجة الصدارة",
+      "--sjs-shadow-small": "تأثيرات الظل",
+      "--sjs-shadow-inner": "تأثيرات الظل",
+      "--sjs-border-default": "الوان"
+    },
+    "header@header": {
+      headerView: "منظر",
+      logoPosition: "موضع الشعار",
+      surveyTitle: "خط عنوان الاستطلاع",
+      surveyDescription: "خط وصف الاستطلاع",
+      headerTitle: "خط عنوان الاستطلاع",
+      headerDescription: "خط وصف الاستطلاع",
+      inheritWidthFrom: "عرض منطقة المحتوى",
+      textAreaWidth: "عرض النص",
+      backgroundColorSwitch: "لون الخلفية",
+      backgroundImage: "صورة الخلفية",
+      backgroundImageOpacity: "العتامه",
+      overlapEnabled: "التداخل",
+      logoPositionX: "موضع الشعار",
+      titlePositionX: "موضع العنوان",
+      descriptionPositionX: "موقف الوصف"
+    }
   },
   // Property values
   pv: {
@@ -1056,6 +1110,38 @@ export var arStrings = {
     searchMode: {
       contains: "يحتوي",
       startsWith: "يبدأ ب"
+    },
+    backgroundImageFit: {
+      auto: "تلقائي",
+      cover: "غطاء",
+      contain: "احتوى",
+      fill: "مد",
+      tile: "بلاط"
+    },
+    backgroundImageAttachment: {
+      fixed: "ثابت",
+      scroll: "طومار"
+    },
+    headerView: {
+      basic: "أساسي",
+      advanced: "متقدم"
+    },
+    inheritWidthFrom: {
+      survey: "نفس المسح",
+      container: "يصلح للحاوية"
+    },
+    backgroundColorSwitch: {
+      none: "اي",
+      accentColor: "لون التمييز",
+      custom: "تقليد"
+    },
+    colorPalette: {
+      light: "ضوء",
+      dark: "داكن"
+    },
+    isPanelless: {
+      "false": "افتراضي",
+      "true": "بدون لوحات"
     }
   },
   // Operators
@@ -1463,101 +1549,40 @@ export var arStrings = {
     copyDisplayValue: "نسخ قيمة العرض"
   },
   theme: {
-    "--background": "لون الخلفية",
-    "--background-dim-light": "خلفية لون فاتح قاتم",
-    "--primary-foreground": "لون المقدمة الأساسي",
-    "--foreground": "لون المقدمة",
-    "--base-unit": "وحدة القاعدة",
     advancedMode: "الوضع المتقدم",
-    groupGeneral: "عام",
-    groupHeader: "راس",
-    groupBackground: "خلفية",
-    groupAppearance: "مظهر",
-    themeName: "موضوع",
-    themeMode: "مظهر السؤال",
-    themeModePanels: "افتراضي",
-    themeModeLightweight: "بدون لوحات",
-    themePaletteLight: "ضوء",
-    themePaletteDark: "داكن",
-    primaryColor: "لون التمييز",
+    pageTitle: "خط عنوان الصفحة",
+    questionTitle: "خط عنوان السؤال",
+    editorPanel: "عنصر الإدخال",
+    lines: "اسطر",
     primaryDefaultColor: "افتراضي",
     primaryDarkColor: "حم",
     primaryLightColor: "المحدد",
-    coverTitleForecolor: "اللون الأمامي للعنوان",
-    coverDescriptionForecolor: "وصف التلوين الأمامي",
-    coverOverlapEnabled: "التداخل",
     backgroundDimColor: "لون الخلفية",
-    backgroundImage: "صورة الخلفية",
-    backgroundImageFitAuto: "تلقائي",
-    backgroundImageFitCover: "غطاء",
-    backgroundImageFitContain: "احتوى",
-    backgroundImageFitFill: "مد",
-    backgroundImageFitTile: "بلاط",
-    backgroundOpacity: "العتامه",
-    backgroundImageAttachmentFixed: "ثابت",
-    backgroundImageAttachmentScroll: "طومار",
-    panelBackgroundTransparency: "عتامة خلفية اللوحة",
-    questionBackgroundTransparency: "عتامة خلفية السؤال",
-    questionTitle: "خط عنوان السؤال",
-    editorPanel: "عنصر الإدخال",
-    backgroundCornerRadius: "الخلفية ونصف قطر الزاوية",
+    cornerRadius: "نصف قطر الزاوية",
     backcolor: "الخلفية الافتراضية",
     hovercolor: "خلفية التحويم",
     borderDecoration: "زخرفة الحدود",
-    accentBackground: "خلفية لهجة",
-    accentForeground: "لهجة الصدارة",
     primaryForecolor: "اللون الافتراضي",
     primaryForecolorLight: "لون معطل",
-    colorsTitle: "الوان",
     font: "الخط",
-    lines: "اسطر",
     borderDefault: "اظلم",
     borderLight: "أخف",
     fontFamily: "عائلة الخط",
-    fontSize: "حجم الخط",
-    color: "لون",
-    placeholderColor: "لون العنصر النائب",
-    size: "حجم",
     fontWeightRegular: "منتظم",
     fontWeightHeavy: "ثقيل",
     fontWeightSemiBold: "شبه غامق",
     fontWeightBold: "جريء",
-    scale: "مِيزَان",
-    cornerRadius: "نصف قطر الزاوية",
-    surveyTitle: "خط عنوان الاستطلاع",
-    surveyDescription: "خط وصف الاستطلاع",
-    pageTitle: "خط عنوان الصفحة",
-    titleFont: "خط العنوان",
-    descriptionFont: "خط الوصف",
+    color: "لون",
+    placeholderColor: "لون العنصر النائب",
+    size: "حجم",
+    opacity: "العتامه",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "إضافة تأثير الظل",
-    opacity: "العتامه",
     boxShadowBlur: "طمس",
     boxShadowSpread: "انتشار",
     boxShadowDrop: "قطرة",
     boxShadowInner: "باطن",
-    shadow: "تأثيرات الظل",
-    headerView: "منظر",
-    headerViewBasic: "أساسي",
-    headerViewAdvanced: "متقدم",
-    coverInheritWidthFrom: "عرض منطقة المحتوى",
-    coverInheritWidthFromSurvey: "نفس المسح",
-    coverInheritWidthFromContainer: "يصلح للحاوية",
-    coverTextAreaWidth: "عرض النص",
-    coverBackgroundColorSwitch: "لون الخلفية",
-    coverBackgroundColorNone: "اي",
-    coverBackgroundColorAccentColor: "لون التمييز",
-    coverBackgroundColorCustom: "تقليد",
-    horizontalAlignmentLeft: "يسار",
-    horizontalAlignmentCenter: "مركز",
-    horizontalAlignmentRight: "يمين",
-    verticalAlignmentTop: "أعلى",
-    verticalAlignmentMiddle: "وسط",
-    verticalAlignmentBottom: "قاع",
-    logoPosition: "موضع الشعار",
-    coverTitlePosition: "موضع العنوان",
-    coverDescriptionPosition: "موقف الوصف",
     names: {
       default: "افتراضي",
       sharp: "حاد",
@@ -1899,12 +1924,11 @@ editorLocalization.locales["ar"] = arStrings;
 // theme.--primary-foreground: "Primary foreground color" => "لون المقدمة الأساسي"
 // theme.--foreground: "Foreground color" => "لون المقدمة"
 // theme.--base-unit: "Base unit" => "وحدة القاعدة"
-// theme.groupGeneral: "General" => "عام"
 // theme.groupAdvanced: "Advanced" => "متقدم"
 // theme.themeName: "Theme" => "موضوع"
-// theme.themeMode: "Question appearance" => "مظهر السؤال"
-// theme.themeModePanels: "Default" => "افتراضي"
-// theme.themeModeLightweight: "Without Panels" => "بدون لوحات"
+// theme.isPanellessss: "Question appearance" => "مظهر السؤال"
+// theme.isPanellessPanels: "Default" => "افتراضي"
+// theme.isPanellessLightweight: "Without Panels" => "بدون لوحات"
 // theme.themePaletteLight: "Light" => "ضوء"
 // theme.themePaletteDark: "Dark" => "داكن"
 // theme.primaryColor: "Accent color" => "لون التمييز"
@@ -1946,7 +1970,7 @@ editorLocalization.locales["ar"] = arStrings;
 // theme.fontWeightBold: "Bold" => "جريء"
 // theme.scale: "Scale" => "مِيزَان"
 // theme.cornerRadius: "Corner radius" => "نصف قطر الزاوية"
-// theme.surveyTitle: "Survey title font" => "خط عنوان الاستطلاع"
+// theme.surveyTitleFont: "Survey title font" => "خط عنوان الاستطلاع"
 // theme.pageTitle: "Page title font" => "خط عنوان الصفحة"
 // theme.pageDescription: "Page description font" => "خط وصف الصفحة"
 // theme.boxShadowX: "X" => "X"
@@ -2008,22 +2032,20 @@ editorLocalization.locales["ar"] = arStrings;
 // survey.title: "Title" => "عنوان"
 // page.title: "Title" => "عنوان"
 // p.setValueIf: "Set value if" => "تعيين قيمة إذا"
-// theme.groupHeader: "Header" => "راس"
-// theme.coverTitleForecolor: "Title forecolor" => "اللون الأمامي للعنوان"
-// theme.coverOverlapEnabled: "Overlap" => "التداخل"
+// theme.header: "Header" => "راس"
 // theme.backgroundImageFitFill: "Stretch" => "مد"
 // theme.backgroundImageFitTile: "Tile" => "بلاط"
 // theme.headerView: "View" => "منظر"
 // theme.headerViewBasic: "Basic" => "أساسي"
 // theme.headerViewAdvanced: "Advanced" => "متقدم"
-// theme.coverInheritWidthFrom: "Content area width" => "عرض منطقة المحتوى"
-// theme.coverInheritWidthFromSurvey: "Same as survey" => "نفس المسح"
-// theme.coverInheritWidthFromPage: "Fit to page" => "ملائمة للصفحة"
-// theme.coverTextAreaWidth: "Text width" => "عرض النص"
-// theme.coverBackgroundColorSwitch: "Background color" => "لون الخلفية"
-// theme.coverBackgroundColorNone: "None" => "اي"
-// theme.coverBackgroundColorAccentColor: "Accent color" => "لون التمييز"
-// theme.coverBackgroundColorCustom: "Custom" => "تقليد"
+// theme.headerInheritWidthFrom: "Content area width" => "عرض منطقة المحتوى"
+// theme.headerInheritWidthFromSurvey: "Same as survey" => "نفس المسح"
+// theme.headerInheritWidthFromPage: "Fit to page" => "ملائمة للصفحة"
+// theme.headerTextAreaWidth: "Text width" => "عرض النص"
+// theme.headerBackgroundColorSwitch: "Background color" => "لون الخلفية"
+// theme.headerBackgroundColorNone: "None" => "اي"
+// theme.headerBackgroundColorAccentColor: "Accent color" => "لون التمييز"
+// theme.headerBackgroundColorCustom: "Custom" => "تقليد"
 // theme.horizontalAlignmentLeft: "Left" => "يسار"
 // theme.horizontalAlignmentCenter: "Center" => "مركز"
 // theme.horizontalAlignmentRight: "Right" => "يمين"
@@ -2043,18 +2065,15 @@ editorLocalization.locales["ar"] = arStrings;
 // pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "ينطبق عندما يكون \"نوع المصدر\" هو \"ملفات محلية\" أو عندما تكون الكاميرا غير متوفرة"
 // pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "ينطبق عندما يكون \"نوع المصدر\" هو \"الكاميرا\"."
 // pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "ينطبق عندما يكون \"نوع المصدر\" هو \"الملفات المحلية أو الكاميرا\"."
-// theme.groupBackground: "Background" => "خلفية"
-// theme.groupAppearance: "Appearance" => "مظهر"
-// theme.coverDescriptionForecolor: "Description forecolor" => "وصف التلوين الأمامي"
+// theme.background: "Background" => "خلفية"
+// theme.appearance: "Appearance" => "مظهر"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "هل تريد حقا إعادة تعيين السمة؟ ستفقد جميع تخصيصاتك."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "نعم ، إعادة تعيين السمة"
-// theme.groupBackground: "Background" => "خلفية"
-// theme.groupAppearance: "Appearance" => "مظهر"
-// theme.coverDescriptionForecolor: "Description forecolor" => "وصف التلوين الأمامي"
-// theme.coverInheritWidthFromContainer: "Fit to container" => "يصلح للحاوية"
+// theme.headerDescriptionForecolor: "Description forecolor" => "وصف التلوين الأمامي"
+// theme.headerInheritWidthFromContainer: "Fit to container" => "يصلح للحاوية"
 // signaturepad.showPlaceholder: "Show the placeholder" => "إظهار العنصر النائب"
 // signaturepad.placeholder: "Placeholder text" => "نص العنصر النائب"
-// theme.surveyDescription: "Survey description font" => "خط وصف الاستطلاع"
+// theme.surveyDescriptionFont: "Survey description font" => "خط وصف الاستطلاع"
 // ed.prevFocus: "Focus previous" => "التركيز السابق"
 // ed.nextFocus: "Focus next" => "التركيز التالي"
 // ed.saveTheme: "Save Theme" => "حفظ السمة"
@@ -2067,8 +2086,8 @@ editorLocalization.locales["ar"] = arStrings;
 // signaturepad.penMinWidth: "Minimum pen width" => "الحد الأدنى لعرض القلم"
 // signaturepad.penMaxWidth: "Maximum pen width" => "الحد الأقصى لعرض القلم"
 // theme.logoPosition: "Logo position" => "موضع الشعار"
-// theme.coverTitlePosition: "Title position" => "موضع العنوان"
-// theme.coverDescriptionPosition: "Description position" => "موقف الوصف"
+// theme.headerTitlePosition: "Title position" => "موضع العنوان"
+// theme.headerDescriptionPosition: "Description position" => "موقف الوصف"
 // ed.propertyGridNoResultsFound: "No results found" => "لم يتم العثور على نتائج"
 // pv.leftRight: "Left and right" => "اليسار واليمين"
 // p.sourceType: "Source type" => "نوع المصدر"
@@ -2458,3 +2477,82 @@ editorLocalization.locales["ar"] = arStrings;
 // ed.selectFile: "Select a file" => "حدد ملفا"
 // ed.removeFile: "Remove the file" => "إزالة الملف"
 // pe.searchMode: "Search Mode" => "وضع البحث"
+// ed.surveyPlaceHolderMobile: "Click the \"Add Question\" button below to start creating your form." => "انقر فوق الزر \"إضافة سؤال\" أدناه لبدء إنشاء النموذج الخاص بك."
+// ed.pagePlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the page." => "انقر فوق الزر \"إضافة سؤال\" أدناه لإضافة عنصر جديد إلى الصفحة."
+// ed.panelPlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the panel." => "انقر فوق الزر \"إضافة سؤال\" أدناه لإضافة عنصر جديد إلى اللوحة."
+// ed.imagePlaceHolderMobile: "Click the button below and choose an image to upload" => "انقر فوق الزر أدناه واختر صورة لتحميلها"
+// coloralpha.opacity: "Opacity" => "العتامه"
+// font.family: "Font family" => "عائلة الخط"
+// font.color: "Color" => "لون"
+// font.placeholderColor: "Placeholder color" => "لون العنصر النائب"
+// font.size: "Size" => "حجم"
+// theme.themeName: "Theme" => "موضوع"
+// theme.isPanelless: "Question appearance" => "مظهر السؤال"
+// theme.editorPanel: "Background and corner radius" => "الخلفية ونصف قطر الزاوية"
+// theme.questionPanel: "Background and corner radius" => "الخلفية ونصف قطر الزاوية"
+// theme.primaryColor: "Accent color" => "لون التمييز"
+// theme.panelBackgroundTransparency: "Panel background opacity" => "عتامة خلفية اللوحة"
+// theme.questionBackgroundTransparency: "Question background opacity" => "عتامة خلفية السؤال"
+// theme.fontSize: "Font size" => "حجم الخط"
+// theme.scale: "Scale" => "مِيزَان"
+// theme.cornerRadius: "Corner radius" => "نصف قطر الزاوية"
+// theme.pageTitle: "Title font" => "خط العنوان"
+// theme.pageDescription: "Description font" => "خط الوصف"
+// theme.questionTitle: "Title font" => "خط العنوان"
+// theme.questionDescription: "Description font" => "خط الوصف"
+// theme.editorFont: "Font" => "الخط"
+// theme.backgroundOpacity: "Opacity" => "العتامه"
+// theme.--sjs-font-family: "Font family" => "عائلة الخط"
+// theme.--sjs-general-backcolor-dim: "Background color" => "لون الخلفية"
+// theme.--sjs-primary-backcolor: "Accent background" => "خلفية لهجة"
+// theme.--sjs-primary-forecolor: "Accent foreground" => "لهجة الصدارة"
+// theme.--sjs-shadow-small: "Shadow effects" => "تأثيرات الظل"
+// theme.--sjs-shadow-inner: "Shadow effects" => "تأثيرات الظل"
+// theme.--sjs-border-default: "Colors" => "الوان"
+// header@header.headerView: "View" => "منظر"
+// header@header.logoPosition: "Logo position" => "موضع الشعار"
+// header@header.surveyTitle: "Survey title font" => "خط عنوان الاستطلاع"
+// header@header.surveyDescription: "Survey description font" => "خط وصف الاستطلاع"
+// header@header.headerTitle: "Survey title font" => "خط عنوان الاستطلاع"
+// header@header.headerDescription: "Survey description font" => "خط وصف الاستطلاع"
+// header@header.inheritWidthFrom: "Content area width" => "عرض منطقة المحتوى"
+// header@header.textAreaWidth: "Text width" => "عرض النص"
+// header@header.backgroundColorSwitch: "Background color" => "لون الخلفية"
+// header@header.backgroundImage: "Background image" => "صورة الخلفية"
+// header@header.backgroundImageOpacity: "Opacity" => "العتامه"
+// header@header.overlapEnabled: "Overlap" => "التداخل"
+// header@header.logoPositionX: "Logo position" => "موضع الشعار"
+// header@header.titlePositionX: "Title position" => "موضع العنوان"
+// header@header.descriptionPositionX: "Description position" => "موقف الوصف"
+// weight.400: "Regular" => "منتظم"
+// weight.600: "Heavy" => "ثقيل"
+// weight.700: "Semi-bold" => "شبه غامق"
+// weight.800: "Bold" => "جريء"
+// backgroundImageFit.auto: "Auto" => "تلقائي"
+// backgroundImageFit.cover: "Cover" => "غطاء"
+// backgroundImageFit.contain: "Contain" => "احتوى"
+// backgroundImageFit.fill: "Stretch" => "مد"
+// backgroundImageFit.tile: "Tile" => "بلاط"
+// backgroundImageAttachment.fixed: "Fixed" => "ثابت"
+// backgroundImageAttachment.scroll: "Scroll" => "طومار"
+// headerView.basic: "Basic" => "أساسي"
+// headerView.advanced: "Advanced" => "متقدم"
+// inheritWidthFrom.survey: "Same as survey" => "نفس المسح"
+// inheritWidthFrom.container: "Fit to container" => "يصلح للحاوية"
+// backgroundColorSwitch.none: "None" => "اي"
+// backgroundColorSwitch.accentColor: "Accent color" => "لون التمييز"
+// backgroundColorSwitch.custom: "Custom" => "تقليد"
+// colorPalette.light: "Light" => "ضوء"
+// colorPalette.dark: "Dark" => "داكن"
+// isPanelless.false: "Default" => "افتراضي"
+// isPanelless.true: "Without Panels" => "بدون لوحات"
+// theme.cornerRadius: "Corner radius" => "نصف قطر الزاوية"
+// theme.fontFamily: "Font family" => "عائلة الخط"
+// theme.fontWeightRegular: "Regular" => "منتظم"
+// theme.fontWeightHeavy: "Heavy" => "ثقيل"
+// theme.fontWeightSemiBold: "Semi-bold" => "شبه غامق"
+// theme.fontWeightBold: "Bold" => "جريء"
+// theme.color: "Color" => "لون"
+// theme.placeholderColor: "Placeholder color" => "لون العنصر النائب"
+// theme.size: "Size" => "حجم"
+// theme.opacity: "Opacity" => "العتامه"

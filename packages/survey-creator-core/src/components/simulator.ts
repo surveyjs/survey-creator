@@ -158,7 +158,18 @@ export class SurveySimulatorModel extends Base {
 }
 
 export var DEFAULT_MONITOR_DPI = (typeof window !== "undefined" ? window.devicePixelRatio : 1) * 96;
-export var simulatorDevices = {
+export var simulatorDevices: {
+  [index: string]: {
+    cssPixelRatio?: number,
+    ppi?: number,
+    width?: number,
+    height?: number,
+    deviceType: string,
+    title: string,
+    cssClass?: string,
+    visibleIndex?: number,
+  },
+} = {
   desktop: {
     deviceType: "desktop",
     title: "Desktop",

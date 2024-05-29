@@ -35,7 +35,7 @@ test("Set logo in designer, change it and check it in test tab", async (t) => {
   await t.expect(Selector(logoImage).exists).ok();
 
   const testTab = await ClientFunction(() => {
-    return window["creator"].getLocString("ed.testSurvey");
+    return window["creator"].getLocString("tabs.preview");
   })();
   await t
     .click(Selector(".svc-tabbed-menu-item").withText(testTab))

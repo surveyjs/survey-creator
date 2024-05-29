@@ -150,6 +150,32 @@ test("Allow remove for choices and generated choices", () => {
   expect(generatedItemAdorner.allowAdd).toBeFalsy();
   expect(generatedItemAdorner.allowRemove).toBeFalsy();
 });
+test("Allow remove for choices with value equals to 0, Bug#5500", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "dropdown", name: "q1", choices: [0, 1, 2] }]
+  };
+  const question = <QuestionCheckboxModel>creator.survey.getAllQuestions()[0];
+
+  const choiceItem1Adorner = new ItemValueWrapperViewModel(creator, question, question.choices[0]);
+  const choiceItem2Adorner = new ItemValueWrapperViewModel(creator, question, question.choices[1]);
+  const choiceItem3Adorner = new ItemValueWrapperViewModel(creator, question, question.choices[2]);
+  expect(choiceItem1Adorner.item.value).toBe(0);
+  expect(choiceItem1Adorner.isNew).toBeFalsy();
+  expect(choiceItem1Adorner.allowAdd).toBeFalsy();
+  expect(choiceItem1Adorner.allowRemove).toBeTruthy();
+
+  expect(choiceItem2Adorner.item.value).toBe(1);
+  expect(choiceItem2Adorner.isNew).toBeFalsy();
+  expect(choiceItem2Adorner.allowAdd).toBeFalsy();
+  expect(choiceItem2Adorner.allowRemove).toBeTruthy();
+
+  expect(choiceItem3Adorner.item.value).toBe(2);
+  expect(choiceItem3Adorner.isNew).toBeFalsy();
+  expect(choiceItem3Adorner.allowAdd).toBeFalsy();
+  expect(choiceItem3Adorner.allowRemove).toBeTruthy();
+
+});
 
 test("item value allowRemove on events", () => {
   const creator = new CreatorTester();
@@ -234,6 +260,7 @@ test("item value allowAdd on events", () => {
   expect(noneAdorner.allowAdd).toBeTruthy();
   expect(otherAdorner.allowAdd).toBeFalsy();
   expect(newAdorner.allowAdd).toBeFalsy();
+  expect(newAdorner.item.isVisible).toBeFalsy();
 });
 
 test("item value no pointer down on new or editable", (): any => {

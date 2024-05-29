@@ -168,13 +168,13 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
     return (<React.Fragment>
       <div className={this.model.designerCss} style={style}>
         {surveyHeader}
-        <SurveyNavigation survey={survey} location="top" />
+        {/* <SurveyNavigation survey={survey} location="top" /> */}
         {this.getRenderedPages()}
-        <SurveyNavigation
+        {/* <SurveyNavigation
           survey={survey}
           location="bottom"
           css={survey.css}
-        />
+        /> */}
       </div>
       {this.creator.showPageNavigator ?
         <div className="svc-tab-designer__page-navigator"><SurveyPageNavigator

@@ -158,9 +158,13 @@ export class SurveyQuestionProperties {
       return a.index < b.index ? -1 : a.index > b.index ? 1 : 0;
     });
     this.setParentTabs();
+    this.tabs.forEach(tab => {
+      tab.tabs?.sort((a, b) => a.index - b.index);
+    });
   }
   private setParentTabs(): void {
-    this.tabs.forEach(tab => {
+    for(let i = this.tabs.length - 1; i >= 0; i --) {
+      const tab = this.tabs[i];
       if (tab.parentName) {
         const parent = this.getTabByName(tab.parentName);
         if (parent) {
@@ -169,9 +173,10 @@ export class SurveyQuestionProperties {
             parent.tabs = [];
           }
           parent.tabs.push(tab);
+          this.tabs.splice(i, 1);
         }
       }
-    });
+    }
   }
   private addPropertyIntoTab(
     defProperty: any,

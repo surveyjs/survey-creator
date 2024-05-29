@@ -104,12 +104,7 @@ export class TabJsonEditorAcePlugin
   implements ICreatorPlugin {
   constructor(creator: SurveyCreatorModel) {
     super(creator);
-    creator.addPluginTab(
-      "editor",
-      this,
-      getLocString("ed.jsonEditor"),
-      "svc-tab-json-editor-ace"
-    );
+    creator.addPluginTab("editor", this, undefined, "svc-tab-json-editor-ace");
   }
   protected createModel(
     creator: SurveyCreatorModel

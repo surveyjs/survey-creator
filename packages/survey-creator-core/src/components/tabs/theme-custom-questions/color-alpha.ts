@@ -20,14 +20,14 @@ function getElementsJSON() {
     }
   ];
 }
-if(!ComponentCollection.Instance.getCustomQuestionByName("colorsettings")) {
+if (!ComponentCollection.Instance.getCustomQuestionByName("coloralpha")) {
   ComponentCollection.Instance.add({
-    name: "colorsettings",
+    name: "coloralpha",
     showInToolbox: false,
     internal: true,
     elementsJSON: getElementsJSON(),
     onInit() {
-      Serializer.addProperties("colorsettings", [{
+      Serializer.addProperties("coloralpha", [{
         name: "choices:itemvalue[]",
         visible: false
       },
@@ -67,8 +67,8 @@ if(!ComponentCollection.Instance.getCustomQuestionByName("colorsettings")) {
     }
   });
 }
-export function updateColorSettingsJSON() {
-  const config = ComponentCollection.Instance.getCustomQuestionByName("colorsettings");
+export function updatecoloralphaJSON() {
+  const config = ComponentCollection.Instance.getCustomQuestionByName("coloralpha");
   config.json.elementsJSON = getElementsJSON();
 }
 

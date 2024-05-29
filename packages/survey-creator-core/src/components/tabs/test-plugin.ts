@@ -76,7 +76,7 @@ export class TabTestPlugin implements ICreatorPlugin {
   }
 
   constructor(private creator: SurveyCreatorModel) {
-    creator.addPluginTab("test", this, "ed.testSurvey");
+    creator.addPluginTab("test", this);
     this.setPreviewTheme(this.creator.themeForPreview);
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
   }
@@ -145,7 +145,7 @@ export class TabTestPlugin implements ICreatorPlugin {
     if (this.creator.showSimulatorInTestSurveyTab) {
       const deviceSelectorItems = Object.keys(simulatorDevices)
         .filter((key) => !!simulatorDevices[key].title)
-        .map((key) => ({ id: key, title: simulatorDevices[key].title }));
+        .map((key) => ({ id: key, title: simulatorDevices[key].title, visibleIndex: simulatorDevices[key].visibleIndex ?? Number.MAX_VALUE }));
       this.deviceSelectorAction = createDropdownActionModel({
         id: "deviceSelector",
         iconName: "icon-device-desktop",
@@ -281,7 +281,7 @@ export class TabTestPlugin implements ICreatorPlugin {
       iconName: "icon-preview",
       active: true,
       visible: this.createVisibleUpdater(),
-      locTitleName: "ed.testSurvey",
+      locTitleName: "tabs.preview",
       showTitle: false,
       action: () => { }
     });

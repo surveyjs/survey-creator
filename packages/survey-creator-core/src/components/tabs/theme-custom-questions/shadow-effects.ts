@@ -40,7 +40,7 @@ function getQuestionJSON() {
         "titleLocation": "left"
       },
       {
-        "type": "colorsettings",
+        "type": "coloralpha",
         "name": "color",
         "titleLocation": "hidden"
       },
@@ -48,36 +48,42 @@ function getQuestionJSON() {
         "type": "buttongroup",
         "name": "isInset",
         "titleLocation": "hidden",
-        "choices": [{ text: getLocString("theme.boxShadowDrop"), value: false }, { text: getLocString("theme.boxShadowInner"), value: true }]
+        "choices": [
+          { text: getLocString("theme.boxShadowDrop"), value: false },
+          { text: getLocString("theme.boxShadowInner"), value: true }
+        ]
       }
     ]
   };
 }
 
-if(!ComponentCollection.Instance.getCustomQuestionByName("boxshadowsettings")) {
+if (!ComponentCollection.Instance.getCustomQuestionByName("shadoweffects")) {
   ComponentCollection.Instance.add({
-    name: "boxshadowsettings",
+    name: "shadoweffects",
     showInToolbox: false,
     internal: true,
     questionJSON: getQuestionJSON(),
     onCreated(question: QuestionCustomModel) {
-      question.valueFromDataCallback = (value: string | Array<Object>): Array<Object> => typeof value == "string" ? parseBoxShadow(value) : value;
+      question.valueFromDataCallback = (value: string | Array<Object>): Array<Object> => {
+        if (typeof value == "undefined") return [{}];
+        return typeof value == "string" ? parseBoxShadow(value) : value;
+      };
       question.valueToDataCallback = (value: string | Array<Object>): string => !!value ? (typeof value == "string" ? value : createBoxShadow(Array.isArray(value) ? value : [value])) : "";
       (<QuestionPanelDynamicModel>question.contentQuestion).panels.forEach(p => p.questions.forEach(q => q.allowRootStyle = false));
     },
   });
 }
 
-export function updateBoxShadowSettingsJSON() {
-  const config = ComponentCollection.Instance.getCustomQuestionByName("boxshadowsettings");
+export function updateShadowEffectsJSON() {
+  const config = ComponentCollection.Instance.getCustomQuestionByName("shadoweffects");
   config.json.questionJSON = getQuestionJSON();
 }
 
 export function createBoxShadow(value: Array<any>): string {
-  if(!Array.isArray(value)) return undefined;
+  if (!Array.isArray(value)) return undefined;
   let hasValue = false;
-  value.forEach(val => { for(let key in val) { hasValue = true; } });
-  if(!hasValue) return undefined;
+  value.forEach(val => { for (let key in val) { hasValue = true; } });
+  if (!hasValue) return undefined;
   return value.map((val => `${val.isInset == true ? "inset " : ""}${val.x ?? 0}px ${val.y ?? 0}px ${val.blur ?? 0}px ${val.spread ?? 0}px ${val.color ?? "#000000"}`
   )).join(", ");
 }
@@ -95,7 +101,7 @@ export function createBoxShadowReset(value: string): string {
   return createBoxShadow(resetValue);
 }
 
-export function parseBoxShadow(value: string): Array<Object> {
+export function parseBoxShadow(value: string = ""): Array<Object> {
   return value.split(/,(?![^(]*\))/).map(value => {
     const color = value.match(/#[a-zA-Z0-9]+|rgba?\(.*?\)/);
     const isInset = value.indexOf("inset") > -1;

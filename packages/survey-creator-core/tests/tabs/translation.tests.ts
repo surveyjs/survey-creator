@@ -1103,7 +1103,7 @@ test("init placeholders for dialects", () => {
         "name": "question1",
         "title": {
           "default": "Question 1",
-          "en-uk": "Question uk",
+          "en-GB": "Question GB",
           "pt": "Question pt",
           "pt-br": "Question br",
         }
@@ -1134,7 +1134,7 @@ test("init placeholders for dialects", () => {
   expect(cellQuestion1.placeholder).toEqual("question1");
   expect(cellQuestion1.value).toEqual("Question 1");
   expect(cellQuestion2.placeholder).toEqual("Question 1");
-  expect(cellQuestion2.value).toEqual("Question uk");
+  expect(cellQuestion2.value).toEqual("Question GB");
   expect(cellQuestion3.placeholder).toEqual("Question 1");
   expect(cellQuestion3.value).toEqual("Question pt");
   expect(cellQuestion4.placeholder).toEqual("Question pt");
@@ -1412,7 +1412,7 @@ test("Export dialect languages", () => {
         "name": "question1",
         "title": {
           "default": "Question 1",
-          "en-uk": "Question uk",
+          "en-GB": "Question GB",
           "de": "Question de",
           "pt": "Question pt",
           "pt-br": "Question br",
@@ -1437,11 +1437,11 @@ test("Export dialect languages", () => {
   });
 
   expect(exported).toHaveLength(3);
-  expect(exported[0]).toEqual(["description ↓ - language →", "default", "en-uk", "de", "pt", "pt-br"]);
+  expect(exported[0]).toEqual(["description ↓ - language →", "default", "en-GB", "de", "pt", "pt-br"]);
   expect(exported[1]).toEqual([
     "survey.page1.question1.title",
     "Question 1",
-    "Question uk",
+    "Question GB",
     "Question de",
     "Question pt",
     "Question br",
@@ -2051,4 +2051,30 @@ test("Store locales order", () => {
   expect(visChoices2[1]).toEqual("fr");
   expect(visChoices2[2]).toEqual("es");
   expect(visChoices2[3]).toEqual("de");
+});
+test("Change translation list actions titles on changing locale", (): any => {
+  editorLocalization.currentLocale = "";
+  const deutschStrings: any = {
+    ed: {
+      translationShowAllStrings: "Show All de",
+      translationShowUsedStringsOnly: "Used Strings Only de"
+    }
+  };
+  editorLocalization.locales["de"] = deutschStrings;
+  const creator = new CreatorTester({ showTranslationTab: true });
+  const dropdownAction = creator.getActionBarItem("svc-translation-show-all-strings");
+  expect(dropdownAction).toBeTruthy();
+  expect(dropdownAction.visible).toBeFalsy();
+  const listModel = <ListModel>dropdownAction.popupModel.contentComponentData.model;
+  const actions = listModel.actions;
+  expect(actions).toHaveLength(2);
+  expect(actions[0].title).toBe("All Strings");
+  expect(actions[1].title).toBe("Used Strings Only");
+  creator.locale = "de";
+  creator.activeTab = "translation";
+  expect(dropdownAction.visible).toBeTruthy();
+  expect(actions).toHaveLength(2);
+  expect(actions[0].title).toBe("Show All de");
+  expect(actions[1].title).toBe("Used Strings Only de");
+  creator.locale = "";
 });

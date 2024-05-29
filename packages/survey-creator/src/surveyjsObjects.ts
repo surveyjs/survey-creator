@@ -279,7 +279,9 @@ export function createAfterRenderHandler(
         }
       }
     };
-    domElement.onpointerdown = domElement.onclick;
+    if (Survey.IsTouch) {
+      domElement.onpointerdown = domElement.onclick;
+    }
     if (!isPanel) {
       var childs = domElement.childNodes;
       for (var i = 0; i < childs.length; i++) {
@@ -572,7 +574,7 @@ questionPrototype["onSelectedElementChanged"] = function () {
 Survey.QuestionSelectBaseImplementor.prototype["onCreated"] = function () {
   var q: any = this.question;
   var updateTriggerFunction = function () {
-    if(!!q && !!q.survey && !q.survey.isDesignMode) return;
+    if (!!q && !!q.survey && !q.survey.isDesignMode) return;
     setTimeout(() => q["koElementType"].notifySubscribers(), 0);
   };
   [

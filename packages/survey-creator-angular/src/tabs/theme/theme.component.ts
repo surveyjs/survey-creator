@@ -1,4 +1,4 @@
-import { ThemeEditorModel } from "survey-creator-core";
+import { ThemeTabViewModel } from "survey-creator-core";
 import { Component, Input } from "@angular/core";
 import { AngularComponentFactory, BaseAngular } from "survey-angular-ui";
 
@@ -7,9 +7,9 @@ import { AngularComponentFactory, BaseAngular } from "survey-angular-ui";
   templateUrl: "./theme.component.html",
   styles: [":host { display: none; }"]
 })
-export class ThemeTabComponent extends BaseAngular<ThemeEditorModel> {
-  @Input() model!: ThemeEditorModel;
-  protected getModel(): ThemeEditorModel {
+export class ThemeTabComponent extends BaseAngular<ThemeTabViewModel> {
+  @Input() model!: ThemeTabViewModel;
+  protected getModel(): ThemeTabViewModel {
     return this.model;
   }
 }

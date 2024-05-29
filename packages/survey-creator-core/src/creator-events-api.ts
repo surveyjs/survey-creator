@@ -280,6 +280,16 @@ export interface CollectionItemAddedEvent {
    */
   itemValues: ItemValue[];
 }
+export interface FastEntryItemsEvent {
+  /**
+   * An array of entered text lines.
+   */
+  lines: string[];
+  /**
+   * An array of collection items that were created based on the entered text lines. Overwrite an item's `value` or `text` property if you want to change the value or display text of this item.
+   */
+  items: ItemValue[];
+}
 
 export interface MatrixColumnAddedEvent {
   /**
@@ -487,6 +497,7 @@ export interface ModifiedEvent {
   */
   type: string;
   question?: Question;
+  name?: string;
 
   oldValue?: any;
   newValue?: any;
@@ -685,7 +696,7 @@ export interface UploadFileEvent {
    * @param status A string value that indicates a successful or failed file upload: `"success"` or `"error"`.
    * @param fileUrl The URL of a successfully uploaded file.
    */
-  callback: (status: string, fileUrl: string) => void;
+  callback: (status: string, fileUrl?: string) => void;
   /**
    * Obsolete. Use the `options.element` parameter instead.
    */

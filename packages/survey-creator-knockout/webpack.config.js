@@ -47,17 +47,17 @@ const buildPlatformJson = {
   },
   typings: packageJson.name + ".d.ts",
   peerDependencies: {
-    "ace-builds": "^1.4.12"
+    "ace-builds": "^1.4.12",
+    "survey-core": packageJson.version,
+    "survey-knockout-ui": packageJson.version,
+    "survey-creator-core": packageJson.version,
   },
   peerDependenciesMeta: {
     "ace-builds": {
       "optional": true
-    }
+    },
   },
   dependencies: {
-    "survey-core": packageJson.version,
-    "survey-knockout-ui": packageJson.version,
-    "survey-creator-core": packageJson.version,
     knockout: "^3.5.0"
   },
   devDependencies: {}

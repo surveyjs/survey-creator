@@ -16,6 +16,15 @@ var spanishTranslation = {
     convertTo: "Convertir a",
     drag: "Elemento de arrastre",
   },
+  // Creator tabs
+  tabs: {
+    preview: "Encuesta de prueba",
+    theme: "Temas",
+    translation: "Traducción",
+    designer: "Diseñador de la encuesta",
+    editor: "Editor de JSON",
+    logic: "Lógica de la encuesta"
+  },
   // Question types
   qt: {
     default: "Defecto",
@@ -41,6 +50,14 @@ var spanishTranslation = {
     expression: "Expresión (solo lectura)",
     signaturepad: "Almohadilla de firma",
     buttongroup: "Grupo de botones"
+  },
+  toolboxCategories: {
+    general: "general",
+    choice: "Preguntas de selección",
+    text: "Preguntas entrada de texto",
+    containers: "Contenedores",
+    matrix: "Preguntas matriz",
+    misc: "Misc"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -73,23 +90,16 @@ var spanishTranslation = {
     newQuestionName: "Pregunta",
     newPanelName: "Panel",
     newTextItemName: "Texto",
-    testSurvey: "Encuesta de prueba",
-    themeSurvey: "Temas",
     defaultV2Theme: "Predeterminado",
     modernTheme: "Moderno",
     defaultTheme: "Incumplimiento (heredado)",
     testSurveyAgain: "Encuesta de prueba de nuevo",
     testSurveyWidth: "Ancho de la encuesta:",
     navigateToMsg: "Tuviste que navegar a:",
-    logic: "Lógica de la encuesta",
-    embedSurvey: "Incrustar la encuesta",
-    translation: "Traducción",
     saveSurvey: "Guardar la encuesta",
     saveSurveyTooltip: "Guardar la encuesta",
     saveTheme: "Guardar tema",
     saveThemeTooltip: "Guardar tema",
-    designer: "Diseñador de la encuesta",
-    jsonEditor: "Editor de JSON",
     jsonHideErrors: "Ocultar errores",
     jsonShowErrors: "Mostrar errores",
     undo: "Deshacer",
@@ -111,12 +121,6 @@ var spanishTranslation = {
     "property-grid": "Propiedades",
     propertyGridFilteredTextPlaceholder: "Escribe para buscar...",
     propertyGridNoResultsFound: "No se han encontrado resultados",
-    toolboxGeneralCategory: "general",
-    toolboxChoiceCategory: "Preguntas de selección",
-    toolboxTextCategory: "Preguntas entrada de texto",
-    toolboxContainersCategory: "Contenedores",
-    toolboxMatrixCategory: "Preguntas matriz",
-    toolboxMiscCategory: "Misc",
     correctJSON: "Por favor, corrija JSON",
     surveyResults: "Resultado de la encuesta:",
     surveyResultsTable: "Como Tabla",
@@ -170,6 +174,10 @@ var spanishTranslation = {
     surveyPlaceHolder: "La encuesta está vacía. Arrastra una pregunta desde la caja de herramientas o haz click en el botón de abajo.",
     pagePlaceHolder: "La página está vacía. Arrastre un elemento desde la caja de herramientas o haga clic en el botón de abajo.",
     imagePlaceHolder: "Arrastre y suelte una imagen aquí o haga clic en el botón de abajo y elija una imagen para cargar",
+    surveyPlaceHolderMobile: "Haga clic en el botón \"Agregar pregunta\" a continuación para comenzar a crear su formulario.",
+    pagePlaceHolderMobile: "Haga clic en el botón \"Agregar pregunta\" a continuación para agregar un nuevo elemento a la página.",
+    panelPlaceHolderMobile: "Haga clic en el botón \"Agregar pregunta\" a continuación para agregar un nuevo elemento al panel.",
+    imagePlaceHolderMobile: "Haga clic en el botón de abajo y elija una imagen para cargar",
     imageChooseImage: "Elegir imagen",
     addNewTypeQuestion: "Añadir {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGOTIPO]",
@@ -221,13 +229,13 @@ var spanishTranslation = {
       question_visibilityText: "Hacer Pregunta {0} Visible", //{0} question name
       question_enableText: "Hacer Pregunta {0} Habilitar", //{0} question name
       question_requireText: "Hacer la pregunta {0} requerida", //{0} question name
-      question_resetValueText: "Restablecer valor para la pregunta: {0}",
+      question_resetValueText: "Restablecer valor para la pregunta: {0}", //{0} question name.
       question_setValueText: "Asignar valor: {1} a la pregunta: {0}",
       column_visibilityText: "hacer la columna {0} de la pregunta {1} visible", //{0} column name, {1} question name
       column_enableText: "hacer la columna {0} de la pregunta {1} activa", //{0} column name, {1} question name
       column_requireText: "hacer la columna {0} de la pregunta {1} requerida", //{0} column name, {1} question name
-      column_resetValueText: "Restablecer el valor de celda de la columna: {0}",
-      column_setValueText: "Asignar valor de celda: {1} a columna: {0}",
+      column_resetValueText: "Restablecer el valor de celda de la columna: {0}", //{0} column name
+      column_setValueText: "Asignar valor de celda: {1} a columna: {0}", //{0} column name and {1} setValueExpression
       setValueExpressionPlaceholder: " Una expresión cuyo resultado se asignará a la pregunta de destino.",
       trigger_completeText: "La encuesta se completa",
       trigger_setvalueText: "En cuestión: {0} valor {1}", //{0} question name, {1} setValue
@@ -745,6 +753,7 @@ var spanishTranslation = {
       top: "En la parte superior",
       bottom: "En la parte inferior"
     },
+    // Creator tabs
     tabs: {
       panel: {
         layout: "Diseño de paneles"
@@ -788,6 +797,9 @@ var spanishTranslation = {
       slider: "Slider",
       expression: "Expresión",
       questionSettings: "Configuración de la pregunta",
+      header: "Encabezado",
+      background: "Fondo",
+      appearance: "Apariencia",
       others: "Otras"
     },
     editProperty: "Editar propiedad '{0}'",
@@ -840,7 +852,49 @@ var spanishTranslation = {
     minWidth_placeholder: "Ej.: 600px",
     maxWidth_placeholder: "Ej.: 50%",
     imageHeight_placeholder: "Automático",
-    imageWidth_placeholder: "Automático"
+    imageWidth_placeholder: "Automático",
+    theme: {
+      themeName: "Tema",
+      isPanelless: "Apariencia de la pregunta",
+      editorPanel: "Fondo y radio de vértice",
+      questionPanel: "Fondo y radio de vértice",
+      primaryColor: "Color de acento",
+      panelBackgroundTransparency: "Opacidad del fondo del panel",
+      questionBackgroundTransparency: "Opacidad del fondo de la pregunta",
+      fontSize: "Tamaño de fuente",
+      scale: "Escama",
+      cornerRadius: "Radio de esquina",
+      pageTitle: "Fuente del título",
+      pageDescription: "Fuente descriptiva",
+      questionTitle: "Fuente del título",
+      questionDescription: "Fuente descriptiva",
+      editorFont: "Fuente",
+      backgroundOpacity: "Opacidad",
+      "--sjs-font-family": "Familia tipográfica",
+      "--sjs-general-backcolor-dim": "Color de fondo",
+      "--sjs-primary-backcolor": "Fondo de acento",
+      "--sjs-primary-forecolor": "Acento en primer plano",
+      "--sjs-shadow-small": "Efectos de sombra",
+      "--sjs-shadow-inner": "Efectos de sombra",
+      "--sjs-border-default": "Colores"
+    },
+    "header@header": {
+      headerView: "Vista",
+      logoPosition: "Posición del logotipo",
+      surveyTitle: "Fuente del título de la encuesta",
+      surveyDescription: "Fuente de descripción de la encuesta",
+      headerTitle: "Fuente del título de la encuesta",
+      headerDescription: "Fuente de descripción de la encuesta",
+      inheritWidthFrom: "Ancho del área de contenido",
+      textAreaWidth: "Ancho del texto",
+      backgroundColorSwitch: "Color de fondo",
+      backgroundImage: "Imagen de fondo",
+      backgroundImageOpacity: "Opacidad",
+      overlapEnabled: "Solapar",
+      logoPositionX: "Posición del logotipo",
+      titlePositionX: "Posición en el título",
+      descriptionPositionX: "Descripción posición"
+    }
   },
   // Property values
   pv: {
@@ -1056,6 +1110,38 @@ var spanishTranslation = {
     searchMode: {
       contains: "Contiene",
       startsWith: "Comienza con"
+    },
+    backgroundImageFit: {
+      auto: "Automático",
+      cover: "Cubrir",
+      contain: "Contener",
+      fill: "Elasticidad",
+      tile: "Teja"
+    },
+    backgroundImageAttachment: {
+      fixed: "Fijo",
+      scroll: "Pergamino"
+    },
+    headerView: {
+      basic: "Básico",
+      advanced: "Avanzado"
+    },
+    inheritWidthFrom: {
+      survey: "Igual que la encuesta",
+      container: "Ajuste al contenedor"
+    },
+    backgroundColorSwitch: {
+      none: "Ninguno",
+      accentColor: "Color de acento",
+      custom: "Costumbre"
+    },
+    colorPalette: {
+      light: "Luz",
+      dark: "Oscuro"
+    },
+    isPanelless: {
+      "false": "Predeterminado",
+      "true": "Sin paneles"
     }
   },
   // Operators
@@ -1463,101 +1549,40 @@ var spanishTranslation = {
     copyDisplayValue: "Copiar valor de visualización"
   },
   theme: {
-    "--background": "Color de fondo",
-    "--background-dim-light": "Color de luz tenue del fondo",
-    "--primary-foreground": "Color primario de primer plano",
-    "--foreground": "Color de primer plano",
-    "--base-unit": "Unidad base",
     advancedMode: "Modo avanzado",
-    groupGeneral: "General",
-    groupHeader: "Encabezado",
-    groupBackground: "Fondo",
-    groupAppearance: "Apariencia",
-    themeName: "Tema",
-    themeMode: "Apariencia de la pregunta",
-    themeModePanels: "Predeterminado",
-    themeModeLightweight: "Sin paneles",
-    themePaletteLight: "Luz",
-    themePaletteDark: "Oscuro",
-    primaryColor: "Color de énfasis",
+    pageTitle: "Fuente del título de la página",
+    questionTitle: "Fuente del título de la pregunta",
+    editorPanel: "Elemento de entrada",
+    lines: "Lineas",
     primaryDefaultColor: "Predeterminado",
     primaryDarkColor: "Cernerse",
     primaryLightColor: "Seleccionado",
-    coverTitleForecolor: "Título de color anterior",
-    coverDescriptionForecolor: "Descripción forecolor",
-    coverOverlapEnabled: "Solapar",
     backgroundDimColor: "Color de fondo",
-    backgroundImage: "Imagen de fondo",
-    backgroundImageFitAuto: "Automático",
-    backgroundImageFitCover: "Cubrir",
-    backgroundImageFitContain: "Contener",
-    backgroundImageFitFill: "Elasticidad",
-    backgroundImageFitTile: "Teja",
-    backgroundOpacity: "Opacidad",
-    backgroundImageAttachmentFixed: "Fijo",
-    backgroundImageAttachmentScroll: "Pergamino",
-    panelBackgroundTransparency: "Opacidad del fondo del panel",
-    questionBackgroundTransparency: "Opacidad de fondo de la pregunta",
-    questionTitle: "Fuente del título de la pregunta",
-    editorPanel: "Elemento de entrada",
-    backgroundCornerRadius: "Fondo y radio de vértice",
+    cornerRadius: "Radio de esquina",
     backcolor: "Fondo predeterminado",
     hovercolor: "Pasar el cursor de fondo",
     borderDecoration: "Decoración de bordes",
-    accentBackground: "Fondo de acento",
-    accentForeground: "Primer plano de acento",
     primaryForecolor: "Color predeterminado",
     primaryForecolorLight: "Color deshabilitado",
-    colorsTitle: "Colores",
     font: "Fuente",
-    lines: "Lineas",
     borderDefault: "Oscuro",
     borderLight: "Encendedor",
-    fontFamily: "Familia de fuentes",
-    fontSize: "Tamaño de fuente",
-    color: "Color",
-    placeholderColor: "Color del marcador de posición",
-    size: "Tamaño",
+    fontFamily: "Familia tipográfica",
     fontWeightRegular: "Regular",
     fontWeightHeavy: "Pesado",
     fontWeightSemiBold: "Semi-negrita",
     fontWeightBold: "Audaz",
-    scale: "Escama",
-    cornerRadius: "Radio de esquina",
-    surveyTitle: "Fuente del título de la encuesta",
-    surveyDescription: "Fuente de descripción de la encuesta",
-    pageTitle: "Fuente del título de la página",
-    titleFont: "Fuente del título",
-    descriptionFont: "Fuente descriptiva",
+    color: "Color",
+    placeholderColor: "Color del marcador de posición",
+    size: "Tamaño",
+    opacity: "Opacidad",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Agregar efecto de sombra",
-    opacity: "Opacidad",
     boxShadowBlur: "Desdibujar",
     boxShadowSpread: "Propagación",
     boxShadowDrop: "Soltar",
     boxShadowInner: "Interior",
-    shadow: "Efectos de sombra",
-    headerView: "Vista",
-    headerViewBasic: "Básico",
-    headerViewAdvanced: "Avanzado",
-    coverInheritWidthFrom: "Ancho del área de contenido",
-    coverInheritWidthFromSurvey: "Igual que la encuesta",
-    coverInheritWidthFromContainer: "Ajuste al contenedor",
-    coverTextAreaWidth: "Ancho del texto",
-    coverBackgroundColorSwitch: "Color de fondo",
-    coverBackgroundColorNone: "Ninguno",
-    coverBackgroundColorAccentColor: "Color de acento",
-    coverBackgroundColorCustom: "Costumbre",
-    horizontalAlignmentLeft: "Izquierda",
-    horizontalAlignmentCenter: "Centro",
-    horizontalAlignmentRight: "Derecha",
-    verticalAlignmentTop: "Arriba",
-    verticalAlignmentMiddle: "Medio",
-    verticalAlignmentBottom: "Fondo",
-    logoPosition: "Posición del logotipo",
-    coverTitlePosition: "Posición del título",
-    coverDescriptionPosition: "Descripción posición",
     names: {
       default: "Predeterminado",
       sharp: "Afilado",
@@ -1764,12 +1789,11 @@ editorLocalization.locales["es"] = spanishTranslation;
 // theme.--primary-foreground: "Primary foreground color" => "Color primario de primer plano"
 // theme.--foreground: "Foreground color" => "Color de primer plano"
 // theme.--base-unit: "Base unit" => "Unidad base"
-// theme.groupGeneral: "General" => "General"
 // theme.groupAdvanced: "Advanced" => "Avanzado"
 // theme.themeName: "Theme" => "Tema"
-// theme.themeMode: "Question appearance" => "Apariencia de la pregunta"
-// theme.themeModePanels: "Default" => "Predeterminado"
-// theme.themeModeLightweight: "Without Panels" => "Sin paneles"
+// theme.isPanellessss: "Question appearance" => "Apariencia de la pregunta"
+// theme.isPanellessPanels: "Default" => "Predeterminado"
+// theme.isPanellessLightweight: "Without Panels" => "Sin paneles"
 // theme.themePaletteLight: "Light" => "Luz"
 // theme.themePaletteDark: "Dark" => "Oscuro"
 // theme.primaryColor: "Accent color" => "Color de énfasis"
@@ -1811,7 +1835,7 @@ editorLocalization.locales["es"] = spanishTranslation;
 // theme.fontWeightBold: "Bold" => "Audaz"
 // theme.scale: "Scale" => "Escama"
 // theme.cornerRadius: "Corner radius" => "Radio de esquina"
-// theme.surveyTitle: "Survey title font" => "Fuente del título de la encuesta"
+// theme.surveyTitleFont: "Survey title font" => "Fuente del título de la encuesta"
 // theme.pageTitle: "Page title font" => "Fuente del título de la página"
 // theme.pageDescription: "Page description font" => "Fuente de descripción de la página"
 // theme.boxShadowX: "X" => "X"
@@ -1872,22 +1896,20 @@ editorLocalization.locales["es"] = spanishTranslation;
 // survey.title: "Title" => "Título"
 // page.title: "Title" => "Título"
 // p.setValueIf: "Set value if" => "Establezca el valor si"
-// theme.groupHeader: "Header" => "Encabezado"
-// theme.coverTitleForecolor: "Title forecolor" => "Título de color anterior"
-// theme.coverOverlapEnabled: "Overlap" => "Solapar"
+// theme.header: "Header" => "Encabezado"
 // theme.backgroundImageFitFill: "Stretch" => "Elasticidad"
 // theme.backgroundImageFitTile: "Tile" => "Teja"
 // theme.headerView: "View" => "Vista"
 // theme.headerViewBasic: "Basic" => "Básico"
 // theme.headerViewAdvanced: "Advanced" => "Avanzado"
-// theme.coverInheritWidthFrom: "Content area width" => "Ancho del área de contenido"
-// theme.coverInheritWidthFromSurvey: "Same as survey" => "Igual que la encuesta"
-// theme.coverInheritWidthFromPage: "Fit to page" => "Ajustar a la página"
-// theme.coverTextAreaWidth: "Text width" => "Ancho del texto"
-// theme.coverBackgroundColorSwitch: "Background color" => "Color de fondo"
-// theme.coverBackgroundColorNone: "None" => "Ninguno"
-// theme.coverBackgroundColorAccentColor: "Accent color" => "Color de acento"
-// theme.coverBackgroundColorCustom: "Custom" => "Costumbre"
+// theme.headerInheritWidthFrom: "Content area width" => "Ancho del área de contenido"
+// theme.headerInheritWidthFromSurvey: "Same as survey" => "Igual que la encuesta"
+// theme.headerInheritWidthFromPage: "Fit to page" => "Ajustar a la página"
+// theme.headerTextAreaWidth: "Text width" => "Ancho del texto"
+// theme.headerBackgroundColorSwitch: "Background color" => "Color de fondo"
+// theme.headerBackgroundColorNone: "None" => "Ninguno"
+// theme.headerBackgroundColorAccentColor: "Accent color" => "Color de acento"
+// theme.headerBackgroundColorCustom: "Custom" => "Costumbre"
 // theme.horizontalAlignmentLeft: "Left" => "Izquierda"
 // theme.horizontalAlignmentCenter: "Center" => "Centro"
 // theme.horizontalAlignmentRight: "Right" => "Derecha"
@@ -1895,7 +1917,7 @@ editorLocalization.locales["es"] = spanishTranslation;
 // theme.verticalAlignmentMiddle: "Middle" => "Medio"
 // theme.verticalAlignmentBottom: "Bottom" => "Fondo"
 // theme.logoPosition: "Logo Position" => "Posición del logotipo"
-// theme.coverTitlePosition: "Title Position" => "Posición del título"
+// theme.headerTitlePosition: "Title Position" => "Posición del título"
 // lg.question_resetValueText: "reset value for question: {0}" => "Restablecer valor para la pregunta: {0}"
 // lg.question_setValueText: "assign value: {1} to question: {0}" => "Asignar valor: {1} a la pregunta: {0}"
 // lg.column_resetValueText: "reset cell value for column: {0}" => "Restablecer el valor de celda de la columna: {0}"
@@ -1909,18 +1931,14 @@ editorLocalization.locales["es"] = spanishTranslation;
 // pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "Se aplica cuando \"Tipo de fuente\" es \"Archivos locales\" o cuando la cámara no está disponible"
 // pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "Se aplica cuando \"Tipo de fuente\" es \"Cámara\"."
 // pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "Se aplica cuando \"Tipo de fuente\" es \"Archivos locales o cámara\"."
-// theme.groupBackground: "Background" => "Fondo"
-// theme.groupAppearance: "Appearance" => "Apariencia"
-// theme.coverDescriptionForecolor: "Description forecolor" => "Descripción forecolor"
+// theme.background: "Background" => "Fondo"
+// theme.appearance: "Appearance" => "Apariencia"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "¿Realmente quieres resetear el tema? Todas tus personalizaciones se perderán."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "Sí, restablece el tema"
-// theme.groupBackground: "Background" => "Fondo"
-// theme.groupAppearance: "Appearance" => "Apariencia"
-// theme.coverDescriptionForecolor: "Description forecolor" => "Descripción forecolor"
-// theme.coverInheritWidthFromContainer: "Fit to container" => "Ajuste al contenedor"
+// theme.headerInheritWidthFromContainer: "Fit to container" => "Ajuste al contenedor"
 // signaturepad.showPlaceholder: "Show the placeholder" => "Mostrar el marcador de posición"
 // signaturepad.placeholder: "Placeholder text" => "Texto de marcador de posición"
-// theme.surveyDescription: "Survey description font" => "Fuente de descripción de la encuesta"
+// theme.surveyDescriptionFont: "Survey description font" => "Fuente de descripción de la encuesta"
 // ed.prevFocus: "Focus previous" => "Enfoque anterior"
 // ed.nextFocus: "Focus next" => "Enfoque siguiente"
 // ed.saveTheme: "Save Theme" => "Guardar tema"
@@ -1932,7 +1950,7 @@ editorLocalization.locales["es"] = spanishTranslation;
 // signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "Escalado automático del área de firma"
 // signaturepad.penMinWidth: "Minimum pen width" => "Ancho mínimo del lápiz"
 // signaturepad.penMaxWidth: "Maximum pen width" => "Ancho máximo del lápiz"
-// theme.coverDescriptionPosition: "Description position" => "Descripción posición"
+// theme.headerDescriptionPosition: "Description position" => "Descripción posición"
 // ed.propertyGridNoResultsFound: "No results found" => "No se han encontrado resultados"
 // pv.leftRight: "Left and right" => "Izquierda y derecha"
 // p.sourceType: "Source type" => "Tipo de origen"
@@ -2322,3 +2340,82 @@ editorLocalization.locales["es"] = spanishTranslation;
 // ed.selectFile: "Select a file" => "Seleccionar un archivo"
 // ed.removeFile: "Remove the file" => "Eliminar el archivo"
 // pe.searchMode: "Search Mode" => "Modo de búsqueda"
+// ed.surveyPlaceHolderMobile: "Click the \"Add Question\" button below to start creating your form." => "Haga clic en el botón \"Agregar pregunta\" a continuación para comenzar a crear su formulario."
+// ed.pagePlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the page." => "Haga clic en el botón \"Agregar pregunta\" a continuación para agregar un nuevo elemento a la página."
+// ed.panelPlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the panel." => "Haga clic en el botón \"Agregar pregunta\" a continuación para agregar un nuevo elemento al panel."
+// ed.imagePlaceHolderMobile: "Click the button below and choose an image to upload" => "Haga clic en el botón de abajo y elija una imagen para cargar"
+// coloralpha.opacity: "Opacity" => "Opacidad"
+// font.family: "Font family" => "Familia tipográfica"
+// font.color: "Color" => "Color"
+// font.placeholderColor: "Placeholder color" => "Color del marcador de posición"
+// font.size: "Size" => "Tamaño"
+// theme.themeName: "Theme" => "Tema"
+// theme.isPanelless: "Question appearance" => "Apariencia de la pregunta"
+// theme.editorPanel: "Background and corner radius" => "Fondo y radio de vértice"
+// theme.questionPanel: "Background and corner radius" => "Fondo y radio de vértice"
+// theme.primaryColor: "Accent color" => "Color de acento"
+// theme.panelBackgroundTransparency: "Panel background opacity" => "Opacidad del fondo del panel"
+// theme.questionBackgroundTransparency: "Question background opacity" => "Opacidad del fondo de la pregunta"
+// theme.fontSize: "Font size" => "Tamaño de fuente"
+// theme.scale: "Scale" => "Escama"
+// theme.cornerRadius: "Corner radius" => "Radio de esquina"
+// theme.pageTitle: "Title font" => "Fuente del título"
+// theme.pageDescription: "Description font" => "Fuente descriptiva"
+// theme.questionTitle: "Title font" => "Fuente del título"
+// theme.questionDescription: "Description font" => "Fuente descriptiva"
+// theme.editorFont: "Font" => "Fuente"
+// theme.backgroundOpacity: "Opacity" => "Opacidad"
+// theme.--sjs-font-family: "Font family" => "Familia tipográfica"
+// theme.--sjs-general-backcolor-dim: "Background color" => "Color de fondo"
+// theme.--sjs-primary-backcolor: "Accent background" => "Fondo de acento"
+// theme.--sjs-primary-forecolor: "Accent foreground" => "Acento en primer plano"
+// theme.--sjs-shadow-small: "Shadow effects" => "Efectos de sombra"
+// theme.--sjs-shadow-inner: "Shadow effects" => "Efectos de sombra"
+// theme.--sjs-border-default: "Colors" => "Colores"
+// header@header.headerView: "View" => "Vista"
+// header@header.logoPosition: "Logo position" => "Posición del logotipo"
+// header@header.surveyTitle: "Survey title font" => "Fuente del título de la encuesta"
+// header@header.surveyDescription: "Survey description font" => "Fuente de descripción de la encuesta"
+// header@header.headerTitle: "Survey title font" => "Fuente del título de la encuesta"
+// header@header.headerDescription: "Survey description font" => "Fuente de descripción de la encuesta"
+// header@header.inheritWidthFrom: "Content area width" => "Ancho del área de contenido"
+// header@header.textAreaWidth: "Text width" => "Ancho del texto"
+// header@header.backgroundColorSwitch: "Background color" => "Color de fondo"
+// header@header.backgroundImage: "Background image" => "Imagen de fondo"
+// header@header.backgroundImageOpacity: "Opacity" => "Opacidad"
+// header@header.overlapEnabled: "Overlap" => "Solapar"
+// header@header.logoPositionX: "Logo position" => "Posición del logotipo"
+// header@header.titlePositionX: "Title position" => "Posición en el título"
+// header@header.descriptionPositionX: "Description position" => "Descripción posición"
+// weight.400: "Regular" => "Regular"
+// weight.600: "Heavy" => "Pesado"
+// weight.700: "Semi-bold" => "Semi-negrita"
+// weight.800: "Bold" => "Audaz"
+// backgroundImageFit.auto: "Auto" => "Automático"
+// backgroundImageFit.cover: "Cover" => "Cubrir"
+// backgroundImageFit.contain: "Contain" => "Contener"
+// backgroundImageFit.fill: "Stretch" => "Elasticidad"
+// backgroundImageFit.tile: "Tile" => "Teja"
+// backgroundImageAttachment.fixed: "Fixed" => "Fijo"
+// backgroundImageAttachment.scroll: "Scroll" => "Pergamino"
+// headerView.basic: "Basic" => "Básico"
+// headerView.advanced: "Advanced" => "Avanzado"
+// inheritWidthFrom.survey: "Same as survey" => "Igual que la encuesta"
+// inheritWidthFrom.container: "Fit to container" => "Ajuste al contenedor"
+// backgroundColorSwitch.none: "None" => "Ninguno"
+// backgroundColorSwitch.accentColor: "Accent color" => "Color de acento"
+// backgroundColorSwitch.custom: "Custom" => "Costumbre"
+// colorPalette.light: "Light" => "Luz"
+// colorPalette.dark: "Dark" => "Oscuro"
+// isPanelless.false: "Default" => "Predeterminado"
+// isPanelless.true: "Without Panels" => "Sin paneles"
+// theme.cornerRadius: "Corner radius" => "Radio de esquina"
+// theme.fontFamily: "Font family" => "Familia tipográfica"
+// theme.fontWeightRegular: "Regular" => "Regular"
+// theme.fontWeightHeavy: "Heavy" => "Pesado"
+// theme.fontWeightSemiBold: "Semi-bold" => "Semi-negrita"
+// theme.fontWeightBold: "Bold" => "Audaz"
+// theme.color: "Color" => "Color"
+// theme.placeholderColor: "Placeholder color" => "Color del marcador de posición"
+// theme.size: "Size" => "Tamaño"
+// theme.opacity: "Opacity" => "Opacidad"

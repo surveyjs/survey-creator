@@ -16,6 +16,15 @@ export var hrStrings = {
     convertTo: "Pretvorite u",
     drag: "Povucite element",
   },
+  // Creator tabs
+  tabs: {
+    preview: "Ispitna anketa",
+    theme: "Teme",
+    translation: "Prijevod",
+    designer: "Dizajner ankete",
+    editor: "JSON urednik",
+    logic: "Logika ankete"
+  },
   // Question types
   qt: {
     default: "Zadani",
@@ -41,6 +50,14 @@ export var hrStrings = {
     expression: "Izraz (samo za čitanje)",
     signaturepad: "Jastučić za potpis",
     buttongroup: "Grupa gumba"
+  },
+  toolboxCategories: {
+    general: "Općenito",
+    choice: "Pitanja o izboru",
+    text: "Pitanja o unosu teksta",
+    containers: "Kontejnere",
+    matrix: "Matrična pitanja",
+    misc: "Ostalo"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -73,23 +90,16 @@ export var hrStrings = {
     newQuestionName: "pitanje",
     newPanelName: "ploča",
     newTextItemName: "tekst",
-    testSurvey: "Ispitna anketa",
-    themeSurvey: "Teme",
     defaultV2Theme: "Propust",
     modernTheme: "Moderan",
     defaultTheme: "Zadano (naslijeđeno)",
     testSurveyAgain: "Ponovno probna anketa",
     testSurveyWidth: "Širina ankete: ",
     navigateToMsg: "Morao si navigirati do:",
-    logic: "Logika ankete",
-    embedSurvey: "Ugrađena anketa",
-    translation: "Prijevod",
     saveSurvey: "Spremi anketu",
     saveSurveyTooltip: "Spremi anketu",
     saveTheme: "Spremi temu",
     saveThemeTooltip: "Spremi temu",
-    designer: "Dizajner ankete",
-    jsonEditor: "JSON urednik",
     jsonHideErrors: "Sakrij pogreške",
     jsonShowErrors: "Pokaži pogreške",
     undo: "Poništiti",
@@ -111,12 +121,6 @@ export var hrStrings = {
     "property-grid": "Svojstva",
     propertyGridFilteredTextPlaceholder: "Upišite za pretraživanje...",
     propertyGridNoResultsFound: "Nisu pronađeni rezultati",
-    toolboxGeneralCategory: "Općenito",
-    toolboxChoiceCategory: "Pitanja o izboru",
-    toolboxTextCategory: "Pitanja o unosu teksta",
-    toolboxContainersCategory: "Kontejnere",
-    toolboxMatrixCategory: "Matrična pitanja",
-    toolboxMiscCategory: "Ostalo",
     correctJSON: "Ispravite JSON.",
     surveyResults: "Rezultat ankete: ",
     surveyResultsTable: "Kao tablica",
@@ -170,6 +174,10 @@ export var hrStrings = {
     surveyPlaceHolder: "Anketa je prazna. Povucite element iz alatnog okvira ili kliknite donji gumb.",
     pagePlaceHolder: "Stranica je prazna. Povucite element iz alatnog okvira ili kliknite donji gumb.",
     imagePlaceHolder: "Povucite i ispustite sliku ovdje ili kliknite donji gumb i odaberite sliku koju želite prenijeti",
+    surveyPlaceHolderMobile: "Kliknite donji gumb \"Dodaj pitanje\" da biste započeli stvaranje obrasca.",
+    pagePlaceHolderMobile: "Kliknite donji gumb \"Dodaj pitanje\" da biste na stranicu dodali novi element.",
+    panelPlaceHolderMobile: "Kliknite donji gumb \"Dodaj pitanje\" da biste na ploču dodali novi element.",
+    imagePlaceHolderMobile: "Kliknite donji gumb i odaberite sliku koju želite prenijeti",
     imageChooseImage: "Odabir slike",
     addNewTypeQuestion: "Dodaj {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
@@ -221,13 +229,13 @@ export var hrStrings = {
       question_visibilityText: "Učinite pitanje {0} vidljivim", //{0} question name
       question_enableText: "Omogući pitanje {0}", //{0} question name
       question_requireText: "Neka pitanje {0} bude potrebno", //{0} question name
-      question_resetValueText: "Vrati izvornu vrijednost za pitanje: {0}",
+      question_resetValueText: "Vrati izvornu vrijednost za pitanje: {0}", //{0} question name.
       question_setValueText: "Dodijeli vrijednost: {1} pitanje: {0}",
       column_visibilityText: "učiniti stupac {0} pitanja vidljivim {1}", //{0} column name, {1} question name
       column_enableText: "{1} omogućivanje stupca {0} pitanja", //{0} column name, {1} question name
       column_requireText: "Učinite stupac {0} pitanja {1} potrebnim", //{0} column name, {1} question name
-      column_resetValueText: "Vrati izvornu vrijednost ćelije za stupac: {0}",
-      column_setValueText: "Dodijeli vrijednost ćelije: {1} stupcu: {0}",
+      column_resetValueText: "Vrati izvornu vrijednost ćelije za stupac: {0}", //{0} column name
+      column_setValueText: "Dodijeli vrijednost ćelije: {1} stupcu: {0}", //{0} column name and {1} setValueExpression
       setValueExpressionPlaceholder: " Izraz čiji će rezultat biti dodijeljen ciljnom pitanju.",
       trigger_completeText: "Anketa se dovrša",
       trigger_setvalueText: "Postavljeno u pitanje: {0} vrijednost {1}", //{0} question name, {1} setValue
@@ -745,6 +753,7 @@ export var hrStrings = {
       top: "Na vrhu",
       bottom: "Na dnu"
     },
+    // Creator tabs
     tabs: {
       panel: {
         layout: "Izgled ploče"
@@ -788,6 +797,9 @@ export var hrStrings = {
       slider: "Klizač",
       expression: "Izraz",
       questionSettings: "Postavke pitanja",
+      header: "Zaglavlje",
+      background: "Pozadina",
+      appearance: "Izgled",
       others: "Drugi"
     },
     editProperty: "Uređivanje objekta '{0}'",
@@ -840,7 +852,49 @@ export var hrStrings = {
     minWidth_placeholder: "Npr.: 600px",
     maxWidth_placeholder: "Npr.: 50%",
     imageHeight_placeholder: "Автоматично",
-    imageWidth_placeholder: "Автоматично"
+    imageWidth_placeholder: "Автоматично",
+    theme: {
+      themeName: "Tema",
+      isPanelless: "Izgled pitanja",
+      editorPanel: "Polumjer pozadine i kuta",
+      questionPanel: "Polumjer pozadine i kuta",
+      primaryColor: "Boja isticanja",
+      panelBackgroundTransparency: "Neprozirnost pozadine ploče",
+      questionBackgroundTransparency: "Pitanje neprozirnosti pozadine",
+      fontSize: "Veličina fonta",
+      scale: "Vaga",
+      cornerRadius: "Kutni radijus",
+      pageTitle: "Font naslova",
+      pageDescription: "Font opisa",
+      questionTitle: "Font naslova",
+      questionDescription: "Font opisa",
+      editorFont: "Krstionica",
+      backgroundOpacity: "Neprozirnost",
+      "--sjs-font-family": "Obitelj fontova",
+      "--sjs-general-backcolor-dim": "Boja pozadine",
+      "--sjs-primary-backcolor": "Pozadina isticanja",
+      "--sjs-primary-forecolor": "Isticanje u prvom planu",
+      "--sjs-shadow-small": "Efekti sjene",
+      "--sjs-shadow-inner": "Efekti sjene",
+      "--sjs-border-default": "Boje"
+    },
+    "header@header": {
+      headerView: "Pogled",
+      logoPosition: "Položaj logotipa",
+      surveyTitle: "Font naslova upitnika",
+      surveyDescription: "Font opisa upitnika",
+      headerTitle: "Font naslova upitnika",
+      headerDescription: "Font opisa upitnika",
+      inheritWidthFrom: "Širina područja sadržaja",
+      textAreaWidth: "Širina teksta",
+      backgroundColorSwitch: "Boja pozadine",
+      backgroundImage: "Pozadinska slika",
+      backgroundImageOpacity: "Neprozirnost",
+      overlapEnabled: "Preklapanje",
+      logoPositionX: "Položaj logotipa",
+      titlePositionX: "Položaj naslova",
+      descriptionPositionX: "Položaj opisa"
+    }
   },
   // Property values
   pv: {
@@ -1056,6 +1110,38 @@ export var hrStrings = {
     searchMode: {
       contains: "Sadržava",
       startsWith: "Počinje s"
+    },
+    backgroundImageFit: {
+      auto: "Automobil",
+      cover: "Pokriti",
+      contain: "Sadržavati",
+      fill: "Parcela",
+      tile: "Crijep"
+    },
+    backgroundImageAttachment: {
+      fixed: "Fiksirane",
+      scroll: "Svitak"
+    },
+    headerView: {
+      basic: "Osnovni",
+      advanced: "Napredan"
+    },
+    inheritWidthFrom: {
+      survey: "Isto kao i anketa",
+      container: "Prilagodi spremniku"
+    },
+    backgroundColorSwitch: {
+      none: "Nijedan",
+      accentColor: "Boja isticanja",
+      custom: "Običaj"
+    },
+    colorPalette: {
+      light: "Svjetlo",
+      dark: "Mračan"
+    },
+    isPanelless: {
+      "false": "Propust",
+      "true": "Bez panela"
     }
   },
   // Operators
@@ -1463,101 +1549,40 @@ export var hrStrings = {
     copyDisplayValue: "Kopiraj vrijednost prikaza"
   },
   theme: {
-    "--background": "Boja pozadine",
-    "--background-dim-light": "Pozadina prigušena svijetla boja",
-    "--primary-foreground": "Primarna boja prednjeg plana",
-    "--foreground": "Boja prednjeg plana",
-    "--base-unit": "Osnovna jedinica",
     advancedMode: "Napredni način rada",
-    groupGeneral: "Općenito",
-    groupHeader: "Zaglavlje",
-    groupBackground: "Pozadina",
-    groupAppearance: "Izgled",
-    themeName: "Tema",
-    themeMode: "Izgled pitanja",
-    themeModePanels: "Propust",
-    themeModeLightweight: "Bez panela",
-    themePaletteLight: "Svjetlo",
-    themePaletteDark: "Mračan",
-    primaryColor: "Boja isticanja",
+    pageTitle: "Font naslova stranice",
+    questionTitle: "Font naslova pitanja",
+    editorPanel: "Ulazni element",
+    lines: "Linije",
     primaryDefaultColor: "Propust",
     primaryDarkColor: "Lebdjeti",
     primaryLightColor: "Odabrani",
-    coverTitleForecolor: "Naslovna prednja strana",
-    coverDescriptionForecolor: "Opis prednje boje",
-    coverOverlapEnabled: "Preklapanje",
     backgroundDimColor: "Boja pozadine",
-    backgroundImage: "Pozadinska slika",
-    backgroundImageFitAuto: "Automobil",
-    backgroundImageFitCover: "Pokriti",
-    backgroundImageFitContain: "Sadržavati",
-    backgroundImageFitFill: "Parcela",
-    backgroundImageFitTile: "Crijep",
-    backgroundOpacity: "Neprozirnost",
-    backgroundImageAttachmentFixed: "Fiksirane",
-    backgroundImageAttachmentScroll: "Svitak",
-    panelBackgroundTransparency: "Neprozirnost pozadine ploče",
-    questionBackgroundTransparency: "Pitanje neprozirnosti pozadine",
-    questionTitle: "Font naslova pitanja",
-    editorPanel: "Ulazni element",
-    backgroundCornerRadius: "Polumjer pozadine i kuta",
+    cornerRadius: "Kutni radijus",
     backcolor: "Zadana pozadina",
     hovercolor: "Pozadina držanja pokazivača miša",
     borderDecoration: "Uređenje obruba",
-    accentBackground: "Pozadina isticanja",
-    accentForeground: "Isticanje u prvom planu",
     primaryForecolor: "Zadana boja",
     primaryForecolorLight: "Onemogućena boja",
-    colorsTitle: "Boje",
     font: "Krstionica",
-    lines: "Linije",
     borderDefault: "Tamnije",
     borderLight: "Upaljač",
     fontFamily: "Obitelj fontova",
-    fontSize: "Veličina fonta",
-    color: "Boja",
-    placeholderColor: "Boja rezerviranog mjesta",
-    size: "Veličina",
     fontWeightRegular: "Redovan",
     fontWeightHeavy: "Težak",
     fontWeightSemiBold: "Polupodebljano",
     fontWeightBold: "Odvažan",
-    scale: "Vaga",
-    cornerRadius: "Kutni radijus",
-    surveyTitle: "Font naslova upitnika",
-    surveyDescription: "Font opisa upitnika",
-    pageTitle: "Font naslova stranice",
-    titleFont: "Font naslova",
-    descriptionFont: "Font opisa",
+    color: "Boja",
+    placeholderColor: "Boja rezerviranog mjesta",
+    size: "Veličina",
+    opacity: "Neprozirnost",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Dodaj efekt sjene",
-    opacity: "Neprozirnost",
     boxShadowBlur: "Mrlja",
     boxShadowSpread: "Širenje",
     boxShadowDrop: "Ispustiti",
     boxShadowInner: "Unutarnji",
-    shadow: "Efekti sjene",
-    headerView: "Pogled",
-    headerViewBasic: "Osnovni",
-    headerViewAdvanced: "Napredan",
-    coverInheritWidthFrom: "Širina područja sadržaja",
-    coverInheritWidthFromSurvey: "Isto kao i anketa",
-    coverInheritWidthFromContainer: "Prilagodi spremniku",
-    coverTextAreaWidth: "Širina teksta",
-    coverBackgroundColorSwitch: "Boja pozadine",
-    coverBackgroundColorNone: "Nijedan",
-    coverBackgroundColorAccentColor: "Boja isticanja",
-    coverBackgroundColorCustom: "Običaj",
-    horizontalAlignmentLeft: "Lijevo",
-    horizontalAlignmentCenter: "Središte",
-    horizontalAlignmentRight: "Desno",
-    verticalAlignmentTop: "Vrh",
-    verticalAlignmentMiddle: "Sredina",
-    verticalAlignmentBottom: "Dno",
-    logoPosition: "Položaj logotipa",
-    coverTitlePosition: "Položaj naslova",
-    coverDescriptionPosition: "Položaj opisa",
     names: {
       default: "Propust",
       sharp: "Oštar",
@@ -1983,12 +2008,11 @@ editorLocalization.locales["hr"] = hrStrings;
 // theme.--primary-foreground: "Primary foreground color" => "Primarna boja prednjeg plana"
 // theme.--foreground: "Foreground color" => "Boja prednjeg plana"
 // theme.--base-unit: "Base unit" => "Osnovna jedinica"
-// theme.groupGeneral: "General" => "Općenito"
 // theme.groupAdvanced: "Advanced" => "Napredan"
 // theme.themeName: "Theme" => "Tema"
-// theme.themeMode: "Question appearance" => "Izgled pitanja"
-// theme.themeModePanels: "Default" => "Propust"
-// theme.themeModeLightweight: "Without Panels" => "Bez panela"
+// theme.isPanellessss: "Question appearance" => "Izgled pitanja"
+// theme.isPanellessPanels: "Default" => "Propust"
+// theme.isPanellessLightweight: "Without Panels" => "Bez panela"
 // theme.themePaletteLight: "Light" => "Svjetlo"
 // theme.themePaletteDark: "Dark" => "Mračan"
 // theme.primaryColor: "Accent color" => "Boja isticanja"
@@ -2030,7 +2054,7 @@ editorLocalization.locales["hr"] = hrStrings;
 // theme.fontWeightBold: "Bold" => "Odvažan"
 // theme.scale: "Scale" => "Vaga"
 // theme.cornerRadius: "Corner radius" => "Kutni radijus"
-// theme.surveyTitle: "Survey title font" => "Font naslova upitnika"
+// theme.surveyTitleFont: "Survey title font" => "Font naslova upitnika"
 // theme.pageTitle: "Page title font" => "Font naslova stranice"
 // theme.pageDescription: "Page description font" => "Font opisa stranice"
 // theme.boxShadowX: "X" => "X"
@@ -2091,22 +2115,20 @@ editorLocalization.locales["hr"] = hrStrings;
 // survey.title: "Title" => "Naslov"
 // page.title: "Title" => "Naslov"
 // p.setValueIf: "Set value if" => "Postavi vrijednost ako"
-// theme.groupHeader: "Header" => "Zaglavlje"
-// theme.coverTitleForecolor: "Title forecolor" => "Naslovna prednja strana"
-// theme.coverOverlapEnabled: "Overlap" => "Preklapanje"
+// theme.header: "Header" => "Zaglavlje"
 // theme.backgroundImageFitFill: "Stretch" => "Parcela"
 // theme.backgroundImageFitTile: "Tile" => "Crijep"
 // theme.headerView: "View" => "Pogled"
 // theme.headerViewBasic: "Basic" => "Osnovni"
 // theme.headerViewAdvanced: "Advanced" => "Napredan"
-// theme.coverInheritWidthFrom: "Content area width" => "Širina područja sadržaja"
-// theme.coverInheritWidthFromSurvey: "Same as survey" => "Isto kao i anketa"
-// theme.coverInheritWidthFromPage: "Fit to page" => "Prilagodi stranici"
-// theme.coverTextAreaWidth: "Text width" => "Širina teksta"
-// theme.coverBackgroundColorSwitch: "Background color" => "Boja pozadine"
-// theme.coverBackgroundColorNone: "None" => "Nijedan"
-// theme.coverBackgroundColorAccentColor: "Accent color" => "Boja isticanja"
-// theme.coverBackgroundColorCustom: "Custom" => "Običaj"
+// theme.headerInheritWidthFrom: "Content area width" => "Širina područja sadržaja"
+// theme.headerInheritWidthFromSurvey: "Same as survey" => "Isto kao i anketa"
+// theme.headerInheritWidthFromPage: "Fit to page" => "Prilagodi stranici"
+// theme.headerTextAreaWidth: "Text width" => "Širina teksta"
+// theme.headerBackgroundColorSwitch: "Background color" => "Boja pozadine"
+// theme.headerBackgroundColorNone: "None" => "Nijedan"
+// theme.headerBackgroundColorAccentColor: "Accent color" => "Boja isticanja"
+// theme.headerBackgroundColorCustom: "Custom" => "Običaj"
 // theme.horizontalAlignmentLeft: "Left" => "Lijevo"
 // theme.horizontalAlignmentCenter: "Center" => "Središte"
 // theme.horizontalAlignmentRight: "Right" => "Desno"
@@ -2114,8 +2136,8 @@ editorLocalization.locales["hr"] = hrStrings;
 // theme.verticalAlignmentMiddle: "Middle" => "Sredina"
 // theme.verticalAlignmentBottom: "Bottom" => "Dno"
 // theme.logoPosition: "Logo Position" => "Položaj logotipa"
-// theme.coverTitlePosition: "Title Position" => "Položaj naslova"
-// theme.coverDescriptionPosition: "Description Position" => "Položaj opisa"
+// theme.headerTitlePosition: "Title Position" => "Položaj naslova"
+// theme.headerDescriptionPosition: "Description Position" => "Položaj opisa"
 // lg.question_resetValueText: "reset value for question: {0}" => "Vrati izvornu vrijednost za pitanje: {0}"
 // lg.question_setValueText: "assign value: {1} to question: {0}" => "Dodijeli vrijednost: {1} pitanje: {0}"
 // lg.column_resetValueText: "reset cell value for column: {0}" => "Vrati izvornu vrijednost ćelije za stupac: {0}"
@@ -2129,18 +2151,14 @@ editorLocalization.locales["hr"] = hrStrings;
 // pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "Primjenjuje se kada je \"Vrsta izvora\" \"Lokalne datoteke\" ili kada kamera nije dostupna"
 // pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "Primjenjuje se kada je \"Vrsta izvora\" \"Kamera\"."
 // pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "Primjenjuje se kada je \"Vrsta izvora\" \"Lokalne datoteke ili kamera\"."
-// theme.groupBackground: "Background" => "Pozadina"
-// theme.groupAppearance: "Appearance" => "Izgled"
-// theme.coverDescriptionForecolor: "Description forecolor" => "Opis prednje boje"
+// theme.background: "Background" => "Pozadina"
+// theme.appearance: "Appearance" => "Izgled"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Želite li zaista resetirati temu? Sve prilagodbe bit će izgubljene."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "Da, resetirajte temu"
-// theme.groupBackground: "Background" => "Pozadina"
-// theme.groupAppearance: "Appearance" => "Izgled"
-// theme.coverDescriptionForecolor: "Description forecolor" => "Opis prednje boje"
-// theme.coverInheritWidthFromContainer: "Fit to container" => "Prilagodi spremniku"
+// theme.headerInheritWidthFromContainer: "Fit to container" => "Prilagodi spremniku"
 // signaturepad.showPlaceholder: "Show the placeholder" => "Pokaži rezervirano mjesto"
 // signaturepad.placeholder: "Placeholder text" => "Tekst rezerviranog mjesta"
-// theme.surveyDescription: "Survey description font" => "Font opisa upitnika"
+// theme.surveyDescriptionFont: "Survey description font" => "Font opisa upitnika"
 
 // ed.prevFocus: "Focus previous" => "Fokusiraj prethodno"
 // ed.nextFocus: "Focus next" => "Usredotoči se sljedeće"
@@ -2542,3 +2560,82 @@ editorLocalization.locales["hr"] = hrStrings;
 // ed.selectFile: "Select a file" => "Odabir datoteke"
 // ed.removeFile: "Remove the file" => "Uklanjanje datoteke"
 // pe.searchMode: "Search Mode" => "Način pretraživanja"
+// ed.surveyPlaceHolderMobile: "Click the \"Add Question\" button below to start creating your form." => "Kliknite donji gumb \"Dodaj pitanje\" da biste započeli stvaranje obrasca."
+// ed.pagePlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the page." => "Kliknite donji gumb \"Dodaj pitanje\" da biste na stranicu dodali novi element."
+// ed.panelPlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the panel." => "Kliknite donji gumb \"Dodaj pitanje\" da biste na ploču dodali novi element."
+// ed.imagePlaceHolderMobile: "Click the button below and choose an image to upload" => "Kliknite donji gumb i odaberite sliku koju želite prenijeti"
+// coloralpha.opacity: "Opacity" => "Neprozirnost"
+// font.family: "Font family" => "Obitelj fontova"
+// font.color: "Color" => "Boja"
+// font.placeholderColor: "Placeholder color" => "Boja rezerviranog mjesta"
+// font.size: "Size" => "Veličina"
+// theme.themeName: "Theme" => "Tema"
+// theme.isPanelless: "Question appearance" => "Izgled pitanja"
+// theme.editorPanel: "Background and corner radius" => "Polumjer pozadine i kuta"
+// theme.questionPanel: "Background and corner radius" => "Polumjer pozadine i kuta"
+// theme.primaryColor: "Accent color" => "Boja isticanja"
+// theme.panelBackgroundTransparency: "Panel background opacity" => "Neprozirnost pozadine ploče"
+// theme.questionBackgroundTransparency: "Question background opacity" => "Pitanje neprozirnosti pozadine"
+// theme.fontSize: "Font size" => "Veličina fonta"
+// theme.scale: "Scale" => "Vaga"
+// theme.cornerRadius: "Corner radius" => "Kutni radijus"
+// theme.pageTitle: "Title font" => "Font naslova"
+// theme.pageDescription: "Description font" => "Font opisa"
+// theme.questionTitle: "Title font" => "Font naslova"
+// theme.questionDescription: "Description font" => "Font opisa"
+// theme.editorFont: "Font" => "Krstionica"
+// theme.backgroundOpacity: "Opacity" => "Neprozirnost"
+// theme.--sjs-font-family: "Font family" => "Obitelj fontova"
+// theme.--sjs-general-backcolor-dim: "Background color" => "Boja pozadine"
+// theme.--sjs-primary-backcolor: "Accent background" => "Pozadina isticanja"
+// theme.--sjs-primary-forecolor: "Accent foreground" => "Isticanje u prvom planu"
+// theme.--sjs-shadow-small: "Shadow effects" => "Efekti sjene"
+// theme.--sjs-shadow-inner: "Shadow effects" => "Efekti sjene"
+// theme.--sjs-border-default: "Colors" => "Boje"
+// header@header.headerView: "View" => "Pogled"
+// header@header.logoPosition: "Logo position" => "Položaj logotipa"
+// header@header.surveyTitle: "Survey title font" => "Font naslova upitnika"
+// header@header.surveyDescription: "Survey description font" => "Font opisa upitnika"
+// header@header.headerTitle: "Survey title font" => "Font naslova upitnika"
+// header@header.headerDescription: "Survey description font" => "Font opisa upitnika"
+// header@header.inheritWidthFrom: "Content area width" => "Širina područja sadržaja"
+// header@header.textAreaWidth: "Text width" => "Širina teksta"
+// header@header.backgroundColorSwitch: "Background color" => "Boja pozadine"
+// header@header.backgroundImage: "Background image" => "Pozadinska slika"
+// header@header.backgroundImageOpacity: "Opacity" => "Neprozirnost"
+// header@header.overlapEnabled: "Overlap" => "Preklapanje"
+// header@header.logoPositionX: "Logo position" => "Položaj logotipa"
+// header@header.titlePositionX: "Title position" => "Položaj naslova"
+// header@header.descriptionPositionX: "Description position" => "Položaj opisa"
+// weight.400: "Regular" => "Redovan"
+// weight.600: "Heavy" => "Težak"
+// weight.700: "Semi-bold" => "Polupodebljano"
+// weight.800: "Bold" => "Odvažan"
+// backgroundImageFit.auto: "Auto" => "Automobil"
+// backgroundImageFit.cover: "Cover" => "Pokriti"
+// backgroundImageFit.contain: "Contain" => "Sadržavati"
+// backgroundImageFit.fill: "Stretch" => "Parcela"
+// backgroundImageFit.tile: "Tile" => "Crijep"
+// backgroundImageAttachment.fixed: "Fixed" => "Fiksirane"
+// backgroundImageAttachment.scroll: "Scroll" => "Svitak"
+// headerView.basic: "Basic" => "Osnovni"
+// headerView.advanced: "Advanced" => "Napredan"
+// inheritWidthFrom.survey: "Same as survey" => "Isto kao i anketa"
+// inheritWidthFrom.container: "Fit to container" => "Prilagodi spremniku"
+// backgroundColorSwitch.none: "None" => "Nijedan"
+// backgroundColorSwitch.accentColor: "Accent color" => "Boja isticanja"
+// backgroundColorSwitch.custom: "Custom" => "Običaj"
+// colorPalette.light: "Light" => "Svjetlo"
+// colorPalette.dark: "Dark" => "Mračan"
+// isPanelless.false: "Default" => "Propust"
+// isPanelless.true: "Without Panels" => "Bez panela"
+// theme.cornerRadius: "Corner radius" => "Kutni radijus"
+// theme.fontFamily: "Font family" => "Obitelj fontova"
+// theme.fontWeightRegular: "Regular" => "Redovan"
+// theme.fontWeightHeavy: "Heavy" => "Težak"
+// theme.fontWeightSemiBold: "Semi-bold" => "Polupodebljano"
+// theme.fontWeightBold: "Bold" => "Odvažan"
+// theme.color: "Color" => "Boja"
+// theme.placeholderColor: "Placeholder color" => "Boja rezerviranog mjesta"
+// theme.size: "Size" => "Veličina"
+// theme.opacity: "Opacity" => "Neprozirnost"

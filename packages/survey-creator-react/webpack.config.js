@@ -49,17 +49,15 @@ const buildPlatformJson = {
   peerDependencies: {
     "ace-builds": "^1.4.12",
     "react": "^16.5.0 || ^17.0.1 || ^18.1.0",
-    "react-dom": "^16.5.0 || ^17.0.1 || ^18.1.0"
+    "react-dom": "^16.5.0 || ^17.0.1 || ^18.1.0",
+    "survey-core": packageJson.version,
+    "survey-react-ui": packageJson.version,
+    "survey-creator-core": packageJson.version
   },
   peerDependenciesMeta: {
     "ace-builds": {
       "optional": true
-    }
-  },
-  dependencies: {
-    "survey-core": packageJson.version,
-    "survey-react-ui": packageJson.version,
-    "survey-creator-core": packageJson.version
+    },
   },
   devDependencies: {}
 };
