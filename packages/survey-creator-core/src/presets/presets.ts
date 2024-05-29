@@ -19,6 +19,7 @@ export interface ICreatorPresetData {
     items?: Array<string>,
     showCategoryTitles?: boolean,
   };
+  localization?: any;
 }
 
 export class CreatorPreset extends CreatorPresetBase {

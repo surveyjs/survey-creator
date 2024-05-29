@@ -1,5 +1,7 @@
 import { CreatorTester } from "./creator-tester";
-import { CreatorPreset } from "../src/presets/presets";
+import { CreatorPreset, ICreatorPresetData } from "../src/presets/presets";
+import { editorLocalization } from "../src/editorLocalization";
+export * from "../src/localization/german";
 
 test("show/hidetabs", () => {
   const creator = new CreatorTester();
@@ -105,4 +107,28 @@ test("set property grid defintion", () => {
   expect(panels[1].name).toBe("logic");
   expect(panels[0].elements).toHaveLength(3);
   expect(panels[1].elements).toHaveLength(2);
+});
+test("apply localization", () => {
+  expect(editorLocalization.presetStrings).toBeFalsy();
+  expect(editorLocalization.getString("tabs.logic")).toEqual("Logic");
+  expect(editorLocalization.getString("tabs.logic", "de")).toEqual("Logik");
+  const json: ICreatorPresetData = {
+    localization: {
+      en: { tabs: { logic: "Logic edit" } },
+      de: { tabs: { logic: "Logik edit" } }
+    }
+  };
+  const preset = new CreatorPreset(json);
+  const creator = new CreatorTester();
+
+  preset.apply(creator);
+  expect(editorLocalization.presetStrings).toBeTruthy();
+  expect(editorLocalization.getString("tabs.logic")).toEqual("Logic edit");
+  expect(editorLocalization.getString("tabs.logic", "de")).toEqual("Logik edit");
+  json.localization.en.tabs.designer = "Designer edit";
+
+  preset.apply();
+  expect(editorLocalization.presetStrings).toBeTruthy();
+  expect(editorLocalization.getString("tabs.designer")).toEqual("Designer edit");
+  editorLocalization.presetStrings = undefined;
 });

@@ -7,6 +7,8 @@ import { SurveyQuestionPresetPropertiesDetail } from "../src/presets/editable/pr
 import { QuestionEmbeddedSurveyModel } from "../src/components/embedded-survey";
 import { CreatorPresetEditorModel } from "../src/presets/editable/presets-editor";
 export * from "../src/presets/editable/preset-question-ranking";
+import { PresetItemValue } from "../src/presets/editable/preset-question-ranking";
+import { editorLocalization } from "../src/editorLocalization";
 
 export * from "../src/components/embedded-survey";
 
@@ -575,4 +577,29 @@ test("Editor: get/set locale", () => {
   expect(editor.creator.locale).toBe("de");
   expect(editor.model.locale).toBe("de");
   expect(editor.navigationBar.actions[3].title).toBe("de");
+});
+test("Preset edit model, edit tabs title", () => {
+  const editor = new CreatorPresetEditorModel({ tabs: { items: [] } });
+  const survey = editor.model;
+  survey.setValue("tabs_show", true);
+  const itemsQuestion = survey.getQuestionByName("tabs_items");
+  expect(itemsQuestion.choices).toHaveLength(6);
+  const item = <PresetItemValue>itemsQuestion.choices[0];
+  expect(item.getType()).toEqual("presetitemvalue");
+  expect(item.value).toEqual("designer");
+  expect(item.locText.localizationName).toEqual("tabs.designer");
+  expect(item.text).toEqual("Designer");
+});
+test("Change editor localization on the fly", () => {
+  const editor = new CreatorPresetEditorModel({ tabs: { items: [] } });
+  const survey = editor.model;
+  survey.setValue("tabs_show", true);
+  const itemsQuestion = survey.getQuestionByName("tabs_items");
+  const item = <PresetItemValue>itemsQuestion.choices[0];
+  item.text = "Designer edit";
+  editor.applyFromSurveyModel();
+  const loc = editor.json.localization;
+  expect(loc).toBeTruthy();
+  expect(loc.en.tabs.designer).toEqual("Designer edit");
+  expect(loc.en.tabs.logic).toBeFalsy();
 });

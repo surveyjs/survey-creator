@@ -64,7 +64,10 @@ export class CreatorPresetEditableBase {
         res[item.getJsonPath(model)] = val;
       }
     });
-    return hasValue ? res : undefined;
+  }
+  public setJsonLocalizationStrings(model: SurveyModel, locStrs: any): any {
+    this.setJsonLocalizationStringsCore(model, locStrs);
+    this.children.forEach(item => item.setJsonLocalizationStrings(model, locStrs));
   }
   public setupQuestions(model: SurveyModel, creator: SurveyCreatorModel): void {
     this.setupQuestionsCore(model, creator);
@@ -101,6 +104,7 @@ export class CreatorPresetEditableBase {
   protected setupQuestionsCore(model: SurveyModel, creator: SurveyCreatorModel): void { }
   protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {}
   protected getJsonValueCore(model: SurveyModel): any { return undefined; }
+  protected setJsonLocalizationStringsCore(model: SurveyModel, locStrs: any): void {}
   protected setupOnCurrentPageCore(model: SurveyModel, creator: SurveyCreatorModel): void {}
   protected updateOnValueChangedCore(model: SurveyModel, creator: SurveyCreatorModel, name: string): void {}
   protected updateOnMatrixDetailPanelVisibleChangedCore(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {}

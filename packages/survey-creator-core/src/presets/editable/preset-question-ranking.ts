@@ -1,4 +1,5 @@
 import { QuestionRankingModel, ItemValue, Serializer, ElementFactory } from "survey-core";
+import { editorLocalization } from "../../editorLocalization";
 
 export class PresetItemValue extends ItemValue {
   constructor(value: any, text: string = null, protected typeName = "presetitemvalue"
@@ -7,6 +8,27 @@ export class PresetItemValue extends ItemValue {
   }
   public getType(): string {
     return !!this.typeName ? this.typeName : "presetitemvalue";
+  }
+  public updateModifiedText(locStrs: any): void {
+    if(!this.locText.localizationName) return undefined;
+    const text = this.locText.text;
+    const presetStrs = editorLocalization.presetStrings;
+    editorLocalization.presetStrings = undefined;
+    if(text !== editorLocalization.getString(this.locText.localizationName)) {
+      this.saveTextInLocStrs(locStrs, text);
+    }
+    editorLocalization.presetStrings = presetStrs;
+  }
+  private saveTextInLocStrs(locStrs: any, text: string): void {
+    const paths = this.locText.localizationName.split(".");
+    for(let i = 0; i < paths.length - 1; i ++) {
+      const path = paths[i];
+      if(!locStrs[path]) {
+        locStrs[path] = {};
+      }
+      locStrs = locStrs[path];
+    }
+    locStrs[paths[paths.length - 1]] = text;
   }
 }
 

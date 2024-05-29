@@ -113,13 +113,34 @@ export class CreatorPresetEditorModel extends Base {
     return true;
   }
   public getJsonFromSurveyModel(): any {
-    const res: any = {};
+    const res: ICreatorPresetData = {};
+    const locStrs: any = {};
     this.model.editablePresets.forEach(preset => {
       const val = preset.getJsonValue(this.model);
       if(!!val) {
         res[preset.path] = val;
       }
+      preset.setJsonLocalizationStrings(this.model, locStrs);
     });
+    if(this.json && !!this.json.localization) {
+      res.localization = JSON.parse(JSON.stringify(this.json.localization));
+    }
+    const locale = this.locale || "en";
+    if(Object.keys(locStrs).length > 0) {
+      if(!res.localization) {
+        res.localization = {};
+      }
+      res.localization[locale] = locStrs;
+    } else {
+      if(res.localization) {
+        if(res.localization[locale]) {
+          delete res.localization[locale];
+        }
+        if(Object.keys(res.localization).length === 0) {
+          delete res.localization;
+        }
+      }
+    }
     return res;
   }
   private validateEditableModel(model: SurveyModel): boolean {

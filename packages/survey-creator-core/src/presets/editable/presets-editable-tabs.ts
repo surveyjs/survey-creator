@@ -2,6 +2,7 @@ import { ItemValue, Question, SurveyModel } from "survey-core";
 import { CreatorPresetEditableBase } from "./presets-editable-base";
 import { SurveyCreatorModel } from "../../creator-base";
 import { editorLocalization } from "../../editorLocalization";
+import { PresetItemValue, QuestionPresetRankingModel } from "./preset-question-ranking";
 
 export class CreatorPresetEditableTabs extends CreatorPresetEditableBase {
   public createMainPageCore(): any {
@@ -46,13 +47,21 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableBase {
     }
     return val;
   }
+  protected setJsonLocalizationStringsCore(model: SurveyModel, locStrs: any): void {
+    const question = <QuestionPresetRankingModel>model.getQuestionByName(this.nameItems);
+    if(!question.isVisible) return;
+    question.choices.forEach(item => {
+      <PresetItemValue>(item).updateModifiedText(locStrs);
+    });
+  }
   protected setupQuestionsCore(model: SurveyModel, creator: SurveyCreatorModel): void {
     const q = model.getQuestionByName(this.nameItems);
     if (q) {
-      const choices = [];
-      creator.getAvailableTabNames().forEach(tab => choices.push(new ItemValue(tab, this.getTabTitle(tab))));
-
-      q.choices = choices;
+      creator.getAvailableTabNames().forEach(tab => {
+        const item = new PresetItemValue(tab);
+        item.locTitle.localizationName = "tabs." + tab;
+        q.choices.push(item);
+      });
     }
   }
   protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
@@ -61,9 +70,6 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableBase {
     model.setValue(this.nameShow, items.length > 0);
     model.setValue(this.nameItems, items.length > 0 ? items : creator.getTabNames());
     model.setValue(this.nameActiveTab, json["activeTab"] || creator.activeTab);
-  }
-  private getTabTitle(name: string): string {
-    return editorLocalization.getString("tabs." + name);
   }
   private get nameShow() { return this.path + "_show"; }
   private get nameItems() { return this.path + "_items"; }
