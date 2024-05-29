@@ -4,7 +4,8 @@ import {
   PanelModelBase, QuestionMatrixDropdownModel, PanelModel, Action, IAction, QuestionCommentModel,
   ComputedUpdater, createDropdownActionModel, Helpers, QuestionMatrixDynamicModel,
   PopupBaseViewModel, IDialogOptions, settings as surveySettings, ListModel, PopupModel, BaseAction,
-  MatrixDropdownColumn
+  MatrixDropdownColumn,
+  createDropdownActionModelAdvanced
 } from "survey-core";
 import { unparse, parse } from "papaparse";
 import { editorLocalization } from "../../editorLocalization";
@@ -1545,34 +1546,33 @@ export class TranslationEditor {
     return res;
   }
   private createLocaleFromAction(): IAction {
-    const action = new Action({
-      id: "svc-translation-fromlocale",
-      component: "sv-action-bar-item-dropdown",
-      css: "svc-translation-machine-from",
-    });
     const defaultLocaleTitle = this.getActionTranslateFromText("");
     const onActionTypesPopupShow = () => {
       const items = [{ id: null, title: defaultLocaleTitle }];
       this.fromLocales.forEach(locale => {
         items.push({ id: locale, title: this.getActionTranslateFromText(locale) });
       });
-      actionTypesPopupModel.contentComponentData.model.setItems(items);
+      const listModel = action.popupModel.contentComponentData.model;
+      listModel.setItems(items);
     };
-    const actionTypesListModel = new ListModel(
-      [{ id: null, title: defaultLocaleTitle }],
-      (item: IAction) => {
+
+    const action = createDropdownActionModelAdvanced({
+      id: "svc-translation-fromlocale",
+      title: defaultLocaleTitle,
+      css: "svc-translation-machine-from",
+    }, {
+      items: [{ id: null, title: defaultLocaleTitle }],
+      onSelectionChanged: (item: IAction) => {
         const id = item.id || "";
         this.setFromLocale(id);
         action.title = this.getActionTranslateFromText(id);
-        actionTypesPopupModel.toggleVisibility();
-      }, true);
-    const actionTypesPopupModel = new PopupModel<{ model: ListModel<BaseAction> }>(
-      "sv-list", { model: actionTypesListModel }, "bottom", "center");
-
-    actionTypesPopupModel.onShow = onActionTypesPopupShow;
-    action.popupModel = actionTypesPopupModel;
-    action.title = defaultLocaleTitle;
-    action.action = () => { actionTypesPopupModel.toggleVisibility(); };
+      },
+      allowSelection: true
+    }, {
+      verticalPosition: "bottom",
+      horizontalPosition: "center",
+      onShow: onActionTypesPopupShow
+    });
 
     return action;
   }

@@ -1,4 +1,4 @@
-import { BaseAction, Action, IAction, PopupModel, ListModel, ComputedUpdater } from "survey-core";
+import { Action, IAction, ComputedUpdater, createDropdownActionModelAdvanced } from "survey-core";
 import { getLogicString } from "./logic-types";
 import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
@@ -92,54 +92,11 @@ export class TabLogicPlugin implements ICreatorPlugin {
   }
   public createActions() {
     const items: Array<Action> = [];
-    const onQuestionPopupShow = () => {
-      const items = this.model.getUsedQuestions().map(question => { return { id: question.name, title: this.creator.getObjectDisplayName(question, "logic-tab:question-filter", "condition", question.name) }; });
-      SurveyHelper.sortItems(items, "title");
-      questionPopupModel.contentComponentData.model.setItems([{ id: null, title: this.showAllQuestionsText }].concat(items));
-    };
-    const questionListModel = new ListModel(
-      [{ id: null, title: this.showAllQuestionsText }],
-      (item: IAction) => {
-        this.model.questionFilter = !!item.id ? item.id : "";
-        questionPopupModel.toggleVisibility();
-      }, true);
-    questionListModel.locOwner = this.creator;
-    const questionPopupModel = new PopupModel<{ model: ListModel<BaseAction> }>(
-      "sv-list", { model: questionListModel }, "bottom", "center");
-    questionPopupModel.onShow = onQuestionPopupShow;
 
-    this.filterQuestionAction = new Action({
-      id: "svc-logic-filter-question",
-      visible: false,
-      component: "sv-action-bar-item-dropdown",
-      popupModel: questionPopupModel,
-      action: () => { questionPopupModel.toggleVisibility(); }
-    });
+    this.filterQuestionAction = this.createFilterQuestionAction();
     items.push(this.filterQuestionAction);
 
-    const onActionTypesPopupShow = () => {
-      const items = this.model.getUsedActionTypes().map(type => { return { id: type.name, title: type.displayName }; });
-      SurveyHelper.sortItems(items, "title");
-      actionTypesPopupModel.contentComponentData.model.setItems([{ id: null, title: this.showAllActionTypesText }].concat(items));
-    };
-    const actionTypesListModel = new ListModel(
-      [{ id: null, title: this.showAllActionTypesText }],
-      (item: IAction) => {
-        this.model.actionTypeFilter = !!item.id ? item.id : "";
-        actionTypesPopupModel.toggleVisibility();
-      }, true);
-    actionTypesListModel.locOwner = this.creator;
-    const actionTypesPopupModel = new PopupModel<{ model: ListModel<BaseAction> }>(
-      "sv-list", { model: actionTypesListModel }, "bottom", "center");
-    actionTypesPopupModel.onShow = onActionTypesPopupShow;
-
-    this.filterActionTypeAction = new Action({
-      id: "svc-logic-filter-actiontype",
-      visible: false,
-      component: "sv-action-bar-item-dropdown",
-      popupModel: actionTypesPopupModel,
-      action: () => { actionTypesPopupModel.toggleVisibility(); }
-    });
+    this.filterActionTypeAction = this.createFilterActionTypeAction();
     items.push(this.filterActionTypeAction);
 
     if (this.creator.allowEditExpressionsInTextEditor) {
@@ -157,6 +114,60 @@ export class TabLogicPlugin implements ICreatorPlugin {
     }
     return items;
   }
+  private createFilterActionTypeAction() {
+    const onActionTypesPopupShow = () => {
+      const items = this.model.getUsedActionTypes().map(type => { return { id: type.name, title: type.displayName }; });
+      SurveyHelper.sortItems(items, "title");
+      const listModel = filterActionTypeAction.popupModel.contentComponentData.model;
+      listModel.setItems([{ id: null, title: this.showAllActionTypesText }].concat(items));
+    };
+
+    const filterActionTypeAction = createDropdownActionModelAdvanced({
+      id: "svc-logic-filter-actiontype",
+      visible: false,
+      component: "sv-action-bar-item-dropdown",
+    }, {
+      items: [{ id: null, title: this.showAllActionTypesText }],
+      onSelectionChanged: (item: IAction) => {
+        this.model.actionTypeFilter = !!item.id ? item.id : "";
+      },
+      allowSelection: true,
+      locOwner: this.creator
+    }, {
+      verticalPosition: "bottom",
+      horizontalPosition: "center",
+      onShow: onActionTypesPopupShow
+    });
+    return filterActionTypeAction;
+  }
+
+  private createFilterQuestionAction() {
+    const onQuestionPopupShow = () => {
+      const items = this.model.getUsedQuestions().map(question => { return { id: question.name, title: this.creator.getObjectDisplayName(question, "logic-tab:question-filter", "condition", question.name) }; });
+      SurveyHelper.sortItems(items, "title");
+      const listModel = filterQuestionAction.popupModel.contentComponentData.model;
+      listModel.setItems([{ id: null, title: this.showAllQuestionsText }].concat(items));
+    };
+
+    const filterQuestionAction = createDropdownActionModelAdvanced({
+      id: "svc-logic-filter-question",
+      visible: false,
+      component: "sv-action-bar-item-dropdown",
+    }, {
+      items: [{ id: null, title: this.showAllQuestionsText }],
+      onSelectionChanged: (item: IAction) => {
+        this.model.questionFilter = !!item.id ? item.id : "";
+      },
+      allowSelection: true,
+      locOwner: this.creator
+    }, {
+      verticalPosition: "bottom",
+      horizontalPosition: "center",
+      onShow: onQuestionPopupShow
+    });
+    return filterQuestionAction;
+  }
+
   private get showAllQuestionsText() { return getLogicString("showAllQuestions"); }
   private get showAllActionTypesText() { return getLogicString("showAllActionTypes"); }
 }
