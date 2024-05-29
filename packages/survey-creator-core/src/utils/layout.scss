@@ -7,7 +7,7 @@
 .svc-flex-row {
   display: flex;
   flex-direction: row;
-  background: $background-dim;
+  background: var(--ctr-surface-background-color, $background-dim);
 }
 
 .svc-full-container {
@@ -53,7 +53,7 @@
 
 .svc-top-bar {
   display: flex;
-  background: $background;
+  background: var(--ctr-menu-item-background-color, $background);
   box-sizing: border-box;
   box-shadow: inset 0px -1px 0px $border;
 

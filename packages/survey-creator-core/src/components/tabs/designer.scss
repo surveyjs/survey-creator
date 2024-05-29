@@ -12,6 +12,11 @@ svc-tab-designer {
   height: 100%;
   overflow-y: scroll;
   position: static;
+  background: var(--ctr-surface-background-color, $background-dim);
+
+  .svc-text {
+    color: var(--ctr-surface-placeholder-text-title-color, $foreground);
+  }
 }
 
 .svc-tab-designer--with-place-holder .svc-tab-designer_content {
@@ -67,6 +72,18 @@ svc-tab-designer {
 
 .svc-designer-header {
   border-bottom: 2px solid transparent;
+
+  h3.sd-title {
+    .sv-string-editor {
+      &[aria-placeholder]:empty:before {
+        color: var(--ctr-survey-header-text-title-color-placeholder, $foreground-light);
+      }
+    }
+  }
+
+  .sd-description {
+    color: var(--ctr-survey-header-text-description-color-placeholder, #909090);
+  }
 }
 
 .svc-designer__placeholder-container {

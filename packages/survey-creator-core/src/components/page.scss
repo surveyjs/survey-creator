@@ -33,6 +33,14 @@ svc-page {
   inset-inline-end: 0; // right
   padding: 0 calcSize(1.5);
   z-index: 1;
+
+  h4.sd-title {
+    .sv-string-editor {
+      &[aria-placeholder]:empty:before {
+        color: var(--ctr-survey-page-header-title-color-placeholder, $foreground-light);
+      }
+    }
+  }
 }
 
 .svc-page__content:not(.svc-page__content--new):focus,
@@ -94,15 +102,15 @@ svc-page {
   outline: none;
 
   use {
-    fill: $foreground-light;
+    fill: var(--ctr-library-contextual-button-icon-color, $foreground-light);
   }
 
   &:hover {
-    background-color: $background-dim;
+    background-color: var(--ctr-button-contextual-button-background-color-hovered, $background-dim);
   }
 
   &:focus {
-    background-color: $primary-light;
+    background-color: var(--ctr-button-contextual-button-background-color-focused, $primary-light);
   }
 }
 

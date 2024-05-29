@@ -13,7 +13,12 @@ svc-toolbox {
   overflow-y: auto;
   direction: rtl;
   scrollbar-gutter: stable both-edges;
+
+  .svc-item__banner {
+    background-color: var(--ctr-toolbox-item-background-color-hovered, $background);
+  }
 }
+
 .svc-side-bar {
   .svc-toolbox {
     direction: ltr;
@@ -32,6 +37,7 @@ _:future,
   overflow-y: scroll;
   scrollbar-gutter: auto;
 }
+
 .svc-creator__toolbox--right,
 [dir='rtl'],
 [style*='direction:rtl'],
@@ -39,11 +45,13 @@ _:future,
   .svc-toolbox {
     direction: ltr;
   }
+
   .svc-toolbox--compact {
     margin-right: 0;
     margin-left: calc(-100vw + calcSize(10.5));
     direction: ltr;
   }
+
   .svc-toolbox__tool {
     .sv-action__content {
       align-items: flex-end;

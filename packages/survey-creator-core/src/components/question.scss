@@ -699,7 +699,7 @@ svc-question,
   outline: none;
 
   use {
-    fill: $foreground-light;
+    fill: var(--ctr-library-contextual-button-icon-color, $foreground-light);
   }
 
   &:hover {

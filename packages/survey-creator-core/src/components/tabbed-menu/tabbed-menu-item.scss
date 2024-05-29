@@ -6,18 +6,23 @@
   line-height: calcSize(4);
   box-sizing: border-box;
   cursor: pointer;
-  color: var(--ctr-menu-item-text-color, $foreground);
+
   &:hover,
   &:focus {
     background-color: var(--ctr-menu-item-background-color-hovered, $background-dim);
     box-shadow: inset 0px -1px 0px $border;
     outline: none;
   }
+
+  .svc-text {
+    color: var(--ctr-menu-item-text-color, $foreground);
+  }
 }
 
 .svc-tabbed-menu-item--selected {
   background: var(--ctr-menu-item-background-color, $background);
   box-shadow: inset 0px -2px 0px var(--ctr-menu-item-border-color-selected, $primary);
+
   &:hover,
   &:focus {
     background: var(--ctr-menu-item-background-color, $background);
@@ -28,6 +33,7 @@
 .svc-tabbed-menu-item--disabled {
   cursor: default;
   opacity: var(--ctr-menu-item-opacity-disabled, 0.25);
+
   &:hover {
     background-color: var(--ctr-menu-item-background-color, $background);
   }
@@ -36,6 +42,7 @@
 .svc-tabbed-menu-item--hidden {
   visibility: hidden;
 }
+
 .svc-tabbed-menu-item {
   .svc-tabbed-menu-item__text {
     white-space: nowrap;
