@@ -1567,6 +1567,24 @@ export class PropertyGridEditorColor extends PropertyGridEditor {
     return res;
   }
 }
+
+export class PropertyGridEditorColorWithAlpha extends PropertyGridEditor {
+  public fit(prop: JsonObjectProperty): boolean {
+    return prop.type == "coloralpha";
+  }
+  public getJSON(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): any {
+    return { type: "coloralpha", descriptionLocation: "hidden" };
+  }
+  public onCreated(obj: Base, question: Question, prop: JsonObjectProperty) {
+    question.valueFromDataCallback = function (val: any): any {
+      return val;
+    };
+    question.valueToDataCallback = function (val: any): any {
+      return val;
+    };
+  }
+}
+
 export class PropertyGridEditorNumber extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "number" || prop.type == "responsiveImageSize";
@@ -1598,6 +1616,16 @@ export class PropertyGridEditorNumber extends PropertyGridEditor {
         }
       }
     }
+  }
+}
+
+export class PropertyGridEditorSpinEdit extends PropertyGridEditor {
+  public fit(prop: JsonObjectProperty): boolean {
+    return prop.type == "spinedit";
+  }
+  public getJSON(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): any {
+    const res: any = { type: "spinedit", descriptionLocation: "hidden" };
+    return res;
   }
 }
 
@@ -1943,6 +1971,7 @@ export class PropertyGridEditorQuestionValue extends PropertyGridEditorQuestion 
 PropertyGridEditorCollection.register(new PropertyGridEditorBoolean());
 PropertyGridEditorCollection.register(new PropertyGridEditorString());
 PropertyGridEditorCollection.register(new PropertyGridEditorNumber());
+PropertyGridEditorCollection.register(new PropertyGridEditorSpinEdit());
 PropertyGridEditorCollection.register(new PropertyGridEditorText());
 PropertyGridEditorCollection.register(new PropertyGridEditorHtml());
 PropertyGridEditorCollection.register(new PropertyGridEditorDropdown());
@@ -1955,6 +1984,7 @@ PropertyGridEditorCollection.register(new PropertyGridEditorQuestionSelectBase()
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestionCarryForward());
 PropertyGridEditorCollection.register(new PropertyGridEditorImageSize());
 PropertyGridEditorCollection.register(new PropertyGridEditorColor());
+PropertyGridEditorCollection.register(new PropertyGridEditorColorWithAlpha());
 PropertyGridEditorCollection.register(new PropertyGridEditorDateTime());
 
 QuestionFactory.Instance.registerQuestion("buttongroup", (name) => {
