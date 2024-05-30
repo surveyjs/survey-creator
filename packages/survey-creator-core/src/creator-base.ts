@@ -51,14 +51,15 @@ import {
   CreateCustomMessagePanelEvent, ActiveTabChangingEvent, ActiveTabChangedEvent, BeforeUndoEvent, BeforeRedoEvent,
   PageAddingEvent, DragStartEndEvent
 } from "./creator-events-api";
+import { SurveyElementActionContainer } from "./components/action-container-view-model";
 
 require("./components/creator.scss");
 require("./components/string-editor.scss");
 require("./creator-theme/creator.scss");
 
-class SurveyTranslationStringsModel extends SurveyModel {
+class SurveyTranslationHeaderStringsModel extends SurveyModel {
   protected createNavigationBar(): ActionContainer {
-    const res = new AdaptiveActionContainer();
+    const res = new SurveyElementActionContainer();
     res.setItems(this.createNavigationActions());
     return res;
   }
@@ -2096,8 +2097,8 @@ export class SurveyCreatorModel extends Base
     return !!res ? res : "internal-use";
   }
   protected createSurveyCore(json: any = {}, reason: string): SurveyModel {
-    if(reason === "translation_strings") {
-      return new SurveyTranslationStringsModel(json);
+    if(reason === "translation_strings_header") {
+      return new SurveyTranslationHeaderStringsModel(json);
     }
     return new SurveyModel(json);
   }

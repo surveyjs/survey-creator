@@ -4,6 +4,7 @@ import "survey-core/survey.i18n";
 import { EmptySurveyCreatorOptions } from "../../src/creator-settings";
 import { CreatorTester } from "../creator-tester";
 import { TabTranslationPlugin } from "../../src/components/tabs/translation-plugin";
+import { SurveyElementActionContainer } from "../../src/components/action-container-view-model";
 
 test("create locales question for edit translation", () => {
   const survey = new SurveyModel({
@@ -193,7 +194,7 @@ test("Implement machine translation for Creator", () => {
   const tabTranslation = new TabTranslationPlugin(creator);
   tabTranslation.activate();
   let editor = tabTranslation.model.createTranslationEditor("fr");
-  let actions = editor.translation.stringsSurvey.navigationBar.actions;
+  let actions = editor.translation.stringsHeaderSurvey.navigationBar.actions;
   expect(actions).toHaveLength(3);
   expect(actions[0].id).toBe("svc-translation-fromlocale");
   expect(actions[0].enabled).toBeFalsy();
@@ -203,7 +204,7 @@ test("Implement machine translation for Creator", () => {
   });
   expect(creator.getHasMachineTranslation()).toBeTruthy();
   editor = tabTranslation.model.createTranslationEditor("fr");
-  actions = editor.translation.stringsSurvey.navigationBar.actions;
+  actions = editor.translation.stringsHeaderSurvey.navigationBar.actions;
   expect(actions).toHaveLength(4);
   expect(actions[0].id).toBe("svc-translation-fromlocale");
   expect(actions[0].enabled).toBeFalsy();
@@ -283,43 +284,45 @@ test("Machine translation from non default locale - UI", () => {
   tabTranslation.activate();
   const editor: TranslationEditor = tabTranslation.model.createTranslationEditor("es");
   expect(editor.fromLocales).toHaveLength(2);
-  const actions = editor.translation.stringsSurvey.navigationBar.actions;
+  const actions = editor.translation.stringsHeaderSurvey.navigationBar.actions;
   expect(actions).toHaveLength(4);
   expect(actions[1].visible).toBeTruthy();
 
   expect(editor.translation.root.allLocItems).toHaveLength(3);
   expect(editor.translation.getVisibleLocales()).toHaveLength(1);
   let matrix = <QuestionMatrixDropdownModel>editor.translation.stringsSurvey.getAllQuestions()[0];
-  expect(matrix.showHeader).toBeTruthy();
+  expect(matrix.showHeader).toBeFalsy();
   expect(matrix.columns).toHaveLength(2);
   expect(matrix.columns[1].name).toBe("es");
 
   editor.setFromLocale("de");
   expect(editor.translation.getVisibleLocales()).toHaveLength(1);
   matrix = <QuestionMatrixDropdownModel>editor.translation.stringsSurvey.getAllQuestions()[0];
-  expect(matrix.showHeader).toBeTruthy();
+  let headerMatrix = <QuestionMatrixDropdownModel>editor.translation.stringsHeaderSurvey.getAllQuestions()[0];
+  expect(matrix.showHeader).toBeFalsy();
   expect(matrix.columns).toHaveLength(3);
   expect(matrix.columns[1].name).toBe("de");
   expect(matrix.columns[2].name).toBe("es");
-  expect(matrix.columns[0].title).toBe("Default (English)");
-  expect(matrix.columns[1].title).toBe("Source: Deutsch");
-  expect(matrix.columns[2].title).toBe("Target: Español");
+  expect(headerMatrix.columns[0].title).toBe("Default (English)");
+  expect(headerMatrix.columns[1].title).toBe("Source: Deutsch");
+  expect(headerMatrix.columns[2].title).toBe("Target: Español");
 
   editor.setFromLocale("fr");
   expect(editor.translation.getVisibleLocales()).toHaveLength(1);
   matrix = <QuestionMatrixDropdownModel>editor.translation.stringsSurvey.getAllQuestions()[0];
-  expect(matrix.showHeader).toBeTruthy();
+  headerMatrix = <QuestionMatrixDropdownModel>editor.translation.stringsHeaderSurvey.getAllQuestions()[0];
+  expect(matrix.showHeader).toBeFalsy();
   expect(matrix.columns).toHaveLength(3);
   expect(matrix.columns[1].name).toBe("fr");
   expect(matrix.columns[2].name).toBe("es");
-  expect(matrix.columns[0].title).toBe("Default (English)");
-  expect(matrix.columns[1].title).toBe("Source: Français");
-  expect(matrix.columns[2].title).toBe("Target: Español");
+  expect(headerMatrix.columns[0].title).toBe("Default (English)");
+  expect(headerMatrix.columns[1].title).toBe("Source: Français");
+  expect(headerMatrix.columns[2].title).toBe("Target: Español");
 
   editor.setFromLocale("");
   expect(editor.translation.getVisibleLocales()).toHaveLength(1);
   matrix = <QuestionMatrixDropdownModel>editor.translation.stringsSurvey.getAllQuestions()[0];
-  expect(matrix.showHeader).toBeTruthy();
+  expect(matrix.showHeader).toBeFalsy();
   expect(matrix.columns).toHaveLength(2);
   expect(matrix.columns[1].name).toBe("es");
 });
@@ -444,7 +447,7 @@ test("Modify translation strings survey in a dialog, remove actions", () => {
   };
   creator.onMachineTranslate.add((sender, options) => {});
   creator.onSurveyInstanceCreated.add((sender, options) => {
-    if(options.area === "translation-tab:table-popup-editor") {
+    if(options.area === "translation-tab:table-header-popup-editor") {
       const actions = options.survey.navigationBar.actions;
       actions.splice(actions.length - 3, 3);
     }
@@ -453,6 +456,60 @@ test("Modify translation strings survey in a dialog, remove actions", () => {
   const tabTranslation = new TabTranslationPlugin(creator);
   tabTranslation.activate();
   const editor = tabTranslation.model.createTranslationEditor("de");
-  const actions = editor.translation.stringsSurvey.navigationBar.actions;
+  const actions = editor.translation.stringsHeaderSurvey.navigationBar.actions;
   expect(actions).toHaveLength(1);
+});
+
+test("Check navigation bar in translation dialog", () => {
+  let creator = new CreatorTester();
+  let json: any = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "text",
+            name: "q1",
+            title: "Title 1",
+          }
+        ]
+      }
+    ]
+  };
+  creator.onMachineTranslate.add((sender, options) => {});
+  creator.JSON = json;
+  let tabTranslation = new TabTranslationPlugin(creator);
+  tabTranslation.activate();
+  let editor = tabTranslation.model.createTranslationEditor("de");
+  let stringsHeaderSurvey = editor.translation.stringsHeaderSurvey;
+  let navigationBar = stringsHeaderSurvey.navigationBar;
+  expect(navigationBar).toBeInstanceOf(SurveyElementActionContainer);
+  let fromLocaleAction = navigationBar.getActionById("svc-translation-fromlocale");
+  expect(fromLocaleAction.location).toBe("start");
+  expect(fromLocaleAction.component).toBe("svc-translate-from-action");
+  expect(fromLocaleAction.data.additionalTitle).toBe("Translate from: ");
+  expect(fromLocaleAction.data.additionalTitleCss).toBe("st-translation-machine-from__title");
+  expect(fromLocaleAction.data.containerCss).toBe("st-translation-machine-from__container st-translation-machine-from__container--disabled");
+
+  creator = new CreatorTester();
+  json = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "text",
+            name: "q1",
+            title: { default: "title", es: "es: title" },
+          }
+        ]
+      }
+    ]
+  };
+  creator.onMachineTranslate.add((sender, options) => {});
+  creator.JSON = json;
+  tabTranslation = new TabTranslationPlugin(creator);
+  tabTranslation.activate();
+  editor = tabTranslation.model.createTranslationEditor("de");
+  expect(editor.translation.stringsHeaderSurvey.navigationBar.getActionById("svc-translation-fromlocale").data.containerCss).toBe("st-translation-machine-from__container");
 });
