@@ -111,6 +111,9 @@ svc-toolbox {
   .svc-toolbox__scroller {
     padding-top: 0;
   }
+  .svc-toolbox__search-container {
+    display: flex;
+  }
 }
 
 .svc-toolbox__panel {
@@ -161,7 +164,7 @@ svc-toolbox {
   margin-bottom: calcSize(1);
   margin-right: calcSize(-1.5);
   margin-left: calcSize(-1.5);
-  display: flex;
+  display: none;
   flex-direction: column;
   width: calc(100% + calcSize(3));
   box-sizing: border-box;
