@@ -54,6 +54,6 @@ Serializer.addClass("presetranking",
   function () { return new QuestionPresetRankingModel(""); },
   "ranking"
 );
-ElementFactory.Instance.registerElement("imagepicker", (name) => {
+ElementFactory.Instance.registerElement("presetranking", (name) => {
   return new QuestionPresetRankingModel(name);
 });
