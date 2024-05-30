@@ -252,6 +252,7 @@ export class QuestionToolbox
   private categoriesTitles: HashTable<string> = {};
 
   @property({
+    defaultValue: false,
     onSet: (val: boolean, target: QuestionToolbox) => {
       target.searchManager.isVisible = val;
     }
