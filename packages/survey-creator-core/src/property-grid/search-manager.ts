@@ -31,13 +31,13 @@ export abstract class SearchManagerBase extends Base {
     this.filterString = "";
   }
 
-  protected abstract setFiterString(newValue: string);
+  protected abstract setFiterString(newValue: string, oldValue: string);
 
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
     super.onPropertyValueChanged(name, oldValue, newValue);
 
     if (name === "filterString") {
-      this.setFiterString(newValue);
+      this.setFiterString(newValue, oldValue);
     }
   }
 
@@ -55,8 +55,8 @@ export abstract class SearchManagerBase extends Base {
 export class SearchManagerToolbox extends SearchManagerBase {
   @property() toolbox: QuestionToolbox;
   public filterStringPlaceholder = getLocString("ed.toolboxFilteredTextPlaceholder");
-  protected setFiterString(newValue: string) {
-    if (!!this.filterString != !!newValue) this.toolbox.lockScrollBar(!!newValue);
+  protected setFiterString(newValue: string, oldValue: string) {
+    if (!!oldValue != !!newValue) this.toolbox.lockScrollBar(!!newValue);
     this.toolbox.items.forEach(item => item.visible = item.hasText(newValue));
     this.toolbox.categories.forEach(category => category.forceExpand = !!newValue);
   }
@@ -132,7 +132,7 @@ export class SearchManager extends SearchManagerBase {
       return srcString.indexOf(newValueInLow) !== -1;
     });
   }
-  protected setFiterString(newValue: string) {
+  protected setFiterString(newValue: string, oldValue: string) {
     if(!newValue) {
       this.reset();
       return;

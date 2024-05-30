@@ -256,8 +256,9 @@ export class QuestionToolbox
       target.searchManager.isVisible = val;
     }
   }) searchEnabled: boolean;
-  @property() isScrollLocked: boolean;
+  @property({ defaultValue: false }) isScrollLocked: boolean;
   public lockScrollBar(val: boolean) {
+    if (!this._containerElementValue) return;
     this.isScrollLocked = val && this._containerElementValue.scrollHeight > this._containerElementValue.clientHeight;
   }
   public searchManager = new SearchManagerToolbox();
