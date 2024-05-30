@@ -88,6 +88,10 @@ export class SurveyQuestionPresetRankingItem extends SurveyQuestionRankingItem {
       </div>
     );
   }
+  private onBlur = (event: any) => {
+    this.item.locText.text = event.target.textContent;
+    return true;
+  };
   private onKeyDown = (event: React.KeyboardEvent<HTMLSpanElement>) => {
     event.stopPropagation();
   };
@@ -112,23 +116,6 @@ export class SurveyQuestionPresetRankingItem extends SurveyQuestionRankingItem {
     this.svStringEditorRef.current.focus();
   }
   protected renderText(): JSX.Element {
-    /*
-    <span
-    role="textbox"
-    //ref={this.svStringEditorRef}
-    className="sv-string-editor"
-    contentEditable={true}
-    spellCheck={false}
-    //aria-placeholder={this.placeholder}
-    //aria-label={this.placeholder || "content editable"}
-    suppressContentEditableWarning={true}
-    /*
-    onBlur={this.onBlur}
-    onInput={this.onInput}
-    onPaste={this.onPaste}
-    onFocus={this.onFocus}
-    onClick={this.edit}
-    */
     const className = "sv-string-editor";
     return (<span
       role="textbox"
@@ -137,6 +124,7 @@ export class SurveyQuestionPresetRankingItem extends SurveyQuestionRankingItem {
       contentEditable={true}
       spellCheck={false}
       suppressContentEditableWarning={true}
+      onBlur={this.onBlur}
       onKeyDown={this.onKeyDown}
       onKeyUp={this.onKeyUp}
       onMouseUp={this.onMouseUp}

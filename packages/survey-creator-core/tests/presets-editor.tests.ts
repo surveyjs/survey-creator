@@ -602,4 +602,5 @@ test("Change editor localization on the fly", () => {
   expect(loc).toBeTruthy();
   expect(loc.en.tabs.designer).toEqual("Designer edit");
   expect(loc.en.tabs.logic).toBeFalsy();
+  expect(editor.creator.tabs[0].locTitle.text).toEqual("Designer edit");
 });
