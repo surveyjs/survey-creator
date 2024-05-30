@@ -838,6 +838,7 @@ export class Translation extends Base implements ITranslationLocales {
   protected getSurveyStringsArea(): string { return undefined; }
   protected getSurveyStringsHeaderArea(): string { return undefined; }
   protected onSurveyStringsCreated(survey: SurveyModel): void {}
+  protected onSurveyStringsHeaderCreated(survey: SurveyModel): void {}
   private createStringsSurvey(): SurveyModel {
     var json = { autoGrowComment: true, allowResizeComment: false };
     setSurveyJSONForPropertyGrid(json, false);
@@ -911,8 +912,9 @@ export class Translation extends Base implements ITranslationLocales {
       matrix.titleLocation = "hidden";
       this.addLocaleColumns(matrix);
 
-      newPage.addQuestion(matrix);
+      newPage.addQuestion(matrix, 0);
       survey.currentPage = survey.pages[0];
+      this.onSurveyStringsHeaderCreated(survey);
     }, this.getSurveyStringsHeaderArea());
     return survey;
   }
@@ -1364,14 +1366,14 @@ export class TranslationForEditor extends Translation {
   constructor(
     survey: SurveyModel,
     options: ISurveyCreatorOptions,
-    private surveyStringsCreatedCallback: (survey: SurveyModel) => void
+    private surveyStringsHeaderCreatedCallback: (survey: SurveyModel) => void
   ) {
     super(survey, options, true);
   }
   protected getSurveyStringsArea(): string { return "translation-tab:table-popup-editor"; }
   protected getSurveyStringsHeaderArea(): string { return "translation-tab:table-header-popup-editor"; }
-  protected onSurveyStringsCreated(survey: SurveyModel): void {
-    this.surveyStringsCreatedCallback(survey);
+  protected onSurveyStringsHeaderCreated(survey: SurveyModel): void {
+    this.surveyStringsHeaderCreatedCallback(survey);
   }
 }
 export class TranslationEditor {
@@ -1416,10 +1418,9 @@ export class TranslationEditor {
     }
     const popupModel: PopupBaseViewModel = surveySettings.showDialog(
       <IDialogOptions>{
-        componentName: "survey",
+        componentName: "svc-tab-translation",
         data: {
-          survey: this.translation.stringsSurvey,
-          model: this.translation.stringsSurvey
+          model: this.translation
         },
         onApply: (): boolean => {
           this.apply();
@@ -1488,17 +1489,17 @@ export class TranslationEditor {
       column.readOnly = true;
       matrix.columns.splice(colIndex, 0, column);
     }
-    if(updateHeader) {
-      matrix.showHeader = true;
-      const cols = matrix.columns;
-      cols[0].title = this.translation.getLocaleName("");
-      if(cols.length > 2) {
-        cols[1].title = this.getHeaderTitle("translationSource", cols[1].name);
-        cols[2].title = this.getHeaderTitle("translationTarget", cols[2].name);
-      } else {
-        cols[1].title = this.getHeaderTitle("translationTarget", cols[1].name);
-      }
-    }
+    // if(updateHeader) {
+    //   // matrix.showHeader = true;
+    //   const cols = matrix.columns;
+    //   cols[0].title = this.translation.getLocaleName("");
+    //   if(cols.length > 2) {
+    //     cols[1].title = this.getHeaderTitle("translationSource", cols[1].name);
+    //     cols[2].title = this.getHeaderTitle("translationTarget", cols[2].name);
+    //   } else {
+    //     cols[1].title = this.getHeaderTitle("translationTarget", cols[1].name);
+    //   }
+    // }
   }
   private getHeaderTitle(strName: string, locale: string): string {
     return editorLocalization.getString("ed." + strName) + this.translation.getLocaleName(locale);
@@ -1599,7 +1600,7 @@ export class TranslationEditor {
     return action;
   }
   private updateFromLocaleAction() {
-    const action = this.translation.stringsSurvey.findLayoutElement("buttons-navigation").data.getActionById("svc-translation-fromlocale");
+    const action = this.translation.stringsHeaderSurvey.findLayoutElement("buttons-navigation").data.getActionById("svc-translation-fromlocale");
     if(!!action) {
       action.enabled = this.fromLocales.length > 0;
       action.iconName = action.enabled ? "icon-chevron_16x16" : undefined;
