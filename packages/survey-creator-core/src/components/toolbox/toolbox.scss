@@ -52,19 +52,11 @@ svc-toolbox {
   }
 }
 
-_::-webkit-full-page-media,
-_:future,
-:root .svc-toolbox {
-  padding: calcSize(2);
-}
 
 .svc-toolbox--compact {
   width: 100vw;
   margin-right: calc(-100vw + calcSize(10.5));
 
-  .svc-toolbox__scroller {
-    scrollbar-gutter: auto;
-  }
   .spg-search-editor_container {
     opacity: 0;
     position: absolute;
@@ -100,10 +92,6 @@ _:future,
     width: fit-content;
     border-right: 1px solid $border-inside;
     box-shadow: $shadow-medium, $shadow-large;
-
-    .svc-toolbox__scroller {
-      scrollbar-gutter: auto;
-    }
   }
 }
 
