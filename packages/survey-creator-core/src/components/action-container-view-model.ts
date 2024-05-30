@@ -13,7 +13,7 @@ import { settings } from "../creator-settings";
 
 export class SurveyElementActionContainer extends AdaptiveActionContainer {
   private needToShrink(item: Action, shrinkStart: boolean, shrinkEnd: boolean) {
-    return (item.location == "start" && shrinkStart || item.location != "start" && shrinkEnd);
+    return (item.innerItem.location == "start" && shrinkStart || item.innerItem.location != "start" && shrinkEnd);
   }
   private setModeForActions(shrinkStart: boolean, shrinkEnd: boolean, exclude: string[] = []): void {
     this.visibleActions.forEach((item) => {
@@ -22,7 +22,7 @@ export class SurveyElementActionContainer extends AdaptiveActionContainer {
         return;
       }
       if (this.needToShrink(item, shrinkStart, shrinkEnd)) {
-        item.mode = item.iconName ? "small" : "removed";
+        item.mode = item.innerItem.iconName ? "small" : "removed";
         return;
       }
       item.mode = "large";
@@ -31,7 +31,7 @@ export class SurveyElementActionContainer extends AdaptiveActionContainer {
   private calcItemSize(item: Action, shrinkStart: boolean, shrinkEnd: boolean, exclude: string[] = []) {
     if (exclude.indexOf(item.id) != -1) return 0;
     if (this.needToShrink(item, shrinkStart, shrinkEnd)) {
-      if (!item.iconName) return 0;
+      if (!item.innerItem.iconName) return 0;
       return item.minDimension;
     }
     return item.maxDimension;

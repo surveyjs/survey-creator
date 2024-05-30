@@ -235,7 +235,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     let switchToStartLocation = false;
     for (var i = actions.length - 1; i >= 0; i--) {
       if (actions[i].id === "convertTo") switchToStartLocation = true;
-      if (!actions[i].location) actions[i].innerItem.location = switchToStartLocation ? "start" : "end";
+      if (!actions[i].innerItem.location) actions[i].innerItem.location = switchToStartLocation ? "start" : "end";
     }
   }
   protected updateElementAllowOptions(options: any, operationsAllow: boolean) {
