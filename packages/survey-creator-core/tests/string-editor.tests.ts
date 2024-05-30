@@ -1002,3 +1002,42 @@ test("StringEditor Navigator - supported types", (): any => {
   expect(StringItemsNavigatorBase.setQuestion(<any>{ element: new QuestionRadiogroupModel("q") })).toBeTruthy();
   expect(StringItemsNavigatorBase.setQuestion(<any>{ element: new QuestionImagePickerModel("q") })).toBeFalsy();
 });
+test("Test string editor inplaceEditForValues without Creator", (): any => {
+  const survey = new SurveyModel({
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "radiogroup",
+            "name": "q0",
+            "choices": [
+              "item1",
+              "item2"
+            ]
+          }
+        ]
+      }
+    ]
+  });
+
+  var itemValue;
+  const q0 = <QuestionRadiogroupModel>survey.getQuestionByName("q0");
+  itemValue = q0.choices[0];
+  var seChoice = new StringEditorViewModelBase(itemValue.locText);
+  expect(itemValue.text).toEqual("item1");
+  expect(seChoice.contentEditable).toBeTruthy();
+  seChoice.onBlur({ target: { innerText: "newItem", innerHTML: "newItem", setAttribute: () => { }, removeAttribute: () => { } } });
+  expect(itemValue.locText.text).toEqual("newItem");
+  expect(itemValue.value).toEqual("item1");
+  expect(itemValue.text).toEqual("newItem");
+
+  var otherItem;
+  const q1 = <QuestionRadiogroupModel>survey.getQuestionByName("q0");
+  otherItem = q1.otherItem;
+  var seChoiceOther = new StringEditorViewModelBase(otherItem.locText);
+  expect(otherItem.text).toEqual("Other (describe)");
+  seChoiceOther.onBlur({ target: { innerText: "Other changed", innerHTML: "Other changed", setAttribute: () => { }, removeAttribute: () => { } } });
+  expect(otherItem.locText.text).toEqual("Other changed");
+  expect(q0.otherText).toEqual("Other changed");
+});
