@@ -1514,11 +1514,12 @@ export class TranslationEditor {
     });
   }
   private setupNavigationButtons(survey: SurveyModel): void {
-    const navigationBar = survey.navigationBar;
+    const navigationBar = new SurveyElementActionContainer();
+    survey["navigationBarValue"] = navigationBar;
+    survey.findLayoutElement("buttons-navigation").data = navigationBar;
     navigationBar.locOwner = survey;
     navigationBar.cssClasses = survey.css.actionBar;
     navigationBar.containerCss = survey.css.footer;
-    navigationBar.actions.splice(0, navigationBar.actions.length);
     survey.addNavigationItem(this.createLocaleFromAction());
     const actionCss = "svc-action-bar-item--right sv-action-bar-item--secondary";
     if (this.options.getHasMachineTranslation()) {

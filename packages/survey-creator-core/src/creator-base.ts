@@ -57,14 +57,6 @@ require("./components/creator.scss");
 require("./components/string-editor.scss");
 require("./creator-theme/creator.scss");
 
-class SurveyTranslationHeaderStringsModel extends SurveyModel {
-  protected createNavigationBar(): ActionContainer {
-    const res = new SurveyElementActionContainer();
-    res.setItems(this.createNavigationActions());
-    return res;
-  }
-}
-
 export interface IKeyboardShortcut {
   name?: string;
   affectedTab?: string;
@@ -2097,9 +2089,6 @@ export class SurveyCreatorModel extends Base
     return !!res ? res : "internal-use";
   }
   protected createSurveyCore(json: any = {}, reason: string): SurveyModel {
-    if(reason === "translation_strings_header") {
-      return new SurveyTranslationHeaderStringsModel(json);
-    }
     return new SurveyModel(json);
   }
   private _stateValue: string;
