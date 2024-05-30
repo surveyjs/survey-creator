@@ -4,7 +4,8 @@ import {
   PanelModelBase, QuestionMatrixDropdownModel, PanelModel, Action, IAction, QuestionCommentModel,
   ComputedUpdater, createDropdownActionModel, Helpers, QuestionMatrixDynamicModel,
   PopupBaseViewModel, IDialogOptions, settings as surveySettings, ListModel, PopupModel, BaseAction,
-  MatrixDropdownColumn
+  MatrixDropdownColumn,
+  CssClassBuilder
 } from "survey-core";
 import { unparse, parse } from "papaparse";
 import { editorLocalization } from "../../editorLocalization";
@@ -15,6 +16,7 @@ import { SurveyHelper } from "../../survey-helper";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
 import { translationCss } from "./translation-theme";
 import { updateMatrixRemoveAction, updateMatixActionsClasses, findAction } from "../../utils/actions";
+import { SurveyElementActionContainer } from "../action-container-view-model";
 
 let isLocaleEnableIfExecuting: boolean;
 function localeEnableIf(params: any): boolean {
@@ -1390,10 +1392,7 @@ export class TranslationEditor {
     this.translation.setEditMode(this.locale);
     this.translation.reset();
     this.fillFromLocales();
-    const action = this.translation.stringsSurvey.navigationBar.getActionById("svc-translation-fromlocale");
-    if(!!action) {
-      action.enabled = this.fromLocales.length > 0;
-    }
+    this.updateFromLocaleAction();
     this.updateMatricesColumns();
   }
   public get translation(): Translation { return this.translationValue; }
@@ -1512,12 +1511,16 @@ export class TranslationEditor {
     });
   }
   private setupNavigationButtons(survey: SurveyModel): void {
-    const actions = survey.navigationBar.actions;
-    actions.splice(0, actions.length);
-    survey.addNavigationItem(this.createLocaleFromAction());
+    const navigationBar = new SurveyElementActionContainer();
+    navigationBar.locOwner = survey;
+    navigationBar.cssClasses = survey.css.actionBar;
+    navigationBar.containerCss = survey.css.footer;
+    survey.findLayoutElement("buttons-navigation").data = navigationBar;
+    const actions:Array<IAction> = [];
+    actions.push(this.createLocaleFromAction());
     const actionCss = "svc-action-bar-item--right sv-action-bar-item--secondary";
     if (this.options.getHasMachineTranslation()) {
-      survey.addNavigationItem(new Action({
+      actions.push(new Action({
         id: "svc-translation-machine",
         iconName: "icon-language",
         css: actionCss,
@@ -1530,8 +1533,12 @@ export class TranslationEditor {
     importAction.css = actionCss;
     const exportAction = createExportCSVAction(() => { this.translation.exportToCSVFileUI(); }, true);
     exportAction.css = actionCss;
-    survey.addNavigationItem(importAction);
-    survey.addNavigationItem(exportAction);
+    actions.push(importAction);
+    actions.push(exportAction);
+    navigationBar.setItems(actions);
+    navigationBar.actions.forEach((action) => {
+      action.innerCss = new CssClassBuilder().append(action.innerCss).append(survey.css.bodyNavigationButton).toString();
+    });
     survey.showNavigationButtons = "top";
   }
   private createStringsToTranslate(): Array<TranslationItem> {
@@ -1555,8 +1562,15 @@ export class TranslationEditor {
   private createLocaleFromAction(): IAction {
     const action = new Action({
       id: "svc-translation-fromlocale",
-      component: "sv-action-bar-item-dropdown",
-      css: "svc-translation-machine-from",
+      component: "svc-translate-from-action",
+      css: "st-translation-machine-from",
+      location: "start",
+      iconSize: "auto",
+      innerCss: "st-translation-machine-from__btn",
+      data: {
+        additionalTitleCss: "st-translation-machine-from__title",
+        additionalTitle: editorLocalization.getString("ed.translateUsigAIFrom")
+      }
     });
     const defaultLocaleTitle = this.getActionTranslateFromText("");
     const onActionTypesPopupShow = () => {
@@ -1584,9 +1598,20 @@ export class TranslationEditor {
 
     return action;
   }
+  private updateFromLocaleAction() {
+    const action = this.translation.stringsSurvey.findLayoutElement("buttons-navigation").data.getActionById("svc-translation-fromlocale");
+    if(!!action) {
+      action.enabled = this.fromLocales.length > 0;
+      action.iconName = action.enabled ? "icon-chevron_16x16" : undefined;
+      action.data.containerCss = new CssClassBuilder()
+        .append("st-translation-machine-from__container")
+        .append("st-translation-machine-from__container--disabled", !action.enabled)
+        .toString();
+    }
+  }
   private getActionTranslateFromText(loc: string): string {
     loc = loc || "";
-    return editorLocalization.getString("ed.translateUsigAIFrom") + this.translation.getLocaleName(loc);
+    return this.translation.getLocaleName(loc);
   }
 }
 export function createImportCSVAction(action: () => void, needSeparator: boolean, isInEditor: boolean = false): Action {
