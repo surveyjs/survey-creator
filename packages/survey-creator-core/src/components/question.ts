@@ -375,25 +375,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     return newAction;
   }
 
-  /*let prop = null;
-    if (this.surveyElement.getType() === "text") prop = Serializer.findProperty("text", "inputType");
-    if (this.surveyElement.getType() === "rating") prop = Serializer.findProperty("rating", "rateDisplayMode");
-    if (!prop || !isPropertyVisible(this.surveyElement, prop.name)) return null;
-    const propName = prop.name;
-    const questionSubType = this.surveyElement.getPropertyValue(propName);
-    const items = prop.getChoices(this.surveyElement, (chs: any) => { });*/
-
-  /*
-    const getAvailableTypes = () => {
-      // const availableTypes = [];
-      // items.forEach(item => {
-      //   availableTypes.push({ id: item, title: editorLocalization.getPropertyValueInEditor(prop.name, item) });
-      // });
-      // return availableTypes;
-      return toolboxItem.items.map(item => { return { id: item.id, title: item.title }; });
-    };
-     */
-
   private createConvertInputType() {
     const questionType = this.surveyElement.getType();
     const toolboxItem = this.creator.toolbox.items.filter(item => item.id === questionType)[0];
@@ -403,7 +384,16 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     const questionSubType = this.surveyElement.getPropertyValue(propName);
 
     const getAvailableTypes = () => {
-      return toolboxItem.items.map(item => { return { id: item.id, title: item.title }; });
+      return toolboxItem.items.map(item => {
+        return {
+          id: item.id,
+          title: item.title,
+          action: (item: any) => {
+            const newValue = this.getUpdatedPropertyValue(propName, item.id);
+            this.surveyElement.setPropertyValue(propName, newValue);
+          }
+        };
+      });
     };
     const actionData: IAction = {
       id: "convertInputType",
@@ -417,10 +407,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
         const newItems = getAvailableTypes();
         listModel.setItems(newItems);
         listModel.selectedItem = this.getSelectedItem(newItems, this.surveyElement.getPropertyValue(propName));
-      },
-      onSelectionChanged: (item: any) => {
-        const newValue = this.getUpdatedPropertyValue(propName, item.id);
-        this.surveyElement.setPropertyValue(propName, newValue);
       }
     });
 
@@ -444,7 +430,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     const selectedItems = actions.filter(item => item.id === id);
     return selectedItems.length > 0 ? selectedItems[0] : undefined;
   }
-  private createDropdownModel(options: { actionData: IAction, items: Array<IAction>, updateListModel: (listModel: ListModel) => void, onSelectionChanged?: (item: any) => void }): Action {
+  private createDropdownModel(options: { actionData: IAction, items: Array<IAction>, updateListModel: (listModel: ListModel) => void }): Action {
     const newAction = createDropdownActionModel({
       id: options.actionData.id,
       css: "sv-action--convertTo sv-action-bar-item--secondary",
@@ -459,7 +445,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       },
     }, {
       items: options.items,
-      onSelectionChanged: options.onSelectionChanged,
       allowSelection: true,
       horizontalPosition: "center",
       onShow: () => {

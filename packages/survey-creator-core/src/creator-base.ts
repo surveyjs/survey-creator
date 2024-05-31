@@ -3384,7 +3384,7 @@ export class SurveyCreatorModel extends Base
     const onSelectQuestionType = (questionType: string, subtype?: string) => {
       this.currentAddQuestionType = questionType;
       this.addNewQuestionInPage(beforeAdd, panel, questionType, subtype);
-      newAction.popupModel.isVisible = false;
+      newAction.popupModel.hide();
     };
     const getActions = () => {
       const availableTypes = this.getAvailableToolboxItems(element).map((item) => {
@@ -3451,10 +3451,12 @@ export class SurveyCreatorModel extends Base
     };
 
     if (!!item.items && item.items.length > 0) {
-      const innerItems = item.items.map(item => new Action({
-        id: item.id, title: item.title, action: () => {
+      const innerItems = item.items.map(i => new Action({
+        id: i.id,
+        title: i.title,
+        action: () => {
           action.hidePopup();
-          onSelectQuestionType(item.typeName, item.id);
+          onSelectQuestionType(item.typeName, i.id);
         }
       }));
       action.setItems(innerItems);
