@@ -303,6 +303,19 @@ export var propertyGridCss = {
   propertygrid_masksettings: {
     content: "spg-question__content spg-question__nopadding spg-masksettings"
   },
+  propertygrid_header: {
+    mainRoot: "spg-header",
+    content: "spg-question__content spg-question__nopadding"
+  },
+  coloralpha: {
+    content: "spg-question__content spg-question__nopadding spg-question__content-coloralpha"
+  },
+  font: {
+    content: "spg-question__content spg-question__nopadding spg-question-composite__content"
+  },
+  backgroundcornerradius: {
+    content: "spg-question__content spg-question__nopadding spg-question-composite__content"
+  },
   saveData: {
     root: "",
     saving: "",
