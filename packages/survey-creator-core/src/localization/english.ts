@@ -120,6 +120,7 @@ export var enStrings = {
     toolbox: "Toolbox",
     "property-grid": "Properties",
     toolboxFilteredTextPlaceholder: "Find question...",
+    toolboxNoResultsFound: "No results found",
     propertyGridFilteredTextPlaceholder: "Type to search...",
     propertyGridNoResultsFound: "No results found",
     correctJSON: "Please correct JSON.",

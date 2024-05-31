@@ -10,6 +10,9 @@
         <!-- ko component: { name: 'svc-search', params: { model: $data.toolbox.searchManager } } -->
         <!-- /ko -->
       </div>
+      <!-- ko if: $data.toolbox.showPlaceholder-->
+      <div class="svc-toolbox__placeholder" data-bind="text:$data.toolbox.toolboxNoResultsFound"></div>
+      <!-- /ko -->
       <div class="svc-toolbox__container">
         <!-- ko ifnot: $data.toolbox.isCompactRendered || categories().length == 1 || !$data.toolbox.showCategoryTitles -->
         <!-- ko foreach: categories -->

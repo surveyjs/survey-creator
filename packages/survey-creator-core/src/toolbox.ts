@@ -176,6 +176,8 @@ export class QuestionToolbox
   @property({ defaultValue: false }) private showCategoryTitlesValue: boolean;
   private dragOrClickHelper: DragOrClickHelper;
 
+  public toolboxNoResultsFound = getLocString("ed.toolboxNoResultsFound");
+
   //koItems = ko.observableArray();
   /**
    * Contains toolbox categories and allows you to modify them.
@@ -263,6 +265,7 @@ export class QuestionToolbox
     this.isScrollLocked = val && this._containerElementValue.scrollHeight > this._containerElementValue.clientHeight;
   }
   public searchManager = new SearchManagerToolbox();
+  @property() showPlaceholder: boolean;
 
   constructor(
     private supportedQuestions: Array<string> = null,

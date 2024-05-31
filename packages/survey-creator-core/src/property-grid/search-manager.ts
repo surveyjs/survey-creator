@@ -58,6 +58,7 @@ export class SearchManagerToolbox extends SearchManagerBase {
   protected setFiterString(newValue: string, oldValue: string) {
     if (!!oldValue != !!newValue) this.toolbox.lockScrollBar(!!newValue);
     this.toolbox.items.forEach(item => item.visible = item.hasText(newValue));
+    this.toolbox.showPlaceholder = !this.toolbox.items.filter(i => i.visible).length;
     this.toolbox.categories.forEach(category => category.forceExpand = !!newValue);
   }
 }

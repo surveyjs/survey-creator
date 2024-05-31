@@ -92,8 +92,7 @@ svc-toolbox {
     position: relative;
     background: $background-dim;
     width: fit-content;
-    border-inline-end: 1px solid $border-inside;
-    box-shadow: $shadow-medium, $shadow-large;
+    box-shadow: 1px 0 0 0 $border-inside, $shadow-medium, $shadow-large;
   }
 }
 
@@ -150,6 +149,10 @@ svc-toolbox {
     margin-left: calc(-100vw + calcSize(10.5));
     direction: ltr;
     align-items: flex-end;
+
+    .svc-toolbox__panel {
+      box-shadow: -1px 0 0 0 $border-inside, $shadow-medium, $shadow-large;
+    }
   }
 
   .svc-toolbox__tool {
@@ -279,4 +282,13 @@ svc-toolbox {
 .svc-toolbox__category--empty {
   height: 0;
   visibility: hidden;
+}
+
+.svc-toolbox__placeholder {
+  padding-top: calcSize(12);
+  margin-left: auto;
+  margin-right: auto;
+  color: $foreground-light;
+  @include defaultFont;
+  font-size: 12px;
 }
