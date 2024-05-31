@@ -3381,14 +3381,14 @@ export class SurveyCreatorModel extends Base
   }
   public getQuestionTypeSelectorModel(beforeAdd: (type: string) => void, element?: SurveyElement) {
     let panel = !!element && element.isPanel ? <PanelModel>element : null;
-    const onSelectionChanged = (questionType: string, subtype?: string) => {
+    const onSelectQuestionType = (questionType: string, subtype?: string) => {
       this.currentAddQuestionType = questionType;
       this.addNewQuestionInPage(beforeAdd, panel, questionType, subtype);
       newAction.popupModel.isVisible = false;
     };
     const getActions = () => {
       const availableTypes = this.getAvailableToolboxItems(element).map((item) => {
-        return this.createIActionBarItemByClass(item, item.needSeparator, onSelectionChanged);
+        return this.createIActionBarItemByClass(item, item.needSeparator, onSelectQuestionType);
       });
       return availableTypes;
     };
@@ -3398,9 +3398,6 @@ export class SurveyCreatorModel extends Base
       title: this.getLocString("ed.addNewQuestion"),
     }, {
       items: getActions(),
-      onSelectionChanged: (item: any) => {
-        onSelectionChanged(item.id);
-      },
       onShow: () => {
         const listModel = newAction.popupModel.contentComponentData.model;
         listModel.setItems(getActions());
@@ -3442,19 +3439,25 @@ export class SurveyCreatorModel extends Base
     this.clickToolboxItem(newElement, panel, "ADDED_FROM_PAGEBUTTON");
   }
 
-  createIActionBarItemByClass(item: QuestionToolboxItem, needSeparator: boolean, onSelectionChanged?: (questionType: string, subtype?: string) => void): Action {
+  createIActionBarItemByClass(item: QuestionToolboxItem, needSeparator: boolean, onSelectQuestionType?: (questionType: string, subtype?: string) => void): Action {
     const action = new Action({
       title: item.title,
       id: item.name,
       iconName: item.iconName,
       needSeparator: needSeparator
     });
+    action.action = () => {
+      onSelectQuestionType(item.typeName);
+    };
+
     if (!!item.items && item.items.length > 0) {
-      const innerItems = item.items.map(item => new Action({ id: item.id, title: item.title }));
-      action.setItems(innerItems, (o, e) => {
-        onSelectionChanged(item.typeName, o.id);
-        action.hidePopup();
-      });
+      const innerItems = item.items.map(item => new Action({
+        id: item.id, title: item.title, action: () => {
+          action.hidePopup();
+          onSelectQuestionType(item.typeName, item.id);
+        }
+      }));
+      action.setItems(innerItems);
     }
     return action;
   }

@@ -369,9 +369,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
         const newItems = this.getConvertToTypesActions(newAction);
         listModel.setItems(newItems);
         listModel.selectedItem = this.getSelectedItem(newItems, this.currentType);
-      },
-      onSelectionChanged: (item: any) => {
-        this.creator.convertCurrentQuestion(item.id);
       }
     });
     newAction.disableHide = true;
@@ -447,7 +444,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     const selectedItems = actions.filter(item => item.id === id);
     return selectedItems.length > 0 ? selectedItems[0] : undefined;
   }
-  private createDropdownModel(options: { actionData: IAction, items: Array<IAction>, updateListModel: (listModel: ListModel) => void, onSelectionChanged: (item: any) => void }): Action {
+  private createDropdownModel(options: { actionData: IAction, items: Array<IAction>, updateListModel: (listModel: ListModel) => void, onSelectionChanged?: (item: any) => void }): Action {
     const newAction = createDropdownActionModel({
       id: options.actionData.id,
       css: "sv-action--convertTo sv-action-bar-item--secondary",
