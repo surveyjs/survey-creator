@@ -301,7 +301,6 @@ test("Toolbox with search", async (t) => {
     await ClientFunction(() => {
       window["creator"].toolbox.searchEnabled = true;
     })();
-
     await t.resizeWindow(2560, 1440);
     await takeElementScreenshot("toolbox-search.png", toolboxElement, t, comparer);
     await t.typeText(Selector(".svc-toolbox input"), "single");
