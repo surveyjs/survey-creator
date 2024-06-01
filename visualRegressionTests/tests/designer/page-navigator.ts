@@ -414,7 +414,7 @@ test("Page navigator scrolling in bypage mode", async (t) => {
 
 test("Page navigator has enough space to be shown", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1500, 800);
+    await t.resizeWindow(1508, 800);
     await setJSON({
       title: "NPS Survey Question",
       pages: [
@@ -502,7 +502,7 @@ test("Page navigator has enough space to be shown", async (t) => {
 });
 test("Page navigator in by-page mode has enough space to be shown", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1500, 800);
+    await t.resizeWindow(1508, 800);
     await ClientFunction(() => {
       window["creator"].pageEditMode = "bypage";
     })();
