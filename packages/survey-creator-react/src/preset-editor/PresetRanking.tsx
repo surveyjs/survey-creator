@@ -1,8 +1,18 @@
-import { ItemValue, QuestionRankingModel, SurveyModel } from "survey-core";
+import { ItemValue, QuestionRankingModel, SurveyModel, LocalizableString } from "survey-core";
 import { ReactQuestionFactory, SurveyQuestionRanking,
   SurveyQuestionRankingItem, ReactSurveyElementsWrapper } from "survey-react-ui";
-//import { PresetItemValue } from "survey-creator-core";
+import { SurveyCreatorModel } from "survey-creator-core";
 import * as React from "react";
+import { SurveyLocStringEditor } from "../StringEditor";
+
+export class PresetLocStringEditor extends SurveyLocStringEditor {
+  protected get locString(): LocalizableString {
+    return this.props.locStr;
+  }
+  protected get creator(): SurveyCreatorModel {
+    return undefined;
+  }
+}
 
 export class SurveyQuestionPresetRanking extends SurveyQuestionRanking {
   protected renderItem(
@@ -88,53 +98,9 @@ export class SurveyQuestionPresetRankingItem extends SurveyQuestionRankingItem {
       </div>
     );
   }
-  private onBlur = (event: any) => {
-    this.item.locText.text = event.target.textContent;
-    return true;
-  };
-  private onKeyDown = (event: React.KeyboardEvent<HTMLSpanElement>) => {
-    event.stopPropagation();
-  };
-  private onKeyUp = (event: React.KeyboardEvent<HTMLSpanElement>) => {
-    event.stopPropagation();
-  };
-  private onMouseUp = (event: React.MouseEvent<HTMLSpanElement>): boolean => {
-    event.stopPropagation();
-    return true;
-  };
-  private onMouseDown = (event: React.MouseEvent<HTMLSpanElement>): boolean => {
-    event.stopPropagation();
-    return true;
-  };
-  private handleTextPointerDown = (event: React.PointerEvent<HTMLSpanElement>) => {
-    event.stopPropagation();
-  }
-  private handleTextPointerUp = (event: React.PointerEvent<HTMLSpanElement>) => {
-    event.stopPropagation();
-  }
-  private edit = (event: any) => {
-    this.svStringEditorRef.current.focus();
-  }
+
   protected renderText(): JSX.Element {
-    const className = "sv-string-editor";
-    return (<span
-      role="textbox"
-      ref={this.svStringEditorRef}
-      className= {className}
-      contentEditable={true}
-      spellCheck={false}
-      suppressContentEditableWarning={true}
-      onBlur={this.onBlur}
-      onKeyDown={this.onKeyDown}
-      onKeyUp={this.onKeyUp}
-      onMouseUp={this.onMouseUp}
-      onMouseDown={this.onMouseDown}
-      onClick={this.edit}
-      onPointerDown={this.handleTextPointerDown}
-      onPointerUp={this.handleTextPointerUp}
-    >
-      {this.text}
-    </span>);
+    return <PresetLocStringEditor locStr={this.item.locText} />;
   }
 }
 
