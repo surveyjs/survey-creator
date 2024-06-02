@@ -2591,13 +2591,13 @@ test("Check textUpdate mode for question", () => {
   const stepQuestion = <QuestionTextModel>propertyGrid.survey.getQuestionByName("step");
 
   expect(nameQuestion.getType()).toEqual("text");
-  expect(nameQuestion.isSurveyInputTextUpdate).toBeFalsy();
+  expect(nameQuestion.getIsInputTextUpdate()).toBeFalsy();
   expect(titleQuestion.getType()).toEqual("comment");
-  expect(titleQuestion.isSurveyInputTextUpdate).toBeTruthy();
+  expect(titleQuestion.getIsInputTextUpdate()).toBeTruthy();
   expect(placeholderQuestion.getType()).toEqual("text");
-  expect(placeholderQuestion.isSurveyInputTextUpdate).toBeTruthy();
+  expect(placeholderQuestion.getIsInputTextUpdate()).toBeTruthy();
   expect(stepQuestion.getType()).toEqual("text");
-  expect(stepQuestion.isSurveyInputTextUpdate).toBeFalsy();
+  expect(stepQuestion.getIsInputTextUpdate()).toBeFalsy();
 });
 test("Has narrow style between link value questions", () => {
   const question = new QuestionTextModel("q1");
@@ -2921,12 +2921,12 @@ test("PropertyEditor and hasError - required for survey.title", () => {
   survey.title = "My Title";
   let propertyGrid = new PropertyGridModelTester(survey);
   let titleQuestion = <QuestionTextModel>propertyGrid.survey.getQuestionByName("title");
-  expect(titleQuestion.isSurveyInputTextUpdate).toBeTruthy();
+  expect(titleQuestion.getIsInputTextUpdate()).toBeTruthy();
   const prop = Serializer.findProperty("survey", "title");
   prop.isRequired = true;
   propertyGrid = new PropertyGridModelTester(survey);
   titleQuestion = <QuestionTextModel>propertyGrid.survey.getQuestionByName("title");
-  expect(titleQuestion.isSurveyInputTextUpdate).toBeFalsy();
+  expect(titleQuestion.getIsInputTextUpdate()).toBeFalsy();
   expect(titleQuestion.textUpdateMode).toBe("onBlur");
   titleQuestion.value = "";
   expect(survey.title).toEqual("My Title");
@@ -3171,6 +3171,14 @@ test("category, parent property", () => {
 
   const question = new QuestionDropdownModel("q1");
   const propertyGrid = new PropertyGridModelTester(question);
+  const tabsFistLevel = propertyGrid.survey.pages[0].elements.map(el => el.name);
+  const tabsSecondLevel = propertyGrid.survey.pages[0].elements[0].elements.map(el => el.name);
+  expect(tabsFistLevel.indexOf("sub1")).toBe(-1);
+  expect(tabsFistLevel.indexOf("sub2")).toBe(-1);
+
+  expect(tabsSecondLevel.indexOf("sub1")).toBeGreaterThan(-1);
+  expect(tabsSecondLevel.indexOf("sub2")).toBeGreaterThan(-1);
+
   const generalPanel = propertyGrid.survey.getPanelByName("general");
   generalPanel.expand();
   generalPanel.collapse();
@@ -3379,4 +3387,22 @@ test("It is impossible to clear value for numeric property, bug##5395", () => {
   expect(imageHeightQuestion.isEmpty()).toBeTruthy();
   expect(question.imageHeight).not.toBe(0);
   expect(question.imageHeight).toBeFalsy();
+});
+test("Show commentText & commentPlaceholder on setting showCommentArea, bug##5527", () => {
+  const question = new QuestionImagePickerModel("q1");
+  const propertyGrid = new PropertyGridModelTester(question);
+  const showCommentAreaQuestion = propertyGrid.survey.getQuestionByName("showCommentArea");
+  const commentTextQuestion = propertyGrid.survey.getQuestionByName("commentText");
+  const commentPlaceholderAreaQuestion = propertyGrid.survey.getQuestionByName("commentPlaceholder");
+  expect(showCommentAreaQuestion).toBeTruthy();
+  expect(commentTextQuestion).toBeTruthy();
+  expect(commentPlaceholderAreaQuestion).toBeTruthy();
+  expect(showCommentAreaQuestion.isVisible).toBeTruthy();
+  expect(commentTextQuestion.isVisible).toBeFalsy();
+  expect(commentPlaceholderAreaQuestion.isVisible).toBeFalsy();
+  showCommentAreaQuestion.value = true;
+  expect(question.showCommentArea).toBeTruthy();
+  expect(showCommentAreaQuestion.isVisible).toBeTruthy();
+  expect(commentTextQuestion.isVisible).toBeTruthy();
+  expect(commentPlaceholderAreaQuestion.isVisible).toBeTruthy();
 });

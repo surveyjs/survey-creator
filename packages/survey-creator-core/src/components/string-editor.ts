@@ -238,7 +238,7 @@ export class StringEditorViewModelBase extends Base {
   @property({ defaultValue: true }) editAsText: boolean;
   compostionInProgress: boolean;
 
-  constructor(private locString: LocalizableString, private creator: SurveyCreatorModel) {
+  constructor(private locString: LocalizableString, private creator?: SurveyCreatorModel) {
     super();
     this.locString = locString;
     this.checkMarkdownToTextConversion(this.locString.owner, this.locString.name);
@@ -311,7 +311,9 @@ export class StringEditorViewModelBase extends Base {
     if (this.maxLength > 0) {
       this.characterCounter.updateRemainingCharacterCounter(this.valueBeforeEdit, this.maxLength);
     }
-    this.creator.selectFromStringEditor = true;
+    if(this.creator) {
+      this.creator.selectFromStringEditor = true;
+    }
     event.target.parentElement.click();
     event.target.spellcheck = true;
     event.target.setAttribute("tabindex", -1);
@@ -319,17 +321,16 @@ export class StringEditorViewModelBase extends Base {
     this.justFocused = true;
   }
 
-  private checkMarkdownToTextConversion(element, name) {
-    var options = {
+  private checkMarkdownToTextConversion(element, name): void {
+    if(!this.creator) return;
+    const options = {
       element: element,
       text: <any>null,
       name: name,
       html: "",
     };
-    if (this.creator) {
-      this.creator.onHtmlToMarkdown.fire(this.creator, options);
-      this.editAsText = (options.text === null);
-    }
+    this.creator.onHtmlToMarkdown.fire(this.creator, options);
+    this.editAsText = (options.text === null);
   }
 
   public onCompositionStart(event: any): void {
@@ -371,74 +372,16 @@ export class StringEditorViewModelBase extends Base {
       return;
     }
 
-    let mdText = null;
-    if (!this.editAsText) {
-      var options = {
-        element: <Base><any>this.locString.owner,
-        text: <any>null,
-        name: this.locString.name,
-        html: event.target.innerHTML
-      };
-      this.creator.onHtmlToMarkdown.fire(this.creator, options);
-      mdText = options.text;
-    }
-    let clearedText;
-    if (mdText) {
-      clearedText = mdText;
-    } else {
-      let txt = this.locString.hasHtml ? event.target.innerHTML : event.target.innerText;
-      if (!this.locString.allowLineBreaks) txt = clearNewLines(txt);
-      clearedText = txt;
-    }
-    let owner = this.locString.owner as any;
-
-    var changingOptions = {
-      obj: owner,
-      propertyName: this.locString.name,
-      value: this.locString.text,
-      newValue: clearedText,
-      doValidation: false
-    };
-    this.creator.onValueChangingCallback(changingOptions);
-    clearedText = changingOptions.newValue;
-
-    this.errorText = this.creator.onGetErrorTextOnValidationCallback(this.locString.name, owner, clearedText);
-    if (!this.errorText && !clearedText) {
-      const propJSON = owner.getPropertyByName && owner.getPropertyByName(this.locString.name);
-      if (propJSON && propJSON.isRequired) {
-        this.errorText = editorLocalization.getString("pe.propertyIsEmpty");
-      }
-    }
+    let clearedText = this.getClearedText(event.target);
+    this.errorText = this.getErrorTextOnChanged(clearedText);
 
     if (this.locString.text != clearedText &&
       !(!this.locString.text && clearedText == this.locString.calculatedText)) {
       if (!this.errorText) {
-        if (this.locString.owner instanceof ItemValue &&
-          this.creator.inplaceEditForValues &&
-          ["noneText", "otherText", "selectAllText"].indexOf(this.locString.name) == -1) {
-          const itemValue = <ItemValue>this.locString.owner;
-          if (itemValue.value !== clearedText) {
-            if (!!itemValue.locOwner && !!itemValue.ownerPropertyName) {
-              const choices = itemValue.locOwner[itemValue.ownerPropertyName];
-              if (Array.isArray(choices) && !!ItemValue.getItemByValue(choices, clearedText)) {
-                clearedText = getNextItemValue(clearedText, choices);
-                if (!!event && !!event.target) {
-                  event.target.innerText = clearedText;
-                }
-              }
-            }
-            itemValue.value = clearedText;
-          }
-        }
-        else {
-          const oldStoreDefaultText = this.locString.storeDefaultText;
-          this.locString.storeDefaultText = false;
-          this.locString.text = clearedText;
-          this.locString.storeDefaultText = oldStoreDefaultText;
-        }
+        this.setValueIntoLocStr(clearedText, event?.target);
       }
       else {
-        this.creator.notify(this.errorText, "error");
+        this.creator?.notify(this.errorText, "error");
         this.focusedProgram = true;
         event.target.innerText = clearedText;
         event.target.focus();
@@ -456,12 +399,85 @@ export class StringEditorViewModelBase extends Base {
     this.focused = false;
     window?.getSelection().removeAllRanges();
   }
+  private getClearedText(target: HTMLElement): string {
+    const html = target.innerHTML;
+    const text = target.innerText;
+    if(!this.creator) return this.locString.hasHtml ? html : text;
+    let mdText = null;
+    if (!this.editAsText) {
+      const options = {
+        element: <Base><any>this.locString.owner,
+        text: <any>null,
+        name: this.locString.name,
+        html: html
+      };
+      this.creator.onHtmlToMarkdown.fire(this.creator, options);
+      mdText = options.text;
+    }
+    let clearedText;
+    if (mdText) {
+      clearedText = mdText;
+    } else {
+      let txt = this.locString.hasHtml ? html : text;
+      if (!this.locString.allowLineBreaks) txt = clearNewLines(txt);
+      clearedText = txt;
+    }
+    const owner = this.locString.owner as any;
+
+    const changingOptions = {
+      obj: owner,
+      propertyName: this.locString.name,
+      value: this.locString.text,
+      newValue: clearedText,
+      doValidation: false
+    };
+    this.creator.onValueChangingCallback(changingOptions);
+    return changingOptions.newValue;
+  }
+  private getErrorTextOnChanged(clearedText: string): string {
+    if(!this.creator) return "";
+    const owner = this.locString.owner as any;
+    let res = this.creator.onGetErrorTextOnValidationCallback(this.locString.name, owner, clearedText);
+    if(!!res || !!clearedText) return res;
+    const propJSON = owner.getPropertyByName && owner.getPropertyByName(this.locString.name);
+    if (propJSON && propJSON.isRequired) return editorLocalization.getString("pe.propertyIsEmpty");
+    return "";
+  }
+  private get isInplaceForEditValues(): boolean {
+    return !!this.creator && this.creator.inplaceEditForValues &&
+      this.locString.owner instanceof ItemValue &&
+      this.creator.inplaceEditForValues &&
+      ["noneText", "otherText", "selectAllText"].indexOf(this.locString.name) === -1;
+  }
+  private setValueIntoLocStr(clearedText: any, target: HTMLElement): void {
+    if (this.isInplaceForEditValues) {
+      const itemValue = <ItemValue>this.locString.owner;
+      if (itemValue.value !== clearedText) {
+        if (!!itemValue.locOwner && !!itemValue.ownerPropertyName) {
+          const choices = itemValue.locOwner[itemValue.ownerPropertyName];
+          if (Array.isArray(choices) && !!ItemValue.getItemByValue(choices, clearedText)) {
+            clearedText = getNextItemValue(clearedText, choices);
+            if (!!target) {
+              target.innerText = clearedText;
+            }
+          }
+        }
+        itemValue.value = clearedText;
+      }
+    }
+    else {
+      const oldStoreDefaultText = this.locString.storeDefaultText;
+      this.locString.storeDefaultText = false;
+      this.locString.text = clearedText;
+      this.locString.storeDefaultText = oldStoreDefaultText;
+    }
+  }
   public done(event: Event): void {
     event.stopImmediatePropagation();
     event.preventDefault();
   }
 
-  public onPaste(event: ClipboardEvent) {
+  public onPaste(event: ClipboardEvent): void {
     if (this.editAsText) {
       event.preventDefault();
       // get text representation of clipboard
@@ -550,6 +566,7 @@ export class StringEditorViewModelBase extends Base {
     return this.placeholderValue;
   }
   public get contentEditable(): boolean {
+    if(!this.creator) return true;
     return this.creator.isCanModifyProperty(<any>this.locString.owner, this.locString.name);
   }
   public get showCharacterCounter(): boolean {

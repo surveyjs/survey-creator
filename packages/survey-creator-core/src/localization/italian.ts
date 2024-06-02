@@ -16,6 +16,15 @@ var italianTranslation = {
     convertTo: "Converti in",
     drag: "Trascina l'elemento",
   },
+  // Creator tabs
+  tabs: {
+    preview: "Anteprima del sondaggio",
+    theme: "Temi",
+    translation: "Traduzione",
+    designer: "Progetta il sondaggio",
+    editor: "Modifica JSON",
+    logic: "Logica"
+  },
   // Question types
   qt: {
     default: "Default",
@@ -48,7 +57,7 @@ var italianTranslation = {
     text: "Domande sull'input di testo",
     containers: "Contenitori",
     matrix: "Domande sulla matrice",
-    misc: "Altri",
+    misc: "Altri"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -81,23 +90,16 @@ var italianTranslation = {
     newQuestionName: "Domanda",
     newPanelName: "Pannello",
     newTextItemName: "Testo",
-    testSurvey: "Anteprima del sondaggio",
-    themeSurvey: "Temi",
     defaultV2Theme: "Default",
     modernTheme: "Tema Moderno",
     defaultTheme: "Default (legacy)",
     testSurveyAgain: "Prova il sondaggio di nuovo",
     testSurveyWidth: "Larghezza sondaggio:",
     navigateToMsg: "Bisogna navigare fino a:",
-    logic: "Logica",
-    embedSurvey: "Includi sondaggio",
-    translation: "Traduzione",
     saveSurvey: "Salva sondaggio",
     saveSurveyTooltip: "Salva sondaggio",
     saveTheme: "Salva tema",
     saveThemeTooltip: "Salva tema",
-    designer: "Progetta il sondaggio",
-    jsonEditor: "Modifica JSON",
     jsonHideErrors: "Nascondi gli errori",
     jsonShowErrors: "Mostra gli errori",
     undo: "Annulla",
@@ -227,13 +229,13 @@ var italianTranslation = {
       question_visibilityText: "rendi la domanda {0} visibile", //{0} question name
       question_enableText: "rendi la domanda {0} abilitata", //{0} question name
       question_requireText: "rendi la domanda {0} obbligatoria", //{0} question name
-      question_resetValueText: "Valore di ripristino per la domanda: {0}",
+      question_resetValueText: "Valore di ripristino per la domanda: {0}", //{0} question name.
       question_setValueText: "Assegna valore: {1} alla domanda: {0}",
       column_visibilityText: "rendi la colonna {0} della domanda {1} visibile", //{0} column name, {1} question name
       column_enableText: "rendi la colonna {0} della domanda {1} abilitata", //{0} column name, {1} question name
       column_requireText: "rendi la colonna {0} della domanda {1} obbligatoria", //{0} column name, {1} question name
-      column_resetValueText: "Reimposta il valore della cella per la colonna: {0}",
-      column_setValueText: "Assegna valore cella: {1} alla colonna: {0}",
+      column_resetValueText: "Reimposta il valore della cella per la colonna: {0}", //{0} column name
+      column_setValueText: "Assegna valore cella: {1} alla colonna: {0}", //{0} column name and {1} setValueExpression
       setValueExpressionPlaceholder: " Espressione il cui risultato verrà assegnato alla domanda di destinazione.",
       trigger_completeText: "il sondaggio viene completato",
       trigger_setvalueText: "imposta nella domanda: {0} valore {1}", //{0} question name, {1} setValue
@@ -751,6 +753,7 @@ var italianTranslation = {
       top: "In alto",
       bottom: "In basso"
     },
+    // Creator tabs
     tabs: {
       panel: {
         layout: "Layout del pannello"
@@ -794,6 +797,9 @@ var italianTranslation = {
       slider: "Cursore",
       expression: "Espressione",
       questionSettings: "Impostazioni delle domande",
+      header: "Intestazione",
+      background: "Sfondo",
+      appearance: "Apparenza",
       others: "Altri"
     },
     editProperty: "Modifica propietà '{0}'",
@@ -846,7 +852,49 @@ var italianTranslation = {
     minWidth_placeholder: "Es.: 600px",
     maxWidth_placeholder: "Es.: 50%",
     imageHeight_placeholder: "Automatico",
-    imageWidth_placeholder: "Automatico"
+    imageWidth_placeholder: "Automatico",
+    theme: {
+      themeName: "Tema",
+      isPanelless: "Aspetto della domanda",
+      editorPanel: "Sfondo e raggio d'angolo",
+      questionPanel: "Sfondo e raggio d'angolo",
+      primaryColor: "Colore d'accento",
+      panelBackgroundTransparency: "Opacità dello sfondo del pannello",
+      questionBackgroundTransparency: "Opacità dello sfondo della domanda",
+      fontSize: "Dimensione del carattere",
+      scale: "Scala",
+      cornerRadius: "Raggio d'angolo",
+      pageTitle: "Carattere del titolo",
+      pageDescription: "Carattere di descrizione",
+      questionTitle: "Carattere del titolo",
+      questionDescription: "Carattere di descrizione",
+      editorFont: "Font",
+      backgroundOpacity: "Opacità",
+      "--sjs-font-family": "Famiglia di caratteri",
+      "--sjs-general-backcolor-dim": "Colore di sfondo",
+      "--sjs-primary-backcolor": "Sfondo d'accento",
+      "--sjs-primary-forecolor": "Primo piano in primo piano",
+      "--sjs-shadow-small": "Effetti ombra",
+      "--sjs-shadow-inner": "Effetti ombra",
+      "--sjs-border-default": "Colori"
+    },
+    "header@header": {
+      headerView: "Vista",
+      logoPosition: "Posizione del logo",
+      surveyTitle: "Carattere del titolo dell'indagine",
+      surveyDescription: "Carattere della descrizione dell'indagine",
+      headerTitle: "Carattere del titolo dell'indagine",
+      headerDescription: "Carattere della descrizione dell'indagine",
+      inheritWidthFrom: "Larghezza dell'area del contenuto",
+      textAreaWidth: "Larghezza del testo",
+      backgroundColorSwitch: "Colore di sfondo",
+      backgroundImage: "Immagine di sfondo",
+      backgroundImageOpacity: "Opacità",
+      overlapEnabled: "Sovrapposizione",
+      logoPositionX: "Posizione del logo",
+      titlePositionX: "Posizione del titolo",
+      descriptionPositionX: "Descrizione posizione"
+    }
   },
   // Property values
   pv: {
@@ -1062,6 +1110,38 @@ var italianTranslation = {
     searchMode: {
       contains: "Contiene",
       startsWith: "Inizia con"
+    },
+    backgroundImageFit: {
+      auto: "Automatico",
+      cover: "Coprire",
+      contain: "Contenere",
+      fill: "Stendere",
+      tile: "Tegola"
+    },
+    backgroundImageAttachment: {
+      fixed: "Fissato",
+      scroll: "Scorrere"
+    },
+    headerView: {
+      basic: "Basico",
+      advanced: "Avanzato"
+    },
+    inheritWidthFrom: {
+      survey: "Uguale al sondaggio",
+      container: "Adatto al contenitore"
+    },
+    backgroundColorSwitch: {
+      none: "Nessuno",
+      accentColor: "Colore d'accento",
+      custom: "Costume"
+    },
+    colorPalette: {
+      light: "Leggero",
+      dark: "Oscuro"
+    },
+    isPanelless: {
+      "false": "Default",
+      "true": "Senza pannelli"
     }
   },
   // Operators
@@ -1469,101 +1549,40 @@ var italianTranslation = {
     copyDisplayValue: "Copia valore di visualizzazione"
   },
   theme: {
-    "--background": "Colore di sfondo",
-    "--background-dim-light": "Colore della luce fioca dello sfondo",
-    "--primary-foreground": "Colore di primo piano primario",
-    "--foreground": "Colore di primo piano",
-    "--base-unit": "Unità base",
     advancedMode: "Modalità avanzata",
-    groupGeneral: "Generale",
-    groupHeader: "Intestazione",
-    groupBackground: "Sfondo",
-    groupAppearance: "Apparenza",
-    themeName: "Tema",
-    themeMode: "Aspetto della domanda",
-    themeModePanels: "Default",
-    themeModeLightweight: "Senza pannelli",
-    themePaletteLight: "Leggero",
-    themePaletteDark: "Oscuro",
-    primaryColor: "Colore principale",
+    pageTitle: "Carattere del titolo della pagina",
+    questionTitle: "Tipo di carattere del titolo della domanda",
+    editorPanel: "Elemento di input",
+    lines: "Poema",
     primaryDefaultColor: "Default",
     primaryDarkColor: "Fluttuare",
     primaryLightColor: "Selezionato",
-    coverTitleForecolor: "Precolore del titolo",
-    coverDescriptionForecolor: "Descrizione forecolor",
-    coverOverlapEnabled: "Sovrapposizione",
     backgroundDimColor: "Colore di sfondo",
-    backgroundImage: "Immagine di sfondo",
-    backgroundImageFitAuto: "Automatico",
-    backgroundImageFitCover: "Coprire",
-    backgroundImageFitContain: "Contenere",
-    backgroundImageFitFill: "Stendere",
-    backgroundImageFitTile: "Tegola",
-    backgroundOpacity: "Opacità",
-    backgroundImageAttachmentFixed: "Fissato",
-    backgroundImageAttachmentScroll: "Scorrere",
-    panelBackgroundTransparency: "Opacità dello sfondo del pannello",
-    questionBackgroundTransparency: "Opacità dello sfondo della domanda",
-    questionTitle: "Tipo di carattere del titolo della domanda",
-    editorPanel: "Elemento di input",
-    backgroundCornerRadius: "Sfondo e raggio d'angolo",
+    cornerRadius: "Raggio d'angolo",
     backcolor: "Sfondo predefinito",
     hovercolor: "Sfondo al passaggio del mouse",
     borderDecoration: "Decorazione del bordo",
-    accentBackground: "Sfondo principale",
-    accentForeground: "Primo piano in primo piano",
     primaryForecolor: "Colore predefinito",
     primaryForecolorLight: "Colore disabilitato",
-    colorsTitle: "Colori",
     font: "Font",
-    lines: "Poema",
     borderDefault: "Scuro",
     borderLight: "Accendino",
     fontFamily: "Famiglia di caratteri",
-    fontSize: "Dimensione del carattere",
-    color: "Colore",
-    placeholderColor: "Colore segnaposto",
-    size: "Grandezza",
     fontWeightRegular: "Regolare",
     fontWeightHeavy: "Pesante",
     fontWeightSemiBold: "Semi-grassetto",
     fontWeightBold: "Audace",
-    scale: "Scala",
-    cornerRadius: "Raggio d'angolo",
-    surveyTitle: "Carattere del titolo del sondaggio",
-    surveyDescription: "Carattere della descrizione dell'indagine",
-    pageTitle: "Carattere del titolo della pagina",
-    titleFont: "Carattere del titolo",
-    descriptionFont: "Carattere di descrizione",
+    color: "Colore",
+    placeholderColor: "Colore segnaposto",
+    size: "Grandezza",
+    opacity: "Opacità",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Aggiungi effetto ombra",
-    opacity: "Opacità",
     boxShadowBlur: "Sfocatura",
     boxShadowSpread: "Diffusione",
     boxShadowDrop: "Goccia",
     boxShadowInner: "Interno",
-    shadow: "Effetti ombra",
-    headerView: "Vista",
-    headerViewBasic: "Basico",
-    headerViewAdvanced: "Avanzato",
-    coverInheritWidthFrom: "Larghezza dell'area di contenuto",
-    coverInheritWidthFromSurvey: "Come il sondaggio",
-    coverInheritWidthFromContainer: "Adatto al contenitore",
-    coverTextAreaWidth: "Larghezza del testo",
-    coverBackgroundColorSwitch: "Colore di sfondo",
-    coverBackgroundColorNone: "Nessuno",
-    coverBackgroundColorAccentColor: "Colore principale",
-    coverBackgroundColorCustom: "Costume",
-    horizontalAlignmentLeft: "A sinistra",
-    horizontalAlignmentCenter: "Centro",
-    horizontalAlignmentRight: "A destra",
-    verticalAlignmentTop: "In alto",
-    verticalAlignmentMiddle: "Mezzo",
-    verticalAlignmentBottom: "Fondoschiena",
-    logoPosition: "Posizione del logo",
-    coverTitlePosition: "Posizione del titolo",
-    coverDescriptionPosition: "Descrizione posizione",
     names: {
       default: "Default",
       sharp: "Affilato",
@@ -1753,12 +1772,11 @@ editorLocalization.locales["it"] = italianTranslation;
 // theme.--primary-foreground: "Primary foreground color" => "Colore di primo piano primario"
 // theme.--foreground: "Foreground color" => "Colore di primo piano"
 // theme.--base-unit: "Base unit" => "Unità base"
-// theme.groupGeneral: "General" => "Generale"
 // theme.groupAdvanced: "Advanced" => "Avanzato"
 // theme.themeName: "Theme" => "Tema"
-// theme.themeMode: "Question appearance" => "Aspetto della domanda"
-// theme.themeModePanels: "Default" => "Default"
-// theme.themeModeLightweight: "Without Panels" => "Senza pannelli"
+// theme.isPanellessss: "Question appearance" => "Aspetto della domanda"
+// theme.isPanellessPanels: "Default" => "Default"
+// theme.isPanellessLightweight: "Without Panels" => "Senza pannelli"
 // theme.themePaletteLight: "Light" => "Leggero"
 // theme.themePaletteDark: "Dark" => "Oscuro"
 // theme.primaryColor: "Accent color" => "Colore principale"
@@ -1800,7 +1818,7 @@ editorLocalization.locales["it"] = italianTranslation;
 // theme.fontWeightBold: "Bold" => "Audace"
 // theme.scale: "Scale" => "Scala"
 // theme.cornerRadius: "Corner radius" => "Raggio d'angolo"
-// theme.surveyTitle: "Survey title font" => "Carattere del titolo del sondaggio"
+// theme.surveyTitleFont: "Survey title font" => "Carattere del titolo del sondaggio"
 // theme.pageTitle: "Page title font" => "Carattere del titolo della pagina"
 // theme.pageDescription: "Page description font" => "Carattere della descrizione della pagina"
 // theme.boxShadowX: "X" => "X"
@@ -1861,22 +1879,20 @@ editorLocalization.locales["it"] = italianTranslation;
 // survey.title: "Title" => "Titolo"
 // page.title: "Title" => "Titolo"
 // p.setValueIf: "Set value if" => "Imposta valore se"
-// theme.groupHeader: "Header" => "Intestazione"
-// theme.coverTitleForecolor: "Title forecolor" => "Precolore del titolo"
-// theme.coverOverlapEnabled: "Overlap" => "Sovrapposizione"
+// theme.header: "Header" => "Intestazione"
 // theme.backgroundImageFitFill: "Stretch" => "Stendere"
 // theme.backgroundImageFitTile: "Tile" => "Tegola"
 // theme.headerView: "View" => "Vista"
 // theme.headerViewBasic: "Basic" => "Basico"
 // theme.headerViewAdvanced: "Advanced" => "Avanzato"
-// theme.coverInheritWidthFrom: "Content area width" => "Larghezza dell'area di contenuto"
-// theme.coverInheritWidthFromSurvey: "Same as survey" => "Come il sondaggio"
-// theme.coverInheritWidthFromPage: "Fit to page" => "Adatta alla pagina"
-// theme.coverTextAreaWidth: "Text width" => "Larghezza del testo"
-// theme.coverBackgroundColorSwitch: "Background color" => "Colore di sfondo"
-// theme.coverBackgroundColorNone: "None" => "Nessuno"
-// theme.coverBackgroundColorAccentColor: "Accent color" => "Colore principale"
-// theme.coverBackgroundColorCustom: "Custom" => "Costume"
+// theme.headerInheritWidthFrom: "Content area width" => "Larghezza dell'area di contenuto"
+// theme.headerInheritWidthFromSurvey: "Same as survey" => "Come il sondaggio"
+// theme.headerInheritWidthFromPage: "Fit to page" => "Adatta alla pagina"
+// theme.headerTextAreaWidth: "Text width" => "Larghezza del testo"
+// theme.headerBackgroundColorSwitch: "Background color" => "Colore di sfondo"
+// theme.headerBackgroundColorNone: "None" => "Nessuno"
+// theme.headerBackgroundColorAccentColor: "Accent color" => "Colore principale"
+// theme.headerBackgroundColorCustom: "Custom" => "Costume"
 // theme.horizontalAlignmentLeft: "Left" => "A sinistra"
 // theme.horizontalAlignmentCenter: "Center" => "Centro"
 // theme.horizontalAlignmentRight: "Right" => "A destra"
@@ -1884,7 +1900,7 @@ editorLocalization.locales["it"] = italianTranslation;
 // theme.verticalAlignmentMiddle: "Middle" => "Mezzo"
 // theme.verticalAlignmentBottom: "Bottom" => "Fondoschiena"
 // theme.logoPosition: "Logo Position" => "Posizione del logo"
-// theme.coverTitlePosition: "Title Position" => "Posizione del titolo"
+// theme.headerTitlePosition: "Title Position" => "Posizione del titolo"
 // lg.question_resetValueText: "reset value for question: {0}" => "Valore di ripristino per la domanda: {0}"
 // lg.question_setValueText: "assign value: {1} to question: {0}" => "Assegna valore: {1} alla domanda: {0}"
 // lg.column_resetValueText: "reset cell value for column: {0}" => "Reimposta il valore della cella per la colonna: {0}"
@@ -1898,18 +1914,14 @@ editorLocalization.locales["it"] = italianTranslation;
 // pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "Si applica quando \"Tipo di origine\" è \"File locali\" o quando la fotocamera non è disponibile"
 // pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "Si applica quando \"Tipo di sorgente\" è \"Fotocamera\"."
 // pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "Si applica quando \"Tipo di origine\" è \"File locali o fotocamera\"."
-// theme.groupBackground: "Background" => "Sfondo"
-// theme.groupAppearance: "Appearance" => "Apparenza"
-// theme.coverDescriptionForecolor: "Description forecolor" => "Descrizione forecolor"
+// theme.background: "Background" => "Sfondo"
+// theme.appearance: "Appearance" => "Apparenza"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Vuoi davvero resettare il tema? Tutte le tue personalizzazioni andranno perse."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "Sì, reimposta il tema"
-// theme.groupBackground: "Background" => "Sfondo"
-// theme.groupAppearance: "Appearance" => "Apparenza"
-// theme.coverDescriptionForecolor: "Description forecolor" => "Descrizione forecolor"
-// theme.coverInheritWidthFromContainer: "Fit to container" => "Adatto al contenitore"
+// theme.headerInheritWidthFromContainer: "Fit to container" => "Adatto al contenitore"
 // signaturepad.showPlaceholder: "Show the placeholder" => "Visualizzare il segnaposto"
 // signaturepad.placeholder: "Placeholder text" => "Testo segnaposto"
-// theme.surveyDescription: "Survey description font" => "Carattere della descrizione dell'indagine"
+// theme.surveyDescriptionFont: "Survey description font" => "Carattere della descrizione dell'indagine"
 
 // ed.prevFocus: "Focus previous" => "Focus precedente"
 // ed.nextFocus: "Focus next" => "Focus successivo"
@@ -1922,7 +1934,7 @@ editorLocalization.locales["it"] = italianTranslation;
 // signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "Ridimensionamento automatico dell'area della firma"
 // signaturepad.penMinWidth: "Minimum pen width" => "Larghezza minima della penna"
 // signaturepad.penMaxWidth: "Maximum pen width" => "Larghezza massima della penna"
-// theme.coverDescriptionPosition: "Description position" => "Descrizione posizione"
+// theme.headerDescriptionPosition: "Description position" => "Descrizione posizione"
 // ed.propertyGridNoResultsFound: "No results found" => "Nessun risultato trovato"
 // pv.leftRight: "Left and right" => "Destra e sinistra"
 // p.sourceType: "Source type" => "Tipo di origine"
@@ -2316,3 +2328,78 @@ editorLocalization.locales["it"] = italianTranslation;
 // ed.pagePlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the page." => "Fai clic sul pulsante \"Aggiungi domanda\" in basso per aggiungere un nuovo elemento alla pagina."
 // ed.panelPlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the panel." => "Fai clic sul pulsante \"Aggiungi domanda\" in basso per aggiungere un nuovo elemento al pannello."
 // ed.imagePlaceHolderMobile: "Click the button below and choose an image to upload" => "Clicca sul pulsante qui sotto e scegli un'immagine da caricare"
+// coloralpha.opacity: "Opacity" => "Opacità"
+// font.family: "Font family" => "Famiglia di caratteri"
+// font.color: "Color" => "Colore"
+// font.placeholderColor: "Placeholder color" => "Colore segnaposto"
+// font.size: "Size" => "Grandezza"
+// theme.themeName: "Theme" => "Tema"
+// theme.isPanelless: "Question appearance" => "Aspetto della domanda"
+// theme.editorPanel: "Background and corner radius" => "Sfondo e raggio d'angolo"
+// theme.questionPanel: "Background and corner radius" => "Sfondo e raggio d'angolo"
+// theme.primaryColor: "Accent color" => "Colore d'accento"
+// theme.panelBackgroundTransparency: "Panel background opacity" => "Opacità dello sfondo del pannello"
+// theme.questionBackgroundTransparency: "Question background opacity" => "Opacità dello sfondo della domanda"
+// theme.fontSize: "Font size" => "Dimensione del carattere"
+// theme.scale: "Scale" => "Scala"
+// theme.cornerRadius: "Corner radius" => "Raggio d'angolo"
+// theme.pageTitle: "Title font" => "Carattere del titolo"
+// theme.pageDescription: "Description font" => "Carattere di descrizione"
+// theme.questionTitle: "Title font" => "Carattere del titolo"
+// theme.questionDescription: "Description font" => "Carattere di descrizione"
+// theme.editorFont: "Font" => "Font"
+// theme.backgroundOpacity: "Opacity" => "Opacità"
+// theme.--sjs-font-family: "Font family" => "Famiglia di caratteri"
+// theme.--sjs-general-backcolor-dim: "Background color" => "Colore di sfondo"
+// theme.--sjs-primary-backcolor: "Accent background" => "Sfondo d'accento"
+// theme.--sjs-primary-forecolor: "Accent foreground" => "Primo piano in primo piano"
+// theme.--sjs-shadow-small: "Shadow effects" => "Effetti ombra"
+// theme.--sjs-shadow-inner: "Shadow effects" => "Effetti ombra"
+// theme.--sjs-border-default: "Colors" => "Colori"
+// header@header.headerView: "View" => "Vista"
+// header@header.logoPosition: "Logo position" => "Posizione del logo"
+// header@header.surveyTitle: "Survey title font" => "Carattere del titolo dell'indagine"
+// header@header.surveyDescription: "Survey description font" => "Carattere della descrizione dell'indagine"
+// header@header.headerTitle: "Survey title font" => "Carattere del titolo dell'indagine"
+// header@header.headerDescription: "Survey description font" => "Carattere della descrizione dell'indagine"
+// header@header.inheritWidthFrom: "Content area width" => "Larghezza dell'area del contenuto"
+// header@header.textAreaWidth: "Text width" => "Larghezza del testo"
+// header@header.backgroundColorSwitch: "Background color" => "Colore di sfondo"
+// header@header.backgroundImage: "Background image" => "Immagine di sfondo"
+// header@header.backgroundImageOpacity: "Opacity" => "Opacità"
+// header@header.overlapEnabled: "Overlap" => "Sovrapposizione"
+// header@header.logoPositionX: "Logo position" => "Posizione del logo"
+// header@header.titlePositionX: "Title position" => "Posizione del titolo"
+// header@header.descriptionPositionX: "Description position" => "Descrizione posizione"
+// weight.400: "Regular" => "Regolare"
+// weight.600: "Heavy" => "Pesante"
+// weight.700: "Semi-bold" => "Semi-grassetto"
+// weight.800: "Bold" => "Audace"
+// backgroundImageFit.auto: "Auto" => "Automatico"
+// backgroundImageFit.cover: "Cover" => "Coprire"
+// backgroundImageFit.contain: "Contain" => "Contenere"
+// backgroundImageFit.fill: "Stretch" => "Stendere"
+// backgroundImageFit.tile: "Tile" => "Tegola"
+// backgroundImageAttachment.fixed: "Fixed" => "Fissato"
+// backgroundImageAttachment.scroll: "Scroll" => "Scorrere"
+// headerView.basic: "Basic" => "Basico"
+// headerView.advanced: "Advanced" => "Avanzato"
+// inheritWidthFrom.survey: "Same as survey" => "Uguale al sondaggio"
+// inheritWidthFrom.container: "Fit to container" => "Adatto al contenitore"
+// backgroundColorSwitch.none: "None" => "Nessuno"
+// backgroundColorSwitch.accentColor: "Accent color" => "Colore d'accento"
+// backgroundColorSwitch.custom: "Custom" => "Costume"
+// colorPalette.light: "Light" => "Leggero"
+// colorPalette.dark: "Dark" => "Oscuro"
+// isPanelless.false: "Default" => "Default"
+// isPanelless.true: "Without Panels" => "Senza pannelli"
+// theme.cornerRadius: "Corner radius" => "Raggio d'angolo"
+// theme.fontFamily: "Font family" => "Famiglia di caratteri"
+// theme.fontWeightRegular: "Regular" => "Regolare"
+// theme.fontWeightHeavy: "Heavy" => "Pesante"
+// theme.fontWeightSemiBold: "Semi-bold" => "Semi-grassetto"
+// theme.fontWeightBold: "Bold" => "Audace"
+// theme.color: "Color" => "Colore"
+// theme.placeholderColor: "Placeholder color" => "Colore segnaposto"
+// theme.size: "Size" => "Grandezza"
+// theme.opacity: "Opacity" => "Opacità"
