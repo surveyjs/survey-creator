@@ -293,17 +293,95 @@ test("Right toolbox (rtl) - scroll", async (t) => {
 });
 test("Toolbox with search", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    const toolboxItem = Selector(".svc-toolbox__item");
-    const toolboxItemDots = Selector(".svc-toolbox__tool .sv-dots__item");
     const toolboxElement = Selector(".svc-toolbox");
 
     await setJSON({ pages: [{ name: "page1" }] });
     await ClientFunction(() => {
       window["creator"].toolbox.searchEnabled = true;
     })();
+
     await t.resizeWindow(2560, 1440);
     await takeElementScreenshot("toolbox-search.png", toolboxElement, t, comparer);
     await t.typeText(Selector(".svc-toolbox input"), "single");
     await takeElementScreenshot("toolbox-search-entered.png", toolboxElement, t, comparer);
+    await t.typeText(Selector(".svc-toolbox input"), "qwerty");
+    await takeElementScreenshot("toolbox-search-placeholder.png", toolboxElement, t, comparer);
+  });
+});
+
+test("Toolbox with search compact", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    const toolboxElement = Selector(".svc-toolbox");
+
+    await setJSON({ pages: [{ name: "page1" }] });
+    await ClientFunction(() => {
+      window["creator"].toolbox.searchEnabled = true;
+    })();
+    await changeToolboxLocation("right");
+    await t.resizeWindow(1240, 870);
+    await takeElementScreenshot("toolbox-search-compact.png", toolboxElement, t, comparer);
+    await t.click(Selector(".svc-toolbox__search-button"));
+    await t.typeText(Selector(".svc-toolbox input"), "single");
+    await takeElementScreenshot("toolbox-search-compact-entered.png", toolboxElement, t, comparer);
+    await t.typeText(Selector(".svc-toolbox input"), "qwerty");
+    await takeElementScreenshot("toolbox-search-compact-placeholder.png", toolboxElement, t, comparer);
+  });
+});
+
+test("Toolbox right with search", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    const toolboxElement = Selector(".svc-toolbox");
+
+    await setJSON({ pages: [{ name: "page1" }] });
+    await ClientFunction(() => {
+      window["creator"].toolbox.searchEnabled = true;
+    })();
+    await changeToolboxLocation("right");
+    await t.resizeWindow(2560, 1440);
+    await takeElementScreenshot("toolbox-search-right.png", toolboxElement, t, comparer);
+    await t.click(Selector(".svc-toolbox__search-button"));
+    await t.typeText(Selector(".svc-toolbox input"), "single");
+    await takeElementScreenshot("toolbox-search-right-entered.png", toolboxElement, t, comparer);
+    await t.typeText(Selector(".svc-toolbox input"), "qwerty");
+    await takeElementScreenshot("toolbox-search-right-placeholder.png", toolboxElement, t, comparer);
+  });
+});
+
+test("Toolbox RTL with search", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    const toolboxElement = Selector(".svc-toolbox");
+
+    await setJSON({ pages: [{ name: "page1" }] });
+    await ClientFunction(() => {
+      window["creator"].toolbox.searchEnabled = true;
+      document.body.setAttribute("dir", "rtl");
+    })();
+
+    await t.resizeWindow(2560, 1440);
+    await takeElementScreenshot("toolbox-search-rtl.png", toolboxElement, t, comparer);
+    await t.typeText(Selector(".svc-toolbox input"), "single");
+    await takeElementScreenshot("toolbox-search-rtl-entered.png", toolboxElement, t, comparer);
+    await t.typeText(Selector(".svc-toolbox input"), "qwerty");
+    await takeElementScreenshot("toolbox-search-rtl-placeholder.png", toolboxElement, t, comparer);
+  });
+});
+
+test("Toolbox RTL with search compact", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    const toolboxElement = Selector(".svc-toolbox");
+
+    await setJSON({ pages: [{ name: "page1" }] });
+    await ClientFunction(() => {
+      window["creator"].toolbox.searchEnabled = true;
+      document.body.setAttribute("dir", "rtl");
+    })();
+
+    await t.resizeWindow(1240, 870);
+    await takeElementScreenshot("toolbox-search-rtl-compact.png", toolboxElement, t, comparer);
+    await t.click(Selector(".svc-toolbox__search-button"));
+    await t.typeText(Selector(".svc-toolbox input"), "single");
+    await takeElementScreenshot("toolbox-search-rtl-compact-entered.png", toolboxElement, t, comparer);
+    await t.typeText(Selector(".svc-toolbox input"), "qwerty");
+    await takeElementScreenshot("toolbox-search-rtl-compact-placeholder.png", toolboxElement, t, comparer);
   });
 });
