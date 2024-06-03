@@ -320,7 +320,6 @@ test("Toolbox with search compact", async (t) => {
     await ClientFunction(() => {
       window["creator"].toolbox.searchEnabled = true;
     })();
-    await changeToolboxLocation("right");
     await t.resizeWindow(1240, 870);
     await takeElementScreenshot("toolbox-search-compact.png", toolboxElement, t, comparer);
     await t.click(Selector(".svc-toolbox__search-button"));
