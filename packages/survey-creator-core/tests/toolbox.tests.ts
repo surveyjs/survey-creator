@@ -709,9 +709,10 @@ test("Toolbox search within categories with titles", (): any => {
 
 test("Toolbox keep scroll while search", (): any => {
   const creator = new CreatorTester();
-  const elementMock: any = {querySelector:() =>{ scrollHeight: 200, clientHeight: 100 }};
+  const elementMock: any = { scrollHeight: 200, clientHeight: 100 };
+
   creator.toolbox.searchEnabled = true;
-  creator.toolbox.setRootElement(elementMock);
+  creator.toolbox.setRootElement({ querySelector: () => elementMock } as any);
   expect(creator.toolbox.isScrollLocked).toBeFalsy();
   creator.toolbox.searchManager.filterString = "a";
   expect(creator.toolbox.isScrollLocked).toBeTruthy();
