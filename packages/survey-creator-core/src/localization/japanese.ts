@@ -16,6 +16,15 @@ export var jaStrings = {
     convertTo: "に変換する",
     drag: "要素をドラッグする",
   },
+  // Creator tabs
+  tabs: {
+    preview: "アンケートをテストする",
+    theme: "テーマ",
+    translation: "翻訳",
+    designer: "アンケートの設計者",
+    editor: "JSONエディタ",
+    logic: "アンケートのロジック"
+  },
   // Question types
   qt: {
     default: "デフォルト",
@@ -41,6 +50,14 @@ export var jaStrings = {
     expression: "式（読み取り専用）",
     signaturepad: "署名パッド",
     buttongroup: "ボタングループ"
+  },
+  toolboxCategories: {
+    general: "一般",
+    choice: "選択の質問",
+    text: "テキスト入力の質問",
+    containers: "コンテナー",
+    matrix: "マトリックスの質問",
+    misc: "雑貨"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -73,23 +90,16 @@ export var jaStrings = {
     newQuestionName: "質問",
     newPanelName: "パネル",
     newTextItemName: "テキスト",
-    testSurvey: "アンケートをテストする",
-    themeSurvey: "テーマ",
     defaultV2Theme: "デフォルト",
     modernTheme: "モダン",
     defaultTheme: "デフォルト (レガシー)",
     testSurveyAgain: "アンケートを再度テストする",
     testSurveyWidth: "アンケートの幅： ",
     navigateToMsg: "次の場所に移動する必要がありました：",
-    logic: "アンケートのロジック",
-    embedSurvey: "アンケートを埋め込む",
-    translation: "翻訳",
     saveSurvey: "アンケートを保存する",
     saveSurveyTooltip: "アンケートを保存する",
     saveTheme: "テーマを保存",
     saveThemeTooltip: "テーマを保存",
-    designer: "アンケートの設計者",
-    jsonEditor: "JSONエディタ",
     jsonHideErrors: "エラーを隠す",
     jsonShowErrors: "エラーを表示",
     undo: "元に戻す",
@@ -111,12 +121,6 @@ export var jaStrings = {
     "property-grid": "プロパティ",
     propertyGridFilteredTextPlaceholder: "検索するタイプ...",
     propertyGridNoResultsFound: "結果が見つかりませんでした",
-    toolboxGeneralCategory: "一般",
-    toolboxChoiceCategory: "選択の質問",
-    toolboxTextCategory: "テキスト入力の質問",
-    toolboxContainersCategory: "コンテナー",
-    toolboxMatrixCategory: "マトリックスの質問",
-    toolboxMiscCategory: "雑貨",
     correctJSON: "JSONを修正してください。",
     surveyResults: "アンケート結果： ",
     surveyResultsTable: "表として",
@@ -225,13 +229,13 @@ export var jaStrings = {
       question_visibilityText: "質問{0}を表示にする", //{0} question name
       question_enableText: "質問{0}を有効にする", //{0} question name
       question_requireText: "質問{0}を必須にする", //{0} question name
-      question_resetValueText: "質問のリセット値:{0}",
+      question_resetValueText: "質問のリセット値:{0}", //{0} question name.
       question_setValueText: "値の割り当て: 質問への{1}: {0}",
       column_visibilityText: "質問{1}の列{0}を表示する", //{0} column name, {1} question name
       column_enableText: "質問の列{0}を有効にする{1}", //{0} column name, {1} question name
       column_requireText: "質問{1}の列{0}を必須にする", //{0} column name, {1} question name
-      column_resetValueText: "列のセル値をリセット:{0}",
-      column_setValueText: "セル値の割り当て:列への{1}:{0}",
+      column_resetValueText: "列のセル値をリセット:{0}", //{0} column name
+      column_setValueText: "セル値の割り当て:列への{1}:{0}", //{0} column name and {1} setValueExpression
       setValueExpressionPlaceholder: "結果が対象の質問に割り当てられる式。",
       trigger_completeText: "アンケートが完了する",
       trigger_setvalueText: "質問：{0}値{1}に設定する", //{0} question name, {1} setValue
@@ -749,6 +753,7 @@ export var jaStrings = {
       top: "上に",
       bottom: "下に"
     },
+    // Creator tabs
     tabs: {
       panel: {
         layout: "パネルレイアウト"
@@ -792,6 +797,9 @@ export var jaStrings = {
       slider: "スライダー",
       expression: "表現",
       questionSettings: "質問設定",
+      header: "ヘッダ",
+      background: "バックグラウンド",
+      appearance: "様子",
       others: "その他"
     },
     editProperty: "プロパティ'{0}'を編集",
@@ -844,7 +852,49 @@ export var jaStrings = {
     minWidth_placeholder: "例:600px",
     maxWidth_placeholder: "例:50%",
     imageHeight_placeholder: "自動",
-    imageWidth_placeholder: "自動"
+    imageWidth_placeholder: "自動",
+    theme: {
+      themeName: "テーマ",
+      isPanelless: "質問の表示設定",
+      editorPanel: "背景と角の半径",
+      questionPanel: "背景と角の半径",
+      primaryColor: "アクセントカラー",
+      panelBackgroundTransparency: "パネル背景の不透明度",
+      questionBackgroundTransparency: "質問の背景の不透明度",
+      fontSize: "フォントサイズ",
+      scale: "規模",
+      cornerRadius: "コーナR(Corner Radius)",
+      pageTitle: "タイトルのフォント",
+      pageDescription: "説明フォント",
+      questionTitle: "タイトルのフォント",
+      questionDescription: "説明フォント",
+      editorFont: "フォント",
+      backgroundOpacity: "不透明",
+      "--sjs-font-family": "フォントファミリー",
+      "--sjs-general-backcolor-dim": "背景色",
+      "--sjs-primary-backcolor": "アクセントの背景",
+      "--sjs-primary-forecolor": "アクセントの前景",
+      "--sjs-shadow-small": "影の効果",
+      "--sjs-shadow-inner": "影の効果",
+      "--sjs-border-default": "色"
+    },
+    "header@header": {
+      headerView: "眺める",
+      logoPosition: "ロゴの位置",
+      surveyTitle: "調査タイトルのフォント",
+      surveyDescription: "調査の説明フォント",
+      headerTitle: "調査タイトルのフォント",
+      headerDescription: "調査の説明フォント",
+      inheritWidthFrom: "コンテンツ領域の幅",
+      textAreaWidth: "文字幅",
+      backgroundColorSwitch: "背景色",
+      backgroundImage: "背景画像",
+      backgroundImageOpacity: "不透明",
+      overlapEnabled: "オーバーラップ",
+      logoPositionX: "ロゴの位置",
+      titlePositionX: "タイトルの位置",
+      descriptionPositionX: "記述の位置"
+    }
   },
   // Property values
   pv: {
@@ -1060,6 +1110,38 @@ export var jaStrings = {
     searchMode: {
       contains: "含む",
       startsWith: "次で始まる"
+    },
+    backgroundImageFit: {
+      auto: "自動",
+      cover: "覆う",
+      contain: "含む",
+      fill: "伸ばす",
+      tile: "瓦"
+    },
+    backgroundImageAttachment: {
+      fixed: "付け",
+      scroll: "スクロール"
+    },
+    headerView: {
+      basic: "基本的な",
+      advanced: "アドバンスド"
+    },
+    inheritWidthFrom: {
+      survey: "調査と同じ",
+      container: "コンテナにフィット"
+    },
+    backgroundColorSwitch: {
+      none: "何一つ",
+      accentColor: "アクセントカラー",
+      custom: "習慣"
+    },
+    colorPalette: {
+      light: "光",
+      dark: "暗い"
+    },
+    isPanelless: {
+      "false": "デフォルト",
+      "true": "パネルなし"
     }
   },
   // Operators
@@ -1467,101 +1549,40 @@ export var jaStrings = {
     copyDisplayValue: "表示値をコピー"
   },
   theme: {
-    "--background": "背景色",
-    "--background-dim-light": "背景の薄暗い明るい色",
-    "--primary-foreground": "原色の前景色",
-    "--foreground": "景色",
-    "--base-unit": "ベースユニット",
     advancedMode: "詳細モード",
-    groupGeneral: "全般",
-    groupHeader: "ヘッダ",
-    groupBackground: "バックグラウンド",
-    groupAppearance: "様子",
-    themeName: "テーマ",
-    themeMode: "質問の外観",
-    themeModePanels: "デフォルト",
-    themeModeLightweight: "パネルなし",
-    themePaletteLight: "光",
-    themePaletteDark: "暗い",
-    primaryColor: "アクセントカラー",
+    pageTitle: "ページタイトルのフォント",
+    questionTitle: "質問タイトルのフォント",
+    editorPanel: "入力要素",
+    lines: "台詞",
     primaryDefaultColor: "デフォルト",
     primaryDarkColor: "ホバー",
     primaryLightColor: "入選",
-    coverTitleForecolor: "タイトル前色",
-    coverDescriptionForecolor: "説明前色",
-    coverOverlapEnabled: "オーバーラップ",
     backgroundDimColor: "背景色",
-    backgroundImage: "背景画像",
-    backgroundImageFitAuto: "自動",
-    backgroundImageFitCover: "覆う",
-    backgroundImageFitContain: "含む",
-    backgroundImageFitFill: "伸ばす",
-    backgroundImageFitTile: "瓦",
-    backgroundOpacity: "不透明",
-    backgroundImageAttachmentFixed: "付け",
-    backgroundImageAttachmentScroll: "スクロール",
-    panelBackgroundTransparency: "パネルの背景の不透明度",
-    questionBackgroundTransparency: "質問の背景の不透明度",
-    questionTitle: "質問タイトルのフォント",
-    editorPanel: "入力要素",
-    backgroundCornerRadius: "背景と角の半径",
+    cornerRadius: "コーナR(Corner Radius)",
     backcolor: "デフォルトの背景",
     hovercolor: "ホバー背景",
     borderDecoration: "ボーダーデコレーション",
-    accentBackground: "アクセントの背景",
-    accentForeground: "アクセントの前景",
     primaryForecolor: "デフォルトの色",
     primaryForecolorLight: "無効色",
-    colorsTitle: "色",
     font: "フォント",
-    lines: "台詞",
     borderDefault: "暗い",
     borderLight: "ライター",
-    fontFamily: "フォントファミリ",
-    fontSize: "文字サイズ",
-    color: "色",
-    placeholderColor: "プレースホルダの色",
-    size: "大きさ",
+    fontFamily: "フォントファミリー",
     fontWeightRegular: "レギュラー",
     fontWeightHeavy: "重い",
     fontWeightSemiBold: "半太字",
     fontWeightBold: "ボールド",
-    scale: "規模",
-    cornerRadius: "コーナー半径",
-    surveyTitle: "アンケートタイトルのフォント",
-    surveyDescription: "調査の説明フォント",
-    pageTitle: "ページタイトルのフォント",
-    titleFont: "タイトルのフォント",
-    descriptionFont: "説明フォント",
+    color: "色",
+    placeholderColor: "プレースホルダーの色",
+    size: "大きさ",
+    opacity: "不透明",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "シャドウ効果を追加",
-    opacity: "不透明",
     boxShadowBlur: "滲む",
     boxShadowSpread: "まん延",
     boxShadowDrop: "落とす",
     boxShadowInner: "内的",
-    shadow: "影の効果",
-    headerView: "眺める",
-    headerViewBasic: "基本的な",
-    headerViewAdvanced: "アドバンスド",
-    coverInheritWidthFrom: "コンテンツ領域の幅",
-    coverInheritWidthFromSurvey: "調査と同じ",
-    coverInheritWidthFromContainer: "コンテナに合わせる",
-    coverTextAreaWidth: "テキスト幅",
-    coverBackgroundColorSwitch: "背景色",
-    coverBackgroundColorNone: "何一つ",
-    coverBackgroundColorAccentColor: "アクセントカラー",
-    coverBackgroundColorCustom: "習慣",
-    horizontalAlignmentLeft: "左",
-    horizontalAlignmentCenter: "センター",
-    horizontalAlignmentRight: "右",
-    verticalAlignmentTop: "ページのトップへ",
-    verticalAlignmentMiddle: "中央",
-    verticalAlignmentBottom: "底",
-    logoPosition: "ロゴの位置",
-    coverTitlePosition: "タイトルの位置",
-    coverDescriptionPosition: "記述の位置",
     names: {
       default: "デフォルト",
       sharp: "鋭い",
@@ -1993,12 +2014,11 @@ editorLocalization.locales["ja"] = jaStrings;
 // theme.--primary-foreground: "Primary foreground color" => "原色の前景色"
 // theme.--foreground: "Foreground color" => "景色"
 // theme.--base-unit: "Base unit" => "ベースユニット"
-// theme.groupGeneral: "General" => "全般"
 // theme.groupAdvanced: "Advanced" => "アドバンスド"
 // theme.themeName: "Theme" => "テーマ"
-// theme.themeMode: "Question appearance" => "質問の外観"
-// theme.themeModePanels: "Default" => "デフォルト"
-// theme.themeModeLightweight: "Without Panels" => "パネルなし"
+// theme.isPanellessss: "Question appearance" => "質問の外観"
+// theme.isPanellessPanels: "Default" => "デフォルト"
+// theme.isPanellessLightweight: "Without Panels" => "パネルなし"
 // theme.themePaletteLight: "Light" => "光"
 // theme.themePaletteDark: "Dark" => "暗い"
 // theme.primaryColor: "Accent color" => "アクセントカラー"
@@ -2040,7 +2060,7 @@ editorLocalization.locales["ja"] = jaStrings;
 // theme.fontWeightBold: "Bold" => "ボールド"
 // theme.scale: "Scale" => "規模"
 // theme.cornerRadius: "Corner radius" => "コーナー半径"
-// theme.surveyTitle: "Survey title font" => "アンケートタイトルのフォント"
+// theme.surveyTitleFont: "Survey title font" => "アンケートタイトルのフォント"
 // theme.pageTitle: "Page title font" => "ページタイトルのフォント"
 // theme.pageDescription: "Page description font" => "ページ記述フォント"
 // theme.boxShadowX: "X" => "X"
@@ -2101,22 +2121,20 @@ editorLocalization.locales["ja"] = jaStrings;
 // survey.title: "Title" => "タイトル"
 // page.title: "Title" => "タイトル"
 // p.setValueIf: "Set value if" => "次の場合に値を設定します"
-// theme.groupHeader: "Header" => "ヘッダ"
-// theme.coverTitleForecolor: "Title forecolor" => "タイトル前色"
-// theme.coverOverlapEnabled: "Overlap" => "オーバーラップ"
+// theme.header: "Header" => "ヘッダ"
 // theme.backgroundImageFitFill: "Stretch" => "伸ばす"
 // theme.backgroundImageFitTile: "Tile" => "瓦"
 // theme.headerView: "View" => "眺める"
 // theme.headerViewBasic: "Basic" => "基本的な"
 // theme.headerViewAdvanced: "Advanced" => "アドバンスド"
-// theme.coverInheritWidthFrom: "Content area width" => "コンテンツ領域の幅"
-// theme.coverInheritWidthFromSurvey: "Same as survey" => "調査と同じ"
-// theme.coverInheritWidthFromPage: "Fit to page" => "ページに合わせる"
-// theme.coverTextAreaWidth: "Text width" => "テキスト幅"
-// theme.coverBackgroundColorSwitch: "Background color" => "背景色"
-// theme.coverBackgroundColorNone: "None" => "何一つ"
-// theme.coverBackgroundColorAccentColor: "Accent color" => "アクセントカラー"
-// theme.coverBackgroundColorCustom: "Custom" => "習慣"
+// theme.headerInheritWidthFrom: "Content area width" => "コンテンツ領域の幅"
+// theme.headerInheritWidthFromSurvey: "Same as survey" => "調査と同じ"
+// theme.headerInheritWidthFromPage: "Fit to page" => "ページに合わせる"
+// theme.headerTextAreaWidth: "Text width" => "テキスト幅"
+// theme.headerBackgroundColorSwitch: "Background color" => "背景色"
+// theme.headerBackgroundColorNone: "None" => "何一つ"
+// theme.headerBackgroundColorAccentColor: "Accent color" => "アクセントカラー"
+// theme.headerBackgroundColorCustom: "Custom" => "習慣"
 // theme.horizontalAlignmentLeft: "Left" => "左"
 // theme.horizontalAlignmentCenter: "Center" => "センター"
 // theme.horizontalAlignmentRight: "Right" => "右"
@@ -2136,18 +2154,14 @@ editorLocalization.locales["ja"] = jaStrings;
 // pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "「ソースタイプ」が「ローカルファイル」の場合、またはカメラが利用できない場合に適用されます"
 // pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "「ソースタイプ」が「カメラ」の場合に適用されます。"
 // pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "「ソースタイプ」が「ローカルファイルまたはカメラ」の場合に適用されます。"
-// theme.groupBackground: "Background" => "バックグラウンド"
-// theme.groupAppearance: "Appearance" => "様子"
-// theme.coverDescriptionForecolor: "Description forecolor" => "説明前色"
+// theme.background: "Background" => "バックグラウンド"
+// theme.appearance: "Appearance" => "様子"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "本当にテーマをリセットしますか?すべてのカスタマイズが失われます。"
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "はい、テーマをリセットします"
-// theme.groupBackground: "Background" => "バックグラウンド"
-// theme.groupAppearance: "Appearance" => "様子"
-// theme.coverDescriptionForecolor: "Description forecolor" => "説明前色"
-// theme.coverInheritWidthFromContainer: "Fit to container" => "コンテナに合わせる"
+// theme.headerInheritWidthFromContainer: "Fit to container" => "コンテナに合わせる"
 // signaturepad.showPlaceholder: "Show the placeholder" => "プレースホルダーを表示する"
 // signaturepad.placeholder: "Placeholder text" => "プレースホルダテキスト"
-// theme.surveyDescription: "Survey description font" => "調査の説明フォント"
+// theme.surveyDescriptionFont: "Survey description font" => "調査の説明フォント"
 // ed.prevFocus: "Focus previous" => "前に焦点を合わせる"
 // ed.nextFocus: "Focus next" => "次の焦点"
 // ed.saveTheme: "Save Theme" => "テーマを保存"
@@ -2160,8 +2174,8 @@ editorLocalization.locales["ja"] = jaStrings;
 // signaturepad.penMinWidth: "Minimum pen width" => "最小ペン幅"
 // signaturepad.penMaxWidth: "Maximum pen width" => "ペンの最大幅"
 // theme.logoPosition: "Logo position" => "ロゴの位置"
-// theme.coverTitlePosition: "Title position" => "タイトルの位置"
-// theme.coverDescriptionPosition: "Description position" => "記述の位置"
+// theme.headerTitlePosition: "Title position" => "タイトルの位置"
+// theme.headerDescriptionPosition: "Description position" => "記述の位置"
 // ed.propertyGridNoResultsFound: "No results found" => "結果が見つかりませんでした"
 // pv.leftRight: "Left and right" => "左右"
 // p.sourceType: "Source type" => "ソースの種類"
@@ -2555,3 +2569,78 @@ editorLocalization.locales["ja"] = jaStrings;
 // ed.pagePlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the page." => "下の「質問を追加」ボタンをクリックして、ページに新しい要素を追加します。"
 // ed.panelPlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the panel." => "下の「質問を追加」ボタンをクリックして、パネルに新しい要素を追加します。"
 // ed.imagePlaceHolderMobile: "Click the button below and choose an image to upload" => "下のボタンをクリックして、アップロードする画像を選択してください"
+// coloralpha.opacity: "Opacity" => "不透明"
+// font.family: "Font family" => "フォントファミリー"
+// font.color: "Color" => "色"
+// font.placeholderColor: "Placeholder color" => "プレースホルダーの色"
+// font.size: "Size" => "大きさ"
+// theme.themeName: "Theme" => "テーマ"
+// theme.isPanelless: "Question appearance" => "質問の表示設定"
+// theme.editorPanel: "Background and corner radius" => "背景と角の半径"
+// theme.questionPanel: "Background and corner radius" => "背景と角の半径"
+// theme.primaryColor: "Accent color" => "アクセントカラー"
+// theme.panelBackgroundTransparency: "Panel background opacity" => "パネル背景の不透明度"
+// theme.questionBackgroundTransparency: "Question background opacity" => "質問の背景の不透明度"
+// theme.fontSize: "Font size" => "フォントサイズ"
+// theme.scale: "Scale" => "規模"
+// theme.cornerRadius: "Corner radius" => "コーナR(Corner Radius)"
+// theme.pageTitle: "Title font" => "タイトルのフォント"
+// theme.pageDescription: "Description font" => "説明フォント"
+// theme.questionTitle: "Title font" => "タイトルのフォント"
+// theme.questionDescription: "Description font" => "説明フォント"
+// theme.editorFont: "Font" => "フォント"
+// theme.backgroundOpacity: "Opacity" => "不透明"
+// theme.--sjs-font-family: "Font family" => "フォントファミリー"
+// theme.--sjs-general-backcolor-dim: "Background color" => "背景色"
+// theme.--sjs-primary-backcolor: "Accent background" => "アクセントの背景"
+// theme.--sjs-primary-forecolor: "Accent foreground" => "アクセントの前景"
+// theme.--sjs-shadow-small: "Shadow effects" => "影の効果"
+// theme.--sjs-shadow-inner: "Shadow effects" => "影の効果"
+// theme.--sjs-border-default: "Colors" => "色"
+// header@header.headerView: "View" => "眺める"
+// header@header.logoPosition: "Logo position" => "ロゴの位置"
+// header@header.surveyTitle: "Survey title font" => "調査タイトルのフォント"
+// header@header.surveyDescription: "Survey description font" => "調査の説明フォント"
+// header@header.headerTitle: "Survey title font" => "調査タイトルのフォント"
+// header@header.headerDescription: "Survey description font" => "調査の説明フォント"
+// header@header.inheritWidthFrom: "Content area width" => "コンテンツ領域の幅"
+// header@header.textAreaWidth: "Text width" => "文字幅"
+// header@header.backgroundColorSwitch: "Background color" => "背景色"
+// header@header.backgroundImage: "Background image" => "背景画像"
+// header@header.backgroundImageOpacity: "Opacity" => "不透明"
+// header@header.overlapEnabled: "Overlap" => "オーバーラップ"
+// header@header.logoPositionX: "Logo position" => "ロゴの位置"
+// header@header.titlePositionX: "Title position" => "タイトルの位置"
+// header@header.descriptionPositionX: "Description position" => "記述の位置"
+// weight.400: "Regular" => "レギュラー"
+// weight.600: "Heavy" => "重い"
+// weight.700: "Semi-bold" => "半太字"
+// weight.800: "Bold" => "ボールド"
+// backgroundImageFit.auto: "Auto" => "自動"
+// backgroundImageFit.cover: "Cover" => "覆う"
+// backgroundImageFit.contain: "Contain" => "含む"
+// backgroundImageFit.fill: "Stretch" => "伸ばす"
+// backgroundImageFit.tile: "Tile" => "瓦"
+// backgroundImageAttachment.fixed: "Fixed" => "付け"
+// backgroundImageAttachment.scroll: "Scroll" => "スクロール"
+// headerView.basic: "Basic" => "基本的な"
+// headerView.advanced: "Advanced" => "アドバンスド"
+// inheritWidthFrom.survey: "Same as survey" => "調査と同じ"
+// inheritWidthFrom.container: "Fit to container" => "コンテナにフィット"
+// backgroundColorSwitch.none: "None" => "何一つ"
+// backgroundColorSwitch.accentColor: "Accent color" => "アクセントカラー"
+// backgroundColorSwitch.custom: "Custom" => "習慣"
+// colorPalette.light: "Light" => "光"
+// colorPalette.dark: "Dark" => "暗い"
+// isPanelless.false: "Default" => "デフォルト"
+// isPanelless.true: "Without Panels" => "パネルなし"
+// theme.cornerRadius: "Corner radius" => "コーナR(Corner Radius)"
+// theme.fontFamily: "Font family" => "フォントファミリー"
+// theme.fontWeightRegular: "Regular" => "レギュラー"
+// theme.fontWeightHeavy: "Heavy" => "重い"
+// theme.fontWeightSemiBold: "Semi-bold" => "半太字"
+// theme.fontWeightBold: "Bold" => "ボールド"
+// theme.color: "Color" => "色"
+// theme.placeholderColor: "Placeholder color" => "プレースホルダーの色"
+// theme.size: "Size" => "大きさ"
+// theme.opacity: "Opacity" => "不透明"

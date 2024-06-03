@@ -628,25 +628,29 @@ test("Show property editor for condition/expression", () => {
   ).toBeTruthy(); //defaultValueExpression is here
 });
 test("Test options.allowEditExpressionsInTextEditor", () => {
-  var question = new QuestionTextModel("q1");
-  var options = new EmptySurveyCreatorOptions();
+  const question = new QuestionTextModel("q1");
+  question.visibleIf = "{q2} = 'abc'";
+  const options = new EmptySurveyCreatorOptions();
   options.allowEditExpressionsInTextEditor = false;
   var propertyGrid = new PropertyGridModelTester(question, options);
-  var conditionQuestion = propertyGrid.survey.getQuestionByName("visibleIf");
-  var expressionQuestion = propertyGrid.survey.getQuestionByName(
-    "defaultValueExpression"
-  );
-  expect(conditionQuestion.isReadOnly).toBeTruthy();
-  expect(expressionQuestion.isReadOnly).toBeFalsy();
+  var conditionQuestion = <QuestionCommentModel>propertyGrid.survey.getQuestionByName("visibleIf");
+  var expressionQuestion = <QuestionCommentModel>propertyGrid.survey.getQuestionByName("defaultValueExpression");
+  expect(conditionQuestion.onKeyDownPreprocess).toBeTruthy();
+  expect(expressionQuestion.onKeyDownPreprocess).toBeFalsy();
+  expect(conditionQuestion.getTitleToolbar()).toBeTruthy();
+  expect(conditionQuestion.titleActions).toHaveLength(2);
+  expect(conditionQuestion.titleActions[1].enabled).toBeTruthy();
 
   options.allowEditExpressionsInTextEditor = true;
   propertyGrid = new PropertyGridModelTester(question, options);
-  conditionQuestion = propertyGrid.survey.getQuestionByName("visibleIf");
-  expressionQuestion = propertyGrid.survey.getQuestionByName(
-    "defaultValueExpression"
-  );
-  expect(conditionQuestion.isReadOnly).toBeFalsy();
-  expect(expressionQuestion.isReadOnly).toBeFalsy();
+  conditionQuestion = <QuestionCommentModel>propertyGrid.survey.getQuestionByName("visibleIf");
+  expressionQuestion = <QuestionCommentModel>propertyGrid.survey.getQuestionByName("defaultValueExpression");
+  expect(conditionQuestion.onKeyDownPreprocess).toBeFalsy();
+  expect(expressionQuestion.onKeyDownPreprocess).toBeFalsy();
+  expect(conditionQuestion.getTitleToolbar()).toBeTruthy();
+  expect(conditionQuestion.titleActions).toHaveLength(3);
+  expect(conditionQuestion.titleActions[1].enabled).toBeTruthy();
+  expect(conditionQuestion.titleActions[2].enabled).toBeTruthy();
 });
 
 test("Support question property editor", () => {
@@ -1309,6 +1313,39 @@ test("matrix columns and rows has column value with isUnique property set to tru
   const rowsQuestion = <QuestionMatrixDynamicModel>propertyGrid.survey.getQuestionByName("rows");
   expect(columnsQuestion.getColumnByName("value").isUnique).toBeTruthy();
   expect(rowsQuestion.getColumnByName("value").isUnique).toBeTruthy();
+  expect(columnsQuestion.keyName).toBe("value");
+  expect(rowsQuestion.keyName).toBe("value");
+});
+test("choices values check on unique", () => {
+  const question = new QuestionDropdownModel("q1");
+  question.choices = ["item1", "item2", "item3"];
+  const propertyGrid = new PropertyGridModelTester(question);
+  const matrix = <QuestionMatrixDynamicModel>propertyGrid.survey.getQuestionByName("choices");
+  expect(matrix.keyName).toBe("value");
+  const cellQuestion = matrix.visibleRows[0].getQuestionByColumnName("value");
+  expect(cellQuestion.errors).toHaveLength(0);
+  cellQuestion.value = "item2";
+  expect(cellQuestion.errors).toHaveLength(1);
+  cellQuestion.value = "item4";
+  expect(cellQuestion.errors).toHaveLength(0);
+});
+test("choices values check on unique when value is the detail panel", () => {
+  const prop = Serializer.findProperty("itemvalue", "value");
+  const prevShowMode = prop.showMode;
+  prop.showMode = "form";
+  const question = new QuestionDropdownModel("q1");
+  question.choices = ["item1", "item2", "item3"];
+  const propertyGrid = new PropertyGridModelTester(question);
+  const matrix = <QuestionMatrixDynamicModel>propertyGrid.survey.getQuestionByName("choices");
+  expect(matrix.keyName).toBe("value");
+  matrix.visibleRows[0].showDetailPanel();
+  const cellQuestion = matrix.visibleRows[0].detailPanel.getQuestionByName("value");
+  expect(cellQuestion.errors).toHaveLength(0);
+  cellQuestion.value = "item2";
+  expect(cellQuestion.errors).toHaveLength(1);
+  cellQuestion.value = "item4";
+  expect(cellQuestion.errors).toHaveLength(0);
+  prop.showMode = prevShowMode;
 });
 test("matrix dropdown rows has column value with isUnique property set to true", () => {
   const question = new QuestionMatrixDropdownModel("q1");
@@ -2554,13 +2591,13 @@ test("Check textUpdate mode for question", () => {
   const stepQuestion = <QuestionTextModel>propertyGrid.survey.getQuestionByName("step");
 
   expect(nameQuestion.getType()).toEqual("text");
-  expect(nameQuestion.isSurveyInputTextUpdate).toBeFalsy();
+  expect(nameQuestion.getIsInputTextUpdate()).toBeFalsy();
   expect(titleQuestion.getType()).toEqual("comment");
-  expect(titleQuestion.isSurveyInputTextUpdate).toBeTruthy();
+  expect(titleQuestion.getIsInputTextUpdate()).toBeTruthy();
   expect(placeholderQuestion.getType()).toEqual("text");
-  expect(placeholderQuestion.isSurveyInputTextUpdate).toBeTruthy();
+  expect(placeholderQuestion.getIsInputTextUpdate()).toBeTruthy();
   expect(stepQuestion.getType()).toEqual("text");
-  expect(stepQuestion.isSurveyInputTextUpdate).toBeFalsy();
+  expect(stepQuestion.getIsInputTextUpdate()).toBeFalsy();
 });
 test("Has narrow style between link value questions", () => {
   const question = new QuestionTextModel("q1");
@@ -2884,12 +2921,12 @@ test("PropertyEditor and hasError - required for survey.title", () => {
   survey.title = "My Title";
   let propertyGrid = new PropertyGridModelTester(survey);
   let titleQuestion = <QuestionTextModel>propertyGrid.survey.getQuestionByName("title");
-  expect(titleQuestion.isSurveyInputTextUpdate).toBeTruthy();
+  expect(titleQuestion.getIsInputTextUpdate()).toBeTruthy();
   const prop = Serializer.findProperty("survey", "title");
   prop.isRequired = true;
   propertyGrid = new PropertyGridModelTester(survey);
   titleQuestion = <QuestionTextModel>propertyGrid.survey.getQuestionByName("title");
-  expect(titleQuestion.isSurveyInputTextUpdate).toBeFalsy();
+  expect(titleQuestion.getIsInputTextUpdate()).toBeFalsy();
   expect(titleQuestion.textUpdateMode).toBe("onBlur");
   titleQuestion.value = "";
   expect(survey.title).toEqual("My Title");
@@ -3134,6 +3171,14 @@ test("category, parent property", () => {
 
   const question = new QuestionDropdownModel("q1");
   const propertyGrid = new PropertyGridModelTester(question);
+  const tabsFistLevel = propertyGrid.survey.pages[0].elements.map(el => el.name);
+  const tabsSecondLevel = propertyGrid.survey.pages[0].elements[0].elements.map(el => el.name);
+  expect(tabsFistLevel.indexOf("sub1")).toBe(-1);
+  expect(tabsFistLevel.indexOf("sub2")).toBe(-1);
+
+  expect(tabsSecondLevel.indexOf("sub1")).toBeGreaterThan(-1);
+  expect(tabsSecondLevel.indexOf("sub2")).toBeGreaterThan(-1);
+
   const generalPanel = propertyGrid.survey.getPanelByName("general");
   generalPanel.expand();
   generalPanel.collapse();
@@ -3342,4 +3387,22 @@ test("It is impossible to clear value for numeric property, bug##5395", () => {
   expect(imageHeightQuestion.isEmpty()).toBeTruthy();
   expect(question.imageHeight).not.toBe(0);
   expect(question.imageHeight).toBeFalsy();
+});
+test("Show commentText & commentPlaceholder on setting showCommentArea, bug##5527", () => {
+  const question = new QuestionImagePickerModel("q1");
+  const propertyGrid = new PropertyGridModelTester(question);
+  const showCommentAreaQuestion = propertyGrid.survey.getQuestionByName("showCommentArea");
+  const commentTextQuestion = propertyGrid.survey.getQuestionByName("commentText");
+  const commentPlaceholderAreaQuestion = propertyGrid.survey.getQuestionByName("commentPlaceholder");
+  expect(showCommentAreaQuestion).toBeTruthy();
+  expect(commentTextQuestion).toBeTruthy();
+  expect(commentPlaceholderAreaQuestion).toBeTruthy();
+  expect(showCommentAreaQuestion.isVisible).toBeTruthy();
+  expect(commentTextQuestion.isVisible).toBeFalsy();
+  expect(commentPlaceholderAreaQuestion.isVisible).toBeFalsy();
+  showCommentAreaQuestion.value = true;
+  expect(question.showCommentArea).toBeTruthy();
+  expect(showCommentAreaQuestion.isVisible).toBeTruthy();
+  expect(commentTextQuestion.isVisible).toBeTruthy();
+  expect(commentPlaceholderAreaQuestion.isVisible).toBeTruthy();
 });

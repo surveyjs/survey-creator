@@ -16,6 +16,15 @@ export var huStrings = {
     convertTo: "Konvertálás",
     drag: "Elem mozgatása",
   },
+  // Creator tabs
+  tabs: {
+    preview: "Próba",
+    theme: "Témák",
+    translation: "Fordítás",
+    designer: "Kérdőívtervező",
+    editor: "JSON szerkesztő",
+    logic: "Logika"
+  },
   // Question types
   qt: {
     default: "Alapértelmezett",
@@ -41,6 +50,14 @@ export var huStrings = {
     expression: "Kifejezés (csak olvasható)",
     signaturepad: "Aláírás",
     buttongroup: "Gombcsoport"
+  },
+  toolboxCategories: {
+    general: "Általános",
+    choice: "Választási kérdések",
+    text: "Szövegbeviteli kérdések",
+    containers: "Konténerek",
+    matrix: "Mátrix kérdések",
+    misc: "Misc"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -73,23 +90,16 @@ export var huStrings = {
     newQuestionName: "kérdés",
     newPanelName: "panel",
     newTextItemName: "szöveg",
-    testSurvey: "Próba",
-    themeSurvey: "Témák",
     defaultV2Theme: "Alapértelmezett",
     modernTheme: "Modern",
     defaultTheme: "Alapértelmezett (örökölt)",
     testSurveyAgain: "Próba ismét",
     testSurveyWidth: "Kérdőív szélessége: ",
     navigateToMsg: "Navigálnia kellett",
-    logic: "Logika",
-    embedSurvey: "Kérdőív beágyazása",
-    translation: "Fordítás",
     saveSurvey: "Kérdőív mentése",
     saveSurveyTooltip: "Felmérés mentése",
     saveTheme: "Téma mentése",
     saveThemeTooltip: "Téma mentése",
-    designer: "Kérdőívtervező",
-    jsonEditor: "JSON szerkesztő",
     jsonHideErrors: "Hibák elrejtése",
     jsonShowErrors: "Hibák megjelenítése",
     undo: "Mégse",
@@ -111,12 +121,6 @@ export var huStrings = {
     "property-grid": "Kellékek",
     propertyGridFilteredTextPlaceholder: "Írja be a kereséshez...",
     propertyGridNoResultsFound: "Nincs találat",
-    toolboxGeneralCategory: "Általános",
-    toolboxChoiceCategory: "Választási kérdések",
-    toolboxTextCategory: "Szövegbeviteli kérdések",
-    toolboxContainersCategory: "Konténerek",
-    toolboxMatrixCategory: "Mátrix kérdések",
-    toolboxMiscCategory: "Misc",
     correctJSON: "Kérem javítsa a JSON-t.",
     surveyResults: "Kérdőív eredménye: ",
     surveyResultsTable: "Táblaként",
@@ -225,13 +229,13 @@ export var huStrings = {
       question_visibilityText: "tegye láthatóvá a {0} kérdést", //{0} question name
       question_enableText: "Kérdés {0} engedélyezése", //{0} question name
       question_requireText: "Tegye fel a kérdést {0} szükséges", //{0} question name
-      question_resetValueText: "Kérdés visszaállítási értéke: {0}",
+      question_resetValueText: "Kérdés visszaállítási értéke: {0}", //{0} question name.
       question_setValueText: "Érték hozzárendelése: {1} a kérdéshez: {0}",
       column_visibilityText: "A {1}. kérdés {0} oszlopának láthatóvá tétele", //{0} column name, {1} question name
       column_enableText: "A kérdés {0} oszlopának engedélyezése {1} engedélyezése", //{0} column name, {1} question name
       column_requireText: "Tegye kötelezővé a kérdés {0} oszlopát {1}", //{0} column name, {1} question name
-      column_resetValueText: "Az oszlop cellaértékének visszaállítása: {0}",
-      column_setValueText: "Cellaérték hozzárendelése: {1} oszlophoz: {0}",
+      column_resetValueText: "Az oszlop cellaértékének visszaállítása: {0}", //{0} column name
+      column_setValueText: "Cellaérték hozzárendelése: {1} oszlophoz: {0}", //{0} column name and {1} setValueExpression
       setValueExpressionPlaceholder: " Olyan kifejezés, amelynek eredménye a célkérdéshez lesz rendelve.",
       trigger_completeText: "A felmérés befejeződött",
       trigger_setvalueText: "Kérdéses érték: {0} érték {1}", //{0} question name, {1} setValue
@@ -749,6 +753,7 @@ export var huStrings = {
       top: "A tetején",
       bottom: "Alul"
     },
+    // Creator tabs
     tabs: {
       panel: {
         layout: "Panel elrendezése"
@@ -792,6 +797,9 @@ export var huStrings = {
       slider: "Csúszka",
       expression: "Kifejezés",
       questionSettings: "Kérdés beállítások",
+      header: "Fejléc",
+      background: "Háttér",
+      appearance: "Megjelenés",
       others: "Mások"
     },
     editProperty: "Tulajdonság szerkesztése '{0}'",
@@ -844,7 +852,49 @@ export var huStrings = {
     minWidth_placeholder: "Pl.: 600px",
     maxWidth_placeholder: "Pl.: 50%",
     imageHeight_placeholder: "kocsi",
-    imageWidth_placeholder: "kocsi"
+    imageWidth_placeholder: "kocsi",
+    theme: {
+      themeName: "Téma",
+      isPanelless: "Kérdés megjelenése",
+      editorPanel: "Háttér és saroksugár",
+      questionPanel: "Háttér és saroksugár",
+      primaryColor: "Kiemelő szín",
+      panelBackgroundTransparency: "Panel hátterének átlátszatlansága",
+      questionBackgroundTransparency: "Kérdés hátterének átlátszatlansága",
+      fontSize: "Betűméret",
+      scale: "Hangsor",
+      cornerRadius: "Sarok sugara",
+      pageTitle: "Cím betűtípusa",
+      pageDescription: "Leírás betűtípus",
+      questionTitle: "Cím betűtípusa",
+      questionDescription: "Leírás betűtípus",
+      editorFont: "Betűkészlet",
+      backgroundOpacity: "Átlátszatlanság",
+      "--sjs-font-family": "Betűcsalád",
+      "--sjs-general-backcolor-dim": "Háttérszín",
+      "--sjs-primary-backcolor": "Ékezetes háttér",
+      "--sjs-primary-forecolor": "Hangsúlyos előtér",
+      "--sjs-shadow-small": "Árnyék effektusok",
+      "--sjs-shadow-inner": "Árnyék effektusok",
+      "--sjs-border-default": "Színek"
+    },
+    "header@header": {
+      headerView: "Nézet",
+      logoPosition: "Logó pozíciója",
+      surveyTitle: "Felmérés címének betűtípusa",
+      surveyDescription: "Felmérés leírásának betűtípusa",
+      headerTitle: "Felmérés címének betűtípusa",
+      headerDescription: "Felmérés leírásának betűtípusa",
+      inheritWidthFrom: "Tartalomterület szélessége",
+      textAreaWidth: "Szöveg szélessége",
+      backgroundColorSwitch: "Háttérszín",
+      backgroundImage: "Háttérkép",
+      backgroundImageOpacity: "Átlátszatlanság",
+      overlapEnabled: "Átfed",
+      logoPositionX: "Logó pozíciója",
+      titlePositionX: "Cím pozíciója",
+      descriptionPositionX: "Leírás pozíciója"
+    }
   },
   // Property values
   pv: {
@@ -1060,6 +1110,38 @@ export var huStrings = {
     searchMode: {
       contains: "Tartalmaz",
       startsWith: "Ezzel kezdődik"
+    },
+    backgroundImageFit: {
+      auto: "Kocsi",
+      cover: "Fedő",
+      contain: "Tartalmaz",
+      fill: "Nyúlik",
+      tile: "Cserép"
+    },
+    backgroundImageAttachment: {
+      fixed: "Fix",
+      scroll: "Kézirattekercs"
+    },
+    headerView: {
+      basic: "Alapvető",
+      advanced: "Haladó"
+    },
+    inheritWidthFrom: {
+      survey: "Ugyanaz, mint a felmérés",
+      container: "Tárolóhoz igazítás"
+    },
+    backgroundColorSwitch: {
+      none: "Egyik sem",
+      accentColor: "Kiemelő szín",
+      custom: "Szokás"
+    },
+    colorPalette: {
+      light: "Fény",
+      dark: "Sötét"
+    },
+    isPanelless: {
+      "false": "Alapértelmezett",
+      "true": "Panelek nélkül"
     }
   },
   // Operators
@@ -1467,101 +1549,40 @@ export var huStrings = {
     copyDisplayValue: "Megjelenített érték másolása"
   },
   theme: {
-    "--background": "Háttérszín",
-    "--background-dim-light": "Háttér halvány világos színe",
-    "--primary-foreground": "Elsődleges festőszín",
-    "--foreground": "Festőszín",
-    "--base-unit": "Alapegység",
     advancedMode: "Speciális mód",
-    groupGeneral: "Általános",
-    groupHeader: "Fejléc",
-    groupBackground: "Háttér",
-    groupAppearance: "Megjelenés",
-    themeName: "Téma",
-    themeMode: "Kérdés megjelenése",
-    themeModePanels: "Alapértelmezett",
-    themeModeLightweight: "Panelek nélkül",
-    themePaletteLight: "Fény",
-    themePaletteDark: "Sötét",
-    primaryColor: "Kiemelő szín",
+    pageTitle: "Oldalcím betűtípusa",
+    questionTitle: "Kérdés címének betűtípusa",
+    editorPanel: "Bemeneti elem",
+    lines: "Sorok",
     primaryDefaultColor: "Alapértelmezett",
     primaryDarkColor: "Lebeg",
     primaryLightColor: "Kiválasztott",
-    coverTitleForecolor: "Cím előszíne",
-    coverDescriptionForecolor: "Leírás előszín",
-    coverOverlapEnabled: "Átfed",
     backgroundDimColor: "Háttérszín",
-    backgroundImage: "Háttérkép",
-    backgroundImageFitAuto: "Kocsi",
-    backgroundImageFitCover: "Fedő",
-    backgroundImageFitContain: "Tartalmaz",
-    backgroundImageFitFill: "Nyúlik",
-    backgroundImageFitTile: "Cserép",
-    backgroundOpacity: "Átlátszatlanság",
-    backgroundImageAttachmentFixed: "Fix",
-    backgroundImageAttachmentScroll: "Kézirattekercs",
-    panelBackgroundTransparency: "Panel hátterének átlátszatlansága",
-    questionBackgroundTransparency: "Kérdés hátterének átlátszatlansága",
-    questionTitle: "Kérdés címének betűtípusa",
-    editorPanel: "Bemeneti elem",
-    backgroundCornerRadius: "Háttér és saroksugár",
+    cornerRadius: "Sarok sugara",
     backcolor: "Alapértelmezett háttér",
     hovercolor: "Háttér rámutatása",
     borderDecoration: "Szegély dekoráció",
-    accentBackground: "Ékezetes háttér",
-    accentForeground: "Hangsúlyos előtér",
     primaryForecolor: "Alapértelmezett szín",
     primaryForecolorLight: "Letiltott szín",
-    colorsTitle: "Színek",
     font: "Betűkészlet",
-    lines: "Sorok",
     borderDefault: "Sötétebb",
     borderLight: "Öngyújtó",
     fontFamily: "Betűcsalád",
-    fontSize: "Betűméret",
-    color: "Szín",
-    placeholderColor: "Helyőrző színe",
-    size: "Méret",
     fontWeightRegular: "Rendszeres",
     fontWeightHeavy: "Nehéz",
     fontWeightSemiBold: "Félig félkövér",
     fontWeightBold: "Merész",
-    scale: "Hangsor",
-    cornerRadius: "Sarok sugara",
-    surveyTitle: "Felmérés címének betűtípusa",
-    surveyDescription: "Felmérés leírásának betűtípusa",
-    pageTitle: "Oldalcím betűtípusa",
-    titleFont: "Cím betűtípusa",
-    descriptionFont: "Leírás betűtípus",
+    color: "Szín",
+    placeholderColor: "Helyőrző színe",
+    size: "Méret",
+    opacity: "Átlátszatlanság",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Árnyékhatás hozzáadása",
-    opacity: "Átlátszatlanság",
     boxShadowBlur: "Elken",
     boxShadowSpread: "Terjedés",
     boxShadowDrop: "Csepp",
     boxShadowInner: "Belső",
-    shadow: "Árnyék effektusok",
-    headerView: "Nézet",
-    headerViewBasic: "Alapvető",
-    headerViewAdvanced: "Haladó",
-    coverInheritWidthFrom: "Tartalomterület szélessége",
-    coverInheritWidthFromSurvey: "Ugyanaz, mint a felmérés",
-    coverInheritWidthFromContainer: "Tárolóhoz igazítás",
-    coverTextAreaWidth: "Szöveg szélessége",
-    coverBackgroundColorSwitch: "Háttérszín",
-    coverBackgroundColorNone: "Egyik sem",
-    coverBackgroundColorAccentColor: "Kiemelő szín",
-    coverBackgroundColorCustom: "Szokás",
-    horizontalAlignmentLeft: "Balra",
-    horizontalAlignmentCenter: "Központ",
-    horizontalAlignmentRight: "Jobbra",
-    verticalAlignmentTop: "Felső",
-    verticalAlignmentMiddle: "Középső",
-    verticalAlignmentBottom: "Fenék",
-    logoPosition: "Logó pozíciója",
-    coverTitlePosition: "Cím pozíciója",
-    coverDescriptionPosition: "Leírás pozíciója",
     names: {
       default: "Alapértelmezett",
       sharp: "Éles",
@@ -2147,12 +2168,11 @@ editorLocalization.locales["hu"] = huStrings;
 // theme.--primary-foreground: "Primary foreground color" => "Elsődleges festőszín"
 // theme.--foreground: "Foreground color" => "Festőszín"
 // theme.--base-unit: "Base unit" => "Alapegység"
-// theme.groupGeneral: "General" => "Általános"
 // theme.groupAdvanced: "Advanced" => "Haladó"
 // theme.themeName: "Theme" => "Téma"
-// theme.themeMode: "Question appearance" => "Kérdés megjelenése"
-// theme.themeModePanels: "Default" => "Alapértelmezett"
-// theme.themeModeLightweight: "Without Panels" => "Panelek nélkül"
+// theme.isPanellessss: "Question appearance" => "Kérdés megjelenése"
+// theme.isPanellessPanels: "Default" => "Alapértelmezett"
+// theme.isPanellessLightweight: "Without Panels" => "Panelek nélkül"
 // theme.themePaletteLight: "Light" => "Fény"
 // theme.themePaletteDark: "Dark" => "Sötét"
 // theme.primaryColor: "Accent color" => "Kiemelő szín"
@@ -2194,7 +2214,7 @@ editorLocalization.locales["hu"] = huStrings;
 // theme.fontWeightBold: "Bold" => "Merész"
 // theme.scale: "Scale" => "Hangsor"
 // theme.cornerRadius: "Corner radius" => "Sarok sugara"
-// theme.surveyTitle: "Survey title font" => "Felmérés címének betűtípusa"
+// theme.surveyTitleFont: "Survey title font" => "Felmérés címének betűtípusa"
 // theme.pageTitle: "Page title font" => "Oldalcím betűtípusa"
 // theme.pageDescription: "Page description font" => "Oldalleíró betűtípus"
 // theme.boxShadowX: "X" => "X"
@@ -2255,22 +2275,20 @@ editorLocalization.locales["hu"] = huStrings;
 // survey.title: "Title" => "Cím"
 // page.title: "Title" => "Cím"
 // p.setValueIf: "Set value if" => "Érték beállítása, ha"
-// theme.groupHeader: "Header" => "Fejléc"
-// theme.coverTitleForecolor: "Title forecolor" => "Cím előszíne"
-// theme.coverOverlapEnabled: "Overlap" => "Átfed"
+// theme.header: "Header" => "Fejléc"
 // theme.backgroundImageFitFill: "Stretch" => "Nyúlik"
 // theme.backgroundImageFitTile: "Tile" => "Cserép"
 // theme.headerView: "View" => "Nézet"
 // theme.headerViewBasic: "Basic" => "Alapvető"
 // theme.headerViewAdvanced: "Advanced" => "Haladó"
-// theme.coverInheritWidthFrom: "Content area width" => "Tartalomterület szélessége"
-// theme.coverInheritWidthFromSurvey: "Same as survey" => "Ugyanaz, mint a felmérés"
-// theme.coverInheritWidthFromPage: "Fit to page" => "Laphoz igazítás"
-// theme.coverTextAreaWidth: "Text width" => "Szöveg szélessége"
-// theme.coverBackgroundColorSwitch: "Background color" => "Háttérszín"
-// theme.coverBackgroundColorNone: "None" => "Egyik sem"
-// theme.coverBackgroundColorAccentColor: "Accent color" => "Kiemelő szín"
-// theme.coverBackgroundColorCustom: "Custom" => "Szokás"
+// theme.headerInheritWidthFrom: "Content area width" => "Tartalomterület szélessége"
+// theme.headerInheritWidthFromSurvey: "Same as survey" => "Ugyanaz, mint a felmérés"
+// theme.headerInheritWidthFromPage: "Fit to page" => "Laphoz igazítás"
+// theme.headerTextAreaWidth: "Text width" => "Szöveg szélessége"
+// theme.headerBackgroundColorSwitch: "Background color" => "Háttérszín"
+// theme.headerBackgroundColorNone: "None" => "Egyik sem"
+// theme.headerBackgroundColorAccentColor: "Accent color" => "Kiemelő szín"
+// theme.headerBackgroundColorCustom: "Custom" => "Szokás"
 // theme.horizontalAlignmentLeft: "Left" => "Balra"
 // theme.horizontalAlignmentCenter: "Center" => "Központ"
 // theme.horizontalAlignmentRight: "Right" => "Jobbra"
@@ -2278,7 +2296,7 @@ editorLocalization.locales["hu"] = huStrings;
 // theme.verticalAlignmentMiddle: "Middle" => "Középső"
 // theme.verticalAlignmentBottom: "Bottom" => "Fenék"
 // theme.logoPosition: "Logo Position" => "Logó pozíciója"
-// theme.coverTitlePosition: "Title Position" => "Cím pozíciója"
+// theme.headerTitlePosition: "Title Position" => "Cím pozíciója"
 // lg.question_resetValueText: "reset value for question: {0}" => "Kérdés visszaállítási értéke: {0}"
 // lg.question_setValueText: "assign value: {1} to question: {0}" => "Érték hozzárendelése: {1} a kérdéshez: {0}"
 // lg.column_resetValueText: "reset cell value for column: {0}" => "Az oszlop cellaértékének visszaállítása: {0}"
@@ -2292,18 +2310,14 @@ editorLocalization.locales["hu"] = huStrings;
 // pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "Akkor érvényes, ha a \"Forrás típusa\" \"Helyi fájlok\", vagy ha a kamera nem érhető el"
 // pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "Akkor érvényes, ha a \"Forrás típusa\" a \"Kamera\"."
 // pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "Akkor érvényes, ha a \"Forrás típusa\" értéke \"Helyi fájlok vagy kamera\"."
-// theme.groupBackground: "Background" => "Háttér"
-// theme.groupAppearance: "Appearance" => "Megjelenés"
-// theme.coverDescriptionForecolor: "Description forecolor" => "Leírás előszín"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Tényleg vissza akarja állítani a témát? Az összes testreszabás elvész."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "Igen, állítsa vissza a témát"
-// theme.groupBackground: "Background" => "Háttér"
-// theme.groupAppearance: "Appearance" => "Megjelenés"
-// theme.coverDescriptionForecolor: "Description forecolor" => "Leírás előszín"
-// theme.coverInheritWidthFromContainer: "Fit to container" => "Tárolóhoz igazítás"
+// theme.background: "Background" => "Háttér"
+// theme.appearance: "Appearance" => "Megjelenés"
+// theme.headerInheritWidthFromContainer: "Fit to container" => "Tárolóhoz igazítás"
 // signaturepad.showPlaceholder: "Show the placeholder" => "A helyőrző megjelenítése"
 // signaturepad.placeholder: "Placeholder text" => "Helyőrző szöveg"
-// theme.surveyDescription: "Survey description font" => "Felmérés leírásának betűtípusa"
+// theme.surveyDescriptionFont: "Survey description font" => "Felmérés leírásának betűtípusa"
 // ed.prevFocus: "Focus previous" => "Fókusz előző"
 // ed.nextFocus: "Focus next" => "Fókusz következő"
 // ed.saveTheme: "Save Theme" => "Téma mentése"
@@ -2315,7 +2329,7 @@ editorLocalization.locales["hu"] = huStrings;
 // signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "Az aláírási terület automatikus méretezése"
 // signaturepad.penMinWidth: "Minimum pen width" => "Tollszélesség minimális"
 // signaturepad.penMaxWidth: "Maximum pen width" => "Maximális tollszélesség"
-// theme.coverDescriptionPosition: "Description position" => "Leírás pozíciója"
+// theme.headerDescriptionPosition: "Description position" => "Leírás pozíciója"
 // ed.propertyGridNoResultsFound: "No results found" => "Nincs találat"
 // pv.leftRight: "Left and right" => "Balra és jobbra"
 // p.sourceType: "Source type" => "Forrás típusa"
@@ -2709,3 +2723,78 @@ editorLocalization.locales["hu"] = huStrings;
 // ed.pagePlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the page." => "Kattintson az alábbi \"Kérdés hozzáadása\" gombra, hogy új elemet adjon az oldalhoz."
 // ed.panelPlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the panel." => "Kattintson az alábbi \"Kérdés hozzáadása\" gombra, hogy új elemet adjon a panelhez."
 // ed.imagePlaceHolderMobile: "Click the button below and choose an image to upload" => "Kattintson az alábbi gombra, és válassza ki a feltölteni kívánt képet"
+// coloralpha.opacity: "Opacity" => "Átlátszatlanság"
+// font.family: "Font family" => "Betűcsalád"
+// font.color: "Color" => "Szín"
+// font.placeholderColor: "Placeholder color" => "Helyőrző színe"
+// font.size: "Size" => "Méret"
+// theme.themeName: "Theme" => "Téma"
+// theme.isPanelless: "Question appearance" => "Kérdés megjelenése"
+// theme.editorPanel: "Background and corner radius" => "Háttér és saroksugár"
+// theme.questionPanel: "Background and corner radius" => "Háttér és saroksugár"
+// theme.primaryColor: "Accent color" => "Kiemelő szín"
+// theme.panelBackgroundTransparency: "Panel background opacity" => "Panel hátterének átlátszatlansága"
+// theme.questionBackgroundTransparency: "Question background opacity" => "Kérdés hátterének átlátszatlansága"
+// theme.fontSize: "Font size" => "Betűméret"
+// theme.scale: "Scale" => "Hangsor"
+// theme.cornerRadius: "Corner radius" => "Sarok sugara"
+// theme.pageTitle: "Title font" => "Cím betűtípusa"
+// theme.pageDescription: "Description font" => "Leírás betűtípus"
+// theme.questionTitle: "Title font" => "Cím betűtípusa"
+// theme.questionDescription: "Description font" => "Leírás betűtípus"
+// theme.editorFont: "Font" => "Betűkészlet"
+// theme.backgroundOpacity: "Opacity" => "Átlátszatlanság"
+// theme.--sjs-font-family: "Font family" => "Betűcsalád"
+// theme.--sjs-general-backcolor-dim: "Background color" => "Háttérszín"
+// theme.--sjs-primary-backcolor: "Accent background" => "Ékezetes háttér"
+// theme.--sjs-primary-forecolor: "Accent foreground" => "Hangsúlyos előtér"
+// theme.--sjs-shadow-small: "Shadow effects" => "Árnyék effektusok"
+// theme.--sjs-shadow-inner: "Shadow effects" => "Árnyék effektusok"
+// theme.--sjs-border-default: "Colors" => "Színek"
+// header@header.headerView: "View" => "Nézet"
+// header@header.logoPosition: "Logo position" => "Logó pozíciója"
+// header@header.surveyTitle: "Survey title font" => "Felmérés címének betűtípusa"
+// header@header.surveyDescription: "Survey description font" => "Felmérés leírásának betűtípusa"
+// header@header.headerTitle: "Survey title font" => "Felmérés címének betűtípusa"
+// header@header.headerDescription: "Survey description font" => "Felmérés leírásának betűtípusa"
+// header@header.inheritWidthFrom: "Content area width" => "Tartalomterület szélessége"
+// header@header.textAreaWidth: "Text width" => "Szöveg szélessége"
+// header@header.backgroundColorSwitch: "Background color" => "Háttérszín"
+// header@header.backgroundImage: "Background image" => "Háttérkép"
+// header@header.backgroundImageOpacity: "Opacity" => "Átlátszatlanság"
+// header@header.overlapEnabled: "Overlap" => "Átfed"
+// header@header.logoPositionX: "Logo position" => "Logó pozíciója"
+// header@header.titlePositionX: "Title position" => "Cím pozíciója"
+// header@header.descriptionPositionX: "Description position" => "Leírás pozíciója"
+// weight.400: "Regular" => "Rendszeres"
+// weight.600: "Heavy" => "Nehéz"
+// weight.700: "Semi-bold" => "Félig félkövér"
+// weight.800: "Bold" => "Merész"
+// backgroundImageFit.auto: "Auto" => "Kocsi"
+// backgroundImageFit.cover: "Cover" => "Fedő"
+// backgroundImageFit.contain: "Contain" => "Tartalmaz"
+// backgroundImageFit.fill: "Stretch" => "Nyúlik"
+// backgroundImageFit.tile: "Tile" => "Cserép"
+// backgroundImageAttachment.fixed: "Fixed" => "Fix"
+// backgroundImageAttachment.scroll: "Scroll" => "Kézirattekercs"
+// headerView.basic: "Basic" => "Alapvető"
+// headerView.advanced: "Advanced" => "Haladó"
+// inheritWidthFrom.survey: "Same as survey" => "Ugyanaz, mint a felmérés"
+// inheritWidthFrom.container: "Fit to container" => "Tárolóhoz igazítás"
+// backgroundColorSwitch.none: "None" => "Egyik sem"
+// backgroundColorSwitch.accentColor: "Accent color" => "Kiemelő szín"
+// backgroundColorSwitch.custom: "Custom" => "Szokás"
+// colorPalette.light: "Light" => "Fény"
+// colorPalette.dark: "Dark" => "Sötét"
+// isPanelless.false: "Default" => "Alapértelmezett"
+// isPanelless.true: "Without Panels" => "Panelek nélkül"
+// theme.cornerRadius: "Corner radius" => "Sarok sugara"
+// theme.fontFamily: "Font family" => "Betűcsalád"
+// theme.fontWeightRegular: "Regular" => "Rendszeres"
+// theme.fontWeightHeavy: "Heavy" => "Nehéz"
+// theme.fontWeightSemiBold: "Semi-bold" => "Félig félkövér"
+// theme.fontWeightBold: "Bold" => "Merész"
+// theme.color: "Color" => "Szín"
+// theme.placeholderColor: "Placeholder color" => "Helyőrző színe"
+// theme.size: "Size" => "Méret"
+// theme.opacity: "Opacity" => "Átlátszatlanság"

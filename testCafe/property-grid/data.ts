@@ -1,4 +1,4 @@
-import { url, setJSON, getJSON } from "../helper";
+import { url, setJSON, getJSON, getPropertyGridCategory, generalGroupName } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Property Grid";
 
@@ -9,6 +9,9 @@ fixture`${title}`.page`${url}`.beforeEach(async (t) => {
 const makeCreatorReadOnly = ClientFunction(() => {
   window["creator"].readOnly = true;
 });
+
+const question1 = Selector("[data-name=\"question1\"]");
+const dataTab = Selector("h4").withExactText("Data");
 
 test("Default value", async (t) => {
   const json = {
@@ -70,9 +73,6 @@ test("Default value & readonly", async (t) => {
   await setJSON(json);
   await makeCreatorReadOnly();
 
-  const question1 = Selector("[data-name=\"question1\"]");
-  const dataTab = Selector("h4").withExactText("Data");
-
   await t
     .click(question1)
     .click(dataTab)
@@ -82,4 +82,46 @@ test("Default value & readonly", async (t) => {
     .expect(Selector(".sv-popup--modal button").withExactText("Apply").filterVisible().exists).notOk()
     .click(Selector(".sv-popup--modal button").withExactText("Cancel"))
     .expect(Selector("span").withExactText("Change Default Answer").visible).ok();
+});
+
+test("Impossible to specify the default value for a masked Date field", async (t) => {
+  const json = {
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1",
+            "title": "Question 1",
+            "clearIfInvisible": "none",
+            "maskType": "datetime",
+            "maskSettings": {
+              "pattern": "mm/dd/yyyy"
+            }
+          }
+        ]
+      }
+    ]
+  };
+  await setJSON(json);
+
+  await t
+    .click(question1, { offsetX: 100, offsetY: 10 })
+    .click(getPropertyGridCategory(generalGroupName))
+    .click(dataTab)
+    .click(Selector("span").withExactText("Set Default Answer"))
+    .pressKey("2")
+    .pressKey("4")
+    .expect(Selector(".sv-popup--modal input").value).eql("02/04/yyyy")
+    .pressKey("1")
+    .pressKey("9")
+    .pressKey("9")
+    .pressKey("8")
+    .expect(Selector(".sv-popup--modal input").value).eql("02/04/1998")
+    .click(Selector(".sv-popup--modal button").withExactText("Apply"))
+    .expect(Selector("span").withExactText("Change Default Answer").visible).ok();
+
+  const resultJson = await getJSON();
+  await t.expect(resultJson.pages[0].elements[0].defaultValue).eql("1998-02-04");
 });

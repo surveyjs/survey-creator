@@ -16,6 +16,15 @@ export var skStrings = {
     convertTo: "Konvertovať na",
     drag: "Presunúť prvok",
   },
+  // Creator tabs
+  tabs: {
+    preview: "Textový prieskum",
+    theme: "Témy",
+    translation: "Preklad",
+    designer: "Návrhár prieskumov",
+    editor: "Editor JSON",
+    logic: "Logika prieskumu"
+  },
   // Question types
   qt: {
     default: "Predvolené",
@@ -41,6 +50,14 @@ export var skStrings = {
     expression: "Výraz (iba na čítanie)",
     signaturepad: "Priestor na podpis",
     buttongroup: "Skupina tlačidiel"
+  },
+  toolboxCategories: {
+    general: "Všeobecné",
+    choice: "Voľba Otázky",
+    text: "Otázky na zadávanie textu",
+    containers: "Kontajnery",
+    matrix: "Maticové otázky",
+    misc: "Misc"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -73,23 +90,16 @@ export var skStrings = {
     newQuestionName: "otázka",
     newPanelName: "panel",
     newTextItemName: "text",
-    testSurvey: "Textový prieskum",
-    themeSurvey: "Témy",
     defaultV2Theme: "Predvolený",
     modernTheme: "Moderný",
     defaultTheme: "Predvolené nastavenie (staršia verzia)",
     testSurveyAgain: "Ďalší textový prieskum",
     testSurveyWidth: "Šírka prieskumu: ",
     navigateToMsg: "Museli ste prejsť na:",
-    logic: "Logika prieskumu",
-    embedSurvey: "Začleniť prieskum",
-    translation: "Preklad",
     saveSurvey: "Uložiť prieskum",
     saveSurveyTooltip: "Uložiť prieskum",
     saveTheme: "Uložiť motív",
     saveThemeTooltip: "Uložiť motív",
-    designer: "Návrhár prieskumov",
-    jsonEditor: "Editor JSON",
     jsonHideErrors: "Skryť chyby",
     jsonShowErrors: "Zobraziť chyby",
     undo: "Späť",
@@ -111,12 +121,6 @@ export var skStrings = {
     "property-grid": "Vlastnosti",
     propertyGridFilteredTextPlaceholder: "Zadajte reťazec pre vyhľadávanie...",
     propertyGridNoResultsFound: "Nenašli sa žiadne výsledky",
-    toolboxGeneralCategory: "Všeobecné",
-    toolboxChoiceCategory: "Voľba Otázky",
-    toolboxTextCategory: "Otázky na zadávanie textu",
-    toolboxContainersCategory: "Kontajnery",
-    toolboxMatrixCategory: "Maticové otázky",
-    toolboxMiscCategory: "Misc",
     correctJSON: "Opravte JSON.",
     surveyResults: "Výsledok prieskumu: ",
     surveyResultsTable: "Ako tabuľku",
@@ -225,13 +229,13 @@ export var skStrings = {
       question_visibilityText: "Otázka {0} bude viditeľná", //{0} question name
       question_enableText: "Otázka {0} bude povolená", //{0} question name
       question_requireText: "Otázka {0} sa bude vyžadovať", //{0} question name
-      question_resetValueText: "Resetovať hodnotu pre otázku: {0}",
+      question_resetValueText: "Resetovať hodnotu pre otázku: {0}", //{0} question name.
       question_setValueText: "Priradiť hodnotu: {1} otázku: {0}",
       column_visibilityText: "Zviditeľnenie stĺpcových {0} otázok {1}", //{0} column name, {1} question name
       column_enableText: "Nastavenie {0}  otázky {1} povolenie", //{0} column name, {1} question name
       column_requireText: "Urobiť stĺpec {0} otázky {1} povinné", //{0} column name, {1} question name
-      column_resetValueText: "Obnoviť hodnotu bunky pre stĺpec: {0}",
-      column_setValueText: "Priradenie hodnoty bunky: {1} do stĺpca: {0}",
+      column_resetValueText: "Obnoviť hodnotu bunky pre stĺpec: {0}", //{0} column name
+      column_setValueText: "Priradenie hodnoty bunky: {1} do stĺpca: {0}", //{0} column name and {1} setValueExpression
       setValueExpressionPlaceholder: " Výraz, ktorého výsledok bude priradený k cieľovej otázke.",
       trigger_completeText: "Prieskum bude dokončený",
       trigger_setvalueText: "Nastaviť v otázke: {0} hodnotu {1}", //{0} question name, {1} setValue
@@ -749,6 +753,7 @@ export var skStrings = {
       top: "V hornej časti",
       bottom: "V spodnej časti"
     },
+    // Creator tabs
     tabs: {
       panel: {
         layout: "Rozloženie panela"
@@ -792,6 +797,9 @@ export var skStrings = {
       slider: "Jazdec",
       expression: "Výraz",
       questionSettings: "Nastavenia otázok",
+      header: "Hlavička",
+      background: "Pozadie",
+      appearance: "Vzhľad",
       others: "Iné"
     },
     editProperty: "Upraviť vlastnosť „{0}“",
@@ -844,7 +852,49 @@ export var skStrings = {
     minWidth_placeholder: "Napríklad: 600px",
     maxWidth_placeholder: "Napríklad: 50%",
     imageHeight_placeholder: "auto",
-    imageWidth_placeholder: "auto"
+    imageWidth_placeholder: "auto",
+    theme: {
+      themeName: "Téma",
+      isPanelless: "Vzhľad otázky",
+      editorPanel: "Pozadie a polomer rohov",
+      questionPanel: "Pozadie a polomer rohov",
+      primaryColor: "Farba akcentu",
+      panelBackgroundTransparency: "Nepriehľadnosť pozadia panela",
+      questionBackgroundTransparency: "Nepriehľadnosť pozadia otázky",
+      fontSize: "Veľkosť písma",
+      scale: "Stupnica",
+      cornerRadius: "Polomer rohov",
+      pageTitle: "Písmo názvu",
+      pageDescription: "Popisné písmo",
+      questionTitle: "Písmo názvu",
+      questionDescription: "Popisné písmo",
+      editorFont: "Písmo",
+      backgroundOpacity: "Neprehľadnosť",
+      "--sjs-font-family": "Skupina písiem",
+      "--sjs-general-backcolor-dim": "Farba pozadia",
+      "--sjs-primary-backcolor": "Zvýraznenie pozadia",
+      "--sjs-primary-forecolor": "Zvýraznenie v popredí",
+      "--sjs-shadow-small": "Efekty tieňov",
+      "--sjs-shadow-inner": "Efekty tieňov",
+      "--sjs-border-default": "Farby"
+    },
+    "header@header": {
+      headerView: "Pohľad",
+      logoPosition: "Umiestnenie loga",
+      surveyTitle: "Písmo názvu prieskumu",
+      surveyDescription: "Písmo popisu prieskumu",
+      headerTitle: "Písmo názvu prieskumu",
+      headerDescription: "Písmo popisu prieskumu",
+      inheritWidthFrom: "Šírka oblasti obsahu",
+      textAreaWidth: "Šírka textu",
+      backgroundColorSwitch: "Farba pozadia",
+      backgroundImage: "Obrázok na pozadí",
+      backgroundImageOpacity: "Neprehľadnosť",
+      overlapEnabled: "Presahovať",
+      logoPositionX: "Umiestnenie loga",
+      titlePositionX: "Pozícia názvu",
+      descriptionPositionX: "Popisná poloha"
+    }
   },
   // Property values
   pv: {
@@ -1060,6 +1110,38 @@ export var skStrings = {
     searchMode: {
       contains: "Obsahuje",
       startsWith: "Začína sa"
+    },
+    backgroundImageFit: {
+      auto: "Auto",
+      cover: "Prikryť",
+      contain: "Obsahovať",
+      fill: "Natiahnuť",
+      tile: "Dlaždica"
+    },
+    backgroundImageAttachment: {
+      fixed: "Stabilný",
+      scroll: "Zvitok"
+    },
+    headerView: {
+      basic: "Základný",
+      advanced: "Pokročilý"
+    },
+    inheritWidthFrom: {
+      survey: "Rovnaké ako prieskum",
+      container: "Vhodné na kontajner"
+    },
+    backgroundColorSwitch: {
+      none: "Žiadny",
+      accentColor: "Farba akcentu",
+      custom: "Zvyk"
+    },
+    colorPalette: {
+      light: "Svetlo",
+      dark: "Tmavý"
+    },
+    isPanelless: {
+      "false": "Predvolený",
+      "true": "Bez panelov"
     }
   },
   // Operators
@@ -1467,101 +1549,40 @@ export var skStrings = {
     copyDisplayValue: "Kopírovať zobrazenú hodnotu"
   },
   theme: {
-    "--background": "Farba pozadia",
-    "--background-dim-light": "Tlmená farba svetla pozadia",
-    "--primary-foreground": "Primárna farba popredia",
-    "--foreground": "Farba popredia",
-    "--base-unit": "Základná jednotka",
     advancedMode: "Rozšírený režim",
-    groupGeneral: "Všeobecné",
-    groupHeader: "Hlavička",
-    groupBackground: "Pozadie",
-    groupAppearance: "Vzhľad",
-    themeName: "Téma",
-    themeMode: "Vzhľad otázky",
-    themeModePanels: "Predvolený",
-    themeModeLightweight: "Bez panelov",
-    themePaletteLight: "Svetlo",
-    themePaletteDark: "Tmavý",
-    primaryColor: "Farba akcentu",
+    pageTitle: "Písmo názvu stránky",
+    questionTitle: "Písmo názvu otázky",
+    editorPanel: "Vstupný prvok",
+    lines: "Riadky",
     primaryDefaultColor: "Predvolený",
     primaryDarkColor: "Hover",
     primaryLightColor: "Vybraný",
-    coverTitleForecolor: "Predná farba názvu",
-    coverDescriptionForecolor: "Popis predná farba",
-    coverOverlapEnabled: "Presahovať",
     backgroundDimColor: "Farba pozadia",
-    backgroundImage: "Obrázok na pozadí",
-    backgroundImageFitAuto: "Auto",
-    backgroundImageFitCover: "Prikryť",
-    backgroundImageFitContain: "Obsahovať",
-    backgroundImageFitFill: "Natiahnuť",
-    backgroundImageFitTile: "Dlaždica",
-    backgroundOpacity: "Neprehľadnosť",
-    backgroundImageAttachmentFixed: "Stabilný",
-    backgroundImageAttachmentScroll: "Zvitok",
-    panelBackgroundTransparency: "Nepriehľadnosť pozadia panela",
-    questionBackgroundTransparency: "Nepriehľadnosť pozadia otázky",
-    questionTitle: "Písmo názvu otázky",
-    editorPanel: "Vstupný prvok",
-    backgroundCornerRadius: "Pozadie a polomer rohov",
+    cornerRadius: "Polomer rohov",
     backcolor: "Predvolené pozadie",
     hovercolor: "Ukázanie na pozadie",
     borderDecoration: "Dekorácia okrajov",
-    accentBackground: "Zvýraznenie pozadia",
-    accentForeground: "Zvýraznenie v popredí",
     primaryForecolor: "Predvolená farba",
     primaryForecolorLight: "Zakázaná farba",
-    colorsTitle: "Farby",
     font: "Písmo",
-    lines: "Riadky",
     borderDefault: "Tmavšie",
     borderLight: "Zapaľovač",
     fontFamily: "Skupina písiem",
-    fontSize: "Veľkosť písma",
-    color: "Farba",
-    placeholderColor: "Farba zástupného symbolu",
-    size: "Veľkosť",
     fontWeightRegular: "Pravidelný",
     fontWeightHeavy: "Ťažký",
     fontWeightSemiBold: "Polotučné",
     fontWeightBold: "Smelý",
-    scale: "Stupnica",
-    cornerRadius: "Polomer rohov",
-    surveyTitle: "Písmo názvu prieskumu",
-    surveyDescription: "Písmo popisu prieskumu",
-    pageTitle: "Písmo názvu stránky",
-    titleFont: "Písmo názvu",
-    descriptionFont: "Popisné písmo",
+    color: "Farba",
+    placeholderColor: "Farba zástupného symbolu",
+    size: "Veľkosť",
+    opacity: "Neprehľadnosť",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Pridanie efektu tieňa",
-    opacity: "Neprehľadnosť",
     boxShadowBlur: "Rozmazať",
     boxShadowSpread: "Nátierka",
     boxShadowDrop: "Kvapka",
     boxShadowInner: "Vnútorný",
-    shadow: "Efekty tieňov",
-    headerView: "Pohľad",
-    headerViewBasic: "Základný",
-    headerViewAdvanced: "Pokročilý",
-    coverInheritWidthFrom: "Šírka oblasti obsahu",
-    coverInheritWidthFromSurvey: "Rovnaké ako prieskum",
-    coverInheritWidthFromContainer: "Vhodné na kontajner",
-    coverTextAreaWidth: "Šírka textu",
-    coverBackgroundColorSwitch: "Farba pozadia",
-    coverBackgroundColorNone: "Žiadny",
-    coverBackgroundColorAccentColor: "Farba akcentu",
-    coverBackgroundColorCustom: "Zvyk",
-    horizontalAlignmentLeft: "Vľavo",
-    horizontalAlignmentCenter: "Centrum",
-    horizontalAlignmentRight: "Doprava",
-    verticalAlignmentTop: "Vrchol",
-    verticalAlignmentMiddle: "Stred",
-    verticalAlignmentBottom: "Dno",
-    logoPosition: "Umiestnenie loga",
-    coverTitlePosition: "Titulná pozícia",
-    coverDescriptionPosition: "Popisná pozícia",
     names: {
       default: "Predvolený",
       sharp: "Ostrý",
@@ -1947,12 +1968,11 @@ editorLocalization.locales["sk"] = skStrings;
 // theme.--primary-foreground: "Primary foreground color" => "Primárna farba popredia"
 // theme.--foreground: "Foreground color" => "Farba popredia"
 // theme.--base-unit: "Base unit" => "Základná jednotka"
-// theme.groupGeneral: "General" => "Všeobecné"
 // theme.groupAdvanced: "Advanced" => "Pokročilý"
 // theme.themeName: "Theme" => "Téma"
-// theme.themeMode: "Question appearance" => "Vzhľad otázky"
-// theme.themeModePanels: "Default" => "Predvolený"
-// theme.themeModeLightweight: "Without Panels" => "Bez panelov"
+// theme.isPanellessss: "Question appearance" => "Vzhľad otázky"
+// theme.isPanellessPanels: "Default" => "Predvolený"
+// theme.isPanellessLightweight: "Without Panels" => "Bez panelov"
 // theme.themePaletteLight: "Light" => "Svetlo"
 // theme.themePaletteDark: "Dark" => "Tmavý"
 // theme.primaryColor: "Accent color" => "Farba akcentu"
@@ -1994,7 +2014,7 @@ editorLocalization.locales["sk"] = skStrings;
 // theme.fontWeightBold: "Bold" => "Smelý"
 // theme.scale: "Scale" => "Stupnica"
 // theme.cornerRadius: "Corner radius" => "Polomer rohov"
-// theme.surveyTitle: "Survey title font" => "Písmo názvu prieskumu"
+// theme.surveyTitleFont: "Survey title font" => "Písmo názvu prieskumu"
 // theme.pageTitle: "Page title font" => "Písmo názvu stránky"
 // theme.pageDescription: "Page description font" => "Písmo popisu stránky"
 // theme.boxShadowX: "X" => "X"
@@ -2055,22 +2075,20 @@ editorLocalization.locales["sk"] = skStrings;
 // survey.title: "Title" => "Titul"
 // page.title: "Title" => "Titul"
 // p.setValueIf: "Set value if" => "Nastaviť hodnotu, ak"
-// theme.groupHeader: "Header" => "Hlavička"
-// theme.coverTitleForecolor: "Title forecolor" => "Predná farba názvu"
-// theme.coverOverlapEnabled: "Overlap" => "Presahovať"
+// theme.header: "Header" => "Hlavička"
 // theme.backgroundImageFitFill: "Stretch" => "Natiahnuť"
 // theme.backgroundImageFitTile: "Tile" => "Dlaždica"
 // theme.headerView: "View" => "Pohľad"
 // theme.headerViewBasic: "Basic" => "Základný"
 // theme.headerViewAdvanced: "Advanced" => "Pokročilý"
-// theme.coverInheritWidthFrom: "Content area width" => "Šírka oblasti obsahu"
-// theme.coverInheritWidthFromSurvey: "Same as survey" => "Rovnaké ako prieskum"
-// theme.coverInheritWidthFromPage: "Fit to page" => "Prispôsobiť na stranu"
-// theme.coverTextAreaWidth: "Text width" => "Šírka textu"
-// theme.coverBackgroundColorSwitch: "Background color" => "Farba pozadia"
-// theme.coverBackgroundColorNone: "None" => "Žiadny"
-// theme.coverBackgroundColorAccentColor: "Accent color" => "Farba akcentu"
-// theme.coverBackgroundColorCustom: "Custom" => "Zvyk"
+// theme.headerInheritWidthFrom: "Content area width" => "Šírka oblasti obsahu"
+// theme.headerInheritWidthFromSurvey: "Same as survey" => "Rovnaké ako prieskum"
+// theme.headerInheritWidthFromPage: "Fit to page" => "Prispôsobiť na stranu"
+// theme.headerTextAreaWidth: "Text width" => "Šírka textu"
+// theme.headerBackgroundColorSwitch: "Background color" => "Farba pozadia"
+// theme.headerBackgroundColorNone: "None" => "Žiadny"
+// theme.headerBackgroundColorAccentColor: "Accent color" => "Farba akcentu"
+// theme.headerBackgroundColorCustom: "Custom" => "Zvyk"
 // theme.horizontalAlignmentLeft: "Left" => "Vľavo"
 // theme.horizontalAlignmentCenter: "Center" => "Centrum"
 // theme.horizontalAlignmentRight: "Right" => "Doprava"
@@ -2078,8 +2096,8 @@ editorLocalization.locales["sk"] = skStrings;
 // theme.verticalAlignmentMiddle: "Middle" => "Stred"
 // theme.verticalAlignmentBottom: "Bottom" => "Dno"
 // theme.logoPosition: "Logo Position" => "Umiestnenie loga"
-// theme.coverTitlePosition: "Title Position" => "Titulná pozícia"
-// theme.coverDescriptionPosition: "Description Position" => "Popisná pozícia"
+// theme.headerTitlePosition: "Title Position" => "Titulná pozícia"
+// theme.headerDescriptionPosition: "Description Position" => "Popisná pozícia"
 // lg.question_resetValueText: "reset value for question: {0}" => "Resetovať hodnotu pre otázku: {0}"
 // lg.question_setValueText: "assign value: {1} to question: {0}" => "Priradiť hodnotu: {1} otázku: {0}"
 // lg.column_resetValueText: "reset cell value for column: {0}" => "Obnoviť hodnotu bunky pre stĺpec: {0}"
@@ -2093,18 +2111,14 @@ editorLocalization.locales["sk"] = skStrings;
 // pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "Použije, keď \"Typ zdroja\" je \"Lokálne súbory\" alebo keď fotoaparát nie je k dispozícii"
 // pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "Používa sa, keď \"Typ zdroja\" je \"Fotoaparát\"."
 // pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "Použije, keď \"Typ zdroja\" je \"Lokálne súbory alebo fotoaparát\"."
-// theme.groupBackground: "Background" => "Pozadie"
-// theme.groupAppearance: "Appearance" => "Vzhľad"
-// theme.coverDescriptionForecolor: "Description forecolor" => "Popis predná farba"
+// theme.background: "Background" => "Pozadie"
+// theme.appearance: "Appearance" => "Vzhľad"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Naozaj chcete resetovať tému? Všetky vaše prispôsobenia sa stratia."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "Áno, obnoviť motív"
-// theme.groupBackground: "Background" => "Pozadie"
-// theme.groupAppearance: "Appearance" => "Vzhľad"
-// theme.coverDescriptionForecolor: "Description forecolor" => "Popis predná farba"
-// theme.coverInheritWidthFromContainer: "Fit to container" => "Vhodné na kontajner"
+// theme.headerInheritWidthFromContainer: "Fit to container" => "Vhodné na kontajner"
 // signaturepad.showPlaceholder: "Show the placeholder" => "Zobrazenie zástupného symbolu"
 // signaturepad.placeholder: "Placeholder text" => "Zástupný text"
-// theme.surveyDescription: "Survey description font" => "Písmo popisu prieskumu"
+// theme.surveyDescriptionFont: "Survey description font" => "Písmo popisu prieskumu"
 // ed.prevFocus: "Focus previous" => "Zameranie predchádzajúce"
 // ed.nextFocus: "Focus next" => "Zameranie ďalej"
 // ed.saveTheme: "Save Theme" => "Uložiť motív"
@@ -2509,3 +2523,78 @@ editorLocalization.locales["sk"] = skStrings;
 // ed.pagePlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the page." => "Kliknite na tlačidlo \"Pridať otázku\" nižšie a pridajte na stránku nový prvok."
 // ed.panelPlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the panel." => "Kliknite na tlačidlo \"Pridať otázku\" nižšie a pridajte na panel nový prvok."
 // ed.imagePlaceHolderMobile: "Click the button below and choose an image to upload" => "Kliknite na tlačidlo nižšie a vyberte obrázok, ktorý chcete nahrať"
+// coloralpha.opacity: "Opacity" => "Neprehľadnosť"
+// font.family: "Font family" => "Skupina písiem"
+// font.color: "Color" => "Farba"
+// font.placeholderColor: "Placeholder color" => "Farba zástupného symbolu"
+// font.size: "Size" => "Veľkosť"
+// theme.themeName: "Theme" => "Téma"
+// theme.isPanelless: "Question appearance" => "Vzhľad otázky"
+// theme.editorPanel: "Background and corner radius" => "Pozadie a polomer rohov"
+// theme.questionPanel: "Background and corner radius" => "Pozadie a polomer rohov"
+// theme.primaryColor: "Accent color" => "Farba akcentu"
+// theme.panelBackgroundTransparency: "Panel background opacity" => "Nepriehľadnosť pozadia panela"
+// theme.questionBackgroundTransparency: "Question background opacity" => "Nepriehľadnosť pozadia otázky"
+// theme.fontSize: "Font size" => "Veľkosť písma"
+// theme.scale: "Scale" => "Stupnica"
+// theme.cornerRadius: "Corner radius" => "Polomer rohov"
+// theme.pageTitle: "Title font" => "Písmo názvu"
+// theme.pageDescription: "Description font" => "Popisné písmo"
+// theme.questionTitle: "Title font" => "Písmo názvu"
+// theme.questionDescription: "Description font" => "Popisné písmo"
+// theme.editorFont: "Font" => "Písmo"
+// theme.backgroundOpacity: "Opacity" => "Neprehľadnosť"
+// theme.--sjs-font-family: "Font family" => "Skupina písiem"
+// theme.--sjs-general-backcolor-dim: "Background color" => "Farba pozadia"
+// theme.--sjs-primary-backcolor: "Accent background" => "Zvýraznenie pozadia"
+// theme.--sjs-primary-forecolor: "Accent foreground" => "Zvýraznenie v popredí"
+// theme.--sjs-shadow-small: "Shadow effects" => "Efekty tieňov"
+// theme.--sjs-shadow-inner: "Shadow effects" => "Efekty tieňov"
+// theme.--sjs-border-default: "Colors" => "Farby"
+// header@header.headerView: "View" => "Pohľad"
+// header@header.logoPosition: "Logo position" => "Umiestnenie loga"
+// header@header.surveyTitle: "Survey title font" => "Písmo názvu prieskumu"
+// header@header.surveyDescription: "Survey description font" => "Písmo popisu prieskumu"
+// header@header.headerTitle: "Survey title font" => "Písmo názvu prieskumu"
+// header@header.headerDescription: "Survey description font" => "Písmo popisu prieskumu"
+// header@header.inheritWidthFrom: "Content area width" => "Šírka oblasti obsahu"
+// header@header.textAreaWidth: "Text width" => "Šírka textu"
+// header@header.backgroundColorSwitch: "Background color" => "Farba pozadia"
+// header@header.backgroundImage: "Background image" => "Obrázok na pozadí"
+// header@header.backgroundImageOpacity: "Opacity" => "Neprehľadnosť"
+// header@header.overlapEnabled: "Overlap" => "Presahovať"
+// header@header.logoPositionX: "Logo position" => "Umiestnenie loga"
+// header@header.titlePositionX: "Title position" => "Pozícia názvu"
+// header@header.descriptionPositionX: "Description position" => "Popisná poloha"
+// weight.400: "Regular" => "Pravidelný"
+// weight.600: "Heavy" => "Ťažký"
+// weight.700: "Semi-bold" => "Polotučné"
+// weight.800: "Bold" => "Smelý"
+// backgroundImageFit.auto: "Auto" => "Auto"
+// backgroundImageFit.cover: "Cover" => "Prikryť"
+// backgroundImageFit.contain: "Contain" => "Obsahovať"
+// backgroundImageFit.fill: "Stretch" => "Natiahnuť"
+// backgroundImageFit.tile: "Tile" => "Dlaždica"
+// backgroundImageAttachment.fixed: "Fixed" => "Stabilný"
+// backgroundImageAttachment.scroll: "Scroll" => "Zvitok"
+// headerView.basic: "Basic" => "Základný"
+// headerView.advanced: "Advanced" => "Pokročilý"
+// inheritWidthFrom.survey: "Same as survey" => "Rovnaké ako prieskum"
+// inheritWidthFrom.container: "Fit to container" => "Vhodné na kontajner"
+// backgroundColorSwitch.none: "None" => "Žiadny"
+// backgroundColorSwitch.accentColor: "Accent color" => "Farba akcentu"
+// backgroundColorSwitch.custom: "Custom" => "Zvyk"
+// colorPalette.light: "Light" => "Svetlo"
+// colorPalette.dark: "Dark" => "Tmavý"
+// isPanelless.false: "Default" => "Predvolený"
+// isPanelless.true: "Without Panels" => "Bez panelov"
+// theme.cornerRadius: "Corner radius" => "Polomer rohov"
+// theme.fontFamily: "Font family" => "Skupina písiem"
+// theme.fontWeightRegular: "Regular" => "Pravidelný"
+// theme.fontWeightHeavy: "Heavy" => "Ťažký"
+// theme.fontWeightSemiBold: "Semi-bold" => "Polotučné"
+// theme.fontWeightBold: "Bold" => "Smelý"
+// theme.color: "Color" => "Farba"
+// theme.placeholderColor: "Placeholder color" => "Farba zástupného symbolu"
+// theme.size: "Size" => "Veľkosť"
+// theme.opacity: "Opacity" => "Neprehľadnosť"

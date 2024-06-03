@@ -18,6 +18,15 @@ export var enStrings = {
     drag: "Drag element",
     license: "To use our library, a <a href='https://surveyjs.io/licensing'>developer license</a> is required. If you have an active license, <a href='https://surveyjs.io/remove-alert-banner'>set up your license key</a> and ensure you're using the latest version."
   },
+  // Creator tabs
+  tabs: {
+    preview: "Preview",
+    theme: "Themes",
+    translation: "Translations",
+    designer: "Designer",
+    editor: "JSON Editor",
+    logic: "Logic"
+  },
   // Question types
   qt: {
     default: "Default",
@@ -43,6 +52,14 @@ export var enStrings = {
     expression: "Expression (read-only)",
     signaturepad: "Signature",
     buttongroup: "Button Group"
+  },
+  toolboxCategories: {
+    general: "General",
+    choice: "Choice Questions",
+    text: "Text Input Questions",
+    containers: "Containers",
+    matrix: "Matrix Questions",
+    misc: "Misc"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -75,23 +92,16 @@ export var enStrings = {
     newQuestionName: "question",
     newPanelName: "panel",
     newTextItemName: "text",
-    testSurvey: "Preview",
-    themeSurvey: "Themes",
     defaultV2Theme: "Default",
     modernTheme: "Modern",
     defaultTheme: "Default (legacy)",
     testSurveyAgain: "Preview Survey Again",
     testSurveyWidth: "Survey width: ",
     navigateToMsg: "You had to navigate to",
-    logic: "Logic",
-    embedSurvey: "Embed Survey",
-    translation: "Translations",
     saveSurvey: "Save Survey",
     saveSurveyTooltip: "Save Survey",
     saveTheme: "Save Theme",
     saveThemeTooltip: "Save Theme",
-    designer: "Designer",
-    jsonEditor: "JSON Editor",
     jsonHideErrors: "Hide errors",
     jsonShowErrors: "Show errors",
     undo: "Undo",
@@ -113,12 +123,6 @@ export var enStrings = {
     "property-grid": "Properties",
     propertyGridFilteredTextPlaceholder: "Type to search...",
     propertyGridNoResultsFound: "No results found",
-    toolboxGeneralCategory: "General",
-    toolboxChoiceCategory: "Choice Questions",
-    toolboxTextCategory: "Text Input Questions",
-    toolboxContainersCategory: "Containers",
-    toolboxMatrixCategory: "Matrix Questions",
-    toolboxMiscCategory: "Misc",
     correctJSON: "Please correct JSON.",
     surveyResults: "Survey Results ",
     surveyResultsTable: "As Table",
@@ -267,9 +271,6 @@ export var enStrings = {
       name: "Panel name",
       title: "Panel title",
       description: "Panel description",
-      // visible: "Make panel visible", 
-      // readOnly: "Make panel read-only",
-      // isRequired: "Make panel required",
       visibleIf: "Make the panel visible if",
       requiredIf: "Make the panel required if",
       questionsOrder: "Question order within the panel",
@@ -285,20 +286,14 @@ export var enStrings = {
       name: "Panel name",
       title: "Panel title",
       description: "Panel description",
-      // visible: "Make panel visible", 
-      // readOnly: "Make panel read-only",
-      // isRequired: "Make panel required",
       visibleIf: "Make the panel visible if",
       requiredIf: "Make the panel required if",
-
-      // questionsOrder: "Question order within the panel",
       page: "Move the panel to page",
       startWithNewLine: "Display the panel on a new line",
       state: "Panel collapse state",
       width: "Inline panel width",
       minWidth: "Minimum panel width",
       maxWidth: "Maximum panel width",
-      // showNumber: "Number panels",
       confirmDelete: "Confirm panel deletion",
       templateDescription: "Panel description pattern",
       templateTitle: "Panel title pattern",
@@ -311,15 +306,12 @@ export var enStrings = {
       templateTitleLocation: "Question title alignment",
       templateErrorLocation: "Error message alignment",
       newPanelPosition: "New panel location",
-      keyName: "Prevent duplicate responses in the following question",
+      keyName: "Prevent duplicate responses in the following question"
     },
     question: {
       name: "Question name",
       title: "Question title",
       description: "Question description",
-      // visible: "Make question visible", 
-      // readOnly: "Make question read-only",
-      // isRequired: "Make question required",
       visibleIf: "Make the question visible if",
       requiredIf: "Make the question required if",
       page: "Move the question to page",
@@ -355,14 +347,15 @@ export var enStrings = {
       name: "Expression name",
       title: "Expression title",
       description: "Expression description",
-      expression: "Expression",
+      expression: "Expression"
     },
     trigger: {
-      expression: "Expression",
+      expression: "Expression"
     },
     calculatedvalue: {
-      expression: "Expression",
+      expression: "Expression"
     },
+    // survey templates
     survey: {
       title: "Survey title",
       description: "Survey description"
@@ -371,9 +364,6 @@ export var enStrings = {
       name: "Page name",
       title: "Page title",
       description: "Page description",
-      // visible: "Make page visible", 
-      // readOnly: "Make page read-only",
-      // isRequired: "Make page required",
       visibleIf: "Make the page visible if",
       requiredIf: "Make the page required if",
       maxTimeToFinish: "Time limit to complete the page",
@@ -392,10 +382,10 @@ export var enStrings = {
     },
     multipletextitem: {
       name: "Name",
-      title: "Title",
+      title: "Title"
     },
     masksettings: {
-      saveMaskedValue: "Save masked value in survey results",
+      saveMaskedValue: "Save masked value in survey results"
     },
     patternmask: {
       pattern: "Value pattern"
@@ -410,7 +400,7 @@ export var enStrings = {
       decimalSeparator: "Decimal separator",
       precision: "Value precision",
       min: "Minimum value",
-      max: "Maximum value",
+      max: "Maximum value"
     },
     currencymask: {
       prefix: "Currency prefix",
@@ -422,7 +412,6 @@ export var enStrings = {
     rateDescriptionLocation: "Label alignment",
     size: "Input field width (in characters)",
     cellErrorLocation: "Cell error message alignment",
-
     apply: "Apply",
     ok: "OK",
     save: "Save",
@@ -664,7 +653,7 @@ export var enStrings = {
       patternmask: "Pattern",
       numericmask: "Numeric",
       datetimemask: "Date and Time",
-      currencymask: "Currency",
+      currencymask: "Currency"
     },
     focusOnFirstError: "Set focus on the first invalid answer",
     checkErrorsMode: "Run validation",
@@ -754,7 +743,7 @@ export var enStrings = {
       enableIf: "Make the row editable if"
     },
     imageitemvalue: {
-      text: "Alt text",
+      text: "Alt text"
     },
     logoPosition: "Logo position",
     addLogo: "Add logo...",
@@ -766,9 +755,10 @@ export var enStrings = {
       top: "On the top",
       bottom: "In the bottom"
     },
+    // Creator tabs
     tabs: {
       panel: {
-        layout: "Panel Layout",
+        layout: "Panel Layout"
       },
       general: "General",
       fileOptions: "Options",
@@ -809,6 +799,9 @@ export var enStrings = {
       slider: "Slider",
       expression: "Expression",
       questionSettings: "Question Settings",
+      header: "Header",
+      background: "Background",
+      appearance: "Appearance",
       others: "Others"
     },
     editProperty: "Edit property '{0}'",
@@ -861,14 +854,57 @@ export var enStrings = {
     minWidth_placeholder: "Ex.: 600px",
     maxWidth_placeholder: "Ex.: 50%",
     imageHeight_placeholder: "auto",
-    imageWidth_placeholder: "auto"
+    imageWidth_placeholder: "auto",
+    theme: {
+      themeName: "Theme",
+      isPanelless: "Question appearance",
+      editorPanel: "Background and corner radius",
+      questionPanel: "Background and corner radius",
+      primaryColor: "Accent color",
+      panelBackgroundTransparency: "Panel background opacity",
+      questionBackgroundTransparency: "Question background opacity",
+      fontSize: "Font size",
+      scale: "Scale",
+      cornerRadius: "Corner radius",
+      pageTitle: "Title font",
+      pageDescription: "Description font",
+      questionTitle: "Title font",
+      questionDescription: "Description font",
+      editorFont: "Font",
+      backgroundOpacity: "Opacity", // Auto-generated string
+
+      "--sjs-font-family": "Font family",
+      "--sjs-general-backcolor-dim": "Background color",
+      "--sjs-primary-backcolor": "Accent background",
+      "--sjs-primary-forecolor": "Accent foreground",
+      "--sjs-shadow-small": "Shadow effects",
+      "--sjs-shadow-inner": "Shadow effects",
+      "--sjs-border-default": "Colors",
+    },
+    "header@header": {
+      headerView: "View",
+      logoPosition: "Logo position",
+      surveyTitle: "Survey title font",
+      surveyDescription: "Survey description font",
+      headerTitle: "Survey title font",
+      headerDescription: "Survey description font",
+      inheritWidthFrom: "Content area width",
+      textAreaWidth: "Text width",
+      backgroundColorSwitch: "Background color",
+      backgroundImage: "Background image",
+      backgroundImageOpacity: "Opacity",
+      overlapEnabled: "Overlap",
+      logoPositionX: "Logo position",
+      titlePositionX: "Title position",
+      descriptionPositionX: "Description position",
+    }
   },
   // Property values
   pv: {
     "true": "true",
     "false": "false",
-    "file": "Local file",
-    "camera": "Camera",
+    file: "Local file",
+    camera: "Camera",
     "file-camera": "Local file or Camera",
     inherit: "Inherit",
     show: "Visible",
@@ -960,7 +996,7 @@ export var enStrings = {
     questionsOnPageMode: {
       standard: "Original structure",
       singlePage: "Show all questions on one page",
-      questionPerPage: "Show single question per page",
+      questionPerPage: "Show single question per page"
     },
     noPreview: "No preview",
     showAllQuestions: "Show all questions",
@@ -1078,6 +1114,38 @@ export var enStrings = {
       contains: "Contains",
       startsWith: "Starts with"
     },
+    backgroundImageFit: {
+      auto: "Auto",
+      cover: "Cover",
+      contain: "Contain",
+      fill: "Stretch",
+      tile: "Tile",
+    },
+    backgroundImageAttachment: {
+      fixed: "Fixed",
+      scroll: "Scroll",
+    },
+    headerView: {
+      basic: "Basic",
+      advanced: "Advanced",
+    },
+    inheritWidthFrom: {
+      survey: "Same as survey",
+      container: "Fit to container",
+    },
+    backgroundColorSwitch: {
+      none: "None",
+      accentColor: "Accent color",
+      custom: "Custom",
+    },
+    colorPalette: {
+      light: "Light",
+      dark: "Dark",
+    },
+    isPanelless: {
+      false: "Default",
+      true: "Without Panels",
+    },
   },
   // Operators
   op: {
@@ -1193,7 +1261,7 @@ export var enStrings = {
       descriptionLocation: "The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Under the panel title\" by default).",
       newPanelPosition: "Defines the position of a newly added panel. By default, new panels are added to the end. Select \"Next\" to insert a new panel after the current one.",
       defaultValueFromLastPanel: "Duplicates answers from the last panel and assigns them to the next added dynamic panel.",
-      keyName: "Reference a question name to require a user to provide a unique response for this question in each panel.",
+      keyName: "Reference a question name to require a user to provide a unique response for this question in each panel."
     },
     defaultValueExpression: "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input.",
     resetValueIf: "Use the magic wand icon to set a conditional rule that determines when a respondent's input is reset to the value based on the \"Default value expression\" or \"Set value expression\" or to the \"Default answer\" value (if either is set).",
@@ -1228,7 +1296,7 @@ export var enStrings = {
     },
     file: {
       imageHeight: "Adjusts the height of the image in the survey results.",
-      imageWidth: "Adjusts the width of the image in the survey results.",
+      imageWidth: "Adjusts the width of the image in the survey results."
     },
     image: {
       contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided."
@@ -1245,6 +1313,7 @@ export var enStrings = {
     comment: {
       rows: "Sets the number of displayed lines in the input field. If the input takes up more lines, the scroll bar will appear."
     },
+    // survey templates
     survey: {
       mode: "Choose between: \"Editable\" - enables respondents to fill out your survey; \"Read-only\" - disables form editing."
     },
@@ -1315,7 +1384,6 @@ export var enStrings = {
     },
     showTimerPanel: "Sets the visibility and location of a timer on a page.",
     panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded.",
-
     imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list.",
     choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents.",
     title: "Type a user-friendly title to display.",
@@ -1355,10 +1423,9 @@ export var enStrings = {
     expression: {
       name: "An expression ID that is not visible to respondents.",
       description: "Type an expression subtitle.",
-      expression: "An expression can include basic calculations (`{q1_id} + {q2_id}`), conditions (`{age} > 60`), and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.).",
+      expression: "An expression can include basic calculations (`{q1_id} + {q2_id}`), conditions (`{age} > 60`), and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)."
     },
     storeOthersAsComment: "Select to store the \"Other\" option value as a separate property in survey results.",
-
     format: "Use {0} as a placeholder for the actual value.",
     acceptedTypes: "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information.",
     columnColCount: "Applies only if \"Cell input type\" is set to Radio Button Group or Checkboxes.",
@@ -1367,23 +1434,23 @@ export var enStrings = {
     photoPlaceholder: "Applies when \"File source type\" is \"Camera\".",
     fileOrPhotoPlaceholder: "Applies when \"File source type\" is \"Local file or camera\".",
     masksettings: {
-      saveMaskedValue: "Select if you want to store the question value with an applied mask in survey results.",
+      saveMaskedValue: "Select if you want to store the question value with an applied mask in survey results."
     },
     patternmask: {
-      pattern: "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character.",
+      pattern: "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character."
     },
     datetimemask: {
-      pattern: "The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year.<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in upper case (AM/PM).<br>`tt` - 12-hour clock period in lower case (am/pm).",
+      pattern: "The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year.<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in upper case (AM/PM).<br>`tt` - 12-hour clock period in lower case (am/pm)."
     },
     numericmask: {
       decimalSeparator: "A symbol used to separate the fractional part from the integer part of a displayed number.",
       thousandsSeparator: "A symbol used to separate the digits of a large number into groups of three.",
-      precision: "Limits how many digits to retain after the decimal point for a displayed number.",
+      precision: "Limits how many digits to retain after the decimal point for a displayed number."
     },
     currencymask: {
       prefix: "One or several symbols to be displayed before the value.",
       suffix: "One or several symbols to be displayed after the value."
-    },
+    }
   },
   // Properties
   p: {
@@ -1486,115 +1553,60 @@ export var enStrings = {
     allowCameraAccess: "Allow camera access", // Auto-generated string
     scaleColorMode: "Rating icon color mode",
     rateColorMode: "Smileys color scheme",
-    copyDisplayValue: "Copy display value" // Auto-generated string
+    copyDisplayValue: "Copy display value", // Auto-generated string
   },
   theme: {
-    "--background": "Background color",
-    "--background-dim-light": "Background dim light color",
-    "--primary-foreground": "Primary foreground color",
-    "--foreground": "Foreground color",
-    "--base-unit": "Base unit",
     advancedMode: "Advanced mode",
-    groupGeneral: "General",
-    groupHeader: "Header",
-    groupBackground: "Background",
-    groupAppearance: "Appearance",
-    themeName: "Theme",
-    themeMode: "Question appearance",
-    themeModePanels: "Default",
-    themeModeLightweight: "Without Panels",
-    themePaletteLight: "Light",
-    themePaletteDark: "Dark",
-    primaryColor: "Accent color",
+    pageTitle: "Page",
+    questionTitle: "Question box",
+    editorPanel: "Input element",
+    lines: "Lines",
+
     primaryDefaultColor: "Default",
     primaryDarkColor: "Hover",
     primaryLightColor: "Selected",
-    coverTitleForecolor: "Title forecolor",
-    coverDescriptionForecolor: "Description forecolor",
-    coverOverlapEnabled: "Overlap",
     backgroundDimColor: "Background color",
-    backgroundImage: "Background image", // Auto-generated string
-    backgroundImageFitAuto: "Auto",
-    backgroundImageFitCover: "Cover",
-    backgroundImageFitContain: "Contain",
-    backgroundImageFitFill: "Stretch",
-    backgroundImageFitTile: "Tile",
-    backgroundOpacity: "Opacity", // Auto-generated string
-    backgroundImageAttachmentFixed: "Fixed",
-    backgroundImageAttachmentScroll: "Scroll",
-    panelBackgroundTransparency: "Panel background opacity",
-    questionBackgroundTransparency: "Question background opacity",
-    questionTitle: "Question box",
-    editorPanel: "Input element",
-    backgroundCornerRadius: "Background and corner radius",
+
+    cornerRadius: "Corner radius",
     backcolor: "Default background",
     hovercolor: "Hover background",
     borderDecoration: "Border decoration",
-    accentBackground: "Accent background",
-    accentForeground: "Accent foreground",
+
     primaryForecolor: "Default color",
     primaryForecolorLight: "Disabled color",
-    colorsTitle: "Colors",
     font: "Font",
-    lines: "Lines",
     borderDefault: "Darker",
     borderLight: "Lighter",
+
     fontFamily: "Font family",
-    fontSize: "Font size",
-    color: "Color",
-    placeholderColor: "Placeholder color",
-    size: "Size",
     fontWeightRegular: "Regular",
     fontWeightHeavy: "Heavy",
     fontWeightSemiBold: "Semi-bold",
     fontWeightBold: "Bold",
-    scale: "Scale",
-    cornerRadius: "Corner radius",
-    surveyTitle: "Survey title font",
-    surveyDescription: "Survey description font",
-    pageTitle: "Page",
-    titleFont: "Title font",
-    descriptionFont: "Description font",
+    color: "Color",
+    placeholderColor: "Placeholder color",
+    size: "Size",
+
+    opacity: "Opacity",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Add Shadow Effect",
-    opacity: "Opacity",
     boxShadowBlur: "Blur",
     boxShadowSpread: "Spread",
     boxShadowDrop: "Drop",
     boxShadowInner: "Inner",
-    shadow: "Shadow effects",
-    headerView: "View",
-    headerViewBasic: "Basic",
-    headerViewAdvanced: "Advanced",
-    coverInheritWidthFrom: "Content area width",
-    coverInheritWidthFromSurvey: "Same as survey",
-    coverInheritWidthFromContainer: "Fit to container",
-    coverTextAreaWidth: "Text width",
-    coverBackgroundColorSwitch: "Background color",
-    coverBackgroundColorNone: "None",
-    coverBackgroundColorAccentColor: "Accent color",
-    coverBackgroundColorCustom: "Custom",
-    horizontalAlignmentLeft: "Left",
-    horizontalAlignmentCenter: "Center",
-    horizontalAlignmentRight: "Right",
-    verticalAlignmentTop: "Top",
-    verticalAlignmentMiddle: "Middle",
-    verticalAlignmentBottom: "Bottom",
-    logoPosition: "Logo position",
-    coverTitlePosition: "Title position",
-    coverDescriptionPosition: "Description position",
+
     names: {
-      "default": "Default",
-      "sharp": "Sharp",
-      "borderless": "Borderless",
-      "flat": "Flat",
-      "plain": "Plain",
-      "doubleborder": "Double Border",
-      "layered": "Layered",
-      "solid": "Solid",
-      "threedimensional": "3D",
-      "contrast": "Contrast"
+      default: "Default",
+      sharp: "Sharp",
+      borderless: "Borderless",
+      flat: "Flat",
+      plain: "Plain",
+      doubleborder: "Double Border",
+      layered: "Layered",
+      solid: "Solid",
+      threedimensional: "3D",
+      contrast: "Contrast"
     },
     colors: {
       teal: "Teal",

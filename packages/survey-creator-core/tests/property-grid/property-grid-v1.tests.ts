@@ -1690,16 +1690,16 @@ test("SurveyHelper.applyItemValueArray", () => {
   var q1 = new QuestionDropdownModel("q1");
   var q2 = new QuestionDropdownModel("q1");
   q1.choices = [1];
-  FastEntryEditor.applyItemValueArray(q1.choices, null);
+  new FastEntryEditor([]).applyItemValueArray(q1.choices, null);
   expect(q1.choices).toHaveLength(0);
   q1.choices = [1];
   q2.choices = [];
-  FastEntryEditor.applyItemValueArray(q1.choices, q2.choices);
+  new FastEntryEditor([]).applyItemValueArray(q1.choices, q2.choices);
   expect(q1.choices).toHaveLength(0);
   var testSetFunc = function (val1: Array<any>, val2: Array<any>, num: number) {
     q1.choices = val1;
     q2.choices = val2;
-    FastEntryEditor.applyItemValueArray(q1.choices, q2.choices);
+    new FastEntryEditor([]).applyItemValueArray(q1.choices, q2.choices);
     expect(q1.toJSON()).toEqual(q2.toJSON());
   };
   testSetFunc([1, 2, 3], [1, 2, 4], 1);

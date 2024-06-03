@@ -280,6 +280,16 @@ export interface CollectionItemAddedEvent {
    */
   itemValues: ItemValue[];
 }
+export interface FastEntryItemsEvent {
+  /**
+   * An array of entered text lines.
+   */
+  lines: string[];
+  /**
+   * An array of collection items that were created based on the entered text lines. Overwrite an item's `value` or `text` property if you want to change the value or display text of this item.
+   */
+  items: ItemValue[];
+}
 
 export interface MatrixColumnAddedEvent {
   /**

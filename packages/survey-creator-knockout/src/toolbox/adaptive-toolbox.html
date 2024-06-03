@@ -6,7 +6,7 @@
       <!-- ko if: $parent.categories().length > 1 -->
       <div class="svc-toolbox__category-header"
         data-bind="click: toggleState, key2click, css: { 'svc-toolbox__category-header--collapsed': $data.toolbox.canCollapseCategories }">
-        <span class="svc-toolbox__category-title" data-bind="text: name"></span>
+        <span class="svc-toolbox__category-title" data-bind="text: title"></span>
         <!-- ko if: $data.toolbox.canCollapseCategories -->
         <div class="svc-toolbox__category-header__controls">
           <sv-svg-icon class="svc-toolbox__category-header__button svc-string-editor__button--expand"

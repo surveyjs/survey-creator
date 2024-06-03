@@ -35,6 +35,9 @@ export class CreatorSurveyPageComponent extends CreatorModelElement<
     this.rootRef = React.createRef();
   }
   protected createModel(props: any): void {
+    if (this.model) {
+      this.model.dispose();
+    }
     this.model = new PageAdorner(
       props.creator,
       props.page
@@ -57,7 +60,6 @@ export class CreatorSurveyPageComponent extends CreatorModelElement<
   componentWillUnmount() {
     super.componentWillUnmount();
     this.model.onPageSelectedCallback = undefined;
-    this.model.dispose();
   }
   protected canRender(): boolean {
     return (

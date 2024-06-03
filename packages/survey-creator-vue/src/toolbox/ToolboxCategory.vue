@@ -12,7 +12,7 @@
           toolbox.canCollapseCategories,
       }"
     >
-      <span class="svc-toolbox__category-title">{{ category.name }}</span>
+      <span class="svc-toolbox__category-title">{{ category.title }}</span>
       <div
         v-if="toolbox.canCollapseCategories"
         class="svc-toolbox__category-header__controls"

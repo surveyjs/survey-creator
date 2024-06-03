@@ -74,7 +74,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     this.creator.focusElement(undefined, true);
   }
   public deactivate(): boolean {
-    if(this.model) {
+    if (this.model) {
       this.model.dispose();
     }
     this.model = undefined;
@@ -162,7 +162,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
         this.creator.makeNewViewActive(this.creator.showThemeTab ? "theme" : "test");
       },
       visible: this.createVisibleUpdater(),
-      locTitleName: "ed.testSurvey",
+      locTitleName: "tabs.preview",
       showTitle: false
     });
 
