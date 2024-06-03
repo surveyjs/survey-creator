@@ -1,11 +1,12 @@
 <ng-template #template>
-  <div class="svc-toolbox" [class]="model.classNames" #container>
+  <div [class]="model.classNames" #container>
     <div (focusout)="model.focusOut($event)" class="svc-toolbox__panel">
       <div class="svc-toolbox__scroller">
         <div *ngIf="model.showSearch" class="svc-toolbox__search-container">
           <ng-container *ngIf="model.isCompactRendered && model.showSearch">
           <svc-toolbox-tool [creator]="creator" [item]="searchItem" [isCompact]="model.isCompactRendered"></svc-toolbox-tool>
           <div class="svc-toolbox__category-separator svc-toolbox__category-separator--search"></div>
+          <svc-search [model]="model.searchManager"></svc-search>
           </ng-container>
         </div>
         <div *ngIf="model.showPlaceholder" class="svc-toolbox__placeholder">{{model}}</div>
