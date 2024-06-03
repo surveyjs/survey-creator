@@ -5,6 +5,7 @@ import { QuestionToolbox } from "src/toolbox";
 
 export abstract class SearchManagerBase extends Base {
   public searchActionBar: ActionContainer = new ActionContainer();
+  public filterStringPlaceholder;
   @property() filterString: string;
   @property() isVisible: boolean;
 

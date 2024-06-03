@@ -49,7 +49,7 @@ if (!window["%hammerhead%"]) {
       callback(no, true);
     }, 1000);
   };
-
+  creator.toolbox.searchEnabled = true;
 
   let json = {
     "elements": [{

@@ -2,6 +2,8 @@ import React from "react";
 import { VerticalResponsivityManager } from "survey-core";
 import { ReactElementFactory } from "survey-react-ui";
 import { ISurveyCreatorToolboxProps, Toolbox } from "./Toolbox";
+import { SurveyCreatorToolboxTool } from "./ToolboxItem";
+import { SearchComponent } from "src/Search";
 
 export class AdaptiveToolbox extends Toolbox {
   private manager: VerticalResponsivityManager;
@@ -15,11 +17,12 @@ export class AdaptiveToolbox extends Toolbox {
   componentDidMount() {
     super.componentDidMount();
     const container = this.rootRef.current;
+    this.toolbox.setRootElement(container);
     if (!container) return;
     this.manager = new VerticalResponsivityManager(
-      container,
+      this.toolbox.containerElement as HTMLDivElement,
       this.toolbox,
-      ".svc-toolbox__tool:not(.sv-dots)",
+      this.toolbox.itemSelector,
       null,
       undefined,
       (callback) => setTimeout(callback)
@@ -29,19 +32,39 @@ export class AdaptiveToolbox extends Toolbox {
     this.manager && (this.manager.dispose());
     super.componentWillUnmount();
   }
+
+  renderSearch() {
+    const searchButton = this.toolbox.isCompactRendered && this.toolbox.showSearch ?
+      <>
+        <SurveyCreatorToolboxTool item={this.toolbox.searchItem as any} creator={this.creator} isCompact={this.toolbox.isCompactRendered} key={"searchitem"} ></SurveyCreatorToolboxTool>
+        <div className="svc-toolbox__category-separator svc-toolbox__category-separator--search"></div>
+      </> :
+      null;
+    return (<div className="svc-toolbox__search-container">
+      {searchButton}
+      <SearchComponent model={this.toolbox.searchManager}></SearchComponent>
+    </div>);
+  }
+
   render(): JSX.Element {
     if (!this.toolbox.hasActions) return null;
-
-    const className = "svc-toolbox" + (this.toolbox.isCompact ? " svc-toolbox--compact" : "");
+    const search = this.toolbox.showSearch ? this.renderSearch() : null;
+    const placeholder = this.toolbox.showPlaceholder ? <div className="svc-toolbox__placeholder">{this.toolbox.toolboxNoResultsFound}</div> : null;
     return (
-      <div ref={this.rootRef} className={className}>
-        <div className="svc-toolbox__container">
-          {(this.toolbox.isCompact || this.toolbox.categories.length == 1 || !this.toolbox.showCategoryTitles) ?
-            (<div className="svc-toolbox__category">
-              {this.renderItems(this.toolbox.renderedActions, this.toolbox.isCompact)}
-            </div>)
-            : this.renderCategories()
-          }
+      <div ref={this.rootRef} className={this.toolbox.classNames}>
+        <div onBlur={(e) => this.toolbox.focusOut(e)} className="svc-toolbox__panel">
+          <div className="svc-toolbox__scroller">
+            {search}
+            {placeholder}
+            <div className="svc-toolbox__container">
+              {(this.toolbox.isCompactRendered || this.toolbox.categories.length == 1 || !this.toolbox.showCategoryTitles) ?
+                (<div className="svc-toolbox__category">
+                  {this.renderItems(this.toolbox.renderedActions, this.toolbox.isCompactRendered)}
+                </div>)
+                : this.renderCategories()
+              }
+            </div>
+          </div>
         </div>
       </div>
     );

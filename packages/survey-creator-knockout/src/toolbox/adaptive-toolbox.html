@@ -1,8 +1,9 @@
 <div data-bind="class: $data.toolbox.classNames">
   <div data-bind="event: { focusout: (_, e)=>$data.toolbox.focusOut(e)  }" class="svc-toolbox__panel">
     <div class="svc-toolbox__scroller">
+      <!-- ko if: $data.toolbox.showSearch-->
       <div class="svc-toolbox__search-container">
-        <!-- ko if: $data.toolbox.isCompactRendered && $data.toolbox.searchEnabled-->
+        <!-- ko if: $data.toolbox.isCompactRendered && $data.toolbox.showSearch-->
         <!-- ko component: { name: 'svc-toolbox-tool', params: { item: $data.toolbox.searchItem, creator: $data.creator, isCompact: $data.toolbox.isCompactRendered } } -->
         <!-- /ko -->
         <div class="svc-toolbox__category-separator svc-toolbox__category-separator--search"></div>
@@ -10,6 +11,7 @@
         <!-- ko component: { name: 'svc-search', params: { model: $data.toolbox.searchManager } } -->
         <!-- /ko -->
       </div>
+      <!-- /ko -->
       <!-- ko if: $data.toolbox.showPlaceholder-->
       <div class="svc-toolbox__placeholder" data-bind="text:$data.toolbox.toolboxNoResultsFound"></div>
       <!-- /ko -->

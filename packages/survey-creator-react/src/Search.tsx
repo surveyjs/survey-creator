@@ -1,13 +1,13 @@
 import React from "react";
 import { Base, settings } from "survey-core";
-import { SearchManager } from "survey-creator-core";
+import { SearchManager, SearchManagerBase } from "survey-creator-core";
 import { ReactElementFactory, SurveyActionBar, SurveyElementBase, SvgIcon } from "survey-react-ui";
 
 interface ISearchComponentProps {
-  model: SearchManager;
+  model: SearchManagerBase;
 }
 export class SearchComponent extends SurveyElementBase<ISearchComponentProps, any> {
-  protected get model(): SearchManager {
+  protected get model(): SearchManagerBase {
     return this.props.model;
   }
   protected getStateElement(): Base {
@@ -41,7 +41,7 @@ export class SearchComponent extends SurveyElementBase<ISearchComponentProps, an
           value={this.state.filterString}
           onChange={onChange}></input>
         <div className="spg-search-editor_toolbar">
-          <div className="spg-search-editor_toolbar-counter">{this.model.matchCounterText}</div>
+          <div className="spg-search-editor_toolbar-counter">{(this.model as any).matchCounterText}</div>
           <SurveyActionBar model={this.model.searchActionBar}></SurveyActionBar>
         </div>
       </div>);

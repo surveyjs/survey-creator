@@ -36,13 +36,9 @@ export class ToolboxViewModel extends Base {
     return this.creator.toolbox;
   }
 
-  public setContainerElement(container: HTMLElement) {
-    this.toolbox.setContainerElement(container);
-  }
-
   dispose() {
     this._categoriesSubscription.dispose();
-    this.toolbox.setContainerElement(null);
+    this.toolbox.setRootElement(null);
     // this._isCompactSubscription.dispose();
   }
 }

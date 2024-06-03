@@ -7,9 +7,9 @@ ko.components.register("svc-adaptive-toolbox", {
   viewModel: {
     createViewModel: (params: any, componentInfo: any) => {
       const model: ToolboxViewModel = new ToolboxViewModel(params.model);
-      const container = componentInfo.element.querySelector(".svc-toolbox__scroller");
-      model.setContainerElement(container);
-      const manager: VerticalResponsivityManager = new VerticalResponsivityManager(container, params.model.toolbox, ".svc-toolbox__tool:not(.svc-toolbox__search-button):not(.sv-dots)");
+      const container = componentInfo.element;
+      model.toolbox.setRootElement(container);
+      const manager: VerticalResponsivityManager = new VerticalResponsivityManager(model.toolbox.containerElement as HTMLDivElement, params.model.toolbox, params.model.toolbox.itemSelector);
       ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
         manager.dispose();
         model.dispose();

@@ -153,6 +153,13 @@ export class QuestionToolbox
   ];
   private _containerElementValue: HTMLElement;
 
+  public get itemSelector(): string {
+    return ".svc-toolbox__tool:not(.svc-toolbox__search-button):not(.sv-dots)";
+  }
+  public get containerSelector(): string {
+    return ".svc-toolbox__scroller";
+  }
+
   public static getQuestionDefaultSettings(questionType: string): any {
     if (!settings.toolbox || !settings.toolbox.defaultJSON) return undefined;
     return settings.toolbox.defaultJSON[questionType];
@@ -339,8 +346,16 @@ export class QuestionToolbox
     return this.isCompact && !this.isFocused;
   }
 
-  public setContainerElement(element: HTMLElement) {
-    this._containerElementValue = element;
+  public get showSearch() {
+    return this.searchEnabled;
+  }
+
+  public setRootElement(element: HTMLElement) {
+    this._containerElementValue = element?.querySelector(this.containerSelector);
+  }
+
+  public get containerElement() {
+    return this._containerElementValue;
   }
 
   public focusOut(e) {
