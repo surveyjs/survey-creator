@@ -1,7 +1,6 @@
-import { ItemValue, Question, SurveyModel } from "survey-core";
-import { CreatorPresetEditableBase } from "./presets-editable-base";
+import { SurveyModel } from "survey-core";
+import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
 import { SurveyCreatorModel } from "../../creator-base";
-import { editorLocalization } from "../../editorLocalization";
 import { PresetItemValue, QuestionPresetRankingModel } from "./preset-question-ranking";
 
 export class CreatorPresetEditableTabs extends CreatorPresetEditableBase {
@@ -54,10 +53,10 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableBase {
       <PresetItemValue>(item).updateModifiedText(locStrs);
     });
   }
-  protected setupQuestionsCore(model: SurveyModel, creator: SurveyCreatorModel): void {
+  protected setupQuestionsCore(model: SurveyModel, creatorSetup: ICreatorPresetEditorSetup): void {
     const q = model.getQuestionByName(this.nameItems);
     if (q) {
-      creator.getAvailableTabNames().forEach(tab => {
+      creatorSetup.creator.getAvailableTabNames().forEach(tab => {
         const item = new PresetItemValue(tab);
         item.locTitle.localizationName = "tabs." + tab;
         q.choices.push(item);

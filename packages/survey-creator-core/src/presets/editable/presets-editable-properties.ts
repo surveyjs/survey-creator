@@ -1,13 +1,15 @@
 import { JsonObjectProperty, ItemValue, MatrixDropdownRowModelBase, QuestionDropdownModel,
   QuestionMatrixDynamicModel, Base, Serializer, SurveyModel, ElementContentVisibilityChangedEvent,
   matrixDropdownColumnTypes } from "survey-core";
-import { CreatorPresetEditableBase } from "./presets-editable-base";
+import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
 import { SurveyCreatorModel } from "../../creator-base";
 import { defaultPropertyGridDefinition, ISurveyPropertyGridDefinition, ISurveyPropertiesDefinition } from "../../question-editor/definition";
 import { SurveyQuestionProperties } from "../../question-editor/properties";
 import { editorLocalization } from "../../editorLocalization";
 import { PropertyGridModel } from "../../../src/property-grid";
 import { QuestionEmbeddedSurveyModel } from "../../components/embedded-survey";
+import { QuestionEmbeddedCreatorModel } from "../../components/embedded-creator";
+import { ICreatorOptions } from "../../creator-options";
 
 export class SurveyQuestionPresetProperties extends SurveyQuestionProperties {
   constructor(obj, className: string, propertyGridDefinition: ISurveyPropertyGridDefinition) {
@@ -180,6 +182,7 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
   private currentJson: ISurveyPropertyGridDefinition;
   private currentProperties: SurveyQuestionPresetPropertiesDetail;
   private currentClassName: string;
+  private propCreator: SurveyCreatorModel;
   public createMainPageCore(): any {
     const parent = (<CreatorEditablePresetPropertyGrid>this.parent);
     return {
@@ -196,6 +199,7 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
           visibleIf: this.getBoolVisibleIf(this.nameShow),
           clearIfInvisible: "onHidden",
           title: "Select element to setup a property grid for it",
+          startWithNewLine: false
         },
         {
           type: "panel",
@@ -203,11 +207,16 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
           visibleIf: this.getNotEmptyVisibleIf(this.nameSelector),
           elements: [
             {
+              type: "embeddedcreator",
+              name: this.namePropertyCreator,
+            },
+            {
               type: "matrixdynamic",
               name: this.nameMatrix,
               allowRowsDragAndDrop: true,
               showHeader: false,
               titleLocation: "hidden",
+              visible: false,
               addRowText: "Add New Category",
               columns: [
                 { cellType: "text", name: "name", title: "Category name", isUnique: true, isRequired: true, enableIf: "{row.name} <> 'general'" }
@@ -228,6 +237,7 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
             {
               type: "embeddedsurvey",
               name: this.namePropertyGrid,
+              visible: false,
               startWithNewLine: false
             }
           ]
@@ -240,9 +250,21 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     this.updateCurrentJson(model);
     return this.currentJson;
   }
-  protected setupQuestionsCore(model: SurveyModel, creator: SurveyCreatorModel): void {
-    this.getSelector(model).choices = this.getSelectorChoices(creator);
+  protected setupQuestionsCore(model: SurveyModel, creatorSetup: ICreatorPresetEditorSetup): void {
+    this.getSelector(model).choices = this.getSelectorChoices(creatorSetup.creator);
     this.getMatrix(model).lockedRowCount = 1;
+    const options: ICreatorOptions = {
+      showJSONEditorTab: false,
+      showLogicTab: false,
+      showPreviewTab: false,
+      pageEditMode: "single",
+      allowModifyPages: false,
+      showSurveyTitle: false,
+      maxNestedPanels: 0
+    };
+    this.propCreator = creatorSetup.createCreator(options);
+    this.setupPropertyCreator();
+    this.getPropertyCreatorQuestion(model).embeddedCreator = this.propCreator;
   }
   protected updateOnMatrixDetailPanelVisibleChangedCore(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {
     if(options.question.name === this.nameMatrix) {
@@ -252,7 +274,7 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
   }
   private isMatrixValueChanged: boolean;
   private isMatrixValueSetting: boolean;
-  protected updateOnValueChangedCore(model: SurveyModel, creator: SurveyCreatorModel, name: string): void {
+  protected updateOnValueChangedCore(model: SurveyModel, name: string): void {
     if(name === this.nameMatrix && !this.isMatrixValueSetting) {
       this.isMatrixValueChanged = true;
       if(this.currentProperties) {
@@ -275,6 +297,9 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     matrix.rowCount = 0;
     matrix.value = this.currentProperties.getRows();
     this.updateEmbeddedSurvey(model);
+
+    this.propCreator.JSON = this.currentProperties.propertyGrid.survey.toJSON();
+
     this.isMatrixValueChanged = false;
     this.isMatrixValueSetting = false;
   }
@@ -337,9 +362,11 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
   private getMatrix(model: SurveyModel): QuestionMatrixDynamicModel { return <QuestionMatrixDynamicModel>model.getQuestionByName(this.nameMatrix); }
   private getSelector(model: SurveyModel): QuestionDropdownModel { return <QuestionDropdownModel>model.getQuestionByName(this.nameSelector); }
   private getPropertyGridQuestion(model: SurveyModel): QuestionEmbeddedSurveyModel { return <QuestionEmbeddedSurveyModel>model.getQuestionByName(this.namePropertyGrid); }
+  private getPropertyCreatorQuestion(model: SurveyModel): QuestionEmbeddedCreatorModel { return <QuestionEmbeddedCreatorModel>model.getQuestionByName(this.namePropertyCreator); }
   private get nameMatrix() { return this.fullPath + "_matrix"; }
   private get nameSelector() { return this.fullPath + "_selector"; }
   private get namePropertyGrid() { return this.fullPath + "_propgrid"; }
+  private get namePropertyCreator() { return this.fullPath + "_propcreator"; }
   private onDetailPanelShowingChanged(model: SurveyModel, row: MatrixDropdownRowModelBase): void {
     if(!row.isDetailPanelShowing || !this.currentProperties) return;
     const classes = this.currentProperties.classes;
@@ -384,6 +411,11 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     if(this.currentProperties) {
       this.currentProperties.updateCurrentJson(model.getValue(this.nameMatrix));
     }
+  }
+  private setupPropertyCreator(): void {
+    const creator = this.propCreator;
+    creator.showSaveButton = false;
+    creator.isAutoSave = false;
   }
 }
 export class CreatorEditablePresetPropertyGrid extends CreatorPresetEditableBase {

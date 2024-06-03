@@ -1,13 +1,14 @@
 import { SurveyCreatorModel } from "../../creator-base";
 import { CreatorPreset, ICreatorPresetData } from "../presets";
 import { ActionContainer, Base, ComputedUpdater, SurveyModel, createDropdownActionModel } from "survey-core";
-import { CreatorPresetEditableBase } from "./presets-editable-base";
+import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
 import { CreatorPresetEditableToolbox, CreatorPresetEditableToolboxConfigurator, CreatorPresetEditableToolboxDefinition } from "./presets-editable-toolbox";
 import { CreatorPresetEditableTabs } from "./presets-editable-tabs";
 import { CreatorEditablePresetPropertyGrid, CreatorPresetEditablePropertyGridDefinition } from "./presets-editable-properties";
 import { editorLocalization } from "../../editorLocalization";
+import { ICreatorOptions } from "../../creator-options";
 
-export class CreatorPresetEditorModel extends Base {
+export class CreatorPresetEditorModel extends Base implements ICreatorPresetEditorSetup {
   private presetValue: CreatorPreset;
   private creatorValue: SurveyCreatorModel;
   private modelValue: SurveyModel;
@@ -15,7 +16,7 @@ export class CreatorPresetEditorModel extends Base {
   constructor(json?: ICreatorPresetData, creator?: SurveyCreatorModel) {
     super();
     this.presetValue = new CreatorPreset(json);
-    this.creatorValue = creator || this.createCreator();
+    this.creatorValue = creator || this.createCreator({});
     this.modelValue = this.createModel();
     this.locale = "en";
     this.navigationBarValue = new ActionContainer();
@@ -58,8 +59,8 @@ export class CreatorPresetEditorModel extends Base {
       this.applyFromSurveyModel();
     }
   }
-  protected createCreator(): SurveyCreatorModel {
-    return new SurveyCreatorModel({});
+  public createCreator(options: ICreatorOptions): SurveyCreatorModel {
+    return new SurveyCreatorModel(options);
   }
   private addNavigationAction(id: string, title: string): void {
     const actionInfo = {
@@ -91,14 +92,14 @@ export class CreatorPresetEditorModel extends Base {
     model.editablePresets = editablePresets;
     model.keepIncorrectValues = true;
     model.showNavigationButtons = false;
-    editablePresets.forEach(item => item.setupQuestions(model, this.creator));
+    editablePresets.forEach(item => item.setupQuestions(model, this));
     const json = this.preset.getJson() || {};
     editablePresets.forEach(item => item.setupQuestionsValue(model, json[item.path], this.creator));
     model.onCurrentPageChanged.add((sender, options) => {
       editablePresets.forEach(item => item.setupOnCurrentPage(model, this.creator));
     });
     model.onValueChanged.add((sender, options) => {
-      editablePresets.forEach(item => item.updateOnValueChanged(model, this.creator, options.name));
+      editablePresets.forEach(item => item.updateOnValueChanged(model, options.name));
     });
     model.onMatrixDetailPanelVisibleChanged.add((sender, options) => {
       editablePresets.forEach(item => item.updateOnMatrixDetailPanelVisibleChanged(model, this.creator, options));

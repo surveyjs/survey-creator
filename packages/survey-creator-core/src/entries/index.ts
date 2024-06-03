@@ -53,6 +53,7 @@ export * from "../components/results";
 export * from "../components/header/logo-image";
 export * from "../components/string-editor";
 export * from "../components/embedded-survey";
+export * from "../components/embedded-creator";
 export * from "../components/link-value";
 export * from "../editorLocalization";
 export * from "../json5";

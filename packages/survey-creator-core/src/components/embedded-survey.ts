@@ -1,7 +1,9 @@
-import { SurveyModel, QuestionFactory, QuestionNonValue, Question, Serializer, property } from "survey-core";
+import { SurveyModel, QuestionFactory, QuestionNonValue, Question, Serializer } from "survey-core";
+
+const questionType = "embeddedsurvey";
 
 export class QuestionEmbeddedSurveyModel extends QuestionNonValue {
-  public embeddedSurveyValue: SurveyModel
+  public embeddedSurveyValue: SurveyModel;
   public onEmbeddedSurveyValueChanged = () => { };
   public set embeddedSurvey(val: SurveyModel) {
     if(val === this.embeddedSurvey) return;
@@ -15,11 +17,11 @@ export class QuestionEmbeddedSurveyModel extends QuestionNonValue {
     super(name);
   }
   public getType(): string {
-    return "embeddedsurvey";
+    return questionType;
   }
 }
 Serializer.addClass(
-  "embeddedsurvey",
+  questionType,
   [],
   function () {
     return new QuestionEmbeddedSurveyModel("");
@@ -27,4 +29,4 @@ Serializer.addClass(
   "nonvalue"
 );
 
-QuestionFactory.Instance.registerQuestion("embeddedsurvey", (name: string): Question => { return new QuestionEmbeddedSurveyModel(name); });
+QuestionFactory.Instance.registerQuestion(questionType, (name: string): Question => { return new QuestionEmbeddedSurveyModel(name); });

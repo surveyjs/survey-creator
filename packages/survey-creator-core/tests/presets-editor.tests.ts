@@ -5,12 +5,13 @@ import { ItemValue, QuestionDropdownModel, QuestionMatrixDynamicModel } from "su
 import { defaultPropertyGridDefinition } from "../src/question-editor/definition";
 import { SurveyQuestionPresetPropertiesDetail } from "../src/presets/editable/presets-editable-properties";
 import { QuestionEmbeddedSurveyModel } from "../src/components/embedded-survey";
+import { QuestionEmbeddedCreatorModel } from "../src/components/embedded-creator";
 import { CreatorPresetEditorModel } from "../src/presets/editable/presets-editor";
 export * from "../src/presets/editable/preset-question-ranking";
 import { PresetItemValue } from "../src/presets/editable/preset-question-ranking";
-import { editorLocalization } from "../src/editorLocalization";
 
 export * from "../src/components/embedded-survey";
+export * from "../src/components/embedded-creator";
 
 test("Preset edit model, create pages", () => {
   const editor = new CreatorPresetEditorModel();
@@ -405,6 +406,8 @@ test("Preset edit model, live property grid", () => {
   let matrix = <QuestionMatrixDynamicModel>survey.getQuestionByName("propertyGrid_definition_matrix");
   matrix.value = [{ name: "general", items: ["title", "description"] },
     { name: "second", items: ["pages", "locale"] }];
+  const embeddedCreator = <QuestionEmbeddedCreatorModel>survey.getQuestionByName("propertyGrid_definition_propcreator");
+  expect(embeddedCreator).toBeTruthy();
   const embeddedSurvey = <QuestionEmbeddedSurveyModel>survey.getQuestionByName("propertyGrid_definition_propgrid");
   let propSurvey = embeddedSurvey.embeddedSurvey;
   let panels = propSurvey.getAllPanels();

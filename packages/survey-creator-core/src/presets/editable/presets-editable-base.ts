@@ -1,6 +1,12 @@
 import { Helpers, SurveyModel } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
 import { CreatorPresetBase } from "../presets-base";
+import { ICreatorOptions } from "../../creator-options";
+
+export interface ICreatorPresetEditorSetup {
+  creator: SurveyCreatorModel;
+  createCreator(options: ICreatorOptions): SurveyCreatorModel;
+}
 
 export class CreatorPresetEditableBase {
   public parent: CreatorPresetEditableBase;
@@ -70,10 +76,10 @@ export class CreatorPresetEditableBase {
     this.setJsonLocalizationStringsCore(model, locStrs);
     this.children.forEach(item => item.setJsonLocalizationStrings(model, locStrs));
   }
-  public setupQuestions(model: SurveyModel, creator: SurveyCreatorModel): void {
-    this.setupQuestionsCore(model, creator);
+  public setupQuestions(model: SurveyModel, creatorSetup: ICreatorPresetEditorSetup): void {
+    this.setupQuestionsCore(model, creatorSetup);
     this.children.forEach(item => {
-      item.setupQuestions(model, creator);
+      item.setupQuestions(model, creatorSetup);
     });
   }
   public setupOnCurrentPage(model: SurveyModel, creator: SurveyCreatorModel): void {
@@ -84,10 +90,10 @@ export class CreatorPresetEditableBase {
       item.setupOnCurrentPage(model, creator);
     });
   }
-  public updateOnValueChanged(model: SurveyModel, creator: SurveyCreatorModel, name: string): void {
-    this.updateOnValueChangedCore(model, creator, name);
+  public updateOnValueChanged(model: SurveyModel, name: string): void {
+    this.updateOnValueChangedCore(model, name);
     this.children.forEach(item => {
-      item.updateOnValueChanged(model, creator, name);
+      item.updateOnValueChanged(model, name);
     });
   }
   public updateOnMatrixDetailPanelVisibleChanged(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {
@@ -102,12 +108,12 @@ export class CreatorPresetEditableBase {
       item.setupQuestionsValue(model, !!json ? json[item.path]: undefined, creator);
     });
   }
-  protected setupQuestionsCore(model: SurveyModel, creator: SurveyCreatorModel): void { }
+  protected setupQuestionsCore(model: SurveyModel, creatorSetup: ICreatorPresetEditorSetup): void { }
   protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {}
   protected getJsonValueCore(model: SurveyModel): any { return undefined; }
   protected setJsonLocalizationStringsCore(model: SurveyModel, locStrs: any): void {}
   protected setupOnCurrentPageCore(model: SurveyModel, creator: SurveyCreatorModel): void {}
-  protected updateOnValueChangedCore(model: SurveyModel, creator: SurveyCreatorModel, name: string): void {}
+  protected updateOnValueChangedCore(model: SurveyModel, name: string): void {}
   protected updateOnMatrixDetailPanelVisibleChangedCore(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {}
   protected copyJson(json: any): any {
     return Helpers.getUnbindValue(json);

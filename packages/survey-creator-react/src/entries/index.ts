@@ -24,6 +24,7 @@ export * from "../adorners/Panel";
 export * from "../LogoImage";
 export * from "../QuestionLinkValue";
 export * from "../QuestionEmbeddedSurvey";
+export * from "../QuestionEmbeddedCreator";
 export * from "../QuestionEditorContent";
 export * from "../ItemValueWrapper";
 export * from "../ImageItemValueWrapper";

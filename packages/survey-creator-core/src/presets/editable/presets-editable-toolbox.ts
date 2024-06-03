@@ -1,8 +1,7 @@
 import { ItemValue, MatrixDropdownRowModelBase, QuestionMatrixDynamicModel, QuestionRankingModel, Serializer, SurveyModel } from "survey-core";
-import { CreatorPresetEditableBase } from "./presets-editable-base";
+import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
 import { SurveyCreatorModel } from "../../creator-base";
 import { SurveyJSON5 } from "../../json5";
-import { title } from "process";
 
 export class CreatorPresetEditableToolboxDefinition extends CreatorPresetEditableBase {
   public createMainPageCore(): any {
@@ -35,13 +34,13 @@ export class CreatorPresetEditableToolboxDefinition extends CreatorPresetEditabl
       ]
     };
   }
-  protected setupQuestionsCore(model: SurveyModel, creator: SurveyCreatorModel): void {
+  protected setupQuestionsCore(model: SurveyModel, creatorSetup: ICreatorPresetEditorSetup): void {
     const matrix = this.getMatrix(model);
     const nameColumn = matrix.getColumnByName("name");
     const iconNameColumn = matrix.getColumnByName("iconName");
     const names = [];
     const iconNames = [];
-    creator.toolbox.getDefaultItems([], false, true, true).forEach(item => {
+    creatorSetup.creator.toolbox.getDefaultItems([], false, true, true).forEach(item => {
       names.push(item.id);
       iconNames.push(item.iconName || ("icon-" + item.id));
     });
@@ -224,8 +223,8 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     this.defaultItems = this.getDefaultToolboxItems(model, creator);
     this.getQuestionItems(model).choices = this.defaultItems;
   }
-  protected setupQuestionsCore(model: SurveyModel, creator: SurveyCreatorModel): void {
-    this.defaultItems = this.getDefaultToolboxItems(model, creator);
+  protected setupQuestionsCore(model: SurveyModel, creatorSetup: ICreatorPresetEditorSetup): void {
+    this.defaultItems = this.getDefaultToolboxItems(model, creatorSetup.creator);
     this.getQuestionItems(model).choices = this.defaultItems;
   }
   protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
