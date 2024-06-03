@@ -304,6 +304,9 @@ test("Toolbox with search", async (t) => {
     await takeElementScreenshot("toolbox-search.png", toolboxElement, t, comparer);
     await t.typeText(Selector(".svc-toolbox input"), "single");
     await takeElementScreenshot("toolbox-search-entered.png", toolboxElement, t, comparer);
+    await t.hover("#svd-grid-search-close");
+    await takeElementScreenshot("toolbox-search-close-hover.png", toolboxElement, t, comparer);
+    await t.click(Selector(".svc-toolbox input"));
     await t.typeText(Selector(".svc-toolbox input"), "qwerty");
     await takeElementScreenshot("toolbox-search-placeholder.png", toolboxElement, t, comparer);
   });
@@ -340,6 +343,7 @@ test("Toolbox right with search", async (t) => {
     await t.resizeWindow(2560, 1440);
     await takeElementScreenshot("toolbox-search-right.png", toolboxElement, t, comparer);
     await t.click(Selector(".svc-toolbox__search-button"));
+    await t.click(Selector(".svc-toolbox input"));
     await t.typeText(Selector(".svc-toolbox input"), "single");
     await takeElementScreenshot("toolbox-search-right-entered.png", toolboxElement, t, comparer);
     await t.typeText(Selector(".svc-toolbox input"), "qwerty");
@@ -379,6 +383,7 @@ test("Toolbox RTL with search compact", async (t) => {
     await t.resizeWindow(1240, 870);
     await takeElementScreenshot("toolbox-search-rtl-compact.png", toolboxElement, t, comparer);
     await t.click(Selector(".svc-toolbox__search-button"));
+    await t.click(Selector(".svc-toolbox input"));
     await t.typeText(Selector(".svc-toolbox input"), "single");
     await takeElementScreenshot("toolbox-search-rtl-compact-entered.png", toolboxElement, t, comparer);
     await t.typeText(Selector(".svc-toolbox input"), "qwerty");
