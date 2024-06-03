@@ -1,7 +1,8 @@
 import {
   SurveyCreatorModel,
   editorLocalization,
-  IQuestionToolboxItem
+  IQuestionToolboxItem,
+  QuestionToolboxItem
 } from "survey-creator-core";
 import React, { CSSProperties } from "react";
 import { ToolboxToolViewModel } from "survey-creator-core";
@@ -19,8 +20,8 @@ import {
 import { CreatorModelElement } from "../ModelElement";
 
 export interface ISurveyCreatorToolboxItemProps {
-  item: IQuestionToolboxItem;
   creator: SurveyCreatorModel;
+  item: QuestionToolboxItem;
   parentModel: ActionContainer;
   isCompact: boolean;
 }
@@ -55,12 +56,12 @@ export class SurveyCreatorToolboxTool extends CreatorModelElement<
   }
 
   render(): JSX.Element {
-    const item = ((this.item as any) as Action);
-    const className = "svc-toolbox__tool " + (item.css || "") + (item.isVisible ? "" : " sv-action--hidden");
+    const item = this.item;
+    const className = "svc-toolbox__tool " + (item.classNames || "") + (item.isVisible ? "" : " sv-action--hidden");
     const itemComponent = ReactElementFactory.Instance.createElement(
-      this.item.component || "svc-toolbox-item",
+      item.component || "svc-toolbox-item",
       {
-        item: this.item,
+        item: item,
         creator: this.creator,
         parentModel: this.creator.toolbox,
         isCompact: this.isCompact
@@ -72,11 +73,14 @@ export class SurveyCreatorToolboxTool extends CreatorModelElement<
           event.persist();
           this.model.onPointerDown(event);
         }}
+        onMouseOver={(event: any) => {
+          this.model.onMouseOver(item, event);
+        }}
+        onMouseLeave={(event: any) => {
+          this.model.onMouseLeave(item, event);
+        }}
       >
         <div className="sv-action__content">
-          {(item.needSeparator && !this.creator.toolbox.showCategoryTitles) ? (
-            <div className="svc-toolbox__category-separator"></div>
-          ) : null}
           {itemComponent}
         </div>
       </div>

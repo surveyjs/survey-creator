@@ -34,7 +34,7 @@ export class AdaptiveToolbox extends Toolbox {
 
     const className = "svc-toolbox" + (this.toolbox.isCompact ? " svc-toolbox--compact" : "");
     return (
-      <div ref={this.rootRef} className={className}>
+      <div ref={this.rootRef} className={className} onScroll={(event) => this.toolbox.onScroll(this.toolbox, event)}>
         <div className="svc-toolbox__container">
           {(this.toolbox.isCompact || this.toolbox.categories.length == 1 || !this.toolbox.showCategoryTitles) ?
             (<div className="svc-toolbox__category">
