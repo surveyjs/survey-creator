@@ -1,7 +1,7 @@
 import { Action, ActionContainer, Base, ComputedUpdater, IElement, Question, SurveyModel, property, settings } from "survey-core";
 import { getLocString } from "../editorLocalization";
 import { scrollElementIntoView } from "../utils/utils";
-import { QuestionToolbox } from "src/toolbox";
+import { QuestionToolbox } from "../toolbox";
 
 export abstract class SearchManagerBase extends Base {
   public searchActionBar: ActionContainer = new ActionContainer();
