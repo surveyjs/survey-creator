@@ -624,3 +624,46 @@ test("Drag Drop (choices): scroll", async (t) => {
     await takeElementScreenshot("drag-drop-scroll.png", newGhostPagePage, t, comparer);
   });
 });
+
+test("Drag Drop inside Popup (conditions)", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(2560, 1440);
+
+    const json = {
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "text",
+              "name": "question1"
+            },
+            {
+              "type": "ranking",
+              "name": "question2",
+              "choices": [
+                "Item 1",
+                "Item 2",
+                "Item 3"
+              ]
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(json);
+
+    const pgTab = Selector("[aria-label='Conditions']");
+    const editBtn = Selector(".spg-question").nth(0).find("button[title='Edit']");
+
+    await t.click(Selector(".svc-question__content"), { offsetX: -10, offsetY: -10 });
+    await t.click(pgTab).click(editBtn).click(".svc-logic-operator--question").click(".sv-list__item [title='question2']");
+
+    const ranking = Selector(".sv-popup__body-content .sv-ranking");
+    const rankingItem = ranking.find(".sv-ranking-item").nth(0);
+    await patchDragDropToDisableDrop();
+    await t.dragToElement(rankingItem, rankingItem, { destinationOffsetX: -1, speed: 0.1 });
+    await takeElementScreenshot("drag-drop-inside-popup-conditions.png", ranking, t, comparer);
+  });
+});
