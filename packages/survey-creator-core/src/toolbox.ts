@@ -135,6 +135,7 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
 export class QuestionToolbox
   extends AdaptiveActionContainer<QuestionToolboxItem>
   implements IQuestionToolbox {
+  public static MINELEMENTCOUNT: number = 10;
   static hiddenTypes = ["buttongroup", "linkvalue", "embeddedsurvey", "spinedit", "color", "fileedit", "textwithreset", "commentwithreset"];
   static defaultIconName = "icon-default";
   static defaultCategories = {
@@ -347,7 +348,7 @@ export class QuestionToolbox
   }
 
   public get showSearch() {
-    return this.searchEnabled;
+    return this.searchEnabled && this.items.length > QuestionToolbox.MINELEMENTCOUNT;
   }
 
   public setRootElement(element: HTMLElement) {

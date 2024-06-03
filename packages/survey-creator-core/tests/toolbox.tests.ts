@@ -751,3 +751,15 @@ test("Toolbox keep scroll while search", (): any => {
   elementMock.clientHeight = 50;
   expect(creator.toolbox.isScrollLocked).toBeFalsy();
 });
+
+test("Toolbox show search depending on items count", (): any => {
+  const creator = new CreatorTester();
+  expect(creator.toolbox.showSearch).toBeFalsy();
+  creator.toolbox.searchEnabled = true;
+  expect(creator.toolbox.showSearch).toBeTruthy();
+  const old = QuestionToolbox.MINELEMENTCOUNT;
+  QuestionToolbox.MINELEMENTCOUNT = 30;
+  expect(creator.toolbox.showSearch).toBeFalsy();
+  QuestionToolbox.MINELEMENTCOUNT = old;
+  expect(creator.toolbox.showSearch).toBeTruthy();
+});
