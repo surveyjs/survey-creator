@@ -121,9 +121,7 @@ export class SurveyCreatorToolboxItem extends CreatorModelElement<
           this.model.click(event);
         }}
       >
-        <span className="svc-toolbox__item-container">
-          <SvgIcon size={24} iconName={this.item.iconName} title={this.item.tooltip}></SvgIcon>
-        </span>
+        {!!this.item.iconName ? <SvgIcon size={24} iconName={this.item.iconName} title={this.item.tooltip}></SvgIcon> : null}
         {(this.props.isCompact ?
           <span className="svc-toolbox__item-banner svc-item__banner">
             <SvgIcon size={24} iconName={this.item.iconName} className="svc-toolbox__item-icon" title={this.item.tooltip}></SvgIcon>

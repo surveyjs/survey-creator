@@ -1,12 +1,15 @@
 <ng-template #template>
-  <div class="svc-toolbox" [class.svc-toolbox--compact]="model.isCompact" #container>
+  <div class="svc-toolbox" [class.svc-toolbox--compact]="model.isCompact" (scroll)="model.onScroll(model, $event)" #container>
     <div class="svc-toolbox__container">
       <ng-container *ngIf="!(model.isCompact || model.categories.length == 1 || !model.showCategoryTitles)">
         <svc-toolbox-category *ngFor="let category of model.categories" [category]="category" [toolbox]="model"></svc-toolbox-category>
       </ng-container>
       <ng-container *ngIf="model.isCompact || model.categories.length == 1 || !model.showCategoryTitles">
         <div class="svc-toolbox__category">
-          <svc-toolbox-tool *ngFor="let item of model.renderedActions" [creator]="creator" [item]="item" [parentModel]="model" [isCompact]="model.isCompact"></svc-toolbox-tool>
+          <ng-container *ngFor="let item of model.renderedActions">
+            <div class="svc-toolbox__category-separator" *ngIf="item.needSeparator && !creator.toolbox.showCategoryTitles"></div>
+            <svc-toolbox-tool [creator]="creator" [item]="item" [parentModel]="model" [isCompact]="model.isCompact"></svc-toolbox-tool>
+          </ng-container>
         </div>
       </ng-container>
     </div>

@@ -56,6 +56,7 @@ export interface IQuestionToolboxItem extends IAction {
    * Toolbox item category. If it is empty, it goes to 'General' category.
    */
   category: string;
+  getArea?: (el: HTMLElement) => HTMLElement;
 }
 
 export interface IQuestionToolbox {
@@ -112,7 +113,12 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
       .append(this.css)
       .append("svc-toolbox__tool--hovered", this.isHovered)
       .append("svc-toolbox__tool--pressed", this.isPressed)
+      .append("svc-toolbox__tool--has-icon", !!this.iconName)
       .toString();
+  }
+
+  public getArea(target: HTMLElement): HTMLElement {
+    return target.closest("#scrollableDiv-designer") as HTMLElement;
   }
 }
 
@@ -435,6 +441,7 @@ export class QuestionToolbox
     parentItem.popupModel.cssClass += " toolbox-subtypes";
     const popup = parentItem.popupModel as PopupModel;
     popup.contentComponentName = "svc-toolbox-list";
+    popup.contentComponentData["toolbox"] = this;
     popup.isFocusedContent = false;
   }
 

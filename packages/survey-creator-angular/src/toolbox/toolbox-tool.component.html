@@ -1,9 +1,10 @@
 <ng-template #template>
-    <div class="svc-toolbox__tool"
-        [class.sv-action--hidden]="!item.isVisible" [class]="item.css" (pointerdown)="model.onPointerDown($event)">
+    <div [class.sv-action--hidden]="!item.isVisible" [class]="itemCssClasses"
+        (pointerdown)="model.onPointerDown($event)" (mouseover)="model.onMouseOver(item, $event)"
+        (mouseleave)="model.onMouseLeave(item, $event)">
         <div class="sv-action__content">
-            <div class="svc-toolbox__category-separator" *ngIf="item.needSeparator && !creator.toolbox.showCategoryTitles"></div>
-            <ng-template [component]="{ name: item.component || 'svc-toolbox-item', default: 'svc-toolbox-item', data: { model: item, viewModel: model, creator: creator, isCompact: isCompact } }"></ng-template>
+            <ng-template [component]="{ name: item.component || 'svc-toolbox-item', default: 'svc-toolbox-item', 
+            data: { model: item, viewModel: model, creator: creator, isCompact: isCompact } }"></ng-template>
         </div>
     </div>
 </ng-template>

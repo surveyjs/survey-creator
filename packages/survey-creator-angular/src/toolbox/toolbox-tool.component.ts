@@ -1,6 +1,6 @@
 import { Component, Input } from "@angular/core";
 import { CreatorModelComponent } from "../creator-model.component";
-import { SurveyCreatorModel, IQuestionToolboxItem, ToolboxToolViewModel } from "survey-creator-core";
+import { SurveyCreatorModel, ToolboxToolViewModel, QuestionToolboxItem } from "survey-creator-core";
 import { Action, ActionContainer } from "survey-core";
 
 @Component({
@@ -22,6 +22,9 @@ export class ToolboxToolComponent extends CreatorModelComponent<Action> {
   }
   protected getModel(): Action {
     return this.item;
+  }
+  public get itemCssClasses() {
+    return (this.item as QuestionToolboxItem).classNames;
   }
   protected override getPropertiesToUpdateSync(): string[] {
     return ["mode"];
