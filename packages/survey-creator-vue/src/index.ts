@@ -44,8 +44,10 @@ import StringEditor from "./StringEditor.vue";
 import AdaptiveToolbox from "./toolbox/AdaptiveToolbox.vue";
 import ToolboxTool from "./toolbox/ToolboxTool.vue";
 import ToolboxItem from "./toolbox/ToolboxItem.vue";
+import ToolboxItemGroup from "./toolbox/ToolboxItemGroup.vue";
 import ToolboxCategory from "./toolbox/ToolboxCategory.vue";
 import Toolbox from "./toolbox/Toolbox.vue";
+import ToolboxList from "./toolbox/ToolboxList.vue";
 
 import Designer from "./tabs/designer/Designer.vue";
 import Page from "./tabs/designer/Page.vue";
@@ -117,9 +119,11 @@ function registerComponents(app: App) {
 
   app.component("svc-adaptive-toolbox", AdaptiveToolbox);
   app.component("svc-toolbox", Toolbox);
+  app.component("svc-toolbox-list", ToolboxList);
   app.component("svc-toolbox-category", ToolboxCategory);
   app.component("svc-toolbox-tool", ToolboxTool);
   app.component("svc-toolbox-item", ToolboxItem);
+  app.component("svc-toolbox-item-group", ToolboxItemGroup);
 
   app.component(editableStringRendererName, StringEditor);
 

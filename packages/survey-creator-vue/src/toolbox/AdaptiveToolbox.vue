@@ -2,6 +2,7 @@
   <div
     class="svc-toolbox"
     :class="{ 'svc-toolbox--compact': toolbox.isCompact }"
+    @scroll="(e) => { toolbox.onScroll(toolbox, e); }"
     ref="root"
   >
     <div class="svc-toolbox__container">
@@ -29,14 +30,18 @@
         "
       >
         <div class="svc-toolbox__category">
-          <svc-toolbox-tool
-            v-for="(item, index) in renderedActions"
-            :creator="creator"
-            :key="index"
-            :item="item"
-            :parentModel="toolbox"
-            :isCompact="toolbox.isCompact"
-          ></svc-toolbox-tool>
+          <template v-for="(item, index) in renderedActions" :key="index">
+            <div
+              v-if="item.needSeparator && !creator.toolbox.showCategoryTitles"
+              class="svc-toolbox__category-separator"
+            ></div>
+            <svc-toolbox-tool
+              :creator="creator"
+              :item="item"
+              :parentModel="toolbox"
+              :isCompact="toolbox.isCompact"
+            ></svc-toolbox-tool>
+          </template>
         </div>
       </template>
     </div>
