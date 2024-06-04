@@ -9,7 +9,7 @@
           <svc-search [model]="model.searchManager"></svc-search>
           </ng-container>
         </div>
-        <div *ngIf="model.showPlaceholder" class="svc-toolbox__placeholder">{{model}}</div>
+        <div *ngIf="model.showPlaceholder" class="svc-toolbox__placeholder">{{model.toolboxNoResultsFound}}</div>
         <div class="svc-toolbox__container">
           <ng-container *ngIf="!(model.isCompact || model.categories.length == 1 || !model.showCategoryTitles)">
             <svc-toolbox-category *ngFor="let category of model.categories" [category]="category" [toolbox]="model"></svc-toolbox-category>
