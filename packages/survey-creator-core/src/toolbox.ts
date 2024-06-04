@@ -351,6 +351,10 @@ export class QuestionToolbox
     return this.searchEnabled && this.items.length > QuestionToolbox.MINELEMENTCOUNT;
   }
 
+  public get showInSingleCategory() {
+    return this.isCompactRendered || this.categories.length == 1 || !this.showCategoryTitles;
+  }
+
   public setRootElement(element: HTMLElement) {
     this._containerElementValue = element?.querySelector(this.containerSelector);
   }

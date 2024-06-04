@@ -11,10 +11,10 @@
         </div>
         <div *ngIf="model.showPlaceholder" class="svc-toolbox__placeholder">{{model.toolboxNoResultsFound}}</div>
         <div class="svc-toolbox__container">
-          <ng-container *ngIf="!(model.isCompactRendered || model.categories.length == 1 || !model.showCategoryTitles)">
+          <ng-container *ngIf="!model.showInSingleCategory">
             <svc-toolbox-category *ngFor="let category of model.categories" [category]="category" [toolbox]="model"></svc-toolbox-category>
           </ng-container>
-          <ng-container *ngIf="model.isCompactRendered || model.categories.length == 1 || !model.showCategoryTitles">
+          <ng-container *ngIf="model.showInSingleCategory">
             <div class="svc-toolbox__category">
               <svc-toolbox-tool *ngFor="let item of model.renderedActions" [creator]="creator" [item]="item" [isCompact]="model.isCompactRendered"></svc-toolbox-tool>
             </div>

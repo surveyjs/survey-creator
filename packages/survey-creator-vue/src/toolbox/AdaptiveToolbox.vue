@@ -20,15 +20,7 @@
           {{ toolbox.toolboxNoResultsFound }}
         </div>
         <div class="svc-toolbox__container">
-          <template
-            v-if="
-              !(
-                toolbox.isCompactRendered ||
-                toolbox.categories.length == 1 ||
-                !toolbox.showCategoryTitles
-              )
-            "
-          >
+          <template v-if="!toolbox.showInSingleCategory">
             <svc-toolbox-category
               v-for="(category, index) in toolbox.categories"
               :key="index"
@@ -36,13 +28,7 @@
               :toolbox="toolbox"
             ></svc-toolbox-category>
           </template>
-          <template
-            v-if="
-              toolbox.isCompactRendered ||
-              toolbox.categories.length == 1 ||
-              !toolbox.showCategoryTitles
-            "
-          >
+          <template v-if="toolbox.showInSingleCategory">
             <div class="svc-toolbox__category">
               <svc-toolbox-tool
                 v-for="(item, index) in renderedActions"

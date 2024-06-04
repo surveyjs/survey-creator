@@ -3,7 +3,7 @@
     <div class="svc-toolbox__scroller">
       <!-- ko if: $data.toolbox.showSearch-->
       <div class="svc-toolbox__search-container">
-        <!-- ko if: $data.toolbox.isCompactRendered && $data.toolbox.showSearch-->
+        <!-- ko if: $data.toolbox.isCompactRendered-->
         <!-- ko component: { name: 'svc-toolbox-tool', params: { item: $data.toolbox.searchItem, creator: $data.creator, isCompact: $data.toolbox.isCompactRendered } } -->
         <!-- /ko -->
         <div class="svc-toolbox__category-separator svc-toolbox__category-separator--search"></div>
@@ -16,7 +16,7 @@
       <div class="svc-toolbox__placeholder" data-bind="text:$data.toolbox.toolboxNoResultsFound"></div>
       <!-- /ko -->
       <div class="svc-toolbox__container">
-        <!-- ko ifnot: $data.toolbox.isCompactRendered || categories().length == 1 || !$data.toolbox.showCategoryTitles -->
+        <!-- ko ifnot: $data.toolbox.showInSingleCategory -->
         <!-- ko foreach: categories -->
         <div class="svc-toolbox__category" data-bind="css: { 'svc-toolbox__category--collapsed': $data.collapsed, 'svc-toolbox__category--empty': $data.empty }">
           <!-- ko if: $parent.categories().length > 1 -->
@@ -41,7 +41,7 @@
         <!-- /ko -->
         <!-- /ko -->
 
-        <!-- ko if: $data.toolbox.isCompactRendered || categories().length == 1 || !$data.toolbox.showCategoryTitles -->
+        <!-- ko if: $data.toolbox.showInSingleCategory -->
         <div class="svc-toolbox__category">
           <!-- ko foreach: $data.toolbox.renderedActions -->
           <!-- ko component: { name: 'svc-toolbox-tool', params: { item: $data, creator: $parent.creator, isCompact: $parent.toolbox.isCompactRendered } } -->
