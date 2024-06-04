@@ -1,5 +1,5 @@
 import { ClientFunction, Selector } from "testcafe";
-import { url, setJSON, takeElementScreenshot, addQuestionByAddQuestionButton, wrapVisualTest, getTabbedMenuItemByText, creatorTabPreviewName, creatorTabDesignerName, resetHoverToCreator, getToolboxItemByText, getPropertyGridCategory, generalGroupName, getListItemByText, surveySettingsButtonSelector, changeToolboxScrolling } from "../../helper";
+import { url, setJSON, takeElementScreenshot, addQuestionByAddQuestionButton, wrapVisualTest, getTabbedMenuItemByText, creatorTabPreviewName, creatorTabDesignerName, resetHoverToCreator, getToolboxItemByText, getPropertyGridCategory, generalGroupName, getListItemByText, surveySettingsButtonSelector, changeToolboxScrolling, changeToolboxSearchEnabled } from "../../helper";
 
 const title = "Designer surface";
 
@@ -991,6 +991,7 @@ test("Check survey layout in mobile mode", async (t) => {
 test("Check property grid flyout", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     changeToolboxScrolling(false);
+    await changeToolboxSearchEnabled(false);
     await t.resizeWindow(1120, 900);
     const root = Selector(".svc-creator");
     await setJSON({});
@@ -1936,6 +1937,7 @@ test("Page placeholder without elements", async (t) => {
 test("Check minimal height", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     changeToolboxScrolling(false);
+    await changeToolboxSearchEnabled(false);
     await t.resizeWindow(1120, 900);
     const root = Selector(".svc-creator");
     await setJSON({});

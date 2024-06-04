@@ -1,4 +1,4 @@
-import { url, setJSON, takeElementScreenshot, getToolboxItemByText, getPropertyGridCategory, generalGroupName, wrapVisualTest, addQuestionByAddQuestionButton, resetHoverToCreator, surveySettingsButtonSelector, inputMaskSettingsGroupName, getListItemByText, getVisibleElement } from "../../helper";
+import { url, setJSON, takeElementScreenshot, getToolboxItemByText, getPropertyGridCategory, generalGroupName, wrapVisualTest, addQuestionByAddQuestionButton, resetHoverToCreator, surveySettingsButtonSelector, inputMaskSettingsGroupName, getListItemByText, getVisibleElement, changeToolboxSearchEnabled } from "../../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Property Grid Editors";
 
@@ -813,6 +813,7 @@ test("renderAs works in matrix questions for textwithreset", async (t) => {
 });
 test("popup overlay in property grid", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    await changeToolboxSearchEnabled(false);
     await t.resizeWindow(900, 900);
     await ClientFunction(() => {
       window["Survey"]._setIsTouch(true);

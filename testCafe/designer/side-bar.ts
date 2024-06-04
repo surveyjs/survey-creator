@@ -2,7 +2,8 @@ import {
   setJSON, collapseButtonSelector, expandButtonSelector, getPagesLength, getTabbedMenuItemByText,
   objectSelectorButton, objectSelectorPopup, propertyGridSelector, url,
   pageNavigator, creatorTabDesignerName, creatorTabPreviewName, changeToolboxLocation, SingleInputToolboxItem, surveySettingsButtonSelector,
-  changeToolboxScrolling
+  changeToolboxScrolling,
+  changeToolboxSearchEnabled
 } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Side bar";
@@ -138,6 +139,7 @@ test("toolboxLocation sidebar", async (t) => {
 
 test("toolboxLocation left", async (t) => {
   await changeToolboxScrolling(false);
+  await changeToolboxSearchEnabled(false);
   const toolboxInDesigner = Selector(".svc-creator-tab .svc-toolbox");
   const dotsInToolbox = toolboxInDesigner.find(".sv-dots__item");
   const popup = Selector(".sv-popup__container").filterVisible();
@@ -184,6 +186,7 @@ test("toolboxLocation left", async (t) => {
 
 test("toolboxLocation sidebar: check toolbox items", async (t) => {
   await changeToolboxScrolling(false);
+  await changeToolboxSearchEnabled(false);
   const toolboxItemCount = 21;
   const itemsInToolboxInDesigner = toolboxInDesigner.find(".svc-toolbox__item");
   const visibleItemsInToolboxInDesigner = itemsInToolboxInDesigner.filterVisible();

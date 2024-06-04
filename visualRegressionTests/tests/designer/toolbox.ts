@@ -1,5 +1,5 @@
 import { ClientFunction, Selector } from "testcafe";
-import { url, changeToolboxLocation, getTabbedMenuItemByText, takeElementScreenshot, setJSON, collapseButtonSelector, wrapVisualTest, changeToolboxScrolling } from "../../helper";
+import { url, changeToolboxSearchEnabled, changeToolboxLocation, getTabbedMenuItemByText, takeElementScreenshot, setJSON, collapseButtonSelector, wrapVisualTest, changeToolboxScrolling } from "../../helper";
 
 const title = "Toolbox Screenshot";
 
@@ -11,6 +11,7 @@ const translationTab = getTabbedMenuItemByText("Translation");
 test("Left toolbox", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await changeToolboxScrolling(false);
+    await changeToolboxSearchEnabled(false);
     const toolboxItem = Selector(".svc-toolbox__item");
     const toolboxItemDots = Selector(".svc-toolbox__tool .sv-dots__item");
     const toolboxElement = Selector(".svc-toolbox");
@@ -48,6 +49,7 @@ test("Left toolbox", async (t) => {
 test("Right toolbox", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await changeToolboxScrolling(false);
+    await changeToolboxSearchEnabled(false);
     const toolboxItem = Selector(".svc-toolbox__item");
     const toolboxItemDots = Selector(".svc-toolbox__tool .sv-dots__item");
 
@@ -87,6 +89,7 @@ test("Right toolbox", async (t) => {
 test("Right toolbox (rtl)", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await changeToolboxScrolling(false);
+    await changeToolboxSearchEnabled(false);
     const toolboxItem = Selector(".svc-toolbox__item");
     const toolboxItemDots = Selector(".svc-toolbox__tool .sv-dots__item");
 
@@ -132,6 +135,7 @@ test("toolbox inside sidebar", async (t) => {
     const toolboxButtonSelector = Selector(".sv-action-bar-item[title=\"Toolbox\"]");
 
     await changeToolboxLocation("sidebar");
+    await changeToolboxSearchEnabled(false);
     await t
       .resizeWindow(1240, 870)
       .click(toolboxButtonSelector)
@@ -147,6 +151,7 @@ test("toolbox inside sidebar", async (t) => {
 
 test("Toolbox tool pressed state", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    await changeToolboxSearchEnabled(false);
     await t.resizeWindow(2560, 1440);
     const toolboxTool = Selector(".svc-toolbox__tool");
 
@@ -162,6 +167,7 @@ test("Toolbox tool pressed state", async (t) => {
 test("designer tab view with page navigator", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await changeToolboxScrolling(false);
+    await changeToolboxSearchEnabled(false);
     await setJSON({
       pages: [
         {
@@ -214,6 +220,7 @@ test("Toolbox with category titles", async (t) => {
 test("Left toolbox - scroll", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await changeToolboxScrolling(true);
+    await changeToolboxSearchEnabled(false);
 
     const toolboxItem = Selector(".svc-toolbox__item").nth(5);
     const toolboxElement = Selector(".svc-toolbox");
@@ -238,6 +245,7 @@ test("Left toolbox - scroll", async (t) => {
 
 test("Right toolbox - scroll", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    await changeToolboxSearchEnabled(false);
     const toolboxItem = Selector(".svc-toolbox__item").nth(5);
 
     await setJSON({ pages: [{ name: "page1" }] });
@@ -264,6 +272,7 @@ test("Right toolbox - scroll", async (t) => {
 
 test("Right toolbox (rtl) - scroll", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    await changeToolboxSearchEnabled(false);
     const toolboxItem = Selector(".svc-toolbox__item").nth(5);
 
     await ClientFunction(() => {

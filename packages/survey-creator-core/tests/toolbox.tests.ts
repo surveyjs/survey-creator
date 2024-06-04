@@ -754,7 +754,6 @@ test("Toolbox keep scroll while search", (): any => {
 
 test("Toolbox show search depending on items count", (): any => {
   const creator = new CreatorTester();
-  expect(creator.toolbox.showSearch).toBeFalsy();
   creator.toolbox.searchEnabled = true;
   expect(creator.toolbox.showSearch).toBeTruthy();
   const old = QuestionToolbox.MINELEMENTCOUNT;
@@ -762,4 +761,6 @@ test("Toolbox show search depending on items count", (): any => {
   expect(creator.toolbox.showSearch).toBeFalsy();
   QuestionToolbox.MINELEMENTCOUNT = old;
   expect(creator.toolbox.showSearch).toBeTruthy();
+  creator.toolbox.searchEnabled = false;
+  expect(creator.toolbox.showSearch).toBeFalsy();
 });
