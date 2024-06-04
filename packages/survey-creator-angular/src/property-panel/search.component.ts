@@ -1,4 +1,4 @@
-import { SearchManager, SearchManager } from "survey-creator-core";
+import { SearchManager } from "survey-creator-core";
 import { Component, Input } from "@angular/core";
 import { AngularComponentFactory, BaseAngular } from "survey-angular-ui";
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { Base, settings } from "survey-core";
-import { SearchManager, SearchManager } from "survey-creator-core";
+import { SearchManager } from "survey-creator-core";
 import { ReactElementFactory, SurveyActionBar, SurveyElementBase, SvgIcon } from "survey-react-ui";
 
 interface ISearchComponentProps {
