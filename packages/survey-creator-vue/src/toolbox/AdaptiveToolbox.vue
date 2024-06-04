@@ -2,26 +2,28 @@
   <div :class="toolbox.classNames" ref="root">
     <div @focusout="(e) => toolbox.focusOut(e)" class="svc-toolbox__panel">
       <div class="svc-toolbox__scroller">
+        <div v-if="toolbox.showSearch" class="svc-toolbox__search-container">
+          <template v-if="toolbox.isCompactRendered">
+            <svc-toolbox-tool
+              :creator="creator"
+              key="searchitem"
+              :item="toolbox.searchItem"
+              :isCompact="toolbox.isCompactRendered"
+            ></svc-toolbox-tool>
+            <div
+              class="svc-toolbox__category-separator svc-toolbox__category-separator--search"
+            ></div>
+          </template>
+          <svc-search :model="toolbox.searchManager"></svc-search>
+        </div>
         <div v-if="toolbox.showPlaceholder" class="svc-toolbox__placeholder">
           {{ toolbox.toolboxNoResultsFound }}
         </div>
-        <template v-if="toolbox.isCompactRendered && toolbox.showSearch">
-          <svc-toolbox-tool
-            :creator="creator"
-            key="searchitem"
-            :item="toolbox.searchItem"
-            :isCompact="toolbox.isCompactRendered"
-          ></svc-toolbox-tool>
-          <div
-            class="svc-toolbox__category-separator svc-toolbox__category-separator--search"
-          ></div>
-          <svc-search :model="toolbox.searchManager"></svc-search>
-        </template>
         <div class="svc-toolbox__container">
           <template
             v-if="
               !(
-                toolbox.isCompact ||
+                toolbox.isCompactRendered ||
                 toolbox.categories.length == 1 ||
                 !toolbox.showCategoryTitles
               )
@@ -36,7 +38,7 @@
           </template>
           <template
             v-if="
-              toolbox.isCompact ||
+              toolbox.isCompactRendered ||
               toolbox.categories.length == 1 ||
               !toolbox.showCategoryTitles
             "
@@ -47,7 +49,7 @@
                 :creator="creator"
                 :key="index"
                 :item="item"
-                :isCompact="toolbox.isCompact"
+                :isCompact="toolbox.isCompactRendered"
               ></svc-toolbox-tool>
             </div>
           </template>
