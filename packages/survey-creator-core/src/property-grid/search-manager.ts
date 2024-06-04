@@ -3,7 +3,7 @@ import { getLocString } from "../editorLocalization";
 import { scrollElementIntoView } from "../utils/utils";
 import { QuestionToolbox } from "../toolbox";
 
-export abstract class SearchManagerBase extends Base {
+export abstract class SearchManager extends Base {
   public searchActionBar: ActionContainer = new ActionContainer();
   public filterStringPlaceholder;
   @property() filterString: string;
@@ -54,7 +54,7 @@ export abstract class SearchManagerBase extends Base {
   }
 }
 
-export class SearchManagerToolbox extends SearchManagerBase {
+export class SearchManagerToolbox extends SearchManager {
   @property() toolbox: QuestionToolbox;
   public filterStringPlaceholder = getLocString("ed.toolboxFilteredTextPlaceholder");
   protected setFiterString(newValue: string, oldValue: string) {
@@ -65,7 +65,7 @@ export class SearchManagerToolbox extends SearchManagerBase {
   }
 }
 
-export class SearchManager extends SearchManagerBase {
+export class SearchManagerPropertyGrid extends SearchManager {
   private highlightedEditorClass = " spg-editor--highlighted";
 
   private currentMatchIndex: number;

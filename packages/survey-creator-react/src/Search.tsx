@@ -1,13 +1,13 @@
 import React from "react";
 import { Base, settings } from "survey-core";
-import { SearchManager, SearchManagerBase } from "survey-creator-core";
+import { SearchManager, SearchManager } from "survey-creator-core";
 import { ReactElementFactory, SurveyActionBar, SurveyElementBase, SvgIcon } from "survey-react-ui";
 
 interface ISearchComponentProps {
-  model: SearchManagerBase;
+  model: SearchManager;
 }
 export class SearchComponent extends SurveyElementBase<ISearchComponentProps, any> {
-  protected get model(): SearchManagerBase {
+  protected get model(): SearchManager {
     return this.props.model;
   }
   protected getStateElement(): Base {
