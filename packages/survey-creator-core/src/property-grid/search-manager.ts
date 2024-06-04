@@ -8,6 +8,7 @@ export abstract class SearchManagerBase extends Base {
   public filterStringPlaceholder;
   @property() filterString: string;
   @property() isVisible: boolean;
+  @property() matchCounterText: string;
 
   protected getSearchActions() {
     return [new Action({
@@ -74,7 +75,6 @@ export class SearchManager extends SearchManagerBase {
 
   @property() survey: SurveyModel;
   @property() isVisible: boolean;
-  @property() matchCounterText: string;
   @property({ defaultValue: [] }) allMatches: Array<Question>;
 
   private expandAllParents(element: IElement) {
