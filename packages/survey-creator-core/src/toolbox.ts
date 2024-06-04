@@ -292,7 +292,7 @@ export class QuestionToolbox
     return JSON.stringify(this.actions);
   }
   public set jsonText(value: string) {
-    this.actions = value ? JSON.parse(value) : [];
+    this.actions = (value ? JSON.parse(value) : []).map(action => new QuestionToolboxItem(action));
     this.onItemsChanged();
   }
   /**

@@ -14,7 +14,7 @@ export class ToolboxToolViewModel extends Base {
 
   public click = (event) => {
     if (!this.allowAdd) return;
-    (this.item as any).innerItem?.action();
+    this.creator.clickToolboxItem(this.item.json);
   };
 
   public get allowAdd() {
