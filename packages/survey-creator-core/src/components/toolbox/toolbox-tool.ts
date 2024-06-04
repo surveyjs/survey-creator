@@ -1,4 +1,4 @@
-import { Base, SurveyModel, DragOrClickHelper } from "survey-core";
+import { Base, SurveyModel, DragOrClickHelper, Action } from "survey-core";
 import { IQuestionToolboxItem } from "../../toolbox";
 import { SurveyCreatorModel } from "../../creator-base";
 import { DragDropSurveyElements } from "../../survey-elements";
@@ -14,7 +14,7 @@ export class ToolboxToolViewModel extends Base {
 
   public click = (event) => {
     if (!this.allowAdd) return;
-    this.creator.clickToolboxItem(this.item.json);
+    (this.item as any).innerItem?.action();
   };
 
   public get allowAdd() {
