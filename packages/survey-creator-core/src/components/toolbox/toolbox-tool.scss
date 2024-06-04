@@ -6,7 +6,6 @@
   align-items: center;
   z-index: 20;
   outline: none;
-  // padding: 0 calcSize(1.5);
   padding: calcSize(1.5) calcSize(2);
 
   sv-svg-icon,
@@ -22,6 +21,10 @@
 
 .svc-toolbox__tool--has-icon > .sv-action__content > .svc-toolbox__item {
   padding: calcSize(1) calcSize(2) calcSize(1) calcSize(1.5);
+}
+
+.svc-toolbox--compact .svc-toolbox__tool--has-icon > .sv-action__content > .svc-toolbox__item {
+  padding: 0 calcSize(1.5);
 }
 
 // is always visible

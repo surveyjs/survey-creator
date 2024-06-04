@@ -1,5 +1,5 @@
 import { ClientFunction, Selector } from "testcafe";
-import { url, changeToolboxLocation, getTabbedMenuItemByText, takeElementScreenshot, setJSON, collapseButtonSelector, wrapVisualTest, changeToolboxScrolling } from "../../helper";
+import { url, changeToolboxLocation, getTabbedMenuItemByText, takeElementScreenshot, setJSON, collapseButtonSelector, wrapVisualTest, changeToolboxScrolling, getToolboxItemByText } from "../../helper";
 
 const title = "Toolbox Screenshot";
 
@@ -208,6 +208,42 @@ test("Toolbox with category titles", async (t) => {
     await ClientFunction(() => { window["creator"].toolbox.showCategoryTitles = true; })();
     await t.resizeWindow(2560, 1440);
     await takeElementScreenshot("toolbox-categories.png", toolboxElement, t, comparer);
+  });
+});
+
+test("Toolbox with subtypes (ltr)", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    const toolboxElement = Selector(".svc-toolbox");
+    const subtypesPopup = Selector(".sv-popup.sv-popup-inner.toolbox-subtypes .sv-popup__container").filterVisible();
+
+    await setJSON({ pages: [{ name: "page1" }] });
+    await t.resizeWindow(2560, 1440)
+      .wait(300)
+      .hover(getToolboxItemByText("Rating Scale"));
+    await takeElementScreenshot("toolbox-left-rating-subtypes.png", toolboxElement, t, comparer);
+
+    await t.hover(getToolboxItemByText("Stars"));
+    await takeElementScreenshot("toolbox-left-rating-subtype-hovered.png", subtypesPopup, t, comparer);
+  });
+});
+
+test("Toolbox with subtypes (rtl)", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await ClientFunction(() => {
+      document.body.setAttribute("dir", "rtl");
+    })();
+
+    const toolboxElement = Selector(".svc-toolbox");
+    const subtypesPopup = Selector(".sv-popup.sv-popup-inner.toolbox-subtypes .sv-popup__container").filterVisible();
+
+    await setJSON({ pages: [{ name: "page1" }] });
+    await t.resizeWindow(2560, 1440)
+      .wait(300)
+      .hover(getToolboxItemByText("Rating Scale"));
+    await takeElementScreenshot("toolbox-right-rating-subtypes.png", toolboxElement, t, comparer);
+
+    await t.hover(getToolboxItemByText("Stars"));
+    await takeElementScreenshot("toolbox-right-rating-subtype-hovered.png", subtypesPopup, t, comparer);
   });
 });
 

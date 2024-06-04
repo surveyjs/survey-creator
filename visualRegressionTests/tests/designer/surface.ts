@@ -2030,3 +2030,16 @@ test("Check adorner actions responsivity after convert", async (t) => {
     await takeElementScreenshot("actions-on-converted-question.png", root.nth(0), t, comparer);
   });
 });
+
+test("Question types with subtypes", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1000, 700);
+
+    await t
+      .click(Selector(".svc-page__question-type-selector"))
+      .hover(getListItemByText("Rating Scale").filterVisible())
+      .wait(400)
+      .hover(getListItemByText("Labels").nth(1));
+    await takeElementScreenshot("question-type-rating-subtypes.png", Selector(".sv-popup.sv-popup--dropdown").filterVisible(), t, comparer);
+  });
+});
