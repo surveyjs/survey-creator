@@ -1,8 +1,10 @@
 <div class="svc-toolbox__item"
   data-bind="attr: { role: 'button', 'aria-label': item.tooltip, title: item.tooltip }, css: item.className, click: (target, event)=>{ target.model.click(event); return true;}, key2click">
-  <!-- ko if: iconName -->
-  <sv-svg-icon params="iconName: iconName, size: 24, title: item.tooltip"></sv-svg-icon>
-  <!-- /ko -->
+  <span class="svc-toolbox__item-container">
+    <!-- ko if: iconName -->
+    <sv-svg-icon params="iconName: iconName, size: 24, title: item.tooltip"></sv-svg-icon>
+    <!-- /ko -->
+  </span>
   <!-- ko if: isCompact -->
   <span class="svc-toolbox__item-banner svc-item__banner">
     <sv-svg-icon params="iconName: iconName, size: 24, title: item.tooltip"
