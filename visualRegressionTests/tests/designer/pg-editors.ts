@@ -357,7 +357,7 @@ test("Property grid input all states", async (t) => {
     await takeElementScreenshot("pg-input-focused.png", input, t, comparer);
 
     await setInputProperty("readOnly", true);
-    await takeElementScreenshot("pg-input-disabled.png", input, t, comparer);
+    await takeElementScreenshot("pg-input-readonly.png", input, t, comparer);
   });
 });
 
