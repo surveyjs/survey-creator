@@ -1,6 +1,7 @@
 import { JsonObjectProperty, ItemValue, MatrixDropdownRowModelBase, QuestionDropdownModel,
   QuestionMatrixDynamicModel, Base, Serializer, SurveyModel, ElementContentVisibilityChangedEvent,
-  matrixDropdownColumnTypes } from "survey-core";
+  matrixDropdownColumnTypes,
+  PanelModel } from "survey-core";
 import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
 import { SurveyCreatorModel } from "../../creator-base";
 import { defaultPropertyGridDefinition, ISurveyPropertyGridDefinition, ISurveyPropertiesDefinition } from "../../question-editor/definition";
@@ -10,6 +11,7 @@ import { PropertyGridModel } from "../../../src/property-grid";
 import { QuestionEmbeddedSurveyModel } from "../../components/embedded-survey";
 import { QuestionEmbeddedCreatorModel } from "../../components/embedded-creator";
 import { ICreatorOptions } from "../../creator-options";
+import { settings } from "../../creator-settings";
 
 export class SurveyQuestionPresetProperties extends SurveyQuestionProperties {
   constructor(obj, className: string, propertyGridDefinition: ISurveyPropertyGridDefinition) {
@@ -262,9 +264,12 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
       showSurveyTitle: false,
       maxNestedPanels: 0
     };
+    const oldSearchValue = settings.propertyGrid.enableSearch;
+    settings.propertyGrid.enableSearch = false;
     this.propCreator = creatorSetup.createCreator(options);
     this.setupPropertyCreator();
     this.getPropertyCreatorQuestion(model).embeddedCreator = this.propCreator;
+    settings.propertyGrid.enableSearch = oldSearchValue;
   }
   protected updateOnMatrixDetailPanelVisibleChangedCore(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {
     if(options.question.name === this.nameMatrix) {
@@ -416,6 +421,40 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     const creator = this.propCreator;
     creator.showSaveButton = false;
     creator.isAutoSave = false;
+    creator.showTabsDefault = false;
+    creator.showToolbarDefault = false;
+    creator.allowCollapseSidebar = false;
+    creator.sidebar.toolbar.setItems([]);
+    creator.setPropertyGridDefinition({
+      autoGenerateProperties: false,
+      classes: {
+        question: {
+          properties: [
+            "name",
+            "title"
+          ]
+        }
+      }
+    });
+    creator.onSurveyInstanceCreated.add((sender, options) => {
+      if(options.area === "property-grid") {
+        const survey = options.survey;
+        if(survey.state === "empty") return;
+        const page = options.survey.pages[0];
+        survey.getAllPanels().forEach(panel => {
+          (<PanelModel>panel).questions.forEach(q => {
+            page.addElement(q);
+          });
+        });
+        const nameQuestion = survey.getQuestionByName("name");
+        nameQuestion.readOnly = true;
+        nameQuestion.description = "";
+        nameQuestion.title = "Property name";
+        const titleQuestion = survey.getQuestionByName("title");
+        titleQuestion.description = "";
+        titleQuestion.title = "Property description";
+      }
+    });
   }
 }
 export class CreatorEditablePresetPropertyGrid extends CreatorPresetEditableBase {

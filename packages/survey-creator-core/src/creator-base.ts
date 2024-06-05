@@ -3631,9 +3631,10 @@ export class SurveyCreatorModel extends Base
   public set showPageNavigator(val: boolean) {
     this.showPageNavigatorValue = val;
   }
-
-  @property({ getDefaultValue: () => { return settings.layout.showTabs; } }) showTabs;
-  @property({ getDefaultValue: () => { return settings.layout.showToolbar; } }) showToolbar;
+  public showTabsDefault: boolean = settings.layout.showTabs;
+  public showToolbarDefault: boolean = settings.layout.showToolbar;
+  @property({ getDefaultValue: (obj: any) => { return obj.showTabsDefault; } }) showTabs;
+  @property({ getDefaultValue: (obj: any) => { return obj.showToolbarDefault; } }) showToolbar;
   @property({ getDefaultValue: () => { return settings.layout.allowCollapseSidebar; } }) allowCollapseSidebar;
   @property({
     defaultValue: false, onSet: (val, creator: SurveyCreatorModel) => {
