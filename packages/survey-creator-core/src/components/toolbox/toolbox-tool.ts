@@ -1,4 +1,4 @@
-import { Base, SurveyModel, DragOrClickHelper, ActionContainer, ListModel, BaseAction, property, CssClassBuilder } from "survey-core";
+import { Base, DragOrClickHelper, ActionContainer, ListModel } from "survey-core";
 import { IQuestionToolboxItem, QuestionToolboxItem } from "../../toolbox";
 import { SurveyCreatorModel } from "../../creator-base";
 import { DragDropSurveyElements } from "../../survey-elements";
