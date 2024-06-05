@@ -28,9 +28,13 @@
 }
 
 .spg-input:disabled,
-.spg-input:disabled::placeholder,
-.spg-input:read-only,
-.spg-input:read-only::placeholder {
+.spg-input:disabled::placeholder {
+  color: $foreground;
+  opacity: 0.25;
+}
+
+input.spg-input:read-only,
+input.spg-input:read-only::placeholder {
   color: $foreground;
   opacity: 0.25;
 }
