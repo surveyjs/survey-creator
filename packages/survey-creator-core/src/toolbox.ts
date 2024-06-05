@@ -261,6 +261,11 @@ export class QuestionToolbox
   @property() forceCompact: boolean;
   private categoriesTitles: HashTable<string> = {};
 
+  /**
+   * Specifies whether to display a search field that allows users to find question and panel types within the toolbox.
+   * 
+   * Default value: `true`
+   */
   @property({
     defaultValue: true,
     onSet: (val: boolean, target: QuestionToolbox) => {
