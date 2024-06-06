@@ -812,11 +812,14 @@ svc-question,
   }
 }
 
-.svc-question__content--ranking {
-  .svc-carry-forward-panel {
-    margin-top: 0;
+.sv-ranking:not(.sv-ranking--select-to-rank) {
+  .svc-question__content--ranking {
+    .svc-carry-forward-panel {
+      margin-top: 0;
+    }
   }
 }
+
 
 .svc-required-action {
   .sv-svg-icon {
