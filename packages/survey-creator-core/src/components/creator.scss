@@ -48,7 +48,7 @@ survey-creator,
 .svc-creator__content-wrapper {
   width: 100%;
   height: 0;
-    flex-grow: 1;
+  flex-grow: 1;
 }
 
 
@@ -117,7 +117,8 @@ survey-creator,
   @include defaultBold;
   vertical-align: middle;
   padding: calcSize(1.5) calcSize(16);
-    display: block;
+  display: block;
+
   a {
     color: $primary-foreground;
   }
@@ -128,6 +129,7 @@ survey-creator,
     padding: calcSize(1.5) calcSize(5);
   }
 }
+
 .sv-drag-drop-ghost {
   top: calcSize(0.75);
   width: 100%;
@@ -144,4 +146,15 @@ survey-creator,
 .sv-drag-drop-ghost--item-value-bottom {
   top: initial;
   bottom: calcSize(-0.5);
+}
+
+.svc-creator-tab__content {
+
+  .sd-progress-buttons__list .sd-progress-buttons__list-element--current,
+  .sd-progress-buttons__list .sd-progress-buttons__list-element--passed {
+    &>.sd-progress-buttons__connector {
+      background-color: var(--sjs-general-dim-forecolor-light, rgba(0, 0, 0, 0.45));
+      opacity: 0.5;
+    }
+  }
 }
