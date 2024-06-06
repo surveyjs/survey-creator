@@ -1014,3 +1014,45 @@ test("Check subcategory order", (): any => {
     Serializer.getProperty("theme", "questionTitle").visible = true;
   }
 });
+
+test("header survey title font color changed", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { title: "Survey Title", questions: [{ type: "text", name: "q1" }] };
+
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const groupHeader = themePlugin.propertyGrid.survey.pages[0].getElementByName("header");
+  const headerViewContainer = groupHeader.elements[0].contentPanel;
+  const headerTitleQuestion = headerViewContainer.getElementByName("headerTitle");
+
+  expect(creator.theme.header).toEqual(undefined);
+
+  let currentThemeCssVariables = creator.theme.cssVariables || {};
+  expect(currentThemeCssVariables["--sjs-font-headertitle-family"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs-font-headertitle-weight"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs-font-headertitle-size"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs-font-headertitle-color"]).toBeUndefined();
+
+  headerViewContainer.getElementByName("headerView").value = "advanced";
+
+  currentThemeCssVariables = creator.theme.cssVariables || {};
+  expect(currentThemeCssVariables["--sjs-font-headertitle-family"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs-font-headertitle-weight"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs-font-headertitle-size"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs-font-headertitle-color"]).toBeUndefined();
+
+  // headerTitleQuestion.contentPanel.getQuestionByName("color").value = "#FBFF24";
+  // headerTitleQuestion.contentPanel.getQuestionByName("weight").value = "400";
+  headerTitleQuestion.contentPanel.getQuestionByName("size").value = 39;
+  // headerTitleQuestion.contentPanel.getQuestionByName("family").value = "Georgia";
+
+  currentThemeCssVariables = creator.theme.cssVariables || {};
+  expect(currentThemeCssVariables["--sjs-font-headertitle-family"]).toBeUndefined();
+  // expect(currentThemeCssVariables["--sjs-font-headertitle-family"]).toBe("Georgia");
+  expect(currentThemeCssVariables["--sjs-font-headertitle-weight"]).toBeUndefined();
+  // expect(currentThemeCssVariables["--sjs-font-headertitle-weight"]).toBe("400");
+  // expect(currentThemeCssVariables["--sjs-font-headertitle-size"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs-font-headertitle-size"]).toBe("39px");
+  expect(currentThemeCssVariables["--sjs-font-headertitle-color"]).toBeUndefined();
+  // expect(currentThemeCssVariables["--sjs-font-headertitle-color"]).toBe("#FBFF24");
+});
