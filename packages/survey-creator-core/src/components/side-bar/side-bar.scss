@@ -1,5 +1,10 @@
 @import "../../variables.scss";
 
+$side-bar-enter-duration: var(--svc-side-bar-enter-duration, 500ms);
+$side-bar-leave-duration: var(--svc-side-bar-leave-duration, 500ms);
+
+$cubic-ease-out: cubic-bezier(0.33, 1, 0.68, 1);
+$reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
 .svc-side-bar__container {
   display: block;
   position: relative;
@@ -7,6 +12,81 @@
   min-width: 370px;
   width: 450px;
   height: 100%;
+}
+@keyframes sideBarMoveIn {
+  from {
+    width: 0;
+  }
+  to {
+    width: var(--animation-width);
+  }
+}
+@keyframes flyoutSideBarShadowFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.75;
+  }
+}
+@keyframes flyoutSideBarMoveIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+.svc-side-bar--leave,
+.svc-side-bar--enter {
+  min-width: 0;
+  animation-fill-mode: forwards;
+  animation-name: sideBarMoveIn;
+}
+.svc-side-bar--enter {
+  animation-duration: $side-bar-enter-duration;
+  animation-timing-function: $cubic-ease-out;
+}
+.svc-side-bar--leave {
+  animation-duration: $side-bar-leave-duration;
+  animation-direction: reverse;
+  animation-timing-function: $reverse-cubic-ease-out;
+}
+.svc-flyout-side-bar.svc-side-bar--enter,
+.svc-flyout-side-bar.svc-side-bar--leave {
+  animation-name: empty;
+  .svc-side-bar__shadow {
+    animation-fill-mode: forwards;
+    animation-name: flyoutSideBarShadowFadeIn;
+  }
+  .svc-side-bar__wrapper {
+    animation-fill-mode: forwards;
+    animation-name: flyoutSideBarMoveIn;
+  }
+}
+.svc-flyout-side-bar.svc-side-bar--enter {
+  animation-duration: $side-bar-enter-duration;
+  .svc-side-bar__shadow {
+    animation-duration: $side-bar-enter-duration;
+    animation-timing-function: $cubic-ease-out;
+  }
+  .svc-side-bar__wrapper {
+    animation-duration: $side-bar-enter-duration;
+    animation-timing-function: $cubic-ease-out;
+  }
+}
+.svc-flyout-side-bar.svc-side-bar--leave {
+  animation-duration: $side-bar-leave-duration;
+  .svc-side-bar__shadow {
+    animation-duration: $side-bar-leave-duration;
+    animation-timing-function: $reverse-cubic-ease-out;
+    animation-direction: reverse;
+  }
+  .svc-side-bar__wrapper {
+    animation-duration: $side-bar-leave-duration;
+    animation-timing-function: $reverse-cubic-ease-out;
+    animation-direction: reverse;
+  }
 }
 
 .svc-side-bar__container .svc-resizer {
@@ -75,7 +155,6 @@
     padding: 0;
   }
 }
-
 
 .svc-flex-column.svc-side-bar__wrapper {
   width: auto;
@@ -152,7 +231,6 @@
 
 .svd-grid-hide {
   margin-inline-end: auto;
-
 }
 
 .sv-mobile-side-bar {

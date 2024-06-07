@@ -61,7 +61,6 @@ export class CreatorResponsivityManager {
     this.creator.updateToolboxIsCompact(toolboxIsCompact);
     this.procesShowToolbox(toolboxVisible);
     this.procesShowPageNavigator(toolboxVisible);
-    this.creator.sidebar.flyoutMode = flyoutSidebar;
 
     if (this.creator.sidebar.visible && !flyoutSidebar) {
       this.creator.sidebar.collapsedManually = false;
@@ -72,6 +71,7 @@ export class CreatorResponsivityManager {
     if (!this.creator.sidebar.visible && !this.creator.sidebar.collapsedManually && !flyoutSidebar && this.creator.toolboxLocation != "right") {
       this.creator.sidebar.expandSidebar();
     }
+    this.creator.sidebar.flyoutMode = flyoutSidebar;
 
   }
   process() {

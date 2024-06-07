@@ -2,7 +2,7 @@
   <div class="svc-side-bar" [class.svc-flyout-side-bar]="model.flyoutPanelMode" [visible]="model.hasVisibleTabs">
     <div class="svc-side-bar__shadow" (click)="model.collapseSidebar()"></div>
     <div class="svc-flex-column svc-side-bar__wrapper">
-      <div class="svc-side-bar__container" [visible]="model.visible" #container>
+      <div class="svc-side-bar__container" [visible]="model.renderedIsVisible" #container>
         <div class="svc-side-bar__container-header">
           <div class="svc-side-bar__container-actions">
             <sv-action-bar [model]="model.toolbar"></sv-action-bar>
@@ -11,7 +11,7 @@
         </div>
         <div class="svc-side-bar__container-content">
           <ng-container *ngFor="let tab of model.tabs">
-            <svc-side-bar-tab [model]="tab"></svc-side-bar-tab> 
+            <svc-side-bar-tab [model]="tab"></svc-side-bar-tab>
           </ng-container>
         </div>
       </div>

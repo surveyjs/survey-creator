@@ -1,5 +1,4 @@
-import { Base, property, AdaptiveActionContainer, Action, ComputedUpdater, propertyArray } from "survey-core";
-import { settings } from "../../creator-settings";
+import { Base, property, AdaptiveActionContainer, Action, ComputedUpdater, propertyArray, AnimationBoolean, IAnimationConsumer } from "survey-core";
 import { getLocString } from "../../editorLocalization";
 import { SurveyCreatorModel } from "../../creator-base";
 import { SidebarTabModel } from "./side-bar-tab-model";
@@ -16,7 +15,8 @@ export class SidebarModel extends Base {
 
   @propertyArray() tabs: Array<SidebarTabModel>;
   @property() headerText: string;
-  @property({ defaultValue: true }) visible: boolean;
+  @property({ defaultValue: true }) _visible: boolean;
+  @property({ defaultValue: true }) renderedIsVisible: boolean
   @property({ defaultValue: false }) collapsedManually: boolean;
   @property({ defaultValue: false }) expandedManually: boolean;
   @property() hasVisibleTabs: boolean;
@@ -32,8 +32,51 @@ export class SidebarModel extends Base {
     }
   }) activeTab: string;
 
+  private rootElement: HTMLElement;
+
+  private getAnimationOptions(): IAnimationConsumer {
+    const onBeforeRunAnimation = (el) => {
+      el.style.setProperty("--animation-width", el.offsetWidth + "px");
+    };
+    return {
+      getAnimatedElement: () => {
+        return this.rootElement;
+      },
+      isAnimationEnabled: () => this.animationAllowed,
+      getRerenderEvent: () => this.onElementRerendered,
+      getLeaveOptions: () => {
+        return {
+          onBeforeRunAnimation: onBeforeRunAnimation,
+          cssClass: "svc-side-bar--leave"
+        };
+      },
+      getEnterOptions: () => {
+        return {
+          onBeforeRunAnimation: (el) => onBeforeRunAnimation,
+          cssClass: "svc-side-bar--enter" };
+      }
+    };
+  }
+  private allowFlyoutMode: boolean = true;
+  public visibilityAnimation = new AnimationBoolean(this.getAnimationOptions(), (val: boolean) => {
+    this.renderedIsVisible = val;
+    this.allowFlyoutMode = true;
+  }, () => this.renderedIsVisible);
+  public set visible(val: boolean) {
+    if(this._visible && !val && !this.flyoutMode) {
+      this.allowFlyoutMode = false;
+    }
+    if(this._visible !== val) {
+      this._visible = val;
+      this.visibilityAnimation.sync(val);
+    }
+  }
+  public get visible(): boolean {
+    return this._visible;
+  }
+
   public get flyoutPanelMode(): boolean {
-    return this.visible && this.flyoutMode;
+    return this.renderedIsVisible && this.flyoutMode && this.allowFlyoutMode;
   }
 
   public get closeText(): string {
@@ -108,7 +151,6 @@ export class SidebarModel extends Base {
     this.visible = this.creator.showSidebar;
     this.createActions();
   }
-
   public getExpandAction() {
     return this._expandAction;
   }
@@ -140,11 +182,13 @@ export class SidebarModel extends Base {
   }
   public initResizeManager(container: HTMLDivElement): void {
     this.resizeManager = new ResizeManager(container, this.getCurrentHandles());
+    this.rootElement = container?.parentElement?.parentElement;
   }
   public resetResizeManager(): void {
     if (!!this.resizeManager) {
       this.resizeManager.dispose();
       this.resizeManager = undefined;
     }
+    this.rootElement = undefined;
   }
 }
