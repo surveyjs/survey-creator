@@ -147,14 +147,3 @@ survey-creator,
   top: initial;
   bottom: calcSize(-0.5);
 }
-
-.svc-creator-tab__content {
-
-  .sd-progress-buttons__list .sd-progress-buttons__list-element--current,
-  .sd-progress-buttons__list .sd-progress-buttons__list-element--passed {
-    &>.sd-progress-buttons__connector {
-      background-color: var(--sjs-general-dim-forecolor-light, rgba(0, 0, 0, 0.45));
-      opacity: 0.5;
-    }
-  }
-}
