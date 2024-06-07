@@ -1,7 +1,8 @@
 import { JsonObjectProperty, ItemValue, MatrixDropdownRowModelBase, QuestionDropdownModel,
   QuestionMatrixDynamicModel, Base, Serializer, SurveyModel, ElementContentVisibilityChangedEvent,
   matrixDropdownColumnTypes,
-  PanelModel } from "survey-core";
+  PanelModel,
+  IAction } from "survey-core";
 import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
 import { SurveyCreatorModel } from "../../creator-base";
 import { defaultPropertyGridDefinition, ISurveyPropertyGridDefinition, ISurveyPropertiesDefinition } from "../../question-editor/definition";
@@ -12,6 +13,8 @@ import { QuestionEmbeddedSurveyModel } from "../../components/embedded-survey";
 import { QuestionEmbeddedCreatorModel } from "../../components/embedded-creator";
 import { ICreatorOptions } from "../../creator-options";
 import { settings } from "../../creator-settings";
+import { IQuestionToolboxItem } from "../../toolbox";
+require("./presets-editable-properties.scss");
 
 export class SurveyQuestionPresetProperties extends SurveyQuestionProperties {
   constructor(obj, className: string, propertyGridDefinition: ISurveyPropertyGridDefinition) {
@@ -71,6 +74,7 @@ export class SurveyQuestionPresetPropertiesDetail {
   public dispose(): void {
     //TODO
   }
+  public getAllPropertiesNames(): Array<string> { return this.allPropertiesNames; }
   public get propertyGrid(): PropertyGridModel { return this.propertyGridValue; }
   public getRows(): Array<any> {
     const rows = [];
@@ -303,8 +307,8 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     matrix.value = this.currentProperties.getRows();
     this.updateEmbeddedSurvey(model);
 
-    this.propCreator.JSON = this.currentProperties.propertyGrid.survey.toJSON();
-
+    this.propCreator.JSON = this.updateCreatorJSON(this.currentProperties.propertyGrid.survey.toJSON());
+    this.setupCreatorToolbox(this.propCreator);
     this.isMatrixValueChanged = false;
     this.isMatrixValueSetting = false;
   }
@@ -425,9 +429,16 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     creator.showToolbarDefault = false;
     creator.allowCollapseSidebar = false;
     creator.sidebar.toolbar.setItems([]);
+    creator.showAddQuestionButton = false;
     creator.setPropertyGridDefinition({
       autoGenerateProperties: false,
       classes: {
+        panel: {
+          properties: [
+            "name",
+            "title"
+          ]
+        },
         question: {
           properties: [
             "name",
@@ -454,7 +465,94 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
         titleQuestion.description = "";
         titleQuestion.title = "Property description";
       }
+      if(options.reason === "designer") {
+        const model = options.survey;
+        const getElementWrapperComponentNamePrev = model.getElementWrapperComponentName;
+        model.getElementWrapperComponentName = (element: any, reason?: string): string => {
+          let res = getElementWrapperComponentNamePrev.call(model, element, reason);
+          if(res === "svc-dropdown-question") {
+            res = "svc-question";
+          }
+          return res;
+        };
+      }
     });
+    creator.onSelectedElementChanging.add((sender, options) => {
+      const el = <any>options.newSelectedElement;
+      if(!!el && (el.isPage || el === creator.survey)) {
+        options.newSelectedElement = creator.selectedElement;
+      }
+    });
+    creator.onElementAllowOperations.add((sender, options) => {
+      options.allowChangeInputType = false;
+      options.allowChangeRequired = false;
+      options.allowChangeType = false;
+      options.allowCopy = false;
+      options.allowShowSettings = false;
+      options.allowDelete = true;
+      options.allowEdit = true;
+    });
+    creator.onCollectionItemAllowOperations.add((sender, options) => {
+      options.allowEdit = false;
+      options.allowAdd = false;
+      options.allowDelete = false;
+    });
+    creator.onQuestionAdded.add((sender, options) => {
+      this.setupCreatorToolbox(sender);
+    });
+    creator.onModified.add((sender, options) => {
+      if(options.type === "OBJECT_DELETED" && (<any>options.target)?.isQuestion) {
+        this.setupCreatorToolbox(sender);
+      }
+    });
+    creator.getElementAddornerCssCallback = (obj: Base, className: string): string =>
+    { return className + " preset_pg_question"; };
+  }
+  private updateCreatorJSON(json: any): any {
+    if(!json || !json.pages || !json.pages[0] || !json.pages[0].elements) return;
+    this.updateCreatorJSONElements(json.pages[0].elements);
+    return json;
+  }
+  private updateCreatorJSONElements(elements: Array<any>): void {
+    for(let i = elements.length - 1; i >= 0; i --) {
+      const el = elements[i];
+      if(Array.isArray(el.elements)) {
+        this.updateCreatorJSONElements(el.elements);
+      }
+      if(!!el.name && el.name.indexOf("overridingProperty")> -1) {
+        elements.splice(i, 1);
+      } else {
+        const type = el.type;
+        if(type === "textwithreset") {
+          el.type = "text";
+        }
+        if(type === "commentwithreset") {
+          el.type = "comment";
+        }
+      }
+    }
+  }
+  private setupCreatorToolbox(creator: SurveyCreatorModel): void {
+    const elements: IQuestionToolboxItem[] = [{ name: "panel", title: "Category", className: "panel", json: { type: "panel" }, iconName: "panel" }];
+    const propGrid = this.currentProperties.propertyGrid.survey;
+    const survey = this.propCreator.survey;
+    const allProps = this.currentProperties.getAllPropertiesNames();
+    allProps.forEach(propName => {
+      if(!survey.getQuestionByName(propName) && propGrid.getQuestionByName(propName)) {
+        const q = propGrid.getQuestionByName(propName);
+        const json = q.toJSON();
+        json.type = q.getType();
+        elements.push({
+          name: propName,
+          title: q.title,
+          className: q.getType(),
+          iconName: "text",
+          json: json
+        });
+      }
+    });
+
+    creator.toolbox.addItems(elements, true);
   }
 }
 export class CreatorEditablePresetPropertyGrid extends CreatorPresetEditableBase {

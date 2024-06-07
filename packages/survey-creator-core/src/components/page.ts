@@ -177,7 +177,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       result = "svc-question__content--drag-over-inside";
     } else if (!!this.dragTypeOverMe && this.page.elements.length === 0 && this.creator.survey.pages.length > 0) {
       result = "svc-page--drag-over-empty";
-      if (!settings.designer.showAddQuestionButton) {
+      if (!!this.creator && !this.creator.showAddQuestionButton) {
         result += " svc-page--drag-over-empty-no-add-button";
       }
     }

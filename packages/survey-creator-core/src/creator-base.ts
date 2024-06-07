@@ -3032,6 +3032,7 @@ export class SurveyCreatorModel extends Base
   set alwaySaveTextInPropertyEditors(value: boolean) {
     this.alwaySaveTextInPropertyEditorsValue = value;
   }
+  getElementAddornerCssCallback(obj: Base, className: string): string { return className; }
   onCanShowPropertyCallback(
     object: any,
     property: JsonObjectProperty,
@@ -3636,6 +3637,7 @@ export class SurveyCreatorModel extends Base
   @property({ getDefaultValue: (obj: any) => { return obj.showTabsDefault; } }) showTabs;
   @property({ getDefaultValue: (obj: any) => { return obj.showToolbarDefault; } }) showToolbar;
   @property({ getDefaultValue: () => { return settings.layout.allowCollapseSidebar; } }) allowCollapseSidebar;
+  @property({ getDefaultValue: () => { return settings.designer.showAddQuestionButton; } }) showAddQuestionButton;
   @property({
     defaultValue: false, onSet: (val, creator: SurveyCreatorModel) => {
       creator.survey.setIsMobile(!!val);

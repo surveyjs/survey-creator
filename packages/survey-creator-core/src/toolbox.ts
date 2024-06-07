@@ -50,11 +50,11 @@ export interface IQuestionToolboxItem extends IAction {
   /**
    * True, if an end user added this item into Toolbox from the survey.
    */
-  isCopied: boolean;
+  isCopied?: boolean;
   /**
    * Toolbox item category. If it is empty, it goes to 'General' category.
    */
-  category: string;
+  category?: string;
 }
 
 export interface IQuestionToolbox {

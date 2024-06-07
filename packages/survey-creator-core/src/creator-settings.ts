@@ -216,6 +216,7 @@ export interface ISurveyCreatorOptions {
   rootElement?: HTMLElement;
   previewShowResults: boolean;
   getObjectDisplayName(obj: Base, area: string, reason: string, displayName: string): string;
+  getElementAddornerCssCallback(obj: Base, className: string): string;
   onCanShowPropertyCallback(
     object: any,
     property: JsonObjectProperty,
@@ -367,6 +368,7 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   ): boolean {
     return true;
   }
+  getElementAddornerCssCallback(obj: Base, className: string): string { return className; }
   onPropertyGridSurveyCreatedCallback(
     object: any,
     survey: SurveyModel
