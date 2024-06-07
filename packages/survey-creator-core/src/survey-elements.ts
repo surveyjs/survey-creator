@@ -96,7 +96,9 @@ export class DragDropSurveyElements extends DragDropCore<any> {
 
     textSpan.className = "svc-dragged-element-shortcut__text";
     textSpan.innerText = text;
-    draggedElementShortcut.appendChild(this.createDraggedElementIcon());
+    if (this.draggedElement.toolboxItemIconName) {
+      draggedElementShortcut.appendChild(this.createDraggedElementIcon());
+    }
     draggedElementShortcut.appendChild(textSpan);
     draggedElementShortcut.className = this.getDraggedElementClass();
     return draggedElementShortcut;
@@ -104,13 +106,12 @@ export class DragDropSurveyElements extends DragDropCore<any> {
 
   protected createDraggedElementIcon(): HTMLElement {
     const span = document.createElement("span");
-    const iconName = this.draggedElement.toolboxItemIconName;
     span.className = "svc-dragged-element-shortcut__icon";
 
-    if (!!iconName) {
-      const svgString = `<svg class="sv-svg-icon" role="img" style="width: 24px; height: 24px;"><use xlink:href="#${iconName}"></use></svg>`;
-      span.innerHTML = svgString;
-    }
+    const iconName = this.draggedElement.toolboxItemIconName;
+    const svgString = `<svg class="sv-svg-icon" role="img" style="width: 24px; height: 24px;"><use xlink:href="#${iconName}"></use></svg>`;
+    span.innerHTML = svgString;
+
     return span;
   }
 

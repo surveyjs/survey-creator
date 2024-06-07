@@ -388,7 +388,7 @@ export class QuestionToolbox
       name: name,
       title: title,
       tooltip: tooltip,
-      className: "svc-toolbox__item svc-toolbox__item--" + iconName,
+      className: this.getItemClassNames(iconName),
       isCopied: options.isCopied !== false,
       iconName: iconName,
       json: !!options.json ? options.json : this.getQuestionJSON(question),
@@ -432,7 +432,7 @@ export class QuestionToolbox
         id: ch,
         name: ch,
         title: editorLocalization.getPropertyValueInEditor(propName, ch),
-        className: parentItem.className,
+        className: this.getItemClassNames() + " svc-toolbox__item-subtype",
         json: newJson,
         iconName: null,
         category: null,
@@ -859,7 +859,7 @@ export class QuestionToolbox
         iconName: iconName,
         title: title,
         tooltip: title,
-        className: "svc-toolbox__item svc-toolbox__item--" + iconName,
+        className: this.getItemClassNames(iconName),
         json: json,
         isCopied: false,
         category: (defaultCategories[name] || "")
@@ -895,6 +895,13 @@ export class QuestionToolbox
     var items = instanceOwner.Instance["items"];
     return !!items ? items : [];
   }
+  private getItemClassNames(iconName?: string): string {
+    return new CssClassBuilder()
+      .append("svc-toolbox__item")
+      .append("svc-toolbox__item--has-icon", !!iconName)
+      .append("svc-toolbox__item--" + iconName, !!iconName)
+      .toString();
+  }
   private addItemFromJSON(json: any) {
     if (json.showInToolbox === false) return;
     const iconName: string = json.iconName ? json.iconName : QuestionToolbox.defaultIconName;
@@ -916,7 +923,7 @@ export class QuestionToolbox
       iconName: iconName,
       title: title,
       tooltip: title,
-      className: "svc-toolbox__item svc-toolbox__item--" + iconName,
+      className: this.getItemClassNames(iconName),
       json: elementJson,
       isCopied: false,
       category: category

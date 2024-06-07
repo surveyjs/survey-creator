@@ -489,7 +489,7 @@ test("Add customWidgets into toolbox", (): any => {
   expect(toolbox.items[0].name).toEqual("radiogroup");
   expect(toolbox.items[1].name).toEqual("dropdown");
   expect(toolbox.items[2].name).toEqual("first");
-  expect(toolbox.items[2].className).toEqual("svc-toolbox__item svc-toolbox__item--firsticon");
+  expect(toolbox.items[2].className).toEqual("svc-toolbox__item svc-toolbox__item--has-icon svc-toolbox__item--firsticon");
   expect(toolbox.items[3].name).toEqual("second");
   expect(toolbox.items[4].name).toEqual("comp1");
   CustomWidgetCollection.Instance.clear();

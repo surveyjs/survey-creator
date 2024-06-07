@@ -215,24 +215,27 @@
     background-color: unset;
   }
 
-  .svc-toolbox__item:not(.sv-dots),
-  .svc-toolbox__item:not(.sv-dots) {
-    opacity: var(--ctr-toolbox-item-opacity-second-level, 0.35);
+  .svc-toolbox__item.svc-toolbox__item-subtype:not(.sv-dots),
+  .svc-toolbox__item.svc-toolbox__item-subtype:not(.sv-dots) {
+    opacity: var(--ctr-toolbox-item-opacity-second-level, 0.75);
     overflow: hidden;
     border-radius: calcSize(12.5);
-    background-color: $background-dim;
-    box-shadow: $shadow-medium;
+    background-color: $background-dim-light;
+    box-shadow: $shadow-small, $shadow-medium;
     transition: 0.1s ease-in-out;
+    padding: calcSize(1.5) calcSize(2);
 
-    &:hover,&:focus{
+    &:hover,
+    &:focus {
       background-color: $background;
+      opacity: 1;
     }
     .svc-toolbox__item-title {
       color: $foreground-dim;
     }
   }
-  .svc-toolbox__item:not(.sv-dots):hover,
-  .svc-toolbox__item:not(.sv-dots):focus {
-    opacity: 1;
+
+  .svc-toolbox__item-title {
+    padding: 0;
   }
 }
