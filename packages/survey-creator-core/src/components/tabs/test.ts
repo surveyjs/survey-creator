@@ -14,7 +14,7 @@ export class TestSurveyTabViewModel extends Base {
   public prevPageAction: Action;
   public testAgainAction: Action;
   public nextPageAction: Action;
-  private selectPageAction: Action;
+  public selectPageAction: Action;
   onSurveyCreatedCallback: (survey: SurveyModel) => any;
 
   public simulator: SurveySimulatorModel;
@@ -247,6 +247,9 @@ export class TestSurveyTabViewModel extends Base {
       selectedItem: this.getCurrentPageItem(),
       onSelectionChanged: (item: IAction) => {
         this.activePage = item.data;
+        for (let i = 0; i < this.survey.pages.length && this.survey.pages[i] !== this.activePage; i++) {
+          this.survey.pages[i].passed = true;
+        }
       },
       verticalPosition: "top",
       horizontalPosition: "center"
