@@ -2071,13 +2071,11 @@ export class SurveyCreatorModel extends Base
     const hash: any = {};
     hash["designer"] = "designer-tab";
     hash["test"] = "preview-tab";
-    hash["property-grid"] = "property-grid";
     hash["default-value"] = "default-value-popup-editor";
     hash["condition-builder"] = "logic-rule:condition-editor";
     hash["logic-item-editor"] = "logic-rule:action-editor";
     hash["logic-items"] = "logic-tab:condition-list";
     hash["theme"] = "theme-tab";
-    hash["theme_editor"] = "theme-tab:property-grid";
     hash["translation_settings"] = "translation-tab:language-list";
     hash["translation_strings"] = "translation-tab:table";
     hash["translation_strings_header"] = "translation-tab:table-header";
@@ -2085,7 +2083,7 @@ export class SurveyCreatorModel extends Base
     hash["fast-entry"] = "table-values-popup-editor";
     hash["modal-question-editor"] = "matrix-cell-question-popup-editor";
     const res = hash[reason];
-    return !!res ? res : "internal-use";
+    return !!res ? res : reason;
   }
   protected createSurveyCore(json: any = {}, reason: string): SurveyModel {
     return new SurveyModel(json);
