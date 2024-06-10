@@ -20,6 +20,8 @@ const themeModelProperties: ISurveyPropertiesDefinition = {
       { name: "--sjs-primary-backcolor-light", tab: "appearanceprimarycolor" },
       { name: "--sjs-primary-forecolor", tab: "appearanceprimarycolor" },
       { name: "--sjs-primary-forecolor-light", tab: "appearanceprimarycolor" },
+      { name: "--sjs-special-red", tab: "appearanceprimarycolor" },
+      { name: "--sjs-special-red-light", tab: "appearanceprimarycolor" },
 
       { name: "--sjs-font-family", tab: "appearancefont" },
       { name: "fontSize", tab: "appearancefont" },

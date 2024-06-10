@@ -826,8 +826,6 @@ Serializer.addProperties("theme",
   { name: "--sjs-border-light", visible: false },
   { name: "--sjs-border-default", visible: false },
   { name: "--sjs-border-inside", visible: false },
-  { name: "--sjs-special-red", visible: false },
-  { name: "--sjs-special-red-light", visible: false },
   { name: "--sjs-special-red-forecolor", visible: false },
   { name: "--sjs-special-green", visible: false },
   { name: "--sjs-special-green-light", visible: false },
@@ -927,6 +925,25 @@ Serializer.addProperties("theme",
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
         editor.colorTitle = getLocString("theme.primaryForecolorLight");
+        editor.colorTitleLocation = "left";
+      }
+    }
+  }, {
+    type: "coloralpha",
+    name: "--sjs-special-red",
+    onPropertyEditorUpdate: function (obj: any, editor: any) {
+      if (!!editor) {
+        editor.colorTitle = getLocString("theme.fontColor");
+        editor.colorTitleLocation = "left";
+      }
+    }
+  }, {
+    type: "coloralpha",
+    name: "--sjs-special-red-light",
+    displayName: "",
+    onPropertyEditorUpdate: function (obj: any, editor: any) {
+      if (!!editor) {
+        editor.colorTitle = getLocString("theme.backgroundColor");
         editor.colorTitleLocation = "left";
       }
     }

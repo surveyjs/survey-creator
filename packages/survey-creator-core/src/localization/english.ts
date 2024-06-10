@@ -877,6 +877,7 @@ export var enStrings = {
       "--sjs-general-backcolor-dim": "Background color",
       "--sjs-primary-backcolor": "Accent background",
       "--sjs-primary-forecolor": "Accent foreground",
+      "--sjs-special-red": "Error",
       "--sjs-shadow-small": "Shadow effects",
       "--sjs-shadow-inner": "Shadow effects",
       "--sjs-border-default": "Colors",
@@ -1571,6 +1572,9 @@ export var enStrings = {
     backcolor: "Default background",
     hovercolor: "Hover background",
     borderDecoration: "Border decoration",
+
+    fontColor: "Font color",
+    backgroundColor: "Background color",
 
     primaryForecolor: "Default color",
     primaryForecolorLight: "Disabled color",
