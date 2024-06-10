@@ -8,7 +8,7 @@ export class PreviewViewModel extends Base {
   static tagRegex = /(<([^>]+)>)/ig;
   public enableInvisiblePages: boolean = true;
   private json: any;
-  private pages: ActionContainer = new ActionContainer();
+  public pages: ActionContainer = new ActionContainer();
   public prevPageAction: Action;
   public nextPageAction: Action;
   public selectPageAction: Action;
