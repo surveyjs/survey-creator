@@ -1056,3 +1056,21 @@ test("header survey title font color changed", (): any => {
   expect(currentThemeCssVariables["--sjs-font-headertitle-color"]).toBeUndefined();
   // expect(currentThemeCssVariables["--sjs-font-headertitle-color"]).toBe("#FBFF24");
 });
+
+test("header editable after theme changed", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { title: "Survey Title", questions: [{ type: "text", name: "q1" }] };
+
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const groupHeader = themePlugin.propertyGrid.survey.pages[0].getElementByName("header");
+  const headerViewContainer = groupHeader.elements[0].contentPanel;
+  const headerTitleQuestion = headerViewContainer.getElementByName("headerTitle");
+  const themeChooser = themePlugin.propertyGrid.survey.getQuestionByName("themeName") as QuestionDropdownModel;
+
+  themeChooser.value = "flat";
+  expect(headerTitleQuestion.isVisible).toBe(false);
+
+  headerViewContainer.getElementByName("headerView").value = "advanced";
+  expect(headerTitleQuestion.isVisible).toBe(true);
+});

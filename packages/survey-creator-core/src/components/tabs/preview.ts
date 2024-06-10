@@ -11,7 +11,7 @@ export class PreviewViewModel extends Base {
   private pages: ActionContainer = new ActionContainer();
   public prevPageAction: Action;
   public nextPageAction: Action;
-  private selectPageAction: Action;
+  public selectPageAction: Action;
   public testAgainAction: Action;
   public simulator: SurveySimulatorModel;
   onSurveyCreatedCallback: (survey: SurveyModel) => any;
@@ -251,6 +251,9 @@ export class PreviewViewModel extends Base {
       selectedItem: this.getCurrentPageItem(),
       onSelectionChanged: (item: IAction) => {
         this.activePage = item.data;
+        for (let i = 0; i < this.survey.pages.length && this.survey.pages[i] !== this.activePage; i++) {
+          this.survey.pages[i].passed = true;
+        }
       },
       verticalPosition: "top",
       horizontalPosition: "center"
