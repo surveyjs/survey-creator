@@ -1545,6 +1545,80 @@ test("Check carry forward panel ranking", async (t) => {
     await takeElementScreenshot("carry-forward-panel-ranking.png", rootSelector, t, comparer);
   });
 });
+
+test("Check carry forward panel ranking: selectToRank", async (t) => {
+  await t.resizeWindow(1920, 1920);
+  await setJSON(
+    {
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "checkbox",
+              "name": "question1",
+              "choices": [
+                "Item 1",
+                "Item 2",
+                "Item 3"
+              ]
+            },
+            {
+              "type": "ranking",
+              "name": "question2",
+              "choicesFromQuestion": "question1",
+              "choicesFromQuestionMode": "selected",
+              "selectToRankEnabled": true
+            }
+          ]
+        }
+      ]
+    });
+
+  await wrapVisualTest(t, async (t, comparer) => {
+    const rootSelector = Selector(".svc-question__adorner").nth(1);
+    await takeElementScreenshot("carry-forward-panel-ranking-select-to-rank.png", rootSelector, t, comparer);
+  });
+});
+
+test("Check carry forward panel ranking: selectToRank vertical", async (t) => {
+  await t.resizeWindow(1920, 1920);
+  await setJSON(
+    {
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "checkbox",
+              "name": "question1",
+              "choices": [
+                "Item 1",
+                "Item 2",
+                "Item 3"
+              ]
+            },
+            {
+              "type": "ranking",
+              "name": "question2",
+              "choicesFromQuestion": "question1",
+              "choicesFromQuestionMode": "selected",
+              "selectToRankEnabled": true,
+              "selectToRankAreasLayout": "vertical"
+            }
+          ]
+        }
+      ]
+    });
+
+  await wrapVisualTest(t, async (t, comparer) => {
+    const rootSelector = Selector(".svc-question__adorner").nth(1);
+    await takeElementScreenshot("carry-forward-panel-ranking-select-to-rank-vertical.png", rootSelector, t, comparer);
+  });
+});
+
 test("Restful service banner", async (t) => {
   await t.resizeWindow(1920, 1920);
   await setJSON(
