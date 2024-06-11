@@ -74,6 +74,37 @@ test("one rule view", async (t) => {
   });
 });
 
+test("long question name", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 900);
+    await setJSON({
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "text",
+              "name": "question with very long name that does not fit into logic"
+            },
+            {
+              "type": "text",
+              "name": "another question with long name that we want to set up",
+              "visibleIf": "{question with very long name that does not fit into logic} = 'a'"
+            }
+          ]
+        }
+      ]
+    });
+    await t
+      .click(getTabbedMenuItemByText(creatorTabLogicName))
+      .hover(Selector(".sl-table__row"))
+      .click(logicDetailButtonElement);
+    const tabContent = Selector(".sl-table__row.st-table__row--detail");
+    await takeElementScreenshot("logic-tab-long-question-name-content.png", tabContent.filterVisible(), t, comparer);
+  });
+});
+
 test("Check actions hover states", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1920, 900);

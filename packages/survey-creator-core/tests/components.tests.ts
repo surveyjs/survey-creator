@@ -260,6 +260,7 @@ test("item value allowAdd on events", () => {
   expect(noneAdorner.allowAdd).toBeTruthy();
   expect(otherAdorner.allowAdd).toBeFalsy();
   expect(newAdorner.allowAdd).toBeFalsy();
+  expect(newAdorner.item.isVisible).toBeFalsy();
 });
 
 test("item value no pointer down on new or editable", (): any => {

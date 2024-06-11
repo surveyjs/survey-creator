@@ -15,19 +15,20 @@ function getElementsJSON() {
       title: getLocString("theme.opacity"),
       min: 0,
       max: 100,
+      defaultValue: 100,
       unit: "%",
       titleLocation: "left"
     }
   ];
 }
-if(!ComponentCollection.Instance.getCustomQuestionByName("colorsettings")) {
+if (!ComponentCollection.Instance.getCustomQuestionByName("coloralpha")) {
   ComponentCollection.Instance.add({
-    name: "colorsettings",
+    name: "coloralpha",
     showInToolbox: false,
     internal: true,
     elementsJSON: getElementsJSON(),
     onInit() {
-      Serializer.addProperties("colorsettings", [{
+      Serializer.addProperties("coloralpha", [{
         name: "choices:itemvalue[]",
         visible: false
       },
@@ -60,15 +61,15 @@ if(!ComponentCollection.Instance.getCustomQuestionByName("colorsettings")) {
       return !!value ? createColor(value) : "";
     },
     valueFromQuestion(value) {
-      return typeof value == "string" ? parseColor(value) : value;
+      return typeof value == "string" || typeof value == "undefined" ? parseColor(value) : value;
     },
     onCreated(question: QuestionCompositeModel) {
       question.contentPanel.questions.forEach(q => q.allowRootStyle = false);
     }
   });
 }
-export function updateColorSettingsJSON() {
-  const config = ComponentCollection.Instance.getCustomQuestionByName("colorsettings");
+export function updatecoloralphaJSON() {
+  const config = ComponentCollection.Instance.getCustomQuestionByName("coloralpha");
   config.json.elementsJSON = getElementsJSON();
 }
 

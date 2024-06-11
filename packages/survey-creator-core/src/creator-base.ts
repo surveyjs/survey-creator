@@ -42,7 +42,7 @@ import { PageAdorner } from "./components/page";
 import {
   ElementDeletingEvent, PropertyGetReadOnlyEvent, ElementGetDisplayNameEvent, HtmlToMarkdownEvent, ElementAllowOperationsEvent,
   ElementGetActionsEvent, PropertyAddingEvent, PropertyGridSurveyCreatedEvent, PropertyEditorCreatedEvent, PropertyEditorUpdateTitleActionsEvent,
-  PropertyGridShowPopupEvent, CollectionItemAllowOperationsEvent, CollectionItemAddedEvent, MatrixColumnAddedEvent, ConfigureTablePropertyEditorEvent,
+  PropertyGridShowPopupEvent, CollectionItemAllowOperationsEvent, CollectionItemAddedEvent, FastEntryItemsEvent as FastEntryFinishedEvent, MatrixColumnAddedEvent, ConfigureTablePropertyEditorEvent,
   PropertyDisplayCustomErrorEvent, PropertyValueChangingEvent, PropertyValueChangedEvent, ConditionGetQuestionListEvent, GetConditionOperatorEvent,
   LogicRuleGetDisplayTextEvent, ModifiedEvent, QuestionAddedEvent, PanelAddedEvent, PageAddedEvent,
   PageGetFooterActionsEvent, SurveyInstanceCreatedEvent, DesignerSurveyCreatedEvent, PreviewSurveyCreatedEvent, NotifyEvent, ElementFocusingEvent,
@@ -363,7 +363,8 @@ export class SurveyCreatorModel extends Base
     componentName?: string,
     index?: number
   ) {
-    const locStrName = !title ? "ed." + name : (title.indexOf("ed.") == 0 ? title : "");
+    const tabName = name === "test" ? "preview" : name;
+    const locStrName = !title ? "tabs." + tabName : (title.indexOf("ed.") == 0 ? title : "");
     if (!!locStrName) {
       title = undefined;
     }
@@ -490,9 +491,16 @@ export class SurveyCreatorModel extends Base
    * For information on event handler parameters, refer to descriptions within the interface.
    * 
    * > This event is not raised when users add a new column to a [Multi-Select Matrix](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-with-dropdown-list) or [Dynamic Matrix](https://surveyjs.io/form-library/documentation/api-reference/dynamic-matrix-table-question-model). For these cases, handle the [`onMatrixColumnAdded`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onMatrixColumnAdded) event instead.
+   * @see onFastEntryFinished
    * @see onCollectionItemAllowOperations
    */
   public onItemValueAdded: EventBase<SurveyCreatorModel, CollectionItemAddedEvent> = this.addCreatorEvent<SurveyCreatorModel, CollectionItemAddedEvent>();
+  /**
+   * An event that is raised when users finish editing collection items (choices, rows, columns) in a pop-up window.
+   * 
+   * Survey authors can specify collection items using a table UI in Property Grid (see the [`onItemValueAdded`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onItemValueAdded) event) or a multi-line text editor in a pop-up window. Each line in the editor specifies the value and display text of one collection item in the following format: `value|text`. Use the `onFastEntryFinished` event to process the entered text lines as required.
+   */
+  public onFastEntryFinished: EventBase<SurveyCreatorModel, FastEntryFinishedEvent> = this.addCreatorEvent<SurveyCreatorModel, FastEntryFinishedEvent>();
   /**
    * An event that is raised when users add a new column to a [Multi-Select Matrix](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-with-dropdown-list) or [Dynamic Matrix](https://surveyjs.io/form-library/documentation/api-reference/dynamic-matrix-table-question-model). Use this event to modify this column.
    * 
@@ -1566,10 +1574,14 @@ export class SurveyCreatorModel extends Base
     property: JsonObjectProperty,
     readOnly: boolean,
     parentObj: Base,
-    parentProperty: JsonObjectProperty
+    parentProperty: JsonObjectProperty,
+    creatorReadOnly?: boolean
   ): boolean {
     if (!property) return false;
-    const proposedValue = this.readOnly || readOnly;
+    if (creatorReadOnly === undefined) {
+      creatorReadOnly = this.readOnly;
+    }
+    const proposedValue = creatorReadOnly || readOnly;
     if (this.onGetPropertyReadOnly.isEmpty) return proposedValue;
     const options = {
       obj: obj,
@@ -2025,13 +2037,13 @@ export class SurveyCreatorModel extends Base
   public createSurvey(json: any, reason: string, model?: any, callback?: (survey: SurveyModel) => void, area?: string): SurveyModel {
     const survey = this.createSurveyCore(json, reason);
 
-    if (reason !== "designer" && reason !== "test") { survey.fitToContainer = false; }
+    if (reason !== "designer" && reason !== "test" && reason !== "theme") { survey.fitToContainer = false; }
 
     if (reason === "designer" || reason === "modal-question-editor") {
       initializeDesignTimeSurveyModel(survey, this);
     }
     survey["needRenderIcons"] = false;
-    if (reason != "designer" && reason != "test") {
+    if (reason != "designer" && reason != "test" && reason !== "theme") {
       survey.locale = editorLocalization.currentLocale;
       if (!json["clearInvisibleValues"]) {
         survey.clearInvisibleValues = "onComplete";
@@ -2050,7 +2062,7 @@ export class SurveyCreatorModel extends Base
     if (reason === "designer") {
       this.onDesignerSurveyCreated.fire(this, { survey: survey });
     }
-    if (reason === "test") {
+    if (reason === "test" || reason === "theme") {
       this.onPreviewSurveyCreated.fire(this, { survey: survey });
     }
     return survey;
@@ -2059,13 +2071,11 @@ export class SurveyCreatorModel extends Base
     const hash: any = {};
     hash["designer"] = "designer-tab";
     hash["test"] = "preview-tab";
-    hash["property-grid"] = "property-grid";
     hash["default-value"] = "default-value-popup-editor";
     hash["condition-builder"] = "logic-rule:condition-editor";
     hash["logic-item-editor"] = "logic-rule:action-editor";
     hash["logic-items"] = "logic-tab:condition-list";
     hash["theme"] = "theme-tab";
-    hash["theme_editor"] = "theme-tab:property-grid";
     hash["translation_settings"] = "translation-tab:language-list";
     hash["translation_strings"] = "translation-tab:table";
     hash["translation_strings_header"] = "translation-tab:table-header";
@@ -2073,7 +2083,7 @@ export class SurveyCreatorModel extends Base
     hash["fast-entry"] = "table-values-popup-editor";
     hash["modal-question-editor"] = "matrix-cell-question-popup-editor";
     const res = hash[reason];
-    return !!res ? res : "internal-use";
+    return !!res ? res : reason;
   }
   protected createSurveyCore(json: any = {}, reason: string): SurveyModel {
     return new SurveyModel(json);
@@ -2561,7 +2571,7 @@ export class SurveyCreatorModel extends Base
 
   //#region Obsolete designerPropertyGrid
   protected get designerPropertyGrid(): PropertyGridModel {
-    const propertyGridTab = this.sidebar.getTabById("propertyGrid");
+    const propertyGridTab = this.sidebar.getTabById(this.sidebar.activeTab);
     if (!propertyGridTab) return null;
     return propertyGridTab.model ? (propertyGridTab.model.propertyGridModel as any as PropertyGridModel) : null;
   }
@@ -2656,7 +2666,7 @@ export class SurveyCreatorModel extends Base
     }
     return "";
   }
-  private expandCategoryIfNeeded(): void {
+  public expandCategoryIfNeeded(): void {
     const expandedTabName = settings.propertyGrid.defaultExpandedTabName;
     if (!!expandedTabName && !this.getPropertyGridExpandedCategory() && !this.survey.isEmpty) {
       const panel = <PanelModel>this.designerPropertyGrid.survey.getPanelByName(expandedTabName);
@@ -3040,7 +3050,7 @@ export class SurveyCreatorModel extends Base
     propertyName: string,
     itemValue: ItemValue,
     itemValues: Array<ItemValue>
-  ) {
+  ): void {
     var options = {
       obj: obj,
       propertyName: propertyName,
@@ -3048,6 +3058,14 @@ export class SurveyCreatorModel extends Base
       itemValues: itemValues
     };
     this.onItemValueAdded.fire(this, options);
+  }
+  onFastEntryCallback(items: Array<ItemValue>, lines: Array<string>): Array<ItemValue> {
+    const options = {
+      items: items,
+      lines: lines
+    };
+    this.onFastEntryFinished.fire(this, options);
+    return options.items;
   }
   onMatrixDropdownColumnAddedCallback(
     matrix: Question,

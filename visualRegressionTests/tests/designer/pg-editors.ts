@@ -1,4 +1,4 @@
-import { url, setJSON, takeElementScreenshot, getToolboxItemByText, getPropertyGridCategory, generalGroupName, wrapVisualTest, addQuestionByAddQuestionButton, resetHoverToCreator, surveySettingsButtonSelector, inputMaskSettingsGroupName, getListItemByText } from "../../helper";
+import { url, setJSON, takeElementScreenshot, getToolboxItemByText, getPropertyGridCategory, generalGroupName, wrapVisualTest, addQuestionByAddQuestionButton, resetHoverToCreator, surveySettingsButtonSelector, inputMaskSettingsGroupName, getListItemByText, getVisibleElement } from "../../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Property Grid Editors";
 
@@ -357,7 +357,7 @@ test("Property grid input all states", async (t) => {
     await takeElementScreenshot("pg-input-focused.png", input, t, comparer);
 
     await setInputProperty("readOnly", true);
-    await takeElementScreenshot("pg-input-disabled.png", input, t, comparer);
+    await takeElementScreenshot("pg-input-readonly.png", input, t, comparer);
   });
 });
 
@@ -809,5 +809,29 @@ test("renderAs works in matrix questions for textwithreset", async (t) => {
     const expandedGroup = Selector(".spg-root-modern .spg-panel.sd-element--expanded");
     await ClientFunction(() => { document.body.focus(); })();
     await takeElementScreenshot("pg-pages-with-reset.png", expandedGroup, t, comparer);
+  });
+});
+test("popup overlay in property grid", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(900, 900);
+    await ClientFunction(() => {
+      window["Survey"]._setIsTouch(true);
+    })();
+    const json = {
+      "elements": [
+        {
+          "type": "text",
+          "name": "question1"
+        }
+      ]
+    };
+    await setJSON(json);
+
+    await t
+      .click("div[data-sv-drop-target-survey-element='question1']", { offsetX: 200, offsetY: 30 })
+      .click(getVisibleElement(".sv-action-bar-item[title='Open settings']"))
+      .click(Selector(".spg-dropdown[aria-label='Input type']"));
+
+    await takeElementScreenshot("pg-overlay-popup.png", getVisibleElement(".sv-popup .sv-popup__container"), t, comparer);
   });
 });

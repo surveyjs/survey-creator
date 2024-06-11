@@ -1,5 +1,6 @@
-import { ComponentCollection, Question, QuestionCompositeModel, Serializer } from "survey-core";
+import { Base, ComponentCollection, JsonObjectProperty, Question, QuestionCompositeModel, Serializer } from "survey-core";
 import { getLocString } from "../../../editorLocalization";
+import { assign } from "../../../utils/utils";
 
 export const DefaultFonts = [
   "Open Sans",
@@ -38,7 +39,7 @@ function getElementsJSON() {
       ],
     },
     {
-      type: "colorsettings",
+      type: "coloralpha",
       name: "color",
       colorTitle: getLocString("theme.color"),
       colorTitleLocation: "left",
@@ -46,7 +47,7 @@ function getElementsJSON() {
       descriptionLocation: "hidden"
     },
     {
-      type: "colorsettings",
+      type: "coloralpha",
       name: "placeholdercolor",
       colorTitle: getLocString("theme.placeholderColor"),
       colorTitleLocation: "left",
@@ -65,14 +66,14 @@ function getElementsJSON() {
   ];
 }
 
-if(!ComponentCollection.Instance.getCustomQuestionByName("fontsettings")) {
+if (!ComponentCollection.Instance.getCustomQuestionByName("font")) {
   ComponentCollection.Instance.add({
-    name: "fontsettings",
+    name: "font",
     showInToolbox: false,
     internal: true,
     elementsJSON: getElementsJSON(),
     onInit() {
-      Serializer.addProperties("fontsettings", [
+      Serializer.addProperties("font", [
         {
           name: "allowEmptyColorValue:boolean",
           default: false,
@@ -91,11 +92,18 @@ if(!ComponentCollection.Instance.getCustomQuestionByName("fontsettings")) {
       color.visible = question.name !== "surveyTitle" && question.name !== "surveyDescription";
       const placeholderColor = question.contentPanel.getQuestionByName("placeholdercolor");
       placeholderColor.visible = question.name === "editorFont";
+
+      const family = question.contentPanel.getQuestionByName("family");
+      family.choices = [].concat(DefaultFonts);
+    },
+    valueToQuestion(value) {
+      return JSON.parse(JSON.stringify(value));
     },
     onValueChanged(question, name, newValue) {
     },
   });
 }
+
 function syncPropertiesFromComposite(question: Question, propertyName: string, newValue: any) {
   const colorQuestion = question.contentPanel.questions[2];
   if (propertyName == "allowEmptyColorValue") {
@@ -104,38 +112,43 @@ function syncPropertiesFromComposite(question: Question, propertyName: string, n
 }
 
 export function updateFontSettingsJSON() {
-  const config = ComponentCollection.Instance.getCustomQuestionByName("fontsettings");
+  const config = ComponentCollection.Instance.getCustomQuestionByName("font");
   config.json.elementsJSON = getElementsJSON();
 }
 
-export function fontsettingsToCssVariable(question: Question, themeCssVariables: { [index: string]: string }) {
-  Object.keys(question.value).forEach(key => {
-    const innerQ = (<QuestionCompositeModel>question).contentPanel.getQuestionByName(key);
-    const propertyName = `--sjs-font-${question.name.toLocaleLowerCase()}-${key}`;
-    if (!question.defaultValue || question.value[key] !== question.defaultValue[key]) {
-      themeCssVariables[propertyName] = question.value[key] + (innerQ.unit?.toString() || "");
+export function fontsettingsToCssVariable(value: any = {}, property: JsonObjectProperty, themeCssVariables: { [index: string]: string }) {
+  Object.keys(value).forEach(key => {
+    const propertyName = `--sjs-font-${property.name.toLocaleLowerCase()}-${key}`;
+    if (!property.defaultValue || value[key] !== property.defaultValue[key]) {
+      themeCssVariables[propertyName] = value[key] + (key === "size" ? "px" : "");
     } else {
       themeCssVariables[propertyName] = undefined;
     }
   });
 }
 
-export function fontsettingsFromCssVariable(question: Question, themeCssVariables: { [index: string]: string }, defaultColorVariable?: string, defaultPlaceholderColorVariable?: string): void {
-  if (!question) return;
+export function fontsettingsFromCssVariable(property: JsonObjectProperty, themeCssVariables: { [index: string]: string }, defaultColorVariableName?: string, defaultPlaceholderColorVariableName?: string): any {
+  if (!property) return;
 
-  const compositeQuestion = <QuestionCompositeModel>question;
-  const fontSettingsFromTheme = Object.keys(themeCssVariables).filter(key => key.indexOf(question.name.toLocaleLowerCase()) !== -1);
+  if (!property.defaultValue) property.defaultValue = {};
+  assign(property.defaultValue, {
+    color: themeCssVariables[defaultColorVariableName],
+    placeholdercolor: !!defaultPlaceholderColorVariableName ? themeCssVariables[defaultPlaceholderColorVariableName] : undefined,
+  });
+  if (!property.defaultValue["size"]) {
+    property.defaultValue["size"] = parseFloat(themeCssVariables["--sjs-font-size"]);
+  }
+
+  const result = { ...property.defaultValue };
+  const fontSettingsFromTheme = Object.keys(themeCssVariables).filter(key => key.indexOf(property.name.toLocaleLowerCase()) !== -1);
   fontSettingsFromTheme.forEach(key => {
     const propertyName = key.split("-").pop();
-    compositeQuestion.contentPanel.getQuestionByName(propertyName).value = themeCssVariables[key];
+    if (propertyName === "size" && themeCssVariables[key] !== undefined) {
+      result[propertyName] = parseFloat(themeCssVariables[key].toString());
+    } else {
+      result[propertyName] = themeCssVariables[key];
+    }
   });
 
-  if (fontSettingsFromTheme.length === 0) {
-    if (!!defaultColorVariable) {
-      compositeQuestion.contentPanel.getQuestionByName("color").value = defaultColorVariable;
-    }
-    if (!!defaultPlaceholderColorVariable) {
-      compositeQuestion.contentPanel.getQuestionByName("placeholdercolor").value = defaultPlaceholderColorVariable;
-    }
-  }
+  return result;
 }
