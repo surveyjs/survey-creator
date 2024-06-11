@@ -128,8 +128,10 @@ export class PropertyGridViewModel extends Base {
     this.selectorPopupModel = new PopupModel(
       "svc-object-selector",
       { model: selectorModel },
-      "bottom",
-      "center"
+      {
+        verticalPosition: "bottom",
+        horizontalPosition: "center",
+      }
     );
     this.selectorPopupModel.cssClass += " svc-object-selector";
     this.selectorPopupModel.displayMode = this.creator.isTouch ? "overlay" : "popup";
@@ -145,10 +147,10 @@ export class PropertyGridViewModel extends Base {
           this.propertyGridModel.obj,
           (obj: Base) => {
             this.selectionController.selectFromAction(obj, "name");
-            this.selectorPopupModel.toggleVisibility();
+            this.selectorPopupModel.hide();
           }
         );
-        this.selectorPopupModel.toggleVisibility();
+        this.selectorPopupModel.show();
         selectorModel.list.scrollToSelectedItem();
       },
       popupModel: this.selectorPopupModel

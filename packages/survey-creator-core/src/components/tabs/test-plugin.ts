@@ -8,8 +8,6 @@ import { TestSurveyTabViewModel } from "./test";
 
 export class TabTestPlugin implements ICreatorPlugin {
   private languageSelectorAction: Action;
-  private changeThemePopupModel: PopupModel;
-  private changeThemeModel: ListModel;
   protected changeThemeAction: Action;
   private deviceSelectorAction: Action;
   private orientationSelectorAction: Action;
@@ -66,6 +64,48 @@ export class TabTestPlugin implements ICreatorPlugin {
     }
     if (this.creator.showDefaultLanguageInTestSurveyTab != undefined) {
       this.setDefaultLanguageOption(this.creator.showDefaultLanguageInTestSurveyTab);
+    }
+  }
+  private createThemeAction(): Action {
+    let action;
+    let themeMapper = StylesManager.getIncludedThemeCss() as Array<any>;
+    const sequence = ["defaultV2", "modern", "default"];
+    themeMapper = themeMapper.sort((theme1, theme2) => {
+      return sequence.indexOf(theme1.name) > sequence.indexOf(theme2.name) ? 1 : -1;
+    });
+    let availableThemesToItems = this.getAvailableThemes(themeMapper);
+
+    if (this.creator.allowChangeThemeInPreview && availableThemesToItems.length > 1 && !this.creator.showThemeTab) {
+      const getStartThemeName = (): string => {
+        const availableThemes = themeMapper.filter(item => item.theme.root === this.simulatorTheme.root);
+        return availableThemes.length > 0 ? availableThemes[0].name : "defaultV2";
+      };
+      action = createDropdownActionModel({
+        id: "themeSwitcher",
+        iconName: "icon-theme",
+        component: "sv-action-bar-item-dropdown",
+        mode: "large",
+        locTitleName: this.getThemeLocName(getStartThemeName()),
+        needSeparator: true,
+        visible: <any>new ComputedUpdater<boolean>(() => {
+          return notShortCircuitAnd(this.creator.showSimulatorInTestSurveyTab, this.creator.activeTab === "test");
+        }),
+      }, {
+        items: availableThemesToItems,
+        locOwner: this.creator,
+        onSelectionChanged: (item: any) => {
+          if (!!this.model) {
+            this.model.setTheme(item.value, themeMapper);
+          }
+          action.locTitleName = this.getThemeLocName(item.value);
+          action.locStrsChanged();
+        },
+        allowSelection: true,
+        verticalPosition: "bottom",
+        horizontalPosition: "center"
+      });
+
+      return action;
     }
   }
   private setPreviewTheme(themeName: string): void {
@@ -196,54 +236,9 @@ export class TabTestPlugin implements ICreatorPlugin {
       items.push(this.invisibleToggleAction);
     }
 
-    let themeMapper = StylesManager.getIncludedThemeCss() as Array<any>;
-    const sequence = ["defaultV2", "modern", "default"];
-    themeMapper = themeMapper.sort((theme1, theme2) => {
-      return sequence.indexOf(theme1.name) > sequence.indexOf(theme2.name) ? 1 : -1;
-    });
-    let availableThemesToItems = this.getAvailableThemes(themeMapper);
-
-    if (this.creator.allowChangeThemeInPreview && availableThemesToItems.length > 1 && !this.creator.showThemeTab) {
-      this.changeThemeModel = new ListModel(
-        availableThemesToItems,
-        (item: any) => {
-          if (!!this.model) {
-            this.model.setTheme(item.value, themeMapper);
-          }
-          this.changeThemeAction.locTitleName = this.getThemeLocName(item.value);
-          this.changeThemeAction.locStrsChanged();
-          this.changeThemePopupModel.toggleVisibility();
-        },
-        true
-      );
-      this.changeThemeModel.locOwner = this.creator;
-
-      this.changeThemePopupModel = new PopupModel(
-        "sv-list",
-        { model: this.changeThemeModel },
-        "bottom",
-        "center"
-      );
-      const getStartThemeName = (): string => {
-        const availableThemes = themeMapper.filter(item => item.theme.root === this.simulatorTheme.root);
-        return availableThemes.length > 0 ? availableThemes[0].name : "defaultV2";
-      };
-      this.changeThemeAction = new Action({
-        id: "themeSwitcher",
-        iconName: "icon-theme",
-        component: "sv-action-bar-item-dropdown",
-        mode: "large",
-        locTitleName: this.getThemeLocName(getStartThemeName()),
-        needSeparator: true,
-        visible: <any>new ComputedUpdater<boolean>(() => {
-          return notShortCircuitAnd(this.creator.showSimulatorInTestSurveyTab, this.creator.activeTab === "test");
-        }),
-        action: () => {
-          this.changeThemePopupModel.toggleVisibility();
-        },
-        popupModel: this.changeThemePopupModel
-      });
-
+    const themeAction = this.createThemeAction();
+    if (!!themeAction) {
+      this.changeThemeAction = themeAction;
       items.push(this.changeThemeAction);
     }
 
