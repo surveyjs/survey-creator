@@ -92,6 +92,9 @@ if (!ComponentCollection.Instance.getCustomQuestionByName("font")) {
       color.visible = question.name !== "surveyTitle" && question.name !== "surveyDescription";
       const placeholderColor = question.contentPanel.getQuestionByName("placeholdercolor");
       placeholderColor.visible = question.name === "editorFont";
+
+      const family = question.contentPanel.getQuestionByName("family");
+      family.choices = [].concat(DefaultFonts);
     },
     valueToQuestion(value) {
       return JSON.parse(JSON.stringify(value));
