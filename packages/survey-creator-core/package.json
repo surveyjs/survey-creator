@@ -9,6 +9,7 @@
   },
   "scripts": {
     "build": "webpack --env.buildType dev && webpack --env.buildType prod",
+    "watch": "webpack --env.buildType dev --watch",
     "build:i18n": "webpack --config ./webpack.i18n.js --env.buildType dev && webpack --config ./webpack.i18n.js --env.buildType prod",
     "doc_gen": "node doc_generator/editor_docgenerator.js src/entries/index.ts",
     "test": "jest",
