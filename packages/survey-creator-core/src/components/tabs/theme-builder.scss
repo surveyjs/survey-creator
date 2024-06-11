@@ -39,8 +39,8 @@ svc-tab-test {
   .sv-action-bar {
     padding: 0;
     height: calc(6 * #{$base-unit});
-    background: $background;
-    border-top: 1px solid $border;
+    border-top: 1px solid var(--ctr-preview-pager-border-color, $border);
+    background: var(--ctr-preview-pager-background-color, $background);
     width: 100%;
     position: absolute;
   }
@@ -57,6 +57,28 @@ svc-tab-test {
 
     .sv-action-bar-item {
       margin: 0;
+
+      use {
+        fill: var(--ctr-survey-question-panel-toolbar-item-icon-color, $foreground-light);
+      }
+    }
+
+    .sv-action-bar-item:not(.sv-action-bar-item--pressed):enabled {
+      &:focus {
+        background: var(--ctr-survey-question-panel-toolbar-item-icon-color-pressed, $background-dim);
+      }
+
+      &:hover {
+        background: var(--ctr-survey-question-panel-toolbar-item-icon-color-pressed, $background-dim);
+      }
+    }
+
+    .sv-action-bar-item--pressed:not(.sv-action-bar-item--active) {
+      background: var(--ctr-survey-question-panel-toolbar-item-icon-color-pressed, $background-dim);
+    }
+
+    .sv-action-bar-item__title {
+      color: var(--ctr-survey-question-panel-toolbar-item-text-color, $foreground);
     }
   }
 

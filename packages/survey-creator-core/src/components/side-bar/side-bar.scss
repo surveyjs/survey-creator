@@ -74,6 +74,24 @@
     justify-content: flex-end;
     padding: 0;
   }
+
+  .sv-action-bar-item:not(.sv-action-bar-item--pressed):enabled {
+    &:focus {
+      background: var(--ctr-menu-toolbar-button-background-color-pressed, $background-dim);
+    }
+
+    &:hover {
+      background: var(--ctr-menu-toolbar-button-background-color-hovered, $background-dim);
+    }
+  }
+
+  .sv-action-bar-item--pressed:not(.sv-action-bar-item--active) {
+    background: var(--ctr-menu-toolbar-button-background-color-pressed, $background-dim);
+  }
+
+  .sv-action-bar-item__title {
+    color: var(--ctr-menu-toolbar-button-text-color, $foreground);
+  }
 }
 
 

@@ -39,8 +39,8 @@ svc-tab-test {
   .sv-action-bar {
     padding: 0;
     height: calc(6 * #{$base-unit});
-    background: $background;
-    border-top: 1px solid $border;
+    border-top: 1px solid var(--ctr-preview-pager-border-color, $border);
+    background: var(--ctr-preview-pager-background-color, $background);
     width: 100%;
     position: absolute;
   }
