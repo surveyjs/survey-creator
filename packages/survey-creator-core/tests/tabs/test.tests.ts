@@ -953,3 +953,68 @@ test("change devices selector dropdown items order", (): any => {
     simulatorDevices.androidTablet.visibleIndex = undefined;
   }
 });
+test("Mark previous pages as passed if selectPageAction selects non-subsequent page", (): any => {
+  const creator: CreatorTester = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "text",
+            name: "question1"
+          }
+        ]
+      },
+      {
+        name: "page2",
+        elements: [
+          {
+            type: "text",
+            name: "question2"
+          }
+        ]
+      },
+      {
+        name: "page3",
+        elements: [
+          {
+            type: "text",
+            name: "question3"
+          }
+        ]
+      },
+      {
+        name: "page4",
+        elements: [
+          {
+            type: "text",
+            name: "question4"
+          }
+        ]
+      }
+    ]
+  };
+  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
+  creator.makeNewViewActive("test");
+  const model: TestSurveyTabViewModel = testPlugin.model;
+
+  const selectPageAction = model.selectPageAction;
+  const listModel = selectPageAction.data as ListModel;
+
+  expect(selectPageAction).toBeTruthy();
+  expect(selectPageAction.visible).toBeTruthy();
+  expect(selectPageAction.data.actions.length).toBe(4);
+
+  expect(model.survey.pages[0].passed).toBeFalsy();
+  expect(model.survey.pages[1].passed).toBeFalsy();
+  expect(model.survey.pages[2].passed).toBeFalsy();
+  expect(model.survey.pages[3].passed).toBeFalsy();
+
+  listModel.onItemClick(listModel.actions[3]);
+
+  expect(model.survey.pages[0].passed).toBeTruthy();
+  expect(model.survey.pages[1].passed).toBeTruthy();
+  expect(model.survey.pages[2].passed).toBeTruthy();
+  expect(model.survey.pages[3].passed).toBeFalsy();
+});

@@ -34,6 +34,12 @@
   opacity: var(--ctr-editor-content-text-opacity-disabled, 0.25);
 }
 
+input.spg-input:read-only,
+input.spg-input:read-only::placeholder {
+  color: $foreground;
+  opacity: 0.25;
+}
+
 .spg-input[type="color"] {
   padding-left: 0;
   padding-right: 0;
