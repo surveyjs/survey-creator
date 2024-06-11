@@ -730,6 +730,7 @@ Serializer.addProperties("theme",
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
         editor.allowClear = false;
+        editor.choices = [].concat(DefaultFonts);
       }
     }
   },
