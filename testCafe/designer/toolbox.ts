@@ -1,4 +1,4 @@
-import { url, getJSON, toolboxItems, explicitErrorHandler, setJSON, changeToolboxScrolling } from "../helper";
+import { url, getJSON, toolboxItems, explicitErrorHandler, setJSON, changeToolboxScrolling, getToolboxItemByText, getSubToolboxItemByText } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Toolbox";
 
@@ -53,6 +53,8 @@ const visibleToolboxItems = Selector(".svc-toolbox__tool").filterVisible();
 const collapsibleCategories = Selector(".svc-toolbox__category-header--collapsed");
 const getCollapsedCategories = (index = 0) => { return categoriesHeader.nth(index).find(".svc-string-editor__button--expand"); };
 const getExpandedCategories = (index = 0) => { return categoriesHeader.nth(index).find(".svc-string-editor__button--collapse"); };
+const toolboxSubTypesPopup = Selector(".sv-popup-inner.toolbox-subtypes .sv-popup__container").filterVisible();
+const newGhostPagePage = Selector("[data-sv-drop-target-survey-element='newGhostPage']");
 
 test("Categories check hover icons", async (t) => {
   await setupCategories(t);
@@ -304,4 +306,107 @@ test("toolbar responsiveness in compact mode", async (t) => {
     .expect(Selector(".svc-toolbox__container").clientHeight).lte(510)
     .expect(visibleToolboxItems.count).eql(11)
     .expect(Selector(".svc-toolbox__tool").count).eql(23);
+});
+
+test("toolbox subTypes: add items by drag-n-drop", async (t) => {
+  await explicitErrorHandler();
+  await t.resizeWindow(1900, 800);
+
+  await t
+    .expect(toolboxSubTypesPopup.visible).notOk()
+    .hover(getToolboxItemByText("Rating Scale"))
+    .wait(400)
+    .expect(toolboxSubTypesPopup.visible).ok()
+
+    .hover(getSubToolboxItemByText("Stars"))
+    .dragToElement(getSubToolboxItemByText("Stars"), ".svc-designer__placeholder-container", { speed: 0.5 })
+    .expect(Selector(".svc-question__content").filterVisible().count).eql(1)
+
+    .hover(getToolboxItemByText("Rating Scale"))
+    .wait(400)
+    .dragToElement(getToolboxItemByText("Rating Scale"), newGhostPagePage, { speed: 0.5 })
+    .expect(Selector(".svc-question__content").filterVisible().count).eql(2)
+    .expect(toolboxSubTypesPopup.visible).notOk();
+
+  const expectedJson = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "rating",
+            "name": "question1",
+            "rateType": "stars"
+          }
+        ]
+      },
+      {
+        "name": "page2",
+        "elements": [
+          {
+            "type": "rating",
+            "name": "question2"
+          }
+        ]
+      }
+    ]
+  };
+  const resultJson = await getJSON();
+  await t.expect(resultJson).eql(expectedJson);
+});
+
+test("toolbox subTypes: add items by click", async (t) => {
+  await explicitErrorHandler();
+  await t.resizeWindow(1900, 800);
+
+  await t
+    .click(getToolboxItemByText("Single-Line Input"))
+    .wait(400)
+    .expect(Selector(".svc-question__content").filterVisible().count).eql(1)
+    .expect(toolboxSubTypesPopup.visible).ok()
+
+    .hover(getToolboxItemByText("Single-Line Input"))
+    .wait(400)
+    .expect(toolboxSubTypesPopup.visible).ok()
+
+    .click(getSubToolboxItemByText("Password"))
+    .expect(Selector(".svc-question__content").filterVisible().count).eql(2)
+    .expect(toolboxSubTypesPopup.visible).notOk();
+
+  const expectedJson = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          },
+          {
+            "type": "text",
+            "name": "question2",
+            "inputType": "password"
+          }
+        ]
+      }
+    ]
+  };
+  const resultJson = await getJSON();
+  await t.expect(resultJson).eql(expectedJson);
+});
+
+test("toolbox subTypes: hide subTypes popup", async (t) => {
+  await explicitErrorHandler();
+  await t.resizeWindow(1900, 800);
+
+  await t
+    .expect(toolboxSubTypesPopup.visible).notOk()
+    .hover(getToolboxItemByText("Rating Scale"))
+    .wait(400)
+    .expect(toolboxSubTypesPopup.visible).ok()
+
+    .scrollBy(".svc-toolbox", 2, 100)
+    .expect(toolboxSubTypesPopup.visible).notOk();
 });

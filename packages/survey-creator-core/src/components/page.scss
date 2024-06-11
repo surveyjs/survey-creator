@@ -130,3 +130,16 @@ svc-page {
     height: auto;
   }
 }
+
+.svc-page__add-new-question,
+.svc-question__adorner {
+  .sv-popup--overlay {
+    .sv-list-item__marker-icon {
+      display: none;
+    }
+
+    .sv-list__item-body {
+      pointer-events: none;
+    }
+  }
+}
