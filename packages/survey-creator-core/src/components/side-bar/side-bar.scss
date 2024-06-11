@@ -42,7 +42,7 @@
   align-items: flex-start;
   height: calc(100% - calc(8 * #{$base-unit}));
   overflow-y: auto;
-  background-color: $background;
+  background-color: var(--ctr-property-grid-form-background-color, $background);
 }
 
 .svc-side-bar__container-container {
@@ -63,6 +63,7 @@
   flex-shrink: 0;
   justify-content: flex-end;
   padding: calcSize(1.5) calcSize(2);
+  color: var(--ctr-menu-toolbar-button-text-color, $foreground);
 }
 
 .svc-side-bar__container-actions {
