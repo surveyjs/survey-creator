@@ -403,7 +403,7 @@ export class QuestionToolbox
     return JSON.stringify(this.actions);
   }
   public set jsonText(value: string) {
-    this.actions = value ? JSON.parse(value) : [];
+    this.actions = (value ? JSON.parse(value) : []).map(action => new QuestionToolboxItem(action));
     this.onItemsChanged();
   }
   /**
@@ -796,9 +796,6 @@ export class QuestionToolbox
   public collapseAllCategories() {
     this.expandCollapseAllCategories(true);
   }
-  public hiddenItemSelected(model: Action): void {
-    this.creator.clickToolboxItem((<any>model).json);
-  }
   private expandCollapseAllCategories(isCollapsed: boolean) {
     const categories = this.categories;
     for (var i = 0; i < categories.length; i++) {
@@ -819,6 +816,9 @@ export class QuestionToolbox
     var prevActiveCategory = this.activeCategory;
     for (let i = 0; i < this.actions.length; i++) {
       const item = this.actions[i];
+      item.innerItem.action = () => {
+        this.creator.clickToolboxItem((<any>item).json);
+      };
       if(item.visible === false) continue;
       const categoryName = item.category ? item.category : "general";
       if (!categoriesHash[categoryName]) {

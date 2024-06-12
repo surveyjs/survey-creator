@@ -1766,14 +1766,14 @@ export class SurveyCreatorModel extends Base
    * @see onDragEnd
    * @see onDragDropAllow
    */
-  public onDragStart: EventBase<any, DragStartEndEvent> = new EventBase<any, DragStartEndEvent>();
+  public onDragStart: EventBase<SurveyCreatorModel, DragStartEndEvent> = this.addCreatorEvent<SurveyCreatorModel, DragStartEndEvent>();
   public onBeforeDrop: EventBase<any, DragStartEndEvent> = this.onDragStart;
   /**
    * An event that is raised when users finish dragging a survey element within the design surface.
    * @see onDragStart
    * @see onDragDropAllow
    */
-  public onDragEnd: EventBase<any, DragStartEndEvent> = new EventBase<any, DragStartEndEvent>();
+  public onDragEnd: EventBase<SurveyCreatorModel, DragStartEndEvent> = this.addCreatorEvent<SurveyCreatorModel, DragStartEndEvent>();
   public onAfterDrop: EventBase<any, DragStartEndEvent> = this.onDragEnd;
   private initDragDropSurveyElements() {
     DragDropSurveyElements.restrictDragQuestionBetweenPages =
@@ -1783,7 +1783,7 @@ export class SurveyCreatorModel extends Base
     let isDraggedFromToolbox = false;
     this.dragDropSurveyElements.onDragStart.add((sender, options) => {
       isDraggedFromToolbox = !sender.draggedElement.parent;
-      this.onDragStart.fire(sender, options);
+      this.onDragStart.fire(this, options);
       this.startUndoRedoTransaction("drag drop");
     });
     this.dragDropSurveyElements.onDragEnd.add((sender, options) => {
@@ -1791,7 +1791,7 @@ export class SurveyCreatorModel extends Base
       const editTitle = isDraggedFromToolbox && this.startEditTitleOnQuestionAdded;
       this.selectElement(options.draggedElement, undefined, false, editTitle);
       isDraggedFromToolbox = false;
-      this.onDragEnd.fire(sender, options);
+      this.onDragEnd.fire(this, options);
     });
   }
   private initDragDropChoices() {
@@ -2037,13 +2037,13 @@ export class SurveyCreatorModel extends Base
   public createSurvey(json: any, reason: string, model?: any, callback?: (survey: SurveyModel) => void, area?: string): SurveyModel {
     const survey = this.createSurveyCore(json, reason);
 
-    if (reason !== "designer" && reason !== "test") { survey.fitToContainer = false; }
+    if (reason !== "designer" && reason !== "test" && reason !== "theme") { survey.fitToContainer = false; }
 
     if (reason === "designer" || reason === "modal-question-editor") {
       initializeDesignTimeSurveyModel(survey, this);
     }
     survey["needRenderIcons"] = false;
-    if (reason != "designer" && reason != "test") {
+    if (reason != "designer" && reason != "test" && reason !== "theme") {
       survey.locale = editorLocalization.currentLocale;
       if (!json["clearInvisibleValues"]) {
         survey.clearInvisibleValues = "onComplete";
@@ -2062,7 +2062,7 @@ export class SurveyCreatorModel extends Base
     if (reason === "designer") {
       this.onDesignerSurveyCreated.fire(this, { survey: survey });
     }
-    if (reason === "test") {
+    if (reason === "test" || reason === "theme") {
       this.onPreviewSurveyCreated.fire(this, { survey: survey });
     }
     return survey;
@@ -2071,13 +2071,11 @@ export class SurveyCreatorModel extends Base
     const hash: any = {};
     hash["designer"] = "designer-tab";
     hash["test"] = "preview-tab";
-    hash["property-grid"] = "property-grid";
     hash["default-value"] = "default-value-popup-editor";
     hash["condition-builder"] = "logic-rule:condition-editor";
     hash["logic-item-editor"] = "logic-rule:action-editor";
     hash["logic-items"] = "logic-tab:condition-list";
     hash["theme"] = "theme-tab";
-    hash["theme_editor"] = "theme-tab:property-grid";
     hash["translation_settings"] = "translation-tab:language-list";
     hash["translation_strings"] = "translation-tab:table";
     hash["translation_strings_header"] = "translation-tab:table-header";
@@ -2085,7 +2083,7 @@ export class SurveyCreatorModel extends Base
     hash["fast-entry"] = "table-values-popup-editor";
     hash["modal-question-editor"] = "matrix-cell-question-popup-editor";
     const res = hash[reason];
-    return !!res ? res : "internal-use";
+    return !!res ? res : reason;
   }
   protected createSurveyCore(json: any = {}, reason: string): SurveyModel {
     return new SurveyModel(json);
