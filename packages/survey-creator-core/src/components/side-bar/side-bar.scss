@@ -42,7 +42,7 @@
   align-items: flex-start;
   height: calc(100% - calc(8 * #{$base-unit}));
   overflow-y: auto;
-  background-color: var(--ctr-property-grid-form-background-color, $background);
+  background-color: var(--ctr-property-grid-background-color, $background);
 }
 
 .svc-side-bar__container-container {

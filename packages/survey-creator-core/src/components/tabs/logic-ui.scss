@@ -213,6 +213,12 @@
   }
 }
 
+.svc-logic-tab__content-empty {
+  .svc-text {
+    color: var(--ctr-surface-placeholder-text-description-color, $foreground);
+  }
+}
+
 .svc-logic-paneldynamic {
   font-family: $font-family;
 

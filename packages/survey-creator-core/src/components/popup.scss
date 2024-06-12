@@ -1,3 +1,23 @@
+.sv-popup {
+  .sd-btn {
+    background: var(--ctr-button-background-color, $background);
+    color: var(--ctr-button-text-color, $primary);
+
+    &:hover {
+      background: var(--ctr-button-background-color-hovered, $background-dark);
+    }
+  }
+
+  .sd-btn--action {
+    background: var(--ctr-button-background-color-cta, $primary);
+    color: var(--ctr-button-text-color-cta, $primary-foreground);
+
+    &:hover {
+      background: var(--ctr-button-background-color-cta-hovered, $primary-background-dark);
+    }
+  }
+}
+
 .sv-popup--modal {
   background-color: var(--ctr-popup-haze-background-color, $background-semitransparent);
 }
