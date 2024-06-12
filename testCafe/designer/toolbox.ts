@@ -1,4 +1,4 @@
-import { url, getJSON, toolboxItems, explicitErrorHandler, setJSON, changeToolboxScrolling } from "../helper";
+import { url, getJSON, toolboxItems, explicitErrorHandler, setJSON, changeToolboxScrolling, changeToolboxSearchEnabled } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Toolbox";
 
@@ -95,6 +95,7 @@ test.before(async (t) => {
   await t.resizeWindow(1200, 605);
 })("Categories Responsiveness small -> large", async (t) => {
   await changeToolboxScrolling(false);
+  await changeToolboxSearchEnabled(false);
 
   await setupCategories(t, 1110);
   await t
@@ -117,6 +118,7 @@ test.before(async (t) => {
   await t.resizeWindow(1900, 600);
 })("Categories Responsiveness large -> small", async (t) => {
   await changeToolboxScrolling(false);
+  await changeToolboxSearchEnabled(false);
 
   await setupCategories(t);
   await t

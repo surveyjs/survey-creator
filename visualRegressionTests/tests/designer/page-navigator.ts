@@ -54,6 +54,7 @@ test("On the right side (default)", async (t) => {
 test("On the right side opened popup", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await changeToolboxScrolling(false);
+    await changeToolboxSearchEnabled(false);
 
     await t.resizeWindow(1920, 500);
     await setJSON(json);

@@ -193,6 +193,7 @@ test("designer tab view with page navigator", async (t) => {
 
 test("Toolbox category collapsed", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    await changeToolboxSearchEnabled(false);
     await t.resizeWindow(2560, 1440);
     const toolboxElement = Selector(".svc-toolbox");
     await setJSON({ pages: [{ name: "page1" }] });

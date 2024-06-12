@@ -1297,6 +1297,7 @@ test("Question actions", async (t) => {
 test("Keep scroll to selected on tab changed", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     changeToolboxScrolling(false);
+    await changeToolboxSearchEnabled(false);
     await t.resizeWindow(1600, 900);
     const json = {
       "logoPosition": "right",
