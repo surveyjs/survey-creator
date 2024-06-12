@@ -207,6 +207,7 @@ test("Toolbox category collapsed", async (t) => {
 
 test("Toolbox with category titles", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    await changeToolboxSearchEnabled(false);
     const toolboxElement = Selector(".svc-toolbox");
 
     await setJSON({ pages: [{ name: "page1" }] });
