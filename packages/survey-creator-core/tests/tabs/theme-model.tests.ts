@@ -383,6 +383,46 @@ test("Theme builder: restore values of font from loadTheme", (): any => {
   });
 });
 
+test("Modify property grid: restore new property", (): any => {
+  Serializer.addProperty("theme", {
+    name: "matrix-title",
+    type: "font",
+    displayName: "Matrix title font",
+    default: {
+      family: "Open Sans",
+      weight: "600",
+      size: 16,
+      color: "rgba(0, 0, 0, 0.91)"
+    },
+  });
+
+  try {
+    const themeModel = new ThemeModel();
+    themeModel.initialize();
+    const newTheme = {
+      "themeName": "default",
+      "colorPalette": "light",
+      "isPanelless": false,
+      "cssVariables": {
+        "--sjs-font-matrix-title-color": "rgba(215, 15, 15, 0.91)"
+      }
+    };
+    themeModel.loadTheme(newTheme as any);
+
+    expect(themeModel["matrix-title"]).toEqual({
+      family: "Open Sans",
+      weight: "600",
+      size: 16,
+      color: "rgba(215, 15, 15, 0.91)"
+    });
+
+    expect(themeModel.cssVariables["--sjs-font-matrix-title-color"]).toBe("rgba(215, 15, 15, 0.91)");
+
+  } finally {
+    Serializer.removeProperty("theme", "matrix-title");
+  }
+});
+
 test("Keep theme css changes through the different themes choosen", (): any => {
   const fefefeColor = "rgba(254, 254, 254, 1)";
   const themeModel = new ThemeModel();

@@ -485,6 +485,11 @@ export class ThemeModel extends Base implements ITheme {
       this["questionPanel"] = backgroundCornerRadiusFromCssVariable(this.getPropertyByName("questionPanel"), json.cssVariables, "--sjs-general-backcolor", "--sjs-general-backcolor-dark", this.cornerRadius);
       this["editorPanel"] = backgroundCornerRadiusFromCssVariable(this.getPropertyByName("editorPanel"), json.cssVariables, "--sjs-general-backcolor-dim-light", "--sjs-general-backcolor-dim-dark", this.cornerRadius);
 
+      Serializer.getProperties("theme").forEach(property => {
+        if (property.type === "font") {
+          this[property.name] = fontsettingsFromCssVariable(property, json.cssVariables);
+        }
+      });
       this["pageTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("pageTitle"), json.cssVariables, "--sjs-general-dim-forecolor");
       this["pageDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("pageDescription"), json.cssVariables, "--sjs-general-dim-forecolor-light");
       this["questionTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("questionTitle"), json.cssVariables, "--sjs-general-forecolor");
@@ -725,6 +730,7 @@ Serializer.addProperties("theme",
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
         editor.allowClear = false;
+        editor.choices = [].concat(DefaultFonts);
       }
     }
   },
