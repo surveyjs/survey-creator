@@ -51,6 +51,7 @@ import {
   CreateCustomMessagePanelEvent, ActiveTabChangingEvent, ActiveTabChangedEvent, BeforeUndoEvent, BeforeRedoEvent,
   PageAddingEvent, DragStartEndEvent
 } from "./creator-events-api";
+import { SurveyElementActionContainer } from "./components/action-container-view-model";
 
 require("./components/creator.scss");
 require("./components/string-editor.scss");

@@ -20,6 +20,7 @@ export * from "./questions/question-link-value.component";
 export * from "./questions/question-embedded-survey.component";
 export * from "./tabs/translation/translation.component";
 export * from "./tabs/translation/translation-line-skeleton.component";
+export * from "./tabs/translation/translate-from-action.component";
 export * from "./tabs/preview/simulator.component";
 export * from "./tabs/preview/test-again.component";
 export * from "./tabs/preview/survey-results.component";
