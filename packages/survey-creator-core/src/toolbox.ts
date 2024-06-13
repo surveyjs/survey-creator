@@ -114,7 +114,6 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
 export class QuestionToolbox
   extends AdaptiveActionContainer<QuestionToolboxItem>
   implements IQuestionToolbox {
-  static hiddenTypes = ["buttongroup", "linkvalue", "embeddedsurvey", "spinedit", "color", "fileedit", "textwithreset", "commentwithreset"];
   static defaultIconName = "icon-default";
   static defaultCategories = {
     choice: ["radiogroup", "rating", "checkbox", "dropdown", "tagbox", "boolean", "file", "imagepicker", "ranking"],
@@ -890,7 +889,7 @@ export class QuestionToolbox
     return !!widget && !widget.showInToolbox;
   }
   private getQuestionTypes(supportedQuestions: Array<string>): string[] {
-    const allTypes: string[] = ElementFactory.Instance.getAllTypes();
+    const allTypes: string[] = ElementFactory.Instance.getAllToolboxTypes();
     if (!supportedQuestions || supportedQuestions.length == 0)
       supportedQuestions = allTypes;
     const questions: string[] = [];
@@ -903,7 +902,6 @@ export class QuestionToolbox
       var name: string = supportedQuestions[i];
       if (
         questions.indexOf(name) < 0 &&
-        QuestionToolbox.hiddenTypes.indexOf(name) < 0 &&
         allTypes.indexOf(name) > -1 &&
         !this.isHiddenCustomWidget(name)
       )
