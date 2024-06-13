@@ -1498,7 +1498,11 @@ export class SurveyCreatorModel extends Base
     for (var i = 0; i < properties.length; i++) {
       const prop = Serializer.findProperty(className, properties[i]);
       if (!!prop) {
-        prop.visible = visible;
+        if(!visible) {
+          this.hiddenProperties[prop.id] = true;
+        } else {
+          delete this.hiddenProperties[prop.id];
+        }
       }
     }
   }
@@ -2843,6 +2847,7 @@ export class SurveyCreatorModel extends Base
     }
     this.selectElement(objIndex > -1 ? elements[objIndex] : parent);
   }
+  hiddenProperties: any = {};
   protected onCanShowObjectProperty(
     object: any,
     property: JsonObjectProperty,
@@ -2850,6 +2855,7 @@ export class SurveyCreatorModel extends Base
     parentObj: any,
     parentProperty: JsonObjectProperty
   ): boolean {
+    if(this.hiddenProperties[property.id]) return false;
     var options = {
       obj: object,
       property: property,
