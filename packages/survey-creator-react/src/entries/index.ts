@@ -36,7 +36,8 @@ export * from "../toolbox/AdaptiveToolbox";
 export * from "../TabbedMenu";
 export * from "../Navigation";
 export * from "../SideBar";
-export * from "../tabs/TranslationLineSkeleton";
+export * from "../tabs/translation/TranslationLineSkeleton";
+export * from "../tabs/translation/TranslateFromAction";
 export * from "../ActionButton";
 export * from "../StringEditor";
 
@@ -47,7 +48,7 @@ export * from "../tabs/JsonEditorTextarea";
 export * from "../tabs/Logic";
 export * from "../tabs/Preview";
 export * from "../tabs/Theme";
-export * from "../tabs/Translation";
+export * from "../tabs/translation/Translation";
 export * from "../tabs/SurveySimulator";
 
 export * from "../events";

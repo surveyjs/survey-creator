@@ -31,6 +31,7 @@ import LinkValue from "./questions/LinkValue.vue";
 
 import Translation from "./tabs/translation/Translation.vue";
 import TranslationLineSkeleton from "./tabs/translation/TranslationLineSkeleton.vue";
+import TranslateFromAction from "./tabs/translation/TranslateFromAction.vue";
 
 import Theme from "./tabs/theme/Theme.vue";
 import Color from "./custom-questions/Color.vue";
@@ -112,6 +113,7 @@ function registerComponents(app: App) {
 
   app.component("svc-tab-translation", Translation);
   app.component("sd-translation-line-skeleton", TranslationLineSkeleton);
+  app.component("svc-translate-from-action", TranslateFromAction);
 
   app.component("svc-tab-logic", Logic);
 

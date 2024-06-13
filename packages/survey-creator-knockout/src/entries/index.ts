@@ -7,7 +7,7 @@ export * from "../tabs/json-editor-ace";
 export * from "../tabs/json-editor-textarea";
 export * from "../tabs/logic";
 export * from "../tabs/logic-operator";
-export * from "../tabs/translation";
+export * from "../tabs/translation/translation";
 
 export * from "../page";
 export * from "../page-add-question";
@@ -61,7 +61,8 @@ export * from "../toolbox/toolbox-item-group";
 export * from "../toolbox/toolbox-tool";
 export * from "../toolbox/toolbox-list";
 export * from "../header/logo-image";
-export * from "../tabs/translation-line-skeleton";
+export * from "../tabs/translation/translation-line-skeleton";
+export * from "../tabs/translation/translate-from-action";
 export * from "../utils/survey-widget";
 export * from "../utils/utils";
 export * from "../switcher/switcher";

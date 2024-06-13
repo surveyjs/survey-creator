@@ -4,7 +4,8 @@ import {
   PanelModelBase, QuestionMatrixDropdownModel, PanelModel, Action, IAction, QuestionCommentModel,
   ComputedUpdater, createDropdownActionModel, Helpers, QuestionMatrixDynamicModel,
   PopupBaseViewModel, IDialogOptions, settings as surveySettings, ListModel, PopupModel, BaseAction,
-  MatrixDropdownColumn
+  MatrixDropdownColumn,
+  CssClassBuilder
 } from "survey-core";
 import { unparse, parse } from "papaparse";
 import { editorLocalization } from "../../editorLocalization";
@@ -15,6 +16,7 @@ import { SurveyHelper } from "../../survey-helper";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
 import { translationCss } from "./translation-theme";
 import { updateMatrixRemoveAction, updateMatixActionsClasses, findAction } from "../../utils/actions";
+import { SurveyElementActionContainer } from "../action-container-view-model";
 
 let isLocaleEnableIfExecuting: boolean;
 function localeEnableIf(params: any): boolean {
@@ -836,6 +838,7 @@ export class Translation extends Base implements ITranslationLocales {
   protected getSurveyStringsArea(): string { return undefined; }
   protected getSurveyStringsHeaderArea(): string { return undefined; }
   protected onSurveyStringsCreated(survey: SurveyModel): void {}
+  protected onSurveyStringsHeaderCreated(survey: SurveyModel): void {}
   private createStringsSurvey(): SurveyModel {
     var json = { autoGrowComment: true, allowResizeComment: false };
     setSurveyJSONForPropertyGrid(json, false);
@@ -909,8 +912,9 @@ export class Translation extends Base implements ITranslationLocales {
       matrix.titleLocation = "hidden";
       this.addLocaleColumns(matrix);
 
-      newPage.addQuestion(matrix);
+      newPage.addQuestion(matrix, 0);
       survey.currentPage = survey.pages[0];
+      this.onSurveyStringsHeaderCreated(survey);
     }, this.getSurveyStringsHeaderArea());
     return survey;
   }
@@ -1362,14 +1366,14 @@ export class TranslationForEditor extends Translation {
   constructor(
     survey: SurveyModel,
     options: ISurveyCreatorOptions,
-    private surveyStringsCreatedCallback: (survey: SurveyModel) => void
+    private surveyStringsHeaderCreatedCallback: (survey: SurveyModel) => void
   ) {
     super(survey, options, true);
   }
   protected getSurveyStringsArea(): string { return "translation-tab:table-popup-editor"; }
   protected getSurveyStringsHeaderArea(): string { return "translation-tab:table-header-popup-editor"; }
-  protected onSurveyStringsCreated(survey: SurveyModel): void {
-    this.surveyStringsCreatedCallback(survey);
+  protected onSurveyStringsHeaderCreated(survey: SurveyModel): void {
+    this.surveyStringsHeaderCreatedCallback(survey);
   }
 }
 export class TranslationEditor {
@@ -1390,10 +1394,8 @@ export class TranslationEditor {
     this.translation.setEditMode(this.locale);
     this.translation.reset();
     this.fillFromLocales();
-    const action = this.translation.stringsSurvey.navigationBar.getActionById("svc-translation-fromlocale");
-    if(!!action) {
-      action.visible = this.fromLocales.length > 0;
-    }
+    this.updateFromLocaleAction();
+    this.updateMatricesColumns();
   }
   public get translation(): Translation { return this.translationValue; }
   public showDialog(): void {
@@ -1416,10 +1418,9 @@ export class TranslationEditor {
     }
     const popupModel: PopupBaseViewModel = surveySettings.showDialog(
       <IDialogOptions>{
-        componentName: "survey",
+        componentName: "svc-tab-translation",
         data: {
-          survey: this.translation.stringsSurvey,
-          model: this.translation.stringsSurvey
+          model: this.translation
         },
         onApply: (): boolean => {
           this.apply();
@@ -1470,14 +1471,27 @@ export class TranslationEditor {
   }
   private updateMatricesColumns(): void {
     this.translation.stringsHeaderSurvey.getAllQuestions().forEach(
-      q => this.updateMatrixColumns(<QuestionMatrixDropdownModel>q)
+      q => {
+        this.updateMatrixColumns(<QuestionMatrixDropdownModel>q);
+        this.updateHeaderMatrixColumns(<QuestionMatrixDropdownModel>q);
+      }
     );
     const questions = this.translation.stringsSurvey.getAllQuestions();
     for(let i = 0; i < questions.length; i ++) {
-      this.updateMatrixColumns(<QuestionMatrixDropdownModel>questions[i], i === 0);
+      this.updateMatrixColumns(<QuestionMatrixDropdownModel>questions[i]);
     }
   }
-  private updateMatrixColumns(matrix: QuestionMatrixDropdownModel, updateHeader: boolean = false): void {
+  private updateHeaderMatrixColumns(matrix: QuestionMatrixDropdownModel) {
+    const cols = matrix.columns;
+    cols[0].title = this.translation.getLocaleName("");
+    if(cols.length > 2) {
+      cols[1].title = this.getHeaderTitle("translationSource", cols[1].name);
+      cols[2].title = this.getHeaderTitle("translationTarget", cols[2].name);
+    } else {
+      cols[1].title = this.getHeaderTitle("translationTarget", cols[1].name);
+    }
+  }
+  private updateMatrixColumns(matrix: QuestionMatrixDropdownModel): void {
     const colIndex = 1;
     if (matrix.columns.length === 3) {
       matrix.columns.splice(colIndex, 1);
@@ -1487,15 +1501,6 @@ export class TranslationEditor {
       const column = new MatrixDropdownColumn(loc, this.translation.getLocaleName(loc));
       column.readOnly = true;
       matrix.columns.splice(colIndex, 0, column);
-    }
-    if(updateHeader) {
-      matrix.showHeader = matrix.columns.length > 2;
-      if(matrix.showHeader) {
-        const cols = matrix.columns;
-        cols[0].title = this.translation.getLocaleName("");
-        cols[1].title = this.getHeaderTitle("translationSource", cols[1].name);
-        cols[2].title = this.getHeaderTitle("translationTarget", cols[2].name);
-      }
     }
   }
   private getHeaderTitle(strName: string, locale: string): string {
@@ -1509,21 +1514,30 @@ export class TranslationEditor {
     });
   }
   private setupNavigationButtons(survey: SurveyModel): void {
-    const actions = survey.navigationBar.actions;
-    actions.splice(0, actions.length);
+    const navigationBar = new SurveyElementActionContainer();
+    survey["navigationBarValue"] = navigationBar;
+    survey.findLayoutElement("buttons-navigation").data = navigationBar;
+    navigationBar.locOwner = survey;
+    navigationBar.cssClasses = survey.css.actionBar;
+    navigationBar.containerCss = survey.css.footer;
+    survey.addNavigationItem(this.createLocaleFromAction());
+    const actionCss = "svc-action-bar-item--right sv-action-bar-item--secondary";
     if (this.options.getHasMachineTranslation()) {
-      survey.addNavigationItem(this.createLocaleFromAction());
       survey.addNavigationItem(new Action({
         id: "svc-translation-machine",
         iconName: "icon-language",
-        css: "svc-translation-machine",
+        css: actionCss,
         locTitleName: "ed.translateUsigAI",
         component: "sv-action-bar-item",
         action: () => { this.doMachineTranslation(); }
       }));
     }
-    survey.addNavigationItem(createImportCSVAction(() => { this.translation.importFromCSVFileDOM(); }, false, true));
-    survey.addNavigationItem(createExportCSVAction(() => { this.translation.exportToCSVFileUI(); }, true));
+    const importAction = createImportCSVAction(() => { this.translation.importFromCSVFileDOM(); }, false, true);
+    importAction.css = actionCss;
+    const exportAction = createExportCSVAction(() => { this.translation.exportToCSVFileUI(); }, true);
+    exportAction.css = actionCss;
+    survey.addNavigationItem(importAction);
+    survey.addNavigationItem(exportAction);
     survey.showNavigationButtons = "top";
   }
   private createStringsToTranslate(): Array<TranslationItem> {
@@ -1547,8 +1561,15 @@ export class TranslationEditor {
   private createLocaleFromAction(): IAction {
     const action = new Action({
       id: "svc-translation-fromlocale",
-      component: "sv-action-bar-item-dropdown",
-      css: "svc-translation-machine-from",
+      component: "svc-translate-from-action",
+      css: "st-translation-machine-from",
+      location: "start",
+      iconSize: "auto",
+      innerCss: "st-translation-machine-from__btn",
+      data: {
+        additionalTitleCss: "st-translation-machine-from__title",
+        additionalTitle: editorLocalization.getString("ed.translateUsigAIFrom")
+      }
     });
     const defaultLocaleTitle = this.getActionTranslateFromText("");
     const onActionTypesPopupShow = () => {
@@ -1576,9 +1597,20 @@ export class TranslationEditor {
 
     return action;
   }
+  private updateFromLocaleAction() {
+    const action = this.translation.stringsHeaderSurvey.findLayoutElement("buttons-navigation").data.getActionById("svc-translation-fromlocale");
+    if(!!action) {
+      action.enabled = this.fromLocales.length > 0;
+      action.iconName = action.enabled ? "icon-chevron_16x16" : undefined;
+      action.data.containerCss = new CssClassBuilder()
+        .append("st-translation-machine-from__container")
+        .append("st-translation-machine-from__container--disabled", !action.enabled)
+        .toString();
+    }
+  }
   private getActionTranslateFromText(loc: string): string {
     loc = loc || "";
-    return editorLocalization.getString("ed.translateUsigAIFrom") + this.translation.getLocaleName(loc);
+    return this.translation.getLocaleName(loc);
   }
 }
 export function createImportCSVAction(action: () => void, needSeparator: boolean, isInEditor: boolean = false): Action {
