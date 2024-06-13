@@ -877,7 +877,7 @@ export var enStrings = {
       "--sjs-general-backcolor-dim": "Background color",
       "--sjs-primary-backcolor": "Accent background",
       "--sjs-primary-forecolor": "Accent foreground",
-      "--sjs-special-red": "Error",
+      "--sjs-special-red": "Error messages",
       "--sjs-shadow-small": "Shadow effects",
       "--sjs-shadow-inner": "Shadow effects",
       "--sjs-border-default": "Colors",
