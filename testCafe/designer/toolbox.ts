@@ -307,3 +307,16 @@ test("toolbar responsiveness in compact mode", async (t) => {
     .expect(visibleToolboxItems.count).eql(11)
     .expect(Selector(".svc-toolbox__tool").count).eql(23);
 });
+
+test("toolbox search in compact mode - clear but do not close", async (t) => {
+  await t.resizeWindow(1200, 600);
+
+  await t
+    .click(".svc-toolbox__search-button")
+    .typeText(".spg-search-editor_input", "d")
+    .expect(Selector(".spg-search-editor_input").value).eql("d")
+    .expect(Selector(".svc-toolbox").hasClass("svc-toolbox--flyout")).ok()
+    .click(".svc-toolbox #svd-grid-search-close")
+    .expect(Selector(".spg-search-editor_input").value).eql("")
+    .expect(Selector(".svc-toolbox").hasClass("svc-toolbox--flyout")).ok();
+});

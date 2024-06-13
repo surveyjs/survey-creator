@@ -15,7 +15,7 @@ export abstract class SearchManager extends Base {
       id: "svd-grid-search-close",
       iconName: "icon-clear_16x16",
       component: "sv-action-bar-item",
-      title: getLocString("ed.close"),
+      title: getLocString("ed.clear"),
       showTitle: false,
       iconSize: 16,
       disableTabStop: true,
@@ -62,6 +62,11 @@ export class SearchManagerToolbox extends SearchManager {
     this.toolbox.items.forEach(item => item.visible = item.hasText(newValue));
     this.toolbox.showPlaceholder = !this.toolbox.items.filter(i => i.visible).length;
     this.toolbox.categories.forEach(category => category.forceExpand = !!newValue);
+  }
+
+  public clearFilterString(): void {
+    this.filterString = "";
+    this.toolbox.containerElement.querySelector("input").focus();
   }
 }
 
