@@ -347,7 +347,6 @@ export class QuestionToolbox
     //}
   }
 
-  //@property() isCompactRendered: boolean;
   public get isCompactRendered() {
     return this.isCompact && !this.isFocused;
   }
