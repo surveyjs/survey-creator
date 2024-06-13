@@ -121,7 +121,7 @@ export var enStrings = {
     generateReadableJSON: "Generate Readable JSON",
     toolbox: "Toolbox",
     "property-grid": "Properties",
-    toolboxFilteredTextPlaceholder: "Find question...",
+    toolboxFilteredTextPlaceholder: "Type to search...",
     toolboxNoResultsFound: "No results found",
     propertyGridFilteredTextPlaceholder: "Type to search...",
     propertyGridNoResultsFound: "No results found",
