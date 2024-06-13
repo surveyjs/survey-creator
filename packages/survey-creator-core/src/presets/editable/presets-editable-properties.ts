@@ -1,8 +1,7 @@
 import { JsonObjectProperty, ItemValue, MatrixDropdownRowModelBase, QuestionDropdownModel,
   QuestionMatrixDynamicModel, Base, Serializer, SurveyModel, ElementContentVisibilityChangedEvent,
   matrixDropdownColumnTypes,
-  PanelModel,
-  IAction } from "survey-core";
+  PanelModel, PanelModelBase } from "survey-core";
 import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
 import { SurveyCreatorModel } from "../../creator-base";
 import { defaultPropertyGridDefinition, ISurveyPropertyGridDefinition, ISurveyPropertiesDefinition } from "../../question-editor/definition";
@@ -188,7 +187,8 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
   private currentJson: ISurveyPropertyGridDefinition;
   private currentProperties: SurveyQuestionPresetPropertiesDetail;
   private currentClassName: string;
-  private propCreator: SurveyCreatorModel;
+  private propCreatorValue: SurveyCreatorModel;
+  public get propCreator(): SurveyCreatorModel { return this.propCreatorValue; }
   public createMainPageCore(): any {
     const parent = (<CreatorEditablePresetPropertyGrid>this.parent);
     return {
@@ -270,7 +270,7 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     };
     const oldSearchValue = settings.propertyGrid.enableSearch;
     settings.propertyGrid.enableSearch = false;
-    this.propCreator = creatorSetup.createCreator(options);
+    this.propCreatorValue = creatorSetup.createCreator(options);
     this.setupPropertyCreator();
     this.getPropertyCreatorQuestion(model).embeddedCreator = this.propCreator;
     settings.propertyGrid.enableSearch = oldSearchValue;
@@ -418,12 +418,27 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     if(!this.isMatrixValueChanged) return;
     this.isMatrixValueChanged = false;
     if(this.currentProperties) {
-      this.currentProperties.updateCurrentJson(model.getValue(this.nameMatrix));
+      this.currentProperties.updateCurrentJson(this.getPropertiesArray());
     }
+  }
+  private getPropertiesArray(): Array<any> {
+    const survey = this.propCreator.survey;
+    const res = [];
+    survey.getAllPanels().forEach(panel => {
+      const item = { name: panel.name, items: [] };
+      (<PanelModelBase>panel).questions.forEach(question => {
+        item.items.push(question.name);
+      });
+      res.push(item);
+    });
+    return res;
   }
   private setupPropertyCreator(): void {
     const creator = this.propCreator;
     creator.showSaveButton = false;
+    creator.onModified.add((sender, options) => {
+      this.isMatrixValueChanged = true;
+    });
     creator.isAutoSave = false;
     creator.showTabsDefault = false;
     creator.showToolbarDefault = false;
