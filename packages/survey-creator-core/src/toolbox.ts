@@ -441,9 +441,7 @@ export class QuestionToolbox
       });
       return innerItem;
     });
-    parentItem.setItems(newItems, (o, e) => {
-      popup.hide();
-    });
+    parentItem.setItems(newItems);
     parentItem.component = "svc-toolbox-item-group";
     parentItem.popupModel.cssClass += " toolbox-subtypes";
     const popup = parentItem.popupModel as PopupModel;

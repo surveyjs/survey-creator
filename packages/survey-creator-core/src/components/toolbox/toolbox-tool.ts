@@ -63,9 +63,6 @@ export class ToolboxToolViewModel extends Base {
   private hidePopup() {
     this.toolboxItem.hidePopup();
     this.toolboxItem.isHovered = false;
-    if (this.model instanceof ListModel) {
-      this.model.onItemClick(this.item);
-    }
   }
 
   private get dragDropHelper(): DragDropSurveyElements {
