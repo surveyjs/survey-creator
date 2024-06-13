@@ -2673,7 +2673,9 @@ export class SurveyCreatorModel extends Base
     if (!!expandedTabName && !this.getPropertyGridExpandedCategory() && !this.survey.isEmpty) {
       const panel = <PanelModel>this.designerPropertyGrid.survey.getPanelByName(expandedTabName);
       if (!!panel) {
+        panel.blockAnimations();
         panel.expand();
+        panel.releaseAnimations();
       }
     }
   }

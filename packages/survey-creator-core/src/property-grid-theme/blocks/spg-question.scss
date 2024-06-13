@@ -68,7 +68,7 @@
 }
 
 .spg-row--multiple {
-  &>div>.spg-row-narrow__question {
+  & > div > .spg-row-narrow__question {
     margin-top: calcSize(-1);
   }
 }
@@ -123,7 +123,7 @@
   gap: calcSize(1);
   flex-wrap: wrap;
 
-  &>div {
+  & > div {
     flex-grow: 1;
     min-width: calcSize(25.5);
 
@@ -144,12 +144,11 @@
   background-color: $red-light;
   border-radius: calcSize(0.5);
   line-height: calcSize(3);
-
 }
 
 .spg-question__erbox,
 sv-question-error {
-  &>div {
+  & > div {
     display: flex;
     gap: calcSize(1);
   }
@@ -179,6 +178,7 @@ sv-question-error {
     gap: calcSize(2);
 
     .spg-row {
+      --animate-margin: 0;
       margin-top: 0;
     }
   }

@@ -10,6 +10,7 @@
 }
 
 .svc-row > .sd-row.sd-page__row {
+  --animate-margin: calc(2 * var(--sjs-base-unit, var(--base-unit, 8px)));
   margin-top: calc(2 * var(--sjs-base-unit, var(--base-unit, 8px)));
 }
 
@@ -54,6 +55,7 @@
 
   &:last-child .sd-row {
     height: initial;
+    --animate-margin: #{calcSize(2)};
     margin-top: calcSize(2);
     margin-bottom: calcSize(2);
   }
@@ -68,6 +70,7 @@
 .svc-panel .svc-row.svc-row--ghost.svc-row.svc-row--ghost {
   .sd-row {
     height: initial;
+    --animate-margin: #{calcSize(2)};
     margin-top: calcSize(2);
     margin-bottom: calcSize(2);
   }
@@ -110,5 +113,5 @@
   }
 }
 .svc-row {
-  @include disableAnimations;
+  // @include disableAnimations;
 }

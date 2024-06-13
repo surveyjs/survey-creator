@@ -105,6 +105,7 @@ let json = {
 
 const options = {
   showLogicTab: true,
+  showThemeTab: true,
   showTranslationTab: true,
   showEmbeddedSurveyTab: true,
   isAutoSave: true
@@ -219,12 +220,10 @@ creator.saveSurveyFunc = (no, callback) => {
   }, 1000);
 };
 
-ReactDOM.render(
-  <React.StrictMode>
-    <SurveyCreator.SurveyCreatorComponent creator={creator} />
-  </React.StrictMode>,
-  document.getElementById("root")
-);
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<React.StrictMode>
+  <SurveyCreator.SurveyCreatorComponent creator={creator} />
+</React.StrictMode>);
 // creator.toolbarItems.push(
 //   new Survey.Action({
 //     id: "toolboxCustomization",

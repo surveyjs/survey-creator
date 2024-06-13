@@ -41,6 +41,8 @@
   align-items: flex-start;
   width: 100%;
   padding: 0 calcSize(4) calcSize(5);
+  --animation-padding-bottom: #{calcSize(5)};
+  --animation-padding-top: 0;
   box-sizing: border-box;
   background: $background-dim;
   box-shadow: inset 0px -1px 0px $border;
@@ -49,16 +51,20 @@
 .spg-panel__content {
   .spg-row {
     width: 100%;
+    --animate-margin: #{calcSize(2)};
     margin-top: calcSize(2);
   }
 
   .spg-row--multiple {
+    --animate-margin: #{calcSize(1)};
     margin-top: calcSize(1);
   }
 }
 
 .sv-mobile-side-bar {
   .spg-panel__content {
+    --animation-padding-bottom: #{calcSize(5)};
+    --animation-padding-top: 0;
     padding: 0 calcSize(2) calcSize(5);
   }
 }
@@ -66,6 +72,55 @@
 .spg-question__nopadding {
   .spg-panel__content {
     padding: 0px;
+    --animation-padding-bottom: 0;
+    --animation-padding-top: 0;
     box-shadow: unset;
   }
+}
+.spg-row--fade-in.spg-row.spg-row.spg-row {
+  margin-top: 0;
+}
+.spg-row--fade-in {
+  animation-fill-mode: forwards;
+  animation-name: fadeIn, moveInWithOverflow, marginFadeIn;
+  min-height: 0 !important;
+  opacity: 0;
+  height: 0;
+  animation-timing-function: $ease-out;
+  animation-delay: $spg-row-fade-in-delay, 0s, 0s;
+  animation-duration: $spg-row-fade-in-duration, $spg-row-move-in-duration, $spg-row-move-in-duration;
+}
+.spg-row--delayed-fade-in {
+  animation-delay: calc(#{$spg-row-fade-in-delay} + #{$spg-row-fade-in-animation-delay}),
+    $spg-row-fade-in-animation-delay, $spg-row-fade-in-animation-delay;
+}
+
+.spg-row--fade-out {
+  animation-name: fadeIn, moveInWithOverflow, marginFadeIn;
+  animation-timing-function: $reverse-ease-out;
+  animation-fill-mode: forwards;
+  animation-direction: reverse;
+  min-height: 0 !important;
+  animation-delay: 0s, $spg-row-move-out-delay, $spg-row-move-out-delay;
+  animation-duration: $spg-row-fade-out-duration, $spg-row-move-out-duration, $spg-row-move-out-duration;
+}
+
+.spg-panel__content--fade-in {
+  animation-name: fadeIn, moveInWithOverflow, paddingFadeIn;
+  min-height: 0 !important;
+  opacity: 0;
+  animation-fill-mode: forwards;
+  animation-timing-function: $ease-out;
+  animation-duration: $spg-expand-fade-in-duration, $spg-expand-move-in-duration, $spg-expand-move-in-duration;
+  animation-delay: $spg-expand-fade-in-delay, 0s, 0s;
+}
+
+.spg-panel__content--fade-out {
+  animation-name: fadeIn, moveInWithOverflow, paddingFadeIn;
+  min-height: 0 !important;
+  animation-direction: reverse;
+  animation-fill-mode: forwards;
+  animation-timing-function: $reverse-ease-out;
+  animation-duration: $spg-collapse-fade-out-duration, $spg-collapse-move-out-duration, $spg-collapse-move-out-duration;
+  animation-delay: 0s, $spg-collapse-move-out-delay, $spg-collapse-move-out-delay;
 }

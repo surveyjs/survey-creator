@@ -807,7 +807,9 @@ export class PropertyGridModel {
     for (var i = 0; i < panels.length; i++) {
       var panel = <PanelModel>panels[i];
       if (panel === question.parent) {
+        panel.blockAnimations();
         panel.expand();
+        panel.releaseAnimations();
       } else {
         panel.collapse();
       }

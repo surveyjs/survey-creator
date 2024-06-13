@@ -61,7 +61,9 @@
   width: max-content;
   padding-right: calcSize(4);
   background-size: calcSize(3) calcSize(3);
-  background-position: right calcSize(0.5) top 50%, 0 0;
+  background-position:
+    right calcSize(0.5) top 50%,
+    0 0;
   background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 15L17 10H7L12 15Z' fill='%2390909080'/%3E%3C/svg%3E%0A");
   background-repeat: no-repeat;
 }
@@ -80,7 +82,7 @@
   }
 }
 
-.spg-table__cell--actions>.spg-matrixdynamic__drag-element {
+.spg-table__cell--actions > .spg-matrixdynamic__drag-element {
   display: inline-block;
   margin-top: calcSize(0.5);
   cursor: move;
@@ -109,5 +111,92 @@
 }
 
 .spg-table__question-wrapper {
+  box-sizing: border-box;
   padding: calcSize(0.5) 0;
+}
+
+@keyframes borderAnimation {
+  from {
+    border-width: 0px;
+  }
+  to {
+    border-width: 8px;
+  }
+}
+
+@keyframes empty {
+  from {
+  }
+  to {
+  }
+}
+.spg-table__row--fade-out,
+.spg-table__row--fade-in {
+  animation-name: empty;
+  animation-fill-mode: forwards;
+  --fade-in-animation-duration: calc(#{$spg-matrix-row-fade-in-duration} + #{$spg-matrix-row-fade-in-delay});
+  animation-duration: max(var(--fade-in-animation-duration), #{$spg-matrix-row-move-in-duration});
+  & > td {
+    animation-name: borderAnimation;
+    animation-timing-function: $ease-out;
+    animation-duration: $spg-matrix-row-move-in-duration;
+    animation-fill-mode: forwards;
+    & > div {
+      animation-name: fadeIn, moveInWithOverflow;
+      opacity: 0;
+      animation-timing-function: $ease-out;
+      animation-fill-mode: forwards;
+      animation-duration: $spg-matrix-row-fade-in-duration, $spg-matrix-row-move-in-duration;
+      animation-delay: $spg-matrix-row-fade-in-delay, 0s;
+    }
+  }
+}
+.spg-table__row--fade-out {
+  animation-direction: reverse;
+  --move-out-animation-duration: calc(#{$spg-matrix-row-move-out-duration} + #{$spg-matrix-row-move-out-delay});
+  animation-duration: max(var(--move-out-animation-duration), #{$spg-matrix-row-fade-out-duration});
+  & > td {
+    animation-duration: $spg-matrix-row-move-out-duration;
+    animation-delay: $spg-matrix-row-move-out-delay;
+    animation-direction: reverse;
+    animation-timing-function: $reverse-ease-out;
+    & > div {
+      animation-direction: reverse;
+      animation-timing-function: $reverse-ease-out;
+      animation-duration: $spg-matrix-row-fade-out-duration, $spg-matrix-row-move-out-duration;
+      animation-delay: 0s, $spg-matrix-row-move-out-delay;
+    }
+  }
+}
+.spg-table__row--detail {
+  &.spg-table__row--fade-in {
+    --fade-in-animation-duration: calc(
+      #{$spg-matrix-detail-row-fade-in-duration} + #{$spg-matrix-detail-row-fade-in-delay}
+    );
+    animation-duration: max(var(--fade-in-animation-duration), #{$spg-matrix-detail-row-move-in-duration});
+    & > td {
+      animation-timing-function: $ease-out;
+      animation-duration: $spg-matrix-detail-row-move-in-duration;
+      & > div {
+        animation-duration: $spg-matrix-detail-row-fade-in-duration, $spg-matrix-detail-row-move-in-duration;
+        animation-delay: $spg-matrix-detail-row-fade-in-delay, 0s;
+      }
+    }
+  }
+  &.spg-table__row--fade-out {
+    --move-out-animation-duration: calc(
+      #{$spg-matrix-detail-row-move-out-duration} + #{$spg-matrix-detail-row-move-out-delay}
+    );
+    animation-duration: max(var(--move-out-animation-duration), #{$spg-matrix-detail-row-fade-out-duration});
+    & > td {
+      animation-timing-function: $reverse-ease-out;
+      animation-duration: $spg-matrix-detail-row-move-out-duration;
+      animation-delay: $spg-matrix-detail-row-move-out-delay;
+      animation-direction: reverse;
+      & > div {
+        animation-duration: $spg-matrix-detail-row-fade-out-duration, $spg-matrix-detail-row-move-out-duration;
+        animation-delay: 0s, $spg-matrix-detail-row-move-out-delay;
+      }
+    }
+  }
 }

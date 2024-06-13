@@ -1,5 +1,5 @@
 @import "../variables.scss";
-
+@import "./blocks/variables.scss";
 @import "blocks/spg-action-bar.scss";
 @import "blocks/spg-question.scss";
 @import "blocks/spg-input.scss";
@@ -22,7 +22,7 @@
   width: 100%;
   border-right: 1px solid $border;
   box-sizing: border-box;
-  @include disableAnimations;
+  // @include disableAnimations;
 }
 
 .spg-container {
