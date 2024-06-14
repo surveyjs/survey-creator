@@ -95,7 +95,7 @@ const conditionBuilder = Selector(".sl-embedded-survey[data-name=\"conditions\"]
 const conditionTextEdit = Selector(".sl-embedded-survey[data-name=\"conditions\"] div[data-name=\"textEditor\"]");
 
 const newRuleDisplayText = "New rule";
-const cellRules = Selector(tableRulesSelector.find(".sl-table__cell[data-responsive-title=\"rules\"]"));
+const cellRules = Selector(tableRulesSelector.find(".sl-table__row.sd-table__row--has-panel .sl-table__cell:nth-of-type(2)"));
 const removeRuleButton = Selector(".sl-table__remove-button").filterVisible();
 const disabledClass = "svc-logic-tab__content-action--disabled";
 const addButton = Selector(".sl-paneldynamic__add-btn ").filterVisible();
