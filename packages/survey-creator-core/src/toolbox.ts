@@ -625,7 +625,7 @@ export class QuestionToolbox
    * Removes categories from the Toolbox.
    */
   public removeCategories() {
-    const allTypes: string[] = ElementFactory.Instance.getAllTypes();
+    const allTypes: string[] = ElementFactory.Instance.getAllToolboxTypes();
     this.changeCategories(allTypes.map(t => ({ name: t, category: null })));
     this.onItemsChanged();
   }

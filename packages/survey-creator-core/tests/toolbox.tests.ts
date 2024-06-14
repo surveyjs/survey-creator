@@ -16,13 +16,9 @@ import { QuestionToolbox } from "../src/toolbox";
 import { CreatorTester } from "./creator-tester";
 
 test("toolbox support options", (): any => {
-  var allTypes = ElementFactory.Instance.getAllTypes();
+  var allTypes = ElementFactory.Instance.getAllToolboxTypes();
   var toolbox = new QuestionToolbox();
-  var unregistredCount = allTypes.indexOf("buttongroup") > -1 ? 1 : 0;
-  if (allTypes.indexOf("linkvalue") > -1) {
-    unregistredCount++;
-  }
-  expect(toolbox.items).toHaveLength(allTypes.length - unregistredCount);
+  expect(toolbox.items).toHaveLength(allTypes.length);
   expect(toolbox.items[0].name).toEqual(toolbox.orderedQuestions[0]);
   expect(toolbox.items[0].json["type"]).toEqual(toolbox.orderedQuestions[0]);
   expect(toolbox.getItemByName("buttongroup")).toBeFalsy();
@@ -392,13 +388,9 @@ test("toolbox copied questions", (): any => {
   expect(toolbox.items).toHaveLength(2);
 });
 test("Save/Load all toolbox items", (): any => {
-  var allTypes = ElementFactory.Instance.getAllTypes();
-  var unregistredCount = allTypes.indexOf("buttongroup") > -1 ? 1 : 0;
-  if (allTypes.indexOf("linkvalue") > -1) {
-    unregistredCount++;
-  }
+  var allTypes = ElementFactory.Instance.getAllToolboxTypes();
   var toolbox1 = new QuestionToolbox();
-  expect(toolbox1.items).toHaveLength(allTypes.length - unregistredCount);
+  expect(toolbox1.items).toHaveLength(allTypes.length);
   var toolbox2 = new QuestionToolbox(["text", "dropdown"]);
   toolbox1.jsonText = toolbox2.jsonText;
   expect(toolbox1.items).toHaveLength(2);
