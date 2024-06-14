@@ -176,4 +176,4 @@ Serializer.addClass("color", [
 
 QuestionFactory.Instance.registerQuestion("color", name => {
   return new QuestionColorModel(name);
-});
+}, false);
