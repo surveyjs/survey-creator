@@ -113,5 +113,15 @@ test("tranlation property grid", async (t) => {
       .click(Selector("span").withText("Català"))
       .click(Selector("button[title='Auto-translate All']"));
     await takeElementScreenshot("translation-auto-translate-popup.png", Selector(".st-translation-dialog"), t, comparer);
+    await t.click("button[title='Apply']")
+      .typeText(Selector("textarea").nth(1), "translated")
+      .click(Selector(".spg-action-button"))
+      .click(Selector("span").withText("Dansk"))
+      .click(Selector("button[title='Auto-translate All']").nth(1));
+    await takeElementScreenshot("translation-auto-translate-popup-enabled-dropdown.png", Selector(".st-translation-dialog"), t, comparer);
+    await t.resizeWindow(1000, 1440);
+    await takeElementScreenshot("translation-auto-translate-popup-medium-screen.png", Selector(".st-translation-dialog"), t, comparer);
+    await t.resizeWindow(800, 1440);
+    await takeElementScreenshot("translation-auto-translate-popup-small-screen.png", Selector(".st-translation-dialog"), t, comparer);
   });
 });
