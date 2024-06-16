@@ -51,6 +51,7 @@ import {
   CreateCustomMessagePanelEvent, ActiveTabChangingEvent, ActiveTabChangedEvent, BeforeUndoEvent, BeforeRedoEvent,
   PageAddingEvent, DragStartEndEvent
 } from "./creator-events-api";
+import { SurveyElementActionContainer } from "./components/action-container-view-model";
 
 require("./components/creator.scss");
 require("./components/string-editor.scss");
@@ -1498,7 +1499,11 @@ export class SurveyCreatorModel extends Base
     for (var i = 0; i < properties.length; i++) {
       const prop = Serializer.findProperty(className, properties[i]);
       if (!!prop) {
-        prop.visible = visible;
+        if(!visible) {
+          this.hiddenProperties[prop.id] = true;
+        } else {
+          delete this.hiddenProperties[prop.id];
+        }
       }
     }
   }
@@ -2843,6 +2848,7 @@ export class SurveyCreatorModel extends Base
     }
     this.selectElement(objIndex > -1 ? elements[objIndex] : parent);
   }
+  hiddenProperties: any = {};
   protected onCanShowObjectProperty(
     object: any,
     property: JsonObjectProperty,
@@ -2850,6 +2856,7 @@ export class SurveyCreatorModel extends Base
     parentObj: any,
     parentProperty: JsonObjectProperty
   ): boolean {
+    if(this.hiddenProperties[property.id]) return false;
     var options = {
       obj: object,
       property: property,
@@ -3625,52 +3632,35 @@ export class StylesManager {
 export function initializeDesignTimeSurveyModel(model: any, creator: SurveyCreatorModel) {
   model.creator = creator;
   model.isPopupEditorContent = false;
-
-  const getElementWrapperComponentNamePrev = model.getElementWrapperComponentName;
-  model.getElementWrapperComponentName = (element: any, reason?: string): string => {
-    let componentName = getElementWrapperComponentName(
-      element,
-      reason,
-      model.isPopupEditorContent
-    );
-
-    return componentName || getElementWrapperComponentNamePrev.call(model, element, reason);
-  };
-
-  const getQuestionContentWrapperComponentNamePrev = model.getQuestionContentWrapperComponentName;
-  model.getQuestionContentWrapperComponentName = (element: any, reason?: string): string => {
-    let componentName = getQuestionContentWrapperComponentName(element);
-    return (
-      componentName || getQuestionContentWrapperComponentNamePrev.call(model, element, reason)
-    );
-  };
-
-  const getElementWrapperComponentDataPrev = model.getElementWrapperComponentData;
-  model.getElementWrapperComponentData = (element: any, reason?: string): any => {
-    const data = getElementWrapperComponentData(element, reason, creator);
-
-    return data || getElementWrapperComponentDataPrev.call(model, element, reason);
-  };
-
-  model.getRowWrapperComponentName = (row: QuestionRowModel): string => {
-    return "svc-row";
-  };
-
-  model.getRowWrapperComponentData = (row: QuestionRowModel): any => {
-    return {
-      creator: creator,
-      row
-    };
-  };
-
-  model.getItemValueWrapperComponentName = (item: ItemValue, question: QuestionSelectBase): string => {
-    return getItemValueWrapperComponentName(item, question);
-  };
-
-  model.getItemValueWrapperComponentData = (item: ItemValue, question: QuestionSelectBase): any => {
-    return getItemValueWrapperComponentData(item, question, creator);
-  };
-
+  model.onElementWrapperComponentName.add((_, opt) => {
+    const compName = opt.componentName;
+    if(opt.wrapperName === "component") {
+      opt.componentName = getElementWrapperComponentName(opt.element, opt.reason, model.isPopupEditorContent);
+    }
+    if(opt.wrapperName === "content-component") {
+      opt.componentName = getQuestionContentWrapperComponentName(opt.element);
+    }
+    if(opt.wrapperName === "row") {
+      opt.componentName = "svc-row";
+    }
+    if(opt.wrapperName === "itemvalue") {
+      opt.componentName = getItemValueWrapperComponentName(opt.item, opt.element);
+    }
+    opt.componentName = opt.componentName || compName;
+  });
+  model.onElementWrapperComponentData.add((_, opt) => {
+    const data = opt.data;
+    if(opt.wrapperName === "component") {
+      opt.data = getElementWrapperComponentData(opt.element, opt.reason, creator);
+    }
+    if(opt.wrapperName === "row") {
+      opt.data = { creator: creator, row: opt.element };
+    }
+    if(opt.wrapperName === "itemvalue") {
+      opt.data = getItemValueWrapperComponentData(opt.item, opt.element, creator);
+    }
+    opt.data = opt.data || data;
+  });
   model.getRendererForString = (element: Base, name: string): string => {
     if (!creator.readOnly && isStringEditable(element, name)) {
       return editableStringRendererName;

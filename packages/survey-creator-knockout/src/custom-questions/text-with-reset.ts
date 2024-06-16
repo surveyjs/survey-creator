@@ -65,7 +65,7 @@ Serializer.overrideClassCreator("textwithreset", function () {
 
 QuestionFactory.Instance.registerQuestion("textwithreset", name => {
   return new QuestionTextWithReset(name);
-});
+}, false);
 RendererFactory.Instance.registerRenderer("textwithreset", "textwithreset", "svc-text-with-reset");
 
 export class QuestionCommentWithReset extends QuestionCommentWithResetModel {
@@ -98,7 +98,7 @@ Serializer.overrideClassCreator("commentwithreset", function () {
 
 QuestionFactory.Instance.registerQuestion("commentwithreset", name => {
   return new QuestionCommentWithReset(name);
-});
+}, false);
 RendererFactory.Instance.registerRenderer("commentwithreset", "commentwithreset", "svc-text-with-reset");
 
 ko.components.register("svc-text-with-reset", {

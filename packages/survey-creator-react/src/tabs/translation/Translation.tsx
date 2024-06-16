@@ -9,7 +9,7 @@ import { Translation } from "survey-creator-core";
 
 export class TabTranslationComponent extends SurveyElementBase<any, any> {
   private get model(): Translation {
-    return this.props.data;
+    return this.props.data || this.props.model;
   }
   protected getStateElement(): Base {
     return this.model;

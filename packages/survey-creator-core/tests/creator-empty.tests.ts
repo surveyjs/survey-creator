@@ -183,6 +183,24 @@ test("Undo deleting a question that has been just added, bug#4479", (): any => {
   expect(page.questions[0].name).toBe("question1");
   creatorSetting.defaultNewSurveyJSON = savedNewJSON;
 });
+test("Undo/Redo on empty survey, bug#5581", (): any => {
+  const savedNewJSON = creatorSetting.defaultNewSurveyJSON;
+  creatorSetting.defaultNewSurveyJSON = {};
+  const creator = new CreatorTester();
+  creator.JSON = {};
+  creator.clickToolboxItem({ type: "text" });
+  expect(creator.selectedElementName).toBe("question1");
+  let page = creator.survey.pages[0];
+  expect(page.questions).toHaveLength(1);
+  creator.undo();
+  expect(creator.survey.pages).toHaveLength(0);
+  creator.redo();
+  expect(creator.survey.pages).toHaveLength(1);
+  page = creator.survey.pages[0];
+  expect(page.questions).toHaveLength(1);
+  expect(page.questions[0].name).toBe("question1");
+  creatorSetting.defaultNewSurveyJSON = savedNewJSON;
+});
 test("Create last question, delete page and select survey in property grid", (): any => {
   const savedNewJSON = creatorSetting.defaultNewSurveyJSON;
   creatorSetting.defaultNewSurveyJSON = {};

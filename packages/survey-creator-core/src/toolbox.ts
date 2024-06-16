@@ -100,7 +100,7 @@ export class QuestionToolboxCategory extends Base {
 export class QuestionToolboxItem extends Action implements IQuestionToolboxItem {
   constructor(private item: IQuestionToolboxItem) {
     super(item);
-    if(!this.id) {
+    if (!this.id) {
       this.id = this.name;
     }
   }
@@ -115,7 +115,7 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
     return this.item;
   }
   get typeName(): string {
-    if(!!this.json && !!this.json.type) return this.json.type;
+    if (!!this.json && !!this.json.type) return this.json.type;
     return this.name;
   }
   get isPanel(): boolean {
@@ -334,7 +334,7 @@ export class QuestionToolbox
     return questionCategoryMap;
   }
   private getCategoryTitle(name: string): string {
-    if(this.categoriesTitles[name]) return this.categoriesTitles[name];
+    if (this.categoriesTitles[name]) return this.categoriesTitles[name];
     return getLocString("toolboxCategories." + name);
   }
   private onActiveCategoryChanged(newValue: string) {
@@ -565,7 +565,7 @@ export class QuestionToolbox
    * @param name
    */
   public getItemByName(name: string): IQuestionToolboxItem {
-    if(!name) return null;
+    if (!name) return null;
     const index: number = this.indexOf(name);
     return index > -1 ? this.actions[index] : null;
   }
@@ -610,7 +610,7 @@ export class QuestionToolbox
       this.updateActionTitle(action);
       this.updateActionTitle(action.innerItem);
     });
-    if(Array.isArray(this.categories)) {
+    if (Array.isArray(this.categories)) {
       this.categories.forEach(category => {
         category.title = this.getCategoryTitle(category.name);
       });
@@ -695,7 +695,7 @@ export class QuestionToolbox
     this.categoriesTitles = {};
     const actionList = new Array<IQuestionToolboxItem>();
     categories.forEach(category => {
-      if(!!category.category && !!category.title) {
+      if (!!category.category && !!category.title) {
         this.categoriesTitles[category.category] = category.title;
       }
       if (!Array.isArray(category.items)) return;
@@ -720,8 +720,8 @@ export class QuestionToolbox
       });
     });
     this.actions.forEach(item => {
-      if(!item.visible) {
-        if(displayMisc) {
+      if (!item.visible) {
+        if (displayMisc) {
           item.visible = true;
           item.category = "misc";
         }
@@ -736,7 +736,7 @@ export class QuestionToolbox
    * Removes categories from the Toolbox.
    */
   public removeCategories() {
-    const allTypes: string[] = ElementFactory.Instance.getAllTypes();
+    const allTypes: string[] = ElementFactory.Instance.getAllToolboxTypes();
     this.changeCategories(allTypes.map(t => ({ name: t, category: null })));
     this.onItemsChanged();
   }
@@ -818,7 +818,7 @@ export class QuestionToolbox
       item.innerItem.action = () => {
         this.creator.clickToolboxItem((<any>item).json);
       };
-      if(item.visible === false) continue;
+      if (item.visible === false) continue;
       const categoryName = item.category ? item.category : "general";
       if (!categoriesHash[categoryName]) {
         const category = this.createCategory();
@@ -844,7 +844,7 @@ export class QuestionToolbox
         }
       }
     }
-    if(changeActions) {
+    if (changeActions) {
       let newItems = [];
       this.categories.forEach((cat) => {
         newItems = newItems.concat(cat.items);
@@ -1000,7 +1000,7 @@ export class QuestionToolbox
     return !!widget && !widget.showInToolbox;
   }
   private getQuestionTypes(supportedQuestions: Array<string>): string[] {
-    const allTypes: string[] = ElementFactory.Instance.getAllTypes();
+    const allTypes: string[] = ElementFactory.Instance.getAllToolboxTypes();
     if (!supportedQuestions || supportedQuestions.length == 0)
       supportedQuestions = allTypes;
     const questions: string[] = [];
@@ -1013,7 +1013,6 @@ export class QuestionToolbox
       var name: string = supportedQuestions[i];
       if (
         questions.indexOf(name) < 0 &&
-        QuestionToolbox.hiddenTypes.indexOf(name) < 0 &&
         allTypes.indexOf(name) > -1 &&
         !this.isHiddenCustomWidget(name)
       )
