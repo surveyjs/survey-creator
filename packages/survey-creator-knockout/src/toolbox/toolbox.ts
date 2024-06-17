@@ -38,6 +38,7 @@ export class ToolboxViewModel extends Base {
 
   dispose() {
     this._categoriesSubscription.dispose();
+    this.toolbox.setRootElement(null);
     // this._isCompactSubscription.dispose();
   }
 }

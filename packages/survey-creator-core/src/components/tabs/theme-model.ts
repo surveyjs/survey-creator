@@ -286,14 +286,14 @@ export class ThemeModel extends Base implements ITheme {
     this.undoRedoManager = new UndoRedoManager();
   }
 
-  public get header(): IHeader {
+  public get header(): HeaderModel {
     return this.getPropertyValue("header");
   }
-  public set header(val: IHeader) {
+  public set header(val: HeaderModel) {
     if (!val) return;
 
     this.setNewHeaderProperty();
-    (this.header as HeaderModel).fromJSON((val as HeaderModel).toJSON());
+    this.header.fromJSON(val.toJSON());
   }
 
   @property({
@@ -463,16 +463,19 @@ export class ThemeModel extends Base implements ITheme {
 
   fromJSON(json: ITheme, options?: ILoadFromJSONOptions): void {
     if (!json) return;
-    super.fromJSON(json, options);
-    const headerModel = new HeaderModel();
-    headerModel.fromJSON(json.header || {});
-    headerModel.owner = this;
-    this.header = headerModel;
+
+    const _json = {};
+    assign(_json, json);
+    delete _json["header"];
+    delete _json["cssVariables"];
+
+    super.fromJSON(_json, options);
+    this.header.fromJSON(json.header || {});
 
     if (json.cssVariables) {
       this["primaryColor"] = json.cssVariables["--sjs-primary-backcolor"];
       super.fromJSON(json.cssVariables, options);
-      headerModel.setCssVariables(json.cssVariables);
+      this.header.setCssVariables(json.cssVariables);
 
       this.scale = !!this["--sjs-base-unit"] ? roundTo2Decimals(parseFloat(this["--sjs-base-unit"]) * 100 / 8) : undefined;
       this.fontSize = !!this["--sjs-font-size"] ? roundTo2Decimals(parseFloat(this["--sjs-font-size"]) * 100 / 16) : undefined;
@@ -482,6 +485,11 @@ export class ThemeModel extends Base implements ITheme {
       this["questionPanel"] = backgroundCornerRadiusFromCssVariable(this.getPropertyByName("questionPanel"), json.cssVariables, "--sjs-general-backcolor", "--sjs-general-backcolor-dark", this.cornerRadius);
       this["editorPanel"] = backgroundCornerRadiusFromCssVariable(this.getPropertyByName("editorPanel"), json.cssVariables, "--sjs-general-backcolor-dim-light", "--sjs-general-backcolor-dim-dark", this.cornerRadius);
 
+      Serializer.getProperties("theme").forEach(property => {
+        if (property.type === "font") {
+          this[property.name] = fontsettingsFromCssVariable(property, json.cssVariables);
+        }
+      });
       this["pageTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("pageTitle"), json.cssVariables, "--sjs-general-dim-forecolor");
       this["pageDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("pageDescription"), json.cssVariables, "--sjs-general-dim-forecolor-light");
       this["questionTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("questionTitle"), json.cssVariables, "--sjs-general-forecolor");
@@ -722,6 +730,7 @@ Serializer.addProperties("theme",
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
         editor.allowClear = false;
+        editor.choices = [].concat(DefaultFonts);
       }
     }
   },

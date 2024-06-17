@@ -5,7 +5,8 @@ import {
   SurveyModel,
   SurveyElement,
   property,
-  actionModeType
+  actionModeType,
+  IAction
 } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { settings } from "../creator-settings";
@@ -20,7 +21,6 @@ export class SurveyElementActionContainer extends AdaptiveActionContainer {
         item.mode = "removed";
         return;
       }
-
       if (this.needToShrink(item, shrinkStart, shrinkEnd)) {
         item.mode = item.innerItem.iconName ? "small" : "removed";
         return;

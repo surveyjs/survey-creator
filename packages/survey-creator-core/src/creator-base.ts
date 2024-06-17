@@ -51,6 +51,7 @@ import {
   CreateCustomMessagePanelEvent, ActiveTabChangingEvent, ActiveTabChangedEvent, BeforeUndoEvent, BeforeRedoEvent,
   PageAddingEvent, DragStartEndEvent
 } from "./creator-events-api";
+import { SurveyElementActionContainer } from "./components/action-container-view-model";
 
 require("./components/creator.scss");
 require("./components/string-editor.scss");
@@ -242,7 +243,7 @@ export class SurveyCreatorModel extends Base
     this.startEditTitleOnQuestionAddedValue = value;
   }
   public get startEditTitleOnQuestionAdded() {
-    return !this.isMobileView && this.startEditTitleOnQuestionAddedValue;
+    return !this.isMobileView && !this.toolbox.searchManager.filterString && this.startEditTitleOnQuestionAddedValue;
   }
   private startEditTitleOnQuestionAddedValue: boolean = true;
   private isRTLValue: boolean = false;
@@ -1573,7 +1574,11 @@ export class SurveyCreatorModel extends Base
     for (var i = 0; i < properties.length; i++) {
       const prop = Serializer.findProperty(className, properties[i]);
       if (!!prop) {
-        prop.visible = visible;
+        if(!visible) {
+          this.hiddenProperties[prop.id] = true;
+        } else {
+          delete this.hiddenProperties[prop.id];
+        }
       }
     }
   }
@@ -1841,14 +1846,14 @@ export class SurveyCreatorModel extends Base
    * @see onDragEnd
    * @see onDragDropAllow
    */
-  public onDragStart: EventBase<any, DragStartEndEvent> = new EventBase<any, DragStartEndEvent>();
+  public onDragStart: EventBase<SurveyCreatorModel, DragStartEndEvent> = this.addCreatorEvent<SurveyCreatorModel, DragStartEndEvent>();
   public onBeforeDrop: EventBase<any, DragStartEndEvent> = this.onDragStart;
   /**
    * An event that is raised when users finish dragging a survey element within the design surface.
    * @see onDragStart
    * @see onDragDropAllow
    */
-  public onDragEnd: EventBase<any, DragStartEndEvent> = new EventBase<any, DragStartEndEvent>();
+  public onDragEnd: EventBase<SurveyCreatorModel, DragStartEndEvent> = this.addCreatorEvent<SurveyCreatorModel, DragStartEndEvent>();
   public onAfterDrop: EventBase<any, DragStartEndEvent> = this.onDragEnd;
   private initDragDropSurveyElements() {
     DragDropSurveyElements.restrictDragQuestionBetweenPages =
@@ -1858,7 +1863,7 @@ export class SurveyCreatorModel extends Base
     let isDraggedFromToolbox = false;
     this.dragDropSurveyElements.onDragStart.add((sender, options) => {
       isDraggedFromToolbox = !sender.draggedElement.parent;
-      this.onDragStart.fire(sender, options);
+      this.onDragStart.fire(this, options);
       this.startUndoRedoTransaction("drag drop");
     });
     this.dragDropSurveyElements.onDragEnd.add((sender, options) => {
@@ -1866,7 +1871,7 @@ export class SurveyCreatorModel extends Base
       const editTitle = isDraggedFromToolbox && this.startEditTitleOnQuestionAdded;
       this.selectElement(options.draggedElement, undefined, false, editTitle);
       isDraggedFromToolbox = false;
-      this.onDragEnd.fire(sender, options);
+      this.onDragEnd.fire(this, options);
     });
   }
   private initDragDropChoices() {
@@ -2112,13 +2117,13 @@ export class SurveyCreatorModel extends Base
   public createSurvey(json: any, reason: string, model?: any, callback?: (survey: SurveyModel) => void, area?: string): SurveyModel {
     const survey = this.createSurveyCore(json, reason);
 
-    if (reason !== "designer" && reason !== "test") { survey.fitToContainer = false; }
+    if (reason !== "designer" && reason !== "test" && reason !== "theme") { survey.fitToContainer = false; }
 
     if (reason === "designer" || reason === "modal-question-editor") {
       initializeDesignTimeSurveyModel(survey, this);
     }
     survey["needRenderIcons"] = false;
-    if (reason != "designer" && reason != "test") {
+    if (reason != "designer" && reason != "test" && reason !== "theme") {
       survey.locale = editorLocalization.currentLocale;
       if (!json["clearInvisibleValues"]) {
         survey.clearInvisibleValues = "onComplete";
@@ -2137,7 +2142,7 @@ export class SurveyCreatorModel extends Base
     if (reason === "designer") {
       this.onDesignerSurveyCreated.fire(this, { survey: survey });
     }
-    if (reason === "test") {
+    if (reason === "test" || reason === "theme") {
       this.onPreviewSurveyCreated.fire(this, { survey: survey });
     }
     return survey;
@@ -2146,13 +2151,11 @@ export class SurveyCreatorModel extends Base
     const hash: any = {};
     hash["designer"] = "designer-tab";
     hash["test"] = "preview-tab";
-    hash["property-grid"] = "property-grid";
     hash["default-value"] = "default-value-popup-editor";
     hash["condition-builder"] = "logic-rule:condition-editor";
     hash["logic-item-editor"] = "logic-rule:action-editor";
     hash["logic-items"] = "logic-tab:condition-list";
     hash["theme"] = "theme-tab";
-    hash["theme_editor"] = "theme-tab:property-grid";
     hash["translation_settings"] = "translation-tab:language-list";
     hash["translation_strings"] = "translation-tab:table";
     hash["translation_strings_header"] = "translation-tab:table-header";
@@ -2160,7 +2163,7 @@ export class SurveyCreatorModel extends Base
     hash["fast-entry"] = "table-values-popup-editor";
     hash["modal-question-editor"] = "matrix-cell-question-popup-editor";
     const res = hash[reason];
-    return !!res ? res : "internal-use";
+    return !!res ? res : reason;
   }
   protected createSurveyCore(json: any = {}, reason: string): SurveyModel {
     return new SurveyModel(json);
@@ -2793,7 +2796,7 @@ export class SurveyCreatorModel extends Base
       }
       this.survey.lazyRendering = false;
       this.doClickQuestionCore(newElement, modifiedType, -1, panel);
-      this.selectElement(newElement, null, true, this.startEditTitleOnQuestionAdded);
+      this.selectElement(newElement, null, !this.toolbox.searchManager.filterString, this.startEditTitleOnQuestionAdded);
     }
   }
   public getJSONForNewElement(json: any): any {
@@ -2930,6 +2933,7 @@ export class SurveyCreatorModel extends Base
     }
     this.selectElement(objIndex > -1 ? elements[objIndex] : parent);
   }
+  hiddenProperties: any = {};
   protected onCanShowObjectProperty(
     object: any,
     property: JsonObjectProperty,
@@ -2937,6 +2941,7 @@ export class SurveyCreatorModel extends Base
     parentObj: any,
     parentProperty: JsonObjectProperty
   ): boolean {
+    if(this.hiddenProperties[property.id]) return false;
     var options = {
       obj: object,
       property: property,
@@ -3715,52 +3720,35 @@ export class StylesManager {
 export function initializeDesignTimeSurveyModel(model: any, creator: SurveyCreatorModel) {
   model.creator = creator;
   model.isPopupEditorContent = false;
-
-  const getElementWrapperComponentNamePrev = model.getElementWrapperComponentName;
-  model.getElementWrapperComponentName = (element: any, reason?: string): string => {
-    let componentName = getElementWrapperComponentName(
-      element,
-      reason,
-      model.isPopupEditorContent
-    );
-
-    return componentName || getElementWrapperComponentNamePrev.call(model, element, reason);
-  };
-
-  const getQuestionContentWrapperComponentNamePrev = model.getQuestionContentWrapperComponentName;
-  model.getQuestionContentWrapperComponentName = (element: any, reason?: string): string => {
-    let componentName = getQuestionContentWrapperComponentName(element);
-    return (
-      componentName || getQuestionContentWrapperComponentNamePrev.call(model, element, reason)
-    );
-  };
-
-  const getElementWrapperComponentDataPrev = model.getElementWrapperComponentData;
-  model.getElementWrapperComponentData = (element: any, reason?: string): any => {
-    const data = getElementWrapperComponentData(element, reason, creator);
-
-    return data || getElementWrapperComponentDataPrev.call(model, element, reason);
-  };
-
-  model.getRowWrapperComponentName = (row: QuestionRowModel): string => {
-    return "svc-row";
-  };
-
-  model.getRowWrapperComponentData = (row: QuestionRowModel): any => {
-    return {
-      creator: creator,
-      row
-    };
-  };
-
-  model.getItemValueWrapperComponentName = (item: ItemValue, question: QuestionSelectBase): string => {
-    return getItemValueWrapperComponentName(item, question);
-  };
-
-  model.getItemValueWrapperComponentData = (item: ItemValue, question: QuestionSelectBase): any => {
-    return getItemValueWrapperComponentData(item, question, creator);
-  };
-
+  model.onElementWrapperComponentName.add((_, opt) => {
+    const compName = opt.componentName;
+    if(opt.wrapperName === "component") {
+      opt.componentName = getElementWrapperComponentName(opt.element, opt.reason, model.isPopupEditorContent);
+    }
+    if(opt.wrapperName === "content-component") {
+      opt.componentName = getQuestionContentWrapperComponentName(opt.element);
+    }
+    if(opt.wrapperName === "row") {
+      opt.componentName = "svc-row";
+    }
+    if(opt.wrapperName === "itemvalue") {
+      opt.componentName = getItemValueWrapperComponentName(opt.item, opt.element);
+    }
+    opt.componentName = opt.componentName || compName;
+  });
+  model.onElementWrapperComponentData.add((_, opt) => {
+    const data = opt.data;
+    if(opt.wrapperName === "component") {
+      opt.data = getElementWrapperComponentData(opt.element, opt.reason, creator);
+    }
+    if(opt.wrapperName === "row") {
+      opt.data = { creator: creator, row: opt.element };
+    }
+    if(opt.wrapperName === "itemvalue") {
+      opt.data = getItemValueWrapperComponentData(opt.item, opt.element, creator);
+    }
+    opt.data = opt.data || data;
+  });
   model.getRendererForString = (element: Base, name: string): string => {
     if (!creator.readOnly && isStringEditable(element, name)) {
       return editableStringRendererName;

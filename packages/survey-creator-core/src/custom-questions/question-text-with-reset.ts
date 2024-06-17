@@ -48,7 +48,7 @@ export class QuestionTextWithResetModel extends QuestionTextModel {
 Serializer.addClass("textwithreset", [], () => new QuestionTextWithResetModel(""), "text");
 QuestionFactory.Instance.registerQuestion("textwithreset", name => {
   return new QuestionTextWithResetModel(name);
-});
+}, false);
 export class QuestionCommentWithResetModel extends QuestionCommentModel {
   constructor(name: string) {
     super(name);
@@ -84,4 +84,4 @@ export class QuestionCommentWithResetModel extends QuestionCommentModel {
 Serializer.addClass("commentwithreset", [{ name: "allowResize:boolean", default: false }], () => new QuestionCommentWithResetModel(""), "comment");
 QuestionFactory.Instance.registerQuestion("commentwithreset", name => {
   return new QuestionCommentWithResetModel(name);
-});
+}, false);

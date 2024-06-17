@@ -29,4 +29,4 @@ Serializer.overrideClassCreator("embeddedsurvey", function () {
 });
 QuestionFactory.Instance.registerQuestion("embeddedsurvey", (name) => {
   return new QuestionEmbeddedSurvey(name);
-});
+}, false);

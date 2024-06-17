@@ -1,14 +1,26 @@
 <ng-template #template>
-  <div class="svc-toolbox" [class.svc-toolbox--compact]="model.isCompact" #container>
-    <div class="svc-toolbox__container">
-      <ng-container *ngIf="!(model.isCompact || model.categories.length == 1 || !model.showCategoryTitles)">
-        <svc-toolbox-category *ngFor="let category of model.categories" [category]="category" [toolbox]="model"></svc-toolbox-category>
-      </ng-container>
-      <ng-container *ngIf="model.isCompact || model.categories.length == 1 || !model.showCategoryTitles">
-        <div class="svc-toolbox__category">
-          <svc-toolbox-tool *ngFor="let item of model.renderedActions" [creator]="creator" [item]="item" [isCompact]="model.isCompact"></svc-toolbox-tool>
+  <div [class]="model.classNames" #container>
+    <div (focusout)="model.focusOut($event)" class="svc-toolbox__panel">
+      <div class="svc-toolbox__scroller">
+        <div *ngIf="model.showSearch" class="svc-toolbox__search-container">
+          <ng-container *ngIf="model.isCompactRendered">
+          <svc-toolbox-tool [creator]="creator" [item]="searchItem" [isCompact]="model.isCompactRendered"></svc-toolbox-tool>
+          <div class="svc-toolbox__category-separator svc-toolbox__category-separator--search"></div>
+          </ng-container>
+          <svc-search [model]="model.searchManager"></svc-search>
         </div>
-      </ng-container>
+        <div *ngIf="model.showPlaceholder" class="svc-toolbox__placeholder">{{model.toolboxNoResultsFound}}</div>
+        <div class="svc-toolbox__container">
+          <ng-container *ngIf="!model.showInSingleCategory">
+            <svc-toolbox-category *ngFor="let category of model.categories" [category]="category" [toolbox]="model"></svc-toolbox-category>
+          </ng-container>
+          <ng-container *ngIf="model.showInSingleCategory">
+            <div class="svc-toolbox__category">
+              <svc-toolbox-tool *ngFor="let item of model.renderedActions" [creator]="creator" [item]="item" [isCompact]="model.isCompactRendered"></svc-toolbox-tool>
+            </div>
+          </ng-container>
+        </div>
+      </div>
     </div>
   </div>
 </ng-template>

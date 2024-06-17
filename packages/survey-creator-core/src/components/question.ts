@@ -355,7 +355,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       (item: any) => {
         this.creator.convertCurrentQuestion(item.id);
       });
-    newAction.disableHide = true;
     return newAction;
   }
   private createConvertInputType() {

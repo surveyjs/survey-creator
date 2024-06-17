@@ -98,7 +98,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.addSubGroupTitle(survey.getPanelByName("appearanceinput"), "theme.lines");
   }
   private updatePropertyGridEditorsAvailability() {
-    const simulatorSurvey = this.model.simulator.survey;
+    const simulatorSurvey = this.model.survey;
     const page = this.propertyGrid.survey.pages[0];
     const header = page?.getElementByName("header") as PanelModel;
     if (header && header.elements.length > 0) {
@@ -192,6 +192,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.simulatorCssClasses = surveyCss[defaultV2ThemeName];
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
     this.propertyGrid = new PropertyGridModel(undefined, creator, themeModelPropertyGridDefinition);
+    this.propertyGrid.surveyInstanceCreatedArea = "theme-tab:property-grid";
     const propertyGridViewModel = new PropertyGridViewModel(this.propertyGrid, creator);
     this.propertyGridTab = this.creator.sidebar.addTab("theme", "svc-property-grid", propertyGridViewModel);
     this.propertyGridTab.caption = editorLocalization.getString("ed.themePropertyGridTitle");
@@ -354,7 +355,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   }
   public deactivate(): boolean {
     if (this.model) {
-      this.simulatorCssClasses = this.model.simulator.survey.css;
+      this.simulatorCssClasses = this.model.survey.css;
       this.model.onPropertyChanged.clear();
       this.themeModel.onThemeSelected.clear();
       this.themeModel.onThemePropertyChanged.clear();

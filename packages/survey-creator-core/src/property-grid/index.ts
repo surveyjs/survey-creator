@@ -1044,8 +1044,9 @@ export class PropertyGridModel {
       if (pnl !== panel && !pnl.parent.isPanel) pnl.collapse();
     });
   }
+  public surveyInstanceCreatedArea = "property-grid";
   protected createSurvey(json: any, callback?: (survey: SurveyModel) => void): SurveyModel {
-    return this.options.createSurvey(json, "property-grid", this, callback);
+    return this.options.createSurvey(json, this.surveyInstanceCreatedArea, this, callback);
   }
   protected getSurveyJSON(): any {
     var res = {};
@@ -1989,4 +1990,4 @@ PropertyGridEditorCollection.register(new PropertyGridEditorDateTime());
 
 QuestionFactory.Instance.registerQuestion("buttongroup", (name) => {
   return new QuestionButtonGroupModel(name);
-});
+}, false);

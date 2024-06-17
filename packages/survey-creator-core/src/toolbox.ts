@@ -13,12 +13,16 @@ import {
   Serializer,
   SurveyModel,
   DragOrClickHelper,
-  HashTable
+  HashTable,
+  ComputedUpdater,
+  CssClassBuilder,
+  surveyLocalization
 } from "survey-core";
 import { SurveyCreatorModel, toolboxLocationType } from "./creator-base";
 import { editorLocalization, getLocString } from "./editorLocalization";
 import { settings } from "./creator-settings";
 import { DragDropSurveyElements } from "./survey-elements";
+import { SearchManagerToolbox } from "./property-grid/search-manager";
 
 export type overflowBehaviorType = "hideInMenu" | "scroll";
 
@@ -74,7 +78,19 @@ export class QuestionToolboxCategory extends Base {
   @property() name: string;
   @property() title: string;
   @propertyArray() items: Array<QuestionToolboxItem>;
-  @property({ defaultValue: false }) collapsed: boolean;
+  @property({ defaultValue: false }) collapsedValue: boolean;
+  @property({ defaultValue: false }) forceExpand: boolean;
+  public get collapsed(): boolean {
+    return !this.forceExpand && this.collapsedValue;
+  }
+  public set collapsed(val: boolean) {
+    this.collapsedValue = val;
+  }
+
+  public get empty() {
+    return this.items.filter(item => item.visible).length == 0;
+  }
+
   public toggleState() {
     if (this.toolbox) {
       this.toolbox.toggleCategoryState(this.name);
@@ -84,7 +100,7 @@ export class QuestionToolboxCategory extends Base {
 export class QuestionToolboxItem extends Action implements IQuestionToolboxItem {
   constructor(private item: IQuestionToolboxItem) {
     super(item);
-    if(!this.id) {
+    if (!this.id) {
       this.id = this.name;
     }
   }
@@ -99,12 +115,17 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
     return this.item;
   }
   get typeName(): string {
-    if(!!this.json && !!this.json.type) return this.json.type;
+    if (!!this.json && !!this.json.type) return this.json.type;
     return this.name;
   }
   get isPanel(): boolean {
     const type = this.typeName;
     return !!type && Serializer.isDescendantOf(type, "panelbase");
+  }
+  public hasText(text: string) {
+    if (!text) return;
+    const textLowerCase = text.toLowerCase();
+    return this.title.toLowerCase().indexOf(textLowerCase) >= 0 || this.name.toLowerCase().indexOf(textLowerCase) >= 0;
   }
 }
 
@@ -114,7 +135,8 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
 export class QuestionToolbox
   extends AdaptiveActionContainer<QuestionToolboxItem>
   implements IQuestionToolbox {
-  static hiddenTypes = ["buttongroup", "linkvalue", "embeddedsurvey", "embeddedcreator", "spinedit", "color", "fileedit", "textwithreset", "commentwithreset", "presetranking"];
+  public static MINELEMENTCOUNT: number = 10;
+  static hiddenTypes = ["buttongroup", "linkvalue", "embeddedsurvey", "spinedit", "color", "fileedit", "textwithreset", "commentwithreset"];
   static defaultIconName = "icon-default";
   static defaultCategories = {
     choice: ["radiogroup", "rating", "checkbox", "dropdown", "tagbox", "boolean", "file", "imagepicker", "ranking"],
@@ -130,6 +152,14 @@ export class QuestionToolbox
     "matrix", "matrixdropdown", "matrixdynamic",
     "html", "expression", "image", "signaturepad"
   ];
+  private _containerElementValue: HTMLElement;
+
+  public get itemSelector(): string {
+    return ".svc-toolbox__tool:not(.svc-toolbox__search-button):not(.sv-dots)";
+  }
+  public get containerSelector(): string {
+    return ".svc-toolbox__scroller";
+  }
 
   public static getQuestionDefaultSettings(questionType: string): any {
     if (!settings.toolbox || !settings.toolbox.defaultJSON) return undefined;
@@ -153,6 +183,8 @@ export class QuestionToolbox
   private keepAllCategoriesExpandedValue: boolean = false;
   @property({ defaultValue: false }) private showCategoryTitlesValue: boolean;
   private dragOrClickHelper: DragOrClickHelper;
+
+  public toolboxNoResultsFound = getLocString("ed.toolboxNoResultsFound");
 
   //koItems = ko.observableArray();
   /**
@@ -205,6 +237,10 @@ export class QuestionToolbox
       target.updateResponsiveness(val, target.overflowBehavior);
     }
   }) isCompact: boolean;
+
+  @property({
+    defaultValue: false,
+  }) isFocused: boolean;
   /**
    * Indicates whether the toolbox is currently can have scrollbar.
    */
@@ -225,12 +261,45 @@ export class QuestionToolbox
   @property() forceCompact: boolean;
   private categoriesTitles: HashTable<string> = {};
 
+  /**
+   * Specifies whether to display a search field that allows users to find question and panel types within the toolbox.
+   * 
+   * Default value: `true`
+   */
+  @property({
+    defaultValue: true,
+    onSet: (val: boolean, target: QuestionToolbox) => {
+      target.searchManager.isVisible = val;
+    }
+  }) searchEnabled: boolean;
+  @property({ defaultValue: false }) isScrollLocked: boolean;
+  public lockScrollBar(val: boolean) {
+    if (!this._containerElementValue) return;
+    this.isScrollLocked = val && this._containerElementValue.scrollHeight > this._containerElementValue.clientHeight;
+  }
+  public searchManager = new SearchManagerToolbox();
+  @property() showPlaceholder: boolean;
+
   constructor(
     private supportedQuestions: Array<string> = null,
     public creator: SurveyCreatorModel = null,
     useDefaultCategories = false
   ) {
     super();
+    this.searchManager.isVisible = this.searchEnabled;
+    this.searchManager.toolbox = this;
+    this.searchItem = new Action({
+      id: "searchItem-id",
+      css: "svc-toolbox__search-button",
+      innerCss: "sv-dots__item",
+      iconName: "icon-search",
+      component: "sv-action-bar-item",
+      tooltip: surveyLocalization.getString("search"),
+      action: () => {
+        (document.querySelector(".svc-toolbox__panel input") as HTMLInputElement).focus();
+        this.isFocused = true;
+      }
+    });
     this.updateResponsiveness(this.isCompact, this.overflowBehavior);
     this.createDefaultItems(supportedQuestions, useDefaultCategories);
     this.initDotsItem();
@@ -265,7 +334,7 @@ export class QuestionToolbox
     return questionCategoryMap;
   }
   private getCategoryTitle(name: string): string {
-    if(this.categoriesTitles[name]) return this.categoriesTitles[name];
+    if (this.categoriesTitles[name]) return this.categoriesTitles[name];
     return getLocString("toolboxCategories." + name);
   }
   private onActiveCategoryChanged(newValue: string) {
@@ -276,6 +345,47 @@ export class QuestionToolbox
       category.collapsed = category.name !== newValue;
     }
     //}
+  }
+
+  public get isCompactRendered() {
+    return this.isCompact && !this.isFocused;
+  }
+
+  public get showSearch() {
+    return this.searchEnabled && this.items.length > QuestionToolbox.MINELEMENTCOUNT;
+  }
+
+  public get showInSingleCategory() {
+    return this.isCompactRendered || this.categories.length == 1 || !this.showCategoryTitles;
+  }
+
+  public setRootElement(element: HTMLElement) {
+    this._containerElementValue = element?.querySelector(this.containerSelector);
+  }
+
+  public get containerElement() {
+    return this._containerElementValue;
+  }
+
+  public focusOut(e) {
+    if (e.relatedTarget !== e.currentTarget &&
+      !e.currentTarget.contains(e.relatedTarget)) {
+      this.isFocused = false;
+      this.searchManager.filterString = "";
+    }
+  }
+
+  public searchItem: IAction;
+
+  public get classNames() {
+    return new CssClassBuilder()
+      .append("svc-toolbox")
+      .append("svc-toolbox--searchable", this.searchEnabled)
+      .append("svc-toolbox--filtering", !!this.searchManager.filterString)
+      .append("svc-toolbox--compact", this.isCompactRendered)
+      .append("svc-toolbox--scroll-locked", this.isScrollLocked)
+      .append("svc-toolbox--flyout", this.isCompact && this.isFocused)
+      .append("svc-toolbox--scrollable", this.isResponsivenessDisabled).toString();
   }
   public setLocation(toolboxLocation: toolboxLocationType) {
     if (toolboxLocation === "sidebar") {
@@ -292,7 +402,7 @@ export class QuestionToolbox
     return JSON.stringify(this.actions);
   }
   public set jsonText(value: string) {
-    this.actions = value ? JSON.parse(value) : [];
+    this.actions = (value ? JSON.parse(value) : []).map(action => new QuestionToolboxItem(action));
     this.onItemsChanged();
   }
   /**
@@ -455,7 +565,7 @@ export class QuestionToolbox
    * @param name
    */
   public getItemByName(name: string): IQuestionToolboxItem {
-    if(!name) return null;
+    if (!name) return null;
     const index: number = this.indexOf(name);
     return index > -1 ? this.actions[index] : null;
   }
@@ -500,7 +610,7 @@ export class QuestionToolbox
       this.updateActionTitle(action);
       this.updateActionTitle(action.innerItem);
     });
-    if(Array.isArray(this.categories)) {
+    if (Array.isArray(this.categories)) {
       this.categories.forEach(category => {
         category.title = this.getCategoryTitle(category.name);
       });
@@ -585,7 +695,7 @@ export class QuestionToolbox
     this.categoriesTitles = {};
     const actionList = new Array<IQuestionToolboxItem>();
     categories.forEach(category => {
-      if(!!category.category && !!category.title) {
+      if (!!category.category && !!category.title) {
         this.categoriesTitles[category.category] = category.title;
       }
       if (!Array.isArray(category.items)) return;
@@ -610,8 +720,8 @@ export class QuestionToolbox
       });
     });
     this.actions.forEach(item => {
-      if(!item.visible) {
-        if(displayMisc) {
+      if (!item.visible) {
+        if (displayMisc) {
           item.visible = true;
           item.category = "misc";
         }
@@ -626,7 +736,7 @@ export class QuestionToolbox
    * Removes categories from the Toolbox.
    */
   public removeCategories() {
-    const allTypes: string[] = ElementFactory.Instance.getAllTypes();
+    const allTypes: string[] = ElementFactory.Instance.getAllToolboxTypes();
     this.changeCategories(allTypes.map(t => ({ name: t, category: null })));
     this.onItemsChanged();
   }
@@ -685,9 +795,6 @@ export class QuestionToolbox
   public collapseAllCategories() {
     this.expandCollapseAllCategories(true);
   }
-  public hiddenItemSelected(model: Action): void {
-    this.creator.clickToolboxItem((<any>model).json);
-  }
   private expandCollapseAllCategories(isCollapsed: boolean) {
     const categories = this.categories;
     for (var i = 0; i < categories.length; i++) {
@@ -708,7 +815,10 @@ export class QuestionToolbox
     var prevActiveCategory = this.activeCategory;
     for (let i = 0; i < this.actions.length; i++) {
       const item = this.actions[i];
-      if(item.visible === false) continue;
+      item.innerItem.action = () => {
+        this.creator.clickToolboxItem((<any>item).json);
+      };
+      if (item.visible === false) continue;
       const categoryName = item.category ? item.category : "general";
       if (!categoriesHash[categoryName]) {
         const category = this.createCategory();
@@ -734,7 +844,7 @@ export class QuestionToolbox
         }
       }
     }
-    if(changeActions) {
+    if (changeActions) {
       let newItems = [];
       this.categories.forEach((cat) => {
         newItems = newItems.concat(cat.items);
@@ -911,7 +1021,7 @@ export class QuestionToolbox
     return !!widget && !widget.showInToolbox;
   }
   private getQuestionTypes(supportedQuestions: Array<string>): string[] {
-    const allTypes: string[] = ElementFactory.Instance.getAllTypes();
+    const allTypes: string[] = ElementFactory.Instance.getAllToolboxTypes();
     if (!supportedQuestions || supportedQuestions.length == 0)
       supportedQuestions = allTypes;
     const questions: string[] = [];
@@ -924,7 +1034,6 @@ export class QuestionToolbox
       var name: string = supportedQuestions[i];
       if (
         questions.indexOf(name) < 0 &&
-        QuestionToolbox.hiddenTypes.indexOf(name) < 0 &&
         allTypes.indexOf(name) > -1 &&
         !this.isHiddenCustomWidget(name)
       )

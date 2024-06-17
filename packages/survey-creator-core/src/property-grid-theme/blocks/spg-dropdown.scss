@@ -12,6 +12,6 @@
 .spg-dropdown_chevron-button {
     line-height: normal;
 }
-.spg-dropdown-popup {
+.spg-dropdown-popup:not(.sv-popup--dropdown-overlay) {
     height: 0;
 }

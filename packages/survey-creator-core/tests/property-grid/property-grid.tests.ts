@@ -3028,6 +3028,17 @@ test("Allow delete all pages by default", () => {
   expect(pagesQuestion.canRemoveRow(pagesQuestion.visibleRows[0])).toBeTruthy();
   expect(pagesQuestion.canRemoveRow(pagesQuestion.visibleRows[1])).toBeTruthy();
 });
+test("Do not select page on adding new page in the property grid #5564", () => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  expect(creator.survey.pages).toHaveLength(1);
+  creator.selectElement(creator.survey);
+  const pagesQuestion = <QuestionMatrixDynamicModel>creator.propertyGrid.getQuestionByName("pages");
+  const actions = pagesQuestion.getTitleActions();
+  actions[actions.length - 1].action();
+  expect(creator.survey.pages).toHaveLength(2);
+  expect((<any>creator.selectedElement).pages).toHaveLength(2);
+});
 test("Setup correct categories for dynamic properties in components", () => {
   ComponentCollection.Instance.add({
     name: "customdropdown",

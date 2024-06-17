@@ -1,4 +1,4 @@
-import { url, getJSON, toolboxItems, explicitErrorHandler, setJSON, changeToolboxScrolling } from "../helper";
+import { url, getJSON, toolboxItems, explicitErrorHandler, setJSON, changeToolboxScrolling, changeToolboxSearchEnabled } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Toolbox";
 
@@ -95,6 +95,7 @@ test.before(async (t) => {
   await t.resizeWindow(1200, 605);
 })("Categories Responsiveness small -> large", async (t) => {
   await changeToolboxScrolling(false);
+  await changeToolboxSearchEnabled(false);
 
   await setupCategories(t, 1110);
   await t
@@ -117,6 +118,7 @@ test.before(async (t) => {
   await t.resizeWindow(1900, 600);
 })("Categories Responsiveness large -> small", async (t) => {
   await changeToolboxScrolling(false);
+  await changeToolboxSearchEnabled(false);
 
   await setupCategories(t);
   await t
@@ -304,4 +306,17 @@ test("toolbar responsiveness in compact mode", async (t) => {
     .expect(Selector(".svc-toolbox__container").clientHeight).lte(510)
     .expect(visibleToolboxItems.count).eql(11)
     .expect(Selector(".svc-toolbox__tool").count).eql(23);
+});
+
+test("toolbox search in compact mode - clear but do not close", async (t) => {
+  await t.resizeWindow(1200, 600);
+
+  await t
+    .click(".svc-toolbox__search-button")
+    .typeText(".spg-search-editor_input", "d")
+    .expect(Selector(".spg-search-editor_input").value).eql("d")
+    .expect(Selector(".svc-toolbox").hasClass("svc-toolbox--flyout")).ok()
+    .click(".svc-toolbox #svd-grid-search-close")
+    .expect(Selector(".spg-search-editor_input").value).eql("")
+    .expect(Selector(".svc-toolbox").hasClass("svc-toolbox--flyout")).ok();
 });
