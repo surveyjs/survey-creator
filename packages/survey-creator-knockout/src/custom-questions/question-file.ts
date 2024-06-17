@@ -65,13 +65,13 @@ export class QuestionFileEditor extends QuestionFileEditorModel {
   }
 }
 
-Serializer.overrideClassCreator("fileedit", function() {
+Serializer.overrideClassCreator("fileedit", function () {
   return new QuestionFileEditor("");
 });
 
 QuestionFactory.Instance.registerQuestion("fileedit", name => {
   return new QuestionFileEditor(name);
-});
+}, false);
 RendererFactory.Instance.registerRenderer("fileedit", "fileedit", "svc-file-edit-question");
 
 ko.components.register("svc-file-edit-question", {

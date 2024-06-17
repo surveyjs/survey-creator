@@ -160,6 +160,12 @@ export async function changeToolboxScrolling(hasScroll: boolean) {
   })(hasScroll);
 }
 
+export async function changeToolboxSearchEnabled(enabled: boolean) {
+  await ClientFunction((newVal) => {
+    window["creator"].toolbox.searchEnabled = newVal;
+  })(enabled);
+}
+
 export async function setShowSidebar(newVal: boolean) {
   await ClientFunction((newVal) => {
     window["creator"].showSidebar = newVal;
