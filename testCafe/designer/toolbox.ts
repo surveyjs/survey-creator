@@ -237,6 +237,41 @@ test("check toolbox css", async (t) => {
   await t.expect(Selector(".svc-toolbox__tool.undefined").exists).notOk();
 });
 
+test("toolbar responsiveness with search", async (t) => {
+  await changeToolboxScrolling(false);
+  await changeToolboxSearchEnabled(false);
+
+  await explicitErrorHandler();
+  await t.resizeWindow(1920, 597);
+  await setJSON({
+    widthMode: "responsive",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          }
+        ]
+      }
+    ]
+  });
+  await t
+    .expect(Selector(".svc-toolbox .sv-dots__item").visible).ok()
+    .expect(Selector(".svc-toolbox__tool").count).eql(22)
+    .expect(Selector(".svc-toolbox .sv-dots__item").visible).ok()
+    .expect(visibleToolboxItems.count).eql(11);
+
+  await changeToolboxSearchEnabled(true);
+  await t.resizeWindow(1920, 598);
+  await t
+    .expect(Selector(".svc-toolbox .sv-dots__item").visible).ok()
+    .expect(Selector(".svc-toolbox__tool").count).eql(22)
+    .expect(Selector(".svc-toolbox .sv-dots__item").visible).ok()
+    .expect(visibleToolboxItems.count).eql(10);
+});
+
 test("toolbar responsiveness in compact mode", async (t) => {
   await changeToolboxScrolling(false);
 
