@@ -1,5 +1,5 @@
 import { ClientFunction, Selector } from "testcafe";
-import { url, setJSON, takeElementScreenshot, addQuestionByAddQuestionButton, wrapVisualTest, getTabbedMenuItemByText, creatorTabPreviewName, creatorTabDesignerName, resetHoverToCreator, getToolboxItemByText, getPropertyGridCategory, generalGroupName, getListItemByText, surveySettingsButtonSelector, changeToolboxScrolling } from "../../helper";
+import { url, setJSON, takeElementScreenshot, addQuestionByAddQuestionButton, wrapVisualTest, getTabbedMenuItemByText, creatorTabPreviewName, creatorTabDesignerName, resetHoverToCreator, getToolboxItemByText, getPropertyGridCategory, generalGroupName, getListItemByText, surveySettingsButtonSelector, changeToolboxScrolling, changeToolboxSearchEnabled } from "../../helper";
 
 const title = "Designer surface";
 
@@ -310,7 +310,7 @@ test("Matrix column vertical", async (t) => {
 
 test("Matrix column editor boolean", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1920, 900);
+    await t.resizeWindow(1924, 900);
     const surveyJSON = {
       "pages": [
         {
@@ -674,7 +674,7 @@ test("Panel gap between items", async (t) => {
 
 test("Panel multi-question row", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1920, 900);
+    await t.resizeWindow(1924, 900);
     const json = {
       "logoPosition": "right",
       "pages": [
@@ -991,6 +991,7 @@ test("Check survey layout in mobile mode", async (t) => {
 test("Check property grid flyout", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     changeToolboxScrolling(false);
+    await changeToolboxSearchEnabled(false);
     await t.resizeWindow(1120, 900);
     const root = Selector(".svc-creator");
     await setJSON({});
@@ -1085,7 +1086,7 @@ test("Check question adorner width", async (t) => {
       "widthMode": "static",
       "width": "1400"
     });
-    await t.resizeWindow(1920, 1080);
+    await t.resizeWindow(1924, 1080);
     const root = Selector(".sd-page");
     await takeElementScreenshot("question-adorner-width.png", root, t, comparer);
   });
@@ -1296,6 +1297,7 @@ test("Question actions", async (t) => {
 test("Keep scroll to selected on tab changed", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     changeToolboxScrolling(false);
+    await changeToolboxSearchEnabled(false);
     await t.resizeWindow(1600, 900);
     const json = {
       "logoPosition": "right",
@@ -2010,6 +2012,7 @@ test("Page placeholder without elements", async (t) => {
 test("Check minimal height", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     changeToolboxScrolling(false);
+    await changeToolboxSearchEnabled(false);
     await t.resizeWindow(1120, 900);
     const root = Selector(".svc-creator");
     await setJSON({});

@@ -6,13 +6,13 @@ import { ObjectSelectorModel } from "./object-selector";
 import { SurveyCreatorModel } from "../creator-base";
 import { settings } from "../creator-settings";
 import { getLocString } from "../editorLocalization";
-import { SearchManager } from "./search-manager";
+import { SearchManagerPropertyGrid } from "./search-manager";
 
 export class PropertyGridViewModel extends Base {
   public nextSelectionAction: Action;
   public prevSelectionAction: Action;
   public objectSelectionAction: Action;
-  public searchManager = new SearchManager();
+  public searchManager = new SearchManagerPropertyGrid();
   private selectorPopupModel: PopupModel;
 
   @property() hasPrev: boolean;

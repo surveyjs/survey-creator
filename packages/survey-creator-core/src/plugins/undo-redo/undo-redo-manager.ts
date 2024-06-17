@@ -300,7 +300,10 @@ export class UndoRedoArrayAction implements IUndoRedoAction {
   private getSenderElement(): Base {
     if(!this._sender.isDisposed || !this.survey) return this._sender;
     const name = this._sender["name"];
-    if(this._sender["isPage"] === true) return this.survey.getPageByName(name);
+    if(this._sender["isPage"] === true) {
+      if(this.survey.pages.length === 0) return this.survey.addNewPage();
+      return this.survey.getPageByName(name);
+    }
     if(this._sender["isPanel"] === true) return this.survey.getPanelByName(name);
     if(this._sender["isQuestion"] === true) return this.survey.getQuestionByName(name);
     return this._sender;

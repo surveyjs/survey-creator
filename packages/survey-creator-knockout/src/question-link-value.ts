@@ -37,4 +37,4 @@ Serializer.overrideClassCreator("linkvalue", <any>function (json) {
 });
 QuestionFactory.Instance.registerQuestion("linkvalue", (name) => {
   return new QuestionLinkValue(name);
-});
+}, false);

@@ -1,5 +1,5 @@
 import { Selector } from "testcafe";
-import { url, objectSelectorButton, propertyGridSelector, expandButtonSelector, setJSON, takeElementScreenshot, wrapVisualTest, pageNavigator, getListItemByText } from "../../helper";
+import { url, objectSelectorButton, propertyGridSelector, expandButtonSelector, setJSON, takeElementScreenshot, wrapVisualTest, pageNavigator, getListItemByText, changeToolboxSearchEnabled } from "../../helper";
 import { largeSurvey } from "./surveys/large-survey";
 
 const title = "Sidebar Screenshot";
@@ -73,6 +73,7 @@ test("property grid search", async (t) => {
         }
       ]
     });
+    await changeToolboxSearchEnabled(false);
     await t.resizeWindow(1920, 900);
     await takeElementScreenshot("side-bar-search-empty.png", Selector(".spg-container_search"), t, comparer);
 
