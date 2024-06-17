@@ -136,7 +136,6 @@ export class QuestionToolbox
   extends AdaptiveActionContainer<QuestionToolboxItem>
   implements IQuestionToolbox {
   public static MINELEMENTCOUNT: number = 10;
-  static hiddenTypes = ["buttongroup", "linkvalue", "embeddedsurvey", "spinedit", "color", "fileedit", "textwithreset", "commentwithreset"];
   static defaultIconName = "icon-default";
   static defaultCategories = {
     choice: ["radiogroup", "rating", "checkbox", "dropdown", "tagbox", "boolean", "file", "imagepicker", "ranking"],
