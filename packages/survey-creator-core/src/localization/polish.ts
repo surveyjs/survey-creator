@@ -119,6 +119,8 @@ var polishStrings = {
     generateReadableJSON: "Generate Readable JSON",
     toolbox: "Paleta",
     "property-grid": "Właściwości",
+    toolboxFilteredTextPlaceholder: "Wpisz, aby wyszukać...",
+    toolboxNoResultsFound: "Nie znaleziono wyników",
     propertyGridFilteredTextPlaceholder: "Wpisz, aby wyszukać...",
     propertyGridNoResultsFound: "Nie znaleziono wyników",
     correctJSON: "Please correct JSON.",
@@ -297,6 +299,7 @@ var polishStrings = {
       templateTitle: "Wzorzec tytułu panelu",
       noEntriesText: "Pusty tekst panelu",
       templateTabTitle: "Wzorzec tytułu tabulatora",
+      tabTitlePlaceholder: "Symbol zastępczy tytułu tabulatora",
       templateVisibleIf: "Uwidocznij pojedynczy panel, jeśli",
       hideNumber: "Ukryj numer panelu",
       titleLocation: "Wyrównanie tytułu panelu",
@@ -874,6 +877,7 @@ var polishStrings = {
       "--sjs-general-backcolor-dim": "Kolor tła",
       "--sjs-primary-backcolor": "Tło akcentu",
       "--sjs-primary-forecolor": "Akcent na pierwszym planie",
+      "--sjs-special-red": "Komunikaty o błędach",
       "--sjs-shadow-small": "Efekty cienia",
       "--sjs-shadow-inner": "Efekty cienia",
       "--sjs-border-default": "Kolory"
@@ -1250,6 +1254,7 @@ var polishStrings = {
       width: "Ustawia szerokość panelu proporcjonalnie do innych elementów pomiarowych w tej samej linii. Akceptuje wartości CSS (px, %, in, pt itp.).",
       templateTitle: "Wpisz szablon dynamicznych tytułów paneli. Użyj {panelIndex} dla ogólnego położenia panelu i {visiblePanelIndex} dla jego kolejności wśród widocznych paneli. Wstaw te symbole zastępcze do wzoru, aby dodać automatyczną numerację.",
       templateTabTitle: "Wpisz szablon tytułów kart. Użyj {panelIndex} dla ogólnego położenia panelu i {visiblePanelIndex} dla jego kolejności wśród widocznych paneli. Wstaw te symbole zastępcze do wzoru, aby dodać automatyczną numerację.",
+      tabTitlePlaceholder: "Tekst zastępczy dla tytułów tabulatorów, który ma zastosowanie, gdy wzorzec tytułu tabulatora nie generuje znaczącej wartości.",
       templateVisibleIf: "To ustawienie umożliwia sterowanie widocznością poszczególnych paneli w panelu dynamicznym. Użyj symbolu zastępczego \"{panel}\", aby odwołać się do bieżącego panelu w wyrażeniu.",
       titleLocation: "To ustawienie jest automatycznie dziedziczone przez wszystkie pytania w tym panelu. Jeśli chcesz zastąpić to ustawienie, zdefiniuj reguły wyrównania tytułów dla poszczególnych pytań. Opcja \"Dziedzicz\" stosuje ustawienie na poziomie strony (jeśli jest ustawione) lub na poziomie ankiety (domyślnie \"Góra\").",
       descriptionLocation: "Opcja \"Dziedzicz\" stosuje ustawienie na poziomie strony (jeśli jest ustawione) lub na poziomie ankiety (domyślnie \"Pod tytułem panelu\").",
@@ -1562,6 +1567,8 @@ var polishStrings = {
     backcolor: "Domyślne tło",
     hovercolor: "Najedź kursorem na tło",
     borderDecoration: "Dekoracja obramowania",
+    fontColor: "Kolor czcionki",
+    backgroundColor: "Kolor tła",
     primaryForecolor: "Kolor domyślny",
     primaryForecolorLight: "Kolor wyłączony",
     font: "Czcionka",
@@ -2912,3 +2919,10 @@ editorLocalization.locales["pl"] = polishStrings;
 // theme.placeholderColor: "Placeholder color" => "Kolor symbolu zastępczego"
 // theme.size: "Size" => "Rozmiar"
 // theme.opacity: "Opacity" => "Nieprzezroczystość"
+// ed.toolboxFilteredTextPlaceholder: "Type to search..." => "Wpisz, aby wyszukać..."
+// ed.toolboxNoResultsFound: "No results found" => "Nie znaleziono wyników"
+// paneldynamic.tabTitlePlaceholder: "Tab title placeholder" => "Symbol zastępczy tytułu tabulatora"
+// theme.--sjs-special-red: "Error messages" => "Komunikaty o błędach"
+// paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "Tekst zastępczy dla tytułów tabulatorów, który ma zastosowanie, gdy wzorzec tytułu tabulatora nie generuje znaczącej wartości."
+// theme.fontColor: "Font color" => "Kolor czcionki"
+// theme.backgroundColor: "Background color" => "Kolor tła"

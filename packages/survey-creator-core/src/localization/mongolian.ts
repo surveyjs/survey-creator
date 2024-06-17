@@ -119,6 +119,8 @@ export var mnStrings = {
     generateReadableJSON: "Ойлгомжтой JSON үүсгэх",
     toolbox: "Хэрэглүүр",
     "property-grid": "Өмнөх",
+    toolboxFilteredTextPlaceholder: "Хайлт хийх төрөл...",
+    toolboxNoResultsFound: "Ямар ч үр дүн олдсонгүй",
     propertyGridFilteredTextPlaceholder: "Хайхын тулд бичнэ үү.....",
     propertyGridNoResultsFound: "Ямар ч үр дүн олдсонгүй",
     correctJSON: "JSON засна уу.",
@@ -297,6 +299,7 @@ export var mnStrings = {
       templateTitle: "Панелийн нэрийн загвар",
       noEntriesText: "Хоосон хавтан текст",
       templateTabTitle: "Таб нэрийн загвар",
+      tabTitlePlaceholder: "Таб нэрийн хуудас эзэмшигч",
       templateVisibleIf: "Хувь хүний панелыг ил гаргах",
       hideNumber: "Хавтангийн дугаарыг нуух",
       titleLocation: "Панел цолны зохицуулалт",
@@ -874,6 +877,7 @@ export var mnStrings = {
       "--sjs-general-backcolor-dim": "Ар талын өнгө",
       "--sjs-primary-backcolor": "Акцентийн гарал үүсэл",
       "--sjs-primary-forecolor": "Акцентийн өмнө",
+      "--sjs-special-red": "Алдааны мессеж",
       "--sjs-shadow-small": "Сүүдрийн нөлөө",
       "--sjs-shadow-inner": "Сүүдрийн нөлөө",
       "--sjs-border-default": "Өнгө"
@@ -1250,6 +1254,7 @@ export var mnStrings = {
       width: "Панелийн өргөнийг ижил шугамаар бусад судалгааны элементүүдтэй тэнцүү тогтооно. CSS-ийн үнэт зүйлсийг (px, %, in, pt г.м) хүлээн зөвшөөрдөг.",
       templateTitle: "Динамик панел цолны темплэйтэд бичнэ. Харагдах панелуудын дунд түүний дарааллыг {panelIndex} болон {visiblePanelIndex} -ийг ашиглана уу. Автомат дугаар нэмэхийн тулд эдгээр байрлагчдыг загварт оруул.",
       templateTabTitle: "Таб нэрний темплэйтэд бичнэ. {panelIndex} нь панелийн ерөнхий байрлал болон {visiblePanelIndex} -ийг ил харагдах панелуудын дунд эмх цэгцтэй байлгахад ашиглана. Автомат дугаар нэмэхийн тулд эдгээр байрлагчдыг загварт оруул.",
+      tabTitlePlaceholder: "Таб нэрийн загвар утга учиртай үнэ цэнийг бий болгодоггүй үед хамаарах tab title-ийн уналтын текст.",
       templateVisibleIf: "Энэ тохиргоо нь динамик панелын доторх хувь хүний панелын харагдах байдлыг хянах боломжийг олгодог. '{panel}' байрлуулагчийг ашиглан одоогийн панелийг өөрийн илэрхийлэлд эш татна уу.",
       titleLocation: "Энэ тохиргоо нь энэ панел доторх бүх асуултаар автоматаар өвлөгддөг. Хэрэв та энэ тохиргоог хүчингүй болгохыг хүсвэл хувь хүний асуултуудад зориулсан нэрийн зохицуулах дүрмүүдийг тодорхойл. \"Өв залгамжлах\" сонголт нь хуудасны түвшин (хэрэв set) эсвэл судалгааны түвшний тохиргоог (\"Top\" нь default-аар) хэрэгжүүлдэг.",
       descriptionLocation: "\"Өв залгамжлах\" сонголт нь хуудасны түвшин (хэрэв set) эсвэл судалгааны түвшний тохиргоог (\"Under the panel title\" -ийг default-аар) хэрэгжүүлдэг.",
@@ -1562,6 +1567,8 @@ export var mnStrings = {
     backcolor: "Дефолт нөхцөл байдал",
     hovercolor: "Hover-ийн гарал үүсэл",
     borderDecoration: "Хилийн чимэг",
+    fontColor: "Фонтын өнгө",
+    backgroundColor: "Ар талын өнгө",
     primaryForecolor: "Дефолт өнгө",
     primaryForecolorLight: "Хөгжлийн бэрхшээлтэй хүний өнгө",
     font: "Фонт",
@@ -2301,3 +2308,10 @@ editorLocalization.locales["mn"] = mnStrings;
 // theme.placeholderColor: "Placeholder color" => "Газар эзэмшигчийн өнгө"
 // theme.size: "Size" => "Хэмжээ"
 // theme.opacity: "Opacity" => "Бүдүүлэг байдал"
+// ed.toolboxFilteredTextPlaceholder: "Type to search..." => "Хайлт хийх төрөл..."
+// ed.toolboxNoResultsFound: "No results found" => "Ямар ч үр дүн олдсонгүй"
+// paneldynamic.tabTitlePlaceholder: "Tab title placeholder" => "Таб нэрийн хуудас эзэмшигч"
+// theme.--sjs-special-red: "Error messages" => "Алдааны мессеж"
+// paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "Таб нэрийн загвар утга учиртай үнэ цэнийг бий болгодоггүй үед хамаарах tab title-ийн уналтын текст."
+// theme.fontColor: "Font color" => "Фонтын өнгө"
+// theme.backgroundColor: "Background color" => "Ар талын өнгө"

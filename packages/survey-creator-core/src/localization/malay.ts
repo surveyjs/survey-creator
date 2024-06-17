@@ -119,6 +119,8 @@ export var msStrings = {
     generateReadableJSON: "Jana JSON yang Boleh Dibaca",
     toolbox: "Kotak Alat",
     "property-grid": "Ciri",
+    toolboxFilteredTextPlaceholder: "Taip untuk mencari...",
+    toolboxNoResultsFound: "Tiada keputusan ditemui",
     propertyGridFilteredTextPlaceholder: "Taip untuk mencari...",
     propertyGridNoResultsFound: "Tiada keputusan ditemui",
     correctJSON: "Pilih JSON yang betul.",
@@ -297,6 +299,7 @@ export var msStrings = {
       templateTitle: "Corak tajuk panel",
       noEntriesText: "Teks panel kosong",
       templateTabTitle: "Corak tajuk tab",
+      tabTitlePlaceholder: "Ruang letak tajuk tab",
       templateVisibleIf: "Jadikan panel individu kelihatan jika",
       hideNumber: "Sembunyikan nombor panel",
       titleLocation: "Penjajaran tajuk panel",
@@ -874,6 +877,7 @@ export var msStrings = {
       "--sjs-general-backcolor-dim": "Warna latar belakang",
       "--sjs-primary-backcolor": "Latar belakang aksen",
       "--sjs-primary-forecolor": "Aksen latar depan",
+      "--sjs-special-red": "Mesej ralat",
       "--sjs-shadow-small": "Kesan bayang",
       "--sjs-shadow-inner": "Kesan bayang",
       "--sjs-border-default": "Warna"
@@ -1250,6 +1254,7 @@ export var msStrings = {
       width: "Mengesetkan lebar panel mengikut kadar unsur tinjauan lain dalam baris yang sama. Menerima nilai CSS (px, %, dalam, pt, dll.).",
       templateTitle: "Taipkan templat untuk tajuk panel dinamik. Gunakan {panelIndex} untuk kedudukan umum panel dan {visiblePanelIndex} untuk pesanannya di kalangan panel yang kelihatan. Masukkan ruang letak ini ke dalam corak untuk menambah penomboran automatik.",
       templateTabTitle: "Taipkan templat untuk tajuk tab. Gunakan {panelIndex} untuk kedudukan umum panel dan {visiblePanelIndex} untuk pesanannya di kalangan panel yang boleh dilihat. Masukkan ruang letak ini ke dalam corak untuk menambah penomboran automatik.",
+      tabTitlePlaceholder: "Teks sandaran untuk tajuk tab yang digunakan apabila corak tajuk tab tidak menghasilkan nilai yang bermakna.",
       templateVisibleIf: "Tetapan ini membolehkan anda mengawal penglihatan panel individu dalam panel dinamik. Gunakan ruang letak '{panel}' untuk merujuk panel semasa dalam ungkapan anda.",
       titleLocation: "Tetapan ini diwarisi secara automatik oleh semua soalan dalam panel ini. Jika anda ingin mengubah seting ini, takrifkan peraturan penjajaran tajuk untuk soalan individu. Pilihan \"Warisan\" menggunakan peringkat halaman (jika ditetapkan) atau tetapan peringkat tinjauan (\"Atas\" secara lalai).",
       descriptionLocation: "Opsyen \"Warisan\" menggunakan aras halaman (jika ditetapkan) atau seting aras tinjauan (\"Di bawah tajuk panel\" secara lalai).",
@@ -1562,6 +1567,8 @@ export var msStrings = {
     backcolor: "Latar belakang lalai",
     hovercolor: "Latarbelakang penuding",
     borderDecoration: "Hiasan sempadan",
+    fontColor: "Warna fon",
+    backgroundColor: "Warna latar belakang",
     primaryForecolor: "Warna lalai",
     primaryForecolorLight: "Warna dinyahdayakan",
     font: "Fon",
@@ -2598,3 +2605,10 @@ editorLocalization.locales["ms"] = msStrings;
 // theme.placeholderColor: "Placeholder color" => "Warna ruang letak"
 // theme.size: "Size" => "Saiz"
 // theme.opacity: "Opacity" => "Kelegapan"
+// ed.toolboxFilteredTextPlaceholder: "Type to search..." => "Taip untuk mencari..."
+// ed.toolboxNoResultsFound: "No results found" => "Tiada keputusan ditemui"
+// paneldynamic.tabTitlePlaceholder: "Tab title placeholder" => "Ruang letak tajuk tab"
+// theme.--sjs-special-red: "Error messages" => "Mesej ralat"
+// paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "Teks sandaran untuk tajuk tab yang digunakan apabila corak tajuk tab tidak menghasilkan nilai yang bermakna."
+// theme.fontColor: "Font color" => "Warna fon"
+// theme.backgroundColor: "Background color" => "Warna latar belakang"

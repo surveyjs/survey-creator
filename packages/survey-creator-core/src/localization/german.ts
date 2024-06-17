@@ -119,6 +119,8 @@ var germanTranslation = {
     generateReadableJSON: "Lesbares JSON generieren",
     toolbox: "Werkzeugleiste",
     "property-grid": "Eigenschaften",
+    toolboxFilteredTextPlaceholder: "Geben Sie ein, um zu suchen...",
+    toolboxNoResultsFound: "Keine Ergebnisse gefunden",
     propertyGridFilteredTextPlaceholder: "Tippen, um zu suchen ...",
     propertyGridNoResultsFound: "Keine Ergebnisse gefunden",
     correctJSON: "Bitte JSON korrigieren.",
@@ -297,6 +299,7 @@ var germanTranslation = {
       templateTitle: "Muster für den Panel-Titel",
       noEntriesText: "Text für leeres Panel",
       templateTabTitle: "Muster des Tab-Titels",
+      tabTitlePlaceholder: "Platzhalter für Registerkartentitel",
       templateVisibleIf: "Machen Sie ein einzelnes Panel sichtbar, wenn",
       hideNumber: "Ausblenden der Panel-Nummer",
       titleLocation: "Ausrichtung des Panel-Titels",
@@ -874,6 +877,7 @@ var germanTranslation = {
       "--sjs-general-backcolor-dim": "Hintergrundfarbe",
       "--sjs-primary-backcolor": "Akzent-Hintergrund",
       "--sjs-primary-forecolor": "Akzent Vordergrund",
+      "--sjs-special-red": "Fehlermeldungen",
       "--sjs-shadow-small": "Schatten-Effekte",
       "--sjs-shadow-inner": "Schatten-Effekte",
       "--sjs-border-default": "Farben"
@@ -1250,6 +1254,7 @@ var germanTranslation = {
       width: "Legt die Breite des Fensters im Verhältnis zu anderen Vermessungselementen in derselben Linie fest. Akzeptiert CSS-Werte (px, %, in, pt usw.).",
       templateTitle: "Geben Sie eine Vorlage für die Titeln von dynamischen Panele. Verwenden Sie {panelIndex} für die allgemeine Position des Panels und {visiblePanelIndex} für die Reihenfolge der sichtbaren Panele. Fügen Sie diese Platzhalter in das Muster ein, um eine automatische Nummerierung hinzuzufügen.",
       templateTabTitle: "Geben Sie eine Vorlage für Tab-titel ein. Verwenden Sie {panelIndex} für die allgemeine Position eines Panels und {visiblePanelIndex} für die Reihenfolge der sichtbaren Panele. Fügen Sie diese Platzhalter in das Muster ein, um eine automatische Nummerierung hinzuzufügen.",
+      tabTitlePlaceholder: "Ein Fallbacktext für Registerkartentitel, der angewendet wird, wenn das Registerkartentitelmuster keinen aussagekräftigen Wert erzeugt.",
       templateVisibleIf: "Mit dieser Einstellung können Sie die Sichtbarkeit einzelner Panele innerhalb des dynamischen Panels steuern. Verwenden Sie den Platzhalter '{panel}', um auf das aktuelle Panel in Ihrem Ausdruck zu verweisen.",
       titleLocation: "Diese Einstellung wird automatisch von allen Fragen in diesem Bereich übernommen. Wenn Sie diese Einstellung außer Kraft setzen möchten, definieren Sie Regeln für die Titelausrichtung für einzelne Fragen. Die Option \"Vererben\" wendet die Einstellung auf Seitenebene (falls gesetzt) oder auf Umfrageebene an (standardmäßig \"Oben\").",
       descriptionLocation: "Die Option \"Vererben\" wendet die Einstellung auf Seitenebene (falls gesetzt) oder auf Umfrageebene an (standardmäßig unter dem Panel-Titel).",
@@ -1562,6 +1567,8 @@ var germanTranslation = {
     backcolor: "Standard-Hintergrund",
     hovercolor: "Hover-Hintergrund",
     borderDecoration: "Bordüren-Verzierung",
+    fontColor: "Schriftfarbe",
+    backgroundColor: "Hintergrundfarbe",
     primaryForecolor: "Standardfarbe",
     primaryForecolorLight: "Deaktivierte Farbe",
     font: "Schriftart",
@@ -2354,3 +2361,10 @@ editorLocalization.locales["de"] = germanTranslation;
 // theme.placeholderColor: "Placeholder color" => "Platzhalterfarbe"
 // theme.size: "Size" => "Größe"
 // theme.opacity: "Opacity" => "Undurchsichtigkeit"
+// ed.toolboxFilteredTextPlaceholder: "Type to search..." => "Geben Sie ein, um zu suchen..."
+// ed.toolboxNoResultsFound: "No results found" => "Keine Ergebnisse gefunden"
+// paneldynamic.tabTitlePlaceholder: "Tab title placeholder" => "Platzhalter für Registerkartentitel"
+// theme.--sjs-special-red: "Error messages" => "Fehlermeldungen"
+// paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "Ein Fallbacktext für Registerkartentitel, der angewendet wird, wenn das Registerkartentitelmuster keinen aussagekräftigen Wert erzeugt."
+// theme.fontColor: "Font color" => "Schriftfarbe"
+// theme.backgroundColor: "Background color" => "Hintergrundfarbe"

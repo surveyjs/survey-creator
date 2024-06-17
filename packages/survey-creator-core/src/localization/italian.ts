@@ -119,6 +119,8 @@ var italianTranslation = {
     generateReadableJSON: "Genera JSON Leggibile",
     toolbox: "Toolbox",
     "property-grid": "Proprietà",
+    toolboxFilteredTextPlaceholder: "Digita per cercare...",
+    toolboxNoResultsFound: "Nessun risultato trovato",
     propertyGridFilteredTextPlaceholder: "Digita per cercare...",
     propertyGridNoResultsFound: "Nessun risultato trovato",
     correctJSON: "Correggi il tuo JSON",
@@ -297,6 +299,7 @@ var italianTranslation = {
       templateTitle: "Pattern titolo pannello",
       noEntriesText: "Testo del pannello vuoto",
       templateTabTitle: "Modello del titolo della tabulazione",
+      tabTitlePlaceholder: "Segnaposto titolo tabulazione",
       templateVisibleIf: "Rendi visibile un singolo pannello se",
       hideNumber: "Nascondere il numero del pannello",
       titleLocation: "Allineamento del titolo del pannello",
@@ -874,6 +877,7 @@ var italianTranslation = {
       "--sjs-general-backcolor-dim": "Colore di sfondo",
       "--sjs-primary-backcolor": "Sfondo d'accento",
       "--sjs-primary-forecolor": "Primo piano in primo piano",
+      "--sjs-special-red": "Messaggi di errore",
       "--sjs-shadow-small": "Effetti ombra",
       "--sjs-shadow-inner": "Effetti ombra",
       "--sjs-border-default": "Colori"
@@ -1250,6 +1254,7 @@ var italianTranslation = {
       width: "Imposta la larghezza del pannello in proporzione agli altri elementi di rilievo nella stessa linea. Accetta valori CSS (px, %, in, pt, ecc.).",
       templateTitle: "Digita un modello per i titoli dei pannelli dinamici. Utilizzare {panelIndex} per la posizione generale del pannello e {visiblePanelIndex} per l'ordine tra i pannelli visibili. Inserire questi segnaposto nel motivo per aggiungere la numerazione automatica.",
       templateTabTitle: "Digita un modello per i titoli delle schede. Utilizzate {panelIndex} per la posizione generale di un pannello e {visiblePanelIndex} per l'ordine tra i pannelli visibili. Inserire questi segnaposto nel motivo per aggiungere la numerazione automatica.",
+      tabTitlePlaceholder: "Testo di fallback per i titoli delle schede che si applica quando il modello del titolo della scheda non produce un valore significativo.",
       templateVisibleIf: "Questa impostazione consente di controllare la visibilità dei singoli pannelli all'interno del pannello dinamico. Utilizzare il segnaposto '{panel}' per fare riferimento al pannello corrente nell'espressione.",
       titleLocation: "Questa impostazione viene ereditata automaticamente da tutte le domande all'interno di questo pannello. Se si desidera ignorare questa impostazione, definire le regole di allineamento del titolo per le singole domande. L'opzione \"Eredita\" applica l'impostazione a livello di pagina (se impostata) o a livello di indagine (\"In alto\" per impostazione predefinita).",
       descriptionLocation: "L'opzione \"Eredita\" applica l'impostazione a livello di pagina (se impostata) o a livello di indagine (\"Sotto il titolo del pannello\" per impostazione predefinita).",
@@ -1562,6 +1567,8 @@ var italianTranslation = {
     backcolor: "Sfondo predefinito",
     hovercolor: "Sfondo al passaggio del mouse",
     borderDecoration: "Decorazione del bordo",
+    fontColor: "Colore del carattere",
+    backgroundColor: "Colore di sfondo",
     primaryForecolor: "Colore predefinito",
     primaryForecolorLight: "Colore disabilitato",
     font: "Font",
@@ -2403,3 +2410,10 @@ editorLocalization.locales["it"] = italianTranslation;
 // theme.placeholderColor: "Placeholder color" => "Colore segnaposto"
 // theme.size: "Size" => "Grandezza"
 // theme.opacity: "Opacity" => "Opacità"
+// ed.toolboxFilteredTextPlaceholder: "Type to search..." => "Digita per cercare..."
+// ed.toolboxNoResultsFound: "No results found" => "Nessun risultato trovato"
+// paneldynamic.tabTitlePlaceholder: "Tab title placeholder" => "Segnaposto titolo tabulazione"
+// theme.--sjs-special-red: "Error messages" => "Messaggi di errore"
+// paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "Testo di fallback per i titoli delle schede che si applica quando il modello del titolo della scheda non produce un valore significativo."
+// theme.fontColor: "Font color" => "Colore del carattere"
+// theme.backgroundColor: "Background color" => "Colore di sfondo"
