@@ -30,4 +30,4 @@ Serializer.addClass(
   "nonvalue"
 );
 
-QuestionFactory.Instance.registerQuestion(questionType, (name: string): Question => { return new QuestionEmbeddedCreatorModel(name); });
+QuestionFactory.Instance.registerQuestion(questionType, (name: string): Question => { return new QuestionEmbeddedCreatorModel(name); }, false);
