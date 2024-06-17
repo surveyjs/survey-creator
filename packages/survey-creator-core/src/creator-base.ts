@@ -3646,7 +3646,7 @@ export function initializeDesignTimeSurveyModel(model: any, creator: SurveyCreat
     if(opt.wrapperName === "itemvalue") {
       opt.componentName = getItemValueWrapperComponentName(opt.item, opt.element);
     }
-    if(opt.wrapperName === "string" && !creator.readOnly && isStringEditable(opt.element, opt.element.name)) {
+    if(opt.wrapperName === "string" && !creator.readOnly && isStringEditable(opt.element, opt.reason)) {
       opt.componentName = editableStringRendererName;
     }
     opt.componentName = opt.componentName || compName;
