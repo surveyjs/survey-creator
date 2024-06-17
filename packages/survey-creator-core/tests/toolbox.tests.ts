@@ -666,3 +666,93 @@ test("Use custom widgets in questionTypes array to keep them in correct order in
   CustomWidgetCollection.Instance.clear();
   ComponentCollection.Instance.clear();
 });
+
+test("Toolbox search", (): any => {
+  const creator = new CreatorTester();
+  creator.toolbox.searchEnabled = true;
+  creator.toolbox.searchManager.filterString = "dRoP";
+  expect(creator.toolbox.items.filter(item => item.visible).map(item => item.name)).toEqual(["dropdown", "tagbox", "matrixdropdown"]);
+  creator.toolbox.searchManager.filterString = "xdRoP";
+  expect(creator.toolbox.items.filter(item => item.visible).map(item => item.name)).toEqual(["matrixdropdown"]);
+  creator.toolbox.searchManager.filterString = "read";
+  expect(creator.toolbox.items.filter(item => item.visible).map(item => item.name)).toEqual(["expression"]);
+});
+
+test("Toolbox search within categories with titles", (): any => {
+  const creator = new CreatorTester();
+  creator.toolbox.searchEnabled = true;
+  creator.toolbox.showCategoryTitles = true;
+  expect(creator.toolbox.getCategoryByName("choice").collapsed).toBeFalsy();
+  expect(creator.toolbox.getCategoryByName("text").collapsed).toBeTruthy();
+  expect(creator.toolbox.getCategoryByName("choice").empty).toBeFalsy();
+  expect(creator.toolbox.getCategoryByName("text").empty).toBeFalsy();
+  creator.toolbox.searchManager.filterString = "dRoP";
+  expect(creator.toolbox.items.filter(item => item.visible).map(item => item.name)).toEqual(["dropdown", "tagbox", "matrixdropdown"]);
+  expect(creator.toolbox.getCategoryByName("choice").collapsed).toBeFalsy();
+  expect(creator.toolbox.getCategoryByName("text").collapsed).toBeFalsy();
+  expect(creator.toolbox.getCategoryByName("choice").empty).toBeFalsy();
+  expect(creator.toolbox.getCategoryByName("text").empty).toBeTruthy();
+  creator.toolbox.searchManager.filterString = "";
+  expect(creator.toolbox.getCategoryByName("choice").collapsed).toBeFalsy();
+  expect(creator.toolbox.getCategoryByName("text").collapsed).toBeTruthy();
+  expect(creator.toolbox.getCategoryByName("choice").empty).toBeFalsy();
+  expect(creator.toolbox.getCategoryByName("text").empty).toBeFalsy();
+});
+
+test("Toolbox keep scroll while search", (): any => {
+  const creator = new CreatorTester();
+  const elementMock: any = { scrollHeight: 200, clientHeight: 100 };
+
+  creator.toolbox.searchEnabled = true;
+  creator.toolbox.setRootElement({ querySelector: () => elementMock } as any);
+  expect(creator.toolbox.isScrollLocked).toBeFalsy();
+  creator.toolbox.searchManager.filterString = "a";
+  expect(creator.toolbox.isScrollLocked).toBeTruthy();
+  elementMock.scrollHeight = 150;
+  expect(creator.toolbox.isScrollLocked).toBeTruthy();
+  creator.toolbox.searchManager.filterString = "ab";
+  expect(creator.toolbox.isScrollLocked).toBeTruthy();
+  elementMock.scrollHeight = 100;
+  expect(creator.toolbox.isScrollLocked).toBeTruthy();
+  creator.toolbox.searchManager.filterString = "abc";
+  expect(creator.toolbox.isScrollLocked).toBeTruthy();
+  elementMock.scrollHeight = 50;
+  elementMock.clientHeight = 50;
+  creator.toolbox.searchManager.filterString = "";
+  expect(creator.toolbox.isScrollLocked).toBeFalsy();
+  elementMock.scrollHeight = 200;
+  elementMock.scrollHeight = 100;
+  expect(creator.toolbox.isScrollLocked).toBeFalsy();
+
+  elementMock.scrollHeight = 50;
+  elementMock.clientHeight = 50;
+  expect(creator.toolbox.isScrollLocked).toBeFalsy();
+  creator.toolbox.searchManager.filterString = "a";
+  expect(creator.toolbox.isScrollLocked).toBeFalsy();
+  elementMock.scrollHeight = 20;
+  elementMock.clientHeight = 20;
+  expect(creator.toolbox.isScrollLocked).toBeFalsy();
+  creator.toolbox.searchManager.filterString = "ab";
+  expect(creator.toolbox.isScrollLocked).toBeFalsy();
+  elementMock.scrollHeight = 10;
+  elementMock.clientHeight = 10;
+  expect(creator.toolbox.isScrollLocked).toBeFalsy();
+  creator.toolbox.searchManager.filterString = "";
+  expect(creator.toolbox.isScrollLocked).toBeFalsy();
+  elementMock.scrollHeight = 50;
+  elementMock.clientHeight = 50;
+  expect(creator.toolbox.isScrollLocked).toBeFalsy();
+});
+
+test("Toolbox show search depending on items count", (): any => {
+  const creator = new CreatorTester();
+  creator.toolbox.searchEnabled = true;
+  expect(creator.toolbox.showSearch).toBeTruthy();
+  const old = QuestionToolbox.MINELEMENTCOUNT;
+  QuestionToolbox.MINELEMENTCOUNT = 30;
+  expect(creator.toolbox.showSearch).toBeFalsy();
+  QuestionToolbox.MINELEMENTCOUNT = old;
+  expect(creator.toolbox.showSearch).toBeTruthy();
+  creator.toolbox.searchEnabled = false;
+  expect(creator.toolbox.showSearch).toBeFalsy();
+});
