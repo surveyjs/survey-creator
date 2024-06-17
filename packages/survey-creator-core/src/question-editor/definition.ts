@@ -626,6 +626,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
     properties: [
       "renderMode",
       "templateTabTitle",
+      "tabTitlePlaceholder",
       "tabAlign",
       "panelCount",
       "minPanelCount",
