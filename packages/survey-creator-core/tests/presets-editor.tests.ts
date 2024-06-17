@@ -374,6 +374,7 @@ test("Preset edit model, property grid, apply", () => {
       }
     ]
   };
+  propGridCreator.survey.getQuestionByName("name").title = "Name 1";
   expect(editor.applyFromSurveyModel()).toBeTruthy();
   const pageProps = propDef?.classes["page"];
   expect(pageProps?.tabs).toHaveLength(0);

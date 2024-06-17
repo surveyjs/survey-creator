@@ -56,4 +56,4 @@ Serializer.addClass("presetranking",
 );
 ElementFactory.Instance.registerElement("presetranking", (name) => {
   return new QuestionPresetRankingModel(name);
-});
+}, false);
