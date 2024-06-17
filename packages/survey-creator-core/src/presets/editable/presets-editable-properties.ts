@@ -8,7 +8,6 @@ import { defaultPropertyGridDefinition, ISurveyPropertyGridDefinition, ISurveyPr
 import { SurveyQuestionProperties } from "../../question-editor/properties";
 import { editorLocalization } from "../../editorLocalization";
 import { PropertyGridModel } from "../../../src/property-grid";
-import { QuestionEmbeddedSurveyModel } from "../../components/embedded-survey";
 import { QuestionEmbeddedCreatorModel } from "../../components/embedded-creator";
 import { ICreatorOptions } from "../../creator-options";
 import { settings } from "../../creator-settings";
@@ -371,14 +370,11 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
       }
       if(options.reason === "designer") {
         const model = options.survey;
-        const getElementWrapperComponentNamePrev = model.getElementWrapperComponentName;
-        model.getElementWrapperComponentName = (element: any, reason?: string): string => {
-          let res = getElementWrapperComponentNamePrev.call(model, element, reason);
-          if(res === "svc-dropdown-question") {
-            res = "svc-question";
+        model.onElementWrapperComponentName.add((sender, options) => {
+          if(options.componentName === "svc-dropdown-question") {
+            options.componentName = "svc-question";
           }
-          return res;
-        };
+        });
       }
     });
     creator.onSelectedElementChanging.add((sender, options) => {
