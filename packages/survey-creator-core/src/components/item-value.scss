@@ -94,25 +94,25 @@
   }
 
   use {
-    fill: $foreground;
+    fill: var(--ctr-survey-item-actionbar-drag-indicator-color, $foreground);
   }
 }
 
 .svc-item-value-controls__button--disabled {
-  fill: $foreground-light;
+  fill: var(--ctr-survey-action-button-icon-color-disabled, $foreground-light);
   opacity: 0.25;
   cursor: default;
 }
 
 .svc-item-value-controls__remove:not(.svc-item-value-controls__button--disabled) {
   use {
-    fill: $red;
+    fill: var(--ctr-survey-action-button-icon-color-negative, $red);
   }
 }
 
 .svc-item-value-controls__add:not(.svc-item-value-controls__button--disabled) {
   use {
-    fill: $primary;
+    fill: var(--ctr-survey-action-button-icon-color-positive, $primary);
   }
 }
 
@@ -120,7 +120,7 @@
 
   &:hover,
   &:focus {
-    background-color: $primary-light;
+    background-color: var(--ctr-survey-action-button-background-color-hovered-positive, $primary-light);
   }
 }
 
@@ -128,7 +128,7 @@
 
   &:hover,
   &:focus {
-    background-color: $red-light;
+    background-color: var(--ctr-survey-action-button-background-color-hovered-negative, $red-light);
   }
 }
 

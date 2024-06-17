@@ -197,7 +197,7 @@
 
     &:focus,
     &:hover {
-      background-color: $background;
+      background-color: var(--ctr-button-background-color-hovered, $background);
       box-shadow: $shadow-small;
     }
   }
