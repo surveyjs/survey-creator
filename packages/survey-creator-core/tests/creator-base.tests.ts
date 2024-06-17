@@ -1140,31 +1140,24 @@ test("Warn on incorrect using constructor", (): any => {
 test("pageEditMode='single'", (): any => {
   let creator = new CreatorTester();
   expect(creator.pageEditMode).toEqual("standard");
-  expect(Serializer.findProperty("survey", "pages").isVisible("")).toBeTruthy();
-  expect(
-    Serializer.findProperty("question", "page").isVisible("")
-  ).toBeTruthy();
-  expect(Serializer.findProperty("panel", "page").isVisible("")).toBeTruthy();
+  const showProp = (className: string, propName: string): boolean => {
+    const prop = Serializer.findProperty(className, propName);
+    return creator.onCanShowPropertyCallback(undefined, prop, "", undefined, <any>undefined);
+  };
+  expect(showProp("survey", "pages")).toBeTruthy();
+  expect(showProp("question", "page")).toBeTruthy();
+  expect(showProp("panel", "page")).toBeTruthy();
   creator = new CreatorTester({ pageEditMode: "single" });
   creator.JSON = { elements: [{ type: "text", name: "question1" }] };
   expect(creator.pageEditMode).toEqual("single");
-  expect(Serializer.findProperty("survey", "pages").isVisible("")).toBeFalsy();
-  expect(Serializer.findProperty("question", "page").isVisible("")).toBeFalsy();
-  expect(Serializer.findProperty("panel", "page").isVisible("")).toBeFalsy();
+  expect(showProp("survey", "pages")).toBeFalsy();
+  expect(showProp("question", "page")).toBeFalsy();
+  expect(showProp("panel", "page")).toBeFalsy();
   const designerPlugin = <TabDesignerPlugin>(
     creator.getPlugin("designer")
   );
   expect(designerPlugin.model.showNewPage).toBeFalsy();
   expect(designerPlugin.model.newPage).toBeFalsy();
-
-  Serializer.findProperty("survey", "pages").visible = true;
-  Serializer.findProperty("question", "page").visible = true;
-  Serializer.findProperty("panel", "page").visible = true;
-  expect(Serializer.findProperty("survey", "pages").isVisible("")).toBeTruthy();
-  expect(
-    Serializer.findProperty("question", "page").isVisible("")
-  ).toBeTruthy();
-  expect(Serializer.findProperty("panel", "page").isVisible("")).toBeTruthy();
 });
 test("Check page actions for pageEditMode is 'single'", (): any => {
   const creator = new CreatorTester({ pageEditMode: "single" });
@@ -2546,28 +2539,36 @@ test("Set readOnly option", (): any => {
 });
 test("Set allowEditSurveyTitle option", (): any => {
   const creator = new CreatorTester({ allowEditSurveyTitle: false });
+  const showProp = (className: string, propName: string): boolean => {
+    const prop = Serializer.findProperty(className, propName);
+    return creator.onCanShowPropertyCallback(undefined, prop, "", undefined, <any>undefined);
+  };
   expect(creator.allowEditSurveyTitle).toBeFalsy();
-  expect(Serializer.findProperty("survey", "title").visible).toBeFalsy();
-  expect(Serializer.findProperty("survey", "description").visible).toBeFalsy();
-  expect(Serializer.findProperty("survey", "logo").visible).toBeFalsy();
-  expect(Serializer.findProperty("survey", "logoFit").visible).toBeFalsy();
-  expect(Serializer.findProperty("survey", "logoWidth").visible).toBeFalsy();
-  expect(Serializer.findProperty("survey", "logoHeight").visible).toBeFalsy();
+  expect(showProp("survey", "title")).toBeFalsy();
+  expect(showProp("survey", "description")).toBeFalsy();
+  expect(showProp("survey", "logo")).toBeFalsy();
+  expect(showProp("survey", "logoFit")).toBeFalsy();
+  expect(showProp("survey", "logoWidth")).toBeFalsy();
+  expect(showProp("survey", "logoHeight")).toBeFalsy();
   creator.allowEditSurveyTitle = true;
-  expect(Serializer.findProperty("survey", "title").visible).toBeTruthy();
-  expect(Serializer.findProperty("survey", "description").visible).toBeTruthy();
-  expect(Serializer.findProperty("survey", "logo").visible).toBeTruthy();
-  expect(Serializer.findProperty("survey", "logoFit").visible).toBeTruthy();
-  expect(Serializer.findProperty("survey", "logoWidth").visible).toBeTruthy();
-  expect(Serializer.findProperty("survey", "logoHeight").visible).toBeTruthy();
+  expect(showProp("survey", "title")).toBeTruthy();
+  expect(showProp("survey", "description")).toBeTruthy();
+  expect(showProp("survey", "logo")).toBeTruthy();
+  expect(showProp("survey", "logoFit")).toBeTruthy();
+  expect(showProp("survey", "logoWidth")).toBeTruthy();
+  expect(showProp("survey", "logoHeight")).toBeTruthy();
 });
 test("Set allowEditSurveyTitle option with removed logoHeight property", (): any => {
   Serializer.removeProperty("survey", "logoHeight");
   const creator = new CreatorTester({ allowEditSurveyTitle: false });
+  const showProp = (className: string, propName: string): boolean => {
+    const prop = Serializer.findProperty(className, propName);
+    return creator.onCanShowPropertyCallback(undefined, prop, "", undefined, <any>undefined);
+  };
   expect(creator.allowEditSurveyTitle).toBeFalsy();
-  expect(Serializer.findProperty("survey", "logoWidth").visible).toBeFalsy();
+  expect(showProp("survey", "logoWidth")).toBeFalsy();
   creator.allowEditSurveyTitle = true;
-  expect(Serializer.findProperty("survey", "logoWidth").visible).toBeTruthy();
+  expect(showProp("survey", "logoWidth")).toBeTruthy();
   Serializer.addProperty("survey", { name: "logoHeight", default: "200px", minValue: 0 });
 });
 test("creator.onActiveTabChanged", (): any => {

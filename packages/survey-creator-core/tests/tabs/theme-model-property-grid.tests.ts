@@ -5,6 +5,7 @@ import { CreatorTester } from "../creator-tester";
 import { PredefinedColors, PredefinedThemes, Themes } from "../../src/components/tabs/themes";
 import { QuestionFileEditorModel } from "../../src/custom-questions/question-file";
 import { editorLocalization } from "../../src/editorLocalization";
+import { DefaultFonts } from "../../src/components/tabs/theme-custom-questions/font-settings";
 export { QuestionFileEditorModel } from "../../src/custom-questions/question-file";
 export { QuestionSpinEditorModel } from "../../src/custom-questions/question-spin-editor";
 export { QuestionColorModel } from "../../src/custom-questions/question-color";
@@ -1055,4 +1056,43 @@ test("header survey title font color changed", (): any => {
   expect(currentThemeCssVariables["--sjs-font-headertitle-size"]).toBe("39px");
   expect(currentThemeCssVariables["--sjs-font-headertitle-color"]).toBeUndefined();
   // expect(currentThemeCssVariables["--sjs-font-headertitle-color"]).toBe("#FBFF24");
+});
+
+test("header editable after theme changed", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { title: "Survey Title", questions: [{ type: "text", name: "q1" }] };
+
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const groupHeader = themePlugin.propertyGrid.survey.pages[0].getElementByName("header");
+  const headerViewContainer = groupHeader.elements[0].contentPanel;
+  const headerTitleQuestion = headerViewContainer.getElementByName("headerTitle");
+  const themeChooser = themePlugin.propertyGrid.survey.getQuestionByName("themeName") as QuestionDropdownModel;
+
+  themeChooser.value = "flat";
+  expect(headerTitleQuestion.isVisible).toBe(false);
+
+  headerViewContainer.getElementByName("headerView").value = "advanced";
+  expect(headerTitleQuestion.isVisible).toBe(true);
+});
+
+test("Theme builder: set custom font", (): any => {
+  const customFont = "RobotoMono-Regular, monospace";
+  expect(DefaultFonts.length).toEqual(10);
+  DefaultFonts.push(customFont);
+  try {
+    const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+    creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+    const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+    themePlugin.activate();
+    const questionGeneralFont = themePlugin.propertyGrid.survey.findQuestionByName("--sjs-font-family") as QuestionDropdownModel;
+    const questionTitleFontSettings = themePlugin.propertyGrid.survey.findQuestionByName("questionTitle") as QuestionCompositeModel;
+    const questionTitleFontFamily = questionTitleFontSettings.contentPanel.getQuestionByName("family") as QuestionDropdownModel;
+
+    expect(questionGeneralFont.choices.length).toEqual(11);
+    expect(questionTitleFontFamily.choices.length).toEqual(11);
+  } finally {
+    DefaultFonts.splice(DefaultFonts.indexOf(customFont), 1);
+    expect(DefaultFonts.length).toEqual(10);
+  }
 });
