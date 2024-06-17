@@ -201,18 +201,22 @@ export class ThemeModel extends Base implements ITheme {
     );
   }
 
+  private updatePropertiesDependentOnPrimaryColor(value: string) {
+    this.colorCalculator.calculateColors(value);
+    this.setPropertyValue("--sjs-primary-backcolor-light", this.colorCalculator.colorSettings.newColorLight);
+    this.setPropertyValue("--sjs-primary-backcolor-dark", this.colorCalculator.colorSettings.newColorDark);
+    this.setThemeCssVariablesChanges("--sjs-primary-backcolor-light", this.colorCalculator.colorSettings.newColorLight);
+    this.setThemeCssVariablesChanges("--sjs-primary-backcolor-dark", this.colorCalculator.colorSettings.newColorDark);
+  }
   private cssVariablePropertiesChanged(name: string, value: any, property: JsonObjectProperty) {
     if (name === "primaryColor") {
       this.setPropertyValue("--sjs-primary-backcolor", value);
       this.setThemeCssVariablesChanges("--sjs-primary-backcolor", value);
+      this.updatePropertiesDependentOnPrimaryColor(value);
     }
     if (name === "--sjs-primary-backcolor") {
       this["primaryColor"] = value;
-      this.colorCalculator.calculateColors(value);
-      this.setPropertyValue("--sjs-primary-backcolor-light", this.colorCalculator.colorSettings.newColorLight);
-      this.setPropertyValue("--sjs-primary-backcolor-dark", this.colorCalculator.colorSettings.newColorDark);
-      this.setThemeCssVariablesChanges("--sjs-primary-backcolor-light", this.colorCalculator.colorSettings.newColorLight);
-      this.setThemeCssVariablesChanges("--sjs-primary-backcolor-dark", this.colorCalculator.colorSettings.newColorDark);
+      this.updatePropertiesDependentOnPrimaryColor(value);
     }
     if (name === "--sjs-shadow-inner" || name === "--sjs-shadow-small") {
       const newBoxShadowReset = createBoxShadowReset(value);
