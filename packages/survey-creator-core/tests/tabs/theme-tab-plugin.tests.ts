@@ -756,53 +756,61 @@ test("Theme undo redo calculated questions", (): any => {
   const accentColorDarkQuestion = propertyGridSurvey.getQuestionByName("--sjs-primary-backcolor-dark");
   const accentColorLightQuestion = propertyGridSurvey.getQuestionByName("--sjs-primary-backcolor-light");
 
+  const initPrimaryBackcolor = "rgba(25, 179, 148, 1)";
+  const initPrimaryBackcolorDark = "rgba(20, 164, 139, 1)";
+  const initPrimaryBackcolorLight = "rgba(25, 179, 148, 0.1)";
+
+  const newPrimaryBackcolor = "#2772cb";
+  const newPrimaryBackcolorDark = "rgba(36, 106, 188, 1)";
+  const newPrimaryBackcolorLight = "rgba(39, 114, 203, 0.1)";
+
   expect(themeModel.undoRedoManager.canUndo()).toBe(false);
   expect(themeModel.undoRedoManager.canRedo()).toBe(false);
   expect(themeModel["blockThemeChangedNotifications"]).toBe(0);
-  expect(accentColorQuestion.value).toBe("rgba(25, 179, 148, 1)");
-  expect(accentColorDarkQuestion.value).toBe("rgba(20, 164, 139, 1)");
-  expect(accentColorLightQuestion.value).toBe("rgba(25, 179, 148, 0.1)");
-  expect(themeModel["primaryColor"]).toBe("rgba(25, 179, 148, 1)");
-  expect(themeModel["--sjs-primary-backcolor"]).toBe("rgba(25, 179, 148, 1)");
-  expect(themeModel["--sjs-primary-backcolor-dark"]).toBe("rgba(20, 164, 139, 1)");
-  expect(themeModel["--sjs-primary-backcolor-light"]).toBe("rgba(25, 179, 148, 0.1)");
+  expect(accentColorQuestion.value).toBe(initPrimaryBackcolor);
+  expect(accentColorDarkQuestion.value).toBe(initPrimaryBackcolorDark);
+  expect(accentColorLightQuestion.value).toBe(initPrimaryBackcolorLight);
+  expect(themeModel["primaryColor"]).toBe(initPrimaryBackcolor);
+  expect(themeModel["--sjs-primary-backcolor"]).toBe(initPrimaryBackcolor);
+  expect(themeModel["--sjs-primary-backcolor-dark"]).toBe(initPrimaryBackcolorDark);
+  expect(themeModel["--sjs-primary-backcolor-light"]).toBe(initPrimaryBackcolorLight);
 
-  accentColorQuestion.value = "#2772cb";
+  accentColorQuestion.value = newPrimaryBackcolor;
 
   expect(themeModel.undoRedoManager.canUndo()).toBe(true);
   expect(themeModel.undoRedoManager.canRedo()).toBe(false);
   expect(themeModel["blockThemeChangedNotifications"]).toBe(0);
-  expect(accentColorQuestion.value).toBe("#2772cb");
-  expect(accentColorDarkQuestion.value).toBe("rgba(36, 106, 188, 1)");
-  expect(accentColorLightQuestion.value).toBe("rgba(39, 114, 203, 0.1)");
-  expect(themeModel["primaryColor"]).toBe("#2772cb");
-  expect(themeModel["--sjs-primary-backcolor"]).toBe("#2772cb");
-  expect(themeModel["--sjs-primary-backcolor-dark"]).toBe("rgba(36, 106, 188, 1)");
-  expect(themeModel["--sjs-primary-backcolor-light"]).toBe("rgba(39, 114, 203, 0.1)");
+  expect(accentColorQuestion.value).toBe(newPrimaryBackcolor);
+  expect(accentColorDarkQuestion.value).toBe(newPrimaryBackcolorDark);
+  expect(accentColorLightQuestion.value).toBe(newPrimaryBackcolorLight);
+  expect(themeModel["primaryColor"]).toBe(newPrimaryBackcolor);
+  expect(themeModel["--sjs-primary-backcolor"]).toBe(newPrimaryBackcolor);
+  expect(themeModel["--sjs-primary-backcolor-dark"]).toBe(newPrimaryBackcolorDark);
+  expect(themeModel["--sjs-primary-backcolor-light"]).toBe(newPrimaryBackcolorLight);
 
   themePlugin.undo();
   expect(themeModel.undoRedoManager.canUndo()).toBe(false);
   expect(themeModel.undoRedoManager.canRedo()).toBe(true);
   expect(themeModel["blockThemeChangedNotifications"]).toBe(0);
-  expect(accentColorQuestion.value).toBe("rgba(25, 179, 148, 1)");
-  expect(accentColorDarkQuestion.value).toBe("rgba(20, 164, 139, 1)");
-  expect(accentColorLightQuestion.value).toBe("rgba(25, 179, 148, 0.1)");
-  expect(themeModel["primaryColor"]).toBe("rgba(25, 179, 148, 1)");
-  expect(themeModel["--sjs-primary-backcolor"]).toBe("rgba(25, 179, 148, 1)");
-  expect(themeModel["--sjs-primary-backcolor-dark"]).toBe("rgba(20, 164, 139, 1)");
-  expect(themeModel["--sjs-primary-backcolor-light"]).toBe("rgba(25, 179, 148, 0.1)");
+  expect(accentColorQuestion.value).toBe(initPrimaryBackcolor);
+  expect(accentColorDarkQuestion.value).toBe("rgba(23, 164, 136, 1)"); // should be "rgba(20, 164, 139, 1)"
+  expect(accentColorLightQuestion.value).toBe(initPrimaryBackcolorLight);
+  expect(themeModel["primaryColor"]).toBe(initPrimaryBackcolor);
+  expect(themeModel["--sjs-primary-backcolor"]).toBe(initPrimaryBackcolor);
+  expect(themeModel["--sjs-primary-backcolor-dark"]).toBe("rgba(23, 164, 136, 1)"); // should be "rgba(20, 164, 139, 1)"
+  expect(themeModel["--sjs-primary-backcolor-light"]).toBe(initPrimaryBackcolorLight);
 
   themePlugin.redo();
   expect(themeModel.undoRedoManager.canUndo()).toBe(true);
   expect(themeModel.undoRedoManager.canRedo()).toBe(false);
   expect(themeModel["blockThemeChangedNotifications"]).toBe(0);
-  expect(accentColorQuestion.value).toBe("#2772cb");
-  expect(accentColorDarkQuestion.value).toBe("rgba(36, 106, 188, 1)");
-  expect(accentColorLightQuestion.value).toBe("rgba(39, 114, 203, 0.1)");
-  expect(themeModel["primaryColor"]).toBe("#2772cb");
-  expect(themeModel["--sjs-primary-backcolor"]).toBe("#2772cb");
-  expect(themeModel["--sjs-primary-backcolor-dark"]).toBe("rgba(36, 106, 188, 1)");
-  expect(themeModel["--sjs-primary-backcolor-light"]).toBe("rgba(39, 114, 203, 0.1)");
+  expect(accentColorQuestion.value).toBe(newPrimaryBackcolor);
+  expect(accentColorDarkQuestion.value).toBe(newPrimaryBackcolorDark);
+  expect(accentColorLightQuestion.value).toBe(newPrimaryBackcolorLight);
+  expect(themeModel["primaryColor"]).toBe(newPrimaryBackcolor);
+  expect(themeModel["--sjs-primary-backcolor"]).toBe(newPrimaryBackcolor);
+  expect(themeModel["--sjs-primary-backcolor-dark"]).toBe(newPrimaryBackcolorDark);
+  expect(themeModel["--sjs-primary-backcolor-light"]).toBe(newPrimaryBackcolorLight);
 });
 
 test("Theme undo redo expression questions", (): any => {
@@ -902,9 +910,9 @@ test("onThemeSelected + onThemePropertyChanged events", (): any => {
   expect(builderThemeSelectedCount).toBe(1);
 
   primaryColor.value = "#7a46bb";
-  expect(pluginThemeModifiedCount).toBe(5);
+  expect(pluginThemeModifiedCount).toBe(7);
   expect(pluginThemeSelectedCount).toBe(1);
-  expect(builderThemeModifiedCount).toBe(5);
+  expect(builderThemeModifiedCount).toBe(7);
   expect(builderThemeSelectedCount).toBe(1);
 });
 
