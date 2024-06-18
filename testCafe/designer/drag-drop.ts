@@ -229,7 +229,7 @@ test("Drag Drop Toolbox All Questions", async (t) => {
 test("Drag Drop Toolbox Responsivity", async (t) => {
   await changeToolboxScrolling(false);
   await changeToolboxSearchEnabled(false);
-  const tabbedMenuItemSelector = Selector(".svc-toolbox .svc-toolbox__tool:nth-of-type(19)");
+  const tabbedMenuItemSelector = Selector(".svc-toolbox .svc-toolbox__tool:nth-of-type(18)");
   await t
     .resizeWindow(1920, 1080)
     .expect(tabbedMenuItemSelector.hasClass("sv-action--hidden")).notOk()
