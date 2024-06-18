@@ -119,6 +119,8 @@ export var jaStrings = {
     generateReadableJSON: "読み取り可能なJSONを生成する",
     toolbox: "ツールボックス",
     "property-grid": "プロパティ",
+    toolboxFilteredTextPlaceholder: "「検索」...",
+    toolboxNoResultsFound: "結果が見つかりませんでした",
     propertyGridFilteredTextPlaceholder: "検索するタイプ...",
     propertyGridNoResultsFound: "結果が見つかりませんでした",
     correctJSON: "JSONを修正してください。",
@@ -297,6 +299,7 @@ export var jaStrings = {
       templateTitle: "パネル・タイトル・パターン",
       noEntriesText: "空のパネル・テキスト",
       templateTabTitle: "タブ タイトルのパターン",
+      tabTitlePlaceholder: "タブ タイトルのプレースホルダー",
       templateVisibleIf: "個々のパネルを表示するのは、次の場合です",
       hideNumber: "パネル番号を隠す",
       titleLocation: "パネルタイトルの配置",
@@ -874,6 +877,7 @@ export var jaStrings = {
       "--sjs-general-backcolor-dim": "背景色",
       "--sjs-primary-backcolor": "アクセントの背景",
       "--sjs-primary-forecolor": "アクセントの前景",
+      "--sjs-special-red": "エラーメッセージ",
       "--sjs-shadow-small": "影の効果",
       "--sjs-shadow-inner": "影の効果",
       "--sjs-border-default": "色"
@@ -1250,6 +1254,7 @@ export var jaStrings = {
       width: "パネルの幅を、同じ行内の他の調査要素に比例して設定します。CSS 値 (px、%、in、pt など) を受け入れます。",
       templateTitle: "動的パネルタイトルのテンプレートを入力します。パネルの一般的な位置には {panelIndex} を使用し、表示されているパネル間の順序には {visiblePanelIndex} を使用します。これらのプレースホルダーをパターンに挿入して、自動番号付けを追加します。",
       templateTabTitle: "タブタイトルのテンプレートを入力します。パネルの一般的な位置には {panelIndex} を使用し、可視パネル間の順序には {visiblePanelIndex} を使用します。これらのプレースホルダーをパターンに挿入して、自動番号付けを追加します。",
+      tabTitlePlaceholder: "タブ タイトル パターンが意味のある値を生成しない場合に適用されるタブ タイトルのフォールバック テキスト。",
       templateVisibleIf: "この設定では、動的パネル内の個々のパネルの表示を制御できます。'{panel}' プレースホルダーを使用して、式で現在のパネルを参照します。",
       titleLocation: "この設定は、このパネル内のすべての質問に自動的に継承されます。この設定を上書きする場合は、個々の質問のタイトル配置ルールを定義します。「継承」オプションは、ページレベル(設定されている場合)またはアンケートレベルの設定(デフォルトでは「上」)を適用します。",
       descriptionLocation: "「継承」オプションは、ページレベル(設定されている場合)またはアンケートレベルの設定(デフォルトでは「パネルタイトルの下」)を適用します。",
@@ -1562,6 +1567,8 @@ export var jaStrings = {
     backcolor: "デフォルトの背景",
     hovercolor: "ホバー背景",
     borderDecoration: "ボーダーデコレーション",
+    fontColor: "フォントの色",
+    backgroundColor: "背景色",
     primaryForecolor: "デフォルトの色",
     primaryForecolorLight: "無効色",
     font: "フォント",
@@ -2644,3 +2651,10 @@ editorLocalization.locales["ja"] = jaStrings;
 // theme.placeholderColor: "Placeholder color" => "プレースホルダーの色"
 // theme.size: "Size" => "大きさ"
 // theme.opacity: "Opacity" => "不透明"
+// ed.toolboxFilteredTextPlaceholder: "Type to search..." => "「検索」..."
+// ed.toolboxNoResultsFound: "No results found" => "結果が見つかりませんでした"
+// paneldynamic.tabTitlePlaceholder: "Tab title placeholder" => "タブ タイトルのプレースホルダー"
+// theme.--sjs-special-red: "Error messages" => "エラーメッセージ"
+// paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "タブ タイトル パターンが意味のある値を生成しない場合に適用されるタブ タイトルのフォールバック テキスト。"
+// theme.fontColor: "Font color" => "フォントの色"
+// theme.backgroundColor: "Background color" => "背景色"

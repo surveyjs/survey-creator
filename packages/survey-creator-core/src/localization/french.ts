@@ -119,6 +119,8 @@ var frenchTranslation = {
     generateReadableJSON: "Générer un JSON lisible",
     toolbox: "Boîte à outils",
     "property-grid": "Propriétés",
+    toolboxFilteredTextPlaceholder: "Tapez pour rechercher...",
+    toolboxNoResultsFound: "Aucun résultat trouvé",
     propertyGridFilteredTextPlaceholder: "Tapez pour rechercher...",
     propertyGridNoResultsFound: "Aucun résultat trouvé",
     correctJSON: "Merci de corriger le JSON",
@@ -297,6 +299,7 @@ var frenchTranslation = {
       templateTitle: "Modèle de titre de panneau",
       noEntriesText: "Texte du panneau vide",
       templateTabTitle: "Modèle de titre de tabulation",
+      tabTitlePlaceholder: "Espace réservé au titre de l’onglet",
       templateVisibleIf: "Rendre un panneau individuel visible si :",
       hideNumber: "Masquer le numéro du panneau",
       titleLocation: "Alignement du titre du panneau",
@@ -874,6 +877,7 @@ var frenchTranslation = {
       "--sjs-general-backcolor-dim": "Couleur de fond",
       "--sjs-primary-backcolor": "Fond d’accent",
       "--sjs-primary-forecolor": "Premier plan accentué",
+      "--sjs-special-red": "Messages d’erreur",
       "--sjs-shadow-small": "Effets d’ombre",
       "--sjs-shadow-inner": "Effets d’ombre",
       "--sjs-border-default": "Couleurs"
@@ -1250,6 +1254,7 @@ var frenchTranslation = {
       width: "Définit la largeur du panneau par rapport aux autres éléments de topographie de la même ligne. Accepte les valeurs CSS (px, %, in, pt, etc.).",
       templateTitle: "Saisissez un modèle pour les titres de panneau dynamiques. Utilisez {panelIndex} pour la position générale du panneau et {visiblePanelIndex} pour son ordre parmi les panneaux visibles. Insérez ces espaces réservés dans le motif pour ajouter une numérotation automatique.",
       templateTabTitle: "Saisissez un modèle pour les titres d’onglets. Utilisez {panelIndex} pour la position générale d’un panneau et {visiblePanelIndex} pour son ordre parmi les panneaux visibles. Insérez ces espaces réservés dans le motif pour ajouter une numérotation automatique.",
+      tabTitlePlaceholder: "Texte de secours pour les titres d’onglet qui s’applique lorsque le modèle de titre d’onglet ne produit pas de valeur significative.",
       templateVisibleIf: "Ce paramètre vous permet de contrôler la visibilité des panneaux individuels dans le panneau dynamique. Utilisez l’espace réservé '{panel}' pour référencer le panneau actuel dans votre expression.",
       titleLocation: "Ce paramètre est automatiquement hérité par toutes les questions de ce panneau. Si vous souhaitez remplacer ce paramètre, définissez des règles d’alignement des titres pour les questions individuelles. L’option « Hériter » applique le paramètre au niveau de la page (s’il est défini) ou au niveau de l’enquête (« Haut » par défaut).",
       descriptionLocation: "L’option « Hériter » applique le paramètre au niveau de la page (s’il est défini) ou au niveau de l’enquête (« Sous le titre du panneau » par défaut).",
@@ -1562,6 +1567,8 @@ var frenchTranslation = {
     backcolor: "Arrière-plan par défaut",
     hovercolor: "Arrière-plan du survol",
     borderDecoration: "Décoration de bordure",
+    fontColor: "Couleur de la police",
+    backgroundColor: "Couleur de fond",
     primaryForecolor: "Couleur par défaut",
     primaryForecolorLight: "Couleur Désactivée",
     font: "Police",
@@ -2706,3 +2713,10 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // theme.placeholderColor: "Placeholder color" => "Couleur de l’espace réservé"
 // theme.size: "Size" => "Taille"
 // theme.opacity: "Opacity" => "Opacité"
+// ed.toolboxFilteredTextPlaceholder: "Type to search..." => "Tapez pour rechercher..."
+// ed.toolboxNoResultsFound: "No results found" => "Aucun résultat trouvé"
+// paneldynamic.tabTitlePlaceholder: "Tab title placeholder" => "Espace réservé au titre de l’onglet"
+// theme.--sjs-special-red: "Error messages" => "Messages d’erreur"
+// paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "Texte de secours pour les titres d’onglet qui s’applique lorsque le modèle de titre d’onglet ne produit pas de valeur significative."
+// theme.fontColor: "Font color" => "Couleur de la police"
+// theme.backgroundColor: "Background color" => "Couleur de fond"

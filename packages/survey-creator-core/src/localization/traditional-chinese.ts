@@ -119,6 +119,8 @@ var traditionalChineseTranslation = {
     generateReadableJSON: "生成易讀的 JSON",
     toolbox: "工具箱",
     "property-grid": "性能",
+    toolboxFilteredTextPlaceholder: "鍵入以搜尋...",
+    toolboxNoResultsFound: "未找到結果",
     propertyGridFilteredTextPlaceholder: "鍵入以搜尋...",
     propertyGridNoResultsFound: "未找到結果",
     correctJSON: "修正 JSON",
@@ -297,6 +299,7 @@ var traditionalChineseTranslation = {
       templateTitle: "面板標題模式",
       noEntriesText: "空面板文本",
       templateTabTitle: "選項卡標題模式",
+      tabTitlePlaceholder: "選項卡標題佔位元",
       templateVisibleIf: "如果出現以下情況，則使單個面板可見",
       hideNumber: "隱藏面板編號",
       titleLocation: "面板標題對齊方式",
@@ -874,6 +877,7 @@ var traditionalChineseTranslation = {
       "--sjs-general-backcolor-dim": "背景顏色",
       "--sjs-primary-backcolor": "重音背景",
       "--sjs-primary-forecolor": "重音前景",
+      "--sjs-special-red": "錯誤消息",
       "--sjs-shadow-small": "陰影效果",
       "--sjs-shadow-inner": "陰影效果",
       "--sjs-border-default": "顏色"
@@ -1250,6 +1254,7 @@ var traditionalChineseTranslation = {
       width: "設置面板的寬度，使其與同一行中的其他測量圖元成比例。接受 CSS 值（px、%、in、pt 等）。",
       templateTitle: "鍵入動態面板標題的範本。使用 {panelIndex} 作為面板的常規位置，使用 {visiblePanelIndex} 作為其在可見面板中的順序。將這些佔位元插入到圖案中以添加自動編號。",
       templateTabTitle: "鍵入選項卡標題的範本。使用 {panelIndex} 表示面板的大致位置，使用 {visiblePanelIndex} 表示其在可見面板中的順序。將這些佔位元插入到圖案中以添加自動編號。",
+      tabTitlePlaceholder: "選項卡標題的回退文本，當選項卡標題模式未生成有意義的值時應用。",
       templateVisibleIf: "此設置允許您控制動態面板中各個面板的可見性。使用“{panel}”佔位符在運算式中引用當前面板。",
       titleLocation: "此面板中的所有問題都會自動繼承此設置。如果要覆蓋此設置，請為單個問題定義標題對齊規則。“繼承”選項應用頁面級別（如果已設置）或調查級別設置（預設為“頂部”）。",
       descriptionLocation: "“繼承”選項應用頁面級別（如果已設置）或調查級別設置（預設為“在面板標題下”）。",
@@ -1562,6 +1567,8 @@ var traditionalChineseTranslation = {
     backcolor: "默認背景",
     hovercolor: "懸停背景",
     borderDecoration: "邊框裝飾",
+    fontColor: "字體顏色",
+    backgroundColor: "背景顏色",
     primaryForecolor: "默認顏色",
     primaryForecolorLight: "禁用顏色",
     font: "字體",
@@ -2917,3 +2924,10 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // theme.placeholderColor: "Placeholder color" => "佔位元顏色"
 // theme.size: "Size" => "大小"
 // theme.opacity: "Opacity" => "不透明度"
+// ed.toolboxFilteredTextPlaceholder: "Type to search..." => "鍵入以搜尋..."
+// ed.toolboxNoResultsFound: "No results found" => "未找到結果"
+// paneldynamic.tabTitlePlaceholder: "Tab title placeholder" => "選項卡標題佔位元"
+// theme.--sjs-special-red: "Error messages" => "錯誤消息"
+// paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "選項卡標題的回退文本，當選項卡標題模式未生成有意義的值時應用。"
+// theme.fontColor: "Font color" => "字體顏色"
+// theme.backgroundColor: "Background color" => "背景顏色"
