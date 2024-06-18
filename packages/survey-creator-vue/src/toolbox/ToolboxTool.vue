@@ -1,12 +1,17 @@
 <template>
   <div
     class="svc-toolbox__tool"
-    @pointerdown="model?.onPointerDown"
-    @mousemove="(e) => { model?.onMouseOver(item, e); }"
-    @mouseleave="(e) => { model?.onMouseLeave(item, e); }"
     :class="toolboxCss"
   >
-    <div class="sv-action__content">
+    <div
+      class="svc-toolbox__category-separator"
+      v-if="item.needSeparator && !creator.toolbox.showCategoryTitles"
+    ></div>
+    <div class="sv-action__content"
+      @pointerdown="model?.onPointerDown"
+      @mousemove="(e) => { model?.onMouseOver(item, e); }"
+      @mouseleave="(e) => { model?.onMouseLeave(item, e); }"
+    >
       <component
         :viewModel="model"
         :is="item.component || 'svc-toolbox-item'"

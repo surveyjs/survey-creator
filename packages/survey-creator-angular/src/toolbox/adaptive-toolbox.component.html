@@ -17,7 +17,6 @@
           <ng-container *ngIf="model.showInSingleCategory">
             <div class="svc-toolbox__category">
               <ng-container *ngFor="let item of model.renderedActions">
-                <div class="svc-toolbox__category-separator" *ngIf="item.needSeparator && !creator.toolbox.showCategoryTitles"></div>
                 <svc-toolbox-tool [creator]="creator" [item]="item" [parentModel]="model" [isCompact]="model.isCompactRendered"></svc-toolbox-tool>
               </ng-container>
             </div>

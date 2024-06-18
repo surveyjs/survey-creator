@@ -68,19 +68,22 @@ export class SurveyCreatorToolboxTool extends CreatorModelElement<
       }
     );
     return (
-      <div className={className} key={item.id}
-        onPointerDown={(event: any) => {
-          event.persist();
-          this.model.onPointerDown(event);
-        }}
-        onMouseOver={(event: any) => {
-          this.model.onMouseOver(item, event);
-        }}
-        onMouseLeave={(event: any) => {
-          this.model.onMouseLeave(item, event);
-        }}
-      >
-        <div className="sv-action__content">
+      <div className={className} key={item.id}>
+        {(item.needSeparator && !this.creator.toolbox.showCategoryTitles) ? (
+          <div className="svc-toolbox__category-separator"></div>
+        ) : null}
+        <div className="sv-action__content"
+          onPointerDown={(event: any) => {
+            event.persist();
+            this.model.onPointerDown(event);
+          }}
+          onMouseOver={(event: any) => {
+            this.model.onMouseOver(item, event);
+          }}
+          onMouseLeave={(event: any) => {
+            this.model.onMouseLeave(item, event);
+          }}
+        >
           {itemComponent}
         </div>
       </div>

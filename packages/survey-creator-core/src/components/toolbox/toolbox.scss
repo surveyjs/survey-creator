@@ -212,6 +212,7 @@ svc-toolbox {
 
 .svc-toolbox__tool:not(.sv-dots) {
   display: flex;
+  flex-direction: column;
   width: auto;
 }
 
@@ -224,7 +225,7 @@ svc-toolbox {
   height: 1px;
   width: calcSize(5);
   background-color: $border;
-  margin: calcSize(1) calcSize(0.5) calcSize(1.5);
+  margin: calcSize(1.5) calcSize(0.5) calcSize(1);
 }
 
 .svc-toolbox--filtering {

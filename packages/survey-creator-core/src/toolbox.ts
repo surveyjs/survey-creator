@@ -127,6 +127,7 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
   public get classNames(): string {
     return new CssClassBuilder()
       .append("svc-toolbox__tool")
+      .append("svc-toolbox__tool--action")
       .append(this.css)
       .append("svc-toolbox__tool--hovered", this.isHovered)
       .append("svc-toolbox__tool--pressed", this.isPressed)
@@ -142,6 +143,18 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
     if (!text) return;
     const textLowerCase = text.toLowerCase();
     return this.title.toLowerCase().indexOf(textLowerCase) >= 0 || this.name.toLowerCase().indexOf(textLowerCase) >= 0;
+  }
+}
+
+export class QuestionToolboxDotsItem extends Action {
+  constructor(private item: IAction) {
+    super(item);
+  }
+  public get classNames(): string {
+    return new CssClassBuilder()
+      .append("svc-toolbox__tool")
+      .append(this.css)
+      .toString();
   }
 }
 
@@ -170,7 +183,7 @@ export class QuestionToolbox
   private _containerElementValue: HTMLElement;
 
   public get itemSelector(): string {
-    return ".svc-toolbox__tool:not(.svc-toolbox__search-button):not(.sv-dots)";
+    return ".svc-toolbox__category>.svc-toolbox__tool--action";
   }
   public get containerSelector(): string {
     return ".svc-toolbox__scroller";
@@ -327,6 +340,7 @@ export class QuestionToolbox
   }
 
   private initDotsItem() {
+    this.dotsItem = new QuestionToolboxDotsItem(this.dotsItem);
     this.dotsItem.popupModel.horizontalPosition = "right";
     this.dotsItem.popupModel.verticalPosition = "top";
     this.dragOrClickHelper = new DragOrClickHelper((pointerDownEvent: PointerEvent, currentTarget: HTMLElement, itemModel: any) => {

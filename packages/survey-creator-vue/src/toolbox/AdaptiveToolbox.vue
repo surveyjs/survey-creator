@@ -40,10 +40,6 @@
           <template v-if="toolbox.showInSingleCategory">
             <div class="svc-toolbox__category">
               <template v-for="(item, index) in renderedActions" :key="index">
-                <div
-                  v-if="item.needSeparator && !creator.toolbox.showCategoryTitles"
-                  class="svc-toolbox__category-separator"
-                ></div>
                 <svc-toolbox-tool
                   :creator="creator"
                   :item="item"
