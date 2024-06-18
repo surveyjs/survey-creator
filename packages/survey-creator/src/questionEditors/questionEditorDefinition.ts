@@ -478,6 +478,7 @@ export class SurveyQuestionEditorDefinition {
       properties: [
         "renderMode",
         "templateTabTitle",
+        "tabTitlePlaceholder",
         "tabAlign",
         "panelCount",
         "minPanelCount",
