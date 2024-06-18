@@ -119,6 +119,8 @@ export var nbStrings = {
     generateReadableJSON: "Lag lesbar JSON",
     toolbox: "Verktøyliste",
     "property-grid": "Innstillinger",
+    toolboxFilteredTextPlaceholder: "Skriv for å søke ...",
+    toolboxNoResultsFound: "Fant ingen resultater",
     propertyGridFilteredTextPlaceholder: "Skriv for å søke ...",
     propertyGridNoResultsFound: "Fant ingen resultater",
     correctJSON: "Vennligst korriger JSON.",
@@ -297,6 +299,7 @@ export var nbStrings = {
       templateTitle: "Mønster for paneltittel",
       noEntriesText: "Tom paneltekst",
       templateTabTitle: "Mønster for tabulatortittel",
+      tabTitlePlaceholder: "Plassholder for tabulatortittel",
       templateVisibleIf: "Gjør et individuelt panel synlig hvis",
       hideNumber: "Skjule panelnummeret",
       titleLocation: "Justering av paneltittel",
@@ -874,6 +877,7 @@ export var nbStrings = {
       "--sjs-general-backcolor-dim": "Bakgrunnsfarge",
       "--sjs-primary-backcolor": "Bakgrunn med aksent",
       "--sjs-primary-forecolor": "Aksent i forgrunnen",
+      "--sjs-special-red": "Feilmeldinger",
       "--sjs-shadow-small": "Skygge effekter",
       "--sjs-shadow-inner": "Skygge effekter",
       "--sjs-border-default": "Farger"
@@ -1250,6 +1254,7 @@ export var nbStrings = {
       width: "Angir bredden på panelet i forhold til andre undersøkelseselementer på samme linje. Godtar CSS-verdier (px, %, i, pt osv.).",
       templateTitle: "Skriv inn en mal for dynamiske paneltitler. Bruk {panelIndex} for panelets generelle posisjon og {visiblePanelIndex} for rekkefølgen blant synlige paneler. Sett inn disse plassholderne i mønsteret for å legge til automatisk nummerering.",
       templateTabTitle: "Skriv inn en mal for fanetitler. Bruk {panelIndex} for panelets generelle posisjon og {visiblePanelIndex} for rekkefølgen blant synlige paneler. Sett inn disse plassholderne i mønsteret for å legge til automatisk nummerering.",
+      tabTitlePlaceholder: "En basistekst for tabulatortitler som gjelder når mønsteret for tabulatortittel ikke gir meningsfull verdi.",
       templateVisibleIf: "Med denne innstillingen kan du kontrollere synligheten til individuelle paneler i det dynamiske panelet. Bruk plassholderen {panel} til å referere til gjeldende panel i uttrykket.",
       titleLocation: "Denne innstillingen arves automatisk av alle spørsmålene i dette panelet. Hvis du vil overstyre denne innstillingen, definerer du regler for titteljustering for enkeltspørsmål. Alternativet \"Arv\" bruker innstillingen på sidenivå (hvis angitt) eller undersøkelsesnivå (\"Topp\" som standard).",
       descriptionLocation: "Alternativet \"Arv\" bruker innstillingen på sidenivå (hvis angitt) eller innstilling på undersøkelsesnivå (\"Under paneltittelen\" som standard).",
@@ -1562,6 +1567,8 @@ export var nbStrings = {
     backcolor: "Standard bakgrunn",
     hovercolor: "Pekerfølsom bakgrunn",
     borderDecoration: "Grense dekorasjon",
+    fontColor: "Skriftfarge",
+    backgroundColor: "Bakgrunnsfarge",
     primaryForecolor: "Standardfarge",
     primaryForecolorLight: "Deaktivert farge",
     font: "Font",
@@ -2648,3 +2655,10 @@ editorLocalization.locales["nb"] = nbStrings;
 // theme.placeholderColor: "Placeholder color" => "Plassholderfarge"
 // theme.size: "Size" => "Størrelse"
 // theme.opacity: "Opacity" => "Ugjennomsiktighet"
+// ed.toolboxFilteredTextPlaceholder: "Type to search..." => "Skriv for å søke ..."
+// ed.toolboxNoResultsFound: "No results found" => "Fant ingen resultater"
+// paneldynamic.tabTitlePlaceholder: "Tab title placeholder" => "Plassholder for tabulatortittel"
+// theme.--sjs-special-red: "Error messages" => "Feilmeldinger"
+// paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "En basistekst for tabulatortitler som gjelder når mønsteret for tabulatortittel ikke gir meningsfull verdi."
+// theme.fontColor: "Font color" => "Skriftfarge"
+// theme.backgroundColor: "Background color" => "Bakgrunnsfarge"

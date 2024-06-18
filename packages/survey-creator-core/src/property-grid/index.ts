@@ -756,6 +756,11 @@ export class PropertyJSONGenerator {
     if (!!this.parentProperty) {
       titleClass += "@" + this.parentProperty.name;
     }
+    if(this.obj.getType() === "matrixdropdowncolumn" && (<any>this.obj).getDynamicType() !== "question") {
+      if(!Serializer.findProperty(this.obj.getType(), prop.name)) {
+        titleClass = (<any>this.obj).getDynamicType();
+      }
+    }
     return editorLocalization.getPropertyNameInEditor(titleClass, prop.name);
   }
   private isQuestionTitleHidden(prop: JsonObjectProperty): boolean {

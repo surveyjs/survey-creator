@@ -119,6 +119,8 @@ export var skStrings = {
     generateReadableJSON: "Vygenerovať načítateľný JSON",
     toolbox: "Súprava nástrojov",
     "property-grid": "Vlastnosti",
+    toolboxFilteredTextPlaceholder: "Zadajte reťazec pre vyhľadávanie...",
+    toolboxNoResultsFound: "Nenašli sa žiadne výsledky",
     propertyGridFilteredTextPlaceholder: "Zadajte reťazec pre vyhľadávanie...",
     propertyGridNoResultsFound: "Nenašli sa žiadne výsledky",
     correctJSON: "Opravte JSON.",
@@ -297,6 +299,7 @@ export var skStrings = {
       templateTitle: "Vzor názvu panela",
       noEntriesText: "Prázdny text panela",
       templateTabTitle: "Vzor názvu tabulátora",
+      tabTitlePlaceholder: "Zástupný symbol názvu tabulátora",
       templateVisibleIf: "Zviditeľniť samostatný panel, ak",
       hideNumber: "Skrytie čísla panela",
       titleLocation: "Zarovnanie názvu panela",
@@ -874,6 +877,7 @@ export var skStrings = {
       "--sjs-general-backcolor-dim": "Farba pozadia",
       "--sjs-primary-backcolor": "Zvýraznenie pozadia",
       "--sjs-primary-forecolor": "Zvýraznenie v popredí",
+      "--sjs-special-red": "Chybové hlásenia",
       "--sjs-shadow-small": "Efekty tieňov",
       "--sjs-shadow-inner": "Efekty tieňov",
       "--sjs-border-default": "Farby"
@@ -1250,6 +1254,7 @@ export var skStrings = {
       width: "Nastaví šírku panela v pomere k ostatným prvkom prieskumu v tej istej čiare. Akceptuje hodnoty CSS (px, %, in, pt atď.).",
       templateTitle: "Zadajte šablónu pre názvy dynamických panelov. Použite {panelIndex} pre všeobecnú pozíciu panela a {visiblePanelIndex} pre jeho poradie medzi viditeľnými panelmi. Vložením týchto zástupných symbolov do vzoru pridáte automatické číslovanie.",
       templateTabTitle: "Zadajte šablónu pre názvy kariet. Použite {panelIndex} pre všeobecnú pozíciu panela a {visiblePanelIndex} pre jeho poradie medzi viditeľnými panelmi. Vložením týchto zástupných symbolov do vzoru pridáte automatické číslovanie.",
+      tabTitlePlaceholder: "Záložný text pre názvy kariet, ktorý sa použije, keď vzor názvu tabulátora nevytvára zmysluplnú hodnotu.",
       templateVisibleIf: "Toto nastavenie umožňuje ovládať viditeľnosť jednotlivých panelov v dynamickom paneli. Použite zástupný symbol {panel} na odkaz na aktuálny panel vo svojom výraze.",
       titleLocation: "Toto nastavenie sa automaticky dedí všetkými otázkami na tomto paneli. Ak chcete toto nastavenie prepísať, definujte pravidlá zarovnania názvu pre jednotlivé otázky. Možnosť Dediť použije nastavenie na úrovni stránky (ak je nastavená) alebo na úrovni prieskumu (\"Predvolene navrchu\").",
       descriptionLocation: "Možnosť \"Dediť\" použije nastavenie na úrovni stránky (ak je nastavená) alebo na úrovni prieskumu (\"Predvolene pod názvom panela\").",
@@ -1562,6 +1567,8 @@ export var skStrings = {
     backcolor: "Predvolené pozadie",
     hovercolor: "Ukázanie na pozadie",
     borderDecoration: "Dekorácia okrajov",
+    fontColor: "Farba písma",
+    backgroundColor: "Farba pozadia",
     primaryForecolor: "Predvolená farba",
     primaryForecolorLight: "Zakázaná farba",
     font: "Písmo",
@@ -2598,3 +2605,10 @@ editorLocalization.locales["sk"] = skStrings;
 // theme.placeholderColor: "Placeholder color" => "Farba zástupného symbolu"
 // theme.size: "Size" => "Veľkosť"
 // theme.opacity: "Opacity" => "Neprehľadnosť"
+// ed.toolboxFilteredTextPlaceholder: "Type to search..." => "Zadajte reťazec pre vyhľadávanie..."
+// ed.toolboxNoResultsFound: "No results found" => "Nenašli sa žiadne výsledky"
+// paneldynamic.tabTitlePlaceholder: "Tab title placeholder" => "Zástupný symbol názvu tabulátora"
+// theme.--sjs-special-red: "Error messages" => "Chybové hlásenia"
+// paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "Záložný text pre názvy kariet, ktorý sa použije, keď vzor názvu tabulátora nevytvára zmysluplnú hodnotu."
+// theme.fontColor: "Font color" => "Farba písma"
+// theme.backgroundColor: "Background color" => "Farba pozadia"

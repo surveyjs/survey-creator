@@ -384,7 +384,7 @@ export class QuestionToolbox
       .append("svc-toolbox--compact", this.isCompactRendered)
       .append("svc-toolbox--scroll-locked", this.isScrollLocked)
       .append("svc-toolbox--flyout", this.isCompact && this.isFocused)
-      .append("svc-toolbox--scrollable", this.isResponsivenessDisabled).toString();
+      .append("svc-toolbox--scrollable", this.overflowBehavior == "scroll").toString();
   }
   public setLocation(toolboxLocation: toolboxLocationType) {
     if (toolboxLocation === "sidebar") {

@@ -119,6 +119,8 @@ export var huStrings = {
     generateReadableJSON: "Olvasható JSON generálása",
     toolbox: "Eszköztár",
     "property-grid": "Kellékek",
+    toolboxFilteredTextPlaceholder: "Írja be a kereséshez...",
+    toolboxNoResultsFound: "Nincs találat",
     propertyGridFilteredTextPlaceholder: "Írja be a kereséshez...",
     propertyGridNoResultsFound: "Nincs találat",
     correctJSON: "Kérem javítsa a JSON-t.",
@@ -297,6 +299,7 @@ export var huStrings = {
       templateTitle: "Panel címmintája",
       noEntriesText: "Üres panelszöveg",
       templateTabTitle: "Lapcím mintája",
+      tabTitlePlaceholder: "Lapcím helyőrzője",
       templateVisibleIf: "Egy adott panel láthatóvá tétele, ha",
       hideNumber: "A panel számának elrejtése",
       titleLocation: "Panelcím igazítása",
@@ -874,6 +877,7 @@ export var huStrings = {
       "--sjs-general-backcolor-dim": "Háttérszín",
       "--sjs-primary-backcolor": "Ékezetes háttér",
       "--sjs-primary-forecolor": "Hangsúlyos előtér",
+      "--sjs-special-red": "Hibaüzenetek",
       "--sjs-shadow-small": "Árnyék effektusok",
       "--sjs-shadow-inner": "Árnyék effektusok",
       "--sjs-border-default": "Színek"
@@ -1250,6 +1254,7 @@ export var huStrings = {
       width: "A panel szélességét az ugyanabban a sorban lévő többi földmérési elemhez viszonyítva állítja be. CSS-értékeket fogad el (px, %, in, pt stb.).",
       templateTitle: "Írjon be egy sablont a dinamikus panelcímekhez. Használja a {panelIndex} elemet a panel általános pozíciójához, a {visiblePanelIndex} értéket pedig a látható panelek közötti sorrendjéhez. Szúrja be ezeket a helyőrzőket a mintába az automatikus számozás hozzáadásához.",
       templateTabTitle: "Írjon be egy sablont a lapcímekhez. Használja a {panelIndex} elemet a panel általános pozíciójához, a {visiblePanelIndex} sablont pedig a látható panelek közötti sorrendjéhez. Szúrja be ezeket a helyőrzőket a mintába az automatikus számozás hozzáadásához.",
+      tabTitlePlaceholder: "A lapcímek alapszövege, amely akkor érvényes, ha a lap címmintája nem ad értelmes értéket.",
       templateVisibleIf: "Ezzel a beállítással szabályozhatja az egyes panelek láthatóságát a dinamikus panelen. A \"{panel}\" helyőrzővel hivatkozhat a kifejezés aktuális paneljére.",
       titleLocation: "Ezt a beállítást a panelen található összes kérdés automatikusan örökli. Ha felül szeretné bírálni ezt a beállítást, határozzon meg címigazítási szabályokat az egyes kérdésekhez. Az \"Öröklés\" opció az oldalszintű (ha be van állítva) vagy a felmérés szintű beállítást (\"Alapértelmezetten felül\") alkalmazza.",
       descriptionLocation: "Az \"Öröklés\" opció az oldalszintű (ha be van állítva) vagy a felmérés szintű beállítást alkalmazza (\"Alapértelmezés szerint a panel címe alatt\").",
@@ -1562,6 +1567,8 @@ export var huStrings = {
     backcolor: "Alapértelmezett háttér",
     hovercolor: "Háttér rámutatása",
     borderDecoration: "Szegély dekoráció",
+    fontColor: "Betűszín",
+    backgroundColor: "Háttérszín",
     primaryForecolor: "Alapértelmezett szín",
     primaryForecolorLight: "Letiltott szín",
     font: "Betűkészlet",
@@ -2798,3 +2805,10 @@ editorLocalization.locales["hu"] = huStrings;
 // theme.placeholderColor: "Placeholder color" => "Helyőrző színe"
 // theme.size: "Size" => "Méret"
 // theme.opacity: "Opacity" => "Átlátszatlanság"
+// ed.toolboxFilteredTextPlaceholder: "Type to search..." => "Írja be a kereséshez..."
+// ed.toolboxNoResultsFound: "No results found" => "Nincs találat"
+// paneldynamic.tabTitlePlaceholder: "Tab title placeholder" => "Lapcím helyőrzője"
+// theme.--sjs-special-red: "Error messages" => "Hibaüzenetek"
+// paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "A lapcímek alapszövege, amely akkor érvényes, ha a lap címmintája nem ad értelmes értéket."
+// theme.fontColor: "Font color" => "Betűszín"
+// theme.backgroundColor: "Background color" => "Háttérszín"
