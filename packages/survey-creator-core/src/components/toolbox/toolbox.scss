@@ -117,6 +117,15 @@ svc-toolbox {
   .svc-toolbox__search-container {
     display: flex;
   }
+  &:not(.svc-toolbox--scrollable) {
+    .svc-toolbox__scroller {
+      padding-top: calcSize(9);
+      .svc-toolbox__search-container {
+        top: calcSize(-9);
+        margin-top: calcSize(-9);
+      }
+    }
+  }
 }
 
 .svc-toolbox__panel {

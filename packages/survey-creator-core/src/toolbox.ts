@@ -152,7 +152,6 @@ export class QuestionToolbox
   extends AdaptiveActionContainer<QuestionToolboxItem>
   implements IQuestionToolbox {
   public static MINELEMENTCOUNT: number = 10;
-  static hiddenTypes = ["buttongroup", "linkvalue", "embeddedsurvey", "spinedit", "color", "fileedit", "textwithreset", "commentwithreset"];
   static defaultIconName = "icon-default";
   static defaultCategories = {
     choice: ["radiogroup", "rating", "checkbox", "dropdown", "tagbox", "boolean", "file", "imagepicker", "ranking"],
@@ -407,7 +406,7 @@ export class QuestionToolbox
       .append("svc-toolbox--compact", this.isCompactRendered)
       .append("svc-toolbox--scroll-locked", this.isScrollLocked)
       .append("svc-toolbox--flyout", this.isCompact && this.isFocused)
-      .append("svc-toolbox--scrollable", this.isResponsivenessDisabled).toString();
+      .append("svc-toolbox--scrollable", this.overflowBehavior == "scroll").toString();
   }
   public setLocation(toolboxLocation: toolboxLocationType) {
     if (toolboxLocation === "sidebar") {
