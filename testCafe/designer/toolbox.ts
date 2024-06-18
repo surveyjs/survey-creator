@@ -274,6 +274,7 @@ test("toolbar responsiveness with search", async (t) => {
 
 test("toolbar responsiveness in compact mode", async (t) => {
   await changeToolboxScrolling(false);
+  await changeToolboxSearchEnabled(false);
 
   await explicitErrorHandler();
   await t.resizeWindow(1920, 605);
