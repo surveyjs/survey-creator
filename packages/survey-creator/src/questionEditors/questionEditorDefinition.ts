@@ -478,6 +478,7 @@ export class SurveyQuestionEditorDefinition {
       properties: [
         "renderMode",
         "templateTabTitle",
+        "tabTitlePlaceholder",
         "tabAlign",
         "panelCount",
         "minPanelCount",
@@ -516,6 +517,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "enableIf", tab: "logic" },
         { name: "requiredIf", tab: "logic" },
         { name: "questionTitleLocation", tab: "layout" },
+        { name: "questionTitleWidth", tab: "layout" },
         { name: "questionErrorLocation", tab: "layout" }
       ],
       tabs: [
