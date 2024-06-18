@@ -128,4 +128,4 @@ Serializer.addClass("fileedit", [], () => new QuestionFileEditorModel(""), "file
 
 QuestionFactory.Instance.registerQuestion("fileedit", name => {
   return new QuestionFileEditorModel(name);
-});
+}, false);

@@ -93,13 +93,13 @@ export class QuestionSpinEditor extends QuestionSpinEditorModel {
   }
 }
 
-Serializer.overrideClassCreator("spinedit", function() {
+Serializer.overrideClassCreator("spinedit", function () {
   return new QuestionSpinEditor("");
 });
 
 QuestionFactory.Instance.registerQuestion("spinedit", name => {
   return new QuestionSpinEditor(name);
-});
+}, false);
 RendererFactory.Instance.registerRenderer("spinedit", "spinedit", "svc-spin-editor");
 
 ko.components.register("svc-spin-editor", {

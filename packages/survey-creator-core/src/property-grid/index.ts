@@ -1946,4 +1946,4 @@ PropertyGridEditorCollection.register(new PropertyGridEditorDateTime());
 
 QuestionFactory.Instance.registerQuestion("buttongroup", (name) => {
   return new QuestionButtonGroupModel(name);
-});
+}, false);

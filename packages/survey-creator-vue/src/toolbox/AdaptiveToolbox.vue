@@ -1,43 +1,46 @@
 <template>
-  <div
-    class="svc-toolbox"
-    :class="{ 'svc-toolbox--compact': toolbox.isCompact }"
-    ref="root"
-  >
-    <div class="svc-toolbox__container">
-      <template
-        v-if="
-          !(
-            toolbox.isCompact ||
-            toolbox.categories.length == 1 ||
-            !toolbox.showCategoryTitles
-          )
-        "
-      >
-        <svc-toolbox-category
-          v-for="(category, index) in toolbox.categories"
-          :key="index"
-          :category="category"
-          :toolbox="toolbox"
-        ></svc-toolbox-category>
-      </template>
-      <template
-        v-if="
-          toolbox.isCompact ||
-          toolbox.categories.length == 1 ||
-          !toolbox.showCategoryTitles
-        "
-      >
-        <div class="svc-toolbox__category">
-          <svc-toolbox-tool
-            v-for="(item, index) in renderedActions"
-            :creator="creator"
-            :key="index"
-            :item="item"
-            :isCompact="toolbox.isCompact"
-          ></svc-toolbox-tool>
+  <div :class="toolbox.classNames" ref="root">
+    <div @focusout="(e) => toolbox.focusOut(e)" class="svc-toolbox__panel">
+      <div class="svc-toolbox__scroller">
+        <div v-if="toolbox.showSearch" class="svc-toolbox__search-container">
+          <template v-if="toolbox.isCompactRendered">
+            <svc-toolbox-tool
+              :creator="creator"
+              key="searchitem"
+              :item="toolbox.searchItem"
+              :isCompact="toolbox.isCompactRendered"
+            ></svc-toolbox-tool>
+            <div
+              class="svc-toolbox__category-separator svc-toolbox__category-separator--search"
+            ></div>
+          </template>
+          <svc-search :model="toolbox.searchManager"></svc-search>
         </div>
-      </template>
+        <div v-if="toolbox.showPlaceholder" class="svc-toolbox__placeholder">
+          {{ toolbox.toolboxNoResultsFound }}
+        </div>
+        <div class="svc-toolbox__container">
+          <template v-if="!toolbox.showInSingleCategory">
+            <svc-toolbox-category
+              v-for="(category, index) in toolbox.categories"
+              :key="index"
+              :category="category"
+              :toolbox="toolbox"
+            ></svc-toolbox-category>
+          </template>
+          <template v-if="toolbox.showInSingleCategory">
+            <div class="svc-toolbox__category">
+              <svc-toolbox-tool
+                v-for="(item, index) in renderedActions"
+                :creator="creator"
+                :key="index"
+                :item="item"
+                :isCompact="toolbox.isCompactRendered"
+              ></svc-toolbox-tool>
+            </div>
+          </template>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -56,10 +59,11 @@ const root = ref<HTMLDivElement>();
 useBase(() => toolbox.value);
 let responsivityManager: VerticalResponsivityManager;
 onMounted(() => {
+  toolbox.value.setRootElement(root.value as HTMLDivElement);
   responsivityManager = new VerticalResponsivityManager(
-    root.value as HTMLDivElement,
+    toolbox.value.containerElement as HTMLDivElement,
     toolbox.value,
-    ".svc-toolbox__tool:not(.sv-dots)"
+    toolbox.value.itemSelector
   );
 });
 onUnmounted(() => {

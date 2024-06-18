@@ -119,6 +119,8 @@ export var fiStrings = {
     generateReadableJSON: "Luo luettava JSON",
     toolbox: "Työkalupakki",
     "property-grid": "Properties",
+    toolboxFilteredTextPlaceholder: "Kirjoita etsiäksesi...",
+    toolboxNoResultsFound: "Tuloksia ei löytynyt",
     propertyGridFilteredTextPlaceholder: "Kirjoita etsiäksesi...",
     propertyGridNoResultsFound: "Tuloksia ei löytynyt",
     correctJSON: "Korjaa JSON.",
@@ -297,6 +299,7 @@ export var fiStrings = {
       templateTitle: "Paneelin otsikkomalli",
       noEntriesText: "Tyhjä paneelin teksti",
       templateTabTitle: "Välilehden otsikkomalli",
+      tabTitlePlaceholder: "Välilehden otsikon paikkamerkki",
       templateVisibleIf: "Tee yksittäinen paneeli näkyväksi, jos",
       hideNumber: "Piilota paneelin numero",
       titleLocation: "Paneelin otsikon tasaus",
@@ -874,6 +877,7 @@ export var fiStrings = {
       "--sjs-general-backcolor-dim": "Taustaväri",
       "--sjs-primary-backcolor": "Aksentti tausta",
       "--sjs-primary-forecolor": "Aksentti etualalla",
+      "--sjs-special-red": "Virhesanomista",
       "--sjs-shadow-small": "Varjo-tehosteet",
       "--sjs-shadow-inner": "Varjo-tehosteet",
       "--sjs-border-default": "Värit"
@@ -1250,6 +1254,7 @@ export var fiStrings = {
       width: "Asettaa paneelin leveyden suhteessa muihin saman rivin mittauselementteihin. Hyväksyy CSS-arvot (px, %, in, pt jne.).",
       templateTitle: "Kirjoita malli dynaamisten paneelien otsikoille. Käytä {panelIndex} paneelin yleistä sijaintia ja {visiblePanelIndex} sen järjestystä näkyvien paneelien joukossa. Lisää nämä paikkamerkit kuvioon lisätäksesi automaattisen numeroinnin.",
       templateTabTitle: "Kirjoita välilehtien otsikoiden malli. Käytä {panelIndex} paneelin yleistä sijaintia ja {visiblePanelIndex} sen järjestystä näkyvien paneelien joukossa. Lisää nämä paikkamerkit kuvioon lisätäksesi automaattisen numeroinnin.",
+      tabTitlePlaceholder: "Välilehtien otsikoiden varateksti, jota käytetään, kun välilehden otsikkomalli ei tuota merkityksellistä arvoa.",
       templateVisibleIf: "Tämän asetuksen avulla voit hallita yksittäisten paneelien näkyvyyttä dynaamisessa paneelissa. {panel}-paikkamerkin avulla voit viitata lausekkeen nykyiseen paneeliin.",
       titleLocation: "Tämä asetus periytyy automaattisesti kaikkiin tämän paneelin kysymyksiin. Jos haluat ohittaa tämän asetuksen, määritä otsikon tasaussäännöt yksittäisille kysymyksille. Peri-vaihtoehto käyttää sivutason (jos määritetty) tai kyselytason asetusta (\"Ylin\" oletuksena).",
       descriptionLocation: "\"Peri\" -vaihtoehto käyttää sivutason (jos määritetty) tai kyselytason asetusta (\"Paneelin otsikon alla\" oletuksena).",
@@ -1562,6 +1567,8 @@ export var fiStrings = {
     backcolor: "Oletustausta",
     hovercolor: "Vie hiiri taustalle",
     borderDecoration: "Reunusten koristelu",
+    fontColor: "Fontin väri",
+    backgroundColor: "Taustaväri",
     primaryForecolor: "Oletusväri",
     primaryForecolorLight: "Käytöstä poistettu väri",
     font: "Fontti",
@@ -2645,3 +2652,10 @@ editorLocalization.locales["fi"] = fiStrings;
 // theme.placeholderColor: "Placeholder color" => "Paikkamerkin väri"
 // theme.size: "Size" => "Koko"
 // theme.opacity: "Opacity" => "Läpikuultamattomuus"
+// ed.toolboxFilteredTextPlaceholder: "Type to search..." => "Kirjoita etsiäksesi..."
+// ed.toolboxNoResultsFound: "No results found" => "Tuloksia ei löytynyt"
+// paneldynamic.tabTitlePlaceholder: "Tab title placeholder" => "Välilehden otsikon paikkamerkki"
+// theme.--sjs-special-red: "Error messages" => "Virhesanomista"
+// paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "Välilehtien otsikoiden varateksti, jota käytetään, kun välilehden otsikkomalli ei tuota merkityksellistä arvoa."
+// theme.fontColor: "Font color" => "Fontin väri"
+// theme.backgroundColor: "Background color" => "Taustaväri"

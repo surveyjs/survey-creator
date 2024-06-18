@@ -119,6 +119,8 @@ export var arStrings = {
     generateReadableJSON: "Generate Readable JSON",
     toolbox: "Toolbox",
     "property-grid": "Properties",
+    toolboxFilteredTextPlaceholder: "اكتب للبحث...",
+    toolboxNoResultsFound: "لم يتم العثور على نتائج",
     propertyGridFilteredTextPlaceholder: "Type to search...",
     propertyGridNoResultsFound: "لم يتم العثور على نتائج",
     correctJSON: "Please correct JSON.",
@@ -297,6 +299,7 @@ export var arStrings = {
       templateTitle: "نمط عنوان اللوحة",
       noEntriesText: "نص لوحة فارغ",
       templateTabTitle: "نمط عنوان علامة التبويب",
+      tabTitlePlaceholder: "العنصر النائب لعنوان علامة التبويب",
       templateVisibleIf: "اجعل لوحة فردية مرئية إذا",
       hideNumber: "إخفاء رقم اللوحة",
       titleLocation: "محاذاة عنوان اللوحة",
@@ -874,6 +877,7 @@ export var arStrings = {
       "--sjs-general-backcolor-dim": "لون الخلفية",
       "--sjs-primary-backcolor": "خلفية لهجة",
       "--sjs-primary-forecolor": "لهجة الصدارة",
+      "--sjs-special-red": "رسائل الخطأ",
       "--sjs-shadow-small": "تأثيرات الظل",
       "--sjs-shadow-inner": "تأثيرات الظل",
       "--sjs-border-default": "الوان"
@@ -1250,6 +1254,7 @@ export var arStrings = {
       width: "يضبط عرض اللوحة بما يتناسب مع عناصر الاستطلاع الأخرى في نفس السطر. يقبل قيم CSS (px ، ٪ ، in ، pt ، إلخ).",
       templateTitle: "اكتب قالبا لعناوين اللوحات الديناميكية. استخدم {panelIndex} للموضع العام لللوحة و {visiblePanelIndex} لترتيبها بين اللوحات المرئية. قم بإدراج هذه العناصر النائبة في النموذج لإضافة ترقيم تلقائي.",
       templateTabTitle: "اكتب قالبا لعناوين علامات التبويب. استخدم {panelIndex} للموضع العام للوحة و {visiblePanelIndex} لترتيبها بين اللوحات المرئية. قم بإدراج هذه العناصر النائبة في النموذج لإضافة ترقيم تلقائي.",
+      tabTitlePlaceholder: "نص احتياطي لعناوين علامات التبويب يتم تطبيقه عندما لا ينتج نمط عنوان علامة التبويب قيمة ذات معنى.",
       templateVisibleIf: "يتيح لك هذا الإعداد التحكم في رؤية اللوحات الفردية داخل اللوحة الديناميكية. استخدم العنصر النائب \"{panel}\" للإشارة إلى اللوحة الحالية في تعبيرك.",
       titleLocation: "يتم توريث هذا الإعداد تلقائيا من خلال جميع الأسئلة داخل هذه اللوحة. إذا كنت تريد إلغاء هذا الإعداد، فحدد قواعد محاذاة العنوان للأسئلة الفردية. يطبق خيار \"الوراثة\" الإعداد على مستوى الصفحة (إذا تم تعيينه) أو على مستوى الاستطلاع (\"أعلى\" افتراضيا).",
       descriptionLocation: "يطبق خيار \"الوراثة\" الإعداد على مستوى الصفحة (إذا تم تعيينه) أو على مستوى الاستطلاع (\"تحت عنوان اللوحة\" افتراضيا).",
@@ -1562,6 +1567,8 @@ export var arStrings = {
     backcolor: "الخلفية الافتراضية",
     hovercolor: "خلفية التحويم",
     borderDecoration: "زخرفة الحدود",
+    fontColor: "لون الخط",
+    backgroundColor: "لون الخلفية",
     primaryForecolor: "اللون الافتراضي",
     primaryForecolorLight: "لون معطل",
     font: "الخط",
@@ -2556,3 +2563,10 @@ editorLocalization.locales["ar"] = arStrings;
 // theme.placeholderColor: "Placeholder color" => "لون العنصر النائب"
 // theme.size: "Size" => "حجم"
 // theme.opacity: "Opacity" => "العتامه"
+// ed.toolboxFilteredTextPlaceholder: "Type to search..." => "اكتب للبحث..."
+// ed.toolboxNoResultsFound: "No results found" => "لم يتم العثور على نتائج"
+// paneldynamic.tabTitlePlaceholder: "Tab title placeholder" => "العنصر النائب لعنوان علامة التبويب"
+// theme.--sjs-special-red: "Error messages" => "رسائل الخطأ"
+// paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "نص احتياطي لعناوين علامات التبويب يتم تطبيقه عندما لا ينتج نمط عنوان علامة التبويب قيمة ذات معنى."
+// theme.fontColor: "Font color" => "لون الخط"
+// theme.backgroundColor: "Background color" => "لون الخلفية"

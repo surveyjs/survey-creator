@@ -119,6 +119,8 @@ export var danishStrings = {
     generateReadableJSON: "Generer læsbar JSON",
     toolbox: "Værktøjskasse",
     "property-grid": "Egenskaber",
+    toolboxFilteredTextPlaceholder: "Skriv for at søge...",
+    toolboxNoResultsFound: "Ingen resultater fundet",
     propertyGridFilteredTextPlaceholder: "Skriv for at søge...",
     propertyGridNoResultsFound: "Ingen resultater fundet",
     correctJSON: "Ret venligst JSON.",
@@ -297,6 +299,7 @@ export var danishStrings = {
       templateTitle: "Panelets titelmønster",
       noEntriesText: "Tom paneltekst",
       templateTabTitle: "Fanetitel mønster",
+      tabTitlePlaceholder: "Pladsholder til fanetitel",
       templateVisibleIf: "Gør et individuelt panel synligt, hvis",
       hideNumber: "Skjul panelnummeret",
       titleLocation: "Justering af paneltitel",
@@ -874,6 +877,7 @@ export var danishStrings = {
       "--sjs-general-backcolor-dim": "Baggrundsfarve",
       "--sjs-primary-backcolor": "Accent baggrund",
       "--sjs-primary-forecolor": "Accent forgrund",
+      "--sjs-special-red": "Fejlmeddelelser",
       "--sjs-shadow-small": "Skyggeeffekter",
       "--sjs-shadow-inner": "Skyggeeffekter",
       "--sjs-border-default": "Farver"
@@ -1250,6 +1254,7 @@ export var danishStrings = {
       width: "Indstiller panelets bredde i forhold til andre undersøgelseselementer på samme linje. Accepterer CSS-værdier (px, %, in, pt osv.).",
       templateTitle: "Indtast en skabelon til dynamiske paneltitler. Brug {panelIndex} til panelets generelle placering og {visiblePanelIndex} til dets rækkefølge blandt synlige paneler. Indsæt disse pladsholdere i mønsteret for at tilføje automatisk nummerering.",
       templateTabTitle: "Indtast en skabelon til fanetitler. Brug {panelIndex} til et panels generelle placering og {visiblePanelIndex} til dets rækkefølge blandt synlige paneler. Indsæt disse pladsholdere i mønsteret for at tilføje automatisk nummerering.",
+      tabTitlePlaceholder: "En reservetekst til fanetitler, der gælder, når fanetitelmønsteret ikke giver en meningsfuld værdi.",
       templateVisibleIf: "Denne indstilling giver dig mulighed for at styre synligheden af individuelle paneler i det dynamiske panel. Brug pladsholderen '{panel}' til at referere til det aktuelle panel i dit udtryk.",
       titleLocation: "Denne indstilling nedarves automatisk af alle spørgsmål i dette panel. Hvis du vil tilsidesætte denne indstilling, skal du definere regler for titeljustering for individuelle spørgsmål. Indstillingen \"Nedarv\" anvender indstillingen på sideniveau (hvis angivet) eller undersøgelsesniveau (\"Top\" som standard).",
       descriptionLocation: "Indstillingen \"Nedarv\" anvender indstillingen på sideniveau (hvis angivet) eller undersøgelsesniveau (\"Under paneltitlen\" som standard).",
@@ -1562,6 +1567,8 @@ export var danishStrings = {
     backcolor: "Standard baggrund",
     hovercolor: "Hold markøren over baggrunden",
     borderDecoration: "Kant dekoration",
+    fontColor: "Skriftfarve",
+    backgroundColor: "Baggrundsfarve",
     primaryForecolor: "Standardfarve",
     primaryForecolorLight: "Deaktiveret farve",
     font: "Skrifttype",
@@ -2830,3 +2837,10 @@ editorLocalization.locales["da"] = danishStrings;
 // theme.placeholderColor: "Placeholder color" => "Pladsholderfarve"
 // theme.size: "Size" => "Størrelse"
 // theme.opacity: "Opacity" => "Opacitet"
+// ed.toolboxFilteredTextPlaceholder: "Type to search..." => "Skriv for at søge..."
+// ed.toolboxNoResultsFound: "No results found" => "Ingen resultater fundet"
+// paneldynamic.tabTitlePlaceholder: "Tab title placeholder" => "Pladsholder til fanetitel"
+// theme.--sjs-special-red: "Error messages" => "Fejlmeddelelser"
+// paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "En reservetekst til fanetitler, der gælder, når fanetitelmønsteret ikke giver en meningsfuld værdi."
+// theme.fontColor: "Font color" => "Skriftfarve"
+// theme.backgroundColor: "Background color" => "Baggrundsfarve"

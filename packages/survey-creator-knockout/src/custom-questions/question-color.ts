@@ -66,7 +66,7 @@ Serializer.overrideClassCreator("color", function () {
 
 QuestionFactory.Instance.registerQuestion("color", name => {
   return new QuestionColor(name);
-});
+}, false);
 RendererFactory.Instance.registerRenderer("color", "color", "svc-color-question");
 
 ko.components.register("svc-color-question", {

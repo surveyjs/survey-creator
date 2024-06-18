@@ -119,6 +119,8 @@ export var bgStrings = {
     generateReadableJSON: "Генериране на четим JSON",
     toolbox: "Кутия с инструменти",
     "property-grid": "Свойства",
+    toolboxFilteredTextPlaceholder: "Въведете за търсене...",
+    toolboxNoResultsFound: "Няма намерени резултати",
     propertyGridFilteredTextPlaceholder: "Въведи за търсене...",
     propertyGridNoResultsFound: "Няма намерени резултати",
     correctJSON: "Моля, коригирай JSON.",
@@ -297,6 +299,7 @@ export var bgStrings = {
       templateTitle: "Модел на заглавие на панел",
       noEntriesText: "Празен текст на панел",
       templateTabTitle: "Шаблон на заглавие на раздел",
+      tabTitlePlaceholder: "Контейнер за заглавие на раздел",
       templateVisibleIf: "Направете отделен панел видим, ако",
       hideNumber: "Скриване на номера на панела",
       titleLocation: "Подравняване на заглавието на панела",
@@ -874,6 +877,7 @@ export var bgStrings = {
       "--sjs-general-backcolor-dim": "Цвят на фона",
       "--sjs-primary-backcolor": "Фон за акцентиране",
       "--sjs-primary-forecolor": "Акцентиране на преден план",
+      "--sjs-special-red": "Съобщения за грешки",
       "--sjs-shadow-small": "Ефекти на сянка",
       "--sjs-shadow-inner": "Ефекти на сянка",
       "--sjs-border-default": "Цветове"
@@ -1250,6 +1254,7 @@ export var bgStrings = {
       width: "Задава ширината на панела пропорционално на другите елементи на изследването в същия ред. Приема CSS стойности (px, %, in, pt и т.н.).",
       templateTitle: "Въведете шаблон за динамични заглавия на панели. Използвайте {panelIndex} за общата позиция на панела и {visiblePanelIndex} за реда му сред видимите панели. Вмъкнете тези контейнери в шаблона, за да добавите автоматично номериране.",
       templateTabTitle: "Въведете шаблон за заглавията на разделите. Използвайте {panelIndex} за общата позиция на панела и {visiblePanelIndex} за реда му между видимите панели. Вмъкнете тези контейнери в шаблона, за да добавите автоматично номериране.",
+      tabTitlePlaceholder: "Резервен текст за заглавията на разделите, който се прилага, когато шаблонът за заглавие на раздела не създава смислена стойност.",
       templateVisibleIf: "Тази настройка ви позволява да контролирате видимостта на отделните панели в динамичния панел. Използвайте контейнера \"{panel}\", за да препращате към текущия панел във вашия израз.",
       titleLocation: "Тази настройка се наследява автоматично от всички въпроси в този панел. Ако искате да заместите тази настройка, определете правила за подравняване на заглавията за отделни въпроси. Опцията \"Наследяване\" прилага настройката за ниво на страница (ако е зададена) или ниво проучване (\"Горе\" по подразбиране).",
       descriptionLocation: "Опцията \"Наследяване\" прилага настройката за ниво на страница (ако е зададена) или ниво проучване (\"Под заглавието на панела\" по подразбиране).",
@@ -1562,6 +1567,8 @@ export var bgStrings = {
     backcolor: "Фон по подразбиране",
     hovercolor: "Фон под курсора на мишката",
     borderDecoration: "Декорация на контура",
+    fontColor: "Цвят на шрифта",
+    backgroundColor: "Цвят на фона",
     primaryForecolor: "Цвят по подразбиране",
     primaryForecolorLight: "Деактивиран цвят",
     font: "Шрифт",
@@ -2208,3 +2215,10 @@ editorLocalization.locales["bg"] = bgStrings;
 // theme.placeholderColor: "Placeholder color" => "Цвят на контейнера"
 // theme.size: "Size" => "Големина"
 // theme.opacity: "Opacity" => "Непрозрачност"
+// ed.toolboxFilteredTextPlaceholder: "Type to search..." => "Въведете за търсене..."
+// ed.toolboxNoResultsFound: "No results found" => "Няма намерени резултати"
+// paneldynamic.tabTitlePlaceholder: "Tab title placeholder" => "Контейнер за заглавие на раздел"
+// theme.--sjs-special-red: "Error messages" => "Съобщения за грешки"
+// paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "Резервен текст за заглавията на разделите, който се прилага, когато шаблонът за заглавие на раздела не създава смислена стойност."
+// theme.fontColor: "Font color" => "Цвят на шрифта"
+// theme.backgroundColor: "Background color" => "Цвят на фона"

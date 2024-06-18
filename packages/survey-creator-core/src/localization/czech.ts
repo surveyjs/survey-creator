@@ -119,6 +119,8 @@ export var czStrings = {
     generateReadableJSON: "Generovat čitelný JSON",
     toolbox: "Sada nástrojů",
     "property-grid": "Vlastnosti",
+    toolboxFilteredTextPlaceholder: "Chcete-li hledat, zadejte jej...",
+    toolboxNoResultsFound: "Nebyly nalezeny žádné výsledky",
     propertyGridFilteredTextPlaceholder: "Zadejte hledaný text...",
     propertyGridNoResultsFound: "Nebyly nalezeny žádné výsledky",
     correctJSON: "Opravte JSON.",
@@ -297,6 +299,7 @@ export var czStrings = {
       templateTitle: "Vzor titulku panelu",
       noEntriesText: "Prázdný text panelu",
       templateTabTitle: "Vzor názvu tabulátoru",
+      tabTitlePlaceholder: "Zástupný symbol názvu tabulátoru",
       templateVisibleIf: "Zviditelněte jednotlivý panel, pokud",
       hideNumber: "Skrýt číslo panelu",
       titleLocation: "Zarovnání názvu panelu",
@@ -874,6 +877,7 @@ export var czStrings = {
       "--sjs-general-backcolor-dim": "Barva pozadí",
       "--sjs-primary-backcolor": "Zvýraznění pozadí",
       "--sjs-primary-forecolor": "Zvýraznění popředí",
+      "--sjs-special-red": "Chybové zprávy",
       "--sjs-shadow-small": "Stínové efekty",
       "--sjs-shadow-inner": "Stínové efekty",
       "--sjs-border-default": "Barvy"
@@ -1250,6 +1254,7 @@ export var czStrings = {
       width: "Nastaví šířku panelu v poměru k ostatním prvkům zaměření ve stejném řádku. Přijímá hodnoty CSS (px, %, in, pt atd.).",
       templateTitle: "Zadejte šablonu pro dynamické názvy panelů. Použijte {panelIndex} pro obecnou pozici panelu a {visiblePanelIndex} pro jeho pořadí mezi viditelnými panely. Vložením těchto zástupných symbolů do vzorku přidáte automatické číslování.",
       templateTabTitle: "Zadejte šablonu pro názvy karet. Použijte {panelIndex} pro obecnou pozici panelu a {visiblePanelIndex} pro jeho pořadí mezi viditelnými panely. Vložením těchto zástupných symbolů do vzorku přidáte automatické číslování.",
+      tabTitlePlaceholder: "Záložní text pro názvy karet, který se použije, když vzor názvu karty nevytváří smysluplnou hodnotu.",
       templateVisibleIf: "Toto nastavení umožňuje řídit viditelnost jednotlivých panelů v rámci dynamického panelu. Pomocí zástupného symbolu {panel} můžete odkazovat na aktuální panel ve výrazu.",
       titleLocation: "Toto nastavení je automaticky převzato všemi otázkami v tomto panelu. Chcete-li toto nastavení přepsat, definujte pravidla zarovnání nadpisů pro jednotlivé otázky. Možnost \"Zdědit\" použije nastavení na úrovni stránky (pokud je nastaveno) nebo na úrovni průzkumu (ve výchozím nastavení \"Nahoře\").",
       descriptionLocation: "Možnost \"Zdědit\" použije nastavení na úrovni stránky (pokud je nastaveno) nebo na úrovni průzkumu (ve výchozím nastavení \"Pod názvem panelu\").",
@@ -1562,6 +1567,8 @@ export var czStrings = {
     backcolor: "Výchozí pozadí",
     hovercolor: "Pozadí při přejetí myší",
     borderDecoration: "Dekorace hran",
+    fontColor: "Barva písma",
+    backgroundColor: "Barva pozadí",
     primaryForecolor: "Výchozí barva",
     primaryForecolorLight: "Barva vypnutého pole",
     font: "Písmo",
@@ -2219,3 +2226,10 @@ editorLocalization.locales["cs"] = czStrings;
 // theme.placeholderColor: "Placeholder color" => "Barva zástupného symbolu"
 // theme.size: "Size" => "Velikost"
 // theme.opacity: "Opacity" => "Neprůhlednost"
+// ed.toolboxFilteredTextPlaceholder: "Type to search..." => "Chcete-li hledat, zadejte jej..."
+// ed.toolboxNoResultsFound: "No results found" => "Nebyly nalezeny žádné výsledky"
+// paneldynamic.tabTitlePlaceholder: "Tab title placeholder" => "Zástupný symbol názvu tabulátoru"
+// theme.--sjs-special-red: "Error messages" => "Chybové zprávy"
+// paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "Záložní text pro názvy karet, který se použije, když vzor názvu karty nevytváří smysluplnou hodnotu."
+// theme.fontColor: "Font color" => "Barva písma"
+// theme.backgroundColor: "Background color" => "Barva pozadí"
