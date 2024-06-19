@@ -260,7 +260,7 @@ test("Left toolbox - scroll", async (t) => {
     await changeToolboxScrolling(true);
     await changeToolboxSearchEnabled(false);
 
-    const toolboxItem = Selector(".svc-toolbox__item").nth(5);
+    const toolboxItem = Selector(".svc-toolbox__item").filterVisible().nth(5);
     const toolboxElement = Selector(".svc-toolbox");
     const creatorTabElement = Selector(".svc-creator-tab");
 
@@ -284,7 +284,7 @@ test("Left toolbox - scroll", async (t) => {
 test("Right toolbox - scroll", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await changeToolboxSearchEnabled(false);
-    const toolboxItem = Selector(".svc-toolbox__item").nth(5);
+    const toolboxItem = Selector(".svc-toolbox__item").filterVisible().nth(5);
 
     await setJSON({ pages: [{ name: "page1" }] });
     await t
@@ -311,7 +311,7 @@ test("Right toolbox - scroll", async (t) => {
 test("Right toolbox (rtl) - scroll", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await changeToolboxSearchEnabled(false);
-    const toolboxItem = Selector(".svc-toolbox__item").nth(5);
+    const toolboxItem = Selector(".svc-toolbox__item").filterVisible().nth(5);
 
     await ClientFunction(() => {
       document.body.setAttribute("dir", "rtl");
