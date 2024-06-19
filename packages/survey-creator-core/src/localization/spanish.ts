@@ -119,6 +119,8 @@ var spanishTranslation = {
     generateReadableJSON: "Generar JSON legible",
     toolbox: "Caja de herramientas",
     "property-grid": "Propiedades",
+    toolboxFilteredTextPlaceholder: "Escriba para buscar...",
+    toolboxNoResultsFound: "No se han encontrado resultados",
     propertyGridFilteredTextPlaceholder: "Escribe para buscar...",
     propertyGridNoResultsFound: "No se han encontrado resultados",
     correctJSON: "Por favor, corrija JSON",
@@ -297,6 +299,7 @@ var spanishTranslation = {
       templateTitle: "Patrón de título de panel",
       noEntriesText: "Texto de panel vacío",
       templateTabTitle: "Patrón de título de tabulación",
+      tabTitlePlaceholder: "Marcador de posición del título de la pestaña",
       templateVisibleIf: "Hacer visible un panel individual si",
       hideNumber: "Ocultar el número de panel",
       titleLocation: "Alineación del título del panel",
@@ -874,6 +877,7 @@ var spanishTranslation = {
       "--sjs-general-backcolor-dim": "Color de fondo",
       "--sjs-primary-backcolor": "Fondo de acento",
       "--sjs-primary-forecolor": "Acento en primer plano",
+      "--sjs-special-red": "Mensajes de error",
       "--sjs-shadow-small": "Efectos de sombra",
       "--sjs-shadow-inner": "Efectos de sombra",
       "--sjs-border-default": "Colores"
@@ -1250,6 +1254,7 @@ var spanishTranslation = {
       width: "Define la anchura del panel en proporción a otros elementos topográficos de la misma línea. Acepta valores CSS (px, %, in, pt, etc.).",
       templateTitle: "Escriba una plantilla para los títulos de los paneles dinámicos. Utilice {panelIndex} para la posición general del panel y {visiblePanelIndex} para su orden entre los paneles visibles. Inserte estos marcadores de posición en el patrón para agregar numeración automática.",
       templateTabTitle: "Escriba una plantilla para los títulos de las pestañas. Utilice {panelIndex} para la posición general de un panel y {visiblePanelIndex} para su orden entre los paneles visibles. Inserte estos marcadores de posición en el patrón para agregar numeración automática.",
+      tabTitlePlaceholder: "Texto de reserva para los títulos de tabulación que se aplica cuando el patrón de título de tabulación no genera un valor significativo.",
       templateVisibleIf: "Esta configuración le permite controlar la visibilidad de paneles individuales dentro del panel dinámico. Utilice el marcador de posición '{panel}' para hacer referencia al panel actual en la expresión.",
       titleLocation: "Esta configuración es heredada automáticamente por todas las preguntas dentro de este panel. Si desea anular esta configuración, defina reglas de alineación de títulos para preguntas individuales. La opción \"Heredar\" aplica la configuración a nivel de página (si está establecida) o a nivel de encuesta (\"Superior\" de forma predeterminada).",
       descriptionLocation: "La opción \"Heredar\" aplica la configuración a nivel de página (si está establecida) o a nivel de encuesta (\"Debajo del título del panel\" de forma predeterminada).",
@@ -1562,6 +1567,8 @@ var spanishTranslation = {
     backcolor: "Fondo predeterminado",
     hovercolor: "Pasar el cursor de fondo",
     borderDecoration: "Decoración de bordes",
+    fontColor: "Color de la fuente",
+    backgroundColor: "Color de fondo",
     primaryForecolor: "Color predeterminado",
     primaryForecolorLight: "Color deshabilitado",
     font: "Fuente",
@@ -2419,3 +2426,10 @@ editorLocalization.locales["es"] = spanishTranslation;
 // theme.placeholderColor: "Placeholder color" => "Color del marcador de posición"
 // theme.size: "Size" => "Tamaño"
 // theme.opacity: "Opacity" => "Opacidad"
+// ed.toolboxFilteredTextPlaceholder: "Type to search..." => "Escriba para buscar..."
+// ed.toolboxNoResultsFound: "No results found" => "No se han encontrado resultados"
+// paneldynamic.tabTitlePlaceholder: "Tab title placeholder" => "Marcador de posición del título de la pestaña"
+// theme.--sjs-special-red: "Error messages" => "Mensajes de error"
+// paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "Texto de reserva para los títulos de tabulación que se aplica cuando el patrón de título de tabulación no genera un valor significativo."
+// theme.fontColor: "Font color" => "Color de la fuente"
+// theme.backgroundColor: "Background color" => "Color de fondo"

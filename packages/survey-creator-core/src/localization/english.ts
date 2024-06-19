@@ -301,6 +301,7 @@ export var enStrings = {
       templateTitle: "Panel title pattern",
       noEntriesText: "Empty panel text",
       templateTabTitle: "Tab title pattern",
+      tabTitlePlaceholder: "Tab title placeholder",
       templateVisibleIf: "Make an individual panel visible if",
       hideNumber: "Hide the panel number",
       titleLocation: "Panel title alignment",
@@ -599,6 +600,7 @@ export var enStrings = {
     allowCompleteSurveyAutomatic: "Complete the survey automatically",
     showProgressBar: "Progress bar alignment",
     questionTitleLocation: "Question title alignment",
+    questionTitleWidth: "Question title width",
     requiredText: "Required symbol(s)",
     questionTitleTemplate: "Question title template, default is: '{no}. {require} {title}'",
     questionErrorLocation: "Error message alignment",
@@ -879,6 +881,7 @@ export var enStrings = {
       "--sjs-general-backcolor-dim": "Background color",
       "--sjs-primary-backcolor": "Accent background",
       "--sjs-primary-forecolor": "Accent foreground",
+      "--sjs-special-red": "Error messages",
       "--sjs-shadow-small": "Shadow effects",
       "--sjs-shadow-inner": "Shadow effects",
       "--sjs-border-default": "Colors",
@@ -1221,6 +1224,9 @@ export var enStrings = {
     currencymask: {
       prefix: "Ex.: $",
       suffix: "Ex.: USD"
+    },
+    panelbase: {
+      questionTitleWidth: "Ex.: 200px"
     }
   },
   pehelp: {
@@ -1232,6 +1238,7 @@ export var enStrings = {
       enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the panel.",
       requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer.",
       questionTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default).",
+      questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.).",
       questionErrorLocation: "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting.",
       questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting.",
       page: "Repositions the panel to the end of a selected page.",
@@ -1258,6 +1265,7 @@ export var enStrings = {
       width: "Sets the width of the panel in proportion to other survey elements in the same line. Accepts CSS values (px, %, in, pt, etc.).",
       templateTitle: "Type in a template for dynamic panel titles. Use \{panelIndex}\ for the panel's general position and \{visiblePanelIndex}\ for its order among visible panels. Insert these placeholders into the pattern to add automatic numbering.",
       templateTabTitle: "Type in a template for tab titles. Use \{panelIndex}\ for a panel's general position and \{visiblePanelIndex}\ for its order among visible panels. Insert these placeholders into the pattern to add automatic numbering.",
+      tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value.",
       templateVisibleIf: "This setting allows you to control the visibility of individual panels within the dynamic panel. Use the `{panel}` placeholder to reference the current panel in your expression.",
       titleLocation: "This setting is automatically inherited by all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default).",
       descriptionLocation: "The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Under the panel title\" by default).",
@@ -1380,6 +1388,7 @@ export var enStrings = {
       enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the page.",
       requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer.",
       questionTitleLocation: "Applies to all questions within this page. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default).",
+      questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.).",
       questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default).",
       questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab.",
       navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
@@ -1573,6 +1582,9 @@ export var enStrings = {
     backcolor: "Default background",
     hovercolor: "Hover background",
     borderDecoration: "Border decoration",
+
+    fontColor: "Font color",
+    backgroundColor: "Background color",
 
     primaryForecolor: "Default color",
     primaryForecolorLight: "Disabled color",

@@ -626,6 +626,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
     properties: [
       "renderMode",
       "templateTabTitle",
+      "tabTitlePlaceholder",
       "tabAlign",
       "panelCount",
       "minPanelCount",
@@ -664,6 +665,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "enableIf", tab: "logic" },
       { name: "requiredIf", tab: "logic" },
       { name: "questionTitleLocation", tab: "questionSettings" },
+      { name: "questionTitleWidth", tab: "questionSettings" },
       { name: "questionErrorLocation", tab: "questionSettings" }
     ],
     tabs: [
