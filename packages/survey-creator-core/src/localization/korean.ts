@@ -119,6 +119,8 @@ export var koreanStrings = {
     generateReadableJSON: "생성 JSON 데이터 읽기",
     toolbox: "도구상자",
     "property-grid": "속성",
+    toolboxFilteredTextPlaceholder: "검색하려면 입력...",
+    toolboxNoResultsFound: "결과를 찾을 수 없습니다.",
     propertyGridFilteredTextPlaceholder: "검색하려면 입력...",
     propertyGridNoResultsFound: "결과를 찾을 수 없습니다.",
     correctJSON: "JSON 데이터를 수정하십시오.",
@@ -297,6 +299,7 @@ export var koreanStrings = {
       templateTitle: "패널 제목 패턴",
       noEntriesText: "빈 패널 텍스트",
       templateTabTitle: "탭 제목 패턴",
+      tabTitlePlaceholder: "탭 제목 자리 표시자",
       templateVisibleIf: "다음과 같은 경우 개별 패널을 표시합니다.",
       hideNumber: "패널 번호 숨기기",
       titleLocation: "패널 제목 정렬",
@@ -874,6 +877,7 @@ export var koreanStrings = {
       "--sjs-general-backcolor-dim": "배경색",
       "--sjs-primary-backcolor": "강조 배경",
       "--sjs-primary-forecolor": "강조 전경",
+      "--sjs-special-red": "오류 메시지",
       "--sjs-shadow-small": "그림자 효과",
       "--sjs-shadow-inner": "그림자 효과",
       "--sjs-border-default": "색상"
@@ -1250,6 +1254,7 @@ export var koreanStrings = {
       width: "패널의 폭을 같은 줄에 있는 다른 측량 요소에 비례하여 설정합니다. CSS 값(px, %, in, pt 등)을 허용합니다.",
       templateTitle: "동적 패널 제목에 대한 템플릿을 입력합니다. 패널의 일반 위치에는 {panelIndex}를 사용하고 표시되는 패널 간의 순서에는 {visiblePanelIndex}를 사용합니다. 이러한 자리 표시자를 패턴에 삽입하여 자동 번호 매기기를 추가합니다.",
       templateTabTitle: "탭 제목에 대한 템플릿을 입력합니다. 패널의 일반적인 위치에는 {panelIndex}를 사용하고 표시되는 패널 간의 순서에는 {visiblePanelIndex}를 사용합니다. 이러한 자리 표시자를 패턴에 삽입하여 자동 번호 매기기를 추가합니다.",
+      tabTitlePlaceholder: "탭 제목 패턴이 의미 있는 값을 생성하지 않을 때 적용되는 탭 제목에 대한 대체 텍스트입니다.",
       templateVisibleIf: "이 설정을 사용하면 동적 패널 내에서 개별 패널의 가시성을 제어할 수 있습니다. '{panel}' 자리 표시자를 사용하여 표현식의 현재 패널을 참조합니다.",
       titleLocation: "이 설정은 이 패널 내의 모든 질문에 자동으로 상속됩니다. 이 설정을 재정의하려면 개별 질문에 대한 제목 정렬 규칙을 정의합니다. \"상속\" 옵션은 페이지 수준(설정된 경우) 또는 설문조사 수준 설정(기본적으로 \"상단\")을 적용합니다.",
       descriptionLocation: "\"상속\" 옵션은 페이지 수준(설정된 경우) 또는 설문조사 수준 설정(기본적으로 \"패널 제목 아래\")을 적용합니다.",
@@ -1562,6 +1567,8 @@ export var koreanStrings = {
     backcolor: "기본 배경",
     hovercolor: "배경 가리키기",
     borderDecoration: "테두리 장식",
+    fontColor: "글꼴 색상",
+    backgroundColor: "배경색",
     primaryForecolor: "기본 색상",
     primaryForecolorLight: "비활성화 된 색상",
     font: "글꼴",
@@ -2849,3 +2856,10 @@ editorLocalization.locales["ko"] = koreanStrings;
 // theme.placeholderColor: "Placeholder color" => "자리 표시자 색"
 // theme.size: "Size" => "크기"
 // theme.opacity: "Opacity" => "불투명도"
+// ed.toolboxFilteredTextPlaceholder: "Type to search..." => "검색하려면 입력..."
+// ed.toolboxNoResultsFound: "No results found" => "결과를 찾을 수 없습니다."
+// paneldynamic.tabTitlePlaceholder: "Tab title placeholder" => "탭 제목 자리 표시자"
+// theme.--sjs-special-red: "Error messages" => "오류 메시지"
+// paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "탭 제목 패턴이 의미 있는 값을 생성하지 않을 때 적용되는 탭 제목에 대한 대체 텍스트입니다."
+// theme.fontColor: "Font color" => "글꼴 색상"
+// theme.backgroundColor: "Background color" => "배경색"

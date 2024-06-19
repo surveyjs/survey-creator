@@ -119,6 +119,8 @@ export var nlStrings = {
     generateReadableJSON: "Genereer leesbare JSON",
     toolbox: "Gereedschap",
     "property-grid": "Eigenschappen",
+    toolboxFilteredTextPlaceholder: "Typ om te zoeken...",
+    toolboxNoResultsFound: "Geen resultaten gevonden",
     propertyGridFilteredTextPlaceholder: "Typ om te zoeken...",
     propertyGridNoResultsFound: "Geen resultaten gevonden",
     correctJSON: "Corrigeer JSON.",
@@ -297,6 +299,7 @@ export var nlStrings = {
       templateTitle: "Patroon voor paneeltitel",
       noEntriesText: "Lege paneeltekst",
       templateTabTitle: "Patroon voor tabbladtitel",
+      tabTitlePlaceholder: "Tijdelijke aanduiding voor tabtitel",
       templateVisibleIf: "Maak een afzonderlijk paneel zichtbaar als",
       hideNumber: "Het paneelnummer verbergen",
       titleLocation: "Uitlijning van paneeltitels",
@@ -874,6 +877,7 @@ export var nlStrings = {
       "--sjs-general-backcolor-dim": "Achtergrondkleur",
       "--sjs-primary-backcolor": "De achtergrond van het accent",
       "--sjs-primary-forecolor": "Accent voorgrond",
+      "--sjs-special-red": "Foutberichten",
       "--sjs-shadow-small": "Schaduweffecten",
       "--sjs-shadow-inner": "Schaduweffecten",
       "--sjs-border-default": "Kleuren"
@@ -1250,6 +1254,7 @@ export var nlStrings = {
       width: "Hiermee stelt u de breedte van het paneel in verhouding tot andere enquête-elementen in dezelfde lijn. Accepteert CSS-waarden (px, %, in, pt, enz.).",
       templateTitle: "Typ een sjabloon voor dynamische paneeltitels. Gebruik {panelIndex} voor de algemene positie van het paneel en {visiblePanelIndex} voor de volgorde tussen de zichtbare panelen. Voeg deze tijdelijke aanduidingen toe aan het patroon om automatische nummering toe te voegen.",
       templateTabTitle: "Typ een sjabloon voor tabbladtitels. Gebruik {panelIndex} voor de algemene positie van een paneel en {visiblePanelIndex} voor de volgorde tussen zichtbare panelen. Voeg deze tijdelijke aanduidingen toe aan het patroon om automatische nummering toe te voegen.",
+      tabTitlePlaceholder: "Een terugvaltekst voor tabbladtitels die van toepassing is wanneer het patroon van de tabbladtitel geen zinvolle waarde oplevert.",
       templateVisibleIf: "Met deze instelling kunt u de zichtbaarheid van afzonderlijke panelen binnen het dynamische paneel regelen. Gebruik de tijdelijke aanduiding '{panel}' om te verwijzen naar het huidige deelvenster in uw expressie.",
       titleLocation: "Deze instelling wordt automatisch overgenomen door alle vragen in dit paneel. Als u deze instelling wilt overschrijven, definieert u regels voor titeluitlijning voor afzonderlijke vragen. De optie \"Overnemen\" past de instelling op paginaniveau (indien ingesteld) of enquêteniveau (\"Standaard bovenaan\") toe.",
       descriptionLocation: "De optie \"Overnemen\" past de instelling op paginaniveau (indien ingesteld) of enquêteniveau toe (\"Standaard onder de paneeltitel\").",
@@ -1562,6 +1567,8 @@ export var nlStrings = {
     backcolor: "Standaard achtergrond",
     hovercolor: "Achtergrond aanwijzen",
     borderDecoration: "Randdecoratie",
+    fontColor: "Tekstkleur",
+    backgroundColor: "Achtergrondkleur",
     primaryForecolor: "Standaardkleur",
     primaryForecolorLight: "Uitgeschakelde kleur",
     font: "Lettertype",
@@ -2626,3 +2633,10 @@ editorLocalization.locales["nl"] = nlStrings;
 // theme.placeholderColor: "Placeholder color" => "Tijdelijke aanduiding voor kleur"
 // theme.size: "Size" => "Grootte"
 // theme.opacity: "Opacity" => "Dekking"
+// ed.toolboxFilteredTextPlaceholder: "Type to search..." => "Typ om te zoeken..."
+// ed.toolboxNoResultsFound: "No results found" => "Geen resultaten gevonden"
+// paneldynamic.tabTitlePlaceholder: "Tab title placeholder" => "Tijdelijke aanduiding voor tabtitel"
+// theme.--sjs-special-red: "Error messages" => "Foutberichten"
+// paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "Een terugvaltekst voor tabbladtitels die van toepassing is wanneer het patroon van de tabbladtitel geen zinvolle waarde oplevert."
+// theme.fontColor: "Font color" => "Tekstkleur"
+// theme.backgroundColor: "Background color" => "Achtergrondkleur"

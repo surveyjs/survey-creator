@@ -119,6 +119,8 @@ export var turkishStrings = {
     generateReadableJSON: "Okunabilir JSON oluştur",
     toolbox: "Araç Kutusu",
     "property-grid": "Özellikler",
+    toolboxFilteredTextPlaceholder: "Aramak için yazın...",
+    toolboxNoResultsFound: "Sonuç bulunamadı",
     propertyGridFilteredTextPlaceholder: "Aramak için yazın...",
     propertyGridNoResultsFound: "Sonuç bulunamadı",
     correctJSON: "JSON nesnesini doğrular.",
@@ -297,6 +299,7 @@ export var turkishStrings = {
       templateTitle: "Panel başlığı deseni",
       noEntriesText: "Boş panel metni",
       templateTabTitle: "Sekme başlığı deseni",
+      tabTitlePlaceholder: "Sekme başlığı yer tutucusu",
       templateVisibleIf: "Aşağıdaki durumlarda tek bir paneli görünür hale getirme",
       hideNumber: "Panel numarasını gizleme",
       titleLocation: "Panel başlığı hizalaması",
@@ -874,6 +877,7 @@ export var turkishStrings = {
       "--sjs-general-backcolor-dim": "Arka plan rengi",
       "--sjs-primary-backcolor": "Vurgu arka planı",
       "--sjs-primary-forecolor": "Vurgu ön planı",
+      "--sjs-special-red": "Hata mesajları",
       "--sjs-shadow-small": "Gölge efektleri",
       "--sjs-shadow-inner": "Gölge efektleri",
       "--sjs-border-default": "Renk"
@@ -1250,6 +1254,7 @@ export var turkishStrings = {
       width: "Panelin genişliğini aynı satırdaki diğer anket öğeleriyle orantılı olarak ayarlar. CSS değerlerini (px, %, in, pt, vb.) kabul eder.",
       templateTitle: "Dinamik panel başlıkları için bir şablon yazın. Panelin genel konumu için {panelIndex} ve görünür paneller arasındaki sırası için {visiblePanelIndex} kullanın. Otomatik numaralandırma eklemek için bu yer tutucuları desene ekleyin.",
       templateTabTitle: "Sekme başlıkları için bir şablon yazın. Panelin genel konumu için {panelIndex} ve görünür paneller arasındaki sırası için {visiblePanelIndex} kullanın. Otomatik numaralandırma eklemek için bu yer tutucuları desene ekleyin.",
+      tabTitlePlaceholder: "Sekme başlığı deseni anlamlı bir değer üretmediğinde geçerli olan sekme başlıkları için bir geri dönüş metni.",
       templateVisibleIf: "Bu ayar, dinamik panel içindeki tek tek panellerin görünürlüğünü kontrol etmenizi sağlar. İfadenizdeki geçerli panele başvurmak için '{panel}' yer tutucusunu kullanın.",
       titleLocation: "Bu ayar, bu paneldeki tüm sorular tarafından otomatik olarak devralınır. Bu ayarı geçersiz kılmak istiyorsanız, tek tek sorular için başlık hizalama kuralları tanımlayın. \"Devral\" seçeneği, sayfa düzeyi (ayarlanmışsa) veya anket düzeyi ayarını (varsayılan olarak \"Üst\") uygular.",
       descriptionLocation: "\"Devral\" seçeneği, sayfa düzeyi (ayarlanmışsa) veya anket düzeyi ayarını (varsayılan olarak \"Panel başlığı altında\") uygular.",
@@ -1562,6 +1567,8 @@ export var turkishStrings = {
     backcolor: "Varsayılan arka plan",
     hovercolor: "Arka planın üzerine gelin",
     borderDecoration: "Bordür dekorasyonu",
+    fontColor: "Yazı tipi rengi",
+    backgroundColor: "Arka plan rengi",
     primaryForecolor: "Varsayılan renk",
     primaryForecolorLight: "Devre dışı bırakılmış renk",
     font: "Yazı tipi",
@@ -2640,3 +2647,10 @@ editorLocalization.locales["tr"] = turkishStrings;
 // theme.placeholderColor: "Placeholder color" => "Yer tutucu rengi"
 // theme.size: "Size" => "Boyut"
 // theme.opacity: "Opacity" => "Opak -lık"
+// ed.toolboxFilteredTextPlaceholder: "Type to search..." => "Aramak için yazın..."
+// ed.toolboxNoResultsFound: "No results found" => "Sonuç bulunamadı"
+// paneldynamic.tabTitlePlaceholder: "Tab title placeholder" => "Sekme başlığı yer tutucusu"
+// theme.--sjs-special-red: "Error messages" => "Hata mesajları"
+// paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "Sekme başlığı deseni anlamlı bir değer üretmediğinde geçerli olan sekme başlıkları için bir geri dönüş metni."
+// theme.fontColor: "Font color" => "Yazı tipi rengi"
+// theme.backgroundColor: "Background color" => "Arka plan rengi"

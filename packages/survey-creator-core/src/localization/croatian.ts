@@ -119,6 +119,8 @@ export var hrStrings = {
     generateReadableJSON: "Generiranje čitljivog JSON",
     toolbox: "Alatni okvir",
     "property-grid": "Svojstva",
+    toolboxFilteredTextPlaceholder: "Upišite za pretraživanje...",
+    toolboxNoResultsFound: "Nisu pronađeni rezultati",
     propertyGridFilteredTextPlaceholder: "Upišite za pretraživanje...",
     propertyGridNoResultsFound: "Nisu pronađeni rezultati",
     correctJSON: "Ispravite JSON.",
@@ -297,6 +299,7 @@ export var hrStrings = {
       templateTitle: "Uzorak naslova ploče",
       noEntriesText: "Prazan tekst ploče",
       templateTabTitle: "Uzorak naslova kartice",
+      tabTitlePlaceholder: "Rezervirano mjesto naslova tabulatora",
       templateVisibleIf: "Učinite pojedinačnu ploču vidljivom ako",
       hideNumber: "Skrivanje broja ploče",
       titleLocation: "Poravnanje naslova ploče",
@@ -874,6 +877,7 @@ export var hrStrings = {
       "--sjs-general-backcolor-dim": "Boja pozadine",
       "--sjs-primary-backcolor": "Pozadina isticanja",
       "--sjs-primary-forecolor": "Isticanje u prvom planu",
+      "--sjs-special-red": "Poruke o pogreškama",
       "--sjs-shadow-small": "Efekti sjene",
       "--sjs-shadow-inner": "Efekti sjene",
       "--sjs-border-default": "Boje"
@@ -1250,6 +1254,7 @@ export var hrStrings = {
       width: "Postavlja širinu ploče proporcionalno ostalim elementima istraživanja u istoj liniji. Prihvaća CSS vrijednosti (px, %, in, pt itd.).",
       templateTitle: "Upišite predložak za dinamičke naslove ploča. Koristite {panelIndex} za opći položaj panela i {visiblePanelIndex} za njegov redoslijed među vidljivim pločama. Umetnite ova rezervirana mjesta u uzorak da biste dodali automatsko numeriranje.",
       templateTabTitle: "Upišite predložak za naslove kartica. Koristite {panelIndex} za opći položaj panela i {visiblePanelIndex} za njegov redoslijed među vidljivim pločama. Umetnite ova rezervirana mjesta u uzorak da biste dodali automatsko numeriranje.",
+      tabTitlePlaceholder: "Rezervni tekst za naslove kartica koji se primjenjuje kada uzorak naslova kartice ne daje značajnu vrijednost.",
       templateVisibleIf: "Ova postavka omogućuje kontrolu vidljivosti pojedinih ploča unutar dinamičke ploče. Koristite rezervirano mjesto '{panel}' za referenciranje trenutne ploče u izrazu.",
       titleLocation: "Ovu postavku automatski nasljeđuju sva pitanja unutar ove ploče. Ako želite nadjačati ovu postavku, definirajte pravila poravnanja naslova za pojedinačna pitanja. Mogućnost \"Naslijedi\" primjenjuje postavku na razini stranice (ako je postavljena) ili na razini upitnika (\"Vrh\" prema zadanim postavkama).",
       descriptionLocation: "Opcija \"Naslijedi\" primjenjuje postavku na razini stranice (ako je postavljena) ili na razini upitnika (\"Pod naslovom ploče\" prema zadanim postavkama).",
@@ -1562,6 +1567,8 @@ export var hrStrings = {
     backcolor: "Zadana pozadina",
     hovercolor: "Pozadina držanja pokazivača miša",
     borderDecoration: "Uređenje obruba",
+    fontColor: "Boja fonta",
+    backgroundColor: "Boja pozadine",
     primaryForecolor: "Zadana boja",
     primaryForecolorLight: "Onemogućena boja",
     font: "Krstionica",
@@ -2639,3 +2646,10 @@ editorLocalization.locales["hr"] = hrStrings;
 // theme.placeholderColor: "Placeholder color" => "Boja rezerviranog mjesta"
 // theme.size: "Size" => "Veličina"
 // theme.opacity: "Opacity" => "Neprozirnost"
+// ed.toolboxFilteredTextPlaceholder: "Type to search..." => "Upišite za pretraživanje..."
+// ed.toolboxNoResultsFound: "No results found" => "Nisu pronađeni rezultati"
+// paneldynamic.tabTitlePlaceholder: "Tab title placeholder" => "Rezervirano mjesto naslova tabulatora"
+// theme.--sjs-special-red: "Error messages" => "Poruke o pogreškama"
+// paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "Rezervni tekst za naslove kartica koji se primjenjuje kada uzorak naslova kartice ne daje značajnu vrijednost."
+// theme.fontColor: "Font color" => "Boja fonta"
+// theme.backgroundColor: "Background color" => "Boja pozadine"

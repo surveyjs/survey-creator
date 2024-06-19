@@ -2087,6 +2087,14 @@ test("Change cellType in the column in property grid", () => {
   expect(propertyGrid.survey.getQuestionByName("name").value).toEqual("col1");
   expect(propertyGrid.survey.getQuestionByName("showNoneItem")).toBeTruthy();
 });
+test("title for expression property for expression column, Bug#5531", () => {
+  var question = new QuestionMatrixDynamicModel("q1");
+  question.addColumn("col1").cellType = "expression";
+  var options = new EmptySurveyCreatorOptions();
+  var propertyGrid = new PropertyGridModelTester(question.columns[0], options);
+  const expressionQuestion = propertyGrid.survey.getQuestionByName("expression");
+  expect(expressionQuestion.title).toEqual("Expression");
+});
 test("Validate Selected Element Errors", (): any => {
   var titleProp = Serializer.findProperty("question", "title");
   var oldIsRequired = titleProp.isRequired;

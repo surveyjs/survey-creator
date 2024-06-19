@@ -119,6 +119,8 @@ export let svStrings = {
     generateReadableJSON: "Generera läsbar JSON",
     toolbox: "Verktygslista",
     "property-grid": "Egenskaper",
+    toolboxFilteredTextPlaceholder: "Skriv för att söka...",
+    toolboxNoResultsFound: "Inga resultat hittades",
     propertyGridFilteredTextPlaceholder: "Skriv för att söka...",
     propertyGridNoResultsFound: "Inga resultat hittades",
     correctJSON: "Var vänligen korrigera JSON.",
@@ -297,6 +299,7 @@ export let svStrings = {
       templateTitle: "Mönster för panelrubrik",
       noEntriesText: "Tom paneltext",
       templateTabTitle: "Mönster för flikrubrik",
+      tabTitlePlaceholder: "Platshållare för flikrubrik",
       templateVisibleIf: "Gör en enskild panel synlig om",
       hideNumber: "Dölj panelnumret",
       titleLocation: "Justering av panelrubrik",
@@ -874,6 +877,7 @@ export let svStrings = {
       "--sjs-general-backcolor-dim": "Bakgrundsfärg",
       "--sjs-primary-backcolor": "Accent bakgrund",
       "--sjs-primary-forecolor": "Accent förgrund",
+      "--sjs-special-red": "Felmeddelanden",
       "--sjs-shadow-small": "Skugga effekter",
       "--sjs-shadow-inner": "Skugga effekter",
       "--sjs-border-default": "Färger"
@@ -1250,6 +1254,7 @@ export let svStrings = {
       width: "Ställer in panelens bredd i proportion till andra undersökningselement på samma rad. Accepterar CSS-värden (px, %, in, pt, etc.).",
       templateTitle: "Skriv in en mall för dynamiska panelrubriker. Använd {panelIndex} för panelens allmänna position och {visiblePanelIndex} för dess ordning bland de synliga panelerna. Infoga dessa platshållare i mönstret för att lägga till automatisk numrering.",
       templateTabTitle: "Skriv in en mall för flikrubriker. Använd {panelIndex} för en panels allmänna position och {visiblePanelIndex} för dess ordning bland synliga paneler. Infoga dessa platshållare i mönstret för att lägga till automatisk numrering.",
+      tabTitlePlaceholder: "En reservtext för flikrubriker som gäller när flikrubrikmönstret inte ger ett meningsfullt värde.",
       templateVisibleIf: "Med den här inställningen kan du styra synligheten för enskilda paneler i den dynamiska panelen. Använd platshållaren {panel} för att referera till den aktuella panelen i uttrycket.",
       titleLocation: "Den här inställningen ärvs automatiskt av alla frågor i den här panelen. Om du vill åsidosätta den här inställningen definierar du regler för rubrikjustering för enskilda frågor. Alternativet \"Ärv\" tillämpar inställningen på sidnivå (om den är inställd) eller på undersökningsnivå (\"Topp\" som standard).",
       descriptionLocation: "Alternativet \"Ärv\" tillämpar inställningen på sidnivå (om den är inställd) eller på undersökningsnivå (\"Under panelrubriken\" som standard).",
@@ -1562,6 +1567,8 @@ export let svStrings = {
     backcolor: "Standardbakgrund",
     hovercolor: "Håll muspekaren bakgrund",
     borderDecoration: "Border dekoration",
+    fontColor: "Teckenfärg",
+    backgroundColor: "Bakgrundsfärg",
     primaryForecolor: "Standardfärg",
     primaryForecolorLight: "Inaktiverad färg",
     font: "Teckensnitt",
@@ -2822,3 +2829,10 @@ editorLocalization.locales["sv"] = svStrings;
 // theme.placeholderColor: "Placeholder color" => "Platshållarens färg"
 // theme.size: "Size" => "Storlek"
 // theme.opacity: "Opacity" => "Ogenomskinlighet"
+// ed.toolboxFilteredTextPlaceholder: "Type to search..." => "Skriv för att söka..."
+// ed.toolboxNoResultsFound: "No results found" => "Inga resultat hittades"
+// paneldynamic.tabTitlePlaceholder: "Tab title placeholder" => "Platshållare för flikrubrik"
+// theme.--sjs-special-red: "Error messages" => "Felmeddelanden"
+// paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "En reservtext för flikrubriker som gäller när flikrubrikmönstret inte ger ett meningsfullt värde."
+// theme.fontColor: "Font color" => "Teckenfärg"
+// theme.backgroundColor: "Background color" => "Bakgrundsfärg"
