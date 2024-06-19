@@ -322,7 +322,7 @@ export class QuestionToolbox
     super();
     this.searchManager.isVisible = this.searchEnabled;
     this.searchManager.toolbox = this;
-    this.searchItem = new Action({
+    this.searchItem = new QuestionToolboxDotsItem({
       id: "searchItem-id",
       css: "svc-toolbox__search-button",
       innerCss: "sv-dots__item",

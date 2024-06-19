@@ -72,6 +72,8 @@ svc-toolbox {
 .svc-toolbox__tool.svc-toolbox__search-button {
   z-index: 20;
   justify-content: center;
+  align-items: center;
+  
   .sv-dots__item {
     margin-top: 0;
     width: calcSize(5);

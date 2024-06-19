@@ -5,7 +5,7 @@
       <!-- ko if: $data.toolbox.showSearch-->
       <div class="svc-toolbox__search-container">
         <!-- ko if: $data.toolbox.isCompactRendered-->
-        <!-- ko component: { name: 'svc-toolbox-tool', params: { item: $data.toolbox.searchItem, creator: $data.creator, model: $parent.toolbox, isCompact: $data.toolbox.isCompactRendered } } -->
+        <!-- ko component: { name: 'svc-toolbox-tool', params: { item: $data.toolbox.searchItem, creator: $data.creator, model: $data.toolbox, isCompact: $data.toolbox.isCompactRendered } } -->
         <!-- /ko -->
         <div class="svc-toolbox__category-separator svc-toolbox__category-separator--search"></div>
         <!-- /ko -->
