@@ -55,19 +55,28 @@
 [dir="rtl"],
 [style*="direction:rtl"],
 [style*="direction: rtl"] {
-  .svc-toolbox__item:hover .svc-toolbox__item-banner,
-  .svc-toolbox__item:focus .svc-toolbox__item-banner {
-    flex-direction: row-reverse;
-    padding-right: calcSize(1.5);
-    padding-left: calcSize(2);
-    margin-left: 0;
-    margin-right: 0;
-    transform: translateX(calc(1.5 * #{$base-unit}));
 
-    .svc-toolbox__item-title {
-      padding-left: calcSize(1);
-      padding-right: calcSize(4);
+
+  .svc-toolbox__tool:hover,
+  .svc-toolbox__tool--hovered,
+  .svc-toolbox__item:focus {
+    .svc-toolbox__item-banner {
+      padding-right: calcSize(1.5);
+      padding-left: calcSize(2);
+      margin-left: calcSize(-2);
+      margin-right: calcSize(-3);
+      flex-direction: row-reverse;
+      transform: translateX(calc(1.5 * #{$base-unit}));
+      .svc-toolbox__item-title {
+        padding-right: calcSize(4);
+        padding-left: calcSize(1);
+      }
     }
+  }
+
+  .svc-toolbox__item-banner {
+    margin-right: calcSize(-4.5);
+    margin-left: 0;
   }
 
   .svc-toolbox__item {
