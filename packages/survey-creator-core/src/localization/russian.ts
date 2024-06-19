@@ -119,6 +119,8 @@ export var ruStrings = {
     generateReadableJSON: "Сформировать читаемый JSON",
     toolbox: "Панель инструментов",
     "property-grid": "Свойства",
+    toolboxFilteredTextPlaceholder: "Введите для поиска...",
+    toolboxNoResultsFound: "Никаких результатов не найдено",
     propertyGridFilteredTextPlaceholder: "Введите для поиска...",
     propertyGridNoResultsFound: "Никаких результатов не найдено",
     correctJSON: "Пожалуйста, исправьте JSON.",
@@ -297,6 +299,7 @@ export var ruStrings = {
       templateTitle: "Шаблон заголовка панели",
       noEntriesText: "Пустой текст на панели",
       templateTabTitle: "Шаблон заголовка вкладки",
+      tabTitlePlaceholder: "Заполнитель заголовка вкладки",
       templateVisibleIf: "Сделать отдельную панель видимой, если",
       hideNumber: "Скрытие номера панели",
       titleLocation: "Выравнивание заголовков панелей",
@@ -874,6 +877,7 @@ export var ruStrings = {
       "--sjs-general-backcolor-dim": "Цвет фона",
       "--sjs-primary-backcolor": "Акцентный фон",
       "--sjs-primary-forecolor": "Акцент на переднем плане",
+      "--sjs-special-red": "Сообщения об ошибках",
       "--sjs-shadow-small": "Эффекты теней",
       "--sjs-shadow-inner": "Эффекты теней",
       "--sjs-border-default": "Знамя"
@@ -1116,11 +1120,11 @@ export var ruStrings = {
       cover: "Заполнение",
       contain: "По размеру",
       fill: "Растянуть",
-      tile: "Замостить",
+      tile: "Замостить"
     },
     backgroundImageAttachment: {
       fixed: "Зафиксировать",
-      scroll: "Прокручивать",
+      scroll: "Прокручивать"
     },
     headerView: {
       basic: "Основной",
@@ -1250,6 +1254,7 @@ export var ruStrings = {
       width: "Устанавливает ширину панели пропорционально другим элементам съемки в той же линии. Принимает значения CSS (px, %, in, pt и т. д.).",
       templateTitle: "Введите шаблон для динамических заголовков панелей. Используйте {panelIndex} для общего положения панели и {visiblePanelIndex} для ее порядка среди видимых панелей. Вставьте эти заполнители в шаблон, чтобы добавить автоматическую нумерацию.",
       templateTabTitle: "Введите шаблон для заголовков вкладок. Используйте {panelIndex} для общего положения панели и {visiblePanelIndex} для ее порядка среди видимых панелей. Вставьте эти заполнители в шаблон, чтобы добавить автоматическую нумерацию.",
+      tabTitlePlaceholder: "Резервный текст для заголовков вкладок, который применяется, когда шаблон заголовка вкладки не дает осмысленного значения.",
       templateVisibleIf: "Этот параметр позволяет управлять видимостью отдельных панелей внутри динамической панели. Используйте заполнитель '{panel}' для ссылки на текущую панель в выражении.",
       titleLocation: "Этот параметр автоматически наследуется всеми вопросами на этой панели. Если вы хотите переопределить этот параметр, определите правила выравнивания заголовков для отдельных вопросов. Опция «Наследовать» применяет настройку на уровне страницы (если задано) или на уровне опроса («Сверху» по умолчанию).",
       descriptionLocation: "Опция «Наследовать» применяет настройку на уровне страницы (если задано) или на уровне опроса («Под заголовком панели» по умолчанию).",
@@ -1562,6 +1567,8 @@ export var ruStrings = {
     backcolor: "Фон по умолчанию",
     hovercolor: "Фон при наведении курсора",
     borderDecoration: "Оформление бордюра",
+    fontColor: "Цвет шрифта",
+    backgroundColor: "Цвет фона",
     primaryForecolor: "Цвет по умолчанию",
     primaryForecolorLight: "Отключенный цвет",
     font: "Шрифт",
@@ -2705,3 +2712,10 @@ editorLocalization.locales["ru"] = ruStrings;
 // theme.placeholderColor: "Placeholder color" => "Цвет заполнителя"
 // theme.size: "Size" => "Размер"
 // theme.opacity: "Opacity" => "Непрозрачность"
+// ed.toolboxFilteredTextPlaceholder: "Type to search..." => "Введите для поиска..."
+// ed.toolboxNoResultsFound: "No results found" => "Никаких результатов не найдено"
+// paneldynamic.tabTitlePlaceholder: "Tab title placeholder" => "Заполнитель заголовка вкладки"
+// theme.--sjs-special-red: "Error messages" => "Сообщения об ошибках"
+// paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "Резервный текст для заголовков вкладок, который применяется, когда шаблон заголовка вкладки не дает осмысленного значения."
+// theme.fontColor: "Font color" => "Цвет шрифта"
+// theme.backgroundColor: "Background color" => "Цвет фона"

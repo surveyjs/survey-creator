@@ -119,6 +119,8 @@ var portugueseTranslation = {
     generateReadableJSON: "Gerar JSON legível",
     toolbox: "Ferramentas",
     "property-grid": "Propriedades",
+    toolboxFilteredTextPlaceholder: "Digite para pesquisar...",
+    toolboxNoResultsFound: "Nenhum resultado encontrado",
     propertyGridFilteredTextPlaceholder: "Escreva para pesquisar...",
     propertyGridNoResultsFound: "Nenhum resultado encontrado",
     correctJSON: "Por favor corrija o JSON.",
@@ -297,6 +299,7 @@ var portugueseTranslation = {
       templateTitle: "Padrão de título do painel",
       noEntriesText: "Texto vazio do painel",
       templateTabTitle: "Padrão de título de guia",
+      tabTitlePlaceholder: "Espaço reservado para título da guia",
       templateVisibleIf: "Tornar um painel individual visível se",
       hideNumber: "Ocultar o número do painel",
       titleLocation: "Alinhamento do título do painel",
@@ -874,6 +877,7 @@ var portugueseTranslation = {
       "--sjs-general-backcolor-dim": "Cor de fundo",
       "--sjs-primary-backcolor": "Fundo de destaque",
       "--sjs-primary-forecolor": "Destaque em primeiro plano",
+      "--sjs-special-red": "Mensagens de erro",
       "--sjs-shadow-small": "Efeitos de sombra",
       "--sjs-shadow-inner": "Efeitos de sombra",
       "--sjs-border-default": "Cores"
@@ -1250,6 +1254,7 @@ var portugueseTranslation = {
       width: "Define a largura do painel proporcionalmente a outros elementos de pesquisa na mesma linha. Aceita valores CSS (px, %, in, pt, etc.).",
       templateTitle: "Digite um modelo para títulos de painel dinâmico. Use {panelIndex} para a posição geral do painel e {visiblePanelIndex} para sua ordem entre os painéis visíveis. Insira esses espaços reservados no padrão para adicionar numeração automática.",
       templateTabTitle: "Digite um modelo para títulos de guias. Use {panelIndex} para a posição geral de um painel e {visiblePanelIndex} para sua ordem entre os painéis visíveis. Insira esses espaços reservados no padrão para adicionar numeração automática.",
+      tabTitlePlaceholder: "Um texto de fallback para títulos de guia que se aplica quando o padrão de título de guia não produz um valor significativo.",
       templateVisibleIf: "Essa configuração permite controlar a visibilidade de painéis individuais dentro do painel dinâmico. Use o espaço reservado '{panel}' para fazer referência ao painel atual em sua expressão.",
       titleLocation: "Essa configuração é herdada automaticamente por todas as perguntas dentro deste painel. Se você quiser substituir essa configuração, defina regras de alinhamento de título para perguntas individuais. A opção \"Herdar\" aplica a configuração de nível de página (se definida) ou de nível de pesquisa (\"Superior\" por padrão).",
       descriptionLocation: "A opção \"Herdar\" aplica a configuração de nível de página (se definida) ou de nível de pesquisa (\"Sob o título do painel\" por padrão).",
@@ -1562,6 +1567,8 @@ var portugueseTranslation = {
     backcolor: "Plano de fundo padrão",
     hovercolor: "Plano de fundo do mouse",
     borderDecoration: "Decoração de borda",
+    fontColor: "Cor da fonte",
+    backgroundColor: "Cor de fundo",
     primaryForecolor: "Cor padrão",
     primaryForecolorLight: "Cor desativada",
     font: "Fonte",
@@ -2311,3 +2318,10 @@ editorLocalization.locales["pt"] = portugueseTranslation;
 // theme.placeholderColor: "Placeholder color" => "Cor do espaço reservado"
 // theme.size: "Size" => "Tamanho"
 // theme.opacity: "Opacity" => "Opacidade"
+// ed.toolboxFilteredTextPlaceholder: "Type to search..." => "Digite para pesquisar..."
+// ed.toolboxNoResultsFound: "No results found" => "Nenhum resultado encontrado"
+// paneldynamic.tabTitlePlaceholder: "Tab title placeholder" => "Espaço reservado para título da guia"
+// theme.--sjs-special-red: "Error messages" => "Mensagens de erro"
+// paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "Um texto de fallback para títulos de guia que se aplica quando o padrão de título de guia não produz um valor significativo."
+// theme.fontColor: "Font color" => "Cor da fonte"
+// theme.backgroundColor: "Background color" => "Cor de fundo"

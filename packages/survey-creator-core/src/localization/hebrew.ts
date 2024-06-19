@@ -119,6 +119,8 @@ export var hebrewStrings = {
     generateReadableJSON: "צור JSON קריא",
     toolbox: "ארגז הכלים",
     "property-grid": "מאפיינים",
+    toolboxFilteredTextPlaceholder: "הקלד כדי לחפש...",
+    toolboxNoResultsFound: "לא נמצאו תוצאות",
     propertyGridFilteredTextPlaceholder: "הקלד כדי לחפש...",
     propertyGridNoResultsFound: "לא נמצאו תוצאות",
     correctJSON: "אנא תקנו את ה-JSON.",
@@ -297,6 +299,7 @@ export var hebrewStrings = {
       templateTitle: "תבנית כותרת חלונית",
       noEntriesText: "טקסט ריק בחלונית",
       templateTabTitle: "תבנית כותרת טאב",
+      tabTitlePlaceholder: "מציין מיקום של כותרת טאב",
       templateVisibleIf: "הפיכת חלונית בודדת לגלויה אם",
       hideNumber: "הסתרת מספר החלונית",
       titleLocation: "יישור כותרת חלונית",
@@ -874,6 +877,7 @@ export var hebrewStrings = {
       "--sjs-general-backcolor-dim": "צבע רקע",
       "--sjs-primary-backcolor": "רקע הדגשה",
       "--sjs-primary-forecolor": "הדגשת החזית",
+      "--sjs-special-red": "הודעות שגיאה",
       "--sjs-shadow-small": "אפקטי צל",
       "--sjs-shadow-inner": "אפקטי צל",
       "--sjs-border-default": "צבעים"
@@ -1250,6 +1254,7 @@ export var hebrewStrings = {
       width: "קובע את רוחב החלונית ביחס לרכיבי סקר אחרים באותה שורה. מקבל ערכי CSS (px, %, in, pt וכו').",
       templateTitle: "הקלד תבנית לכותרות חלוניות דינמיות. השתמש ב- {panelIndex} למיקום הכללי של החלונית וב- {visiblePanelIndex} לסדר שלה בין חלוניות גלויות. הוסף מצייני מיקום אלה לתבנית כדי להוסיף מספור אוטומטי.",
       templateTabTitle: "הקלד תבנית עבור כותרות כרטיסיות. השתמש ב- {panelIndex} למיקום הכללי של חלונית וב- {visiblePanelIndex} לסדר שלה בין חלוניות גלויות. הוסף מצייני מיקום אלה לתבנית כדי להוסיף מספור אוטומטי.",
+      tabTitlePlaceholder: "טקסט נסיגה עבור כותרות טאבים שחל כאשר תבנית כותרת הטאב אינה מפיקה ערך בעל משמעות.",
       templateVisibleIf: "קביעה זו מאפשרת לשלוט בתצוגה של חלוניות בודדות בחלונית הדינמית. השתמש במציין המיקום '{panel}' כדי להפנות לחלונית הנוכחית בביטוי שלך.",
       titleLocation: "הגדרה זו עוברת בירושה אוטומטית לכל השאלות בחלונית זו. אם ברצונך לעקוף הגדרה זו, הגדר כללי יישור כותרת עבור שאלות בודדות. האפשרות \"הירושה\" מחילה את ההגדרה ברמת הדף (אם הוגדרה) או ברמת הסקר (\"למעלה\" כברירת מחדל).",
       descriptionLocation: "האפשרות \"הירושה\" מחילה את ההגדרה ברמת העמוד (אם הוגדרה) או ברמת הסקר (\"תחת כותרת החלונית\" כברירת מחדל).",
@@ -1562,6 +1567,8 @@ export var hebrewStrings = {
     backcolor: "רקע ברירת מחדל",
     hovercolor: "רקע העברת עכבר",
     borderDecoration: "קישוט גבול",
+    fontColor: "צבע גופן",
+    backgroundColor: "צבע רקע",
     primaryForecolor: "צבע ברירת מחדל",
     primaryForecolorLight: "צבע כבוי",
     font: "גופן",
@@ -2213,3 +2220,10 @@ editorLocalization.locales["he"] = hebrewStrings;
 // theme.placeholderColor: "Placeholder color" => "צבע מציין מיקום"
 // theme.size: "Size" => "גודל"
 // theme.opacity: "Opacity" => "אטימות"
+// ed.toolboxFilteredTextPlaceholder: "Type to search..." => "הקלד כדי לחפש..."
+// ed.toolboxNoResultsFound: "No results found" => "לא נמצאו תוצאות"
+// paneldynamic.tabTitlePlaceholder: "Tab title placeholder" => "מציין מיקום של כותרת טאב"
+// theme.--sjs-special-red: "Error messages" => "הודעות שגיאה"
+// paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "טקסט נסיגה עבור כותרות טאבים שחל כאשר תבנית כותרת הטאב אינה מפיקה ערך בעל משמעות."
+// theme.fontColor: "Font color" => "צבע גופן"
+// theme.backgroundColor: "Background color" => "צבע רקע"

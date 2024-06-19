@@ -119,6 +119,8 @@ var persianStrings = {
     generateReadableJSON: "تولید کد خوانا JSON",
     toolbox: "جعبه ابزار",
     "property-grid": "ویژگی ها",
+    toolboxFilteredTextPlaceholder: "تایپ برای جستجو...",
+    toolboxNoResultsFound: "نتیجه ای یافت نشد",
     propertyGridFilteredTextPlaceholder: "جستجو...",
     propertyGridNoResultsFound: "نتیجه ای یافت نشد",
     correctJSON: "لطفا JSON را تصحیح کنید.",
@@ -297,6 +299,7 @@ var persianStrings = {
       templateTitle: "الگوی عنوان پنل",
       noEntriesText: "متن تابلوی خالی",
       templateTabTitle: "الگوی عنوان زبانه",
+      tabTitlePlaceholder: "ذی نفع عنوان تب",
       templateVisibleIf: "ایجاد یک پنل منفرد مرئی اگر",
       hideNumber: "مخفی کردن شمارهی تابلو",
       titleLocation: "ترازبندی عنوان پنل",
@@ -874,6 +877,7 @@ var persianStrings = {
       "--sjs-general-backcolor-dim": "رنگ پسزمینه",
       "--sjs-primary-backcolor": "پسزمینۀ لهجه",
       "--sjs-primary-forecolor": "پیشزمینه لهجه",
+      "--sjs-special-red": "پیغامهای خطا",
       "--sjs-shadow-small": "جلوه های سایه",
       "--sjs-shadow-inner": "جلوه های سایه",
       "--sjs-border-default": "رنگ"
@@ -1250,6 +1254,7 @@ var persianStrings = {
       width: "عرض پانل را متناسب با سایر عناصر بررسی در همان خط تنظیم می کند. مقادیر CSS را می پذیرد (px، ٪، in، pt و غیره).",
       templateTitle: "قالب را برای عناوین پانل پویا تایپ کنید. از {panelIndex} برای موقعیت عمومی پانل و {visiblePanelIndex} برای سفارش ان در میان پانل های قابل مشاهده استفاده کنید. این نگهدارنده ها را در الگو قرار دهید تا شماره گذاری خودکار اضافه شود.",
       templateTabTitle: "در قالبی برای عناوین زبانه تایپ کنید. از {panelIndex} برای موقعیت عمومی پانل و {visiblePanelIndex} برای سفارش ان در میان پانل های قابل مشاهده استفاده کنید. این نگهدارنده ها را در الگو قرار دهید تا شماره گذاری خودکار اضافه شود.",
+      tabTitlePlaceholder: "یک متن جایگزین برای عناوین برگه که زمانی اعمال می شود که الگوی عنوان برگه ارزش معنی داری تولید نمی کند.",
       templateVisibleIf: "این تنظیم به شما اجازه می دهد تا دید پانل های فردی را در پانل پویا کنترل کنید. از نگهدارنده '{panel}' برای ارجاع به پنل فعلی در عبارت خود استفاده کنید.",
       titleLocation: "این تنظیم به طور خودکار توسط تمام سوالات موجود در این پنل به ارث برده می شود. اگر می خواهید این تنظیم را لغو کنید، قوانین تراز عنوان را برای سوالات فردی تعریف کنید. گزینه \"Inherit\" به طور پیش فرض تنظیم سطح صفحه (در صورت تنظیم) یا سطح نظرسنجی (\"بالا\" را اعمال می کند).",
       descriptionLocation: "گزینه \"Inherit\" سطح صفحه (در صورت تنظیم) یا تنظیم سطح نظرسنجی (\"زیر عنوان پانل\" به طور پیش فرض) اعمال می شود.",
@@ -1562,6 +1567,8 @@ var persianStrings = {
     backcolor: "پسزمینۀ پیشفرض",
     hovercolor: "پسزمینه شناور",
     borderDecoration: "دکوراسیون مرزی",
+    fontColor: "رنگ قلم",
+    backgroundColor: "رنگ پسزمینه",
     primaryForecolor: "رنگ پیشفرض",
     primaryForecolorLight: "رنگ غیرفعال",
     font: "فونت",
@@ -2600,3 +2607,10 @@ editorLocalization.locales["fa"] = persianStrings;
 // theme.placeholderColor: "Placeholder color" => "رنگ نگهدارنده"
 // theme.size: "Size" => "اندازه"
 // theme.opacity: "Opacity" => "کدورت"
+// ed.toolboxFilteredTextPlaceholder: "Type to search..." => "تایپ برای جستجو..."
+// ed.toolboxNoResultsFound: "No results found" => "نتیجه ای یافت نشد"
+// paneldynamic.tabTitlePlaceholder: "Tab title placeholder" => "ذی نفع عنوان تب"
+// theme.--sjs-special-red: "Error messages" => "پیغامهای خطا"
+// paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "یک متن جایگزین برای عناوین برگه که زمانی اعمال می شود که الگوی عنوان برگه ارزش معنی داری تولید نمی کند."
+// theme.fontColor: "Font color" => "رنگ قلم"
+// theme.backgroundColor: "Background color" => "رنگ پسزمینه"

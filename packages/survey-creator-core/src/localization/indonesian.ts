@@ -119,6 +119,8 @@ export var indonesianStrings = {
     generateReadableJSON: "Hasilkan JSON yang dapat dibaca",
     toolbox: "Kotak Perkakas",
     "property-grid": "Properti",
+    toolboxFilteredTextPlaceholder: "Ketik untuk mencari...",
+    toolboxNoResultsFound: "Tidak ada hasil yang ditemukan",
     propertyGridFilteredTextPlaceholder: "Ketik untuk mencari...",
     propertyGridNoResultsFound: "Tidak ada hasil yang ditemukan",
     correctJSON: "Please correct JSON.",
@@ -297,6 +299,7 @@ export var indonesianStrings = {
       templateTitle: "Pola judul panel",
       noEntriesText: "Teks panel kosong",
       templateTabTitle: "Pola judul tab",
+      tabTitlePlaceholder: "Tempat penampung judul tab",
       templateVisibleIf: "Membuat panel individual terlihat jika",
       hideNumber: "Menyembunyikan nomor panel",
       titleLocation: "Perataan judul panel",
@@ -874,6 +877,7 @@ export var indonesianStrings = {
       "--sjs-general-backcolor-dim": "Warna latar belakang",
       "--sjs-primary-backcolor": "Latar belakang aksen",
       "--sjs-primary-forecolor": "Latar depan aksen",
+      "--sjs-special-red": "Pesan kesalahan",
       "--sjs-shadow-small": "Efek bayangan",
       "--sjs-shadow-inner": "Efek bayangan",
       "--sjs-border-default": "Warna"
@@ -1250,6 +1254,7 @@ export var indonesianStrings = {
       width: "Mengatur lebar panel secara proporsional dengan elemen survei lainnya di baris yang sama. Menerima nilai CSS (px, %, in, pt, dll.).",
       templateTitle: "Ketik template untuk judul panel dinamis. Gunakan {panelIndex} untuk posisi umum panel dan {visiblePanelIndex} untuk urutannya di antara panel yang terlihat. Masukkan tempat penampung ini ke dalam pola untuk menambahkan penomoran otomatis.",
       templateTabTitle: "Ketik templat untuk judul tab. Gunakan {panelIndex} untuk posisi umum panel dan {visiblePanelIndex} untuk urutannya di antara panel yang terlihat. Masukkan tempat penampung ini ke dalam pola untuk menambahkan penomoran otomatis.",
+      tabTitlePlaceholder: "Teks fallback untuk judul tab yang berlaku saat pola judul tab tidak menghasilkan nilai yang berarti.",
       templateVisibleIf: "Pengaturan ini memungkinkan Anda mengontrol visibilitas masing-masing panel dalam panel dinamis. Gunakan placeholder '{panel}' untuk mereferensikan panel saat ini dalam ekspresi Anda.",
       titleLocation: "Setelan ini secara otomatis diwarisi oleh semua pertanyaan dalam panel ini. Jika Anda ingin mengganti setelan ini, tentukan aturan perataan judul untuk masing-masing pertanyaan. Opsi \"Warisi\" menerapkan setelan tingkat halaman (jika ditetapkan) atau tingkat survei (\"Teratas\" secara default).",
       descriptionLocation: "Opsi \"Warisi\" menerapkan setelan tingkat halaman (jika ditetapkan) atau tingkat survei (\"Di bawah judul panel\" secara default).",
@@ -1562,6 +1567,8 @@ export var indonesianStrings = {
     backcolor: "Latar belakang default",
     hovercolor: "Arahkan kursor ke latar belakang",
     borderDecoration: "Dekorasi perbatasan",
+    fontColor: "Warna font",
+    backgroundColor: "Warna latar belakang",
     primaryForecolor: "Warna default",
     primaryForecolorLight: "Warna dinonaktifkan",
     font: "Font",
@@ -2799,3 +2806,10 @@ editorLocalization.locales["id"] = indonesianStrings;
 // theme.placeholderColor: "Placeholder color" => "Warna tempat penampung"
 // theme.size: "Size" => "Tingginya"
 // theme.opacity: "Opacity" => "Opacity"
+// ed.toolboxFilteredTextPlaceholder: "Type to search..." => "Ketik untuk mencari..."
+// ed.toolboxNoResultsFound: "No results found" => "Tidak ada hasil yang ditemukan"
+// paneldynamic.tabTitlePlaceholder: "Tab title placeholder" => "Tempat penampung judul tab"
+// theme.--sjs-special-red: "Error messages" => "Pesan kesalahan"
+// paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "Teks fallback untuk judul tab yang berlaku saat pola judul tab tidak menghasilkan nilai yang berarti."
+// theme.fontColor: "Font color" => "Warna font"
+// theme.backgroundColor: "Background color" => "Warna latar belakang"

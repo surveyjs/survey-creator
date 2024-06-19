@@ -201,18 +201,22 @@ export class ThemeModel extends Base implements ITheme {
     );
   }
 
+  private updatePropertiesDependentOnPrimaryColor(value: string) {
+    this.colorCalculator.calculateColors(value);
+    this.setPropertyValue("--sjs-primary-backcolor-light", this.colorCalculator.colorSettings.newColorLight);
+    this.setPropertyValue("--sjs-primary-backcolor-dark", this.colorCalculator.colorSettings.newColorDark);
+    this.setThemeCssVariablesChanges("--sjs-primary-backcolor-light", this.colorCalculator.colorSettings.newColorLight);
+    this.setThemeCssVariablesChanges("--sjs-primary-backcolor-dark", this.colorCalculator.colorSettings.newColorDark);
+  }
   private cssVariablePropertiesChanged(name: string, value: any, property: JsonObjectProperty) {
     if (name === "primaryColor") {
       this.setPropertyValue("--sjs-primary-backcolor", value);
       this.setThemeCssVariablesChanges("--sjs-primary-backcolor", value);
+      this.updatePropertiesDependentOnPrimaryColor(value);
     }
     if (name === "--sjs-primary-backcolor") {
       this["primaryColor"] = value;
-      this.colorCalculator.calculateColors(value);
-      this.setPropertyValue("--sjs-primary-backcolor-light", this.colorCalculator.colorSettings.newColorLight);
-      this.setPropertyValue("--sjs-primary-backcolor-dark", this.colorCalculator.colorSettings.newColorDark);
-      this.setThemeCssVariablesChanges("--sjs-primary-backcolor-light", this.colorCalculator.colorSettings.newColorLight);
-      this.setThemeCssVariablesChanges("--sjs-primary-backcolor-dark", this.colorCalculator.colorSettings.newColorDark);
+      this.updatePropertiesDependentOnPrimaryColor(value);
     }
     if (name === "--sjs-shadow-inner" || name === "--sjs-shadow-small") {
       const newBoxShadowReset = createBoxShadowReset(value);
@@ -832,8 +836,6 @@ Serializer.addProperties("theme",
   { name: "--sjs-border-light", visible: false },
   { name: "--sjs-border-default", visible: false },
   { name: "--sjs-border-inside", visible: false },
-  { name: "--sjs-special-red", visible: false },
-  { name: "--sjs-special-red-light", visible: false },
   { name: "--sjs-special-red-forecolor", visible: false },
   { name: "--sjs-special-green", visible: false },
   { name: "--sjs-special-green-light", visible: false },
@@ -933,6 +935,25 @@ Serializer.addProperties("theme",
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
         editor.colorTitle = getLocString("theme.primaryForecolorLight");
+        editor.colorTitleLocation = "left";
+      }
+    }
+  }, {
+    type: "coloralpha",
+    name: "--sjs-special-red",
+    onPropertyEditorUpdate: function (obj: any, editor: any) {
+      if (!!editor) {
+        editor.colorTitle = getLocString("theme.fontColor");
+        editor.colorTitleLocation = "left";
+      }
+    }
+  }, {
+    type: "coloralpha",
+    name: "--sjs-special-red-light",
+    displayName: "",
+    onPropertyEditorUpdate: function (obj: any, editor: any) {
+      if (!!editor) {
+        editor.colorTitle = getLocString("theme.backgroundColor");
         editor.colorTitleLocation = "left";
       }
     }
