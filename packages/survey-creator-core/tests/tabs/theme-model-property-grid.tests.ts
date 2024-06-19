@@ -1076,7 +1076,6 @@ test("header editable after theme changed", (): any => {
   expect(headerTitleQuestion.isVisible).toBe(true);
 });
 
-
 test("advanced header disable inheritWidthFrom and reset it to 'container' if showTOC is true", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.JSON = { title: "Survey Title", questions: [{ type: "text", name: "q1" }] };
