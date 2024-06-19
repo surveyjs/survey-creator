@@ -27,7 +27,7 @@ survey-creator,
     border: 4px solid rgba(0, 0, 0, 0);
     background-clip: padding-box;
     border-radius: 32px;
-    background-color: $border;
+    background-color: var(--ctr-scrollbar-background-color, $border);
   }
 
   ::-webkit-scrollbar-track {
@@ -36,7 +36,7 @@ survey-creator,
 
   ::-webkit-scrollbar-thumb:hover {
     border: 2px solid rgba(0, 0, 0, 0);
-    background-color: $foreground-light;
+    background-color: var(--ctr-scrollbar-background-color, $border);
   }
 }
 
