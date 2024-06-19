@@ -50,7 +50,7 @@ async function setupToolboxProperty(propertyName: string, propertyValue: any) {
 
 const categories = Selector(".svc-toolbox__category");
 const categoriesHeader = Selector(".svc-toolbox__category-header");
-const visibleToolboxItems = Selector(".svc-toolbox__tool").filterVisible();
+const visibleToolboxItems = Selector(".svc-toolbox__category>.svc-toolbox__tool").filterVisible();
 const collapsibleCategories = Selector(".svc-toolbox__category-header--collapsed");
 const getCollapsedCategories = (index = 0) => { return categoriesHeader.nth(index).find(".svc-string-editor__button--expand"); };
 const getExpandedCategories = (index = 0) => { return categoriesHeader.nth(index).find(".svc-string-editor__button--collapse"); };
@@ -146,15 +146,15 @@ test("Categories allowExpandMultipleCategories property", async (t) => {
     .expect(visibleToolboxItems.count).eql(0)
 
     .click(categoriesHeader.nth(0))
-    .expect(categories.nth(0).find(".svc-toolbox__tool").count).eql(16)
+    .expect(categories.nth(0).find(":scope>.svc-toolbox__tool").count).eql(16)
     .expect(visibleToolboxItems.count).eql(16)
 
     .click(categoriesHeader.nth(1))
-    .expect(categories.nth(1).find(".svc-toolbox__tool").count).eql(3)
+    .expect(categories.nth(1).find(":scope>.svc-toolbox__tool").count).eql(3)
     .expect(visibleToolboxItems.count).eql(19)
 
     .click(categoriesHeader.nth(2))
-    .expect(categories.nth(2).find(".svc-toolbox__tool").count).eql(2)
+    .expect(categories.nth(2).find(":scope>.svc-toolbox__tool").count).eql(2)
     .expect(visibleToolboxItems.count).eql(21);
 });
 
@@ -262,7 +262,7 @@ test("toolbar responsiveness with search", async (t) => {
   });
   await t
     .expect(Selector(".svc-toolbox .sv-dots__item").visible).ok()
-    .expect(Selector(".svc-toolbox__tool").count).eql(22)
+    .expect(Selector(".svc-toolbox__category>.svc-toolbox__tool").count).eql(22)
     .expect(Selector(".svc-toolbox .sv-dots__item").visible).ok()
     .expect(visibleToolboxItems.count).eql(11);
 
@@ -270,7 +270,7 @@ test("toolbar responsiveness with search", async (t) => {
   await t.resizeWindow(1920, 598);
   await t
     .expect(Selector(".svc-toolbox .sv-dots__item").visible).ok()
-    .expect(Selector(".svc-toolbox__tool").count).eql(22)
+    .expect(Selector(".svc-toolbox__category>.svc-toolbox__tool").count).eql(22)
     .expect(Selector(".svc-toolbox .sv-dots__item").visible).ok()
     .expect(visibleToolboxItems.count).eql(10);
 });
@@ -336,7 +336,7 @@ test("toolbar responsiveness in compact mode", async (t) => {
     .expect(Selector(".svc-toolbox .sv-dots__item").visible).ok()
     .expect(Selector(".svc-toolbox__container").clientHeight).lte(510)
     .expect(visibleToolboxItems.count).eql(11)
-    .expect(Selector(".svc-toolbox__tool").count).eql(22)
+    .expect(Selector(".svc-toolbox__category>.svc-toolbox__tool").count).eql(22)
 
     .click(".svc-question__content--text", { offsetX: 200, offsetY: 20 })
     .click(Selector(".sv-action-bar-item__title").withText("Save as Toolbox Item"))
@@ -344,7 +344,7 @@ test("toolbar responsiveness in compact mode", async (t) => {
     .expect(Selector(".svc-toolbox .sv-dots__item").visible).ok()
     .expect(Selector(".svc-toolbox__container").clientHeight).lte(510)
     .expect(visibleToolboxItems.count).eql(11)
-    .expect(Selector(".svc-toolbox__tool").count).eql(23);
+    .expect(Selector(".svc-toolbox__category>.svc-toolbox__tool").count).eql(23);
 });
 
 test("toolbox subTypes: add items by drag-n-drop", async (t) => {
