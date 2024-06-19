@@ -163,6 +163,12 @@ export class ThemeTabPlugin implements ICreatorPlugin {
 
     this._setPGEditorPropertyValue(panel.getQuestionByName("descriptionPositionX"), "readOnly", !survey.description);
     this._setPGEditorPropertyValue(panel.getQuestionByName("descriptionPositionY"), "readOnly", !survey.description);
+
+    if (survey.showTOC) {
+      const inheritWidthFrom = panel.getQuestionByName("inheritWidthFrom");
+      this._setPGEditorPropertyValue(inheritWidthFrom, "value", "container");
+      this._setPGEditorPropertyValue(inheritWidthFrom, "visible", false);
+    }
   }
 
   private updateVisibilityOfPropertyGridGroups() {
