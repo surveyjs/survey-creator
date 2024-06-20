@@ -617,7 +617,7 @@ export class QuestionToolbox
   }
   private updateActionTitle(action: IAction): void {
     const newTitle = editorLocalization.getString("qt." + action.id);
-    if (!!newTitle) {
+    if (!!newTitle && newTitle !== action.id) {
       action.title = newTitle;
       action.tooltip = newTitle;
     }

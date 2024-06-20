@@ -593,6 +593,7 @@ test("Change localization strings for toolbox categories", () => {
   const survey = editor.model;
   survey.setValue("toolbox_show", true);
   survey.setValue("toolbox_mode", "categories");
+  survey.setValue("toolbox_showCategoryTitles", true);
   const matrix = <QuestionMatrixDynamicModel>survey.getQuestionByName("toolbox_categories");
   const row1 = matrix.visibleRows[0];
   expect(row1.getQuestionByName("category").value).toBe("choice");

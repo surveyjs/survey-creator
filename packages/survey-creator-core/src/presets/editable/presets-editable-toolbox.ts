@@ -5,6 +5,8 @@ import { SurveyJSON5 } from "../../json5";
 import { PresetItemValue, QuestionPresetRankingModel } from "./preset-question-ranking";
 import { editorLocalization } from "../../editorLocalization";
 
+const LocCategoriesName = "toolboxCategories";
+
 export class CreatorPresetEditableToolboxDefinition extends CreatorPresetEditableBase {
   public createMainPageCore(): any {
     return {
@@ -265,17 +267,6 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
       };
     });
     this.updateShowCategoriesTitlesElements(model);
-    const matrix = this.getQuestionCategories(model);
-    matrix.visibleRows.forEach(row => {
-      const category = row.getValue("category");
-      const defaultTitle = this.getCategoryTitle(category);
-      if(!!defaultTitle) {
-        row.getQuestionByName("category").readOnly = true;
-      }
-      if(!row.getValue("title")) {
-        row.setValue("title", defaultTitle);
-      }
-    });
   }
   protected updateOnValueChangedCore(model: SurveyModel, name: string): void {
     if(name === this.nameShowCategoryTitles) {
@@ -287,10 +278,20 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     const matrix = this.getQuestionCategories(model);
     matrix.showHeader = val;
     matrix.getColumnByName("title").visible = val;
+    matrix.visibleRows.forEach(row => {
+      const category = row.getValue("category");
+      const defaultTitle = this.getCategoryTitle(category);
+      if(!!defaultTitle) {
+        row.getQuestionByName("category").readOnly = true;
+      }
+      const titleQuestion = row.getQuestionByName("title");
+      if(titleQuestion.isEmpty()) {
+        titleQuestion.value = defaultTitle;
+      }
+    });
   }
-  private locCategoriesName = "toolboxCategories";
   private getCategoryTitle(name: string): string {
-    return editorLocalization.getString(this.locCategoriesName + "." + name);
+    return editorLocalization.getString(LocCategoriesName + "." + name);
   }
   protected setJsonLocalizationStringsCore(model: SurveyModel, locStrs: any): void {
     (<QuestionPresetRankingModel>this.getQuestionItems(model)).updateModifiedText(locStrs);
@@ -299,10 +300,10 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
       matrix.visibleRows.forEach(row => {
         const category = row.getValue("category");
         if(row.getValue("title") !== this.getCategoryTitle(category)) {
-          if(!locStrs[this.locCategoriesName]) {
-            locStrs[this.locCategoriesName] = {};
+          if(!locStrs[LocCategoriesName]) {
+            locStrs[LocCategoriesName] = {};
           }
-          locStrs[this.locCategoriesName][category] = row.getValue("title");
+          locStrs[LocCategoriesName][category] = row.getValue("title");
         }
         const q = <QuestionPresetRankingModel>row.getQuestionByName("items");
         if(!!q) {
