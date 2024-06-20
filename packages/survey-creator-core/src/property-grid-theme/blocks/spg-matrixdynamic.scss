@@ -53,8 +53,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: $background;
-  border: 1px solid $border;
+  background: var(--ctr-property-grid-background-color, $background);
+  border: 1px solid var(--ctr-survey-placeholder-border-color, $border);
   box-sizing: border-box;
 
   .spg-matrixdynamic__add-btn {
@@ -65,7 +65,7 @@
 .spg-matrixdynamic__placeholder-text {
   font-size: calcSize(2);
   line-height: calcSize(3);
-  color: $foreground-light;
+  color: var(--ctr-survey-placeholder-text-color, $foreground-light);
 }
 
 .spg-matrixdynamic__add-btn {
@@ -74,7 +74,7 @@
   border: none;
   margin-top: calcSize(0.5);
   background: transparent;
-  color: $primary;
+  color: var(--ctr-survey-action-button-text-color-positive, $primary);
   font-family: $font-family;
   font-size: calcSize(2);
   font-weight: 600;
