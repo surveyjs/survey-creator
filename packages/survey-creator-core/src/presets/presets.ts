@@ -4,6 +4,7 @@ import { CreatorPresetTabs } from "./presets-tabs";
 import { CreatorPresetPropertyGrid } from "./presets-properties";
 import { IToolboxCategoryDefinition } from "../toolbox";
 import { ISurveyPropertyGridDefinition } from "../question-editor/definition";
+import { SurveyCreatorModel } from "../creator-base";
 
 export interface ICreatorPresetData {
   propertyGrid?: {
@@ -30,6 +31,12 @@ export class CreatorPreset extends CreatorPresetBase {
   public getPath(): string { return ""; }
   public getJson(): ICreatorPresetData {
     return <ICreatorPresetData>this.json;
+  }
+  public apply(creator?: SurveyCreatorModel): void {
+    super.apply(creator);
+    if(!!creator) {
+      creator.updateLocalizedStrings();
+    }
   }
   protected createPresets(): Array<ICreatorPreset> {
     return [new CreatorPresetTabs(), new CreatorPresetToolbox(),

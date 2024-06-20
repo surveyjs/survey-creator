@@ -26,11 +26,6 @@ export abstract class CreatorPresetBase implements ICreatorPreset {
       this.children.forEach(item => item.apply(creator));
     }
     this.applyLocalization();
-    if(!!creator) {
-      const loc = creator.locale;
-      creator.locale = "du";
-      creator.locale = loc;
-    }
     this.onApplied.fire(this, {});
   }
   public applyLocalization(): void {

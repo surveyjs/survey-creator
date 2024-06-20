@@ -588,3 +588,19 @@ test("Change localization strings for toolbox (categories)", () => {
   expect(loc.en.qt.radiogroup).toEqual("Radio item");
   expect(loc.en.qt.text).toBeFalsy();
 });
+test("Change localization strings for toolbox categories", () => {
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  survey.setValue("toolbox_show", true);
+  survey.setValue("toolbox_mode", "categories");
+  const matrix = <QuestionMatrixDynamicModel>survey.getQuestionByName("toolbox_categories");
+  const row1 = matrix.visibleRows[0];
+  expect(row1.getQuestionByName("category").value).toBe("choice");
+  expect(row1.getQuestionByName("title").value).toBe("Choice Questions");
+  row1.getQuestionByName("title").value = "Choice Questions edit";
+  editor.applyFromSurveyModel();
+  const loc = editor.json.localization;
+  expect(loc).toBeTruthy();
+  expect(loc.en.toolboxCategories.text).toBeFalsy();
+  expect(loc.en.toolboxCategories.choice).toEqual("Choice Questions edit");
+});

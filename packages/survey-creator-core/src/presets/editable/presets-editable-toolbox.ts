@@ -3,6 +3,7 @@ import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-
 import { SurveyCreatorModel } from "../../creator-base";
 import { SurveyJSON5 } from "../../json5";
 import { PresetItemValue, QuestionPresetRankingModel } from "./preset-question-ranking";
+import { editorLocalization } from "../../editorLocalization";
 
 export class CreatorPresetEditableToolboxDefinition extends CreatorPresetEditableBase {
   public createMainPageCore(): any {
@@ -144,13 +145,15 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
           choices: [{ value: "categories", text: "Categories" }, { value: "items", text: "No categories" }],
           visibleIf: this.getBoolVisibleIf(this.nameCategoriesShow),
           clearIfInvisible: "onHidden",
+          startWithNewLine: false
         },
         {
           type: "boolean",
           name: this.nameShowCategoryTitles,
           defaultValue: false,
           visibleIf: this.getTextVisibleIf(this.nameCategoriesMode, "categories"),
-          title: "Show Categories Titles"
+          title: "Show Categories Titles",
+          startWithNewLine: false
         },
         {
           type: "matrixdynamic",
@@ -159,10 +162,11 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
           visibleIf: this.getTextVisibleIf(this.nameCategoriesMode, "categories"),
           minRowCount: 1,
           allowRowsDragAndDrop: true,
-          showHeader: false,
+          showHeader: true,
           addRowText: "Add new Category",
           columns: [
             { cellType: "text", name: "category", title: "Category Name", isUnique: true, isRequired: true },
+            { cellType: "text", name: "title", title: "Category Title" },
             { cellType: "expression", name: "count", title: "Number of items in category", expression: "{row.items.length}" }
           ],
           detailPanelMode: "underRowSingle",
@@ -255,6 +259,9 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
         }
       }
     });
+    categories.forEach(item => {
+      item.title = this.getCategoryTitle(item.category);
+    });
     model.setValue(this.nameCategories, categories);
     this.getQuestionCategories(model).visibleRows.forEach(row => {
       row.onDetailPanelShowingChanged = () => {
@@ -262,11 +269,22 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
       };
     });
   }
+  private locCategoriesName = "toolboxCategories";
+  private getCategoryTitle(name: string): string {
+    return editorLocalization.getString(this.locCategoriesName + "." + name);
+  }
   protected setJsonLocalizationStringsCore(model: SurveyModel, locStrs: any): void {
     (<QuestionPresetRankingModel>this.getQuestionItems(model)).updateModifiedText(locStrs);
     const matrix = this.getQuestionCategories(model);
     if(matrix.isVisible) {
       matrix.visibleRows.forEach(row => {
+        const category = row.getValue("category");
+        if(row.getValue("title") !== this.getCategoryTitle(category)) {
+          if(!locStrs[this.locCategoriesName]) {
+            locStrs[this.locCategoriesName] = {};
+          }
+          locStrs[this.locCategoriesName][category] = row.getValue("title");
+        }
         const q = <QuestionPresetRankingModel>row.getQuestionByName("items");
         if(!!q) {
           q.updateModifiedText(locStrs);
