@@ -108,7 +108,7 @@ test("set property grid defintion", () => {
   expect(panels[0].elements).toHaveLength(3);
   expect(panels[1].elements).toHaveLength(2);
 });
-test("apply localization", () => {
+test("apply localization for tabs", () => {
   expect(editorLocalization.presetStrings).toBeFalsy();
   expect(editorLocalization.getString("tabs.logic")).toEqual("Logic");
   expect(editorLocalization.getString("tabs.logic", "de")).toEqual("Logik");
@@ -130,5 +130,31 @@ test("apply localization", () => {
   preset.apply();
   expect(editorLocalization.presetStrings).toBeTruthy();
   expect(editorLocalization.getString("tabs.designer")).toEqual("Designer edit");
+  editorLocalization.presetStrings = undefined;
+});
+test("apply localization for toolbox", () => {
+  expect(editorLocalization.presetStrings).toBeFalsy();
+  expect(editorLocalization.getString("qt.checkbox")).toEqual("Checkboxes");
+  expect(editorLocalization.getString("qt.checkbox", "de")).toEqual("Auswahl");
+  const json: ICreatorPresetData = {
+    localization: {
+      en: { qt: { checkbox: "Checkboxes edit" } },
+      de: { qt: { checkbox: "Auswahl edit" } }
+    }
+  };
+  const preset = new CreatorPreset(json);
+  const creator = new CreatorTester();
+
+  preset.apply(creator);
+  expect(editorLocalization.presetStrings).toBeTruthy();
+  expect(editorLocalization.getString("qt.checkbox")).toEqual("Checkboxes edit");
+  expect(editorLocalization.getString("qt.checkbox", "de")).toEqual("Auswahl edit");
+  expect(creator.toolbox.getActionById("checkbox").title).toEqual("Checkboxes edit");
+  json.localization.en.qt.text = "Text edit";
+
+  preset.apply(creator);
+  expect(editorLocalization.presetStrings).toBeTruthy();
+  expect(editorLocalization.getString("qt.text")).toEqual("Text edit");
+  expect(creator.toolbox.getActionById("text").title).toEqual("Text edit");
   editorLocalization.presetStrings = undefined;
 });

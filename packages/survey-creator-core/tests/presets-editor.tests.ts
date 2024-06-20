@@ -1,10 +1,7 @@
 import { CreatorTester } from "./creator-tester";
 import { ICreatorPresetData } from "../src/presets/presets";
 import { QuestionToolbox } from "../src/toolbox";
-import { ItemValue, QuestionDropdownModel, QuestionMatrixDynamicModel, Serializer } from "survey-core";
-import { defaultPropertyGridDefinition } from "../src/question-editor/definition";
-import { SurveyQuestionPresetPropertiesDetail } from "../src/presets/editable/presets-editable-properties";
-import { QuestionEmbeddedSurveyModel } from "../src/components/embedded-survey";
+import { ItemValue, QuestionDropdownModel, QuestionMatrixDynamicModel, QuestionRankingModel, Serializer } from "survey-core";
 import { QuestionEmbeddedCreatorModel } from "../src/components/embedded-creator";
 import { CreatorPresetEditorModel } from "../src/presets/editable/presets-editor";
 export * from "../src/presets/editable/preset-question-ranking";
@@ -546,7 +543,7 @@ test("Preset edit model, edit tabs title", () => {
   expect(item.locText.localizationName).toEqual("tabs.designer");
   expect(item.text).toEqual("Designer");
 });
-test("Change editor localization on the fly", () => {
+test("Change localization strings for tabs", () => {
   const editor = new CreatorPresetEditorModel({ tabs: { items: [] } });
   const survey = editor.model;
   survey.setValue("tabs_show", true);
@@ -559,4 +556,35 @@ test("Change editor localization on the fly", () => {
   expect(loc.en.tabs.designer).toEqual("Designer edit");
   expect(loc.en.tabs.logic).toBeFalsy();
   expect(editor.creator.tabs[0].locTitle.text).toEqual("Designer edit");
+});
+test("Change localization strings for toolbox (no categories)", () => {
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  survey.setValue("toolbox_show", true);
+  survey.setValue("toolbox_mode", "items");
+  const question = <QuestionRankingModel>survey.getQuestionByName("toolbox_items");
+  expect(question.isVisible).toBeTruthy();
+  const textItem = ItemValue.getItemByValue(question.choices, "text");
+  textItem.text = "Text item";
+  editor.applyFromSurveyModel();
+  const loc = editor.json.localization;
+  expect(loc).toBeTruthy();
+  expect(loc.en.qt.text).toEqual("Text item");
+  expect(loc.en.qt.checkbox).toBeFalsy();
+});
+test("Change localization strings for toolbox (categories)", () => {
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  survey.setValue("toolbox_show", true);
+  survey.setValue("toolbox_mode", "categories");
+  const matrix = <QuestionMatrixDynamicModel>survey.getQuestionByName("toolbox_categories");
+  matrix.visibleRows[0].showDetailPanel();
+  const question = <QuestionRankingModel>matrix.visibleRows[0].detailPanel.getQuestionByName("items");
+  const textItem = ItemValue.getItemByValue(question.choices, "radiogroup");
+  textItem.text = "Radio item";
+  editor.applyFromSurveyModel();
+  const loc = editor.json.localization;
+  expect(loc).toBeTruthy();
+  expect(loc.en.qt.radiogroup).toEqual("Radio item");
+  expect(loc.en.qt.text).toBeFalsy();
 });

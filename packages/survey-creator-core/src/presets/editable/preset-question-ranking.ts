@@ -33,6 +33,10 @@ export class PresetItemValue extends ItemValue {
 }
 
 export class QuestionPresetRankingModel extends QuestionRankingModel {
+  constructor(name: string) {
+    super(name);
+    this.itemContentComponent = "sv-preset-ranking-item-content";
+  }
   public getType(): string {
     return "presetranking";
   }
@@ -41,6 +45,12 @@ export class QuestionPresetRankingModel extends QuestionRankingModel {
   }
   protected getCssType(): string {
     return "ranking";
+  }
+  public updateModifiedText(locStrs: any): void {
+    if(!this.isVisible) return;
+    this.choices.forEach(item => {
+      (<PresetItemValue>item).updateModifiedText(locStrs);
+    });
   }
 }
 

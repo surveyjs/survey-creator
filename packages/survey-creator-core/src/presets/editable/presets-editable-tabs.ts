@@ -47,18 +47,14 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableBase {
     return val;
   }
   protected setJsonLocalizationStringsCore(model: SurveyModel, locStrs: any): void {
-    const question = <QuestionPresetRankingModel>model.getQuestionByName(this.nameItems);
-    if(!question.isVisible) return;
-    question.choices.forEach(item => {
-      <PresetItemValue>(item).updateModifiedText(locStrs);
-    });
+    (<QuestionPresetRankingModel>model.getQuestionByName(this.nameItems)).updateModifiedText(locStrs);
   }
   protected setupQuestionsCore(model: SurveyModel, creatorSetup: ICreatorPresetEditorSetup): void {
     const q = model.getQuestionByName(this.nameItems);
     if (q) {
       creatorSetup.creator.getAvailableTabNames().forEach(tab => {
         const item = new PresetItemValue(tab);
-        item.locTitle.localizationName = "tabs." + tab;
+        item.locText.localizationName = "tabs." + tab;
         q.choices.push(item);
       });
     }

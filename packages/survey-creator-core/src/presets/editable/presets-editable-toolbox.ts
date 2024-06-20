@@ -2,6 +2,7 @@ import { ItemValue, MatrixDropdownRowModelBase, QuestionMatrixDynamicModel, Ques
 import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
 import { SurveyCreatorModel } from "../../creator-base";
 import { SurveyJSON5 } from "../../json5";
+import { PresetItemValue, QuestionPresetRankingModel } from "./preset-question-ranking";
 
 export class CreatorPresetEditableToolboxDefinition extends CreatorPresetEditableBase {
   public createMainPageCore(): any {
@@ -167,7 +168,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
           detailPanelMode: "underRowSingle",
           detailElements: [
             {
-              type: "ranking",
+              type: "presetranking",
               name: "items",
               titleLocation: "hidden",
               selectToRankEnabled: true,
@@ -179,7 +180,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
           ]
         },
         {
-          type: "ranking",
+          type: "presetranking",
           name: this.nameItems,
           visibleIf: this.getTextVisibleIf(this.nameCategoriesMode, "items"),
           titleLocation: "hidden",
@@ -220,12 +221,21 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     }
   }
   protected setupOnCurrentPageCore(model: SurveyModel, creator: SurveyCreatorModel): void {
-    this.defaultItems = this.getDefaultToolboxItems(model, creator);
-    this.getQuestionItems(model).choices = this.defaultItems;
+    this.setQuestionItemsChoices(model, creator);
   }
   protected setupQuestionsCore(model: SurveyModel, creatorSetup: ICreatorPresetEditorSetup): void {
-    this.defaultItems = this.getDefaultToolboxItems(model, creatorSetup.creator);
-    this.getQuestionItems(model).choices = this.defaultItems;
+    this.setQuestionItemsChoices(model, creatorSetup.creator);
+  }
+  private setQuestionItemsChoices(model: SurveyModel, creator: SurveyCreatorModel): void {
+    this.defaultItems = this.getDefaultToolboxItems(model, creator);
+    const q = this.getQuestionItems(model);
+    q.choices = this.defaultItems;
+    this.updateRankingLocalizationName(q);
+  }
+  private updateRankingLocalizationName(question: QuestionRankingModel): void {
+    question.choices.forEach(item => {
+      item.locText.localizationName = "qt." + item.value;
+    });
   }
   protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
     const val = [];
@@ -252,13 +262,27 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
       };
     });
   }
+  protected setJsonLocalizationStringsCore(model: SurveyModel, locStrs: any): void {
+    (<QuestionPresetRankingModel>this.getQuestionItems(model)).updateModifiedText(locStrs);
+    const matrix = this.getQuestionCategories(model);
+    if(matrix.isVisible) {
+      matrix.visibleRows.forEach(row => {
+        const q = <QuestionPresetRankingModel>row.getQuestionByName("items");
+        if(!!q) {
+          q.updateModifiedText(locStrs);
+        }
+      });
+    }
+  }
   private getQuestionItems(model: SurveyModel): QuestionRankingModel {
     return <QuestionRankingModel>model.getQuestionByName(this.nameItems);
   }
   private getQuestionCategories(model: SurveyModel): QuestionMatrixDynamicModel { return <QuestionMatrixDynamicModel>model.getQuestionByName(this.nameCategories); }
   private onDetailPanelShowingChanged(row: MatrixDropdownRowModelBase): void {
     if(!row.isDetailPanelShowing) return;
-    row.getQuestionByName("items").choices = this.getRankingChoices(row);
+    const q = <QuestionRankingModel>row.getQuestionByName("items");
+    q.choices = this.getRankingChoices(row);
+    this.updateRankingLocalizationName(q);
   }
   private getDefaultToolboxItems(model: SurveyModel, creator: SurveyCreatorModel): ItemValue[] {
     const items = {};
@@ -276,10 +300,13 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     }
     const res = [];
     for(let key in items) {
-      res.push(new ItemValue(key, items[key]));
+      res.push(this.createItemValue(key, items[key]));
     }
 
     return res;
+  }
+  private createItemValue(val: string, title: string): ItemValue {
+    return new PresetItemValue(val, title);
   }
   private getRankingChoices(row: MatrixDropdownRowModelBase): Array<ItemValue> {
     const res = [];
@@ -298,7 +325,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     }
     this.defaultItems.forEach(item => {
       if(!usedItems[item.id]) {
-        res.push(new ItemValue(item.id, item.title));
+        res.push(this.createItemValue(item.id, item.title));
       }
     });
     return res;
