@@ -15,13 +15,13 @@ export class CreatorPresetEditableToolboxDefinition extends CreatorPresetEditabl
         {
           type: "boolean",
           name: this.nameShow,
-          title: "Update existing toolbox items and create new items"
+          title: "Would you like to update existing toolbox items and create new ones?"
         },
         {
           type: "matrixdynamic",
           name: this.nameMatrix,
           visibleIf: this.getBoolVisibleIf(this.nameShow),
-          title: "Define items definition",
+          title: "Please define item definitions.",
           rowCount: 0,
           addRowText: "Add New Item Defintion",
           columns: [

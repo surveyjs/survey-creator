@@ -13,12 +13,12 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableBase {
         {
           type: "boolean",
           name: nameShow,
-          title: "Do you want to setup Creator tabs?",
+          title: "Would you like to set up Creator tabs?",
         },
         {
           type: "presetranking",
           name: this.nameItems,
-          title: "Please order the Creator tabs",
+          title: "Please arrange the Creator tabs.",
           selectToRankEnabled: true,
           minSelectedChoices: 1,
           selectToRankAreasLayout: "vertical",
