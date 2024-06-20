@@ -162,7 +162,6 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
           visibleIf: this.getTextVisibleIf(this.nameCategoriesMode, "categories"),
           minRowCount: 1,
           allowRowsDragAndDrop: true,
-          showHeader: true,
           addRowText: "Add new Category",
           columns: [
             { cellType: "text", name: "category", title: "Category Name", isUnique: true, isRequired: true },
@@ -259,15 +258,35 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
         }
       }
     });
-    categories.forEach(item => {
-      item.title = this.getCategoryTitle(item.category);
-    });
     model.setValue(this.nameCategories, categories);
     this.getQuestionCategories(model).visibleRows.forEach(row => {
       row.onDetailPanelShowingChanged = () => {
         this.onDetailPanelShowingChanged(row);
       };
     });
+    this.updateShowCategoriesTitlesElements(model);
+    const matrix = this.getQuestionCategories(model);
+    matrix.visibleRows.forEach(row => {
+      const category = row.getValue("category");
+      const defaultTitle = this.getCategoryTitle(category);
+      if(!!defaultTitle) {
+        row.getQuestionByName("category").readOnly = true;
+      }
+      if(!row.getValue("title")) {
+        row.setValue("title", defaultTitle);
+      }
+    });
+  }
+  protected updateOnValueChangedCore(model: SurveyModel, name: string): void {
+    if(name === this.nameShowCategoryTitles) {
+      this.updateShowCategoriesTitlesElements(model);
+    }
+  }
+  private updateShowCategoriesTitlesElements(model: SurveyModel): void {
+    const val = model.getValue(this.nameShowCategoryTitles) === true;
+    const matrix = this.getQuestionCategories(model);
+    matrix.showHeader = val;
+    matrix.getColumnByName("title").visible = val;
   }
   private locCategoriesName = "toolboxCategories";
   private getCategoryTitle(name: string): string {

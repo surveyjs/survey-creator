@@ -596,11 +596,28 @@ test("Change localization strings for toolbox categories", () => {
   const matrix = <QuestionMatrixDynamicModel>survey.getQuestionByName("toolbox_categories");
   const row1 = matrix.visibleRows[0];
   expect(row1.getQuestionByName("category").value).toBe("choice");
+  expect(row1.getQuestionByName("category").isReadOnly).toBeTruthy();
   expect(row1.getQuestionByName("title").value).toBe("Choice Questions");
+  expect(row1.getQuestionByName("title").isReadOnly).toBeFalsy();
   row1.getQuestionByName("title").value = "Choice Questions edit";
   editor.applyFromSurveyModel();
   const loc = editor.json.localization;
   expect(loc).toBeTruthy();
   expect(loc.en.toolboxCategories.text).toBeFalsy();
   expect(loc.en.toolboxCategories.choice).toEqual("Choice Questions edit");
+});
+test("Toolbox categories, show header and showcolumn title column if show categories", () => {
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  survey.setValue("toolbox_show", true);
+  survey.setValue("toolbox_mode", "categories");
+  const matrix = <QuestionMatrixDynamicModel>survey.getQuestionByName("toolbox_categories");
+  expect(matrix.showHeader).toBeFalsy();
+  expect(matrix.getColumnByName("title").visible).toBeFalsy();
+  survey.setValue("toolbox_showCategoryTitles", true);
+  expect(matrix.showHeader).toBeTruthy();
+  expect(matrix.getColumnByName("title").visible).toBeTruthy();
+  survey.setValue("toolbox_showCategoryTitles", false);
+  expect(matrix.showHeader).toBeFalsy();
+  expect(matrix.getColumnByName("title").visible).toBeFalsy();
 });
