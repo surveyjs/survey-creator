@@ -3663,7 +3663,7 @@ export function initializeDesignTimeSurveyModel(model: any, creator: SurveyCreat
       opt.data = getItemValueWrapperComponentData(opt.item, opt.element, creator);
     }
     if(opt.wrapperName === "string" && !creator.readOnly && isStringEditable(opt.element, opt.data.name)) {
-      opt.data = { creator: creator, element: opt.elemenent, locStr: opt.data };
+      opt.data = { creator: creator, element: opt.element, locStr: opt.data };
     }
     opt.data = opt.data || data;
   });
