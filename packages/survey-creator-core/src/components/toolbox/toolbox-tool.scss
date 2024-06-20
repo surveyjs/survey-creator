@@ -12,6 +12,7 @@
   .sv-svg-icon {
     display: block;
     height: calcSize(3);
+    pointer-events: none;
   }
 }
 
