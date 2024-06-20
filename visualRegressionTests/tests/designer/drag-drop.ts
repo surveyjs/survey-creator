@@ -492,7 +492,7 @@ test("Drag Drop to Multiline from Toolbox", async (t) => {
     await t
       .hover(RatingToolboxItem)
       .dragToElement(RatingToolboxItem, Question2, { speed: 0.5, destinationOffsetX: -1 })
-      .hover(Question2);
+      .hover(Selector("body"), { offsetX: 0, offsetY: 0 });
     await takeElementScreenshot("drag-drop-to-multiline-from-toolbox.png", Page1, t, comparer);
   });
 });
