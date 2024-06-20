@@ -177,13 +177,19 @@ export class PreviewViewModel extends Base {
     const pages: Array<IAction> = [];
     for (let i: number = 0; i < this.survey.pages.length; i++) {
       const page: PageModel = this.survey.pages[i];
-      pages.push({
+      const pageItem: IAction = {
         id: page.name,
         data: page,
         title: this.getPageTitle(page),
         enabled: this.enableInvisiblePages || page.isVisible,
         visible: true
-      });
+      };
+      if (!page.isVisible) {
+        pageItem.css = "svc-page-invisible";
+        pageItem.markerIconName = "icon-invisible-items";
+        pageItem.markerIconSize = 24;
+      }
+      pages.push(pageItem);
     }
     this.pageListItems = pages;
   }
