@@ -154,12 +154,13 @@ test("Toolbox tool pressed state", async (t) => {
     await changeToolboxSearchEnabled(false);
     await t.resizeWindow(2560, 1440);
     const toolboxTool = Selector(".svc-toolbox__tool");
+    const toolboxToolAction = Selector(".svc-toolbox__tool > .sv-action__content");
 
-    await t.dispatchEvent(toolboxTool, "pointerdown");
+    await t.dispatchEvent(toolboxToolAction, "pointerdown");
 
     await takeElementScreenshot("toolbox-tool-pressed-state.png", toolboxTool, t, comparer);
 
-    await t.dispatchEvent(toolboxTool, "pointerup");
+    await t.dispatchEvent(toolboxToolAction, "pointerup");
     await takeElementScreenshot("toolbox-tool-normal-state.png", toolboxTool, t, comparer);
   });
 });
