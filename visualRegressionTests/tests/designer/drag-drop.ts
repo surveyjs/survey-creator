@@ -487,12 +487,13 @@ test("Drag Drop to Multiline from Toolbox", async (t) => {
     await setJSON(json);
 
     const Question2 = Selector("[data-name=\"question2\"]");
+    const Question4 = Selector("[data-name=\"question4\"]");
     const Page1 = Selector("[data-sv-drop-target-survey-element='page1']");
 
     await t
       .hover(RatingToolboxItem)
       .dragToElement(RatingToolboxItem, Question2, { speed: 0.5, destinationOffsetX: -1 })
-      .hover(Selector("body"), { offsetX: 0, offsetY: 0 });
+      .hover(Question4);
     await takeElementScreenshot("drag-drop-to-multiline-from-toolbox.png", Page1, t, comparer);
   });
 });
