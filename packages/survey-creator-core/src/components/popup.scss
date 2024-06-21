@@ -65,6 +65,7 @@ survey-creator:not(.svd-simulator-content) {
 
     .sv-list__input {
       color: var(--ctr-list-search-text-color-placeholder, $foreground-dim-light);
+      background-color: transparent;
     }
 
     .sv-list__filter-icon use {
