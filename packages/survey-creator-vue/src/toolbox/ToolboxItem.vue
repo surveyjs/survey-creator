@@ -14,15 +14,15 @@
         :size="24"
         :title="item.tooltip"
       ></sv-svg-icon>
-      <span v-if="isCompact" class="svc-toolbox__item-banner svc-item__banner">
-        <sv-svg-icon
-          :iconName="item.iconName"
-          :size="24"
-          :title="item.tooltip"
-          class="svc-toolbox__item-icon"
-        ></sv-svg-icon>
-        <span class="svc-toolbox__item-title">{{ item.title }}</span>
-      </span>
+    </span>
+    <span v-if="isCompact" class="svc-toolbox__item-banner svc-item__banner">
+      <sv-svg-icon
+        :iconName="item.iconName"
+        :size="24"
+        :title="item.tooltip"
+        class="svc-toolbox__item-icon"
+      ></sv-svg-icon>
+      <span class="svc-toolbox__item-title">{{ item.title }}</span>
     </span>
     <span v-if="!isCompact" class="svc-toolbox__item-title">
       {{ item.title }}
