@@ -115,6 +115,7 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
         .append("svc-toolbox__tool--hovered", this.isHovered)
         .append("svc-toolbox__tool--pressed", this.isPressed)
         .append("svc-toolbox__tool--has-icon", !!this.iconName)
+        .append("sv-action--hidden", !this.isVisible)
         .toString();
     }) as any;
   }
@@ -330,10 +331,14 @@ export class QuestionToolbox
   }
 
   private initDotsItem() {
-    this.dotsItem.css = new CssClassBuilder()
-      .append("svc-toolbox__tool")
-      .append(this.dotsItem.css)
-      .toString();
+    const originalCss = this.dotsItem.css;
+    this.dotsItem.css = new ComputedUpdater(() => {
+      return new CssClassBuilder()
+        .append("svc-toolbox__tool")
+        .append(originalCss)
+        .append("sv-action--hidden", !this.dotsItem.isVisible)
+        .toString();
+    }) as any;
 
     this.dotsItem.popupModel.horizontalPosition = "right";
     this.dotsItem.popupModel.verticalPosition = "top";

@@ -1,7 +1,6 @@
 <template>
   <div
-    class="svc-toolbox__tool"
-    :class="toolboxCss"
+    :class="item.css"
   >
     <div
       class="svc-toolbox__category-separator"
@@ -42,9 +41,4 @@ const model = useCreatorModel(
   }
 );
 useBase(() => props.item);
-const toolboxCss = computed(
-  () =>
-    ((props.item.classNames || "") + " " ?? "") +
-    (!props.item.isVisible ? "sv-action--hidden" : "")
-);
 </script>

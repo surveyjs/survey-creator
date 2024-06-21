@@ -24,7 +24,7 @@ export class ToolboxToolComponent extends CreatorModelComponent<Action> {
     return this.item;
   }
   public get itemCssClasses() {
-    return (this.item as QuestionToolboxItem).classNames;
+    return (this.item as QuestionToolboxItem).css;
   }
   protected override getPropertiesToUpdateSync(): string[] {
     return ["mode"];

@@ -57,7 +57,6 @@ export class SurveyCreatorToolboxTool extends CreatorModelElement<
 
   render(): JSX.Element {
     const item = this.item;
-    const className = "svc-toolbox__tool " + (item.classNames || "") + (item.isVisible ? "" : " sv-action--hidden");
     const itemComponent = ReactElementFactory.Instance.createElement(
       item.component || "svc-toolbox-item",
       {
@@ -68,7 +67,7 @@ export class SurveyCreatorToolboxTool extends CreatorModelElement<
       }
     );
     return (
-      <div className={className} key={item.id}>
+      <div className={item.css} key={item.id}>
         {(item.needSeparator && !this.creator.toolbox.showCategoryTitles) ? (
           <div className="svc-toolbox__category-separator"></div>
         ) : null}

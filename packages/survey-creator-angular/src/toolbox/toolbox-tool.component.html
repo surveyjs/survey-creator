@@ -1,5 +1,5 @@
 <ng-template #template>
-    <div [class.sv-action--hidden]="!item.isVisible" [class]="itemCssClasses">
+    <div [class]="itemCssClasses">
         <div class="svc-toolbox__category-separator" *ngIf="item.needSeparator && !creator.toolbox.showCategoryTitles">
         </div>
         <div class="sv-action__content" (pointerdown)="model.onPointerDown($event)"
