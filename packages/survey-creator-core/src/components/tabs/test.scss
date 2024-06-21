@@ -78,6 +78,10 @@ svc-tab-test {
   }
 }
 
+.svc-page-invisible .sv-list-item__marker-icon {
+  padding: 0;
+}
+
 .svc-test-tab__content .sd-body--empty {
   font-family: $font-family;
   font-style: normal;

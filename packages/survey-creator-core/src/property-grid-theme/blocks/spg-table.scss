@@ -97,6 +97,7 @@
   text-overflow: ellipsis;
   overflow: hidden;
   max-width: 100px;
+  padding-left: calcSize(1);
 
   span {
     display: none;
