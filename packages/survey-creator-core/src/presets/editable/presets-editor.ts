@@ -13,10 +13,10 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
   private creatorValue: SurveyCreatorModel;
   private modelValue: SurveyModel;
   private navigationBarValue: ActionContainer;
-  constructor(json?: ICreatorPresetData, creator?: SurveyCreatorModel) {
+  constructor(json?: ICreatorPresetData) {
     super();
     this.presetValue = new CreatorPreset(json);
-    this.creatorValue = creator || this.createCreator({});
+    this.creatorValue = this.createCreator({});
     this.modelValue = this.createModel();
     this.locale = "en";
     this.navigationBarValue = new ActionContainer();
@@ -110,8 +110,8 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     if(!this.validateEditableModel(this.model)) return false;
     this.preset.setJson(this.getJsonFromSurveyModel());
     this.model.setValue("json_result", JSON.stringify(this.preset.getJson(), null, 2));
+    this.creatorValue = this.createCreator({});
     this.preset.apply(this.creator);
-    this.creator.locStrsChanged();
     return true;
   }
   public getJsonFromSurveyModel(): any {

@@ -294,6 +294,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     return editorLocalization.getString(LocCategoriesName + "." + name);
   }
   protected setJsonLocalizationStringsCore(model: SurveyModel, locStrs: any): void {
+    if(model.getValue(this.nameCategoriesShow) !== true) return;
     (<QuestionPresetRankingModel>this.getQuestionItems(model)).updateModifiedText(locStrs);
     const matrix = this.getQuestionCategories(model);
     if(matrix.isVisible) {

@@ -52,8 +52,7 @@ test("Preset edit model, page component", () => {
   expect(resJson2).toEqual({});
 });
 test("Preset edit model, tabs page with creator, default items", () => {
-  const creator = new CreatorTester();
-  const editor = new CreatorPresetEditorModel({}, creator);
+  const editor = new CreatorPresetEditorModel({});
   const survey = editor.model;
   const boolQuestion = survey.getQuestionByName("tabs_show");
   boolQuestion.value = true;
@@ -64,6 +63,7 @@ test("Preset edit model, tabs page with creator, default items", () => {
   const activeTabQuestion = survey.getQuestionByName("tabs_activeTab");
   activeTabQuestion.value = "logic";
   editor.applyFromSurveyModel();
+  const creator = editor.creator;
   expect(creator.tabs).toHaveLength(2);
   expect(creator.tabs[0].id).toEqual("test");
   expect(creator.tabs[1].id).toEqual("logic");
@@ -128,6 +128,24 @@ test("Preset edit model, toolbox definition page, validate name/json", () => {
   expect(editor.applyFromSurveyModel()).toBeTruthy();
   expect(nameQuestion.errors).toHaveLength(0);
   expect(jsonQuestion.errors).toHaveLength(0);
+});
+test("Preset edit model, page component", () => {
+  const editor = new CreatorPresetEditorModel({ tabs: { items: [] } });
+  expect(editor.creator.tabs).toHaveLength(3);
+  const survey = editor.model;
+  const boolQuestion = survey.getQuestionByName("tabs_show");
+  const itemsQuestion = survey.getQuestionByName("tabs_items");
+  expect(itemsQuestion.isVisible).toBeFalsy();
+  boolQuestion.value = true;
+  itemsQuestion.value = ["designer", "logic"];
+  itemsQuestion.choices[0].text = "Designer Edit";
+  expect(editor.applyFromSurveyModel()).toBeTruthy();
+  expect(editor.creator.tabs).toHaveLength(2);
+  expect(editor.creator.tabs[0].title).toEqual("Designer Edit");
+  boolQuestion.value = false;
+  expect(editor.applyFromSurveyModel()).toBeTruthy();
+  expect(editor.creator.tabs).toHaveLength(3);
+  expect(editor.creator.tabs[0].title).toEqual("Designer");
 });
 test("Preset edit model, toolbox definition page, default values", () => {
   const presetJson = {
@@ -325,7 +343,7 @@ test("Preset edit model, property grid, apply", () => {
   survey.setValue("propertyGrid_definition_show", true);
   survey.currentPage = survey.getPageByName("page_propertyGrid_definition");
   survey.setValue("propertyGrid_definition_selector", "survey");
-  const propGridCreator = getPropGridCreator(survey);
+  let propGridCreator = getPropGridCreator(survey);
   propGridCreator.JSON = {
     elements: [
       { type: "panel", "name": "general",
@@ -344,7 +362,6 @@ test("Preset edit model, property grid, apply", () => {
   };
   propGridCreator.survey.getPanelByName("second1").name = "second";
   expect(editor.applyFromSurveyModel()).toBeTruthy();
-  const creator = editor.creator;
   const propDef = editor.preset.getJson().propertyGrid?.definition;
   const surveyProps = propDef?.classes["survey"];
   expect(propDef?.autoGenerateProperties).toStrictEqual(false);
@@ -379,6 +396,7 @@ test("Preset edit model, property grid, apply", () => {
   const panelBaseProps = propDef?.classes["panelbase"];
   expect(panelBaseProps?.tabs).toHaveLength(0);
   expect(panelBaseProps?.properties).toHaveLength(3);
+  const creator = editor.creator;
   creator.JSON = { pages: [{ name: "page1" }] };
   creator.selectElement(creator.survey.pages[0]);
   const panels2 = creator.propertyGrid.getAllPanels();

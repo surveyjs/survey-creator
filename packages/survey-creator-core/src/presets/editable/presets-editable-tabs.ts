@@ -47,6 +47,7 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableBase {
     return val;
   }
   protected setJsonLocalizationStringsCore(model: SurveyModel, locStrs: any): void {
+    if(!model.getValue(this.nameShow)) return;
     (<QuestionPresetRankingModel>model.getQuestionByName(this.nameItems)).updateModifiedText(locStrs);
   }
   protected setupQuestionsCore(model: SurveyModel, creatorSetup: ICreatorPresetEditorSetup): void {

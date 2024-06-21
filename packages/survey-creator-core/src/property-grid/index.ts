@@ -533,7 +533,9 @@ export class PropertyJSONGenerator {
             css.questionWrapper = "spg-boolean-wrapper--overriding";
           };
           const overridingQuestion = this.createOverridingQuestion(panel, q, prop.overridingProperty);
-          q.parent.addElement(overridingQuestion, q.parent.elements.indexOf(q) + 1);
+          if(!!overridingQuestion) {
+            q.parent.addElement(overridingQuestion, q.parent.elements.indexOf(q) + 1);
+          }
         }
       }
       q.descriptionLocation = "hidden";
@@ -568,6 +570,7 @@ export class PropertyJSONGenerator {
   }
   private createOverridingQuestion(panel: PanelModelBase, question: Question, overridingProp: string): Question {
     const linkValue = <QuestionLinkValueModel>Serializer.createClass("linkvalue");
+    if(!linkValue) return null;
     linkValue.name = question.name + "_" + "overridingProperty";
     linkValue.startWithNewLine = false;
     linkValue.property = question.property;

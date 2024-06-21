@@ -1,6 +1,5 @@
 import { EventBase } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
-import { editorLocalization } from "../editorLocalization";
 
 export interface ICreatorPreset {
   setJson(json: any): void;
@@ -25,13 +24,7 @@ export abstract class CreatorPresetBase implements ICreatorPreset {
       this.applyCore(creator);
       this.children.forEach(item => item.apply(creator));
     }
-    this.applyLocalization();
     this.onApplied.fire(this, {});
-  }
-  public applyLocalization(): void {
-    const strs = this.json?.localization;
-    if(!strs) return;
-    editorLocalization.presetStrings = JSON.parse(JSON.stringify(strs));
   }
   public abstract getPath(): string;
   protected applyCore(creator: SurveyCreatorModel): void { }
