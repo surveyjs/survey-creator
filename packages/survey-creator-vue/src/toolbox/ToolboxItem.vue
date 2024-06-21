@@ -8,21 +8,21 @@
     @click="viewModel.click($event)"
     v-key2click
   >
-    <sv-svg-icon v-if="item.iconName"
-      :iconName="item.iconName"
-      :size="24"
-      :title="item.tooltip"
-    ></sv-svg-icon>
-    <span v-if="isCompact" class="svc-toolbox__item-banner svc-item__banner">
-      <span class="svc-toolbox__item-container">
+    <span class="svc-toolbox__item-container">
+      <sv-svg-icon v-if="item.iconName"
+        :iconName="item.iconName"
+        :size="24"
+        :title="item.tooltip"
+      ></sv-svg-icon>
+      <span v-if="isCompact" class="svc-toolbox__item-banner svc-item__banner">
         <sv-svg-icon
           :iconName="item.iconName"
           :size="24"
           :title="item.tooltip"
           class="svc-toolbox__item-icon"
         ></sv-svg-icon>
+        <span class="svc-toolbox__item-title">{{ item.title }}</span>
       </span>
-      <span class="svc-toolbox__item-title">{{ item.title }}</span>
     </span>
     <span v-if="!isCompact" class="svc-toolbox__item-title">
       {{ item.title }}
