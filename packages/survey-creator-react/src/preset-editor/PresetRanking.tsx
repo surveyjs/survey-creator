@@ -19,16 +19,14 @@ export class PresetLocStringEditor extends SurveyLocStringEditor {
 
 export class SurveyQuestionPresetRankingItemContent extends SurveyQuestionRankingItemContent {
   protected renderElement(): JSX.Element {
-    const handlePointerDown = (event: any) => {
-      event.stopPropagation();
-    };
-    const handlePointerUp = (event: any) => {
+    const doStopPropagation = (event: any) => {
       event.stopPropagation();
     };
     const style = { overflow: "inherit" };
     return <div className={this.cssClasses.controlLabel} style={style}
-      onPointerDown={handlePointerDown}
-      onPointerUp={handlePointerUp}>
+      onPointerDown={doStopPropagation}
+      onPointerUp={doStopPropagation}
+      onKeyDown={doStopPropagation}>
       <PresetLocStringEditor locStr={this.item.locText} />
     </div>;
   }
