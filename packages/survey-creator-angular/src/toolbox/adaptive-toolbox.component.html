@@ -1,7 +1,7 @@
 <ng-template #template>
-  <div [class]="model.classNames" (scroll)="model.onScroll(model, $event)" #container>
+  <div [class]="model.classNames" #container>
     <div (focusout)="model.focusOut($event)" class="svc-toolbox__panel">
-      <div class="svc-toolbox__scroller">
+      <div class="svc-toolbox__scroller" (scroll)="model.onScroll(model, $event)">
         <div *ngIf="model.showSearch" class="svc-toolbox__search-container">
           <ng-container *ngIf="model.isCompactRendered">
           <svc-toolbox-tool [creator]="creator" [item]="searchItem" [parentModel]="model" [isCompact]="model.isCompactRendered"></svc-toolbox-tool>

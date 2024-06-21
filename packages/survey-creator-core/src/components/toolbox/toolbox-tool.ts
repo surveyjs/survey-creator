@@ -39,7 +39,6 @@ export class ToolboxToolViewModel extends Base {
   public onPointerDown(pointerDownEvent) {
     pointerDownEvent.stopPropagation();
 
-    this.hidePopup();
     if (!this.allowAdd) return;
     if (this.item.id.indexOf("dotsItem-id") === 0) return true; //toolbox responsive popup
     this.dragOrClickHelper.onPointerDown(pointerDownEvent);
@@ -50,6 +49,7 @@ export class ToolboxToolViewModel extends Base {
   }
 
   private onPointerUp = (pointerUpEvent) => {
+    this.hidePopup();
     this.toolboxItem.isPressed = false;
     document.removeEventListener("pointerup", this.onPointerUp);
   }

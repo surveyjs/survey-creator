@@ -1,7 +1,8 @@
 <div
-  data-bind="class: $data.toolbox.classNames, event:{ scroll: function(model, event) { $data.toolbox.onScroll(model, event); return true; } }">
+  data-bind="class: $data.toolbox.classNames">
   <div data-bind="event: { focusout: (_, e)=>$data.toolbox.focusOut(e)  }" class="svc-toolbox__panel">
-    <div class="svc-toolbox__scroller">
+    <div class="svc-toolbox__scroller"
+      data-bind="event:{ scroll: function(model, event) { $data.toolbox.onScroll(model, event); return true; } }">
       <!-- ko if: $data.toolbox.showSearch-->
       <div class="svc-toolbox__search-container">
         <!-- ko if: $data.toolbox.isCompactRendered-->

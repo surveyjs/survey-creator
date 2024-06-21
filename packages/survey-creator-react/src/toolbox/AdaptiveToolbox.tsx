@@ -51,9 +51,9 @@ export class AdaptiveToolbox extends Toolbox {
     const search = this.toolbox.showSearch ? this.renderSearch() : null;
     const placeholder = this.toolbox.showPlaceholder ? <div className="svc-toolbox__placeholder">{this.toolbox.toolboxNoResultsFound}</div> : null;
     return (
-      <div ref={this.rootRef} className={this.toolbox.classNames} onScroll={(event) => this.toolbox.onScroll(this.toolbox, event)}>
+      <div ref={this.rootRef} className={this.toolbox.classNames}>
         <div onBlur={(e) => this.toolbox.focusOut(e)} className="svc-toolbox__panel">
-          <div className="svc-toolbox__scroller">
+          <div className="svc-toolbox__scroller" onScroll={(event) => this.toolbox.onScroll(this.toolbox, event)}>
             {search}
             {placeholder}
             <div className="svc-toolbox__container">

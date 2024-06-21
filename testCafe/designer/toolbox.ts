@@ -411,7 +411,7 @@ test("toolbox subTypes: add items by click", async (t) => {
 
     .click(getSubToolboxItemByText("Password"))
     .expect(Selector(".svc-question__content").filterVisible().count).eql(2)
-    .expect(toolboxSubTypesPopup.visible).notOk();
+    .expect(toolboxSubTypesPopup.visible).ok();
 
   const expectedJson = {
     "logoPosition": "right",
@@ -446,7 +446,7 @@ test("toolbox subTypes: hide subTypes popup", async (t) => {
     .wait(400)
     .expect(toolboxSubTypesPopup.visible).ok()
 
-    .scrollBy(".svc-toolbox", 2, 100)
+    .scrollBy(".svc-toolbox__scroller", 2, 100)
     .expect(toolboxSubTypesPopup.visible).notOk();
 });
 
