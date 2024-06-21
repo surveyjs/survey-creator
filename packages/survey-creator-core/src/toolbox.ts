@@ -16,7 +16,8 @@ import {
   PopupModel,
   CssClassBuilder,
   HashTable,
-  surveyLocalization
+  surveyLocalization,
+  ComputedUpdater
 } from "survey-core";
 import { SurveyCreatorModel, toolboxLocationType } from "./creator-base";
 import { editorLocalization, getLocString } from "./editorLocalization";
@@ -104,6 +105,18 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
     if (!this.id) {
       this.id = this.name;
     }
+
+    const originalCss = this.css;
+    this.css = new ComputedUpdater(() => {
+      return new CssClassBuilder()
+        .append("svc-toolbox__tool")
+        .append("svc-toolbox__tool--action")
+        .append(originalCss)
+        .append("svc-toolbox__tool--hovered", this.isHovered)
+        .append("svc-toolbox__tool--pressed", this.isPressed)
+        .append("svc-toolbox__tool--has-icon", !!this.iconName)
+        .toString();
+    }) as any;
   }
   className: string;
   iconName: string;
@@ -124,17 +137,6 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
     return !!type && Serializer.isDescendantOf(type, "panelbase");
   }
 
-  public get classNames(): string {
-    return new CssClassBuilder()
-      .append("svc-toolbox__tool")
-      .append("svc-toolbox__tool--action")
-      .append(this.css)
-      .append("svc-toolbox__tool--hovered", this.isHovered)
-      .append("svc-toolbox__tool--pressed", this.isPressed)
-      .append("svc-toolbox__tool--has-icon", !!this.iconName)
-      .toString();
-  }
-
   public getArea(target: HTMLElement): HTMLElement {
     return target.closest("#scrollableDiv-designer") as HTMLElement;
   }
@@ -143,18 +145,6 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
     if (!text) return;
     const textLowerCase = text.toLowerCase();
     return this.title.toLowerCase().indexOf(textLowerCase) >= 0 || this.name.toLowerCase().indexOf(textLowerCase) >= 0;
-  }
-}
-
-export class QuestionToolboxDotsItem extends Action {
-  constructor(private item: IAction) {
-    super(item);
-  }
-  public get classNames(): string {
-    return new CssClassBuilder()
-      .append("svc-toolbox__tool")
-      .append(this.css)
-      .toString();
   }
 }
 
@@ -322,9 +312,9 @@ export class QuestionToolbox
     super();
     this.searchManager.isVisible = this.searchEnabled;
     this.searchManager.toolbox = this;
-    this.searchItem = new QuestionToolboxDotsItem({
+    this.searchItem = new Action({
       id: "searchItem-id",
-      css: "svc-toolbox__search-button",
+      css: "svc-toolbox__tool svc-toolbox__search-button",
       innerCss: "sv-dots__item",
       iconName: "icon-search",
       component: "sv-action-bar-item",
@@ -340,7 +330,11 @@ export class QuestionToolbox
   }
 
   private initDotsItem() {
-    this.dotsItem = new QuestionToolboxDotsItem(this.dotsItem);
+    this.dotsItem.css = new CssClassBuilder()
+      .append("svc-toolbox__tool")
+      .append(this.dotsItem.css)
+      .toString();
+
     this.dotsItem.popupModel.horizontalPosition = "right";
     this.dotsItem.popupModel.verticalPosition = "top";
     this.dragOrClickHelper = new DragOrClickHelper((pointerDownEvent: PointerEvent, currentTarget: HTMLElement, itemModel: any) => {
