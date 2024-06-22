@@ -48,6 +48,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     this.creator.locale = val;
     this.model.locale = val;
   }
+  public getLocale(): string { return this.locale || "en"; }
   public get json(): ICreatorPresetData {
     return this.preset.getJson();
   }
@@ -95,6 +96,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     editablePresets.forEach(item => item.setupQuestions(model, this));
     const json = this.preset.getJson() || {};
     editablePresets.forEach(item => item.setupQuestionsValue(model, json[item.path], this.creator));
+    this.updateJsonLocalizationStrings(editablePresets);
     model.onCurrentPageChanged.add((sender, options) => {
       editablePresets.forEach(item => item.setupOnCurrentPage(model, this.creator));
     });
@@ -116,18 +118,24 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
   }
   public getJsonFromSurveyModel(): any {
     const res: ICreatorPresetData = {};
-    const locStrs: any = {};
     this.model.editablePresets.forEach(preset => {
       const val = preset.getJsonValue(this.model);
       if(!!val) {
         res[preset.path] = val;
       }
+    });
+    this.getJsonLocalizationStrings(res);
+    return res;
+  }
+  private getJsonLocalizationStrings(res: ICreatorPresetData): void {
+    const locStrs: any = {};
+    this.model.editablePresets.forEach(preset => {
       preset.setJsonLocalizationStrings(this.model, locStrs);
     });
     if(this.json && !!this.json.localization) {
       res.localization = JSON.parse(JSON.stringify(this.json.localization));
     }
-    const locale = this.locale || "en";
+    const locale = this.getLocale();
     if(Object.keys(locStrs).length > 0) {
       if(!res.localization) {
         res.localization = {};
@@ -143,7 +151,14 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
         }
       }
     }
-    return res;
+  }
+  private updateJsonLocalizationStrings(editablePresets: Array<CreatorPresetEditableBase>): void {
+    const strs = this.json && !!this.json.localization ? JSON.parse(JSON.stringify(this.json.localization)) : {};
+    const locale = this.getLocale();
+    const locs = strs[locale] || {};
+    editablePresets.forEach(preset => {
+      preset.updateJsonLocalizationStrings(locs);
+    });
   }
   private validateEditableModel(model: SurveyModel): boolean {
     if(!model.validate(true, true)) return false;

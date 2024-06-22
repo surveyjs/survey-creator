@@ -74,41 +74,8 @@ export class SurveyQuestionPresetPropertiesDetail {
   }
   public getAllPropertiesNames(): Array<string> { return this.allPropertiesNames; }
   public get propertyGrid(): PropertyGridModel { return this.propertyGridValue; }
-  public getRows(): Array<any> {
-    const rows = [];
-    this.properties.getTabs().forEach(tab => {
-      const row: any = { name: tab.name, items: [] };
-      tab.properties.forEach(prop => {
-        row.items.push(prop.name);
-      });
-      rows.push(row);
-    });
-    return rows;
-  }
-  public getRankingChoices(matrix: QuestionMatrixDynamicModel, row: MatrixDropdownRowModelBase): Array<ItemValue> {
-    const val = matrix.value;
-    const usedItems = {};
-    if(Array.isArray(val)) {
-      const rowIndex = matrix.visibleRows.indexOf(row);
-      for(let i = 0; i < val.length; i ++) {
-        const items = val[i].items;
-        if(i !== rowIndex && Array.isArray(items)) {
-          items.forEach(v => usedItems[v] = true);
-        }
-      }
-    }
-    const res = [];
-    this.allPropertiesNames.forEach(name => {
-      if(!usedItems[name]) {
-        res.push(new ItemValue(name, editorLocalization.getPropertyNameInEditor(this.className, name)));
-      }
-    });
-    return res;
-  }
-  public updatePropertyGrid(val: Array<any>): void {
-    const definition: ISurveyPropertyGridDefinition = { autoGenerateProperties: false, classes: {} };
-    this.updateCurrentJsonCore(definition.classes, val);
-    this.propertyGrid.setPropertyGridDefinition(definition);
+  public getPropertyClassName(propName: string): string {
+    return this.propertiesHash[propName];
   }
   public updateCurrentJson(val: Array<any>): void {
     this.updateCurrentJsonCore(this.currentJson.classes, val);
@@ -184,12 +151,12 @@ export class SurveyQuestionPresetPropertiesDetail {
 
 export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEditableBase {
   private currentJson: ISurveyPropertyGridDefinition;
+  private localeStrings: any;
   private currentProperties: SurveyQuestionPresetPropertiesDetail;
   private currentClassName: string;
   private propCreatorValue: SurveyCreatorModel;
   public get propCreator(): SurveyCreatorModel { return this.propCreatorValue; }
   public createMainPageCore(): any {
-    const parent = (<CreatorEditablePresetPropertyGrid>this.parent);
     return {
       title: "Property Grid categories",
       elements: [
@@ -242,6 +209,15 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     this.setupPropertyCreator();
     this.getPropertyCreatorQuestion(model).embeddedCreator = this.propCreator;
     settings.propertyGrid.enableSearch = oldSearchValue;
+  }
+  protected setJsonLocalizationStringsCore(model: SurveyModel, locStrs: any): void {
+    const pe = this.localeStrings.pe;
+    if(Object.keys(pe).length > 0) {
+      locStrs.pe = pe;
+    }
+  }
+  protected updateJsonLocalizationStringsCore(locStrs: any): void {
+    this.localeStrings = { pe: locStrs.pe || {} };
   }
   private isPropCreatorChanged: boolean;
   protected updateOnValueChangedCore(model: SurveyModel, name: string): void {
@@ -326,6 +302,17 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     creator.showSaveButton = false;
     creator.onModified.add((sender, options) => {
       this.isPropCreatorChanged = true;
+      if(options.name === "title" && (<any>options.target)?.isQuestion) {
+        const pe = this.localeStrings.pe;
+        const propName = (<any>options.target).name;
+        const className = this.currentProperties.getPropertyClassName(propName);
+        if(!!className) {
+          if(!pe[className]) {
+            pe[className] = {};
+          }
+          pe[className][propName] = options.newValue;
+        }
+      }
     });
     creator.isAutoSave = false;
     creator.showTabsDefault = false;

@@ -1,4 +1,3 @@
-import { CreatorTester } from "./creator-tester";
 import { ICreatorPresetData } from "../src/presets/presets";
 import { QuestionToolbox } from "../src/toolbox";
 import { ItemValue, QuestionDropdownModel, QuestionMatrixDynamicModel, QuestionRankingModel, Serializer } from "survey-core";
@@ -6,7 +5,7 @@ import { QuestionEmbeddedCreatorModel } from "../src/components/embedded-creator
 import { CreatorPresetEditorModel } from "../src/presets/editable/presets-editor";
 export * from "../src/presets/editable/preset-question-ranking";
 import { PresetItemValue } from "../src/presets/editable/preset-question-ranking";
-import { SurveyModel } from "survey-core";
+import { SurveyModel, Question } from "survey-core";
 import { SurveyCreatorModel } from "../src/creator-base";
 
 export * from "../src/components/embedded-survey";
@@ -639,4 +638,49 @@ test("Toolbox categories, show header and showcolumn title column if show catego
   survey.setValue("toolbox_showCategoryTitles", false);
   expect(matrix.showHeader).toBeFalsy();
   expect(matrix.getColumnByName("title").visible).toBeFalsy();
+});
+test("Preset edit model, Change localization", () => {
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  survey.setValue("propertyGrid_definition_show", true);
+  survey.currentPage = survey.getPageByName("page_propertyGrid_definition");
+  survey.setValue("propertyGrid_definition_selector", "text");
+  const propGridCreator = getPropGridCreator(survey);
+  propGridCreator.JSON = {
+    elements: [
+      { type: "panel", "name": "general",
+        elements: [
+          { type: "text", name: "name" },
+          { type: "dropdown", name: "inputType" },
+          { type: "comment", name: "title" },
+          { type: "text", name: "placeholder" },
+          { type: "comment", name: "description" }
+        ]
+      }
+    ]
+  };
+  propGridCreator.survey.getQuestionByName("name").title = "My Name";
+  propGridCreator.survey.getQuestionByName("inputType").title = "My Input Type";
+  expect(editor.applyFromSurveyModel()).toBeTruthy();
+  const loc = editor.json.localization;
+  expect(loc).toBeTruthy();
+  expect(loc.en.pe.question).toBeTruthy();
+  expect(loc.en.pe.text).toBeTruthy();
+  expect(loc.en.pe.panel).toBeFalsy();
+  expect(loc.en.pe.question.name).toEqual("My Name");
+  expect(loc.en.pe.text.inputType).toEqual("My Input Type");
+
+  const creator = editor.creator;
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  creator.selectElement(creator.survey.getQuestionByName("q1"));
+  const propGridSurvey = getPropGridSurvey(survey);
+  const panels = propGridSurvey.getAllPanels();
+  expect(panels).toHaveLength(1);
+  expect(panels[0].name).toBe("general");
+  const elements = panels[0].elements;
+  expect(elements).toHaveLength(5);
+  expect(elements[0].name).toBe("name");
+  expect(elements[1].name).toBe("inputType");
+  expect((<Question>elements[0]).title).toEqual("My Name");
+  expect((<Question>elements[1]).title).toEqual("My Input Type");
 });
