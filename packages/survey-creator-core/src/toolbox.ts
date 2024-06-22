@@ -152,6 +152,7 @@ export class QuestionToolbox
     "html", "expression", "image", "signaturepad"
   ];
   private _containerElementValue: HTMLElement;
+  public presetDefaultItems: Array<IQuestionToolboxItem>;
 
   public get itemSelector(): string {
     return ".svc-toolbox__tool:not(.svc-toolbox__search-button):not(.sv-dots)";
@@ -688,9 +689,28 @@ export class QuestionToolbox
    */
   public defineCategories(categories: Array<IToolboxCategoryDefinition>, displayMisc: boolean = false): void {
     if (!Array.isArray(categories)) return;
-    this.actions.forEach(item => {
+    const items = this.getDefaultItems(this.supportedQuestions, false, true, true);
+    const itemsHash = {};
+    items.forEach(item => {
       item.visible = false;
+      itemsHash[item.id] = item;
     });
+    if(Array.isArray(this.presetDefaultItems)) {
+      this.presetDefaultItems.forEach(item => {
+        const action = itemsHash[item.name];
+        if (action) {
+          for (let key in item) {
+            action[key] = item[key];
+          }
+        } else {
+          if (!!item.json) {
+            const tItem = new QuestionToolboxItem(<IQuestionToolboxItem>item);
+            itemsHash[tItem.id] = tItem;
+            items.push(tItem);
+          }
+        }
+      });
+    }
     this.categoriesTitles = {};
     const actionList = new Array<IQuestionToolboxItem>();
     categories.forEach(category => {
@@ -707,7 +727,7 @@ export class QuestionToolbox
           name = obj.name;
           title = obj.title;
         }
-        const item = this.getItemByName(name);
+        const item = itemsHash[name];
         if (item) {
           item.category = category.category;
           item.visible = true;
@@ -718,15 +738,15 @@ export class QuestionToolbox
         }
       });
     });
-    this.actions.forEach(item => {
-      if (!item.visible) {
-        if (displayMisc) {
+    if(displayMisc) {
+      items.forEach(item => {
+        if(!item.visible) {
           item.visible = true;
           item.category = "misc";
+          actionList.push(item);
         }
-        actionList.push(item);
-      }
-    });
+      });
+    }
     this.setItems(actionList);
     this.onItemsChanged(false);
   }

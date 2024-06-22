@@ -17,23 +17,18 @@ export class CreatorPresetToolboxDefinition extends CreatorPresetBase {
     this.applyDefinition(creator, this.json);
   }
   private applyDefinition(creator: SurveyCreatorModel, defintion: Array<ICreatorPresetToolboxItem>): void {
-    if (!Array.isArray(defintion)) return;
-    const tb = creator.toolbox;
+    creator.toolbox.presetDefaultItems = this.getPresetDefaultItems(defintion);
+  }
+  private getPresetDefaultItems(defintion: Array<ICreatorPresetToolboxItem>): Array<IQuestionToolboxItem> {
+    if (!Array.isArray(defintion)) return undefined;
     const def: Array<ICreatorPresetToolboxItem> = JSON.parse(JSON.stringify(defintion));
+    const res = new Array<IQuestionToolboxItem>();
     def.forEach(item => {
       if (typeof item === "object" && !!item.name) {
-        const action = tb.getItemByName(item.name);
-        if (action) {
-          for (let key in item) {
-            action[key] = item[key];
-          }
-        } else {
-          if (!!item.json) {
-            tb.addItem(<IQuestionToolboxItem>item);
-          }
-        }
+        res.push(<IQuestionToolboxItem>item);
       }
     });
+    return res;
   }
 }
 
