@@ -227,7 +227,6 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     if(name !== this.nameSelector) return;
     this.updateCurrentJson(model);
     if(this.currentProperties) {
-      this.currentProperties.dispose();
       this.currentProperties = null;
     }
     const selQuestion = this.getSelector(model);
@@ -335,7 +334,8 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
         question: {
           properties: [
             "name",
-            "title"
+            "title",
+            "description"
           ]
         }
       }
@@ -344,19 +344,25 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
       if(options.area === "property-grid") {
         const survey = options.survey;
         if(survey.state === "empty") return;
+        survey.onGetQuestionTitleActions.add((sender, options) => {
+          options.titleActions = [];
+        });
+        /*
         const page = options.survey.pages[0];
         survey.getAllPanels().forEach(panel => {
           (<PanelModel>panel).questions.forEach(q => {
             page.addElement(q);
           });
         });
+        */
+        const isQuestion = (<any>creator.selectedElement).isQuestion;
         const nameQuestion = survey.getQuestionByName("name");
         nameQuestion.readOnly = true;
         nameQuestion.description = "";
-        nameQuestion.title = "Property name";
+        nameQuestion.title = isQuestion ? "Property name" : "Category name";
         const titleQuestion = survey.getQuestionByName("title");
         titleQuestion.description = "";
-        titleQuestion.title = "Property description";
+        titleQuestion.title = isQuestion ? "Property title" : "Category description";
       }
       if(options.reason === "designer") {
         const model = options.survey;
