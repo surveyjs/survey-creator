@@ -641,7 +641,7 @@ test("Toolbox categories, show header and showcolumn title column if show catego
   expect(matrix.showHeader).toBeFalsy();
   expect(matrix.getColumnByName("title").visible).toBeFalsy();
 });
-test("Preset edit model, Change localization", () => {
+test("Preset edit model, Change localization strings", () => {
   const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
   survey.setValue("propertyGrid_definition_show", true);
@@ -663,6 +663,7 @@ test("Preset edit model, Change localization", () => {
   };
   propGridCreator.survey.getQuestionByName("name").title = "My Name";
   propGridCreator.survey.getQuestionByName("inputType").title = "My Input Type";
+  propGridCreator.survey.getQuestionByName("inputType").description = "My Input Type description";
   expect(editor.applyFromSurveyModel()).toBeTruthy();
   const loc = editor.json.localization;
   expect(loc).toBeTruthy();
@@ -671,6 +672,8 @@ test("Preset edit model, Change localization", () => {
   expect(loc.en.pe.panel).toBeFalsy();
   expect(loc.en.pe.question.name).toEqual("My Name");
   expect(loc.en.pe.text.inputType).toEqual("My Input Type");
+  expect(loc.en.pehelp.text).toBeTruthy();
+  expect(loc.en.pehelp.text.inputType).toEqual("My Input Type description");
 
   const creator = editor.creator;
   creator.JSON = { elements: [{ type: "text", name: "q1" }] };
@@ -685,6 +688,7 @@ test("Preset edit model, Change localization", () => {
   expect(elements[1].name).toBe("inputType");
   expect((<Question>elements[0]).title).toEqual("My Name");
   expect((<Question>elements[1]).title).toEqual("My Input Type");
+  expect((<Question>elements[1]).description).toEqual("My Input Type description");
 });
 test("Change localization strings and then change locale for tabs", () => {
   const editor = new CreatorPresetEditorModel({ tabs: { items: [] } });

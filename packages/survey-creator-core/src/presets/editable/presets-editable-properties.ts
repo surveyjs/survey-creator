@@ -213,14 +213,18 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     this.getPropertyCreatorQuestion(model).embeddedCreator = this.propCreator;
     settings.propertyGrid.enableSearch = oldSearchValue;
   }
-  protected setJsonLocalizationStringsCore(model: SurveyModel, locStrs: any): void {
-    const pe = this.localeStrings.pe;
-    if(Object.keys(pe).length > 0) {
-      locStrs.pe = pe;
+  private setJSONForTitlesAndDescriptions(locStrs: any, name: string): void {
+    const strs = this.localeStrings[name];
+    if(Object.keys(strs).length > 0) {
+      locStrs[name] = strs;
     }
   }
+  protected setJsonLocalizationStringsCore(model: SurveyModel, locStrs: any): void {
+    this.setJSONForTitlesAndDescriptions(locStrs, "pe");
+    this.setJSONForTitlesAndDescriptions(locStrs, "pehelp");
+  }
   protected updateJsonLocalizationStringsCore(locStrs: any): void {
-    this.localeStrings = { pe: locStrs.pe || {} };
+    this.localeStrings = { pe: locStrs.pe || {}, pehelp: locStrs.pehelp || {} };
   }
   private isPropCreatorChanged: boolean;
   protected updateOnValueChangedCore(model: SurveyModel, name: string): void {
@@ -299,20 +303,28 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     });
     return res;
   }
+  private changePropTitleAndDescription(strs: any, propName: string, val: string): void {
+    const className = this.currentProperties.getPropertyClassName(propName);
+    if(!!className) {
+      if(!strs[className]) {
+        strs[className] = {};
+      }
+      strs[className][propName] = val;
+    }
+  }
   private setupPropertyCreator(): void {
     const creator = this.propCreator;
     creator.showSaveButton = false;
     creator.onModified.add((sender, options) => {
       this.isPropCreatorChanged = true;
-      if(options.name === "title" && (<any>options.target)?.isQuestion) {
-        const pe = this.localeStrings.pe;
-        const propName = (<any>options.target).name;
-        const className = this.currentProperties.getPropertyClassName(propName);
-        if(!!className) {
-          if(!pe[className]) {
-            pe[className] = {};
-          }
-          pe[className][propName] = options.newValue;
+      if((<any>options.target)?.isQuestion) {
+        if(options.name === "title") {
+          this.changePropTitleAndDescription(this.localeStrings.pe,
+            (<any>options.target).name, options.newValue);
+        }
+        if(options.name === "description") {
+          this.changePropTitleAndDescription(this.localeStrings.pehelp,
+            (<any>options.target).name, options.newValue);
         }
       }
     });
@@ -363,6 +375,11 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
         const titleQuestion = survey.getQuestionByName("title");
         titleQuestion.description = "";
         titleQuestion.title = isQuestion ? "Property title" : "Category description";
+        const descQuestion = survey.getQuestionByName("description");
+        if(descQuestion) {
+          descQuestion.description = "";
+          descQuestion.title = "Property help text";
+        }
       }
       if(options.reason === "designer") {
         const model = options.survey;
