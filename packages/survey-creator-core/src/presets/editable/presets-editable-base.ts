@@ -80,6 +80,10 @@ export class CreatorPresetEditableBase {
     this.updateJsonLocalizationStringsCore(locStrs);
     this.children.forEach(item => item.updateJsonLocalizationStrings(locStrs));
   }
+  public dispose(): void {
+    this.disposeCore();
+    this.children.forEach(item => item.dispose());
+  }
   public setupQuestions(model: SurveyModel, creatorSetup: ICreatorPresetEditorSetup): void {
     this.setupQuestionsCore(model, creatorSetup);
     this.children.forEach(item => {
@@ -117,6 +121,7 @@ export class CreatorPresetEditableBase {
   protected getJsonValueCore(model: SurveyModel): any { return undefined; }
   protected setJsonLocalizationStringsCore(model: SurveyModel, locStrs: any): void {}
   protected updateJsonLocalizationStringsCore(locStrs: any): void {}
+  protected disposeCore(): void {}
   protected setupOnCurrentPageCore(model: SurveyModel, creator: SurveyCreatorModel): void {}
   protected updateOnValueChangedCore(model: SurveyModel, name: string): void {}
   protected updateOnMatrixDetailPanelVisibleChangedCore(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {}

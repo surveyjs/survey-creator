@@ -8,6 +8,8 @@ import { PresetItemValue } from "../src/presets/editable/preset-question-ranking
 import { SurveyModel, Question } from "survey-core";
 import { SurveyCreatorModel } from "../src/creator-base";
 
+export * from "../src/localization/german";
+
 export * from "../src/components/embedded-survey";
 export * from "../src/components/embedded-creator";
 
@@ -683,4 +685,19 @@ test("Preset edit model, Change localization", () => {
   expect(elements[1].name).toBe("inputType");
   expect((<Question>elements[0]).title).toEqual("My Name");
   expect((<Question>elements[1]).title).toEqual("My Input Type");
+});
+test("Change localization strings and then change locale for tabs", () => {
+  const editor = new CreatorPresetEditorModel({ tabs: { items: [] } });
+  const survey = editor.model;
+  survey.setValue("tabs_show", true);
+  let itemsQuestion = survey.getQuestionByName("tabs_items");
+  const item = <PresetItemValue>itemsQuestion.choices[0];
+  item.text = "Designer edit";
+  editor.locale = "de";
+  const loc = editor.json.localization;
+  expect(loc).toBeTruthy();
+  expect(loc.en.tabs.designer).toEqual("Designer edit");
+  expect(editor.creator.tabs[0].locTitle.text).toEqual("Designer");
+  itemsQuestion = editor.model.getQuestionByName("tabs_items");
+  expect(itemsQuestion.choices[0].text).toEqual("Designer");
 });

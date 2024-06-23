@@ -69,9 +69,6 @@ export class SurveyQuestionPresetPropertiesDetail {
     }
     return res;
   }
-  public dispose(): void {
-    //TODO
-  }
   public getAllPropertiesNames(): Array<string> { return this.allPropertiesNames; }
   public get propertyGrid(): PropertyGridModel { return this.propertyGridValue; }
   public getPropertyClassName(propName: string): string {
@@ -156,6 +153,12 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
   private currentClassName: string;
   private propCreatorValue: SurveyCreatorModel;
   public get propCreator(): SurveyCreatorModel { return this.propCreatorValue; }
+  public disposeCore(): void {
+    if(this.propCreator) {
+      this.propCreator.dispose();
+      this.propCreatorValue = undefined;
+    }
+  }
   public createMainPageCore(): any {
     return {
       title: "Property Grid categories",

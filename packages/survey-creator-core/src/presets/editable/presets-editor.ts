@@ -26,6 +26,15 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     this.addLocaleDropdown();
     this.activeTab = this.navigationBar.actions[0].id;
   }
+  public dispose(): void {
+    super.dispose();
+    this.creator.dispose();
+    this.disposeModel();
+  }
+  private disposeModel(): void {
+    this.model.editablePresets.forEach(preset => preset.dispose());
+    this.model.dispose();
+  }
   public get preset(): CreatorPreset { return this.presetValue; }
   public get creator(): SurveyCreatorModel { return this.creatorValue; }
   public get model(): SurveyModel { return this.modelValue; }
@@ -45,8 +54,12 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     return this.creator.locale;
   }
   public set locale(val: string) {
+    this.applyFromSurveyModel(false);
     this.creator.locale = val;
+    this.disposeModel();
+    this.modelValue = this.createModel();
     this.model.locale = val;
+    this.setPropertyValue("model", this.model);
   }
   public getLocale(): string { return this.locale || "en"; }
   public get json(): ICreatorPresetData {
@@ -108,11 +121,13 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     });
     return model;
   }
-  public applyFromSurveyModel(): boolean {
+  public applyFromSurveyModel(reCreateCretor: boolean = true): boolean {
     if(!this.validateEditableModel(this.model)) return false;
     this.preset.setJson(this.getJsonFromSurveyModel());
     this.model.setValue("json_result", JSON.stringify(this.preset.getJson(), null, 2));
-    this.creatorValue = this.createCreator({});
+    if(reCreateCretor) {
+      this.creatorValue = this.createCreator({});
+    }
     this.preset.apply(this.creator);
     return true;
   }
