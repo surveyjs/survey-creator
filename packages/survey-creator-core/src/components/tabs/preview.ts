@@ -220,7 +220,7 @@ export class PreviewViewModel extends Base {
       if (this.survey.state === "starting" && isNext) {
         newIndex = 0;
       }
-      let nearPage: PageModel = this.survey.visiblePages[newIndex];
+      let nearPage: PageModel = this.showInvisibleElements ? this.survey.pages[newIndex] : this.survey.visiblePages[newIndex];
       if (!isNext && currentIndex === 0 && this.survey.firstPageIsStarted
         && this.survey.pages.length > 0) {
         nearPage = this.survey.pages[0];
