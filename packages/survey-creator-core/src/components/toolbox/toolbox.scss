@@ -129,9 +129,11 @@ svc-toolbox {
   .svc-toolbox__search-container {
     display: flex;
   }
+
   &:not(.svc-toolbox--scrollable) {
     .svc-toolbox__scroller {
       padding-top: calcSize(9);
+
       .svc-toolbox__search-container {
         top: calcSize(-9);
         margin-top: calcSize(-9);
@@ -206,7 +208,6 @@ svc-toolbox {
   position: sticky;
   top: 0;
   z-index: 30;
-  background-color: $background-dim;
   padding-top: calcSize(1);
   margin-bottom: calcSize(1);
   margin-right: calcSize(-1.5);

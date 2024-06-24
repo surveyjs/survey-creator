@@ -38,7 +38,6 @@
 }
 
 .spg-search-editor_container {
-  position: absolute;
   border-bottom: 1px solid var(--ctr-property-grid-search-border-color, $border);
   background: var(--ctr-property-grid-search-background-color, $background-dim);
   padding: calcSize(2);
