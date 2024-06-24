@@ -317,14 +317,24 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     creator.showSaveButton = false;
     creator.onModified.add((sender, options) => {
       this.isPropCreatorChanged = true;
-      if((<any>options.target)?.isQuestion) {
-        if(options.name === "title") {
-          this.changePropTitleAndDescription(this.localeStrings.pe,
-            (<any>options.target).name, options.newValue);
+      if(options.type === "PROPERTY_CHANGED") {
+        if((<any>options.target)?.isQuestion) {
+          if(options.name === "title") {
+            this.changePropTitleAndDescription(this.localeStrings.pe,
+              (<any>options.target).name, options.newValue);
+          }
+          if(options.name === "description") {
+            this.changePropTitleAndDescription(this.localeStrings.pehelp,
+              (<any>options.target).name, options.newValue);
+          }
         }
-        if(options.name === "description") {
-          this.changePropTitleAndDescription(this.localeStrings.pehelp,
-            (<any>options.target).name, options.newValue);
+        if((<any>options.target)?.isPanel) {
+          if(options.name === "title") {
+            if(!this.localeStrings.pe.tabs) {
+              this.localeStrings.pe.tabs = {};
+            }
+            this.localeStrings.pe.tabs[(<any>options.target).name] = options.newValue;
+          }
         }
       }
     });
