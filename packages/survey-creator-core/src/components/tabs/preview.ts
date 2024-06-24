@@ -155,7 +155,7 @@ export class PreviewViewModel extends Base {
   private updatePageItem(page: PageModel) {
     const item = this.getPageItemByPage(page);
     if (item) {
-      item.enabled = this.enableInvisiblePages || page.isVisible;
+      item.enabled = (this.enableInvisiblePages && this.showInvisibleElements) || page.isVisible;
     }
   }
   private getCurrentPageItem(): IAction {
@@ -181,7 +181,7 @@ export class PreviewViewModel extends Base {
         id: page.name,
         data: page,
         title: this.getPageTitle(page),
-        enabled: this.enableInvisiblePages || page.isVisible,
+        enabled: (this.enableInvisiblePages && this.showInvisibleElements) || page.isVisible,
         visible: true
       };
       if (!page.isVisible) {
