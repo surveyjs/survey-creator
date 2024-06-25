@@ -12,6 +12,7 @@ import { QuestionEmbeddedCreatorModel } from "../../components/embedded-creator"
 import { ICreatorOptions } from "../../creator-options";
 import { settings } from "../../creator-settings";
 import { IQuestionToolboxItem } from "../../toolbox";
+import { SurveyHelper } from "../../survey-helper";
 require("./presets-editable-properties.scss");
 
 export class SurveyQuestionPresetProperties extends SurveyQuestionProperties {
@@ -30,6 +31,7 @@ export class SurveyQuestionPresetPropertiesDetail {
   public classes = new Array<string>();
   private properties: SurveyQuestionPresetProperties;
   private propertyGridValue: PropertyGridModel;
+  private propertyGridDefaultValue: PropertyGridModel;
   private allPropertiesNames: Array<string>;
   constructor(private className: string, private currentJson: ISurveyPropertyGridDefinition) {
     const cls = {};
@@ -56,6 +58,7 @@ export class SurveyQuestionPresetPropertiesDetail {
       this.classes.push(className);
     }
     this.propertyGridValue = new PropertyGridModel(obj, undefined, this.currentJson);
+    this.propertyGridDefaultValue = new PropertyGridModel(obj);
   }
   private createObj(): Base {
     if(this.className === "survey") return new SurveyModel();
@@ -71,6 +74,7 @@ export class SurveyQuestionPresetPropertiesDetail {
   }
   public getAllPropertiesNames(): Array<string> { return this.allPropertiesNames; }
   public get propertyGrid(): PropertyGridModel { return this.propertyGridValue; }
+  public get propertyGridDefault(): PropertyGridModel { return this.propertyGridDefaultValue; }
   public getPropertyClassName(propName: string): string {
     return this.propertiesHash[propName];
   }
@@ -204,7 +208,7 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
       pageEditMode: "single",
       allowModifyPages: false,
       showSurveyTitle: false,
-      maxNestedPanels: 0
+      maxNestedPanels: 1
     };
     const oldSearchValue = settings.propertyGrid.enableSearch;
     settings.propertyGrid.enableSearch = false;
@@ -369,17 +373,19 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
         survey.onGetQuestionTitleActions.add((sender, options) => {
           options.titleActions = [];
         });
-        /*
-        const page = options.survey.pages[0];
-        survey.getAllPanels().forEach(panel => {
-          (<PanelModel>panel).questions.forEach(q => {
-            page.addElement(q);
-          });
+        survey.onUpdatePanelCssClasses.add((sender, options) => {
+          options.cssClasses.panel.header += " preset_pg_property_panel";
         });
-        */
+        survey.getAllPanels().forEach(panel => {
+          const pnl = <PanelModel>panel;
+          pnl.state = "default";
+          pnl.locTitle.onGetTextCallback = undefined;
+          pnl.locTitle.clear();
+          pnl.onFirstRendering();
+        });
         const isQuestion = (<any>creator.selectedElement).isQuestion;
         const nameQuestion = survey.getQuestionByName("name");
-        nameQuestion.readOnly = true;
+        nameQuestion.readOnly = isQuestion || this.isDefaultPanelName((<any>creator.selectedElement).name);
         nameQuestion.description = "";
         nameQuestion.title = isQuestion ? "Property name" : "Category name";
         const titleQuestion = survey.getQuestionByName("title");
@@ -420,16 +426,45 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
       options.allowAdd = false;
       options.allowDelete = false;
     });
-    creator.onQuestionAdded.add((sender, options) => {
-      this.setupCreatorToolbox(sender);
-    });
     creator.onModified.add((sender, options) => {
-      if(options.type === "OBJECT_DELETED" && (<any>options.target)?.isQuestion) {
+      if(options.type === "OBJECT_DELETED") {
         this.setupCreatorToolbox(sender);
       }
     });
     creator.getElementAddornerCssCallback = (obj: Base, className: string): string =>
     { return className + " preset_pg_question"; };
+    creator.onPanelAdded.add((sender, options) => {
+      const pnl = options.panel;
+      if(pnl.parent.isPanel) {
+        const parent = pnl.parent;
+        parent.removeElement(pnl);
+        const page = creator.survey.pages[0];
+        const index = page.elements.indexOf(<any>parent);
+        page.addElement(pnl, index + 1);
+      }
+      pnl.name = SurveyHelper.getNewName(creator.survey.getAllPanels(), "category");
+      pnl.title = "New Category";
+    });
+    creator.onQuestionAdded.add((sender, options) => {
+      const q = options.question;
+      if(!q.parent || !q.parent.isPanel) {
+        let sel = creator.selectedElement;
+        let index: number = undefined;
+        if(!sel || (<any>sel).isPage || sel.getType() === "survey") {
+          if(creator.survey.getAllPanels().length === 0) {
+            creator.clickToolboxItem(creator.toolbox.getItemByName("panel").json);
+          }
+          sel = <any>creator.survey.getAllPanels()[0];
+        }
+        if((<any>sel).isQuestion) {
+          const panel = (<any>sel).parent;
+          index = panel.elements.indexOf(sel) + 1;
+          sel = panel;
+        }
+        (<PanelModelBase>sel).addElement(q, index);
+      }
+      this.setupCreatorToolbox(sender);
+    });
   }
   private updateCreatorJSON(json: any): any {
     if(!json || !json.pages || !json.pages[0] || !json.pages[0].elements) return;
@@ -457,13 +492,16 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
   }
   private setupCreatorToolbox(creator: SurveyCreatorModel): void {
     const elements: IQuestionToolboxItem[] = [{ name: "panel", title: "Category", className: "panel", json: { type: "panel" }, iconName: "panel" }];
-    const propGrid = this.currentProperties.propertyGrid.survey;
+    const hiddenProperties = ["progressBarInheritWidthFrom"]; //TODO
+    const propGrid = this.currentProperties.propertyGridDefault.survey;
     const survey = this.propCreator.survey;
     const allProps = this.currentProperties.getAllPropertiesNames();
     allProps.forEach(propName => {
-      if(!survey.getQuestionByName(propName) && propGrid.getQuestionByName(propName)) {
+      if(!survey.getQuestionByName(propName) && propGrid.getQuestionByName(propName)
+        && hiddenProperties.indexOf(propName) < 0) {
         const q = propGrid.getQuestionByName(propName);
         const json = q.toJSON();
+        json.name = propName;
         json.type = q.getType();
         elements.push({
           name: propName,
@@ -476,6 +514,10 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     });
 
     creator.toolbox.addItems(elements, true);
+  }
+  private isDefaultPanelName(name: string): boolean {
+    if(!name) return true;
+    return !!this.currentProperties.propertyGridDefault.survey.getPanelByName(name);
   }
 }
 export class CreatorEditablePresetPropertyGrid extends CreatorPresetEditableBase {
