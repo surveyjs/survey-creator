@@ -598,6 +598,7 @@ export var hrStrings = {
     allowCompleteSurveyAutomatic: "Automatsko ispunjavanje upitnika",
     showProgressBar: "Pokaži traku napretka",
     questionTitleLocation: "Lokacija naslova pitanja",
+    questionTitleWidth: "Širina naslova pitanja",
     requiredText: "Pitanje je zahtijevalo simbole",
     questionTitleTemplate: "Predložak naslova pitanja, zadano je: '{no}. {require} {title}'",
     questionErrorLocation: "Mjesto pogreške u pitanju",
@@ -734,6 +735,7 @@ export var hrStrings = {
     correctAnswer: "Točan odgovor",
     defaultPanelValue: "Zadane vrijednosti",
     cells: "Tekstovi ćelija",
+    fileInputPlaceholder: "Odabir datoteke ili lijepljenje veze na datoteku...",
     keyName: "Stupac ključa",
     itemvalue: {
       visibleIf: "Učini mogućnost vidljivom ako",
@@ -1220,6 +1222,9 @@ export var hrStrings = {
     currencymask: {
       prefix: "Npr.: $",
       suffix: "Npr.: USD"
+    },
+    panelbase: {
+      questionTitleWidth: "Npr.: 200px"
     }
   },
   pehelp: {
@@ -1230,6 +1235,7 @@ export var hrStrings = {
       enableIf: "Pomoću ikone čarobnog štapića postavite uvjetno pravilo koje onemogućuje način samo za čitanje ploče.",
       requiredIf: "Pomoću ikone čarobnog štapića postavite uvjetno pravilo koje sprječava slanje upitnika, osim ako barem jedno ugniježđeno pitanje nema odgovor.",
       questionTitleLocation: "Odnosi se na sva pitanja unutar ovog panela. Ako želite nadjačati ovu postavku, definirajte pravila poravnanja naslova za pojedinačna pitanja. Mogućnost \"Naslijedi\" primjenjuje postavku na razini stranice (ako je postavljena) ili na razini upitnika (\"Vrh\" prema zadanim postavkama).",
+      questionTitleWidth: "Postavlja dosljednu širinu za naslove pitanja kada su poravnati lijevo od okvira pitanja. Prihvaća CSS vrijednosti (px, %, in, pt itd.).",
       questionErrorLocation: "Postavlja mjesto poruke o pogrešci u odnosu na sva pitanja unutar ploče. Opcija \"Naslijedi\" primjenjuje postavku na razini stranice (ako je postavljena) ili na razini upitnika.",
       questionsOrder: "Zadržava izvorni redoslijed pitanja ili ih randomizira. Opcija \"Naslijedi\" primjenjuje postavku na razini stranice (ako je postavljena) ili na razini upitnika.",
       page: "Premješta ploču na kraj odabrane stranice.",
@@ -1376,6 +1382,7 @@ export var hrStrings = {
       enableIf: "Pomoću ikone čarobnog štapića postavite uvjetno pravilo koje onemogućuje način samo za čitanje stranice.",
       requiredIf: "Pomoću ikone čarobnog štapića postavite uvjetno pravilo koje sprječava slanje upitnika, osim ako barem jedno ugniježđeno pitanje nema odgovor.",
       questionTitleLocation: "Odnosi se na sva pitanja unutar ove stranice. Ako želite nadjačati ovu postavku, definirajte pravila poravnanja naslova za pojedinačna pitanja ili ploče. Mogućnost \"Naslijedi\" primjenjuje postavku na razini upitnika (\"Vrh\" prema zadanim postavkama).",
+      questionTitleWidth: "Postavlja dosljednu širinu za naslove pitanja kada su poravnati lijevo od okvira pitanja. Prihvaća CSS vrijednosti (px, %, in, pt itd.).",
       questionErrorLocation: "Postavlja mjesto poruke o pogrešci u odnosu na pitanje s unosom koji nije valjan. Odaberite između: \"Vrh\" - tekst pogreške nalazi se na vrhu okvira pitanja; \"Dno\" - tekst pogreške nalazi se na dnu okvira pitanja. Mogućnost \"Naslijedi\" primjenjuje postavku na razini upitnika (\"Vrh\" prema zadanim postavkama).",
       questionsOrder: "Zadržava izvorni redoslijed pitanja ili ih randomizira. Mogućnost \"Naslijedi\" primjenjuje postavku na razini upitnika (\"Original\" prema zadanim postavkama). Efekt ove postavke vidljiv je samo na kartici Pretpregled.",
       navigationButtonsVisibility: "Postavlja vidljivost navigacijskih gumba na stranici. Opcija \"Naslijedi\" primjenjuje postavku na razini upitnika, koja je zadana kao \"Vidljivo\"."
@@ -2653,3 +2660,8 @@ editorLocalization.locales["hr"] = hrStrings;
 // paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "Rezervni tekst za naslove kartica koji se primjenjuje kada uzorak naslova kartice ne daje značajnu vrijednost."
 // theme.fontColor: "Font color" => "Boja fonta"
 // theme.backgroundColor: "Background color" => "Boja pozadine"
+// pe.questionTitleWidth: "Question title width" => "Širina naslova pitanja"
+// pe.fileInputPlaceholder: "Select a file or paste a file link..." => "Odabir datoteke ili lijepljenje veze na datoteku..."
+// panelbase.questionTitleWidth: "Ex.: 200px" => "Npr.: 200px"
+// panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Postavlja dosljednu širinu za naslove pitanja kada su poravnati lijevo od okvira pitanja. Prihvaća CSS vrijednosti (px, %, in, pt itd.)."
+// page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Postavlja dosljednu širinu za naslove pitanja kada su poravnati lijevo od okvira pitanja. Prihvaća CSS vrijednosti (px, %, in, pt itd.)."

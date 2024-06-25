@@ -438,3 +438,52 @@ test("background image in preview", async (t) => {
     await takeElementScreenshot("test-tab-background-image.png", previewTab, t, comparer);
   });
 });
+
+test("Page selector with invisible page", async t => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1024, 768);
+    await setJSON({
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "boolean",
+              "name": "question1",
+              "title": "Show Page"
+            }
+          ]
+        },
+        {
+          "name": "page2",
+          "elements": [
+            {
+              "type": "rating",
+              "name": "question2"
+            }
+          ],
+          "visibleIf": "{question1} = true"
+        },
+        {
+          "name": "page3",
+          "elements": [
+            {
+              "type": "radiogroup",
+              "name": "question3",
+              "choices": [
+                "Item 1",
+                "Item 2",
+                "Item 3"
+              ]
+            }
+          ]
+        }
+      ]
+    });
+    const pageSelectorButton = Selector(".svc-page-selector");
+    await t
+      .click(getTabbedMenuItemByText(creatorTabPreviewName))
+      .click(pageSelectorButton);
+    await takeElementScreenshot("test-tab-page-selector-witn-invisible-page.png", ".svc-page-selector .sv-popup__container", t, comparer);
+  });
+});

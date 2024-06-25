@@ -4328,3 +4328,31 @@ test("Check the placeholders of the survey items if isMobileView is true", (): a
   expect(panelModelAdorner.placeholderText).toBe("Click the \"Add Question\" button below to add a new element to the panel.");
   expect(imageQuestionModelAdorner.placeholderText).toBe("Click the button below and choose an image to upload");
 });
+
+test("onModified is raised for mask settings", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1",
+            "maskType": "numeric",
+            "maskSettings": {
+              "thousandsSeparator": "."
+            }
+          }
+        ]
+      }
+    ]
+  };
+  let propName = "not triggered";
+  creator.onModified.add((sender, options) => {
+    propName = options.name;
+  });
+  const maskedQuestion = creator.survey.getQuestionByName("question1") as QuestionTextModel;
+  (maskedQuestion.maskSettings as any).thousandsSeparator = "-";
+  expect(propName).toBe("thousandsSeparator");
+});

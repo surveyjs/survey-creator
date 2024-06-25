@@ -1,7 +1,7 @@
 <template>
   <div
     class="svc-toolbox__category"
-    :class="{ 'svc-toolbox__category--collapsed': category.collapsed }"
+    :class="{ 'svc-toolbox__category--collapsed': category.collapsed, 'svc-toolbox__category--empty': category.empty }"
   >
     <div
       class="svc-toolbox__category-header"

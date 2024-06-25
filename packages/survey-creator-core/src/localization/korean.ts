@@ -598,6 +598,7 @@ export var koreanStrings = {
     allowCompleteSurveyAutomatic: "설문조사 자동 완성",
     showProgressBar: "진행률 막대 표시",
     questionTitleLocation: "질문 제목 위치",
+    questionTitleWidth: "질문 제목 너비",
     requiredText: "질문에 필요한 기호",
     questionTitleTemplate: "질문 제목 템플릿입니다. 기본값: '{no}. {require} {title}'",
     questionErrorLocation: "질문 위치 오류",
@@ -734,6 +735,7 @@ export var koreanStrings = {
     correctAnswer: "정답",
     defaultPanelValue: "기본값",
     cells: "셀 텍스트",
+    fileInputPlaceholder: "파일 선택 또는 파일 링크 붙여넣기...",
     keyName: "키 열",
     itemvalue: {
       visibleIf: "다음과 같은 경우 옵션을 표시합니다.",
@@ -1220,6 +1222,9 @@ export var koreanStrings = {
     currencymask: {
       prefix: "예: $",
       suffix: "예.: USD"
+    },
+    panelbase: {
+      questionTitleWidth: "예: 200px"
     }
   },
   pehelp: {
@@ -1230,6 +1235,7 @@ export var koreanStrings = {
       enableIf: "마술 지팡이 아이콘을 사용하여 패널에 대해 읽기 전용 모드를 비활성화하는 조건부 규칙을 설정합니다.",
       requiredIf: "마술 지팡이 아이콘을 사용하여 하나 이상의 중첩된 질문에 답변이 없는 한 설문조사 제출을 금지하는 조건부 규칙을 설정합니다.",
       questionTitleLocation: "이 패널 내의 모든 질문에 적용됩니다. 이 설정을 재정의하려면 개별 질문에 대한 제목 정렬 규칙을 정의합니다. \"상속\" 옵션은 페이지 수준(설정된 경우) 또는 설문조사 수준 설정(기본적으로 \"상단\")을 적용합니다.",
+      questionTitleWidth: "질문 제목이 질문 상자의 왼쪽에 정렬될 때 일관된 너비를 설정합니다. CSS 값(px, %, in, pt 등)을 허용합니다.",
       questionErrorLocation: "패널 내의 모든 질문과 관련된 오류 메시지의 위치를 설정합니다. \"상속\" 옵션은 페이지 수준(설정된 경우) 또는 설문조사 수준 설정을 적용합니다.",
       questionsOrder: "질문의 원래 순서를 유지하거나 무작위화합니다. \"상속\" 옵션은 페이지 수준(설정된 경우) 또는 설문조사 수준 설정을 적용합니다.",
       page: "선택한 페이지의 끝으로 패널의 위치를 변경합니다.",
@@ -1376,6 +1382,7 @@ export var koreanStrings = {
       enableIf: "마술 지팡이 아이콘을 사용하여 페이지에 대해 읽기 전용 모드를 비활성화하는 조건부 규칙을 설정합니다.",
       requiredIf: "마술 지팡이 아이콘을 사용하여 하나 이상의 중첩된 질문에 답변이 없는 한 설문조사 제출을 금지하는 조건부 규칙을 설정합니다.",
       questionTitleLocation: "이 페이지 내의 모든 질문에 적용됩니다. 이 설정을 재정의하려면 개별 질문 또는 패널에 대한 제목 정렬 규칙을 정의합니다. \"상속\" 옵션은 설문조사 수준 설정(기본적으로 \"상단\")을 적용합니다.",
+      questionTitleWidth: "질문 제목이 질문 상자의 왼쪽에 정렬될 때 일관된 너비를 설정합니다. CSS 값(px, %, in, pt 등)을 허용합니다.",
       questionErrorLocation: "잘못된 입력이 있는 질문과 관련된 오류 메시지의 위치를 설정합니다. 다음 중 하나를 선택합니다. \"상단\" - 오류 텍스트가 질문 상자 상단에 배치됩니다. \"하단\" - 오류 텍스트가 질문 상자 하단에 배치됩니다. \"상속\" 옵션은 설문조사 수준 설정(기본적으로 \"상단\")을 적용합니다.",
       questionsOrder: "질문의 원래 순서를 유지하거나 무작위화합니다. \"상속\" 옵션은 설문조사 수준 설정(기본적으로 \"원본\")을 적용합니다. 이 설정의 효과는 미리보기 탭에서만 볼 수 있습니다.",
       navigationButtonsVisibility: "페이지에서 탐색 단추의 표시 여부를 설정합니다. \"상속\" 옵션은 설문조사 수준 설정을 적용하며, 기본값은 \"표시\"입니다."
@@ -2863,3 +2870,8 @@ editorLocalization.locales["ko"] = koreanStrings;
 // paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "탭 제목 패턴이 의미 있는 값을 생성하지 않을 때 적용되는 탭 제목에 대한 대체 텍스트입니다."
 // theme.fontColor: "Font color" => "글꼴 색상"
 // theme.backgroundColor: "Background color" => "배경색"
+// pe.questionTitleWidth: "Question title width" => "질문 제목 너비"
+// pe.fileInputPlaceholder: "Select a file or paste a file link..." => "파일 선택 또는 파일 링크 붙여넣기..."
+// panelbase.questionTitleWidth: "Ex.: 200px" => "예: 200px"
+// panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "질문 제목이 질문 상자의 왼쪽에 정렬될 때 일관된 너비를 설정합니다. CSS 값(px, %, in, pt 등)을 허용합니다."
+// page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "질문 제목이 질문 상자의 왼쪽에 정렬될 때 일관된 너비를 설정합니다. CSS 값(px, %, in, pt 등)을 허용합니다."

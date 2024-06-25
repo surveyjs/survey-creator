@@ -598,6 +598,7 @@ var spanishTranslation = {
     allowCompleteSurveyAutomatic: "Completar la encuesta automáticamente",
     showProgressBar: "Mostrar barra de progreso",
     questionTitleLocation: "Ubicación del título de la pregunta",
+    questionTitleWidth: "Ancho del título de la pregunta",
     requiredText: "La pregunta requerida (s) símbolo (s)",
     questionTitleTemplate: "Plantilla de título de la pregunta, el valor predeterminado es: '{no}.{requiere} {título} '",
     questionErrorLocation: "Ubicación de error de la pregunta",
@@ -734,6 +735,7 @@ var spanishTranslation = {
     correctAnswer: "Respuesta correcta",
     defaultPanelValue: "Valores por defecto",
     cells: "Textos de celda",
+    fileInputPlaceholder: "Seleccione un archivo o pegue un enlace de archivo...",
     keyName: "Columna clave",
     itemvalue: {
       visibleIf: "Haga que la opción sea visible si",
@@ -1220,6 +1222,9 @@ var spanishTranslation = {
     currencymask: {
       prefix: "Ej.: $",
       suffix: "Ej.: USD"
+    },
+    panelbase: {
+      questionTitleWidth: "Ej.: 200px"
     }
   },
   pehelp: {
@@ -1230,6 +1235,7 @@ var spanishTranslation = {
       enableIf: "Utilice el icono de la varita mágica para establecer una regla condicional que desactive el modo de solo lectura para el panel.",
       requiredIf: "Utilice el icono de la varita mágica para establecer una regla condicional que impida el envío de encuestas a menos que al menos una pregunta anidada tenga una respuesta.",
       questionTitleLocation: "Se aplica a todas las preguntas de este panel. Si desea anular esta configuración, defina reglas de alineación de títulos para preguntas individuales. La opción \"Heredar\" aplica la configuración a nivel de página (si está establecida) o a nivel de encuesta (\"Superior\" de forma predeterminada).",
+      questionTitleWidth: "Establece un ancho coherente para los títulos de las preguntas cuando están alineados a la izquierda de sus cuadros de preguntas. Acepta valores CSS (px, %, in, pt, etc.).",
       questionErrorLocation: "Establece la ubicación de un mensaje de error en relación con todas las preguntas del panel. La opción \"Heredar\" aplica la configuración a nivel de página (si se establece) o a nivel de encuesta.",
       questionsOrder: "Mantiene el orden original de las preguntas o las aleatoriza. La opción \"Heredar\" aplica la configuración a nivel de página (si se establece) o a nivel de encuesta.",
       page: "Cambia la posición del panel al final de una página seleccionada.",
@@ -1376,6 +1382,7 @@ var spanishTranslation = {
       enableIf: "Utilice el icono de la varita mágica para establecer una regla condicional que deshabilite el modo de solo lectura de la página.",
       requiredIf: "Utilice el icono de la varita mágica para establecer una regla condicional que impida el envío de encuestas a menos que al menos una pregunta anidada tenga una respuesta.",
       questionTitleLocation: "Se aplica a todas las preguntas de esta página. Si desea anular esta configuración, defina reglas de alineación de títulos para preguntas o paneles individuales. La opción \"Heredar\" aplica la configuración a nivel de encuesta (\"Superior\" de forma predeterminada).",
+      questionTitleWidth: "Establece un ancho coherente para los títulos de las preguntas cuando están alineados a la izquierda de sus cuadros de preguntas. Acepta valores CSS (px, %, in, pt, etc.).",
       questionErrorLocation: "Establece la ubicación de un mensaje de error en relación con la pregunta con entrada no válida. Elija entre: \"Arriba\": se coloca un texto de error en la parte superior del cuadro de pregunta; \"Abajo\": se coloca un texto de error en la parte inferior del cuadro de pregunta. La opción \"Heredar\" aplica la configuración a nivel de encuesta (\"Superior\" de forma predeterminada).",
       questionsOrder: "Mantiene el orden original de las preguntas o las aleatoriza. La opción \"Heredar\" aplica la configuración a nivel de encuesta (\"Original\" de forma predeterminada). El efecto de esta configuración solo es visible en la pestaña Vista previa.",
       navigationButtonsVisibility: "Establece la visibilidad de los botones de navegación en la página. La opción \"Heredar\" aplica la configuración de nivel de encuesta, que por defecto es \"Visible\"."
@@ -2433,3 +2440,8 @@ editorLocalization.locales["es"] = spanishTranslation;
 // paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "Texto de reserva para los títulos de tabulación que se aplica cuando el patrón de título de tabulación no genera un valor significativo."
 // theme.fontColor: "Font color" => "Color de la fuente"
 // theme.backgroundColor: "Background color" => "Color de fondo"
+// pe.questionTitleWidth: "Question title width" => "Ancho del título de la pregunta"
+// pe.fileInputPlaceholder: "Select a file or paste a file link..." => "Seleccione un archivo o pegue un enlace de archivo..."
+// panelbase.questionTitleWidth: "Ex.: 200px" => "Ej.: 200px"
+// panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Establece un ancho coherente para los títulos de las preguntas cuando están alineados a la izquierda de sus cuadros de preguntas. Acepta valores CSS (px, %, in, pt, etc.)."
+// page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Establece un ancho coherente para los títulos de las preguntas cuando están alineados a la izquierda de sus cuadros de preguntas. Acepta valores CSS (px, %, in, pt, etc.)."

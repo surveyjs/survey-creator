@@ -114,6 +114,7 @@ test("tranlation property grid", async (t) => {
       .click(Selector("button[title='Auto-translate All']"));
     await takeElementScreenshot("translation-auto-translate-popup.png", Selector(".st-translation-dialog"), t, comparer);
     await t.click("button[title='Apply']")
+      .wait(1000)
       .typeText(Selector("textarea").nth(1), "translated")
       .click(Selector(".spg-action-button"))
       .click(Selector("span").withText("Dansk"))

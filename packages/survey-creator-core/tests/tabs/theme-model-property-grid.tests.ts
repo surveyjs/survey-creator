@@ -1076,6 +1076,39 @@ test("header editable after theme changed", (): any => {
   expect(headerTitleQuestion.isVisible).toBe(true);
 });
 
+test("advanced header disable inheritWidthFrom and reset it to 'container' if showTOC is true", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { title: "Survey Title", questions: [{ type: "text", name: "q1" }] };
+
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const groupHeader = themePlugin.propertyGrid.survey.pages[0].getElementByName("header");
+  const headerViewContainer = groupHeader.elements[0].contentPanel;
+  const inheritWidthFromQuestion = headerViewContainer.getElementByName("inheritWidthFrom");
+
+  expect(inheritWidthFromQuestion.isVisible).toBe(false);
+
+  headerViewContainer.getElementByName("headerView").value = "advanced";
+  expect(inheritWidthFromQuestion.isVisible).toBe(true);
+  expect(inheritWidthFromQuestion.value).toBe("container");
+
+  inheritWidthFromQuestion.value = "survey";
+
+  themePlugin.deactivate();
+  creator.survey.showTOC = true;
+  themePlugin.activate();
+  expect(headerViewContainer.getElementByName("headerView").value).toBe("advanced");
+  expect(inheritWidthFromQuestion.value).toBe("container");
+  expect(inheritWidthFromQuestion.isVisible).toBe(false);
+
+  themePlugin.deactivate();
+  creator.survey.showTOC = false;
+  themePlugin.activate();
+  expect(headerViewContainer.getElementByName("headerView").value).toBe("advanced");
+  expect(inheritWidthFromQuestion.value).toBe("container");
+  expect(inheritWidthFromQuestion.isVisible).toBe(true);
+});
+
 test("Theme builder: set custom font", (): any => {
   const customFont = "RobotoMono-Regular, monospace";
   expect(DefaultFonts.length).toEqual(10);

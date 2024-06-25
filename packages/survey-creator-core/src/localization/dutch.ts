@@ -598,6 +598,7 @@ export var nlStrings = {
     allowCompleteSurveyAutomatic: "Vul de enquête automatisch in",
     showProgressBar: "Toon voortgangsbalk",
     questionTitleLocation: "Plek vraagtitel",
+    questionTitleWidth: "Breedte van de vraagtitel",
     requiredText: "Symbool(en) verplichte vraag",
     questionTitleTemplate: "Vraagtitelsjabloon, standaard is: '{no}. {vereisen} {titel}'",
     questionErrorLocation: "Plek vraagfoutmelding",
@@ -734,6 +735,7 @@ export var nlStrings = {
     correctAnswer: "Juist antwoord",
     defaultPanelValue: "Standaardwaarden",
     cells: "Celteksten",
+    fileInputPlaceholder: "Selecteer een bestand of plak een bestandslink...",
     keyName: "Sleutelkolom",
     itemvalue: {
       visibleIf: "Maak de optie zichtbaar als",
@@ -1220,6 +1222,9 @@ export var nlStrings = {
     currencymask: {
       prefix: "Bijv.: $",
       suffix: "Bijv.: USD"
+    },
+    panelbase: {
+      questionTitleWidth: "Bijv.: 200px"
     }
   },
   pehelp: {
@@ -1230,6 +1235,7 @@ export var nlStrings = {
       enableIf: "Gebruik het pictogram van de toverstaf om een voorwaardelijke regel in te stellen die de alleen-lezen modus voor het deelvenster uitschakelt.",
       requiredIf: "Gebruik het toverstafpictogram om een voorwaardelijke regel in te stellen die het verzenden van enquêtes verhindert, tenzij ten minste één geneste vraag een antwoord heeft.",
       questionTitleLocation: "Geldt voor alle vragen binnen dit panel. Als u deze instelling wilt overschrijven, definieert u regels voor titeluitlijning voor afzonderlijke vragen. De optie \"Overnemen\" past de instelling op paginaniveau (indien ingesteld) of enquêteniveau (\"Standaard bovenaan\") toe.",
+      questionTitleWidth: "Hiermee stelt u een consistente breedte in voor vraagtitels wanneer deze links van de vraagvakken zijn uitgelijnd. Accepteert CSS-waarden (px, %, in, pt, enz.).",
       questionErrorLocation: "Hiermee stelt u de locatie van een foutmelding in met betrekking tot alle vragen in het panel. De optie \"Overnemen\" past de instelling op paginaniveau (indien ingesteld) of enquêteniveau toe.",
       questionsOrder: "Behoudt de oorspronkelijke volgorde van vragen of maakt ze willekeurig. De optie \"Overnemen\" past de instelling op paginaniveau (indien ingesteld) of enquêteniveau toe.",
       page: "Hiermee verplaatst u het deelvenster naar het einde van een geselecteerde pagina.",
@@ -1376,6 +1382,7 @@ export var nlStrings = {
       enableIf: "Gebruik het pictogram van de toverstaf om een voorwaardelijke regel in te stellen waarmee de alleen-lezen modus voor de pagina wordt uitgeschakeld.",
       requiredIf: "Gebruik het toverstafpictogram om een voorwaardelijke regel in te stellen die het verzenden van enquêtes verhindert, tenzij ten minste één geneste vraag een antwoord heeft.",
       questionTitleLocation: "Geldt voor alle vragen op deze pagina. Als je deze instelling wilt overschrijven, definieer je regels voor titeluitlijning voor afzonderlijke vragen of panelen. De optie \"Overnemen\" past de instelling op enquêteniveau toe (\"Top\" standaard).",
+      questionTitleWidth: "Hiermee stelt u een consistente breedte in voor vraagtitels wanneer deze links van de vraagvakken zijn uitgelijnd. Accepteert CSS-waarden (px, %, in, pt, enz.).",
       questionErrorLocation: "Hiermee stelt u de locatie van een foutmelding in ten opzichte van de vraag met ongeldige invoer. Kies tussen: \"Top\" - er wordt een fouttekst bovenaan het vraagvak geplaatst; \"Onderaan\" - er wordt een fouttekst onderaan het vraagvak geplaatst. De optie \"Overnemen\" past de instelling op enquêteniveau toe (\"Top\" standaard).",
       questionsOrder: "Behoudt de oorspronkelijke volgorde van vragen of maakt ze willekeurig. De optie \"Overerven\" past de instelling op enquêteniveau toe (\"Standaard Origineel\"). Het effect van deze instelling is alleen zichtbaar op het tabblad Voorbeeld.",
       navigationButtonsVisibility: "Hiermee stelt u de zichtbaarheid van navigatieknoppen op de pagina in. De optie \"Overerven\" past de instelling op enquêteniveau toe, die standaard op \"Zichtbaar\" staat."
@@ -2640,3 +2647,8 @@ editorLocalization.locales["nl"] = nlStrings;
 // paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "Een terugvaltekst voor tabbladtitels die van toepassing is wanneer het patroon van de tabbladtitel geen zinvolle waarde oplevert."
 // theme.fontColor: "Font color" => "Tekstkleur"
 // theme.backgroundColor: "Background color" => "Achtergrondkleur"
+// pe.questionTitleWidth: "Question title width" => "Breedte van de vraagtitel"
+// pe.fileInputPlaceholder: "Select a file or paste a file link..." => "Selecteer een bestand of plak een bestandslink..."
+// panelbase.questionTitleWidth: "Ex.: 200px" => "Bijv.: 200px"
+// panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Hiermee stelt u een consistente breedte in voor vraagtitels wanneer deze links van de vraagvakken zijn uitgelijnd. Accepteert CSS-waarden (px, %, in, pt, enz.)."
+// page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Hiermee stelt u een consistente breedte in voor vraagtitels wanneer deze links van de vraagvakken zijn uitgelijnd. Accepteert CSS-waarden (px, %, in, pt, enz.)."

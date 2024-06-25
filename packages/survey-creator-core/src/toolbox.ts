@@ -89,9 +89,7 @@ export class QuestionToolboxCategory extends Base {
     this.collapsedValue = val;
   }
 
-  public get empty() {
-    return this.items.filter(item => item.visible).length == 0;
-  }
+  @property() empty: boolean;
 
   public toggleState() {
     if (this.toolbox) {

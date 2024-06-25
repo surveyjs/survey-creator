@@ -18,7 +18,9 @@ export class SurveyCreatorToolboxCategory extends SurveyElementBase<ISurveyCreat
     return this.props.toolbox;
   }
   public get class() {
-    return "svc-toolbox__category" + (this.category.collapsed ? " svc-toolbox__category--collapsed" : "");
+    return "svc-toolbox__category" +
+      (this.category.collapsed ? " svc-toolbox__category--collapsed" : "") +
+      (this.category.empty ? " svc-toolbox__category--empty" : "");
   }
 
   protected getStateElement(): Base {
