@@ -155,7 +155,7 @@ export class PreviewViewModel extends Base {
   private updatePageItem(page: PageModel) {
     const item = this.getPageItemByPage(page);
     if (item) {
-      item.enabled = this.enableInvisiblePages || page.isVisible;
+      item.enabled = (this.enableInvisiblePages && this.showInvisibleElements) || page.isVisible;
     }
   }
   private getCurrentPageItem(): IAction {
@@ -181,7 +181,7 @@ export class PreviewViewModel extends Base {
         id: page.name,
         data: page,
         title: this.getPageTitle(page),
-        enabled: this.enableInvisiblePages || page.isVisible,
+        enabled: (this.enableInvisiblePages && this.showInvisibleElements) || page.isVisible,
         visible: true
       };
       if (!page.isVisible) {
@@ -220,7 +220,7 @@ export class PreviewViewModel extends Base {
       if (this.survey.state === "starting" && isNext) {
         newIndex = 0;
       }
-      let nearPage: PageModel = this.survey.visiblePages[newIndex];
+      let nearPage: PageModel = this.showInvisibleElements ? this.survey.pages[newIndex] : this.survey.visiblePages[newIndex];
       if (!isNext && currentIndex === 0 && this.survey.firstPageIsStarted
         && this.survey.pages.length > 0) {
         nearPage = this.survey.pages[0];

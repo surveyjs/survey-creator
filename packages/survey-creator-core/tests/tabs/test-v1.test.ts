@@ -54,7 +54,7 @@ test("pages, visibility", (): any => {
   const pageList = model.pageActions.filter((item: IAction) => item.id === "pageSelector")[0].popupModel.contentComponentData.model;
   const pagesActions = pageList.actions;
   expect(pagesActions).toHaveLength(3);
-  expect(pagesActions[1].enabled).toBeTruthy();//TestSurveyTabViewModel.enableInvisiblePages = true
+  expect(pagesActions[1].enabled).toBeFalsy();
   q.visible = true;
   expect(pagesActions[1].enabled).toBeTruthy();
 });

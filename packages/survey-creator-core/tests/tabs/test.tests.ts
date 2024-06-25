@@ -161,14 +161,14 @@ test("Enable/disable nextPage action on page visibility change and page actions,
   expect(pageList.actions).toHaveLength(2);
   expect(pageList.actions[0].title).toBe("Page 1");
   expect(pageList.actions[1].title).toBe("Page 2");
-  expect(pageList.actions[1].enabled).toBeTruthy(); //TestSurveyTabViewModel.enableInvisiblePages = true
+  expect(pageList.actions[1].enabled).toBeFalsy();
   const nextPage: IAction = model.pageActions.filter((item: IAction) => item.id === "nextPage")[0];
   expect(nextPage.enabled).toBeFalsy();
   model.survey.setValue("q1", 2);
   expect(pageList.actions[1].enabled).toBeTruthy();
   expect(nextPage.enabled).toBeTruthy();
   model.survey.setValue("q1", 3);
-  expect(pageList.actions[1].enabled).toBeTruthy(); //TestSurveyTabViewModel.enableInvisiblePages = true
+  expect(pageList.actions[1].enabled).toBeFalsy();
   expect(nextPage.enabled).toBeFalsy();
 });
 test("Page action title when the preview shows only, Bug#5277", (): any => {
@@ -248,10 +248,10 @@ test("pages, PageListItems, makes items enable/disable and do not touch visibili
   expect(pagesActions).toHaveLength(3);
   expect(pagesActions[0].enabled).toBeTruthy();
   expect(pagesActions[1].enabled).toBeTruthy();
-  expect(pagesActions[2].enabled).toBeTruthy(); //TestSurveyTabViewModel.enableInvisiblePages = true
+  expect(pagesActions[2].enabled).toBeFalsy();
   expect(pagesActions[2].visible).toEqual(true);
   model.survey.pages[1].visible = false;
-  expect(pagesActions[1].enabled).toBeTruthy(); //TestSurveyTabViewModel.enableInvisiblePages = true
+  expect(pagesActions[1].enabled).toBeFalsy();
   expect(pagesActions[1].visible).toEqual(true);
   model.survey.pages[1].visible = true;
   expect(pagesActions[1].enabled).toBeTruthy();
