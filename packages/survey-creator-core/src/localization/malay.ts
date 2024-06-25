@@ -598,6 +598,7 @@ export var msStrings = {
     allowCompleteSurveyAutomatic: "Lengkapkan tinjauan secara automatik",
     showProgressBar: "Tunjukkan bar perkembangan",
     questionTitleLocation: "Lokasi tajuk soalan",
+    questionTitleWidth: "Lebar tajuk soalan",
     requiredText: "Soalan memerlukan simbol",
     questionTitleTemplate: "Templat tajuk soalan, lalai ialah: '{tidak}. {perlukan} {tajuk}'",
     questionErrorLocation: "Lokasi ralat soalan",
@@ -734,6 +735,7 @@ export var msStrings = {
     correctAnswer: "Jawapan yang betul",
     defaultPanelValue: "Nilai Lalai",
     cells: "Teks sel",
+    fileInputPlaceholder: "Pilih fail atau tampal pautan fail...",
     keyName: "Lajur utama",
     itemvalue: {
       visibleIf: "Jadikan opsyen kelihatan jika",
@@ -1220,6 +1222,9 @@ export var msStrings = {
     currencymask: {
       prefix: "Ex.: $",
       suffix: "Ex.: USD"
+    },
+    panelbase: {
+      questionTitleWidth: "Ex.: 200px"
     }
   },
   pehelp: {
@@ -1230,6 +1235,7 @@ export var msStrings = {
       enableIf: "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang melumpuhkan mod baca sahaja untuk panel.",
       requiredIf: "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang menghalang penyerahan tinjauan melainkan sekurang-kurangnya satu soalan tersarang mempunyai jawapan.",
       questionTitleLocation: "Digunakan untuk semua soalan dalam panel ini. Jika anda ingin mengubah seting ini, takrifkan peraturan penjajaran tajuk untuk soalan individu. Pilihan \"Warisan\" menggunakan peringkat halaman (jika ditetapkan) atau tetapan peringkat tinjauan (\"Atas\" secara lalai).",
+      questionTitleWidth: "Menetapkan lebar yang konsisten untuk tajuk soalan apabila ia dijajarkan di sebelah kiri kotak soalan mereka. Menerima nilai CSS (px, %, dalam, pt, dll.).",
       questionErrorLocation: "Mengesetkan lokasi mesej ralat berhubung dengan semua soalan dalam panel. Opsyen \"Warisan\" menggunakan aras halaman (jika set) atau seting aras tinjauan.",
       questionsOrder: "Mengekalkan susunan soalan asal atau rawak mereka. Opsyen \"Warisan\" menggunakan aras halaman (jika set) atau seting aras tinjauan.",
       page: "Meletakkan semula panel di hujung halaman yang dipilih.",
@@ -1376,6 +1382,7 @@ export var msStrings = {
       enableIf: "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang menyahdayakan mod baca sahaja untuk halaman.",
       requiredIf: "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang menghalang penyerahan tinjauan melainkan sekurang-kurangnya satu soalan tersarang mempunyai jawapan.",
       questionTitleLocation: "Digunakan untuk semua soalan dalam halaman ini. Jika anda ingin mengubah seting ini, takrifkan peraturan penjajaran tajuk untuk soalan atau panel individu. Pilihan \"Warisan\" menggunakan tetapan peringkat tinjauan (\"Atas\" secara lalai).",
+      questionTitleWidth: "Menetapkan lebar yang konsisten untuk tajuk soalan apabila ia dijajarkan di sebelah kiri kotak soalan mereka. Menerima nilai CSS (px, %, dalam, pt, dll.).",
       questionErrorLocation: "Mengesetkan lokasi mesej ralat berhubung dengan soalan dengan input tidak sah. Pilih antara: \"Atas\" - teks ralat diletakkan di bahagian atas kotak soalan; \"Bawah\" - teks ralat diletakkan di bahagian bawah kotak soalan. Pilihan \"Warisan\" menggunakan tetapan peringkat tinjauan (\"Atas\" secara lalai).",
       questionsOrder: "Mengekalkan susunan soalan asal atau rawak mereka. Pilihan \"Warisan\" menggunakan seting peringkat tinjauan (\"Asal\" secara lalai). Kesan seting ini hanya kelihatan dalam tab Pratonton.",
       navigationButtonsVisibility: "Mengesetkan keterlihatan butang navigasi pada halaman. Opsyen \"Warisan\" menggunakan seting aras tinjauan, yang lalai kepada \"Boleh Dilihat\"."
@@ -2612,3 +2619,8 @@ editorLocalization.locales["ms"] = msStrings;
 // paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "Teks sandaran untuk tajuk tab yang digunakan apabila corak tajuk tab tidak menghasilkan nilai yang bermakna."
 // theme.fontColor: "Font color" => "Warna fon"
 // theme.backgroundColor: "Background color" => "Warna latar belakang"
+// pe.questionTitleWidth: "Question title width" => "Lebar tajuk soalan"
+// pe.fileInputPlaceholder: "Select a file or paste a file link..." => "Pilih fail atau tampal pautan fail..."
+// panelbase.questionTitleWidth: "Ex.: 200px" => "Ex.: 200px"
+// panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Menetapkan lebar yang konsisten untuk tajuk soalan apabila ia dijajarkan di sebelah kiri kotak soalan mereka. Menerima nilai CSS (px, %, dalam, pt, dll.)."
+// page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Menetapkan lebar yang konsisten untuk tajuk soalan apabila ia dijajarkan di sebelah kiri kotak soalan mereka. Menerima nilai CSS (px, %, dalam, pt, dll.)."

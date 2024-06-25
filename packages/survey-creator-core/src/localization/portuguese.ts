@@ -598,6 +598,7 @@ var portugueseTranslation = {
     allowCompleteSurveyAutomatic: "Preencha o questionário automaticamente",
     showProgressBar: "Mostrar barra de progresso",
     questionTitleLocation: "Localização do título da pergunta",
+    questionTitleWidth: "Largura do título da pergunta",
     requiredText: "Símbolo(s) para perguntas obrigatórias",
     questionTitleTemplate: "Template do título da pergunta, default é: '{no}. {obrigatório} {título}'",
     questionErrorLocation: "Localização do erro da pergunta",
@@ -734,6 +735,7 @@ var portugueseTranslation = {
     correctAnswer: "Resposta correta",
     defaultPanelValue: "Valores pré-definidos",
     cells: "Textos de Célula",
+    fileInputPlaceholder: "Selecione um arquivo ou cole um link de arquivo...",
     keyName: "Coluna chave",
     itemvalue: {
       visibleIf: "Torne a opção visível se",
@@ -1220,6 +1222,9 @@ var portugueseTranslation = {
     currencymask: {
       prefix: "Ex.: $",
       suffix: "Ex.: USD"
+    },
+    panelbase: {
+      questionTitleWidth: "Ex.: 200px"
     }
   },
   pehelp: {
@@ -1230,6 +1235,7 @@ var portugueseTranslation = {
       enableIf: "Use o ícone de varinha mágica para definir uma regra condicional que desabilite o modo somente leitura para o painel.",
       requiredIf: "Use o ícone de varinha mágica para definir uma regra condicional que impeça o envio de questionários, a menos que pelo menos uma pergunta aninhada tenha uma resposta.",
       questionTitleLocation: "Aplica-se a todas as perguntas deste painel. Se você quiser substituir essa configuração, defina regras de alinhamento de título para perguntas individuais. A opção \"Herdar\" aplica a configuração de nível de página (se definida) ou de nível de pesquisa (\"Superior\" por padrão).",
+      questionTitleWidth: "Define largura consistente para títulos de perguntas quando eles estão alinhados à esquerda de suas caixas de perguntas. Aceita valores CSS (px, %, in, pt, etc.).",
       questionErrorLocation: "Define o local de uma mensagem de erro em relação a todas as perguntas no painel. A opção \"Herdar\" aplica a configuração de nível de página (se definida) ou de nível de pesquisa.",
       questionsOrder: "Mantém a ordem original das perguntas ou as randomiza. A opção \"Herdar\" aplica a configuração de nível de página (se definida) ou de nível de pesquisa.",
       page: "Reposiciona o painel no final de uma página selecionada.",
@@ -1376,6 +1382,7 @@ var portugueseTranslation = {
       enableIf: "Use o ícone de varinha mágica para definir uma regra condicional que desabilita o modo somente leitura da página.",
       requiredIf: "Use o ícone de varinha mágica para definir uma regra condicional que impeça o envio de questionários, a menos que pelo menos uma pergunta aninhada tenha uma resposta.",
       questionTitleLocation: "Aplica-se a todas as perguntas dentro desta página. Se você quiser substituir essa configuração, defina regras de alinhamento de título para perguntas ou painéis individuais. A opção \"Herdar\" aplica a configuração de nível de pesquisa (\"Superior\" por padrão).",
+      questionTitleWidth: "Define largura consistente para títulos de perguntas quando eles estão alinhados à esquerda de suas caixas de perguntas. Aceita valores CSS (px, %, in, pt, etc.).",
       questionErrorLocation: "Define o local de uma mensagem de erro em relação à pergunta com entrada inválida. Escolha entre: \"Top\" - um texto de erro é colocado na parte superior da caixa de perguntas; \"Inferior\" - um texto de erro é colocado na parte inferior da caixa de perguntas. A opção \"Herdar\" aplica a configuração de nível de pesquisa (\"Superior\" por padrão).",
       questionsOrder: "Mantém a ordem original das perguntas ou as randomiza. A opção \"Herdar\" aplica a configuração de nível de pesquisa (\"Original\" por padrão). O efeito dessa configuração só é visível na guia Visualização.",
       navigationButtonsVisibility: "Define a visibilidade dos botões de navegação na página. A opção \"Herdar\" aplica a configuração de nível de pesquisa, que tem como padrão \"Visível\"."
@@ -2325,3 +2332,8 @@ editorLocalization.locales["pt"] = portugueseTranslation;
 // paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "Um texto de fallback para títulos de guia que se aplica quando o padrão de título de guia não produz um valor significativo."
 // theme.fontColor: "Font color" => "Cor da fonte"
 // theme.backgroundColor: "Background color" => "Cor de fundo"
+// pe.questionTitleWidth: "Question title width" => "Largura do título da pergunta"
+// pe.fileInputPlaceholder: "Select a file or paste a file link..." => "Selecione um arquivo ou cole um link de arquivo..."
+// panelbase.questionTitleWidth: "Ex.: 200px" => "Ex.: 200px"
+// panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Define largura consistente para títulos de perguntas quando eles estão alinhados à esquerda de suas caixas de perguntas. Aceita valores CSS (px, %, in, pt, etc.)."
+// page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Define largura consistente para títulos de perguntas quando eles estão alinhados à esquerda de suas caixas de perguntas. Aceita valores CSS (px, %, in, pt, etc.)."

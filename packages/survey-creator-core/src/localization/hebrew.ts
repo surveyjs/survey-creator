@@ -598,6 +598,7 @@ export var hebrewStrings = {
     allowCompleteSurveyAutomatic: "השלם את הסקר באופן אוטומטי",
     showProgressBar: "מיקום שורת ההתקדמות",
     questionTitleLocation: "מיקום כותרת השאלה",
+    questionTitleWidth: "רוחב כותרת השאלה",
     requiredText: "סמן נדרש(ים)",
     questionTitleTemplate: "תבנית כותרת השאלה, ברירת המחדל היא: '{no}. {require} {title}'",
     questionErrorLocation: "מיקום הודעת השגיאה",
@@ -734,6 +735,7 @@ export var hebrewStrings = {
     correctAnswer: "תשובה נכונה",
     defaultPanelValue: "ערכים ברירת מחדל",
     cells: "טקסטי תאים",
+    fileInputPlaceholder: "בחר קובץ או הדבק קישור לקובץ...",
     keyName: "עמודת מפתח",
     itemvalue: {
       visibleIf: "הפוך את האפשרות לגלויה אם",
@@ -1220,6 +1222,9 @@ export var hebrewStrings = {
     currencymask: {
       prefix: "לדוגמה: $",
       suffix: "לדוגמה: USD"
+    },
+    panelbase: {
+      questionTitleWidth: "לדוגמה: 200px"
     }
   },
   pehelp: {
@@ -1230,6 +1235,7 @@ export var hebrewStrings = {
       enableIf: "השתמשו בסמל מטה הקסם כדי להגדיר כלל מותנה שמשבית את מצב הקריאה בלבד של החלונית.",
       requiredIf: "השתמש בסמל מטה הקסם כדי להגדיר כלל תנאי המונע שליחת סקר, אלא אם לשאלה מקוננת אחת לפחות יש תשובה.",
       questionTitleLocation: "חל על כל השאלות בפאנל זה. אם ברצונך לעקוף הגדרה זו, הגדר כללי יישור כותרת עבור שאלות בודדות. האפשרות \"הירושה\" מחילה את ההגדרה ברמת הדף (אם הוגדרה) או ברמת הסקר (\"למעלה\" כברירת מחדל).",
+      questionTitleWidth: "הגדרת רוחב עקבי לכותרות שאלות כאשר הן מיושרות משמאל לתיבות השאלות. מקבל ערכי CSS (px, %, in, pt וכו').",
       questionErrorLocation: "קובע את המיקום של הודעת שגיאה ביחס לכל השאלות בחלונית. האפשרות \"הירושה\" מחילה את ההגדרה ברמת הדף (אם הוגדרה) או ברמת הסקר.",
       questionsOrder: "שומר על הסדר המקורי של השאלות או מסדר אותן באופן אקראי. האפשרות \"הירושה\" מחילה את ההגדרה ברמת הדף (אם הוגדרה) או ברמת הסקר.",
       page: "מיקום מחדש של החלונית לסוף עמוד שנבחר.",
@@ -1376,6 +1382,7 @@ export var hebrewStrings = {
       enableIf: "השתמש בסמל מטה הקסם כדי להגדיר כלל תנאי שמשבית את מצב הקריאה בלבד של העמוד.",
       requiredIf: "השתמש בסמל מטה הקסם כדי להגדיר כלל תנאי המונע שליחת סקר, אלא אם לשאלה מקוננת אחת לפחות יש תשובה.",
       questionTitleLocation: "חל על כל השאלות בדף זה. אם ברצונך לדרוס הגדרה זו, הגדר כללי יישור כותרת לשאלות או חלוניות בודדות. האפשרות \"ירושה\" מחילה את ההגדרה ברמת הסקר (\"למעלה\" כברירת מחדל).",
+      questionTitleWidth: "הגדרת רוחב עקבי לכותרות שאלות כאשר הן מיושרות משמאל לתיבות השאלות. מקבל ערכי CSS (px, %, in, pt וכו').",
       questionErrorLocation: "הגדרת המיקום של הודעת שגיאה ביחס לשאלה עם קלט לא חוקי. בחר בין: \"למעלה\" - טקסט שגיאה ממוקם בחלק העליון של תיבת השאלה; \"תחתית\" - טקסט שגיאה ממוקם בחלק התחתון של תיבת השאלה. האפשרות \"ירושה\" מחילה את ההגדרה ברמת הסקר (\"למעלה\" כברירת מחדל).",
       questionsOrder: "שומר על הסדר המקורי של השאלות או מסדר אותן באופן אקראי. האפשרות \"ירושה\" מחילה את ההגדרה ברמת הסקר (\"מקורי\" כברירת מחדל). ההשפעה של הגדרה זו גלויה רק בכרטיסיה תצוגה מקדימה.",
       navigationButtonsVisibility: "מגדיר את התצוגה של לחצני ניווט בעמוד. האפשרות \"ירושה\" מחילה את ההגדרה ברמת הסקר, המוגדרת כברירת מחדל ל\"גלוי\"."
@@ -2227,3 +2234,8 @@ editorLocalization.locales["he"] = hebrewStrings;
 // paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "טקסט נסיגה עבור כותרות טאבים שחל כאשר תבנית כותרת הטאב אינה מפיקה ערך בעל משמעות."
 // theme.fontColor: "Font color" => "צבע גופן"
 // theme.backgroundColor: "Background color" => "צבע רקע"
+// pe.questionTitleWidth: "Question title width" => "רוחב כותרת השאלה"
+// pe.fileInputPlaceholder: "Select a file or paste a file link..." => "בחר קובץ או הדבק קישור לקובץ..."
+// panelbase.questionTitleWidth: "Ex.: 200px" => "לדוגמה: 200px"
+// panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "הגדרת רוחב עקבי לכותרות שאלות כאשר הן מיושרות משמאל לתיבות השאלות. מקבל ערכי CSS (px, %, in, pt וכו')."
+// page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "הגדרת רוחב עקבי לכותרות שאלות כאשר הן מיושרות משמאל לתיבות השאלות. מקבל ערכי CSS (px, %, in, pt וכו')."

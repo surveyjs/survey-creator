@@ -323,6 +323,22 @@ test("Toolbox with search", async (t) => {
   });
 });
 
+test("Toolbox with search in categories", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    const toolboxElement = Selector(".svc-toolbox");
+
+    await setJSON({ pages: [{ name: "page1" }] });
+    await ClientFunction(() => {
+      window["creator"].toolbox.searchEnabled = true;
+      window["creator"].toolbox.showCategoryTitles = true;
+    })();
+
+    await t.resizeWindow(2560, 1440);
+    await t.typeText(Selector(".svc-toolbox input"), "single");
+    await takeElementScreenshot("toolbox-search-categories.png", toolboxElement, t, comparer);
+  });
+});
+
 test("Toolbox with search compact", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     const toolboxElement = Selector(".svc-toolbox");
