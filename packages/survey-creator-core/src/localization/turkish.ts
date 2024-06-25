@@ -598,6 +598,7 @@ export var turkishStrings = {
     allowCompleteSurveyAutomatic: "Anketi otomatik olarak tamamlama",
     showProgressBar: "İlerleme çubuğunu göster",
     questionTitleLocation: "Soru başlığı konumu",
+    questionTitleWidth: "Soru başlığı genişliği",
     requiredText: "Zorunlu soru sembolü",
     questionTitleTemplate: "Soru başlığı şablonu, varsayılan değer: '{no}. {require} {title}'",
     questionErrorLocation: "Soru hatası konumu",
@@ -734,6 +735,7 @@ export var turkishStrings = {
     correctAnswer: "Doğru Cevap",
     defaultPanelValue: "Varsayılan Değerler",
     cells: "Hücre Metinleri",
+    fileInputPlaceholder: "Bir dosya seçin veya bir dosya bağlantısı yapıştırın...",
     keyName: "Anahtar sütunu",
     itemvalue: {
       visibleIf: "Aşağıdaki durumlarda seçeneği görünür hale getirin",
@@ -1220,6 +1222,9 @@ export var turkishStrings = {
     currencymask: {
       prefix: "Ör.: $",
       suffix: "Ör.: USD"
+    },
+    panelbase: {
+      questionTitleWidth: "Ör.: 200 piksel"
     }
   },
   pehelp: {
@@ -1230,6 +1235,7 @@ export var turkishStrings = {
       enableIf: "Panelin salt okunur modunu devre dışı bırakan koşullu bir kural ayarlamak için sihirli değnek simgesini kullanın.",
       requiredIf: "En az bir iç içe geçmiş sorunun yanıtı olmadığı sürece anket gönderimini engelleyen koşullu bir kural ayarlamak için sihirli değnek simgesini kullanın.",
       questionTitleLocation: "Bu paneldeki tüm sorular için geçerlidir. Bu ayarı geçersiz kılmak istiyorsanız, tek tek sorular için başlık hizalama kuralları tanımlayın. \"Devral\" seçeneği, sayfa düzeyi (ayarlanmışsa) veya anket düzeyi ayarını (varsayılan olarak \"Üst\") uygular.",
+      questionTitleWidth: "Soru kutularının soluna hizalandıklarında soru başlıkları için tutarlı genişlik ayarlar. CSS değerlerini (px, %, in, pt, vb.) kabul eder.",
       questionErrorLocation: "Paneldeki tüm sorularla ilgili olarak bir hata mesajının konumunu ayarlar. \"Devral\" seçeneği, sayfa düzeyi (ayarlanmışsa) veya anket düzeyi ayarını uygular.",
       questionsOrder: "Soruların orijinal sırasını korur veya rastgele hale getirir. \"Devral\" seçeneği, sayfa düzeyi (ayarlanmışsa) veya anket düzeyi ayarını uygular.",
       page: "Paneli seçili sayfanın sonuna yeniden konumlandırır.",
@@ -1376,6 +1382,7 @@ export var turkishStrings = {
       enableIf: "Sayfanın salt okunur modunu devre dışı bırakan koşullu bir kural ayarlamak için sihirli değnek simgesini kullanın.",
       requiredIf: "En az bir iç içe geçmiş sorunun yanıtı olmadığı sürece anket gönderimini engelleyen koşullu bir kural ayarlamak için sihirli değnek simgesini kullanın.",
       questionTitleLocation: "Bu sayfadaki tüm sorular için geçerlidir. Bu ayarı geçersiz kılmak istiyorsanız, tek tek sorular veya paneller için başlık hizalama kuralları tanımlayın. \"Devral\" seçeneği, anket düzeyindeki ayarı uygular (varsayılan olarak \"Üst\").",
+      questionTitleWidth: "Soru kutularının soluna hizalandıklarında soru başlıkları için tutarlı genişlik ayarlar. CSS değerlerini (px, %, in, pt, vb.) kabul eder.",
       questionErrorLocation: "Geçersiz girişi olan soruyla ilgili olarak bir hata mesajının konumunu ayarlar. Şunlar arasından seçim yapın: \"Üst\" - soru kutusunun en üstüne bir hata metni yerleştirilir; \"Alt\" - soru kutusunun altına bir hata metni yerleştirilir. \"Devral\" seçeneği, anket düzeyindeki ayarı uygular (varsayılan olarak \"Üst\").",
       questionsOrder: "Soruların orijinal sırasını korur veya rastgele hale getirir. \"Devral\" seçeneği, anket düzeyindeki ayarı (varsayılan olarak \"Orijinal\") uygular. Bu ayarın etkisi yalnızca Önizleme sekmesinde görünür.",
       navigationButtonsVisibility: "Sayfadaki gezinme düğmelerinin görünürlüğünü ayarlar. \"Devral\" seçeneği, varsayılan olarak \"Görünür\" olan anket düzeyi ayarını uygular."
@@ -2654,3 +2661,8 @@ editorLocalization.locales["tr"] = turkishStrings;
 // paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "Sekme başlığı deseni anlamlı bir değer üretmediğinde geçerli olan sekme başlıkları için bir geri dönüş metni."
 // theme.fontColor: "Font color" => "Yazı tipi rengi"
 // theme.backgroundColor: "Background color" => "Arka plan rengi"
+// pe.questionTitleWidth: "Question title width" => "Soru başlığı genişliği"
+// pe.fileInputPlaceholder: "Select a file or paste a file link..." => "Bir dosya seçin veya bir dosya bağlantısı yapıştırın..."
+// panelbase.questionTitleWidth: "Ex.: 200px" => "Ör.: 200 piksel"
+// panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Soru kutularının soluna hizalandıklarında soru başlıkları için tutarlı genişlik ayarlar. CSS değerlerini (px, %, in, pt, vb.) kabul eder."
+// page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Soru kutularının soluna hizalandıklarında soru başlıkları için tutarlı genişlik ayarlar. CSS değerlerini (px, %, in, pt, vb.) kabul eder."

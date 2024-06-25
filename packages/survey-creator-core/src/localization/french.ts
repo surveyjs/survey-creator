@@ -598,6 +598,7 @@ var frenchTranslation = {
     allowCompleteSurveyAutomatic: "Répondez automatiquement à l’enquête",
     showProgressBar: "Afficher la barre de progression",
     questionTitleLocation: "Emplacement du titre de la question",
+    questionTitleWidth: "Largeur du titre de la question",
     requiredText: "Symbole(s) des questions obligatoires",
     questionTitleTemplate: "Emplacement du symbole obligatoire'",
     questionErrorLocation: "Emplacement de l'erreur",
@@ -734,6 +735,7 @@ var frenchTranslation = {
     correctAnswer: "Réponse correcte",
     defaultPanelValue: "Valeurs par défaut",
     cells: "Texte des cellules",
+    fileInputPlaceholder: "Sélectionnez un fichier ou collez un lien de fichier...",
     keyName: "Colonne clé",
     itemvalue: {
       visibleIf: "Rendre l’option visible si",
@@ -1220,6 +1222,9 @@ var frenchTranslation = {
     currencymask: {
       prefix: "Ex. : $",
       suffix: "Ex. : USD"
+    },
+    panelbase: {
+      questionTitleWidth: "Ex. : 200px"
     }
   },
   pehelp: {
@@ -1230,6 +1235,7 @@ var frenchTranslation = {
       enableIf: "Utilisez l’icône en forme de baguette magique pour définir une règle conditionnelle qui désactive le mode lecture seule du panneau.",
       requiredIf: "Utilisez l’icône en forme de baguette magique pour définir une règle conditionnelle qui empêche l’envoi d’un sondage à moins qu’au moins une question imbriquée n’ait une réponse.",
       questionTitleLocation: "S’applique à toutes les questions de ce panneau. Si vous souhaitez remplacer ce paramètre, définissez des règles d’alignement des titres pour les questions individuelles. L’option « Hériter » applique le paramètre au niveau de la page (s’il est défini) ou au niveau de l’enquête (« Haut » par défaut).",
+      questionTitleWidth: "Définit une largeur cohérente pour les titres de questions lorsqu’ils sont alignés à gauche de leurs zones de questions. Accepte les valeurs CSS (px, %, in, pt, etc.).",
       questionErrorLocation: "Définit l’emplacement d’un message d’erreur par rapport à toutes les questions du panneau. L’option « Hériter » applique le paramètre au niveau de la page (s’il est défini) ou au niveau de l’enquête.",
       questionsOrder: "Conserve l’ordre d’origine des questions ou les rend aléatoires. L’option « Hériter » applique le paramètre au niveau de la page (s’il est défini) ou au niveau de l’enquête.",
       page: "Repositionne le panneau à la fin d’une page sélectionnée.",
@@ -1376,6 +1382,7 @@ var frenchTranslation = {
       enableIf: "Utilisez l’icône en forme de baguette magique pour définir une règle conditionnelle qui désactive le mode lecture seule de la page.",
       requiredIf: "Utilisez l’icône en forme de baguette magique pour définir une règle conditionnelle qui empêche l’envoi d’un sondage à moins qu’au moins une question imbriquée n’ait une réponse.",
       questionTitleLocation: "S’applique à toutes les questions de cette page. Si vous souhaitez remplacer ce paramètre, définissez des règles d’alignement des titres pour des questions ou des panneaux individuels. L’option « Hériter » applique le paramètre au niveau de l’enquête (« Top » par défaut).",
+      questionTitleWidth: "Définit une largeur cohérente pour les titres de questions lorsqu’ils sont alignés à gauche de leurs zones de questions. Accepte les valeurs CSS (px, %, in, pt, etc.).",
       questionErrorLocation: "Définit l’emplacement d’un message d’erreur par rapport à la question dont l’entrée n’est pas valide. Choisissez entre : « Haut » - un texte d’erreur est placé en haut de la zone de question ; « Bas » - un texte d’erreur est placé en bas de la zone de question. L’option « Hériter » applique le paramètre au niveau de l’enquête (« Top » par défaut).",
       questionsOrder: "Conserve l’ordre d’origine des questions ou les rend aléatoires. L’option « Hériter » applique le paramètre au niveau de l’enquête (« Original » par défaut). L’effet de ce paramètre n’est visible que dans l’onglet Aperçu.",
       navigationButtonsVisibility: "Définit la visibilité des boutons de navigation sur la page. L’option « Hériter » applique le paramètre au niveau de l’enquête, qui est par défaut « Visible »."
@@ -2720,3 +2727,8 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "Texte de secours pour les titres d’onglet qui s’applique lorsque le modèle de titre d’onglet ne produit pas de valeur significative."
 // theme.fontColor: "Font color" => "Couleur de la police"
 // theme.backgroundColor: "Background color" => "Couleur de fond"
+// pe.questionTitleWidth: "Question title width" => "Largeur du titre de la question"
+// pe.fileInputPlaceholder: "Select a file or paste a file link..." => "Sélectionnez un fichier ou collez un lien de fichier..."
+// panelbase.questionTitleWidth: "Ex.: 200px" => "Ex. : 200px"
+// panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Définit une largeur cohérente pour les titres de questions lorsqu’ils sont alignés à gauche de leurs zones de questions. Accepte les valeurs CSS (px, %, in, pt, etc.)."
+// page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Définit une largeur cohérente pour les titres de questions lorsqu’ils sont alignés à gauche de leurs zones de questions. Accepte les valeurs CSS (px, %, in, pt, etc.)."

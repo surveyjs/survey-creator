@@ -598,6 +598,7 @@ var germanTranslation = {
     allowCompleteSurveyAutomatic: "Umfrage automatisch ausfüllen",
     showProgressBar: "Fortschrittsbalken anzeigen",
     questionTitleLocation: "Position des Fragentitels",
+    questionTitleWidth: "Breite des Fragetitels",
     requiredText: "Symbol für erforderliche Fragen",
     questionTitleTemplate: "Template für den Fragentitel. Standard ist: \"{no}. {require} {title}\"",
     questionErrorLocation: "Position der Fehlermeldungen",
@@ -734,6 +735,7 @@ var germanTranslation = {
     correctAnswer: "Richtige Antwort",
     defaultPanelValue: "Standardwerte",
     cells: "Zellentexte",
+    fileInputPlaceholder: "Wählen Sie eine Datei aus oder fügen Sie einen Dateilink ein...",
     keyName: "Spalte \"Schlüssel\"",
     itemvalue: {
       visibleIf: "Option sichtbar machen, wenn",
@@ -1220,6 +1222,9 @@ var germanTranslation = {
     currencymask: {
       prefix: "Bsp.: $",
       suffix: "Bsp.: USD"
+    },
+    panelbase: {
+      questionTitleWidth: "Beispiel: 200px"
     }
   },
   pehelp: {
@@ -1230,6 +1235,7 @@ var germanTranslation = {
       enableIf: "Verwenden Sie das Zauberstabsymbol, um eine bedingte Regel festzulegen, die den schreibgeschützten Modus für das Panel deaktiviert.",
       requiredIf: "Verwenden Sie das Zauberstabsymbol, um eine bedingte Regel festzulegen, die die Übermittlung von Umfragen verhindert, es sei denn, mindestens eine verschachtelte Frage enthält eine Antwort.",
       questionTitleLocation: "Gilt für alle Fragen in diesem Bereich. Wenn Sie diese Einstellung außer Kraft setzen möchten, definieren Sie Regeln für die Titelausrichtung für einzelne Fragen. Die Option \"Vererben\" wendet die Einstellung auf Seitenebene (falls gesetzt) oder auf Umfrageebene an (standardmäßig \"Oben\").",
+      questionTitleWidth: "Legt eine konsistente Breite für Fragetitel fest, wenn sie links neben den Fragefeldern ausgerichtet sind. Akzeptiert CSS-Werte (px, %, in, pt usw.).",
       questionErrorLocation: "Legt die Position einer Fehlermeldung in Bezug auf alle Fragen innerhalb des Bereichs fest. Die Option \"Vererben\" wendet die Einstellung auf Seitenebene (falls gesetzt) oder auf Umfrageebene an.",
       questionsOrder: "Behält die ursprüngliche Reihenfolge der Fragen bei oder randomisiert sie. Die Option \"Vererben\" wendet die Einstellung auf Seitenebene (falls gesetzt) oder auf Umfrageebene an.",
       page: "Positioniert das Panel am Ende einer ausgewählten Seite.",
@@ -1376,6 +1382,7 @@ var germanTranslation = {
       enableIf: "Verwenden Sie das Zauberstabsymbol, um eine bedingte Regel festzulegen, die den schreibgeschützten Modus für die Seite deaktiviert.",
       requiredIf: "Verwenden Sie das Zauberstabsymbol, um eine bedingte Regel festzulegen, die die Übermittlung von Umfragen verhindert, es sei denn, mindestens eine verschachtelte Frage enthält eine Antwort.",
       questionTitleLocation: "Gilt für alle Fragen auf dieser Seite. Wenn Sie diese Einstellung außer Kraft setzen möchten, definieren Sie Regeln für die Titelausrichtung für einzelne Fragen oder Bereiche. Die Option \"Vererben\" wendet die Einstellung auf Umfrageebene an (standardmäßig \"Oben\").",
+      questionTitleWidth: "Legt eine konsistente Breite für Fragetitel fest, wenn sie links neben den Fragefeldern ausgerichtet sind. Akzeptiert CSS-Werte (px, %, in, pt usw.).",
       questionErrorLocation: "Legt die Position einer Fehlermeldung in Bezug auf die Frage mit ungültiger Eingabe fest. Wählen Sie zwischen: \"Oben\" - ein Fehlertext wird am oberen Rand des Fragefelds platziert; \"Unten\" - ein Fehlertext wird am unteren Rand des Fragefelds platziert. Die Option \"Vererben\" wendet die Einstellung auf Umfrageebene an (standardmäßig \"Oben\").",
       questionsOrder: "Behält die ursprüngliche Reihenfolge der Fragen bei oder randomisiert sie. Mit der Option \"Vererben\" wird die Einstellung auf Umfrageebene (\"Original\" standardmäßig) angewendet. Die Auswirkungen dieser Einstellung sind nur auf dem Tab \"Vorschau\" sichtbar.",
       navigationButtonsVisibility: "Legt die Sichtbarkeit von Navigationsschaltflächen auf der Seite fest. Mit der Option \"Vererben\" wird die Einstellung auf Umfrageebene angewendet, die standardmäßig auf \"Sichtbar\" eingestellt ist."
@@ -2368,3 +2375,8 @@ editorLocalization.locales["de"] = germanTranslation;
 // paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "Ein Fallbacktext für Registerkartentitel, der angewendet wird, wenn das Registerkartentitelmuster keinen aussagekräftigen Wert erzeugt."
 // theme.fontColor: "Font color" => "Schriftfarbe"
 // theme.backgroundColor: "Background color" => "Hintergrundfarbe"
+// pe.questionTitleWidth: "Question title width" => "Breite des Fragetitels"
+// pe.fileInputPlaceholder: "Select a file or paste a file link..." => "Wählen Sie eine Datei aus oder fügen Sie einen Dateilink ein..."
+// panelbase.questionTitleWidth: "Ex.: 200px" => "Beispiel: 200px"
+// panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Legt eine konsistente Breite für Fragetitel fest, wenn sie links neben den Fragefeldern ausgerichtet sind. Akzeptiert CSS-Werte (px, %, in, pt usw.)."
+// page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Legt eine konsistente Breite für Fragetitel fest, wenn sie links neben den Fragefeldern ausgerichtet sind. Akzeptiert CSS-Werte (px, %, in, pt usw.)."

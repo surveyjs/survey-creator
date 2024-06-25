@@ -211,12 +211,14 @@ test("Check PropertyGridLinkFileEditor acceptedTypes", () => {
 });
 
 test("Check file editor placeholder and renderedValue", () => {
+  const placeholder = "test_placeholder";
   const survey = new SurveyModel({
     elements: [
       {
         name: "q1",
         type: "fileedit",
-        storeDataAsText: false
+        storeDataAsText: false,
+        placeholder
       }
     ]
   });
@@ -226,22 +228,22 @@ test("Check file editor placeholder and renderedValue", () => {
 
   question.value = url;
   expect(question.value).toBe("some_url");
-  expect(question.placeholder).toBe("");
+  expect(question.renderedPlaceholder).toBe(placeholder);
   expect(question.renderedValue).toBe("some_url");
 
   question.value = base64Url;
   expect(question.value).toBe(base64Url);
-  expect(question.placeholder).toBe("data:image/png;base64,...");
+  expect(question.renderedPlaceholder).toBe("data:image/png;base64,...");
   expect(question.renderedValue).toBe("");
 
   survey.setValue("q1", url);
   expect(question.value).toBe("some_url");
-  expect(question.placeholder).toBe("");
+  expect(question.renderedPlaceholder).toBe(placeholder);
   expect(question.renderedValue).toBe("some_url");
 
   survey.setValue("q1", base64Url);
   expect(question.value).toBe(base64Url);
-  expect(question.placeholder).toBe("data:image/png;base64,...");
+  expect(question.renderedPlaceholder).toBe("data:image/png;base64,...");
   expect(question.renderedValue).toBe("");
 });
 
