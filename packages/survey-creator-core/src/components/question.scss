@@ -304,8 +304,8 @@ svc-question {
   //min-width: 100px;
   height: calcSize(3);
   border-radius: calcSize(12.5);
-  background-color: $background;
-  color: $foreground;
+  background-color: var(--ctr-toolbox-item-background-color-hovered, $background);
+  color: var(--ctr-toolbox-item-text-color-hovered, $foreground);
   padding: calcSize(1) calcSize(1.5);
   padding-right: calcSize(3.5);
   cursor: grabbing;
@@ -321,11 +321,11 @@ svc-question {
 }
 
 .svc-dragged-element-shortcut .sv-svg-icon use {
-  fill: $primary;
+  fill: var(--ctr-toolbox-item-icon-color-hovered, $primary);
 }
 
 .svc-dragged-element-shortcut--selected {
-  border: 2px solid $secondary;
+  border: 2px solid var(--ctr-toolbox-item-border-color-floating, $secondary);
 }
 
 .svc-dragged-element-shortcut__text {

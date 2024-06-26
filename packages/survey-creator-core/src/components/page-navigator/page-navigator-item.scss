@@ -59,8 +59,8 @@ svc-page-navigator-item,
     height: calcSize(1);
     right: calc(50% - 1.5 * #{$base-unit} / 2);
     top: calc(50% - 1.5 * #{$base-unit} / 2);
-    background: var(--ctr-page-navigator-item-background-color-hovered, $background);
-    border: calcSize(0.25) solid var(--ctr-page-navigator-item-dot-color-selected, $primary);
+    background: var(--ctr-page-navigator-item-dot-color-selected, $background);
+    border: calcSize(0.25) solid var(--ctr-page-navigator-item-dot-border-color-selected, $primary);
   }
 }
 

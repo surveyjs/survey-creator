@@ -10,6 +10,10 @@ svc-page {
   .sd-page__title {
     margin: calcSize(2.5) 0 0 0;
   }
+
+  .svc-panel__placeholder {
+    color: var(--ctr-survey-page-placeholder-text-color, $foreground-light);
+  }
 }
 
 .svc-page__content {
@@ -104,8 +108,8 @@ svc-page {
 .svc-creator .svc-page .svc-page__content--selected:focus,
 .svc-hovered {
   &.svc-page__content--selected {
-    box-shadow: 0 0 0 2px inset $secondary;
-    background: $secondary-backcolor-semi-light;
+    box-shadow: 0 0 0 2px inset var(--ctr-survey-page-border-color-selected, $secondary);
+    background: var(--ctr-survey-page-background-color-selected, $secondary-backcolor-semi-light);
 
     .svc-page__content-actions {
       display: block;

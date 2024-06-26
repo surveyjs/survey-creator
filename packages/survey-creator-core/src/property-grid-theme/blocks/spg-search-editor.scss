@@ -104,6 +104,18 @@
   margin: 0;
 }
 
+.spg-search-editor_bar-item:not(.sv-action-bar-item--pressed) {
+
+  &:hover:enabled,
+  &:focus:enabled {
+    background: var(--ctr-search-button-background-color-clear-hovered, $background-dim);
+
+    .sv-action-bar-item__icon use {
+      fill: var(--ctr-search-button-icon-color-clear-hovered, $foreground-light)
+    }
+  }
+}
+
 .spg-search-editor_toolbar .sv-action-bar-item__icon use {
   fill: var(--ctr-property-grid-search-button-icon-color, $foreground-light)
 }

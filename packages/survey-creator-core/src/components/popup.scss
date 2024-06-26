@@ -23,8 +23,12 @@ survey-creator:not(.svd-simulator-content) {
     background-color: var(--ctr-popup-haze-background-color, $background-semitransparent);
   }
 
-  .sv-popup--modal>.sv-popup__container>.sv-popup__shadow>.sv-popup__body-content {
+  .sv-popup--modal>.sv-popup__container {
     background-color: var(--ctr-popup-background-color, $background-dim-light);
+
+    &>.sv-popup__shadow>.sv-popup__body-content {
+      background-color: var(--ctr-popup-background-color, $background-dim-light);
+    }
   }
 
   .sv-popup--overlay:not(.sv-popup--dropdown-overlay) {
@@ -81,9 +85,12 @@ survey-creator:not(.svd-simulator-content) {
     background: var(--ctr-list-item-background-color-hovered, $background-dim);
   }
 
-  .sv-list__item--selected>.sv-list__item-body {
-    color: var(--ctr-list-item-text-color-selected, $primary-foreground);
-    background: var(--ctr-list-item-background-color-selected, $primary);
+  .sv-list__item--selected,
+  .sv-list__item.sv-list__item--selected:hover {
+    &>.sv-list__item-body {
+      color: var(--ctr-list-item-text-color-selected, $primary-foreground);
+      background: var(--ctr-list-item-background-color-selected, $primary);
+    }
   }
 
   //styles for dropdown overlay
