@@ -213,6 +213,11 @@
     box-shadow: unset;
     background: unset;
   }
+  
+  .sv-list__container {
+    flex-wrap: wrap;
+    column-gap: calcSize(2);
+  }
 
   .sv-popup__shadow {
     box-shadow: unset;
@@ -224,6 +229,7 @@
   }
   .sv-popup__scrolling-content {
     padding: calcSize(1) calcSize(2);
+    overflow: visible;
   }
 
   .sv-list__item:hover > .sv-list__item-body,

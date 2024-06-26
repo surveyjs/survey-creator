@@ -236,6 +236,18 @@ test("Toolbox with subtypes (ltr)", async (t) => {
   });
 });
 
+test("Toolbox with subtypes (wrap)", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    const subtypesPopup = Selector(".sv-popup.sv-popup-inner.toolbox-subtypes .sv-popup__container").filterVisible();
+
+    await setJSON({ pages: [{ name: "page1" }] });
+    await t.resizeWindow(2560, 500)
+      .wait(300)
+      .hover(getToolboxItemByText("Single-Line Input"));
+    await takeElementScreenshot("toolbox-wrap-subtypes.png", subtypesPopup, t, comparer);
+  });
+});
+
 test("Toolbox with subtypes (rtl)", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await ClientFunction(() => {
