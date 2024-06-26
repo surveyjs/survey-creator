@@ -29,7 +29,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
 
   constructor(private creator: SurveyCreatorModel) {
     creator.addPluginTab("designer", this);
-    const propertyGridModel = new PropertyGridModel(creator.survey as any as Base, creator);
+    const propertyGridModel = new PropertyGridModel(creator.survey as any as Base, creator, creator.getPropertyGridDefinition());
     this.propertyGrid = new PropertyGridViewModel(propertyGridModel, creator);
     this.propertyGridTab = this.creator.sidebar.addTab("propertyGrid", "svc-property-grid", this.propertyGrid, () => {
       const result = [];

@@ -150,7 +150,9 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     } else {
       result = result.replace(" svc-question__content--drag-over-bottom", "");
     }
-
+    if(this.creator) {
+      result = this.creator.getElementAddornerCssCallback(this.surveyElement, result);
+    }
     return result;
   }
 

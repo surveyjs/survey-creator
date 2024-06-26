@@ -53,6 +53,7 @@ export * from "../components/results";
 export * from "../components/header/logo-image";
 export * from "../components/string-editor";
 export * from "../components/embedded-survey";
+export * from "../components/embedded-creator";
 export * from "../components/link-value";
 export * from "../editorLocalization";
 export * from "../json5";
@@ -91,6 +92,9 @@ export * from "../utils/resizer";
 export * from "../plugins/undo-redo";
 export * from "../plugins/undo-redo/undo-redo-manager";
 export * from "../pages-controller";
+export * from "../presets/presets";
+export * from "../presets/editable/presets-editor";
+export * from "../presets/editable/preset-question-ranking";
 
 require("../components/property-panel/property-panel-item.scss");
 require("../components/property-panel/property-panel.scss");

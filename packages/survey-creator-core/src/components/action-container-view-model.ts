@@ -250,7 +250,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     return this.getPropertyValue("showAddQuestionButton");
   }
   protected setShowAddQuestionButton(val: boolean): void {
-    this.setPropertyValue("showAddQuestionButton", val && this.allowEdit && settings.designer.showAddQuestionButton);
+    this.setPropertyValue("showAddQuestionButton", val && this.allowEdit && !!this.creator && this.creator.showAddQuestionButton);
   }
   protected duplicate(): void { }
   protected delete(): void {
