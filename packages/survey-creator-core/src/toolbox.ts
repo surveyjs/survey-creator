@@ -892,13 +892,14 @@ export class QuestionToolbox
     const defaultCategories = useDefaultCategories ? this.getDefaultQuestionCategories() : {};
 
     for (var i = 0; i < questions.length; i++) {
-      var name = questions[i];
-      var question = ElementFactory.Instance.createElement(name, "q1");
+      const name = questions[i];
+      let question = ElementFactory.Instance.createElement(name, "q1");
       if (!question) {
         question = Serializer.createClass(name);
       }
-      var json = this.getQuestionJSON(question);
-      var title = editorLocalization.getString("qt." + name);
+      const json = this.getQuestionJSON(question);
+      delete json.name;
+      const title = editorLocalization.getString("qt." + name);
       const iconName = "icon-" + name;
       const item: IQuestionToolboxItem = {
         id: name,
@@ -952,10 +953,11 @@ export class QuestionToolbox
     if (!title) {
       title = json.name;
     }
-    var elementJson = json.defaultJSON ? json.defaultJSON : {};
+    var elementJson = json.defaultJSON ? JSON.parse(JSON.stringify(json.defaultJSON)) : {};
     if (!elementJson.type) {
       elementJson.type = json.name;
     }
+    delete elementJson.name;
     var category = json.category ? json.category : "";
     const item: IQuestionToolboxItem = <any>new Action(<any>{
       id: json.name,
