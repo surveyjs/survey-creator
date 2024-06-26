@@ -598,6 +598,7 @@ export var indonesianStrings = {
     allowCompleteSurveyAutomatic: "Selesaikan survei secara otomatis",
     showProgressBar: "Tampilkan progress bar",
     questionTitleLocation: "Lokasi judul pertanyaan",
+    questionTitleWidth: "Lebar judul pertanyaan",
     requiredText: "Simbil pertanyaan wajib",
     questionTitleTemplate: "Template Judul Pertanyaan, default adalah: '{no}. {require} {title}'",
     questionErrorLocation: "Lokasi Pertanyaan Error",
@@ -734,6 +735,7 @@ export var indonesianStrings = {
     correctAnswer: "Jawaban yang Benar",
     defaultPanelValue: "Nilai Default",
     cells: "Teks Sel",
+    fileInputPlaceholder: "Pilih file atau tempel tautan file...",
     keyName: "Kolom kunci",
     itemvalue: {
       visibleIf: "Buat opsi terlihat jika",
@@ -1220,6 +1222,9 @@ export var indonesianStrings = {
     currencymask: {
       prefix: "Contoh.: $",
       suffix: "Contoh: USD"
+    },
+    panelbase: {
+      questionTitleWidth: "Contoh: 200px"
     }
   },
   pehelp: {
@@ -1230,6 +1235,7 @@ export var indonesianStrings = {
       enableIf: "Gunakan ikon tongkat ajaib untuk mengatur aturan bersyarat yang menonaktifkan mode baca-saja untuk panel.",
       requiredIf: "Gunakan ikon tongkat ajaib untuk menetapkan aturan bersyarat yang mencegah pengiriman survei kecuali setidaknya satu pertanyaan bertingkat memiliki jawaban.",
       questionTitleLocation: "Berlaku untuk semua pertanyaan dalam panel ini. Jika Anda ingin mengganti setelan ini, tentukan aturan perataan judul untuk masing-masing pertanyaan. Opsi \"Warisi\" menerapkan setelan tingkat halaman (jika ditetapkan) atau tingkat survei (\"Teratas\" secara default).",
+      questionTitleWidth: "Mengatur lebar yang konsisten untuk judul pertanyaan bila disejajarkan di sebelah kiri kotak pertanyaan. Menerima nilai CSS (px, %, in, pt, dll.).",
       questionErrorLocation: "Mengatur lokasi pesan kesalahan sehubungan dengan semua pertanyaan dalam panel. Opsi \"Warisi\" menerapkan setelan tingkat halaman (jika ditetapkan) atau tingkat survei.",
       questionsOrder: "Menyimpan urutan pertanyaan asli atau mengacaknya. Opsi \"Warisi\" menerapkan setelan tingkat halaman (jika ditetapkan) atau tingkat survei.",
       page: "Memposisikan ulang panel ke akhir halaman yang dipilih.",
@@ -1376,6 +1382,7 @@ export var indonesianStrings = {
       enableIf: "Gunakan ikon tongkat ajaib untuk mengatur aturan bersyarat yang menonaktifkan mode baca-saja untuk halaman.",
       requiredIf: "Gunakan ikon tongkat ajaib untuk menetapkan aturan bersyarat yang mencegah pengiriman survei kecuali setidaknya satu pertanyaan bertingkat memiliki jawaban.",
       questionTitleLocation: "Berlaku untuk semua pertanyaan dalam halaman ini. Jika Anda ingin mengganti setelan ini, tentukan aturan perataan judul untuk masing-masing pertanyaan atau panel. Opsi \"Warisi\" menerapkan setelan tingkat survei (\"Teratas\" secara default).",
+      questionTitleWidth: "Mengatur lebar yang konsisten untuk judul pertanyaan bila disejajarkan di sebelah kiri kotak pertanyaan. Menerima nilai CSS (px, %, in, pt, dll.).",
       questionErrorLocation: "Mengatur lokasi pesan kesalahan sehubungan dengan pertanyaan dengan input yang tidak valid. Pilih antara: \"Atas\" - teks kesalahan ditempatkan di bagian atas kotak pertanyaan; \"Bawah\" - teks kesalahan ditempatkan di bagian bawah kotak pertanyaan. Opsi \"Warisi\" menerapkan setelan tingkat survei (\"Teratas\" secara default).",
       questionsOrder: "Menyimpan urutan pertanyaan asli atau mengacaknya. Opsi \"Warisi\" menerapkan setelan tingkat survei (\"Asli\" secara default). Efek pengaturan ini hanya terlihat di tab Pratinjau.",
       navigationButtonsVisibility: "Mengatur visibilitas tombol navigasi di halaman. Opsi \"Warisi\" menerapkan pengaturan tingkat survei, yang defaultnya adalah \"Terlihat\"."
@@ -2813,3 +2820,8 @@ editorLocalization.locales["id"] = indonesianStrings;
 // paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "Teks fallback untuk judul tab yang berlaku saat pola judul tab tidak menghasilkan nilai yang berarti."
 // theme.fontColor: "Font color" => "Warna font"
 // theme.backgroundColor: "Background color" => "Warna latar belakang"
+// pe.questionTitleWidth: "Question title width" => "Lebar judul pertanyaan"
+// pe.fileInputPlaceholder: "Select a file or paste a file link..." => "Pilih file atau tempel tautan file..."
+// panelbase.questionTitleWidth: "Ex.: 200px" => "Contoh: 200px"
+// panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Mengatur lebar yang konsisten untuk judul pertanyaan bila disejajarkan di sebelah kiri kotak pertanyaan. Menerima nilai CSS (px, %, in, pt, dll.)."
+// page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Mengatur lebar yang konsisten untuk judul pertanyaan bila disejajarkan di sebelah kiri kotak pertanyaan. Menerima nilai CSS (px, %, in, pt, dll.)."

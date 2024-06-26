@@ -598,6 +598,7 @@ export var czStrings = {
     allowCompleteSurveyAutomatic: "Automatické vyplnění dotazníku",
     showProgressBar: "Zobrazit ukazatel průběhu",
     questionTitleLocation: "Umístění názvu otázky",
+    questionTitleWidth: "Šířka názvu otázky",
     requiredText: "Povinné symboly otázky",
     questionTitleTemplate: "Šablona názvu otázky, výchozí je: „{no}. {require} {title}“",
     questionErrorLocation: "Umístění chyby v otázce",
@@ -734,6 +735,7 @@ export var czStrings = {
     correctAnswer: "Správná odpověď",
     defaultPanelValue: "Výchozí hodnoty",
     cells: "Texty buněk",
+    fileInputPlaceholder: "Vyberte soubor nebo vložte odkaz na soubor...",
     keyName: "Klíčový sloupec",
     itemvalue: {
       visibleIf: "Zviditelněte tuto možnost, pokud",
@@ -1220,6 +1222,9 @@ export var czStrings = {
     currencymask: {
       prefix: "Př.: $",
       suffix: "Př.: USD"
+    },
+    panelbase: {
+      questionTitleWidth: "Př.: 200px"
     }
   },
   pehelp: {
@@ -1230,6 +1235,7 @@ export var czStrings = {
       enableIf: "Pomocí ikony kouzelné hůlky nastavte podmíněné pravidlo, které pro panel zakáže režim jen pro čtení.",
       requiredIf: "Pomocí ikony kouzelné hůlky nastavte podmíněné pravidlo, které zabrání odeslání průzkumu, pokud alespoň jedna vnořená otázka nemá odpověď.",
       questionTitleLocation: "Platí pro všechny otázky v rámci tohoto panelu. Chcete-li toto nastavení přepsat, definujte pravidla zarovnání nadpisů pro jednotlivé otázky. Možnost \"Zdědit\" použije nastavení na úrovni stránky (pokud je nastaveno) nebo na úrovni průzkumu (ve výchozím nastavení \"Nahoře\").",
+      questionTitleWidth: "Nastaví konzistentní šířku názvů otázek, pokud jsou zarovnány nalevo od polí s otázkami. Přijímá hodnoty CSS (px, %, in, pt atd.).",
       questionErrorLocation: "Nastaví umístění chybové zprávy ve vztahu ke všem otázkám v panelu. Možnost \"Zdědit\" použije nastavení na úrovni stránky (pokud je nastaveno) nebo na úrovni průzkumu.",
       questionsOrder: "Zachová původní pořadí otázek nebo je náhodně vybere. Možnost \"Zdědit\" použije nastavení na úrovni stránky (pokud je nastaveno) nebo na úrovni průzkumu.",
       page: "Přemístí panel na konec vybrané stránky.",
@@ -1376,6 +1382,7 @@ export var czStrings = {
       enableIf: "Pomocí ikony kouzelné hůlky nastavte podmíněné pravidlo, které zakáže režim pouze pro čtení stránky.",
       requiredIf: "Pomocí ikony kouzelné hůlky nastavte podmíněné pravidlo, které zabrání odeslání průzkumu, pokud alespoň jedna vnořená otázka nemá odpověď.",
       questionTitleLocation: "Platí pro všechny otázky na této stránce. Chcete-li toto nastavení přepsat, definujte pravidla zarovnání nadpisů pro jednotlivé otázky nebo panely. Možnost \"Zdědit\" použije nastavení na úrovni průzkumu (ve výchozím nastavení \"Nahoře\").",
+      questionTitleWidth: "Nastaví konzistentní šířku názvů otázek, pokud jsou zarovnány nalevo od polí s otázkami. Přijímá hodnoty CSS (px, %, in, pt atd.).",
       questionErrorLocation: "Nastaví umístění chybové zprávy ve vztahu k otázce s neplatným vstupem. Vyberte si mezi: \"Nahoře\" - text chyby je umístěn v horní části pole s otázkou; \"Bottom\" - text chyby je umístěn ve spodní části pole s otázkou. Možnost \"Zdědit\" použije nastavení na úrovni průzkumu (ve výchozím nastavení \"Nahoře\").",
       questionsOrder: "Zachová původní pořadí otázek nebo je náhodně vybere. Možnost \"Zdědit\" použije nastavení na úrovni průzkumu (ve výchozím nastavení \"Původní\"). Účinek tohoto nastavení je viditelný pouze na kartě Náhled.",
       navigationButtonsVisibility: "Nastaví viditelnost navigačních tlačítek na stránce. Možnost \"Zdědit\" použije nastavení na úrovni průzkumu, které je ve výchozím nastavení \"Viditelné\"."
@@ -2233,3 +2240,8 @@ editorLocalization.locales["cs"] = czStrings;
 // paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "Záložní text pro názvy karet, který se použije, když vzor názvu karty nevytváří smysluplnou hodnotu."
 // theme.fontColor: "Font color" => "Barva písma"
 // theme.backgroundColor: "Background color" => "Barva pozadí"
+// pe.questionTitleWidth: "Question title width" => "Šířka názvu otázky"
+// pe.fileInputPlaceholder: "Select a file or paste a file link..." => "Vyberte soubor nebo vložte odkaz na soubor..."
+// panelbase.questionTitleWidth: "Ex.: 200px" => "Př.: 200px"
+// panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Nastaví konzistentní šířku názvů otázek, pokud jsou zarovnány nalevo od polí s otázkami. Přijímá hodnoty CSS (px, %, in, pt atd.)."
+// page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Nastaví konzistentní šířku názvů otázek, pokud jsou zarovnány nalevo od polí s otázkami. Přijímá hodnoty CSS (px, %, in, pt atd.)."

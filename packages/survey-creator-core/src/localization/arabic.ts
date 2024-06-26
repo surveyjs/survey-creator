@@ -598,6 +598,7 @@ export var arStrings = {
     allowCompleteSurveyAutomatic: "إكمال الاستطلاع تلقائيا",
     showProgressBar: "إظهار شريط التقدم",
     questionTitleLocation: "موقع عنوان السؤال",
+    questionTitleWidth: "عرض عنوان السؤال",
     requiredText: "رمز السؤال مطلوب",
     questionTitleTemplate: "Question title template, default is: '{no}. {require} {title}'",
     questionErrorLocation: "موقع خطأ في السؤال",
@@ -734,6 +735,7 @@ export var arStrings = {
     correctAnswer: "الإجابة الصحيحة",
     defaultPanelValue: "القيم الافتراضية",
     cells: "نصوص الخلية",
+    fileInputPlaceholder: "حدد ملفا أو الصق رابط ملف...",
     keyName: "عمود المفتاح",
     itemvalue: {
       visibleIf: "اجعل الخيار مرئيا إذا",
@@ -1220,6 +1222,9 @@ export var arStrings = {
     currencymask: {
       prefix: "مثال: $",
       suffix: "مثال: الدولار الأمريكي"
+    },
+    panelbase: {
+      questionTitleWidth: "مثال: 200 بكسل"
     }
   },
   pehelp: {
@@ -1230,6 +1235,7 @@ export var arStrings = {
       enableIf: "استخدم أيقونة العصا السحرية لتعيين قاعدة شرطية تعطل وضع القراءة فقط للوحة.",
       requiredIf: "استخدم أيقونة العصا السحرية لتعيين قاعدة شرطية تمنع إرسال الاستطلاع ما لم يكن لسؤال واحد متداخل على الأقل إجابة.",
       questionTitleLocation: "ينطبق على جميع الأسئلة داخل هذه اللجنة. إذا كنت تريد إلغاء هذا الإعداد، فحدد قواعد محاذاة العنوان للأسئلة الفردية. يطبق خيار \"الوراثة\" الإعداد على مستوى الصفحة (إذا تم تعيينه) أو على مستوى الاستطلاع (\"أعلى\" افتراضيا).",
+      questionTitleWidth: "يعين عرضا متناسقا لعناوين الأسئلة عندما تتم محاذاتها إلى يسار مربعات الأسئلة الخاصة بها. يقبل قيم CSS (px ، ٪ ، in ، pt ، إلخ).",
       questionErrorLocation: "تعيين موقع رسالة خطأ فيما يتعلق بجميع الأسئلة داخل اللوحة. يطبق خيار \"الوراثة\" الإعداد على مستوى الصفحة (إذا تم تعيينه) أو على مستوى الاستطلاع.",
       questionsOrder: "يحافظ على الترتيب الأصلي للأسئلة أو يحولها عشوائيا. يطبق خيار \"الوراثة\" الإعداد على مستوى الصفحة (إذا تم تعيينه) أو على مستوى الاستطلاع.",
       page: "تغيير موضع اللوحة إلى نهاية الصفحة المحددة.",
@@ -1376,6 +1382,7 @@ export var arStrings = {
       enableIf: "استخدم أيقونة العصا السحرية لتعيين قاعدة شرطية تعطل وضع القراءة فقط للصفحة.",
       requiredIf: "استخدم أيقونة العصا السحرية لتعيين قاعدة شرطية تمنع إرسال الاستطلاع ما لم يكن لسؤال واحد متداخل على الأقل إجابة.",
       questionTitleLocation: "ينطبق على جميع الأسئلة الواردة في هذه الصفحة. إذا كنت تريد إلغاء هذا الإعداد، فحدد قواعد محاذاة العنوان للأسئلة أو اللوحات الفردية. يطبق خيار \"الوراثة\" إعداد مستوى الاستطلاع (\"أعلى\" افتراضيا).",
+      questionTitleWidth: "يعين عرضا متناسقا لعناوين الأسئلة عندما تتم محاذاتها إلى يسار مربعات الأسئلة الخاصة بها. يقبل قيم CSS (px ، ٪ ، in ، pt ، إلخ).",
       questionErrorLocation: "تعيين موقع رسالة خطأ فيما يتعلق بالسؤال مع إدخال غير صالح. اختر بين: \"أعلى\" - يتم وضع نص خطأ في أعلى مربع السؤال ؛ \"أسفل\" - يتم وضع نص خطأ في أسفل مربع السؤال. يطبق خيار \"الوراثة\" إعداد مستوى الاستطلاع (\"أعلى\" افتراضيا).",
       questionsOrder: "يحافظ على الترتيب الأصلي للأسئلة أو يحولها عشوائيا. يطبق خيار \"الوراثة\" إعداد مستوى الاستطلاع (\"أصلي\" افتراضيا). يكون تأثير هذا الإعداد مرئيا فقط في علامة التبويب معاينة.",
       navigationButtonsVisibility: "يضبط رؤية أزرار التنقل على الصفحة. يطبق خيار \"الوراثة\" إعداد مستوى الاستطلاع ، والذي يتم تعيينه افتراضيا على \"مرئي\"."
@@ -2570,3 +2577,8 @@ editorLocalization.locales["ar"] = arStrings;
 // paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "نص احتياطي لعناوين علامات التبويب يتم تطبيقه عندما لا ينتج نمط عنوان علامة التبويب قيمة ذات معنى."
 // theme.fontColor: "Font color" => "لون الخط"
 // theme.backgroundColor: "Background color" => "لون الخلفية"
+// pe.questionTitleWidth: "Question title width" => "عرض عنوان السؤال"
+// pe.fileInputPlaceholder: "Select a file or paste a file link..." => "حدد ملفا أو الصق رابط ملف..."
+// panelbase.questionTitleWidth: "Ex.: 200px" => "مثال: 200 بكسل"
+// panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "يعين عرضا متناسقا لعناوين الأسئلة عندما تتم محاذاتها إلى يسار مربعات الأسئلة الخاصة بها. يقبل قيم CSS (px ، ٪ ، in ، pt ، إلخ)."
+// page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "يعين عرضا متناسقا لعناوين الأسئلة عندما تتم محاذاتها إلى يسار مربعات الأسئلة الخاصة بها. يقبل قيم CSS (px ، ٪ ، in ، pt ، إلخ)."

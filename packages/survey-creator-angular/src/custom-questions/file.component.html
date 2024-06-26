@@ -2,7 +2,7 @@
   (drop)="model.onDrop($event)" (dragleave)="model.onDragLeave($event)" (keydown)="model.onKeyDown($event)">
   <input type="text" [disabled]="model.isInputReadOnly" [class]="model.cssClasses.control"
     [value]="model.renderedValue ||''" (change)="model.onInputChange($event)" (blur)="model.onInputBlur($event)"
-    [attr.placeholder]="model.placeholder"/>
+    [attr.placeholder]="model.renderedPlaceholder" />
   <input type="file" [disabled]="model.isInputReadOnly" [class]="model.cssClasses.fileInput" [attr.id]="model.inputId"
     [attr.aria-required]="model.ariaRequired" [attr.aria-label]="model.ariaLabel"
     [attr.aria-invalid]="model.ariaInvalid" [attr.aria-describedby]="model.ariaDescribedBy" [attr.multiple]="false"

@@ -52,15 +52,20 @@ export class QuestionFileEditorModel extends QuestionFileModel {
   }
 
   @property() private _renderedValue: string = "";
-  @property() public placeholder: string = "";
+  @property() private notEmptyValuePlaceholder: string = "";
+  @property() public placeholder: string;
+
+  public get renderedPlaceholder() {
+    return this.notEmptyValuePlaceholder || this.placeholder;
+  }
 
   protected updateRenderedValue(value: string) {
     const matchBase64 = !!value ? value.match(/^data:((?:\w+\/(?:(?!;).)+)?)((?:;[\w\W]*?[^;])*),/) : null;
     if(matchBase64) {
-      this.placeholder = matchBase64[0] + "...";
+      this.notEmptyValuePlaceholder = matchBase64[0] + "...";
       this._renderedValue = "";
     } else {
-      this.placeholder = "";
+      this.notEmptyValuePlaceholder = "";
       this._renderedValue = value;
     }
   }
@@ -71,7 +76,7 @@ export class QuestionFileEditorModel extends QuestionFileModel {
 
   protected updateValueFromInputEvent(event: Event) {
     const value = (<HTMLInputElement>event.target).value;
-    if(!!this.placeholder && !value) return;
+    if(!!this.notEmptyValuePlaceholder && !value) return;
     if(!Helpers.isTwoValueEquals(value, this.value)) {
       this.clear(undefined, false);
       this.loadedFilesValue = undefined;
@@ -124,7 +129,7 @@ export class QuestionFileEditorModel extends QuestionFileModel {
     }
   }
 }
-Serializer.addClass("fileedit", [], () => new QuestionFileEditorModel(""), "file");
+Serializer.addClass("fileedit", ["placeholder:string"], () => new QuestionFileEditorModel(""), "file");
 
 QuestionFactory.Instance.registerQuestion("fileedit", name => {
   return new QuestionFileEditorModel(name);

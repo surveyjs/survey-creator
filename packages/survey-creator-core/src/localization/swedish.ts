@@ -598,6 +598,7 @@ export let svStrings = {
     allowCompleteSurveyAutomatic: "Fyll i enkäten automatiskt",
     showProgressBar: "Visa händelsförlopp",
     questionTitleLocation: "Fråga titel placering",
+    questionTitleWidth: "Bredd på frågerubrik",
     requiredText: "Var vänlig skriv en text",
     questionTitleTemplate: "Fråga titel mall, standard är: '{no}. {require} {title}'",
     questionErrorLocation: "Fråga fel placerad",
@@ -734,6 +735,7 @@ export let svStrings = {
     correctAnswer: "Rätt svar",
     defaultPanelValue: "Standardvärden",
     cells: "Cell texter",
+    fileInputPlaceholder: "Välj en fil eller klistra in en fillänk...",
     keyName: "Kolumnen Nyckel",
     itemvalue: {
       visibleIf: "Gör alternativet synligt om",
@@ -1220,6 +1222,9 @@ export let svStrings = {
     currencymask: {
       prefix: "Ex.: $",
       suffix: "Ex.: USD"
+    },
+    panelbase: {
+      questionTitleWidth: "Ex.: 200px"
     }
   },
   pehelp: {
@@ -1230,6 +1235,7 @@ export let svStrings = {
       enableIf: "Använd trollstavsikonen för att ställa in en villkorsregel som inaktiverar det skrivskyddade läget för panelen.",
       requiredIf: "Använd trollstavsikonen för att ställa in en villkorsregel som förhindrar att undersökningen skickas in om inte minst en kapslad fråga har ett svar.",
       questionTitleLocation: "Gäller alla frågor i den här panelen. Om du vill åsidosätta den här inställningen definierar du regler för rubrikjustering för enskilda frågor. Alternativet \"Ärv\" tillämpar inställningen på sidnivå (om den är inställd) eller på undersökningsnivå (\"Topp\" som standard).",
+      questionTitleWidth: "Anger konsekvent bredd för frågerubriker när de är justerade till vänster om frågerutorna. Accepterar CSS-värden (px, %, in, pt, etc.).",
       questionErrorLocation: "Anger platsen för ett felmeddelande i förhållande till alla frågor i panelen. Alternativet \"Ärv\" tillämpar inställningen på sidnivå (om den är inställd) eller på undersökningsnivå.",
       questionsOrder: "Behåller den ursprungliga ordningen på frågorna eller slumpar dem. Alternativet \"Ärv\" tillämpar inställningen på sidnivå (om den är inställd) eller på undersökningsnivå.",
       page: "Flyttar panelen till slutet av en markerad sida.",
@@ -1376,6 +1382,7 @@ export let svStrings = {
       enableIf: "Använd trollstavsikonen för att ställa in en villkorsregel som inaktiverar det skrivskyddade läget för sidan.",
       requiredIf: "Använd trollstavsikonen för att ställa in en villkorsregel som förhindrar att undersökningen skickas in om inte minst en kapslad fråga har ett svar.",
       questionTitleLocation: "Gäller alla frågor på denna sida. Om du vill åsidosätta den här inställningen definierar du regler för titeljustering för enskilda frågor eller paneler. Alternativet \"Ärv\" tillämpar inställningen på undersökningsnivå (\"Topp\" som standard).",
+      questionTitleWidth: "Anger konsekvent bredd för frågerubriker när de är justerade till vänster om frågerutorna. Accepterar CSS-värden (px, %, in, pt, etc.).",
       questionErrorLocation: "Anger platsen för ett felmeddelande i förhållande till frågan med ogiltig inmatning. Välj mellan: \"Överst\" - en feltext placeras högst upp i frågerutan; \"Nederst\" - en feltext placeras längst ner i frågerutan. Alternativet \"Ärv\" tillämpar inställningen på undersökningsnivå (\"Topp\" som standard).",
       questionsOrder: "Behåller den ursprungliga ordningen på frågorna eller slumpar dem. Alternativet \"Ärv\" tillämpar inställningen på undersökningsnivå (\"Original\" som standard). Effekten av den här inställningen visas bara på fliken Förhandsgranska.",
       navigationButtonsVisibility: "Ställer in synligheten för navigeringsknapparna på sidan. Alternativet \"Ärv\" tillämpar inställningen på undersökningsnivå, som standard är \"Synlig\"."
@@ -2836,3 +2843,8 @@ editorLocalization.locales["sv"] = svStrings;
 // paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "En reservtext för flikrubriker som gäller när flikrubrikmönstret inte ger ett meningsfullt värde."
 // theme.fontColor: "Font color" => "Teckenfärg"
 // theme.backgroundColor: "Background color" => "Bakgrundsfärg"
+// pe.questionTitleWidth: "Question title width" => "Bredd på frågerubrik"
+// pe.fileInputPlaceholder: "Select a file or paste a file link..." => "Välj en fil eller klistra in en fillänk..."
+// panelbase.questionTitleWidth: "Ex.: 200px" => "Ex.: 200px"
+// panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Anger konsekvent bredd för frågerubriker när de är justerade till vänster om frågerutorna. Accepterar CSS-värden (px, %, in, pt, etc.)."
+// page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Anger konsekvent bredd för frågerubriker när de är justerade till vänster om frågerutorna. Accepterar CSS-värden (px, %, in, pt, etc.)."
