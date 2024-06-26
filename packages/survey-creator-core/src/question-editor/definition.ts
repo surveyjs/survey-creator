@@ -67,6 +67,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
         name: "maxWidth",
         tab: "layout",
       },
+      { name: "colSpan", tab: "layout" },
       { name: "valueName", tab: "data" },
       { name: "defaultValue", tab: "data" },
       { name: "correctAnswer", tab: "data" },
@@ -392,6 +393,9 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "useGrouping"
     ]
   },
+  "panellayoutcolumn": {
+    properties: ["width", "questionTitleWidth"]
+  },
   matrixdropdowncolumn: {
     properties: ["name", "title"]
   },
@@ -666,7 +670,8 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "requiredIf", tab: "logic" },
       { name: "questionTitleLocation", tab: "questionSettings" },
       { name: "questionTitleWidth", tab: "questionSettings" },
-      { name: "questionErrorLocation", tab: "questionSettings" }
+      { name: "questionErrorLocation", tab: "questionSettings" },
+      { name: "layoutColumns", tab: "questionSettings" },
     ],
     tabs: [
       { name: "questionSettings", index: 100 },

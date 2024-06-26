@@ -636,6 +636,15 @@ export class PropertyGridEditorMatrixColumns extends PropertyGridEditorMatrix {
   protected getAllowRowDragDrop(prop: JsonObjectProperty): boolean { return true; }
 }
 
+export class PropertyGridEditorMatrixLayoutColumns extends PropertyGridEditorMatrix {
+  public fit(prop: JsonObjectProperty): boolean {
+    return prop.type == "panellayoutcolumns";
+  }
+  protected getDefaulColumnNames(): Array<string> {
+    return ["width", "questionTitleWidth"];
+  }
+}
+
 export class PropertyGridEditorMatrixPages extends PropertyGridEditorMatrix {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "surveypages";
@@ -898,3 +907,4 @@ PropertyGridEditorCollection.register({
     };
   }
 });
+PropertyGridEditorCollection.register(new PropertyGridEditorMatrixLayoutColumns());
