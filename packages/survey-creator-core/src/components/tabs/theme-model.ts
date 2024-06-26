@@ -442,7 +442,7 @@ export class ThemeModel extends Base implements ITheme {
 
     this.blockThemeChangedNotifications += 1;
 
-    if (["backgroundImage", "backgroundImageFit", "backgroundImageAttachment", "backgroundOpacity"].indexOf(name) !== -1) {
+    if (this === sender && ["backgroundImage", "backgroundImageFit", "backgroundImageAttachment", "backgroundOpacity"].indexOf(name) !== -1) {
       this[name] = newValue;
       this.onThemePropertyChanged.fire(this, { name, value: newValue });
       this.blockThemeChangedNotifications -= 1;

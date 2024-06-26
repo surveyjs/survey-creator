@@ -598,6 +598,7 @@ var persianStrings = {
     allowCompleteSurveyAutomatic: "بررسی را به طور خودکار تکمیل کنید",
     showProgressBar: "نمایش نشانگر پیشرفت",
     questionTitleLocation: "محل عنوان سوال",
+    questionTitleWidth: "عرض عنوان سوال",
     requiredText: "سوالات نشان دار اجباری هستند",
     questionTitleTemplate: "قالب عنوان سوال، به صورت پیش فرض: '{no}. {require} {title}'",
     questionErrorLocation: "محل خطای سوال",
@@ -734,6 +735,7 @@ var persianStrings = {
     correctAnswer: "پاسخ صحیح",
     defaultPanelValue: "مقادیر پیشفرض",
     cells: "متن سلولی",
+    fileInputPlaceholder: "یک پرونده را انتخاب کنید یا پیوند پرونده را جایگذاری کنید...",
     keyName: "ستون کلید",
     itemvalue: {
       visibleIf: "این گزینه قابل مشاهده است اگر",
@@ -1220,6 +1222,9 @@ var persianStrings = {
     currencymask: {
       prefix: "سابق: $",
       suffix: "Ex.: دلار امریکا"
+    },
+    panelbase: {
+      questionTitleWidth: "سابق: 200 پیکسل"
     }
   },
   pehelp: {
@@ -1230,6 +1235,7 @@ var persianStrings = {
       enableIf: "از نماد چوب جادویی برای تنظیم یک قانون شرطی استفاده کنید که حالت فقط خواندنی را برای پانل غیرفعال می کند.",
       requiredIf: "از نماد چوب جادویی برای تنظیم یک قانون شرطی استفاده کنید که مانع از ارسال نظرسنجی می شود مگر اینکه حداقل یک سوال تو در تو پاسخ داشته باشد.",
       questionTitleLocation: "برای تمام سوالات در این پنل اعمال می شود. اگر می خواهید این تنظیم را لغو کنید، قوانین تراز عنوان را برای سوالات فردی تعریف کنید. گزینه \"Inherit\" به طور پیش فرض تنظیم سطح صفحه (در صورت تنظیم) یا سطح نظرسنجی (\"بالا\" را اعمال می کند).",
+      questionTitleWidth: "عرض ثابت را برای عناوین سؤال تنظیم می کند وقتی که انها در سمت چپ جعبه های سوال خود قرار دارند. مقادیر CSS را می پذیرد (px، ٪، in، pt و غیره).",
       questionErrorLocation: "مکان یک پیام خطا را در رابطه با تمام سوالات درون پانل تنظیم می کند. گزینه \"Inherit\" شامل تنظیمات سطح صفحه (در صورت تنظیم) یا سطح نظرسنجی است.",
       questionsOrder: "ترتیب اصلی سوالات را نگه می دارد یا انها را تصادفی می کند. گزینه \"Inherit\" شامل تنظیمات سطح صفحه (در صورت تنظیم) یا سطح نظرسنجی است.",
       page: "پانل را به انتهای صفحه انتخاب شده تغییر می دهد.",
@@ -1376,6 +1382,7 @@ var persianStrings = {
       enableIf: "از نماد چوب جادویی برای تنظیم یک قانون شرطی استفاده کنید که حالت فقط خواندنی را برای صفحه غیرفعال می کند.",
       requiredIf: "از نماد چوب جادویی برای تنظیم یک قانون شرطی استفاده کنید که مانع از ارسال نظرسنجی می شود مگر اینکه حداقل یک سوال تو در تو پاسخ داشته باشد.",
       questionTitleLocation: "به تمام سوالات موجود در این صفحه اعمال می شود. اگر می خواهید این تنظیمات را لغو کنید، قوانین تراز عنوان را برای سوالات یا پانل های فردی تعریف کنید. گزینه \"ارث\" تنظیم سطح نظرسنجی (\"بالا\" به طور پیش فرض) را اعمال می کند.",
+      questionTitleWidth: "عرض ثابت را برای عناوین سؤال تنظیم می کند وقتی که انها در سمت چپ جعبه های سوال خود قرار دارند. مقادیر CSS را می پذیرد (px، ٪، in، pt و غیره).",
       questionErrorLocation: "مکان یک پیام خطا را در رابطه با سؤال با ورودی نامعتبر تنظیم می کند. انتخاب بین: \"بالا\" - یک متن خطا در بالای جعبه سوال قرار می گیرد؛ \"پایین\" - یک متن خطا در پایین جعبه سوال قرار می گیرد. گزینه \"ارث\" تنظیم سطح نظرسنجی (\"بالا\" به طور پیش فرض) را اعمال می کند.",
       questionsOrder: "ترتیب اصلی سوالات را نگه می دارد یا انها را تصادفی می کند. گزینه \"ارث\" تنظیم سطح نظرسنجی (\"اصلی\" به طور پیش فرض) را اعمال می کند. اثر این تنظیم فقط در تب Preview قابل مشاهده است.",
       navigationButtonsVisibility: "قابلیت مشاهده دکمههای پیمایش را روی صفحه تنظیم میکند. گزینه \"به ارث بردن\" تنظیم سطح نظرسنجی را اعمال می کند که به طور پیش فرض به \"قابل مشاهده\" است."
@@ -2614,3 +2621,8 @@ editorLocalization.locales["fa"] = persianStrings;
 // paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "یک متن جایگزین برای عناوین برگه که زمانی اعمال می شود که الگوی عنوان برگه ارزش معنی داری تولید نمی کند."
 // theme.fontColor: "Font color" => "رنگ قلم"
 // theme.backgroundColor: "Background color" => "رنگ پسزمینه"
+// pe.questionTitleWidth: "Question title width" => "عرض عنوان سوال"
+// pe.fileInputPlaceholder: "Select a file or paste a file link..." => "یک پرونده را انتخاب کنید یا پیوند پرونده را جایگذاری کنید..."
+// panelbase.questionTitleWidth: "Ex.: 200px" => "سابق: 200 پیکسل"
+// panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "عرض ثابت را برای عناوین سؤال تنظیم می کند وقتی که انها در سمت چپ جعبه های سوال خود قرار دارند. مقادیر CSS را می پذیرد (px، ٪، in، pt و غیره)."
+// page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "عرض ثابت را برای عناوین سؤال تنظیم می کند وقتی که انها در سمت چپ جعبه های سوال خود قرار دارند. مقادیر CSS را می پذیرد (px، ٪، in، pt و غیره)."

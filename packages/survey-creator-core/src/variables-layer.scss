@@ -1,0 +1,62 @@
+@import "./variables.scss";
+
+$primary-background-500: var(--sjs-primary-background-500, #{$primary});
+$primary-background-400: var(--sjs-primary-background-400, #{$primary-background-dark});
+$primary-background-10: var(--sjs-primary-background-10, #{$primary-light});
+$primary-foreground-100: var(--sjs-primary-foreground-100, #{$primary-foreground});
+$primary-foreground-25: var(--sjs-primary-foreground-25, #{$primary-foreground-disabled});
+
+$secondary-background-500: var(--sjs-secondary-background-500, #{$secondary});
+$secondary-background-25: var(--sjs-secondary-background-25, #{$secondary-backcolor-semi-light});
+$secondary-background-10: var(--sjs-secondary-background-10, #{$secondary-light});
+$secondary-foreground-100: var(--sjs-secondary-foreground-100, #{$secondary-forecolor});
+$secondary-forecolor-25: var(--sjs-secondary-forecolor-25, #{$secondary-forecolor-light});
+
+$layer-1-background-500: var(--sjs-layer-1-background-500, #{$background});
+$layer-1-background-400: var(--sjs-layer-1-background-400, #{$background-dark});
+$layer-1-foreground-100: var(--sjs-layer-1-foreground-100, #{$foreground});
+$layer-1-foreground-75: var(--sjs-layer-1-foreground-75, #000000bf);
+$layer-1-foreground-50: var(--sjs-layer-1-foreground-50, #{$foreground-light});
+
+$layer-2-background-500: var(--sjs-layer-2-background-500, #{$background-dim-light});
+$layer-2-background-400: var(--sjs-layer-2-background-400, #{$background-dim-dark});
+$layer-2-foreground-100: var(--sjs-layer-2-foreground-100, #000000e8);
+$layer-2-foreground-75: var(--sjs-layer-2-foreground-75, #000000bf);
+$layer-2-foreground-50: var(--sjs-layer-2-foreground-50, #00000072);
+
+$layer-3-background-500: var(--sjs-layer-3-background-500, #{$background-dim});
+$layer-3-background-400: var(--sjs-layer-3-background-400, #e7e7e7);
+$layer-3-foreground-100: var(--sjs-layer-3-foreground-100, #{$foreground-dim});
+$layer-3-foreground-75: var(--sjs-layer-3-foreground-75, #000000bf);
+$layer-3-foreground-50: var(--sjs-layer-3-foreground-50, #{$foreground-dim-light});
+
+$borders-border-25: var(--sjs-borders-border-25, #{$border});
+$borders-border-10: var(--sjs-borders-border-10, #{$border-light});
+
+$special-background: var(--sjs-special-background, #f3f3f3);
+$special-haze: var(--sjs-special-haze, var(--sjs-general-haze-background, #9090907f));
+$special-shadow: var(--sjs-special-shadow, #00000026);
+$special-glow: var(--sjs-special-glow, #00000019);
+
+$semantic-red-background-500: var(--sjs-semantic-red-background-500, #{$red});
+$semantic-red-background-10: var(--sjs-semantic-red-background-10, #{$red-light});
+$semantic-red-foreground-100: var(--sjs-semantic-red-foreground-100, #{$red-forecolor});
+$semantic-green-background-500: var(--sjs-semantic-green-background-500, #{$green});
+$semantic-green-background-10: var(--sjs-semantic-green-background-10, #{$green-light});
+$semantic-green-foreground-100: var(--sjs-semantic-green-foreground-100, #{$green-forecolor});
+$semantic-blue-background-500: var(--sjs-semantic-blue-background-500, #{$blue});
+$semantic-blue-background-10: var(--sjs-semantic-blue-background-10, #{$blue-light});
+$semantic-blue-foreground-100: var(--sjs-semantic-blue-foreground-100, #{$blue-forecolor});
+$semantic-yellow-background-500: var(--sjs-semantic-yellow-background-500, #{$yellow});
+$semantic-yellow-background-10: var(--sjs-semantic-yellow-background-10, #{$yellow-light});
+$semantic-yellow-foreground-100: var(--sjs-semantic-yellow-foreground-100, #{$yellow-forecolor});
+$semantic-white-background-500: var(--sjs-semantic-white-background-500, var(--sjs-special-white, #ffffff));
+
+$code-red-500: var(--sjs-code-red-500, var(--sjs-code-red, #f41b4f));
+$code-green-500: var(--sjs-code-green-500, var(--sjs-code-green, #08997b));
+$code-blue-500: var(--sjs-code-blue-500, var(--sjs-code-blue, #316ec9));
+$code-yellow-500: var(--sjs-code-yellow-500, var(--sjs-code-yellow, #f58c06));
+$code-purple-500: var(--sjs-code-purple-500, var(--sjs-code-purple, #c22ea1));
+$code-gray-700: var(--sjs-code-gray-700, var(--sjs-code-light-gray, #b5b5b5));
+$code-gray-500: var(--sjs-code-gray-500, var(--sjs-code-gray, #8a8a8a));
+$code-gray-300: var(--sjs-code-gray-300, var(--sjs-code-black, #505050));

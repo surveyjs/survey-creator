@@ -737,6 +737,7 @@ export var enStrings = {
     correctAnswer: "Correct Answer",
     defaultPanelValue: "Default Values",
     cells: "Cell Texts",
+    fileInputPlaceholder: "Select a file or paste a file link...",
     keyName: "Prevent duplicate responses in the following column",
     itemvalue: {
       visibleIf: "Make the option visible if",
@@ -1444,6 +1445,7 @@ export var enStrings = {
     filePlaceholder: "Applies when \"File source type\" is \"Local file\" or when camera is unavailable",
     photoPlaceholder: "Applies when \"File source type\" is \"Camera\".",
     fileOrPhotoPlaceholder: "Applies when \"File source type\" is \"Local file or camera\".",
+
     masksettings: {
       saveMaskedValue: "Select if you want to store the question value with an applied mask in survey results."
     },

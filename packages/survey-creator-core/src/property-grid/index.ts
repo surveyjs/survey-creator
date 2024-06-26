@@ -1540,7 +1540,7 @@ export class PropertyGridLinkEditor extends PropertyGridEditor {
     prop: JsonObjectProperty,
     options: ISurveyCreatorOptions
   ): any {
-    const res: any = { type: "fileedit", storeDataAsText: false };
+    const res: any = { type: "fileedit", storeDataAsText: false, placeholder: editorLocalization.getString("pe.fileInputPlaceholder") };
     return res;
   }
 

@@ -598,6 +598,7 @@ var traditionalChineseTranslation = {
     allowCompleteSurveyAutomatic: "自動完成調查",
     showProgressBar: "顯示進度條",
     questionTitleLocation: "問題的標題位置",
+    questionTitleWidth: "問題標題寬度",
     requiredText: "The question required symbol(s)",
     questionTitleTemplate: "問題標題模板, 默認為: '{no}. {require} {title}'",
     questionErrorLocation: "問題錯誤定位",
@@ -734,6 +735,7 @@ var traditionalChineseTranslation = {
     correctAnswer: "正確答案",
     defaultPanelValue: "預設值",
     cells: "單元格文本",
+    fileInputPlaceholder: "選擇檔案或貼上檔案連結...",
     keyName: "鍵列",
     itemvalue: {
       visibleIf: "如果出現以下情況，則使該選項可見",
@@ -1220,6 +1222,9 @@ var traditionalChineseTranslation = {
     currencymask: {
       prefix: "例：$",
       suffix: "例如：美元"
+    },
+    panelbase: {
+      questionTitleWidth: "例如：200px"
     }
   },
   pehelp: {
@@ -1230,6 +1235,7 @@ var traditionalChineseTranslation = {
       enableIf: "使用魔棒圖示設置禁用面板唯讀模式的條件規則。",
       requiredIf: "使用魔杖圖示設置條件規則，除非至少有一個嵌套問題有答案，否則該規則將阻止調查提交。",
       questionTitleLocation: "適用於此面板中的所有問題。如果要覆蓋此設置，請為單個問題定義標題對齊規則。“繼承”選項應用頁面級別（如果已設置）或調查級別設置（預設為“頂部”）。",
+      questionTitleWidth: "當問題標題與問題框左側對齊時，為問題標題設置一致的寬度。接受 CSS 值（px、%、in、pt 等）。",
       questionErrorLocation: "設置與面板中所有問題相關的錯誤消息的位置。“繼承”選項應用頁面級別（如果已設置）或調查級別設置。",
       questionsOrder: "保持問題的原始順序或隨機化問題。“繼承”選項應用頁面級別（如果已設置）或調查級別設置。",
       page: "將面板重新置放到選頁面的末尾。",
@@ -1376,6 +1382,7 @@ var traditionalChineseTranslation = {
       enableIf: "使用魔杖圖示設置禁用頁面只讀模式的條件規則。",
       requiredIf: "使用魔杖圖示設置條件規則，除非至少有一個嵌套問題有答案，否則該規則將阻止調查提交。",
       questionTitleLocation: "適用於本頁中的所有問題。如果要覆蓋此設置，請為單個問題或面板定義標題對齊規則。“繼承”選項將應用調查級別設置（預設為“頂部”）。",
+      questionTitleWidth: "當問題標題與問題框左側對齊時，為問題標題設置一致的寬度。接受 CSS 值（px、%、in、pt 等）。",
       questionErrorLocation: "設置與輸入無效的問題相關的錯誤消息的位置。選擇：「頂部」 - 錯誤文本放置在問題框的頂部;“底部” - 錯誤文本放置在問題框的底部。“繼承”選項將應用調查級別設置（預設為“頂部”）。",
       questionsOrder: "保持問題的原始順序或隨機化問題。繼承「選項應用調查級別設置（預設為」原始」。）。此設置的效果僅在「預覽」選項卡中可見。",
       navigationButtonsVisibility: "設置導航按鈕在頁面上的可見性。“繼承”選項應用調查級別設置，預設為“可見”。"
@@ -2931,3 +2938,8 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "選項卡標題的回退文本，當選項卡標題模式未生成有意義的值時應用。"
 // theme.fontColor: "Font color" => "字體顏色"
 // theme.backgroundColor: "Background color" => "背景顏色"
+// pe.questionTitleWidth: "Question title width" => "問題標題寬度"
+// pe.fileInputPlaceholder: "Select a file or paste a file link..." => "選擇檔案或貼上檔案連結..."
+// panelbase.questionTitleWidth: "Ex.: 200px" => "例如：200px"
+// panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "當問題標題與問題框左側對齊時，為問題標題設置一致的寬度。接受 CSS 值（px、%、in、pt 等）。"
+// page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "當問題標題與問題框左側對齊時，為問題標題設置一致的寬度。接受 CSS 值（px、%、in、pt 等）。"

@@ -14,7 +14,7 @@
       :value="question.renderedValue || ''"
       @change="question.onInputChange"
       @blur="question.onInputBlur"
-      :placeholder="question.placeholder"
+      :placeholder="question.renderedPlaceholder"
     />
     <input
       type="file"

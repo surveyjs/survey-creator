@@ -598,6 +598,7 @@ export var jaStrings = {
     allowCompleteSurveyAutomatic: "調査に自動的に回答する",
     showProgressBar: "プログレスバーを表示する",
     questionTitleLocation: "質問のタイトルの場所",
+    questionTitleWidth: "質問タイトルの幅",
     requiredText: "質問には記号が必要",
     questionTitleTemplate: "質問タイトルのテンプレート、デフォルトは「{no}. {require} {title}」です",
     questionErrorLocation: "質問エラーの場所",
@@ -734,6 +735,7 @@ export var jaStrings = {
     correctAnswer: "正解",
     defaultPanelValue: "デフォルト値",
     cells: "セルテキスト",
+    fileInputPlaceholder: "ファイルを選択するか、ファイルリンクを貼り付けます...",
     keyName: "キー列",
     itemvalue: {
       visibleIf: "次の場合にオプションを表示します",
@@ -1220,6 +1222,9 @@ export var jaStrings = {
     currencymask: {
       prefix: "Ex.: $",
       suffix: "Ex.: USD"
+    },
+    panelbase: {
+      questionTitleWidth: "例:200px"
     }
   },
   pehelp: {
@@ -1230,6 +1235,7 @@ export var jaStrings = {
       enableIf: "魔法の杖アイコンを使用して、パネルの読み取り専用モードを無効にする条件付きルールを設定します。",
       requiredIf: "魔法の杖アイコンを使用して、ネストされた質問に回答が少なくとも1つない限り、調査の送信を禁止する条件付きルールを設定します。",
       questionTitleLocation: "このパネル内のすべての質問に適用されます。この設定を上書きする場合は、個々の質問のタイトル配置ルールを定義します。「継承」オプションは、ページレベル(設定されている場合)またはアンケートレベルの設定(デフォルトでは「上」)を適用します。",
+      questionTitleWidth: "質問タイトルが質問ボックスの左側に配置されている場合に、質問タイトルの幅を一定に設定します。CSS 値 (px、%、in、pt など) を受け入れます。",
       questionErrorLocation: "パネル内のすべての質問に関連するエラーメッセージの位置を設定します。[継承] オプションは、ページレベル(設定されている場合)またはアンケートレベルの設定を適用します。",
       questionsOrder: "質問の元の順序を維持するか、ランダム化します。[継承] オプションは、ページレベル(設定されている場合)またはアンケートレベルの設定を適用します。",
       page: "パネルを選択したページの末尾に再配置します。",
@@ -1376,6 +1382,7 @@ export var jaStrings = {
       enableIf: "魔法の杖アイコンを使用して、ページの読み取り専用モードを無効にする条件付きルールを設定します。",
       requiredIf: "魔法の杖アイコンを使用して、ネストされた質問に回答が少なくとも1つない限り、調査の送信を禁止する条件付きルールを設定します。",
       questionTitleLocation: "このページ内のすべての質問に適用されます。この設定を上書きする場合は、個々の質問またはパネルのタイトル配置ルールを定義します。「継承」オプションは、アンケートレベルの設定(デフォルトでは「トップ」)を適用します。",
+      questionTitleWidth: "質問タイトルが質問ボックスの左側に配置されている場合に、質問タイトルの幅を一定に設定します。CSS 値 (px、%、in、pt など) を受け入れます。",
       questionErrorLocation: "無効な入力を含む質問に関連するエラーメッセージの場所を設定します。次から選択します: \"Top\" - 質問ボックスの上部にエラーテキストが配置されます。\"Bottom\" - 質問ボックスの下部にエラーテキストが配置されます。「継承」オプションは、アンケートレベルの設定(デフォルトでは「トップ」)を適用します。",
       questionsOrder: "質問の元の順序を維持するか、ランダム化します。「継承」オプションは、アンケートレベルの設定(デフォルトでは「オリジナル」)を適用します。この設定の効果は、「プレビュー」タブにのみ表示されます。",
       navigationButtonsVisibility: "ページ上のナビゲーションボタンの表示を設定します。「継承」オプションは、アンケートレベルの設定を適用し、デフォルトは「表示」です。"
@@ -2658,3 +2665,8 @@ editorLocalization.locales["ja"] = jaStrings;
 // paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "タブ タイトル パターンが意味のある値を生成しない場合に適用されるタブ タイトルのフォールバック テキスト。"
 // theme.fontColor: "Font color" => "フォントの色"
 // theme.backgroundColor: "Background color" => "背景色"
+// pe.questionTitleWidth: "Question title width" => "質問タイトルの幅"
+// pe.fileInputPlaceholder: "Select a file or paste a file link..." => "ファイルを選択するか、ファイルリンクを貼り付けます..."
+// panelbase.questionTitleWidth: "Ex.: 200px" => "例:200px"
+// panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "質問タイトルが質問ボックスの左側に配置されている場合に、質問タイトルの幅を一定に設定します。CSS 値 (px、%、in、pt など) を受け入れます。"
+// page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "質問タイトルが質問ボックスの左側に配置されている場合に、質問タイトルの幅を一定に設定します。CSS 値 (px、%、in、pt など) を受け入れます。"

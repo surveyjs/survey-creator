@@ -1,7 +1,8 @@
 <ng-template #template>
-  <div class="svc-toolbox__category" [class.svc-toolbox__category--collapsed]="category.collapsed">
+  <div class="svc-toolbox__category" [class.svc-toolbox__category--collapsed]="category.collapsed"
+    [class.svc-toolbox__category--empty]="category.empty">
     <div class="svc-toolbox__category-header"
-      (click)="category.toggleState()" [key2click] [class.svc-toolbox__category-header--collapsed]="toolbox.canCollapseCategories">
+      (click)="category.toggleState()" [key2click] [class.svc-toolbox__category-header--collapsed]="toolbox.canCollapseCategories" >
       <span class="svc-toolbox__category-title">{{category.title}}</span>
       <div *ngIf="toolbox.canCollapseCategories" class="svc-toolbox__category-header__controls">
         <svg [iconName]="'icon-arrow-down'" class="svc-toolbox__category-header__button svc-string-editor__button--expand" [size]="24" sv-ng-svg-icon [visible]="category.collapsed"></svg>

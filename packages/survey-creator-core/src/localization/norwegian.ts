@@ -598,6 +598,7 @@ export var nbStrings = {
     allowCompleteSurveyAutomatic: "Fullfør undersøkelsen automatisk",
     showProgressBar: "Vis fremdriftslinje",
     questionTitleLocation: "Spørsmål tittel plassering",
+    questionTitleWidth: "Bredde på spørsmålstittel",
     requiredText: "Svar nødvendig symbol(er)",
     questionTitleTemplate: "Spørsmål tittel mal, standard er: '{no}. {require} {title}'",
     questionErrorLocation: "Spørsmål feil plassering",
@@ -734,6 +735,7 @@ export var nbStrings = {
     correctAnswer: "Riktig svar",
     defaultPanelValue: "Standardverdier",
     cells: "Cell Tekster",
+    fileInputPlaceholder: "Velg en fil eller lim inn en filkobling ...",
     keyName: "Nøkkelkolonne",
     itemvalue: {
       visibleIf: "Gjøre alternativet synlig hvis",
@@ -1220,6 +1222,9 @@ export var nbStrings = {
     currencymask: {
       prefix: "Eks.: $",
       suffix: "Eks.: USD"
+    },
+    panelbase: {
+      questionTitleWidth: "Eks.: 200 piksler"
     }
   },
   pehelp: {
@@ -1230,6 +1235,7 @@ export var nbStrings = {
       enableIf: "Bruk tryllestavikonet til å angi en betinget regel som deaktiverer skrivebeskyttet modus for panelet.",
       requiredIf: "Bruk tryllestavikonet til å angi en betinget regel som forhindrer innsending av spørreundersøkelser med mindre minst ett nestet spørsmål har et svar.",
       questionTitleLocation: "Gjelder alle spørsmålene i dette panelet. Hvis du vil overstyre denne innstillingen, definerer du regler for titteljustering for enkeltspørsmål. Alternativet \"Arv\" bruker innstillingen på sidenivå (hvis angitt) eller undersøkelsesnivå (\"Topp\" som standard).",
+      questionTitleWidth: "Angir konsekvent bredde for spørsmålstitler når de er justert til venstre for spørsmålsboksene. Godtar CSS-verdier (px, %, i, pt osv.).",
       questionErrorLocation: "Angir plasseringen av en feilmelding i forhold til alle spørsmålene i panelet. Alternativet «Arv» bruker innstillingen på sidenivå (hvis angitt) eller undersøkelsesnivå.",
       questionsOrder: "Beholder den opprinnelige rekkefølgen på spørsmål eller randomiserer dem. Alternativet «Arv» bruker innstillingen på sidenivå (hvis angitt) eller undersøkelsesnivå.",
       page: "Flytter panelet til slutten av en merket side.",
@@ -1376,6 +1382,7 @@ export var nbStrings = {
       enableIf: "Bruk tryllestavikonet til å angi en betinget regel som deaktiverer skrivebeskyttet modus for siden.",
       requiredIf: "Bruk tryllestavikonet til å angi en betinget regel som forhindrer innsending av spørreundersøkelser med mindre minst ett nestet spørsmål har et svar.",
       questionTitleLocation: "Gjelder alle spørsmål på denne siden. Hvis du vil overstyre denne innstillingen, definerer du regler for titteljustering for enkeltspørsmål eller paneler. Alternativet \"Arv\" bruker innstillingen på undersøkelsesnivå (\"Topp\" som standard).",
+      questionTitleWidth: "Angir konsekvent bredde for spørsmålstitler når de er justert til venstre for spørsmålsboksene. Godtar CSS-verdier (px, %, i, pt osv.).",
       questionErrorLocation: "Angir plasseringen til en feilmelding i forhold til spørsmålet med ugyldige inndata. Velg mellom: \"Topp\" - en feiltekst plasseres øverst i spørsmålsboksen; \"Bunn\" - en feiltekst er plassert nederst i spørsmålsboksen. Alternativet \"Arv\" bruker innstillingen på undersøkelsesnivå (\"Topp\" som standard).",
       questionsOrder: "Beholder den opprinnelige rekkefølgen på spørsmål eller randomiserer dem. Alternativet \"Arv\" bruker innstillingen på undersøkelsesnivå (\"Original\" som standard). Effekten av denne innstillingen er bare synlig i kategorien Forhåndsvisning.",
       navigationButtonsVisibility: "Angir synligheten til navigasjonsknapper på siden. Alternativet \"Arv\" bruker innstillingen på undersøkelsesnivå, som som standard er \"Synlig\"."
@@ -2662,3 +2669,8 @@ editorLocalization.locales["nb"] = nbStrings;
 // paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "En basistekst for tabulatortitler som gjelder når mønsteret for tabulatortittel ikke gir meningsfull verdi."
 // theme.fontColor: "Font color" => "Skriftfarge"
 // theme.backgroundColor: "Background color" => "Bakgrunnsfarge"
+// pe.questionTitleWidth: "Question title width" => "Bredde på spørsmålstittel"
+// pe.fileInputPlaceholder: "Select a file or paste a file link..." => "Velg en fil eller lim inn en filkobling ..."
+// panelbase.questionTitleWidth: "Ex.: 200px" => "Eks.: 200 piksler"
+// panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Angir konsekvent bredde for spørsmålstitler når de er justert til venstre for spørsmålsboksene. Godtar CSS-verdier (px, %, i, pt osv.)."
+// page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Angir konsekvent bredde for spørsmålstitler når de er justert til venstre for spørsmålsboksene. Godtar CSS-verdier (px, %, i, pt osv.)."
