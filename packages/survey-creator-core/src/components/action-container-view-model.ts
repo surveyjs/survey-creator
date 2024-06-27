@@ -6,7 +6,9 @@ import {
   SurveyElement,
   property,
   actionModeType,
-  IAction
+  IAction,
+  ActionContainer,
+  ComputedUpdater
 } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { settings } from "../creator-settings";
@@ -86,7 +88,9 @@ export class SurveyElementActionContainer extends AdaptiveActionContainer {
 
 export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> extends Base {
   public actionContainer: SurveyElementActionContainer;
+  public topActionContainer: ActionContainer;
   @property({ defaultValue: true }) allowDragging: boolean;
+  @property() collapsed: boolean;
   private allowEditOption: boolean;
   private selectedPropPageFunc: (sender: Base, options: any) => void;
   private sidebarFlyoutModeChangedFunc: (sender: Base, options: any) => void;
@@ -109,6 +113,25 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this.actionContainer = new SurveyElementActionContainer();
     this.actionContainer.dotsItem.iconSize = 16;
     this.actionContainer.dotsItem.popupModel.horizontalPosition = "center";
+
+    this.topActionContainer = new ActionContainer();
+    this.topActionContainer.setItems([{
+      id: "collapse",
+      iconName: "icon-collapse_16x16",
+      visible: new ComputedUpdater(() => !this.collapsed),
+      action: () => {
+        this.collapsed = true;
+      }
+    },
+    {
+      id: "expand",
+      iconName: "icon-expand_16x16",
+      visible: new ComputedUpdater(() => this.collapsed),
+      action: () => {
+        this.collapsed = false;
+      }
+    }]);
+
     this.setSurveyElement(surveyElement);
     this.creator.sidebar.onPropertyChanged.add(this.sidebarFlyoutModeChangedFunc);
     this.setShowAddQuestionButton(true);

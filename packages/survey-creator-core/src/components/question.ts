@@ -43,6 +43,7 @@ export interface QuestionBannerParams {
 export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   @property() isDragged: boolean;
   @property({ defaultValue: "" }) currentAddQuestionType: string;
+
   placeholderComponent: string;
   placeholderComponentData: any;
 
@@ -96,7 +97,10 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   }
 
   rootCss() {
-    return this.surveyElement.isQuestion && !(<Question>this.surveyElement).startWithNewLine ? " svc-question__adorner--start-with-new-line" : "";
+    const isStartWithNewLine = this.surveyElement.isQuestion && !(<Question>this.surveyElement).startWithNewLine;
+    return new CssClassBuilder()
+      .append("svc-question__adorner--start-with-new-line", isStartWithNewLine)
+      .append("svc-question__adorner--collapsed", !!this.collapsed).toString();
   }
 
   css() {
