@@ -563,6 +563,7 @@ export class QuestionToolbox
     parentItem.setItems(newItems);
     parentItem.component = "svc-toolbox-item-group";
     parentItem.popupModel.cssClass += " toolbox-subtypes";
+    parentItem.popupModel.isFocusedContainer = false;
     const popup = parentItem.popupModel as PopupModel;
     popup.contentComponentName = "svc-toolbox-list";
     popup.contentComponentData["toolbox"] = this;

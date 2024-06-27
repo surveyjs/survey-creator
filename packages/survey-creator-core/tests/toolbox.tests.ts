@@ -756,3 +756,9 @@ test("Toolbox show search depending on items count", (): any => {
   creator.toolbox.searchEnabled = false;
   expect(creator.toolbox.showSearch).toBeFalsy();
 });
+
+test("Toolbox child items do not get focus", (): any => {
+  const creator = new CreatorTester();
+  creator.toolbox.searchEnabled = true;
+  expect(creator.toolbox.items.filter(i => i.name == "text")[0].popupModel.isFocusedContainer).toBeFalsy();
+});
