@@ -646,6 +646,7 @@ export var skStrings = {
     questionsOnPageMode: "Štruktúra prieskumu",
     maxTextLength: "Maximálna dĺžka odpovede (v znakoch)",
     maxOthersLength: "Maximálna dĺžka komentára (v znakoch)",
+    commentAreaRows: "Výška oblasti komentárov (v riadkoch)",
     autoGrowComment: "V prípade potreby automaticky rozbaľte oblasť komentárov",
     allowResizeComment: "Povolenie používateľom meniť veľkosť textových oblastí",
     textUpdateMode: "Aktualizácia hodnoty textovej otázky",
@@ -1350,6 +1351,7 @@ export var skStrings = {
     questionsOrder: "Zachová pôvodné poradie otázok alebo ich náhodne vyberie. Efekt tohto nastavenia je viditeľný iba na karte Ukážka.",
     maxTextLength: "Len pre otázky týkajúce sa zadávania textu.",
     maxOthersLength: "Len pre komentáre k otázkam.",
+    commentAreaRows: "Nastaví počet zobrazených riadkov v textových oblastiach pre komentáre otázok. Vo vstupe zaberá viac riadkov, zobrazí sa posúvač.",
     autoGrowComment: "Vyberte, či chcete, aby komentáre otázok a otázky s dlhým textom automaticky narástli na výšku na základe zadanej dĺžky textu.",
     allowResizeComment: "Iba pre komentáre k otázkam a otázky s dlhým textom.",
     calculatedValues: "Vlastné premenné slúžia ako medziľahlé alebo pomocné premenné používané vo výpočtoch formulárov. Vstupy respondentov berú ako zdrojové hodnoty. Každá vlastná premenná má jedinečný názov a výraz, na ktorom je založená.",
@@ -2624,3 +2626,5 @@ editorLocalization.locales["sk"] = skStrings;
 // panelbase.questionTitleWidth: "Ex.: 200px" => "Napríklad: 200px"
 // panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Nastavuje konzistentnú šírku názvov otázok, keď sú zarovnané naľavo od polí otázok. Akceptuje hodnoty CSS (px, %, in, pt atď.)."
 // page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Nastavuje konzistentnú šírku názvov otázok, keď sú zarovnané naľavo od polí otázok. Akceptuje hodnoty CSS (px, %, in, pt atď.)."
+// pe.commentAreaRows: "Comment area height (in lines)" => "Výška oblasti komentárov (v riadkoch)"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "Nastaví počet zobrazených riadkov v textových oblastiach pre komentáre otázok. Vo vstupe zaberá viac riadkov, zobrazí sa posúvač."

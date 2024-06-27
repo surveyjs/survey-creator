@@ -646,6 +646,7 @@ var spanishTranslation = {
     questionsOnPageMode: "Estructura de la encuesta",
     maxTextLength: "Longitud máxima de la respuesta (en caracteres)",
     maxOthersLength: "Longitud máxima de comentario (en caracteres)",
+    commentAreaRows: "Altura del área de comentarios (en líneas)",
     autoGrowComment: "Auto-expand de comentario si es necesario",
     allowResizeComment: "Permitir a los usuarios cambiar el tamaño de las áreas de texto",
     textUpdateMode: "Actualizar valor del texto de la pregunta",
@@ -1350,6 +1351,7 @@ var spanishTranslation = {
     questionsOrder: "Mantiene el orden original de las preguntas o las aleatoriza. El efecto de esta configuración solo es visible en la pestaña Vista previa.",
     maxTextLength: "Solo para preguntas de entrada de texto.",
     maxOthersLength: "Solo para comentarios de preguntas.",
+    commentAreaRows: "Establece el número de líneas mostradas en las áreas de texto para los comentarios de las preguntas. En la entrada ocupa más líneas, aparece la barra de desplazamiento.",
     autoGrowComment: "Seleccione si desea que los comentarios de las preguntas y las preguntas de texto largo aumenten automáticamente en altura en función de la longitud del texto introducido.",
     allowResizeComment: "Solo para comentarios de preguntas y preguntas de texto largo.",
     calculatedValues: "Las variables personalizadas sirven como variables intermedias o auxiliares que se utilizan en los cálculos de formularios. Toman las entradas de los encuestados como valores de origen. Cada variable personalizada tiene un nombre único y una expresión en la que se basa.",
@@ -2445,3 +2447,5 @@ editorLocalization.locales["es"] = spanishTranslation;
 // panelbase.questionTitleWidth: "Ex.: 200px" => "Ej.: 200px"
 // panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Establece un ancho coherente para los títulos de las preguntas cuando están alineados a la izquierda de sus cuadros de preguntas. Acepta valores CSS (px, %, in, pt, etc.)."
 // page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Establece un ancho coherente para los títulos de las preguntas cuando están alineados a la izquierda de sus cuadros de preguntas. Acepta valores CSS (px, %, in, pt, etc.)."
+// pe.commentAreaRows: "Comment area height (in lines)" => "Altura del área de comentarios (en líneas)"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "Establece el número de líneas mostradas en las áreas de texto para los comentarios de las preguntas. En la entrada ocupa más líneas, aparece la barra de desplazamiento."

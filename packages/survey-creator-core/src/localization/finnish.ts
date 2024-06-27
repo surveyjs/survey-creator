@@ -646,6 +646,7 @@ export var fiStrings = {
     questionsOnPageMode: "Kyselyn rakenne",
     maxTextLength: "Vastauksen enimmäispituus (merkkeinä)",
     maxOthersLength: "Kommentin enimmäispituus (merkkeinä)",
+    commentAreaRows: "Kommenttialueen korkeus (riveinä)",
     autoGrowComment: "Laajenna kommenttialue tarvittaessa automaattisesti",
     allowResizeComment: "Salli käyttäjien muuttaa tekstialueiden kokoa",
     textUpdateMode: "Tekstikysymyksen arvon päivittäminen",
@@ -1350,6 +1351,7 @@ export var fiStrings = {
     questionsOrder: "Säilyttää kysymysten alkuperäisen järjestyksen tai satunnaistaa ne. Tämän asetuksen vaikutus näkyy vain Esikatselu-välilehdessä.",
     maxTextLength: "Vain tekstinsyöttökysymykset.",
     maxOthersLength: "Vain kysymysten kommentit.",
+    commentAreaRows: "Määrittää tekstialueilla näytettävien rivien määrän kysymyskommentteja varten. Tulossa vie enemmän rivejä, vierityspalkki tulee näkyviin.",
     autoGrowComment: "Valitse tämä, jos haluat, että kysymysten kommentit ja pitkät tekstit -kysymykset kasvavat automaattisesti syötetyn tekstin pituuden perusteella.",
     allowResizeComment: "Vain kysymyskommentit ja pitkän tekstin kysymykset.",
     calculatedValues: "Mukautetut muuttujat toimivat väli- tai apumuuttujina, joita käytetään lomakelaskelmissa. He ottavat vastaajan syötteet lähdearvoina. Jokaisella mukautetulla muuttujalla on yksilöllinen nimi ja lauseke, johon se perustuu.",
@@ -2671,3 +2673,5 @@ editorLocalization.locales["fi"] = fiStrings;
 // panelbase.questionTitleWidth: "Ex.: 200px" => "Esimerkki: 200px"
 // panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Määrittää kysymysten otsikoiden tasaisen leveyden, kun ne tasataan kysymysruutujen vasemmalle puolelle. Hyväksyy CSS-arvot (px, %, in, pt jne.)."
 // page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Määrittää kysymysten otsikoiden tasaisen leveyden, kun ne tasataan kysymysruutujen vasemmalle puolelle. Hyväksyy CSS-arvot (px, %, in, pt jne.)."
+// pe.commentAreaRows: "Comment area height (in lines)" => "Kommenttialueen korkeus (riveinä)"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "Määrittää tekstialueilla näytettävien rivien määrän kysymyskommentteja varten. Tulossa vie enemmän rivejä, vierityspalkki tulee näkyviin."

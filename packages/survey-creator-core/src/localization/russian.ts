@@ -646,6 +646,7 @@ export var ruStrings = {
     questionsOnPageMode: "Структура опроса",
     maxTextLength: "Максимальная длина ответа (в символах)",
     maxOthersLength: "Максимальная длина комментария (в символах)",
+    commentAreaRows: "Высота области комментариев (в строках)",
     autoGrowComment: "При необходимости автоматически разверните область комментариев",
     allowResizeComment: "Разрешить пользователям изменять размер текстовых областей",
     textUpdateMode: "Обновление значения текстового вопроса",
@@ -1350,6 +1351,7 @@ export var ruStrings = {
     questionsOrder: "Сохраняет исходный порядок вопросов или рандомизирует их. Эффект этого параметра виден только на вкладке «Предварительный просмотр».",
     maxTextLength: "Только для вопросов с вводом текста.",
     maxOthersLength: "Только для комментариев к вопросам.",
+    commentAreaRows: "Задает количество отображаемых строк в текстовых областях для комментариев к вопросам. При вводе занимает больше строк, появляется полоса прокрутки.",
     autoGrowComment: "Выберите, хотите ли вы, чтобы комментарии к вопросам и вопросы с длинным текстом автоматически увеличивались в высоту в зависимости от введенной длины текста.",
     allowResizeComment: "Только для комментариев к вопросам и вопросов с длинным текстом.",
     calculatedValues: "Пользовательские переменные служат промежуточными или вспомогательными переменными, используемыми в вычислениях формы. Они принимают входные данные респондента в качестве исходных значений. Каждая пользовательская переменная имеет уникальное имя и выражение, на котором она основана.",
@@ -2731,3 +2733,5 @@ editorLocalization.locales["ru"] = ruStrings;
 // panelbase.questionTitleWidth: "Ex.: 200px" => "Пример: 200px"
 // panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Задает одинаковую ширину заголовков вопросов, если они выровнены по левому краю полей вопросов. Принимает значения CSS (px, %, in, pt и т. д.)."
 // page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Задает одинаковую ширину заголовков вопросов, если они выровнены по левому краю полей вопросов. Принимает значения CSS (px, %, in, pt и т. д.)."
+// pe.commentAreaRows: "Comment area height (in lines)" => "Высота области комментариев (в строках)"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "Задает количество отображаемых строк в текстовых областях для комментариев к вопросам. При вводе занимает больше строк, появляется полоса прокрутки."
