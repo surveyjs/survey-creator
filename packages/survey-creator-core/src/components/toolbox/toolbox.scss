@@ -237,7 +237,7 @@ svc-toolbox {
 .svc-toolbox__category-separator {
   height: 1px;
   width: calcSize(5);
-  background-color: $border;
+  background-color: var(--ctr-toolbox-separator-color, $border);
   margin: calcSize(1) calcSize(0.5) calcSize(1.5);
 }
 

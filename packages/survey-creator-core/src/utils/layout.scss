@@ -55,7 +55,7 @@
   display: flex;
   background: var(--ctr-menu-item-background-color, $background);
   box-sizing: border-box;
-  box-shadow: inset 0px -1px 0px $border;
+  box-shadow: inset 0px -1px 0px var(--ctr-menu-border-color, $border);
 
   .svc-toolbar-wrapper {
     flex: 0 0 auto;

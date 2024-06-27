@@ -140,8 +140,8 @@
 
 .spg-question__erbox {
   padding: calcSize(1) calcSize(1.5) calcSize(1) calcSize(1.5);
-  color: $foreground;
-  background-color: $red-light;
+  color: var(--ctr-error-message-text-color, $foreground);
+  background-color: var(--ctr-error-message-background-color, $red-light);
   border-radius: calcSize(0.5);
   line-height: calcSize(3);
 

@@ -9,7 +9,8 @@
   border-collapse: collapse;
 
   tr {
-    border-bottom: 1px solid var(--ctr-data-table-border-color, $border);
+    border-bottom: 1px solid var(--ctr-data-table-row-border-color, $border);
+    background-color: var(--ctr-data-table-row-background-color, $background);
   }
 }
 

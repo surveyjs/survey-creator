@@ -9,6 +9,7 @@ svc-page {
 
   .sd-page__title {
     margin: calcSize(2.5) 0 0 0;
+    color: var(--ctr-survey-page-header-title-color-placeholder, $foreground-dim);
   }
 
   .svc-panel__placeholder {
@@ -101,7 +102,7 @@ svc-page {
 
 .svc-page__content:not(.svc-page__content--new):focus,
 .svc-hovered.svc-page__content:not(.svc-page__content--new) {
-  background: $secondary-backcolor-semi-light;
+  background: var(--ctr-survey-page-background-color-hovered, $secondary-backcolor-semi-light);
 }
 
 .svc-creator .svc-page .svc-page__content--selected,

@@ -93,14 +93,18 @@
   .sv-action-bar-item__title {
     color: var(--ctr-menu-toolbar-button-text-color, $foreground);
   }
+
+  .sv-action-bar-item__icon use {
+    fill: var(--ctr-menu-toolbar-button-icon-color, $foreground-light);
+  }
 }
 
 
 .svc-flex-column.svc-side-bar__wrapper {
   width: auto;
-  border-left: 1px solid $border;
+  border-left: 1px solid var(--ctr-property-grid-border-color, $border);
   height: 100%;
-  background-color: $background-dim;
+  background-color: var(--ctr-property-grid-form-background-color, $background-dim);
 }
 
 .svc-side-bar {

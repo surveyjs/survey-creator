@@ -146,4 +146,8 @@ survey-creator:not(.svd-simulator-content) {
       background-color: var(--ctr-contextual-menu-footer-background-color, $background-dim);
     }
   }
+
+  .sv-popup__content {
+    color: var(--ctr-popup-message-color, #404040);
+  }
 }
