@@ -1,5 +1,5 @@
 <template>
-  <div class="model.cssClasses.root">
+  <div :class="model.cssClasses.root">
     <template v-for="(item, index) in model.renderedActions" :key="index">
       <svc-toolbox-tool
         :creator="toolbox.creator"
