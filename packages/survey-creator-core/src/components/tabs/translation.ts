@@ -1045,7 +1045,7 @@ export class Translation extends Base implements ITranslationLocales {
     this.addLanguageAction = createDropdownActionModel({
       id: "svc-translation-choose-language",
       iconName: "icon-add",
-      enabled: <any>(new ComputedUpdater(() => this.isChooseLanguageEnabled)),
+      enabled: <any>(new ComputedUpdater(() => this.isChooseLanguageEnabled && !this.readOnly)),
     }, {
       items: this.chooseLanguageActions,
       allowSelection: false,
@@ -1094,10 +1094,11 @@ export class Translation extends Base implements ITranslationLocales {
   }
   private updateReadOnly(): void {
     if (this.stringsSurvey) {
-      this.stringsSurvey.mode = this.readOnly ? "display" : "edit";
+      const mode = this.readOnly ? "display" : "edit";
+      this.stringsSurvey.mode = mode;
+      this.settingsSurvey.mode = mode;
     }
   }
-
   public canShowProperty(obj: Base, prop: JsonObjectProperty, isEmpty: boolean): boolean {
     const result = !isEmpty || SurveyHelper.isPropertyVisible(obj, prop, this.options);
     return this.translationStringVisibilityCallback ? this.translationStringVisibilityCallback(obj, prop.name, result) : result;
