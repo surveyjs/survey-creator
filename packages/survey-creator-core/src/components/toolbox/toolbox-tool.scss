@@ -1,4 +1,5 @@
 @import "../../variables.scss";
+@import "../../variables-layer.scss";
 
 .svc-toolbox__item {
   display: flex;
@@ -138,7 +139,7 @@
 
 .svc-toolbox:not(.svc-toolbox--compact) {
   .svc-toolbox__item:not(.sv-dots):focus,
-  .svc-toolbox__tool--hovered .svc-toolbox__item:not(.sv-dots),
+  .svc-toolbox__tool--hovered > .sv-action__content > .svc-toolbox__item:not(.sv-dots),
   .svc-toolbox__item:not(.sv-dots):hover {
     overflow: hidden;
     border-radius: calcSize(12.5);
@@ -237,23 +238,29 @@
     background-color: unset;
   }
 
-  .svc-toolbox__item.svc-toolbox__item-subtype:not(.sv-dots),
-  .svc-toolbox__item.svc-toolbox__item-subtype:not(.sv-dots) {
-    opacity: var(--ctr-toolbox-item-opacity-second-level, 0.75);
+  .svc-toolbox__item.svc-toolbox__item-subtype {
+    opacity: var(--ctr-toolbox-item-opacity-submenu, 1);
     overflow: hidden;
     border-radius: calcSize(12.5);
-    background-color: $background-dim-light;
+    background: var(--ctr-toolbox-item-background-color-submenu, $layer-2-background-500);
     box-shadow: $shadow-small, $shadow-medium;
     transition: 0.1s ease-in-out;
     padding: calcSize(1.5) calcSize(2);
 
-    &:hover,
-    &:focus {
-      background-color: $background;
-      opacity: 1;
-    }
     .svc-toolbox__item-title {
-      color: $foreground-dim;
+      color: var(--ctr-toolbox-item-text-color-submenu, $layer-2-foreground-100);
+    }
+  }
+
+  .svc-toolbox__tool:hover,
+  .svc-toolbox__tool--hovered,
+  .svc-toolbox__item:focus {
+    .svc-toolbox__item-subtype {
+      background: var(--ctr-toolbox-item-background-color-hovered, $layer-1-background-500);
+
+      .svc-toolbox__item-title {
+        color: var(--ctr-toolbox-item-text-color-hovered, $layer-1-foreground-100);
+      }
     }
   }
 
