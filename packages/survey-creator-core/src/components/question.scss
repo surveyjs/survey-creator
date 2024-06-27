@@ -876,4 +876,13 @@ svc-question,
   position: absolute;
   top: 0;
   right: 0;
+  .sv-action-bar-item {
+    use {
+      fill: $foreground-dim-light;
+    }
+    margin: 0;
+    padding: calcSize(0.5);
+    opacity: 0.5;
+    height: 24px;
+  }
 }

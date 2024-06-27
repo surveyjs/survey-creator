@@ -115,23 +115,26 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this.actionContainer.dotsItem.popupModel.horizontalPosition = "center";
 
     this.topActionContainer = new ActionContainer();
+    this.topActionContainer.sizeMode = "small";
     this.topActionContainer.setItems([{
       id: "collapse",
-      iconName: "icon-collapse_16x16",
-      visible: new ComputedUpdater(() => !this.collapsed),
+      iconName: "icon-collapse-v_16x16",
+      iconSize: 16,
+      visible: new ComputedUpdater<boolean>(() => !this.collapsed),
       action: () => {
         this.collapsed = true;
       }
     },
     {
       id: "expand",
-      iconName: "icon-expand_16x16",
-      visible: new ComputedUpdater(() => this.collapsed),
+      iconName: "icon-expand-v_16x16",
+      iconSize: 16,
+      visible: new ComputedUpdater<boolean>(() => this.collapsed),
       action: () => {
         this.collapsed = false;
       }
     }]);
-
+    this.collapsed = false;
     this.setSurveyElement(surveyElement);
     this.creator.sidebar.onPropertyChanged.add(this.sidebarFlyoutModeChangedFunc);
     this.setShowAddQuestionButton(true);
