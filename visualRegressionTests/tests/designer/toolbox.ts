@@ -243,7 +243,8 @@ test("Toolbox with subtypes (wrap)", async (t) => {
     await setJSON({ pages: [{ name: "page1" }] });
     await t.resizeWindow(2560, 500)
       .wait(300)
-      .hover(getToolboxItemByText("Single-Line Input"));
+      .hover(getToolboxItemByText("Single-Line Input"))
+      .expect(subtypesPopup.visible).ok();
     await takeElementScreenshot("toolbox-wrap-subtypes.png", subtypesPopup, t, comparer);
   });
 });
