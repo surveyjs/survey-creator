@@ -646,6 +646,7 @@ export var bgStrings = {
     questionsOnPageMode: "Структура на анкетата",
     maxTextLength: "Максимална дължина на отговора (в символи)",
     maxOthersLength: "Максимална дължина на коментара (в символи)",
+    commentAreaRows: "Височина на областта за коментари (в редове)",
     autoGrowComment: "Автоматично разширяване на областта за коментари, ако е необходимо",
     allowResizeComment: "Позволява на потребителите да преоразмеряват текстови области",
     textUpdateMode: "Актуализиране стойността на текстовия въпрос",
@@ -1350,6 +1351,7 @@ export var bgStrings = {
     questionsOrder: "Запазва първоначалния ред на въпросите или ги рандомизира. Ефектът от тази настройка се вижда само в раздела Визуализация .",
     maxTextLength: "Само за въпроси за въвеждане на текст.",
     maxOthersLength: "Само за въпросителни коментари.",
+    commentAreaRows: "Задава броя на показваните редове в текстовите области за коментари на въпроси. Във входа заема повече редове, плъзгачът се появява.",
     autoGrowComment: "Изберете дали искате коментарите за въпроси и въпросите с дълъг текст автоматично да нарастват на височина въз основа на въведената дължина на текста.",
     allowResizeComment: "Само за коментари с въпроси и въпроси с дълъг текст.",
     calculatedValues: "Персонализираните променливи служат като междинни или спомагателни променливи, използвани в изчисленията на формуляра. Те приемат входните данни на респондентите като изходни стойности. Всяка персонализирана променлива има уникално име и израз, на който се базира.",
@@ -2234,3 +2236,5 @@ editorLocalization.locales["bg"] = bgStrings;
 // panelbase.questionTitleWidth: "Ex.: 200px" => "Пример: 200px"
 // panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Задава еднаква ширина за заглавията на въпросите, когато те са подравнени отляво на техните полета за въпроси. Приема CSS стойности (px, %, in, pt и т.н.)."
 // page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Задава еднаква ширина за заглавията на въпросите, когато те са подравнени отляво на техните полета за въпроси. Приема CSS стойности (px, %, in, pt и т.н.)."
+// pe.commentAreaRows: "Comment area height (in lines)" => "Височина на областта за коментари (в редове)"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "Задава броя на показваните редове в текстовите области за коментари на въпроси. Във входа заема повече редове, плъзгачът се появява."

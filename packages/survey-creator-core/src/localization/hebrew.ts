@@ -646,6 +646,7 @@ export var hebrewStrings = {
     questionsOnPageMode: "מבנה הסקר",
     maxTextLength: "אורך מקסימלי לתשובה (בתווים)",
     maxOthersLength: "אורך מקסימלי להערות (בתווים)",
+    commentAreaRows: "גובה אזור הערה (בשורות)",
     autoGrowComment: "הרחבה אוטומטית של אזור ההערות כראוי",
     allowResizeComment: "אפשר התאמה ידנית של אזורי טקסט על ידי המשתמש",
     textUpdateMode: "עדכן את ערך הטקסט של השאלה",
@@ -1350,6 +1351,7 @@ export var hebrewStrings = {
     questionsOrder: "שומר על הסדר המקורי של השאלות או מסדר אותן באופן אקראי. ההשפעה של הגדרה זו גלויה רק בכרטיסיה תצוגה מקדימה.",
     maxTextLength: "לשאלות הזנת טקסט בלבד.",
     maxOthersLength: "להערות לשאלה בלבד.",
+    commentAreaRows: "מגדיר את מספר השורות המוצגות באזורי טקסט להערות שאלה. בקלט תופס יותר שורות, פס הגלילה מופיע.",
     autoGrowComment: "בחר אם ברצונך שהערות שאלה ושאלות טקסט ארוך יגדלו באופן אוטומטי לגובה בהתבסס על אורך הטקסט שהוזנו.",
     allowResizeComment: "להערות לשאלות ולשאלות טקסט ארוך בלבד.",
     calculatedValues: "משתנים מותאמים אישית משמשים כמשתני ביניים או משתני עזר המשמשים בחישובי טפסים. הם לוקחים תשומות משיבים כערכי מקור. לכל משתנה מותאם אישית יש שם ייחודי וביטוי שעליו הוא מבוסס.",
@@ -2239,3 +2241,5 @@ editorLocalization.locales["he"] = hebrewStrings;
 // panelbase.questionTitleWidth: "Ex.: 200px" => "לדוגמה: 200px"
 // panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "הגדרת רוחב עקבי לכותרות שאלות כאשר הן מיושרות משמאל לתיבות השאלות. מקבל ערכי CSS (px, %, in, pt וכו')."
 // page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "הגדרת רוחב עקבי לכותרות שאלות כאשר הן מיושרות משמאל לתיבות השאלות. מקבל ערכי CSS (px, %, in, pt וכו')."
+// pe.commentAreaRows: "Comment area height (in lines)" => "גובה אזור הערה (בשורות)"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "מגדיר את מספר השורות המוצגות באזורי טקסט להערות שאלה. בקלט תופס יותר שורות, פס הגלילה מופיע."

@@ -646,6 +646,7 @@ export let svStrings = {
     questionsOnPageMode: "Undersökningens struktur",
     maxTextLength: "Maximal svarslängd (i tecken)",
     maxOthersLength: "Maximal kommentarslängd (i tecken)",
+    commentAreaRows: "Kommentarsfältets höjd (i rader)",
     autoGrowComment: "Expandera kommentarsområdet automatiskt om det behövs",
     allowResizeComment: "Tillåt användare att ändra storlek på textområden",
     textUpdateMode: "Uppdatera textfrågevärde",
@@ -1350,6 +1351,7 @@ export let svStrings = {
     questionsOrder: "Behåller den ursprungliga ordningen på frågorna eller slumpar dem. Effekten av den här inställningen visas bara på fliken Förhandsgranska.",
     maxTextLength: "Endast för textinmatningsfrågor.",
     maxOthersLength: "Endast för frågekommentarer.",
+    commentAreaRows: "Anger antalet rader som ska visas i textområden för frågekommentarer. I inmatningen tar upp fler rader visas rullningslisten.",
     autoGrowComment: "Välj om du vill att frågekommentarer och långa textfrågor automatiskt ska öka i höjd baserat på den angivna textlängden.",
     allowResizeComment: "Endast för frågekommentarer och långa textfrågor.",
     calculatedValues: "Anpassade variabler fungerar som mellanliggande variabler eller hjälpvariabler som används i formulärberäkningar. De tar svarandes indata som källvärden. Varje anpassad variabel har ett unikt namn och ett uttryck som den baseras på.",
@@ -2848,3 +2850,5 @@ editorLocalization.locales["sv"] = svStrings;
 // panelbase.questionTitleWidth: "Ex.: 200px" => "Ex.: 200px"
 // panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Anger konsekvent bredd för frågerubriker när de är justerade till vänster om frågerutorna. Accepterar CSS-värden (px, %, in, pt, etc.)."
 // page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Anger konsekvent bredd för frågerubriker när de är justerade till vänster om frågerutorna. Accepterar CSS-värden (px, %, in, pt, etc.)."
+// pe.commentAreaRows: "Comment area height (in lines)" => "Kommentarsfältets höjd (i rader)"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "Anger antalet rader som ska visas i textområden för frågekommentarer. I inmatningen tar upp fler rader visas rullningslisten."
