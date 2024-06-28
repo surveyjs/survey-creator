@@ -35,11 +35,11 @@ svc-toolbox {
 
   .spg-search-editor_bar-item.sv-action-bar-item:not(.sv-action-bar-item--pressed) {
     &:hover:enabled {
-      background-color: $red-light;
+      background-color: var(--ctr-toolbox-search-clear-button-background-color-hovered, $red-light);
       border-radius: 100px;
 
       svg use {
-        fill: $red;
+        fill: var(--ctr-toolbox-search-clear-button-icon-color-hovered, $red);
       }
     }
   }
@@ -103,7 +103,7 @@ svc-toolbox {
   .svc-toolbox__panel {
     z-index: 200;
     position: relative;
-    background: $background-dim;
+    background: var(--ctr-toolbox-background-color, $background-dim);
     width: fit-content;
     box-shadow: 1px 0 0 0 $border-inside, $shadow-medium, $shadow-large;
   }
@@ -317,7 +317,7 @@ svc-toolbox {
   padding-top: calcSize(12);
   margin-left: auto;
   margin-right: auto;
-  color: $foreground-light;
+  color: var(--ctr-property-grid-placeholder-text-description-color, $foreground-light);
   @include defaultFont;
   font-size: 12px;
 }
