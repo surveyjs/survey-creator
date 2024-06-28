@@ -207,8 +207,7 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
       showPreviewTab: false,
       pageEditMode: "single",
       allowModifyPages: false,
-      showSurveyTitle: false,
-      maxNestedPanels: 1
+      showSurveyTitle: false
     };
     const oldSearchValue = settings.propertyGrid.enableSearch;
     settings.propertyGrid.enableSearch = false;
@@ -318,6 +317,7 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
   }
   private setupPropertyCreator(): void {
     const creator = this.propCreator;
+    creator.maxNestedPanels = 0;
     creator.showSaveButton = false;
     creator.onModified.add((sender, options) => {
       this.isPropCreatorChanged = true;
