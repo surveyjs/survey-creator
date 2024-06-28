@@ -241,8 +241,8 @@ test("Toolbox with subtypes (wrap)", async (t) => {
     const subtypesPopup = Selector(".sv-popup.sv-popup-inner.toolbox-subtypes .sv-popup__container").nth(1);
 
     await setJSON({ pages: [{ name: "page1" }] });
-    await t.resizeWindow(2560, 500)
-      .wait(300)
+    await t.resizeWindow(1775, 500)
+      .scrollBy(".svc-toolbox__scroller", 2, 300)
       .hover(getToolboxItemByText("Single-Line Input"))
       .expect(subtypesPopup.visible).ok();
     await takeElementScreenshot("toolbox-wrap-subtypes.png", subtypesPopup, t, comparer);
