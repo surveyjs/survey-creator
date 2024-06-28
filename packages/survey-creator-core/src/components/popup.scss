@@ -66,10 +66,15 @@ survey-creator:not(.svd-simulator-content) {
 
   .sv-list__filter {
     background-color: var(--ctr-contextual-menu-background-color, $background);
+    border-bottom: 1px solid var(--ctr-list-search-border-color, $border-inside);
 
     .sv-list__input {
       color: var(--ctr-list-search-text-color-placeholder, $foreground-dim-light);
       background-color: transparent;
+
+      &::placeholder {
+        color: var(--ctr-list-search-text-color-placeholder, $foreground-dim-light);
+      }
     }
 
     .sv-list__filter-icon use {
@@ -81,7 +86,12 @@ survey-creator:not(.svd-simulator-content) {
     color: var(--ctr-list-item-text-color, $foreground-dim);
   }
 
+  .sv-list__item-icon use {
+    fill: var(--ctr-list-item-icon-color, $foreground-dim-light);
+  }
+
   .sv-list__item--hovered>.sv-list__item-body {
+    color: var(--ctr-list-item-text-color-hovered, $foreground-dim);
     background: var(--ctr-list-item-background-color-hovered, $background-dim);
   }
 

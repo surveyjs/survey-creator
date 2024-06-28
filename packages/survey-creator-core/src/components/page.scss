@@ -64,7 +64,7 @@ svc-page {
   //hovered state
   .sv-action-bar-item:not(.sv-action-bar-item--pressed):hover:enabled,
   .sv-action-bar-item:not(.sv-action-bar-item--pressed):focus:enabled {
-    background-color: var(--ctr-survey-page-toolbar-item-background-color-hovered, $background-dim);
+    background-color: var(--ctr-survey-question-panel-toolbar-item-background-color-hovered, $background-dim);
   }
 
   //pressed state

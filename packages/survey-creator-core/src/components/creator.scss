@@ -38,6 +38,12 @@ survey-creator,
     border: 2px solid rgba(0, 0, 0, 0);
     background-color: var(--ctr-scrollbar-background-color, $border);
   }
+
+  .sv-popup .sv-popup__scrolling-content {
+    ::-webkit-scrollbar-thumb:hover {
+      background-color: var(--ctr-scrollbar-background-color, $border);
+    }
+  }
 }
 
 .svc-creator__area {
