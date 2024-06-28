@@ -238,7 +238,7 @@ test("Toolbox with subtypes (ltr)", async (t) => {
 
 test("Toolbox with subtypes (wrap)", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    const subtypesPopup = Selector(".sv-popup.sv-popup-inner.toolbox-subtypes .sv-popup__container").filterVisible();
+    const subtypesPopup = Selector(".sv-popup.sv-popup-inner.toolbox-subtypes .sv-popup__container").nth(1);
 
     await setJSON({ pages: [{ name: "page1" }] });
     await t.resizeWindow(2560, 500)
