@@ -369,6 +369,17 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
         const newItems = this.getConvertToTypesActions(newAction);
         listModel.setItems(newItems);
         listModel.selectedItem = this.getSelectedItem(newItems, this.currentType);
+
+        let propertyName = QuestionToolbox.getSubTypePropertyName(this.currentType);
+        newItems.forEach(action => {
+          if (action.items?.length > 0) {
+            const selectedSubItem = action.items.filter(item => item.id === this.element[propertyName])[0];
+            if (selectedSubItem) {
+              const _listModel = action.popupModel.contentComponentData.model;
+              _listModel.selectedItem = selectedSubItem;
+            }
+          }
+        });
       }
     });
     newAction.disableHide = true;

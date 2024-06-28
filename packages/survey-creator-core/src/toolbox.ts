@@ -560,7 +560,7 @@ export class QuestionToolbox
       });
       return innerItem;
     });
-    parentItem.setItems(newItems);
+    parentItem.setSubItems({ items: newItems });
     parentItem.component = "svc-toolbox-item-group";
     parentItem.popupModel.cssClass += " toolbox-subtypes";
     parentItem.popupModel.isFocusedContainer = false;
