@@ -2078,3 +2078,31 @@ test("Change translation list actions titles on changing locale", (): any => {
   expect(actions[1].title).toBe("Used Strings Only de");
   creator.locale = "";
 });
+test("Creator read-only", (): any => {
+  const creator = new CreatorTester({ showTranslationTab: true });
+  creator.JSON = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "text",
+            name: "question1",
+            title: {
+              default: "question 1",
+              de: "question de",
+            }
+          }
+        ]
+      }
+    ]
+  };
+  creator.readOnly = true;
+  creator.activeTab = "translation";
+  const tabTranslationPlugin: TabTranslationPlugin = creator.getPlugin("translation");
+  const translation = tabTranslationPlugin.model;
+  expect(translation.stringsSurvey.mode).toBe("display");
+  expect(translation.settingsSurvey.mode).toBe("display");
+  const action = creator.toolbar.getActionById("svc-translation-import");
+  expect(action.enabled).toBeFalsy();
+});

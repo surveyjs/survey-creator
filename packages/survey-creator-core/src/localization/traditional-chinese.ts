@@ -646,6 +646,7 @@ var traditionalChineseTranslation = {
     questionsOnPageMode: "調查結構",
     maxTextLength: "最大答案長度（以字元為單位）",
     maxOthersLength: "最大註解長度（以字元為單位）",
+    commentAreaRows: "評論區高度（以行為單位）",
     autoGrowComment: "如有必要，自動展開評論區域",
     allowResizeComment: "允許用戶調整文字區域的大小",
     textUpdateMode: "更新文字問題值",
@@ -1350,6 +1351,7 @@ var traditionalChineseTranslation = {
     questionsOrder: "保持問題的原始順序或隨機化問題。此設置的效果僅在「預覽」選項卡中可見。",
     maxTextLength: "僅適用於文本輸入問題。",
     maxOthersLength: "僅供問題評論。",
+    commentAreaRows: "設置問題註釋的文字區域中顯示的行數。在輸入佔用更多行時，將出現滾動條。",
     autoGrowComment: "選擇是否希望問題註釋和長文本問題根據輸入的文字長度自動增加高度。",
     allowResizeComment: "僅適用於問題評論和長文本問題。",
     calculatedValues: "自訂變數用作表單計算中使用的中間變數或輔助變數。他們將受訪者的輸入作為源值。每個自定義變數都有一個唯一的名稱和它所基於的表達式。",
@@ -2943,3 +2945,5 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // panelbase.questionTitleWidth: "Ex.: 200px" => "例如：200px"
 // panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "當問題標題與問題框左側對齊時，為問題標題設置一致的寬度。接受 CSS 值（px、%、in、pt 等）。"
 // page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "當問題標題與問題框左側對齊時，為問題標題設置一致的寬度。接受 CSS 值（px、%、in、pt 等）。"
+// pe.commentAreaRows: "Comment area height (in lines)" => "評論區高度（以行為單位）"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "設置問題註釋的文字區域中顯示的行數。在輸入佔用更多行時，將出現滾動條。"

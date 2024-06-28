@@ -646,6 +646,7 @@ export var indonesianStrings = {
     questionsOnPageMode: "Struktur survei",
     maxTextLength: "Panjang jawaban maksimum (dalam karakter)",
     maxOthersLength: "Panjang komentar maksimum (dalam karakter)",
+    commentAreaRows: "Tinggi area komentar (dalam baris)",
     autoGrowComment: "Perluas area komentar secara otomatis jika perlu",
     allowResizeComment: "Mengizinkan pengguna mengubah ukuran area teks",
     textUpdateMode: "Memperbarui nilai pertanyaan teks",
@@ -1350,6 +1351,7 @@ export var indonesianStrings = {
     questionsOrder: "Menyimpan urutan pertanyaan asli atau mengacaknya. Efek pengaturan ini hanya terlihat di tab Pratinjau.",
     maxTextLength: "Hanya untuk pertanyaan entri teks.",
     maxOthersLength: "Hanya untuk komentar pertanyaan.",
+    commentAreaRows: "Mengatur jumlah baris yang ditampilkan di area teks untuk komentar pertanyaan. Dalam input mengambil lebih banyak baris, bilah gulir muncul.",
     autoGrowComment: "Pilih apakah Anda ingin komentar pertanyaan dan pertanyaan Teks Panjang bertambah tinggi secara otomatis berdasarkan panjang teks yang dimasukkan.",
     allowResizeComment: "Hanya untuk komentar pertanyaan dan pertanyaan Teks Panjang.",
     calculatedValues: "Variabel kustom berfungsi sebagai variabel perantara atau tambahan yang digunakan dalam perhitungan formulir. Mereka mengambil input responden sebagai nilai sumber. Setiap variabel kustom memiliki nama unik dan ekspresi yang menjadi dasarnya.",
@@ -2825,3 +2827,5 @@ editorLocalization.locales["id"] = indonesianStrings;
 // panelbase.questionTitleWidth: "Ex.: 200px" => "Contoh: 200px"
 // panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Mengatur lebar yang konsisten untuk judul pertanyaan bila disejajarkan di sebelah kiri kotak pertanyaan. Menerima nilai CSS (px, %, in, pt, dll.)."
 // page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Mengatur lebar yang konsisten untuk judul pertanyaan bila disejajarkan di sebelah kiri kotak pertanyaan. Menerima nilai CSS (px, %, in, pt, dll.)."
+// pe.commentAreaRows: "Comment area height (in lines)" => "Tinggi area komentar (dalam baris)"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "Mengatur jumlah baris yang ditampilkan di area teks untuk komentar pertanyaan. Dalam input mengambil lebih banyak baris, bilah gulir muncul."

@@ -646,6 +646,7 @@ export var msStrings = {
     questionsOnPageMode: "Struktur tinjauan",
     maxTextLength: "Panjang jawapan maksimum (dalam aksara)",
     maxOthersLength: "Panjang komen maksimum (dalam aksara)",
+    commentAreaRows: "Komen ketinggian kawasan (dalam garisan)",
     autoGrowComment: "Kembangkan kawasan komen secara automatik jika perlu",
     allowResizeComment: "Benarkan pengguna mensaiz semula kawasan teks",
     textUpdateMode: "Mengemas kini nilai soalan teks",
@@ -1350,6 +1351,7 @@ export var msStrings = {
     questionsOrder: "Mengekalkan susunan soalan asal atau rawak mereka. Kesan seting ini hanya kelihatan dalam tab Pratonton.",
     maxTextLength: "Untuk soalan entri teks sahaja.",
     maxOthersLength: "Untuk komen soalan sahaja.",
+    commentAreaRows: "Mengesetkan bilangan baris yang dipaparkan dalam kawasan teks untuk komen soalan. Dalam input mengambil lebih banyak baris, bar skrol muncul.",
     autoGrowComment: "Pilih jika anda inginkan komen soalan dan soalan Teks Panjang untuk mengembangkan ketinggian automatik berdasarkan panjang teks yang dimasukkan.",
     allowResizeComment: "Untuk komen soalan dan soalan Teks Panjang sahaja.",
     calculatedValues: "Pemboleh ubah tersuai berfungsi sebagai pemboleh ubah perantaraan atau tambahan yang digunakan dalam pengiraan borang. Mereka mengambil input responden sebagai nilai sumber. Setiap pemboleh ubah tersuai mempunyai nama unik dan ungkapan yang berdasarkannya.",
@@ -2624,3 +2626,5 @@ editorLocalization.locales["ms"] = msStrings;
 // panelbase.questionTitleWidth: "Ex.: 200px" => "Ex.: 200px"
 // panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Menetapkan lebar yang konsisten untuk tajuk soalan apabila ia dijajarkan di sebelah kiri kotak soalan mereka. Menerima nilai CSS (px, %, dalam, pt, dll.)."
 // page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Menetapkan lebar yang konsisten untuk tajuk soalan apabila ia dijajarkan di sebelah kiri kotak soalan mereka. Menerima nilai CSS (px, %, dalam, pt, dll.)."
+// pe.commentAreaRows: "Comment area height (in lines)" => "Komen ketinggian kawasan (dalam garisan)"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "Mengesetkan bilangan baris yang dipaparkan dalam kawasan teks untuk komen soalan. Dalam input mengambil lebih banyak baris, bar skrol muncul."
