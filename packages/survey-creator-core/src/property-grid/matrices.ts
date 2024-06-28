@@ -643,6 +643,19 @@ export class PropertyGridEditorMatrixLayoutColumns extends PropertyGridEditorMat
   protected getDefaulColumnNames(): Array<string> {
     return ["width", "questionTitleWidth"];
   }
+  public onMatrixCellCreated(obj: Base, options: any) {
+    super.onMatrixCellCreated(obj, options);
+
+    const q = options.cellQuestion;
+    q.textUpdateMode = "onTyping";
+  }
+
+  public onCreated(obj: Base, question: Question, prop: JsonObjectProperty, options?: ISurveyCreatorOptions, propGridDefinition?: ISurveyPropertyGridDefinition) {
+    super.onCreated(obj, question, prop, options, propGridDefinition);
+    const matrixQuestion = <QuestionMatrixDynamicModel>question;
+    matrixQuestion.allowRemoveRows = false;
+    matrixQuestion.allowAddRows = false;
+  }
 }
 
 export class PropertyGridEditorMatrixPages extends PropertyGridEditorMatrix {
