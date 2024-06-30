@@ -47,7 +47,6 @@ export class DragDropSurveyElements extends DragDropCore<any> {
   public static newGhostPage: PageModel = null;
   public static restrictDragQuestionBetweenPages: boolean = false;
   public static edgeHeight: number = 30;
-  public static nestedPanelDepth: number = -1;
   public static ghostSurveyElementName = "sv-drag-drop-ghost-survey-element-name"; // before renaming use globa search (we have also css selectors)
 
   private insideEmptyContainer = null;
@@ -230,10 +229,14 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     if (this.draggedElement.getType() === "paneldynamic" && dropTarget === this.draggedElement.template) {
       return false;
     }
-    if (this.maxNestedPanels >= 0 && this.draggedElement.isPanel) {
-      let len = SurveyHelper.getElementDeepLength(dropTarget);
-      if (dragOverLocation !== DragTypeOverMeEnum.InsideEmptyPanel && dropTarget.isPanel) len--;
-      if (this.maxNestedPanels < len) return false;
+    if (this.maxNestedPanels >= 0) {
+      const el = this.dragOverIndicatorElement || this.draggedElement;
+      const elPanel = el.isPanel ? el : el.parent;
+      if(!!elPanel && elPanel.isPanel) {
+        let len = SurveyHelper.getElementDeepLength(elPanel);
+        if (dragOverLocation !== DragTypeOverMeEnum.InsideEmptyPanel && el.isPanel) len--;
+        if (this.maxNestedPanels < len) return false;
+      }
     }
 
     if (
