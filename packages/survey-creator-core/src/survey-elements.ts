@@ -314,11 +314,11 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     this.parentElement = this.dropTarget.isPage
       ? this.dropTarget
       : ((<any>this.dropTarget).page || (<any>this.dropTarget).__page);
-    if (!this.isAllowDragOver(dropTarget, dragOverLocation)) {
+    const dragOverIndicator = this.dragOverIndicatorElement || this.dropTarget;
+    if (!this.isAllowDragOver(dragOverIndicator, dragOverLocation)) {
       this.allowDropHere = false;
       return;
     }
-    const dragOverIndicator = this.dragOverIndicatorElement || this.dropTarget;
     if (dragOverLocation == DragTypeOverMeEnum.InsideEmptyPanel) {
       dragOverIndicator.dragTypeOverMe = DragTypeOverMeEnum.InsideEmptyPanel;
     } else {
