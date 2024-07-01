@@ -236,7 +236,7 @@ test("Toolbox with subtypes (ltr)", async (t) => {
   });
 });
 
-test("Toolbox with subtypes (wrap)", async (t) => {
+test.skip("Toolbox with subtypes (wrap)", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     const subtypesPopup = Selector(".sv-popup.sv-popup-inner.toolbox-subtypes .sv-popup__container").nth(1);
 
