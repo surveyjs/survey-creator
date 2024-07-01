@@ -1474,7 +1474,7 @@ export var enStrings = {
       cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes.",
       "--sjs-general-backcolor-dim": "Sets the main background color of the survey.",
     },
-    "header@header": {
+    header: {
       inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in.",
       textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels.",
       overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey.",
