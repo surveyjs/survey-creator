@@ -1134,7 +1134,7 @@ test("Support onDragDropAllow, Bug#4572", (): any => {
   expect(counter).toBe(2);
   expect(ddHelper["allowDropHere"]).toBeTruthy();
 });
-test("Support onDragDropAllow&allowMultipleElementsInRow", (): any => {
+test("Support onDragDropAllow&allowMultipleElementsInRow, #5621", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
     "logoPosition": "right",
