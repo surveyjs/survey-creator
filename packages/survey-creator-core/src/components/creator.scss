@@ -46,6 +46,16 @@ survey-creator,
   }
 }
 
+survey-creator {
+  .sv-drag-drop-choices-shortcut {
+    .sv-drag-drop-choices-shortcut__content {
+      background: var(--ctr-survey-radio-button-group-item-background-color-floating, $background);
+
+      .sd-item__decorator {}
+    }
+  }
+}
+
 .svc-creator__area {
   position: relative;
 

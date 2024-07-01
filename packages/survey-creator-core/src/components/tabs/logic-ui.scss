@@ -83,29 +83,45 @@
 
 .svc-logic-operator.svc-logic-operator--question {
   background-color: var(--ctr-expression-item-background-color-parameter, $blue-light);
+  color: var(--ctr-expression-item-text-color-parameter, $foreground);
 
   &:hover,
   &:focus {
     background-color: var(--ctr-expression-item-background-color-parameter-hovered, $blue);
+    color: var(--ctr-expression-item-text-color-parameter-hovered, $foreground);
   }
 }
 
-.svc-logic-operator.svc-logic-operator--conjunction,
-.svc-logic-operator.svc-logic-operator--operator {
+.svc-logic-operator.svc-logic-operator--conjunction {
   background-color: var(--ctr-expression-item-background-color-conjunction, $yellow-light);
+  color: var(--ctr-expression-item-text-color-conjunction, $foreground);
 
   &:hover,
   &:focus {
     background-color: var(--ctr-expression-item-background-color-conjunction-hovered, $yellow);
+    color: var(--ctr-expression-item-text-color-conjunction-hovered, $foreground);
+  }
+}
+
+.svc-logic-operator.svc-logic-operator--operator {
+  background-color: var(--ctr-expression-item-background-color-operator, $yellow-light);
+  color: var(--ctr-expression-item-text-color-operator, $foreground);
+
+  &:hover,
+  &:focus {
+    background-color: var(--ctr-expression-item-background-color-operator-hovered, $yellow);
+    color: var(--ctr-expression-item-text-color-operator-hovered, $foreground);
   }
 }
 
 .svc-logic-operator.svc-logic-operator--action {
   background-color: var(--ctr-expression-item-background-color-action, $red-light);
+  color: var(--ctr-expression-item-text-color-action, $foreground);
 
   &:hover,
   &:focus {
     background-color: var(--ctr-expression-item-background-color-action-hovered, $red);
+    color: var(--ctr-expression-item-text-color-action-hovered, $foreground);
   }
 }
 
@@ -163,13 +179,13 @@
 
 .svc-logic-operator--action.sl-paneldynamic__add-btn.sl-paneldynamic__add-btn,
 .svc-logic-operator--operator.sl-paneldynamic__add-btn.sl-paneldynamic__add-btn {
-  color: var(--ctr-expression-item-text-color-operator-empty, $foreground-light);
+  // color: var(--ctr-expression-item-text-color-operator-empty, $foreground-light);
   margin-top: calcSize(2);
 
-  &:hover,
-  &:focus {
-    color: var(--ctr-expression-item-background-color-operator-hovered, $primary-foreground);
-  }
+  // &:hover,
+  // &:focus {
+  //   color: var(--ctr-expression-item-background-color-operator-hovered, $primary-foreground);
+  // }
 }
 
 .svc-logic-tab__content {
