@@ -372,6 +372,49 @@ test("Drag Drop to Panel", async (t) => {
   const resultJson = await getJSON();
   await t.expect(resultJson).eql(expectedJson);
 });
+test("Drag Drop Question from a panel", async (t) => {
+  await t.resizeWindow(2560, 1440);
+  const json = {
+    elements: [
+      {
+        type: "panel",
+        name: "panel1",
+        elements: [
+          { type: "text", name: "question1" }
+        ]
+      }
+    ]
+  };
+  await setJSON(json);
+
+  const question1 = Selector("[data-sv-drop-target-survey-element=\"question1\"]");
+  const panel1 = Selector("[data-sv-drop-target-survey-element=\"panel1\"]");
+
+  await t
+    .hover(question1, { speed: 0.5 })
+    .dragToElement(question1, panel1, {
+      offsetX: 2,
+      offsetY: 2,
+      destinationOffsetY: 2,
+      speed: 0.5
+    });
+  const expectedJson = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          { type: "text", name: "question1" },
+          {
+            type: "panel",
+            name: "panel1"
+          }
+        ]
+      }
+    ]
+  };
+  const resultJson = await getJSON();
+  await t.expect(resultJson).eql(expectedJson);
+});
 
 test("Drag Drop Question with Multiline (StartWithNewLine === false)", async (t) => {
   const json = {
