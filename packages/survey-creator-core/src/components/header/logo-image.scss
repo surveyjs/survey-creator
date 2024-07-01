@@ -13,9 +13,11 @@
   padding: 0;
   cursor: pointer;
   max-width: 50%;
+
   .sd-logo__image {
     max-width: 100%;
   }
+
   .svc-image-item-value-controls {
     display: block;
     top: calcSize(2.5);
@@ -47,11 +49,11 @@
   border-radius: calcSize(4);
 
   &:hover {
-    background-color: $primary-light;
+    background-color: var(--ctr-survey-header-logo-placeholder-background-color-hovered, $primary-light);
     opacity: unset;
 
     use {
-      fill: $primary;
+      fill: var(--ctr-survey-header-logo-placeholder-icon-color-hovered, $primary);
     }
   }
 
@@ -62,7 +64,7 @@
 }
 
 .svc-logo-image-placeholder use {
-  fill: $foreground-light;
+  fill: var(--ctr-survey-header-logo-placeholder-icon-color, $foreground-light);
 }
 
 .svc-logo-image-container {

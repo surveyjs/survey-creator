@@ -180,7 +180,7 @@
     .svc-toolbox__item:not(.sv-dots),
     .svc-toolbox__item:not(.sv-dots):hover {
       .sv-svg-icon use {
-        fill: $foreground;
+        fill: var(--ctr-toolbox-item-icon-color-pressed, $foreground);
         opacity: 0.5;
       }
 

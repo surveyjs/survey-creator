@@ -116,6 +116,7 @@ svc-page-navigator-item,
     padding: 0 calcSize(4.5) 0 calcSize(2.5);
     max-width: calcSize(25);
     opacity: 1;
+    background: var(--ctr-page-navigator-item-background-color-hovered, $background);
   }
 }
 

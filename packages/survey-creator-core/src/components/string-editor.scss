@@ -22,7 +22,7 @@
 
     &[aria-placeholder]:empty:before {
       content: attr(aria-placeholder);
-      color: $foreground-light;
+      color: var(--ctr-survey-page-header-title-color-placeholder, $foreground-light);
     }
   }
 
@@ -175,6 +175,7 @@
 
 .sd-rating {
   .sd-rating__item:focus-within {
+
     &:not(.sd-rating__min-text),
     &:not(.sd-rating__max-text) {
       .svc-string-editor:focus-within {
