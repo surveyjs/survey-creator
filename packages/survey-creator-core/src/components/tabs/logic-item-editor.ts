@@ -179,7 +179,8 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
               startWithNewLine: false,
               showValueInLink: false,
               allowClear: false,
-              showClear: false
+              showClear: false,
+              iconName: "icon-delete_16x16"
             },
             {
               name: "triggerEditorPanel",
@@ -208,8 +209,8 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     this.isModifiedValue = false;
   }
   public isEmpty(): boolean {
-    if(this.panels.length === 0) return true;
-    if(this.panels.length > 1) return false;
+    if (this.panels.length === 0) return true;
+    if (this.panels.length > 1) return false;
     const modelAction = this.getActionModelByPanel(this.panels[0]);
     return !modelAction;
   }
@@ -258,12 +259,12 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     if (selectorsNames.indexOf(question.name) < 0 && (parentName === "triggerEditorPanel" || parentName === "setValueIfPanel")) {
       const qType = question.getType();
       assignDefaultV2Classes(cssClasses, qType);
-      if(!defaultV2Css[qType] && propertyGridCss[qType]) {
+      if (!defaultV2Css[qType] && propertyGridCss[qType]) {
         copyCssClasses(cssClasses, propertyGridCss.question);
         copyCssClasses(cssClasses, propertyGridCss[qType]);
       }
       const els = question.parent.elements.filter(el => selectorsNames.indexOf(el.name) < 0 && el.name !== "expression");
-      if((question.name !== "runExpression" && qType !== "comment") || (Array.isArray(els) && els.length > 1)) {
+      if ((question.name !== "runExpression" && qType !== "comment") || (Array.isArray(els) && els.length > 1)) {
         cssClasses.mainRoot += " svc-logic-question-value sd-element--with-frame";
       }
     }
@@ -281,8 +282,8 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     }
   }
   private isSetValueInternalQuestion(question: Question): boolean {
-    if(this.isSetValueInternalQuestionCore(question)) return true;
-    if(this.isSetValueInternalQuestionCore(question.parentQuestion)) return true;
+    if (this.isSetValueInternalQuestionCore(question)) return true;
+    if (this.isSetValueInternalQuestionCore(question.parentQuestion)) return true;
     const parent: any = question.parent;
     return parent && this.isSetValueInternalQuestionCore(parent.parentQuestion);
   }
@@ -301,7 +302,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       panel.allowRootStyle = false;
       cssClasses.panel.container += " svc-logic_trigger-questions";
     }
-    if(this.isSetValueInternalQuestionCore(panel.parentQuestion)) {
+    if (this.isSetValueInternalQuestionCore(panel.parentQuestion)) {
       assignDefaultV2Classes(cssClasses, panel.getType());
     }
   }
@@ -501,7 +502,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       }
       res.push(itemValue);
     }
-    if(settings.logic.questionSortOrder === "asc") {
+    if (settings.logic.questionSortOrder === "asc") {
       SurveyHelper.sortItems(res);
     }
     return res;

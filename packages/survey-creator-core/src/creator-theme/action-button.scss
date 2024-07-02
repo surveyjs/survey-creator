@@ -5,28 +5,32 @@
   box-sizing: border-box;
   border-radius: calcSize(12.5);
 
-  color: $primary;
+  color: var(--ctr-survey-action-button-text-color-positive, $primary);
+
   font-weight: 600;
   font-size: calcSize(2);
   line-height: calcSize(3);
 
   border: calcSize(0.25) solid transparent;
 
+  .svc-text {
+    color: var(--ctr-survey-action-button-text-color-positive, $primary);
+  }
+
   &:focus,
   &:hover {
-    background-color: $primary-light;
+    background-color: var(--ctr-survey-action-button-background-color-hovered-positive, $primary-light);
     outline: none;
   }
 }
 
 .svc-action-button--selected {
-  border-color: $primary;
+  border-color: var(--ctr-survey-action-button-text-color-positive, $primary);
 }
 
 .svc-action-button--disabled {
-  opacity: 0.25;
-  color: $foreground;
+  opacity: var(--ctr-survey-action-button-opacity-disabled, 0.25);
+  color: var(--ctr-survey-action-button-text-color-disabled, $foreground);
 }
 
-.svc-action-button--pressed {
-}
+.svc-action-button--pressed {}

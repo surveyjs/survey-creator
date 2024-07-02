@@ -378,7 +378,8 @@ export class ConditionEditor extends PropertyEditorSetupValue {
               startWithNewLine: false,
               showValueInLink: false,
               allowClear: false,
-              showClear: false
+              showClear: false,
+              iconName: "icon-delete_16x16"
             },
             {
               name: "questionValue",
@@ -469,8 +470,8 @@ export class ConditionEditor extends PropertyEditorSetupValue {
   }
   public errorText: string;
   public isEmpty(): boolean {
-    if(this.panel.panels.length === 0) return true;
-    if(this.panel.panels.length > 1) return false;
+    if (this.panel.panels.length === 0) return true;
+    if (this.panel.panels.length > 1) return false;
     const item = this.createEditorItemFromPanel(this.panel.panels[0]);
     return !item.questionName;
   }
@@ -705,7 +706,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
   private addSurveyCalculatedValues(names: Array<any>) {
     this.survey.calculatedValues.forEach(item => {
       const index = names.indexOf(item.name.toLowerCase());
-      if(index > -1) {
+      if (index > -1) {
         names.splice(index, 1);
       }
       names.push(item.name);
@@ -761,9 +762,9 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       newQuestion.description = "";
       newQuestion.titleLocation = "top";
       newQuestion.hasComment = false;
-      if(newQuestion.showOtherItem) {
+      if (newQuestion.showOtherItem) {
         const question = this.getConditionQuestion(qName);
-        if(question && question.getStoreOthersAsComment && question.getStoreOthersAsComment()) {
+        if (question && question.getStoreOthersAsComment && question.getStoreOthersAsComment()) {
           const other = newQuestion.otherItem;
           newQuestion.choices.push(new ItemValue(other.value, other.title));
           other.value = "#" + other.value + "#";
@@ -804,7 +805,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     let path = "";
     const question = this.getConditionQuestion(questionName);
     if (!question) return null;
-    if(!operator) {
+    if (!operator) {
       operator = this.getDefaultOperatorByQuestion(question);
     }
     if (questionName.indexOf(question.getValueName()) == 0) {
@@ -821,8 +822,8 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       path = path.substring(1);
     }
     const json = question && question.getConditionJson ? question.getConditionJson(operator, path) : null;
-    if(!json) return null;
-    if(!!json.choicesFromQuestion) {
+    if (!json) return null;
+    if (!!json.choicesFromQuestion) {
       this.updateChoicesFromQuestion(json);
     }
     if (json.type == "expression") {
@@ -837,13 +838,13 @@ export class ConditionEditor extends PropertyEditorSetupValue {
   }
   private updateChoicesFromQuestion(json: any): void {
     const question = this.getConditionQuestion(json.choicesFromQuestion);
-    if(!question) return;
+    if (!question) return;
     delete json.choicesFromQuestion;
     const questionJSON = question.toJSON();
-    if(!!questionJSON.choices) {
+    if (!!questionJSON.choices) {
       json.choices = questionJSON.choices;
     }
-    if(!!questionJSON.choicesByUrl) {
+    if (!!questionJSON.choicesByUrl) {
       json.choicesByUrl = questionJSON.choicesByUrl;
     }
   }
@@ -897,9 +898,9 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     return this.getDefaultOperatorByQuestion(this.getConditionQuestion(questionName));
   }
   private getDefaultOperatorByQuestion(question: Question): string {
-    if(!!question) {
+    if (!!question) {
       const defOps = settings.logic.defaultOperators;
-      if(!!defOps[question.getType()]) return defOps[question.getType()];
+      if (!!defOps[question.getType()]) return defOps[question.getType()];
     }
     return this.defaultOperator;
   }

@@ -17,6 +17,7 @@ export class QuestionLinkValueModel extends Question {
   @property({ defaultValue: true }) showValueInLink: boolean;
   @property({ defaultValue: false }) showTooltip: boolean;
   @property({ defaultValue: true }) isClickable: boolean;
+  @property() iconName: string;
   constructor(name: string, json: any = null) {
     super(name);
     const linkValueText = json && !json.showValueInLink && (editorLocalization.getString("pe.set")) + " " + json.title || null;
@@ -88,7 +89,9 @@ Serializer.addClass(
       name: "showTooltip: boolean",
       default: false,
       visible: false
-    }],
+    },
+    "iconName"
+  ],
   function (json) {
     const viewModel = new QuestionLinkValueModel("", json);
     return viewModel;

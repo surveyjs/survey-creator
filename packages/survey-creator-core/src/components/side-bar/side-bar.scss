@@ -28,8 +28,8 @@
 }
 
 .svc-side-bar__container-header {
-  background: $background;
-  box-shadow: inset 0px -2px 0px $primary;
+  background: var(--ctr-property-grid-header-background-color, $background);
+  box-shadow: inset 0px -2px 0px var(--ctr-property-grid-header-border-color, $primary);
   // text-align: right;
   line-height: calcSize(3);
   display: flex;
@@ -42,7 +42,7 @@
   align-items: flex-start;
   height: calc(100% - calc(8 * #{$base-unit}));
   overflow-y: auto;
-  background-color: $background;
+  background-color: var(--ctr-property-grid-background-color, $background);
 }
 
 .svc-side-bar__container-container {
@@ -63,6 +63,7 @@
   flex-shrink: 0;
   justify-content: flex-end;
   padding: calcSize(1.5) calcSize(2);
+  color: var(--ctr-menu-toolbar-button-text-color, $foreground);
 }
 
 .svc-side-bar__container-actions {
@@ -74,14 +75,36 @@
     justify-content: flex-end;
     padding: 0;
   }
+
+  .sv-action-bar-item:not(.sv-action-bar-item--pressed):enabled {
+    &:focus {
+      background: var(--ctr-menu-toolbar-button-background-color-pressed, $background-dim);
+    }
+
+    &:hover {
+      background: var(--ctr-menu-toolbar-button-background-color-hovered, $background-dim);
+    }
+  }
+
+  .sv-action-bar-item--pressed:not(.sv-action-bar-item--active) {
+    background: var(--ctr-menu-toolbar-button-background-color-pressed, $background-dim);
+  }
+
+  .sv-action-bar-item__title {
+    color: var(--ctr-menu-toolbar-button-text-color, $foreground);
+  }
+
+  .sv-action-bar-item__icon use {
+    fill: var(--ctr-menu-toolbar-button-icon-color, $foreground-light);
+  }
 }
 
 
 .svc-flex-column.svc-side-bar__wrapper {
   width: auto;
-  border-left: 1px solid $border;
+  border-left: 1px solid var(--ctr-property-grid-border-color, $border);
   height: 100%;
-  background-color: $background-dim;
+  background-color: var(--ctr-property-grid-form-background-color, $background-dim);
 }
 
 .svc-side-bar {
@@ -159,6 +182,7 @@
   .svc-flyout-side-bar .svc-side-bar__wrapper {
     width: 100%;
   }
+
   .svc-side-bar__container {
     width: 100%;
   }

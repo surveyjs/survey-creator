@@ -57,6 +57,8 @@ require("./components/creator.scss");
 require("./components/string-editor.scss");
 require("./creator-theme/creator.scss");
 
+import designTabSurveyThemeJSON from "./designTabSurveyThemeJSON";
+
 export interface IKeyboardShortcut {
   name?: string;
   affectedTab?: string;
@@ -1499,7 +1501,7 @@ export class SurveyCreatorModel extends Base
     for (var i = 0; i < properties.length; i++) {
       const prop = Serializer.findProperty(className, properties[i]);
       if (!!prop) {
-        if(!visible) {
+        if (!visible) {
           this.hiddenProperties[prop.id] = true;
         } else {
           delete this.hiddenProperties[prop.id];
@@ -2013,6 +2015,10 @@ export class SurveyCreatorModel extends Base
     this.changeText(value, true);
   }
 
+  public get designTabSurveyThemeVariables(): {} {
+    return designTabSurveyThemeJSON.cssVariables;
+  }
+
   public getSurveyJSON(): any {
     if (this.viewType != "editor") {
       return new JsonObject().toJsonObject(this.survey);
@@ -2042,7 +2048,10 @@ export class SurveyCreatorModel extends Base
   public createSurvey(json: any, reason: string, model?: any, callback?: (survey: SurveyModel) => void, area?: string): SurveyModel {
     const survey = this.createSurveyCore(json, reason);
 
-    if (reason !== "designer" && reason !== "test" && reason !== "theme") { survey.fitToContainer = false; }
+    if (reason !== "designer" && reason !== "test" && reason !== "theme") {
+      survey.fitToContainer = false;
+      survey.applyTheme(designTabSurveyThemeJSON);
+    }
 
     if (reason === "designer" || reason === "modal-question-editor") {
       initializeDesignTimeSurveyModel(survey, this);
@@ -2870,7 +2879,7 @@ export class SurveyCreatorModel extends Base
     parentObj: any,
     parentProperty: JsonObjectProperty
   ): boolean {
-    if(this.hiddenProperties[property.id]) return false;
+    if (this.hiddenProperties[property.id]) return false;
     var options = {
       obj: object,
       property: property,
@@ -3648,29 +3657,29 @@ export function initializeDesignTimeSurveyModel(model: any, creator: SurveyCreat
   model.isPopupEditorContent = false;
   model.onElementWrapperComponentName.add((_, opt) => {
     const compName = opt.componentName;
-    if(opt.wrapperName === "component") {
+    if (opt.wrapperName === "component") {
       opt.componentName = getElementWrapperComponentName(opt.element, opt.reason, model.isPopupEditorContent);
     }
-    if(opt.wrapperName === "content-component") {
+    if (opt.wrapperName === "content-component") {
       opt.componentName = getQuestionContentWrapperComponentName(opt.element);
     }
-    if(opt.wrapperName === "row") {
+    if (opt.wrapperName === "row") {
       opt.componentName = "svc-row";
     }
-    if(opt.wrapperName === "itemvalue") {
+    if (opt.wrapperName === "itemvalue") {
       opt.componentName = getItemValueWrapperComponentName(opt.item, opt.element);
     }
     opt.componentName = opt.componentName || compName;
   });
   model.onElementWrapperComponentData.add((_, opt) => {
     const data = opt.data;
-    if(opt.wrapperName === "component") {
+    if (opt.wrapperName === "component") {
       opt.data = getElementWrapperComponentData(opt.element, opt.reason, creator);
     }
-    if(opt.wrapperName === "row") {
+    if (opt.wrapperName === "row") {
       opt.data = { creator: creator, row: opt.element };
     }
-    if(opt.wrapperName === "itemvalue") {
+    if (opt.wrapperName === "itemvalue") {
       opt.data = getItemValueWrapperComponentData(opt.item, opt.element, creator);
     }
     opt.data = opt.data || data;
