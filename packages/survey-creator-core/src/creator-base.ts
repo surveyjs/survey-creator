@@ -2363,9 +2363,23 @@ export class SurveyCreatorModel extends Base
   }
 
   public createNewElement(json: any): IElement {
-    var newElement = Serializer.createClass(json["type"]);
+    const newElement = Serializer.createClass(json["type"]);
     new JsonObject().toObject(json, newElement);
-    this.setNewNames(newElement);
+    let needNewName = true;
+    if(!!json.name) {
+      if(newElement.isPage) {
+        needNewName = !!this.survey.getPageByName(newElement.name);
+      } else {
+        if(newElement.isPanel) {
+          needNewName = !!this.survey.getPanelByName(newElement.name);
+        } else {
+          needNewName = !!this.survey.getQuestionByName(newElement.name);
+        }
+      }
+    }
+    if(needNewName) {
+      this.setNewNames(newElement);
+    }
     return newElement;
   }
 

@@ -646,6 +646,7 @@ export var nlStrings = {
     questionsOnPageMode: "Structuur van de enquête",
     maxTextLength: "Maximale tekstlengte",
     maxOthersLength: "Maximale tekstlengte optie 'Anders:'",
+    commentAreaRows: "Hoogte commentaargebied (in lijnen)",
     autoGrowComment: "Commentaargebied indien nodig automatisch uitvouwen",
     allowResizeComment: "Gebruikers toestaan het formaat van tekstgebieden te wijzigen",
     textUpdateMode: "Modus tekstvernieuwing",
@@ -1350,6 +1351,7 @@ export var nlStrings = {
     questionsOrder: "Behoudt de oorspronkelijke volgorde van vragen of maakt ze willekeurig. Het effect van deze instelling is alleen zichtbaar op het tabblad Voorbeeld.",
     maxTextLength: "Alleen voor vragen over tekstinvoer.",
     maxOthersLength: "Alleen voor opmerkingen over vragen.",
+    commentAreaRows: "Hiermee stelt u het aantal weergegeven regels in tekstgebieden in voor opmerkingen bij vragen. In de invoer neemt meer regels in beslag, de schuifbalk verschijnt.",
     autoGrowComment: "Selecteer of u wilt dat vraagopmerkingen en lange tekstvragen automatisch in hoogte groeien op basis van de ingevoerde tekstlengte.",
     allowResizeComment: "Alleen voor vraagopmerkingen en lange tekstvragen.",
     calculatedValues: "Aangepaste variabelen dienen als tussenliggende of hulpvariabelen die worden gebruikt in formulierberekeningen. Ze nemen de input van respondenten als bronwaarden. Elke aangepaste variabele heeft een unieke naam en een expressie waarop deze is gebaseerd.",
@@ -2652,3 +2654,5 @@ editorLocalization.locales["nl"] = nlStrings;
 // panelbase.questionTitleWidth: "Ex.: 200px" => "Bijv.: 200px"
 // panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Hiermee stelt u een consistente breedte in voor vraagtitels wanneer deze links van de vraagvakken zijn uitgelijnd. Accepteert CSS-waarden (px, %, in, pt, enz.)."
 // page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Hiermee stelt u een consistente breedte in voor vraagtitels wanneer deze links van de vraagvakken zijn uitgelijnd. Accepteert CSS-waarden (px, %, in, pt, enz.)."
+// pe.commentAreaRows: "Comment area height (in lines)" => "Hoogte commentaargebied (in lijnen)"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "Hiermee stelt u het aantal weergegeven regels in tekstgebieden in voor opmerkingen bij vragen. In de invoer neemt meer regels in beslag, de schuifbalk verschijnt."

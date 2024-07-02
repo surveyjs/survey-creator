@@ -646,6 +646,7 @@ var germanTranslation = {
     questionsOnPageMode: "Umfrage Struktur",
     maxTextLength: "Maximale Antwortlänge (in Zeichen)",
     maxOthersLength: "Maximale Kommentarlänge (in Zeichen)",
+    commentAreaRows: "Höhe des Kommentarbereichs (in Zeilen)",
     autoGrowComment: "Kommentarbereich bei Bedarf automatisch erweitern",
     allowResizeComment: "Benutzern erlauben, die Größe von Textbereichen zu ändern",
     textUpdateMode: "Wert der Textfrage aktualisieren",
@@ -1350,6 +1351,7 @@ var germanTranslation = {
     questionsOrder: "Behält die ursprüngliche Reihenfolge der Fragen bei oder randomisiert sie. Die Auswirkungen dieser Einstellung sind nur auf dem Tab \"Vorschau\" sichtbar.",
     maxTextLength: "Nur für Fragen zur Texteingabe.",
     maxOthersLength: "Nur für Fragenkommentare.",
+    commentAreaRows: "Legt die Anzahl der angezeigten Zeilen in Textbereichen für Fragenkommentare fest. Wenn die Eingabe mehr Zeilen einnimmt, erscheint die Bildlaufleiste.",
     autoGrowComment: "Wählen Sie diese Option aus, wenn Fragenkommentare und Langtextfragen basierend auf der eingegebenen Textlänge automatisch in die Höhe wachsen sollen.",
     allowResizeComment: "Nur für Fragenkommentare und Langtextfragen.",
     calculatedValues: "Benutzerdefinierte Variablen dienen als Zwischen- oder Hilfsvariablen, die in Formularberechnungen verwendet werden. Sie nehmen die Eingaben der Befragten als Quellwerte. Jede benutzerdefinierte Variable hat einen eindeutigen Namen und einen Ausdruck, auf dem sie basiert.",
@@ -2380,3 +2382,5 @@ editorLocalization.locales["de"] = germanTranslation;
 // panelbase.questionTitleWidth: "Ex.: 200px" => "Beispiel: 200px"
 // panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Legt eine konsistente Breite für Fragetitel fest, wenn sie links neben den Fragefeldern ausgerichtet sind. Akzeptiert CSS-Werte (px, %, in, pt usw.)."
 // page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Legt eine konsistente Breite für Fragetitel fest, wenn sie links neben den Fragefeldern ausgerichtet sind. Akzeptiert CSS-Werte (px, %, in, pt usw.)."
+// pe.commentAreaRows: "Comment area height (in lines)" => "Höhe des Kommentarbereichs (in Zeilen)"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "Legt die Anzahl der angezeigten Zeilen in Textbereichen für Fragenkommentare fest. Wenn die Eingabe mehr Zeilen einnimmt, erscheint die Bildlaufleiste."

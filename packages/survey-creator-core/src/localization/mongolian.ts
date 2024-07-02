@@ -646,6 +646,7 @@ export var mnStrings = {
     questionsOnPageMode: "Санал асуулгын бүтэц",
     maxTextLength: "Хариултын хамгийн их урт(тэмдэгтээр)",
     maxOthersLength: "Хариултын хамгийн бага урт(тэмдэгтээр)",
+    commentAreaRows: "Тайлбар хэсгийн өндөр (мөрөнд)",
     autoGrowComment: "Шаардлагатай үед санал сэтгэгдлийн хэсгийг өргөсгөх",
     allowResizeComment: "Хэрэглэгчдэд текстийн газруудыг дахин ашиглах боломж олго",
     textUpdateMode: "Текст асуултын утгыг шинэчлэх",
@@ -1350,6 +1351,7 @@ export var mnStrings = {
     questionsOrder: "Асуултуудын анхны дарааллыг хадгалах эсвэл санамсаргүйгээр авч явдаг. Энэ тохиргооны үр нөлөө нь зөвхөн Preview таб-д харагдана.",
     maxTextLength: "Зөвхөн текст оруулах асуултуудад зориулна.",
     maxOthersLength: "Асуулт хариултын хувьд зөвхөн.",
+    commentAreaRows: "Асуулт хариултын текст хэсэгт үзүүлсэн мөрүүдийн тоог тогтоо. Хуйлмал бичиг нь илүү олон мөртэй байдаг.",
     autoGrowComment: "Асуулт хариулт болон Урт Текст асуултыг орсон текст урт дээр үндэслэн өндрөөс автоматаар өсгөхийг хүсвэл сонгоно уу.",
     allowResizeComment: "Асуулт хариулт болон Урт текстийн асуултуудад зөвхөн.",
     calculatedValues: "Үйлчилгээний хувьсагчид нь форм тооцоололд хэрэглэгддэг дундын буюу туслах хувьсагчид болж үйлчилдэг. Тэд хариулагчийн оруулсан хувь нэмрийг эх сурвалжийн үнэт зүйлс гэж үздэг. Custom хувьсагч бүр өвөрмөц нэртэй, дээр нь суурилсан илэрхийлэлтэй байдаг.",
@@ -2327,3 +2329,5 @@ editorLocalization.locales["mn"] = mnStrings;
 // panelbase.questionTitleWidth: "Ex.: 200px" => "Экс: 200px"
 // panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Асуултын хайрцгуудынхаа зүүн талд эгнэн зогсож байх үед асуултын нэрний тогтмол өргөнийг тогтоо. CSS-ийн үнэт зүйлсийг (px, %, in, pt г.м) хүлээн зөвшөөрдөг."
 // page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Асуултын хайрцгуудынхаа зүүн талд эгнэн зогсож байх үед асуултын нэрний тогтмол өргөнийг тогтоо. CSS-ийн үнэт зүйлсийг (px, %, in, pt г.м) хүлээн зөвшөөрдөг."
+// pe.commentAreaRows: "Comment area height (in lines)" => "Тайлбар хэсгийн өндөр (мөрөнд)"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "Асуулт хариултын текст хэсэгт үзүүлсэн мөрүүдийн тоог тогтоо. Хуйлмал бичиг нь илүү олон мөртэй байдаг."

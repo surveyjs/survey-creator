@@ -646,6 +646,7 @@ var simplifiedChineseTranslation = {
     questionsOnPageMode: "调查结构",
     maxTextLength: "最大答案长度（以字符为单位）",
     maxOthersLength: "最大注释长度（以字符为单位）",
+    commentAreaRows: "评论区高度（以行为单位）",
     autoGrowComment: "如有必要，自动展开评论区域",
     allowResizeComment: "允许用户调整文本区域的大小",
     textUpdateMode: "更新文本问题值",
@@ -1350,6 +1351,7 @@ var simplifiedChineseTranslation = {
     questionsOrder: "保持问题的原始顺序或随机化问题。此设置的效果仅在“预览”选项卡中可见。",
     maxTextLength: "仅适用于文本输入问题。",
     maxOthersLength: "仅供问题评论。",
+    commentAreaRows: "设置问题注释的文本区域中显示的行数。在输入占用更多行时，将出现滚动条。",
     autoGrowComment: "选择是否希望问题注释和长文本问题根据输入的文本长度自动增加高度。",
     allowResizeComment: "仅适用于问题评论和长文本问题。",
     calculatedValues: "自定义变量用作表单计算中使用的中间变量或辅助变量。他们将受访者的输入作为源值。每个自定义变量都有一个唯一的名称和它所基于的表达式。",
@@ -2813,3 +2815,5 @@ editorLocalization.locales["zh-cn"] = simplifiedChineseTranslation;
 // panelbase.questionTitleWidth: "Ex.: 200px" => "例如：200px"
 // panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "当问题标题与问题框左侧对齐时，为问题标题设置一致的宽度。接受 CSS 值（px、%、in、pt 等）。"
 // page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "当问题标题与问题框左侧对齐时，为问题标题设置一致的宽度。接受 CSS 值（px、%、in、pt 等）。"
+// pe.commentAreaRows: "Comment area height (in lines)" => "评论区高度（以行为单位）"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "设置问题注释的文本区域中显示的行数。在输入占用更多行时，将出现滚动条。"

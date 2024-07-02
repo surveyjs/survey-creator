@@ -646,6 +646,7 @@ export var koreanStrings = {
     questionsOnPageMode: "설문조사 구조",
     maxTextLength: "최대 답변 길이(문자 단위)",
     maxOthersLength: "최대 주석 길이(문자)",
+    commentAreaRows: "주석 영역 높이(줄)",
     autoGrowComment: "필요한 경우 주석 영역 자동 확장",
     allowResizeComment: "사용자가 텍스트 영역의 크기를 조정할 수 있도록 허용",
     textUpdateMode: "텍스트 질문 값 업데이트",
@@ -1350,6 +1351,7 @@ export var koreanStrings = {
     questionsOrder: "질문의 원래 순서를 유지하거나 무작위화합니다. 이 설정의 효과는 미리보기 탭에서만 볼 수 있습니다.",
     maxTextLength: "텍스트 입력 질문에만 해당됩니다.",
     maxOthersLength: "질문 댓글에만 해당됩니다.",
+    commentAreaRows: "질문 주석에 대해 텍스트 영역에 표시되는 줄 수를 설정합니다. 입력이 더 많은 줄을 차지하면 스크롤 막대가 나타납니다.",
     autoGrowComment: "질문 댓글과 긴 텍스트 질문의 높이가 입력한 텍스트 길이에 따라 자동으로 커지도록 하려면 선택합니다.",
     allowResizeComment: "질문 댓글 및 긴 텍스트 질문에만 해당됩니다.",
     calculatedValues: "사용자 지정 변수는 양식 계산에 사용되는 중간 또는 보조 변수 역할을 합니다. 응답자 입력을 소스 값으로 사용합니다. 각 맞춤 변수에는 고유한 이름과 기준이 되는 표현식이 있습니다.",
@@ -2875,3 +2877,5 @@ editorLocalization.locales["ko"] = koreanStrings;
 // panelbase.questionTitleWidth: "Ex.: 200px" => "예: 200px"
 // panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "질문 제목이 질문 상자의 왼쪽에 정렬될 때 일관된 너비를 설정합니다. CSS 값(px, %, in, pt 등)을 허용합니다."
 // page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "질문 제목이 질문 상자의 왼쪽에 정렬될 때 일관된 너비를 설정합니다. CSS 값(px, %, in, pt 등)을 허용합니다."
+// pe.commentAreaRows: "Comment area height (in lines)" => "주석 영역 높이(줄)"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "질문 주석에 대해 텍스트 영역에 표시되는 줄 수를 설정합니다. 입력이 더 많은 줄을 차지하면 스크롤 막대가 나타납니다."

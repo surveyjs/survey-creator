@@ -62,6 +62,20 @@ test("Click on toolbox and insert into correct index", (): any => {
   expect(creator.selectedElementName).toEqual("question3");
   expect(creator.survey.currentPage.elements[1].name).toEqual("question3");
 });
+test("Try to use name property from JSON", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "question1" },
+      { type: "text", name: "question2" }
+    ]
+  };
+  creator.selectElement(creator.survey.getQuestionByName("question1"));
+  creator.clickToolboxItem({ type: "text", name: "text1" });
+  expect(creator.selectedElementName).toEqual("text1");
+  creator.clickToolboxItem({ type: "text", name: "text1" });
+  expect(creator.selectedElementName).toEqual("question3");
+});
 test("Convert checkbox into rating", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {

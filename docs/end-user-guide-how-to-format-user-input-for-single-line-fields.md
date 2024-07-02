@@ -70,7 +70,7 @@ The Range input type allows users to select a numeric value within a specified r
 
 ### Phone Number
 
-The Phone Number input type is used for fields that require telephone numbers. If you want to apply a specific phone number format, e.g. +1 (234) 555-12-34, you can use [input masking](https://surveyjs.io/form-library/examples/masked-input-fields/).
+The Phone Number input type is used for fields that require telephone numbers. If you want to apply a specific phone number format, e.g. +1 (234) 555-12-34, you can use [input masking](https://surveyjs.io/form-library/examples/masked-input-fields/) instead.
 
 ### Text
 

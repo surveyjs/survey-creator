@@ -309,3 +309,28 @@ test("header custom background color and theme changes", (): any => {
   expect(header["backgroundColorSwitch"]).toEqual("custom");
   expect(header["backgroundColor"]).toBe("#ff0000");
 });
+
+test("set backgroundImage into header", (): any => {
+  const themeModel = new ThemeModel();
+  const header = themeModel.header as HeaderModel;
+
+  header["headerView"] = "advanced";
+  header.backgroundImage = "https://t4.ftcdn.net/jpg/02/83/13/61/360_F_283136113_b3VRHNiOPFMOluzYJPpfuoH8Czh9c743.jpg";
+  header.backgroundImageFit = "contain";
+  header.backgroundImageOpacity = 50;
+
+  const result = themeModel.toJSON();
+  expect(result).toStrictEqual({
+    backgroundImage: "",
+    backgroundImageAttachment: "scroll",
+    backgroundImageFit: "cover",
+    backgroundOpacity: 1,
+    headerView: "advanced",
+    header: {
+      backgroundImage: "https://t4.ftcdn.net/jpg/02/83/13/61/360_F_283136113_b3VRHNiOPFMOluzYJPpfuoH8Czh9c743.jpg",
+      backgroundImageOpacity: 0.5,
+      backgroundImageFit: "contain",
+    },
+    cssVariables: {}
+  });
+});

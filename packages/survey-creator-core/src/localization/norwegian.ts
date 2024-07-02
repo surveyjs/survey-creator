@@ -646,6 +646,7 @@ export var nbStrings = {
     questionsOnPageMode: "Undersøkelse struktur",
     maxTextLength: "Maksimal svarlengde (i tegn)",
     maxOthersLength: "Maksimal kommentarlengde (i tegn)",
+    commentAreaRows: "Høyde i kommentarområdet (i linjer)",
     autoGrowComment: "Utvid kommentarområdet automatisk om nødvendig",
     allowResizeComment: "Tillat brukere å endre størrelse på tekstområder",
     textUpdateMode: "Oppdatere tekstspørsmålsverdi",
@@ -1350,6 +1351,7 @@ export var nbStrings = {
     questionsOrder: "Beholder den opprinnelige rekkefølgen på spørsmål eller randomiserer dem. Effekten av denne innstillingen er bare synlig i kategorien Forhåndsvisning.",
     maxTextLength: "Kun for spørsmål om tekstoppføring.",
     maxOthersLength: "Kun for spørsmålskommentarer.",
+    commentAreaRows: "Angir antall viste linjer i tekstområder for spørsmålskommentarer. I inngangen tar opp flere linjer, vises rullefeltet.",
     autoGrowComment: "Velg om du vil at spørsmålskommentarer og Lang tekst-spørsmål skal vokse automatisk i høyde basert på den angitte tekstlengden.",
     allowResizeComment: "Kun for spørsmålskommentarer og langtekstspørsmål.",
     calculatedValues: "Egendefinerte variabler fungerer som mellomliggende variabler eller hjelpevariabler som brukes i skjemaberegninger. De tar respondentinnganger som kildeverdier. Hver egendefinerte variabel har et unikt navn og et uttrykk den er basert på.",
@@ -2674,3 +2676,5 @@ editorLocalization.locales["nb"] = nbStrings;
 // panelbase.questionTitleWidth: "Ex.: 200px" => "Eks.: 200 piksler"
 // panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Angir konsekvent bredde for spørsmålstitler når de er justert til venstre for spørsmålsboksene. Godtar CSS-verdier (px, %, i, pt osv.)."
 // page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Angir konsekvent bredde for spørsmålstitler når de er justert til venstre for spørsmålsboksene. Godtar CSS-verdier (px, %, i, pt osv.)."
+// pe.commentAreaRows: "Comment area height (in lines)" => "Høyde i kommentarområdet (i linjer)"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "Angir antall viste linjer i tekstområder for spørsmålskommentarer. I inngangen tar opp flere linjer, vises rullefeltet."

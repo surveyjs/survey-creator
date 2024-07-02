@@ -646,6 +646,7 @@ export var arStrings = {
     questionsOnPageMode: "هيكل المسح",
     maxTextLength: "الحد الأقصى لطول الإجابة (بالأحرف)",
     maxOthersLength: "الحد الأقصى لطول التعليق (بالأحرف)",
+    commentAreaRows: "ارتفاع منطقة التعليق (في الأسطر)",
     autoGrowComment: "توسيع منطقة التعليق تلقائيا إذا لزم الأمر",
     allowResizeComment: "السماح للمستخدمين بتغيير حجم مناطق النص",
     textUpdateMode: "تحديث قيمة السؤال النصي",
@@ -1350,6 +1351,7 @@ export var arStrings = {
     questionsOrder: "يحافظ على الترتيب الأصلي للأسئلة أو يحولها عشوائيا. يكون تأثير هذا الإعداد مرئيا فقط في علامة التبويب معاينة.",
     maxTextLength: "لأسئلة إدخال النص فقط.",
     maxOthersLength: "لتعليقات الأسئلة فقط.",
+    commentAreaRows: "يضبط عدد الأسطر المعروضة في مساحات النص لتعليقات الأسئلة. في الإدخال يأخذ المزيد من الأسطر ، يظهر شريط التمرير.",
     autoGrowComment: "حدد ما إذا كنت تريد زيادة تعليقات الأسئلة وأسئلة النص الطويل تلقائيا في الارتفاع بناء على طول النص الذي تم إدخاله.",
     allowResizeComment: "لتعليقات الأسئلة وأسئلة النص الطويل فقط.",
     calculatedValues: "تعمل المتغيرات المخصصة كمتغيرات وسيطة أو مساعدة تستخدم في حسابات النماذج. يأخذون مدخلات المستجيبين كقيم مصدر. كل متغير مخصص له اسم فريد وتعبير يعتمد عليه.",
@@ -2582,3 +2584,5 @@ editorLocalization.locales["ar"] = arStrings;
 // panelbase.questionTitleWidth: "Ex.: 200px" => "مثال: 200 بكسل"
 // panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "يعين عرضا متناسقا لعناوين الأسئلة عندما تتم محاذاتها إلى يسار مربعات الأسئلة الخاصة بها. يقبل قيم CSS (px ، ٪ ، in ، pt ، إلخ)."
 // page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "يعين عرضا متناسقا لعناوين الأسئلة عندما تتم محاذاتها إلى يسار مربعات الأسئلة الخاصة بها. يقبل قيم CSS (px ، ٪ ، in ، pt ، إلخ)."
+// pe.commentAreaRows: "Comment area height (in lines)" => "ارتفاع منطقة التعليق (في الأسطر)"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "يضبط عدد الأسطر المعروضة في مساحات النص لتعليقات الأسئلة. في الإدخال يأخذ المزيد من الأسطر ، يظهر شريط التمرير."
