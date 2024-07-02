@@ -1,6 +1,5 @@
 # Survey Creator Model (Platform-Independent Part)
 
-
 <video src="https://github.com/surveyjs/survey-creator/assets/22315929/884eeb5b-68e6-4d38-a8f9-d2483e6ce386"></video>
 
 
