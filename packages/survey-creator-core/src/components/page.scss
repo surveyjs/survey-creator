@@ -141,5 +141,15 @@ svc-page {
     .sv-list__item-body {
       pointer-events: none;
     }
+
+    .sv-list__item.sv-list__item--selected.sv-list__item--group > .sv-list__item-body {
+      background-color: $primary;
+      color: $primary-foreground;
+      font-weight: 600;
+    }
+
+    .sv-list__item.sv-list__item--selected.sv-list__item--group > .sv-list__item-body use {
+      fill: $background;
+    }
   }
 }
