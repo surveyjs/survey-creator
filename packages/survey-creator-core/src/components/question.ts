@@ -342,7 +342,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       enabled: allowChangeType,
       visibleIndex: 0,
       title: actionTitle,
-      iconName: this.creator.toolbox.getItemByName(this.element.getType())?.iconName
+      iconName: "icon-chevron"
     };
     const newAction = this.createDropdownModel(actionData, actions,
       (listModel: ListModel) => {
