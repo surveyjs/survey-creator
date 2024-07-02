@@ -38,6 +38,8 @@ export * from "./panel.component";
 export * from "./toolbox/adaptive-toolbox.component";
 export * from "./toolbox/toolbox-tool.component";
 export * from "./toolbox/toolbox-item.component";
+export * from "./toolbox/toolbox-item-group.component";
+export * from "./toolbox/toolbox-list.component";
 export * from "./toolbox/toolbox-category.component";
 export * from "./string-editor.component";
 export * from "./page-navigator/page-navigator.component";

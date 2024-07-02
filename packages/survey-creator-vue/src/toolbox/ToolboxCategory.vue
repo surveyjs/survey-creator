@@ -36,6 +36,7 @@
       :item="item"
       :key="index"
       :creator="toolbox.creator"
+      :parentModel="toolbox"
       :isCompact="false"
     ></svc-toolbox-tool>
   </div>

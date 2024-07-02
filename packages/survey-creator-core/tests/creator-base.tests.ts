@@ -2349,12 +2349,14 @@ test("convertInputType, change inputType for a text question", (): any => {
   const popup = action.popupModel;
   const popupViewModel = new PopupDropdownViewModel(popup); // need for popupModel.onShow
   expect(popup).toBeTruthy();
-  popup.toggleVisibility();
+  popup.show();
   const list = popup.contentComponentData.model;
   expect(list).toBeTruthy();
   expect(list.selectedItem).toBeTruthy();
   expect(list.selectedItem.id).toEqual("text");
-  list.onSelectionChanged(list.actions.filter(item => item.id === "tel")[0]);
+
+  const telItem = list.actions.filter(item => item.id === "tel")[0];
+  list.onItemClick(telItem);
   expect(question.inputType).toBe("tel");
   expect(action.title).toBe("Phone Number");
   question.inputType = "password";

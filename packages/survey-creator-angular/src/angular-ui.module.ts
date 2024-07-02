@@ -40,6 +40,8 @@ import { PanelDesignerComponent } from "./panel.component";
 import { AdaptiveToolboxComponent } from "./toolbox/adaptive-toolbox.component";
 import { ToolboxToolComponent } from "./toolbox/toolbox-tool.component";
 import { ToolboxItemComponent } from "./toolbox/toolbox-item.component";
+import { ToolboxItemGroupComponent } from "./toolbox/toolbox-item-group.component";
+import { ToolboxListComponent } from "./toolbox/toolbox-list.component";
 import { ToolboxCategoryComponent } from "./toolbox/toolbox-category.component";
 import { StringEditorComponent } from "./string-editor.component";
 import { PageNavigatorComponent } from "./page-navigator/page-navigator.component";
@@ -67,7 +69,7 @@ import { TranslateFromAction } from "./tabs/translation/translate-from-action.co
 
 @NgModule({
   declarations: [CreatorComponent, DesignerTabComponent, PageDesignerComponent, QuestionDesignerComponent, PanelDesignerComponent, TabbledMenuComponent, TabbedMenuItemComponent, TabbedMenuItemWrapperComponent, SidebarComponent, SidebarTabComponent, ObjectSelectorComponent, PropertyGridComponent, SearchComponent, TextareaJsonEditorComponent, AceJsonEditorComponent, LogicTabComponent, LogicAddButtonComponent, ActionButtonComponent, SwitcherComponent, LinkValueQuestionComponent, EmbeddedSurveyQuestionComponent, TranslationTabComponent, TranslationSkeletonComponent, SimulatorComponent, TestTabComponent, TestAgainActionComponent, SurveyResultsComponent, SurveyResultsTableRowComponent, ThemeTabComponent,
-    AdaptiveToolboxComponent, ToolboxToolComponent, ToolboxItemComponent, ToolboxCategoryComponent, StringEditorComponent, PageNavigatorComponent, PageNavigatorItemComponent,
+    AdaptiveToolboxComponent, ToolboxToolComponent, ToolboxItemComponent, ToolboxItemGroupComponent, ToolboxListComponent, ToolboxCategoryComponent, StringEditorComponent, PageNavigatorComponent, PageNavigatorItemComponent,
     QuestionDropdownDesignerComponent, QuestionDropdownAdornerDesignerComponent, QuestionImageDesignerComponent, QuestionImageAdornerDesignerComponent,
     ItemValueDesignerComponent, ImageItemValueDesignerComponent, LogicOperatorComponent, MatrixCellComponent, QuestionEditorComponent, CellQuestionDropdownComponent, CreatorRowComponent, DesignerPagesComponent, DesignerSurveyComponent, CellQuestionComponent, QuestionWidgetDesignerComponent, ToolboxComponent, CreatorLogoImageComponent,
     QuestionRatingAdornerDesignerComponent, QuestionRatingDesignerComponent, QuestionSpinEditorComponent, ColorItemComponent, QuestionColorComponent, QuestionFileEditorComponent, AddQuestionButtonComponent, QuestionBannerComponent, JsonErrorItemComponent, QuestionTextWithResetComponent, TranslateFromAction],
@@ -77,7 +79,7 @@ import { TranslateFromAction } from "./tabs/translation/translate-from-action.co
   ],
   exports: [
     CreatorComponent, DesignerTabComponent, PageDesignerComponent, QuestionDesignerComponent, PanelDesignerComponent, TabbledMenuComponent, TabbedMenuItemComponent, TabbedMenuItemWrapperComponent, SidebarComponent, SidebarTabComponent, ObjectSelectorComponent, PropertyGridComponent, SearchComponent, TextareaJsonEditorComponent, AceJsonEditorComponent, LogicTabComponent, LogicAddButtonComponent, ActionButtonComponent, SwitcherComponent, LinkValueQuestionComponent, EmbeddedSurveyQuestionComponent, TranslationTabComponent, TranslationSkeletonComponent, SimulatorComponent, TestTabComponent, TestAgainActionComponent, SurveyResultsComponent, SurveyResultsTableRowComponent, ThemeTabComponent,
-    AdaptiveToolboxComponent, ToolboxToolComponent, ToolboxItemComponent, ToolboxCategoryComponent, StringEditorComponent, PageNavigatorComponent, PageNavigatorItemComponent,
+    AdaptiveToolboxComponent, ToolboxToolComponent, ToolboxItemComponent, ToolboxItemGroupComponent, ToolboxListComponent, ToolboxCategoryComponent, StringEditorComponent, PageNavigatorComponent, PageNavigatorItemComponent,
     QuestionDropdownDesignerComponent, QuestionDropdownAdornerDesignerComponent, QuestionImageDesignerComponent, QuestionImageAdornerDesignerComponent,
     ItemValueDesignerComponent, ImageItemValueDesignerComponent, LogicOperatorComponent, MatrixCellComponent, QuestionEditorComponent, CellQuestionDropdownComponent, CreatorRowComponent, DesignerPagesComponent, DesignerSurveyComponent, CellQuestionComponent, QuestionWidgetDesignerComponent, ToolboxComponent, CreatorLogoImageComponent,
     QuestionRatingAdornerDesignerComponent, QuestionRatingDesignerComponent, QuestionSpinEditorComponent, ColorItemComponent, QuestionColorComponent, QuestionFileEditorComponent, AddQuestionButtonComponent, QuestionBannerComponent, JsonErrorItemComponent, QuestionTextWithResetComponent, TranslateFromAction],

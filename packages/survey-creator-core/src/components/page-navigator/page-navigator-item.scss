@@ -75,6 +75,15 @@ svc-page-navigator-item,
   padding: 0;
   opacity: 0;
   z-index: 20;
+  position: absolute;
+  top: 0;
+  height: 100%;
+  background-color: $background;
+  border-radius: calcSize(12.5);
+  box-shadow: $shadow-medium;
+  transition:
+    max-width 0.1s ease-in-out,
+    padding 0.2s ease-in-out;
 
   .svc-page-navigator-item__dot {
     position: absolute;

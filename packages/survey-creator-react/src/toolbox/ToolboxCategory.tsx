@@ -68,7 +68,7 @@ export class SurveyCreatorToolboxCategory extends SurveyElementBase<ISurveyCreat
 
   renderItems(items: Array<any>, isCompact = false) {
     return items.map((item, itemIndex) =>
-      <SurveyCreatorToolboxTool item={(item as any)} creator={this.toolbox.creator} isCompact={isCompact} key={"item" + itemIndex} ></SurveyCreatorToolboxTool>
+      <SurveyCreatorToolboxTool item={(item as any)} creator={this.toolbox.creator} parentModel={this.toolbox} isCompact={isCompact} key={"item" + itemIndex} ></SurveyCreatorToolboxTool>
     );
   }
 }

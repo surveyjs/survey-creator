@@ -481,7 +481,7 @@ test("Add customWidgets into toolbox", (): any => {
   expect(toolbox.items[0].name).toEqual("radiogroup");
   expect(toolbox.items[1].name).toEqual("dropdown");
   expect(toolbox.items[2].name).toEqual("first");
-  expect(toolbox.items[2].className).toEqual("svc-toolbox__item svc-toolbox__item--firsticon");
+  expect(toolbox.items[2].className).toEqual("svc-toolbox__item svc-toolbox__item--has-icon svc-toolbox__item--firsticon");
   expect(toolbox.items[3].name).toEqual("second");
   expect(toolbox.items[4].name).toEqual("comp1");
   CustomWidgetCollection.Instance.clear();
@@ -755,4 +755,10 @@ test("Toolbox show search depending on items count", (): any => {
   expect(creator.toolbox.showSearch).toBeTruthy();
   creator.toolbox.searchEnabled = false;
   expect(creator.toolbox.showSearch).toBeFalsy();
+});
+
+test("Toolbox child items do not get focus", (): any => {
+  const creator = new CreatorTester();
+  creator.toolbox.searchEnabled = true;
+  expect(creator.toolbox.items.filter(i => i.name == "text")[0].popupModel.isFocusedContainer).toBeFalsy();
 });

@@ -250,12 +250,11 @@ svc-question {
 
 .svc-dragged-element-shortcut {
   //min-width: 100px;
-  height: calcSize(3);
+  height: auto;
   border-radius: calcSize(12.5);
   background-color: $background;
   color: $foreground;
-  padding: calcSize(1) calcSize(1.5);
-  padding-right: calcSize(3.5);
+  padding: calcSize(1.5) calcSize(2);
   cursor: grabbing;
   position: absolute;
   z-index: 1000;
@@ -278,8 +277,17 @@ svc-question {
 
 .svc-dragged-element-shortcut__text {
   @include smallBold;
-  margin-left: calcSize(4);
-  line-height: calcSize(3);
+  line-height: calcSize(2);
+}
+
+.svc-dragged-element-shortcut--has-icon {
+  padding: calcSize(1) calcSize(1.5);
+  padding-right: calcSize(3.5);
+
+  .svc-dragged-element-shortcut__text {
+    line-height: calcSize(3);
+    margin-inline-start: calcSize(4);
+  }
 }
 
 .svc-dragged-element-shortcut__icon {

@@ -132,6 +132,9 @@ export function getVisibleElement(selector: string | Selector): Selector {
 export function getToolboxItemByText(text: string) {
   return getVisibleElement(".svc-toolbox__item-title").withExactText(text);
 }
+export function getSubToolboxItemByText(text: string) {
+  return getVisibleElement(".svc-toolbox__item-subtype").withExactText(text);
+}
 export async function addQuestionByAddQuestionButton(t: TestController, text: string) {
   await t
     .click(Selector(".svc-page__add-new-question .svc-page__question-type-selector"))

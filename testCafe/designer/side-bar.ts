@@ -188,9 +188,9 @@ test("toolboxLocation sidebar: check toolbox items", async (t) => {
   await changeToolboxScrolling(false);
   await changeToolboxSearchEnabled(false);
   const toolboxItemCount = 21;
-  const itemsInToolboxInDesigner = toolboxInDesigner.find(".svc-toolbox__item");
+  const itemsInToolboxInDesigner = toolboxInDesigner.find(".svc-toolbox__item:not(.svc-toolbox__item-subtype)");
   const visibleItemsInToolboxInDesigner = itemsInToolboxInDesigner.filterVisible();
-  const itemsInToolboxInSidebar = toolboxInSidebar.find(".svc-toolbox__item");
+  const itemsInToolboxInSidebar = toolboxInSidebar.find(".svc-toolbox__item:not(.svc-toolbox__item-subtype)");
   const visibleItemsInToolboxInSidebar = itemsInToolboxInSidebar.filterVisible();
 
   await t

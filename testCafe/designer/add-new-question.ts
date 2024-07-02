@@ -1,5 +1,5 @@
 import { Selector, ClientFunction } from "testcafe";
-import { setJSON, getAddNewQuestionButton, getToolboxItemByText, getVisibleElement, url, RatingToolboxItem } from "../helper";
+import { setJSON, getAddNewQuestionButton, getToolboxItemByText, getVisibleElement, url, RatingToolboxItem, getListItemByText, getBarItemByTitle, getJSON } from "../helper";
 
 const title = "Add new question";
 
@@ -128,4 +128,86 @@ test("Add question when a question in dynamic panel is selected", async (t) => {
     .click(Selector(".sv-string-editor").withText("question1"))
     .click(Selector(".svc-page__add-new-question").nth(0))
     .expect(Selector("[data-name=\"question2\"]").exists).ok();
+});
+test("Add New Question with sub type", async t => {
+  await t
+    .maximizeWindow()
+    .click(Selector(".svc-page__add-new-question button"))
+    .hover(getListItemByText("Rating Scale").filterVisible())
+    .wait(400)
+    .click(getListItemByText("Stars").nth(1))
+    .expect(getVisibleElement(".svc-question__content").count).eql(1)
+    .expect(getVisibleElement(".svc-question__content-actions .sv-action-bar-item__title").nth(0).textContent).eql("Rating Scale")
+    .expect(getVisibleElement(".svc-question__content-actions .sv-action-bar-item__title").nth(1).textContent).eql("Stars");
+
+  let expectedJson = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "rating",
+            "name": "question1",
+            "rateType": "stars"
+          }
+        ]
+      }
+    ]
+  };
+  let resultJson = await getJSON();
+  await t.expect(resultJson).eql(expectedJson);
+
+  await t
+    .click(getBarItemByTitle("Rating Scale"))
+    .hover(getListItemByText("Single-Line Input").filterVisible())
+    .wait(400)
+    .click(getListItemByText("Password").nth(1))
+    .expect(getVisibleElement(".svc-question__content").count).eql(1)
+    .expect(getVisibleElement(".svc-question__content-actions .sv-action-bar-item__title").nth(0).textContent).eql("Single-Line Input")
+    .expect(getVisibleElement(".svc-question__content-actions .sv-action-bar-item__title").nth(1).textContent).eql("Password");
+
+  expectedJson = <any>{
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1",
+            "inputType": "password"
+          }
+        ]
+      }
+    ]
+  };
+  resultJson = await getJSON();
+  await t.expect(resultJson).eql(expectedJson);
+
+  await t
+    .click(getBarItemByTitle("Single-Line Input"))
+    .hover(getListItemByText("Single-Line Input").filterVisible())
+    .wait(400)
+    .click(getListItemByText("Rating Scale"))
+    .expect(getVisibleElement(".svc-question__content").count).eql(1)
+    .expect(getVisibleElement(".svc-question__content-actions .sv-action-bar-item__title").nth(0).textContent).eql("Rating Scale")
+    .expect(getVisibleElement(".svc-question__content-actions .sv-action-bar-item__title").nth(1).textContent).eql("Labels");
+
+  expectedJson = <any>{
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "rating",
+            "name": "question1"
+          }
+        ]
+      }
+    ]
+  };
+  resultJson = await getJSON();
+  await t.expect(resultJson).eql(expectedJson);
 });

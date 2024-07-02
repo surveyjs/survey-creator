@@ -9,7 +9,7 @@
     v-key2click
   >
     <span class="svc-toolbox__item-container">
-      <sv-svg-icon
+      <sv-svg-icon v-if="item.iconName"
         :iconName="item.iconName"
         :size="24"
         :title="item.tooltip"
