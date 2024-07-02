@@ -1,3 +1,5 @@
+// This dictionary contains 65 untranslated or inherited localization strings.
+// These strings are commented out. Uncomment and edit them if you want to add your translations.
 import { editorLocalization } from "survey-creator-core";
 
 var traditionalChineseTranslation = {
@@ -1457,6 +1459,19 @@ var traditionalChineseTranslation = {
     currencymask: {
       prefix: "要在值之前顯示的一個或多個符號。",
       suffix: "要在值后顯示的一個或多個符號。"
+    },
+    theme: {
+      // isPanelless: "This setting applies only to questions outside of a panel.",
+      // primaryColor: "Sets a supplementary color that highlights key survey elements.",
+      // panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background.",
+      // questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background.",
+      // cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes.",
+      // "--sjs-general-backcolor-dim": "Sets the main background color of the survey."
+    },
+    header: {
+      // inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in.",
+      // textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels.",
+      // overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey."
     }
   },
   // Properties
@@ -1560,7 +1575,63 @@ var traditionalChineseTranslation = {
     allowCameraAccess: "允許攝像頭訪問",
     scaleColorMode: "縮放顏色模式",
     rateColorMode: "評價顏色模式",
-    copyDisplayValue: "複製顯示值"
+    copyDisplayValue: "複製顯示值",
+    // insensitive: "insensitive",
+    // state: "state",
+    // indent: "indent",
+    // titleLocation: "titleLocation",
+    // descriptionLocation: "descriptionLocation",
+    // hideNumber: "hideNumber",
+    // errorLocation: "errorLocation",
+    // isUnique: "isUnique",
+    // showInMultipleColumns: "showInMultipleColumns",
+    // totalAlignment: "totalAlignment",
+    // detailErrorLocation: "detailErrorLocation",
+    // inheritWidthFrom: "inheritWidthFrom",
+    // textAreaWidth: "textAreaWidth",
+    // textGlowEnabled: "textGlowEnabled",
+    // overlapEnabled: "overlapEnabled",
+    // backgroundImageOpacity: "backgroundImageOpacity",
+    // logoPositionX: "logoPositionX",
+    // logoPositionY: "logoPositionY",
+    // titlePositionX: "titlePositionX",
+    // titlePositionY: "titlePositionY",
+    // descriptionPositionX: "descriptionPositionX",
+    // descriptionPositionY: "descriptionPositionY",
+    // showNumber: "showNumber",
+    // progressBarInheritWidthFrom: "progressBarInheritWidthFrom",
+    // headerView: "headerView",
+    // choiceValuesFromQuestion: "choiceValuesFromQuestion",
+    // choiceTextsFromQuestion: "choiceTextsFromQuestion",
+    // refuseText: "refuseText",
+    // dontKnowText: "dontKnowText",
+    // cellComponent: "cellComponent",
+    // inputTextAlignment: "inputTextAlignment",
+    // maskSettings: "maskSettings",
+    // itemErrorLocation: "itemErrorLocation",
+    // signatureWidth: "signatureWidth",
+    // signatureHeight: "signatureHeight",
+    // signatureAutoScaleEnabled: "signatureAutoScaleEnabled",
+    // penMinWidth: "penMinWidth",
+    // penMaxWidth: "penMaxWidth",
+    // showPlaceholder: "showPlaceholder",
+    // placeholderReadOnly: "placeholderReadOnly",
+    // templateTitle: "templateTitle",
+    // templateTabTitle: "templateTabTitle",
+    // tabTitlePlaceholder: "tabTitlePlaceholder",
+    // templateDescription: "templateDescription",
+    // noEntriesText: "noEntriesText",
+    // newPanelPosition: "newPanelPosition",
+    // templateTitleLocation: "templateTitleLocation",
+    // templateErrorLocation: "templateErrorLocation",
+    // templateVisibleIf: "templateVisibleIf",
+    // saveMaskedValue: "saveMaskedValue",
+    // pattern: "pattern",
+    // allowNegativeValues: "allowNegativeValues",
+    // decimalSeparator: "decimalSeparator",
+    // thousandsSeparator: "thousandsSeparator",
+    // prefix: "prefix",
+    // suffix: "suffix"
   },
   theme: {
     advancedMode: "高級模式",

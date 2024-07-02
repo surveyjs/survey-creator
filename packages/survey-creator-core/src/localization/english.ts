@@ -751,7 +751,7 @@ export var enStrings = {
     imageitemvalue: {
       text: "Alt text"
     },
-    logoPosition: "Logo position",
+    logoPosition: "Logo alignment",
     addLogo: "Add logo...",
     changeLogo: "Change logo...",
     logoPositions: {
@@ -867,10 +867,10 @@ export var enStrings = {
       editorPanel: "Background and corner radius",
       questionPanel: "Background and corner radius",
       primaryColor: "Accent color",
-      panelBackgroundTransparency: "Panel background opacity",
-      questionBackgroundTransparency: "Question background opacity",
-      fontSize: "Font size",
-      scale: "Scale",
+      panelBackgroundTransparency: "Panel and question box opacity",
+      questionBackgroundTransparency: "Input element opacity",
+      fontSize: "Survey font size",
+      scale: "Survey scale factor",
       cornerRadius: "Corner radius",
       pageTitle: "Title font",
       pageDescription: "Description font",
@@ -879,18 +879,18 @@ export var enStrings = {
       editorFont: "Font",
       backgroundOpacity: "Opacity", // Auto-generated string
 
-      "--sjs-font-family": "Font family",
+      "--sjs-font-family": "Survey font family",
       "--sjs-general-backcolor-dim": "Background color",
-      "--sjs-primary-backcolor": "Accent background",
-      "--sjs-primary-forecolor": "Accent foreground",
-      "--sjs-special-red": "Error messages",
+      "--sjs-primary-backcolor": "Accent background colors",
+      "--sjs-primary-forecolor": "Accent foreground colors",
+      "--sjs-special-red": "Error message colors",
       "--sjs-shadow-small": "Shadow effects",
       "--sjs-shadow-inner": "Shadow effects",
       "--sjs-border-default": "Colors",
     },
     "header@header": {
       headerView: "View",
-      logoPosition: "Logo position",
+      logoPosition: "Logo alignment",
       surveyTitle: "Survey title font",
       surveyDescription: "Survey description font",
       headerTitle: "Survey title font",
@@ -901,9 +901,9 @@ export var enStrings = {
       backgroundImage: "Background image",
       backgroundImageOpacity: "Opacity",
       overlapEnabled: "Overlap",
-      logoPositionX: "Logo position",
-      titlePositionX: "Title position",
-      descriptionPositionX: "Description position",
+      logoPositionX: "Logo alignment",
+      titlePositionX: "Survey title alignment",
+      descriptionPositionX: "Survey description alignment",
     }
   },
   // Property values
@@ -1138,7 +1138,7 @@ export var enStrings = {
     },
     inheritWidthFrom: {
       survey: "Same as survey",
-      container: "Fit to container",
+      container: "Same as container",
     },
     backgroundColorSwitch: {
       none: "None",
@@ -1465,6 +1465,19 @@ export var enStrings = {
     currencymask: {
       prefix: "One or several symbols to be displayed before the value.",
       suffix: "One or several symbols to be displayed after the value."
+    },
+    theme: {
+      isPanelless: "This setting applies only to questions outside of a panel.",
+      primaryColor: "Sets a supplementary color that highlights key survey elements.",
+      panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background.",
+      questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background.",
+      cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes.",
+      "--sjs-general-backcolor-dim": "Sets the main background color of the survey.",
+    },
+    header: {
+      inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in.",
+      textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels.",
+      overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey.",
     }
   },
   // Properties
