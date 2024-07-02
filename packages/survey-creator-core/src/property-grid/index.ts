@@ -1849,7 +1849,7 @@ export class PropertyGridEditorPage extends PropertyGridEditorDropdown {
 }
 export class PropertyGridEditorQuestion extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
-    return prop.type == "question";
+    return prop.type == "question" || prop.type === "questionlist";
   }
   public getJSON(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): any {
     const result = {
@@ -1919,7 +1919,7 @@ export class PropertyGridEditorQuestionCarryForward extends PropertyGridEditorQu
 
 export class PropertyGridEditorQuestionValue extends PropertyGridEditorQuestion {
   public fit(prop: JsonObjectProperty): boolean {
-    return prop.type == "questionvalue";
+    return prop.type === "questionvalue" || prop.type === "questionlist-savevaluename";
   }
   protected getItemValue(question: Question): any {
     return question.getValueName();
