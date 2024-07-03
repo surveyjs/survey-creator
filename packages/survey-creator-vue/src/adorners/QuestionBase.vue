@@ -31,48 +31,54 @@
             size: 24,
           }"
         ></sv-svg-icon>
+        <sv-action-bar
+          :model="model.topActionContainer"
+          :handleClick="false"
+        ></sv-action-bar>
       </div>
 
       <sv-template-renderer
         :componentName="componentName"
         :componentData="componentData"
       ></sv-template-renderer>
-      <div
-        v-if="model.isEmptyElement && !showPlaceholderComponent"
-        class="svc-panel__placeholder_frame-wrapper"
-      >
-        <div class="svc-panel__placeholder_frame">
-          <div class="svc-panel__placeholder" data-bind="text: placeholderText">
-            {{ model.placeholderText }}
+      <div>
+        <div
+          v-if="model.isEmptyElement && !showPlaceholderComponent"
+          class="svc-panel__placeholder_frame-wrapper"
+        >
+          <div class="svc-panel__placeholder_frame">
+            <div class="svc-panel__placeholder" data-bind="text: placeholderText">
+              {{ model.placeholderText }}
+            </div>
           </div>
         </div>
-      </div>
-      <component
-        v-if="model.isEmptyElement && showPlaceholderComponent"
-        :is="placeholderComponent"
-        v-bind="placeholderComponentData"
-      ></component>
-      <!-- ko if: koIsEmptyElement() && !!$data.placeholderComponentData -->
-      <!-- ko let: { question: placeholderComponentData.data }  -->
-      <!-- ko component: { name: 'sv-template-renderer', params: { componentData: null, templateData: placeholderComponentData } } -->
-      <!-- /ko -->
-      <!-- /ko -->
-      <!-- /ko -->
+        <component
+          v-if="model.isEmptyElement && showPlaceholderComponent"
+          :is="placeholderComponent"
+          v-bind="placeholderComponentData"
+        ></component>
+        <!-- ko if: koIsEmptyElement() && !!$data.placeholderComponentData -->
+        <!-- ko let: { question: placeholderComponentData.data }  -->
+        <!-- ko component: { name: 'sv-template-renderer', params: { componentData: null, templateData: placeholderComponentData } } -->
+        <!-- /ko -->
+        <!-- /ko -->
+        <!-- /ko -->
 
-      <!-- ko if: adornerComponent -->
-      <!-- ko component: { name: adornerComponent, params: { model: $data } } -->
-      <!-- /ko -->
-      <!-- /ko -->
-      <component
-        v-if="adornerComponent"
-        :is="adornerComponent"
-        :model="model"
-        :element="element"
-      />
-      <svc-question-banner
-        v-if="model.isBannerShowing"
-        :model="questionBannerParams"
-      ></svc-question-banner>
+        <!-- ko if: adornerComponent -->
+        <!-- ko component: { name: adornerComponent, params: { model: $data } } -->
+        <!-- /ko -->
+        <!-- /ko -->
+        <component
+          v-if="adornerComponent"
+          :is="adornerComponent"
+          :model="model"
+          :element="element"
+        />
+        <svc-question-banner
+          v-if="model.isBannerShowing"
+          :model="questionBannerParams"
+        ></svc-question-banner>
+      </div>
       <div
         class="svc-question__content-actions"
         v-on:focusin="

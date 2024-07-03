@@ -100,8 +100,10 @@ export class QuestionAdornerComponent extends CreatorModelElement<
     return (
       <>
         {this.props.element}
-        {this.renderElementPlaceholder()}
-        {this.renderCarryForwardBanner()}
+        <div className="svc-question__placeholders">
+          {this.renderElementPlaceholder()}
+          {this.renderCarryForwardBanner()}
+        </div>
       </>
     );
   }
