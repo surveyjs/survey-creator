@@ -12,6 +12,8 @@ import {
 } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { settings } from "../creator-settings";
+import { DesignerStateManager } from "./tabs/designer-state-manager";
+import { TabDesignerPlugin } from "./tabs/designer-plugin";
 
 export class SurveyElementActionContainer extends AdaptiveActionContainer {
   private needToShrink(item: Action, shrinkStart: boolean, shrinkEnd: boolean) {
@@ -89,10 +91,12 @@ export class SurveyElementActionContainer extends AdaptiveActionContainer {
 export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> extends Base {
   public actionContainer: SurveyElementActionContainer;
   public topActionContainer: ActionContainer;
+  protected designerStateManager: DesignerStateManager;
   @property({ defaultValue: true }) allowDragging: boolean;
   @property({
     onSet: (val, target: SurveyElementAdornerBase<T>) => {
       target.renderedCollapsed = val;
+      if (target.designerStateManager) target.designerStateManager.getElementState(target.surveyElement).collapsed = val;
     }
   }) collapsed: boolean;
   @property() renderedCollapsed: boolean;
@@ -105,6 +109,8 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     protected surveyElement: T
   ) {
     super();
+    this.designerStateManager = (creator.getPlugin("designer") as TabDesignerPlugin)?.designerStateManager;
+    this.designerStateManager?.initForElement(this.surveyElement);
     this.selectedPropPageFunc = (sender: Base, options: any) => {
       if (options.name === "isSelectedInDesigner") {
         this.onElementSelectedChanged(options.newValue);
@@ -139,7 +145,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
         this.collapsed = false;
       }
     }]);
-    this.collapsed = false;
+    this.collapsed = this.designerStateManager?.getElementState(this.surveyElement).collapsed;
     this.setSurveyElement(surveyElement);
     this.creator.sidebar.onPropertyChanged.add(this.sidebarFlyoutModeChangedFunc);
     this.setShowAddQuestionButton(true);
