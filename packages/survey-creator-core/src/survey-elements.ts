@@ -206,7 +206,10 @@ export class DragDropSurveyElements extends DragDropCore<any> {
 
     // drop to panel
     else if (dropTarget.isPanel) {
-      dropTarget = this.getPanelDropTarget(dropTargetNode, dropTarget, event);
+      const dragOverLocation = calculateDragOverLocation(event.clientX, event.clientY, dropTargetNode);
+      if(dragOverLocation === DragTypeOverMeEnum.InsideEmptyPanel) {
+        dropTarget = this.getPanelDropTarget(dropTargetNode, dropTarget, event);
+      }
     }
     // drop to question
 
@@ -285,12 +288,13 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       allow: true,
       parent: this.parentElement,
       source: this.draggedElement,
-      toElement: this.parentElement,
+      toElement: <IElement>dropTarget,
       draggedElement: this.draggedElement,
       fromElement: this.draggedElement.parent,
       target: <IElement>dropTarget,
       insertAfter: undefined,
-      insertBefore: undefined
+      insertBefore: undefined,
+      allowMultipleElementsInRow: true
     };
     if (dragOverLocation === DragTypeOverMeEnum.Bottom || dragOverLocation === DragTypeOverMeEnum.Right) {
       allowOptions.insertAfter = <IElement>dropTarget;
@@ -299,6 +303,14 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       allowOptions.insertBefore = <IElement>dropTarget;
     }
     this.survey.onDragDropAllow.fire(this.survey, allowOptions);
+    if(!allowOptions.allowMultipleElementsInRow) {
+      if(dragOverLocation === DragTypeOverMeEnum.Left) {
+        this.dragOverLocation = DragTypeOverMeEnum.Top;
+      }
+      if(dragOverLocation === DragTypeOverMeEnum.Right) {
+        this.dragOverLocation = DragTypeOverMeEnum.Bottom;
+      }
+    }
     return allowOptions.allow;
   }
   public dragOverCore(dropTarget: ISurveyElement, dragOverLocation: DragTypeOverMeEnum): void {
@@ -377,15 +389,6 @@ export class DragDropSurveyElements extends DragDropCore<any> {
   protected onStartDrag(): void {
     // this.ghostSurveyElement = this.createGhostSurveyElement();
     this.draggedElement.isDragMe = true;
-  }
-
-  private getElementIndexInPanel(target: IElement, row: QuestionRowModel): number {
-    if (!row) return -1;
-    var index = row.elements.indexOf(target);
-    if (row.index == 0) return index;
-    var prevRow = row.panel.rows[row.index - 1];
-    var prevElement = prevRow.elements[prevRow.elements.length - 1];
-    return index + row.panel.elements.indexOf(prevElement) + 1;
   }
   public moveElementInPanel(panel: IPanel, src: IElement, target: IElement, targetIndex: number) {
     var srcIndex = (<PanelModelBase>src.parent).elements.indexOf(src);
