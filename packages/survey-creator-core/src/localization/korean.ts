@@ -1,3 +1,5 @@
+// This dictionary contains 65 untranslated or inherited localization strings.
+// These strings are commented out. Uncomment and edit them if you want to add your translations.
 import { editorLocalization, defaultStrings } from "survey-creator-core";
 
 export var koreanStrings = {
@@ -646,6 +648,7 @@ export var koreanStrings = {
     questionsOnPageMode: "설문조사 구조",
     maxTextLength: "최대 답변 길이(문자 단위)",
     maxOthersLength: "최대 주석 길이(문자)",
+    commentAreaRows: "주석 영역 높이(줄)",
     autoGrowComment: "필요한 경우 주석 영역 자동 확장",
     allowResizeComment: "사용자가 텍스트 영역의 크기를 조정할 수 있도록 허용",
     textUpdateMode: "텍스트 질문 값 업데이트",
@@ -1350,6 +1353,7 @@ export var koreanStrings = {
     questionsOrder: "질문의 원래 순서를 유지하거나 무작위화합니다. 이 설정의 효과는 미리보기 탭에서만 볼 수 있습니다.",
     maxTextLength: "텍스트 입력 질문에만 해당됩니다.",
     maxOthersLength: "질문 댓글에만 해당됩니다.",
+    commentAreaRows: "질문 주석에 대해 텍스트 영역에 표시되는 줄 수를 설정합니다. 입력이 더 많은 줄을 차지하면 스크롤 막대가 나타납니다.",
     autoGrowComment: "질문 댓글과 긴 텍스트 질문의 높이가 입력한 텍스트 길이에 따라 자동으로 커지도록 하려면 선택합니다.",
     allowResizeComment: "질문 댓글 및 긴 텍스트 질문에만 해당됩니다.",
     calculatedValues: "사용자 지정 변수는 양식 계산에 사용되는 중간 또는 보조 변수 역할을 합니다. 응답자 입력을 소스 값으로 사용합니다. 각 맞춤 변수에는 고유한 이름과 기준이 되는 표현식이 있습니다.",
@@ -1455,6 +1459,19 @@ export var koreanStrings = {
     currencymask: {
       prefix: "값 앞에 표시할 하나 또는 여러 개의 기호입니다.",
       suffix: "값 뒤에 표시할 하나 또는 여러 개의 기호입니다."
+    },
+    theme: {
+      // isPanelless: "This setting applies only to questions outside of a panel.",
+      // primaryColor: "Sets a supplementary color that highlights key survey elements.",
+      // panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background.",
+      // questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background.",
+      // cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes.",
+      // "--sjs-general-backcolor-dim": "Sets the main background color of the survey."
+    },
+    header: {
+      // inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in.",
+      // textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels.",
+      // overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey."
     }
   },
   // Properties
@@ -1558,7 +1575,63 @@ export var koreanStrings = {
     allowCameraAccess: "카메라 액세스 허용",
     scaleColorMode: "스케일 컬러 모드",
     rateColorMode: "비율 색상 모드",
-    copyDisplayValue: "표시 값 복사"
+    copyDisplayValue: "표시 값 복사",
+    // insensitive: "insensitive",
+    // state: "state",
+    // indent: "indent",
+    // titleLocation: "titleLocation",
+    // descriptionLocation: "descriptionLocation",
+    // hideNumber: "hideNumber",
+    // errorLocation: "errorLocation",
+    // isUnique: "isUnique",
+    // showInMultipleColumns: "showInMultipleColumns",
+    // totalAlignment: "totalAlignment",
+    // detailErrorLocation: "detailErrorLocation",
+    // inheritWidthFrom: "inheritWidthFrom",
+    // textAreaWidth: "textAreaWidth",
+    // textGlowEnabled: "textGlowEnabled",
+    // overlapEnabled: "overlapEnabled",
+    // backgroundImageOpacity: "backgroundImageOpacity",
+    // logoPositionX: "logoPositionX",
+    // logoPositionY: "logoPositionY",
+    // titlePositionX: "titlePositionX",
+    // titlePositionY: "titlePositionY",
+    // descriptionPositionX: "descriptionPositionX",
+    // descriptionPositionY: "descriptionPositionY",
+    // showNumber: "showNumber",
+    // progressBarInheritWidthFrom: "progressBarInheritWidthFrom",
+    // headerView: "headerView",
+    // choiceValuesFromQuestion: "choiceValuesFromQuestion",
+    // choiceTextsFromQuestion: "choiceTextsFromQuestion",
+    // refuseText: "refuseText",
+    // dontKnowText: "dontKnowText",
+    // cellComponent: "cellComponent",
+    // inputTextAlignment: "inputTextAlignment",
+    // maskSettings: "maskSettings",
+    // itemErrorLocation: "itemErrorLocation",
+    // signatureWidth: "signatureWidth",
+    // signatureHeight: "signatureHeight",
+    // signatureAutoScaleEnabled: "signatureAutoScaleEnabled",
+    // penMinWidth: "penMinWidth",
+    // penMaxWidth: "penMaxWidth",
+    // showPlaceholder: "showPlaceholder",
+    // placeholderReadOnly: "placeholderReadOnly",
+    // templateTitle: "templateTitle",
+    // templateTabTitle: "templateTabTitle",
+    // tabTitlePlaceholder: "tabTitlePlaceholder",
+    // templateDescription: "templateDescription",
+    // noEntriesText: "noEntriesText",
+    // newPanelPosition: "newPanelPosition",
+    // templateTitleLocation: "templateTitleLocation",
+    // templateErrorLocation: "templateErrorLocation",
+    // templateVisibleIf: "templateVisibleIf",
+    // saveMaskedValue: "saveMaskedValue",
+    // pattern: "pattern",
+    // allowNegativeValues: "allowNegativeValues",
+    // decimalSeparator: "decimalSeparator",
+    // thousandsSeparator: "thousandsSeparator",
+    // prefix: "prefix",
+    // suffix: "suffix"
   },
   theme: {
     advancedMode: "어드밴스드 모드",
@@ -2875,3 +2948,5 @@ editorLocalization.locales["ko"] = koreanStrings;
 // panelbase.questionTitleWidth: "Ex.: 200px" => "예: 200px"
 // panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "질문 제목이 질문 상자의 왼쪽에 정렬될 때 일관된 너비를 설정합니다. CSS 값(px, %, in, pt 등)을 허용합니다."
 // page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "질문 제목이 질문 상자의 왼쪽에 정렬될 때 일관된 너비를 설정합니다. CSS 값(px, %, in, pt 등)을 허용합니다."
+// pe.commentAreaRows: "Comment area height (in lines)" => "주석 영역 높이(줄)"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "질문 주석에 대해 텍스트 영역에 표시되는 줄 수를 설정합니다. 입력이 더 많은 줄을 차지하면 스크롤 막대가 나타납니다."

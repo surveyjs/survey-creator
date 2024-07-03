@@ -152,6 +152,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     items.push(this.mergeLocaleWithDefaultAction);
 
     this.importCsvAction = createImportCSVAction(() => { this.model.importFromCSVFileDOM(); }, true);
+    this.importCsvAction.enabled = <any>(new ComputedUpdater(() => !this.creator.readOnly)),
     this.importCsvAction.visible = false;
     items.push(this.importCsvAction);
 

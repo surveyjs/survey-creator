@@ -1,3 +1,5 @@
+// This dictionary contains 65 untranslated or inherited localization strings.
+// These strings are commented out. Uncomment and edit them if you want to add your translations.
 import { editorLocalization, defaultStrings } from "survey-creator-core";
 
 export var nbStrings = {
@@ -646,6 +648,7 @@ export var nbStrings = {
     questionsOnPageMode: "Undersøkelse struktur",
     maxTextLength: "Maksimal svarlengde (i tegn)",
     maxOthersLength: "Maksimal kommentarlengde (i tegn)",
+    commentAreaRows: "Høyde i kommentarområdet (i linjer)",
     autoGrowComment: "Utvid kommentarområdet automatisk om nødvendig",
     allowResizeComment: "Tillat brukere å endre størrelse på tekstområder",
     textUpdateMode: "Oppdatere tekstspørsmålsverdi",
@@ -1350,6 +1353,7 @@ export var nbStrings = {
     questionsOrder: "Beholder den opprinnelige rekkefølgen på spørsmål eller randomiserer dem. Effekten av denne innstillingen er bare synlig i kategorien Forhåndsvisning.",
     maxTextLength: "Kun for spørsmål om tekstoppføring.",
     maxOthersLength: "Kun for spørsmålskommentarer.",
+    commentAreaRows: "Angir antall viste linjer i tekstområder for spørsmålskommentarer. I inngangen tar opp flere linjer, vises rullefeltet.",
     autoGrowComment: "Velg om du vil at spørsmålskommentarer og Lang tekst-spørsmål skal vokse automatisk i høyde basert på den angitte tekstlengden.",
     allowResizeComment: "Kun for spørsmålskommentarer og langtekstspørsmål.",
     calculatedValues: "Egendefinerte variabler fungerer som mellomliggende variabler eller hjelpevariabler som brukes i skjemaberegninger. De tar respondentinnganger som kildeverdier. Hver egendefinerte variabel har et unikt navn og et uttrykk den er basert på.",
@@ -1455,6 +1459,19 @@ export var nbStrings = {
     currencymask: {
       prefix: "Ett eller flere symboler som skal vises før verdien.",
       suffix: "Ett eller flere symboler som skal vises etter verdien."
+    },
+    theme: {
+      // isPanelless: "This setting applies only to questions outside of a panel.",
+      // primaryColor: "Sets a supplementary color that highlights key survey elements.",
+      // panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background.",
+      // questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background.",
+      // cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes.",
+      // "--sjs-general-backcolor-dim": "Sets the main background color of the survey."
+    },
+    header: {
+      // inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in.",
+      // textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels.",
+      // overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey."
     }
   },
   // Properties
@@ -1558,7 +1575,63 @@ export var nbStrings = {
     allowCameraAccess: "Tillat kameratilgang",
     scaleColorMode: "Skaler farge, modus",
     rateColorMode: "Vurder farge, modus",
-    copyDisplayValue: "Kopier visningsverdi"
+    copyDisplayValue: "Kopier visningsverdi",
+    // insensitive: "insensitive",
+    // state: "state",
+    // indent: "indent",
+    // titleLocation: "titleLocation",
+    // descriptionLocation: "descriptionLocation",
+    // hideNumber: "hideNumber",
+    // errorLocation: "errorLocation",
+    // isUnique: "isUnique",
+    // showInMultipleColumns: "showInMultipleColumns",
+    // totalAlignment: "totalAlignment",
+    // detailErrorLocation: "detailErrorLocation",
+    // inheritWidthFrom: "inheritWidthFrom",
+    // textAreaWidth: "textAreaWidth",
+    // textGlowEnabled: "textGlowEnabled",
+    // overlapEnabled: "overlapEnabled",
+    // backgroundImageOpacity: "backgroundImageOpacity",
+    // logoPositionX: "logoPositionX",
+    // logoPositionY: "logoPositionY",
+    // titlePositionX: "titlePositionX",
+    // titlePositionY: "titlePositionY",
+    // descriptionPositionX: "descriptionPositionX",
+    // descriptionPositionY: "descriptionPositionY",
+    // showNumber: "showNumber",
+    // progressBarInheritWidthFrom: "progressBarInheritWidthFrom",
+    // headerView: "headerView",
+    // choiceValuesFromQuestion: "choiceValuesFromQuestion",
+    // choiceTextsFromQuestion: "choiceTextsFromQuestion",
+    // refuseText: "refuseText",
+    // dontKnowText: "dontKnowText",
+    // cellComponent: "cellComponent",
+    // inputTextAlignment: "inputTextAlignment",
+    // maskSettings: "maskSettings",
+    // itemErrorLocation: "itemErrorLocation",
+    // signatureWidth: "signatureWidth",
+    // signatureHeight: "signatureHeight",
+    // signatureAutoScaleEnabled: "signatureAutoScaleEnabled",
+    // penMinWidth: "penMinWidth",
+    // penMaxWidth: "penMaxWidth",
+    // showPlaceholder: "showPlaceholder",
+    // placeholderReadOnly: "placeholderReadOnly",
+    // templateTitle: "templateTitle",
+    // templateTabTitle: "templateTabTitle",
+    // tabTitlePlaceholder: "tabTitlePlaceholder",
+    // templateDescription: "templateDescription",
+    // noEntriesText: "noEntriesText",
+    // newPanelPosition: "newPanelPosition",
+    // templateTitleLocation: "templateTitleLocation",
+    // templateErrorLocation: "templateErrorLocation",
+    // templateVisibleIf: "templateVisibleIf",
+    // saveMaskedValue: "saveMaskedValue",
+    // pattern: "pattern",
+    // allowNegativeValues: "allowNegativeValues",
+    // decimalSeparator: "decimalSeparator",
+    // thousandsSeparator: "thousandsSeparator",
+    // prefix: "prefix",
+    // suffix: "suffix"
   },
   theme: {
     advancedMode: "Avansert modus",
@@ -2674,3 +2747,5 @@ editorLocalization.locales["nb"] = nbStrings;
 // panelbase.questionTitleWidth: "Ex.: 200px" => "Eks.: 200 piksler"
 // panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Angir konsekvent bredde for spørsmålstitler når de er justert til venstre for spørsmålsboksene. Godtar CSS-verdier (px, %, i, pt osv.)."
 // page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Angir konsekvent bredde for spørsmålstitler når de er justert til venstre for spørsmålsboksene. Godtar CSS-verdier (px, %, i, pt osv.)."
+// pe.commentAreaRows: "Comment area height (in lines)" => "Høyde i kommentarområdet (i linjer)"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "Angir antall viste linjer i tekstområder for spørsmålskommentarer. I inngangen tar opp flere linjer, vises rullefeltet."

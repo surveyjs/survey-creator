@@ -1,3 +1,5 @@
+// This dictionary contains 65 untranslated or inherited localization strings.
+// These strings are commented out. Uncomment and edit them if you want to add your translations.
 import { editorLocalization, defaultStrings } from "survey-creator-core";
 
 export var hrStrings = {
@@ -646,6 +648,7 @@ export var hrStrings = {
     questionsOnPageMode: "Struktura upitnika",
     maxTextLength: "Maksimalna duljina odgovora (u znakovima)",
     maxOthersLength: "Maksimalna duljina komentara (u znakovima)",
+    commentAreaRows: "Visina područja komentara (u recima)",
     autoGrowComment: "Ako je potrebno, automatsko proširivanje područja komentara",
     allowResizeComment: "Dopusti korisnicima promjenu veličine tekstnih područja",
     textUpdateMode: "Ažuriranje vrijednosti tekstnog pitanja",
@@ -1350,6 +1353,7 @@ export var hrStrings = {
     questionsOrder: "Zadržava izvorni redoslijed pitanja ili ih randomizira. Efekt ove postavke vidljiv je samo na kartici Pretpregled.",
     maxTextLength: "Samo za pitanja o unosu teksta.",
     maxOthersLength: "Samo za komentare pitanja.",
+    commentAreaRows: "Postavlja broj prikazanih redaka u tekstnim područjima za komentare pitanja. U ulazu zauzima više redaka pojavljuje se klizač.",
     autoGrowComment: "Odaberite želite li da komentari pitanja i pitanja dugog teksta automatski rastu u visinu na temelju unesene duljine teksta.",
     allowResizeComment: "Samo za komentare pitanja i pitanja dugog teksta.",
     calculatedValues: "Prilagođene varijable služe kao srednje ili pomoćne varijable koje se koriste u izračunima obrazaca. Oni uzimaju unose ispitanika kao izvorne vrijednosti. Svaka prilagođena varijabla ima jedinstveni naziv i izraz na kojem se temelji.",
@@ -1455,6 +1459,19 @@ export var hrStrings = {
     currencymask: {
       prefix: "Jedan ili više simbola koji će se prikazati prije vrijednosti.",
       suffix: "Jedan ili više simbola koji će se prikazati nakon vrijednosti."
+    },
+    theme: {
+      // isPanelless: "This setting applies only to questions outside of a panel.",
+      // primaryColor: "Sets a supplementary color that highlights key survey elements.",
+      // panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background.",
+      // questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background.",
+      // cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes.",
+      // "--sjs-general-backcolor-dim": "Sets the main background color of the survey."
+    },
+    header: {
+      // inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in.",
+      // textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels.",
+      // overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey."
     }
   },
   // Properties
@@ -1558,7 +1575,63 @@ export var hrStrings = {
     allowCameraAccess: "Dopusti pristup kameri",
     scaleColorMode: "Način skaliranja boje",
     rateColorMode: "Način ocjenjivanja boja",
-    copyDisplayValue: "Kopiraj vrijednost prikaza"
+    copyDisplayValue: "Kopiraj vrijednost prikaza",
+    // insensitive: "insensitive",
+    // state: "state",
+    // indent: "indent",
+    // titleLocation: "titleLocation",
+    // descriptionLocation: "descriptionLocation",
+    // hideNumber: "hideNumber",
+    // errorLocation: "errorLocation",
+    // isUnique: "isUnique",
+    // showInMultipleColumns: "showInMultipleColumns",
+    // totalAlignment: "totalAlignment",
+    // detailErrorLocation: "detailErrorLocation",
+    // inheritWidthFrom: "inheritWidthFrom",
+    // textAreaWidth: "textAreaWidth",
+    // textGlowEnabled: "textGlowEnabled",
+    // overlapEnabled: "overlapEnabled",
+    // backgroundImageOpacity: "backgroundImageOpacity",
+    // logoPositionX: "logoPositionX",
+    // logoPositionY: "logoPositionY",
+    // titlePositionX: "titlePositionX",
+    // titlePositionY: "titlePositionY",
+    // descriptionPositionX: "descriptionPositionX",
+    // descriptionPositionY: "descriptionPositionY",
+    // showNumber: "showNumber",
+    // progressBarInheritWidthFrom: "progressBarInheritWidthFrom",
+    // headerView: "headerView",
+    // choiceValuesFromQuestion: "choiceValuesFromQuestion",
+    // choiceTextsFromQuestion: "choiceTextsFromQuestion",
+    // refuseText: "refuseText",
+    // dontKnowText: "dontKnowText",
+    // cellComponent: "cellComponent",
+    // inputTextAlignment: "inputTextAlignment",
+    // maskSettings: "maskSettings",
+    // itemErrorLocation: "itemErrorLocation",
+    // signatureWidth: "signatureWidth",
+    // signatureHeight: "signatureHeight",
+    // signatureAutoScaleEnabled: "signatureAutoScaleEnabled",
+    // penMinWidth: "penMinWidth",
+    // penMaxWidth: "penMaxWidth",
+    // showPlaceholder: "showPlaceholder",
+    // placeholderReadOnly: "placeholderReadOnly",
+    // templateTitle: "templateTitle",
+    // templateTabTitle: "templateTabTitle",
+    // tabTitlePlaceholder: "tabTitlePlaceholder",
+    // templateDescription: "templateDescription",
+    // noEntriesText: "noEntriesText",
+    // newPanelPosition: "newPanelPosition",
+    // templateTitleLocation: "templateTitleLocation",
+    // templateErrorLocation: "templateErrorLocation",
+    // templateVisibleIf: "templateVisibleIf",
+    // saveMaskedValue: "saveMaskedValue",
+    // pattern: "pattern",
+    // allowNegativeValues: "allowNegativeValues",
+    // decimalSeparator: "decimalSeparator",
+    // thousandsSeparator: "thousandsSeparator",
+    // prefix: "prefix",
+    // suffix: "suffix"
   },
   theme: {
     advancedMode: "Napredni način rada",
@@ -2665,3 +2738,5 @@ editorLocalization.locales["hr"] = hrStrings;
 // panelbase.questionTitleWidth: "Ex.: 200px" => "Npr.: 200px"
 // panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Postavlja dosljednu širinu za naslove pitanja kada su poravnati lijevo od okvira pitanja. Prihvaća CSS vrijednosti (px, %, in, pt itd.)."
 // page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Postavlja dosljednu širinu za naslove pitanja kada su poravnati lijevo od okvira pitanja. Prihvaća CSS vrijednosti (px, %, in, pt itd.)."
+// pe.commentAreaRows: "Comment area height (in lines)" => "Visina područja komentara (u recima)"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "Postavlja broj prikazanih redaka u tekstnim područjima za komentare pitanja. U ulazu zauzima više redaka pojavljuje se klizač."

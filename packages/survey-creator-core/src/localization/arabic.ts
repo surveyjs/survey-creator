@@ -1,3 +1,5 @@
+// This dictionary contains 65 untranslated or inherited localization strings.
+// These strings are commented out. Uncomment and edit them if you want to add your translations.
 import { editorLocalization, defaultStrings } from "survey-creator-core";
 
 export var arStrings = {
@@ -646,6 +648,7 @@ export var arStrings = {
     questionsOnPageMode: "هيكل المسح",
     maxTextLength: "الحد الأقصى لطول الإجابة (بالأحرف)",
     maxOthersLength: "الحد الأقصى لطول التعليق (بالأحرف)",
+    commentAreaRows: "ارتفاع منطقة التعليق (في الأسطر)",
     autoGrowComment: "توسيع منطقة التعليق تلقائيا إذا لزم الأمر",
     allowResizeComment: "السماح للمستخدمين بتغيير حجم مناطق النص",
     textUpdateMode: "تحديث قيمة السؤال النصي",
@@ -1350,6 +1353,7 @@ export var arStrings = {
     questionsOrder: "يحافظ على الترتيب الأصلي للأسئلة أو يحولها عشوائيا. يكون تأثير هذا الإعداد مرئيا فقط في علامة التبويب معاينة.",
     maxTextLength: "لأسئلة إدخال النص فقط.",
     maxOthersLength: "لتعليقات الأسئلة فقط.",
+    commentAreaRows: "يضبط عدد الأسطر المعروضة في مساحات النص لتعليقات الأسئلة. في الإدخال يأخذ المزيد من الأسطر ، يظهر شريط التمرير.",
     autoGrowComment: "حدد ما إذا كنت تريد زيادة تعليقات الأسئلة وأسئلة النص الطويل تلقائيا في الارتفاع بناء على طول النص الذي تم إدخاله.",
     allowResizeComment: "لتعليقات الأسئلة وأسئلة النص الطويل فقط.",
     calculatedValues: "تعمل المتغيرات المخصصة كمتغيرات وسيطة أو مساعدة تستخدم في حسابات النماذج. يأخذون مدخلات المستجيبين كقيم مصدر. كل متغير مخصص له اسم فريد وتعبير يعتمد عليه.",
@@ -1455,6 +1459,19 @@ export var arStrings = {
     currencymask: {
       prefix: "رمز واحد أو عدة رموز ليتم عرضها قبل القيمة.",
       suffix: "رمز واحد أو عدة رموز ليتم عرضها بعد القيمة."
+    },
+    theme: {
+      // isPanelless: "This setting applies only to questions outside of a panel.",
+      // primaryColor: "Sets a supplementary color that highlights key survey elements.",
+      // panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background.",
+      // questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background.",
+      // cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes.",
+      // "--sjs-general-backcolor-dim": "Sets the main background color of the survey."
+    },
+    header: {
+      // inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in.",
+      // textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels.",
+      // overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey."
     }
   },
   // Properties
@@ -1558,7 +1575,63 @@ export var arStrings = {
     allowCameraAccess: "السماح بالوصول إلى الكاميرا",
     scaleColorMode: "مقياس وضع اللون",
     rateColorMode: "معدل وضع اللون",
-    copyDisplayValue: "نسخ قيمة العرض"
+    copyDisplayValue: "نسخ قيمة العرض",
+    // insensitive: "insensitive",
+    // state: "state",
+    // indent: "indent",
+    // titleLocation: "titleLocation",
+    // descriptionLocation: "descriptionLocation",
+    // hideNumber: "hideNumber",
+    // errorLocation: "errorLocation",
+    // isUnique: "isUnique",
+    // showInMultipleColumns: "showInMultipleColumns",
+    // totalAlignment: "totalAlignment",
+    // detailErrorLocation: "detailErrorLocation",
+    // inheritWidthFrom: "inheritWidthFrom",
+    // textAreaWidth: "textAreaWidth",
+    // textGlowEnabled: "textGlowEnabled",
+    // overlapEnabled: "overlapEnabled",
+    // backgroundImageOpacity: "backgroundImageOpacity",
+    // logoPositionX: "logoPositionX",
+    // logoPositionY: "logoPositionY",
+    // titlePositionX: "titlePositionX",
+    // titlePositionY: "titlePositionY",
+    // descriptionPositionX: "descriptionPositionX",
+    // descriptionPositionY: "descriptionPositionY",
+    // showNumber: "showNumber",
+    // progressBarInheritWidthFrom: "progressBarInheritWidthFrom",
+    // headerView: "headerView",
+    // choiceValuesFromQuestion: "choiceValuesFromQuestion",
+    // choiceTextsFromQuestion: "choiceTextsFromQuestion",
+    // refuseText: "refuseText",
+    // dontKnowText: "dontKnowText",
+    // cellComponent: "cellComponent",
+    // inputTextAlignment: "inputTextAlignment",
+    // maskSettings: "maskSettings",
+    // itemErrorLocation: "itemErrorLocation",
+    // signatureWidth: "signatureWidth",
+    // signatureHeight: "signatureHeight",
+    // signatureAutoScaleEnabled: "signatureAutoScaleEnabled",
+    // penMinWidth: "penMinWidth",
+    // penMaxWidth: "penMaxWidth",
+    // showPlaceholder: "showPlaceholder",
+    // placeholderReadOnly: "placeholderReadOnly",
+    // templateTitle: "templateTitle",
+    // templateTabTitle: "templateTabTitle",
+    // tabTitlePlaceholder: "tabTitlePlaceholder",
+    // templateDescription: "templateDescription",
+    // noEntriesText: "noEntriesText",
+    // newPanelPosition: "newPanelPosition",
+    // templateTitleLocation: "templateTitleLocation",
+    // templateErrorLocation: "templateErrorLocation",
+    // templateVisibleIf: "templateVisibleIf",
+    // saveMaskedValue: "saveMaskedValue",
+    // pattern: "pattern",
+    // allowNegativeValues: "allowNegativeValues",
+    // decimalSeparator: "decimalSeparator",
+    // thousandsSeparator: "thousandsSeparator",
+    // prefix: "prefix",
+    // suffix: "suffix"
   },
   theme: {
     advancedMode: "الوضع المتقدم",
@@ -2582,3 +2655,5 @@ editorLocalization.locales["ar"] = arStrings;
 // panelbase.questionTitleWidth: "Ex.: 200px" => "مثال: 200 بكسل"
 // panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "يعين عرضا متناسقا لعناوين الأسئلة عندما تتم محاذاتها إلى يسار مربعات الأسئلة الخاصة بها. يقبل قيم CSS (px ، ٪ ، in ، pt ، إلخ)."
 // page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "يعين عرضا متناسقا لعناوين الأسئلة عندما تتم محاذاتها إلى يسار مربعات الأسئلة الخاصة بها. يقبل قيم CSS (px ، ٪ ، in ، pt ، إلخ)."
+// pe.commentAreaRows: "Comment area height (in lines)" => "ارتفاع منطقة التعليق (في الأسطر)"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "يضبط عدد الأسطر المعروضة في مساحات النص لتعليقات الأسئلة. في الإدخال يأخذ المزيد من الأسطر ، يظهر شريط التمرير."

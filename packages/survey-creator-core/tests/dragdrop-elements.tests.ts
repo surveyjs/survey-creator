@@ -1134,6 +1134,43 @@ test("Support onDragDropAllow, Bug#4572", (): any => {
   expect(counter).toBe(2);
   expect(ddHelper["allowDropHere"]).toBeTruthy();
 });
+test("Support onDragDropAllow&allowMultipleElementsInRow, #5621", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          }
+        ]
+      },
+      {
+        "name": "page2",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question2"
+          }
+        ]
+      }
+    ]
+  };
+  creator.onDragDropAllow.add((sender, options) => {
+    options.allowMultipleElementsInRow = false;
+  });
+  const ddHelper: any = creator.dragDropSurveyElements;
+  const q1 = creator.survey.getQuestionByName("question1");
+  const q2 = creator.survey.getQuestionByName("question2");
+  ddHelper.draggedElement = q2;
+  ddHelper.dragOverCore(q1, DragTypeOverMeEnum.Left);
+  expect(ddHelper.dragOverLocation).toBe(DragTypeOverMeEnum.Top);
+  ddHelper.dragOverCore(q1, DragTypeOverMeEnum.Right);
+  expect(ddHelper.dragOverLocation).toBe(DragTypeOverMeEnum.Bottom);
+});
 
 test("drag drop one empty panel to other empty panel - https://github.com/surveyjs/survey-creator/issues/4390", () => {
   const json = {

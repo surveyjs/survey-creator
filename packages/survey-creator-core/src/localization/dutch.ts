@@ -1,3 +1,5 @@
+// This dictionary contains 65 untranslated or inherited localization strings.
+// These strings are commented out. Uncomment and edit them if you want to add your translations.
 import { editorLocalization, defaultStrings } from "survey-creator-core";
 
 export var nlStrings = {
@@ -646,6 +648,7 @@ export var nlStrings = {
     questionsOnPageMode: "Structuur van de enquête",
     maxTextLength: "Maximale tekstlengte",
     maxOthersLength: "Maximale tekstlengte optie 'Anders:'",
+    commentAreaRows: "Hoogte commentaargebied (in lijnen)",
     autoGrowComment: "Commentaargebied indien nodig automatisch uitvouwen",
     allowResizeComment: "Gebruikers toestaan het formaat van tekstgebieden te wijzigen",
     textUpdateMode: "Modus tekstvernieuwing",
@@ -1350,6 +1353,7 @@ export var nlStrings = {
     questionsOrder: "Behoudt de oorspronkelijke volgorde van vragen of maakt ze willekeurig. Het effect van deze instelling is alleen zichtbaar op het tabblad Voorbeeld.",
     maxTextLength: "Alleen voor vragen over tekstinvoer.",
     maxOthersLength: "Alleen voor opmerkingen over vragen.",
+    commentAreaRows: "Hiermee stelt u het aantal weergegeven regels in tekstgebieden in voor opmerkingen bij vragen. In de invoer neemt meer regels in beslag, de schuifbalk verschijnt.",
     autoGrowComment: "Selecteer of u wilt dat vraagopmerkingen en lange tekstvragen automatisch in hoogte groeien op basis van de ingevoerde tekstlengte.",
     allowResizeComment: "Alleen voor vraagopmerkingen en lange tekstvragen.",
     calculatedValues: "Aangepaste variabelen dienen als tussenliggende of hulpvariabelen die worden gebruikt in formulierberekeningen. Ze nemen de input van respondenten als bronwaarden. Elke aangepaste variabele heeft een unieke naam en een expressie waarop deze is gebaseerd.",
@@ -1455,6 +1459,19 @@ export var nlStrings = {
     currencymask: {
       prefix: "Een of meer symbolen die vóór de waarde moeten worden weergegeven.",
       suffix: "Een of meer symbolen die na de waarde moeten worden weergegeven."
+    },
+    theme: {
+      // isPanelless: "This setting applies only to questions outside of a panel.",
+      // primaryColor: "Sets a supplementary color that highlights key survey elements.",
+      // panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background.",
+      // questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background.",
+      // cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes.",
+      // "--sjs-general-backcolor-dim": "Sets the main background color of the survey."
+    },
+    header: {
+      // inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in.",
+      // textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels.",
+      // overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey."
     }
   },
   // Properties
@@ -1558,7 +1575,63 @@ export var nlStrings = {
     allowCameraAccess: "Toegang tot de camera toestaan",
     scaleColorMode: "Kleurmodus schalen",
     rateColorMode: "Kleurmodus beoordelen",
-    copyDisplayValue: "Weergavewaarde kopiëren"
+    copyDisplayValue: "Weergavewaarde kopiëren",
+    // insensitive: "insensitive",
+    // state: "state",
+    // indent: "indent",
+    // titleLocation: "titleLocation",
+    // descriptionLocation: "descriptionLocation",
+    // hideNumber: "hideNumber",
+    // errorLocation: "errorLocation",
+    // isUnique: "isUnique",
+    // showInMultipleColumns: "showInMultipleColumns",
+    // totalAlignment: "totalAlignment",
+    // detailErrorLocation: "detailErrorLocation",
+    // inheritWidthFrom: "inheritWidthFrom",
+    // textAreaWidth: "textAreaWidth",
+    // textGlowEnabled: "textGlowEnabled",
+    // overlapEnabled: "overlapEnabled",
+    // backgroundImageOpacity: "backgroundImageOpacity",
+    // logoPositionX: "logoPositionX",
+    // logoPositionY: "logoPositionY",
+    // titlePositionX: "titlePositionX",
+    // titlePositionY: "titlePositionY",
+    // descriptionPositionX: "descriptionPositionX",
+    // descriptionPositionY: "descriptionPositionY",
+    // showNumber: "showNumber",
+    // progressBarInheritWidthFrom: "progressBarInheritWidthFrom",
+    // headerView: "headerView",
+    // choiceValuesFromQuestion: "choiceValuesFromQuestion",
+    // choiceTextsFromQuestion: "choiceTextsFromQuestion",
+    // refuseText: "refuseText",
+    // dontKnowText: "dontKnowText",
+    // cellComponent: "cellComponent",
+    // inputTextAlignment: "inputTextAlignment",
+    // maskSettings: "maskSettings",
+    // itemErrorLocation: "itemErrorLocation",
+    // signatureWidth: "signatureWidth",
+    // signatureHeight: "signatureHeight",
+    // signatureAutoScaleEnabled: "signatureAutoScaleEnabled",
+    // penMinWidth: "penMinWidth",
+    // penMaxWidth: "penMaxWidth",
+    // showPlaceholder: "showPlaceholder",
+    // placeholderReadOnly: "placeholderReadOnly",
+    // templateTitle: "templateTitle",
+    // templateTabTitle: "templateTabTitle",
+    // tabTitlePlaceholder: "tabTitlePlaceholder",
+    // templateDescription: "templateDescription",
+    // noEntriesText: "noEntriesText",
+    // newPanelPosition: "newPanelPosition",
+    // templateTitleLocation: "templateTitleLocation",
+    // templateErrorLocation: "templateErrorLocation",
+    // templateVisibleIf: "templateVisibleIf",
+    // saveMaskedValue: "saveMaskedValue",
+    // pattern: "pattern",
+    // allowNegativeValues: "allowNegativeValues",
+    // decimalSeparator: "decimalSeparator",
+    // thousandsSeparator: "thousandsSeparator",
+    // prefix: "prefix",
+    // suffix: "suffix"
   },
   theme: {
     advancedMode: "Geavanceerde modus",
@@ -2652,3 +2725,5 @@ editorLocalization.locales["nl"] = nlStrings;
 // panelbase.questionTitleWidth: "Ex.: 200px" => "Bijv.: 200px"
 // panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Hiermee stelt u een consistente breedte in voor vraagtitels wanneer deze links van de vraagvakken zijn uitgelijnd. Accepteert CSS-waarden (px, %, in, pt, enz.)."
 // page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Hiermee stelt u een consistente breedte in voor vraagtitels wanneer deze links van de vraagvakken zijn uitgelijnd. Accepteert CSS-waarden (px, %, in, pt, enz.)."
+// pe.commentAreaRows: "Comment area height (in lines)" => "Hoogte commentaargebied (in lijnen)"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "Hiermee stelt u het aantal weergegeven regels in tekstgebieden in voor opmerkingen bij vragen. In de invoer neemt meer regels in beslag, de schuifbalk verschijnt."
