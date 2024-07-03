@@ -90,7 +90,12 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   public actionContainer: SurveyElementActionContainer;
   public topActionContainer: ActionContainer;
   @property({ defaultValue: true }) allowDragging: boolean;
-  @property() collapsed: boolean;
+  @property({
+    onSet: (val, target: SurveyElementAdornerBase<T>) => {
+      target.renderedCollapsed = val;
+    }
+  }) collapsed: boolean;
+  @property() renderedCollapsed: boolean;
   private allowEditOption: boolean;
   private selectedPropPageFunc: (sender: Base, options: any) => void;
   private sidebarFlyoutModeChangedFunc: (sender: Base, options: any) => void;

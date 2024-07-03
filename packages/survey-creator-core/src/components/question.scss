@@ -85,8 +85,13 @@ svc-question {
   }
 }
 
-.svc-question__content>div {
+.svc-question__content>div,
+.svc-question__placeholders>div {
   overflow: visible;
+}
+
+.svc-question__placeholders {
+  width: 100%;
 }
 
 .svc-question__content {
@@ -455,14 +460,19 @@ svc-question,
 .svc-question__adorner--collapsed {
   .sd-description,
   .sd-element__content,
+  .sd-question__content,
   .svc-panel__add-new-question-container,
   .svc-question__content-actions,
-  .svc-panel__placeholder_frame-wrapper
+  .svc-panel__placeholder_frame-wrapper,
+  .svc-question__placeholders
   {
     display: none;
   }
   .svc-question__content {
     padding-bottom: calcSize(2);
+  }
+  .sd-title.sd-element__title.sd-element__title--hidden {
+    display: block;
   }
 }
 
