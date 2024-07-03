@@ -285,6 +285,12 @@
   flex-flow: row wrap;
 }
 
+.sl-table__cell.sd-table__cell-action--show-detail {
+  use {
+    fill: var(--ctr-collapse-button-icon-color, $foreground-light);
+  }
+}
+
 .sl-table__cell--detail-panel {
   .sd-body {
     margin: 0;

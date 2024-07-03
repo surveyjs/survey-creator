@@ -1810,6 +1810,11 @@ export class SurveyCreatorModel extends Base
       this.stopUndoRedoTransaction();
       this.selectElement(options.draggedElement, undefined, false);
     });
+    this.dragDropChoices.onShortcutCreated = (shortcut: HTMLElement) => {
+      Object.keys(this.designTabSurveyThemeVariables).forEach((key) => {
+        shortcut.style.setProperty(key, this.designTabSurveyThemeVariables[key]);
+      });
+    };
   }
 
   public updateElementsOnLocaleChanged(obj: Base, propertyName: string): void {
@@ -2375,18 +2380,18 @@ export class SurveyCreatorModel extends Base
     const newElement = Serializer.createClass(json["type"]);
     new JsonObject().toObject(json, newElement);
     let needNewName = true;
-    if(!!json.name) {
-      if(newElement.isPage) {
+    if (!!json.name) {
+      if (newElement.isPage) {
         needNewName = !!this.survey.getPageByName(newElement.name);
       } else {
-        if(newElement.isPanel) {
+        if (newElement.isPanel) {
           needNewName = !!this.survey.getPanelByName(newElement.name);
         } else {
           needNewName = !!this.survey.getQuestionByName(newElement.name);
         }
       }
     }
-    if(needNewName) {
+    if (needNewName) {
       this.setNewNames(newElement);
     }
     return newElement;
