@@ -67,7 +67,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
         name: "maxWidth",
         tab: "layout",
       },
-      { name: "colSpan", tab: "layout" },
+      { name: "effectiveColSpan", tab: "layout" },
       { name: "valueName", tab: "data" },
       { name: "defaultValue", tab: "data" },
       { name: "correctAnswer", tab: "data" },
@@ -394,7 +394,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
     ]
   },
   "panellayoutcolumn": {
-    properties: ["width", "questionTitleWidth"]
+    properties: ["effectiveWidth", "questionTitleWidth"]
   },
   matrixdropdowncolumn: {
     properties: ["name", "title"]

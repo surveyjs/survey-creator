@@ -1228,7 +1228,11 @@ export var enStrings = {
     },
     panelbase: {
       questionTitleWidth: "Ex.: 200px"
-    }
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "Ex.: 30%",
+      questionTitleWidth: "Ex.: 200px",
+    },
   },
   pehelp: {
     panel: {
@@ -1463,7 +1467,11 @@ export var enStrings = {
     currencymask: {
       prefix: "One or several symbols to be displayed before the value.",
       suffix: "One or several symbols to be displayed after the value."
-    }
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "Accepts values %.",
+      questionTitleWidth: "Accepts values px."
+    },
   },
   // Properties
   p: {
@@ -1567,6 +1575,7 @@ export var enStrings = {
     scaleColorMode: "Rating icon color mode",
     rateColorMode: "Smileys color scheme",
     copyDisplayValue: "Copy display value", // Auto-generated string
+    effectiveColSpan: "Column span",
   },
   theme: {
     advancedMode: "Advanced mode",
