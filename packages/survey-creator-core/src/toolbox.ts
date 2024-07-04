@@ -13,10 +13,11 @@ import {
   Serializer,
   SurveyModel,
   DragOrClickHelper,
-  HashTable,
-  ComputedUpdater,
+  PopupModel,
   CssClassBuilder,
-  surveyLocalization
+  HashTable,
+  surveyLocalization,
+  ComputedUpdater
 } from "survey-core";
 import { SurveyCreatorModel, toolboxLocationType } from "./creator-base";
 import { editorLocalization, getLocString } from "./editorLocalization";
@@ -59,6 +60,7 @@ export interface IQuestionToolboxItem extends IAction {
    * Toolbox item category. If it is empty, it goes to 'General' category.
    */
   category: string;
+  getArea?: (el: HTMLElement) => HTMLElement;
 }
 
 export interface IQuestionToolbox {
@@ -87,9 +89,7 @@ export class QuestionToolboxCategory extends Base {
     this.collapsedValue = val;
   }
 
-  public get empty() {
-    return this.items.filter(item => item.visible).length == 0;
-  }
+  @property() empty: boolean;
 
   public toggleState() {
     if (this.toolbox) {
@@ -103,6 +103,19 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
     if (!this.id) {
       this.id = this.name;
     }
+
+    const originalCss = this.css;
+    this.css = new ComputedUpdater(() => {
+      return new CssClassBuilder()
+        .append("svc-toolbox__tool")
+        .append("svc-toolbox__tool--action")
+        .append(originalCss)
+        .append("svc-toolbox__tool--hovered", this.isHovered)
+        .append("svc-toolbox__tool--pressed", this.isPressed)
+        .append("svc-toolbox__tool--has-icon", !!this.iconName)
+        .append("sv-action--hidden", !this.isVisible)
+        .toString();
+    }) as any;
   }
   className: string;
   iconName: string;
@@ -122,6 +135,11 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
     const type = this.typeName;
     return !!type && Serializer.isDescendantOf(type, "panelbase");
   }
+
+  public getArea(target: HTMLElement): HTMLElement {
+    return target.closest("#scrollableDiv-designer") as HTMLElement;
+  }
+
   public hasText(text: string) {
     if (!text) return;
     const textLowerCase = text.toLowerCase();
@@ -154,7 +172,7 @@ export class QuestionToolbox
   private _containerElementValue: HTMLElement;
 
   public get itemSelector(): string {
-    return ".svc-toolbox__tool:not(.svc-toolbox__search-button):not(.sv-dots)";
+    return ".svc-toolbox__category>.svc-toolbox__tool--action";
   }
   public get containerSelector(): string {
     return ".svc-toolbox__scroller";
@@ -163,6 +181,12 @@ export class QuestionToolbox
   public static getQuestionDefaultSettings(questionType: string): any {
     if (!settings.toolbox || !settings.toolbox.defaultJSON) return undefined;
     return settings.toolbox.defaultJSON[questionType];
+  }
+  public static getSubTypePropertyName(questionType: string): string {
+    let propertyName = "";
+    if (questionType === "text") propertyName = "inputType";
+    if (questionType === "rating") propertyName = "rateType";
+    return propertyName;
   }
   /**
    * Modify this array to change the toolbox items order.
@@ -289,7 +313,7 @@ export class QuestionToolbox
     this.searchManager.toolbox = this;
     this.searchItem = new Action({
       id: "searchItem-id",
-      css: "svc-toolbox__search-button",
+      css: "svc-toolbox__tool svc-toolbox__search-button",
       innerCss: "sv-dots__item",
       iconName: "icon-search",
       component: "sv-action-bar-item",
@@ -305,6 +329,15 @@ export class QuestionToolbox
   }
 
   private initDotsItem() {
+    const originalCss = this.dotsItem.css;
+    this.dotsItem.css = new ComputedUpdater(() => {
+      return new CssClassBuilder()
+        .append("svc-toolbox__tool")
+        .append(originalCss)
+        .append("sv-action--hidden", !this.dotsItem.isVisible)
+        .toString();
+    }) as any;
+
     this.dotsItem.popupModel.horizontalPosition = "right";
     this.dotsItem.popupModel.verticalPosition = "top";
     this.dragOrClickHelper = new DragOrClickHelper((pointerDownEvent: PointerEvent, currentTarget: HTMLElement, itemModel: any) => {
@@ -474,7 +507,7 @@ export class QuestionToolbox
       name: name,
       title: title,
       tooltip: tooltip,
-      className: "svc-toolbox__item svc-toolbox__item--" + iconName,
+      className: this.getItemClassNames(iconName),
       isCopied: options.isCopied !== false,
       iconName: iconName,
       json: !!options.json ? options.json : this.getQuestionJSON(question),
@@ -498,9 +531,45 @@ export class QuestionToolbox
     }
     else {
       item.iconName = item.iconName ? item.iconName : QuestionToolbox.defaultIconName;
-      return new QuestionToolboxItem(item);
+      const newItem = new QuestionToolboxItem(item);
+      this.addSubTypes(newItem);
+
+      return newItem;
     }
   }
+  private addSubTypes(parentItem: QuestionToolboxItem) {
+    let property = null;
+    const propName = QuestionToolbox.getSubTypePropertyName(parentItem.id);
+    if (propName) property = Serializer.findProperty(parentItem.id, propName);
+    if (!property || !property.visible) return;
+
+    const newItems = property.choices.map(ch => {
+      const newJson = { ...parentItem.json };
+      newJson[propName] = ch;
+
+      const innerItem = new QuestionToolboxItem({
+        id: ch,
+        name: ch,
+        title: editorLocalization.getPropertyValueInEditor(propName, ch),
+        className: this.getItemClassNames() + " svc-toolbox__item-subtype",
+        json: newJson,
+        iconName: null,
+        category: null,
+        isCopied: false,
+        component: "svc-toolbox-item"
+      });
+      return innerItem;
+    });
+    parentItem.setSubItems({ items: newItems });
+    parentItem.component = "svc-toolbox-item-group";
+    parentItem.popupModel.cssClass += " toolbox-subtypes";
+    parentItem.popupModel.isFocusedContainer = false;
+    const popup = parentItem.popupModel as PopupModel;
+    popup.contentComponentName = "svc-toolbox-list";
+    popup.contentComponentData["toolbox"] = this;
+    popup.isFocusedContent = false;
+  }
+
   public addItem(item: IQuestionToolboxItem, index?: number) {
     this.correctItem(item);
     const action = this.getActionByItem(item);
@@ -894,13 +963,14 @@ export class QuestionToolbox
     const defaultCategories = useDefaultCategories ? this.getDefaultQuestionCategories() : {};
 
     for (var i = 0; i < questions.length; i++) {
-      var name = questions[i];
-      var question = ElementFactory.Instance.createElement(name, "q1");
+      const name = questions[i];
+      let question = ElementFactory.Instance.createElement(name, "q1");
       if (!question) {
         question = Serializer.createClass(name);
       }
-      var json = this.getQuestionJSON(question);
-      var title = editorLocalization.getString("qt." + name);
+      const json = this.getQuestionJSON(question);
+      delete json.name;
+      const title = editorLocalization.getString("qt." + name);
       const iconName = "icon-" + name;
       const item: IQuestionToolboxItem = {
         id: name,
@@ -908,7 +978,7 @@ export class QuestionToolbox
         iconName: iconName,
         title: title,
         tooltip: title,
-        className: "svc-toolbox__item svc-toolbox__item--" + iconName,
+        className: this.getItemClassNames(iconName),
         json: json,
         isCopied: false,
         category: (defaultCategories[name] || "")
@@ -944,6 +1014,13 @@ export class QuestionToolbox
     var items = instanceOwner.Instance["items"];
     return !!items ? items : [];
   }
+  private getItemClassNames(iconName?: string): string {
+    return new CssClassBuilder()
+      .append("svc-toolbox__item")
+      .append("svc-toolbox__item--has-icon", !!iconName)
+      .append("svc-toolbox__item--" + iconName, !!iconName)
+      .toString();
+  }
   private addItemFromJSON(json: any) {
     if (json.showInToolbox === false) return;
     const iconName: string = json.iconName ? json.iconName : QuestionToolbox.defaultIconName;
@@ -954,10 +1031,11 @@ export class QuestionToolbox
     if (!title) {
       title = json.name;
     }
-    var elementJson = json.defaultJSON ? json.defaultJSON : {};
+    var elementJson = json.defaultJSON ? JSON.parse(JSON.stringify(json.defaultJSON)) : {};
     if (!elementJson.type) {
       elementJson.type = json.name;
     }
+    delete elementJson.name;
     var category = json.category ? json.category : "";
     const item: IQuestionToolboxItem = <any>new Action(<any>{
       id: json.name,
@@ -965,7 +1043,7 @@ export class QuestionToolbox
       iconName: iconName,
       title: title,
       tooltip: title,
-      className: "svc-toolbox__item svc-toolbox__item--" + iconName,
+      className: this.getItemClassNames(iconName),
       json: elementJson,
       isCopied: false,
       category: category
@@ -1020,5 +1098,13 @@ export class QuestionToolbox
     return questions;
   }
 
+  public hideAllInnerPopups() {
+    this.actions.forEach(action => {
+      action.hidePopup();
+    });
+  }
+  public onScroll(model, event) {
+    this.hideAllInnerPopups();
+  }
   //public dispose(): void { } Don't we need to dispose toolbox?
 }

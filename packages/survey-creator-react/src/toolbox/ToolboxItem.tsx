@@ -1,12 +1,14 @@
 import {
   SurveyCreatorModel,
   editorLocalization,
-  IQuestionToolboxItem
+  IQuestionToolboxItem,
+  QuestionToolboxItem
 } from "survey-creator-core";
 import React, { CSSProperties } from "react";
 import { ToolboxToolViewModel } from "survey-creator-core";
 import {
   Action,
+  ActionContainer,
   Base,
   SurveyModel
 } from "survey-core";
@@ -18,8 +20,9 @@ import {
 import { CreatorModelElement } from "../ModelElement";
 
 export interface ISurveyCreatorToolboxItemProps {
-  item: IQuestionToolboxItem;
   creator: SurveyCreatorModel;
+  item: QuestionToolboxItem;
+  parentModel: ActionContainer;
   isCompact: boolean;
 }
 
@@ -33,7 +36,7 @@ export class SurveyCreatorToolboxTool extends CreatorModelElement<
     super(props);
   }
   protected createModel(props: any): void {
-    this.model = new ToolboxToolViewModel(props.item, props.creator);
+    this.model = new ToolboxToolViewModel(props.item, props.creator, props.parentModel);
   }
   protected getUpdatedModelProps(): string[] {
     return ["creator", "item"];
@@ -53,27 +56,33 @@ export class SurveyCreatorToolboxTool extends CreatorModelElement<
   }
 
   render(): JSX.Element {
-    const item = ((this.item as any) as Action);
-    const className = "svc-toolbox__tool " + (item.css || "") + (item.isVisible ? "" : " sv-action--hidden");
+    const item = this.item;
     const itemComponent = ReactElementFactory.Instance.createElement(
-      this.item.component || "svc-toolbox-item",
+      item.component || "svc-toolbox-item",
       {
-        item: this.item,
+        item: item,
         creator: this.creator,
+        parentModel: this.creator.toolbox,
         isCompact: this.isCompact
       }
     );
     return (
-      <div className={className} key={item.id}
-        onPointerDown={(event: any) => {
-          event.persist();
-          this.model.onPointerDown(event);
-        }}
-      >
-        <div className="sv-action__content">
-          {(item.needSeparator && !this.creator.toolbox.showCategoryTitles) ? (
-            <div className="svc-toolbox__category-separator"></div>
-          ) : null}
+      <div className={item.css} key={item.id}>
+        {(item.needSeparator && !this.creator.toolbox.showCategoryTitles) ? (
+          <div className="svc-toolbox__category-separator"></div>
+        ) : null}
+        <div className="sv-action__content"
+          onPointerDown={(event: any) => {
+            event.persist();
+            this.model.onPointerDown(event);
+          }}
+          onMouseOver={(event: any) => {
+            this.model.onMouseOver(item, event);
+          }}
+          onMouseLeave={(event: any) => {
+            this.model.onMouseLeave(item, event);
+          }}
+        >
           {itemComponent}
         </div>
       </div>
@@ -91,7 +100,7 @@ export class SurveyCreatorToolboxItem extends CreatorModelElement<
   }
   protected createModel(props: any): void {
     const toolboxItem: IQuestionToolboxItem = props.item;
-    this.model = new ToolboxToolViewModel(toolboxItem, props.creator);
+    this.model = new ToolboxToolViewModel(toolboxItem, props.creator, props.parentModel);
   }
   protected getUpdatedModelProps(): string[] {
     return ["creator", "item"];
@@ -119,7 +128,7 @@ export class SurveyCreatorToolboxItem extends CreatorModelElement<
         }}
       >
         <span className="svc-toolbox__item-container">
-          <SvgIcon size={24} iconName={this.item.iconName} title={this.item.tooltip}></SvgIcon>
+          {!!this.item.iconName ? <SvgIcon size={24} iconName={this.item.iconName} title={this.item.tooltip}></SvgIcon> : null}
         </span>
         {(this.props.isCompact ?
           <span className="svc-toolbox__item-banner svc-item__banner">

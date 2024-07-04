@@ -2107,6 +2107,7 @@ test("Check adorner actions responsivity after convert", async (t) => {
     await takeElementScreenshot("actions-on-converted-question.png", root.nth(0), t, comparer);
   });
 });
+
 test("Question adorner - collapsed", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1920, 1080);
@@ -2131,5 +2132,17 @@ test("Question adorner - collapsed", async (t) => {
     await t.click(qContent.nth(1), { offsetX: 10, offsetY: 10 });
     await t.click(qCollapseButton.filterVisible());
     await takeElementScreenshot("panel-adorner-collapsed.png", qContent.nth(1), t, comparer);
+  });
+});
+test("Question types with subtypes", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1000, 700);
+
+    await t
+      .click(Selector(".svc-page__question-type-selector"))
+      .hover(getListItemByText("Rating Scale").filterVisible())
+      .wait(400)
+      .hover(getListItemByText("Labels").nth(1));
+    await takeElementScreenshot("question-type-rating-subtypes.png", Selector(".sv-popup.sv-popup--dropdown").filterVisible(), t, comparer);
   });
 });

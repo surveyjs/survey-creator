@@ -1,3 +1,5 @@
+// This dictionary contains 65 untranslated or inherited localization strings.
+// These strings are commented out. Uncomment and edit them if you want to add your translations.
 import { editorLocalization } from "survey-creator-core";
 
 var persianStrings = {
@@ -598,6 +600,7 @@ var persianStrings = {
     allowCompleteSurveyAutomatic: "بررسی را به طور خودکار تکمیل کنید",
     showProgressBar: "نمایش نشانگر پیشرفت",
     questionTitleLocation: "محل عنوان سوال",
+    questionTitleWidth: "عرض عنوان سوال",
     requiredText: "سوالات نشان دار اجباری هستند",
     questionTitleTemplate: "قالب عنوان سوال، به صورت پیش فرض: '{no}. {require} {title}'",
     questionErrorLocation: "محل خطای سوال",
@@ -645,6 +648,7 @@ var persianStrings = {
     questionsOnPageMode: "ساختار نظرسنجی",
     maxTextLength: "حداکثر طول پاسخ (در کاراکترها)",
     maxOthersLength: "حداکثر طول توضیحات (در نویسهها)",
+    commentAreaRows: "ارتفاع منطقه نظر (در خطوط)",
     autoGrowComment: "گسترش خودکار منطقه نظر در صورت لزوم",
     allowResizeComment: "اجازه دادن به کاربران برای تغییر اندازه مناطق متن",
     textUpdateMode: "بههنگامسازی مقدار سؤال متن",
@@ -734,6 +738,7 @@ var persianStrings = {
     correctAnswer: "پاسخ صحیح",
     defaultPanelValue: "مقادیر پیشفرض",
     cells: "متن سلولی",
+    fileInputPlaceholder: "یک پرونده را انتخاب کنید یا پیوند پرونده را جایگذاری کنید...",
     keyName: "ستون کلید",
     itemvalue: {
       visibleIf: "این گزینه قابل مشاهده است اگر",
@@ -1220,6 +1225,9 @@ var persianStrings = {
     currencymask: {
       prefix: "سابق: $",
       suffix: "Ex.: دلار امریکا"
+    },
+    panelbase: {
+      questionTitleWidth: "سابق: 200 پیکسل"
     }
   },
   pehelp: {
@@ -1230,6 +1238,7 @@ var persianStrings = {
       enableIf: "از نماد چوب جادویی برای تنظیم یک قانون شرطی استفاده کنید که حالت فقط خواندنی را برای پانل غیرفعال می کند.",
       requiredIf: "از نماد چوب جادویی برای تنظیم یک قانون شرطی استفاده کنید که مانع از ارسال نظرسنجی می شود مگر اینکه حداقل یک سوال تو در تو پاسخ داشته باشد.",
       questionTitleLocation: "برای تمام سوالات در این پنل اعمال می شود. اگر می خواهید این تنظیم را لغو کنید، قوانین تراز عنوان را برای سوالات فردی تعریف کنید. گزینه \"Inherit\" به طور پیش فرض تنظیم سطح صفحه (در صورت تنظیم) یا سطح نظرسنجی (\"بالا\" را اعمال می کند).",
+      questionTitleWidth: "عرض ثابت را برای عناوین سؤال تنظیم می کند وقتی که انها در سمت چپ جعبه های سوال خود قرار دارند. مقادیر CSS را می پذیرد (px، ٪، in، pt و غیره).",
       questionErrorLocation: "مکان یک پیام خطا را در رابطه با تمام سوالات درون پانل تنظیم می کند. گزینه \"Inherit\" شامل تنظیمات سطح صفحه (در صورت تنظیم) یا سطح نظرسنجی است.",
       questionsOrder: "ترتیب اصلی سوالات را نگه می دارد یا انها را تصادفی می کند. گزینه \"Inherit\" شامل تنظیمات سطح صفحه (در صورت تنظیم) یا سطح نظرسنجی است.",
       page: "پانل را به انتهای صفحه انتخاب شده تغییر می دهد.",
@@ -1344,6 +1353,7 @@ var persianStrings = {
     questionsOrder: "ترتیب اصلی سوالات را نگه می دارد یا انها را تصادفی می کند. اثر این تنظیم فقط در تب Preview قابل مشاهده است.",
     maxTextLength: "فقط برای سوالات ورودی متن.",
     maxOthersLength: "فقط برای نظرات سوال.",
+    commentAreaRows: "تعداد خطوط نمایش داده شده در ناحیههای متن را برای نظرات سؤال تنظیم میکند. در ورودی طول می کشد تا خطوط بیشتر، نوار اسکرول به نظر می رسد.",
     autoGrowComment: "انتخاب کنید اگر شما می خواهید نظرات سوال و سوالات متن بلند به رشد خودکار در ارتفاع بر اساس طول متن وارد شده است.",
     allowResizeComment: "برای نظرات سوال و سوالات طولانی متن تنها.",
     calculatedValues: "متغیرهای سفارشی به عنوان متغیرهای متوسط یا کمکی مورد استفاده در محاسبات فرم عمل می کنند. انها ورودی های پاسخ دهنده را به عنوان مقادیر منبع می گیرند. هر متغیر سفارشی دارای یک نام منحصر به فرد و یک عبارت است که بر اساس ان است.",
@@ -1376,6 +1386,7 @@ var persianStrings = {
       enableIf: "از نماد چوب جادویی برای تنظیم یک قانون شرطی استفاده کنید که حالت فقط خواندنی را برای صفحه غیرفعال می کند.",
       requiredIf: "از نماد چوب جادویی برای تنظیم یک قانون شرطی استفاده کنید که مانع از ارسال نظرسنجی می شود مگر اینکه حداقل یک سوال تو در تو پاسخ داشته باشد.",
       questionTitleLocation: "به تمام سوالات موجود در این صفحه اعمال می شود. اگر می خواهید این تنظیمات را لغو کنید، قوانین تراز عنوان را برای سوالات یا پانل های فردی تعریف کنید. گزینه \"ارث\" تنظیم سطح نظرسنجی (\"بالا\" به طور پیش فرض) را اعمال می کند.",
+      questionTitleWidth: "عرض ثابت را برای عناوین سؤال تنظیم می کند وقتی که انها در سمت چپ جعبه های سوال خود قرار دارند. مقادیر CSS را می پذیرد (px، ٪، in، pt و غیره).",
       questionErrorLocation: "مکان یک پیام خطا را در رابطه با سؤال با ورودی نامعتبر تنظیم می کند. انتخاب بین: \"بالا\" - یک متن خطا در بالای جعبه سوال قرار می گیرد؛ \"پایین\" - یک متن خطا در پایین جعبه سوال قرار می گیرد. گزینه \"ارث\" تنظیم سطح نظرسنجی (\"بالا\" به طور پیش فرض) را اعمال می کند.",
       questionsOrder: "ترتیب اصلی سوالات را نگه می دارد یا انها را تصادفی می کند. گزینه \"ارث\" تنظیم سطح نظرسنجی (\"اصلی\" به طور پیش فرض) را اعمال می کند. اثر این تنظیم فقط در تب Preview قابل مشاهده است.",
       navigationButtonsVisibility: "قابلیت مشاهده دکمههای پیمایش را روی صفحه تنظیم میکند. گزینه \"به ارث بردن\" تنظیم سطح نظرسنجی را اعمال می کند که به طور پیش فرض به \"قابل مشاهده\" است."
@@ -1448,6 +1459,19 @@ var persianStrings = {
     currencymask: {
       prefix: "یک یا چند نماد قبل از مقدار نمایش داده می شود.",
       suffix: "یک یا چند نماد بعد از مقدار نمایش داده می شود."
+    },
+    theme: {
+      // isPanelless: "This setting applies only to questions outside of a panel.",
+      // primaryColor: "Sets a supplementary color that highlights key survey elements.",
+      // panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background.",
+      // questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background.",
+      // cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes.",
+      // "--sjs-general-backcolor-dim": "Sets the main background color of the survey."
+    },
+    header: {
+      // inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in.",
+      // textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels.",
+      // overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey."
     }
   },
   // Properties
@@ -1551,7 +1575,63 @@ var persianStrings = {
     allowCameraAccess: "اجازه دسترسی به دوربین",
     scaleColorMode: "مقیاس حالت رنگ",
     rateColorMode: "نرخ حالت رنگ",
-    copyDisplayValue: "رونوشت مقدار نمایش"
+    copyDisplayValue: "رونوشت مقدار نمایش",
+    // insensitive: "insensitive",
+    // state: "state",
+    // indent: "indent",
+    // titleLocation: "titleLocation",
+    // descriptionLocation: "descriptionLocation",
+    // hideNumber: "hideNumber",
+    // errorLocation: "errorLocation",
+    // isUnique: "isUnique",
+    // showInMultipleColumns: "showInMultipleColumns",
+    // totalAlignment: "totalAlignment",
+    // detailErrorLocation: "detailErrorLocation",
+    // inheritWidthFrom: "inheritWidthFrom",
+    // textAreaWidth: "textAreaWidth",
+    // textGlowEnabled: "textGlowEnabled",
+    // overlapEnabled: "overlapEnabled",
+    // backgroundImageOpacity: "backgroundImageOpacity",
+    // logoPositionX: "logoPositionX",
+    // logoPositionY: "logoPositionY",
+    // titlePositionX: "titlePositionX",
+    // titlePositionY: "titlePositionY",
+    // descriptionPositionX: "descriptionPositionX",
+    // descriptionPositionY: "descriptionPositionY",
+    // showNumber: "showNumber",
+    // progressBarInheritWidthFrom: "progressBarInheritWidthFrom",
+    // headerView: "headerView",
+    // choiceValuesFromQuestion: "choiceValuesFromQuestion",
+    // choiceTextsFromQuestion: "choiceTextsFromQuestion",
+    // refuseText: "refuseText",
+    // dontKnowText: "dontKnowText",
+    // cellComponent: "cellComponent",
+    // inputTextAlignment: "inputTextAlignment",
+    // maskSettings: "maskSettings",
+    // itemErrorLocation: "itemErrorLocation",
+    // signatureWidth: "signatureWidth",
+    // signatureHeight: "signatureHeight",
+    // signatureAutoScaleEnabled: "signatureAutoScaleEnabled",
+    // penMinWidth: "penMinWidth",
+    // penMaxWidth: "penMaxWidth",
+    // showPlaceholder: "showPlaceholder",
+    // placeholderReadOnly: "placeholderReadOnly",
+    // templateTitle: "templateTitle",
+    // templateTabTitle: "templateTabTitle",
+    // tabTitlePlaceholder: "tabTitlePlaceholder",
+    // templateDescription: "templateDescription",
+    // noEntriesText: "noEntriesText",
+    // newPanelPosition: "newPanelPosition",
+    // templateTitleLocation: "templateTitleLocation",
+    // templateErrorLocation: "templateErrorLocation",
+    // templateVisibleIf: "templateVisibleIf",
+    // saveMaskedValue: "saveMaskedValue",
+    // pattern: "pattern",
+    // allowNegativeValues: "allowNegativeValues",
+    // decimalSeparator: "decimalSeparator",
+    // thousandsSeparator: "thousandsSeparator",
+    // prefix: "prefix",
+    // suffix: "suffix"
   },
   theme: {
     advancedMode: "حالت پیشرفته",
@@ -2614,3 +2694,10 @@ editorLocalization.locales["fa"] = persianStrings;
 // paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "یک متن جایگزین برای عناوین برگه که زمانی اعمال می شود که الگوی عنوان برگه ارزش معنی داری تولید نمی کند."
 // theme.fontColor: "Font color" => "رنگ قلم"
 // theme.backgroundColor: "Background color" => "رنگ پسزمینه"
+// pe.questionTitleWidth: "Question title width" => "عرض عنوان سوال"
+// pe.fileInputPlaceholder: "Select a file or paste a file link..." => "یک پرونده را انتخاب کنید یا پیوند پرونده را جایگذاری کنید..."
+// panelbase.questionTitleWidth: "Ex.: 200px" => "سابق: 200 پیکسل"
+// panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "عرض ثابت را برای عناوین سؤال تنظیم می کند وقتی که انها در سمت چپ جعبه های سوال خود قرار دارند. مقادیر CSS را می پذیرد (px، ٪، in، pt و غیره)."
+// page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "عرض ثابت را برای عناوین سؤال تنظیم می کند وقتی که انها در سمت چپ جعبه های سوال خود قرار دارند. مقادیر CSS را می پذیرد (px، ٪، in، pt و غیره)."
+// pe.commentAreaRows: "Comment area height (in lines)" => "ارتفاع منطقه نظر (در خطوط)"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "تعداد خطوط نمایش داده شده در ناحیههای متن را برای نظرات سؤال تنظیم میکند. در ورودی طول می کشد تا خطوط بیشتر، نوار اسکرول به نظر می رسد."

@@ -18,7 +18,7 @@ export class SurveyQuestionFileEditor extends SurveyQuestionText {
         <input
           disabled={this.isDisplayMode}
           className={this.questionFile.cssClasses.control}
-          placeholder={this.questionFile.placeholder}
+          placeholder={this.questionFile.renderedPlaceholder}
           ref={(input) => (this.setControl(input))}
           autoComplete="off"
           type="text"

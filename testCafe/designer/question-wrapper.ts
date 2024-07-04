@@ -102,7 +102,7 @@ test("Single input question wrapper action convert on hover", async (t) => {
 
     .hover(getToolboxItemByText("Single-Line Input"))
     .click(getToolboxItemByText("Single-Line Input"))
-    .click(Selector(".svc-tab-designer"), { offsetX: 5, offsetY: 5 })
+    .click(Selector(".svc-tab-designer"), { offsetX: 150, offsetY: 5 })
     .expect(Selector(".svc-question__content.svc-question__content--selected").exists).notOk()
     .hover(".svc-question__content", { offsetX: 5, offsetY: 5 })
     .wait(500)

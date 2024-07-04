@@ -61,7 +61,10 @@ export class SearchManagerToolbox extends SearchManager {
     if (!!oldValue != !!newValue) this.toolbox.lockScrollBar(!!newValue);
     this.toolbox.items.forEach(item => item.visible = item.hasText(newValue));
     this.toolbox.showPlaceholder = !this.toolbox.items.filter(i => i.visible).length;
-    this.toolbox.categories.forEach(category => category.forceExpand = !!newValue);
+    this.toolbox.categories.forEach(category => {
+      category.forceExpand = !!newValue;
+      category.empty = category.items.filter(item => item.visible).length == 0;
+    });
   }
 
   public clearFilterString(): void {

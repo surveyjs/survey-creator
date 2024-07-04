@@ -1,3 +1,5 @@
+// This dictionary contains 65 untranslated or inherited localization strings.
+// These strings are commented out. Uncomment and edit them if you want to add your translations.
 import { editorLocalization } from "survey-creator-core";
 
 var italianTranslation = {
@@ -598,6 +600,7 @@ var italianTranslation = {
     allowCompleteSurveyAutomatic: "Completa automaticamente il sondaggio",
     showProgressBar: "Visualizza barra di avanzamento",
     questionTitleLocation: "Posizione del titolo della domanda",
+    questionTitleWidth: "Larghezza del titolo della domanda",
     requiredText: "Simbolo domanda obbligatoria, ad esempio (*)",
     questionTitleTemplate: "Template titolo della domanda, il default è: '{no}. {require} {title}'",
     questionErrorLocation: "Posizione del messaggio di errore",
@@ -645,6 +648,7 @@ var italianTranslation = {
     questionsOnPageMode: "Struttura sondaggio",
     maxTextLength: "Lunghezza massima della risposta (in caratteri)",
     maxOthersLength: "Lunghezza massima del commento (in caratteri)",
+    commentAreaRows: "Altezza dell'area di commento (in righe)",
     autoGrowComment: "Espansione automatica dell'area dei commenti, se necessaria",
     allowResizeComment: "Consenti agli utenti di ridimensionare le aree di testo",
     textUpdateMode: "Aggiornare il valore del testo della domanda",
@@ -734,6 +738,7 @@ var italianTranslation = {
     correctAnswer: "Risposta corretta",
     defaultPanelValue: "Valori di default",
     cells: "Testi Celle",
+    fileInputPlaceholder: "Seleziona un file o incolla un collegamento a un file...",
     keyName: "Colonna chiave",
     itemvalue: {
       visibleIf: "Rendi visibile l'opzione se",
@@ -1220,6 +1225,9 @@ var italianTranslation = {
     currencymask: {
       prefix: "Es.: $",
       suffix: "Es.: USD"
+    },
+    panelbase: {
+      questionTitleWidth: "Es.: 200px"
     }
   },
   pehelp: {
@@ -1230,6 +1238,7 @@ var italianTranslation = {
       enableIf: "Utilizzare l'icona della bacchetta magica per impostare una regola condizionale che disabiliti la modalità di sola lettura per il pannello.",
       requiredIf: "Utilizza l'icona della bacchetta magica per impostare una regola condizionale che impedisca l'invio dell'indagine a meno che almeno una domanda nidificata non abbia una risposta.",
       questionTitleLocation: "Si applica a tutte le domande all'interno di questo pannello. Se si desidera ignorare questa impostazione, definire le regole di allineamento del titolo per le singole domande. L'opzione \"Eredita\" applica l'impostazione a livello di pagina (se impostata) o a livello di indagine (\"In alto\" per impostazione predefinita).",
+      questionTitleWidth: "Imposta una larghezza coerente per i titoli delle domande quando sono allineati a sinistra delle caselle delle domande. Accetta valori CSS (px, %, in, pt, ecc.).",
       questionErrorLocation: "Imposta la posizione di un messaggio di errore in relazione a tutte le domande all'interno del pannello. L'opzione \"Eredita\" applica l'impostazione a livello di pagina (se impostata) o a livello di indagine.",
       questionsOrder: "Mantiene l'ordine originale delle domande o le rende casuali. L'opzione \"Eredita\" applica l'impostazione a livello di pagina (se impostata) o a livello di indagine.",
       page: "Riposiziona il pannello alla fine di una pagina selezionata.",
@@ -1344,6 +1353,7 @@ var italianTranslation = {
     questionsOrder: "Mantiene l'ordine originale delle domande o le rende casuali. L'effetto di questa impostazione è visibile solo nella scheda Anteprima.",
     maxTextLength: "Solo per domande di immissione di testo.",
     maxOthersLength: "Solo per i commenti alle domande.",
+    commentAreaRows: "Imposta il numero di righe visualizzate nelle aree di testo per i commenti alle domande. Nell'input occupa più righe, viene visualizzata la barra di scorrimento.",
     autoGrowComment: "Selezionare questa opzione se si desidera che i commenti alle domande e le domande di testo lungo aumentino automaticamente in altezza in base alla lunghezza del testo inserito.",
     allowResizeComment: "Solo per i commenti alle domande e le domande a testo lungo.",
     calculatedValues: "Le variabili personalizzate fungono da variabili intermedie o ausiliarie utilizzate nei calcoli dei moduli. Accettano gli input dei rispondenti come valori di origine. Ogni variabile personalizzata ha un nome univoco e un'espressione su cui si basa.",
@@ -1376,6 +1386,7 @@ var italianTranslation = {
       enableIf: "Utilizzare l'icona della bacchetta magica per impostare una regola condizionale che disabilita la modalità di sola lettura per la pagina.",
       requiredIf: "Utilizza l'icona della bacchetta magica per impostare una regola condizionale che impedisca l'invio dell'indagine a meno che almeno una domanda nidificata non abbia una risposta.",
       questionTitleLocation: "Si applica a tutte le domande all'interno di questa pagina. Se si desidera ignorare questa impostazione, definire le regole di allineamento dei titoli per le singole domande o pannelli. L'opzione \"Eredita\" applica l'impostazione a livello di indagine (\"In alto\" per impostazione predefinita).",
+      questionTitleWidth: "Imposta una larghezza coerente per i titoli delle domande quando sono allineati a sinistra delle caselle delle domande. Accetta valori CSS (px, %, in, pt, ecc.).",
       questionErrorLocation: "Imposta la posizione di un messaggio di errore in relazione alla domanda con input non valido. Scegli tra: \"In alto\" - un testo di errore viene posizionato nella parte superiore della casella della domanda; \"In basso\": un testo di errore viene inserito nella parte inferiore della casella della domanda. L'opzione \"Eredita\" applica l'impostazione a livello di indagine (\"In alto\" per impostazione predefinita).",
       questionsOrder: "Mantiene l'ordine originale delle domande o le rende casuali. L'opzione \"Eredita\" applica l'impostazione a livello di indagine (\"Originale\" per impostazione predefinita). L'effetto di questa impostazione è visibile solo nella scheda Anteprima.",
       navigationButtonsVisibility: "Imposta la visibilità dei pulsanti di navigazione nella pagina. L'opzione \"Eredita\" applica l'impostazione a livello di indagine, che per impostazione predefinita è \"Visibile\"."
@@ -1448,6 +1459,19 @@ var italianTranslation = {
     currencymask: {
       prefix: "Uno o più simboli da visualizzare prima del valore.",
       suffix: "Uno o più simboli da visualizzare dopo il valore."
+    },
+    theme: {
+      // isPanelless: "This setting applies only to questions outside of a panel.",
+      // primaryColor: "Sets a supplementary color that highlights key survey elements.",
+      // panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background.",
+      // questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background.",
+      // cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes.",
+      // "--sjs-general-backcolor-dim": "Sets the main background color of the survey."
+    },
+    header: {
+      // inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in.",
+      // textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels.",
+      // overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey."
     }
   },
   // Properties
@@ -1551,7 +1575,63 @@ var italianTranslation = {
     allowCameraAccess: "Consenti accesso alla videocamera",
     scaleColorMode: "Modalità scala colore",
     rateColorMode: "Valuta la modalità colore",
-    copyDisplayValue: "Copia valore di visualizzazione"
+    copyDisplayValue: "Copia valore di visualizzazione",
+    // insensitive: "insensitive",
+    // state: "state",
+    // indent: "indent",
+    // titleLocation: "titleLocation",
+    // descriptionLocation: "descriptionLocation",
+    // hideNumber: "hideNumber",
+    // errorLocation: "errorLocation",
+    // isUnique: "isUnique",
+    // showInMultipleColumns: "showInMultipleColumns",
+    // totalAlignment: "totalAlignment",
+    // detailErrorLocation: "detailErrorLocation",
+    // inheritWidthFrom: "inheritWidthFrom",
+    // textAreaWidth: "textAreaWidth",
+    // textGlowEnabled: "textGlowEnabled",
+    // overlapEnabled: "overlapEnabled",
+    // backgroundImageOpacity: "backgroundImageOpacity",
+    // logoPositionX: "logoPositionX",
+    // logoPositionY: "logoPositionY",
+    // titlePositionX: "titlePositionX",
+    // titlePositionY: "titlePositionY",
+    // descriptionPositionX: "descriptionPositionX",
+    // descriptionPositionY: "descriptionPositionY",
+    // showNumber: "showNumber",
+    // progressBarInheritWidthFrom: "progressBarInheritWidthFrom",
+    // headerView: "headerView",
+    // choiceValuesFromQuestion: "choiceValuesFromQuestion",
+    // choiceTextsFromQuestion: "choiceTextsFromQuestion",
+    // refuseText: "refuseText",
+    // dontKnowText: "dontKnowText",
+    // cellComponent: "cellComponent",
+    // inputTextAlignment: "inputTextAlignment",
+    // maskSettings: "maskSettings",
+    // itemErrorLocation: "itemErrorLocation",
+    // signatureWidth: "signatureWidth",
+    // signatureHeight: "signatureHeight",
+    // signatureAutoScaleEnabled: "signatureAutoScaleEnabled",
+    // penMinWidth: "penMinWidth",
+    // penMaxWidth: "penMaxWidth",
+    // showPlaceholder: "showPlaceholder",
+    // placeholderReadOnly: "placeholderReadOnly",
+    // templateTitle: "templateTitle",
+    // templateTabTitle: "templateTabTitle",
+    // tabTitlePlaceholder: "tabTitlePlaceholder",
+    // templateDescription: "templateDescription",
+    // noEntriesText: "noEntriesText",
+    // newPanelPosition: "newPanelPosition",
+    // templateTitleLocation: "templateTitleLocation",
+    // templateErrorLocation: "templateErrorLocation",
+    // templateVisibleIf: "templateVisibleIf",
+    // saveMaskedValue: "saveMaskedValue",
+    // pattern: "pattern",
+    // allowNegativeValues: "allowNegativeValues",
+    // decimalSeparator: "decimalSeparator",
+    // thousandsSeparator: "thousandsSeparator",
+    // prefix: "prefix",
+    // suffix: "suffix"
   },
   theme: {
     advancedMode: "Modalità avanzata",
@@ -2417,3 +2497,10 @@ editorLocalization.locales["it"] = italianTranslation;
 // paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "Testo di fallback per i titoli delle schede che si applica quando il modello del titolo della scheda non produce un valore significativo."
 // theme.fontColor: "Font color" => "Colore del carattere"
 // theme.backgroundColor: "Background color" => "Colore di sfondo"
+// pe.questionTitleWidth: "Question title width" => "Larghezza del titolo della domanda"
+// pe.fileInputPlaceholder: "Select a file or paste a file link..." => "Seleziona un file o incolla un collegamento a un file..."
+// panelbase.questionTitleWidth: "Ex.: 200px" => "Es.: 200px"
+// panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Imposta una larghezza coerente per i titoli delle domande quando sono allineati a sinistra delle caselle delle domande. Accetta valori CSS (px, %, in, pt, ecc.)."
+// page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Imposta una larghezza coerente per i titoli delle domande quando sono allineati a sinistra delle caselle delle domande. Accetta valori CSS (px, %, in, pt, ecc.)."
+// pe.commentAreaRows: "Comment area height (in lines)" => "Altezza dell'area di commento (in righe)"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "Imposta il numero di righe visualizzate nelle aree di testo per i commenti alle domande. Nell'input occupa più righe, viene visualizzata la barra di scorrimento."

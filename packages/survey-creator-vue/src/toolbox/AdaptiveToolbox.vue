@@ -1,13 +1,17 @@
 <template>
-  <div :class="toolbox.classNames" ref="root">
+  <div
+    :class="toolbox.classNames"
+    ref="root"
+  >
     <div @focusout="(e) => toolbox.focusOut(e)" class="svc-toolbox__panel">
-      <div class="svc-toolbox__scroller">
+      <div class="svc-toolbox__scroller" @scroll="(e) => { toolbox.onScroll(toolbox, e); }">
         <div v-if="toolbox.showSearch" class="svc-toolbox__search-container">
           <template v-if="toolbox.isCompactRendered">
             <svc-toolbox-tool
               :creator="creator"
               key="searchitem"
               :item="toolbox.searchItem"
+              :parentModel="toolbox"
               :isCompact="toolbox.isCompactRendered"
             ></svc-toolbox-tool>
             <div
@@ -30,13 +34,14 @@
           </template>
           <template v-if="toolbox.showInSingleCategory">
             <div class="svc-toolbox__category">
-              <svc-toolbox-tool
-                v-for="(item, index) in renderedActions"
-                :creator="creator"
-                :key="index"
-                :item="item"
-                :isCompact="toolbox.isCompactRendered"
-              ></svc-toolbox-tool>
+              <template v-for="(item, index) in renderedActions" :key="index">
+                <svc-toolbox-tool
+                  :creator="creator"
+                  :item="item"
+                  :parentModel="toolbox"
+                  :isCompact="toolbox.isCompactRendered"
+                ></svc-toolbox-tool>
+              </template>
             </div>
           </template>
         </div>

@@ -1,3 +1,5 @@
+// This dictionary contains 65 untranslated or inherited localization strings.
+// These strings are commented out. Uncomment and edit them if you want to add your translations.
 import { editorLocalization } from "survey-creator-core";
 
 export var turkishStrings = {
@@ -598,6 +600,7 @@ export var turkishStrings = {
     allowCompleteSurveyAutomatic: "Anketi otomatik olarak tamamlama",
     showProgressBar: "İlerleme çubuğunu göster",
     questionTitleLocation: "Soru başlığı konumu",
+    questionTitleWidth: "Soru başlığı genişliği",
     requiredText: "Zorunlu soru sembolü",
     questionTitleTemplate: "Soru başlığı şablonu, varsayılan değer: '{no}. {require} {title}'",
     questionErrorLocation: "Soru hatası konumu",
@@ -645,6 +648,7 @@ export var turkishStrings = {
     questionsOnPageMode: "Anket yapısı",
     maxTextLength: "Maksimum metin uzunluğu",
     maxOthersLength: "Maksimum diğerleri uzunluğu",
+    commentAreaRows: "Yorum alanı yüksekliği (satırlar halinde)",
     autoGrowComment: "Gerekirse yorum alanını otomatik olarak genişletin",
     allowResizeComment: "Kullanıcıların metin alanlarını yeniden boyutlandırmasına izin verme",
     textUpdateMode: "Metin sorusu değerini güncelleme",
@@ -734,6 +738,7 @@ export var turkishStrings = {
     correctAnswer: "Doğru Cevap",
     defaultPanelValue: "Varsayılan Değerler",
     cells: "Hücre Metinleri",
+    fileInputPlaceholder: "Bir dosya seçin veya bir dosya bağlantısı yapıştırın...",
     keyName: "Anahtar sütunu",
     itemvalue: {
       visibleIf: "Aşağıdaki durumlarda seçeneği görünür hale getirin",
@@ -1220,6 +1225,9 @@ export var turkishStrings = {
     currencymask: {
       prefix: "Ör.: $",
       suffix: "Ör.: USD"
+    },
+    panelbase: {
+      questionTitleWidth: "Ör.: 200 piksel"
     }
   },
   pehelp: {
@@ -1230,6 +1238,7 @@ export var turkishStrings = {
       enableIf: "Panelin salt okunur modunu devre dışı bırakan koşullu bir kural ayarlamak için sihirli değnek simgesini kullanın.",
       requiredIf: "En az bir iç içe geçmiş sorunun yanıtı olmadığı sürece anket gönderimini engelleyen koşullu bir kural ayarlamak için sihirli değnek simgesini kullanın.",
       questionTitleLocation: "Bu paneldeki tüm sorular için geçerlidir. Bu ayarı geçersiz kılmak istiyorsanız, tek tek sorular için başlık hizalama kuralları tanımlayın. \"Devral\" seçeneği, sayfa düzeyi (ayarlanmışsa) veya anket düzeyi ayarını (varsayılan olarak \"Üst\") uygular.",
+      questionTitleWidth: "Soru kutularının soluna hizalandıklarında soru başlıkları için tutarlı genişlik ayarlar. CSS değerlerini (px, %, in, pt, vb.) kabul eder.",
       questionErrorLocation: "Paneldeki tüm sorularla ilgili olarak bir hata mesajının konumunu ayarlar. \"Devral\" seçeneği, sayfa düzeyi (ayarlanmışsa) veya anket düzeyi ayarını uygular.",
       questionsOrder: "Soruların orijinal sırasını korur veya rastgele hale getirir. \"Devral\" seçeneği, sayfa düzeyi (ayarlanmışsa) veya anket düzeyi ayarını uygular.",
       page: "Paneli seçili sayfanın sonuna yeniden konumlandırır.",
@@ -1344,6 +1353,7 @@ export var turkishStrings = {
     questionsOrder: "Soruların orijinal sırasını korur veya rastgele hale getirir. Bu ayarın etkisi yalnızca Önizleme sekmesinde görünür.",
     maxTextLength: "Yalnızca metin girişi soruları için.",
     maxOthersLength: "Yalnızca soru yorumları içindir.",
+    commentAreaRows: "Soru yorumları için metin alanlarında görüntülenen satır sayısını ayarlar. Girişte daha fazla satır alır, kaydırma çubuğu görünür.",
     autoGrowComment: "Soru yorumlarının ve Uzun Metin sorularının yüksekliğinin girilen metin uzunluğuna göre otomatik olarak büyümesini istiyorsanız seçin.",
     allowResizeComment: "Yalnızca soru yorumları ve Uzun Metin soruları için.",
     calculatedValues: "Özelleştirilebilir değişkenler, form hesaplamalarında kullanılan ara veya yardımcı değişkenler olarak işlev görür. Yanıtlayan girdilerini kaynak değerler olarak alırlar. Her özelleştirilebilen değişkenin benzersiz bir adı ve temel aldığı bir ifadesi vardır.",
@@ -1376,6 +1386,7 @@ export var turkishStrings = {
       enableIf: "Sayfanın salt okunur modunu devre dışı bırakan koşullu bir kural ayarlamak için sihirli değnek simgesini kullanın.",
       requiredIf: "En az bir iç içe geçmiş sorunun yanıtı olmadığı sürece anket gönderimini engelleyen koşullu bir kural ayarlamak için sihirli değnek simgesini kullanın.",
       questionTitleLocation: "Bu sayfadaki tüm sorular için geçerlidir. Bu ayarı geçersiz kılmak istiyorsanız, tek tek sorular veya paneller için başlık hizalama kuralları tanımlayın. \"Devral\" seçeneği, anket düzeyindeki ayarı uygular (varsayılan olarak \"Üst\").",
+      questionTitleWidth: "Soru kutularının soluna hizalandıklarında soru başlıkları için tutarlı genişlik ayarlar. CSS değerlerini (px, %, in, pt, vb.) kabul eder.",
       questionErrorLocation: "Geçersiz girişi olan soruyla ilgili olarak bir hata mesajının konumunu ayarlar. Şunlar arasından seçim yapın: \"Üst\" - soru kutusunun en üstüne bir hata metni yerleştirilir; \"Alt\" - soru kutusunun altına bir hata metni yerleştirilir. \"Devral\" seçeneği, anket düzeyindeki ayarı uygular (varsayılan olarak \"Üst\").",
       questionsOrder: "Soruların orijinal sırasını korur veya rastgele hale getirir. \"Devral\" seçeneği, anket düzeyindeki ayarı (varsayılan olarak \"Orijinal\") uygular. Bu ayarın etkisi yalnızca Önizleme sekmesinde görünür.",
       navigationButtonsVisibility: "Sayfadaki gezinme düğmelerinin görünürlüğünü ayarlar. \"Devral\" seçeneği, varsayılan olarak \"Görünür\" olan anket düzeyi ayarını uygular."
@@ -1448,6 +1459,19 @@ export var turkishStrings = {
     currencymask: {
       prefix: "Değerden önce görüntülenecek bir veya birkaç sembol.",
       suffix: "Değerden sonra görüntülenecek bir veya birkaç sembol."
+    },
+    theme: {
+      // isPanelless: "This setting applies only to questions outside of a panel.",
+      // primaryColor: "Sets a supplementary color that highlights key survey elements.",
+      // panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background.",
+      // questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background.",
+      // cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes.",
+      // "--sjs-general-backcolor-dim": "Sets the main background color of the survey."
+    },
+    header: {
+      // inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in.",
+      // textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels.",
+      // overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey."
     }
   },
   // Properties
@@ -1551,7 +1575,63 @@ export var turkishStrings = {
     allowCameraAccess: "Kamera erişimine izin ver",
     scaleColorMode: "Renk modunu ölçekle",
     rateColorMode: "Renk modunu ayarla",
-    copyDisplayValue: "Görüntüleme değerini kopyala"
+    copyDisplayValue: "Görüntüleme değerini kopyala",
+    // insensitive: "insensitive",
+    // state: "state",
+    // indent: "indent",
+    // titleLocation: "titleLocation",
+    // descriptionLocation: "descriptionLocation",
+    // hideNumber: "hideNumber",
+    // errorLocation: "errorLocation",
+    // isUnique: "isUnique",
+    // showInMultipleColumns: "showInMultipleColumns",
+    // totalAlignment: "totalAlignment",
+    // detailErrorLocation: "detailErrorLocation",
+    // inheritWidthFrom: "inheritWidthFrom",
+    // textAreaWidth: "textAreaWidth",
+    // textGlowEnabled: "textGlowEnabled",
+    // overlapEnabled: "overlapEnabled",
+    // backgroundImageOpacity: "backgroundImageOpacity",
+    // logoPositionX: "logoPositionX",
+    // logoPositionY: "logoPositionY",
+    // titlePositionX: "titlePositionX",
+    // titlePositionY: "titlePositionY",
+    // descriptionPositionX: "descriptionPositionX",
+    // descriptionPositionY: "descriptionPositionY",
+    // showNumber: "showNumber",
+    // progressBarInheritWidthFrom: "progressBarInheritWidthFrom",
+    // headerView: "headerView",
+    // choiceValuesFromQuestion: "choiceValuesFromQuestion",
+    // choiceTextsFromQuestion: "choiceTextsFromQuestion",
+    // refuseText: "refuseText",
+    // dontKnowText: "dontKnowText",
+    // cellComponent: "cellComponent",
+    // inputTextAlignment: "inputTextAlignment",
+    // maskSettings: "maskSettings",
+    // itemErrorLocation: "itemErrorLocation",
+    // signatureWidth: "signatureWidth",
+    // signatureHeight: "signatureHeight",
+    // signatureAutoScaleEnabled: "signatureAutoScaleEnabled",
+    // penMinWidth: "penMinWidth",
+    // penMaxWidth: "penMaxWidth",
+    // showPlaceholder: "showPlaceholder",
+    // placeholderReadOnly: "placeholderReadOnly",
+    // templateTitle: "templateTitle",
+    // templateTabTitle: "templateTabTitle",
+    // tabTitlePlaceholder: "tabTitlePlaceholder",
+    // templateDescription: "templateDescription",
+    // noEntriesText: "noEntriesText",
+    // newPanelPosition: "newPanelPosition",
+    // templateTitleLocation: "templateTitleLocation",
+    // templateErrorLocation: "templateErrorLocation",
+    // templateVisibleIf: "templateVisibleIf",
+    // saveMaskedValue: "saveMaskedValue",
+    // pattern: "pattern",
+    // allowNegativeValues: "allowNegativeValues",
+    // decimalSeparator: "decimalSeparator",
+    // thousandsSeparator: "thousandsSeparator",
+    // prefix: "prefix",
+    // suffix: "suffix"
   },
   theme: {
     advancedMode: "Gelişmiş mod",
@@ -2654,3 +2734,10 @@ editorLocalization.locales["tr"] = turkishStrings;
 // paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "Sekme başlığı deseni anlamlı bir değer üretmediğinde geçerli olan sekme başlıkları için bir geri dönüş metni."
 // theme.fontColor: "Font color" => "Yazı tipi rengi"
 // theme.backgroundColor: "Background color" => "Arka plan rengi"
+// pe.questionTitleWidth: "Question title width" => "Soru başlığı genişliği"
+// pe.fileInputPlaceholder: "Select a file or paste a file link..." => "Bir dosya seçin veya bir dosya bağlantısı yapıştırın..."
+// panelbase.questionTitleWidth: "Ex.: 200px" => "Ör.: 200 piksel"
+// panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Soru kutularının soluna hizalandıklarında soru başlıkları için tutarlı genişlik ayarlar. CSS değerlerini (px, %, in, pt, vb.) kabul eder."
+// page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Soru kutularının soluna hizalandıklarında soru başlıkları için tutarlı genişlik ayarlar. CSS değerlerini (px, %, in, pt, vb.) kabul eder."
+// pe.commentAreaRows: "Comment area height (in lines)" => "Yorum alanı yüksekliği (satırlar halinde)"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "Soru yorumları için metin alanlarında görüntülenen satır sayısını ayarlar. Girişte daha fazla satır alır, kaydırma çubuğu görünür."
