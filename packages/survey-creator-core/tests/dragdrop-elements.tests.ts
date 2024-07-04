@@ -1134,7 +1134,7 @@ test("Support onDragDropAllow, Bug#4572", (): any => {
   expect(counter).toBe(2);
   expect(ddHelper["allowDropHere"]).toBeTruthy();
 });
-test("Support onDragDropAllow&allowMultipleElementsInRow, #5621", (): any => {
+test("Support onDragDropAllow&allowDropNextToAnother, #5621", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
     "logoPosition": "right",
@@ -1160,7 +1160,7 @@ test("Support onDragDropAllow&allowMultipleElementsInRow, #5621", (): any => {
     ]
   };
   creator.onDragDropAllow.add((sender, options) => {
-    options.allowMultipleElementsInRow = false;
+    (<any>options).allowDropNextToAnother = false;
   });
   const ddHelper: any = creator.dragDropSurveyElements;
   const q1 = creator.survey.getQuestionByName("question1");

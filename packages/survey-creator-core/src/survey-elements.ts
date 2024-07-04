@@ -288,7 +288,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
   }
   private isAllowDragOver(dropTarget: ISurveyElement, dragOverLocation: DragTypeOverMeEnum): boolean {
     if (!this.survey || this.survey.onDragDropAllow.isEmpty) return true;
-    const allowOptions: DragDropAllowEvent = {
+    const allowOptions: any = {
       allow: true,
       parent: this.parentElement,
       source: this.draggedElement,
@@ -298,7 +298,8 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       target: <IElement>dropTarget,
       insertAfter: undefined,
       insertBefore: undefined,
-      allowMultipleElementsInRow: true
+      allowMultipleElementsInRow: true,
+      allowDropNextToAnother: true
     };
     if (dragOverLocation === DragTypeOverMeEnum.Bottom || dragOverLocation === DragTypeOverMeEnum.Right) {
       allowOptions.insertAfter = <IElement>dropTarget;
@@ -307,7 +308,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       allowOptions.insertBefore = <IElement>dropTarget;
     }
     this.survey.onDragDropAllow.fire(this.survey, allowOptions);
-    if(!allowOptions.allowMultipleElementsInRow) {
+    if(!allowOptions.allowDropNextToAnother) {
       if(dragOverLocation === DragTypeOverMeEnum.Left) {
         this.dragOverLocation = DragTypeOverMeEnum.Top;
       }
