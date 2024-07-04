@@ -129,20 +129,10 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this.topActionContainer.sizeMode = "small";
     this.topActionContainer.setItems([{
       id: "collapse",
-      iconName: "icon-collapse-v_16x16",
+      iconName: new ComputedUpdater<string>(() => this.collapsed ? "icon-restore_16x16" : "icon-collapse-detail-light_16x16") as any,
       iconSize: 16,
-      visible: new ComputedUpdater<boolean>(() => !this.collapsed),
       action: () => {
-        this.collapsed = true;
-      }
-    },
-    {
-      id: "expand",
-      iconName: "icon-expand-v_16x16",
-      iconSize: 16,
-      visible: new ComputedUpdater<boolean>(() => this.collapsed),
-      action: () => {
-        this.collapsed = false;
+        this.collapsed = !this.collapsed;
       }
     }]);
     this.collapsed = this.designerStateManager?.getElementState(this.surveyElement).collapsed;

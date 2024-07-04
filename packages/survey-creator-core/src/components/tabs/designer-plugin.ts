@@ -51,6 +51,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     });
     this.toolboxTab = this.creator.sidebar.addTab("toolbox", "svc-toolbox", creator);
     this.designerStateManager = new DesignerStateManager();
+    this.designerStateManager.initForSurvey(this.creator.survey);
     this.creator.onSurveyInstanceCreated.add((s, o) => {
       if (o.reason == "designer") {
         this.designerStateManager.initForSurvey(o.survey);

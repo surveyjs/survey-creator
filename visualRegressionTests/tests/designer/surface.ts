@@ -2134,6 +2134,38 @@ test("Question adorner - collapsed", async (t) => {
     await takeElementScreenshot("panel-adorner-collapsed.png", qContent.nth(1), t, comparer);
   });
 });
+
+test("Question adorner - collapsed mobile", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(500, 1080);
+    const json = {
+      elements: [
+        {
+          type: "text",
+          name: "question1"
+        },
+        {
+          type: "panel",
+          name: "panel1"
+        }
+      ]
+    };
+    await setJSON(json);
+    const qContent = Selector(".svc-question__content");
+    const qCollapseButton = Selector(".svc-question__content #collapse");
+    await t.click(qContent.nth(0), { offsetX: 10, offsetY: 10 });
+    await t.click(qCollapseButton.filterVisible());
+    await takeElementScreenshot("question-adorner-collapsed.png", qContent.nth(0), t, comparer);
+    await t.click(qContent.nth(1), { offsetX: 10, offsetY: 10 });
+    await t.click(qCollapseButton.filterVisible());
+    await takeElementScreenshot("panel-adorner-collapsed.png", qContent.nth(1), t, comparer);
+
+    await t.click(Selector("body"), { offsetX: 1, offsetY: 1 });
+    await takeElementScreenshot("question-adorner-collapsed-unselected.png", qContent.nth(0), t, comparer);
+    await takeElementScreenshot("panel-adorner-collapsed-unselected.png", qContent.nth(1), t, comparer);
+  });
+});
+
 test("Question types with subtypes", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1000, 700);

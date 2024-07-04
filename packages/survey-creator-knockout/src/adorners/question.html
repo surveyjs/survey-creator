@@ -13,31 +13,29 @@
     <!-- /ko -->
     <!-- ko component: { name: 'sv-template-renderer', params: { componentData: null, templateData: templateData } } -->
     <!-- /ko -->
-    <div class="svc-question__placeholders">
-        <!-- ko if: koIsEmptyElement() && !$data.placeholderComponentData -->
-        <div class="svc-panel__placeholder_frame-wrapper">
-          <div class="svc-panel__placeholder_frame">
-            <div class="svc-panel__placeholder" data-bind="text: placeholderText"></div>
-          </div>
-        </div>
-        <!-- /ko -->
-        <!-- ko if: koIsEmptyElement() && !!$data.placeholderComponentData -->
-        <!-- ko let: { question: placeholderComponentData.data }  -->
-        <!-- ko component: { name: 'sv-template-renderer', params: { componentData: null, templateData: placeholderComponentData } } -->
-        <!-- /ko -->
-        <!-- /ko -->
-        <!-- /ko -->
-
-      <!-- ko if: adornerComponent -->
-      <!-- ko component: { name: adornerComponent, params: { model: $data } } -->
-      <!-- /ko -->
-      <!-- /ko -->
-
-      <!-- ko if: isBannerShowing -->
-      <!-- ko component: { name: 'svc-question-banner', params: $data } -->
-      <!-- /ko -->
-      <!-- /ko -->
+    <!-- ko if: koIsEmptyElement() && !$data.placeholderComponentData -->
+    <div class="svc-panel__placeholder_frame-wrapper">
+      <div class="svc-panel__placeholder_frame">
+        <div class="svc-panel__placeholder" data-bind="text: placeholderText"></div>
+      </div>
     </div>
+    <!-- /ko -->
+    <!-- ko if: koIsEmptyElement() && !!$data.placeholderComponentData -->
+    <!-- ko let: { question: placeholderComponentData.data }  -->
+    <!-- ko component: { name: 'sv-template-renderer', params: { componentData: null, templateData: placeholderComponentData } } -->
+    <!-- /ko -->
+    <!-- /ko -->
+    <!-- /ko -->
+
+    <!-- ko if: adornerComponent -->
+    <!-- ko component: { name: adornerComponent, params: { model: $data } } -->
+    <!-- /ko -->
+    <!-- /ko -->
+
+    <!-- ko if: isBannerShowing -->
+    <!-- ko component: { name: 'svc-question-banner', params: $data } -->
+    <!-- /ko -->
+    <!-- /ko -->
     <div class="svc-question__content-actions" data-bind="event: {focusin: koSelect}">
       <!-- ko component: { name: 'sv-action-bar', params: { model: actionContainer, handleClick: false } } -->
       <!-- /ko -->
