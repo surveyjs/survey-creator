@@ -756,8 +756,8 @@ export class PropertyJSONGenerator {
     if (!!this.parentProperty) {
       titleClass += "@" + this.parentProperty.name;
     }
-    if(this.obj.getType() === "matrixdropdowncolumn" && (<any>this.obj).getDynamicType() !== "question") {
-      if(!Serializer.findProperty(this.obj.getType(), prop.name)) {
+    if (this.obj.getType() === "matrixdropdowncolumn" && (<any>this.obj).getDynamicType() !== "question") {
+      if (!Serializer.findProperty(this.obj.getType(), prop.name)) {
         titleClass = (<any>this.obj).getDynamicType();
       }
     }
@@ -871,6 +871,7 @@ export class PropertyGridModel {
           PropertyGridEditorCollection.onSetup(this.obj, q, q.property, this.options);
         });
         survey.checkErrorsMode = "onValueChanging";
+        survey.questionErrorComponent = "svc-question-error";
       }
     });
     if (!this.obj) return;
@@ -1570,7 +1571,7 @@ export class PropertyGridEditorNumber extends PropertyGridEditor {
       if (prop.defaultValue !== undefined) {
         options.value = prop.defaultValue;
       } else {
-        if(!prop.isRequired && options.value === "") {
+        if (!prop.isRequired && options.value === "") {
           options.value = undefined;
         }
         else {

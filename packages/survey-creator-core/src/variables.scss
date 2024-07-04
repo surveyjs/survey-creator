@@ -10,14 +10,10 @@ $secondary-backcolor-semi-light: var(--sjs-secondary-backcolor-semi-light, rgba(
 $secondary-forecolor: var(--sjs-secondary-forecolor, #fff);
 $secondary-forecolor-light: var(--sjs-secondary-forecolor-light, rgba(#fff, 0.25));
 
-$editor-background: var(
-  --sjs-editorpanel-backcolor,
-  var(--sjs-editor-background, var(--sjs-general-backcolor-dim-light, var(--background-dim-light, #f9f9f9)))
-);
-$question-background: var(
-  --sjs-questionpanel-backcolor,
-  var(--sjs-question-background, var(--sjs-general-backcolor, var(--background, #fff)))
-);
+$editor-background: var(--sjs-editorpanel-backcolor,
+    var(--sjs-editor-background, var(--sjs-general-backcolor-dim-light, var(--background-dim-light, #f9f9f9))));
+$question-background: var(--sjs-questionpanel-backcolor,
+    var(--sjs-question-background, var(--sjs-general-backcolor, var(--background, #fff))));
 
 $background: var(--sjs-general-backcolor, var(--background, #fff));
 $background-dim: var(--sjs-general-backcolor-dim, var(--background-dim, #f3f3f3));
@@ -37,10 +33,11 @@ $border: var(--sjs-border-default, var(--border, #d6d6d6));
 $border-light: var(--sjs-border-light, var(--border-light, #eaeaea));
 $border-inside: var(--sjs-border-inside, var(--border-inside, rgba(0, 0, 0, 0.16)));
 
-$shadow-small: var(--sjs-shadow-small, 0px 1px 2px 0px rgba(0, 0, 0, 0.15));
-$shadow-medium: var(--sjs-shadow-medium, 0px 2px 6px 0px rgba(0, 0, 0, 0.1));
-$shadow-large: var(--sjs-shadow-large, 0px 8px 16px 0px rgba(0, 0, 0, 0.1));
+$shadow-small: var(--ctr-shadow-small-offset-x, 0px) var(--ctr-shadow-small-offset-y, 1px) var(--ctr-shadow-small-blur, 2px) var(--ctr-shadow-small-spread, 0px) var(--ctr-shadow-small-color, rgba(0, 0, 0, 0.15));
+$shadow-medium: var(--ctr-shadow-medium-offset-x, 0px) var(--ctr-shadow-medium-offset-y, 2px) var(--ctr-shadow-medium-blur, 6px) var(--ctr-shadow-medium-spread, 0px) var(--ctr-shadow-medium-color, rgba(0, 0, 0, 0.10));
+$shadow-large: var(--ctr-shadow-large-offset-x, 0px) var(--ctr-shadow-large-offset-y, 8px) var(--ctr-shadow-large-blur, 16px) var(--ctr-shadow-large-spread, 0px) var(--ctr-shadow-large-color, rgba(0, 0, 0, 0.10));
 $shadow-inner: var(--sjs-shadow-inner, inset 0px 1px 2px 0px rgba(0, 0, 0, 0.15));
+$shadow-x-large: var(--ctr-shadow-x-large-offset-x, 0px) var(--ctr-shadow-x-large-offset-y, 0px) var(--ctr-shadow-x-large-blur, 0px) var(--ctr-shadow-x-large-spread, 0px) var(--ctr-shadow-x-large-color, rgba(0, 0, 0, 0.10));
 
 $red: var(--sjs-special-red, var(--red, #e60a3e));
 $red-light: var(--sjs-special-red-light, var(--red-light, rgba(230, 10, 62, 0.1)));
@@ -61,11 +58,14 @@ $base-unit: var(--sjs-base-unit, var(--base-unit, 8px));
 
 $sd-panel-normal-min-width: 496px;
 $sd-panel-medium-min-width: 176px;
+
 @function calcSize($multiplier) {
   @if $multiplier ==1 {
     $result: #{$base-unit};
     @return $result;
-  } @else {
+  }
+
+  @else {
     $result: calc(#{$multiplier} * (#{$base-unit}));
     @return $result;
   }
@@ -154,18 +154,22 @@ $tab-min-height: var(--tab-min-height, auto);
 }
 
 @mixin disableAnimations {
+
   .sd-row--fade-out,
   .sd-row--fade-in {
     animation: none;
   }
+
   .sd-element-wrapper--fade-out,
   .sd-element-wrapper--fade-in {
     animation: none;
   }
+
   .sd-element__content--fade-in,
   .sd-element__content--fade-out {
     animation: none;
   }
+
   .sd-paneldynamic__panel-wrapper--fade-in,
   .sd-paneldynamic__panel-wrapper--fade-out,
   .sd-paneldynamic__panel-wrapper--fade-out-left,
@@ -174,6 +178,7 @@ $tab-min-height: var(--tab-min-height, auto);
   .sd-paneldynamic__panel-wrapper--fade-in-right {
     animation: none;
   }
+
   .sd-table__row--fade-out,
   .sd-table__row--fade-in {
     animation: none;
