@@ -465,6 +465,18 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
       }
       this.setupCreatorToolbox(sender);
     });
+    creator.onDragDropAllow.add((sender, options) => {
+      options["allowDropNextToAnother"] = false;
+      const target: any = options.target;
+      const src: any = options.draggedElement;
+      if(!target || !src) return;
+      if(src.isPanel) {
+        options.allow = target.isPanel && (!!options.insertAfter || !!options.insertBefore);
+      }
+      if(src.isQuestion) {
+        options.allow = target.isQuestion || (!options.insertAfter && !options.insertBefore);
+      }
+    });
   }
   private updateCreatorJSON(json: any): any {
     if(!json || !json.pages || !json.pages[0] || !json.pages[0].elements) return;
