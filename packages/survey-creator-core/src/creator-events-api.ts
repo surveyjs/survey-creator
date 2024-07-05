@@ -830,7 +830,7 @@ export interface DragDropAllowEvent {
   /**
    * A Boolean property that you can set to `false` if you want to disallow placing `draggedElement` on the same line with any other survey element.
    */
-  allowDropNextToAnother: boolean;
+  allowDropNextToAnother?: boolean;
   /**
    * A Boolean property that you can set to `false` if you want to cancel the drag and drop operation.
    */
