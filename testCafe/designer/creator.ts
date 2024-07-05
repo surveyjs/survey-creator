@@ -30,7 +30,7 @@ test("Select survey on deleting the last question", async t => {
     .wait(2000)
     .expect(Selector(".sv-string-viewer").withExactText("Show the title").exists).notOk();
 });
-test("Do not select the deleting question", async t => {
+test("Do not select the deleting question if it was not selected", async t => {
   await setJSON({
     "elements": [
       { "type": "text", "name": "q1" },
