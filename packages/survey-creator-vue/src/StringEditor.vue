@@ -12,7 +12,7 @@
       <span class="svc-string-editor__input">
         <span
           role="textbox"
-          v-if="!locString.hasHtml"
+          v-if="safeEdit"
           class="sv-string-editor"
           spellcheck="false"
           @focus="onFocus"
@@ -32,7 +32,7 @@
         ></span>
         <span
           role="textbox"
-          v-if="locString.hasHtml"
+          v-if="!safeEdit"
           class="sv-string-editor sv-string-editor--html"
           spellcheck="false"
           @focus="onFocus"
@@ -45,7 +45,7 @@
           @click="edit"
           :aria-placeholder="placeholder"
           :contenteditable="contentEditable"
-          v-html="editValue"
+          v-html="locString.renderedHtml"
           ref="root"
         ></span>
         <sv-character-counter
@@ -107,13 +107,9 @@ const baseModel = useCreatorModel(
   }
 );
 
-const editValue = computed<string>(
-  () =>
-    (baseModel.value?.focused &&
-      baseModel.value.editAsText &&
-      locString.value.text) ||
-    (renderedHtml.value as string)
-);
+const safeEdit = computed<boolean>(() => baseModel.value?.safeEdit);
+const editValue = computed<string>(() => baseModel.value?.editValue);
+
 const errorText = computed(() => baseModel.value?.errorText);
 const className = computed(() => {
   return baseModel.value?.className(locString.value.renderedHtml);

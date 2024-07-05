@@ -399,6 +399,14 @@ export class StringEditorViewModelBase extends Base {
     this.focused = false;
     window?.getSelection().removeAllRanges();
   }
+
+  public get safeEdit(): boolean {
+    return !this.locString.hasHtml || this.focused && this.editAsText;
+  }
+  public get editValue(): string {
+    return this.focused && this.editAsText && this.locString.text || this.locString.renderedHtml;
+  }
+
   private getClearedText(target: HTMLElement): string {
     const html = target.innerHTML;
     const text = target.innerText;
@@ -418,7 +426,7 @@ export class StringEditorViewModelBase extends Base {
     if (mdText) {
       clearedText = mdText;
     } else {
-      let txt = this.locString.hasHtml ? html : text;
+      let txt = this.locString.hasHtml && !this.editAsText ? html : text;
       if (!this.locString.allowLineBreaks) txt = clearNewLines(txt);
       clearedText = txt;
     }
