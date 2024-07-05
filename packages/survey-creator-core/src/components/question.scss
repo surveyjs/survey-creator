@@ -490,6 +490,7 @@ svc-question,
 
 .svc-question__adorner--collapsed {
   .svc-question__content {
+    flex-grow: 0;
     padding-bottom: calcSize(4);
     .sd-element__header,
     .sd-element--complex > .sd-element__header {
