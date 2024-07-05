@@ -755,6 +755,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       },
       { name: "maxTextLength", tab: "question" },
       { name: "maxOthersLength", tab: "question" },
+      { name: "commentAreaRows", tab: "question" },
       { name: "autoGrowComment", tab: "question" },
       { name: "allowResizeComment", tab: "question" },
       { name: "showPageTitles", tab: "pages" },

@@ -1,3 +1,5 @@
+// This dictionary contains 65 untranslated or inherited localization strings.
+// These strings are commented out. Uncomment and edit them if you want to add your translations.
 import { editorLocalization } from "survey-creator-core";
 
 export var jaStrings = {
@@ -646,6 +648,7 @@ export var jaStrings = {
     questionsOnPageMode: "調査体制",
     maxTextLength: "回答の最大長 (文字数)",
     maxOthersLength: "コメントの最大長 (文字数)",
+    commentAreaRows: "コメント領域の高さ (行単位)",
     autoGrowComment: "必要に応じてコメント領域を自動展開する",
     allowResizeComment: "ユーザーがテキスト領域のサイズを変更できるようにする",
     textUpdateMode: "テキストの質問値を更新する",
@@ -1350,6 +1353,7 @@ export var jaStrings = {
     questionsOrder: "質問の元の順序を維持するか、ランダム化します。この設定の効果は、「プレビュー」タブにのみ表示されます。",
     maxTextLength: "テキスト入力の質問専用です。",
     maxOthersLength: "質問コメント専用です。",
+    commentAreaRows: "質問コメントのテキスト領域に表示される行数を設定します。入力がより多くの行を占めると、スクロールバーが表示されます。",
     autoGrowComment: "質問のコメントと長いテキストの質問の高さを、入力したテキストの長さに基づいて自動的に拡大する場合に選択します。",
     allowResizeComment: "質問コメントとテキスト(長文)の質問のみ。",
     calculatedValues: "カスタム変数は、フォーム計算で使用される中間変数または補助変数として機能します。回答者の入力をソース値として受け取ります。各カスタム変数には、一意の名前と基になる式があります。",
@@ -1455,6 +1459,19 @@ export var jaStrings = {
     currencymask: {
       prefix: "値の前に表示される 1 つまたは複数のシンボル。",
       suffix: "値の後に表示される 1 つまたは複数の記号。"
+    },
+    theme: {
+      // isPanelless: "This setting applies only to questions outside of a panel.",
+      // primaryColor: "Sets a supplementary color that highlights key survey elements.",
+      // panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background.",
+      // questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background.",
+      // cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes.",
+      // "--sjs-general-backcolor-dim": "Sets the main background color of the survey."
+    },
+    header: {
+      // inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in.",
+      // textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels.",
+      // overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey."
     }
   },
   // Properties
@@ -1558,7 +1575,63 @@ export var jaStrings = {
     allowCameraAccess: "カメラへのアクセスを許可する",
     scaleColorMode: "スケールカラーモード",
     rateColorMode: "レートカラーモード",
-    copyDisplayValue: "表示値をコピー"
+    copyDisplayValue: "表示値をコピー",
+    // insensitive: "insensitive",
+    // state: "state",
+    // indent: "indent",
+    // titleLocation: "titleLocation",
+    // descriptionLocation: "descriptionLocation",
+    // hideNumber: "hideNumber",
+    // errorLocation: "errorLocation",
+    // isUnique: "isUnique",
+    // showInMultipleColumns: "showInMultipleColumns",
+    // totalAlignment: "totalAlignment",
+    // detailErrorLocation: "detailErrorLocation",
+    // inheritWidthFrom: "inheritWidthFrom",
+    // textAreaWidth: "textAreaWidth",
+    // textGlowEnabled: "textGlowEnabled",
+    // overlapEnabled: "overlapEnabled",
+    // backgroundImageOpacity: "backgroundImageOpacity",
+    // logoPositionX: "logoPositionX",
+    // logoPositionY: "logoPositionY",
+    // titlePositionX: "titlePositionX",
+    // titlePositionY: "titlePositionY",
+    // descriptionPositionX: "descriptionPositionX",
+    // descriptionPositionY: "descriptionPositionY",
+    // showNumber: "showNumber",
+    // progressBarInheritWidthFrom: "progressBarInheritWidthFrom",
+    // headerView: "headerView",
+    // choiceValuesFromQuestion: "choiceValuesFromQuestion",
+    // choiceTextsFromQuestion: "choiceTextsFromQuestion",
+    // refuseText: "refuseText",
+    // dontKnowText: "dontKnowText",
+    // cellComponent: "cellComponent",
+    // inputTextAlignment: "inputTextAlignment",
+    // maskSettings: "maskSettings",
+    // itemErrorLocation: "itemErrorLocation",
+    // signatureWidth: "signatureWidth",
+    // signatureHeight: "signatureHeight",
+    // signatureAutoScaleEnabled: "signatureAutoScaleEnabled",
+    // penMinWidth: "penMinWidth",
+    // penMaxWidth: "penMaxWidth",
+    // showPlaceholder: "showPlaceholder",
+    // placeholderReadOnly: "placeholderReadOnly",
+    // templateTitle: "templateTitle",
+    // templateTabTitle: "templateTabTitle",
+    // tabTitlePlaceholder: "tabTitlePlaceholder",
+    // templateDescription: "templateDescription",
+    // noEntriesText: "noEntriesText",
+    // newPanelPosition: "newPanelPosition",
+    // templateTitleLocation: "templateTitleLocation",
+    // templateErrorLocation: "templateErrorLocation",
+    // templateVisibleIf: "templateVisibleIf",
+    // saveMaskedValue: "saveMaskedValue",
+    // pattern: "pattern",
+    // allowNegativeValues: "allowNegativeValues",
+    // decimalSeparator: "decimalSeparator",
+    // thousandsSeparator: "thousandsSeparator",
+    // prefix: "prefix",
+    // suffix: "suffix"
   },
   theme: {
     advancedMode: "詳細モード",
@@ -2670,3 +2743,5 @@ editorLocalization.locales["ja"] = jaStrings;
 // panelbase.questionTitleWidth: "Ex.: 200px" => "例:200px"
 // panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "質問タイトルが質問ボックスの左側に配置されている場合に、質問タイトルの幅を一定に設定します。CSS 値 (px、%、in、pt など) を受け入れます。"
 // page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "質問タイトルが質問ボックスの左側に配置されている場合に、質問タイトルの幅を一定に設定します。CSS 値 (px、%、in、pt など) を受け入れます。"
+// pe.commentAreaRows: "Comment area height (in lines)" => "コメント領域の高さ (行単位)"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "質問コメントのテキスト領域に表示される行数を設定します。入力がより多くの行を占めると、スクロールバーが表示されます。"

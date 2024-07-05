@@ -97,6 +97,10 @@
           "Title": "Carry Forward Responses"
         },
         {
+          "Name": "end-user-guide-pipe-selected-choices-to-dynamic-matrix",
+          "Title": "Pipe Selected Choices to a Dynamic Matrix"
+        },
+        {
           "Name": "end-user-guide-add-navigation-elements-to-form",
           "Title": "Form Navigation"
         },
@@ -115,6 +119,10 @@
         {
           "Name": "end-user-guide-how-to-add-image-or-video-choice-question-to-form",
           "Title": "Add Image and Video Choice Questions"
+        },
+        {
+          "Name": "end-user-guide-dynamic-tab-title-format",
+          "Title": "Configure Dynamic Tab Titles in Dynamic Panel"
         },
         {
           "Name": "end-user-guide-how-to-create-transfer-list",

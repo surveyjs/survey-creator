@@ -94,7 +94,9 @@ test("Page navigator hover", async t => {
   const pageHoverSelector = Selector(".svc-page-navigator-item__banner").withExactText("page2");
 
   await t
-    .hover(Selector(".svc-page-navigator-item__dot[title=\"page2\"]"))
+    .wait(10)
+    .expect(Selector(".svc-page-navigator-item-content").filterVisible().count).eql(2)
+    .hover(Selector(".svc-page-navigator-item-content").nth(1))
     .expect(pageHoverSelector.visible).ok();
   const zIndex = await pageHoverSelector.getStyleProperty("z-index");
   await t
