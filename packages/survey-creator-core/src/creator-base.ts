@@ -2223,6 +2223,7 @@ export class SurveyCreatorModel extends Base
       }
     );
   }
+  public addNewQuestionToEnd: boolean = true;
   protected doClickQuestionCore(
     element: IElement,
     modifiedType: string = "ADDED_FROM_TOOLBOX",
@@ -2253,8 +2254,12 @@ export class SurveyCreatorModel extends Base
       }
       parent = selectedElement.parent;
       if (index < 0) {
-        index = parent.elements.indexOf(selectedElement);
-        if (index > -1) index++;
+        if(this.addNewQuestionToEnd) {
+          index = parent.elements.length;
+        } else {
+          index = parent.elements.indexOf(selectedElement);
+          if (index > -1) index++;
+        }
       }
     }
     if (panel) {
