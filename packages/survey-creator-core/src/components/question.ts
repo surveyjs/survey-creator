@@ -526,8 +526,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   }
   protected duplicate(): void {
     setTimeout(() => {
-      var newElement = this.creator.fastCopyQuestion(this.surveyElement);
-      this.creator.selectElement(newElement);
+      this.creator.fastCopyQuestion(this.surveyElement, true);
     }, 1);
   }
   addNewQuestion(): void {

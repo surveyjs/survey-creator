@@ -2390,11 +2390,12 @@ export class SurveyCreatorModel extends Base
   }
 
   /**
-   * Creates a copy of a specified question and inserts the copy next to this question.
+   * Creates a copy of a specified question, inserts the copy next to this question and optionally select it in the designer.
    * @param question A question to copy.
+   * @param selectNewElement Select a new element if true
    * @returns The instance of a new question.
    */
-  public fastCopyQuestion(question: Base): IElement {
+  public fastCopyQuestion(question: Base, selectNewElement?: boolean): IElement {
     var newElement = this.copyElement(question);
     var index = !!question["parent"]
       ? question["parent"].elements.indexOf(question) + 1
@@ -2406,6 +2407,9 @@ export class SurveyCreatorModel extends Base
       }
     }
     this.doClickQuestionCore(newElement, "ELEMENT_COPIED", index, question["parent"]);
+    if(selectNewElement) {
+      this.selectElement(newElement);
+    }
     return newElement;
   }
   /**
@@ -2847,8 +2851,9 @@ export class SurveyCreatorModel extends Base
   }
 
   protected deletePanelOrQuestion(obj: Base): void {
+    const changeSelection = obj === this.selectedElement;
     var parent = obj["parent"];
-    var elements = parent.elements;
+    const elements = parent.elements;
     var objIndex = elements.indexOf(obj);
     if (objIndex == elements.length - 1) {
       objIndex--;
@@ -2860,7 +2865,9 @@ export class SurveyCreatorModel extends Base
     if (parent.isPage && (this.pageEditMode === "single" || elements.length === 0)) {
       parent = this.survey;
     }
-    this.selectElement(objIndex > -1 ? elements[objIndex] : parent);
+    if(changeSelection) {
+      this.selectElement(objIndex > -1 ? elements[objIndex] : parent);
+    }
   }
   hiddenProperties: any = {};
   protected onCanShowObjectProperty(

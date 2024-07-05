@@ -4032,6 +4032,48 @@ test("Remove carry-forward property on deleting a question", (): any => {
   creator.deleteElement(q1);
   expect(q2.choicesFromQuestion).toBeFalsy();
 });
+test("Keep selection on deleting another question, #5634", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" },
+      { type: "text", name: "q3" }
+    ]
+  };
+  let counter = 0;
+  creator.onSelectedElementChanged.add((sender, options) => {
+    counter ++;
+  });
+  creator.selectQuestionByName("q1");
+  expect(counter).toBe(1);
+  expect(creator.selectedElementName).toEqual("q1");
+  const q2 = creator.survey.getQuestionByName("q2");
+  creator.deleteElement(q2);
+  expect(creator.selectedElementName).toEqual("q1");
+  expect(counter).toBe(1);
+});
+test("Do not select a duplicated question if it is not selected, #5634", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" },
+      { type: "text", name: "q3" }
+    ]
+  };
+  let counter = 0;
+  creator.onSelectedElementChanged.add((sender, options) => {
+    counter ++;
+  });
+  creator.selectQuestionByName("q1");
+  expect(counter).toBe(1);
+  expect(creator.selectedElementName).toEqual("q1");
+  const q2 = creator.survey.getQuestionByName("q2");
+  creator.fastCopyQuestion(q2, true);
+  expect(creator.selectedElementName).toEqual("question1");
+  expect(counter).toBe(2);
+});
 test("Do not focus title on mobile", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
