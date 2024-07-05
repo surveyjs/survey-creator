@@ -40,13 +40,12 @@ test("Do not select the deleting question", async t => {
   });
   await t
     .maximizeWindow()
-    .expect(getVisibleElement(".svc-question__content").length).eql(3)
-    .click(getVisibleElement(".svc-question__content").withText("q1"), { offsetX: 100, offsetY: 100 })
-    .expect(getVisibleElement(".svc-question__content--selected").withText("q1").exists).ok()
-    .hover(getVisibleElement(".svc-question__content").withText("q2"), { offsetX: 100, offsetY: 100 })
-    .click(getVisibleElement(".svc-question__content").withText("q2").withText("Delete"))
-    .expect(getVisibleElement(".svc-question__content").length).eql(2)
-    .expect(getVisibleElement(".svc-question__content--selected").withText("q1").exists).ok();
+    .click(getVisibleElement(".svc-question__content").find("span").withText("q1"), { offsetX: 100, offsetY: 5 })
+    .expect(getVisibleElement(".svc-question__content--selected").find("span").withText("q1").exists).ok()
+    .hover(getVisibleElement(".svc-question__content").withText("q2"), { offsetX: 50, offsetY: 50 })
+    .click(getVisibleElement(".svc-question__content").withText("q2").find("span").withText("Delete"))
+    .expect(getVisibleElement(".svc-question__content").find("span").withText("q2").exists).notOk()
+    .expect(getVisibleElement(".svc-question__content--selected").find("span").withText("q1").exists).ok();
 });
 test("Keyboard tab navigation between questions", async (t) => {
   const json = {
