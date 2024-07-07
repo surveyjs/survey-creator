@@ -3622,6 +3622,9 @@ export class SurveyCreatorModel extends Base
    * @see toolboxLocation
    */
   @property({ defaultValue: "right" }) sidebarLocation: "left" | "right";
+
+  @property({ defaultValue: "never" }) expandCollapseButtonMode?: "never" | "onhover" | "always";
+
   selectFromStringEditor: boolean;
 
   @property({

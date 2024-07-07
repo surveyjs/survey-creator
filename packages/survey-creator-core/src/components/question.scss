@@ -452,11 +452,11 @@ svc-question,
 
 // EO reset styles for drag-drop-ghost-survey-element to avoid layout jumping while dragging
 
-.svc-hovered>.svc-question__content>.svc-question__drag-area {
+.svc-hovered>.svc-question__content>.svc-question__drag-area>.svc-question__drag-element {
   visibility: visible;
 }
 
-.svc-question__content.svc-question__content--selected>.svc-question__drag-area {
+.svc-question__content.svc-question__content--selected>.svc-question__drag-area>.svc-question__drag-element {
   visibility: visible;
   z-index: 1;
 }
@@ -519,7 +519,6 @@ svc-question,
   cursor: move;
   top: 0;
   left: 0;
-  visibility: hidden;
   height: calcSize(3.5);
   width: 100%;
   display: flex;
@@ -531,6 +530,7 @@ svc-question,
   width: 100%;
   height: calcSize(4);
   opacity: 0.5;
+  visibility: hidden;
 
   use {
     fill: $foreground-light;
@@ -924,6 +924,7 @@ svc-question,
   position: absolute;
   top: 0;
   right: 0;
+  visibility: hidden;
   .sv-action-bar-item {
     use {
       fill: $foreground-dim-light;
@@ -935,5 +936,12 @@ svc-question,
     &:hover, &:focus {
       opacity: initial;
     }
+  }
+}
+
+.svc-question__adorner--collapse-onhover.svc-hovered,
+.svc-question__adorner--collapse-always {
+  .svc-question__top-actions {
+    visibility: visible;
   }
 }
