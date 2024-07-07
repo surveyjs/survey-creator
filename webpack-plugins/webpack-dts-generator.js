@@ -7,7 +7,7 @@ module.exports = function DtsGeneratorProgressPlugin(options) {
     if (progress === 1) {
       console.log("typings start");
       console.log("typescript start");
-      child_process.execSync("tsc --p tsconfig.typing.json");
+      child_process.execSync("tsc --p tsconfig.typing.json", { stdio: "inherit" });
       console.log("typescript end");
 
       const importName = options.importName || "entries/index";
