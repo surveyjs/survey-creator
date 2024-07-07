@@ -2,7 +2,8 @@
   data-bind="css: rootCss(), attr: { 'data-sv-drop-target-survey-element': element.name || null }, event: { mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }">
   <div data-bind="click: koSelect, key2click: { disableTabStop: true }, clickBubble: false, css: css()">
     <!-- ko if: allowDragging -->
-    <div class="svc-question__drag-area" data-bind="event: { pointerdown: (model, event)=>{ onPointerDown(event) } }">
+    <div class="svc-question__drag-area"
+      data-bind="event: { pointerdown: (model, event)=>{ onPointerDown(event); return true; } }">
       <!-- ko component: { name: 'sv-svg-icon', params: { css: 'svc-question__drag-element', iconName: 'icon-drag-area-indicator_24x16', size: 24 } } -->
       <!-- /ko -->
       <div class="svc-question__top-actions">
