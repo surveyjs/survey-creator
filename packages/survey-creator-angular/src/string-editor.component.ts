@@ -63,12 +63,6 @@ export class StringEditorComponent extends CreatorModelComponent<StringEditorVie
   public get errorText(): string {
     return this.baseModel.errorText;
   }
-  public get safeEdit(): boolean {
-    return this.baseModel.safeEdit;
-  }
-  public get editValue(): string {
-    return this.baseModel.editValue;
-  }
   onChangeHandler = (): void => {
     this.detectChanges();
   }

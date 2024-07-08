@@ -12,7 +12,7 @@
       <span class="svc-string-editor__input">
         <span
           role="textbox"
-          v-if="!locString.renderedHtml"
+          v-if="!locString.hasHtml"
           class="sv-string-editor"
           spellcheck="false"
           @focus="onFocus"
@@ -25,14 +25,14 @@
           @compositionend="baseModel?.onCompositionEnd"
           @mouseup="baseModel?.onMouseUp"
           @click="edit"
-          :textContent="editValue"
+          :textContent="renderedHtml"
           :aria-placeholder="placeholder"
           :contenteditable="contentEditable"
           ref="root"
         ></span>
         <span
           role="textbox"
-          v-if="locString.renderedHtml"
+          v-if="locString.hasHtml"
           class="sv-string-editor sv-string-editor--html"
           spellcheck="false"
           @focus="onFocus"
@@ -45,7 +45,7 @@
           @click="edit"
           :aria-placeholder="placeholder"
           :contenteditable="contentEditable"
-          v-html="editValue"
+          v-html="renderedHtml"
           ref="root"
         ></span>
         <sv-character-counter
@@ -107,7 +107,6 @@ const baseModel = useCreatorModel(
   }
 );
 
-const editValue = computed<string>(() => baseModel.value?.editValue);
 
 const errorText = computed(() => baseModel.value?.errorText);
 const className = computed(() => {

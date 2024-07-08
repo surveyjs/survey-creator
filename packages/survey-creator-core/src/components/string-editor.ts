@@ -314,6 +314,11 @@ export class StringEditorViewModelBase extends Base {
     if(this.creator) {
       this.creator.selectFromStringEditor = true;
     }
+
+    if (this.locString.hasHtml && this.editAsText) {
+      event.target.innerText = event.target.textContent = this.locString.text;
+    }
+
     event.target.parentElement.click();
     event.target.spellcheck = true;
     event.target.setAttribute("tabindex", -1);
@@ -398,18 +403,6 @@ export class StringEditorViewModelBase extends Base {
     }
     this.focused = false;
     window?.getSelection().removeAllRanges();
-  }
-
-  public get safeEdit(): boolean {
-    return !this.locString.hasHtml || this.focused && this.editAsText;
-  }
-  public get editValue(): string {
-    if (this.focused && this.editAsText && this.locString.hasHtml) {
-      var el = document.createElement("div");
-      el.innerText = el.textContent = this.locString.text;
-      return el.innerHTML;
-    }
-    return this.locString.renderedHtml;
   }
 
   private getClearedText(target: HTMLElement): string {

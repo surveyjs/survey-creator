@@ -39,12 +39,6 @@ export class StringEditorViewModel {
   public get koHasHtml(): boolean {
     return this.locString.koHasHtml();
   }
-  public get safeEdit(): boolean {
-    return this.baseModel.safeEdit;
-  }
-  public get editValue(): string {
-    return this.baseModel.editValue;
-  }
   public get koRenderedHtml(): string {
     return this.locString.koRenderedHtml();
   }
