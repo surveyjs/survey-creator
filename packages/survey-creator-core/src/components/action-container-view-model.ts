@@ -96,7 +96,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   @property({
     onSet: (val, target: SurveyElementAdornerBase<T>) => {
       target.renderedCollapsed = val;
-      if (target.designerStateManager) target.designerStateManager.getElementState(target.surveyElement).collapsed = val;
+      if (target.designerStateManager && target.surveyElement) target.designerStateManager.getElementState(target.surveyElement).collapsed = val;
     }
   }) collapsed: boolean;
   @property() renderedCollapsed: boolean;
@@ -110,7 +110,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   ) {
     super();
     this.designerStateManager = (creator.getPlugin("designer") as TabDesignerPlugin)?.designerStateManager;
-    this.designerStateManager?.initForElement(this.surveyElement);
+    this.designerStateManager?.initForElement(surveyElement);
     this.selectedPropPageFunc = (sender: Base, options: any) => {
       if (options.name === "isSelectedInDesigner") {
         this.onElementSelectedChanged(options.newValue);
@@ -135,7 +135,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
         this.collapsed = !this.collapsed;
       }
     }]);
-    this.collapsed = this.designerStateManager?.getElementState(this.surveyElement).collapsed;
+    this.collapsed = !!surveyElement && (this.designerStateManager?.getElementState(surveyElement).collapsed);
     this.setSurveyElement(surveyElement);
     this.creator.sidebar.onPropertyChanged.add(this.sidebarFlyoutModeChangedFunc);
     this.setShowAddQuestionButton(true);

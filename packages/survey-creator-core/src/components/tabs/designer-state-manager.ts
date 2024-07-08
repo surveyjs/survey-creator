@@ -11,7 +11,7 @@ export class DesignerStateManager {
   private elementState: ElementStateMap = {};
   private pageState: ElementStateMap = {};
   private getStateMapForElement(element: SurveyElement) {
-    return element.isPage ? this.pageState : this.elementState;
+    return (element && element.isPage) ? this.pageState : this.elementState;
   }
 
   private onQuestionAddedHandler = (sender, opts): void => {
@@ -29,6 +29,7 @@ export class DesignerStateManager {
     survey.onPanelAdded.add(this.onPanelAddedHandler);
   }
   initForElement(element: SurveyElement): void {
+    if (!element) return;
     const stateMap = this.getStateMapForElement(element);
     element.registerFunctionOnPropertyValueChanged(
       "name",
