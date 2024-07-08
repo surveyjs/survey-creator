@@ -113,6 +113,7 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
         .append("svc-toolbox__tool--hovered", this.isHovered)
         .append("svc-toolbox__tool--pressed", this.isPressed)
         .append("svc-toolbox__tool--has-icon", !!this.iconName)
+        .append("svc-toolbox__tool--disabled", this.enabled === false)
         .append("sv-action--hidden", !this.isVisible)
         .toString();
     }) as any;
