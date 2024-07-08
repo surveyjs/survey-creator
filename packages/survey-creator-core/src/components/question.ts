@@ -102,7 +102,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     const isStartWithNewLine = this.surveyElement.isQuestion && !(<Question>this.surveyElement).startWithNewLine;
     return new CssClassBuilder()
       .append("svc-question__adorner--start-with-new-line", isStartWithNewLine)
-      .append("svc-question__adorner--collapse-" + this.creator.expandCollapseButtonMode)
+      .append("svc-question__adorner--collapse-" + this.creator.expandCollapseButtonVisibility)
       .append("svc-question__adorner--collapsed", !!this.renderedCollapsed).toString();
   }
 

@@ -401,13 +401,13 @@ test("Question adorner - collapse button in differen modes", async (t) => {
   await t.expect(qContent.hasClass("svc-question__content--selected")).ok();
   await t.expect(qCollapseButton.visible).notOk();
 
-  await ClientFunction(() => { window["creator"].expandCollapseButtonMode = "onhover"; })();
+  await ClientFunction(() => { window["creator"].expandCollapseButtonVisibility = "onhover"; })();
   await setJSON(json);
   await t.expect(qCollapseButton.visible).notOk();
   await t.hover(qContent);
   await t.expect(qCollapseButton.visible).ok();
 
-  await ClientFunction(() => { window["creator"].expandCollapseButtonMode = "always"; })();
+  await ClientFunction(() => { window["creator"].expandCollapseButtonVisibility = "always"; })();
   await setJSON(json);
   await t.expect(qCollapseButton.visible).ok();
 });
