@@ -391,11 +391,11 @@ test("Question adorner - collapse button in differen modes", async (t) => {
     ]
   };
   await setJSON(json);
+  await t.hover(getToolboxItemByText("Single-Line Input"));
   const qContent = Selector(".svc-question__content");
   const qCollapseButton = Selector(".svc-question__content #collapse");
-  await t.hover("body", { offsetX: 10, offsetY: 10 });
-  await t.hover(qContent);
-  await t.expect(Selector(".svc-question__adorner").hasClass(".svc-hovered")).ok();
+  await t.hover(qContent, { offsetX: 10, offsetY: 10 });
+  await t.expect(Selector(".svc-question__adorner").hasClass("svc-hovered")).ok();
   await t.expect(qCollapseButton.visible).notOk();
   await t.click(qContent, { offsetX: 10, offsetY: 10 });
   await t.expect(qContent.hasClass("svc-question__content--selected")).ok();
