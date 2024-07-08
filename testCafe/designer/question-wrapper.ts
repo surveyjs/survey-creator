@@ -404,12 +404,14 @@ test("Question adorner - collapse button in differen modes", async (t) => {
   await ClientFunction(() => { window["creator"].expandCollapseButtonVisibility = "onhover"; })();
   json.elements[0].name = "question2";
   await setJSON(json);
+  await t.hover(getToolboxItemByText("Single-Line Input"));
   await t.expect(qCollapseButton.visible).notOk();
-  await t.hover(qContent);
+  await t.hover(qContent, { offsetX: 10, offsetY: 10 });
   await t.expect(qCollapseButton.visible).ok();
 
   await ClientFunction(() => { window["creator"].expandCollapseButtonVisibility = "always"; })();
   json.elements[0].name = "question3";
+  await t.hover(getToolboxItemByText("Single-Line Input"));
   await setJSON(json);
   await t.expect(qCollapseButton.visible).ok();
   await ClientFunction(() => { window["creator"].expandCollapseButtonVisibility = "never"; })();

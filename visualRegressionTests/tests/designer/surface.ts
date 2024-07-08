@@ -2161,10 +2161,10 @@ test("Question adorner - collapsed mobile", async (t) => {
     const qCollapseButton = Selector(".svc-question__content #collapse");
     await t.click(qContent.nth(0), { offsetX: 10, offsetY: 10 });
     await t.click(qCollapseButton.filterVisible());
-    await takeElementScreenshot("question-adorner-collapsed.png", qContent.nth(0), t, comparer);
+    await takeElementScreenshot("question-adorner-collapsed-mobile.png", qContent.nth(0), t, comparer);
     await t.click(qContent.nth(1), { offsetX: 10, offsetY: 10 });
     await t.click(qCollapseButton.filterVisible());
-    await takeElementScreenshot("panel-adorner-collapsed.png", qContent.nth(1), t, comparer);
+    await takeElementScreenshot("panel-adorner-collapsed-mobile.png", qContent.nth(1), t, comparer);
 
     await t.click(Selector("body"), { offsetX: 1, offsetY: 1 });
     await takeElementScreenshot("question-adorner-collapsed-unselected.png", qContent.nth(0), t, comparer);
