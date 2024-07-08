@@ -51,7 +51,7 @@ test("Click on toolbox and cancel survey.lazyRendering", (): any => {
 });
 test("Click on toolbox and insert into correct index", (): any => {
   const creator = new CreatorTester();
-  creator.addNewQuestionToEnd = false;
+  creator.addNewQuestionLast = false;
   creator.JSON = {
     elements: [
       { type: "text", name: "question1" },

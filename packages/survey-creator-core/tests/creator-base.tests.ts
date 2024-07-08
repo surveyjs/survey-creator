@@ -3146,7 +3146,7 @@ test("Use settings.designer.showAddQuestionButton = false", (): any => {
 });
 test("Add Questions with selection", (): any => {
   const creator = new CreatorTester();
-  creator.addNewQuestionToEnd = false;
+  creator.addNewQuestionLast = false;
   creator.JSON = { elements: [{ type: "panel", name: "panel1" }] };
   const panel = <PanelModel>creator.survey.getAllPanels()[0];
   const panelModel: QuestionAdornerViewModel = new QuestionAdornerViewModel(creator, panel, undefined);
@@ -3861,7 +3861,7 @@ test("Reordering on drag&drop", (): any => {
   creator.undo();
   expect(creator.undoRedoManager.canRedo()).toBeTruthy();
 });
-test("creator.addNewQuestionToEnd property", (): any => {
+test("creator.addNewQuestionLast property", (): any => {
   const creator = new CreatorTester();
   creator.clickToolboxItem({ type: "text" });
   creator.clickToolboxItem({ type: "text" });
@@ -3871,7 +3871,7 @@ test("creator.addNewQuestionToEnd property", (): any => {
   expect(creator.selectedElementName).toEqual("question3");
   expect(creator.survey.pages[0].elements[2].name).toEqual("question3");
   creator.selectQuestionByName("question1");
-  creator.addNewQuestionToEnd = false;
+  creator.addNewQuestionLast = false;
   creator.clickToolboxItem({ type: "text" });
   expect(creator.selectedElementName).toEqual("question4");
   expect(creator.survey.pages[0].elements[1].name).toEqual("question4");
