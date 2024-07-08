@@ -1,4 +1,5 @@
 @import "../../variables.scss";
+@import "../../variables-layer.scss";
 
 .svc-toolbox__item {
   display: flex;
@@ -6,9 +7,9 @@
   align-items: center;
   z-index: 20;
   outline: none;
-  padding-top: var(--ctr-toolbox-item-padding-top, calcSize(1));
+  padding-top: var(--ctr-toolbox-item-padding-top, calcSize(0));
   padding-right: var(--ctr-toolbox-item-padding-right, calcSize(1.5));
-  padding-bottom: var(--ctr-toolbox-item-padding-bottom, calcSize(1));
+  padding-bottom: var(--ctr-toolbox-item-padding-bottom, calcSize(0));
   padding-left: var(--ctr-toolbox-item-padding-left, calcSize(1.5));
 
   sv-svg-icon,
@@ -19,6 +20,15 @@
   }
 }
 
+.svc-toolbox__tool {
+
+  sv-svg-icon,
+  .sv-svg-icon {
+    pointer-events: none;
+  }
+}
+
+
 // is always visible
 .svc-toolbox__item-container {
   outline: none;
@@ -26,6 +36,8 @@
   .sv-svg-icon use {
     fill: var(--ctr-toolbox-item-icon-color, $foreground-light);
   }
+
+  padding: calcSize(1) 0;
 }
 
 //is visible only on hover
@@ -35,7 +47,8 @@
   box-sizing: border-box;
   align-items: center;
   margin-right: 0;
-  margin-left: calcSize(-1.5);
+  margin-left: calcSize(-4.5);
+  height: calcSize(5);
 
   .svc-toolbox__item-icon {
     position: absolute;
@@ -58,19 +71,27 @@
 [style*="direction:rtl"],
 [style*="direction: rtl"] {
 
-  .svc-toolbox__item:hover .svc-toolbox__item-banner,
-  .svc-toolbox__item:focus .svc-toolbox__item-banner {
-    flex-direction: row-reverse;
-    padding-right: var(--ctr-toolbox-item-padding-right-rtl, calcSize(1.5));
-    padding-left: var(--ctr-toolbox-item-padding-left-rtl, calcSize(2));
-    margin-left: 0;
-    margin-right: 0;
-    transform: translateX(calc(1.5 * #{$base-unit}));
+  .svc-toolbox__tool:hover,
+  .svc-toolbox__tool--hovered,
+  .svc-toolbox__item:focus {
+    .svc-toolbox__item-banner {
+      padding-right: calcSize(1.5);
+      padding-left: calcSize(2);
+      margin-left: calcSize(-2);
+      margin-right: calcSize(-3);
+      flex-direction: row-reverse;
+      transform: translateX(calc(1.5 * #{$base-unit}));
 
-    .svc-toolbox__item-title {
-      padding-left: calcSize(1);
-      padding-right: calcSize(4);
+      .svc-toolbox__item-title {
+        padding-right: calcSize(4);
+        padding-left: calcSize(1);
+      }
     }
+  }
+
+  .svc-toolbox__item-banner {
+    margin-right: calcSize(-4.5);
+    margin-left: 0;
   }
 
   .svc-toolbox__item {
@@ -82,6 +103,10 @@
   }
 
   .svc-toolbox__category {
+    align-items: flex-end;
+  }
+
+  .svc-toolbox__tool {
     align-items: flex-end;
   }
 
@@ -103,12 +128,14 @@
   color: var(--ctr-toolbox-item-text-color, $foreground-light);
 }
 
-.svc-toolbox__item:hover,
+.svc-toolbox__tool:hover,
+.svc-toolbox__tool--hovered,
 .svc-toolbox__item:focus {
   .svc-toolbox__item-banner {
     max-width: calcSize(100);
     padding-left: var(--ctr-toolbox-item-padding-left, calcSize(1.5));
     padding-right: var(--ctr-toolbox-item-padding-right, calcSize(2));
+    margin-right: calcSize(-2);
     opacity: 1;
 
     .svc-toolbox__item-title {
@@ -120,6 +147,7 @@
 .svc-toolbox:not(.svc-toolbox--compact) {
 
   .svc-toolbox__item:not(.sv-dots):focus,
+  .svc-toolbox__tool--hovered>.sv-action__content>.svc-toolbox__item:not(.sv-dots),
   .svc-toolbox__item:not(.sv-dots):hover {
     overflow: hidden;
     border-radius: var(--ctr-toolbox-item-corner-radius, calcSize(12.5));
@@ -187,5 +215,66 @@
       color: var(--ctr-toolbox-item-text-color-hovered, $foreground);
       opacity: 0.5;
     }
+  }
+}
+
+.toolbox-subtypes {
+  .sv-popup__container {
+    box-shadow: unset;
+    background: unset;
+  }
+
+  .sv-list__container {
+    flex-wrap: wrap;
+    column-gap: calcSize(2);
+  }
+
+  .sv-popup__shadow {
+    box-shadow: unset;
+  }
+
+  .sv-popup__body-content {
+    background: unset;
+    padding: 0;
+  }
+
+  .sv-popup__scrolling-content {
+    padding: calcSize(1) calcSize(2);
+    overflow: visible;
+  }
+
+  .sv-list__item:hover>.sv-list__item-body,
+  .sv-list__item:focus>.sv-list__item-body {
+    background-color: unset;
+  }
+
+  .svc-toolbox__item.svc-toolbox__item-subtype {
+    opacity: var(--ctr-toolbox-item-opacity-submenu, 1);
+    overflow: hidden;
+    border-radius: calcSize(12.5);
+    background: var(--ctr-toolbox-item-background-color-submenu, $layer-2-background-500);
+    box-shadow: $shadow-small, $shadow-medium;
+    transition: 0.1s ease-in-out;
+    padding: calcSize(1.5) calcSize(2);
+
+    .svc-toolbox__item-title {
+      color: var(--ctr-toolbox-item-text-color-submenu, $layer-2-foreground-100);
+    }
+  }
+
+  .svc-toolbox__tool:hover,
+  .svc-toolbox__tool--hovered,
+  .svc-toolbox__item:focus {
+    .svc-toolbox__item-subtype {
+      background: var(--ctr-toolbox-item-background-color-hovered, $layer-1-background-500);
+
+      .svc-toolbox__item-title {
+        color: var(--ctr-toolbox-item-text-color-hovered, $layer-1-foreground-100);
+      }
+    }
+  }
+
+  .svc-toolbox__item-title {
+    padding: 0;
   }
 }

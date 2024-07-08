@@ -63,7 +63,6 @@ svc-toolbox {
   }
 }
 
-
 .svc-toolbox--compact {
   width: 100vw;
   margin-right: calc(-100vw + calcSize(10.5));
@@ -83,6 +82,7 @@ svc-toolbox {
 .svc-toolbox__tool.svc-toolbox__search-button {
   z-index: 20;
   justify-content: center;
+  align-items: center;
 
   .sv-dots__item {
     margin-top: 0;
@@ -105,7 +105,10 @@ svc-toolbox {
     position: relative;
     background: var(--ctr-toolbox-background-color, $background-dim);
     width: fit-content;
-    box-shadow: 1px 0 0 0 $border-inside, $shadow-medium, $shadow-large;
+    box-shadow:
+      1px 0 0 0 $border-inside,
+      $shadow-medium,
+      $shadow-large;
   }
 }
 
@@ -179,7 +182,10 @@ svc-toolbox {
     align-items: flex-end;
 
     .svc-toolbox__panel {
-      box-shadow: -1px 0 0 0 $border-inside, $shadow-medium, $shadow-large;
+      box-shadow:
+        -1px 0 0 0 $border-inside,
+        $shadow-medium,
+        $shadow-large;
     }
   }
 
@@ -226,6 +232,7 @@ svc-toolbox {
 
 .svc-toolbox__tool:not(.sv-dots) {
   display: flex;
+  flex-direction: column;
   width: auto;
 }
 
@@ -238,7 +245,7 @@ svc-toolbox {
   height: 1px;
   width: calcSize(5);
   background-color: var(--ctr-toolbox-separator-color, $border);
-  margin: calcSize(1) calcSize(0.5) calcSize(1.5);
+  margin: calcSize(1.5) calcSize(0.5) calcSize(1);
 }
 
 .svc-toolbox--filtering {
@@ -295,7 +302,8 @@ svc-toolbox {
 
   .sv-action__content {
     display: flex;
-    padding-top: calcSize(0.5);
+    // padding: calcSize(0.25) 0;
+    padding-block-start: calcSize(0.5);
     flex-direction: column;
     align-items: flex-start;
   }

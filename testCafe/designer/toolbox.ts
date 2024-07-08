@@ -1,4 +1,5 @@
-import { url, getJSON, toolboxItems, explicitErrorHandler, setJSON, changeToolboxScrolling, changeToolboxSearchEnabled } from "../helper";
+import { url, getJSON, toolboxItems, explicitErrorHandler, setJSON, changeToolboxScrolling, changeToolboxSearchEnabled, getToolboxItemByText, getSubToolboxItemByText } from "../helper";
+
 import { ClientFunction, Selector } from "testcafe";
 const title = "Toolbox";
 
@@ -49,10 +50,12 @@ async function setupToolboxProperty(propertyName: string, propertyValue: any) {
 
 const categories = Selector(".svc-toolbox__category");
 const categoriesHeader = Selector(".svc-toolbox__category-header");
-const visibleToolboxItems = Selector(".svc-toolbox__tool").filterVisible();
+const visibleToolboxItems = Selector(".svc-toolbox__category>.svc-toolbox__tool").filterVisible();
 const collapsibleCategories = Selector(".svc-toolbox__category-header--collapsed");
 const getCollapsedCategories = (index = 0) => { return categoriesHeader.nth(index).find(".svc-string-editor__button--expand"); };
 const getExpandedCategories = (index = 0) => { return categoriesHeader.nth(index).find(".svc-string-editor__button--collapse"); };
+const toolboxSubTypesPopup = Selector(".sv-popup-inner.toolbox-subtypes .sv-popup__container").filterVisible();
+const newGhostPagePage = Selector("[data-sv-drop-target-survey-element='newGhostPage']");
 
 test("Categories check hover icons", async (t) => {
   await setupCategories(t);
@@ -143,15 +146,15 @@ test("Categories allowExpandMultipleCategories property", async (t) => {
     .expect(visibleToolboxItems.count).eql(0)
 
     .click(categoriesHeader.nth(0))
-    .expect(categories.nth(0).find(".svc-toolbox__tool").count).eql(16)
+    .expect(categories.nth(0).find(":scope>.svc-toolbox__tool").count).eql(16)
     .expect(visibleToolboxItems.count).eql(16)
 
     .click(categoriesHeader.nth(1))
-    .expect(categories.nth(1).find(".svc-toolbox__tool").count).eql(3)
+    .expect(categories.nth(1).find(":scope>.svc-toolbox__tool").count).eql(3)
     .expect(visibleToolboxItems.count).eql(19)
 
     .click(categoriesHeader.nth(2))
-    .expect(categories.nth(2).find(".svc-toolbox__tool").count).eql(2)
+    .expect(categories.nth(2).find(":scope>.svc-toolbox__tool").count).eql(2)
     .expect(visibleToolboxItems.count).eql(21);
 });
 
@@ -259,7 +262,7 @@ test("toolbar responsiveness with search", async (t) => {
   });
   await t
     .expect(Selector(".svc-toolbox .sv-dots__item").visible).ok()
-    .expect(Selector(".svc-toolbox__tool").count).eql(22)
+    .expect(Selector(".svc-toolbox__category>.svc-toolbox__tool").count).eql(22)
     .expect(Selector(".svc-toolbox .sv-dots__item").visible).ok()
     .expect(visibleToolboxItems.count).eql(11);
 
@@ -267,7 +270,7 @@ test("toolbar responsiveness with search", async (t) => {
   await t.resizeWindow(1920, 598);
   await t
     .expect(Selector(".svc-toolbox .sv-dots__item").visible).ok()
-    .expect(Selector(".svc-toolbox__tool").count).eql(22)
+    .expect(Selector(".svc-toolbox__category>.svc-toolbox__tool").count).eql(22)
     .expect(Selector(".svc-toolbox .sv-dots__item").visible).ok()
     .expect(visibleToolboxItems.count).eql(10);
 });
@@ -333,7 +336,7 @@ test("toolbar responsiveness in compact mode", async (t) => {
     .expect(Selector(".svc-toolbox .sv-dots__item").visible).ok()
     .expect(Selector(".svc-toolbox__container").clientHeight).lte(510)
     .expect(visibleToolboxItems.count).eql(11)
-    .expect(Selector(".svc-toolbox__tool").count).eql(22)
+    .expect(Selector(".svc-toolbox__category>.svc-toolbox__tool").count).eql(22)
 
     .click(".svc-question__content--text", { offsetX: 200, offsetY: 20 })
     .click(Selector(".sv-action-bar-item__title").withText("Save as Toolbox Item"))
@@ -341,7 +344,110 @@ test("toolbar responsiveness in compact mode", async (t) => {
     .expect(Selector(".svc-toolbox .sv-dots__item").visible).ok()
     .expect(Selector(".svc-toolbox__container").clientHeight).lte(510)
     .expect(visibleToolboxItems.count).eql(11)
-    .expect(Selector(".svc-toolbox__tool").count).eql(23);
+    .expect(Selector(".svc-toolbox__category>.svc-toolbox__tool").count).eql(23);
+});
+
+test("toolbox subTypes: add items by drag-n-drop", async (t) => {
+  await explicitErrorHandler();
+  await t.resizeWindow(1900, 800);
+
+  await t
+    .expect(toolboxSubTypesPopup.visible).notOk()
+    .hover(getToolboxItemByText("Rating Scale"))
+    .wait(400)
+    .expect(toolboxSubTypesPopup.visible).ok()
+
+    .hover(getSubToolboxItemByText("Stars"))
+    .dragToElement(getSubToolboxItemByText("Stars"), ".svc-designer__placeholder-container", { speed: 0.5 })
+    .expect(Selector(".svc-question__content").filterVisible().count).eql(1)
+
+    .hover(getToolboxItemByText("Rating Scale"))
+    .wait(400)
+    .dragToElement(getToolboxItemByText("Rating Scale"), newGhostPagePage, { speed: 0.5 })
+    .expect(Selector(".svc-question__content").filterVisible().count).eql(2)
+    .expect(toolboxSubTypesPopup.visible).notOk();
+
+  const expectedJson = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "rating",
+            "name": "question1",
+            "rateType": "stars"
+          }
+        ]
+      },
+      {
+        "name": "page2",
+        "elements": [
+          {
+            "type": "rating",
+            "name": "question2"
+          }
+        ]
+      }
+    ]
+  };
+  const resultJson = await getJSON();
+  await t.expect(resultJson).eql(expectedJson);
+});
+
+test("toolbox subTypes: add items by click", async (t) => {
+  await explicitErrorHandler();
+  await t.resizeWindow(1900, 800);
+
+  await t
+    .click(getToolboxItemByText("Single-Line Input"))
+    .wait(400)
+    .expect(Selector(".svc-question__content").filterVisible().count).eql(1)
+    .expect(toolboxSubTypesPopup.visible).ok()
+
+    .hover(getToolboxItemByText("Single-Line Input"))
+    .wait(400)
+    .expect(toolboxSubTypesPopup.visible).ok()
+
+    .click(getSubToolboxItemByText("Password"))
+    .expect(Selector(".svc-question__content").filterVisible().count).eql(2)
+    .expect(toolboxSubTypesPopup.visible).ok();
+
+  const expectedJson = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          },
+          {
+            "type": "text",
+            "name": "question2",
+            "inputType": "password"
+          }
+        ]
+      }
+    ]
+  };
+  const resultJson = await getJSON();
+  await t.expect(resultJson).eql(expectedJson);
+});
+
+test("toolbox subTypes: hide subTypes popup", async (t) => {
+  await explicitErrorHandler();
+  await t.resizeWindow(1900, 800);
+
+  await t
+    .expect(toolboxSubTypesPopup.visible).notOk()
+    .hover(getToolboxItemByText("Rating Scale"))
+    .wait(400)
+    .expect(toolboxSubTypesPopup.visible).ok()
+
+    .scrollBy(".svc-toolbox__scroller", 2, 100)
+    .expect(toolboxSubTypesPopup.visible).notOk();
 });
 
 test("toolbox search in compact mode - clear but do not close", async (t) => {
