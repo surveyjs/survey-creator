@@ -246,13 +246,13 @@ export interface ICreatorOptions {
   /**
    * Specifies where to add new questions when users click the "Add Question" button.
    * 
-   * This property supports the following values:
+   * Accepted values:
    * 
    * - `true` (default)       
-   * Adds new questions to the end of a survey page.
+   * New questions are added to the end of a survey page.
    * 
    * - `false`      
-   * Adds new questions after the currently selected question on the design surface.
+   * New questions are added after the currently selected question on the design surface.
    */
   addNewQuestionLast?: boolean;
   /**
