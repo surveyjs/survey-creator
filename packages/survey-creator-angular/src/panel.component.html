@@ -9,7 +9,9 @@
         (pointerdown)="adorner.onPointerDown($event)">
         <svg class="svc-question__drag-element" [iconName]="'icon-drag-area-indicator_24x16'" [size]="24"
           sv-ng-svg-icon></svg>
-        <sv-action-bar [model]="adorner.topActionContainer" [handleClick]="false"></sv-action-bar>
+          <div class="svc-question__top-actions">
+            <sv-action-bar [model]="adorner.topActionContainer" [handleClick]="false"></sv-action-bar>
+          </div>
       </div>
 
       <ng-template [component]="{ name: componentName, data: componentData }"></ng-template>

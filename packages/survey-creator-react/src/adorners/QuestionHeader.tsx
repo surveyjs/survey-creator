@@ -27,7 +27,9 @@ export class QuestionWrapperHeader extends React.Component<QuestionWrapperHeader
         }
       >
         <SvgIcon className="svc-question__drag-element" size={24} iconName={"icon-drag-area-indicator_24x16"}></SvgIcon>
-        <SurveyActionBar model={this.props.model.topActionContainer} handleClick={false}></SurveyActionBar>
+        <div className="svc-question__top-actions">
+          <SurveyActionBar model={this.props.model.topActionContainer} handleClick={false}></SurveyActionBar>
+        </div>
       </div>
     );
   }
