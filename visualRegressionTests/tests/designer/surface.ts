@@ -2124,7 +2124,7 @@ test("Question adorner - collapsed", async (t) => {
       ]
     };
     await ClientFunction(() => {
-      window["creator"].expandCollapseButtonMode = "onhover";
+      window["creator"].expandCollapseButtonVisibility = "onhover";
     })();
     await setJSON(json);
     const qContent = Selector(".svc-question__content");
@@ -2154,7 +2154,7 @@ test("Question adorner - collapsed mobile", async (t) => {
       ]
     };
     await ClientFunction(() => {
-      window["creator"].expandCollapseButtonMode = "onhover";
+      window["creator"].expandCollapseButtonVisibility = "onhover";
     })();
     await setJSON(json);
     const qContent = Selector(".svc-question__content");
