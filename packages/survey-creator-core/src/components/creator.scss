@@ -121,7 +121,7 @@ survey-creator {
   max-width: 0;
   overflow: hidden;
   height: 100%;
-  background-color: $background;
+  background-color: var(--ctr-page-banner-background-color, $background);
   /* Shadow / Medium */
   border-radius: calcSize(12.5);
   box-shadow: $shadow-medium;
@@ -129,14 +129,14 @@ survey-creator {
 }
 
 .svc-creator__non-commercial-text {
-  color: $primary-foreground;
+  color: var(--ctr-page-banner-text-color, $primary-foreground);
   @include defaultBold;
   vertical-align: middle;
   padding: calcSize(1.5) calcSize(16);
   display: block;
 
   a {
-    color: $primary-foreground;
+    color: var(--ctr-page-banner-text-color, $primary-foreground);
   }
 }
 
