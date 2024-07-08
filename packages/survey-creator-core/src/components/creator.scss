@@ -112,7 +112,7 @@ survey-creator {
 .svc-creator__banner {
   width: 100%;
   line-height: calcSize(4);
-  background-color: $secondary;
+  background-color: var(--ctr-page-banner-background-color, $secondary);
   text-align: center;
 }
 
@@ -121,7 +121,7 @@ survey-creator {
   max-width: 0;
   overflow: hidden;
   height: 100%;
-  background-color: var(--ctr-page-banner-background-color, $background);
+  background-color: $background;
   /* Shadow / Medium */
   border-radius: calcSize(12.5);
   box-shadow: $shadow-medium;
