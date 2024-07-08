@@ -125,10 +125,8 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
       return null;
     }
     let control = null;
-    const safeEdit = this.baseModel.safeEdit;
-    const safeEditValue = this.baseModel.editValue;
-    if (!safeEdit) {
-      const htmlValue = { __html: this.locString.renderedHtml };
+    if (this.locString.hasHtml) {
+      const htmlValue = { __html: this.baseModel.editValue };
       control = (
         <span
           role="textbox"
@@ -171,7 +169,7 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
           onMouseUp={this.onMouseUp}
           onClick={this.edit}
         >
-          {safeEditValue}
+          {this.baseModel.editValue}
         </span>
       );
     }

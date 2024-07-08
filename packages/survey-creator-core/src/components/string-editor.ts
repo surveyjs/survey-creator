@@ -404,7 +404,12 @@ export class StringEditorViewModelBase extends Base {
     return !this.locString.hasHtml || this.focused && this.editAsText;
   }
   public get editValue(): string {
-    return this.focused && this.editAsText && this.locString.text || this.locString.renderedHtml;
+    if (this.focused && this.editAsText && this.locString.hasHtml) {
+      var el = document.createElement("div");
+      el.innerText = el.textContent = this.locString.text;
+      return el.innerHTML;
+    }
+    return this.locString.renderedHtml;
   }
 
   private getClearedText(target: HTMLElement): string {
