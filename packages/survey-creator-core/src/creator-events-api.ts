@@ -557,6 +557,12 @@ export interface PageAddedEvent {
   page: PageModel;
 }
 
+export interface QuestionConvertedEvent {
+  convertFrom: Question;
+  convertTo: string;
+  convertFromJSON: any;
+}
+
 export interface PageGetFooterActionsEvent {
   /**
    * An array of actions. You can add, modify, or remove actions from this array.
