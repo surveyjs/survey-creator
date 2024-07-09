@@ -243,10 +243,14 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       })
     );
   }
+  isDisableSelecting: boolean;
   protected disableActionFocusing(isMouse: boolean, event: any): void {
-    if(isMouse) {
-      event.stopPropagation();
-    }
+    this.isDisableSelecting = isMouse;
+  }
+  protected canSelectElement(): boolean {
+    const res = !this.isDisableSelecting;
+    this.isDisableSelecting = false;
+    return res;
   }
   public get allowEdit(): boolean {
     return !!this.creator && !this.creator.readOnly && this.allowEditOption;
