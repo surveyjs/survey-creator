@@ -1400,6 +1400,28 @@ export class PropertyGridEditorBoolean extends PropertyGridEditor {
     return true;
   }
 }
+
+export class PropertyGridEditorUndefinedBoolean extends PropertyGridEditor {
+  public fit(prop: JsonObjectProperty, context?: string): boolean {
+    return prop.type == "boolean" && !!prop.defaultValueFunc && prop.defaultValueFunc(null) === undefined;
+  }
+
+  public getJSON(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): any {
+    const choices: Array<any> = [
+      { value: undefined, text: editorLocalization.getString("pe.booleanAuto") },
+      { value: false, text: editorLocalization.getString("pe.booleanFalse") },
+      { value: true, text: editorLocalization.getString("pe.booleanTrue") },
+    ];
+
+    const res: any = {
+      type: "buttongroup",
+      choices: choices,
+      default: undefined,
+      showOptionsCaption: false
+    };
+    return res;
+  }
+}
 export abstract class PropertyGridEditorStringBase extends PropertyGridEditor {
   protected updateMaxLength(prop: JsonObjectProperty, json: any): any {
     if (prop.maxLength > 0) {
@@ -1948,6 +1970,7 @@ PropertyGridEditorCollection.register(new PropertyGridEditorImageSize());
 PropertyGridEditorCollection.register(new PropertyGridEditorColor());
 PropertyGridEditorCollection.register(new PropertyGridEditorColorWithAlpha());
 PropertyGridEditorCollection.register(new PropertyGridEditorDateTime());
+PropertyGridEditorCollection.register(new PropertyGridEditorUndefinedBoolean());
 
 QuestionFactory.Instance.registerQuestion("buttongroup", (name) => {
   return new QuestionButtonGroupModel(name);
