@@ -1,3 +1,5 @@
+// This dictionary contains 65 untranslated or inherited localization strings.
+// These strings are commented out. Uncomment and edit them if you want to add your translations.
 import { editorLocalization } from "survey-creator-core";
 
 var simplifiedChineseTranslation = {
@@ -598,6 +600,7 @@ var simplifiedChineseTranslation = {
     allowCompleteSurveyAutomatic: "自动完成调查",
     showProgressBar: "显示进度条",
     questionTitleLocation: "问题的标题位置",
+    questionTitleWidth: "问题标题宽度",
     requiredText: "问题必填标志",
     questionTitleTemplate: "问题标题模板, 默认为: '{no}. {require} {title}'",
     questionErrorLocation: "问题错误定位",
@@ -645,6 +648,7 @@ var simplifiedChineseTranslation = {
     questionsOnPageMode: "调查结构",
     maxTextLength: "最大答案长度（以字符为单位）",
     maxOthersLength: "最大注释长度（以字符为单位）",
+    commentAreaRows: "评论区高度（以行为单位）",
     autoGrowComment: "如有必要，自动展开评论区域",
     allowResizeComment: "允许用户调整文本区域的大小",
     textUpdateMode: "更新文本问题值",
@@ -734,6 +738,7 @@ var simplifiedChineseTranslation = {
     correctAnswer: "正确答案",
     defaultPanelValue: "默认值",
     cells: "单元格文本",
+    fileInputPlaceholder: "选择文件或粘贴文件链接...",
     keyName: "键列",
     itemvalue: {
       visibleIf: "如果出现以下情况，则使该选项可见",
@@ -1220,6 +1225,9 @@ var simplifiedChineseTranslation = {
     currencymask: {
       prefix: "例：$",
       suffix: "例如：美元"
+    },
+    panelbase: {
+      questionTitleWidth: "例如：200px"
     }
   },
   pehelp: {
@@ -1230,6 +1238,7 @@ var simplifiedChineseTranslation = {
       enableIf: "使用魔棒图标设置禁用面板只读模式的条件规则。",
       requiredIf: "使用魔杖图标设置条件规则，除非至少有一个嵌套问题有答案，否则该规则将阻止调查提交。",
       questionTitleLocation: "适用于此面板中的所有问题。如果要覆盖此设置，请为单个问题定义标题对齐规则。“继承”选项应用页面级别（如果已设置）或调查级别设置（默认为“顶部”）。",
+      questionTitleWidth: "当问题标题与问题框左侧对齐时，为问题标题设置一致的宽度。接受 CSS 值（px、%、in、pt 等）。",
       questionErrorLocation: "设置与面板中所有问题相关的错误消息的位置。“继承”选项应用页面级别（如果已设置）或调查级别设置。",
       questionsOrder: "保持问题的原始顺序或随机化问题。“继承”选项应用页面级别（如果已设置）或调查级别设置。",
       page: "将面板重新定位到所选页面的末尾。",
@@ -1344,6 +1353,7 @@ var simplifiedChineseTranslation = {
     questionsOrder: "保持问题的原始顺序或随机化问题。此设置的效果仅在“预览”选项卡中可见。",
     maxTextLength: "仅适用于文本输入问题。",
     maxOthersLength: "仅供问题评论。",
+    commentAreaRows: "设置问题注释的文本区域中显示的行数。在输入占用更多行时，将出现滚动条。",
     autoGrowComment: "选择是否希望问题注释和长文本问题根据输入的文本长度自动增加高度。",
     allowResizeComment: "仅适用于问题评论和长文本问题。",
     calculatedValues: "自定义变量用作表单计算中使用的中间变量或辅助变量。他们将受访者的输入作为源值。每个自定义变量都有一个唯一的名称和它所基于的表达式。",
@@ -1376,6 +1386,7 @@ var simplifiedChineseTranslation = {
       enableIf: "使用魔杖图标设置禁用页面只读模式的条件规则。",
       requiredIf: "使用魔杖图标设置条件规则，除非至少有一个嵌套问题有答案，否则该规则将阻止调查提交。",
       questionTitleLocation: "适用于本页中的所有问题。如果要覆盖此设置，请为单个问题或面板定义标题对齐规则。“继承”选项将应用调查级别设置（默认为“顶部”）。",
+      questionTitleWidth: "当问题标题与问题框左侧对齐时，为问题标题设置一致的宽度。接受 CSS 值（px、%、in、pt 等）。",
       questionErrorLocation: "设置与输入无效的问题相关的错误消息的位置。选择：“顶部” - 错误文本放置在问题框的顶部;“底部” - 错误文本放置在问题框的底部。“继承”选项将应用调查级别设置（默认为“顶部”）。",
       questionsOrder: "保持问题的原始顺序或随机化问题。“继承”选项应用调查级别设置（默认为“原始”）。此设置的效果仅在“预览”选项卡中可见。",
       navigationButtonsVisibility: "设置导航按钮在页面上的可见性。“继承”选项应用调查级别设置，默认为“可见”。"
@@ -1448,6 +1459,19 @@ var simplifiedChineseTranslation = {
     currencymask: {
       prefix: "要在值之前显示的一个或多个符号。",
       suffix: "要在值后显示的一个或多个符号。"
+    },
+    theme: {
+      // isPanelless: "This setting applies only to questions outside of a panel.",
+      // primaryColor: "Sets a supplementary color that highlights key survey elements.",
+      // panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background.",
+      // questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background.",
+      // cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes.",
+      // "--sjs-general-backcolor-dim": "Sets the main background color of the survey."
+    },
+    header: {
+      // inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in.",
+      // textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels.",
+      // overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey."
     }
   },
   // Properties
@@ -1551,7 +1575,63 @@ var simplifiedChineseTranslation = {
     allowCameraAccess: "允许摄像头访问",
     scaleColorMode: "缩放颜色模式",
     rateColorMode: "评价颜色模式",
-    copyDisplayValue: "复制显示值"
+    copyDisplayValue: "复制显示值",
+    // insensitive: "insensitive",
+    // state: "state",
+    // indent: "indent",
+    // titleLocation: "titleLocation",
+    // descriptionLocation: "descriptionLocation",
+    // hideNumber: "hideNumber",
+    // errorLocation: "errorLocation",
+    // isUnique: "isUnique",
+    // showInMultipleColumns: "showInMultipleColumns",
+    // totalAlignment: "totalAlignment",
+    // detailErrorLocation: "detailErrorLocation",
+    // inheritWidthFrom: "inheritWidthFrom",
+    // textAreaWidth: "textAreaWidth",
+    // textGlowEnabled: "textGlowEnabled",
+    // overlapEnabled: "overlapEnabled",
+    // backgroundImageOpacity: "backgroundImageOpacity",
+    // logoPositionX: "logoPositionX",
+    // logoPositionY: "logoPositionY",
+    // titlePositionX: "titlePositionX",
+    // titlePositionY: "titlePositionY",
+    // descriptionPositionX: "descriptionPositionX",
+    // descriptionPositionY: "descriptionPositionY",
+    // showNumber: "showNumber",
+    // progressBarInheritWidthFrom: "progressBarInheritWidthFrom",
+    // headerView: "headerView",
+    // choiceValuesFromQuestion: "choiceValuesFromQuestion",
+    // choiceTextsFromQuestion: "choiceTextsFromQuestion",
+    // refuseText: "refuseText",
+    // dontKnowText: "dontKnowText",
+    // cellComponent: "cellComponent",
+    // inputTextAlignment: "inputTextAlignment",
+    // maskSettings: "maskSettings",
+    // itemErrorLocation: "itemErrorLocation",
+    // signatureWidth: "signatureWidth",
+    // signatureHeight: "signatureHeight",
+    // signatureAutoScaleEnabled: "signatureAutoScaleEnabled",
+    // penMinWidth: "penMinWidth",
+    // penMaxWidth: "penMaxWidth",
+    // showPlaceholder: "showPlaceholder",
+    // placeholderReadOnly: "placeholderReadOnly",
+    // templateTitle: "templateTitle",
+    // templateTabTitle: "templateTabTitle",
+    // tabTitlePlaceholder: "tabTitlePlaceholder",
+    // templateDescription: "templateDescription",
+    // noEntriesText: "noEntriesText",
+    // newPanelPosition: "newPanelPosition",
+    // templateTitleLocation: "templateTitleLocation",
+    // templateErrorLocation: "templateErrorLocation",
+    // templateVisibleIf: "templateVisibleIf",
+    // saveMaskedValue: "saveMaskedValue",
+    // pattern: "pattern",
+    // allowNegativeValues: "allowNegativeValues",
+    // decimalSeparator: "decimalSeparator",
+    // thousandsSeparator: "thousandsSeparator",
+    // prefix: "prefix",
+    // suffix: "suffix"
   },
   theme: {
     advancedMode: "高级模式",
@@ -2801,3 +2881,10 @@ editorLocalization.locales["zh-cn"] = simplifiedChineseTranslation;
 // paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "选项卡标题的回退文本，当选项卡标题模式未生成有意义的值时应用。"
 // theme.fontColor: "Font color" => "字体颜色"
 // theme.backgroundColor: "Background color" => "背景颜色"
+// pe.questionTitleWidth: "Question title width" => "问题标题宽度"
+// pe.fileInputPlaceholder: "Select a file or paste a file link..." => "选择文件或粘贴文件链接..."
+// panelbase.questionTitleWidth: "Ex.: 200px" => "例如：200px"
+// panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "当问题标题与问题框左侧对齐时，为问题标题设置一致的宽度。接受 CSS 值（px、%、in、pt 等）。"
+// page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "当问题标题与问题框左侧对齐时，为问题标题设置一致的宽度。接受 CSS 值（px、%、in、pt 等）。"
+// pe.commentAreaRows: "Comment area height (in lines)" => "评论区高度（以行为单位）"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "设置问题注释的文本区域中显示的行数。在输入占用更多行时，将出现滚动条。"

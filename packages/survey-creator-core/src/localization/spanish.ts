@@ -1,3 +1,5 @@
+// This dictionary contains 65 untranslated or inherited localization strings.
+// These strings are commented out. Uncomment and edit them if you want to add your translations.
 import { editorLocalization } from "survey-creator-core";
 
 var spanishTranslation = {
@@ -598,6 +600,7 @@ var spanishTranslation = {
     allowCompleteSurveyAutomatic: "Completar la encuesta automáticamente",
     showProgressBar: "Mostrar barra de progreso",
     questionTitleLocation: "Ubicación del título de la pregunta",
+    questionTitleWidth: "Ancho del título de la pregunta",
     requiredText: "La pregunta requerida (s) símbolo (s)",
     questionTitleTemplate: "Plantilla de título de la pregunta, el valor predeterminado es: '{no}.{requiere} {título} '",
     questionErrorLocation: "Ubicación de error de la pregunta",
@@ -645,6 +648,7 @@ var spanishTranslation = {
     questionsOnPageMode: "Estructura de la encuesta",
     maxTextLength: "Longitud máxima de la respuesta (en caracteres)",
     maxOthersLength: "Longitud máxima de comentario (en caracteres)",
+    commentAreaRows: "Altura del área de comentarios (en líneas)",
     autoGrowComment: "Auto-expand de comentario si es necesario",
     allowResizeComment: "Permitir a los usuarios cambiar el tamaño de las áreas de texto",
     textUpdateMode: "Actualizar valor del texto de la pregunta",
@@ -734,6 +738,7 @@ var spanishTranslation = {
     correctAnswer: "Respuesta correcta",
     defaultPanelValue: "Valores por defecto",
     cells: "Textos de celda",
+    fileInputPlaceholder: "Seleccione un archivo o pegue un enlace de archivo...",
     keyName: "Columna clave",
     itemvalue: {
       visibleIf: "Haga que la opción sea visible si",
@@ -1220,6 +1225,9 @@ var spanishTranslation = {
     currencymask: {
       prefix: "Ej.: $",
       suffix: "Ej.: USD"
+    },
+    panelbase: {
+      questionTitleWidth: "Ej.: 200px"
     }
   },
   pehelp: {
@@ -1230,6 +1238,7 @@ var spanishTranslation = {
       enableIf: "Utilice el icono de la varita mágica para establecer una regla condicional que desactive el modo de solo lectura para el panel.",
       requiredIf: "Utilice el icono de la varita mágica para establecer una regla condicional que impida el envío de encuestas a menos que al menos una pregunta anidada tenga una respuesta.",
       questionTitleLocation: "Se aplica a todas las preguntas de este panel. Si desea anular esta configuración, defina reglas de alineación de títulos para preguntas individuales. La opción \"Heredar\" aplica la configuración a nivel de página (si está establecida) o a nivel de encuesta (\"Superior\" de forma predeterminada).",
+      questionTitleWidth: "Establece un ancho coherente para los títulos de las preguntas cuando están alineados a la izquierda de sus cuadros de preguntas. Acepta valores CSS (px, %, in, pt, etc.).",
       questionErrorLocation: "Establece la ubicación de un mensaje de error en relación con todas las preguntas del panel. La opción \"Heredar\" aplica la configuración a nivel de página (si se establece) o a nivel de encuesta.",
       questionsOrder: "Mantiene el orden original de las preguntas o las aleatoriza. La opción \"Heredar\" aplica la configuración a nivel de página (si se establece) o a nivel de encuesta.",
       page: "Cambia la posición del panel al final de una página seleccionada.",
@@ -1344,6 +1353,7 @@ var spanishTranslation = {
     questionsOrder: "Mantiene el orden original de las preguntas o las aleatoriza. El efecto de esta configuración solo es visible en la pestaña Vista previa.",
     maxTextLength: "Solo para preguntas de entrada de texto.",
     maxOthersLength: "Solo para comentarios de preguntas.",
+    commentAreaRows: "Establece el número de líneas mostradas en las áreas de texto para los comentarios de las preguntas. En la entrada ocupa más líneas, aparece la barra de desplazamiento.",
     autoGrowComment: "Seleccione si desea que los comentarios de las preguntas y las preguntas de texto largo aumenten automáticamente en altura en función de la longitud del texto introducido.",
     allowResizeComment: "Solo para comentarios de preguntas y preguntas de texto largo.",
     calculatedValues: "Las variables personalizadas sirven como variables intermedias o auxiliares que se utilizan en los cálculos de formularios. Toman las entradas de los encuestados como valores de origen. Cada variable personalizada tiene un nombre único y una expresión en la que se basa.",
@@ -1376,6 +1386,7 @@ var spanishTranslation = {
       enableIf: "Utilice el icono de la varita mágica para establecer una regla condicional que deshabilite el modo de solo lectura de la página.",
       requiredIf: "Utilice el icono de la varita mágica para establecer una regla condicional que impida el envío de encuestas a menos que al menos una pregunta anidada tenga una respuesta.",
       questionTitleLocation: "Se aplica a todas las preguntas de esta página. Si desea anular esta configuración, defina reglas de alineación de títulos para preguntas o paneles individuales. La opción \"Heredar\" aplica la configuración a nivel de encuesta (\"Superior\" de forma predeterminada).",
+      questionTitleWidth: "Establece un ancho coherente para los títulos de las preguntas cuando están alineados a la izquierda de sus cuadros de preguntas. Acepta valores CSS (px, %, in, pt, etc.).",
       questionErrorLocation: "Establece la ubicación de un mensaje de error en relación con la pregunta con entrada no válida. Elija entre: \"Arriba\": se coloca un texto de error en la parte superior del cuadro de pregunta; \"Abajo\": se coloca un texto de error en la parte inferior del cuadro de pregunta. La opción \"Heredar\" aplica la configuración a nivel de encuesta (\"Superior\" de forma predeterminada).",
       questionsOrder: "Mantiene el orden original de las preguntas o las aleatoriza. La opción \"Heredar\" aplica la configuración a nivel de encuesta (\"Original\" de forma predeterminada). El efecto de esta configuración solo es visible en la pestaña Vista previa.",
       navigationButtonsVisibility: "Establece la visibilidad de los botones de navegación en la página. La opción \"Heredar\" aplica la configuración de nivel de encuesta, que por defecto es \"Visible\"."
@@ -1448,6 +1459,19 @@ var spanishTranslation = {
     currencymask: {
       prefix: "Uno o varios símbolos que se mostrarán antes del valor.",
       suffix: "Uno o varios símbolos que se mostrarán después del valor."
+    },
+    theme: {
+      // isPanelless: "This setting applies only to questions outside of a panel.",
+      // primaryColor: "Sets a supplementary color that highlights key survey elements.",
+      // panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background.",
+      // questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background.",
+      // cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes.",
+      // "--sjs-general-backcolor-dim": "Sets the main background color of the survey."
+    },
+    header: {
+      // inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in.",
+      // textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels.",
+      // overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey."
     }
   },
   // Properties
@@ -1551,7 +1575,63 @@ var spanishTranslation = {
     allowCameraAccess: "Permitir el acceso a la cámara",
     scaleColorMode: "Modo de color de escala",
     rateColorMode: "Modo de color de tasa",
-    copyDisplayValue: "Copiar valor de visualización"
+    copyDisplayValue: "Copiar valor de visualización",
+    // insensitive: "insensitive",
+    // state: "state",
+    // indent: "indent",
+    // titleLocation: "titleLocation",
+    // descriptionLocation: "descriptionLocation",
+    // hideNumber: "hideNumber",
+    // errorLocation: "errorLocation",
+    // isUnique: "isUnique",
+    // showInMultipleColumns: "showInMultipleColumns",
+    // totalAlignment: "totalAlignment",
+    // detailErrorLocation: "detailErrorLocation",
+    // inheritWidthFrom: "inheritWidthFrom",
+    // textAreaWidth: "textAreaWidth",
+    // textGlowEnabled: "textGlowEnabled",
+    // overlapEnabled: "overlapEnabled",
+    // backgroundImageOpacity: "backgroundImageOpacity",
+    // logoPositionX: "logoPositionX",
+    // logoPositionY: "logoPositionY",
+    // titlePositionX: "titlePositionX",
+    // titlePositionY: "titlePositionY",
+    // descriptionPositionX: "descriptionPositionX",
+    // descriptionPositionY: "descriptionPositionY",
+    // showNumber: "showNumber",
+    // progressBarInheritWidthFrom: "progressBarInheritWidthFrom",
+    // headerView: "headerView",
+    // choiceValuesFromQuestion: "choiceValuesFromQuestion",
+    // choiceTextsFromQuestion: "choiceTextsFromQuestion",
+    // refuseText: "refuseText",
+    // dontKnowText: "dontKnowText",
+    // cellComponent: "cellComponent",
+    // inputTextAlignment: "inputTextAlignment",
+    // maskSettings: "maskSettings",
+    // itemErrorLocation: "itemErrorLocation",
+    // signatureWidth: "signatureWidth",
+    // signatureHeight: "signatureHeight",
+    // signatureAutoScaleEnabled: "signatureAutoScaleEnabled",
+    // penMinWidth: "penMinWidth",
+    // penMaxWidth: "penMaxWidth",
+    // showPlaceholder: "showPlaceholder",
+    // placeholderReadOnly: "placeholderReadOnly",
+    // templateTitle: "templateTitle",
+    // templateTabTitle: "templateTabTitle",
+    // tabTitlePlaceholder: "tabTitlePlaceholder",
+    // templateDescription: "templateDescription",
+    // noEntriesText: "noEntriesText",
+    // newPanelPosition: "newPanelPosition",
+    // templateTitleLocation: "templateTitleLocation",
+    // templateErrorLocation: "templateErrorLocation",
+    // templateVisibleIf: "templateVisibleIf",
+    // saveMaskedValue: "saveMaskedValue",
+    // pattern: "pattern",
+    // allowNegativeValues: "allowNegativeValues",
+    // decimalSeparator: "decimalSeparator",
+    // thousandsSeparator: "thousandsSeparator",
+    // prefix: "prefix",
+    // suffix: "suffix"
   },
   theme: {
     advancedMode: "Modo avanzado",
@@ -2433,3 +2513,10 @@ editorLocalization.locales["es"] = spanishTranslation;
 // paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "Texto de reserva para los títulos de tabulación que se aplica cuando el patrón de título de tabulación no genera un valor significativo."
 // theme.fontColor: "Font color" => "Color de la fuente"
 // theme.backgroundColor: "Background color" => "Color de fondo"
+// pe.questionTitleWidth: "Question title width" => "Ancho del título de la pregunta"
+// pe.fileInputPlaceholder: "Select a file or paste a file link..." => "Seleccione un archivo o pegue un enlace de archivo..."
+// panelbase.questionTitleWidth: "Ex.: 200px" => "Ej.: 200px"
+// panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Establece un ancho coherente para los títulos de las preguntas cuando están alineados a la izquierda de sus cuadros de preguntas. Acepta valores CSS (px, %, in, pt, etc.)."
+// page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Establece un ancho coherente para los títulos de las preguntas cuando están alineados a la izquierda de sus cuadros de preguntas. Acepta valores CSS (px, %, in, pt, etc.)."
+// pe.commentAreaRows: "Comment area height (in lines)" => "Altura del área de comentarios (en líneas)"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "Establece el número de líneas mostradas en las áreas de texto para los comentarios de las preguntas. En la entrada ocupa más líneas, aparece la barra de desplazamiento."

@@ -36,6 +36,9 @@
       .sv-string-editor:focus-within {
         white-space: nowrap;
       }
+      &::after {
+        display: none
+      }
     }
 
     .svc-string-editor__content {
@@ -109,7 +112,9 @@
     padding: calcSize(0.5) calcSize(2.5);
   }
 }
-
+.svc-question__content .svc-rating-question-content  .sd-question__content {
+  overflow-x: visible;
+}
 .svc-creator--mobile {
   .svc-rating-question-content {
     position: relative;

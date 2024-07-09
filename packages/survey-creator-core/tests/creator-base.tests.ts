@@ -2349,12 +2349,14 @@ test("convertInputType, change inputType for a text question", (): any => {
   const popup = action.popupModel;
   const popupViewModel = new PopupDropdownViewModel(popup); // need for popupModel.onShow
   expect(popup).toBeTruthy();
-  popup.toggleVisibility();
+  popup.show();
   const list = popup.contentComponentData.model;
   expect(list).toBeTruthy();
   expect(list.selectedItem).toBeTruthy();
   expect(list.selectedItem.id).toEqual("text");
-  list.onSelectionChanged(list.actions.filter(item => item.id === "tel")[0]);
+
+  const telItem = list.actions.filter(item => item.id === "tel")[0];
+  list.onItemClick(telItem);
   expect(question.inputType).toBe("tel");
   expect(action.title).toBe("Phone Number");
   question.inputType = "password";
@@ -3144,6 +3146,7 @@ test("Use settings.designer.showAddQuestionButton = false", (): any => {
 });
 test("Add Questions with selection", (): any => {
   const creator = new CreatorTester();
+  creator.addNewQuestionLast = false;
   creator.JSON = { elements: [{ type: "panel", name: "panel1" }] };
   const panel = <PanelModel>creator.survey.getAllPanels()[0];
   const panelModel: QuestionAdornerViewModel = new QuestionAdornerViewModel(creator, panel, undefined);
@@ -3858,7 +3861,22 @@ test("Reordering on drag&drop", (): any => {
   creator.undo();
   expect(creator.undoRedoManager.canRedo()).toBeTruthy();
 });
-
+test("creator.addNewQuestionLast property", (): any => {
+  const creator = new CreatorTester();
+  creator.clickToolboxItem({ type: "text" });
+  creator.clickToolboxItem({ type: "text" });
+  expect(creator.selectedElementName).toEqual("question2");
+  creator.selectQuestionByName("question1");
+  creator.clickToolboxItem({ type: "text" });
+  expect(creator.selectedElementName).toEqual("question3");
+  expect(creator.survey.pages[0].elements[2].name).toEqual("question3");
+  creator.selectQuestionByName("question1");
+  creator.addNewQuestionLast = false;
+  creator.clickToolboxItem({ type: "text" });
+  expect(creator.selectedElementName).toEqual("question4");
+  expect(creator.survey.pages[0].elements[1].name).toEqual("question4");
+  expect(creator.survey.pages[0].elements[3].name).toEqual("question3");
+});
 test("Initial Property Grid category expanded state", (): any => {
   const creator = new CreatorTester();
   let survey: SurveyModel;

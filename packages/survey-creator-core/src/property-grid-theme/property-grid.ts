@@ -217,13 +217,14 @@ export var propertyGridCss = {
     itemDecorator: "spg-item__svg spg-radio__svg",
     cellText: "spg-matrix__text",
     cellTextSelected: "spg-matrix__text--checked",
-    cellTextDisabled: "spg-matrix__text--disabled"
+    cellTextDisabled: "spg-matrix__text--disabled",
   },
   matrixdropdown: {
     tableWrapper: "spg-table-wrapper",
     root: "spg-table",
     cell: "spg-table__cell",
-    headerCell: "spg-table__cell spg-table__cell--header"
+    headerCell: "spg-table__cell spg-table__cell--header",
+    emptyCell: "spg-table__cell--empty",
   },
   matrixdynamic: {
     tableWrapper: "spg-table-wrapper",
@@ -251,7 +252,8 @@ export var propertyGridCss = {
     dragDropGhostPositionBottom: "spg-matrixdynamic__drag-drop-ghost-position-bottom",
     emptyRowsSection: "spg-matrixdynamic__placeholder",
     emptyRowsText: "spg-matrixdynamic__placeholder-text",
-    cellQuestionWrapper: "spg-table__question-wrapper"
+    cellQuestionWrapper: "spg-table__question-wrapper",
+    emptyCell: "spg-table__cell--empty",
   },
   rating: {
     root: "spg-rating",

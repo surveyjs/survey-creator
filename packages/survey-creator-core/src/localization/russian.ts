@@ -1,3 +1,5 @@
+// This dictionary contains 65 untranslated or inherited localization strings.
+// These strings are commented out. Uncomment and edit them if you want to add your translations.
 import { editorLocalization } from "survey-creator-core";
 
 export var ruStrings = {
@@ -598,6 +600,7 @@ export var ruStrings = {
     allowCompleteSurveyAutomatic: "Автоматическое заполнение опроса",
     showProgressBar: "Показывать прогресс заполнения",
     questionTitleLocation: "Расположение заголовка вопроса",
+    questionTitleWidth: "Ширина заголовка вопроса",
     requiredText: "Символ для обязательного вопроса",
     questionTitleTemplate: "Шаблон названия опроса, по умолчанию: {не} {требует} {текста}.",
     questionErrorLocation: "Размещение ошибки опроса",
@@ -645,6 +648,7 @@ export var ruStrings = {
     questionsOnPageMode: "Структура опроса",
     maxTextLength: "Максимальная длина ответа (в символах)",
     maxOthersLength: "Максимальная длина комментария (в символах)",
+    commentAreaRows: "Высота области комментариев (в строках)",
     autoGrowComment: "При необходимости автоматически разверните область комментариев",
     allowResizeComment: "Разрешить пользователям изменять размер текстовых областей",
     textUpdateMode: "Обновление значения текстового вопроса",
@@ -734,6 +738,7 @@ export var ruStrings = {
     correctAnswer: "Правильный ответ",
     defaultPanelValue: "Значения по умолчанию",
     cells: "Тексты ячеек",
+    fileInputPlaceholder: "Выберите файл или вставьте ссылку на файл...",
     keyName: "Ключевая колонка",
     itemvalue: {
       visibleIf: "Сделайте опцию видимой, если",
@@ -1220,6 +1225,9 @@ export var ruStrings = {
     currencymask: {
       prefix: "Пример: $",
       suffix: "Пример: USD"
+    },
+    panelbase: {
+      questionTitleWidth: "Пример: 200px"
     }
   },
   pehelp: {
@@ -1230,6 +1238,7 @@ export var ruStrings = {
       enableIf: "Используйте значок волшебной палочки, чтобы задать условное правило, которое отключает режим только для чтения для панели.",
       requiredIf: "Используйте значок волшебной палочки, чтобы задать условное правило, которое запрещает отправку опроса, если хотя бы один вложенный вопрос не содержит ответа.",
       questionTitleLocation: "Применяется ко всем вопросам в этой панели. Если вы хотите переопределить этот параметр, определите правила выравнивания заголовков для отдельных вопросов. Опция «Наследовать» применяет настройку на уровне страницы (если задано) или на уровне опроса («Сверху» по умолчанию).",
+      questionTitleWidth: "Задает одинаковую ширину заголовков вопросов, если они выровнены по левому краю полей вопросов. Принимает значения CSS (px, %, in, pt и т. д.).",
       questionErrorLocation: "Задает расположение сообщения об ошибке по отношению ко всем вопросам на панели. Опция «Наследовать» применяет настройку на уровне страницы (если задано) или на уровне опроса.",
       questionsOrder: "Сохраняет исходный порядок вопросов или рандомизирует их. Опция «Наследовать» применяет настройку на уровне страницы (если задано) или на уровне опроса.",
       page: "Перемещает панель в конец выбранной страницы.",
@@ -1344,6 +1353,7 @@ export var ruStrings = {
     questionsOrder: "Сохраняет исходный порядок вопросов или рандомизирует их. Эффект этого параметра виден только на вкладке «Предварительный просмотр».",
     maxTextLength: "Только для вопросов с вводом текста.",
     maxOthersLength: "Только для комментариев к вопросам.",
+    commentAreaRows: "Задает количество отображаемых строк в текстовых областях для комментариев к вопросам. При вводе занимает больше строк, появляется полоса прокрутки.",
     autoGrowComment: "Выберите, хотите ли вы, чтобы комментарии к вопросам и вопросы с длинным текстом автоматически увеличивались в высоту в зависимости от введенной длины текста.",
     allowResizeComment: "Только для комментариев к вопросам и вопросов с длинным текстом.",
     calculatedValues: "Пользовательские переменные служат промежуточными или вспомогательными переменными, используемыми в вычислениях формы. Они принимают входные данные респондента в качестве исходных значений. Каждая пользовательская переменная имеет уникальное имя и выражение, на котором она основана.",
@@ -1376,6 +1386,7 @@ export var ruStrings = {
       enableIf: "Используйте значок волшебной палочки, чтобы задать условное правило, которое отключает режим только для чтения для страницы.",
       requiredIf: "Используйте значок волшебной палочки, чтобы задать условное правило, которое запрещает отправку опроса, если хотя бы один вложенный вопрос не содержит ответа.",
       questionTitleLocation: "Относится ко всем вопросам на этой странице. Если вы хотите переопределить этот параметр, задайте правила выравнивания заголовков для отдельных вопросов или панелей. Опция «Наследовать» применяет настройку уровня опроса («Сверху» по умолчанию).",
+      questionTitleWidth: "Задает одинаковую ширину заголовков вопросов, если они выровнены по левому краю полей вопросов. Принимает значения CSS (px, %, in, pt и т. д.).",
       questionErrorLocation: "Задает расположение сообщения об ошибке по отношению к вопросу с недопустимыми входными данными. Выберите между: «Сверху» - текст ошибки размещается в верхней части поля вопроса; «Внизу» - текст ошибки размещается в нижней части окна вопроса. Опция «Наследовать» применяет настройку уровня опроса («Сверху» по умолчанию).",
       questionsOrder: "Сохраняет исходный порядок вопросов или рандомизирует их. Опция «Наследовать» применяет настройку уровня опроса («Оригинал» по умолчанию). Эффект этого параметра виден только на вкладке «Предварительный просмотр».",
       navigationButtonsVisibility: "Задает видимость кнопок навигации на странице. Опция \"Наследовать\" применяет настройку уровня опроса, которая по умолчанию имеет значение \"Видимый\"."
@@ -1448,6 +1459,19 @@ export var ruStrings = {
     currencymask: {
       prefix: "Один или несколько символов, которые будут отображаться перед значением.",
       suffix: "Один или несколько символов, которые будут отображаться после значения."
+    },
+    theme: {
+      // isPanelless: "This setting applies only to questions outside of a panel.",
+      // primaryColor: "Sets a supplementary color that highlights key survey elements.",
+      // panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background.",
+      // questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background.",
+      // cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes.",
+      // "--sjs-general-backcolor-dim": "Sets the main background color of the survey."
+    },
+    header: {
+      // inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in.",
+      // textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels.",
+      // overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey."
     }
   },
   // Properties
@@ -1551,7 +1575,63 @@ export var ruStrings = {
     allowCameraAccess: "Разрешить доступ к камере",
     scaleColorMode: "Цветовой режим масштабирования",
     rateColorMode: "Оцените цветовой режим",
-    copyDisplayValue: "Копирование отображаемого значения"
+    copyDisplayValue: "Копирование отображаемого значения",
+    // insensitive: "insensitive",
+    // state: "state",
+    // indent: "indent",
+    // titleLocation: "titleLocation",
+    // descriptionLocation: "descriptionLocation",
+    // hideNumber: "hideNumber",
+    // errorLocation: "errorLocation",
+    // isUnique: "isUnique",
+    // showInMultipleColumns: "showInMultipleColumns",
+    // totalAlignment: "totalAlignment",
+    // detailErrorLocation: "detailErrorLocation",
+    // inheritWidthFrom: "inheritWidthFrom",
+    // textAreaWidth: "textAreaWidth",
+    // textGlowEnabled: "textGlowEnabled",
+    // overlapEnabled: "overlapEnabled",
+    // backgroundImageOpacity: "backgroundImageOpacity",
+    // logoPositionX: "logoPositionX",
+    // logoPositionY: "logoPositionY",
+    // titlePositionX: "titlePositionX",
+    // titlePositionY: "titlePositionY",
+    // descriptionPositionX: "descriptionPositionX",
+    // descriptionPositionY: "descriptionPositionY",
+    // showNumber: "showNumber",
+    // progressBarInheritWidthFrom: "progressBarInheritWidthFrom",
+    // headerView: "headerView",
+    // choiceValuesFromQuestion: "choiceValuesFromQuestion",
+    // choiceTextsFromQuestion: "choiceTextsFromQuestion",
+    // refuseText: "refuseText",
+    // dontKnowText: "dontKnowText",
+    // cellComponent: "cellComponent",
+    // inputTextAlignment: "inputTextAlignment",
+    // maskSettings: "maskSettings",
+    // itemErrorLocation: "itemErrorLocation",
+    // signatureWidth: "signatureWidth",
+    // signatureHeight: "signatureHeight",
+    // signatureAutoScaleEnabled: "signatureAutoScaleEnabled",
+    // penMinWidth: "penMinWidth",
+    // penMaxWidth: "penMaxWidth",
+    // showPlaceholder: "showPlaceholder",
+    // placeholderReadOnly: "placeholderReadOnly",
+    // templateTitle: "templateTitle",
+    // templateTabTitle: "templateTabTitle",
+    // tabTitlePlaceholder: "tabTitlePlaceholder",
+    // templateDescription: "templateDescription",
+    // noEntriesText: "noEntriesText",
+    // newPanelPosition: "newPanelPosition",
+    // templateTitleLocation: "templateTitleLocation",
+    // templateErrorLocation: "templateErrorLocation",
+    // templateVisibleIf: "templateVisibleIf",
+    // saveMaskedValue: "saveMaskedValue",
+    // pattern: "pattern",
+    // allowNegativeValues: "allowNegativeValues",
+    // decimalSeparator: "decimalSeparator",
+    // thousandsSeparator: "thousandsSeparator",
+    // prefix: "prefix",
+    // suffix: "suffix"
   },
   theme: {
     advancedMode: "Расширенный режим",
@@ -2719,3 +2799,10 @@ editorLocalization.locales["ru"] = ruStrings;
 // paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "Резервный текст для заголовков вкладок, который применяется, когда шаблон заголовка вкладки не дает осмысленного значения."
 // theme.fontColor: "Font color" => "Цвет шрифта"
 // theme.backgroundColor: "Background color" => "Цвет фона"
+// pe.questionTitleWidth: "Question title width" => "Ширина заголовка вопроса"
+// pe.fileInputPlaceholder: "Select a file or paste a file link..." => "Выберите файл или вставьте ссылку на файл..."
+// panelbase.questionTitleWidth: "Ex.: 200px" => "Пример: 200px"
+// panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Задает одинаковую ширину заголовков вопросов, если они выровнены по левому краю полей вопросов. Принимает значения CSS (px, %, in, pt и т. д.)."
+// page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Задает одинаковую ширину заголовков вопросов, если они выровнены по левому краю полей вопросов. Принимает значения CSS (px, %, in, pt и т. д.)."
+// pe.commentAreaRows: "Comment area height (in lines)" => "Высота области комментариев (в строках)"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "Задает количество отображаемых строк в текстовых областях для комментариев к вопросам. При вводе занимает больше строк, появляется полоса прокрутки."

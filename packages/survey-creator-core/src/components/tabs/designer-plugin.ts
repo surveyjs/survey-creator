@@ -6,6 +6,7 @@ import { PropertyGridModel } from "../../property-grid";
 import { PropertyGridViewModel } from "../../property-grid/property-grid-view-model";
 import { SidebarTabModel } from "../side-bar/side-bar-tab-model";
 import { TabDesignerViewModel } from "./designer";
+import { DesignerStateManager } from "./designer-state-manager";
 
 export class TabDesignerPlugin implements ICreatorPlugin {
   public model: TabDesignerViewModel;
@@ -16,6 +17,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
   private saveSurveyAction: Action;
   public previewAction: Action;
   private designerAction: Action;
+  public designerStateManager: DesignerStateManager;
 
   private get isSurveySelected(): boolean {
     return this.creator.isElementSelected(<any>this.creator.survey);
@@ -48,6 +50,13 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       return result;
     });
     this.toolboxTab = this.creator.sidebar.addTab("toolbox", "svc-toolbox", creator);
+    this.designerStateManager = new DesignerStateManager();
+    this.designerStateManager.initForSurvey(this.creator.survey);
+    this.creator.onSurveyInstanceCreated.add((s, o) => {
+      if (o.reason == "designer") {
+        this.designerStateManager.initForSurvey(o.survey);
+      }
+    });
     this.creator.onPropertyChanged.add((sender, options) => {
       if (options.name === "toolboxLocation") {
         if (this.toolboxTab.visible && options.newVal !== "sidebar") {

@@ -130,3 +130,31 @@ svc-page {
     height: auto;
   }
 }
+
+.svc-page__add-new-question,
+.svc-question__adorner {
+  .sv-list__item.sv-list__item--disabled {
+    opacity: 0.25;
+    pointer-events: none;
+  }
+
+  .sv-popup--overlay {
+    .sv-list-item__marker-icon {
+      display: none;
+    }
+
+    .sv-list__item-body {
+      pointer-events: none;
+    }
+
+    .sv-list__item.sv-list__item--selected.sv-list__item--group > .sv-list__item-body {
+      background-color: $primary;
+      color: $primary-foreground;
+      font-weight: 600;
+    }
+
+    .sv-list__item.sv-list__item--selected.sv-list__item--group > .sv-list__item-body use {
+      fill: $background;
+    }
+  }
+}

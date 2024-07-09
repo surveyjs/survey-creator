@@ -1,3 +1,5 @@
+// This dictionary contains 65 untranslated or inherited localization strings.
+// These strings are commented out. Uncomment and edit them if you want to add your translations.
 import { editorLocalization } from "survey-creator-core";
 
 export var indonesianStrings = {
@@ -598,6 +600,7 @@ export var indonesianStrings = {
     allowCompleteSurveyAutomatic: "Selesaikan survei secara otomatis",
     showProgressBar: "Tampilkan progress bar",
     questionTitleLocation: "Lokasi judul pertanyaan",
+    questionTitleWidth: "Lebar judul pertanyaan",
     requiredText: "Simbil pertanyaan wajib",
     questionTitleTemplate: "Template Judul Pertanyaan, default adalah: '{no}. {require} {title}'",
     questionErrorLocation: "Lokasi Pertanyaan Error",
@@ -645,6 +648,7 @@ export var indonesianStrings = {
     questionsOnPageMode: "Struktur survei",
     maxTextLength: "Panjang jawaban maksimum (dalam karakter)",
     maxOthersLength: "Panjang komentar maksimum (dalam karakter)",
+    commentAreaRows: "Tinggi area komentar (dalam baris)",
     autoGrowComment: "Perluas area komentar secara otomatis jika perlu",
     allowResizeComment: "Mengizinkan pengguna mengubah ukuran area teks",
     textUpdateMode: "Memperbarui nilai pertanyaan teks",
@@ -734,6 +738,7 @@ export var indonesianStrings = {
     correctAnswer: "Jawaban yang Benar",
     defaultPanelValue: "Nilai Default",
     cells: "Teks Sel",
+    fileInputPlaceholder: "Pilih file atau tempel tautan file...",
     keyName: "Kolom kunci",
     itemvalue: {
       visibleIf: "Buat opsi terlihat jika",
@@ -1220,6 +1225,9 @@ export var indonesianStrings = {
     currencymask: {
       prefix: "Contoh.: $",
       suffix: "Contoh: USD"
+    },
+    panelbase: {
+      questionTitleWidth: "Contoh: 200px"
     }
   },
   pehelp: {
@@ -1230,6 +1238,7 @@ export var indonesianStrings = {
       enableIf: "Gunakan ikon tongkat ajaib untuk mengatur aturan bersyarat yang menonaktifkan mode baca-saja untuk panel.",
       requiredIf: "Gunakan ikon tongkat ajaib untuk menetapkan aturan bersyarat yang mencegah pengiriman survei kecuali setidaknya satu pertanyaan bertingkat memiliki jawaban.",
       questionTitleLocation: "Berlaku untuk semua pertanyaan dalam panel ini. Jika Anda ingin mengganti setelan ini, tentukan aturan perataan judul untuk masing-masing pertanyaan. Opsi \"Warisi\" menerapkan setelan tingkat halaman (jika ditetapkan) atau tingkat survei (\"Teratas\" secara default).",
+      questionTitleWidth: "Mengatur lebar yang konsisten untuk judul pertanyaan bila disejajarkan di sebelah kiri kotak pertanyaan. Menerima nilai CSS (px, %, in, pt, dll.).",
       questionErrorLocation: "Mengatur lokasi pesan kesalahan sehubungan dengan semua pertanyaan dalam panel. Opsi \"Warisi\" menerapkan setelan tingkat halaman (jika ditetapkan) atau tingkat survei.",
       questionsOrder: "Menyimpan urutan pertanyaan asli atau mengacaknya. Opsi \"Warisi\" menerapkan setelan tingkat halaman (jika ditetapkan) atau tingkat survei.",
       page: "Memposisikan ulang panel ke akhir halaman yang dipilih.",
@@ -1344,6 +1353,7 @@ export var indonesianStrings = {
     questionsOrder: "Menyimpan urutan pertanyaan asli atau mengacaknya. Efek pengaturan ini hanya terlihat di tab Pratinjau.",
     maxTextLength: "Hanya untuk pertanyaan entri teks.",
     maxOthersLength: "Hanya untuk komentar pertanyaan.",
+    commentAreaRows: "Mengatur jumlah baris yang ditampilkan di area teks untuk komentar pertanyaan. Dalam input mengambil lebih banyak baris, bilah gulir muncul.",
     autoGrowComment: "Pilih apakah Anda ingin komentar pertanyaan dan pertanyaan Teks Panjang bertambah tinggi secara otomatis berdasarkan panjang teks yang dimasukkan.",
     allowResizeComment: "Hanya untuk komentar pertanyaan dan pertanyaan Teks Panjang.",
     calculatedValues: "Variabel kustom berfungsi sebagai variabel perantara atau tambahan yang digunakan dalam perhitungan formulir. Mereka mengambil input responden sebagai nilai sumber. Setiap variabel kustom memiliki nama unik dan ekspresi yang menjadi dasarnya.",
@@ -1376,6 +1386,7 @@ export var indonesianStrings = {
       enableIf: "Gunakan ikon tongkat ajaib untuk mengatur aturan bersyarat yang menonaktifkan mode baca-saja untuk halaman.",
       requiredIf: "Gunakan ikon tongkat ajaib untuk menetapkan aturan bersyarat yang mencegah pengiriman survei kecuali setidaknya satu pertanyaan bertingkat memiliki jawaban.",
       questionTitleLocation: "Berlaku untuk semua pertanyaan dalam halaman ini. Jika Anda ingin mengganti setelan ini, tentukan aturan perataan judul untuk masing-masing pertanyaan atau panel. Opsi \"Warisi\" menerapkan setelan tingkat survei (\"Teratas\" secara default).",
+      questionTitleWidth: "Mengatur lebar yang konsisten untuk judul pertanyaan bila disejajarkan di sebelah kiri kotak pertanyaan. Menerima nilai CSS (px, %, in, pt, dll.).",
       questionErrorLocation: "Mengatur lokasi pesan kesalahan sehubungan dengan pertanyaan dengan input yang tidak valid. Pilih antara: \"Atas\" - teks kesalahan ditempatkan di bagian atas kotak pertanyaan; \"Bawah\" - teks kesalahan ditempatkan di bagian bawah kotak pertanyaan. Opsi \"Warisi\" menerapkan setelan tingkat survei (\"Teratas\" secara default).",
       questionsOrder: "Menyimpan urutan pertanyaan asli atau mengacaknya. Opsi \"Warisi\" menerapkan setelan tingkat survei (\"Asli\" secara default). Efek pengaturan ini hanya terlihat di tab Pratinjau.",
       navigationButtonsVisibility: "Mengatur visibilitas tombol navigasi di halaman. Opsi \"Warisi\" menerapkan pengaturan tingkat survei, yang defaultnya adalah \"Terlihat\"."
@@ -1448,6 +1459,19 @@ export var indonesianStrings = {
     currencymask: {
       prefix: "Satu atau beberapa simbol yang akan ditampilkan sebelum nilai.",
       suffix: "Satu atau beberapa simbol yang akan ditampilkan setelah nilai."
+    },
+    theme: {
+      // isPanelless: "This setting applies only to questions outside of a panel.",
+      // primaryColor: "Sets a supplementary color that highlights key survey elements.",
+      // panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background.",
+      // questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background.",
+      // cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes.",
+      // "--sjs-general-backcolor-dim": "Sets the main background color of the survey."
+    },
+    header: {
+      // inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in.",
+      // textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels.",
+      // overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey."
     }
   },
   // Properties
@@ -1551,7 +1575,63 @@ export var indonesianStrings = {
     allowCameraAccess: "Izinkan akses kamera",
     scaleColorMode: "Mode skala warna",
     rateColorMode: "Mode warna tingkat",
-    copyDisplayValue: "Salin nilai tampilan"
+    copyDisplayValue: "Salin nilai tampilan",
+    // insensitive: "insensitive",
+    // state: "state",
+    // indent: "indent",
+    // titleLocation: "titleLocation",
+    // descriptionLocation: "descriptionLocation",
+    // hideNumber: "hideNumber",
+    // errorLocation: "errorLocation",
+    // isUnique: "isUnique",
+    // showInMultipleColumns: "showInMultipleColumns",
+    // totalAlignment: "totalAlignment",
+    // detailErrorLocation: "detailErrorLocation",
+    // inheritWidthFrom: "inheritWidthFrom",
+    // textAreaWidth: "textAreaWidth",
+    // textGlowEnabled: "textGlowEnabled",
+    // overlapEnabled: "overlapEnabled",
+    // backgroundImageOpacity: "backgroundImageOpacity",
+    // logoPositionX: "logoPositionX",
+    // logoPositionY: "logoPositionY",
+    // titlePositionX: "titlePositionX",
+    // titlePositionY: "titlePositionY",
+    // descriptionPositionX: "descriptionPositionX",
+    // descriptionPositionY: "descriptionPositionY",
+    // showNumber: "showNumber",
+    // progressBarInheritWidthFrom: "progressBarInheritWidthFrom",
+    // headerView: "headerView",
+    // choiceValuesFromQuestion: "choiceValuesFromQuestion",
+    // choiceTextsFromQuestion: "choiceTextsFromQuestion",
+    // refuseText: "refuseText",
+    // dontKnowText: "dontKnowText",
+    // cellComponent: "cellComponent",
+    // inputTextAlignment: "inputTextAlignment",
+    // maskSettings: "maskSettings",
+    // itemErrorLocation: "itemErrorLocation",
+    // signatureWidth: "signatureWidth",
+    // signatureHeight: "signatureHeight",
+    // signatureAutoScaleEnabled: "signatureAutoScaleEnabled",
+    // penMinWidth: "penMinWidth",
+    // penMaxWidth: "penMaxWidth",
+    // showPlaceholder: "showPlaceholder",
+    // placeholderReadOnly: "placeholderReadOnly",
+    // templateTitle: "templateTitle",
+    // templateTabTitle: "templateTabTitle",
+    // tabTitlePlaceholder: "tabTitlePlaceholder",
+    // templateDescription: "templateDescription",
+    // noEntriesText: "noEntriesText",
+    // newPanelPosition: "newPanelPosition",
+    // templateTitleLocation: "templateTitleLocation",
+    // templateErrorLocation: "templateErrorLocation",
+    // templateVisibleIf: "templateVisibleIf",
+    // saveMaskedValue: "saveMaskedValue",
+    // pattern: "pattern",
+    // allowNegativeValues: "allowNegativeValues",
+    // decimalSeparator: "decimalSeparator",
+    // thousandsSeparator: "thousandsSeparator",
+    // prefix: "prefix",
+    // suffix: "suffix"
   },
   theme: {
     advancedMode: "Mode lanjutan",
@@ -2813,3 +2893,10 @@ editorLocalization.locales["id"] = indonesianStrings;
 // paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "Teks fallback untuk judul tab yang berlaku saat pola judul tab tidak menghasilkan nilai yang berarti."
 // theme.fontColor: "Font color" => "Warna font"
 // theme.backgroundColor: "Background color" => "Warna latar belakang"
+// pe.questionTitleWidth: "Question title width" => "Lebar judul pertanyaan"
+// pe.fileInputPlaceholder: "Select a file or paste a file link..." => "Pilih file atau tempel tautan file..."
+// panelbase.questionTitleWidth: "Ex.: 200px" => "Contoh: 200px"
+// panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Mengatur lebar yang konsisten untuk judul pertanyaan bila disejajarkan di sebelah kiri kotak pertanyaan. Menerima nilai CSS (px, %, in, pt, dll.)."
+// page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Mengatur lebar yang konsisten untuk judul pertanyaan bila disejajarkan di sebelah kiri kotak pertanyaan. Menerima nilai CSS (px, %, in, pt, dll.)."
+// pe.commentAreaRows: "Comment area height (in lines)" => "Tinggi area komentar (dalam baris)"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "Mengatur jumlah baris yang ditampilkan di area teks untuk komentar pertanyaan. Dalam input mengambil lebih banyak baris, bilah gulir muncul."

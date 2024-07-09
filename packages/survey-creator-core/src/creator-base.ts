@@ -1499,7 +1499,7 @@ export class SurveyCreatorModel extends Base
     for (var i = 0; i < properties.length; i++) {
       const prop = Serializer.findProperty(className, properties[i]);
       if (!!prop) {
-        if(!visible) {
+        if (!visible) {
           this.hiddenProperties[prop.id] = true;
         } else {
           delete this.hiddenProperties[prop.id];
@@ -2223,6 +2223,18 @@ export class SurveyCreatorModel extends Base
       }
     );
   }
+  /**
+   * Specifies where to add new questions when users click the "Add Question" button.
+   * 
+   * Accepted values:
+   * 
+   * - `true` (default)       
+   * New questions are added to the end of a survey page.
+   * 
+   * - `false`      
+   * New questions are added after the currently selected question on the design surface.
+   */
+  public addNewQuestionLast: boolean = true;
   protected doClickQuestionCore(
     element: IElement,
     modifiedType: string = "ADDED_FROM_TOOLBOX",
@@ -2253,8 +2265,12 @@ export class SurveyCreatorModel extends Base
       }
       parent = selectedElement.parent;
       if (index < 0) {
-        index = parent.elements.indexOf(selectedElement);
-        if (index > -1) index++;
+        if (this.addNewQuestionLast) {
+          index = parent.elements.length;
+        } else {
+          index = parent.elements.indexOf(selectedElement);
+          if (index > -1) index++;
+        }
       }
     }
     if (panel) {
@@ -2363,9 +2379,23 @@ export class SurveyCreatorModel extends Base
   }
 
   public createNewElement(json: any): IElement {
-    var newElement = Serializer.createClass(json["type"]);
+    const newElement = Serializer.createClass(json["type"]);
     new JsonObject().toObject(json, newElement);
-    this.setNewNames(newElement);
+    let needNewName = true;
+    if (!!json.name) {
+      if (newElement.isPage) {
+        needNewName = !!this.survey.getPageByName(newElement.name);
+      } else {
+        if (newElement.isPanel) {
+          needNewName = !!this.survey.getPanelByName(newElement.name);
+        } else {
+          needNewName = !!this.survey.getQuestionByName(newElement.name);
+        }
+      }
+    }
+    if (needNewName) {
+      this.setNewNames(newElement);
+    }
     return newElement;
   }
 
@@ -2856,7 +2886,7 @@ export class SurveyCreatorModel extends Base
     parentObj: any,
     parentProperty: JsonObjectProperty
   ): boolean {
-    if(this.hiddenProperties[property.id]) return false;
+    if (this.hiddenProperties[property.id]) return false;
     var options = {
       obj: object,
       property: property,
@@ -3403,6 +3433,7 @@ export class SurveyCreatorModel extends Base
     const res: Array<QuestionToolboxItem> = [].concat(this.toolbox.items);
     if (!element || this.maxNestedPanels < 0) return res;
     if (!isAddNew && element.isPanel) return res;
+
     if (this.maxNestedPanels < SurveyHelper.getElementDeepLength(element)) {
       for (let i = res.length - 1; i >= 0; i--) {
         if (res[i].isPanel) {
@@ -3414,9 +3445,14 @@ export class SurveyCreatorModel extends Base
   }
   public getQuestionTypeSelectorModel(beforeAdd: (type: string) => void, element?: SurveyElement) {
     let panel = !!element && element.isPanel ? <PanelModel>element : null;
+    const onSelectQuestionType = (questionType: string, subtype?: string) => {
+      this.currentAddQuestionType = questionType;
+      this.addNewQuestionInPage(beforeAdd, panel, questionType, subtype);
+      newAction.popupModel.hide();
+    };
     const getActions = () => {
       const availableTypes = this.getAvailableToolboxItems(element).map((item) => {
-        return this.createIActionBarItemByClass(item.name, item.title, item.iconName, item.needSeparator);
+        return this.createIActionBarItemByClass(item, item.needSeparator, onSelectQuestionType);
       });
       return availableTypes;
     };
@@ -3426,10 +3462,6 @@ export class SurveyCreatorModel extends Base
       title: this.getLocString("ed.addNewQuestion"),
     }, {
       items: getActions(),
-      onSelectionChanged: (item: any) => {
-        this.currentAddQuestionType = item.id;
-        this.addNewQuestionInPage(beforeAdd, panel);
-      },
       onShow: () => {
         const listModel = newAction.popupModel.contentComponentData.model;
         listModel.setItems(getActions());
@@ -3454,9 +3486,8 @@ export class SurveyCreatorModel extends Base
   }
 
   @undoRedoTransaction()
-  public addNewQuestionInPage(beforeAdd: (string) => void, panel: IPanel = null, type: string = null) {
-    if (!type)
-      type = this.currentAddQuestionType;
+  public addNewQuestionInPage(beforeAdd: (string) => void, panel: IPanel = null, type: string = null, subtype: string = null) {
+    if (!type) type = this.currentAddQuestionType;
     if (!type) type = settings.designer.defaultAddQuestionType;
     beforeAdd(type);
     let json = { type: type };
@@ -3465,15 +3496,37 @@ export class SurveyCreatorModel extends Base
       json = toolboxItem.json;
     }
     let newElement = this.createNewElement(json);
+
+    let propertyName = QuestionToolbox.getSubTypePropertyName(type);
+    if (!!propertyName && !!subtype) (newElement as Question).setPropertyValue(propertyName, subtype);
+
     this.clickToolboxItem(newElement, panel, "ADDED_FROM_PAGEBUTTON");
   }
-  createIActionBarItemByClass(className: string, title: string, iconName: string, needSeparator: boolean): Action {
+
+  createIActionBarItemByClass(item: QuestionToolboxItem, needSeparator: boolean, onSelectQuestionType?: (questionType: string, subtype?: string) => void): Action {
     const action = new Action({
-      title: title,
-      id: className,
-      iconName: iconName,
+      title: item.title,
+      id: item.name,
+      iconName: item.iconName,
+      visible: item.visible,
+      enabled: item.enabled,
+      needSeparator: needSeparator
     });
-    action.needSeparator = needSeparator;
+    action.action = () => {
+      onSelectQuestionType(item.typeName);
+    };
+
+    if (!!item.items && item.items.length > 0) {
+      const innerItems = item.items.map(i => new Action({
+        id: i.id,
+        title: i.title,
+        action: () => {
+          action.hidePopup();
+          onSelectQuestionType(item.typeName, i.id);
+        }
+      }));
+      action.setSubItems({ items: innerItems });
+    }
     return action;
   }
 
@@ -3587,6 +3640,18 @@ export class SurveyCreatorModel extends Base
    * @see toolboxLocation
    */
   @property({ defaultValue: "right" }) sidebarLocation: "left" | "right";
+
+  /*
+   * Specifies the visibility of the buttons that expand and collapse survey elements on the design surface.
+   * 
+   * Possible values:
+   * 
+   * - `"onhover"` (default) - Displays an expand/collapse button when a survey element is hovered over or selected.
+   * - `"always"` - Displays the expand/collapse buttons permanently.
+   * - `"never"` - Hides the expand/collapse buttons.
+   */
+  @property({ defaultValue: "never" }) expandCollapseButtonVisibility?: "never" | "onhover" | "always";
+
   selectFromStringEditor: boolean;
 
   @property({
@@ -3634,16 +3699,16 @@ export function initializeDesignTimeSurveyModel(model: any, creator: SurveyCreat
   model.isPopupEditorContent = false;
   model.onElementWrapperComponentName.add((_, opt) => {
     const compName = opt.componentName;
-    if(opt.wrapperName === "component") {
+    if (opt.wrapperName === "component") {
       opt.componentName = getElementWrapperComponentName(opt.element, opt.reason, model.isPopupEditorContent);
     }
-    if(opt.wrapperName === "content-component") {
+    if (opt.wrapperName === "content-component") {
       opt.componentName = getQuestionContentWrapperComponentName(opt.element);
     }
-    if(opt.wrapperName === "row") {
+    if (opt.wrapperName === "row") {
       opt.componentName = "svc-row";
     }
-    if(opt.wrapperName === "itemvalue") {
+    if (opt.wrapperName === "itemvalue") {
       opt.componentName = getItemValueWrapperComponentName(opt.item, opt.element);
     }
     if(opt.wrapperName === "string" && !creator.readOnly && isStringEditable(opt.element, opt.reason)) {
@@ -3653,13 +3718,13 @@ export function initializeDesignTimeSurveyModel(model: any, creator: SurveyCreat
   });
   model.onElementWrapperComponentData.add((_, opt) => {
     const data = opt.data;
-    if(opt.wrapperName === "component") {
+    if (opt.wrapperName === "component") {
       opt.data = getElementWrapperComponentData(opt.element, opt.reason, creator);
     }
-    if(opt.wrapperName === "row") {
+    if (opt.wrapperName === "row") {
       opt.data = { creator: creator, row: opt.element };
     }
-    if(opt.wrapperName === "itemvalue") {
+    if (opt.wrapperName === "itemvalue") {
       opt.data = getItemValueWrapperComponentData(opt.item, opt.element, creator);
     }
     if(opt.wrapperName === "string" && !creator.readOnly && isStringEditable(opt.element, opt.data.name)) {

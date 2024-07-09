@@ -418,12 +418,15 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "totalDisplayStyle", tab: "totals" },
       { name: "totalCurrency", tab: "totals" },
       { name: "totalFormat", tab: "totals" },
-      { name: "totalExpression", tab: "totals" }
+      { name: "totalExpression", tab: "totals" },
+      { name: "validators", tab: "validation" },
+      { name: "requiredErrorText", tab: "validation" }
     ],
     tabs: [
       { name: "general", index: 5 },
       { name: "logic", index: 20 },
-      { name: "totals", index: 40 }
+      { name: "totals", index: 40 },
+      { name: "validation", index: 60 }
     ]
   },
   "matrixdropdowncolumn@checkbox": {
@@ -750,6 +753,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       },
       { name: "maxTextLength", tab: "question" },
       { name: "maxOthersLength", tab: "question" },
+      { name: "commentAreaRows", tab: "question" },
       { name: "autoGrowComment", tab: "question" },
       { name: "allowResizeComment", tab: "question" },
       { name: "showPageTitles", tab: "pages" },

@@ -1,3 +1,5 @@
+// This dictionary contains 65 untranslated or inherited localization strings.
+// These strings are commented out. Uncomment and edit them if you want to add your translations.
 import { editorLocalization } from "survey-creator-core";
 
 export var huStrings = {
@@ -598,6 +600,7 @@ export var huStrings = {
     allowCompleteSurveyAutomatic: "A felmérés automatikus kitöltése",
     showProgressBar: "Előrehaladás-mutató megjelenítése",
     questionTitleLocation: "Kérdés címének helye",
+    questionTitleWidth: "Kérdés címének szélessége",
     requiredText: "Kötelező szimbólum",
     questionTitleTemplate: "Kérdés címének sablonja: '{szám}. {kötelező} {cím}'",
     questionErrorLocation: "Kérdés hibaüzenetének helyzete",
@@ -645,6 +648,7 @@ export var huStrings = {
     questionsOnPageMode: "Felmérési struktúra",
     maxTextLength: "Válasz maximális hossza (karakterben)",
     maxOthersLength: "Megjegyzés maximális hossza (karakterben)",
+    commentAreaRows: "Megjegyzés területének magassága (sorokban)",
     autoGrowComment: "Szükség esetén automatikusan bontsa ki a megjegyzésterületet",
     allowResizeComment: "A szövegterületek átméretezésének engedélyezése a felhasználók számára",
     textUpdateMode: "Szöveges kérdés értékének frissítése",
@@ -734,6 +738,7 @@ export var huStrings = {
     correctAnswer: "Helyes válasz",
     defaultPanelValue: "Alapértelmezett értékek",
     cells: "Cella szövegek",
+    fileInputPlaceholder: "Válasszon ki egy fájlt, vagy illesszen be egy fájlhivatkozást...",
     keyName: "Fő oszlop",
     itemvalue: {
       visibleIf: "Tegye láthatóvá a beállítást, ha",
@@ -1220,6 +1225,9 @@ export var huStrings = {
     currencymask: {
       prefix: "Pl.: $",
       suffix: "Pl.: USD"
+    },
+    panelbase: {
+      questionTitleWidth: "Pl.: 200px"
     }
   },
   pehelp: {
@@ -1230,6 +1238,7 @@ export var huStrings = {
       enableIf: "A varázspálca ikonnal állítson be egy feltételes szabályt, amely letiltja a panel írásvédett módját.",
       requiredIf: "A varázspálca ikonnal állítson be egy feltételes szabályt, amely megakadályozza a felmérés elküldését, kivéve, ha legalább egy beágyazott kérdésre van válasz.",
       questionTitleLocation: "A panelen található összes kérdésre vonatkozik. Ha felül szeretné bírálni ezt a beállítást, határozzon meg címigazítási szabályokat az egyes kérdésekhez. Az \"Öröklés\" opció az oldalszintű (ha be van állítva) vagy a felmérés szintű beállítást (\"Alapértelmezetten felül\") alkalmazza.",
+      questionTitleWidth: "Egységes szélességet állít be a kérdéscímekhez, ha azok a kérdésmezőktől balra vannak igazítva. CSS-értékeket fogad el (px, %, in, pt stb.).",
       questionErrorLocation: "Beállítja a hibaüzenet helyét a panelen belüli összes kérdéssel kapcsolatban. Az \"Öröklés\" opció az oldalszintű (ha be van állítva) vagy a felmérés szintű beállítást alkalmazza.",
       questionsOrder: "Megtartja a kérdések eredeti sorrendjét, vagy véletlenszerűvé teszi őket. Az \"Öröklés\" opció az oldalszintű (ha be van állítva) vagy a felmérés szintű beállítást alkalmazza.",
       page: "A kijelölt oldal végére helyezi a panelt.",
@@ -1344,6 +1353,7 @@ export var huStrings = {
     questionsOrder: "Megtartja a kérdések eredeti sorrendjét, vagy véletlenszerűvé teszi őket. A beállítás hatása csak az Előnézet lapon látható.",
     maxTextLength: "Csak szövegbeviteli kérdések esetén.",
     maxOthersLength: "Csak kérdésekhez fűzött megjegyzésekhez.",
+    commentAreaRows: "Beállítja a kérdésmegjegyzések szövegterületein megjelenített sorok számát. A bemenet több sort foglal el, megjelenik a görgetősáv.",
     autoGrowComment: "Válassza ki, ha azt szeretné, hogy a kérdésmegjegyzések és a hosszú szöveges kérdések magassága automatikusan növekedjen a beírt szöveg hossza alapján.",
     allowResizeComment: "Csak kérdésekhez és hosszú szöveges kérdésekhez.",
     calculatedValues: "Az egyéni változók köztes vagy kiegészítő változókként szolgálnak az űrlapszámításokban. A válaszadó bemeneteit forrásértékként veszik fel. Minden egyéni változónak egyedi neve és egy kifejezése van, amelyen alapul.",
@@ -1376,6 +1386,7 @@ export var huStrings = {
       enableIf: "A varázspálca ikonnal állítson be egy feltételes szabályt, amely letiltja az oldal írásvédett módját.",
       requiredIf: "A varázspálca ikonnal állítson be egy feltételes szabályt, amely megakadályozza a felmérés elküldését, kivéve, ha legalább egy beágyazott kérdésre van válasz.",
       questionTitleLocation: "Az ezen az oldalon található összes kérdésre vonatkozik. Ha felül szeretné bírálni ezt a beállítást, határozzon meg címigazítási szabályokat az egyes kérdésekhez vagy panelekhez. Az \"Öröklés\" opció a felmérés szintű beállítást alkalmazza (\"Felül\" alapértelmezés szerint).",
+      questionTitleWidth: "Egységes szélességet állít be a kérdéscímekhez, ha azok a kérdésmezőktől balra vannak igazítva. CSS-értékeket fogad el (px, %, in, pt stb.).",
       questionErrorLocation: "Beállítja az érvénytelen bevitelű kérdéssel kapcsolatos hibaüzenet helyét. Válasszon a következők közül: \"Felső\" - egy hibaüzenet kerül a kérdésmező tetejére; \"Alsó\" - egy hibaüzenet kerül a kérdésmező aljára. Az \"Öröklés\" opció a felmérés szintű beállítást alkalmazza (\"Felül\" alapértelmezés szerint).",
       questionsOrder: "Megtartja a kérdések eredeti sorrendjét, vagy véletlenszerűvé teszi őket. Az \"Öröklés\" opció a felmérési szintű beállítást alkalmazza (\"Eredeti\" alapértelmezés szerint). A beállítás hatása csak az Előnézet lapon látható.",
       navigationButtonsVisibility: "Beállítja a navigációs gombok láthatóságát az oldalon. Az \"Öröklés\" opció a felmérés szintű beállítást alkalmazza, amely alapértelmezés szerint \"Látható\"."
@@ -1448,6 +1459,19 @@ export var huStrings = {
     currencymask: {
       prefix: "Egy vagy több szimbólum jelenik meg az érték előtt.",
       suffix: "Egy vagy több szimbólum jelenik meg az érték után."
+    },
+    theme: {
+      // isPanelless: "This setting applies only to questions outside of a panel.",
+      // primaryColor: "Sets a supplementary color that highlights key survey elements.",
+      // panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background.",
+      // questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background.",
+      // cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes.",
+      // "--sjs-general-backcolor-dim": "Sets the main background color of the survey."
+    },
+    header: {
+      // inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in.",
+      // textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels.",
+      // overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey."
     }
   },
   // Properties
@@ -1551,7 +1575,63 @@ export var huStrings = {
     allowCameraAccess: "Kamera-hozzáférés engedélyezése",
     scaleColorMode: "Színmód méretezése",
     rateColorMode: "Értékelje a színmódot",
-    copyDisplayValue: "Megjelenített érték másolása"
+    copyDisplayValue: "Megjelenített érték másolása",
+    // insensitive: "insensitive",
+    // state: "state",
+    // indent: "indent",
+    // titleLocation: "titleLocation",
+    // descriptionLocation: "descriptionLocation",
+    // hideNumber: "hideNumber",
+    // errorLocation: "errorLocation",
+    // isUnique: "isUnique",
+    // showInMultipleColumns: "showInMultipleColumns",
+    // totalAlignment: "totalAlignment",
+    // detailErrorLocation: "detailErrorLocation",
+    // inheritWidthFrom: "inheritWidthFrom",
+    // textAreaWidth: "textAreaWidth",
+    // textGlowEnabled: "textGlowEnabled",
+    // overlapEnabled: "overlapEnabled",
+    // backgroundImageOpacity: "backgroundImageOpacity",
+    // logoPositionX: "logoPositionX",
+    // logoPositionY: "logoPositionY",
+    // titlePositionX: "titlePositionX",
+    // titlePositionY: "titlePositionY",
+    // descriptionPositionX: "descriptionPositionX",
+    // descriptionPositionY: "descriptionPositionY",
+    // showNumber: "showNumber",
+    // progressBarInheritWidthFrom: "progressBarInheritWidthFrom",
+    // headerView: "headerView",
+    // choiceValuesFromQuestion: "choiceValuesFromQuestion",
+    // choiceTextsFromQuestion: "choiceTextsFromQuestion",
+    // refuseText: "refuseText",
+    // dontKnowText: "dontKnowText",
+    // cellComponent: "cellComponent",
+    // inputTextAlignment: "inputTextAlignment",
+    // maskSettings: "maskSettings",
+    // itemErrorLocation: "itemErrorLocation",
+    // signatureWidth: "signatureWidth",
+    // signatureHeight: "signatureHeight",
+    // signatureAutoScaleEnabled: "signatureAutoScaleEnabled",
+    // penMinWidth: "penMinWidth",
+    // penMaxWidth: "penMaxWidth",
+    // showPlaceholder: "showPlaceholder",
+    // placeholderReadOnly: "placeholderReadOnly",
+    // templateTitle: "templateTitle",
+    // templateTabTitle: "templateTabTitle",
+    // tabTitlePlaceholder: "tabTitlePlaceholder",
+    // templateDescription: "templateDescription",
+    // noEntriesText: "noEntriesText",
+    // newPanelPosition: "newPanelPosition",
+    // templateTitleLocation: "templateTitleLocation",
+    // templateErrorLocation: "templateErrorLocation",
+    // templateVisibleIf: "templateVisibleIf",
+    // saveMaskedValue: "saveMaskedValue",
+    // pattern: "pattern",
+    // allowNegativeValues: "allowNegativeValues",
+    // decimalSeparator: "decimalSeparator",
+    // thousandsSeparator: "thousandsSeparator",
+    // prefix: "prefix",
+    // suffix: "suffix"
   },
   theme: {
     advancedMode: "Speciális mód",
@@ -2812,3 +2892,10 @@ editorLocalization.locales["hu"] = huStrings;
 // paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "A lapcímek alapszövege, amely akkor érvényes, ha a lap címmintája nem ad értelmes értéket."
 // theme.fontColor: "Font color" => "Betűszín"
 // theme.backgroundColor: "Background color" => "Háttérszín"
+// pe.questionTitleWidth: "Question title width" => "Kérdés címének szélessége"
+// pe.fileInputPlaceholder: "Select a file or paste a file link..." => "Válasszon ki egy fájlt, vagy illesszen be egy fájlhivatkozást..."
+// panelbase.questionTitleWidth: "Ex.: 200px" => "Pl.: 200px"
+// panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Egységes szélességet állít be a kérdéscímekhez, ha azok a kérdésmezőktől balra vannak igazítva. CSS-értékeket fogad el (px, %, in, pt stb.)."
+// page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Egységes szélességet állít be a kérdéscímekhez, ha azok a kérdésmezőktől balra vannak igazítva. CSS-értékeket fogad el (px, %, in, pt stb.)."
+// pe.commentAreaRows: "Comment area height (in lines)" => "Megjegyzés területének magassága (sorokban)"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "Beállítja a kérdésmegjegyzések szövegterületein megjelenített sorok számát. A bemenet több sort foglal el, megjelenik a görgetősáv."

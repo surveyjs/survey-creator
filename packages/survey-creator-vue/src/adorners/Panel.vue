@@ -29,6 +29,12 @@
           :iconName="'icon-drag-area-indicator_24x16'"
           :size="24"
         ></sv-svg-icon>
+        <div class="svc-question__top-actions">
+          <sv-action-bar
+            :model="adorner.topActionContainer"
+            :handleClick="false"
+          ></sv-action-bar>
+        </div>
       </div>
       <component :is="componentName" v-bind="componentData"></component>
       <div v-if="adorner.isEmptyElement" class="svc-panel__placeholder_frame-wrapper">

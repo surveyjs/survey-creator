@@ -102,7 +102,7 @@ test("Single input question wrapper action convert on hover", async (t) => {
 
     .hover(getToolboxItemByText("Single-Line Input"))
     .click(getToolboxItemByText("Single-Line Input"))
-    .click(Selector(".svc-tab-designer"), { offsetX: 5, offsetY: 5 })
+    .click(Selector(".svc-tab-designer"), { offsetX: 150, offsetY: 5 })
     .expect(Selector(".svc-question__content.svc-question__content--selected").exists).notOk()
     .hover(".svc-question__content", { offsetX: 5, offsetY: 5 })
     .wait(500)
@@ -378,4 +378,41 @@ test("No tab stop in dynamic panel", async (t) => {
     .pressKey("tab")
     .pressKey("tab")
     .expect(Selector(".svc-question__content--panel .sv-action-bar-item").withText("Panel").focused).ok();
+});
+
+test("Question adorner - collapse button in differen modes", async (t) => {
+  await t.resizeWindow(1920, 1080);
+  const json = {
+    elements: [
+      {
+        type: "text",
+        name: "question1"
+      }
+    ]
+  };
+  await setJSON(json);
+  await t.hover(getToolboxItemByText("Single-Line Input"));
+  const qContent = Selector(".svc-question__content");
+  const qCollapseButton = Selector(".svc-question__content #collapse");
+  await t.hover(qContent, { offsetX: 10, offsetY: 10 });
+  await t.expect(Selector(".svc-question__adorner").hasClass("svc-hovered")).ok();
+  await t.expect(qCollapseButton.visible).notOk();
+  await t.click(qContent, { offsetX: 10, offsetY: 10 });
+  await t.expect(qContent.hasClass("svc-question__content--selected")).ok();
+  await t.expect(qCollapseButton.visible).notOk();
+
+  await ClientFunction(() => { window["creator"].expandCollapseButtonVisibility = "onhover"; })();
+  json.elements[0].name = "question2";
+  await setJSON(json);
+  await t.hover(getToolboxItemByText("Single-Line Input"));
+  await t.expect(qCollapseButton.visible).notOk();
+  await t.hover(qContent, { offsetX: 10, offsetY: 10 });
+  await t.expect(qCollapseButton.visible).ok();
+
+  await ClientFunction(() => { window["creator"].expandCollapseButtonVisibility = "always"; })();
+  json.elements[0].name = "question3";
+  await t.hover(getToolboxItemByText("Single-Line Input"));
+  await setJSON(json);
+  await t.expect(qCollapseButton.visible).ok();
+  await ClientFunction(() => { window["creator"].expandCollapseButtonVisibility = "never"; })();
 });

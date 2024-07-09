@@ -1,3 +1,5 @@
+// This dictionary contains 65 untranslated or inherited localization strings.
+// These strings are commented out. Uncomment and edit them if you want to add your translations.
 import { editorLocalization } from "survey-creator-core";
 
 export var mnStrings = {
@@ -598,6 +600,7 @@ export var mnStrings = {
     allowCompleteSurveyAutomatic: "Судалгааг автоматаар дуусгах",
     showProgressBar: "Явцын мөрний байршил",
     questionTitleLocation: "Асуултын гарчгийн байршил",
+    questionTitleWidth: "Асуулт нэрийн өргөн",
     requiredText: "Шаардлагатай тэмдэг(үүд)",
     questionTitleTemplate: "Асуултын гарчигны загвар, үндсэн нь: '{үгүй}. {шаардах} {гарчиг}'",
     questionErrorLocation: "Алдааны мэдэгдлийн байршил",
@@ -645,6 +648,7 @@ export var mnStrings = {
     questionsOnPageMode: "Санал асуулгын бүтэц",
     maxTextLength: "Хариултын хамгийн их урт(тэмдэгтээр)",
     maxOthersLength: "Хариултын хамгийн бага урт(тэмдэгтээр)",
+    commentAreaRows: "Тайлбар хэсгийн өндөр (мөрөнд)",
     autoGrowComment: "Шаардлагатай үед санал сэтгэгдлийн хэсгийг өргөсгөх",
     allowResizeComment: "Хэрэглэгчдэд текстийн газруудыг дахин ашиглах боломж олго",
     textUpdateMode: "Текст асуултын утгыг шинэчлэх",
@@ -734,6 +738,7 @@ export var mnStrings = {
     correctAnswer: "Зөв хариулт",
     defaultPanelValue: "Үндсэн утга",
     cells: "Нүдний текст",
+    fileInputPlaceholder: "Файл сонгох эсвэл файлын холбоосыг наа...",
     keyName: "Түлхүүр багана",
     itemvalue: {
       visibleIf: "Хэрэв сонголтыг ил тод болго",
@@ -1220,6 +1225,9 @@ export var mnStrings = {
     currencymask: {
       prefix: "Экс.: $",
       suffix: "Экс.: USD"
+    },
+    panelbase: {
+      questionTitleWidth: "Экс: 200px"
     }
   },
   pehelp: {
@@ -1230,6 +1238,7 @@ export var mnStrings = {
       enableIf: "Зөвхөн унших хэв маягийг хаах нөхцөлтэй дүрмийг тогтоохын тулд шидэт туузны зургыг ашигла.",
       requiredIf: "Наад зах нь нэг үүрээ засах асуулт хариулт байхгүй л бол судалгаа явуулахаас сэргийлдэг нөхцөлийн дүрмийг тогтоохын тулд шидэт туузны зургыг ашигла.",
       questionTitleLocation: "Энэ хэлэлцүүлгийн бүх асуултад хамаарна. Хэрэв та энэ тохиргоог хүчингүй болгохыг хүсвэл хувь хүний асуултуудад зориулсан нэрийн зохицуулах дүрмүүдийг тодорхойл. \"Өв залгамжлах\" сонголт нь хуудасны түвшин (хэрэв set) эсвэл судалгааны түвшний тохиргоог (\"Top\" нь default-аар) хэрэгжүүлдэг.",
+      questionTitleWidth: "Асуултын хайрцгуудынхаа зүүн талд эгнэн зогсож байх үед асуултын нэрний тогтмол өргөнийг тогтоо. CSS-ийн үнэт зүйлсийг (px, %, in, pt г.м) хүлээн зөвшөөрдөг.",
       questionErrorLocation: "Хяналтын шатны бүх асуулттай холбогдуулан алдааны мессежийн байршлыг тогтооно. \"Өв залгамжлах\" сонголт нь хуудасны түвшин (хэрэв set) эсвэл судалгааны түвшний тохиргоог хэрэгжүүлдэг.",
       questionsOrder: "Асуултуудын анхны дарааллыг хадгалах эсвэл санамсаргүйгээр авч явдаг. \"Өв залгамжлах\" сонголт нь хуудасны түвшин (хэрэв set) эсвэл судалгааны түвшний тохиргоог хэрэгжүүлдэг.",
       page: "Сонгосон хуудасны төгсгөлд панелийг дахин байршуулах.",
@@ -1344,6 +1353,7 @@ export var mnStrings = {
     questionsOrder: "Асуултуудын анхны дарааллыг хадгалах эсвэл санамсаргүйгээр авч явдаг. Энэ тохиргооны үр нөлөө нь зөвхөн Preview таб-д харагдана.",
     maxTextLength: "Зөвхөн текст оруулах асуултуудад зориулна.",
     maxOthersLength: "Асуулт хариултын хувьд зөвхөн.",
+    commentAreaRows: "Асуулт хариултын текст хэсэгт үзүүлсэн мөрүүдийн тоог тогтоо. Хуйлмал бичиг нь илүү олон мөртэй байдаг.",
     autoGrowComment: "Асуулт хариулт болон Урт Текст асуултыг орсон текст урт дээр үндэслэн өндрөөс автоматаар өсгөхийг хүсвэл сонгоно уу.",
     allowResizeComment: "Асуулт хариулт болон Урт текстийн асуултуудад зөвхөн.",
     calculatedValues: "Үйлчилгээний хувьсагчид нь форм тооцоололд хэрэглэгддэг дундын буюу туслах хувьсагчид болж үйлчилдэг. Тэд хариулагчийн оруулсан хувь нэмрийг эх сурвалжийн үнэт зүйлс гэж үздэг. Custom хувьсагч бүр өвөрмөц нэртэй, дээр нь суурилсан илэрхийлэлтэй байдаг.",
@@ -1376,6 +1386,7 @@ export var mnStrings = {
       enableIf: "Зөвхөн хуудсанд зориулсан унших хэв маягийг хаах нөхцөлтэй дүрмийг тогтоохын тулд шидэт wand зургыг ашигла.",
       requiredIf: "Наад зах нь нэг үүрээ засах асуулт хариулт байхгүй л бол судалгаа явуулахаас сэргийлдэг нөхцөлийн дүрмийг тогтоохын тулд шидэт туузны зургыг ашигла.",
       questionTitleLocation: "Энэ хуудсан дахь бүх асуултад хамаарна. Хэрэв та энэ тохиргоог хүчингүй болгохыг хүсвэл хувь хүний асуулт эсвэл панелуудын нэрийн зохицуулах дүрмүүдийг тодорхойл. \"Өв залгамж\" сонголт нь судалгааны түвшний тохиргоог (\"Top\" by default) хэрэгжүүлдэг.",
+      questionTitleWidth: "Асуултын хайрцгуудынхаа зүүн талд эгнэн зогсож байх үед асуултын нэрний тогтмол өргөнийг тогтоо. CSS-ийн үнэт зүйлсийг (px, %, in, pt г.м) хүлээн зөвшөөрдөг.",
       questionErrorLocation: "Асуулттай холбоотой алдааны мессежийн байршлыг хүчингүй оруулсан байдлаар тогтооно. Аль нэгийг сонгоно уу: \"Топ\" - асуултын хайрцагны дээд хэсэгт алдаа текст байрлуулсан байна; \"Bottom\" - асуултын хайрцагны доод хэсэгт алдаа текст байрлуулна. \"Өв залгамж\" сонголт нь судалгааны түвшний тохиргоог (\"Top\" by default) хэрэгжүүлдэг.",
       questionsOrder: "Асуултуудын анхны дарааллыг хадгалах эсвэл санамсаргүйгээр авч явдаг. \"Өв залгамж\" сонголт нь судалгааны түвшний тохиргоог (\"Оригинал\" дефолтоор) хэрэгжүүлдэг. Энэ тохиргооны үр нөлөө нь зөвхөн Preview таб-д харагдана.",
       navigationButtonsVisibility: "Хуудсан дээр навигацийн товчны харагдах байдлыг тогтоо. \"Өв залгамжлах\" хувилбар нь \"Үзэгдэх\" гэсэн сонголт бүхий судалгааны түвшний тохиргоог хэрэгжүүлдэг."
@@ -1448,6 +1459,19 @@ export var mnStrings = {
     currencymask: {
       prefix: "Үнэ цэнийн өмнө үзүүлэх нэг эсвэл хэд хэдэн бэлгэдлүүдийг.",
       suffix: "Үнэ цэнийн дараа үзүүлэх нэг эсвэл хэд хэдэн бэлгэдлүүдийг."
+    },
+    theme: {
+      // isPanelless: "This setting applies only to questions outside of a panel.",
+      // primaryColor: "Sets a supplementary color that highlights key survey elements.",
+      // panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background.",
+      // questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background.",
+      // cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes.",
+      // "--sjs-general-backcolor-dim": "Sets the main background color of the survey."
+    },
+    header: {
+      // inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in.",
+      // textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels.",
+      // overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey."
     }
   },
   // Properties
@@ -1551,7 +1575,63 @@ export var mnStrings = {
     allowCameraAccess: "Камераар нэвтрэх боломж олгох",
     scaleColorMode: "Масштабын өнгө загвар",
     rateColorMode: "Хэмжээ өнгөний хэв маяг",
-    copyDisplayValue: "Copy display value"
+    copyDisplayValue: "Copy display value",
+    // insensitive: "insensitive",
+    // state: "state",
+    // indent: "indent",
+    // titleLocation: "titleLocation",
+    // descriptionLocation: "descriptionLocation",
+    // hideNumber: "hideNumber",
+    // errorLocation: "errorLocation",
+    // isUnique: "isUnique",
+    // showInMultipleColumns: "showInMultipleColumns",
+    // totalAlignment: "totalAlignment",
+    // detailErrorLocation: "detailErrorLocation",
+    // inheritWidthFrom: "inheritWidthFrom",
+    // textAreaWidth: "textAreaWidth",
+    // textGlowEnabled: "textGlowEnabled",
+    // overlapEnabled: "overlapEnabled",
+    // backgroundImageOpacity: "backgroundImageOpacity",
+    // logoPositionX: "logoPositionX",
+    // logoPositionY: "logoPositionY",
+    // titlePositionX: "titlePositionX",
+    // titlePositionY: "titlePositionY",
+    // descriptionPositionX: "descriptionPositionX",
+    // descriptionPositionY: "descriptionPositionY",
+    // showNumber: "showNumber",
+    // progressBarInheritWidthFrom: "progressBarInheritWidthFrom",
+    // headerView: "headerView",
+    // choiceValuesFromQuestion: "choiceValuesFromQuestion",
+    // choiceTextsFromQuestion: "choiceTextsFromQuestion",
+    // refuseText: "refuseText",
+    // dontKnowText: "dontKnowText",
+    // cellComponent: "cellComponent",
+    // inputTextAlignment: "inputTextAlignment",
+    // maskSettings: "maskSettings",
+    // itemErrorLocation: "itemErrorLocation",
+    // signatureWidth: "signatureWidth",
+    // signatureHeight: "signatureHeight",
+    // signatureAutoScaleEnabled: "signatureAutoScaleEnabled",
+    // penMinWidth: "penMinWidth",
+    // penMaxWidth: "penMaxWidth",
+    // showPlaceholder: "showPlaceholder",
+    // placeholderReadOnly: "placeholderReadOnly",
+    // templateTitle: "templateTitle",
+    // templateTabTitle: "templateTabTitle",
+    // tabTitlePlaceholder: "tabTitlePlaceholder",
+    // templateDescription: "templateDescription",
+    // noEntriesText: "noEntriesText",
+    // newPanelPosition: "newPanelPosition",
+    // templateTitleLocation: "templateTitleLocation",
+    // templateErrorLocation: "templateErrorLocation",
+    // templateVisibleIf: "templateVisibleIf",
+    // saveMaskedValue: "saveMaskedValue",
+    // pattern: "pattern",
+    // allowNegativeValues: "allowNegativeValues",
+    // decimalSeparator: "decimalSeparator",
+    // thousandsSeparator: "thousandsSeparator",
+    // prefix: "prefix",
+    // suffix: "suffix"
   },
   theme: {
     advancedMode: "Дэвшилтэт хэв маяг",
@@ -2315,3 +2395,10 @@ editorLocalization.locales["mn"] = mnStrings;
 // paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "Таб нэрийн загвар утга учиртай үнэ цэнийг бий болгодоггүй үед хамаарах tab title-ийн уналтын текст."
 // theme.fontColor: "Font color" => "Фонтын өнгө"
 // theme.backgroundColor: "Background color" => "Ар талын өнгө"
+// pe.questionTitleWidth: "Question title width" => "Асуулт нэрийн өргөн"
+// pe.fileInputPlaceholder: "Select a file or paste a file link..." => "Файл сонгох эсвэл файлын холбоосыг наа..."
+// panelbase.questionTitleWidth: "Ex.: 200px" => "Экс: 200px"
+// panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Асуултын хайрцгуудынхаа зүүн талд эгнэн зогсож байх үед асуултын нэрний тогтмол өргөнийг тогтоо. CSS-ийн үнэт зүйлсийг (px, %, in, pt г.м) хүлээн зөвшөөрдөг."
+// page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Асуултын хайрцгуудынхаа зүүн талд эгнэн зогсож байх үед асуултын нэрний тогтмол өргөнийг тогтоо. CSS-ийн үнэт зүйлсийг (px, %, in, pt г.м) хүлээн зөвшөөрдөг."
+// pe.commentAreaRows: "Comment area height (in lines)" => "Тайлбар хэсгийн өндөр (мөрөнд)"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "Асуулт хариултын текст хэсэгт үзүүлсэн мөрүүдийн тоог тогтоо. Хуйлмал бичиг нь илүү олон мөртэй байдаг."

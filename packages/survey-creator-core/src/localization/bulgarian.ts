@@ -1,3 +1,5 @@
+// This dictionary contains 65 untranslated or inherited localization strings.
+// These strings are commented out. Uncomment and edit them if you want to add your translations.
 import { editorLocalization } from "survey-creator-core";
 
 export var bgStrings = {
@@ -598,6 +600,7 @@ export var bgStrings = {
     allowCompleteSurveyAutomatic: "Попълване на анкетата автоматично",
     showProgressBar: "Местоположение на лентата за напредък",
     questionTitleLocation: "Местоположение на заглавието на въпроса",
+    questionTitleWidth: "Ширина на заглавието на въпроса",
     requiredText: "Задължителен символ(и)",
     questionTitleTemplate: "Шаблонът за заглавие на въпрос по подразбиране е:: '{no}. {require} {title}'",
     questionErrorLocation: "Местоположение на съобщението за грешка",
@@ -645,6 +648,7 @@ export var bgStrings = {
     questionsOnPageMode: "Структура на анкетата",
     maxTextLength: "Максимална дължина на отговора (в символи)",
     maxOthersLength: "Максимална дължина на коментара (в символи)",
+    commentAreaRows: "Височина на областта за коментари (в редове)",
     autoGrowComment: "Автоматично разширяване на областта за коментари, ако е необходимо",
     allowResizeComment: "Позволява на потребителите да преоразмеряват текстови области",
     textUpdateMode: "Актуализиране стойността на текстовия въпрос",
@@ -734,6 +738,7 @@ export var bgStrings = {
     correctAnswer: "Правилен отговор",
     defaultPanelValue: "Стойности по подразбиране",
     cells: "Текст в клетката",
+    fileInputPlaceholder: "Избор на файл или поставяне на връзка към файл...",
     keyName: "Ключова колона",
     itemvalue: {
       visibleIf: "Направете опцията видима, ако",
@@ -1220,6 +1225,9 @@ export var bgStrings = {
     currencymask: {
       prefix: "Пример: $",
       suffix: "Пример: USD"
+    },
+    panelbase: {
+      questionTitleWidth: "Пример: 200px"
     }
   },
   pehelp: {
@@ -1230,6 +1238,7 @@ export var bgStrings = {
       enableIf: "Използвайте иконата на магическа пръчка, за да зададете условно правило, което забранява режима само за четене за панела.",
       requiredIf: "Използвайте иконата на магическа пръчка, за да зададете условно правило, което не позволява подаване на проучване, освен ако поне един вложен въпрос няма отговор.",
       questionTitleLocation: "Отнася се за всички въпроси в рамките на този панел. Ако искате да заместите тази настройка, определете правила за подравняване на заглавията за отделни въпроси. Опцията \"Наследяване\" прилага настройката за ниво на страница (ако е зададена) или ниво проучване (\"Горе\" по подразбиране).",
+      questionTitleWidth: "Задава еднаква ширина за заглавията на въпросите, когато те са подравнени отляво на техните полета за въпроси. Приема CSS стойности (px, %, in, pt и т.н.).",
       questionErrorLocation: "Задава местоположението на съобщение за грешка във връзка с всички въпроси в панела. Опцията \"Наследяване\" прилага настройката за ниво на страница (ако е зададена) или ниво проучване.",
       questionsOrder: "Запазва първоначалния ред на въпросите или ги рандомизира. Опцията \"Наследяване\" прилага настройката за ниво на страница (ако е зададена) или ниво проучване.",
       page: "Премества панела в края на избрана страница.",
@@ -1344,6 +1353,7 @@ export var bgStrings = {
     questionsOrder: "Запазва първоначалния ред на въпросите или ги рандомизира. Ефектът от тази настройка се вижда само в раздела Визуализация .",
     maxTextLength: "Само за въпроси за въвеждане на текст.",
     maxOthersLength: "Само за въпросителни коментари.",
+    commentAreaRows: "Задава броя на показваните редове в текстовите области за коментари на въпроси. Във входа заема повече редове, плъзгачът се появява.",
     autoGrowComment: "Изберете дали искате коментарите за въпроси и въпросите с дълъг текст автоматично да нарастват на височина въз основа на въведената дължина на текста.",
     allowResizeComment: "Само за коментари с въпроси и въпроси с дълъг текст.",
     calculatedValues: "Персонализираните променливи служат като междинни или спомагателни променливи, използвани в изчисленията на формуляра. Те приемат входните данни на респондентите като изходни стойности. Всяка персонализирана променлива има уникално име и израз, на който се базира.",
@@ -1376,6 +1386,7 @@ export var bgStrings = {
       enableIf: "Използвайте иконата на магическа пръчка, за да зададете условно правило, което забранява режима само за четене за страницата.",
       requiredIf: "Използвайте иконата на магическа пръчка, за да зададете условно правило, което не позволява подаване на проучване, освен ако поне един вложен въпрос няма отговор.",
       questionTitleLocation: "Отнася се за всички въпроси в тази страница. Ако искате да замените тази настройка, определете правила за подравняване на заглавията за отделни въпроси или панели. Опцията \"Наследяване\" прилага настройката за ниво проучване (\"Top\" по подразбиране).",
+      questionTitleWidth: "Задава еднаква ширина за заглавията на въпросите, когато те са подравнени отляво на техните полета за въпроси. Приема CSS стойности (px, %, in, pt и т.н.).",
       questionErrorLocation: "Задава местоположението на съобщение за грешка във връзка с въпроса с невалиден вход. Изберете между: \"Top\" - в горната част на полето за въпроси се поставя текст за грешка; \"Отдолу\" - в долната част на полето за въпроси се поставя текст за грешка. Опцията \"Наследяване\" прилага настройката за ниво проучване (\"Top\" по подразбиране).",
       questionsOrder: "Запазва първоначалния ред на въпросите или ги рандомизира. Опцията \"Наследяване\" прилага настройката на ниво проучване (\"Оригинал\" по подразбиране). Ефектът от тази настройка се вижда само в раздела Визуализация .",
       navigationButtonsVisibility: "Задава видимостта на бутоните за навигация на страницата. Опцията \"Наследяване\" прилага настройката на ниво проучване, която по подразбиране е \"Видима\"."
@@ -1448,6 +1459,19 @@ export var bgStrings = {
     currencymask: {
       prefix: "Един или няколко символа, които трябва да бъдат показани преди стойността.",
       suffix: "Един или няколко символа, които трябва да се покажат след стойността."
+    },
+    theme: {
+      // isPanelless: "This setting applies only to questions outside of a panel.",
+      // primaryColor: "Sets a supplementary color that highlights key survey elements.",
+      // panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background.",
+      // questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background.",
+      // cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes.",
+      // "--sjs-general-backcolor-dim": "Sets the main background color of the survey."
+    },
+    header: {
+      // inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in.",
+      // textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels.",
+      // overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey."
     }
   },
   // Properties
@@ -1551,7 +1575,63 @@ export var bgStrings = {
     allowCameraAccess: "Разреши достъп до камерата",
     scaleColorMode: "Режим на мащабиране на цветовете",
     rateColorMode: "Режим на оценяване на цветовете",
-    copyDisplayValue: "Копиране на показваната стойност"
+    copyDisplayValue: "Копиране на показваната стойност",
+    // insensitive: "insensitive",
+    // state: "state",
+    // indent: "indent",
+    // titleLocation: "titleLocation",
+    // descriptionLocation: "descriptionLocation",
+    // hideNumber: "hideNumber",
+    // errorLocation: "errorLocation",
+    // isUnique: "isUnique",
+    // showInMultipleColumns: "showInMultipleColumns",
+    // totalAlignment: "totalAlignment",
+    // detailErrorLocation: "detailErrorLocation",
+    // inheritWidthFrom: "inheritWidthFrom",
+    // textAreaWidth: "textAreaWidth",
+    // textGlowEnabled: "textGlowEnabled",
+    // overlapEnabled: "overlapEnabled",
+    // backgroundImageOpacity: "backgroundImageOpacity",
+    // logoPositionX: "logoPositionX",
+    // logoPositionY: "logoPositionY",
+    // titlePositionX: "titlePositionX",
+    // titlePositionY: "titlePositionY",
+    // descriptionPositionX: "descriptionPositionX",
+    // descriptionPositionY: "descriptionPositionY",
+    // showNumber: "showNumber",
+    // progressBarInheritWidthFrom: "progressBarInheritWidthFrom",
+    // headerView: "headerView",
+    // choiceValuesFromQuestion: "choiceValuesFromQuestion",
+    // choiceTextsFromQuestion: "choiceTextsFromQuestion",
+    // refuseText: "refuseText",
+    // dontKnowText: "dontKnowText",
+    // cellComponent: "cellComponent",
+    // inputTextAlignment: "inputTextAlignment",
+    // maskSettings: "maskSettings",
+    // itemErrorLocation: "itemErrorLocation",
+    // signatureWidth: "signatureWidth",
+    // signatureHeight: "signatureHeight",
+    // signatureAutoScaleEnabled: "signatureAutoScaleEnabled",
+    // penMinWidth: "penMinWidth",
+    // penMaxWidth: "penMaxWidth",
+    // showPlaceholder: "showPlaceholder",
+    // placeholderReadOnly: "placeholderReadOnly",
+    // templateTitle: "templateTitle",
+    // templateTabTitle: "templateTabTitle",
+    // tabTitlePlaceholder: "tabTitlePlaceholder",
+    // templateDescription: "templateDescription",
+    // noEntriesText: "noEntriesText",
+    // newPanelPosition: "newPanelPosition",
+    // templateTitleLocation: "templateTitleLocation",
+    // templateErrorLocation: "templateErrorLocation",
+    // templateVisibleIf: "templateVisibleIf",
+    // saveMaskedValue: "saveMaskedValue",
+    // pattern: "pattern",
+    // allowNegativeValues: "allowNegativeValues",
+    // decimalSeparator: "decimalSeparator",
+    // thousandsSeparator: "thousandsSeparator",
+    // prefix: "prefix",
+    // suffix: "suffix"
   },
   theme: {
     advancedMode: "Разширен режим",
@@ -2222,3 +2302,10 @@ editorLocalization.locales["bg"] = bgStrings;
 // paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "Резервен текст за заглавията на разделите, който се прилага, когато шаблонът за заглавие на раздела не създава смислена стойност."
 // theme.fontColor: "Font color" => "Цвят на шрифта"
 // theme.backgroundColor: "Background color" => "Цвят на фона"
+// pe.questionTitleWidth: "Question title width" => "Ширина на заглавието на въпроса"
+// pe.fileInputPlaceholder: "Select a file or paste a file link..." => "Избор на файл или поставяне на връзка към файл..."
+// panelbase.questionTitleWidth: "Ex.: 200px" => "Пример: 200px"
+// panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Задава еднаква ширина за заглавията на въпросите, когато те са подравнени отляво на техните полета за въпроси. Приема CSS стойности (px, %, in, pt и т.н.)."
+// page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Задава еднаква ширина за заглавията на въпросите, когато те са подравнени отляво на техните полета за въпроси. Приема CSS стойности (px, %, in, pt и т.н.)."
+// pe.commentAreaRows: "Comment area height (in lines)" => "Височина на областта за коментари (в редове)"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "Задава броя на показваните редове в текстовите области за коментари на въпроси. Във входа заема повече редове, плъзгачът се появява."
