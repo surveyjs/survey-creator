@@ -426,17 +426,17 @@ test("Check markdown events with HTML", async (t) => {
   await t
     .expect(getValue()).eql("*a<b>b</b>c*")
     .click(Selector(".sv-string-editor").withText("$abc$"))
-    .expect(Selector(".sv-string-editor").withText("*abc*").visible).ok()
-    .click(Selector(".sv-string-editor").withText("*abc*"))
+    .expect(Selector(".sv-string-editor").withText("*a<b>b</b>c*").visible).ok()
+    .click(Selector(".sv-string-editor").withText("*a<b>b</b>c*"))
     .wait(100)
     .pressKey("esc")
     .wait(100)
     .expect(Selector(".sv-string-editor").withText("$abc$").visible).ok()
     .expect(getValue()).eql("*a<b>b</b>c*")
     .click(Selector(".sv-string-editor").withText("$abc$"))
-    .expect(Selector(".sv-string-editor").withText("*abc*").visible).ok()
-    .click(Selector(".sv-string-editor").withText("*abc*"))
-    .typeText(Selector(".sv-string-editor").withText("*abc*"), "d", { caretPos: 0 })
+    .expect(Selector(".sv-string-editor").withText("*a<b>b</b>c*").visible).ok()
+    .click(Selector(".sv-string-editor").withText("*a<b>b</b>c*"))
+    .typeText(Selector(".sv-string-editor").withText("*a<b>b</b>c*"), "d", { caretPos: 0 })
     .pressKey("enter")
     .expect(Selector(".sv-string-editor").withText("d$abc$").visible).ok()
     .expect(getValue()).eql("d*a<b>b</b>c*");
@@ -923,6 +923,35 @@ test("Check string editor with html", async (t) => {
   const htmlMarkupSelector = Selector(".sv-string-editor--html #markup_html").withText("Test");
 
   await t.expect(htmlMarkupSelector.getStyleProperty("color")).eql("rgb(255, 0, 255)");
+});
+
+test("Check string editor with html security", async (t) => {
+  await explicitErrorHandler();
+  await ClientFunction(() => {
+    (<any>window).creator.onDesignerSurveyCreated.add(function (editor, options) {
+      options.survey.onTextMarkdown.add((_, opt) => {
+        opt.html = opt.text.replaceAll("<", "[").replaceAll(">", "]");
+      });
+    });
+  })();
+
+  await setJSON({
+    "elements": [
+      {
+        "type": "text",
+        title: "<p>Test</p>",
+        "name": "q1",
+      }]
+  });
+
+  const htmlMarkupSelector = Selector(".sv-string-editor--html").withText("Test");
+  await t.expect(htmlMarkupSelector.visible).ok();
+
+  await t.expect(ClientFunction(() => document.querySelector(".sd-question[data-name=q1] .sv-string-editor").innerHTML)()).eql("[p]Test[/p]");
+  await t.click(htmlMarkupSelector);
+  await t.expect(ClientFunction(() => document.querySelector(".sd-question[data-name=q1] .sv-string-editor").innerHTML)()).eql("&lt;p&gt;Test&lt;/p&gt;");
+  await t.pressKey("enter");
+  await t.expect(ClientFunction(() => document.querySelector(".sd-question[data-name=q1] .sv-string-editor").innerHTML)()).eql("[p]Test[/p]");
 });
 
 test("Check string editor focus does not throw error: #4459", async (t) => {
