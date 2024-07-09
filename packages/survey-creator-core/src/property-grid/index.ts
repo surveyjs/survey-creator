@@ -1408,18 +1408,30 @@ export class PropertyGridEditorUndefinedBoolean extends PropertyGridEditor {
 
   public getJSON(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): any {
     const choices: Array<any> = [
-      { value: undefined, text: editorLocalization.getString("pe.booleanAuto") },
-      { value: false, text: editorLocalization.getString("pe.booleanFalse") },
-      { value: true, text: editorLocalization.getString("pe.booleanTrue") },
+      { value: "auto", text: editorLocalization.getString("pe.booleanAuto") },
+      { value: "false", text: editorLocalization.getString("pe.booleanFalse") },
+      { value: "true", text: editorLocalization.getString("pe.booleanTrue") },
     ];
 
     const res: any = {
       type: "buttongroup",
       choices: choices,
-      default: undefined,
       showOptionsCaption: false
     };
     return res;
+  }
+
+  onCreated(obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions, propGridDefinition?: ISurveyPropertyGridDefinition) {
+    question.valueFromDataCallback = (val: boolean | undefined) => { return val === undefined ? "auto" : val.toString(); };
+    question.valueToDataCallback = (val: string) => { return val === "auto" ? undefined : val === "true"; };
+  }
+  onSetup(obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions) {
+    const objValue = obj.getPropertyValue(prop.name);
+    if (objValue === undefined) {
+      question.value = "auto";
+    } else {
+      question.value = objValue === "true";
+    }
   }
 }
 export abstract class PropertyGridEditorStringBase extends PropertyGridEditor {
