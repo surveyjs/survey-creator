@@ -408,6 +408,94 @@ test("Question adorner - collapse button in differen modes", async (t) => {
   await t.expect(qCollapseButton.visible).notOk();
   await t.hover(qContent, { offsetX: 10, offsetY: 10 });
   await t.expect(qCollapseButton.visible).ok();
+  await t.click(qContent, { offsetX: 10, offsetY: 10 });
+  await t.hover(getToolboxItemByText("Single-Line Input"));
+  await t.expect(qCollapseButton.visible).ok();
+
+  await ClientFunction(() => { window["creator"].expandCollapseButtonVisibility = "always"; })();
+  json.elements[0].name = "question3";
+  await t.hover(getToolboxItemByText("Single-Line Input"));
+  await setJSON(json);
+  await t.expect(qCollapseButton.visible).ok();
+  await ClientFunction(() => { window["creator"].expandCollapseButtonVisibility = "never"; })();
+});
+
+test("Question adorner - collapse button visibility inside panels", async (t) => {
+  await t.resizeWindow(1920, 1080);
+  const json = {
+    elements: [
+      {
+        "type": "panel",
+        "name": "panel1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          }
+        ]
+      }
+    ]
+  };
+  await ClientFunction(() => { window["creator"].expandCollapseButtonVisibility = "onhover"; })();
+  await setJSON(json);
+  await t.hover(getToolboxItemByText("Single-Line Input"));
+  const qContent = Selector(".svc-question__content--text");
+  const pContent = Selector(".svc-question__content--panel");
+  const qCollapseButton = Selector(".svc-question__content--text #collapse");
+  const pCollapseButton = Selector(".svc-question__content--panel #collapse");
+
+  await t.hover(qContent, { offsetX: 10, offsetY: 10 });
+  await t.expect(Selector(".svc-question__adorner.svc-hovered > .svc-question__content--text").exists).ok();
+  await t.expect(qCollapseButton.visible).ok();
+  await t.expect(pCollapseButton.visible).notOk();
+
+  await t.hover(pContent, { offsetX: 10, offsetY: 10 });
+  await t.expect(Selector(".svc-question__adorner.svc-hovered > .svc-question__content--panel").exists).ok();
+  await t.expect(qCollapseButton.visible).notOk();
+  await t.expect(pCollapseButton.visible).ok();
+
+  await t.click(qContent, { offsetX: 10, offsetY: 10 });
+  await t.expect(qContent.hasClass("svc-question__content--selected")).ok();
+  await t.expect(qCollapseButton.visible).ok();
+  await t.expect(pCollapseButton.visible).notOk();
+
+  await t.click(pContent, { offsetX: 10, offsetY: 10 });
+  await t.expect(pContent.hasClass("svc-question__content--selected")).ok();
+  await t.expect(qCollapseButton.visible).notOk();
+  await t.expect(pCollapseButton.visible).ok();
+});
+
+test("Page adorner - collapse button in differen modes", async (t) => {
+  await t.resizeWindow(1920, 1080);
+  const json = {
+    elements: [
+      {
+        type: "text",
+        name: "question1"
+      }
+    ]
+  };
+  await setJSON(json);
+  await t.hover(getToolboxItemByText("Single-Line Input"));
+  const qContent = Selector(".svc-page__content");
+  const qCollapseButton = Selector(".svc-page__content #collapse");
+  await t.hover(qContent, { offsetX: 10, offsetY: 10 });
+  await t.expect(Selector(".svc-page__content").hasClass("svc-hovered")).ok();
+  await t.expect(qCollapseButton.visible).notOk();
+  await t.click(qContent, { offsetX: 10, offsetY: 10 });
+  await t.expect(qContent.hasClass("svc-page__content--selected")).ok();
+  await t.expect(qCollapseButton.visible).notOk();
+
+  await ClientFunction(() => { window["creator"].expandCollapseButtonVisibility = "onhover"; })();
+  json.elements[0].name = "question2";
+  await setJSON(json);
+  await t.hover(getToolboxItemByText("Single-Line Input"));
+  await t.expect(qCollapseButton.visible).notOk();
+  await t.hover(qContent, { offsetX: 10, offsetY: 10 });
+  await t.expect(qCollapseButton.visible).ok();
+  await t.click(qContent, { offsetX: 10, offsetY: 10 });
+  await t.expect(qContent.hasClass("svc-page__content--selected")).ok();
+  await t.expect(qCollapseButton.visible).ok();
 
   await ClientFunction(() => { window["creator"].expandCollapseButtonVisibility = "always"; })();
   json.elements[0].name = "question3";

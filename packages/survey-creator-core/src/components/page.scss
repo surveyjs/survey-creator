@@ -28,11 +28,17 @@ svc-page {
 
 .svc-page__content-actions {
   position: absolute;
-  display: none;
+  visibility: hidden;
   top: calcSize(1);
   inset-inline-end: 0; // right
   padding: 0 calcSize(1.5);
   z-index: 1;
+}
+
+.svc-page__content-actions--top {
+  inset-inline-end: unset;
+  inset-inline-start: 0;
+  width: auto;
 }
 
 .svc-page__content:not(.svc-page__content--new):focus,
@@ -46,10 +52,12 @@ svc-page {
   &.svc-page__content--selected {
     box-shadow: 0 0 0 2px inset $secondary;
     background: $secondary-backcolor-semi-light;
-
-    .svc-page__content-actions {
-      display: block;
-    }
+  }
+  .svc-page__content-actions {
+    visibility: visible;
+  }
+  .svc-page__content-actions--top {
+    visibility: hidden;
   }
 }
 
@@ -155,6 +163,37 @@ svc-page {
 
     .sv-list__item.sv-list__item--selected.sv-list__item--group > .sv-list__item-body use {
       fill: $background;
+    }
+  }
+}
+.svc-page__content--collapsed {
+  &>* {
+    display: none
+  }
+  .svc-page__content-actions {
+    display: block;
+  }
+  .sd-page {
+    display: flex;
+    &>* {
+      display: none
+    }
+    .sd-title {
+      display: block;
+    }
+  }
+}
+.svc-page__content.svc-page__content--collapsed {
+  .sd-page {
+    padding-bottom: 0;
+  }
+}
+.svc-creator .svc-page {
+  .svc-page__content--collapse-onhover.svc-page__content--selected,
+  .svc-page__content--collapse-onhover.svc-hovered,
+  .svc-page__content--collapse-always {
+    .svc-page__content-actions--top {
+      visibility: visible;
     }
   }
 }

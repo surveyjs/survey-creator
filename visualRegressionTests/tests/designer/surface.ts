@@ -2138,6 +2138,33 @@ test("Question adorner - collapsed", async (t) => {
   });
 });
 
+test.only("Page adorner - collapsed", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 1080);
+    const json = {
+      elements: [
+        {
+          type: "html",
+          name: "question1"
+        }
+      ]
+    };
+    await ClientFunction(() => {
+      window["creator"].expandCollapseButtonVisibility = "onhover";
+    })();
+    await setJSON(json);
+    const qContent = Selector(".svc-page__content");
+    const qCollapseButton = Selector(".svc-page__content #collapse");
+    await t.hover(qContent.nth(0), { offsetX: 10, offsetY: 10 });
+    await t.expect(qContent.nth(0).hasClass("svc-hovered")).ok();
+    await takeElementScreenshot("page-adorner-expanded.png", qContent.nth(0), t, comparer);
+    await t.click(qContent.nth(0), { offsetX: 10, offsetY: 10 });
+    await t.click(qCollapseButton.filterVisible());
+    await t.hover(".svc-toolbox");
+    await takeElementScreenshot("page-adorner-collapsed.png", qContent.nth(0), t, comparer);
+  });
+});
+
 test("Question adorner - collapsed mobile", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(500, 1080);

@@ -125,11 +125,22 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this.actionContainer.dotsItem.iconSize = 16;
     this.actionContainer.dotsItem.popupModel.horizontalPosition = "center";
 
+    let collapseIcon;
+    let expandIcon;
+    if (surveyElement?.isPage) {
+      collapseIcon = "icon-collapse-v_16x16";
+      expandIcon = "icon-expand-v_16x16";
+    } else {
+      collapseIcon = "icon-collapse-detail-light_16x16";
+      expandIcon = "icon-restore_16x16";
+    }
+
     this.topActionContainer = new ActionContainer();
     this.topActionContainer.sizeMode = "small";
     this.topActionContainer.setItems([{
       id: "collapse",
-      iconName: new ComputedUpdater<string>(() => this.collapsed ? "icon-restore_16x16" : "icon-collapse-detail-light_16x16") as any,
+      css: "sv-action-bar-item--secondary",
+      iconName: new ComputedUpdater<string>(() => this.collapsed ? expandIcon : collapseIcon) as any,
       iconSize: 16,
       action: () => {
         this.collapsed = !this.collapsed;

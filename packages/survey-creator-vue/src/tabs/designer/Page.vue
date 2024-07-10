@@ -14,6 +14,9 @@
     @mouseover="hover"
     @mouseleave="hover"
   >
+    <div class="svc-page__content-actions svc-page__content-actions--top">
+      <sv-action-bar :model="model.topActionContainer"></sv-action-bar>
+    </div>
     <div class="svc-page__content-actions">
       <sv-action-bar :model="model.actionContainer"></sv-action-bar>
     </div>

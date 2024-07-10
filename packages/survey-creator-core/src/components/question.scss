@@ -939,9 +939,10 @@ svc-question,
   }
 }
 
-.svc-question__adorner--collapse-onhover.svc-hovered,
-.svc-question__adorner--collapse-always {
-  .svc-question__top-actions {
+.svc-question__adorner--collapse-onhover.svc-hovered > .svc-question__content,
+.svc-question__adorner--collapse-onhover > .svc-question__content--selected,
+.svc-question__adorner--collapse-always > .svc-question__content {
+  &>.svc-question__drag-area > .svc-question__top-actions {
     visibility: visible;
   }
 }
