@@ -78,7 +78,7 @@ svc-page-navigator-item,
   position: absolute;
   top: 0;
   height: 100%;
-  background-color: $background;
+  background-color: var(--ctr-page-navigator-item-background-color-hovered, $background);
   border-radius: calcSize(12.5);
   box-shadow: $shadow-medium;
   transition:
@@ -90,6 +90,10 @@ svc-page-navigator-item,
     display: inline-block;
     top: calcSize(1.75);
     right: calcSize(1.75);
+  }
+
+  .svc-text {
+    color: var(--ctr-page-navigator-item-text-color-hovered);
   }
 }
 

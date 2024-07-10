@@ -180,7 +180,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
               showValueInLink: false,
               allowClear: false,
               showClear: false,
-              iconName: "icon-delete_16x16"
+              iconName: "icon-delete_24x24"
             },
             {
               name: "triggerEditorPanel",

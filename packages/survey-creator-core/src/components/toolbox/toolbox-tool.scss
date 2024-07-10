@@ -184,11 +184,11 @@
 .svc-toolbox__tool .sv-dots__item:hover:enabled,
 .svc-toolbox__tool .sv-dots__item:focus:enabled,
 .svc-toolbox__tool .sv-dots__item.sv-action-bar-item--pressed {
-  background-color: var(--ctr-toolbox-button-background-color-pressed, $primary-light);
+  background-color: var(--ctr-toolbox-button-background-color-hovered, $primary-light);
   border-radius: var(--ctr-toolbox-item-corner-radius, calcSize(12.5));
 
   .sv-svg-icon use {
-    fill: var(--ctr-toolbox-item-icon-color-pressed, $primary);
+    fill: var(--ctr-toolbox-item-icon-color-hovered, $primary);
   }
 }
 
