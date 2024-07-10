@@ -271,4 +271,6 @@ export interface ICreatorOptions {
    */
   pageEditMode?: "standard" | "single" | "bypage";
   enableLinkFileEditor?: boolean;
+
+  expandCollapseButtonVisibility?: "never" | "onhover" | "always";
 }
