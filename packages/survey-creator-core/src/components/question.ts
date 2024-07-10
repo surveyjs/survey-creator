@@ -102,8 +102,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     const isStartWithNewLine = this.surveyElement.isQuestion && !(<Question>this.surveyElement).startWithNewLine;
     return new CssClassBuilder()
       .append("svc-question__adorner--start-with-new-line", isStartWithNewLine)
-      .append("svc-question__adorner--collapse-" + this.creator.expandCollapseButtonVisibility, true)
-      .append("svc-question__adorner--collapsed", !!this.renderedCollapsed).toString();
+      .append("svc-question__adorner--collapse-" + this.creator.expandCollapseButtonVisibility, true).toString();
   }
 
   css() {
@@ -120,6 +119,9 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     }
     if (this.isEmptyTemplate) {
       result += " svc-question__content--empty-template";
+    }
+    if (this.renderedCollapsed) {
+      result += " svc-question__content--collapsed";
     }
 
     if (this.isDragMe) {

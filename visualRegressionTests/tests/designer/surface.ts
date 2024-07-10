@@ -2138,7 +2138,7 @@ test("Question adorner - collapsed", async (t) => {
   });
 });
 
-test.only("Page adorner - collapsed", async (t) => {
+test("Page adorner - collapsed", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1920, 1080);
     const json = {

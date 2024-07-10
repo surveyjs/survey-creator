@@ -11,6 +11,7 @@
         e.stopPropagation();
       }
     "
+    @dblclick="(e) => model.dblclick(e)"
     @mouseover="hover"
     @mouseleave="hover"
   >

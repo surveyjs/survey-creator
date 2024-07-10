@@ -1,5 +1,5 @@
 <div *ngIf="model && adorner && (isGhost === undefined || isGhost === adorner.isGhost)" class="svc-page__content" [class]="adorner.css" [key2click]
-  (click)="adorner.select(adorner, $event)" (mouseover)="adorner.hover($event, $event.currentTarget)"
+  (click)="adorner.select(adorner, $event)" (dblclick)="adorner.dblclick($event)"  (mouseover)="adorner.hover($event, $event.currentTarget)"
   (mouseleave)="adorner.hover($event, $event.target)" [id]="adorner.page.id" data-bind="clickBubble: false">
   <div class="svc-page__content-actions svc-page__content-actions--top">
     <sv-action-bar [model]="adorner.topActionContainer"></sv-action-bar>

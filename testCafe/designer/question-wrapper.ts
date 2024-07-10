@@ -465,6 +465,48 @@ test("Question adorner - collapse button visibility inside panels", async (t) =>
   await t.expect(pCollapseButton.visible).ok();
 });
 
+test("Question adorner - doubleclick", async (t) => {
+  await t.resizeWindow(1920, 1080);
+  const json = {
+    elements: [
+      {
+        "type": "panel",
+        "name": "panel1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          }
+        ]
+      }
+    ]
+  };
+  await ClientFunction(() => { window["creator"].expandCollapseButtonVisibility = "onhover"; })();
+  await setJSON(json);
+  await t.hover(getToolboxItemByText("Single-Line Input"));
+  const qContent = Selector(".svc-question__content--text");
+  const pContent = Selector(".svc-question__content--panel");
+  const pgContent = Selector(".svc-page__content");
+
+  await t.expect(qContent.hasClass("svc-question__content--collapsed")).notOk();
+  await t.doubleClick(qContent, { offsetX: 10, offsetY: 10 });
+  await t.expect(qContent.hasClass("svc-question__content--collapsed")).ok();
+  await t.doubleClick(qContent, { offsetX: 10, offsetY: 10 });
+  await t.expect(qContent.hasClass("svc-question__content--collapsed")).notOk();
+
+  await t.expect(pContent.hasClass("svc-question__content--collapsed")).notOk();
+  await t.doubleClick(pContent, { offsetX: 10, offsetY: 10 });
+  await t.expect(pContent.hasClass("svc-question__content--collapsed")).ok();
+  await t.doubleClick(pContent, { offsetX: 10, offsetY: 10 });
+  await t.expect(pContent.hasClass("svc-question__content--collapsed")).notOk();
+
+  await t.expect(pgContent.hasClass("svc-page__content--collapsed")).notOk();
+  await t.doubleClick(pgContent, { offsetX: 10, offsetY: 10 });
+  await t.expect(pgContent.hasClass("svc-page__content--collapsed")).ok();
+  await t.doubleClick(pgContent, { offsetX: 10, offsetY: 10 });
+  await t.expect(pgContent.hasClass("svc-page__content--collapsed")).notOk();
+});
+
 test("Page adorner - collapse button in differen modes", async (t) => {
   await t.resizeWindow(1920, 1080);
   const json = {

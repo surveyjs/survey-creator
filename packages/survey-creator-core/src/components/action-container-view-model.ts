@@ -100,6 +100,11 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     }
   }) collapsed: boolean;
   @property() renderedCollapsed: boolean;
+
+  public dblclick(event) {
+    this.collapsed = !this.collapsed;
+    event.stopPropagation();
+  }
   private allowEditOption: boolean;
   private selectedPropPageFunc: (sender: Base, options: any) => void;
   private sidebarFlyoutModeChangedFunc: (sender: Base, options: any) => void;

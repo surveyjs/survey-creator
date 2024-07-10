@@ -3,6 +3,7 @@
     v-if="adorner"
     class="svc-question__adorner"
     :class="adorner.rootCss()"
+    @dblclick="(e) => adorner.dblclick(e)"
     @mouseover="adorner.hover($event, $event.currentTarget)"
     @mouseleave="adorner.hover($event, $event.currentTarget)"
     :data-sv-drop-target-survey-element="adorner.element.name || null"

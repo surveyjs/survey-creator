@@ -3,6 +3,7 @@
     class="svc-question__adorner"
     :class="model.rootCss()"
     ref="root"
+    @dblclick="(e) => model.dblclick(e)"
     v-on:mouseover="(e) => model.hover(e, e.currentTarget)"
     v-on:mouseleave="(e) => model.hover(e, e.currentTarget)"
     :data-sv-drop-target-survey-element="model.element.name || null"
