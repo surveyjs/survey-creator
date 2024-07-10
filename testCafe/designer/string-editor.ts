@@ -442,6 +442,27 @@ test("Check markdown events with HTML", async (t) => {
     .expect(getValue()).eql("d*a<b>b</b>c*");
 });
 
+test("Check markdown events with question title", async (t) => {
+  await ClientFunction(() => {
+    window["creator"].onSurveyInstanceCreated.add((sender, options) => {
+      options.survey.onTextMarkdown.add((survey, options) => options.html = options.text.replaceAll("*", "$"));
+    });
+  })();
+
+  await setJSON({
+    "elements": [
+      {
+        "type": "text",
+        "name": "question1"
+      }
+    ]
+  });
+
+  await t
+    .click(Selector(".sv-string-editor").withText("question1"))
+    .expect(Selector(".sv-string-editor").withText("question1").focused).ok();
+});
+
 test("Test selection", async (t) => {
   let json = {
     "elements": [
