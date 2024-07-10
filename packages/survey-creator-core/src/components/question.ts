@@ -45,6 +45,7 @@ export interface QuestionBannerParams {
 export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   @property() isDragged: boolean;
   @property({ defaultValue: "" }) currentAddQuestionType: string;
+
   placeholderComponent: string;
   placeholderComponentData: any;
 
@@ -80,11 +81,11 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   get element() {
     return this.surveyElement;
   }
-
+  protected canSelectElement(): boolean {
+    return super.canSelectElement() && this.surveyElement.isInteractiveDesignElement;
+  }
   select(model: QuestionAdornerViewModel, event: IPortableEvent) {
-    if (!model.surveyElement.isInteractiveDesignElement) {
-      return;
-    }
+    if (!model.canSelectElement()) return;
     const creator = model.creator;
     const selEl = model.surveyElement;
     const el: any = document?.activeElement;
@@ -98,7 +99,11 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   }
 
   rootCss() {
-    return this.surveyElement.isQuestion && !(<Question>this.surveyElement).startWithNewLine ? " svc-question__adorner--start-with-new-line" : "";
+    const isStartWithNewLine = this.surveyElement.isQuestion && !(<Question>this.surveyElement).startWithNewLine;
+    return new CssClassBuilder()
+      .append("svc-question__adorner--start-with-new-line", isStartWithNewLine)
+      .append("svc-question__adorner--collapse-" + this.creator.expandCollapseButtonVisibility, true)
+      .append("svc-question__adorner--collapsed", !!this.renderedCollapsed).toString();
   }
 
   css() {
@@ -526,8 +531,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   }
   protected duplicate(): void {
     setTimeout(() => {
-      var newElement = this.creator.fastCopyQuestion(this.surveyElement);
-      this.creator.selectElement(newElement);
+      this.creator.fastCopyQuestion(this.surveyElement, true);
     }, 1);
   }
   addNewQuestion(): void {

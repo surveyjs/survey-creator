@@ -2237,6 +2237,18 @@ export class SurveyCreatorModel extends Base
       }
     );
   }
+  /**
+   * Specifies where to add new questions when users click the "Add Question" button.
+   * 
+   * Accepted values:
+   * 
+   * - `true` (default)       
+   * New questions are added to the end of a survey page.
+   * 
+   * - `false`      
+   * New questions are added after the currently selected question on the design surface.
+   */
+  public addNewQuestionLast: boolean = true;
   protected doClickQuestionCore(
     element: IElement,
     modifiedType: string = "ADDED_FROM_TOOLBOX",
@@ -2267,8 +2279,12 @@ export class SurveyCreatorModel extends Base
       }
       parent = selectedElement.parent;
       if (index < 0) {
-        index = parent.elements.indexOf(selectedElement);
-        if (index > -1) index++;
+        if (this.addNewQuestionLast) {
+          index = parent.elements.length;
+        } else {
+          index = parent.elements.indexOf(selectedElement);
+          if (index > -1) index++;
+        }
       }
     }
     if (panel) {
@@ -2404,11 +2420,12 @@ export class SurveyCreatorModel extends Base
   }
 
   /**
-   * Creates a copy of a specified question and inserts the copy next to this question.
+   * Creates a copy of a specified question, inserts the copy next to this question and optionally select it in the designer.
    * @param question A question to copy.
+   * @param selectNewElement Select a new element if true
    * @returns The instance of a new question.
    */
-  public fastCopyQuestion(question: Base): IElement {
+  public fastCopyQuestion(question: Base, selectNewElement?: boolean): IElement {
     var newElement = this.copyElement(question);
     var index = !!question["parent"]
       ? question["parent"].elements.indexOf(question) + 1
@@ -2420,6 +2437,9 @@ export class SurveyCreatorModel extends Base
       }
     }
     this.doClickQuestionCore(newElement, "ELEMENT_COPIED", index, question["parent"]);
+    if(selectNewElement) {
+      this.selectElement(newElement);
+    }
     return newElement;
   }
   /**
@@ -2861,8 +2881,9 @@ export class SurveyCreatorModel extends Base
   }
 
   protected deletePanelOrQuestion(obj: Base): void {
+    const changeSelection = obj === this.selectedElement;
     var parent = obj["parent"];
-    var elements = parent.elements;
+    const elements = parent.elements;
     var objIndex = elements.indexOf(obj);
     if (objIndex == elements.length - 1) {
       objIndex--;
@@ -2874,7 +2895,9 @@ export class SurveyCreatorModel extends Base
     if (parent.isPage && (this.pageEditMode === "single" || elements.length === 0)) {
       parent = this.survey;
     }
-    this.selectElement(objIndex > -1 ? elements[objIndex] : parent);
+    if(changeSelection) {
+      this.selectElement(objIndex > -1 ? elements[objIndex] : parent);
+    }
   }
   hiddenProperties: any = {};
   protected onCanShowObjectProperty(
@@ -3506,6 +3529,8 @@ export class SurveyCreatorModel extends Base
       title: item.title,
       id: item.name,
       iconName: item.iconName,
+      visible: item.visible,
+      enabled: item.enabled,
       needSeparator: needSeparator
     });
     action.action = () => {
@@ -3636,6 +3661,18 @@ export class SurveyCreatorModel extends Base
    * @see toolboxLocation
    */
   @property({ defaultValue: "right" }) sidebarLocation: "left" | "right";
+
+  /*
+   * Specifies the visibility of the buttons that expand and collapse survey elements on the design surface.
+   * 
+   * Possible values:
+   * 
+   * - `"onhover"` (default) - Displays an expand/collapse button when a survey element is hovered over or selected.
+   * - `"always"` - Displays the expand/collapse buttons permanently.
+   * - `"never"` - Hides the expand/collapse buttons.
+   */
+  @property({ defaultValue: "never" }) expandCollapseButtonVisibility?: "never" | "onhover" | "always";
+
   selectFromStringEditor: boolean;
 
   @property({

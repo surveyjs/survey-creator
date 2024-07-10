@@ -466,3 +466,27 @@ test("Toolbox RTL with search compact", async (t) => {
     await takeElementScreenshot("toolbox-search-rtl-compact-placeholder.png", toolboxElement, t, comparer);
   });
 });
+
+test("Toolbox disabled items", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    const toolboxElement = Selector(".svc-toolbox .svc-toolbox__container");
+
+    await ClientFunction(() => {
+      window["creator"].toolbox.searchEnabled = true;
+      const rating = window["creator"].toolbox.getItemByName("rating");
+      rating.enabled = false;
+      const checkbox = window["creator"].toolbox.getItemByName("checkbox");
+      checkbox.enabled = false;
+    })();
+
+    await t.resizeWindow(1920, 1440);
+    await takeElementScreenshot("toolbox-disabled-items.png", toolboxElement, t, comparer);
+    await t.resizeWindow(1240, 1440);
+    await takeElementScreenshot("toolbox-compact-disabled-items.png", toolboxElement, t, comparer);
+
+    await t
+      .click(Selector("button.svc-page__question-type-selector"))
+      .expect(Selector(".sv-popup__container").filterVisible().visible).ok();
+    await takeElementScreenshot("add-new-disabled-items.png", Selector(".sv-popup__container").filterVisible(), t, comparer);
+  });
+});

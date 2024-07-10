@@ -198,6 +198,11 @@ svc-page {
 
 .svc-page__add-new-question,
 .svc-question__adorner {
+  .sv-list__item.sv-list__item--disabled {
+    opacity: 0.25;
+    pointer-events: none;
+  }
+
   .sv-popup--overlay {
     .sv-list-item__marker-icon {
       display: none;

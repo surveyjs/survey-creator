@@ -126,7 +126,7 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
     }
     let control = null;
     if (this.locString.hasHtml) {
-      const htmlValue = { __html: this.baseModel.focused && this.baseModel.editAsText && this.locString.text || this.locString.renderedHtml };
+      const htmlValue = { __html: this.locString.renderedHtml };
       control = (
         <span
           role="textbox"

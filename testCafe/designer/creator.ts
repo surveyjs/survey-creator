@@ -30,7 +30,23 @@ test("Select survey on deleting the last question", async t => {
     .wait(2000)
     .expect(Selector(".sv-string-viewer").withExactText("Show the title").exists).notOk();
 });
-
+test("Do not select the deleting question if it was not selected", async t => {
+  await setJSON({
+    "elements": [
+      { "type": "text", "name": "q1" },
+      { "type": "text", "name": "q2" },
+      { "type": "text", "name": "q3" }
+    ]
+  });
+  await t
+    .maximizeWindow()
+    .click(getVisibleElement(".svc-question__content").find("span").withText("q1"), { offsetX: 100, offsetY: 5 })
+    .expect(getVisibleElement(".svc-question__content--selected").find("span").withText("q1").exists).ok()
+    .hover(getVisibleElement(".svc-question__content").withText("q2"), { offsetX: 50, offsetY: 50 })
+    .click(getVisibleElement(".svc-question__content").withText("q2").find("span").withText("Delete"))
+    .expect(getVisibleElement(".svc-question__content").find("span").withText("q2").exists).notOk()
+    .expect(getVisibleElement(".svc-question__content--selected").find("span").withText("q1").exists).ok();
+});
 test("Keyboard tab navigation between questions", async (t) => {
   const json = {
     "logoPosition": "right",
