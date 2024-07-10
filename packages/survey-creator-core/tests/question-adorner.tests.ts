@@ -1,6 +1,8 @@
 import { QuestionAdornerViewModel } from "../src/components/question";
 import { Action, settings } from "survey-core";
 import { CreatorTester } from "./creator-tester";
+import { PageAdorner } from "../src/components/page";
+import { TabDesignerPlugin } from "../src/components/tabs/designer-plugin";
 
 settings.supportCreatorV2 = true;
 
@@ -110,4 +112,107 @@ test("Check question adorners location", (): any => {
   expect(questionAdorner.actionContainer.getActionById("isrequired").innerItem.location).toBe("end");
   expect(questionAdorner.actionContainer.getActionById("delete").innerItem.location).toBe("end");
   expect(questionAdorner.actionContainer.getActionById("duplicate").innerItem.location).toBe("end");
+});
+
+test("Check question adorners expand-collapse - save state", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1" },
+    ]
+  };
+  const question = creator.survey.getQuestionByName("q1");
+  let questionAdorner = new QuestionAdornerViewModel(
+    creator,
+    question,
+    <any>undefined
+  );
+
+  let action = questionAdorner.topActionContainer.getActionById("collapse");
+  expect(questionAdorner.collapsed).toBeFalsy();
+  expect(action.iconName).toBe("icon-collapse-detail-light_16x16");
+  action.action();
+  expect(questionAdorner.collapsed).toBeTruthy();
+  expect(action.iconName).toBe("icon-restore_16x16");
+
+  let questionAdorner2 = new QuestionAdornerViewModel(
+    creator,
+    question,
+    <any>undefined
+  );
+  let action2 = questionAdorner2.topActionContainer.getActionById("collapse");
+  expect(questionAdorner2.collapsed).toBeTruthy();
+  action2.action();
+  expect(questionAdorner2.collapsed).toBeFalsy();
+
+  let questionAdorner3 = new QuestionAdornerViewModel(
+    creator,
+    question,
+    <any>undefined
+  );
+  expect(questionAdorner3.collapsed).toBeFalsy();
+});
+
+test("Check question adorners expand-collapse - restore state after add", (): any => {
+  const creator = new CreatorTester();
+  const designerPlugin = <TabDesignerPlugin>(
+    creator.getPlugin("designer")
+  );
+  let pageModel = new PageAdorner(creator, designerPlugin.model.newPage);
+  pageModel.addNewQuestion(pageModel, null);
+
+  let question2 = creator.survey.getQuestionByName("question1");
+  let questionAdorner = new QuestionAdornerViewModel(
+    creator,
+    question2,
+    <any>undefined
+  );
+
+  let action = questionAdorner.topActionContainer.getActionById("collapse");
+  expect(questionAdorner.collapsed).toBeFalsy();
+  action.action();
+  expect(questionAdorner.collapsed).toBeTruthy();
+
+  expect(creator.survey.getAllQuestions().length).toBe(1);
+  question2.delete();
+  expect(creator.survey.getAllQuestions().length).toBe(0);
+
+  pageModel = new PageAdorner(creator, designerPlugin.model.newPage);
+  pageModel.addNewQuestion(pageModel, null);
+  questionAdorner = new QuestionAdornerViewModel(
+    creator,
+    question2,
+    <any>undefined
+  );
+  expect(questionAdorner.collapsed).toBeFalsy();
+
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "question1" },
+    ]
+  };
+  question2 = creator.survey.getQuestionByName("question1");
+  questionAdorner = new QuestionAdornerViewModel(
+    creator,
+    question2,
+    <any>undefined
+  );
+
+  action = questionAdorner.topActionContainer.getActionById("collapse");
+  expect(questionAdorner.collapsed).toBeFalsy();
+  action.action();
+  expect(questionAdorner.collapsed).toBeTruthy();
+
+  expect(creator.survey.getAllQuestions().length).toBe(1);
+  question2.delete();
+  expect(creator.survey.getAllQuestions().length).toBe(0);
+
+  pageModel = new PageAdorner(creator, designerPlugin.model.newPage);
+  pageModel.addNewQuestion(pageModel, null);
+  questionAdorner = new QuestionAdornerViewModel(
+    creator,
+    question2,
+    <any>undefined
+  );
+  expect(questionAdorner.collapsed).toBeFalsy();
 });

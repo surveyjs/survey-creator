@@ -35,7 +35,9 @@
       }
     }
   }
-
+  .svc-question__drag-area {
+    height: calcSize(3);
+  }
   .svc-question__content--selected {
     .svc-rating-question-controls {
       bottom: calcSize(10);
