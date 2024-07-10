@@ -316,7 +316,7 @@ export class StringEditorViewModelBase extends Base {
     }
 
     if (this.locString.hasHtml && this.editAsText) {
-      event.target.innerText = event.target.textContent = this.locString.text;
+      event.target.innerText = event.target.textContent = this.locString.calculatedText;
     }
 
     event.target.parentElement.click();

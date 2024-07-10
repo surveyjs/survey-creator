@@ -215,3 +215,32 @@ test("Clear read-only and enbleIf column properties", () => {
   const editorQuestionJSON = editor["getQuestionJSON"]();
   expect(editorQuestionJSON.columns).toEqual([{ name: "col1", cellType: "text" }, { name: "col2" }, { name: "col3" }]);
 });
+test("Delete random properties properties", () => {
+  const survey = new SurveyModel({
+    "elements": [
+      {
+        "type": "checkbox",
+        "name": "q1",
+        "choices": ["Item-1"],
+        "choicesOrder": "random"
+      },
+      {
+        "type": "checkbox",
+        "name": "q2",
+        "choices": ["Item-1"],
+        "choicesOrder": "asc"
+      }
+    ]
+  });
+  const etalon: any = { name: "question", choices: ["Item-1"], storeOthersAsComment: false, title: "q1", type: "checkbox" };
+  let question = survey.getQuestionByName("q1");
+  let editor = new DefaultValueEditor(question, "defaultValue");
+  let editorQuestionJSON = editor["getQuestionJSON"]();
+  expect(editorQuestionJSON).toEqual(etalon);
+  question = survey.getQuestionByName("q2");
+  editor = new DefaultValueEditor(question, "defaultValue");
+  editorQuestionJSON = editor["getQuestionJSON"]();
+  etalon.choicesOrder = "asc";
+  etalon.title = "q2";
+  expect(editorQuestionJSON).toEqual(etalon);
+});
