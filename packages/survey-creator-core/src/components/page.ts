@@ -191,7 +191,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
 
     result += (" svc-page__content--collapse-" + this.creator.expandCollapseButtonVisibility);
     if (this.renderedCollapsed) result += (" svc-page__content--collapsed");
-    return result;
+    return result.trim();
   }
   public hover(event: MouseEvent, element: HTMLElement | any) {
     toggleHovered(event, element, this.creator.pageHoverDelay);

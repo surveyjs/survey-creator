@@ -13,12 +13,12 @@ test("Check page adorner css on drag over", (): any => {
     creator,
     creator.survey.pages[0]
   );
-  expect(pageAdorner.css).toBe("");
+  expect(pageAdorner.css).toBe("svc-page__content--collapse-never");
   pageAdorner.dragTypeOverMe = true as any;
-  expect(pageAdorner.css).toBe("svc-question__content--drag-over-inside");
+  expect(pageAdorner.css).toBe("svc-question__content--drag-over-inside svc-page__content--collapse-never");
   pageAdorner.showPlaceholder = false;
-  expect(pageAdorner.css).toBe("svc-page--drag-over-empty");
+  expect(pageAdorner.css).toBe("svc-page--drag-over-empty svc-page__content--collapse-never");
   settings.designer.showAddQuestionButton = false;
-  expect(pageAdorner.css).toBe("svc-page--drag-over-empty svc-page--drag-over-empty-no-add-button");
+  expect(pageAdorner.css).toBe("svc-page--drag-over-empty svc-page--drag-over-empty-no-add-button svc-page__content--collapse-never");
   settings.designer.showAddQuestionButton = true;
 });
