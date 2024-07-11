@@ -102,7 +102,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   @property() renderedCollapsed: boolean;
 
   public dblclick(event) {
-    this.collapsed = !this.collapsed;
+    if (this.creator.expandCollapseButtonVisibility != "never") this.collapsed = !this.collapsed;
     event.stopPropagation();
   }
   private allowEditOption: boolean;
