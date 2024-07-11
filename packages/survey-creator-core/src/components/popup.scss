@@ -93,6 +93,10 @@ survey-creator:not(.svd-simulator-content) {
   .sv-list__item--hovered>.sv-list__item-body {
     color: var(--ctr-list-item-text-color-hovered, $foreground-dim);
     background: var(--ctr-list-item-background-color-hovered, $background-dim);
+
+    .sv-list__item-icon use {
+      fill: var(--ctr-list-item-icon-color-hovered, $background);
+    }
   }
 
   .sv-list__item--selected,
@@ -100,6 +104,10 @@ survey-creator:not(.svd-simulator-content) {
     &>.sv-list__item-body {
       color: var(--ctr-list-item-text-color-selected, $primary-foreground);
       background: var(--ctr-list-item-background-color-selected, $primary);
+    }
+
+    .sv-list__item-icon use {
+      fill: var(--ctr-list-item-icon-color-selected, $background);
     }
   }
 
@@ -147,6 +155,10 @@ survey-creator:not(.svd-simulator-content) {
           background: var(--ctr-list-item-background-color-selected, $primary);
           color: var(--ctr-list-item-text-color-selected, $primary-foreground);
         }
+      }
+
+      .sv-list__item-icon use {
+        fill: var(--ctr-list-item-icon-color-hovered, $background);
       }
     }
   }

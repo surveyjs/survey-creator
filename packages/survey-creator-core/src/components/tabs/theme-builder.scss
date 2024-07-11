@@ -69,7 +69,7 @@ svc-tab-test {
       }
 
       &:hover {
-        background: var(--ctr-survey-question-panel-toolbar-item-icon-color-pressed, $background-dim);
+        background: var(--ctr-survey-question-panel-toolbar-item-icon-color-hovered, $background-dim);
       }
     }
 
