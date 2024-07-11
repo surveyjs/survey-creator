@@ -10,7 +10,7 @@
       </div>
     </div>
       <ng-container *ngFor="let item of category.items">
-        <svc-toolbox-tool [item]="item" [creator]="toolbox.creator" [isCompact]="false" ></svc-toolbox-tool>
+        <svc-toolbox-tool [item]="item" [creator]="toolbox.creator" [parentModel]="toolbox" [isCompact]="false" ></svc-toolbox-tool>
       </ng-container>
   </div>
 </ng-template>

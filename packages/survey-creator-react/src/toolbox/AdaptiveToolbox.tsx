@@ -36,7 +36,7 @@ export class AdaptiveToolbox extends Toolbox {
   renderSearch() {
     const searchButton = this.toolbox.isCompactRendered ?
       <>
-        <SurveyCreatorToolboxTool item={this.toolbox.searchItem as any} creator={this.creator} isCompact={this.toolbox.isCompactRendered} key={"searchitem"} ></SurveyCreatorToolboxTool>
+        <SurveyCreatorToolboxTool item={this.toolbox.searchItem as any} creator={this.creator} parentModel={this.toolbox} isCompact={this.toolbox.isCompactRendered} key={"searchitem"} ></SurveyCreatorToolboxTool>
         <div className="svc-toolbox__category-separator svc-toolbox__category-separator--search"></div>
       </> :
       null;
@@ -53,7 +53,7 @@ export class AdaptiveToolbox extends Toolbox {
     return (
       <div ref={this.rootRef} className={this.toolbox.classNames}>
         <div onBlur={(e) => this.toolbox.focusOut(e)} className="svc-toolbox__panel">
-          <div className="svc-toolbox__scroller">
+          <div className="svc-toolbox__scroller" onScroll={(event) => this.toolbox.onScroll(this.toolbox, event)}>
             {search}
             {placeholder}
             <div className="svc-toolbox__container">

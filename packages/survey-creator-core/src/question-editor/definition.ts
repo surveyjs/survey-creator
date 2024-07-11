@@ -419,12 +419,15 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "totalDisplayStyle", tab: "totals" },
       { name: "totalCurrency", tab: "totals" },
       { name: "totalFormat", tab: "totals" },
-      { name: "totalExpression", tab: "totals" }
+      { name: "totalExpression", tab: "totals" },
+      { name: "validators", tab: "validation" },
+      { name: "requiredErrorText", tab: "validation" }
     ],
     tabs: [
       { name: "general", index: 5 },
       { name: "logic", index: 20 },
-      { name: "totals", index: 40 }
+      { name: "totals", index: 40 },
+      { name: "validation", index: 60 }
     ]
   },
   "matrixdropdowncolumn@checkbox": {
@@ -435,6 +438,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "choiceTextsFromQuestion", tab: "choices" },
       { name: "showOtherItem", tab: "choices" },
       { name: "otherText", tab: "choices" },
+      { name: "otherPlaceholder", tab: "choices" },
       { name: "choicesOrder", tab: "choices" },
       { name: "colCount", tab: "choices" },
       { name: "showSelectAllItem", tab: "choices" },
@@ -463,6 +467,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "choiceTextsFromQuestion", tab: "choices" },
       { name: "showOtherItem", tab: "choices" },
       { name: "otherText", tab: "choices" },
+      { name: "otherPlaceholder", tab: "choices" },
       { name: "choicesOrder", tab: "choices" },
       { name: "colCount", tab: "choices" },
       { name: "showNoneItem", tab: "choices" },
@@ -487,6 +492,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "choiceTextsFromQuestion", tab: "choices" },
       { name: "showOtherItem", tab: "choices" },
       { name: "otherText", tab: "choices" },
+      { name: "otherPlaceholder", tab: "choices" },
       { name: "choicesOrder", tab: "choices" },
       { name: "optionsCaption", tab: "choices" },
       { name: "showNoneItem", tab: "choices" },
@@ -514,6 +520,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "choiceTextsFromQuestion", tab: "choices" },
       { name: "showOtherItem", tab: "choices" },
       { name: "otherText", tab: "choices" },
+      { name: "otherPlaceholder", tab: "choices" },
       { name: "choicesOrder", tab: "choices" },
       { name: "optionsCaption", tab: "choices" },
       { name: "showNoneItem", tab: "choices" },

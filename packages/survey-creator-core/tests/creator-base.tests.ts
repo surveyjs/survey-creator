@@ -2349,12 +2349,14 @@ test("convertInputType, change inputType for a text question", (): any => {
   const popup = action.popupModel;
   const popupViewModel = new PopupDropdownViewModel(popup); // need for popupModel.onShow
   expect(popup).toBeTruthy();
-  popup.toggleVisibility();
+  popup.show();
   const list = popup.contentComponentData.model;
   expect(list).toBeTruthy();
   expect(list.selectedItem).toBeTruthy();
   expect(list.selectedItem.id).toEqual("text");
-  list.onSelectionChanged(list.actions.filter(item => item.id === "tel")[0]);
+
+  const telItem = list.actions.filter(item => item.id === "tel")[0];
+  list.onItemClick(telItem);
   expect(question.inputType).toBe("tel");
   expect(action.title).toBe("Phone Number");
   question.inputType = "password";
@@ -3144,6 +3146,7 @@ test("Use settings.designer.showAddQuestionButton = false", (): any => {
 });
 test("Add Questions with selection", (): any => {
   const creator = new CreatorTester();
+  creator.addNewQuestionLast = false;
   creator.JSON = { elements: [{ type: "panel", name: "panel1" }] };
   const panel = <PanelModel>creator.survey.getAllPanels()[0];
   const panelModel: QuestionAdornerViewModel = new QuestionAdornerViewModel(creator, panel, undefined);
@@ -3858,7 +3861,22 @@ test("Reordering on drag&drop", (): any => {
   creator.undo();
   expect(creator.undoRedoManager.canRedo()).toBeTruthy();
 });
-
+test("creator.addNewQuestionLast property", (): any => {
+  const creator = new CreatorTester();
+  creator.clickToolboxItem({ type: "text" });
+  creator.clickToolboxItem({ type: "text" });
+  expect(creator.selectedElementName).toEqual("question2");
+  creator.selectQuestionByName("question1");
+  creator.clickToolboxItem({ type: "text" });
+  expect(creator.selectedElementName).toEqual("question3");
+  expect(creator.survey.pages[0].elements[2].name).toEqual("question3");
+  creator.selectQuestionByName("question1");
+  creator.addNewQuestionLast = false;
+  creator.clickToolboxItem({ type: "text" });
+  expect(creator.selectedElementName).toEqual("question4");
+  expect(creator.survey.pages[0].elements[1].name).toEqual("question4");
+  expect(creator.survey.pages[0].elements[3].name).toEqual("question3");
+});
 test("Initial Property Grid category expanded state", (): any => {
   const creator = new CreatorTester();
   let survey: SurveyModel;
@@ -4029,6 +4047,48 @@ test("Remove carry-forward property on deleting a question", (): any => {
   expect(q2.choicesFromQuestion).toBe("q1");
   creator.deleteElement(q1);
   expect(q2.choicesFromQuestion).toBeFalsy();
+});
+test("Keep selection on deleting another question, #5634", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" },
+      { type: "text", name: "q3" }
+    ]
+  };
+  let counter = 0;
+  creator.onSelectedElementChanged.add((sender, options) => {
+    counter ++;
+  });
+  creator.selectQuestionByName("q1");
+  expect(counter).toBe(1);
+  expect(creator.selectedElementName).toEqual("q1");
+  const q2 = creator.survey.getQuestionByName("q2");
+  creator.deleteElement(q2);
+  expect(creator.selectedElementName).toEqual("q1");
+  expect(counter).toBe(1);
+});
+test("Do not select a duplicated question if it is not selected, #5634", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" },
+      { type: "text", name: "q3" }
+    ]
+  };
+  let counter = 0;
+  creator.onSelectedElementChanged.add((sender, options) => {
+    counter ++;
+  });
+  creator.selectQuestionByName("q1");
+  expect(counter).toBe(1);
+  expect(creator.selectedElementName).toEqual("q1");
+  const q2 = creator.survey.getQuestionByName("q2");
+  creator.fastCopyQuestion(q2, true);
+  expect(creator.selectedElementName).toEqual("question1");
+  expect(counter).toBe(2);
 });
 test("Do not focus title on mobile", (): any => {
   const creator = new CreatorTester();

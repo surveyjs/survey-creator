@@ -31,6 +31,12 @@
             size: 24,
           }"
         ></sv-svg-icon>
+        <div class="svc-question__top-actions">
+          <sv-action-bar
+            :model="model.topActionContainer"
+            :handleClick="false"
+          ></sv-action-bar>
+        </div>
       </div>
 
       <sv-template-renderer
