@@ -1,5 +1,6 @@
 <template>
   <div
+    :key="model.page.id"
     v-if="model.page"
     :id="model.page.id"
     class="svc-page__content"
