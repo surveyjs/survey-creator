@@ -464,7 +464,7 @@ test("Preset edit model, edit matrixdropdowncolumn@default", () => {
   survey.setValue("propertyGrid_definition_selector", "matrixdropdowncolumn@default");
   const propGridCreator = getPropGridCreator(survey);
   const creatorSurvey = propGridCreator.survey;
-  expect(creatorSurvey.getAllPanels()).toHaveLength(3);
+  expect(creatorSurvey.getAllPanels()).toHaveLength(4);
   expect(creatorSurvey.getAllPanels()[0].elements).toHaveLength(10);
   expect(creatorSurvey.getAllPanels()[1].elements).toHaveLength(7);
 });

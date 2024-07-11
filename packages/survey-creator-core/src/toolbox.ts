@@ -59,7 +59,7 @@ export interface IQuestionToolboxItem extends IAction {
   /**
    * Toolbox item category. If it is empty, it goes to 'General' category.
    */
-  category: string;
+  category?: string;
   /**
    * Specifies whether users can interact with the toolbox item.
    * 
