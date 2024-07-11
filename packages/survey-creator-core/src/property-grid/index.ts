@@ -1408,9 +1408,9 @@ export class PropertyGridEditorUndefinedBoolean extends PropertyGridEditor {
 
   public getJSON(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): any {
     const choices: Array<any> = [
-      { value: "auto", text: editorLocalization.getString("pe.booleanAuto") },
-      { value: "false", text: editorLocalization.getString("pe.booleanFalse") },
-      { value: "true", text: editorLocalization.getString("pe.booleanTrue") },
+      { value: "auto", text: editorLocalization.getString("pe.inherit") },
+      { value: "false", text: editorLocalization.getString("pe.disabled") },
+      { value: "true", text: editorLocalization.getString("pe.enabled") },
     ];
 
     const res: any = {
