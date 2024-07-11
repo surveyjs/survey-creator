@@ -60,7 +60,7 @@ export class QuestionAdornerComponent extends CreatorModelElement<
         ref={this.rootRef}
         data-sv-drop-target-survey-element={this.model.element.name || null}
         className={"svc-question__adorner " + this.model.rootCss()}
-        onDoubleClick={e => allowInteractions && this.model.dblclick(e.nativeEvent)}
+        onDoubleClick={e => { allowInteractions && this.model.dblclick(e.nativeEvent); e.stopPropagation(); }}
         onMouseOut={e => allowInteractions && this.model.hover(e.nativeEvent, e.currentTarget)}
         onMouseOver={e => allowInteractions && this.model.hover(e.nativeEvent, e.currentTarget)}
       >
