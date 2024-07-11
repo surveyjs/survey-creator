@@ -852,6 +852,43 @@ test("Paste multiline selectbase", async (t) => {
   })()).eql("[\"Item 1\",\"Ita\",\"b\",\"cem 2\",\"Item 3\"]");
 });
 
+test("Paste multiline selectbase through event", async (t) => {
+
+  await setJSON({
+    "elements": [
+      {
+        "type": "radiogroup",
+        "name": "question1",
+        "choices": [
+          "Item 1",
+        ],
+        "showNoneItem": true
+      }
+    ]
+  });
+  var paste = ClientFunction((idx, data) => {
+    var event = new Event("paste");
+    event["clipboardData"] = { getData: () => data };
+    var element = document.querySelectorAll(".sd-selectbase .sv-string-editor")[idx];
+    element.dispatchEvent(event);
+  });
+
+  await t
+    .click(Selector(".sv-string-editor").withText("None"));
+  await paste(2, "q\nw\ne");
+  await t.pressKey("Enter");
+  await t.expect(ClientFunction(() => {
+    return JSON.stringify(window["creator"].survey.getAllQuestions()[0].visibleChoices.map(c => c.text));
+  })()).eql("[\"Item 1\",\"Item 2\",\"qwe\",\"Other (describe)\"]");
+
+  await t
+    .click(Selector(".sv-string-editor").withText("Item 1"));
+  await paste(0, "a\nb\nc");
+  await t.expect(ClientFunction(() => {
+    return JSON.stringify(window["creator"].survey.getAllQuestions()[0].choices.map(c => c.text));
+  })()).eql("[\"a\",\"b\",\"c\"]");
+});
+
 test.skip("Paste html data", async (t) => {
   // this test does not work in Chrome. Keep it here fore future investigation
   await setJSON({
