@@ -1,10 +1,6 @@
 <!-- ko if: page -->
 <div class="svc-page__content"
-  data-bind="click: select, key2click, clickBubble: false, css: css, attr: { id: page.id }, event: { dblclick: (d, e) => dblclick(e), mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }">
-  <div class="svc-page__content-actions svc-page__content-actions--top">
-    <!-- ko component: { name: 'sv-action-bar', params: { model: topActionContainer } } -->
-    <!-- /ko -->
-  </div>
+  data-bind="click: select, key2click, clickBubble: false, css: css, attr: { id: page.id }, event: { mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }">
   <div class="svc-page__content-actions">
     <!-- ko component: { name: 'sv-action-bar', params: { model: actionContainer } } -->
     <!-- /ko -->

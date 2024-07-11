@@ -18,7 +18,8 @@ import {
   CssClassBuilder,
   QuestionPanelDynamicModel,
   ListModel,
-  QuestionTextModel
+  QuestionTextModel,
+  ActionContainer
 } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { editorLocalization, getLocString } from "../editorLocalization";
@@ -50,7 +51,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   placeholderComponentData: any;
 
   private dragOrClickHelper: DragOrClickHelper;
-
+  public topActionContainer: ActionContainer;
   constructor(
     creator: SurveyCreatorModel,
     surveyElement: SurveyElement,
@@ -58,6 +59,9 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   ) {
     super(creator, surveyElement);
     this.actionContainer.sizeMode = "small";
+    this.topActionContainer = new ActionContainer();
+    this.topActionContainer.sizeMode = "small";
+    this.topActionContainer.setItems([this.expandCollapseAction]);
     if (
       surveyElement.isQuestion &&
       !!surveyElement["setCanShowOptionItemCallback"]

@@ -1,31 +1,15 @@
 <template>
-  <div
-    :key="model.page.id"
-    v-if="model.page"
-    :id="model.page.id"
-    class="svc-page__content"
-    :class="model.css"
-    v-key2click
-    @click="
+  <div :key="model.page.id" v-if="model.page" :id="model.page.id" class="svc-page__content" :class="model.css"
+    v-key2click @click="
       (e) => {
         model.select(model, e);
         e.stopPropagation();
       }
-    "
-    @dblclick="(e) => model.dblclick(e)"
-    @mouseover="hover"
-    @mouseleave="hover"
-  >
-    <div class="svc-page__content-actions svc-page__content-actions--top">
-      <sv-action-bar :model="model.topActionContainer"></sv-action-bar>
-    </div>
+    " @dblclick="(e) => model.dblclick(e)" @mouseover="hover" @mouseleave="hover">
     <div class="svc-page__content-actions">
       <sv-action-bar :model="model.actionContainer"></sv-action-bar>
     </div>
-    <survey-page
-      :survey="model.creator.survey"
-      :page="model.page"
-    ></survey-page>
+    <survey-page :survey="model.creator.survey" :page="model.page"></survey-page>
     <div v-if="model.showPlaceholder" class="svc-page__placeholder_frame">
       <div class="svc-panel__placeholder_frame">
         <div class="svc-panel__placeholder">{{model.placeholderText}}</div>

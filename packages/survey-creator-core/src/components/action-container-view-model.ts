@@ -90,7 +90,7 @@ export class SurveyElementActionContainer extends AdaptiveActionContainer {
 
 export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> extends Base {
   public actionContainer: SurveyElementActionContainer;
-  public topActionContainer: ActionContainer;
+  protected expandCollapseAction: IAction;
   protected designerStateManager: DesignerStateManager;
   @property({ defaultValue: true }) allowDragging: boolean;
   @property({
@@ -130,27 +130,18 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this.actionContainer.dotsItem.iconSize = 16;
     this.actionContainer.dotsItem.popupModel.horizontalPosition = "center";
 
-    let collapseIcon;
-    let expandIcon;
-    if (surveyElement?.isPage) {
-      collapseIcon = "icon-collapse-v_16x16";
-      expandIcon = "icon-expand-v_16x16";
-    } else {
-      collapseIcon = "icon-collapse-detail-light_16x16";
-      expandIcon = "icon-restore_16x16";
-    }
-
-    this.topActionContainer = new ActionContainer();
-    this.topActionContainer.sizeMode = "small";
-    this.topActionContainer.setItems([{
+    const collapseIcon = "icon-collapse-detail-light_16x16";
+    const expandIcon = "icon-restore_16x16";
+    this.expandCollapseAction = {
       id: "collapse",
-      css: "sv-action-bar-item--secondary",
+      css: "sv-action-bar-item--secondary sv-action-bar-item--collapse",
       iconName: new ComputedUpdater<string>(() => this.collapsed ? expandIcon : collapseIcon) as any,
       iconSize: 16,
       action: () => {
         this.collapsed = !this.collapsed;
       }
-    }]);
+    };
+
     this.collapsed = !!surveyElement && (this.designerStateManager?.getElementState(surveyElement).collapsed);
     this.setSurveyElement(surveyElement);
     this.creator.sidebar.onPropertyChanged.add(this.sidebarFlyoutModeChangedFunc);

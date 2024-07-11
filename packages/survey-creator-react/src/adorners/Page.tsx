@@ -104,15 +104,9 @@ export class CreatorSurveyPageComponent extends CreatorModelElement<
     return (<SurveyPage page={this.props.page} survey={this.props.survey} creator={this.props.creator} css={this.model.css}></SurveyPage>);
   }
   protected renderHeader(): JSX.Element {
-    return (
-      <>
-        <div className="svc-page__content-actions svc-page__content-actions--top">
-          <SurveyActionBar model={this.model.topActionContainer}></SurveyActionBar>
-        </div>
-        <div className="svc-page__content-actions">
-          <SurveyActionBar model={this.model.actionContainer}></SurveyActionBar>
-        </div>
-      </>);
+    return (<div className="svc-page__content-actions">
+      <SurveyActionBar model={this.model.actionContainer}></SurveyActionBar>
+    </div>);
   }
   protected renderFooter(): JSX.Element {
     return <SurveyActionBar model={this.model.footerActionsBar}></SurveyActionBar>;
