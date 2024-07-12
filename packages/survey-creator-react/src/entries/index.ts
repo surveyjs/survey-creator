@@ -4,8 +4,6 @@ Version = `${process.env.VERSION}`;
 // import "@survey/creator/survey-creator-core.css";
 
 export * from "../SurveyCreator";
-export * from "../preset-editor/CreatorPresetEditor";
-export * from "../preset-editor/PresetRanking";
 
 export * from "../adorners/Row";
 export * from "../adorners/Question";
@@ -24,7 +22,6 @@ export * from "../adorners/Panel";
 export * from "../LogoImage";
 export * from "../QuestionLinkValue";
 export * from "../QuestionEmbeddedSurvey";
-export * from "../QuestionEmbeddedCreator";
 export * from "../QuestionEditorContent";
 export * from "../ItemValueWrapper";
 export * from "../ImageItemValueWrapper";

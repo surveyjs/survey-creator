@@ -1,5 +1,5 @@
 import { QuestionFactory, QuestionNonValue, Question, Serializer } from "survey-core";
-import { SurveyCreatorModel } from "../creator-base";
+import { SurveyCreatorModel } from "survey-creator-core";
 
 const questionType = "embeddedcreator";
 
@@ -7,7 +7,7 @@ export class QuestionEmbeddedCreatorModel extends QuestionNonValue {
   public embeddedCreatorValue: SurveyCreatorModel;
   public onEmbeddedSurveyValueChanged = () => { };
   public set embeddedCreator(val: SurveyCreatorModel) {
-    if(val === this.embeddedCreator) return;
+    if (val === this.embeddedCreator) return;
     this.setPropertyValue("embeddedCreator", val);
     this.onEmbeddedSurveyValueChanged();
   }

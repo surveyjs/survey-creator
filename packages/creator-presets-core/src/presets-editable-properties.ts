@@ -1,22 +1,15 @@
-import { JsonObjectProperty, ItemValue, MatrixDropdownRowModelBase, QuestionDropdownModel,
-  QuestionMatrixDynamicModel, Base, Serializer, SurveyModel, ElementContentVisibilityChangedEvent,
-  matrixDropdownColumnTypes,
+import { JsonObjectProperty, ItemValue, QuestionDropdownModel,
+  Base, Serializer, SurveyModel, matrixDropdownColumnTypes,
   PanelModel, PanelModelBase } from "survey-core";
 import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
-import { SurveyCreatorModel } from "../../creator-base";
-import { defaultPropertyGridDefinition, ISurveyPropertyGridDefinition, ISurveyPropertiesDefinition } from "../../question-editor/definition";
-import { SurveyQuestionProperties } from "../../question-editor/properties";
-import { editorLocalization } from "../../editorLocalization";
-import { PropertyGridModel } from "../../../src/property-grid";
-import { QuestionEmbeddedCreatorModel } from "../../components/embedded-creator";
-import { ICreatorOptions } from "../../creator-options";
-import { settings } from "../../creator-settings";
-import { IQuestionToolboxItem } from "../../toolbox";
-import { SurveyHelper } from "../../survey-helper";
+import { SurveyCreatorModel, defaultPropertyGridDefinition, ISurveyPropertyGridDefinition, ISurveyPropertiesDefinition,
+  SurveyQuestionProperties, editorLocalization, PropertyGridModel,
+  ICreatorOptions, settings, IQuestionToolboxItem, SurveyHelper } from "survey-creator-core";
+import { QuestionEmbeddedCreatorModel } from "./components/embedded-creator";
 require("./presets-editable-properties.scss");
 
 export class SurveyQuestionPresetProperties extends SurveyQuestionProperties {
-  constructor(obj, className: string, propertyGridDefinition: ISurveyPropertyGridDefinition) {
+  constructor(obj: any, className: string, propertyGridDefinition: ISurveyPropertyGridDefinition) {
     super(obj, null, className, null, null, null, propertyGridDefinition);
   }
   protected getIsPropertyVisible(prop: JsonObjectProperty): boolean {
@@ -299,7 +292,7 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     const res = [];
     survey.getAllPanels().forEach(panel => {
       const item = { name: panel.name, items: [] };
-      (<PanelModelBase>panel).questions.forEach(question => {
+      (<PanelModelBase><any>panel).questions.forEach(question => {
         item.items.push(question.name);
       });
       res.push(item);

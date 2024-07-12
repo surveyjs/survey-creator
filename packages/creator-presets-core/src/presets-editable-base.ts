@@ -1,7 +1,5 @@
 import { Helpers, SurveyModel } from "survey-core";
-import { SurveyCreatorModel } from "../../creator-base";
-import { CreatorPresetBase } from "../presets-base";
-import { ICreatorOptions } from "../../creator-options";
+import { SurveyCreatorModel, CreatorPresetBase, ICreatorOptions } from "survey-creator-core";
 
 export interface ICreatorPresetEditorSetup {
   creator: SurveyCreatorModel;

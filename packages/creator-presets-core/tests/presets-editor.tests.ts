@@ -1,17 +1,15 @@
-import { ICreatorPresetData } from "../src/presets/presets";
-import { QuestionToolbox } from "../src/toolbox";
 import { ItemValue, QuestionDropdownModel, QuestionMatrixDynamicModel, QuestionRankingModel, Serializer } from "survey-core";
 import { QuestionEmbeddedCreatorModel } from "../src/components/embedded-creator";
-import { CreatorPresetEditorModel } from "../src/presets/editable/presets-editor";
-export * from "../src/presets/editable/preset-question-ranking";
-import { PresetItemValue } from "../src/presets/editable/preset-question-ranking";
+import { CreatorPresetEditorModel } from "../src/presets-editor";
+export * from "../src/preset-question-ranking";
+import { PresetItemValue } from "../src/preset-question-ranking";
 import { SurveyModel, Question } from "survey-core";
-import { SurveyCreatorModel } from "../src/creator-base";
-
-export * from "../src/localization/german";
-
-export * from "../src/components/embedded-survey";
+import { SurveyCreatorModel, ICreatorPresetData, QuestionToolbox } from "survey-creator-core";
 export * from "../src/components/embedded-creator";
+/*
+export * from "../src/localization/german";
+export * from "../src/components/embedded-survey";
+*/
 
 test("Preset edit model, create pages", () => {
   const editor = new CreatorPresetEditorModel();

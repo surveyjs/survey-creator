@@ -1,7 +1,7 @@
 import React from "react";
 import { ReactQuestionFactory, SurveyQuestionElementBase } from "survey-react-ui";
-import { QuestionEmbeddedCreatorModel } from "survey-creator-core";
-import { SurveyCreatorComponent, SurveyCreator } from "./SurveyCreator";
+import { QuestionEmbeddedCreatorModel } from "creator-presets-core";
+import { SurveyCreatorComponent, SurveyCreator } from "survey-creator-react";
 
 export class SurveyElementEmbeddedCreator extends SurveyQuestionElementBase {
   protected get embeddedCreator(): QuestionEmbeddedCreatorModel {

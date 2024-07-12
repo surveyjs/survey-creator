@@ -1,12 +1,10 @@
-import { SurveyCreatorModel } from "../../creator-base";
-import { CreatorPreset, ICreatorPresetData } from "../presets";
+import { SurveyCreatorModel, editorLocalization, ICreatorOptions } from "survey-creator-core";
+import { CreatorPreset, ICreatorPresetData } from "survey-creator-core";
 import { ActionContainer, Base, ComputedUpdater, SurveyModel, createDropdownActionModel } from "survey-core";
 import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
 import { CreatorPresetEditableToolbox, CreatorPresetEditableToolboxConfigurator, CreatorPresetEditableToolboxDefinition } from "./presets-editable-toolbox";
 import { CreatorPresetEditableTabs } from "./presets-editable-tabs";
 import { CreatorEditablePresetPropertyGrid, CreatorPresetEditablePropertyGridDefinition } from "./presets-editable-properties";
-import { editorLocalization } from "../../editorLocalization";
-import { ICreatorOptions } from "../../creator-options";
 
 export class CreatorPresetEditorModel extends Base implements ICreatorPresetEditorSetup {
   private presetValue: CreatorPreset;

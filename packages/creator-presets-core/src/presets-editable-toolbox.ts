@@ -1,9 +1,7 @@
 import { ItemValue, MatrixDropdownRowModelBase, QuestionMatrixDynamicModel, QuestionRankingModel, Serializer, SurveyModel } from "survey-core";
 import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
-import { SurveyCreatorModel } from "../../creator-base";
-import { SurveyJSON5 } from "../../json5";
+import { SurveyCreatorModel, SurveyJSON5, editorLocalization } from "survey-creator-core";
 import { PresetItemValue, QuestionPresetRankingModel } from "./preset-question-ranking";
-import { editorLocalization } from "../../editorLocalization";
 
 const LocCategoriesName = "toolboxCategories";
 

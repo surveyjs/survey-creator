@@ -1,5 +1,5 @@
 import { QuestionRankingModel, ItemValue, Serializer, ElementFactory } from "survey-core";
-import { editorLocalization } from "../../editorLocalization";
+import { editorLocalization } from "survey-creator-core";
 
 export class PresetItemValue extends ItemValue {
   constructor(value: any, text: string = null, protected typeName = "presetitemvalue"

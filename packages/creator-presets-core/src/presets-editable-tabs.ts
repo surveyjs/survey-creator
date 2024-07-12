@@ -1,6 +1,6 @@
 import { SurveyModel } from "survey-core";
 import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
-import { SurveyCreatorModel } from "../../creator-base";
+import { SurveyCreatorModel } from "survey-creator-core";
 import { PresetItemValue, QuestionPresetRankingModel } from "./preset-question-ranking";
 
 export class CreatorPresetEditableTabs extends CreatorPresetEditableBase {

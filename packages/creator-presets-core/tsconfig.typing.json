@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "es2015",
+    "lib": [
+      "DOM",
+      "ES5",
+      "ES2015.Promise",
+      "es6"
+    ],
+    "paths": {
+      "survey-core": [
+        "./node_modules/survey-core"
+      ],
+      "survey-creator-core": [
+        "./node_modules/survey-creator-core"
+      ]
+    },
+    "baseUrl": ".",
+    "sourceMap": false,
+    "noImplicitAny": false,
+    "importHelpers": false,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "skipLibCheck": true,
+    "outDir": "build/typings/",
+  },
+  "include": [
+    "./src/entries/index.ts",
+  ],
+}

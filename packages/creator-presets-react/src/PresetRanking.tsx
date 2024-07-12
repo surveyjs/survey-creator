@@ -2,7 +2,7 @@ import { LocalizableString } from "survey-core";
 import { ReactQuestionFactory, ReactElementFactory, SurveyQuestionRanking, SurveyQuestionRankingItemContent } from "survey-react-ui";
 import { SurveyCreatorModel } from "survey-creator-core";
 import * as React from "react";
-import { SurveyLocStringEditor } from "../StringEditor";
+import { SurveyLocStringEditor } from "survey-creator-react";
 
 ReactQuestionFactory.Instance.registerQuestion("presetranking", (props) => {
   return React.createElement(SurveyQuestionRanking, props);
