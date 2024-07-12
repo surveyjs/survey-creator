@@ -33,10 +33,15 @@ svc-page {
   inset-inline-end: 0; // right
   padding: 0 calcSize(1.5);
   z-index: 1;
+
+  .sv-action-bar-separator {
+    margin: 0 calcSize(1);
+  }
 }
 
 .svc-page__content:not(.svc-page__content--new):focus,
 .svc-hovered.svc-page__content:not(.svc-page__content--new) {
+  box-shadow: 0 0 0 2px $secondary-light;
   background: $secondary-backcolor-semi-light;
 }
 
@@ -49,8 +54,9 @@ svc-page {
     top: 0;
     left: 0;
     border: 2px $border dashed;
-    border-radius: 4px;
-    box-sizing: border-box;
+    margin: -2px;
+    border-radius: calcSize(1);
+    box-sizing: content-box;
     pointer-events: none;
   }
 }
@@ -62,7 +68,7 @@ svc-page {
     display: none;
   }
   &.svc-page__content--selected {
-    box-shadow: 0 0 0 2px inset $secondary;
+    box-shadow: 0 0 0 2px $secondary;
     background: $secondary-backcolor-semi-light;
   }
   .svc-page__content-actions {
