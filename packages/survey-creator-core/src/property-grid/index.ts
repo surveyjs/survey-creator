@@ -1656,7 +1656,8 @@ export class PropertyGridEditorText extends PropertyGridEditorStringBase {
     options: ISurveyCreatorOptions
   ): any {
     return this.updateType(prop, obj, this.updateMaxLength(prop, {
-      type: "comment"
+      type: "comment",
+      rows: 2
     }));
   }
 }
@@ -1670,7 +1671,8 @@ export class PropertyGridEditorHtml extends PropertyGridEditorStringBase {
     options: ISurveyCreatorOptions
   ): any {
     return this.updateMaxLength(prop, {
-      type: "comment"
+      type: "comment",
+      rows: 2
     });
   }
 }
@@ -1683,7 +1685,10 @@ export class PropertyGridEditorStringArray extends PropertyGridEditor {
     prop: JsonObjectProperty,
     options: ISurveyCreatorOptions
   ): any {
-    return { type: "comment" };
+    return {
+      type: "comment",
+      rows: 2
+    };
   }
   public onCreated(obj: Base, question: Question, prop: JsonObjectProperty) {
     question.valueFromDataCallback = function (val: any): any {
