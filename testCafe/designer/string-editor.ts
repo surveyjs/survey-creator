@@ -853,7 +853,6 @@ test("Paste multiline selectbase", async (t) => {
 });
 
 test("Paste multiline selectbase through event", async (t) => {
-
   await setJSON({
     "elements": [
       {
@@ -866,16 +865,22 @@ test("Paste multiline selectbase through event", async (t) => {
       }
     ]
   });
-  var paste = ClientFunction((idx, data) => {
+
+  var skipIfReact = ClientFunction(() => {
+    return window["creator"].survey.platformName == "react";
+  });
+  // skip test fo react - insecured code
+  if (await skipIfReact()) return;
+
+  var paste = ClientFunction((data) => {
     var event = new Event("paste");
     event["clipboardData"] = { getData: () => data };
-    var element = document.querySelectorAll(".sd-selectbase .sv-string-editor")[idx];
-    element.dispatchEvent(event);
+    document.activeElement.dispatchEvent(event);
   });
 
   await t
     .click(Selector(".sv-string-editor").withText("None"));
-  await paste(2, "q\nw\ne");
+  await paste("q\nw\ne");
   await t.pressKey("Enter");
   await t.expect(ClientFunction(() => {
     return JSON.stringify(window["creator"].survey.getAllQuestions()[0].visibleChoices.map(c => c.text));
@@ -883,7 +888,7 @@ test("Paste multiline selectbase through event", async (t) => {
 
   await t
     .click(Selector(".sv-string-editor").withText("Item 1"));
-  await paste(0, "a\nb\nc");
+  await paste("a\nb\nc");
   await t.expect(ClientFunction(() => {
     return JSON.stringify(window["creator"].survey.getAllQuestions()[0].choices.map(c => c.text));
   })()).eql("[\"a\",\"b\",\"c\"]");
