@@ -75,6 +75,23 @@ svc-page {
     visibility: visible;
   }
 }
+.svc-creator--mobile {
+  .svc-page .svc-page__content--collapsed {
+    &::after {
+      margin: 0;
+      border-radius: calcSize(1);
+    }
+  }
+  
+  .svc-creator .svc-page .svc-page__content--selected,
+  .svc-creator .svc-page .svc-page__content--selected:focus,
+  .svc-hovered.svc-page__content {
+    &.svc-page__content--selected {
+      box-shadow: 0 0 0 2px inset $secondary;
+    }
+  }
+ 
+}
 
 .svc-page__footer {
   overflow: visible;
