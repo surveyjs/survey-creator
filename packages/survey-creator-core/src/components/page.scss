@@ -83,12 +83,16 @@ svc-page {
     }
   }
   
-  .svc-creator .svc-page .svc-page__content--selected,
-  .svc-creator .svc-page .svc-page__content--selected:focus,
+  &.svc-creator .svc-page .svc-page__content--selected,
+  &.svc-creator .svc-page .svc-page__content--selected:focus,
   .svc-hovered.svc-page__content {
     &.svc-page__content--selected {
       box-shadow: 0 0 0 2px inset $secondary;
     }
+  }
+  .svc-page__content:not(.svc-page__content--new):focus,
+  .svc-hovered.svc-page__content:not(.svc-page__content--new) {
+    box-shadow: 0 0 0 2px inset $secondary-light;
   }
  
 }
