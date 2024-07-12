@@ -65,16 +65,16 @@ svc-tab-test {
 
     .sv-action-bar-item:not(.sv-action-bar-item--pressed):enabled {
       &:focus {
-        background: var(--ctr-survey-question-panel-toolbar-item-icon-color-pressed, $background-dim);
+        background: var(--ctr-survey-question-panel-toolbar-item-background-color-selected, $background-dim);
       }
 
       &:hover {
-        background: var(--ctr-survey-question-panel-toolbar-item-icon-color-hovered, $background-dim);
+        background: var(--ctr-survey-question-panel-toolbar-item-background-color-hovered, $background-dim);
       }
     }
 
     .sv-action-bar-item--pressed:not(.sv-action-bar-item--active) {
-      background: var(--ctr-survey-question-panel-toolbar-item-icon-color-pressed, $background-dim);
+      background: var(--ctr-survey-question-panel-toolbar-item-background-color-selected, $background-dim);
     }
 
     .sv-action-bar-item__title {
