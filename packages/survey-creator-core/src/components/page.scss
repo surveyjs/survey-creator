@@ -55,7 +55,7 @@ svc-page {
     left: 0;
     border: 2px $border dashed;
     margin: -2px;
-    border-radius: calcSize(1);
+    border-radius: calcSize(1.25);
     box-sizing: content-box;
     pointer-events: none;
   }
