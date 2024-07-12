@@ -231,9 +231,8 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
         title: this.creator.getLocString("survey.duplicate"),
         visibleIndex: 10,
         iconSize: 16,
-        action: () => {
-          this.duplicate();
-        }
+        action: () => this.duplicate(),
+        onFocus: (isMouse: boolean, event: any) => this.disableActionFocusing(isMouse, event)
       })
     );
 
@@ -266,9 +265,19 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
         iconSize: 16,
         action: () => {
           this.delete();
-        }
+        },
+        onFocus: (isMouse: boolean, event: any) => this.disableActionFocusing(isMouse, event)
       })
     );
+  }
+  isDisableSelecting: boolean;
+  protected disableActionFocusing(isMouse: boolean, event: any): void {
+    this.isDisableSelecting = isMouse;
+  }
+  protected canSelectElement(): boolean {
+    const res = !this.isDisableSelecting;
+    this.isDisableSelecting = false;
+    return res;
   }
   public get allowEdit(): boolean {
     return !!this.creator && !this.creator.readOnly && this.allowEditOption;
