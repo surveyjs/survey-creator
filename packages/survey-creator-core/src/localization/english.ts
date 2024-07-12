@@ -1447,7 +1447,7 @@ export var enStrings = {
     filePlaceholder: "Applies when \"File source type\" is \"Local file\" or when camera is unavailable",
     photoPlaceholder: "Applies when \"File source type\" is \"Camera\".",
     fileOrPhotoPlaceholder: "Applies when \"File source type\" is \"Local file or camera\".",
-
+    colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line.",
     masksettings: {
       saveMaskedValue: "Select if you want to store the question value with an applied mask in survey results."
     },
