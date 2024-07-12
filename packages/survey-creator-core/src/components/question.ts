@@ -128,6 +128,10 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       result = result.replace(" svc-question__content--dragged", "");
     }
 
+    if (!!this.dragTypeOverMe && this.surveyElement.isPanel && this.collapsed) {
+      result += " svc-question__content--collapsed-drag-over-inside";
+    }
+
     if (this.dragTypeOverMe === DragTypeOverMeEnum.InsideEmptyPanel) {
       result += " svc-question__content--drag-over-inside";
     } else {
@@ -232,8 +236,13 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     if (!this.surveyElement.isInteractiveDesignElement) {
       return;
     }
+    if (this.dragTypeOverMe) this.dragIn();
     //this.updateActionsProperties();
     toggleHovered(event, element);
+  }
+  public leave(event: MouseEvent, element: HTMLElement | any) {
+    this.dragOut();
+    this.hover(event, element);
   }
   protected updateActionsProperties(): void {
     if (this.isDisposed) return;

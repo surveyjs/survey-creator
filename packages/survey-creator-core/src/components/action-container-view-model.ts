@@ -93,13 +93,47 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   public topActionContainer: ActionContainer;
   protected designerStateManager: DesignerStateManager;
   @property({ defaultValue: true }) allowDragging: boolean;
+
+  public calculateCollapsed() {
+    this.calculatedCollapsed = this.collapsedByDrag !== undefined ? this.collapsedByDrag : this.collapsed;
+  }
   @property({
     onSet: (val, target: SurveyElementAdornerBase<T>) => {
-      target.renderedCollapsed = val;
+      target.calculateCollapsed();
       if (target.designerStateManager && target.surveyElement) target.designerStateManager.getElementState(target.surveyElement).collapsed = val;
     }
   }) collapsed: boolean;
+  @property({
+    onSet: (val, target: SurveyElementAdornerBase<T>) => {
+      target.renderedCollapsed = val;
+    }
+  }) calculatedCollapsed: boolean;
+  @property({
+    onSet: (val, target: SurveyElementAdornerBase<T>) => {
+      target.calculateCollapsed();
+    }
+  }) collapsedByDrag: boolean;
+
   @property() renderedCollapsed: boolean;
+
+  private dragCollapsedTimer;
+
+  protected dragIn() {
+    if (this.surveyElement.isPanel && this.collapsed) {
+      this.dragCollapsedTimer = setTimeout(() => {
+        this.collapsedByDrag = false;
+      }, 1000);
+    }
+  }
+  protected dragOut() {
+    this.collapsedByDrag = undefined;
+    if (this.dragCollapsedTimer) clearTimeout(this.dragCollapsedTimer);
+  }
+
+  public dblclick(event) {
+    if (this.creator.expandCollapseButtonVisibility != "never") this.collapsed = !this.collapsed;
+    event.stopPropagation();
+  }
   private allowEditOption: boolean;
   private selectedPropPageFunc: (sender: Base, options: any) => void;
   private sidebarFlyoutModeChangedFunc: (sender: Base, options: any) => void;

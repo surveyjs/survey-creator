@@ -1,5 +1,5 @@
 <div class="svc-question__adorner"
-  data-bind="css: rootCss(), attr: { 'data-sv-drop-target-survey-element': element.name || null }, event: { mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }">
+  data-bind="css: rootCss(), attr: { 'data-sv-drop-target-survey-element': element.name || null }, event: { dblclick: (d, e) => dblclick(e), mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { leave(e, $element); } }">
   <div
     data-bind="click: $data.element.isInteractiveDesignElement ? koSelect : null, key2click: { disableTabStop: true }, clickBubble: false, css: css()">
     <!-- ko if: allowDragging && $data.element.isInteractiveDesignElement -->
@@ -54,7 +54,8 @@
         <button type="button"
           data-bind="click: action, key2click, clickBubble: false, attr: { title: $data.addNewQuestionText }"
           class="svc-panel__question-type-selector">
-          <sv-svg-icon class="svc-panel__question-type-selector-icon" params="iconName: iconName, size: 24"></sv-svg-icon>
+          <sv-svg-icon class="svc-panel__question-type-selector-icon"
+            params="iconName: iconName, size: 24"></sv-svg-icon>
         </button>
         <!-- /ko -->
       </div>
