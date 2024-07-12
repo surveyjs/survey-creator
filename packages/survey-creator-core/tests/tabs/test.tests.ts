@@ -1038,7 +1038,7 @@ test("Suppress NavigateToUrl notification using allow option", (): any => {
       options.survey.onNavigateToUrl.add((sender, options) => {
         onNavigateToUrlLog += "->" + options.url;
         options.allow = allowNavigate;
-      })
+      });
     }
   });
 
