@@ -1034,7 +1034,7 @@ test("Suppress NavigateToUrl notification using allow option", (): any => {
   let allowNavigate = true;
   let onNavigateToUrlLog = "";
   creator.onSurveyInstanceCreated.add((sender, options) => {
-    if (options.area = "theme-tab" || options.area === "preview-tab" || options.area === "design-tab") {
+    if (options.area === "theme-tab" || options.area === "preview-tab" || options.area === "design-tab") {
       options.survey.onNavigateToUrl.add((sender, options) => {
         onNavigateToUrlLog += "->" + options.url;
         options.allow = allowNavigate;
