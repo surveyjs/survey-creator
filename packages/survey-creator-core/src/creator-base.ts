@@ -1797,6 +1797,9 @@ export class SurveyCreatorModel extends Base
       this.selectElement(options.draggedElement, undefined, false, editTitle);
       isDraggedFromToolbox = false;
       this.onDragEnd.fire(this, options);
+      if (!options.fromElement) {
+        this.setModified({ type: "ADDED_FROM_TOOLBOX", question: options.draggedElement });
+      }
     });
   }
   private initDragDropChoices() {
