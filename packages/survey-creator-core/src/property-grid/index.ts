@@ -1010,7 +1010,7 @@ export class PropertyGridModel {
     return this.options.createSurvey(json, this.surveyInstanceCreatedArea, this, callback);
   }
   protected getSurveyJSON(): any {
-    var res = {};
+    var res = { autoGrowComment: true, allowResizeComment: false };
     setSurveyJSONForPropertyGrid(res, true, false);
     return res;
   }
