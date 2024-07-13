@@ -2265,7 +2265,7 @@ export class SurveyCreatorModel extends Base
       }
       parent = selectedElement.parent;
       if (index < 0) {
-        if (this.addNewQuestionLast) {
+        if (this.addNewQuestionLast && modifiedType === "ADDED_FROM_PAGEBUTTON") {
           index = parent.elements.length;
         } else {
           index = parent.elements.indexOf(selectedElement);

@@ -3867,12 +3867,12 @@ test("creator.addNewQuestionLast property", (): any => {
   creator.clickToolboxItem({ type: "text" });
   expect(creator.selectedElementName).toEqual("question2");
   creator.selectQuestionByName("question1");
-  creator.clickToolboxItem({ type: "text" });
+  creator.addNewQuestionInPage((str) => {}, undefined, "text");
   expect(creator.selectedElementName).toEqual("question3");
   expect(creator.survey.pages[0].elements[2].name).toEqual("question3");
   creator.selectQuestionByName("question1");
   creator.addNewQuestionLast = false;
-  creator.clickToolboxItem({ type: "text" });
+  creator.addNewQuestionInPage((str) => {}, undefined, "text");
   expect(creator.selectedElementName).toEqual("question4");
   expect(creator.survey.pages[0].elements[1].name).toEqual("question4");
   expect(creator.survey.pages[0].elements[3].name).toEqual("question3");
