@@ -90,19 +90,21 @@ test("Page hover on Add Question button", async t => {
 test("Page navigator hover", async t => {
   await setJSON(json_pages);
   await t
-    .maximizeWindow();
+    .resizeWindow(2560, 2000);
   const pageHoverSelector = Selector(".svc-page-navigator-item__banner").withExactText("page2");
 
   await t
     .wait(10)
     .expect(Selector(".svc-page-navigator-item-content").filterVisible().count).eql(2)
-    .hover(Selector(".svc-page-navigator-item-content").nth(1))
+    .hover(Selector(".svc-page-navigator-item-content").nth(1), { speed: 0.1 })
+    .wait(1500)
     .expect(pageHoverSelector.visible).ok();
   const zIndex = await pageHoverSelector.getStyleProperty("z-index");
   await t
     .expect(parseInt(zIndex))
     .gte(20);
 });
+
 test("Question hover and events", async t => {
   await setJSON(json);
   await ClientFunction(() => {
