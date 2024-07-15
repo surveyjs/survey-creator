@@ -50,11 +50,15 @@ export abstract class JsonEditorBaseModel extends Base {
   private errorListValue: ListModel;
   public get errorList(): ListModel {
     if (!this.errorListValue) {
-      this.errorListValue = new ListModel([], (action: Action) => {
-        const error: SurveyTextWorkerError = action.data.error;
-        if (!!error) this.gotoError(error.at, error.rowAt, error.columnAt);
-      }, false);
-      this.errorListValue.searchEnabled = false;
+      this.errorListValue = new ListModel({
+        items: [],
+        onSelectionChanged: (action: Action) => {
+          const error: SurveyTextWorkerError = action.data.error;
+          if (!!error) this.gotoError(error.at, error.rowAt, error.columnAt);
+        },
+        allowSelection: false,
+        searchEnabled: false
+      });
       this.errorListValue.cssClasses = {
         item: "svc-json-errors__item",
         itemBody: "svc-json-error",
