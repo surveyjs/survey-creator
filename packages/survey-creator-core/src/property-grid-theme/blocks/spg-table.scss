@@ -22,11 +22,11 @@
 }
 
 .spg-table__cell--detail-panel {
+  background: $background-dim;
+
   .spg-panel__content {
     box-shadow: none;
   }
-
-  background: $background-dim;
 }
 
 .spg-table__cell:not(.spg-table__cell--detail-panel):not(.spg-table__cell--actions):first-of-type {

@@ -13,10 +13,10 @@
   height: calcSize(6);
   cursor: pointer;
   padding: calcSize(1.5);
+  outline: none;
   use {
     fill: $foreground-light;
   }
-  outline: none;
 }
 .svc-context-button {
   &:hover,

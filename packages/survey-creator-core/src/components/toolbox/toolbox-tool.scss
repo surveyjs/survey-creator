@@ -23,15 +23,14 @@
   }
 }
 
-
 // is always visible
 .svc-toolbox__item-container {
   outline: none;
+  padding: calcSize(1) 0;
 
   .sv-svg-icon use {
     fill: $foreground-light;
   }
-  padding: calcSize(1) 0;
 }
 
 //is visible only on hover
@@ -212,13 +211,13 @@
 .svc-toolbox:not(.svc-toolbox--compact) {
   .svc-toolbox__tool--pressed {
     .svc-toolbox__item:not(.sv-dots) {
+      color: $foreground;
+      opacity: 0.5;
+
       .sv-svg-icon use {
         fill: $foreground;
         opacity: 0.5;
       }
-
-      color: $foreground;
-      opacity: 0.5;
     }
 
     .svc-toolbox__item.svc-toolbox__item-subtype {

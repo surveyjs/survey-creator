@@ -119,14 +119,13 @@ svc-question {
 .svc-question__content-actions {
   position: absolute;
   opacity: 0;
+  bottom: calcSize(2);
+  inset-inline-start: calcSize(4); // left
+  inset-inline-end: calcSize(3.5); // right
 
   &:focus-within {
     opacity: 1;
   }
-
-  bottom: calcSize(2);
-  inset-inline-start: calcSize(4); // left
-  inset-inline-end: calcSize(3.5); // right
 
   .sv-action--convertTo {
     max-width: max-content;
@@ -137,10 +136,10 @@ svc-question {
     }
 
     .sv-action-bar-item__title {
-      @include textEllipsis;
-
       display: inline-block;
       justify-content: left;
+
+      @include textEllipsis;
 
       &::after {
         content: " ";
@@ -583,11 +582,11 @@ svc-question,
 }
 
 .svc-widget__content {
+  width: 100%;
+
   .sd-question__content {
     pointer-events: none;
   }
-
-  width: 100%;
 }
 
 .svc-question__content {
@@ -759,6 +758,10 @@ svc-question,
   cursor: pointer;
   margin-right: calcSize(1);
   outline: none;
+  top: calcSize(2);
+  margin: 0;
+  position: absolute;
+  right: 0;
 
   use {
     fill: $foreground-light;
@@ -771,11 +774,6 @@ svc-question,
   &:focus {
     background-color: $primary-light;
   }
-
-  top: calcSize(2);
-  margin: 0;
-  position: absolute;
-  right: 0;
 }
 
 .sv-list__container .sv-action-bar-item--secondary {
@@ -926,15 +924,16 @@ svc-question,
   right: 0;
   visibility: hidden;
   .sv-action-bar-item {
-    use {
-      fill: $foreground-dim-light;
-    }
     margin: 0;
     padding: calcSize(0.5);
     opacity: 0.5;
     height: 24px;
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
       opacity: initial;
+    }
+    use {
+      fill: $foreground-dim-light;
     }
   }
 }
