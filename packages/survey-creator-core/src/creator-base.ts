@@ -187,6 +187,7 @@ export class SurveyCreatorModel extends Base
    * Default value: `true`
    */
   @property({ defaultValue: true }) previewShowResults: boolean;
+  @property() showOneCategoryInPropertyGrid: boolean;
   get allowEditSurveyTitle(): boolean {
     return this.getPropertyValue("allowEditSurveyTitle", true);
   }
