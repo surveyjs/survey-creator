@@ -90,7 +90,7 @@ test("Page hover on Add Question button", async t => {
 test("Page navigator hover", async t => {
   await setJSON(json_pages);
   await t
-    .resizeWindow(2560, 2000);
+    .resizeWindow(970, 632);
   const pageHoverSelector = Selector(".svc-page-navigator-item__banner").withExactText("page2");
 
   await t
