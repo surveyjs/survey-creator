@@ -121,6 +121,10 @@ input.spg-input:read-only::placeholder {
   border: none;
   line-height: calcSize(3);
   background-color: transparent;
+
+  &::placeholder {
+    color: var(--ctr-editor-content-text-color-placeholder, $foreground-dim-light);
+  }
 }
 
 .spg-input-container__input:disabled {
