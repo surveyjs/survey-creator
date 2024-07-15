@@ -1188,6 +1188,39 @@ test("Convert text question into dropdown", (): any => {
   expect(el.choices).toHaveLength(3);
   expect(el.choices[0].value).toEqual("Item 1");
 });
+test("Convert radiogroup question into dropdown, onQuestionCoverting", (): any => {
+  var creator = new CreatorTester();
+  let objJSON: any = undefined;
+  creator.onQuestionConverting.add((sender, options) => {
+    options.json = objJSON;
+  });
+  const json ={ elements: [{ type: "radiogroup", name: "q1", choices: [1, 2, 3, 4] }] };
+  creator.JSON = json;
+  creator.selectQuestionByName("q1");
+  creator.convertCurrentQuestion("dropdown");
+  var el = <QuestionDropdownModel>creator.selectedElement;
+  expect(el.getType()).toEqual("dropdown");
+  expect(el.choices).toHaveLength(3);
+  expect(el.choices[0].value).toEqual("Item 1");
+
+  objJSON = { choices: [5, 6] };
+  creator.JSON = json;
+  creator.selectQuestionByName("q1");
+  creator.convertCurrentQuestion("dropdown");
+  var el = <QuestionDropdownModel>creator.selectedElement;
+  expect(el.getType()).toEqual("dropdown");
+  expect(el.choices).toHaveLength(2);
+  expect(el.choices[0].value).toBe(5);
+
+  objJSON = {};
+  creator.JSON = json;
+  creator.selectQuestionByName("q1");
+  creator.convertCurrentQuestion("dropdown");
+  var el = <QuestionDropdownModel>creator.selectedElement;
+  expect(el.getType()).toEqual("dropdown");
+  expect(el.choices).toHaveLength(3);
+  expect(el.choices[0].value).toEqual("Item 1");
+});
 test("Convert text question into single matrix", (): any => {
   var creator = new CreatorTester();
   creator.JSON = {

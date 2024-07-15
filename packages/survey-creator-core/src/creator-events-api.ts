@@ -540,6 +540,21 @@ export interface PageAddedEvent {
   page: PageModel;
 }
 
+export interface QuestionConvertingEvent {
+  /**
+   * A question of the previous type.
+   */
+  sourceQuestion: Question;
+  /**
+   * A target [type](https://surveyjs.io/form-library/documentation/api-reference/question#getType).
+   */
+  targetType: string;
+  /**
+   * A JSON object produced by the previous question. You can modify this object to decide which properties should be copied to a new question. Set this parameter to `undefined` if you want to create the new question with a default JSON object.
+   */
+  json: any;
+}
+
 export interface PageGetFooterActionsEvent {
   /**
    * An array of actions. You can add, modify, or remove actions from this array.
