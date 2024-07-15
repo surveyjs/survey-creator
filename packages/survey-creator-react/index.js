@@ -202,6 +202,7 @@ creator.onMachineTranslate.add((_, options) => {
   options.strings.forEach(str => { translatedStrings.push(options.toLocale + ": " + str); });
   options.callback(translatedStrings);
 });
+creator.showOneCategoryInPropertyGrid = true;
 creator.JSON = json;
 creator.locale = "de";
 window.creator = creator;

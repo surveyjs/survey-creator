@@ -505,6 +505,23 @@ export class PropertyJSONGenerator {
     panel.fromJSON(this.toJSON(isNestedObj, context));
     this.onQuestionsCreated(panel);
   }
+  public setupPages(survey: SurveyModel): void {
+    const json = this.convertPanelsToPages(this.toJSON(false));
+    const surveyJSON = survey.toJSON();
+    Object.keys(json).forEach(key => surveyJSON[key] = json[key]);
+    survey.fromJSON(surveyJSON);
+    survey.pages.forEach(page => this.onQuestionsCreated(page));
+  }
+  public convertPanelsToPages(json: any): any {
+    const elements = json.elements;
+    if(!Array.isArray(elements)) return;
+    elements.forEach(el => {
+      delete el.type;
+    });
+    json["pages"] = elements;
+    delete json.elements;
+    return json;
+  }
   private onQuestionsCreated(panel: PanelModelBase): void {
     var properties = Serializer.getPropertiesByObj(this.obj);
     var props: any = {};
@@ -573,7 +590,10 @@ export class PropertyJSONGenerator {
     linkValue.property = question.property;
     linkValue.obj = question.obj;
     linkValue.visibleIf = "propertyEnableIf() = false";
-    const overridingQuestion = panel.getQuestionByName(overridingProp);
+    let overridingQuestion = panel.getQuestionByName(overridingProp);
+    if(!overridingQuestion && !!panel.survey) {
+      overridingQuestion = <Question>panel.survey.getQuestionByName(overridingProp);
+    }
     linkValue.linkValueText = editorLocalization.getString("pe.overridingPropertyPrefix");
     linkValue.titleLocation = "hidden";
     linkValue.onUpdateCssClassesCallback = (css: any) => {
@@ -819,6 +839,10 @@ export class PropertyGridModel {
     }
     if (focus) {
       question.focus();
+    } else {
+      if(this.isPagesAsCategory) {
+        this.survey.currentPage = question.page;
+      }
     }
   }
   private setObjFromAction(value: Base, propertyName: string) {
@@ -859,18 +883,23 @@ export class PropertyGridModel {
       survey.questionErrorLocation = "bottom";
       survey.getCss().list = {};
       survey.css = propertyGridCss;
-      var page = survey.createNewPage("p1");
       if (!!this.obj) {
-        new PropertyJSONGenerator(this.obj, this.options, null, null, this.propertyGridDefinition).setupObjPanel(
-          page,
-          false
-        );
+        const jsonGenerator = new PropertyJSONGenerator(this.obj, this.options, null, null, this.propertyGridDefinition);
+        if(this.isPagesAsCategory) {
+          jsonGenerator.setupPages(survey);
+        } else {
+          const page = survey.createNewPage("p1");
+          jsonGenerator.setupObjPanel(page, false);
+          survey.addPage(page);
+        }
         survey.enterKeyAction = "loseFocus";
-        survey.addPage(page);
         survey.getAllQuestions().forEach(q => {
           PropertyGridEditorCollection.onSetup(this.obj, q, q.property, this.options);
         });
         survey.checkErrorsMode = "onValueChanging";
+      }
+      if(survey.pages.length === 0) {
+        survey.addNewPage("p1");
       }
     });
     if (!this.obj) return;
@@ -970,6 +999,9 @@ export class PropertyGridModel {
   }
   public get survey() {
     return this.surveyValue;
+  }
+  private get isPagesAsCategory(): boolean {
+    return this.options.showOneCategoryInPropertyGrid;
   }
   public validate(): boolean {
     if (!this.survey) return;

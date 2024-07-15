@@ -215,6 +215,7 @@ export interface ISurveyCreatorOptions {
   inplaceEditForValues: boolean;
   rootElement?: HTMLElement;
   previewShowResults: boolean;
+  showOneCategoryInPropertyGrid: boolean;
   getObjectDisplayName(obj: Base, area: string, reason: string, displayName: string): string;
   onCanShowPropertyCallback(
     object: any,
@@ -354,6 +355,7 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   machineTranslationValue: boolean = false;
   inplaceEditForValues: boolean = false;
   maxNestedPanels: number = -1;
+  showOneCategoryInPropertyGrid: boolean;
 
   getObjectDisplayName(obj: Base, area: string, reason: string, displayName: string): string {
     return displayName;
