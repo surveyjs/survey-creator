@@ -1971,13 +1971,28 @@ export class SurveyCreatorModel extends Base
     if (!this.survey) return "";
     var json = (<any>this.survey).toJSON();
     json = this.singlePageJSON(json);
+    this.moveElementsToTheEnd(json);
     const indent = settings.jsonEditor.indentation;
     if (this.generateValidJSON) {
       return JSON.stringify(json, null, indent);
     }
     return new SurveyJSON5().stringify(json, null, indent);
   }
-
+  private moveElementsToTheEnd(json: any): void {
+    if(!json) return;
+    if(Array.isArray(json)) {
+      json.forEach(el => this.moveElementsToTheEnd(el));
+    } else {
+      if(typeof json === "object") {
+        if(!!json["elements"]) {
+          const els = json["elements"];
+          delete json["elements"];
+          json["elements"] = els;
+        }
+        Object.keys(json).forEach(key => this.moveElementsToTheEnd(json[key]));
+      }
+    }
+  }
   protected setTextValue(value: string) {
     if (!!this.setSurveyJSONTextCallback) {
       this.setSurveyJSONTextCallback(value);
