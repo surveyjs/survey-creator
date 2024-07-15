@@ -100,7 +100,7 @@ input.spg-input:read-only::placeholder {
   height: auto;
 
   sv-ng-question-comment {
-    height: calcSize(9);
+    display: flex;
   }
 
   .spg-input-container__input {
