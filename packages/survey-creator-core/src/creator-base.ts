@@ -2174,12 +2174,12 @@ export class SurveyCreatorModel extends Base
   protected convertQuestion(obj: Question, className: string): Question {
     const objJSON = QuestionConverter.getObjJSON(obj, this.getDefaultElementJSON(obj.getType()));
     const options: QuestionConvertedEvent = {
-      convertFrom: obj,
-      convertTo: className,
-      convertFromJSON: objJSON
+      sourceQuestion: obj,
+      targetType: className,
+      json: objJSON
     };
     this.onQuestionConverting.fire(this, options);
-    const newQuestion = <Question>QuestionConverter.convertObject(obj, className, options.convertFromJSON, this.getDefaultElementJSON(className));
+    const newQuestion = <Question>QuestionConverter.convertObject(obj, className, options.json, this.getDefaultElementJSON(className));
     this.setModified({
       type: "QUESTION_CONVERTED",
       className: className,

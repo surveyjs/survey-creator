@@ -558,9 +558,9 @@ export interface PageAddedEvent {
 }
 
 export interface QuestionConvertedEvent {
-  convertFrom: Question;
-  convertTo: string;
-  convertFromJSON: any;
+  sourceQuestion: Question;
+  targetType: string;
+  json: any;
 }
 
 export interface PageGetFooterActionsEvent {

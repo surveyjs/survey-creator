@@ -1192,7 +1192,7 @@ test("Convert radiogroup question into dropdown, onQuestionCoverting", (): any =
   var creator = new CreatorTester();
   let objJSON: any = undefined;
   creator.onQuestionConverting.add((sender, options) => {
-    options.convertFromJSON = objJSON;
+    options.json = objJSON;
   });
   const json ={ elements: [{ type: "radiogroup", name: "q1", choices: [1, 2, 3, 4] }] };
   creator.JSON = json;
