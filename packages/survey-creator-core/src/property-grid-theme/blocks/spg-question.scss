@@ -96,6 +96,7 @@
     padding: calcSize(1) calcSize(2);
     border-right: 1px solid $border;
     display: inline-block;
+    color: var(--ctr-editor-label-color, $foreground-dim-light);
   }
 
   display: flex;
