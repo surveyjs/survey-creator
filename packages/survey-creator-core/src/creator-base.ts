@@ -44,7 +44,7 @@ import {
   ElementGetActionsEvent, PropertyAddingEvent, PropertyGridSurveyCreatedEvent, PropertyEditorCreatedEvent, PropertyEditorUpdateTitleActionsEvent,
   PropertyGridShowPopupEvent, CollectionItemAllowOperationsEvent, CollectionItemAddedEvent, FastEntryItemsEvent as FastEntryFinishedEvent, MatrixColumnAddedEvent, ConfigureTablePropertyEditorEvent,
   PropertyDisplayCustomErrorEvent, PropertyValueChangingEvent, PropertyValueChangedEvent, ConditionGetQuestionListEvent, GetConditionOperatorEvent,
-  LogicRuleGetDisplayTextEvent, ModifiedEvent, QuestionAddedEvent, PanelAddedEvent, PageAddedEvent,
+  LogicRuleGetDisplayTextEvent, ModifiedEvent, QuestionAddedEvent, PanelAddedEvent, PageAddedEvent, QuestionConvertingEvent,
   PageGetFooterActionsEvent, SurveyInstanceCreatedEvent, DesignerSurveyCreatedEvent, PreviewSurveyCreatedEvent, NotifyEvent, ElementFocusingEvent,
   ElementFocusedEvent, OpenFileChooserEvent, UploadFileEvent, TranslationStringVisibilityEvent, TranslationImportItemEvent,
   TranslationImportedEvent, TranslationExportItemEvent, MachineTranslateEvent, TranslationItemChangingEvent, DragDropAllowEvent,
@@ -224,7 +224,7 @@ export class SurveyCreatorModel extends Base
    * 
    * Default value: `false`
    * 
-   * If you enable this property, Survey Creator calls the [`saveSurveyFunc`](#saveSurveyFunc) or [`saveThemeFunc`](#saveThemeFunc) function to save the survey or theme JSON schema. The schemas are saved with a 500-millisecond delay after users change settings. You can specify the [`autoSaveDelay`](#autoSaveDelay) property to increase or descrease the delay.
+   * If you enable this property, Survey Creator calls the [`saveSurveyFunc`](#saveSurveyFunc) or [`saveThemeFunc`](#saveThemeFunc) function to save the survey or theme JSON schema. The schemas are saved with a 500-millisecond delay after users change settings. You can specify the [`autoSaveDelay`](#autoSaveDelay) property to increase or decrease the delay.
    */
   @property({ defaultValue: false }) isAutoSave: boolean;
   @property() showOptions: boolean;
@@ -597,6 +597,10 @@ export class SurveyCreatorModel extends Base
    * [Customize Survey Elements on Creation](https://surveyjs.io/survey-creator/documentation/customize-survey-creation-process#customize-survey-elements-on-creation (linkStyle))
    */
   public onPageAdded: EventBase<SurveyCreatorModel, PageAddedEvent> = this.addCreatorEvent<SurveyCreatorModel, PageAddedEvent>();
+  /**
+   * An event that is raised when a [question's type is being changed](https://surveyjs.io/survey-creator/documentation/end-user-guide/user-interface#how-to-change-the-question-type).
+   */
+  public onQuestionConverting: EventBase<SurveyCreatorModel, QuestionConvertingEvent> = this.addCreatorEvent<SurveyCreatorModel, QuestionConvertingEvent>();
 
   /**
    * An event that is raised when Survey Creator renders action buttons under each page on the design surface. Use this event to add, remove, or modify the buttons.
@@ -1216,6 +1220,11 @@ export class SurveyCreatorModel extends Base
     return this.getPlugin(this.activeTab);
   }
 
+  /**
+   * Provides access to the [Toolbox API](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolbox).
+   * 
+   * [Toolbox Customization](https://surveyjs.io/survey-creator/documentation/toolbox-customization (linkStyle))
+   */
   public toolbox: QuestionToolbox;
   public get toolboxCategories(): Array<any> {
     return this.toolbox.categories;
@@ -1875,6 +1884,9 @@ export class SurveyCreatorModel extends Base
       this.selectElement(options.draggedElement, undefined, false, editTitle);
       isDraggedFromToolbox = false;
       this.onDragEnd.fire(this, options);
+      if (!options.fromElement) {
+        this.setModified({ type: "ADDED_FROM_TOOLBOX", question: options.draggedElement });
+      }
     });
   }
   private initDragDropChoices() {
@@ -2049,13 +2061,28 @@ export class SurveyCreatorModel extends Base
     if (!this.survey) return "";
     var json = (<any>this.survey).toJSON();
     json = this.singlePageJSON(json);
+    this.moveElementsToTheEnd(json);
     const indent = settings.jsonEditor.indentation;
     if (this.generateValidJSON) {
       return JSON.stringify(json, null, indent);
     }
     return new SurveyJSON5().stringify(json, null, indent);
   }
-
+  private moveElementsToTheEnd(json: any): void {
+    if(!json) return;
+    if(Array.isArray(json)) {
+      json.forEach(el => this.moveElementsToTheEnd(el));
+    } else {
+      if(typeof json === "object") {
+        if(!!json["elements"]) {
+          const els = json["elements"];
+          delete json["elements"];
+          json["elements"] = els;
+        }
+        Object.keys(json).forEach(key => this.moveElementsToTheEnd(json[key]));
+      }
+    }
+  }
   protected setTextValue(value: string) {
     if (!!this.setSurveyJSONTextCallback) {
       this.setSurveyJSONTextCallback(value);
@@ -2248,8 +2275,14 @@ export class SurveyCreatorModel extends Base
   }
 
   protected convertQuestion(obj: Question, className: string): Question {
-    var newQuestion = <Question>QuestionConverter.convertObject(obj, className,
-      this.getDefaultElementJSON(obj.getType()), this.getDefaultElementJSON(className));
+    const objJSON = QuestionConverter.getObjJSON(obj, this.getDefaultElementJSON(obj.getType()));
+    const options: QuestionConvertingEvent = {
+      sourceQuestion: obj,
+      targetType: className,
+      json: objJSON
+    };
+    this.onQuestionConverting.fire(this, options);
+    const newQuestion = <Question>QuestionConverter.convertObject(obj, className, options.json, this.getDefaultElementJSON(className));
     this.setModified({
       type: "QUESTION_CONVERTED",
       className: className,
@@ -2343,7 +2376,7 @@ export class SurveyCreatorModel extends Base
       }
       parent = selectedElement.parent;
       if (index < 0) {
-        if (this.addNewQuestionLast) {
+        if (this.addNewQuestionLast && modifiedType === "ADDED_FROM_PAGEBUTTON") {
           index = parent.elements.length;
         } else {
           index = parent.elements.indexOf(selectedElement);

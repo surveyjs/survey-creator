@@ -236,3 +236,15 @@ test("export json to file", (done): any => {
   };
   editorPlugin.exportToFile(settings.jsonEditor.exportFileName);
 });
+test("Put elements into end of the JSON", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: { type: "text", name: "q1" }
+  };
+  creator.survey.pages[0].title = "test";
+  const editor = new TextareaJsonEditorModel(creator);
+  const text = editor.text;
+  const elementsPos = text.indexOf("elements");
+  const titlePos = text.indexOf("title");
+  expect(elementsPos > titlePos).toBeTruthy();
+});

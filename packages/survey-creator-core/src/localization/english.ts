@@ -415,6 +415,9 @@ export var enStrings = {
     rateDescriptionLocation: "Label alignment",
     size: "Input field width (in characters)",
     cellErrorLocation: "Cell error message alignment",
+    enabled: "Enabled",
+    disabled: "Disabled",
+    inherit: "Inherit",
     apply: "Apply",
     ok: "OK",
     save: "Save",
@@ -1380,8 +1383,8 @@ export var enStrings = {
     locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab.",
     detailPanelMode: "Sets the location of a details section in relation to a row. Choose from: \"None\" - no expansion is added; \"Under the row\" - a row expansion is placed under each row of the matrix; \"Under the row, display one row expansion only\" - an expansion is displayed under a single row only, the remaining row expansions are collapsed.",
     imageFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio.",
-    autoGrow: "Gradually increases the height of the input field as data is being entered. Overrides the \"Input field height (in lines)\" setting.",
-    allowResize: "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field.",
+    autoGrow: "The \"Inherit\" option applies a survey-level setting (\"Disabled\" by default).",
+    allowResize: "The \"Inherit\" option applies a survey-level setting (\"Enabled\" by default).",
     maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the \"Thank You\" page.",
     maxTimeToFinishPage: "A time interval in seconds after which the survey auto-advances to the next page. Hides the \"Previous\" navigation button.",
     page: {
@@ -1447,7 +1450,7 @@ export var enStrings = {
     filePlaceholder: "Applies when \"File source type\" is \"Local file\" or when camera is unavailable",
     photoPlaceholder: "Applies when \"File source type\" is \"Camera\".",
     fileOrPhotoPlaceholder: "Applies when \"File source type\" is \"Local file or camera\".",
-
+    colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line.",
     masksettings: {
       saveMaskedValue: "Select if you want to store the question value with an applied mask in survey results."
     },

@@ -447,28 +447,20 @@ export interface LogicRuleGetDisplayTextEvent {
 
 export interface ModifiedEvent {
   /**
-  * A value that indicates the modification: `"ADDED_FROM_TOOLBOX"`, `"PAGE_ADDED"`, `"PAGE_MOVED"`, `"QUESTION_CONVERTED"`, `"QUESTION_CHANGED_BY_EDITOR"`, `"PROPERTY_CHANGED"`, `"ELEMENT_REORDERED"`, `"OBJECT_DELETED"`, `"VIEW_TYPE_CHANGED"`, `"DO_DROP"`, `"TRANSLATIONS_CHANGED"`, `"JSON_EDITOR"`, `"THEME_MODIFIED"`
+  * A value that indicates the modification: `"ADDED_FROM_TOOLBOX"`, "ADDED_FROM_PAGEBUTTON", `"PAGE_ADDED"`, `"QUESTION_CONVERTED"`, `"ELEMENT_COPIED"`, `"PROPERTY_CHANGED"`, `"ELEMENT_REORDERED"`, `"OBJECT_DELETED"`, `"JSON_EDITOR"`
   * 
   * Depending on the `options.type` value, the `options` object contains parameters listed below:
   * 
-  * `options.type`: `"ADDED_FROM_TOOLBOX"`
-  * - `options.question` - An added question.
+  * `options.type`: `"ADDED_FROM_TOOLBOX"` | `"ADDED_FROM_PAGEBUTTON"` | `"ELEMENT_COPIED"`
+  * - `options.question` - An added or copied survey element.
   * 
   * `options.type`: `"PAGE_ADDED"`
   * - `options.newValue` - An added page.
-  *
-  * `options.type`: `"PAGE_MOVED"`
-  * - `options.page` - A moved page.
-  * - `options.indexFrom` - A previous index.
-  * - `options.indexTo` - A current index.
   *
   * `options.type`: `"QUESTION_CONVERTED"`
   * - `options.className` - The name of a class to which a question has been converted.
   * - `options.oldValue` - An object of a previous class.
   * - `options.newValue` - An object of a class specified by `options.className`.
-  *
-  * `options.type`: `"QUESTION_CHANGED_BY_EDITOR"`
-  * - `options.question` - A question that has been edited in a pop-up editor.
   *
   * `options.type`: `"PROPERTY_CHANGED"`
   * - `options.name` - The name of the changed property.
@@ -485,15 +477,6 @@ export interface ModifiedEvent {
   *
   * `options.type`: `"OBJECT_DELETED"`
   * - `options.target` - A deleted object.
-  *
-  * `options.type`: `"VIEW_TYPE_CHANGED"`
-  * - `options.newType` - A current view: `"editor"` or `"designer"`.
-  *
-  * `options.type`: `"DO_DROP"`
-  * - `options.page` - A parent page of the dragged element.
-  * - `options.source` - A dragged element.
-  * - `options.target` - A drop target.
-  * - `options.newElement` - A new element. This parameter is defined only if users drag a question or panel from the Toolbox.
   */
   type: string;
   question?: Question;
@@ -555,6 +538,21 @@ export interface PageAddedEvent {
    * The page users added.
    */
   page: PageModel;
+}
+
+export interface QuestionConvertingEvent {
+  /**
+   * A question of the previous type.
+   */
+  sourceQuestion: Question;
+  /**
+   * A target [type](https://surveyjs.io/form-library/documentation/api-reference/question#getType).
+   */
+  targetType: string;
+  /**
+   * A JSON object produced by the previous question. You can modify this object to decide which properties should be copied to a new question. Set this parameter to `undefined` if you want to create the new question with a default JSON object.
+   */
+  json: any;
 }
 
 export interface PageGetFooterActionsEvent {

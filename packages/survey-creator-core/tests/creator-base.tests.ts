@@ -1188,6 +1188,39 @@ test("Convert text question into dropdown", (): any => {
   expect(el.choices).toHaveLength(3);
   expect(el.choices[0].value).toEqual("Item 1");
 });
+test("Convert radiogroup question into dropdown, onQuestionCoverting", (): any => {
+  var creator = new CreatorTester();
+  let objJSON: any = undefined;
+  creator.onQuestionConverting.add((sender, options) => {
+    options.json = objJSON;
+  });
+  const json ={ elements: [{ type: "radiogroup", name: "q1", choices: [1, 2, 3, 4] }] };
+  creator.JSON = json;
+  creator.selectQuestionByName("q1");
+  creator.convertCurrentQuestion("dropdown");
+  var el = <QuestionDropdownModel>creator.selectedElement;
+  expect(el.getType()).toEqual("dropdown");
+  expect(el.choices).toHaveLength(3);
+  expect(el.choices[0].value).toEqual("Item 1");
+
+  objJSON = { choices: [5, 6] };
+  creator.JSON = json;
+  creator.selectQuestionByName("q1");
+  creator.convertCurrentQuestion("dropdown");
+  var el = <QuestionDropdownModel>creator.selectedElement;
+  expect(el.getType()).toEqual("dropdown");
+  expect(el.choices).toHaveLength(2);
+  expect(el.choices[0].value).toBe(5);
+
+  objJSON = {};
+  creator.JSON = json;
+  creator.selectQuestionByName("q1");
+  creator.convertCurrentQuestion("dropdown");
+  var el = <QuestionDropdownModel>creator.selectedElement;
+  expect(el.getType()).toEqual("dropdown");
+  expect(el.choices).toHaveLength(3);
+  expect(el.choices[0].value).toEqual("Item 1");
+});
 test("Convert text question into single matrix", (): any => {
   var creator = new CreatorTester();
   creator.JSON = {
@@ -3867,12 +3900,12 @@ test("creator.addNewQuestionLast property", (): any => {
   creator.clickToolboxItem({ type: "text" });
   expect(creator.selectedElementName).toEqual("question2");
   creator.selectQuestionByName("question1");
-  creator.clickToolboxItem({ type: "text" });
+  creator.addNewQuestionInPage((str) => {}, undefined, "text");
   expect(creator.selectedElementName).toEqual("question3");
   expect(creator.survey.pages[0].elements[2].name).toEqual("question3");
   creator.selectQuestionByName("question1");
   creator.addNewQuestionLast = false;
-  creator.clickToolboxItem({ type: "text" });
+  creator.addNewQuestionInPage((str) => {}, undefined, "text");
   expect(creator.selectedElementName).toEqual("question4");
   expect(creator.survey.pages[0].elements[1].name).toEqual("question4");
   expect(creator.survey.pages[0].elements[3].name).toEqual("question3");

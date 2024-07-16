@@ -486,6 +486,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   },
   "matrixdropdowncolumn@dropdown": {
     properties: [
+      "placeholder",
       { name: "choicesFromQuestion", tab: "choices" },
       { name: "choicesFromQuestionMode", tab: "choices" },
       { name: "choiceValuesFromQuestion", tab: "choices" },
@@ -514,6 +515,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   },
   "matrixdropdowncolumn@tagbox": {
     properties: [
+      "placeholder",
       { name: "choicesFromQuestion", tab: "choices" },
       { name: "choicesFromQuestionMode", tab: "choices" },
       { name: "choiceValuesFromQuestion", tab: "choices" },
