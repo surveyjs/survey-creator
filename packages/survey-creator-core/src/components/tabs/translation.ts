@@ -3,9 +3,10 @@ import {
   Serializer, PageModel, surveyLocalization, ILocalizableString, ItemValue, FunctionFactory,
   PanelModelBase, QuestionMatrixDropdownModel, PanelModel, Action, IAction, QuestionCommentModel,
   ComputedUpdater, createDropdownActionModel, Helpers, QuestionMatrixDynamicModel,
-  PopupBaseViewModel, IDialogOptions, settings as surveySettings, ListModel, PopupModel, BaseAction,
+  PopupBaseViewModel, IDialogOptions, settings as surveySettings,
   MatrixDropdownColumn,
-  CssClassBuilder
+  CssClassBuilder,
+  createPopupModelWithListModel
 } from "survey-core";
 import { unparse, parse } from "papaparse";
 import { editorLocalization } from "../../editorLocalization";
@@ -1560,41 +1561,47 @@ export class TranslationEditor {
     return res;
   }
   private createLocaleFromAction(): IAction {
-    const action = new Action({
-      id: "svc-translation-fromlocale",
-      component: "svc-translate-from-action",
-      css: "st-translation-machine-from",
-      location: "start",
-      iconSize: "auto",
-      innerCss: "st-translation-machine-from__btn",
-      data: {
-        additionalTitleCss: "st-translation-machine-from__title",
-        additionalTitle: editorLocalization.getString("ed.translateUsigAIFrom")
-      }
-    });
     const defaultLocaleTitle = this.getActionTranslateFromText("");
     const onActionTypesPopupShow = () => {
       const items = [{ id: null, title: defaultLocaleTitle }];
       this.fromLocales.forEach(locale => {
         items.push({ id: locale, title: this.getActionTranslateFromText(locale) });
       });
-      actionTypesPopupModel.contentComponentData.model.setItems(items);
+      const listModel = action.popupModel.contentComponentData.model;
+      listModel.setItems(items);
     };
-    const actionTypesListModel = new ListModel(
-      [{ id: null, title: defaultLocaleTitle }],
-      (item: IAction) => {
+
+    const actionTypesPopupModel = createPopupModelWithListModel({
+      items: [{ id: null, title: defaultLocaleTitle }],
+      onSelectionChanged: (item: IAction) => {
         const id = item.id || "";
         this.setFromLocale(id);
         action.title = this.getActionTranslateFromText(id);
-        actionTypesPopupModel.toggleVisibility();
-      }, true);
-    const actionTypesPopupModel = new PopupModel<{ model: ListModel<BaseAction> }>(
-      "sv-list", { model: actionTypesListModel }, "bottom", "center");
+      },
+      allowSelection: true
+    }, {
+      verticalPosition: "bottom",
+      horizontalPosition: "center",
+      onShow: onActionTypesPopupShow
+    });
 
-    actionTypesPopupModel.onShow = onActionTypesPopupShow;
-    action.popupModel = actionTypesPopupModel;
-    action.title = defaultLocaleTitle;
-    action.action = () => { actionTypesPopupModel.toggleVisibility(); };
+    const action = new Action({
+      id: "svc-translation-fromlocale",
+      component: "svc-translate-from-action",
+      css: "st-translation-machine-from",
+      location: "start",
+      title: defaultLocaleTitle,
+      iconSize: "auto",
+      innerCss: "st-translation-machine-from__btn",
+      data: {
+        additionalTitleCss: "st-translation-machine-from__title",
+        additionalTitle: editorLocalization.getString("ed.translateUsigAIFrom")
+      },
+      popupModel: actionTypesPopupModel,
+      action: () => {
+        actionTypesPopupModel.toggleVisibility();
+      }
+    });
 
     return action;
   }
