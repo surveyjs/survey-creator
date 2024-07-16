@@ -204,9 +204,9 @@ export class TabTestPlugin implements ICreatorPlugin {
     let availableThemesToItems = this.getAvailableThemes(themeMapper);
 
     if (this.creator.allowChangeThemeInPreview && availableThemesToItems.length > 1 && !this.creator.showThemeTab) {
-      this.changeThemeModel = new ListModel({
-        items: availableThemesToItems,
-        onSelectionChanged: (item: any) => {
+      this.changeThemeModel = new ListModel(
+        availableThemesToItems,
+        (item: any) => {
           if (!!this.model) {
             this.model.setTheme(item.value, themeMapper);
           }
@@ -214,8 +214,8 @@ export class TabTestPlugin implements ICreatorPlugin {
           this.changeThemeAction.locStrsChanged();
           this.changeThemePopupModel.toggleVisibility();
         },
-        allowSelection: true
-      });
+        true
+      );
       this.changeThemeModel.locOwner = this.creator;
 
       this.changeThemePopupModel = new PopupModel(
