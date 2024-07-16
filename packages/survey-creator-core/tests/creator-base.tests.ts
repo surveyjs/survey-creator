@@ -4447,3 +4447,9 @@ test("onModified is raised for mask settings", (): any => {
   (maskedQuestion.maskSettings as any).thousandsSeparator = "-";
   expect(propName).toBe("thousandsSeparator");
 });
+
+test("json editor default indent", (): any => {
+  const creator = new CreatorTester();
+  expect(settings.jsonEditor.indentation).toBe(2);
+  expect(creator.text).toBe("{\n  \"logoPosition\": \"right\",\n  \"pages\": [\n    {\n      \"name\": \"page1\"\n    }\n  ]\n}");
+});
