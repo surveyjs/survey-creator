@@ -1672,7 +1672,8 @@ export class PropertyGridEditorHtml extends PropertyGridEditorStringBase {
   ): any {
     return this.updateMaxLength(prop, {
       type: "comment",
-      rows: 2
+      "allowResize": true,
+      "autoGrow": false,
     });
   }
 }
