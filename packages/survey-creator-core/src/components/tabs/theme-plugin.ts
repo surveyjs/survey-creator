@@ -29,6 +29,8 @@ import { propertyGridCss } from "../../property-grid-theme/property-grid";
  * const creator = new SurveyCreatorModel(creatorOptions);
  * creator.themeEditor.settingName = "value";
  * ```
+ * 
+ * [Theme Editor Documentation](https://surveyjs.io/survey-creator/documentation/theme-editor (linkStyle))
  */
 export class ThemeTabPlugin implements ICreatorPlugin {
   public static DefaultTheme = Themes["default-light"];

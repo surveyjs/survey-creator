@@ -26,7 +26,7 @@ test("Change title of text question", async (t) => {
   await setJSON(json);
   await t
     .click(getTabbedMenuItemByText("JSON Editor"))
-    .selectTextAreaContent(Selector(".svc-json-editor-tab__content-area"), 8, 15, 8, 24)
+    .selectTextAreaContent(Selector(".svc-json-editor-tab__content-area"), 8, 20, 8, 29)
     .pressKey("backspace")
     .pressKey("I space a m space c h a n g e d")
 
@@ -51,7 +51,7 @@ test("Goto line from error", async (t) => {
   await t
     .click(getTabbedMenuItemByText("JSON Editor"))
     .selectTextAreaContent(Selector(".svc-json-editor-tab__content-area"))
-    .selectTextAreaContent(Selector(".svc-json-editor-tab__content-area"), 4, 4, 4, 4)
+    .selectTextAreaContent(Selector(".svc-json-editor-tab__content-area"), 4, 7, 4, 7)
     .pressKey("a")
     .wait(1100)
     .expect(Selector(".svc-json-editor-tab__errros_list").visible).ok()
@@ -94,7 +94,7 @@ test("Check fix error", async (t) => {
   await t
     .click(getTabbedMenuItemByText("JSON Editor"))
     .selectTextAreaContent(Selector(".svc-json-editor-tab__content-area"))
-    .selectTextAreaContent(Selector(".svc-json-editor-tab__content-area"), 11, 15, 11, 16)
+    .selectTextAreaContent(Selector(".svc-json-editor-tab__content-area"), 11, 20, 11, 21)
     .pressKey("1")
     .wait(1100)
     .expect(Selector(".svc-json-editor-tab__errros_list").visible).ok()
