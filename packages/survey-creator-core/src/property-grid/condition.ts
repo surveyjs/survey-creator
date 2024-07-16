@@ -16,7 +16,11 @@ export class PropertyGridEditorExpression extends PropertyGridEditor {
     prop: JsonObjectProperty,
     options: ISurveyCreatorOptions
   ): any {
-    return { type: "comment", showOptionsCaption: false };
+    return {
+      type: "comment",
+      showOptionsCaption: false,
+      rows: 2
+    };
   }
   public clearPropertyValue(
     obj: Base,
@@ -38,7 +42,8 @@ export class PropertyGridEditorCondition extends PropertyGridEditorExpression {
   ): any {
     return {
       type: "comment",
-      showOptionsCaption: false
+      showOptionsCaption: false,
+      rows: 2,
     };
   }
   public canClearPropertyValue(obj: Base, prop: JsonObjectProperty, question: Question, options: ISurveyCreatorOptions): boolean {
