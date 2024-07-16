@@ -1,5 +1,5 @@
 import { PagesController } from "../../pages-controller";
-import { PageModel, PopupModel, ListModel, Base, propertyArray, SurveyModel, property, IAction, Action, ComputedUpdater } from "survey-core";
+import { PageModel, PopupModel, ListModel, Base, propertyArray, SurveyModel, property, IAction, Action, ComputedUpdater, createPopupModelWithListModel } from "survey-core";
 
 require("./page-navigator.scss");
 require("./page-navigator-item.scss");
@@ -32,21 +32,25 @@ export class PageNavigatorViewModel extends Base {
     this.icon = "icon-select-page";
     this.pagesController.onPagesChanged.add(this.pagesChangedFunc);
     this.pagesController.onCurrentPageChanged.add(this.currentPagesChangedFunc);
-    this.pageListModel = new ListModel({
+
+    this.popupModel = createPopupModelWithListModel({
       items: [],
       onSelectionChanged: (item) => {
         this.pagesController.selectPage(item.data);
         this.popupModel.hide();
       },
       allowSelection: true
+    }, {
+      onShow: () => {
+        this.pageListModel.selectedItem = this.getActionBarByPage(this.pagesController.currentPage);
+        this.isPopupOpened = true;
+      },
+      onHide: () => { this.isPopupOpened = false; }
     });
-    this.popupModel = new PopupModel("sv-list", { model: this.pageListModel });
+
+    this.pageListModel = this.popupModel.contentComponentData.model;
+
     !!this.pagesController && (this.popupModel.horizontalPosition = this.pagesController.creator["toolboxLocation"]);
-    this.popupModel.onShow = () => {
-      this.pageListModel.selectedItem = this.getActionBarByPage(this.pagesController.currentPage);
-      this.isPopupOpened = true;
-    };
-    this.popupModel.onHide = () => { this.isPopupOpened = false; };
     if (!!this.pagesController.creator["onPropertyChanged"]) {
       this.pagesController.creator["onPropertyChanged"].add(this.pcPropertyChangedHandler);
     }
