@@ -122,6 +122,7 @@ svc-page {
   overflow: visible;
   margin-left: calcSize(3);
   margin-right: calcSize(3);
+  gap: calcSize(2);
 
   .sv-action {
     flex: 1 1 0;
@@ -131,8 +132,6 @@ svc-page {
     flex-grow: 1;
     border: none;
   }
-
-  gap: calcSize(2);
 }
 
 .svc-page__add-new-question {

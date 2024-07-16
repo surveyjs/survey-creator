@@ -1011,7 +1011,7 @@ export class PropertyGridModel {
     return this.options.createSurvey(json, this.surveyInstanceCreatedArea, this, callback);
   }
   protected getSurveyJSON(): any {
-    var res = {};
+    var res = { autoGrowComment: true, allowResizeComment: false };
     setSurveyJSONForPropertyGrid(res, true, false);
     return res;
   }
@@ -1401,6 +1401,40 @@ export class PropertyGridEditorBoolean extends PropertyGridEditor {
     return true;
   }
 }
+
+export class PropertyGridEditorUndefinedBoolean extends PropertyGridEditor {
+  public fit(prop: JsonObjectProperty, context?: string): boolean {
+    return prop.type == "boolean" && !!prop.defaultValueFunc && prop.defaultValueFunc(null) === undefined;
+  }
+
+  public getJSON(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): any {
+    const choices: Array<any> = [
+      { value: "auto", text: editorLocalization.getString("pe.inherit") },
+      { value: "false", text: editorLocalization.getString("pe.disabled") },
+      { value: "true", text: editorLocalization.getString("pe.enabled") },
+    ];
+
+    const res: any = {
+      type: "buttongroup",
+      choices: choices,
+      showOptionsCaption: false
+    };
+    return res;
+  }
+
+  onCreated(obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions, propGridDefinition?: ISurveyPropertyGridDefinition) {
+    question.valueFromDataCallback = (val: boolean | undefined) => { return val === undefined ? "auto" : val.toString(); };
+    question.valueToDataCallback = (val: string) => { return val === "auto" ? undefined : val === "true"; };
+  }
+  onSetup(obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions) {
+    const objValue = obj.getPropertyValue(prop.name);
+    if (objValue === undefined) {
+      question.value = "auto";
+    } else {
+      question.value = objValue === "true";
+    }
+  }
+}
 export abstract class PropertyGridEditorStringBase extends PropertyGridEditor {
   protected updateMaxLength(prop: JsonObjectProperty, json: any): any {
     if (prop.maxLength > 0) {
@@ -1623,7 +1657,8 @@ export class PropertyGridEditorText extends PropertyGridEditorStringBase {
     options: ISurveyCreatorOptions
   ): any {
     return this.updateType(prop, obj, this.updateMaxLength(prop, {
-      type: "comment"
+      type: "comment",
+      rows: 2
     }));
   }
 }
@@ -1637,7 +1672,8 @@ export class PropertyGridEditorHtml extends PropertyGridEditorStringBase {
     options: ISurveyCreatorOptions
   ): any {
     return this.updateMaxLength(prop, {
-      type: "comment"
+      type: "comment",
+      rows: 2
     });
   }
 }
@@ -1650,7 +1686,10 @@ export class PropertyGridEditorStringArray extends PropertyGridEditor {
     prop: JsonObjectProperty,
     options: ISurveyCreatorOptions
   ): any {
-    return { type: "comment" };
+    return {
+      type: "comment",
+      rows: 2
+    };
   }
   public onCreated(obj: Base, question: Question, prop: JsonObjectProperty) {
     question.valueFromDataCallback = function (val: any): any {
@@ -1949,6 +1988,7 @@ PropertyGridEditorCollection.register(new PropertyGridEditorImageSize());
 PropertyGridEditorCollection.register(new PropertyGridEditorColor());
 PropertyGridEditorCollection.register(new PropertyGridEditorColorWithAlpha());
 PropertyGridEditorCollection.register(new PropertyGridEditorDateTime());
+PropertyGridEditorCollection.register(new PropertyGridEditorUndefinedBoolean());
 
 QuestionFactory.Instance.registerQuestion("buttongroup", (name) => {
   return new QuestionButtonGroupModel(name);

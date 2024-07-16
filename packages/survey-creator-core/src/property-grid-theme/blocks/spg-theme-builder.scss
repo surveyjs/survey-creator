@@ -61,13 +61,12 @@
 
     .spg-question__title {
       white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
 
       .sv-string-viewer {
         white-space: nowrap;
       }
-
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
   }
 
@@ -87,12 +86,12 @@
     }
   }
 
-  .spg-nested-panel__content > .spg-row:first-of-type {
+  .spg-nested-panel__content>.spg-row:first-of-type {
     margin-top: 0;
   }
 
-  .spg-paneldynamic__panel-wrapper > .spg-nested-panel,
-  .spg-row:last-of-type > div > .spg-nested-panel {
+  .spg-paneldynamic__panel-wrapper>.spg-nested-panel,
+  .spg-row:last-of-type>div>.spg-nested-panel {
     padding-bottom: 0;
 
     &::after {
@@ -122,18 +121,23 @@
   .spg-header {
     margin-top: calcSize(-2);
   }
+
   .sd-question--title-top .spg-paneldynamic {
     margin-top: calcSize(-1);
   }
+
   .spg-question.spg-row__question:not(.sd-question--title-top):not(.spg-question--boolean) {
     margin-top: calcSize(-1);
   }
+
   .spg-row--multiple .spg-question.spg-row__question:not(.sd-question--title-top) {
     margin-top: 0;
   }
+
   .spg-question__content-coloralpha {
     margin-top: calcSize(-1);
   }
+
   .spg-question-composite__content .spg-row:first-of-type {
     margin-top: calcSize(1);
   }

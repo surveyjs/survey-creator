@@ -171,14 +171,13 @@ svc-question {
 .svc-question__content-actions {
   position: absolute;
   opacity: 0;
+  bottom: calcSize(2);
+  inset-inline-start: calcSize(4); // left
+  inset-inline-end: calcSize(3.5); // right
 
   &:focus-within {
     opacity: 1;
   }
-
-  bottom: calcSize(2);
-  inset-inline-start: calcSize(4); // left
-  inset-inline-end: calcSize(3.5); // right
 
   .sv-action--convertTo {
     max-width: max-content;
@@ -193,8 +192,6 @@ svc-question {
     }
 
     .sv-action-bar-item__title {
-      @include textEllipsis;
-
       display: inline-block;
       justify-content: left;
     }
@@ -508,19 +505,23 @@ svc-question,
     &>* {
       display: none
     }
+
     .svc-question__drag-area {
       display: flex,
     }
+
     .sd-element {
       display: block;
-      &>*:not(.sd-element__header ) {
+
+      &>*:not(.sd-element__header) {
         display: none
       }
-      .sd-element__header
-      {
+
+      .sd-element__header {
         &>*:not(.sd-element__title) {
           display: none;
         }
+
         .sd-element__title,
         .sd-title.sd-element__title.sd-element__title--hidden {
           display: block;
@@ -534,21 +535,25 @@ svc-question,
   .svc-question__content {
     flex-grow: 0;
     padding-bottom: calcSize(4);
+
     .sd-element__header,
-    .sd-element--complex > .sd-element__header {
+    .sd-element--complex>.sd-element__header {
       padding-top: 0;
       padding-bottom: 0;
     }
   }
 }
+
 .svc-creator--mobile {
   .svc-question__top-actions {
     padding: 0;
   }
+
   .svc-question__adorner--collapsed {
     .svc-question__content {
       padding-bottom: calcSize(2);
     }
+
     .svc-question__content--selected {
       padding-bottom: calcSize(3);
     }
@@ -625,11 +630,11 @@ svc-question,
 }
 
 .svc-widget__content {
+  width: 100%;
+
   .sd-question__content {
     pointer-events: none;
   }
-
-  width: 100%;
 }
 
 .svc-question__content {
@@ -801,6 +806,10 @@ svc-question,
   cursor: pointer;
   margin-right: calcSize(1);
   outline: none;
+  top: calcSize(2);
+  margin: 0;
+  position: absolute;
+  right: 0;
 
   use {
     fill: var(--ctr-library-contextual-button-icon-color, $foreground-light);
@@ -813,11 +822,6 @@ svc-question,
   &:focus {
     background-color: $primary-light;
   }
-
-  top: calcSize(2);
-  margin: 0;
-  position: absolute;
-  right: 0;
 }
 
 .sv-list__container .sv-action-bar-item--secondary {
@@ -967,16 +971,20 @@ svc-question,
   top: 0;
   right: 0;
   visibility: hidden;
+
   .sv-action-bar-item {
-    use {
-      fill: $foreground-dim-light;
-    }
     margin: 0;
     padding: calcSize(0.5);
     opacity: 0.5;
     height: 24px;
-    &:hover, &:focus {
+
+    &:hover,
+    &:focus {
       opacity: initial;
+    }
+
+    use {
+      fill: $foreground-dim-light;
     }
   }
 }
