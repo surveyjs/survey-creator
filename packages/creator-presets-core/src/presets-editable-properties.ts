@@ -149,6 +149,7 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
   private currentProperties: SurveyQuestionPresetPropertiesDetail;
   private currentClassName: string;
   private propCreatorValue: SurveyCreatorModel;
+  private isModified: boolean;
   public get propCreator(): SurveyCreatorModel { return this.propCreatorValue; }
   public disposeCore(): void {
     if(this.propCreator) {
@@ -161,17 +162,10 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
       title: "Property Grid categories",
       elements: [
         {
-          type: "boolean",
-          name: this.nameShow,
-          title: "Do you want to configure Property Grid categories and properties?"
-        },
-        {
           type: "dropdown",
           name: this.nameSelector,
-          visibleIf: this.getBoolVisibleIf(this.nameShow),
           clearIfInvisible: "onHidden",
-          title: "Select element to setup a property grid for it",
-          startWithNewLine: false
+          title: "Select element to setup a property grid for it"
         },
         {
           type: "panel",
@@ -188,7 +182,7 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     };
   }
   public getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel): any {
-    if(model.getValue(this.nameShow) !== true) return undefined;
+    if(!this.isModified) return undefined;
     this.updateCurrentJson(model);
     return this.currentJson;
   }
@@ -237,14 +231,16 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     this.setupCreatorToolbox(this.propCreator);
   }
   protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
-    model.setValue(this.nameShow, !!json);
+    this.isModified = !!json;
     if(!json) {
       json = this.copyJson(defaultPropertyGridDefinition);
     }
     this.currentJson = json;
     this.currentJson.autoGenerateProperties = false;
   }
-  private get nameShow() { return this.fullPath + "_show"; }
+  protected setupOnCurrentPageCore(model: SurveyModel, creator: SurveyCreatorModel): void {
+    model.widthMode = "auto";
+  }
   private getSelector(model: SurveyModel): QuestionDropdownModel { return <QuestionDropdownModel>model.getQuestionByName(this.nameSelector); }
   private getPropertyCreatorQuestion(model: SurveyModel): QuestionEmbeddedCreatorModel { return <QuestionEmbeddedCreatorModel>model.getQuestionByName(this.namePropertyCreator); }
   private get nameSelector() { return this.fullPath + "_selector"; }
@@ -314,6 +310,7 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     creator.showSaveButton = false;
     creator.onModified.add((sender, options) => {
       this.isPropCreatorChanged = true;
+      this.isModified = true;
       if(options.type === "PROPERTY_CHANGED") {
         if((<any>options.target)?.isQuestion) {
           if(options.name === "title") {

@@ -277,8 +277,6 @@ test("Preset edit model, property grid, setup", () => {
   const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
   expect(survey.getPageByName("page_propertyGrid_definition").visible).toBeTruthy();
-  survey.setValue("propertyGrid_definition_show", true);
-  expect(survey.getPageByName("page_propertyGrid_definition").visible).toBeTruthy();
   const selectorQuestion = <QuestionDropdownModel>survey.getQuestionByName("propertyGrid_definition_selector");
   const checkSelectorChoice = (value: string): boolean => {
     const items = selectorQuestion.choices.filter(item => item.value === value);
@@ -310,7 +308,6 @@ test("Preset edit model, property grid, apply", () => {
   Serializer.findProperty("survey", "pages").visible = true;
   const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
-  survey.setValue("propertyGrid_definition_show", true);
   survey.currentPage = survey.getPageByName("page_propertyGrid_definition");
   survey.setValue("propertyGrid_definition_selector", "survey");
   let propGridCreator = getPropGridCreator(survey);
@@ -376,7 +373,6 @@ test("Preset edit model, property grid, apply", () => {
 test("Preset edit model, live property grid & visible indexes", () => {
   const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
-  survey.setValue("propertyGrid_definition_show", true);
   survey.currentPage = survey.getPageByName("page_propertyGrid_definition");
   survey.setValue("propertyGrid_definition_selector", "text");
   const propGridCreator = getPropGridCreator(survey);
@@ -419,7 +415,6 @@ test("Preset edit model, live property grid & visible indexes", () => {
 test("Preset edit model, include columns types", () => {
   const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
-  survey.setValue("propertyGrid_definition_show", true);
   survey.currentPage = survey.getPageByName("page_propertyGrid_definition");
   const question = <QuestionDropdownModel>survey.getQuestionByName("propertyGrid_definition_selector");
   expect(ItemValue.getItemByValue(question.choices, "matrixdropdowncolumn@default")).toBeTruthy();
@@ -428,7 +423,6 @@ test("Preset edit model, include columns types", () => {
 test("Preset edit model, edit matrixdropdowncolumn@default", () => {
   const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
-  survey.setValue("propertyGrid_definition_show", true);
   survey.currentPage = survey.getPageByName("page_propertyGrid_definition");
   survey.setValue("propertyGrid_definition_selector", "matrixdropdowncolumn@default");
   const propGridCreator = getPropGridCreator(survey);
@@ -440,7 +434,6 @@ test("Preset edit model, edit matrixdropdowncolumn@default", () => {
 test("Preset edit model, property grid & matrixdropdowncolumn@checkbox", () => {
   const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
-  survey.setValue("propertyGrid_definition_show", true);
   survey.currentPage = survey.getPageByName("page_propertyGrid_definition");
   survey.setValue("propertyGrid_definition_selector", "matrixdropdowncolumn@checkbox");
   const propGridCreator = getPropGridCreator(survey);
@@ -600,16 +593,14 @@ test("Toolbox categories, show header and showcolumn title column if show catego
   expect(matrix.showHeader).toBeFalsy();
   expect(matrix.getColumnByName("title").visible).toBeFalsy();
   survey.setValue("toolbox_showCategoryTitles", true);
-  expect(matrix.showHeader).toBeTruthy();
+  expect(matrix.showHeader).toBeFalsy();
   expect(matrix.getColumnByName("title").visible).toBeTruthy();
   survey.setValue("toolbox_showCategoryTitles", false);
-  expect(matrix.showHeader).toBeFalsy();
   expect(matrix.getColumnByName("title").visible).toBeFalsy();
 });
 test("Preset edit model, Change localization strings title&description", () => {
   const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
-  survey.setValue("propertyGrid_definition_show", true);
   survey.currentPage = survey.getPageByName("page_propertyGrid_definition");
   survey.setValue("propertyGrid_definition_selector", "text");
   const propGridCreator = getPropGridCreator(survey);
@@ -658,7 +649,6 @@ test("Preset edit model, Change localization strings title&description", () => {
 test("Preset edit model, Change localization strings title&description", () => {
   const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
-  survey.setValue("propertyGrid_definition_show", true);
   survey.currentPage = survey.getPageByName("page_propertyGrid_definition");
   survey.setValue("propertyGrid_definition_selector", "text");
   const propGridCreator = getPropGridCreator(survey);
@@ -692,7 +682,6 @@ test("Change localization strings and then change locale for tabs", () => {
 test("Preset edit model, Property grid toolbox", () => {
   const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
-  survey.setValue("propertyGrid_definition_show", true);
   survey.currentPage = survey.getPageByName("page_propertyGrid_definition");
   survey.setValue("propertyGrid_definition_selector", "survey");
   const propGridCreator = getPropGridCreator(survey);

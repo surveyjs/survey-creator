@@ -11,9 +11,10 @@ export class SurveyElementEmbeddedCreator extends SurveyQuestionElementBase {
     if (!this.embeddedCreator) return null;
     const creator = this.embeddedCreator.embeddedCreator as SurveyCreator;
     if (!creator) return null;
-    return <SurveyCreatorComponent
+    const style = { width: "100%", height: "1000px" };
+    return <div style={style}><SurveyCreatorComponent
       creator={creator}
-    />;
+    /></div>;
 
   }
 }
