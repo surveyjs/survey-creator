@@ -702,6 +702,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "width", tab: "layout" },
       { name: "minWidth", tab: "layout" },
       { name: "maxWidth", tab: "layout" },
+      { name: "effectiveColSpan", tab: "layout" },
       { name: "showNumber", tab: "numbering" },
       { name: "showQuestionNumbers", tab: "numbering" },
       { name: "questionStartIndex", tab: "numbering" }
