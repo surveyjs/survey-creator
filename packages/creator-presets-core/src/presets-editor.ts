@@ -2,7 +2,7 @@ import { SurveyCreatorModel, editorLocalization, ICreatorOptions } from "survey-
 import { CreatorPreset, ICreatorPresetData } from "survey-creator-core";
 import { ActionContainer, Base, ComputedUpdater, SurveyModel, createDropdownActionModel } from "survey-core";
 import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
-import { CreatorPresetEditableToolbox, CreatorPresetEditableToolboxConfigurator, CreatorPresetEditableToolboxDefinition } from "./presets-editable-toolbox";
+import { CreatorPresetEditableToolboxConfigurator } from "./presets-editable-toolbox";
 import { CreatorPresetEditableTabs } from "./presets-editable-tabs";
 import { CreatorEditablePresetPropertyGrid, CreatorPresetEditablePropertyGridDefinition } from "./presets-editable-properties";
 
@@ -185,9 +185,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
   }
   private createEditableCore(preset: CreatorPreset, fullPath: string): CreatorPresetEditableBase {
     if(fullPath === "tabs") return new CreatorPresetEditableTabs(preset);
-    if(fullPath === "toolbox") return new CreatorPresetEditableToolbox(preset);
-    if(fullPath === "toolbox_definition") return new CreatorPresetEditableToolboxDefinition(preset);
-    if(fullPath === "toolbox_") return new CreatorPresetEditableToolboxConfigurator(preset);
+    if(fullPath === "toolbox") return new CreatorPresetEditableToolboxConfigurator(preset);
     if(fullPath === "propertyGrid") return new CreatorEditablePresetPropertyGrid(preset);
     if(fullPath === "propertyGrid_definition") return new CreatorPresetEditablePropertyGridDefinition(preset);
     return undefined;

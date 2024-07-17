@@ -1,55 +1,194 @@
-import { ItemValue, MatrixDropdownRowModelBase, QuestionMatrixDynamicModel, QuestionRankingModel, Serializer, SurveyModel } from "survey-core";
+import { Helpers, ItemValue, MatrixDropdownRowModelBase, QuestionMatrixDynamicModel, QuestionRankingModel, Serializer, SurveyModel } from "survey-core";
 import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
-import { SurveyCreatorModel, SurveyJSON5, editorLocalization } from "survey-creator-core";
+import { QuestionToolboxCategory, QuestionToolboxItem, SurveyCreatorModel, SurveyJSON5, editorLocalization } from "survey-creator-core";
 import { PresetItemValue, QuestionPresetRankingModel } from "./preset-question-ranking";
 
 const LocCategoriesName = "toolboxCategories";
 
-export class CreatorPresetEditableToolboxDefinition extends CreatorPresetEditableBase {
+export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEditableBase {
+  private defaultItems = {};
+  private allItems: ItemValue[];
+
   public createMainPageCore(): any {
     return {
-      title: "Toolbox items definition",
+      title: "Setup toolbox",
       elements: [
         {
-          type: "boolean",
-          name: this.nameShow,
-          title: "Would you like to update existing toolbox items and create new ones?"
+          type: "panel",
+          name: "panel_toolbox_definition",
+          description: "Create a new toolbox item, name it and select the icon. Also add the code that will be executed when this item is selected.",
+          elements: [
+            {
+              type: "matrixdynamic",
+              name: this.nameMatrix,
+              titleLocation: "hidden",
+              rowCount: 0,
+              addRowText: "Add New Item Defintion",
+              columns: [
+                { cellType: "text", name: "name", title: "Name", isUnique: true, isRequired: true },
+                { cellType: "text", name: "iconName", title: "Icon Name" },
+                { cellType: "text", name: "title", title: "Title" }
+              ],
+              detailPanelMode: "underRow",
+              detailElements: [
+                { type: "text", name: "tooltip", title: "Tooltip" },
+                { type: "comment", name: "json", title: "JSON that will be used on clicking item", rows: 15 }
+              ]
+            }
+          ]
         },
         {
-          type: "matrixdynamic",
-          name: this.nameMatrix,
-          visibleIf: this.getBoolVisibleIf(this.nameShow),
-          title: "Please define item definitions.",
-          rowCount: 0,
-          addRowText: "Add New Item Defintion",
-          columns: [
-            { cellType: "text", name: "name", title: "Name", isUnique: true, isRequired: true },
-            { cellType: "text", name: "iconName", title: "Icon Name" },
-            { cellType: "text", name: "title", title: "Title" }
-          ],
-          detailPanelMode: "underRow",
-          detailElements: [
-            { type: "text", name: "tooltip", title: "Tooltip" },
-            { type: "comment", name: "json", title: "JSON that will be used on clicking item", rows: 15 }
+          type: "panel",
+          name: "panel_toolbox_items",
+          description: "Select the items you want to see in the toolbox. Determine their order and group them into logical groups as needed.",
+          elements: [
+            {
+              type: "boolean",
+              name: this.nameCategoriesMode,
+              title: "Use categories to group toolbox items",
+              titleLocation: "hidden",
+              defaultValue: "categories",
+              valueTrue: "categories",
+              valueFalse: "items",
+              clearIfInvisible: "onHidden",
+              startWithNewLine: false,
+              renderAs: "checkbox"
+            },
+            {
+              type: "boolean",
+              name: this.nameShowCategoryTitles,
+              defaultValue: false,
+              titleLocation: "hidden",
+              visibleIf: this.getTextVisibleIf(this.nameCategoriesMode, "categories"),
+              clearIfInvisible: "onHidden",
+              title: "Show Categories Titles",
+              startWithNewLine: false,
+              renderAs: "checkbox"
+            },
+            {
+              type: "matrixdynamic",
+              name: this.nameCategories,
+              titleLocation: "hidden",
+              visibleIf: this.getTextVisibleIf(this.nameCategoriesMode, "categories"),
+              minRowCount: 1,
+              allowRowsDragAndDrop: true,
+              addRowText: "Add new Category",
+              columns: [
+                { cellType: "text", name: "category", title: "Category Name", isUnique: true, isRequired: true },
+                { cellType: "text", name: "title", title: "Category Title" }
+              ],
+              detailPanelMode: "underRowSingle",
+              detailElements: [
+                {
+                  type: "presetranking",
+                  name: "items",
+                  titleLocation: "hidden",
+                  selectToRankEnabled: true,
+                  minSelectedChoices: 1,
+                  selectToRankAreasLayout: "horizontal",
+                  selectToRankEmptyRankedAreaText: "Drag toolbox items to hide them",
+                  selectToRankEmptyUnrankedAreaText: "Drag toolbox items here"
+                }
+              ]
+            },
+            {
+              type: "presetranking",
+              name: this.nameItems,
+              visibleIf: this.getTextVisibleIf(this.nameCategoriesMode, "items"),
+              titleLocation: "hidden",
+              selectToRankEnabled: true,
+              minSelectedChoices: 1,
+              selectToRankAreasLayout: "horizontal",
+              selectToRankEmptyRankedAreaText: "Drag toolbox items to hide them",
+              selectToRankEmptyUnrankedAreaText: "Drag toolbox items here"
+            }
           ]
         }
       ]
     };
   }
-  protected setupQuestionsCore(model: SurveyModel, creatorSetup: ICreatorPresetEditorSetup): void {
-    const matrix = this.getMatrix(model);
-    const nameColumn = matrix.getColumnByName("name");
-    const iconNameColumn = matrix.getColumnByName("iconName");
-    const names = [];
-    const iconNames = [];
-    creatorSetup.creator.toolbox.getDefaultItems([], false, true, true).forEach(item => {
-      names.push(item.id);
-      iconNames.push(item.iconName || ("icon-" + item.id));
+  public get nameCategoriesMode() { return this.fullPath + "_mode"; }
+  private get nameMatrix() { return this.fullPath + "_matrix"; }
+  private get nameItems() { return this.fullPath + "_items"; }
+  private get nameCategories() { return this.fullPath + "_categories"; }
+  private get nameShowCategoryTitles() { return this.fullPath + "_showCategoryTitles"; }
+  private getMatrix(model: SurveyModel): QuestionMatrixDynamicModel {
+    return <QuestionMatrixDynamicModel>model.getQuestionByName(this.nameMatrix);
+  }
+  public getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel): any {
+    const res: any = {};
+    const definition = this.getJsonItemsDefinition(model);
+    if(definition) {
+      res.definition = definition;
+    }
+    const mode = model.getValue(this.nameCategoriesMode);
+    const toolbox = creator.toolbox;
+    if(mode === "items") {
+      const items = model.getValue(this.nameItems);
+      const toolboxItems = [];
+      toolbox.items.forEach(item => toolboxItems.push(item.name));
+      if(Array.isArray(items) && items.length > 0 && (toolbox.hasCategories || !Helpers.isTwoValueEquals(items, toolboxItems, true))) {
+        res.items = items;
+      }
+    }
+    if(mode === "categories") {
+      const categories = this.getCategoriesJson(model);
+      if(Array.isArray(categories) && categories.length > 0 && (!toolbox.hasCategories || !this.isCategoriesSame(categories, toolbox.categories))) {
+        res.categories = this.getCategoriesJson(model);
+      }
+    }
+    if(model.getValue(this.nameShowCategoryTitles)) {
+      res.showCategoryTitles = true;
+    }
+    return Object.keys(res).length > 0 ? res : undefined;
+  }
+  private isCategoriesSame(categories: any, toolboxCategories: Array<QuestionToolboxCategory>): boolean {
+    if(categories.length !== toolboxCategories.length) return false;
+    for(let i = 0; i < categories.length; i ++) {
+      if(categories[i].category !== toolboxCategories[i].name) return false;
+      if(categories[i].title !== toolboxCategories[i].title) return false;
+      const toolboxItems = [];
+      toolboxCategories[i].items.forEach(item => toolboxItems.push(item.name));
+      if(!Helpers.isTwoValueEquals(categories[i].items, toolboxItems, true)) return false;
+    }
+    return true;
+  }
+  private getCategoriesJson(model: SurveyModel): any {
+    const res = model.getValue(this.nameCategories);
+    if(!Array.isArray(res)) return undefined;
+    res.forEach(item => {
+      delete item["count"];
     });
-    names.sort();
-    iconNames.sort();
-    nameColumn["dataList"] = names;
-    iconNameColumn["dataList"] = iconNames;
+    return res;
+  }
+  private getJsonItemsDefinition(model: SurveyModel): any {
+    const matrix = this.getMatrix(model);
+    const value = matrix.value;
+    if(!Array.isArray(value) || value.length === 0) return undefined;
+    const res = [];
+    for(let i = 0; i < value.length; i ++) {
+      const val = {};
+      const item = value[i];
+      for(let key in item) {
+        const itemVal = key === "json" ? this.parseJson(item[key]) : item[key];
+        if(!!itemVal) {
+          val[key] = itemVal;
+        }
+      }
+      res.push(val);
+    }
+    return res;
+  }
+
+  protected updateOnMatrixDetailPanelVisibleChangedCore(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {
+    if(options.question.name === this.nameCategories) {
+      this.onDetailPanelShowingChanged(options.row);
+    }
+  }
+  protected setupQuestionsCore(model: SurveyModel, creatorSetup: ICreatorPresetEditorSetup): void {
+    this.setupDefaultItems(creatorSetup.creator);
+    this.setupItemsDefinition(model, creatorSetup.creator);
+    this.setQuestionItemsChoices(model);
   }
   protected validateCore(model: SurveyModel): boolean {
     const matrix = this.getMatrix(model);
@@ -70,170 +209,38 @@ export class CreatorPresetEditableToolboxDefinition extends CreatorPresetEditabl
     }
     return true;
   }
-  public getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel): any {
+  private setupItemsDefinition(model: SurveyModel, creator: SurveyCreatorModel): void {
     const matrix = this.getMatrix(model);
-    const value = matrix.value;
-    if(!Array.isArray(value) || value.length === 0) return undefined;
-    const res = [];
-    for(let i = 0; i < value.length; i ++) {
-      const val = {};
-      const item = value[i];
-      for(let key in item) {
-        const itemVal = key === "json" ? this.parseJson(item[key]) : item[key];
-        if(!!itemVal) {
-          val[key] = itemVal;
-        }
-      }
-      res.push(val);
-    }
-    return res;
-  }
-  protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
-    model.setValue(this.nameShow, !!json);
-    json = json || [];
-    const question = this.getMatrix(model);
-    const value = [];
-    json.forEach(item => {
-      const val = {};
-      for(let key in item) {
-        val[key] = key === "json" ? JSON.stringify(item[key], null, 2) : item[key];
-      }
-      value.push(val);
+    const nameColumn = matrix.getColumnByName("name");
+    const iconNameColumn = matrix.getColumnByName("iconName");
+    const names = [];
+    const iconNames = [];
+    creator.toolbox.getDefaultItems([], false, true, true).forEach(item => {
+      names.push(item.id);
+      iconNames.push(item.iconName || ("icon-" + item.id));
     });
-    question.value = value;
+    names.sort();
+    iconNames.sort();
+    nameColumn["dataList"] = names;
+    iconNameColumn["dataList"] = iconNames;
   }
-  private getMatrix(model: SurveyModel): QuestionMatrixDynamicModel {
-    return <QuestionMatrixDynamicModel>model.getQuestionByName(this.nameMatrix);
-  }
-  private get nameMatrix() { return this.fullPath + "_matrix"; }
-  public get nameShow() { return this.fullPath + "_show"; }
-  private validateJson(text: string): boolean {
-    text = text.trim();
-    if(!text) return true;
-    const json = this.parseJson(text);
-    if(!json || !json.type) return false;
-    const obj = Serializer.createClass(json.type, json);
-    return !!obj;
-  }
-  private parseJson(text: string): any {
-    try {
-      const res = new SurveyJSON5().parse(text);
-      return res;
-    } catch(e) {
-      return undefined;
-    }
-  }
-}
 
-export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEditableBase {
-  private defaultItems: ItemValue[];
-  public createMainPageCore(): any {
-    return {
-      title: "Setup toolbox",
-      elements: [
-        {
-          type: "boolean",
-          name: this.nameCategoriesShow,
-          defaultValue: false,
-          title: "Setup toolbox items and categories"
-        },
-        {
-          type: "buttongroup",
-          name: this.nameCategoriesMode,
-          title: "Do you want to have categories or plain items",
-          defaultValue: "categories",
-          choices: [{ value: "categories", text: "Categories" }, { value: "items", text: "No categories" }],
-          visibleIf: this.getBoolVisibleIf(this.nameCategoriesShow),
-          clearIfInvisible: "onHidden",
-          startWithNewLine: false
-        },
-        {
-          type: "boolean",
-          name: this.nameShowCategoryTitles,
-          defaultValue: false,
-          visibleIf: this.getTextVisibleIf(this.nameCategoriesMode, "categories"),
-          title: "Show Categories Titles",
-          startWithNewLine: false
-        },
-        {
-          type: "matrixdynamic",
-          name: this.nameCategories,
-          title: "Setup Toolbox categories and items",
-          visibleIf: this.getTextVisibleIf(this.nameCategoriesMode, "categories"),
-          minRowCount: 1,
-          allowRowsDragAndDrop: true,
-          addRowText: "Add new Category",
-          columns: [
-            { cellType: "text", name: "category", title: "Category Name", isUnique: true, isRequired: true },
-            { cellType: "text", name: "title", title: "Category Title" },
-            { cellType: "expression", name: "count", title: "Number of items in category", expression: "{row.items.length}" }
-          ],
-          detailPanelMode: "underRowSingle",
-          detailElements: [
-            {
-              type: "presetranking",
-              name: "items",
-              titleLocation: "hidden",
-              selectToRankEnabled: true,
-              minSelectedChoices: 1,
-              selectToRankAreasLayout: "horizontal",
-              selectToRankEmptyRankedAreaText: "Drag toolbox items to hide them",
-              selectToRankEmptyUnrankedAreaText: "Drag toolbox items here"
-            }
-          ]
-        },
-        {
-          type: "presetranking",
-          name: this.nameItems,
-          visibleIf: this.getTextVisibleIf(this.nameCategoriesMode, "items"),
-          titleLocation: "hidden",
-          selectToRankEnabled: true,
-          minSelectedChoices: 1,
-          selectToRankAreasLayout: "horizontal",
-          selectToRankEmptyRankedAreaText: "Drag toolbox items to hide them",
-          selectToRankEmptyUnrankedAreaText: "Drag toolbox items here"
-        }
-      ]
-    };
-  }
-  public get nameCategoriesShow() { return this.fullPath + "_show"; }
-  public get nameCategoriesMode() { return this.fullPath + "_mode"; }
-  private get nameItems() { return this.fullPath + "_items"; }
-  private get nameCategories() { return this.fullPath + "_categories"; }
-  private get nameShowCategoryTitles() { return this.fullPath + "_showCategoryTitles"; }
-  protected getJsonPath(model: SurveyModel): string {
-    return model.getValue(this.nameCategoriesMode);
-  }
-  public getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel): any {
-    const mode = model.getValue(this.nameCategoriesMode);
-    if(mode === "items") return model.getValue(this.nameItems);
-    if(mode === "categories") return this.getCategoriesJson(model);
-    return undefined;
-  }
-  private getCategoriesJson(model: SurveyModel): any {
-    const res = model.getValue(this.nameCategories);
-    if(!Array.isArray(res)) return undefined;
-    res.forEach(item => {
-      delete item["count"];
-    });
-    return res;
-  }
-  protected updateOnMatrixDetailPanelVisibleChangedCore(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {
-    if(options.question.name === this.nameCategories) {
-      this.onDetailPanelShowingChanged(options.row);
+  private setQuestionItemsChoices(model: SurveyModel): void {
+    this.allItems = this.getDefaultToolboxItems(model);
+    const q = this.getQuestionItems(model);
+    if(!this.isItemValuesEqual(q.choices, this.allItems)) {
+      q.choices = this.allItems;
+      this.updateRankingLocalizationName(q);
+      const items = this.getQuestionCategories(model);
+      items.visibleRows.forEach(row => row.hideDetailPanel());
     }
   }
-  protected setupOnCurrentPageCore(model: SurveyModel, creator: SurveyCreatorModel): void {
-    this.setQuestionItemsChoices(model, creator);
-  }
-  protected setupQuestionsCore(model: SurveyModel, creatorSetup: ICreatorPresetEditorSetup): void {
-    this.setQuestionItemsChoices(model, creatorSetup.creator);
-  }
-  private setQuestionItemsChoices(model: SurveyModel, creator: SurveyCreatorModel): void {
-    this.defaultItems = this.getDefaultToolboxItems(model, creator);
-    const q = this.getQuestionItems(model);
-    q.choices = this.defaultItems;
-    this.updateRankingLocalizationName(q);
+  private isItemValuesEqual(a: Array<ItemValue>, b: Array<ItemValue>): boolean {
+    if(a.length !== b.length) return false;
+    for(let i = 0; i < a.length; i ++) {
+      if(a[i].value !== b[i].value || a[i].title !== b[i].title) return false;
+    }
+    return true;
   }
   private updateRankingLocalizationName(question: QuestionRankingModel): void {
     question.choices.forEach(item => {
@@ -241,6 +248,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     });
   }
   protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
+    this.setupQuestionsValueDefinition(model, json);
     const val = [];
     creator.toolbox.items.forEach(item => val.push(item.id));
     this.getQuestionItems(model).value = val;
@@ -266,7 +274,24 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     });
     this.updateShowCategoriesTitlesElements(model);
   }
+  private setupQuestionsValueDefinition(model: SurveyModel, json: any): void {
+    json = json || {};
+    const question = this.getMatrix(model);
+    const value = [];
+    const definition = json.definition || [];
+    definition.forEach(item => {
+      const val = {};
+      for(let key in item) {
+        val[key] = key === "json" ? JSON.stringify(item[key], null, 2) : item[key];
+      }
+      value.push(val);
+    });
+    question.value = value;
+  }
   protected updateOnValueChangedCore(model: SurveyModel, name: string): void {
+    if(name === this.nameMatrix) {
+      this.setQuestionItemsChoices(model);
+    }
     if(name === this.nameShowCategoryTitles) {
       this.updateShowCategoriesTitlesElements(model);
     }
@@ -292,7 +317,6 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     return editorLocalization.getString(LocCategoriesName + "." + name);
   }
   protected setJsonLocalizationStringsCore(model: SurveyModel, locStrs: any): void {
-    if(model.getValue(this.nameCategoriesShow) !== true) return;
     (<QuestionPresetRankingModel>this.getQuestionItems(model)).updateModifiedText(locStrs);
     const matrix = this.getQuestionCategories(model);
     if(matrix.isVisible) {
@@ -321,12 +345,19 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     q.choices = this.getRankingChoices(row);
     this.updateRankingLocalizationName(q);
   }
-  private getDefaultToolboxItems(model: SurveyModel, creator: SurveyCreatorModel): ItemValue[] {
+  private setupDefaultItems(creator: SurveyCreatorModel): void {
     const items = {};
     creator.toolbox.getDefaultItems([], false, true, true).forEach(item => {
       items[item.id] = item.title;
     });
-    const definitionVal = model.getValue("toolbox_definition_matrix");
+    this.defaultItems = items;
+  }
+  private getDefaultToolboxItems(model: SurveyModel): ItemValue[] {
+    const items = {};
+    for(let key in this.defaultItems) {
+      items[key] = this.defaultItems[key];
+    }
+    const definitionVal = model.getValue(this.nameMatrix);
     if(Array.isArray(definitionVal)) {
       definitionVal.forEach(item => {
         const key = item.name;
@@ -349,7 +380,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     const res = [];
     const model = <SurveyModel>row.getSurvey();
     const matrix = this.getQuestionCategories(<SurveyModel>model);
-    if(!Array.isArray(this.defaultItems)) return res;
+    if(!Array.isArray(this.allItems)) return res;
     const val = model.getValue(this.nameCategories);
     const usedItems = {};
     if(Array.isArray(val)) {
@@ -360,20 +391,27 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
         }
       }
     }
-    this.defaultItems.forEach(item => {
+    this.allItems.forEach(item => {
       if(!usedItems[item.id]) {
         res.push(this.createItemValue(item.id, item.title));
       }
     });
     return res;
   }
-}
-export class CreatorPresetEditableToolbox extends CreatorPresetEditableBase {
-  public getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel): any {
-    const val = model.getValue(this.fullPath + "_showCategoryTitles");
-    if(val) {
-      return { showCategoryTitles: true };
+  private validateJson(text: string): boolean {
+    text = text.trim();
+    if(!text) return true;
+    const json = this.parseJson(text);
+    if(!json || !json.type) return false;
+    const obj = Serializer.createClass(json.type, json);
+    return !!obj;
+  }
+  private parseJson(text: string): any {
+    try {
+      const res = new SurveyJSON5().parse(text);
+      return res;
+    } catch(e) {
+      return undefined;
     }
-    return undefined;
   }
 }

@@ -10,12 +10,11 @@ export * from "../src/components/embedded-creator";
 test("Preset edit model, create pages", () => {
   const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
-  expect(survey.pages).toHaveLength(4);
-  expect(survey.visiblePages).toHaveLength(4);
+  expect(survey.pages).toHaveLength(3);
+  expect(survey.visiblePages).toHaveLength(3);
   expect(survey.pages[0].name).toEqual("page_tabs");
-  expect(survey.pages[1].name).toEqual("page_toolbox_definition");
-  expect(survey.pages[2].name).toEqual("page_toolbox");
-  expect(survey.pages[3].name).toEqual("page_propertyGrid_definition");
+  expect(survey.pages[1].name).toEqual("page_toolbox");
+  expect(survey.pages[2].name).toEqual("page_propertyGrid_definition");
 });
 test("Preset edit model, page component", () => {
   const editor = new CreatorPresetEditorModel({ tabs: { items: [] } });
@@ -80,34 +79,15 @@ test("Preset edit model, tabs page with creator, default items", () => {
 test("Preset edit model, toolbox page", () => {
   const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
-  const boolDefinitionQuestion = survey.getQuestionByName("toolbox_definition_show");
-  const boolSetupQuestion = survey.getQuestionByName("toolbox_show");
   const boolSetupCategoriesQuestion = survey.getQuestionByName("toolbox_mode");
-  expect(boolDefinitionQuestion).toBeTruthy();
-  expect(boolDefinitionQuestion.value).toBeFalsy();
-  expect(boolSetupQuestion).toBeTruthy();
-  expect(boolSetupQuestion.value).toEqual(false);
   expect(boolSetupCategoriesQuestion).toBeTruthy();
-  expect(boolSetupCategoriesQuestion.isVisible).toBeFalsy();
-  expect(boolSetupCategoriesQuestion.value).toBeFalsy();
-  boolSetupQuestion.value = true;
   expect(boolSetupCategoriesQuestion.value).toEqual("categories");
   expect(boolSetupCategoriesQuestion.isVisible).toBeTruthy();
-});
-test("Preset edit model, toolbox definition page", () => {
-  const editor = new CreatorPresetEditorModel();
-  const survey = editor.model;
-  const page = survey.getPageByName("page_toolbox_definition");
-  const matrixQuestion = survey.getQuestionByName("toolbox_definition_matrix");
-  expect(matrixQuestion).toBeTruthy();
-  expect(page).toBeTruthy();
-  expect(page.isVisible).toBeTruthy();
 });
 test("Preset edit model, toolbox definition page, validate name/json", () => {
   const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
-  survey.setValue("toolbox_definition_show", true);
-  const matrixQuestion = survey.getQuestionByName("toolbox_definition_matrix");
+  const matrixQuestion = survey.getQuestionByName("toolbox_matrix");
   expect(matrixQuestion.visibleRows).toHaveLength(0);
   matrixQuestion.addRow();
   const row = matrixQuestion.visibleRows[0];
@@ -155,8 +135,7 @@ test("Preset edit model, toolbox definition page, default values", () => {
   };
   const editor = new CreatorPresetEditorModel(presetJson);
   const survey = editor.model;
-  expect(survey.getValue("toolbox_definition_show")).toBeTruthy();
-  const matrixQuestion = survey.getQuestionByName("toolbox_definition_matrix");
+  const matrixQuestion = survey.getQuestionByName("toolbox_matrix");
   const val = matrixQuestion.value;
   expect(val).toHaveLength(3);
   expect(val[0]["name"]).toEqual("name1");
@@ -178,8 +157,7 @@ test("Preset edit model, toolbox definition page, default values", () => {
 test("Preset edit model, toolbox definition page, apply", () => {
   const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
-  survey.setValue("toolbox_definition_show", true);
-  const matrixQuestion = survey.getQuestionByName("toolbox_definition_matrix");
+  const matrixQuestion = survey.getQuestionByName("toolbox_matrix");
   matrixQuestion.addRow();
   const row = matrixQuestion.visibleRows[0];
   const nameQuestion = row.getQuestionByName("name");
@@ -204,7 +182,6 @@ test("Preset edit model, toolbox definition page, apply", () => {
 test("Preset edit model, toolbox items, default value and apply", () => {
   const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
-  survey.setValue("toolbox_show", true);
   survey.setValue("toolbox_mode", "items");
   const question = survey.getQuestionByName("toolbox_items");
   expect(question).toBeTruthy();
@@ -224,7 +201,6 @@ test("Preset edit model, toolbox items, default value and apply", () => {
 test("Preset edit model, toolbox categories, default value and apply", () => {
   const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
-  survey.setValue("toolbox_show", true);
   survey.setValue("toolbox_mode", "categories");
   const question = <QuestionMatrixDynamicModel>survey.getQuestionByName("toolbox_categories");
   const showTitlesQuestion = survey.getQuestionByName("toolbox_showCategoryTitles");
@@ -243,7 +219,7 @@ test("Preset edit model, toolbox categories, default value and apply", () => {
   const row = question.visibleRows[0];
   row.showDetailPanel();
   let itemsQuestion = row.getQuestionByName("items");
-  const items = itemsQuestion.value;
+  const items = [].concat(itemsQuestion.value);
   const newValue = items.splice(0, 3);
   itemsQuestion.value = items;
   question.addRow();
@@ -267,15 +243,15 @@ test("Preset edit model, toolbox categories, default value and apply", () => {
 test("Preset edit model, toolbox items & definition page", () => {
   const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
-  survey.setValue("toolbox_definition_show", true);
-  survey.setValue("toolbox_show", true);
+  survey.currentPage = survey.getPageByName("page_toolbox");
+  expect(survey.currentPage.name).toEqual("page_toolbox");
   survey.setValue("toolbox_mode", "categories");
   const itemsQuestion = survey.getQuestionByName("toolbox_items");
   const defaultItems = new QuestionToolbox().getDefaultItems([], false, true, true);
   expect(itemsQuestion.choices).toHaveLength(defaultItems.length);
   expect(itemsQuestion.value).toHaveLength(defaultItems.length);
 
-  const definitionQuestion = survey.getQuestionByName("toolbox_definition_matrix");
+  const definitionQuestion = survey.getQuestionByName("toolbox_matrix");
   definitionQuestion.addRow();
   definitionQuestion.addRow();
   const rowDef1 = definitionQuestion.visibleRows[0];
@@ -284,8 +260,6 @@ test("Preset edit model, toolbox items & definition page", () => {
   rowDef2.getQuestionByName("name").value = "radiogroup";
   rowDef2.getQuestionByName("title").value = "Radiogroup_New";
 
-  survey.currentPage = survey.getPageByName("page_toolbox");
-  expect(survey.currentPage.name).toEqual("page_toolbox");
   expect(itemsQuestion.choices).toHaveLength(defaultItems.length + 1);
   expect(itemsQuestion.value).toHaveLength(defaultItems.length);
   expect(itemsQuestion.choices[0].value).toEqual("radiogroup");
@@ -519,8 +493,7 @@ test("Editor: do not allow to change the activeTab if there is an error", () => 
   const editor = new CreatorPresetEditorModel();
   expect(editor.activeTab).toEqual("preset");
   const survey = editor.model;
-  survey.setValue("toolbox_definition_show", true);
-  const matrixQuestion = <QuestionMatrixDynamicModel>survey.getQuestionByName("toolbox_definition_matrix");
+  const matrixQuestion = <QuestionMatrixDynamicModel>survey.getQuestionByName("toolbox_matrix");
   expect(matrixQuestion.isVisible).toBeTruthy();
   matrixQuestion.addRow();
   survey.currentPageNo = 0;
@@ -570,7 +543,6 @@ test("Change localization strings for tabs", () => {
 test("Change localization strings for toolbox (no categories)", () => {
   const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
-  survey.setValue("toolbox_show", true);
   survey.setValue("toolbox_mode", "items");
   const question = <QuestionRankingModel>survey.getQuestionByName("toolbox_items");
   expect(question.isVisible).toBeTruthy();
@@ -585,7 +557,6 @@ test("Change localization strings for toolbox (no categories)", () => {
 test("Change localization strings for toolbox (categories)", () => {
   const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
-  survey.setValue("toolbox_show", true);
   survey.setValue("toolbox_mode", "categories");
   const matrix = <QuestionMatrixDynamicModel>survey.getQuestionByName("toolbox_categories");
   matrix.visibleRows[0].showDetailPanel();
@@ -601,7 +572,6 @@ test("Change localization strings for toolbox (categories)", () => {
 test("Change localization strings for toolbox categories", () => {
   const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
-  survey.setValue("toolbox_show", true);
   survey.setValue("toolbox_mode", "categories");
   survey.setValue("toolbox_showCategoryTitles", true);
   const matrix = <QuestionMatrixDynamicModel>survey.getQuestionByName("toolbox_categories");
@@ -620,7 +590,6 @@ test("Change localization strings for toolbox categories", () => {
 test("Toolbox categories, show header and showcolumn title column if show categories", () => {
   const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
-  survey.setValue("toolbox_show", true);
   survey.setValue("toolbox_mode", "categories");
   const matrix = <QuestionMatrixDynamicModel>survey.getQuestionByName("toolbox_categories");
   expect(matrix.showHeader).toBeFalsy();
