@@ -35,8 +35,9 @@ export class PresetItemValue extends ItemValue {
 export class QuestionPresetRankingModel extends QuestionRankingModel {
   constructor(name: string) {
     super(name);
-    this.itemContentComponent = "sv-preset-ranking-item-content";
+    this.itemComponent = "sv-preset-ranking-item-content";
   }
+  public alwaysHasValue: boolean;
   public getType(): string {
     return "presetranking";
   }
@@ -45,6 +46,16 @@ export class QuestionPresetRankingModel extends QuestionRankingModel {
   }
   protected getCssType(): string {
     return "ranking";
+  }
+  protected setNewValue(newValue: any): void {
+    if((this.alwaysHasValue &&
+      !Array.isArray(newValue) || newValue.length === 0) &&
+      this.visibleChoices.length > 0) {
+      const val = [];
+      this.visibleChoices.forEach(item => val.push(item.value));
+      newValue = val;
+    }
+    super.setNewValue(newValue);
   }
   public updateModifiedText(locStrs: any): void {
     if(!this.isVisible) return;

@@ -13,6 +13,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
   private navigationBarValue: ActionContainer;
   constructor(json?: ICreatorPresetData) {
     super();
+    editorLocalization.presetStrings = undefined;
     this.presetValue = new CreatorPreset(json);
     this.creatorValue = this.createCreator({});
     this.modelValue = this.createModel();
@@ -103,7 +104,8 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     const model = new SurveyModel(this.getEditModelJson(editablePresets));
     model.editablePresets = editablePresets;
     model.keepIncorrectValues = true;
-    model.showNavigationButtons = false;
+    model.showCompleteButton = false;
+    model.showPrevButton = false;
     editablePresets.forEach(item => item.setupQuestions(model, this));
     const json = this.preset.getJson() || {};
     editablePresets.forEach(item => item.setupQuestionsValue(model, json[item.path], this.creator));
@@ -121,18 +123,18 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
   }
   public applyFromSurveyModel(reCreateCretor: boolean = true): boolean {
     if(!this.validateEditableModel(this.model)) return false;
-    this.preset.setJson(this.getJsonFromSurveyModel());
-    this.model.setValue("json_result", JSON.stringify(this.preset.getJson(), null, 2));
     if(reCreateCretor) {
       this.creatorValue = this.createCreator({});
     }
+    this.preset.setJson(this.getJsonFromSurveyModel());
+    this.model.setValue("json_result", JSON.stringify(this.preset.getJson(), null, 2));
     this.preset.apply(this.creator);
     return true;
   }
   public getJsonFromSurveyModel(): any {
     const res: ICreatorPresetData = {};
     this.model.editablePresets.forEach(preset => {
-      const val = preset.getJsonValue(this.model);
+      const val = preset.getJsonValue(this.model, this.creator);
       if(!!val) {
         res[preset.path] = val;
       }

@@ -56,13 +56,13 @@ export class CreatorPresetEditableBase {
   protected getTextVisibleIf(name: string, val: string): string { return "{" + name + "}='" + val +"'"; }
   protected getNotEmptyVisibleIf(name: string): string { return "{" + name + "} notempty"; }
   protected createMainPageCore(): any { return undefined; }
-  public getJsonValue(model: SurveyModel): any {
+  public getJsonValue(model: SurveyModel, creator: SurveyCreatorModel): any {
     const page = model.getPageByName(this.pageName);
-    const core = page && page.isVisible ? this.getJsonValueCore(model) : undefined;
+    const core = page && page.isVisible ? this.getJsonValueCore(model, creator) : undefined;
     let hasValue = !!core;
     const res = hasValue ? core : {};
     this.children.forEach(item => {
-      const val = item.getJsonValue(model);
+      const val = item.getJsonValue(model, creator);
       if(!!val) {
         hasValue = true;
         res[item.getJsonPath(model)] = val;
@@ -116,7 +116,7 @@ export class CreatorPresetEditableBase {
   }
   protected setupQuestionsCore(model: SurveyModel, creatorSetup: ICreatorPresetEditorSetup): void { }
   protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {}
-  protected getJsonValueCore(model: SurveyModel): any { return undefined; }
+  protected getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel): any { return undefined; }
   protected setJsonLocalizationStringsCore(model: SurveyModel, locStrs: any): void {}
   protected updateJsonLocalizationStringsCore(locStrs: any): void {}
   protected disposeCore(): void {}

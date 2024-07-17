@@ -70,7 +70,7 @@ export class CreatorPresetEditableToolboxDefinition extends CreatorPresetEditabl
     }
     return true;
   }
-  public getJsonValueCore(model: SurveyModel): any {
+  public getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel): any {
     const matrix = this.getMatrix(model);
     const value = matrix.value;
     if(!Array.isArray(value) || value.length === 0) return undefined;
@@ -204,7 +204,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
   protected getJsonPath(model: SurveyModel): string {
     return model.getValue(this.nameCategoriesMode);
   }
-  public getJsonValueCore(model: SurveyModel): any {
+  public getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel): any {
     const mode = model.getValue(this.nameCategoriesMode);
     if(mode === "items") return model.getValue(this.nameItems);
     if(mode === "categories") return this.getCategoriesJson(model);
@@ -369,7 +369,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
   }
 }
 export class CreatorPresetEditableToolbox extends CreatorPresetEditableBase {
-  public getJsonValueCore(model: SurveyModel): any {
+  public getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel): any {
     const val = model.getValue(this.fullPath + "_showCategoryTitles");
     if(val) {
       return { showCategoryTitles: true };

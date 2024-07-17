@@ -6,10 +6,6 @@ import { PresetItemValue } from "../src/preset-question-ranking";
 import { SurveyModel, Question } from "survey-core";
 import { SurveyCreatorModel, ICreatorPresetData, QuestionToolbox } from "survey-creator-core";
 export * from "../src/components/embedded-creator";
-/*
-export * from "../src/localization/german";
-export * from "../src/components/embedded-survey";
-*/
 
 test("Preset edit model, create pages", () => {
   const editor = new CreatorPresetEditorModel();
@@ -24,37 +20,41 @@ test("Preset edit model, create pages", () => {
 test("Preset edit model, page component", () => {
   const editor = new CreatorPresetEditorModel({ tabs: { items: [] } });
   const survey = editor.model;
-  const boolQuestion = survey.getQuestionByName("tabs_show");
-  expect(boolQuestion).toBeTruthy();
-  expect(boolQuestion.value).toBeFalsy();
+  const allItemsQuestion = survey.getQuestionByName("tabs_allItems");
   const itemsQuestion = survey.getQuestionByName("tabs_items");
-  expect(itemsQuestion.isVisible).toBeFalsy();
-  boolQuestion.value = true;
   const activeTabQuestion = survey.getQuestionByName("tabs_activeTab");
-  expect(itemsQuestion.choices).toHaveLength(6);
-  expect(itemsQuestion.choices[0].value).toEqual("designer");
-  expect(itemsQuestion.choices[4].value).toEqual("editor");
-  expect(itemsQuestion.choices[5].value).toEqual("translation");
-  expect(itemsQuestion.choices[0].title).toEqual("Designer");
-  expect(itemsQuestion.choices[4].title).toEqual("JSON Editor");
+  expect(allItemsQuestion.choices).toHaveLength(6);
+  expect(allItemsQuestion.choices[0].value).toEqual("designer");
+  expect(allItemsQuestion.choices[4].value).toEqual("editor");
+  expect(allItemsQuestion.choices[5].value).toEqual("translation");
+  expect(allItemsQuestion.choices[0].title).toEqual("Designer");
+  expect(allItemsQuestion.choices[4].title).toEqual("JSON Editor");
+  expect([].concat(allItemsQuestion.value)).toEqual(["designer", "preview", "editor"]);
+  expect(itemsQuestion.visibleChoices).toHaveLength(3);
+  expect([].concat(itemsQuestion.value)).toEqual(["designer", "preview", "editor"]);
   expect(activeTabQuestion.visibleChoices).toHaveLength(3);
   expect(activeTabQuestion.value).toEqual("designer");
-  itemsQuestion.value = ["designer", "translation"];
+
+  allItemsQuestion.value = ["designer", "translation"];
+  expect(itemsQuestion.visibleChoices).toHaveLength(2);
   expect(activeTabQuestion.visibleChoices).toHaveLength(2);
+  expect([].concat(itemsQuestion.value)).toEqual(["designer", "translation"]);
+  expect(activeTabQuestion.visibleChoices).toHaveLength(2);
+  expect(activeTabQuestion.value).toEqual("designer");
   activeTabQuestion.value = "translation";
   const resJson1 = editor.getJsonFromSurveyModel();
   expect(resJson1).toEqual({
     tabs: { items: ["designer", "translation"], activeTab: "translation" }
   });
-  boolQuestion.value = false;
+
+  allItemsQuestion.value = ["designer", "preview", "editor"];
+  activeTabQuestion.value = "designer";
   const resJson2 = editor.getJsonFromSurveyModel();
   expect(resJson2).toEqual({});
 });
 test("Preset edit model, tabs page with creator, default items", () => {
   const editor = new CreatorPresetEditorModel({});
   const survey = editor.model;
-  const boolQuestion = survey.getQuestionByName("tabs_show");
-  boolQuestion.value = true;
   const itemsQuestion = survey.getQuestionByName("tabs_items");
   const defultTabs = JSON.parse(JSON.stringify(itemsQuestion.value));
   expect(defultTabs).toEqual(["designer", "preview", "editor"]);
@@ -71,8 +71,6 @@ test("Preset edit model, tabs page with creator, default items", () => {
 test("Preset edit model, tabs page with creator, default items", () => {
   const editor = new CreatorPresetEditorModel({ tabs: { items: ["designer", "logic"], activeTab: "logic" } });
   const survey = editor.model;
-  const boolQuestion = survey.getQuestionByName("tabs_show");
-  boolQuestion.value = true;
   const itemsQuestion = survey.getQuestionByName("tabs_items");
   const defultTabs = JSON.parse(JSON.stringify(itemsQuestion.value));
   expect(defultTabs).toEqual(["designer", "logic"]);
@@ -132,19 +130,18 @@ test("Preset edit model, page component", () => {
   const editor = new CreatorPresetEditorModel({ tabs: { items: [] } });
   expect(editor.creator.tabs).toHaveLength(3);
   const survey = editor.model;
-  const boolQuestion = survey.getQuestionByName("tabs_show");
+  const allItemsQuestion = survey.getQuestionByName("tabs_allItems");
   const itemsQuestion = survey.getQuestionByName("tabs_items");
-  expect(itemsQuestion.isVisible).toBeFalsy();
-  boolQuestion.value = true;
-  itemsQuestion.value = ["designer", "logic"];
+  allItemsQuestion.value = ["designer", "logic"];
   itemsQuestion.choices[0].text = "Designer Edit";
   expect(editor.applyFromSurveyModel()).toBeTruthy();
   expect(editor.creator.tabs).toHaveLength(2);
   expect(editor.creator.tabs[0].title).toEqual("Designer Edit");
-  boolQuestion.value = false;
+/* TODO reset the page
   expect(editor.applyFromSurveyModel()).toBeTruthy();
   expect(editor.creator.tabs).toHaveLength(3);
   expect(editor.creator.tabs[0].title).toEqual("Designer");
+*/
 });
 test("Preset edit model, toolbox definition page, default values", () => {
   const presetJson = {
@@ -510,9 +507,7 @@ test("Editor: activeTab & navigationBar", () => {
   expect(editor.activeTab).toEqual("preset");
   expect(editor.navigationBar.actions[0].active).toBeTruthy();
   const survey = editor.model;
-  const boolQuestion = survey.getQuestionByName("tabs_show");
   const itemsQuestion = survey.getQuestionByName("tabs_items");
-  boolQuestion.value = true;
   itemsQuestion.value = ["designer", "translation"];
   editor.navigationBar.actions[1].action();
   expect(editor.activeTab).toEqual("creator");
@@ -551,7 +546,6 @@ test("Editor: get/set locale", () => {
 test("Preset edit model, edit tabs title", () => {
   const editor = new CreatorPresetEditorModel({ tabs: { items: [] } });
   const survey = editor.model;
-  survey.setValue("tabs_show", true);
   const itemsQuestion = survey.getQuestionByName("tabs_items");
   expect(itemsQuestion.choices).toHaveLength(6);
   const item = <PresetItemValue>itemsQuestion.choices[0];
@@ -563,7 +557,6 @@ test("Preset edit model, edit tabs title", () => {
 test("Change localization strings for tabs", () => {
   const editor = new CreatorPresetEditorModel({ tabs: { items: [] } });
   const survey = editor.model;
-  survey.setValue("tabs_show", true);
   const itemsQuestion = survey.getQuestionByName("tabs_items");
   const item = <PresetItemValue>itemsQuestion.choices[0];
   item.text = "Designer edit";
@@ -711,7 +704,6 @@ test("Preset edit model, Change localization strings title&description", () => {
 test("Change localization strings and then change locale for tabs", () => {
   const editor = new CreatorPresetEditorModel({ tabs: { items: [] } });
   const survey = editor.model;
-  survey.setValue("tabs_show", true);
   let itemsQuestion = survey.getQuestionByName("tabs_items");
   const item = <PresetItemValue>itemsQuestion.choices[0];
   item.text = "Designer edit";
