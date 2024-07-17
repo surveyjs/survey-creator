@@ -24,10 +24,11 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
               titleLocation: "hidden",
               rowCount: 0,
               addRowText: "Add New Item Defintion",
+              showHeader: false,
               columns: [
-                { cellType: "text", name: "name", title: "Name", isUnique: true, isRequired: true },
-                { cellType: "text", name: "iconName", title: "Icon Name" },
-                { cellType: "text", name: "title", title: "Title" }
+                { cellType: "text", name: "name", placeholder: "Name", isUnique: true, isRequired: true },
+                { cellType: "text", name: "iconName", placeholder: "Icon Name" },
+                { cellType: "text", name: "title", placeholder: "Title" }
               ],
               detailPanelMode: "underRow",
               detailElements: [
@@ -73,9 +74,10 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
               minRowCount: 1,
               allowRowsDragAndDrop: true,
               addRowText: "Add new Category",
+              showHeader: false,
               columns: [
-                { cellType: "text", name: "category", title: "Category Name", isUnique: true, isRequired: true },
-                { cellType: "text", name: "title", title: "Category Title" }
+                { cellType: "text", name: "category", isUnique: true, isRequired: true },
+                { cellType: "text", name: "title" }
               ],
               detailPanelMode: "underRowSingle",
               detailElements: [
@@ -299,7 +301,6 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
   private updateShowCategoriesTitlesElements(model: SurveyModel): void {
     const val = model.getValue(this.nameShowCategoryTitles) === true;
     const matrix = this.getQuestionCategories(model);
-    matrix.showHeader = val;
     matrix.getColumnByName("title").visible = val;
     matrix.visibleRows.forEach(row => {
       const category = row.getValue("category");
