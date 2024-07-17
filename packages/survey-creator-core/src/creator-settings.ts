@@ -176,7 +176,7 @@ export var settings = {
     allowCollapseSidebar: true
   },
   jsonEditor: {
-    indentation: 1,
+    indentation: 2,
     exportFileName: "survey.json"
   }
 };

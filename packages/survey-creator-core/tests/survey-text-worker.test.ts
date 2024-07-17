@@ -101,5 +101,5 @@ test("SurveyTextWorker, required properties", () => {
   expect(lines.length).toBe(oldLines.length + 1);
   const indent1 = lines[5].split(" ").length - 1;
   const indent2 = lines[6].split(" ").length - 1;
-  expect(indent2).toBe(indent1 + 2);
+  expect(indent2).toBe(indent1 + 3);
 });

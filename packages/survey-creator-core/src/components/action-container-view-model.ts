@@ -96,7 +96,13 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   @property({
     onSet: (val, target: SurveyElementAdornerBase<T>) => {
       target.renderedCollapsed = val;
-      if (target.designerStateManager && target.surveyElement) target.designerStateManager.getElementState(target.surveyElement).collapsed = val;
+      if (target.designerStateManager && target.surveyElement) {
+        target.designerStateManager.getElementState(target.surveyElement).collapsed = val;
+      }
+      setTimeout(() => {
+        target.creator.survey.pages.forEach(p => p.ensureRowsVisibility());
+        target.creator.survey.getAllPanels().forEach(p => p.ensureRowsVisibility());
+      }, 50);
     }
   }) collapsed: boolean;
   @property() renderedCollapsed: boolean;
