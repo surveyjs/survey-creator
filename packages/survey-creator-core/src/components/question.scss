@@ -198,7 +198,7 @@ svc-question {
 
     .sv-action-bar-item__icon {
       use {
-        fill: var(--ctr-survey-question-panel-toolbar-item-icon-color, $primary);
+        fill: var(--ctr-survey-question-panel-toolbar-item-icon-color, $secondary);
       }
     }
 

@@ -415,6 +415,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       id: "convertInputType",
       visibleIndex: 1,
       title: editorLocalization.getPropertyValueInEditor(propName, questionSubType),
+      iconName: "icon-chevron"
     };
     const newAction = this.createDropdownModel({
       actionData: actionData,
