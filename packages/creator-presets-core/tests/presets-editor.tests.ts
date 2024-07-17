@@ -534,11 +534,16 @@ test("Change localization strings for tabs", () => {
   const item = <PresetItemValue>itemsQuestion.choices[0];
   item.text = "Designer edit";
   editor.applyFromSurveyModel();
-  const loc = editor.json.localization;
+  let loc = editor.json.localization;
   expect(loc).toBeTruthy();
   expect(loc.en.tabs.designer).toEqual("Designer edit");
   expect(loc.en.tabs.logic).toBeFalsy();
   expect(editor.creator.tabs[0].locTitle.text).toEqual("Designer edit");
+  item.locText.text = "";
+  expect(item.text).toBe("Designer");
+  editor.applyFromSurveyModel();
+  loc = editor.json.localization;
+  expect(loc).toBeFalsy();
 });
 test("Change localization strings for toolbox (no categories)", () => {
   const editor = new CreatorPresetEditorModel();

@@ -9,6 +9,14 @@ export class PresetItemValue extends ItemValue {
   public getType(): string {
     return !!this.typeName ? this.typeName : "presetitemvalue";
   }
+  protected onPropertyValueChanged(name: string, oldValue: any, newValue: any): void {
+    if(name === "text" && !!oldValue && !newValue && !!this.locText.localizationName) {
+      const presetStrs = editorLocalization.presetStrings;
+      editorLocalization.presetStrings = undefined;
+      this.locText.text = editorLocalization.getString(this.locText.localizationName);
+      editorLocalization.presetStrings = presetStrs;
+    }
+  }
   public updateModifiedText(locStrs: any): void {
     if(!this.locText.localizationName) return undefined;
     const text = this.locText.text;
