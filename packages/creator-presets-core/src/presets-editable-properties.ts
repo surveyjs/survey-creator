@@ -1,7 +1,6 @@
 import { JsonObjectProperty, ItemValue, QuestionDropdownModel,
   Base, Serializer, SurveyModel, matrixDropdownColumnTypes,
-  PanelModel, PanelModelBase, 
-  SurveyElement} from "survey-core";
+  PanelModel, PanelModelBase, SurveyElement } from "survey-core";
 import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
 import { SurveyCreatorModel, defaultPropertyGridDefinition, ISurveyPropertyGridDefinition, ISurveyPropertiesDefinition,
   SurveyQuestionProperties, editorLocalization, PropertyGridModel, TabDesignerPlugin,
