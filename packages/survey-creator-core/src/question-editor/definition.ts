@@ -1,5 +1,6 @@
 export interface IPropertyEditorInfo {
   name: string;
+  index?: number;
   title?: string;
   tab?: string;
 }
@@ -581,7 +582,6 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   },
   "matrixdropdowncolumn@rating": {
     properties: [
-      "rateValues",
       { name: "displayMode", tab: "rateValues" },
       { name: "rateType", tab: "rateValues" },
       { name: "rateCount", tab: "rateValues" },
@@ -591,6 +591,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "rateMin", tab: "rateValues" },
       { name: "rateMax", tab: "rateValues" },
       { name: "rateStep", tab: "rateValues" },
+      { name: "rateValues", tab: "rateValues" },
       { name: "minRateDescription", tab: "rateValues" },
       { name: "maxRateDescription", tab: "rateValues" },
       { name: "rateDescriptionLocation", tab: "rateValues" },
