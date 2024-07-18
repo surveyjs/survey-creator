@@ -1,9 +1,9 @@
 import { JsonObjectProperty, ItemValue, QuestionDropdownModel,
   Base, Serializer, SurveyModel, matrixDropdownColumnTypes,
-  PanelModel, PanelModelBase } from "survey-core";
+  PanelModel, PanelModelBase, SurveyElement } from "survey-core";
 import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
 import { SurveyCreatorModel, defaultPropertyGridDefinition, ISurveyPropertyGridDefinition, ISurveyPropertiesDefinition,
-  SurveyQuestionProperties, editorLocalization, PropertyGridModel,
+  SurveyQuestionProperties, editorLocalization, PropertyGridModel, TabDesignerPlugin,
   ICreatorOptions, settings, IQuestionToolboxItem, SurveyHelper } from "survey-creator-core";
 import { QuestionEmbeddedCreatorModel } from "./components/embedded-creator";
 require("./presets-editable-properties.scss");
@@ -338,6 +338,13 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     creator.allowCollapseSidebar = false;
     creator.sidebar.toolbar.setItems([]);
     creator.showAddQuestionButton = false;
+    creator.expandCollapseButtonVisibility = "always";
+    const designer = <TabDesignerPlugin>creator.getPlugin("designer");
+    designer.designerStateManager.onInitElementStateCallback = (element: SurveyElement, state: any): void => {
+      if(element.isPanel) {
+        state.collapsed = true;
+      }
+    };
     creator.setPropertyGridDefinition({
       autoGenerateProperties: false,
       classes: {

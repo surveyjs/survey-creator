@@ -1,5 +1,5 @@
 import { QuestionAdornerViewModel } from "../src/components/question";
-import { Action, settings } from "survey-core";
+import { Action, settings, SurveyElement } from "survey-core";
 import { CreatorTester } from "./creator-tester";
 import { PageAdorner } from "../src/components/page";
 import { TabDesignerPlugin } from "../src/components/tabs/designer-plugin";
@@ -215,4 +215,24 @@ test("Check question adorners expand-collapse - restore state after add", (): an
     <any>undefined
   );
   expect(questionAdorner.collapsed).toBeFalsy();
+});
+test("Check question adorners expand-collapse - onInitElementStateCallback", (): any => {
+  const creator = new CreatorTester();
+  const designerPlugin = <TabDesignerPlugin>(
+    creator.getPlugin("designer")
+  );
+  designerPlugin.designerStateManager.onInitElementStateCallback = (element: SurveyElement, state: any): void => {
+    state.collapsed = element.name === "question1";
+  };
+  let pageModel = new PageAdorner(creator, designerPlugin.model.newPage);
+  pageModel.addNewQuestion(pageModel, null);
+
+  let question1 = creator.survey.getQuestionByName("question1");
+  let questionAdorner = new QuestionAdornerViewModel(
+    creator,
+    question1,
+    <any>undefined
+  );
+
+  expect(questionAdorner.collapsed).toBeTruthy();
 });
