@@ -533,7 +533,9 @@ export class PropertyJSONGenerator {
             css.questionWrapper = "spg-boolean-wrapper--overriding";
           };
           const overridingQuestion = this.createOverridingQuestion(panel, q, prop.overridingProperty);
-          q.parent.addElement(overridingQuestion, q.parent.elements.indexOf(q) + 1);
+          if (!!overridingQuestion) {
+            q.parent.addElement(overridingQuestion, q.parent.elements.indexOf(q) + 1);
+          }
         }
       }
       q.descriptionLocation = "hidden";
@@ -568,6 +570,7 @@ export class PropertyJSONGenerator {
   }
   private createOverridingQuestion(panel: PanelModelBase, question: Question, overridingProp: string): Question {
     const linkValue = <QuestionLinkValueModel>Serializer.createClass("linkvalue");
+    if (!linkValue) return null;
     linkValue.name = question.name + "_" + "overridingProperty";
     linkValue.startWithNewLine = false;
     linkValue.property = question.property;
@@ -804,6 +807,13 @@ export class PropertyGridModel {
     if (this.objValue === value) return;
     this.setObj(value);
   }
+  public setPropertyGridDefinition(val: ISurveyPropertyGridDefinition): void {
+    if (this.propertyGridDefinition === val) return;
+    this.propertyGridDefinition = val;
+    if (!!this.obj) {
+      this.updateCurrentSurveyWithNewDefinition();
+    }
+  }
   public selectProperty(propertyName: string, focus = true) {
     if (!this.survey) return;
     var question = this.survey.getQuestionByName(propertyName);
@@ -856,23 +866,7 @@ export class PropertyGridModel {
       this.surveyValue.dispose();
     }
     this.surveyValue = this.createSurvey(json, (survey: SurveyModel): void => {
-      survey.questionErrorLocation = "bottom";
-      survey.getCss().list = {};
-      survey.css = propertyGridCss;
-      var page = survey.createNewPage("p1");
-      if (!!this.obj) {
-        new PropertyJSONGenerator(this.obj, this.options, null, null, this.propertyGridDefinition).setupObjPanel(
-          page,
-          false
-        );
-        survey.enterKeyAction = "loseFocus";
-        survey.addPage(page);
-        survey.getAllQuestions().forEach(q => {
-          PropertyGridEditorCollection.onSetup(this.obj, q, q.property, this.options);
-        });
-        survey.checkErrorsMode = "onValueChanging";
-        survey.questionErrorComponent = "svc-question-error";
-      }
+      this.onCreateSurvey(survey);
     });
     if (!this.obj) return;
     this.survey.onValueChanged.add((sender, options) => {
@@ -962,6 +956,58 @@ export class PropertyGridModel {
       opt.question.allowRootStyle = false;
     });
     this.options.onPropertyGridSurveyCreatedCallback(this.obj, this.survey);
+  }
+  private onCreateSurvey(survey: SurveyModel): void {
+    survey.questionErrorLocation = "bottom";
+    survey.getCss().list = {};
+    survey.css = propertyGridCss;
+    const page = survey.createNewPage("p1");
+    if (!!this.obj) {
+      new PropertyJSONGenerator(this.obj, this.options, null, null, this.propertyGridDefinition).setupObjPanel(
+        page,
+        false
+      );
+      survey.addPage(page);
+      survey.getAllQuestions().forEach(q => {
+        PropertyGridEditorCollection.onSetup(this.obj, q, q.property, this.options);
+      });
+      survey.enterKeyAction = "loseFocus";
+      survey.checkErrorsMode = "onValueChanging";
+    }
+  }
+  private updateCurrentSurveyWithNewDefinition(): void {
+    const newSurvey = new SurveyModel(this.getSurveyJSON());
+    this.onCreateSurvey(newSurvey);
+    this.updateElementsInPanel(this.survey.pages[0], newSurvey.pages[0]);
+  }
+  private updateElementsInPanel(curPanel: PanelModelBase, newPanel: PanelModelBase): void {
+    for (let i = curPanel.elements.length - 1; i >= 0; i--) {
+      const el = curPanel.elements[i];
+      const newEl = newPanel.getElementByName(el.name);
+      if (!!newEl && el.isPanel === newEl.isPanel) {
+        if (el.isPanel && newEl.isPanel) {
+          this.updateElementsInPanel(<any>el, <any>newEl);
+        }
+      } else {
+        curPanel.removeElement(el);
+      }
+    }
+    const elsToAdd = new Array<any>();
+    for (let i = 0; i < newPanel.elements.length; i++) {
+      const newEl = newPanel.elements[i];
+      let curIndex = i + elsToAdd.length;
+      if (curIndex < curPanel.elements.length && curPanel.elements[curIndex].name === newEl.name) continue;
+      const curEl = curPanel.getElementByName(newEl.name);
+      if (!!curEl) {
+        curPanel.removeElement(curEl);
+        curPanel.addElement(curEl, curIndex);
+      } else {
+        elsToAdd.push({ element: newEl, index: i });
+      }
+    }
+    for (let i = 0; i < elsToAdd.length; i++) {
+      curPanel.addElement(elsToAdd[i].element, elsToAdd[i].index);
+    }
   }
   public get options(): ISurveyCreatorOptions {
     return this.optionsValue;
