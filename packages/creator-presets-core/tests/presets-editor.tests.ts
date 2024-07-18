@@ -67,6 +67,22 @@ test("Preset edit model, tabs page with creator, default items", () => {
   expect(creator.tabs[1].id).toEqual("logic");
   expect(creator.activeTab).toBe("logic");
 });
+test("Preset edit model, tabs page one selected element", () => {
+  const editor = new CreatorPresetEditorModel({});
+  const survey = editor.model;
+  const allItemsQuestion = survey.getQuestionByName("tabs_allItems");
+  const itemsQuestion = survey.getQuestionByName("tabs_items");
+  const activeTabQuestion = survey.getQuestionByName("tabs_activeTab");
+  expect([].concat(itemsQuestion.value)).toEqual(["designer", "preview", "editor"]);
+  allItemsQuestion.value = ["designer"];
+  expect([].concat(itemsQuestion.value)).toEqual(["designer"]);
+  expect(itemsQuestion.isVisible).toBeFalsy();
+  expect(activeTabQuestion.isVisible).toBeFalsy();
+  allItemsQuestion.value = ["designer", "preview"];
+  expect([].concat(itemsQuestion.value)).toEqual(["designer", "preview"]);
+  expect(itemsQuestion.isVisible).toBeTruthy();
+  expect(activeTabQuestion.isVisible).toBeTruthy();
+});
 test("Preset edit model, tabs page with creator, default items", () => {
   const editor = new CreatorPresetEditorModel({ tabs: { items: ["designer", "logic"], activeTab: "logic" } });
   const survey = editor.model;

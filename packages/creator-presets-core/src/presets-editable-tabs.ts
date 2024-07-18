@@ -15,6 +15,7 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableBase {
             {
               type: "checkbox",
               title: "Selected tabs",
+              minSelectedChoices: 1,
               name: this.allItems
             },
             {
@@ -22,6 +23,7 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableBase {
               name: this.nameItems,
               choicesVisibleIf: namesChoicesVisibleIf,
               title: "Tab's order and editing",
+              clearIfInvisible: "onHidden",
               startWithNewLine: false
             },
             {
@@ -91,6 +93,13 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableBase {
     model.setValue(this.allItems, items);
     model.setValue(this.nameItems, items);
     model.setValue(this.nameActiveTab, json["activeTab"] || creator.activeTab);
+  }
+  protected updateOnValueChangedCore(model: SurveyModel, name: string): void {
+    if(name === this.allItems) {
+      const val = model.getValue(name) || [];
+      model.getQuestionByName(this.nameActiveTab).visible = val.length > 1;
+      model.getQuestionByName(this.nameItems).visible = val.length > 1;
+    }
   }
   private get allItems() { return this.path + "_allItems"; }
   private get nameItems() { return this.path + "_items"; }
