@@ -202,6 +202,12 @@ svc-question {
       }
     }
 
+    .sv-action-bar-item__icon:last-child {
+      use {
+        fill: $primary;
+      }
+    }
+
     .sv-action-bar-item__title--with-icon {
       margin-inline-start: 0; // margin-left
       margin-inline-end: 0; // margin-right

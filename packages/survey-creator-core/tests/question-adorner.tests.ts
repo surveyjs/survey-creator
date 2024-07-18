@@ -81,7 +81,7 @@ test("Check question adorners icons", (): any => {
   let convertToAction = questionAdorner.actionContainer.getActionById("convertTo");
   let convertInputTypeAction = questionAdorner.actionContainer.getActionById("convertInputType");
   expect(convertToAction.innerItem.iconName).toBe("icon-chevron");
-  expect(convertInputTypeAction.innerItem.iconName).toBe(undefined);
+  expect(convertInputTypeAction.innerItem.iconName).toBe("icon-chevron");
 });
 
 test("Check question adorners location", (): any => {
