@@ -2071,7 +2071,7 @@ export class SurveyCreatorModel extends Base
 
     if (reason !== "designer" && reason !== "test" && reason !== "theme") {
       survey.fitToContainer = false;
-      survey.isGridLayoutMode = false;
+      survey.gridLayoutEnabled = false;
     }
 
     if (reason === "designer" || reason === "modal-question-editor") {
