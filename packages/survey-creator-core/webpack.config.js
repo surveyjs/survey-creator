@@ -181,16 +181,6 @@ module.exports = function (options) {
         {
           test: /\.svg$/,
           loader: "svg-inline-loader",
-          // oneOf: [
-          //   {
-          //     exclude: path.resolve(__dirname, "./src/images/simulator/"),
-          //     use: "svg-inline-loader"
-          //   },
-          //   {
-          //     include: path.resolve(__dirname, "./src/images/simulator/"),
-          //     use: "url-loader"
-          //   },
-          // ]
         },
       ],
     },
@@ -241,7 +231,6 @@ module.exports = function (options) {
   if (isProductionBuild) {
     config.plugins.push = config.plugins.concat([]);
   } else {
-    config.output.clean = true;
     config.devtool = "source-map";
     config.plugins = config.plugins.concat([
       new webpack.LoaderOptionsPlugin({ debug: true }),
