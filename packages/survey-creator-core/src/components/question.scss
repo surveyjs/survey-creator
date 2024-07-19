@@ -44,6 +44,10 @@ svc-question {
   .sv-action-bar-item__icon {
     margin-inline-start: calcSize(0.5);
 
+    &:last-child {
+      margin-inline-start: 0;
+    }
+
     use {
       fill: var(--ctr-survey-question-panel-toolbar-item-icon-color, $secondary);
     }
