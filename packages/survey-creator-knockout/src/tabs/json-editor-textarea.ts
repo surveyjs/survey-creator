@@ -1,7 +1,7 @@
 import * as ko from "knockout";
 import { ImplementorBase } from "survey-knockout-ui";
 import { TabJsonEditorTextareaPlugin, TextareaJsonEditorModel } from "survey-creator-core";
-const template: string = require("./json-editor-textarea.html");
+const template = require("./json-editor-textarea.html");
 // import template from "./json-editor-textarea.html";
 
 ko.components.register("svc-tab-json-editor-textarea", {
@@ -12,14 +12,14 @@ ko.components.register("svc-tab-json-editor-textarea", {
       const model: TextareaJsonEditorModel = <TextareaJsonEditorModel>plugin.model;
       model.canShowErrors = false;
       const el = componentInfo.element.parentElement;
-      if(!!el) {
+      if (!!el) {
         const els = el.getElementsByClassName("svc-json-editor-tab__content-area");
-        if(els.length > 0) {
+        if (els.length > 0) {
           model.textElement = els[0];
         }
       }
       return { model };
     }
   },
-  template: template
+  template: template.default
 });

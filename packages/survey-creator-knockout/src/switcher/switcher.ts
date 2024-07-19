@@ -11,5 +11,5 @@ ko.components.register("svc-switcher", {
       return params;
     },
   },
-  template: template
+  template: template.default
 });

@@ -12,5 +12,5 @@ ko.components.register("svc-toolbox-list", {
       return { model: model };
     },
   },
-  template: template,
+  template: template.default,
 });

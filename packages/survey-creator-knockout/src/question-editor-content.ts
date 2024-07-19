@@ -9,5 +9,5 @@ ko.components.register("svc-question-editor-content", {
       return params;
     },
   },
-  template: template,
+  template: template.default,
 });

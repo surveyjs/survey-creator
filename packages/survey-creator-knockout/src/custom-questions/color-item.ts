@@ -15,5 +15,5 @@ ko.components.register("color-item", {
       };
     },
   },
-  template: template,
+  template: template.default,
 });

@@ -34,5 +34,5 @@ ko.components.register("svc-matrix-cell", {
       return model;
     },
   },
-  template: template,
+  template: template.default,
 });

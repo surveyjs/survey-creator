@@ -110,7 +110,7 @@ module.exports = function (options) {
         },
         {
           test: /\.css$/,
-          loader: [
+          use: [
             MiniCssExtractPlugin.loader,
             {
               loader: "css-loader",
@@ -122,7 +122,7 @@ module.exports = function (options) {
         },
         {
           test: /\.s(c|a)ss$/,
-          loader: [
+          use: [
             MiniCssExtractPlugin.loader,
             {
               loader: "css-loader",
@@ -140,6 +140,7 @@ module.exports = function (options) {
         },
         {
           test: /\.html$/,
+          exclude: [/node_modules/, require.resolve('./index.html')],
           loader: "html-loader"
         },
         {
@@ -218,7 +219,10 @@ module.exports = function (options) {
       })
     ]);
     config.devServer = {
-      contentBase: __dirname,
+      static: {
+        directory: path.join(__dirname, '.'),
+      },
+      //host: "0.0.0.0",
       compress: false,
       port: 8081
     };

@@ -13,5 +13,5 @@ ko.components.register("svc-tab-logic", {
       return { model: plugin.model };
     }
   },
-  template: templateHtml
+  template: templateHtml.default
 });

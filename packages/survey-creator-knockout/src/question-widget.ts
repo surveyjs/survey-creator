@@ -22,5 +22,5 @@ ko.components.register("svc-widget-question", {
       return model;
     }
   },
-  template: template
+  template: template.default
 });

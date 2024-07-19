@@ -21,7 +21,7 @@ ko.components.register("svc-dropdown-question", {
       return model;
     }
   },
-  template: questionTemplate
+  template: questionTemplate.default
 });
 ko.components.register("svc-dropdown-question-adorner", {
   viewModel: {
@@ -29,5 +29,5 @@ ko.components.register("svc-dropdown-question-adorner", {
       return params.model;
     }
   },
-  template: template
+  template: template.default
 });
