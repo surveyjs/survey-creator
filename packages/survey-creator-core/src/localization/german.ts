@@ -183,7 +183,7 @@ var germanTranslation = {
     panelPlaceHolderMobile: "Klicken Sie unten auf die Schaltfläche \"Frage hinzufügen\", um dem Bedienfeld ein neues Element hinzuzufügen.",
     imagePlaceHolderMobile: "Klicken Sie auf die Schaltfläche unten und wählen Sie ein Bild zum Hochladen aus",
     imageChooseImage: "Bild auswählen",
-    addNewTypeQuestion: "Add {0}", //{0} is localizable question type
+    addNewTypeQuestion: "{0} hinzufügen", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
     choices_Item: "Artikel ",
     selectFile: "Wählen Sie eine Datei aus",
