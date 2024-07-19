@@ -1,14 +1,12 @@
 module.exports = {
-  globals: {
-    "ts-jest": {
-      diagnostics: false,
-      tsconfig: "tsconfig.test.json",
-    },
-  },
+  testEnvironment: "jsdom",
   collectCoverage: true,
   roots: ["tests"],
   transform: {
-    "^.+\\.(t|j)sx?$": "ts-jest",
+    "^.+\\.(t|j)sx?$": ["ts-jest", {
+      diagnostics: false,
+      tsconfig: "tsconfig.test.json"
+    }],
     "^.+\\.html?$": "<rootDir>/tests/template-loader.js",
   },
   moduleNameMapper: {

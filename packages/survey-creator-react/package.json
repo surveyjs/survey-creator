@@ -88,7 +88,7 @@
     "storybook-addon-designs": "^5.4.2",
     "style-loader": "^1.2.1",
     "surveyjs-doc-generator": "git+https://github.com/surveyjs/surveyjs-doc-generator.git",
-    "testcafe": "^3.6.2",
+    "testcafe": "3.3.0",
     "ts-jest": "^29.2.2",
     "ts-loader": "^8.0.15",
     "tsconfig-paths-webpack-plugin": "^3.3.0",
@@ -101,7 +101,6 @@
   "dependencies": {
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "rmodal": "^1.0.36",
     "survey-core": "../../../survey-library/build/survey-core",
     "survey-creator-core": "../survey-creator-core/build",
     "survey-react-ui": "../../../survey-library/build/survey-react-ui"
