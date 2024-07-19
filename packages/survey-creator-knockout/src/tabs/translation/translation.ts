@@ -15,5 +15,5 @@ ko.components.register("svc-tab-translation", {
       return { model: model };
     }
   },
-  template: templateHtml
+  template: templateHtml.default
 });

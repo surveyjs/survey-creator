@@ -12,7 +12,7 @@ ko.components.register("survey-results", {
       return model;
     }
   },
-  template: templateHtml
+  template: templateHtml.default
 });
 
 ko.components.register("survey-results-table-row", {
@@ -23,5 +23,5 @@ ko.components.register("survey-results-table-row", {
       return { model };
     }
   },
-  template: rowTemplateHtml
+  template: rowTemplateHtml.default
 });

@@ -30,5 +30,5 @@ ko.components.register("svc-toolbox-item", {
       );
     }
   },
-  template: template
+  template: template.default
 });

@@ -30,7 +30,7 @@ export class QuestionLinkValue extends QuestionLinkValueModel {
   }
 }
 
-new SurveyTemplateText().addText(questionTemplate, "question", "linkvalue");
+new SurveyTemplateText().addText(questionTemplate.default, "question", "linkvalue");
 
 Serializer.overrideClassCreator("linkvalue", <any>function (json) {
   return new QuestionLinkValue("", json);
