@@ -159,13 +159,14 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
   }
   public createMainPageCore(): any {
     return {
-      title: "Property Grid categories",
+      title: "Customize the Property Grid",
+      navigationTitle: "Property Grid",
       elements: [
         {
           type: "dropdown",
           name: this.nameSelector,
           clearIfInvisible: "onHidden",
-          title: "Select element to setup a property grid for it"
+          title: "Select an element to customize its settings available in the Property Grid"
         },
         {
           type: "panel",

@@ -8,13 +8,14 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableBase {
     const namesChoicesVisibleIf = "{" + this.allItems + "} contains {item}";
     return {
       title: "Tabs customization",
+      navigationTitle: "Tabs",
       elements: [
         { type: "panel", name: "tabs_main_panel",
-          description: "Configure tabs on the Creator page. Select the tabs you want to show. Set up their order, and choose the one that will be active by default at the beginning of work.",
+          description: "Select the tabs you want to show, reorder them, change their titles, and choose the tab that will be active by default.",
           elements: [
             {
               type: "checkbox",
-              title: "Selected tabs",
+              title: "Available tabs",
               minSelectedChoices: 1,
               name: this.allItems
             },
@@ -22,7 +23,7 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableBase {
               type: "presetranking",
               name: this.nameItems,
               choicesVisibleIf: namesChoicesVisibleIf,
-              title: "Tab's order and editing",
+              title: "Tab order and titles",
               clearIfInvisible: "onHidden",
               startWithNewLine: false
             },

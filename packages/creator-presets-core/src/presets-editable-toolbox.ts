@@ -11,42 +11,18 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
 
   public createMainPageCore(): any {
     return {
-      title: "Setup toolbox",
+      title: "Set Up the Toolbox",
+      navigationTitle: "Toolbox",
       elements: [
         {
           type: "panel",
-          name: "panel_toolbox_definition",
-          description: "Create a new toolbox item, name it and select the icon. Also add the code that will be executed when this item is selected.",
-          elements: [
-            {
-              type: "matrixdynamic",
-              name: this.nameMatrix,
-              titleLocation: "hidden",
-              rowCount: 0,
-              addRowText: "Add New Item Defintion",
-              showHeader: false,
-              columns: [
-                { cellType: "text", name: "name", placeholder: "Name", isUnique: true, isRequired: true },
-                { cellType: "text", name: "iconName", placeholder: "Icon Name" },
-                { cellType: "text", name: "title", placeholder: "Title" }
-              ],
-              detailPanelMode: "underRow",
-              detailElements: [
-                { type: "text", name: "tooltip", title: "Tooltip" },
-                { type: "comment", name: "json", title: "JSON that will be used on clicking item", rows: 15 }
-              ]
-            }
-          ]
-        },
-        {
-          type: "panel",
           name: "panel_toolbox_items",
-          description: "Select the items you want to see in the toolbox. Determine their order and group them into logical groups as needed.",
+          description: "Select the toolbox items you want to show, group them into categories, rename them, and change their order if required.",
           elements: [
             {
               type: "boolean",
               name: this.nameCategoriesMode,
-              title: "Use categories to group toolbox items",
+              title: "Enable grouping",
               titleLocation: "hidden",
               defaultValue: "categories",
               valueTrue: "categories",
@@ -58,11 +34,11 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
             {
               type: "boolean",
               name: this.nameShowCategoryTitles,
+              title: "Show category titles",
               defaultValue: false,
               titleLocation: "hidden",
               visibleIf: this.getTextVisibleIf(this.nameCategoriesMode, "categories"),
               clearIfInvisible: "onHidden",
-              title: "Show Categories Titles",
               startWithNewLine: false,
               renderAs: "checkbox"
             },
@@ -73,7 +49,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
               visibleIf: this.getTextVisibleIf(this.nameCategoriesMode, "categories"),
               minRowCount: 1,
               allowRowsDragAndDrop: true,
-              addRowText: "Add new Category",
+              addRowText: "Add new category",
               showHeader: false,
               columns: [
                 { cellType: "text", name: "category", isUnique: true, isRequired: true },
@@ -88,8 +64,8 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
                   selectToRankEnabled: true,
                   minSelectedChoices: 1,
                   selectToRankAreasLayout: "horizontal",
-                  selectToRankEmptyRankedAreaText: "Drag toolbox items to hide them",
-                  selectToRankEmptyUnrankedAreaText: "Drag toolbox items here"
+                  selectToRankEmptyRankedAreaText: "Drag toolbox items here to hide them",
+                  selectToRankEmptyUnrankedAreaText: " Drag toolbox items here to show them"
                 }
               ]
             },
@@ -101,8 +77,33 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
               selectToRankEnabled: true,
               minSelectedChoices: 1,
               selectToRankAreasLayout: "horizontal",
-              selectToRankEmptyRankedAreaText: "Drag toolbox items to hide them",
-              selectToRankEmptyUnrankedAreaText: "Drag toolbox items here"
+              selectToRankEmptyRankedAreaText: "Drag toolbox items here to hide them",
+              selectToRankEmptyUnrankedAreaText: " Drag toolbox items here to show them"
+            }
+          ]
+        },
+        {
+          type: "panel",
+          name: "panel_toolbox_definition",
+          description: "Create a new toolboitem or customize one of the predefined toolbox items.",
+          elements: [
+            {
+              type: "matrixdynamic",
+              name: this.nameMatrix,
+              titleLocation: "hidden",
+              rowCount: 0,
+              addRowText: "Add New Item Defintion",
+              showHeader: false,
+              columns: [
+                { cellType: "text", name: "name", placeholder: "Name", isUnique: true, isRequired: true },
+                { cellType: "text", name: "iconName", placeholder: "Icon name" },
+                { cellType: "text", name: "title", placeholder: "Title" }
+              ],
+              detailPanelMode: "underRow",
+              detailElements: [
+                { type: "text", name: "tooltip", title: "Tooltip" },
+                { type: "comment", name: "json", title: "JSON object to apply when users select this toolbox item", rows: 15 }
+              ]
             }
           ]
         }
