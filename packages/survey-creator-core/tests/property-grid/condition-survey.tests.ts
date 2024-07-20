@@ -1136,10 +1136,12 @@ test("onConditionQuestionsGetListCallback", () => {
     propertyName: string,
     object: any,
     editor: any,
-    res: [any]
-  ) => {
+    res: any[],
+    variables: string[]
+  ): string => {
     propName = propertyName;
     res.push(survey2.getQuestionByName("question1"));
+    return "";
   };
   var editor = new ConditionEditor(survey, question, options, "visibleIf");
   expect(propName).toEqual("visibleIf");
@@ -1148,6 +1150,31 @@ test("onConditionQuestionsGetListCallback", () => {
   expect(panel.getQuestionByName("questionValue").getType()).toEqual(
     "dropdown"
   );
+});
+test("Add ability to remove variables onConditionQuestionsGetListCallback #5710", () => {
+  const survey = new SurveyModel({
+    elements: [{ name: "q1", type: "text" }, { name: "q2", type: "text" }]
+  });
+  survey.setVariable("abc", 1);
+  survey.setVariable("edf", 1);
+  const question = survey.getQuestionByName("q1");
+  const options = new EmptySurveyCreatorOptions();
+  options.onConditionQuestionsGetListCallback = (
+    propertyName: string,
+    object: any,
+    editor: any,
+    res: any[],
+    variables: string[]
+  ): string => {
+    variables.splice(0, 1);
+    return "";
+  };
+  const editor = new ConditionEditor(survey, question, options, "visibleIf");
+  const panel = editor.panel.panels[0];
+  const dropdownQuestion = <QuestionDropdownModel>panel.getQuestionByName("questionName");
+  expect(dropdownQuestion.choices).toHaveLength(2);
+  expect(dropdownQuestion.choices[0].value).toBe("q2");
+  expect(dropdownQuestion.choices[1].value).toBe("edf");
 });
 test("getObjectDisplayName", () => {
   var survey = new SurveyModel({
