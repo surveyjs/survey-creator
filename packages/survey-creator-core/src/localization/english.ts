@@ -1232,7 +1232,11 @@ export var enStrings = {
     },
     panelbase: {
       questionTitleWidth: "Ex.: 200px"
-    }
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "Ex.: 30%",
+      questionTitleWidth: "Ex.: 200px",
+    },
   },
   pehelp: {
     panel: {
@@ -1481,7 +1485,11 @@ export var enStrings = {
       inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in.",
       textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels.",
       overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey.",
-    }
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "Accepts values %.",
+      questionTitleWidth: "Accepts values px."
+    },
   },
   // Properties
   p: {
@@ -1585,6 +1593,7 @@ export var enStrings = {
     scaleColorMode: "Rating icon color mode",
     rateColorMode: "Smileys color scheme",
     copyDisplayValue: "Copy display value", // Auto-generated string
+    effectiveColSpan: "Column span",
   },
   theme: {
     advancedMode: "Advanced mode",

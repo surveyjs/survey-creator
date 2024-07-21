@@ -9,5 +9,5 @@ ko.components.register("survey-simulator", {
       return params.model;
     },
   },
-  template: templateHtml,
+  template: templateHtml.default,
 });

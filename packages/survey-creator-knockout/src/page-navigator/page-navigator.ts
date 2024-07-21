@@ -43,5 +43,5 @@ ko.components.register("svc-page-navigator", {
       return model;
     },
   },
-  template: template,
+  template: template.default,
 });

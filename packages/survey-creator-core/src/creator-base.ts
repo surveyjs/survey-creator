@@ -2147,7 +2147,10 @@ export class SurveyCreatorModel extends Base
   public createSurvey(json: any, reason: string, model?: any, callback?: (survey: SurveyModel) => void, area?: string): SurveyModel {
     const survey = this.createSurveyCore(json, reason);
 
-    if (reason !== "designer" && reason !== "test" && reason !== "theme") { survey.fitToContainer = false; }
+    if (reason !== "designer" && reason !== "test" && reason !== "theme") {
+      survey.fitToContainer = false;
+      survey.gridLayoutEnabled = false;
+    }
 
     if (reason === "designer" || reason === "modal-question-editor") {
       initializeDesignTimeSurveyModel(survey, this);

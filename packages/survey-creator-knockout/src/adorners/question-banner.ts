@@ -11,5 +11,5 @@ ko.components.register("svc-question-banner", {
       return params.createBannerParams();
     }
   },
-  template: template
+  template: template.default
 });

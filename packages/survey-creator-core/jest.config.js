@@ -1,23 +1,21 @@
 module.exports = {
-  globals: {
-    "ts-jest": {
-      diagnostics: false,
-      tsconfig: "tsconfig.test.json",
-    },
-  },
+  testEnvironment: "jsdom",
   reporters: [
     "default",
-    [ "jest-junit", {
-    "suiteNameTemplate": "{filepath}",
-    "outputDirectory": ".",
-    "outputName": "junit.xml"
-    } ]
+    ["jest-junit", {
+      "suiteNameTemplate": "{filepath}",
+      "outputDirectory": ".",
+      "outputName": "junit.xml"
+    }]
   ],
   collectCoverage: true,
   coverageReporters: ["json", "lcov", "text", "html", "text-summary", "cobertura"],
   roots: ["tests"],
   transform: {
-    "^.+\\.(t|j)sx?$": "ts-jest",
+    "^.+\\.(t|j)sx?$": ["ts-jest", {
+      diagnostics: false,
+      tsconfig: "tsconfig.test.json"
+    }]
   },
   moduleNameMapper: {
     "\\.(css|scss)$": "<rootDir>/tests/empty-module.js",

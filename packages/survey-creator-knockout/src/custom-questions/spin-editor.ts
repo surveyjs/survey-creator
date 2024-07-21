@@ -108,5 +108,5 @@ ko.components.register("svc-spin-editor", {
       return params;
     },
   },
-  template: template,
+  template: template.default,
 });
