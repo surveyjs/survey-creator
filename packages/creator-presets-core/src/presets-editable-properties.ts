@@ -239,9 +239,6 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     this.currentJson = json;
     this.currentJson.autoGenerateProperties = false;
   }
-  protected setupOnCurrentPageCore(model: SurveyModel, creator: SurveyCreatorModel): void {
-    model.widthMode = "auto";
-  }
   private getSelector(model: SurveyModel): QuestionDropdownModel { return <QuestionDropdownModel>model.getQuestionByName(this.nameSelector); }
   private getPropertyCreatorQuestion(model: SurveyModel): QuestionEmbeddedCreatorModel { return <QuestionEmbeddedCreatorModel>model.getQuestionByName(this.namePropertyCreator); }
   private get nameSelector() { return this.fullPath + "_selector"; }
@@ -340,66 +337,30 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     creator.sidebar.toolbar.setItems([]);
     creator.showAddQuestionButton = false;
     creator.expandCollapseButtonVisibility = "always";
+    creator.updateToolboxIsCompact(false);
+    creator.showSidebar = false;
     const designer = <TabDesignerPlugin>creator.getPlugin("designer");
     designer.designerStateManager.onInitElementStateCallback = (element: SurveyElement, state: any): void => {
       if(element.isPanel) {
         state.collapsed = true;
       }
     };
-    creator.setPropertyGridDefinition({
-      autoGenerateProperties: false,
-      classes: {
-        panel: {
-          properties: [
-            "name",
-            "title"
-          ]
-        },
-        question: {
-          properties: [
-            "name",
-            "title",
-            "description"
-          ]
-        }
-      }
-    });
     creator.onSurveyInstanceCreated.add((sender, options) => {
-      if(options.area === "property-grid") {
-        const survey = options.survey;
-        if(survey.state === "empty") return;
-        survey.onGetQuestionTitleActions.add((sender, options) => {
-          options.titleActions = [];
-        });
-        survey.onUpdatePanelCssClasses.add((sender, options) => {
-          options.cssClasses.panel.header += " preset_pg_property_panel";
-        });
-        survey.getAllPanels().forEach(panel => {
-          const pnl = <PanelModel>panel;
-          pnl.state = "default";
-          pnl.locTitle.onGetTextCallback = undefined;
-          pnl.locTitle.clear();
-          pnl.onFirstRendering();
-        });
-        const isQuestion = (<any>creator.selectedElement).isQuestion;
-        const nameQuestion = survey.getQuestionByName("name");
-        nameQuestion.readOnly = isQuestion || this.isDefaultPanelName((<any>creator.selectedElement).name);
-        nameQuestion.description = "";
-        nameQuestion.title = isQuestion ? "Property name" : "Category name";
-        const titleQuestion = survey.getQuestionByName("title");
-        titleQuestion.description = "";
-        titleQuestion.title = isQuestion ? "Property title" : "Category description";
-        const descQuestion = survey.getQuestionByName("description");
-        if(descQuestion) {
-          descQuestion.description = "";
-          descQuestion.title = "Property help text";
-        }
-      }
       if(options.reason === "designer") {
         const model = options.survey;
+        model.getAllPanels().forEach(panel => {
+          this.addCategoryNamePropIntoPanel(<PanelModel>panel, creator);
+        });
+        model.onPanelAdded.add((sender, options) => {
+          this.addCategoryNamePropIntoPanel(options.panel, creator);
+        });
         model.onElementWrapperComponentName.add((sender, options) => {
-          if(options.componentName === "svc-dropdown-question") {
-            options.componentName = "svc-question";
+          if(options.element.isQuestion &&
+            (options.componentName === "svc-dropdown-question" || options.componentName === "svc-question")) {
+            options.componentName = "svc-preset-question";
+          }
+          if(options.element.isPanel && options.componentName === "svc-panel") {
+            options.componentName = "svc-preset-panel";
           }
         });
       }
@@ -441,6 +402,7 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
         page.addElement(pnl, index + 1);
       }
       pnl.name = SurveyHelper.getNewName(creator.survey.getAllPanels(), "category");
+      pnl.setLocalizableStringText("categoryName", pnl.name);
       pnl.title = "New Category";
     });
     creator.onQuestionAdded.add((sender, options) => {
@@ -478,6 +440,8 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
   }
   private updateCreatorJSON(json: any): any {
     if(!json || !json.pages || !json.pages[0] || !json.pages[0].elements) return;
+    json.widthMode = "static";
+    json.width = "800px";
     this.updateCreatorJSONElements(json.pages[0].elements);
     return json;
   }
@@ -486,6 +450,9 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
       const el = elements[i];
       if(Array.isArray(el.elements)) {
         this.updateCreatorJSONElements(el.elements);
+      }
+      if(el.titleLocation === "hidden") {
+        delete el.titleLocation;
       }
       if(!!el.name && el.name.indexOf("overridingProperty")> -1) {
         elements.splice(i, 1);
@@ -517,13 +484,26 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
           name: propName,
           title: q.title,
           className: q.getType(),
-          iconName: "text",
+          iconName: "icon-text", //TODO
           json: json
         });
       }
     });
 
     creator.toolbox.addItems(elements, true);
+  }
+  private addCategoryNamePropIntoPanel(panel: PanelModel, creator: SurveyCreatorModel): void {
+    if(!this.isDefaultPanelName(panel.name)) {
+      const locStr = panel.createCustomLocalizableObj("categoryName");
+      locStr.text = panel.name;
+      (<any>locStr).locStr = locStr;
+      (<any>locStr).creator = creator;
+      locStr.onStrChanged = (oldValue: string, newValue: string): void => {
+        if(!newValue) {
+          panel.name = newValue;
+        }
+      };
+    }
   }
   private isDefaultPanelName(name: string): boolean {
     if(!name) return true;
