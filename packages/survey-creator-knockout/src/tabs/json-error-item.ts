@@ -12,5 +12,5 @@ ko.components.register("json-error-item", {
       };
     },
   },
-  template: template,
+  template: template.default,
 });

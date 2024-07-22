@@ -20,8 +20,8 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     this.locale = "en";
     this.navigationBarValue = new ActionContainer();
     this.addNavigationAction("preset", "Edit Preset");
-    this.addNavigationAction("creator", "Review Creator");
-    this.addNavigationAction("results", "Preset JSON");
+    this.addNavigationAction("creator", "Preview Survey Creator");
+    this.addNavigationAction("results", "View Preset JSON");
     this.addLocaleDropdown();
     this.activeTab = this.navigationBar.actions[0].id;
   }
@@ -111,7 +111,6 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     editablePresets.forEach(item => item.setupQuestionsValue(model, json[item.path], this.creator));
     this.updateJsonLocalizationStrings(editablePresets);
     model.onCurrentPageChanged.add((sender, options) => {
-      model.widthMode = "static";
       editablePresets.forEach(item => item.setupOnCurrentPage(model, this.creator));
     });
     model.onValueChanged.add((sender, options) => {
@@ -215,7 +214,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     return res;
   }
   private getEditModelJson(editablePresets: Array<CreatorPresetEditableBase>): any {
-    const modelJson = { pages: [], showTOC: true, showQuestionNumbers: false, widthMode: "static", width: "1040px" };
+    const modelJson = { pages: [], showTOC: true, showQuestionNumbers: false, widthMode: "static", width: "1200px" };
     editablePresets.forEach(preset => {
       const pages = preset.createPages();
       if (Array.isArray(pages)) {

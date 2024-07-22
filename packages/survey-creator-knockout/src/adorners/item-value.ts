@@ -50,5 +50,5 @@ ko.components.register("svc-item-value", {
       return model;
     }
   },
-  template: template
+  template: template.default
 });

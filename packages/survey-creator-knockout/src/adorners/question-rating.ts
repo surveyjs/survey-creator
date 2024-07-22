@@ -29,7 +29,7 @@ ko.components.register("svc-rating-question", {
       return model;
     }
   },
-  template: questionTemplate
+  template: questionTemplate.default
 });
 ko.components.register("svc-rating-question-content", {
   viewModel: {
@@ -47,5 +47,5 @@ ko.components.register("svc-rating-question-content", {
       return model;
     }
   },
-  template: template
+  template: template.default
 });

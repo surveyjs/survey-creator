@@ -75,5 +75,5 @@ ko.components.register("svc-color-question", {
       return params;
     },
   },
-  template: template,
+  template: template.default,
 });

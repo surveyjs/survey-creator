@@ -74,6 +74,24 @@ test("set toolbox definition", () => {
   expect(actions[1].title).toEqual("Date");
   expect(actions[1].json.inputType).toEqual("date");
 });
+test("Override toolbox JSON", () => {
+  const creator = new CreatorTester();
+  const preset = new CreatorPreset({
+    toolbox: {
+      definition: [
+        { name: "radiogroup", json: { type: "radiogroup", choices: [1, 2, 3, 4, 5, 6, 7] } }
+      ]
+    }
+  });
+  preset.apply(creator);
+  const item = creator.toolbox.getActionById("radiogroup");
+  expect(item).toBeTruthy();
+  creator.clickToolboxItem(item.json);
+  const question = creator.survey.getQuestionByName("question1");
+  expect(question.getType()).toBe("radiogroup");
+  expect(question.choices).toHaveLength(7);
+  expect(question.choices[6].value).toBe(7);
+});
 test("set property grid defintion", () => {
   const creator = new CreatorTester();
   creator.JSON = { elements: [{ type: "text", name: "q1" }] };

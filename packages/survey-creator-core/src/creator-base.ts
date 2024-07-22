@@ -2076,12 +2076,12 @@ export class SurveyCreatorModel extends Base
     return new SurveyJSON5().stringify(json, null, indent);
   }
   private moveElementsToTheEnd(json: any): void {
-    if(!json) return;
-    if(Array.isArray(json)) {
+    if (!json) return;
+    if (Array.isArray(json)) {
       json.forEach(el => this.moveElementsToTheEnd(el));
     } else {
-      if(typeof json === "object") {
-        if(!!json["elements"]) {
+      if (typeof json === "object") {
+        if (!!json["elements"]) {
           const els = json["elements"];
           delete json["elements"];
           json["elements"] = els;
@@ -2161,6 +2161,7 @@ export class SurveyCreatorModel extends Base
     if (reason !== "designer" && reason !== "test" && reason !== "theme") {
       survey.fitToContainer = false;
       survey.applyTheme(designTabSurveyThemeJSON);
+      survey.gridLayoutEnabled = false;
     }
 
     if (reason === "designer" || reason === "modal-question-editor") {
@@ -3293,7 +3294,8 @@ export class SurveyCreatorModel extends Base
     propertyName: string,
     obj: Base,
     editor: any,
-    list: any[]
+    list: any[],
+    variables: string[]
   ): string {
     if (this.onConditionQuestionsGetList.isEmpty) return settings.logic.questionSortOrder;
     var options = {
@@ -3301,7 +3303,8 @@ export class SurveyCreatorModel extends Base
       obj: obj,
       editor: editor,
       sortOrder: "asc",
-      list: list
+      list: list,
+      variables: variables
     };
     this.onConditionQuestionsGetList.fire(this, options);
     if (options.list !== list) {

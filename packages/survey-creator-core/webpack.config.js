@@ -1,18 +1,13 @@
 "use strict";
 
-var webpack = require("webpack");
-var path = require("path");
-var MiniCssExtractPlugin = require("mini-css-extract-plugin");
-var FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries");
+const webpack = require("webpack");
+const fs = require("fs");
+const path = require("path");
+const RemoveEmptyScriptsPlugin = require("webpack-remove-empty-scripts");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const DtsGeneratorPlugin = require("../../webpack-plugins/webpack-dts-generator");
-var packageJson = require("./package.json");
-var fs = require("fs");
-var replace = require("replace-in-file");
-var mergeFiles = require("merge-files");
-var svgStoreUtils = require(path.resolve(
-  __dirname,
-  "./node_modules/webpack-svgstore-plugin/src/helpers/utils.js"
-));
+const mergeFiles = require("merge-files");
+const packageJson = require("./package.json");
 
 const today = new Date();
 const year = today.getFullYear();
@@ -77,76 +72,28 @@ module.exports = function (options) {
   var buildPath = __dirname + "/build/";
   var isProductionBuild = options.buildType === "prod";
 
-  function createSVGBundle() {
-    var options = {
-      fileName: path.resolve(__dirname, "./src/svgbundle.html"),
-      template: path.resolve(__dirname, "./svgbundle.pug"),
-      svgoOptions: {
-        plugins: [{ removeTitle: true }],
-      },
-      prefix: "icon-",
-    };
-
-    svgStoreUtils.filesMap(path.join("./src/images/**/*.svg"), (files) => {
-      const fileContent = svgStoreUtils.createSprite(
-        svgStoreUtils.parseFiles(files, options),
-        options.template
-      );
-
-      fs.writeFileSync(options.fileName, fileContent);
-    });
-  }
-
-  function removeLines(fileName, regex) {
-    replace.sync(
-      {
-        files: fileName,
-        from: regex,
-        to: "",
-      },
-      (error, changes) => {
-        if (error) {
-          return console.error("Error occurred:", error);
-        }
-        console.log("check me :     " + fileName);
-        console.log("Modified files:", changes.join(", "));
-      }
-    );
-  }
-
-  async function createStylesBundleWithFonts() {
+  function createStylesBundleWithFonts() {
     const getdir = (filename) => {
       return buildPath + filename;
     }
 
-    let outputPath = getdir("survey-creator-core.css");
-    let inputPathList = [
-      getdir("fonts.fontless.css"),
-      getdir("survey-creator-core.fontless.css")
-    ];
-    // status: true or false
-    let status = await mergeFiles(inputPathList, outputPath);
-    // or
-    mergeFiles(inputPathList, outputPath).then((status) => {
-      // next
-    });
+    if (isProductionBuild) {
+      let outputPath = getdir("survey-creator-core.min.css");
+      let inputPathList = [
+        getdir("fonts.fontless.min.css"),
+        getdir("survey-creator-core.fontless.min.css")
+      ];
+      return mergeFiles(inputPathList, outputPath);
+    } else {
+      let outputPath = getdir("survey-creator-core.css");
+      let inputPathList = [
+        getdir("fonts.fontless.css"),
+        getdir("survey-creator-core.fontless.css")
+      ];
+      return mergeFiles(inputPathList, outputPath);
+    }
 
-    // min verstion
-    outputPath = getdir("survey-creator-core.min.css");
-    inputPathList = [
-      getdir("fonts.fontless.min.css"),
-      getdir("survey-creator-core.fontless.min.css")
-    ];
-    // status: true or false
-    status = await mergeFiles(inputPathList, outputPath);
-    // or
-    mergeFiles(inputPathList, outputPath).then((status) => {
-      // next
-    });
   }
-
-  //var packageName = chunkName || packageJson.name;
-  var packageName = packageJson.name;
 
   var percentage_handler = function handler(percentage, msg) {
     if (0 == percentage) {
@@ -166,7 +113,7 @@ module.exports = function (options) {
         );
       }
 
-      createStylesBundleWithFonts();
+      return createStylesBundleWithFonts();
     }
   };
 
@@ -194,7 +141,7 @@ module.exports = function (options) {
         },
         {
           test: /\.css$/,
-          loader: [
+          use: [
             MiniCssExtractPlugin.loader,
             {
               loader: "css-loader",
@@ -206,8 +153,13 @@ module.exports = function (options) {
         },
         {
           test: /\.s(c|a)ss$/,
-          loader: [
-            MiniCssExtractPlugin.loader,
+          use: [
+            {
+              loader: MiniCssExtractPlugin.loader,
+              options: {
+                publicPath: ""
+              }
+            },
             {
               loader: "css-loader",
               options: {
@@ -228,16 +180,7 @@ module.exports = function (options) {
         },
         {
           test: /\.svg$/,
-          oneOf: [
-            {
-              exclude: path.resolve(__dirname, "./src/images/simulator/"),
-              use: "svg-inline-loader"
-            },
-            {
-              include: path.resolve(__dirname, "./src/images/simulator/"),
-              use: "url-loader"
-            },
-          ]
+          loader: "svg-inline-loader",
         },
       ],
     },
@@ -247,7 +190,7 @@ module.exports = function (options) {
       library: options.libraryName || "SurveyCreatorCore",
       libraryTarget: "umd",
       globalObject: 'this',
-      umdNamedDefine: true,
+      umdNamedDefine: true
     },
     externals: {
       knockout: {
@@ -274,11 +217,11 @@ module.exports = function (options) {
         "process.env.ENVIRONMENT": JSON.stringify(options.buildType),
         "process.env.VERSION": JSON.stringify(packageJson.version),
       }),
-      new FixStyleOnlyEntriesPlugin(),
+      new RemoveEmptyScriptsPlugin(),
       new MiniCssExtractPlugin({
         filename: isProductionBuild ? "[name].fontless.min.css" : "[name].fontless.css",
       }),
-      new webpack.WatchIgnorePlugin([/svgbundle\.html/]),
+      new webpack.WatchIgnorePlugin({ paths: [/svgbundle\.html/] }),
       new webpack.BannerPlugin({
         banner: banner,
       }),

@@ -5,7 +5,7 @@ const template = require("./page-navigator-item.html");
 // import template from "./page-navigator-item.html";
 
 export class PageNavigatorItemViewModel {
-  constructor(private item: IAction) {}
+  constructor(private item: IAction) { }
   get text() {
     return this.item.title;
   }
@@ -39,5 +39,5 @@ ko.components.register("svc-page-navigator-item", {
       return new PageNavigatorItemViewModel(params.item);
     },
   },
-  template: template,
+  template: template.default,
 });

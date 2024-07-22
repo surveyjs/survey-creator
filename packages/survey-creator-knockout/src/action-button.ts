@@ -24,5 +24,5 @@ ko.components.register("svc-action-button", {
       return new ActionButtonViewModel(params);
     }
   },
-  template: template
+  template: template.default
 });
