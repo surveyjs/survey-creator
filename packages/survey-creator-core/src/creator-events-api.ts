@@ -404,7 +404,8 @@ export interface ConditionGetQuestionListEvent {
   /**
    * A list of questions available for selection.
    */
-  list: any;
+  list: any[];
+  variables: string[];
   /**
    * The sort order of questions within the list: `"asc"` (default) or `"none"`. Set this property to `"none"` to disable sorting.
    */

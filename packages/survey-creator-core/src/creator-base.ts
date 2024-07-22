@@ -3282,7 +3282,8 @@ export class SurveyCreatorModel extends Base
     propertyName: string,
     obj: Base,
     editor: any,
-    list: any[]
+    list: any[],
+    variables: string[]
   ): string {
     if (this.onConditionQuestionsGetList.isEmpty) return settings.logic.questionSortOrder;
     var options = {
@@ -3290,7 +3291,8 @@ export class SurveyCreatorModel extends Base
       obj: obj,
       editor: editor,
       sortOrder: "asc",
-      list: list
+      list: list,
+      variables: variables
     };
     this.onConditionQuestionsGetList.fire(this, options);
     if (options.list !== list) {

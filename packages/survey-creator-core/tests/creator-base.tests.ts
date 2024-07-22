@@ -4337,7 +4337,7 @@ test("Creator pageEditMode edit onCanDeleteItemCallback", (): any => {
 test("Creator pageEditMode edit onCanDeleteItemCallback", (): any => {
   const creator = new CreatorTester();
   const func = () => {
-    return creator.onConditionQuestionsGetListCallback("test", creator.survey, undefined, []);
+    return creator.onConditionQuestionsGetListCallback("test", creator.survey, undefined, [], []);
   };
   expect(func()).toBe("asc");
   settings.logic.questionSortOrder = "none";
