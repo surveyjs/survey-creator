@@ -4,7 +4,6 @@ const webpack = require("webpack");
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
-const DtsGeneratorPlugin = require("../../webpack-plugins/webpack-dts-generator");
 const packageJson = require("./package.json");
 const fs = require("fs");
 
@@ -43,7 +42,7 @@ const buildPlatformJson = {
   engines: {
     node: ">=0.10.0"
   },
-  typings: packageJson.name + ".d.ts",
+  typings: "./typings/entries/index.d.ts",
   peerDependencies: {
     "ace-builds": "^1.4.12",
     "react": "^16.5.0 || ^17.0.1 || ^18.1.0",
@@ -101,18 +100,6 @@ module.exports = function (options) {
         {
           test: /\.(ts|tsx)$/,
           loader: "ts-loader",
-        },
-        {
-          test: /\.css$/,
-          loader: [
-            MiniCssExtractPlugin.loader,
-            {
-              loader: "css-loader",
-              options: {
-                sourceMap: options.buildType !== "prod"
-              }
-            }
-          ]
         },
         {
           test: /\.s(c|a)ss$/,
@@ -218,11 +205,6 @@ module.exports = function (options) {
     config.devtool = "source-map";
     config.plugins = config.plugins.concat([
       new webpack.LoaderOptionsPlugin({ debug: true }),
-      new DtsGeneratorPlugin({
-        webpack: webpack,
-        filePath: "build/creator-presets-react.d.ts",
-        moduleName: "creator-presets-react"
-      })
     ]);
     config.devServer = {
       contentBase: __dirname,
