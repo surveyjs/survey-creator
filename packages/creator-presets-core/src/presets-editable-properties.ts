@@ -337,7 +337,7 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     creator.sidebar.toolbar.setItems([]);
     creator.showAddQuestionButton = false;
     creator.expandCollapseButtonVisibility = "always";
-    creator.updateToolboxIsCompact(false);
+    creator.toolbox.forceCompact = false;
     creator.showSidebar = false;
     const designer = <TabDesignerPlugin>creator.getPlugin("designer");
     designer.designerStateManager.onInitElementStateCallback = (element: SurveyElement, state: any): void => {
@@ -355,11 +355,12 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
           this.addCategoryNamePropIntoPanel(options.panel, creator);
         });
         model.onElementWrapperComponentName.add((sender, options) => {
-          if(options.element.isQuestion &&
-            (options.componentName === "svc-dropdown-question" || options.componentName === "svc-question")) {
+          const el = options.element;
+          const compName = options.componentName;
+          if(el.isQuestion && (compName === "svc-dropdown-question" || compName === "svc-question")) {
             options.componentName = "svc-preset-question";
           }
-          if(options.element.isPanel && options.componentName === "svc-panel") {
+          if(el.isPanel && compName === "svc-panel") {
             options.componentName = "svc-preset-panel";
           }
         });
@@ -468,7 +469,7 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     }
   }
   private setupCreatorToolbox(creator: SurveyCreatorModel): void {
-    const elements: IQuestionToolboxItem[] = [{ name: "panel", title: "Category", className: "panel", json: { type: "panel" }, iconName: "panel" }];
+    const elements: IQuestionToolboxItem[] = [{ name: "panel", title: "Category", className: "panel", json: { type: "panel" }, iconName: "icon-panel" }];
     const hiddenProperties = ["progressBarInheritWidthFrom"]; //TODO
     const propGrid = this.currentProperties.propertyGridDefault.survey;
     const survey = this.propCreator.survey;
@@ -499,7 +500,7 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
       (<any>locStr).locStr = locStr;
       (<any>locStr).creator = creator;
       locStr.onStrChanged = (oldValue: string, newValue: string): void => {
-        if(!newValue) {
+        if(!!newValue) {
           panel.name = newValue;
         }
       };

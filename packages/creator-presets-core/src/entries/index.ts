@@ -8,6 +8,7 @@ export * from "../presets-editable-properties";
 export * from "../presets-editable-tabs";
 export * from "../presets-editable-toolbox";
 export * from "../components/embedded-creator";
+export * from "../components/question";
 
 import { checkLibraryVersion } from "survey-core";
 
