@@ -9,7 +9,7 @@ export * from "../../src/property-grid/header-settings";
 import { ITheme, QuestionButtonGroupModel, QuestionCompositeModel, QuestionDropdownModel, QuestionFileModel, Serializer, SurveyElement, settings as surveySettings } from "survey-core";
 import { CreatorTester } from "../creator-tester";
 import { ThemeTabPlugin } from "../../src/components/tabs/theme-plugin";
-import { ThemeModel } from "../../src/components/tabs/theme-model";
+import { HeaderModel, ThemeModel } from "../../src/components/tabs/theme-model";
 import { ThemeTabViewModel } from "../../src/components/tabs/theme-builder";
 import { settings } from "../../src/creator-settings";
 import { assign, parseColor } from "../../src/utils/utils";
@@ -849,6 +849,46 @@ test("Theme undo redo expression questions", (): any => {
   expect(themeModel["blockThemeChangedNotifications"]).toBe(0);
   expect(fontSizeQuestion.value).toBe(150);
   expect(themeModel.cssVariables["--sjs-font-size"]).toBe("24px");
+});
+
+test("Theme undo redo header settings", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const themeModel = themePlugin.themeModel as ThemeModel;
+  const header = themeModel.header as HeaderModel;
+  const groupHeader = themePlugin.propertyGrid.survey.pages[0].getElementByName("header");
+  const headerViewContainer = groupHeader.elements[0].contentPanel;
+  const inheritWidthFromQuestion = headerViewContainer.getElementByName("inheritWidthFrom");
+
+  expect(header.inheritWidthFrom).toBe("container");
+  expect(themeModel.undoRedoManager.canUndo()).toBe(false);
+  expect(themeModel.undoRedoManager.canRedo()).toBe(false);
+  expect(themeModel["blockThemeChangedNotifications"]).toBe(0);
+  expect(inheritWidthFromQuestion.value).toBe("container");
+
+  inheritWidthFromQuestion.value = "survey";
+
+  expect(header.inheritWidthFrom).toBe("survey");
+  expect(themeModel.undoRedoManager.canUndo()).toBe(true);
+  expect(themeModel.undoRedoManager.canRedo()).toBe(false);
+  expect(themeModel["blockThemeChangedNotifications"]).toBe(0);
+  expect(inheritWidthFromQuestion.value).toBe("survey");
+
+  themePlugin.undo();
+  expect(header.inheritWidthFrom).toBe("container");
+  expect(themeModel.undoRedoManager.canUndo()).toBe(false);
+  expect(themeModel.undoRedoManager.canRedo()).toBe(true);
+  expect(themeModel["blockThemeChangedNotifications"]).toBe(0);
+  expect(inheritWidthFromQuestion.value).toBe("container");
+
+  themePlugin.redo();
+  expect(header.inheritWidthFrom).toBe("survey");
+  expect(themeModel.undoRedoManager.canUndo()).toBe(true);
+  expect(themeModel.undoRedoManager.canRedo()).toBe(false);
+  expect(themeModel["blockThemeChangedNotifications"]).toBe(0);
+  expect(inheritWidthFromQuestion.value).toBe("survey");
 });
 
 test("Theme builder: trigger responsiveness", (): any => {
