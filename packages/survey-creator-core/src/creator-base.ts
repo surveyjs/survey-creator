@@ -1899,7 +1899,17 @@ export class SurveyCreatorModel extends Base
       this.selectElement(options.draggedElement, undefined, false);
     });
   }
-
+  private resetPanelTitleRendering(obj: Base, propertyName: string, oldValue: string): void {
+    if(propertyName !== "title" || !obj) return;
+    const el = <SurveyElement>obj;
+    if(el.isPanel && !!oldValue !== !!el.title) {
+      const panel = <PanelModel>el;
+      if(panel.showTitle) {
+        panel.showTitle = false;
+        panel.showTitle = true;
+      }
+    }
+  }
   public updateElementsOnLocaleChanged(obj: Base, propertyName: string): void {
     if (obj.getType() !== "survey" || propertyName !== "locale") return;
     const pages = this.survey.pages;
@@ -2244,6 +2254,7 @@ export class SurveyCreatorModel extends Base
   public notifySurveyPropertyChanged(options: any): void {
     this.clearSurveyLogicForUpdate(options.target, options.name, options.newValue);
     this.updateSurveyLogicValues(options.target, options.name, options.oldValue);
+    this.resetPanelTitleRendering(options.target, options.name, options.oldValue);
     const plugin = this.currentPlugin;
     if (!!plugin && !!plugin.onDesignerSurveyPropertyChanged) {
       plugin.onDesignerSurveyPropertyChanged(options.target, options.name);
