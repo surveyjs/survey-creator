@@ -973,6 +973,7 @@ export class PropertyGridModel {
       });
       survey.enterKeyAction = "loseFocus";
       survey.checkErrorsMode = "onValueChanging";
+      survey.questionErrorComponent = "svc-question-error";
     }
   }
   private updateCurrentSurveyWithNewDefinition(): void {

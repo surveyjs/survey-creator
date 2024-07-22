@@ -1,6 +1,6 @@
 import * as ko from "knockout";
 
-const template = require("./question-error.html");
+const template = require("./question-error.html").default;
 
 export var QuestionErrorComponent: any;
 

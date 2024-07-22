@@ -395,6 +395,9 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       }
       return "icon-chevron_16x16";
     });
+    newAction.iconSize = <any>new ComputedUpdater(() => {
+      return newAction.mode === "small" ? 24 : 16;
+    });
     newAction.disableHide = true;
     return newAction;
   }
