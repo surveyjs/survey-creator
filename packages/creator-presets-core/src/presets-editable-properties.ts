@@ -455,6 +455,9 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
       if(el.titleLocation === "hidden") {
         delete el.titleLocation;
       }
+      if(!!el.state) {
+        delete el.state;
+      }
       if(!!el.name && el.name.indexOf("overridingProperty")> -1) {
         elements.splice(i, 1);
       } else {
