@@ -4,7 +4,6 @@ var webpack = require("webpack");
 var path = require("path");
 var MiniCssExtractPlugin = require("mini-css-extract-plugin");
 var FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries");
-const DtsGeneratorPlugin = require("../../webpack-plugins/webpack-dts-generator");
 var packageJson = require("./package.json");
 var fs = require("fs");
 
@@ -45,7 +44,7 @@ var buildPlatformJson = {
   engines: {
     node: ">=0.10.0",
   },
-  typings: packageJson.name + ".d.ts",
+  typings: "./typings/entries/index.d.ts",
   peerDependencies: {
     "ace-builds": "^1.4.12",
     "survey-core": packageJson.version
@@ -103,18 +102,6 @@ module.exports = function (options) {
           loader: "ts-loader",
         },
         {
-          test: /\.css$/,
-          loader: [
-            MiniCssExtractPlugin.loader,
-            {
-              loader: "css-loader",
-              options: {
-                sourceMap: options.buildType !== "prod",
-              },
-            },
-          ],
-        },
-        {
           test: /\.s(c|a)ss$/,
           loader: [
             MiniCssExtractPlugin.loader,
@@ -162,11 +149,6 @@ module.exports = function (options) {
     },
     plugins: [
       new webpack.ProgressPlugin(percentage_handler),
-      new DtsGeneratorPlugin({
-        webpack: webpack,
-        filePath: "build/creator-presets-core.d.ts",
-        moduleName: "creator-presets-core"
-      }),
       new webpack.DefinePlugin({
         "process.env.ENVIRONMENT": JSON.stringify(options.buildType),
         "process.env.VERSION": JSON.stringify(packageJson.version),
