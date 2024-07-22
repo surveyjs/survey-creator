@@ -42,12 +42,6 @@ svc-question {
   }
 
   .sv-action-bar-item__icon {
-    margin-inline-start: calcSize(0.5);
-
-    &:last-child {
-      margin-inline-start: 0;
-    }
-
     use {
       fill: var(--ctr-survey-question-panel-toolbar-item-icon-color, $secondary);
     }
@@ -203,8 +197,10 @@ svc-question {
     }
 
     .sv-action-bar-item__icon {
-      use {
-        fill: var(--ctr-survey-question-panel-toolbar-item-icon-color, $secondary);
+      margin-inline-start: calcSize(0.5);
+
+      &:last-child {
+        margin-inline-start: 0;
       }
     }
 
@@ -218,7 +214,6 @@ svc-question {
       margin-inline-start: 0; // margin-left
       margin-inline-end: 0; // margin-right
     }
-
   }
 
   .sv-action--convertTo.sv-action--hidden {
