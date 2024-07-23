@@ -127,7 +127,12 @@ module.exports = function (options) {
         {
           test: /\.html$/,
           exclude: [/node_modules/, require.resolve('./index.html')],
-          loader: "html-loader"
+          loader: "html-loader",
+          options: {
+            minimize: {
+              removeComments: false
+            }
+          }
         },
         {
           test: /\.(svg|png)$/,
