@@ -1,19 +1,16 @@
 import React from "react";
 import { ReactElementFactory } from "survey-react-ui";
 import { PanelAdornerComponent, QuestionAdornerComponentProps } from "survey-creator-react";
-import { SurveyLocStringEditor } from "survey-creator-react";
+import { QuestionAdornerViewModel } from "survey-creator-core";
+import { QuestionPresetAdornerViewModel } from "creator-presets-core";
 
 export class PanelPresetAdornerComponent extends PanelAdornerComponent {
-  protected renderElementContent(): JSX.Element {
-    const locName = this.model.element.getLocalizableString("categoryName");
-    const categoryName = locName ? <SurveyLocStringEditor locStr={locName} /> : <b>{this.model.element.name}</b>;
-    const info = <div>
-      <span>Category name: {categoryName}</span>
-    </div>;
-    return <React.Fragment>
-      {super.renderElementContent()}
-      {info}
-    </React.Fragment>;
+  protected createQuestionViewModel(props: any): QuestionAdornerViewModel {
+    return new QuestionPresetAdornerViewModel(
+      props.componentData,
+      props.question,
+      null
+    );
   }
 }
 

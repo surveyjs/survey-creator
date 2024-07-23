@@ -497,17 +497,16 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     creator.toolbox.addItems(elements, true);
   }
   private addCategoryNamePropIntoPanel(panel: PanelModel, creator: SurveyCreatorModel): void {
-    if(!this.isDefaultPanelName(panel.name)) {
-      const locStr = panel.createCustomLocalizableObj("categoryName");
-      locStr.text = panel.name;
-      (<any>locStr).locStr = locStr;
-      (<any>locStr).creator = creator;
-      locStr.onStrChanged = (oldValue: string, newValue: string): void => {
-        if(!!newValue) {
-          panel.name = newValue;
-        }
-      };
-    }
+    const locStr = panel.createCustomLocalizableObj("categoryName");
+    locStr.text = panel.name;
+    (<any>panel).isDefaultPanel = this.isDefaultPanelName(panel.name);
+    (<any>locStr).locStr = locStr;
+    (<any>locStr).creator = creator;
+    locStr.onStrChanged = (oldValue: string, newValue: string): void => {
+      if(!!newValue) {
+        panel.name = newValue;
+      }
+    };
   }
   private isDefaultPanelName(name: string): boolean {
     if(!name) return true;
