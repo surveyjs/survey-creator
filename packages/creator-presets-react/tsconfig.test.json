@@ -3,6 +3,8 @@
   "compilerOptions": {
     "noImplicitAny": false,
     "esModuleInterop": true,
-    "allowJs": true
+    "allowJs": true,
+    "declaration": false,
+    "declarationDir": null
   }
 }

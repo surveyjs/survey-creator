@@ -17,7 +17,9 @@
       "survey-creator-core": [
         "./node_modules/survey-creator-core"
       ]
-    }
+    },
+    "declaration": true,
+    "declarationDir": "build/typings/"
   },
   "exclude": [
     "node_modules",
@@ -31,6 +33,6 @@
     "**/*.test.ts"
   ],
   "include": [
-    "src/**/*.ts"
-  ]
+    "./src/entries/index.ts",
+  ],
 }

@@ -1,16 +1,16 @@
 import React from "react";
 import { ReactElementFactory } from "survey-react-ui";
 import { QuestionAdornerComponent, QuestionAdornerComponentProps } from "survey-creator-react";
+import { QuestionAdornerViewModel } from "survey-creator-core";
+import { QuestionPresetAdornerViewModel } from "creator-presets-core";
 
 export class QuestionPresetAdornerComponent extends QuestionAdornerComponent {
-  protected renderElementContent(): JSX.Element {
-    const info = <div>
-      <span>Property name: <b>{this.model.element.name}</b></span> <span>, property type: <b>{this.model.element.getType()}</b></span>
-    </div>;
-    return <React.Fragment>
-      {super.renderElementContent()}
-      {info}
-    </React.Fragment>;
+  protected createQuestionViewModel(props: any): QuestionAdornerViewModel {
+    return new QuestionPresetAdornerViewModel(
+      props.componentData,
+      props.question,
+      null
+    );
   }
 }
 

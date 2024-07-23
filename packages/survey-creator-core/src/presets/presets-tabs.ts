@@ -5,8 +5,18 @@ export class CreatorPresetTabs extends CreatorPresetBase {
   public getPath(): string { return "tabs"; }
   protected applyCore(creator: SurveyCreatorModel): void {
     super.applyCore(creator);
-    this.applyTabs(creator, this.json["items"]);
-    const tab = this.json.activeTab;
+    const items = this.json["items"] || [];
+    let tab = this.json.activeTab || (items.length > 0 ? items[0]: "");
+    if(items.length > 0 && items.indexOf(tab) < 0) {
+      tab = items[0];
+    }
+    if(!!tab && creator.activeTab !== tab) {
+      const activePlugin = creator.getPlugin(creator.activeTab);
+      if(!!activePlugin?.deactivate) {
+        activePlugin.deactivate();
+      }
+    }
+    this.applyTabs(creator, items);
     if (tab) {
       creator.activeTab = tab === "preview" ? "test" : tab;
     }
