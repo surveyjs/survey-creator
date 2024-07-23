@@ -5,6 +5,7 @@ const fs = require("fs");
 const path = require("path");
 const RemoveEmptyScriptsPlugin = require("webpack-remove-empty-scripts");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+var DashedNamePlugin = require("../../webpack-dashed-name");
 const mergeFiles = require("merge-files");
 const packageJson = require("./package.json");
 
@@ -168,7 +169,11 @@ module.exports = function (options) {
     output: {
       path: buildPath,
       filename: "[name]" + (isProductionBuild ? ".min" : "") + ".js",
-      library: options.libraryName || "SurveyCreatorCore",
+      library: {
+        root: options.libraryName || "SurveyCreatorCore",
+        amd: '[dashedname]',
+        commonjs: '[dashedname]',
+      },
       libraryTarget: "umd",
       globalObject: 'this',
       umdNamedDefine: true
@@ -188,6 +193,7 @@ module.exports = function (options) {
       },
     },
     plugins: [
+      new DashedNamePlugin(),
       new webpack.ProgressPlugin(percentage_handler),
       new webpack.DefinePlugin({
         "process.env.ENVIRONMENT": JSON.stringify(options.buildType),
