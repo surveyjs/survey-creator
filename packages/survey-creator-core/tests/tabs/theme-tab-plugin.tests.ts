@@ -890,6 +890,25 @@ test("Theme undo redo header settings", (): any => {
   expect(themeModel["blockThemeChangedNotifications"]).toBe(0);
   expect(inheritWidthFromQuestion.value).toBe("survey");
 });
+test("Set header settings properties, binding with a property grid", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const themeModel = themePlugin.themeModel as ThemeModel;
+  const header = themeModel.header as HeaderModel;
+  const groupHeader = themePlugin.propertyGrid.survey.pages[0].getElementByName("header");
+  const headerViewContainer = groupHeader.elements[0].contentPanel;
+  const inheritWidthFromQuestion = headerViewContainer.getElementByName("inheritWidthFrom");
+
+  expect(header.inheritWidthFrom).toBe("container");
+  expect(inheritWidthFromQuestion.value).toBe("container");
+
+  header.inheritWidthFrom = "survey";
+
+  expect(header.inheritWidthFrom).toBe("survey");
+  expect(inheritWidthFromQuestion.value).toBe("survey");
+});
 
 test("Theme builder: trigger responsiveness", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
