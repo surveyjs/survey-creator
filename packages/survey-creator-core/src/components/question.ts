@@ -426,6 +426,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       id: "convertInputType",
       visibleIndex: 1,
       title: editorLocalization.getPropertyValueInEditor(propName, questionSubType),
+      disableShrink: true,
       iconName: "icon-chevron_16x16"
     };
     const newAction = this.createDropdownModel({
@@ -438,7 +439,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       }
     });
 
-    newAction.disableShrink = true;
     this.surveyElement.registerFunctionOnPropertyValueChanged(
       propName,
       () => {
@@ -467,7 +467,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       title: options.actionData.title,
       enabled: options.actionData.enabled,
       visibleIndex: options.actionData.visibleIndex,
-      disableShrink: false,
+      disableShrink: options.actionData.disableShrink,
       location: "start",
       action: (newType) => {
       },

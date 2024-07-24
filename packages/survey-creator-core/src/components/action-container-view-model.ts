@@ -26,7 +26,7 @@ export class SurveyElementActionContainer extends AdaptiveActionContainer {
         return;
       }
       if (this.needToShrink(item, shrinkStart, shrinkEnd)) {
-        item.mode = item.innerItem.iconName ? "small" : "removed";
+        item.mode = !item.innerItem.disableShrink && item.innerItem.iconName ? "small" : "removed";
         return;
       }
       item.mode = "large";
@@ -35,7 +35,7 @@ export class SurveyElementActionContainer extends AdaptiveActionContainer {
   private calcItemSize(item: Action, shrinkStart: boolean, shrinkEnd: boolean, exclude: string[] = []) {
     if (exclude.indexOf(item.id) != -1) return 0;
     if (this.needToShrink(item, shrinkStart, shrinkEnd)) {
-      if (!item.innerItem.iconName) return 0;
+      if (item.innerItem.disableShrink || !item.innerItem.iconName) return 0;
       return item.minDimension;
     }
     return item.maxDimension;
