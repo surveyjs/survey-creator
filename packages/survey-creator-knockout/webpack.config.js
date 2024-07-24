@@ -5,6 +5,7 @@ const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+var DashedNamePlugin = require("../../webpack-dashed-name");
 const packageJson = require("./package.json");
 const fs = require("fs");
 
@@ -127,7 +128,12 @@ module.exports = function (options) {
         {
           test: /\.html$/,
           exclude: [/node_modules/, require.resolve('./index.html')],
-          loader: "html-loader"
+          loader: "html-loader",
+          options: {
+            minimize: {
+              removeComments: false
+            }
+          }
         },
         {
           test: /\.(svg|png)$/,
@@ -141,7 +147,11 @@ module.exports = function (options) {
     output: {
       path: buildPath,
       filename: "[name]" + (isProductionBuild ? ".min" : "") + ".js",
-      library: options.libraryName || "SurveyCreator",
+      library: {
+        root: options.libraryName || "SurveyCreator",
+        amd: '[dashedname]',
+        commonjs: '[dashedname]',
+      },
       libraryTarget: "umd",
       globalObject: "this",
       umdNamedDefine: true
@@ -173,6 +183,7 @@ module.exports = function (options) {
       },
     },
     plugins: [
+      new DashedNamePlugin(),
       new webpack.ProgressPlugin(percentage_handler),
       new webpack.DefinePlugin({
         "process.env.ENVIRONMENT": JSON.stringify(options.buildType),
