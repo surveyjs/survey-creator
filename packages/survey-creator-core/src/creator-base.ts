@@ -3847,6 +3847,9 @@ export function initializeDesignTimeSurveyModel(model: any, creator: SurveyCreat
     if (opt.wrapperName === "itemvalue") {
       opt.componentName = getItemValueWrapperComponentName(opt.item, opt.element);
     }
+    if(opt.wrapperName === "string" && !creator.readOnly && isStringEditable(opt.element, opt.reason)) {
+      opt.componentName = editableStringRendererName;
+    }
     opt.componentName = opt.componentName || compName;
   });
   model.onElementWrapperComponentData.add((_, opt) => {
@@ -3860,25 +3863,11 @@ export function initializeDesignTimeSurveyModel(model: any, creator: SurveyCreat
     if (opt.wrapperName === "itemvalue") {
       opt.data = getItemValueWrapperComponentData(opt.item, opt.element, creator);
     }
+    if(opt.wrapperName === "string" && !creator.readOnly && isStringEditable(opt.element, opt.data.name)) {
+      opt.data = { creator: creator, element: opt.element, locStr: opt.data };
+    }
     opt.data = opt.data || data;
   });
-  model.getRendererForString = (element: Base, name: string): string => {
-    if (!creator.readOnly && isStringEditable(element, name)) {
-      return editableStringRendererName;
-    }
-    return undefined;
-  };
-
-  model.getRendererContextForString = (element: Base, locStr: LocalizableString): any => {
-    if (!creator.readOnly && isStringEditable(element, locStr.name)) {
-      return {
-        creator: creator,
-        element,
-        locStr
-      };
-    }
-    return <any>locStr;
-  };
 }
 
 function isContentElement(element: any) {
