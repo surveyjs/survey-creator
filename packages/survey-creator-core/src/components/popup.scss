@@ -73,7 +73,7 @@ survey-creator:not(.svd-simulator-content) {
       background-color: transparent;
 
       &::placeholder {
-        color: var(--ctr-list-search-text-color-placeholder, $foreground-dim-light);
+        color: var(--ctr-list-search-text-color-placeholder, $foreground-light);
       }
     }
 
