@@ -5,6 +5,7 @@ export * from "../src/preset-question-ranking";
 import { PresetItemValue } from "../src/preset-question-ranking";
 import { SurveyModel, Question } from "survey-core";
 import { SurveyCreatorModel, ICreatorPresetData, QuestionToolbox } from "survey-creator-core";
+import { QuestionPresetAdornerViewModel } from "../src/components/question";
 export * from "../src/components/embedded-creator";
 
 test("Preset edit model, create pages", () => {
@@ -719,4 +720,37 @@ test("Preset edit model, Property grid toolbox", () => {
   expect(newPanel2.elements).toHaveLength(1);
   expect(newPanel2.questions[0].name).toEqual("focusOnFirstError");
   expect(propGridCreator.toolbox.actions).toHaveLength(2);
+});
+test("Preset edit model, Property grid change the new category name", () => {
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  survey.currentPage = survey.getPageByName("page_propertyGrid_definition");
+  survey.setValue("propertyGrid_definition_selector", "survey");
+  const propGridCreator = getPropGridCreator(survey);
+  expect(propGridCreator.toolbox.actions).toHaveLength(1);
+  const valPanel = propGridCreator.survey.getPanelByName("validation");
+  expect(valPanel).toBeTruthy();
+  propGridCreator.deleteElement(valPanel);
+  expect(propGridCreator.toolbox.actions).toHaveLength(3);
+  propGridCreator.selectElement(propGridCreator.survey.getQuestionByName("title"));
+  propGridCreator.clickToolboxItem(propGridCreator.toolbox.getItemByName("panel").json);
+  const newPanel1 = propGridCreator.survey.getPanelByName("category1");
+  expect(newPanel1).toBeTruthy();
+  const panel1Adorner = new QuestionPresetAdornerViewModel(editor.creator, newPanel1, null);
+  const action1 = panel1Adorner.actionContainer.getActionById("svc_category_name");
+  expect(action1).toBeTruthy();
+  const locCategoryName1 = action1.locTitle;
+  expect(locCategoryName1.text).toBe("category1");
+  expect(action1.enabled).toBeTruthy();
+  locCategoryName1.text = "my_new_category";
+  expect(locCategoryName1.text).toBe("my_new_category");
+  expect(newPanel1.name).toBe("my_new_category");
+
+  const newPanel2 = propGridCreator.survey.getPanelByName("general");
+  const panel2Adorner = new QuestionPresetAdornerViewModel(editor.creator, newPanel2, null);
+  const action2 = panel2Adorner.actionContainer.getActionById("svc_category_name");
+  expect(action2).toBeTruthy();
+  const locCategoryName2 = action2.locTitle;
+  expect(locCategoryName2.text).toBe("general");
+  expect(action2.enabled).toBeFalsy();
 });
