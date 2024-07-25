@@ -1,4 +1,5 @@
-survey-creator:not(.svd-simulator-content) {
+survey-creator:not(.svd-simulator-content),
+.svc-creator:not(.svd-simulator-content) {
   .sv-popup {
     .sd-btn {
       background: var(--ctr-button-background-color, $background);
@@ -61,6 +62,12 @@ survey-creator:not(.svd-simulator-content) {
   .sv-popup--dropdown {
     .sv-popup__body-content {
       background-color: var(--ctr-contextual-menu-background-color, $background);
+    }
+  }
+
+  .sv-popup--dropdown.toolbox-subtypes {
+    .sv-popup__body-content {
+      background: unset;
     }
   }
 
