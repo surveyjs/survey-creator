@@ -1073,28 +1073,30 @@ test("Check onOpenFileChooser is called and context is passed", (): any => {
   themePlugin.activate();
   const propertyGridSurvey = themePlugin.propertyGrid.survey;
   const themeModel = themePlugin.themeModel;
-  const origGetElementById = document.getElementById;
-  document.getElementById = () => ({} as any);
-  try {
-    const backgroundImageEditor = propertyGridSurvey.getQuestionByName("backgroundImage") as QuestionFileModel;
-    backgroundImageEditor.chooseFile(new MouseEvent("click"));
-    expect(log).toBe("->onOpenFileChooser->uploadFile");
-    expect(lastContext).toStrictEqual({ element: themePlugin.themeModel, elementType: "theme", propertyName: "backgroundImage" });
-    expect(lastUploadContext).toStrictEqual({ element: themePlugin.themeModel, item: undefined, elementType: "theme", propertyName: "backgroundImage" });
-    expect(lastUploadOptions.elementType).toBe("theme");
-    expect(lastUploadOptions.propertyName).toBe("backgroundImage");
+  const backgroundImageEditor = propertyGridSurvey.getQuestionByName("backgroundImage") as QuestionFileModel;
+  const testContainer = document.createElement("div");
+  const testInput = document.createElement("input");
+  testContainer.appendChild(testInput);
+  testInput.id = backgroundImageEditor.inputId;
+  backgroundImageEditor["rootElement"] = testContainer;
+  backgroundImageEditor.chooseFile(new MouseEvent("click"));
+  expect(log).toBe("->onOpenFileChooser->uploadFile");
+  expect(lastContext).toStrictEqual({ element: themePlugin.themeModel, elementType: "theme", propertyName: "backgroundImage" });
+  expect(lastUploadContext).toStrictEqual({ element: themePlugin.themeModel, item: undefined, elementType: "theme", propertyName: "backgroundImage" });
+  expect(lastUploadOptions.elementType).toBe("theme");
+  expect(lastUploadOptions.propertyName).toBe("backgroundImage");
 
-    const groupHeader = themePlugin.propertyGrid.survey.pages[0].getElementByName("header");
-    const headerBackgroundImageEditor = groupHeader.elements[0].contentPanel.getElementByName("backgroundImage");
-    headerBackgroundImageEditor.chooseFile(new MouseEvent("click"));
-    expect(log).toBe("->onOpenFileChooser->uploadFile->onOpenFileChooser->uploadFile");
-    expect(lastContext).toStrictEqual({ element: themeModel.header, elementType: "header", propertyName: "backgroundImage" });
-    expect(lastUploadContext).toStrictEqual({ element: themeModel.header, elementType: "header", propertyName: "backgroundImage", item: undefined });
-    expect(lastUploadOptions.elementType).toBe("header");
-    expect(lastUploadOptions.propertyName).toBe("backgroundImage");
-  } finally {
-    document.getElementById = origGetElementById;
-  }
+  const groupHeader = themePlugin.propertyGrid.survey.pages[0].getElementByName("header");
+  const headerBackgroundImageEditor = groupHeader.elements[0].contentPanel.getElementByName("backgroundImage");
+  testInput.id = headerBackgroundImageEditor.inputId;
+  headerBackgroundImageEditor["rootElement"] = testContainer;
+  headerBackgroundImageEditor.chooseFile(new MouseEvent("click"));
+  expect(log).toBe("->onOpenFileChooser->uploadFile->onOpenFileChooser->uploadFile");
+  expect(lastContext).toStrictEqual({ element: themeModel.header, elementType: "header", propertyName: "backgroundImage" });
+  expect(lastUploadContext).toStrictEqual({ element: themeModel.header, elementType: "header", propertyName: "backgroundImage", item: undefined });
+  expect(lastUploadOptions.elementType).toBe("header");
+  expect(lastUploadOptions.propertyName).toBe("backgroundImage");
+
 });
 
 test("Modify property grid: add/hide properties", (): any => {
