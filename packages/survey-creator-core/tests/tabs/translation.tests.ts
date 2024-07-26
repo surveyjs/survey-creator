@@ -2106,3 +2106,41 @@ test("Creator read-only", (): any => {
   const action = creator.toolbar.getActionById("svc-translation-import");
   expect(action.enabled).toBeFalsy();
 });
+test("onTranslationStringVisibility for imageLink, Issue #5734", (): void => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    "elements": [
+      {
+        "type": "imagepicker",
+        "name": "question1",
+        "choices": [
+          {
+            "value": "spanishUrl",
+            "imageLink": {
+              "default": "abc",
+              "es": "abc-es"
+            }
+          },
+          {
+            "value": "Image 2",
+            "imageLink": "edf"
+          }
+        ]
+      }
+    ]
+  };
+  let isFiredCorrectly = false;
+  creator.onTranslationStringVisibility.add((sender, options) => {
+    if (options.propertyName === "imageLink") {
+      if(!options.visible) isFiredCorrectly = true;
+      options.visible = true;
+    }
+  });
+  const tabTranslation = new TabTranslationPlugin(creator);
+  tabTranslation.activate();
+  const translation = tabTranslation.model;
+  expect(isFiredCorrectly).toBeTruthy();
+  const items = translation.root.groups[0].groups[0].groups[0].items;
+  expect(items).toHaveLength(4);
+  expect(items[1].name).toBe("spanishUrl.imageLink");
+});

@@ -271,7 +271,7 @@ export interface ITranslationLocales {
   translateItemAfterRender(item: TranslationItem, el: any, locale: string);
   fireOnObjCreating(obj: Base);
   removeLocale(loc: string): void;
-  canShowProperty(obj: Base, prop: JsonObjectProperty, isEmpty: boolean): boolean;
+  canShowProperty(obj: Base, prop: JsonObjectProperty, isEmpty: boolean, isShowing: boolean): boolean;
   getEditLocale(): string;
   getProcessedTranslationItemText(locale: string, name: ILocalizableString, newValue: string, context: any): string;
 }
@@ -457,13 +457,15 @@ export class TranslationGroup extends TranslationItemBase {
     });
   }
   private getLocalizedProperties(obj: any): Array<JsonObjectProperty> {
-    var res = [];
-    var properties = Serializer.getPropertiesByObj(obj);
-    for (var i = 0; i < properties.length; i++) {
-      var property = properties[i];
-      if (!property.isSerializable || !property.isLocalizable || property.type === "url" || property.type === "file") continue;
-      if (property.readOnly || !property.visible) continue;
-      res.push(property);
+    const res = [];
+    const properties = Serializer.getPropertiesByObj(obj);
+    for (let i = 0; i < properties.length; i++) {
+      const property = properties[i];
+      if (property.readOnly || !property.visible || !property.isSerializable || !property.isLocalizable) continue;
+      const isShowing = ["url", "file"].indexOf(property.type) < 0;
+      if(this.canShowProperty(property, !!obj[property.name], isShowing)) {
+        res.push(property);
+      }
     }
     return res;
   }
@@ -480,8 +482,8 @@ export class TranslationGroup extends TranslationItemBase {
     }
     return res;
   }
-  private canShowProperty(property: JsonObjectProperty, isEmpty: boolean): boolean {
-    if (!!this.translation && !this.translation.canShowProperty(this.obj, property, isEmpty)) return false;
+  private canShowProperty(property: JsonObjectProperty, isEmpty: boolean, isShowing: boolean = true): boolean {
+    if (!!this.translation && !this.translation.canShowProperty(this.obj, property, isEmpty, isShowing)) return false;
     return true;
   }
   private createTranslationItem(obj: any, property: JsonObjectProperty): TranslationItem {
@@ -1100,8 +1102,8 @@ export class Translation extends Base implements ITranslationLocales {
       this.settingsSurvey.mode = mode;
     }
   }
-  public canShowProperty(obj: Base, prop: JsonObjectProperty, isEmpty: boolean): boolean {
-    const result = !isEmpty || SurveyHelper.isPropertyVisible(obj, prop, this.options);
+  public canShowProperty(obj: Base, prop: JsonObjectProperty, isEmpty: boolean, isShowing: boolean = true): boolean {
+    const result = isShowing !== false && (!isEmpty || SurveyHelper.isPropertyVisible(obj, prop, this.options));
     return this.translationStringVisibilityCallback ? this.translationStringVisibilityCallback(obj, prop.name, result) : result;
   }
   public get defaultLocale(): string {
