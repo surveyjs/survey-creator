@@ -484,7 +484,7 @@ export class TranslationGroup extends TranslationItemBase {
   }
   private canShowProperty(property: JsonObjectProperty, isEmpty: boolean, isShowing: boolean = true): boolean {
     if (!!this.translation && !this.translation.canShowProperty(this.obj, property, isEmpty, isShowing)) return false;
-    return true;
+    return isShowing;
   }
   private createTranslationItem(obj: any, property: JsonObjectProperty): TranslationItem {
     const defaultValue = this.getDefaultValue(obj, property);
