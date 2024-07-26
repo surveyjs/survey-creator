@@ -405,9 +405,12 @@ export interface ConditionGetQuestionListEvent {
    * A list of questions available for selection.
    */
   list: any[];
+  /**
+   * A list of [calculated values](https://surveyjs.io/form-library/documentation/design-survey/conditional-logic#calculated-values) and [variables](https://surveyjs.io/form-library/documentation/design-survey/conditional-logic#variables) available for selection.
+   */
   variables: string[];
   /**
-   * The sort order of questions within the list: `"asc"` (default) or `"none"`. Set this property to `"none"` to disable sorting.
+   * The sort order of questions within both list: `"asc"` (default) or `"none"`. Set this property to `"none"` to disable sorting.
    */
   sortOrder: string;
 }
