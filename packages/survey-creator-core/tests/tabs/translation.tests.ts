@@ -316,7 +316,7 @@ test("stringsSurvey and filterPage + one page", () => {
   translation.filteredPage = survey.pages[0];
   expect(translation.stringsSurvey.getAllQuestions()).toHaveLength(1);
 });
-test("Translation show All strings and property visibility", () => {
+test("Translation show All strings and property visibility, #1", () => {
   const creator = new CreatorTester();
   creator.JSON = {
     completedHtml: "Test",
@@ -328,7 +328,7 @@ test("Translation show All strings and property visibility", () => {
     ]
   };
   creator.onShowingProperty.add((sender, options) => {
-    options.canShow = options.property.name == "title";
+    options.canShow = ["title", "completedHtml"].indexOf(options.property.name) > -1;
   });
   const tabTranslation = new TabTranslationPlugin(creator);
   tabTranslation.activate();
@@ -1177,7 +1177,7 @@ test("Test settings.translation.maximumSelectedLocales", () => {
   expect(visLocales[1]).toEqual("fr");
   settings.translation.maximumSelectedLocales = oldMaximumSelectedLocales;
 });
-test("Translation show All strings and property visibility", () => {
+test("Translation show All strings and property visibility, #2", () => {
   const creator = new CreatorTester();
   creator.JSON = {
     elements: [

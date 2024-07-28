@@ -483,7 +483,7 @@ export class TranslationGroup extends TranslationItemBase {
     return res;
   }
   private canShowProperty(property: JsonObjectProperty, isEmpty: boolean, isShowing: boolean = true): boolean {
-    if (!!this.translation && !this.translation.canShowProperty(this.obj, property, isEmpty, isShowing)) return false;
+    if (!!this.translation) return this.translation.canShowProperty(this.obj, property, isEmpty, isShowing);
     return isShowing;
   }
   private createTranslationItem(obj: any, property: JsonObjectProperty): TranslationItem {
@@ -1103,7 +1103,7 @@ export class Translation extends Base implements ITranslationLocales {
     }
   }
   public canShowProperty(obj: Base, prop: JsonObjectProperty, isEmpty: boolean, isShowing: boolean = true): boolean {
-    const result = isShowing !== false && (!isEmpty || SurveyHelper.isPropertyVisible(obj, prop, this.options));
+    const result = isShowing && (!isEmpty || SurveyHelper.isPropertyVisible(obj, prop, this.options));
     return this.translationStringVisibilityCallback ? this.translationStringVisibilityCallback(obj, prop.name, result) : result;
   }
   public get defaultLocale(): string {
