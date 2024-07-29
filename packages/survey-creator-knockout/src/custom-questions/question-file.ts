@@ -80,5 +80,5 @@ ko.components.register("svc-file-edit-question", {
       return params;
     },
   },
-  template: template,
+  template: template.default,
 });

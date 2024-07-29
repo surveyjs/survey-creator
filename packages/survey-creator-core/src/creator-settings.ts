@@ -176,7 +176,7 @@ export var settings = {
     allowCollapseSidebar: true
   },
   jsonEditor: {
-    indentation: 1,
+    indentation: 2,
     exportFileName: "survey.json"
   }
 };
@@ -216,6 +216,7 @@ export interface ISurveyCreatorOptions {
   rootElement?: HTMLElement;
   previewShowResults: boolean;
   getObjectDisplayName(obj: Base, area: string, reason: string, displayName: string): string;
+  getElementAddornerCssCallback(obj: Base, className: string): string;
   onCanShowPropertyCallback(
     object: any,
     property: JsonObjectProperty,
@@ -299,7 +300,8 @@ export interface ISurveyCreatorOptions {
     propertyName: string,
     obj: Base,
     editor: any,
-    list: any[]
+    list: any[],
+    variables: string[]
   ): string;
   onConditionGetTitleCallback(
     expression: string,
@@ -367,6 +369,7 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   ): boolean {
     return true;
   }
+  getElementAddornerCssCallback(obj: Base, className: string): string { return className; }
   onPropertyGridSurveyCreatedCallback(
     object: any,
     survey: SurveyModel
@@ -462,7 +465,8 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
     propertyName: string,
     obj: Base,
     editor: any,
-    list: any[]
+    list: any[],
+    variables: string[]
   ): string { return "asc"; }
   onConditionGetTitleCallback(
     expression: string,

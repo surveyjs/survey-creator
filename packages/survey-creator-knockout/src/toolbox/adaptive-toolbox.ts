@@ -17,5 +17,5 @@ ko.components.register("svc-adaptive-toolbox", {
       return model;
     },
   },
-  template: template
+  template: template.default
 });

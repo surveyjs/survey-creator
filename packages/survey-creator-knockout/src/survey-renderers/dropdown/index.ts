@@ -8,7 +8,7 @@ export class DropdownEditorViewModel {
   public koValue: ko.Observable<any>;
   public isExpanded: ko.Observable<boolean> = ko.observable(false);
   public isFocused: ko.Observable<boolean> = ko.observable(false);
-  constructor(public question: any) {}
+  constructor(public question: any) { }
 
   public selectItem = (itemValue: ItemValue) => {
     this.question.value = itemValue.value;
@@ -31,7 +31,7 @@ ko.components.register("sjs-dropdown", {
       return new DropdownEditorViewModel(params.question);
     },
   },
-  template: template,
+  template: template.default,
 });
 
 RendererFactory.Instance.registerRenderer(

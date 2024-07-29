@@ -274,3 +274,45 @@ test("Get property name from pe. based on class name", () => {
   expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Titolo");
   editorLocalization.defaultLocale = "en";
 });
+test("Support preset locale strings", () => {
+  editorLocalization.currentLocale = "";
+  editorLocalization.defaultLocale = "en";
+  editorLocalization.reset();
+  expect(editorLocalization.getString("qt.text")).toEqual("Single-Line Input");
+  editorLocalization.getLocale().pe.survey.title = "Survey title";
+  expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Survey title");
+  editorLocalization.defaultLocale = "fr";
+  expect(editorLocalization.getString("qt.text")).toEqual("Champ de saisie");
+  expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Titre du questionnaire");
+  editorLocalization.defaultLocale = "it";
+  expect(editorLocalization.getString("qt.text")).toEqual("Testo semplice");
+  expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Titolo");
+
+  editorLocalization.presetStrings = {
+    en: { qt: { text: "Text - en preset" }, pe: { survey: { title: "Survey title - en preset" } } },
+    fr: { qt: { text: "Text - fr preset" }, pe: { survey: { title: "Survey title - fr preset" } } },
+    it: { qt: { text: "Text - it preset" }, pe: { survey: { title: "Survey title - it preset" } } }
+  };
+  editorLocalization.defaultLocale = "";
+  expect(editorLocalization.getString("qt.text")).toEqual("Text - en preset");
+  expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Survey title - en preset");
+  editorLocalization.defaultLocale = "fr";
+  expect(editorLocalization.getString("qt.text")).toEqual("Text - fr preset");
+  expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Survey title - fr preset");
+  editorLocalization.defaultLocale = "it";
+  expect(editorLocalization.getString("qt.text")).toEqual("Text - it preset");
+  expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Survey title - it preset");
+
+  editorLocalization.defaultLocale = "";
+  editorLocalization.presetStrings = undefined;
+  expect(editorLocalization.getString("qt.text")).toEqual("Single-Line Input");
+  expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Survey title");
+  editorLocalization.defaultLocale = "fr";
+  expect(editorLocalization.getString("qt.text")).toEqual("Champ de saisie");
+  expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Titre du questionnaire");
+  editorLocalization.defaultLocale = "it";
+  expect(editorLocalization.getString("qt.text")).toEqual("Testo semplice");
+  expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Titolo");
+
+  editorLocalization.defaultLocale = "";
+});

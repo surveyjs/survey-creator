@@ -66,8 +66,8 @@ test("Convert question", () => {
   var q2 = <QuestionCommentModel>panel.addNewQuestion("comment");
   q1.choices = ["myitem1", "myitem2"];
   q2.placeholder = "type here";
-  QuestionConverter.convertObject(q1, "checkbox");
-  QuestionConverter.convertObject(q2, "text");
+  QuestionConverter.convertObject(q1, "checkbox", q1.toJSON());
+  QuestionConverter.convertObject(q2, "text", q2.toJSON());
   expect((<Base>(<any>page.elements[1])).getType()).toEqual("checkbox");
   expect((<Base>(<any>panel.elements[0])).getType()).toEqual("text");
   var newQ1 = <QuestionCheckboxModel>page.elements[1];
@@ -115,14 +115,14 @@ test("Convert to custom component", () => {
   });
   const survey = new SurveyModel({ questions: [{ type: "text", name: "q1" }] });
   const questionText = survey.getAllQuestions()[0];
-  const component = QuestionConverter.convertObject(questionText, "fullname");
+  const component = QuestionConverter.convertObject(questionText, "fullname", questionText.toJSON());
   expect(component.name).toBe("q1");
   ComponentCollection.Instance.clear();
 });
 test("Convert choices to rateValues", () => {
   const survey = new SurveyModel({ questions: [{ type: "radiogroup", name: "q1", choices: ["i1", "i2"] }] });
   const src = survey.getAllQuestions()[0];
-  const dest = <QuestionRatingModel>QuestionConverter.convertObject(src, "rating");
+  const dest = <QuestionRatingModel>QuestionConverter.convertObject(src, "rating", src.toJSON());
   expect(dest.getType()).toBe("rating");
   expect(dest.rateValues).toHaveLength(2);
   expect(dest.rateValues[0].value).toEqual("i1");
@@ -130,7 +130,7 @@ test("Convert choices to rateValues", () => {
 test("Convert rateValues to choices", () => {
   const survey = new SurveyModel({ questions: [{ type: "rating", name: "q1", rateValues: ["i1", "i2"] }] });
   const src = survey.getAllQuestions()[0];
-  const dest = <QuestionRadiogroupModel>QuestionConverter.convertObject(src, "radiogroup");
+  const dest = <QuestionRadiogroupModel>QuestionConverter.convertObject(src, "radiogroup", src.toJSON());
   expect(dest.getType()).toBe("radiogroup");
   expect(dest.choices).toHaveLength(2);
   expect(dest.choices[0].value).toEqual("i1");
@@ -138,7 +138,8 @@ test("Convert rateValues to choices", () => {
 test("Do not convert default choices", () => {
   const survey = new SurveyModel({ questions: [{ type: "radiogroup", name: "q1", choices: ["item1", "item2", "item3"] }] });
   const src = survey.getAllQuestions()[0];
-  const dest = <QuestionRatingModel>QuestionConverter.convertObject(src, "rating", { type: "radiogroup", name: "question1", choices: ["item1", "item2", "item3"] });
+  const objJSON = QuestionConverter.getObjJSON(src, { type: "radiogroup", name: "question1", choices: ["item1", "item2", "item3"] });
+  const dest = <QuestionRatingModel>QuestionConverter.convertObject(src, "rating", objJSON);
   expect(dest.getType()).toBe("rating");
   expect(dest.rateValues).toHaveLength(0);
 });
@@ -146,7 +147,8 @@ test("Convert text question to image", () => {
   const survey = new SurveyModel();
   const page = survey.addNewPage();
   const q1 = <QuestionRadiogroupModel>page.addNewQuestion("text");
-  QuestionConverter.convertObject(q1, "image", {}, { imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg" });
+  const objJSON = QuestionConverter.getObjJSON(q1, {});
+  QuestionConverter.convertObject(q1, "image", objJSON, { imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg" });
   expect(page.questions[0].getType()).toEqual("image");
   const newQ1 = <QuestionImageModel>page.questions[0];
   expect(newQ1.imageLink).toEqual("https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg");
@@ -163,10 +165,10 @@ test("Convert text and radio question to image picker", () => {
   const defaultJSON = settings.toolbox.defaultJSON.imagepicker;
   const defaultObjJSON = settings.toolbox.defaultJSON.radiogroup;
   q3.choices = defaultObjJSON.choices;
-  QuestionConverter.convertObject(q1, "imagepicker", undefined, defaultJSON);
-  QuestionConverter.convertObject(q2, "imagepicker", defaultObjJSON, defaultJSON);
-  QuestionConverter.convertObject(q3, "imagepicker", defaultObjJSON, defaultJSON);
-  QuestionConverter.convertObject(q4, "imagepicker", defaultObjJSON, defaultJSON);
+  QuestionConverter.convertObject(q1, "imagepicker", QuestionConverter.getObjJSON(q1, undefined), defaultJSON);
+  QuestionConverter.convertObject(q2, "imagepicker", QuestionConverter.getObjJSON(q2, defaultObjJSON), defaultJSON);
+  QuestionConverter.convertObject(q3, "imagepicker", QuestionConverter.getObjJSON(q3, defaultObjJSON), defaultJSON);
+  QuestionConverter.convertObject(q4, "imagepicker", QuestionConverter.getObjJSON(q4, defaultObjJSON), defaultJSON);
   expect(page.questions[0].getType()).toEqual("imagepicker");
   expect(page.questions[1].getType()).toEqual("imagepicker");
   expect(page.questions[2].getType()).toEqual("imagepicker");
@@ -227,7 +229,7 @@ test("Convert matrix question", () => {
   expect(q1.columns[0].name).toEqual("Column 1");
   expect(q1.columns[1].title).toEqual("Col2");
   expect(q1.columns[1].name).toEqual("Column 2");
-  QuestionConverter.convertObject(q1, "matrix_new");
+  QuestionConverter.convertObject(q1, "matrix_new", q1.toJSON());
   expect((<Base>(<any>page.elements[0])).getType()).toEqual("matrix_new");
   var newQ1 = <QuestionMatrixModel>page.elements[0];
   expect(newQ1.columns[0].text).toEqual("Column 1");
@@ -241,7 +243,7 @@ test("Convert matrix question", () => {
   expect(q2.columns[0].value).toEqual("Column 1");
   expect(q2.columns[1].text).toEqual("Col2");
   expect(q2.columns[1].value).toEqual("Column 2");
-  QuestionConverter.convertObject(q2, "matrixdropdown_new");
+  QuestionConverter.convertObject(q2, "matrixdropdown_new", q2.toJSON());
   expect((<Base>(<any>page.elements[1])).getType()).toEqual("matrixdropdown_new");
   var newQ2 = <QuestionMatrixDropdownModel>page.elements[1];
   expect(newQ2.columns[0].title).toEqual("Column 1");
@@ -255,7 +257,7 @@ test("Convert matrix question", () => {
   expect(q1.columns[0].name).toEqual("Column 1");
   expect(q1.columns[1].title).toEqual("Col2");
   expect(q1.columns[1].name).toEqual("Column 2");
-  QuestionConverter.convertObject(q1, "matrix_new");
+  QuestionConverter.convertObject(q1, "matrix_new", q1.toJSON());
   expect((<Base>(<any>page.elements[2])).getType()).toEqual("matrix_new");
   newQ1 = <QuestionMatrixModel>page.elements[2];
   expect(newQ1.columns[0].text).toEqual("Column 1");
@@ -269,7 +271,7 @@ test("Convert matrix question", () => {
   expect(q2.columns[0].value).toEqual("Column 1");
   expect(q2.columns[1].text).toEqual("Col2");
   expect(q2.columns[1].value).toEqual("Column 2");
-  QuestionConverter.convertObject(q2, "matrixdropdown");
+  QuestionConverter.convertObject(q2, "matrixdropdown", q2.toJSON());
   expect((<Base>(<any>page.elements[3])).getType()).toEqual("matrixdropdown");
   newQ2 = <QuestionMatrixDropdownModel>page.elements[3];
   expect(newQ2.columns[0].title).toEqual("Column 1");
@@ -281,14 +283,14 @@ test("Convert text to radio with unset default questions", () => {
   const survey = new SurveyModel();
   const page = survey.addNewPage();
   const q1 = page.addNewQuestion("text");
-  QuestionConverter.convertObject(q1, "radiogroup", {}, { choices: ["Item 1", "Item 2", "Item 3"] });
+  QuestionConverter.convertObject(q1, "radiogroup", QuestionConverter.getObjJSON(q1, {}), { choices: ["Item 1", "Item 2", "Item 3"] });
   expect(page.questions[0].getType()).toEqual("radiogroup");
   const newQ1 = <QuestionRadiogroupModel>page.questions[0];
   expect(newQ1.choices).toHaveLength(3);
   expect(newQ1.choices[0].value).toEqual("Item 1");
 
   const q2 = page.addNewQuestion("text");
-  QuestionConverter.convertObject(q2, "radiogroup");
+  QuestionConverter.convertObject(q2, "radiogroup", q2.toJSON());
   expect((<Base>(<any>page.elements[1])).getType()).toEqual("radiogroup");
   var newQ2 = <QuestionImagePickerModel>page.questions[1];
   expect(newQ2.choices).toHaveLength(3);
@@ -306,13 +308,13 @@ test("Convert matrix to matrix dropdown and back", () => {
     ]
   });
   const q1 = <QuestionMatrixModel>survey.getQuestionByName("q1");
-  const q2 = <QuestionMatrixDropdownModel>QuestionConverter.convertObject(q1, "matrixdropdown");
+  const q2 = <QuestionMatrixDropdownModel>QuestionConverter.convertObject(q1, "matrixdropdown", q1.toJSON());
   expect(q2.getType()).toEqual("matrixdropdown");
   expect(q2.columns).toHaveLength(4);
   expect(q2.columns[0].name).toEqual("col1");
   expect(q2.columns[1].name).toEqual("col2");
   expect(q2.columns[1].title).toEqual("Column 2");
-  const q3 = <QuestionMatrixModel>QuestionConverter.convertObject(q2, "matrix");
+  const q3 = <QuestionMatrixModel>QuestionConverter.convertObject(q2, "matrix", q2.toJSON());
   expect(q3.getType()).toEqual("matrix");
   expect(q3.columns).toHaveLength(4);
   expect(q3.columns[0].value).toEqual("col1");
@@ -331,13 +333,13 @@ test("Convert matrix to matrix dynamic and back", () => {
     ]
   });
   const q1 = <QuestionMatrixModel>survey.getQuestionByName("q1");
-  const q2 = <QuestionMatrixDynamicModel>QuestionConverter.convertObject(q1, "matrixdynamic");
+  const q2 = <QuestionMatrixDynamicModel>QuestionConverter.convertObject(q1, "matrixdynamic", q1.toJSON());
   expect(q2.getType()).toEqual("matrixdynamic");
   expect(q2.columns).toHaveLength(4);
   expect(q2.columns[0].name).toEqual("col1");
   expect(q2.columns[1].name).toEqual("col2");
   expect(q2.columns[1].title).toEqual("Column 2");
-  const q3 = <QuestionMatrixModel>QuestionConverter.convertObject(q2, "matrix");
+  const q3 = <QuestionMatrixModel>QuestionConverter.convertObject(q2, "matrix", q2.toJSON());
   expect(q3.getType()).toEqual("matrix");
   expect(q3.columns).toHaveLength(4);
   expect(q3.columns[0].value).toEqual("col1");
@@ -359,12 +361,12 @@ test("Convert panel to panel dynamic and back", () => {
     ]
   });
   const panel1 = <PanelModel>survey.getPanelByName("panel");
-  const q1 = <QuestionPanelDynamicModel>QuestionConverter.convertObject(<any>panel1, "paneldynamic");
+  const q1 = <QuestionPanelDynamicModel>QuestionConverter.convertObject(<any>panel1, "paneldynamic", panel1.toJSON());
   expect(q1.getType()).toEqual("paneldynamic");
   expect(q1.title).toEqual("Panel");
   expect(q1.templateElements).toHaveLength(2);
   expect(q1.templateElements[1].name).toEqual("q2");
-  const panel2 = <PanelModel><any>QuestionConverter.convertObject(q1, "panel");
+  const panel2 = <PanelModel><any>QuestionConverter.convertObject(q1, "panel", q1.toJSON());
   expect(panel2.getType()).toEqual("panel");
   expect(panel2.title).toEqual("Panel");
   expect(panel2.elements).toHaveLength(2);
@@ -387,7 +389,7 @@ test("Convert text to custom widget barrating", () => {
   const survey = new SurveyModel();
   const page = survey.addNewPage();
   const q1 = <QuestionRadiogroupModel>page.addNewQuestion("text");
-  QuestionConverter.convertObject(q1, barType);
+  QuestionConverter.convertObject(q1, barType, q1.toJSON());
   expect((<Base>(<any>page.elements[0])).getType()).toEqual(barType);
   const newQ1 = <QuestionImagePickerModel>page.elements[0];
   expect(newQ1.choices).toHaveLength(5);
@@ -419,16 +421,16 @@ test("Remove incorrect validators, Bug#4228", () => {
   expect(q1.validators).toHaveLength(2);
   expect(q2.validators).toHaveLength(1);
 
-  const q1_1 = QuestionConverter.convertObject(q1, "comment");
+  const q1_1 = QuestionConverter.convertObject(q1, "comment", q1.toJSON());
   expect(q1_1.validators).toHaveLength(1);
   expect((<any>q1_1.validators[0]).maxLength).toBe(20);
-  const q1_2 = QuestionConverter.convertObject(q1_1, "dropdown");
+  const q1_2 = QuestionConverter.convertObject(q1_1, "dropdown", q1_1.toJSON());
   expect(q1_2.validators).toHaveLength(0);
 
-  const q2_1 = QuestionConverter.convertObject(q2, "tagbox");
+  const q2_1 = QuestionConverter.convertObject(q2, "tagbox", q2.toJSON());
   expect(q2_1.validators).toHaveLength(1);
   expect((<any>q2_1.validators[0]).minCount).toBe(3);
-  const q2_2 = QuestionConverter.convertObject(q2_1, "dropdown");
+  const q2_2 = QuestionConverter.convertObject(q2_1, "dropdown", q2_1.toJSON());
   expect(q2_2.validators).toHaveLength(0);
 });
 test("Convert matrix into matrixdropdown, Bug#4455", () => {
@@ -442,7 +444,7 @@ test("Convert matrix into matrixdropdown, Bug#4455", () => {
   });
   const q1 = survey.getQuestionByName("q1");
 
-  const q1_1 = <QuestionMatrixDropdownModel>QuestionConverter.convertObject(q1, "matrixdropdown");
+  const q1_1 = <QuestionMatrixDropdownModel>QuestionConverter.convertObject(q1, "matrixdropdown", q1.toJSON());
   expect(q1_1.columns).toHaveLength(1);
   expect(q1_1.columns[0].name).toBe("col1");
   expect(q1_1.columns[0].title).toBe("Column 1");
@@ -457,7 +459,7 @@ test("Keep startWithNewLine property value for next question, Bug#4729", () => {
   let q1 = survey.getQuestionByName("q1");
   const q2 = survey.getQuestionByName("q2");
   expect(q2.startWithNewLine).toBeFalsy();
-  QuestionConverter.convertObject(q1, "boolean");
+  QuestionConverter.convertObject(q1, "boolean", q1.toJSON());
   q1 = survey.getQuestionByName("q1");
   expect(q1.getType()).toBe("boolean");
   expect(q2.startWithNewLine).toBeFalsy();
@@ -513,13 +515,13 @@ test("Convert default matrix dropdown into single matrix, Bug#5025", () => {
   expect(matrix1.columns[1].name).toBe("Column 2");
   expect(matrix1.rows[1].value).toBe("Row 2");
   survey.pages[0].addQuestion(matrix1);
-  const matrix2 = QuestionConverter.convertObject(matrix1, "matrix", matrixdrodownDefaultJSON, matrixDefaultJSON);
+  const matrix2 = QuestionConverter.convertObject(matrix1, "matrix", QuestionConverter.getObjJSON(matrix1, matrixdrodownDefaultJSON), matrixDefaultJSON);
   expect(matrix2.name).toBe("q2");
   expect(matrix2.columns).toHaveLength(3);
   expect(matrix2.rows).toHaveLength(2);
   expect(matrix2.columns[1].value).toBe("Column 2");
   expect(matrix2.rows[1].value).toBe("Row 2");
-  const matrix3 = QuestionConverter.convertObject(matrix2, "matrixdropdown", matrixDefaultJSON, matrixdrodownDefaultJSON);
+  const matrix3 = QuestionConverter.convertObject(matrix2, "matrixdropdown", QuestionConverter.getObjJSON(matrix2, matrixDefaultJSON), matrixdrodownDefaultJSON);
   expect(matrix3.name).toBe("q2");
   expect(matrix3.columns).toHaveLength(3);
   expect(matrix3.rows).toHaveLength(2);

@@ -26,5 +26,5 @@ ko.components.register("svc-tabbed-menu", {
       return model;
     }
   },
-  template: template
+  template: template.default
 });

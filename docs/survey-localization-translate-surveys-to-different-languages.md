@@ -46,7 +46,7 @@ import "survey-creator-core/i18n/german";
 import "survey-creator-core/i18n/italian";
 ```
 
-The default language for UI elements is English. To select another language, set the `currentLocale` property. For example, the following code translates the Survey Creator UI to French:
+The default language for UI elements is English. To select another language, set the `currentLocale` property or Survey Creator's [`locale`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#locale) property. For example, the following code translates the Survey Creator UI to French:
 
 ```js
 SurveyCreator.localization.currentLocale = "fr";
@@ -55,6 +55,8 @@ SurveyCreator.localization.currentLocale = "fr";
 import { editorLocalization } from "survey-creator-core";
 import "survey-creator-core/i18n/french";
 editorLocalization.currentLocale = "fr";
+// ----- or -----
+creator.locale = "fr";
 ```
 
 ### Override Individual Translations

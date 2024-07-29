@@ -30,5 +30,5 @@ ko.components.register("survey-creator", {
       return model;
     },
   },
-  template: template,
+  template: template.default,
 });

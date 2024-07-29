@@ -100,10 +100,13 @@ function saveThemeJson(url, json, saveNo, callback) {
 
 To load a theme JSON object into Theme Editor, assign the object to Survey Creator's [`theme`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#theme) property. The following code takes a theme JSON object from `localStorage`:
 
-
 ```js
 creator.theme = window.localStorage.getItem("survey-theme-json");
 ```
+
+You can also add UI elements that allow users to save, apply, and reuse custom themes. To implement this advanced functionality, refer to the following demo:
+
+[View "Add Reusable Themes" Demo](https://surveyjs.io/survey-creator/examples/save-custom-theme/ (linkStyle))
 
 ## See Also
 

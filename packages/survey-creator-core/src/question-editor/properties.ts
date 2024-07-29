@@ -14,6 +14,8 @@ export class SurveyQuestionEditorPropertyDefinition {
   public category: string;
   public createdFromTabName: boolean;
   public onSameLine: boolean;
+  public index: number;
+  public definedIndex: number;
   public get name(): string {
     return !!this.property ? this.property.name : "";
   }
@@ -37,6 +39,7 @@ export class SurveyQuestionProperties {
   private properties: Array<JsonObjectProperty>;
   private propertiesHash: any;
   private tabs: Array<SurveyQuestionEditorTabDefinition> = [];
+  private unusedProperties: Array<JsonObjectProperty> = [];
   constructor(
     public obj: any,
     public options: ISurveyCreatorOptions = null,
@@ -53,6 +56,22 @@ export class SurveyQuestionProperties {
     this.properties = Serializer.getPropertiesByObj(this.obj);
     this.fillPropertiesHash();
     this.buildTabs(className);
+  }
+  public getAllVisiblePropertiesNames(includeUnused: boolean): Array<string> {
+    const res = [];
+    this.tabs.forEach(tab => {
+      tab.properties.forEach(prop => res.push(prop.name));
+    });
+    if(includeUnused) {
+      this.unusedProperties.forEach(prop => res.push(prop.name));
+    }
+    return res;
+  }
+  protected getIsPropertyVisible(prop: JsonObjectProperty): boolean {
+    return SurveyHelper.isPropertyVisible(this.obj, prop, this.options, this.showMode, this.parentObj, this.parentProperty);
+  }
+  protected getDynamicClassName(): string {
+    return !!this.obj && this.obj.isQuestion && !!this.obj.getDynamicType ? this.obj.getDynamicType() : "";
   }
   public getProperty(propertyName: string): JsonObjectProperty {
     var res = this.propertiesHash[propertyName];
@@ -82,14 +101,7 @@ export class SurveyQuestionProperties {
       var prop = this.properties[i];
       this.propertiesHash[prop.name] = {
         property: prop,
-        visible: SurveyHelper.isPropertyVisible(
-          this.obj,
-          prop,
-          this.options,
-          this.showMode,
-          this.parentObj,
-          this.parentProperty
-        ),
+        visible: this.getIsPropertyVisible(prop),
       };
     }
   }
@@ -116,7 +128,7 @@ export class SurveyQuestionProperties {
     return res;
   }
   private buildTabs(className: string) {
-    if (!className) {
+    if (!className && !!this.obj) {
       className = this.obj.getType();
     }
     var definitions = this.getAllDefinitionsByClass(className);
@@ -205,6 +217,9 @@ export class SurveyQuestionProperties {
       !isString && !!defProperty.category ? defProperty.category : "";
     propertyDefinition.title =
       !isString && !!defProperty.title ? defProperty.title : "";
+    if(!isTab && defProperty.index !== undefined) {
+      propertyDefinition.definedIndex = defProperty.index;
+    }
     propertyDefinition.onSameLine = this.isPropertyOnSameLine(propRes.property.nextToProperty);
     propertyDefinition.createdFromTabName = isTab;
     let tab = this.getTabOrCreate(tabName);
@@ -299,19 +314,32 @@ export class SurveyQuestionProperties {
     var result = [];
     var usedProperties = {};
     if (className.indexOf("@") > -1 && this.getClassDefintion(className)) {
-      var defaultName =
-        className.substring(0, className.indexOf("@") + 1) + "default";
-      if (defaultName != className && !!this.getClassDefintion(defaultName)
-      ) {
-        result.push(this.getClassDefintion(defaultName));
+      const prefix = className.substring(0, className.indexOf("@") + 1);
+      const clName = className.substring(prefix.length);
+      const classes = [];
+      let classInfo = Serializer.findClass(clName);
+      while(!!classInfo && classInfo.name !== "question") {
+        classes.unshift(prefix + classInfo.name);
+        classInfo = !!classInfo.parentName ? Serializer.findClass(classInfo.parentName) : undefined;
       }
-      result.push(this.getClassDefintion(className));
+      if(classes.indexOf(className) < 0) {
+        classes.unshift(className);
+      }
+      if(classes.indexOf(prefix + "default") < 0) {
+        classes.unshift(prefix + "default");
+      }
+      classes.forEach(cl => {
+        const def = this.getClassDefintion(cl);
+        if(def) {
+          result.push(def);
+        }
+      });
       this.setUsedProperties(result, usedProperties);
       this.addNonTabProperties(result, usedProperties, true);
       return result;
     }
     let hasNonTabDynamicProperties = false;
-    const dynamicClass = this.obj.isQuestion && !!this.obj.getDynamicType ? this.obj.getDynamicType() : "";
+    const dynamicClass = this.getDynamicClassName();
     if (dynamicClass) {
       hasNonTabDynamicProperties = this.getAllDefinitionsByClassCore(dynamicClass, usedProperties, result, className);
     }
@@ -379,18 +407,29 @@ export class SurveyQuestionProperties {
     if (!!jsonProperty.category) return jsonProperty.category;
     return null;
   }
+  private getUnusedProperties(usedProperties: any, isFormMode: boolean = false): Array<JsonObjectProperty> {
+    const res = [];
+    for (var i = 0; i < this.properties.length; i++) {
+      const prop = this.properties[i];
+      if (this.isJSONPropertyVisible(prop) && !usedProperties[prop.name] && (!isFormMode || prop.showMode === "form")) {
+        res.push(prop);
+      }
+    }
+    return res;
+  }
   private addNonTabProperties(
     tabs: Array<ISurveyQuestionEditorDefinition>,
     usedProperties: any, isFormMode: boolean = false
   ) {
-    if (!this.propertyGridDefinition.autoGenerateProperties) return;
+    const unusedProperties = this.getUnusedProperties(usedProperties, isFormMode);
+    if (!this.propertyGridDefinition.autoGenerateProperties) {
+      this.unusedProperties = unusedProperties;
+      return;
+    }
     let classRes: any = { properties: [], tabs: [] };
     let tabNames = [];
-    for (var i = 0; i < this.properties.length; i++) {
-      let prop = this.properties[i];
-      if (!this.isJSONPropertyVisible(prop) || !!usedProperties[prop.name] ||
-        (isFormMode && prop.showMode !== "form"))
-        continue;
+    for (var i = 0; i < unusedProperties.length; i++) {
+      const prop = unusedProperties[i];
       let propCategory = this.getJsonPropertyCategory(prop);
       let tabName = !!propCategory
         ? propCategory
@@ -412,7 +451,7 @@ export class SurveyQuestionProperties {
         }
       }
       classRes.properties.push({
-        name: this.properties[i].name,
+        name: prop.name,
         tab: tabName,
       });
     }
@@ -424,16 +463,26 @@ export class SurveyQuestionProperties {
     properties: Array<SurveyQuestionEditorPropertyDefinition>
   ) {
     if (!Array.isArray(properties)) return;
-    var props: Array<SurveyQuestionEditorPropertyDefinition> = [].concat(
-      properties
-    );
-    for (var i = 0; i < props.length; i++) {
-      var index = props[i].property.visibleIndex;
+    let index = 0;
+    properties.forEach(prop => {
+      prop.index = prop.definedIndex !== undefined ? prop.definedIndex : index;
+      index ++;
+    });
+    properties.sort((prop1, prop2): number => {
+      if(prop1.index === prop2.index) return 0;
+      return prop1.index < prop2.index ? -1 : 1;
+    });
+    this.insertProperteisWithVisibleIndex(properties);
+  }
+  private insertProperteisWithVisibleIndex(properties: Array<SurveyQuestionEditorPropertyDefinition>): void {
+    const props: Array<SurveyQuestionEditorPropertyDefinition> = [].concat(properties);
+    for (let i = 0; i < props.length; i++) {
+      let index = props[i].property.visibleIndex;
       if (props[i].createdFromTabName && index < 0) {
         index = 0;
       }
-      if (index < 0) continue;
-      var curIndex = properties.indexOf(props[i]);
+      if (index < 0 || props[i].definedIndex !== undefined) continue;
+      let curIndex = properties.indexOf(props[i]);
       if (curIndex > -1) {
         properties.splice(curIndex, 1);
       }

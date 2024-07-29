@@ -11,5 +11,5 @@ ko.components.register("sd-translation-line-skeleton", {
       return { question: params.question };
     },
   },
-  template: template,
+  template: template.default,
 });

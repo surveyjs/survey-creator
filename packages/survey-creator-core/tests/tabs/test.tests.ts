@@ -1018,3 +1018,53 @@ test("Mark previous pages as passed if selectPageAction selects non-subsequent p
   expect(model.survey.pages[2].passed).toBeTruthy();
   expect(model.survey.pages[3].passed).toBeFalsy();
 });
+
+test("Suppress NavigateToUrl notification using allow option", (): any => {
+  const creator: CreatorTester = new CreatorTester();
+  creator.JSON = {
+    questions: [
+      {
+        type: "text",
+        name: "q1",
+      }
+    ],
+    "navigateToUrl": "javascript:alert(2)",
+  };
+
+  let allowNavigate = true;
+  let onNavigateToUrlLog = "";
+  creator.onSurveyInstanceCreated.add((sender, options) => {
+    if (options.area === "theme-tab" || options.area === "preview-tab" || options.area === "design-tab") {
+      options.survey.onNavigateToUrl.add((sender, options) => {
+        onNavigateToUrlLog += "->" + options.url;
+        options.allow = allowNavigate;
+      });
+    }
+  });
+
+  let notificationsLog = "";
+  creator.onNotify.add((sender, options) => {
+    notificationsLog += "->" + options.message;
+  });
+
+  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
+  testPlugin.activate();
+  const model: TestSurveyTabViewModel = testPlugin.model;
+
+  expect(onNavigateToUrlLog).toBe("");
+  expect(notificationsLog).toBe("");
+
+  model.survey.doComplete();
+  expect(onNavigateToUrlLog).toBe("->javascript:alert(2)");
+  expect(notificationsLog).toBe("->You had to navigate to 'javascript:alert(2)'.");
+
+  let testAgain = model.testAgainAction;
+  expect(testAgain).toBeTruthy();
+  testAgain.action();
+
+  allowNavigate = false;
+
+  model.survey.doComplete();
+  expect(onNavigateToUrlLog).toBe("->javascript:alert(2)->javascript:alert(2)");
+  expect(notificationsLog).toBe("->You had to navigate to 'javascript:alert(2)'.");
+});
