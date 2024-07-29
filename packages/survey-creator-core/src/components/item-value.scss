@@ -69,7 +69,7 @@
   }
 }
 
-.svc-item-value-controls__button>span {
+.svc-item-value-controls__button > span {
   display: block;
 }
 
@@ -117,7 +117,6 @@
 }
 
 .svc-item-value-controls__add:not(.svc-item-value-controls__button--disabled) {
-
   &:hover,
   &:focus {
     background-color: $primary-light;
@@ -125,7 +124,6 @@
 }
 
 .svc-item-value-controls__remove:not(.svc-item-value-controls__button--disabled) {
-
   &:hover,
   &:focus {
     background-color: $red-light;
@@ -138,7 +136,6 @@
 
 .svc-item-value--new {
   .svc-item-value__item {
-
     .sd-item__control-label,
     .sv-ranking-item__text {
       color: $foreground-light;
@@ -199,8 +196,6 @@
   }
 }
 
-
-
 .svc-item-value--ghost {
   .svc-item-value__ghost {
     display: block;
@@ -255,7 +250,6 @@
 }
 
 .svc-creator--mobile .svc-tab-designer {
-
   .svc-question__content--ranking,
   .sd-selectbase,
   .svc-question__dropdown-choices {
@@ -279,15 +273,12 @@
       margin-left: calcSize(-3);
     }
   }
-
 }
 
 .svc-creator--touch:not(.svc-creator--mobile) .svc-tab-designer {
-
   .svc-question__content--ranking,
   .sd-selectbase,
   .svc-question__dropdown-choices {
-
     .svc-item-value-controls__drag-icon {
       visibility: visible;
     }

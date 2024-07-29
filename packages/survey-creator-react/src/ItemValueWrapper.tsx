@@ -21,6 +21,11 @@ export class ItemValueAdornerComponent extends CreatorModelElement<
   any
 > {
   model: ItemValueWrapperViewModel;
+  private rootRef: React.RefObject<HTMLDivElement>;
+  constructor(props) {
+    super(props);
+    this.rootRef = React.createRef();
+  }
   protected createModel(props: any): void {
     this.model = new ItemValueWrapperViewModel(
       props.componentData.creator,
@@ -37,6 +42,23 @@ export class ItemValueAdornerComponent extends CreatorModelElement<
   private onBlur = (event: any) => {
     this.model.onFocusOut(event.nativeEvent);
   };
+
+  componentDidUpdate(prevProps: any, prevState: any): void {
+    super.componentDidUpdate(prevProps, prevState);
+    this.props.item.setRootElement(this.rootRef.current);
+    if (prevProps.item !== this.props.item && prevProps.item) {
+      prevProps.item.setRootElement(undefined);
+    }
+  }
+
+  componentDidMount(): void {
+    super.componentDidMount();
+    this.props.item.setRootElement(this.rootRef.current);
+  }
+  componentWillUnmount(): void {
+    super.componentWillUnmount();
+    this.props.item.setRootElement(undefined);
+  }
 
   render(): JSX.Element {
     // if (this.model.question.isDragged) {
@@ -78,6 +100,7 @@ export class ItemValueAdornerComponent extends CreatorModelElement<
 
     return (
       <div
+        ref={this.rootRef}
         className={
           "svc-item-value-wrapper" +
           (this.model.allowAdd ? " svc-item-value--new" : "") +
