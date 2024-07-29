@@ -39,6 +39,7 @@ export abstract class StringItemsNavigatorBase {
   }
   private setEventsForItem(creator: SurveyCreatorModel, items: any[], item: any) {
     const connector = StringEditorConnector.get(this.getItemLocString(items, item));
+    connector.allowLineBreaksOnEdit = true;
     connector.onEditComplete.clear();
     connector.onEditComplete.add(() => {
       const itemIndex = items.indexOf(item);
@@ -211,6 +212,8 @@ export class StringEditorConnector {
   public setAutoFocus() { this.focusOnEditor = true; }
 
   public hasEditCompleteHandler = false;
+
+  public allowLineBreaksOnEdit = false;
 
   public focusOnEditor: boolean;
   public activateEditor(): void {
@@ -488,7 +491,7 @@ export class StringEditorViewModelBase extends Base {
       event.preventDefault();
       // get text representation of clipboard
       let text = event.clipboardData.getData("text/plain");
-      if (!this.locString.allowLineBreaks) text = clearNewLines(text);
+      if (!this.locString.allowLineBreaks && !this.connector?.allowLineBreaksOnEdit) text = clearNewLines(text);
       // insert text manually
       const selection = window.getSelection();
       if (!selection.rangeCount) return;
