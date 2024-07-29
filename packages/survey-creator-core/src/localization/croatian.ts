@@ -1,3 +1,5 @@
+// This dictionary contains 65 untranslated or inherited localization strings.
+// These strings are commented out. Uncomment and edit them if you want to add your translations.
 import { editorLocalization, defaultStrings } from "survey-creator-core";
 
 export var hrStrings = {
@@ -119,6 +121,8 @@ export var hrStrings = {
     generateReadableJSON: "Generiranje čitljivog JSON",
     toolbox: "Alatni okvir",
     "property-grid": "Svojstva",
+    toolboxFilteredTextPlaceholder: "Upišite za pretraživanje...",
+    toolboxNoResultsFound: "Nisu pronađeni rezultati",
     propertyGridFilteredTextPlaceholder: "Upišite za pretraživanje...",
     propertyGridNoResultsFound: "Nisu pronađeni rezultati",
     correctJSON: "Ispravite JSON.",
@@ -297,6 +301,7 @@ export var hrStrings = {
       templateTitle: "Uzorak naslova ploče",
       noEntriesText: "Prazan tekst ploče",
       templateTabTitle: "Uzorak naslova kartice",
+      tabTitlePlaceholder: "Rezervirano mjesto naslova tabulatora",
       templateVisibleIf: "Učinite pojedinačnu ploču vidljivom ako",
       hideNumber: "Skrivanje broja ploče",
       titleLocation: "Poravnanje naslova ploče",
@@ -595,6 +600,7 @@ export var hrStrings = {
     allowCompleteSurveyAutomatic: "Automatsko ispunjavanje upitnika",
     showProgressBar: "Pokaži traku napretka",
     questionTitleLocation: "Lokacija naslova pitanja",
+    questionTitleWidth: "Širina naslova pitanja",
     requiredText: "Pitanje je zahtijevalo simbole",
     questionTitleTemplate: "Predložak naslova pitanja, zadano je: '{no}. {require} {title}'",
     questionErrorLocation: "Mjesto pogreške u pitanju",
@@ -642,6 +648,7 @@ export var hrStrings = {
     questionsOnPageMode: "Struktura upitnika",
     maxTextLength: "Maksimalna duljina odgovora (u znakovima)",
     maxOthersLength: "Maksimalna duljina komentara (u znakovima)",
+    commentAreaRows: "Visina područja komentara (u recima)",
     autoGrowComment: "Ako je potrebno, automatsko proširivanje područja komentara",
     allowResizeComment: "Dopusti korisnicima promjenu veličine tekstnih područja",
     textUpdateMode: "Ažuriranje vrijednosti tekstnog pitanja",
@@ -731,6 +738,7 @@ export var hrStrings = {
     correctAnswer: "Točan odgovor",
     defaultPanelValue: "Zadane vrijednosti",
     cells: "Tekstovi ćelija",
+    fileInputPlaceholder: "Odabir datoteke ili lijepljenje veze na datoteku...",
     keyName: "Stupac ključa",
     itemvalue: {
       visibleIf: "Učini mogućnost vidljivom ako",
@@ -874,6 +882,7 @@ export var hrStrings = {
       "--sjs-general-backcolor-dim": "Boja pozadine",
       "--sjs-primary-backcolor": "Pozadina isticanja",
       "--sjs-primary-forecolor": "Isticanje u prvom planu",
+      "--sjs-special-red": "Poruke o pogreškama",
       "--sjs-shadow-small": "Efekti sjene",
       "--sjs-shadow-inner": "Efekti sjene",
       "--sjs-border-default": "Boje"
@@ -1216,6 +1225,9 @@ export var hrStrings = {
     currencymask: {
       prefix: "Npr.: $",
       suffix: "Npr.: USD"
+    },
+    panelbase: {
+      questionTitleWidth: "Npr.: 200px"
     }
   },
   pehelp: {
@@ -1226,6 +1238,7 @@ export var hrStrings = {
       enableIf: "Pomoću ikone čarobnog štapića postavite uvjetno pravilo koje onemogućuje način samo za čitanje ploče.",
       requiredIf: "Pomoću ikone čarobnog štapića postavite uvjetno pravilo koje sprječava slanje upitnika, osim ako barem jedno ugniježđeno pitanje nema odgovor.",
       questionTitleLocation: "Odnosi se na sva pitanja unutar ovog panela. Ako želite nadjačati ovu postavku, definirajte pravila poravnanja naslova za pojedinačna pitanja. Mogućnost \"Naslijedi\" primjenjuje postavku na razini stranice (ako je postavljena) ili na razini upitnika (\"Vrh\" prema zadanim postavkama).",
+      questionTitleWidth: "Postavlja dosljednu širinu za naslove pitanja kada su poravnati lijevo od okvira pitanja. Prihvaća CSS vrijednosti (px, %, in, pt itd.).",
       questionErrorLocation: "Postavlja mjesto poruke o pogrešci u odnosu na sva pitanja unutar ploče. Opcija \"Naslijedi\" primjenjuje postavku na razini stranice (ako je postavljena) ili na razini upitnika.",
       questionsOrder: "Zadržava izvorni redoslijed pitanja ili ih randomizira. Opcija \"Naslijedi\" primjenjuje postavku na razini stranice (ako je postavljena) ili na razini upitnika.",
       page: "Premješta ploču na kraj odabrane stranice.",
@@ -1250,6 +1263,7 @@ export var hrStrings = {
       width: "Postavlja širinu ploče proporcionalno ostalim elementima istraživanja u istoj liniji. Prihvaća CSS vrijednosti (px, %, in, pt itd.).",
       templateTitle: "Upišite predložak za dinamičke naslove ploča. Koristite {panelIndex} za opći položaj panela i {visiblePanelIndex} za njegov redoslijed među vidljivim pločama. Umetnite ova rezervirana mjesta u uzorak da biste dodali automatsko numeriranje.",
       templateTabTitle: "Upišite predložak za naslove kartica. Koristite {panelIndex} za opći položaj panela i {visiblePanelIndex} za njegov redoslijed među vidljivim pločama. Umetnite ova rezervirana mjesta u uzorak da biste dodali automatsko numeriranje.",
+      tabTitlePlaceholder: "Rezervni tekst za naslove kartica koji se primjenjuje kada uzorak naslova kartice ne daje značajnu vrijednost.",
       templateVisibleIf: "Ova postavka omogućuje kontrolu vidljivosti pojedinih ploča unutar dinamičke ploče. Koristite rezervirano mjesto '{panel}' za referenciranje trenutne ploče u izrazu.",
       titleLocation: "Ovu postavku automatski nasljeđuju sva pitanja unutar ove ploče. Ako želite nadjačati ovu postavku, definirajte pravila poravnanja naslova za pojedinačna pitanja. Mogućnost \"Naslijedi\" primjenjuje postavku na razini stranice (ako je postavljena) ili na razini upitnika (\"Vrh\" prema zadanim postavkama).",
       descriptionLocation: "Opcija \"Naslijedi\" primjenjuje postavku na razini stranice (ako je postavljena) ili na razini upitnika (\"Pod naslovom ploče\" prema zadanim postavkama).",
@@ -1339,6 +1353,7 @@ export var hrStrings = {
     questionsOrder: "Zadržava izvorni redoslijed pitanja ili ih randomizira. Efekt ove postavke vidljiv je samo na kartici Pretpregled.",
     maxTextLength: "Samo za pitanja o unosu teksta.",
     maxOthersLength: "Samo za komentare pitanja.",
+    commentAreaRows: "Postavlja broj prikazanih redaka u tekstnim područjima za komentare pitanja. U ulazu zauzima više redaka pojavljuje se klizač.",
     autoGrowComment: "Odaberite želite li da komentari pitanja i pitanja dugog teksta automatski rastu u visinu na temelju unesene duljine teksta.",
     allowResizeComment: "Samo za komentare pitanja i pitanja dugog teksta.",
     calculatedValues: "Prilagođene varijable služe kao srednje ili pomoćne varijable koje se koriste u izračunima obrazaca. Oni uzimaju unose ispitanika kao izvorne vrijednosti. Svaka prilagođena varijabla ima jedinstveni naziv i izraz na kojem se temelji.",
@@ -1371,6 +1386,7 @@ export var hrStrings = {
       enableIf: "Pomoću ikone čarobnog štapića postavite uvjetno pravilo koje onemogućuje način samo za čitanje stranice.",
       requiredIf: "Pomoću ikone čarobnog štapića postavite uvjetno pravilo koje sprječava slanje upitnika, osim ako barem jedno ugniježđeno pitanje nema odgovor.",
       questionTitleLocation: "Odnosi se na sva pitanja unutar ove stranice. Ako želite nadjačati ovu postavku, definirajte pravila poravnanja naslova za pojedinačna pitanja ili ploče. Mogućnost \"Naslijedi\" primjenjuje postavku na razini upitnika (\"Vrh\" prema zadanim postavkama).",
+      questionTitleWidth: "Postavlja dosljednu širinu za naslove pitanja kada su poravnati lijevo od okvira pitanja. Prihvaća CSS vrijednosti (px, %, in, pt itd.).",
       questionErrorLocation: "Postavlja mjesto poruke o pogrešci u odnosu na pitanje s unosom koji nije valjan. Odaberite između: \"Vrh\" - tekst pogreške nalazi se na vrhu okvira pitanja; \"Dno\" - tekst pogreške nalazi se na dnu okvira pitanja. Mogućnost \"Naslijedi\" primjenjuje postavku na razini upitnika (\"Vrh\" prema zadanim postavkama).",
       questionsOrder: "Zadržava izvorni redoslijed pitanja ili ih randomizira. Mogućnost \"Naslijedi\" primjenjuje postavku na razini upitnika (\"Original\" prema zadanim postavkama). Efekt ove postavke vidljiv je samo na kartici Pretpregled.",
       navigationButtonsVisibility: "Postavlja vidljivost navigacijskih gumba na stranici. Opcija \"Naslijedi\" primjenjuje postavku na razini upitnika, koja je zadana kao \"Vidljivo\"."
@@ -1443,6 +1459,19 @@ export var hrStrings = {
     currencymask: {
       prefix: "Jedan ili više simbola koji će se prikazati prije vrijednosti.",
       suffix: "Jedan ili više simbola koji će se prikazati nakon vrijednosti."
+    },
+    theme: {
+      // isPanelless: "This setting applies only to questions outside of a panel.",
+      // primaryColor: "Sets a supplementary color that highlights key survey elements.",
+      // panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background.",
+      // questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background.",
+      // cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes.",
+      // "--sjs-general-backcolor-dim": "Sets the main background color of the survey."
+    },
+    header: {
+      // inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in.",
+      // textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels.",
+      // overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey."
     }
   },
   // Properties
@@ -1546,7 +1575,63 @@ export var hrStrings = {
     allowCameraAccess: "Dopusti pristup kameri",
     scaleColorMode: "Način skaliranja boje",
     rateColorMode: "Način ocjenjivanja boja",
-    copyDisplayValue: "Kopiraj vrijednost prikaza"
+    copyDisplayValue: "Kopiraj vrijednost prikaza",
+    // insensitive: "insensitive",
+    // state: "state",
+    // indent: "indent",
+    // titleLocation: "titleLocation",
+    // descriptionLocation: "descriptionLocation",
+    // hideNumber: "hideNumber",
+    // errorLocation: "errorLocation",
+    // isUnique: "isUnique",
+    // showInMultipleColumns: "showInMultipleColumns",
+    // totalAlignment: "totalAlignment",
+    // detailErrorLocation: "detailErrorLocation",
+    // inheritWidthFrom: "inheritWidthFrom",
+    // textAreaWidth: "textAreaWidth",
+    // textGlowEnabled: "textGlowEnabled",
+    // overlapEnabled: "overlapEnabled",
+    // backgroundImageOpacity: "backgroundImageOpacity",
+    // logoPositionX: "logoPositionX",
+    // logoPositionY: "logoPositionY",
+    // titlePositionX: "titlePositionX",
+    // titlePositionY: "titlePositionY",
+    // descriptionPositionX: "descriptionPositionX",
+    // descriptionPositionY: "descriptionPositionY",
+    // showNumber: "showNumber",
+    // progressBarInheritWidthFrom: "progressBarInheritWidthFrom",
+    // headerView: "headerView",
+    // choiceValuesFromQuestion: "choiceValuesFromQuestion",
+    // choiceTextsFromQuestion: "choiceTextsFromQuestion",
+    // refuseText: "refuseText",
+    // dontKnowText: "dontKnowText",
+    // cellComponent: "cellComponent",
+    // inputTextAlignment: "inputTextAlignment",
+    // maskSettings: "maskSettings",
+    // itemErrorLocation: "itemErrorLocation",
+    // signatureWidth: "signatureWidth",
+    // signatureHeight: "signatureHeight",
+    // signatureAutoScaleEnabled: "signatureAutoScaleEnabled",
+    // penMinWidth: "penMinWidth",
+    // penMaxWidth: "penMaxWidth",
+    // showPlaceholder: "showPlaceholder",
+    // placeholderReadOnly: "placeholderReadOnly",
+    // templateTitle: "templateTitle",
+    // templateTabTitle: "templateTabTitle",
+    // tabTitlePlaceholder: "tabTitlePlaceholder",
+    // templateDescription: "templateDescription",
+    // noEntriesText: "noEntriesText",
+    // newPanelPosition: "newPanelPosition",
+    // templateTitleLocation: "templateTitleLocation",
+    // templateErrorLocation: "templateErrorLocation",
+    // templateVisibleIf: "templateVisibleIf",
+    // saveMaskedValue: "saveMaskedValue",
+    // pattern: "pattern",
+    // allowNegativeValues: "allowNegativeValues",
+    // decimalSeparator: "decimalSeparator",
+    // thousandsSeparator: "thousandsSeparator",
+    // prefix: "prefix",
+    // suffix: "suffix"
   },
   theme: {
     advancedMode: "Napredni način rada",
@@ -1562,6 +1647,8 @@ export var hrStrings = {
     backcolor: "Zadana pozadina",
     hovercolor: "Pozadina držanja pokazivača miša",
     borderDecoration: "Uređenje obruba",
+    fontColor: "Boja fonta",
+    backgroundColor: "Boja pozadine",
     primaryForecolor: "Zadana boja",
     primaryForecolorLight: "Onemogućena boja",
     font: "Krstionica",
@@ -2639,3 +2726,17 @@ editorLocalization.locales["hr"] = hrStrings;
 // theme.placeholderColor: "Placeholder color" => "Boja rezerviranog mjesta"
 // theme.size: "Size" => "Veličina"
 // theme.opacity: "Opacity" => "Neprozirnost"
+// ed.toolboxFilteredTextPlaceholder: "Type to search..." => "Upišite za pretraživanje..."
+// ed.toolboxNoResultsFound: "No results found" => "Nisu pronađeni rezultati"
+// paneldynamic.tabTitlePlaceholder: "Tab title placeholder" => "Rezervirano mjesto naslova tabulatora"
+// theme.--sjs-special-red: "Error messages" => "Poruke o pogreškama"
+// paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "Rezervni tekst za naslove kartica koji se primjenjuje kada uzorak naslova kartice ne daje značajnu vrijednost."
+// theme.fontColor: "Font color" => "Boja fonta"
+// theme.backgroundColor: "Background color" => "Boja pozadine"
+// pe.questionTitleWidth: "Question title width" => "Širina naslova pitanja"
+// pe.fileInputPlaceholder: "Select a file or paste a file link..." => "Odabir datoteke ili lijepljenje veze na datoteku..."
+// panelbase.questionTitleWidth: "Ex.: 200px" => "Npr.: 200px"
+// panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Postavlja dosljednu širinu za naslove pitanja kada su poravnati lijevo od okvira pitanja. Prihvaća CSS vrijednosti (px, %, in, pt itd.)."
+// page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Postavlja dosljednu širinu za naslove pitanja kada su poravnati lijevo od okvira pitanja. Prihvaća CSS vrijednosti (px, %, in, pt itd.)."
+// pe.commentAreaRows: "Comment area height (in lines)" => "Visina područja komentara (u recima)"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "Postavlja broj prikazanih redaka u tekstnim područjima za komentare pitanja. U ulazu zauzima više redaka pojavljuje se klizač."

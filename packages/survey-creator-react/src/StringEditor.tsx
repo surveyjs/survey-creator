@@ -16,15 +16,15 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
     if (this.baseModel) {
       this.baseModel.dispose();
     }
-    this.baseModel = new StringEditorViewModelBase(props.locStr.locStr, props.locStr.creator);
+    this.baseModel = new StringEditorViewModelBase(this.locString, this.creator);
   }
   protected getUpdatedModelProps(): string[] {
     return ["creator", "locString"];
   }
-  private get locString(): LocalizableString {
+  protected get locString(): LocalizableString {
     return this.props.locStr.locStr;
   }
-  private get creator(): SurveyCreatorModel {
+  protected get creator(): SurveyCreatorModel {
     return this.props.locStr.creator;
   }
   private get style(): any {
@@ -126,7 +126,7 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
     }
     let control = null;
     if (this.locString.hasHtml) {
-      const htmlValue = { __html: this.baseModel.focused && this.baseModel.editAsText && this.locString.text || this.locString.renderedHtml };
+      const htmlValue = { __html: this.locString.renderedHtml };
       control = (
         <span
           role="textbox"

@@ -161,14 +161,14 @@ test("Enable/disable nextPage action on page visibility change and page actions,
   expect(pageList.actions).toHaveLength(2);
   expect(pageList.actions[0].title).toBe("Page 1");
   expect(pageList.actions[1].title).toBe("Page 2");
-  expect(pageList.actions[1].enabled).toBeTruthy(); //TestSurveyTabViewModel.enableInvisiblePages = true
+  expect(pageList.actions[1].enabled).toBeFalsy();
   const nextPage: IAction = model.pageActions.filter((item: IAction) => item.id === "nextPage")[0];
   expect(nextPage.enabled).toBeFalsy();
   model.survey.setValue("q1", 2);
   expect(pageList.actions[1].enabled).toBeTruthy();
   expect(nextPage.enabled).toBeTruthy();
   model.survey.setValue("q1", 3);
-  expect(pageList.actions[1].enabled).toBeTruthy(); //TestSurveyTabViewModel.enableInvisiblePages = true
+  expect(pageList.actions[1].enabled).toBeFalsy();
   expect(nextPage.enabled).toBeFalsy();
 });
 test("Page action title when the preview shows only, Bug#5277", (): any => {
@@ -248,10 +248,10 @@ test("pages, PageListItems, makes items enable/disable and do not touch visibili
   expect(pagesActions).toHaveLength(3);
   expect(pagesActions[0].enabled).toBeTruthy();
   expect(pagesActions[1].enabled).toBeTruthy();
-  expect(pagesActions[2].enabled).toBeTruthy(); //TestSurveyTabViewModel.enableInvisiblePages = true
+  expect(pagesActions[2].enabled).toBeFalsy();
   expect(pagesActions[2].visible).toEqual(true);
   model.survey.pages[1].visible = false;
-  expect(pagesActions[1].enabled).toBeTruthy(); //TestSurveyTabViewModel.enableInvisiblePages = true
+  expect(pagesActions[1].enabled).toBeFalsy();
   expect(pagesActions[1].visible).toEqual(true);
   model.survey.pages[1].visible = true;
   expect(pagesActions[1].enabled).toBeTruthy();
@@ -952,4 +952,119 @@ test("change devices selector dropdown items order", (): any => {
     simulatorDevices.msSurface.visibleIndex = undefined;
     simulatorDevices.androidTablet.visibleIndex = undefined;
   }
+});
+test("Mark previous pages as passed if selectPageAction selects non-subsequent page", (): any => {
+  const creator: CreatorTester = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "text",
+            name: "question1"
+          }
+        ]
+      },
+      {
+        name: "page2",
+        elements: [
+          {
+            type: "text",
+            name: "question2"
+          }
+        ]
+      },
+      {
+        name: "page3",
+        elements: [
+          {
+            type: "text",
+            name: "question3"
+          }
+        ]
+      },
+      {
+        name: "page4",
+        elements: [
+          {
+            type: "text",
+            name: "question4"
+          }
+        ]
+      }
+    ]
+  };
+  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
+  creator.makeNewViewActive("test");
+  const model: TestSurveyTabViewModel = testPlugin.model;
+
+  const selectPageAction = model.selectPageAction;
+  const listModel = selectPageAction.data as ListModel;
+
+  expect(selectPageAction).toBeTruthy();
+  expect(selectPageAction.visible).toBeTruthy();
+  expect(selectPageAction.data.actions.length).toBe(4);
+
+  expect(model.survey.pages[0].passed).toBeFalsy();
+  expect(model.survey.pages[1].passed).toBeFalsy();
+  expect(model.survey.pages[2].passed).toBeFalsy();
+  expect(model.survey.pages[3].passed).toBeFalsy();
+
+  listModel.onItemClick(listModel.actions[3]);
+
+  expect(model.survey.pages[0].passed).toBeTruthy();
+  expect(model.survey.pages[1].passed).toBeTruthy();
+  expect(model.survey.pages[2].passed).toBeTruthy();
+  expect(model.survey.pages[3].passed).toBeFalsy();
+});
+
+test("Suppress NavigateToUrl notification using allow option", (): any => {
+  const creator: CreatorTester = new CreatorTester();
+  creator.JSON = {
+    questions: [
+      {
+        type: "text",
+        name: "q1",
+      }
+    ],
+    "navigateToUrl": "javascript:alert(2)",
+  };
+
+  let allowNavigate = true;
+  let onNavigateToUrlLog = "";
+  creator.onSurveyInstanceCreated.add((sender, options) => {
+    if (options.area === "theme-tab" || options.area === "preview-tab" || options.area === "design-tab") {
+      options.survey.onNavigateToUrl.add((sender, options) => {
+        onNavigateToUrlLog += "->" + options.url;
+        options.allow = allowNavigate;
+      });
+    }
+  });
+
+  let notificationsLog = "";
+  creator.onNotify.add((sender, options) => {
+    notificationsLog += "->" + options.message;
+  });
+
+  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
+  testPlugin.activate();
+  const model: TestSurveyTabViewModel = testPlugin.model;
+
+  expect(onNavigateToUrlLog).toBe("");
+  expect(notificationsLog).toBe("");
+
+  model.survey.doComplete();
+  expect(onNavigateToUrlLog).toBe("->javascript:alert(2)");
+  expect(notificationsLog).toBe("->You had to navigate to 'javascript:alert(2)'.");
+
+  let testAgain = model.testAgainAction;
+  expect(testAgain).toBeTruthy();
+  testAgain.action();
+
+  allowNavigate = false;
+
+  model.survey.doComplete();
+  expect(onNavigateToUrlLog).toBe("->javascript:alert(2)->javascript:alert(2)");
+  expect(notificationsLog).toBe("->You had to navigate to 'javascript:alert(2)'.");
 });

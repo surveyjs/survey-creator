@@ -14,5 +14,5 @@ ko.components.register("svc-cell-dropdown-question", {
       return createQuestionViewModel(params, componentInfo);
     }
   },
-  template: template
+  template: template.default
 });

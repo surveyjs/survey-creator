@@ -1140,31 +1140,24 @@ test("Warn on incorrect using constructor", (): any => {
 test("pageEditMode='single'", (): any => {
   let creator = new CreatorTester();
   expect(creator.pageEditMode).toEqual("standard");
-  expect(Serializer.findProperty("survey", "pages").isVisible("")).toBeTruthy();
-  expect(
-    Serializer.findProperty("question", "page").isVisible("")
-  ).toBeTruthy();
-  expect(Serializer.findProperty("panel", "page").isVisible("")).toBeTruthy();
+  const showProp = (className: string, propName: string): boolean => {
+    const prop = Serializer.findProperty(className, propName);
+    return creator.onCanShowPropertyCallback(undefined, prop, "", undefined, <any>undefined);
+  };
+  expect(showProp("survey", "pages")).toBeTruthy();
+  expect(showProp("question", "page")).toBeTruthy();
+  expect(showProp("panel", "page")).toBeTruthy();
   creator = new CreatorTester({ pageEditMode: "single" });
   creator.JSON = { elements: [{ type: "text", name: "question1" }] };
   expect(creator.pageEditMode).toEqual("single");
-  expect(Serializer.findProperty("survey", "pages").isVisible("")).toBeFalsy();
-  expect(Serializer.findProperty("question", "page").isVisible("")).toBeFalsy();
-  expect(Serializer.findProperty("panel", "page").isVisible("")).toBeFalsy();
+  expect(showProp("survey", "pages")).toBeFalsy();
+  expect(showProp("question", "page")).toBeFalsy();
+  expect(showProp("panel", "page")).toBeFalsy();
   const designerPlugin = <TabDesignerPlugin>(
     creator.getPlugin("designer")
   );
   expect(designerPlugin.model.showNewPage).toBeFalsy();
   expect(designerPlugin.model.newPage).toBeFalsy();
-
-  Serializer.findProperty("survey", "pages").visible = true;
-  Serializer.findProperty("question", "page").visible = true;
-  Serializer.findProperty("panel", "page").visible = true;
-  expect(Serializer.findProperty("survey", "pages").isVisible("")).toBeTruthy();
-  expect(
-    Serializer.findProperty("question", "page").isVisible("")
-  ).toBeTruthy();
-  expect(Serializer.findProperty("panel", "page").isVisible("")).toBeTruthy();
 });
 test("Check page actions for pageEditMode is 'single'", (): any => {
   const creator = new CreatorTester({ pageEditMode: "single" });
@@ -1189,6 +1182,39 @@ test("Convert text question into dropdown", (): any => {
   };
   var q = creator.survey.getQuestionByName("question1");
   creator.selectElement(q);
+  creator.convertCurrentQuestion("dropdown");
+  var el = <QuestionDropdownModel>creator.selectedElement;
+  expect(el.getType()).toEqual("dropdown");
+  expect(el.choices).toHaveLength(3);
+  expect(el.choices[0].value).toEqual("Item 1");
+});
+test("Convert radiogroup question into dropdown, onQuestionCoverting", (): any => {
+  var creator = new CreatorTester();
+  let objJSON: any = undefined;
+  creator.onQuestionConverting.add((sender, options) => {
+    options.json = objJSON;
+  });
+  const json ={ elements: [{ type: "radiogroup", name: "q1", choices: [1, 2, 3, 4] }] };
+  creator.JSON = json;
+  creator.selectQuestionByName("q1");
+  creator.convertCurrentQuestion("dropdown");
+  var el = <QuestionDropdownModel>creator.selectedElement;
+  expect(el.getType()).toEqual("dropdown");
+  expect(el.choices).toHaveLength(3);
+  expect(el.choices[0].value).toEqual("Item 1");
+
+  objJSON = { choices: [5, 6] };
+  creator.JSON = json;
+  creator.selectQuestionByName("q1");
+  creator.convertCurrentQuestion("dropdown");
+  var el = <QuestionDropdownModel>creator.selectedElement;
+  expect(el.getType()).toEqual("dropdown");
+  expect(el.choices).toHaveLength(2);
+  expect(el.choices[0].value).toBe(5);
+
+  objJSON = {};
+  creator.JSON = json;
+  creator.selectQuestionByName("q1");
   creator.convertCurrentQuestion("dropdown");
   var el = <QuestionDropdownModel>creator.selectedElement;
   expect(el.getType()).toEqual("dropdown");
@@ -2356,12 +2382,14 @@ test("convertInputType, change inputType for a text question", (): any => {
   const popup = action.popupModel;
   const popupViewModel = new PopupDropdownViewModel(popup); // need for popupModel.onShow
   expect(popup).toBeTruthy();
-  popup.toggleVisibility();
+  popup.show();
   const list = popup.contentComponentData.model;
   expect(list).toBeTruthy();
   expect(list.selectedItem).toBeTruthy();
   expect(list.selectedItem.id).toEqual("text");
-  list.onSelectionChanged(list.actions.filter(item => item.id === "tel")[0]);
+
+  const telItem = list.actions.filter(item => item.id === "tel")[0];
+  list.onItemClick(telItem);
   expect(question.inputType).toBe("tel");
   expect(action.title).toBe("Phone Number");
   question.inputType = "password";
@@ -2546,28 +2574,36 @@ test("Set readOnly option", (): any => {
 });
 test("Set allowEditSurveyTitle option", (): any => {
   const creator = new CreatorTester({ allowEditSurveyTitle: false });
+  const showProp = (className: string, propName: string): boolean => {
+    const prop = Serializer.findProperty(className, propName);
+    return creator.onCanShowPropertyCallback(undefined, prop, "", undefined, <any>undefined);
+  };
   expect(creator.allowEditSurveyTitle).toBeFalsy();
-  expect(Serializer.findProperty("survey", "title").visible).toBeFalsy();
-  expect(Serializer.findProperty("survey", "description").visible).toBeFalsy();
-  expect(Serializer.findProperty("survey", "logo").visible).toBeFalsy();
-  expect(Serializer.findProperty("survey", "logoFit").visible).toBeFalsy();
-  expect(Serializer.findProperty("survey", "logoWidth").visible).toBeFalsy();
-  expect(Serializer.findProperty("survey", "logoHeight").visible).toBeFalsy();
+  expect(showProp("survey", "title")).toBeFalsy();
+  expect(showProp("survey", "description")).toBeFalsy();
+  expect(showProp("survey", "logo")).toBeFalsy();
+  expect(showProp("survey", "logoFit")).toBeFalsy();
+  expect(showProp("survey", "logoWidth")).toBeFalsy();
+  expect(showProp("survey", "logoHeight")).toBeFalsy();
   creator.allowEditSurveyTitle = true;
-  expect(Serializer.findProperty("survey", "title").visible).toBeTruthy();
-  expect(Serializer.findProperty("survey", "description").visible).toBeTruthy();
-  expect(Serializer.findProperty("survey", "logo").visible).toBeTruthy();
-  expect(Serializer.findProperty("survey", "logoFit").visible).toBeTruthy();
-  expect(Serializer.findProperty("survey", "logoWidth").visible).toBeTruthy();
-  expect(Serializer.findProperty("survey", "logoHeight").visible).toBeTruthy();
+  expect(showProp("survey", "title")).toBeTruthy();
+  expect(showProp("survey", "description")).toBeTruthy();
+  expect(showProp("survey", "logo")).toBeTruthy();
+  expect(showProp("survey", "logoFit")).toBeTruthy();
+  expect(showProp("survey", "logoWidth")).toBeTruthy();
+  expect(showProp("survey", "logoHeight")).toBeTruthy();
 });
 test("Set allowEditSurveyTitle option with removed logoHeight property", (): any => {
   Serializer.removeProperty("survey", "logoHeight");
   const creator = new CreatorTester({ allowEditSurveyTitle: false });
+  const showProp = (className: string, propName: string): boolean => {
+    const prop = Serializer.findProperty(className, propName);
+    return creator.onCanShowPropertyCallback(undefined, prop, "", undefined, <any>undefined);
+  };
   expect(creator.allowEditSurveyTitle).toBeFalsy();
-  expect(Serializer.findProperty("survey", "logoWidth").visible).toBeFalsy();
+  expect(showProp("survey", "logoWidth")).toBeFalsy();
   creator.allowEditSurveyTitle = true;
-  expect(Serializer.findProperty("survey", "logoWidth").visible).toBeTruthy();
+  expect(showProp("survey", "logoWidth")).toBeTruthy();
   Serializer.addProperty("survey", { name: "logoHeight", default: "200px", minValue: 0 });
 });
 test("creator.onActiveTabChanged", (): any => {
@@ -3143,6 +3179,7 @@ test("Use settings.designer.showAddQuestionButton = false", (): any => {
 });
 test("Add Questions with selection", (): any => {
   const creator = new CreatorTester();
+  creator.addNewQuestionLast = false;
   creator.JSON = { elements: [{ type: "panel", name: "panel1" }] };
   const panel = <PanelModel>creator.survey.getAllPanels()[0];
   const panelModel: QuestionAdornerViewModel = new QuestionAdornerViewModel(creator, panel, undefined);
@@ -3857,7 +3894,22 @@ test("Reordering on drag&drop", (): any => {
   creator.undo();
   expect(creator.undoRedoManager.canRedo()).toBeTruthy();
 });
-
+test("creator.addNewQuestionLast property", (): any => {
+  const creator = new CreatorTester();
+  creator.clickToolboxItem({ type: "text" });
+  creator.clickToolboxItem({ type: "text" });
+  expect(creator.selectedElementName).toEqual("question2");
+  creator.selectQuestionByName("question1");
+  creator.addNewQuestionInPage((str) => {}, undefined, "text");
+  expect(creator.selectedElementName).toEqual("question3");
+  expect(creator.survey.pages[0].elements[2].name).toEqual("question3");
+  creator.selectQuestionByName("question1");
+  creator.addNewQuestionLast = false;
+  creator.addNewQuestionInPage((str) => {}, undefined, "text");
+  expect(creator.selectedElementName).toEqual("question4");
+  expect(creator.survey.pages[0].elements[1].name).toEqual("question4");
+  expect(creator.survey.pages[0].elements[3].name).toEqual("question3");
+});
 test("Initial Property Grid category expanded state", (): any => {
   const creator = new CreatorTester();
   let survey: SurveyModel;
@@ -4028,6 +4080,48 @@ test("Remove carry-forward property on deleting a question", (): any => {
   expect(q2.choicesFromQuestion).toBe("q1");
   creator.deleteElement(q1);
   expect(q2.choicesFromQuestion).toBeFalsy();
+});
+test("Keep selection on deleting another question, #5634", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" },
+      { type: "text", name: "q3" }
+    ]
+  };
+  let counter = 0;
+  creator.onSelectedElementChanged.add((sender, options) => {
+    counter ++;
+  });
+  creator.selectQuestionByName("q1");
+  expect(counter).toBe(1);
+  expect(creator.selectedElementName).toEqual("q1");
+  const q2 = creator.survey.getQuestionByName("q2");
+  creator.deleteElement(q2);
+  expect(creator.selectedElementName).toEqual("q1");
+  expect(counter).toBe(1);
+});
+test("Do not select a duplicated question if it is not selected, #5634", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" },
+      { type: "text", name: "q3" }
+    ]
+  };
+  let counter = 0;
+  creator.onSelectedElementChanged.add((sender, options) => {
+    counter ++;
+  });
+  creator.selectQuestionByName("q1");
+  expect(counter).toBe(1);
+  expect(creator.selectedElementName).toEqual("q1");
+  const q2 = creator.survey.getQuestionByName("q2");
+  creator.fastCopyQuestion(q2, true);
+  expect(creator.selectedElementName).toEqual("question1");
+  expect(counter).toBe(2);
 });
 test("Do not focus title on mobile", (): any => {
   const creator = new CreatorTester();
@@ -4243,7 +4337,7 @@ test("Creator pageEditMode edit onCanDeleteItemCallback", (): any => {
 test("Creator pageEditMode edit onCanDeleteItemCallback", (): any => {
   const creator = new CreatorTester();
   const func = () => {
-    return creator.onConditionQuestionsGetListCallback("test", creator.survey, undefined, []);
+    return creator.onConditionQuestionsGetListCallback("test", creator.survey, undefined, [], []);
   };
   expect(func()).toBe("asc");
   settings.logic.questionSortOrder = "none";
@@ -4324,4 +4418,38 @@ test("Check the placeholders of the survey items if isMobileView is true", (): a
   expect(pageModelAdorner.placeholderText).toBe("Click the \"Add Question\" button below to add a new element to the page.");
   expect(panelModelAdorner.placeholderText).toBe("Click the \"Add Question\" button below to add a new element to the panel.");
   expect(imageQuestionModelAdorner.placeholderText).toBe("Click the button below and choose an image to upload");
+});
+
+test("onModified is raised for mask settings", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1",
+            "maskType": "numeric",
+            "maskSettings": {
+              "thousandsSeparator": "."
+            }
+          }
+        ]
+      }
+    ]
+  };
+  let propName = "not triggered";
+  creator.onModified.add((sender, options) => {
+    propName = options.name;
+  });
+  const maskedQuestion = creator.survey.getQuestionByName("question1") as QuestionTextModel;
+  (maskedQuestion.maskSettings as any).thousandsSeparator = "-";
+  expect(propName).toBe("thousandsSeparator");
+});
+
+test("json editor default indent", (): any => {
+  const creator = new CreatorTester();
+  expect(settings.jsonEditor.indentation).toBe(2);
+  expect(creator.text).toBe("{\n  \"logoPosition\": \"right\",\n  \"pages\": [\n    {\n      \"name\": \"page1\"\n    }\n  ]\n}");
 });

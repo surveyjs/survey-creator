@@ -25,7 +25,7 @@
           @compositionend="baseModel?.onCompositionEnd"
           @mouseup="baseModel?.onMouseUp"
           @click="edit"
-          :textContent="editValue"
+          :textContent="renderedHtml"
           :aria-placeholder="placeholder"
           :contenteditable="contentEditable"
           ref="root"
@@ -45,7 +45,7 @@
           @click="edit"
           :aria-placeholder="placeholder"
           :contenteditable="contentEditable"
-          v-html="editValue"
+          v-html="renderedHtml"
           ref="root"
         ></span>
         <sv-character-counter
@@ -107,13 +107,7 @@ const baseModel = useCreatorModel(
   }
 );
 
-const editValue = computed<string>(
-  () =>
-    (baseModel.value?.focused &&
-      baseModel.value.editAsText &&
-      locString.value.text) ||
-    (renderedHtml.value as string)
-);
+
 const errorText = computed(() => baseModel.value?.errorText);
 const className = computed(() => {
   return baseModel.value?.className(locString.value.renderedHtml);

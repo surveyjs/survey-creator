@@ -1,5 +1,6 @@
 export interface IPropertyEditorInfo {
   name: string;
+  index?: number;
   title?: string;
   tab?: string;
 }
@@ -67,6 +68,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
         name: "maxWidth",
         tab: "layout",
       },
+      { name: "effectiveColSpan", tab: "layout" },
       { name: "valueName", tab: "data" },
       { name: "defaultValue", tab: "data" },
       { name: "correctAnswer", tab: "data" },
@@ -392,6 +394,9 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "useGrouping"
     ]
   },
+  "panellayoutcolumn": {
+    properties: ["effectiveWidth", "questionTitleWidth"]
+  },
   matrixdropdowncolumn: {
     properties: ["name", "title"]
   },
@@ -418,12 +423,15 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "totalDisplayStyle", tab: "totals" },
       { name: "totalCurrency", tab: "totals" },
       { name: "totalFormat", tab: "totals" },
-      { name: "totalExpression", tab: "totals" }
+      { name: "totalExpression", tab: "totals" },
+      { name: "validators", tab: "validation" },
+      { name: "requiredErrorText", tab: "validation" }
     ],
     tabs: [
       { name: "general", index: 5 },
       { name: "logic", index: 20 },
-      { name: "totals", index: 40 }
+      { name: "totals", index: 40 },
+      { name: "validation", index: 60 }
     ]
   },
   "matrixdropdowncolumn@checkbox": {
@@ -434,6 +442,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "choiceTextsFromQuestion", tab: "choices" },
       { name: "showOtherItem", tab: "choices" },
       { name: "otherText", tab: "choices" },
+      { name: "otherPlaceholder", tab: "choices" },
       { name: "choicesOrder", tab: "choices" },
       { name: "colCount", tab: "choices" },
       { name: "showSelectAllItem", tab: "choices" },
@@ -462,6 +471,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "choiceTextsFromQuestion", tab: "choices" },
       { name: "showOtherItem", tab: "choices" },
       { name: "otherText", tab: "choices" },
+      { name: "otherPlaceholder", tab: "choices" },
       { name: "choicesOrder", tab: "choices" },
       { name: "colCount", tab: "choices" },
       { name: "showNoneItem", tab: "choices" },
@@ -480,12 +490,14 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   },
   "matrixdropdowncolumn@dropdown": {
     properties: [
+      "placeholder",
       { name: "choicesFromQuestion", tab: "choices" },
       { name: "choicesFromQuestionMode", tab: "choices" },
       { name: "choiceValuesFromQuestion", tab: "choices" },
       { name: "choiceTextsFromQuestion", tab: "choices" },
       { name: "showOtherItem", tab: "choices" },
       { name: "otherText", tab: "choices" },
+      { name: "otherPlaceholder", tab: "choices" },
       { name: "choicesOrder", tab: "choices" },
       { name: "optionsCaption", tab: "choices" },
       { name: "showNoneItem", tab: "choices" },
@@ -507,12 +519,14 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   },
   "matrixdropdowncolumn@tagbox": {
     properties: [
+      "placeholder",
       { name: "choicesFromQuestion", tab: "choices" },
       { name: "choicesFromQuestionMode", tab: "choices" },
       { name: "choiceValuesFromQuestion", tab: "choices" },
       { name: "choiceTextsFromQuestion", tab: "choices" },
       { name: "showOtherItem", tab: "choices" },
       { name: "otherText", tab: "choices" },
+      { name: "otherPlaceholder", tab: "choices" },
       { name: "choicesOrder", tab: "choices" },
       { name: "optionsCaption", tab: "choices" },
       { name: "showNoneItem", tab: "choices" },
@@ -572,7 +586,6 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   },
   "matrixdropdowncolumn@rating": {
     properties: [
-      "rateValues",
       { name: "displayMode", tab: "rateValues" },
       { name: "rateType", tab: "rateValues" },
       { name: "rateCount", tab: "rateValues" },
@@ -582,6 +595,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "rateMin", tab: "rateValues" },
       { name: "rateMax", tab: "rateValues" },
       { name: "rateStep", tab: "rateValues" },
+      { name: "rateValues", tab: "rateValues" },
       { name: "minRateDescription", tab: "rateValues" },
       { name: "maxRateDescription", tab: "rateValues" },
       { name: "rateDescriptionLocation", tab: "rateValues" },
@@ -626,6 +640,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
     properties: [
       "renderMode",
       "templateTabTitle",
+      "tabTitlePlaceholder",
       "tabAlign",
       "panelCount",
       "minPanelCount",
@@ -664,7 +679,9 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "enableIf", tab: "logic" },
       { name: "requiredIf", tab: "logic" },
       { name: "questionTitleLocation", tab: "questionSettings" },
-      { name: "questionErrorLocation", tab: "questionSettings" }
+      { name: "questionTitleWidth", tab: "questionSettings" },
+      { name: "questionErrorLocation", tab: "questionSettings" },
+      { name: "layoutColumns", tab: "questionSettings" },
     ],
     tabs: [
       { name: "questionSettings", index: 100 },
@@ -686,6 +703,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "width", tab: "layout" },
       { name: "minWidth", tab: "layout" },
       { name: "maxWidth", tab: "layout" },
+      { name: "effectiveColSpan", tab: "layout" },
       { name: "showNumber", tab: "numbering" },
       { name: "showQuestionNumbers", tab: "numbering" },
       { name: "questionStartIndex", tab: "numbering" }
@@ -748,8 +766,10 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       },
       { name: "maxTextLength", tab: "question" },
       { name: "maxOthersLength", tab: "question" },
+      { name: "commentAreaRows", tab: "question" },
       { name: "autoGrowComment", tab: "question" },
       { name: "allowResizeComment", tab: "question" },
+      { name: "gridLayoutEnabled", tab: "question" },
       { name: "showPageTitles", tab: "pages" },
       { name: "showPageNumbers", tab: "pages" },
 

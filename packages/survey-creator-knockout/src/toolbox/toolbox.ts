@@ -38,6 +38,7 @@ export class ToolboxViewModel extends Base {
 
   dispose() {
     this._categoriesSubscription.dispose();
+    this.toolbox.setRootElement(null);
     // this._isCompactSubscription.dispose();
   }
 }
@@ -49,5 +50,5 @@ ko.components.register("svc-toolbox", {
       return model;
     },
   },
-  template: template
+  template: template.default
 });

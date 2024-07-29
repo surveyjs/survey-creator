@@ -29,6 +29,8 @@ import { propertyGridCss } from "../../property-grid-theme/property-grid";
  * const creator = new SurveyCreatorModel(creatorOptions);
  * creator.themeEditor.settingName = "value";
  * ```
+ * 
+ * [Theme Editor Documentation](https://surveyjs.io/survey-creator/documentation/theme-editor (linkStyle))
  */
 export class ThemeTabPlugin implements ICreatorPlugin {
   public static DefaultTheme = Themes["default-light"];
@@ -98,7 +100,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.addSubGroupTitle(survey.getPanelByName("appearanceinput"), "theme.lines");
   }
   private updatePropertyGridEditorsAvailability() {
-    const simulatorSurvey = this.model.simulator.survey;
+    const simulatorSurvey = this.model.survey;
     const page = this.propertyGrid.survey.pages[0];
     const header = page?.getElementByName("header") as PanelModel;
     if (header && header.elements.length > 0) {
@@ -163,6 +165,12 @@ export class ThemeTabPlugin implements ICreatorPlugin {
 
     this._setPGEditorPropertyValue(panel.getQuestionByName("descriptionPositionX"), "readOnly", !survey.description);
     this._setPGEditorPropertyValue(panel.getQuestionByName("descriptionPositionY"), "readOnly", !survey.description);
+
+    if (survey.showTOC) {
+      const inheritWidthFrom = panel.getQuestionByName("inheritWidthFrom");
+      this._setPGEditorPropertyValue(inheritWidthFrom, "value", "container");
+      this._setPGEditorPropertyValue(inheritWidthFrom, "visible", false);
+    }
   }
 
   private updateVisibilityOfPropertyGridGroups() {
@@ -192,6 +200,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.simulatorCssClasses = surveyCss[defaultV2ThemeName];
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
     this.propertyGrid = new PropertyGridModel(undefined, creator, themeModelPropertyGridDefinition);
+    this.propertyGrid.surveyInstanceCreatedArea = "theme-tab:property-grid";
     const propertyGridViewModel = new PropertyGridViewModel(this.propertyGrid, creator);
     this.propertyGridTab = this.creator.sidebar.addTab("theme", "svc-property-grid", propertyGridViewModel);
     this.propertyGridTab.caption = editorLocalization.getString("ed.themePropertyGridTitle");
@@ -354,7 +363,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   }
   public deactivate(): boolean {
     if (this.model) {
-      this.simulatorCssClasses = this.model.simulator.survey.css;
+      this.simulatorCssClasses = this.model.survey.css;
       this.model.onPropertyChanged.clear();
       this.themeModel.onThemeSelected.clear();
       this.themeModel.onThemePropertyChanged.clear();

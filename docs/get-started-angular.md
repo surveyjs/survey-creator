@@ -69,6 +69,14 @@ Open the `angular.json` file and reference Survey Creator and SurveyJS Form Libr
 }
 ```
 
+When [using standalone components](https://github.com/surveyjs/code-examples/tree/main/get-started-creator/angular-standalone-components), import the style sheets directly in the component file:
+
+```js
+// survey-creator.component.ts
+import "survey-core/defaultV2.css";
+import "survey-creator-core/survey-creator-core.css";
+```
+
 ## Configure Survey Creator
 
 To configure the Survey Creator component, specify [its properties](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions) in a configuration object. In this tutorial, the object enables the following properties:
@@ -135,7 +143,7 @@ export class SurveyCreatorComponent implements OnInit {
 
 ## Render Survey Creator
 
-Before you render the survey, you need to import the module that integrates Survey Creator with Angular. Open your NgModule class (usually resides in the `app.module.ts` file), import the `SurveyCreatorModule` from `survey-creator-angular`, and list it in the `imports` array.
+Before you render the survey, you need to import the module that integrates Survey Creator with Angular. Open your `NgModule` class (usually resides in the `app.module.ts` file), import the `SurveyCreatorModule` from `survey-creator-angular`, and list it in the `imports` array.
 
 ```js
 // app.module.ts
@@ -152,7 +160,24 @@ import { SurveyCreatorModule } from 'survey-creator-angular';
   bootstrap: [ ... ]
 })
 export class AppModule { }
+```
 
+When [using standalone components](https://github.com/surveyjs/code-examples/tree/main/get-started-creator/angular-standalone-components), import the `SurveyCreatorModule` and add it to the `imports` array directly in the component file:
+
+```js
+// survey-creator.component.ts
+// ...
+import { SurveyCreatorModule } from 'survey-angular-ui';
+
+@Component({
+  // ...
+  standalone: true,
+  imports: [ SurveyCreatorModule ],
+  // ...
+})
+export class SurveyCreatorComponent implements OnInit {
+  // ...
+}
 ```
 
 To render Survey Creator, add a `<survey-creator>` element to your component template and bind the element's `model` attribute to the model instance you created in the previous step:

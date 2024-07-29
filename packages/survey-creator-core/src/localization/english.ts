@@ -121,6 +121,8 @@ export var enStrings = {
     generateReadableJSON: "Generate Readable JSON",
     toolbox: "Toolbox",
     "property-grid": "Properties",
+    toolboxFilteredTextPlaceholder: "Type to search...",
+    toolboxNoResultsFound: "No results found",
     propertyGridFilteredTextPlaceholder: "Type to search...",
     propertyGridNoResultsFound: "No results found",
     correctJSON: "Please correct JSON.",
@@ -299,6 +301,7 @@ export var enStrings = {
       templateTitle: "Panel title pattern",
       noEntriesText: "Empty panel text",
       templateTabTitle: "Tab title pattern",
+      tabTitlePlaceholder: "Tab title placeholder",
       templateVisibleIf: "Make an individual panel visible if",
       hideNumber: "Hide the panel number",
       titleLocation: "Panel title alignment",
@@ -412,6 +415,9 @@ export var enStrings = {
     rateDescriptionLocation: "Label alignment",
     size: "Input field width (in characters)",
     cellErrorLocation: "Cell error message alignment",
+    enabled: "Enabled",
+    disabled: "Disabled",
+    inherit: "Inherit",
     apply: "Apply",
     ok: "OK",
     save: "Save",
@@ -597,6 +603,7 @@ export var enStrings = {
     allowCompleteSurveyAutomatic: "Complete the survey automatically",
     showProgressBar: "Progress bar alignment",
     questionTitleLocation: "Question title alignment",
+    questionTitleWidth: "Question title width",
     requiredText: "Required symbol(s)",
     questionTitleTemplate: "Question title template, default is: '{no}. {require} {title}'",
     questionErrorLocation: "Error message alignment",
@@ -644,6 +651,7 @@ export var enStrings = {
     questionsOnPageMode: "Survey layout",
     maxTextLength: "Restrict answer length",
     maxOthersLength: "Restrict comment length",
+    commentAreaRows: "Comment area height (in lines)",
     autoGrowComment: "Auto-expand text areas",
     allowResizeComment: "Allow users to resize text areas",
     textUpdateMode: "Update input field values",
@@ -733,6 +741,7 @@ export var enStrings = {
     correctAnswer: "Correct Answer",
     defaultPanelValue: "Default Values",
     cells: "Cell Texts",
+    fileInputPlaceholder: "Select a file or paste a file link...",
     keyName: "Prevent duplicate responses in the following column",
     itemvalue: {
       visibleIf: "Make the option visible if",
@@ -745,7 +754,7 @@ export var enStrings = {
     imageitemvalue: {
       text: "Alt text"
     },
-    logoPosition: "Logo position",
+    logoPosition: "Logo alignment",
     addLogo: "Add logo...",
     changeLogo: "Change logo...",
     logoPositions: {
@@ -861,10 +870,10 @@ export var enStrings = {
       editorPanel: "Background and corner radius",
       questionPanel: "Background and corner radius",
       primaryColor: "Accent color",
-      panelBackgroundTransparency: "Panel background opacity",
-      questionBackgroundTransparency: "Question background opacity",
-      fontSize: "Font size",
-      scale: "Scale",
+      panelBackgroundTransparency: "Panel and question box opacity",
+      questionBackgroundTransparency: "Input element opacity",
+      fontSize: "Survey font size",
+      scale: "Survey scale factor",
       cornerRadius: "Corner radius",
       pageTitle: "Title font",
       pageDescription: "Description font",
@@ -873,17 +882,18 @@ export var enStrings = {
       editorFont: "Font",
       backgroundOpacity: "Opacity", // Auto-generated string
 
-      "--sjs-font-family": "Font family",
+      "--sjs-font-family": "Survey font family",
       "--sjs-general-backcolor-dim": "Background color",
-      "--sjs-primary-backcolor": "Accent background",
-      "--sjs-primary-forecolor": "Accent foreground",
+      "--sjs-primary-backcolor": "Accent background colors",
+      "--sjs-primary-forecolor": "Accent foreground colors",
+      "--sjs-special-red": "Error message colors",
       "--sjs-shadow-small": "Shadow effects",
       "--sjs-shadow-inner": "Shadow effects",
       "--sjs-border-default": "Colors",
     },
     "header@header": {
       headerView: "View",
-      logoPosition: "Logo position",
+      logoPosition: "Logo alignment",
       surveyTitle: "Survey title font",
       surveyDescription: "Survey description font",
       headerTitle: "Survey title font",
@@ -894,9 +904,9 @@ export var enStrings = {
       backgroundImage: "Background image",
       backgroundImageOpacity: "Opacity",
       overlapEnabled: "Overlap",
-      logoPositionX: "Logo position",
-      titlePositionX: "Title position",
-      descriptionPositionX: "Description position",
+      logoPositionX: "Logo alignment",
+      titlePositionX: "Survey title alignment",
+      descriptionPositionX: "Survey description alignment",
     }
   },
   // Property values
@@ -1131,7 +1141,7 @@ export var enStrings = {
     },
     inheritWidthFrom: {
       survey: "Same as survey",
-      container: "Fit to container",
+      container: "Same as container",
     },
     backgroundColorSwitch: {
       none: "None",
@@ -1219,7 +1229,14 @@ export var enStrings = {
     currencymask: {
       prefix: "Ex.: $",
       suffix: "Ex.: USD"
-    }
+    },
+    panelbase: {
+      questionTitleWidth: "Ex.: 200px"
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "Ex.: 30%",
+      questionTitleWidth: "Ex.: 200px",
+    },
   },
   pehelp: {
     panel: {
@@ -1230,6 +1247,7 @@ export var enStrings = {
       enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the panel.",
       requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer.",
       questionTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default).",
+      questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.).",
       questionErrorLocation: "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting.",
       questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting.",
       page: "Repositions the panel to the end of a selected page.",
@@ -1256,6 +1274,7 @@ export var enStrings = {
       width: "Sets the width of the panel in proportion to other survey elements in the same line. Accepts CSS values (px, %, in, pt, etc.).",
       templateTitle: "Type in a template for dynamic panel titles. Use \{panelIndex}\ for the panel's general position and \{visiblePanelIndex}\ for its order among visible panels. Insert these placeholders into the pattern to add automatic numbering.",
       templateTabTitle: "Type in a template for tab titles. Use \{panelIndex}\ for a panel's general position and \{visiblePanelIndex}\ for its order among visible panels. Insert these placeholders into the pattern to add automatic numbering.",
+      tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value.",
       templateVisibleIf: "This setting allows you to control the visibility of individual panels within the dynamic panel. Use the `{panel}` placeholder to reference the current panel in your expression.",
       titleLocation: "This setting is automatically inherited by all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default).",
       descriptionLocation: "The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Under the panel title\" by default).",
@@ -1345,6 +1364,7 @@ export var enStrings = {
     questionsOrder: "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab.",
     maxTextLength: "For text entry questions only.",
     maxOthersLength: "For question comments only.",
+    commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears.",
     autoGrowComment: "Select if you want question comments and Long Text questions to auto-grow in height based on the entered text length.",
     allowResizeComment: "For question comments and Long Text questions only.",
     calculatedValues: "Custom variables serve as intermediate or auxiliary variables used in form calculations. They take respondent inputs as source values. Each custom variable has a unique name and an expression it's based on.",
@@ -1367,23 +1387,24 @@ export var enStrings = {
     locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab.",
     detailPanelMode: "Sets the location of a details section in relation to a row. Choose from: \"None\" - no expansion is added; \"Under the row\" - a row expansion is placed under each row of the matrix; \"Under the row, display one row expansion only\" - an expansion is displayed under a single row only, the remaining row expansions are collapsed.",
     imageFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio.",
-    autoGrow: "Gradually increases the height of the input field as data is being entered. Overrides the \"Input field height (in lines)\" setting.",
-    allowResize: "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field.",
+    autoGrow: "The \"Inherit\" option applies a survey-level setting (\"Disabled\" by default).",
+    allowResize: "The \"Inherit\" option applies a survey-level setting (\"Enabled\" by default).",
     maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the \"Thank You\" page.",
-    maxTimeToFinishPage: "A time interval in seconds after which the survey auto-advances to the next page.",
+    maxTimeToFinishPage: "A time interval in seconds after which the survey auto-advances to the next page. Hides the \"Previous\" navigation button.",
     page: {
-      maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the next page.",
+      maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the next page. Hides the \"Previous\" navigation button.",
       // isRequired: "Prevents survey submission unless at least one nested question has an answer.",
       visibleIf: "Use the magic wand icon to set a conditional rule that determines page visibility.",
       enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the page.",
       requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer.",
       questionTitleLocation: "Applies to all questions within this page. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default).",
+      questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.).",
       questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default).",
       questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab.",
       navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
     },
     showTimerPanel: "Sets the visibility and location of a timer on a page.",
-    panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded.",
+    panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded. Applies if \"Panel display mode\" is set to \"List\" and the \"Panel title pattern\" property is specified.",
     imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list.",
     choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents.",
     title: "Type a user-friendly title to display.",
@@ -1433,6 +1454,7 @@ export var enStrings = {
     filePlaceholder: "Applies when \"File source type\" is \"Local file\" or when camera is unavailable",
     photoPlaceholder: "Applies when \"File source type\" is \"Camera\".",
     fileOrPhotoPlaceholder: "Applies when \"File source type\" is \"Local file or camera\".",
+    colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line.",
     masksettings: {
       saveMaskedValue: "Select if you want to store the question value with an applied mask in survey results."
     },
@@ -1450,7 +1472,24 @@ export var enStrings = {
     currencymask: {
       prefix: "One or several symbols to be displayed before the value.",
       suffix: "One or several symbols to be displayed after the value."
-    }
+    },
+    theme: {
+      isPanelless: "This setting applies only to questions outside of a panel.",
+      primaryColor: "Sets a supplementary color that highlights key survey elements.",
+      panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background.",
+      questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background.",
+      cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes.",
+      "--sjs-general-backcolor-dim": "Sets the main background color of the survey.",
+    },
+    header: {
+      inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in.",
+      textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels.",
+      overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey.",
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "Accepts values %.",
+      questionTitleWidth: "Accepts values px."
+    },
   },
   // Properties
   p: {
@@ -1554,6 +1593,7 @@ export var enStrings = {
     scaleColorMode: "Rating icon color mode",
     rateColorMode: "Smileys color scheme",
     copyDisplayValue: "Copy display value", // Auto-generated string
+    effectiveColSpan: "Column span",
   },
   theme: {
     advancedMode: "Advanced mode",
@@ -1571,6 +1611,9 @@ export var enStrings = {
     backcolor: "Default background",
     hovercolor: "Hover background",
     borderDecoration: "Border decoration",
+
+    fontColor: "Font color",
+    backgroundColor: "Background color",
 
     primaryForecolor: "Default color",
     primaryForecolorLight: "Disabled color",

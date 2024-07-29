@@ -636,12 +636,34 @@ export class PropertyGridEditorMatrixColumns extends PropertyGridEditorMatrix {
   protected getAllowRowDragDrop(prop: JsonObjectProperty): boolean { return true; }
 }
 
+export class PropertyGridEditorMatrixLayoutColumns extends PropertyGridEditorMatrix {
+  public fit(prop: JsonObjectProperty): boolean {
+    return prop.type == "panellayoutcolumns";
+  }
+  protected getDefaulColumnNames(): Array<string> {
+    return ["width", "questionTitleWidth"];
+  }
+  public onMatrixCellCreated(obj: Base, options: any) {
+    super.onMatrixCellCreated(obj, options);
+
+    const q = options.cellQuestion;
+    q.textUpdateMode = "onTyping";
+  }
+
+  public onCreated(obj: Base, question: Question, prop: JsonObjectProperty, options?: ISurveyCreatorOptions, propGridDefinition?: ISurveyPropertyGridDefinition) {
+    super.onCreated(obj, question, prop, options, propGridDefinition);
+    const matrixQuestion = <QuestionMatrixDynamicModel>question;
+    matrixQuestion.allowRemoveRows = false;
+    matrixQuestion.allowAddRows = false;
+  }
+}
+
 export class PropertyGridEditorMatrixPages extends PropertyGridEditorMatrix {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "surveypages";
   }
   protected addItem(creator: ISurveyCreatorOptions, obj: Base, question: QuestionMatrixDynamicModel) {
-    (creator as CreatorBase).addPage();
+    (creator as CreatorBase).addPage(undefined, false);
   }
   protected getColumnClassName(obj: Base, prop: JsonObjectProperty): string {
     return "page@" + obj.getType();
@@ -898,3 +920,4 @@ PropertyGridEditorCollection.register({
     };
   }
 });
+PropertyGridEditorCollection.register(new PropertyGridEditorMatrixLayoutColumns());

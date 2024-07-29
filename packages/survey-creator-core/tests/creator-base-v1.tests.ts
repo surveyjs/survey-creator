@@ -186,18 +186,9 @@ test("At least one page should be available", () => {
 });
 
 test("options.questionTypes", () => {
-  const allTypes = ElementFactory.Instance.getAllTypes();
+  const allTypes = ElementFactory.Instance.getAllToolboxTypes();
   let creator = new CreatorTester();
-  let unregistredCount = allTypes.indexOf("buttongroup") > -1 ? 1 : 0;
-  if (allTypes.indexOf("linkvalue") > -1) {
-    unregistredCount++;
-  }
-  if (allTypes.indexOf("embeddedsurvey") > -1) {
-    unregistredCount++;
-  }
-  expect(creator.toolbox.items).toHaveLength(
-    allTypes.length - unregistredCount
-  );
+  expect(creator.toolbox.items).toHaveLength(allTypes.length);
   creator = new CreatorTester({
     questionTypes: ["text", "dropdown", "unknown"]
   });

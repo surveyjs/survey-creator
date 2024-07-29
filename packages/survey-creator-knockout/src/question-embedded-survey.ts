@@ -22,11 +22,11 @@ export class QuestionEmbeddedSurvey extends QuestionEmbeddedSurveyModel {
   }
 }
 
-new SurveyTemplateText().addText(questionTemplate, "question", "embeddedsurvey");
+new SurveyTemplateText().addText(questionTemplate.default, "question", "embeddedsurvey");
 
 Serializer.overrideClassCreator("embeddedsurvey", function () {
   return new QuestionEmbeddedSurvey("");
 });
 QuestionFactory.Instance.registerQuestion("embeddedsurvey", (name) => {
   return new QuestionEmbeddedSurvey(name);
-});
+}, false);

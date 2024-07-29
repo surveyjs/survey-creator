@@ -1,5 +1,5 @@
 import { ClientFunction, Selector } from "testcafe";
-import { url, setJSON, takeElementScreenshot, addQuestionByAddQuestionButton, wrapVisualTest, getTabbedMenuItemByText, creatorTabPreviewName, creatorTabDesignerName, resetHoverToCreator, getToolboxItemByText, getPropertyGridCategory, generalGroupName, getListItemByText, surveySettingsButtonSelector, changeToolboxScrolling } from "../../helper";
+import { url, setJSON, takeElementScreenshot, addQuestionByAddQuestionButton, wrapVisualTest, getTabbedMenuItemByText, creatorTabPreviewName, creatorTabDesignerName, resetHoverToCreator, getToolboxItemByText, getPropertyGridCategory, generalGroupName, getListItemByText, surveySettingsButtonSelector, changeToolboxScrolling, changeToolboxSearchEnabled } from "../../helper";
 
 const title = "Designer surface";
 
@@ -310,7 +310,7 @@ test("Matrix column vertical", async (t) => {
 
 test("Matrix column editor boolean", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1920, 900);
+    await t.resizeWindow(1924, 900);
     const surveyJSON = {
       "pages": [
         {
@@ -674,7 +674,7 @@ test("Panel gap between items", async (t) => {
 
 test("Panel multi-question row", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1920, 900);
+    await t.resizeWindow(1924, 900);
     const json = {
       "logoPosition": "right",
       "pages": [
@@ -991,6 +991,7 @@ test("Check survey layout in mobile mode", async (t) => {
 test("Check property grid flyout", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     changeToolboxScrolling(false);
+    await changeToolboxSearchEnabled(false);
     await t.resizeWindow(1120, 900);
     const root = Selector(".svc-creator");
     await setJSON({});
@@ -1085,7 +1086,7 @@ test("Check question adorner width", async (t) => {
       "widthMode": "static",
       "width": "1400"
     });
-    await t.resizeWindow(1920, 1080);
+    await t.resizeWindow(1924, 1080);
     const root = Selector(".sd-page");
     await takeElementScreenshot("question-adorner-width.png", root, t, comparer);
   });
@@ -1296,6 +1297,7 @@ test("Question actions", async (t) => {
 test("Keep scroll to selected on tab changed", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     changeToolboxScrolling(false);
+    await changeToolboxSearchEnabled(false);
     await t.resizeWindow(1600, 900);
     const json = {
       "logoPosition": "right",
@@ -1545,6 +1547,80 @@ test("Check carry forward panel ranking", async (t) => {
     await takeElementScreenshot("carry-forward-panel-ranking.png", rootSelector, t, comparer);
   });
 });
+
+test("Check carry forward panel ranking: selectToRank", async (t) => {
+  await t.resizeWindow(1920, 1920);
+  await setJSON(
+    {
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "checkbox",
+              "name": "question1",
+              "choices": [
+                "Item 1",
+                "Item 2",
+                "Item 3"
+              ]
+            },
+            {
+              "type": "ranking",
+              "name": "question2",
+              "choicesFromQuestion": "question1",
+              "choicesFromQuestionMode": "selected",
+              "selectToRankEnabled": true
+            }
+          ]
+        }
+      ]
+    });
+
+  await wrapVisualTest(t, async (t, comparer) => {
+    const rootSelector = Selector(".svc-question__adorner").nth(1);
+    await takeElementScreenshot("carry-forward-panel-ranking-select-to-rank.png", rootSelector, t, comparer);
+  });
+});
+
+test("Check carry forward panel ranking: selectToRank vertical", async (t) => {
+  await t.resizeWindow(1920, 1920);
+  await setJSON(
+    {
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "checkbox",
+              "name": "question1",
+              "choices": [
+                "Item 1",
+                "Item 2",
+                "Item 3"
+              ]
+            },
+            {
+              "type": "ranking",
+              "name": "question2",
+              "choicesFromQuestion": "question1",
+              "choicesFromQuestionMode": "selected",
+              "selectToRankEnabled": true,
+              "selectToRankAreasLayout": "vertical"
+            }
+          ]
+        }
+      ]
+    });
+
+  await wrapVisualTest(t, async (t, comparer) => {
+    const rootSelector = Selector(".svc-question__adorner").nth(1);
+    await takeElementScreenshot("carry-forward-panel-ranking-select-to-rank-vertical.png", rootSelector, t, comparer);
+  });
+});
+
 test("Restful service banner", async (t) => {
   await t.resizeWindow(1920, 1920);
   await setJSON(
@@ -1936,6 +2012,7 @@ test("Page placeholder without elements", async (t) => {
 test("Check minimal height", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     changeToolboxScrolling(false);
+    await changeToolboxSearchEnabled(false);
     await t.resizeWindow(1120, 900);
     const root = Selector(".svc-creator");
     await setJSON({});
@@ -2028,5 +2105,82 @@ test("Check adorner actions responsivity after convert", async (t) => {
     await ClientFunction(() => { document.body.focus(); })();
     await t.wait(100);
     await takeElementScreenshot("actions-on-converted-question.png", root.nth(0), t, comparer);
+  });
+});
+
+test("Question adorner - collapsed", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 1080);
+    const json = {
+      elements: [
+        {
+          type: "text",
+          name: "question1"
+        },
+        {
+          type: "panel",
+          name: "panel1"
+        }
+      ]
+    };
+    await ClientFunction(() => {
+      window["creator"].expandCollapseButtonVisibility = "onhover";
+    })();
+    await setJSON(json);
+    const qContent = Selector(".svc-question__content");
+    const qCollapseButton = Selector(".svc-question__content #collapse");
+    await t.click(qContent.nth(0), { offsetX: 10, offsetY: 10 });
+    await t.click(qCollapseButton.filterVisible());
+    await takeElementScreenshot("question-adorner-collapsed.png", qContent.nth(0), t, comparer);
+    await t.click(qContent.nth(1), { offsetX: 10, offsetY: 10 });
+    await t.click(qCollapseButton.filterVisible());
+    await takeElementScreenshot("panel-adorner-collapsed.png", qContent.nth(1), t, comparer);
+  });
+});
+
+test("Question adorner - collapsed mobile", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(500, 1080);
+    const json = {
+      elements: [
+        {
+          type: "text",
+          name: "question1"
+        },
+        {
+          type: "panel",
+          name: "panel1"
+        }
+      ]
+    };
+    await ClientFunction(() => {
+      window["creator"].expandCollapseButtonVisibility = "onhover";
+    })();
+    await setJSON(json);
+    const qContent = Selector(".svc-question__content");
+    const qCollapseButton = Selector(".svc-question__content #collapse");
+    await t.click(qContent.nth(0), { offsetX: 10, offsetY: 10 });
+    await t.click(qCollapseButton.filterVisible());
+    await takeElementScreenshot("question-adorner-collapsed-mobile.png", qContent.nth(0), t, comparer);
+    await t.click(qContent.nth(1), { offsetX: 10, offsetY: 10 });
+    await t.click(qCollapseButton.filterVisible());
+    await takeElementScreenshot("panel-adorner-collapsed-mobile.png", qContent.nth(1), t, comparer);
+
+    await t.click(Selector(".svc-creator"), { offsetX: 1, offsetY: 1 });
+    await takeElementScreenshot("question-adorner-collapsed-unselected.png", qContent.nth(0), t, comparer);
+    await takeElementScreenshot("panel-adorner-collapsed-unselected.png", qContent.nth(1), t, comparer);
+  });
+});
+
+test("Question types with subtypes", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1000, 700);
+
+    await t
+      .click(Selector(".svc-page__question-type-selector"))
+      .hover(getListItemByText("Rating Scale").filterVisible())
+      .wait(400)
+      .hover(getListItemByText("Labels").nth(1));
+    await takeElementScreenshot("question-type-rating-subtypes.png", Selector(".sv-popup.sv-popup--dropdown").filterVisible(), t, comparer);
   });
 });

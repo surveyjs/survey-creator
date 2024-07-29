@@ -1625,7 +1625,7 @@ test("DefaultValue editor & readOnly", () => {
   const question = new QuestionDropdownModel("q1");
   question.choices = [1, 2, 3, 4, 5];
   question.defaultValue = 2;
-  const defaultValueProp = Serializer.findProperty("question", "defaultValue");
+  const defaultValueProp = Serializer.findProperty("dropdown", "defaultValue");
   defaultValueProp.readOnly = true;
   var propertyGrid = new PropertyGridModelTester(question);
   const editQuestion = <QuestionLinkValueModel>propertyGrid.survey.getQuestionByName("defaultValue");
@@ -2086,6 +2086,14 @@ test("Change cellType in the column in property grid", () => {
   expect(question.columns[0].cellType).toEqual("checkbox");
   expect(propertyGrid.survey.getQuestionByName("name").value).toEqual("col1");
   expect(propertyGrid.survey.getQuestionByName("showNoneItem")).toBeTruthy();
+});
+test("title for expression property for expression column, Bug#5531", () => {
+  var question = new QuestionMatrixDynamicModel("q1");
+  question.addColumn("col1").cellType = "expression";
+  var options = new EmptySurveyCreatorOptions();
+  var propertyGrid = new PropertyGridModelTester(question.columns[0], options);
+  const expressionQuestion = propertyGrid.survey.getQuestionByName("expression");
+  expect(expressionQuestion.title).toEqual("Expression");
 });
 test("Validate Selected Element Errors", (): any => {
   var titleProp = Serializer.findProperty("question", "title");
@@ -3028,6 +3036,17 @@ test("Allow delete all pages by default", () => {
   expect(pagesQuestion.canRemoveRow(pagesQuestion.visibleRows[0])).toBeTruthy();
   expect(pagesQuestion.canRemoveRow(pagesQuestion.visibleRows[1])).toBeTruthy();
 });
+test("Do not select page on adding new page in the property grid #5564", () => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  expect(creator.survey.pages).toHaveLength(1);
+  creator.selectElement(creator.survey);
+  const pagesQuestion = <QuestionMatrixDynamicModel>creator.propertyGrid.getQuestionByName("pages");
+  const actions = pagesQuestion.getTitleActions();
+  actions[actions.length - 1].action();
+  expect(creator.survey.pages).toHaveLength(2);
+  expect((<any>creator.selectedElement).pages).toHaveLength(2);
+});
 test("Setup correct categories for dynamic properties in components", () => {
   ComponentCollection.Instance.add({
     name: "customdropdown",
@@ -3405,4 +3424,40 @@ test("Show commentText & commentPlaceholder on setting showCommentArea, bug##552
   expect(showCommentAreaQuestion.isVisible).toBeTruthy();
   expect(commentTextQuestion.isVisible).toBeTruthy();
   expect(commentPlaceholderAreaQuestion.isVisible).toBeTruthy();
+});
+test("autoGrow & allowResize on setting comment question", () => {
+  const question = new QuestionCommentModel("q1");
+  const propertyGrid = new PropertyGridModelTester(question);
+  const autoGrowQuestion = propertyGrid.survey.getQuestionByName("autoGrow");
+  const allowResizeQuestion = propertyGrid.survey.getQuestionByName("allowResize");
+
+  expect(question.autoGrow === undefined).toBeTruthy();
+  expect(question.allowResize === undefined).toBeTruthy();
+  expect(autoGrowQuestion.value === "auto").toBeTruthy();
+  expect(allowResizeQuestion.value === "auto").toBeTruthy();
+
+  autoGrowQuestion.value = "false";
+  allowResizeQuestion.value = "false";
+  expect(question.autoGrow === false).toBeTruthy();
+  expect(question.allowResize === false).toBeTruthy();
+
+  autoGrowQuestion.value = "true";
+  allowResizeQuestion.value = "true";
+  expect(question.autoGrow === true).toBeTruthy();
+  expect(question.allowResize === true).toBeTruthy();
+
+  question.autoGrow = false;
+  question.allowResize = false;
+  expect(autoGrowQuestion.value === "false").toBeTruthy();
+  expect(allowResizeQuestion.value === "false").toBeTruthy();
+
+  question.autoGrow = undefined;
+  question.allowResize = undefined;
+  expect(autoGrowQuestion.value === "auto").toBeTruthy();
+  expect(allowResizeQuestion.value === "auto").toBeTruthy();
+
+  question.autoGrow = true;
+  question.allowResize = true;
+  expect(autoGrowQuestion.value === "true").toBeTruthy();
+  expect(allowResizeQuestion.value === "true").toBeTruthy();
 });

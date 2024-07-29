@@ -1,5 +1,5 @@
 import { Selector } from "testcafe";
-import { url, objectSelectorButton, propertyGridSelector, expandButtonSelector, setJSON, takeElementScreenshot, wrapVisualTest, pageNavigator, getListItemByText } from "../../helper";
+import { url, objectSelectorButton, propertyGridSelector, expandButtonSelector, setJSON, takeElementScreenshot, wrapVisualTest, pageNavigator, getListItemByText, changeToolboxSearchEnabled } from "../../helper";
 import { largeSurvey } from "./surveys/large-survey";
 
 const title = "Sidebar Screenshot";
@@ -73,6 +73,7 @@ test("property grid search", async (t) => {
         }
       ]
     });
+    await changeToolboxSearchEnabled(false);
     await t.resizeWindow(1920, 900);
     await takeElementScreenshot("side-bar-search-empty.png", Selector(".spg-container_search"), t, comparer);
 
@@ -88,5 +89,29 @@ test("property grid search", async (t) => {
 
     await t.click(Selector(".spg-search-editor_bar-item").nth(2)); // clear
     await takeElementScreenshot("side-bar-search-empty.png", Selector(".spg-container_search"), t, comparer);
+  });
+});
+
+test("property grid search matrix", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await setJSON({
+      "elements": [
+        {
+          "type": "radiogroup",
+          "name": "question1",
+          "choices": [
+            "Item 1",
+            "Item 2",
+            "Item 3"
+          ]
+        }
+      ]
+    });
+    await changeToolboxSearchEnabled(false);
+    await t.click(".sd-question");
+    await t.resizeWindow(1920, 900);
+
+    await t.typeText(".spg-search-editor_input", "choices");
+    await takeElementScreenshot("side-bar-search-matrix.png", ".spg-matrixdynamic__content", t, comparer);
   });
 });

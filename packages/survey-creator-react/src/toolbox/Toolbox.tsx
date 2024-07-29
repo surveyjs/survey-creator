@@ -37,15 +37,18 @@ export class Toolbox extends SurveyElementBase<ISurveyCreatorToolboxProps, any> 
     );
   }
 
-  renderItems(items: Array<any>, isCompact = false) {
-    return items.map((item, itemIndex) =>
-      <SurveyCreatorToolboxTool item={(item as any)} creator={this.creator} isCompact={isCompact} key={"item" + itemIndex} ></SurveyCreatorToolboxTool>
-    );
+  renderItems(items: Array<any>, isCompact = false): Array<JSX.Element> {
+    const result = [];
+    items.forEach((item, itemIndex) => {
+      const tool = <SurveyCreatorToolboxTool item={(item as any)} creator={this.creator} parentModel={this.toolbox} isCompact={isCompact} key={"item" + itemIndex} ></SurveyCreatorToolboxTool>;
+      result.push(tool);
+    });
+    return result;
   }
 
   renderCategories() {
     return this.toolbox.categories.map((category, index) => {
-      return <SurveyCreatorToolboxCategory category={category} toolbox={this.toolbox} key={"item" + index} ></SurveyCreatorToolboxCategory>;
+      return <SurveyCreatorToolboxCategory category={category} toolbox={this.toolbox} key={"category" + index} ></SurveyCreatorToolboxCategory>;
     });
   }
 }

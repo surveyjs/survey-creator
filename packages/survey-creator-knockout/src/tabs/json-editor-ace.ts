@@ -1,7 +1,7 @@
 import * as ko from "knockout";
 import { ImplementorBase } from "survey-knockout-ui";
 import { TabJsonEditorAcePlugin, AceJsonEditorModel } from "survey-creator-core";
-const template: string = require("./json-editor-ace.html");
+const template = require("./json-editor-ace.html");
 // import template from "./json-editor-ace.html";
 
 ko.components.register("svc-tab-json-editor-ace", {
@@ -23,5 +23,5 @@ ko.components.register("svc-tab-json-editor-ace", {
       return { model: plugin.model };
     }
   },
-  template: template
+  template: template.default
 });

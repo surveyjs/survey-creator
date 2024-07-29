@@ -232,6 +232,7 @@ export var propertyGridCss = {
     headerCell: "spg-table__cell spg-table__cell--header",
     rowFadeIn: "spg-table__row--fade-in",
     rowFadeOut: "spg-table__row--fade-out",
+    emptyCell: "spg-table__cell--empty",
   },
   matrixdynamic: {
     tableWrapper: "spg-table-wrapper",
@@ -262,6 +263,7 @@ export var propertyGridCss = {
     cellQuestionWrapper: "spg-table__question-wrapper",
     rowFadeIn: "spg-table__row--fade-in",
     rowFadeOut: "spg-table__row--fade-out",
+    emptyCell: "spg-table__cell--empty",
   },
   rating: {
     root: "spg-rating",

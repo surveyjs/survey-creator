@@ -18,7 +18,7 @@ ko.components.register("svc-property-grid", {
       return params;
     }
   },
-  template: template
+  template: template.default
 });
 
 Serializer.overrideClassCreator("buttongroup", function () {
@@ -29,4 +29,4 @@ QuestionFactory.Instance.registerQuestion("buttongroup", (name) => {
   var q = new QuestionButtonGroup(name);
   q.choices = QuestionFactory.DefaultChoices;
   return q;
-});
+}, false);

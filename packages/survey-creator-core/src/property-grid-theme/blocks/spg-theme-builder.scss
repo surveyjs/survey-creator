@@ -61,11 +61,12 @@
 
     .spg-question__title {
       white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
       .sv-string-viewer {
           white-space: nowrap;
         }
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
   }
 

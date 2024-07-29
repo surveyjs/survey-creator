@@ -63,9 +63,6 @@ export class StringEditorComponent extends CreatorModelComponent<StringEditorVie
   public get errorText(): string {
     return this.baseModel.errorText;
   }
-  public get editValue(): string {
-    return this.baseModel.focused && this.baseModel.editAsText && this.locString.text || this.locString.renderedHtml;
-  }
   onChangeHandler = (): void => {
     this.detectChanges();
   }

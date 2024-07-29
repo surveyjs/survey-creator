@@ -655,25 +655,28 @@ export class ConditionEditor extends PropertyEditorSetupValue {
         const context = contextObject ? contextObject : (!this.context || this.context === question);
         question.addConditionObjectsByContext(res, context);
       }
-      sortOrder = this.options.onConditionQuestionsGetListCallback(this.propertyName, <any>this.object, this, res);
-      for (let i = 0; i < res.length; i++) {
-        res[i].value = res[i].name;
-        let question = !!res[i].question ? res[i].question : res[i];
-        if (!this.options.showTitlesInExpressions) {
-          let name = res[i].name;
-          let valueName = question.valueName;
-          if (!!valueName && name.indexOf(valueName) == 0) {
-            name = name.replace(valueName, question.name);
-          }
-          const unwrappedValueText = "-unwrapped";
-          name = name.replace(unwrappedValueText, "");
-          res[i].text = this.options.getObjectDisplayName(question, "condition-editor", "condition", name);
-        }
-        this.addConditionQuestionsHash[res[i].name] = question;
-      }
     }
+
     const variableNames = this.survey.getVariableNames();
     this.addSurveyCalculatedValues(variableNames);
+    sortOrder = this.options.onConditionQuestionsGetListCallback(this.propertyName, <any>this.object, this, res, variableNames);
+
+    for (let i = 0; i < res.length; i++) {
+      res[i].value = res[i].name;
+      let question = !!res[i].question ? res[i].question : res[i];
+      if (!this.options.showTitlesInExpressions) {
+        let name = res[i].name;
+        let valueName = question.valueName;
+        if (!!valueName && name.indexOf(valueName) == 0) {
+          name = name.replace(valueName, question.name);
+        }
+        const unwrappedValueText = "-unwrapped";
+        name = name.replace(unwrappedValueText, "");
+        res[i].text = this.options.getObjectDisplayName(question, "condition-editor", "condition", name);
+      }
+      this.addConditionQuestionsHash[res[i].name] = question;
+    }
+
     this.addValuesIntoConditionQuestions(variableNames, res);
     if (sortOrder === "asc") {
       SurveyHelper.sortItems(res);

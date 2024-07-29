@@ -20,17 +20,17 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script> -->
 
-  <script src="../node_modules/survey-core/survey.core.js"></script>
-  <script src="../node_modules/survey-core/survey.i18n.min.js"></script>
-  <script src="../node_modules/survey-knockout-ui/survey-knockout-ui.js"></script>
-  <script src="../node_modules/survey-creator-core/survey-creator-core.js"></script>
+  <script src="./node_modules/survey-core/survey.core.js"></script>
+  <script src="./node_modules/survey-core/survey.i18n.min.js"></script>
+  <script src="./node_modules/survey-knockout-ui/survey-knockout-ui.js"></script>
+  <script src="./node_modules/survey-creator-core/survey-creator-core.js"></script>
 
-  <!--<script src="../build/survey-creator-knockout.js"></script>-->
-  <!-- <link rel="stylesheet" type="text/css" href="../node_modules/survey-core/survey.css" /> -->
-  <!-- <link rel="stylesheet" type="text/css" href="../node_modules/survey-core/modern.css" /> -->
-  <link rel="stylesheet" type="text/css" href="../node_modules/survey-core/defaultV2.css" />
-  <link rel="stylesheet" type="text/css" href="../node_modules/survey-creator-core/survey-creator-core.css" />
-  <!--<link rel="stylesheet" type="text/css" href="../build/survey-creator-knockout.css" />-->
+  <!--<script src="./build/survey-creator-knockout.js"></script>-->
+  <!-- <link rel="stylesheet" type="text/css" href="./node_modules/survey-core/survey.css" /> -->
+  <!-- <link rel="stylesheet" type="text/css" href="./node_modules/survey-core/modern.css" /> -->
+  <link rel="stylesheet" type="text/css" href="./node_modules/survey-core/defaultV2.css" />
+  <link rel="stylesheet" type="text/css" href="./node_modules/survey-creator-core/survey-creator-core.css" />
+  <!--<link rel="stylesheet" type="text/css" href="./build/survey-creator-knockout.css" />-->
 
   <!-- <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
@@ -61,11 +61,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
 
-<body>
+<body onload="init()">
   <button onclick="setJSON()">Set JSON</button>
   <div id="surveyCreator" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0;">
   </div>
+  <script src="index.js" type="text/javascript"></script>
 </body>
-<script src="index.js" type="text/javascript"></script>
 
 </html>

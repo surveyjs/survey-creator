@@ -92,6 +92,7 @@ export class DefaultMatrixRowValueEditor extends DefaultArrayValueEditor {
     json.minRowCount = 1;
     json.maxRowCount = 1;
     json.columnsLocation = "vertical";
+    delete json.defaultValue;
     return json;
   }
 }

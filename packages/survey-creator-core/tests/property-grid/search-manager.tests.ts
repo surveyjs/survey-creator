@@ -1,5 +1,5 @@
 import { SurveyModel, settings } from "survey-core";
-import { SearchManager } from "../../src/property-grid/search-manager";
+import { SearchManagerPropertyGrid } from "../../src/property-grid/search-manager";
 
 function createSurvey(): SurveyModel {
   return new SurveyModel({
@@ -27,7 +27,7 @@ function getHighlightedEditors(survey: SurveyModel) {
   return survey.getAllQuestions().filter(q => q.getRootCss().indexOf(highlightedEditorClass) !== -1);
 }
 test("SearchManager init state", () => {
-  const searchManager = new SearchManager();
+  const searchManager = new SearchManagerPropertyGrid();
   const survey = createSurvey();
   searchManager.setSurvey(survey);
   expect(searchManager.searchActionBar.actions).toHaveLength(3);
@@ -36,7 +36,7 @@ test("SearchManager init state", () => {
 });
 
 test("SearchManager: highlightedEditorClass", () => {
-  const searchManager = new SearchManager();
+  const searchManager = new SearchManagerPropertyGrid();
   const survey = createSurvey();
   searchManager.setSurvey(survey);
 
@@ -77,7 +77,7 @@ test("SearchManager: highlightedEditorClass", () => {
 });
 
 test("SearchManager: matchCounterText", () => {
-  const searchManager = new SearchManager();
+  const searchManager = new SearchManagerPropertyGrid();
   const survey = createSurvey();
   searchManager.setSurvey(survey);
   searchManager.filterString = "st";
@@ -104,7 +104,7 @@ test("SearchManager: matchCounterText", () => {
 });
 
 test("SearchManager: enabled searchActionBar items", () => {
-  const searchManager = new SearchManager();
+  const searchManager = new SearchManagerPropertyGrid();
   const survey = createSurvey();
   searchManager.setSurvey(survey);
   searchManager.filterString = "st";
@@ -139,7 +139,7 @@ test("SearchManager: enabled searchActionBar items", () => {
 });
 
 test("SearchManager: normalizeTextCallback", () => {
-  const searchManager = new SearchManager();
+  const searchManager = new SearchManagerPropertyGrid();
   const survey = new SurveyModel({
     "elements": [
       {
@@ -174,7 +174,7 @@ test("SearchManager: normalizeTextCallback", () => {
 });
 
 test("SearchManager: search by name and description", () => {
-  const searchManager = new SearchManager();
+  const searchManager = new SearchManagerPropertyGrid();
   const survey = new SurveyModel({
     "elements": [
       {

@@ -11,5 +11,5 @@ ko.components.register("svc-side-bar-tab", {
       return params;
     },
   },
-  template: template
+  template: template.default
 });

@@ -136,4 +136,4 @@ Serializer.addClass("spinedit", [
 ], () => new QuestionSpinEditorModel(""), "text");
 QuestionFactory.Instance.registerQuestion("spinedit", name => {
   return new QuestionSpinEditorModel(name);
-});
+}, false);

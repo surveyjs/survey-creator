@@ -42,7 +42,6 @@ test("Edit matrix row default value", () => {
   var question = new QuestionMatrixDynamicModel("q1");
   question.addColumn("col1");
   question.addColumn("col2");
-  question.rows = ["row1", "row2"];
   question.defaultRowValue = { col1: 1, col2: 2 };
   var editor = new DefaultMatrixRowValueEditor(question, "defaultRowValue");
   const editorQuestion = <QuestionMatrixDynamicModel>editor.question;
@@ -55,6 +54,23 @@ test("Edit matrix row default value", () => {
   editorQuestion.visibleRows[0].cells[1].value = 4;
   editor.apply();
   expect(question.defaultRowValue).toEqual({ col1: 3, col2: 4 });
+});
+test("Edit matrix row default value and defaultValue, Bug#5663", () => {
+  var question = new QuestionMatrixDynamicModel("q1");
+  question.addColumn("col1");
+  question.addColumn("col2");
+  question.defaultValue = [{ col1: 1, col2: 2 }, { col1: 3, col2: 4 }];
+  var editor = new DefaultMatrixRowValueEditor(question, "defaultRowValue");
+  const editorQuestion = <QuestionMatrixDynamicModel>editor.question;
+  expect(editorQuestion.defaultValue).toBeFalsy();
+  expect(editorQuestion.getType()).toEqual("matrixdynamic");
+  expect(editorQuestion.columns).toHaveLength(2);
+  expect(editorQuestion.rowCount).toEqual(1);
+  expect(editorQuestion.columnsLocation).toEqual("vertical");
+  editorQuestion.visibleRows[0].cells[0].value = 5;
+  editorQuestion.visibleRows[0].cells[1].value = 6;
+  editor.apply();
+  expect(question.defaultRowValue).toEqual({ col1: 5, col2: 6 });
 });
 test("Edit panel dynamic panel default value", () => {
   const question = new QuestionPanelDynamicModel("q1");
@@ -214,4 +230,33 @@ test("Clear read-only and enbleIf column properties", () => {
   const editor = new DefaultValueEditor(question, "defaultValue");
   const editorQuestionJSON = editor["getQuestionJSON"]();
   expect(editorQuestionJSON.columns).toEqual([{ name: "col1", cellType: "text" }, { name: "col2" }, { name: "col3" }]);
+});
+test("Delete random properties properties", () => {
+  const survey = new SurveyModel({
+    "elements": [
+      {
+        "type": "checkbox",
+        "name": "q1",
+        "choices": ["Item-1"],
+        "choicesOrder": "random"
+      },
+      {
+        "type": "checkbox",
+        "name": "q2",
+        "choices": ["Item-1"],
+        "choicesOrder": "asc"
+      }
+    ]
+  });
+  const etalon: any = { name: "question", choices: ["Item-1"], storeOthersAsComment: false, title: "q1", type: "checkbox" };
+  let question = survey.getQuestionByName("q1");
+  let editor = new DefaultValueEditor(question, "defaultValue");
+  let editorQuestionJSON = editor["getQuestionJSON"]();
+  expect(editorQuestionJSON).toEqual(etalon);
+  question = survey.getQuestionByName("q2");
+  editor = new DefaultValueEditor(question, "defaultValue");
+  editorQuestionJSON = editor["getQuestionJSON"]();
+  etalon.choicesOrder = "asc";
+  etalon.title = "q2";
+  expect(editorQuestionJSON).toEqual(etalon);
 });

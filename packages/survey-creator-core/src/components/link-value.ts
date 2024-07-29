@@ -98,4 +98,4 @@ Serializer.addClass(
 
 QuestionFactory.Instance.registerQuestion("linkvalue", (name) => {
   return new QuestionLinkValueModel(name);
-});
+}, false);

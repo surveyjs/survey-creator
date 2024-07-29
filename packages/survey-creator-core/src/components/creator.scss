@@ -48,7 +48,7 @@ survey-creator,
 .svc-creator__content-wrapper {
   width: 100%;
   height: 0;
-    flex-grow: 1;
+  flex-grow: 1;
 }
 
 
@@ -100,8 +100,7 @@ survey-creator,
 }
 
 .svc-item__banner {
-  position: absolute;
-  top: 0;
+  position: relative;
   max-width: 0;
   overflow: hidden;
   height: 100%;
@@ -117,7 +116,8 @@ survey-creator,
   @include defaultBold;
   vertical-align: middle;
   padding: calcSize(1.5) calcSize(16);
-    display: block;
+  display: block;
+
   a {
     color: $primary-foreground;
   }
@@ -128,6 +128,7 @@ survey-creator,
     padding: calcSize(1.5) calcSize(5);
   }
 }
+
 .sv-drag-drop-ghost {
   top: calcSize(0.75);
   width: 100%;

@@ -314,6 +314,11 @@ export class StringEditorViewModelBase extends Base {
     if(this.creator) {
       this.creator.selectFromStringEditor = true;
     }
+
+    if (this.locString.hasHtml && this.editAsText) {
+      event.target.innerText = event.target.textContent = this.locString.calculatedText;
+    }
+
     event.target.parentElement.click();
     event.target.spellcheck = true;
     event.target.setAttribute("tabindex", -1);
@@ -399,6 +404,7 @@ export class StringEditorViewModelBase extends Base {
     this.focused = false;
     window?.getSelection().removeAllRanges();
   }
+
   private getClearedText(target: HTMLElement): string {
     const html = target.innerHTML;
     const text = target.innerText;
@@ -418,7 +424,7 @@ export class StringEditorViewModelBase extends Base {
     if (mdText) {
       clearedText = mdText;
     } else {
-      let txt = this.locString.hasHtml ? html : text;
+      let txt = this.locString.hasHtml && !this.editAsText ? html : text;
       if (!this.locString.allowLineBreaks) txt = clearNewLines(txt);
       clearedText = txt;
     }

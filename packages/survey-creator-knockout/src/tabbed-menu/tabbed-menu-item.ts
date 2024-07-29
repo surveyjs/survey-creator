@@ -7,5 +7,5 @@ ko.components.register("svc-tabbed-menu-item", {
       return params.item;
     },
   },
-  template: template,
+  template: template.default,
 });

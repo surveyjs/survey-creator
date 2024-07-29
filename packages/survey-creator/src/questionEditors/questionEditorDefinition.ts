@@ -43,6 +43,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "width", tab: "layout" },
         { name: "minWidth", tab: "layout" },
         { name: "maxWidth", tab: "layout" },
+        { name: "effectiveColSpan", tab: "layout" },
         { name: "valueName", tab: "data" },
         { name: "defaultValue", tab: "data" },
         { name: "correctAnswer", tab: "data" },
@@ -329,6 +330,9 @@ export class SurveyQuestionEditorDefinition {
         "useGrouping",
       ],
     },
+    "panellayoutcolumn": {
+      properties: ["effectiveWidth", "questionTitleWidth"]
+    },
     matrixdropdowncolumn: {
       properties: ["isRequired", "cellType", "name", "title"],
     },
@@ -478,6 +482,7 @@ export class SurveyQuestionEditorDefinition {
       properties: [
         "renderMode",
         "templateTabTitle",
+        "tabTitlePlaceholder",
         "tabAlign",
         "panelCount",
         "minPanelCount",
@@ -516,7 +521,9 @@ export class SurveyQuestionEditorDefinition {
         { name: "enableIf", tab: "logic" },
         { name: "requiredIf", tab: "logic" },
         { name: "questionTitleLocation", tab: "layout" },
-        { name: "questionErrorLocation", tab: "layout" }
+        { name: "questionTitleWidth", tab: "layout" },
+        { name: "questionErrorLocation", tab: "layout" },
+        { name: "layoutColumns", tab: "layout" },
       ],
       tabs: [
         { name: "logic", index: 100 },
@@ -536,6 +543,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "indent", tab: "layout" },
         { name: "innerIndent", tab: "layout" },
         { name: "width", tab: "layout" },
+        { name: "effectiveColSpan", tab: "layout" },
         { name: "showNumber", tab: "numbering" },
         { name: "showQuestionNumbers", tab: "numbering" },
         { name: "questionStartIndex", tab: "numbering" },
@@ -600,8 +608,10 @@ export class SurveyQuestionEditorDefinition {
         { name: "questionsOrder", tab: "question" },
         { name: "maxTextLength", tab: "question" },
         { name: "maxOthersLength", tab: "question" },
+        { name: "commentAreaRows", tab: "question" },
         { name: "autoGrowComment", tab: "question" },
         { name: "allowResizeComment", tab: "question" },
+        { name: "gridLayoutEnabled", tab: "question" },
 
         { name: "showPageTitles", tab: "pages" },
         { name: "showPageNumbers", tab: "pages" },

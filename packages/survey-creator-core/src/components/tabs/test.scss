@@ -78,6 +78,14 @@ svc-tab-test {
   }
 }
 
+.svc-page-invisible .sv-list-item__marker-icon {
+  --sjs-general-forecolor-light: rgba(0, 0, 0, 0.45);
+
+  padding: 0;
+  opacity: 0.5;
+  margin-inline-end: calcSize(0.5);
+}
+
 .svc-test-tab__content .sd-body--empty {
   font-family: $font-family;
   font-style: normal;

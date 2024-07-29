@@ -13,7 +13,7 @@ export class CreatorSurveyPageComponent extends PageAdorner {
   constructor(creator: SurveyCreatorModel, private _page: PageModel | ko.Observable<PageModel>) {
     super(creator, ko.unwrap(_page));
 
-    if(ko.isSubscribable(_page)) {
+    if (ko.isSubscribable(_page)) {
       this.pageUpdater = _page.subscribe((newPage: PageModel) => {
         this.detachElement(this.currPage);
         this.currPage = newPage;
@@ -33,7 +33,7 @@ export class CreatorSurveyPageComponent extends PageAdorner {
   fixedDispose(): void {
     this.pageUpdater && this.pageUpdater.dispose();
     super.dispose();
-    if(ko.isWritableObservable(this._page)) {
+    if (ko.isWritableObservable(this._page)) {
       (this._page as ko.Observable<PageModel>)(undefined);
     }
     this._page = undefined;
@@ -60,5 +60,5 @@ ko.components.register("svc-page", {
       return pageAdornerViewModel;
     }
   },
-  template: template
+  template: template.default
 });

@@ -193,10 +193,10 @@ test("actions and creator.onPropertyValueChanging", () => {
   creator.JSON = { elements: [{ type: "text", name: "q1" }] };
   let isRequiredNewValue = false;
   creator.onPropertyValueChanging.add((sender, options) => {
-    if(options.propertyName === "isRequired") {
+    if (options.propertyName === "isRequired") {
       options.newValue = isRequiredNewValue;
     }
-    if(options.propertyName === "inputType" && options.newValue === "tel") {
+    if (options.propertyName === "inputType" && options.newValue === "tel") {
       options.newValue = "date";
     }
   });
@@ -214,7 +214,8 @@ test("actions and creator.onPropertyValueChanging", () => {
   expect(popup).toBeTruthy();
   popup.toggleVisibility();
   const list = popup.contentComponentData.model;
-  list.onSelectionChanged(list.actions.filter(item => item.id === "tel")[0]);
+  const telItem = list.actions.filter(item => item.id === "tel")[0];
+  list.onItemClick(telItem);
   expect(q1.inputType).toBe("date");
   expect(action.title).toBe("Date");
 });

@@ -224,7 +224,7 @@ test("export json to file", (done): any => {
   const editorPlugin: TabJsonEditorTextareaPlugin = <TabJsonEditorTextareaPlugin>creator.getPlugin("editor");
   editorPlugin.activate();
 
-  expect(editorPlugin.model.text).toEqual("{\n \"pages\": [\n  {\n   \"name\": \"page1\",\n   \"elements\": [\n    {\n     \"type\": \"text\",\n     \"name\": \"q1\"\n    },\n    {\n     \"type\": \"text\",\n     \"name\": \"q2\"\n    }\n   ]\n  }\n ]\n}");
+  expect(editorPlugin.model.text).toEqual("{\n  \"pages\": [\n    {\n      \"name\": \"page1\",\n      \"elements\": [\n        {\n          \"type\": \"text\",\n          \"name\": \"q1\"\n        },\n        {\n          \"type\": \"text\",\n          \"name\": \"q2\"\n        }\n      ]\n    }\n  ]\n}");
   editorPlugin.saveToFileHandler = async (fileName: string, blob: Blob) => {
     let fileReader = new FileReader();
     fileReader.onload = (e) => {
@@ -235,4 +235,16 @@ test("export json to file", (done): any => {
     fileReader.readAsText(blob);
   };
   editorPlugin.exportToFile(settings.jsonEditor.exportFileName);
+});
+test("Put elements into end of the JSON", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: { type: "text", name: "q1" }
+  };
+  creator.survey.pages[0].title = "test";
+  const editor = new TextareaJsonEditorModel(creator);
+  const text = editor.text;
+  const elementsPos = text.indexOf("elements");
+  const titlePos = text.indexOf("title");
+  expect(elementsPos > titlePos).toBeTruthy();
 });

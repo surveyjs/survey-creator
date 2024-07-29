@@ -244,6 +244,18 @@ export interface ICreatorOptions {
    */
   questionTypes?: Array<string>;
   /**
+   * Specifies where to add new questions when users click the "Add Question" button.
+   * 
+   * Accepted values:
+   * 
+   * - `true` (default)       
+   * New questions are added to the end of a survey page.
+   * 
+   * - `false`      
+   * New questions are added after the currently selected question on the design surface.
+   */
+  addNewQuestionLast?: boolean;
+  /**
    * Specifies how Survey Creator users edit survey pages.
    * 
    * Accepted values:

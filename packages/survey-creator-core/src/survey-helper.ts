@@ -269,10 +269,18 @@ export class SurveyHelper {
     delete json["minWidth"];
     delete json["maxWidth"];
   }
+  private static deleteRandomProperties(json: any) {
+    ["choicesOrder", "rowsOrder"].forEach(prop => {
+      if(json[prop] === "random") {
+        delete json[prop];
+      }
+    });
+  }
   public static updateQuestionJson(questionJson: any) {
     questionJson.storeOthersAsComment = false;
     delete questionJson.valuePropertyName;
     SurveyHelper.deleteConditionProperties(questionJson);
+    SurveyHelper.deleteRandomProperties(questionJson);
     SurveyHelper.deleteConditionPropertiesFromArray(questionJson.choices);
     SurveyHelper.deleteConditionPropertiesFromArray(questionJson.rows);
     SurveyHelper.deleteConditionPropertiesFromArray(questionJson.columns);

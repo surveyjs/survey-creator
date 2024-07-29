@@ -1,3 +1,5 @@
+// This dictionary contains 65 untranslated or inherited localization strings.
+// These strings are commented out. Uncomment and edit them if you want to add your translations.
 import { editorLocalization } from "survey-creator-core";
 
 export var msStrings = {
@@ -119,6 +121,8 @@ export var msStrings = {
     generateReadableJSON: "Jana JSON yang Boleh Dibaca",
     toolbox: "Kotak Alat",
     "property-grid": "Ciri",
+    toolboxFilteredTextPlaceholder: "Taip untuk mencari...",
+    toolboxNoResultsFound: "Tiada keputusan ditemui",
     propertyGridFilteredTextPlaceholder: "Taip untuk mencari...",
     propertyGridNoResultsFound: "Tiada keputusan ditemui",
     correctJSON: "Pilih JSON yang betul.",
@@ -297,6 +301,7 @@ export var msStrings = {
       templateTitle: "Corak tajuk panel",
       noEntriesText: "Teks panel kosong",
       templateTabTitle: "Corak tajuk tab",
+      tabTitlePlaceholder: "Ruang letak tajuk tab",
       templateVisibleIf: "Jadikan panel individu kelihatan jika",
       hideNumber: "Sembunyikan nombor panel",
       titleLocation: "Penjajaran tajuk panel",
@@ -595,6 +600,7 @@ export var msStrings = {
     allowCompleteSurveyAutomatic: "Lengkapkan tinjauan secara automatik",
     showProgressBar: "Tunjukkan bar perkembangan",
     questionTitleLocation: "Lokasi tajuk soalan",
+    questionTitleWidth: "Lebar tajuk soalan",
     requiredText: "Soalan memerlukan simbol",
     questionTitleTemplate: "Templat tajuk soalan, lalai ialah: '{tidak}. {perlukan} {tajuk}'",
     questionErrorLocation: "Lokasi ralat soalan",
@@ -642,6 +648,7 @@ export var msStrings = {
     questionsOnPageMode: "Struktur tinjauan",
     maxTextLength: "Panjang jawapan maksimum (dalam aksara)",
     maxOthersLength: "Panjang komen maksimum (dalam aksara)",
+    commentAreaRows: "Komen ketinggian kawasan (dalam garisan)",
     autoGrowComment: "Kembangkan kawasan komen secara automatik jika perlu",
     allowResizeComment: "Benarkan pengguna mensaiz semula kawasan teks",
     textUpdateMode: "Mengemas kini nilai soalan teks",
@@ -731,6 +738,7 @@ export var msStrings = {
     correctAnswer: "Jawapan yang betul",
     defaultPanelValue: "Nilai Lalai",
     cells: "Teks sel",
+    fileInputPlaceholder: "Pilih fail atau tampal pautan fail...",
     keyName: "Lajur utama",
     itemvalue: {
       visibleIf: "Jadikan opsyen kelihatan jika",
@@ -874,6 +882,7 @@ export var msStrings = {
       "--sjs-general-backcolor-dim": "Warna latar belakang",
       "--sjs-primary-backcolor": "Latar belakang aksen",
       "--sjs-primary-forecolor": "Aksen latar depan",
+      "--sjs-special-red": "Mesej ralat",
       "--sjs-shadow-small": "Kesan bayang",
       "--sjs-shadow-inner": "Kesan bayang",
       "--sjs-border-default": "Warna"
@@ -1216,6 +1225,9 @@ export var msStrings = {
     currencymask: {
       prefix: "Ex.: $",
       suffix: "Ex.: USD"
+    },
+    panelbase: {
+      questionTitleWidth: "Ex.: 200px"
     }
   },
   pehelp: {
@@ -1226,6 +1238,7 @@ export var msStrings = {
       enableIf: "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang melumpuhkan mod baca sahaja untuk panel.",
       requiredIf: "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang menghalang penyerahan tinjauan melainkan sekurang-kurangnya satu soalan tersarang mempunyai jawapan.",
       questionTitleLocation: "Digunakan untuk semua soalan dalam panel ini. Jika anda ingin mengubah seting ini, takrifkan peraturan penjajaran tajuk untuk soalan individu. Pilihan \"Warisan\" menggunakan peringkat halaman (jika ditetapkan) atau tetapan peringkat tinjauan (\"Atas\" secara lalai).",
+      questionTitleWidth: "Menetapkan lebar yang konsisten untuk tajuk soalan apabila ia dijajarkan di sebelah kiri kotak soalan mereka. Menerima nilai CSS (px, %, dalam, pt, dll.).",
       questionErrorLocation: "Mengesetkan lokasi mesej ralat berhubung dengan semua soalan dalam panel. Opsyen \"Warisan\" menggunakan aras halaman (jika set) atau seting aras tinjauan.",
       questionsOrder: "Mengekalkan susunan soalan asal atau rawak mereka. Opsyen \"Warisan\" menggunakan aras halaman (jika set) atau seting aras tinjauan.",
       page: "Meletakkan semula panel di hujung halaman yang dipilih.",
@@ -1250,6 +1263,7 @@ export var msStrings = {
       width: "Mengesetkan lebar panel mengikut kadar unsur tinjauan lain dalam baris yang sama. Menerima nilai CSS (px, %, dalam, pt, dll.).",
       templateTitle: "Taipkan templat untuk tajuk panel dinamik. Gunakan {panelIndex} untuk kedudukan umum panel dan {visiblePanelIndex} untuk pesanannya di kalangan panel yang kelihatan. Masukkan ruang letak ini ke dalam corak untuk menambah penomboran automatik.",
       templateTabTitle: "Taipkan templat untuk tajuk tab. Gunakan {panelIndex} untuk kedudukan umum panel dan {visiblePanelIndex} untuk pesanannya di kalangan panel yang boleh dilihat. Masukkan ruang letak ini ke dalam corak untuk menambah penomboran automatik.",
+      tabTitlePlaceholder: "Teks sandaran untuk tajuk tab yang digunakan apabila corak tajuk tab tidak menghasilkan nilai yang bermakna.",
       templateVisibleIf: "Tetapan ini membolehkan anda mengawal penglihatan panel individu dalam panel dinamik. Gunakan ruang letak '{panel}' untuk merujuk panel semasa dalam ungkapan anda.",
       titleLocation: "Tetapan ini diwarisi secara automatik oleh semua soalan dalam panel ini. Jika anda ingin mengubah seting ini, takrifkan peraturan penjajaran tajuk untuk soalan individu. Pilihan \"Warisan\" menggunakan peringkat halaman (jika ditetapkan) atau tetapan peringkat tinjauan (\"Atas\" secara lalai).",
       descriptionLocation: "Opsyen \"Warisan\" menggunakan aras halaman (jika ditetapkan) atau seting aras tinjauan (\"Di bawah tajuk panel\" secara lalai).",
@@ -1339,6 +1353,7 @@ export var msStrings = {
     questionsOrder: "Mengekalkan susunan soalan asal atau rawak mereka. Kesan seting ini hanya kelihatan dalam tab Pratonton.",
     maxTextLength: "Untuk soalan entri teks sahaja.",
     maxOthersLength: "Untuk komen soalan sahaja.",
+    commentAreaRows: "Mengesetkan bilangan baris yang dipaparkan dalam kawasan teks untuk komen soalan. Dalam input mengambil lebih banyak baris, bar skrol muncul.",
     autoGrowComment: "Pilih jika anda inginkan komen soalan dan soalan Teks Panjang untuk mengembangkan ketinggian automatik berdasarkan panjang teks yang dimasukkan.",
     allowResizeComment: "Untuk komen soalan dan soalan Teks Panjang sahaja.",
     calculatedValues: "Pemboleh ubah tersuai berfungsi sebagai pemboleh ubah perantaraan atau tambahan yang digunakan dalam pengiraan borang. Mereka mengambil input responden sebagai nilai sumber. Setiap pemboleh ubah tersuai mempunyai nama unik dan ungkapan yang berdasarkannya.",
@@ -1371,6 +1386,7 @@ export var msStrings = {
       enableIf: "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang menyahdayakan mod baca sahaja untuk halaman.",
       requiredIf: "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang menghalang penyerahan tinjauan melainkan sekurang-kurangnya satu soalan tersarang mempunyai jawapan.",
       questionTitleLocation: "Digunakan untuk semua soalan dalam halaman ini. Jika anda ingin mengubah seting ini, takrifkan peraturan penjajaran tajuk untuk soalan atau panel individu. Pilihan \"Warisan\" menggunakan tetapan peringkat tinjauan (\"Atas\" secara lalai).",
+      questionTitleWidth: "Menetapkan lebar yang konsisten untuk tajuk soalan apabila ia dijajarkan di sebelah kiri kotak soalan mereka. Menerima nilai CSS (px, %, dalam, pt, dll.).",
       questionErrorLocation: "Mengesetkan lokasi mesej ralat berhubung dengan soalan dengan input tidak sah. Pilih antara: \"Atas\" - teks ralat diletakkan di bahagian atas kotak soalan; \"Bawah\" - teks ralat diletakkan di bahagian bawah kotak soalan. Pilihan \"Warisan\" menggunakan tetapan peringkat tinjauan (\"Atas\" secara lalai).",
       questionsOrder: "Mengekalkan susunan soalan asal atau rawak mereka. Pilihan \"Warisan\" menggunakan seting peringkat tinjauan (\"Asal\" secara lalai). Kesan seting ini hanya kelihatan dalam tab Pratonton.",
       navigationButtonsVisibility: "Mengesetkan keterlihatan butang navigasi pada halaman. Opsyen \"Warisan\" menggunakan seting aras tinjauan, yang lalai kepada \"Boleh Dilihat\"."
@@ -1443,6 +1459,19 @@ export var msStrings = {
     currencymask: {
       prefix: "Satu atau beberapa simbol yang akan dipaparkan sebelum nilai.",
       suffix: "Satu atau beberapa simbol yang akan dipaparkan selepas nilai."
+    },
+    theme: {
+      // isPanelless: "This setting applies only to questions outside of a panel.",
+      // primaryColor: "Sets a supplementary color that highlights key survey elements.",
+      // panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background.",
+      // questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background.",
+      // cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes.",
+      // "--sjs-general-backcolor-dim": "Sets the main background color of the survey."
+    },
+    header: {
+      // inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in.",
+      // textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels.",
+      // overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey."
     }
   },
   // Properties
@@ -1546,7 +1575,63 @@ export var msStrings = {
     allowCameraAccess: "Benarkan capaian kamera",
     scaleColorMode: "Mod warna skala",
     rateColorMode: "Mod warna kadar",
-    copyDisplayValue: "Nilai paparan salin"
+    copyDisplayValue: "Nilai paparan salin",
+    // insensitive: "insensitive",
+    // state: "state",
+    // indent: "indent",
+    // titleLocation: "titleLocation",
+    // descriptionLocation: "descriptionLocation",
+    // hideNumber: "hideNumber",
+    // errorLocation: "errorLocation",
+    // isUnique: "isUnique",
+    // showInMultipleColumns: "showInMultipleColumns",
+    // totalAlignment: "totalAlignment",
+    // detailErrorLocation: "detailErrorLocation",
+    // inheritWidthFrom: "inheritWidthFrom",
+    // textAreaWidth: "textAreaWidth",
+    // textGlowEnabled: "textGlowEnabled",
+    // overlapEnabled: "overlapEnabled",
+    // backgroundImageOpacity: "backgroundImageOpacity",
+    // logoPositionX: "logoPositionX",
+    // logoPositionY: "logoPositionY",
+    // titlePositionX: "titlePositionX",
+    // titlePositionY: "titlePositionY",
+    // descriptionPositionX: "descriptionPositionX",
+    // descriptionPositionY: "descriptionPositionY",
+    // showNumber: "showNumber",
+    // progressBarInheritWidthFrom: "progressBarInheritWidthFrom",
+    // headerView: "headerView",
+    // choiceValuesFromQuestion: "choiceValuesFromQuestion",
+    // choiceTextsFromQuestion: "choiceTextsFromQuestion",
+    // refuseText: "refuseText",
+    // dontKnowText: "dontKnowText",
+    // cellComponent: "cellComponent",
+    // inputTextAlignment: "inputTextAlignment",
+    // maskSettings: "maskSettings",
+    // itemErrorLocation: "itemErrorLocation",
+    // signatureWidth: "signatureWidth",
+    // signatureHeight: "signatureHeight",
+    // signatureAutoScaleEnabled: "signatureAutoScaleEnabled",
+    // penMinWidth: "penMinWidth",
+    // penMaxWidth: "penMaxWidth",
+    // showPlaceholder: "showPlaceholder",
+    // placeholderReadOnly: "placeholderReadOnly",
+    // templateTitle: "templateTitle",
+    // templateTabTitle: "templateTabTitle",
+    // tabTitlePlaceholder: "tabTitlePlaceholder",
+    // templateDescription: "templateDescription",
+    // noEntriesText: "noEntriesText",
+    // newPanelPosition: "newPanelPosition",
+    // templateTitleLocation: "templateTitleLocation",
+    // templateErrorLocation: "templateErrorLocation",
+    // templateVisibleIf: "templateVisibleIf",
+    // saveMaskedValue: "saveMaskedValue",
+    // pattern: "pattern",
+    // allowNegativeValues: "allowNegativeValues",
+    // decimalSeparator: "decimalSeparator",
+    // thousandsSeparator: "thousandsSeparator",
+    // prefix: "prefix",
+    // suffix: "suffix"
   },
   theme: {
     advancedMode: "Mod lanjutan",
@@ -1562,6 +1647,8 @@ export var msStrings = {
     backcolor: "Latar belakang lalai",
     hovercolor: "Latarbelakang penuding",
     borderDecoration: "Hiasan sempadan",
+    fontColor: "Warna fon",
+    backgroundColor: "Warna latar belakang",
     primaryForecolor: "Warna lalai",
     primaryForecolorLight: "Warna dinyahdayakan",
     font: "Fon",
@@ -2598,3 +2685,17 @@ editorLocalization.locales["ms"] = msStrings;
 // theme.placeholderColor: "Placeholder color" => "Warna ruang letak"
 // theme.size: "Size" => "Saiz"
 // theme.opacity: "Opacity" => "Kelegapan"
+// ed.toolboxFilteredTextPlaceholder: "Type to search..." => "Taip untuk mencari..."
+// ed.toolboxNoResultsFound: "No results found" => "Tiada keputusan ditemui"
+// paneldynamic.tabTitlePlaceholder: "Tab title placeholder" => "Ruang letak tajuk tab"
+// theme.--sjs-special-red: "Error messages" => "Mesej ralat"
+// paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "Teks sandaran untuk tajuk tab yang digunakan apabila corak tajuk tab tidak menghasilkan nilai yang bermakna."
+// theme.fontColor: "Font color" => "Warna fon"
+// theme.backgroundColor: "Background color" => "Warna latar belakang"
+// pe.questionTitleWidth: "Question title width" => "Lebar tajuk soalan"
+// pe.fileInputPlaceholder: "Select a file or paste a file link..." => "Pilih fail atau tampal pautan fail..."
+// panelbase.questionTitleWidth: "Ex.: 200px" => "Ex.: 200px"
+// panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Menetapkan lebar yang konsisten untuk tajuk soalan apabila ia dijajarkan di sebelah kiri kotak soalan mereka. Menerima nilai CSS (px, %, dalam, pt, dll.)."
+// page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Menetapkan lebar yang konsisten untuk tajuk soalan apabila ia dijajarkan di sebelah kiri kotak soalan mereka. Menerima nilai CSS (px, %, dalam, pt, dll.)."
+// pe.commentAreaRows: "Comment area height (in lines)" => "Komen ketinggian kawasan (dalam garisan)"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "Mengesetkan bilangan baris yang dipaparkan dalam kawasan teks untuk komen soalan. Dalam input mengambil lebih banyak baris, bar skrol muncul."

@@ -42,7 +42,7 @@ const json = {
 test("Hover", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await explicitErrorHandler();
-    await t.resizeWindow(2560, 1440);
+    await t.resizeWindow(2552, 1440);
     await setJSON(json);
     await t.wait(3000);
 

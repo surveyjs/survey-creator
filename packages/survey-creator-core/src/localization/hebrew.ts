@@ -1,3 +1,5 @@
+// This dictionary contains 65 untranslated or inherited localization strings.
+// These strings are commented out. Uncomment and edit them if you want to add your translations.
 import { editorLocalization } from "survey-creator-core";
 
 export var hebrewStrings = {
@@ -119,6 +121,8 @@ export var hebrewStrings = {
     generateReadableJSON: "צור JSON קריא",
     toolbox: "ארגז הכלים",
     "property-grid": "מאפיינים",
+    toolboxFilteredTextPlaceholder: "הקלד כדי לחפש...",
+    toolboxNoResultsFound: "לא נמצאו תוצאות",
     propertyGridFilteredTextPlaceholder: "הקלד כדי לחפש...",
     propertyGridNoResultsFound: "לא נמצאו תוצאות",
     correctJSON: "אנא תקנו את ה-JSON.",
@@ -297,6 +301,7 @@ export var hebrewStrings = {
       templateTitle: "תבנית כותרת חלונית",
       noEntriesText: "טקסט ריק בחלונית",
       templateTabTitle: "תבנית כותרת טאב",
+      tabTitlePlaceholder: "מציין מיקום של כותרת טאב",
       templateVisibleIf: "הפיכת חלונית בודדת לגלויה אם",
       hideNumber: "הסתרת מספר החלונית",
       titleLocation: "יישור כותרת חלונית",
@@ -595,6 +600,7 @@ export var hebrewStrings = {
     allowCompleteSurveyAutomatic: "השלם את הסקר באופן אוטומטי",
     showProgressBar: "מיקום שורת ההתקדמות",
     questionTitleLocation: "מיקום כותרת השאלה",
+    questionTitleWidth: "רוחב כותרת השאלה",
     requiredText: "סמן נדרש(ים)",
     questionTitleTemplate: "תבנית כותרת השאלה, ברירת המחדל היא: '{no}. {require} {title}'",
     questionErrorLocation: "מיקום הודעת השגיאה",
@@ -642,6 +648,7 @@ export var hebrewStrings = {
     questionsOnPageMode: "מבנה הסקר",
     maxTextLength: "אורך מקסימלי לתשובה (בתווים)",
     maxOthersLength: "אורך מקסימלי להערות (בתווים)",
+    commentAreaRows: "גובה אזור הערה (בשורות)",
     autoGrowComment: "הרחבה אוטומטית של אזור ההערות כראוי",
     allowResizeComment: "אפשר התאמה ידנית של אזורי טקסט על ידי המשתמש",
     textUpdateMode: "עדכן את ערך הטקסט של השאלה",
@@ -731,6 +738,7 @@ export var hebrewStrings = {
     correctAnswer: "תשובה נכונה",
     defaultPanelValue: "ערכים ברירת מחדל",
     cells: "טקסטי תאים",
+    fileInputPlaceholder: "בחר קובץ או הדבק קישור לקובץ...",
     keyName: "עמודת מפתח",
     itemvalue: {
       visibleIf: "הפוך את האפשרות לגלויה אם",
@@ -874,6 +882,7 @@ export var hebrewStrings = {
       "--sjs-general-backcolor-dim": "צבע רקע",
       "--sjs-primary-backcolor": "רקע הדגשה",
       "--sjs-primary-forecolor": "הדגשת החזית",
+      "--sjs-special-red": "הודעות שגיאה",
       "--sjs-shadow-small": "אפקטי צל",
       "--sjs-shadow-inner": "אפקטי צל",
       "--sjs-border-default": "צבעים"
@@ -1216,6 +1225,9 @@ export var hebrewStrings = {
     currencymask: {
       prefix: "לדוגמה: $",
       suffix: "לדוגמה: USD"
+    },
+    panelbase: {
+      questionTitleWidth: "לדוגמה: 200px"
     }
   },
   pehelp: {
@@ -1226,6 +1238,7 @@ export var hebrewStrings = {
       enableIf: "השתמשו בסמל מטה הקסם כדי להגדיר כלל מותנה שמשבית את מצב הקריאה בלבד של החלונית.",
       requiredIf: "השתמש בסמל מטה הקסם כדי להגדיר כלל תנאי המונע שליחת סקר, אלא אם לשאלה מקוננת אחת לפחות יש תשובה.",
       questionTitleLocation: "חל על כל השאלות בפאנל זה. אם ברצונך לעקוף הגדרה זו, הגדר כללי יישור כותרת עבור שאלות בודדות. האפשרות \"הירושה\" מחילה את ההגדרה ברמת הדף (אם הוגדרה) או ברמת הסקר (\"למעלה\" כברירת מחדל).",
+      questionTitleWidth: "הגדרת רוחב עקבי לכותרות שאלות כאשר הן מיושרות משמאל לתיבות השאלות. מקבל ערכי CSS (px, %, in, pt וכו').",
       questionErrorLocation: "קובע את המיקום של הודעת שגיאה ביחס לכל השאלות בחלונית. האפשרות \"הירושה\" מחילה את ההגדרה ברמת הדף (אם הוגדרה) או ברמת הסקר.",
       questionsOrder: "שומר על הסדר המקורי של השאלות או מסדר אותן באופן אקראי. האפשרות \"הירושה\" מחילה את ההגדרה ברמת הדף (אם הוגדרה) או ברמת הסקר.",
       page: "מיקום מחדש של החלונית לסוף עמוד שנבחר.",
@@ -1250,6 +1263,7 @@ export var hebrewStrings = {
       width: "קובע את רוחב החלונית ביחס לרכיבי סקר אחרים באותה שורה. מקבל ערכי CSS (px, %, in, pt וכו').",
       templateTitle: "הקלד תבנית לכותרות חלוניות דינמיות. השתמש ב- {panelIndex} למיקום הכללי של החלונית וב- {visiblePanelIndex} לסדר שלה בין חלוניות גלויות. הוסף מצייני מיקום אלה לתבנית כדי להוסיף מספור אוטומטי.",
       templateTabTitle: "הקלד תבנית עבור כותרות כרטיסיות. השתמש ב- {panelIndex} למיקום הכללי של חלונית וב- {visiblePanelIndex} לסדר שלה בין חלוניות גלויות. הוסף מצייני מיקום אלה לתבנית כדי להוסיף מספור אוטומטי.",
+      tabTitlePlaceholder: "טקסט נסיגה עבור כותרות טאבים שחל כאשר תבנית כותרת הטאב אינה מפיקה ערך בעל משמעות.",
       templateVisibleIf: "קביעה זו מאפשרת לשלוט בתצוגה של חלוניות בודדות בחלונית הדינמית. השתמש במציין המיקום '{panel}' כדי להפנות לחלונית הנוכחית בביטוי שלך.",
       titleLocation: "הגדרה זו עוברת בירושה אוטומטית לכל השאלות בחלונית זו. אם ברצונך לעקוף הגדרה זו, הגדר כללי יישור כותרת עבור שאלות בודדות. האפשרות \"הירושה\" מחילה את ההגדרה ברמת הדף (אם הוגדרה) או ברמת הסקר (\"למעלה\" כברירת מחדל).",
       descriptionLocation: "האפשרות \"הירושה\" מחילה את ההגדרה ברמת העמוד (אם הוגדרה) או ברמת הסקר (\"תחת כותרת החלונית\" כברירת מחדל).",
@@ -1339,6 +1353,7 @@ export var hebrewStrings = {
     questionsOrder: "שומר על הסדר המקורי של השאלות או מסדר אותן באופן אקראי. ההשפעה של הגדרה זו גלויה רק בכרטיסיה תצוגה מקדימה.",
     maxTextLength: "לשאלות הזנת טקסט בלבד.",
     maxOthersLength: "להערות לשאלה בלבד.",
+    commentAreaRows: "מגדיר את מספר השורות המוצגות באזורי טקסט להערות שאלה. בקלט תופס יותר שורות, פס הגלילה מופיע.",
     autoGrowComment: "בחר אם ברצונך שהערות שאלה ושאלות טקסט ארוך יגדלו באופן אוטומטי לגובה בהתבסס על אורך הטקסט שהוזנו.",
     allowResizeComment: "להערות לשאלות ולשאלות טקסט ארוך בלבד.",
     calculatedValues: "משתנים מותאמים אישית משמשים כמשתני ביניים או משתני עזר המשמשים בחישובי טפסים. הם לוקחים תשומות משיבים כערכי מקור. לכל משתנה מותאם אישית יש שם ייחודי וביטוי שעליו הוא מבוסס.",
@@ -1371,6 +1386,7 @@ export var hebrewStrings = {
       enableIf: "השתמש בסמל מטה הקסם כדי להגדיר כלל תנאי שמשבית את מצב הקריאה בלבד של העמוד.",
       requiredIf: "השתמש בסמל מטה הקסם כדי להגדיר כלל תנאי המונע שליחת סקר, אלא אם לשאלה מקוננת אחת לפחות יש תשובה.",
       questionTitleLocation: "חל על כל השאלות בדף זה. אם ברצונך לדרוס הגדרה זו, הגדר כללי יישור כותרת לשאלות או חלוניות בודדות. האפשרות \"ירושה\" מחילה את ההגדרה ברמת הסקר (\"למעלה\" כברירת מחדל).",
+      questionTitleWidth: "הגדרת רוחב עקבי לכותרות שאלות כאשר הן מיושרות משמאל לתיבות השאלות. מקבל ערכי CSS (px, %, in, pt וכו').",
       questionErrorLocation: "הגדרת המיקום של הודעת שגיאה ביחס לשאלה עם קלט לא חוקי. בחר בין: \"למעלה\" - טקסט שגיאה ממוקם בחלק העליון של תיבת השאלה; \"תחתית\" - טקסט שגיאה ממוקם בחלק התחתון של תיבת השאלה. האפשרות \"ירושה\" מחילה את ההגדרה ברמת הסקר (\"למעלה\" כברירת מחדל).",
       questionsOrder: "שומר על הסדר המקורי של השאלות או מסדר אותן באופן אקראי. האפשרות \"ירושה\" מחילה את ההגדרה ברמת הסקר (\"מקורי\" כברירת מחדל). ההשפעה של הגדרה זו גלויה רק בכרטיסיה תצוגה מקדימה.",
       navigationButtonsVisibility: "מגדיר את התצוגה של לחצני ניווט בעמוד. האפשרות \"ירושה\" מחילה את ההגדרה ברמת הסקר, המוגדרת כברירת מחדל ל\"גלוי\"."
@@ -1443,6 +1459,19 @@ export var hebrewStrings = {
     currencymask: {
       prefix: "סימן אחד או יותר שיוצגו לפני הערך.",
       suffix: "סימן אחד או יותר שיוצגו לאחר הערך."
+    },
+    theme: {
+      // isPanelless: "This setting applies only to questions outside of a panel.",
+      // primaryColor: "Sets a supplementary color that highlights key survey elements.",
+      // panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background.",
+      // questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background.",
+      // cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes.",
+      // "--sjs-general-backcolor-dim": "Sets the main background color of the survey."
+    },
+    header: {
+      // inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in.",
+      // textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels.",
+      // overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey."
     }
   },
   // Properties
@@ -1546,7 +1575,63 @@ export var hebrewStrings = {
     allowCameraAccess: "אפשר גישה למצלמה",
     scaleColorMode: "מצב צבע לסולם",
     rateColorMode: "מצב צבע לדירוג",
-    copyDisplayValue: "העתקת ערך תצוגה"
+    copyDisplayValue: "העתקת ערך תצוגה",
+    // insensitive: "insensitive",
+    // state: "state",
+    // indent: "indent",
+    // titleLocation: "titleLocation",
+    // descriptionLocation: "descriptionLocation",
+    // hideNumber: "hideNumber",
+    // errorLocation: "errorLocation",
+    // isUnique: "isUnique",
+    // showInMultipleColumns: "showInMultipleColumns",
+    // totalAlignment: "totalAlignment",
+    // detailErrorLocation: "detailErrorLocation",
+    // inheritWidthFrom: "inheritWidthFrom",
+    // textAreaWidth: "textAreaWidth",
+    // textGlowEnabled: "textGlowEnabled",
+    // overlapEnabled: "overlapEnabled",
+    // backgroundImageOpacity: "backgroundImageOpacity",
+    // logoPositionX: "logoPositionX",
+    // logoPositionY: "logoPositionY",
+    // titlePositionX: "titlePositionX",
+    // titlePositionY: "titlePositionY",
+    // descriptionPositionX: "descriptionPositionX",
+    // descriptionPositionY: "descriptionPositionY",
+    // showNumber: "showNumber",
+    // progressBarInheritWidthFrom: "progressBarInheritWidthFrom",
+    // headerView: "headerView",
+    // choiceValuesFromQuestion: "choiceValuesFromQuestion",
+    // choiceTextsFromQuestion: "choiceTextsFromQuestion",
+    // refuseText: "refuseText",
+    // dontKnowText: "dontKnowText",
+    // cellComponent: "cellComponent",
+    // inputTextAlignment: "inputTextAlignment",
+    // maskSettings: "maskSettings",
+    // itemErrorLocation: "itemErrorLocation",
+    // signatureWidth: "signatureWidth",
+    // signatureHeight: "signatureHeight",
+    // signatureAutoScaleEnabled: "signatureAutoScaleEnabled",
+    // penMinWidth: "penMinWidth",
+    // penMaxWidth: "penMaxWidth",
+    // showPlaceholder: "showPlaceholder",
+    // placeholderReadOnly: "placeholderReadOnly",
+    // templateTitle: "templateTitle",
+    // templateTabTitle: "templateTabTitle",
+    // tabTitlePlaceholder: "tabTitlePlaceholder",
+    // templateDescription: "templateDescription",
+    // noEntriesText: "noEntriesText",
+    // newPanelPosition: "newPanelPosition",
+    // templateTitleLocation: "templateTitleLocation",
+    // templateErrorLocation: "templateErrorLocation",
+    // templateVisibleIf: "templateVisibleIf",
+    // saveMaskedValue: "saveMaskedValue",
+    // pattern: "pattern",
+    // allowNegativeValues: "allowNegativeValues",
+    // decimalSeparator: "decimalSeparator",
+    // thousandsSeparator: "thousandsSeparator",
+    // prefix: "prefix",
+    // suffix: "suffix"
   },
   theme: {
     advancedMode: "מצב מתקדם",
@@ -1562,6 +1647,8 @@ export var hebrewStrings = {
     backcolor: "רקע ברירת מחדל",
     hovercolor: "רקע העברת עכבר",
     borderDecoration: "קישוט גבול",
+    fontColor: "צבע גופן",
+    backgroundColor: "צבע רקע",
     primaryForecolor: "צבע ברירת מחדל",
     primaryForecolorLight: "צבע כבוי",
     font: "גופן",
@@ -2213,3 +2300,17 @@ editorLocalization.locales["he"] = hebrewStrings;
 // theme.placeholderColor: "Placeholder color" => "צבע מציין מיקום"
 // theme.size: "Size" => "גודל"
 // theme.opacity: "Opacity" => "אטימות"
+// ed.toolboxFilteredTextPlaceholder: "Type to search..." => "הקלד כדי לחפש..."
+// ed.toolboxNoResultsFound: "No results found" => "לא נמצאו תוצאות"
+// paneldynamic.tabTitlePlaceholder: "Tab title placeholder" => "מציין מיקום של כותרת טאב"
+// theme.--sjs-special-red: "Error messages" => "הודעות שגיאה"
+// paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "טקסט נסיגה עבור כותרות טאבים שחל כאשר תבנית כותרת הטאב אינה מפיקה ערך בעל משמעות."
+// theme.fontColor: "Font color" => "צבע גופן"
+// theme.backgroundColor: "Background color" => "צבע רקע"
+// pe.questionTitleWidth: "Question title width" => "רוחב כותרת השאלה"
+// pe.fileInputPlaceholder: "Select a file or paste a file link..." => "בחר קובץ או הדבק קישור לקובץ..."
+// panelbase.questionTitleWidth: "Ex.: 200px" => "לדוגמה: 200px"
+// panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "הגדרת רוחב עקבי לכותרות שאלות כאשר הן מיושרות משמאל לתיבות השאלות. מקבל ערכי CSS (px, %, in, pt וכו')."
+// page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "הגדרת רוחב עקבי לכותרות שאלות כאשר הן מיושרות משמאל לתיבות השאלות. מקבל ערכי CSS (px, %, in, pt וכו')."
+// pe.commentAreaRows: "Comment area height (in lines)" => "גובה אזור הערה (בשורות)"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "מגדיר את מספר השורות המוצגות באזורי טקסט להערות שאלה. בקלט תופס יותר שורות, פס הגלילה מופיע."

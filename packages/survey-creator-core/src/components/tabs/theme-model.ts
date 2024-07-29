@@ -201,18 +201,22 @@ export class ThemeModel extends Base implements ITheme {
     );
   }
 
+  private updatePropertiesDependentOnPrimaryColor(value: string) {
+    this.colorCalculator.calculateColors(value);
+    this.setPropertyValue("--sjs-primary-backcolor-light", this.colorCalculator.colorSettings.newColorLight);
+    this.setPropertyValue("--sjs-primary-backcolor-dark", this.colorCalculator.colorSettings.newColorDark);
+    this.setThemeCssVariablesChanges("--sjs-primary-backcolor-light", this.colorCalculator.colorSettings.newColorLight);
+    this.setThemeCssVariablesChanges("--sjs-primary-backcolor-dark", this.colorCalculator.colorSettings.newColorDark);
+  }
   private cssVariablePropertiesChanged(name: string, value: any, property: JsonObjectProperty) {
     if (name === "primaryColor") {
       this.setPropertyValue("--sjs-primary-backcolor", value);
       this.setThemeCssVariablesChanges("--sjs-primary-backcolor", value);
+      this.updatePropertiesDependentOnPrimaryColor(value);
     }
     if (name === "--sjs-primary-backcolor") {
       this["primaryColor"] = value;
-      this.colorCalculator.calculateColors(value);
-      this.setPropertyValue("--sjs-primary-backcolor-light", this.colorCalculator.colorSettings.newColorLight);
-      this.setPropertyValue("--sjs-primary-backcolor-dark", this.colorCalculator.colorSettings.newColorDark);
-      this.setThemeCssVariablesChanges("--sjs-primary-backcolor-light", this.colorCalculator.colorSettings.newColorLight);
-      this.setThemeCssVariablesChanges("--sjs-primary-backcolor-dark", this.colorCalculator.colorSettings.newColorDark);
+      this.updatePropertiesDependentOnPrimaryColor(value);
     }
     if (name === "--sjs-shadow-inner" || name === "--sjs-shadow-small") {
       const newBoxShadowReset = createBoxShadowReset(value);
@@ -286,14 +290,14 @@ export class ThemeModel extends Base implements ITheme {
     this.undoRedoManager = new UndoRedoManager();
   }
 
-  public get header(): IHeader {
+  public get header(): HeaderModel {
     return this.getPropertyValue("header");
   }
-  public set header(val: IHeader) {
+  public set header(val: HeaderModel) {
     if (!val) return;
 
     this.setNewHeaderProperty();
-    (this.header as HeaderModel).fromJSON((val as HeaderModel).toJSON());
+    this.header.fromJSON(val.toJSON());
   }
 
   @property({
@@ -438,7 +442,7 @@ export class ThemeModel extends Base implements ITheme {
 
     this.blockThemeChangedNotifications += 1;
 
-    if (["backgroundImage", "backgroundImageFit", "backgroundImageAttachment", "backgroundOpacity"].indexOf(name) !== -1) {
+    if (this === sender && ["backgroundImage", "backgroundImageFit", "backgroundImageAttachment", "backgroundOpacity"].indexOf(name) !== -1) {
       this[name] = newValue;
       this.onThemePropertyChanged.fire(this, { name, value: newValue });
       this.blockThemeChangedNotifications -= 1;
@@ -463,16 +467,23 @@ export class ThemeModel extends Base implements ITheme {
 
   fromJSON(json: ITheme, options?: ILoadFromJSONOptions): void {
     if (!json) return;
-    super.fromJSON(json, options);
-    const headerModel = new HeaderModel();
-    headerModel.fromJSON(json.header || {});
-    headerModel.owner = this;
-    this.header = headerModel;
+
+    const _json = {};
+    assign(_json, json);
+    delete _json["header"];
+    delete _json["cssVariables"];
+
+    super.fromJSON(_json, options);
+
+    const _headerJson = {};
+    assign(_headerJson, json.header);
+    if (!!json["headerView"]) _headerJson["headerView"] = json["headerView"];
+    this.header.fromJSON(_headerJson || {});
 
     if (json.cssVariables) {
       this["primaryColor"] = json.cssVariables["--sjs-primary-backcolor"];
       super.fromJSON(json.cssVariables, options);
-      headerModel.setCssVariables(json.cssVariables);
+      this.header.setCssVariables(json.cssVariables);
 
       this.scale = !!this["--sjs-base-unit"] ? roundTo2Decimals(parseFloat(this["--sjs-base-unit"]) * 100 / 8) : undefined;
       this.fontSize = !!this["--sjs-font-size"] ? roundTo2Decimals(parseFloat(this["--sjs-font-size"]) * 100 / 16) : undefined;
@@ -482,6 +493,11 @@ export class ThemeModel extends Base implements ITheme {
       this["questionPanel"] = backgroundCornerRadiusFromCssVariable(this.getPropertyByName("questionPanel"), json.cssVariables, "--sjs-general-backcolor", "--sjs-general-backcolor-dark", this.cornerRadius);
       this["editorPanel"] = backgroundCornerRadiusFromCssVariable(this.getPropertyByName("editorPanel"), json.cssVariables, "--sjs-general-backcolor-dim-light", "--sjs-general-backcolor-dim-dark", this.cornerRadius);
 
+      Serializer.getProperties("theme").forEach(property => {
+        if (property.type === "font") {
+          this[property.name] = fontsettingsFromCssVariable(property, json.cssVariables);
+        }
+      });
       this["pageTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("pageTitle"), json.cssVariables, "--sjs-general-dim-forecolor");
       this["pageDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("pageDescription"), json.cssVariables, "--sjs-general-dim-forecolor-light");
       this["questionTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("questionTitle"), json.cssVariables, "--sjs-general-forecolor");
@@ -722,6 +738,7 @@ Serializer.addProperties("theme",
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
         editor.allowClear = false;
+        editor.choices = [].concat(DefaultFonts);
       }
     }
   },
@@ -823,8 +840,6 @@ Serializer.addProperties("theme",
   { name: "--sjs-border-light", visible: false },
   { name: "--sjs-border-default", visible: false },
   { name: "--sjs-border-inside", visible: false },
-  { name: "--sjs-special-red", visible: false },
-  { name: "--sjs-special-red-light", visible: false },
   { name: "--sjs-special-red-forecolor", visible: false },
   { name: "--sjs-special-green", visible: false },
   { name: "--sjs-special-green-light", visible: false },
@@ -924,6 +939,25 @@ Serializer.addProperties("theme",
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
         editor.colorTitle = getLocString("theme.primaryForecolorLight");
+        editor.colorTitleLocation = "left";
+      }
+    }
+  }, {
+    type: "coloralpha",
+    name: "--sjs-special-red",
+    onPropertyEditorUpdate: function (obj: any, editor: any) {
+      if (!!editor) {
+        editor.colorTitle = getLocString("theme.fontColor");
+        editor.colorTitleLocation = "left";
+      }
+    }
+  }, {
+    type: "coloralpha",
+    name: "--sjs-special-red-light",
+    displayName: "",
+    onPropertyEditorUpdate: function (obj: any, editor: any) {
+      if (!!editor) {
+        editor.colorTitle = getLocString("theme.backgroundColor");
         editor.colorTitleLocation = "left";
       }
     }

@@ -383,6 +383,46 @@ test("Theme builder: restore values of font from loadTheme", (): any => {
   });
 });
 
+test("Modify property grid: restore new property", (): any => {
+  Serializer.addProperty("theme", {
+    name: "matrix-title",
+    type: "font",
+    displayName: "Matrix title font",
+    default: {
+      family: "Open Sans",
+      weight: "600",
+      size: 16,
+      color: "rgba(0, 0, 0, 0.91)"
+    },
+  });
+
+  try {
+    const themeModel = new ThemeModel();
+    themeModel.initialize();
+    const newTheme = {
+      "themeName": "default",
+      "colorPalette": "light",
+      "isPanelless": false,
+      "cssVariables": {
+        "--sjs-font-matrix-title-color": "rgba(215, 15, 15, 0.91)"
+      }
+    };
+    themeModel.loadTheme(newTheme as any);
+
+    expect(themeModel["matrix-title"]).toEqual({
+      family: "Open Sans",
+      weight: "600",
+      size: 16,
+      color: "rgba(215, 15, 15, 0.91)"
+    });
+
+    expect(themeModel.cssVariables["--sjs-font-matrix-title-color"]).toBe("rgba(215, 15, 15, 0.91)");
+
+  } finally {
+    Serializer.removeProperty("theme", "matrix-title");
+  }
+});
+
 test("Keep theme css changes through the different themes choosen", (): any => {
   const fefefeColor = "rgba(254, 254, 254, 1)";
   const themeModel = new ThemeModel();
@@ -420,6 +460,25 @@ test("Keep theme css changes through the different themes choosen", (): any => {
   expect(themeModel["--sjs-primary-backcolor"]).toEqual("rgba(25, 179, 148, 1)");
   expect(themeModel["--sjs-general-backcolor-dim"]).toEqual("rgba(243, 243, 243, 1)");
   expect(themeModel.themeCssCustomizations).toStrictEqual({});
+});
+
+test("Update --sjs-primary-backcolor-light && --sjs-primary-backcolor-dark", (): any => {
+  const fefefeColor = "rgba(254, 254, 254, 1)";
+  const themeModel = new ThemeModel();
+  themeModel.initialize();
+
+  expect(themeModel["--sjs-primary-backcolor"]).toEqual("rgba(25, 179, 148, 1)");
+  expect(themeModel["primaryColor"]).toEqual("rgba(25, 179, 148, 1)");
+  expect(themeModel["--sjs-primary-backcolor-light"]).toEqual("rgba(25, 179, 148, 0.1)");
+  expect(themeModel["--sjs-primary-backcolor-dark"]).toEqual("rgba(20, 164, 139, 1)");
+  expect(themeModel.themeCssCustomizations).toStrictEqual({});
+
+  themeModel["primaryColor"] = fefefeColor;
+  expect(themeModel.themeCssCustomizations).toStrictEqual({
+    "--sjs-primary-backcolor": fefefeColor,
+    "--sjs-primary-backcolor-dark": "rgba(239, 239, 239, 1)",
+    "--sjs-primary-backcolor-light": "rgba(254, 254, 254, 0.1)",
+  });
 });
 
 test("findSuitableTheme", (): any => {

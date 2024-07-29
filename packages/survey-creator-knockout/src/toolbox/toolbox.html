@@ -17,7 +17,7 @@
       </div>
       <!-- ko ifnot: collapsed -->
       <!-- ko foreach: items -->
-      <!-- ko component: { name: $data.component || 'svc-toolbox-tool', params: { item: $data, creator: $parents[1].creator, isCompact: false } } -->
+      <!-- ko component: { name: 'svc-toolbox-tool', params: { item: $data, creator: $parents[1].creator, model: $data.toolbox, isCompact: false } } -->
       <!-- /ko -->
       <!-- /ko -->
       <!-- /ko -->
@@ -28,7 +28,7 @@
     <!-- ko if: categories().length == 1 || !$data.toolbox.showCategoryTitles -->
     <div class="svc-toolbox__category">
       <!-- ko foreach: $data.toolbox.visibleActions -->
-      <!-- ko component: { name: 'svc-toolbox-tool', params: { item: $data, creator: $parent.creator, isCompact: false } } -->
+      <!-- ko component: { name: 'svc-toolbox-tool', params: { item: $data, creator: $parent.creator, model: $parent.toolbox, isCompact: false } } -->
       <!-- /ko -->
       <!-- /ko -->
     </div>

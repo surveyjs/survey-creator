@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, Input, ViewChild } from "@angular/core";
 import { SurveyCreatorModel, QuestionToolbox } from "survey-creator-core";
-import { VerticalResponsivityManager } from "survey-core";
+import { Action, VerticalResponsivityManager } from "survey-core";
 import { BaseAngular } from "survey-angular-ui";
 
 @Component({
@@ -15,10 +15,14 @@ export class AdaptiveToolboxComponent extends BaseAngular<QuestionToolbox> imple
   public get model() {
     return this.creator.toolbox;
   }
+  public get searchItem() {
+    return this.model.searchItem as Action;
+  }
   ngAfterViewInit() {
+    this.model.setRootElement(this.container.nativeElement as HTMLDivElement);
     this.responsivityManager =
-      new VerticalResponsivityManager(this.container.nativeElement as HTMLDivElement,
-        this.model, ".svc-toolbox__tool:not(.sv-dots)");
+      new VerticalResponsivityManager(this.model.containerElement as HTMLDivElement,
+        this.model, this.model.itemSelector);
   }
   protected getModel(): QuestionToolbox {
     return this.model;

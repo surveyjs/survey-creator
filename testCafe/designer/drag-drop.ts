@@ -1,4 +1,4 @@
-import { url, getPagesLength, getQuestionsLength, setJSON, getJSON, getQuestionNameByIndex, getItemValueByIndex, patchDragDropToDisableDrop, RatingToolboxItem, SingleInputToolboxItem, surveySettingsButtonSelector, changeToolboxScrolling } from "../helper";
+import { url, getPagesLength, getQuestionsLength, setJSON, getJSON, getQuestionNameByIndex, getItemValueByIndex, patchDragDropToDisableDrop, RatingToolboxItem, SingleInputToolboxItem, surveySettingsButtonSelector, changeToolboxScrolling, changeToolboxSearchEnabled } from "../helper";
 import { Selector, ClientFunction } from "testcafe";
 const title = "Drag Drop";
 
@@ -228,7 +228,8 @@ test("Drag Drop Toolbox All Questions", async (t) => {
 
 test("Drag Drop Toolbox Responsivity", async (t) => {
   await changeToolboxScrolling(false);
-  const tabbedMenuItemSelector = Selector(".svc-toolbox .svc-toolbox__tool:nth-of-type(19)");
+  await changeToolboxSearchEnabled(false);
+  const tabbedMenuItemSelector = Selector(".svc-toolbox .svc-toolbox__tool:nth-of-type(18)");
   await t
     .resizeWindow(1920, 1080)
     .expect(tabbedMenuItemSelector.hasClass("sv-action--hidden")).notOk()
@@ -364,6 +365,49 @@ test("Drag Drop to Panel", async (t) => {
             ]
           },
           { type: "rating", name: "question2" }
+        ]
+      }
+    ]
+  };
+  const resultJson = await getJSON();
+  await t.expect(resultJson).eql(expectedJson);
+});
+test("Drag Drop Question from a panel", async (t) => {
+  await t.resizeWindow(2560, 1440);
+  const json = {
+    elements: [
+      {
+        type: "panel",
+        name: "panel1",
+        elements: [
+          { type: "text", name: "question1" }
+        ]
+      }
+    ]
+  };
+  await setJSON(json);
+
+  const question1 = Selector("[data-sv-drop-target-survey-element=\"question1\"]");
+  const panel1 = Selector("[data-sv-drop-target-survey-element=\"panel1\"]");
+
+  await t
+    .hover(question1, { speed: 0.5 })
+    .dragToElement(question1, panel1, {
+      offsetX: 2,
+      offsetY: 2,
+      destinationOffsetY: 2,
+      speed: 0.5
+    });
+  const expectedJson = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          { type: "text", name: "question1" },
+          {
+            type: "panel",
+            name: "panel1"
+          }
         ]
       }
     ]

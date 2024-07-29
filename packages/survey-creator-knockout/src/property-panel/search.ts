@@ -11,5 +11,5 @@ ko.components.register("svc-search", {
       return { model: model };
     }
   },
-  template: template
+  template: template.default
 });

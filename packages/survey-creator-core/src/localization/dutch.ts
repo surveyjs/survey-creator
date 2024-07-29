@@ -1,3 +1,5 @@
+// This dictionary contains 65 untranslated or inherited localization strings.
+// These strings are commented out. Uncomment and edit them if you want to add your translations.
 import { editorLocalization, defaultStrings } from "survey-creator-core";
 
 export var nlStrings = {
@@ -119,6 +121,8 @@ export var nlStrings = {
     generateReadableJSON: "Genereer leesbare JSON",
     toolbox: "Gereedschap",
     "property-grid": "Eigenschappen",
+    toolboxFilteredTextPlaceholder: "Typ om te zoeken...",
+    toolboxNoResultsFound: "Geen resultaten gevonden",
     propertyGridFilteredTextPlaceholder: "Typ om te zoeken...",
     propertyGridNoResultsFound: "Geen resultaten gevonden",
     correctJSON: "Corrigeer JSON.",
@@ -297,6 +301,7 @@ export var nlStrings = {
       templateTitle: "Patroon voor paneeltitel",
       noEntriesText: "Lege paneeltekst",
       templateTabTitle: "Patroon voor tabbladtitel",
+      tabTitlePlaceholder: "Tijdelijke aanduiding voor tabtitel",
       templateVisibleIf: "Maak een afzonderlijk paneel zichtbaar als",
       hideNumber: "Het paneelnummer verbergen",
       titleLocation: "Uitlijning van paneeltitels",
@@ -595,6 +600,7 @@ export var nlStrings = {
     allowCompleteSurveyAutomatic: "Vul de enquête automatisch in",
     showProgressBar: "Toon voortgangsbalk",
     questionTitleLocation: "Plek vraagtitel",
+    questionTitleWidth: "Breedte van de vraagtitel",
     requiredText: "Symbool(en) verplichte vraag",
     questionTitleTemplate: "Vraagtitelsjabloon, standaard is: '{no}. {vereisen} {titel}'",
     questionErrorLocation: "Plek vraagfoutmelding",
@@ -642,6 +648,7 @@ export var nlStrings = {
     questionsOnPageMode: "Structuur van de enquête",
     maxTextLength: "Maximale tekstlengte",
     maxOthersLength: "Maximale tekstlengte optie 'Anders:'",
+    commentAreaRows: "Hoogte commentaargebied (in lijnen)",
     autoGrowComment: "Commentaargebied indien nodig automatisch uitvouwen",
     allowResizeComment: "Gebruikers toestaan het formaat van tekstgebieden te wijzigen",
     textUpdateMode: "Modus tekstvernieuwing",
@@ -731,6 +738,7 @@ export var nlStrings = {
     correctAnswer: "Juist antwoord",
     defaultPanelValue: "Standaardwaarden",
     cells: "Celteksten",
+    fileInputPlaceholder: "Selecteer een bestand of plak een bestandslink...",
     keyName: "Sleutelkolom",
     itemvalue: {
       visibleIf: "Maak de optie zichtbaar als",
@@ -874,6 +882,7 @@ export var nlStrings = {
       "--sjs-general-backcolor-dim": "Achtergrondkleur",
       "--sjs-primary-backcolor": "De achtergrond van het accent",
       "--sjs-primary-forecolor": "Accent voorgrond",
+      "--sjs-special-red": "Foutberichten",
       "--sjs-shadow-small": "Schaduweffecten",
       "--sjs-shadow-inner": "Schaduweffecten",
       "--sjs-border-default": "Kleuren"
@@ -1216,6 +1225,9 @@ export var nlStrings = {
     currencymask: {
       prefix: "Bijv.: $",
       suffix: "Bijv.: USD"
+    },
+    panelbase: {
+      questionTitleWidth: "Bijv.: 200px"
     }
   },
   pehelp: {
@@ -1226,6 +1238,7 @@ export var nlStrings = {
       enableIf: "Gebruik het pictogram van de toverstaf om een voorwaardelijke regel in te stellen die de alleen-lezen modus voor het deelvenster uitschakelt.",
       requiredIf: "Gebruik het toverstafpictogram om een voorwaardelijke regel in te stellen die het verzenden van enquêtes verhindert, tenzij ten minste één geneste vraag een antwoord heeft.",
       questionTitleLocation: "Geldt voor alle vragen binnen dit panel. Als u deze instelling wilt overschrijven, definieert u regels voor titeluitlijning voor afzonderlijke vragen. De optie \"Overnemen\" past de instelling op paginaniveau (indien ingesteld) of enquêteniveau (\"Standaard bovenaan\") toe.",
+      questionTitleWidth: "Hiermee stelt u een consistente breedte in voor vraagtitels wanneer deze links van de vraagvakken zijn uitgelijnd. Accepteert CSS-waarden (px, %, in, pt, enz.).",
       questionErrorLocation: "Hiermee stelt u de locatie van een foutmelding in met betrekking tot alle vragen in het panel. De optie \"Overnemen\" past de instelling op paginaniveau (indien ingesteld) of enquêteniveau toe.",
       questionsOrder: "Behoudt de oorspronkelijke volgorde van vragen of maakt ze willekeurig. De optie \"Overnemen\" past de instelling op paginaniveau (indien ingesteld) of enquêteniveau toe.",
       page: "Hiermee verplaatst u het deelvenster naar het einde van een geselecteerde pagina.",
@@ -1250,6 +1263,7 @@ export var nlStrings = {
       width: "Hiermee stelt u de breedte van het paneel in verhouding tot andere enquête-elementen in dezelfde lijn. Accepteert CSS-waarden (px, %, in, pt, enz.).",
       templateTitle: "Typ een sjabloon voor dynamische paneeltitels. Gebruik {panelIndex} voor de algemene positie van het paneel en {visiblePanelIndex} voor de volgorde tussen de zichtbare panelen. Voeg deze tijdelijke aanduidingen toe aan het patroon om automatische nummering toe te voegen.",
       templateTabTitle: "Typ een sjabloon voor tabbladtitels. Gebruik {panelIndex} voor de algemene positie van een paneel en {visiblePanelIndex} voor de volgorde tussen zichtbare panelen. Voeg deze tijdelijke aanduidingen toe aan het patroon om automatische nummering toe te voegen.",
+      tabTitlePlaceholder: "Een terugvaltekst voor tabbladtitels die van toepassing is wanneer het patroon van de tabbladtitel geen zinvolle waarde oplevert.",
       templateVisibleIf: "Met deze instelling kunt u de zichtbaarheid van afzonderlijke panelen binnen het dynamische paneel regelen. Gebruik de tijdelijke aanduiding '{panel}' om te verwijzen naar het huidige deelvenster in uw expressie.",
       titleLocation: "Deze instelling wordt automatisch overgenomen door alle vragen in dit paneel. Als u deze instelling wilt overschrijven, definieert u regels voor titeluitlijning voor afzonderlijke vragen. De optie \"Overnemen\" past de instelling op paginaniveau (indien ingesteld) of enquêteniveau (\"Standaard bovenaan\") toe.",
       descriptionLocation: "De optie \"Overnemen\" past de instelling op paginaniveau (indien ingesteld) of enquêteniveau toe (\"Standaard onder de paneeltitel\").",
@@ -1339,6 +1353,7 @@ export var nlStrings = {
     questionsOrder: "Behoudt de oorspronkelijke volgorde van vragen of maakt ze willekeurig. Het effect van deze instelling is alleen zichtbaar op het tabblad Voorbeeld.",
     maxTextLength: "Alleen voor vragen over tekstinvoer.",
     maxOthersLength: "Alleen voor opmerkingen over vragen.",
+    commentAreaRows: "Hiermee stelt u het aantal weergegeven regels in tekstgebieden in voor opmerkingen bij vragen. In de invoer neemt meer regels in beslag, de schuifbalk verschijnt.",
     autoGrowComment: "Selecteer of u wilt dat vraagopmerkingen en lange tekstvragen automatisch in hoogte groeien op basis van de ingevoerde tekstlengte.",
     allowResizeComment: "Alleen voor vraagopmerkingen en lange tekstvragen.",
     calculatedValues: "Aangepaste variabelen dienen als tussenliggende of hulpvariabelen die worden gebruikt in formulierberekeningen. Ze nemen de input van respondenten als bronwaarden. Elke aangepaste variabele heeft een unieke naam en een expressie waarop deze is gebaseerd.",
@@ -1371,6 +1386,7 @@ export var nlStrings = {
       enableIf: "Gebruik het pictogram van de toverstaf om een voorwaardelijke regel in te stellen waarmee de alleen-lezen modus voor de pagina wordt uitgeschakeld.",
       requiredIf: "Gebruik het toverstafpictogram om een voorwaardelijke regel in te stellen die het verzenden van enquêtes verhindert, tenzij ten minste één geneste vraag een antwoord heeft.",
       questionTitleLocation: "Geldt voor alle vragen op deze pagina. Als je deze instelling wilt overschrijven, definieer je regels voor titeluitlijning voor afzonderlijke vragen of panelen. De optie \"Overnemen\" past de instelling op enquêteniveau toe (\"Top\" standaard).",
+      questionTitleWidth: "Hiermee stelt u een consistente breedte in voor vraagtitels wanneer deze links van de vraagvakken zijn uitgelijnd. Accepteert CSS-waarden (px, %, in, pt, enz.).",
       questionErrorLocation: "Hiermee stelt u de locatie van een foutmelding in ten opzichte van de vraag met ongeldige invoer. Kies tussen: \"Top\" - er wordt een fouttekst bovenaan het vraagvak geplaatst; \"Onderaan\" - er wordt een fouttekst onderaan het vraagvak geplaatst. De optie \"Overnemen\" past de instelling op enquêteniveau toe (\"Top\" standaard).",
       questionsOrder: "Behoudt de oorspronkelijke volgorde van vragen of maakt ze willekeurig. De optie \"Overerven\" past de instelling op enquêteniveau toe (\"Standaard Origineel\"). Het effect van deze instelling is alleen zichtbaar op het tabblad Voorbeeld.",
       navigationButtonsVisibility: "Hiermee stelt u de zichtbaarheid van navigatieknoppen op de pagina in. De optie \"Overerven\" past de instelling op enquêteniveau toe, die standaard op \"Zichtbaar\" staat."
@@ -1443,6 +1459,19 @@ export var nlStrings = {
     currencymask: {
       prefix: "Een of meer symbolen die vóór de waarde moeten worden weergegeven.",
       suffix: "Een of meer symbolen die na de waarde moeten worden weergegeven."
+    },
+    theme: {
+      // isPanelless: "This setting applies only to questions outside of a panel.",
+      // primaryColor: "Sets a supplementary color that highlights key survey elements.",
+      // panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background.",
+      // questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background.",
+      // cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes.",
+      // "--sjs-general-backcolor-dim": "Sets the main background color of the survey."
+    },
+    header: {
+      // inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in.",
+      // textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels.",
+      // overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey."
     }
   },
   // Properties
@@ -1546,7 +1575,63 @@ export var nlStrings = {
     allowCameraAccess: "Toegang tot de camera toestaan",
     scaleColorMode: "Kleurmodus schalen",
     rateColorMode: "Kleurmodus beoordelen",
-    copyDisplayValue: "Weergavewaarde kopiëren"
+    copyDisplayValue: "Weergavewaarde kopiëren",
+    // insensitive: "insensitive",
+    // state: "state",
+    // indent: "indent",
+    // titleLocation: "titleLocation",
+    // descriptionLocation: "descriptionLocation",
+    // hideNumber: "hideNumber",
+    // errorLocation: "errorLocation",
+    // isUnique: "isUnique",
+    // showInMultipleColumns: "showInMultipleColumns",
+    // totalAlignment: "totalAlignment",
+    // detailErrorLocation: "detailErrorLocation",
+    // inheritWidthFrom: "inheritWidthFrom",
+    // textAreaWidth: "textAreaWidth",
+    // textGlowEnabled: "textGlowEnabled",
+    // overlapEnabled: "overlapEnabled",
+    // backgroundImageOpacity: "backgroundImageOpacity",
+    // logoPositionX: "logoPositionX",
+    // logoPositionY: "logoPositionY",
+    // titlePositionX: "titlePositionX",
+    // titlePositionY: "titlePositionY",
+    // descriptionPositionX: "descriptionPositionX",
+    // descriptionPositionY: "descriptionPositionY",
+    // showNumber: "showNumber",
+    // progressBarInheritWidthFrom: "progressBarInheritWidthFrom",
+    // headerView: "headerView",
+    // choiceValuesFromQuestion: "choiceValuesFromQuestion",
+    // choiceTextsFromQuestion: "choiceTextsFromQuestion",
+    // refuseText: "refuseText",
+    // dontKnowText: "dontKnowText",
+    // cellComponent: "cellComponent",
+    // inputTextAlignment: "inputTextAlignment",
+    // maskSettings: "maskSettings",
+    // itemErrorLocation: "itemErrorLocation",
+    // signatureWidth: "signatureWidth",
+    // signatureHeight: "signatureHeight",
+    // signatureAutoScaleEnabled: "signatureAutoScaleEnabled",
+    // penMinWidth: "penMinWidth",
+    // penMaxWidth: "penMaxWidth",
+    // showPlaceholder: "showPlaceholder",
+    // placeholderReadOnly: "placeholderReadOnly",
+    // templateTitle: "templateTitle",
+    // templateTabTitle: "templateTabTitle",
+    // tabTitlePlaceholder: "tabTitlePlaceholder",
+    // templateDescription: "templateDescription",
+    // noEntriesText: "noEntriesText",
+    // newPanelPosition: "newPanelPosition",
+    // templateTitleLocation: "templateTitleLocation",
+    // templateErrorLocation: "templateErrorLocation",
+    // templateVisibleIf: "templateVisibleIf",
+    // saveMaskedValue: "saveMaskedValue",
+    // pattern: "pattern",
+    // allowNegativeValues: "allowNegativeValues",
+    // decimalSeparator: "decimalSeparator",
+    // thousandsSeparator: "thousandsSeparator",
+    // prefix: "prefix",
+    // suffix: "suffix"
   },
   theme: {
     advancedMode: "Geavanceerde modus",
@@ -1562,6 +1647,8 @@ export var nlStrings = {
     backcolor: "Standaard achtergrond",
     hovercolor: "Achtergrond aanwijzen",
     borderDecoration: "Randdecoratie",
+    fontColor: "Tekstkleur",
+    backgroundColor: "Achtergrondkleur",
     primaryForecolor: "Standaardkleur",
     primaryForecolorLight: "Uitgeschakelde kleur",
     font: "Lettertype",
@@ -2626,3 +2713,17 @@ editorLocalization.locales["nl"] = nlStrings;
 // theme.placeholderColor: "Placeholder color" => "Tijdelijke aanduiding voor kleur"
 // theme.size: "Size" => "Grootte"
 // theme.opacity: "Opacity" => "Dekking"
+// ed.toolboxFilteredTextPlaceholder: "Type to search..." => "Typ om te zoeken..."
+// ed.toolboxNoResultsFound: "No results found" => "Geen resultaten gevonden"
+// paneldynamic.tabTitlePlaceholder: "Tab title placeholder" => "Tijdelijke aanduiding voor tabtitel"
+// theme.--sjs-special-red: "Error messages" => "Foutberichten"
+// paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "Een terugvaltekst voor tabbladtitels die van toepassing is wanneer het patroon van de tabbladtitel geen zinvolle waarde oplevert."
+// theme.fontColor: "Font color" => "Tekstkleur"
+// theme.backgroundColor: "Background color" => "Achtergrondkleur"
+// pe.questionTitleWidth: "Question title width" => "Breedte van de vraagtitel"
+// pe.fileInputPlaceholder: "Select a file or paste a file link..." => "Selecteer een bestand of plak een bestandslink..."
+// panelbase.questionTitleWidth: "Ex.: 200px" => "Bijv.: 200px"
+// panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Hiermee stelt u een consistente breedte in voor vraagtitels wanneer deze links van de vraagvakken zijn uitgelijnd. Accepteert CSS-waarden (px, %, in, pt, enz.)."
+// page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Hiermee stelt u een consistente breedte in voor vraagtitels wanneer deze links van de vraagvakken zijn uitgelijnd. Accepteert CSS-waarden (px, %, in, pt, enz.)."
+// pe.commentAreaRows: "Comment area height (in lines)" => "Hoogte commentaargebied (in lijnen)"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "Hiermee stelt u het aantal weergegeven regels in tekstgebieden in voor opmerkingen bij vragen. In de invoer neemt meer regels in beslag, de schuifbalk verschijnt."

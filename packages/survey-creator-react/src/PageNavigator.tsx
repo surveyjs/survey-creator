@@ -132,7 +132,7 @@ export class SurveyPageNavigatorItem extends CreatorModelElement<any, any> {
           }}
         >
           <div className="svc-page-navigator-item__dot" title={item.title}></div>
-          <div className="svc-page-navigator-item__banner svc-item__banner">
+          <div className="svc-page-navigator-item__banner">
             <span className="svc-text svc-text--small svc-text--bold">{item.title}</span>
             <span className="svc-page-navigator-item__dot"></span>
           </div>
