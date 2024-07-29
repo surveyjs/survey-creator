@@ -1881,7 +1881,7 @@ export class SurveyCreatorModel extends Base
     this.dragDropSurveyElements.onDragEnd.add((sender, options) => {
       this.stopUndoRedoTransaction();
       const editTitle = isDraggedFromToolbox && this.startEditTitleOnQuestionAdded;
-      this.selectElement(options.draggedElement, undefined, false, editTitle);
+      this.selectElement(options.draggedElement, undefined, true, editTitle);
       isDraggedFromToolbox = false;
       this.onDragEnd.fire(this, options);
       if (!options.fromElement) {
@@ -2691,24 +2691,34 @@ export class SurveyCreatorModel extends Base
       this.focusElement(element, focus, selEl, propertyName, startEdit);
     }
   }
+  private currentFocusInterval: any;
+  private currentFocusTimeout: any;
   public focusElement(element: any, focus: string | boolean, selEl: any = null, propertyName: string = null, startEdit: boolean = null) {
     if (!selEl) selEl = this.getSelectedSurveyElement();
-    setTimeout(() => {
-      if (!!selEl && (focus || startEdit && (!selEl.hasTitle || selEl.isPanel))) {
+    if(!selEl) return;
+    clearInterval(this.currentFocusInterval);
+    clearTimeout(this.currentFocusTimeout);
+    this.currentFocusTimeout = setTimeout(() => {
+      this.currentFocusInterval = setInterval(() => {
         const el = document.getElementById(selEl.id);
-        if (!!el) {
-          const blockValue = !this.rootElement || this.rootElement.clientHeight - 64 > el.clientHeight ? "center" : "start";
-          el.scrollIntoView({ block: blockValue });
-          if (!propertyName && el.parentElement) {
-            let elToFocus: HTMLElement = (typeof (focus) === "string") ? el.parentElement.querySelector(focus) : el.parentElement;
-            elToFocus && elToFocus.focus();
+        if (!!selEl && (focus || startEdit && (!selEl.hasTitle || selEl.isPanel))) {
+          if(!el || this.rootElement.getAnimations({ subtree: true }).filter((animation => animation.effect.getComputedTiming().activeDuration !== Infinity && (animation.pending || animation.playState !== "finished")))[0]) return;
+          clearInterval(this.currentFocusInterval);
+          if (!!el) {
+            SurveyHelper.scrollIntoViewIfNeeded(el.parentElement ?? el, () => { return { block: "start", behavior: "smooth" }; }, true);
+            if (!propertyName && el.parentElement) {
+              let elToFocus: HTMLElement = (typeof (focus) === "string") ? el.parentElement.querySelector(focus) : el.parentElement;
+              elToFocus && elToFocus.focus({ preventScroll: true });
+            }
           }
+        } else {
+          clearInterval(this.currentFocusInterval);
         }
-      }
-      if (startEdit && !!element) {
-        StringEditorConnector.get((element as Question).locTitle).activateEditor();
-      }
-    }, 100);
+        if (startEdit && !!element) {
+          StringEditorConnector.get((element as Question).locTitle).activateEditor();
+        }
+      }, 1);
+    }, 15);
   }
 
   private getSelectedSurveyElement(): IElement {
