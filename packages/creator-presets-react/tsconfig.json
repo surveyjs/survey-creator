@@ -10,6 +10,8 @@
     "moduleResolution": "node",
     "jsx": "react",
     "baseUrl": ".",
+    "declaration": true,
+    "declarationDir": "build/typings/",
     "paths": {
       "survey-core": [
         "./node_modules/survey-core"
@@ -28,16 +30,7 @@
       ]
     }
   },
-  "exclude": [
-    "node_modules",
-    "build",
-    "**/*.js",    
-    "**/node_modules",
-    "**/tests",
-    "**/*.spec.ts",
-    "**/*.test.ts"
-  ],
   "include": [
-    "src/**/*.ts"
-  ]
+    "./src/entries/index.ts",
+  ],
 }

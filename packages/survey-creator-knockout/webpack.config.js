@@ -5,10 +5,9 @@ const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const DtsGeneratorPlugin = require("../../webpack-plugins/webpack-dts-generator");
+var DashedNamePlugin = require("../../webpack-dashed-name");
 const packageJson = require("./package.json");
 const fs = require("fs");
-const replace = require("replace-in-file");
 
 const year = new Date().getFullYear();
 const banner = [
@@ -45,7 +44,7 @@ const buildPlatformJson = {
   engines: {
     node: ">=0.10.0"
   },
-  typings: packageJson.name + ".d.ts",
+  typings: "./typings/entries/index.d.ts",
   peerDependencies: {
     "ace-builds": "^1.4.12",
     "survey-core": packageJson.version,
@@ -109,18 +108,6 @@ module.exports = function (options) {
           loader: "ts-loader",
         },
         {
-          test: /\.css$/,
-          use: [
-            MiniCssExtractPlugin.loader,
-            {
-              loader: "css-loader",
-              options: {
-                sourceMap: options.buildType !== "prod"
-              }
-            }
-          ]
-        },
-        {
           test: /\.s(c|a)ss$/,
           use: [
             MiniCssExtractPlugin.loader,
@@ -141,7 +128,12 @@ module.exports = function (options) {
         {
           test: /\.html$/,
           exclude: [/node_modules/, require.resolve('./index.html')],
-          loader: "html-loader"
+          loader: "html-loader",
+          options: {
+            minimize: {
+              removeComments: false
+            }
+          }
         },
         {
           test: /\.(svg|png)$/,
@@ -155,7 +147,11 @@ module.exports = function (options) {
     output: {
       path: buildPath,
       filename: "[name]" + (isProductionBuild ? ".min" : "") + ".js",
-      library: options.libraryName || "SurveyCreator",
+      library: {
+        root: options.libraryName || "SurveyCreator",
+        amd: '[dashedname]',
+        commonjs: '[dashedname]',
+      },
       libraryTarget: "umd",
       globalObject: "this",
       umdNamedDefine: true
@@ -187,6 +183,7 @@ module.exports = function (options) {
       },
     },
     plugins: [
+      new DashedNamePlugin(),
       new webpack.ProgressPlugin(percentage_handler),
       new webpack.DefinePlugin({
         "process.env.ENVIRONMENT": JSON.stringify(options.buildType),
@@ -212,11 +209,6 @@ module.exports = function (options) {
         inject: "body",
         template: "index.html"
       }),
-      new DtsGeneratorPlugin({
-        webpack: webpack,
-        filePath: "build/survey-creator-knockout.d.ts",
-        moduleName: "survey-creator-knockout"
-      })
     ]);
     config.devServer = {
       static: {

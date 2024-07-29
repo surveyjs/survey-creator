@@ -8,8 +8,9 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "moduleResolution": "node",
-    "jsx": "react",
     "baseUrl": ".",
+    "declaration": true,
+    "declarationDir": "build/typings/",
     "paths": {
       "survey-core": [
         "./node_modules/survey-core"
@@ -20,18 +21,12 @@
       "creator-presets-core": [
         "./src/entries/index.ts"
       ],
-      "tslib" : ["./node_modules/tslib/tslib.d.ts"]
-    }    
+      "tslib": [
+        "./node_modules/tslib/tslib.d.ts"
+      ]
+    }
   },
-  "exclude": [
-    "node_modules",
-    "build",
-    "**/node_modules",
-    "**/tests",
-    "**/*.spec.ts",
-    "**/*.test.ts"
-  ],
   "include": [
-    "src/**/*.ts"
+    "./src/entries/index.ts",
   ]
 }

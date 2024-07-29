@@ -769,6 +769,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "commentAreaRows", tab: "question" },
       { name: "autoGrowComment", tab: "question" },
       { name: "allowResizeComment", tab: "question" },
+      { name: "gridLayoutEnabled", tab: "question" },
       { name: "showPageTitles", tab: "pages" },
       { name: "showPageNumbers", tab: "pages" },
 

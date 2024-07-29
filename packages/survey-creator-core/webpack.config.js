@@ -5,7 +5,7 @@ const fs = require("fs");
 const path = require("path");
 const RemoveEmptyScriptsPlugin = require("webpack-remove-empty-scripts");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const DtsGeneratorPlugin = require("../../webpack-plugins/webpack-dts-generator");
+var DashedNamePlugin = require("../../webpack-dashed-name");
 const mergeFiles = require("merge-files");
 const packageJson = require("./package.json");
 
@@ -17,15 +17,6 @@ var banner = [
   "(c) 2015-" + year + " Devsoft Baltic OÜ - http://surveyjs.io/",
   "Github: https://github.com/surveyjs/survey-creator",
   "License: https://surveyjs.io/Licenses#SurveyCreator",
-].join("\n");
-
-var dts_banner = [
-  "Type definitions for SurveyJS Creator JavaScript library v" +
-  packageJson.version,
-  "(c) 2015-" + year + " Devsoft Baltic OÜ - http://surveyjs.io/",
-  "Github: https://github.com/surveyjs/survey-creator",
-  "License: https://surveyjs.io/Licenses#SurveyCreator",
-  "",
 ].join("\n");
 
 var buildPlatformJson = {
@@ -55,7 +46,7 @@ var buildPlatformJson = {
   engines: {
     node: ">=0.10.0",
   },
-  typings: packageJson.name + ".d.ts",
+  typings: "./typings/entries/index.d.ts",
   peerDependencies: {
     "ace-builds": "^1.4.12",
     "survey-core": packageJson.version
@@ -138,18 +129,9 @@ module.exports = function (options) {
         {
           test: /\.(ts|tsx)$/,
           loader: "ts-loader",
-        },
-        {
-          test: /\.css$/,
-          use: [
-            MiniCssExtractPlugin.loader,
-            {
-              loader: "css-loader",
-              options: {
-                sourceMap: options.buildType !== "prod",
-              },
-            },
-          ],
+          options: {
+            configFile: options.tsConfigFile || "tsconfig.json"
+          }
         },
         {
           test: /\.s(c|a)ss$/,
@@ -187,7 +169,11 @@ module.exports = function (options) {
     output: {
       path: buildPath,
       filename: "[name]" + (isProductionBuild ? ".min" : "") + ".js",
-      library: options.libraryName || "SurveyCreatorCore",
+      library: {
+        root: options.libraryName || "SurveyCreatorCore",
+        amd: '[dashedname]',
+        commonjs: '[dashedname]',
+      },
       libraryTarget: "umd",
       globalObject: 'this',
       umdNamedDefine: true
@@ -207,12 +193,8 @@ module.exports = function (options) {
       },
     },
     plugins: [
+      new DashedNamePlugin(),
       new webpack.ProgressPlugin(percentage_handler),
-      new DtsGeneratorPlugin({
-        webpack: webpack,
-        filePath: "build/survey-creator-core.d.ts",
-        moduleName: "survey-creator-core"
-      }),
       new webpack.DefinePlugin({
         "process.env.ENVIRONMENT": JSON.stringify(options.buildType),
         "process.env.VERSION": JSON.stringify(packageJson.version),
