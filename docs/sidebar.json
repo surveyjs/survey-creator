@@ -149,11 +149,11 @@
         },
         {
           "Name": "questiontoolbox",
-          "Title": "Toolbox"
+          "Title": "QuestionToolbox"
         },
         {
           "Name": "iquestiontoolboxitem",
-          "Title": "Toolbox Item"
+          "Title": "IQuestionToolboxItem"
         },
         {
           "Name": "themetabplugin",

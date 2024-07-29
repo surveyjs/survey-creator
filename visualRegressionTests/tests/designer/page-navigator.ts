@@ -113,7 +113,7 @@ test("On the left side (rtl)", async (t) => {
 
 test("Page Navigator works with - scroll-behavior: smooth;", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    changeToolboxScrolling(false);
+    await changeToolboxScrolling(false);
     await changeToolboxSearchEnabled(false);
     await t.resizeWindow(1400, 800);
     await ClientFunction(() => {
@@ -595,7 +595,7 @@ test("Page navigator in by-page mode has enough space to be shown", async (t) =>
 });
 test("Page navigator scrolls to top of long page and centers small page", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    changeToolboxScrolling(false);
+    await changeToolboxScrolling(false);
     await changeToolboxSearchEnabled(false);
     await t.resizeWindow(1500, 800);
     await setJSON({

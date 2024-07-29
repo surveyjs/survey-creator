@@ -31,7 +31,7 @@ ko.components.register("sv-logic-operator", {
       return { question: q, model: q.dropdownListModel, click: click, clear: clear, keyup: keyup };
     },
   },
-  template: template,
+  template: template.default,
 });
 
 RendererFactory.Instance.registerRenderer("dropdown", "logicoperator", "sv-logic-operator");

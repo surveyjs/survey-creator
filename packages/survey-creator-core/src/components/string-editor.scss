@@ -8,12 +8,12 @@
 }
 
 .svc-string-editor {
+  position: static;
+
   [contenteditable="true"] {
     user-select: text;
     -webkit-user-select: text;
   }
-
-  position: static;
 
   .sv-string-editor {
     position: relative;

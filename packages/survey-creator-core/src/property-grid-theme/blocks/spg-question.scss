@@ -91,15 +91,14 @@
   box-sizing: border-box;
   max-width: 50%;
   flex: 1;
+  display: flex;
+  align-items: center;
 
   .spg-question__title {
     padding: calcSize(1) calcSize(2);
     border-right: 1px solid $border;
     display: inline-block;
   }
-
-  display: flex;
-  align-items: center;
 }
 
 .spg-question__content--left {
@@ -107,14 +106,13 @@
 
   .spg-input.spg-input.spg-input {
     background-color: transparent;
+    box-shadow: none;
+    border: none;
 
     &:focus,
     &:focus-within {
       box-shadow: none;
     }
-
-    box-shadow: none;
-    border: none;
   }
 }
 
@@ -144,7 +142,6 @@
   background-color: $red-light;
   border-radius: calcSize(0.5);
   line-height: calcSize(3);
-
 }
 
 .spg-question__erbox,

@@ -8,7 +8,6 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "moduleResolution": "node",
-    "jsx": "react",
     "baseUrl": ".",
     "paths": {
       "survey-core": [
@@ -17,20 +16,11 @@
       "survey-creator-core": [
         "./node_modules/survey-creator-core"
       ]
-    }
+    },
+    "declaration": true,
+    "declarationDir": "build/typings/"
   },
-  "exclude": [
-    "node_modules",
-    "build",
-    "stories",
-    "examples",
-    ".storybook",
-    "**/node_modules",
-    "**/tests",
-    "**/*.spec.ts",
-    "**/*.test.ts"
-  ],
   "include": [
-    "src/**/*.ts"
+    "./src/entries/index.ts",
   ]
 }

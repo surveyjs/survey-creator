@@ -149,10 +149,12 @@ export class ObjectSelectorModel extends Base {
     this.selector = new ObjectSelector(this.creator, survey, this.getObjectDisplayName);
     const selectedItem = this.selector.getItemByObj(selectedObj);
     if (!this.listModelValue) {
-      this.listModelValue = new ListModel<Action>(
-        this.selector.items,
-        (item: IAction) => { onClose(item.data); },
-        true, selectedItem);
+      this.listModelValue = new ListModel<Action>({
+        items: this.selector.items,
+        onSelectionChanged: (item: IAction) => { onClose(item.data); },
+        allowSelection: true,
+        selectedItem: selectedItem
+      });
       this.listModelValue.setOnFilterStringChangedCallback((text: string) => { this.selector.filterByText(text); });
     } else {
       this.listModelValue.setItems(this.selector.items);

@@ -107,5 +107,5 @@ ko.components.register("svc-text-with-reset", {
       return params;
     },
   },
-  template: template,
+  template: template.default,
 });

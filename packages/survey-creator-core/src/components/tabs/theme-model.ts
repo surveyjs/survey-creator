@@ -474,7 +474,11 @@ export class ThemeModel extends Base implements ITheme {
     delete _json["cssVariables"];
 
     super.fromJSON(_json, options);
-    this.header.fromJSON(json.header || {});
+
+    const _headerJson = {};
+    assign(_headerJson, json.header);
+    if (!!json["headerView"]) _headerJson["headerView"] = json["headerView"];
+    this.header.fromJSON(_headerJson || {});
 
     if (json.cssVariables) {
       this["primaryColor"] = json.cssVariables["--sjs-primary-backcolor"];

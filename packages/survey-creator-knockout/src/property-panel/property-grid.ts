@@ -18,7 +18,7 @@ ko.components.register("svc-property-grid", {
       return params;
     }
   },
-  template: template
+  template: template.default
 });
 
 Serializer.overrideClassCreator("buttongroup", function () {

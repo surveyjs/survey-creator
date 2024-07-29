@@ -43,5 +43,5 @@ ko.components.register("svc-panel", {
       return createPanelViewModel(params, componentInfo);
     }
   },
-  template: template
+  template: template.default
 });

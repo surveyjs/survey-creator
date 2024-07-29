@@ -1,67 +1,69 @@
-if (!window["%hammerhead%"]) {
-  // SurveyCreator.SurveyJSONEditor.aceBasePath = "https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.10/";
+function init() {
 
-  Survey.Serializer.findProperty("page", "name").defaultValue = "test";
+  if (!window["%hammerhead%"]) {
+    // SurveyCreator.SurveyJSONEditor.aceBasePath = "https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.10/";
 
-  SurveyCreator.localization.currentLocale = "en";
-  let options = {
-    // showTestSurveyTab: false,
-    // showJSONEditorTab: false
-    showLogicTab: true,
-    showTranslationTab: true,
-    showThemeTab: true,
-    showEmbeddedSurveyTab: true,
-    isAutoSave: true,
-    inplaceEditForValues: true
-  };
+    Survey.Serializer.findProperty("page", "name").defaultValue = "test";
 
-  // const propertyGridTemplate = "<div><button data-bind='click: btnClick, style: btnStyle'>Click me...</button><!-- ko template: { name: 'survey-content', data: model  } --><!-- /ko --></div>";
-  // ko.components.unregister("svc-property-grid");
-  // ko.components.register("svc-property-grid", {
-  //   viewModel: {
-  //     createViewModel: (params, componentInfo) => {
-  //       const subscrib = ko.computed(() => {
-  //         const model = ko.unwrap(params.model);
-  //         new SurveyKnockout.ImplementorBase(model);
-  //       });
-  //       ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
-  //         subscrib.dispose();
-  //       });
-  //       params.btnClick = ()=> { alert("The Button is clicked") };
-  //       params.btnStyle = {
-  //         width: "100%",
-  //         height: "32px"
-  //       };
+    SurveyCreator.localization.currentLocale = "en";
+    let options = {
+      // showTestSurveyTab: false,
+      // showJSONEditorTab: false
+      showLogicTab: true,
+      showTranslationTab: true,
+      showThemeTab: true,
+      showEmbeddedSurveyTab: true,
+      isAutoSave: true,
+      inplaceEditForValues: true
+    };
 
-  //       return params;
-  //     }
-  //   },
-  //   template: propertyGridTemplate
-  // });
+    // const propertyGridTemplate = "<div><button data-bind='click: btnClick, style: btnStyle'>Click me...</button><!-- ko template: { name: 'survey-content', data: model  } --><!-- /ko --></div>";
+    // ko.components.unregister("svc-property-grid");
+    // ko.components.register("svc-property-grid", {
+    //   viewModel: {
+    //     createViewModel: (params, componentInfo) => {
+    //       const subscrib = ko.computed(() => {
+    //         const model = ko.unwrap(params.model);
+    //         new SurveyKnockout.ImplementorBase(model);
+    //       });
+    //       ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
+    //         subscrib.dispose();
+    //       });
+    //       params.btnClick = ()=> { alert("The Button is clicked") };
+    //       params.btnStyle = {
+    //         width: "100%",
+    //         height: "32px"
+    //       };
 
-  let creator = new SurveyCreator.SurveyCreator(options);
-  creator.onMachineTranslate.add((sender, options) => {
-    options.callback(false, []);
-  });
+    //       return params;
+    //     }
+    //   },
+    //   template: propertyGridTemplate
+    // });
 
-  creator.saveSurveyFunc = (no, callback) => {
-    setTimeout(function () {
-      callback(no, true);
-    }, 1000);
-  };
-  creator.toolbox.searchEnabled = true;
+    let creator = new SurveyCreator.SurveyCreator(options);
+    creator.onMachineTranslate.add((sender, options) => {
+      options.callback(false, []);
+    });
 
-  let json = {
-    "elements": [{
-      "type": "dropdown",
-      "name": "country",
-      "title": "Select a country",
-      "description": "A full list of countries is queried from a RESTful web service.",
-      "choicesByUrl": {
-        "url": "https://surveyjs.io/api/CountriesExample",
-        "valueName": "name"
-      }
-    }, {
+    creator.saveSurveyFunc = (no, callback) => {
+      setTimeout(function () {
+        callback(no, true);
+      }, 1000);
+    };
+    creator.toolbox.searchEnabled = true;
+
+    let json = {
+      "elements": [{
+        "type": "dropdown",
+        "name": "country",
+        "title": "Select a country",
+        "description": "A full list of countries is queried from a RESTful web service.",
+        "choicesByUrl": {
+          "url": "https://surveyjs.io/api/CountriesExample",
+          "valueName": "name"
+        }
+      }, {
         "type": "panel",
         "name": "countriesByRegion",
         "title": "Filter countries by selected region",
@@ -72,24 +74,26 @@ if (!window["%hammerhead%"]) {
           "title": "Select a region",
           "choices": ["Africa", "Americas", "Asia", "Europe", "Oceania"]
         }, {
-            "type": "dropdown",
-            "name": "reg_country",
-            "title": "Select a country",
-            "choicesByUrl": {
-              "url": "https://surveyjs.io/api/CountriesExample?region={region}",
-              "valueName": "name"
-            }
-          }]
+          "type": "dropdown",
+          "name": "reg_country",
+          "title": "Select a country",
+          "choicesByUrl": {
+            "url": "https://surveyjs.io/api/CountriesExample?region={region}",
+            "valueName": "name"
+          }
+        }]
       }],
-    "showQuestionNumbers": false
-  };
+      "showQuestionNumbers": false
+    };
 
-  window.creator = creator;
-  // ko.applyBindings({ creator: creator });
-  creator.render("surveyCreator");
+    window.creator = creator;
+    // ko.applyBindings({ creator: creator });
+    creator.render("surveyCreator");
 
-  function setJSON() {
-    window.creator.JSON = json;
+    function setJSON() {
+      window.creator.JSON = json;
+    }
+    setJSON();
   }
-  setJSON();
+
 }

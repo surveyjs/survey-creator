@@ -2,7 +2,7 @@ import * as ko from "knockout";
 import { SurveyModel } from "survey-core";
 import { SurveyCreatorModel, LogoImageViewModel } from "survey-creator-core";
 import { ImplementorBase } from "survey-knockout-ui";
-const template: string = require("./logo-image.html");
+const template = require("./logo-image.html");
 
 ko.components.register("svc-logo-image", {
   viewModel: {
@@ -12,5 +12,5 @@ ko.components.register("svc-logo-image", {
       return model;
     },
   },
-  template: template
+  template: template.default
 });
