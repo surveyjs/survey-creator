@@ -557,7 +557,7 @@ export class SurveyCreatorModel extends Base
    */
   public onSurveyPropertyValueChanged: EventBase<SurveyCreatorModel, PropertyValueChangedEvent> = this.addCreatorEvent<SurveyCreatorModel, PropertyValueChangedEvent>();
   /**
-   * An event that is raised when a condition editor renders a list of questions available for selection. Use this event to modify this list.
+   * An event that is raised when a condition editor renders a list of questions and variables available for selection. Use this event to modify this list.
    */
   public onConditionQuestionsGetList: EventBase<SurveyCreatorModel, ConditionGetQuestionListEvent> = this.addCreatorEvent<SurveyCreatorModel, ConditionGetQuestionListEvent>();
 
