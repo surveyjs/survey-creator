@@ -94,15 +94,15 @@ survey-creator:not(.svd-simulator-content),
   }
 
   .sv-list__item-icon use {
-    fill: var(--ctr-list-item-icon-color, $foreground-dim-light);
+    fill: var(--ctr-list-item-icon-color, $foreground-light);
   }
 
   .sv-list__item--hovered>.sv-list__item-body {
-    color: var(--ctr-list-item-text-color-hovered, $foreground-dim);
-    background: var(--ctr-list-item-background-color-hovered, $background-dim);
+    color: var(--ctr-list-item-text-color-hovered, $foreground);
+    background: var(--ctr-list-item-background-color-hovered, $background-dark);
 
     .sv-list__item-icon use {
-      fill: var(--ctr-list-item-icon-color-hovered, $background);
+      fill: var(--ctr-list-item-icon-color-hovered, $foreground-light);
     }
   }
 
