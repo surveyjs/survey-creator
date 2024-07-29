@@ -316,7 +316,7 @@ test("stringsSurvey and filterPage + one page", () => {
   translation.filteredPage = survey.pages[0];
   expect(translation.stringsSurvey.getAllQuestions()).toHaveLength(1);
 });
-test("Translation show All strings and property visibility", () => {
+test("Translation show All strings and property visibility, #1", () => {
   const creator = new CreatorTester();
   creator.JSON = {
     completedHtml: "Test",
@@ -328,7 +328,7 @@ test("Translation show All strings and property visibility", () => {
     ]
   };
   creator.onShowingProperty.add((sender, options) => {
-    options.canShow = options.property.name == "title";
+    options.canShow = ["title", "completedHtml"].indexOf(options.property.name) > -1;
   });
   const tabTranslation = new TabTranslationPlugin(creator);
   tabTranslation.activate();
@@ -1177,7 +1177,7 @@ test("Test settings.translation.maximumSelectedLocales", () => {
   expect(visLocales[1]).toEqual("fr");
   settings.translation.maximumSelectedLocales = oldMaximumSelectedLocales;
 });
-test("Translation show All strings and property visibility", () => {
+test("Translation show All strings and property visibility, #2", () => {
   const creator = new CreatorTester();
   creator.JSON = {
     elements: [
@@ -2105,4 +2105,42 @@ test("Creator read-only", (): any => {
   expect(translation.settingsSurvey.mode).toBe("display");
   const action = creator.toolbar.getActionById("svc-translation-import");
   expect(action.enabled).toBeFalsy();
+});
+test("onTranslationStringVisibility for imageLink, Issue #5734", (): void => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    "elements": [
+      {
+        "type": "imagepicker",
+        "name": "question1",
+        "choices": [
+          {
+            "value": "spanishUrl",
+            "imageLink": {
+              "default": "abc",
+              "es": "abc-es"
+            }
+          },
+          {
+            "value": "Image 2",
+            "imageLink": "edf"
+          }
+        ]
+      }
+    ]
+  };
+  let isFiredCorrectly = false;
+  creator.onTranslationStringVisibility.add((sender, options) => {
+    if (options.propertyName === "imageLink") {
+      if(!options.visible) isFiredCorrectly = true;
+      options.visible = true;
+    }
+  });
+  const tabTranslation = new TabTranslationPlugin(creator);
+  tabTranslation.activate();
+  const translation = tabTranslation.model;
+  expect(isFiredCorrectly).toBeTruthy();
+  const items = translation.root.groups[0].groups[0].groups[0].items;
+  expect(items).toHaveLength(4);
+  expect(items[1].name).toBe("spanishUrl.imageLink");
 });
