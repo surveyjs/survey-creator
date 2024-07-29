@@ -187,6 +187,7 @@
   .svc-logic-tab__content-action {
     margin-left: 25%;
     margin-right: 25%;
+    margin-top: calcSize(5);
     margin-bottom: calcSize(8);
   }
 
@@ -238,6 +239,7 @@
 }
 
 .sl-table__cell--detail-panel {
+  padding: 0;
   .sd-body {
     margin: 0;
     min-width: none;

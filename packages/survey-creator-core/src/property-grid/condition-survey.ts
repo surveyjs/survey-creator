@@ -938,7 +938,9 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     const cssClasses = options.cssClasses;
     const question = options.question;
     cssClasses.answered = "svc-logic-question--answered";
-
+    if(question.name === "textEditor") {
+      cssClasses.root += " svc-logic-question-text-editor";
+    }
     if (question.name === "conjunction") {
       question.allowRootStyle = false;
       cssClasses.control += " svc-logic-operator svc-logic-operator--conjunction ";
