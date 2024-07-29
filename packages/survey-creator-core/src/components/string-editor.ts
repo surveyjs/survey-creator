@@ -122,6 +122,7 @@ class StringItemsNavigatorSelectBase extends StringItemsNavigatorBase {
     return [this.question.choices];
   }
   protected addNewItem(creator: SurveyCreatorModel, items: any, text: string = null) {
+    if (creator.maximumChoicesCount && items.length >= creator.maximumChoicesCount) return;
     const itemValue = creator.createNewItemValue(this.question);
     if (!!text) itemValue.value = text;
   }
@@ -158,8 +159,14 @@ class StringItemsNavigatorMatrix extends StringItemsNavigatorBase {
   protected addNewItem(creator: SurveyCreatorModel, items: any, text: string = null) {
     let titleBase: string;
     let propertyName: string;
-    if (items == this.question.columns) { titleBase = "Column "; propertyName = "columns"; }
-    if (items == this.question.rows) { titleBase = "Row "; propertyName = "rows"; }
+    if (items == this.question.columns) {
+      if (creator.maximumColumnsCount && items.length >= creator.maximumColumnsCount) return;
+      titleBase = "Column "; propertyName = "columns";
+    }
+    if (items == this.question.rows) {
+      if (creator.maximumRowsCount && items.length >= creator.maximumRowsCount) return;
+      titleBase = "Row "; propertyName = "rows";
+    }
     const newItem = new ItemValue(getNextValue(titleBase, items.map(i => i.value)) as string);
     items.push(text || newItem);
     creator.onItemValueAddedCallback(
@@ -181,6 +188,7 @@ class StringItemsNavigatorMatrixDropdown extends StringItemsNavigatorMatrix {
   }
   protected addNewItem(creator: SurveyCreatorModel, items: any, text: string = null) {
     if (items == this.question.columns) {
+      if (creator.maximumColumnsCount && items.length >= creator.maximumColumnsCount) return;
       var column = new MatrixDropdownColumn(text || getNextValue("Column ", items.map(i => i.value)) as string);
       this.question.columns.push(column);
       creator.onMatrixDropdownColumnAddedCallback(this.question, column, this.question.columns);
