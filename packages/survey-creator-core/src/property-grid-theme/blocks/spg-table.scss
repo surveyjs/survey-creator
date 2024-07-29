@@ -110,94 +110,60 @@
     white-space: unset;
   }
 }
-
 .spg-table__question-wrapper {
   box-sizing: border-box;
   padding: calcSize(0.5) 0;
 }
 
-@keyframes borderAnimation {
-  from {
-    border-width: 0px;
-  }
-  to {
-    border-width: 8px;
-  }
-}
-
-@keyframes empty {
-  from {
-  }
-  to {
-  }
-}
-.spg-table__row--fade-out,
-.spg-table__row--fade-in {
+.spg-table__row--leave,
+.spg-table__row--enter {
   animation-name: empty;
-  animation-fill-mode: forwards;
-  --fade-in-animation-duration: calc(#{$spg-matrix-row-fade-in-duration} + #{$spg-matrix-row-fade-in-delay});
-  animation-duration: max(var(--fade-in-animation-duration), #{$spg-matrix-row-move-in-duration});
+  --move-whole-animation-duration: calc(var(--move-animation-duration) + var(--move-animation-delay));
+  --fade-whole-animation-duration: calc(var(--fade-animation-duration) + var(--fade-animation-delay));
+  animation-duration: max(var(--fade-whole-animation-duration), var(--move-whole-animation-duration));
   & > td {
-    animation-name: borderAnimation;
-    animation-timing-function: $ease-out;
-    animation-duration: $spg-matrix-row-move-in-duration;
-    animation-fill-mode: forwards;
     & > div {
       animation-name: fadeIn, moveInWithOverflow;
       opacity: 0;
-      animation-timing-function: $ease-out;
+      animation-direction: var(--animation-direction);
+      animation-timing-function: var(--animation-timing-function);
       animation-fill-mode: forwards;
-      animation-duration: $spg-matrix-row-fade-in-duration, $spg-matrix-row-move-in-duration;
-      animation-delay: $spg-matrix-row-fade-in-delay, 0s;
+      animation-duration: var(--fade-animation-duration), var(--move-animation-duration), var(--move-animation-duration);
+      animation-delay: var(--fade-animation-delay), var(--move-animation-delay), var(--move-animation-delay);
     }
   }
 }
-.spg-table__row--fade-out {
-  animation-direction: reverse;
-  --move-out-animation-duration: calc(#{$spg-matrix-row-move-out-duration} + #{$spg-matrix-row-move-out-delay});
-  animation-duration: max(var(--move-out-animation-duration), #{$spg-matrix-row-fade-out-duration});
-  & > td {
-    animation-duration: $spg-matrix-row-move-out-duration;
-    animation-delay: $spg-matrix-row-move-out-delay;
-    animation-direction: reverse;
-    animation-timing-function: $reverse-ease-out;
-    & > div {
-      animation-direction: reverse;
-      animation-timing-function: $reverse-ease-out;
-      animation-duration: $spg-matrix-row-fade-out-duration, $spg-matrix-row-move-out-duration;
-      animation-delay: 0s, $spg-matrix-row-move-out-delay;
-    }
-  }
+.spg-table__row--enter {
+  --move-animation-delay: 0s;
+  --move-animation-duration: #{$spg-matrix-row-move-in-duration};
+  --fade-animation-duration: #{$spg-matrix-row-fade-in-duration};
+  --fade-animation-delay: #{$spg-matrix-row-fade-in-delay};
+  --animation-direction: normal;
+  --animation-timing-function: #{$ease-out};
+}
+.spg-table__row--leave {
+  --move-animation-delay: #{$spg-matrix-row-move-out-delay};
+  --move-animation-duration: #{$spg-matrix-row-move-out-duration};
+  --fade-animation-duration: #{$spg-matrix-row-fade-out-duration};
+  --fade-animation-delay: 0s;
+  --animation-direction: reverse;
+  --animation-timing-function: #{$reverse-ease-out};
 }
 .spg-table__row--detail {
-  &.spg-table__row--fade-in {
-    --fade-in-animation-duration: calc(
-      #{$spg-matrix-detail-row-fade-in-duration} + #{$spg-matrix-detail-row-fade-in-delay}
-    );
-    animation-duration: max(var(--fade-in-animation-duration), #{$spg-matrix-detail-row-move-in-duration});
-    & > td {
-      animation-timing-function: $ease-out;
-      animation-duration: $spg-matrix-detail-row-move-in-duration;
-      & > div {
-        animation-duration: $spg-matrix-detail-row-fade-in-duration, $spg-matrix-detail-row-move-in-duration;
-        animation-delay: $spg-matrix-detail-row-fade-in-delay, 0s;
-      }
-    }
+  &.spg-table__row--enter {
+    --move-animation-delay: 0s;
+    --move-animation-duration: #{$spg-matrix-detail-row-move-in-duration};
+    --fade-animation-duration: #{$spg-matrix-detail-row-fade-in-duration};
+    --fade-animation-delay: #{$spg-matrix-detail-row-fade-in-delay};
+    --animation-direction: normal;
+    --animation-timing-function: #{$ease-out};
   }
-  &.spg-table__row--fade-out {
-    --move-out-animation-duration: calc(
-      #{$spg-matrix-detail-row-move-out-duration} + #{$spg-matrix-detail-row-move-out-delay}
-    );
-    animation-duration: max(var(--move-out-animation-duration), #{$spg-matrix-detail-row-fade-out-duration});
-    & > td {
-      animation-timing-function: $reverse-ease-out;
-      animation-duration: $spg-matrix-detail-row-move-out-duration;
-      animation-delay: $spg-matrix-detail-row-move-out-delay;
-      animation-direction: reverse;
-      & > div {
-        animation-duration: $spg-matrix-detail-row-fade-out-duration, $spg-matrix-detail-row-move-out-duration;
-        animation-delay: 0s, $spg-matrix-detail-row-move-out-delay;
-      }
-    }
+  &.spg-table__row--leave {
+    --move-animation-delay: #{$spg-matrix-detail-row-move-out-delay};
+    --move-animation-duration: #{$spg-matrix-detail-row-move-out-duration};
+    --fade-animation-duration: #{$spg-matrix-detail-row-fade-out-duration};
+    --fade-animation-delay: 0s;
+    --animation-direction: reverse;
+    --animation-timing-function: #{$reverse-ease-out};
   }
 }

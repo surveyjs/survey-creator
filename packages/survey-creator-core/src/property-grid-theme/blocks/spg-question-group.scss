@@ -1,9 +1,7 @@
 .spg-question-group {
   .spg-row {
     margin-top: 0;
-    --animate-margin: 0;
     &:not(:first-of-type) {
-      --animate-margin: #{calcSize(1)};
       margin-top: calcSize(1);
     }
   }
