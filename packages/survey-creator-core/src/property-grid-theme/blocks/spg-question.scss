@@ -146,12 +146,15 @@
 }
 
 .spg-question__erbox,
+.spg-question__erbox>svc-question-error,
 sv-question-error {
   &>div {
     display: flex;
     gap: calcSize(1);
   }
 }
+
+
 
 .spg-question__erbox-icon {
   .sv-svg-icon {
