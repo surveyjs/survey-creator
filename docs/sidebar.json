@@ -113,6 +113,10 @@
           "Title": "Format User Input for Single-Line Fields"
         },
         {
+          "Name": "end-user-guide-how-to-calculate-duration-between-dates-within-form",
+          "Title": "Calculate Duration Between Dates"
+        },
+        {
           "Name": "end-user-guide-how-to-apply-input-mask-to-text-fields",
           "Title": "Apply Input Masks"
         },
