@@ -1,6 +1,6 @@
 import * as ko from "knockout";
 import { Action } from "survey-core";
-const template: string = require("./translate-from-action.html");
+const template = require("./translate-from-action.html");
 
 ko.components.register("svc-translate-from-action", {
   viewModel: {
@@ -11,5 +11,5 @@ ko.components.register("svc-translate-from-action", {
       return params;
     }
   },
-  template: template
+  template: template.default
 });

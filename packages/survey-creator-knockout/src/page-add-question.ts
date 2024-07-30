@@ -8,5 +8,5 @@ ko.components.register("svc-add-new-question-btn", {
       return params.item.data;
     },
   },
-  template: template
+  template: template.default
 });

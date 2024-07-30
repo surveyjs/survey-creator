@@ -14,5 +14,5 @@ ko.components.register("svc-tab-theme", {
       return { model: plugin.model };
     },
   },
-  template: template
+  template: template.default
 });

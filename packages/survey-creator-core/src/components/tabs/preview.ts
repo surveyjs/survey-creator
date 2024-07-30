@@ -102,10 +102,10 @@ export class PreviewViewModel extends Base {
     });
 
     if (!!this.survey["onNavigateToUrl"]) {
-      this.survey["onNavigateToUrl"].add(function (sender, options) {
+      this.survey["onNavigateToUrl"].add((sender, options) => {
         const url: string = options.url;
         options.url = "";
-        if (!!url) {
+        if (!!url && options.allow) {
           const message: string = getLocString("ed.navigateToMsg") + " '" + url + "'.";
           if (!!this.surveyProvider) {
             this.surveyProvider.notify(message);

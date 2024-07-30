@@ -15,5 +15,5 @@ ko.components.register("svc-complete-page", {
       };
     },
   },
-  template: template
+  template: template.default
 });

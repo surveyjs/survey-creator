@@ -187,5 +187,5 @@ ko.components.register(editableStringRendererName, {
       return model;
     },
   },
-  template: template,
+  template: template.default,
 });

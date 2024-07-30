@@ -79,6 +79,7 @@ export class CreatorSurveyPageComponent extends CreatorModelElement<
         onClick={(e) => {
           return this.model.select(this.model, new ReactMouseEvent(e));
         }}
+        onDoubleClick={e => this.model.dblclick(e.nativeEvent)}
         onMouseLeave={(e) => this.model.hover(e.nativeEvent, e.currentTarget)}
         onMouseOver={(e) => this.model.hover(e.nativeEvent, e.currentTarget)}
       >

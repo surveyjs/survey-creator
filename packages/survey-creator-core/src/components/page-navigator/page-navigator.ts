@@ -32,14 +32,14 @@ export class PageNavigatorViewModel extends Base {
     this.icon = "icon-select-page";
     this.pagesController.onPagesChanged.add(this.pagesChangedFunc);
     this.pagesController.onCurrentPageChanged.add(this.currentPagesChangedFunc);
-    this.pageListModel = new ListModel(
-      [],
-      (item) => {
+    this.pageListModel = new ListModel({
+      items: [],
+      onSelectionChanged: (item) => {
         this.pagesController.selectPage(item.data);
-        this.popupModel.toggleVisibility();
+        this.popupModel.hide();
       },
-      true
-    );
+      allowSelection: true
+    });
     this.popupModel = new PopupModel("sv-list", { model: this.pageListModel });
     !!this.pagesController && (this.popupModel.horizontalPosition = this.pagesController.creator["toolboxLocation"]);
     this.popupModel.onShow = () => {

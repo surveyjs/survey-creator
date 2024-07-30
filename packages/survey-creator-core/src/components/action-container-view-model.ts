@@ -90,7 +90,7 @@ export class SurveyElementActionContainer extends AdaptiveActionContainer {
 
 export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> extends Base {
   public actionContainer: SurveyElementActionContainer;
-  public topActionContainer: ActionContainer;
+  protected expandCollapseAction: IAction;
   protected designerStateManager: DesignerStateManager;
   @property({ defaultValue: true }) allowDragging: boolean;
 
@@ -100,7 +100,13 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   @property({
     onSet: (val, target: SurveyElementAdornerBase<T>) => {
       target.calculateCollapsed();
-      if (target.designerStateManager && target.surveyElement) target.designerStateManager.getElementState(target.surveyElement).collapsed = val;
+      if (target.designerStateManager && target.surveyElement) {
+        target.designerStateManager.getElementState(target.surveyElement).collapsed = val;
+      }
+      setTimeout(() => {
+        target.creator.survey.pages.forEach(p => p.ensureRowsVisibility());
+        target.creator.survey.getAllPanels().forEach(p => p.ensureRowsVisibility());
+      }, 50);
     }
   }) collapsed: boolean;
   @property({
@@ -159,16 +165,18 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this.actionContainer.dotsItem.iconSize = 16;
     this.actionContainer.dotsItem.popupModel.horizontalPosition = "center";
 
-    this.topActionContainer = new ActionContainer();
-    this.topActionContainer.sizeMode = "small";
-    this.topActionContainer.setItems([{
+    const collapseIcon = "icon-collapse-detail-light_16x16";
+    const expandIcon = "icon-restore_16x16";
+    this.expandCollapseAction = {
       id: "collapse",
-      iconName: new ComputedUpdater<string>(() => this.collapsed ? "icon-restore_16x16" : "icon-collapse-detail-light_16x16") as any,
+      css: "sv-action-bar-item--secondary sv-action-bar-item--collapse",
+      iconName: new ComputedUpdater<string>(() => this.collapsed ? expandIcon : collapseIcon) as any,
       iconSize: 16,
       action: () => {
         this.collapsed = !this.collapsed;
       }
-    }]);
+    };
+
     this.collapsed = !!surveyElement && (this.designerStateManager?.getElementState(surveyElement).collapsed);
     this.setSurveyElement(surveyElement);
     this.creator.sidebar.onPropertyChanged.add(this.sidebarFlyoutModeChangedFunc);
@@ -320,7 +328,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     return this.getPropertyValue("showAddQuestionButton");
   }
   protected setShowAddQuestionButton(val: boolean): void {
-    this.setPropertyValue("showAddQuestionButton", val && this.allowEdit && settings.designer.showAddQuestionButton);
+    this.setPropertyValue("showAddQuestionButton", val && this.allowEdit && !!this.creator && this.creator.showAddQuestionButton);
   }
   protected duplicate(): void { }
   protected delete(): void {

@@ -22,5 +22,5 @@ ko.components.register("svc-side-bar", {
       return params;
     }
   },
-  template: template
+  template: template.default
 });

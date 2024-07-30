@@ -8,15 +8,11 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "moduleResolution": "node",
-    "jsx": "react",
     "baseUrl": ".",
-    "paths": {
-      "survey-creator-core": [
-        "./src/editorLocalization.ts"
-      ],
-    }
+    "declaration": true,
+    "declarationDir": "build/typings/"
   },
   "include": [
-    "src/**/*.ts"
+    "./src/entries/index.ts"
   ]
 }

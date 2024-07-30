@@ -18,7 +18,8 @@ import {
   CssClassBuilder,
   QuestionPanelDynamicModel,
   ListModel,
-  QuestionTextModel
+  QuestionTextModel,
+  ActionContainer
 } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { editorLocalization, getLocString } from "../editorLocalization";
@@ -50,7 +51,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   placeholderComponentData: any;
 
   private dragOrClickHelper: DragOrClickHelper;
-
+  public topActionContainer: ActionContainer;
   constructor(
     creator: SurveyCreatorModel,
     surveyElement: SurveyElement,
@@ -58,6 +59,9 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   ) {
     super(creator, surveyElement);
     this.actionContainer.sizeMode = "small";
+    this.topActionContainer = new ActionContainer();
+    this.topActionContainer.sizeMode = "small";
+    this.topActionContainer.setItems([this.expandCollapseAction]);
     if (
       surveyElement.isQuestion &&
       !!surveyElement["setCanShowOptionItemCallback"]
@@ -102,8 +106,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     const isStartWithNewLine = this.surveyElement.isQuestion && !(<Question>this.surveyElement).startWithNewLine;
     return new CssClassBuilder()
       .append("svc-question__adorner--start-with-new-line", isStartWithNewLine)
-      .append("svc-question__adorner--collapse-" + this.creator.expandCollapseButtonVisibility, true)
-      .append("svc-question__adorner--collapsed", !!this.renderedCollapsed).toString();
+      .append("svc-question__adorner--collapse-" + this.creator.expandCollapseButtonVisibility, true).toString();
   }
 
   css() {
@@ -120,6 +123,9 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     }
     if (this.isEmptyTemplate) {
       result += " svc-question__content--empty-template";
+    }
+    if (this.renderedCollapsed) {
+      result += " svc-question__content--collapsed";
     }
 
     if (this.isDragMe) {
@@ -161,7 +167,9 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     } else {
       result = result.replace(" svc-question__content--drag-over-bottom", "");
     }
-
+    if(this.creator) {
+      result = this.creator.getElementAddornerCssCallback(this.surveyElement, result);
+    }
     return result;
   }
 

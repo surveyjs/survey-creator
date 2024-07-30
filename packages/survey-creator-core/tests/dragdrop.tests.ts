@@ -1,5 +1,6 @@
 import { SurveyModel, QuestionTextModel, settings, DragTypeOverMeEnum } from "survey-core";
 import { DragDropSurveyElements } from "../src/survey-elements";
+import { CreatorTester } from "./creator-tester";
 
 var assert: any;
 
@@ -901,4 +902,33 @@ test("Drag Drop Question with Multiline (StartWithNewLine === false)", () => {
   expect(page.rows[0].elements[0].name).toBe("q1"); // "r1 q1 check");
   expect(page.rows[0].elements[1].name).toBe("q2"); // "r1 q2 check");
   expect(page.rows[0].elements[2].name).toBe("q3"); // "r1 q3 check");
+});
+
+test("onModified is raised when frop from toolbox", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1",
+          }
+        ]
+      }
+    ]
+  };
+  let modifiedLog = "";
+  creator.onModified.add((sender, options) => {
+    modifiedLog += "->" + options.type;
+  });
+  var q1 = new QuestionTextModel("q1");
+  const ddHelper: any = creator.dragDropSurveyElements;
+  ddHelper.draggedElement = q1;
+  ddHelper.dragOverCore(creator.survey.getQuestionByName("question1"), DragTypeOverMeEnum.Top);
+  ddHelper.allowDropHere = true;
+  ddHelper.drop();
+
+  expect(modifiedLog).toBe("->PROPERTY_CHANGED->ADDED_FROM_TOOLBOX");
 });
