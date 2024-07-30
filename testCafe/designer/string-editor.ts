@@ -852,6 +852,48 @@ test("Paste multiline selectbase", async (t) => {
   })()).eql("[\"Item 1\",\"Ita\",\"b\",\"cem 2\",\"Item 3\"]");
 });
 
+test("Paste multiline selectbase through event", async (t) => {
+  await setJSON({
+    "elements": [
+      {
+        "type": "radiogroup",
+        "name": "question1",
+        "choices": [
+          "Item 1",
+        ],
+        "showNoneItem": true
+      }
+    ]
+  });
+
+  var skipIfReact = ClientFunction(() => {
+    return window["creator"].survey.platformName == "react";
+  });
+  // skip test fo react - insecured code
+  if (await skipIfReact()) return;
+
+  var paste = ClientFunction((data) => {
+    var event = new Event("paste");
+    event["clipboardData"] = { getData: () => data };
+    document.activeElement.dispatchEvent(event);
+  });
+
+  await t
+    .click(Selector(".sv-string-editor").withText("None"));
+  await paste("q\nw\ne");
+  await t.pressKey("Enter");
+  await t.expect(ClientFunction(() => {
+    return JSON.stringify(window["creator"].survey.getAllQuestions()[0].visibleChoices.map(c => c.text));
+  })()).eql("[\"Item 1\",\"Item 2\",\"qwe\",\"Other (describe)\"]");
+
+  await t
+    .click(Selector(".sv-string-editor").withText("Item 1"));
+  await paste("a\nb\nc");
+  await t.expect(ClientFunction(() => {
+    return JSON.stringify(window["creator"].survey.getAllQuestions()[0].choices.map(c => c.text));
+  })()).eql("[\"a\",\"b\",\"c\"]");
+});
+
 test.skip("Paste html data", async (t) => {
   // this test does not work in Chrome. Keep it here fore future investigation
   await setJSON({
