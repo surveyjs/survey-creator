@@ -887,8 +887,6 @@ export const thStrings = {
       "--sjs-general-backcolor-dim": "สีพื้นหลัง",
       "--sjs-primary-backcolor": "สีพื้นหลังเน้น",
       "--sjs-primary-forecolor": "สีเน้นพื้นหน้า",
-
-
       "--sjs-special-red": "สีข้อความข้อผิดพลาด",
       "--sjs-shadow-small": "เอฟเฟกต์เงา",
       "--sjs-shadow-inner": "เอฟเฟกต์เงา",
