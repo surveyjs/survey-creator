@@ -14,6 +14,9 @@
     margin: calcSize(1) 0 0 0;
     padding: 0;
   }
+  .spg-panel__content .spg-row.spg-row {
+    animation: none;
+  }
 
   .spg-paneldynamic__add-btn {
     margin: 0 auto;
@@ -30,7 +33,7 @@
       min-width: auto;
     }
 
-    &>div {
+    & > div {
       flex-grow: 1;
       flex-shrink: 1;
       flex-basis: calc(50% - #{$base-unit} * 0.5);
@@ -65,8 +68,8 @@
       text-overflow: ellipsis;
 
       .sv-string-viewer {
-          white-space: nowrap;
-        }
+        white-space: nowrap;
+      }
     }
   }
 
