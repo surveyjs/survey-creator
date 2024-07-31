@@ -12,8 +12,9 @@ import {
 } from "survey-core";
 import { QuestionLinkValueModel } from "../src/components/link-value";
 import { settings } from "../src/creator-settings";
-import { QuestionToolbox } from "../src/toolbox";
+import { QuestionToolbox, QuestionToolboxItem } from "../src/toolbox";
 import { CreatorTester } from "./creator-tester";
+import { ToolboxToolViewModel } from "../src/components/toolbox/toolbox-tool";
 
 test("toolbox support options", (): any => {
   var allTypes = ElementFactory.Instance.getAllToolboxTypes();
@@ -761,4 +762,25 @@ test("Toolbox child items do not get focus", (): any => {
   const creator = new CreatorTester();
   creator.toolbox.searchEnabled = true;
   expect(creator.toolbox.items.filter(i => i.name == "text")[0].popupModel.isFocusedContainer).toBeFalsy();
+});
+
+test("Toolbox showSubitems property", (): any => {
+  const creator = new CreatorTester();
+  const textItem = creator.toolbox.getItemByName("text");
+  const toolboxTool = new ToolboxToolViewModel(textItem, creator, creator.toolbox);
+
+  expect(toolboxTool.itemComponent).toBe("svc-toolbox-item-group");
+
+  creator.toolbox.showSubitems = false;
+  expect(toolboxTool.itemComponent).toBe("svc-toolbox-item");
+});
+
+test("Toolbox item clearSubitems function", (): any => {
+  const creator = new CreatorTester();
+  const textItem = creator.toolbox.getItemByName("text") as QuestionToolboxItem;
+
+  expect(textItem.items.length).toBe(13);
+
+  textItem.clearSubitems();
+  expect(textItem.items.length).toBe(0);
 });

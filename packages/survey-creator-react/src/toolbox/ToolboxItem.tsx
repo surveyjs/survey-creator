@@ -58,7 +58,7 @@ export class SurveyCreatorToolboxTool extends CreatorModelElement<
   render(): JSX.Element {
     const item = this.item;
     const itemComponent = ReactElementFactory.Instance.createElement(
-      item.component || "svc-toolbox-item",
+      item.itemComponent,
       {
         item: item,
         creator: this.creator,

@@ -13,7 +13,7 @@
     >
       <component
         :viewModel="model"
-        :is="item.component || 'svc-toolbox-item'"
+        :is="item.itemComponent"
         :item="item"
         :creator="creator"
         :isCompact="isCompact"

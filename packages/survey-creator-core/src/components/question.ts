@@ -405,7 +405,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   private createConvertInputType() {
     const questionType = this.surveyElement.getType();
     const toolboxItem = this.creator.toolbox.items.filter(item => item.id === questionType)[0];
-    if (!toolboxItem || !toolboxItem.items || toolboxItem.items.length < 1) return null;
+    if (!toolboxItem || !toolboxItem.hasSubItems) return null;
 
     let propName = QuestionToolbox.getSubTypePropertyName(questionType);
     const questionSubType = this.surveyElement.getPropertyValue(propName);
