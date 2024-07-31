@@ -157,7 +157,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     } else {
       result = result.replace(" svc-question__content--drag-over-bottom", "");
     }
-    if(this.creator) {
+    if (this.creator) {
       result = this.creator.getElementAddornerCssCallback(this.surveyElement, result);
     }
     return result;
@@ -367,7 +367,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       enabled: allowChangeType,
       visibleIndex: 0,
       title: actionTitle,
-      iconName: this.creator.toolbox.getItemByName(this.element.getType())?.iconName
+      iconName: "icon-chevron_16x16"
     };
     const newAction = this.createDropdownModel({
       actionData: actionData,
@@ -388,6 +388,15 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
           }
         });
       }
+    });
+    newAction.iconName = <any>new ComputedUpdater(() => {
+      if (newAction.mode === "small") {
+        return this.creator.toolbox.getItemByName(this.element.getType())?.iconName;
+      }
+      return "icon-chevron_16x16";
+    });
+    newAction.iconSize = <any>new ComputedUpdater(() => {
+      return newAction.mode === "small" ? 24 : 16;
     });
     newAction.disableHide = true;
     return newAction;
@@ -417,6 +426,8 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       id: "convertInputType",
       visibleIndex: 1,
       title: editorLocalization.getPropertyValueInEditor(propName, questionSubType),
+      disableShrink: true,
+      iconName: "icon-chevron_16x16"
     };
     const newAction = this.createDropdownModel({
       actionData: actionData,
@@ -428,7 +439,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       }
     });
 
-    newAction.disableShrink = true;
     this.surveyElement.registerFunctionOnPropertyValueChanged(
       propName,
       () => {
@@ -453,11 +463,11 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       id: options.actionData.id,
       css: "sv-action--convertTo sv-action-bar-item--secondary",
       iconName: options.actionData.iconName,
-      iconSize: 24,
+      iconSize: 16,
       title: options.actionData.title,
       enabled: options.actionData.enabled,
       visibleIndex: options.actionData.visibleIndex,
-      disableShrink: false,
+      disableShrink: options.actionData.disableShrink,
       location: "start",
       action: (newType) => {
       },

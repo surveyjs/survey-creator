@@ -27,10 +27,66 @@ svc-question {
 
         &:active {
           opacity: 0.5;
-          background-color: var(--background-dim, #f3f3f3);
+          background-color: $background-dim;
         }
       }
     }
+  }
+}
+
+.svc-question__adorner {
+  .sv-action-bar-item {
+    background-color: transparent;
+    color: var(--ctr-survey-question-panel-toolbar-item-text-color, $foreground);
+  }
+
+  .sv-action-bar-item__icon {
+    use {
+      fill: var(--ctr-survey-question-panel-toolbar-item-icon-color, $secondary);
+    }
+  }
+
+  //hovered state
+  .sv-action-bar-item:not(.sv-action-bar-item--pressed):hover:enabled,
+  .sv-action-bar-item:not(.sv-action-bar-item--pressed):focus:enabled {
+    background-color: var(--ctr-survey-question-panel-toolbar-item-background-color-hovered, $background-dim);
+  }
+
+  //pressed state
+  .sv-action-bar-item:not(.sv-action-bar-item--pressed):active:enabled {
+    opacity: var(--ctr-survey-question-panel-toolbar-item-opacity-pressed, 0.5);
+  }
+
+  //disabled state
+  .sv-action-bar-item:disabled {
+    opacity: var(--ctr-survey-question-panel-toolbar-item-opacity-disabled, 0.25);
+  }
+
+  .sv-action-bar-item--secondary {
+    .sv-action-bar-item__icon use {
+      fill: var(--ctr-survey-question-panel-toolbar-item-icon-color, $secondary);
+    }
+  }
+
+  .sv-action-bar-item--active {
+    .sv-action-bar-item__icon use {
+      fill: var(--ctr-survey-question-panel-toolbar-item-icon-color, $secondary);
+    }
+  }
+
+  .sv-action-bar-item-dropdown {
+    background-color: transparent;
+  }
+
+  .sv-action-bar-item--pressed:not(.sv-action-bar-item--active) {
+    background-color: var(--ctr-survey-question-panel-toolbar-item-background-color-selected, $background-dim);
+    opacity: var(--ctr-survey-question-panel-toolbar-item-opacity-pressed, 50%);
+  }
+
+  .sv-action-bar-item.svc-required-action--active:not(.sv-action-bar-item--pressed):enabled:hover,
+  .sv-action-bar-item.svc-required-action--active:not(.sv-action-bar-item--pressed):enabled:focus,
+  .sv-action-bar-item.svc-required-action--active {
+    background-color: $secondary-backcolor-semi-light;
   }
 }
 
@@ -130,6 +186,10 @@ svc-question {
   .sv-action--convertTo {
     max-width: max-content;
 
+    .sv-action-bar-item {
+      flex-direction: row-reverse;
+    }
+
     .sv-action-bar-item--icon {
       max-width: 100%;
       padding: calcSize(0.5);
@@ -138,27 +198,19 @@ svc-question {
     .sv-action-bar-item__title {
       display: inline-block;
       justify-content: left;
-
-      @include textEllipsis;
-
-      &::after {
-        content: " ";
-        display: inline-block;
-        margin-inline-start: calcSize(0.5);
-        width: calcSize(2);
-        height: calcSize(2);
-        vertical-align: bottom;
-        background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8 11L13 6H3L8 11Z' fill='%23ff9814'/%3E%3C/svg%3E%0A");
-      }
     }
 
     .sv-action-bar-item__icon {
+      margin-inline-start: calcSize(0.5);
+
+      &:last-child {
+        margin-inline-start: 0;
+      }
+    }
+
+    .sv-action-bar-item__icon:last-child {
       use {
         fill: $primary;
-      }
-
-      &:not(:last-child) {
-        display: none
       }
     }
 
@@ -166,7 +218,6 @@ svc-question {
       margin-inline-start: 0; // margin-left
       margin-inline-end: 0; // margin-right
     }
-
   }
 
   .sv-action--convertTo.sv-action--hidden {
@@ -252,8 +303,8 @@ svc-question {
   //min-width: 100px;
   height: auto;
   border-radius: calcSize(12.5);
-  background-color: $background;
-  color: $foreground;
+  background-color: var(--ctr-toolbox-item-background-color-hovered, $background);
+  color: var(--ctr-toolbox-item-text-color-hovered, $foreground);
   padding: calcSize(1.5) calcSize(2);
   cursor: grabbing;
   position: absolute;
@@ -268,11 +319,11 @@ svc-question {
 }
 
 .svc-dragged-element-shortcut .sv-svg-icon use {
-  fill: $primary;
+  fill: var(--ctr-toolbox-item-icon-color-hovered, $primary);
 }
 
 .svc-dragged-element-shortcut--selected {
-  border: 2px solid $secondary;
+  border: 2px solid var(--ctr-toolbox-item-border-color-floating, $secondary);
 }
 
 .svc-dragged-element-shortcut__text {
@@ -465,19 +516,23 @@ svc-question,
     &>* {
       display: none
     }
+
     .svc-question__drag-area {
       display: flex,
     }
+
     .sd-element {
       display: block;
-      &>*:not(.sd-element__header ) {
+
+      &>*:not(.sd-element__header) {
         display: none
       }
-      .sd-element__header
-      {
+
+      .sd-element__header {
         &>*:not(.sd-element__title) {
           display: none;
         }
+
         .sd-element__title,
         .sd-title.sd-element__title.sd-element__title--hidden {
           display: block;
@@ -491,21 +546,25 @@ svc-question,
   .svc-question__content {
     flex-grow: 0;
     padding-bottom: calcSize(4);
+
     .sd-element__header,
-    .sd-element--complex > .sd-element__header {
+    .sd-element--complex>.sd-element__header {
       padding-top: 0;
       padding-bottom: 0;
     }
   }
 }
+
 .svc-creator--mobile {
   .svc-question__top-actions {
     padding: 0;
   }
+
   .svc-question__adorner--collapsed {
     .svc-question__content {
       padding-bottom: calcSize(2);
     }
+
     .svc-question__content--selected {
       padding-bottom: calcSize(3);
     }
@@ -532,7 +591,7 @@ svc-question,
   visibility: hidden;
 
   use {
-    fill: $foreground-light;
+    fill: var(--ctr-survey-question-panel-drag-area-drag-indicator-color, $foreground-light);
   }
 }
 
@@ -684,7 +743,7 @@ svc-question,
     justify-content: center;
     margin: calcSize(1) calcSize(3);
     line-height: calcSize(2);
-    color: $primary;
+    color: var(--ctr-survey-action-button-text-color-positive, $primary);
     text-wrap: nowrap;
   }
 }
@@ -764,7 +823,7 @@ svc-question,
   right: 0;
 
   use {
-    fill: $foreground-light;
+    fill: var(--ctr-library-contextual-button-icon-color, $foreground-light);
   }
 
   &:hover {
@@ -880,12 +939,6 @@ svc-question,
   }
 }
 
-.svc-required-action--active:not(.sv-action-bar-item--pressed):enabled:hover,
-.svc-required-action--active:not(.sv-action-bar-item--pressed):enabled:focus,
-.svc-required-action--active {
-  background-color: $secondary-backcolor-semi-light;
-}
-
 
 .svc-question__adorner {
   .sv-ranking:not(.sv-ranking--select-to-rank) {
@@ -923,15 +976,18 @@ svc-question,
   top: 0;
   right: 0;
   visibility: hidden;
+
   .sv-action-bar-item {
     margin: 0;
     padding: calcSize(0.5);
     opacity: 0.5;
     height: 24px;
+
     &:hover,
     &:focus {
       opacity: initial;
     }
+
     use {
       fill: $foreground-dim-light;
     }

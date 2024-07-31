@@ -9,6 +9,11 @@ svc-page {
 
   .sd-page__title {
     margin: calcSize(2.5) 0 0 0;
+    color: var(--ctr-survey-page-header-title-color-placeholder, $foreground-dim);
+  }
+
+  .svc-panel__placeholder {
+    color: var(--ctr-survey-page-placeholder-text-color, $foreground-light);
   }
 }
 
@@ -33,19 +38,79 @@ svc-page {
   inset-inline-end: 0; // right
   padding: 0 calcSize(1.5);
   z-index: 1;
+
+  h4.sd-title {
+    .sv-string-editor {
+      &[aria-placeholder]:empty:before {
+        color: var(--ctr-survey-page-header-title-color-placeholder, $foreground-light);
+      }
+    }
+  }
+}
+
+.svc-page__content-actions {
+  .sv-action-bar-item {
+    border-radius: var(--ctr-survey-page-toolbar-item-corner-radius, 4px);
+    background-color: transparent;
+    color: var(--ctr-survey-page-toolbar-item-text-color, $foreground);
+  }
+
+  .sv-action-bar-item__icon {
+    use {
+      fill: var(--ctr-survey-question-panel-toolbar-item-icon-color, $secondary);
+    }
+  }
+
+  //hovered state
+  .sv-action-bar-item:not(.sv-action-bar-item--pressed):hover:enabled,
+  .sv-action-bar-item:not(.sv-action-bar-item--pressed):focus:enabled {
+    background-color: var(--ctr-survey-question-panel-toolbar-item-background-color-hovered, $background-dim);
+  }
+
+  //pressed state
+  .sv-action-bar-item:not(.sv-action-bar-item--pressed):active:enabled {
+    opacity: var(--ctr-survey-question-panel-toolbar-item-opacity-pressed, 0.5);
+  }
+
+  //disabled state
+  .sv-action-bar-item:disabled {
+    opacity: var(--ctr-survey-question-panel-toolbar-item-opacity-disabled, 0.25);
+  }
+
+  .sv-action-bar-item--secondary {
+    .sv-action-bar-item__icon use {
+      fill: var(--ctr-survey-question-panel-toolbar-item-icon-color, $secondary);
+    }
+  }
+
+  .sv-action-bar-item--active {
+    .sv-action-bar-item__icon use {
+      fill: var(--ctr-survey-question-panel-toolbar-item-icon-color, $secondary);
+    }
+  }
+
+  .sv-action-bar-item-dropdown {
+    border-radius: calcCornerRadius(0.5);
+    background-color: transparent;
+  }
+
+  .sv-action-bar-item--pressed:not(.sv-action-bar-item--active) {
+    background-color: var(--ctr-survey-page-toolbar-item-background-color-selected, $background-dim);
+    opacity: var(--ctr-survey-question-panel-toolbar-item-opacity-pressed, 50%);
+  }
 }
 
 .svc-page__content:not(.svc-page__content--new):focus,
 .svc-hovered.svc-page__content:not(.svc-page__content--new) {
-  background: $secondary-backcolor-semi-light;
+  background: var(--ctr-survey-page-background-color-hovered, $secondary-backcolor-semi-light);
 }
 
 .svc-creator .svc-page .svc-page__content--selected,
 .svc-creator .svc-page .svc-page__content--selected:focus,
 .svc-hovered {
   &.svc-page__content--selected {
-    box-shadow: 0 0 0 2px inset $secondary;
-    background: $secondary-backcolor-semi-light;
+    box-shadow: 0 0 0 2px inset var(--ctr-survey-page-border-color-selected, $secondary);
+    background: var(--ctr-survey-page-background-color-selected, $secondary-backcolor-semi-light);
 
     .svc-page__content-actions {
       display: block;
@@ -93,15 +158,15 @@ svc-page {
   outline: none;
 
   use {
-    fill: $foreground-light;
+    fill: var(--ctr-library-contextual-button-icon-color, $foreground-light);
   }
 
   &:hover {
-    background-color: $background-dim;
+    background-color: var(--ctr-button-contextual-button-background-color-hovered, $background-dim);
   }
 
   &:focus {
-    background-color: $primary-light;
+    background-color: var(--ctr-button-contextual-button-background-color-focused, $primary-light);
   }
 }
 

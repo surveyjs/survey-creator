@@ -49,6 +49,7 @@ export * from "../side-bar/side-bar-tab";
 export * from "../results";
 export * from "../simulator";
 export * from "../survey-renderers/dropdown";
+export * from "../survey-renderers/question-error/question-error";
 export * from "../tabs/test";
 export * from "../tabs/test-complete";
 export * from "../tabs/theme";
