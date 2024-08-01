@@ -357,8 +357,6 @@ test("dropdown popup in simulator", async (t) => {
     });
 
     await t.click(getTabbedMenuItemByText(creatorTabPreviewName));
-    await t.click(Selector('[title="Select device type"]'));
-    await t.click(Selector("span").withText("iPhone SE"));
     await t.click(Selector('[data-name="nps-score"]'));
     await t.click(Selector("li.sv-list__item.sd-list__item span").withText("2"));
     await t.click(Selector('[data-name="nps-score"]'));
@@ -368,11 +366,8 @@ test("dropdown popup in simulator", async (t) => {
 
 test("dropdown popup in simulator - mobile", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await ClientFunction(() => {
-      window["Survey"]._setIsTouch(true);
-    })();
     const simulator = Selector(".svd-simulator-content");
-    await t.resizeWindow(400, 600);
+    await t.resizeWindow(1800, 600);
     await setJSON({
       "logoPosition": "right",
       "pages": [
@@ -399,7 +394,9 @@ test("dropdown popup in simulator - mobile", async (t) => {
         }
       ]
     });
-    await t.click(Selector('[title="Preview"]'));
+    await t.click(getTabbedMenuItemByText(creatorTabPreviewName));
+    await t.click(Selector('[title="Select device type"]'));
+    await t.click(Selector("span").withText("iPhone SE"));
     await t.click(Selector('[data-name="nps-score"]'));
     await takeElementScreenshot("test-tab-opened-dropdown-mobile.png", simulator, t, comparer);
   });
