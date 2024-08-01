@@ -179,10 +179,10 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     // drop to page
     let page: any = this.survey.getPageByName(dataAttributeValue);
     if (page) {
-      if (page.elements.length !== 0) {
-        // TODO we can't drop on not empty page directly for now
-        return null;
-      }
+      // if (page.elements.length !== 0) {
+      //   // TODO we can't drop on not empty page directly for now
+      //   return null;
+      // }
       return page;
     }
 
@@ -428,6 +428,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       srcContainer.removeElement(src);
     }
     const dest = this.dragOverIndicatorElement?.isPanel ? this.dragOverIndicatorElement : this.dropTarget;
+    if (dest.isPage && dest.elements.length > 0) return;
     const isTargetIsContainer = dest.isPanel || dest.isPage;
     if (isTargetIsContainer && this.dragOverLocation == DragTypeOverMeEnum.InsideEmptyPanel) {
       dest.insertElement(src);

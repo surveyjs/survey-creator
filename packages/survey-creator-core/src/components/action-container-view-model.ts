@@ -125,14 +125,13 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   private dragCollapsedTimer;
 
   protected dragIn() {
-    if (this.surveyElement.isPanel && this.collapsed) {
+    if ((this.surveyElement.isPanel || this.surveyElement.isPage) && this.collapsed) {
       this.dragCollapsedTimer = setTimeout(() => {
-        this.collapsedByDrag = false;
+        this.collapsed = false;
       }, 1000);
     }
   }
   protected dragOut() {
-    this.collapsedByDrag = undefined;
     if (this.dragCollapsedTimer) clearTimeout(this.dragCollapsedTimer);
   }
 
@@ -152,6 +151,9 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this.designerStateManager = (creator.getPlugin("designer") as TabDesignerPlugin)?.designerStateManager;
     this.designerStateManager?.initForElement(surveyElement);
     this.selectedPropPageFunc = (sender: Base, options: any) => {
+      if (options.name === "dragTypeOverMe") {
+        if (!!options.newValue) this.dragIn(); else this.dragOut();
+      }
       if (options.name === "isSelectedInDesigner") {
         this.onElementSelectedChanged(options.newValue);
       }

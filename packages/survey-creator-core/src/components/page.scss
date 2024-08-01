@@ -139,6 +139,12 @@ svc-page {
     box-sizing: content-box;
     pointer-events: none;
   }
+  &.svc-page__content--collapsed-drag-over-inside {
+    &::after {
+      border: 2px $primary solid;
+      background: $primary-light;
+    }
+  }
 }
 
 .svc-creator .svc-page .svc-page__content--selected,
