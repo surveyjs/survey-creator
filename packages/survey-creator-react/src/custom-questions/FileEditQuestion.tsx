@@ -80,6 +80,7 @@ export class SurveyQuestionFileEditor extends SurveyQuestionText {
     return (
       <div
         className={this.questionFile.cssClasses.root}
+        ref={el => this.setContent(el)}
         onDragEnter={this.questionFile.onDragEnter}
         onDragOver={this.questionFile.onDragOver}
         onDrop={this.questionFile.onDrop}

@@ -57,6 +57,8 @@ require("./components/creator.scss");
 require("./components/string-editor.scss");
 require("./creator-theme/creator.scss");
 
+import designTabSurveyThemeJSON from "./designTabSurveyThemeJSON";
+
 export interface IKeyboardShortcut {
   name?: string;
   affectedTab?: string;
@@ -1898,6 +1900,11 @@ export class SurveyCreatorModel extends Base
       this.stopUndoRedoTransaction();
       this.selectElement(options.draggedElement, undefined, false);
     });
+    this.dragDropChoices.onShortcutCreated = (shortcut: HTMLElement) => {
+      Object.keys(this.designTabSurveyThemeVariables).forEach((key) => {
+        shortcut.style.setProperty(key, this.designTabSurveyThemeVariables[key]);
+      });
+    };
   }
 
   public updateElementsOnLocaleChanged(obj: Base, propertyName: string): void {
@@ -2118,6 +2125,10 @@ export class SurveyCreatorModel extends Base
     this.changeText(value, true);
   }
 
+  public get designTabSurveyThemeVariables(): {} {
+    return designTabSurveyThemeJSON.cssVariables;
+  }
+
   public getSurveyJSON(): any {
     if (this.viewType != "editor") {
       return new JsonObject().toJsonObject(this.survey);
@@ -2149,6 +2160,7 @@ export class SurveyCreatorModel extends Base
 
     if (reason !== "designer" && reason !== "test" && reason !== "theme") {
       survey.fitToContainer = false;
+      survey.applyTheme(designTabSurveyThemeJSON);
       survey.gridLayoutEnabled = false;
     }
 

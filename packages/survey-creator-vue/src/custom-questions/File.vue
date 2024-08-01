@@ -6,6 +6,7 @@
     @drop="question.onDrop"
     @dragleave="question.onDragLeave"
     @keydown="question.onKeyDown"
+    ref="root"
   >
     <input
       type="text"
@@ -67,6 +68,8 @@ import type { QuestionFileEditorModel } from "survey-creator-core";
 import { useQuestion } from "survey-vue3-ui";
 import { ref } from "vue";
 
+const root = ref<HTMLElement>();
+
 const props = defineProps<{ question: QuestionFileEditorModel }>();
-useQuestion(props, ref<HTMLElement>());
+useQuestion(props, root);
 </script>

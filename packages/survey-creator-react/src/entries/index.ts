@@ -40,6 +40,7 @@ export * from "../tabs/translation/TranslationLineSkeleton";
 export * from "../tabs/translation/TranslateFromAction";
 export * from "../ActionButton";
 export * from "../StringEditor";
+export * from "../QuestionError";
 
 export * from "../tabs/logic-operator";
 export * from "../tabs/Designer";

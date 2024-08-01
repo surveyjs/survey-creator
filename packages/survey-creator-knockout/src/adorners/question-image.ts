@@ -31,7 +31,7 @@ ko.components.register("svc-image-question", {
       model["placeholderComponentData"] = {
         name: "survey-question-file",
         data: model.filePresentationModel,
-        afterRender: () => { }
+        afterRender: model.filePresentationModel.koQuestionAfterRender
       };
       return model;
     }

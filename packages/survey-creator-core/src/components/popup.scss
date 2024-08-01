@@ -1,0 +1,211 @@
+survey-creator:not(.svd-simulator-content),
+.svc-creator:not(.svd-simulator-content) {
+  .sv-popup {
+    .sd-btn {
+      background: var(--ctr-button-background-color, $background);
+      color: var(--ctr-button-text-color, $primary);
+
+      &:hover {
+        background: var(--ctr-button-background-color-hovered, $background-dark);
+      }
+    }
+
+    .sd-btn--action {
+      background: var(--ctr-button-background-color-cta, $primary);
+      color: var(--ctr-button-text-color-cta, $primary-foreground);
+
+      &:hover {
+        background: var(--ctr-button-background-color-cta-hovered, $primary-background-dark);
+      }
+    }
+  }
+
+  .sv-popup--modal {
+    background-color: var(--ctr-popup-haze-background-color, $background-semitransparent);
+  }
+
+  .sv-popup--modal>.sv-popup__container {
+    background-color: var(--ctr-popup-background-color, $background-dim-light);
+
+    &>.sv-popup__shadow>.sv-popup__body-content {
+      background-color: var(--ctr-popup-background-color, $background-dim-light);
+    }
+  }
+
+  .sv-popup--overlay:not(.sv-popup--dropdown-overlay) {
+    .sv-popup__container {
+      background: var(--ctr-popup-haze-background-color, $background-semitransparent);
+    }
+
+    .sv-popup__body-content {
+      background-color: var(--ctr-popup-background-color, $background-dim);
+    }
+
+    .sv-popup__button.sv-popup__button {
+      background-color: var(--ctr-button-background-color-cta, $primary);
+      border: 2px solid var(--ctr-button-background-color-cta, $primary);
+      color: var(--ctr-button-text-color-cta, $primary-foreground);
+    }
+  }
+
+  .sv-popup__pointer {
+    &:after {
+      content: " ";
+      border-bottom: calcSize(1) solid var(--ctr-contextual-menu-pointer-color, $background);
+    }
+  }
+
+  .sv-popup__body-header {
+    color: var(--ctr-popup-title-color, $foreground);
+  }
+
+  .sv-popup--dropdown {
+    .sv-popup__body-content {
+      background-color: var(--ctr-contextual-menu-background-color, $background);
+    }
+  }
+
+  .sv-popup--dropdown.toolbox-subtypes {
+    .sv-popup__body-content {
+      background: unset;
+    }
+  }
+
+  .sv-list__filter {
+    background-color: var(--ctr-contextual-menu-background-color, $background);
+    border-bottom: 1px solid var(--ctr-list-search-border-color, $border-inside);
+
+    .sv-list__input {
+      color: var(--ctr-list-search-text-color-placeholder, $foreground-dim-light);
+      background-color: transparent;
+
+      &::placeholder {
+        color: var(--ctr-list-search-text-color-placeholder, $foreground-light);
+      }
+    }
+
+    .sv-list__filter-icon use {
+      fill: var(--ctr-list-search-icon-color, $foreground-light);
+    }
+  }
+
+  .sv-list__item-body {
+    color: var(--ctr-list-item-text-color, $foreground-dim);
+  }
+
+  .sv-list__item-icon use {
+    fill: var(--ctr-list-item-icon-color, $foreground-light);
+  }
+
+  .sv-list__item--hovered>.sv-list__item-body {
+    color: var(--ctr-list-item-text-color-hovered, $foreground);
+    background: var(--ctr-list-item-background-color-hovered, $background-dark);
+
+    .sv-list__item-icon use {
+      fill: var(--ctr-list-item-icon-color-hovered, $foreground-light);
+    }
+  }
+
+  .sv-list__item--selected,
+  .sv-list__item.sv-list__item--selected:hover {
+    &>.sv-list__item-body {
+      color: var(--ctr-list-item-text-color-selected, $primary-foreground);
+      background: var(--ctr-list-item-background-color-selected, $primary);
+    }
+
+    .sv-list__item-icon use {
+      fill: var(--ctr-list-item-icon-color-selected, $background);
+    }
+
+    &.sv-list__item--group {
+      &>.sv-list__item-body {
+        background: var(--ctr-list-item-background-color-selected, $primary-light);
+        color: var(--ctr-list-item-text-color-selected, $foreground);
+        font-weight: 400;
+      }
+
+      .sv-list__item-icon use {
+        fill: var(--ctr-list-item-icon-color-hovered, $foreground-light);
+      }
+    }
+  }
+
+  //styles for dropdown overlay
+  .sv-popup--dropdown-overlay {
+    .sv-popup__button.sv-popup__button {
+      color: var(--ctr-actionbar-button-text-color, $primary);
+    }
+
+    .sv-popup__body-footer {
+      background-color: var(--ctr-contextual-menu-footer-background-color, $background-dim);
+      border-top: 1px solid var(--ctr-contextual-menu-footer-border-color, $border-light);
+    }
+
+    .sv-list__empty-container {
+      background-color: var(--ctr-contextual-menu-background-color, $background);
+    }
+
+    .sv-popup__button:disabled {
+      color: var(--ctr-actionbar-button-text-color-disabled, $foreground);
+      opacity: var(--ctr-actionbar-button-opacity-disabled, 0.25);
+    }
+
+    .sv-list__filter-clear-button {
+      svg {
+        use {
+          fill: var(--ctr-list-item-icon-color, $foreground-light);
+        }
+      }
+    }
+
+    .sv-list__input {
+      color: var(--ctr-list-item-text-color, $foreground-light);
+    }
+
+    .sv-list__item:hover,
+    .sv-list__item:focus,
+    .sv-list__item--focused {
+      .sv-list__item-body {
+        background: var(--ctr-list-item-background-color-hovered, $background);
+      }
+
+      &.sv-list__item--selected {
+        .sv-list__item-body {
+          background: var(--ctr-list-item-background-color-selected, $primary);
+          color: var(--ctr-list-item-text-color-selected, $primary-foreground);
+        }
+      }
+
+      .sv-list__item-icon use {
+        fill: var(--ctr-list-item-icon-color-hovered, $foreground-light);
+      }
+
+      &.sv-list__item--selected.sv-list__item--group {
+        &>.sv-list__item-body {
+          background: var(--ctr-list-item-background-color-selected, $primary-light);
+          color: var(--ctr-list-item-text-color-selected, $foreground);
+          font-weight: 400;
+        }
+
+        .sv-list__item-icon use {
+          fill: var(--ctr-list-item-icon-color-hovered, $foreground-light);
+        }
+      }
+    }
+
+    .sd-btn {
+      background: var(--ctr-button-background-color, rgba(0, 0, 0, 0));
+    }
+
+  }
+
+  .sv-dropdown-popup.sv-popup--dropdown-overlay {
+    .sv-popup__body-footer {
+      background-color: var(--ctr-contextual-menu-footer-background-color, $background-dim);
+    }
+  }
+
+  .sv-popup__content {
+    color: var(--ctr-popup-message-color, #404040);
+  }
+}

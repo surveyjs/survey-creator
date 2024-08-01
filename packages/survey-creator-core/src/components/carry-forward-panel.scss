@@ -9,12 +9,12 @@
   width: 100%;
   padding: calcSize(4) calcSize(8);
   border-radius: calcSize(1);
-  background-color: #F8F8F8;
+  background-color: $background-dim-light;
   text-align: center;
   font-weight: 400;
   font-size: calcSize(2);
   line-height: calcSize(3);
-  color: rgba(0, 0, 0, 0.45);
+  color: $foreground-dim-light;
 }
   
 @container (max-width: #{$sd-panel-medium-min-width}) {

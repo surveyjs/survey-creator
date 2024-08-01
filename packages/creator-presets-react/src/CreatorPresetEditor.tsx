@@ -1,9 +1,10 @@
 import React from "react";
 import { Base } from "survey-core";
-import { SurveyActionBar, SurveyElementBase, Survey } from "survey-react-ui";
+import { SurveyActionBar, SurveyElementBase, Survey, SvgBundleComponent } from "survey-react-ui";
 import { ICreatorOptions, SurveyCreatorModel } from "survey-creator-core";
 import { SurveyCreator, SurveyCreatorComponent } from "survey-creator-react";
 import { CreatorPresetEditorModel } from "creator-presets-core";
+import { PresetsHeaderComponent } from "./Header";
 
 export class CreatorPresetEditor extends CreatorPresetEditorModel {
   public createCreator(options: ICreatorOptions): SurveyCreatorModel {
@@ -27,10 +28,11 @@ export class CreatorPresetEditorComponent extends SurveyElementBase<ICreatorPres
     return this.editor;
   }
   renderElement() {
-    const navigation = <SurveyActionBar model={this.editor.navigationBar} handleClick={true} />;
+    const header = <PresetsHeaderComponent editor={this.editor}></PresetsHeaderComponent>;
     const context = this.renderContext();
     return <>
-      {navigation}
+      <SvgBundleComponent></SvgBundleComponent>
+      {header}
       {context}
     </>;
   }
