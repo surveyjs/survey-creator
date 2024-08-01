@@ -173,7 +173,9 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
     return this.title.toLowerCase().indexOf(textLowerCase) >= 0 || this.name.toLowerCase().indexOf(textLowerCase) >= 0;
   }
 
-  public addSubitems(items: Array<IQuestionToolboxItem>) {
+  public addSubitems(items: Array<QuestionToolboxItem>) {
+    if (!items || items.length < 1) return;
+
     this.setSubItems({ items: items });
     this.component = QuestionToolbox.defaultItemGroupComponent;
     const popup = this.popupModel as PopupModel;
@@ -193,25 +195,27 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
   }
 
   public addSubitem(item: IQuestionToolboxItem, index: number = -1): void {
-    if (!item.className) item.className = QuestionToolboxItem.getItemClassNames(item.iconName) + " svc-toolbox__item-subtype";
-    if (!(item instanceof QuestionToolboxItem)) {
-      item = new QuestionToolboxItem(item);
-    }
-    let array: Array<IQuestionToolboxItem> = (this.items || []).slice();
+    if (!item) return;
+
+    const newItem: QuestionToolboxItem = (item instanceof QuestionToolboxItem) ? item : new QuestionToolboxItem(item);
+    if (!newItem.className) newItem.className = QuestionToolboxItem.getItemClassNames(newItem.iconName) + " svc-toolbox__item-subtype";
+    let array: Array<QuestionToolboxItem> = (this.items || []).slice();
     if (index === -1) {
-      array.push(item);
+      array.push(newItem);
     } else {
-      array = array.splice(index, 0, item);
+      array = array.splice(index, 0, newItem);
     }
     this.addSubitems(array);
   }
 
   public removeSubitem(item: IQuestionToolboxItem | string): void {
-    if (!this.hasSubItems) return;
+    if (!this.hasSubItems || !item) return;
 
     const id = (item as IQuestionToolboxItem)?.id || item;
+    if (id) return;
+
     const removedItem = this.items.filter(i => i.id === id)[0];
-    let array: Array<IQuestionToolboxItem> = (this.items || []).slice();
+    let array: Array<QuestionToolboxItem> = (this.items || []).slice();
     const removedIndex = array.indexOf(removedItem);
     if (removedIndex > -1) {
       array.splice(removedIndex, 1);
@@ -621,13 +625,13 @@ export class QuestionToolbox
       return newItem;
     }
   }
-  private createSubTypes(parentItem: QuestionToolboxItem): Array<IQuestionToolboxItem> {
+  private createSubTypes(parentItem: QuestionToolboxItem): Array<QuestionToolboxItem> {
     let property = null;
     const propName = QuestionToolbox.getSubTypePropertyName(parentItem.id);
     if (propName) property = Serializer.findProperty(parentItem.id, propName);
     if (!property || !property.visible) return;
 
-    const newItems: Array<IQuestionToolboxItem> = property.choices.map(ch => {
+    const newItems: Array<QuestionToolboxItem> = property.choices.map(ch => {
       const newJson = { ...parentItem.json };
       newJson[propName] = ch;
 
