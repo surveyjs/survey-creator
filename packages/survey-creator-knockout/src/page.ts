@@ -27,7 +27,7 @@ export class CreatorSurveyPageComponent extends PageAdorner {
   }
 
   protected getPage(): PageModel {
-    return ko.unwrap(this._page);
+    return ko.unwrap(this._page) || super.getPage();
   }
 
   fixedDispose(): void {
