@@ -977,8 +977,7 @@ svc-question,
     &:focus {
       opacity: initial;
     }
-
-    use {
+    .sv-action-bar-item__icon use {
       fill: $foreground-dim-light;
     }
   }
