@@ -39,6 +39,7 @@ export abstract class StringItemsNavigatorBase {
   }
   private setEventsForItem(creator: SurveyCreatorModel, items: any[], item: any) {
     const connector = StringEditorConnector.get(this.getItemLocString(items, item));
+    connector.allowLineBreaksOnEdit = true;
     connector.onEditComplete.clear();
     connector.onEditComplete.add(() => {
       const itemIndex = items.indexOf(item);
@@ -122,6 +123,7 @@ class StringItemsNavigatorSelectBase extends StringItemsNavigatorBase {
     return [this.question.choices];
   }
   protected addNewItem(creator: SurveyCreatorModel, items: any, text: string = null) {
+    if (creator.maximumChoicesCount && items.length >= creator.maximumChoicesCount) return;
     const itemValue = creator.createNewItemValue(this.question);
     if (!!text) itemValue.value = text;
   }
@@ -158,8 +160,14 @@ class StringItemsNavigatorMatrix extends StringItemsNavigatorBase {
   protected addNewItem(creator: SurveyCreatorModel, items: any, text: string = null) {
     let titleBase: string;
     let propertyName: string;
-    if (items == this.question.columns) { titleBase = "Column "; propertyName = "columns"; }
-    if (items == this.question.rows) { titleBase = "Row "; propertyName = "rows"; }
+    if (items == this.question.columns) {
+      if (creator.maximumColumnsCount && items.length >= creator.maximumColumnsCount) return;
+      titleBase = "Column "; propertyName = "columns";
+    }
+    if (items == this.question.rows) {
+      if (creator.maximumRowsCount && items.length >= creator.maximumRowsCount) return;
+      titleBase = "Row "; propertyName = "rows";
+    }
     const newItem = new ItemValue(getNextValue(titleBase, items.map(i => i.value)) as string);
     items.push(text || newItem);
     creator.onItemValueAddedCallback(
@@ -181,6 +189,7 @@ class StringItemsNavigatorMatrixDropdown extends StringItemsNavigatorMatrix {
   }
   protected addNewItem(creator: SurveyCreatorModel, items: any, text: string = null) {
     if (items == this.question.columns) {
+      if (creator.maximumColumnsCount && items.length >= creator.maximumColumnsCount) return;
       var column = new MatrixDropdownColumn(text || getNextValue("Column ", items.map(i => i.value)) as string);
       this.question.columns.push(column);
       creator.onMatrixDropdownColumnAddedCallback(this.question, column, this.question.columns);
@@ -211,6 +220,8 @@ export class StringEditorConnector {
   public setAutoFocus() { this.focusOnEditor = true; }
 
   public hasEditCompleteHandler = false;
+
+  public allowLineBreaksOnEdit = false;
 
   public focusOnEditor: boolean;
   public activateEditor(): void {
@@ -488,7 +499,7 @@ export class StringEditorViewModelBase extends Base {
       event.preventDefault();
       // get text representation of clipboard
       let text = event.clipboardData.getData("text/plain");
-      if (!this.locString.allowLineBreaks) text = clearNewLines(text);
+      if (!this.locString.allowLineBreaks && !this.connector?.allowLineBreaksOnEdit) text = clearNewLines(text);
       // insert text manually
       const selection = window.getSelection();
       if (!selection.rangeCount) return;

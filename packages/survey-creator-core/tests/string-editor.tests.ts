@@ -424,6 +424,7 @@ test("StringEditorConnector for selectbase questions", (): any => {
   };
   const question = creator.survey.getQuestionByName("q1") as QuestionRadiogroupModel;
   creator.selectElement(question);
+  creator.maximumChoicesCount = 3;
 
   const questionAdorner = new QuestionAdornerViewModel(
     creator,
@@ -446,6 +447,8 @@ test("StringEditorConnector for selectbase questions", (): any => {
   expect(question.choices.map(c => c.value)).toEqual(["item1", "item2", "item3"]);
   var connectorItem3 = StringEditorConnector.get(question.choices[2].locText);
   connectorItem3.onDoActivate.add(sender => activeLocString = sender);
+  connectorItem3.onEditComplete.fire(null, {});
+  expect(question.choices.map(c => c.value)).toEqual(["item1", "item2", "item3"]);
 
   connectorItem2.onBackspaceEmptyString.fire(null, {});
   expect(question.choices.map(c => c.value)).toEqual(["item1", "item3"]);
@@ -537,6 +540,7 @@ test("StringEditorConnector for multiple text questions", (): any => {
 
 test("StringEditorConnector for matrix questions (columns)", (): any => {
   const creator = new CreatorTester();
+  creator.maximumColumnsCount = 3;
   creator.JSON = {
     elements: [
       { type: "matrix", name: "q1", columns: ["Column 1", "Column 2"], rows: ["Row 1", "Row 2"] },
@@ -567,6 +571,9 @@ test("StringEditorConnector for matrix questions (columns)", (): any => {
   var connectorItem3 = StringEditorConnector.get(question.columns[2].locText);
   connectorItem3.onDoActivate.add(sender => activeLocString = sender);
 
+  connectorItem3.onEditComplete.fire(null, {});
+  expect(question.columns.map(c => c.value)).toEqual(["Column 1", "Column 2", "Column 3"]);
+
   connectorItem2.onBackspaceEmptyString.fire(null, {});
   expect(question.columns.map(c => c.value)).toEqual(["Column 1", "Column 3"]);
   expect(activeLocString).toEqual(question.columns[0].locText);
@@ -581,6 +588,7 @@ test("StringEditorConnector for matrix questions (columns)", (): any => {
 
 test("StringEditorConnector for matrixdropdown questions (columns)", (): any => {
   const creator = new CreatorTester();
+  creator.maximumColumnsCount = 3;
   creator.JSON = {
     elements: [
       { type: "matrixdropdown", name: "q2", columns: [{ name: "Column 1" }, { name: "Column 2" }], rows: ["Row 1", "Row 2"] },
@@ -615,55 +623,8 @@ test("StringEditorConnector for matrixdropdown questions (columns)", (): any => 
     expect(question.columns.map(c => c.value)).toEqual(["Column 1", "Column 2", "Column 3"]);
     var connectorItem3 = StringEditorConnector.get(question.columns[2].locTitle);
     connectorItem3.onDoActivate.add(sender => activeLocString = sender);
-
-    connectorItem2.onBackspaceEmptyString.fire(null, {});
-    expect(question.columns.map(c => c.value)).toEqual(["Column 1", "Column 3"]);
-    expect(activeLocString).toEqual(question.columns[0].locTitle);
-
-    connectorItem1.onBackspaceEmptyString.fire(null, {});
-    expect(question.columns.map(c => c.value)).toEqual(["Column 3"]);
-    expect(activeLocString).toEqual(question.columns[0].locTitle);
-
-    connectorItem3.onBackspaceEmptyString.fire(null, {});
-    expect(question.columns.map(c => c.value)).toEqual([]);
-  }
-});
-
-test("StringEditorConnector for matrixdropdown questions (columns)", (): any => {
-  const creator = new CreatorTester();
-  creator.JSON = {
-    elements: [
-      { type: "matrixdropdown", name: "q2", columns: [{ name: "Column 1" }, { name: "Column 2" }], rows: ["Row 1", "Row 2"] },
-      { type: "matrixdynamic", name: "q3", columns: [{ name: "Column 1" }, { name: "Column 2" }], rows: ["Row 1", "Row 2"] }
-    ]
-  };
-  const allQuestions = creator.survey.getAllQuestions();
-
-  for (var i = 0; i < allQuestions.length; i++) {
-    const question = allQuestions[i] as any;
-    creator.selectElement(question);
-
-    const questionAdorner = new QuestionAdornerViewModel(
-      creator,
-      question,
-      <any>undefined
-    );
-    var connectorTitle = StringEditorConnector.get(question.locTitle);
-    var connectorItem1 = StringEditorConnector.get(question.columns[0].locTitle);
-    var connectorItem2 = StringEditorConnector.get(question.columns[1].locTitle);
-    var activeLocString;
-    connectorTitle.onDoActivate.add(sender => activeLocString = sender);
-    connectorItem1.onDoActivate.add(sender => activeLocString = sender);
-    connectorItem2.onDoActivate.add(sender => activeLocString = sender);
-
-    connectorTitle.onEditComplete.fire(null, {});
-    expect(activeLocString).toEqual(question.columns[0].locTitle);
-    connectorItem1.onEditComplete.fire(null, {});
-    expect(activeLocString).toEqual(question.columns[1].locTitle);
-    connectorItem2.onEditComplete.fire(null, {});
+    connectorItem3.onEditComplete.fire(null, {});
     expect(question.columns.map(c => c.value)).toEqual(["Column 1", "Column 2", "Column 3"]);
-    var connectorItem3 = StringEditorConnector.get(question.columns[2].locTitle);
-    connectorItem3.onDoActivate.add(sender => activeLocString = sender);
 
     connectorItem2.onBackspaceEmptyString.fire(null, {});
     expect(question.columns.map(c => c.value)).toEqual(["Column 1", "Column 3"]);
@@ -691,6 +652,7 @@ test("StringEditorConnector for matrix questions (rows)", (): any => {
   for (var i = 0; i < allQuestions.length; i++) {
     const question = allQuestions[i] as any;
     creator.selectElement(question);
+    creator.maximumRowsCount = 3;
 
     const questionAdorner = new QuestionAdornerViewModel(
       creator,
@@ -711,6 +673,8 @@ test("StringEditorConnector for matrix questions (rows)", (): any => {
     expect(question.rows.map(c => c.value)).toEqual(["Row 1", "Row 2", "Row 3"]);
     var connectorItem3 = StringEditorConnector.get(question.rows[2].locText);
     connectorItem3.onDoActivate.add(sender => activeLocString = sender);
+    connectorItem3.onEditComplete.fire(null, {});
+    expect(question.rows.map(c => c.value)).toEqual(["Row 1", "Row 2", "Row 3"]);
 
     connectorItem2.onBackspaceEmptyString.fire(null, {});
     expect(question.rows.map(c => c.value)).toEqual(["Row 1", "Row 3"]);

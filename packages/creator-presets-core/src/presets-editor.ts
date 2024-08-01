@@ -1,16 +1,37 @@
 import { SurveyCreatorModel, editorLocalization, ICreatorOptions } from "survey-creator-core";
 import { CreatorPreset, ICreatorPresetData } from "survey-creator-core";
-import { ActionContainer, Base, ComputedUpdater, SurveyModel, createDropdownActionModel } from "survey-core";
+import { ActionContainer, Base, ComputedUpdater, LocalizableString, SurveyModel, createDropdownActionModel } from "survey-core";
 import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
 import { CreatorPresetEditableToolboxConfigurator } from "./presets-editable-toolbox";
 import { CreatorPresetEditableTabs } from "./presets-editable-tabs";
 import { CreatorEditablePresetPropertyGrid, CreatorPresetEditablePropertyGridDefinition } from "./presets-editable-properties";
+require("./presets-header.scss");
+
+export class NavigationBar extends ActionContainer {
+  constructor() {
+    super();
+    this.cssClasses = {
+      root: "presets-navigation-bar",
+      defaultSizeMode: "",
+      smallSizeMode: "",
+      item: "presets-navigation-bar__item presets-navigation-bar-item",
+      itemWithTitle: "",
+      itemAsIcon: "",
+      itemActive: "presets-navigation-bar-item--active",
+      itemPressed: "presets-navigation-bar-item--pressed",
+      itemIcon: "",
+      itemTitle: "",
+      itemTitleWithIcon: "",
+    };
+  }
+}
 
 export class CreatorPresetEditorModel extends Base implements ICreatorPresetEditorSetup {
   private presetValue: CreatorPreset;
   private creatorValue: SurveyCreatorModel;
   private modelValue: SurveyModel;
-  private navigationBarValue: ActionContainer;
+  private navigationBarValue: NavigationBar;
+  public locTitle: LocalizableString;
   constructor(json?: ICreatorPresetData) {
     super();
     editorLocalization.presetStrings = undefined;
@@ -18,7 +39,9 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     this.creatorValue = this.createCreator({});
     this.modelValue = this.createModel();
     this.locale = "en";
-    this.navigationBarValue = new ActionContainer();
+    this.locTitle = new LocalizableString(undefined, false);
+    this.locTitle.text = "Creator Presets";
+    this.navigationBarValue = new NavigationBar();
     this.addNavigationAction("preset", "Edit Preset");
     this.addNavigationAction("creator", "Preview Survey Creator");
     this.addNavigationAction("results", "View Preset JSON");
