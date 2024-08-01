@@ -1,11 +1,11 @@
 import { Base, DragOrClickHelper, ActionContainer, ListModel } from "survey-core";
-import { QuestionToolbox, QuestionToolboxItem } from "../../toolbox";
+import { IQuestionToolboxItem, QuestionToolbox, QuestionToolboxItem } from "../../toolbox";
 import { SurveyCreatorModel } from "../../creator-base";
 import { DragDropSurveyElements } from "../../survey-elements";
 export class ToolboxToolViewModel extends Base {
   private dragOrClickHelper: DragOrClickHelper;
   constructor(
-    protected item: QuestionToolboxItem,
+    protected item: IQuestionToolboxItem,
     protected creator: SurveyCreatorModel,
     protected model: ActionContainer
   ) {
@@ -24,7 +24,7 @@ export class ToolboxToolViewModel extends Base {
   }
 
   public get itemComponent(): string {
-    if (!this.creator.toolbox.showSubitems && this.item.hasSubItems) {
+    if (!this.creator.toolbox.showSubitems && this.toolboxItem.hasSubItems) {
       return QuestionToolbox.defaultItemComponent;
     }
     return this.item.component || QuestionToolbox.defaultItemComponent;

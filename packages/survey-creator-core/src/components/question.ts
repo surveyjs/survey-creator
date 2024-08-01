@@ -404,6 +404,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
 
   private createConvertInputType() {
     const questionType = this.surveyElement.getType();
+    if (questionType !== "text" && questionType !== "rating") return null;
     const toolboxItem = this.creator.toolbox.items.filter(item => item.id === questionType)[0];
     if (!toolboxItem || !toolboxItem.hasSubItems) return null;
 

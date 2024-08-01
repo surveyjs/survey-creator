@@ -13,7 +13,7 @@
     >
       <component
         :viewModel="model"
-        :is="item.itemComponent"
+        :is="model?.itemComponent"
         :item="item"
         :creator="creator"
         :isCompact="isCompact"

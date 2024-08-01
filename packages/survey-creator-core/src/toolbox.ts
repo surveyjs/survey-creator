@@ -175,10 +175,10 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
 
   public addSubitems(items: Array<IQuestionToolboxItem>) {
     this.setSubItems({ items: items });
-    this.component = "svc-toolbox-item-group";
-    this.popupModel.cssClass += " svc-toolbox-subtypes";
-    this.popupModel.isFocusedContainer = false;
+    this.component = QuestionToolbox.defaultItemGroupComponent;
     const popup = this.popupModel as PopupModel;
+    popup.cssClass += " svc-toolbox-subtypes";
+    popup.isFocusedContainer = false;
     popup.contentComponentName = "svc-toolbox-list";
     popup.contentComponentData["toolbox"] = this;
     popup.isFocusedContent = false;
@@ -248,6 +248,7 @@ export class QuestionToolbox
   public static MINELEMENTCOUNT: number = 10;
   static defaultIconName = "icon-default";
   static defaultItemComponent = "svc-toolbox-item";
+  static defaultItemGroupComponent = "svc-toolbox-item-group";
   static defaultCategories = {
     choice: ["radiogroup", "rating", "checkbox", "dropdown", "tagbox", "boolean", "file", "imagepicker", "ranking"],
     text: ["text", "comment", "multipletext"],

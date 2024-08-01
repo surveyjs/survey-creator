@@ -5,7 +5,7 @@
         <div class="sv-action__content" (pointerdown)="model.onPointerDown($event)"
             (mouseover)="model.onMouseOver(item, $event)"
         (mouseleave)="model.onMouseLeave(item, $event)">
-            <ng-template [component]="{ name: item.itemComponent, default: 'svc-toolbox-item', 
+            <ng-template [component]="{ name: model.itemComponent, default: 'svc-toolbox-item', 
             data: { model: item, viewModel: model, creator: creator, isCompact: isCompact } }"></ng-template>
         </div>
     </div>

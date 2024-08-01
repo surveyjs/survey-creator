@@ -58,7 +58,7 @@ export class SurveyCreatorToolboxTool extends CreatorModelElement<
   render(): JSX.Element {
     const item = this.item;
     const itemComponent = ReactElementFactory.Instance.createElement(
-      item.itemComponent,
+      this.model.itemComponent,
       {
         item: item,
         creator: this.creator,
