@@ -2211,3 +2211,28 @@ test("Question types with subtypes", async (t) => {
     await takeElementScreenshot("question-type-rating-subtypes.png", Selector(".sv-popup.sv-popup--dropdown").filterVisible(), t, comparer);
   });
 });
+
+test("Check page selection when width mode is responsive", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t
+      .resizeWindow(1920, 1080);
+    const json = {
+      widthMode: "responsive",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "text",
+              "name": "text",
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(json);
+    const rootSelector = Selector(".svc-tab-designer");
+    await t.click(".svc-page", { offsetX: 5, offsetY: 5 });
+    await takeElementScreenshot("page-selected-responsive.png", rootSelector, t, comparer);
+  });
+});
