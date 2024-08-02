@@ -54,7 +54,7 @@ const visibleToolboxItems = Selector(".svc-toolbox__category>.svc-toolbox__tool"
 const collapsibleCategories = Selector(".svc-toolbox__category-header--collapsed");
 const getCollapsedCategories = (index = 0) => { return categoriesHeader.nth(index).find(".svc-string-editor__button--expand"); };
 const getExpandedCategories = (index = 0) => { return categoriesHeader.nth(index).find(".svc-string-editor__button--collapse"); };
-const toolboxSubTypesPopup = Selector(".sv-popup-inner.toolbox-subtypes .sv-popup__container").filterVisible();
+const toolboxSubTypesPopup = Selector(".sv-popup-inner.svc-toolbox-subtypes .sv-popup__container").filterVisible();
 const newGhostPagePage = Selector("[data-sv-drop-target-survey-element='newGhostPage']");
 
 test("Categories check hover icons", async (t) => {
