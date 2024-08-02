@@ -24,7 +24,7 @@ export class ToolboxToolViewModel extends Base {
   }
 
   public get itemComponent(): string {
-    if (!this.creator.toolbox.showSubitems && this.toolboxItem.hasSubItems) {
+    if (!!this.creator && !this.creator.toolbox.showSubitems && this.toolboxItem.hasSubItems) {
       return QuestionToolbox.defaultItemComponent;
     }
     return this.item.component || QuestionToolbox.defaultItemComponent;
