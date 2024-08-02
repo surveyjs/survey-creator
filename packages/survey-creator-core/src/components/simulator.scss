@@ -72,3 +72,7 @@
     overflow-y: scroll;
   }
 }
+
+.svd-simulator .sv-popup--overlay {
+  --sv-popup-overlay-height: 100%;;
+}
