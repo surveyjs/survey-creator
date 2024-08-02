@@ -1194,7 +1194,7 @@ test("Convert radiogroup question into dropdown, onQuestionCoverting", (): any =
   creator.onQuestionConverting.add((sender, options) => {
     options.json = objJSON;
   });
-  const json ={ elements: [{ type: "radiogroup", name: "q1", choices: [1, 2, 3, 4] }] };
+  const json = { elements: [{ type: "radiogroup", name: "q1", choices: [1, 2, 3, 4] }] };
   creator.JSON = json;
   creator.selectQuestionByName("q1");
   creator.convertCurrentQuestion("dropdown");
@@ -3900,15 +3900,24 @@ test("creator.addNewQuestionLast property", (): any => {
   creator.clickToolboxItem({ type: "text" });
   expect(creator.selectedElementName).toEqual("question2");
   creator.selectQuestionByName("question1");
-  creator.addNewQuestionInPage((str) => {}, undefined, "text");
+  creator.addNewQuestionInPage((str) => { }, undefined, "text");
   expect(creator.selectedElementName).toEqual("question3");
   expect(creator.survey.pages[0].elements[2].name).toEqual("question3");
   creator.selectQuestionByName("question1");
   creator.addNewQuestionLast = false;
-  creator.addNewQuestionInPage((str) => {}, undefined, "text");
+  creator.addNewQuestionInPage((str) => { }, undefined, "text");
   expect(creator.selectedElementName).toEqual("question4");
   expect(creator.survey.pages[0].elements[1].name).toEqual("question4");
   expect(creator.survey.pages[0].elements[3].name).toEqual("question3");
+});
+test("addNewQuestionInPage with json", (): any => {
+  const creator = new CreatorTester();
+  creator.addNewQuestionInPage((str) => { }, undefined, "text", { type: "text", inputType: "email" });
+  const newQuestion = creator.survey.pages[0].elements[0] as QuestionTextModel;
+
+  expect(creator.selectedElementName).toEqual("question1");
+  expect(newQuestion.name).toEqual("question1");
+  expect(newQuestion.inputType).toEqual("email");
 });
 test("Initial Property Grid category expanded state", (): any => {
   const creator = new CreatorTester();
@@ -4092,7 +4101,7 @@ test("Keep selection on deleting another question, #5634", (): any => {
   };
   let counter = 0;
   creator.onSelectedElementChanged.add((sender, options) => {
-    counter ++;
+    counter++;
   });
   creator.selectQuestionByName("q1");
   expect(counter).toBe(1);
@@ -4113,7 +4122,7 @@ test("Do not select a duplicated question if it is not selected, #5634", (): any
   };
   let counter = 0;
   creator.onSelectedElementChanged.add((sender, options) => {
-    counter ++;
+    counter++;
   });
   creator.selectQuestionByName("q1");
   expect(counter).toBe(1);

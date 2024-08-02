@@ -180,6 +180,9 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
     this.component = QuestionToolbox.defaultItemGroupComponent;
   }
 
+  /**
+   * 
+   */
   public clearSubitems(): void {
     if (this.hasSubItems) {
       this.items = [];
@@ -187,7 +190,9 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
       this.popupModel.dispose();
     }
   }
-
+  /**
+   * 
+   */
   public addSubitem(item: IQuestionToolboxItem, index: number = -1): void {
     if (!item) return;
 
@@ -197,16 +202,18 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
     if (index === -1) {
       array.push(newItem);
     } else {
-      array = array.splice(index, 0, newItem);
+      array.splice(index, 0, newItem);
     }
     this.addSubitems(array);
   }
-
+  /**
+   * 
+   */
   public removeSubitem(item: IQuestionToolboxItem | string): void {
     if (!this.hasSubItems || !item) return;
 
     const id = (item as IQuestionToolboxItem)?.id || item;
-    if (id) return;
+    if (!id) return;
 
     const removedItem = this.items.filter(i => i.id === id)[0];
     let array: Array<QuestionToolboxItem> = (this.items || []).slice();
@@ -394,6 +401,9 @@ export class QuestionToolbox
     }
   }) searchEnabled: boolean;
 
+  /**
+   * 
+   */
   @property({ defaultValue: true }) showSubitems: boolean;
 
   @property({ defaultValue: false }) isScrollLocked: boolean;

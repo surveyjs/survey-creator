@@ -12,7 +12,7 @@ import {
 } from "survey-core";
 import { QuestionLinkValueModel } from "../src/components/link-value";
 import { settings } from "../src/creator-settings";
-import { QuestionToolbox, QuestionToolboxItem } from "../src/toolbox";
+import { IQuestionToolboxItem, QuestionToolbox, QuestionToolboxItem } from "../src/toolbox";
 import { CreatorTester } from "./creator-tester";
 import { ToolboxToolViewModel } from "../src/components/toolbox/toolbox-tool";
 
@@ -129,7 +129,8 @@ test("toolbox default categories calculator", (): any => {
   expect(toolbox["getDefaultQuestionCategories"]()).toEqual({
     "radiogroup": "choice",
     "dropdown": "choice",
-    "matrix": "matrix" });
+    "matrix": "matrix"
+  });
 });
 
 test("toolbox default categories actions separator", (): any => {
@@ -761,7 +762,10 @@ test("Toolbox show search depending on items count", (): any => {
 test("Toolbox child items do not get focus", (): any => {
   const creator = new CreatorTester();
   creator.toolbox.searchEnabled = true;
-  expect(creator.toolbox.items.filter(i => i.name == "text")[0].popupModel.isFocusedContainer).toBeFalsy();
+
+  const textItem = creator.toolbox.getItemByName("text") as QuestionToolboxItem;
+  const toolboxItemTool = new ToolboxToolViewModel(textItem, creator, creator.toolbox); // init popup model
+  expect(textItem.popupModel.isFocusedContainer).toBeFalsy();
 });
 
 test("Toolbox showSubitems property", (): any => {
@@ -780,7 +784,71 @@ test("Toolbox item clearSubitems function", (): any => {
   const textItem = creator.toolbox.getItemByName("text") as QuestionToolboxItem;
 
   expect(textItem.items.length).toBe(13);
+  expect(textItem.component).toBe("svc-toolbox-item-group");
 
   textItem.clearSubitems();
   expect(textItem.items.length).toBe(0);
+  expect(textItem.component).toBe("");
+});
+
+test("Toolbox item addSubitem function", (): any => {
+  const subitemsClassName = "svc-toolbox__item-subtype";
+  const creator = new CreatorTester();
+  const booleanItem = creator.toolbox.getItemByName("boolean") as QuestionToolboxItem;
+  const radioBooleanItem = <IQuestionToolboxItem>{
+    id: "boolRadio",
+    name: "boolRadio",
+    title: "Radio",
+  };
+
+  const checkboxBooleanItem = <IQuestionToolboxItem>{
+    id: "boolCheckbox",
+    name: "boolCheckbox",
+    title: "Checkbox",
+  };
+
+  const customBooleanItem = <IQuestionToolboxItem>{
+    id: "boolCustom",
+    name: "boolCustom",
+    title: "Custom",
+  };
+  expect(booleanItem.hasSubItems).toBe(false);
+
+  booleanItem.addSubitem(radioBooleanItem);
+  expect(booleanItem.items.length).toBe(1);
+  expect(booleanItem.items[0].id).toBe("boolRadio");
+  expect(booleanItem.items[0].className).toContain(subitemsClassName);
+
+  booleanItem.addSubitem(checkboxBooleanItem);
+  expect(booleanItem.items.length).toBe(2);
+  expect(booleanItem.items[0].id).toBe("boolRadio");
+  expect(booleanItem.items[1].id).toBe("boolCheckbox");
+  expect(booleanItem.items[1].className).toContain(subitemsClassName);
+
+  booleanItem.addSubitem(customBooleanItem, 1);
+  expect(booleanItem.items.length).toBe(3);
+  expect(booleanItem.items[0].id).toBe("boolRadio");
+  expect(booleanItem.items[1].id).toBe("boolCustom");
+  expect(booleanItem.items[2].id).toBe("boolCheckbox");
+  expect(booleanItem.items[1].className).toContain(subitemsClassName);
+});
+
+test("Toolbox item removeSubitem function", (): any => {
+  const creator = new CreatorTester();
+  const ratingItem = creator.toolbox.getItemByName("rating") as QuestionToolboxItem;
+
+  expect(ratingItem.hasSubItems).toBe(true);
+  expect(ratingItem.items.length).toBe(3);
+
+  ratingItem.removeSubitem(ratingItem.items[0]);
+  expect(ratingItem.items.length).toBe(2);
+
+  ratingItem.removeSubitem("stars");
+  expect(ratingItem.items.length).toBe(1);
+  expect(ratingItem.items[0].id).toBe("smileys");
+  expect(ratingItem.component).toBe("svc-toolbox-item-group");
+
+  ratingItem.removeSubitem(ratingItem.items[0]);
+  expect(ratingItem.hasSubItems).toBe(false);
+  expect(ratingItem.component).toBe("");
 });
