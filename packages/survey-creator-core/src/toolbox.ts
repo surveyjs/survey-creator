@@ -178,12 +178,6 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
 
     this.setSubItems({ items: items });
     this.component = QuestionToolbox.defaultItemGroupComponent;
-    const popup = this.popupModel as PopupModel;
-    popup.cssClass += " svc-toolbox-subtypes";
-    popup.isFocusedContainer = false;
-    popup.contentComponentName = "svc-toolbox-list";
-    popup.contentComponentData["toolbox"] = this;
-    popup.isFocusedContent = false;
   }
 
   public clearSubitems(): void {
