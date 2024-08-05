@@ -1,7 +1,7 @@
 <ng-container *ngIf="!creator.isCreatorDisposed">
   <sv-ng-modal-container></sv-ng-modal-container>
   <div class="svc-creator" [class.svc-creator--mobile]="creator.isMobileView"
-    [class.svc-creator--touch]="creator.isTouch" #container>
+    [class.svc-creator--touch]="creator.isTouch" [class.svc-creator--dragging]="creator.isDragging" #container>
     <div>
       <sv-svg-bundle></sv-svg-bundle>
     </div>

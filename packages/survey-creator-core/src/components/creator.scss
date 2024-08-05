@@ -46,6 +46,13 @@ survey-creator,
   }
 }
 
+.svc-creator--dragging {
+  [contenteditable="true"] {
+    /* Safari issue https://github.com/surveyjs/survey-creator/issues/5740 */
+    pointer-events: none;
+  }
+}
+
 survey-creator {
   .sv-drag-drop-choices-shortcut {
     .sv-drag-drop-choices-shortcut__content {
@@ -55,6 +62,7 @@ survey-creator {
     }
   }
 }
+
 
 .svc-creator__area {
   position: relative;
