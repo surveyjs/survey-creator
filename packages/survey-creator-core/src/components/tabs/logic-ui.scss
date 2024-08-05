@@ -88,7 +88,7 @@
   &:hover,
   &:focus {
     background-color: var(--ctr-expression-item-background-color-parameter-hovered, $blue);
-    color: var(--ctr-expression-item-text-color-parameter-hovered, $foreground);
+    color: var(--ctr-expression-item-text-color-parameter-hovered, $background);
   }
 }
 
