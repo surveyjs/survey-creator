@@ -85,7 +85,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
         {
           type: "panel",
           name: "panel_toolbox_definition",
-          description: "Create a new toolboitem or customize one of the predefined toolbox items.",
+          description: "Create a new toolbox item or customize one of the predefined toolbox items.",
           elements: [
             {
               type: "matrixdynamic",
@@ -94,6 +94,8 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
               rowCount: 0,
               addRowText: "Add New Item Defintion",
               showHeader: false,
+              hideColumnsIfEmpty: true,
+              emptyRowsText: "Please add a new Definition.",
               columns: [
                 { cellType: "text", name: "name", placeholder: "Name", isUnique: true, isRequired: true },
                 { cellType: "text", name: "iconName", placeholder: "Icon name" },
@@ -189,8 +191,11 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     }
   }
   protected setupQuestionsCore(model: SurveyModel, creatorSetup: ICreatorPresetEditorSetup): void {
-    this.setupDefaultItems(creatorSetup.creator);
-    this.setupItemsDefinition(model, creatorSetup.creator);
+    this.setupPageQuestions(model, creatorSetup.creator);
+  }
+  private setupPageQuestions(model: SurveyModel, creator: SurveyCreatorModel): void {
+    this.setupDefaultItems(creator);
+    this.setupItemsDefinition(model, creator);
     this.setQuestionItemsChoices(model);
   }
   protected validateCore(model: SurveyModel): boolean {
@@ -276,6 +281,10 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
       };
     });
     this.updateShowCategoriesTitlesElements(model);
+  }
+  protected onLocaleChangedCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
+    this.setupPageQuestions(model, creator);
+    this.setupQuestionsValueCore(model, json, creator);
   }
   private setupQuestionsValueDefinition(model: SurveyModel, json: any): void {
     json = json || {};

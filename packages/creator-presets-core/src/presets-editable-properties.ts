@@ -514,4 +514,7 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
   }
 }
 export class CreatorEditablePresetPropertyGrid extends CreatorPresetEditableBase {
+  protected onLocaleChangedCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
+    model.clearValue("propertyGrid_definition_selector");
+  }
 }

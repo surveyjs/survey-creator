@@ -63,27 +63,7 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableBase {
     (<QuestionPresetRankingModel>model.getQuestionByName(this.nameItems)).updateModifiedText(locStrs);
   }
   protected setupQuestionsCore(model: SurveyModel, creatorSetup: ICreatorPresetEditorSetup): void {
-    const tabs = creatorSetup.creator.getAvailableTabNames();
-    const presetItems: Array<PresetItemValue> = [];
-    const allQ = model.getQuestionByName(this.allItems);
-    const activeQ = model.getQuestionByName(this.nameActiveTab);
-    const selectedQ = model.getQuestionByName(this.nameItems);
-    selectedQ.alwaysHasValue = true;
-    tabs.forEach(tab => {
-      const item = new PresetItemValue(tab);
-      item.locText.localizationName = "tabs." + tab;
-      presetItems.push(item);
-    });
-    presetItems.forEach(item => {
-      const checkItem = new ItemValue(item.value);
-      checkItem.locText.sharedData = item.locText;
-      item.locText.onStringChanged.add((sender, options) => {
-        checkItem.locText.strChanged();
-      });
-      allQ.choices.push(checkItem);
-      activeQ.choices.push(checkItem);
-      selectedQ.choices.push(item);
-    });
+    this.setupPageQuestions(model, creatorSetup.creator);
   }
   protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
     json = json || {};
@@ -94,6 +74,36 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableBase {
     model.setValue(this.allItems, items);
     model.setValue(this.nameItems, items);
     model.setValue(this.nameActiveTab, json["activeTab"] || creator.activeTab);
+  }
+  protected onLocaleChangedCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
+    this.setupPageQuestions(model, creator);
+    this.setupQuestionsValueCore(model, json, creator);
+  }
+  protected setupPageQuestions(model: SurveyModel, creator: SurveyCreatorModel): void {
+    const tabs = creator.getAvailableTabNames();
+    const presetItems: Array<PresetItemValue> = [];
+    const allQ = model.getQuestionByName(this.allItems);
+    const activeQ = model.getQuestionByName(this.nameActiveTab);
+    const selectedQ = model.getQuestionByName(this.nameItems);
+    selectedQ.alwaysHasValue = true;
+    tabs.forEach(tab => {
+      const item = new PresetItemValue(tab);
+      item.locText.localizationName = "tabs." + tab;
+      presetItems.push(item);
+    });
+    allQ.choices = [];
+    activeQ.choices = [];
+    selectedQ.choices = [];
+    presetItems.forEach(item => {
+      const checkItem = new ItemValue(item.value);
+      checkItem.locText.sharedData = item.locText;
+      item.locText.onStringChanged.add((sender, options) => {
+        checkItem.locText.strChanged();
+      });
+      allQ.choices.push(checkItem);
+      activeQ.choices.push(checkItem);
+      selectedQ.choices.push(item);
+    });
   }
   protected updateOnValueChangedCore(model: SurveyModel, name: string): void {
     if(name === this.allItems) {
