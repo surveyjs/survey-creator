@@ -90,7 +90,7 @@ export class SurveyElementActionContainer extends AdaptiveActionContainer {
 
 export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> extends Base {
   public actionContainer: SurveyElementActionContainer;
-  public topActionContainer: ActionContainer;
+  protected expandCollapseAction: IAction;
   protected designerStateManager: DesignerStateManager;
   @property({ defaultValue: true }) allowDragging: boolean;
   @property({
@@ -106,6 +106,11 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     }
   }) collapsed: boolean;
   @property() renderedCollapsed: boolean;
+
+  public dblclick(event) {
+    if (this.creator.expandCollapseButtonVisibility != "never") this.collapsed = !this.collapsed;
+    event.stopPropagation();
+  }
   private allowEditOption: boolean;
   private selectedPropPageFunc: (sender: Base, options: any) => void;
   private sidebarFlyoutModeChangedFunc: (sender: Base, options: any) => void;
@@ -131,16 +136,18 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this.actionContainer.dotsItem.iconSize = 16;
     this.actionContainer.dotsItem.popupModel.horizontalPosition = "center";
 
-    this.topActionContainer = new ActionContainer();
-    this.topActionContainer.sizeMode = "small";
-    this.topActionContainer.setItems([{
+    const collapseIcon = "icon-collapse-detail-light_16x16";
+    const expandIcon = "icon-restore_16x16";
+    this.expandCollapseAction = {
       id: "collapse",
-      iconName: new ComputedUpdater<string>(() => this.collapsed ? "icon-restore_16x16" : "icon-collapse-detail-light_16x16") as any,
+      css: "sv-action-bar-item--secondary sv-action-bar-item--collapse",
+      iconName: new ComputedUpdater<string>(() => this.collapsed ? expandIcon : collapseIcon) as any,
       iconSize: 16,
       action: () => {
         this.collapsed = !this.collapsed;
       }
-    }]);
+    };
+
     this.collapsed = !!surveyElement && (this.designerStateManager?.getElementState(surveyElement).collapsed);
     this.setSurveyElement(surveyElement);
     this.creator.sidebar.onPropertyChanged.add(this.sidebarFlyoutModeChangedFunc);
