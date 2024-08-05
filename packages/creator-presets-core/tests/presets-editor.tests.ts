@@ -787,3 +787,16 @@ test("Preset edit model, Languages tab", () => {
   expect(editor.creator.locale).toBeFalsy();
   expect(surveyLocalization.supportedLocales).toStrictEqual([]);
 });
+test("Preset edit model, toolbox categories, restore after creator locale changed", () => {
+  addLocales();
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  const matrix = <QuestionMatrixDynamicModel>survey.getQuestionByName("toolbox_categories");
+  const rowCount = matrix.rowCount;
+  expect(rowCount > 1).toBeTruthy();
+  survey.setValue("toolbox_mode", "items");
+  survey.getQuestionByName("languages_creator").value = "de";
+  expect(editor.creator.locale).toBe("de");
+  survey.setValue("toolbox_mode", "categories");
+  expect(matrix.rowCount).toBe(rowCount);
+});

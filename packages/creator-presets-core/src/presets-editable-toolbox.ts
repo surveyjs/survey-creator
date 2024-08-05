@@ -283,8 +283,10 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     this.updateShowCategoriesTitlesElements(model);
   }
   protected onLocaleChangedCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
-    this.setupPageQuestions(model, creator);
-    this.setupQuestionsValueCore(model, json, creator);
+    const newCreator = new SurveyCreatorModel({});
+    newCreator.locale = creator.locale;
+    this.setupPageQuestions(model, newCreator);
+    this.setupQuestionsValueCore(model, json, newCreator);
   }
   private setupQuestionsValueDefinition(model: SurveyModel, json: any): void {
     json = json || {};
