@@ -12,18 +12,20 @@ export class ToolboxToolViewModel extends Base {
     super();
     this.dragOrClickHelper = new DragOrClickHelper(this.startDragToolboxItem);
 
-    const popup = item.popupModel as PopupModel;
-    if (!!popup) {
-      const className = new CssClassBuilder()
-        .append(popup.cssClass)
-        .append("svc-toolbox-subtypes")
-        .toString();
+    if (!this.isDotsItem()) {
+      const popup = item.popupModel as PopupModel;
+      if (!!popup) {
+        const className = new CssClassBuilder()
+          .append(popup.cssClass)
+          .append("svc-toolbox-subtypes")
+          .toString();
 
-      popup.cssClass = className;
-      popup.isFocusedContainer = false;
-      popup.contentComponentName = "svc-toolbox-list";
-      popup.contentComponentData["creator"] = creator;
-      popup.isFocusedContent = false;
+        popup.cssClass = className;
+        popup.isFocusedContainer = false;
+        popup.contentComponentName = "svc-toolbox-list";
+        popup.contentComponentData["creator"] = creator;
+        popup.isFocusedContent = false;
+      }
     }
   }
 
@@ -60,7 +62,7 @@ export class ToolboxToolViewModel extends Base {
     pointerDownEvent.stopPropagation();
 
     if (!this.allowAdd) return;
-    if (this.item.id.indexOf("dotsItem-id") === 0) return true; //toolbox responsive popup
+    if (this.isDotsItem()) return true; //toolbox responsive popup
     this.dragOrClickHelper.onPointerDown(pointerDownEvent);
 
     this.toolboxItem.isPressed = true;
@@ -79,6 +81,10 @@ export class ToolboxToolViewModel extends Base {
     this.dragDropHelper.startDragToolboxItem(pointerDownEvent, json, this.item);
     return true;
   };
+
+  private isDotsItem() {
+    return this.item.id.indexOf("dotsItem-id") === 0;
+  }
 
   private hidePopup() {
     this.toolboxItem.hidePopup();
