@@ -204,13 +204,13 @@
 
 .svc-logic-operator--action.sl-paneldynamic__add-btn.sl-paneldynamic__add-btn,
 .svc-logic-operator--operator.sl-paneldynamic__add-btn.sl-paneldynamic__add-btn {
-  // color: var(--ctr-expression-item-text-color-operator-empty, $foreground-light);
+  color: var(--ctr-expression-item-text-color-operator-empty, $foreground-light);
   margin-top: calcSize(2);
 
-  // &:hover,
-  // &:focus {
-  //   color: var(--ctr-expression-item-background-color-operator-hovered, $primary-foreground);
-  // }
+  &:hover,
+  &:focus {
+    color: var(--ctr-expression-item-background-color-operator-hovered, $primary-foreground);
+  }
 }
 
 .svc-logic-tab__content {
