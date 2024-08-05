@@ -10,6 +10,7 @@ import {
   IDialogOptions,
   PopupBaseViewModel,
   surveyLocalization,
+  Serializer,
 } from "survey-core";
 import { defaultV2Css } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
@@ -44,13 +45,14 @@ export class MatrixCellWrapperEditSurvey {
     const column: MatrixDropdownColumn = matrix.getColumnByName(this.cellQuestion.name);
     const columnJSON = column.toJSON();
     const prevCellType = columnJSON["cellType"];
-    const questionJSON = this.survey.getAllQuestions()[0].toJSON();
+    const questionJSON = this.question.toJSON();
+    const qType = this.question.getType();
     if(!!prevCellType) {
       questionJSON.cellType = prevCellType;
     }
     if(Helpers.isTwoValueEquals(questionJSON, columnJSON)) return;
     for(let key in columnJSON) {
-      if(questionJSON[key] === undefined && (columnJSON[key] === true || columnJSON[key] === false)) {
+      if(!!Serializer.findProperty(qType, key) && questionJSON[key] === undefined && (columnJSON[key] === true || columnJSON[key] === false)) {
         questionJSON[key] = !columnJSON[key];
       }
     }
