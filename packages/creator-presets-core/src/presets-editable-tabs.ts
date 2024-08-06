@@ -7,7 +7,7 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableBase {
   public createMainPageCore(): any {
     const namesChoicesVisibleIf = "{" + this.allItems + "} contains {item}";
     return {
-      title: "Tabs customization",
+      title: " Configure Tabs",
       navigationTitle: "Tabs",
       elements: [
         { type: "panel", name: "tabs_main_panel",

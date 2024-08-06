@@ -472,7 +472,7 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     }
   }
   private setupCreatorToolbox(creator: SurveyCreatorModel): void {
-    const elements: IQuestionToolboxItem[] = [{ name: "panel", title: "Category", className: "panel", json: { type: "panel" }, iconName: "icon-panel" }];
+    const elements: IQuestionToolboxItem[] = [{ name: "panel", title: "New Category", className: "panel", json: { type: "panel" }, iconName: "icon-panel" }];
     const hiddenProperties = ["progressBarInheritWidthFrom"]; //TODO
     const propGrid = this.currentProperties.propertyGridDefault.survey;
     const survey = this.propCreator.survey;

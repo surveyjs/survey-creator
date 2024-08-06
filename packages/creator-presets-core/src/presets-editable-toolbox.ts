@@ -92,10 +92,10 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
               name: this.nameMatrix,
               titleLocation: "hidden",
               rowCount: 0,
-              addRowText: "Add New Item Defintion",
+              addRowText: "Add new toolbox item",
               showHeader: false,
               hideColumnsIfEmpty: true,
-              emptyRowsText: "Please add a new Definition.",
+              emptyRowsText: "Click the button below to add a new toolbox item.",
               columns: [
                 { cellType: "text", name: "name", placeholder: "Name", isUnique: true, isRequired: true },
                 { cellType: "text", name: "iconName", placeholder: "Icon name" },

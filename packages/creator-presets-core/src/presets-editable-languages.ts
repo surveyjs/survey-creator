@@ -5,16 +5,16 @@ import { editorLocalization, SurveyCreatorModel } from "survey-creator-core";
 export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
   public createMainPageCore(): any {
     return {
-      title: "Languages support",
+      title: "Select Languages",
       navigationTitle: "Languages",
       elements: [
         { type: "panel", name: "languages_main_panel",
-          description: "Select creator language (default is English) and supported locales (all languages are supported by default)",
+          description: "Select the language of the Survey Creator UI and target languages for the survey being configured.",
           elements: [
             {
               type: "dropdown",
               titleLocation: "left",
-              title: "Creator locale",
+              title: " UI language:",
               placeholder: editorLocalization.getLocaleName(""),
               name: this.creatorLocaleName,
               choices: this.getCreatorLocales()
@@ -22,7 +22,7 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
             {
               type: "checkbox",
               name: this.surveyLocalesName,
-              title: "Supported survey locales",
+              title: "Survey languages",
               minSelectedChoices: 1,
               colCount: 3,
               showSelectAllItem: true,
