@@ -118,7 +118,9 @@ svc-question {
     margin-left: 0;
   }
 
-  .sd-selectbase--multi-column,
+  .sd-selectbase--multi-column {
+    overflow: initial;
+  }
   .sd-question.sd-question--table {
     overflow-x: initial;
   }
