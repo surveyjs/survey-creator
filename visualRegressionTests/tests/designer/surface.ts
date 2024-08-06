@@ -310,7 +310,7 @@ test("Matrix column vertical", async (t) => {
 
 test("Matrix column editor boolean", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1924, 900);
+    await t.resizeWindow(1956, 900);
     const surveyJSON = {
       "pages": [
         {
@@ -674,7 +674,7 @@ test("Panel gap between items", async (t) => {
 
 test("Panel multi-question row", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1924, 900);
+    await t.resizeWindow(1956, 900);
     const json = {
       "logoPosition": "right",
       "pages": [
@@ -1094,7 +1094,7 @@ test("Check question adorner width", async (t) => {
 
 test("Check question scroll", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1920, 1080);
+    await t.resizeWindow(1952, 1080);
     await setJSON({
       "logoPosition": "right",
       "pages": [
@@ -1933,7 +1933,7 @@ test("Narrow panel add question button", async (t) => {
 
 test("Dynamic panels in multi-line", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1000, 1000);
+    await t.resizeWindow(1032, 1000);
     const json = {
       "pages": [
         {
@@ -2051,7 +2051,7 @@ test("Composite question - check no scroll", async (t) => {
         ],
       });
     })();
-    await t.resizeWindow(1120, 900);
+    await t.resizeWindow(1152, 900);
     await setJSON({
       "pages": [
         {
@@ -2072,7 +2072,7 @@ test("Composite question - check no scroll", async (t) => {
 
 test("Check adorner actions responsivity after convert", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1400, 900);
+    await t.resizeWindow(1432, 900);
     const root = Selector(".sd-page.sd-body__page");
     await setJSON({
       "logoPosition": "right",
@@ -2209,5 +2209,30 @@ test("Question types with subtypes", async (t) => {
       .wait(400)
       .hover(getListItemByText("Labels").nth(1));
     await takeElementScreenshot("question-type-rating-subtypes.png", Selector(".sv-popup.sv-popup--dropdown").filterVisible(), t, comparer);
+  });
+});
+
+test("Check page selection when width mode is responsive", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t
+      .resizeWindow(1920, 1080);
+    const json = {
+      widthMode: "responsive",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "text",
+              "name": "text",
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(json);
+    const rootSelector = Selector(".svc-tab-designer");
+    await t.click(".svc-page", { offsetX: 5, offsetY: 5 });
+    await takeElementScreenshot("page-selected-responsive.png", rootSelector, t, comparer);
   });
 });
