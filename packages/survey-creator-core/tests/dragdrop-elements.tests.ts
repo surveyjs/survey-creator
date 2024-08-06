@@ -167,12 +167,15 @@ test("surveyelement: onDragStart and onDragEnd events", () => {
   ddHelper.draggedElement = question2;
   ddHelper.dropTarget = question1;
 
+  ddHelper["createDraggedElementShortcut"] = ()=>{};
+  ddHelper.dragInit(null, ddHelper.draggedElement, ddHelper.parentElement, document.createElement("div"));
+  expect(beforeCount).toBe(1);
+
   ddHelper["draggedElementShortcut"] = document.body.appendChild(
     document.createElement("div")
   );
   ddHelper["allowDropHere"] = true;
   ddHelper["drop"]();
-  expect(beforeCount).toBe(1);
   expect(afterCount).toBe(1);
   expect(draggedElement.name).toBe("q2");
 
