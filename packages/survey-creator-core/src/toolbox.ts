@@ -195,9 +195,10 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
    */
   public addSubitem(item: IQuestionToolboxItem, index: number = -1): void {
     if (!item) return;
-
-    const newItem: QuestionToolboxItem = (item instanceof QuestionToolboxItem) ? item : new QuestionToolboxItem(item);
-    if (!newItem.className) newItem.className = QuestionToolboxItem.getItemClassNames(newItem.iconName) + " svc-toolbox__item-subtype";
+    const newItem: QuestionToolboxItem = new QuestionToolboxItem(item);
+    newItem.iconName = "";
+    if (!newItem.className) newItem.className = QuestionToolboxItem.getItemClassNames(newItem.iconName);
+    newItem.className = new CssClassBuilder().append(newItem.className).append("svc-toolbox__item-subtype").toString();
     let array: Array<QuestionToolboxItem> = (this.items || []).slice();
     if (index === -1) {
       array.push(newItem);
