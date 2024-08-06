@@ -341,7 +341,7 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     creator.showSidebar = false;
     const designer = <TabDesignerPlugin>creator.getPlugin("designer");
     designer.designerStateManager.onInitElementStateCallback = (element: SurveyElement, state: any): void => {
-      if(element.isPanel) {
+      if(element.isPanel || element.isQuestion) {
         state.collapsed = true;
       }
     };
