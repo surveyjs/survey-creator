@@ -76,7 +76,7 @@ test("Rating adorners", async (t) => {
 
 test("Rating adorners - disabled buttons", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1924, 1080);
+    await t.resizeWindow(1956, 1080);
     await setJSON({
       elements: [
         {
@@ -122,7 +122,7 @@ test("Multi row rating adorner", async (t) => {
     (jsonMulti as any).pages[0].elements[0].rateType = "labels";
     (jsonMulti as any).pages[0].elements[1].rateType = "labels";
     await setJSON(jsonMulti);
-    await t.resizeWindow(1200, 900);
+    await t.resizeWindow(1232, 900);
 
     const question = Selector("div[data-name=question1]");
     await takeElementScreenshot("rating-multiline.png", question, t, comparer);
@@ -149,7 +149,7 @@ test("Multi row rating adorner smileys", async (t) => {
     jNew.pages[0].elements[0].rateType = "smileys";
     jNew.pages[0].elements[1].rateType = "smileys";
     await setJSON(jNew);
-    await t.resizeWindow(1200, 900);
+    await t.resizeWindow(1232, 900);
 
     const question = Selector("div[data-name=question1]");
     await takeElementScreenshot("rating-multiline-smileys.png", question, t, comparer);
@@ -176,7 +176,7 @@ test("Multi row rating adorner stars", async (t) => {
     jNew.pages[0].elements[0].rateType = "stars";
     jNew.pages[0].elements[1].rateType = "stars";
     await setJSON(jNew);
-    await t.resizeWindow(1200, 900);
+    await t.resizeWindow(1232, 900);
 
     const question = Selector("div[data-name=question1]");
     await takeElementScreenshot("rating-multiline-stars.png", question, t, comparer);
@@ -225,7 +225,7 @@ test("Rating min/max editing", async (t) => {
       ]
     }
     );
-    await t.resizeWindow(1904, 1000);
+    await t.resizeWindow(1936, 1000);
     const question = Selector("div[data-name=question1]");
     await t.click(question.find("span").withText("min"));
     await takeElementScreenshot("rating-editing-min.png", question, t, comparer);
