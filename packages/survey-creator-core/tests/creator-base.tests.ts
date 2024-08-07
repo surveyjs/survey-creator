@@ -23,6 +23,7 @@ import {
   PageModel,
   ComputedUpdater,
   PopupDropdownViewModel,
+  Question,
 } from "survey-core";
 import { PageAdorner } from "../src/components/page";
 import { QuestionAdornerViewModel } from "../src/components/question";
@@ -2027,6 +2028,31 @@ test("PageAdorner and onElementAllowOperations, allowEdit", (): any => {
   expect(pageModel2.getActionById("duplicate").visible).toBeTruthy();
   expect(pageModel2.showAddQuestionButton).toBeTruthy();
 });
+test("PageAdorner and onElementAllowOperations, allowExpandCollapse", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "text", name: "q1" }]
+  };
+  creator.survey.addNewPage("page2");
+  creator.onElementAllowOperations.add((sender, options) => {
+    let page = null;
+    if (options.obj.isPage) {
+      page = options.obj;
+    }
+    if (!!page) {
+      const isFirstPage = sender.survey.pages.indexOf(page) === 0;
+      if (isFirstPage) {
+        options.allowExpandCollapse = false;
+      }
+    }
+  });
+  const pageModel1 = new PageAdorner(creator, creator.survey.pages[0]);
+  const pageModel2 = new PageAdorner(creator, creator.survey.pages[1]);
+  creator.selectElement(creator.survey.pages[0]);
+  expect(pageModel1.getActionById("collapse").visible).toBeFalsy();
+  creator.selectElement(creator.survey.pages[1]);
+  expect(pageModel2.getActionById("collapse").visible).toBeTruthy();
+});
 test("PageAdorner and creator readOnly", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
@@ -2092,6 +2118,25 @@ test("QuestionAdornerViewModel and onElementAllowOperations", (): any => {
   expect(q4Model.getActionById("convertTo").visible).toBeTruthy();
   expect(q4Model.getActionById("isrequired").visible).toBeTruthy();
   expect(q4Model.getActionById("convertInputType").visible).toBeTruthy();
+});
+
+test("QuestionAdornerViewModel and onElementAllowOperations, allowExpandCollapse", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "panel", name: "q1" },
+      { type: "panel", name: "q2" }
+    ]
+  };
+  creator.survey.addNewPage("page2");
+  creator.onElementAllowOperations.add((sender, options) => {
+    options.allowExpandCollapse = (options.obj as Question).name === "q1";
+  });
+  const q1Model = new QuestionAdornerViewModel(creator, creator.survey.getAllQuestions()[0], undefined);
+  const q2Model = new QuestionAdornerViewModel(creator, creator.survey.getAllQuestions()[1], undefined);
+
+  expect(q1Model.topActionContainer.getActionById("collapse").visible).toBeTruthy();
+  expect(q2Model.topActionContainer.getActionById("collapse").visible).toBeFalsy();
 });
 
 test("QuestionAdornerViewModel and onElementAllowOperations on new elements", (): any => {
