@@ -93,6 +93,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   protected expandCollapseAction: IAction;
   protected designerStateManager: DesignerStateManager;
   @property({ defaultValue: true }) allowDragging: boolean;
+  @property({ defaultValue: true }) allowExpandCollapse: boolean;
   @property({
     onSet: (val, target: SurveyElementAdornerBase<T>) => {
       target.renderedCollapsed = val;
@@ -108,7 +109,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   @property() renderedCollapsed: boolean;
 
   public dblclick(event) {
-    if (this.creator.expandCollapseButtonVisibility != "never") this.collapsed = !this.collapsed;
+    if (this.allowExpandCollapse) this.collapsed = !this.collapsed;
     event.stopPropagation();
   }
   private allowEditOption: boolean;
@@ -143,6 +144,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       css: "sv-action-bar-item--secondary sv-action-bar-item--collapse",
       iconName: new ComputedUpdater<string>(() => this.collapsed ? expandIcon : collapseIcon) as any,
       iconSize: 16,
+      visible: new ComputedUpdater<boolean>(() => this.allowExpandCollapse) as any,
       action: () => {
         this.collapsed = !this.collapsed;
       }
@@ -208,6 +210,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   }
   protected updateElementAllowOptions(options: any, operationsAllow: boolean): void {
     this.allowDragging = operationsAllow && options.allowDragging;
+    this.allowExpandCollapse = this.creator.expandCollapseButtonVisibility != "never" && options.allowExpandCollapse;
     this.allowEditOption = (options.allowEdit == undefined || !!options.allowEdit);
     this.updateActionVisibility("delete", operationsAllow && options.allowDelete);
     this.updateActionVisibility("duplicate", operationsAllow && options.allowCopy);
