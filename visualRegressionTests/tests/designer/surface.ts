@@ -1805,6 +1805,15 @@ test("Narrow question placeholder", async (t) => {
               "minWidth": "200px"
             },
             {
+              "type": "panel",
+              "name": "panel1z",
+              "maxWidth": "200px",
+              "minWidth": "200px",
+              "title": "Title",
+              "startWithNewLine": false,
+              "isRequired": true
+            },
+            {
               "type": "paneldynamic",
               "name": "panel1",
               "maxWidth": "200px",
@@ -1833,6 +1842,15 @@ test("Narrow question placeholder", async (t) => {
               "minWidth": "400px"
             },
             {
+              "type": "panel",
+              "name": "panel11",
+              "maxWidth": "400px",
+              "minWidth": "400px",
+              "title": "Title",
+              "startWithNewLine": false,
+              "isRequired": true
+            },
+            {
               "type": "paneldynamic",
               "name": "panel1",
               "maxWidth": "400px",
@@ -1848,7 +1866,7 @@ test("Narrow question placeholder", async (t) => {
               "startWithNewLine": false
             },
             {
-              "type": "html",
+              "type": "image",
               "name": "question3",
               "maxWidth": "400px",
               "minWidth": "400px",
@@ -1864,20 +1882,23 @@ test("Narrow question placeholder", async (t) => {
     })();
     const qContent = Selector(".svc-question__content");
     await takeElementScreenshot("panel-placeholder.png", qContent.nth(0), t, comparer);
+    await takeElementScreenshot("panel-title-placeholder.png", qContent.nth(1), t, comparer);
 
-    await takeElementScreenshot("panel-dynamic-placeholder.png", qContent.nth(1), t, comparer);
+    await takeElementScreenshot("panel-dynamic-placeholder.png", qContent.nth(2), t, comparer);
 
-    await takeElementScreenshot("html-placeholder.png", qContent.nth(2), t, comparer);
+    await takeElementScreenshot("html-placeholder.png", qContent.nth(3), t, comparer);
 
-    await takeElementScreenshot("image-placeholder.png", qContent.nth(3), t, comparer);
+    await takeElementScreenshot("image-placeholder.png", qContent.nth(4), t, comparer);
 
-    await takeElementScreenshot("panel-placeholder-medium.png", qContent.nth(4), t, comparer);
+    await takeElementScreenshot("panel-placeholder-medium.png", qContent.nth(5), t, comparer);
 
-    await takeElementScreenshot("panel-dynamic-placeholder-medium.png", qContent.nth(5), t, comparer);
+    await takeElementScreenshot("panel-title-placeholder-medium.png", qContent.nth(6), t, comparer);
 
-    await takeElementScreenshot("html-placeholder-medium.png", qContent.nth(6), t, comparer);
+    await takeElementScreenshot("panel-dynamic-placeholder-medium.png", qContent.nth(7), t, comparer);
 
-    await takeElementScreenshot("image-placeholder-medium.png", qContent.nth(7), t, comparer);
+    await takeElementScreenshot("html-placeholder-medium.png", qContent.nth(8), t, comparer);
+
+    await takeElementScreenshot("image-placeholder-medium.png", qContent.nth(9), t, comparer);
 
   });
 });
