@@ -159,7 +159,7 @@ svc-page {
     background: $primary-light;
     &::after {
       border: 2px $primary solid;
-      background: $primary-light;
+      animation: collapsed-drag-over-inside-blinking 1s infinite;
     }
   }
 }

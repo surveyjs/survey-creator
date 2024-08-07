@@ -17,7 +17,9 @@ svc-question {
   display: flex;
   flex-direction: column;
   justify-content: stretch;
-
+  &.svc-question__adorner--collapsed {
+    height: fit-content;
+  }
   .sv-action-bar {
     overflow: visible;
 
@@ -269,7 +271,17 @@ svc-question {
 }
 .svc-question__content--collapsed-drag-over-inside:not(.svc-question__content--dragged) {
   box-shadow: 0 0 0 2px $primary;
-  background: $primary-light;
+  animation: collapsed-drag-over-inside-blinking 1s;
+}
+
+@keyframes collapsed-drag-over-inside-blinking {
+  0%{ background: $primary-light }
+  40%{ background: $primary-light }
+  50%{ background: $background }
+  60%{ background: $primary-light }
+  75%{ background: $background }
+  85%{ background: $primary-light }
+  100%{ background: $primary-light }
 }
 
 .svc-question__content--selected:not(.svc-question__content--dragged),
