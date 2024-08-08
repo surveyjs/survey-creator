@@ -129,6 +129,14 @@
           "Title": "Configure Dynamic Tab Titles in Dynamic Panel"
         },
         {
+          "Name": "end-user-guide-how-to-use-column-totals-in-matrix-questions",
+          "Title": "Configure Column Totals in Matrix Questions"
+        },
+        {
+          "Name": "end-user-guide-how-to-use-custom-variables-in-form-calculations",
+          "Title": "Use Custom Variables in Form Calculations"
+        },
+        {
           "Name": "end-user-guide-how-to-create-transfer-list",
           "Title": "Create a Transfer List"
         }

@@ -263,3 +263,27 @@ test("QuestionRatingAdornerViewModel add rateValues and call onItemValueAdded ev
   expect(ratingQuestion.rateValues[3].value).toEqual("newItem1");
   expect(ratingQuestion.rateValues[3].text).toEqual("New Item 1");
 });
+test("Edit matrix cell question & showInMultipleColumns, #5750", (): any => {
+  let creator = new CreatorTester();
+  creator.JSON = {
+    "elements": [
+      {
+        "type": "matrixdropdown",
+        "name": "q1",
+        "columns": [{ name: "column1", cellType: "checkbox", showInMultipleColumns: true, choices: [1, 2, 3, 4] }],
+        "rows": ["row1", "row2"]
+      }
+    ]
+  };
+  const matrix = <QuestionMatrixDropdownModel>creator.survey.getQuestionByName("q1");
+  let question = matrix.visibleRows[0].cells[0].question;
+  let editSurvey = new MatrixCellWrapperEditSurvey(creator, question, matrix.columns[0]);
+  let editQuestion = <QuestionCheckboxModel>editSurvey.question;
+  expect(editQuestion.getType()).toEqual("checkbox");
+  editQuestion.choices = [1, 2, 3, 4, 5];
+  editSurvey.apply();
+  const columnQuestion = matrix.columns[0];
+  expect(columnQuestion.cellType).toEqual("checkbox");
+  expect(columnQuestion.showInMultipleColumns).toBeTruthy();
+  expect(columnQuestion.choices).toHaveLength(5);
+});
