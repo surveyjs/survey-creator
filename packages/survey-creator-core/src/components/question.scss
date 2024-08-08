@@ -118,6 +118,9 @@ svc-question {
     margin-left: 0;
   }
 
+  .sd-selectbase--multi-column {
+    overflow: initial;
+  }
   .sd-question.sd-question--table {
     overflow-x: initial;
   }
@@ -525,12 +528,14 @@ svc-question,
       & > *:not(.sd-element__header) {
         display: none;
       }
-
       .sd-element__header {
         & > *:not(.sd-element__title) {
           display: none;
         }
-
+        &.sd-panel__header--hidden {
+          display:block
+        }
+  
         .sd-element__title,
         .sd-title.sd-element__title.sd-element__title--hidden {
           display: block;
@@ -590,6 +595,21 @@ svc-question,
   }
 }
 
+.svc-question__content--html,
+.svc-question__content--image {
+  &.svc-question__content--empty {
+    padding-top: calcSize(5);
+  }
+}
+.svc-creator--mobile {
+  .svc-question__content--html,
+  .svc-question__content--image {
+    &.svc-question__content--empty {
+      padding-top: calcSize(3);
+    }
+  }
+}
+
 .sd-panel {
   .svc-question__content--image:not(.svc-question__content--empty) {
     padding-left: 1px;
@@ -620,13 +640,6 @@ svc-question,
   .svc-question__content.svc-question__content--selected:not(.svc-question__content--dragged) {
     border: 1px solid $secondary;
     box-shadow: 0 0 0 1px $secondary inset;
-  }
-}
-
-.sd-page__row.sd-row--multiple .svc-question__content--empty {
-  .sd-row__question,
-  .sd-row__panel {
-    height: 0;
   }
 }
 
@@ -848,6 +861,13 @@ svc-question,
   }
 }
 
+.svc-question__content.svc-question__content--collapsed {
+  .sd-element--complex > .sd-element__header--location-top {
+    &.sd-panel__header--hidden {
+      padding: 0;
+    }
+  }
+}
 .svc-question__content {
   .sd-element__header--location-top {
     margin-top: 0;
@@ -856,7 +876,9 @@ svc-question,
   .sd-element--complex > .sd-element__header--location-top {
     padding-bottom: calc(0.5 * var(--sd-base-vertical-padding));
     padding-top: 0;
-
+    &.sd-panel__header--hidden {
+      padding-bottom: calcSize(1);
+    }
     &:after {
       display: none;
     }
