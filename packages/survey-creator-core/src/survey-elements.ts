@@ -50,7 +50,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
   public static nestedPanelDepth: number = -1;
   public static ghostSurveyElementName = "sv-drag-drop-ghost-survey-element-name"; // before renaming use globa search (we have also css selectors)
 
-  private insideEmptyContainer = null;
+  public insideContainer = null;
   protected prevIsEdge: any = null;
   // protected ghostSurveyElement: IElement = null;
   protected dragOverIndicatorElement: any = null;
@@ -199,12 +199,12 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     });
 
     // drop to paneldynamic
-    if (dropTarget.getType() === "paneldynamic" && this.insideEmptyContainer) {
+    if (dropTarget.getType() === "paneldynamic" && this.insideContainer) {
       dropTarget = (<any>dropTarget).template;
     }
 
     // drop to matrix detail panel
-    if ((dropTarget.getType() === "matrixdropdown" || dropTarget.getType() === "matrixdynamic") && (<any>dropTarget).detailPanelMode !== "none" && this.insideEmptyContainer) {
+    if ((dropTarget.getType() === "matrixdropdown" || dropTarget.getType() === "matrixdynamic") && (<any>dropTarget).detailPanelMode !== "none" && this.insideContainer) {
       dropTarget = (<any>dropTarget).detailPanel;
     }
 
@@ -365,12 +365,12 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       this.banDropHere();
       return;
     }
-    this.insideEmptyContainer = !calculateIsEdge(dropTargetNode, event.clientY) && !calculateIsSide(dropTargetNode, event.clientX);
+    this.insideContainer = !calculateIsEdge(dropTargetNode, event.clientY) && !calculateIsSide(dropTargetNode, event.clientX);
     const dropTarget = this.getDropTargetByNode(dropTargetNode, event);
 
     let dragOverLocation = calculateDragOverLocation(event.clientX, event.clientY, dropTargetNode);
     if (dropTarget && (dropTarget.isPanel || dropTarget.isPage) && dropTarget.elements.length === 0) {
-      if (dropTarget.isPage || this.insideEmptyContainer) {
+      if (dropTarget.isPage || this.insideContainer) {
         dragOverLocation = DragTypeOverMeEnum.InsideEmptyPanel;
       }
     }
@@ -450,7 +450,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
   }
 
   public clear(): void {
-    this.insideEmptyContainer = null;
+    this.insideContainer = null;
     this.removeDragOverMarker(this.prevDropTarget);
     this.removeDragOverMarker(this.dropTarget);
     this.removeDragOverMarker(this.dragOverIndicatorElement);

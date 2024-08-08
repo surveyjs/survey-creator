@@ -372,6 +372,53 @@ test("Drag Drop to Panel", async (t) => {
   const resultJson = await getJSON();
   await t.expect(resultJson).eql(expectedJson);
 });
+
+test("Drag Drop to collapsed panel", async (t) => {
+  await ClientFunction(() => { window["creator"].expandCollapseButtonVisibility = "always"; })();
+
+  await t.resizeWindow(1600, 1000);
+  const json = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "panel",
+            name: "panel1",
+            elements: [{
+              type: "text",
+              name: "q1"
+            }]
+          }
+        ]
+      }
+    ]
+  };
+  await setJSON(json);
+
+  const qCollapseButton = Selector(".svc-question__content #collapse");
+  await t.click(qCollapseButton.filterVisible());
+
+  const Panel = Selector("[data-sv-drop-target-survey-element=\"panel1\"]");
+  const toolboxToolAction = Selector(".svc-toolbox__tool > .sv-action__content");
+  await t
+    .hover(toolboxToolAction)
+    .dispatchEvent(toolboxToolAction, "pointerdown")
+    .hover(Panel, { offsetX: 5 })
+    .expect(Panel.find(".svc-question__content--drag-over-left").exists).ok()
+    .expect(Panel.find(".svc-question__content--collapsed-drag-over-inside").exists).notOk()
+    .wait(2000)
+    .hover(Panel, { offsetX: 100 })
+    .expect(Panel.find(".svc-question__content--collapsed").exists).ok()
+    .wait(2000)
+    .expect(Panel.find(".svc-question__content--collapsed").exists).notOk()
+    .expect(Panel.find(".svc-question__content--drag-over-left").exists).notOk()
+    .dispatchEvent(toolboxToolAction, "pointerup");
+
+  const resultJson = await getJSON();
+  await t.expect(resultJson).eql(json);
+});
+
 test("Drag Drop Question from a panel", async (t) => {
   await t.resizeWindow(2560, 1440);
   const json = {

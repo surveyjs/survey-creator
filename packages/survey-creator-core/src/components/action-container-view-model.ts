@@ -89,10 +89,15 @@ export class SurveyElementActionContainer extends AdaptiveActionContainer {
 }
 
 export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> extends Base {
+  static expandOnDragTimeOut: number = 1000;
   public actionContainer: SurveyElementActionContainer;
   protected expandCollapseAction: IAction;
   protected designerStateManager: DesignerStateManager;
   @property({ defaultValue: true }) allowDragging: boolean;
+
+  protected get dragInsideCollapsedContainer(): boolean {
+    return this.collapsed && this.creator.dragDropSurveyElements.insideContainer;
+  }
 
   public calculateCollapsed() {
     this.calculatedCollapsed = this.collapsedByDrag !== undefined ? this.collapsedByDrag : this.collapsed;
@@ -127,10 +132,14 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   protected dragIn() {
     if ((this.surveyElement.isPanel || this.surveyElement.isPage) && this.collapsed) {
       this.dragCollapsedTimer = setTimeout(() => {
-        this.collapsed = false;
-      }, 1000);
+        this.expandWithDragIn();
+      }, SurveyElementAdornerBase.expandOnDragTimeOut);
     }
   }
+  protected expandWithDragIn() {
+    this.collapsed = false;
+  }
+
   protected dragOut() {
     if (this.dragCollapsedTimer) clearTimeout(this.dragCollapsedTimer);
   }
@@ -152,7 +161,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this.designerStateManager?.initForElement(surveyElement);
     this.selectedPropPageFunc = (sender: Base, options: any) => {
       if (options.name === "dragTypeOverMe") {
-        if (!!options.newValue) this.dragIn(); else this.dragOut();
+        if (!!options.newValue && this.dragInsideCollapsedContainer) this.dragIn(); else this.dragOut();
       }
       if (options.name === "isSelectedInDesigner") {
         this.onElementSelectedChanged(options.newValue);
