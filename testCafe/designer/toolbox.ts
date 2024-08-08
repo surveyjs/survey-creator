@@ -117,14 +117,15 @@ test.before(async (t) => {
     .expect(visibleToolboxItems.count).eql(2);
 });
 
-test.before(async (t) => {
+test.only.before(async (t) => {
   await t.resizeWindow(1900, 600);
 })("Categories Responsiveness large -> small", async (t) => {
   await changeToolboxScrolling(false);
   await changeToolboxSearchEnabled(false);
-
+  await t.debug();
   await setupCategories(t);
   await t
+    .debug()
     .expect(categoriesHeader.count).eql(3)
     .expect(visibleToolboxItems.count).eql(16)
 

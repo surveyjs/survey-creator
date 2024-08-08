@@ -26,11 +26,13 @@
   </button>
 </template>
 <script lang="ts">
+ import { SvComponent } from "survey-vue3-ui";
 export default {
   inheritAttrs: false,
 };
 </script>
 <script lang="ts" setup>
+ import { SvComponent } from "survey-vue3-ui";
 import { useBase } from "survey-vue3-ui";
 import type { Switcher } from "survey-creator-core";
 const props = defineProps<{ item: Switcher }>();

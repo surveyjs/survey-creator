@@ -7,24 +7,25 @@
       :title="model.pageSelectorCaption"
       :class="{ 'svc-page-navigator__selector--opened': model.isPopupOpened }"
     >
-      <sv-svg-icon
+      <SvComponent :name="'sv-svg-icon'"
         class="svc-page-navigator__navigator-icon"
         :iconName="model.icon"
         :size="24"
-      ></sv-svg-icon>
-      <sv-popup :model="model.popupModel"></sv-popup>
+      ></SvComponent>
+      <SvComponent :name="'sv-popup'" :model="model.popupModel"></SvComponent>
     </div>
     <div>
-      <svc-page-navigator-item
+      <SvComponent :name="'svc-page-navigator-item'"
         v-for="(item, index) in model.visibleItems"
         :key="index"
         :model="item"
-      ></svc-page-navigator-item>
+      ></SvComponent>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+ import { SvComponent } from "survey-vue3-ui";
 import { useCreatorModel } from "@/creator-model";
 import {
   PageNavigatorViewModel,

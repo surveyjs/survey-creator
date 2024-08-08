@@ -1,20 +1,21 @@
 <template>
   <div :class="question.getRootClass()">
-    <component :is="getComponentName()" :question="question"></component>
+    <SvComponent :name="getComponentName()" :question="question"></SvComponent>
     <button
       :class="question.cssClasses.resetButton"
       :disabled="question.resetValueAdorner.isDisabled"
       @click="question.resetValueAdorner.resetValue"
       :title="question.resetValueAdorner.caption"
     >
-      <sv-svg-icon
+      <SvComponent :name="'sv-svg-icon'"
         :iconName="question.cssClasses.resetButtonIcon"
         :size="'auto'"
-      ></sv-svg-icon>
+      ></SvComponent>
     </button>
   </div>
 </template>
 <script lang="ts" setup>
+ import { SvComponent } from "survey-vue3-ui";
 import type {
   QuestionTextWithResetModel,
   QuestionCommentWithResetModel,

@@ -4,14 +4,15 @@
     :class="[!item.isVisible ? 'sv-action--hidden' : '', item.css]"
   >
     <div class="sv-action__content">
-      <component
-        :is="item.component || 'svc-tabbed-menu-item'"
+      <SvComponent
+        :name="item.component || 'svc-tabbed-menu-item'"
         :item="item"
-      ></component>
+      ></SvComponent>
     </div>
   </span>
 </template>
 <script setup lang="ts">
+ import { SvComponent } from "survey-vue3-ui";
 import type { TabbedMenuItem } from "survey-creator-core";
 import { useBase } from "survey-vue3-ui";
 const props = defineProps<{ item: TabbedMenuItem }>();

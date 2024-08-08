@@ -1,10 +1,10 @@
 <template>
   <div :class="question.cssClasses.root" @keydown="question.onKeyDown">
     <label :class="question.getSwatchCss()" :style="question.getSwatchStyle()">
-      <sv-svg-icon
+      <SvComponent :name="'sv-svg-icon'"
         :iconName="question.cssClasses.swatchIcon"
         :size="'auto'"
-      ></sv-svg-icon>
+      ></SvComponent>
       <input
         type="color"
         :disabled="question.isInputReadOnly"
@@ -31,13 +31,14 @@
       :class="question.cssClasses.control"
     />
     <template v-if="question.showDropdownAction">
-      <sv-action-bar-item :item="question.dropdownAction"></sv-action-bar-item>
-      <sv-popup :model="question.dropdownAction.popupModel"></sv-popup>
+      <SvComponent :name="'sv-action-bar-item'" :item="question.dropdownAction"></SvComponent>
+      <SvComponent :name="'sv-popup'" :model="question.dropdownAction.popupModel"></SvComponent>
     </template>
   </div>
 </template>
 
 <script lang="ts" setup>
+ import { SvComponent } from "survey-vue3-ui";
 import type { QuestionColorModel } from "survey-creator-core";
 import { useQuestion } from "survey-vue3-ui";
 import { ref } from "vue";

@@ -11,17 +11,18 @@
       @mousemove="(e) => { model?.onMouseOver(item, e); }"
       @mouseleave="(e) => { model?.onMouseLeave(item, e); }"
     >
-      <component
+      <SvComponent
         :viewModel="model"
-        :is="item.component || 'svc-toolbox-item'"
+        :name="item.component || 'svc-toolbox-item'"
         :item="item"
         :creator="creator"
         :isCompact="isCompact"
-      ></component>
+      ></SvComponent>
     </div>
   </div>
 </template>
 <script lang="ts" setup>
+ import { SvComponent } from "survey-vue3-ui";
 import { QuestionToolboxItem, ToolboxToolViewModel, type SurveyCreatorModel } from "survey-creator-core";
 import type { Action, ActionContainer } from "survey-core";
 import { useCreatorModel } from "@/creator-model";

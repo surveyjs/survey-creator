@@ -30,7 +30,7 @@
             :title="undefined"
             :aria-label="undefined"
           >
-            <sv-svg-icon :iconName="'icon-file'" :size="24"></sv-svg-icon>
+            <SvComponent :name="'sv-svg-icon'" :iconName="'icon-file'" :size="24"></SvComponent>
           </span>
           <span
             class="svc-context-button svc-context-button--danger"
@@ -39,18 +39,19 @@
             :title="undefined"
             :aria-label="undefined"
           >
-            <sv-svg-icon :iconName="'icon-clear'" :size="24"></sv-svg-icon>
+            <SvComponent :name="'sv-svg-icon'" :iconName="'icon-clear'" :size="24"></SvComponent>
           </span>
         </div>
-        <sv-logo-image :data="survey"></sv-logo-image>
+        <SvComponent :name="'sv-logo-image'" :data="survey"></SvComponent>
       </div>
     </template>
     <div class="svc-logo-image__loading" v-if="model.isUploading">
-      <sv-loading-indicator></sv-loading-indicator>
+      <SvComponent :name="'sv-loading-indicator'"></SvComponent>
     </div>
   </div>
 </template>
 <script lang="ts" setup>
+ import { SvComponent } from "survey-vue3-ui";
 import { useCreatorModel } from "@/creator-model";
 import { SurveyCreatorModel, LogoImageViewModel } from "survey-creator-core";
 import { computed, onMounted, ref, watch } from "vue";

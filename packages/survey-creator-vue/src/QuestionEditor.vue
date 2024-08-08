@@ -1,7 +1,8 @@
 <template>
-  <component :is="componentName" v-bind="componentData"></component>
+  <SvComponent :name="componentName" v-bind="componentData"></SvComponent>
 </template>
 <script lang="ts" setup>
+import { SvComponent } from "survey-vue3-ui";
 import type { SurveyModel } from "survey-core";
 import { computed } from "vue";
 

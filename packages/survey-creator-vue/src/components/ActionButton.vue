@@ -17,6 +17,7 @@
   >
 </template>
 <script lang="ts" setup>
+ import { SvComponent } from "survey-vue3-ui";
 const props = defineProps<{
   classes?: string;
   selected?: boolean;

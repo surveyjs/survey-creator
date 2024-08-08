@@ -11,6 +11,7 @@
   </div>
 </template>
 <script lang="ts" setup>
+ import { SvComponent } from "survey-vue3-ui";
 import type { Action } from "survey-core";
 import { useBase } from "survey-vue3-ui";
 import { computed } from "vue";

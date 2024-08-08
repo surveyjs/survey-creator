@@ -1,13 +1,15 @@
 <template>
   <div class="svc-tabbed-menu" ref="container">
     <template v-for="action in model.renderedActions" :key="action.id">
-      <svc-tabbed-menu-item-wrapper
+      <SvComponent
+        :name="'svc-tabbed-menu-item-wrapper'"
         :item="action"
-      ></svc-tabbed-menu-item-wrapper>
+      ></SvComponent>
     </template>
   </div>
 </template>
 <script setup lang="ts">
+import { SvComponent } from "survey-vue3-ui";
 import { ResponsivityManager } from "survey-core";
 import type { TabbedMenuContainer } from "survey-creator-core";
 import { useBase } from "survey-vue3-ui";

@@ -7,24 +7,25 @@
           :key="item.value"
           :class="model.getChoiceCss()"
         >
-          <component
-            :is="getItemValueComponentName(item)"
+          <SvComponent
+            :name="getItemValueComponentName(item)"
             v-bind="getItemValueComponentData(item)"
           >
-          </component>
+          </SvComponent>
         </div>
       </div>
-      <svc-action-button
+      <SvComponent :name="'svc-action-button'"
         v-if="model.needToCollapse"
         :text="model.getButtonText()"
         :click="model.switchCollapse.bind(model)"
         :allowBubble="true"
       >
-      </svc-action-button>
+      </SvComponent>
     </div>
   </div>
 </template>
 <script lang="ts" setup>
+import { SvComponent } from "survey-vue3-ui";
 import type {
   ItemValue,
   QuestionDropdownModel,

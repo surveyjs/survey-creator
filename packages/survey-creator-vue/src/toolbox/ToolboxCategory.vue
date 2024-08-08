@@ -17,31 +17,32 @@
         v-if="toolbox.canCollapseCategories"
         class="svc-toolbox__category-header__controls"
       >
-        <sv-svg-icon
+        <SvComponent :name="'sv-svg-icon'"
           :iconName="'icon-arrow-down'"
           class="svc-toolbox__category-header__button svc-string-editor__button--expand"
           :size="24"
           v-show="category.collapsed"
-        ></sv-svg-icon>
-        <sv-svg-icon
+        ></SvComponent>
+        <SvComponent :name="'sv-svg-icon'"
           :iconName="'icon-arrow-up'"
           class="svc-toolbox__category-header__button svc-string-editor__button--collapse"
           :size="24"
           v-show="!category.collapsed"
-        ></sv-svg-icon>
+        ></SvComponent>
       </div>
     </div>
-    <svc-toolbox-tool
+    <SvComponent :name="'svc-toolbox-tool'"
       v-for="(item, index) in category.items"
       :item="item"
       :key="index"
       :creator="toolbox.creator"
       :parentModel="toolbox"
       :isCompact="false"
-    ></svc-toolbox-tool>
+    ></SvComponent>
   </div>
 </template>
 <script lang="ts" setup>
+ import { SvComponent } from "survey-vue3-ui";
 import type {
   QuestionToolbox,
   QuestionToolboxCategory,

@@ -1,12 +1,13 @@
 <template>
-  <component
+  <SvComponent
     v-if="model.visible"
-    :is="model.componentName"
+    :name="model.componentName"
     :model="model.model"
-  ></component>
+  ></SvComponent>
 </template>
 
 <script lang="ts" setup>
+ import { SvComponent } from "survey-vue3-ui";
 import type { SidebarTabModel } from "survey-creator-core";
 import { useBase } from "survey-vue3-ui";
 const props = defineProps<{ model: SidebarTabModel }>();

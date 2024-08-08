@@ -1,9 +1,10 @@
 <template>
   <template v-if="model.isVisible">
-    <sv-list :model="model.list"></sv-list>
+    <SvComponent :name="'sv-list'" :model="model.list"></SvComponent>
   </template>
 </template>
 <script lang="ts" setup>
+ import { SvComponent } from "survey-vue3-ui";
 import type { ObjectSelectorModel } from "survey-creator-core";
 import { useBase } from "survey-vue3-ui";
 const props = defineProps<{ model: ObjectSelectorModel }>();

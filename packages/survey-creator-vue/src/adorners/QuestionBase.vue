@@ -24,26 +24,26 @@
         class="svc-question__drag-area"
         v-on:pointerdown="(e) => model.onPointerDown(e)"
       >
-        <sv-svg-icon
+        <SvComponent :name="'sv-svg-icon'"
           class="svc-question__drag-element"
           v-bind="{
             css: 'svc-question__drag-element',
             iconName: 'icon-drag-area-indicator_24x16',
             size: 24,
           }"
-        ></sv-svg-icon>
+        ></SvComponent>
         <div class="svc-question__top-actions">
-          <sv-action-bar
+          <SvComponent :name="'sv-action-bar'"
             :model="model.topActionContainer"
             :handleClick="false"
-          ></sv-action-bar>
+          ></SvComponent>
         </div>
       </div>
 
-      <sv-template-renderer
+      <SvComponent :name="'sv-template-renderer'"
         :componentName="componentName"
         :componentData="componentData"
-      ></sv-template-renderer>
+      ></SvComponent>
       <div
         v-if="model.isEmptyElement && !showPlaceholderComponent"
         class="svc-panel__placeholder_frame-wrapper"
@@ -54,11 +54,11 @@
           </div>
         </div>
       </div>
-      <component
+      <SvComponent
         v-if="model.isEmptyElement && showPlaceholderComponent"
-        :is="placeholderComponent"
+        :name="placeholderComponent"
         v-bind="placeholderComponentData"
-      ></component>
+      ></SvComponent>
       <!-- ko if: koIsEmptyElement() && !!$data.placeholderComponentData -->
       <!-- ko let: { question: placeholderComponentData.data }  -->
       <!-- ko component: { name: 'sv-template-renderer', params: { componentData: null, templateData: placeholderComponentData } } -->
@@ -70,16 +70,16 @@
       <!-- ko component: { name: adornerComponent, params: { model: $data } } -->
       <!-- /ko -->
       <!-- /ko -->
-      <component
+      <SvComponent
         v-if="adornerComponent"
-        :is="adornerComponent"
+        :name="adornerComponent"
         :model="model"
         :element="element"
       />
-      <svc-question-banner
+      <SvComponent :name="'svc-question-banner'"
         v-if="model.isBannerShowing"
         :model="questionBannerParams"
-      ></svc-question-banner>
+      ></SvComponent>
       <div
         class="svc-question__content-actions"
         v-on:focusin="
@@ -89,15 +89,16 @@
           }
         "
       >
-        <sv-action-bar
+        <SvComponent :name="'sv-action-bar'"
           :model="model.actionContainer"
           :handleClick="false"
-        ></sv-action-bar>
+        ></SvComponent>
       </div>
     </div>
   </div>
 </template>
 <script lang="ts" setup>
+ import { SvComponent } from "survey-vue3-ui";
 import type { QuestionAdornerViewModel } from "survey-creator-core";
 import { computed, ref } from "vue";
 const props = defineProps<{

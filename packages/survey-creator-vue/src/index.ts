@@ -1,5 +1,5 @@
 import type { App } from "vue";
-import { surveyPlugin } from "survey-vue3-ui";
+import { SurveyComponent, ComponentFactory } from "survey-vue3-ui";
 import SurveyCreatorComponent from "./Creator.vue";
 
 import TabbedMenu from "./tabbed-menu/TabbedMenu.vue";
@@ -75,89 +75,195 @@ import CellQuestionDropdownVue from "./adorners/CellQuestionDropdown.vue";
 import CustomWidget from "./adorners/CustomWidget.vue";
 import QuestionBanner from "./adorners/QuestionBanner.vue";
 
-function registerComponents(app: App) {
-  app.component("SurveyCreatorComponent", SurveyCreatorComponent);
-  app.component("svc-tabbed-menu", TabbedMenu);
-  app.component("svc-tabbed-menu-item-wrapper", TabbedMenuItemWrapper);
-  app.component("svc-tabbed-menu-item", TabbedMenuItem);
+function registerComponents() {
+  ComponentFactory.Instance.registerComponent("svc-tabbed-menu", TabbedMenu);
+  ComponentFactory.Instance.registerComponent(
+    "svc-tabbed-menu-item-wrapper",
+    TabbedMenuItemWrapper
+  );
+  ComponentFactory.Instance.registerComponent(
+    "svc-tabbed-menu-item",
+    TabbedMenuItem
+  );
 
-  app.component("svc-side-bar", SideBar);
-  app.component("svc-side-bar-tab", SideBarTab);
+  ComponentFactory.Instance.registerComponent("svc-side-bar", SideBar);
+  ComponentFactory.Instance.registerComponent("svc-side-bar-tab", SideBarTab);
 
-  app.component("svc-property-grid", PropertyGrid);
-  app.component("svc-object-selector", ObjectSelector);
-  app.component("svc-search", Search);
-  app.component("svc-switcher", Switcher);
+  ComponentFactory.Instance.registerComponent(
+    "svc-property-grid",
+    PropertyGrid
+  );
+  ComponentFactory.Instance.registerComponent(
+    "svc-object-selector",
+    ObjectSelector
+  );
+  ComponentFactory.Instance.registerComponent("svc-search", Search);
+  ComponentFactory.Instance.registerComponent("svc-switcher", Switcher);
 
-  app.component("svc-action-button", ActionButton);
-  app.component("svc-question-error", QuestionError);
+  ComponentFactory.Instance.registerComponent(
+    "svc-action-button",
+    ActionButton
+  );
 
-  app.component("survey-embeddedsurvey", EmbeddedSurvey);
-  app.component("sv-logic-operator", LogicOperator);
-  app.component("survey-linkvalue", LinkValue);
+  ComponentFactory.Instance.registerComponent(
+    "survey-embeddedsurvey",
+    EmbeddedSurvey
+  );
+  ComponentFactory.Instance.registerComponent(
+    "sv-logic-operator",
+    LogicOperator
+  );
+  ComponentFactory.Instance.registerComponent("survey-linkvalue", LinkValue);
 
-  app.component("survey-color", Color);
-  app.component("color-item", ColorItem);
-  app.component("survey-fileedit", File);
-  app.component("survey-spinedit", SpinEditor);
-  app.component("survey-textwithreset", TextWithReset);
-  app.component("survey-commentwithreset", TextWithReset);
-  app.component("survey-widget", app._context.components["SurveyComponent"]);
-  app.component("survey-simulator", Simulator);
-  app.component("svc-tab-test", Test);
-  app.component("svc-complete-page", TestAgain);
-  app.component("survey-results", SurveyResults);
-  app.component("survey-results-table-row", SurveyResultsRow);
+  ComponentFactory.Instance.registerComponent("survey-color", Color);
+  ComponentFactory.Instance.registerComponent("color-item", ColorItem);
+  ComponentFactory.Instance.registerComponent("survey-fileedit", File);
+  ComponentFactory.Instance.registerComponent("survey-spinedit", SpinEditor);
+  ComponentFactory.Instance.registerComponent(
+    "survey-textwithreset",
+    TextWithReset
+  );
+  ComponentFactory.Instance.registerComponent(
+    "survey-commentwithreset",
+    TextWithReset
+  );
+  ComponentFactory.Instance.registerComponent("survey-widget", SurveyComponent);
+  ComponentFactory.Instance.registerComponent("survey-simulator", Simulator);
+  ComponentFactory.Instance.registerComponent("svc-tab-test", Test);
+  ComponentFactory.Instance.registerComponent("svc-complete-page", TestAgain);
+  ComponentFactory.Instance.registerComponent("survey-results", SurveyResults);
+  ComponentFactory.Instance.registerComponent(
+    "survey-results-table-row",
+    SurveyResultsRow
+  );
 
-  app.component("json-error-item", JsonEditorErrorItem);
-  app.component("svc-tab-json-editor-textarea", JsonEditorTextArea);
-  app.component("svc-tab-json-editor-ace", JsonEditorAce);
+  ComponentFactory.Instance.registerComponent(
+    "json-error-item",
+    JsonEditorErrorItem
+  );
+  ComponentFactory.Instance.registerComponent(
+    "svc-tab-json-editor-textarea",
+    JsonEditorTextArea
+  );
+  ComponentFactory.Instance.registerComponent(
+    "svc-tab-json-editor-ace",
+    JsonEditorAce
+  );
 
-  app.component("svc-tab-translation", Translation);
-  app.component("sd-translation-line-skeleton", TranslationLineSkeleton);
-  app.component("svc-translate-from-action", TranslateFromAction);
+  ComponentFactory.Instance.registerComponent(
+    "svc-tab-translation",
+    Translation
+  );
+  ComponentFactory.Instance.registerComponent(
+    "sd-translation-line-skeleton",
+    TranslationLineSkeleton
+  );
+  ComponentFactory.Instance.registerComponent(
+    "svc-translate-from-action",
+    TranslateFromAction
+  );
 
-  app.component("svc-tab-logic", Logic);
+  ComponentFactory.Instance.registerComponent("svc-tab-logic", Logic);
 
-  app.component("svc-tab-theme", Theme);
+  ComponentFactory.Instance.registerComponent("svc-tab-theme", Theme);
 
-  app.component("svc-adaptive-toolbox", AdaptiveToolbox);
-  app.component("svc-toolbox", Toolbox);
-  app.component("svc-toolbox-list", ToolboxList);
-  app.component("svc-toolbox-category", ToolboxCategory);
-  app.component("svc-toolbox-tool", ToolboxTool);
-  app.component("svc-toolbox-item", ToolboxItem);
-  app.component("svc-toolbox-item-group", ToolboxItemGroup);
+  ComponentFactory.Instance.registerComponent(
+    "svc-adaptive-toolbox",
+    AdaptiveToolbox
+  );
+  ComponentFactory.Instance.registerComponent("svc-toolbox", Toolbox);
+  ComponentFactory.Instance.registerComponent("svc-toolbox-list", ToolboxList);
+  ComponentFactory.Instance.registerComponent(
+    "svc-toolbox-category",
+    ToolboxCategory
+  );
+  ComponentFactory.Instance.registerComponent("svc-toolbox-tool", ToolboxTool);
+  ComponentFactory.Instance.registerComponent("svc-toolbox-item", ToolboxItem);
+  ComponentFactory.Instance.registerComponent(
+    "svc-toolbox-item-group",
+    ToolboxItemGroup
+  );
 
-  app.component(editableStringRendererName, StringEditor);
+  ComponentFactory.Instance.registerComponent(
+    editableStringRendererName,
+    StringEditor
+  );
 
-  app.component("svc-tab-designer", Designer);
-  app.component("svc-page-navigator", PageNavigator);
-  app.component("svc-page-navigator-item", PageNavigatorItem);
-  app.component("svc-page", Page);
-  app.component("svc-row", Row);
-  app.component("svc-add-new-question-btn", PageAddQuestion);
-  app.component("svc-question", QuestionAdorner);
-  app.component("svc-rating-question", QuestionAdorner);
-  app.component("svc-rating-question-content", RatingAdorner);
-  app.component("svc-image-question", QuestionImageAdorner);
-  app.component("svc-image-question-adorner", ImageAdorner);
-  app.component("svc-matrix-cell", MatrixCell);
-  app.component("svc-cell-question", CellQuestion);
-  app.component("svc-cell-dropdown-question", CellQuestionDropdownVue);
-  app.component("svc-question-editor-content", QuestionEditor);
-  app.component("svc-logo-image", Logo);
-  app.component("svc-panel", Panel);
-  app.component("svc-item-value", ItemValue);
-  app.component("svc-image-item-value", ImageItemValue);
-  app.component("svc-dropdown-question", QuestionDropdown);
-  app.component("svc-dropdown-question-adorner", Dropdown);
-  app.component("svc-widget-question", CustomWidget);
-  app.component("svc-question-banner", QuestionBanner);
+  ComponentFactory.Instance.registerComponent("svc-tab-designer", Designer);
+  ComponentFactory.Instance.registerComponent(
+    "svc-page-navigator",
+    PageNavigator
+  );
+  ComponentFactory.Instance.registerComponent(
+    "svc-page-navigator-item",
+    PageNavigatorItem
+  );
+  ComponentFactory.Instance.registerComponent("svc-page", Page);
+  ComponentFactory.Instance.registerComponent("svc-row", Row);
+  ComponentFactory.Instance.registerComponent(
+    "svc-add-new-question-btn",
+    PageAddQuestion
+  );
+  ComponentFactory.Instance.registerComponent("svc-question", QuestionAdorner);
+  ComponentFactory.Instance.registerComponent(
+    "svc-rating-question",
+    QuestionAdorner
+  );
+  ComponentFactory.Instance.registerComponent(
+    "svc-rating-question-content",
+    RatingAdorner
+  );
+  ComponentFactory.Instance.registerComponent(
+    "svc-image-question",
+    QuestionImageAdorner
+  );
+  ComponentFactory.Instance.registerComponent(
+    "svc-image-question-adorner",
+    ImageAdorner
+  );
+  ComponentFactory.Instance.registerComponent("svc-matrix-cell", MatrixCell);
+  ComponentFactory.Instance.registerComponent(
+    "svc-cell-question",
+    CellQuestion
+  );
+  ComponentFactory.Instance.registerComponent(
+    "svc-cell-dropdown-question",
+    CellQuestionDropdownVue
+  );
+  ComponentFactory.Instance.registerComponent(
+    "svc-question-editor-content",
+    QuestionEditor
+  );
+  ComponentFactory.Instance.registerComponent("svc-logo-image", Logo);
+  ComponentFactory.Instance.registerComponent("svc-panel", Panel);
+  ComponentFactory.Instance.registerComponent("svc-item-value", ItemValue);
+  ComponentFactory.Instance.registerComponent(
+    "svc-image-item-value",
+    ImageItemValue
+  );
+  ComponentFactory.Instance.registerComponent(
+    "svc-dropdown-question",
+    QuestionDropdown
+  );
+  ComponentFactory.Instance.registerComponent(
+    "svc-dropdown-question-adorner",
+    Dropdown
+  );
+  ComponentFactory.Instance.registerComponent(
+    "svc-widget-question",
+    CustomWidget
+  );
+  ComponentFactory.Instance.registerComponent(
+    "svc-question-banner",
+    QuestionBanner
+  );
 }
+registerComponents();
+
+export { SurveyCreatorComponent };
 
 export const surveyCreatorPlugin = {
-  install(app: any) {
-    registerComponents(app);
+  install(app: App) {
+    app.component("SurveyCreatorComponent", SurveyCreatorComponent);
   },
 };
