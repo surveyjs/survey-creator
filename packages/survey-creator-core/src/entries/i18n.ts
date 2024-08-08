@@ -1,5 +1,6 @@
 //localization
 import "../localization/arabic";
+import "../localization/bulgarian";
 import "../localization/croatian";
 import "../localization/czech";
 import "../localization/danish";
@@ -19,12 +20,13 @@ import "../localization/norwegian";
 import "../localization/persian";
 import "../localization/polish";
 import "../localization/portuguese";
+import "../localization/romanian";
 import "../localization/russian";
 import "../localization/simplified-chinese";
 import "../localization/slovak";
 import "../localization/spanish";
 import "../localization/swedish";
 import "../localization/tajik";
+import "../localization/thai";
 import "../localization/traditional-chinese";
 import "../localization/turkish";
-import "../localization/bulgarian";
