@@ -144,16 +144,15 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       css: "sv-action-bar-item--secondary sv-action-bar-item--collapse",
       iconName: new ComputedUpdater<string>(() => this.collapsed ? expandIcon : collapseIcon) as any,
       iconSize: 16,
-      visible: new ComputedUpdater<boolean>(() => this.allowExpandCollapse) as any,
       action: () => {
         this.collapsed = !this.collapsed;
       }
     };
-
     this.collapsed = !!surveyElement && (this.designerStateManager?.getElementState(surveyElement).collapsed);
     this.setSurveyElement(surveyElement);
     this.creator.sidebar.onPropertyChanged.add(this.sidebarFlyoutModeChangedFunc);
     this.setShowAddQuestionButton(true);
+    this.expandCollapseAction.visible = this.allowExpandCollapse;
   }
 
   protected detachElement(surveyElement: T): void {
@@ -210,7 +209,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   }
   protected updateElementAllowOptions(options: any, operationsAllow: boolean): void {
     this.allowDragging = operationsAllow && options.allowDragging;
-    this.allowExpandCollapse = this.creator.expandCollapseButtonVisibility != "never" && options.allowExpandCollapse;
+    this.allowExpandCollapse = this.creator.expandCollapseButtonVisibility != "never" && (options.allowExpandCollapse == undefined || !!options.allowExpandCollapse);
     this.allowEditOption = (options.allowEdit == undefined || !!options.allowEdit);
     this.updateActionVisibility("delete", operationsAllow && options.allowDelete);
     this.updateActionVisibility("duplicate", operationsAllow && options.allowCopy);

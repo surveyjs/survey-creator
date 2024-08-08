@@ -24,6 +24,7 @@ import {
   ComputedUpdater,
   PopupDropdownViewModel,
   Question,
+  SurveyElement,
 } from "survey-core";
 import { PageAdorner } from "../src/components/page";
 import { QuestionAdornerViewModel } from "../src/components/question";
@@ -2030,28 +2031,36 @@ test("PageAdorner and onElementAllowOperations, allowEdit", (): any => {
 });
 test("PageAdorner and onElementAllowOperations, allowExpandCollapse", (): any => {
   const creator = new CreatorTester();
+  creator.expandCollapseButtonVisibility = "onhover";
   creator.JSON = {
-    elements: [{ type: "text", name: "q1" }]
-  };
-  creator.survey.addNewPage("page2");
-  creator.onElementAllowOperations.add((sender, options) => {
-    let page = null;
-    if (options.obj.isPage) {
-      page = options.obj;
-    }
-    if (!!page) {
-      const isFirstPage = sender.survey.pages.indexOf(page) === 0;
-      if (isFirstPage) {
-        options.allowExpandCollapse = false;
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          }
+        ]
+      },
+      {
+        "name": "page2",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question2"
+          }
+        ]
       }
-    }
+    ]
+  };
+  creator.onElementAllowOperations.add((sender, options) => {
+    options.allowExpandCollapse = (options.obj as SurveyElement).name == "page2";
   });
   const pageModel1 = new PageAdorner(creator, creator.survey.pages[0]);
   const pageModel2 = new PageAdorner(creator, creator.survey.pages[1]);
-  creator.selectElement(creator.survey.pages[0]);
-  expect(pageModel1.getActionById("collapse").visible).toBeFalsy();
-  creator.selectElement(creator.survey.pages[1]);
-  expect(pageModel2.getActionById("collapse").visible).toBeTruthy();
+  expect(pageModel1.actionContainer.getActionById("collapse").visible).toBeFalsy();
+  expect(pageModel2.actionContainer.getActionById("collapse").visible).toBeTruthy();
 });
 test("PageAdorner and creator readOnly", (): any => {
   const creator = new CreatorTester();
@@ -2122,10 +2131,11 @@ test("QuestionAdornerViewModel and onElementAllowOperations", (): any => {
 
 test("QuestionAdornerViewModel and onElementAllowOperations, allowExpandCollapse", (): any => {
   const creator = new CreatorTester();
+  creator.expandCollapseButtonVisibility = "onhover";
   creator.JSON = {
     elements: [
-      { type: "panel", name: "q1" },
-      { type: "panel", name: "q2" }
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" }
     ]
   };
   creator.survey.addNewPage("page2");
