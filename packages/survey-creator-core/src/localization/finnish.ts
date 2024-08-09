@@ -1,5 +1,3 @@
-// This dictionary contains 65 untranslated or inherited localization strings.
-// These strings are commented out. Uncomment and edit them if you want to add your translations.
 import { editorLocalization } from "survey-creator-core";
 
 export var fiStrings = {
@@ -415,6 +413,9 @@ export var fiStrings = {
     rateDescriptionLocation: "Otsikon tasaus",
     size: "Syöttökentän koko (merkkeinä)",
     cellErrorLocation: "Solun virhesanoman tasaus",
+    enabled: "Käytössä",
+    disabled: "Vammainen",
+    inherit: "Periä",
     apply: "Käytä",
     ok: "OK",
     save: "Tallenna",
@@ -662,6 +663,7 @@ export var fiStrings = {
     },
     focusOnFirstError: "Aseta kohdistus ensimmäiseen virheelliseen vastaukseen",
     checkErrorsMode: "Suorita vahvistus",
+    validateVisitedEmptyFields: "Vahvista tyhjät kentät, kun kohdistus on kadonnut",
     navigateToUrl: "Siirry URL-osoitteeseen",
     navigateToUrlOnCondition: "Dynaaminen URL-osoite",
     completedBeforeHtml: "Merkintä, joka osoittaa, onko käyttäjä jo täyttänyt tämän kyselyn",
@@ -1228,6 +1230,10 @@ export var fiStrings = {
     },
     panelbase: {
       questionTitleWidth: "Esimerkki: 200px"
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "Esimerkki: 30 %",
+      questionTitleWidth: "Esimerkki: 200px"
     }
   },
   pehelp: {
@@ -1380,6 +1386,7 @@ export var fiStrings = {
     allowResize: "Koonmuuttokahva (tai kahva) tulee näkyviin kulmaan, ja sitä vetämällä voit muuttaa syöttökentän kokoa.",
     maxTimeToFinish: "Sekunteina oleva aikaväli, jonka jälkeen kysely etenee automaattisesti Kiitos-sivulle.",
     maxTimeToFinishPage: "Sekunteina ilmaistu aikaväli, jonka jälkeen kysely siirtyy automaattisesti seuraavalle sivulle.",
+    validateVisitedEmptyFields: "Ota tämä asetus käyttöön, jos haluat käynnistää vahvistuksen, kun käyttäjä keskittyy tyhjään syöttökenttään ja poistuu siitä tekemättä muutoksia.",
     page: {
       maxTimeToFinish: "Sekunteina ilmaistu aikaväli, jonka jälkeen kysely siirtyy automaattisesti seuraavalle sivulle.",
       visibleIf: "Käytä taikasauvakuvaketta asettaaksesi ehdollisen säännön, joka määrittää sivun näkyvyyden.",
@@ -1442,6 +1449,7 @@ export var fiStrings = {
     filePlaceholder: "Käytetään, kun \"Lähdetyyppi\" on \"Paikalliset tiedostot\" tai kun kamera ei ole käytettävissä",
     photoPlaceholder: "Käytetään, kun \"Lähdetyyppi\" on \"Kamera\".",
     fileOrPhotoPlaceholder: "Käytetään, kun \"Lähdetyyppi\" on \"Paikalliset tiedostot tai kamera\".",
+    colCount: "Järjestää valintavaihtoehdot monisarakkeiseen asetteluun. Kun asetuksena on 0, asetukset näytetään yhdellä rivillä.",
     masksettings: {
       saveMaskedValue: "Valitse, haluatko tallentaa kyselyn tuloksiin kysymyksen arvon käyttämällä maskia."
     },
@@ -1461,17 +1469,21 @@ export var fiStrings = {
       suffix: "Yksi tai useampi symboli, joka näytetään arvon jälkeen."
     },
     theme: {
-      // isPanelless: "This setting applies only to questions outside of a panel.",
-      // primaryColor: "Sets a supplementary color that highlights key survey elements.",
-      // panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background.",
-      // questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background.",
-      // cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes.",
-      // "--sjs-general-backcolor-dim": "Sets the main background color of the survey."
+      isPanelless: "Tämä asetus koskee vain paneelin ulkopuolisia kysymyksiä.",
+      primaryColor: "Määrittää lisävärin, joka korostaa kyselyn tärkeimmät elementit.",
+      panelBackgroundTransparency: "Säätää paneelien ja kysymysruutujen läpinäkyvyyttä suhteessa kyselyn taustaan.",
+      questionBackgroundTransparency: "Säätää syöttöelementtien läpinäkyvyyttä suhteessa kyselyn taustaan.",
+      cornerRadius: "Asettaa kulmasäteen kaikille suorakaiteen muotoisille elementeille. Ota edistynyt tila käyttöön, jos haluat määrittää syöttöelementtien tai paneelien ja kysymysruutujen yksittäiset kulmasäteen arvot.",
+      "--sjs-general-backcolor-dim": "Määrittää kyselyn päätaustavärin."
     },
     header: {
-      // inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in.",
-      // textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels.",
-      // overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey."
+      inheritWidthFrom: "Sama kuin säilö -vaihtoehto säätää automaattisesti otsikon sisältöalueen leveyttä sopimaan HTML-elementtiin, johon kysely sijoitetaan.",
+      textAreaWidth: "Kyselyn otsikon ja kuvauksen sisältävän otsikkoalueen leveys pikseleinä mitattuna.",
+      overlapEnabled: "Suurentaa otsikon alaosan kyselyn yläosan päälle."
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "Hyväksyy arvot %.",
+      questionTitleWidth: "Hyväksyy arvot px."
     }
   },
   // Properties
@@ -1576,62 +1588,7 @@ export var fiStrings = {
     scaleColorMode: "Skaalaa väriä -tila",
     rateColorMode: "Arvioi väritila",
     copyDisplayValue: "Kopioi näyttöarvo",
-    // insensitive: "insensitive",
-    // state: "state",
-    // indent: "indent",
-    // titleLocation: "titleLocation",
-    // descriptionLocation: "descriptionLocation",
-    // hideNumber: "hideNumber",
-    // errorLocation: "errorLocation",
-    // isUnique: "isUnique",
-    // showInMultipleColumns: "showInMultipleColumns",
-    // totalAlignment: "totalAlignment",
-    // detailErrorLocation: "detailErrorLocation",
-    // inheritWidthFrom: "inheritWidthFrom",
-    // textAreaWidth: "textAreaWidth",
-    // textGlowEnabled: "textGlowEnabled",
-    // overlapEnabled: "overlapEnabled",
-    // backgroundImageOpacity: "backgroundImageOpacity",
-    // logoPositionX: "logoPositionX",
-    // logoPositionY: "logoPositionY",
-    // titlePositionX: "titlePositionX",
-    // titlePositionY: "titlePositionY",
-    // descriptionPositionX: "descriptionPositionX",
-    // descriptionPositionY: "descriptionPositionY",
-    // showNumber: "showNumber",
-    // progressBarInheritWidthFrom: "progressBarInheritWidthFrom",
-    // headerView: "headerView",
-    // choiceValuesFromQuestion: "choiceValuesFromQuestion",
-    // choiceTextsFromQuestion: "choiceTextsFromQuestion",
-    // refuseText: "refuseText",
-    // dontKnowText: "dontKnowText",
-    // cellComponent: "cellComponent",
-    // inputTextAlignment: "inputTextAlignment",
-    // maskSettings: "maskSettings",
-    // itemErrorLocation: "itemErrorLocation",
-    // signatureWidth: "signatureWidth",
-    // signatureHeight: "signatureHeight",
-    // signatureAutoScaleEnabled: "signatureAutoScaleEnabled",
-    // penMinWidth: "penMinWidth",
-    // penMaxWidth: "penMaxWidth",
-    // showPlaceholder: "showPlaceholder",
-    // placeholderReadOnly: "placeholderReadOnly",
-    // templateTitle: "templateTitle",
-    // templateTabTitle: "templateTabTitle",
-    // tabTitlePlaceholder: "tabTitlePlaceholder",
-    // templateDescription: "templateDescription",
-    // noEntriesText: "noEntriesText",
-    // newPanelPosition: "newPanelPosition",
-    // templateTitleLocation: "templateTitleLocation",
-    // templateErrorLocation: "templateErrorLocation",
-    // templateVisibleIf: "templateVisibleIf",
-    // saveMaskedValue: "saveMaskedValue",
-    // pattern: "pattern",
-    // allowNegativeValues: "allowNegativeValues",
-    // decimalSeparator: "decimalSeparator",
-    // thousandsSeparator: "thousandsSeparator",
-    // prefix: "prefix",
-    // suffix: "suffix"
+    effectiveColSpan: "Sarakkeen jänneväli"
   },
   theme: {
     advancedMode: "Edistynyt tila",
@@ -2746,3 +2703,23 @@ editorLocalization.locales["fi"] = fiStrings;
 // page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Määrittää kysymysten otsikoiden tasaisen leveyden, kun ne tasataan kysymysruutujen vasemmalle puolelle. Hyväksyy CSS-arvot (px, %, in, pt jne.)."
 // pe.commentAreaRows: "Comment area height (in lines)" => "Kommenttialueen korkeus (riveinä)"
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "Määrittää tekstialueilla näytettävien rivien määrän kysymyskommentteja varten. Tulossa vie enemmän rivejä, vierityspalkki tulee näkyviin."
+// pe.enabled: "Enabled" => "Käytössä"
+// pe.disabled: "Disabled" => "Vammainen"
+// pe.inherit: "Inherit" => "Periä"
+// pe.validateVisitedEmptyFields: "Validate empty fields on lost focus" => "Vahvista tyhjät kentät, kun kohdistus on kadonnut"
+// panellayoutcolumn.effectiveWidth: "Ex.: 30%" => "Esimerkki: 30 %"
+// panellayoutcolumn.questionTitleWidth: "Ex.: 200px" => "Esimerkki: 200px"
+// pehelp.validateVisitedEmptyFields: "Enable this option to trigger validation when a user focuses on an empty input field and then leaves it without making any changes." => "Ota tämä asetus käyttöön, jos haluat käynnistää vahvistuksen, kun käyttäjä keskittyy tyhjään syöttökenttään ja poistuu siitä tekemättä muutoksia."
+// pehelp.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line." => "Järjestää valintavaihtoehdot monisarakkeiseen asetteluun. Kun asetuksena on 0, asetukset näytetään yhdellä rivillä."
+// theme.isPanelless: "This setting applies only to questions outside of a panel." => "Tämä asetus koskee vain paneelin ulkopuolisia kysymyksiä."
+// theme.primaryColor: "Sets a supplementary color that highlights key survey elements." => "Määrittää lisävärin, joka korostaa kyselyn tärkeimmät elementit."
+// theme.panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background." => "Säätää paneelien ja kysymysruutujen läpinäkyvyyttä suhteessa kyselyn taustaan."
+// theme.questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background." => "Säätää syöttöelementtien läpinäkyvyyttä suhteessa kyselyn taustaan."
+// theme.cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes." => "Asettaa kulmasäteen kaikille suorakaiteen muotoisille elementeille. Ota edistynyt tila käyttöön, jos haluat määrittää syöttöelementtien tai paneelien ja kysymysruutujen yksittäiset kulmasäteen arvot."
+// theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "Määrittää kyselyn päätaustavärin."
+// header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "Sama kuin säilö -vaihtoehto säätää automaattisesti otsikon sisältöalueen leveyttä sopimaan HTML-elementtiin, johon kysely sijoitetaan."
+// header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "Kyselyn otsikon ja kuvauksen sisältävän otsikkoalueen leveys pikseleinä mitattuna."
+// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "Suurentaa otsikon alaosan kyselyn yläosan päälle."
+// panellayoutcolumn.effectiveWidth: "Accepts values %." => "Hyväksyy arvot %."
+// panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Hyväksyy arvot px."
+// p.effectiveColSpan: "Column span" => "Sarakkeen jänneväli"

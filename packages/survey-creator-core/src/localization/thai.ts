@@ -1,5 +1,3 @@
-// Uncomment the line below if you create a custom dictionary
-// This dictionary was created by translating the default dictionary to Thai using GTP4o.
 import { editorLocalization } from "survey-creator-core";
 
 export const thStrings = {
@@ -17,7 +15,6 @@ export const thStrings = {
     deleteQuestion: "ลบคำถาม",
     convertTo: "แปลงเป็น",
     drag: "ลากองค์ประกอบ",
-    license: "ในการใช้ห้องสมุดของเรา จำเป็นต้องมี <a href='https://surveyjs.io/licensing'>ใบอนุญาตนักพัฒนา</a> หากคุณมีใบอนุญาตที่ใช้งานอยู่ <a href='https://surveyjs.io/remove-alert-banner'>ตั้งค่าคีย์ใบอนุญาตของคุณ</a> และตรวจสอบให้แน่ใจว่าคุณกำลังใช้เวอร์ชันล่าสุด"
   },
   // Creator tabs
   tabs: {
@@ -184,7 +181,7 @@ export const thStrings = {
     panelPlaceHolderMobile: "คลิกปุ่ม \"เพิ่มคำถาม\" ด้านล่างเพื่อเพิ่มองค์ประกอบใหม่ลงในแผง",
     imagePlaceHolderMobile: "คลิกปุ่มด้านล่างและเลือกภาพที่จะอัปโหลด",
     imageChooseImage: "เลือกภาพ",
-    addNewTypeQuestion: "เพิ่ม {0}", //{0} คือประเภทคำถามที่แปลได้
+    addNewTypeQuestion: "เพิ่ม {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[โลโก้]",
     choices_Item: "รายการ ",
     selectFile: "เลือกไฟล์",
@@ -226,29 +223,29 @@ export const thStrings = {
       trigger_skipDescription: "เมื่อการแสดงผลตรรกะเป็นจริง แบบสำรวจจะมุ่งเน้น/ข้ามไปยังคำถามที่เลือก",
       trigger_runExpressionDescription: "เมื่อการแสดงผลตรรกะเป็นจริง แบบสำรวจจะประเมินนิพจน์อื่น เป็นทางเลือก ผลลัพธ์ของนิพจน์หลังสามารถกำหนดเป็นค่าของคำถามที่เลือกได้",
       completedHtmlOnConditionDescription: "หากนิพจน์ตรรกะเป็นจริง หน้าขอบคุณจะแสดงเนื้อหาที่ระบุ",
-      itemExpressionText: "เมื่อนิพจน์: '{0}' เป็นจริง", //{0} - นิพจน์
+      itemExpressionText: "เมื่อนิพจน์: '{0}' เป็นจริง", //{0} - the expression
       itemEmptyExpressionText: "กฎใหม่",
-      page_visibilityText: "ทำให้หน้า {0} แสดง", //{0} ชื่อหน้า
-      panel_visibilityText: "ทำให้แผง {0} แสดง", //{0} ชื่อแผง
-      panel_enableText: "ทำให้แผง {0} เปิดใช้งาน", //{0} ชื่อแผง
-      question_visibilityText: "ทำให้คำถาม {0} แสดง", //{0} ชื่อคำถาม
-      question_enableText: "ทำให้คำถาม {0} เปิดใช้งาน", //{0} ชื่อคำถาม
-      question_requireText: "ทำให้คำถาม {0} จำเป็น", //{0} ชื่อคำถาม
-      question_resetValueText: "รีเซ็ตค่าคำถาม: {0}", //{0} ชื่อคำถาม
-      question_setValueText: "กำหนดค่า: {1} ให้คำถาม: {0}", //{0} ชื่อคำถามและ {1} setValueExpression
-      column_visibilityText: "ทำให้คอลัมน์ {0} ของคำถาม {1} แสดง", //{0} ชื่อคอลัมน์, {1} ชื่อคำถาม
-      column_enableText: "ทำให้คอลัมน์ {0} ของคำถาม {1} เปิดใช้งาน", //{0} ชื่อคอลัมน์, {1} ชื่อคำถาม
-      column_requireText: "ทำให้คอลัมน์ {0} ของคำถาม {1} จำเป็น", //{0} ชื่อคอลัมน์, {1} ชื่อคำถาม
-      column_resetValueText: "รีเซ็ตค่าคอลัมน์: {0}", //{0} ชื่อคอลัมน์
-      column_setValueText: "กำหนดค่าคอลัมน์: {1} ให้คอลัมน์: {0}", //{0} ชื่อคอลัมน์และ {1} setValueExpression
+      page_visibilityText: "ทำให้หน้า {0} แสดง", //{0} page name
+      panel_visibilityText: "ทำให้แผง {0} แสดง", //{0} panel name
+      panel_enableText: "ทำให้แผง {0} เปิดใช้งาน", //{0} panel name
+      question_visibilityText: "ทำให้คำถาม {0} แสดง", //{0} question name
+      question_enableText: "ทำให้คำถาม {0} เปิดใช้งาน", //{0} question name
+      question_requireText: "ทำให้คำถาม {0} จำเป็น", //{0} question name
+      question_resetValueText: "รีเซ็ตค่าคำถาม: {0}", //{0} question name.
+      question_setValueText: "กำหนดค่า: {1} ให้คำถาม: {0}",
+      column_visibilityText: "ทำให้คอลัมน์ {0} ของคำถาม {1} แสดง", //{0} column name, {1} question name
+      column_enableText: "ทำให้คอลัมน์ {0} ของคำถาม {1} เปิดใช้งาน", //{0} column name, {1} question name
+      column_requireText: "ทำให้คอลัมน์ {0} ของคำถาม {1} จำเป็น", //{0} column name, {1} question name
+      column_resetValueText: "รีเซ็ตค่าคอลัมน์: {0}", //{0} column name
+      column_setValueText: "กำหนดค่าคอลัมน์: {1} ให้คอลัมน์: {0}", //{0} column name and {1} setValueExpression
       setValueExpressionPlaceholder: "นิพจน์ที่ผลลัพธ์จะถูกกำหนดให้กับคำถามเป้าหมาย",
       trigger_completeText: "แบบสำรวจเสร็จสิ้น",
-      trigger_setvalueText: "ตั้งค่าคำถาม: {0} ค่า {1}", //{0} ชื่อคำถาม, {1} setValue
-      trigger_setvalueEmptyText: "ล้างค่าคำถาม: {0}", //{0} ชื่อคำถาม
-      trigger_copyvalueText: "คัดลอกคำถาม: {0} ค่า จากคำถาม {1}", //{0} และ {1} ชื่อคำถาม
-      trigger_skipText: "แบบสำรวจข้ามไปยังคำถาม {0}", //{0} ชื่อคำถาม
-      trigger_runExpressionText1: "รันนิพจน์: '{0}'", //{0} นิพจน์
-      trigger_runExpressionText2: " และตั้งค่าผลลัพธ์ให้กับคำถาม: {0}", //{0} ชื่อคำถาม
+      trigger_setvalueText: "ตั้งค่าคำถาม: {0} ค่า {1}", //{0} question name, {1} setValue
+      trigger_setvalueEmptyText: "ล้างค่าคำถาม: {0}", //{0} question name
+      trigger_copyvalueText: "คัดลอกคำถาม: {0} ค่า จากคำถาม {1}", //{0} and {1} question names
+      trigger_skipText: "แบบสำรวจข้ามไปยังคำถาม {0}", //{0} question name
+      trigger_runExpressionText1: "รันนิพจน์: '{0}'", //{0} the expression
+      trigger_runExpressionText2: " และตั้งค่าผลลัพธ์ให้กับคำถาม: {0}", //{0} question name
       completedHtmlOnConditionText: "แสดงข้อความที่กำหนดเองสำหรับหน้าขอบคุณ",
       showAllQuestions: "คำถามทั้งหมด",
       showAllActionTypes: "การกระทำทั้งหมด",
@@ -666,6 +663,7 @@ export const thStrings = {
     },
     focusOnFirstError: "ตั้งโฟกัสที่คำตอบที่ไม่ถูกต้องแรก",
     checkErrorsMode: "รันการตรวจสอบ",
+    validateVisitedEmptyFields: "ตรวจสอบฟิลด์ว่างเมื่อเสียโฟกัส",
     navigateToUrl: "เปลี่ยนเส้นทางไปยังลิงก์ภายนอกหลังจากส่ง",
     navigateToUrlOnCondition: "ลิงก์ภายนอกแบบไดนามิก",
     completedBeforeHtml: "มาร์กอัปที่จะแสดงหากผู้ใช้กรอกแบบสำรวจนี้แล้ว",
@@ -881,8 +879,7 @@ export const thStrings = {
       questionTitle: "ฟอนต์ชื่อคำถาม",
       questionDescription: "ฟอนต์คำอธิบายคำถาม",
       editorFont: "ฟอนต์",
-      backgroundOpacity: "ความทึบ", // สตริงที่สร้างโดยอัตโนมัติ
-
+      backgroundOpacity: "ความทึบ",
       "--sjs-font-family": "ฟอนต์แบบสำรวจ",
       "--sjs-general-backcolor-dim": "สีพื้นหลัง",
       "--sjs-primary-backcolor": "สีพื้นหลังเน้น",
@@ -1154,8 +1151,8 @@ export const thStrings = {
       dark: "มืด"
     },
     isPanelless: {
-      false: "ค่าเริ่มต้น",
-      true: "ไม่มีแผง"
+      "false": "ค่าเริ่มต้น",
+      "true": "ไม่มีแผง"
     }
   },
   // Operators
@@ -1389,6 +1386,7 @@ export const thStrings = {
     allowResize: "ตัวเลือก \"สืบทอด\" จะใช้การตั้งค่าระดับแบบสำรวจ (ค่าเริ่มต้นคือ \"เปิดใช้งาน\")",
     maxTimeToFinish: "ช่วงเวลาที่กำหนดในวินาทีหลังจากนั้นแบบสำรวจจะเปลี่ยนไปยังหน้าขอบคุณโดยอัตโนมัติ",
     maxTimeToFinishPage: "ช่วงเวลาที่กำหนดในวินาทีหลังจากนั้นแบบสำรวจจะเปลี่ยนไปยังหน้าถัดไปโดยอัตโนมัติ ซ่อนปุ่มนำทาง \"ก่อนหน้า\"",
+    validateVisitedEmptyFields: "เปิดใช้งานตัวเลือกนี้เพื่อทริกเกอร์การตรวจสอบความถูกต้องเมื่อผู้ใช้มุ่งเน้นไปที่ฟิลด์อินพุตที่ว่างเปล่า แล้วปล่อยออกจากฟิลด์โดยไม่ทําการเปลี่ยนแปลงใดๆ",
     page: {
       maxTimeToFinish: "ช่วงเวลาที่กำหนดในวินาทีหลังจากนั้นแบบสำรวจจะเปลี่ยนไปยังหน้าถัดไปโดยอัตโนมัติ ซ่อนปุ่มนำทาง \"ก่อนหน้า\"",
       visibleIf: "ใช้ไอคอนไม้เท้าวิเศษเพื่อตั้งกฎเงื่อนไขที่กำหนดการมองเห็นของหน้า",
@@ -1590,7 +1588,7 @@ export const thStrings = {
     scaleColorMode: "โหมดสีไอคอนการให้คะแนน",
     rateColorMode: "โทนสีของสไมลี่",
     copyDisplayValue: "คัดลอกค่าที่แสดง",
-    effectiveColSpan: "การขยายคอลัมน์",
+    effectiveColSpan: "การขยายคอลัมน์"
   },
   theme: {
     advancedMode: "โหมดขั้นสูง",
@@ -1598,26 +1596,21 @@ export const thStrings = {
     questionTitle: "กล่องคำถาม",
     editorPanel: "องค์ประกอบป้อนข้อมูล",
     lines: "เส้น",
-
     primaryDefaultColor: "ค่าเริ่มต้น",
     primaryDarkColor: "เมื่อชี้เมาส์",
     primaryLightColor: "เมื่อเลือก",
     backgroundDimColor: "สีพื้นหลัง",
-
     cornerRadius: "รัศมีมุม",
     backcolor: "พื้นหลังค่าเริ่มต้น",
     hovercolor: "พื้นหลังเมื่อชี้เมาส์",
     borderDecoration: "การตกแต่งขอบ",
-
     fontColor: "สีฟอนต์",
     backgroundColor: "สีพื้นหลัง",
-
     primaryForecolor: "สีค่าเริ่มต้น",
     primaryForecolorLight: "สีเมื่อปิดใช้งาน",
     font: "ฟอนต์",
     borderDefault: "สีเข้ม",
     borderLight: "สีอ่อน",
-
     fontFamily: "ครอบครัวฟอนต์",
     fontWeightRegular: "ปกติ",
     fontWeightHeavy: "หนัก",
@@ -1626,7 +1619,6 @@ export const thStrings = {
     color: "สี",
     placeholderColor: "สีข้อความสำรอง",
     size: "ขนาด",
-
     opacity: "ความโปร่งใส",
     boxShadowX: "X",
     boxShadowY: "Y",
@@ -1635,7 +1627,6 @@ export const thStrings = {
     boxShadowSpread: "กระจาย",
     boxShadowDrop: "หล่น",
     boxShadowInner: "ภายใน",
-
     names: {
       default: "ค่าเริ่มต้น",
       sharp: "คม",
@@ -1661,3 +1652,7 @@ export const thStrings = {
 };
 
 editorLocalization.locales["th"] = thStrings;
+// The following strings have been translated by a machine translation service
+// Remove those strings that you have corrected manually
+// pe.validateVisitedEmptyFields: "Validate empty fields on lost focus" => "ตรวจสอบฟิลด์ว่างเมื่อเสียโฟกัส"
+// pehelp.validateVisitedEmptyFields: "Enable this option to trigger validation when a user focuses on an empty input field and then leaves it without making any changes." => "เปิดใช้งานตัวเลือกนี้เพื่อทริกเกอร์การตรวจสอบความถูกต้องเมื่อผู้ใช้มุ่งเน้นไปที่ฟิลด์อินพุตที่ว่างเปล่า แล้วปล่อยออกจากฟิลด์โดยไม่ทําการเปลี่ยนแปลงใดๆ"

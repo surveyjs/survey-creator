@@ -1,5 +1,3 @@
-// This dictionary contains 65 untranslated or inherited localization strings.
-// These strings are commented out. Uncomment and edit them if you want to add your translations.
 import { editorLocalization } from "survey-creator-core";
 
 export var danishStrings = {
@@ -415,6 +413,9 @@ export var danishStrings = {
     rateDescriptionLocation: "Justering af etiketter",
     size: "Inputfeltstørrelse (i tegn)",
     cellErrorLocation: "Justering af cellefejlmeddelelse",
+    enabled: "Aktiveret",
+    disabled: "Handicappet",
+    inherit: "Arve",
     apply: "Anvend",
     ok: "OK",
     save: "Spare",
@@ -662,6 +663,7 @@ export var danishStrings = {
     },
     focusOnFirstError: "Sæt fokus på det første ugyldige svar",
     checkErrorsMode: "Kør validering",
+    validateVisitedEmptyFields: "Validere tomme felter ved mistet fokus",
     navigateToUrl: "Naviger til URL",
     navigateToUrlOnCondition: "Dynamisk webadresse",
     completedBeforeHtml: "Markering for at vise, om brugeren allerede har udfyldt denne undersøgelse",
@@ -1228,6 +1230,10 @@ export var danishStrings = {
     },
     panelbase: {
       questionTitleWidth: "Eks.: 200px"
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "Eks.: 30%",
+      questionTitleWidth: "Eks.: 200px"
     }
   },
   pehelp: {
@@ -1380,6 +1386,7 @@ export var danishStrings = {
     allowResize: "Størrelseshåndtaget (eller grebet) vises i hjørnet og kan trækkes for at ændre størrelsen på indtastningsfeltet.",
     maxTimeToFinish: "Et tidsinterval i sekunder, hvorefter undersøgelsen automatisk går videre til siden Tak.",
     maxTimeToFinishPage: "Et tidsinterval i sekunder, hvorefter undersøgelsen automatisk går videre til næste side.",
+    validateVisitedEmptyFields: "Aktivér denne indstilling for at udløse validering, når en bruger fokuserer på et tomt inputfelt og derefter forlader det uden at foretage ændringer.",
     page: {
       maxTimeToFinish: "Et tidsinterval i sekunder, hvorefter undersøgelsen automatisk går videre til næste side.",
       visibleIf: "Brug tryllestavsikonet til at indstille en betinget regel, der bestemmer sidens synlighed.",
@@ -1442,6 +1449,7 @@ export var danishStrings = {
     filePlaceholder: "Gælder, når \"Kildetype\" er \"Lokale filer\", eller når kameraet ikke er tilgængeligt",
     photoPlaceholder: "Gælder, når \"Kildetype\" er \"Kamera\".",
     fileOrPhotoPlaceholder: "Gælder, når \"Kildetype\" er \"Lokale filer eller kamera\".",
+    colCount: "Arrangerer valgmuligheder i et layout med flere kolonner. Når den er indstillet til 0, vises indstillingerne på en enkelt linje.",
     masksettings: {
       saveMaskedValue: "Vælg, om du vil gemme spørgsmålsværdien med en anvendt maske i undersøgelsesresultater."
     },
@@ -1461,17 +1469,21 @@ export var danishStrings = {
       suffix: "Et eller flere symboler, der skal vises efter værdien."
     },
     theme: {
-      // isPanelless: "This setting applies only to questions outside of a panel.",
-      // primaryColor: "Sets a supplementary color that highlights key survey elements.",
-      // panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background.",
-      // questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background.",
-      // cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes.",
-      // "--sjs-general-backcolor-dim": "Sets the main background color of the survey."
+      isPanelless: "Denne indstilling gælder kun for spørgsmål uden for et panel.",
+      primaryColor: "Indstiller en supplerende farve, der fremhæver vigtige undersøgelseselementer.",
+      panelBackgroundTransparency: "Justerer gennemsigtigheden af paneler og spørgsmålsfelter i forhold til undersøgelsesbaggrunden.",
+      questionBackgroundTransparency: "Justerer gennemsigtigheden af inputelementer i forhold til undersøgelsesbaggrunden.",
+      cornerRadius: "Indstiller hjørneradius for alle rektangulære elementer. Aktiver Avanceret tilstand, hvis du vil indstille individuelle hjørneradiusværdier for inputelementer eller paneler og spørgsmålsfelter.",
+      "--sjs-general-backcolor-dim": "Indstiller undersøgelsens primære baggrundsfarve."
     },
     header: {
-      // inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in.",
-      // textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels.",
-      // overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey."
+      inheritWidthFrom: "Indstillingen \"Samme som beholder\" justerer automatisk bredden på sidehovedindholdsområdet, så den passer ind i det HTML-element, som undersøgelsen er placeret i.",
+      textAreaWidth: "Bredden af det sidehovedområde, der indeholder undersøgelsens titel og beskrivelse, målt i pixel.",
+      overlapEnabled: "Gør bunden af sidehovedet overlejret med toppen af undersøgelsen."
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "Accepterer værdier %.",
+      questionTitleWidth: "Accepterer værdier px."
     }
   },
   // Properties
@@ -1576,62 +1588,7 @@ export var danishStrings = {
     scaleColorMode: "Skaler farvetilstand",
     rateColorMode: "Bedøm farvetilstand",
     copyDisplayValue: "Kopiér visningsværdi",
-    // insensitive: "insensitive",
-    // state: "state",
-    // indent: "indent",
-    // titleLocation: "titleLocation",
-    // descriptionLocation: "descriptionLocation",
-    // hideNumber: "hideNumber",
-    // errorLocation: "errorLocation",
-    // isUnique: "isUnique",
-    // showInMultipleColumns: "showInMultipleColumns",
-    // totalAlignment: "totalAlignment",
-    // detailErrorLocation: "detailErrorLocation",
-    // inheritWidthFrom: "inheritWidthFrom",
-    // textAreaWidth: "textAreaWidth",
-    // textGlowEnabled: "textGlowEnabled",
-    // overlapEnabled: "overlapEnabled",
-    // backgroundImageOpacity: "backgroundImageOpacity",
-    // logoPositionX: "logoPositionX",
-    // logoPositionY: "logoPositionY",
-    // titlePositionX: "titlePositionX",
-    // titlePositionY: "titlePositionY",
-    // descriptionPositionX: "descriptionPositionX",
-    // descriptionPositionY: "descriptionPositionY",
-    // showNumber: "showNumber",
-    // progressBarInheritWidthFrom: "progressBarInheritWidthFrom",
-    // headerView: "headerView",
-    // choiceValuesFromQuestion: "choiceValuesFromQuestion",
-    // choiceTextsFromQuestion: "choiceTextsFromQuestion",
-    // refuseText: "refuseText",
-    // dontKnowText: "dontKnowText",
-    // cellComponent: "cellComponent",
-    // inputTextAlignment: "inputTextAlignment",
-    // maskSettings: "maskSettings",
-    // itemErrorLocation: "itemErrorLocation",
-    // signatureWidth: "signatureWidth",
-    // signatureHeight: "signatureHeight",
-    // signatureAutoScaleEnabled: "signatureAutoScaleEnabled",
-    // penMinWidth: "penMinWidth",
-    // penMaxWidth: "penMaxWidth",
-    // showPlaceholder: "showPlaceholder",
-    // placeholderReadOnly: "placeholderReadOnly",
-    // templateTitle: "templateTitle",
-    // templateTabTitle: "templateTabTitle",
-    // tabTitlePlaceholder: "tabTitlePlaceholder",
-    // templateDescription: "templateDescription",
-    // noEntriesText: "noEntriesText",
-    // newPanelPosition: "newPanelPosition",
-    // templateTitleLocation: "templateTitleLocation",
-    // templateErrorLocation: "templateErrorLocation",
-    // templateVisibleIf: "templateVisibleIf",
-    // saveMaskedValue: "saveMaskedValue",
-    // pattern: "pattern",
-    // allowNegativeValues: "allowNegativeValues",
-    // decimalSeparator: "decimalSeparator",
-    // thousandsSeparator: "thousandsSeparator",
-    // prefix: "prefix",
-    // suffix: "suffix"
+    effectiveColSpan: "Søjlespænd"
   },
   theme: {
     advancedMode: "Avanceret tilstand",
@@ -2931,3 +2888,23 @@ editorLocalization.locales["da"] = danishStrings;
 // page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Angiver ensartet bredde for spørgsmålstitler, når de er justeret til venstre for deres spørgsmålsbokse. Accepterer CSS-værdier (px, %, in, pt osv.)."
 // pe.commentAreaRows: "Comment area height (in lines)" => "Højde på kommentarområdet (i linjer)"
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "Angiver antallet af viste linjer i tekstområder for spørgsmålskommentarer. I indgangen optager flere linjer, rullepanelet vises."
+// pe.enabled: "Enabled" => "Aktiveret"
+// pe.disabled: "Disabled" => "Handicappet"
+// pe.inherit: "Inherit" => "Arve"
+// pe.validateVisitedEmptyFields: "Validate empty fields on lost focus" => "Validere tomme felter ved mistet fokus"
+// panellayoutcolumn.effectiveWidth: "Ex.: 30%" => "Eks.: 30%"
+// panellayoutcolumn.questionTitleWidth: "Ex.: 200px" => "Eks.: 200px"
+// pehelp.validateVisitedEmptyFields: "Enable this option to trigger validation when a user focuses on an empty input field and then leaves it without making any changes." => "Aktivér denne indstilling for at udløse validering, når en bruger fokuserer på et tomt inputfelt og derefter forlader det uden at foretage ændringer."
+// pehelp.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line." => "Arrangerer valgmuligheder i et layout med flere kolonner. Når den er indstillet til 0, vises indstillingerne på en enkelt linje."
+// theme.isPanelless: "This setting applies only to questions outside of a panel." => "Denne indstilling gælder kun for spørgsmål uden for et panel."
+// theme.primaryColor: "Sets a supplementary color that highlights key survey elements." => "Indstiller en supplerende farve, der fremhæver vigtige undersøgelseselementer."
+// theme.panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background." => "Justerer gennemsigtigheden af paneler og spørgsmålsfelter i forhold til undersøgelsesbaggrunden."
+// theme.questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background." => "Justerer gennemsigtigheden af inputelementer i forhold til undersøgelsesbaggrunden."
+// theme.cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes." => "Indstiller hjørneradius for alle rektangulære elementer. Aktiver Avanceret tilstand, hvis du vil indstille individuelle hjørneradiusværdier for inputelementer eller paneler og spørgsmålsfelter."
+// theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "Indstiller undersøgelsens primære baggrundsfarve."
+// header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "Indstillingen \"Samme som beholder\" justerer automatisk bredden på sidehovedindholdsområdet, så den passer ind i det HTML-element, som undersøgelsen er placeret i."
+// header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "Bredden af det sidehovedområde, der indeholder undersøgelsens titel og beskrivelse, målt i pixel."
+// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "Gør bunden af sidehovedet overlejret med toppen af undersøgelsen."
+// panellayoutcolumn.effectiveWidth: "Accepts values %." => "Accepterer værdier %."
+// panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Accepterer værdier px."
+// p.effectiveColSpan: "Column span" => "Søjlespænd"

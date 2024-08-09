@@ -1,5 +1,3 @@
-// This dictionary contains 65 untranslated or inherited localization strings.
-// These strings are commented out. Uncomment and edit them if you want to add your translations.
 import { editorLocalization, defaultStrings } from "survey-creator-core";
 
 export var koreanStrings = {
@@ -415,6 +413,9 @@ export var koreanStrings = {
     rateDescriptionLocation: "레이블 정렬",
     size: "입력 필드 크기(문자)",
     cellErrorLocation: "셀 오류 메시지 맞춤",
+    enabled: "사용",
+    disabled: "비활성화",
+    inherit: "물려받다",
     apply: "적용",
     ok: "확인",
     save: "구해내다",
@@ -662,6 +663,7 @@ export var koreanStrings = {
     },
     focusOnFirstError: "첫 번째 오답에 포커스 설정",
     checkErrorsMode: "유효성 검사 실행",
+    validateVisitedEmptyFields: "초점이 손실된 빈 필드 유효성 검사",
     navigateToUrl: "URL로 이동합니다.",
     navigateToUrlOnCondition: "동적 URL",
     completedBeforeHtml: "사용자가 이미 이 설문조사를 작성했는지 여부를 표시하는 마크업",
@@ -1228,6 +1230,10 @@ export var koreanStrings = {
     },
     panelbase: {
       questionTitleWidth: "예: 200px"
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "예: 30%",
+      questionTitleWidth: "예: 200px"
     }
   },
   pehelp: {
@@ -1380,6 +1386,7 @@ export var koreanStrings = {
     allowResize: "크기 조정 핸들(또는 그립)이 모서리에 나타나며 드래그하여 입력 필드의 크기를 변경할 수 있습니다.",
     maxTimeToFinish: "설문조사가 감사 인사 페이지로 자동 전환되기까지의 시간 간격(초)입니다.",
     maxTimeToFinishPage: "설문조사가 다음 페이지로 자동 넘어가는 시간 간격(초)입니다.",
+    validateVisitedEmptyFields: "이 옵션을 사용하면 사용자가 빈 입력 필드에 집중한 다음 변경하지 않고 떠날 때 유효성 검사를 트리거합니다.",
     page: {
       maxTimeToFinish: "설문조사가 다음 페이지로 자동 넘어가는 시간 간격(초)입니다.",
       visibleIf: "마술 지팡이 아이콘을 사용하여 페이지 표시 여부를 결정하는 조건부 규칙을 설정할 수 있습니다.",
@@ -1442,6 +1449,7 @@ export var koreanStrings = {
     filePlaceholder: "\"소스 유형\"이 \"로컬 파일\"이거나 카메라를 사용할 수 없는 경우에 적용됩니다.",
     photoPlaceholder: "\"소스 유형\"이 \"카메라\"인 경우에 적용됩니다.",
     fileOrPhotoPlaceholder: "\"소스 유형\"이 \"로컬 파일 또는 카메라\"인 경우에 적용됩니다.",
+    colCount: "선택 옵션을 다중 열 레이아웃으로 정렬합니다. 0으로 설정하면 옵션이 한 줄로 표시됩니다.",
     masksettings: {
       saveMaskedValue: "마스크가 적용된 질문 값을 현장조사 결과에 저장하려면 선택합니다."
     },
@@ -1461,17 +1469,21 @@ export var koreanStrings = {
       suffix: "값 뒤에 표시할 하나 또는 여러 개의 기호입니다."
     },
     theme: {
-      // isPanelless: "This setting applies only to questions outside of a panel.",
-      // primaryColor: "Sets a supplementary color that highlights key survey elements.",
-      // panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background.",
-      // questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background.",
-      // cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes.",
-      // "--sjs-general-backcolor-dim": "Sets the main background color of the survey."
+      isPanelless: "이 설정은 패널 외부의 질문에만 적용됩니다.",
+      primaryColor: "주요 측량 요소를 강조하는 보조 색상을 설정합니다.",
+      panelBackgroundTransparency: "설문조사 배경을 기준으로 패널과 질문 상자의 투명도를 조정합니다.",
+      questionBackgroundTransparency: "현장조사 배경에 상대적인 입력 요소의 투명도를 조정합니다.",
+      cornerRadius: "모든 직사각형 요소의 구석 반지름을 설정합니다. Advanced Mode(고급 모드)를 활성화하면 입력 요소 또는 패널 및 질문 상자에 대한 개별 모서리 반경 값을 설정할 수 있습니다.",
+      "--sjs-general-backcolor-dim": "현장조사의 기본 배경색을 설정합니다."
     },
     header: {
-      // inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in.",
-      // textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels.",
-      // overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey."
+      inheritWidthFrom: "\"컨테이너와 동일\" 옵션은 설문조사가 배치된 HTML 요소에 맞게 헤더 콘텐츠 영역 너비를 자동으로 조정합니다.",
+      textAreaWidth: "설문조사 제목과 설명이 포함된 헤더 영역의 너비로, 픽셀 단위로 측정됩니다.",
+      overlapEnabled: "헤더의 아래쪽을 현장조사의 위쪽과 겹쳐서 만듭니다."
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "% 값을 허용합니다.",
+      questionTitleWidth: "px 값을 허용합니다."
     }
   },
   // Properties
@@ -1576,62 +1588,7 @@ export var koreanStrings = {
     scaleColorMode: "스케일 컬러 모드",
     rateColorMode: "비율 색상 모드",
     copyDisplayValue: "표시 값 복사",
-    // insensitive: "insensitive",
-    // state: "state",
-    // indent: "indent",
-    // titleLocation: "titleLocation",
-    // descriptionLocation: "descriptionLocation",
-    // hideNumber: "hideNumber",
-    // errorLocation: "errorLocation",
-    // isUnique: "isUnique",
-    // showInMultipleColumns: "showInMultipleColumns",
-    // totalAlignment: "totalAlignment",
-    // detailErrorLocation: "detailErrorLocation",
-    // inheritWidthFrom: "inheritWidthFrom",
-    // textAreaWidth: "textAreaWidth",
-    // textGlowEnabled: "textGlowEnabled",
-    // overlapEnabled: "overlapEnabled",
-    // backgroundImageOpacity: "backgroundImageOpacity",
-    // logoPositionX: "logoPositionX",
-    // logoPositionY: "logoPositionY",
-    // titlePositionX: "titlePositionX",
-    // titlePositionY: "titlePositionY",
-    // descriptionPositionX: "descriptionPositionX",
-    // descriptionPositionY: "descriptionPositionY",
-    // showNumber: "showNumber",
-    // progressBarInheritWidthFrom: "progressBarInheritWidthFrom",
-    // headerView: "headerView",
-    // choiceValuesFromQuestion: "choiceValuesFromQuestion",
-    // choiceTextsFromQuestion: "choiceTextsFromQuestion",
-    // refuseText: "refuseText",
-    // dontKnowText: "dontKnowText",
-    // cellComponent: "cellComponent",
-    // inputTextAlignment: "inputTextAlignment",
-    // maskSettings: "maskSettings",
-    // itemErrorLocation: "itemErrorLocation",
-    // signatureWidth: "signatureWidth",
-    // signatureHeight: "signatureHeight",
-    // signatureAutoScaleEnabled: "signatureAutoScaleEnabled",
-    // penMinWidth: "penMinWidth",
-    // penMaxWidth: "penMaxWidth",
-    // showPlaceholder: "showPlaceholder",
-    // placeholderReadOnly: "placeholderReadOnly",
-    // templateTitle: "templateTitle",
-    // templateTabTitle: "templateTabTitle",
-    // tabTitlePlaceholder: "tabTitlePlaceholder",
-    // templateDescription: "templateDescription",
-    // noEntriesText: "noEntriesText",
-    // newPanelPosition: "newPanelPosition",
-    // templateTitleLocation: "templateTitleLocation",
-    // templateErrorLocation: "templateErrorLocation",
-    // templateVisibleIf: "templateVisibleIf",
-    // saveMaskedValue: "saveMaskedValue",
-    // pattern: "pattern",
-    // allowNegativeValues: "allowNegativeValues",
-    // decimalSeparator: "decimalSeparator",
-    // thousandsSeparator: "thousandsSeparator",
-    // prefix: "prefix",
-    // suffix: "suffix"
+    effectiveColSpan: "열 범위"
   },
   theme: {
     advancedMode: "어드밴스드 모드",
@@ -2950,3 +2907,23 @@ editorLocalization.locales["ko"] = koreanStrings;
 // page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "질문 제목이 질문 상자의 왼쪽에 정렬될 때 일관된 너비를 설정합니다. CSS 값(px, %, in, pt 등)을 허용합니다."
 // pe.commentAreaRows: "Comment area height (in lines)" => "주석 영역 높이(줄)"
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "질문 주석에 대해 텍스트 영역에 표시되는 줄 수를 설정합니다. 입력이 더 많은 줄을 차지하면 스크롤 막대가 나타납니다."
+// pe.enabled: "Enabled" => "사용"
+// pe.disabled: "Disabled" => "비활성화"
+// pe.inherit: "Inherit" => "물려받다"
+// pe.validateVisitedEmptyFields: "Validate empty fields on lost focus" => "초점이 손실된 빈 필드 유효성 검사"
+// panellayoutcolumn.effectiveWidth: "Ex.: 30%" => "예: 30%"
+// panellayoutcolumn.questionTitleWidth: "Ex.: 200px" => "예: 200px"
+// pehelp.validateVisitedEmptyFields: "Enable this option to trigger validation when a user focuses on an empty input field and then leaves it without making any changes." => "이 옵션을 사용하면 사용자가 빈 입력 필드에 집중한 다음 변경하지 않고 떠날 때 유효성 검사를 트리거합니다."
+// pehelp.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line." => "선택 옵션을 다중 열 레이아웃으로 정렬합니다. 0으로 설정하면 옵션이 한 줄로 표시됩니다."
+// theme.isPanelless: "This setting applies only to questions outside of a panel." => "이 설정은 패널 외부의 질문에만 적용됩니다."
+// theme.primaryColor: "Sets a supplementary color that highlights key survey elements." => "주요 측량 요소를 강조하는 보조 색상을 설정합니다."
+// theme.panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background." => "설문조사 배경을 기준으로 패널과 질문 상자의 투명도를 조정합니다."
+// theme.questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background." => "현장조사 배경에 상대적인 입력 요소의 투명도를 조정합니다."
+// theme.cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes." => "모든 직사각형 요소의 구석 반지름을 설정합니다. Advanced Mode(고급 모드)를 활성화하면 입력 요소 또는 패널 및 질문 상자에 대한 개별 모서리 반경 값을 설정할 수 있습니다."
+// theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "현장조사의 기본 배경색을 설정합니다."
+// header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "\"컨테이너와 동일\" 옵션은 설문조사가 배치된 HTML 요소에 맞게 헤더 콘텐츠 영역 너비를 자동으로 조정합니다."
+// header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "설문조사 제목과 설명이 포함된 헤더 영역의 너비로, 픽셀 단위로 측정됩니다."
+// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "헤더의 아래쪽을 현장조사의 위쪽과 겹쳐서 만듭니다."
+// panellayoutcolumn.effectiveWidth: "Accepts values %." => "% 값을 허용합니다."
+// panellayoutcolumn.questionTitleWidth: "Accepts values px." => "px 값을 허용합니다."
+// p.effectiveColSpan: "Column span" => "열 범위"

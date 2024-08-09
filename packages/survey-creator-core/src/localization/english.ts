@@ -665,6 +665,7 @@ export var enStrings = {
     },
     focusOnFirstError: "Set focus on the first invalid answer",
     checkErrorsMode: "Run validation",
+    validateVisitedEmptyFields: "Validate empty fields on lost focus",
     navigateToUrl: "Redirect to an external link after submission",
     navigateToUrlOnCondition: "Dynamic external link",
     completedBeforeHtml: "Markup to show if the user already filled out this survey",
@@ -1391,6 +1392,7 @@ export var enStrings = {
     allowResize: "The \"Inherit\" option applies a survey-level setting (\"Enabled\" by default).",
     maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the \"Thank You\" page.",
     maxTimeToFinishPage: "A time interval in seconds after which the survey auto-advances to the next page. Hides the \"Previous\" navigation button.",
+    validateVisitedEmptyFields: "Enable this option to trigger validation when a user focuses on an empty input field and then leaves it without making any changes.",
     page: {
       maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the next page. Hides the \"Previous\" navigation button.",
       // isRequired: "Prevents survey submission unless at least one nested question has an answer.",

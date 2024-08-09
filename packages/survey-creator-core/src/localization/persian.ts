@@ -1,5 +1,3 @@
-// This dictionary contains 65 untranslated or inherited localization strings.
-// These strings are commented out. Uncomment and edit them if you want to add your translations.
 import { editorLocalization } from "survey-creator-core";
 
 var persianStrings = {
@@ -415,6 +413,9 @@ var persianStrings = {
     rateDescriptionLocation: "تراز برچسب",
     size: "اندازه فیلد ورودی (در نویسه ها)",
     cellErrorLocation: "همراستاسازی پیام خطای سلولی",
+    enabled: "فعال",
+    disabled: "غیر فعال",
+    inherit: "به ارث ببرید",
     apply: "اعمال",
     ok: "تایید",
     save: "ذخیره",
@@ -662,6 +663,7 @@ var persianStrings = {
     },
     focusOnFirstError: "تنظیم تمرکز روی اولین پاسخ نامعتبر",
     checkErrorsMode: "اجرای اعتبارسنجی",
+    validateVisitedEmptyFields: "اعتبارسنجی فیلدهای خالی در فوکوس از دست رفته",
     navigateToUrl: "حرکت به نشانی وب",
     navigateToUrlOnCondition: "نشانی وب پویا",
     completedBeforeHtml: "نشانهگذاری برای نشان دادن اینکه ایا کاربر قبلا این بررسی را پر کرده است",
@@ -1228,6 +1230,10 @@ var persianStrings = {
     },
     panelbase: {
       questionTitleWidth: "سابق: 200 پیکسل"
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "مثال: 30٪",
+      questionTitleWidth: "مثال: 200 پیکسل"
     }
   },
   pehelp: {
@@ -1380,6 +1386,7 @@ var persianStrings = {
     allowResize: "دسته تغییر اندازه (یا گرفتن) در گوشه ظاهر می شود و می تواند برای تغییر اندازه میدان ورودی کشیده شود.",
     maxTimeToFinish: "یک فاصله زمانی در ثانیه که پس از ان نظرسنجی به طور خودکار به صفحه تشکر از شما پیش می رود.",
     maxTimeToFinishPage: "یک فاصله زمانی در ثانیه که پس از ان نظرسنجی به طور خودکار به صفحه بعدی پیش می رود.",
+    validateVisitedEmptyFields: "این گزینه را فعال کنید تا زمانی که کاربر روی یک فیلد ورودی خالی تمرکز می کند و سپس بدون ایجاد هیچ تغییری آن را ترک می کند، اعتبارسنجی را فعال کنید.",
     page: {
       maxTimeToFinish: "یک فاصله زمانی در ثانیه که پس از ان نظرسنجی به طور خودکار به صفحه بعدی پیش می رود.",
       visibleIf: "از نماد چوب جادویی برای تنظیم یک قانون شرطی استفاده کنید که دید صفحه را تعیین می کند.",
@@ -1442,6 +1449,7 @@ var persianStrings = {
     filePlaceholder: "اعمال می شود زمانی که \"نوع منبع\" است \"فایل های محلی\" و یا زمانی که دوربین در دسترس نیست",
     photoPlaceholder: "هنگامی که \"نوع منبع\" \"دوربین\" است، اعمال می شود.",
     fileOrPhotoPlaceholder: "زمانی اعمال می شود که \"نوع منبع\" \"فایل های محلی یا دوربین\" باشد.",
+    colCount: "گزینه های انتخاب را در یک طرح چند ستونی مرتب می کند. هنگامی که روی 0 تنظیم می شود، گزینه ها در یک خط نمایش داده می شوند.",
     masksettings: {
       saveMaskedValue: "انتخاب کنید که ایا می خواهید مقدار سؤال را با یک ماسک کاربردی در نتایج نظرسنجی ذخیره کنید."
     },
@@ -1461,17 +1469,21 @@ var persianStrings = {
       suffix: "یک یا چند نماد بعد از مقدار نمایش داده می شود."
     },
     theme: {
-      // isPanelless: "This setting applies only to questions outside of a panel.",
-      // primaryColor: "Sets a supplementary color that highlights key survey elements.",
-      // panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background.",
-      // questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background.",
-      // cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes.",
-      // "--sjs-general-backcolor-dim": "Sets the main background color of the survey."
+      isPanelless: "این تنظیم فقط برای سؤالات خارج از پانل اعمال می شود.",
+      primaryColor: "یک رنگ تکمیلی تنظیم می کند که عناصر کلیدی نظرسنجی را برجسته می کند.",
+      panelBackgroundTransparency: "شفافیت پانل ها و جعبه های سوال را نسبت به پیشینه نظرسنجی تنظیم می کند.",
+      questionBackgroundTransparency: "شفافیت عناصر ورودی را نسبت به پیشینه نظرسنجی تنظیم می کند.",
+      cornerRadius: "شعاع گوشه را برای همه عناصر مستطیلی تنظیم می کند. اگر می خواهید مقادیر شعاع گوشه جداگانه را برای عناصر ورودی یا پانل ها و جعبه های سؤال تنظیم کنید، حالت پیشرفته را فعال کنید.",
+      "--sjs-general-backcolor-dim": "رنگ پس زمینه اصلی نظرسنجی را تنظیم می کند."
     },
     header: {
-      // inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in.",
-      // textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels.",
-      // overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey."
+      inheritWidthFrom: "گزینه \"همان کانتینر\" به طور خودکار عرض ناحیه محتوای هدر را تنظیم می کند تا در عنصر HTML که نظرسنجی در آن قرار می گیرد قرار گیرد.",
+      textAreaWidth: "عرض ناحیه سرصفحه که حاوی عنوان و توضیحات نظرسنجی است که بر حسب پیکسل اندازه گیری می شود.",
+      overlapEnabled: "پایین سربرگ را با بالای نظرسنجی پوشانده می کند."
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "مقادیر را می پذیرد.",
+      questionTitleWidth: "مقادیر px را می پذیرد."
     }
   },
   // Properties
@@ -1576,62 +1588,7 @@ var persianStrings = {
     scaleColorMode: "مقیاس حالت رنگ",
     rateColorMode: "نرخ حالت رنگ",
     copyDisplayValue: "رونوشت مقدار نمایش",
-    // insensitive: "insensitive",
-    // state: "state",
-    // indent: "indent",
-    // titleLocation: "titleLocation",
-    // descriptionLocation: "descriptionLocation",
-    // hideNumber: "hideNumber",
-    // errorLocation: "errorLocation",
-    // isUnique: "isUnique",
-    // showInMultipleColumns: "showInMultipleColumns",
-    // totalAlignment: "totalAlignment",
-    // detailErrorLocation: "detailErrorLocation",
-    // inheritWidthFrom: "inheritWidthFrom",
-    // textAreaWidth: "textAreaWidth",
-    // textGlowEnabled: "textGlowEnabled",
-    // overlapEnabled: "overlapEnabled",
-    // backgroundImageOpacity: "backgroundImageOpacity",
-    // logoPositionX: "logoPositionX",
-    // logoPositionY: "logoPositionY",
-    // titlePositionX: "titlePositionX",
-    // titlePositionY: "titlePositionY",
-    // descriptionPositionX: "descriptionPositionX",
-    // descriptionPositionY: "descriptionPositionY",
-    // showNumber: "showNumber",
-    // progressBarInheritWidthFrom: "progressBarInheritWidthFrom",
-    // headerView: "headerView",
-    // choiceValuesFromQuestion: "choiceValuesFromQuestion",
-    // choiceTextsFromQuestion: "choiceTextsFromQuestion",
-    // refuseText: "refuseText",
-    // dontKnowText: "dontKnowText",
-    // cellComponent: "cellComponent",
-    // inputTextAlignment: "inputTextAlignment",
-    // maskSettings: "maskSettings",
-    // itemErrorLocation: "itemErrorLocation",
-    // signatureWidth: "signatureWidth",
-    // signatureHeight: "signatureHeight",
-    // signatureAutoScaleEnabled: "signatureAutoScaleEnabled",
-    // penMinWidth: "penMinWidth",
-    // penMaxWidth: "penMaxWidth",
-    // showPlaceholder: "showPlaceholder",
-    // placeholderReadOnly: "placeholderReadOnly",
-    // templateTitle: "templateTitle",
-    // templateTabTitle: "templateTabTitle",
-    // tabTitlePlaceholder: "tabTitlePlaceholder",
-    // templateDescription: "templateDescription",
-    // noEntriesText: "noEntriesText",
-    // newPanelPosition: "newPanelPosition",
-    // templateTitleLocation: "templateTitleLocation",
-    // templateErrorLocation: "templateErrorLocation",
-    // templateVisibleIf: "templateVisibleIf",
-    // saveMaskedValue: "saveMaskedValue",
-    // pattern: "pattern",
-    // allowNegativeValues: "allowNegativeValues",
-    // decimalSeparator: "decimalSeparator",
-    // thousandsSeparator: "thousandsSeparator",
-    // prefix: "prefix",
-    // suffix: "suffix"
+    effectiveColSpan: "دهانه ستون"
   },
   theme: {
     advancedMode: "حالت پیشرفته",
@@ -2701,3 +2658,23 @@ editorLocalization.locales["fa"] = persianStrings;
 // page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "عرض ثابت را برای عناوین سؤال تنظیم می کند وقتی که انها در سمت چپ جعبه های سوال خود قرار دارند. مقادیر CSS را می پذیرد (px، ٪، in، pt و غیره)."
 // pe.commentAreaRows: "Comment area height (in lines)" => "ارتفاع منطقه نظر (در خطوط)"
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "تعداد خطوط نمایش داده شده در ناحیههای متن را برای نظرات سؤال تنظیم میکند. در ورودی طول می کشد تا خطوط بیشتر، نوار اسکرول به نظر می رسد."
+// pe.enabled: "Enabled" => "فعال"
+// pe.disabled: "Disabled" => "غیر فعال"
+// pe.inherit: "Inherit" => "به ارث ببرید"
+// pe.validateVisitedEmptyFields: "Validate empty fields on lost focus" => "اعتبارسنجی فیلدهای خالی در فوکوس از دست رفته"
+// panellayoutcolumn.effectiveWidth: "Ex.: 30%" => "مثال: 30٪"
+// panellayoutcolumn.questionTitleWidth: "Ex.: 200px" => "مثال: 200 پیکسل"
+// pehelp.validateVisitedEmptyFields: "Enable this option to trigger validation when a user focuses on an empty input field and then leaves it without making any changes." => "این گزینه را فعال کنید تا زمانی که کاربر روی یک فیلد ورودی خالی تمرکز می کند و سپس بدون ایجاد هیچ تغییری آن را ترک می کند، اعتبارسنجی را فعال کنید."
+// pehelp.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line." => "گزینه های انتخاب را در یک طرح چند ستونی مرتب می کند. هنگامی که روی 0 تنظیم می شود، گزینه ها در یک خط نمایش داده می شوند."
+// theme.isPanelless: "This setting applies only to questions outside of a panel." => "این تنظیم فقط برای سؤالات خارج از پانل اعمال می شود."
+// theme.primaryColor: "Sets a supplementary color that highlights key survey elements." => "یک رنگ تکمیلی تنظیم می کند که عناصر کلیدی نظرسنجی را برجسته می کند."
+// theme.panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background." => "شفافیت پانل ها و جعبه های سوال را نسبت به پیشینه نظرسنجی تنظیم می کند."
+// theme.questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background." => "شفافیت عناصر ورودی را نسبت به پیشینه نظرسنجی تنظیم می کند."
+// theme.cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes." => "شعاع گوشه را برای همه عناصر مستطیلی تنظیم می کند. اگر می خواهید مقادیر شعاع گوشه جداگانه را برای عناصر ورودی یا پانل ها و جعبه های سؤال تنظیم کنید، حالت پیشرفته را فعال کنید."
+// theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "رنگ پس زمینه اصلی نظرسنجی را تنظیم می کند."
+// header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "گزینه \"همان کانتینر\" به طور خودکار عرض ناحیه محتوای هدر را تنظیم می کند تا در عنصر HTML که نظرسنجی در آن قرار می گیرد قرار گیرد."
+// header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "عرض ناحیه سرصفحه که حاوی عنوان و توضیحات نظرسنجی است که بر حسب پیکسل اندازه گیری می شود."
+// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "پایین سربرگ را با بالای نظرسنجی پوشانده می کند."
+// panellayoutcolumn.effectiveWidth: "Accepts values %." => "مقادیر را می پذیرد."
+// panellayoutcolumn.questionTitleWidth: "Accepts values px." => "مقادیر px را می پذیرد."
+// p.effectiveColSpan: "Column span" => "دهانه ستون"
