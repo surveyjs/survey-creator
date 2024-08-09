@@ -121,7 +121,7 @@ export interface ElementAllowOperationsEvent {
    */
   allowEdit: boolean;
   /**
-   * Allows users to collapse and expand survey element on the design surface.
+   * Allows users to collapse and expand the survey element on the design surface.
    */
   allowExpandCollapse: boolean;
   /**
