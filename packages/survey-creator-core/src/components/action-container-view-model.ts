@@ -89,14 +89,13 @@ export class SurveyElementActionContainer extends AdaptiveActionContainer {
 }
 
 export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> extends Base {
-  static expandOnDragTimeOut: number = 1000;
   public actionContainer: SurveyElementActionContainer;
   protected expandCollapseAction: IAction;
   protected designerStateManager: DesignerStateManager;
   @property({ defaultValue: true }) allowDragging: boolean;
 
   protected get dragInsideCollapsedContainer(): boolean {
-    return this.calculatedCollapsed && this.creator.dragDropSurveyElements.insideContainer;
+    return this.collapsed && this.creator.dragDropSurveyElements.insideContainer;
   }
 
   protected creatorDragStartHandler = () => {
@@ -109,13 +108,10 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this.collapsedByDrag = false;
   }
 
-  public calculateCollapsed() {
-    this.calculatedCollapsed = this.collapsedByDrag !== undefined ? this.collapsedByDrag : this.collapsed;
-  }
+  @property({ defaultValue: true }) allowExpandCollapse: boolean;
   @property({
     onSet: (val, target: SurveyElementAdornerBase<T>) => {
-      target.collapsedByDrag = false;
-      target.calculateCollapsed();
+      target.renderedCollapsed = val;
       if (target.designerStateManager && target.surveyElement) {
         target.designerStateManager.getElementState(target.surveyElement).collapsed = val;
       }
@@ -125,17 +121,6 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       }, 50);
     }
   }) collapsed: boolean;
-  @property({
-    onSet: (val, target: SurveyElementAdornerBase<T>) => {
-      target.renderedCollapsed = val;
-    }
-  }) calculatedCollapsed: boolean;
-  @property({
-    onSet: (val, target: SurveyElementAdornerBase<T>) => {
-      target.calculateCollapsed();
-    }
-  }) collapsedByDrag: boolean;
-
   @property() renderedCollapsed: boolean;
 
   private dragCollapsedTimer;
@@ -144,7 +129,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     if ((this.surveyElement.isPanel || this.surveyElement.isPage) && this.calculatedCollapsed) {
       this.dragCollapsedTimer = setTimeout(() => {
         this.expandWithDragIn();
-      }, SurveyElementAdornerBase.expandOnDragTimeOut);
+      }, this.creator.expandOnDragTimeOut);
     }
   }
   protected expandWithDragIn() {
@@ -156,7 +141,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   }
 
   public dblclick(event) {
-    if (this.creator.expandCollapseButtonVisibility != "never") this.collapsed = !this.collapsed;
+    if (this.allowExpandCollapse) this.collapsed = !this.collapsed;
     event.stopPropagation();
   }
   private allowEditOption: boolean;
@@ -200,11 +185,11 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
         this.collapsed = !this.collapsed;
       }
     };
-
     this.collapsed = !!surveyElement && (this.designerStateManager?.getElementState(surveyElement).collapsed);
     this.setSurveyElement(surveyElement);
     this.creator.sidebar.onPropertyChanged.add(this.sidebarFlyoutModeChangedFunc);
     this.setShowAddQuestionButton(true);
+    this.expandCollapseAction.visible = this.allowExpandCollapse;
   }
 
   protected detachElement(surveyElement: T): void {
@@ -261,6 +246,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   }
   protected updateElementAllowOptions(options: any, operationsAllow: boolean): void {
     this.allowDragging = operationsAllow && options.allowDragging;
+    this.allowExpandCollapse = this.creator.expandCollapseButtonVisibility != "never" && (options.allowExpandCollapse == undefined || !!options.allowExpandCollapse);
     this.allowEditOption = (options.allowEdit == undefined || !!options.allowEdit);
     this.updateActionVisibility("delete", operationsAllow && options.allowDelete);
     this.updateActionVisibility("duplicate", operationsAllow && options.allowCopy);

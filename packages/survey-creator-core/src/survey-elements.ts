@@ -179,10 +179,6 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     // drop to page
     let page: any = this.survey.getPageByName(dataAttributeValue);
     if (page) {
-      // if (page.elements.length !== 0) {
-      //   // TODO we can't drop on not empty page directly for now
-      //   return null;
-      // }
       return page;
     }
 

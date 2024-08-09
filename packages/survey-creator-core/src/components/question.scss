@@ -274,6 +274,7 @@ svc-question {
 }
 .svc-question__content--collapsed-drag-over-inside:not(.svc-question__content--dragged) {
   box-shadow: 0 0 0 2px $primary;
+  background: $primary-light;
   animation: collapsed-drag-over-inside-blinking 1s;
 }
 

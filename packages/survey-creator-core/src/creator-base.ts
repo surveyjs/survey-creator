@@ -3693,7 +3693,8 @@ export class SurveyCreatorModel extends Base
       allowChangeInputType: true,
       allowChangeRequired: true,
       allowShowSettings: undefined,
-      allowEdit: undefined
+      allowEdit: undefined,
+      allowExpandCollapse: undefined
     };
     this.onElementAllowOperations.fire(this, options);
     return options;
@@ -3803,6 +3804,8 @@ export class SurveyCreatorModel extends Base
   @property() collapsePagesOnDragStart?: boolean;
   @property() collapsePanelsOnDragStart?: boolean;
   @property() collapseQuestionsOnDragStart?: boolean;
+  expandOnDragTimeOut: number = 1000;
+
   selectFromStringEditor: boolean;
 
   @property({
