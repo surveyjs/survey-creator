@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { ReactQuestionFactory, SurveyQuestionElementBase } from "survey-react-ui";
 import { QuestionEmbeddedCreatorModel } from "creator-presets-core";
 import { SurveyCreatorComponent, SurveyCreator } from "survey-creator-react";

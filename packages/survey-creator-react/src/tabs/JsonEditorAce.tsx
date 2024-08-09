@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { Base } from "survey-core";
 import { ReactElementFactory, SurveyElementBase } from "survey-react-ui";
 import { AceJsonEditorModel } from "survey-creator-core";
@@ -27,7 +27,7 @@ export class TabJsonEditorAceComponent extends SurveyElementBase<
     this.model.init(ace.edit(this.aceEditorrRef.current as HTMLElement));
   }
   renderElement(): JSX.Element {
-    const errors = <TabJsonEditorErrorsComponent data={this.model}/>;
+    const errors = <TabJsonEditorErrorsComponent data={this.model} />;
     return (
       <div className="svc-creator-tab__content">
         <div className="svc-json-editor-tab__content">

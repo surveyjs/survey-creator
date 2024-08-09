@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { LocalizableString, Serializer, JsonObjectProperty, Base } from "survey-core";
 import { CharacterCounterComponent, ReactElementFactory, SurveyElementBase, SvgIcon } from "survey-react-ui";
 import { SurveyCreatorModel, StringEditorViewModelBase, editableStringRendererName } from "survey-creator-core";

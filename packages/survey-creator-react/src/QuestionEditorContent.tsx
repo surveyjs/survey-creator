@@ -1,7 +1,7 @@
 import { Base, Question, SurveyError, SurveyModel } from "survey-core";
 import { ISurveyCreator, ReactElementFactory, ReactQuestionFactory, SurveyQuestion } from "survey-react-ui";
 import { SurveyCreatorModel } from "survey-creator-core";
-import React from "react";
+import * as React from "react";
 
 interface IQuestionEditorContentComponentProps {
   creator: SurveyCreatorModel;

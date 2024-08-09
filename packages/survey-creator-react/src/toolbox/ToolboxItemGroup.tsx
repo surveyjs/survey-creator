@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { Base } from "survey-core";
 import { Popup, ReactElementFactory } from "survey-react-ui";
 import { CreatorModelElement } from "../ModelElement";

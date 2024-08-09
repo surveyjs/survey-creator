@@ -1,4 +1,5 @@
-import React, { Fragment } from "react";
+import { Fragment } from "react";
+import * as React from "react";
 import { Action, Base } from "survey-core";
 import { ReactElementFactory, SurveyElementBase, Survey, attachKey2click } from "survey-react-ui";
 import { SurveyLogicUI } from "survey-creator-core";

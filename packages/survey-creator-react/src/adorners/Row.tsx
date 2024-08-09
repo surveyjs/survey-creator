@@ -1,5 +1,5 @@
 import { RowViewModel } from "survey-creator-core";
-import React from "react";
+import * as React from "react";
 import { Base, QuestionRowModel } from "survey-core";
 import { ReactElementFactory } from "survey-react-ui";
 import { CreatorModelElement } from "../ModelElement";
