@@ -184,6 +184,9 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
         result += " svc-page--drag-over-empty-no-add-button";
       }
     }
+    if (!!this.dragTypeOverMe && this.collapsed) {
+      result += " svc-page__content--collapsed-drag-over-inside";
+    }
     if (this.isGhost) {
       return result + " svc-page__content--new";
     }

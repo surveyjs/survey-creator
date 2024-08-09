@@ -3801,6 +3801,8 @@ export class SurveyCreatorModel extends Base
    */
   @property({ defaultValue: "never" }) expandCollapseButtonVisibility?: "never" | "onhover" | "always";
 
+  expandOnDragTimeOut: number = 1000;
+
   selectFromStringEditor: boolean;
 
   @property({
