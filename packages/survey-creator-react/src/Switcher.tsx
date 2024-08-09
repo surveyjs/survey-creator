@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { Switcher } from "survey-creator-core";
 import { Base } from "survey-core";
 import { ReactElementFactory, attachKey2click, SurveyElementBase } from "survey-react-ui";

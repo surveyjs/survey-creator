@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { Base, Action } from "survey-core";
 import { ReactElementFactory, SurveyElementBase } from "survey-react-ui";
 import { SurveyLocStringEditor } from "survey-creator-react";
@@ -30,8 +30,8 @@ export class SurveyTextEditorAction extends SurveyElementBase<IActionBarItemProp
   }
   renderTextEditor() {
     const locTitle: any = this.item.innerItem.locTitle;
-    if(!locTitle || !locTitle.locStr || !locTitle.creator) return;
-    if(this.item.enabled) return <SurveyLocStringEditor locStr={locTitle} />;
+    if (!locTitle || !locTitle.locStr || !locTitle.creator) return;
+    if (this.item.enabled) return <SurveyLocStringEditor locStr={locTitle} />;
     return this.renderTextCore(this.item.locTitle.text);
   }
   private renderTextCore(text: string | undefined) {

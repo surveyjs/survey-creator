@@ -1,5 +1,5 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import * as React from "react";
+import * as ReactDOM from "react-dom";
 
 import {
   Base,
@@ -49,11 +49,11 @@ export class SurveyCreatorComponent extends SurveyElementBase<
 
   componentDidUpdate(prevProps: any, prevState: any): void {
     super.componentDidUpdate(prevProps, prevState);
-    if(this.creator !== prevProps.creator) {
-      if(prevProps.creator) {
+    if (this.creator !== prevProps.creator) {
+      if (prevProps.creator) {
         prevProps.creator.unsubscribeRootElement();
       }
-      if(this.creator && this.rootNode.current) {
+      if (this.creator && this.rootNode.current) {
         this.creator.setRootElement(this.rootNode.current);
       }
     }

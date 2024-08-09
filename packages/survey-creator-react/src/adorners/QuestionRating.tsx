@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { Base } from "survey-core";
 import { QuestionRatingAdornerViewModel } from "survey-creator-core";
 import { attachKey2click, ReactElementFactory, SvgIcon } from "survey-react-ui";

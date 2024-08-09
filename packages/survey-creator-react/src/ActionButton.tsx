@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { attachKey2click, SurveyElementBase, } from "survey-react-ui";
 
 export class ActionButton extends SurveyElementBase<any, any> {

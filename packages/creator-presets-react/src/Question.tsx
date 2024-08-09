@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { ReactElementFactory } from "survey-react-ui";
 import { QuestionAdornerComponent, QuestionAdornerComponentProps } from "survey-creator-react";
 import { QuestionAdornerViewModel } from "survey-creator-core";
