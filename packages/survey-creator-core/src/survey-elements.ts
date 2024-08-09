@@ -209,12 +209,12 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     }
 
     // drop to panel
-    else if (dropTarget.isPanel) {
-      const dragOverLocation = calculateDragOverLocation(event.clientX, event.clientY, dropTargetNode);
-      if (dragOverLocation === DragTypeOverMeEnum.InsideEmptyPanel) {
-        dropTarget = this.getPanelDropTarget(dropTargetNode, dropTarget, event);
-      }
-    }
+    // else if (dropTarget.isPanel) {
+    //   const dragOverLocation = calculateDragOverLocation(event.clientX, event.clientY, dropTargetNode);
+    //   if (dragOverLocation === DragTypeOverMeEnum.InsideEmptyPanel) {
+    //     dropTarget = this.getPanelDropTarget(dropTargetNode, dropTarget, event);
+    //   }
+    // }
     // drop to question
 
     //question inside paneldymanic
