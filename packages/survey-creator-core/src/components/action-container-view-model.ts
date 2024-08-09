@@ -96,7 +96,17 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   @property({ defaultValue: true }) allowDragging: boolean;
 
   protected get dragInsideCollapsedContainer(): boolean {
-    return this.collapsed && this.creator.dragDropSurveyElements.insideContainer;
+    return this.calculatedCollapsed && this.creator.dragDropSurveyElements.insideContainer;
+  }
+
+  protected creatorDragStartHandler = () => {
+    if (this.surveyElement.isPage) this.collapsedByDrag = this.creator.collapsePagesOnDragStart;
+    if (this.surveyElement.isPanel) this.collapsedByDrag = this.creator.collapsePanelsOnDragStart;
+    if (this.surveyElement.isQuestion) this.collapsedByDrag = this.creator.collapseQuestionsOnDragStart;
+  }
+
+  protected creatorDragEndHandler = () => {
+    this.collapsedByDrag = false;
   }
 
   public calculateCollapsed() {
@@ -104,6 +114,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   }
   @property({
     onSet: (val, target: SurveyElementAdornerBase<T>) => {
+      target.collapsedByDrag = false;
       target.calculateCollapsed();
       if (target.designerStateManager && target.surveyElement) {
         target.designerStateManager.getElementState(target.surveyElement).collapsed = val;
@@ -130,7 +141,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   private dragCollapsedTimer;
 
   protected dragIn() {
-    if ((this.surveyElement.isPanel || this.surveyElement.isPage) && this.collapsed) {
+    if ((this.surveyElement.isPanel || this.surveyElement.isPage) && this.calculatedCollapsed) {
       this.dragCollapsedTimer = setTimeout(() => {
         this.expandWithDragIn();
       }, SurveyElementAdornerBase.expandOnDragTimeOut);
@@ -157,6 +168,8 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     protected surveyElement: T
   ) {
     super();
+    this.creator.onDragStart.add(this.creatorDragStartHandler);
+    this.creator.onDragEnd.add(this.creatorDragEndHandler);
     this.designerStateManager = (creator.getPlugin("designer") as TabDesignerPlugin)?.designerStateManager;
     this.designerStateManager?.initForElement(surveyElement);
     this.selectedPropPageFunc = (sender: Base, options: any) => {
