@@ -238,10 +238,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     //this.updateActionsProperties();
     toggleHovered(event, element);
   }
-  public leave(event: MouseEvent, element: HTMLElement | any) {
-    this.dragOut();
-    this.hover(event, element);
-  }
   protected updateActionsProperties(): void {
     if (this.isDisposed) return;
     super.updateActionsProperties();
