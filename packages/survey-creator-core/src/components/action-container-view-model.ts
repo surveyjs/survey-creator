@@ -101,6 +101,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   @property({ defaultValue: true }) allowExpandCollapse: boolean;
   @property({
     onSet: (val, target: SurveyElementAdornerBase<T>) => {
+      target.renderedCollapsed = val;
       if (target.designerStateManager && target.surveyElement) {
         target.designerStateManager.getElementState(target.surveyElement).collapsed = val;
       }
