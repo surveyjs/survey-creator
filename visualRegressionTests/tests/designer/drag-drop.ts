@@ -631,7 +631,7 @@ test("Drag Drop to collapsed panel", async (t) => {
     await ClientFunction(() => {
       window["creator"].expandCollapseButtonVisibility = "onhover";
       window["creator"].expandOnDragTimeOut = 1000000;
-      document.head.insertAdjacentHTML("beforeend", "<style>* { animation: initial; }</style>");
+      document.head.insertAdjacentHTML("beforeend", "<style>*, ::after, ::before { animation: initial!important; }</style>");
     })();
 
     await t.resizeWindow(1600, 1000);
@@ -673,7 +673,7 @@ test("Drag Drop to collapsed page", async (t) => {
     await ClientFunction(() => {
       window["creator"].expandCollapseButtonVisibility = "onhover";
       window["creator"].expandOnDragTimeOut = 1000000;
-      document.head.insertAdjacentHTML("beforeend", "<style>* { animation: initial; }</style>");
+      document.head.insertAdjacentHTML("beforeend", "<style>*, ::after, ::before { animation: initial!important; }</style>");
     })();
 
     await t.resizeWindow(1600, 500);
