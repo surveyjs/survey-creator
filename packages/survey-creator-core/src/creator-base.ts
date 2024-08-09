@@ -3274,7 +3274,7 @@ export class SurveyCreatorModel extends Base
     keys.forEach(key => options[key] = editorOptions[key]);
     this.onSetPropertyEditorOptions.fire(this, options);
     this.onConfigureTablePropertyEditor.fire(this, options);
-    keys.forEach(key => editorOptions[key] = options[key]);
+    keys.forEach(key => editorOptions[key] = editorOptions[key] && options[key]);
   }
   onGetErrorTextOnValidationCallback(
     propertyName: string,

@@ -4520,13 +4520,22 @@ test("onSetPropertyEditorOptions -> onConfigureTablePropertyEditor", (): any => 
   };
   creator.onSetPropertyEditorOptionsCallback("choices", question, callBackOptions);
   expect(callBackOptions.allowBatchEdit).toBeTruthy();
+  let onSetPropertyEditorOptions_allowBatchEdit = false;
   creator.onSetPropertyEditorOptions.add((sender: any, options: ConfigureTablePropertyEditorEvent) => {
-    options.editorOptions.allowBatchEdit = false;
+    options.editorOptions.allowBatchEdit = onSetPropertyEditorOptions_allowBatchEdit;
   });
   creator.onSetPropertyEditorOptionsCallback("choices", question, callBackOptions);
   expect(callBackOptions.allowBatchEdit).toBeFalsy();
+  callBackOptions.allowBatchEdit = true;
+  onSetPropertyEditorOptions_allowBatchEdit = true;
+  let onConfigureTablePropertyEditor_allowBatchEdit = true;
   creator.onConfigureTablePropertyEditor.add((sender: any, options: ConfigureTablePropertyEditorEvent) => {
-    options.allowBatchEdit = true;
+    options.allowBatchEdit = onConfigureTablePropertyEditor_allowBatchEdit;
   });
+  creator.onSetPropertyEditorOptionsCallback("choices", question, callBackOptions);
   expect(callBackOptions.allowBatchEdit).toBeTruthy();
+
+  onSetPropertyEditorOptions_allowBatchEdit = false;
+  creator.onSetPropertyEditorOptionsCallback("choices", question, callBackOptions);
+  expect(callBackOptions.allowBatchEdit).toBeFalsy();
 });
