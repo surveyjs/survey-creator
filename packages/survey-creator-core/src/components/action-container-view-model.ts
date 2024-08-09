@@ -98,13 +98,9 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     return this.collapsed && this.creator.dragDropSurveyElements.insideContainer;
   }
 
-  public calculateCollapsed() {
-    this.calculatedCollapsed = this.collapsedByDrag !== undefined ? this.collapsedByDrag : this.collapsed;
-  }
   @property({ defaultValue: true }) allowExpandCollapse: boolean;
   @property({
     onSet: (val, target: SurveyElementAdornerBase<T>) => {
-      target.calculateCollapsed();
       if (target.designerStateManager && target.surveyElement) {
         target.designerStateManager.getElementState(target.surveyElement).collapsed = val;
       }
@@ -114,17 +110,6 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       }, 50);
     }
   }) collapsed: boolean;
-  @property({
-    onSet: (val, target: SurveyElementAdornerBase<T>) => {
-      target.renderedCollapsed = val;
-    }
-  }) calculatedCollapsed: boolean;
-  @property({
-    onSet: (val, target: SurveyElementAdornerBase<T>) => {
-      target.calculateCollapsed();
-    }
-  }) collapsedByDrag: boolean;
-
   @property() renderedCollapsed: boolean;
 
   private dragCollapsedTimer;
