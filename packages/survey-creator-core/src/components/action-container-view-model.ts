@@ -102,6 +102,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   public calculateCollapsed() {
     this.calculatedCollapsed = this.collapsedByDrag !== undefined ? this.collapsedByDrag : this.collapsed;
   }
+  @property({ defaultValue: true }) allowExpandCollapse: boolean;
   @property({
     onSet: (val, target: SurveyElementAdornerBase<T>) => {
       target.calculateCollapsed();
@@ -145,7 +146,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   }
 
   public dblclick(event) {
-    if (this.creator.expandCollapseButtonVisibility != "never") this.collapsed = !this.collapsed;
+    if (this.allowExpandCollapse) this.collapsed = !this.collapsed;
     event.stopPropagation();
   }
   private allowEditOption: boolean;
@@ -187,11 +188,11 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
         this.collapsed = !this.collapsed;
       }
     };
-
     this.collapsed = !!surveyElement && (this.designerStateManager?.getElementState(surveyElement).collapsed);
     this.setSurveyElement(surveyElement);
     this.creator.sidebar.onPropertyChanged.add(this.sidebarFlyoutModeChangedFunc);
     this.setShowAddQuestionButton(true);
+    this.expandCollapseAction.visible = this.allowExpandCollapse;
   }
 
   protected detachElement(surveyElement: T): void {
@@ -248,6 +249,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   }
   protected updateElementAllowOptions(options: any, operationsAllow: boolean): void {
     this.allowDragging = operationsAllow && options.allowDragging;
+    this.allowExpandCollapse = this.creator.expandCollapseButtonVisibility != "never" && (options.allowExpandCollapse == undefined || !!options.allowExpandCollapse);
     this.allowEditOption = (options.allowEdit == undefined || !!options.allowEdit);
     this.updateActionVisibility("delete", operationsAllow && options.allowDelete);
     this.updateActionVisibility("duplicate", operationsAllow && options.allowCopy);

@@ -28,7 +28,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   constructor(creator: SurveyCreatorModel, page: PageModel) {
     super(creator, page);
     this.actionContainer.sizeMode = "small";
-    this.expandCollapseAction.visible = !this.isGhost;
+    if (this.isGhost) this.expandCollapseAction.visible = false;
     this.expandCollapseAction.needSeparator = true;
     if (this.creator.expandCollapseButtonVisibility != "never") this.actionContainer.addAction(this.expandCollapseAction);
     this.questionTypeSelectorModel = this.creator.getQuestionTypeSelectorModel(
