@@ -1,5 +1,6 @@
 import { CreatorPresetBase, ICreatorPreset } from "./presets-base";
 import { CreatorPresetToolbox, ICreatorPresetToolboxItem } from "./presets-toolbox";
+import { CreatorPresetLanguages } from "./presets-languages";
 import { CreatorPresetTabs } from "./presets-tabs";
 import { CreatorPresetPropertyGrid } from "./presets-properties";
 import { IToolboxCategoryDefinition } from "../toolbox";
@@ -8,6 +9,10 @@ import { SurveyCreatorModel } from "../creator-base";
 import { editorLocalization } from "../editorLocalization";
 
 export interface ICreatorPresetData {
+  languages?: {
+    creator?: string,
+    surveyLocales?: Array<string>,
+  };
   propertyGrid?: {
     definition?: ISurveyPropertyGridDefinition,
   };
@@ -49,7 +54,7 @@ export class CreatorPreset extends CreatorPresetBase {
     }
   }
   protected createPresets(): Array<ICreatorPreset> {
-    return [new CreatorPresetTabs(), new CreatorPresetToolbox(),
+    return [new CreatorPresetLanguages(), new CreatorPresetTabs(), new CreatorPresetToolbox(),
       new CreatorPresetPropertyGrid()];
   }
 }
