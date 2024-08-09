@@ -314,6 +314,7 @@ export interface TablePropertyEditorOptions {
   allowAddRemoveItems: boolean;
   allowRemoveAllItems: boolean;
   allowBatchEdit: boolean;
+  showTextView?: boolean;
 }
 export interface ConfigureTablePropertyEditorEvent {
   /**
@@ -337,7 +338,7 @@ export interface ConfigureTablePropertyEditorEvent {
    */
   allowBatchEdit: boolean;
   /**
-   * Obsolete. Use `options.allowAddRemoveRows`, `options.allowRemoveAllRows`, and `options.allowBatchEdit` instead.
+   * Obsolete. Use `options.allowAddRemoveItems`, `options.allowRemoveAllItems`, and `options.allowBatchEdit` instead.
    */
   editorOptions: TablePropertyEditorOptions;
 }
