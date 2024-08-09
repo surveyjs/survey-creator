@@ -1,5 +1,5 @@
-import { Base, DragOrClickHelper, ActionContainer, ListModel } from "survey-core";
-import { IQuestionToolboxItem, QuestionToolboxItem } from "../../toolbox";
+import { Base, DragOrClickHelper, ActionContainer, ListModel, PopupModel, CssClassBuilder } from "survey-core";
+import { IQuestionToolboxItem, QuestionToolbox, QuestionToolboxItem } from "../../toolbox";
 import { SurveyCreatorModel } from "../../creator-base";
 import { DragDropSurveyElements } from "../../survey-elements";
 export class ToolboxToolViewModel extends Base {
@@ -11,6 +11,22 @@ export class ToolboxToolViewModel extends Base {
   ) {
     super();
     this.dragOrClickHelper = new DragOrClickHelper(this.startDragToolboxItem);
+
+    if (!this.isDotsItem()) {
+      const popup = item.popupModel as PopupModel;
+      if (!!popup) {
+        const className = new CssClassBuilder()
+          .append(popup.cssClass)
+          .append("svc-toolbox-subtypes")
+          .toString();
+
+        popup.cssClass = className;
+        popup.isFocusedContainer = false;
+        popup.contentComponentName = "svc-toolbox-list";
+        popup.contentComponentData["creator"] = creator;
+        popup.isFocusedContent = false;
+      }
+    }
   }
 
   public click = (event) => {
@@ -21,6 +37,13 @@ export class ToolboxToolViewModel extends Base {
 
   public get toolboxItem() {
     return this.item as QuestionToolboxItem;
+  }
+
+  public get itemComponent(): string {
+    if (!!this.creator && !this.creator.toolbox.showSubitems && this.toolboxItem.hasSubItems) {
+      return QuestionToolbox.defaultItemComponent;
+    }
+    return this.item.component || QuestionToolbox.defaultItemComponent;
   }
 
   public get allowAdd() {
@@ -39,7 +62,7 @@ export class ToolboxToolViewModel extends Base {
     pointerDownEvent.stopPropagation();
 
     if (!this.allowAdd) return;
-    if (this.item.id.indexOf("dotsItem-id") === 0) return true; //toolbox responsive popup
+    if (this.isDotsItem()) return true; //toolbox responsive popup
     this.dragOrClickHelper.onPointerDown(pointerDownEvent);
 
     this.toolboxItem.isPressed = true;
@@ -58,6 +81,10 @@ export class ToolboxToolViewModel extends Base {
     this.dragDropHelper.startDragToolboxItem(pointerDownEvent, json, this.item);
     return true;
   };
+
+  private isDotsItem() {
+    return this.item.id.indexOf("dotsItem-id") === 0;
+  }
 
   private hidePopup() {
     this.toolboxItem.hidePopup();

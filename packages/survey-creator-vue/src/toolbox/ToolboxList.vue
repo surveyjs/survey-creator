@@ -2,9 +2,9 @@
   <div :class="model.cssClasses.root">
     <template v-for="(item, index) in model.renderedActions" :key="index">
       <svc-toolbox-tool
-        :creator="toolbox.creator"
+        :creator="creator"
         :item="item"
-        :parentModel="toolbox"
+        :parentModel="model"
         :isCompact="false"
       ></svc-toolbox-tool>
     </template>
@@ -12,9 +12,9 @@
 </template>
 <script lang="ts" setup>
 import type { ListModel } from "survey-core";
-import type { QuestionToolbox } from "survey-creator-core";
+import type { CreatorBase } from "survey-creator-core";
 defineProps<{
   model: ListModel;
-  toolbox: QuestionToolbox;
+  creator: CreatorBase;
 }>();
 </script>

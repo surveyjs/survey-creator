@@ -5,7 +5,7 @@
     <!-- /ko -->
     <div class="sv-action__content"
         data-bind="event: { pointerdown: (model, event)=>{onPointerDown(event); return true;}, mouseover: function(model, event) { onMouseOver(model.item, event); return true; }, mouseleave: function(model, event) { onMouseLeave(model.item, event); return true; } }">
-        <!-- ko component: { name: $data.item.component || 'svc-toolbox-item', params: { model: $data, item: $data.item, creator: $data.creator, isCompact: $data.isCompact } } -->
+        <!-- ko component: { name: $data.itemComponent, params: { model: $data, item: $data.item, creator: $data.creator, isCompact: $data.isCompact } } -->
         <!-- /ko -->
     </div>
 </div>

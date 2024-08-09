@@ -1,4 +1,4 @@
-import { SurveyModel, QuestionTextModel, QuestionRatingModel, CustomWidgetCollection, Serializer, SurveyElement } from "survey-core";
+import { SurveyModel, QuestionTextModel, QuestionRatingModel, CustomWidgetCollection, Serializer, SurveyElement, Action } from "survey-core";
 import { ToolboxToolViewModel } from "../src/components/toolbox/toolbox-tool";
 import { CreatorTester } from "./creator-tester";
 import { PageAdorner } from "../src/components/page";
@@ -264,4 +264,22 @@ test("Doesn't duplicate custom toolbox items with built-in ones in convertTo", (
     if (item.id === "dropdown") counter++;
   });
   expect(counter).toEqual(1);
+});
+test("Check convertTo action with subitems", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  let question = creator.survey.getQuestionByName("q1");
+  expect(question.getType()).toBe("text");
+
+  creator.selectElement(question);
+  const questionModel = new QuestionAdornerViewModel(creator, question, undefined as any);
+
+  const items = questionModel.getConvertToTypesActions();
+  const ratingItem = items.filter(i => i.id == "rating")[0] as Action;
+  expect(ratingItem.hasSubItems).toBeTruthy();
+
+  ratingItem.items[2].action();
+  question = creator.survey.getQuestionByName("q1") as QuestionRatingModel;
+  expect(question.getType()).toBe("rating");
+  expect(question.rateType).toBe("smileys");
 });
