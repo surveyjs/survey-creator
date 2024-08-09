@@ -1,5 +1,3 @@
-// This dictionary contains 65 untranslated or inherited localization strings.
-// These strings are commented out. Uncomment and edit them if you want to add your translations.
 import { editorLocalization } from "survey-creator-core";
 
 export var turkishStrings = {
@@ -415,6 +413,9 @@ export var turkishStrings = {
     rateDescriptionLocation: "Etiket hizalama",
     size: "Giriş alanı boyutu (karakter cinsinden)",
     cellErrorLocation: "Hücre hata iletisi hizalaması",
+    enabled: "Etkin",
+    disabled: "Sakat",
+    inherit: "Devralır",
     apply: "Uygula",
     ok: "TAMAM",
     save: "Kaydet",
@@ -662,6 +663,7 @@ export var turkishStrings = {
     },
     focusOnFirstError: "İlk hataya odaklan",
     checkErrorsMode: "Çalıştırma doğrulaması",
+    validateVisitedEmptyFields: "Kayıp odakta boş alanları doğrulayın",
     navigateToUrl: "URL'ye gidin",
     navigateToUrlOnCondition: "Dinamik URL",
     completedBeforeHtml: "Kullanıcının bu anketi zaten doldurup doldurmadığını göstermek için işaretleme",
@@ -1228,6 +1230,10 @@ export var turkishStrings = {
     },
     panelbase: {
       questionTitleWidth: "Ör.: 200 piksel"
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "Ör.: %30",
+      questionTitleWidth: "Ör.: 200 piksel"
     }
   },
   pehelp: {
@@ -1380,6 +1386,7 @@ export var turkishStrings = {
     allowResize: "Yeniden boyutlandırma tutamacı (veya tutamak) köşede görünür ve giriş alanının boyutunu değiştirmek için sürüklenebilir.",
     maxTimeToFinish: "Anketin otomatik olarak Teşekkür Ederiz sayfasına ilerlediği saniye cinsinden bir zaman aralığı.",
     maxTimeToFinishPage: "Anketin otomatik olarak bir sonraki sayfaya ilerlediği saniye cinsinden bir zaman aralığı.",
+    validateVisitedEmptyFields: "Bir kullanıcı boş bir giriş alanına odaklandığında ve ardından herhangi bir değişiklik yapmadan bu alandan ayrıldığında doğrulamayı tetiklemek için bu seçeneği etkinleştirin.",
     page: {
       maxTimeToFinish: "Anketin otomatik olarak bir sonraki sayfaya ilerlediği saniye cinsinden bir zaman aralığı.",
       visibleIf: "Sayfa görünürlüğünü belirleyen koşullu bir kural belirlemek için sihirli değnek simgesini kullanın.",
@@ -1442,6 +1449,7 @@ export var turkishStrings = {
     filePlaceholder: "\"Kaynak türü\" \"Yerel dosyalar\" olduğunda veya fotoğraf makinesi kullanılamadığında geçerlidir",
     photoPlaceholder: "\"Kaynak türü\" \"Kamera\" olduğunda geçerlidir.",
     fileOrPhotoPlaceholder: "\"Kaynak türü\" \"Yerel dosyalar veya kamera\" olduğunda geçerlidir.",
+    colCount: "Seçim seçeneklerini çok sütunlu bir düzende düzenler. 0 olarak ayarlandığında, seçenekler tek bir satırda görüntülenir.",
     masksettings: {
       saveMaskedValue: "Soru değerini, anket sonuçlarında uygulanan bir maske ile saklamak istiyorsanız seçin."
     },
@@ -1461,17 +1469,21 @@ export var turkishStrings = {
       suffix: "Değerden sonra görüntülenecek bir veya birkaç sembol."
     },
     theme: {
-      // isPanelless: "This setting applies only to questions outside of a panel.",
-      // primaryColor: "Sets a supplementary color that highlights key survey elements.",
-      // panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background.",
-      // questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background.",
-      // cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes.",
-      // "--sjs-general-backcolor-dim": "Sets the main background color of the survey."
+      isPanelless: "Bu ayar yalnızca panelin dışındaki sorular için geçerlidir.",
+      primaryColor: "Önemli anket öğelerini vurgulayan ek bir renk ayarlar.",
+      panelBackgroundTransparency: "Anketlerin ve soru kutularının saydamlığını anket arka planına göre ayarlar.",
+      questionBackgroundTransparency: "Giriş öğelerinin saydamlığını anket arka planına göre ayarlar.",
+      cornerRadius: "Tüm dikdörtgen elemanlar için köşe yarıçapını ayarlar. Giriş öğeleri veya paneller ve soru kutuları için ayrı köşe yarıçapı değerleri ayarlamak istiyorsanız Gelişmiş Modu etkinleştirin.",
+      "--sjs-general-backcolor-dim": "Anketin ana arka plan rengini ayarlar."
     },
     header: {
-      // inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in.",
-      // textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels.",
-      // overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey."
+      inheritWidthFrom: "\"Kapsayıcı ile aynı\" seçeneği, başlık içerik alanı genişliğini anketin yerleştirildiği HTML öğesine sığacak şekilde otomatik olarak ayarlar.",
+      textAreaWidth: "Anket başlığını ve açıklamasını içeren üstbilgi alanının piksel cinsinden genişliği.",
+      overlapEnabled: "Üstbilginin alt kısmını, anketin üst kısmıyla kaplanmış hale getirir."
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "% değerlerini kabul eder.",
+      questionTitleWidth: "Px değerlerini kabul eder."
     }
   },
   // Properties
@@ -1576,62 +1588,7 @@ export var turkishStrings = {
     scaleColorMode: "Renk modunu ölçekle",
     rateColorMode: "Renk modunu ayarla",
     copyDisplayValue: "Görüntüleme değerini kopyala",
-    // insensitive: "insensitive",
-    // state: "state",
-    // indent: "indent",
-    // titleLocation: "titleLocation",
-    // descriptionLocation: "descriptionLocation",
-    // hideNumber: "hideNumber",
-    // errorLocation: "errorLocation",
-    // isUnique: "isUnique",
-    // showInMultipleColumns: "showInMultipleColumns",
-    // totalAlignment: "totalAlignment",
-    // detailErrorLocation: "detailErrorLocation",
-    // inheritWidthFrom: "inheritWidthFrom",
-    // textAreaWidth: "textAreaWidth",
-    // textGlowEnabled: "textGlowEnabled",
-    // overlapEnabled: "overlapEnabled",
-    // backgroundImageOpacity: "backgroundImageOpacity",
-    // logoPositionX: "logoPositionX",
-    // logoPositionY: "logoPositionY",
-    // titlePositionX: "titlePositionX",
-    // titlePositionY: "titlePositionY",
-    // descriptionPositionX: "descriptionPositionX",
-    // descriptionPositionY: "descriptionPositionY",
-    // showNumber: "showNumber",
-    // progressBarInheritWidthFrom: "progressBarInheritWidthFrom",
-    // headerView: "headerView",
-    // choiceValuesFromQuestion: "choiceValuesFromQuestion",
-    // choiceTextsFromQuestion: "choiceTextsFromQuestion",
-    // refuseText: "refuseText",
-    // dontKnowText: "dontKnowText",
-    // cellComponent: "cellComponent",
-    // inputTextAlignment: "inputTextAlignment",
-    // maskSettings: "maskSettings",
-    // itemErrorLocation: "itemErrorLocation",
-    // signatureWidth: "signatureWidth",
-    // signatureHeight: "signatureHeight",
-    // signatureAutoScaleEnabled: "signatureAutoScaleEnabled",
-    // penMinWidth: "penMinWidth",
-    // penMaxWidth: "penMaxWidth",
-    // showPlaceholder: "showPlaceholder",
-    // placeholderReadOnly: "placeholderReadOnly",
-    // templateTitle: "templateTitle",
-    // templateTabTitle: "templateTabTitle",
-    // tabTitlePlaceholder: "tabTitlePlaceholder",
-    // templateDescription: "templateDescription",
-    // noEntriesText: "noEntriesText",
-    // newPanelPosition: "newPanelPosition",
-    // templateTitleLocation: "templateTitleLocation",
-    // templateErrorLocation: "templateErrorLocation",
-    // templateVisibleIf: "templateVisibleIf",
-    // saveMaskedValue: "saveMaskedValue",
-    // pattern: "pattern",
-    // allowNegativeValues: "allowNegativeValues",
-    // decimalSeparator: "decimalSeparator",
-    // thousandsSeparator: "thousandsSeparator",
-    // prefix: "prefix",
-    // suffix: "suffix"
+    effectiveColSpan: "Sütun aralığı"
   },
   theme: {
     advancedMode: "Gelişmiş mod",
@@ -2741,3 +2698,23 @@ editorLocalization.locales["tr"] = turkishStrings;
 // page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Soru kutularının soluna hizalandıklarında soru başlıkları için tutarlı genişlik ayarlar. CSS değerlerini (px, %, in, pt, vb.) kabul eder."
 // pe.commentAreaRows: "Comment area height (in lines)" => "Yorum alanı yüksekliği (satırlar halinde)"
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "Soru yorumları için metin alanlarında görüntülenen satır sayısını ayarlar. Girişte daha fazla satır alır, kaydırma çubuğu görünür."
+// pe.enabled: "Enabled" => "Etkin"
+// pe.disabled: "Disabled" => "Sakat"
+// pe.inherit: "Inherit" => "Devralır"
+// pe.validateVisitedEmptyFields: "Validate empty fields on lost focus" => "Kayıp odakta boş alanları doğrulayın"
+// panellayoutcolumn.effectiveWidth: "Ex.: 30%" => "Ör.: %30"
+// panellayoutcolumn.questionTitleWidth: "Ex.: 200px" => "Ör.: 200 piksel"
+// pehelp.validateVisitedEmptyFields: "Enable this option to trigger validation when a user focuses on an empty input field and then leaves it without making any changes." => "Bir kullanıcı boş bir giriş alanına odaklandığında ve ardından herhangi bir değişiklik yapmadan bu alandan ayrıldığında doğrulamayı tetiklemek için bu seçeneği etkinleştirin."
+// pehelp.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line." => "Seçim seçeneklerini çok sütunlu bir düzende düzenler. 0 olarak ayarlandığında, seçenekler tek bir satırda görüntülenir."
+// theme.isPanelless: "This setting applies only to questions outside of a panel." => "Bu ayar yalnızca panelin dışındaki sorular için geçerlidir."
+// theme.primaryColor: "Sets a supplementary color that highlights key survey elements." => "Önemli anket öğelerini vurgulayan ek bir renk ayarlar."
+// theme.panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background." => "Anketlerin ve soru kutularının saydamlığını anket arka planına göre ayarlar."
+// theme.questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background." => "Giriş öğelerinin saydamlığını anket arka planına göre ayarlar."
+// theme.cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes." => "Tüm dikdörtgen elemanlar için köşe yarıçapını ayarlar. Giriş öğeleri veya paneller ve soru kutuları için ayrı köşe yarıçapı değerleri ayarlamak istiyorsanız Gelişmiş Modu etkinleştirin."
+// theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "Anketin ana arka plan rengini ayarlar."
+// header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "\"Kapsayıcı ile aynı\" seçeneği, başlık içerik alanı genişliğini anketin yerleştirildiği HTML öğesine sığacak şekilde otomatik olarak ayarlar."
+// header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "Anket başlığını ve açıklamasını içeren üstbilgi alanının piksel cinsinden genişliği."
+// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "Üstbilginin alt kısmını, anketin üst kısmıyla kaplanmış hale getirir."
+// panellayoutcolumn.effectiveWidth: "Accepts values %." => "% değerlerini kabul eder."
+// panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Px değerlerini kabul eder."
+// p.effectiveColSpan: "Column span" => "Sütun aralığı"

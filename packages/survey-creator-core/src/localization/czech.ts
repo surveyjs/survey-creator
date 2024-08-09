@@ -1,5 +1,3 @@
-// This dictionary contains 65 untranslated or inherited localization strings.
-// These strings are commented out. Uncomment and edit them if you want to add your translations.
 import { editorLocalization } from "survey-creator-core";
 
 export var czStrings = {
@@ -415,6 +413,9 @@ export var czStrings = {
     rateDescriptionLocation: "Zarovnání štítků",
     size: "Velikost vstupu (v počtu znaků)",
     cellErrorLocation: "Zarovnání chybové zprávy buňky",
+    enabled: "Zpřístupněný",
+    disabled: "Invalidní",
+    inherit: "Zdědit",
     apply: "Použít",
     ok: "OK",
     save: "Uložit",
@@ -662,6 +663,7 @@ export var czStrings = {
     },
     focusOnFirstError: "Zvýraznit první neplatnou odpověď",
     checkErrorsMode: "Spustit ověření",
+    validateVisitedEmptyFields: "Ověření prázdných polí při ztrátě fokusu",
     navigateToUrl: "Přejít na URL",
     navigateToUrlOnCondition: "Dynamická URL",
     completedBeforeHtml: "Text, který se uživateli zobrazí v případě, kdy má již průzkum vyplněný",
@@ -1228,6 +1230,10 @@ export var czStrings = {
     },
     panelbase: {
       questionTitleWidth: "Př.: 200px"
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "Př.: 30%",
+      questionTitleWidth: "Př.: 200px"
     }
   },
   pehelp: {
@@ -1380,6 +1386,7 @@ export var czStrings = {
     allowResize: "Úchyt pro změnu velikosti (nebo uzel) se zobrazí v rohu a lze jej přetáhnout a změnit tak velikost vstupního pole.",
     maxTimeToFinish: "Časový interval v sekundách, po jehož uplynutí se průzkum automaticky přesune na stránku s poděkováním.",
     maxTimeToFinishPage: "Časový interval v sekundách, po jehož uplynutí se průzkum automaticky přesune na další stránku.",
+    validateVisitedEmptyFields: "Tuto možnost povolte, chcete-li spustit ověření, když se uživatel zaměří na prázdné vstupní pole a poté ho opustí, aniž by provedl jakékoli změny.",
     page: {
       maxTimeToFinish: "Časový interval v sekundách, po jehož uplynutí se průzkum automaticky přesune na další stránku.",
       visibleIf: "Pomocí ikony kouzelné hůlky můžete nastavit podmíněné pravidlo, které určuje viditelnost stránky.",
@@ -1442,6 +1449,7 @@ export var czStrings = {
     filePlaceholder: "Platí, když je \"Typ zdroje\" nastaven na \"Místní soubory\" nebo když je kamera nedostupná",
     photoPlaceholder: "Platí, když je \"Typ zdroje\" nastaven na \"Fotoaparát\".",
     fileOrPhotoPlaceholder: "Platí, když \"Typ zdroje\" je \"Místní soubory nebo kamera\".",
+    colCount: "Uspořádá možnosti voleb v rozložení s více sloupci. Při nastavení na 0 se možnosti zobrazí na jednom řádku.",
     masksettings: {
       saveMaskedValue: "Vyberte, zda chcete uložit hodnotu otázky s použitou maskou do výsledků průzkumu."
     },
@@ -1461,17 +1469,21 @@ export var czStrings = {
       suffix: "Jeden nebo více symbolů, které se zobrazí za hodnotou."
     },
     theme: {
-      // isPanelless: "This setting applies only to questions outside of a panel.",
-      // primaryColor: "Sets a supplementary color that highlights key survey elements.",
-      // panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background.",
-      // questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background.",
-      // cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes.",
-      // "--sjs-general-backcolor-dim": "Sets the main background color of the survey."
+      isPanelless: "Toto nastavení platí pouze pro otázky mimo panel.",
+      primaryColor: "Nastaví doplňkovou barvu, která zvýrazní klíčové prvky průzkumu.",
+      panelBackgroundTransparency: "Upraví průhlednost panelů a polí s otázkami vzhledem k pozadí průzkumu.",
+      questionBackgroundTransparency: "Upraví průhlednost vstupních prvků vzhledem k pozadí průzkumu.",
+      cornerRadius: "Nastaví poloměr rohů pro všechny obdélníkové prvky. Rozšířený režim povolte, pokud chcete nastavit jednotlivé hodnoty poloměru rohů pro vstupní prvky nebo panely a pole s otázkami.",
+      "--sjs-general-backcolor-dim": "Nastaví hlavní barvu pozadí průzkumu."
     },
     header: {
-      // inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in.",
-      // textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels.",
-      // overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey."
+      inheritWidthFrom: "Možnost \"Stejné jako kontejner\" automaticky upraví šířku oblasti obsahu záhlaví tak, aby se vešla do prvku HTML, do kterého je průzkum umístěn.",
+      textAreaWidth: "Šířka oblasti záhlaví, která obsahuje název a popis průzkumu, měřená v pixelech.",
+      overlapEnabled: "Nastaví dolní část záhlaví tak, aby překrývala horní část průzkumu."
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "Přijímá hodnoty %.",
+      questionTitleWidth: "Přijímá hodnoty px."
     }
   },
   // Properties
@@ -1576,62 +1588,7 @@ export var czStrings = {
     scaleColorMode: "Barevný režim měřítka",
     rateColorMode: "Barevný režim s ohodnocením",
     copyDisplayValue: "Kopírovat zobrazovanou hodnotu",
-    // insensitive: "insensitive",
-    // state: "state",
-    // indent: "indent",
-    // titleLocation: "titleLocation",
-    // descriptionLocation: "descriptionLocation",
-    // hideNumber: "hideNumber",
-    // errorLocation: "errorLocation",
-    // isUnique: "isUnique",
-    // showInMultipleColumns: "showInMultipleColumns",
-    // totalAlignment: "totalAlignment",
-    // detailErrorLocation: "detailErrorLocation",
-    // inheritWidthFrom: "inheritWidthFrom",
-    // textAreaWidth: "textAreaWidth",
-    // textGlowEnabled: "textGlowEnabled",
-    // overlapEnabled: "overlapEnabled",
-    // backgroundImageOpacity: "backgroundImageOpacity",
-    // logoPositionX: "logoPositionX",
-    // logoPositionY: "logoPositionY",
-    // titlePositionX: "titlePositionX",
-    // titlePositionY: "titlePositionY",
-    // descriptionPositionX: "descriptionPositionX",
-    // descriptionPositionY: "descriptionPositionY",
-    // showNumber: "showNumber",
-    // progressBarInheritWidthFrom: "progressBarInheritWidthFrom",
-    // headerView: "headerView",
-    // choiceValuesFromQuestion: "choiceValuesFromQuestion",
-    // choiceTextsFromQuestion: "choiceTextsFromQuestion",
-    // refuseText: "refuseText",
-    // dontKnowText: "dontKnowText",
-    // cellComponent: "cellComponent",
-    // inputTextAlignment: "inputTextAlignment",
-    // maskSettings: "maskSettings",
-    // itemErrorLocation: "itemErrorLocation",
-    // signatureWidth: "signatureWidth",
-    // signatureHeight: "signatureHeight",
-    // signatureAutoScaleEnabled: "signatureAutoScaleEnabled",
-    // penMinWidth: "penMinWidth",
-    // penMaxWidth: "penMaxWidth",
-    // showPlaceholder: "showPlaceholder",
-    // placeholderReadOnly: "placeholderReadOnly",
-    // templateTitle: "templateTitle",
-    // templateTabTitle: "templateTabTitle",
-    // tabTitlePlaceholder: "tabTitlePlaceholder",
-    // templateDescription: "templateDescription",
-    // noEntriesText: "noEntriesText",
-    // newPanelPosition: "newPanelPosition",
-    // templateTitleLocation: "templateTitleLocation",
-    // templateErrorLocation: "templateErrorLocation",
-    // templateVisibleIf: "templateVisibleIf",
-    // saveMaskedValue: "saveMaskedValue",
-    // pattern: "pattern",
-    // allowNegativeValues: "allowNegativeValues",
-    // decimalSeparator: "decimalSeparator",
-    // thousandsSeparator: "thousandsSeparator",
-    // prefix: "prefix",
-    // suffix: "suffix"
+    effectiveColSpan: "Rozpětí sloupců"
   },
   theme: {
     advancedMode: "Pokročilý režim",
@@ -2320,3 +2277,23 @@ editorLocalization.locales["cs"] = czStrings;
 // page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Nastaví konzistentní šířku názvů otázek, pokud jsou zarovnány nalevo od polí s otázkami. Přijímá hodnoty CSS (px, %, in, pt atd.)."
 // pe.commentAreaRows: "Comment area height (in lines)" => "Výška oblasti komentářů (v řádcích)"
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "Nastaví počet zobrazených řádků v textových oblastech pro komentáře k otázkám. V případě, že vstup zabírá více řádků, zobrazí se posuvník."
+// pe.enabled: "Enabled" => "Zpřístupněný"
+// pe.disabled: "Disabled" => "Invalidní"
+// pe.inherit: "Inherit" => "Zdědit"
+// pe.validateVisitedEmptyFields: "Validate empty fields on lost focus" => "Ověření prázdných polí při ztrátě fokusu"
+// panellayoutcolumn.effectiveWidth: "Ex.: 30%" => "Př.: 30%"
+// panellayoutcolumn.questionTitleWidth: "Ex.: 200px" => "Př.: 200px"
+// pehelp.validateVisitedEmptyFields: "Enable this option to trigger validation when a user focuses on an empty input field and then leaves it without making any changes." => "Tuto možnost povolte, chcete-li spustit ověření, když se uživatel zaměří na prázdné vstupní pole a poté ho opustí, aniž by provedl jakékoli změny."
+// pehelp.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line." => "Uspořádá možnosti voleb v rozložení s více sloupci. Při nastavení na 0 se možnosti zobrazí na jednom řádku."
+// theme.isPanelless: "This setting applies only to questions outside of a panel." => "Toto nastavení platí pouze pro otázky mimo panel."
+// theme.primaryColor: "Sets a supplementary color that highlights key survey elements." => "Nastaví doplňkovou barvu, která zvýrazní klíčové prvky průzkumu."
+// theme.panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background." => "Upraví průhlednost panelů a polí s otázkami vzhledem k pozadí průzkumu."
+// theme.questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background." => "Upraví průhlednost vstupních prvků vzhledem k pozadí průzkumu."
+// theme.cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes." => "Nastaví poloměr rohů pro všechny obdélníkové prvky. Rozšířený režim povolte, pokud chcete nastavit jednotlivé hodnoty poloměru rohů pro vstupní prvky nebo panely a pole s otázkami."
+// theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "Nastaví hlavní barvu pozadí průzkumu."
+// header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "Možnost \"Stejné jako kontejner\" automaticky upraví šířku oblasti obsahu záhlaví tak, aby se vešla do prvku HTML, do kterého je průzkum umístěn."
+// header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "Šířka oblasti záhlaví, která obsahuje název a popis průzkumu, měřená v pixelech."
+// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "Nastaví dolní část záhlaví tak, aby překrývala horní část průzkumu."
+// panellayoutcolumn.effectiveWidth: "Accepts values %." => "Přijímá hodnoty %."
+// panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Přijímá hodnoty px."
+// p.effectiveColSpan: "Column span" => "Rozpětí sloupců"

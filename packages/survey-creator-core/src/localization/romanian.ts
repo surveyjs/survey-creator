@@ -1,5 +1,3 @@
-// Uncomment the line below if you create a custom dictionary
-// This dictionary was created by translating the default dictionary to Romanian using GTP4o.
 import { editorLocalization } from "survey-creator-core";
 
 export const roStrings = {
@@ -17,7 +15,6 @@ export const roStrings = {
     deleteQuestion: "Șterge întrebarea",
     convertTo: "Convertiți în",
     drag: "Trage elementul",
-    license: "Pentru a folosi biblioteca noastră, este necesară o <a href='https://surveyjs.io/licensing'>licență de dezvoltator</a>. Dacă aveți o licență activă, <a href='https://surveyjs.io/remove-alert-banner'>configurați cheia de licență</a> și asigurați-vă că utilizați cea mai recentă versiune."
   },
   // Creator tabs
   tabs: {
@@ -184,7 +181,7 @@ export const roStrings = {
     panelPlaceHolderMobile: "Faceți clic pe butonul \"Adaugă întrebare\" de mai jos pentru a adăuga un nou element în panou.",
     imagePlaceHolderMobile: "Faceți clic pe butonul de mai jos și alegeți o imagine de încărcat",
     imageChooseImage: "Alegeți imaginea",
-    addNewTypeQuestion: "Adăugați {0}", //{0} este tipul de întrebare localizabil
+    addNewTypeQuestion: "Adăugați {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
     choices_Item: "Element ",
     selectFile: "Selectați un fișier",
@@ -226,29 +223,29 @@ export const roStrings = {
       trigger_skipDescription: "Când expresia logică evaluează la adevărat, chestionarul se concentrează/sare la întrebarea selectată.",
       trigger_runExpressionDescription: "Când expresia logică evaluează la adevărat, chestionarul evaluează o altă expresie. Opțional, rezultatul ultimei expresii poate fi atribuit ca valoare întrebării selectate",
       completedHtmlOnConditionDescription: "Dacă expresia logică evaluează la adevărat, pagina de „Mulțumire” afișează conținutul specificat.",
-      itemExpressionText: "Când expresia: '{0}' returnează adevărat", //{0} - expresia
+      itemExpressionText: "Când expresia: '{0}' returnează adevărat", //{0} - the expression
       itemEmptyExpressionText: "Regulă nouă",
-      page_visibilityText: "face pagina {0} vizibilă", //{0} numele paginii
-      panel_visibilityText: "face panoul {0} vizibil", //{0} numele panoului
-      panel_enableText: "face panoul {0} activ", //{0} numele panoului
-      question_visibilityText: "face întrebarea {0} vizibilă", //{0} numele întrebării
-      question_enableText: "face întrebarea {0} activă", //{0} numele întrebării
-      question_requireText: "face întrebarea {0} obligatorie", //{0} numele întrebării
-      question_resetValueText: "resetează valoarea pentru întrebarea: {0}", //{0} numele întrebării.
-      question_setValueText: "atribuiți valoarea: {1} întrebării: {0}", //{0} numele întrebării și {1} setValueExpression
-      column_visibilityText: "face coloana {0} a întrebării {1} vizibilă", //{0} numele coloanei, {1} numele întrebării
-      column_enableText: "face coloana {0} a întrebării {1} activă", //{0} numele coloanei, {1} numele întrebării
-      column_requireText: "face coloana {0} a întrebării {1} obligatorie", //{0} numele coloanei, {1} numele întrebării
-      column_resetValueText: "resetează valoarea celulei pentru coloana: {0}", //{0} numele coloanei
-      column_setValueText: "atribuiți valoarea celulei: {1} coloanei: {0}", //{0} numele coloanei și {1} setValueExpression
+      page_visibilityText: "face pagina {0} vizibilă", //{0} page name
+      panel_visibilityText: "face panoul {0} vizibil", //{0} panel name
+      panel_enableText: "face panoul {0} activ", //{0} panel name
+      question_visibilityText: "face întrebarea {0} vizibilă", //{0} question name
+      question_enableText: "face întrebarea {0} activă", //{0} question name
+      question_requireText: "face întrebarea {0} obligatorie", //{0} question name
+      question_resetValueText: "resetează valoarea pentru întrebarea: {0}", //{0} question name.
+      question_setValueText: "atribuiți valoarea: {1} întrebării: {0}",
+      column_visibilityText: "face coloana {0} a întrebării {1} vizibilă", //{0} column name, {1} question name
+      column_enableText: "face coloana {0} a întrebării {1} activă", //{0} column name, {1} question name
+      column_requireText: "face coloana {0} a întrebării {1} obligatorie", //{0} column name, {1} question name
+      column_resetValueText: "resetează valoarea celulei pentru coloana: {0}", //{0} column name
+      column_setValueText: "atribuiți valoarea celulei: {1} coloanei: {0}", //{0} column name and {1} setValueExpression
       setValueExpressionPlaceholder: "O expresie al cărei rezultat va fi atribuit întrebării țintă.",
       trigger_completeText: "chestionarul devine completat",
-      trigger_setvalueText: "setați în întrebarea: {0} valoarea {1}", //{0} numele întrebării, {1} setValue
-      trigger_setvalueEmptyText: "ștergeți valoarea întrebării: {0}", //{0} numele întrebării
-      trigger_copyvalueText: "copiați în întrebarea: {0} valoarea din întrebarea {1}", //{0} și {1} numele întrebărilor
-      trigger_skipText: "chestionarul sare la întrebarea {0}", //{0} numele întrebării
-      trigger_runExpressionText1: "execută expresia: '{0}'", //{0} expresia
-      trigger_runExpressionText2: " și setați rezultatul acesteia în întrebarea: {0}", //{0} numele întrebării
+      trigger_setvalueText: "setați în întrebarea: {0} valoarea {1}", //{0} question name, {1} setValue
+      trigger_setvalueEmptyText: "ștergeți valoarea întrebării: {0}", //{0} question name
+      trigger_copyvalueText: "copiați în întrebarea: {0} valoarea din întrebarea {1}", //{0} and {1} question names
+      trigger_skipText: "chestionarul sare la întrebarea {0}", //{0} question name
+      trigger_runExpressionText1: "execută expresia: '{0}'", //{0} the expression
+      trigger_runExpressionText2: " și setați rezultatul acesteia în întrebarea: {0}", //{0} question name
       completedHtmlOnConditionText: "afișați text personalizat pentru pagina de „Mulțumire”.",
       showAllQuestions: "Toate întrebările",
       showAllActionTypes: "Toate tipurile de acțiuni",
@@ -666,6 +663,7 @@ export const roStrings = {
     },
     focusOnFirstError: "Focalizați pe primul răspuns invalid",
     checkErrorsMode: "Rulați validarea",
+    validateVisitedEmptyFields: "Validarea câmpurilor goale pentru focalizarea pierdută",
     navigateToUrl: "Redirecționare către un link extern după trimitere",
     navigateToUrlOnCondition: "Link extern dinamic",
     completedBeforeHtml: "Marcaj de afișat dacă utilizatorul a completat deja acest chestionar",
@@ -881,8 +879,7 @@ export const roStrings = {
       questionTitle: "Font titlu",
       questionDescription: "Font descriere",
       editorFont: "Font",
-      backgroundOpacity: "Opacitate", // Auto-generated string
-
+      backgroundOpacity: "Opacitate",
       "--sjs-font-family": "Familia fontului chestionarului",
       "--sjs-general-backcolor-dim": "Culoarea fundalului",
       "--sjs-primary-backcolor": "Culorile fundalului accent",
@@ -890,7 +887,7 @@ export const roStrings = {
       "--sjs-special-red": "Culorile mesajului de eroare",
       "--sjs-shadow-small": "Efecte de umbră",
       "--sjs-shadow-inner": "Efecte de umbră",
-      "--sjs-border-default": "Culori",
+      "--sjs-border-default": "Culori"
     },
     "header@header": {
       headerView: "Vizualizare",
@@ -907,7 +904,7 @@ export const roStrings = {
       overlapEnabled: "Suprapunere",
       logoPositionX: "Alinierea logo-ului",
       titlePositionX: "Alinierea titlului chestionarului",
-      descriptionPositionX: "Alinierea descrierii chestionarului",
+      descriptionPositionX: "Alinierea descrierii chestionarului"
     }
   },
   // Property values
@@ -1130,33 +1127,33 @@ export const roStrings = {
       cover: "Acoperă",
       contain: "Conține",
       fill: "Umple",
-      tile: "Placă",
+      tile: "Placă"
     },
     backgroundImageAttachment: {
       fixed: "Fix",
-      scroll: "Derulare",
+      scroll: "Derulare"
     },
     headerView: {
       basic: "De bază",
-      advanced: "Avansat",
+      advanced: "Avansat"
     },
     inheritWidthFrom: {
       survey: "La fel ca chestionarul",
-      container: "La fel ca containerul",
+      container: "La fel ca containerul"
     },
     backgroundColorSwitch: {
       none: "Niciunul",
       accentColor: "Culoare accent",
-      custom: "Personalizat",
+      custom: "Personalizat"
     },
     colorPalette: {
       light: "Deschis",
-      dark: "Întunecat",
+      dark: "Întunecat"
     },
     isPanelless: {
-      false: "Implicit",
-      true: "Fără panouri",
-    },
+      "false": "Implicit",
+      "true": "Fără panouri"
+    }
   },
   // Operators
   op: {
@@ -1236,14 +1233,13 @@ export const roStrings = {
     },
     panellayoutcolumn: {
       effectiveWidth: "Ex.: 30%",
-      questionTitleWidth: "Ex.: 200px",
-    },
+      questionTitleWidth: "Ex.: 200px"
+    }
   },
   pehelp: {
     panel: {
       name: "Un ID al panoului care nu este vizibil pentru respondenți.",
       description: "Introduceți un subtitlu pentru panou.",
-      // isRequired: "Împiedică trimiterea chestionarului dacă cel puțin o întrebare inclusă nu are un răspuns.",
       visibleIf: "Utilizați pictograma bagheta magică pentru a seta o regulă condițională care determină vizibilitatea panoului.",
       enableIf: "Utilizați pictograma bagheta magică pentru a seta o regulă condițională care dezactivează modul doar citire pentru panou.",
       requiredIf: "Utilizați pictograma bagheta magică pentru a seta o regulă condițională care împiedică trimiterea chestionarului dacă cel puțin o întrebare inclusă nu are un răspuns.",
@@ -1260,14 +1256,12 @@ export const roStrings = {
     paneldynamic: {
       name: "Un ID al panoului care nu este vizibil pentru respondenți.",
       description: "Introduceți un subtitlu pentru panou.",
-      // isRequired: "Împiedică trimiterea chestionarului dacă cel puțin o întrebare inclusă nu are un răspuns.",
       visibleIf: "Utilizați pictograma bagheta magică pentru a seta o regulă condițională care determină vizibilitatea panoului.",
       enableIf: "Utilizați pictograma bagheta magică pentru a seta o regulă condițională care dezactivează modul doar citire pentru panou.",
       requiredIf: "Utilizați pictograma bagheta magică pentru a seta o regulă condițională care împiedică trimiterea chestionarului dacă cel puțin o întrebare inclusă nu are un răspuns.",
       templateTitleLocation: "Se aplică tuturor întrebărilor din acest panou. Dacă doriți să înlocuiți această setare, definiți reguli de aliniere a titlului pentru întrebările individuale. Opțiunea „Moștenește” aplică setarea de la nivel de pagină (dacă este setată) sau setarea de la nivel de chestionar („Sus” implicit).",
       templateErrorLocation: "Setează locația unui mesaj de eroare în raport cu o întrebare cu intrare invalidă. Alegeți dintre: „Sus” - un text de eroare este plasat în partea de sus a casetei întrebării; „Jos” - un text de eroare este plasat în partea de jos a casetei întrebării. Opțiunea „Moștenește” aplică setarea de la nivel de pagină (dacă este setată) sau setarea de la nivel de chestionar („Sus” implicit).",
       errorLocation: "Setează locația unui mesaj de eroare în raport cu toate întrebările din panou. Opțiunea „Moștenește” aplică setarea de la nivel de pagină (dacă este setată) sau setarea de la nivel de chestionar.",
-      // questionsOrder: "Păstrează ordinea originală a întrebărilor sau le randomizează. Opțiunea „Moștenește” aplică setarea de la nivel de pagină (dacă este setată) sau setarea de la nivel de chestionar.",
       page: "Repoziționează panoul la sfârșitul unei pagini selectate.",
       innerIndent: "Adaugă spațiu sau margine între conținutul panoului și marginea stângă a casetei panoului.",
       startWithNewLine: "Deselectați pentru a afișa panoul pe un rând cu întrebarea sau panoul anterior. Setarea nu se aplică dacă panoul este primul element din formular.",
@@ -1392,9 +1386,9 @@ export const roStrings = {
     allowResize: "Opțiunea „Moștenește” aplică setarea de la nivel de chestionar („Activat” implicit).",
     maxTimeToFinish: "Un interval de timp în secunde după care chestionarul avansează automat la pagina „Mulțumim”.",
     maxTimeToFinishPage: "Un interval de timp în secunde după care chestionarul avansează automat la pagina următoare. Ascunde butonul de navigare „Anterior”.",
+    validateVisitedEmptyFields: "Activați această opțiune pentru a declanșa validarea atunci când un utilizator se concentrează pe un câmp de introducere gol și apoi îl lasă fără a efectua modificări.",
     page: {
       maxTimeToFinish: "Un interval de timp în secunde după care chestionarul avansează automat la pagina următoare. Ascunde butonul de navigare „Anterior”.",
-      // isRequired: "Împiedică trimiterea chestionarului dacă cel puțin o întrebare inclusă nu are un răspuns.",
       visibleIf: "Utilizați pictograma bagheta magică pentru a seta o regulă condițională care determină vizibilitatea paginii.",
       enableIf: "Utilizați pictograma bagheta magică pentru a seta o regulă condițională care dezactivează modul doar citire pentru pagină.",
       requiredIf: "Utilizați pictograma bagheta magică pentru a seta o regulă condițională care împiedică trimiterea chestionarului dacă cel puțin o întrebare inclusă nu are un răspuns.",
@@ -1490,7 +1484,7 @@ export const roStrings = {
     panellayoutcolumn: {
       effectiveWidth: "Acceptă valori în %.",
       questionTitleWidth: "Acceptă valori în px."
-    },
+    }
   },
   // Properties
   p: {
@@ -1506,95 +1500,95 @@ export const roStrings = {
     sourceType: "Tipul sursei de fișier",
     fitToContainer: "Potrivește în container",
     setValueExpression: "Setează expresia valorii",
-    description: "Descriere", // Auto-generated string
+    description: "Descriere",
     logoFit: "Potrivirea logo-ului",
-    pages: "Pagini", // Auto-generated string
-    questions: "Întrebări", // Auto-generated string
+    pages: "Pagini",
+    questions: "Întrebări",
     triggers: "Declanșatori",
     calculatedValues: "Variabile personalizate",
-    surveyId: "ID-ul chestionarului", // Auto-generated string
-    surveyPostId: "ID-ul postării chestionarului", // Auto-generated string
-    surveyShowDataSaving: "Afișează salvarea datelor chestionarului", // Auto-generated string
+    surveyId: "ID-ul chestionarului",
+    surveyPostId: "ID-ul postării chestionarului",
+    surveyShowDataSaving: "Afișează salvarea datelor chestionarului",
     questionDescriptionLocation: "Alinierea descrierii întrebării",
-    progressBarType: "Tipul barei de progres", // Auto-generated string
+    progressBarType: "Tipul barei de progres",
     showTOC: "Arată tabelul de conținut (TOC)",
     tocLocation: "Alinierea TOC",
-    questionTitlePattern: "Modelul titlului întrebării", // Auto-generated string
+    questionTitlePattern: "Modelul titlului întrebării",
     widthMode: "Modul de lățime al chestionarului",
-    showBrandInfo: "Arată informații despre marcă", // Auto-generated string
+    showBrandInfo: "Arată informații despre marcă",
     useDisplayValuesInDynamicTexts: "Utilizați valorile afișate în textele dinamice",
-    visibleIf: "Vizibil dacă", // Auto-generated string
+    visibleIf: "Vizibil dacă",
     defaultValueExpression: "Expresia valorii implicite",
-    requiredIf: "Necesar dacă", // Auto-generated string
+    requiredIf: "Necesar dacă",
     resetValueIf: "Resetați valoarea dacă",
     setValueIf: "Setează valoarea dacă",
     validators: "Reguli de validare",
-    bindings: "Legături", // Auto-generated string
-    renderAs: "Renderizare ca", // Auto-generated string
-    attachOriginalItems: "Atașați elementele originale", // Auto-generated string
+    bindings: "Legături",
+    renderAs: "Renderizare ca",
+    attachOriginalItems: "Atașați elementele originale",
     choices: "Opțiuni",
-    choicesByUrl: "Opțiuni de la URL", // Auto-generated string
-    currency: "Valută", // Auto-generated string
-    cellHint: "Sugestie celulă", // Auto-generated string
-    totalMaximumFractionDigits: "Numărul maxim de zecimale totale", // Auto-generated string
-    totalMinimumFractionDigits: "Numărul minim de zecimale totale", // Auto-generated string
-    columns: "Coloane", // Auto-generated string
-    detailElements: "Elemente detaliate", // Auto-generated string
-    allowAdaptiveActions: "Permite acțiuni adaptive", // Auto-generated string
-    defaultRowValue: "Valoarea implicită a rândului", // Auto-generated string
-    detailPanelShowOnAdding: "Afișează panoul detaliat la adăugare", // Auto-generated string
-    choicesLazyLoadEnabled: "Încărcare întârziată activată pentru opțiuni", // Auto-generated string
-    choicesLazyLoadPageSize: "Dimensiunea paginii pentru încărcarea întârziată a opțiunilor", // Auto-generated string
-    inputFieldComponent: "Componenta câmpului de intrare", // Auto-generated string
-    itemComponent: "Componentă element", // Auto-generated string
-    min: "Min", // Auto-generated string
-    max: "Max", // Auto-generated string
-    minValueExpression: "Expresia valorii minime", // Auto-generated string
-    maxValueExpression: "Expresia valorii maxime", // Auto-generated string
-    step: "Pas", // Auto-generated string
+    choicesByUrl: "Opțiuni de la URL",
+    currency: "Valută",
+    cellHint: "Sugestie celulă",
+    totalMaximumFractionDigits: "Numărul maxim de zecimale totale",
+    totalMinimumFractionDigits: "Numărul minim de zecimale totale",
+    columns: "Coloane",
+    detailElements: "Elemente detaliate",
+    allowAdaptiveActions: "Permite acțiuni adaptive",
+    defaultRowValue: "Valoarea implicită a rândului",
+    detailPanelShowOnAdding: "Afișează panoul detaliat la adăugare",
+    choicesLazyLoadEnabled: "Încărcare întârziată activată pentru opțiuni",
+    choicesLazyLoadPageSize: "Dimensiunea paginii pentru încărcarea întârziată a opțiunilor",
+    inputFieldComponent: "Componenta câmpului de intrare",
+    itemComponent: "Componentă element",
+    min: "Min",
+    max: "Max",
+    minValueExpression: "Expresia valorii minime",
+    maxValueExpression: "Expresia valorii maxime",
+    step: "Pas",
     dataList: "Elemente pentru sugestii automate",
     itemSize: "Lățimea câmpului de intrare (în caractere)",
     itemTitleWidth: "Lățimea etichetei elementului (în px)",
-    elements: "Elemente", // Auto-generated string
-    content: "Conținut", // Auto-generated string
+    elements: "Elemente",
+    content: "Conținut",
     navigationButtonsVisibility: "Arată/ascunde butoanele de navigare",
-    navigationTitle: "Titlul navigării", // Auto-generated string
-    navigationDescription: "Descrierea navigării", // Auto-generated string
-    longTap: "Apăsare lungă", // Auto-generated string
+    navigationTitle: "Titlul navigării",
+    navigationDescription: "Descrierea navigării",
+    longTap: "Apăsare lungă",
     autoGrow: "Extinderea dinamică a câmpului de intrare",
     allowResize: "Permite redimensionarea",
-    acceptCarriageReturn: "Acceptă întoarcerea la linie", // Auto-generated string
+    acceptCarriageReturn: "Acceptă întoarcerea la linie",
     displayMode: "Mod de afișare",
-    rateType: "Tip de evaluare", // Auto-generated string
-    label: "Etichetă", // Auto-generated string
+    rateType: "Tip de evaluare",
+    label: "Etichetă",
     contentMode: "Mod de conținut",
     imageFit: "Potrivirea imaginii și miniaturilor",
     altText: "Text alternativ",
-    height: "Înălțime", // Auto-generated string
-    penColor: "Culoarea stiloului", // Auto-generated string
+    height: "Înălțime",
+    penColor: "Culoarea stiloului",
     backgroundColor: "Culoarea fundalului",
-    templateElements: "Elemente template", // Auto-generated string
-    operator: "Operator", // Auto-generated string
-    isVariable: "Este variabil", // Auto-generated string
-    runExpression: "Rulează expresia", // Auto-generated string
-    showCaption: "Arată subtitlul", // Auto-generated string
-    iconName: "Nume pictogramă", // Auto-generated string
-    iconSize: "Dimensiunea pictogramei", // Auto-generated string
-    precision: "Precizie", // Auto-generated string
-    matrixDragHandleArea: "Zona de manipulare a matricei", // Auto-generated string
+    templateElements: "Elemente template",
+    operator: "Operator",
+    isVariable: "Este variabil",
+    runExpression: "Rulează expresia",
+    showCaption: "Arată subtitlul",
+    iconName: "Nume pictogramă",
+    iconSize: "Dimensiunea pictogramei",
+    precision: "Precizie",
+    matrixDragHandleArea: "Zona de manipulare a matricei",
     backgroundImage: "Imagine de fundal",
-    backgroundImageFit: "Potrivirea imaginii de fundal", // Auto-generated string
-    backgroundImageAttachment: "Atașament imagine de fundal", // Auto-generated string
-    backgroundOpacity: "Opacitatea fundalului", // Auto-generated string
+    backgroundImageFit: "Potrivirea imaginii de fundal",
+    backgroundImageAttachment: "Atașament imagine de fundal",
+    backgroundOpacity: "Opacitatea fundalului",
     selectToRankEnabled: "Permite clasificarea selectivă",
     selectToRankAreasLayout: "Alinierea zonei de clasificare",
     selectToRankEmptyRankedAreaText: "Text de afișat dacă toate opțiunile sunt selectate",
     selectToRankEmptyUnrankedAreaText: "Textul substitut pentru zona de clasificare",
-    allowCameraAccess: "Permite accesul la cameră", // Auto-generated string
+    allowCameraAccess: "Permite accesul la cameră",
     scaleColorMode: "Modul de culoare al pictogramei de evaluare",
     rateColorMode: "Schema de culori a pictogramelor Smileys",
-    copyDisplayValue: "Copiază valoarea afișată", // Auto-generated string
-    effectiveColSpan: "Span de coloană eficient",
+    copyDisplayValue: "Copiază valoarea afișată",
+    effectiveColSpan: "Span de coloană eficient"
   },
   theme: {
     advancedMode: "Mod avansat",
@@ -1602,26 +1596,21 @@ export const roStrings = {
     questionTitle: "Caseta de întrebare",
     editorPanel: "Element de intrare",
     lines: "Linii",
-
     primaryDefaultColor: "Implicit",
     primaryDarkColor: "Hover",
     primaryLightColor: "Selectat",
     backgroundDimColor: "Culoarea fundalului",
-
     cornerRadius: "Raza colțului",
     backcolor: "Fundal implicit",
     hovercolor: "Fundal la trecere",
     borderDecoration: "Decorarea bordurii",
-
     fontColor: "Culoarea fontului",
     backgroundColor: "Culoarea fundalului",
-
     primaryForecolor: "Culoare implicită",
     primaryForecolorLight: "Culoare dezactivată",
     font: "Font",
     borderDefault: "Mai întunecat",
     borderLight: "Mai deschis",
-
     fontFamily: "Familia de fonturi",
     fontWeightRegular: "Regular",
     fontWeightHeavy: "Heavy",
@@ -1630,7 +1619,6 @@ export const roStrings = {
     color: "Culoare",
     placeholderColor: "Culoarea textului substitut",
     size: "Dimensiune",
-
     opacity: "Opacitate",
     boxShadowX: "X",
     boxShadowY: "Y",
@@ -1639,7 +1627,6 @@ export const roStrings = {
     boxShadowSpread: "Întindere",
     boxShadowDrop: "Drop",
     boxShadowInner: "Interior",
-
     names: {
       default: "Implicit",
       sharp: "Sharp",
@@ -1665,3 +1652,7 @@ export const roStrings = {
 };
 
 editorLocalization.locales["ro"] = roStrings;
+// The following strings have been translated by a machine translation service
+// Remove those strings that you have corrected manually
+// pe.validateVisitedEmptyFields: "Validate empty fields on lost focus" => "Validarea câmpurilor goale pentru focalizarea pierdută"
+// pehelp.validateVisitedEmptyFields: "Enable this option to trigger validation when a user focuses on an empty input field and then leaves it without making any changes." => "Activați această opțiune pentru a declanșa validarea atunci când un utilizator se concentrează pe un câmp de introducere gol și apoi îl lasă fără a efectua modificări."

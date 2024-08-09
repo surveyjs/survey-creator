@@ -1,5 +1,3 @@
-// This dictionary contains 65 untranslated or inherited localization strings.
-// These strings are commented out. Uncomment and edit them if you want to add your translations.
 import { editorLocalization } from "survey-creator-core";
 
 var traditionalChineseTranslation = {
@@ -415,6 +413,9 @@ var traditionalChineseTranslation = {
     rateDescriptionLocation: "標籤對齊",
     size: "輸入欄位大小（以字元為單位 ）",
     cellErrorLocation: "單元格錯誤消息對齊方式",
+    enabled: "啟用",
+    disabled: "禁用",
+    inherit: "繼承",
     apply: "應用",
     ok: "確定",
     save: "救",
@@ -662,6 +663,7 @@ var traditionalChineseTranslation = {
     },
     focusOnFirstError: "將焦點放在第一個無效答案上",
     checkErrorsMode: "運行驗證",
+    validateVisitedEmptyFields: "驗證失去焦點時的空欄位",
     navigateToUrl: "導航到網址",
     navigateToUrlOnCondition: "動態網址",
     completedBeforeHtml: "用於顯示使用者是否已填寫此調查的標記",
@@ -1228,6 +1230,10 @@ var traditionalChineseTranslation = {
     },
     panelbase: {
       questionTitleWidth: "例如：200px"
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "例如：30%",
+      questionTitleWidth: "例如：200px"
     }
   },
   pehelp: {
@@ -1380,6 +1386,7 @@ var traditionalChineseTranslation = {
     allowResize: "調整大小的手柄（或手柄）出現在角落，可以拖動以更改輸入字段的大小。",
     maxTimeToFinish: "以秒為單位的時間間隔，在此時間間隔之後，調查將自動前進到“感謝”頁面。",
     maxTimeToFinishPage: "以秒為單位的時間間隔，在此時間間隔之後，調查將自動前進到下一頁。",
+    validateVisitedEmptyFields: "啟用此選項可在使用者將焦點放在空輸入欄位上，然後離開該欄位而不進行任何更改時觸發驗證。",
     page: {
       maxTimeToFinish: "以秒為單位的時間間隔，在此時間間隔之後，調查將自動前進到下一頁。",
       visibleIf: "使用魔杖圖示設置確定頁面可見性的條件規則。",
@@ -1442,6 +1449,7 @@ var traditionalChineseTranslation = {
     filePlaceholder: "當「源類型」為「本地檔」或相機不可用時適用",
     photoPlaceholder: "當「源類型」為「相機」時適用。",
     fileOrPhotoPlaceholder: "當「源類型」為「本地檔或相機」時適用。",
+    colCount: "在多列佈局中排列選項。當設置為 0 時，選項將顯示在一行中。",
     masksettings: {
       saveMaskedValue: "選擇是否要在調查結果中存儲帶有應用掩碼的問題值。"
     },
@@ -1461,17 +1469,21 @@ var traditionalChineseTranslation = {
       suffix: "要在值后顯示的一個或多個符號。"
     },
     theme: {
-      // isPanelless: "This setting applies only to questions outside of a panel.",
-      // primaryColor: "Sets a supplementary color that highlights key survey elements.",
-      // panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background.",
-      // questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background.",
-      // cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes.",
-      // "--sjs-general-backcolor-dim": "Sets the main background color of the survey."
+      isPanelless: "此設置僅適用於面板之外的問題。",
+      primaryColor: "設置一種補充顏色，用於突出顯示關鍵調查元素。",
+      panelBackgroundTransparency: "調整面板和問題框相對於調查背景的透明度。",
+      questionBackgroundTransparency: "調整輸入元素相對於調查背景的透明度。",
+      cornerRadius: "設置所有矩形元素的圓角半徑。如果要為輸入元素或面板和問題框設置單獨的角半徑值，請啟用高級模式。",
+      "--sjs-general-backcolor-dim": "設置調查的主要背景顏色。"
     },
     header: {
-      // inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in.",
-      // textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels.",
-      // overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey."
+      inheritWidthFrom: "“與容器相同”選項會自動調整標題內容區域的寬度，以適應放置調查的 HTML 元素。",
+      textAreaWidth: "包含調查標題和描述的標題區域的寬度，以像素為單位。",
+      overlapEnabled: "使標題的底部與調查的頂部重疊。"
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "接受值 。",
+      questionTitleWidth: "接受值 px。"
     }
   },
   // Properties
@@ -1576,62 +1588,7 @@ var traditionalChineseTranslation = {
     scaleColorMode: "縮放顏色模式",
     rateColorMode: "評價顏色模式",
     copyDisplayValue: "複製顯示值",
-    // insensitive: "insensitive",
-    // state: "state",
-    // indent: "indent",
-    // titleLocation: "titleLocation",
-    // descriptionLocation: "descriptionLocation",
-    // hideNumber: "hideNumber",
-    // errorLocation: "errorLocation",
-    // isUnique: "isUnique",
-    // showInMultipleColumns: "showInMultipleColumns",
-    // totalAlignment: "totalAlignment",
-    // detailErrorLocation: "detailErrorLocation",
-    // inheritWidthFrom: "inheritWidthFrom",
-    // textAreaWidth: "textAreaWidth",
-    // textGlowEnabled: "textGlowEnabled",
-    // overlapEnabled: "overlapEnabled",
-    // backgroundImageOpacity: "backgroundImageOpacity",
-    // logoPositionX: "logoPositionX",
-    // logoPositionY: "logoPositionY",
-    // titlePositionX: "titlePositionX",
-    // titlePositionY: "titlePositionY",
-    // descriptionPositionX: "descriptionPositionX",
-    // descriptionPositionY: "descriptionPositionY",
-    // showNumber: "showNumber",
-    // progressBarInheritWidthFrom: "progressBarInheritWidthFrom",
-    // headerView: "headerView",
-    // choiceValuesFromQuestion: "choiceValuesFromQuestion",
-    // choiceTextsFromQuestion: "choiceTextsFromQuestion",
-    // refuseText: "refuseText",
-    // dontKnowText: "dontKnowText",
-    // cellComponent: "cellComponent",
-    // inputTextAlignment: "inputTextAlignment",
-    // maskSettings: "maskSettings",
-    // itemErrorLocation: "itemErrorLocation",
-    // signatureWidth: "signatureWidth",
-    // signatureHeight: "signatureHeight",
-    // signatureAutoScaleEnabled: "signatureAutoScaleEnabled",
-    // penMinWidth: "penMinWidth",
-    // penMaxWidth: "penMaxWidth",
-    // showPlaceholder: "showPlaceholder",
-    // placeholderReadOnly: "placeholderReadOnly",
-    // templateTitle: "templateTitle",
-    // templateTabTitle: "templateTabTitle",
-    // tabTitlePlaceholder: "tabTitlePlaceholder",
-    // templateDescription: "templateDescription",
-    // noEntriesText: "noEntriesText",
-    // newPanelPosition: "newPanelPosition",
-    // templateTitleLocation: "templateTitleLocation",
-    // templateErrorLocation: "templateErrorLocation",
-    // templateVisibleIf: "templateVisibleIf",
-    // saveMaskedValue: "saveMaskedValue",
-    // pattern: "pattern",
-    // allowNegativeValues: "allowNegativeValues",
-    // decimalSeparator: "decimalSeparator",
-    // thousandsSeparator: "thousandsSeparator",
-    // prefix: "prefix",
-    // suffix: "suffix"
+    effectiveColSpan: "柱跨度"
   },
   theme: {
     advancedMode: "高級模式",
@@ -3018,3 +2975,23 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "當問題標題與問題框左側對齊時，為問題標題設置一致的寬度。接受 CSS 值（px、%、in、pt 等）。"
 // pe.commentAreaRows: "Comment area height (in lines)" => "評論區高度（以行為單位）"
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "設置問題註釋的文字區域中顯示的行數。在輸入佔用更多行時，將出現滾動條。"
+// pe.enabled: "Enabled" => "啟用"
+// pe.disabled: "Disabled" => "禁用"
+// pe.inherit: "Inherit" => "繼承"
+// pe.validateVisitedEmptyFields: "Validate empty fields on lost focus" => "驗證失去焦點時的空欄位"
+// panellayoutcolumn.effectiveWidth: "Ex.: 30%" => "例如：30%"
+// panellayoutcolumn.questionTitleWidth: "Ex.: 200px" => "例如：200px"
+// pehelp.validateVisitedEmptyFields: "Enable this option to trigger validation when a user focuses on an empty input field and then leaves it without making any changes." => "啟用此選項可在使用者將焦點放在空輸入欄位上，然後離開該欄位而不進行任何更改時觸發驗證。"
+// pehelp.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line." => "在多列佈局中排列選項。當設置為 0 時，選項將顯示在一行中。"
+// theme.isPanelless: "This setting applies only to questions outside of a panel." => "此設置僅適用於面板之外的問題。"
+// theme.primaryColor: "Sets a supplementary color that highlights key survey elements." => "設置一種補充顏色，用於突出顯示關鍵調查元素。"
+// theme.panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background." => "調整面板和問題框相對於調查背景的透明度。"
+// theme.questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background." => "調整輸入元素相對於調查背景的透明度。"
+// theme.cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes." => "設置所有矩形元素的圓角半徑。如果要為輸入元素或面板和問題框設置單獨的角半徑值，請啟用高級模式。"
+// theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "設置調查的主要背景顏色。"
+// header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "“與容器相同”選項會自動調整標題內容區域的寬度，以適應放置調查的 HTML 元素。"
+// header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "包含調查標題和描述的標題區域的寬度，以像素為單位。"
+// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "使標題的底部與調查的頂部重疊。"
+// panellayoutcolumn.effectiveWidth: "Accepts values %." => "接受值 。"
+// panellayoutcolumn.questionTitleWidth: "Accepts values px." => "接受值 px。"
+// p.effectiveColSpan: "Column span" => "柱跨度"

@@ -1,5 +1,3 @@
-// This dictionary contains 65 untranslated or inherited localization strings.
-// These strings are commented out. Uncomment and edit them if you want to add your translations.
 import { editorLocalization } from "survey-creator-core";
 
 export var hebrewStrings = {
@@ -415,6 +413,9 @@ export var hebrewStrings = {
     rateDescriptionLocation: "יישור תוויות",
     size: "גודל שדה הקלט (בתווים)",
     cellErrorLocation: "יישור הודעת שגיאה של תא",
+    enabled: "מופעלת",
+    disabled: "נכים",
+    inherit: "לרשת",
     apply: "החל",
     ok: "אוקי",
     save: "שמור",
@@ -662,6 +663,7 @@ export var hebrewStrings = {
     },
     focusOnFirstError: "קפיצה לתשובה השגויה הראשונה",
     checkErrorsMode: "הפעל את האימות",
+    validateVisitedEmptyFields: "אימות שדות ריקים במיקוד שאבד",
     navigateToUrl: "נווט לכתובת URL",
     navigateToUrlOnCondition: "כתובת URL דינמית",
     completedBeforeHtml: "קוד HTML להצגה אם המשתמש כבר מילא את הסקר הזה",
@@ -1228,6 +1230,10 @@ export var hebrewStrings = {
     },
     panelbase: {
       questionTitleWidth: "לדוגמה: 200px"
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "לדוגמה: 30%",
+      questionTitleWidth: "לדוגמה: 200px"
     }
   },
   pehelp: {
@@ -1380,6 +1386,7 @@ export var hebrewStrings = {
     allowResize: "נקודת האחיזה לשינוי גודל (או נקודת האחיזה) מופיעה בפינה וניתן לגרור אותה כדי לשנות את גודל שדה הקלט.",
     maxTimeToFinish: "מרווח זמן בשניות שלאחריו הסקר מתקדם אוטומטית לדף התודה.",
     maxTimeToFinishPage: "מרווח זמן בשניות שלאחריו הסקר מתקדם אוטומטית לעמוד הבא.",
+    validateVisitedEmptyFields: "הפעל אפשרות זו כדי להפעיל אימות כאשר משתמש מתמקד בשדה קלט ריק ולאחר מכן עוזב אותו מבלי לבצע שינויים.",
     page: {
       maxTimeToFinish: "מרווח זמן בשניות שלאחריו הסקר מתקדם אוטומטית לעמוד הבא.",
       visibleIf: "השתמש בסמל מטה הקסם כדי להגדיר כלל תנאי הקובע את תצוגת העמוד.",
@@ -1442,6 +1449,7 @@ export var hebrewStrings = {
     filePlaceholder: "חל כאשר \"סוג מקור\" הוא \"קבצים מקומיים\" או כאשר המצלמה אינה זמינה",
     photoPlaceholder: "חל כאשר \"סוג מקור\" הוא \"מצלמה\".",
     fileOrPhotoPlaceholder: "חל כאשר \"סוג מקור\" הוא \"קבצים מקומיים או מצלמה\".",
+    colCount: "מסדר אפשרויות בחירה בפריסה מרובת עמודות. כאשר הן מוגדרות על 0, האפשרויות מוצגות בשורה אחת.",
     masksettings: {
       saveMaskedValue: "בחר אם ברצונך לאחסן את ערך השאלה עם מסיכה שהוחלה בתוצאות הסקר."
     },
@@ -1461,17 +1469,21 @@ export var hebrewStrings = {
       suffix: "סימן אחד או יותר שיוצגו לאחר הערך."
     },
     theme: {
-      // isPanelless: "This setting applies only to questions outside of a panel.",
-      // primaryColor: "Sets a supplementary color that highlights key survey elements.",
-      // panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background.",
-      // questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background.",
-      // cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes.",
-      // "--sjs-general-backcolor-dim": "Sets the main background color of the survey."
+      isPanelless: "הגדרה זו חלה רק על שאלות מחוץ לחלונית.",
+      primaryColor: "הגדרת צבע משלים המדגיש רכיבי סקר מרכזיים.",
+      panelBackgroundTransparency: "התאמת השקיפות של חלוניות ותיבות שאלה ביחס לרקע הסקר.",
+      questionBackgroundTransparency: "התאמת השקיפות של רכיבי הקלט ביחס לרקע הסקר.",
+      cornerRadius: "קובע את רדיוס הפינה לכל הרכיבים המלבניים. הפעילו את 'מצב מתקדם' אם ברצונכם להגדיר ערכי רדיוס פינה בודדים לרכיבי קלט או לחלוניות ולתיבות שאלה.",
+      "--sjs-general-backcolor-dim": "מגדיר את צבע הרקע הראשי של הסקר."
     },
     header: {
-      // inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in.",
-      // textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels.",
-      // overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey."
+      inheritWidthFrom: "האפשרות \"זהה לגורם מכיל\" מתאימה אוטומטית את רוחב אזור התוכן של הכותרת העליונה כך שיתאים לרכיב HTML שבו ממוקם הסקר.",
+      textAreaWidth: "רוחב אזור הכותרת המכיל את כותרת הסקר ותיאורו, נמדד בפיקסלים.",
+      overlapEnabled: "הופך את החלק התחתון של הכותרת לשכבת-על עם החלק העליון של הסקר."
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "מקבל ערכים %.",
+      questionTitleWidth: "מקבל ערכים px."
     }
   },
   // Properties
@@ -1576,62 +1588,7 @@ export var hebrewStrings = {
     scaleColorMode: "מצב צבע לסולם",
     rateColorMode: "מצב צבע לדירוג",
     copyDisplayValue: "העתקת ערך תצוגה",
-    // insensitive: "insensitive",
-    // state: "state",
-    // indent: "indent",
-    // titleLocation: "titleLocation",
-    // descriptionLocation: "descriptionLocation",
-    // hideNumber: "hideNumber",
-    // errorLocation: "errorLocation",
-    // isUnique: "isUnique",
-    // showInMultipleColumns: "showInMultipleColumns",
-    // totalAlignment: "totalAlignment",
-    // detailErrorLocation: "detailErrorLocation",
-    // inheritWidthFrom: "inheritWidthFrom",
-    // textAreaWidth: "textAreaWidth",
-    // textGlowEnabled: "textGlowEnabled",
-    // overlapEnabled: "overlapEnabled",
-    // backgroundImageOpacity: "backgroundImageOpacity",
-    // logoPositionX: "logoPositionX",
-    // logoPositionY: "logoPositionY",
-    // titlePositionX: "titlePositionX",
-    // titlePositionY: "titlePositionY",
-    // descriptionPositionX: "descriptionPositionX",
-    // descriptionPositionY: "descriptionPositionY",
-    // showNumber: "showNumber",
-    // progressBarInheritWidthFrom: "progressBarInheritWidthFrom",
-    // headerView: "headerView",
-    // choiceValuesFromQuestion: "choiceValuesFromQuestion",
-    // choiceTextsFromQuestion: "choiceTextsFromQuestion",
-    // refuseText: "refuseText",
-    // dontKnowText: "dontKnowText",
-    // cellComponent: "cellComponent",
-    // inputTextAlignment: "inputTextAlignment",
-    // maskSettings: "maskSettings",
-    // itemErrorLocation: "itemErrorLocation",
-    // signatureWidth: "signatureWidth",
-    // signatureHeight: "signatureHeight",
-    // signatureAutoScaleEnabled: "signatureAutoScaleEnabled",
-    // penMinWidth: "penMinWidth",
-    // penMaxWidth: "penMaxWidth",
-    // showPlaceholder: "showPlaceholder",
-    // placeholderReadOnly: "placeholderReadOnly",
-    // templateTitle: "templateTitle",
-    // templateTabTitle: "templateTabTitle",
-    // tabTitlePlaceholder: "tabTitlePlaceholder",
-    // templateDescription: "templateDescription",
-    // noEntriesText: "noEntriesText",
-    // newPanelPosition: "newPanelPosition",
-    // templateTitleLocation: "templateTitleLocation",
-    // templateErrorLocation: "templateErrorLocation",
-    // templateVisibleIf: "templateVisibleIf",
-    // saveMaskedValue: "saveMaskedValue",
-    // pattern: "pattern",
-    // allowNegativeValues: "allowNegativeValues",
-    // decimalSeparator: "decimalSeparator",
-    // thousandsSeparator: "thousandsSeparator",
-    // prefix: "prefix",
-    // suffix: "suffix"
+    effectiveColSpan: "טווח עמודות"
   },
   theme: {
     advancedMode: "מצב מתקדם",
@@ -2314,3 +2271,23 @@ editorLocalization.locales["he"] = hebrewStrings;
 // page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "הגדרת רוחב עקבי לכותרות שאלות כאשר הן מיושרות משמאל לתיבות השאלות. מקבל ערכי CSS (px, %, in, pt וכו')."
 // pe.commentAreaRows: "Comment area height (in lines)" => "גובה אזור הערה (בשורות)"
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "מגדיר את מספר השורות המוצגות באזורי טקסט להערות שאלה. בקלט תופס יותר שורות, פס הגלילה מופיע."
+// pe.enabled: "Enabled" => "מופעלת"
+// pe.disabled: "Disabled" => "נכים"
+// pe.inherit: "Inherit" => "לרשת"
+// pe.validateVisitedEmptyFields: "Validate empty fields on lost focus" => "אימות שדות ריקים במיקוד שאבד"
+// panellayoutcolumn.effectiveWidth: "Ex.: 30%" => "לדוגמה: 30%"
+// panellayoutcolumn.questionTitleWidth: "Ex.: 200px" => "לדוגמה: 200px"
+// pehelp.validateVisitedEmptyFields: "Enable this option to trigger validation when a user focuses on an empty input field and then leaves it without making any changes." => "הפעל אפשרות זו כדי להפעיל אימות כאשר משתמש מתמקד בשדה קלט ריק ולאחר מכן עוזב אותו מבלי לבצע שינויים."
+// pehelp.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line." => "מסדר אפשרויות בחירה בפריסה מרובת עמודות. כאשר הן מוגדרות על 0, האפשרויות מוצגות בשורה אחת."
+// theme.isPanelless: "This setting applies only to questions outside of a panel." => "הגדרה זו חלה רק על שאלות מחוץ לחלונית."
+// theme.primaryColor: "Sets a supplementary color that highlights key survey elements." => "הגדרת צבע משלים המדגיש רכיבי סקר מרכזיים."
+// theme.panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background." => "התאמת השקיפות של חלוניות ותיבות שאלה ביחס לרקע הסקר."
+// theme.questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background." => "התאמת השקיפות של רכיבי הקלט ביחס לרקע הסקר."
+// theme.cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes." => "קובע את רדיוס הפינה לכל הרכיבים המלבניים. הפעילו את 'מצב מתקדם' אם ברצונכם להגדיר ערכי רדיוס פינה בודדים לרכיבי קלט או לחלוניות ולתיבות שאלה."
+// theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "מגדיר את צבע הרקע הראשי של הסקר."
+// header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "האפשרות \"זהה לגורם מכיל\" מתאימה אוטומטית את רוחב אזור התוכן של הכותרת העליונה כך שיתאים לרכיב HTML שבו ממוקם הסקר."
+// header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "רוחב אזור הכותרת המכיל את כותרת הסקר ותיאורו, נמדד בפיקסלים."
+// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "הופך את החלק התחתון של הכותרת לשכבת-על עם החלק העליון של הסקר."
+// panellayoutcolumn.effectiveWidth: "Accepts values %." => "מקבל ערכים %."
+// panellayoutcolumn.questionTitleWidth: "Accepts values px." => "מקבל ערכים px."
+// p.effectiveColSpan: "Column span" => "טווח עמודות"
