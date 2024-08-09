@@ -89,7 +89,6 @@ export class SurveyElementActionContainer extends AdaptiveActionContainer {
 }
 
 export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> extends Base {
-  static expandOnDragTimeOut: number = 1000;
   public actionContainer: SurveyElementActionContainer;
   protected expandCollapseAction: IAction;
   protected designerStateManager: DesignerStateManager;
@@ -134,7 +133,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     if ((this.surveyElement.isPanel || this.surveyElement.isPage) && this.collapsed) {
       this.dragCollapsedTimer = setTimeout(() => {
         this.expandWithDragIn();
-      }, SurveyElementAdornerBase.expandOnDragTimeOut);
+      }, this.creator.expandOnDragTimeOut);
     }
   }
   protected expandWithDragIn() {

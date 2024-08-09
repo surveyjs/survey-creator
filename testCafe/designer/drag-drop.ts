@@ -419,6 +419,44 @@ test("Drag Drop to collapsed panel", async (t) => {
   await t.expect(resultJson).eql(json);
 });
 
+test("Drag Drop to collapsed page", async (t) => {
+  await ClientFunction(() => { window["creator"].expandCollapseButtonVisibility = "always"; })();
+
+  await t.resizeWindow(1600, 1000);
+  const json = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "panel",
+            name: "panel1",
+            elements: [{
+              type: "text",
+              name: "q1"
+            }]
+          }
+        ]
+      }
+    ]
+  };
+  await setJSON(json);
+
+  const qCollapseButton = Selector(".svc-page__content #collapse");
+  await t.click(qCollapseButton.filterVisible());
+
+  const Page = Selector(".svc-page");
+  const toolboxToolAction = Selector(".svc-toolbox__tool > .sv-action__content");
+  await t
+    .hover(toolboxToolAction)
+    .dispatchEvent(toolboxToolAction, "pointerdown")
+    .hover(Page)
+
+    .expect(Page.find(".svc-page__content--collapsed").exists).ok()
+    .wait(2000)
+    .expect(Page.find(".svc-page__content--collapsed").exists).notOk();
+});
+
 test("Drag Drop Question from a panel", async (t) => {
   await t.resizeWindow(2560, 1440);
   const json = {
