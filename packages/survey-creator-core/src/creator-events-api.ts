@@ -311,17 +311,8 @@ export interface MatrixColumnAddedEvent {
 }
 
 export interface TablePropertyEditorOptions {
-  /**
-   * A Boolean property that you can set to `false` if you want to disallow users to add and delete table rows.
-   */
   allowAddRemoveItems: boolean;
-  /**
-   * A Boolean property that you can set to `false` if you want to disallow users to delete all table rows.
-   */
   allowRemoveAllItems: boolean;
-  /**
-   * A Boolean property that you can set to `false` if you want to disallow users to edit table content as text in a pop-up window.
-   */
   allowBatchEdit: boolean;
 }
 export interface ConfigureTablePropertyEditorEvent {
@@ -334,18 +325,6 @@ export interface ConfigureTablePropertyEditorEvent {
    */
   propertyName: string;
   /**
-   * An object with table property editor settings that you can modify. Contains the following properties:
-   *   - `options.editorOptions.allowAddRemoveItems`: `boolean`      
-   *   A Boolean property that you can set to `false` if you want to disallow users to add and delete table rows.
-   * 
-   *   - `options.editorOptions.allowRemoveAllItems`: `boolean`      
-   *   A Boolean property that you can set to `false` if you want to disallow users to delete all table rows.
-   * 
-   *   - `options.editorOptions.allowBatchEdit`: `boolean`     
-   *   A Boolean property that you can set to `false` if you want to disallow users to edit table content as text in a pop-up window.
-   */
-  editorOptions: TablePropertyEditorOptions;
-  /**
    * A Boolean property that you can set to `false` if you want to disallow users to add and delete table rows.
    */
   allowAddRemoveItems: boolean;
@@ -357,6 +336,10 @@ export interface ConfigureTablePropertyEditorEvent {
    * A Boolean property that you can set to `false` if you want to disallow users to edit table content as text in a pop-up window.
    */
   allowBatchEdit: boolean;
+  /**
+   * Obsolete. Use `options.allowAddRemoveRows`, `options.allowRemoveAllRows`, and `options.allowBatchEdit` instead.
+   */
+  editorOptions: TablePropertyEditorOptions;
 }
 
 export interface PropertyDisplayCustomErrorEvent {
@@ -724,7 +707,7 @@ export interface UploadFileEvent {
    */
   callback: (status: string, fileUrl?: string) => void;
   /**
-   * Obsolete. Use the `options.element` parameter instead.
+   * Obsolete. Use `options.element` instead.
    */
   question: Question;
 }
