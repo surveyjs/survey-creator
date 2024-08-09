@@ -311,6 +311,20 @@ export interface MatrixColumnAddedEvent {
 }
 
 export interface TablePropertyEditorOptions {
+  allowAddRemoveItems: boolean;
+  allowRemoveAllItems: boolean;
+  allowBatchEdit: boolean;
+  showTextView?: boolean;
+}
+export interface ConfigureTablePropertyEditorEvent {
+  /**
+   * A survey element (survey, page, panel, question) for which the table property editor is created.
+   */
+  obj: Base;
+  /**
+   * The name of the property with which the editor is associated: [`"columns"`](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-question-model#columns), [`"rows"`](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-question-model#rows), [`"choices"`](https://surveyjs.io/form-library/documentation/api-reference/questionselectbase#choices), etc.
+   */
+  propertyName: string;
   /**
    * A Boolean property that you can set to `false` if you want to disallow users to add and delete table rows.
    */
@@ -323,26 +337,8 @@ export interface TablePropertyEditorOptions {
    * A Boolean property that you can set to `false` if you want to disallow users to edit table content as text in a pop-up window.
    */
   allowBatchEdit: boolean;
-}
-export interface ConfigureTablePropertyEditorEvent {
   /**
-   * A survey element (survey, page, panel, question) for which the table property editor is created.
-   */
-  obj: Base;
-  /**
-   * The name of the property with which the editor is associated: [`"columns"`](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-question-model#columns), [`"rows"`](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-question-model#rows), [`"choices"`](https://surveyjs.io/form-library/documentation/api-reference/questionselectbase#choices), etc.
-   */
-  propertyName: string;
-  /**
-   * An object with table property editor settings that you can modify. Contains the following properties:
-   *   - `options.editorOptions.allowAddRemoveItems`: `boolean`      
-   *   A Boolean property that you can set to `false` if you want to disallow users to add and delete table rows.
-   * 
-   *   - `options.editorOptions.allowRemoveAllItems`: `boolean`      
-   *   A Boolean property that you can set to `false` if you want to disallow users to delete all table rows.
-   * 
-   *   - `options.editorOptions.allowBatchEdit`: `boolean`     
-   *   A Boolean property that you can set to `false` if you want to disallow users to edit table content as text in a pop-up window.
+   * Obsolete. Use `options.allowAddRemoveItems`, `options.allowRemoveAllItems`, and `options.allowBatchEdit` instead.
    */
   editorOptions: TablePropertyEditorOptions;
 }
@@ -712,7 +708,7 @@ export interface UploadFileEvent {
    */
   callback: (status: string, fileUrl?: string) => void;
   /**
-   * Obsolete. Use the `options.element` parameter instead.
+   * Obsolete. Use `options.element` instead.
    */
   question: Question;
 }

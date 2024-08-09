@@ -55,6 +55,7 @@ import { PropertyGridEditorCollection } from "../src/property-grid/index";
 import { PropertyGridEditorMatrixItemValues } from "../src/property-grid/matrices";
 import { ObjectSelector } from "../src/property-grid/object-selector";
 import { TabDesignerViewModel } from "../src/components/tabs/designer";
+import { ConfigureTablePropertyEditorEvent } from "../src/creator-events-api";
 
 surveySettings.supportCreatorV2 = true;
 
@@ -4507,4 +4508,34 @@ test("json editor default indent", (): any => {
   const creator = new CreatorTester();
   expect(settings.jsonEditor.indentation).toBe(2);
   expect(creator.text).toBe("{\n  \"logoPosition\": \"right\",\n  \"pages\": [\n    {\n      \"name\": \"page1\"\n    }\n  ]\n}");
+});
+test("onSetPropertyEditorOptions -> onConfigureTablePropertyEditor", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "dropdown", name: "q1", choices: [1, 2] }] };
+  const question = creator.survey.getQuestionByName("q1");
+  const callBackOptions = {
+    allowAddRemoveItems: true,
+    allowRemoveAllItems: true,
+    allowBatchEdit: true
+  };
+  creator.onSetPropertyEditorOptionsCallback("choices", question, callBackOptions);
+  expect(callBackOptions.allowBatchEdit).toBeTruthy();
+  let onSetPropertyEditorOptions_allowBatchEdit = false;
+  creator.onSetPropertyEditorOptions.add((sender: any, options: ConfigureTablePropertyEditorEvent) => {
+    options.editorOptions.allowBatchEdit = onSetPropertyEditorOptions_allowBatchEdit;
+  });
+  creator.onSetPropertyEditorOptionsCallback("choices", question, callBackOptions);
+  expect(callBackOptions.allowBatchEdit).toBeFalsy();
+  callBackOptions.allowBatchEdit = true;
+  onSetPropertyEditorOptions_allowBatchEdit = true;
+  let onConfigureTablePropertyEditor_allowBatchEdit = true;
+  creator.onConfigureTablePropertyEditor.add((sender: any, options: ConfigureTablePropertyEditorEvent) => {
+    options.allowBatchEdit = onConfigureTablePropertyEditor_allowBatchEdit;
+  });
+  creator.onSetPropertyEditorOptionsCallback("choices", question, callBackOptions);
+  expect(callBackOptions.allowBatchEdit).toBeTruthy();
+
+  onSetPropertyEditorOptions_allowBatchEdit = false;
+  creator.onSetPropertyEditorOptionsCallback("choices", question, callBackOptions);
+  expect(callBackOptions.allowBatchEdit).toBeFalsy();
 });
