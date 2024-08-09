@@ -536,6 +536,7 @@ export class SurveyCreatorModel extends Base
    * @see onPropertyEditorCreated
    */
   public onSetPropertyEditorOptions: EventBase<SurveyCreatorModel, ConfigureTablePropertyEditorEvent> = this.addCreatorEvent<SurveyCreatorModel, ConfigureTablePropertyEditorEvent>();
+  public onConfigureTablePropertyEditor: EventBase<SurveyCreatorModel, ConfigureTablePropertyEditorEvent> = this.addCreatorEvent<SurveyCreatorModel, ConfigureTablePropertyEditorEvent>();
 
   public onGenerateNewName: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
   /**
@@ -3261,12 +3262,19 @@ export class SurveyCreatorModel extends Base
     obj: Base,
     editorOptions: any
   ) {
-    var options = {
+    const options: any = {
       propertyName: propertyName,
       obj: obj,
-      editorOptions: editorOptions
+      editorOptions: editorOptions,
+      allowAddRemoveItems: editorOptions.allowAddRemoveItems,
+      allowRemoveAllItems: editorOptions.allowRemoveAllItems,
+      allowBatchEdit: editorOptions.allowBatchEdit
     };
+    const keys = ["allowAddRemoveItems", "allowRemoveAllItems", "allowBatchEdit"];
+    keys.forEach(key => options[key] = editorOptions[key]);
     this.onSetPropertyEditorOptions.fire(this, options);
+    this.onConfigureTablePropertyEditor.fire(this, options);
+    keys.forEach(key => editorOptions[key] = options[key]);
   }
   onGetErrorTextOnValidationCallback(
     propertyName: string,

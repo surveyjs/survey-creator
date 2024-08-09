@@ -345,6 +345,18 @@ export interface ConfigureTablePropertyEditorEvent {
    *   A Boolean property that you can set to `false` if you want to disallow users to edit table content as text in a pop-up window.
    */
   editorOptions: TablePropertyEditorOptions;
+  /**
+   * A Boolean property that you can set to `false` if you want to disallow users to add and delete table rows.
+   */
+  allowAddRemoveItems: boolean;
+  /**
+   * A Boolean property that you can set to `false` if you want to disallow users to delete all table rows.
+   */
+  allowRemoveAllItems: boolean;
+  /**
+   * A Boolean property that you can set to `false` if you want to disallow users to edit table content as text in a pop-up window.
+   */
+  allowBatchEdit: boolean;
 }
 
 export interface PropertyDisplayCustomErrorEvent {
