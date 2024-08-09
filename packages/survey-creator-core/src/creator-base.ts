@@ -1879,6 +1879,7 @@ export class SurveyCreatorModel extends Base
       isDraggedFromToolbox = !sender.draggedElement.parent;
       this.onDragStart.fire(this, options);
       this.startUndoRedoTransaction("drag drop");
+      this.isDragging = true;
     });
     this.dragDropSurveyElements.onDragEnd.add((sender, options) => {
       this.stopUndoRedoTransaction();
@@ -1889,6 +1890,7 @@ export class SurveyCreatorModel extends Base
       if (!options.fromElement) {
         this.setModified({ type: "ADDED_FROM_TOOLBOX", question: options.draggedElement });
       }
+      this.isDragging = false;
     });
   }
   private initDragDropChoices() {
@@ -3762,6 +3764,7 @@ export class SurveyCreatorModel extends Base
     }
   }) isMobileView: boolean;
   @property({ defaultValue: false }) isTouch;
+  @property({ defaultValue: false }) isDragging;
   /**
    * Specifies the Toolbox location.
    * 
