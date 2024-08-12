@@ -227,7 +227,7 @@ creator.saveSurveyFunc = (no, callback) => {
 //   </React.StrictMode>,
 //   document.getElementById("root")
 // );
-SurveyCreatorUI.renderSurveyCreator(creator, document.getElementById("root"));
+SurveyCreator.renderSurveyCreator(creator, document.getElementById("root"));
 
 // creator.toolbarItems.push(
 //   new Survey.Action({
