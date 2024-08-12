@@ -1,5 +1,3 @@
-// This dictionary contains 65 untranslated or inherited localization strings.
-// These strings are commented out. Uncomment and edit them if you want to add your translations.
 import { editorLocalization } from "survey-creator-core";
 
 export var bgStrings = {
@@ -415,6 +413,9 @@ export var bgStrings = {
     rateDescriptionLocation: "Подравняване на етикети",
     size: "Размер на въвеждане (в знаци)",
     cellErrorLocation: "Подравняване на съобщение за грешка в клетка",
+    enabled: "Разрешено",
+    disabled: "Инвалид",
+    inherit: "Наследявам",
     apply: "Приложи",
     ok: "ДА",
     save: "Запази",
@@ -662,6 +663,7 @@ export var bgStrings = {
     },
     focusOnFirstError: "Фокусиране върху първия невалиден отговор",
     checkErrorsMode: "Стартиране на валидацията",
+    validateVisitedEmptyFields: "Проверка на празни полета при загубен фокус",
     navigateToUrl: "Навигирай до URL",
     navigateToUrlOnCondition: "Динамичен URL",
     completedBeforeHtml: "Маркиране за показване дали потребителят вече е попълнил тази анкета",
@@ -1228,6 +1230,10 @@ export var bgStrings = {
     },
     panelbase: {
       questionTitleWidth: "Пример: 200px"
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "Пример: 30%",
+      questionTitleWidth: "Пример: 200px"
     }
   },
   pehelp: {
@@ -1380,6 +1386,7 @@ export var bgStrings = {
     allowResize: "Манипулаторът за преоразмеряване (или ръкохватката) се появява в ъгъла и може да се плъзга, за да се промени размерът на входното поле.",
     maxTimeToFinish: "Интервал от време в секунди, след което проучването автоматично преминава към страницата \"Благодаря\".",
     maxTimeToFinishPage: "Интервал от време в секунди, след който проучването автоматично преминава към следващата страница.",
+    validateVisitedEmptyFields: "Активирайте тази опция, за да задействате проверка, когато потребителят се фокусира върху празно поле за въвеждане и след това го напусне, без да прави никакви промени.",
     page: {
       maxTimeToFinish: "Интервал от време в секунди, след който проучването автоматично преминава към следващата страница.",
       visibleIf: "Използвайте иконата на магическа пръчка, за да зададете условно правило, което определя видимостта на страницата.",
@@ -1442,6 +1449,7 @@ export var bgStrings = {
     filePlaceholder: "Прилага се, когато \"Тип източник\" е \"Локални файлове\" или когато камерата не е налична",
     photoPlaceholder: "Прилага се, когато \"Тип източник\" е \"Камера\".",
     fileOrPhotoPlaceholder: "Прилага се, когато \"Тип източник\" е \"Локални файлове или камера\".",
+    colCount: "Подрежда опциите за избор в оформление с няколко колони. Когато е зададено на 0, опциите се показват на един ред.",
     masksettings: {
       saveMaskedValue: "Изберете дали искате да съхраните стойността на въпроса с приложена маска в резултатите от проучването."
     },
@@ -1461,17 +1469,21 @@ export var bgStrings = {
       suffix: "Един или няколко символа, които трябва да се покажат след стойността."
     },
     theme: {
-      // isPanelless: "This setting applies only to questions outside of a panel.",
-      // primaryColor: "Sets a supplementary color that highlights key survey elements.",
-      // panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background.",
-      // questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background.",
-      // cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes.",
-      // "--sjs-general-backcolor-dim": "Sets the main background color of the survey."
+      isPanelless: "Тази настройка се прилага само за въпроси извън панела.",
+      primaryColor: "Задава допълнителен цвят, който подчертава ключови елементи на проучването.",
+      panelBackgroundTransparency: "Регулира прозрачността на панелите и полетата за въпроси спрямо фона на проучването.",
+      questionBackgroundTransparency: "Регулира прозрачността на входните елементи спрямо фона на проучването.",
+      cornerRadius: "Задава ъгловия радиус за всички правоъгълни елементи. Разрешете разширения режим, ако искате да зададете индивидуални стойности на радиуса на ъгъла за входни елементи или панели и полета за въпроси.",
+      "--sjs-general-backcolor-dim": "Задава основния цвят на фона на проучването."
     },
     header: {
-      // inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in.",
-      // textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels.",
-      // overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey."
+      inheritWidthFrom: "Опцията \"Същото като контейнера\" автоматично регулира ширината на областта на съдържанието на заглавката, за да се побере в HTML елемента, в който е поставена анкетата.",
+      textAreaWidth: "Ширината на областта на заглавката, която съдържа заглавието и описанието на проучването, измерена в пиксели.",
+      overlapEnabled: "Прави долната част на заглавката наслагвана с горната част на проучването."
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "Приема стойности %.",
+      questionTitleWidth: "Приема стойности px."
     }
   },
   // Properties
@@ -1576,62 +1588,7 @@ export var bgStrings = {
     scaleColorMode: "Режим на мащабиране на цветовете",
     rateColorMode: "Режим на оценяване на цветовете",
     copyDisplayValue: "Копиране на показваната стойност",
-    // insensitive: "insensitive",
-    // state: "state",
-    // indent: "indent",
-    // titleLocation: "titleLocation",
-    // descriptionLocation: "descriptionLocation",
-    // hideNumber: "hideNumber",
-    // errorLocation: "errorLocation",
-    // isUnique: "isUnique",
-    // showInMultipleColumns: "showInMultipleColumns",
-    // totalAlignment: "totalAlignment",
-    // detailErrorLocation: "detailErrorLocation",
-    // inheritWidthFrom: "inheritWidthFrom",
-    // textAreaWidth: "textAreaWidth",
-    // textGlowEnabled: "textGlowEnabled",
-    // overlapEnabled: "overlapEnabled",
-    // backgroundImageOpacity: "backgroundImageOpacity",
-    // logoPositionX: "logoPositionX",
-    // logoPositionY: "logoPositionY",
-    // titlePositionX: "titlePositionX",
-    // titlePositionY: "titlePositionY",
-    // descriptionPositionX: "descriptionPositionX",
-    // descriptionPositionY: "descriptionPositionY",
-    // showNumber: "showNumber",
-    // progressBarInheritWidthFrom: "progressBarInheritWidthFrom",
-    // headerView: "headerView",
-    // choiceValuesFromQuestion: "choiceValuesFromQuestion",
-    // choiceTextsFromQuestion: "choiceTextsFromQuestion",
-    // refuseText: "refuseText",
-    // dontKnowText: "dontKnowText",
-    // cellComponent: "cellComponent",
-    // inputTextAlignment: "inputTextAlignment",
-    // maskSettings: "maskSettings",
-    // itemErrorLocation: "itemErrorLocation",
-    // signatureWidth: "signatureWidth",
-    // signatureHeight: "signatureHeight",
-    // signatureAutoScaleEnabled: "signatureAutoScaleEnabled",
-    // penMinWidth: "penMinWidth",
-    // penMaxWidth: "penMaxWidth",
-    // showPlaceholder: "showPlaceholder",
-    // placeholderReadOnly: "placeholderReadOnly",
-    // templateTitle: "templateTitle",
-    // templateTabTitle: "templateTabTitle",
-    // tabTitlePlaceholder: "tabTitlePlaceholder",
-    // templateDescription: "templateDescription",
-    // noEntriesText: "noEntriesText",
-    // newPanelPosition: "newPanelPosition",
-    // templateTitleLocation: "templateTitleLocation",
-    // templateErrorLocation: "templateErrorLocation",
-    // templateVisibleIf: "templateVisibleIf",
-    // saveMaskedValue: "saveMaskedValue",
-    // pattern: "pattern",
-    // allowNegativeValues: "allowNegativeValues",
-    // decimalSeparator: "decimalSeparator",
-    // thousandsSeparator: "thousandsSeparator",
-    // prefix: "prefix",
-    // suffix: "suffix"
+    effectiveColSpan: "Обхват на колоната"
   },
   theme: {
     advancedMode: "Разширен режим",
@@ -2309,3 +2266,23 @@ editorLocalization.locales["bg"] = bgStrings;
 // page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Задава еднаква ширина за заглавията на въпросите, когато те са подравнени отляво на техните полета за въпроси. Приема CSS стойности (px, %, in, pt и т.н.)."
 // pe.commentAreaRows: "Comment area height (in lines)" => "Височина на областта за коментари (в редове)"
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "Задава броя на показваните редове в текстовите области за коментари на въпроси. Във входа заема повече редове, плъзгачът се появява."
+// pe.enabled: "Enabled" => "Разрешено"
+// pe.disabled: "Disabled" => "Инвалид"
+// pe.inherit: "Inherit" => "Наследявам"
+// pe.validateVisitedEmptyFields: "Validate empty fields on lost focus" => "Проверка на празни полета при загубен фокус"
+// panellayoutcolumn.effectiveWidth: "Ex.: 30%" => "Пример: 30%"
+// panellayoutcolumn.questionTitleWidth: "Ex.: 200px" => "Пример: 200px"
+// pehelp.validateVisitedEmptyFields: "Enable this option to trigger validation when a user focuses on an empty input field and then leaves it without making any changes." => "Активирайте тази опция, за да задействате проверка, когато потребителят се фокусира върху празно поле за въвеждане и след това го напусне, без да прави никакви промени."
+// pehelp.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line." => "Подрежда опциите за избор в оформление с няколко колони. Когато е зададено на 0, опциите се показват на един ред."
+// theme.isPanelless: "This setting applies only to questions outside of a panel." => "Тази настройка се прилага само за въпроси извън панела."
+// theme.primaryColor: "Sets a supplementary color that highlights key survey elements." => "Задава допълнителен цвят, който подчертава ключови елементи на проучването."
+// theme.panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background." => "Регулира прозрачността на панелите и полетата за въпроси спрямо фона на проучването."
+// theme.questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background." => "Регулира прозрачността на входните елементи спрямо фона на проучването."
+// theme.cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes." => "Задава ъгловия радиус за всички правоъгълни елементи. Разрешете разширения режим, ако искате да зададете индивидуални стойности на радиуса на ъгъла за входни елементи или панели и полета за въпроси."
+// theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "Задава основния цвят на фона на проучването."
+// header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "Опцията \"Същото като контейнера\" автоматично регулира ширината на областта на съдържанието на заглавката, за да се побере в HTML елемента, в който е поставена анкетата."
+// header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "Ширината на областта на заглавката, която съдържа заглавието и описанието на проучването, измерена в пиксели."
+// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "Прави долната част на заглавката наслагвана с горната част на проучването."
+// panellayoutcolumn.effectiveWidth: "Accepts values %." => "Приема стойности %."
+// panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Приема стойности px."
+// p.effectiveColSpan: "Column span" => "Обхват на колоната"

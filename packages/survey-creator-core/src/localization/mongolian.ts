@@ -1,5 +1,3 @@
-// This dictionary contains 65 untranslated or inherited localization strings.
-// These strings are commented out. Uncomment and edit them if you want to add your translations.
 import { editorLocalization } from "survey-creator-core";
 
 export var mnStrings = {
@@ -415,6 +413,9 @@ export var mnStrings = {
     rateDescriptionLocation: "Шошгоны зохицл",
     size: "Оролтын хэмжээ (тэмдэгтээр)",
     cellErrorLocation: "Эсийн алдааны мессежийн зохицуулалт",
+    enabled: "Боломжтой болсон",
+    disabled: "Хөгжлийн бэрхшээлтэй",
+    inherit: "Өв залгамжл",
     apply: "Хэрэгжүүл",
     ok: "OK",
     save: "Хадгалах",
@@ -662,6 +663,7 @@ export var mnStrings = {
     },
     focusOnFirstError: "Анхны буруу хариулт руу чиглүүлэх",
     checkErrorsMode: "Баталгаажуулалт ажиллуулах",
+    validateVisitedEmptyFields: "Алдагдсан фокус дээр хоосон талбайг баталгаажуулах",
     navigateToUrl: "URL-рүү чиглүүлэх",
     navigateToUrlOnCondition: "Динамик URL",
     completedBeforeHtml: "Хэрэглэгч санал асуулгыг бөглөсөн байх үед харуулах тэмдэглэгээ",
@@ -1228,6 +1230,10 @@ export var mnStrings = {
     },
     panelbase: {
       questionTitleWidth: "Экс: 200px"
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "Экс. : 30 %",
+      questionTitleWidth: "Экс: 200px"
     }
   },
   pehelp: {
@@ -1380,6 +1386,7 @@ export var mnStrings = {
     allowResize: "Resize бариул (эсвэл бариул) буланд гарч, оролтын талбарын хэмжээг өөрчлөхийн тулд чирэгдэж болно.",
     maxTimeToFinish: "Цаг хугацааны интервал секундын дотор. Үүний дараа судалгаа автоматаар \"Thank You\" хуудас руу орж байна.",
     maxTimeToFinishPage: "Судалгааны автоматаар дараагийн хуудас руу урагшлах секундын дотор цаг хугацаа.",
+    validateVisitedEmptyFields: "Хэрэглэгч хоосон оролтын талбар дээр төвлөрч, дараа нь ямар нэгэн өөрчлөлт хийхгүйгээр орхих үед баталгаажуулалтыг өдөөх боломжийг энэ боломжийг олго.",
     page: {
       maxTimeToFinish: "Судалгааны автоматаар дараагийн хуудас руу урагшлах секундын дотор цаг хугацаа.",
       visibleIf: "Илбийн wand icon-ийг ашиглан хуудасны харагдах байдлыг тодорхойлох нөхцөлтэй дүрэм тогтооно.",
@@ -1442,6 +1449,7 @@ export var mnStrings = {
     filePlaceholder: "\"Эх сурвалжийн төрөл\" нь \"Орон нутгийн файлууд\" эсвэл камер байхгүй үед хамаарна",
     photoPlaceholder: "\"Эх сурвалжийн төрөл\" \"Камер\" байхад хамаарна.",
     fileOrPhotoPlaceholder: "\"Эх сурвалжийн төрөл\" нь \"Орон нутгийн файлууд буюу камер\" байхад хамаарна.",
+    colCount: "Сонголт хийх сонголтуудыг олон баганатай загвараар зохион байгуулна. 0-д тавихад сонголтуудыг нэг мөр харуулдаг.",
     masksettings: {
       saveMaskedValue: "Асуултын үнэ цэнийг судалгааны үр дүнд хэрэгжүүлсэн багаар хадгалахыг хүсэж байгаа эсэхээ сонго."
     },
@@ -1461,17 +1469,21 @@ export var mnStrings = {
       suffix: "Үнэ цэнийн дараа үзүүлэх нэг эсвэл хэд хэдэн бэлгэдлүүдийг."
     },
     theme: {
-      // isPanelless: "This setting applies only to questions outside of a panel.",
-      // primaryColor: "Sets a supplementary color that highlights key survey elements.",
-      // panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background.",
-      // questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background.",
-      // cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes.",
-      // "--sjs-general-backcolor-dim": "Sets the main background color of the survey."
+      isPanelless: "Энэ тохиргоо нь зөвхөн панелын гаднах асуултуудад хамаарна.",
+      primaryColor: "Судалгааны гол элементүүдийг тодотгох нэмэлт өнгө тогтооно.",
+      panelBackgroundTransparency: "Судалгааны нөхцөл байдлыг харьцуулан панел, асуултын хайрцгуудын ил тод байдлыг тохируулна.",
+      questionBackgroundTransparency: "Судалгааны нөхцөлтэй харьцуулахад оруулах элементүүдийн ил тод байдлыг тохируулна.",
+      cornerRadius: "Бүх тэгш өнцөгт элементүүдэд булангийн радиусыг тогтооно. Оролтын элементүүд эсвэл панел, асуултын хайрцгуудад зориулсан хувь хүний булангийн радиус үнэт зүйлсийг тогтоохыг хүсвэл Advanced Mode-г боломжтой болго.",
+      "--sjs-general-backcolor-dim": "Судалгааны үндсэн нөхцөл байдлын өнгийг тогтооно."
     },
     header: {
-      // inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in.",
-      // textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels.",
-      // overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey."
+      inheritWidthFrom: "\"As as container\" сонголт автоматаар судалгаа хийсэн HTML элементэд тохируулахын тулд толгойн агуулгын хэсгийн өргөнийг тохируулдаг.",
+      textAreaWidth: "Пикселээр хэмжсэн судалгааны нэр, тодорхойлолт бүхий толгойн хэсгийн өргөн.",
+      overlapEnabled: "Толгойн доод хэсгийг судалгааны дээд хэсэгт оруулав."
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "Үнэт зүйлсийг %-ийг хүлээн зөвшөөрдөг.",
+      questionTitleWidth: "Үнэ цэнэ px-ийг хүлээн зөвшөөрдөг."
     }
   },
   // Properties
@@ -1576,62 +1588,7 @@ export var mnStrings = {
     scaleColorMode: "Масштабын өнгө загвар",
     rateColorMode: "Хэмжээ өнгөний хэв маяг",
     copyDisplayValue: "Copy display value",
-    // insensitive: "insensitive",
-    // state: "state",
-    // indent: "indent",
-    // titleLocation: "titleLocation",
-    // descriptionLocation: "descriptionLocation",
-    // hideNumber: "hideNumber",
-    // errorLocation: "errorLocation",
-    // isUnique: "isUnique",
-    // showInMultipleColumns: "showInMultipleColumns",
-    // totalAlignment: "totalAlignment",
-    // detailErrorLocation: "detailErrorLocation",
-    // inheritWidthFrom: "inheritWidthFrom",
-    // textAreaWidth: "textAreaWidth",
-    // textGlowEnabled: "textGlowEnabled",
-    // overlapEnabled: "overlapEnabled",
-    // backgroundImageOpacity: "backgroundImageOpacity",
-    // logoPositionX: "logoPositionX",
-    // logoPositionY: "logoPositionY",
-    // titlePositionX: "titlePositionX",
-    // titlePositionY: "titlePositionY",
-    // descriptionPositionX: "descriptionPositionX",
-    // descriptionPositionY: "descriptionPositionY",
-    // showNumber: "showNumber",
-    // progressBarInheritWidthFrom: "progressBarInheritWidthFrom",
-    // headerView: "headerView",
-    // choiceValuesFromQuestion: "choiceValuesFromQuestion",
-    // choiceTextsFromQuestion: "choiceTextsFromQuestion",
-    // refuseText: "refuseText",
-    // dontKnowText: "dontKnowText",
-    // cellComponent: "cellComponent",
-    // inputTextAlignment: "inputTextAlignment",
-    // maskSettings: "maskSettings",
-    // itemErrorLocation: "itemErrorLocation",
-    // signatureWidth: "signatureWidth",
-    // signatureHeight: "signatureHeight",
-    // signatureAutoScaleEnabled: "signatureAutoScaleEnabled",
-    // penMinWidth: "penMinWidth",
-    // penMaxWidth: "penMaxWidth",
-    // showPlaceholder: "showPlaceholder",
-    // placeholderReadOnly: "placeholderReadOnly",
-    // templateTitle: "templateTitle",
-    // templateTabTitle: "templateTabTitle",
-    // tabTitlePlaceholder: "tabTitlePlaceholder",
-    // templateDescription: "templateDescription",
-    // noEntriesText: "noEntriesText",
-    // newPanelPosition: "newPanelPosition",
-    // templateTitleLocation: "templateTitleLocation",
-    // templateErrorLocation: "templateErrorLocation",
-    // templateVisibleIf: "templateVisibleIf",
-    // saveMaskedValue: "saveMaskedValue",
-    // pattern: "pattern",
-    // allowNegativeValues: "allowNegativeValues",
-    // decimalSeparator: "decimalSeparator",
-    // thousandsSeparator: "thousandsSeparator",
-    // prefix: "prefix",
-    // suffix: "suffix"
+    effectiveColSpan: "Баганын хугацаа"
   },
   theme: {
     advancedMode: "Дэвшилтэт хэв маяг",
@@ -2402,3 +2359,23 @@ editorLocalization.locales["mn"] = mnStrings;
 // page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Асуултын хайрцгуудынхаа зүүн талд эгнэн зогсож байх үед асуултын нэрний тогтмол өргөнийг тогтоо. CSS-ийн үнэт зүйлсийг (px, %, in, pt г.м) хүлээн зөвшөөрдөг."
 // pe.commentAreaRows: "Comment area height (in lines)" => "Тайлбар хэсгийн өндөр (мөрөнд)"
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "Асуулт хариултын текст хэсэгт үзүүлсэн мөрүүдийн тоог тогтоо. Хуйлмал бичиг нь илүү олон мөртэй байдаг."
+// pe.enabled: "Enabled" => "Боломжтой болсон"
+// pe.disabled: "Disabled" => "Хөгжлийн бэрхшээлтэй"
+// pe.inherit: "Inherit" => "Өв залгамжл"
+// pe.validateVisitedEmptyFields: "Validate empty fields on lost focus" => "Алдагдсан фокус дээр хоосон талбайг баталгаажуулах"
+// panellayoutcolumn.effectiveWidth: "Ex.: 30%" => "Экс. : 30 %"
+// panellayoutcolumn.questionTitleWidth: "Ex.: 200px" => "Экс: 200px"
+// pehelp.validateVisitedEmptyFields: "Enable this option to trigger validation when a user focuses on an empty input field and then leaves it without making any changes." => "Хэрэглэгч хоосон оролтын талбар дээр төвлөрч, дараа нь ямар нэгэн өөрчлөлт хийхгүйгээр орхих үед баталгаажуулалтыг өдөөх боломжийг энэ боломжийг олго."
+// pehelp.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line." => "Сонголт хийх сонголтуудыг олон баганатай загвараар зохион байгуулна. 0-д тавихад сонголтуудыг нэг мөр харуулдаг."
+// theme.isPanelless: "This setting applies only to questions outside of a panel." => "Энэ тохиргоо нь зөвхөн панелын гаднах асуултуудад хамаарна."
+// theme.primaryColor: "Sets a supplementary color that highlights key survey elements." => "Судалгааны гол элементүүдийг тодотгох нэмэлт өнгө тогтооно."
+// theme.panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background." => "Судалгааны нөхцөл байдлыг харьцуулан панел, асуултын хайрцгуудын ил тод байдлыг тохируулна."
+// theme.questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background." => "Судалгааны нөхцөлтэй харьцуулахад оруулах элементүүдийн ил тод байдлыг тохируулна."
+// theme.cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes." => "Бүх тэгш өнцөгт элементүүдэд булангийн радиусыг тогтооно. Оролтын элементүүд эсвэл панел, асуултын хайрцгуудад зориулсан хувь хүний булангийн радиус үнэт зүйлсийг тогтоохыг хүсвэл Advanced Mode-г боломжтой болго."
+// theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "Судалгааны үндсэн нөхцөл байдлын өнгийг тогтооно."
+// header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "\"As as container\" сонголт автоматаар судалгаа хийсэн HTML элементэд тохируулахын тулд толгойн агуулгын хэсгийн өргөнийг тохируулдаг."
+// header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "Пикселээр хэмжсэн судалгааны нэр, тодорхойлолт бүхий толгойн хэсгийн өргөн."
+// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "Толгойн доод хэсгийг судалгааны дээд хэсэгт оруулав."
+// panellayoutcolumn.effectiveWidth: "Accepts values %." => "Үнэт зүйлсийг %-ийг хүлээн зөвшөөрдөг."
+// panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Үнэ цэнэ px-ийг хүлээн зөвшөөрдөг."
+// p.effectiveColSpan: "Column span" => "Баганын хугацаа"
