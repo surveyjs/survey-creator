@@ -3663,7 +3663,7 @@ export class SurveyCreatorModel extends Base
       onSelectQuestionType(item.typeName);
     };
 
-    if (!!item.items && item.items.length > 0) {
+    if (!!item.items && item.items.length > 0 && this.toolbox.showSubitems) {
       const innerItems = item.items.map(i => new Action({
         id: i.id,
         title: i.title,
