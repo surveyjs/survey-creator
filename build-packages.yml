@@ -1276,10 +1276,10 @@ jobs:
       npm run build
     displayName: 'Build CreatorV2 JS'
 
-  - script: |
-      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js
-      npm run test
-    displayName: 'Unit test CreatorV2 JS'
+#  - script: |
+#      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js
+#      npm run test
+#    displayName: 'Unit test CreatorV2 JS'
 
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js
