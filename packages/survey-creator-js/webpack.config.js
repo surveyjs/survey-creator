@@ -92,14 +92,6 @@ module.exports = function (options) {
     },
     resolve: {
       extensions: [".ts", ".js", ".tsx", ".scss"],
-      // plugins: [new TsconfigPathsPlugin({ configFile: "./tsconfig.json" })],
-      alias: {
-        "survey-react-ui": path.resolve(__dirname, "./node_modules/survey-js-ui"),
-        "react": path.resolve(__dirname, "./node_modules/survey-js-ui"),
-        "react-dom/test-utils": path.resolve(__dirname, "./node_modules/survey-js-ui"),
-        "react-dom": path.resolve(__dirname, "./node_modules/survey-js-ui"),     // Must be below test-utils
-        "react/jsx-runtime": path.resolve(__dirname, "./node_modules/survey-js-ui"),
-      }
     },
     optimization: {
       minimize: isProductionBuild
@@ -158,17 +150,6 @@ module.exports = function (options) {
       umdNamedDefine: true
     },
     externals: [
-      function ({ context, request }, callback) {
-        if (/(survey-js-ui|survey-react-ui|^react$|^react-dom$)/.test(request)) {
-          return callback(null, {
-            root: "SurveyUI",
-            commonjs2: "survey-js-ui",
-            commonjs: "survey-js-ui",
-            amd: "survey-js-ui"
-          });
-        }
-        callback();
-      },
       {
         "survey-core": {
           root: "Survey",
@@ -176,18 +157,34 @@ module.exports = function (options) {
           commonjs: "survey-core",
           amd: "survey-core"
         },
-        // "survey-js-ui": {
-        //   root: "SurveyUI",
-        //   commonjs2: "survey-js-ui",
-        //   commonjs: "survey-js-ui",
-        //   amd: "survey-js-ui"
-        // },
-        // "../../../survey-library/build/survey-js-ui/survey-js-ui.js": {
-        //   root: "SurveyUI",
-        //   commonjs2: "survey-js-ui",
-        //   commonjs: "survey-js-ui",
-        //   amd: "survey-js-ui"
-        // },
+        "survey-js-ui":
+        {
+          root: "SurveyUI",
+          commonjs2: "survey-js-ui",
+          commonjs: "survey-js-ui",
+          amd: "survey-js-ui"
+        },
+        "survey-react-ui":
+        {
+          root: "SurveyUI",
+          commonjs2: "survey-js-ui",
+          commonjs: "survey-js-ui",
+          amd: "survey-js-ui"
+        },
+        "react":
+        {
+          root: "SurveyUI",
+          commonjs2: "survey-js-ui",
+          commonjs: "survey-js-ui",
+          amd: "survey-js-ui"
+        },
+        "react-dom":
+        {
+          root: "SurveyUI",
+          commonjs2: "survey-js-ui",
+          commonjs: "survey-js-ui",
+          amd: "survey-js-ui"
+        },
         "survey-creator-core": {
           root: "SurveyCreatorCore",
           commonjs2: "survey-creator-core",
