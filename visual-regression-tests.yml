@@ -770,3 +770,222 @@ jobs:
       publishLocation: 'Container'
     condition: always()
     displayName: 'publish vrt vue artifacts'
+
+
+- job: CreatorV2JS
+  dependsOn: CreatorV2Core
+  steps:
+  - checkout: self
+  - checkout: EmptyRepo
+    persistCredentials: true
+    clean: true
+
+  - task: PowerShell@2
+    displayName: 'update Google Chrome to latest'
+    inputs:
+      targetType: 'inline'
+      script: '$Path = $env:TEMP; $Installer = ''chrome_installer.exe''; Invoke-WebRequest -Uri ''http://dl.google.com/chrome/install/375.126/chrome_installer.exe'' -OutFile $Path\$Installer; Start-Process -FilePath $Path\$Installer -Args ''/silent /install'' -Verb RunAs -Wait; Remove-Item -Path $Path\$Installer'
+
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '14.x'
+    displayName: 'Install Node.js'
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js/"
+      Contents: "package.json"
+      TargetFolder: "$(Build.SourcesDirectory)/Temp/js-ui/"
+      OverWrite: true
+    displayName: "Copy package.json for cache key (js-ui)"
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: "$(Build.SourcesDirectory)/survey-creator/"
+      Contents: "package.json"
+      TargetFolder: "$(Build.SourcesDirectory)/Temp/root/"
+      OverWrite: true
+    displayName: "Copy package.json for cache key (root)"
+
+  - task: Cache@2
+    inputs:
+      key: 'npm-cache-creator-js-ui | $(Build.SourcesDirectory)/Temp/js-ui/package.json'
+      path: $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js/node_modules
+      cacheHitVar: NPM_CACHE_RESTORED
+    displayName: Cache NPM
+
+  - task: Cache@2
+    inputs:
+      key: 'npm-cache-creator-root | $(Build.SourcesDirectory)/Temp/root/package.json'
+      path: $(Build.SourcesDirectory)/survey-creator/node_modules
+      cacheHitVar: NPM_CACHE_RESTORED_ROOT
+    displayName: Cache NPM
+
+  - task: DownloadBuildArtifacts@0
+    inputs:
+      buildType: 'specific'
+      project: 'af2804d2-859a-4705-9ef5-cdf46d1d5d4f'
+      pipeline: '56'
+      specificBuildWithTriggering: true
+      buildVersionToDownload: 'latest'
+      downloadType: 'single'
+      artifactName: 'SurveyJSLibraryBuildSurveyUI'
+      downloadPath: '$(System.ArtifactsDirectory)'
+
+  - task: DownloadBuildArtifacts@0
+    inputs:
+      buildType: 'specific'
+      project: 'af2804d2-859a-4705-9ef5-cdf46d1d5d4f'
+      pipeline: '56'
+      specificBuildWithTriggering: true
+      buildVersionToDownload: 'latest'
+      downloadType: 'single'
+      artifactName: 'SurveyJSLibraryBuildCoreAngularJquery'
+      downloadPath: '$(System.ArtifactsDirectory)'
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCoreAngularJquery/packages'
+      Contents: '**'
+      TargetFolder: '$(Build.SourcesDirectory)/survey-library/build'
+      OverWrite: true
+
+  - task: DownloadBuildArtifacts@0
+    inputs:
+      buildType: 'current'
+      downloadType: 'single'
+      artifactName: 'SurveyJSCreatorV2Build-VRT-Core-$(Build.BuildId)'
+      downloadPath: '$(System.ArtifactsDirectory)'
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuildSurveyUI/packages'
+      Contents: '**'
+      TargetFolder: '$(Build.SourcesDirectory)/survey-library/build'
+      OverWrite: true
+
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-library/build/survey-js-ui
+      sed -i 's/"survey-core": .*"/"survey-core": "latest"/g' package.json
+    displayName: 'Change survey-core dependency version from release next ver to local dependency'
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: $(System.ArtifactsDirectory)/SurveyJSCreatorV2Build-VRT-Core-$(Build.BuildId)
+      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/build'
+  
+  - task: Npm@1
+    displayName: 'Npm install root'
+    inputs:
+      command: install
+      verbose: false
+      workingDir: $(Build.SourcesDirectory)/survey-creator
+    condition: ne(variables.NPM_CACHE_RESTORED_ROOT, 'true')
+  
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator
+      npm run lint
+    displayName: 'check lint'
+
+  - task: Npm@1
+    displayName: 'Npm install survey-creator-js'
+    inputs:
+      command: install
+      verbose: false
+      workingDir: $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js
+    condition: ne(variables.NPM_CACHE_RESTORED, 'true')
+
+  # update 'file' npm dependencies in case of cache
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: $(System.ArtifactsDirectory)/SurveyJSLibraryBuildCoreAngularJquery/packages/survey-core
+      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js/node_modules/survey-core'
+      OverWrite: true
+    condition: ne(variables.NPM_CACHE_RESTORED, 'false')
+    displayName: 'copy survey-core in case of npm cache'
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: $(System.ArtifactsDirectory)/SurveyJSLibraryBuildCoreAngularJquery/packages/survey-core
+      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js/node_modules/survey-core'
+      OverWrite: true
+    condition: ne(variables.NPM_CACHE_RESTORED, 'false')
+    displayName: 'copy survey-core in case of npm cache'
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: $(Build.SourcesDirectory)/survey-library/build/survey-js-ui
+      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js/node_modules/survey-js-ui'
+      OverWrite: true
+    condition: ne(variables.NPM_CACHE_RESTORED, 'false')
+    displayName: 'copy survey-js-ui in case of npm cache'
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: $(System.ArtifactsDirectory)/SurveyJSCreatorV2Build-VRT-Core-$(Build.BuildId)
+      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js/node_modules/survey-creator-core'
+      OverWrite: true
+    condition: ne(variables.NPM_CACHE_RESTORED, 'false')
+    displayName: 'copy survey-creator-core in case of npm cache'
+  # EO update 'file' npm dependencies in case of cache
+
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js
+      npm run remove-package-lock
+    displayName: 'npm run remove-package-lock'
+
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js
+      npm run remove-package-lock
+    displayName: 'npm run remove-package-lock'
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCoreAngularJquery/packages/survey-core'
+      Contents: '**'
+      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js/node_modules/survey-core'
+      OverWrite: true
+    displayName: 'copy build from library for f-f tests'
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuildSurveyUI/packages/survey-js-ui'
+      Contents: '**'
+      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js/node_modules/survey-js-ui'
+      OverWrite: true
+    displayName: 'copy build from library for f-f tests'
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js/node_modules/@types'
+      Contents: '**'
+      TargetFolder: '$(Build.SourcesDirectory)/survey-library/node_modules/@types'
+      OverWrite: true
+    displayName: 'copy @types into library directory'
+
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js
+      npm run build
+    displayName: 'Build CreatorV2 JS'
+
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js
+      npm run visual-regression-tests:ci
+    displayName: 'Visual Regression Tests CreatorV2 JS'
+  
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(Build.SourcesDirectory)/survey-creator/visualRegressionTests'
+      Contents: '**'
+      TargetFolder: '$(Build.ArtifactStagingDirectory)/Creator_JS_VRT'
+      OverWrite: true
+    condition: always()
+    displayName: 'copy vrt JS artifacts'
+  
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)/Creator_JS_VRT/'
+      ArtifactName: 'Creator_JS_VRT'
+      publishLocation: 'Container'
+    condition: always()
+    displayName: 'publish vrt JS artifacts'
