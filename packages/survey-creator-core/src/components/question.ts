@@ -389,18 +389,29 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
         listModel.setItems(newItems);
         listModel.selectedItem = this.getSelectedItem(newItems, this.currentType);
 
-        let propertyName = QuestionToolbox.getSubTypePropertyName(this.currentType);
-        if (!!propertyName) {
-          newItems.forEach(action => {
-            if (action.items?.length > 0) {
-              const selectedSubItem = action.items.filter(item => item.id === this.element[propertyName])[0];
-              if (selectedSubItem) {
-                const _listModel = action.popupModel.contentComponentData.model;
-                _listModel.selectedItem = selectedSubItem;
+        newItems.forEach(action => {
+          if (action.items?.length > 0) {
+            let selectedSubItem = undefined;
+            action.items.forEach(item => {
+              const elementType = this.element.getType();
+              const toolboxItem = (this.creator.toolbox.getItemByName(action.id) as QuestionToolboxItem).getSubitemByName(item.id);
+              const json = toolboxItem.json || {};
+              if (item.id == elementType || json.type == elementType) {
+                if (!selectedSubItem) selectedSubItem = item;
+                let jsonIsCorresponded = true;
+                Object.keys(json).forEach(p => {
+                  if (p != "type" && json[p] != this.element[p]) jsonIsCorresponded = false;
+                });
+                if (jsonIsCorresponded) selectedSubItem = item;
               }
+            });
+            if (selectedSubItem) {
+              const _listModel = action.popupModel.contentComponentData.model;
+              _listModel.selectedItem = selectedSubItem;
+              listModel.selectedItem = action;
             }
-          });
-        }
+          }
+        });
       }
     });
     newAction.iconName = <any>new ComputedUpdater(() => {

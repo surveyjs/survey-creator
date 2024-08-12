@@ -1,8 +1,9 @@
 import { QuestionAdornerViewModel } from "../src/components/question";
-import { Action, settings, SurveyElement } from "survey-core";
+import { Action, PopupDropdownViewModel, settings, SurveyElement, settings as surveySettings } from "survey-core";
 import { CreatorTester } from "./creator-tester";
 import { PageAdorner } from "../src/components/page";
 import { TabDesignerPlugin } from "../src/components/tabs/designer-plugin";
+import { QuestionToolboxItem } from "../src/toolbox";
 
 settings.supportCreatorV2 = true;
 
@@ -235,4 +236,78 @@ test("Check question adorners expand-collapse - onInitElementStateCallback", ():
   );
 
   expect(questionAdorner.collapsed).toBeTruthy();
+});
+
+test("Check question converter selected item for subitems", (): any => {
+  surveySettings.animationEnabled = false;
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", inputType: "email", name: "q1" }
+    ]
+  };
+  const question = creator.survey.getQuestionByName("q1");
+  creator.selectElement(question);
+  const questionAdorner = new QuestionAdornerViewModel(
+    creator,
+    question,
+    <any>undefined
+  );
+  const convertToAction = questionAdorner.actionContainer.getActionById("convertTo");
+  const popup = convertToAction.popupModel;
+  const popupViewModel = new PopupDropdownViewModel(popup); // need for popupModel.onShow
+  popup.toggleVisibility();
+  const list = popup.contentComponentData.model;
+  expect(list.selectedItem.id).toBe("text");
+
+  const popupSubtype = list.selectedItem.popupModel;
+  const popupViewModelSubtype = new PopupDropdownViewModel(popupSubtype); // need for popupModel.onShow
+  popupSubtype.toggleVisibility();
+  const listSubtype = popupSubtype.contentComponentData.model;
+  expect(listSubtype.selectedItem.id).toBe("email");
+
+  surveySettings.animationEnabled = true;
+});
+
+test("Check question converter selected item for customized subitems (types)", (): any => {
+  surveySettings.animationEnabled = false;
+  const creator = new CreatorTester();
+
+  //customize matrix item
+  const MatrixItem = creator.toolbox.getItemByName("matrix") as QuestionToolboxItem;
+  const MatrixDropdownItem = creator.toolbox.getItemByName("matrixdropdown");
+  const MatrixDynamicItem = creator.toolbox.getItemByName("matrixdynamic");
+  MatrixItem.title = "Matrix";
+  MatrixItem.addSubitem(<any>{ name: "matrixdefault", json: { type: "matrix" }, title: "Single-Select" });
+  MatrixItem.addSubitem(MatrixDropdownItem);
+  MatrixItem.addSubitem(MatrixDynamicItem);
+  creator.toolbox.removeItem("matrixdropdown");
+  creator.toolbox.removeItem("matrixdynamic");
+
+  creator.JSON = {
+    elements: [
+      { type: "matrixdropdown", name: "q1" },
+    ]
+  };
+  const question = creator.survey.getQuestionByName("q1");
+  creator.selectElement(question);
+  const questionAdorner = new QuestionAdornerViewModel(
+    creator,
+    question,
+    <any>undefined
+  );
+  const convertToAction = questionAdorner.actionContainer.getActionById("convertTo");
+  const popup = convertToAction.popupModel;
+  const popupViewModel = new PopupDropdownViewModel(popup); // need for popupModel.onShow
+  popup.toggleVisibility();
+  const list = popup.contentComponentData.model;
+  expect(list.selectedItem.id).toBe("matrix");
+
+  const popupSubtype = list.selectedItem.popupModel;
+  const popupViewModelSubtype = new PopupDropdownViewModel(popupSubtype); // need for popupModel.onShow
+  popupSubtype.toggleVisibility();
+  const listSubtype = popupSubtype.contentComponentData.model;
+  expect(listSubtype.selectedItem.id).toBe("matrixdropdown");
+
+  surveySettings.animationEnabled = true;
 });

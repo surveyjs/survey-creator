@@ -173,6 +173,10 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
     return this.title.toLowerCase().indexOf(textLowerCase) >= 0 || this.name.toLowerCase().indexOf(textLowerCase) >= 0;
   }
 
+  public getSubitemByName(id: string): QuestionToolboxItem {
+    return this.items?.filter(i => i.id === id)[0];
+  }
+
   public addSubitems(items: Array<QuestionToolboxItem>) {
     if (!items || items.length < 1) return;
 
@@ -213,10 +217,10 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
   public removeSubitem(item: IQuestionToolboxItem | string): void {
     if (!this.hasSubItems || !item) return;
 
-    const id = (item as IQuestionToolboxItem)?.id || item;
+    const id: string = (item as IQuestionToolboxItem)?.id || item as string;
     if (!id) return;
 
-    const removedItem = this.items.filter(i => i.id === id)[0];
+    const removedItem = this.getSubitemByName(id);
     let array: Array<QuestionToolboxItem> = (this.items || []).slice();
     const removedIndex = array.indexOf(removedItem);
     if (removedIndex > -1) {
