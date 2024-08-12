@@ -10,6 +10,9 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
   private allItems: ItemValue[];
 
   public createMainPageCore(): any {
+    const getRankingItemEnableIf = (name: string): string => {
+      return "{" + name + ".length} > 1 or {" + name + "} notcontains {item}";
+    };
     return {
       title: "Set Up the Toolbox",
       navigationTitle: "Toolbox",
@@ -63,6 +66,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
                   titleLocation: "hidden",
                   selectToRankEnabled: true,
                   minSelectedChoices: 1,
+                  choicesEnableIf: getRankingItemEnableIf("row.items"),
                   selectToRankAreasLayout: "horizontal",
                   selectToRankEmptyRankedAreaText: "Drag toolbox items here to hide them",
                   selectToRankEmptyUnrankedAreaText: " Drag toolbox items here to show them"
@@ -73,6 +77,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
               type: "presetranking",
               name: this.nameItems,
               visibleIf: this.getTextVisibleIf(this.nameCategoriesMode, "items"),
+              choicesEnableIf: getRankingItemEnableIf(this.nameItems),
               titleLocation: "hidden",
               selectToRankEnabled: true,
               minSelectedChoices: 1,
