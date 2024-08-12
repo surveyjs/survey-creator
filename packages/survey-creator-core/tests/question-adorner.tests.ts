@@ -238,6 +238,32 @@ test("Check question adorners expand-collapse - onInitElementStateCallback", ():
   expect(questionAdorner.collapsed).toBeTruthy();
 });
 
+test("Check question converter no subitems", (): any => {
+  surveySettings.animationEnabled = false;
+  const creator = new CreatorTester();
+  creator.toolbox.showSubitems = false;
+  creator.JSON = {
+    elements: [
+      { type: "text", inputType: "email", name: "q1" }
+    ]
+  };
+  const question = creator.survey.getQuestionByName("q1");
+  creator.selectElement(question);
+  const questionAdorner = new QuestionAdornerViewModel(
+    creator,
+    question,
+    <any>undefined
+  );
+  const convertToAction = questionAdorner.actionContainer.getActionById("convertTo");
+  const popup = convertToAction.popupModel;
+  const popupViewModel = new PopupDropdownViewModel(popup); // need for popupModel.onShow
+  popup.toggleVisibility();
+  const list = popup.contentComponentData.model;
+  expect((list.getActionById("text").items || []).length).toBe(0);
+
+  surveySettings.animationEnabled = true;
+});
+
 test("Check question converter selected item for subitems", (): any => {
   surveySettings.animationEnabled = false;
   const creator = new CreatorTester();
@@ -308,6 +334,44 @@ test("Check question converter selected item for customized subitems (types)", (
   popupSubtype.toggleVisibility();
   const listSubtype = popupSubtype.contentComponentData.model;
   expect(listSubtype.selectedItem.id).toBe("matrixdropdown");
+
+  surveySettings.animationEnabled = true;
+});
+
+test("Check question converter selected item for customized subitems (json)", (): any => {
+  surveySettings.animationEnabled = false;
+  const creator = new CreatorTester();
+
+  // create subitems from new items (the same type, different json)
+  const booleans = creator.toolbox.getItemByName("boolean") as QuestionToolboxItem;
+  booleans.addSubitem(<any>{ name: "booleandefault", json: { type: "boolean" }, title: "Slider" });
+  booleans.addSubitem(<any>{ name: "boolradio", json: { type: "boolean", renderAs: "radio" }, title: "Radio" });
+  booleans.addSubitem(<any>{ name: "boolcheckbox", json: { type: "boolean", renderAs: "checkbox" }, title: "Checkbox" });
+
+  creator.JSON = {
+    elements: [
+      { type: "boolean", name: "q1", renderAs: "radio" },
+    ]
+  };
+  const question = creator.survey.getQuestionByName("q1");
+  creator.selectElement(question);
+  const questionAdorner = new QuestionAdornerViewModel(
+    creator,
+    question,
+    <any>undefined
+  );
+  const convertToAction = questionAdorner.actionContainer.getActionById("convertTo");
+  const popup = convertToAction.popupModel;
+  const popupViewModel = new PopupDropdownViewModel(popup); // need for popupModel.onShow
+  popup.toggleVisibility();
+  const list = popup.contentComponentData.model;
+  expect(list.selectedItem.id).toBe("boolean");
+
+  const popupSubtype = list.selectedItem.popupModel;
+  const popupViewModelSubtype = new PopupDropdownViewModel(popupSubtype); // need for popupModel.onShow
+  popupSubtype.toggleVisibility();
+  const listSubtype = popupSubtype.contentComponentData.model;
+  expect(listSubtype.selectedItem.id).toBe("boolradio");
 
   surveySettings.animationEnabled = true;
 });
