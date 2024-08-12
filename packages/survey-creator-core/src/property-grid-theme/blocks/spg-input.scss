@@ -57,6 +57,7 @@ input.spg-input:read-only::placeholder {
   height: calcSize(5);
   padding: calcSize(1);
   line-height: 0;
+  transition: background $creator-transition-duration, opacity $creator-transition-duration;
 
   &:focus,
   &:hover {
