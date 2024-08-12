@@ -1,5 +1,3 @@
-// This dictionary contains 65 untranslated or inherited localization strings.
-// These strings are commented out. Uncomment and edit them if you want to add your translations.
 import { editorLocalization, defaultStrings } from "survey-creator-core";
 
 export var hrStrings = {
@@ -415,6 +413,9 @@ export var hrStrings = {
     rateDescriptionLocation: "Poravnanje natpisa",
     size: "Veličina polja unosa (u znakovima)",
     cellErrorLocation: "Poravnanje poruke o pogrešci ćelije",
+    enabled: "Omogućen",
+    disabled: "Onemogućen",
+    inherit: "Naslijediti",
     apply: "Primijeniti",
     ok: "OK",
     save: "Spremiti",
@@ -662,6 +663,7 @@ export var hrStrings = {
     },
     focusOnFirstError: "Postavljanje fokusa na prvi odgovor koji nije valjan",
     checkErrorsMode: "Pokreni provjeru valjanosti",
+    validateVisitedEmptyFields: "Provjera valjanosti praznih polja pri izgubljenom fokusu",
     navigateToUrl: "Navigacija do URL-a",
     navigateToUrlOnCondition: "Dinamički URL",
     completedBeforeHtml: "Oznaka koja pokazuje je li korisnik već ispunio ovu anketu",
@@ -1228,6 +1230,10 @@ export var hrStrings = {
     },
     panelbase: {
       questionTitleWidth: "Npr.: 200px"
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "Npr.: 30%",
+      questionTitleWidth: "Primjer: 200px"
     }
   },
   pehelp: {
@@ -1380,6 +1386,7 @@ export var hrStrings = {
     allowResize: "Ručica za promjenu veličine (ili držač) pojavljuje se u kutu i može se povući kako bi se promijenila veličina polja za unos.",
     maxTimeToFinish: "Vremenski interval u sekundama nakon kojeg anketa automatski prelazi na stranicu zahvale.",
     maxTimeToFinishPage: "Vremenski interval u sekundama nakon kojeg anketa automatski prelazi na sljedeću stranicu.",
+    validateVisitedEmptyFields: "Omogućite ovu mogućnost da biste pokrenuli provjeru valjanosti kada se korisnik usredotoči na prazno polje za unos, a zatim ga napusti bez ikakvih promjena.",
     page: {
       maxTimeToFinish: "Vremenski interval u sekundama nakon kojeg anketa automatski prelazi na sljedeću stranicu.",
       visibleIf: "Pomoću ikone čarobnog štapića postavite uvjetno pravilo koje određuje vidljivost stranice.",
@@ -1442,6 +1449,7 @@ export var hrStrings = {
     filePlaceholder: "Primjenjuje se kada je \"Vrsta izvora\" \"Lokalne datoteke\" ili kada kamera nije dostupna",
     photoPlaceholder: "Primjenjuje se kada je \"Vrsta izvora\" \"Kamera\".",
     fileOrPhotoPlaceholder: "Primjenjuje se kada je \"Vrsta izvora\" \"Lokalne datoteke ili kamera\".",
+    colCount: "Raspoređuje opcije izbora u rasporedu s više stupaca. Kada je postavljena na 0, opcije se prikazuju u jednom retku.",
     masksettings: {
       saveMaskedValue: "Odaberite želite li spremiti vrijednost pitanja s primijenjenom maskom u rezultatima upitnika."
     },
@@ -1461,17 +1469,21 @@ export var hrStrings = {
       suffix: "Jedan ili više simbola koji će se prikazati nakon vrijednosti."
     },
     theme: {
-      // isPanelless: "This setting applies only to questions outside of a panel.",
-      // primaryColor: "Sets a supplementary color that highlights key survey elements.",
-      // panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background.",
-      // questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background.",
-      // cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes.",
-      // "--sjs-general-backcolor-dim": "Sets the main background color of the survey."
+      isPanelless: "Ova se postavka primjenjuje samo na pitanja izvan ploče.",
+      primaryColor: "Postavlja dodatnu boju koja ističe ključne elemente upitnika.",
+      panelBackgroundTransparency: "Prilagođava prozirnost panela i okvira s pitanjima u odnosu na pozadinu ankete.",
+      questionBackgroundTransparency: "Prilagođava prozirnost ulaznih elemenata u odnosu na pozadinu upitnika.",
+      cornerRadius: "Postavlja polumjer kuta za sve pravokutne elemente. Omogućite napredni način rada ako želite postaviti pojedinačne vrijednosti radijusa kuta za ulazne elemente ili ploče i okvire s pitanjima.",
+      "--sjs-general-backcolor-dim": "Postavlja glavnu boju pozadine upitnika."
     },
     header: {
-      // inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in.",
-      // textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels.",
-      // overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey."
+      inheritWidthFrom: "Opcija \"Isto kao spremnik\" automatski prilagođava širinu područja sadržaja zaglavlja kako bi se uklopila u HTML element u koji je upitnik postavljen.",
+      textAreaWidth: "Širina područja zaglavlja koje sadrži naslov i opis upitnika, mjerena u pikselima.",
+      overlapEnabled: "Čini dno zaglavlja prekrivenim vrhom upitnika."
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "Prihvaća vrijednosti %.",
+      questionTitleWidth: "Prihvaća vrijednosti px."
     }
   },
   // Properties
@@ -1576,62 +1588,7 @@ export var hrStrings = {
     scaleColorMode: "Način skaliranja boje",
     rateColorMode: "Način ocjenjivanja boja",
     copyDisplayValue: "Kopiraj vrijednost prikaza",
-    // insensitive: "insensitive",
-    // state: "state",
-    // indent: "indent",
-    // titleLocation: "titleLocation",
-    // descriptionLocation: "descriptionLocation",
-    // hideNumber: "hideNumber",
-    // errorLocation: "errorLocation",
-    // isUnique: "isUnique",
-    // showInMultipleColumns: "showInMultipleColumns",
-    // totalAlignment: "totalAlignment",
-    // detailErrorLocation: "detailErrorLocation",
-    // inheritWidthFrom: "inheritWidthFrom",
-    // textAreaWidth: "textAreaWidth",
-    // textGlowEnabled: "textGlowEnabled",
-    // overlapEnabled: "overlapEnabled",
-    // backgroundImageOpacity: "backgroundImageOpacity",
-    // logoPositionX: "logoPositionX",
-    // logoPositionY: "logoPositionY",
-    // titlePositionX: "titlePositionX",
-    // titlePositionY: "titlePositionY",
-    // descriptionPositionX: "descriptionPositionX",
-    // descriptionPositionY: "descriptionPositionY",
-    // showNumber: "showNumber",
-    // progressBarInheritWidthFrom: "progressBarInheritWidthFrom",
-    // headerView: "headerView",
-    // choiceValuesFromQuestion: "choiceValuesFromQuestion",
-    // choiceTextsFromQuestion: "choiceTextsFromQuestion",
-    // refuseText: "refuseText",
-    // dontKnowText: "dontKnowText",
-    // cellComponent: "cellComponent",
-    // inputTextAlignment: "inputTextAlignment",
-    // maskSettings: "maskSettings",
-    // itemErrorLocation: "itemErrorLocation",
-    // signatureWidth: "signatureWidth",
-    // signatureHeight: "signatureHeight",
-    // signatureAutoScaleEnabled: "signatureAutoScaleEnabled",
-    // penMinWidth: "penMinWidth",
-    // penMaxWidth: "penMaxWidth",
-    // showPlaceholder: "showPlaceholder",
-    // placeholderReadOnly: "placeholderReadOnly",
-    // templateTitle: "templateTitle",
-    // templateTabTitle: "templateTabTitle",
-    // tabTitlePlaceholder: "tabTitlePlaceholder",
-    // templateDescription: "templateDescription",
-    // noEntriesText: "noEntriesText",
-    // newPanelPosition: "newPanelPosition",
-    // templateTitleLocation: "templateTitleLocation",
-    // templateErrorLocation: "templateErrorLocation",
-    // templateVisibleIf: "templateVisibleIf",
-    // saveMaskedValue: "saveMaskedValue",
-    // pattern: "pattern",
-    // allowNegativeValues: "allowNegativeValues",
-    // decimalSeparator: "decimalSeparator",
-    // thousandsSeparator: "thousandsSeparator",
-    // prefix: "prefix",
-    // suffix: "suffix"
+    effectiveColSpan: "Raspon stupaca"
   },
   theme: {
     advancedMode: "Napredni način rada",
@@ -2740,3 +2697,23 @@ editorLocalization.locales["hr"] = hrStrings;
 // page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Postavlja dosljednu širinu za naslove pitanja kada su poravnati lijevo od okvira pitanja. Prihvaća CSS vrijednosti (px, %, in, pt itd.)."
 // pe.commentAreaRows: "Comment area height (in lines)" => "Visina područja komentara (u recima)"
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "Postavlja broj prikazanih redaka u tekstnim područjima za komentare pitanja. U ulazu zauzima više redaka pojavljuje se klizač."
+// pe.enabled: "Enabled" => "Omogućen"
+// pe.disabled: "Disabled" => "Onemogućen"
+// pe.inherit: "Inherit" => "Naslijediti"
+// pe.validateVisitedEmptyFields: "Validate empty fields on lost focus" => "Provjera valjanosti praznih polja pri izgubljenom fokusu"
+// panellayoutcolumn.effectiveWidth: "Ex.: 30%" => "Npr.: 30%"
+// panellayoutcolumn.questionTitleWidth: "Ex.: 200px" => "Primjer: 200px"
+// pehelp.validateVisitedEmptyFields: "Enable this option to trigger validation when a user focuses on an empty input field and then leaves it without making any changes." => "Omogućite ovu mogućnost da biste pokrenuli provjeru valjanosti kada se korisnik usredotoči na prazno polje za unos, a zatim ga napusti bez ikakvih promjena."
+// pehelp.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line." => "Raspoređuje opcije izbora u rasporedu s više stupaca. Kada je postavljena na 0, opcije se prikazuju u jednom retku."
+// theme.isPanelless: "This setting applies only to questions outside of a panel." => "Ova se postavka primjenjuje samo na pitanja izvan ploče."
+// theme.primaryColor: "Sets a supplementary color that highlights key survey elements." => "Postavlja dodatnu boju koja ističe ključne elemente upitnika."
+// theme.panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background." => "Prilagođava prozirnost panela i okvira s pitanjima u odnosu na pozadinu ankete."
+// theme.questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background." => "Prilagođava prozirnost ulaznih elemenata u odnosu na pozadinu upitnika."
+// theme.cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes." => "Postavlja polumjer kuta za sve pravokutne elemente. Omogućite napredni način rada ako želite postaviti pojedinačne vrijednosti radijusa kuta za ulazne elemente ili ploče i okvire s pitanjima."
+// theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "Postavlja glavnu boju pozadine upitnika."
+// header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "Opcija \"Isto kao spremnik\" automatski prilagođava širinu područja sadržaja zaglavlja kako bi se uklopila u HTML element u koji je upitnik postavljen."
+// header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "Širina područja zaglavlja koje sadrži naslov i opis upitnika, mjerena u pikselima."
+// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "Čini dno zaglavlja prekrivenim vrhom upitnika."
+// panellayoutcolumn.effectiveWidth: "Accepts values %." => "Prihvaća vrijednosti %."
+// panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Prihvaća vrijednosti px."
+// p.effectiveColSpan: "Column span" => "Raspon stupaca"
