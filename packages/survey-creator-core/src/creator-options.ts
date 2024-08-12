@@ -273,7 +273,5 @@ export interface ICreatorOptions {
   enableLinkFileEditor?: boolean;
 
   expandCollapseButtonVisibility?: "never" | "onhover" | "always";
-  collapsePagesOnDragStart?: boolean;
-  collapsePanelsOnDragStart?: boolean;
-  collapseQuestionsOnDragStart?: boolean;
+  collapsedByDrag?: boolean;
 }

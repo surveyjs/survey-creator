@@ -98,16 +98,6 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     return this.collapsed && this.creator.dragDropSurveyElements.insideContainer;
   }
 
-  protected creatorDragStartHandler = () => {
-    if (this.surveyElement.isPage) this.collapsedByDrag = this.creator.collapsePagesOnDragStart;
-    if (this.surveyElement.isPanel) this.collapsedByDrag = this.creator.collapsePanelsOnDragStart;
-    if (this.surveyElement.isQuestion) this.collapsedByDrag = this.creator.collapseQuestionsOnDragStart;
-  }
-
-  protected creatorDragEndHandler = () => {
-    this.collapsedByDrag = false;
-  }
-
   @property({ defaultValue: true }) allowExpandCollapse: boolean;
   @property({
     onSet: (val, target: SurveyElementAdornerBase<T>) => {
@@ -126,7 +116,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   private dragCollapsedTimer;
 
   protected dragIn() {
-    if ((this.surveyElement.isPanel || this.surveyElement.isPage) && this.calculatedCollapsed) {
+    if ((this.surveyElement.isPanel || this.surveyElement.isPage) && this.collapsed) {
       this.dragCollapsedTimer = setTimeout(() => {
         this.expandWithDragIn();
       }, this.creator.expandOnDragTimeOut);
@@ -153,11 +143,13 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     protected surveyElement: T
   ) {
     super();
-    this.creator.onDragStart.add(this.creatorDragStartHandler);
-    this.creator.onDragEnd.add(this.creatorDragEndHandler);
     this.designerStateManager = (creator.getPlugin("designer") as TabDesignerPlugin)?.designerStateManager;
     this.designerStateManager?.initForElement(surveyElement);
     this.selectedPropPageFunc = (sender: Base, options: any) => {
+      // TODO: discuss and check
+      if (options.name === "state") {
+        this.collapsed = !this.surveyElement.isExpanded;
+      }
       if (options.name === "dragTypeOverMe") {
         if (!!options.newValue && this.dragInsideCollapsedContainer) this.dragIn(); else this.dragOut();
       }

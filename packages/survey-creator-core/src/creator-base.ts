@@ -3801,9 +3801,14 @@ export class SurveyCreatorModel extends Base
    */
   @property({ defaultValue: "never" }) expandCollapseButtonVisibility?: "never" | "onhover" | "always";
 
-  @property() collapsePagesOnDragStart?: boolean;
-  @property() collapsePanelsOnDragStart?: boolean;
-  @property() collapseQuestionsOnDragStart?: boolean;
+  /*
+  *
+  */
+  @property() collapseOnDrag: boolean;
+
+  @property() collapsePagesOnDragStart: boolean;
+  @property() collapsePanelsOnDragStart: boolean;
+  @property() collapseQuestionsOnDragStart: boolean;
   expandOnDragTimeOut: number = 1000;
 
   selectFromStringEditor: boolean;
