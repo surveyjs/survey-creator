@@ -184,3 +184,9 @@ $tab-min-height: var(--tab-min-height, auto);
     animation: none;
   }
 }
+
+:root {
+  --sjs-creator-transition-duration: 500ms;
+}
+
+$creator-transition-duration: var(--sjs-creator-transition-duration, 150ms);
