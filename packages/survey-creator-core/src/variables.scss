@@ -186,7 +186,7 @@ $tab-min-height: var(--tab-min-height, auto);
 }
 
 :root {
-  --sjs-creator-transition-duration: 500ms;
+  --sjs-creator-transition-duration: 150ms;
 }
 
 $creator-transition-duration: var(--sjs-creator-transition-duration, 150ms);
