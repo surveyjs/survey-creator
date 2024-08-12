@@ -23,6 +23,7 @@
     &[aria-placeholder]:empty:before {
       content: attr(aria-placeholder);
       color: var(--ctr-survey-page-header-title-color-placeholder, $foreground-light);
+      transition: color $creator-transition-duration;
     }
   }
 
@@ -80,6 +81,7 @@
   align-items: center;
   justify-content: right;
   line-height: 0px;
+  transition: box-shadow $creator-transition-duration;
 }
 
 .svc-string-editor__error {
