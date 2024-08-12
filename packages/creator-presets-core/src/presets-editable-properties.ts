@@ -380,6 +380,7 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
       options.allowShowSettings = false;
       options.allowDelete = true;
       options.allowEdit = true;
+      options.allowExpandCollapse = !(<SurveyElement>options.obj).isPage;
     });
     creator.onCollectionItemAllowOperations.add((sender, options) => {
       options.allowEdit = false;
