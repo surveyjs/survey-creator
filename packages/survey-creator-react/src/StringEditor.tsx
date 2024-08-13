@@ -75,7 +75,9 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
     return this.baseModel.contentEditable;
   }
   private onBlur = (event: any) => {
-    this.svStringEditorRef.current.spellcheck = false;
+    if (this.svStringEditorRef.current) {
+      this.svStringEditorRef.current.spellcheck = false;
+    }
     this.locString["__isEditing"] = false;
     this.justFocused = false;
     this.baseModel.onBlur(event.nativeEvent);
