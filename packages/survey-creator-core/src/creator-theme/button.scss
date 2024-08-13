@@ -11,6 +11,7 @@
   cursor: pointer;
   user-select: none;
   outline: solid calcSize(0.25) transparent;
+  transition: background-color $creator-transition-duration;
 
   .svc-text {
     display: flex;

@@ -24,6 +24,7 @@ svc-page {
   box-sizing: border-box;
   width: 100%;
   outline: none;
+  transition: background $creator-transition-duration, box-shadow $creator-transition-duration;
 
   .sd-page {
     margin: 0;
@@ -211,6 +212,7 @@ svc-page {
   cursor: pointer;
   margin-inline-end: calcSize(1); // margin-right
   outline: none;
+  transition: background-color $creator-transition-duration;
 
   use {
     fill: var(--ctr-library-contextual-button-icon-color, $foreground-light);

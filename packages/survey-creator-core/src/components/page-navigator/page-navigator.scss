@@ -13,9 +13,11 @@ svc-page-navigator,
   padding: calcSize(1.25);
   border-radius: 50%;
   cursor: pointer;
+  transition: background-color $creator-transition-duration;
 
   use {
     fill: var(--ctr-page-navigator-button-icon-color, $foreground-light);
+    transition: fill $creator-transition-duration;
   }
 }
 
