@@ -833,8 +833,11 @@ test("Preset edit model, tabs page with creator, default items", () => {
   const survey = editor.model;
   const itemsQuestion = survey.getQuestionByName("tabs_items");
   itemsQuestion.value = ["preview", "logic"];
-  survey.completeLastPage();
-  const creator = editor.creator;
-  expect(creator.tabs).toHaveLength(2);
-  expect(editor.activeTab).toBe("creator");
+  const nextBtn = survey.navigationBar.getActionById("sv-nav-next");
+  expect(nextBtn.isVisible).toBeTruthy();
+  survey.currentPageNo = survey.visiblePages.length - 1;
+  expect(survey.isLastPage).toBeTruthy();
+  expect(nextBtn.isVisible).toBeTruthy();
+  nextBtn.action();
+  expect(survey.isFirstPage).toBeTruthy();
 });
