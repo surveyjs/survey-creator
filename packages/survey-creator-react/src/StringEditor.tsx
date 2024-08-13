@@ -160,7 +160,7 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
           aria-label={this.placeholder || "content editable"}
           suppressContentEditableWarning={true}
           // style={this.style}
-          dangerouslySetInnerHTML={{ __html: this.locString.renderedHtml }}
+          key={this.locString.renderedHtml}
           onBlur={this.onBlur}
           onInput={this.onInput}
           onPaste={this.onPaste}
@@ -171,7 +171,7 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
           onKeyUp={this.onKeyUp}
           onMouseUp={this.onMouseUp}
           onClick={this.edit}
-        ></span>
+        >{this.locString.renderedHtml}</span>
       );
     }
     const counter = this.baseModel.showCharacterCounter ? (<CharacterCounterComponent counter={this.baseModel.characterCounter} remainingCharacterCounter={this.baseModel.getCharacterCounterClass}></CharacterCounterComponent>) : null;
