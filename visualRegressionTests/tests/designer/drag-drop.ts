@@ -459,7 +459,7 @@ test("Drag Drop to Multiline from Toolbox", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     changeToolboxScrolling(false);
     await explicitErrorHandler();
-    await t.resizeWindow(2552, 1440);
+    await t.resizeWindow(2584, 1440);
 
     const json = {
       "logoPosition": "right",
@@ -501,7 +501,7 @@ test("Drag Drop to Multiline from Toolbox", async (t) => {
 test("Drag Drop to Multiline styles", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await explicitErrorHandler();
-    await t.resizeWindow(800, 600);
+    await t.resizeWindow(832, 600);
 
     const json = {
       "logoPosition": "right",

@@ -4,7 +4,8 @@ import {
   IQuestionToolboxItem,
   QuestionToolboxItem
 } from "survey-creator-core";
-import React, { CSSProperties } from "react";
+import { CSSProperties, createElement } from "react";
+import * as React from "react";
 import { ToolboxToolViewModel } from "survey-creator-core";
 import {
   Action,
@@ -144,5 +145,5 @@ export class SurveyCreatorToolboxItem extends CreatorModelElement<
 }
 
 ReactElementFactory.Instance.registerElement("svc-toolbox-item", (props) => {
-  return React.createElement(SurveyCreatorToolboxItem, props);
+  return createElement(SurveyCreatorToolboxItem, props);
 });

@@ -9,7 +9,7 @@ import {
   attachKey2click
 } from "survey-react-ui";
 import { PageNavigatorViewModel, PagesController } from "survey-creator-core";
-import React from "react";
+import * as React from "react";
 import { CreatorModelElement } from "./ModelElement";
 
 interface ISurveyPageNavigatorProps {

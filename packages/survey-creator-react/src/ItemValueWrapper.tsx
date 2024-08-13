@@ -1,5 +1,5 @@
 import { getLocString, ItemValueWrapperViewModel } from "survey-creator-core";
-import React from "react";
+import * as React from "react";
 import { ReactDragEvent } from "src/events";
 import { QuestionSelectBase, Base, ItemValue } from "survey-core";
 import {

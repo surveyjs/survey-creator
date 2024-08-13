@@ -3694,7 +3694,8 @@ export class SurveyCreatorModel extends Base
       allowChangeInputType: true,
       allowChangeRequired: true,
       allowShowSettings: undefined,
-      allowEdit: undefined
+      allowEdit: undefined,
+      allowExpandCollapse: undefined
     };
     this.onElementAllowOperations.fire(this, options);
     return options;

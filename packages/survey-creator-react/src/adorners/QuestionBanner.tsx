@@ -1,5 +1,5 @@
 import { QuestionBannerParams } from "survey-creator-core";
-import React from "react";
+import * as React from "react";
 import { ReactElementFactory } from "survey-react-ui";
 import { ActionButton } from "../ActionButton";
 

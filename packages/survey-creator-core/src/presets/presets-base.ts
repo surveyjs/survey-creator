@@ -15,6 +15,7 @@ export abstract class CreatorPresetBase implements ICreatorPreset {
     this.setupPresets();
   }
   public setJson(json: any): void {
+    if(!json && this.applyEmptyJson()) json = {};
     this.json = json;
     this.children.forEach(item => item.setJson(this.json && item.getPath() ? this.json[item.getPath()] : this.json));
   }
@@ -27,6 +28,7 @@ export abstract class CreatorPresetBase implements ICreatorPreset {
     this.onApplied.fire(this, {});
   }
   public abstract getPath(): string;
+  protected applyEmptyJson(): boolean { return false; }
   protected applyCore(creator: SurveyCreatorModel): void { }
   protected createPresets(): Array<ICreatorPreset> {
     return [];

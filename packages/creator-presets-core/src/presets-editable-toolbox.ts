@@ -10,6 +10,9 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
   private allItems: ItemValue[];
 
   public createMainPageCore(): any {
+    const getRankingItemEnableIf = (name: string): string => {
+      return "{" + name + ".length} > 1 or {" + name + "} notcontains {item}";
+    };
     return {
       title: "Set Up the Toolbox",
       navigationTitle: "Toolbox",
@@ -63,6 +66,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
                   titleLocation: "hidden",
                   selectToRankEnabled: true,
                   minSelectedChoices: 1,
+                  choicesEnableIf: getRankingItemEnableIf("row.items"),
                   selectToRankAreasLayout: "horizontal",
                   selectToRankEmptyRankedAreaText: "Drag toolbox items here to hide them",
                   selectToRankEmptyUnrankedAreaText: " Drag toolbox items here to show them"
@@ -73,6 +77,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
               type: "presetranking",
               name: this.nameItems,
               visibleIf: this.getTextVisibleIf(this.nameCategoriesMode, "items"),
+              choicesEnableIf: getRankingItemEnableIf(this.nameItems),
               titleLocation: "hidden",
               selectToRankEnabled: true,
               minSelectedChoices: 1,
@@ -85,15 +90,17 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
         {
           type: "panel",
           name: "panel_toolbox_definition",
-          description: "Create a new toolboitem or customize one of the predefined toolbox items.",
+          description: "Create a new toolbox item or customize one of the predefined toolbox items.",
           elements: [
             {
               type: "matrixdynamic",
               name: this.nameMatrix,
               titleLocation: "hidden",
               rowCount: 0,
-              addRowText: "Add New Item Defintion",
+              addRowText: "Add new toolbox item",
               showHeader: false,
+              hideColumnsIfEmpty: true,
+              emptyRowsText: "Click the button below to add a new toolbox item.",
               columns: [
                 { cellType: "text", name: "name", placeholder: "Name", isUnique: true, isRequired: true },
                 { cellType: "text", name: "iconName", placeholder: "Icon name" },
@@ -189,8 +196,11 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     }
   }
   protected setupQuestionsCore(model: SurveyModel, creatorSetup: ICreatorPresetEditorSetup): void {
-    this.setupDefaultItems(creatorSetup.creator);
-    this.setupItemsDefinition(model, creatorSetup.creator);
+    this.setupPageQuestions(model, creatorSetup.creator);
+  }
+  private setupPageQuestions(model: SurveyModel, creator: SurveyCreatorModel): void {
+    this.setupDefaultItems(creator);
+    this.setupItemsDefinition(model, creator);
     this.setQuestionItemsChoices(model);
   }
   protected validateCore(model: SurveyModel): boolean {
@@ -276,6 +286,12 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
       };
     });
     this.updateShowCategoriesTitlesElements(model);
+  }
+  protected onLocaleChangedCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
+    const newCreator = new SurveyCreatorModel({});
+    newCreator.locale = creator.locale;
+    this.setupPageQuestions(model, newCreator);
+    this.setupQuestionsValueCore(model, json, newCreator);
   }
   private setupQuestionsValueDefinition(model: SurveyModel, json: any): void {
     json = json || {};

@@ -341,7 +341,7 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     creator.showSidebar = false;
     const designer = <TabDesignerPlugin>creator.getPlugin("designer");
     designer.designerStateManager.onInitElementStateCallback = (element: SurveyElement, state: any): void => {
-      if(element.isPanel) {
+      if(element.isPanel || element.isQuestion) {
         state.collapsed = true;
       }
     };
@@ -380,6 +380,7 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
       options.allowShowSettings = false;
       options.allowDelete = true;
       options.allowEdit = true;
+      options.allowExpandCollapse = !(<SurveyElement>options.obj).isPage;
     });
     creator.onCollectionItemAllowOperations.add((sender, options) => {
       options.allowEdit = false;
@@ -472,7 +473,7 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     }
   }
   private setupCreatorToolbox(creator: SurveyCreatorModel): void {
-    const elements: IQuestionToolboxItem[] = [{ name: "panel", title: "Category", className: "panel", json: { type: "panel" }, iconName: "icon-panel" }];
+    const elements: IQuestionToolboxItem[] = [{ name: "panel", title: "New Category", className: "panel", json: { type: "panel" }, iconName: "icon-panel" }];
     const hiddenProperties = ["progressBarInheritWidthFrom"]; //TODO
     const propGrid = this.currentProperties.propertyGridDefault.survey;
     const survey = this.propCreator.survey;
@@ -514,4 +515,7 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
   }
 }
 export class CreatorEditablePresetPropertyGrid extends CreatorPresetEditableBase {
+  protected onLocaleChangedCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
+    model.clearValue("propertyGrid_definition_selector");
+  }
 }

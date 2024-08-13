@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { Base, SurveyModel, PageModel } from "survey-core";
 import {
   ReactElementFactory,
