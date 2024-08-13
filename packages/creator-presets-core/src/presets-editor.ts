@@ -100,8 +100,8 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     const model = new SurveyModel(this.getEditModelJson(editablePresets));
     model.editablePresets = editablePresets;
     model.keepIncorrectValues = true;
-    model.showCompleteButton = false;
     model.showPrevButton = false;
+    model.completeText = "Apply Preset Changes";
     editablePresets.forEach(item => item.setupQuestions(model, this));
     const json = this.preset.getJson() || {};
     editablePresets.forEach(item => item.setupQuestionsValue(model, json[item.path], this.creator));
@@ -119,6 +119,12 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
       if(options.name === "languages_creator") {
         editorLocalization.currentLocale = options.value;
         editablePresets.forEach(item => item.onLocaleChanged(model, json[item.path], this.creator));
+      }
+    });
+    model.onCompleting.add((sender, options) => {
+      options.allow = false;
+      if(this.applyFromSurveyModel()) {
+        this.activeTab = "creator";
       }
     });
     model.onMatrixDetailPanelVisibleChanged.add((sender, options) => {

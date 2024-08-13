@@ -293,13 +293,27 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     });
     return res;
   }
-  private changePropTitleAndDescription(strs: any, propName: string, val: string): void {
+  private changePropTitleAndDescription(path: string, propName: string, val: string): void {
+    this.ensureLocalizationPath(path);
+    const strs = this.localeStrings[path];
     const className = this.currentProperties.getPropertyClassName(propName);
     if(!!className) {
       if(!strs[className]) {
         strs[className] = {};
       }
       strs[className][propName] = val;
+    }
+  }
+  private ensureLocalizationPath(path: string): void {
+    if(!this.localeStrings) {
+      this.localeStrings = {};
+    }
+    const names = path.split(".");
+    let strs = this.localeStrings;
+    for(let i = 0; i < names.length; i ++) {
+      const name = names[i];
+      if(!strs[name]) strs[name] = {};
+      strs = strs[name];
     }
   }
   private setupPropertyCreator(): void {
@@ -310,22 +324,19 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
       this.isPropCreatorChanged = true;
       this.isModified = true;
       if(options.type === "PROPERTY_CHANGED") {
+        const name = (<any>options.target).name;
         if((<any>options.target)?.isQuestion) {
           if(options.name === "title") {
-            this.changePropTitleAndDescription(this.localeStrings.pe,
-              (<any>options.target).name, options.newValue);
+            this.changePropTitleAndDescription("pe", name, options.newValue);
           }
           if(options.name === "description") {
-            this.changePropTitleAndDescription(this.localeStrings.pehelp,
-              (<any>options.target).name, options.newValue);
+            this.changePropTitleAndDescription("pehelp", name, options.newValue);
           }
         }
         if((<any>options.target)?.isPanel) {
           if(options.name === "title") {
-            if(!this.localeStrings.pe.tabs) {
-              this.localeStrings.pe.tabs = {};
-            }
-            this.localeStrings.pe.tabs[(<any>options.target).name] = options.newValue;
+            this.ensureLocalizationPath("pe.tabs");
+            this.localeStrings.pe.tabs[name] = options.newValue;
           }
         }
       }
@@ -450,26 +461,32 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
   private updateCreatorJSONElements(elements: Array<any>): void {
     for(let i = elements.length - 1; i >= 0; i --) {
       const el = elements[i];
-      if(Array.isArray(el.elements)) {
-        this.updateCreatorJSONElements(el.elements);
-      }
-      if(el.titleLocation === "hidden") {
-        delete el.titleLocation;
-      }
-      if(!!el.state) {
-        delete el.state;
-      }
       if(!!el.name && el.name.indexOf("overridingProperty")> -1) {
         elements.splice(i, 1);
       } else {
-        const type = el.type;
-        if(type === "textwithreset") {
-          el.type = "text";
-        }
-        if(type === "commentwithreset") {
-          el.type = "comment";
-        }
+        this.updateJSONElement(el);
       }
+    }
+  }
+  private updateJSONElement(el: any): void {
+    if(Array.isArray(el.elements)) {
+      this.updateCreatorJSONElements(el.elements);
+    }
+    if(el.titleLocation === "hidden") {
+      delete el.titleLocation;
+    }
+    if(el.descriptionLocation === "hidden") {
+      delete el.descriptionLocation;
+    }
+    if(!!el.state) {
+      delete el.state;
+    }
+    const type = el.type;
+    if(type === "textwithreset") {
+      el.type = "text";
+    }
+    if(type === "commentwithreset") {
+      el.type = "comment";
     }
   }
   private setupCreatorToolbox(creator: SurveyCreatorModel): void {
@@ -483,6 +500,7 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
         && hiddenProperties.indexOf(propName) < 0) {
         const q = propGrid.getQuestionByName(propName);
         const json = q.toJSON();
+        this.updateJSONElement(json);
         json.name = propName;
         json.type = q.getType();
         elements.push({

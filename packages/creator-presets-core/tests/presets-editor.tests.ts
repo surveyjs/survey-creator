@@ -608,6 +608,34 @@ test("Toolbox categories, show header and showcolumn title column if show catego
   survey.setValue("toolbox_showCategoryTitles", false);
   expect(matrix.getColumnByName("title").visible).toBeFalsy();
 });
+test("Preset edit model, Set question name title&description", () => {
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  survey.currentPage = survey.getPageByName("page_propertyGrid_definition");
+  survey.setValue("propertyGrid_definition_selector", "text");
+  const propGridCreator = getPropGridCreator(survey);
+  const q = propGridCreator.survey.getQuestionByName("name");
+  expect(q).toBeTruthy();
+  expect(q.title).toBe("Question name");
+  expect(q.description).toBe("A question ID that is not visible to respondents.");
+});
+test("Preset edit model, Keep description on deleting the question", () => {
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  survey.currentPage = survey.getPageByName("page_propertyGrid_definition");
+  survey.setValue("propertyGrid_definition_selector", "text");
+  const propGridCreator = getPropGridCreator(survey);
+  expect(propGridCreator.toolbox.items).toHaveLength(1);
+  const q = propGridCreator.survey.getQuestionByName("name");
+  expect(q).toBeTruthy();
+  propGridCreator.selectElement(q);
+  propGridCreator.deleteCurrentElement();
+  expect(propGridCreator.survey.getQuestionByName("name")).toBeFalsy();
+  expect(propGridCreator.toolbox.items).toHaveLength(2);
+  const json = propGridCreator.toolbox.items[1].json;
+  expect(json.description).toEqual("A question ID that is not visible to respondents.");
+  expect(json.descriptionLocation).toBeFalsy();
+});
 test("Preset edit model, Change localization strings title&description", () => {
   const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
@@ -700,7 +728,7 @@ test("Preset edit model, Property grid toolbox", () => {
   const valPanel = propGridCreator.survey.getPanelByName("validation");
   expect(valPanel).toBeTruthy();
   propGridCreator.deleteElement(valPanel);
-  expect(propGridCreator.toolbox.actions).toHaveLength(3);
+  expect(propGridCreator.toolbox.actions).toHaveLength(4);
   propGridCreator.selectElement(propGridCreator.survey.getQuestionByName("title"));
   propGridCreator.clickToolboxItem(propGridCreator.toolbox.getItemByName("panel").json);
   propGridCreator.clickToolboxItem(propGridCreator.toolbox.getItemByName("panel").json);
@@ -713,7 +741,7 @@ test("Preset edit model, Property grid toolbox", () => {
   propGridCreator.clickToolboxItem(propGridCreator.toolbox.getItemByName("focusOnFirstError").json);
   expect(newPanel2.elements).toHaveLength(1);
   expect(newPanel2.questions[0].name).toEqual("focusOnFirstError");
-  expect(propGridCreator.toolbox.actions).toHaveLength(2);
+  expect(propGridCreator.toolbox.actions).toHaveLength(3);
 });
 test("Preset edit model, Property grid change the new category name", () => {
   const editor = new CreatorPresetEditorModel();
@@ -725,7 +753,7 @@ test("Preset edit model, Property grid change the new category name", () => {
   const valPanel = propGridCreator.survey.getPanelByName("validation");
   expect(valPanel).toBeTruthy();
   propGridCreator.deleteElement(valPanel);
-  expect(propGridCreator.toolbox.actions).toHaveLength(3);
+  expect(propGridCreator.toolbox.actions).toHaveLength(4);
   propGridCreator.selectElement(propGridCreator.survey.getQuestionByName("title"));
   propGridCreator.clickToolboxItem(propGridCreator.toolbox.getItemByName("panel").json);
   const newPanel1 = propGridCreator.survey.getPanelByName("category1");
@@ -799,4 +827,14 @@ test("Preset edit model, toolbox categories, restore after creator locale change
   expect(editor.creator.locale).toBe("de");
   survey.setValue("toolbox_mode", "categories");
   expect(matrix.rowCount).toBe(rowCount);
+});
+test("Preset edit model, tabs page with creator, default items", () => {
+  const editor = new CreatorPresetEditorModel({});
+  const survey = editor.model;
+  const itemsQuestion = survey.getQuestionByName("tabs_items");
+  itemsQuestion.value = ["preview", "logic"];
+  survey.completeLastPage();
+  const creator = editor.creator;
+  expect(creator.tabs).toHaveLength(2);
+  expect(editor.activeTab).toBe("creator");
 });
