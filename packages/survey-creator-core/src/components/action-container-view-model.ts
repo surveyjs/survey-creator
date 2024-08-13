@@ -147,7 +147,9 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this.designerStateManager?.initForElement(surveyElement);
     this.selectedPropPageFunc = (sender: Base, options: any) => {
       if (options.name === "dragTypeOverMe") {
-        if (!!options.newValue && this.dragInsideCollapsedContainer) this.dragIn(); else this.dragOut();
+        if (this.dragInsideCollapsedContainer) {
+          if (!!options.newValue) this.dragIn(); else this.dragOut();
+        }
       }
       if (options.name === "isSelectedInDesigner") {
         this.onElementSelectedChanged(options.newValue);

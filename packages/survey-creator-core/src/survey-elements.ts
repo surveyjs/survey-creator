@@ -154,7 +154,6 @@ export class DragDropSurveyElements extends DragDropCore<any> {
   }
 
   protected getDropTargetByDataAttributeValue(dataAttributeValue: string, dropTargetNode: HTMLElement, event: PointerEvent): any {
-    this.removeDragOverMarker(this.dragOverIndicatorElement);
     this.dragOverIndicatorElement = null;
 
     if (!dataAttributeValue) {
@@ -220,8 +219,10 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       let page: any = this.survey.getPageByName(dataAttributeValue);
       dropTarget.__page = page;
     }
-
-    this.dragOverIndicatorElement = dragOverElement;
+    if (this.dragOverIndicatorElement != dragOverElement) {
+      this.removeDragOverMarker(this.dragOverIndicatorElement);
+      this.dragOverIndicatorElement = dragOverElement;
+    }
     return dropTarget;
     // EO drop to question or panel
   }
@@ -314,8 +315,8 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     return allowOptions.allow;
   }
   public dragOverCore(dropTarget: ISurveyElement, dragOverLocation: DragTypeOverMeEnum): void {
-    this.removeDragOverMarker(this.dragOverIndicatorElement);
-    this.removeDragOverMarker(this.dropTarget);
+    const oldDragOverIndicatorElement = this.dragOverIndicatorElement;
+    const oldDropTarget = this.dropTarget;
     if (this.isSameElement(dropTarget)) {
       this.allowDropHere = false;
       return;
@@ -342,6 +343,8 @@ export class DragDropSurveyElements extends DragDropCore<any> {
         dragOverIndicator.dragTypeOverMe = this.dragOverLocation;
       }
     }
+    if (this.dragOverIndicatorElement != oldDragOverIndicatorElement) this.removeDragOverMarker(oldDragOverIndicatorElement);
+    if (this.dropTarget != oldDropTarget) this.removeDragOverMarker(oldDropTarget);
   }
   private isSameElement(target: ISurveyElement): boolean {
     while (!!target) {
