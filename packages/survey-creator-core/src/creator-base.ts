@@ -2289,7 +2289,7 @@ export class SurveyCreatorModel extends Base
     }
   }
 
-  protected convertQuestion(obj: Question, className: string): Question {
+  protected convertQuestion(obj: Question, className: string, deafultJSON: any = null): Question {
     const objJSON = QuestionConverter.getObjJSON(obj, this.getDefaultElementJSON(obj.getType()));
     const options: QuestionConvertingEvent = {
       sourceQuestion: obj,
@@ -2297,7 +2297,7 @@ export class SurveyCreatorModel extends Base
       json: objJSON
     };
     this.onQuestionConverting.fire(this, options);
-    const newQuestion = <Question>QuestionConverter.convertObject(obj, className, options.json, this.getDefaultElementJSON(className));
+    const newQuestion = <Question>QuestionConverter.convertObject(obj, className, options.json, deafultJSON || this.getDefaultElementJSON(className));
     this.setModified({
       type: "QUESTION_CONVERTED",
       className: className,
@@ -3550,13 +3550,13 @@ export class SurveyCreatorModel extends Base
     this.showSaveButton = value != null && !this.isAutoSave;
   }
   @undoRedoTransaction()
-  public convertCurrentQuestion(newType: string) {
+  public convertCurrentQuestion(newType: string, defaultJSON: any = null) {
     var el = this.selectedElement;
     if (!el || el.getType() === newType) return;
     const objType = SurveyHelper.getObjectType(el);
     if (objType !== ObjType.Question && objType !== ObjType.Panel) return;
     this.addNewElementReason = "ELEMENT_CONVERTED";
-    el = this.convertQuestion(<Question>el, newType);
+    el = this.convertQuestion(<Question>el, newType, defaultJSON);
     this.selectElement(el, null, "#convertTo button");
   }
 

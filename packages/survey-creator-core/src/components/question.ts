@@ -347,16 +347,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       const needSeparator = lastItem && item.category != lastItem.category;
       const action = this.creator.createIActionBarItemByClass(item, needSeparator, (questionType: string, json?: any) => {
         const type = json?.type || questionType;
-        if (this.surveyElement.getType() !== type) {
-          this.creator.convertCurrentQuestion(type);
-        }
-        if (!!json) {
-          Object.keys(json).forEach(propName => {
-            if (propName !== "type") {
-              this.surveyElement.setPropertyValue(propName, json[propName]);
-            }
-          });
-        }
+        this.creator.convertCurrentQuestion(type, json);
         parentAction?.hidePopup();
       });
       lastItem = item;
