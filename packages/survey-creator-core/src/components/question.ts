@@ -353,7 +353,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
         if (!!json) {
           Object.keys(json).forEach(propName => {
             if (propName !== "type") {
-              this.creator.selectedElement.setPropertyValue(propName, json[propName]);
+              this.surveyElement.setPropertyValue(propName, json[propName]);
             }
           });
         }
