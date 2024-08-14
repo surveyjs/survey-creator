@@ -62,16 +62,18 @@ export class QuestionConverter {
     }
     return res;
   }
-  public static convertObject(obj: Question, convertToClass: string, objJSON: any, defaultJSON: any = null): Question {
-    if (!obj || !obj.parent || convertToClass == obj.getType()) return null;
+  public static convertObject(obj: Question, convertToClass: string, objJSON: any, defaultJSON: any = null, resetToDefault = false): Question {
+    if (!obj || !obj.parent || convertToClass == obj.getType() && !defaultJSON) return null;
     let newQuestion = !defaultJSON ? QuestionFactory.Instance.createQuestion(convertToClass, obj.name) : undefined;
     if(!newQuestion) {
       newQuestion = Serializer.createClass(convertToClass, {});
     }
     newQuestion.name = obj.name;
-    const json = defaultJSON ? Helpers.createCopy(defaultJSON) : newQuestion.toJSON();
+    const sourceJSON = resetToDefault ? objJSON : defaultJSON;
+
+    const json = sourceJSON ? Helpers.createCopy(sourceJSON) : newQuestion.toJSON();
     //const qJson = QuestionConverter.getObjJSON(obj, objJSON);
-    const qJson = objJSON || {};
+    const qJson = resetToDefault ? defaultJSON : objJSON || {};
     for (let key in qJson) {
       json[key] = qJson[key];
     }
