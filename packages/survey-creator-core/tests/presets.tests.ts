@@ -1,6 +1,7 @@
 import { CreatorTester } from "./creator-tester";
 import { CreatorPreset, ICreatorPresetData } from "../src/presets/presets";
 import { editorLocalization } from "../src/editorLocalization";
+import { surveyLocalization } from "survey-core";
 export * from "../src/localization/german";
 
 test("show/hidetabs", () => {
@@ -205,4 +206,33 @@ test("apply localization for toolbox", () => {
   expect(editorLocalization.getString("qt.text")).toEqual("Text edit");
   expect(creator.toolbox.getActionById("text").title).toEqual("Text edit");
   editorLocalization.presetStrings = undefined;
+});
+test("apply creator locale", () => {
+  const json: ICreatorPresetData = {
+    languages: { creator: "de" }
+  };
+  const preset = new CreatorPreset(json);
+  const creator = new CreatorTester();
+
+  preset.apply(creator);
+  expect(creator.locale).toBe("de");
+
+  preset.setJson({});
+  preset.apply(creator);
+  expect(creator.locale).toBeFalsy();
+});
+test("apply supported locales", () => {
+  expect(surveyLocalization.supportedLocales).toStrictEqual([]);
+  const json: ICreatorPresetData = {
+    languages: { surveyLocales: ["de", "fr", "it"] }
+  };
+  const preset = new CreatorPreset(json);
+  const creator = new CreatorTester();
+
+  preset.apply(creator);
+  expect(surveyLocalization.supportedLocales).toStrictEqual(["de", "fr", "it"]);
+
+  preset.setJson({});
+  preset.apply(creator);
+  expect(surveyLocalization.supportedLocales).toStrictEqual([]);
 });

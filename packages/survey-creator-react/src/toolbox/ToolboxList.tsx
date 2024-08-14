@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { ListModel } from "survey-core";
 import { ReactElementFactory, SurveyElementBase } from "survey-react-ui";
 import { SurveyCreatorToolboxTool } from "./ToolboxItem";

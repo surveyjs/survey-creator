@@ -3,6 +3,14 @@ import { Base, CssClassBuilder, property, SurveyModel } from "survey-core";
 require("./simulator.scss");
 
 export class SurveySimulatorModel extends Base {
+  private surveyChanged() {
+    const _this = this;
+    this.survey.onOpenDropdownMenu.add((_, options) => {
+      const device = simulatorDevices[_this.activeDevice];
+      options.menuType = device.deviceType === "desktop" ? "dropdown" : (device.deviceType == "tablet" ? "popup" : "overlay");
+    });
+  }
+
   constructor() {
     super();
     // if (!!_toolbarHolder) {
@@ -37,7 +45,9 @@ export class SurveySimulatorModel extends Base {
   }
 
   @property({ defaultValue: true }) landscape: boolean;
-  @property() survey: SurveyModel;
+  @property({
+    onSet: (newVal: SurveyModel, target: SurveySimulatorModel) => { target.surveyChanged(); }
+  }) survey: SurveyModel;
   @property({ defaultValue: "desktop" }) device: string;
   @property({ defaultValue: "l" }) orientation: string;
   @property({ defaultValue: true }) considerDPI: boolean;

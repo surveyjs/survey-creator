@@ -24,17 +24,14 @@ They can be used separately ("10 days", "5 months", "6 years") or together to fo
 You can use the `dateDiff()` function to display the calculated duration value in the following questions:
 
 - Expression    
-This question is always read-only. The value is set using the **Expression** property located under **General**:
+This question is always read-only. The value is set using the **Expression** property located under **General**:<br><br>
+    <img src="../images/eud-expression 401 611.png" alt='Duration fuction in an Expression question' width="301" height="458">
 
-  <img src="../images/eud-expression 401 611.png" alt='Duration fuction in an Expression question' width="301" height="458">
 - Single-Line Input     
-The value is set using the **Set value expression** property located under **Conditions**:
-
-  <img src="../images/eud-set-value-expression 400 596.png" alt='Duration fuction in a Single Line Input' width="300" height="447">
-
-  You can enable the read-only mode for a Single-Line Input with a set expression using the **Read-only** property located under **General**:
-
-  <img src="../images/eud-read-only 400 596.png" alt='How to set Read-only mode for a Single-Line Input' width="300" height="447">
+The value is set using the **Set value expression** property located under **Conditions**:<br><br>
+    <img src="../images/eud-set-value-expression 400 596.png" alt='Duration fuction in a Single Line Input' width="300" height="447"><br><br>
+    You can enable the read-only mode for a Single-Line Input with a set expression using the **Read-only** property located under **General**:<br><br>
+    <img src="../images/eud-read-only 400 596.png" alt='How to set Read-only mode for a Single-Line Input' width="300" height="447">
 
 If you want the calculations to happen behind the scenes, you can create a hidden Expression question, create a custom variable, or use a combination of both. For example, you can create one custom variable for the duration in years and another one for the number of months of the remaining incomplete year. Then, you can create a read-only Expression question that will display both values in a single field.
 
@@ -50,7 +47,7 @@ If you want to calculate the duration between any date and a survey completion d
 
 ## Duration Function Syntax for Combined Values
 
-Combined values are commonly used when you want your duration estimate to be precise. For example, when it comes to the employment period, you might want to include the number of months of the incomplete year, not just the number of full months of employment. If you use the syntax above to estimate the number of months, the expression will estimate and display the employment duration in full months only. To estimate the duration of the incomplete year in days or months, the following syntax is used:
+Combined values are commonly used when you want your duration estimate to be precise. For example, when it comes to the employment period, you might want to include the number of months of the incomplete year, not just the number of full years of employment. If you use the syntax above to estimate the number of months, the expression will estimate and display the employment duration in full months only, even if the number is greater than 12. To estimate the duration of the incomplete year in days or months, the following syntax is used:
 
 - Incomplete year in days &mdash; `dateDiff({firstDate}, {secondDate}, 'days') % 365` 
 - Incomplete year in months &mdash; `dateDiff({firstDate}, {secondDate}, 'months') % 12`
@@ -80,7 +77,7 @@ To configure an Expression question that will estimate and merge both values&mda
 1. Enter the following sample value: `dateDiff({since-date}, today(), 'years') + ' years' + ' ' + dateDiff({since-date}, today(), 'months') % 12 + ' months'`
 1. Under **Conditions**, locate the **Make the question visible if** property.
 1. Click the **Magic wand icon** on the right of the property.
-1. Set up a visibility rule by selecting the ID of the source question for the start date. Based on the configuration below, the Expression question will only be visible once the question with an ID "since-date" receives a date value, i.e., when it is not empty.
+1. Set up a visibility rule by selecting the ID of the source question for the start date. Based on the configuration below, the Expression question will only be visible once the question with an ID "since-date" receives a date value, i.e., when it is not empty.<br><br>
    <img src="../images/eud-expression-visibility 1179 723.png" alt='How to set up a visibility rule for an Expression question' width="1179" height="723">
 
 ### How to Prefill a Single-Line Input with a Calculated Duration Value
@@ -94,11 +91,11 @@ In this example, we will use the same source question for the start date and ass
 3. Under **Conditions**, locate the **Set value expression** property.
 4. Enter the following sample value: `dateDiff({since-date}, today(), 'years') + ' years' + ' ' + dateDiff({since-date}, today(), 'months') % 12 + ' months'`
 5. Locate the **Set value if** property.
-6. Click the magic wand icon and set a conditional rule that determines when to assign the calculated value as a response.
+6. Click the magic wand icon and set a conditional rule that determines when to assign the calculated value as a response.<br><br>
    <img src="../images/eud-set-value-if-and-set-value.png" alt='How to set and condition an expression-based value for a Single-Line Input' width="1193" height="571">
 
 In the example above, the value is assigned when the source question for the start date with an ID "since-date" has a value, i.e., is not empty. If you don't want to set the value conditionally, use the **Default value expression** property instead of **Set value expression** and **Set value if**.
 
 ## Limitations
 
-When merged values contain a number and a string (text) value, they cannot be used in the **Formatted string** property of the Expression question. Expressions ignore text values, and the resulting expression will only display calculated numbers.
+When merged values contain both numbers and strings (text), they cannot be used in the **Formatted string** property of the Expression question. Expressions ignore text values, so the resulting expression will only display calculated numbers.

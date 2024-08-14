@@ -1,5 +1,5 @@
 import { QuestionAdornerViewModel, toggleHovered } from "survey-creator-core";
-import React from "react";
+import * as React from "react";
 import { ReactDragEvent, ReactMouseEvent } from "../events";
 import { Base, Question } from "survey-core";
 import {

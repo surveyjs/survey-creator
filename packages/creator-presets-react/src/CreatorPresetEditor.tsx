@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { Base } from "survey-core";
 import { SurveyActionBar, SurveyElementBase, Survey, SvgBundleComponent } from "survey-react-ui";
 import { ICreatorOptions, SurveyCreatorModel } from "survey-creator-core";

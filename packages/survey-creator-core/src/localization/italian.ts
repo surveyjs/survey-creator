@@ -1,5 +1,3 @@
-// This dictionary contains 65 untranslated or inherited localization strings.
-// These strings are commented out. Uncomment and edit them if you want to add your translations.
 import { editorLocalization } from "survey-creator-core";
 
 var italianTranslation = {
@@ -415,6 +413,9 @@ var italianTranslation = {
     rateDescriptionLocation: "Allineamento delle etichette",
     size: "Dimensione dell'input (in caratteri)",
     cellErrorLocation: "Allineamento dei messaggi di errore delle celle",
+    enabled: "Abilitato",
+    disabled: "Disabile",
+    inherit: "Ereditare",
     apply: "Applica",
     ok: "OK",
     save: "Salva",
@@ -662,6 +663,7 @@ var italianTranslation = {
     },
     focusOnFirstError: "Imposta il focus sulla prima risposta invalida",
     checkErrorsMode: "Esegui la convalida",
+    validateVisitedEmptyFields: "Convalida i campi vuoti in caso di perdita dello stato attivo",
     navigateToUrl: "Naviga fino all'URL",
     navigateToUrlOnCondition: "URL Dinamico",
     completedBeforeHtml: "Markup da mostrare se l'utente ha già compilato questo sondaggio",
@@ -1228,6 +1230,10 @@ var italianTranslation = {
     },
     panelbase: {
       questionTitleWidth: "Es.: 200px"
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "Es.: 30%",
+      questionTitleWidth: "Es.: 200px"
     }
   },
   pehelp: {
@@ -1380,6 +1386,7 @@ var italianTranslation = {
     allowResize: "La maniglia di ridimensionamento (o grip) viene visualizzata nell'angolo e può essere trascinata per modificare le dimensioni del campo di immissione.",
     maxTimeToFinish: "Un intervallo di tempo in secondi dopo il quale l'indagine avanza automaticamente alla pagina di ringraziamento.",
     maxTimeToFinishPage: "Un intervallo di tempo in secondi dopo il quale il rilevamento avanza automaticamente alla pagina successiva.",
+    validateVisitedEmptyFields: "Abilitare questa opzione per attivare la convalida quando un utente si concentra su un campo di input vuoto e poi lo abbandona senza apportare modifiche.",
     page: {
       maxTimeToFinish: "Un intervallo di tempo in secondi dopo il quale il rilevamento avanza automaticamente alla pagina successiva.",
       visibleIf: "Usa l'icona della bacchetta magica per impostare una regola condizionale che determina la visibilità della pagina.",
@@ -1442,6 +1449,7 @@ var italianTranslation = {
     filePlaceholder: "Si applica quando \"Tipo di origine\" è \"File locali\" o quando la fotocamera non è disponibile",
     photoPlaceholder: "Si applica quando \"Tipo di sorgente\" è \"Fotocamera\".",
     fileOrPhotoPlaceholder: "Si applica quando \"Tipo di origine\" è \"File locali o fotocamera\".",
+    colCount: "Dispone le opzioni di scelta in un layout a più colonne. Se impostato su 0, le opzioni vengono visualizzate in una singola riga.",
     masksettings: {
       saveMaskedValue: "Selezionare questa opzione se si desidera memorizzare il valore della domanda con una maschera applicata nei risultati dell'indagine."
     },
@@ -1461,17 +1469,21 @@ var italianTranslation = {
       suffix: "Uno o più simboli da visualizzare dopo il valore."
     },
     theme: {
-      // isPanelless: "This setting applies only to questions outside of a panel.",
-      // primaryColor: "Sets a supplementary color that highlights key survey elements.",
-      // panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background.",
-      // questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background.",
-      // cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes.",
-      // "--sjs-general-backcolor-dim": "Sets the main background color of the survey."
+      isPanelless: "Questa impostazione si applica solo alle domande esterne a un pannello.",
+      primaryColor: "Imposta un colore supplementare che evidenzia gli elementi chiave del rilievo.",
+      panelBackgroundTransparency: "Regola la trasparenza dei pannelli e delle caselle delle domande rispetto allo sfondo del sondaggio.",
+      questionBackgroundTransparency: "Regola la trasparenza degli elementi di input rispetto allo sfondo del rilevamento.",
+      cornerRadius: "Imposta il raggio dell'angolo per tutti gli elementi rettangolari. Abilitare la Modalità avanzata se si desidera impostare i valori del raggio d'angolo individuali per gli elementi di input o i pannelli e le caselle delle domande.",
+      "--sjs-general-backcolor-dim": "Imposta il colore di sfondo principale del rilevamento."
     },
     header: {
-      // inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in.",
-      // textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels.",
-      // overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey."
+      inheritWidthFrom: "L'opzione \"Uguale al contenitore\" regola automaticamente la larghezza dell'area del contenuto dell'intestazione per adattarla all'elemento HTML in cui è posizionato il sondaggio.",
+      textAreaWidth: "La larghezza dell'area dell'intestazione che contiene il titolo e la descrizione del sondaggio, misurata in pixel.",
+      overlapEnabled: "Sovrappone la parte inferiore dell'intestazione alla parte superiore del rilevamento."
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "Accetta valori %.",
+      questionTitleWidth: "Accetta valori px."
     }
   },
   // Properties
@@ -1576,62 +1588,7 @@ var italianTranslation = {
     scaleColorMode: "Modalità scala colore",
     rateColorMode: "Valuta la modalità colore",
     copyDisplayValue: "Copia valore di visualizzazione",
-    // insensitive: "insensitive",
-    // state: "state",
-    // indent: "indent",
-    // titleLocation: "titleLocation",
-    // descriptionLocation: "descriptionLocation",
-    // hideNumber: "hideNumber",
-    // errorLocation: "errorLocation",
-    // isUnique: "isUnique",
-    // showInMultipleColumns: "showInMultipleColumns",
-    // totalAlignment: "totalAlignment",
-    // detailErrorLocation: "detailErrorLocation",
-    // inheritWidthFrom: "inheritWidthFrom",
-    // textAreaWidth: "textAreaWidth",
-    // textGlowEnabled: "textGlowEnabled",
-    // overlapEnabled: "overlapEnabled",
-    // backgroundImageOpacity: "backgroundImageOpacity",
-    // logoPositionX: "logoPositionX",
-    // logoPositionY: "logoPositionY",
-    // titlePositionX: "titlePositionX",
-    // titlePositionY: "titlePositionY",
-    // descriptionPositionX: "descriptionPositionX",
-    // descriptionPositionY: "descriptionPositionY",
-    // showNumber: "showNumber",
-    // progressBarInheritWidthFrom: "progressBarInheritWidthFrom",
-    // headerView: "headerView",
-    // choiceValuesFromQuestion: "choiceValuesFromQuestion",
-    // choiceTextsFromQuestion: "choiceTextsFromQuestion",
-    // refuseText: "refuseText",
-    // dontKnowText: "dontKnowText",
-    // cellComponent: "cellComponent",
-    // inputTextAlignment: "inputTextAlignment",
-    // maskSettings: "maskSettings",
-    // itemErrorLocation: "itemErrorLocation",
-    // signatureWidth: "signatureWidth",
-    // signatureHeight: "signatureHeight",
-    // signatureAutoScaleEnabled: "signatureAutoScaleEnabled",
-    // penMinWidth: "penMinWidth",
-    // penMaxWidth: "penMaxWidth",
-    // showPlaceholder: "showPlaceholder",
-    // placeholderReadOnly: "placeholderReadOnly",
-    // templateTitle: "templateTitle",
-    // templateTabTitle: "templateTabTitle",
-    // tabTitlePlaceholder: "tabTitlePlaceholder",
-    // templateDescription: "templateDescription",
-    // noEntriesText: "noEntriesText",
-    // newPanelPosition: "newPanelPosition",
-    // templateTitleLocation: "templateTitleLocation",
-    // templateErrorLocation: "templateErrorLocation",
-    // templateVisibleIf: "templateVisibleIf",
-    // saveMaskedValue: "saveMaskedValue",
-    // pattern: "pattern",
-    // allowNegativeValues: "allowNegativeValues",
-    // decimalSeparator: "decimalSeparator",
-    // thousandsSeparator: "thousandsSeparator",
-    // prefix: "prefix",
-    // suffix: "suffix"
+    effectiveColSpan: "Estensione delle colonne"
   },
   theme: {
     advancedMode: "Modalità avanzata",
@@ -2504,3 +2461,23 @@ editorLocalization.locales["it"] = italianTranslation;
 // page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Imposta una larghezza coerente per i titoli delle domande quando sono allineati a sinistra delle caselle delle domande. Accetta valori CSS (px, %, in, pt, ecc.)."
 // pe.commentAreaRows: "Comment area height (in lines)" => "Altezza dell'area di commento (in righe)"
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "Imposta il numero di righe visualizzate nelle aree di testo per i commenti alle domande. Nell'input occupa più righe, viene visualizzata la barra di scorrimento."
+// pe.enabled: "Enabled" => "Abilitato"
+// pe.disabled: "Disabled" => "Disabile"
+// pe.inherit: "Inherit" => "Ereditare"
+// pe.validateVisitedEmptyFields: "Validate empty fields on lost focus" => "Convalida i campi vuoti in caso di perdita dello stato attivo"
+// panellayoutcolumn.effectiveWidth: "Ex.: 30%" => "Es.: 30%"
+// panellayoutcolumn.questionTitleWidth: "Ex.: 200px" => "Es.: 200px"
+// pehelp.validateVisitedEmptyFields: "Enable this option to trigger validation when a user focuses on an empty input field and then leaves it without making any changes." => "Abilitare questa opzione per attivare la convalida quando un utente si concentra su un campo di input vuoto e poi lo abbandona senza apportare modifiche."
+// pehelp.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line." => "Dispone le opzioni di scelta in un layout a più colonne. Se impostato su 0, le opzioni vengono visualizzate in una singola riga."
+// theme.isPanelless: "This setting applies only to questions outside of a panel." => "Questa impostazione si applica solo alle domande esterne a un pannello."
+// theme.primaryColor: "Sets a supplementary color that highlights key survey elements." => "Imposta un colore supplementare che evidenzia gli elementi chiave del rilievo."
+// theme.panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background." => "Regola la trasparenza dei pannelli e delle caselle delle domande rispetto allo sfondo del sondaggio."
+// theme.questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background." => "Regola la trasparenza degli elementi di input rispetto allo sfondo del rilevamento."
+// theme.cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes." => "Imposta il raggio dell'angolo per tutti gli elementi rettangolari. Abilitare la Modalità avanzata se si desidera impostare i valori del raggio d'angolo individuali per gli elementi di input o i pannelli e le caselle delle domande."
+// theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "Imposta il colore di sfondo principale del rilevamento."
+// header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "L'opzione \"Uguale al contenitore\" regola automaticamente la larghezza dell'area del contenuto dell'intestazione per adattarla all'elemento HTML in cui è posizionato il sondaggio."
+// header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "La larghezza dell'area dell'intestazione che contiene il titolo e la descrizione del sondaggio, misurata in pixel."
+// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "Sovrappone la parte inferiore dell'intestazione alla parte superiore del rilevamento."
+// panellayoutcolumn.effectiveWidth: "Accepts values %." => "Accetta valori %."
+// panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Accetta valori px."
+// p.effectiveColSpan: "Column span" => "Estensione delle colonne"

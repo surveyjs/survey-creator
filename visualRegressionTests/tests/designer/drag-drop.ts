@@ -459,7 +459,7 @@ test("Drag Drop to Multiline from Toolbox", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     changeToolboxScrolling(false);
     await explicitErrorHandler();
-    await t.resizeWindow(2552, 1440);
+    await t.resizeWindow(2584, 1440);
 
     const json = {
       "logoPosition": "right",
@@ -501,7 +501,7 @@ test("Drag Drop to Multiline from Toolbox", async (t) => {
 test("Drag Drop to Multiline styles", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await explicitErrorHandler();
-    await t.resizeWindow(800, 600);
+    await t.resizeWindow(832, 600);
 
     const json = {
       "logoPosition": "right",
@@ -552,6 +552,53 @@ test("Drag Drop to Multiline styles", async (t) => {
     await setClass(1, "drag-over-right");
     await takeElementScreenshot("drag-drop-to-multiline-end.png", Page1, t, comparer);
     await setClass(1, "drag-over-right", "remove");
+  });
+});
+
+test("Drag Drop inside panel dynamic top indicator", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await explicitErrorHandler();
+    await t.resizeWindow(832, 600);
+
+    const json = {
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "paneldynamic",
+              "name": "question1",
+              "templateElements": [
+                {
+                  "type": "text",
+                  "name": "question2"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(json);
+
+    const Page1 = Selector("[data-sv-drop-target-survey-element='page1']");
+
+    async function setClass(idx: number, suffix: string, remove: "add" | "remove" = "add") {
+      await ClientFunction((idx, suffix, remove) => {
+        const el = document.querySelectorAll(".svc-question__content")[idx];
+        if (remove != "remove") {
+          el.classList.add("svc-question__content--" + suffix);
+        }
+        else {
+          el.classList.remove("svc-question__content--" + suffix);
+        }
+      })(idx, suffix, remove);
+    }
+
+    await setClass(1, "drag-over-top");
+    await takeElementScreenshot("drag-drop-inside-panel-dynamic-top.png", Page1, t, comparer);
+    await setClass(1, "drag-over-top", "remove");
   });
 });
 

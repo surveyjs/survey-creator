@@ -208,13 +208,6 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       dropTarget = (<any>dropTarget).detailPanel;
     }
 
-    // drop to panel
-    else if (dropTarget.isPanel) {
-      const dragOverLocation = calculateDragOverLocation(event.clientX, event.clientY, dropTargetNode);
-      if (dragOverLocation === DragTypeOverMeEnum.InsideEmptyPanel) {
-        dropTarget = this.getPanelDropTarget(dropTargetNode, dropTarget, event);
-      }
-    }
     // drop to question
 
     //question inside paneldymanic

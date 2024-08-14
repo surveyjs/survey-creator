@@ -1,9 +1,9 @@
-import React from "react";
+import * as React from "react";
 import { VerticalResponsivityManager } from "survey-core";
 import { ReactElementFactory } from "survey-react-ui";
 import { ISurveyCreatorToolboxProps, Toolbox } from "./Toolbox";
 import { SurveyCreatorToolboxTool } from "./ToolboxItem";
-import { SearchComponent } from "src/Search";
+import { SearchComponent } from "../Search";
 
 export class AdaptiveToolbox extends Toolbox {
   private manager: VerticalResponsivityManager;

@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { QuestionSelectBase, Base, ItemValue, SurveyModel } from "survey-core";
 import { MatrixCellWrapperViewModel, toggleHovered } from "survey-creator-core";
 import {

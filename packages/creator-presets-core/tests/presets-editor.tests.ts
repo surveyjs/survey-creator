@@ -1,21 +1,25 @@
-import { ItemValue, QuestionDropdownModel, QuestionMatrixDynamicModel, QuestionRankingModel, Serializer } from "survey-core";
+import { ItemValue, QuestionCheckboxBase, QuestionCheckboxModel, QuestionDropdownModel, QuestionMatrixDynamicModel, QuestionRankingModel, Serializer, surveyLocalization } from "survey-core";
 import { QuestionEmbeddedCreatorModel } from "../src/components/embedded-creator";
 import { CreatorPresetEditorModel } from "../src/presets-editor";
 export * from "../src/preset-question-ranking";
 import { PresetItemValue } from "../src/preset-question-ranking";
 import { SurveyModel, Question } from "survey-core";
-import { SurveyCreatorModel, ICreatorPresetData, QuestionToolbox } from "survey-creator-core";
+import { SurveyCreatorModel, ICreatorPresetData, QuestionToolbox, editorLocalization } from "survey-creator-core";
 import { QuestionPresetAdornerViewModel } from "../src/components/question";
 export * from "../src/components/embedded-creator";
+//import "survey-creator-core/i18n/german";
+//import "survey-creator-core/i18n/italian";
+//import "survey-creator-core/i18n/french";
 
 test("Preset edit model, create pages", () => {
   const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
-  expect(survey.pages).toHaveLength(3);
-  expect(survey.visiblePages).toHaveLength(3);
-  expect(survey.pages[0].name).toEqual("page_tabs");
-  expect(survey.pages[1].name).toEqual("page_toolbox");
-  expect(survey.pages[2].name).toEqual("page_propertyGrid_definition");
+  expect(survey.pages).toHaveLength(4);
+  expect(survey.visiblePages).toHaveLength(4);
+  expect(survey.pages[0].name).toEqual("page_languages");
+  expect(survey.pages[1].name).toEqual("page_tabs");
+  expect(survey.pages[2].name).toEqual("page_toolbox");
+  expect(survey.pages[3].name).toEqual("page_propertyGrid_definition");
 });
 test("Preset edit model, page component", () => {
   const editor = new CreatorPresetEditorModel({ tabs: { items: [] } });
@@ -510,21 +514,10 @@ test("Editor: do not allow to change the activeTab if there is an error", () => 
   expect(survey.currentPageNo).toBe(0);
   editor.navigationBar.actions[1].action();
   expect(editor.activeTab).toEqual("preset");
-  expect(survey.currentPageNo).toBe(1);
+  expect(survey.currentPageNo).toBe(2);
   matrixQuestion.removeRow(0);
   editor.navigationBar.actions[1].action();
   expect(editor.activeTab).toEqual("creator");
-});
-test("Editor: get/set locale", () => {
-  const editor = new CreatorPresetEditorModel();
-  expect(editor.locale).toBe("en");
-  expect(editor.creator.locale).toBe("en");
-  expect(editor.model.locale).toBe("");
-  expect(editor.navigationBar.actions[3].title).toBe("English");
-  editor.locale = "de";
-  expect(editor.creator.locale).toBe("de");
-  expect(editor.model.locale).toBe("de");
-  expect(editor.navigationBar.actions[3].title).toBe("de");
 });
 test("Preset edit model, edit tabs title", () => {
   const editor = new CreatorPresetEditorModel({ tabs: { items: [] } });
@@ -615,6 +608,34 @@ test("Toolbox categories, show header and showcolumn title column if show catego
   survey.setValue("toolbox_showCategoryTitles", false);
   expect(matrix.getColumnByName("title").visible).toBeFalsy();
 });
+test("Preset edit model, Set question name title&description", () => {
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  survey.currentPage = survey.getPageByName("page_propertyGrid_definition");
+  survey.setValue("propertyGrid_definition_selector", "text");
+  const propGridCreator = getPropGridCreator(survey);
+  const q = propGridCreator.survey.getQuestionByName("name");
+  expect(q).toBeTruthy();
+  expect(q.title).toBe("Question name");
+  expect(q.description).toBe("A question ID that is not visible to respondents.");
+});
+test("Preset edit model, Keep description on deleting the question", () => {
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  survey.currentPage = survey.getPageByName("page_propertyGrid_definition");
+  survey.setValue("propertyGrid_definition_selector", "text");
+  const propGridCreator = getPropGridCreator(survey);
+  expect(propGridCreator.toolbox.items).toHaveLength(1);
+  const q = propGridCreator.survey.getQuestionByName("name");
+  expect(q).toBeTruthy();
+  propGridCreator.selectElement(q);
+  propGridCreator.deleteCurrentElement();
+  expect(propGridCreator.survey.getQuestionByName("name")).toBeFalsy();
+  expect(propGridCreator.toolbox.items).toHaveLength(2);
+  const json = propGridCreator.toolbox.items[1].json;
+  expect(json.description).toEqual("A question ID that is not visible to respondents.");
+  expect(json.descriptionLocation).toBeFalsy();
+});
 test("Preset edit model, Change localization strings title&description", () => {
   const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
@@ -683,12 +704,13 @@ test("Preset edit model, Change localization strings title&description", () => {
   expect(propGridSurvey.getPanelByName("general").title).toEqual("General Edit");
 });
 test("Change localization strings and then change locale for tabs", () => {
+  addLocales();
   const editor = new CreatorPresetEditorModel({ tabs: { items: [] } });
   const survey = editor.model;
   let itemsQuestion = survey.getQuestionByName("tabs_items");
   const item = <PresetItemValue>itemsQuestion.choices[0];
   item.text = "Designer edit";
-  editor.locale = "de";
+  survey.setValue("languages_creator", "de");
   const loc = editor.json.localization;
   expect(loc).toBeTruthy();
   expect(loc.en.tabs.designer).toEqual("Designer edit");
@@ -706,7 +728,7 @@ test("Preset edit model, Property grid toolbox", () => {
   const valPanel = propGridCreator.survey.getPanelByName("validation");
   expect(valPanel).toBeTruthy();
   propGridCreator.deleteElement(valPanel);
-  expect(propGridCreator.toolbox.actions).toHaveLength(3);
+  expect(propGridCreator.toolbox.actions).toHaveLength(4);
   propGridCreator.selectElement(propGridCreator.survey.getQuestionByName("title"));
   propGridCreator.clickToolboxItem(propGridCreator.toolbox.getItemByName("panel").json);
   propGridCreator.clickToolboxItem(propGridCreator.toolbox.getItemByName("panel").json);
@@ -719,7 +741,7 @@ test("Preset edit model, Property grid toolbox", () => {
   propGridCreator.clickToolboxItem(propGridCreator.toolbox.getItemByName("focusOnFirstError").json);
   expect(newPanel2.elements).toHaveLength(1);
   expect(newPanel2.questions[0].name).toEqual("focusOnFirstError");
-  expect(propGridCreator.toolbox.actions).toHaveLength(2);
+  expect(propGridCreator.toolbox.actions).toHaveLength(3);
 });
 test("Preset edit model, Property grid change the new category name", () => {
   const editor = new CreatorPresetEditorModel();
@@ -731,7 +753,7 @@ test("Preset edit model, Property grid change the new category name", () => {
   const valPanel = propGridCreator.survey.getPanelByName("validation");
   expect(valPanel).toBeTruthy();
   propGridCreator.deleteElement(valPanel);
-  expect(propGridCreator.toolbox.actions).toHaveLength(3);
+  expect(propGridCreator.toolbox.actions).toHaveLength(4);
   propGridCreator.selectElement(propGridCreator.survey.getQuestionByName("title"));
   propGridCreator.clickToolboxItem(propGridCreator.toolbox.getItemByName("panel").json);
   const newPanel1 = propGridCreator.survey.getPanelByName("category1");
@@ -753,4 +775,69 @@ test("Preset edit model, Property grid change the new category name", () => {
   const locCategoryName2 = action2.locTitle;
   expect(locCategoryName2.text).toBe("general");
   expect(action2.enabled).toBeFalsy();
+});
+function addLocale(name: string): void {
+  if(!surveyLocalization.locales[name]) {
+    surveyLocalization.locales[name] = {};
+    surveyLocalization["localeNames"][name] = name.toUpperCase();
+  }
+}
+function addLocales(): void {
+  if(!editorLocalization.locales["de"]) {
+    editorLocalization.locales["de"] = { survey: { edit: "Bearbeiten" }, tabs: { designer: "Designer" } };
+  }
+  addLocale("de");
+  addLocale("fr");
+  addLocale("it");
+  addLocale("bg");
+}
+test("Preset edit model, Languages tab", () => {
+  addLocales();
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  const dropdownQuestion = <QuestionDropdownModel>survey.getQuestionByName("languages_creator");
+  const surveyLocalesQuestion = <QuestionCheckboxModel>survey.getQuestionByName("languages_surveyLocales");
+  expect(dropdownQuestion.choices.length > 0).toBeTruthy();
+  expect(surveyLocalesQuestion.choices.length > 0).toBeTruthy();
+  expect(dropdownQuestion.isEmpty()).toBeTruthy();
+  expect(surveyLocalesQuestion.isAllSelected).toBeTruthy();
+  dropdownQuestion.value = "de";
+  surveyLocalesQuestion.value = ["de", "fr"];
+  expect(editor.applyFromSurveyModel()).toBeTruthy();
+  expect(editor.json.languages?.creator).toBe("de");
+  expect(editor.json.languages?.surveyLocales).toStrictEqual(["de", "fr"]);
+  expect(editor.creator.locale).toBe("de");
+  expect(surveyLocalization.supportedLocales).toStrictEqual(["de", "fr"]);
+
+  dropdownQuestion.clearValue();
+  surveyLocalesQuestion.selectAll();
+  expect(editor.applyFromSurveyModel()).toBeTruthy();
+  expect(editor.creator.locale).toBeFalsy();
+  expect(surveyLocalization.supportedLocales).toStrictEqual([]);
+});
+test("Preset edit model, toolbox categories, restore after creator locale changed", () => {
+  addLocales();
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  const matrix = <QuestionMatrixDynamicModel>survey.getQuestionByName("toolbox_categories");
+  const rowCount = matrix.rowCount;
+  expect(rowCount > 1).toBeTruthy();
+  survey.setValue("toolbox_mode", "items");
+  survey.getQuestionByName("languages_creator").value = "de";
+  expect(editor.creator.locale).toBe("de");
+  survey.setValue("toolbox_mode", "categories");
+  expect(matrix.rowCount).toBe(rowCount);
+});
+test("Preset edit model, tabs page with creator, default items", () => {
+  const editor = new CreatorPresetEditorModel({});
+  const survey = editor.model;
+  const itemsQuestion = survey.getQuestionByName("tabs_items");
+  itemsQuestion.value = ["preview", "logic"];
+  const nextBtn = survey.navigationBar.getActionById("sv-nav-next");
+  expect(nextBtn.isVisible).toBeTruthy();
+  survey.currentPageNo = survey.visiblePages.length - 1;
+  expect(survey.isLastPage).toBeTruthy();
+  expect(nextBtn.isVisible).toBeTruthy();
+  nextBtn.action();
+  expect(survey.isFirstPage).toBeTruthy();
 });
