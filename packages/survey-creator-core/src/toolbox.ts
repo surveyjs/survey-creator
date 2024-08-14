@@ -30,7 +30,7 @@ export type overflowBehaviorType = "hideInMenu" | "scroll";
 /**
  * A toolbox item configuration.
  * 
- * `IQuestionToolboxItem` objects are used in such Toolbox API methods as [`getItemByName(name)`](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolbox#getItemByName), [`addItem(name, index)`](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolbox#addItem), [`replaceItem(name)`](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolbox#replaceItem), and others.
+ * `IQuestionToolboxItem` objects are used in such Toolbox API methods as [`getItemByName(name)`](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolbox#getItemByName), [`addItem(item, index)`](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolbox#addItem), [`replaceItem(item)`](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolbox#replaceItem), and others.
  * 
  * [Toolbox Customization](https://surveyjs.io/survey-creator/documentation/toolbox-customization (linkStyle))
  */
@@ -80,6 +80,27 @@ export interface IQuestionToolboxItem extends IAction {
    */
   enabled?: boolean;
   getArea?: (el: HTMLElement) => HTMLElement;
+  /**
+   * Removes all subitems from this toolbox item.
+   * @see removeSubitem
+   * @see addSubitem
+   */
+  clearSubitems?(): void;
+  /**
+   * Adds a subitem to this toolbox item.
+   * @param subitem An `IQuestionToolboxItem` object that represents a subitem configuration.
+   * @param index *(Optional)* A zero-based index at which to insert the subitem. If you do not specify this parameter, the subitem is added to the end.
+   * @see removeSubitem
+   * @see clearSubitems
+   */
+  addSubitem?(subitem: IQuestionToolboxItem, index: number): void;
+  /**
+   * Removes a specific subitem from this toolbox item.
+   * @param subitem A subitem [`name`](https://surveyjs.io/survey-creator/documentation/api-reference/iquestiontoolboxitem#name) or an `IQuestionToolboxItem` object that represents a subitem configuration.
+   * @see clearSubitems
+   * @see addSubitem
+   */
+  removeSubitem?(subitem: IQuestionToolboxItem | string): void;
 }
 
 export interface IQuestionToolbox {
@@ -184,9 +205,6 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
     this.component = QuestionToolbox.defaultItemGroupComponent;
   }
 
-  /**
-   * 
-   */
   public clearSubitems(): void {
     if (this.hasSubItems) {
       this.items = [];
@@ -194,9 +212,7 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
       this.popupModel.dispose();
     }
   }
-  /**
-   * 
-   */
+
   public addSubitem(item: IQuestionToolboxItem, index: number = -1): void {
     if (!item) return;
     const newItem: QuestionToolboxItem = new QuestionToolboxItem(item);
@@ -211,9 +227,7 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
     }
     this.addSubitems(array);
   }
-  /**
-   * 
-   */
+
   public removeSubitem(item: IQuestionToolboxItem | string): void {
     if (!this.hasSubItems || !item) return;
 
@@ -407,7 +421,9 @@ export class QuestionToolbox
   }) searchEnabled: boolean;
 
   /**
+   * Specifies whether toolbox items support subitems.
    * 
+   * Default value: `true`
    */
   @property({ defaultValue: true }) showSubitems: boolean;
 
@@ -875,7 +891,7 @@ export class QuestionToolbox
       item.visible = false;
       itemsHash[item.id] = item;
     });
-    if(Array.isArray(this.presetDefaultItems)) {
+    if (Array.isArray(this.presetDefaultItems)) {
       this.presetDefaultItems.forEach(item => {
         const action = itemsHash[item.name];
         if (action) {
@@ -918,9 +934,9 @@ export class QuestionToolbox
         }
       });
     });
-    if(displayMisc) {
+    if (displayMisc) {
       items.forEach(item => {
-        if(!item.visible) {
+        if (!item.visible) {
           item.visible = true;
           item.category = "misc";
           actionList.push(item);
@@ -1098,10 +1114,10 @@ export class QuestionToolbox
   public getDefaultItems(supportedQuestions: Array<string>, useDefaultCategories: boolean,
     includeCustomWidgets: boolean, includeComponents: boolean): Array<QuestionToolboxItem> {
     let res = this.getDefaultQuestionItems(supportedQuestions, useDefaultCategories);
-    if(includeCustomWidgets) {
+    if (includeCustomWidgets) {
       res = res.concat(this.getRegisterCustomWidgets());
     }
-    if(includeComponents) {
+    if (includeComponents) {
       res = res.concat(this.getRegisterComponentQuestions());
     }
     return res;
@@ -1140,7 +1156,7 @@ export class QuestionToolbox
     const res = [];
     ComponentCollection.Instance.items.forEach(item => {
       const action = this.createToolboxItemFromJSON(item.json);
-      if(!!action) {
+      if (!!action) {
         res.push(action);
       }
     });
@@ -1149,9 +1165,9 @@ export class QuestionToolbox
   private getRegisterCustomWidgets(): Array<QuestionToolboxItem> {
     const res = [];
     CustomWidgetCollection.Instance.widgets.forEach(widget => {
-      if(widget.canShowInToolbox) {
+      if (widget.canShowInToolbox) {
         const action = this.createToolboxItemFromJSON(widget.widgetJson);
-        if(!!action) {
+        if (!!action) {
           res.push(action);
         }
       }
@@ -1159,7 +1175,7 @@ export class QuestionToolbox
     return res;
   }
   private addToolBoxItem(action: QuestionToolboxItem, actions: QuestionToolboxItem[]): void {
-    if(!action) return;
+    if (!action) return;
     const existingAction = this.getActionByIdFromArray(action.id, actions);
     if (!!existingAction) {
       actions.splice(actions.indexOf(existingAction), 1, action);
@@ -1173,8 +1189,8 @@ export class QuestionToolbox
     }
   }
   private getActionByIdFromArray(id: string, actions: QuestionToolboxItem[]): QuestionToolboxItem {
-    for(let i = 0; i < actions.length; i++) {
-      if(actions[i].id === id) return actions[i];
+    for (let i = 0; i < actions.length; i++) {
+      if (actions[i].id === id) return actions[i];
     }
     return undefined;
   }
