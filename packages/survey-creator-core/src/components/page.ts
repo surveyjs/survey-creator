@@ -189,7 +189,10 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       }
     }
     if (!!this.dragTypeOverMe && this.collapsed) {
+      this.dragIn();
       result += " svc-page__content--collapsed-drag-over-inside";
+    } else {
+      this.dragOut();
     }
     if (this.isGhost) {
       return result + " svc-page__content--new";
