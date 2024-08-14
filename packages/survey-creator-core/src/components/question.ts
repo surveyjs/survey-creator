@@ -34,7 +34,7 @@ import { SurveyElementAdornerBase } from "./action-container-view-model";
 require("./question.scss");
 import { settings } from "../creator-settings";
 import { StringEditorConnector, StringItemsNavigatorBase } from "./string-editor";
-import { DragDropSurveyElements } from "../survey-elements";
+import { DragDropSurveyElements, isPanelDynamic } from "../survey-elements";
 import { QuestionToolbox, QuestionToolboxItem } from "../toolbox";
 
 export interface QuestionBannerParams {
@@ -132,7 +132,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       result += " svc-question__content--dragged";
     }
 
-    if (!!this.dragTypeOverMe && this.surveyElement.isPanel && this.dragInsideCollapsedContainer) {
+    if (!!this.dragTypeOverMe && (this.canExpandOnDrag) && this.dragInsideCollapsedContainer) {
       result += " svc-question__content--collapsed-drag-over-inside";
     }
 

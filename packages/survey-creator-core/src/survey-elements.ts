@@ -1,4 +1,4 @@
-import { DragDropAllowEvent, DragDropCore, DragTypeOverMeEnum, IElement, IPanel, IShortcutText, ISurveyElement, JsonObject, PageModel, PanelModelBase, QuestionRowModel, Serializer, SurveyModel } from "survey-core";
+import { DragDropAllowEvent, DragDropCore, DragTypeOverMeEnum, IElement, IPanel, IShortcutText, ISurveyElement, JsonObject, PageModel, PanelModelBase, QuestionPanelDynamicModel, QuestionRowModel, Serializer, SurveyModel } from "survey-core";
 import { settings } from "./creator-settings";
 import { IQuestionToolboxItem } from "./toolbox";
 import { SurveyHelper } from "./survey-helper";
@@ -41,6 +41,10 @@ export function calculateDragOverLocation(clientX: number, clientY: number, drop
       return DragTypeOverMeEnum.Top;
     }
   }
+}
+
+export function isPanelDynamic(element: ISurveyElement) {
+  return element instanceof QuestionPanelDynamicModel;
 }
 
 export class DragDropSurveyElements extends DragDropCore<any> {
@@ -154,6 +158,8 @@ export class DragDropSurveyElements extends DragDropCore<any> {
   }
 
   protected getDropTargetByDataAttributeValue(dataAttributeValue: string, dropTargetNode: HTMLElement, event: PointerEvent): any {
+    const oldDragOverIndicatorElement = this.dragOverIndicatorElement;
+
     this.dragOverIndicatorElement = null;
 
     if (!dataAttributeValue) {
@@ -219,10 +225,10 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       let page: any = this.survey.getPageByName(dataAttributeValue);
       dropTarget.__page = page;
     }
-    if (this.dragOverIndicatorElement != dragOverElement) {
-      this.removeDragOverMarker(this.dragOverIndicatorElement);
-      this.dragOverIndicatorElement = dragOverElement;
+    if (this.dragOverIndicatorElement != oldDragOverIndicatorElement) {
+      this.removeDragOverMarker(oldDragOverIndicatorElement);
     }
+    this.dragOverIndicatorElement = dragOverElement;
     return dropTarget;
     // EO drop to question or panel
   }
