@@ -1316,7 +1316,8 @@ export var enStrings = {
     },
     file: {
       imageHeight: "Adjusts the height of the image in the survey results.",
-      imageWidth: "Adjusts the width of the image in the survey results."
+      imageWidth: "Adjusts the width of the image in the survey results.",
+      allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead.",
     },
     image: {
       contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided."
