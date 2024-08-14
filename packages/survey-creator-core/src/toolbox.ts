@@ -138,10 +138,8 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
     }) as any;
   }
   className: string;
-  iconName: string;
   name: string;
   json: any;
-  tooltip: string;
   isCopied: boolean;
   category: string;
   toJSON() {

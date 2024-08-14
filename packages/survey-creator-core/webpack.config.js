@@ -193,8 +193,8 @@ module.exports = function (options) {
       },
     },
     plugins: [
-      new DashedNamePlugin(),
       new webpack.ProgressPlugin(percentage_handler),
+      new DashedNamePlugin(),
       new webpack.DefinePlugin({
         "process.env.ENVIRONMENT": JSON.stringify(options.buildType),
         "process.env.VERSION": JSON.stringify(packageJson.version),

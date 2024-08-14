@@ -82,7 +82,6 @@ export class SearchManagerPropertyGrid extends SearchManager {
   public propertyGridNoResultsFound = getLocString("ed.propertyGridNoResultsFound");
 
   @property() survey: SurveyModel;
-  @property() isVisible: boolean;
   @property({ defaultValue: [] }) allMatches: Array<Question>;
 
   private expandAllParents(element: IElement) {
@@ -110,9 +109,9 @@ export class SearchManagerPropertyGrid extends SearchManager {
   }
   private updatedMatchCounterText(index: number) {
     const count = this.allMatches.length;
-    if(count === 1) {
+    if (count === 1) {
       this.matchCounterText = "";
-    } else if(this.currentMatch) {
+    } else if (this.currentMatch) {
       const value = index + 1;
       this.matchCounterText = [value, count].join("/");
     } else {
@@ -135,7 +134,7 @@ export class SearchManagerPropertyGrid extends SearchManager {
     const visibleQuestions = this.survey.getAllQuestions().filter(q => q.isVisible);
     return visibleQuestions.filter(q => {
       let srcString = q.name + "|" + q.title + "|" + q.description;
-      if(!!srcString) {
+      if (!!srcString) {
         srcString = normalize(srcString, "search");
         srcString = srcString.toLocaleLowerCase().trim();
       }
@@ -143,13 +142,13 @@ export class SearchManagerPropertyGrid extends SearchManager {
     });
   }
   protected setFiterString(newValue: string, oldValue: string) {
-    if(!newValue) {
+    if (!newValue) {
       this.reset();
       return;
     }
 
     this.allMatches = this.getAllMatches(newValue);
-    if(this.allMatches.length === 0) {
+    if (this.allMatches.length === 0) {
       this.reset();
       return;
     }
