@@ -124,7 +124,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     if (this.isEmptyTemplate) {
       result += " svc-question__content--empty-template";
     }
-    if (this.renderedCollapsed) {
+    if (this.renderedCollapsed || this.creator.allQuestionsCollapsed && !this.surveyElement.isPanel) {
       result += " svc-question__content--collapsed";
     }
 

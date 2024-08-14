@@ -4,7 +4,8 @@ import {
   QuestionSelectBase, QuestionRowModel, LocalizableString, ILocalizableString, ILocalizableOwner, PopupBaseViewModel,
   EventBase, hasLicense, slk, settings as SurveySettings, Event, Helpers as SurveyHelpers, MatrixDropdownColumn, JsonObject,
   dxSurveyService, ISurveyElement, PanelModelBase, surveyLocalization, QuestionMatrixDropdownModelBase, ITheme, Helpers,
-  chooseFiles, createDropdownActionModel
+  chooseFiles, createDropdownActionModel,
+  ComputedUpdater
 } from "survey-core";
 import { ICreatorPlugin, ISurveyCreatorOptions, settings, ICollectionItemAllowOperations } from "./creator-settings";
 import { editorLocalization } from "./editorLocalization";
@@ -1261,6 +1262,18 @@ export class SurveyCreatorModel extends Base
     this.isTouch = IsTouch;
     const expandAction = this.sidebar.getExpandAction();
     !!expandAction && this.toolbar.actions.push(expandAction);
+
+    const collapseOnDragAction = new Action({
+      id: "svd-collapse-on-drag",
+      title: "Collapse On Drag",
+      pressed: new ComputedUpdater(() => this.collapseOnDrag) as any,
+      visible: new ComputedUpdater(() => this.activeTab === "designer"),
+      enabled: true,
+      action: () => { this.collapseOnDrag = !this.collapseOnDrag; }
+    });
+
+    // Add a custom button to the top toolbar
+    this.toolbar.actions.push(collapseOnDragAction);
   }
   public addCreatorEvent<SurveyCreatorModel, T>(): EventBase<SurveyCreatorModel, T> {
     return this.addEvent<SurveyCreatorModel, T>();
@@ -1877,11 +1890,13 @@ export class SurveyCreatorModel extends Base
     let isDraggedFromToolbox = false;
     this.dragDropSurveyElements.onDragStart.add((sender, options) => {
       isDraggedFromToolbox = !sender.draggedElement.parent;
+      if (this.collapseOnDrag) this.allQuestionsCollapsed = true;
       this.onDragStart.fire(this, options);
       this.startUndoRedoTransaction("drag drop");
     });
     this.dragDropSurveyElements.onDragEnd.add((sender, options) => {
       this.stopUndoRedoTransaction();
+      this.allQuestionsCollapsed = false;
       const editTitle = isDraggedFromToolbox && this.startEditTitleOnQuestionAdded;
       this.selectElement(options.draggedElement, undefined, false, editTitle);
       isDraggedFromToolbox = false;
@@ -3804,11 +3819,10 @@ export class SurveyCreatorModel extends Base
   /*
   *
   */
-  @property() collapseOnDrag: boolean;
+  @property({ defaultValue: false }) collapseOnDrag: boolean;
 
-  @property() collapsePagesOnDragStart: boolean;
-  @property() collapsePanelsOnDragStart: boolean;
-  @property() collapseQuestionsOnDragStart: boolean;
+  @property() allQuestionsCollapsed: boolean;
+
   expandOnDragTimeOut: number = 1000;
 
   selectFromStringEditor: boolean;
