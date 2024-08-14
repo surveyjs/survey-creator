@@ -54,7 +54,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
   public static nestedPanelDepth: number = -1;
   public static ghostSurveyElementName = "sv-drag-drop-ghost-survey-element-name"; // before renaming use globa search (we have also css selectors)
 
-  public insideContainer = null;
+  private insideContainer = null;
   protected prevIsEdge: any = null;
   // protected ghostSurveyElement: IElement = null;
   protected dragOverIndicatorElement: any = null;
@@ -393,6 +393,8 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     this.allowDropHere = true;
 
     this.dragOverCore(dropTarget, dragOverLocation);
+
+    if (dropTarget) dropTarget.dragInsideOverMe = this.insideContainer;
   }
 
   protected onStartDrag(): void {
@@ -459,6 +461,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     this.removeDragOverMarker(this.prevDropTarget);
     this.removeDragOverMarker(this.dropTarget);
     this.removeDragOverMarker(this.dragOverIndicatorElement);
+    if (this.dropTarget) this.dropTarget.dragInsideOverMe = false;
     if (!!this.draggedElement) {
       this.draggedElement.isDragMe = false;
     }
