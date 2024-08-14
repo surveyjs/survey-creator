@@ -98,7 +98,8 @@
   </div>
 </template>
 <script lang="ts" setup>
- import { SvComponent } from "survey-vue3-ui";
+import { key2ClickDirective as vKey2click } from "survey-vue3-ui";
+import { SvComponent } from "survey-vue3-ui";
 import type { QuestionAdornerViewModel } from "survey-creator-core";
 import { computed, ref } from "vue";
 const props = defineProps<{

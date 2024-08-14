@@ -17,7 +17,8 @@
         :title="undefined"
         :aria-label="undefined"
       >
-        <SvComponent :name="'sv-svg-icon'"
+        <SvComponent
+          :name="'sv-svg-icon'"
           :iconName="'icon-file'"
           :size="24"
           @click="model.chooseFile(model)"
@@ -35,7 +36,8 @@
   </div>
 </template>
 <script lang="ts" setup>
- import { SvComponent } from "survey-vue3-ui";
+import { key2ClickDirective as vKey2click } from "survey-vue3-ui";
+import { SvComponent } from "survey-vue3-ui";
 import type { QuestionImageModel } from "survey-core";
 import type { QuestionImageAdornerViewModel } from "survey-creator-core";
 

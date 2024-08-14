@@ -39,6 +39,7 @@
   </div>
 </template>
 <script lang="ts" setup>
+import { key2ClickDirective as vKey2click } from "survey-vue3-ui";
 import { SvComponent } from "survey-vue3-ui";
 import { useCreatorModel } from "@/creator-model";
 import type { SurveyModel, PageModel } from "survey-core";

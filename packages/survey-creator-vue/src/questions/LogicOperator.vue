@@ -16,7 +16,8 @@
         :aria-describedby="question.ariaDescribedBy"
       >
         <div :class="question.cssClasses.controlValue">
-          <SvComponent :name="'survey-string'"
+          <SvComponent
+            :name="'survey-string'"
             v-if="question.selectedItemLocText"
             :locString="question.selectedItemLocText"
           ></SvComponent>
@@ -28,7 +29,8 @@
           @click="clear"
           v-show="!question.isEmpty()"
         >
-          <SvComponent :name="'sv-svg-icon'"
+          <SvComponent
+            :name="'sv-svg-icon'"
             :class="question.cssClasses.cleanButtonSvg"
             :iconName="question.cssClasses.cleanButtonIconId"
             :size="'auto'"
@@ -36,7 +38,10 @@
           ></SvComponent>
         </div>
       </div>
-      <SvComponent :name="'sv-popup'" :model="question.popupModel"></SvComponent>
+      <SvComponent
+        :name="'sv-popup'"
+        :model="question.popupModel"
+      ></SvComponent>
     </template>
     <div
       disabled
@@ -44,7 +49,8 @@
       :class="question.getControlClass()"
       :id="question.inputId"
     >
-      <SvComponent :name="'survey-string'"
+      <SvComponent
+        :name="'survey-string'"
         v-if="question.selectedItemLocText"
         :locString="question.selectedItemLocText"
       ></SvComponent>
@@ -53,7 +59,7 @@
   </div>
 </template>
 <script lang="ts" setup>
- import { SvComponent } from "survey-vue3-ui";
+import { SvComponent } from "survey-vue3-ui";
 import { DropdownListModel, type QuestionDropdownModel } from "survey-core";
 import { initLogicOperator } from "survey-creator-core";
 import { useQuestion } from "survey-vue3-ui";
@@ -79,7 +85,6 @@ const keyup = (event: Event) => {
 };
 </script>
 <script lang="ts">
- import { SvComponent } from "survey-vue3-ui";
 import { RendererFactory } from "survey-core";
 RendererFactory.Instance.registerRenderer(
   "dropdown",

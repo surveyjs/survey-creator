@@ -7,7 +7,8 @@
       :title="model.pageSelectorCaption"
       :class="{ 'svc-page-navigator__selector--opened': model.isPopupOpened }"
     >
-      <SvComponent :name="'sv-svg-icon'"
+      <SvComponent
+        :name="'sv-svg-icon'"
         class="svc-page-navigator__navigator-icon"
         :iconName="model.icon"
         :size="24"
@@ -15,7 +16,8 @@
       <SvComponent :name="'sv-popup'" :model="model.popupModel"></SvComponent>
     </div>
     <div>
-      <SvComponent :name="'svc-page-navigator-item'"
+      <SvComponent
+        :name="'svc-page-navigator-item'"
         v-for="(item, index) in model.visibleItems"
         :key="index"
         :model="item"
@@ -25,7 +27,8 @@
 </template>
 
 <script lang="ts" setup>
- import { SvComponent } from "survey-vue3-ui";
+import { key2ClickDirective as vKey2click } from "survey-vue3-ui";
+import { SvComponent } from "survey-vue3-ui";
 import { useCreatorModel } from "@/creator-model";
 import {
   PageNavigatorViewModel,

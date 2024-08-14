@@ -9,14 +9,17 @@
     v-key2click
   >
     <span class="svc-toolbox__item-container">
-      <SvComponent :name="'sv-svg-icon'" v-if="item.iconName"
+      <SvComponent
+        :name="'sv-svg-icon'"
+        v-if="item.iconName"
         :iconName="item.iconName"
         :size="24"
         :title="item.tooltip"
       ></SvComponent>
     </span>
     <span v-if="isCompact" class="svc-toolbox__item-banner svc-item__banner">
-      <SvComponent :name="'sv-svg-icon'"
+      <SvComponent
+        :name="'sv-svg-icon'"
         :iconName="item.iconName"
         :size="24"
         :title="item.tooltip"
@@ -30,7 +33,8 @@
   </div>
 </template>
 <script lang="ts" setup>
- import { SvComponent } from "survey-vue3-ui";
+import { key2ClickDirective as vKey2click } from "survey-vue3-ui";
+import { SvComponent } from "survey-vue3-ui";
 import type {
   SurveyCreatorModel,
   IQuestionToolboxItem,

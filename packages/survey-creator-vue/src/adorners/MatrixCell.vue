@@ -20,14 +20,22 @@
         @click="adorner.editQuestion(adorner, $event)"
         v-key2click
       >
-        <SvComponent :name="'sv-svg-icon'" :iconName="'icon-edit'" :size="24"></SvComponent>
+        <SvComponent
+          :name="'sv-svg-icon'"
+          :iconName="'icon-edit'"
+          :size="24"
+        ></SvComponent>
       </span>
     </div>
   </div>
 </template>
 <script lang="ts" setup>
- import { SvComponent } from "survey-vue3-ui";
-import { SurveyCreatorModel, MatrixCellWrapperViewModel } from "survey-creator-core";
+import { key2ClickDirective as vKey2click } from "survey-vue3-ui";
+import { SvComponent } from "survey-vue3-ui";
+import {
+  SurveyCreatorModel,
+  MatrixCellWrapperViewModel,
+} from "survey-creator-core";
 import type { QuestionSelectBase } from "survey-core";
 import { computed } from "vue";
 import { useCreatorModel } from "@/creator-model";

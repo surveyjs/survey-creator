@@ -15,7 +15,8 @@
   </div>
 </template>
 <script lang="ts" setup>
- import { SvComponent } from "survey-vue3-ui";
+import { key2ClickDirective as vKey2click } from "survey-vue3-ui";
+import { SvComponent } from "survey-vue3-ui";
 import type { Action } from "survey-core";
 import { useBase } from "survey-vue3-ui";
 const props = defineProps<{ model: Action }>();

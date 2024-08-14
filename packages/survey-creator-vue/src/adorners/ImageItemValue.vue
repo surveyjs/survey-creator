@@ -90,9 +90,7 @@
                   class="svc-image-item-value__loading"
                   v-if="adorner.isUploading"
                 >
-                  <SvComponent
-                    :name="'sv-loading-indicator'"
-                  ></SvComponent>
+                  <SvComponent :name="'sv-loading-indicator'"></SvComponent>
                 </div>
               </div>
             </label>
@@ -125,6 +123,7 @@
 </template>
 <script lang="ts" setup>
 import { SvComponent } from "survey-vue3-ui";
+import { key2ClickDirective as vKey2click } from "survey-vue3-ui";
 import { useCreatorModel } from "@/creator-model";
 import type { ImageItemValue, QuestionImagePickerModel } from "survey-core";
 import {

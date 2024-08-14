@@ -40,7 +40,8 @@
         :disabled="question.getIsClearButtonDisabled()"
         @click="question.doClean"
       >
-        <SvComponent :name="'sv-svg-icon'"
+        <SvComponent
+          :name="'sv-svg-icon'"
           :iconName="question.cssClasses.clearButtonIcon"
           :size="'auto'"
           :title="question.clearButtonCaption"
@@ -54,7 +55,8 @@
         @click="question.chooseFiles"
         v-key2click
       >
-        <SvComponent :name="'sv-svg-icon'"
+        <SvComponent
+          :name="'sv-svg-icon'"
           :iconName="question.cssClasses.chooseButtonIcon"
           :size="'auto'"
           :title="question.chooseButtonCaption"
@@ -64,7 +66,8 @@
   </div>
 </template>
 <script lang="ts" setup>
- import { SvComponent } from "survey-vue3-ui";
+import { key2ClickDirective as vKey2click } from "survey-vue3-ui";
+import { SvComponent } from "survey-vue3-ui";
 import type { QuestionFileEditorModel } from "survey-creator-core";
 import { useQuestion } from "survey-vue3-ui";
 import { ref } from "vue";

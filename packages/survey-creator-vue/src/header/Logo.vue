@@ -30,7 +30,11 @@
             :title="undefined"
             :aria-label="undefined"
           >
-            <SvComponent :name="'sv-svg-icon'" :iconName="'icon-file'" :size="24"></SvComponent>
+            <SvComponent
+              :name="'sv-svg-icon'"
+              :iconName="'icon-file'"
+              :size="24"
+            ></SvComponent>
           </span>
           <span
             class="svc-context-button svc-context-button--danger"
@@ -39,7 +43,11 @@
             :title="undefined"
             :aria-label="undefined"
           >
-            <SvComponent :name="'sv-svg-icon'" :iconName="'icon-clear'" :size="24"></SvComponent>
+            <SvComponent
+              :name="'sv-svg-icon'"
+              :iconName="'icon-clear'"
+              :size="24"
+            ></SvComponent>
           </span>
         </div>
         <SvComponent :name="'sv-logo-image'" :data="survey"></SvComponent>
@@ -51,7 +59,8 @@
   </div>
 </template>
 <script lang="ts" setup>
- import { SvComponent } from "survey-vue3-ui";
+import { key2ClickDirective as vKey2click } from "survey-vue3-ui";
+import { SvComponent } from "survey-vue3-ui";
 import { useCreatorModel } from "@/creator-model";
 import { SurveyCreatorModel, LogoImageViewModel } from "survey-creator-core";
 import { computed, onMounted, ref, watch } from "vue";
