@@ -108,7 +108,7 @@ svc-question {
   transition: background $creator-transition-duration, box-shadow $creator-transition-duration;
 
   * {
-    transition: visibility $creator-transition-duration;
+    transition: background $creator-transition-duration, background-color $creator-transition-duration;
   }
 }
 
@@ -745,6 +745,7 @@ svc-question,
   text-align: center;
   cursor: pointer;
   user-select: none;
+  transition: background-color $creator-transition-duration, background $creator-transition-duration;
 
   border: none;
   box-shadow: none;

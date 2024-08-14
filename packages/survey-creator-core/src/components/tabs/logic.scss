@@ -22,6 +22,7 @@
   box-sizing: border-box;
   border-radius: calcSize(12.5);
   padding: 0;
+  transition: background-color $creator-transition-duration;
 
   &:hover:enabled,
   &.sv-focused--by-key {
@@ -51,12 +52,13 @@
 }
 
 .sl-table__cell .sv-action-bar-item__icon {
-  display: none;
+  opacity: 0;
+  transition: opacity $creator-transition-duration;
 }
 
 .sl-table__row:hover .sl-table__cell .sv-action-bar-item__icon,
 .sl-table__cell .sv-action-bar-item.sv-focused--by-key .sv-action-bar-item__icon {
-  display: block;
+  opacity: 1;
 }
 
 .sl-table__row #remove-row {
@@ -205,6 +207,8 @@
     text-align: center;
 
     user-select: none;
+
+    transition: background-color $creator-transition-duration, color $creator-transition-duration;
   }
 
   button:hover:enabled {

@@ -71,6 +71,7 @@
 }
 
 .svc-logic-operator.svc-logic-operator {
+  transition: background-color $creator-transition-duration, color $creator-transition-duration;
 
   &:hover,
   &:focus {
