@@ -44,12 +44,14 @@ const buildPlatformJson = {
   engines: {
     node: ">=0.10.0"
   },
-  typings: "./typings/entries/index.d.ts",
+  typings: "./typings/survey-creator-js/entries/index.d.ts",
   peerDependencies: {
     "ace-builds": "^1.4.12",
     "survey-core": packageJson.version,
     "survey-js-ui": packageJson.version,
-    "survey-creator-core": packageJson.version
+    "survey-creator-core": packageJson.version,
+    "@types/react-dom": "*",
+    "@types/react": "*",
   },
   peerDependenciesMeta: {
     "ace-builds": {
@@ -90,14 +92,6 @@ module.exports = function (options) {
     },
     resolve: {
       extensions: [".ts", ".js", ".tsx", ".scss"],
-      plugins: [new TsconfigPathsPlugin({ configFile: "./tsconfig.json" })],
-      alias: {
-        "survey-react-ui": "survey-js-ui",
-        "react": "survey-js-ui",
-        "react-dom/test-utils": "survey-js-ui",
-        "react-dom": "survey-js-ui",     // Must be below test-utils
-        "react/jsx-runtime": "survey-js-ui",
-      }
     },
     optimization: {
       minimize: isProductionBuild
@@ -108,7 +102,7 @@ module.exports = function (options) {
           test: /\.(ts|tsx)$/,
           loader: "ts-loader",
           options: {
-            transpileOnly: true
+            transpileOnly: isProductionBuild
           }
         },
         {
@@ -147,7 +141,7 @@ module.exports = function (options) {
       path: buildPath,
       filename: "[name]" + (isProductionBuild ? ".min" : "") + ".js",
       library: {
-        root: options.libraryName || "SurveyCreatorUI",
+        root: options.libraryName || "SurveyCreator",
         amd: '[dashedname]',
         commonjs: '[dashedname]',
       },
@@ -155,26 +149,50 @@ module.exports = function (options) {
       globalObject: "this",
       umdNamedDefine: true
     },
-    externals: {
-      "survey-core": {
-        root: "Survey",
-        commonjs2: "survey-core",
-        commonjs: "survey-core",
-        amd: "survey-core"
-      },
-      "survey-js-ui": {
-        root: "SurveyUI",
-        commonjs2: "survey-js-ui",
-        commonjs: "survey-js-ui",
-        amd: "survey-js-ui"
-      },
-      "survey-creator-core": {
-        root: "SurveyCreatorCore",
-        commonjs2: "survey-creator-core",
-        commonjs: "survey-creator-core",
-        amd: "survey-creator-core"
+    externals: [
+      {
+        "survey-core": {
+          root: "Survey",
+          commonjs2: "survey-core",
+          commonjs: "survey-core",
+          amd: "survey-core"
+        },
+        "survey-js-ui":
+        {
+          root: "SurveyUI",
+          commonjs2: "survey-js-ui",
+          commonjs: "survey-js-ui",
+          amd: "survey-js-ui"
+        },
+        "survey-react-ui":
+        {
+          root: "SurveyUI",
+          commonjs2: "survey-js-ui",
+          commonjs: "survey-js-ui",
+          amd: "survey-js-ui"
+        },
+        "react":
+        {
+          root: "SurveyUI",
+          commonjs2: "survey-js-ui",
+          commonjs: "survey-js-ui",
+          amd: "survey-js-ui"
+        },
+        "react-dom":
+        {
+          root: "SurveyUI",
+          commonjs2: "survey-js-ui",
+          commonjs: "survey-js-ui",
+          amd: "survey-js-ui"
+        },
+        "survey-creator-core": {
+          root: "SurveyCreatorCore",
+          commonjs2: "survey-creator-core",
+          commonjs: "survey-creator-core",
+          amd: "survey-creator-core"
+        }
       }
-    },
+    ],
     plugins: [
       new DashedNamePlugin(),
       new webpack.ProgressPlugin(percentage_handler),
@@ -209,7 +227,7 @@ module.exports = function (options) {
       },
       //host: "0.0.0.0",
       compress: false,
-      port: 8082
+      port: 8083
     };
   }
 

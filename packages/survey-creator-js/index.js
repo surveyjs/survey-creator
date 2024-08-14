@@ -193,7 +193,7 @@ SurveyReact.ReactElementFactory.Instance.registerElement("svc-page", (props) => 
   return React.createElement(CreatorSurveyPageComponent2, props);
 });
 */
-const creator = new SurveyCreatorUI.SurveyCreator(options);
+const creator = new SurveyCreator.SurveyCreator(options);
 creator.onModified.add((sender, options) => {
   console.log(JSON.stringify(options, null, 3));
 });
@@ -227,7 +227,7 @@ creator.saveSurveyFunc = (no, callback) => {
 //   </React.StrictMode>,
 //   document.getElementById("root")
 // );
-SurveyCreatorUI.renderSurveyCreator(creator, document.getElementById("root"));
+SurveyCreator.renderSurveyCreator(creator, document.getElementById("root"));
 
 // creator.toolbarItems.push(
 //   new Survey.Action({

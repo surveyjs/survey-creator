@@ -803,7 +803,7 @@ export class QuestionToolbox
       item.visible = false;
       itemsHash[item.id] = item;
     });
-    if(Array.isArray(this.presetDefaultItems)) {
+    if (Array.isArray(this.presetDefaultItems)) {
       this.presetDefaultItems.forEach(item => {
         const action = itemsHash[item.name];
         if (action) {
@@ -846,9 +846,9 @@ export class QuestionToolbox
         }
       });
     });
-    if(displayMisc) {
+    if (displayMisc) {
       items.forEach(item => {
-        if(!item.visible) {
+        if (!item.visible) {
           item.visible = true;
           item.category = "misc";
           actionList.push(item);
@@ -982,7 +982,7 @@ export class QuestionToolbox
     this.hasCategories = categories.length > 1;
     //this.updateCategoriesState();
     this.updateItemSeparators();
-    this.raiseUpdate(false);
+    this.updateResponsiveness(this.isCompact, this.overflowBehavior);
   }
   protected createCategory(): QuestionToolboxCategory {
     return new QuestionToolboxCategory(this);
@@ -1026,10 +1026,10 @@ export class QuestionToolbox
   public getDefaultItems(supportedQuestions: Array<string>, useDefaultCategories: boolean,
     includeCustomWidgets: boolean, includeComponents: boolean): Array<QuestionToolboxItem> {
     let res = this.getDefaultQuestionItems(supportedQuestions, useDefaultCategories);
-    if(includeCustomWidgets) {
+    if (includeCustomWidgets) {
       res = res.concat(this.getRegisterCustomWidgets());
     }
-    if(includeComponents) {
+    if (includeComponents) {
       res = res.concat(this.getRegisterComponentQuestions());
     }
     return res;
@@ -1068,7 +1068,7 @@ export class QuestionToolbox
     const res = [];
     ComponentCollection.Instance.items.forEach(item => {
       const action = this.createToolboxItemFromJSON(item.json);
-      if(!!action) {
+      if (!!action) {
         res.push(action);
       }
     });
@@ -1077,9 +1077,9 @@ export class QuestionToolbox
   private getRegisterCustomWidgets(): Array<QuestionToolboxItem> {
     const res = [];
     CustomWidgetCollection.Instance.widgets.forEach(widget => {
-      if(widget.canShowInToolbox) {
+      if (widget.canShowInToolbox) {
         const action = this.createToolboxItemFromJSON(widget.widgetJson);
-        if(!!action) {
+        if (!!action) {
           res.push(action);
         }
       }
@@ -1087,7 +1087,7 @@ export class QuestionToolbox
     return res;
   }
   private addToolBoxItem(action: QuestionToolboxItem, actions: QuestionToolboxItem[]): void {
-    if(!action) return;
+    if (!action) return;
     const existingAction = this.getActionByIdFromArray(action.id, actions);
     if (!!existingAction) {
       actions.splice(actions.indexOf(existingAction), 1, action);
@@ -1101,8 +1101,8 @@ export class QuestionToolbox
     }
   }
   private getActionByIdFromArray(id: string, actions: QuestionToolboxItem[]): QuestionToolboxItem {
-    for(let i = 0; i < actions.length; i++) {
-      if(actions[i].id === id) return actions[i];
+    for (let i = 0; i < actions.length; i++) {
+      if (actions[i].id === id) return actions[i];
     }
     return undefined;
   }

@@ -100,8 +100,19 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     const model = new SurveyModel(this.getEditModelJson(editablePresets));
     model.editablePresets = editablePresets;
     model.keepIncorrectValues = true;
-    model.showCompleteButton = false;
     model.showPrevButton = false;
+    model.showCompleteButton = false;
+    model.registerFunctionOnPropertyValueChanged("isShowNextButton", () => {
+      model.setPropertyValue("isShowNextButton", true);
+    });
+    const nextButton = model.navigationBar.getActionById("sv-nav-next");
+    nextButton.action = (): void => {
+      if(!model.isLastPage) {
+        model.nextPageUIClick();
+      } else {
+        model.currentPageNo = 0;
+      }
+    };
     editablePresets.forEach(item => item.setupQuestions(model, this));
     const json = this.preset.getJson() || {};
     editablePresets.forEach(item => item.setupQuestionsValue(model, json[item.path], this.creator));

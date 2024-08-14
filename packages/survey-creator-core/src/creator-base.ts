@@ -1272,7 +1272,7 @@ export class SurveyCreatorModel extends Base
       this.toolbox.isCompact = this.toolbox.forceCompact;
     } else if (this.toolboxLocation == "right") {
       this.toolbox.isCompact = this.showSidebar || (hasValue && newVal);
-    } else if (hasValue) {
+    } else if (hasValue && this.toolbox.isCompact !== newVal) {
       this.toolbox.isCompact = newVal;
     }
   }
