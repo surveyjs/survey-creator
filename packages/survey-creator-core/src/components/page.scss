@@ -157,6 +157,7 @@ svc-page {
   &.svc-page__content--collapsed-drag-over-inside {
     box-shadow: 0 0 0 2px $primary;
     background: $primary-light;
+    animation: collapsed-drag-over-inside-blinking 1s infinite;
     &::after {
       border: 2px $primary solid;
       background: $primary-light;
