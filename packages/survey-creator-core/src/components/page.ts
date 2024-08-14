@@ -40,6 +40,10 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     this.attachElement(page);
   }
 
+  protected get dragInsideCollapsedContainer(): boolean {
+    return this.collapsed;
+  }
+
   protected attachElement(surveyElement: PageModel): void {
     super.attachElement(surveyElement);
     this.dragTypeOverMe = null;

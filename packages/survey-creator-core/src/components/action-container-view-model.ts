@@ -14,6 +14,7 @@ import { SurveyCreatorModel } from "../creator-base";
 import { settings } from "../creator-settings";
 import { DesignerStateManager } from "./tabs/designer-state-manager";
 import { TabDesignerPlugin } from "./tabs/designer-plugin";
+import { isPanelDynamic } from "../survey-elements";
 
 export class SurveyElementActionContainer extends AdaptiveActionContainer {
   private needToShrink(item: Action, shrinkStart: boolean, shrinkEnd: boolean) {
@@ -115,8 +116,12 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
 
   private dragCollapsedTimer;
 
+  protected get canExpandOnDrag() {
+    return this.surveyElement.isPanel || this.surveyElement.isPage || isPanelDynamic(this.surveyElement);
+  }
+
   protected dragIn() {
-    if ((this.surveyElement.isPanel || this.surveyElement.isPage) && this.collapsed) {
+    if (this.canExpandOnDrag && this.collapsed) {
       this.dragCollapsedTimer = setTimeout(() => {
         this.expandWithDragIn();
       }, this.creator.expandOnDragTimeOut);
@@ -151,7 +156,9 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
         this.collapsed = !this.surveyElement.isExpanded;
       }
       if (options.name === "dragTypeOverMe") {
-        if (!!options.newValue && this.dragInsideCollapsedContainer) this.dragIn(); else this.dragOut();
+        if (this.dragInsideCollapsedContainer) {
+          if (!!options.newValue) this.dragIn(); else this.dragOut();
+        }
       }
       if (options.name === "isSelectedInDesigner") {
         this.onElementSelectedChanged(options.newValue);

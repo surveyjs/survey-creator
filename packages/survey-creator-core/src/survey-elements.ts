@@ -1,4 +1,4 @@
-import { DragDropAllowEvent, DragDropCore, DragTypeOverMeEnum, IElement, IPanel, IShortcutText, ISurveyElement, JsonObject, PageModel, PanelModelBase, QuestionRowModel, Serializer, SurveyModel } from "survey-core";
+import { DragDropAllowEvent, DragDropCore, DragTypeOverMeEnum, IElement, IPanel, IShortcutText, ISurveyElement, JsonObject, PageModel, PanelModelBase, QuestionPanelDynamicModel, QuestionRowModel, Serializer, SurveyModel } from "survey-core";
 import { settings } from "./creator-settings";
 import { IQuestionToolboxItem } from "./toolbox";
 import { SurveyHelper } from "./survey-helper";
@@ -41,6 +41,10 @@ export function calculateDragOverLocation(clientX: number, clientY: number, drop
       return DragTypeOverMeEnum.Top;
     }
   }
+}
+
+export function isPanelDynamic(element: ISurveyElement) {
+  return element instanceof QuestionPanelDynamicModel;
 }
 
 export class DragDropSurveyElements extends DragDropCore<any> {
@@ -154,7 +158,8 @@ export class DragDropSurveyElements extends DragDropCore<any> {
   }
 
   protected getDropTargetByDataAttributeValue(dataAttributeValue: string, dropTargetNode: HTMLElement, event: PointerEvent): any {
-    this.removeDragOverMarker(this.dragOverIndicatorElement);
+    const oldDragOverIndicatorElement = this.dragOverIndicatorElement;
+
     this.dragOverIndicatorElement = null;
 
     if (!dataAttributeValue) {
@@ -220,7 +225,9 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       let page: any = this.survey.getPageByName(dataAttributeValue);
       dropTarget.__page = page;
     }
-
+    if (this.dragOverIndicatorElement != oldDragOverIndicatorElement) {
+      this.removeDragOverMarker(oldDragOverIndicatorElement);
+    }
     this.dragOverIndicatorElement = dragOverElement;
     return dropTarget;
     // EO drop to question or panel
@@ -314,8 +321,8 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     return allowOptions.allow;
   }
   public dragOverCore(dropTarget: ISurveyElement, dragOverLocation: DragTypeOverMeEnum): void {
-    this.removeDragOverMarker(this.dragOverIndicatorElement);
-    this.removeDragOverMarker(this.dropTarget);
+    const oldDragOverIndicatorElement = this.dragOverIndicatorElement;
+    const oldDropTarget = this.dropTarget;
     if (this.isSameElement(dropTarget)) {
       this.allowDropHere = false;
       return;
@@ -342,6 +349,8 @@ export class DragDropSurveyElements extends DragDropCore<any> {
         dragOverIndicator.dragTypeOverMe = this.dragOverLocation;
       }
     }
+    if (this.dragOverIndicatorElement != oldDragOverIndicatorElement) this.removeDragOverMarker(oldDragOverIndicatorElement);
+    if (this.dropTarget != oldDropTarget) this.removeDragOverMarker(oldDropTarget);
   }
   private isSameElement(target: ISurveyElement): boolean {
     while (!!target) {
