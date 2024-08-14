@@ -555,6 +555,53 @@ test("Drag Drop to Multiline styles", async (t) => {
   });
 });
 
+test("Drag Drop inside panel dynamic top indicator", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await explicitErrorHandler();
+    await t.resizeWindow(832, 600);
+
+    const json = {
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "paneldynamic",
+              "name": "question1",
+              "templateElements": [
+                {
+                  "type": "text",
+                  "name": "question2"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(json);
+
+    const Page1 = Selector("[data-sv-drop-target-survey-element='page1']");
+
+    async function setClass(idx: number, suffix: string, remove: "add" | "remove" = "add") {
+      await ClientFunction((idx, suffix, remove) => {
+        const el = document.querySelectorAll(".svc-question__content")[idx];
+        if (remove != "remove") {
+          el.classList.add("svc-question__content--" + suffix);
+        }
+        else {
+          el.classList.remove("svc-question__content--" + suffix);
+        }
+      })(idx, suffix, remove);
+    }
+
+    await setClass(1, "drag-over-top");
+    await takeElementScreenshot("drag-drop-inside-panel-dynamic-top.png", Page1, t, comparer);
+    await setClass(1, "drag-over-top", "remove");
+  });
+});
+
 test("Toolbox Custom Component Icon", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(2560, 1440);
