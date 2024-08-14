@@ -7,7 +7,8 @@
       @click="question.resetValueAdorner.resetValue"
       :title="question.resetValueAdorner.caption"
     >
-      <SvComponent :name="'sv-svg-icon'"
+      <SvComponent
+        :name="'sv-svg-icon'"
         :iconName="question.cssClasses.resetButtonIcon"
         :size="'auto'"
       ></SvComponent>
@@ -15,7 +16,7 @@
   </div>
 </template>
 <script lang="ts" setup>
- import { SvComponent } from "survey-vue3-ui";
+import { SvComponent } from "survey-vue3-ui";
 import type {
   QuestionTextWithResetModel,
   QuestionCommentWithResetModel,

@@ -108,7 +108,7 @@
 import { SvComponent } from "survey-vue3-ui";
 import type { SurveyCreatorModel } from "survey-creator-core";
 import { useBase } from "survey-vue3-ui";
-import { computed, onMounted, onUnmounted, ref, toRaw, watch } from "vue";
+import { computed, onMounted, onUnmounted, ref, toRaw } from "vue";
 const props = defineProps<{ model: SurveyCreatorModel }>();
 const model = computed(() => {
   return toRaw(props.model);

@@ -4,7 +4,7 @@
   </template>
 </template>
 <script lang="ts" setup>
- import { SvComponent } from "survey-vue3-ui";
+import { SvComponent } from "survey-vue3-ui";
 import type { ObjectSelectorModel } from "survey-creator-core";
 import { useBase } from "survey-vue3-ui";
 const props = defineProps<{ model: ObjectSelectorModel }>();

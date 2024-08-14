@@ -12,7 +12,6 @@ import PropertyGrid from "./property-panel/PropertyGrid.vue";
 
 import ActionButton from "./components/ActionButton.vue";
 import Switcher from "./components/Switcher.vue";
-import QuestionError from "./components/QuestionError.vue";
 import Simulator from "./tabs/preview/Simulator.vue";
 import Test from "./tabs/preview/Test.vue";
 

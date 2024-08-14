@@ -17,7 +17,6 @@
 </template>
 
 <script lang="ts" setup>
- import { SvComponent } from "survey-vue3-ui";
 import type { Translation } from "survey-creator-core";
 import { useBase } from "survey-vue3-ui";
 

@@ -6,9 +6,15 @@
     }"
   >
     <div class="svc-plugin-tab__content" @scroll="model.onScroll()">
-      <SvComponent :name="'survey-simulator'" :model="model.simulator"></SvComponent>
+      <SvComponent
+        :name="'survey-simulator'"
+        :model="model.simulator"
+      ></SvComponent>
       <template v-if="model.showResults">
-        <SvComponent :name="'survey-results'" :survey="model.survey"></SvComponent>
+        <SvComponent
+          :name="'survey-results'"
+          :survey="model.survey"
+        ></SvComponent>
       </template>
     </div>
     <div
@@ -20,7 +26,7 @@
   </div>
 </template>
 <script lang="ts" setup>
- import { SvComponent } from "survey-vue3-ui";
+import { SvComponent } from "survey-vue3-ui";
 import type { TestSurveyTabViewModel } from "survey-creator-core";
 import { useBase } from "survey-vue3-ui";
 const props = defineProps<{ model: TestSurveyTabViewModel }>();

@@ -14,7 +14,8 @@
           </SvComponent>
         </div>
       </div>
-      <SvComponent :name="'svc-action-button'"
+      <SvComponent
+        :name="'svc-action-button'"
         v-if="model.needToCollapse"
         :text="model.getButtonText()"
         :click="model.switchCollapse.bind(model)"

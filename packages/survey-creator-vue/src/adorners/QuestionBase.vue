@@ -24,7 +24,8 @@
         class="svc-question__drag-area"
         v-on:pointerdown="(e) => model.onPointerDown(e)"
       >
-        <SvComponent :name="'sv-svg-icon'"
+        <SvComponent
+          :name="'sv-svg-icon'"
           class="svc-question__drag-element"
           v-bind="{
             css: 'svc-question__drag-element',
@@ -33,14 +34,16 @@
           }"
         ></SvComponent>
         <div class="svc-question__top-actions">
-          <SvComponent :name="'sv-action-bar'"
+          <SvComponent
+            :name="'sv-action-bar'"
             :model="model.topActionContainer"
             :handleClick="false"
           ></SvComponent>
         </div>
       </div>
 
-      <SvComponent :name="'sv-template-renderer'"
+      <SvComponent
+        :name="'sv-template-renderer'"
         :componentName="componentName"
         :componentData="componentData"
       ></SvComponent>
@@ -76,7 +79,8 @@
         :model="model"
         :element="element"
       />
-      <SvComponent :name="'svc-question-banner'"
+      <SvComponent
+        :name="'svc-question-banner'"
         v-if="model.isBannerShowing"
         :model="questionBannerParams"
       ></SvComponent>
@@ -89,7 +93,8 @@
           }
         "
       >
-        <SvComponent :name="'sv-action-bar'"
+        <SvComponent
+          :name="'sv-action-bar'"
           :model="model.actionContainer"
           :handleClick="false"
         ></SvComponent>

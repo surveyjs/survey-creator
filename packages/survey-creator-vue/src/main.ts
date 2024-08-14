@@ -10,4 +10,4 @@ const app = createApp(App);
 app.use(surveyPlugin);
 app.use(surveyCreatorPlugin);
 
-const mountedApp = app.mount("#app");
+app.mount("#app");

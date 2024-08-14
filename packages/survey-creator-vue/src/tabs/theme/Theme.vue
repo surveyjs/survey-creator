@@ -6,8 +6,12 @@
     }"
   >
     <div class="svc-plugin-tab__content">
-      <SvComponent :name="'survey-simulator'" :model="model.simulator"></SvComponent>
-      <SvComponent :name="'survey-results'"
+      <SvComponent
+        :name="'survey-simulator'"
+        :model="model.simulator"
+      ></SvComponent>
+      <SvComponent
+        :name="'survey-results'"
         v-if="model.showResults"
         :survey="model.survey"
       ></SvComponent>
@@ -21,7 +25,7 @@
   </div>
 </template>
 <script lang="ts" setup>
- import { SvComponent } from "survey-vue3-ui";
+import { SvComponent } from "survey-vue3-ui";
 import type { ThemeTabViewModel } from "survey-creator-core";
 import { useBase } from "survey-vue3-ui";
 const props = defineProps<{ model: ThemeTabViewModel }>();

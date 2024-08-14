@@ -1,7 +1,8 @@
 <template>
   <div class="svc-rating-question-content">
     <div :class="model?.controlsClassNames">
-      <SvComponent :name="'sv-svg-icon'"
+      <SvComponent
+        :name="'sv-svg-icon'"
         v-if="model?.allowRemove"
         :iconName="'icon-remove_16x16'"
         :size="16"
@@ -11,7 +12,8 @@
         :title="model?.removeTooltip"
         :aria-label="model?.removeTooltip"
       ></SvComponent>
-      <SvComponent :name="'sv-svg-icon'"
+      <SvComponent
+        :name="'sv-svg-icon'"
         v-if="model?.allowAdd"
         :iconName="'icon-add_16x16'"
         :size="16"

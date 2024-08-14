@@ -17,7 +17,8 @@
         v-if="adorner.isDraggable"
         class="svc-item-value-controls__button svc-item-value-controls__drag"
       >
-        <SvComponent :name="'sv-svg-icon'"
+        <SvComponent
+          :name="'sv-svg-icon'"
           class="svc-item-value-controls__drag-icon"
           :iconName="'icon-drag-area-indicator'"
           :size="24"
@@ -30,7 +31,8 @@
         v-key2click
         @click="adorner.add(adorner)"
         :aria-label="undefined"
-        ><SvComponent :name="'sv-svg-icon'"
+        ><SvComponent
+          :name="'sv-svg-icon'"
           :iconName="'icon-add_16x16'"
           :size="16"
           :title="undefined"
@@ -43,7 +45,8 @@
         @click="adorner.remove(adorner)"
         @blur="adorner.onFocusOut($event)"
         :aria-label="undefined"
-        ><SvComponent :name="'sv-svg-icon'"
+        ><SvComponent
+          :name="'sv-svg-icon'"
           :iconName="'icon-remove_16x16'"
           :size="16"
           :title="undefined"
@@ -57,7 +60,7 @@
 </template>
 
 <script lang="ts" setup>
- import { SvComponent } from "survey-vue3-ui";
+import { SvComponent } from "survey-vue3-ui";
 import { useCreatorModel } from "@/creator-model";
 import type { ItemValue, QuestionSelectBase } from "survey-core";
 import {

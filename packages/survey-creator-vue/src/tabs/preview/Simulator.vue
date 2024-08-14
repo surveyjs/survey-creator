@@ -27,14 +27,17 @@
         }"
       >
         <div class="svd-simulator-content">
-          <SvComponent :name="'survey-widget'" :model="model.survey"></SvComponent>
+          <SvComponent
+            :name="'survey-widget'"
+            :model="model.survey"
+          ></SvComponent>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script lang="ts" setup>
- import { SvComponent } from "survey-vue3-ui";
+import { SvComponent } from "survey-vue3-ui";
 import type { SurveySimulatorModel } from "survey-creator-core";
 import { useBase } from "survey-vue3-ui";
 import { computed } from "vue";

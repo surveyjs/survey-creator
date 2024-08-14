@@ -4,7 +4,8 @@
       <template
         v-if="!(toolbox.categories.length == 1 || !toolbox.showCategoryTitles)"
       >
-        <SvComponent :name="'svc-toolbox-category'"
+        <SvComponent
+          :name="'svc-toolbox-category'"
           v-for="(category, index) in toolbox.categories"
           :category="category"
           :key="index"
@@ -16,7 +17,8 @@
         v-if="toolbox.categories.length == 1 || !toolbox.showCategoryTitles"
       >
         <div class="svc-toolbox__category">
-          <SvComponent :name="'svc-toolbox-tool'"
+          <SvComponent
+            :name="'svc-toolbox-tool'"
             v-for="(item, index) in toolbox.visibleActions"
             :creator="model"
             :key="index"
@@ -30,7 +32,7 @@
   </div>
 </template>
 <script lang="ts" setup>
- import { SvComponent } from "survey-vue3-ui";
+import { SvComponent } from "survey-vue3-ui";
 import type { SurveyCreatorModel } from "survey-creator-core";
 import { useBase } from "survey-vue3-ui";
 import { computed } from "vue";

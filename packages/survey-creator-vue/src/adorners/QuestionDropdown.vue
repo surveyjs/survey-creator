@@ -9,7 +9,6 @@
   ></QuestionBase>
 </template>
 <script lang="ts" setup>
- import { SvComponent } from "survey-vue3-ui";
 import QuestionBase from "./QuestionBase.vue";
 import { useCreatorModel } from "../creator-model";
 import {

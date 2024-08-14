@@ -12,7 +12,10 @@
       <div class="svc-side-bar__container" v-show="model.visible" ref="root">
         <div class="svc-side-bar__container-header">
           <div class="svc-side-bar__container-actions">
-            <SvComponent :name="'sv-action-bar'" :model="model.toolbar"></SvComponent>
+            <SvComponent
+              :name="'sv-action-bar'"
+              :model="model.toolbar"
+            ></SvComponent>
           </div>
           <div v-if="!!model.headerText" class="svc-side-bar__container-title">
             {{ model.headerText }}
@@ -28,7 +31,7 @@
   </div>
 </template>
 <script lang="ts" setup>
- import { SvComponent } from "survey-vue3-ui";
+import { SvComponent } from "survey-vue3-ui";
 import { onMounted, onUnmounted, ref } from "vue";
 import type { SidebarModel } from "survey-creator-core";
 import { useBase } from "survey-vue3-ui";

@@ -1,7 +1,11 @@
 <template>
   <div v-if="model.isVisible" class="spg-search-editor_container">
     <div class="spg-search-editor_search-icon">
-      <SvComponent :name="'sv-svg-icon'" :iconName="'icon-search'" :size="'auto'"></SvComponent>
+      <SvComponent
+        :name="'sv-svg-icon'"
+        :iconName="'icon-search'"
+        :size="'auto'"
+      ></SvComponent>
     </div>
     <input
       type="text"
@@ -14,12 +18,15 @@
       <div class="spg-search-editor_toolbar-counter">
         {{ model.matchCounterText }}
       </div>
-      <SvComponent :name="'sv-action-bar'" :model="model.searchActionBar"></SvComponent>
+      <SvComponent
+        :name="'sv-action-bar'"
+        :model="model.searchActionBar"
+      ></SvComponent>
     </div>
   </div>
 </template>
 <script lang="ts" setup>
- import { SvComponent } from "survey-vue3-ui";
+import { SvComponent } from "survey-vue3-ui";
 import type { SearchManager } from "survey-creator-core";
 import { useBase } from "survey-vue3-ui";
 import { computed } from "vue";

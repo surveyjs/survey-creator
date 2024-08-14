@@ -1,15 +1,22 @@
 <template>
-  <div
-    :class="item.css"
-  >
+  <div :class="item.css">
     <div
       class="svc-toolbox__category-separator"
       v-if="item.needSeparator && !creator.toolbox.showCategoryTitles"
     ></div>
-    <div class="sv-action__content"
+    <div
+      class="sv-action__content"
       @pointerdown="model?.onPointerDown"
-      @mousemove="(e) => { model?.onMouseOver(item, e); }"
-      @mouseleave="(e) => { model?.onMouseLeave(item, e); }"
+      @mousemove="
+        (e) => {
+          model?.onMouseOver(item, e);
+        }
+      "
+      @mouseleave="
+        (e) => {
+          model?.onMouseLeave(item, e);
+        }
+      "
     >
       <SvComponent
         :viewModel="model"
@@ -22,11 +29,14 @@
   </div>
 </template>
 <script lang="ts" setup>
- import { SvComponent } from "survey-vue3-ui";
-import { QuestionToolboxItem, ToolboxToolViewModel, type SurveyCreatorModel } from "survey-creator-core";
-import type { Action, ActionContainer } from "survey-core";
+import { SvComponent } from "survey-vue3-ui";
+import {
+  QuestionToolboxItem,
+  ToolboxToolViewModel,
+  type SurveyCreatorModel,
+} from "survey-creator-core";
+import type { ActionContainer } from "survey-core";
 import { useCreatorModel } from "@/creator-model";
-import { computed } from "vue";
 import { useBase } from "survey-vue3-ui";
 const props = defineProps<{
   creator: SurveyCreatorModel;
@@ -35,7 +45,12 @@ const props = defineProps<{
   isCompact: boolean;
 }>();
 const model = useCreatorModel(
-  () => new ToolboxToolViewModel(props.item as any, props.creator, props.parentModel),
+  () =>
+    new ToolboxToolViewModel(
+      props.item as any,
+      props.creator,
+      props.parentModel
+    ),
   [() => props.creator, () => props.item],
   (model) => {
     model.dispose();

@@ -5,13 +5,15 @@
         {{ model.surveyResultsText }}
       </div>
       <div class="svd-test-results__header-types">
-        <SvComponent :name="'svc-action-button'"
+        <SvComponent
+          :name="'svc-action-button'"
           :text="model.surveyResultsTableText"
           :click="model.selectTableClick"
           :disabled="false"
           :selected="model.isTableSelected"
         ></SvComponent>
-        <SvComponent :name="'svc-action-button'"
+        <SvComponent
+          :name="'svc-action-button'"
           :text="model.surveyResultsJsonText"
           :click="model.selectJsonClick"
           :disabled="false"
@@ -39,7 +41,8 @@
           </tr>
         </thead>
         <tbody>
-          <SvComponent :name="'survey-results-table-row'"
+          <SvComponent
+            :name="'survey-results-table-row'"
             v-for="(row, index) in model.resultData"
             :model="row"
             :key="index"
@@ -50,7 +53,7 @@
   </div>
 </template>
 <script lang="ts" setup>
- import { SvComponent } from "survey-vue3-ui";
+import { SvComponent } from "survey-vue3-ui";
 import { useCreatorModel } from "@/creator-model";
 import type { SurveyModel } from "survey-core";
 import { SurveyResultsModel } from "survey-creator-core";

@@ -17,7 +17,7 @@
   </div>
 </template>
 <script lang="ts" setup>
- import { SvComponent } from "survey-vue3-ui";
+import { SvComponent } from "survey-vue3-ui";
 import type { TextareaJsonEditorModel } from "survey-creator-core";
 import { useBase } from "survey-vue3-ui";
 import { ref, onMounted } from "vue";

@@ -29,7 +29,8 @@
         @focus="question.onFocus"
         tabindex="-1"
       >
-        <SvComponent :name="'sv-svg-icon'"
+        <SvComponent
+          :name="'sv-svg-icon'"
           :iconName="question.cssClasses.decreaseButtonIcon"
           :size="'auto'"
         ></SvComponent>
@@ -44,7 +45,8 @@
         @focus="question.onFocus"
         tabindex="-1"
       >
-        <SvComponent :name="'sv-svg-icon'"
+        <SvComponent
+          :name="'sv-svg-icon'"
           :iconName="question.cssClasses.increaseButtonIcon"
           :size="'auto'"
         ></SvComponent>
@@ -53,7 +55,7 @@
   </div>
 </template>
 <script lang="ts" setup>
- import { SvComponent } from "survey-vue3-ui";
+import { SvComponent } from "survey-vue3-ui";
 import type { QuestionSpinEditorModel } from "survey-creator-core";
 import { useQuestion } from "survey-vue3-ui";
 import { ref } from "vue";

@@ -10,9 +10,17 @@
         :class="{ 'svd-test-results__marker--expanded': !model.collapsed }"
         :style="{ left: model.markerMargin }"
       >
-        <SvComponent :name="'sv-svg-icon'" :iconName="'icon-expand_16x16'" :size="16"></SvComponent>
+        <SvComponent
+          :name="'sv-svg-icon'"
+          :iconName="'icon-expand_16x16'"
+          :size="16"
+        ></SvComponent>
       </span>
-      <SvComponent :name="'survey-string'" v-if="model.question" :locString="model.question.locTitle"></SvComponent>
+      <SvComponent
+        :name="'survey-string'"
+        v-if="model.question"
+        :locString="model.question.locTitle"
+      ></SvComponent>
       <span v-else>{{ model.title }}</span>
     </td>
     <td
@@ -25,7 +33,8 @@
     </td>
   </tr>
   <template v-if="model.isNode && !model.collapsed">
-    <SvComponent :name="'survey-results-table-row'"
+    <SvComponent
+      :name="'survey-results-table-row'"
       v-for="(row, index) in model.data"
       :model="row"
       :key="index + 1"

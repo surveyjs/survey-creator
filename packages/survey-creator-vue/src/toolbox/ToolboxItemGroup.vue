@@ -1,14 +1,19 @@
 <template>
-  <SvComponent :name="'svc-toolbox-item'"
+  <SvComponent
+    :name="'svc-toolbox-item'"
     :viewModel="viewModel"
     :item="item"
     :creator="creator"
     :isCompact="isCompact"
   ></SvComponent>
-  <SvComponent :name="'sv-popup'" :model="item.popupModel" :getArea="item.getArea"></SvComponent>
+  <SvComponent
+    :name="'sv-popup'"
+    :model="item.popupModel"
+    :getArea="item.getArea"
+  ></SvComponent>
 </template>
 <script lang="ts" setup>
- import { SvComponent } from "survey-vue3-ui";
+import { SvComponent } from "survey-vue3-ui";
 import type {
   SurveyCreatorModel,
   IQuestionToolboxItem,
