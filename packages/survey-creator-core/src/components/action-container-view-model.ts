@@ -96,7 +96,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   @property({ defaultValue: true }) allowDragging: boolean;
 
   protected get dragInsideCollapsedContainer(): boolean {
-    return this.collapsed && !!this.surveyElement.dragTypeOverMe && this.surveyElement.dragInsideOverMe;
+    return this.collapsed && this.creator.dragDropSurveyElements.insideContainer;
   }
 
   @property({ defaultValue: true }) allowExpandCollapse: boolean;
@@ -129,14 +129,10 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   }
   protected expandWithDragIn() {
     this.collapsed = false;
-    this.dragCollapsedTimer = undefined;
   }
 
   protected dragOut() {
-    if (this.dragCollapsedTimer) {
-      clearTimeout(this.dragCollapsedTimer);
-      this.dragCollapsedTimer = undefined;
-    }
+    if (this.dragCollapsedTimer) clearTimeout(this.dragCollapsedTimer);
   }
 
   public dblclick(event) {
@@ -155,8 +151,10 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this.designerStateManager = (creator.getPlugin("designer") as TabDesignerPlugin)?.designerStateManager;
     this.designerStateManager?.initForElement(surveyElement);
     this.selectedPropPageFunc = (sender: Base, options: any) => {
-      if (options.name === "dragTypeOverMe" || options.name === "dragInsideOverMe") {
-        if (this.dragInsideCollapsedContainer) this.dragIn(); else this.dragOut();
+      if (options.name === "dragTypeOverMe") {
+        if (this.dragInsideCollapsedContainer) {
+          if (!!options.newValue) this.dragIn(); else this.dragOut();
+        }
       }
       if (options.name === "isSelectedInDesigner") {
         this.onElementSelectedChanged(options.newValue);
