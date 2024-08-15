@@ -210,6 +210,12 @@
   .svc-item-value-controls {
     visibility: hidden;
   }
+
+  height: calcSize(6);
+
+  .sv-ranking-item__text .sv-string-viewer {
+    white-space: unset;
+  }
 }
 
 .svc-item-value--movedown {
