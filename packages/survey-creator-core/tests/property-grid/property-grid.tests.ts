@@ -233,7 +233,7 @@ test("dropdown property editor, get choices on callback", () => {
   expect(callbackList[1]).toBeTruthy();
   Serializer.removeProperty("survey", "region");
 });
-test("Serializer.addpropery, type: 'dropdown' cuts the text before dots, provided into choices. Bug#5787", (): any => {
+test("Serializer.addpropery, type: 'dropdown' cuts the text before dots, provided into choices. Bug #5787", (): any => {
   Serializer.addProperty("survey", { name: "prop1:dropdown", type: "dropdown",
     choices: ["Gemini 1.5 Pro", "Claude 3.5 Sonnet"] });
   const survey = new SurveyModel();
