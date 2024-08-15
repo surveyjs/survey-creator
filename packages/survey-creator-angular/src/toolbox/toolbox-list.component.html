@@ -1,8 +1,7 @@
 <ng-template #template>
   <div [class]="model.cssClasses.root">
     <ng-container *ngFor="let item of model.renderedActions">
-      <svc-toolbox-tool [item]="item" [creator]="toolbox.creator" [parentModel]="model"
-        [isCompact]="false"></svc-toolbox-tool>
+      <svc-toolbox-tool [item]="item" [creator]="creator" [parentModel]="model" [isCompact]="false"></svc-toolbox-tool>
     </ng-container>
   </div>
 </ng-template>
