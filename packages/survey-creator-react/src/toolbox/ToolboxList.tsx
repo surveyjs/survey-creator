@@ -2,11 +2,11 @@ import * as React from "react";
 import { ListModel } from "survey-core";
 import { ReactElementFactory, SurveyElementBase } from "survey-react-ui";
 import { SurveyCreatorToolboxTool } from "./ToolboxItem";
-import { QuestionToolbox } from "survey-creator-core";
+import { CreatorBase } from "survey-creator-core";
 
 interface IListProps {
   model: ListModel;
-  toolbox: QuestionToolbox;
+  creator: CreatorBase;
 }
 
 export class ToolboxList extends SurveyElementBase<IListProps, any> {
@@ -17,8 +17,8 @@ export class ToolboxList extends SurveyElementBase<IListProps, any> {
   get model(): ListModel {
     return this.props.model;
   }
-  get toolbox(): QuestionToolbox {
-    return this.props.toolbox;
+  get creator(): CreatorBase {
+    return this.props.creator;
   }
   getStateElement() {
     return this.model;
@@ -37,7 +37,7 @@ export class ToolboxList extends SurveyElementBase<IListProps, any> {
   renderItems() {
     const items = this.model.renderedActions;
     return items.map((item, itemIndex) =>
-      <SurveyCreatorToolboxTool item={(item as any)} creator={this.toolbox.creator} parentModel={this.model} isCompact={false} key={"item" + itemIndex} ></SurveyCreatorToolboxTool>
+      <SurveyCreatorToolboxTool item={(item as any)} creator={this.creator} parentModel={this.model} isCompact={false} key={"item" + itemIndex} ></SurveyCreatorToolboxTool>
     );
   }
 }

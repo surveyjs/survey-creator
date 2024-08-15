@@ -2294,7 +2294,7 @@ export class SurveyCreatorModel extends Base
     }
   }
 
-  protected convertQuestion(obj: Question, className: string): Question {
+  protected convertQuestion(obj: Question, className: string, defaultJSON: any = null): Question {
     const objJSON = QuestionConverter.getObjJSON(obj, this.getDefaultElementJSON(obj.getType()));
     const options: QuestionConvertingEvent = {
       sourceQuestion: obj,
@@ -2302,7 +2302,7 @@ export class SurveyCreatorModel extends Base
       json: objJSON
     };
     this.onQuestionConverting.fire(this, options);
-    const newQuestion = <Question>QuestionConverter.convertObject(obj, className, options.json, this.getDefaultElementJSON(className));
+    const newQuestion = <Question>QuestionConverter.convertObject(obj, className, options.json, defaultJSON || this.getDefaultElementJSON(className), !!defaultJSON);
     this.setModified({
       type: "QUESTION_CONVERTED",
       className: className,
@@ -3562,13 +3562,13 @@ export class SurveyCreatorModel extends Base
     this.showSaveButton = value != null && !this.isAutoSave;
   }
   @undoRedoTransaction()
-  public convertCurrentQuestion(newType: string) {
+  public convertCurrentQuestion(newType: string, defaultJSON: any = null) {
     var el = this.selectedElement;
-    if (!el || el.getType() === newType) return;
+    if (!el || el.getType() === newType && !defaultJSON) return;
     const objType = SurveyHelper.getObjectType(el);
     if (objType !== ObjType.Question && objType !== ObjType.Panel) return;
     this.addNewElementReason = "ELEMENT_CONVERTED";
-    el = this.convertQuestion(<Question>el, newType);
+    el = this.convertQuestion(<Question>el, newType, defaultJSON);
     this.selectElement(el, null, "#convertTo button");
   }
 
@@ -3603,9 +3603,9 @@ export class SurveyCreatorModel extends Base
   }
   public getQuestionTypeSelectorModel(beforeAdd: (type: string) => void, element?: SurveyElement) {
     let panel = !!element && element.isPanel ? <PanelModel>element : null;
-    const onSelectQuestionType = (questionType: string, subtype?: string) => {
+    const onSelectQuestionType = (questionType: string, json?: any) => {
       this.currentAddQuestionType = questionType;
-      this.addNewQuestionInPage(beforeAdd, panel, questionType, subtype);
+      this.addNewQuestionInPage(beforeAdd, panel, questionType, json);
       newAction.popupModel.hide();
     };
     const getActions = () => {
@@ -3644,24 +3644,25 @@ export class SurveyCreatorModel extends Base
   }
 
   @undoRedoTransaction()
-  public addNewQuestionInPage(beforeAdd: (string) => void, panel: IPanel = null, type: string = null, subtype: string = null) {
+  public addNewQuestionInPage(beforeAdd: (string) => void, panel: IPanel = null, type: string = null, initJson: any = null) {
     if (!type) type = this.currentAddQuestionType;
     if (!type) type = settings.designer.defaultAddQuestionType;
     beforeAdd(type);
-    let json = { type: type };
-    const toolboxItem = this.toolbox.getItemByName(type);
-    if (!!toolboxItem && !!toolboxItem.json) {
-      json = toolboxItem.json;
+    let json = initJson;
+    if (!json) {
+      const toolboxItem = this.toolbox.getItemByName(type);
+      if (!!toolboxItem && !!toolboxItem.json) {
+        json = toolboxItem.json;
+      } else {
+        json = { type: type };
+      }
     }
     let newElement = this.createNewElement(json);
-
-    let propertyName = QuestionToolbox.getSubTypePropertyName(type);
-    if (!!propertyName && !!subtype) (newElement as Question).setPropertyValue(propertyName, subtype);
 
     this.clickToolboxItem(newElement, panel, "ADDED_FROM_PAGEBUTTON");
   }
 
-  createIActionBarItemByClass(item: QuestionToolboxItem, needSeparator: boolean, onSelectQuestionType?: (questionType: string, subtype?: string) => void): Action {
+  createIActionBarItemByClass(item: QuestionToolboxItem, needSeparator: boolean, onSelectQuestionType?: (questionType: string, json?: any) => void): Action {
     const action = new Action({
       title: item.title,
       id: item.name,
@@ -3674,13 +3675,13 @@ export class SurveyCreatorModel extends Base
       onSelectQuestionType(item.typeName);
     };
 
-    if (!!item.items && item.items.length > 0) {
+    if (!!item.items && item.items.length > 0 && this.toolbox.showSubitems) {
       const innerItems = item.items.map(i => new Action({
         id: i.id,
         title: i.title,
         action: () => {
           action.hidePopup();
-          onSelectQuestionType(item.typeName, i.id);
+          onSelectQuestionType(item.typeName, i.json);
         }
       }));
       action.setSubItems({ items: innerItems });
