@@ -435,6 +435,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     const dest = this.dragOverIndicatorElement?.isPanel ? this.dragOverIndicatorElement : this.dropTarget;
     if (dest.isPage && dest.elements.length > 0) return;
     const isTargetIsContainer = dest.isPanel || dest.isPage;
+    if (isTargetIsContainer && this.insideContainer && dest.elements.length > 0) return;
     if (isTargetIsContainer && this.dragOverLocation == DragTypeOverMeEnum.InsideEmptyPanel) {
       dest.insertElement(src);
     } else {

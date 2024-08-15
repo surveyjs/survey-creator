@@ -401,6 +401,16 @@ test("Drag Drop to collapsed panel", async (t) => {
 
   const Panel = Selector("[data-sv-drop-target-survey-element=\"panel1\"]");
   const toolboxToolAction = Selector(".svc-toolbox__tool > .sv-action__content");
+
+  await t
+    .hover(toolboxToolAction)
+    .dispatchEvent(toolboxToolAction, "pointerdown")
+    .hover(Panel, { offsetX: 150 })
+    .expect(Panel.find(".svc-question__content--collapsed-drag-over-inside").exists).ok()
+    .dispatchEvent(toolboxToolAction, "pointerup");
+  const resultJson0 = await getJSON();
+  await t.expect(resultJson0).eql(json);
+
   await t
     .hover(toolboxToolAction)
     .dispatchEvent(toolboxToolAction, "pointerdown")
@@ -420,7 +430,10 @@ test("Drag Drop to collapsed panel", async (t) => {
 });
 
 test("Drag Drop to collapsed dynamic panel", async (t) => {
-  await ClientFunction(() => { window["creator"].expandCollapseButtonVisibility = "always"; })();
+  await ClientFunction(() => {
+    window["creator"].expandCollapseButtonVisibility = "always";
+    window["creator"].expandOnDragTimeOut = 2000;
+  })();
 
   await t.resizeWindow(1600, 1000);
   const json = {
@@ -456,7 +469,7 @@ test("Drag Drop to collapsed dynamic panel", async (t) => {
     .expect(Panel.find(".svc-question__content--drag-over-left").exists).ok()
     .expect(Panel.find(".svc-question__content--collapsed-drag-over-inside").exists).notOk()
     .wait(2000)
-    .hover(Panel, { offsetX: 100, speed: 0.6 })
+    .hover(Panel, { offsetX: 100, speed: 0.5 })
     .expect(Panel.find(".svc-question__content--collapsed").exists).ok()
     .wait(2000)
     .expect(Panel.find(".svc-question__content--collapsed").exists).notOk()
