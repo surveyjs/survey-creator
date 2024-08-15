@@ -90,21 +90,24 @@ export class PropertyGridEditorMaskType extends PropertyGridEditor {
       default: noneItemValue,
       allowClear: false,
       searchEnabled: false,
-      choices: this.getChoices(noneItemValue)
+      choices: this.getChoices(obj, noneItemValue)
     };
     return result;
   }
-  private getChoices(noneItemValue: string): Array<any> {
-    const classes = Serializer.getChildrenClasses("masksettings") || [];
-    const choices = classes.map((cl: JsonMetadataClass) => {
-      let value = cl.name;
-      if (cl.name.indexOf("mask") !== -1) {
-        value = value.slice(0, value.indexOf("mask"));
-      }
-      return { value: value, text: getLocString("pe.maskTypes." + cl.name) };
-    });
-    const noneItem = { value: noneItemValue, text: getLocString("pe.maskTypes.none") };
-    choices.splice(0, 0, noneItem);
+  private getChoices(obj: any, noneItemValue: string): Array<any> {
+    let choices = Serializer.findProperty("text", "maskType").getChoices(obj);
+    if (!choices || choices.length == 0) {
+      const classes = Serializer.getChildrenClasses("masksettings") || [];
+      choices = classes.map((cl: JsonMetadataClass) => {
+        let value = cl.name;
+        if (cl.name.indexOf("mask") !== -1) {
+          value = value.slice(0, value.indexOf("mask"));
+        }
+        return { value: value, text: getLocString("pe.maskTypes." + cl.name) };
+      });
+      const noneItem = { value: noneItemValue, text: getLocString("pe.maskTypes.none") };
+      choices.splice(0, 0, noneItem);
+    }
     return choices;
   }
 }

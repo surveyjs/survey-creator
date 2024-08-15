@@ -3321,6 +3321,19 @@ test("PropertyGridEditorMaskType editor", () => {
   expect(maskTypeQuestion.selectedItem.value).toEqual("pattern");
   expect(maskTypeQuestion.selectedItem.title).toEqual("Pattern");
 });
+test("PropertyGridEditorMaskType editor: choices redefinition", () => {
+  Serializer.findProperty("text", "maskType").setChoices(["none", "pattern", "numeric"], undefined);
+  const question = new QuestionTextModel("q1");
+  const propertyGrid = new PropertyGridModelTester(question);
+  const maskTypeQuestion = propertyGrid.survey.getQuestionByName("maskType");
+  expect(maskTypeQuestion.getType()).toEqual("dropdown");
+  expect(maskTypeQuestion.choices).toHaveLength(3);
+  expect(maskTypeQuestion.choices[0].value).toBe("none");
+  expect(maskTypeQuestion.choices[1].value).toBe("pattern");
+  expect(maskTypeQuestion.choices[2].value).toBe("numeric");
+
+  Serializer.findProperty("text", "maskType").setChoices(undefined as any, undefined);
+});
 test("PropertyGridEditorMaskType editor: localize item", () => {
   const enLocale = editorLocalization.getLocale("");
   const oldMaskTypesNone = enLocale.pe.maskTypes.none;
