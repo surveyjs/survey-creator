@@ -119,20 +119,27 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   protected get canExpandOnDrag() {
     return this.surveyElement.isPanel || this.surveyElement.isPage || isPanelDynamic(this.surveyElement);
   }
-
+  private draggedIn = false;
   protected dragIn() {
-    if (this.canExpandOnDrag && this.collapsed) {
-      this.dragCollapsedTimer = setTimeout(() => {
-        this.expandWithDragIn();
-      }, this.creator.expandOnDragTimeOut);
+    if (!this.draggedIn) {
+      if (this.canExpandOnDrag && this.collapsed) {
+        this.draggedIn = true;
+        this.dragCollapsedTimer = setTimeout(() => {
+          this.expandWithDragIn();
+        }, this.creator.expandOnDragTimeOut);
+      }
     }
   }
   protected expandWithDragIn() {
     this.collapsed = false;
+    this.dragCollapsedTimer = undefined;
   }
 
   protected dragOut() {
-    if (this.dragCollapsedTimer) clearTimeout(this.dragCollapsedTimer);
+    if (this.draggedIn) {
+      clearTimeout(this.dragCollapsedTimer);
+      this.draggedIn = false;
+    }
   }
 
   public dblclick(event) {
@@ -151,15 +158,6 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this.designerStateManager = (creator.getPlugin("designer") as TabDesignerPlugin)?.designerStateManager;
     this.designerStateManager?.initForElement(surveyElement);
     this.selectedPropPageFunc = (sender: Base, options: any) => {
-      // TODO: discuss and check
-      if (options.name === "state") {
-        this.collapsed = !this.surveyElement.isExpanded;
-      }
-      if (options.name === "dragTypeOverMe") {
-        if (this.dragInsideCollapsedContainer) {
-          if (!!options.newValue) this.dragIn(); else this.dragOut();
-        }
-      }
       if (options.name === "isSelectedInDesigner") {
         this.onElementSelectedChanged(options.newValue);
       }

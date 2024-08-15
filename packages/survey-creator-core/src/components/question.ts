@@ -133,7 +133,10 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     }
 
     if (!!this.dragTypeOverMe && (this.canExpandOnDrag) && this.dragInsideCollapsedContainer) {
+      this.dragIn();
       result += " svc-question__content--collapsed-drag-over-inside";
+    } else {
+      this.dragOut();
     }
 
     if (this.dragTypeOverMe === DragTypeOverMeEnum.InsideEmptyPanel) {
