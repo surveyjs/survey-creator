@@ -9,6 +9,7 @@
   height: calcSize(6);
   border: none;
   box-shadow: inset 0 0 0 var(--ctr-editor-border-width, 1px) var(--ctr-editor-border-color, $border-inside);
+  transition: box-shadow $creator-transition-duration;
 
   padding: calcSize(1.5) calcSize(2);
   outline: none;

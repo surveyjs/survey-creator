@@ -51,11 +51,13 @@
 }
 
 .spg-checkbox .spg-checkbox__svg {
-  display: none;
+  opacity: 0;
+  fill: transparent;
+  transition: fill $creator-transition-duration;
 }
 
 .spg-checkbox--checked .spg-checkbox__svg {
-  display: block;
+  opacity: 1;
   width: calcSize(2.5);
   height: calcSize(2.5);
   background-repeat: no-repeat;

@@ -1,6 +1,7 @@
 .spg-root-modern {
   .sv-button-group {
     border: 1px solid var(--ctr-button-group-item-border-color, $border);
+    transition: box-shadow $creator-transition-duration, border-color $creator-transition-duration, border $creator-transition-duration;
   }
 
   .sv-button-group:focus-within {
@@ -10,7 +11,7 @@
 
   .sv-button-group__item {
     background: var(--ctr-button-group-item-background-color, $background);
-    transition: background $creator-transition-duration, background-color $creator-transition-duration;
+    transition: background $creator-transition-duration, background-color $creator-transition-duration, color $creator-transition-duration;
 
     &:not(:last-of-type) {
       border-right: 1px solid var(--ctr-button-group-item-border-color, $border);
