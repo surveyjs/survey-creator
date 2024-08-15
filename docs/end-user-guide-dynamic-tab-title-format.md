@@ -63,12 +63,12 @@ To generate a dynamic panel title that uses a user's response to one of the pane
 2. Populate it with questions.
 3. Decide a response to which question you want to use as a dynamic panel title.
 4. Assign this question a **Question name** and a **Question title**.
-5. Make the question **Required** to make sure it receives an answer.
+5. Make the question **Required** to make sure it receives an answer.<br><br>
     <img src="../images/eud-dynamic-panel-setup 1583 795.png" alt="Dynamic panel tab titles" width="1583" height="795">
 6. Select the Dynamic Panel.
 7. Under **General**, locate the **Tab title pattern** property.
 8. Enter the following sample value: `{panel.course-title}`, where `course-title` is the **Question name** value of the source question for the dynamic title.
-9. Optionally, align the tab title to the left, center, or right using the **Tab alignment** property.
+9. Optionally, align the tab title to the left, center, or right using the **Tab alignment** property.<br><br>
     <img src="../images/eud-tab-title-pattern 1580 784.png" alt="How to align dynamic panel tab titles" width="1580" height="784">
-10. Set a static value for the **Tab title placeholder** property. This value will be used if the dynamic tab title pattern doesn't produce a meaningful result or if the source question has not yet been answered.
+10. Set a static value for the **Tab title placeholder** property. This value will be used if the dynamic tab title pattern doesn't produce a meaningful result or if the source question has not yet been answered.<br><br>
     <img src="../images/eud-tab-title-placeholder 893 562.png" alt="Fallback tab title configuration" width="893" height="562">

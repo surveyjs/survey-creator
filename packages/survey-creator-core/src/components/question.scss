@@ -941,6 +941,12 @@ svc-question,
   .sd-question__content {
     padding-bottom: 2px;
     margin-bottom: -2px;
+    padding-top: calcSize(1);
+    margin-top: calcSize(-1);
+  }
+  .sd-paneldynamic__panels-container {
+    padding-top: calcSize(1);
+    margin-top: calcSize(-1);
   }
 }
 
