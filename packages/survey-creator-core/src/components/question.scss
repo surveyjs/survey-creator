@@ -281,11 +281,11 @@ svc-question {
 @keyframes collapsed-drag-over-inside-blinking {
   0%{ background: $primary-light }
   40%{ background: $primary-light }
-  50%{ background: $background-dim }
+  50%{ background: transparent }
   55%{ background: $primary-light }
-  65%{ background: $background-dim }
+  65%{ background: transparent }
   70%{ background: $primary-light }
-  80%{ background: $background-dim }
+  80%{ background: transparent }
   85%{ background: $primary-light }
   100%{ background: $primary-light }
 }
