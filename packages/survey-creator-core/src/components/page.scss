@@ -34,11 +34,12 @@ svc-page {
 
 .svc-page__content-actions {
   position: absolute;
-  visibility: hidden;
+  opacity: 0;
   top: calcSize(1);
   inset-inline-end: 0; // right
   padding: 0 calcSize(1.5);
   z-index: 1;
+  transition: opacity $creator-transition-duration;
 
   .sv-action-bar-separator {
     margin: 0 calcSize(1);
@@ -141,7 +142,7 @@ svc-page {
   }
 
   .svc-page__content-actions {
-    visibility: visible;
+    opacity: 1;
   }
 }
 
@@ -311,7 +312,7 @@ svc-page {
 .svc-creator .svc-page {
   .svc-page__content--collapse-always {
     .svc-page__content-actions {
-      visibility: visible;
+      opacity: 1;
 
       .sv-action {
         visibility: hidden;
