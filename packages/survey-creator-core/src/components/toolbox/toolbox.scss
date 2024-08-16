@@ -222,6 +222,7 @@ svc-toolbox {
   flex-direction: column;
   width: calc(100% + calcSize(3));
   box-sizing: border-box;
+  background: var(--ctr-property-grid-search-background-color, $background-dim);
 }
 
 .svc-toolbox__category {
