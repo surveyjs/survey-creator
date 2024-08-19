@@ -1153,6 +1153,10 @@ export var hebrewStrings = {
     isPanelless: {
       "false": "ברירת מחדל",
       "true": "ללא פאנלים"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "זהה לסקר",
+      container: "זהה למיכל"
     }
   },
   // Operators
@@ -1310,7 +1314,8 @@ export var hebrewStrings = {
     },
     file: {
       imageHeight: "התאמת גובה התמונה בתוצאות הסקר.",
-      imageWidth: "התאמת רוחב התמונה בתוצאות הסקר."
+      imageWidth: "התאמת רוחב התמונה בתוצאות הסקר.",
+      allowImagesPreview: "מציג תצוגות מקדימות של תמונות ממוזערות עבור קבצים שהועלו במידת האפשר. בטל את הבחירה אם ברצונך להציג סמלי קבצים במקום זאת."
     },
     image: {
       contentMode: "האפשרות \"אוטומטי\" קובעת אוטומטית את המצב המתאים לתצוגה - תמונה, וידאו או YouTube - בהתבסס על כתובת האתר המקורית שסופקה."
@@ -1484,7 +1489,8 @@ export var hebrewStrings = {
     panellayoutcolumn: {
       effectiveWidth: "מקבל ערכים %.",
       questionTitleWidth: "מקבל ערכים px."
-    }
+    },
+    progressBarInheritWidthFrom: "האפשרות \"זהה לגורם מכיל\" מתאימה אוטומטית את רוחב אזור מד ההתקדמות כך שיתאים לרכיב HTML שבו ממוקם הסקר."
   },
   // Properties
   p: {
@@ -1588,7 +1594,8 @@ export var hebrewStrings = {
     scaleColorMode: "מצב צבע לסולם",
     rateColorMode: "מצב צבע לדירוג",
     copyDisplayValue: "העתקת ערך תצוגה",
-    effectiveColSpan: "טווח עמודות"
+    effectiveColSpan: "טווח עמודות",
+    progressBarInheritWidthFrom: "רוחב אזור מד התקדמות"
   },
   theme: {
     advancedMode: "מצב מתקדם",
@@ -2291,3 +2298,8 @@ editorLocalization.locales["he"] = hebrewStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "מקבל ערכים %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "מקבל ערכים px."
 // p.effectiveColSpan: "Column span" => "טווח עמודות"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "זהה לסקר"
+// progressBarInheritWidthFrom.container: "Same as container" => "זהה למיכל"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "מציג תצוגות מקדימות של תמונות ממוזערות עבור קבצים שהועלו במידת האפשר. בטל את הבחירה אם ברצונך להציג סמלי קבצים במקום זאת."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "האפשרות \"זהה לגורם מכיל\" מתאימה אוטומטית את רוחב אזור מד ההתקדמות כך שיתאים לרכיב HTML שבו ממוקם הסקר."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "רוחב אזור מד התקדמות"

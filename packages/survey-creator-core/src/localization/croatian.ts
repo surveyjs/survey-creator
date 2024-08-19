@@ -1153,6 +1153,10 @@ export var hrStrings = {
     isPanelless: {
       "false": "Propust",
       "true": "Bez panela"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "Isto kao i anketa",
+      container: "Isto kao spremnik"
     }
   },
   // Operators
@@ -1310,7 +1314,8 @@ export var hrStrings = {
     },
     file: {
       imageHeight: "Podešava visinu slike u rezultatima upitnika.",
-      imageWidth: "Podešava širinu slike u rezultatima upitnika."
+      imageWidth: "Podešava širinu slike u rezultatima upitnika.",
+      allowImagesPreview: "Prikazuje pretpreglede minijatura za prenesene datoteke kada je to moguće. Poništite odabir želite li umjesto toga prikazati ikone datoteka."
     },
     image: {
       contentMode: "Opcija \"Automatski\" automatski određuje odgovarajući način prikaza - Slika, Videozapis ili YouTube - na temelju navedenog izvornog URL-a."
@@ -1484,7 +1489,8 @@ export var hrStrings = {
     panellayoutcolumn: {
       effectiveWidth: "Prihvaća vrijednosti %.",
       questionTitleWidth: "Prihvaća vrijednosti px."
-    }
+    },
+    progressBarInheritWidthFrom: "Opcija \"Isto kao spremnik\" automatski prilagođava širinu područja trake napretka kako bi se uklopila u HTML element u koji je upitnik postavljen."
   },
   // Properties
   p: {
@@ -1588,7 +1594,8 @@ export var hrStrings = {
     scaleColorMode: "Način skaliranja boje",
     rateColorMode: "Način ocjenjivanja boja",
     copyDisplayValue: "Kopiraj vrijednost prikaza",
-    effectiveColSpan: "Raspon stupaca"
+    effectiveColSpan: "Raspon stupaca",
+    progressBarInheritWidthFrom: "Širina područja trake napretka"
   },
   theme: {
     advancedMode: "Napredni način rada",
@@ -2717,3 +2724,8 @@ editorLocalization.locales["hr"] = hrStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Prihvaća vrijednosti %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Prihvaća vrijednosti px."
 // p.effectiveColSpan: "Column span" => "Raspon stupaca"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "Isto kao i anketa"
+// progressBarInheritWidthFrom.container: "Same as container" => "Isto kao spremnik"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Prikazuje pretpreglede minijatura za prenesene datoteke kada je to moguće. Poništite odabir želite li umjesto toga prikazati ikone datoteka."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "Opcija \"Isto kao spremnik\" automatski prilagođava širinu područja trake napretka kako bi se uklopila u HTML element u koji je upitnik postavljen."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "Širina područja trake napretka"

@@ -1153,6 +1153,10 @@ export var czStrings = {
     isPanelless: {
       "false": "Výchozí",
       "true": "Bez panelů"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "Stejné jako v průzkumu",
+      container: "Stejné jako u kontejneru"
     }
   },
   // Operators
@@ -1310,7 +1314,8 @@ export var czStrings = {
     },
     file: {
       imageHeight: "Upraví výšku obrázku ve výsledcích měření.",
-      imageWidth: "Upraví šířku obrázku ve výsledcích měření."
+      imageWidth: "Upraví šířku obrázku ve výsledcích měření.",
+      allowImagesPreview: "Pokud je to možné, zobrazuje náhledy miniatur pro nahrané soubory. Zrušte výběr, pokud chcete místo toho zobrazit ikony souborů."
     },
     image: {
       contentMode: "Možnost \"Auto\" automaticky určí vhodný režim pro zobrazení – Obrázek, Video nebo YouTube – na základě zadané zdrojové adresy URL."
@@ -1484,7 +1489,8 @@ export var czStrings = {
     panellayoutcolumn: {
       effectiveWidth: "Přijímá hodnoty %.",
       questionTitleWidth: "Přijímá hodnoty px."
-    }
+    },
+    progressBarInheritWidthFrom: "Možnost \"Stejné jako kontejner\" automaticky upraví šířku oblasti indikátoru průběhu tak, aby se vešla do prvku HTML, do kterého je průzkum umístěn."
   },
   // Properties
   p: {
@@ -1588,7 +1594,8 @@ export var czStrings = {
     scaleColorMode: "Barevný režim měřítka",
     rateColorMode: "Barevný režim s ohodnocením",
     copyDisplayValue: "Kopírovat zobrazovanou hodnotu",
-    effectiveColSpan: "Rozpětí sloupců"
+    effectiveColSpan: "Rozpětí sloupců",
+    progressBarInheritWidthFrom: "Šířka oblasti indikátoru průběhu"
   },
   theme: {
     advancedMode: "Pokročilý režim",
@@ -2297,3 +2304,8 @@ editorLocalization.locales["cs"] = czStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Přijímá hodnoty %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Přijímá hodnoty px."
 // p.effectiveColSpan: "Column span" => "Rozpětí sloupců"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "Stejné jako v průzkumu"
+// progressBarInheritWidthFrom.container: "Same as container" => "Stejné jako u kontejneru"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Pokud je to možné, zobrazuje náhledy miniatur pro nahrané soubory. Zrušte výběr, pokud chcete místo toho zobrazit ikony souborů."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "Možnost \"Stejné jako kontejner\" automaticky upraví šířku oblasti indikátoru průběhu tak, aby se vešla do prvku HTML, do kterého je průzkum umístěn."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "Šířka oblasti indikátoru průběhu"

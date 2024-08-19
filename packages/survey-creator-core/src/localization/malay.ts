@@ -1153,6 +1153,10 @@ export var msStrings = {
     isPanelless: {
       "false": "Lalai",
       "true": "Tanpa Panel"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "Sama seperti tinjauan",
+      container: "Sama seperti bekas"
     }
   },
   // Operators
@@ -1310,7 +1314,8 @@ export var msStrings = {
     },
     file: {
       imageHeight: "Melaraskan ketinggian imej dalam hasil tinjauan.",
-      imageWidth: "Melaraskan lebar imej dalam hasil tinjauan."
+      imageWidth: "Melaraskan lebar imej dalam hasil tinjauan.",
+      allowImagesPreview: "Memaparkan pratonton lakaran kecil untuk fail yang dimuat naik apabila boleh. Nyahpilih jika anda mahu menunjukkan ikon fail."
     },
     image: {
       contentMode: "Pilihan \"Auto\" secara automatik menentukan mod yang sesuai untuk paparan - Imej, Video atau YouTube - berdasarkan URL sumber yang disediakan."
@@ -1484,7 +1489,8 @@ export var msStrings = {
     panellayoutcolumn: {
       effectiveWidth: "Menerima nilai %.",
       questionTitleWidth: "Menerima nilai px."
-    }
+    },
+    progressBarInheritWidthFrom: "Pilihan \"Sama seperti bekas\" melaraskan lebar kawasan bar kemajuan secara automatik agar sesuai dengan elemen HTML yang diletakkan dalam tinjauan."
   },
   // Properties
   p: {
@@ -1588,7 +1594,8 @@ export var msStrings = {
     scaleColorMode: "Mod warna skala",
     rateColorMode: "Mod warna kadar",
     copyDisplayValue: "Nilai paparan salin",
-    effectiveColSpan: "Rentang lajur"
+    effectiveColSpan: "Rentang lajur",
+    progressBarInheritWidthFrom: "Lebar kawasan bar kemajuan"
   },
   theme: {
     advancedMode: "Mod lanjutan",
@@ -2676,3 +2683,8 @@ editorLocalization.locales["ms"] = msStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Menerima nilai %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Menerima nilai px."
 // p.effectiveColSpan: "Column span" => "Rentang lajur"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "Sama seperti tinjauan"
+// progressBarInheritWidthFrom.container: "Same as container" => "Sama seperti bekas"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Memaparkan pratonton lakaran kecil untuk fail yang dimuat naik apabila boleh. Nyahpilih jika anda mahu menunjukkan ikon fail."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "Pilihan \"Sama seperti bekas\" melaraskan lebar kawasan bar kemajuan secara automatik agar sesuai dengan elemen HTML yang diletakkan dalam tinjauan."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "Lebar kawasan bar kemajuan"

@@ -1153,6 +1153,10 @@ export var nbStrings = {
     isPanelless: {
       "false": "Standard",
       "true": "Uten paneler"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "Samme som undersøkelse",
+      container: "Samme som container"
     }
   },
   // Operators
@@ -1310,7 +1314,8 @@ export var nbStrings = {
     },
     file: {
       imageHeight: "Justerer høyden på bildet i undersøkelsesresultatene.",
-      imageWidth: "Justerer bredden på bildet i undersøkelsesresultatene."
+      imageWidth: "Justerer bredden på bildet i undersøkelsesresultatene.",
+      allowImagesPreview: "Viser miniatyrforhåndsvisninger for opplastede filer når det er mulig. Fjern merket hvis du vil vise filikoner i stedet."
     },
     image: {
       contentMode: "Alternativet \"Auto\" bestemmer automatisk passende modus for visning - Bilde, Video eller YouTube - basert på kildens URL som er oppgitt."
@@ -1484,7 +1489,8 @@ export var nbStrings = {
     panellayoutcolumn: {
       effectiveWidth: "Godtar verdier %.",
       questionTitleWidth: "Godtar verdier px."
-    }
+    },
+    progressBarInheritWidthFrom: "Alternativet \"Samme som beholder\" justerer automatisk fremdriftslinjens områdebredde slik at den passer inn i HTML-elementet undersøkelsen er plassert i."
   },
   // Properties
   p: {
@@ -1588,7 +1594,8 @@ export var nbStrings = {
     scaleColorMode: "Skaler farge, modus",
     rateColorMode: "Vurder farge, modus",
     copyDisplayValue: "Kopier visningsverdi",
-    effectiveColSpan: "Spaltespenn"
+    effectiveColSpan: "Spaltespenn",
+    progressBarInheritWidthFrom: "Bredde på fremdriftslinjeområde"
   },
   theme: {
     advancedMode: "Avansert modus",
@@ -2726,3 +2733,8 @@ editorLocalization.locales["nb"] = nbStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Godtar verdier %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Godtar verdier px."
 // p.effectiveColSpan: "Column span" => "Spaltespenn"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "Samme som undersøkelse"
+// progressBarInheritWidthFrom.container: "Same as container" => "Samme som container"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Viser miniatyrforhåndsvisninger for opplastede filer når det er mulig. Fjern merket hvis du vil vise filikoner i stedet."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "Alternativet \"Samme som beholder\" justerer automatisk fremdriftslinjens områdebredde slik at den passer inn i HTML-elementet undersøkelsen er plassert i."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "Bredde på fremdriftslinjeområde"

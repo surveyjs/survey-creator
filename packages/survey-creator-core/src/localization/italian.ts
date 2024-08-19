@@ -1153,6 +1153,10 @@ var italianTranslation = {
     isPanelless: {
       "false": "Default",
       "true": "Senza pannelli"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "Come il sondaggio",
+      container: "Uguale al contenitore"
     }
   },
   // Operators
@@ -1310,7 +1314,8 @@ var italianTranslation = {
     },
     file: {
       imageHeight: "Regola l'altezza dell'immagine nei risultati del rilevamento.",
-      imageWidth: "Regola la larghezza dell'immagine nei risultati del rilevamento."
+      imageWidth: "Regola la larghezza dell'immagine nei risultati del rilevamento.",
+      allowImagesPreview: "Visualizza le anteprime in miniatura per i file caricati, quando possibile. Deseleziona se desideri mostrare le icone dei file."
     },
     image: {
       contentMode: "L'opzione \"Auto\" determina automaticamente la modalità di visualizzazione adatta - Immagine, Video o YouTube - in base all'URL di origine fornito."
@@ -1484,7 +1489,8 @@ var italianTranslation = {
     panellayoutcolumn: {
       effectiveWidth: "Accetta valori %.",
       questionTitleWidth: "Accetta valori px."
-    }
+    },
+    progressBarInheritWidthFrom: "L'opzione \"Uguale al contenitore\" regola automaticamente la larghezza dell'area della barra di avanzamento per adattarla all'elemento HTML in cui è posizionato il sondaggio."
   },
   // Properties
   p: {
@@ -1588,7 +1594,8 @@ var italianTranslation = {
     scaleColorMode: "Modalità scala colore",
     rateColorMode: "Valuta la modalità colore",
     copyDisplayValue: "Copia valore di visualizzazione",
-    effectiveColSpan: "Estensione delle colonne"
+    effectiveColSpan: "Estensione delle colonne",
+    progressBarInheritWidthFrom: "Larghezza dell'area della barra di avanzamento"
   },
   theme: {
     advancedMode: "Modalità avanzata",
@@ -2481,3 +2488,8 @@ editorLocalization.locales["it"] = italianTranslation;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Accetta valori %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Accetta valori px."
 // p.effectiveColSpan: "Column span" => "Estensione delle colonne"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "Come il sondaggio"
+// progressBarInheritWidthFrom.container: "Same as container" => "Uguale al contenitore"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Visualizza le anteprime in miniatura per i file caricati, quando possibile. Deseleziona se desideri mostrare le icone dei file."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "L'opzione \"Uguale al contenitore\" regola automaticamente la larghezza dell'area della barra di avanzamento per adattarla all'elemento HTML in cui è posizionato il sondaggio."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "Larghezza dell'area della barra di avanzamento"

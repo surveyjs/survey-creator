@@ -1153,6 +1153,10 @@ export var nlStrings = {
     isPanelless: {
       "false": "Verstek",
       "true": "Zonder panelen"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "Zelfde als enquête",
+      container: "Zelfde als container"
     }
   },
   // Operators
@@ -1310,7 +1314,8 @@ export var nlStrings = {
     },
     file: {
       imageHeight: "Hiermee past u de hoogte van de afbeelding in de enquêteresultaten aan.",
-      imageWidth: "Hiermee past u de breedte van de afbeelding in de enquêteresultaten aan."
+      imageWidth: "Hiermee past u de breedte van de afbeelding in de enquêteresultaten aan.",
+      allowImagesPreview: "Geeft indien mogelijk miniatuurvoorbeelden weer voor geüploade bestanden. Schakel de selectie uit als u in plaats daarvan bestandspictogrammen wilt weergeven."
     },
     image: {
       contentMode: "De optie \"Auto\" bepaalt automatisch de geschikte modus voor weergave - Afbeelding, Video of YouTube - op basis van de opgegeven bron-URL."
@@ -1484,7 +1489,8 @@ export var nlStrings = {
     panellayoutcolumn: {
       effectiveWidth: "Accepteert waarden %.",
       questionTitleWidth: "Accepteert waarden px."
-    }
+    },
+    progressBarInheritWidthFrom: "Met de optie \"Zelfde als container\" wordt de breedte van het gebied van de voortgangsbalk automatisch aangepast aan het HTML-element waarin de enquête is geplaatst."
   },
   // Properties
   p: {
@@ -1588,7 +1594,8 @@ export var nlStrings = {
     scaleColorMode: "Kleurmodus schalen",
     rateColorMode: "Kleurmodus beoordelen",
     copyDisplayValue: "Weergavewaarde kopiëren",
-    effectiveColSpan: "Kolom spanwijdte"
+    effectiveColSpan: "Kolom spanwijdte",
+    progressBarInheritWidthFrom: "Breedte van het voortgangsbalkgebied"
   },
   theme: {
     advancedMode: "Geavanceerde modus",
@@ -2704,3 +2711,8 @@ editorLocalization.locales["nl"] = nlStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Accepteert waarden %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Accepteert waarden px."
 // p.effectiveColSpan: "Column span" => "Kolom spanwijdte"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "Zelfde als enquête"
+// progressBarInheritWidthFrom.container: "Same as container" => "Zelfde als container"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Geeft indien mogelijk miniatuurvoorbeelden weer voor geüploade bestanden. Schakel de selectie uit als u in plaats daarvan bestandspictogrammen wilt weergeven."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "Met de optie \"Zelfde als container\" wordt de breedte van het gebied van de voortgangsbalk automatisch aangepast aan het HTML-element waarin de enquête is geplaatst."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "Breedte van het voortgangsbalkgebied"
