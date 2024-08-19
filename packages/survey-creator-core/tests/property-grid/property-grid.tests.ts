@@ -3326,7 +3326,7 @@ test("PropertyGridEditorMaskType editor: choices redefinition", () => {
   const question = new QuestionTextModel("q1");
   const propertyGrid = new PropertyGridModelTester(question);
   const maskTypeQuestion = propertyGrid.survey.getQuestionByName("maskType");
-  expect(maskTypeQuestion.getType()).toEqual("dropdown");
+  expect(maskTypeQuestion.getType()).toEqual("buttongroup");
   expect(maskTypeQuestion.choices).toHaveLength(3);
   expect(maskTypeQuestion.choices[0].value).toBe("none");
   expect(maskTypeQuestion.choices[1].value).toBe("pattern");
@@ -3336,8 +3336,8 @@ test("PropertyGridEditorMaskType editor: choices redefinition", () => {
 });
 test("PropertyGridEditorMaskType editor: localize item", () => {
   const enLocale = editorLocalization.getLocale("");
-  const oldMaskTypesNone = enLocale.pe.maskTypes.none;
-  enLocale.pe.maskTypes.none = "Unmasked";
+  const oldMaskTypesNone = enLocale.pv.maskType.none;
+  enLocale.pv.maskType.none = "Unmasked";
 
   const question = new QuestionTextModel("q1");
   const propertyGrid = new PropertyGridModelTester(question);
@@ -3346,7 +3346,7 @@ test("PropertyGridEditorMaskType editor: localize item", () => {
   expect(maskTypeQuestion.selectedItem.value).toEqual("none");
   expect(maskTypeQuestion.selectedItem.title).toEqual("Unmasked");
 
-  enLocale.pe.maskTypes.none = oldMaskTypesNone;
+  enLocale.pv.maskType.none = oldMaskTypesNone;
 });
 test("PropertyGridEditorMaskType editor: localize item", () => {
   ComponentCollection.Instance.add({

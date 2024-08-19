@@ -77,39 +77,3 @@ export class PropertyGridEditorQuestionMaskSettings extends PropertyGridEditor {
 }
 
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestionMaskSettings());
-
-export class PropertyGridEditorMaskType extends PropertyGridEditor {
-  public fit(prop: JsonObjectProperty): boolean {
-    return prop.type == "masktype";
-  }
-  public getJSON(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): any {
-    const noneItemValue = "none";
-    const result = {
-      type: "dropdown",
-      // optionsCaption: editorLocalization.getString("pe.conditionSelectQuestion"),
-      default: noneItemValue,
-      allowClear: false,
-      searchEnabled: false,
-      choices: this.getChoices(obj, noneItemValue)
-    };
-    return result;
-  }
-  private getChoices(obj: any, noneItemValue: string): Array<any> {
-    let choices = Serializer.findProperty("text", "maskType").getChoices(obj);
-    if (!choices || choices.length == 0) {
-      const classes = Serializer.getChildrenClasses("masksettings") || [];
-      choices = classes.map((cl: JsonMetadataClass) => {
-        let value = cl.name;
-        if (cl.name.indexOf("mask") !== -1) {
-          value = value.slice(0, value.indexOf("mask"));
-        }
-        return { value: value, text: getLocString("pe.maskTypes." + cl.name) };
-      });
-      const noneItem = { value: noneItemValue, text: getLocString("pe.maskTypes.none") };
-      choices.splice(0, 0, noneItem);
-    }
-    return choices;
-  }
-}
-
-PropertyGridEditorCollection.register(new PropertyGridEditorMaskType());
