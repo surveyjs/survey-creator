@@ -32,7 +32,8 @@ import {
   QuestionImagePickerModel,
   ComponentCollection,
   QuestionBooleanModel,
-  QuestionRadiogroupModel
+  QuestionRadiogroupModel,
+  PageModel
 } from "survey-core";
 import {
   EmptySurveyCreatorOptions,
@@ -3475,4 +3476,10 @@ test("autoGrow & allowResize on setting comment question", () => {
   question.allowResize = true;
   expect(autoGrowQuestion.value === "true").toBeTruthy();
   expect(allowResizeQuestion.value === "true").toBeTruthy();
+});
+test("page class doesn't have layout category", () => {
+  const page = new PageModel("page");
+  const propertyGrid = new PropertyGridModelTester(page);
+  expect(propertyGrid.survey.getPanelByName("logic")).toBeTruthy();
+  expect(propertyGrid.survey.getPanelByName("layout")).toBeFalsy();
 });
