@@ -291,7 +291,7 @@ export class EditorLocalization {
     return res;
   }
   private getValueInternal(value: any, prefix: string, locale: string = null): string {
-    if (value === "" || value === null || value === undefined) return "";
+    if (!value || (value.indexOf && value.indexOf(".") > -1)) return "";
     value = value.toString();
     const res = this.getString(prefix + "." + value, locale);
     if (!!res) return res;

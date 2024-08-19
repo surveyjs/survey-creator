@@ -233,6 +233,21 @@ test("dropdown property editor, get choices on callback", () => {
   expect(callbackList[1]).toBeTruthy();
   Serializer.removeProperty("survey", "region");
 });
+test("Serializer.addpropery, type: 'dropdown' cuts the text before dots, provided into choices. Bug#5787", (): any => {
+  Serializer.addProperty("survey", { name: "prop1:dropdown", type: "dropdown",
+    choices: ["Gemini 1.5 Pro", "Claude 3.5 Sonnet"] });
+  const survey = new SurveyModel();
+  const propertyGrid = new PropertyGridModelTester(survey);
+  const question = propertyGrid.survey.getQuestionByName("prop1");
+  expect(question.getType()).toBe("dropdown");
+  expect(question.choices).toHaveLength(2);
+  expect(question.choices[0].value).toBe("Gemini 1.5 Pro");
+  expect(question.choices[1].value).toBe("Claude 3.5 Sonnet");
+  expect(question.choices[0].text).toBe("Gemini 1.5 Pro");
+  expect(question.choices[1].text).toBe("Claude 3.5 Sonnet");
+
+  Serializer.removeProperty("survey", "prop1");
+});
 
 test("set property editor", () => {
   Serializer.addProperty("question", {
