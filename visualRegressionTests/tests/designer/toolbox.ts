@@ -370,6 +370,9 @@ test("Toolbox with search", async (t) => {
     await t.click(Selector(".svc-toolbox input"));
     await t.typeText(Selector(".svc-toolbox input"), "qwerty");
     await takeElementScreenshot("toolbox-search-placeholder.png", toolboxElement, t, comparer);
+    await t.click("#svd-grid-search-close");
+    await ClientFunction(() => (document.querySelector(".svc-toolbox__scroller") as HTMLDivElement).style.background = "red")();
+    await takeElementScreenshot("toolbox-search-background.png", toolboxElement, t, comparer);
   });
 });
 
