@@ -654,13 +654,6 @@ export var msStrings = {
     allowResizeComment: "Benarkan pengguna mensaiz semula kawasan teks",
     textUpdateMode: "Mengemas kini nilai soalan teks",
     maskType: "Input jenis topeng",
-    maskTypes: {
-      none: "Tiada",
-      patternmask: "Corak",
-      numericmask: "Angka",
-      datetimemask: "Tarikh dan Masa",
-      currencymask: "Mata wang"
-    },
     focusOnFirstError: "Mengesetkan fokus pada jawapan tidak sah yang pertama",
     checkErrorsMode: "Jalankan pengesahihan",
     validateVisitedEmptyFields: "Sahkan medan kosong pada fokus yang hilang",
@@ -995,6 +988,13 @@ export var msStrings = {
       url: "URL",
       week: "Minggu"
     },
+    maskType: {
+      none: "Tiada",
+      pattern: "Corak",
+      numeric: "Angka",
+      datetime: "Tarikh dan Masa",
+      currency: "Mata wang"
+    },
     all: "semua",
     page: "halaman",
     survey: "tinjauan",
@@ -1310,7 +1310,8 @@ export var msStrings = {
     },
     file: {
       imageHeight: "Melaraskan ketinggian imej dalam hasil tinjauan.",
-      imageWidth: "Melaraskan lebar imej dalam hasil tinjauan."
+      imageWidth: "Melaraskan lebar imej dalam hasil tinjauan.",
+      allowImagesPreview: "Memaparkan pratonton lakaran kecil untuk fail yang dimuat naik apabila boleh. Nyahpilih jika anda mahu menunjukkan ikon fail."
     },
     image: {
       contentMode: "Pilihan \"Auto\" secara automatik menentukan mod yang sesuai untuk paparan - Imej, Video atau YouTube - berdasarkan URL sumber yang disediakan."
@@ -2676,3 +2677,9 @@ editorLocalization.locales["ms"] = msStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Menerima nilai %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Menerima nilai px."
 // p.effectiveColSpan: "Column span" => "Rentang lajur"
+// maskType.none: "None" => "Tiada"
+// maskType.pattern: "Pattern" => "Corak"
+// maskType.numeric: "Numeric" => "Angka"
+// maskType.datetime: "Date and Time" => "Tarikh dan Masa"
+// maskType.currency: "Currency" => "Mata wang"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Memaparkan pratonton lakaran kecil untuk fail yang dimuat naik apabila boleh. Nyahpilih jika anda mahu menunjukkan ikon fail."

@@ -654,13 +654,6 @@ export var huStrings = {
     allowResizeComment: "A szövegterületek átméretezésének engedélyezése a felhasználók számára",
     textUpdateMode: "Szöveges kérdés értékének frissítése",
     maskType: "Beviteli maszk típusa",
-    maskTypes: {
-      none: "Egyik sem",
-      patternmask: "Minta",
-      numericmask: "Numerikus",
-      datetimemask: "Dátum és idő",
-      currencymask: "Valuta"
-    },
     focusOnFirstError: "Fókusz beállítása az első érvénytelen válaszra",
     checkErrorsMode: "Érvényesítés futtatása",
     validateVisitedEmptyFields: "Üres mezők ellenőrzése elveszett fókusz esetén",
@@ -995,6 +988,13 @@ export var huStrings = {
       url: "URL",
       week: "Hét"
     },
+    maskType: {
+      none: "Egyik sem",
+      pattern: "Minta",
+      numeric: "Numerikus",
+      datetime: "Dátum és idő",
+      currency: "Valuta"
+    },
     all: "összes",
     page: "lap",
     survey: "kérdőív",
@@ -1310,7 +1310,8 @@ export var huStrings = {
     },
     file: {
       imageHeight: "Beállítja a kép magasságát a felmérés eredményeiben.",
-      imageWidth: "Beállítja a kép szélességét a felmérés eredményeiben."
+      imageWidth: "Beállítja a kép szélességét a felmérés eredményeiben.",
+      allowImagesPreview: "Ha lehetséges, miniatűr előnézeteket jelenít meg a feltöltött fájlokhoz. Törölje a jelölést, ha inkább fájlikonokat szeretne megjeleníteni."
     },
     image: {
       contentMode: "Az \"Automatikus\" opció automatikusan meghatározza a megjelenítéshez megfelelő módot - Kép, Videó vagy YouTube - a megadott forrás URL alapján."
@@ -2876,3 +2877,9 @@ editorLocalization.locales["hu"] = huStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Elfogadja a % értékeket"
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Elfogadja a px értékeket."
 // p.effectiveColSpan: "Column span" => "Oszlop fesztávolsága"
+// maskType.none: "None" => "Egyik sem"
+// maskType.pattern: "Pattern" => "Minta"
+// maskType.numeric: "Numeric" => "Numerikus"
+// maskType.datetime: "Date and Time" => "Dátum és idő"
+// maskType.currency: "Currency" => "Valuta"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Ha lehetséges, miniatűr előnézeteket jelenít meg a feltöltött fájlokhoz. Törölje a jelölést, ha inkább fájlikonokat szeretne megjeleníteni."

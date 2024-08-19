@@ -654,13 +654,6 @@ export var nlStrings = {
     allowResizeComment: "Gebruikers toestaan het formaat van tekstgebieden te wijzigen",
     textUpdateMode: "Modus tekstvernieuwing",
     maskType: "Type invoermasker",
-    maskTypes: {
-      none: "Geen",
-      patternmask: "Patroon",
-      numericmask: "Numeriek",
-      datetimemask: "Datum en tijd",
-      currencymask: "Valuta"
-    },
     focusOnFirstError: "Focus op eerste fout zetten",
     checkErrorsMode: "Validatie uitvoeren",
     validateVisitedEmptyFields: "Lege velden valideren bij verloren focus",
@@ -995,6 +988,13 @@ export var nlStrings = {
       url: "Url",
       week: "Week"
     },
+    maskType: {
+      none: "Geen",
+      pattern: "Patroon",
+      numeric: "Numeriek",
+      datetime: "Datum en tijd",
+      currency: "Valuta"
+    },
     all: "Alle",
     page: "Pagina",
     survey: "Enquête",
@@ -1310,7 +1310,8 @@ export var nlStrings = {
     },
     file: {
       imageHeight: "Hiermee past u de hoogte van de afbeelding in de enquêteresultaten aan.",
-      imageWidth: "Hiermee past u de breedte van de afbeelding in de enquêteresultaten aan."
+      imageWidth: "Hiermee past u de breedte van de afbeelding in de enquêteresultaten aan.",
+      allowImagesPreview: "Geeft indien mogelijk miniatuurvoorbeelden weer voor geüploade bestanden. Schakel de selectie uit als u in plaats daarvan bestandspictogrammen wilt weergeven."
     },
     image: {
       contentMode: "De optie \"Auto\" bepaalt automatisch de geschikte modus voor weergave - Afbeelding, Video of YouTube - op basis van de opgegeven bron-URL."
@@ -2704,3 +2705,9 @@ editorLocalization.locales["nl"] = nlStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Accepteert waarden %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Accepteert waarden px."
 // p.effectiveColSpan: "Column span" => "Kolom spanwijdte"
+// maskType.none: "None" => "Geen"
+// maskType.pattern: "Pattern" => "Patroon"
+// maskType.numeric: "Numeric" => "Numeriek"
+// maskType.datetime: "Date and Time" => "Datum en tijd"
+// maskType.currency: "Currency" => "Valuta"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Geeft indien mogelijk miniatuurvoorbeelden weer voor geüploade bestanden. Schakel de selectie uit als u in plaats daarvan bestandspictogrammen wilt weergeven."
