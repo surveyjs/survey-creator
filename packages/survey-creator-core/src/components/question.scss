@@ -1021,3 +1021,22 @@ svc-question,
     visibility: visible;
   }
 }
+
+.sd-row--enter.sd-row--enter.sd-row--enter.sd-row--enter {
+  .svc-question__content--selected {
+    box-shadow: $shadow-small;
+    .svc-question__content-actions {
+      display: none;
+    }
+  }
+}
+
+.sd-panel {
+  .sd-row--enter.sd-row--enter.sd-row--enter.sd-row--enter {
+    .svc-question__content--selected {
+      border-radius: 0;
+      border: 1px dashed $border;
+      box-shadow: none;
+    }
+  }
+}

@@ -128,3 +128,20 @@
     padding-left: calcSize(1);
   }
 }
+$svc-row-fade-in-duration: var(--sjs-svc-row-fade-in-duration, 250ms);
+$svc-row-move-in-duration: var(--sjs-svc-row-move-in-duration, 250ms);
+$svc-row-fade-in-delay: var(--sjs-svc-row-fade-in-delay, 100ms);
+$svc-row-fade-out-duration: var(--sjs-svc-row-fade-out-duration, 250ms);
+$svc-row-move-out-duration: var(--sjs-svc-row-move-out-duration, 250ms);
+$svc-row-move-out-delay: var(--sjs-svc-row-move-out-delay, 100ms);
+$svc-row-fade-in-animation-delay: var(--sjs-svc-row-fade-in-animation-delay, 0s);
+
+.svc-row {
+  --sjs-row-fade-in-duration: #{$svc-row-fade-in-duration};
+  --sjs-row-move-in-duration: #{$svc-row-move-in-duration};
+  --sjs-row-fade-in-delay: #{$svc-row-fade-in-delay};
+  --sjs-row-fade-out-duration: #{$svc-row-fade-out-duration};
+  --sjs-row-move-out-duration: #{$svc-row-move-out-duration};
+  --sjs-row-move-out-delay: #{$svc-row-move-out-delay};
+  --sjs-row-fade-in-animation-delay: #{$svc-row-fade-in-animation-delay};
+}
