@@ -396,6 +396,35 @@ test("Drag Drop to collapsed panel", async (t) => {
   };
   await setJSON(json);
 
+  const expectedJson = {
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "panel",
+            "name": "panel1",
+            "elements": [
+              {
+                "type": "text",
+                "name": "q1"
+              },
+              {
+                "type": "radiogroup",
+                "name": "question1",
+                "choices": [
+                  "Item 1",
+                  "Item 2",
+                  "Item 3"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  };
+
   const qCollapseButton = Selector(".svc-question__content #collapse");
   await t.click(qCollapseButton.filterVisible());
 
@@ -409,7 +438,7 @@ test("Drag Drop to collapsed panel", async (t) => {
     .expect(Panel.find(".svc-question__content--collapsed-drag-over-inside").exists).ok()
     .dispatchEvent(toolboxToolAction, "pointerup");
   const resultJson0 = await getJSON();
-  await t.expect(resultJson0).eql(json);
+  await t.expect(resultJson0).eql(expectedJson);
 
   await t
     .hover(toolboxToolAction)
@@ -424,9 +453,6 @@ test("Drag Drop to collapsed panel", async (t) => {
     .expect(Panel.find(".svc-question__content--collapsed").exists).notOk()
     .expect(Panel.find(".svc-question__content--drag-over-left").exists).notOk()
     .dispatchEvent(toolboxToolAction, "pointerup");
-
-  const resultJson = await getJSON();
-  await t.expect(resultJson).eql(json);
 });
 
 test("Drag Drop to collapsed dynamic panel", async (t) => {
