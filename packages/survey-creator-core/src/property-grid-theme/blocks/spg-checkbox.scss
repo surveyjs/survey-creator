@@ -53,15 +53,15 @@
 .spg-checkbox .spg-checkbox__svg {
   opacity: 0;
   fill: transparent;
-  transition: fill $creator-transition-duration;
-}
-
-.spg-checkbox--checked .spg-checkbox__svg {
-  opacity: 1;
   width: calcSize(2.5);
   height: calcSize(2.5);
   background-repeat: no-repeat;
   background-size: calcSize(2) calcSize(2);
+  transition: opacity $creator-transition-duration, fill $creator-transition-duration;
+}
+
+.spg-checkbox--checked .spg-checkbox__svg {
+  opacity: 1;
   fill: var(--ctr-checkbox-button-check-mark-color, $primary);
 }
 

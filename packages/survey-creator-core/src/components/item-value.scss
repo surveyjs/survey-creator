@@ -63,6 +63,7 @@
   outline: none;
   height: calcSize(2);
   box-sizing: content-box;
+  transition: background $creator-transition-duration, background-color $creator-transition-duration;
 
   .sv-svg-icon {
     display: block;

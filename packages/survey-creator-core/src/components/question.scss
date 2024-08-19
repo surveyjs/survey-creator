@@ -107,10 +107,6 @@ svc-question {
   outline: none;
   transition: background $creator-transition-duration, box-shadow $creator-transition-duration;
 
-  * {
-    transition: background $creator-transition-duration, background-color $creator-transition-duration;
-  }
-
   &:after,
   &:before {
     content: " ";
