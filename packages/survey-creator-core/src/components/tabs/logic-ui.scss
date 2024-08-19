@@ -52,7 +52,7 @@
   font-weight: 600;
   font-family: $font-family;
   font-size: calcSize(2);
-  color: $foreground-light;
+  color: var(--ctr-expression-item-text-color-parameter-empty, $foreground-light);
   height: calcSize(5);
   line-height: calcSize(3);
   cursor: pointer;
@@ -68,50 +68,67 @@
 }
 
 .sl-question.svc-logic-question--answered .svc-logic-operator {
-  color: $foreground;
+  color: var(--ctr-expression-item-text-color-parameter, $foreground);
 }
 
 .svc-logic-operator.svc-logic-operator {
+
   &:hover,
   &:focus {
-    color: #ffffff;
+    color: var(--ctr-expression-item-text-color-parameter-hovered, $primary-foreground);
     outline: none;
     box-shadow: none;
   }
 }
 
 .svc-logic-operator.svc-logic-operator--question {
-  background-color: $blue-light;
+  background-color: var(--ctr-expression-item-background-color-parameter, $blue-light);
+  color: var(--ctr-expression-item-text-color-parameter, $foreground);
 
   &:hover,
   &:focus {
-    background-color: $blue;
+    background-color: var(--ctr-expression-item-background-color-parameter-hovered, $blue);
+    color: var(--ctr-expression-item-text-color-parameter-hovered, $background);
   }
 }
 
-.svc-logic-operator.svc-logic-operator--conjunction,
-.svc-logic-operator.svc-logic-operator--operator {
-  background-color: $yellow-light;
+.svc-logic-operator.svc-logic-operator--conjunction {
+  background-color: var(--ctr-expression-item-background-color-conjunction, $yellow-light);
+  color: var(--ctr-expression-item-text-color-conjunction, $foreground);
 
   &:hover,
   &:focus {
-    background-color: $yellow;
+    background-color: var(--ctr-expression-item-background-color-conjunction-hovered, $yellow);
+    color: var(--ctr-expression-item-text-color-conjunction-hovered, $primary-foreground);
+  }
+}
+
+.svc-logic-operator.svc-logic-operator--operator {
+  background-color: var(--ctr-expression-item-background-color-operator, $yellow-light);
+  color: var(--ctr-expression-item-text-color-operator, $foreground);
+
+  &:hover,
+  &:focus {
+    background-color: var(--ctr-expression-item-background-color-operator-hovered, $yellow);
+    color: var(--ctr-expression-item-text-color-operator-hovered, $primary-foreground);
   }
 }
 
 .svc-logic-operator.svc-logic-operator--action {
-  background-color: $red-light;
+  background-color: var(--ctr-expression-item-background-color-action, $red-light);
+  color: var(--ctr-expression-item-text-color-action, $foreground);
 
   &:hover,
   &:focus {
-    background-color: $red;
+    background-color: var(--ctr-expression-item-background-color-action-hovered, $red);
+    color: var(--ctr-expression-item-text-color-action-hovered, $primary-foreground);
   }
 }
 
 .svc-logic-operator.svc-logic-operator--error {
-  background-color: $background;
-  color: $red;
-  box-shadow: inset 0 0 0 2px $red;
+  background-color: var(--ctr-expression-item-background-color-parameter-error, $background);
+  color: var(--ctr-expression-item-text-color-parameter-error, $red);
+  box-shadow: inset 0 0 0 2px var(--ctr-expression-item-text-color-parameter-error, $red);
 }
 
 .svc-logic-operator__error {
@@ -138,14 +155,39 @@
   background-position: center;
 }
 
+.svc-action-button--icon.svc-logic-condition-remove.svc-icon-remove {
+  display: none;
+  width: calcSize(5);
+  height: calcSize(5);
+  background: none;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+
+  use {
+    fill: var(--ctr-survey-action-button-icon-color-negative, $red);
+  }
+}
+
+.svc-action-button--disabled.svc-action-button--icon.svc-logic-condition-remove.svc-icon-remove {
+  use {
+    fill: var(--ctr-survey-action-button-icon-color-disabled, $foreground-dim-light);
+  }
+}
+
 .sl-panel-wrapper--in-row:hover .svc-logic-condition-remove.svc-icon-remove,
 .sl-panel-wrapper--in-row:focus-within .svc-logic-condition-remove.svc-icon-remove {
   display: block;
 }
 
+.sl-panel-wrapper--in-row:hover .svc-logic-condition-remove.svc-icon-remove.svc-action-button--icon,
+.sl-panel-wrapper--in-row:focus-within .svc-logic-condition-remove.svc-icon-remove.svc-action-button--icon {
+  display: flex;
+}
+
 .svc-logic-condition-remove.svc-icon-remove:hover,
 .svc-logic-condition-remove.svc-icon-remove:focus {
-  background-color: $red-light;
+  background-color: var(--ctr-library-action-button-background-color-negative-hovered, $red-light);
 }
 
 .svc-logic-condition-remove-question {
@@ -162,12 +204,12 @@
 
 .svc-logic-operator--action.sl-paneldynamic__add-btn.sl-paneldynamic__add-btn,
 .svc-logic-operator--operator.sl-paneldynamic__add-btn.sl-paneldynamic__add-btn {
-  color: $foreground-light;
+  color: var(--ctr-expression-item-text-color-operator-empty, $foreground-light);
   margin-top: calcSize(2);
 
   &:hover,
   &:focus {
-    color: $primary-foreground;
+    color: var(--ctr-expression-item-background-color-operator-hovered, $primary-foreground);
   }
 }
 
@@ -197,19 +239,25 @@
 
     &:focus,
     &:hover {
-      background-color: $background;
+      background-color: var(--ctr-button-background-color-hovered, $background);
       box-shadow: $shadow-small;
     }
   }
 
   .svc-logic-tab__content-action--disabled .svc-text {
-    color: $foreground;
-    opacity: 0.25;
+    color: var(--ctr-button-text-color-disabled, $foreground);
+    opacity: var(--ctr-button-text-opacity-disabled, 0.25);
   }
 
   .sd-paneldynamic__panel-wrapper--in-row {
     margin-top: 0;
     align-items: start;
+  }
+}
+
+.svc-logic-tab__content-empty {
+  .svc-text {
+    color: var(--ctr-surface-placeholder-text-description-color, $foreground);
   }
 }
 
@@ -236,6 +284,12 @@
 .svc-logic-tab__content .svc-logic-paneldynamic .sd-row {
   margin-top: 0;
   flex-flow: row wrap;
+}
+
+.sl-table__cell.sd-table__cell-action--show-detail {
+  use {
+    fill: var(--ctr-collapse-button-icon-color, $foreground-light);
+  }
 }
 
 .sl-table__cell--detail-panel {
@@ -300,7 +354,7 @@
 }
 
 .svc-logic-tab__leave-apply-button {
-  background-color: $red;
+  background-color: var(--ctr-button-background-color-danger, $red);
 }
 
 .sl-list {

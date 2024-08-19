@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { ReactElementFactory } from "survey-react-ui";
 
 export class TranslationLineSkeleton extends React.Component<any, any> {

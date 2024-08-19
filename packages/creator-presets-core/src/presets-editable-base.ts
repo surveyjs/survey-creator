@@ -114,8 +114,15 @@ export class CreatorPresetEditableBase {
       item.setupQuestionsValue(model, !!json ? json[item.path]: undefined, creator);
     });
   }
+  public onLocaleChanged(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
+    this.onLocaleChangedCore(model, json, creator);
+    this.children.forEach(item => {
+      item.setupQuestionsValue(model, !!json ? json[item.path]: undefined, creator);
+    });
+  }
   protected setupQuestionsCore(model: SurveyModel, creatorSetup: ICreatorPresetEditorSetup): void { }
   protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {}
+  protected onLocaleChangedCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {}
   protected getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel): any { return undefined; }
   protected setJsonLocalizationStringsCore(model: SurveyModel, locStrs: any): void {}
   protected updateJsonLocalizationStringsCore(locStrs: any): void {}

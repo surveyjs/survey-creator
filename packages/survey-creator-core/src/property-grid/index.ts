@@ -533,7 +533,7 @@ export class PropertyJSONGenerator {
             css.questionWrapper = "spg-boolean-wrapper--overriding";
           };
           const overridingQuestion = this.createOverridingQuestion(panel, q, prop.overridingProperty);
-          if(!!overridingQuestion) {
+          if (!!overridingQuestion) {
             q.parent.addElement(overridingQuestion, q.parent.elements.indexOf(q) + 1);
           }
         }
@@ -570,7 +570,7 @@ export class PropertyJSONGenerator {
   }
   private createOverridingQuestion(panel: PanelModelBase, question: Question, overridingProp: string): Question {
     const linkValue = <QuestionLinkValueModel>Serializer.createClass("linkvalue");
-    if(!linkValue) return null;
+    if (!linkValue) return null;
     linkValue.name = question.name + "_" + "overridingProperty";
     linkValue.startWithNewLine = false;
     linkValue.property = question.property;
@@ -759,8 +759,8 @@ export class PropertyJSONGenerator {
     if (!!this.parentProperty) {
       titleClass += "@" + this.parentProperty.name;
     }
-    if(this.obj.getType() === "matrixdropdowncolumn" && (<any>this.obj).getDynamicType() !== "question") {
-      if(!Serializer.findProperty(this.obj.getType(), prop.name)) {
+    if (this.obj.getType() === "matrixdropdowncolumn" && (<any>this.obj).getDynamicType() !== "question") {
+      if (!Serializer.findProperty(this.obj.getType(), prop.name)) {
         titleClass = (<any>this.obj).getDynamicType();
       }
     }
@@ -808,9 +808,9 @@ export class PropertyGridModel {
     this.setObj(value);
   }
   public setPropertyGridDefinition(val: ISurveyPropertyGridDefinition): void {
-    if(this.propertyGridDefinition === val) return;
+    if (this.propertyGridDefinition === val) return;
     this.propertyGridDefinition = val;
-    if(!!this.obj) {
+    if (!!this.obj) {
       this.updateCurrentSurveyWithNewDefinition();
     }
   }
@@ -975,6 +975,7 @@ export class PropertyGridModel {
       });
       survey.enterKeyAction = "loseFocus";
       survey.checkErrorsMode = "onValueChanging";
+      survey.questionErrorComponent = "svc-question-error";
     }
   }
   private updateCurrentSurveyWithNewDefinition(): void {
@@ -983,11 +984,11 @@ export class PropertyGridModel {
     this.updateElementsInPanel(this.survey.pages[0], newSurvey.pages[0]);
   }
   private updateElementsInPanel(curPanel: PanelModelBase, newPanel: PanelModelBase): void {
-    for(let i = curPanel.elements.length - 1; i >= 0; i --) {
+    for (let i = curPanel.elements.length - 1; i >= 0; i--) {
       const el = curPanel.elements[i];
       const newEl = newPanel.getElementByName(el.name);
-      if(!!newEl && el.isPanel === newEl.isPanel) {
-        if(el.isPanel && newEl.isPanel) {
+      if (!!newEl && el.isPanel === newEl.isPanel) {
+        if (el.isPanel && newEl.isPanel) {
           this.updateElementsInPanel(<any>el, <any>newEl);
         }
       } else {
@@ -995,19 +996,19 @@ export class PropertyGridModel {
       }
     }
     const elsToAdd = new Array<any>();
-    for(let i = 0; i < newPanel.elements.length; i ++) {
+    for (let i = 0; i < newPanel.elements.length; i++) {
       const newEl = newPanel.elements[i];
       let curIndex = i + elsToAdd.length;
-      if(curIndex < curPanel.elements.length && curPanel.elements[curIndex].name === newEl.name) continue;
+      if (curIndex < curPanel.elements.length && curPanel.elements[curIndex].name === newEl.name) continue;
       const curEl = curPanel.getElementByName(newEl.name);
-      if(!!curEl) {
+      if (!!curEl) {
         curPanel.removeElement(curEl);
         curPanel.addElement(curEl, curIndex);
       } else {
         elsToAdd.push({ element: newEl, index: i });
       }
     }
-    for(let i = 0; i < elsToAdd.length; i ++) {
+    for (let i = 0; i < elsToAdd.length; i++) {
       curPanel.addElement(elsToAdd[i].element, elsToAdd[i].index);
     }
   }
@@ -1653,7 +1654,7 @@ export class PropertyGridEditorNumber extends PropertyGridEditor {
       if (prop.defaultValue !== undefined) {
         options.value = prop.defaultValue;
       } else {
-        if(!prop.isRequired && options.value === "") {
+        if (!prop.isRequired && options.value === "") {
           options.value = undefined;
         }
         else {

@@ -9,6 +9,7 @@ export * from "../presets-editable-tabs";
 export * from "../presets-editable-toolbox";
 export * from "../components/embedded-creator";
 export * from "../components/question";
+export * from "../svgbundle";
 
 import { checkLibraryVersion } from "survey-core";
 

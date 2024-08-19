@@ -122,7 +122,11 @@ module.exports = function (options) {
         {
           test: /\.html$/,
           loader: "html-loader",
-        }
+        },
+        {
+          test: /\.svg$/,
+          loader: "svg-inline-loader",
+        },
       ],
     },
     output: {

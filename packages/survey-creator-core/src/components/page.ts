@@ -1,4 +1,4 @@
-import { ActionContainer, ComputedUpdater, DragTypeOverMeEnum, IAction, IElement, PageModel, property } from "survey-core";
+import { ActionContainer, ComputedUpdater, CssClassBuilder, DragTypeOverMeEnum, IAction, IElement, PageModel, property } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { IPortableMouseEvent } from "../utils/events";
 import { SurveyElementAdornerBase } from "./action-container-view-model";
@@ -28,6 +28,9 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   constructor(creator: SurveyCreatorModel, page: PageModel) {
     super(creator, page);
     this.actionContainer.sizeMode = "small";
+    if (this.isGhost) this.expandCollapseAction.visible = false;
+    this.expandCollapseAction.needSeparator = true;
+    if (this.creator.expandCollapseButtonVisibility != "never") this.actionContainer.addAction(this.expandCollapseAction);
     this.questionTypeSelectorModel = this.creator.getQuestionTypeSelectorModel(
       (type) => {
         this.currentAddQuestionType = type;
@@ -187,7 +190,10 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     if (this.creator.isElementSelected(this.page)) {
       result += " svc-page__content--selected";
     }
-    return result;
+
+    result += (" svc-page__content--collapse-" + this.creator.expandCollapseButtonVisibility);
+    if (this.renderedCollapsed) result += (" svc-page__content--collapsed");
+    return result.trim();
   }
   public hover(event: MouseEvent, element: HTMLElement | any) {
     toggleHovered(event, element, this.creator.pageHoverDelay);

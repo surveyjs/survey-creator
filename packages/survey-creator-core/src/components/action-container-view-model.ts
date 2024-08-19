@@ -26,7 +26,7 @@ export class SurveyElementActionContainer extends AdaptiveActionContainer {
         return;
       }
       if (this.needToShrink(item, shrinkStart, shrinkEnd)) {
-        item.mode = item.innerItem.iconName ? "small" : "removed";
+        item.mode = !item.innerItem.disableShrink && item.innerItem.iconName ? "small" : "removed";
         return;
       }
       item.mode = "large";
@@ -35,7 +35,7 @@ export class SurveyElementActionContainer extends AdaptiveActionContainer {
   private calcItemSize(item: Action, shrinkStart: boolean, shrinkEnd: boolean, exclude: string[] = []) {
     if (exclude.indexOf(item.id) != -1) return 0;
     if (this.needToShrink(item, shrinkStart, shrinkEnd)) {
-      if (!item.innerItem.iconName) return 0;
+      if (item.innerItem.disableShrink || !item.innerItem.iconName) return 0;
       return item.minDimension;
     }
     return item.maxDimension;
@@ -90,9 +90,10 @@ export class SurveyElementActionContainer extends AdaptiveActionContainer {
 
 export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> extends Base {
   public actionContainer: SurveyElementActionContainer;
-  public topActionContainer: ActionContainer;
+  protected expandCollapseAction: IAction;
   protected designerStateManager: DesignerStateManager;
   @property({ defaultValue: true }) allowDragging: boolean;
+  @property({ defaultValue: true }) allowExpandCollapse: boolean;
   @property({
     onSet: (val, target: SurveyElementAdornerBase<T>) => {
       target.renderedCollapsed = val;
@@ -106,6 +107,11 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     }
   }) collapsed: boolean;
   @property() renderedCollapsed: boolean;
+
+  public dblclick(event) {
+    if (this.allowExpandCollapse) this.collapsed = !this.collapsed;
+    event.stopPropagation();
+  }
   private allowEditOption: boolean;
   private selectedPropPageFunc: (sender: Base, options: any) => void;
   private sidebarFlyoutModeChangedFunc: (sender: Base, options: any) => void;
@@ -131,20 +137,22 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this.actionContainer.dotsItem.iconSize = 16;
     this.actionContainer.dotsItem.popupModel.horizontalPosition = "center";
 
-    this.topActionContainer = new ActionContainer();
-    this.topActionContainer.sizeMode = "small";
-    this.topActionContainer.setItems([{
+    const collapseIcon = "icon-collapse-detail-light_16x16";
+    const expandIcon = "icon-restore_16x16";
+    this.expandCollapseAction = {
       id: "collapse",
-      iconName: new ComputedUpdater<string>(() => this.collapsed ? "icon-restore_16x16" : "icon-collapse-detail-light_16x16") as any,
+      css: "sv-action-bar-item--secondary sv-action-bar-item--collapse",
+      iconName: new ComputedUpdater<string>(() => this.collapsed ? expandIcon : collapseIcon) as any,
       iconSize: 16,
       action: () => {
         this.collapsed = !this.collapsed;
       }
-    }]);
+    };
     this.collapsed = !!surveyElement && (this.designerStateManager?.getElementState(surveyElement).collapsed);
     this.setSurveyElement(surveyElement);
     this.creator.sidebar.onPropertyChanged.add(this.sidebarFlyoutModeChangedFunc);
     this.setShowAddQuestionButton(true);
+    this.expandCollapseAction.visible = this.allowExpandCollapse;
   }
 
   protected detachElement(surveyElement: T): void {
@@ -201,6 +209,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   }
   protected updateElementAllowOptions(options: any, operationsAllow: boolean): void {
     this.allowDragging = operationsAllow && options.allowDragging;
+    this.allowExpandCollapse = this.creator.expandCollapseButtonVisibility != "never" && (options.allowExpandCollapse == undefined || !!options.allowExpandCollapse);
     this.allowEditOption = (options.allowEdit == undefined || !!options.allowEdit);
     this.updateActionVisibility("delete", operationsAllow && options.allowDelete);
     this.updateActionVisibility("duplicate", operationsAllow && options.allowCopy);

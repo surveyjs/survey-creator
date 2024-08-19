@@ -626,6 +626,7 @@ export class SurveyQuestionEditorDefinition {
 
         { name: "focusOnFirstError", tab: "validation" },
         { name: "checkErrorsMode", tab: "validation" },
+        { name: "validateVisitedEmptyFields", tab: "validation" },
 
         { name: "navigateToUrl", tab: "showOnCompleted" },
         { name: "showCompletedPage", tab: "showOnCompleted" },

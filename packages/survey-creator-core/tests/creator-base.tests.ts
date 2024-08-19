@@ -23,6 +23,8 @@ import {
   PageModel,
   ComputedUpdater,
   PopupDropdownViewModel,
+  Question,
+  SurveyElement,
 } from "survey-core";
 import { PageAdorner } from "../src/components/page";
 import { QuestionAdornerViewModel } from "../src/components/question";
@@ -53,6 +55,7 @@ import { PropertyGridEditorCollection } from "../src/property-grid/index";
 import { PropertyGridEditorMatrixItemValues } from "../src/property-grid/matrices";
 import { ObjectSelector } from "../src/property-grid/object-selector";
 import { TabDesignerViewModel } from "../src/components/tabs/designer";
+import { ConfigureTablePropertyEditorEvent } from "../src/creator-events-api";
 
 surveySettings.supportCreatorV2 = true;
 
@@ -1194,7 +1197,7 @@ test("Convert radiogroup question into dropdown, onQuestionCoverting", (): any =
   creator.onQuestionConverting.add((sender, options) => {
     options.json = objJSON;
   });
-  const json ={ elements: [{ type: "radiogroup", name: "q1", choices: [1, 2, 3, 4] }] };
+  const json = { elements: [{ type: "radiogroup", name: "q1", choices: [1, 2, 3, 4] }] };
   creator.JSON = json;
   creator.selectQuestionByName("q1");
   creator.convertCurrentQuestion("dropdown");
@@ -2027,6 +2030,39 @@ test("PageAdorner and onElementAllowOperations, allowEdit", (): any => {
   expect(pageModel2.getActionById("duplicate").visible).toBeTruthy();
   expect(pageModel2.showAddQuestionButton).toBeTruthy();
 });
+test("PageAdorner and onElementAllowOperations, allowExpandCollapse", (): any => {
+  const creator = new CreatorTester();
+  creator.expandCollapseButtonVisibility = "onhover";
+  creator.JSON = {
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          }
+        ]
+      },
+      {
+        "name": "page2",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question2"
+          }
+        ]
+      }
+    ]
+  };
+  creator.onElementAllowOperations.add((sender, options) => {
+    options.allowExpandCollapse = (options.obj as SurveyElement).name == "page2";
+  });
+  const pageModel1 = new PageAdorner(creator, creator.survey.pages[0]);
+  const pageModel2 = new PageAdorner(creator, creator.survey.pages[1]);
+  expect(pageModel1.actionContainer.getActionById("collapse").visible).toBeFalsy();
+  expect(pageModel2.actionContainer.getActionById("collapse").visible).toBeTruthy();
+});
 test("PageAdorner and creator readOnly", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
@@ -2092,6 +2128,26 @@ test("QuestionAdornerViewModel and onElementAllowOperations", (): any => {
   expect(q4Model.getActionById("convertTo").visible).toBeTruthy();
   expect(q4Model.getActionById("isrequired").visible).toBeTruthy();
   expect(q4Model.getActionById("convertInputType").visible).toBeTruthy();
+});
+
+test("QuestionAdornerViewModel and onElementAllowOperations, allowExpandCollapse", (): any => {
+  const creator = new CreatorTester();
+  creator.expandCollapseButtonVisibility = "onhover";
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" }
+    ]
+  };
+  creator.survey.addNewPage("page2");
+  creator.onElementAllowOperations.add((sender, options) => {
+    options.allowExpandCollapse = (options.obj as Question).name === "q1";
+  });
+  const q1Model = new QuestionAdornerViewModel(creator, creator.survey.getAllQuestions()[0], undefined);
+  const q2Model = new QuestionAdornerViewModel(creator, creator.survey.getAllQuestions()[1], undefined);
+
+  expect(q1Model.topActionContainer.getActionById("collapse").visible).toBeTruthy();
+  expect(q2Model.topActionContainer.getActionById("collapse").visible).toBeFalsy();
 });
 
 test("QuestionAdornerViewModel and onElementAllowOperations on new elements", (): any => {
@@ -3900,15 +3956,24 @@ test("creator.addNewQuestionLast property", (): any => {
   creator.clickToolboxItem({ type: "text" });
   expect(creator.selectedElementName).toEqual("question2");
   creator.selectQuestionByName("question1");
-  creator.addNewQuestionInPage((str) => {}, undefined, "text");
+  creator.addNewQuestionInPage((str) => { }, undefined, "text");
   expect(creator.selectedElementName).toEqual("question3");
   expect(creator.survey.pages[0].elements[2].name).toEqual("question3");
   creator.selectQuestionByName("question1");
   creator.addNewQuestionLast = false;
-  creator.addNewQuestionInPage((str) => {}, undefined, "text");
+  creator.addNewQuestionInPage((str) => { }, undefined, "text");
   expect(creator.selectedElementName).toEqual("question4");
   expect(creator.survey.pages[0].elements[1].name).toEqual("question4");
   expect(creator.survey.pages[0].elements[3].name).toEqual("question3");
+});
+test("addNewQuestionInPage with json", (): any => {
+  const creator = new CreatorTester();
+  creator.addNewQuestionInPage((str) => { }, undefined, "text", { type: "text", inputType: "email" });
+  const newQuestion = creator.survey.pages[0].elements[0] as QuestionTextModel;
+
+  expect(creator.selectedElementName).toEqual("question1");
+  expect(newQuestion.name).toEqual("question1");
+  expect(newQuestion.inputType).toEqual("email");
 });
 test("Initial Property Grid category expanded state", (): any => {
   const creator = new CreatorTester();
@@ -4092,7 +4157,7 @@ test("Keep selection on deleting another question, #5634", (): any => {
   };
   let counter = 0;
   creator.onSelectedElementChanged.add((sender, options) => {
-    counter ++;
+    counter++;
   });
   creator.selectQuestionByName("q1");
   expect(counter).toBe(1);
@@ -4113,7 +4178,7 @@ test("Do not select a duplicated question if it is not selected, #5634", (): any
   };
   let counter = 0;
   creator.onSelectedElementChanged.add((sender, options) => {
-    counter ++;
+    counter++;
   });
   creator.selectQuestionByName("q1");
   expect(counter).toBe(1);
@@ -4452,4 +4517,34 @@ test("json editor default indent", (): any => {
   const creator = new CreatorTester();
   expect(settings.jsonEditor.indentation).toBe(2);
   expect(creator.text).toBe("{\n  \"logoPosition\": \"right\",\n  \"pages\": [\n    {\n      \"name\": \"page1\"\n    }\n  ]\n}");
+});
+test("onSetPropertyEditorOptions -> onConfigureTablePropertyEditor", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "dropdown", name: "q1", choices: [1, 2] }] };
+  const question = creator.survey.getQuestionByName("q1");
+  const callBackOptions = {
+    allowAddRemoveItems: true,
+    allowRemoveAllItems: true,
+    allowBatchEdit: true
+  };
+  creator.onSetPropertyEditorOptionsCallback("choices", question, callBackOptions);
+  expect(callBackOptions.allowBatchEdit).toBeTruthy();
+  let onSetPropertyEditorOptions_allowBatchEdit = false;
+  creator.onSetPropertyEditorOptions.add((sender: any, options: ConfigureTablePropertyEditorEvent) => {
+    options.editorOptions.allowBatchEdit = onSetPropertyEditorOptions_allowBatchEdit;
+  });
+  creator.onSetPropertyEditorOptionsCallback("choices", question, callBackOptions);
+  expect(callBackOptions.allowBatchEdit).toBeFalsy();
+  callBackOptions.allowBatchEdit = true;
+  onSetPropertyEditorOptions_allowBatchEdit = true;
+  let onConfigureTablePropertyEditor_allowBatchEdit = true;
+  creator.onConfigureTablePropertyEditor.add((sender: any, options: ConfigureTablePropertyEditorEvent) => {
+    options.allowBatchEdit = onConfigureTablePropertyEditor_allowBatchEdit;
+  });
+  creator.onSetPropertyEditorOptionsCallback("choices", question, callBackOptions);
+  expect(callBackOptions.allowBatchEdit).toBeTruthy();
+
+  onSetPropertyEditorOptions_allowBatchEdit = false;
+  creator.onSetPropertyEditorOptionsCallback("choices", question, callBackOptions);
+  expect(callBackOptions.allowBatchEdit).toBeFalsy();
 });

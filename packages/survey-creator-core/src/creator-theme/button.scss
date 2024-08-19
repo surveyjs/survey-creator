@@ -5,7 +5,7 @@
   line-height: calcSize(7);
   vertical-align: baseline;
   text-align: center;
-  background-color: $background;
+  background-color: var(--ctr-button-background-color, $background);
   box-shadow: $shadow-small;
   border-radius: calcSize(0.5);
   cursor: pointer;
@@ -17,13 +17,14 @@
     align-items: center;
     flex-grow: 1;
     justify-content: center;
-    color: $primary;
+    color: var(--ctr-button-text-color, $primary);
   }
 }
 
 .svc-btn:hover {
-  background-color: $background-dark;
+  background-color: var(--ctr-button-background-color-hovered, $background-dark);
 }
+
 .svc-btn:focus {
-  box-shadow: 0 0 0 2px $primary;
+  box-shadow: 0 0 0 2px var(--ctr-button-border-color-focused, $primary);
 }

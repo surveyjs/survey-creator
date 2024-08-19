@@ -145,19 +145,14 @@ To set an input type for a column of cells within a Multi-Select Matrix, follow 
 
 1. Select a Multi-Select Matrix question. This action will display the question settings in the Property Grid.
 2. Under **Columns**, select the column for whose cells you wish to set a new input type.
-3. Click the **Pen** icon on the right of the column title. This action will display the column settings in the Property Grid.
-  
-   <img src="../images/eud-multi-select-matrix-column.png" alt='Multi-Select Matrix: How to set a new cell type for a column' width="329" height="414">
-  
-   Another way to display the column settings in the Property Grid is by clicking the area around the column title on the design surface.
-
+3. Click the **Pen** icon on the right of the column title. This action will display the column settings in the Property Grid.<br><br>
+   <img src="../images/eud-multi-select-matrix-column.png" alt='Multi-Select Matrix: How to set a new cell type for a column' width="329" height="414"><br><br>
+   Another way to display the column settings in the Property Grid is by clicking the area around the column title on the design surface.<br><br>
    <img src="../images/eud-column-area.png" alt='Multiple Textboxes: How to activate column settings in the Property Grid' width="819" height="454">
-
 4. Under **General**, locate the **Cell input type** property. By default, it is set to Default, which means that it inherits the cell type set for the entire matrix table.
 5. In the drop-down menu, select Single-Line Input.
 6. Locate the **Input type** property.
-7. In the drop-down menu, select among the available input types.
-
+7. In the drop-down menu, select among the available input types.<br><br>
    <img src="../images/eud-column-input-type.png" alt='Multiple Textboxes: How to set a new question type for a column cell' width="327" height="548">
 
 The image below illustrates a three-column matrix table with cell input types set to Single-Line Input, Dropdown and Yes/No (Boolean). The first column has its "Input type" property set to Month.

@@ -1,28 +1,50 @@
 import { SurveyCreatorModel, editorLocalization, ICreatorOptions } from "survey-creator-core";
 import { CreatorPreset, ICreatorPresetData } from "survey-creator-core";
-import { ActionContainer, Base, ComputedUpdater, SurveyModel, createDropdownActionModel } from "survey-core";
+import { ActionContainer, Base, ComputedUpdater, LocalizableString, SurveyModel, createDropdownActionModel } from "survey-core";
 import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
 import { CreatorPresetEditableToolboxConfigurator } from "./presets-editable-toolbox";
 import { CreatorPresetEditableTabs } from "./presets-editable-tabs";
 import { CreatorEditablePresetPropertyGrid, CreatorPresetEditablePropertyGridDefinition } from "./presets-editable-properties";
+import { CreatorPresetEditableLanguages } from "./presets-editable-languages";
+require("./presets-header.scss");
+
+export class NavigationBar extends ActionContainer {
+  constructor() {
+    super();
+    this.cssClasses = {
+      root: "presets-navigation-bar",
+      defaultSizeMode: "",
+      smallSizeMode: "",
+      item: "presets-navigation-bar__item presets-navigation-bar-item",
+      itemWithTitle: "",
+      itemAsIcon: "",
+      itemActive: "presets-navigation-bar-item--active",
+      itemPressed: "presets-navigation-bar-item--pressed",
+      itemIcon: "",
+      itemTitle: "",
+      itemTitleWithIcon: "",
+    };
+  }
+}
 
 export class CreatorPresetEditorModel extends Base implements ICreatorPresetEditorSetup {
   private presetValue: CreatorPreset;
   private creatorValue: SurveyCreatorModel;
   private modelValue: SurveyModel;
-  private navigationBarValue: ActionContainer;
+  private navigationBarValue: NavigationBar;
+  public locTitle: LocalizableString;
   constructor(json?: ICreatorPresetData) {
     super();
     editorLocalization.presetStrings = undefined;
     this.presetValue = new CreatorPreset(json);
     this.creatorValue = this.createCreator({});
     this.modelValue = this.createModel();
-    this.locale = "en";
-    this.navigationBarValue = new ActionContainer();
+    this.locTitle = new LocalizableString(undefined, false);
+    this.locTitle.text = "Creator Presets";
+    this.navigationBarValue = new NavigationBar();
     this.addNavigationAction("preset", "Edit Preset");
     this.addNavigationAction("creator", "Preview Survey Creator");
     this.addNavigationAction("results", "View Preset JSON");
-    this.addLocaleDropdown();
     this.activeTab = this.navigationBar.actions[0].id;
   }
   public dispose(): void {
@@ -49,18 +71,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     this.activeTab = val;
     return true;
   }
-  public get locale(): string {
-    return this.creator.locale;
-  }
-  public set locale(val: string) {
-    this.applyFromSurveyModel(false);
-    this.creator.locale = val;
-    this.disposeModel();
-    this.modelValue = this.createModel();
-    this.model.locale = val;
-    this.setPropertyValue("model", this.model);
-  }
-  public getLocale(): string { return this.locale || "en"; }
+  public getLocale(): string { return this.json?.languages?.creator || "en"; }
   public get json(): ICreatorPresetData {
     return this.preset.getJson();
   }
@@ -84,28 +95,24 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     };
     this.navigationBar.addAction(actionInfo);
   }
-  private addLocaleDropdown(): void {
-    const locales = editorLocalization.getLocales();
-
-    const items = locales.map((loc) => ({ id: loc || "en", title: editorLocalization.getLocaleName(loc || "en") }));
-    const action = createDropdownActionModel({
-      id: "locales",
-      mode: "small",
-      title: <any>new ComputedUpdater<string>(() => editorLocalization.getLocaleName(this.locale))
-    }, {
-      items: items,
-      allowSelection: true,
-      onSelectionChanged: (item: any) => { this.locale = item.id; },
-    });
-    this.navigationBar.addAction(action);
-  }
   protected createModel(): SurveyModel {
     const editablePresets = this.createEditablePresets();
     const model = new SurveyModel(this.getEditModelJson(editablePresets));
     model.editablePresets = editablePresets;
     model.keepIncorrectValues = true;
-    model.showCompleteButton = false;
     model.showPrevButton = false;
+    model.showCompleteButton = false;
+    model.registerFunctionOnPropertyValueChanged("isShowNextButton", () => {
+      model.setPropertyValue("isShowNextButton", true);
+    });
+    const nextButton = model.navigationBar.getActionById("sv-nav-next");
+    nextButton.action = (): void => {
+      if(!model.isLastPage) {
+        model.nextPageUIClick();
+      } else {
+        model.currentPageNo = 0;
+      }
+    };
     editablePresets.forEach(item => item.setupQuestions(model, this));
     const json = this.preset.getJson() || {};
     editablePresets.forEach(item => item.setupQuestionsValue(model, json[item.path], this.creator));
@@ -113,8 +120,17 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     model.onCurrentPageChanged.add((sender, options) => {
       editablePresets.forEach(item => item.setupOnCurrentPage(model, this.creator));
     });
+    model.onValueChanging.add((sender, options) => {
+      if(options.name === "languages_creator") {
+        this.applyFromSurveyModel(true);
+      }
+    });
     model.onValueChanged.add((sender, options) => {
       editablePresets.forEach(item => item.updateOnValueChanged(model, options.name));
+      if(options.name === "languages_creator") {
+        editorLocalization.currentLocale = options.value;
+        editablePresets.forEach(item => item.onLocaleChanged(model, json[item.path], this.creator));
+      }
     });
     model.onMatrixDetailPanelVisibleChanged.add((sender, options) => {
       editablePresets.forEach(item => item.updateOnMatrixDetailPanelVisibleChanged(model, this.creator, options));
@@ -184,6 +200,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     return true;
   }
   private createEditableCore(preset: CreatorPreset, fullPath: string): CreatorPresetEditableBase {
+    if(fullPath === "languages") return new CreatorPresetEditableLanguages(preset);
     if(fullPath === "tabs") return new CreatorPresetEditableTabs(preset);
     if(fullPath === "toolbox") return new CreatorPresetEditableToolboxConfigurator(preset);
     if(fullPath === "propertyGrid") return new CreatorEditablePresetPropertyGrid(preset);
