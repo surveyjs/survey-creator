@@ -455,6 +455,50 @@ test("Drag Drop to collapsed panel", async (t) => {
     .dispatchEvent(toolboxToolAction, "pointerup");
 });
 
+test("Drag Drop to selected collapsed panel", async (t) => {
+  await ClientFunction(() => { window["creator"].expandCollapseButtonVisibility = "always"; })();
+
+  await t.resizeWindow(1600, 1000);
+  const json = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "panel",
+            name: "panel1",
+            elements: [{
+              type: "text",
+              name: "q1"
+            }]
+          }
+        ]
+      }
+    ]
+  };
+  await setJSON(json);
+
+  const qCollapseButton = Selector(".svc-question__content #collapse");
+  await t.click(qCollapseButton.filterVisible());
+
+  const Panel = Selector("[data-sv-drop-target-survey-element=\"panel1\"]");
+  const toolboxToolAction = Selector(".svc-toolbox__tool > .sv-action__content");
+
+  await t
+    .click(Panel, { offsetX: 1, offsetY: 1 })
+    .hover(toolboxToolAction)
+    .dispatchEvent(toolboxToolAction, "pointerdown")
+    .hover(Panel, { offsetX: 100 })
+    .expect(Panel.find(".svc-question__content--collapsed").exists).ok()
+    .expect(Panel.find(".svc-question__content--collapsed").exists).notOk({ timeout: 3000 })
+    .dispatchEvent(toolboxToolAction, "pointerup");
+
+  const resultJson0 = await getJSON();
+  await t.expect(resultJson0).eql(json);
+
+  await t.expect(Selector(".spg-question[data-name=name] input").value).eql("panel1");
+});
+
 test("Drag Drop to collapsed dynamic panel", async (t) => {
   await ClientFunction(() => {
     window["creator"].expandCollapseButtonVisibility = "always";
@@ -522,7 +566,7 @@ test("Drag Drop to collapsed page", async (t) => {
               type: "text",
               name: "q1"
             }]
-          }
+          },
         ]
       }
     ]
@@ -534,6 +578,41 @@ test("Drag Drop to collapsed page", async (t) => {
 
   const Page = Selector(".svc-page");
   const toolboxToolAction = Selector(".svc-toolbox__tool > .sv-action__content");
+  const expectedJson = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "panel",
+            name: "panel1",
+            elements: [{
+              type: "text",
+              name: "q1"
+            }]
+          }, {
+            "type": "radiogroup",
+            "name": "question1",
+            "choices": [
+              "Item 1",
+              "Item 2",
+              "Item 3"
+            ]
+          }
+        ]
+      }
+    ]
+  };
+
+  await t
+    .hover(toolboxToolAction)
+    .dispatchEvent(toolboxToolAction, "pointerdown")
+    .hover(Page, { offsetX: 150 })
+    .expect(Page.find(".svc-page__content--collapsed-drag-over-inside").exists).ok()
+    .dispatchEvent(toolboxToolAction, "pointerup");
+  const resultJson0 = await getJSON();
+  await t.expect(resultJson0).eql(expectedJson);
+
   await t
     .hover(toolboxToolAction)
     .dispatchEvent(toolboxToolAction, "pointerdown")
