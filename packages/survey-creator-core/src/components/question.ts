@@ -34,7 +34,7 @@ import { SurveyElementAdornerBase } from "./action-container-view-model";
 require("./question.scss");
 import { settings } from "../creator-settings";
 import { StringEditorConnector, StringItemsNavigatorBase } from "./string-editor";
-import { DragDropSurveyElements } from "../survey-elements";
+import { DragDropSurveyElements, isPanelDynamic } from "../survey-elements";
 import { QuestionToolbox, QuestionToolboxItem } from "../toolbox";
 
 export interface QuestionBannerParams {
@@ -130,49 +130,47 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
 
     if (this.isDragMe) {
       result += " svc-question__content--dragged";
+    }
+
+    if (!!this.dragTypeOverMe && (this.canExpandOnDrag) && this.dragInsideCollapsedContainer) {
+      this.dragIn();
+      result += " svc-question__content--collapsed-drag-over-inside";
     } else {
-      result = result.replace(" svc-question__content--dragged", "");
+      this.dragOut();
     }
 
     if (this.dragTypeOverMe === DragTypeOverMeEnum.InsideEmptyPanel) {
       result += " svc-question__content--drag-over-inside";
-    } else {
-      result = result.replace(" svc-question__content--drag-over-inside", "");
     }
+    if (!this.dragInsideCollapsedContainer) {
+      if (this.dragTypeOverMe === DragTypeOverMeEnum.Left) {
+        result += " svc-question__content--drag-over-left";
+      }
 
-    if (this.dragTypeOverMe === DragTypeOverMeEnum.Left) {
-      result += " svc-question__content--drag-over-left";
-    } else {
-      result = result.replace(" svc-question__content--drag-over-left", "");
-    }
+      if (this.dragTypeOverMe === DragTypeOverMeEnum.Right) {
+        result += " svc-question__content--drag-over-right";
+      }
 
-    if (this.dragTypeOverMe === DragTypeOverMeEnum.Right) {
-      result += " svc-question__content--drag-over-right";
-    } else {
-      result = result.replace(" svc-question__content--drag-over-right", "");
-    }
-
-    if (this.dragTypeOverMe === DragTypeOverMeEnum.Top) {
-      result += " svc-question__content--drag-over-top";
-    } else {
-      result = result.replace(" svc-question__content--drag-over-top", "");
-    }
-
-    if (this.dragTypeOverMe === DragTypeOverMeEnum.Bottom) {
-      result += " svc-question__content--drag-over-bottom";
-    } else {
-      result = result.replace(" svc-question__content--drag-over-bottom", "");
-    }
-    if (this.creator) {
-      result = this.creator.getElementAddornerCssCallback(this.surveyElement, result);
+      if (this.dragTypeOverMe === DragTypeOverMeEnum.Top) {
+        result += " svc-question__content--drag-over-top";
+      }
+      if (this.dragTypeOverMe === DragTypeOverMeEnum.Bottom) {
+        result += " svc-question__content--drag-over-bottom";
+      }
+      if (this.creator) {
+        result = this.creator.getElementAddornerCssCallback(this.surveyElement, result);
+      }
     }
     return result;
   }
-
+  protected expandWithDragIn() {
+    super.expandWithDragIn();
+    this.element.dragTypeOverMe = null;
+    this.creator.dragDropSurveyElements.dropTarget = null;
+  }
   get isDragMe(): boolean {
     return this.surveyElement.isDragMe;
   }
-
   get dragTypeOverMe() {
     return this.element.dragTypeOverMe;
   }
