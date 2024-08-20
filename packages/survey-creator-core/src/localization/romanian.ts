@@ -654,13 +654,6 @@ export const roStrings = {
     allowResizeComment: "Permite utilizatorilor să redimensioneze zonele de text",
     textUpdateMode: "Actualizează valorile câmpurilor de intrare",
     maskType: "Tip mască de intrare",
-    maskTypes: {
-      none: "Niciuna",
-      patternmask: "Model",
-      numericmask: "Numeric",
-      datetimemask: "Dată și oră",
-      currencymask: "Valută"
-    },
     focusOnFirstError: "Focalizați pe primul răspuns invalid",
     checkErrorsMode: "Rulați validarea",
     validateVisitedEmptyFields: "Validarea câmpurilor goale pentru focalizarea pierdută",
@@ -995,6 +988,13 @@ export const roStrings = {
       url: "URL",
       week: "Săptămână"
     },
+    maskType: {
+      none: "Niciunul",
+      pattern: "Model",
+      numeric: "Numerică",
+      datetime: "Data și ora",
+      currency: "Valută"
+    },
     all: "Toate",
     page: "Pagină",
     survey: "Chestionar",
@@ -1153,6 +1153,10 @@ export const roStrings = {
     isPanelless: {
       "false": "Implicit",
       "true": "Fără panouri"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "La fel ca sondajul",
+      container: "La fel ca containerul"
     }
   },
   // Operators
@@ -1310,7 +1314,8 @@ export const roStrings = {
     },
     file: {
       imageHeight: "Reglează înălțimea imaginii în rezultatele chestionarului.",
-      imageWidth: "Reglează lățimea imaginii în rezultatele chestionarului."
+      imageWidth: "Reglează lățimea imaginii în rezultatele chestionarului.",
+      allowImagesPreview: "Afișează previzualizări în miniatură pentru fișierele încărcate atunci când este posibil. Deselectați dacă doriți să afișați pictogramele fișierelor."
     },
     image: {
       contentMode: "Opțiunea „Auto” determină automat modul potrivit pentru afișare - Imagine, Video sau YouTube - pe baza URL-ului sursă furnizat."
@@ -1484,7 +1489,8 @@ export const roStrings = {
     panellayoutcolumn: {
       effectiveWidth: "Acceptă valori în %.",
       questionTitleWidth: "Acceptă valori în px."
-    }
+    },
+    progressBarInheritWidthFrom: "Opțiunea \"La fel ca containerul\" ajustează automat lățimea zonei barei de progres pentru a se potrivi cu elementul HTML în care este plasat sondajul."
   },
   // Properties
   p: {
@@ -1588,7 +1594,8 @@ export const roStrings = {
     scaleColorMode: "Modul de culoare al pictogramei de evaluare",
     rateColorMode: "Schema de culori a pictogramelor Smileys",
     copyDisplayValue: "Copiază valoarea afișată",
-    effectiveColSpan: "Span de coloană eficient"
+    effectiveColSpan: "Span de coloană eficient",
+    progressBarInheritWidthFrom: "Lățimea zonei barei de progres"
   },
   theme: {
     advancedMode: "Mod avansat",
@@ -1656,3 +1663,13 @@ editorLocalization.locales["ro"] = roStrings;
 // Remove those strings that you have corrected manually
 // pe.validateVisitedEmptyFields: "Validate empty fields on lost focus" => "Validarea câmpurilor goale pentru focalizarea pierdută"
 // pehelp.validateVisitedEmptyFields: "Enable this option to trigger validation when a user focuses on an empty input field and then leaves it without making any changes." => "Activați această opțiune pentru a declanșa validarea atunci când un utilizator se concentrează pe un câmp de introducere gol și apoi îl lasă fără a efectua modificări."
+// progressBarInheritWidthFrom.survey: "Same as survey" => "La fel ca sondajul"
+// progressBarInheritWidthFrom.container: "Same as container" => "La fel ca containerul"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Afișează previzualizări în miniatură pentru fișierele încărcate atunci când este posibil. Deselectați dacă doriți să afișați pictogramele fișierelor."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "Opțiunea \"La fel ca containerul\" ajustează automat lățimea zonei barei de progres pentru a se potrivi cu elementul HTML în care este plasat sondajul."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "Lățimea zonei barei de progres"
+// maskType.none: "None" => "Niciunul"
+// maskType.pattern: "Pattern" => "Model"
+// maskType.numeric: "Numeric" => "Numerică"
+// maskType.datetime: "Date and Time" => "Data și ora"
+// maskType.currency: "Currency" => "Valută"

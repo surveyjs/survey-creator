@@ -654,13 +654,6 @@ var frenchTranslation = {
     allowResizeComment: "Autoriser les utilisateurs à redimensionner les zones de texte",
     textUpdateMode: "Mettre à jour la valeur de la question textuelle",
     maskType: "Type de masque de saisie",
-    maskTypes: {
-      none: "Aucun",
-      patternmask: "Modèle",
-      numericmask: "Numérique",
-      datetimemask: "Date et heure",
-      currencymask: "Monnaie"
-    },
     focusOnFirstError: "Renvoyer vers la première question ayant une erreur",
     checkErrorsMode: "Exécuter la validation",
     validateVisitedEmptyFields: "Valider les champs vides en cas de perte de focus",
@@ -995,6 +988,13 @@ var frenchTranslation = {
       url: "URL",
       week: "Semaine"
     },
+    maskType: {
+      none: "Aucun",
+      pattern: "Modèle",
+      numeric: "Numérique",
+      datetime: "Date et heure",
+      currency: "Monnaie"
+    },
     all: "Tous",
     page: "Page",
     survey: "Sondage",
@@ -1153,6 +1153,10 @@ var frenchTranslation = {
     isPanelless: {
       "false": "Faire défaut",
       "true": "Sans panneaux"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "Identique à l’enquête",
+      container: "Identique au conteneur"
     }
   },
   // Operators
@@ -1310,7 +1314,8 @@ var frenchTranslation = {
     },
     file: {
       imageHeight: "Ajuste la hauteur de l’image dans les résultats de l’enquête.",
-      imageWidth: "Ajuste la largeur de l’image dans les résultats de l’enquête."
+      imageWidth: "Ajuste la largeur de l’image dans les résultats de l’enquête.",
+      allowImagesPreview: "Affiche des aperçus miniatures pour les fichiers téléchargés lorsque cela est possible. Désélectionnez si vous souhaitez afficher les icônes de fichier à la place."
     },
     image: {
       contentMode: "L’option « Auto » détermine automatiquement le mode d’affichage approprié - Image, Vidéo ou YouTube - en fonction de l’URL source fournie."
@@ -1484,7 +1489,8 @@ var frenchTranslation = {
     panellayoutcolumn: {
       effectiveWidth: "Accepte les valeurs %.",
       questionTitleWidth: "Accepte les valeurs px."
-    }
+    },
+    progressBarInheritWidthFrom: "L’option « Identique au conteneur » ajuste automatiquement la largeur de la zone de la barre de progression pour s’adapter à l’élément HTML dans lequel l’enquête est placée."
   },
   // Properties
   p: {
@@ -1588,7 +1594,8 @@ var frenchTranslation = {
     scaleColorMode: "Mode de couleur de mise à l’échelle",
     rateColorMode: "Évaluer le mode de couleur",
     copyDisplayValue: "Copier la valeur d’affichage",
-    effectiveColSpan: "Portée de poteau"
+    effectiveColSpan: "Portée de poteau",
+    progressBarInheritWidthFrom: "Largeur de la zone de la barre de progression"
   },
   theme: {
     advancedMode: "Mode avancé",
@@ -2784,3 +2791,13 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Accepte les valeurs %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Accepte les valeurs px."
 // p.effectiveColSpan: "Column span" => "Portée de poteau"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "Identique à l’enquête"
+// progressBarInheritWidthFrom.container: "Same as container" => "Identique au conteneur"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Affiche des aperçus miniatures pour les fichiers téléchargés lorsque cela est possible. Désélectionnez si vous souhaitez afficher les icônes de fichier à la place."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "L’option « Identique au conteneur » ajuste automatiquement la largeur de la zone de la barre de progression pour s’adapter à l’élément HTML dans lequel l’enquête est placée."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "Largeur de la zone de la barre de progression"
+// maskType.none: "None" => "Aucun"
+// maskType.pattern: "Pattern" => "Modèle"
+// maskType.numeric: "Numeric" => "Numérique"
+// maskType.datetime: "Date and Time" => "Date et heure"
+// maskType.currency: "Currency" => "Monnaie"

@@ -654,13 +654,6 @@ export var koreanStrings = {
     allowResizeComment: "사용자가 텍스트 영역의 크기를 조정할 수 있도록 허용",
     textUpdateMode: "텍스트 질문 값 업데이트",
     maskType: "입력 마스크 유형",
-    maskTypes: {
-      none: "없음",
-      patternmask: "무늬",
-      numericmask: "숫자",
-      datetimemask: "날짜 및 시간",
-      currencymask: "통화"
-    },
     focusOnFirstError: "첫 번째 오답에 포커스 설정",
     checkErrorsMode: "유효성 검사 실행",
     validateVisitedEmptyFields: "초점이 손실된 빈 필드 유효성 검사",
@@ -995,6 +988,13 @@ export var koreanStrings = {
       url: "URL (영문)",
       week: "주"
     },
+    maskType: {
+      none: "없음",
+      pattern: "무늬",
+      numeric: "숫자",
+      datetime: "날짜 및 시간",
+      currency: "통화"
+    },
     all: "모두",
     page: "페이지",
     survey: "설문지",
@@ -1153,6 +1153,10 @@ export var koreanStrings = {
     isPanelless: {
       "false": "기본값",
       "true": "패널 없음"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "설문 조사와 동일",
+      container: "컨테이너와 동일"
     }
   },
   // Operators
@@ -1310,7 +1314,8 @@ export var koreanStrings = {
     },
     file: {
       imageHeight: "현장조사 결과에서 이미지의 높이를 조정합니다.",
-      imageWidth: "현장조사 결과에서 이미지의 너비를 조정합니다."
+      imageWidth: "현장조사 결과에서 이미지의 너비를 조정합니다.",
+      allowImagesPreview: "가능한 경우 업로드된 파일에 대한 썸네일 미리보기를 표시합니다. 대신 파일 아이콘을 표시하려면 선택을 취소합니다."
     },
     image: {
       contentMode: "\"자동\" 옵션은 제공된 소스 URL을 기반으로 표시에 적합한 모드(이미지, 비디오 또는 YouTube)를 자동으로 결정합니다."
@@ -1484,7 +1489,8 @@ export var koreanStrings = {
     panellayoutcolumn: {
       effectiveWidth: "% 값을 허용합니다.",
       questionTitleWidth: "px 값을 허용합니다."
-    }
+    },
+    progressBarInheritWidthFrom: "\"컨테이너와 동일\" 옵션은 설문조사가 배치된 HTML 요소에 맞게 진행률 표시줄 영역 너비를 자동으로 조정합니다."
   },
   // Properties
   p: {
@@ -1588,7 +1594,8 @@ export var koreanStrings = {
     scaleColorMode: "스케일 컬러 모드",
     rateColorMode: "비율 색상 모드",
     copyDisplayValue: "표시 값 복사",
-    effectiveColSpan: "열 범위"
+    effectiveColSpan: "열 범위",
+    progressBarInheritWidthFrom: "진행률 표시줄 영역 너비"
   },
   theme: {
     advancedMode: "어드밴스드 모드",
@@ -2927,3 +2934,13 @@ editorLocalization.locales["ko"] = koreanStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "% 값을 허용합니다."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "px 값을 허용합니다."
 // p.effectiveColSpan: "Column span" => "열 범위"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "설문 조사와 동일"
+// progressBarInheritWidthFrom.container: "Same as container" => "컨테이너와 동일"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "가능한 경우 업로드된 파일에 대한 썸네일 미리보기를 표시합니다. 대신 파일 아이콘을 표시하려면 선택을 취소합니다."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "\"컨테이너와 동일\" 옵션은 설문조사가 배치된 HTML 요소에 맞게 진행률 표시줄 영역 너비를 자동으로 조정합니다."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "진행률 표시줄 영역 너비"
+// maskType.none: "None" => "없음"
+// maskType.pattern: "Pattern" => "무늬"
+// maskType.numeric: "Numeric" => "숫자"
+// maskType.datetime: "Date and Time" => "날짜 및 시간"
+// maskType.currency: "Currency" => "통화"

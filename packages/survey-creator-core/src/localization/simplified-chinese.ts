@@ -654,13 +654,6 @@ var simplifiedChineseTranslation = {
     allowResizeComment: "允许用户调整文本区域的大小",
     textUpdateMode: "更新文本问题值",
     maskType: "输入掩码类型",
-    maskTypes: {
-      none: "没有",
-      patternmask: "模式",
-      numericmask: "数值的",
-      datetimemask: "日期和时间",
-      currencymask: "货币"
-    },
     focusOnFirstError: "将焦点放在第一个无效答案上",
     checkErrorsMode: "运行验证",
     validateVisitedEmptyFields: "验证失去焦点时的空字段",
@@ -995,6 +988,13 @@ var simplifiedChineseTranslation = {
       url: "网址",
       week: "周"
     },
+    maskType: {
+      none: "没有",
+      pattern: "模式",
+      numeric: "数值的",
+      datetime: "日期和时间",
+      currency: "货币"
+    },
     all: "全部",
     page: "页",
     survey: "问卷",
@@ -1153,6 +1153,10 @@ var simplifiedChineseTranslation = {
     isPanelless: {
       "false": "违约",
       "true": "不带面板"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "与调查相同",
+      container: "与容器相同"
     }
   },
   // Operators
@@ -1310,7 +1314,8 @@ var simplifiedChineseTranslation = {
     },
     file: {
       imageHeight: "调整调查结果中图像的高度。",
-      imageWidth: "调整调查结果中图像的宽度。"
+      imageWidth: "调整调查结果中图像的宽度。",
+      allowImagesPreview: "尽可能显示已上传文件的缩略图预览。取消选择是否要显示文件图标。"
     },
     image: {
       contentMode: "“自动”选项会根据提供的源 URL 自动确定适合的显示模式 - 图像、视频或 YouTube。"
@@ -1484,7 +1489,8 @@ var simplifiedChineseTranslation = {
     panellayoutcolumn: {
       effectiveWidth: "接受值 %。",
       questionTitleWidth: "接受值 px。"
-    }
+    },
+    progressBarInheritWidthFrom: "“与容器相同”选项会自动调整进度条区域的宽度，以适应放置调查的 HTML 元素。"
   },
   // Properties
   p: {
@@ -1588,7 +1594,8 @@ var simplifiedChineseTranslation = {
     scaleColorMode: "缩放颜色模式",
     rateColorMode: "评价颜色模式",
     copyDisplayValue: "复制显示值",
-    effectiveColSpan: "柱跨度"
+    effectiveColSpan: "柱跨度",
+    progressBarInheritWidthFrom: "进度条区域宽度"
   },
   theme: {
     advancedMode: "高级模式",
@@ -2865,3 +2872,13 @@ editorLocalization.locales["zh-cn"] = simplifiedChineseTranslation;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "接受值 %。"
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "接受值 px。"
 // p.effectiveColSpan: "Column span" => "柱跨度"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "与调查相同"
+// progressBarInheritWidthFrom.container: "Same as container" => "与容器相同"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "尽可能显示已上传文件的缩略图预览。取消选择是否要显示文件图标。"
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "“与容器相同”选项会自动调整进度条区域的宽度，以适应放置调查的 HTML 元素。"
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "进度条区域宽度"
+// maskType.none: "None" => "没有"
+// maskType.pattern: "Pattern" => "模式"
+// maskType.numeric: "Numeric" => "数值的"
+// maskType.datetime: "Date and Time" => "日期和时间"
+// maskType.currency: "Currency" => "货币"

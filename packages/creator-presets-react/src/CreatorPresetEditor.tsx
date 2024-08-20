@@ -47,6 +47,19 @@ export class CreatorPresetEditorComponent extends SurveyElementBase<ICreatorPres
   private renderResults() {
     const text = JSON.stringify(this.editor.json, null, 2);
     const style = { width: "100%", height: "100%" };
-    return <textarea readOnly={true} style={style}>{text}</textarea>;
+    const textStyle = { padding: "7px" };
+    const codeText = `import { CreatorPreset } from "survey-creator-core";
+
+const preset = new CreatorPreset(yourPresetJSON_you_found_it_bellow);
+preset.apply(creator);
+`;
+    return <>
+      <div style={textStyle}>Please use the following code to apply your preset:
+        <div>
+          <pre><code>{codeText}</code></pre>
+        </div>
+      </div>
+      <textarea readOnly={true} style={style}>{text}</textarea>
+    </>;
   }
 }

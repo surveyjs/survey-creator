@@ -157,6 +157,41 @@ test("set property grid defintion", () => {
   expect(panels[0].elements).toHaveLength(3);
   expect(panels[1].elements).toHaveLength(2);
 });
+test("set property grid defintion: make general tab not the first one", () => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  creator.selectQuestionByName("q1");
+  const preset = new CreatorPreset({
+    propertyGrid: {
+      definition: {
+        autoGenerateProperties: false,
+        classes: {
+          question: {
+            properties: [
+              "name",
+              "title",
+              "indent",
+              { name: "visibleIf", tab: "logic" },
+              { name: "enableIf", tab: "logic" },
+            ],
+            tabs: [
+              { name: "logic", index: 10 },
+              { name: "general", index: 30 }
+            ]
+          },
+        }
+      }
+    }
+  });
+  preset.apply(creator);
+  const survey = creator.propertyGrid;
+  const panels = survey.getAllPanels();
+  expect(panels).toHaveLength(2);
+  expect(panels[0].name).toBe("logic");
+  expect(panels[1].name).toBe("general");
+  expect(panels[0].elements).toHaveLength(2);
+  expect(panels[1].elements).toHaveLength(3);
+});
 test("apply localization for tabs", () => {
   expect(editorLocalization.presetStrings).toBeFalsy();
   expect(editorLocalization.getString("tabs.logic")).toEqual("Logic");

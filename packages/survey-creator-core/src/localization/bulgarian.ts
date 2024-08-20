@@ -654,13 +654,6 @@ export var bgStrings = {
     allowResizeComment: "Позволява на потребителите да преоразмеряват текстови области",
     textUpdateMode: "Актуализиране стойността на текстовия въпрос",
     maskType: "Тип маска за въвеждане",
-    maskTypes: {
-      none: "Никой",
-      patternmask: "Шарка",
-      numericmask: "Цифров",
-      datetimemask: "Дата и час",
-      currencymask: "Валута"
-    },
     focusOnFirstError: "Фокусиране върху първия невалиден отговор",
     checkErrorsMode: "Стартиране на валидацията",
     validateVisitedEmptyFields: "Проверка на празни полета при загубен фокус",
@@ -995,6 +988,13 @@ export var bgStrings = {
       url: "URL",
       week: "Седмица"
     },
+    maskType: {
+      none: "Никой",
+      pattern: "Шарка",
+      numeric: "Цифров",
+      datetime: "Дата и час",
+      currency: "Валута"
+    },
     all: "Всички",
     page: "Старница",
     survey: "Анкета",
@@ -1153,6 +1153,10 @@ export var bgStrings = {
     isPanelless: {
       "false": "По подразбиране",
       "true": "Без панели"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "Същото като проучването",
+      container: "Същото като контейнера"
     }
   },
   // Operators
@@ -1310,7 +1314,8 @@ export var bgStrings = {
     },
     file: {
       imageHeight: "Регулира височината на изображението в резултатите от проучването.",
-      imageWidth: "Регулира ширината на изображението в резултатите от проучването."
+      imageWidth: "Регулира ширината на изображението в резултатите от проучването.",
+      allowImagesPreview: "Показва визуализации на миниатюри за качени файлове, когато е възможно. Премахнете отметката, ако вместо това искате да показвате икони на файлове."
     },
     image: {
       contentMode: "Опцията \"Auto\" автоматично определя подходящия режим за показване - Image, Video или YouTube - въз основа на предоставения URL адрес на източника."
@@ -1484,7 +1489,8 @@ export var bgStrings = {
     panellayoutcolumn: {
       effectiveWidth: "Приема стойности %.",
       questionTitleWidth: "Приема стойности px."
-    }
+    },
+    progressBarInheritWidthFrom: "Опцията \"Същото като контейнер\" автоматично регулира ширината на областта на лентата за напредъка, за да се побере в HTML елемента, в който е поставена анкетата."
   },
   // Properties
   p: {
@@ -1588,7 +1594,8 @@ export var bgStrings = {
     scaleColorMode: "Режим на мащабиране на цветовете",
     rateColorMode: "Режим на оценяване на цветовете",
     copyDisplayValue: "Копиране на показваната стойност",
-    effectiveColSpan: "Обхват на колоната"
+    effectiveColSpan: "Обхват на колоната",
+    progressBarInheritWidthFrom: "Ширина на областта на лентата за напредък"
   },
   theme: {
     advancedMode: "Разширен режим",
@@ -2286,3 +2293,13 @@ editorLocalization.locales["bg"] = bgStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Приема стойности %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Приема стойности px."
 // p.effectiveColSpan: "Column span" => "Обхват на колоната"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "Същото като проучването"
+// progressBarInheritWidthFrom.container: "Same as container" => "Същото като контейнера"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Показва визуализации на миниатюри за качени файлове, когато е възможно. Премахнете отметката, ако вместо това искате да показвате икони на файлове."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "Опцията \"Същото като контейнер\" автоматично регулира ширината на областта на лентата за напредъка, за да се побере в HTML елемента, в който е поставена анкетата."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "Ширина на областта на лентата за напредък"
+// maskType.none: "None" => "Никой"
+// maskType.pattern: "Pattern" => "Шарка"
+// maskType.numeric: "Numeric" => "Цифров"
+// maskType.datetime: "Date and Time" => "Дата и час"
+// maskType.currency: "Currency" => "Валута"

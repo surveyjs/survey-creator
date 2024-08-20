@@ -654,13 +654,6 @@ var polishStrings = {
     allowResizeComment: "Zezwalaj użytkownikom na zmianę rozmiaru obszarów tekstu",
     textUpdateMode: "Aktualizowanie wartości pytania tekstowego",
     maskType: "Typ maski wprowadzania",
-    maskTypes: {
-      none: "Żaden",
-      patternmask: "Deseń",
-      numericmask: "Numeryczny",
-      datetimemask: "Data i godzina",
-      currencymask: "Waluta"
-    },
     focusOnFirstError: "Ustaw fokus na pierwszej nieprawidłowej odpowiedzi",
     checkErrorsMode: "Sprawdzanie poprawności uruchamiania",
     validateVisitedEmptyFields: "Weryfikowanie pustych pól w przypadku utraty fokusu",
@@ -995,6 +988,13 @@ var polishStrings = {
       url: "Adres URL",
       week: "Tydzień"
     },
+    maskType: {
+      none: "Żaden",
+      pattern: "Deseń",
+      numeric: "Numeryczny",
+      datetime: "Data i godzina",
+      currency: "Waluta"
+    },
     all: "Cały",
     page: "Strona",
     survey: "Sondaż",
@@ -1153,6 +1153,10 @@ var polishStrings = {
     isPanelless: {
       "false": "Domyślny",
       "true": "Bez paneli"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "Tak samo jak w przypadku ankiety",
+      container: "Tak samo jak kontener"
     }
   },
   // Operators
@@ -1310,7 +1314,8 @@ var polishStrings = {
     },
     file: {
       imageHeight: "Dostosowuje wysokość obrazu w wynikach ankiety.",
-      imageWidth: "Dostosowuje szerokość obrazu w wynikach ankiety."
+      imageWidth: "Dostosowuje szerokość obrazu w wynikach ankiety.",
+      allowImagesPreview: "Wyświetla podgląd miniatur przesłanych plików, jeśli to możliwe. Usuń zaznaczenie, jeśli zamiast tego chcesz wyświetlać ikony plików."
     },
     image: {
       contentMode: "Opcja \"Auto\" automatycznie określa odpowiedni tryb wyświetlania - Obraz, Wideo lub YouTube - na podstawie podanego źródłowego adresu URL."
@@ -1484,7 +1489,8 @@ var polishStrings = {
     panellayoutcolumn: {
       effectiveWidth: "Akceptuje wartości %.",
       questionTitleWidth: "Akceptuje wartości px."
-    }
+    },
+    progressBarInheritWidthFrom: "Opcja \"Tak samo jak kontener\" automatycznie dostosowuje szerokość obszaru paska postępu, aby pasowała do elementu HTML, w którym umieszczona jest ankieta."
   },
   // Properties
   p: {
@@ -1588,7 +1594,8 @@ var polishStrings = {
     scaleColorMode: "Tryb skalowania kolorów",
     rateColorMode: "Oceń tryb kolorów",
     copyDisplayValue: "Kopiowanie wyświetlanej wartości",
-    effectiveColSpan: "Rozpiętość kolumn"
+    effectiveColSpan: "Rozpiętość kolumn",
+    progressBarInheritWidthFrom: "Szerokość obszaru paska postępu"
   },
   theme: {
     advancedMode: "Tryb zaawansowany",
@@ -2990,3 +2997,13 @@ editorLocalization.locales["pl"] = polishStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Akceptuje wartości %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Akceptuje wartości px."
 // p.effectiveColSpan: "Column span" => "Rozpiętość kolumn"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "Tak samo jak w przypadku ankiety"
+// progressBarInheritWidthFrom.container: "Same as container" => "Tak samo jak kontener"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Wyświetla podgląd miniatur przesłanych plików, jeśli to możliwe. Usuń zaznaczenie, jeśli zamiast tego chcesz wyświetlać ikony plików."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "Opcja \"Tak samo jak kontener\" automatycznie dostosowuje szerokość obszaru paska postępu, aby pasowała do elementu HTML, w którym umieszczona jest ankieta."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "Szerokość obszaru paska postępu"
+// maskType.none: "None" => "Żaden"
+// maskType.pattern: "Pattern" => "Deseń"
+// maskType.numeric: "Numeric" => "Numeryczny"
+// maskType.datetime: "Date and Time" => "Data i godzina"
+// maskType.currency: "Currency" => "Waluta"

@@ -656,13 +656,6 @@ export var enStrings = {
     allowResizeComment: "Allow users to resize text areas",
     textUpdateMode: "Update input field values",
     maskType: "Input mask type",
-    maskTypes: {
-      none: "None",
-      patternmask: "Pattern",
-      numericmask: "Numeric",
-      datetimemask: "Date and Time",
-      currencymask: "Currency"
-    },
     focusOnFirstError: "Set focus on the first invalid answer",
     checkErrorsMode: "Run validation",
     validateVisitedEmptyFields: "Validate empty fields on lost focus",
@@ -998,6 +991,13 @@ export var enStrings = {
       url: "URL",
       week: "Week"
     },
+    maskType: {
+      none: "None",
+      pattern: "Pattern",
+      numeric: "Numeric",
+      datetime: "Date and Time",
+      currency: "Currency"
+    },
     all: "All",
     page: "Page",
     survey: "Survey",
@@ -1157,6 +1157,10 @@ export var enStrings = {
       false: "Default",
       true: "Without Panels",
     },
+    progressBarInheritWidthFrom: {
+      survey: "Same as survey",
+      container: "Same as container"
+    }
   },
   // Operators
   op: {
@@ -1493,6 +1497,7 @@ export var enStrings = {
       effectiveWidth: "Accepts values %.",
       questionTitleWidth: "Accepts values px."
     },
+    progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in."
   },
   // Properties
   p: {
@@ -1597,6 +1602,7 @@ export var enStrings = {
     rateColorMode: "Smileys color scheme",
     copyDisplayValue: "Copy display value", // Auto-generated string
     effectiveColSpan: "Column span",
+    progressBarInheritWidthFrom: "Progress bar area width",
   },
   theme: {
     advancedMode: "Advanced mode",

@@ -685,7 +685,6 @@ const defaultProperties: ISurveyPropertiesDefinition = {
     ],
     tabs: [
       { name: "questionSettings", index: 100 },
-      { name: "layout", index: 150 },
       { name: "logic", index: 200 },
       { name: "data", index: 300 },
       { name: "validation", index: 400 }
@@ -708,7 +707,10 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "showQuestionNumbers", tab: "numbering" },
       { name: "questionStartIndex", tab: "numbering" }
     ],
-    tabs: [{ name: "numbering", index: 350 }]
+    tabs: [
+      { name: "layout", index: 150 },
+      { name: "numbering", index: 350 }
+    ]
   },
   page: {
     properties: [

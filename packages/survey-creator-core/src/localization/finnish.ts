@@ -654,13 +654,6 @@ export var fiStrings = {
     allowResizeComment: "Salli käyttäjien muuttaa tekstialueiden kokoa",
     textUpdateMode: "Tekstikysymyksen arvon päivittäminen",
     maskType: "Syöttörajoitteen tyyppi",
-    maskTypes: {
-      none: "Ei lainkaan",
-      patternmask: "Kuvio",
-      numericmask: "Numeerinen",
-      datetimemask: "Päivämäärä ja kellonaika",
-      currencymask: "Valuutta"
-    },
     focusOnFirstError: "Aseta kohdistus ensimmäiseen virheelliseen vastaukseen",
     checkErrorsMode: "Suorita vahvistus",
     validateVisitedEmptyFields: "Vahvista tyhjät kentät, kun kohdistus on kadonnut",
@@ -995,6 +988,13 @@ export var fiStrings = {
       url: "URL",
       week: "Viikko"
     },
+    maskType: {
+      none: "Ei lainkaan",
+      pattern: "Kuvio",
+      numeric: "Numeerinen",
+      datetime: "Päivämäärä ja kellonaika",
+      currency: "Valuutta"
+    },
     all: "all",
     page: "page",
     survey: "survey",
@@ -1153,6 +1153,10 @@ export var fiStrings = {
     isPanelless: {
       "false": "Laiminlyönti",
       "true": "Ilman paneeleja"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "Sama kuin kyselyssä",
+      container: "Sama kuin kontti"
     }
   },
   // Operators
@@ -1310,7 +1314,8 @@ export var fiStrings = {
     },
     file: {
       imageHeight: "Säätää kuvan korkeutta kyselyn tuloksissa.",
-      imageWidth: "Säätää kuvan leveyttä kyselyn tuloksissa."
+      imageWidth: "Säätää kuvan leveyttä kyselyn tuloksissa.",
+      allowImagesPreview: "Näyttää ladattujen tiedostojen pikkukuvien esikatselut, kun mahdollista. Poista valinta, jos haluat näyttää tiedostokuvakkeet sen sijaan."
     },
     image: {
       contentMode: "\"Auto\" -vaihtoehto määrittää automaattisesti sopivan näyttötilan - Kuva, Video tai YouTube - annetun lähde-URL-osoitteen perusteella."
@@ -1484,7 +1489,8 @@ export var fiStrings = {
     panellayoutcolumn: {
       effectiveWidth: "Hyväksyy arvot %.",
       questionTitleWidth: "Hyväksyy arvot px."
-    }
+    },
+    progressBarInheritWidthFrom: "Sama kuin säilö -vaihtoehto säätää edistymispalkin alueen leveyttä automaattisesti sopimaan HTML-elementtiin, johon kysely sijoitetaan."
   },
   // Properties
   p: {
@@ -1588,7 +1594,8 @@ export var fiStrings = {
     scaleColorMode: "Skaalaa väriä -tila",
     rateColorMode: "Arvioi väritila",
     copyDisplayValue: "Kopioi näyttöarvo",
-    effectiveColSpan: "Sarakkeen jänneväli"
+    effectiveColSpan: "Sarakkeen jänneväli",
+    progressBarInheritWidthFrom: "Edistymispalkin alueen leveys"
   },
   theme: {
     advancedMode: "Edistynyt tila",
@@ -2723,3 +2730,13 @@ editorLocalization.locales["fi"] = fiStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Hyväksyy arvot %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Hyväksyy arvot px."
 // p.effectiveColSpan: "Column span" => "Sarakkeen jänneväli"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "Sama kuin kyselyssä"
+// progressBarInheritWidthFrom.container: "Same as container" => "Sama kuin kontti"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Näyttää ladattujen tiedostojen pikkukuvien esikatselut, kun mahdollista. Poista valinta, jos haluat näyttää tiedostokuvakkeet sen sijaan."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "Sama kuin säilö -vaihtoehto säätää edistymispalkin alueen leveyttä automaattisesti sopimaan HTML-elementtiin, johon kysely sijoitetaan."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "Edistymispalkin alueen leveys"
+// maskType.none: "None" => "Ei lainkaan"
+// maskType.pattern: "Pattern" => "Kuvio"
+// maskType.numeric: "Numeric" => "Numeerinen"
+// maskType.datetime: "Date and Time" => "Päivämäärä ja kellonaika"
+// maskType.currency: "Currency" => "Valuutta"
