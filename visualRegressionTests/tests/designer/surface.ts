@@ -310,7 +310,7 @@ test("Matrix column vertical", async (t) => {
 
 test("Matrix column editor boolean", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1924, 900);
+    await t.resizeWindow(1956, 900);
     const surveyJSON = {
       "pages": [
         {
@@ -674,7 +674,7 @@ test("Panel gap between items", async (t) => {
 
 test("Panel multi-question row", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1924, 900);
+    await t.resizeWindow(1956, 900);
     const json = {
       "logoPosition": "right",
       "pages": [
@@ -1094,7 +1094,7 @@ test("Check question adorner width", async (t) => {
 
 test("Check question scroll", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1920, 1080);
+    await t.resizeWindow(1952, 1080);
     await setJSON({
       "logoPosition": "right",
       "pages": [
@@ -1805,6 +1805,15 @@ test("Narrow question placeholder", async (t) => {
               "minWidth": "200px"
             },
             {
+              "type": "panel",
+              "name": "panel1z",
+              "maxWidth": "200px",
+              "minWidth": "200px",
+              "title": "Title",
+              "startWithNewLine": false,
+              "isRequired": true
+            },
+            {
               "type": "paneldynamic",
               "name": "panel1",
               "maxWidth": "200px",
@@ -1833,6 +1842,15 @@ test("Narrow question placeholder", async (t) => {
               "minWidth": "400px"
             },
             {
+              "type": "panel",
+              "name": "panel11",
+              "maxWidth": "400px",
+              "minWidth": "400px",
+              "title": "Title",
+              "startWithNewLine": false,
+              "isRequired": true
+            },
+            {
               "type": "paneldynamic",
               "name": "panel1",
               "maxWidth": "400px",
@@ -1848,7 +1866,7 @@ test("Narrow question placeholder", async (t) => {
               "startWithNewLine": false
             },
             {
-              "type": "html",
+              "type": "image",
               "name": "question3",
               "maxWidth": "400px",
               "minWidth": "400px",
@@ -1864,20 +1882,23 @@ test("Narrow question placeholder", async (t) => {
     })();
     const qContent = Selector(".svc-question__content");
     await takeElementScreenshot("panel-placeholder.png", qContent.nth(0), t, comparer);
+    await takeElementScreenshot("panel-title-placeholder.png", qContent.nth(1), t, comparer);
 
-    await takeElementScreenshot("panel-dynamic-placeholder.png", qContent.nth(1), t, comparer);
+    await takeElementScreenshot("panel-dynamic-placeholder.png", qContent.nth(2), t, comparer);
 
-    await takeElementScreenshot("html-placeholder.png", qContent.nth(2), t, comparer);
+    await takeElementScreenshot("html-placeholder.png", qContent.nth(3), t, comparer);
 
-    await takeElementScreenshot("image-placeholder.png", qContent.nth(3), t, comparer);
+    await takeElementScreenshot("image-placeholder.png", qContent.nth(4), t, comparer);
 
-    await takeElementScreenshot("panel-placeholder-medium.png", qContent.nth(4), t, comparer);
+    await takeElementScreenshot("panel-placeholder-medium.png", qContent.nth(5), t, comparer);
 
-    await takeElementScreenshot("panel-dynamic-placeholder-medium.png", qContent.nth(5), t, comparer);
+    await takeElementScreenshot("panel-title-placeholder-medium.png", qContent.nth(6), t, comparer);
 
-    await takeElementScreenshot("html-placeholder-medium.png", qContent.nth(6), t, comparer);
+    await takeElementScreenshot("panel-dynamic-placeholder-medium.png", qContent.nth(7), t, comparer);
 
-    await takeElementScreenshot("image-placeholder-medium.png", qContent.nth(7), t, comparer);
+    await takeElementScreenshot("html-placeholder-medium.png", qContent.nth(8), t, comparer);
+
+    await takeElementScreenshot("image-placeholder-medium.png", qContent.nth(9), t, comparer);
 
   });
 });
@@ -1933,7 +1954,7 @@ test("Narrow panel add question button", async (t) => {
 
 test("Dynamic panels in multi-line", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1000, 1000);
+    await t.resizeWindow(1032, 1000);
     const json = {
       "pages": [
         {
@@ -2051,7 +2072,7 @@ test("Composite question - check no scroll", async (t) => {
         ],
       });
     })();
-    await t.resizeWindow(1120, 900);
+    await t.resizeWindow(1152, 900);
     await setJSON({
       "pages": [
         {
@@ -2072,7 +2093,7 @@ test("Composite question - check no scroll", async (t) => {
 
 test("Check adorner actions responsivity after convert", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1400, 900);
+    await t.resizeWindow(1432, 900);
     const root = Selector(".sd-page.sd-body__page");
     await setJSON({
       "logoPosition": "right",
@@ -2138,6 +2159,33 @@ test("Question adorner - collapsed", async (t) => {
   });
 });
 
+test("Page adorner - collapsed", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 1080);
+    const json = {
+      elements: [
+        {
+          type: "html",
+          name: "question1"
+        }
+      ]
+    };
+    await ClientFunction(() => {
+      window["creator"].expandCollapseButtonVisibility = "onhover";
+    })();
+    await setJSON(json);
+    const qContent = Selector(".svc-page__content");
+    const qCollapseButton = Selector(".svc-page__content #collapse");
+    await t.hover(qContent.nth(0), { offsetX: 10, offsetY: 10 });
+    await t.expect(qContent.nth(0).hasClass("svc-hovered")).ok();
+    await takeElementScreenshot("page-adorner-expanded.png", qContent.nth(0), t, comparer);
+    await t.click(qContent.nth(0), { offsetX: 10, offsetY: 10 });
+    await t.click(qCollapseButton.filterVisible());
+    await t.hover(".svc-toolbox");
+    await takeElementScreenshot("page-adorner-collapsed.png", qContent.nth(0), t, comparer);
+  });
+});
+
 test("Question adorner - collapsed mobile", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(500, 1080);
@@ -2182,5 +2230,30 @@ test("Question types with subtypes", async (t) => {
       .wait(400)
       .hover(getListItemByText("Labels").nth(1));
     await takeElementScreenshot("question-type-rating-subtypes.png", Selector(".sv-popup.sv-popup--dropdown").filterVisible(), t, comparer);
+  });
+});
+
+test("Check page selection when width mode is responsive", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t
+      .resizeWindow(1920, 1080);
+    const json = {
+      widthMode: "responsive",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "text",
+              "name": "text",
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(json);
+    const rootSelector = Selector(".svc-tab-designer");
+    await t.click(".svc-page", { offsetX: 5, offsetY: 5 });
+    await takeElementScreenshot("page-selected-responsive.png", rootSelector, t, comparer);
   });
 });

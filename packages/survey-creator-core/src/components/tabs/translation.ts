@@ -3,9 +3,10 @@ import {
   Serializer, PageModel, surveyLocalization, ILocalizableString, ItemValue, FunctionFactory,
   PanelModelBase, QuestionMatrixDropdownModel, PanelModel, Action, IAction, QuestionCommentModel,
   ComputedUpdater, createDropdownActionModel, Helpers, QuestionMatrixDynamicModel,
-  PopupBaseViewModel, IDialogOptions, settings as surveySettings, ListModel, PopupModel, BaseAction,
+  PopupBaseViewModel, IDialogOptions, settings as surveySettings,
   MatrixDropdownColumn,
-  CssClassBuilder
+  CssClassBuilder,
+  createPopupModelWithListModel
 } from "survey-core";
 import { unparse, parse } from "papaparse";
 import { editorLocalization } from "../../editorLocalization";
@@ -270,7 +271,7 @@ export interface ITranslationLocales {
   translateItemAfterRender(item: TranslationItem, el: any, locale: string);
   fireOnObjCreating(obj: Base);
   removeLocale(loc: string): void;
-  canShowProperty(obj: Base, prop: JsonObjectProperty, isEmpty: boolean): boolean;
+  canShowProperty(obj: Base, prop: JsonObjectProperty, isEmpty: boolean, isShowing: boolean): boolean;
   getEditLocale(): string;
   getProcessedTranslationItemText(locale: string, name: ILocalizableString, newValue: string, context: any): string;
 }
@@ -456,13 +457,15 @@ export class TranslationGroup extends TranslationItemBase {
     });
   }
   private getLocalizedProperties(obj: any): Array<JsonObjectProperty> {
-    var res = [];
-    var properties = Serializer.getPropertiesByObj(obj);
-    for (var i = 0; i < properties.length; i++) {
-      var property = properties[i];
-      if (!property.isSerializable || !property.isLocalizable || property.type === "url" || property.type === "file") continue;
-      if (property.readOnly || !property.visible) continue;
-      res.push(property);
+    const res = [];
+    const properties = Serializer.getPropertiesByObj(obj);
+    for (let i = 0; i < properties.length; i++) {
+      const property = properties[i];
+      if (property.readOnly || !property.visible || !property.isSerializable || !property.isLocalizable) continue;
+      const isShowing = ["url", "file"].indexOf(property.type) < 0;
+      if(this.canShowProperty(property, !!obj[property.name], isShowing)) {
+        res.push(property);
+      }
     }
     return res;
   }
@@ -479,9 +482,9 @@ export class TranslationGroup extends TranslationItemBase {
     }
     return res;
   }
-  private canShowProperty(property: JsonObjectProperty, isEmpty: boolean): boolean {
-    if (!!this.translation && !this.translation.canShowProperty(this.obj, property, isEmpty)) return false;
-    return true;
+  private canShowProperty(property: JsonObjectProperty, isEmpty: boolean, isShowing: boolean = true): boolean {
+    if (!!this.translation) return this.translation.canShowProperty(this.obj, property, isEmpty, isShowing);
+    return isShowing;
   }
   private createTranslationItem(obj: any, property: JsonObjectProperty): TranslationItem {
     const defaultValue = this.getDefaultValue(obj, property);
@@ -1099,8 +1102,8 @@ export class Translation extends Base implements ITranslationLocales {
       this.settingsSurvey.mode = mode;
     }
   }
-  public canShowProperty(obj: Base, prop: JsonObjectProperty, isEmpty: boolean): boolean {
-    const result = !isEmpty || SurveyHelper.isPropertyVisible(obj, prop, this.options);
+  public canShowProperty(obj: Base, prop: JsonObjectProperty, isEmpty: boolean, isShowing: boolean = true): boolean {
+    const result = isShowing && (!isEmpty || SurveyHelper.isPropertyVisible(obj, prop, this.options));
     return this.translationStringVisibilityCallback ? this.translationStringVisibilityCallback(obj, prop.name, result) : result;
   }
   public get defaultLocale(): string {
@@ -1560,41 +1563,47 @@ export class TranslationEditor {
     return res;
   }
   private createLocaleFromAction(): IAction {
-    const action = new Action({
-      id: "svc-translation-fromlocale",
-      component: "svc-translate-from-action",
-      css: "st-translation-machine-from",
-      location: "start",
-      iconSize: "auto",
-      innerCss: "st-translation-machine-from__btn",
-      data: {
-        additionalTitleCss: "st-translation-machine-from__title",
-        additionalTitle: editorLocalization.getString("ed.translateUsigAIFrom")
-      }
-    });
     const defaultLocaleTitle = this.getActionTranslateFromText("");
     const onActionTypesPopupShow = () => {
       const items = [{ id: null, title: defaultLocaleTitle }];
       this.fromLocales.forEach(locale => {
         items.push({ id: locale, title: this.getActionTranslateFromText(locale) });
       });
-      actionTypesPopupModel.contentComponentData.model.setItems(items);
+      const listModel = action.popupModel.contentComponentData.model;
+      listModel.setItems(items);
     };
-    const actionTypesListModel = new ListModel(
-      [{ id: null, title: defaultLocaleTitle }],
-      (item: IAction) => {
+
+    const actionTypesPopupModel = createPopupModelWithListModel({
+      items: [{ id: null, title: defaultLocaleTitle }],
+      onSelectionChanged: (item: IAction) => {
         const id = item.id || "";
         this.setFromLocale(id);
         action.title = this.getActionTranslateFromText(id);
-        actionTypesPopupModel.toggleVisibility();
-      }, true);
-    const actionTypesPopupModel = new PopupModel<{ model: ListModel<BaseAction> }>(
-      "sv-list", { model: actionTypesListModel }, "bottom", "center");
+      },
+      allowSelection: true
+    }, {
+      verticalPosition: "bottom",
+      horizontalPosition: "center",
+      onShow: onActionTypesPopupShow
+    });
 
-    actionTypesPopupModel.onShow = onActionTypesPopupShow;
-    action.popupModel = actionTypesPopupModel;
-    action.title = defaultLocaleTitle;
-    action.action = () => { actionTypesPopupModel.toggleVisibility(); };
+    const action = new Action({
+      id: "svc-translation-fromlocale",
+      component: "svc-translate-from-action",
+      css: "st-translation-machine-from",
+      location: "start",
+      title: defaultLocaleTitle,
+      iconSize: "auto",
+      innerCss: "st-translation-machine-from__btn",
+      data: {
+        additionalTitleCss: "st-translation-machine-from__title",
+        additionalTitle: editorLocalization.getString("ed.translateUsigAIFrom")
+      },
+      popupModel: actionTypesPopupModel,
+      action: () => {
+        actionTypesPopupModel.toggleVisibility();
+      }
+    });
 
     return action;
   }

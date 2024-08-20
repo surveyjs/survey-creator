@@ -223,7 +223,7 @@ test("Toolbox with category titles", async (t) => {
 test("Toolbox with subtypes (ltr)", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     const toolboxElement = Selector(".svc-toolbox");
-    const subtypesPopup = Selector(".sv-popup.sv-popup-inner.toolbox-subtypes .sv-popup__container").filterVisible();
+    const subtypesPopup = Selector(".sv-popup.sv-popup-inner.svc-toolbox-subtypes .sv-popup__container").filterVisible();
 
     await setJSON({ pages: [{ name: "page1" }] });
     await t.resizeWindow(2560, 1440)
@@ -238,7 +238,7 @@ test("Toolbox with subtypes (ltr)", async (t) => {
 
 test.skip("Toolbox with subtypes (wrap)", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    const subtypesPopup = Selector(".sv-popup.sv-popup-inner.toolbox-subtypes .sv-popup__container").nth(1);
+    const subtypesPopup = Selector(".sv-popup.sv-popup-inner.svc-toolbox-subtypes .sv-popup__container").nth(1);
 
     await setJSON({ pages: [{ name: "page1" }] });
     await t.resizeWindow(1775, 500)
@@ -256,7 +256,7 @@ test("Toolbox with subtypes (rtl)", async (t) => {
     })();
 
     const toolboxElement = Selector(".svc-toolbox");
-    const subtypesPopup = Selector(".sv-popup.sv-popup-inner.toolbox-subtypes .sv-popup__container").filterVisible();
+    const subtypesPopup = Selector(".sv-popup.sv-popup-inner.svc-toolbox-subtypes .sv-popup__container").filterVisible();
 
     await setJSON({ pages: [{ name: "page1" }] });
     await t.resizeWindow(2560, 1440)
@@ -370,6 +370,9 @@ test("Toolbox with search", async (t) => {
     await t.click(Selector(".svc-toolbox input"));
     await t.typeText(Selector(".svc-toolbox input"), "qwerty");
     await takeElementScreenshot("toolbox-search-placeholder.png", toolboxElement, t, comparer);
+    await t.click("#svd-grid-search-close");
+    await ClientFunction(() => (document.querySelector(".svc-toolbox__scroller") as HTMLDivElement).style.background = "red")();
+    await takeElementScreenshot("toolbox-search-background.png", toolboxElement, t, comparer);
   });
 });
 

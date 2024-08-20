@@ -23,6 +23,7 @@ test("IHeader de/serialization", (): any => {
     themeName: "custom",
     colorPalette: "light",
     isPanelless: true,
+    headerView: "advanced",
     header: {
       "height": 300,
       "inheritWidthFrom": "survey",
@@ -40,6 +41,9 @@ test("IHeader de/serialization", (): any => {
     }
   };
   themeModel.fromJSON(themeJson);
+  const header = themeModel.header as HeaderModel;
+  expect(header["headerView"]).toBe("advanced");
+
   const result = themeModel.toJSON();
   expect(result.header).toStrictEqual(themeJson.header!);
 });

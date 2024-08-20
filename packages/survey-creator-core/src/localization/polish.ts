@@ -1,5 +1,3 @@
-// This dictionary contains 65 untranslated or inherited localization strings.
-// These strings are commented out. Uncomment and edit them if you want to add your translations.
 import { editorLocalization } from "survey-creator-core";
 
 var polishStrings = {
@@ -415,6 +413,9 @@ var polishStrings = {
     rateDescriptionLocation: "Wyrównanie etykiety",
     size: "Rozmiar pola wejściowego (w znakach)",
     cellErrorLocation: "Wyrównanie komunikatu o błędzie komórki",
+    enabled: "Włączone",
+    disabled: "Niepełnosprawny",
+    inherit: "Odziedziczyć",
     apply: "Zastosuj",
     ok: "OK",
     save: "Zapisać",
@@ -653,15 +654,9 @@ var polishStrings = {
     allowResizeComment: "Zezwalaj użytkownikom na zmianę rozmiaru obszarów tekstu",
     textUpdateMode: "Aktualizowanie wartości pytania tekstowego",
     maskType: "Typ maski wprowadzania",
-    maskTypes: {
-      none: "Żaden",
-      patternmask: "Deseń",
-      numericmask: "Numeryczny",
-      datetimemask: "Data i godzina",
-      currencymask: "Waluta"
-    },
     focusOnFirstError: "Ustaw fokus na pierwszej nieprawidłowej odpowiedzi",
     checkErrorsMode: "Sprawdzanie poprawności uruchamiania",
+    validateVisitedEmptyFields: "Weryfikowanie pustych pól w przypadku utraty fokusu",
     navigateToUrl: "Przejdź do adresu URL",
     navigateToUrlOnCondition: "Dynamiczny adres URL",
     completedBeforeHtml: "Znaczniki, aby pokazać, czy użytkownik już wypełnił tę ankietę",
@@ -993,6 +988,13 @@ var polishStrings = {
       url: "Adres URL",
       week: "Tydzień"
     },
+    maskType: {
+      none: "Żaden",
+      pattern: "Deseń",
+      numeric: "Numeryczny",
+      datetime: "Data i godzina",
+      currency: "Waluta"
+    },
     all: "Cały",
     page: "Strona",
     survey: "Sondaż",
@@ -1151,6 +1153,10 @@ var polishStrings = {
     isPanelless: {
       "false": "Domyślny",
       "true": "Bez paneli"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "Tak samo jak w przypadku ankiety",
+      container: "Tak samo jak kontener"
     }
   },
   // Operators
@@ -1228,6 +1234,10 @@ var polishStrings = {
     },
     panelbase: {
       questionTitleWidth: "Przykład: 200 pikseli"
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "Przykład: 30%",
+      questionTitleWidth: "Przykład: 200px"
     }
   },
   pehelp: {
@@ -1304,7 +1314,8 @@ var polishStrings = {
     },
     file: {
       imageHeight: "Dostosowuje wysokość obrazu w wynikach ankiety.",
-      imageWidth: "Dostosowuje szerokość obrazu w wynikach ankiety."
+      imageWidth: "Dostosowuje szerokość obrazu w wynikach ankiety.",
+      allowImagesPreview: "Wyświetla podgląd miniatur przesłanych plików, jeśli to możliwe. Usuń zaznaczenie, jeśli zamiast tego chcesz wyświetlać ikony plików."
     },
     image: {
       contentMode: "Opcja \"Auto\" automatycznie określa odpowiedni tryb wyświetlania - Obraz, Wideo lub YouTube - na podstawie podanego źródłowego adresu URL."
@@ -1380,6 +1391,7 @@ var polishStrings = {
     allowResize: "Uchwyt zmiany rozmiaru pojawi się w rogu i można go przeciągnąć, aby zmienić rozmiar pola wejściowego.",
     maxTimeToFinish: "Przedział czasu w sekundach, po przekroczeniu którego ankieta automatycznie przechodzi do strony z podziękowaniem.",
     maxTimeToFinishPage: "Przedział czasu w sekundach, po którym ankieta automatycznie przechodzi do następnej strony.",
+    validateVisitedEmptyFields: "Włącz tę opcję, aby wyzwolić walidację, gdy użytkownik skupi się na pustym polu wejściowym, a następnie opuści je bez wprowadzania żadnych zmian.",
     page: {
       maxTimeToFinish: "Przedział czasu w sekundach, po którym ankieta automatycznie przechodzi do następnej strony.",
       visibleIf: "Użyj ikony magicznej różdżki, aby ustawić regułę warunkową, która określa widoczność strony.",
@@ -1442,6 +1454,7 @@ var polishStrings = {
     filePlaceholder: "Ma zastosowanie, gdy \"Typ źródła\" to \"Pliki lokalne\" lub gdy kamera jest niedostępna",
     photoPlaceholder: "Ma zastosowanie, gdy \"Typ źródła\" to \"Kamera\".",
     fileOrPhotoPlaceholder: "Ma zastosowanie, gdy \"Typ źródła\" to \"Pliki lokalne lub kamera\".",
+    colCount: "Rozmieszcza opcje wyboru w układzie wielokolumnowym. Po ustawieniu wartości 0 opcje są wyświetlane w jednym wierszu.",
     masksettings: {
       saveMaskedValue: "Wybierz, czy chcesz przechowywać wartość pytania z zastosowaną maską w wynikach ankiety."
     },
@@ -1461,18 +1474,23 @@ var polishStrings = {
       suffix: "Jeden lub kilka symboli, które mają być wyświetlane po wartości."
     },
     theme: {
-      // isPanelless: "This setting applies only to questions outside of a panel.",
-      // primaryColor: "Sets a supplementary color that highlights key survey elements.",
-      // panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background.",
-      // questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background.",
-      // cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes.",
-      // "--sjs-general-backcolor-dim": "Sets the main background color of the survey."
+      isPanelless: "To ustawienie ma zastosowanie tylko do pytań znajdujących się poza panelem.",
+      primaryColor: "Ustawia kolor dodatkowy, który wyróżnia kluczowe elementy ankiety.",
+      panelBackgroundTransparency: "Dostosowuje przezroczystość paneli i pól pytań względem tła ankiety.",
+      questionBackgroundTransparency: "Dostosowuje przezroczystość elementów wejściowych względem tła ankiety.",
+      cornerRadius: "Ustawia promień narożnika dla wszystkich elementów prostokątnych. Włącz tryb zaawansowany, jeśli chcesz ustawić indywidualne wartości promienia narożnika dla elementów wejściowych lub paneli i pól pytań.",
+      "--sjs-general-backcolor-dim": "Ustawia główny kolor tła ankiety."
     },
     header: {
-      // inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in.",
-      // textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels.",
-      // overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey."
-    }
+      inheritWidthFrom: "Opcja \"Taki sam jak kontener\" automatycznie dostosowuje szerokość obszaru zawartości nagłówka, aby pasowała do elementu HTML, w którym umieszczono ankietę.",
+      textAreaWidth: "Szerokość obszaru nagłówka, który zawiera tytuł i opis ankiety, mierzona w pikselach.",
+      overlapEnabled: "Powoduje, że dolna krawędź nagłówka jest nakładana na górną krawędź ankiety."
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "Akceptuje wartości %.",
+      questionTitleWidth: "Akceptuje wartości px."
+    },
+    progressBarInheritWidthFrom: "Opcja \"Tak samo jak kontener\" automatycznie dostosowuje szerokość obszaru paska postępu, aby pasowała do elementu HTML, w którym umieszczona jest ankieta."
   },
   // Properties
   p: {
@@ -1576,62 +1594,8 @@ var polishStrings = {
     scaleColorMode: "Tryb skalowania kolorów",
     rateColorMode: "Oceń tryb kolorów",
     copyDisplayValue: "Kopiowanie wyświetlanej wartości",
-    // insensitive: "insensitive",
-    // state: "state",
-    // indent: "indent",
-    // titleLocation: "titleLocation",
-    // descriptionLocation: "descriptionLocation",
-    // hideNumber: "hideNumber",
-    // errorLocation: "errorLocation",
-    // isUnique: "isUnique",
-    // showInMultipleColumns: "showInMultipleColumns",
-    // totalAlignment: "totalAlignment",
-    // detailErrorLocation: "detailErrorLocation",
-    // inheritWidthFrom: "inheritWidthFrom",
-    // textAreaWidth: "textAreaWidth",
-    // textGlowEnabled: "textGlowEnabled",
-    // overlapEnabled: "overlapEnabled",
-    // backgroundImageOpacity: "backgroundImageOpacity",
-    // logoPositionX: "logoPositionX",
-    // logoPositionY: "logoPositionY",
-    // titlePositionX: "titlePositionX",
-    // titlePositionY: "titlePositionY",
-    // descriptionPositionX: "descriptionPositionX",
-    // descriptionPositionY: "descriptionPositionY",
-    // showNumber: "showNumber",
-    // progressBarInheritWidthFrom: "progressBarInheritWidthFrom",
-    // headerView: "headerView",
-    // choiceValuesFromQuestion: "choiceValuesFromQuestion",
-    // choiceTextsFromQuestion: "choiceTextsFromQuestion",
-    // refuseText: "refuseText",
-    // dontKnowText: "dontKnowText",
-    // cellComponent: "cellComponent",
-    // inputTextAlignment: "inputTextAlignment",
-    // maskSettings: "maskSettings",
-    // itemErrorLocation: "itemErrorLocation",
-    // signatureWidth: "signatureWidth",
-    // signatureHeight: "signatureHeight",
-    // signatureAutoScaleEnabled: "signatureAutoScaleEnabled",
-    // penMinWidth: "penMinWidth",
-    // penMaxWidth: "penMaxWidth",
-    // showPlaceholder: "showPlaceholder",
-    // placeholderReadOnly: "placeholderReadOnly",
-    // templateTitle: "templateTitle",
-    // templateTabTitle: "templateTabTitle",
-    // tabTitlePlaceholder: "tabTitlePlaceholder",
-    // templateDescription: "templateDescription",
-    // noEntriesText: "noEntriesText",
-    // newPanelPosition: "newPanelPosition",
-    // templateTitleLocation: "templateTitleLocation",
-    // templateErrorLocation: "templateErrorLocation",
-    // templateVisibleIf: "templateVisibleIf",
-    // saveMaskedValue: "saveMaskedValue",
-    // pattern: "pattern",
-    // allowNegativeValues: "allowNegativeValues",
-    // decimalSeparator: "decimalSeparator",
-    // thousandsSeparator: "thousandsSeparator",
-    // prefix: "prefix",
-    // suffix: "suffix"
+    effectiveColSpan: "Rozpiętość kolumn",
+    progressBarInheritWidthFrom: "Szerokość obszaru paska postępu"
   },
   theme: {
     advancedMode: "Tryb zaawansowany",
@@ -3013,3 +2977,33 @@ editorLocalization.locales["pl"] = polishStrings;
 // page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Ustawia spójną szerokość tytułów pytań, gdy są one wyrównane do lewej strony pól pytań. Akceptuje wartości CSS (px, %, in, pt itp.)."
 // pe.commentAreaRows: "Comment area height (in lines)" => "Wysokość obszaru komentarza (w wierszach)"
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "Ustawia liczbę wierszy wyświetlanych w obszarach tekstowych dla komentarzy do pytań. W danych wejściowych pojawia się więcej wierszy, pojawia się pasek przewijania."
+// pe.enabled: "Enabled" => "Włączone"
+// pe.disabled: "Disabled" => "Niepełnosprawny"
+// pe.inherit: "Inherit" => "Odziedziczyć"
+// pe.validateVisitedEmptyFields: "Validate empty fields on lost focus" => "Weryfikowanie pustych pól w przypadku utraty fokusu"
+// panellayoutcolumn.effectiveWidth: "Ex.: 30%" => "Przykład: 30%"
+// panellayoutcolumn.questionTitleWidth: "Ex.: 200px" => "Przykład: 200px"
+// pehelp.validateVisitedEmptyFields: "Enable this option to trigger validation when a user focuses on an empty input field and then leaves it without making any changes." => "Włącz tę opcję, aby wyzwolić walidację, gdy użytkownik skupi się na pustym polu wejściowym, a następnie opuści je bez wprowadzania żadnych zmian."
+// pehelp.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line." => "Rozmieszcza opcje wyboru w układzie wielokolumnowym. Po ustawieniu wartości 0 opcje są wyświetlane w jednym wierszu."
+// theme.isPanelless: "This setting applies only to questions outside of a panel." => "To ustawienie ma zastosowanie tylko do pytań znajdujących się poza panelem."
+// theme.primaryColor: "Sets a supplementary color that highlights key survey elements." => "Ustawia kolor dodatkowy, który wyróżnia kluczowe elementy ankiety."
+// theme.panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background." => "Dostosowuje przezroczystość paneli i pól pytań względem tła ankiety."
+// theme.questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background." => "Dostosowuje przezroczystość elementów wejściowych względem tła ankiety."
+// theme.cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes." => "Ustawia promień narożnika dla wszystkich elementów prostokątnych. Włącz tryb zaawansowany, jeśli chcesz ustawić indywidualne wartości promienia narożnika dla elementów wejściowych lub paneli i pól pytań."
+// theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "Ustawia główny kolor tła ankiety."
+// header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "Opcja \"Taki sam jak kontener\" automatycznie dostosowuje szerokość obszaru zawartości nagłówka, aby pasowała do elementu HTML, w którym umieszczono ankietę."
+// header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "Szerokość obszaru nagłówka, który zawiera tytuł i opis ankiety, mierzona w pikselach."
+// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "Powoduje, że dolna krawędź nagłówka jest nakładana na górną krawędź ankiety."
+// panellayoutcolumn.effectiveWidth: "Accepts values %." => "Akceptuje wartości %."
+// panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Akceptuje wartości px."
+// p.effectiveColSpan: "Column span" => "Rozpiętość kolumn"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "Tak samo jak w przypadku ankiety"
+// progressBarInheritWidthFrom.container: "Same as container" => "Tak samo jak kontener"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Wyświetla podgląd miniatur przesłanych plików, jeśli to możliwe. Usuń zaznaczenie, jeśli zamiast tego chcesz wyświetlać ikony plików."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "Opcja \"Tak samo jak kontener\" automatycznie dostosowuje szerokość obszaru paska postępu, aby pasowała do elementu HTML, w którym umieszczona jest ankieta."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "Szerokość obszaru paska postępu"
+// maskType.none: "None" => "Żaden"
+// maskType.pattern: "Pattern" => "Deseń"
+// maskType.numeric: "Numeric" => "Numeryczny"
+// maskType.datetime: "Date and Time" => "Data i godzina"
+// maskType.currency: "Currency" => "Waluta"

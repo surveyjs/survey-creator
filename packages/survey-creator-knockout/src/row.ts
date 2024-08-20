@@ -39,5 +39,5 @@ ko.components.register("svc-row", {
       return model;
     }
   },
-  template: template
+  template: template.default
 });

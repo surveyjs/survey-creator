@@ -121,6 +121,10 @@ export interface ElementAllowOperationsEvent {
    */
   allowEdit: boolean;
   /**
+   * Allows users to collapse and expand the survey element on the design surface.
+   */
+  allowExpandCollapse: boolean;
+  /**
    * Controls the visibility of the Settings button that allows users to open the Property Grid for survey element configuration. Set this property to `true` or `false` to display or hide the Settings button at all times. The default value `undefined` displays the Settings button only when Survey Creator has small width.
    */
   allowShowSettings: boolean | undefined;
@@ -307,6 +311,20 @@ export interface MatrixColumnAddedEvent {
 }
 
 export interface TablePropertyEditorOptions {
+  allowAddRemoveItems: boolean;
+  allowRemoveAllItems: boolean;
+  allowBatchEdit: boolean;
+  showTextView?: boolean;
+}
+export interface ConfigureTablePropertyEditorEvent {
+  /**
+   * A survey element (survey, page, panel, question) for which the table property editor is created.
+   */
+  obj: Base;
+  /**
+   * The name of the property with which the editor is associated: [`"columns"`](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-question-model#columns), [`"rows"`](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-question-model#rows), [`"choices"`](https://surveyjs.io/form-library/documentation/api-reference/questionselectbase#choices), etc.
+   */
+  propertyName: string;
   /**
    * A Boolean property that you can set to `false` if you want to disallow users to add and delete table rows.
    */
@@ -319,18 +337,8 @@ export interface TablePropertyEditorOptions {
    * A Boolean property that you can set to `false` if you want to disallow users to edit table content as text in a pop-up window.
    */
   allowBatchEdit: boolean;
-}
-export interface ConfigureTablePropertyEditorEvent {
   /**
-   * A survey element (survey, page, panel, question) for which the table property editor is created.
-   */
-  obj: Base;
-  /**
-   * The name of the property with which the editor is associated: [`"columns"`](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-question-model#columns), [`"rows"`](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-question-model#rows), [`"choices"`](https://surveyjs.io/form-library/documentation/api-reference/questionselectbase#choices), etc.
-   */
-  propertyName: string;
-  /**
-   * An obejct with table property editor settings that you can modify.
+   * Obsolete. Use `options.allowAddRemoveItems`, `options.allowRemoveAllItems`, and `options.allowBatchEdit` instead.
    */
   editorOptions: TablePropertyEditorOptions;
 }
@@ -404,9 +412,13 @@ export interface ConditionGetQuestionListEvent {
   /**
    * A list of questions available for selection.
    */
-  list: any;
+  list: any[];
   /**
-   * The sort order of questions within the list: `"asc"` (default) or `"none"`. Set this property to `"none"` to disable sorting.
+   * A list of [calculated values](https://surveyjs.io/form-library/documentation/design-survey/conditional-logic#calculated-values) and [variables](https://surveyjs.io/form-library/documentation/design-survey/conditional-logic#variables) available for selection.
+   */
+  variables: string[];
+  /**
+   * The sort order of questions within both list: `"asc"` (default) or `"none"`. Set this property to `"none"` to disable sorting.
    */
   sortOrder: string;
 }
@@ -538,6 +550,21 @@ export interface PageAddedEvent {
    * The page users added.
    */
   page: PageModel;
+}
+
+export interface QuestionConvertingEvent {
+  /**
+   * A question of the previous type.
+   */
+  sourceQuestion: Question;
+  /**
+   * A target [type](https://surveyjs.io/form-library/documentation/api-reference/question#getType).
+   */
+  targetType: string;
+  /**
+   * A JSON object produced by the previous question. You can modify this object to decide which properties should be copied to a new question. Set this parameter to `undefined` if you want to create the new question with a default JSON object.
+   */
+  json: any;
 }
 
 export interface PageGetFooterActionsEvent {
@@ -681,7 +708,7 @@ export interface UploadFileEvent {
    */
   callback: (status: string, fileUrl?: string) => void;
   /**
-   * Obsolete. Use the `options.element` parameter instead.
+   * Obsolete. Use `options.element` instead.
    */
   question: Question;
 }

@@ -112,6 +112,6 @@ export class TabJsonEditorAcePlugin
     return new AceJsonEditorModel(creator);
   }
   public static hasAceEditor(): boolean {
-    return typeof window["ace"] !== "undefined";
+    return typeof window !== "undefined" && typeof window["ace"] !== "undefined";
   }
 }

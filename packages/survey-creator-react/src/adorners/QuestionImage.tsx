@@ -2,7 +2,7 @@ import {
   QuestionImageAdornerViewModel,
   QuestionAdornerViewModel
 } from "survey-creator-core";
-import React from "react";
+import * as React from "react";
 import { attachKey2click, LoadingIndicatorComponent, ReactElementFactory, ReactQuestionFactory, SvgIcon } from "survey-react-ui";
 import {
   QuestionAdornerComponent,

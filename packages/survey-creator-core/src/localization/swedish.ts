@@ -1,5 +1,3 @@
-// This dictionary contains 65 untranslated or inherited localization strings.
-// These strings are commented out. Uncomment and edit them if you want to add your translations.
 import { editorLocalization } from "survey-creator-core";
 
 export let svStrings = {
@@ -415,6 +413,9 @@ export let svStrings = {
     rateDescriptionLocation: "Justering av etiketter",
     size: "Inmatningsfältets storlek (i tecken)",
     cellErrorLocation: "Justering av cellfelmeddelande",
+    enabled: "Aktiverat",
+    disabled: "Handikappad",
+    inherit: "Ärva",
     apply: "Faställ",
     ok: "OK",
     save: "Spara",
@@ -653,15 +654,9 @@ export let svStrings = {
     allowResizeComment: "Tillåt användare att ändra storlek på textområden",
     textUpdateMode: "Uppdatera textfrågevärde",
     maskType: "Typ av indatamask",
-    maskTypes: {
-      none: "Ingen",
-      patternmask: "Mönster",
-      numericmask: "Numerisk",
-      datetimemask: "Datum och tid",
-      currencymask: "Valuta"
-    },
     focusOnFirstError: "Ställ in fokus på det första ogiltiga svaret",
     checkErrorsMode: "Kör validering",
+    validateVisitedEmptyFields: "Validera tomma fält vid förlorat fokus",
     navigateToUrl: "Navigera till URL",
     navigateToUrlOnCondition: "Dynamisk URL",
     completedBeforeHtml: "Markering för att visa om användaren redan har fyllt i undersökningen",
@@ -993,6 +988,13 @@ export let svStrings = {
       url: "URL",
       week: "Vecka"
     },
+    maskType: {
+      none: "Ingen",
+      pattern: "Mönster",
+      numeric: "Numerisk",
+      datetime: "Datum och tid",
+      currency: "Valuta"
+    },
     all: "all",
     page: "page",
     survey: "survey",
@@ -1151,6 +1153,10 @@ export let svStrings = {
     isPanelless: {
       "false": "Standard",
       "true": "Utan paneler"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "Samma som undersökning",
+      container: "Samma som behållare"
     }
   },
   // Operators
@@ -1228,6 +1234,10 @@ export let svStrings = {
     },
     panelbase: {
       questionTitleWidth: "Ex.: 200px"
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "Ex.: 30%",
+      questionTitleWidth: "Ex.: 200px"
     }
   },
   pehelp: {
@@ -1304,7 +1314,8 @@ export let svStrings = {
     },
     file: {
       imageHeight: "Justerar höjden på bilden i undersökningsresultaten.",
-      imageWidth: "Justerar bredden på bilden i undersökningsresultaten."
+      imageWidth: "Justerar bredden på bilden i undersökningsresultaten.",
+      allowImagesPreview: "Visar miniatyrbilder av uppladdade filer när det är möjligt. Avmarkera om du vill visa filikoner i stället."
     },
     image: {
       contentMode: "Alternativet \"Auto\" bestämmer automatiskt vilket läge som är lämpligt för visning - bild, video eller YouTube - baserat på den angivna källadressen."
@@ -1380,6 +1391,7 @@ export let svStrings = {
     allowResize: "Storlekshandtaget (eller greppet) visas i hörnet och kan dras för att ändra storleken på inmatningsfältet.",
     maxTimeToFinish: "Ett tidsintervall i sekunder varefter undersökningen automatiskt går vidare till Tack-sidan.",
     maxTimeToFinishPage: "Ett tidsintervall i sekunder varefter undersökningen automatiskt går vidare till nästa sida.",
+    validateVisitedEmptyFields: "Aktivera det här alternativet för att utlösa validering när en användare fokuserar på ett tomt inmatningsfält och sedan lämnar det utan att göra några ändringar.",
     page: {
       maxTimeToFinish: "Ett tidsintervall i sekunder varefter undersökningen automatiskt går vidare till nästa sida.",
       visibleIf: "Använd trollstavsikonen för att ställa in en villkorsregel som bestämmer sidans synlighet.",
@@ -1442,6 +1454,7 @@ export let svStrings = {
     filePlaceholder: "Gäller när \"Källtyp\" är \"Lokala filer\" eller när kameran inte är tillgänglig",
     photoPlaceholder: "Gäller när \"Källtyp\" är \"Kamera\".",
     fileOrPhotoPlaceholder: "Gäller när \"Källtyp\" är \"Lokala filer eller kamera\".",
+    colCount: "Ordnar valalternativ i en layout med flera kolumner. När värdet är 0 visas alternativen på en enda rad.",
     masksettings: {
       saveMaskedValue: "Välj om du vill lagra frågevärdet med en tillämpad mask i undersökningsresultaten."
     },
@@ -1461,18 +1474,23 @@ export let svStrings = {
       suffix: "En eller flera symboler som ska visas efter värdet."
     },
     theme: {
-      // isPanelless: "This setting applies only to questions outside of a panel.",
-      // primaryColor: "Sets a supplementary color that highlights key survey elements.",
-      // panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background.",
-      // questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background.",
-      // cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes.",
-      // "--sjs-general-backcolor-dim": "Sets the main background color of the survey."
+      isPanelless: "Den här inställningen gäller endast för frågor utanför en panel.",
+      primaryColor: "Ställer in en extra färg som framhäver viktiga undersökningselement.",
+      panelBackgroundTransparency: "Justerar transparensen för paneler och frågerutor i förhållande till undersökningens bakgrund.",
+      questionBackgroundTransparency: "Justerar transparensen för indataelement i förhållande till undersökningens bakgrund.",
+      cornerRadius: "Anger hörnradien för alla rektangulära element. Aktivera Avancerat läge om du vill ställa in individuella hörnradievärden för inmatningselement eller paneler och frågerutor.",
+      "--sjs-general-backcolor-dim": "Ställer in undersökningens huvudsakliga bakgrundsfärg."
     },
     header: {
-      // inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in.",
-      // textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels.",
-      // overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey."
-    }
+      inheritWidthFrom: "Alternativet \"Samma som behållare\" justerar automatiskt bredden på rubrikens innehållsområde så att det passar in i HTML-elementet som undersökningen placeras i.",
+      textAreaWidth: "Bredden på rubrikområdet som innehåller undersökningens titel och beskrivning, mätt i pixlar.",
+      overlapEnabled: "Gör så att den nedre delen av sidhuvudet överlappas med den övre delen av undersökningen."
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "Accepterar värden %.",
+      questionTitleWidth: "Accepterar värdena px."
+    },
+    progressBarInheritWidthFrom: "Alternativet \"Samma som behållare\" justerar automatiskt förloppsindikatorns bredd så att den passar in i HTML-elementet som undersökningen är placerad i."
   },
   // Properties
   p: {
@@ -1576,62 +1594,8 @@ export let svStrings = {
     scaleColorMode: "Färgläge för skala",
     rateColorMode: "Betygsätt färgläge",
     copyDisplayValue: "Kopiera visningsvärde",
-    // insensitive: "insensitive",
-    // state: "state",
-    // indent: "indent",
-    // titleLocation: "titleLocation",
-    // descriptionLocation: "descriptionLocation",
-    // hideNumber: "hideNumber",
-    // errorLocation: "errorLocation",
-    // isUnique: "isUnique",
-    // showInMultipleColumns: "showInMultipleColumns",
-    // totalAlignment: "totalAlignment",
-    // detailErrorLocation: "detailErrorLocation",
-    // inheritWidthFrom: "inheritWidthFrom",
-    // textAreaWidth: "textAreaWidth",
-    // textGlowEnabled: "textGlowEnabled",
-    // overlapEnabled: "overlapEnabled",
-    // backgroundImageOpacity: "backgroundImageOpacity",
-    // logoPositionX: "logoPositionX",
-    // logoPositionY: "logoPositionY",
-    // titlePositionX: "titlePositionX",
-    // titlePositionY: "titlePositionY",
-    // descriptionPositionX: "descriptionPositionX",
-    // descriptionPositionY: "descriptionPositionY",
-    // showNumber: "showNumber",
-    // progressBarInheritWidthFrom: "progressBarInheritWidthFrom",
-    // headerView: "headerView",
-    // choiceValuesFromQuestion: "choiceValuesFromQuestion",
-    // choiceTextsFromQuestion: "choiceTextsFromQuestion",
-    // refuseText: "refuseText",
-    // dontKnowText: "dontKnowText",
-    // cellComponent: "cellComponent",
-    // inputTextAlignment: "inputTextAlignment",
-    // maskSettings: "maskSettings",
-    // itemErrorLocation: "itemErrorLocation",
-    // signatureWidth: "signatureWidth",
-    // signatureHeight: "signatureHeight",
-    // signatureAutoScaleEnabled: "signatureAutoScaleEnabled",
-    // penMinWidth: "penMinWidth",
-    // penMaxWidth: "penMaxWidth",
-    // showPlaceholder: "showPlaceholder",
-    // placeholderReadOnly: "placeholderReadOnly",
-    // templateTitle: "templateTitle",
-    // templateTabTitle: "templateTabTitle",
-    // tabTitlePlaceholder: "tabTitlePlaceholder",
-    // templateDescription: "templateDescription",
-    // noEntriesText: "noEntriesText",
-    // newPanelPosition: "newPanelPosition",
-    // templateTitleLocation: "templateTitleLocation",
-    // templateErrorLocation: "templateErrorLocation",
-    // templateVisibleIf: "templateVisibleIf",
-    // saveMaskedValue: "saveMaskedValue",
-    // pattern: "pattern",
-    // allowNegativeValues: "allowNegativeValues",
-    // decimalSeparator: "decimalSeparator",
-    // thousandsSeparator: "thousandsSeparator",
-    // prefix: "prefix",
-    // suffix: "suffix"
+    effectiveColSpan: "Kolumn spännvidd",
+    progressBarInheritWidthFrom: "Bredd på förloppsindikatorns area"
   },
   theme: {
     advancedMode: "Avancerat läge",
@@ -2923,3 +2887,33 @@ editorLocalization.locales["sv"] = svStrings;
 // page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Anger konsekvent bredd för frågerubriker när de är justerade till vänster om frågerutorna. Accepterar CSS-värden (px, %, in, pt, etc.)."
 // pe.commentAreaRows: "Comment area height (in lines)" => "Kommentarsfältets höjd (i rader)"
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "Anger antalet rader som ska visas i textområden för frågekommentarer. I inmatningen tar upp fler rader visas rullningslisten."
+// pe.enabled: "Enabled" => "Aktiverat"
+// pe.disabled: "Disabled" => "Handikappad"
+// pe.inherit: "Inherit" => "Ärva"
+// pe.validateVisitedEmptyFields: "Validate empty fields on lost focus" => "Validera tomma fält vid förlorat fokus"
+// panellayoutcolumn.effectiveWidth: "Ex.: 30%" => "Ex.: 30%"
+// panellayoutcolumn.questionTitleWidth: "Ex.: 200px" => "Ex.: 200px"
+// pehelp.validateVisitedEmptyFields: "Enable this option to trigger validation when a user focuses on an empty input field and then leaves it without making any changes." => "Aktivera det här alternativet för att utlösa validering när en användare fokuserar på ett tomt inmatningsfält och sedan lämnar det utan att göra några ändringar."
+// pehelp.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line." => "Ordnar valalternativ i en layout med flera kolumner. När värdet är 0 visas alternativen på en enda rad."
+// theme.isPanelless: "This setting applies only to questions outside of a panel." => "Den här inställningen gäller endast för frågor utanför en panel."
+// theme.primaryColor: "Sets a supplementary color that highlights key survey elements." => "Ställer in en extra färg som framhäver viktiga undersökningselement."
+// theme.panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background." => "Justerar transparensen för paneler och frågerutor i förhållande till undersökningens bakgrund."
+// theme.questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background." => "Justerar transparensen för indataelement i förhållande till undersökningens bakgrund."
+// theme.cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes." => "Anger hörnradien för alla rektangulära element. Aktivera Avancerat läge om du vill ställa in individuella hörnradievärden för inmatningselement eller paneler och frågerutor."
+// theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "Ställer in undersökningens huvudsakliga bakgrundsfärg."
+// header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "Alternativet \"Samma som behållare\" justerar automatiskt bredden på rubrikens innehållsområde så att det passar in i HTML-elementet som undersökningen placeras i."
+// header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "Bredden på rubrikområdet som innehåller undersökningens titel och beskrivning, mätt i pixlar."
+// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "Gör så att den nedre delen av sidhuvudet överlappas med den övre delen av undersökningen."
+// panellayoutcolumn.effectiveWidth: "Accepts values %." => "Accepterar värden %."
+// panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Accepterar värdena px."
+// p.effectiveColSpan: "Column span" => "Kolumn spännvidd"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "Samma som undersökning"
+// progressBarInheritWidthFrom.container: "Same as container" => "Samma som behållare"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Visar miniatyrbilder av uppladdade filer när det är möjligt. Avmarkera om du vill visa filikoner i stället."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "Alternativet \"Samma som behållare\" justerar automatiskt förloppsindikatorns bredd så att den passar in i HTML-elementet som undersökningen är placerad i."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "Bredd på förloppsindikatorns area"
+// maskType.none: "None" => "Ingen"
+// maskType.pattern: "Pattern" => "Mönster"
+// maskType.numeric: "Numeric" => "Numerisk"
+// maskType.datetime: "Date and Time" => "Datum och tid"
+// maskType.currency: "Currency" => "Valuta"

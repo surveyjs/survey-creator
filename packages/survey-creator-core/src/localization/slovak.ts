@@ -1,5 +1,3 @@
-// This dictionary contains 65 untranslated or inherited localization strings.
-// These strings are commented out. Uncomment and edit them if you want to add your translations.
 import { editorLocalization } from "survey-creator-core";
 
 export var skStrings = {
@@ -415,6 +413,9 @@ export var skStrings = {
     rateDescriptionLocation: "Zarovnanie štítkov",
     size: "Veľkosť vstupného poľa (v znakoch)",
     cellErrorLocation: "Zarovnanie chybového hlásenia bunky",
+    enabled: "Povolené",
+    disabled: "Invalidný",
+    inherit: "Zdediť",
     apply: "Použiť",
     ok: "OK",
     save: "Uložiť",
@@ -653,15 +654,9 @@ export var skStrings = {
     allowResizeComment: "Povolenie používateľom meniť veľkosť textových oblastí",
     textUpdateMode: "Aktualizácia hodnoty textovej otázky",
     maskType: "Typ vstupnej masky",
-    maskTypes: {
-      none: "Žiadny",
-      patternmask: "Vzorka",
-      numericmask: "Numerický",
-      datetimemask: "Dátum a čas",
-      currencymask: "Mena"
-    },
     focusOnFirstError: "Zameranie na prvú neplatnú odpoveď",
     checkErrorsMode: "Spustenie overenia pravosti",
+    validateVisitedEmptyFields: "Overenie prázdnych polí pri strate zamerania",
     navigateToUrl: "Prejsť na adresu URL",
     navigateToUrlOnCondition: "Dynamická webová adresa",
     completedBeforeHtml: "Značky na zobrazenie, či používateľ už vyplnil tento prieskum",
@@ -993,6 +988,13 @@ export var skStrings = {
       url: "URL adresa",
       week: "Týždeň"
     },
+    maskType: {
+      none: "Žiadny",
+      pattern: "Vzorka",
+      numeric: "Numerický",
+      datetime: "Dátum a čas",
+      currency: "Mena"
+    },
     all: "všetko",
     page: "stránka",
     survey: "prieskum",
@@ -1151,6 +1153,10 @@ export var skStrings = {
     isPanelless: {
       "false": "Predvolený",
       "true": "Bez panelov"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "Rovnaké ako prieskum",
+      container: "Rovnaké ako kontajner"
     }
   },
   // Operators
@@ -1228,6 +1234,10 @@ export var skStrings = {
     },
     panelbase: {
       questionTitleWidth: "Napríklad: 200px"
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "Príklad: 30 %",
+      questionTitleWidth: "Príklad: 200 pixelov"
     }
   },
   pehelp: {
@@ -1304,7 +1314,8 @@ export var skStrings = {
     },
     file: {
       imageHeight: "Upraví výšku obrázka vo výsledkoch prieskumu.",
-      imageWidth: "Upraví šírku obrázka vo výsledkoch prieskumu."
+      imageWidth: "Upraví šírku obrázka vo výsledkoch prieskumu.",
+      allowImagesPreview: "Ak je to možné, zobrazí náhľady miniatúr nahraných súborov. Zrušte výber, ak chcete namiesto toho zobraziť ikony súborov."
     },
     image: {
       contentMode: "Možnosť \"Auto\" automaticky určuje vhodný režim zobrazenia - obrázok, video alebo YouTube - na základe poskytnutej zdrojovej adresy URL."
@@ -1380,6 +1391,7 @@ export var skStrings = {
     allowResize: "Rukoväť na zmenu veľkosti (alebo uchopenie) sa zobrazí v rohu a potiahnutím môžete zmeniť veľkosť vstupného poľa.",
     maxTimeToFinish: "Časový interval v sekundách, po ktorom prieskum automaticky prejde na stránku s poďakovaním.",
     maxTimeToFinishPage: "Časový interval v sekundách, po ktorom prieskum automaticky prejde na ďalšiu stránku.",
+    validateVisitedEmptyFields: "Povoľte túto možnosť, ak chcete spustiť overenie, keď sa používateľ zameria na prázdne vstupné pole a potom ho opustí bez vykonania akýchkoľvek zmien.",
     page: {
       maxTimeToFinish: "Časový interval v sekundách, po ktorom prieskum automaticky prejde na ďalšiu stránku.",
       visibleIf: "Pomocou ikony čarovnej paličky nastavte podmienené pravidlo, ktoré určuje viditeľnosť stránky.",
@@ -1442,6 +1454,7 @@ export var skStrings = {
     filePlaceholder: "Použije, keď \"Typ zdroja\" je \"Lokálne súbory\" alebo keď fotoaparát nie je k dispozícii",
     photoPlaceholder: "Používa sa, keď \"Typ zdroja\" je \"Fotoaparát\".",
     fileOrPhotoPlaceholder: "Použije, keď \"Typ zdroja\" je \"Lokálne súbory alebo fotoaparát\".",
+    colCount: "Usporiada možnosti výberu vo viacstĺpcovom rozložení. Ak je nastavená hodnota 0, možnosti sa zobrazia v jednom riadku.",
     masksettings: {
       saveMaskedValue: "Vyberte, či chcete do výsledkov prieskumu uložiť hodnotu otázky s použitou maskou."
     },
@@ -1461,18 +1474,23 @@ export var skStrings = {
       suffix: "Jeden alebo viac symbolov, ktoré sa zobrazia za hodnotou."
     },
     theme: {
-      // isPanelless: "This setting applies only to questions outside of a panel.",
-      // primaryColor: "Sets a supplementary color that highlights key survey elements.",
-      // panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background.",
-      // questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background.",
-      // cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes.",
-      // "--sjs-general-backcolor-dim": "Sets the main background color of the survey."
+      isPanelless: "Toto nastavenie sa vzťahuje len na otázky mimo panela.",
+      primaryColor: "Nastaví doplnkovú farbu, ktorá zvýrazní kľúčové prvky prieskumu.",
+      panelBackgroundTransparency: "Upravuje priehľadnosť panelov a polí otázok vzhľadom na pozadie prieskumu.",
+      questionBackgroundTransparency: "Upraví priehľadnosť vstupných prvkov vzhľadom na pozadie prieskumu.",
+      cornerRadius: "Nastaví polomer rohu pre všetky obdĺžnikové prvky. Povoľte Rozšírený režim, ak chcete nastaviť jednotlivé hodnoty polomeru rohu pre vstupné prvky alebo panely a polia otázok.",
+      "--sjs-general-backcolor-dim": "Nastaví hlavnú farbu pozadia prieskumu."
     },
     header: {
-      // inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in.",
-      // textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels.",
-      // overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey."
-    }
+      inheritWidthFrom: "Možnosť \"Rovnaké ako kontajner\" automaticky upraví šírku oblasti obsahu hlavičky tak, aby sa zmestila do prvku HTML, do ktorého je prieskum umiestnený.",
+      textAreaWidth: "Šírka oblasti hlavičky, ktorá obsahuje názov a popis prieskumu, meraná v pixeloch.",
+      overlapEnabled: "Vytvorí spodnú časť hlavičky prekrytú hornou časťou prieskumu."
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "Akceptuje hodnoty %.",
+      questionTitleWidth: "Akceptuje hodnoty px."
+    },
+    progressBarInheritWidthFrom: "Možnosť \"Rovnaké ako kontajner\" automaticky upraví šírku oblasti indikátora priebehu tak, aby sa zmestila do prvku HTML, v ktorom je prieskum umiestnený."
   },
   // Properties
   p: {
@@ -1576,62 +1594,8 @@ export var skStrings = {
     scaleColorMode: "Farebný režim mierky",
     rateColorMode: "Režim hodnotenia farieb",
     copyDisplayValue: "Kopírovať zobrazenú hodnotu",
-    // insensitive: "insensitive",
-    // state: "state",
-    // indent: "indent",
-    // titleLocation: "titleLocation",
-    // descriptionLocation: "descriptionLocation",
-    // hideNumber: "hideNumber",
-    // errorLocation: "errorLocation",
-    // isUnique: "isUnique",
-    // showInMultipleColumns: "showInMultipleColumns",
-    // totalAlignment: "totalAlignment",
-    // detailErrorLocation: "detailErrorLocation",
-    // inheritWidthFrom: "inheritWidthFrom",
-    // textAreaWidth: "textAreaWidth",
-    // textGlowEnabled: "textGlowEnabled",
-    // overlapEnabled: "overlapEnabled",
-    // backgroundImageOpacity: "backgroundImageOpacity",
-    // logoPositionX: "logoPositionX",
-    // logoPositionY: "logoPositionY",
-    // titlePositionX: "titlePositionX",
-    // titlePositionY: "titlePositionY",
-    // descriptionPositionX: "descriptionPositionX",
-    // descriptionPositionY: "descriptionPositionY",
-    // showNumber: "showNumber",
-    // progressBarInheritWidthFrom: "progressBarInheritWidthFrom",
-    // headerView: "headerView",
-    // choiceValuesFromQuestion: "choiceValuesFromQuestion",
-    // choiceTextsFromQuestion: "choiceTextsFromQuestion",
-    // refuseText: "refuseText",
-    // dontKnowText: "dontKnowText",
-    // cellComponent: "cellComponent",
-    // inputTextAlignment: "inputTextAlignment",
-    // maskSettings: "maskSettings",
-    // itemErrorLocation: "itemErrorLocation",
-    // signatureWidth: "signatureWidth",
-    // signatureHeight: "signatureHeight",
-    // signatureAutoScaleEnabled: "signatureAutoScaleEnabled",
-    // penMinWidth: "penMinWidth",
-    // penMaxWidth: "penMaxWidth",
-    // showPlaceholder: "showPlaceholder",
-    // placeholderReadOnly: "placeholderReadOnly",
-    // templateTitle: "templateTitle",
-    // templateTabTitle: "templateTabTitle",
-    // tabTitlePlaceholder: "tabTitlePlaceholder",
-    // templateDescription: "templateDescription",
-    // noEntriesText: "noEntriesText",
-    // newPanelPosition: "newPanelPosition",
-    // templateTitleLocation: "templateTitleLocation",
-    // templateErrorLocation: "templateErrorLocation",
-    // templateVisibleIf: "templateVisibleIf",
-    // saveMaskedValue: "saveMaskedValue",
-    // pattern: "pattern",
-    // allowNegativeValues: "allowNegativeValues",
-    // decimalSeparator: "decimalSeparator",
-    // thousandsSeparator: "thousandsSeparator",
-    // prefix: "prefix",
-    // suffix: "suffix"
+    effectiveColSpan: "Rozpätie stĺpca",
+    progressBarInheritWidthFrom: "Šírka oblasti indikátora priebehu"
   },
   theme: {
     advancedMode: "Rozšírený režim",
@@ -2699,3 +2663,33 @@ editorLocalization.locales["sk"] = skStrings;
 // page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Nastavuje konzistentnú šírku názvov otázok, keď sú zarovnané naľavo od polí otázok. Akceptuje hodnoty CSS (px, %, in, pt atď.)."
 // pe.commentAreaRows: "Comment area height (in lines)" => "Výška oblasti komentárov (v riadkoch)"
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "Nastaví počet zobrazených riadkov v textových oblastiach pre komentáre otázok. Vo vstupe zaberá viac riadkov, zobrazí sa posúvač."
+// pe.enabled: "Enabled" => "Povolené"
+// pe.disabled: "Disabled" => "Invalidný"
+// pe.inherit: "Inherit" => "Zdediť"
+// pe.validateVisitedEmptyFields: "Validate empty fields on lost focus" => "Overenie prázdnych polí pri strate zamerania"
+// panellayoutcolumn.effectiveWidth: "Ex.: 30%" => "Príklad: 30 %"
+// panellayoutcolumn.questionTitleWidth: "Ex.: 200px" => "Príklad: 200 pixelov"
+// pehelp.validateVisitedEmptyFields: "Enable this option to trigger validation when a user focuses on an empty input field and then leaves it without making any changes." => "Povoľte túto možnosť, ak chcete spustiť overenie, keď sa používateľ zameria na prázdne vstupné pole a potom ho opustí bez vykonania akýchkoľvek zmien."
+// pehelp.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line." => "Usporiada možnosti výberu vo viacstĺpcovom rozložení. Ak je nastavená hodnota 0, možnosti sa zobrazia v jednom riadku."
+// theme.isPanelless: "This setting applies only to questions outside of a panel." => "Toto nastavenie sa vzťahuje len na otázky mimo panela."
+// theme.primaryColor: "Sets a supplementary color that highlights key survey elements." => "Nastaví doplnkovú farbu, ktorá zvýrazní kľúčové prvky prieskumu."
+// theme.panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background." => "Upravuje priehľadnosť panelov a polí otázok vzhľadom na pozadie prieskumu."
+// theme.questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background." => "Upraví priehľadnosť vstupných prvkov vzhľadom na pozadie prieskumu."
+// theme.cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes." => "Nastaví polomer rohu pre všetky obdĺžnikové prvky. Povoľte Rozšírený režim, ak chcete nastaviť jednotlivé hodnoty polomeru rohu pre vstupné prvky alebo panely a polia otázok."
+// theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "Nastaví hlavnú farbu pozadia prieskumu."
+// header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "Možnosť \"Rovnaké ako kontajner\" automaticky upraví šírku oblasti obsahu hlavičky tak, aby sa zmestila do prvku HTML, do ktorého je prieskum umiestnený."
+// header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "Šírka oblasti hlavičky, ktorá obsahuje názov a popis prieskumu, meraná v pixeloch."
+// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "Vytvorí spodnú časť hlavičky prekrytú hornou časťou prieskumu."
+// panellayoutcolumn.effectiveWidth: "Accepts values %." => "Akceptuje hodnoty %."
+// panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Akceptuje hodnoty px."
+// p.effectiveColSpan: "Column span" => "Rozpätie stĺpca"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "Rovnaké ako prieskum"
+// progressBarInheritWidthFrom.container: "Same as container" => "Rovnaké ako kontajner"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Ak je to možné, zobrazí náhľady miniatúr nahraných súborov. Zrušte výber, ak chcete namiesto toho zobraziť ikony súborov."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "Možnosť \"Rovnaké ako kontajner\" automaticky upraví šírku oblasti indikátora priebehu tak, aby sa zmestila do prvku HTML, v ktorom je prieskum umiestnený."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "Šírka oblasti indikátora priebehu"
+// maskType.none: "None" => "Žiadny"
+// maskType.pattern: "Pattern" => "Vzorka"
+// maskType.numeric: "Numeric" => "Numerický"
+// maskType.datetime: "Date and Time" => "Dátum a čas"
+// maskType.currency: "Currency" => "Mena"

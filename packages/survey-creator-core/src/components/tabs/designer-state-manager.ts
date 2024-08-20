@@ -15,19 +15,20 @@ export class DesignerStateManager {
   }
 
   private onQuestionAddedHandler = (sender, opts): void => {
-    this.elementState[opts.question.name] = new ElementState();
+    this.createElementState(opts.question, false);
   }
   private onPageAddedHandler = (sender, opts): void => {
-    this.pageState[opts.page.name] = new ElementState();
+    this.createElementState(opts.page, false);
   }
   private onPanelAddedHandler = (sender, opts): void => {
-    this.elementState[opts.panel.name] = new ElementState();
+    this.createElementState(opts.panel, false);
   }
   initForSurvey(survey: SurveyModel) {
     survey.onQuestionAdded.add(this.onQuestionAddedHandler);
     survey.onPageAdded.add(this.onPageAddedHandler);
     survey.onPanelAdded.add(this.onPanelAddedHandler);
   }
+
   initForElement(element: SurveyElement): void {
     if (!element) return;
     const stateMap = this.getStateMapForElement(element);
@@ -41,14 +42,23 @@ export class DesignerStateManager {
     );
   }
   getElementState(element: SurveyElement): ElementState {
+    return this.createElementState(element, true);
+  }
+  private createElementState(element: SurveyElement, checkIfExists: boolean): ElementState {
     const stateMap = this.getStateMapForElement(element);
     const name = element.name;
-    let state = stateMap[name];
-    if (state) return state;
-    state = new ElementState();
-    stateMap[name] = new ElementState();
-    return state;
+    if(checkIfExists) {
+      const state = stateMap[name];
+      if (state) return state;
+    }
+    const res = new ElementState();
+    stateMap[name] = res;
+    if(this.onInitElementStateCallback) {
+      this.onInitElementStateCallback(element, res);
+    }
+    return res;
   }
+  public onInitElementStateCallback: (element: SurveyElement, state: ElementState) => void;
   constructor() {
   }
 }

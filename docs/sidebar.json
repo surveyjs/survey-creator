@@ -113,6 +113,10 @@
           "Title": "Format User Input for Single-Line Fields"
         },
         {
+          "Name": "end-user-guide-how-to-calculate-duration-between-dates-within-form",
+          "Title": "Calculate Duration Between Dates"
+        },
+        {
           "Name": "end-user-guide-how-to-apply-input-mask-to-text-fields",
           "Title": "Apply Input Masks"
         },
@@ -123,6 +127,14 @@
         {
           "Name": "end-user-guide-dynamic-tab-title-format",
           "Title": "Configure Dynamic Tab Titles in Dynamic Panel"
+        },
+        {
+          "Name": "end-user-guide-how-to-use-column-totals-in-matrix-questions",
+          "Title": "Configure Column Totals in Matrix Questions"
+        },
+        {
+          "Name": "end-user-guide-how-to-use-custom-variables-in-form-calculations",
+          "Title": "Use Custom Variables in Form Calculations"
         },
         {
           "Name": "end-user-guide-how-to-create-transfer-list",
@@ -149,11 +161,11 @@
         },
         {
           "Name": "questiontoolbox",
-          "Title": "Toolbox"
+          "Title": "QuestionToolbox"
         },
         {
           "Name": "iquestiontoolboxitem",
-          "Title": "Toolbox Item"
+          "Title": "IQuestionToolboxItem"
         },
         {
           "Name": "themetabplugin",

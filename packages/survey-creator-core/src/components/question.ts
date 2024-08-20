@@ -18,7 +18,8 @@ import {
   CssClassBuilder,
   QuestionPanelDynamicModel,
   ListModel,
-  QuestionTextModel
+  QuestionTextModel,
+  ActionContainer
 } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { editorLocalization, getLocString } from "../editorLocalization";
@@ -50,7 +51,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   placeholderComponentData: any;
 
   private dragOrClickHelper: DragOrClickHelper;
-
+  public topActionContainer: ActionContainer;
   constructor(
     creator: SurveyCreatorModel,
     surveyElement: SurveyElement,
@@ -58,6 +59,9 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   ) {
     super(creator, surveyElement);
     this.actionContainer.sizeMode = "small";
+    this.topActionContainer = new ActionContainer();
+    this.topActionContainer.sizeMode = "small";
+    this.topActionContainer.setItems([this.expandCollapseAction]);
     if (
       surveyElement.isQuestion &&
       !!surveyElement["setCanShowOptionItemCallback"]
@@ -102,8 +106,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     const isStartWithNewLine = this.surveyElement.isQuestion && !(<Question>this.surveyElement).startWithNewLine;
     return new CssClassBuilder()
       .append("svc-question__adorner--start-with-new-line", isStartWithNewLine)
-      .append("svc-question__adorner--collapse-" + this.creator.expandCollapseButtonVisibility, true)
-      .append("svc-question__adorner--collapsed", !!this.renderedCollapsed).toString();
+      .append("svc-question__adorner--collapse-" + this.creator.expandCollapseButtonVisibility, true).toString();
   }
 
   css() {
@@ -120,6 +123,9 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     }
     if (this.isEmptyTemplate) {
       result += " svc-question__content--empty-template";
+    }
+    if (this.renderedCollapsed) {
+      result += " svc-question__content--collapsed";
     }
 
     if (this.isDragMe) {
@@ -157,7 +163,9 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     } else {
       result = result.replace(" svc-question__content--drag-over-bottom", "");
     }
-
+    if (this.creator) {
+      result = this.creator.getElementAddornerCssCallback(this.surveyElement, result);
+    }
     return result;
   }
 
@@ -337,12 +345,9 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     let lastItem = null;
     availableItems.forEach((item: QuestionToolboxItem) => {
       const needSeparator = lastItem && item.category != lastItem.category;
-      const action = this.creator.createIActionBarItemByClass(item, needSeparator, (questionType: string, subtype?: string) => {
-        if (this.surveyElement.getType() !== questionType) {
-          this.creator.convertCurrentQuestion(questionType);
-        }
-        let propertyName = QuestionToolbox.getSubTypePropertyName(questionType);
-        if (!!propertyName && !!subtype) this.creator.selectedElement.setPropertyValue(propertyName, subtype);
+      const action = this.creator.createIActionBarItemByClass(item, needSeparator, (questionType: string, json?: any) => {
+        const type = json?.type || questionType;
+        this.creator.convertCurrentQuestion(type, json);
         parentAction?.hidePopup();
       });
       lastItem = item;
@@ -365,7 +370,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       enabled: allowChangeType,
       visibleIndex: 0,
       title: actionTitle,
-      iconName: this.creator.toolbox.getItemByName(this.element.getType())?.iconName
+      iconName: "icon-chevron_16x16"
     };
     const newAction = this.createDropdownModel({
       actionData: actionData,
@@ -375,17 +380,39 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
         listModel.setItems(newItems);
         listModel.selectedItem = this.getSelectedItem(newItems, this.currentType);
 
-        let propertyName = QuestionToolbox.getSubTypePropertyName(this.currentType);
         newItems.forEach(action => {
           if (action.items?.length > 0) {
-            const selectedSubItem = action.items.filter(item => item.id === this.element[propertyName])[0];
+            let selectedSubItem = undefined;
+            action.items.forEach(item => {
+              const elementType = this.element.getType();
+              const toolboxItem = (this.creator.toolbox.getItemByName(action.id) as QuestionToolboxItem).getSubitemByName(item.id);
+              const json = toolboxItem.json || {};
+              if (item.id == elementType || json.type == elementType) {
+                if (!selectedSubItem) selectedSubItem = item;
+                let jsonIsCorresponded = true;
+                Object.keys(json).forEach(p => {
+                  if (p != "type" && json[p] != this.element[p]) jsonIsCorresponded = false;
+                });
+                if (jsonIsCorresponded) selectedSubItem = item;
+              }
+            });
             if (selectedSubItem) {
               const _listModel = action.popupModel.contentComponentData.model;
               _listModel.selectedItem = selectedSubItem;
+              listModel.selectedItem = action;
             }
           }
         });
       }
+    });
+    newAction.iconName = <any>new ComputedUpdater(() => {
+      if (newAction.mode === "small") {
+        return this.creator.toolbox.getItemByName(this.element.getType())?.iconName;
+      }
+      return "icon-chevron_16x16";
+    });
+    newAction.iconSize = <any>new ComputedUpdater(() => {
+      return newAction.mode === "small" ? 24 : 16;
     });
     newAction.disableHide = true;
     return newAction;
@@ -393,8 +420,9 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
 
   private createConvertInputType() {
     const questionType = this.surveyElement.getType();
+    if (questionType !== "text" && questionType !== "rating") return null;
     const toolboxItem = this.creator.toolbox.items.filter(item => item.id === questionType)[0];
-    if (!toolboxItem || !toolboxItem.items || toolboxItem.items.length < 1) return null;
+    if (!toolboxItem || !toolboxItem.hasSubItems) return null;
 
     let propName = QuestionToolbox.getSubTypePropertyName(questionType);
     const questionSubType = this.surveyElement.getPropertyValue(propName);
@@ -415,6 +443,8 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       id: "convertInputType",
       visibleIndex: 1,
       title: editorLocalization.getPropertyValueInEditor(propName, questionSubType),
+      disableShrink: true,
+      iconName: "icon-chevron_16x16"
     };
     const newAction = this.createDropdownModel({
       actionData: actionData,
@@ -426,7 +456,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       }
     });
 
-    newAction.disableShrink = true;
     this.surveyElement.registerFunctionOnPropertyValueChanged(
       propName,
       () => {
@@ -451,11 +480,11 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       id: options.actionData.id,
       css: "sv-action--convertTo sv-action-bar-item--secondary",
       iconName: options.actionData.iconName,
-      iconSize: 24,
+      iconSize: 16,
       title: options.actionData.title,
       enabled: options.actionData.enabled,
       visibleIndex: options.actionData.visibleIndex,
-      disableShrink: false,
+      disableShrink: options.actionData.disableShrink,
       location: "start",
       action: (newType) => {
       },

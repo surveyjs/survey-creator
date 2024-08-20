@@ -415,6 +415,9 @@ export var enStrings = {
     rateDescriptionLocation: "Label alignment",
     size: "Input field width (in characters)",
     cellErrorLocation: "Cell error message alignment",
+    enabled: "Enabled",
+    disabled: "Disabled",
+    inherit: "Inherit",
     apply: "Apply",
     ok: "OK",
     save: "Save",
@@ -653,15 +656,9 @@ export var enStrings = {
     allowResizeComment: "Allow users to resize text areas",
     textUpdateMode: "Update input field values",
     maskType: "Input mask type",
-    maskTypes: {
-      none: "None",
-      patternmask: "Pattern",
-      numericmask: "Numeric",
-      datetimemask: "Date and Time",
-      currencymask: "Currency"
-    },
     focusOnFirstError: "Set focus on the first invalid answer",
     checkErrorsMode: "Run validation",
+    validateVisitedEmptyFields: "Validate empty fields on lost focus",
     navigateToUrl: "Redirect to an external link after submission",
     navigateToUrlOnCondition: "Dynamic external link",
     completedBeforeHtml: "Markup to show if the user already filled out this survey",
@@ -994,6 +991,13 @@ export var enStrings = {
       url: "URL",
       week: "Week"
     },
+    maskType: {
+      none: "None",
+      pattern: "Pattern",
+      numeric: "Numeric",
+      datetime: "Date and Time",
+      currency: "Currency"
+    },
     all: "All",
     page: "Page",
     survey: "Survey",
@@ -1153,6 +1157,10 @@ export var enStrings = {
       false: "Default",
       true: "Without Panels",
     },
+    progressBarInheritWidthFrom: {
+      survey: "Same as survey",
+      container: "Same as container"
+    }
   },
   // Operators
   op: {
@@ -1229,7 +1237,11 @@ export var enStrings = {
     },
     panelbase: {
       questionTitleWidth: "Ex.: 200px"
-    }
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "Ex.: 30%",
+      questionTitleWidth: "Ex.: 200px",
+    },
   },
   pehelp: {
     panel: {
@@ -1239,7 +1251,7 @@ export var enStrings = {
       visibleIf: "Use the magic wand icon to set a conditional rule that determines panel visibility.",
       enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the panel.",
       requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer.",
-      questionTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default).",
+      questionTitleLocation: "Applies to all questions within this panel. When set to \"Hidden\", it also hides question descriptions. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default). ",
       questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.).",
       questionErrorLocation: "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting.",
       questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting.",
@@ -1288,7 +1300,7 @@ export var enStrings = {
       startWithNewLine: "Unselect to display the question in one line with the previous question or panel. The setting doesn't apply if the question is the first element in your form.",
       page: "Repositions the question to the end of a selected page.",
       state: "Choose from: \"Expanded\" - the question box is displayed in full and can be collapsed; \"Collapsed\" - the question box displays only the title and description and can be expanded; \"Locked\" - the question box is displayed in full and cannot be collapsed.",
-      titleLocation: "Overrides title alignment rules defined on a panel, page or survey level. The \"Inherit\" option applies any higher-level settings (if set) or survey-level setting (\"Top\" by default).",
+      titleLocation: "Overrides title alignment rules defined on a panel, page, or survey level. When set to \"Hidden\", it also hides question descriptions. The \"Inherit\" option applies any higher-level settings (if set) or survey-level setting (\"Top\" by default).",
       descriptionLocation: "The \"Inherit\" option applies the survey-level setting (\"Under the question title\" by default).",
       errorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default).",
       indent: "Adds space or margin between the question content and the left border of the question box.",
@@ -1308,7 +1320,8 @@ export var enStrings = {
     },
     file: {
       imageHeight: "Adjusts the height of the image in the survey results.",
-      imageWidth: "Adjusts the width of the image in the survey results."
+      imageWidth: "Adjusts the width of the image in the survey results.",
+      allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead.",
     },
     image: {
       contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided."
@@ -1380,17 +1393,18 @@ export var enStrings = {
     locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab.",
     detailPanelMode: "Sets the location of a details section in relation to a row. Choose from: \"None\" - no expansion is added; \"Under the row\" - a row expansion is placed under each row of the matrix; \"Under the row, display one row expansion only\" - an expansion is displayed under a single row only, the remaining row expansions are collapsed.",
     imageFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio.",
-    autoGrow: "Gradually increases the height of the input field as data is being entered. Overrides the \"Input field height (in lines)\" setting.",
-    allowResize: "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field.",
+    autoGrow: "The \"Inherit\" option applies a survey-level setting (\"Disabled\" by default).",
+    allowResize: "The \"Inherit\" option applies a survey-level setting (\"Enabled\" by default).",
     maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the \"Thank You\" page.",
     maxTimeToFinishPage: "A time interval in seconds after which the survey auto-advances to the next page. Hides the \"Previous\" navigation button.",
+    validateVisitedEmptyFields: "Enable this option to trigger validation when a user focuses on an empty input field and then leaves it without making any changes.",
     page: {
       maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the next page. Hides the \"Previous\" navigation button.",
       // isRequired: "Prevents survey submission unless at least one nested question has an answer.",
       visibleIf: "Use the magic wand icon to set a conditional rule that determines page visibility.",
       enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the page.",
       requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer.",
-      questionTitleLocation: "Applies to all questions within this page. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default).",
+      questionTitleLocation: "Applies to all questions within this page. When set to \"Hidden\", it also hides question descriptions. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default).",
       questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.).",
       questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default).",
       questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab.",
@@ -1478,7 +1492,12 @@ export var enStrings = {
       inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in.",
       textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels.",
       overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey.",
-    }
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "Accepts values %.",
+      questionTitleWidth: "Accepts values px."
+    },
+    progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in."
   },
   // Properties
   p: {
@@ -1582,6 +1601,8 @@ export var enStrings = {
     scaleColorMode: "Rating icon color mode",
     rateColorMode: "Smileys color scheme",
     copyDisplayValue: "Copy display value", // Auto-generated string
+    effectiveColSpan: "Column span",
+    progressBarInheritWidthFrom: "Progress bar area width",
   },
   theme: {
     advancedMode: "Advanced mode",

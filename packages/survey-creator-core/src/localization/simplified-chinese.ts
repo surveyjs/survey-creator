@@ -1,5 +1,3 @@
-// This dictionary contains 65 untranslated or inherited localization strings.
-// These strings are commented out. Uncomment and edit them if you want to add your translations.
 import { editorLocalization } from "survey-creator-core";
 
 var simplifiedChineseTranslation = {
@@ -415,6 +413,9 @@ var simplifiedChineseTranslation = {
     rateDescriptionLocation: "标签对齐",
     size: "输入字段大小（以字符为单位）",
     cellErrorLocation: "单元格错误消息对齐方式",
+    enabled: "启用",
+    disabled: "禁用",
+    inherit: "继承",
     apply: "应用",
     ok: "确定",
     save: "救",
@@ -653,15 +654,9 @@ var simplifiedChineseTranslation = {
     allowResizeComment: "允许用户调整文本区域的大小",
     textUpdateMode: "更新文本问题值",
     maskType: "输入掩码类型",
-    maskTypes: {
-      none: "没有",
-      patternmask: "模式",
-      numericmask: "数值的",
-      datetimemask: "日期和时间",
-      currencymask: "货币"
-    },
     focusOnFirstError: "将焦点放在第一个无效答案上",
     checkErrorsMode: "运行验证",
+    validateVisitedEmptyFields: "验证失去焦点时的空字段",
     navigateToUrl: "导航到网址",
     navigateToUrlOnCondition: "动态网址",
     completedBeforeHtml: "用于显示用户是否已填写此调查的标记",
@@ -993,6 +988,13 @@ var simplifiedChineseTranslation = {
       url: "网址",
       week: "周"
     },
+    maskType: {
+      none: "没有",
+      pattern: "模式",
+      numeric: "数值的",
+      datetime: "日期和时间",
+      currency: "货币"
+    },
     all: "全部",
     page: "页",
     survey: "问卷",
@@ -1151,6 +1153,10 @@ var simplifiedChineseTranslation = {
     isPanelless: {
       "false": "违约",
       "true": "不带面板"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "与调查相同",
+      container: "与容器相同"
     }
   },
   // Operators
@@ -1228,6 +1234,10 @@ var simplifiedChineseTranslation = {
     },
     panelbase: {
       questionTitleWidth: "例如：200px"
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "例如：30%",
+      questionTitleWidth: "例如：200px"
     }
   },
   pehelp: {
@@ -1304,7 +1314,8 @@ var simplifiedChineseTranslation = {
     },
     file: {
       imageHeight: "调整调查结果中图像的高度。",
-      imageWidth: "调整调查结果中图像的宽度。"
+      imageWidth: "调整调查结果中图像的宽度。",
+      allowImagesPreview: "尽可能显示已上传文件的缩略图预览。取消选择是否要显示文件图标。"
     },
     image: {
       contentMode: "“自动”选项会根据提供的源 URL 自动确定适合的显示模式 - 图像、视频或 YouTube。"
@@ -1380,6 +1391,7 @@ var simplifiedChineseTranslation = {
     allowResize: "调整大小的手柄（或手柄）出现在角落，可以拖动以更改输入字段的大小。",
     maxTimeToFinish: "以秒为单位的时间间隔，在此时间间隔之后，调查将自动前进到“感谢”页面。",
     maxTimeToFinishPage: "以秒为单位的时间间隔，在此时间间隔之后，调查将自动前进到下一页。",
+    validateVisitedEmptyFields: "启用此选项可在用户将焦点放在空输入字段上，然后离开该字段而不进行任何更改时触发验证。",
     page: {
       maxTimeToFinish: "以秒为单位的时间间隔，在此时间间隔之后，调查将自动前进到下一页。",
       visibleIf: "使用魔杖图标设置确定页面可见性的条件规则。",
@@ -1442,6 +1454,7 @@ var simplifiedChineseTranslation = {
     filePlaceholder: "当“源类型”为“本地文件”或相机不可用时适用",
     photoPlaceholder: "当“源类型”为“相机”时适用。",
     fileOrPhotoPlaceholder: "当“源类型”为“本地文件或相机”时适用。",
+    colCount: "在多列布局中排列选项。当设置为 0 时，选项将显示在一行中。",
     masksettings: {
       saveMaskedValue: "选择是否要在调查结果中存储带有应用掩码的问题值。"
     },
@@ -1461,18 +1474,23 @@ var simplifiedChineseTranslation = {
       suffix: "要在值后显示的一个或多个符号。"
     },
     theme: {
-      // isPanelless: "This setting applies only to questions outside of a panel.",
-      // primaryColor: "Sets a supplementary color that highlights key survey elements.",
-      // panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background.",
-      // questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background.",
-      // cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes.",
-      // "--sjs-general-backcolor-dim": "Sets the main background color of the survey."
+      isPanelless: "此设置仅适用于面板之外的问题。",
+      primaryColor: "设置一种补充颜色，用于突出显示关键调查元素。",
+      panelBackgroundTransparency: "调整面板和问题框相对于调查背景的透明度。",
+      questionBackgroundTransparency: "调整输入元素相对于调查背景的透明度。",
+      cornerRadius: "设置所有矩形元素的圆角半径。如果要为输入元素或面板和问题框设置单独的角半径值，请启用高级模式。",
+      "--sjs-general-backcolor-dim": "设置调查的主要背景颜色。"
     },
     header: {
-      // inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in.",
-      // textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels.",
-      // overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey."
-    }
+      inheritWidthFrom: "“与容器相同”选项会自动调整标题内容区域的宽度，以适应放置调查的 HTML 元素。",
+      textAreaWidth: "包含调查标题和描述的标题区域的宽度，以像素为单位。",
+      overlapEnabled: "使标题的底部与调查的顶部重叠。"
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "接受值 %。",
+      questionTitleWidth: "接受值 px。"
+    },
+    progressBarInheritWidthFrom: "“与容器相同”选项会自动调整进度条区域的宽度，以适应放置调查的 HTML 元素。"
   },
   // Properties
   p: {
@@ -1576,62 +1594,8 @@ var simplifiedChineseTranslation = {
     scaleColorMode: "缩放颜色模式",
     rateColorMode: "评价颜色模式",
     copyDisplayValue: "复制显示值",
-    // insensitive: "insensitive",
-    // state: "state",
-    // indent: "indent",
-    // titleLocation: "titleLocation",
-    // descriptionLocation: "descriptionLocation",
-    // hideNumber: "hideNumber",
-    // errorLocation: "errorLocation",
-    // isUnique: "isUnique",
-    // showInMultipleColumns: "showInMultipleColumns",
-    // totalAlignment: "totalAlignment",
-    // detailErrorLocation: "detailErrorLocation",
-    // inheritWidthFrom: "inheritWidthFrom",
-    // textAreaWidth: "textAreaWidth",
-    // textGlowEnabled: "textGlowEnabled",
-    // overlapEnabled: "overlapEnabled",
-    // backgroundImageOpacity: "backgroundImageOpacity",
-    // logoPositionX: "logoPositionX",
-    // logoPositionY: "logoPositionY",
-    // titlePositionX: "titlePositionX",
-    // titlePositionY: "titlePositionY",
-    // descriptionPositionX: "descriptionPositionX",
-    // descriptionPositionY: "descriptionPositionY",
-    // showNumber: "showNumber",
-    // progressBarInheritWidthFrom: "progressBarInheritWidthFrom",
-    // headerView: "headerView",
-    // choiceValuesFromQuestion: "choiceValuesFromQuestion",
-    // choiceTextsFromQuestion: "choiceTextsFromQuestion",
-    // refuseText: "refuseText",
-    // dontKnowText: "dontKnowText",
-    // cellComponent: "cellComponent",
-    // inputTextAlignment: "inputTextAlignment",
-    // maskSettings: "maskSettings",
-    // itemErrorLocation: "itemErrorLocation",
-    // signatureWidth: "signatureWidth",
-    // signatureHeight: "signatureHeight",
-    // signatureAutoScaleEnabled: "signatureAutoScaleEnabled",
-    // penMinWidth: "penMinWidth",
-    // penMaxWidth: "penMaxWidth",
-    // showPlaceholder: "showPlaceholder",
-    // placeholderReadOnly: "placeholderReadOnly",
-    // templateTitle: "templateTitle",
-    // templateTabTitle: "templateTabTitle",
-    // tabTitlePlaceholder: "tabTitlePlaceholder",
-    // templateDescription: "templateDescription",
-    // noEntriesText: "noEntriesText",
-    // newPanelPosition: "newPanelPosition",
-    // templateTitleLocation: "templateTitleLocation",
-    // templateErrorLocation: "templateErrorLocation",
-    // templateVisibleIf: "templateVisibleIf",
-    // saveMaskedValue: "saveMaskedValue",
-    // pattern: "pattern",
-    // allowNegativeValues: "allowNegativeValues",
-    // decimalSeparator: "decimalSeparator",
-    // thousandsSeparator: "thousandsSeparator",
-    // prefix: "prefix",
-    // suffix: "suffix"
+    effectiveColSpan: "柱跨度",
+    progressBarInheritWidthFrom: "进度条区域宽度"
   },
   theme: {
     advancedMode: "高级模式",
@@ -2888,3 +2852,33 @@ editorLocalization.locales["zh-cn"] = simplifiedChineseTranslation;
 // page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "当问题标题与问题框左侧对齐时，为问题标题设置一致的宽度。接受 CSS 值（px、%、in、pt 等）。"
 // pe.commentAreaRows: "Comment area height (in lines)" => "评论区高度（以行为单位）"
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "设置问题注释的文本区域中显示的行数。在输入占用更多行时，将出现滚动条。"
+// pe.enabled: "Enabled" => "启用"
+// pe.disabled: "Disabled" => "禁用"
+// pe.inherit: "Inherit" => "继承"
+// pe.validateVisitedEmptyFields: "Validate empty fields on lost focus" => "验证失去焦点时的空字段"
+// panellayoutcolumn.effectiveWidth: "Ex.: 30%" => "例如：30%"
+// panellayoutcolumn.questionTitleWidth: "Ex.: 200px" => "例如：200px"
+// pehelp.validateVisitedEmptyFields: "Enable this option to trigger validation when a user focuses on an empty input field and then leaves it without making any changes." => "启用此选项可在用户将焦点放在空输入字段上，然后离开该字段而不进行任何更改时触发验证。"
+// pehelp.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line." => "在多列布局中排列选项。当设置为 0 时，选项将显示在一行中。"
+// theme.isPanelless: "This setting applies only to questions outside of a panel." => "此设置仅适用于面板之外的问题。"
+// theme.primaryColor: "Sets a supplementary color that highlights key survey elements." => "设置一种补充颜色，用于突出显示关键调查元素。"
+// theme.panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background." => "调整面板和问题框相对于调查背景的透明度。"
+// theme.questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background." => "调整输入元素相对于调查背景的透明度。"
+// theme.cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes." => "设置所有矩形元素的圆角半径。如果要为输入元素或面板和问题框设置单独的角半径值，请启用高级模式。"
+// theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "设置调查的主要背景颜色。"
+// header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "“与容器相同”选项会自动调整标题内容区域的宽度，以适应放置调查的 HTML 元素。"
+// header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "包含调查标题和描述的标题区域的宽度，以像素为单位。"
+// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "使标题的底部与调查的顶部重叠。"
+// panellayoutcolumn.effectiveWidth: "Accepts values %." => "接受值 %。"
+// panellayoutcolumn.questionTitleWidth: "Accepts values px." => "接受值 px。"
+// p.effectiveColSpan: "Column span" => "柱跨度"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "与调查相同"
+// progressBarInheritWidthFrom.container: "Same as container" => "与容器相同"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "尽可能显示已上传文件的缩略图预览。取消选择是否要显示文件图标。"
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "“与容器相同”选项会自动调整进度条区域的宽度，以适应放置调查的 HTML 元素。"
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "进度条区域宽度"
+// maskType.none: "None" => "没有"
+// maskType.pattern: "Pattern" => "模式"
+// maskType.numeric: "Numeric" => "数值的"
+// maskType.datetime: "Date and Time" => "日期和时间"
+// maskType.currency: "Currency" => "货币"

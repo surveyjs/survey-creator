@@ -31,12 +31,12 @@ ko.components.register("svc-image-question", {
       model["placeholderComponentData"] = {
         name: "survey-question-file",
         data: model.filePresentationModel,
-        afterRender: () => { }
+        afterRender: model.filePresentationModel.koQuestionAfterRender
       };
       return model;
     }
   },
-  template: questionTemplate
+  template: questionTemplate.default
 });
 ko.components.register("svc-image-question-adorner", {
   viewModel: {
@@ -44,5 +44,5 @@ ko.components.register("svc-image-question-adorner", {
       return params.model;
     }
   },
-  template: template
+  template: template.default
 });

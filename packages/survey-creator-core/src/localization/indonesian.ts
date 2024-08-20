@@ -1,5 +1,3 @@
-// This dictionary contains 65 untranslated or inherited localization strings.
-// These strings are commented out. Uncomment and edit them if you want to add your translations.
 import { editorLocalization } from "survey-creator-core";
 
 export var indonesianStrings = {
@@ -415,6 +413,9 @@ export var indonesianStrings = {
     rateDescriptionLocation: "Perataan label",
     size: "Ukuran bidang input (dalam karakter)",
     cellErrorLocation: "Perataan pesan kesalahan sel",
+    enabled: "Diaktifkan",
+    disabled: "Cacat",
+    inherit: "Mewarisi",
     apply: "Terapkan",
     ok: "OK",
     save: "Simpan",
@@ -653,15 +654,9 @@ export var indonesianStrings = {
     allowResizeComment: "Mengizinkan pengguna mengubah ukuran area teks",
     textUpdateMode: "Memperbarui nilai pertanyaan teks",
     maskType: "Jenis masker input",
-    maskTypes: {
-      none: "Tidak",
-      patternmask: "Pola",
-      numericmask: "Numerik",
-      datetimemask: "Tanggal dan Waktu",
-      currencymask: "Mata uang"
-    },
     focusOnFirstError: "Mengatur fokus pada jawaban pertama yang tidak valid",
     checkErrorsMode: "Jalankan validasi",
+    validateVisitedEmptyFields: "Memvalidasi bidang kosong saat fokus hilang",
     navigateToUrl: "Arahkan ke URL",
     navigateToUrlOnCondition: "URL dinamis",
     completedBeforeHtml: "Markup untuk menunjukkan apakah pengguna sudah mengisi survei ini",
@@ -993,6 +988,13 @@ export var indonesianStrings = {
       url: "URL",
       week: "Minggu"
     },
+    maskType: {
+      none: "Tidak",
+      pattern: "Pola",
+      numeric: "Numerik",
+      datetime: "Tanggal dan Waktu",
+      currency: "Mata uang"
+    },
     all: "semua",
     page: "halaman",
     survey: "survei",
@@ -1151,6 +1153,10 @@ export var indonesianStrings = {
     isPanelless: {
       "false": "Default",
       "true": "Tanpa Panel"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "Sama seperti survei",
+      container: "Sama seperti wadah"
     }
   },
   // Operators
@@ -1228,6 +1234,10 @@ export var indonesianStrings = {
     },
     panelbase: {
       questionTitleWidth: "Contoh: 200px"
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "Contoh: 30%",
+      questionTitleWidth: "Contoh: 200px"
     }
   },
   pehelp: {
@@ -1304,7 +1314,8 @@ export var indonesianStrings = {
     },
     file: {
       imageHeight: "Menyesuaikan tinggi gambar dalam hasil survei.",
-      imageWidth: "Menyesuaikan lebar gambar dalam hasil survei."
+      imageWidth: "Menyesuaikan lebar gambar dalam hasil survei.",
+      allowImagesPreview: "Menampilkan pratinjau thumbnail untuk file yang diunggah jika memungkinkan. Batalkan pilihan jika Anda ingin menampilkan ikon file sebagai gantinya."
     },
     image: {
       contentMode: "Opsi \"Otomatis\" secara otomatis menentukan mode yang sesuai untuk tampilan - Gambar, Video, atau YouTube - berdasarkan URL sumber yang disediakan."
@@ -1380,6 +1391,7 @@ export var indonesianStrings = {
     allowResize: "Gagang pengubah ukuran (atau pegangan) muncul di sudut dan dapat diseret untuk mengubah ukuran bidang input.",
     maxTimeToFinish: "Interval waktu dalam hitungan detik setelah survei maju secara otomatis ke halaman Terima Kasih.",
     maxTimeToFinishPage: "Interval waktu dalam hitungan detik setelah survei maju secara otomatis ke halaman berikutnya.",
+    validateVisitedEmptyFields: "Aktifkan opsi ini untuk memicu validasi saat pengguna berfokus pada bidang input kosong dan kemudian meninggalkannya tanpa membuat perubahan apa pun.",
     page: {
       maxTimeToFinish: "Interval waktu dalam hitungan detik setelah survei maju secara otomatis ke halaman berikutnya.",
       visibleIf: "Gunakan ikon tongkat ajaib untuk menetapkan aturan bersyarat yang menentukan visibilitas halaman.",
@@ -1442,6 +1454,7 @@ export var indonesianStrings = {
     filePlaceholder: "Berlaku ketika \"Jenis sumber\" adalah \"File lokal\" atau ketika kamera tidak tersedia",
     photoPlaceholder: "Berlaku ketika \"Jenis sumber\" adalah \"Kamera\".",
     fileOrPhotoPlaceholder: "Berlaku ketika \"Jenis sumber\" adalah \"File atau kamera lokal\".",
+    colCount: "Mengatur opsi pilihan dalam tata letak multi-kolom. Saat diatur ke 0, opsi ditampilkan dalam satu baris.",
     masksettings: {
       saveMaskedValue: "Pilih apakah Anda ingin menyimpan nilai pertanyaan dengan masker yang diterapkan dalam hasil survei."
     },
@@ -1461,18 +1474,23 @@ export var indonesianStrings = {
       suffix: "Satu atau beberapa simbol yang akan ditampilkan setelah nilai."
     },
     theme: {
-      // isPanelless: "This setting applies only to questions outside of a panel.",
-      // primaryColor: "Sets a supplementary color that highlights key survey elements.",
-      // panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background.",
-      // questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background.",
-      // cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes.",
-      // "--sjs-general-backcolor-dim": "Sets the main background color of the survey."
+      isPanelless: "Pengaturan ini hanya berlaku untuk pertanyaan di luar panel.",
+      primaryColor: "Menetapkan warna tambahan yang menyoroti elemen survei utama.",
+      panelBackgroundTransparency: "Menyesuaikan transparansi panel dan kotak pertanyaan relatif terhadap latar belakang survei.",
+      questionBackgroundTransparency: "Menyesuaikan transparansi elemen input relatif terhadap latar belakang survei.",
+      cornerRadius: "Mengatur jari-jari sudut untuk semua elemen persegi panjang. Aktifkan Mode Lanjutan jika Anda ingin mengatur nilai radius sudut individual untuk elemen input atau panel dan kotak pertanyaan.",
+      "--sjs-general-backcolor-dim": "Mengatur warna latar belakang utama survei."
     },
     header: {
-      // inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in.",
-      // textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels.",
-      // overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey."
-    }
+      inheritWidthFrom: "Opsi \"Sama seperti wadah\" secara otomatis menyesuaikan lebar area konten header agar sesuai dengan elemen HTML tempat survei ditempatkan.",
+      textAreaWidth: "Lebar area header yang berisi judul dan deskripsi survei, diukur dalam piksel.",
+      overlapEnabled: "Membuat bagian bawah header dilapisi dengan bagian atas survei."
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "Menerima nilai %",
+      questionTitleWidth: "Menerima nilai px."
+    },
+    progressBarInheritWidthFrom: "Opsi \"Sama seperti wadah\" secara otomatis menyesuaikan lebar area bilah kemajuan agar sesuai dengan elemen HTML tempat survei ditempatkan."
   },
   // Properties
   p: {
@@ -1576,62 +1594,8 @@ export var indonesianStrings = {
     scaleColorMode: "Mode skala warna",
     rateColorMode: "Mode warna tingkat",
     copyDisplayValue: "Salin nilai tampilan",
-    // insensitive: "insensitive",
-    // state: "state",
-    // indent: "indent",
-    // titleLocation: "titleLocation",
-    // descriptionLocation: "descriptionLocation",
-    // hideNumber: "hideNumber",
-    // errorLocation: "errorLocation",
-    // isUnique: "isUnique",
-    // showInMultipleColumns: "showInMultipleColumns",
-    // totalAlignment: "totalAlignment",
-    // detailErrorLocation: "detailErrorLocation",
-    // inheritWidthFrom: "inheritWidthFrom",
-    // textAreaWidth: "textAreaWidth",
-    // textGlowEnabled: "textGlowEnabled",
-    // overlapEnabled: "overlapEnabled",
-    // backgroundImageOpacity: "backgroundImageOpacity",
-    // logoPositionX: "logoPositionX",
-    // logoPositionY: "logoPositionY",
-    // titlePositionX: "titlePositionX",
-    // titlePositionY: "titlePositionY",
-    // descriptionPositionX: "descriptionPositionX",
-    // descriptionPositionY: "descriptionPositionY",
-    // showNumber: "showNumber",
-    // progressBarInheritWidthFrom: "progressBarInheritWidthFrom",
-    // headerView: "headerView",
-    // choiceValuesFromQuestion: "choiceValuesFromQuestion",
-    // choiceTextsFromQuestion: "choiceTextsFromQuestion",
-    // refuseText: "refuseText",
-    // dontKnowText: "dontKnowText",
-    // cellComponent: "cellComponent",
-    // inputTextAlignment: "inputTextAlignment",
-    // maskSettings: "maskSettings",
-    // itemErrorLocation: "itemErrorLocation",
-    // signatureWidth: "signatureWidth",
-    // signatureHeight: "signatureHeight",
-    // signatureAutoScaleEnabled: "signatureAutoScaleEnabled",
-    // penMinWidth: "penMinWidth",
-    // penMaxWidth: "penMaxWidth",
-    // showPlaceholder: "showPlaceholder",
-    // placeholderReadOnly: "placeholderReadOnly",
-    // templateTitle: "templateTitle",
-    // templateTabTitle: "templateTabTitle",
-    // tabTitlePlaceholder: "tabTitlePlaceholder",
-    // templateDescription: "templateDescription",
-    // noEntriesText: "noEntriesText",
-    // newPanelPosition: "newPanelPosition",
-    // templateTitleLocation: "templateTitleLocation",
-    // templateErrorLocation: "templateErrorLocation",
-    // templateVisibleIf: "templateVisibleIf",
-    // saveMaskedValue: "saveMaskedValue",
-    // pattern: "pattern",
-    // allowNegativeValues: "allowNegativeValues",
-    // decimalSeparator: "decimalSeparator",
-    // thousandsSeparator: "thousandsSeparator",
-    // prefix: "prefix",
-    // suffix: "suffix"
+    effectiveColSpan: "Rentang kolom",
+    progressBarInheritWidthFrom: "Lebar area bilah kemajuan"
   },
   theme: {
     advancedMode: "Mode lanjutan",
@@ -2900,3 +2864,33 @@ editorLocalization.locales["id"] = indonesianStrings;
 // page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Mengatur lebar yang konsisten untuk judul pertanyaan bila disejajarkan di sebelah kiri kotak pertanyaan. Menerima nilai CSS (px, %, in, pt, dll.)."
 // pe.commentAreaRows: "Comment area height (in lines)" => "Tinggi area komentar (dalam baris)"
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "Mengatur jumlah baris yang ditampilkan di area teks untuk komentar pertanyaan. Dalam input mengambil lebih banyak baris, bilah gulir muncul."
+// pe.enabled: "Enabled" => "Diaktifkan"
+// pe.disabled: "Disabled" => "Cacat"
+// pe.inherit: "Inherit" => "Mewarisi"
+// pe.validateVisitedEmptyFields: "Validate empty fields on lost focus" => "Memvalidasi bidang kosong saat fokus hilang"
+// panellayoutcolumn.effectiveWidth: "Ex.: 30%" => "Contoh: 30%"
+// panellayoutcolumn.questionTitleWidth: "Ex.: 200px" => "Contoh: 200px"
+// pehelp.validateVisitedEmptyFields: "Enable this option to trigger validation when a user focuses on an empty input field and then leaves it without making any changes." => "Aktifkan opsi ini untuk memicu validasi saat pengguna berfokus pada bidang input kosong dan kemudian meninggalkannya tanpa membuat perubahan apa pun."
+// pehelp.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line." => "Mengatur opsi pilihan dalam tata letak multi-kolom. Saat diatur ke 0, opsi ditampilkan dalam satu baris."
+// theme.isPanelless: "This setting applies only to questions outside of a panel." => "Pengaturan ini hanya berlaku untuk pertanyaan di luar panel."
+// theme.primaryColor: "Sets a supplementary color that highlights key survey elements." => "Menetapkan warna tambahan yang menyoroti elemen survei utama."
+// theme.panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background." => "Menyesuaikan transparansi panel dan kotak pertanyaan relatif terhadap latar belakang survei."
+// theme.questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background." => "Menyesuaikan transparansi elemen input relatif terhadap latar belakang survei."
+// theme.cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes." => "Mengatur jari-jari sudut untuk semua elemen persegi panjang. Aktifkan Mode Lanjutan jika Anda ingin mengatur nilai radius sudut individual untuk elemen input atau panel dan kotak pertanyaan."
+// theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "Mengatur warna latar belakang utama survei."
+// header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "Opsi \"Sama seperti wadah\" secara otomatis menyesuaikan lebar area konten header agar sesuai dengan elemen HTML tempat survei ditempatkan."
+// header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "Lebar area header yang berisi judul dan deskripsi survei, diukur dalam piksel."
+// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "Membuat bagian bawah header dilapisi dengan bagian atas survei."
+// panellayoutcolumn.effectiveWidth: "Accepts values %." => "Menerima nilai %"
+// panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Menerima nilai px."
+// p.effectiveColSpan: "Column span" => "Rentang kolom"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "Sama seperti survei"
+// progressBarInheritWidthFrom.container: "Same as container" => "Sama seperti wadah"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Menampilkan pratinjau thumbnail untuk file yang diunggah jika memungkinkan. Batalkan pilihan jika Anda ingin menampilkan ikon file sebagai gantinya."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "Opsi \"Sama seperti wadah\" secara otomatis menyesuaikan lebar area bilah kemajuan agar sesuai dengan elemen HTML tempat survei ditempatkan."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "Lebar area bilah kemajuan"
+// maskType.none: "None" => "Tidak"
+// maskType.pattern: "Pattern" => "Pola"
+// maskType.numeric: "Numeric" => "Numerik"
+// maskType.datetime: "Date and Time" => "Tanggal dan Waktu"
+// maskType.currency: "Currency" => "Mata uang"

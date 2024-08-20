@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { LocalizableString, Serializer, JsonObjectProperty, Base } from "survey-core";
 import { CharacterCounterComponent, ReactElementFactory, SurveyElementBase, SvgIcon } from "survey-react-ui";
 import { SurveyCreatorModel, StringEditorViewModelBase, editableStringRendererName } from "survey-creator-core";
@@ -16,15 +16,15 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
     if (this.baseModel) {
       this.baseModel.dispose();
     }
-    this.baseModel = new StringEditorViewModelBase(props.locStr.locStr, props.locStr.creator);
+    this.baseModel = new StringEditorViewModelBase(this.locString, this.creator);
   }
   protected getUpdatedModelProps(): string[] {
     return ["creator", "locString"];
   }
-  private get locString(): LocalizableString {
+  protected get locString(): LocalizableString {
     return this.props.locStr.locStr;
   }
-  private get creator(): SurveyCreatorModel {
+  protected get creator(): SurveyCreatorModel {
     return this.props.locStr.creator;
   }
   private get style(): any {
@@ -75,7 +75,9 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
     return this.baseModel.contentEditable;
   }
   private onBlur = (event: any) => {
-    this.svStringEditorRef.current.spellcheck = false;
+    if (this.svStringEditorRef.current) {
+      this.svStringEditorRef.current.spellcheck = false;
+    }
     this.locString["__isEditing"] = false;
     this.justFocused = false;
     this.baseModel.onBlur(event.nativeEvent);
@@ -158,6 +160,7 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
           aria-label={this.placeholder || "content editable"}
           suppressContentEditableWarning={true}
           // style={this.style}
+          key={this.locString.renderedHtml}
           onBlur={this.onBlur}
           onInput={this.onInput}
           onPaste={this.onPaste}
@@ -168,9 +171,7 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
           onKeyUp={this.onKeyUp}
           onMouseUp={this.onMouseUp}
           onClick={this.edit}
-        >
-          {this.locString.renderedHtml}
-        </span>
+        >{this.locString.renderedHtml}</span>
       );
     }
     const counter = this.baseModel.showCharacterCounter ? (<CharacterCounterComponent counter={this.baseModel.characterCounter} remainingCharacterCounter={this.baseModel.getCharacterCounterClass}></CharacterCounterComponent>) : null;

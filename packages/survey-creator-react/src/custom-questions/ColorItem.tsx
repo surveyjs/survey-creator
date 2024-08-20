@@ -1,8 +1,8 @@
-import React from "react";
+import * as React from "react";
 import { ItemValue } from "survey-core";
 import { ReactElementFactory, SurveyElementBase } from "survey-react-ui";
 
-class ItemTemplateComponent extends SurveyElementBase<{item: ItemValue}, any> {
+class ItemTemplateComponent extends SurveyElementBase<{ item: ItemValue }, any> {
   render() {
     const item = this.props.item;
     return (

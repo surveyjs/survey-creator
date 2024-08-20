@@ -86,11 +86,17 @@ export * from "../components/switcher/switcher";
 export * from "../utils/events";
 export * from "../utils/utils";
 export * from "../question-editor/definition";
+export * from "../question-editor/properties";
 export * from "../survey-helper";
 export * from "../utils/resizer";
 export * from "../plugins/undo-redo";
 export * from "../plugins/undo-redo/undo-redo-manager";
 export * from "../pages-controller";
+export * from "../presets/presets-base";
+export * from "../presets/presets";
+export * from "../presets/presets-properties";
+export * from "../presets/presets-tabs";
+export * from "../presets/presets-toolbox";
 
 require("../components/property-panel/property-panel-item.scss");
 require("../components/property-panel/property-panel.scss");

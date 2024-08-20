@@ -74,5 +74,5 @@ ko.components.register("svc-image-item-value", {
       return model;
     }
   },
-  template: template
+  template: template.default
 });

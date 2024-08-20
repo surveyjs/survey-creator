@@ -43,5 +43,5 @@ ko.components.register("svc-question", {
       return createQuestionViewModel(params, componentInfo);
     }
   },
-  template: template
+  template: template.default
 });

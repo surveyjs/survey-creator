@@ -32,7 +32,8 @@ import {
   QuestionImagePickerModel,
   ComponentCollection,
   QuestionBooleanModel,
-  QuestionRadiogroupModel
+  QuestionRadiogroupModel,
+  PageModel
 } from "survey-core";
 import {
   EmptySurveyCreatorOptions,
@@ -232,6 +233,21 @@ test("dropdown property editor, get choices on callback", () => {
   expect(callbackList[0]).toBeTruthy();
   expect(callbackList[1]).toBeTruthy();
   Serializer.removeProperty("survey", "region");
+});
+test("Serializer.addpropery, type: 'dropdown' cuts the text before dots, provided into choices. Bug#5787", (): any => {
+  Serializer.addProperty("survey", { name: "prop1:dropdown", type: "dropdown",
+    choices: ["Gemini 1.5 Pro", "Claude 3.5 Sonnet"] });
+  const survey = new SurveyModel();
+  const propertyGrid = new PropertyGridModelTester(survey);
+  const question = propertyGrid.survey.getQuestionByName("prop1");
+  expect(question.getType()).toBe("dropdown");
+  expect(question.choices).toHaveLength(2);
+  expect(question.choices[0].value).toBe("Gemini 1.5 Pro");
+  expect(question.choices[1].value).toBe("Claude 3.5 Sonnet");
+  expect(question.choices[0].text).toBe("Gemini 1.5 Pro");
+  expect(question.choices[1].text).toBe("Claude 3.5 Sonnet");
+
+  Serializer.removeProperty("survey", "prop1");
 });
 
 test("set property editor", () => {
@@ -3321,10 +3337,26 @@ test("PropertyGridEditorMaskType editor", () => {
   expect(maskTypeQuestion.selectedItem.value).toEqual("pattern");
   expect(maskTypeQuestion.selectedItem.title).toEqual("Pattern");
 });
+test("PropertyGridEditorMaskType editor: choices redefinition", () => {
+  const prop = Serializer.findProperty("text", "maskType");
+  const oldChoicesValue = (prop as any).choicesValue;
+  const oldChoicesFunc = (prop as any).choicesfunc;
+  prop.setChoices(["none", "pattern", "numeric"], undefined);
+  const question = new QuestionTextModel("q1");
+  const propertyGrid = new PropertyGridModelTester(question);
+  const maskTypeQuestion = propertyGrid.survey.getQuestionByName("maskType");
+  expect(maskTypeQuestion.getType()).toEqual("buttongroup");
+  expect(maskTypeQuestion.choices).toHaveLength(3);
+  expect(maskTypeQuestion.choices[0].value).toBe("none");
+  expect(maskTypeQuestion.choices[1].value).toBe("pattern");
+  expect(maskTypeQuestion.choices[2].value).toBe("numeric");
+
+  Serializer.findProperty("text", "maskType").setChoices(oldChoicesValue as any, oldChoicesFunc);
+});
 test("PropertyGridEditorMaskType editor: localize item", () => {
   const enLocale = editorLocalization.getLocale("");
-  const oldMaskTypesNone = enLocale.pe.maskTypes.none;
-  enLocale.pe.maskTypes.none = "Unmasked";
+  const oldMaskTypesNone = enLocale.pv.maskType.none;
+  enLocale.pv.maskType.none = "Unmasked";
 
   const question = new QuestionTextModel("q1");
   const propertyGrid = new PropertyGridModelTester(question);
@@ -3333,7 +3365,7 @@ test("PropertyGridEditorMaskType editor: localize item", () => {
   expect(maskTypeQuestion.selectedItem.value).toEqual("none");
   expect(maskTypeQuestion.selectedItem.title).toEqual("Unmasked");
 
-  enLocale.pe.maskTypes.none = oldMaskTypesNone;
+  enLocale.pv.maskType.none = oldMaskTypesNone;
 });
 test("PropertyGridEditorMaskType editor: localize item", () => {
   ComponentCollection.Instance.add({
@@ -3424,4 +3456,46 @@ test("Show commentText & commentPlaceholder on setting showCommentArea, bug##552
   expect(showCommentAreaQuestion.isVisible).toBeTruthy();
   expect(commentTextQuestion.isVisible).toBeTruthy();
   expect(commentPlaceholderAreaQuestion.isVisible).toBeTruthy();
+});
+test("autoGrow & allowResize on setting comment question", () => {
+  const question = new QuestionCommentModel("q1");
+  const propertyGrid = new PropertyGridModelTester(question);
+  const autoGrowQuestion = propertyGrid.survey.getQuestionByName("autoGrow");
+  const allowResizeQuestion = propertyGrid.survey.getQuestionByName("allowResize");
+
+  expect(question.autoGrow === undefined).toBeTruthy();
+  expect(question.allowResize === undefined).toBeTruthy();
+  expect(autoGrowQuestion.value === "auto").toBeTruthy();
+  expect(allowResizeQuestion.value === "auto").toBeTruthy();
+
+  autoGrowQuestion.value = "false";
+  allowResizeQuestion.value = "false";
+  expect(question.autoGrow === false).toBeTruthy();
+  expect(question.allowResize === false).toBeTruthy();
+
+  autoGrowQuestion.value = "true";
+  allowResizeQuestion.value = "true";
+  expect(question.autoGrow === true).toBeTruthy();
+  expect(question.allowResize === true).toBeTruthy();
+
+  question.autoGrow = false;
+  question.allowResize = false;
+  expect(autoGrowQuestion.value === "false").toBeTruthy();
+  expect(allowResizeQuestion.value === "false").toBeTruthy();
+
+  question.autoGrow = undefined;
+  question.allowResize = undefined;
+  expect(autoGrowQuestion.value === "auto").toBeTruthy();
+  expect(allowResizeQuestion.value === "auto").toBeTruthy();
+
+  question.autoGrow = true;
+  question.allowResize = true;
+  expect(autoGrowQuestion.value === "true").toBeTruthy();
+  expect(allowResizeQuestion.value === "true").toBeTruthy();
+});
+test("page class doesn't have layout category", () => {
+  const page = new PageModel("page");
+  const propertyGrid = new PropertyGridModelTester(page);
+  expect(propertyGrid.survey.getPanelByName("logic")).toBeTruthy();
+  expect(propertyGrid.survey.getPanelByName("layout")).toBeFalsy();
 });

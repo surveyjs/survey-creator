@@ -1,5 +1,6 @@
 export interface IPropertyEditorInfo {
   name: string;
+  index?: number;
   title?: string;
   tab?: string;
 }
@@ -67,6 +68,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
         name: "maxWidth",
         tab: "layout",
       },
+      { name: "effectiveColSpan", tab: "layout" },
       { name: "valueName", tab: "data" },
       { name: "defaultValue", tab: "data" },
       { name: "correctAnswer", tab: "data" },
@@ -392,6 +394,9 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "useGrouping"
     ]
   },
+  "panellayoutcolumn": {
+    properties: ["effectiveWidth", "questionTitleWidth"]
+  },
   matrixdropdowncolumn: {
     properties: ["name", "title"]
   },
@@ -485,6 +490,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   },
   "matrixdropdowncolumn@dropdown": {
     properties: [
+      "placeholder",
       { name: "choicesFromQuestion", tab: "choices" },
       { name: "choicesFromQuestionMode", tab: "choices" },
       { name: "choiceValuesFromQuestion", tab: "choices" },
@@ -513,6 +519,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   },
   "matrixdropdowncolumn@tagbox": {
     properties: [
+      "placeholder",
       { name: "choicesFromQuestion", tab: "choices" },
       { name: "choicesFromQuestionMode", tab: "choices" },
       { name: "choiceValuesFromQuestion", tab: "choices" },
@@ -579,7 +586,6 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   },
   "matrixdropdowncolumn@rating": {
     properties: [
-      "rateValues",
       { name: "displayMode", tab: "rateValues" },
       { name: "rateType", tab: "rateValues" },
       { name: "rateCount", tab: "rateValues" },
@@ -589,6 +595,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "rateMin", tab: "rateValues" },
       { name: "rateMax", tab: "rateValues" },
       { name: "rateStep", tab: "rateValues" },
+      { name: "rateValues", tab: "rateValues" },
       { name: "minRateDescription", tab: "rateValues" },
       { name: "maxRateDescription", tab: "rateValues" },
       { name: "rateDescriptionLocation", tab: "rateValues" },
@@ -673,11 +680,11 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "requiredIf", tab: "logic" },
       { name: "questionTitleLocation", tab: "questionSettings" },
       { name: "questionTitleWidth", tab: "questionSettings" },
-      { name: "questionErrorLocation", tab: "questionSettings" }
+      { name: "questionErrorLocation", tab: "questionSettings" },
+      { name: "layoutColumns", tab: "questionSettings" },
     ],
     tabs: [
       { name: "questionSettings", index: 100 },
-      { name: "layout", index: 150 },
       { name: "logic", index: 200 },
       { name: "data", index: 300 },
       { name: "validation", index: 400 }
@@ -695,11 +702,15 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "width", tab: "layout" },
       { name: "minWidth", tab: "layout" },
       { name: "maxWidth", tab: "layout" },
+      { name: "effectiveColSpan", tab: "layout" },
       { name: "showNumber", tab: "numbering" },
       { name: "showQuestionNumbers", tab: "numbering" },
       { name: "questionStartIndex", tab: "numbering" }
     ],
-    tabs: [{ name: "numbering", index: 350 }]
+    tabs: [
+      { name: "layout", index: 150 },
+      { name: "numbering", index: 350 }
+    ]
   },
   page: {
     properties: [
@@ -760,6 +771,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "commentAreaRows", tab: "question" },
       { name: "autoGrowComment", tab: "question" },
       { name: "allowResizeComment", tab: "question" },
+      { name: "gridLayoutEnabled", tab: "question" },
       { name: "showPageTitles", tab: "pages" },
       { name: "showPageNumbers", tab: "pages" },
 
@@ -773,6 +785,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
 
       { name: "focusOnFirstError", tab: "validation" },
       { name: "checkErrorsMode", tab: "validation" },
+      { name: "validateVisitedEmptyFields", tab: "validation" },
 
       { name: "navigateToUrl", tab: "showOnCompleted" },
       { name: "navigateToUrlOnCondition", tab: "showOnCompleted" },

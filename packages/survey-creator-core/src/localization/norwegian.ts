@@ -1,5 +1,3 @@
-// This dictionary contains 65 untranslated or inherited localization strings.
-// These strings are commented out. Uncomment and edit them if you want to add your translations.
 import { editorLocalization, defaultStrings } from "survey-creator-core";
 
 export var nbStrings = {
@@ -415,6 +413,9 @@ export var nbStrings = {
     rateDescriptionLocation: "Justering av etiketter",
     size: "Størrelse på inndatafelt (i tegn)",
     cellErrorLocation: "Justering av cellefeilmelding",
+    enabled: "Aktivert",
+    disabled: "Ufør",
+    inherit: "Arve",
     apply: "Bruk",
     ok: "OK",
     save: "Lagre",
@@ -653,15 +654,9 @@ export var nbStrings = {
     allowResizeComment: "Tillat brukere å endre størrelse på tekstområder",
     textUpdateMode: "Oppdatere tekstspørsmålsverdi",
     maskType: "Type inndatamaske",
-    maskTypes: {
-      none: "Ingen",
-      patternmask: "Mønster",
-      numericmask: "Numerisk",
-      datetimemask: "Dato og klokkeslett",
-      currencymask: "Valuta"
-    },
     focusOnFirstError: "Sette fokus på det første ugyldige svaret",
     checkErrorsMode: "Kjør validering",
+    validateVisitedEmptyFields: "Validere tomme felt ved tapt fokus",
     navigateToUrl: "Naviger til URL",
     navigateToUrlOnCondition: "Dynamisk URL-adresse",
     completedBeforeHtml: "Markering for å vise om brukeren allerede har fylt ut denne undersøkelsen",
@@ -993,6 +988,13 @@ export var nbStrings = {
       url: "URL",
       week: "Uke"
     },
+    maskType: {
+      none: "Ingen",
+      pattern: "Mønster",
+      numeric: "Numerisk",
+      datetime: "Dato og klokkeslett",
+      currency: "Valuta"
+    },
     all: "all",
     page: "page",
     survey: "survey",
@@ -1151,6 +1153,10 @@ export var nbStrings = {
     isPanelless: {
       "false": "Standard",
       "true": "Uten paneler"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "Samme som undersøkelse",
+      container: "Samme som container"
     }
   },
   // Operators
@@ -1228,6 +1234,10 @@ export var nbStrings = {
     },
     panelbase: {
       questionTitleWidth: "Eks.: 200 piksler"
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "Eks.: 30%",
+      questionTitleWidth: "Eks.: 200px"
     }
   },
   pehelp: {
@@ -1304,7 +1314,8 @@ export var nbStrings = {
     },
     file: {
       imageHeight: "Justerer høyden på bildet i undersøkelsesresultatene.",
-      imageWidth: "Justerer bredden på bildet i undersøkelsesresultatene."
+      imageWidth: "Justerer bredden på bildet i undersøkelsesresultatene.",
+      allowImagesPreview: "Viser miniatyrforhåndsvisninger for opplastede filer når det er mulig. Fjern merket hvis du vil vise filikoner i stedet."
     },
     image: {
       contentMode: "Alternativet \"Auto\" bestemmer automatisk passende modus for visning - Bilde, Video eller YouTube - basert på kildens URL som er oppgitt."
@@ -1380,6 +1391,7 @@ export var nbStrings = {
     allowResize: "Skaleringshåndtaket (eller grepet) vises i hjørnet og kan dras for å endre størrelsen på inndatafeltet.",
     maxTimeToFinish: "Et tidsintervall i sekunder hvoretter undersøkelsen automatisk går videre til takkesiden.",
     maxTimeToFinishPage: "Et tidsintervall i sekunder hvoretter undersøkelsen automatisk går videre til neste side.",
+    validateVisitedEmptyFields: "Aktiver dette alternativet for å utløse validering når en bruker fokuserer på et tomt inndatafelt og deretter forlater det uten å gjøre noen endringer.",
     page: {
       maxTimeToFinish: "Et tidsintervall i sekunder hvoretter undersøkelsen automatisk går videre til neste side.",
       visibleIf: "Bruk tryllestavikonet til å angi en betinget regel som bestemmer sidens synlighet.",
@@ -1442,6 +1454,7 @@ export var nbStrings = {
     filePlaceholder: "Gjelder når \"Kildetype\" er \"Lokale filer\" eller når kameraet er utilgjengelig",
     photoPlaceholder: "Gjelder når \"Kildetype\" er \"Kamera\".",
     fileOrPhotoPlaceholder: "Gjelder når \"Kildetype\" er \"Lokale filer eller kamera\".",
+    colCount: "Ordner valgalternativer i et oppsett med flere kolonner. Når den er satt til 0, vises alternativene på én enkelt linje.",
     masksettings: {
       saveMaskedValue: "Velg om du vil lagre spørsmålsverdien med en brukt maske i evalueringsresultatene."
     },
@@ -1461,18 +1474,23 @@ export var nbStrings = {
       suffix: "Ett eller flere symboler som skal vises etter verdien."
     },
     theme: {
-      // isPanelless: "This setting applies only to questions outside of a panel.",
-      // primaryColor: "Sets a supplementary color that highlights key survey elements.",
-      // panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background.",
-      // questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background.",
-      // cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes.",
-      // "--sjs-general-backcolor-dim": "Sets the main background color of the survey."
+      isPanelless: "Denne innstillingen gjelder bare for spørsmål utenfor et panel.",
+      primaryColor: "Angir en tilleggsfarge som uthever viktige undersøkelseselementer.",
+      panelBackgroundTransparency: "Justerer gjennomsiktigheten til paneler og spørsmålsbokser i forhold til evalueringsbakgrunnen.",
+      questionBackgroundTransparency: "Justerer gjennomsiktigheten til inndataelementer i forhold til evalueringsbakgrunnen.",
+      cornerRadius: "Angir hjørneradiusen for alle rektangulære elementer. Aktiver avansert modus hvis du vil angi individuelle hjørneradiusverdier for inndataelementer eller paneler og spørsmålsbokser.",
+      "--sjs-general-backcolor-dim": "Angir hovedbakgrunnsfargen for undersøkelsen."
     },
     header: {
-      // inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in.",
-      // textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels.",
-      // overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey."
-    }
+      inheritWidthFrom: "Alternativet \"Samme som beholder\" justerer automatisk bredden på overskriftsinnholdsområdet slik at det passer inn i HTML-elementet undersøkelsen er plassert i.",
+      textAreaWidth: "Bredden på overskriftsområdet som inneholder evalueringstittelen og beskrivelsen, målt i piksler.",
+      overlapEnabled: "Gjør bunnen av toppteksten overlagt med toppen av undersøkelsen."
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "Godtar verdier %.",
+      questionTitleWidth: "Godtar verdier px."
+    },
+    progressBarInheritWidthFrom: "Alternativet \"Samme som beholder\" justerer automatisk fremdriftslinjens områdebredde slik at den passer inn i HTML-elementet undersøkelsen er plassert i."
   },
   // Properties
   p: {
@@ -1576,62 +1594,8 @@ export var nbStrings = {
     scaleColorMode: "Skaler farge, modus",
     rateColorMode: "Vurder farge, modus",
     copyDisplayValue: "Kopier visningsverdi",
-    // insensitive: "insensitive",
-    // state: "state",
-    // indent: "indent",
-    // titleLocation: "titleLocation",
-    // descriptionLocation: "descriptionLocation",
-    // hideNumber: "hideNumber",
-    // errorLocation: "errorLocation",
-    // isUnique: "isUnique",
-    // showInMultipleColumns: "showInMultipleColumns",
-    // totalAlignment: "totalAlignment",
-    // detailErrorLocation: "detailErrorLocation",
-    // inheritWidthFrom: "inheritWidthFrom",
-    // textAreaWidth: "textAreaWidth",
-    // textGlowEnabled: "textGlowEnabled",
-    // overlapEnabled: "overlapEnabled",
-    // backgroundImageOpacity: "backgroundImageOpacity",
-    // logoPositionX: "logoPositionX",
-    // logoPositionY: "logoPositionY",
-    // titlePositionX: "titlePositionX",
-    // titlePositionY: "titlePositionY",
-    // descriptionPositionX: "descriptionPositionX",
-    // descriptionPositionY: "descriptionPositionY",
-    // showNumber: "showNumber",
-    // progressBarInheritWidthFrom: "progressBarInheritWidthFrom",
-    // headerView: "headerView",
-    // choiceValuesFromQuestion: "choiceValuesFromQuestion",
-    // choiceTextsFromQuestion: "choiceTextsFromQuestion",
-    // refuseText: "refuseText",
-    // dontKnowText: "dontKnowText",
-    // cellComponent: "cellComponent",
-    // inputTextAlignment: "inputTextAlignment",
-    // maskSettings: "maskSettings",
-    // itemErrorLocation: "itemErrorLocation",
-    // signatureWidth: "signatureWidth",
-    // signatureHeight: "signatureHeight",
-    // signatureAutoScaleEnabled: "signatureAutoScaleEnabled",
-    // penMinWidth: "penMinWidth",
-    // penMaxWidth: "penMaxWidth",
-    // showPlaceholder: "showPlaceholder",
-    // placeholderReadOnly: "placeholderReadOnly",
-    // templateTitle: "templateTitle",
-    // templateTabTitle: "templateTabTitle",
-    // tabTitlePlaceholder: "tabTitlePlaceholder",
-    // templateDescription: "templateDescription",
-    // noEntriesText: "noEntriesText",
-    // newPanelPosition: "newPanelPosition",
-    // templateTitleLocation: "templateTitleLocation",
-    // templateErrorLocation: "templateErrorLocation",
-    // templateVisibleIf: "templateVisibleIf",
-    // saveMaskedValue: "saveMaskedValue",
-    // pattern: "pattern",
-    // allowNegativeValues: "allowNegativeValues",
-    // decimalSeparator: "decimalSeparator",
-    // thousandsSeparator: "thousandsSeparator",
-    // prefix: "prefix",
-    // suffix: "suffix"
+    effectiveColSpan: "Spaltespenn",
+    progressBarInheritWidthFrom: "Bredde på fremdriftslinjeområde"
   },
   theme: {
     advancedMode: "Avansert modus",
@@ -2749,3 +2713,33 @@ editorLocalization.locales["nb"] = nbStrings;
 // page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Angir konsekvent bredde for spørsmålstitler når de er justert til venstre for spørsmålsboksene. Godtar CSS-verdier (px, %, i, pt osv.)."
 // pe.commentAreaRows: "Comment area height (in lines)" => "Høyde i kommentarområdet (i linjer)"
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "Angir antall viste linjer i tekstområder for spørsmålskommentarer. I inngangen tar opp flere linjer, vises rullefeltet."
+// pe.enabled: "Enabled" => "Aktivert"
+// pe.disabled: "Disabled" => "Ufør"
+// pe.inherit: "Inherit" => "Arve"
+// pe.validateVisitedEmptyFields: "Validate empty fields on lost focus" => "Validere tomme felt ved tapt fokus"
+// panellayoutcolumn.effectiveWidth: "Ex.: 30%" => "Eks.: 30%"
+// panellayoutcolumn.questionTitleWidth: "Ex.: 200px" => "Eks.: 200px"
+// pehelp.validateVisitedEmptyFields: "Enable this option to trigger validation when a user focuses on an empty input field and then leaves it without making any changes." => "Aktiver dette alternativet for å utløse validering når en bruker fokuserer på et tomt inndatafelt og deretter forlater det uten å gjøre noen endringer."
+// pehelp.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line." => "Ordner valgalternativer i et oppsett med flere kolonner. Når den er satt til 0, vises alternativene på én enkelt linje."
+// theme.isPanelless: "This setting applies only to questions outside of a panel." => "Denne innstillingen gjelder bare for spørsmål utenfor et panel."
+// theme.primaryColor: "Sets a supplementary color that highlights key survey elements." => "Angir en tilleggsfarge som uthever viktige undersøkelseselementer."
+// theme.panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background." => "Justerer gjennomsiktigheten til paneler og spørsmålsbokser i forhold til evalueringsbakgrunnen."
+// theme.questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background." => "Justerer gjennomsiktigheten til inndataelementer i forhold til evalueringsbakgrunnen."
+// theme.cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes." => "Angir hjørneradiusen for alle rektangulære elementer. Aktiver avansert modus hvis du vil angi individuelle hjørneradiusverdier for inndataelementer eller paneler og spørsmålsbokser."
+// theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "Angir hovedbakgrunnsfargen for undersøkelsen."
+// header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "Alternativet \"Samme som beholder\" justerer automatisk bredden på overskriftsinnholdsområdet slik at det passer inn i HTML-elementet undersøkelsen er plassert i."
+// header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "Bredden på overskriftsområdet som inneholder evalueringstittelen og beskrivelsen, målt i piksler."
+// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "Gjør bunnen av toppteksten overlagt med toppen av undersøkelsen."
+// panellayoutcolumn.effectiveWidth: "Accepts values %." => "Godtar verdier %."
+// panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Godtar verdier px."
+// p.effectiveColSpan: "Column span" => "Spaltespenn"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "Samme som undersøkelse"
+// progressBarInheritWidthFrom.container: "Same as container" => "Samme som container"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Viser miniatyrforhåndsvisninger for opplastede filer når det er mulig. Fjern merket hvis du vil vise filikoner i stedet."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "Alternativet \"Samme som beholder\" justerer automatisk fremdriftslinjens områdebredde slik at den passer inn i HTML-elementet undersøkelsen er plassert i."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "Bredde på fremdriftslinjeområde"
+// maskType.none: "None" => "Ingen"
+// maskType.pattern: "Pattern" => "Mønster"
+// maskType.numeric: "Numeric" => "Numerisk"
+// maskType.datetime: "Date and Time" => "Dato og klokkeslett"
+// maskType.currency: "Currency" => "Valuta"

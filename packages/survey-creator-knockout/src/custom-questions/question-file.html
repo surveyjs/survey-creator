@@ -1,3 +1,4 @@
+<!-- ko template: { afterRender: question.koQuestionAfterRender } -->
 <div
   data-bind="css: question.cssClasses.root, event: { keydown: question.koOnKeyDown, dragenter: question.ondragenter, dragover: question.ondragover, drop: question.ondrop, dragleave: question.ondragleave }">
   <input type="text"
@@ -17,3 +18,4 @@
     </label>
   </div>
 </div>
+<!-- /ko -->
