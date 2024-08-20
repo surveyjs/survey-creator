@@ -654,13 +654,6 @@ var traditionalChineseTranslation = {
     allowResizeComment: "允許用戶調整文字區域的大小",
     textUpdateMode: "更新文字問題值",
     maskType: "輸入掩碼類型",
-    maskTypes: {
-      none: "沒有",
-      patternmask: "模式",
-      numericmask: "數值的",
-      datetimemask: "日期和時間",
-      currencymask: "貨幣"
-    },
     focusOnFirstError: "將焦點放在第一個無效答案上",
     checkErrorsMode: "運行驗證",
     validateVisitedEmptyFields: "驗證失去焦點時的空欄位",
@@ -995,6 +988,13 @@ var traditionalChineseTranslation = {
       url: "網址",
       week: "周"
     },
+    maskType: {
+      none: "沒有",
+      pattern: "模式",
+      numeric: "數值的",
+      datetime: "日期和時間",
+      currency: "貨幣"
+    },
     all: "都",
     page: "頁",
     survey: "調查",
@@ -1310,7 +1310,8 @@ var traditionalChineseTranslation = {
     },
     file: {
       imageHeight: "調整調查結果中圖像的高度。",
-      imageWidth: "調整調查結果中圖像的寬度。"
+      imageWidth: "調整調查結果中圖像的寬度。",
+      allowImagesPreview: "儘可能顯示已上傳檔的縮圖預覽。取消選擇是否要顯示檔圖示。"
     },
     image: {
       contentMode: "“自動”選項會根據提供的源URL自動確定適合的顯示模式 - 圖像、視頻或YouTube。"
@@ -2995,3 +2996,9 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "接受值 。"
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "接受值 px。"
 // p.effectiveColSpan: "Column span" => "柱跨度"
+// maskType.none: "None" => "沒有"
+// maskType.pattern: "Pattern" => "模式"
+// maskType.numeric: "Numeric" => "數值的"
+// maskType.datetime: "Date and Time" => "日期和時間"
+// maskType.currency: "Currency" => "貨幣"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "儘可能顯示已上傳檔的縮圖預覽。取消選擇是否要顯示檔圖示。"

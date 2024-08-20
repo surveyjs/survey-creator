@@ -654,13 +654,6 @@ export let svStrings = {
     allowResizeComment: "Tillåt användare att ändra storlek på textområden",
     textUpdateMode: "Uppdatera textfrågevärde",
     maskType: "Typ av indatamask",
-    maskTypes: {
-      none: "Ingen",
-      patternmask: "Mönster",
-      numericmask: "Numerisk",
-      datetimemask: "Datum och tid",
-      currencymask: "Valuta"
-    },
     focusOnFirstError: "Ställ in fokus på det första ogiltiga svaret",
     checkErrorsMode: "Kör validering",
     validateVisitedEmptyFields: "Validera tomma fält vid förlorat fokus",
@@ -995,6 +988,13 @@ export let svStrings = {
       url: "URL",
       week: "Vecka"
     },
+    maskType: {
+      none: "Ingen",
+      pattern: "Mönster",
+      numeric: "Numerisk",
+      datetime: "Datum och tid",
+      currency: "Valuta"
+    },
     all: "all",
     page: "page",
     survey: "survey",
@@ -1310,7 +1310,8 @@ export let svStrings = {
     },
     file: {
       imageHeight: "Justerar höjden på bilden i undersökningsresultaten.",
-      imageWidth: "Justerar bredden på bilden i undersökningsresultaten."
+      imageWidth: "Justerar bredden på bilden i undersökningsresultaten.",
+      allowImagesPreview: "Visar miniatyrbilder av uppladdade filer när det är möjligt. Avmarkera om du vill visa filikoner i stället."
     },
     image: {
       contentMode: "Alternativet \"Auto\" bestämmer automatiskt vilket läge som är lämpligt för visning - bild, video eller YouTube - baserat på den angivna källadressen."
@@ -2900,3 +2901,9 @@ editorLocalization.locales["sv"] = svStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Accepterar värden %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Accepterar värdena px."
 // p.effectiveColSpan: "Column span" => "Kolumn spännvidd"
+// maskType.none: "None" => "Ingen"
+// maskType.pattern: "Pattern" => "Mönster"
+// maskType.numeric: "Numeric" => "Numerisk"
+// maskType.datetime: "Date and Time" => "Datum och tid"
+// maskType.currency: "Currency" => "Valuta"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Visar miniatyrbilder av uppladdade filer när det är möjligt. Avmarkera om du vill visa filikoner i stället."

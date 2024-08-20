@@ -654,13 +654,6 @@ export var ruStrings = {
     allowResizeComment: "Разрешить пользователям изменять размер текстовых областей",
     textUpdateMode: "Обновление значения текстового вопроса",
     maskType: "Тип входной маски",
-    maskTypes: {
-      none: "Никакой",
-      patternmask: "Рисунок",
-      numericmask: "Числовой",
-      datetimemask: "Дата и время",
-      currencymask: "Валюта"
-    },
     focusOnFirstError: "Установка фокуса на первом недопустимом ответе",
     checkErrorsMode: "Запуск проверки",
     validateVisitedEmptyFields: "Проверка пустых полей при потере фокуса",
@@ -995,6 +988,13 @@ export var ruStrings = {
       url: "URL-адрес",
       week: "Неделя"
     },
+    maskType: {
+      none: "Никакой",
+      pattern: "Рисунок",
+      numeric: "Числовой",
+      datetime: "Дата и время",
+      currency: "Валюта"
+    },
     all: "Все",
     page: "Страница",
     survey: "Опрос",
@@ -1310,7 +1310,8 @@ export var ruStrings = {
     },
     file: {
       imageHeight: "Настройка высоты изображения в результатах съемки.",
-      imageWidth: "Настройка ширины изображения в результатах съемки."
+      imageWidth: "Настройка ширины изображения в результатах съемки.",
+      allowImagesPreview: "Отображает предварительный просмотр миниатюр для загруженных файлов, когда это возможно. Снимите флажок, если вместо этого вы хотите отображать значки файлов."
     },
     image: {
       contentMode: "Опция \"Авто\" автоматически определяет подходящий режим отображения - Изображение, Видео или YouTube - на основе предоставленного исходного URL-адреса."
@@ -2783,3 +2784,9 @@ editorLocalization.locales["ru"] = ruStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Принимает значения %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Принимает значения px."
 // p.effectiveColSpan: "Column span" => "Пролет колонны"
+// maskType.none: "None" => "Никакой"
+// maskType.pattern: "Pattern" => "Рисунок"
+// maskType.numeric: "Numeric" => "Числовой"
+// maskType.datetime: "Date and Time" => "Дата и время"
+// maskType.currency: "Currency" => "Валюта"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Отображает предварительный просмотр миниатюр для загруженных файлов, когда это возможно. Снимите флажок, если вместо этого вы хотите отображать значки файлов."

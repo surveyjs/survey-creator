@@ -654,13 +654,6 @@ export const thStrings = {
     allowResizeComment: "อนุญาตให้ผู้ใช้ปรับขนาดพื้นที่ข้อความ",
     textUpdateMode: "อัปเดตค่าช่องป้อนข้อมูล",
     maskType: "ประเภทหน้ากากอินพุต",
-    maskTypes: {
-      none: "ไม่มี",
-      patternmask: "รูปแบบ",
-      numericmask: "ตัวเลข",
-      datetimemask: "วันที่และเวลา",
-      currencymask: "สกุลเงิน"
-    },
     focusOnFirstError: "ตั้งโฟกัสที่คำตอบที่ไม่ถูกต้องแรก",
     checkErrorsMode: "รันการตรวจสอบ",
     validateVisitedEmptyFields: "ตรวจสอบฟิลด์ว่างเมื่อเสียโฟกัส",
@@ -995,6 +988,13 @@ export const thStrings = {
       url: "URL",
       week: "สัปดาห์"
     },
+    maskType: {
+      none: "ไม่มีใคร",
+      pattern: "แบบ",
+      numeric: "ตัวเลข",
+      datetime: "วันที่และเวลา",
+      currency: "เงินตรา"
+    },
     all: "ทั้งหมด",
     page: "หน้า",
     survey: "แบบสำรวจ",
@@ -1310,7 +1310,8 @@ export const thStrings = {
     },
     file: {
       imageHeight: "ปรับความสูงของภาพในผลลัพธ์แบบสำรวจ",
-      imageWidth: "ปรับความกว้างของภาพในผลลัพธ์แบบสำรวจ"
+      imageWidth: "ปรับความกว้างของภาพในผลลัพธ์แบบสำรวจ",
+      allowImagesPreview: "แสดงตัวอย่างภาพขนาดย่อสําหรับไฟล์ที่อัปโหลดเมื่อเป็นไปได้ ยกเลิกการเลือกหากคุณต้องการแสดงไอคอนไฟล์แทน"
     },
     image: {
       contentMode: "ตัวเลือก \"อัตโนมัติ\" จะกำหนดโหมดเนื้อหาที่เหมาะสมโดยอัตโนมัติตาม URL ที่ให้มา"
@@ -1656,3 +1657,9 @@ editorLocalization.locales["th"] = thStrings;
 // Remove those strings that you have corrected manually
 // pe.validateVisitedEmptyFields: "Validate empty fields on lost focus" => "ตรวจสอบฟิลด์ว่างเมื่อเสียโฟกัส"
 // pehelp.validateVisitedEmptyFields: "Enable this option to trigger validation when a user focuses on an empty input field and then leaves it without making any changes." => "เปิดใช้งานตัวเลือกนี้เพื่อทริกเกอร์การตรวจสอบความถูกต้องเมื่อผู้ใช้มุ่งเน้นไปที่ฟิลด์อินพุตที่ว่างเปล่า แล้วปล่อยออกจากฟิลด์โดยไม่ทําการเปลี่ยนแปลงใดๆ"
+// maskType.none: "None" => "ไม่มีใคร"
+// maskType.pattern: "Pattern" => "แบบ"
+// maskType.numeric: "Numeric" => "ตัวเลข"
+// maskType.datetime: "Date and Time" => "วันที่และเวลา"
+// maskType.currency: "Currency" => "เงินตรา"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "แสดงตัวอย่างภาพขนาดย่อสําหรับไฟล์ที่อัปโหลดเมื่อเป็นไปได้ ยกเลิกการเลือกหากคุณต้องการแสดงไอคอนไฟล์แทน"

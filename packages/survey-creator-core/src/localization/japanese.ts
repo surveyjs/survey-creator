@@ -654,13 +654,6 @@ export var jaStrings = {
     allowResizeComment: "ユーザーがテキスト領域のサイズを変更できるようにする",
     textUpdateMode: "テキストの質問値を更新する",
     maskType: "定型入力の種類",
-    maskTypes: {
-      none: "何一つ",
-      patternmask: "パターン",
-      numericmask: "数値",
-      datetimemask: "日付と時刻",
-      currencymask: "通貨"
-    },
     focusOnFirstError: "最初の無効な回答にフォーカスを設定する",
     checkErrorsMode: "検証の実行",
     validateVisitedEmptyFields: "フォーカスを失った空のフィールドの検証",
@@ -995,6 +988,13 @@ export var jaStrings = {
       url: "リンク",
       week: "週"
     },
+    maskType: {
+      none: "何一つ",
+      pattern: "パターン",
+      numeric: "数値",
+      datetime: "日付と時刻",
+      currency: "通貨"
+    },
     all: "すべて",
     page: "ページ",
     survey: "アンケート",
@@ -1310,7 +1310,8 @@ export var jaStrings = {
     },
     file: {
       imageHeight: "アンケート結果の画像の高さを調整します。",
-      imageWidth: "アンケート結果の画像の幅を調整します。"
+      imageWidth: "アンケート結果の画像の幅を調整します。",
+      allowImagesPreview: "可能な場合は、アップロードされたファイルのサムネイル プレビューを表示します。代わりにファイルアイコンを表示する場合は、選択を解除します。"
     },
     image: {
       contentMode: "「自動」オプションでは、指定されたソースURLに基づいて、表示に適したモード(画像、動画、YouTube)が自動的に決定されます。"
@@ -2722,3 +2723,9 @@ editorLocalization.locales["ja"] = jaStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "値 % を受け入れます。"
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "値 px を受け入れます。"
 // p.effectiveColSpan: "Column span" => "列スパン"
+// maskType.none: "None" => "何一つ"
+// maskType.pattern: "Pattern" => "パターン"
+// maskType.numeric: "Numeric" => "数値"
+// maskType.datetime: "Date and Time" => "日付と時刻"
+// maskType.currency: "Currency" => "通貨"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "可能な場合は、アップロードされたファイルのサムネイル プレビューを表示します。代わりにファイルアイコンを表示する場合は、選択を解除します。"
