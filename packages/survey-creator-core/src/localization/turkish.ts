@@ -654,13 +654,6 @@ export var turkishStrings = {
     allowResizeComment: "Kullanıcıların metin alanlarını yeniden boyutlandırmasına izin verme",
     textUpdateMode: "Metin sorusu değerini güncelleme",
     maskType: "Giriş maskesi türü",
-    maskTypes: {
-      none: "Hiç kimse",
-      patternmask: "Desen",
-      numericmask: "Sayısal",
-      datetimemask: "Tarih ve Saat",
-      currencymask: "Para birimi"
-    },
     focusOnFirstError: "İlk hataya odaklan",
     checkErrorsMode: "Çalıştırma doğrulaması",
     validateVisitedEmptyFields: "Kayıp odakta boş alanları doğrulayın",
@@ -995,6 +988,13 @@ export var turkishStrings = {
       url: "URL",
       week: "Hafta"
     },
+    maskType: {
+      none: "Hiç kimse",
+      pattern: "Desen",
+      numeric: "Sayısal",
+      datetime: "Tarih ve Saat",
+      currency: "Para birimi"
+    },
     all: "Tümü",
     page: "Sayfa",
     survey: "Anket",
@@ -1310,7 +1310,8 @@ export var turkishStrings = {
     },
     file: {
       imageHeight: "Anket sonuçlarındaki görüntünün yüksekliğini ayarlar.",
-      imageWidth: "Anket sonuçlarındaki görüntünün genişliğini ayarlar."
+      imageWidth: "Anket sonuçlarındaki görüntünün genişliğini ayarlar.",
+      allowImagesPreview: "Mümkün olduğunda karşıya yüklenen dosyalar için küçük resim önizlemelerini görüntüler. Bunun yerine dosya simgelerini göstermek istiyorsanız seçimi kaldırın."
     },
     image: {
       contentMode: "\"Otomatik\" seçeneği, sağlanan kaynak URL'ye göre görüntüleme için uygun modu (Resim, Video veya YouTube) otomatik olarak belirler."
@@ -2718,3 +2719,9 @@ editorLocalization.locales["tr"] = turkishStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "% değerlerini kabul eder."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Px değerlerini kabul eder."
 // p.effectiveColSpan: "Column span" => "Sütun aralığı"
+// maskType.none: "None" => "Hiç kimse"
+// maskType.pattern: "Pattern" => "Desen"
+// maskType.numeric: "Numeric" => "Sayısal"
+// maskType.datetime: "Date and Time" => "Tarih ve Saat"
+// maskType.currency: "Currency" => "Para birimi"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Mümkün olduğunda karşıya yüklenen dosyalar için küçük resim önizlemelerini görüntüler. Bunun yerine dosya simgelerini göstermek istiyorsanız seçimi kaldırın."

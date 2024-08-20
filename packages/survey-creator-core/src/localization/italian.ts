@@ -654,13 +654,6 @@ var italianTranslation = {
     allowResizeComment: "Consenti agli utenti di ridimensionare le aree di testo",
     textUpdateMode: "Aggiornare il valore del testo della domanda",
     maskType: "Tipo di maschera di input",
-    maskTypes: {
-      none: "Nessuno",
-      patternmask: "Modello",
-      numericmask: "Numerico",
-      datetimemask: "Data e ora",
-      currencymask: "Valuta"
-    },
     focusOnFirstError: "Imposta il focus sulla prima risposta invalida",
     checkErrorsMode: "Esegui la convalida",
     validateVisitedEmptyFields: "Convalida i campi vuoti in caso di perdita dello stato attivo",
@@ -995,6 +988,13 @@ var italianTranslation = {
       url: "URL",
       week: "Settimana"
     },
+    maskType: {
+      none: "Nessuno",
+      pattern: "Modello",
+      numeric: "Numerico",
+      datetime: "Data e ora",
+      currency: "Valuta"
+    },
     all: "Tutto",
     page: "Pagina",
     survey: "Sondaggio",
@@ -1310,7 +1310,8 @@ var italianTranslation = {
     },
     file: {
       imageHeight: "Regola l'altezza dell'immagine nei risultati del rilevamento.",
-      imageWidth: "Regola la larghezza dell'immagine nei risultati del rilevamento."
+      imageWidth: "Regola la larghezza dell'immagine nei risultati del rilevamento.",
+      allowImagesPreview: "Visualizza le anteprime in miniatura per i file caricati, quando possibile. Deseleziona se desideri mostrare le icone dei file."
     },
     image: {
       contentMode: "L'opzione \"Auto\" determina automaticamente la modalità di visualizzazione adatta - Immagine, Video o YouTube - in base all'URL di origine fornito."
@@ -2481,3 +2482,9 @@ editorLocalization.locales["it"] = italianTranslation;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Accetta valori %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Accetta valori px."
 // p.effectiveColSpan: "Column span" => "Estensione delle colonne"
+// maskType.none: "None" => "Nessuno"
+// maskType.pattern: "Pattern" => "Modello"
+// maskType.numeric: "Numeric" => "Numerico"
+// maskType.datetime: "Date and Time" => "Data e ora"
+// maskType.currency: "Currency" => "Valuta"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Visualizza le anteprime in miniatura per i file caricati, quando possibile. Deseleziona se desideri mostrare le icone dei file."

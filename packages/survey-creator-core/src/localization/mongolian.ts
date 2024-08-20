@@ -654,13 +654,6 @@ export var mnStrings = {
     allowResizeComment: "Хэрэглэгчдэд текстийн газруудыг дахин ашиглах боломж олго",
     textUpdateMode: "Текст асуултын утгыг шинэчлэх",
     maskType: "Оролтын багны төрөл",
-    maskTypes: {
-      none: "Хэн ч биш",
-      patternmask: "Загвар",
-      numericmask: "Тоо нь",
-      datetimemask: "Огноо, цаг",
-      currencymask: "Валютын ханш"
-    },
     focusOnFirstError: "Анхны буруу хариулт руу чиглүүлэх",
     checkErrorsMode: "Баталгаажуулалт ажиллуулах",
     validateVisitedEmptyFields: "Алдагдсан фокус дээр хоосон талбайг баталгаажуулах",
@@ -995,6 +988,13 @@ export var mnStrings = {
       url: "URL",
       week: "Долоо хоног"
     },
+    maskType: {
+      none: "Хэн ч биш",
+      pattern: "Загвар",
+      numeric: "Тоо нь",
+      datetime: "Огноо, цаг",
+      currency: "Валютын ханш"
+    },
     all: "Бүх",
     page: "Хуудас",
     survey: "Санал асуулга",
@@ -1310,7 +1310,8 @@ export var mnStrings = {
     },
     file: {
       imageHeight: "Судалгааны үр дүнгээр дүрсний өндрийг тохируулна.",
-      imageWidth: "Судалгааны үр дүн дэх зургийн өргөнийг тохируулна."
+      imageWidth: "Судалгааны үр дүн дэх зургийн өргөнийг тохируулна.",
+      allowImagesPreview: "Боломжтой бол татаж авсан файлуудад зориулсан эрхий хурууны урьдчилсан үзүүлэлтийг үзүүлнэ. Оронд нь файлын зургуудыг үзүүлэхийг хүсвэл сонгогдоогүй."
     },
     image: {
       contentMode: "\"Авто\" сонголт нь эх сурвалж URL-д суурилсан зураг, видео, эсвэл YouTube - харуулах тохиромжтой хэв маягийг автоматаар тодорхойлдог."
@@ -2379,3 +2380,9 @@ editorLocalization.locales["mn"] = mnStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Үнэт зүйлсийг %-ийг хүлээн зөвшөөрдөг."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Үнэ цэнэ px-ийг хүлээн зөвшөөрдөг."
 // p.effectiveColSpan: "Column span" => "Баганын хугацаа"
+// maskType.none: "None" => "Хэн ч биш"
+// maskType.pattern: "Pattern" => "Загвар"
+// maskType.numeric: "Numeric" => "Тоо нь"
+// maskType.datetime: "Date and Time" => "Огноо, цаг"
+// maskType.currency: "Currency" => "Валютын ханш"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Боломжтой бол татаж авсан файлуудад зориулсан эрхий хурууны урьдчилсан үзүүлэлтийг үзүүлнэ. Оронд нь файлын зургуудыг үзүүлэхийг хүсвэл сонгогдоогүй."

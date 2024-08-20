@@ -654,13 +654,6 @@ export var hebrewStrings = {
     allowResizeComment: "אפשר התאמה ידנית של אזורי טקסט על ידי המשתמש",
     textUpdateMode: "עדכן את ערך הטקסט של השאלה",
     maskType: "סוג מסיכת קלט",
-    maskTypes: {
-      none: "ללא",
-      patternmask: "תבנית",
-      numericmask: "מספריים",
-      datetimemask: "תאריך ושעה",
-      currencymask: "מטבע"
-    },
     focusOnFirstError: "קפיצה לתשובה השגויה הראשונה",
     checkErrorsMode: "הפעל את האימות",
     validateVisitedEmptyFields: "אימות שדות ריקים במיקוד שאבד",
@@ -995,6 +988,13 @@ export var hebrewStrings = {
       url: "כתובת URL",
       week: "שבוע"
     },
+    maskType: {
+      none: "ללא",
+      pattern: "תבנית",
+      numeric: "מספריים",
+      datetime: "תאריך ושעה",
+      currency: "מטבע"
+    },
     all: "הכל",
     page: "עמוד",
     survey: "שאלון",
@@ -1310,7 +1310,8 @@ export var hebrewStrings = {
     },
     file: {
       imageHeight: "התאמת גובה התמונה בתוצאות הסקר.",
-      imageWidth: "התאמת רוחב התמונה בתוצאות הסקר."
+      imageWidth: "התאמת רוחב התמונה בתוצאות הסקר.",
+      allowImagesPreview: "מציג תצוגות מקדימות של תמונות ממוזערות עבור קבצים שהועלו במידת האפשר. בטל את הבחירה אם ברצונך להציג סמלי קבצים במקום זאת."
     },
     image: {
       contentMode: "האפשרות \"אוטומטי\" קובעת אוטומטית את המצב המתאים לתצוגה - תמונה, וידאו או YouTube - בהתבסס על כתובת האתר המקורית שסופקה."
@@ -2291,3 +2292,9 @@ editorLocalization.locales["he"] = hebrewStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "מקבל ערכים %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "מקבל ערכים px."
 // p.effectiveColSpan: "Column span" => "טווח עמודות"
+// maskType.none: "None" => "ללא"
+// maskType.pattern: "Pattern" => "תבנית"
+// maskType.numeric: "Numeric" => "מספריים"
+// maskType.datetime: "Date and Time" => "תאריך ושעה"
+// maskType.currency: "Currency" => "מטבע"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "מציג תצוגות מקדימות של תמונות ממוזערות עבור קבצים שהועלו במידת האפשר. בטל את הבחירה אם ברצונך להציג סמלי קבצים במקום זאת."
