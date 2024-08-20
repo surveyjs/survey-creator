@@ -100,7 +100,7 @@ export class QuestionAdornerComponent extends CreatorModelElement<
   }
 
   protected renderQuestionTitle(): JSX.Element {
-    if (this.model.element.hasTitle) return null;
+    if (this.model.element.hasTitle || this.model.element.isPanel) return null;
     const element = this.model.element as Question | PanelModel;
     return (
       <div className={this.model.cssCollapsedHiddenHeader} >
