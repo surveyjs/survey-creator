@@ -1204,7 +1204,7 @@ test("drag drop one empty panel to other empty panel - https://github.com/survey
 
   const ddHelper: any = new DragDropSurveyElements(survey);
   ddHelper.draggedElement = p2;
-
+  ddHelper.insideContainer = true;
   ddHelper.dragOverCore(p1, DragTypeOverMeEnum.InsideEmptyPanel);
   ddHelper.doDrop();
 
