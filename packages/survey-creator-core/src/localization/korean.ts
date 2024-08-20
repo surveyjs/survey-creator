@@ -654,13 +654,6 @@ export var koreanStrings = {
     allowResizeComment: "사용자가 텍스트 영역의 크기를 조정할 수 있도록 허용",
     textUpdateMode: "텍스트 질문 값 업데이트",
     maskType: "입력 마스크 유형",
-    maskTypes: {
-      none: "없음",
-      patternmask: "무늬",
-      numericmask: "숫자",
-      datetimemask: "날짜 및 시간",
-      currencymask: "통화"
-    },
     focusOnFirstError: "첫 번째 오답에 포커스 설정",
     checkErrorsMode: "유효성 검사 실행",
     validateVisitedEmptyFields: "초점이 손실된 빈 필드 유효성 검사",
@@ -994,6 +987,13 @@ export var koreanStrings = {
       time: "시간",
       url: "URL (영문)",
       week: "주"
+    },
+    maskType: {
+      none: "없음",
+      pattern: "무늬",
+      numeric: "숫자",
+      datetime: "날짜 및 시간",
+      currency: "통화"
     },
     all: "모두",
     page: "페이지",
@@ -2939,3 +2939,8 @@ editorLocalization.locales["ko"] = koreanStrings;
 // file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "가능한 경우 업로드된 파일에 대한 썸네일 미리보기를 표시합니다. 대신 파일 아이콘을 표시하려면 선택을 취소합니다."
 // pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "\"컨테이너와 동일\" 옵션은 설문조사가 배치된 HTML 요소에 맞게 진행률 표시줄 영역 너비를 자동으로 조정합니다."
 // p.progressBarInheritWidthFrom: "Progress bar area width" => "진행률 표시줄 영역 너비"
+// maskType.none: "None" => "없음"
+// maskType.pattern: "Pattern" => "무늬"
+// maskType.numeric: "Numeric" => "숫자"
+// maskType.datetime: "Date and Time" => "날짜 및 시간"
+// maskType.currency: "Currency" => "통화"

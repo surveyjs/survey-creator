@@ -654,13 +654,6 @@ export var msStrings = {
     allowResizeComment: "Benarkan pengguna mensaiz semula kawasan teks",
     textUpdateMode: "Mengemas kini nilai soalan teks",
     maskType: "Input jenis topeng",
-    maskTypes: {
-      none: "Tiada",
-      patternmask: "Corak",
-      numericmask: "Angka",
-      datetimemask: "Tarikh dan Masa",
-      currencymask: "Mata wang"
-    },
     focusOnFirstError: "Mengesetkan fokus pada jawapan tidak sah yang pertama",
     checkErrorsMode: "Jalankan pengesahihan",
     validateVisitedEmptyFields: "Sahkan medan kosong pada fokus yang hilang",
@@ -994,6 +987,13 @@ export var msStrings = {
       time: "Masa",
       url: "URL",
       week: "Minggu"
+    },
+    maskType: {
+      none: "Tiada",
+      pattern: "Corak",
+      numeric: "Angka",
+      datetime: "Tarikh dan Masa",
+      currency: "Mata wang"
     },
     all: "semua",
     page: "halaman",
@@ -2688,3 +2688,8 @@ editorLocalization.locales["ms"] = msStrings;
 // file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Memaparkan pratonton lakaran kecil untuk fail yang dimuat naik apabila boleh. Nyahpilih jika anda mahu menunjukkan ikon fail."
 // pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "Pilihan \"Sama seperti bekas\" melaraskan lebar kawasan bar kemajuan secara automatik agar sesuai dengan elemen HTML yang diletakkan dalam tinjauan."
 // p.progressBarInheritWidthFrom: "Progress bar area width" => "Lebar kawasan bar kemajuan"
+// maskType.none: "None" => "Tiada"
+// maskType.pattern: "Pattern" => "Corak"
+// maskType.numeric: "Numeric" => "Angka"
+// maskType.datetime: "Date and Time" => "Tarikh dan Masa"
+// maskType.currency: "Currency" => "Mata wang"

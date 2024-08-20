@@ -654,13 +654,6 @@ export var turkishStrings = {
     allowResizeComment: "Kullanıcıların metin alanlarını yeniden boyutlandırmasına izin verme",
     textUpdateMode: "Metin sorusu değerini güncelleme",
     maskType: "Giriş maskesi türü",
-    maskTypes: {
-      none: "Hiç kimse",
-      patternmask: "Desen",
-      numericmask: "Sayısal",
-      datetimemask: "Tarih ve Saat",
-      currencymask: "Para birimi"
-    },
     focusOnFirstError: "İlk hataya odaklan",
     checkErrorsMode: "Çalıştırma doğrulaması",
     validateVisitedEmptyFields: "Kayıp odakta boş alanları doğrulayın",
@@ -994,6 +987,13 @@ export var turkishStrings = {
       time: "Saat",
       url: "URL",
       week: "Hafta"
+    },
+    maskType: {
+      none: "Hiç kimse",
+      pattern: "Desen",
+      numeric: "Sayısal",
+      datetime: "Tarih ve Saat",
+      currency: "Para birimi"
     },
     all: "Tümü",
     page: "Sayfa",
@@ -2730,3 +2730,8 @@ editorLocalization.locales["tr"] = turkishStrings;
 // file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Mümkün olduğunda karşıya yüklenen dosyalar için küçük resim önizlemelerini görüntüler. Bunun yerine dosya simgelerini göstermek istiyorsanız seçimi kaldırın."
 // pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "\"Kapsayıcı ile aynı\" seçeneği, ilerleme çubuğu alan genişliğini anketin yerleştirildiği HTML öğesine sığacak şekilde otomatik olarak ayarlar."
 // p.progressBarInheritWidthFrom: "Progress bar area width" => "İlerleme çubuğu alanı genişliği"
+// maskType.none: "None" => "Hiç kimse"
+// maskType.pattern: "Pattern" => "Desen"
+// maskType.numeric: "Numeric" => "Sayısal"
+// maskType.datetime: "Date and Time" => "Tarih ve Saat"
+// maskType.currency: "Currency" => "Para birimi"

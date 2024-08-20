@@ -654,13 +654,6 @@ export var arStrings = {
     allowResizeComment: "السماح للمستخدمين بتغيير حجم مناطق النص",
     textUpdateMode: "تحديث قيمة السؤال النصي",
     maskType: "نوع قناع الإدخال",
-    maskTypes: {
-      none: "اي",
-      patternmask: "رسم",
-      numericmask: "عددي",
-      datetimemask: "التاريخ والوقت",
-      currencymask: "عملة"
-    },
     focusOnFirstError: "تعيين التركيز على أول إجابة غير صالحة",
     checkErrorsMode: "تشغيل التحقق من الصحة",
     validateVisitedEmptyFields: "التحقق من صحة الحقول الفارغة على التركيز المفقود",
@@ -994,6 +987,13 @@ export var arStrings = {
       time: "الوقت",
       url: "الرابط",
       week: "أسبوع"
+    },
+    maskType: {
+      none: "اي",
+      pattern: "رسم",
+      numeric: "عددي",
+      datetime: "التاريخ والوقت",
+      currency: "عملة"
     },
     all: "الكل",
     page: "الصفحة",
@@ -2646,3 +2646,8 @@ editorLocalization.locales["ar"] = arStrings;
 // file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "يعرض معاينات الصور المصغرة للملفات التي تم تحميلها عندما يكون ذلك ممكنا. قم بإلغاء تحديد ما إذا كنت تريد إظهار رموز الملفات بدلا من ذلك."
 // pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "يقوم خيار \"نفس الحاوية\" بضبط عرض منطقة شريط التقدم تلقائيا ليلائم عنصر HTML الذي يتم وضع الاستطلاع فيه."
 // p.progressBarInheritWidthFrom: "Progress bar area width" => "عرض منطقة شريط التقدم"
+// maskType.none: "None" => "اي"
+// maskType.pattern: "Pattern" => "رسم"
+// maskType.numeric: "Numeric" => "عددي"
+// maskType.datetime: "Date and Time" => "التاريخ والوقت"
+// maskType.currency: "Currency" => "عملة"

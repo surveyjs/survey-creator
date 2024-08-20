@@ -654,13 +654,6 @@ export var danishStrings = {
     allowResizeComment: "Tillad brugere at ændre størrelsen på tekstområder",
     textUpdateMode: "Opdater værdi for tekstspørgsmål",
     maskType: "Type af inputmaske",
-    maskTypes: {
-      none: "Ingen",
-      patternmask: "Mønster",
-      numericmask: "Numerisk",
-      datetimemask: "Dato og klokkeslæt",
-      currencymask: "Valuta"
-    },
     focusOnFirstError: "Sæt fokus på det første ugyldige svar",
     checkErrorsMode: "Kør validering",
     validateVisitedEmptyFields: "Validere tomme felter ved mistet fokus",
@@ -994,6 +987,13 @@ export var danishStrings = {
       time: "Tidspunkt",
       url: "URL-adresse",
       week: "Uge"
+    },
+    maskType: {
+      none: "Ingen",
+      pattern: "Mønster",
+      numeric: "Numerisk",
+      datetime: "Dato og klokkeslæt",
+      currency: "Valuta"
     },
     all: "all",
     page: "page",
@@ -2920,3 +2920,8 @@ editorLocalization.locales["da"] = danishStrings;
 // file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Viser miniaturebilleder for uploadede filer, når det er muligt. Fjern markeringen, hvis du vil vise filikoner i stedet."
 // pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "Indstillingen \"Samme som beholder\" justerer automatisk bredden på statuslinjens område, så den passer ind i det HTML-element, som undersøgelsen er placeret i."
 // p.progressBarInheritWidthFrom: "Progress bar area width" => "Bredde på statuslinjeområde"
+// maskType.none: "None" => "Ingen"
+// maskType.pattern: "Pattern" => "Mønster"
+// maskType.numeric: "Numeric" => "Numerisk"
+// maskType.datetime: "Date and Time" => "Dato og klokkeslæt"
+// maskType.currency: "Currency" => "Valuta"

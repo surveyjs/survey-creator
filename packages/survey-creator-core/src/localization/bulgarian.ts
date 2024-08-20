@@ -654,13 +654,6 @@ export var bgStrings = {
     allowResizeComment: "Позволява на потребителите да преоразмеряват текстови области",
     textUpdateMode: "Актуализиране стойността на текстовия въпрос",
     maskType: "Тип маска за въвеждане",
-    maskTypes: {
-      none: "Никой",
-      patternmask: "Шарка",
-      numericmask: "Цифров",
-      datetimemask: "Дата и час",
-      currencymask: "Валута"
-    },
     focusOnFirstError: "Фокусиране върху първия невалиден отговор",
     checkErrorsMode: "Стартиране на валидацията",
     validateVisitedEmptyFields: "Проверка на празни полета при загубен фокус",
@@ -994,6 +987,13 @@ export var bgStrings = {
       time: "Време",
       url: "URL",
       week: "Седмица"
+    },
+    maskType: {
+      none: "Никой",
+      pattern: "Шарка",
+      numeric: "Цифров",
+      datetime: "Дата и час",
+      currency: "Валута"
     },
     all: "Всички",
     page: "Старница",
@@ -2298,3 +2298,8 @@ editorLocalization.locales["bg"] = bgStrings;
 // file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Показва визуализации на миниатюри за качени файлове, когато е възможно. Премахнете отметката, ако вместо това искате да показвате икони на файлове."
 // pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "Опцията \"Същото като контейнер\" автоматично регулира ширината на областта на лентата за напредъка, за да се побере в HTML елемента, в който е поставена анкетата."
 // p.progressBarInheritWidthFrom: "Progress bar area width" => "Ширина на областта на лентата за напредък"
+// maskType.none: "None" => "Никой"
+// maskType.pattern: "Pattern" => "Шарка"
+// maskType.numeric: "Numeric" => "Цифров"
+// maskType.datetime: "Date and Time" => "Дата и час"
+// maskType.currency: "Currency" => "Валута"

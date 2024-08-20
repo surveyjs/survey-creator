@@ -654,13 +654,6 @@ export var jaStrings = {
     allowResizeComment: "ユーザーがテキスト領域のサイズを変更できるようにする",
     textUpdateMode: "テキストの質問値を更新する",
     maskType: "定型入力の種類",
-    maskTypes: {
-      none: "何一つ",
-      patternmask: "パターン",
-      numericmask: "数値",
-      datetimemask: "日付と時刻",
-      currencymask: "通貨"
-    },
     focusOnFirstError: "最初の無効な回答にフォーカスを設定する",
     checkErrorsMode: "検証の実行",
     validateVisitedEmptyFields: "フォーカスを失った空のフィールドの検証",
@@ -994,6 +987,13 @@ export var jaStrings = {
       time: "時間",
       url: "リンク",
       week: "週"
+    },
+    maskType: {
+      none: "何一つ",
+      pattern: "パターン",
+      numeric: "数値",
+      datetime: "日付と時刻",
+      currency: "通貨"
     },
     all: "すべて",
     page: "ページ",
@@ -2734,3 +2734,8 @@ editorLocalization.locales["ja"] = jaStrings;
 // file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "可能な場合は、アップロードされたファイルのサムネイル プレビューを表示します。代わりにファイルアイコンを表示する場合は、選択を解除します。"
 // pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "「コンテナと同じ」オプションは、調査が配置されているHTML要素に収まるようにプログレスバーの領域幅を自動調整します。"
 // p.progressBarInheritWidthFrom: "Progress bar area width" => "プログレスバー領域の幅"
+// maskType.none: "None" => "何一つ"
+// maskType.pattern: "Pattern" => "パターン"
+// maskType.numeric: "Numeric" => "数値"
+// maskType.datetime: "Date and Time" => "日付と時刻"
+// maskType.currency: "Currency" => "通貨"

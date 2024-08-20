@@ -654,13 +654,6 @@ var persianStrings = {
     allowResizeComment: "اجازه دادن به کاربران برای تغییر اندازه مناطق متن",
     textUpdateMode: "بههنگامسازی مقدار سؤال متن",
     maskType: "نوع ماسک ورودی",
-    maskTypes: {
-      none: "هیچ کدام",
-      patternmask: "الگوی",
-      numericmask: "عددی",
-      datetimemask: "تاریخ و زمان",
-      currencymask: "ارز"
-    },
     focusOnFirstError: "تنظیم تمرکز روی اولین پاسخ نامعتبر",
     checkErrorsMode: "اجرای اعتبارسنجی",
     validateVisitedEmptyFields: "اعتبارسنجی فیلدهای خالی در فوکوس از دست رفته",
@@ -994,6 +987,13 @@ var persianStrings = {
       time: "زمان",
       url: "آدرس",
       week: "هفته"
+    },
+    maskType: {
+      none: "هیچ کدام",
+      pattern: "الگوی",
+      numeric: "عددی",
+      datetime: "تاریخ و زمان",
+      currency: "ارز"
     },
     all: "تمام",
     page: "صفحه",
@@ -2690,3 +2690,8 @@ editorLocalization.locales["fa"] = persianStrings;
 // file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "در صورت امکان، پیش نمایش تصاویر کوچک را برای فایل های آپلود شده نمایش می دهد. اگر می خواهید به جای آن نمادهای فایل را نشان دهید، انتخاب را لغو کنید."
 // pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "گزینه \"همان کانتینر\" به طور خودکار عرض ناحیه نوار پیشرفت را تنظیم می کند تا در عنصر HTML که نظرسنجی در آن قرار می گیرد قرار گیرد."
 // p.progressBarInheritWidthFrom: "Progress bar area width" => "عرض مساحت نوار پیشرفت"
+// maskType.none: "None" => "هیچ کدام"
+// maskType.pattern: "Pattern" => "الگوی"
+// maskType.numeric: "Numeric" => "عددی"
+// maskType.datetime: "Date and Time" => "تاریخ و زمان"
+// maskType.currency: "Currency" => "ارز"

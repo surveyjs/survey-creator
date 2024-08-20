@@ -654,13 +654,6 @@ var traditionalChineseTranslation = {
     allowResizeComment: "允許用戶調整文字區域的大小",
     textUpdateMode: "更新文字問題值",
     maskType: "輸入掩碼類型",
-    maskTypes: {
-      none: "沒有",
-      patternmask: "模式",
-      numericmask: "數值的",
-      datetimemask: "日期和時間",
-      currencymask: "貨幣"
-    },
     focusOnFirstError: "將焦點放在第一個無效答案上",
     checkErrorsMode: "運行驗證",
     validateVisitedEmptyFields: "驗證失去焦點時的空欄位",
@@ -994,6 +987,13 @@ var traditionalChineseTranslation = {
       time: "時間",
       url: "網址",
       week: "周"
+    },
+    maskType: {
+      none: "沒有",
+      pattern: "模式",
+      numeric: "數值的",
+      datetime: "日期和時間",
+      currency: "貨幣"
     },
     all: "都",
     page: "頁",
@@ -3007,3 +3007,8 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "儘可能顯示已上傳檔的縮圖預覽。取消選擇是否要顯示檔圖示。"
 // pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "“與容器相同”選項會自動調整進度條區域的寬度，以適應放置調查的 HTML 元素。"
 // p.progressBarInheritWidthFrom: "Progress bar area width" => "進度條區域寬度"
+// maskType.none: "None" => "沒有"
+// maskType.pattern: "Pattern" => "模式"
+// maskType.numeric: "Numeric" => "數值的"
+// maskType.datetime: "Date and Time" => "日期和時間"
+// maskType.currency: "Currency" => "貨幣"

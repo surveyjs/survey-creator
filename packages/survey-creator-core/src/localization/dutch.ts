@@ -654,13 +654,6 @@ export var nlStrings = {
     allowResizeComment: "Gebruikers toestaan het formaat van tekstgebieden te wijzigen",
     textUpdateMode: "Modus tekstvernieuwing",
     maskType: "Type invoermasker",
-    maskTypes: {
-      none: "Geen",
-      patternmask: "Patroon",
-      numericmask: "Numeriek",
-      datetimemask: "Datum en tijd",
-      currencymask: "Valuta"
-    },
     focusOnFirstError: "Focus op eerste fout zetten",
     checkErrorsMode: "Validatie uitvoeren",
     validateVisitedEmptyFields: "Lege velden valideren bij verloren focus",
@@ -994,6 +987,13 @@ export var nlStrings = {
       time: "Tijd",
       url: "Url",
       week: "Week"
+    },
+    maskType: {
+      none: "Geen",
+      pattern: "Patroon",
+      numeric: "Numeriek",
+      datetime: "Datum en tijd",
+      currency: "Valuta"
     },
     all: "Alle",
     page: "Pagina",
@@ -2716,3 +2716,8 @@ editorLocalization.locales["nl"] = nlStrings;
 // file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Geeft indien mogelijk miniatuurvoorbeelden weer voor geüploade bestanden. Schakel de selectie uit als u in plaats daarvan bestandspictogrammen wilt weergeven."
 // pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "Met de optie \"Zelfde als container\" wordt de breedte van het gebied van de voortgangsbalk automatisch aangepast aan het HTML-element waarin de enquête is geplaatst."
 // p.progressBarInheritWidthFrom: "Progress bar area width" => "Breedte van het voortgangsbalkgebied"
+// maskType.none: "None" => "Geen"
+// maskType.pattern: "Pattern" => "Patroon"
+// maskType.numeric: "Numeric" => "Numeriek"
+// maskType.datetime: "Date and Time" => "Datum en tijd"
+// maskType.currency: "Currency" => "Valuta"

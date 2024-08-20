@@ -654,13 +654,6 @@ export const roStrings = {
     allowResizeComment: "Permite utilizatorilor să redimensioneze zonele de text",
     textUpdateMode: "Actualizează valorile câmpurilor de intrare",
     maskType: "Tip mască de intrare",
-    maskTypes: {
-      none: "Niciuna",
-      patternmask: "Model",
-      numericmask: "Numeric",
-      datetimemask: "Dată și oră",
-      currencymask: "Valută"
-    },
     focusOnFirstError: "Focalizați pe primul răspuns invalid",
     checkErrorsMode: "Rulați validarea",
     validateVisitedEmptyFields: "Validarea câmpurilor goale pentru focalizarea pierdută",
@@ -994,6 +987,13 @@ export const roStrings = {
       time: "Ora",
       url: "URL",
       week: "Săptămână"
+    },
+    maskType: {
+      none: "Niciunul",
+      pattern: "Model",
+      numeric: "Numerică",
+      datetime: "Data și ora",
+      currency: "Valută"
     },
     all: "Toate",
     page: "Pagină",
@@ -1668,3 +1668,8 @@ editorLocalization.locales["ro"] = roStrings;
 // file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Afișează previzualizări în miniatură pentru fișierele încărcate atunci când este posibil. Deselectați dacă doriți să afișați pictogramele fișierelor."
 // pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "Opțiunea \"La fel ca containerul\" ajustează automat lățimea zonei barei de progres pentru a se potrivi cu elementul HTML în care este plasat sondajul."
 // p.progressBarInheritWidthFrom: "Progress bar area width" => "Lățimea zonei barei de progres"
+// maskType.none: "None" => "Niciunul"
+// maskType.pattern: "Pattern" => "Model"
+// maskType.numeric: "Numeric" => "Numerică"
+// maskType.datetime: "Date and Time" => "Data și ora"
+// maskType.currency: "Currency" => "Valută"

@@ -654,13 +654,6 @@ export var ruStrings = {
     allowResizeComment: "Разрешить пользователям изменять размер текстовых областей",
     textUpdateMode: "Обновление значения текстового вопроса",
     maskType: "Тип входной маски",
-    maskTypes: {
-      none: "Никакой",
-      patternmask: "Рисунок",
-      numericmask: "Числовой",
-      datetimemask: "Дата и время",
-      currencymask: "Валюта"
-    },
     focusOnFirstError: "Установка фокуса на первом недопустимом ответе",
     checkErrorsMode: "Запуск проверки",
     validateVisitedEmptyFields: "Проверка пустых полей при потере фокуса",
@@ -994,6 +987,13 @@ export var ruStrings = {
       time: "Время",
       url: "URL-адрес",
       week: "Неделя"
+    },
+    maskType: {
+      none: "Никакой",
+      pattern: "Рисунок",
+      numeric: "Числовой",
+      datetime: "Дата и время",
+      currency: "Валюта"
     },
     all: "Все",
     page: "Страница",
@@ -2795,3 +2795,8 @@ editorLocalization.locales["ru"] = ruStrings;
 // file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Отображает предварительный просмотр миниатюр для загруженных файлов, когда это возможно. Снимите флажок, если вместо этого вы хотите отображать значки файлов."
 // pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "Опция \"То же, что и контейнер\" автоматически настраивает ширину области индикатора выполнения в соответствии с HTML-элементом, в который помещается опрос."
 // p.progressBarInheritWidthFrom: "Progress bar area width" => "Ширина области индикатора выполнения"
+// maskType.none: "None" => "Никакой"
+// maskType.pattern: "Pattern" => "Рисунок"
+// maskType.numeric: "Numeric" => "Числовой"
+// maskType.datetime: "Date and Time" => "Дата и время"
+// maskType.currency: "Currency" => "Валюта"

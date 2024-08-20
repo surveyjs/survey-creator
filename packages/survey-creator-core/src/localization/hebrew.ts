@@ -654,13 +654,6 @@ export var hebrewStrings = {
     allowResizeComment: "אפשר התאמה ידנית של אזורי טקסט על ידי המשתמש",
     textUpdateMode: "עדכן את ערך הטקסט של השאלה",
     maskType: "סוג מסיכת קלט",
-    maskTypes: {
-      none: "ללא",
-      patternmask: "תבנית",
-      numericmask: "מספריים",
-      datetimemask: "תאריך ושעה",
-      currencymask: "מטבע"
-    },
     focusOnFirstError: "קפיצה לתשובה השגויה הראשונה",
     checkErrorsMode: "הפעל את האימות",
     validateVisitedEmptyFields: "אימות שדות ריקים במיקוד שאבד",
@@ -994,6 +987,13 @@ export var hebrewStrings = {
       time: "שעה",
       url: "כתובת URL",
       week: "שבוע"
+    },
+    maskType: {
+      none: "ללא",
+      pattern: "תבנית",
+      numeric: "מספריים",
+      datetime: "תאריך ושעה",
+      currency: "מטבע"
     },
     all: "הכל",
     page: "עמוד",
@@ -2303,3 +2303,8 @@ editorLocalization.locales["he"] = hebrewStrings;
 // file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "מציג תצוגות מקדימות של תמונות ממוזערות עבור קבצים שהועלו במידת האפשר. בטל את הבחירה אם ברצונך להציג סמלי קבצים במקום זאת."
 // pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "האפשרות \"זהה לגורם מכיל\" מתאימה אוטומטית את רוחב אזור מד ההתקדמות כך שיתאים לרכיב HTML שבו ממוקם הסקר."
 // p.progressBarInheritWidthFrom: "Progress bar area width" => "רוחב אזור מד התקדמות"
+// maskType.none: "None" => "ללא"
+// maskType.pattern: "Pattern" => "תבנית"
+// maskType.numeric: "Numeric" => "מספריים"
+// maskType.datetime: "Date and Time" => "תאריך ושעה"
+// maskType.currency: "Currency" => "מטבע"

@@ -654,13 +654,6 @@ export let svStrings = {
     allowResizeComment: "Tillåt användare att ändra storlek på textområden",
     textUpdateMode: "Uppdatera textfrågevärde",
     maskType: "Typ av indatamask",
-    maskTypes: {
-      none: "Ingen",
-      patternmask: "Mönster",
-      numericmask: "Numerisk",
-      datetimemask: "Datum och tid",
-      currencymask: "Valuta"
-    },
     focusOnFirstError: "Ställ in fokus på det första ogiltiga svaret",
     checkErrorsMode: "Kör validering",
     validateVisitedEmptyFields: "Validera tomma fält vid förlorat fokus",
@@ -994,6 +987,13 @@ export let svStrings = {
       time: "Tid",
       url: "URL",
       week: "Vecka"
+    },
+    maskType: {
+      none: "Ingen",
+      pattern: "Mönster",
+      numeric: "Numerisk",
+      datetime: "Datum och tid",
+      currency: "Valuta"
     },
     all: "all",
     page: "page",
@@ -2912,3 +2912,8 @@ editorLocalization.locales["sv"] = svStrings;
 // file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Visar miniatyrbilder av uppladdade filer när det är möjligt. Avmarkera om du vill visa filikoner i stället."
 // pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "Alternativet \"Samma som behållare\" justerar automatiskt förloppsindikatorns bredd så att den passar in i HTML-elementet som undersökningen är placerad i."
 // p.progressBarInheritWidthFrom: "Progress bar area width" => "Bredd på förloppsindikatorns area"
+// maskType.none: "None" => "Ingen"
+// maskType.pattern: "Pattern" => "Mönster"
+// maskType.numeric: "Numeric" => "Numerisk"
+// maskType.datetime: "Date and Time" => "Datum och tid"
+// maskType.currency: "Currency" => "Valuta"

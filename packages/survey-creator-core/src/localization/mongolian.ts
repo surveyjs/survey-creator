@@ -654,13 +654,6 @@ export var mnStrings = {
     allowResizeComment: "Хэрэглэгчдэд текстийн газруудыг дахин ашиглах боломж олго",
     textUpdateMode: "Текст асуултын утгыг шинэчлэх",
     maskType: "Оролтын багны төрөл",
-    maskTypes: {
-      none: "Хэн ч биш",
-      patternmask: "Загвар",
-      numericmask: "Тоо нь",
-      datetimemask: "Огноо, цаг",
-      currencymask: "Валютын ханш"
-    },
     focusOnFirstError: "Анхны буруу хариулт руу чиглүүлэх",
     checkErrorsMode: "Баталгаажуулалт ажиллуулах",
     validateVisitedEmptyFields: "Алдагдсан фокус дээр хоосон талбайг баталгаажуулах",
@@ -994,6 +987,13 @@ export var mnStrings = {
       time: "Цаг хугацаа",
       url: "URL",
       week: "Долоо хоног"
+    },
+    maskType: {
+      none: "Хэн ч биш",
+      pattern: "Загвар",
+      numeric: "Тоо нь",
+      datetime: "Огноо, цаг",
+      currency: "Валютын ханш"
     },
     all: "Бүх",
     page: "Хуудас",
@@ -2391,3 +2391,8 @@ editorLocalization.locales["mn"] = mnStrings;
 // file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Боломжтой бол татаж авсан файлуудад зориулсан эрхий хурууны урьдчилсан үзүүлэлтийг үзүүлнэ. Оронд нь файлын зургуудыг үзүүлэхийг хүсвэл сонгогдоогүй."
 // pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "\"As as container\" сонголт автоматаар судалгаанд байрлуулсан HTML элементэд тохируулахын тулд progress bar area өргөнийг тохируулдаг."
 // p.progressBarInheritWidthFrom: "Progress bar area width" => "Прогресс барын бүсийн өргөн"
+// maskType.none: "None" => "Хэн ч биш"
+// maskType.pattern: "Pattern" => "Загвар"
+// maskType.numeric: "Numeric" => "Тоо нь"
+// maskType.datetime: "Date and Time" => "Огноо, цаг"
+// maskType.currency: "Currency" => "Валютын ханш"

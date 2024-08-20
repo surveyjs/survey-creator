@@ -654,13 +654,6 @@ var polishStrings = {
     allowResizeComment: "Zezwalaj użytkownikom na zmianę rozmiaru obszarów tekstu",
     textUpdateMode: "Aktualizowanie wartości pytania tekstowego",
     maskType: "Typ maski wprowadzania",
-    maskTypes: {
-      none: "Żaden",
-      patternmask: "Deseń",
-      numericmask: "Numeryczny",
-      datetimemask: "Data i godzina",
-      currencymask: "Waluta"
-    },
     focusOnFirstError: "Ustaw fokus na pierwszej nieprawidłowej odpowiedzi",
     checkErrorsMode: "Sprawdzanie poprawności uruchamiania",
     validateVisitedEmptyFields: "Weryfikowanie pustych pól w przypadku utraty fokusu",
@@ -994,6 +987,13 @@ var polishStrings = {
       time: "Godzina",
       url: "Adres URL",
       week: "Tydzień"
+    },
+    maskType: {
+      none: "Żaden",
+      pattern: "Deseń",
+      numeric: "Numeryczny",
+      datetime: "Data i godzina",
+      currency: "Waluta"
     },
     all: "Cały",
     page: "Strona",
@@ -3002,3 +3002,8 @@ editorLocalization.locales["pl"] = polishStrings;
 // file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Wyświetla podgląd miniatur przesłanych plików, jeśli to możliwe. Usuń zaznaczenie, jeśli zamiast tego chcesz wyświetlać ikony plików."
 // pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "Opcja \"Tak samo jak kontener\" automatycznie dostosowuje szerokość obszaru paska postępu, aby pasowała do elementu HTML, w którym umieszczona jest ankieta."
 // p.progressBarInheritWidthFrom: "Progress bar area width" => "Szerokość obszaru paska postępu"
+// maskType.none: "None" => "Żaden"
+// maskType.pattern: "Pattern" => "Deseń"
+// maskType.numeric: "Numeric" => "Numeryczny"
+// maskType.datetime: "Date and Time" => "Data i godzina"
+// maskType.currency: "Currency" => "Waluta"

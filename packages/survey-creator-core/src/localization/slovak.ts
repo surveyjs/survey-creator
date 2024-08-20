@@ -654,13 +654,6 @@ export var skStrings = {
     allowResizeComment: "Povolenie používateľom meniť veľkosť textových oblastí",
     textUpdateMode: "Aktualizácia hodnoty textovej otázky",
     maskType: "Typ vstupnej masky",
-    maskTypes: {
-      none: "Žiadny",
-      patternmask: "Vzorka",
-      numericmask: "Numerický",
-      datetimemask: "Dátum a čas",
-      currencymask: "Mena"
-    },
     focusOnFirstError: "Zameranie na prvú neplatnú odpoveď",
     checkErrorsMode: "Spustenie overenia pravosti",
     validateVisitedEmptyFields: "Overenie prázdnych polí pri strate zamerania",
@@ -994,6 +987,13 @@ export var skStrings = {
       time: "Čas",
       url: "URL adresa",
       week: "Týždeň"
+    },
+    maskType: {
+      none: "Žiadny",
+      pattern: "Vzorka",
+      numeric: "Numerický",
+      datetime: "Dátum a čas",
+      currency: "Mena"
     },
     all: "všetko",
     page: "stránka",
@@ -2688,3 +2688,8 @@ editorLocalization.locales["sk"] = skStrings;
 // file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Ak je to možné, zobrazí náhľady miniatúr nahraných súborov. Zrušte výber, ak chcete namiesto toho zobraziť ikony súborov."
 // pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "Možnosť \"Rovnaké ako kontajner\" automaticky upraví šírku oblasti indikátora priebehu tak, aby sa zmestila do prvku HTML, v ktorom je prieskum umiestnený."
 // p.progressBarInheritWidthFrom: "Progress bar area width" => "Šírka oblasti indikátora priebehu"
+// maskType.none: "None" => "Žiadny"
+// maskType.pattern: "Pattern" => "Vzorka"
+// maskType.numeric: "Numeric" => "Numerický"
+// maskType.datetime: "Date and Time" => "Dátum a čas"
+// maskType.currency: "Currency" => "Mena"

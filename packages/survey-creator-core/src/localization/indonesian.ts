@@ -654,13 +654,6 @@ export var indonesianStrings = {
     allowResizeComment: "Mengizinkan pengguna mengubah ukuran area teks",
     textUpdateMode: "Memperbarui nilai pertanyaan teks",
     maskType: "Jenis masker input",
-    maskTypes: {
-      none: "Tidak",
-      patternmask: "Pola",
-      numericmask: "Numerik",
-      datetimemask: "Tanggal dan Waktu",
-      currencymask: "Mata uang"
-    },
     focusOnFirstError: "Mengatur fokus pada jawaban pertama yang tidak valid",
     checkErrorsMode: "Jalankan validasi",
     validateVisitedEmptyFields: "Memvalidasi bidang kosong saat fokus hilang",
@@ -994,6 +987,13 @@ export var indonesianStrings = {
       time: "Waktu",
       url: "URL",
       week: "Minggu"
+    },
+    maskType: {
+      none: "Tidak",
+      pattern: "Pola",
+      numeric: "Numerik",
+      datetime: "Tanggal dan Waktu",
+      currency: "Mata uang"
     },
     all: "semua",
     page: "halaman",
@@ -2889,3 +2889,8 @@ editorLocalization.locales["id"] = indonesianStrings;
 // file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Menampilkan pratinjau thumbnail untuk file yang diunggah jika memungkinkan. Batalkan pilihan jika Anda ingin menampilkan ikon file sebagai gantinya."
 // pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "Opsi \"Sama seperti wadah\" secara otomatis menyesuaikan lebar area bilah kemajuan agar sesuai dengan elemen HTML tempat survei ditempatkan."
 // p.progressBarInheritWidthFrom: "Progress bar area width" => "Lebar area bilah kemajuan"
+// maskType.none: "None" => "Tidak"
+// maskType.pattern: "Pattern" => "Pola"
+// maskType.numeric: "Numeric" => "Numerik"
+// maskType.datetime: "Date and Time" => "Tanggal dan Waktu"
+// maskType.currency: "Currency" => "Mata uang"

@@ -654,13 +654,6 @@ export var hrStrings = {
     allowResizeComment: "Dopusti korisnicima promjenu veličine tekstnih područja",
     textUpdateMode: "Ažuriranje vrijednosti tekstnog pitanja",
     maskType: "Vrsta maske za unos",
-    maskTypes: {
-      none: "Nijedan",
-      patternmask: "Uzorak",
-      numericmask: "Brojčani",
-      datetimemask: "Datum i vrijeme",
-      currencymask: "Valuta"
-    },
     focusOnFirstError: "Postavljanje fokusa na prvi odgovor koji nije valjan",
     checkErrorsMode: "Pokreni provjeru valjanosti",
     validateVisitedEmptyFields: "Provjera valjanosti praznih polja pri izgubljenom fokusu",
@@ -994,6 +987,13 @@ export var hrStrings = {
       time: "Vrijeme",
       url: "URL",
       week: "Tjedan"
+    },
+    maskType: {
+      none: "Nijedan",
+      pattern: "Uzorak",
+      numeric: "Brojčani",
+      datetime: "Datum i vrijeme",
+      currency: "Valuta"
     },
     all: "all",
     page: "page",
@@ -2729,3 +2729,8 @@ editorLocalization.locales["hr"] = hrStrings;
 // file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Prikazuje pretpreglede minijatura za prenesene datoteke kada je to moguće. Poništite odabir želite li umjesto toga prikazati ikone datoteka."
 // pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "Opcija \"Isto kao spremnik\" automatski prilagođava širinu područja trake napretka kako bi se uklopila u HTML element u koji je upitnik postavljen."
 // p.progressBarInheritWidthFrom: "Progress bar area width" => "Širina područja trake napretka"
+// maskType.none: "None" => "Nijedan"
+// maskType.pattern: "Pattern" => "Uzorak"
+// maskType.numeric: "Numeric" => "Brojčani"
+// maskType.datetime: "Date and Time" => "Datum i vrijeme"
+// maskType.currency: "Currency" => "Valuta"

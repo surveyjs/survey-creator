@@ -654,13 +654,6 @@ var portugueseTranslation = {
     allowResizeComment: "Permitir que os usuários redimensionem áreas de texto",
     textUpdateMode: "Atualizar valor da pergunta de texto",
     maskType: "Tipo de máscara de entrada",
-    maskTypes: {
-      none: "Nenhum",
-      patternmask: "Padrão",
-      numericmask: "Numérico",
-      datetimemask: "Data e Hora",
-      currencymask: "Moeda"
-    },
     focusOnFirstError: "Defina o foco na primeira resposta inválida",
     checkErrorsMode: "Executar validação",
     validateVisitedEmptyFields: "Validar campos vazios em caso de perda de foco",
@@ -994,6 +987,13 @@ var portugueseTranslation = {
       time: "Hora",
       url: "URL",
       week: "Semana"
+    },
+    maskType: {
+      none: "Nenhum",
+      pattern: "Padrão",
+      numeric: "Numérico",
+      datetime: "Data e hora",
+      currency: "Moeda"
     },
     all: "todos",
     page: "página",
@@ -2401,3 +2401,8 @@ editorLocalization.locales["pt"] = portugueseTranslation;
 // file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Exibe visualizações em miniatura para arquivos carregados quando possível. Desmarque se quiser mostrar ícones de arquivo."
 // pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "A opção \"Igual ao contêiner\" ajusta automaticamente a largura da área da barra de progresso para caber no elemento HTML em que a pesquisa é colocada."
 // p.progressBarInheritWidthFrom: "Progress bar area width" => "Largura da área da barra de progresso"
+// maskType.none: "None" => "Nenhum"
+// maskType.pattern: "Pattern" => "Padrão"
+// maskType.numeric: "Numeric" => "Numérico"
+// maskType.datetime: "Date and Time" => "Data e hora"
+// maskType.currency: "Currency" => "Moeda"

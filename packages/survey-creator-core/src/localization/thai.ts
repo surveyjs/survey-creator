@@ -654,13 +654,6 @@ export const thStrings = {
     allowResizeComment: "อนุญาตให้ผู้ใช้ปรับขนาดพื้นที่ข้อความ",
     textUpdateMode: "อัปเดตค่าช่องป้อนข้อมูล",
     maskType: "ประเภทหน้ากากอินพุต",
-    maskTypes: {
-      none: "ไม่มี",
-      patternmask: "รูปแบบ",
-      numericmask: "ตัวเลข",
-      datetimemask: "วันที่และเวลา",
-      currencymask: "สกุลเงิน"
-    },
     focusOnFirstError: "ตั้งโฟกัสที่คำตอบที่ไม่ถูกต้องแรก",
     checkErrorsMode: "รันการตรวจสอบ",
     validateVisitedEmptyFields: "ตรวจสอบฟิลด์ว่างเมื่อเสียโฟกัส",
@@ -994,6 +987,13 @@ export const thStrings = {
       time: "เวลา",
       url: "URL",
       week: "สัปดาห์"
+    },
+    maskType: {
+      none: "ไม่มีใคร",
+      pattern: "แบบ",
+      numeric: "ตัวเลข",
+      datetime: "วันที่และเวลา",
+      currency: "เงินตรา"
     },
     all: "ทั้งหมด",
     page: "หน้า",
@@ -1668,3 +1668,8 @@ editorLocalization.locales["th"] = thStrings;
 // file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "แสดงตัวอย่างภาพขนาดย่อสําหรับไฟล์ที่อัปโหลดเมื่อเป็นไปได้ ยกเลิกการเลือกหากคุณต้องการแสดงไอคอนไฟล์แทน"
 // pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "ตัวเลือก \"เหมือนกับคอนเทนเนอร์\" จะปรับความกว้างของพื้นที่แถบความคืบหน้าโดยอัตโนมัติเพื่อให้พอดีกับองค์ประกอบ HTML ที่วางแบบสํารวจ"
 // p.progressBarInheritWidthFrom: "Progress bar area width" => "ความกว้างของพื้นที่แถบความคืบหน้า"
+// maskType.none: "None" => "ไม่มีใคร"
+// maskType.pattern: "Pattern" => "แบบ"
+// maskType.numeric: "Numeric" => "ตัวเลข"
+// maskType.datetime: "Date and Time" => "วันที่และเวลา"
+// maskType.currency: "Currency" => "เงินตรา"

@@ -654,13 +654,6 @@ var frenchTranslation = {
     allowResizeComment: "Autoriser les utilisateurs à redimensionner les zones de texte",
     textUpdateMode: "Mettre à jour la valeur de la question textuelle",
     maskType: "Type de masque de saisie",
-    maskTypes: {
-      none: "Aucun",
-      patternmask: "Modèle",
-      numericmask: "Numérique",
-      datetimemask: "Date et heure",
-      currencymask: "Monnaie"
-    },
     focusOnFirstError: "Renvoyer vers la première question ayant une erreur",
     checkErrorsMode: "Exécuter la validation",
     validateVisitedEmptyFields: "Valider les champs vides en cas de perte de focus",
@@ -994,6 +987,13 @@ var frenchTranslation = {
       time: "Heure",
       url: "URL",
       week: "Semaine"
+    },
+    maskType: {
+      none: "Aucun",
+      pattern: "Modèle",
+      numeric: "Numérique",
+      datetime: "Date et heure",
+      currency: "Monnaie"
     },
     all: "Tous",
     page: "Page",
@@ -2796,3 +2796,8 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Affiche des aperçus miniatures pour les fichiers téléchargés lorsque cela est possible. Désélectionnez si vous souhaitez afficher les icônes de fichier à la place."
 // pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "L’option « Identique au conteneur » ajuste automatiquement la largeur de la zone de la barre de progression pour s’adapter à l’élément HTML dans lequel l’enquête est placée."
 // p.progressBarInheritWidthFrom: "Progress bar area width" => "Largeur de la zone de la barre de progression"
+// maskType.none: "None" => "Aucun"
+// maskType.pattern: "Pattern" => "Modèle"
+// maskType.numeric: "Numeric" => "Numérique"
+// maskType.datetime: "Date and Time" => "Date et heure"
+// maskType.currency: "Currency" => "Monnaie"
