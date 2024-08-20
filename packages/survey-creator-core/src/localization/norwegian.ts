@@ -654,13 +654,6 @@ export var nbStrings = {
     allowResizeComment: "Tillat brukere å endre størrelse på tekstområder",
     textUpdateMode: "Oppdatere tekstspørsmålsverdi",
     maskType: "Type inndatamaske",
-    maskTypes: {
-      none: "Ingen",
-      patternmask: "Mønster",
-      numericmask: "Numerisk",
-      datetimemask: "Dato og klokkeslett",
-      currencymask: "Valuta"
-    },
     focusOnFirstError: "Sette fokus på det første ugyldige svaret",
     checkErrorsMode: "Kjør validering",
     validateVisitedEmptyFields: "Validere tomme felt ved tapt fokus",
@@ -995,6 +988,13 @@ export var nbStrings = {
       url: "URL",
       week: "Uke"
     },
+    maskType: {
+      none: "Ingen",
+      pattern: "Mønster",
+      numeric: "Numerisk",
+      datetime: "Dato og klokkeslett",
+      currency: "Valuta"
+    },
     all: "all",
     page: "page",
     survey: "survey",
@@ -1310,7 +1310,8 @@ export var nbStrings = {
     },
     file: {
       imageHeight: "Justerer høyden på bildet i undersøkelsesresultatene.",
-      imageWidth: "Justerer bredden på bildet i undersøkelsesresultatene."
+      imageWidth: "Justerer bredden på bildet i undersøkelsesresultatene.",
+      allowImagesPreview: "Viser miniatyrforhåndsvisninger for opplastede filer når det er mulig. Fjern merket hvis du vil vise filikoner i stedet."
     },
     image: {
       contentMode: "Alternativet \"Auto\" bestemmer automatisk passende modus for visning - Bilde, Video eller YouTube - basert på kildens URL som er oppgitt."
@@ -2726,3 +2727,9 @@ editorLocalization.locales["nb"] = nbStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Godtar verdier %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Godtar verdier px."
 // p.effectiveColSpan: "Column span" => "Spaltespenn"
+// maskType.none: "None" => "Ingen"
+// maskType.pattern: "Pattern" => "Mønster"
+// maskType.numeric: "Numeric" => "Numerisk"
+// maskType.datetime: "Date and Time" => "Dato og klokkeslett"
+// maskType.currency: "Currency" => "Valuta"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Viser miniatyrforhåndsvisninger for opplastede filer når det er mulig. Fjern merket hvis du vil vise filikoner i stedet."

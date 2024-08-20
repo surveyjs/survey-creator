@@ -654,13 +654,6 @@ export var skStrings = {
     allowResizeComment: "Povolenie používateľom meniť veľkosť textových oblastí",
     textUpdateMode: "Aktualizácia hodnoty textovej otázky",
     maskType: "Typ vstupnej masky",
-    maskTypes: {
-      none: "Žiadny",
-      patternmask: "Vzorka",
-      numericmask: "Numerický",
-      datetimemask: "Dátum a čas",
-      currencymask: "Mena"
-    },
     focusOnFirstError: "Zameranie na prvú neplatnú odpoveď",
     checkErrorsMode: "Spustenie overenia pravosti",
     validateVisitedEmptyFields: "Overenie prázdnych polí pri strate zamerania",
@@ -995,6 +988,13 @@ export var skStrings = {
       url: "URL adresa",
       week: "Týždeň"
     },
+    maskType: {
+      none: "Žiadny",
+      pattern: "Vzorka",
+      numeric: "Numerický",
+      datetime: "Dátum a čas",
+      currency: "Mena"
+    },
     all: "všetko",
     page: "stránka",
     survey: "prieskum",
@@ -1310,7 +1310,8 @@ export var skStrings = {
     },
     file: {
       imageHeight: "Upraví výšku obrázka vo výsledkoch prieskumu.",
-      imageWidth: "Upraví šírku obrázka vo výsledkoch prieskumu."
+      imageWidth: "Upraví šírku obrázka vo výsledkoch prieskumu.",
+      allowImagesPreview: "Ak je to možné, zobrazí náhľady miniatúr nahraných súborov. Zrušte výber, ak chcete namiesto toho zobraziť ikony súborov."
     },
     image: {
       contentMode: "Možnosť \"Auto\" automaticky určuje vhodný režim zobrazenia - obrázok, video alebo YouTube - na základe poskytnutej zdrojovej adresy URL."
@@ -2676,3 +2677,9 @@ editorLocalization.locales["sk"] = skStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Akceptuje hodnoty %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Akceptuje hodnoty px."
 // p.effectiveColSpan: "Column span" => "Rozpätie stĺpca"
+// maskType.none: "None" => "Žiadny"
+// maskType.pattern: "Pattern" => "Vzorka"
+// maskType.numeric: "Numeric" => "Numerický"
+// maskType.datetime: "Date and Time" => "Dátum a čas"
+// maskType.currency: "Currency" => "Mena"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Ak je to možné, zobrazí náhľady miniatúr nahraných súborov. Zrušte výber, ak chcete namiesto toho zobraziť ikony súborov."

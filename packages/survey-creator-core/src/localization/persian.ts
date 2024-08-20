@@ -654,13 +654,6 @@ var persianStrings = {
     allowResizeComment: "اجازه دادن به کاربران برای تغییر اندازه مناطق متن",
     textUpdateMode: "بههنگامسازی مقدار سؤال متن",
     maskType: "نوع ماسک ورودی",
-    maskTypes: {
-      none: "هیچ کدام",
-      patternmask: "الگوی",
-      numericmask: "عددی",
-      datetimemask: "تاریخ و زمان",
-      currencymask: "ارز"
-    },
     focusOnFirstError: "تنظیم تمرکز روی اولین پاسخ نامعتبر",
     checkErrorsMode: "اجرای اعتبارسنجی",
     validateVisitedEmptyFields: "اعتبارسنجی فیلدهای خالی در فوکوس از دست رفته",
@@ -995,6 +988,13 @@ var persianStrings = {
       url: "آدرس",
       week: "هفته"
     },
+    maskType: {
+      none: "هیچ کدام",
+      pattern: "الگوی",
+      numeric: "عددی",
+      datetime: "تاریخ و زمان",
+      currency: "ارز"
+    },
     all: "تمام",
     page: "صفحه",
     survey: "نظرسنجی",
@@ -1310,7 +1310,8 @@ var persianStrings = {
     },
     file: {
       imageHeight: "ارتفاع تصویر را در نتایج نظرسنجی تنظیم می کند.",
-      imageWidth: "عرض تصویر را در نتایج نظرسنجی تنظیم می کند."
+      imageWidth: "عرض تصویر را در نتایج نظرسنجی تنظیم می کند.",
+      allowImagesPreview: "در صورت امکان، پیش نمایش تصاویر کوچک را برای فایل های آپلود شده نمایش می دهد. اگر می خواهید به جای آن نمادهای فایل را نشان دهید، انتخاب را لغو کنید."
     },
     image: {
       contentMode: "گزینه \"Auto\" به طور خودکار حالت مناسب برای نمایش - تصویر، ویدئو یا یوتیوب - را بر اساس URL منبع ارائه شده تعیین می کند."
@@ -2678,3 +2679,9 @@ editorLocalization.locales["fa"] = persianStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "مقادیر را می پذیرد."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "مقادیر px را می پذیرد."
 // p.effectiveColSpan: "Column span" => "دهانه ستون"
+// maskType.none: "None" => "هیچ کدام"
+// maskType.pattern: "Pattern" => "الگوی"
+// maskType.numeric: "Numeric" => "عددی"
+// maskType.datetime: "Date and Time" => "تاریخ و زمان"
+// maskType.currency: "Currency" => "ارز"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "در صورت امکان، پیش نمایش تصاویر کوچک را برای فایل های آپلود شده نمایش می دهد. اگر می خواهید به جای آن نمادهای فایل را نشان دهید، انتخاب را لغو کنید."

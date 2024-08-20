@@ -654,13 +654,6 @@ export var indonesianStrings = {
     allowResizeComment: "Mengizinkan pengguna mengubah ukuran area teks",
     textUpdateMode: "Memperbarui nilai pertanyaan teks",
     maskType: "Jenis masker input",
-    maskTypes: {
-      none: "Tidak",
-      patternmask: "Pola",
-      numericmask: "Numerik",
-      datetimemask: "Tanggal dan Waktu",
-      currencymask: "Mata uang"
-    },
     focusOnFirstError: "Mengatur fokus pada jawaban pertama yang tidak valid",
     checkErrorsMode: "Jalankan validasi",
     validateVisitedEmptyFields: "Memvalidasi bidang kosong saat fokus hilang",
@@ -995,6 +988,13 @@ export var indonesianStrings = {
       url: "URL",
       week: "Minggu"
     },
+    maskType: {
+      none: "Tidak",
+      pattern: "Pola",
+      numeric: "Numerik",
+      datetime: "Tanggal dan Waktu",
+      currency: "Mata uang"
+    },
     all: "semua",
     page: "halaman",
     survey: "survei",
@@ -1310,7 +1310,8 @@ export var indonesianStrings = {
     },
     file: {
       imageHeight: "Menyesuaikan tinggi gambar dalam hasil survei.",
-      imageWidth: "Menyesuaikan lebar gambar dalam hasil survei."
+      imageWidth: "Menyesuaikan lebar gambar dalam hasil survei.",
+      allowImagesPreview: "Menampilkan pratinjau thumbnail untuk file yang diunggah jika memungkinkan. Batalkan pilihan jika Anda ingin menampilkan ikon file sebagai gantinya."
     },
     image: {
       contentMode: "Opsi \"Otomatis\" secara otomatis menentukan mode yang sesuai untuk tampilan - Gambar, Video, atau YouTube - berdasarkan URL sumber yang disediakan."
@@ -2877,3 +2878,9 @@ editorLocalization.locales["id"] = indonesianStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Menerima nilai %"
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Menerima nilai px."
 // p.effectiveColSpan: "Column span" => "Rentang kolom"
+// maskType.none: "None" => "Tidak"
+// maskType.pattern: "Pattern" => "Pola"
+// maskType.numeric: "Numeric" => "Numerik"
+// maskType.datetime: "Date and Time" => "Tanggal dan Waktu"
+// maskType.currency: "Currency" => "Mata uang"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Menampilkan pratinjau thumbnail untuk file yang diunggah jika memungkinkan. Batalkan pilihan jika Anda ingin menampilkan ikon file sebagai gantinya."
