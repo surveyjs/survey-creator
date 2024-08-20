@@ -190,10 +190,10 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     return (this.element)?.getPropertyValue("isMessagePanelVisible");
   }
   get cssCollapsedHiddenHeader(): string {
-    return (this.element as PanelModel | Question).cssHeader + " sd-question__header--hidden";
+    return (this.element as PanelModel | Question).cssHeader + " svc-question__header--hidden";
   }
   get cssCollapsedHiddenTitle(): string {
-    return this.element.cssTitle + " sd-element__title--hidden";
+    return this.element.cssTitle + " svc-element__title--hidden";
   }
   public createBannerParams(): QuestionBannerParams {
     return this.createCarryForwardParams() || this.createUsingRestfulParams() || this.createCustomMessagePanel();

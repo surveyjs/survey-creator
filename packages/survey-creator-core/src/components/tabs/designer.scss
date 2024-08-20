@@ -42,7 +42,8 @@ svc-tab-designer {
 
   .sd-title {
     display: flex;
-    &.sd-element__title--hidden {
+    &.sd-element__title--hidden,
+    &.svc-element__title--hidden {
       display: none;
     }
   }
