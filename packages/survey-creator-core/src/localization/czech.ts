@@ -654,13 +654,6 @@ export var czStrings = {
     allowResizeComment: "Povolit uživatelům změnit velikost textových polí",
     textUpdateMode: "Aktualizovat hodnotu textové otázky",
     maskType: "Typ vstupní masky",
-    maskTypes: {
-      none: "Žádný",
-      patternmask: "Vzor",
-      numericmask: "Číselný",
-      datetimemask: "Datum a čas",
-      currencymask: "Měna"
-    },
     focusOnFirstError: "Zvýraznit první neplatnou odpověď",
     checkErrorsMode: "Spustit ověření",
     validateVisitedEmptyFields: "Ověření prázdných polí při ztrátě fokusu",
@@ -995,6 +988,13 @@ export var czStrings = {
       url: "URL",
       week: "Týden"
     },
+    maskType: {
+      none: "Žádný",
+      pattern: "Vzor",
+      numeric: "Číselný",
+      datetime: "Datum a čas",
+      currency: "Měna"
+    },
     all: "vše",
     page: "stránka",
     survey: "průzkum",
@@ -1310,7 +1310,8 @@ export var czStrings = {
     },
     file: {
       imageHeight: "Upraví výšku obrázku ve výsledcích měření.",
-      imageWidth: "Upraví šířku obrázku ve výsledcích měření."
+      imageWidth: "Upraví šířku obrázku ve výsledcích měření.",
+      allowImagesPreview: "Pokud je to možné, zobrazuje náhledy miniatur pro nahrané soubory. Zrušte výběr, pokud chcete místo toho zobrazit ikony souborů."
     },
     image: {
       contentMode: "Možnost \"Auto\" automaticky určí vhodný režim pro zobrazení – Obrázek, Video nebo YouTube – na základě zadané zdrojové adresy URL."
@@ -2297,3 +2298,9 @@ editorLocalization.locales["cs"] = czStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Přijímá hodnoty %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Přijímá hodnoty px."
 // p.effectiveColSpan: "Column span" => "Rozpětí sloupců"
+// maskType.none: "None" => "Žádný"
+// maskType.pattern: "Pattern" => "Vzor"
+// maskType.numeric: "Numeric" => "Číselný"
+// maskType.datetime: "Date and Time" => "Datum a čas"
+// maskType.currency: "Currency" => "Měna"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Pokud je to možné, zobrazuje náhledy miniatur pro nahrané soubory. Zrušte výběr, pokud chcete místo toho zobrazit ikony souborů."

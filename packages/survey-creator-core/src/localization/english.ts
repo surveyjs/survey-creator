@@ -656,13 +656,6 @@ export var enStrings = {
     allowResizeComment: "Allow users to resize text areas",
     textUpdateMode: "Update input field values",
     maskType: "Input mask type",
-    maskTypes: {
-      none: "None",
-      patternmask: "Pattern",
-      numericmask: "Numeric",
-      datetimemask: "Date and Time",
-      currencymask: "Currency"
-    },
     focusOnFirstError: "Set focus on the first invalid answer",
     checkErrorsMode: "Run validation",
     validateVisitedEmptyFields: "Validate empty fields on lost focus",
@@ -997,6 +990,13 @@ export var enStrings = {
       time: "Time",
       url: "URL",
       week: "Week"
+    },
+    maskType: {
+      none: "None",
+      pattern: "Pattern",
+      numeric: "Numeric",
+      datetime: "Date and Time",
+      currency: "Currency"
     },
     all: "All",
     page: "Page",

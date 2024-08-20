@@ -654,13 +654,6 @@ export var danishStrings = {
     allowResizeComment: "Tillad brugere at ændre størrelsen på tekstområder",
     textUpdateMode: "Opdater værdi for tekstspørgsmål",
     maskType: "Type af inputmaske",
-    maskTypes: {
-      none: "Ingen",
-      patternmask: "Mønster",
-      numericmask: "Numerisk",
-      datetimemask: "Dato og klokkeslæt",
-      currencymask: "Valuta"
-    },
     focusOnFirstError: "Sæt fokus på det første ugyldige svar",
     checkErrorsMode: "Kør validering",
     validateVisitedEmptyFields: "Validere tomme felter ved mistet fokus",
@@ -995,6 +988,13 @@ export var danishStrings = {
       url: "URL-adresse",
       week: "Uge"
     },
+    maskType: {
+      none: "Ingen",
+      pattern: "Mønster",
+      numeric: "Numerisk",
+      datetime: "Dato og klokkeslæt",
+      currency: "Valuta"
+    },
     all: "all",
     page: "page",
     survey: "survey",
@@ -1310,7 +1310,8 @@ export var danishStrings = {
     },
     file: {
       imageHeight: "Justerer billedets højde i undersøgelsesresultaterne.",
-      imageWidth: "Justerer billedets bredde i undersøgelsesresultaterne."
+      imageWidth: "Justerer billedets bredde i undersøgelsesresultaterne.",
+      allowImagesPreview: "Viser miniaturebilleder for uploadede filer, når det er muligt. Fjern markeringen, hvis du vil vise filikoner i stedet."
     },
     image: {
       contentMode: "Indstillingen \"Auto\" bestemmer automatisk den passende tilstand til visning - Billede, Video eller YouTube - baseret på den angivne kilde-URL."
@@ -2908,3 +2909,9 @@ editorLocalization.locales["da"] = danishStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Accepterer værdier %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Accepterer værdier px."
 // p.effectiveColSpan: "Column span" => "Søjlespænd"
+// maskType.none: "None" => "Ingen"
+// maskType.pattern: "Pattern" => "Mønster"
+// maskType.numeric: "Numeric" => "Numerisk"
+// maskType.datetime: "Date and Time" => "Dato og klokkeslæt"
+// maskType.currency: "Currency" => "Valuta"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Viser miniaturebilleder for uploadede filer, når det er muligt. Fjern markeringen, hvis du vil vise filikoner i stedet."

@@ -654,13 +654,6 @@ var portugueseTranslation = {
     allowResizeComment: "Permitir que os usuários redimensionem áreas de texto",
     textUpdateMode: "Atualizar valor da pergunta de texto",
     maskType: "Tipo de máscara de entrada",
-    maskTypes: {
-      none: "Nenhum",
-      patternmask: "Padrão",
-      numericmask: "Numérico",
-      datetimemask: "Data e Hora",
-      currencymask: "Moeda"
-    },
     focusOnFirstError: "Defina o foco na primeira resposta inválida",
     checkErrorsMode: "Executar validação",
     validateVisitedEmptyFields: "Validar campos vazios em caso de perda de foco",
@@ -995,6 +988,13 @@ var portugueseTranslation = {
       url: "URL",
       week: "Semana"
     },
+    maskType: {
+      none: "Nenhum",
+      pattern: "Padrão",
+      numeric: "Numérico",
+      datetime: "Data e hora",
+      currency: "Moeda"
+    },
     all: "todos",
     page: "página",
     survey: "pesquisa",
@@ -1310,7 +1310,8 @@ var portugueseTranslation = {
     },
     file: {
       imageHeight: "Ajusta a altura da imagem nos resultados da pesquisa.",
-      imageWidth: "Ajusta a largura da imagem nos resultados da pesquisa."
+      imageWidth: "Ajusta a largura da imagem nos resultados da pesquisa.",
+      allowImagesPreview: "Exibe visualizações em miniatura para arquivos carregados quando possível. Desmarque se quiser mostrar ícones de arquivo."
     },
     image: {
       contentMode: "A opção \"Auto\" determina automaticamente o modo adequado para exibição - Imagem, Vídeo ou YouTube - com base no URL de origem fornecido."
@@ -2389,3 +2390,9 @@ editorLocalization.locales["pt"] = portugueseTranslation;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Aceita valores %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Aceita valores px."
 // p.effectiveColSpan: "Column span" => "Extensão da coluna"
+// maskType.none: "None" => "Nenhum"
+// maskType.pattern: "Pattern" => "Padrão"
+// maskType.numeric: "Numeric" => "Numérico"
+// maskType.datetime: "Date and Time" => "Data e hora"
+// maskType.currency: "Currency" => "Moeda"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Exibe visualizações em miniatura para arquivos carregados quando possível. Desmarque se quiser mostrar ícones de arquivo."

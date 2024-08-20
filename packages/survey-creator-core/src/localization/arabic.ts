@@ -654,13 +654,6 @@ export var arStrings = {
     allowResizeComment: "السماح للمستخدمين بتغيير حجم مناطق النص",
     textUpdateMode: "تحديث قيمة السؤال النصي",
     maskType: "نوع قناع الإدخال",
-    maskTypes: {
-      none: "اي",
-      patternmask: "رسم",
-      numericmask: "عددي",
-      datetimemask: "التاريخ والوقت",
-      currencymask: "عملة"
-    },
     focusOnFirstError: "تعيين التركيز على أول إجابة غير صالحة",
     checkErrorsMode: "تشغيل التحقق من الصحة",
     validateVisitedEmptyFields: "التحقق من صحة الحقول الفارغة على التركيز المفقود",
@@ -995,6 +988,13 @@ export var arStrings = {
       url: "الرابط",
       week: "أسبوع"
     },
+    maskType: {
+      none: "اي",
+      pattern: "رسم",
+      numeric: "عددي",
+      datetime: "التاريخ والوقت",
+      currency: "عملة"
+    },
     all: "الكل",
     page: "الصفحة",
     survey: "الإستبيان",
@@ -1310,7 +1310,8 @@ export var arStrings = {
     },
     file: {
       imageHeight: "يضبط ارتفاع الصورة في نتائج الاستطلاع.",
-      imageWidth: "يضبط عرض الصورة في نتائج الاستطلاع."
+      imageWidth: "يضبط عرض الصورة في نتائج الاستطلاع.",
+      allowImagesPreview: "يعرض معاينات الصور المصغرة للملفات التي تم تحميلها عندما يكون ذلك ممكنا. قم بإلغاء تحديد ما إذا كنت تريد إظهار رموز الملفات بدلا من ذلك."
     },
     image: {
       contentMode: "يحدد الخيار \"تلقائي\" تلقائيا الوضع المناسب للعرض - الصورة أو الفيديو أو YouTube - بناء على عنوان URL المصدر المقدم."
@@ -2634,3 +2635,9 @@ editorLocalization.locales["ar"] = arStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "يقبل القيم٪"
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "يقبل القيم px."
 // p.effectiveColSpan: "Column span" => "امتداد العمود"
+// maskType.none: "None" => "اي"
+// maskType.pattern: "Pattern" => "رسم"
+// maskType.numeric: "Numeric" => "عددي"
+// maskType.datetime: "Date and Time" => "التاريخ والوقت"
+// maskType.currency: "Currency" => "عملة"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "يعرض معاينات الصور المصغرة للملفات التي تم تحميلها عندما يكون ذلك ممكنا. قم بإلغاء تحديد ما إذا كنت تريد إظهار رموز الملفات بدلا من ذلك."
