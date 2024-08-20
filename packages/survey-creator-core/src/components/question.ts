@@ -19,7 +19,8 @@ import {
   QuestionPanelDynamicModel,
   ListModel,
   QuestionTextModel,
-  ActionContainer
+  ActionContainer,
+  PanelModel
 } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { editorLocalization, getLocString } from "../editorLocalization";
@@ -187,6 +188,12 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   }
   private get isMessagePanelVisible(): boolean {
     return (this.element)?.getPropertyValue("isMessagePanelVisible");
+  }
+  get cssCollapsedHiddenHeader(): string {
+    return (this.element as PanelModel | Question).cssHeader + " sd-question__header--hidden";
+  }
+  get cssCollapsedHiddenTitle(): string {
+    return this.element.cssTitle + " sd-element__title--hidden";
   }
   public createBannerParams(): QuestionBannerParams {
     return this.createCarryForwardParams() || this.createUsingRestfulParams() || this.createCustomMessagePanel();
