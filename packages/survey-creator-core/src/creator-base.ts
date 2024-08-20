@@ -1882,9 +1882,9 @@ export class SurveyCreatorModel extends Base
     });
     this.dragDropSurveyElements.onDragEnd.add((sender, options) => {
       this.stopUndoRedoTransaction();
+      const editTitle = isDraggedFromToolbox && this.startEditTitleOnQuestionAdded;
       isDraggedFromToolbox = false;
       if (!options.draggedElement) return;
-      const editTitle = isDraggedFromToolbox && this.startEditTitleOnQuestionAdded;
       this.selectElement(options.draggedElement, undefined, false, editTitle);
       this.onDragEnd.fire(this, options);
       if (!options.fromElement) {
