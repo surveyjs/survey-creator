@@ -84,7 +84,7 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
   private get creatorLocaleName() : string { return this.path + "_creator"; }
   private get surveyLocalesName(): string { return this.path + "_surveyLocales"; }
   private get surveyShowInEnglishName(): string { return this.path + "_surveyShowInEnglish"; }
-  private getIsShowInEnglishSelected(model: SurveyModel): boolean { return model.getValue(this.surveyShowInEnglishName) === true;}
+  private getIsShowInEnglishSelected(model: SurveyModel): boolean { return model.getValue(this.surveyShowInEnglishName) === true; }
   private getCreatorLocales(): Array<ItemValue> {
     return this.getLocaleItemValues(editorLocalization.getLocales(), false);
   }
