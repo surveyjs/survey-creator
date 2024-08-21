@@ -567,7 +567,8 @@ svc-question,
       .sd-title.sd-element__title{
         &.sd-element__title--hidden,
         &.svc-element__title--hidden {
-          &>.svc-string-editor{
+          &>.svc-string-editor,
+          &>sv-ng-string>.svc-string-editor{
             display: inline-flex;
             &::before {
               content: '('
