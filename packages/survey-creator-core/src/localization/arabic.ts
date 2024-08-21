@@ -1153,6 +1153,10 @@ export var arStrings = {
     isPanelless: {
       "false": "افتراضي",
       "true": "بدون لوحات"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "نفس المسح",
+      container: "نفس الحاوية"
     }
   },
   // Operators
@@ -1485,7 +1489,8 @@ export var arStrings = {
     panellayoutcolumn: {
       effectiveWidth: "يقبل القيم٪",
       questionTitleWidth: "يقبل القيم px."
-    }
+    },
+    progressBarInheritWidthFrom: "يقوم خيار \"نفس الحاوية\" بضبط عرض منطقة شريط التقدم تلقائيا ليلائم عنصر HTML الذي يتم وضع الاستطلاع فيه."
   },
   // Properties
   p: {
@@ -1589,7 +1594,8 @@ export var arStrings = {
     scaleColorMode: "مقياس وضع اللون",
     rateColorMode: "معدل وضع اللون",
     copyDisplayValue: "نسخ قيمة العرض",
-    effectiveColSpan: "امتداد العمود"
+    effectiveColSpan: "امتداد العمود",
+    progressBarInheritWidthFrom: "عرض منطقة شريط التقدم"
   },
   theme: {
     advancedMode: "الوضع المتقدم",
@@ -2635,9 +2641,13 @@ editorLocalization.locales["ar"] = arStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "يقبل القيم٪"
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "يقبل القيم px."
 // p.effectiveColSpan: "Column span" => "امتداد العمود"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "نفس المسح"
+// progressBarInheritWidthFrom.container: "Same as container" => "نفس الحاوية"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "يعرض معاينات الصور المصغرة للملفات التي تم تحميلها عندما يكون ذلك ممكنا. قم بإلغاء تحديد ما إذا كنت تريد إظهار رموز الملفات بدلا من ذلك."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "يقوم خيار \"نفس الحاوية\" بضبط عرض منطقة شريط التقدم تلقائيا ليلائم عنصر HTML الذي يتم وضع الاستطلاع فيه."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "عرض منطقة شريط التقدم"
 // maskType.none: "None" => "اي"
 // maskType.pattern: "Pattern" => "رسم"
 // maskType.numeric: "Numeric" => "عددي"
 // maskType.datetime: "Date and Time" => "التاريخ والوقت"
 // maskType.currency: "Currency" => "عملة"
-// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "يعرض معاينات الصور المصغرة للملفات التي تم تحميلها عندما يكون ذلك ممكنا. قم بإلغاء تحديد ما إذا كنت تريد إظهار رموز الملفات بدلا من ذلك."

@@ -1153,6 +1153,10 @@ var polishStrings = {
     isPanelless: {
       "false": "Domyślny",
       "true": "Bez paneli"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "Tak samo jak w przypadku ankiety",
+      container: "Tak samo jak kontener"
     }
   },
   // Operators
@@ -1485,7 +1489,8 @@ var polishStrings = {
     panellayoutcolumn: {
       effectiveWidth: "Akceptuje wartości %.",
       questionTitleWidth: "Akceptuje wartości px."
-    }
+    },
+    progressBarInheritWidthFrom: "Opcja \"Tak samo jak kontener\" automatycznie dostosowuje szerokość obszaru paska postępu, aby pasowała do elementu HTML, w którym umieszczona jest ankieta."
   },
   // Properties
   p: {
@@ -1589,7 +1594,8 @@ var polishStrings = {
     scaleColorMode: "Tryb skalowania kolorów",
     rateColorMode: "Oceń tryb kolorów",
     copyDisplayValue: "Kopiowanie wyświetlanej wartości",
-    effectiveColSpan: "Rozpiętość kolumn"
+    effectiveColSpan: "Rozpiętość kolumn",
+    progressBarInheritWidthFrom: "Szerokość obszaru paska postępu"
   },
   theme: {
     advancedMode: "Tryb zaawansowany",
@@ -2991,9 +2997,13 @@ editorLocalization.locales["pl"] = polishStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Akceptuje wartości %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Akceptuje wartości px."
 // p.effectiveColSpan: "Column span" => "Rozpiętość kolumn"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "Tak samo jak w przypadku ankiety"
+// progressBarInheritWidthFrom.container: "Same as container" => "Tak samo jak kontener"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Wyświetla podgląd miniatur przesłanych plików, jeśli to możliwe. Usuń zaznaczenie, jeśli zamiast tego chcesz wyświetlać ikony plików."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "Opcja \"Tak samo jak kontener\" automatycznie dostosowuje szerokość obszaru paska postępu, aby pasowała do elementu HTML, w którym umieszczona jest ankieta."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "Szerokość obszaru paska postępu"
 // maskType.none: "None" => "Żaden"
 // maskType.pattern: "Pattern" => "Deseń"
 // maskType.numeric: "Numeric" => "Numeryczny"
 // maskType.datetime: "Date and Time" => "Data i godzina"
 // maskType.currency: "Currency" => "Waluta"
-// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Wyświetla podgląd miniatur przesłanych plików, jeśli to możliwe. Usuń zaznaczenie, jeśli zamiast tego chcesz wyświetlać ikony plików."

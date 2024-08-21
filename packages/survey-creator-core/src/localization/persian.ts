@@ -1153,6 +1153,10 @@ var persianStrings = {
     isPanelless: {
       "false": "پیش فرض",
       "true": "بدون پانل"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "همانند نظرسنجی",
+      container: "همانند کانتینر"
     }
   },
   // Operators
@@ -1485,7 +1489,8 @@ var persianStrings = {
     panellayoutcolumn: {
       effectiveWidth: "مقادیر را می پذیرد.",
       questionTitleWidth: "مقادیر px را می پذیرد."
-    }
+    },
+    progressBarInheritWidthFrom: "گزینه \"همان کانتینر\" به طور خودکار عرض ناحیه نوار پیشرفت را تنظیم می کند تا در عنصر HTML که نظرسنجی در آن قرار می گیرد قرار گیرد."
   },
   // Properties
   p: {
@@ -1589,7 +1594,8 @@ var persianStrings = {
     scaleColorMode: "مقیاس حالت رنگ",
     rateColorMode: "نرخ حالت رنگ",
     copyDisplayValue: "رونوشت مقدار نمایش",
-    effectiveColSpan: "دهانه ستون"
+    effectiveColSpan: "دهانه ستون",
+    progressBarInheritWidthFrom: "عرض مساحت نوار پیشرفت"
   },
   theme: {
     advancedMode: "حالت پیشرفته",
@@ -2679,9 +2685,13 @@ editorLocalization.locales["fa"] = persianStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "مقادیر را می پذیرد."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "مقادیر px را می پذیرد."
 // p.effectiveColSpan: "Column span" => "دهانه ستون"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "همانند نظرسنجی"
+// progressBarInheritWidthFrom.container: "Same as container" => "همانند کانتینر"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "در صورت امکان، پیش نمایش تصاویر کوچک را برای فایل های آپلود شده نمایش می دهد. اگر می خواهید به جای آن نمادهای فایل را نشان دهید، انتخاب را لغو کنید."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "گزینه \"همان کانتینر\" به طور خودکار عرض ناحیه نوار پیشرفت را تنظیم می کند تا در عنصر HTML که نظرسنجی در آن قرار می گیرد قرار گیرد."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "عرض مساحت نوار پیشرفت"
 // maskType.none: "None" => "هیچ کدام"
 // maskType.pattern: "Pattern" => "الگوی"
 // maskType.numeric: "Numeric" => "عددی"
 // maskType.datetime: "Date and Time" => "تاریخ و زمان"
 // maskType.currency: "Currency" => "ارز"
-// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "در صورت امکان، پیش نمایش تصاویر کوچک را برای فایل های آپلود شده نمایش می دهد. اگر می خواهید به جای آن نمادهای فایل را نشان دهید، انتخاب را لغو کنید."
