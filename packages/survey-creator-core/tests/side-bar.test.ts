@@ -33,13 +33,13 @@ test("Sidebar: activate tab change", () => {
   expect(creator.sidebar.tabs[2].visible).toEqual(false);
 });
 
-test("Sidebar: hasVisibleTabs test", () => {
+test("Sidebar: hasVisiblePages test", () => {
   const creator = new CreatorTester({ showTranslationTab: true });
-  expect(creator.sidebar.hasVisibleTabs).toEqual(true);
+  expect(creator.sidebar.hasVisiblePages).toEqual(true);
 
   creator.makeNewViewActive("test");
-  expect(creator.sidebar.hasVisibleTabs).toEqual(false);
+  expect(creator.sidebar.hasVisiblePages).toEqual(false);
 
   creator.makeNewViewActive("translation");
-  expect(creator.sidebar.hasVisibleTabs).toEqual(true);
+  expect(creator.sidebar.hasVisiblePages).toEqual(true);
 });

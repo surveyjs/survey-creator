@@ -1,5 +1,5 @@
 import * as React from "react";
-import { SidebarTabModel, SidebarModel } from "survey-creator-core";
+import { SidebarPageModel, SidebarModel } from "survey-creator-core";
 import { Base } from "survey-core";
 import { SurveyElementBase, SurveyActionBar, ReactQuestionFactory, ReactElementFactory } from "survey-react-ui";
 
@@ -38,9 +38,9 @@ export class SidebarComponent extends SurveyElementBase<ISidebarComponentProps, 
   renderElement() {
     const style = { display: !this.model.visible ? "none" : "" };
     const className = "svc-side-bar" + (this.model.flyoutPanelMode ? " svc-flyout-side-bar" : "");
-    const items = this.model.tabs.map((item) => <SidebarTab item={item} key={item.id} />);
+    const items = this.model.pages.map((item) => <SidebarPage item={item} key={item.id} />);
     return (
-      <div className={className} style={{ display: !this.model.hasVisibleTabs ? "none" : "" }}>
+      <div className={className} style={{ display: !this.model.hasVisiblePages ? "none" : "" }}>
         <div className="svc-side-bar__shadow" onClick={() => this.model.collapseSidebar()}></div>
         <div className="svc-flex-column svc-side-bar__wrapper">
           <div ref={this.containerRef} style={style} className="svc-side-bar__container">
@@ -64,8 +64,8 @@ export class SidebarComponent extends SurveyElementBase<ISidebarComponentProps, 
   }
 }
 
-class SidebarTab extends SurveyElementBase<any, any> {
-  private get item(): SidebarTabModel {
+class SidebarPage extends SurveyElementBase<any, any> {
+  private get item(): SidebarPageModel {
     return this.props.item;
   }
 
@@ -76,14 +76,14 @@ class SidebarTab extends SurveyElementBase<any, any> {
   renderElement(): JSX.Element {
     if (!this.item.visible) return null;
 
-    const component = ReactElementFactory.Instance.createElement(this.item.componentName, { model: this.item.model });
+    const component = ReactElementFactory.Instance.createElement(this.item.componentName, { model: this.item.componentModel });
 
     return component;
   }
 }
 
-ReactQuestionFactory.Instance.registerQuestion("svc-side-bar-tab", (props) => {
-  return React.createElement(SidebarTab, props);
+ReactQuestionFactory.Instance.registerQuestion("svc-side-bar-page", (props) => {
+  return React.createElement(SidebarPage, props);
 });
 
 export default SidebarComponent;

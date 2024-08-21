@@ -2742,9 +2742,9 @@ export class SurveyCreatorModel extends Base
 
   //#region Obsolete designerPropertyGrid
   protected get designerPropertyGrid(): PropertyGridModel {
-    const propertyGridTab = this.sidebar.getTabById(this.sidebar.activeTab);
+    const propertyGridTab = this.sidebar.getPageById(this.sidebar.activePage);
     if (!propertyGridTab) return null;
-    return propertyGridTab.model ? (propertyGridTab.model.propertyGridModel as any as PropertyGridModel) : null;
+    return propertyGridTab.componentModel ? (propertyGridTab.componentModel.propertyGridModel as any as PropertyGridModel) : null;
   }
   public get propertyGrid(): SurveyModel {
     return this.designerPropertyGrid.survey;

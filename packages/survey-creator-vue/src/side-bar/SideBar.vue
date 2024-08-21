@@ -2,7 +2,7 @@
   <div
     class="svc-side-bar"
     :class="{ 'svc-flyout-side-bar': model.flyoutPanelMode }"
-    v-show="model.hasVisibleTabs"
+    v-show="model.hasVisiblePages"
   >
     <div
       class="svc-side-bar__shadow"
@@ -19,8 +19,8 @@
           </div>
         </div>
         <div class="svc-side-bar__container-content">
-          <template v-for="(tab, index) in model.tabs" :key="index">
-            <svc-side-bar-tab :model="tab"></svc-side-bar-tab>
+          <template v-for="(page, index) in model.pages" :key="index">
+            <svc-side-bar-page :model="page"></svc-side-bar-page>
           </template>
         </div>
       </div>

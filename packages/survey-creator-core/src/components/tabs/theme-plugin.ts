@@ -4,7 +4,7 @@ import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { ThemeTabViewModel } from "./theme-builder";
-import { SidebarTabModel } from "../side-bar/side-bar-tab-model";
+import { SidebarPageModel } from "../side-bar/side-bar-page-model";
 import { PredefinedColors, PredefinedThemes, Themes } from "./themes";
 import { assign, notShortCircuitAnd, saveToFileHandler } from "../../utils/utils";
 import { PropertyGridModel } from "../../property-grid";
@@ -54,7 +54,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   private _availableThemes = [].concat(PredefinedThemes);
 
   public propertyGrid: PropertyGridModel;
-  private propertyGridTab: SidebarTabModel;
+  private propertyGridTab: SidebarPageModel;
   public model: ThemeTabViewModel;
   public themeModel: ThemeModel;
 
@@ -202,7 +202,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.propertyGrid = new PropertyGridModel(undefined, creator, themeModelPropertyGridDefinition);
     this.propertyGrid.surveyInstanceCreatedArea = "theme-tab:property-grid";
     const propertyGridViewModel = new PropertyGridViewModel(this.propertyGrid, creator);
-    this.propertyGridTab = this.creator.sidebar.addTab("theme", "svc-property-grid", propertyGridViewModel);
+    this.propertyGridTab = this.creator.sidebar.addPage("theme", "svc-property-grid", propertyGridViewModel);
     this.propertyGridTab.caption = editorLocalization.getString("ed.themePropertyGridTitle");
     this.themeModel = new ThemeModel();
 
@@ -284,7 +284,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.updatePropertyGridEditorsAvailability();
     this.updateVisibilityOfPropertyGridGroups();
     this.updatePropertyGridColorEditorWithPredefinedColors();
-    this.creator.sidebar.activeTab = this.propertyGridTab.id;
+    this.creator.sidebar.activePage = this.propertyGridTab.id;
     this.propertyGridTab.visible = true;
     this.creator.expandCategoryIfNeeded();
   }
