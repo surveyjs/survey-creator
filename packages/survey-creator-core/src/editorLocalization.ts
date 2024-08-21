@@ -90,7 +90,9 @@ export class EditorLocalization {
     if (!defaultLocale) {
       defaultLocale = surveyLocalization.defaultLocale;
     }
-    let name = capitalize(surveyLocalization.getLocaleName(loc || defaultLocale, inEnglish));
+    let name = surveyLocalization.getLocaleName(loc || defaultLocale, inEnglish);
+    if(name === loc) return name;
+    name = capitalize(name);
     if(!loc) {
       name = editorLocalization.getString("ed.defaultLocale")["format"](name);
     }
