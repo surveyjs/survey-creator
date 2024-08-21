@@ -1,4 +1,4 @@
-import { ItemValue, QuestionCheckboxBase, QuestionCheckboxModel, QuestionDropdownModel, QuestionMatrixDynamicModel, QuestionRankingModel, Serializer, surveyLocalization } from "survey-core";
+import { ItemValue, QuestionBooleanModel, QuestionCheckboxBase, QuestionCheckboxModel, QuestionDropdownModel, QuestionMatrixDynamicModel, QuestionRankingModel, Serializer, surveyLocalization } from "survey-core";
 import { QuestionEmbeddedCreatorModel } from "../src/components/embedded-creator";
 import { CreatorPresetEditorModel } from "../src/presets-editor";
 export * from "../src/preset-question-ranking";
@@ -774,6 +774,7 @@ function addLocale(name: string): void {
   if(!surveyLocalization.locales[name]) {
     surveyLocalization.locales[name] = {};
     surveyLocalization["localeNames"][name] = name.toUpperCase();
+    surveyLocalization["localeNamesInEnglish"][name] = name.toUpperCase() + "-English";
   }
 }
 function addLocales(): void {
@@ -808,6 +809,24 @@ test("Preset edit model, Languages tab", () => {
   expect(editor.applyFromSurveyModel()).toBeTruthy();
   expect(editor.creator.locale).toBeFalsy();
   expect(surveyLocalization.supportedLocales).toStrictEqual([]);
+});
+test("Preset edit model, Languages tab - show in English", () => {
+  addLocales();
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  const surveyLocalesQuestion = <QuestionCheckboxModel>survey.getQuestionByName("languages_surveyLocales");
+  const showInEnglishQuestion = <QuestionBooleanModel>survey.getQuestionByName("languages_surveyShowInEnglish");
+
+  expect(showInEnglishQuestion.value).toBe(false);
+  const item = ItemValue.getItemByValue(surveyLocalesQuestion.choices, "de");
+  expect(item.text).toBe("DE");
+  showInEnglishQuestion.value = true;
+  expect(item.text).toBe("DE-English");
+  expect(editor.applyFromSurveyModel()).toBeTruthy();
+  expect(editor.json.languages?.showNamesInEnglish).toBeTruthy();
+  expect(surveyLocalization.showNamesInEnglish).toBeTruthy();
+
+  surveyLocalization.showNamesInEnglish = false;
 });
 test("Preset edit model, toolbox categories, restore after creator locale changed", () => {
   addLocales();
