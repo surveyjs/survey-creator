@@ -28,7 +28,9 @@ svc-page-navigator,
 survey-creator,
 .svc-creator {
   .svc-page-navigator__selector {
-
+    padding: 0;
+    border: none;
+    background-color: transparent;
     &:hover,
     &:focus {
       outline: none;
