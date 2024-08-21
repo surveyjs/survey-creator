@@ -345,7 +345,15 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       const needSeparator = lastItem && item.category != lastItem.category;
       const action = this.creator.createIActionBarItemByClass(item, needSeparator, (questionType: string, json?: any) => {
         const type = json?.type || questionType;
-        this.creator.convertCurrentQuestion(type, json);
+        let newJson = { ...json };
+        (this.defaultJsons[type] || []).forEach((djson) => {
+          if (this.jsonIsCorresponded(djson)) {
+            Object.keys(djson).forEach(k => {
+              newJson[k] = undefined;
+            });
+          }
+        });
+        this.creator.convertCurrentQuestion(type, newJson);
         parentAction?.hidePopup();
       });
       lastItem = item;
@@ -385,7 +393,10 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
         newItems.forEach(action => {
           const toolboxItem = (this.creator.toolbox.getItemByName(action.id) as QuestionToolboxItem);
           const type = toolboxItem.json?.type || toolboxItem.id;
-          if (toolboxItem.json) this.defaultJsons[type] = (this.defaultJsons[type] || []).push(toolboxItem.json);
+          if (toolboxItem.json) {
+            if (!this.defaultJsons[type]) this.defaultJsons[type] = [];
+            this.defaultJsons[type].push(toolboxItem.json);
+          }
           if (action.items?.length > 0) {
             let selectedSubItem = undefined;
             action.items.forEach(item => {
