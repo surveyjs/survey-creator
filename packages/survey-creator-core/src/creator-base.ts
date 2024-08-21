@@ -1888,8 +1888,9 @@ export class SurveyCreatorModel extends Base
     this.dragDropSurveyElements.onDragEnd.add((sender, options) => {
       this.stopUndoRedoTransaction();
       const editTitle = isDraggedFromToolbox && this.startEditTitleOnQuestionAdded;
-      this.selectElement(options.draggedElement, undefined, false, editTitle);
       isDraggedFromToolbox = false;
+      if (!options.draggedElement) return;
+      this.selectElement(options.draggedElement, undefined, false, editTitle);
       this.onDragEnd.fire(this, options);
       if (!options.fromElement) {
         this.setModified({ type: "ADDED_FROM_TOOLBOX", question: options.draggedElement });
@@ -3813,6 +3814,8 @@ export class SurveyCreatorModel extends Base
    * - `"never"` - Hides the expand/collapse buttons.
    */
   @property({ defaultValue: "never" }) expandCollapseButtonVisibility?: "never" | "onhover" | "always";
+
+  expandOnDragTimeOut: number = 1000;
 
   selectFromStringEditor: boolean;
 

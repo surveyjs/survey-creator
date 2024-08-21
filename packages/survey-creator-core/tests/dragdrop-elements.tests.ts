@@ -810,6 +810,7 @@ test("drag drop to panel vertical", () => {
   const ddHelper: any = new DragDropSurveyElements(survey);
   ddHelper.draggedElement = q1;
 
+  ddHelper.insideContainer = true;
   ddHelper.dragOverCore(p1, DragTypeOverMeEnum.InsideEmptyPanel);
   ddHelper.doDrop();
 
@@ -828,6 +829,7 @@ test("drag drop to panel vertical", () => {
   });
 
   ddHelper.draggedElement = q2;
+  ddHelper.insideContainer = false;
   ddHelper.dragOverCore(survey.getQuestionByName("q1"), DragTypeOverMeEnum.Top);
   ddHelper.doDrop();
 
@@ -896,6 +898,7 @@ test("drag drop to panel horizontal", () => {
   const ddHelper: any = new DragDropSurveyElements(survey);
   ddHelper.draggedElement = q1;
 
+  ddHelper.insideContainer = true;
   ddHelper.dragOverCore(p1, DragTypeOverMeEnum.InsideEmptyPanel);
   ddHelper.doDrop();
 
@@ -913,6 +916,7 @@ test("drag drop to panel horizontal", () => {
     }]
   });
 
+  ddHelper.insideContainer = false;
   ddHelper.draggedElement = q2;
   ddHelper.dragOverCore(survey.getQuestionByName("q1"), DragTypeOverMeEnum.Left);
   ddHelper.doDrop();
@@ -1200,7 +1204,7 @@ test("drag drop one empty panel to other empty panel - https://github.com/survey
 
   const ddHelper: any = new DragDropSurveyElements(survey);
   ddHelper.draggedElement = p2;
-
+  ddHelper.insideContainer = true;
   ddHelper.dragOverCore(p1, DragTypeOverMeEnum.InsideEmptyPanel);
   ddHelper.doDrop();
 
