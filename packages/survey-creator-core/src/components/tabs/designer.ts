@@ -1,9 +1,10 @@
-import { Base, PageModel, property, SurveyModel, ComputedUpdater, settings, IPage } from "survey-core";
+import { Base, PageModel, property, SurveyModel, ComputedUpdater, settings, IPage, ActionContainer } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
 import { getLocString } from "../../editorLocalization";
 import { PagesController } from "../../pages-controller";
 import { SurveyHelper } from "../../survey-helper";
 import { DragDropSurveyElements } from "../../survey-elements";
+import { SurveyElementActionContainer } from "../action-container-view-model";
 require("./designer.scss");
 
 export const initialSettingsAllowShowEmptyTitleInDesignMode = settings.allowShowEmptyTitleInDesignMode;
@@ -18,6 +19,8 @@ export class TabDesignerViewModel extends Base {
   @property() designerCss: string;
   @property() showPlaceholder: boolean;
   public creator: SurveyCreatorModel;
+
+  public actionContainer: ActionContainer;
 
   public get displayPageDropTarget() {
     return this.pagesController.page2Display === this.newPage ? "newGhostPage" : this.pagesController.page2Display.name;
@@ -67,6 +70,18 @@ export class TabDesignerViewModel extends Base {
     super();
     this.creator = creator;
     this.pagesControllerValue = new PagesController(creator);
+    this.actionContainer = new ActionContainer();
+    const action = (action) => { this.creator.onSurfaceToolbarActionExecuted.fire(this.creator, { action: action }); };
+    this.actionContainer.setItems([{
+      id: "collapseAll",
+      iconName: "icon-collapseall-24x24",
+      css: "svc-page-navigator__selector",
+      action: action
+    }, {
+      id: "expandAll",
+      iconName: "icon-expandall-24x24",
+      action: action
+    }]);
     this.initSurvey();
   }
   get survey() {
