@@ -357,6 +357,8 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     return this.surveyElement.getType();
   }
 
+  private defaultJsons = {};
+
   private createConvertToAction() {
     const actions = this.getConvertToTypesActions();
     const allowChangeType: boolean = actions.length > 0;
@@ -370,28 +372,29 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       title: actionTitle,
       iconName: "icon-chevron_16x16"
     };
+
     const newAction = this.createDropdownModel({
       actionData: actionData,
       items: actions,
       updateListModel: (listModel: ListModel) => {
         const newItems = this.getConvertToTypesActions(newAction);
+        this.defaultJsons = {};
         listModel.setItems(newItems);
         listModel.selectedItem = this.getSelectedItem(newItems, this.currentType);
 
         newItems.forEach(action => {
+          const toolboxItem = (this.creator.toolbox.getItemByName(action.id) as QuestionToolboxItem);
+          const type = toolboxItem.json?.type || toolboxItem.id;
+          if (toolboxItem.json) this.defaultJsons[type] = (this.defaultJsons[type] || []).push(toolboxItem.json);
           if (action.items?.length > 0) {
             let selectedSubItem = undefined;
             action.items.forEach(item => {
               const elementType = this.element.getType();
-              const toolboxItem = (this.creator.toolbox.getItemByName(action.id) as QuestionToolboxItem).getSubitemByName(item.id);
-              const json = toolboxItem.json || {};
-              if (item.id == elementType || json.type == elementType) {
+              const toolboxSubitem = toolboxItem.getSubitemByName(item.id);
+              const json = toolboxSubitem.json || {};
+              if (type == elementType) {
                 if (!selectedSubItem) selectedSubItem = item;
-                let jsonIsCorresponded = true;
-                Object.keys(json).forEach(p => {
-                  if (p != "type" && json[p] != this.element[p]) jsonIsCorresponded = false;
-                });
-                if (jsonIsCorresponded) selectedSubItem = item;
+                if (this.jsonIsCorresponded(json)) selectedSubItem = item;
               }
             });
             if (selectedSubItem) {
@@ -414,6 +417,14 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     });
     newAction.disableHide = true;
     return newAction;
+  }
+
+  private jsonIsCorresponded(json: any) {
+    let jsonIsCorresponded = true;
+    Object.keys(json).forEach(p => {
+      if (p != "type" && json[p] != this.element[p]) jsonIsCorresponded = false;
+    });
+    return jsonIsCorresponded;
   }
 
   private createConvertInputType() {

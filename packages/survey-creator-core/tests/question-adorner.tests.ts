@@ -386,17 +386,6 @@ test("Check question converter with subitems (json)", (): any => {
   booleans.addSubitem(<any>{ name: "boolradio", json: { type: "boolean", renderAs: "radio" }, title: "Radio" });
   booleans.addSubitem(<any>{ name: "boolcheckbox", json: { type: "boolean", renderAs: "checkbox" }, title: "Checkbox" });
 
-  //customize matrix item
-  const MatrixItem = creator.toolbox.getItemByName("matrix") as QuestionToolboxItem;
-  const MatrixDropdownItem = creator.toolbox.getItemByName("matrixdropdown");
-  const MatrixDynamicItem = creator.toolbox.getItemByName("matrixdynamic");
-  MatrixItem.title = "Matrix";
-  MatrixItem.addSubitem(<any>{ name: "matrixdefault", json: { type: "matrix" }, title: "Single-Select" });
-  MatrixItem.addSubitem(MatrixDropdownItem);
-  MatrixItem.addSubitem(MatrixDynamicItem);
-  creator.toolbox.removeItem("matrixdropdown");
-  creator.toolbox.removeItem("matrixdynamic");
-
   creator.JSON = {
     elements: [
       { type: "boolean", name: "q1", renderAs: "radio" },
@@ -420,6 +409,13 @@ test("Check question converter with subitems (json)", (): any => {
   booleanCheckAction.action();
   const questionConverted = creator.survey.getQuestionByName("q1");
   expect(questionConverted.renderAs).toBe("checkbox");
+
+  popup.toggleVisibility();
+  const booleanCheckAction2 = booleanAction.items[0];
+  booleanCheckAction2.action();
+  const questionConverted2 = creator.survey.getQuestionByName("q1");
+  expect(questionConverted2.renderAs).toBe("");
+
   surveySettings.animationEnabled = true;
 });
 
