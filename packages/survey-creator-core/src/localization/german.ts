@@ -1153,10 +1153,6 @@ var germanTranslation = {
     isPanelless: {
       "false": "Vorgabe",
       "true": "Ohne Paneele"
-    },
-    progressBarInheritWidthFrom: {
-      survey: "Wie bei der Umfrage",
-      container: "Identisch mit Container"
     }
   },
   // Operators
@@ -1489,8 +1485,7 @@ var germanTranslation = {
     panellayoutcolumn: {
       effectiveWidth: "Akzeptiert die Werte %.",
       questionTitleWidth: "Akzeptiert die Werte px."
-    },
-    progressBarInheritWidthFrom: "Die Option \"Wie Container\" passt die Breite des Fortschrittsbalkenbereichs automatisch an das HTML-Element an, in dem die Umfrage platziert wird."
+    }
   },
   // Properties
   p: {
@@ -1594,8 +1589,7 @@ var germanTranslation = {
     scaleColorMode: "Farbmodus skalieren",
     rateColorMode: "Farbmodus bewerten",
     copyDisplayValue: "Anzeigewert kopieren",
-    effectiveColSpan: "Spaltenbereich",
-    progressBarInheritWidthFrom: "Breite des Fortschrittsbalkenbereichs"
+    effectiveColSpan: "Spaltenbereich"
   },
   theme: {
     advancedMode: "Erweiterter Modus",
@@ -2439,13 +2433,9 @@ editorLocalization.locales["de"] = germanTranslation;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Akzeptiert die Werte %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Akzeptiert die Werte px."
 // p.effectiveColSpan: "Column span" => "Spaltenbereich"
-// progressBarInheritWidthFrom.survey: "Same as survey" => "Wie bei der Umfrage"
-// progressBarInheritWidthFrom.container: "Same as container" => "Identisch mit Container"
-// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Zeigt nach Möglichkeit Miniaturansichten für hochgeladene Dateien an. Deaktivieren Sie diese Option, wenn Sie stattdessen Dateisymbole anzeigen möchten."
-// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "Die Option \"Wie Container\" passt die Breite des Fortschrittsbalkenbereichs automatisch an das HTML-Element an, in dem die Umfrage platziert wird."
-// p.progressBarInheritWidthFrom: "Progress bar area width" => "Breite des Fortschrittsbalkenbereichs"
 // maskType.none: "None" => "Nichts"
 // maskType.pattern: "Pattern" => "Muster"
 // maskType.numeric: "Numeric" => "Numerisch"
 // maskType.datetime: "Date and Time" => "Datum und Uhrzeit"
 // maskType.currency: "Currency" => "Währung"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Zeigt nach Möglichkeit Miniaturansichten für hochgeladene Dateien an. Deaktivieren Sie diese Option, wenn Sie stattdessen Dateisymbole anzeigen möchten."

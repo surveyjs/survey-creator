@@ -1153,10 +1153,6 @@ export var mnStrings = {
     isPanelless: {
       "false": "Дефолт",
       "true": "Панелгүйгээр"
-    },
-    progressBarInheritWidthFrom: {
-      survey: "Судалгаатай адил",
-      container: "Савтай адил"
     }
   },
   // Operators
@@ -1489,8 +1485,7 @@ export var mnStrings = {
     panellayoutcolumn: {
       effectiveWidth: "Үнэт зүйлсийг %-ийг хүлээн зөвшөөрдөг.",
       questionTitleWidth: "Үнэ цэнэ px-ийг хүлээн зөвшөөрдөг."
-    },
-    progressBarInheritWidthFrom: "\"As as container\" сонголт автоматаар судалгаанд байрлуулсан HTML элементэд тохируулахын тулд progress bar area өргөнийг тохируулдаг."
+    }
   },
   // Properties
   p: {
@@ -1594,8 +1589,7 @@ export var mnStrings = {
     scaleColorMode: "Масштабын өнгө загвар",
     rateColorMode: "Хэмжээ өнгөний хэв маяг",
     copyDisplayValue: "Copy display value",
-    effectiveColSpan: "Баганын хугацаа",
-    progressBarInheritWidthFrom: "Прогресс барын бүсийн өргөн"
+    effectiveColSpan: "Баганын хугацаа"
   },
   theme: {
     advancedMode: "Дэвшилтэт хэв маяг",
@@ -2386,13 +2380,9 @@ editorLocalization.locales["mn"] = mnStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Үнэт зүйлсийг %-ийг хүлээн зөвшөөрдөг."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Үнэ цэнэ px-ийг хүлээн зөвшөөрдөг."
 // p.effectiveColSpan: "Column span" => "Баганын хугацаа"
-// progressBarInheritWidthFrom.survey: "Same as survey" => "Судалгаатай адил"
-// progressBarInheritWidthFrom.container: "Same as container" => "Савтай адил"
-// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Боломжтой бол татаж авсан файлуудад зориулсан эрхий хурууны урьдчилсан үзүүлэлтийг үзүүлнэ. Оронд нь файлын зургуудыг үзүүлэхийг хүсвэл сонгогдоогүй."
-// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "\"As as container\" сонголт автоматаар судалгаанд байрлуулсан HTML элементэд тохируулахын тулд progress bar area өргөнийг тохируулдаг."
-// p.progressBarInheritWidthFrom: "Progress bar area width" => "Прогресс барын бүсийн өргөн"
 // maskType.none: "None" => "Хэн ч биш"
 // maskType.pattern: "Pattern" => "Загвар"
 // maskType.numeric: "Numeric" => "Тоо нь"
 // maskType.datetime: "Date and Time" => "Огноо, цаг"
 // maskType.currency: "Currency" => "Валютын ханш"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Боломжтой бол татаж авсан файлуудад зориулсан эрхий хурууны урьдчилсан үзүүлэлтийг үзүүлнэ. Оронд нь файлын зургуудыг үзүүлэхийг хүсвэл сонгогдоогүй."

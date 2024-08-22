@@ -1153,10 +1153,6 @@ export var turkishStrings = {
     isPanelless: {
       "false": "Temerrüt",
       "true": "Panelsiz"
-    },
-    progressBarInheritWidthFrom: {
-      survey: "Anketle aynı",
-      container: "Konteyner ile aynı"
     }
   },
   // Operators
@@ -1489,8 +1485,7 @@ export var turkishStrings = {
     panellayoutcolumn: {
       effectiveWidth: "% değerlerini kabul eder.",
       questionTitleWidth: "Px değerlerini kabul eder."
-    },
-    progressBarInheritWidthFrom: "\"Kapsayıcı ile aynı\" seçeneği, ilerleme çubuğu alan genişliğini anketin yerleştirildiği HTML öğesine sığacak şekilde otomatik olarak ayarlar."
+    }
   },
   // Properties
   p: {
@@ -1594,8 +1589,7 @@ export var turkishStrings = {
     scaleColorMode: "Renk modunu ölçekle",
     rateColorMode: "Renk modunu ayarla",
     copyDisplayValue: "Görüntüleme değerini kopyala",
-    effectiveColSpan: "Sütun aralığı",
-    progressBarInheritWidthFrom: "İlerleme çubuğu alanı genişliği"
+    effectiveColSpan: "Sütun aralığı"
   },
   theme: {
     advancedMode: "Gelişmiş mod",
@@ -2725,13 +2719,9 @@ editorLocalization.locales["tr"] = turkishStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "% değerlerini kabul eder."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Px değerlerini kabul eder."
 // p.effectiveColSpan: "Column span" => "Sütun aralığı"
-// progressBarInheritWidthFrom.survey: "Same as survey" => "Anketle aynı"
-// progressBarInheritWidthFrom.container: "Same as container" => "Konteyner ile aynı"
-// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Mümkün olduğunda karşıya yüklenen dosyalar için küçük resim önizlemelerini görüntüler. Bunun yerine dosya simgelerini göstermek istiyorsanız seçimi kaldırın."
-// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "\"Kapsayıcı ile aynı\" seçeneği, ilerleme çubuğu alan genişliğini anketin yerleştirildiği HTML öğesine sığacak şekilde otomatik olarak ayarlar."
-// p.progressBarInheritWidthFrom: "Progress bar area width" => "İlerleme çubuğu alanı genişliği"
 // maskType.none: "None" => "Hiç kimse"
 // maskType.pattern: "Pattern" => "Desen"
 // maskType.numeric: "Numeric" => "Sayısal"
 // maskType.datetime: "Date and Time" => "Tarih ve Saat"
 // maskType.currency: "Currency" => "Para birimi"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Mümkün olduğunda karşıya yüklenen dosyalar için küçük resim önizlemelerini görüntüler. Bunun yerine dosya simgelerini göstermek istiyorsanız seçimi kaldırın."

@@ -1153,10 +1153,6 @@ var spanishTranslation = {
     isPanelless: {
       "false": "Predeterminado",
       "true": "Sin paneles"
-    },
-    progressBarInheritWidthFrom: {
-      survey: "Igual que la encuesta",
-      container: "Igual que el contenedor"
     }
   },
   // Operators
@@ -1489,8 +1485,7 @@ var spanishTranslation = {
     panellayoutcolumn: {
       effectiveWidth: "Acepta valores %.",
       questionTitleWidth: "Acepta valores px."
-    },
-    progressBarInheritWidthFrom: "La opción \"Igual que el contenedor\" ajusta automáticamente el ancho del área de la barra de progreso para que quepa en el elemento HTML en el que se coloca la encuesta."
+    }
   },
   // Properties
   p: {
@@ -1594,8 +1589,7 @@ var spanishTranslation = {
     scaleColorMode: "Modo de color de escala",
     rateColorMode: "Modo de color de tasa",
     copyDisplayValue: "Copiar valor de visualización",
-    effectiveColSpan: "Tramo de columna",
-    progressBarInheritWidthFrom: "Ancho del área de la barra de progreso"
+    effectiveColSpan: "Tramo de columna"
   },
   theme: {
     advancedMode: "Modo avanzado",
@@ -2504,13 +2498,9 @@ editorLocalization.locales["es"] = spanishTranslation;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Acepta valores %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Acepta valores px."
 // p.effectiveColSpan: "Column span" => "Tramo de columna"
-// progressBarInheritWidthFrom.survey: "Same as survey" => "Igual que la encuesta"
-// progressBarInheritWidthFrom.container: "Same as container" => "Igual que el contenedor"
-// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Muestra vistas previas en miniatura de los archivos cargados cuando es posible. Anule la selección si desea mostrar los iconos de archivo en su lugar."
-// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "La opción \"Igual que el contenedor\" ajusta automáticamente el ancho del área de la barra de progreso para que quepa en el elemento HTML en el que se coloca la encuesta."
-// p.progressBarInheritWidthFrom: "Progress bar area width" => "Ancho del área de la barra de progreso"
 // maskType.none: "None" => "Ninguno"
 // maskType.pattern: "Pattern" => "Patrón"
 // maskType.numeric: "Numeric" => "Numérico"
 // maskType.datetime: "Date and Time" => "Fecha y hora"
 // maskType.currency: "Currency" => "Divisa"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Muestra vistas previas en miniatura de los archivos cargados cuando es posible. Anule la selección si desea mostrar los iconos de archivo en su lugar."

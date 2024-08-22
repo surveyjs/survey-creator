@@ -1157,10 +1157,6 @@ export var enStrings = {
       false: "Default",
       true: "Without Panels",
     },
-    progressBarInheritWidthFrom: {
-      survey: "Same as survey",
-      container: "Same as container"
-    }
   },
   // Operators
   op: {
@@ -1497,7 +1493,6 @@ export var enStrings = {
       effectiveWidth: "Accepts values %.",
       questionTitleWidth: "Accepts values px."
     },
-    progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in."
   },
   // Properties
   p: {
@@ -1602,7 +1597,6 @@ export var enStrings = {
     rateColorMode: "Smileys color scheme",
     copyDisplayValue: "Copy display value", // Auto-generated string
     effectiveColSpan: "Column span",
-    progressBarInheritWidthFrom: "Progress bar area width",
   },
   theme: {
     advancedMode: "Advanced mode",

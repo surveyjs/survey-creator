@@ -1153,10 +1153,6 @@ export var indonesianStrings = {
     isPanelless: {
       "false": "Default",
       "true": "Tanpa Panel"
-    },
-    progressBarInheritWidthFrom: {
-      survey: "Sama seperti survei",
-      container: "Sama seperti wadah"
     }
   },
   // Operators
@@ -1489,8 +1485,7 @@ export var indonesianStrings = {
     panellayoutcolumn: {
       effectiveWidth: "Menerima nilai %",
       questionTitleWidth: "Menerima nilai px."
-    },
-    progressBarInheritWidthFrom: "Opsi \"Sama seperti wadah\" secara otomatis menyesuaikan lebar area bilah kemajuan agar sesuai dengan elemen HTML tempat survei ditempatkan."
+    }
   },
   // Properties
   p: {
@@ -1594,8 +1589,7 @@ export var indonesianStrings = {
     scaleColorMode: "Mode skala warna",
     rateColorMode: "Mode warna tingkat",
     copyDisplayValue: "Salin nilai tampilan",
-    effectiveColSpan: "Rentang kolom",
-    progressBarInheritWidthFrom: "Lebar area bilah kemajuan"
+    effectiveColSpan: "Rentang kolom"
   },
   theme: {
     advancedMode: "Mode lanjutan",
@@ -2884,13 +2878,9 @@ editorLocalization.locales["id"] = indonesianStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Menerima nilai %"
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Menerima nilai px."
 // p.effectiveColSpan: "Column span" => "Rentang kolom"
-// progressBarInheritWidthFrom.survey: "Same as survey" => "Sama seperti survei"
-// progressBarInheritWidthFrom.container: "Same as container" => "Sama seperti wadah"
-// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Menampilkan pratinjau thumbnail untuk file yang diunggah jika memungkinkan. Batalkan pilihan jika Anda ingin menampilkan ikon file sebagai gantinya."
-// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "Opsi \"Sama seperti wadah\" secara otomatis menyesuaikan lebar area bilah kemajuan agar sesuai dengan elemen HTML tempat survei ditempatkan."
-// p.progressBarInheritWidthFrom: "Progress bar area width" => "Lebar area bilah kemajuan"
 // maskType.none: "None" => "Tidak"
 // maskType.pattern: "Pattern" => "Pola"
 // maskType.numeric: "Numeric" => "Numerik"
 // maskType.datetime: "Date and Time" => "Tanggal dan Waktu"
 // maskType.currency: "Currency" => "Mata uang"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Menampilkan pratinjau thumbnail untuk file yang diunggah jika memungkinkan. Batalkan pilihan jika Anda ingin menampilkan ikon file sebagai gantinya."

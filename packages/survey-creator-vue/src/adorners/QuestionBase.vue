@@ -39,11 +39,6 @@
           ></sv-action-bar>
         </div>
       </div>
-      <div v-if="!element.hasTitle" :class="model.cssCollapsedHiddenHeader">
-        <div :class="model.cssCollapsedHiddenTitle">
-          <survey-string :locString="element.locTitle"/>
-        </div>
-      </div>
 
       <sv-template-renderer
         :componentName="componentName"

@@ -3499,22 +3499,3 @@ test("page class doesn't have layout category", () => {
   expect(propertyGrid.survey.getPanelByName("logic")).toBeTruthy();
   expect(propertyGrid.survey.getPanelByName("layout")).toBeFalsy();
 });
-test("tagbox as property & required", () => {
-  Serializer.addProperty("survey", {
-    name: "prop1", category: "general", default: ["item1"],
-    isRequired: true, type: "multiplevalues", choices: ["item1", "item2", "item3"]
-  });
-
-  const survey = new SurveyModel();
-  const propertyGrid = new PropertyGridModelTester(survey);
-  const question = propertyGrid.survey.getQuestionByName("prop1");
-  expect(question.value).toHaveLength(1);
-  expect(question.value[0]).toBe("item1");
-  expect(question.errors).toHaveLength(0);
-  question.clearValue();
-  expect(question.errors).toHaveLength(1);
-  question.value = ["item1"];
-  expect(question.errors).toHaveLength(0);
-
-  Serializer.removeProperty("survey", "prop1");
-});

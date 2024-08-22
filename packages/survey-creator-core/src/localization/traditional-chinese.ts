@@ -1153,10 +1153,6 @@ var traditionalChineseTranslation = {
     isPanelless: {
       "false": "違約",
       "true": "不帶面板"
-    },
-    progressBarInheritWidthFrom: {
-      survey: "與調查相同",
-      container: "與容器相同"
     }
   },
   // Operators
@@ -1489,8 +1485,7 @@ var traditionalChineseTranslation = {
     panellayoutcolumn: {
       effectiveWidth: "接受值 。",
       questionTitleWidth: "接受值 px。"
-    },
-    progressBarInheritWidthFrom: "“與容器相同”選項會自動調整進度條區域的寬度，以適應放置調查的 HTML 元素。"
+    }
   },
   // Properties
   p: {
@@ -1594,8 +1589,7 @@ var traditionalChineseTranslation = {
     scaleColorMode: "縮放顏色模式",
     rateColorMode: "評價顏色模式",
     copyDisplayValue: "複製顯示值",
-    effectiveColSpan: "柱跨度",
-    progressBarInheritWidthFrom: "進度條區域寬度"
+    effectiveColSpan: "柱跨度"
   },
   theme: {
     advancedMode: "高級模式",
@@ -3002,13 +2996,9 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "接受值 。"
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "接受值 px。"
 // p.effectiveColSpan: "Column span" => "柱跨度"
-// progressBarInheritWidthFrom.survey: "Same as survey" => "與調查相同"
-// progressBarInheritWidthFrom.container: "Same as container" => "與容器相同"
-// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "儘可能顯示已上傳檔的縮圖預覽。取消選擇是否要顯示檔圖示。"
-// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "“與容器相同”選項會自動調整進度條區域的寬度，以適應放置調查的 HTML 元素。"
-// p.progressBarInheritWidthFrom: "Progress bar area width" => "進度條區域寬度"
 // maskType.none: "None" => "沒有"
 // maskType.pattern: "Pattern" => "模式"
 // maskType.numeric: "Numeric" => "數值的"
 // maskType.datetime: "Date and Time" => "日期和時間"
 // maskType.currency: "Currency" => "貨幣"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "儘可能顯示已上傳檔的縮圖預覽。取消選擇是否要顯示檔圖示。"

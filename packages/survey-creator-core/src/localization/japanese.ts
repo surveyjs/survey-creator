@@ -1153,10 +1153,6 @@ export var jaStrings = {
     isPanelless: {
       "false": "デフォルト",
       "true": "パネルなし"
-    },
-    progressBarInheritWidthFrom: {
-      survey: "調査と同じ",
-      container: "コンテナと同じ"
     }
   },
   // Operators
@@ -1489,8 +1485,7 @@ export var jaStrings = {
     panellayoutcolumn: {
       effectiveWidth: "値 % を受け入れます。",
       questionTitleWidth: "値 px を受け入れます。"
-    },
-    progressBarInheritWidthFrom: "「コンテナと同じ」オプションは、調査が配置されているHTML要素に収まるようにプログレスバーの領域幅を自動調整します。"
+    }
   },
   // Properties
   p: {
@@ -1594,8 +1589,7 @@ export var jaStrings = {
     scaleColorMode: "スケールカラーモード",
     rateColorMode: "レートカラーモード",
     copyDisplayValue: "表示値をコピー",
-    effectiveColSpan: "列スパン",
-    progressBarInheritWidthFrom: "プログレスバー領域の幅"
+    effectiveColSpan: "列スパン"
   },
   theme: {
     advancedMode: "詳細モード",
@@ -2729,13 +2723,9 @@ editorLocalization.locales["ja"] = jaStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "値 % を受け入れます。"
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "値 px を受け入れます。"
 // p.effectiveColSpan: "Column span" => "列スパン"
-// progressBarInheritWidthFrom.survey: "Same as survey" => "調査と同じ"
-// progressBarInheritWidthFrom.container: "Same as container" => "コンテナと同じ"
-// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "可能な場合は、アップロードされたファイルのサムネイル プレビューを表示します。代わりにファイルアイコンを表示する場合は、選択を解除します。"
-// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "「コンテナと同じ」オプションは、調査が配置されているHTML要素に収まるようにプログレスバーの領域幅を自動調整します。"
-// p.progressBarInheritWidthFrom: "Progress bar area width" => "プログレスバー領域の幅"
 // maskType.none: "None" => "何一つ"
 // maskType.pattern: "Pattern" => "パターン"
 // maskType.numeric: "Numeric" => "数値"
 // maskType.datetime: "Date and Time" => "日付と時刻"
 // maskType.currency: "Currency" => "通貨"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "可能な場合は、アップロードされたファイルのサムネイル プレビューを表示します。代わりにファイルアイコンを表示する場合は、選択を解除します。"

@@ -19,8 +19,7 @@
     "survey-customization": "customize-survey-creation-process",
     "property-grid": "property-grid-customization",
     "troubleshooting": "overview",
-    "end-user-guide": "end-user-guide-user-interface",
-    "get-started-knockout-jquery": "get-started-html-css-javascript"
+    "end-user-guide": "end-user-guide-user-interface"
   },
   "classRename": {
     "surveycreatormodel": "survey-creator"

@@ -1153,10 +1153,6 @@ var portugueseTranslation = {
     isPanelless: {
       "false": "Inadimplência",
       "true": "Sem Painéis"
-    },
-    progressBarInheritWidthFrom: {
-      survey: "O mesmo que pesquisa",
-      container: "Igual ao contêiner"
     }
   },
   // Operators
@@ -1489,8 +1485,7 @@ var portugueseTranslation = {
     panellayoutcolumn: {
       effectiveWidth: "Aceita valores %.",
       questionTitleWidth: "Aceita valores px."
-    },
-    progressBarInheritWidthFrom: "A opção \"Igual ao contêiner\" ajusta automaticamente a largura da área da barra de progresso para caber no elemento HTML em que a pesquisa é colocada."
+    }
   },
   // Properties
   p: {
@@ -1594,8 +1589,7 @@ var portugueseTranslation = {
     scaleColorMode: "Modo de cor de escala",
     rateColorMode: "Classifique o modo de cores",
     copyDisplayValue: "Copiar valor de exibição",
-    effectiveColSpan: "Extensão da coluna",
-    progressBarInheritWidthFrom: "Largura da área da barra de progresso"
+    effectiveColSpan: "Extensão da coluna"
   },
   theme: {
     advancedMode: "Modo avançado",
@@ -2396,13 +2390,9 @@ editorLocalization.locales["pt"] = portugueseTranslation;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Aceita valores %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Aceita valores px."
 // p.effectiveColSpan: "Column span" => "Extensão da coluna"
-// progressBarInheritWidthFrom.survey: "Same as survey" => "O mesmo que pesquisa"
-// progressBarInheritWidthFrom.container: "Same as container" => "Igual ao contêiner"
-// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Exibe visualizações em miniatura para arquivos carregados quando possível. Desmarque se quiser mostrar ícones de arquivo."
-// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "A opção \"Igual ao contêiner\" ajusta automaticamente a largura da área da barra de progresso para caber no elemento HTML em que a pesquisa é colocada."
-// p.progressBarInheritWidthFrom: "Progress bar area width" => "Largura da área da barra de progresso"
 // maskType.none: "None" => "Nenhum"
 // maskType.pattern: "Pattern" => "Padrão"
 // maskType.numeric: "Numeric" => "Numérico"
 // maskType.datetime: "Date and Time" => "Data e hora"
 // maskType.currency: "Currency" => "Moeda"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Exibe visualizações em miniatura para arquivos carregados quando possível. Desmarque se quiser mostrar ícones de arquivo."
