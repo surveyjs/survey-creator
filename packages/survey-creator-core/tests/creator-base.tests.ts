@@ -56,6 +56,7 @@ import { PropertyGridEditorMatrixItemValues } from "../src/property-grid/matrice
 import { ObjectSelector } from "../src/property-grid/object-selector";
 import { TabDesignerViewModel } from "../src/components/tabs/designer";
 import { ConfigureTablePropertyEditorEvent } from "../src/creator-events-api";
+import { IQuestionToolboxItem } from "../src/toolbox";
 
 surveySettings.supportCreatorV2 = true;
 
@@ -1327,6 +1328,41 @@ test("Question type selector popup displayMode", (): any => {
   creator.isTouch = true;
   selectorModel = creator.getQuestionTypeSelectorModel(() => { });
   expect(selectorModel.popupModel.displayMode).toBe("overlay");
+});
+
+test("Question type selector with custom toolbox item", (): any => {
+  const creator = new CreatorTester();
+  const customToolboxItem = <IQuestionToolboxItem>{
+    "id": "panel1",
+    "name": "panel1",
+    "iconName": "icon-panel",
+    "className": "",
+    "title": "",
+    "json": {
+      "type": "panel",
+      "name": "panel1",
+      "elements": [{ "type": "text", "name": "question1" }],
+    },
+    "isCopied": false,
+    "isUsed": true,
+    "isStandard": false,
+    "category": "Custom Questions"
+  };
+  creator.toolbox.addItem(customToolboxItem);
+
+  const survey: SurveyModel = creator.survey;
+  expect(survey.getAllQuestions().length).toEqual(0);
+
+  const selectorModel = creator.getQuestionTypeSelectorModel(() => { });
+  const listModel: ListModel = selectorModel.popupModel.contentComponentData.model;
+  selectorModel.popupModel.toggleVisibility();
+  const customItem = listModel.actions.filter((item) => item.id == "panel1")[0];
+  listModel.onItemClick(customItem);
+  expect(survey.getAllPanels().length).toEqual(1);
+  expect(survey.getAllPanels()[0].getType()).toEqual("panel");
+
+  const newQ = survey.getAllPanels()[0];
+  expect(newQ.elements.length).toEqual(1);
 });
 
 test("Add question with default choices", (): any => {
