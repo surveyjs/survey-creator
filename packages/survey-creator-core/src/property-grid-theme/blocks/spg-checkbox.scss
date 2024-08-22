@@ -31,6 +31,8 @@
   flex-shrink: 0;
   // padding: calcSize(0.5);
   padding: 1px 1px;
+  outline: 2px solid transparent;
+  transition: background $creator-transition-duration, background-color $creator-transition-duration, outline $creator-transition-duration;
 }
 
 .spg-checkbox:hover {
@@ -45,6 +47,7 @@
   }
 }
 
+.spg-checkbox:active .spg-checkbox__rectangle,
 .spg-checkbox__control:focus+.spg-checkbox__rectangle {
   outline: 2px solid var(--ctr-checkbox-border-color-focused, $primary);
   outline-offset: -2px;
