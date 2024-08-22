@@ -448,7 +448,7 @@ test("Check question converter selected item for single subitems (json)", (): an
   const popupViewModelSubtype2 = new PopupDropdownViewModel(popupSubtype2); // need for popupModel.onShow
   popupSubtype2.toggleVisibility();
   const listSubtype2 = popupSubtype2.contentComponentData.model;
-  expect(listSubtype2.selectedItem).toBe(undefined);
+  expect(listSubtype2.selectedItem?.id).toBe(undefined);
 
   surveySettings.animationEnabled = true;
 });
