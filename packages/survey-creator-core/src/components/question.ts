@@ -339,6 +339,22 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   public getConvertToTypesActions(parentAction?: Action): Array<IAction> {
     const availableItems = this.getConvertToTypes();
 
+    const defaultJsons = {};
+    availableItems.forEach((toolboxItem: QuestionToolboxItem) => {
+      const type = toolboxItem.json?.type || toolboxItem.id;
+      if (toolboxItem.json) {
+        if (!defaultJsons[type]) defaultJsons[type] = [];
+        defaultJsons[type].push(toolboxItem.json);
+      }
+      (toolboxItem.items || []).forEach((toolboxSubitem: QuestionToolboxItem) => {
+        if (toolboxSubitem.json) {
+          const stype = toolboxSubitem.json?.type || toolboxSubitem.id;
+          if (!defaultJsons[stype]) defaultJsons[stype] = [];
+          defaultJsons[stype].push(toolboxSubitem.json);
+        }
+      });
+    });
+
     const res = [];
     let lastItem = null;
     availableItems.forEach((item: QuestionToolboxItem) => {
@@ -346,10 +362,10 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       const action = this.creator.createIActionBarItemByClass(item, needSeparator, (questionType: string, json?: any) => {
         const type = json?.type || questionType;
         let newJson = { ...json };
-        (this.defaultJsons[type] || []).forEach((djson) => {
+        (defaultJsons[type] || []).forEach((djson) => {
           if (this.jsonIsCorresponded(djson)) {
             Object.keys(djson).forEach(k => {
-              newJson[k] = undefined;
+              if (k != "type" && !newJson[k]) newJson[k] = undefined;
             });
           }
         });
@@ -364,8 +380,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   private get currentType(): string {
     return this.surveyElement.getType();
   }
-
-  private defaultJsons = {};
 
   private createConvertToAction() {
     const actions = this.getConvertToTypesActions();
@@ -386,24 +400,21 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       items: actions,
       updateListModel: (listModel: ListModel) => {
         const newItems = this.getConvertToTypesActions(newAction);
-        this.defaultJsons = {};
+
         listModel.setItems(newItems);
         listModel.selectedItem = this.getSelectedItem(newItems, this.currentType);
 
         newItems.forEach(action => {
           const toolboxItem = (this.creator.toolbox.getItemByName(action.id) as QuestionToolboxItem);
-          const type = toolboxItem.json?.type || toolboxItem.id;
-          if (toolboxItem.json) {
-            if (!this.defaultJsons[type]) this.defaultJsons[type] = [];
-            this.defaultJsons[type].push(toolboxItem.json);
-          }
+
           if (action.items?.length > 0) {
             let selectedSubItem = undefined;
             action.items.forEach(item => {
               const elementType = this.element.getType();
               const toolboxSubitem = toolboxItem.getSubitemByName(item.id);
               const json = toolboxSubitem.json || {};
-              if (type == elementType) {
+
+              if (item.id == elementType || json.type == elementType) {
                 if (!selectedSubItem) selectedSubItem = item;
                 if (this.jsonIsCorresponded(json)) selectedSubItem = item;
               }

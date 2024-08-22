@@ -1,5 +1,5 @@
 import { QuestionAdornerViewModel } from "../src/components/question";
-import { Action, PopupDropdownViewModel, settings, SurveyElement, settings as surveySettings } from "survey-core";
+import { Action, PopupDropdownViewModel, QuestionRadiogroupModel, settings, SurveyElement, settings as surveySettings } from "survey-core";
 import { CreatorTester } from "./creator-tester";
 import { PageAdorner } from "../src/components/page";
 import { TabDesignerPlugin } from "../src/components/tabs/designer-plugin";
@@ -238,6 +238,22 @@ test("Check question adorners expand-collapse - onInitElementStateCallback", ():
   expect(questionAdorner.collapsed).toBeTruthy();
 });
 
+function getQuestionConverterList(creator: CreatorTester, questionName: string) {
+  const question = creator.survey.getQuestionByName(questionName);
+  creator.selectElement(question);
+  const questionAdorner = new QuestionAdornerViewModel(
+    creator,
+    question,
+    <any>undefined
+  );
+  const convertToAction = questionAdorner.actionContainer.getActionById("convertTo");
+  const popup = convertToAction.popupModel;
+  const popupViewModel = new PopupDropdownViewModel(popup); // need for popupModel.onShow
+  popup.toggleVisibility();
+  const list = popup.contentComponentData.model;
+  return list;
+}
+
 test("Check question converter no subitems", (): any => {
   surveySettings.animationEnabled = false;
   const creator = new CreatorTester();
@@ -414,7 +430,7 @@ test("Check question converter with subitems (json)", (): any => {
   const booleanCheckAction2 = booleanAction.items[0];
   booleanCheckAction2.action();
   const questionConverted2 = creator.survey.getQuestionByName("q1");
-  expect(questionConverted2.renderAs).toBe("");
+  expect(questionConverted2.renderAs).toBe("default");
 
   surveySettings.animationEnabled = true;
 });
@@ -441,16 +457,60 @@ test("Check question converter with subitems (types)", (): any => {
     question,
     <any>undefined
   );
-  const convertToAction = questionAdorner.actionContainer.getActionById("convertTo");
-  const popup = convertToAction.popupModel;
-  const popupViewModel = new PopupDropdownViewModel(popup); // need for popupModel.onShow
-  popup.toggleVisibility();
-  const list = popup.contentComponentData.model;
 
-  const booleanAction = list.getActionById("boolean");
-  const booleanCheckAction = booleanAction.items[2];
-  booleanCheckAction.action();
-  const questionConverted = creator.survey.getQuestionByName("q1");
+  getQuestionConverterList(creator, "q1").getActionById("boolean").items[2].action();
+  const questionConverted = creator.survey.getQuestionByName("q1") as QuestionRadiogroupModel;
   expect(questionConverted.getType()).toBe("radiogroup");
+  expect(questionConverted.choices.length).toBe(3);
+
+  questionConverted.choices[0].text = "abc";
+  expect(creator.survey.getQuestionByName("q1").choices[0].text).toBe("abc");
+
+  getQuestionConverterList(creator, "q1").getActionById("dropdown").action();
+  expect(creator.survey.getQuestionByName("q1").choices[0].text).toBe("abc");
+  expect(creator.survey.getQuestionByName("q1").getType()).toBe("dropdown");
+
+  getQuestionConverterList(creator, "q1").getActionById("boolean").items[2].action();
+  expect(creator.survey.getQuestionByName("q1").choices[0].text).toBe("abc");
+  expect(creator.survey.getQuestionByName("q1").getType()).toBe("radiogroup");
+
+  surveySettings.animationEnabled = true;
+});
+
+test("Check question converter with single subitem (json)", (): any => {
+  surveySettings.animationEnabled = false;
+  const creator = new CreatorTester();
+
+  const longTextItem = creator.toolbox.getItemByName("comment");
+  longTextItem.addSubitem({
+    name: "limitedLongText",
+    title: "Limited to 280 characters",
+    json: {
+      type: "comment",
+      maxLength: 280
+    }
+  });
+
+  creator.JSON = {
+    elements: [
+      { type: "boolean", name: "q1", renderAs: "radio" },
+    ]
+  };
+
+  getQuestionConverterList(creator, "q1").getActionById("comment").action();
+  expect(creator.survey.getQuestionByName("q1").maxLength).toBe(-1);
+
+  getQuestionConverterList(creator, "q1").getActionById("comment").items[0].action();
+  expect(creator.survey.getQuestionByName("q1").maxLength).toBe(280);
+
+  getQuestionConverterList(creator, "q1").getActionById("comment").action();
+  expect(creator.survey.getQuestionByName("q1").maxLength).toBe(-1);
+
+  getQuestionConverterList(creator, "q1").getActionById("radiogroup").action();
+  expect(creator.survey.getQuestionByName("q1").maxLength).toBe(undefined);
+
+  getQuestionConverterList(creator, "q1").getActionById("comment").items[0].action();
+  expect(creator.survey.getQuestionByName("q1").maxLength).toBe(280);
+
   surveySettings.animationEnabled = true;
 });
