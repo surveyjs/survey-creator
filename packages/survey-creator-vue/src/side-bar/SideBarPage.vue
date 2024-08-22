@@ -2,7 +2,7 @@
   <component
     v-if="model.visible"
     :is="model.componentName"
-    :model="model.componentName"
+    :model="model.componentData"
   ></component>
 </template>
 

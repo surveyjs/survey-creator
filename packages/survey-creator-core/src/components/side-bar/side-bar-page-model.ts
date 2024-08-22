@@ -12,12 +12,12 @@ export class SidebarPageModel extends Base {
       target.sidePanel.updateHasVisiblePages();
     }
   }) visible: boolean;
-  @property() componentModel: any;
+  @property() componentData: any;
   @property() componentName: string;
 
-  constructor(public id: string, public sidePanel: SidebarModel, componentName?: string, model?: any) {
+  constructor(public id: string, public sidePanel: SidebarModel, componentName?: string, componentData?: any) {
     super();
     !!componentName && (this.componentName = componentName);
-    !!model && (this.componentModel = model);
+    !!componentData && (this.componentData = componentData);
   }
 }

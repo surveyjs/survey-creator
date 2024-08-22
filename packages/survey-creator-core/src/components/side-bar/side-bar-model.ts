@@ -4,9 +4,12 @@ import { SurveyCreatorModel } from "../../creator-base";
 import { SidebarPageModel } from "./side-bar-page-model";
 import { ResizeManager } from "../../utils/resizer";
 import { notShortCircuitAnd } from "../../utils/utils";
+import { TabControlModel } from "./tab-control-model";
 
 export class SidebarModel extends Base {
   public toolbar: AdaptiveActionContainer = new AdaptiveActionContainer();
+  public tabControl: TabControlModel;
+
   private _expandAction: Action;
   private _collapseAction: Action;
   private _activePage: SidebarPageModel;
@@ -22,14 +25,12 @@ export class SidebarModel extends Base {
   @property({ defaultValue: false }) flyoutMode: boolean;
   @property({
     onSet: (val, target: SidebarModel) => {
-      target.pages.forEach(page => page.visible = false);
-      target._activePage = target.pages.filter(page => page.id === val)[0];
-      if (target._activePage) {
-        target.headerText = target._activePage.caption;
-        target._activePage.visible = true;
-      }
+      target.setActivePage(target.pages.filter(page => page.id === val)[0]);
     }
   }) activePage: string;
+
+  sideAreaComponentName: string;
+  sideAreaComponentData: any;
 
   public get activePageModel(): SidebarPageModel {
     return this._activePage;
@@ -110,6 +111,15 @@ export class SidebarModel extends Base {
     this.creator.onPropertyChanged.add(this.sidebarLocationChangedHandler);
     this.visible = this.creator.showSidebar;
     this.createActions();
+  }
+
+  public setActivePage(newPage: SidebarPageModel): void {
+    this.pages.forEach(page => page.visible = false);
+    this._activePage = newPage;
+    if (this._activePage) {
+      this.headerText = this._activePage.caption;
+      this._activePage.visible = true;
+    }
   }
 
   public getExpandAction() {

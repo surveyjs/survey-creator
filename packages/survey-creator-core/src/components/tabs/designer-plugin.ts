@@ -1,5 +1,5 @@
-import { notShortCircuitAnd } from "../../utils/utils";
 import { Base, SurveyModel, Action, ComputedUpdater } from "survey-core";
+import { notShortCircuitAnd } from "../../utils/utils";
 import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
 import { PropertyGridModel } from "../../property-grid";
@@ -7,6 +7,9 @@ import { PropertyGridViewModel } from "../../property-grid/property-grid-view-mo
 import { SidebarPageModel } from "../side-bar/side-bar-page-model";
 import { TabDesignerViewModel } from "./designer";
 import { DesignerStateManager } from "./designer-state-manager";
+import { getLocString } from "../../editorLocalization";
+import { TabControlModel } from "../side-bar/tab-control-model";
+import { pgTabIcons } from "../../property-grid/icons";
 
 export class TabDesignerPlugin implements ICreatorPlugin {
   public model: TabDesignerViewModel;
@@ -18,6 +21,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
   public previewAction: Action;
   private designerAction: Action;
   public designerStateManager: DesignerStateManager;
+  private tabControlModel: TabControlModel;
 
   private get isSurveySelected(): boolean {
     return this.creator.isElementSelected(<any>this.creator.survey);
@@ -31,6 +35,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
 
   constructor(private creator: SurveyCreatorModel) {
     creator.addPluginTab("designer", this);
+    this.tabControlModel = new TabControlModel(this.creator.sidebar);
     const propertyGridModel = new PropertyGridModel(creator.survey as any as Base, creator, creator.getPropertyGridDefinition());
     this.propertyGrid = new PropertyGridViewModel(propertyGridModel, creator);
     this.propertyGridTab = this.creator.sidebar.addPage("propertyGrid", "svc-property-grid", this.propertyGrid, () => {
@@ -48,6 +53,25 @@ export class TabDesignerPlugin implements ICreatorPlugin {
         result.push(this.propertyGrid.objectSelectionAction);
       }
       return result;
+    });
+
+    creator.onSelectedElementChanged.add((sender, options) => {
+      if (creator.showOneCategoryInPropertyGrid) {
+        const pgTabs = propertyGridModel.survey.pages.map(p => {
+          const action = new Action({
+            id: p.name,
+            locTooltipName: "pe.tabs." + p.name,
+            iconName: pgTabIcons[p.name] || pgTabIcons["specific"],
+            action: () => {
+              propertyGridModel.survey.currentPage = p;
+              pgTabs.forEach(i => i.pressed = false);
+              action.pressed = true;
+            }
+          });
+          return action;
+        });
+        this.tabControlModel.topToolbar.setItems(pgTabs);
+      }
     });
     this.toolboxTab = this.creator.sidebar.addPage("toolbox", "svc-toolbox", creator);
     this.designerStateManager = new DesignerStateManager();
@@ -80,6 +104,10 @@ export class TabDesignerPlugin implements ICreatorPlugin {
   public activate(): void {
     this.model = new TabDesignerViewModel(this.creator);
     this.creator.sidebar.activePage = this.propertyGridTab.id;
+    if (this.creator.showOneCategoryInPropertyGrid) {
+      this.creator.sidebar.sideAreaComponentName = "svc-tab-control";
+      this.creator.sidebar.sideAreaComponentData = this.tabControlModel;
+    }
     this.creator.focusElement(undefined, true);
   }
   public deactivate(): boolean {
@@ -88,6 +116,8 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     }
     this.model = undefined;
     this.propertyGridTab.visible = false;
+    this.creator.sidebar.sideAreaComponentName = undefined;
+    this.creator.sidebar.sideAreaComponentData = undefined;
     return true;
   }
   public onDesignerSurveyPropertyChanged(obj: Base, propName: string): void {

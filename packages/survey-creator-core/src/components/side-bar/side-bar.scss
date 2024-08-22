@@ -9,6 +9,10 @@
   height: 100%;
 }
 
+.svc-side-bar__wrapper {
+  height: 100%;
+}
+
 .svc-side-bar__container .svc-resizer {
   width: 3px;
   height: 100%;
@@ -99,8 +103,7 @@
   }
 }
 
-
-.svc-flex-column.svc-side-bar__wrapper {
+.svc-flex-row.svc-side-bar__wrapper {
   width: auto;
   border-left: 1px solid var(--ctr-property-grid-border-color, $border);
   height: 100%;

@@ -1,0 +1,34 @@
+import { Action, ActionContainer, Base } from "survey-core";
+import { SidebarModel } from "./side-bar-model";
+
+export class TabControlModel extends Base {
+  public topToolbar: ActionContainer = new ActionContainer();
+  public bottomToolbar: ActionContainer = new ActionContainer();
+  public expandCollapseAction: Action;
+
+  constructor(public sidePanel: SidebarModel) {
+    super();
+    this.createToggleAction();
+  }
+
+  private createToggleAction() {
+    this.expandCollapseAction = new Action({
+      id: "svd-grid-hide",
+      iconName: this.sidePanel.visible ? "icon-collapse-panel" : "icon-expand-panel",
+      css: this.sidePanel.visible ? "svd-grid-hide" : "svd-grid-expand",
+      locTitleName: this.sidePanel.visible ? "ed.hidePanel" : "ed.showPanel",
+      showTitle: false,
+      visible: true,
+      action: () => {
+        if (this.sidePanel.visible) {
+          this.sidePanel.collapseSidebar();
+        } else {
+          this.sidePanel.expandSidebar();
+        }
+        this.expandCollapseAction.locTitleName = this.sidePanel.visible ? "ed.hidePanel" : "ed.showPanel";
+        this.expandCollapseAction.css = this.sidePanel.visible ? "svd-grid-hide" : "svd-grid-expand";
+        this.expandCollapseAction.iconName = this.sidePanel.visible ? "icon-collapse-panel" : "icon-expand-panel";
+      }
+    });
+  }
+}

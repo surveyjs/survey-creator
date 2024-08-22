@@ -989,6 +989,7 @@ export class PropertyGridModel {
     if (!!this.obj) {
       const jsonGenerator = new PropertyJSONGenerator(this.obj, this.options, null, null, this.propertyGridDefinition);
       if (this.isPagesAsCategory) {
+        survey.css.page.root += " spg-panel__content";
         jsonGenerator.setupPages(survey);
       } else {
         const page = survey.createNewPage("p1");

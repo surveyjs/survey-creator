@@ -1,0 +1,161 @@
+@import "../../variables.scss";
+
+.Tabs_22400_60650 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-left: var(--ctr-property-grid-tabs-border-width, 1px) solid
+    var(--ctr-property-grid-tabs-border-color, rgba(0, 0, 0, 0.16));
+  background: var(--ctr-property-grid-tabs-background-color, #fff);
+  box-sizing: border-box;
+}
+.TopToolbar_22400_60651 {
+  display: flex;
+  padding: var(--ctr-property-grid-tabs-padding-top, 12px) var(--ctr-property-grid-tabs-padding-right, 12px)
+    var(--ctr-property-grid-tabs-padding-bottom, 12px) var(--ctr-property-grid-tabs-padding-left, 12px);
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  gap: var(--ctr-property-grid-tabs-separator-margin, 12px);
+}
+.CollapseButton_22400_60652 {
+  display: flex;
+  align-items: center;
+}
+.menu-toolbar-button {
+  display: flex;
+  padding: var(--ctr-menu-toolbar-button-padding-top, 8px) var(--ctr-menu-toolbar-button-padding-right, 8px)
+    var(--ctr-menu-toolbar-button-padding-bottom, 8px) var(--ctr-menu-toolbar-button-padding-left, 8px);
+  justify-content: center;
+  align-items: center;
+  gap: var(--ctr-menu-toolbar-button-gap, 8px);
+  border-radius: var(--ctr-menu-toolbar-button-corner-radius, 4px);
+}
+.menu-toolbar-button-icon {
+  display: flex;
+  width: var(--ctr-menu-toolbar-button-icon-width, 24px);
+  height: var(--ctr-menu-toolbar-button-icon-height, 24px);
+  justify-content: center;
+  align-items: center;
+
+  use {
+    fill: var(--ctr-menu-toolbar-button-icon-color, $foreground-light);
+  }
+}
+.CollapsePanel_24x24_21220_2484322 {
+  flex: 1 0 0;
+}
+.Separator_22400_60653 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  align-self: stretch;
+}
+.Line_21220_2204727 {
+  height: var(--ctr-separator-width, 1px);
+  background: var(--ctr-separator-color, rgba(0, 0, 0, 0.16));
+  width: 100%;
+}
+.Items_22400_60654 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  gap: var(--ctr-property-grid-tabs-gap, 12px);
+}
+.General_22400_60655 {
+  display: flex;
+  align-items: center;
+}
+.General_24x24_21220_2484322 {
+  flex: 1 0 0;
+}
+.MenuButton_22408_73629 {
+  display: flex;
+  align-items: center;
+}
+.menu-toolbar-button--selected {
+  display: flex;
+  padding: var(--ctr-menu-toolbar-button-padding-top, 8px) var(--ctr-menu-toolbar-button-padding-right, 8px)
+    var(--ctr-menu-toolbar-button-padding-bottom, 8px) var(--ctr-menu-toolbar-button-padding-left, 8px);
+  justify-content: center;
+  align-items: center;
+  gap: var(--ctr-menu-toolbar-button-gap, 8px);
+  border-radius: var(--ctr-menu-toolbar-button-corner-radius, 4px);
+  background: var(--ctr-menu-toolbar-button-background-color-selected, #fff);
+
+  use {
+    fill: var(--ctr-menu-toolbar-button-icon-color-selected, $primary);
+  }
+}
+
+.Icon_21220_2484300 {
+  display: flex;
+  width: var(--ctr-menu-toolbar-button-icon-width, 24px);
+  height: var(--ctr-menu-toolbar-button-icon-height, 24px);
+  justify-content: center;
+  align-items: center;
+}
+.Specific_24x24_21220_2484301 {
+  flex: 1 0 0;
+}
+.Design_22408_73593 {
+  display: flex;
+  align-items: center;
+}
+.Design_24x24_21220_2484322 {
+  flex: 1 0 0;
+}
+.Layout_22408_73611 {
+  display: flex;
+  align-items: center;
+}
+.Layout_24x24_21220_2484322 {
+  flex: 1 0 0;
+}
+.MenuButton_22400_60660 {
+  display: flex;
+  align-items: center;
+}
+.Conditions_24x24_21220_2484322 {
+  flex: 1 0 0;
+}
+.Data_22400_60661 {
+  display: flex;
+  align-items: center;
+}
+.Data_24x24_21220_2484322 {
+  flex: 1 0 0;
+}
+.Validation_22400_60662 {
+  display: flex;
+  align-items: center;
+}
+.Validation_24x24_21220_2484322 {
+  flex: 1 0 0;
+}
+.BottomToolbar_22400_60665 {
+  display: flex;
+  padding: var(--ctr-property-grid-tabs-padding-top, 12px) var(--ctr-property-grid-tabs-padding-right, 12px)
+    var(--ctr-property-grid-tabs-padding-bottom, 12px) var(--ctr-property-grid-tabs-padding-left, 12px);
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  gap: var(--ctr-property-grid-tabs-separator-margin, 12px);
+}
+.Items_22400_60666 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  gap: var(--ctr-property-grid-tabs-gap, 12px);
+}
+.Settings_22400_60667 {
+  display: flex;
+  align-items: center;
+}
+.CreatorSettings_24x24_21220_2484322 {
+  flex: 1 0 0;
+}

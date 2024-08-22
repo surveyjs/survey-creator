@@ -38,15 +38,19 @@ export class SidebarComponent extends SurveyElementBase<ISidebarComponentProps, 
   renderElement() {
     const style = { display: !this.model.visible ? "none" : "" };
     const className = "svc-side-bar" + (this.model.flyoutPanelMode ? " svc-flyout-side-bar" : "");
-    const items = this.model.pages.map((item) => <SidebarPage item={item} key={item.id} />);
+    const items = this.model.pages.map((page) => <SidebarPage page={page} key={page.id} />);
+    let sideArea = null;
+    if (this.model.sideAreaComponentName) {
+      sideArea = ReactElementFactory.Instance.createElement(this.model.sideAreaComponentName, { model: this.model.sideAreaComponentData });
+    }
     return (
       <div className={className} style={{ display: !this.model.hasVisiblePages ? "none" : "" }}>
         <div className="svc-side-bar__shadow" onClick={() => this.model.collapseSidebar()}></div>
-        <div className="svc-flex-column svc-side-bar__wrapper">
+        <div className="svc-flex-row svc-side-bar__wrapper">
           <div ref={this.containerRef} style={style} className="svc-side-bar__container">
             <div className="svc-side-bar__container-header">
               <div className="svc-side-bar__container-actions">
-                <SurveyActionBar model={this.model.toolbar}></SurveyActionBar>
+                <SurveyActionBar model={(this.model as any).toolbar}></SurveyActionBar>
               </div>
               {(!!this.model.headerText ?
                 <div className="svc-side-bar__container-title">
@@ -58,6 +62,7 @@ export class SidebarComponent extends SurveyElementBase<ISidebarComponentProps, 
               {items}
             </div>
           </div>
+          {sideArea}
         </div>
       </div>
     );
@@ -65,18 +70,18 @@ export class SidebarComponent extends SurveyElementBase<ISidebarComponentProps, 
 }
 
 class SidebarPage extends SurveyElementBase<any, any> {
-  private get item(): SidebarPageModel {
-    return this.props.item;
+  private get page(): SidebarPageModel {
+    return this.props.page;
   }
 
   protected getStateElement(): Base {
-    return this.item;
+    return this.page;
   }
 
   renderElement(): JSX.Element {
-    if (!this.item.visible) return null;
+    if (!this.page.visible) return null;
 
-    const component = ReactElementFactory.Instance.createElement(this.item.componentName, { model: this.item.componentModel });
+    const component = ReactElementFactory.Instance.createElement(this.page.componentName, { model: this.page.componentData });
 
     return component;
   }

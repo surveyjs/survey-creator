@@ -35,6 +35,7 @@ export * from "../toolbox/ToolboxList";
 export * from "../toolbox/AdaptiveToolbox";
 export * from "../TabbedMenu";
 export * from "../Navigation";
+export * from "../TabControl";
 export * from "../SideBar";
 export * from "../tabs/translation/TranslationLineSkeleton";
 export * from "../tabs/translation/TranslateFromAction";

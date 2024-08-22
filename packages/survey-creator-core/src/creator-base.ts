@@ -2744,7 +2744,7 @@ export class SurveyCreatorModel extends Base
   protected get designerPropertyGrid(): PropertyGridModel {
     const propertyGridTab = this.sidebar.getPageById(this.sidebar.activePage);
     if (!propertyGridTab) return null;
-    return propertyGridTab.componentModel ? (propertyGridTab.componentModel.propertyGridModel as any as PropertyGridModel) : null;
+    return propertyGridTab.componentData ? (propertyGridTab.componentData.propertyGridModel as any as PropertyGridModel) : null;
   }
   public get propertyGrid(): SurveyModel {
     return this.designerPropertyGrid.survey;
