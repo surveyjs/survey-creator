@@ -294,3 +294,48 @@ test("Question adorner - update other rows with lazy rendering on question colla
   await t.expect(qContent.count).eql(3);
   await t.expect(qCollapseButton.count).eql(3);
 });
+test("Collapse all and expand all toolbar", async (t) => {
+  await t.resizeWindow(1600, 1080);
+  const json = {
+    elements: [
+      {
+        type: "text",
+        name: "question1"
+      },
+      {
+        type: "panel",
+        name: "panel1"
+      }
+    ]
+  };
+  await ClientFunction(() => {
+    window["creator"].expandCollapseButtonVisibility = "onhover";
+  })();
+  await setJSON(json);
+  await t.click("#collapseAll");
+  await t.expect(Selector(".svc-page__content--collapsed").exists).ok();
+  await t.click("#expandAll");
+  await t.expect(Selector(".svc-page__content--collapsed").exists).notOk();
+});
+test("Collapse all and expand all toolbar visibility", async (t) => {
+  await t.resizeWindow(1600, 1080);
+  const json = {
+    elements: [
+      {
+        type: "text",
+        name: "question1"
+      },
+      {
+        type: "panel",
+        name: "panel1"
+      }
+    ]
+  };
+  await ClientFunction(() => {
+    window["creator"].expandCollapseButtonVisibility = "never";
+  })();
+  await setJSON(json);
+  await t.click("#collapseAll");
+  await t.expect(Selector("#collapseAll").exists).notOk();
+  await t.expect(Selector("#expandAll").exists).notOk();
+});

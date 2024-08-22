@@ -2314,3 +2314,27 @@ test("Check page selection when width mode is responsive", async (t) => {
     await takeElementScreenshot("page-selected-responsive.png", rootSelector, t, comparer);
   });
 });
+
+test("Collapse all and expand all toolbar", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1600, 1080);
+    const json = {
+      elements: [
+        {
+          type: "text",
+          name: "question1"
+        },
+        {
+          type: "panel",
+          name: "panel1"
+        }
+      ]
+    };
+    await ClientFunction(() => {
+      window["creator"].expandCollapseButtonVisibility = "onhover";
+    })();
+    await setJSON(json);
+    await t.hover("#collapseAll");
+    await takeElementScreenshot("design-surface-toolbar.png", Selector(".svc-tab-designer"), t, comparer);
+  });
+});

@@ -70,34 +70,42 @@ export class TabDesignerViewModel extends Base {
     super();
     this.creator = creator;
     this.pagesControllerValue = new PagesController(creator);
-    this.actionContainer = new ActionContainer();
-    const action = (action) => { this.creator.onSurfaceToolbarActionExecuted.fire(this.creator, { action: action }); };
 
-    let defaultActionBarCss = {
-      root: "sv-action-bar",
-      defaultSizeMode: "",
-      smallSizeMode: "",
-      item: "svc-page-navigator__selector",
-      itemWithTitle: "",
-      itemAsIcon: "",
-      itemActive: "",
-      itemPressed: "",
-      itemIcon: "svc-page-navigator__navigator-icon",
-      itemTitleWithIcon: "",
-    };
-    this.actionContainer.cssClasses = defaultActionBarCss;
-
-    this.actionContainer.setItems([{
-      id: "collapseAll",
-      iconName: "icon-collapseall-24x24",
-      action: action
-    }, {
-      id: "expandAll",
-      iconName: "icon-expandall-24x24",
-      action: action
-    }]);
+    this.initToolbar();
     this.initSurvey();
   }
+  private initToolbar() {
+    if (this.creator.expandCollapseButtonVisibility != "never") {
+      this.actionContainer = new ActionContainer();
+      const action = (action) => { this.creator.onSurfaceToolbarActionExecuted.fire(this.creator, { action: action }); };
+
+      let defaultActionBarCss = {
+        root: "sv-action-bar",
+        defaultSizeMode: "",
+        smallSizeMode: "",
+        item: "svc-page-navigator__selector",
+        itemWithTitle: "",
+        itemAsIcon: "",
+        itemActive: "",
+        itemPressed: "",
+        itemIcon: "svc-page-navigator__navigator-icon",
+        itemTitleWithIcon: "",
+      };
+      this.actionContainer.cssClasses = defaultActionBarCss;
+
+      this.actionContainer.setItems([{
+        id: "collapseAll",
+        iconName: "icon-collapseall-24x24",
+        action: action
+      }, {
+        id: "expandAll",
+        iconName: "icon-expandall-24x24",
+        action: action
+      }]);
+
+    }
+  }
+
   get survey() {
     return this.creator.survey;
   }

@@ -65,10 +65,12 @@
       </svc-page-navigator>
     </div>
     <!-- /ko -->
+    <!-- ko if: actionContainer -->
     <div class="svc-tab-designer__toolbar">
-      <!-- ko component: { name: 'sv-action-bar', params: { model: actionContainer } } -->
+      <!-- ko component: { name: 'sv-action-bar', params: { model: actionContainer, handleClick: false } } -->
       <!-- /ko -->
     </div>
+    <!-- /ko -->
     <!-- /ko -->
   </div>
 </div>
