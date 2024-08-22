@@ -106,19 +106,19 @@ export var settings = {
      */
     defaultJSON: {
       dropdown: {
-        choices: ["Item 1", "Item 2", "Item 3"]
+        choices: [{ value: "Item 1" }, { value: "Item 2" }, { value: "Item 3" }]
       },
       tagbox: {
-        choices: ["Item 1", "Item 2", "Item 3"]
+        choices: [{ value: "Item 1" }, { value: "Item 2" }, { value: "Item 3" }]
       },
       checkbox: {
-        choices: ["Item 1", "Item 2", "Item 3"]
+        choices: [{ value: "Item 1" }, { value: "Item 2" }, { value: "Item 3" }]
       },
       radiogroup: {
-        choices: ["Item 1", "Item 2", "Item 3"]
+        choices: [{ value: "Item 1" }, { value: "Item 2" }, { value: "Item 3" }]
       },
       ranking: {
-        choices: ["Item 1", "Item 2", "Item 3"]
+        choices: [{ value: "Item 1" }, { value: "Item 2" }, { value: "Item 3" }]
       },
       imagepicker: {
         imageFit: "cover",

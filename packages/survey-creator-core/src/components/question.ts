@@ -394,28 +394,24 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       title: actionTitle,
       iconName: "icon-chevron_16x16"
     };
-
     const newAction = this.createDropdownModel({
       actionData: actionData,
       items: actions,
       updateListModel: (listModel: ListModel) => {
         const newItems = this.getConvertToTypesActions(newAction);
-
         listModel.setItems(newItems);
         listModel.selectedItem = this.getSelectedItem(newItems, this.currentType);
 
         newItems.forEach(action => {
           const toolboxItem = (this.creator.toolbox.getItemByName(action.id) as QuestionToolboxItem);
-
           if (action.items?.length > 0) {
             let selectedSubItem = undefined;
             action.items.forEach(item => {
               const elementType = this.element.getType();
               const toolboxSubitem = toolboxItem.getSubitemByName(item.id);
               const json = toolboxSubitem.json || {};
-
               if (item.id == elementType || json.type == elementType) {
-                if (!selectedSubItem) selectedSubItem = item;
+                if (!listModel.selectedItem) selectedSubItem = item;
                 if (this.jsonIsCorresponded(json)) selectedSubItem = item;
               }
             });
@@ -444,7 +440,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   private jsonIsCorresponded(json: any) {
     let jsonIsCorresponded = true;
     Object.keys(json).forEach(p => {
-      if (p != "type" && json[p] != this.element[p]) jsonIsCorresponded = false;
+      if (p != "type" && JSON.stringify(json[p]) != JSON.stringify(this.element[p])) jsonIsCorresponded = false;
     });
     return jsonIsCorresponded;
   }

@@ -392,6 +392,67 @@ test("Check question converter selected item for customized subitems (json)", ()
   surveySettings.animationEnabled = true;
 });
 
+test("Check question converter selected item for single subitems (json)", (): any => {
+  surveySettings.animationEnabled = false;
+  const creator = new CreatorTester();
+
+  const longTextItem = creator.toolbox.getItemByName("comment");
+  longTextItem.addSubitem({
+    name: "limitedLongText",
+    title: "Limited to 280 characters",
+    json: {
+      type: "comment",
+      maxLength: 280
+    }
+  });
+
+  creator.JSON = {
+    elements: [
+      { type: "comment", name: "q1", maxLength: 280 },
+    ]
+  };
+  const question = creator.survey.getQuestionByName("q1");
+  creator.selectElement(question);
+  const questionAdorner = new QuestionAdornerViewModel(
+    creator,
+    question,
+    <any>undefined
+  );
+  const convertToAction = questionAdorner.actionContainer.getActionById("convertTo");
+  const popup = convertToAction.popupModel;
+  const popupViewModel = new PopupDropdownViewModel(popup); // need for popupModel.onShow
+  popup.toggleVisibility();
+  const list = popup.contentComponentData.model;
+  expect(list.selectedItem.id).toBe("comment");
+
+  const popupSubtype = list.selectedItem.popupModel;
+  const popupViewModelSubtype = new PopupDropdownViewModel(popupSubtype); // need for popupModel.onShow
+  popupSubtype.toggleVisibility();
+  const listSubtype = popupSubtype.contentComponentData.model;
+  expect(listSubtype.selectedItem.id).toBe("limitedLongText");
+
+  question.maxLength = 100;
+  const questionAdorner2 = new QuestionAdornerViewModel(
+    creator,
+    question,
+    <any>undefined
+  );
+  const convertToAction2 = questionAdorner2.actionContainer.getActionById("convertTo");
+  const popup2 = convertToAction2.popupModel;
+  const popupViewModel2 = new PopupDropdownViewModel(popup2); // need for popupModel.onShow
+  popup.toggleVisibility();
+  const list2 = popup.contentComponentData.model;
+  expect(list2.selectedItem.id).toBe("comment");
+
+  const popupSubtype2 = list2.selectedItem.popupModel;
+  const popupViewModelSubtype2 = new PopupDropdownViewModel(popupSubtype2); // need for popupModel.onShow
+  popupSubtype2.toggleVisibility();
+  const listSubtype2 = popupSubtype2.contentComponentData.model;
+  expect(listSubtype2.selectedItem).toBe(undefined);
+
+  surveySettings.animationEnabled = true;
+});
+
 test("Check question converter with subitems (json)", (): any => {
   surveySettings.animationEnabled = false;
   const creator = new CreatorTester();
