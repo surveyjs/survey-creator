@@ -80,7 +80,7 @@ test("Page hover on Add Question button", async t => {
   await t
     .maximizeWindow();
   const page = Selector(".svc-page__content");
-  const question = Selector(".svc-page__add-new-question");
+  const question = Selector(".svc-element__add-new-question");
   await t
     .hover(question, { offsetX: 5, offsetY: 5 })
     .wait(300)

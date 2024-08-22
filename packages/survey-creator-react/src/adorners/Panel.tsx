@@ -12,6 +12,7 @@ import {
   Popup
 } from "survey-react-ui";
 import { QuestionAdornerComponent, QuestionAdornerComponentProps } from "./Question";
+import { AddQuestionButtonComponent } from "../AddQuestionButton";
 
 export class PanelAdornerComponent extends QuestionAdornerComponent {
   renderElementPlaceholder(): JSX.Element {
@@ -31,11 +32,6 @@ export class PanelAdornerComponent extends QuestionAdornerComponent {
               this.model.addNewQuestion();
             }}
           >
-            <SvgIcon
-              className={"svc-panel__add-new-question-icon"}
-              iconName={"icon-add_24x24"}
-              size={24}
-            ></SvgIcon>
             <span className="svc-text svc-text--normal svc-text--bold">
               {this.model.addNewQuestionText}
             </span>
@@ -55,6 +51,9 @@ export class PanelAdornerComponent extends QuestionAdornerComponent {
             <Popup model={this.model.questionTypeSelectorModel.popupModel}></Popup>
           </div>
           <div className="svc-panel__add-new-question-wrapper">
+            <AddQuestionButtonComponent item={{ data: this.model } as any} buttonClass={"svc-action-button"} renderPopup={false} />
+          </div>
+          {/* <div className="svc-panel__add-new-question-wrapper">
             {attachKey2click(<div
               className="svc-panel__add-new-question svc-action-button"
               onClick={(e) => {
@@ -62,11 +61,6 @@ export class PanelAdornerComponent extends QuestionAdornerComponent {
                 this.model.addNewQuestion();
               }}
             >
-              <SvgIcon
-                className={"svc-panel__add-new-question-icon"}
-                iconName={"icon-add_24x24"}
-                size={24}
-              ></SvgIcon>
               <span className="svc-text svc-text--normal svc-text--bold">
                 {this.model.addNewQuestionText}
               </span>
@@ -87,8 +81,12 @@ export class PanelAdornerComponent extends QuestionAdornerComponent {
                   size={24}
                 ></SvgIcon>
               </span>
+              <div className="svc-panel__question-type-selector-popup">
+                <Popup model={this.model.questionTypeSelectorModel.popupModel}></Popup>
+              </div>
             </button>)}
-          </div></div>) : null}
+          </div> */}
+        </div>) : null}
 
       {super.renderFooter()}
     </React.Fragment>);

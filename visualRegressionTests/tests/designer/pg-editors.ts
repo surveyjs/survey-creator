@@ -366,7 +366,7 @@ test("Dropdown popup in property grid", async (t) => {
     await t.resizeWindow(1240, 870);
 
     await t
-      .click(Selector(".svc-page__add-new-question"))
+      .click(Selector(".svc-element__add-new-question"))
       .click(Selector(".spg-dropdown[aria-label='Input type']"));
 
     await takeElementScreenshot("pg-dropdown-editor.png", Selector(".svc-side-bar"), t, comparer);
