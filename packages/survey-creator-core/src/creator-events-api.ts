@@ -613,6 +613,7 @@ export interface SurveyInstanceCreatedEvent {
    */
   reason: string;
   model?: Base;
+  obj?: Base;
 }
 
 export interface DesignerSurveyCreatedEvent {
