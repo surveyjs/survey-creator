@@ -32,6 +32,12 @@ export class TabDesignerPlugin implements ICreatorPlugin {
   private createVisibleUpdater() {
     return <any>new ComputedUpdater<boolean>(() => { return this.creator.activeTab === "designer"; });
   }
+  private setTabControl() {
+    if (this.creator.showOneCategoryInPropertyGrid) {
+      this.creator.sidebar.sideAreaComponentName = "svc-tab-control";
+      this.creator.sidebar.sideAreaComponentData = this.tabControlModel;
+    }
+  }
 
   constructor(private creator: SurveyCreatorModel) {
     creator.addPluginTab("designer", this);
@@ -104,12 +110,10 @@ export class TabDesignerPlugin implements ICreatorPlugin {
   public activate(): void {
     this.model = new TabDesignerViewModel(this.creator);
     this.creator.sidebar.activePage = this.propertyGridTab.id;
-    if (this.creator.showOneCategoryInPropertyGrid) {
-      this.creator.sidebar.sideAreaComponentName = "svc-tab-control";
-      this.creator.sidebar.sideAreaComponentData = this.tabControlModel;
-    }
+    this.setTabControl();
     this.creator.focusElement(undefined, true);
   }
+
   public deactivate(): boolean {
     if (this.model) {
       this.model.dispose();
@@ -128,6 +132,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
   public update(): void {
     if (!this.model) return;
     this.model.initSurvey();
+    this.setTabControl();
   }
   public createActions() {
     const items: Array<Action> = [];

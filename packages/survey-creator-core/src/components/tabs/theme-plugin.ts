@@ -198,6 +198,13 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     }
   }
 
+  private setTabControl() {
+    if (this.creator.showOneCategoryInPropertyGrid) {
+      this.creator.sidebar.sideAreaComponentName = "svc-tab-control";
+      this.creator.sidebar.sideAreaComponentData = this.tabControlModel;
+    }
+  }
+
   constructor(private creator: SurveyCreatorModel) {
     creator.addPluginTab("theme", this);
     this.simulatorCssClasses = surveyCss[defaultV2ThemeName];
@@ -309,8 +316,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       });
       this.tabControlModel.topToolbar.setItems(pgTabs);
 
-      this.creator.sidebar.sideAreaComponentName = "svc-tab-control";
-      this.creator.sidebar.sideAreaComponentData = this.tabControlModel;
+      this.setTabControl();
     }
     this.creator.expandCategoryIfNeeded();
   }
@@ -376,6 +382,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     });
 
     this.resetTheme.enabled = getThemeFullName(this.themeModel.defaultSessionTheme) !== getThemeFullName(this.creator.theme) || this.isModified;
+    this.setTabControl();
   }
   private updateAllowModifyTheme() {
     const opt: { theme: ITheme, allow: boolean } = { theme: this.themeModel, allow: !this.creator.readOnly };
