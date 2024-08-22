@@ -1,10 +1,22 @@
 import * as React from "react";
 import { Base } from "survey-core";
-import { SurveyActionBar, SurveyElementBase, Survey, SvgBundleComponent } from "survey-react-ui";
+import { SurveyElementBase, Survey, SvgBundleComponent } from "survey-react-ui";
 import { ICreatorOptions, SurveyCreatorModel } from "survey-creator-core";
 import { SurveyCreator, SurveyCreatorComponent } from "survey-creator-react";
 import { CreatorPresetEditorModel } from "creator-presets-core";
 import { PresetsHeaderComponent } from "./Header";
+
+const presetApplyText = "Use the following code to apply the preset:";
+const presetApplyCode = `import { SurveyCreatorModel, SurveyCreatorPreset } from "survey-creator-core";
+const creator = new SurveyCreatorModel({ ... });
+
+const presetJson = {
+  // Copy the JSON object from below
+}
+
+const preset = new SurveyCreatorPreset(presetJson);
+preset.applyTo(creator);
+`;
 
 export class CreatorPresetEditor extends CreatorPresetEditorModel {
   public createCreator(options: ICreatorOptions): SurveyCreatorModel {
@@ -46,17 +58,12 @@ export class CreatorPresetEditorComponent extends SurveyElementBase<ICreatorPres
   }
   private renderResults() {
     const text = JSON.stringify(this.editor.json, null, 2);
-    const style = { width: "100%", height: "100%" };
+    const style = { width: "100%", height: "100vh" };
     const textStyle = { padding: "7px" };
-    const codeText = `import { CreatorPreset } from "survey-creator-core";
-
-const preset = new CreatorPreset(yourPresetJSON_you_found_it_bellow);
-preset.apply(creator);
-`;
     return <>
-      <div style={textStyle}>Please use the following code to apply your preset:
+      <div style={textStyle}>{presetApplyText}
         <div>
-          <pre><code>{codeText}</code></pre>
+          <pre><code>{presetApplyCode}</code></pre>
         </div>
       </div>
       <textarea readOnly={true} style={style}>{text}</textarea>

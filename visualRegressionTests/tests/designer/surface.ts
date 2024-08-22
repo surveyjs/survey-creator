@@ -2159,13 +2159,68 @@ test("Question adorner - collapsed", async (t) => {
   });
 });
 
-test("Page adorner - collapsed", async (t) => {
+test("Question adorner - no title collapsed", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1920, 1080);
     const json = {
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "text",
+              "name": "question1",
+              "titleLocation": "hidden"
+            },
+            {
+              "type": "paneldynamic",
+              "name": "question4",
+              "titleLocation": "hidden"
+            },
+            {
+              "type": "html",
+              "name": "question2"
+            },
+            {
+              "type": "image",
+              "name": "question3",
+              "imageFit": "cover",
+              "imageHeight": "auto",
+              "imageWidth": "100%"
+            }
+          ]
+        }
+      ]
+    };
+    await ClientFunction(() => {
+      window["creator"].expandCollapseButtonVisibility = "onhover";
+    })();
+    await setJSON(json);
+    const qContent = Selector(".svc-question__content");
+    const qCollapseButton = Selector(".svc-question__content #collapse");
+    await t.click(qContent.nth(0), { offsetX: 10, offsetY: 10 });
+    await t.click(qCollapseButton.filterVisible());
+    await takeElementScreenshot("question-adorner-no-title-collapsed.png", qContent.nth(0), t, comparer);
+    await t.click(qContent.nth(1), { offsetX: 10, offsetY: 10 });
+    await t.click(qCollapseButton.filterVisible());
+    await takeElementScreenshot("panel-dynamic-adorner-no-title-collapsed.png", qContent.nth(1), t, comparer);
+    await t.click(qContent.nth(2), { offsetX: 10, offsetY: 10 });
+    await t.click(qCollapseButton.filterVisible());
+    await takeElementScreenshot("question-html-adorner-no-title-collapsed.png", qContent.nth(2), t, comparer);
+    await t.click(qContent.nth(3), { offsetX: 10, offsetY: 10 });
+    await t.click(qCollapseButton.filterVisible());
+    await takeElementScreenshot("question-image-adorner-no-title-collapsed.png", qContent.nth(3), t, comparer);
+  });
+});
+
+test("Page adorner - collapsed", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1600, 500);
+    const json = {
       elements: [
         {
-          type: "html",
+          type: "expression",
           name: "question1"
         }
       ]
@@ -2178,11 +2233,13 @@ test("Page adorner - collapsed", async (t) => {
     const qCollapseButton = Selector(".svc-page__content #collapse");
     await t.hover(qContent.nth(0), { offsetX: 10, offsetY: 10 });
     await t.expect(qContent.nth(0).hasClass("svc-hovered")).ok();
-    await takeElementScreenshot("page-adorner-expanded.png", qContent.nth(0), t, comparer);
+    await takeElementScreenshot("page-adorner-expanded.png", ".svc-tab-designer_content", t, comparer);
     await t.click(qContent.nth(0), { offsetX: 10, offsetY: 10 });
     await t.click(qCollapseButton.filterVisible());
-    await t.hover(".svc-toolbox");
-    await takeElementScreenshot("page-adorner-collapsed.png", qContent.nth(0), t, comparer);
+    await t.hover(".svc-toolbox", { speed: 0.1 });
+    await takeElementScreenshot("page-adorner-collapsed-selected.png", ".svc-tab-designer_content", t, comparer);
+    await t.click(".svc-tab-designer_content", { offsetX: 1, offsetY: 1 });
+    await takeElementScreenshot("page-adorner-collapsed.png", ".svc-tab-designer_content", t, comparer);
   });
 });
 
