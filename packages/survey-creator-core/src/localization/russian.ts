@@ -1153,6 +1153,10 @@ export var ruStrings = {
     isPanelless: {
       "false": "По умолчанию",
       "true": "Без панелей"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "То же, что и опрос",
+      container: "То же, что и контейнер"
     }
   },
   // Operators
@@ -1485,7 +1489,8 @@ export var ruStrings = {
     panellayoutcolumn: {
       effectiveWidth: "Принимает значения %.",
       questionTitleWidth: "Принимает значения px."
-    }
+    },
+    progressBarInheritWidthFrom: "Опция \"То же, что и контейнер\" автоматически настраивает ширину области индикатора выполнения в соответствии с HTML-элементом, в который помещается опрос."
   },
   // Properties
   p: {
@@ -1589,7 +1594,8 @@ export var ruStrings = {
     scaleColorMode: "Цветовой режим масштабирования",
     rateColorMode: "Оцените цветовой режим",
     copyDisplayValue: "Копирование отображаемого значения",
-    effectiveColSpan: "Пролет колонны"
+    effectiveColSpan: "Пролет колонны",
+    progressBarInheritWidthFrom: "Ширина области индикатора выполнения"
   },
   theme: {
     advancedMode: "Расширенный режим",
@@ -2784,9 +2790,13 @@ editorLocalization.locales["ru"] = ruStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Принимает значения %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Принимает значения px."
 // p.effectiveColSpan: "Column span" => "Пролет колонны"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "То же, что и опрос"
+// progressBarInheritWidthFrom.container: "Same as container" => "То же, что и контейнер"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Отображает предварительный просмотр миниатюр для загруженных файлов, когда это возможно. Снимите флажок, если вместо этого вы хотите отображать значки файлов."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "Опция \"То же, что и контейнер\" автоматически настраивает ширину области индикатора выполнения в соответствии с HTML-элементом, в который помещается опрос."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "Ширина области индикатора выполнения"
 // maskType.none: "None" => "Никакой"
 // maskType.pattern: "Pattern" => "Рисунок"
 // maskType.numeric: "Numeric" => "Числовой"
 // maskType.datetime: "Date and Time" => "Дата и время"
 // maskType.currency: "Currency" => "Валюта"
-// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Отображает предварительный просмотр миниатюр для загруженных файлов, когда это возможно. Снимите флажок, если вместо этого вы хотите отображать значки файлов."

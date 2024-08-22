@@ -1153,6 +1153,10 @@ export const thStrings = {
     isPanelless: {
       "false": "ค่าเริ่มต้น",
       "true": "ไม่มีแผง"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "เช่นเดียวกับแบบสํารวจ",
+      container: "เหมือนกับคอนเทนเนอร์"
     }
   },
   // Operators
@@ -1485,7 +1489,8 @@ export const thStrings = {
     panellayoutcolumn: {
       effectiveWidth: "รับค่าของ %",
       questionTitleWidth: "รับค่าของ px"
-    }
+    },
+    progressBarInheritWidthFrom: "ตัวเลือก \"เหมือนกับคอนเทนเนอร์\" จะปรับความกว้างของพื้นที่แถบความคืบหน้าโดยอัตโนมัติเพื่อให้พอดีกับองค์ประกอบ HTML ที่วางแบบสํารวจ"
   },
   // Properties
   p: {
@@ -1589,7 +1594,8 @@ export const thStrings = {
     scaleColorMode: "โหมดสีไอคอนการให้คะแนน",
     rateColorMode: "โทนสีของสไมลี่",
     copyDisplayValue: "คัดลอกค่าที่แสดง",
-    effectiveColSpan: "การขยายคอลัมน์"
+    effectiveColSpan: "การขยายคอลัมน์",
+    progressBarInheritWidthFrom: "ความกว้างของพื้นที่แถบความคืบหน้า"
   },
   theme: {
     advancedMode: "โหมดขั้นสูง",
@@ -1657,9 +1663,13 @@ editorLocalization.locales["th"] = thStrings;
 // Remove those strings that you have corrected manually
 // pe.validateVisitedEmptyFields: "Validate empty fields on lost focus" => "ตรวจสอบฟิลด์ว่างเมื่อเสียโฟกัส"
 // pehelp.validateVisitedEmptyFields: "Enable this option to trigger validation when a user focuses on an empty input field and then leaves it without making any changes." => "เปิดใช้งานตัวเลือกนี้เพื่อทริกเกอร์การตรวจสอบความถูกต้องเมื่อผู้ใช้มุ่งเน้นไปที่ฟิลด์อินพุตที่ว่างเปล่า แล้วปล่อยออกจากฟิลด์โดยไม่ทําการเปลี่ยนแปลงใดๆ"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "เช่นเดียวกับแบบสํารวจ"
+// progressBarInheritWidthFrom.container: "Same as container" => "เหมือนกับคอนเทนเนอร์"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "แสดงตัวอย่างภาพขนาดย่อสําหรับไฟล์ที่อัปโหลดเมื่อเป็นไปได้ ยกเลิกการเลือกหากคุณต้องการแสดงไอคอนไฟล์แทน"
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "ตัวเลือก \"เหมือนกับคอนเทนเนอร์\" จะปรับความกว้างของพื้นที่แถบความคืบหน้าโดยอัตโนมัติเพื่อให้พอดีกับองค์ประกอบ HTML ที่วางแบบสํารวจ"
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "ความกว้างของพื้นที่แถบความคืบหน้า"
 // maskType.none: "None" => "ไม่มีใคร"
 // maskType.pattern: "Pattern" => "แบบ"
 // maskType.numeric: "Numeric" => "ตัวเลข"
 // maskType.datetime: "Date and Time" => "วันที่และเวลา"
 // maskType.currency: "Currency" => "เงินตรา"
-// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "แสดงตัวอย่างภาพขนาดย่อสําหรับไฟล์ที่อัปโหลดเมื่อเป็นไปได้ ยกเลิกการเลือกหากคุณต้องการแสดงไอคอนไฟล์แทน"

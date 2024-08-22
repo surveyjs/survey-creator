@@ -1153,6 +1153,10 @@ export var koreanStrings = {
     isPanelless: {
       "false": "기본값",
       "true": "패널 없음"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "설문 조사와 동일",
+      container: "컨테이너와 동일"
     }
   },
   // Operators
@@ -1485,7 +1489,8 @@ export var koreanStrings = {
     panellayoutcolumn: {
       effectiveWidth: "% 값을 허용합니다.",
       questionTitleWidth: "px 값을 허용합니다."
-    }
+    },
+    progressBarInheritWidthFrom: "\"컨테이너와 동일\" 옵션은 설문조사가 배치된 HTML 요소에 맞게 진행률 표시줄 영역 너비를 자동으로 조정합니다."
   },
   // Properties
   p: {
@@ -1589,7 +1594,8 @@ export var koreanStrings = {
     scaleColorMode: "스케일 컬러 모드",
     rateColorMode: "비율 색상 모드",
     copyDisplayValue: "표시 값 복사",
-    effectiveColSpan: "열 범위"
+    effectiveColSpan: "열 범위",
+    progressBarInheritWidthFrom: "진행률 표시줄 영역 너비"
   },
   theme: {
     advancedMode: "어드밴스드 모드",
@@ -2928,9 +2934,13 @@ editorLocalization.locales["ko"] = koreanStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "% 값을 허용합니다."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "px 값을 허용합니다."
 // p.effectiveColSpan: "Column span" => "열 범위"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "설문 조사와 동일"
+// progressBarInheritWidthFrom.container: "Same as container" => "컨테이너와 동일"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "가능한 경우 업로드된 파일에 대한 썸네일 미리보기를 표시합니다. 대신 파일 아이콘을 표시하려면 선택을 취소합니다."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "\"컨테이너와 동일\" 옵션은 설문조사가 배치된 HTML 요소에 맞게 진행률 표시줄 영역 너비를 자동으로 조정합니다."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "진행률 표시줄 영역 너비"
 // maskType.none: "None" => "없음"
 // maskType.pattern: "Pattern" => "무늬"
 // maskType.numeric: "Numeric" => "숫자"
 // maskType.datetime: "Date and Time" => "날짜 및 시간"
 // maskType.currency: "Currency" => "통화"
-// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "가능한 경우 업로드된 파일에 대한 썸네일 미리보기를 표시합니다. 대신 파일 아이콘을 표시하려면 선택을 취소합니다."

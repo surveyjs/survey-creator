@@ -1083,7 +1083,7 @@ export class PropertyGridModel {
   }
   private onValueChanging(options: any) {
     var q = options.question;
-    if (!q || !q.property || Helpers.isTwoValueEquals(options.value, options.oldValue, false, false, false)) return;
+    if (!q || !q.property || !Array.isArray(options.value) && Helpers.isTwoValueEquals(options.value, options.oldValue, false, false, false)) return;
     PropertyGridEditorCollection.onValueChanging(this.obj, q.property, q, options);
     var changingOptions = {
       obj: this.obj,

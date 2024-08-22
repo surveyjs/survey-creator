@@ -1153,6 +1153,10 @@ export var huStrings = {
     isPanelless: {
       "false": "Alapértelmezett",
       "true": "Panelek nélkül"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "Ugyanaz, mint a felmérés",
+      container: "Ugyanaz, mint a konténer"
     }
   },
   // Operators
@@ -1485,7 +1489,8 @@ export var huStrings = {
     panellayoutcolumn: {
       effectiveWidth: "Elfogadja a % értékeket",
       questionTitleWidth: "Elfogadja a px értékeket."
-    }
+    },
+    progressBarInheritWidthFrom: "Az \"Ugyanaz, mint a tároló\" opció automatikusan beállítja a folyamatjelző sáv területének szélességét, hogy illeszkedjen ahhoz a HTML-elemhez, amelybe a felmérés kerül."
   },
   // Properties
   p: {
@@ -1589,7 +1594,8 @@ export var huStrings = {
     scaleColorMode: "Színmód méretezése",
     rateColorMode: "Értékelje a színmódot",
     copyDisplayValue: "Megjelenített érték másolása",
-    effectiveColSpan: "Oszlop fesztávolsága"
+    effectiveColSpan: "Oszlop fesztávolsága",
+    progressBarInheritWidthFrom: "A folyamatjelző sáv területének szélessége"
   },
   theme: {
     advancedMode: "Speciális mód",
@@ -2877,9 +2883,13 @@ editorLocalization.locales["hu"] = huStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Elfogadja a % értékeket"
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Elfogadja a px értékeket."
 // p.effectiveColSpan: "Column span" => "Oszlop fesztávolsága"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "Ugyanaz, mint a felmérés"
+// progressBarInheritWidthFrom.container: "Same as container" => "Ugyanaz, mint a konténer"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Ha lehetséges, miniatűr előnézeteket jelenít meg a feltöltött fájlokhoz. Törölje a jelölést, ha inkább fájlikonokat szeretne megjeleníteni."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "Az \"Ugyanaz, mint a tároló\" opció automatikusan beállítja a folyamatjelző sáv területének szélességét, hogy illeszkedjen ahhoz a HTML-elemhez, amelybe a felmérés kerül."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "A folyamatjelző sáv területének szélessége"
 // maskType.none: "None" => "Egyik sem"
 // maskType.pattern: "Pattern" => "Minta"
 // maskType.numeric: "Numeric" => "Numerikus"
 // maskType.datetime: "Date and Time" => "Dátum és idő"
 // maskType.currency: "Currency" => "Valuta"
-// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Ha lehetséges, miniatűr előnézeteket jelenít meg a feltöltött fájlokhoz. Törölje a jelölést, ha inkább fájlikonokat szeretne megjeleníteni."
