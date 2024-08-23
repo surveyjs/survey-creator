@@ -118,10 +118,10 @@ svc-tab-designer {
 
 .svc-tab-designer__toolbar {
   position: absolute;
-  padding: calcSize(1.5);
   bottom: calcSize(0);
-  right: calcSize(1);
+  right: 0;
   .sv-action-bar {
+    padding: calcSize(1.5);
     gap: calcSize(1);
     flex-direction: column;
   }

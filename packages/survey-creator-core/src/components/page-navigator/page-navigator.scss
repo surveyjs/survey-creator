@@ -70,13 +70,14 @@ survey-creator,
 
 .svc-tab-designer__page-navigator {
   position: absolute;
-  padding: calcSize(16.5) calcSize(1.5);
+  padding: calcSize(16.5) 0;
   top: 0;
   bottom: calcSize(20);
-  right: calcSize(1);
+  right: 0;
 }
 
 .svc-page-navigator {
+  padding: calcSize(1.5);
   width: calcSize(5.5);
 }
 
