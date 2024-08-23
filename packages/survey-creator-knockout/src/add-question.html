@@ -1,0 +1,13 @@
+<div
+  data-bind="css: 'svc-element__add-new-question ' + buttonClass, click: data.addNewQuestion, key2click, clickBubble: false, event: { mouseover: function(m, e) { data.hoverStopper && data.hoverStopper(e, $element); }}">
+  <span class="svc-text svc-text--normal svc-text--bold" data-bind="text: data.addNewQuestionText">
+  </span>
+  <!-- ko if: $data.renderPopup -->
+  <!-- ko component: { name: "svc-add-question-type-selector", params: { questionTypeSelectorModel: data.questionTypeSelectorModel, renderPopup: renderPopup } } -->
+  <!-- /ko -->
+  <!-- /ko -->
+</div>
+<!-- ko ifnot: $data.renderPopup -->
+<!-- ko component: { name: "svc-add-question-type-selector", params: { questionTypeSelectorModel: data.questionTypeSelectorModel, renderPopup: renderPopup } } -->
+<!-- /ko -->
+<!-- /ko -->

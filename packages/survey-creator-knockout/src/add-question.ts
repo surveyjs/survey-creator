@@ -1,6 +1,7 @@
 import * as ko from "knockout";
-const template = require("./page-add-question.html");
+const template = require("./add-question.html");
 export let AddNewQuestionViewModel: any;
+export * from "./add-question-type-selector";
 
 ko.components.register("svc-add-new-question-btn", {
   viewModel: {
