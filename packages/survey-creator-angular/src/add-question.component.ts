@@ -6,7 +6,7 @@ import { Base } from "survey-core";
 @Component(
   {
     selector: "svc-add-new-question-btn",
-    templateUrl: "./page-add-question.component.html",
+    templateUrl: "./add-question.component.html",
     styles: [":host { display: none; }"]
   }
 )
@@ -28,10 +28,6 @@ export class AddQuestionButtonComponent extends CreatorModelComponent<Base> {
   public addNewQuestion(event: any) {
     event.stopPropagation();
     this.adorner.addNewQuestion(this.adorner, event);
-  }
-  public selectQuestionType(event: any) {
-    event.stopPropagation();
-    this.adorner.questionTypeSelectorModel.action();
   }
 }
 AngularComponentFactory.Instance.registerComponent("svc-add-new-question-btn", AddQuestionButtonComponent);
