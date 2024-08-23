@@ -3,34 +3,34 @@ import { CreatorTester } from "./creator-tester";
 
 test("Sidebar tabs initial", () => {
   const creator = new CreatorTester();
-  expect(creator.sidebar.tabs.length).toEqual(2);
+  expect(creator.sidebar.pages.length).toEqual(2);
 });
 test("Sidebar tabs with showTranslationTab: true", () => {
   const creator = new CreatorTester({ showTranslationTab: true });
-  expect(creator.sidebar.tabs.length).toEqual(3);
+  expect(creator.sidebar.pages.length).toEqual(3);
 });
 
 test("Sidebar: activate tab change", () => {
   const creator = new CreatorTester({ showTranslationTab: true });
   expect(creator.sidebar.headerText).toEqual(undefined);
-  expect(creator.sidebar.activeTab).toEqual("propertyGrid");
-  expect(creator.sidebar.tabs[0].visible).toEqual(true);
-  expect(creator.sidebar.tabs[1].visible).toEqual(false);
-  expect(creator.sidebar.tabs[2].visible).toEqual(false);
+  expect(creator.sidebar.activePage).toEqual("propertyGrid");
+  expect(creator.sidebar.pages[0].visible).toEqual(true);
+  expect(creator.sidebar.pages[1].visible).toEqual(false);
+  expect(creator.sidebar.pages[2].visible).toEqual(false);
 
-  creator.sidebar.activeTab = "translation";
+  creator.sidebar.activePage = "translation";
   expect(creator.sidebar.headerText).toEqual("Language Settings");
-  expect(creator.sidebar.activeTab).toEqual("translation");
-  expect(creator.sidebar.tabs[0].visible).toEqual(false);
-  expect(creator.sidebar.tabs[1].visible).toEqual(false);
-  expect(creator.sidebar.tabs[2].visible).toEqual(true);
+  expect(creator.sidebar.activePage).toEqual("translation");
+  expect(creator.sidebar.pages[0].visible).toEqual(false);
+  expect(creator.sidebar.pages[1].visible).toEqual(false);
+  expect(creator.sidebar.pages[2].visible).toEqual(true);
 
-  creator.sidebar.activeTab = "toolbox";
+  creator.sidebar.activePage = "toolbox";
   expect(creator.sidebar.headerText).toEqual(undefined);
-  expect(creator.sidebar.activeTab).toEqual("toolbox");
-  expect(creator.sidebar.tabs[0].visible).toEqual(false);
-  expect(creator.sidebar.tabs[1].visible).toEqual(true);
-  expect(creator.sidebar.tabs[2].visible).toEqual(false);
+  expect(creator.sidebar.activePage).toEqual("toolbox");
+  expect(creator.sidebar.pages[0].visible).toEqual(false);
+  expect(creator.sidebar.pages[1].visible).toEqual(true);
+  expect(creator.sidebar.pages[2].visible).toEqual(false);
 });
 
 test("Sidebar: hasVisiblePages test", () => {
