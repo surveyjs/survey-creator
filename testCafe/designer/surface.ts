@@ -335,7 +335,6 @@ test("Collapse all and expand all toolbar visibility", async (t) => {
     window["creator"].expandCollapseButtonVisibility = "never";
   })();
   await setJSON(json);
-  await t.click("#collapseAll");
   await t.expect(Selector("#collapseAll").exists).notOk();
   await t.expect(Selector("#expandAll").exists).notOk();
 });
