@@ -156,7 +156,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     }
   }
 
-  addNewQuestion(model: PageAdorner, event: IPortableMouseEvent, type?: string) {
+  addNewQuestion = (model: PageAdorner, event: IPortableMouseEvent, type?: string) => {
     this.creator.addNewQuestionInPage((type) => {
       this.addGhostPage(false);
       this.creator.survey.currentPage = this.page;
