@@ -19,7 +19,8 @@ import {
   QuestionPanelDynamicModel,
   ListModel,
   QuestionTextModel,
-  ActionContainer
+  ActionContainer,
+  Helpers
 } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { editorLocalization, getLocString } from "../editorLocalization";
@@ -439,8 +440,9 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
 
   private jsonIsCorresponded(json: any) {
     let jsonIsCorresponded = true;
+    const objJson = this.element.toJSON();
     Object.keys(json).forEach(p => {
-      if (p != "type" && JSON.stringify(json[p]) != JSON.stringify(this.element[p])) jsonIsCorresponded = false;
+      if (p != "type" && !Helpers.isTwoValueEquals(json[p], objJson[p])) jsonIsCorresponded = false;
     });
     return jsonIsCorresponded;
   }

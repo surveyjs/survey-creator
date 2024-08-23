@@ -440,8 +440,8 @@ test("Check question converter selected item for single subitems (json)", (): an
   const convertToAction2 = questionAdorner2.actionContainer.getActionById("convertTo");
   const popup2 = convertToAction2.popupModel;
   const popupViewModel2 = new PopupDropdownViewModel(popup2); // need for popupModel.onShow
-  popup.toggleVisibility();
-  const list2 = popup.contentComponentData.model;
+  popup2.toggleVisibility();
+  const list2 = popup2.contentComponentData.model;
   expect(list2.selectedItem.id).toBe("comment");
 
   const popupSubtype2 = list2.selectedItem.popupModel;
