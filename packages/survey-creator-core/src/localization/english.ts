@@ -1333,7 +1333,7 @@ export var enStrings = {
       contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options."
     },
     text: {
-      size: "This setting only resizes the input field and doesn't affect the width of the question box. To limit the accepted input length, go to <b>Validation → Maximum character limit</b>."
+      size: "This setting only resizes the input field and doesn't affect the width of the question box. To limit the accepted input length, go to \"Validation\" → \"Maximum character limit\"."
     },
     comment: {
       rows: "Sets the number of displayed lines in the input field. If the input takes up more lines, the scroll bar will appear."
@@ -1349,7 +1349,8 @@ export var enStrings = {
       visibleIf: "Use the magic wand icon to set a conditional rule that determines column visibility.",
       enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the column.",
       requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer.",
-      showInMultipleColumns: "When selected, creates an individual column for each choice option."
+      showInMultipleColumns: "When selected, creates an individual column for each choice option.",
+      colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix.",
     },
     widthMode: "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used.",
     cookieName: "Assign a unique cookie value for your survey. The cookie will be set in a respondent's browser upon survey completion to prevent repetitive survey submissions.",
@@ -1456,7 +1457,7 @@ export var enStrings = {
     storeOthersAsComment: "Select to store the \"Other\" option value as a separate property in survey results.",
     format: "Use {0} as a placeholder for the actual value.",
     acceptedTypes: "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information.",
-    columnColCount: "Applies only if \"Cell input type\" is set to Radio Button Group or Checkboxes.",
+    columnColCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. Applies only to columns with \"Cell input type\" set to Radio Button Group or Checkboxes.",
     autocomplete: "Select the data type that the user's browser can retrieve. This data is sourced either from past values entered by the user or from pre-configured values if any have been saved by the user for autocompletion.",
     filePlaceholder: "Applies when \"File source type\" is \"Local file\" or when camera is unavailable",
     photoPlaceholder: "Applies when \"File source type\" is \"Camera\".",
