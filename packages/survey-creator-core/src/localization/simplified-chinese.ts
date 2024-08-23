@@ -995,6 +995,11 @@ var simplifiedChineseTranslation = {
       datetime: "日期和时间",
       currency: "货币"
     },
+    inputTextAlignment: {
+      auto: "自动",
+      left: "左",
+      right: "右"
+    },
     all: "全部",
     page: "页",
     survey: "问卷",
@@ -1439,6 +1444,7 @@ var simplifiedChineseTranslation = {
     dataList: "输入将在输入期间向受访者建议的选项列表。",
     itemSize: "该设置仅调整输入字段的大小，不会影响问题框的宽度。",
     itemTitleWidth: "为所有项目标签设置一致的宽度（以像素为单位）",
+    inputTextAlignment: "选择如何在字段中对齐输入值。默认设置 “Auto” 如果应用了货币或数字掩码，则将输入值向右对齐，如果未应用，则向左对齐。",
     altText: "当图像无法在用户设备上显示时，出于辅助功能的目的，可作为替代。",
     rateColorMode: "定义当评级图标类型设置为“笑脸”时所选表情符号的颜色。选择：“默认” - 所选表情符号以默认调查颜色显示;“比例” - 所选的表情符号继承了评分量表的颜色。",
     expression: {
@@ -1555,6 +1561,7 @@ var simplifiedChineseTranslation = {
     dataList: "数据列表",
     itemSize: "itemSize",
     itemTitleWidth: "项目标签宽度（以 px 为单位）",
+    inputTextAlignment: "输入值对齐",
     elements: "元素",
     content: "内容",
     navigationButtonsVisibility: "导航按钮可见",
@@ -2882,3 +2889,9 @@ editorLocalization.locales["zh-cn"] = simplifiedChineseTranslation;
 // maskType.numeric: "Numeric" => "数值的"
 // maskType.datetime: "Date and Time" => "日期和时间"
 // maskType.currency: "Currency" => "货币"
+
+// inputTextAlignment.auto: "Auto" => "自动"
+// inputTextAlignment.left: "Left" => "左"
+// inputTextAlignment.right: "Right" => "右"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "选择如何在字段中对齐输入值。默认设置 “Auto” 如果应用了货币或数字掩码，则将输入值向右对齐，如果未应用，则向左对齐。"
+// p.inputTextAlignment: "Input value alignment" => "输入值对齐"

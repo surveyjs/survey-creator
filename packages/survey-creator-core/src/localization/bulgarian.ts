@@ -995,6 +995,11 @@ export var bgStrings = {
       datetime: "Дата и час",
       currency: "Валута"
     },
+    inputTextAlignment: {
+      auto: "Авто",
+      left: "Ляво",
+      right: "Дясно"
+    },
     all: "Всички",
     page: "Старница",
     survey: "Анкета",
@@ -1439,6 +1444,7 @@ export var bgStrings = {
     dataList: "Въведете списък с възможности за избор, които ще бъдат предложени на респондента по време на въвеждането.",
     itemSize: "Настройката само преоразмерява входните полета и не влияе на ширината на полето за въпроси.",
     itemTitleWidth: "Задава еднаква ширина за всички етикети на елементи в пиксели",
+    inputTextAlignment: "Изберете как да подравните входната стойност в полето. Настройката по подразбиране \"Автоматично\" подравнява входната стойност надясно, ако е приложено валутно или цифрово маскиране, и наляво, ако не.",
     altText: "Служи като заместител, когато изображението не може да бъде показано на устройството на потребителя и за целите на достъпността.",
     rateColorMode: "Определя цвета на избрания емотикон, когато типът на иконата за оценка е зададен на \"Усмивки\". Изберете между: \"По подразбиране\" - избраният емотикон се появява в цвета на проучването по подразбиране; \"Скала\" - избраният емотикон наследява цвят от рейтинговата скала.",
     expression: {
@@ -1555,6 +1561,7 @@ export var bgStrings = {
     dataList: "Списък с данни",
     itemSize: "Размер на елемента",
     itemTitleWidth: "Ширина на етикета на елемента (в пиксели)",
+    inputTextAlignment: "Подравняване на входните стойности",
     elements: "Елементи",
     content: "Съдържание",
     navigationButtonsVisibility: "Видимост на бутоните за навигация",
@@ -2303,3 +2310,9 @@ editorLocalization.locales["bg"] = bgStrings;
 // maskType.numeric: "Numeric" => "Цифров"
 // maskType.datetime: "Date and Time" => "Дата и час"
 // maskType.currency: "Currency" => "Валута"
+
+// inputTextAlignment.auto: "Auto" => "Авто"
+// inputTextAlignment.left: "Left" => "Ляво"
+// inputTextAlignment.right: "Right" => "Дясно"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Изберете как да подравните входната стойност в полето. Настройката по подразбиране \"Автоматично\" подравнява входната стойност надясно, ако е приложено валутно или цифрово маскиране, и наляво, ако не."
+// p.inputTextAlignment: "Input value alignment" => "Подравняване на входните стойности"

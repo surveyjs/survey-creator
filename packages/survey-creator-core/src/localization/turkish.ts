@@ -995,6 +995,11 @@ export var turkishStrings = {
       datetime: "Tarih ve Saat",
       currency: "Para birimi"
     },
+    inputTextAlignment: {
+      auto: "Otomatik",
+      left: "Sol",
+      right: "Sağ"
+    },
     all: "Tümü",
     page: "Sayfa",
     survey: "Anket",
@@ -1439,6 +1444,7 @@ export var turkishStrings = {
     dataList: "Giriş sırasında yanıtlayana önerilecek seçeneklerin bir listesini girin.",
     itemSize: "Bu ayar yalnızca giriş alanlarını yeniden boyutlandırır ve soru kutusunun genişliğini etkilemez.",
     itemTitleWidth: "Piksel cinsinden tüm öğe etiketleri için tutarlı genişlik ayarlar",
+    inputTextAlignment: "Alan içinde giriş değerinin nasıl hizalanacağını seçin. Varsayılan ayar olan \"Otomatik\", para birimi veya sayısal maskeleme uygulanmışsa giriş değerini sağa, uygulanmıyorsa sola hizalar.",
     altText: "Görüntü, kullanıcının cihazında görüntülenemediğinde ve erişilebilirlik amacıyla yedek olarak görev yapar.",
     rateColorMode: "Derecelendirme simgesi türü \"Suratlar\" olarak ayarlandığında seçilen emojinin rengini tanımlar. Şunlar arasından seçim yapın: \"Varsayılan\" - seçilen emoji varsayılan anket renginde görünür; \"Ölçek\" - seçilen emoji, derecelendirme ölçeğinden rengi devralır.",
     expression: {
@@ -1555,6 +1561,7 @@ export var turkishStrings = {
     dataList: "Veri listesi",
     itemSize: "Öğe boyutu",
     itemTitleWidth: "Öğe etiketi genişliği (piksel cinsinden)",
+    inputTextAlignment: "Giriş değeri hizalaması",
     elements: "Öğe",
     content: "İçerik",
     navigationButtonsVisibility: "Navigasyon butonları görünürlüğü",
@@ -2735,3 +2742,9 @@ editorLocalization.locales["tr"] = turkishStrings;
 // maskType.numeric: "Numeric" => "Sayısal"
 // maskType.datetime: "Date and Time" => "Tarih ve Saat"
 // maskType.currency: "Currency" => "Para birimi"
+
+// inputTextAlignment.auto: "Auto" => "Otomatik"
+// inputTextAlignment.left: "Left" => "Sol"
+// inputTextAlignment.right: "Right" => "Sağ"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Alan içinde giriş değerinin nasıl hizalanacağını seçin. Varsayılan ayar olan \"Otomatik\", para birimi veya sayısal maskeleme uygulanmışsa giriş değerini sağa, uygulanmıyorsa sola hizalar."
+// p.inputTextAlignment: "Input value alignment" => "Giriş değeri hizalaması"

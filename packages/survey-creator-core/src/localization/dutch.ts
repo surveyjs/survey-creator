@@ -995,6 +995,11 @@ export var nlStrings = {
       datetime: "Datum en tijd",
       currency: "Valuta"
     },
+    inputTextAlignment: {
+      auto: "Auto",
+      left: "Links",
+      right: "Rechts"
+    },
     all: "Alle",
     page: "Pagina",
     survey: "Enquête",
@@ -1439,6 +1444,7 @@ export var nlStrings = {
     dataList: "Voer een lijst met keuzes in die tijdens de invoer aan de respondent worden voorgesteld.",
     itemSize: "De instelling wijzigt alleen de grootte van de invoervelden en heeft geen invloed op de breedte van het vraagvak.",
     itemTitleWidth: "Hiermee stelt u een consistente breedte in voor alle artikellabels in pixels",
+    inputTextAlignment: "Selecteer hoe u de invoerwaarde binnen het veld wilt uitlijnen. De standaardinstelling \"Auto\" lijnt de invoerwaarde uit aan de rechterkant als valuta- of numerieke maskering wordt toegepast en aan de linkerkant als dat niet het geval is.",
     altText: "Dient als vervanging wanneer de afbeelding niet kan worden weergegeven op het apparaat van een gebruiker en voor toegankelijkheidsdoeleinden.",
     rateColorMode: "Definieert de kleur van de geselecteerde emoji wanneer het type Beoordelingspictogram is ingesteld op \"Smileys\". Kies tussen: \"Standaard\" - de geselecteerde emoji verschijnt in de standaard enquêtekleur; \"Schaal\" - de geselecteerde emoji erft de kleur van de beoordelingsschaal.",
     expression: {
@@ -1555,6 +1561,7 @@ export var nlStrings = {
     dataList: "Gegevenslijst",
     itemSize: "Item grootte",
     itemTitleWidth: "Breedte artikellabel (in px)",
+    inputTextAlignment: "Uitlijning van invoerwaarden",
     elements: "Elementen",
     content: "Tevreden",
     navigationButtonsVisibility: "Navigatie Knoppen zichtbaarheid",
@@ -2721,3 +2728,9 @@ editorLocalization.locales["nl"] = nlStrings;
 // maskType.numeric: "Numeric" => "Numeriek"
 // maskType.datetime: "Date and Time" => "Datum en tijd"
 // maskType.currency: "Currency" => "Valuta"
+
+// inputTextAlignment.auto: "Auto" => "Auto"
+// inputTextAlignment.left: "Left" => "Links"
+// inputTextAlignment.right: "Right" => "Rechts"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Selecteer hoe u de invoerwaarde binnen het veld wilt uitlijnen. De standaardinstelling \"Auto\" lijnt de invoerwaarde uit aan de rechterkant als valuta- of numerieke maskering wordt toegepast en aan de linkerkant als dat niet het geval is."
+// p.inputTextAlignment: "Input value alignment" => "Uitlijning van invoerwaarden"

@@ -995,6 +995,11 @@ var polishStrings = {
       datetime: "Data i godzina",
       currency: "Waluta"
     },
+    inputTextAlignment: {
+      auto: "Automatycznie",
+      left: "Lewy",
+      right: "Prawy"
+    },
     all: "Cały",
     page: "Strona",
     survey: "Sondaż",
@@ -1439,6 +1444,7 @@ var polishStrings = {
     dataList: "Wprowadź listę opcji, które zostaną zasugerowane respondentowi podczas wprowadzania danych.",
     itemSize: "To ustawienie zmienia tylko rozmiar pól wejściowych i nie wpływa na szerokość pola pytania.",
     itemTitleWidth: "Ustawia stałą szerokość dla wszystkich etykiet elementów w pikselach",
+    inputTextAlignment: "Wybierz sposób wyrównania wartości wejściowej w polu. Ustawienie domyślne \"Auto\" wyrównuje wartość wejściową do prawej, jeśli stosowane jest maskowanie walutowe lub numeryczne, i do lewej, jeśli nie.",
     altText: "Służy jako substytut, gdy obraz nie może być wyświetlany na urządzeniu użytkownika oraz w celu ułatwienia dostępu.",
     rateColorMode: "Określa kolor wybranego emoji, gdy typ ikony oceny jest ustawiony na \"Emotikony\". Wybierz pomiędzy: \"Domyślny\" - wybrany emoji pojawia się w domyślnym kolorze ankiety; \"Skala\" - wybrany emoji dziedziczy kolor ze skali ocen.",
     expression: {
@@ -1555,6 +1561,7 @@ var polishStrings = {
     dataList: "Lista danych",
     itemSize: "Rozmiar produktu",
     itemTitleWidth: "Szerokość etykiety elementu (w pikselach)",
+    inputTextAlignment: "Wyrównanie wartości wejściowej",
     elements: "Pierwiastki",
     content: "Zawartość",
     navigationButtonsVisibility: "Widoczność przycisków nawigacyjnych",
@@ -3007,3 +3014,9 @@ editorLocalization.locales["pl"] = polishStrings;
 // maskType.numeric: "Numeric" => "Numeryczny"
 // maskType.datetime: "Date and Time" => "Data i godzina"
 // maskType.currency: "Currency" => "Waluta"
+
+// inputTextAlignment.auto: "Auto" => "Automatycznie"
+// inputTextAlignment.left: "Left" => "Lewy"
+// inputTextAlignment.right: "Right" => "Prawy"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Wybierz sposób wyrównania wartości wejściowej w polu. Ustawienie domyślne \"Auto\" wyrównuje wartość wejściową do prawej, jeśli stosowane jest maskowanie walutowe lub numeryczne, i do lewej, jeśli nie."
+// p.inputTextAlignment: "Input value alignment" => "Wyrównanie wartości wejściowej"

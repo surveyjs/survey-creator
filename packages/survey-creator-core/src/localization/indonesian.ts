@@ -995,6 +995,11 @@ export var indonesianStrings = {
       datetime: "Tanggal dan Waktu",
       currency: "Mata uang"
     },
+    inputTextAlignment: {
+      auto: "Auto",
+      left: "Kiri",
+      right: "Kanan"
+    },
     all: "semua",
     page: "halaman",
     survey: "survei",
@@ -1439,6 +1444,7 @@ export var indonesianStrings = {
     dataList: "Masukkan daftar pilihan yang akan disarankan kepada responden saat masukan.",
     itemSize: "Pengaturan hanya mengubah ukuran bidang input dan tidak memengaruhi lebar kotak pertanyaan.",
     itemTitleWidth: "Mengatur lebar yang konsisten untuk semua label item dalam piksel",
+    inputTextAlignment: "Pilih cara menyelaraskan nilai input dalam bidang. Pengaturan default \"Otomatis\" menyelaraskan nilai input ke kanan jika penyembunyian mata uang atau numerik diterapkan dan ke kiri jika tidak.",
     altText: "Berfungsi sebagai pengganti ketika gambar tidak dapat ditampilkan pada perangkat pengguna dan untuk tujuan aksesibilitas.",
     rateColorMode: "Menentukan warna emoji yang dipilih saat jenis ikon Peringkat diatur ke \"Smiley\". Pilih antara: \"Default\" - emoji yang dipilih muncul dalam warna survei default; \"Skala\" - emoji yang dipilih mewarisi warna dari skala peringkat.",
     expression: {
@@ -1555,6 +1561,7 @@ export var indonesianStrings = {
     dataList: "Daftar data",
     itemSize: "ukuranBarang",
     itemTitleWidth: "Lebar label item (dalam px)",
+    inputTextAlignment: "Penyelarasan nilai input",
     elements: "Elemen",
     content: "Puas",
     navigationButtonsVisibility: "visibilitas tombol navigasi",
@@ -2894,3 +2901,9 @@ editorLocalization.locales["id"] = indonesianStrings;
 // maskType.numeric: "Numeric" => "Numerik"
 // maskType.datetime: "Date and Time" => "Tanggal dan Waktu"
 // maskType.currency: "Currency" => "Mata uang"
+
+// inputTextAlignment.auto: "Auto" => "Auto"
+// inputTextAlignment.left: "Left" => "Kiri"
+// inputTextAlignment.right: "Right" => "Kanan"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Pilih cara menyelaraskan nilai input dalam bidang. Pengaturan default \"Otomatis\" menyelaraskan nilai input ke kanan jika penyembunyian mata uang atau numerik diterapkan dan ke kiri jika tidak."
+// p.inputTextAlignment: "Input value alignment" => "Penyelarasan nilai input"
