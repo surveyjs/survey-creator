@@ -609,6 +609,10 @@ export interface SurveyInstanceCreatedEvent {
    */
   survey: SurveyModel;
   /**
+   * A survey element being edited in the Property Grid. Present only if the `options.area` parameter equals `"property-grid"`.
+   */
+  obj?: Base;
+  /**
    * Obsolete. Use `options.area` instead.
    */
   reason: string;

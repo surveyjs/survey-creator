@@ -20,7 +20,8 @@ import {
   ListModel,
   QuestionTextModel,
   ActionContainer,
-  Helpers
+  Helpers,
+  PanelModel
 } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { editorLocalization, getLocString } from "../editorLocalization";
@@ -186,6 +187,12 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   }
   private get isMessagePanelVisible(): boolean {
     return (this.element)?.getPropertyValue("isMessagePanelVisible");
+  }
+  get cssCollapsedHiddenHeader(): string {
+    return (this.element as PanelModel | Question).cssHeader + " svc-question__header--hidden";
+  }
+  get cssCollapsedHiddenTitle(): string {
+    return this.element.cssTitle + " svc-element__title--hidden";
   }
   public createBannerParams(): QuestionBannerParams {
     return this.createCarryForwardParams() || this.createUsingRestfulParams() || this.createCustomMessagePanel();

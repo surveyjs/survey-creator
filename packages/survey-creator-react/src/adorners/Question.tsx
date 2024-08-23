@@ -1,14 +1,15 @@
 import { QuestionAdornerViewModel, toggleHovered } from "survey-creator-core";
 import * as React from "react";
 import { ReactDragEvent, ReactMouseEvent } from "../events";
-import { Base, Question } from "survey-core";
+import { Base, PanelModel, Question, SurveyElementCore } from "survey-core";
 import {
   SurveyActionBar,
   ReactElementFactory,
   SurveyQuestion,
   attachKey2click,
   SvgIcon,
-  Popup
+  Popup,
+  SurveyElementBase
 } from "survey-react-ui";
 import { CreatorModelElement } from "../ModelElement";
 
@@ -97,9 +98,23 @@ export class QuestionAdornerComponent extends CreatorModelElement<
     if (!this.model.isBannerShowing) return null;
     return ReactElementFactory.Instance.createElement("svc-question-banner", this.model.createBannerParams());
   }
+
+  protected renderQuestionTitle(): JSX.Element {
+    if (this.model.element.hasTitle || this.model.element.isPanel) return null;
+    const element = this.model.element as Question | PanelModel;
+    return (
+      <div className={this.model.cssCollapsedHiddenHeader} >
+        <div className={this.model.cssCollapsedHiddenTitle} >
+          {SurveyElementBase.renderLocString(element.locTitle, null, "q_title")}
+        </div>
+      </div>
+    );
+  }
+
   protected renderElementContent(): JSX.Element {
     return (
       <>
+        {this.renderQuestionTitle()}
         {this.props.element}
         {this.renderElementPlaceholder()}
         {this.renderCarryForwardBanner()}

@@ -4548,3 +4548,26 @@ test("onSetPropertyEditorOptions -> onConfigureTablePropertyEditor", (): any => 
   creator.onSetPropertyEditorOptionsCallback("choices", question, callBackOptions);
   expect(callBackOptions.allowBatchEdit).toBeFalsy();
 });
+test("creator.onSurveyInstanceCreated from property Grid", () => {
+  const creator = new CreatorTester();
+  const selectedTypes = new Array<string>();
+  creator.onSurveyInstanceCreated.add((sender, options) => {
+    if (options.area === "property-grid") {
+      if(options.obj) {
+        selectedTypes.push(options.obj.getType());
+      }
+    }
+  });
+  creator.JSON = {
+    elements: [
+      { name: "q1", type: "text" },
+      {
+        name: "q2",
+        type: "radiogroup"
+      }
+    ]
+  };
+  creator.selectQuestionByName("q1");
+  creator.selectQuestionByName("q2");
+  expect(selectedTypes).toStrictEqual(["survey", "text", "radiogroup"]);
+});
