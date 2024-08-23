@@ -79,6 +79,10 @@ export class QuestionAdornerComponent extends CreatorModelElement<
         className={this.model.css()}
         onClick={(e) => this.model.select(this.model, new ReactMouseEvent(e))}
       >
+        <div className="svc-question__drop-indicator svc-question__drop-indicator--left"></div>
+        <div className="svc-question__drop-indicator svc-question__drop-indicator--right"></div>
+        <div className="svc-question__drop-indicator svc-question__drop-indicator--top"></div>
+        <div className="svc-question__drop-indicator svc-question__drop-indicator--bottom"></div>
         {allowInteractions ? this.renderHeader() : null}
         {content}
         {this.renderFooter()}
