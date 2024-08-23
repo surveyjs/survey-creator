@@ -75,35 +75,32 @@ export class TabDesignerViewModel extends Base {
     this.initSurvey();
   }
   private initToolbar() {
-    if (this.creator.expandCollapseButtonVisibility != "never") {
-      this.actionContainer = new ActionContainer();
-      const action = (action) => { this.creator.onSurfaceToolbarActionExecuted.fire(this.creator, { action: action }); };
+    this.actionContainer = new ActionContainer();
+    const action = (action) => { this.creator.onSurfaceToolbarActionExecuted.fire(this.creator, { action: action }); };
 
-      let defaultActionBarCss = {
-        root: "sv-action-bar",
-        defaultSizeMode: "",
-        smallSizeMode: "",
-        item: "svc-page-navigator__selector",
-        itemWithTitle: "",
-        itemAsIcon: "",
-        itemActive: "",
-        itemPressed: "",
-        itemIcon: "svc-page-navigator__navigator-icon",
-        itemTitleWithIcon: "",
-      };
-      this.actionContainer.cssClasses = defaultActionBarCss;
+    let defaultActionBarCss = {
+      root: "sv-action-bar",
+      defaultSizeMode: "",
+      smallSizeMode: "",
+      item: "svc-page-navigator__selector",
+      itemWithTitle: "",
+      itemAsIcon: "",
+      itemActive: "",
+      itemPressed: "",
+      itemIcon: "svc-page-navigator__navigator-icon",
+      itemTitleWithIcon: "",
+    };
+    this.actionContainer.cssClasses = defaultActionBarCss;
 
-      this.actionContainer.setItems([{
-        id: "collapseAll",
-        iconName: "icon-collapseall-24x24",
-        action: action
-      }, {
-        id: "expandAll",
-        iconName: "icon-expandall-24x24",
-        action: action
-      }]);
-
-    }
+    this.actionContainer.setItems([{
+      id: "collapseAll",
+      iconName: "icon-collapseall-24x24",
+      action: action
+    }, {
+      id: "expandAll",
+      iconName: "icon-expandall-24x24",
+      action: action
+    }]);
   }
 
   get survey() {
@@ -119,6 +116,9 @@ export class TabDesignerViewModel extends Base {
     if (this.creator.isMobileView)
       return getLocString("ed.surveyPlaceHolderMobile");
     return getLocString("ed.surveyPlaceHolder");
+  }
+  public get hasToolbar() {
+    return this.creator.expandCollapseButtonVisibility != "never";
   }
   private isUpdatingNewPage: boolean;
   public onDesignerSurveyPropertyChanged(obj: Base, propName: string): void {

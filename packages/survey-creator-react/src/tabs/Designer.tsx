@@ -183,7 +183,7 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
         ></SurveyPageNavigator></div>
         : null
       }
-      {this.model.actionContainer ?
+      {this.model.hasToolbar ?
         <div className="svc-tab-designer__toolbar">
           <SurveyActionBar model={this.model.actionContainer} handleClick={false}></SurveyActionBar></div>
         : null

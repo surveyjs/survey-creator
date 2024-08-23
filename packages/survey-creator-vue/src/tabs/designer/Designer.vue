@@ -58,7 +58,7 @@
           <svc-page-navigator :pagesController="model.pagesController" :pageEditMode="model.creator.pageEditMode">
           </svc-page-navigator>
         </div>
-        <div v-if="model.actionContainer" class="svc-tab-designer__page-navigator">
+        <div v-if="model.hasToolbar" class="svc-tab-designer__toolbar">
           <sv-action-bar :model="model.actionContainer"></sv-action-bar>
         </div>
       </template>

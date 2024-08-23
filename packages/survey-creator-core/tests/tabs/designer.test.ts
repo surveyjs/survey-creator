@@ -296,6 +296,7 @@ test("overridingProperty affects LogoImageViewModel allowEdit", () => {
 test("expand all and collapse all", () => {
 
   const creator = new CreatorTester();
+  creator.expandCollapseButtonVisibility = "onhover";
   creator.JSON = {
     "pages": [
       {
