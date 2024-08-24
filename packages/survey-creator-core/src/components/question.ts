@@ -344,10 +344,28 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     });
     return res;
   }
+
+  private buildDefaultJsonMap(availableItems: QuestionToolboxItem[]) {
+    const defaultJsons = {};
+    function addItemJson(toolboxItem: QuestionToolboxItem) {
+      const type = toolboxItem.json?.type || toolboxItem.id;
+      if (toolboxItem.json) {
+        if (!defaultJsons[type]) defaultJsons[type] = [];
+        defaultJsons[type].push(toolboxItem.json);
+      }
+    }
+    availableItems.forEach((toolboxItem: QuestionToolboxItem) => {
+      addItemJson(toolboxItem);
+      (toolboxItem.items || []).forEach((toolboxSubitem: QuestionToolboxItem) => {
+        addItemJson(toolboxSubitem);
+      });
+    });
+    return defaultJsons;
+  }
+
   public getConvertToTypesActions(parentAction?: Action): Array<IAction> {
     const availableItems = this.getConvertToTypes();
-
-    const defaultJsons = {};
+    const defaultJsons = this.buildDefaultJsonMap(availableItems);
     availableItems.forEach((toolboxItem: QuestionToolboxItem) => {
       const type = toolboxItem.json?.type || toolboxItem.id;
       if (toolboxItem.json) {
