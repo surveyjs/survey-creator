@@ -110,6 +110,40 @@ test("Check imagepicker add/delete items style", async (t) => {
     .click(".svc-image-item-value-controls__add");
 });
 
+test("Check imagepicker add/delete - 5817", async (t) => {
+  await t.resizeWindow(1920, 1080);
+  await explicitErrorHandler();
+  await setJSON({
+    elements: [{
+      type: "imagepicker", name: "q1", choices: [
+        {
+          "value": "lion",
+          "imageLink": "lion.jpg"
+        },
+        {
+          "value": "giraffe",
+          "imageLink": "lion.jpg"
+        }
+      ]
+    }]
+  });
+  await ClientFunction(() => {
+    const creator = (window as any).creator;
+    creator.selectElement(creator.survey.getQuestionByName("q1"));
+  })();
+  await t
+    .expect(Selector(".svc-tab-designer .svc-image-item-value--new").visible).ok()
+    .click(".svc-image-item-value-controls__add")
+    .setFilesToUpload(getVisibleElement(".svc-image-item-value--new").find(".svc-choose-file-input"), "./image.jpg")
+    .expect(Selector(".svc-image-item-value").nth(2).find("img").hasAttribute("src")).ok()
+    .click(Selector(".svc-context-button--danger").nth(2))
+    .expect(Selector(".svc-image-item-value").nth(2).hasClass("svc-image-item-value--new")).ok()
+    .expect(Selector(".svc-tab-designer .svc-image-item-value--new").visible).ok()
+    .click(".svc-image-item-value-controls__add")
+    .setFilesToUpload(getVisibleElement(".svc-image-item-value--new").find(".svc-choose-file-input"), "./image.jpg")
+    .expect(Selector(".svc-image-item-value").nth(2).find("img").hasAttribute("src")).ok();
+});
+
 test("Check imagepicker delete item", async (t) => {
   await t.resizeWindow(1920, 1080);
   await explicitErrorHandler();
