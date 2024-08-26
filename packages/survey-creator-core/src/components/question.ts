@@ -372,11 +372,16 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       const needSeparator = lastItem && item.category != lastItem.category;
       const action = this.creator.createIActionBarItemByClass(item, needSeparator, (questionType: string, json?: any) => {
         const type = json?.type || questionType;
-        let newJson = { ...json };
+        let newJson = {};
         (defaultJsons[type] || []).forEach((djson) => {
           if (this.jsonIsCorresponded(djson)) {
-            Object.keys(djson).forEach(k => {
-              if (k != "type" && !newJson[k]) newJson[k] = undefined;
+            newJson = { ...json };
+            const objJson = this.element.toJSON();
+            Object.keys(djson).forEach(p => {
+              if (p != "type" && !newJson[p]) newJson[p] = undefined;
+            });
+            Object.keys(json).forEach(p => {
+              if (p != "type" && !(!objJson[p] || djson[p])) newJson[p] = undefined;
             });
           }
         });
