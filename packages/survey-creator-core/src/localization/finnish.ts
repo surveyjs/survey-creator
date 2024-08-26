@@ -995,6 +995,11 @@ export var fiStrings = {
       datetime: "Päivämäärä ja kellonaika",
       currency: "Valuutta"
     },
+    inputTextAlignment: {
+      auto: "Auto",
+      left: "Vasen",
+      right: "Oikea"
+    },
     all: "all",
     page: "page",
     survey: "survey",
@@ -1153,6 +1158,10 @@ export var fiStrings = {
     isPanelless: {
       "false": "Laiminlyönti",
       "true": "Ilman paneeleja"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "Sama kuin kyselyssä",
+      container: "Sama kuin kontti"
     }
   },
   // Operators
@@ -1435,6 +1444,7 @@ export var fiStrings = {
     dataList: "Kirjoita luettelo vaihtoehdoista, joita vastaajalle ehdotetaan syötteen aikana.",
     itemSize: "Asetus muuttaa vain syöttökenttien kokoa eikä vaikuta kysymysruudun leveyteen.",
     itemTitleWidth: "Määrittää yhdenmukaisen leveyden kaikille tuoteotsikoille kuvapisteinä",
+    inputTextAlignment: "Valitse, miten syötteen arvo tasataan kenttään. Oletusasetus \"Auto\" kohdistaa syöttöarvon oikealle, jos valuuttaa tai numeerista peittoa käytetään, ja vasemmalle, jos ei.",
     altText: "Toimii korvikkeena, kun kuvaa ei voida näyttää käyttäjän laitteella, ja esteettömyyssyistä.",
     rateColorMode: "Määrittää valitun emojin värin, kun luokituskuvakkeen tyypiksi on asetettu \"Hymiöt\". Valitse seuraavista: \"Oletus\" - valittu emoji näkyy kyselyn oletusvärillä; \"Scale\" - valittu emoji perii värin luokitusasteikolta.",
     expression: {
@@ -1485,7 +1495,8 @@ export var fiStrings = {
     panellayoutcolumn: {
       effectiveWidth: "Hyväksyy arvot %.",
       questionTitleWidth: "Hyväksyy arvot px."
-    }
+    },
+    progressBarInheritWidthFrom: "Sama kuin säilö -vaihtoehto säätää edistymispalkin alueen leveyttä automaattisesti sopimaan HTML-elementtiin, johon kysely sijoitetaan."
   },
   // Properties
   p: {
@@ -1550,6 +1561,7 @@ export var fiStrings = {
     dataList: "Tietoluettelo",
     itemSize: "itemSize",
     itemTitleWidth: "Nimikkeen otsikon leveys (px)",
+    inputTextAlignment: "Syöttöarvon tasaus",
     elements: "Luonnonvoimat",
     content: "Sisältö",
     navigationButtonsVisibility: "navigationButtonsVisibility",
@@ -1589,7 +1601,8 @@ export var fiStrings = {
     scaleColorMode: "Skaalaa väriä -tila",
     rateColorMode: "Arvioi väritila",
     copyDisplayValue: "Kopioi näyttöarvo",
-    effectiveColSpan: "Sarakkeen jänneväli"
+    effectiveColSpan: "Sarakkeen jänneväli",
+    progressBarInheritWidthFrom: "Edistymispalkin alueen leveys"
   },
   theme: {
     advancedMode: "Edistynyt tila",
@@ -2724,9 +2737,19 @@ editorLocalization.locales["fi"] = fiStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Hyväksyy arvot %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Hyväksyy arvot px."
 // p.effectiveColSpan: "Column span" => "Sarakkeen jänneväli"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "Sama kuin kyselyssä"
+// progressBarInheritWidthFrom.container: "Same as container" => "Sama kuin kontti"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Näyttää ladattujen tiedostojen pikkukuvien esikatselut, kun mahdollista. Poista valinta, jos haluat näyttää tiedostokuvakkeet sen sijaan."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "Sama kuin säilö -vaihtoehto säätää edistymispalkin alueen leveyttä automaattisesti sopimaan HTML-elementtiin, johon kysely sijoitetaan."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "Edistymispalkin alueen leveys"
 // maskType.none: "None" => "Ei lainkaan"
 // maskType.pattern: "Pattern" => "Kuvio"
 // maskType.numeric: "Numeric" => "Numeerinen"
 // maskType.datetime: "Date and Time" => "Päivämäärä ja kellonaika"
 // maskType.currency: "Currency" => "Valuutta"
-// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Näyttää ladattujen tiedostojen pikkukuvien esikatselut, kun mahdollista. Poista valinta, jos haluat näyttää tiedostokuvakkeet sen sijaan."
+
+// inputTextAlignment.auto: "Auto" => "Auto"
+// inputTextAlignment.left: "Left" => "Vasen"
+// inputTextAlignment.right: "Right" => "Oikea"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Valitse, miten syötteen arvo tasataan kenttään. Oletusasetus \"Auto\" kohdistaa syöttöarvon oikealle, jos valuuttaa tai numeerista peittoa käytetään, ja vasemmalle, jos ei."
+// p.inputTextAlignment: "Input value alignment" => "Syöttöarvon tasaus"

@@ -995,6 +995,11 @@ export var mnStrings = {
       datetime: "Огноо, цаг",
       currency: "Валютын ханш"
     },
+    inputTextAlignment: {
+      auto: "Авто",
+      left: "Зүүн",
+      right: "Баруун талд"
+    },
     all: "Бүх",
     page: "Хуудас",
     survey: "Санал асуулга",
@@ -1153,6 +1158,10 @@ export var mnStrings = {
     isPanelless: {
       "false": "Дефолт",
       "true": "Панелгүйгээр"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "Судалгаатай адил",
+      container: "Савтай адил"
     }
   },
   // Operators
@@ -1435,6 +1444,7 @@ export var mnStrings = {
     dataList: "Санал болгох сонголтуудын жагсаалтыг оруулах үед хариулагчид санал болгох болно.",
     itemSize: "Тохиргоо нь зөвхөн оролтын талбаруудыг дахин тохируулдаг бөгөөд асуултын хайрцагны өргөнд нөлөөлдөггүй.",
     itemTitleWidth: "Пикселд бүх зүйлийн шошгоны тогтмол өргөнийг тогтоох",
+    inputTextAlignment: "Талбар доторх оролтын үнэ цэнийг хэрхэн уялдуулахыг сонго. \"Авто\" гэсэн дефолт тохиргоо нь валют эсвэл тоон маск хэрэглэх бол оролтын үнэ цэнийг баруун тийш, хэрэв үгүй бол зүүн тийш нь уялдуулна.",
     altText: "Хэрэглэгчийн төхөөрөмж дээр болон хүртээмжийн зорилгоор дүрсийг харуулах боломжгүй үед орлуулагчаар үйлчилнэ.",
     rateColorMode: "Rating icon төрлийн \"Smileys\" гэж тогтооход сонгосон эможигийн өнгийг тодорхойлно. Аль нэгийг нь сонгоно уу: \"Default\" - сонгосон эможи нь стандарт судалгааны өнгөөр гарч ирдэг; \"Scale\" - сонгосон эможи нь үнэлгээний хэмжүүрээс өнгийг өвлөн авдаг.",
     expression: {
@@ -1485,7 +1495,8 @@ export var mnStrings = {
     panellayoutcolumn: {
       effectiveWidth: "Үнэт зүйлсийг %-ийг хүлээн зөвшөөрдөг.",
       questionTitleWidth: "Үнэ цэнэ px-ийг хүлээн зөвшөөрдөг."
-    }
+    },
+    progressBarInheritWidthFrom: "\"As as container\" сонголт автоматаар судалгаанд байрлуулсан HTML элементэд тохируулахын тулд progress bar area өргөнийг тохируулдаг."
   },
   // Properties
   p: {
@@ -1550,6 +1561,7 @@ export var mnStrings = {
     dataList: "Өгөгдлийн жагсаалт",
     itemSize: "Элементийн хэмжээ",
     itemTitleWidth: "Барааны шошгоны өргөн (px-д)",
+    inputTextAlignment: "Оролтын үнэ цэнийн зохицуулалт",
     elements: "Элементүүд",
     content: "Контент",
     navigationButtonsVisibility: "Чиглүүлэх товчны харагдац",
@@ -1589,7 +1601,8 @@ export var mnStrings = {
     scaleColorMode: "Масштабын өнгө загвар",
     rateColorMode: "Хэмжээ өнгөний хэв маяг",
     copyDisplayValue: "Copy display value",
-    effectiveColSpan: "Баганын хугацаа"
+    effectiveColSpan: "Баганын хугацаа",
+    progressBarInheritWidthFrom: "Прогресс барын бүсийн өргөн"
   },
   theme: {
     advancedMode: "Дэвшилтэт хэв маяг",
@@ -2380,9 +2393,19 @@ editorLocalization.locales["mn"] = mnStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Үнэт зүйлсийг %-ийг хүлээн зөвшөөрдөг."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Үнэ цэнэ px-ийг хүлээн зөвшөөрдөг."
 // p.effectiveColSpan: "Column span" => "Баганын хугацаа"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "Судалгаатай адил"
+// progressBarInheritWidthFrom.container: "Same as container" => "Савтай адил"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Боломжтой бол татаж авсан файлуудад зориулсан эрхий хурууны урьдчилсан үзүүлэлтийг үзүүлнэ. Оронд нь файлын зургуудыг үзүүлэхийг хүсвэл сонгогдоогүй."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "\"As as container\" сонголт автоматаар судалгаанд байрлуулсан HTML элементэд тохируулахын тулд progress bar area өргөнийг тохируулдаг."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "Прогресс барын бүсийн өргөн"
 // maskType.none: "None" => "Хэн ч биш"
 // maskType.pattern: "Pattern" => "Загвар"
 // maskType.numeric: "Numeric" => "Тоо нь"
 // maskType.datetime: "Date and Time" => "Огноо, цаг"
 // maskType.currency: "Currency" => "Валютын ханш"
-// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Боломжтой бол татаж авсан файлуудад зориулсан эрхий хурууны урьдчилсан үзүүлэлтийг үзүүлнэ. Оронд нь файлын зургуудыг үзүүлэхийг хүсвэл сонгогдоогүй."
+
+// inputTextAlignment.auto: "Auto" => "Авто"
+// inputTextAlignment.left: "Left" => "Зүүн"
+// inputTextAlignment.right: "Right" => "Баруун талд"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Талбар доторх оролтын үнэ цэнийг хэрхэн уялдуулахыг сонго. \"Авто\" гэсэн дефолт тохиргоо нь валют эсвэл тоон маск хэрэглэх бол оролтын үнэ цэнийг баруун тийш, хэрэв үгүй бол зүүн тийш нь уялдуулна."
+// p.inputTextAlignment: "Input value alignment" => "Оролтын үнэ цэнийн зохицуулалт"

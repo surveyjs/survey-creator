@@ -995,6 +995,11 @@ export var turkishStrings = {
       datetime: "Tarih ve Saat",
       currency: "Para birimi"
     },
+    inputTextAlignment: {
+      auto: "Otomatik",
+      left: "Sol",
+      right: "Sağ"
+    },
     all: "Tümü",
     page: "Sayfa",
     survey: "Anket",
@@ -1153,6 +1158,10 @@ export var turkishStrings = {
     isPanelless: {
       "false": "Temerrüt",
       "true": "Panelsiz"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "Anketle aynı",
+      container: "Konteyner ile aynı"
     }
   },
   // Operators
@@ -1435,6 +1444,7 @@ export var turkishStrings = {
     dataList: "Giriş sırasında yanıtlayana önerilecek seçeneklerin bir listesini girin.",
     itemSize: "Bu ayar yalnızca giriş alanlarını yeniden boyutlandırır ve soru kutusunun genişliğini etkilemez.",
     itemTitleWidth: "Piksel cinsinden tüm öğe etiketleri için tutarlı genişlik ayarlar",
+    inputTextAlignment: "Alan içinde giriş değerinin nasıl hizalanacağını seçin. Varsayılan ayar olan \"Otomatik\", para birimi veya sayısal maskeleme uygulanmışsa giriş değerini sağa, uygulanmıyorsa sola hizalar.",
     altText: "Görüntü, kullanıcının cihazında görüntülenemediğinde ve erişilebilirlik amacıyla yedek olarak görev yapar.",
     rateColorMode: "Derecelendirme simgesi türü \"Suratlar\" olarak ayarlandığında seçilen emojinin rengini tanımlar. Şunlar arasından seçim yapın: \"Varsayılan\" - seçilen emoji varsayılan anket renginde görünür; \"Ölçek\" - seçilen emoji, derecelendirme ölçeğinden rengi devralır.",
     expression: {
@@ -1485,7 +1495,8 @@ export var turkishStrings = {
     panellayoutcolumn: {
       effectiveWidth: "% değerlerini kabul eder.",
       questionTitleWidth: "Px değerlerini kabul eder."
-    }
+    },
+    progressBarInheritWidthFrom: "\"Kapsayıcı ile aynı\" seçeneği, ilerleme çubuğu alan genişliğini anketin yerleştirildiği HTML öğesine sığacak şekilde otomatik olarak ayarlar."
   },
   // Properties
   p: {
@@ -1550,6 +1561,7 @@ export var turkishStrings = {
     dataList: "Veri listesi",
     itemSize: "Öğe boyutu",
     itemTitleWidth: "Öğe etiketi genişliği (piksel cinsinden)",
+    inputTextAlignment: "Giriş değeri hizalaması",
     elements: "Öğe",
     content: "İçerik",
     navigationButtonsVisibility: "Navigasyon butonları görünürlüğü",
@@ -1589,7 +1601,8 @@ export var turkishStrings = {
     scaleColorMode: "Renk modunu ölçekle",
     rateColorMode: "Renk modunu ayarla",
     copyDisplayValue: "Görüntüleme değerini kopyala",
-    effectiveColSpan: "Sütun aralığı"
+    effectiveColSpan: "Sütun aralığı",
+    progressBarInheritWidthFrom: "İlerleme çubuğu alanı genişliği"
   },
   theme: {
     advancedMode: "Gelişmiş mod",
@@ -2719,9 +2732,19 @@ editorLocalization.locales["tr"] = turkishStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "% değerlerini kabul eder."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Px değerlerini kabul eder."
 // p.effectiveColSpan: "Column span" => "Sütun aralığı"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "Anketle aynı"
+// progressBarInheritWidthFrom.container: "Same as container" => "Konteyner ile aynı"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Mümkün olduğunda karşıya yüklenen dosyalar için küçük resim önizlemelerini görüntüler. Bunun yerine dosya simgelerini göstermek istiyorsanız seçimi kaldırın."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "\"Kapsayıcı ile aynı\" seçeneği, ilerleme çubuğu alan genişliğini anketin yerleştirildiği HTML öğesine sığacak şekilde otomatik olarak ayarlar."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "İlerleme çubuğu alanı genişliği"
 // maskType.none: "None" => "Hiç kimse"
 // maskType.pattern: "Pattern" => "Desen"
 // maskType.numeric: "Numeric" => "Sayısal"
 // maskType.datetime: "Date and Time" => "Tarih ve Saat"
 // maskType.currency: "Currency" => "Para birimi"
-// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Mümkün olduğunda karşıya yüklenen dosyalar için küçük resim önizlemelerini görüntüler. Bunun yerine dosya simgelerini göstermek istiyorsanız seçimi kaldırın."
+
+// inputTextAlignment.auto: "Auto" => "Otomatik"
+// inputTextAlignment.left: "Left" => "Sol"
+// inputTextAlignment.right: "Right" => "Sağ"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Alan içinde giriş değerinin nasıl hizalanacağını seçin. Varsayılan ayar olan \"Otomatik\", para birimi veya sayısal maskeleme uygulanmışsa giriş değerini sağa, uygulanmıyorsa sola hizalar."
+// p.inputTextAlignment: "Input value alignment" => "Giriş değeri hizalaması"

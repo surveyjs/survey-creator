@@ -995,6 +995,11 @@ export var arStrings = {
       datetime: "التاريخ والوقت",
       currency: "عملة"
     },
+    inputTextAlignment: {
+      auto: "تلقائي",
+      left: "يسار",
+      right: "يمين"
+    },
     all: "الكل",
     page: "الصفحة",
     survey: "الإستبيان",
@@ -1153,6 +1158,10 @@ export var arStrings = {
     isPanelless: {
       "false": "افتراضي",
       "true": "بدون لوحات"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "نفس المسح",
+      container: "نفس الحاوية"
     }
   },
   // Operators
@@ -1435,6 +1444,7 @@ export var arStrings = {
     dataList: "أدخل قائمة بالخيارات التي سيتم اقتراحها على المستجيب أثناء الإدخال.",
     itemSize: "يغير الإعداد حجم حقول الإدخال فقط ولا يؤثر على عرض مربع السؤال.",
     itemTitleWidth: "يضبط عرضا متناسقا لكل تسميات العناصر بالبكسل",
+    inputTextAlignment: "حدد كيفية محاذاة قيمة الإدخال داخل الحقل. يقوم الإعداد الافتراضي \"تلقائي\" بمحاذاة قيمة الإدخال إلى اليمين إذا تم تطبيق إخفاء العملة أو الرقمية وإلى اليسار إذا لم يكن كذلك.",
     altText: "يعمل كبديل عندما يتعذر عرض الصورة على جهاز المستخدم ولأغراض إمكانية الوصول.",
     rateColorMode: "يحدد لون الرموز التعبيرية المحددة عند تعيين نوع رمز التقييم على \"الوجوه الضاحكة\". اختر بين: \"افتراضي\" - يظهر الرمز التعبيري المحدد بلون الاستطلاع الافتراضي ؛ \"مقياس\" - يرث الرمز التعبيري المحدد اللون من مقياس التصنيف.",
     expression: {
@@ -1485,7 +1495,8 @@ export var arStrings = {
     panellayoutcolumn: {
       effectiveWidth: "يقبل القيم٪",
       questionTitleWidth: "يقبل القيم px."
-    }
+    },
+    progressBarInheritWidthFrom: "يقوم خيار \"نفس الحاوية\" بضبط عرض منطقة شريط التقدم تلقائيا ليلائم عنصر HTML الذي يتم وضع الاستطلاع فيه."
   },
   // Properties
   p: {
@@ -1550,6 +1561,7 @@ export var arStrings = {
     dataList: "قائمة البيانات",
     itemSize: "itemSize",
     itemTitleWidth: "عرض تسمية العنصر (بالبكسل)",
+    inputTextAlignment: "محاذاة قيمة الإدخال",
     elements: "عناصر",
     content: "محتوى",
     navigationButtonsVisibility: "رؤية أزرار التنقل",
@@ -1589,7 +1601,8 @@ export var arStrings = {
     scaleColorMode: "مقياس وضع اللون",
     rateColorMode: "معدل وضع اللون",
     copyDisplayValue: "نسخ قيمة العرض",
-    effectiveColSpan: "امتداد العمود"
+    effectiveColSpan: "امتداد العمود",
+    progressBarInheritWidthFrom: "عرض منطقة شريط التقدم"
   },
   theme: {
     advancedMode: "الوضع المتقدم",
@@ -2635,9 +2648,19 @@ editorLocalization.locales["ar"] = arStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "يقبل القيم٪"
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "يقبل القيم px."
 // p.effectiveColSpan: "Column span" => "امتداد العمود"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "نفس المسح"
+// progressBarInheritWidthFrom.container: "Same as container" => "نفس الحاوية"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "يعرض معاينات الصور المصغرة للملفات التي تم تحميلها عندما يكون ذلك ممكنا. قم بإلغاء تحديد ما إذا كنت تريد إظهار رموز الملفات بدلا من ذلك."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "يقوم خيار \"نفس الحاوية\" بضبط عرض منطقة شريط التقدم تلقائيا ليلائم عنصر HTML الذي يتم وضع الاستطلاع فيه."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "عرض منطقة شريط التقدم"
 // maskType.none: "None" => "اي"
 // maskType.pattern: "Pattern" => "رسم"
 // maskType.numeric: "Numeric" => "عددي"
 // maskType.datetime: "Date and Time" => "التاريخ والوقت"
 // maskType.currency: "Currency" => "عملة"
-// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "يعرض معاينات الصور المصغرة للملفات التي تم تحميلها عندما يكون ذلك ممكنا. قم بإلغاء تحديد ما إذا كنت تريد إظهار رموز الملفات بدلا من ذلك."
+
+// inputTextAlignment.auto: "Auto" => "تلقائي"
+// inputTextAlignment.left: "Left" => "يسار"
+// inputTextAlignment.right: "Right" => "يمين"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "حدد كيفية محاذاة قيمة الإدخال داخل الحقل. يقوم الإعداد الافتراضي \"تلقائي\" بمحاذاة قيمة الإدخال إلى اليمين إذا تم تطبيق إخفاء العملة أو الرقمية وإلى اليسار إذا لم يكن كذلك."
+// p.inputTextAlignment: "Input value alignment" => "محاذاة قيمة الإدخال"

@@ -995,6 +995,11 @@ export var koreanStrings = {
       datetime: "날짜 및 시간",
       currency: "통화"
     },
+    inputTextAlignment: {
+      auto: "자동",
+      left: "왼쪽",
+      right: "오른쪽"
+    },
     all: "모두",
     page: "페이지",
     survey: "설문지",
@@ -1153,6 +1158,10 @@ export var koreanStrings = {
     isPanelless: {
       "false": "기본값",
       "true": "패널 없음"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "설문 조사와 동일",
+      container: "컨테이너와 동일"
     }
   },
   // Operators
@@ -1435,6 +1444,7 @@ export var koreanStrings = {
     dataList: "입력 시 응답자에게 제안될 선택 사항 목록을 입력합니다.",
     itemSize: "이 설정은 입력 필드의 크기만 조정하며 질문 상자의 너비에는 영향을 주지 않습니다.",
     itemTitleWidth: "모든 항목 레이블에 대해 일관된 너비를 픽셀 단위로 설정합니다.",
+    inputTextAlignment: "필드 내에서 입력 값을 정렬하는 방법을 선택합니다. 기본 설정인 \"Auto\"는 통화 또는 숫자 마스킹이 적용된 경우 입력 값을 오른쪽에 정렬하고 그렇지 않은 경우 왼쪽에 정렬합니다.",
     altText: "사용자의 장치에 이미지를 표시할 수 없는 경우 접근성을 위해 대신 사용할 수 있습니다.",
     rateColorMode: "등급 아이콘 유형이 \"스마일리\"로 설정된 경우 선택한 이모티콘의 색상을 정의합니다. 다음 중 하나를 선택합니다. \"기본값\" - 선택한 이모티콘이 기본 설문조사 색상으로 표시됩니다. \"척도\"-선택한 이모티콘은 등급 척도에서 색상을 상속합니다.",
     expression: {
@@ -1485,7 +1495,8 @@ export var koreanStrings = {
     panellayoutcolumn: {
       effectiveWidth: "% 값을 허용합니다.",
       questionTitleWidth: "px 값을 허용합니다."
-    }
+    },
+    progressBarInheritWidthFrom: "\"컨테이너와 동일\" 옵션은 설문조사가 배치된 HTML 요소에 맞게 진행률 표시줄 영역 너비를 자동으로 조정합니다."
   },
   // Properties
   p: {
@@ -1550,6 +1561,7 @@ export var koreanStrings = {
     dataList: "데이터 목록",
     itemSize: "항목 크기",
     itemTitleWidth: "항목 레이블 너비(px)",
+    inputTextAlignment: "입력 값 정렬",
     elements: "요소",
     content: "콘텐츠",
     navigationButtonsVisibility: "탐색 버튼 선명도",
@@ -1589,7 +1601,8 @@ export var koreanStrings = {
     scaleColorMode: "스케일 컬러 모드",
     rateColorMode: "비율 색상 모드",
     copyDisplayValue: "표시 값 복사",
-    effectiveColSpan: "열 범위"
+    effectiveColSpan: "열 범위",
+    progressBarInheritWidthFrom: "진행률 표시줄 영역 너비"
   },
   theme: {
     advancedMode: "어드밴스드 모드",
@@ -2928,9 +2941,19 @@ editorLocalization.locales["ko"] = koreanStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "% 값을 허용합니다."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "px 값을 허용합니다."
 // p.effectiveColSpan: "Column span" => "열 범위"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "설문 조사와 동일"
+// progressBarInheritWidthFrom.container: "Same as container" => "컨테이너와 동일"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "가능한 경우 업로드된 파일에 대한 썸네일 미리보기를 표시합니다. 대신 파일 아이콘을 표시하려면 선택을 취소합니다."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "\"컨테이너와 동일\" 옵션은 설문조사가 배치된 HTML 요소에 맞게 진행률 표시줄 영역 너비를 자동으로 조정합니다."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "진행률 표시줄 영역 너비"
 // maskType.none: "None" => "없음"
 // maskType.pattern: "Pattern" => "무늬"
 // maskType.numeric: "Numeric" => "숫자"
 // maskType.datetime: "Date and Time" => "날짜 및 시간"
 // maskType.currency: "Currency" => "통화"
-// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "가능한 경우 업로드된 파일에 대한 썸네일 미리보기를 표시합니다. 대신 파일 아이콘을 표시하려면 선택을 취소합니다."
+
+// inputTextAlignment.auto: "Auto" => "자동"
+// inputTextAlignment.left: "Left" => "왼쪽"
+// inputTextAlignment.right: "Right" => "오른쪽"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "필드 내에서 입력 값을 정렬하는 방법을 선택합니다. 기본 설정인 \"Auto\"는 통화 또는 숫자 마스킹이 적용된 경우 입력 값을 오른쪽에 정렬하고 그렇지 않은 경우 왼쪽에 정렬합니다."
+// p.inputTextAlignment: "Input value alignment" => "입력 값 정렬"

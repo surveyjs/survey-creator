@@ -995,6 +995,11 @@ var portugueseTranslation = {
       datetime: "Data e hora",
       currency: "Moeda"
     },
+    inputTextAlignment: {
+      auto: "Automático",
+      left: "Esquerda",
+      right: "Certo"
+    },
     all: "todos",
     page: "página",
     survey: "pesquisa",
@@ -1153,6 +1158,10 @@ var portugueseTranslation = {
     isPanelless: {
       "false": "Inadimplência",
       "true": "Sem Painéis"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "O mesmo que pesquisa",
+      container: "Igual ao contêiner"
     }
   },
   // Operators
@@ -1435,6 +1444,7 @@ var portugueseTranslation = {
     dataList: "Insira uma lista de opções que serão sugeridas ao respondente durante a entrada.",
     itemSize: "A configuração redimensiona apenas os campos de entrada e não afeta a largura da caixa de pergunta.",
     itemTitleWidth: "Define largura consistente para todos os rótulos de item em pixels",
+    inputTextAlignment: "Selecione como alinhar o valor de entrada dentro do campo. A configuração padrão \"Auto\" alinha o valor de entrada à direita se o mascaramento de moeda ou numérico for aplicado e à esquerda se não.",
     altText: "Serve como um substituto quando a imagem não pode ser exibida no dispositivo de um usuário e para fins de acessibilidade.",
     rateColorMode: "Define a cor do emoji selecionado quando o tipo de ícone Classificação é definido como \"Smileys\". Escolha entre: \"Padrão\" - o emoji selecionado aparece na cor padrão do questionário; \"Escala\" - o emoji selecionado herda a cor da escala de classificação.",
     expression: {
@@ -1485,7 +1495,8 @@ var portugueseTranslation = {
     panellayoutcolumn: {
       effectiveWidth: "Aceita valores %.",
       questionTitleWidth: "Aceita valores px."
-    }
+    },
+    progressBarInheritWidthFrom: "A opção \"Igual ao contêiner\" ajusta automaticamente a largura da área da barra de progresso para caber no elemento HTML em que a pesquisa é colocada."
   },
   // Properties
   p: {
@@ -1550,6 +1561,7 @@ var portugueseTranslation = {
     dataList: "Lista",
     itemSize: "Tamanho do item",
     itemTitleWidth: "Largura da etiqueta do item (em px)",
+    inputTextAlignment: "Alinhamento de valor de entrada",
     elements: "elementos",
     content: "conteúdo",
     navigationButtonsVisibility: "Visibilidade dos botões de navegação",
@@ -1589,7 +1601,8 @@ var portugueseTranslation = {
     scaleColorMode: "Modo de cor de escala",
     rateColorMode: "Classifique o modo de cores",
     copyDisplayValue: "Copiar valor de exibição",
-    effectiveColSpan: "Extensão da coluna"
+    effectiveColSpan: "Extensão da coluna",
+    progressBarInheritWidthFrom: "Largura da área da barra de progresso"
   },
   theme: {
     advancedMode: "Modo avançado",
@@ -2390,9 +2403,19 @@ editorLocalization.locales["pt"] = portugueseTranslation;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Aceita valores %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Aceita valores px."
 // p.effectiveColSpan: "Column span" => "Extensão da coluna"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "O mesmo que pesquisa"
+// progressBarInheritWidthFrom.container: "Same as container" => "Igual ao contêiner"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Exibe visualizações em miniatura para arquivos carregados quando possível. Desmarque se quiser mostrar ícones de arquivo."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "A opção \"Igual ao contêiner\" ajusta automaticamente a largura da área da barra de progresso para caber no elemento HTML em que a pesquisa é colocada."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "Largura da área da barra de progresso"
 // maskType.none: "None" => "Nenhum"
 // maskType.pattern: "Pattern" => "Padrão"
 // maskType.numeric: "Numeric" => "Numérico"
 // maskType.datetime: "Date and Time" => "Data e hora"
 // maskType.currency: "Currency" => "Moeda"
-// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Exibe visualizações em miniatura para arquivos carregados quando possível. Desmarque se quiser mostrar ícones de arquivo."
+
+// inputTextAlignment.auto: "Auto" => "Automático"
+// inputTextAlignment.left: "Left" => "Esquerda"
+// inputTextAlignment.right: "Right" => "Certo"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Selecione como alinhar o valor de entrada dentro do campo. A configuração padrão \"Auto\" alinha o valor de entrada à direita se o mascaramento de moeda ou numérico for aplicado e à esquerda se não."
+// p.inputTextAlignment: "Input value alignment" => "Alinhamento de valor de entrada"

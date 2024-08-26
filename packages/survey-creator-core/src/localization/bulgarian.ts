@@ -995,6 +995,11 @@ export var bgStrings = {
       datetime: "Дата и час",
       currency: "Валута"
     },
+    inputTextAlignment: {
+      auto: "Авто",
+      left: "Ляво",
+      right: "Дясно"
+    },
     all: "Всички",
     page: "Старница",
     survey: "Анкета",
@@ -1153,6 +1158,10 @@ export var bgStrings = {
     isPanelless: {
       "false": "По подразбиране",
       "true": "Без панели"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "Същото като проучването",
+      container: "Същото като контейнера"
     }
   },
   // Operators
@@ -1435,6 +1444,7 @@ export var bgStrings = {
     dataList: "Въведете списък с възможности за избор, които ще бъдат предложени на респондента по време на въвеждането.",
     itemSize: "Настройката само преоразмерява входните полета и не влияе на ширината на полето за въпроси.",
     itemTitleWidth: "Задава еднаква ширина за всички етикети на елементи в пиксели",
+    inputTextAlignment: "Изберете как да подравните входната стойност в полето. Настройката по подразбиране \"Автоматично\" подравнява входната стойност надясно, ако е приложено валутно или цифрово маскиране, и наляво, ако не.",
     altText: "Служи като заместител, когато изображението не може да бъде показано на устройството на потребителя и за целите на достъпността.",
     rateColorMode: "Определя цвета на избрания емотикон, когато типът на иконата за оценка е зададен на \"Усмивки\". Изберете между: \"По подразбиране\" - избраният емотикон се появява в цвета на проучването по подразбиране; \"Скала\" - избраният емотикон наследява цвят от рейтинговата скала.",
     expression: {
@@ -1485,7 +1495,8 @@ export var bgStrings = {
     panellayoutcolumn: {
       effectiveWidth: "Приема стойности %.",
       questionTitleWidth: "Приема стойности px."
-    }
+    },
+    progressBarInheritWidthFrom: "Опцията \"Същото като контейнер\" автоматично регулира ширината на областта на лентата за напредъка, за да се побере в HTML елемента, в който е поставена анкетата."
   },
   // Properties
   p: {
@@ -1550,6 +1561,7 @@ export var bgStrings = {
     dataList: "Списък с данни",
     itemSize: "Размер на елемента",
     itemTitleWidth: "Ширина на етикета на елемента (в пиксели)",
+    inputTextAlignment: "Подравняване на входните стойности",
     elements: "Елементи",
     content: "Съдържание",
     navigationButtonsVisibility: "Видимост на бутоните за навигация",
@@ -1589,7 +1601,8 @@ export var bgStrings = {
     scaleColorMode: "Режим на мащабиране на цветовете",
     rateColorMode: "Режим на оценяване на цветовете",
     copyDisplayValue: "Копиране на показваната стойност",
-    effectiveColSpan: "Обхват на колоната"
+    effectiveColSpan: "Обхват на колоната",
+    progressBarInheritWidthFrom: "Ширина на областта на лентата за напредък"
   },
   theme: {
     advancedMode: "Разширен режим",
@@ -2287,9 +2300,19 @@ editorLocalization.locales["bg"] = bgStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Приема стойности %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Приема стойности px."
 // p.effectiveColSpan: "Column span" => "Обхват на колоната"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "Същото като проучването"
+// progressBarInheritWidthFrom.container: "Same as container" => "Същото като контейнера"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Показва визуализации на миниатюри за качени файлове, когато е възможно. Премахнете отметката, ако вместо това искате да показвате икони на файлове."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "Опцията \"Същото като контейнер\" автоматично регулира ширината на областта на лентата за напредъка, за да се побере в HTML елемента, в който е поставена анкетата."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "Ширина на областта на лентата за напредък"
 // maskType.none: "None" => "Никой"
 // maskType.pattern: "Pattern" => "Шарка"
 // maskType.numeric: "Numeric" => "Цифров"
 // maskType.datetime: "Date and Time" => "Дата и час"
 // maskType.currency: "Currency" => "Валута"
-// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Показва визуализации на миниатюри за качени файлове, когато е възможно. Премахнете отметката, ако вместо това искате да показвате икони на файлове."
+
+// inputTextAlignment.auto: "Auto" => "Авто"
+// inputTextAlignment.left: "Left" => "Ляво"
+// inputTextAlignment.right: "Right" => "Дясно"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Изберете как да подравните входната стойност в полето. Настройката по подразбиране \"Автоматично\" подравнява входната стойност надясно, ако е приложено валутно или цифрово маскиране, и наляво, ако не."
+// p.inputTextAlignment: "Input value alignment" => "Подравняване на входните стойности"

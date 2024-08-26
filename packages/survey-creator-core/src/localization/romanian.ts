@@ -995,6 +995,11 @@ export const roStrings = {
       datetime: "Data și ora",
       currency: "Valută"
     },
+    inputTextAlignment: {
+      auto: "Automobil",
+      left: "Stânga",
+      right: "Dreapta"
+    },
     all: "Toate",
     page: "Pagină",
     survey: "Chestionar",
@@ -1153,6 +1158,10 @@ export const roStrings = {
     isPanelless: {
       "false": "Implicit",
       "true": "Fără panouri"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "La fel ca sondajul",
+      container: "La fel ca containerul"
     }
   },
   // Operators
@@ -1435,6 +1444,7 @@ export const roStrings = {
     dataList: "Introduceți o listă de opțiuni care vor fi sugerate respondentului în timpul introducerii.",
     itemSize: "Setarea redimensionează doar câmpurile de intrare și nu afectează lățimea casetei întrebării.",
     itemTitleWidth: "Setează o lățime consistentă pentru toate etichetele elementelor în pixeli",
+    inputTextAlignment: "Selectați modul de aliniere a valorii de intrare în câmp. Setarea implicită \"Auto\" aliniază valoarea de intrare la dreapta dacă se aplică mascare monedară sau numerică și la stânga dacă nu.",
     altText: "Servește ca un substitut atunci când imaginea nu poate fi afișată pe dispozitivul utilizatorului și pentru scopuri de accesibilitate.",
     rateColorMode: "Definește culoarea emoji-ului selectat când tipul pictogramei de evaluare este setat la „Smileys”. Alegeți dintre: „Implicit” - emoji-ul selectat apare în culoarea implicită a chestionarului; „Scală” - emoji-ul selectat moștenește culoarea de la scala de evaluare.",
     expression: {
@@ -1485,7 +1495,8 @@ export const roStrings = {
     panellayoutcolumn: {
       effectiveWidth: "Acceptă valori în %.",
       questionTitleWidth: "Acceptă valori în px."
-    }
+    },
+    progressBarInheritWidthFrom: "Opțiunea \"La fel ca containerul\" ajustează automat lățimea zonei barei de progres pentru a se potrivi cu elementul HTML în care este plasat sondajul."
   },
   // Properties
   p: {
@@ -1550,6 +1561,7 @@ export const roStrings = {
     dataList: "Elemente pentru sugestii automate",
     itemSize: "Lățimea câmpului de intrare (în caractere)",
     itemTitleWidth: "Lățimea etichetei elementului (în px)",
+    inputTextAlignment: "Alinierea valorilor de intrare",
     elements: "Elemente",
     content: "Conținut",
     navigationButtonsVisibility: "Arată/ascunde butoanele de navigare",
@@ -1589,7 +1601,8 @@ export const roStrings = {
     scaleColorMode: "Modul de culoare al pictogramei de evaluare",
     rateColorMode: "Schema de culori a pictogramelor Smileys",
     copyDisplayValue: "Copiază valoarea afișată",
-    effectiveColSpan: "Span de coloană eficient"
+    effectiveColSpan: "Span de coloană eficient",
+    progressBarInheritWidthFrom: "Lățimea zonei barei de progres"
   },
   theme: {
     advancedMode: "Mod avansat",
@@ -1657,9 +1670,19 @@ editorLocalization.locales["ro"] = roStrings;
 // Remove those strings that you have corrected manually
 // pe.validateVisitedEmptyFields: "Validate empty fields on lost focus" => "Validarea câmpurilor goale pentru focalizarea pierdută"
 // pehelp.validateVisitedEmptyFields: "Enable this option to trigger validation when a user focuses on an empty input field and then leaves it without making any changes." => "Activați această opțiune pentru a declanșa validarea atunci când un utilizator se concentrează pe un câmp de introducere gol și apoi îl lasă fără a efectua modificări."
+// progressBarInheritWidthFrom.survey: "Same as survey" => "La fel ca sondajul"
+// progressBarInheritWidthFrom.container: "Same as container" => "La fel ca containerul"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Afișează previzualizări în miniatură pentru fișierele încărcate atunci când este posibil. Deselectați dacă doriți să afișați pictogramele fișierelor."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "Opțiunea \"La fel ca containerul\" ajustează automat lățimea zonei barei de progres pentru a se potrivi cu elementul HTML în care este plasat sondajul."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "Lățimea zonei barei de progres"
 // maskType.none: "None" => "Niciunul"
 // maskType.pattern: "Pattern" => "Model"
 // maskType.numeric: "Numeric" => "Numerică"
 // maskType.datetime: "Date and Time" => "Data și ora"
 // maskType.currency: "Currency" => "Valută"
-// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Afișează previzualizări în miniatură pentru fișierele încărcate atunci când este posibil. Deselectați dacă doriți să afișați pictogramele fișierelor."
+
+// inputTextAlignment.auto: "Auto" => "Automobil"
+// inputTextAlignment.left: "Left" => "Stânga"
+// inputTextAlignment.right: "Right" => "Dreapta"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Selectați modul de aliniere a valorii de intrare în câmp. Setarea implicită \"Auto\" aliniază valoarea de intrare la dreapta dacă se aplică mascare monedară sau numerică și la stânga dacă nu."
+// p.inputTextAlignment: "Input value alignment" => "Alinierea valorilor de intrare"

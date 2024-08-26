@@ -995,6 +995,11 @@ var traditionalChineseTranslation = {
       datetime: "日期和時間",
       currency: "貨幣"
     },
+    inputTextAlignment: {
+      auto: "自動",
+      left: "左",
+      right: "右"
+    },
     all: "都",
     page: "頁",
     survey: "調查",
@@ -1153,6 +1158,10 @@ var traditionalChineseTranslation = {
     isPanelless: {
       "false": "違約",
       "true": "不帶面板"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "與調查相同",
+      container: "與容器相同"
     }
   },
   // Operators
@@ -1435,6 +1444,7 @@ var traditionalChineseTranslation = {
     dataList: "輸入將在輸入期間向受訪者建議的選項清單。",
     itemSize: "該設置僅調整輸入欄位的大小，不會影響問題框的寬度。",
     itemTitleWidth: "為所有項目標籤設定一致的寬度（以像素為單位）",
+    inputTextAlignment: "選擇如何在欄位中對齊輸入值。默認設置 「Auto」 如果應用了貨幣或數位掩碼，則將輸入值向右對齊，如果未應用，則向左對齊。",
     altText: "當圖像無法在使用者設備上顯示時，出於輔助功能的目的，可作為替代。",
     rateColorMode: "定義當評級圖示類型設置為「笑臉」時所選表情符號的顏色。選擇：「預設」 - 選取表情符號以預設調查顏色顯示;“比例” - 所選的表情符號繼承了評分量表的顏色。",
     expression: {
@@ -1485,7 +1495,8 @@ var traditionalChineseTranslation = {
     panellayoutcolumn: {
       effectiveWidth: "接受值 。",
       questionTitleWidth: "接受值 px。"
-    }
+    },
+    progressBarInheritWidthFrom: "“與容器相同”選項會自動調整進度條區域的寬度，以適應放置調查的 HTML 元素。"
   },
   // Properties
   p: {
@@ -1550,6 +1561,7 @@ var traditionalChineseTranslation = {
     dataList: "數據清單",
     itemSize: "專案大小",
     itemTitleWidth: "項目標籤寬度（以 px 為單位）",
+    inputTextAlignment: "輸入值對齊",
     elements: "元素",
     content: "內容",
     navigationButtonsVisibility: "導航按鈕可見性",
@@ -1589,7 +1601,8 @@ var traditionalChineseTranslation = {
     scaleColorMode: "縮放顏色模式",
     rateColorMode: "評價顏色模式",
     copyDisplayValue: "複製顯示值",
-    effectiveColSpan: "柱跨度"
+    effectiveColSpan: "柱跨度",
+    progressBarInheritWidthFrom: "進度條區域寬度"
   },
   theme: {
     advancedMode: "高級模式",
@@ -2996,9 +3009,19 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "接受值 。"
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "接受值 px。"
 // p.effectiveColSpan: "Column span" => "柱跨度"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "與調查相同"
+// progressBarInheritWidthFrom.container: "Same as container" => "與容器相同"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "儘可能顯示已上傳檔的縮圖預覽。取消選擇是否要顯示檔圖示。"
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "“與容器相同”選項會自動調整進度條區域的寬度，以適應放置調查的 HTML 元素。"
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "進度條區域寬度"
 // maskType.none: "None" => "沒有"
 // maskType.pattern: "Pattern" => "模式"
 // maskType.numeric: "Numeric" => "數值的"
 // maskType.datetime: "Date and Time" => "日期和時間"
 // maskType.currency: "Currency" => "貨幣"
-// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "儘可能顯示已上傳檔的縮圖預覽。取消選擇是否要顯示檔圖示。"
+
+// inputTextAlignment.auto: "Auto" => "自動"
+// inputTextAlignment.left: "Left" => "左"
+// inputTextAlignment.right: "Right" => "右"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "選擇如何在欄位中對齊輸入值。默認設置 「Auto」 如果應用了貨幣或數位掩碼，則將輸入值向右對齊，如果未應用，則向左對齊。"
+// p.inputTextAlignment: "Input value alignment" => "輸入值對齊"
