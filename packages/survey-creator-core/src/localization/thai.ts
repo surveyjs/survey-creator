@@ -995,6 +995,11 @@ export const thStrings = {
       datetime: "วันที่และเวลา",
       currency: "เงินตรา"
     },
+    inputTextAlignment: {
+      auto: "รถ",
+      left: "ซ้าย",
+      right: "ขวา"
+    },
     all: "ทั้งหมด",
     page: "หน้า",
     survey: "แบบสำรวจ",
@@ -1439,6 +1444,7 @@ export const thStrings = {
     dataList: "ป้อนรายการตัวเลือกที่จะเสนอแนะให้ผู้ตอบระหว่างการป้อนข้อมูล",
     itemSize: "การตั้งค่านี้เพียงแค่เปลี่ยนขนาดของช่องป้อนข้อมูลและไม่ส่งผลต่อความกว้างของกล่องคำถาม",
     itemTitleWidth: "ตั้งความกว้างที่สม่ำเสมอสำหรับป้ายชื่อรายการทั้งหมดเป็นพิกเซล",
+    inputTextAlignment: "เลือกวิธีจัดตําแหน่งค่าอินพุตภายในฟิลด์ การตั้งค่าเริ่มต้น \"อัตโนมัติ\" จะจัดตําแหน่งค่าอินพุตไปทางขวาหากมีการใช้การปิดบังสกุลเงินหรือตัวเลข และไปทางซ้ายหากไม่ใช้",
     altText: "ใช้เป็นข้อความสำรองเมื่อภาพไม่สามารถแสดงบนอุปกรณ์ของผู้ใช้และเพื่อวัตถุประสงค์ในการเข้าถึง",
     rateColorMode: "กำหนดสีของอีโมจิที่เลือกเมื่อประเภทไอคอนการให้คะแนนตั้งเป็น \"สไมลี่\" เลือกระหว่าง: \"ค่าเริ่มต้น\" - อีโมจิที่เลือกจะแสดงในสีแบบสำรวจเริ่มต้น; \"มาตราส่วน\" - อีโมจิที่เลือกจะสืบทอดสีจากมาตราส่วนการให้คะแนน",
     expression: {
@@ -1555,6 +1561,7 @@ export const thStrings = {
     dataList: "รายการสำหรับการเสนอแนะ",
     itemSize: "ความกว้างของช่องป้อนข้อมูล (ในอักขระ)",
     itemTitleWidth: "ความกว้างป้ายชื่อรายการ (ใน px)",
+    inputTextAlignment: "การจัดตําแหน่งค่าอินพุต",
     elements: "องค์ประกอบ",
     content: "เนื้อหา",
     navigationButtonsVisibility: "แสดง/ซ่อนปุ่มนำทาง",
@@ -1673,3 +1680,9 @@ editorLocalization.locales["th"] = thStrings;
 // maskType.numeric: "Numeric" => "ตัวเลข"
 // maskType.datetime: "Date and Time" => "วันที่และเวลา"
 // maskType.currency: "Currency" => "เงินตรา"
+
+// inputTextAlignment.auto: "Auto" => "รถ"
+// inputTextAlignment.left: "Left" => "ซ้าย"
+// inputTextAlignment.right: "Right" => "ขวา"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "เลือกวิธีจัดตําแหน่งค่าอินพุตภายในฟิลด์ การตั้งค่าเริ่มต้น \"อัตโนมัติ\" จะจัดตําแหน่งค่าอินพุตไปทางขวาหากมีการใช้การปิดบังสกุลเงินหรือตัวเลข และไปทางซ้ายหากไม่ใช้"
+// p.inputTextAlignment: "Input value alignment" => "การจัดตําแหน่งค่าอินพุต"

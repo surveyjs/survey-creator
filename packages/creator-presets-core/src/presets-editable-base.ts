@@ -52,7 +52,7 @@ export class CreatorPresetEditableBase {
     }
     return res;
   }
-  protected getBoolVisibleIf(name: string): string { return "{" + name + "}=true"; }
+  protected getBoolVisibleIf(name: string, isTrue: boolean = true): string { return "{" + name + "}=" + (isTrue ? "true" : "false"); }
   protected getTextVisibleIf(name: string, val: string): string { return "{" + name + "}='" + val +"'"; }
   protected getNotEmptyVisibleIf(name: string): string { return "{" + name + "} notempty"; }
   protected createMainPageCore(): any { return undefined; }

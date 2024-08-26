@@ -3674,7 +3674,7 @@ export class SurveyCreatorModel extends Base
       needSeparator: needSeparator
     });
     action.action = () => {
-      onSelectQuestionType(item.typeName);
+      onSelectQuestionType(item.typeName, item.json);
     };
 
     if (!!item.items && item.items.length > 0 && this.toolbox.showSubitems) {

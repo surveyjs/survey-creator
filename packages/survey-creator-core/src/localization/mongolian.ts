@@ -995,6 +995,11 @@ export var mnStrings = {
       datetime: "Огноо, цаг",
       currency: "Валютын ханш"
     },
+    inputTextAlignment: {
+      auto: "Авто",
+      left: "Зүүн",
+      right: "Баруун талд"
+    },
     all: "Бүх",
     page: "Хуудас",
     survey: "Санал асуулга",
@@ -1439,6 +1444,7 @@ export var mnStrings = {
     dataList: "Санал болгох сонголтуудын жагсаалтыг оруулах үед хариулагчид санал болгох болно.",
     itemSize: "Тохиргоо нь зөвхөн оролтын талбаруудыг дахин тохируулдаг бөгөөд асуултын хайрцагны өргөнд нөлөөлдөггүй.",
     itemTitleWidth: "Пикселд бүх зүйлийн шошгоны тогтмол өргөнийг тогтоох",
+    inputTextAlignment: "Талбар доторх оролтын үнэ цэнийг хэрхэн уялдуулахыг сонго. \"Авто\" гэсэн дефолт тохиргоо нь валют эсвэл тоон маск хэрэглэх бол оролтын үнэ цэнийг баруун тийш, хэрэв үгүй бол зүүн тийш нь уялдуулна.",
     altText: "Хэрэглэгчийн төхөөрөмж дээр болон хүртээмжийн зорилгоор дүрсийг харуулах боломжгүй үед орлуулагчаар үйлчилнэ.",
     rateColorMode: "Rating icon төрлийн \"Smileys\" гэж тогтооход сонгосон эможигийн өнгийг тодорхойлно. Аль нэгийг нь сонгоно уу: \"Default\" - сонгосон эможи нь стандарт судалгааны өнгөөр гарч ирдэг; \"Scale\" - сонгосон эможи нь үнэлгээний хэмжүүрээс өнгийг өвлөн авдаг.",
     expression: {
@@ -1555,6 +1561,7 @@ export var mnStrings = {
     dataList: "Өгөгдлийн жагсаалт",
     itemSize: "Элементийн хэмжээ",
     itemTitleWidth: "Барааны шошгоны өргөн (px-д)",
+    inputTextAlignment: "Оролтын үнэ цэнийн зохицуулалт",
     elements: "Элементүүд",
     content: "Контент",
     navigationButtonsVisibility: "Чиглүүлэх товчны харагдац",
@@ -2396,3 +2403,9 @@ editorLocalization.locales["mn"] = mnStrings;
 // maskType.numeric: "Numeric" => "Тоо нь"
 // maskType.datetime: "Date and Time" => "Огноо, цаг"
 // maskType.currency: "Currency" => "Валютын ханш"
+
+// inputTextAlignment.auto: "Auto" => "Авто"
+// inputTextAlignment.left: "Left" => "Зүүн"
+// inputTextAlignment.right: "Right" => "Баруун талд"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Талбар доторх оролтын үнэ цэнийг хэрхэн уялдуулахыг сонго. \"Авто\" гэсэн дефолт тохиргоо нь валют эсвэл тоон маск хэрэглэх бол оролтын үнэ цэнийг баруун тийш, хэрэв үгүй бол зүүн тийш нь уялдуулна."
+// p.inputTextAlignment: "Input value alignment" => "Оролтын үнэ цэнийн зохицуулалт"

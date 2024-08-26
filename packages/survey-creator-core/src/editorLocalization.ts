@@ -86,17 +86,17 @@ export class EditorLocalization {
     }
     return obj;
   }
-  public getLocaleName(loc: string, defaultLocale: string = null): string {
-    let localeNames = surveyLocalization["localeNames"];
+  public getLocaleName(loc: string, defaultLocale: string = null, inEnglish?: boolean): string {
     if (!defaultLocale) {
       defaultLocale = surveyLocalization.defaultLocale;
     }
-    let res = !!loc
-      ? capitalize(localeNames[loc])
-      : editorLocalization
-        .getString("ed.defaultLocale")
-        ["format"](capitalize(localeNames[defaultLocale]));
-    return !!res ? res : loc;
+    let name = surveyLocalization.getLocaleName(loc || defaultLocale, inEnglish);
+    if(name === loc) return name;
+    name = capitalize(name);
+    if(!loc) {
+      name = editorLocalization.getString("ed.defaultLocale")["format"](name);
+    }
+    return name || loc;
   }
   public getPropertyName(strName: string, defaultName: string = null): string {
     var obj = this.getProperty(strName, defaultName);
