@@ -995,6 +995,11 @@ export var koreanStrings = {
       datetime: "날짜 및 시간",
       currency: "통화"
     },
+    inputTextAlignment: {
+      auto: "자동",
+      left: "왼쪽",
+      right: "오른쪽"
+    },
     all: "모두",
     page: "페이지",
     survey: "설문지",
@@ -1439,6 +1444,7 @@ export var koreanStrings = {
     dataList: "입력 시 응답자에게 제안될 선택 사항 목록을 입력합니다.",
     itemSize: "이 설정은 입력 필드의 크기만 조정하며 질문 상자의 너비에는 영향을 주지 않습니다.",
     itemTitleWidth: "모든 항목 레이블에 대해 일관된 너비를 픽셀 단위로 설정합니다.",
+    inputTextAlignment: "필드 내에서 입력 값을 정렬하는 방법을 선택합니다. 기본 설정인 \"Auto\"는 통화 또는 숫자 마스킹이 적용된 경우 입력 값을 오른쪽에 정렬하고 그렇지 않은 경우 왼쪽에 정렬합니다.",
     altText: "사용자의 장치에 이미지를 표시할 수 없는 경우 접근성을 위해 대신 사용할 수 있습니다.",
     rateColorMode: "등급 아이콘 유형이 \"스마일리\"로 설정된 경우 선택한 이모티콘의 색상을 정의합니다. 다음 중 하나를 선택합니다. \"기본값\" - 선택한 이모티콘이 기본 설문조사 색상으로 표시됩니다. \"척도\"-선택한 이모티콘은 등급 척도에서 색상을 상속합니다.",
     expression: {
@@ -1555,6 +1561,7 @@ export var koreanStrings = {
     dataList: "데이터 목록",
     itemSize: "항목 크기",
     itemTitleWidth: "항목 레이블 너비(px)",
+    inputTextAlignment: "입력 값 정렬",
     elements: "요소",
     content: "콘텐츠",
     navigationButtonsVisibility: "탐색 버튼 선명도",
@@ -2944,3 +2951,9 @@ editorLocalization.locales["ko"] = koreanStrings;
 // maskType.numeric: "Numeric" => "숫자"
 // maskType.datetime: "Date and Time" => "날짜 및 시간"
 // maskType.currency: "Currency" => "통화"
+
+// inputTextAlignment.auto: "Auto" => "자동"
+// inputTextAlignment.left: "Left" => "왼쪽"
+// inputTextAlignment.right: "Right" => "오른쪽"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "필드 내에서 입력 값을 정렬하는 방법을 선택합니다. 기본 설정인 \"Auto\"는 통화 또는 숫자 마스킹이 적용된 경우 입력 값을 오른쪽에 정렬하고 그렇지 않은 경우 왼쪽에 정렬합니다."
+// p.inputTextAlignment: "Input value alignment" => "입력 값 정렬"

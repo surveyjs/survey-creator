@@ -995,6 +995,11 @@ export var hrStrings = {
       datetime: "Datum i vrijeme",
       currency: "Valuta"
     },
+    inputTextAlignment: {
+      auto: "Automobil",
+      left: "Lijevo",
+      right: "Desno"
+    },
     all: "all",
     page: "page",
     survey: "survey",
@@ -1439,6 +1444,7 @@ export var hrStrings = {
     dataList: "Unesite popis izbora koji će se predložiti ispitaniku tijekom unosa.",
     itemSize: "Postavka samo mijenja veličinu ulaznih polja i ne utječe na širinu okvira pitanja.",
     itemTitleWidth: "Postavlja dosljednu širinu za sve natpise stavki u pikselima",
+    inputTextAlignment: "Odaberite način poravnanja ulazne vrijednosti unutar polja. Zadana postavka \"Automatski\" poravnava ulaznu vrijednost udesno ako se primjenjuje valutno ili numeričko maskiranje i ulijevo ako nije.",
     altText: "Služi kao zamjena kada se slika ne može prikazati na korisnikovom uređaju i u svrhu pristupačnosti.",
     rateColorMode: "Definira boju odabranog emojija kada je vrsta ikone Ocjena postavljena na \"Smajlići\". Odaberite između: \"Zadano\" - odabrani emoji pojavljuje se u zadanoj boji ankete; \"Skala\" - odabrani emoji nasljeđuje boju od ljestvice ocjenjivanja.",
     expression: {
@@ -1555,6 +1561,7 @@ export var hrStrings = {
     dataList: "Popis podataka",
     itemSize: "itemSize",
     itemTitleWidth: "Širina natpisa stavke (u px)",
+    inputTextAlignment: "Usklađivanje ulaznih vrijednosti",
     elements: "Elemenata",
     content: "Sadržaj",
     navigationButtonsVisibility: "navigationButtonsVisibility",
@@ -2734,3 +2741,9 @@ editorLocalization.locales["hr"] = hrStrings;
 // maskType.numeric: "Numeric" => "Brojčani"
 // maskType.datetime: "Date and Time" => "Datum i vrijeme"
 // maskType.currency: "Currency" => "Valuta"
+
+// inputTextAlignment.auto: "Auto" => "Automobil"
+// inputTextAlignment.left: "Left" => "Lijevo"
+// inputTextAlignment.right: "Right" => "Desno"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Odaberite način poravnanja ulazne vrijednosti unutar polja. Zadana postavka \"Automatski\" poravnava ulaznu vrijednost udesno ako se primjenjuje valutno ili numeričko maskiranje i ulijevo ako nije."
+// p.inputTextAlignment: "Input value alignment" => "Usklađivanje ulaznih vrijednosti"
