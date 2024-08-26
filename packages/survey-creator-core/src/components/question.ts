@@ -366,21 +366,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   public getConvertToTypesActions(parentAction?: Action): Array<IAction> {
     const availableItems = this.getConvertToTypes();
     const defaultJsons = this.buildDefaultJsonMap(availableItems);
-    availableItems.forEach((toolboxItem: QuestionToolboxItem) => {
-      const type = toolboxItem.json?.type || toolboxItem.id;
-      if (toolboxItem.json) {
-        if (!defaultJsons[type]) defaultJsons[type] = [];
-        defaultJsons[type].push(toolboxItem.json);
-      }
-      (toolboxItem.items || []).forEach((toolboxSubitem: QuestionToolboxItem) => {
-        if (toolboxSubitem.json) {
-          const stype = toolboxSubitem.json?.type || toolboxSubitem.id;
-          if (!defaultJsons[stype]) defaultJsons[stype] = [];
-          defaultJsons[stype].push(toolboxSubitem.json);
-        }
-      });
-    });
-
     const res = [];
     let lastItem = null;
     availableItems.forEach((item: QuestionToolboxItem) => {
