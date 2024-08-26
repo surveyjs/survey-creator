@@ -641,6 +641,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   paneldynamic: {
     properties: [
       "renderMode",
+      "displayMode",
       "templateTabTitle",
       "tabTitlePlaceholder",
       "tabAlign",
@@ -661,6 +662,8 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "panelNextText",
       "showQuestionNumbers",
       "showRangeInProgress",
+      "showProgressBar",
+      "progressBarLocation",
       { name: "defaultPanelValue", tab: "data" },
       { name: "defaultValueFromLastPanel", tab: "data" },
       { name: "templateTitleLocation", tab: "questionSettings" },
