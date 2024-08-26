@@ -481,6 +481,7 @@ export class SurveyQuestionEditorDefinition {
     paneldynamic: {
       properties: [
         "renderMode",
+        "displayMode",
         "templateTabTitle",
         "tabTitlePlaceholder",
         "tabAlign",
@@ -501,6 +502,8 @@ export class SurveyQuestionEditorDefinition {
         "panelNextText",
         "showQuestionNumbers",
         "showRangeInProgress",
+        "showProgressBar",
+        "progressBarLocation",
         { name: "defaultPanelValue", tab: "data" },
         { name: "defaultValueFromLastPanel", tab: "data" },
         { name: "templateTitleLocation", tab: "layout" },

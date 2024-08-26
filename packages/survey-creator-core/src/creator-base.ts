@@ -2188,7 +2188,8 @@ export class SurveyCreatorModel extends Base
       survey: survey,
       reason: reason,
       area: area,
-      model: !!model ? model : this.currentPlugin?.model
+      model: !!model ? model : this.currentPlugin?.model,
+      obj: area === "property-grid" && model ? model.obj : undefined
     });
     if (reason === "designer") {
       this.onDesignerSurveyCreated.fire(this, { survey: survey });
@@ -3673,7 +3674,7 @@ export class SurveyCreatorModel extends Base
       needSeparator: needSeparator
     });
     action.action = () => {
-      onSelectQuestionType(item.typeName);
+      onSelectQuestionType(item.typeName, item.json);
     };
 
     if (!!item.items && item.items.length > 0 && this.toolbox.showSubitems) {
