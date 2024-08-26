@@ -1888,8 +1888,9 @@ export class SurveyCreatorModel extends Base
     this.dragDropSurveyElements.onDragEnd.add((sender, options) => {
       this.stopUndoRedoTransaction();
       const editTitle = isDraggedFromToolbox && this.startEditTitleOnQuestionAdded;
-      this.selectElement(options.draggedElement, undefined, false, editTitle);
       isDraggedFromToolbox = false;
+      if (!options.draggedElement) return;
+      this.selectElement(options.draggedElement, undefined, false, editTitle);
       this.onDragEnd.fire(this, options);
       if (!options.fromElement) {
         this.setModified({ type: "ADDED_FROM_TOOLBOX", question: options.draggedElement });
@@ -2187,7 +2188,8 @@ export class SurveyCreatorModel extends Base
       survey: survey,
       reason: reason,
       area: area,
-      model: !!model ? model : this.currentPlugin?.model
+      model: !!model ? model : this.currentPlugin?.model,
+      obj: area === "property-grid" && model ? model.obj : undefined
     });
     if (reason === "designer") {
       this.onDesignerSurveyCreated.fire(this, { survey: survey });
@@ -3672,7 +3674,7 @@ export class SurveyCreatorModel extends Base
       needSeparator: needSeparator
     });
     action.action = () => {
-      onSelectQuestionType(item.typeName);
+      onSelectQuestionType(item.typeName, item.json);
     };
 
     if (!!item.items && item.items.length > 0 && this.toolbox.showSubitems) {
@@ -3813,6 +3815,8 @@ export class SurveyCreatorModel extends Base
    * - `"never"` - Hides the expand/collapse buttons.
    */
   @property({ defaultValue: "never" }) expandCollapseButtonVisibility?: "never" | "onhover" | "always";
+
+  expandOnDragTimeOut: number = 1000;
 
   selectFromStringEditor: boolean;
 
