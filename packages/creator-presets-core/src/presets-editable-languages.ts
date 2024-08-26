@@ -20,26 +20,20 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
               choices: this.getCreatorLocales()
             },
             {
-              type: "panel", name: "languages_survey_panel",
+              type: "boolean",
+              name: this.surveyUseEnglishNames,
+              title: "Translate Survey language names to Engish",
+              titleLocation: "hidden",
+              renderAs: "checkbox"
+            },
+            {
+              type: "checkbox",
+              name: this.surveyLocalesName,
               title: "Survey languages",
-              elements: [
-                {
-                  type: "boolean",
-                  name: this.surveyShowInEnglishName,
-                  titleLocation: "hidden",
-                  labelFalse: "Display languages in their native form",
-                  labelTrue: "Display languages in English",
-                },
-                {
-                  type: "checkbox",
-                  name: this.surveyLocalesName,
-                  titleLocation: "hidden",
-                  minSelectedChoices: 1,
-                  colCount: 3,
-                  showSelectAllItem: true,
-                  choices: this.getSurveyLocales()
-                }
-              ]
+              minSelectedChoices: 1,
+              colCount: 3,
+              showSelectAllItem: true,
+              choices: this.getSurveyLocales()
             }
           ]
         }
@@ -47,15 +41,15 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
   }
   protected getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel): any {
     const creatorLocale = model.getValue(this.creatorLocaleName);
-    const showInEnglish = model.getValue(this.surveyShowInEnglishName) === true;
+    const useEnglishNames = model.getValue(this.surveyUseEnglishNames) === true;
     const question = <QuestionCheckboxModel>model.getQuestionByName(this.surveyLocalesName);
-    if(!creatorLocale && question.isAllSelected && !showInEnglish) return undefined;
+    if(!creatorLocale && question.isAllSelected && !useEnglishNames) return undefined;
     const res: any = {};
     if(creatorLocale) {
       res.creator = creatorLocale;
     }
-    if(showInEnglish) {
-      res.showNamesInEnglish = true;
+    if(useEnglishNames) {
+      res.useEnglishNames = true;
     }
     if(!question.isAllSelected && Array.isArray(question.value)) {
       res.surveyLocales = [];
@@ -66,7 +60,7 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
   protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
     json = json || {};
     model.setValue(this.creatorLocaleName, json.creator);
-    model.setValue(this.surveyShowInEnglishName, json.showInEnglish === true);
+    model.setValue(this.surveyUseEnglishNames, json.showInEnglish === true);
     this.updateLocaleNames(model);
     const question = <QuestionCheckboxModel>model.getQuestionByName(this.surveyLocalesName);
     const locales = json.surveyLocales;
@@ -77,14 +71,14 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
     }
   }
   protected updateOnValueChangedCore(model: SurveyModel, name: string): void {
-    if(name === this.surveyShowInEnglishName) {
+    if(name === this.surveyUseEnglishNames) {
       this.updateLocaleNames(model);
     }
   }
   private get creatorLocaleName() : string { return this.path + "_creator"; }
   private get surveyLocalesName(): string { return this.path + "_surveyLocales"; }
-  private get surveyShowInEnglishName(): string { return this.path + "_surveyShowInEnglish"; }
-  private getIsShowInEnglishSelected(model: SurveyModel): boolean { return model.getValue(this.surveyShowInEnglishName) === true; }
+  private get surveyUseEnglishNames(): string { return this.path + "_surveyUseEnglishNames"; }
+  private getIsShowInEnglishSelected(model: SurveyModel): boolean { return model.getValue(this.surveyUseEnglishNames) === true; }
   private getCreatorLocales(): Array<ItemValue> {
     return this.getLocaleItemValues(editorLocalization.getLocales(), false);
   }

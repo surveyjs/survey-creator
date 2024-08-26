@@ -12,7 +12,7 @@ export interface ICreatorPresetData {
   languages?: {
     creator?: string,
     surveyLocales?: Array<string>,
-    showNamesInEnglish?: boolean,
+    useEnglishNames?: boolean,
   };
   propertyGrid?: {
     definition?: ISurveyPropertyGridDefinition,

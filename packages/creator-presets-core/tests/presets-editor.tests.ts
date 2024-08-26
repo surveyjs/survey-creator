@@ -815,7 +815,7 @@ test("Preset edit model, Languages tab - show in English", () => {
   const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
   const surveyLocalesQuestion = <QuestionCheckboxModel>survey.getQuestionByName("languages_surveyLocales");
-  const showInEnglishQuestion = <QuestionBooleanModel>survey.getQuestionByName("languages_surveyShowInEnglish");
+  const showInEnglishQuestion = <QuestionBooleanModel>survey.getQuestionByName("languages_surveyUseEnglishNames");
 
   expect(showInEnglishQuestion.value).toBe(false);
   const item = ItemValue.getItemByValue(surveyLocalesQuestion.choices, "de");
@@ -823,7 +823,7 @@ test("Preset edit model, Languages tab - show in English", () => {
   showInEnglishQuestion.value = true;
   expect(item.text).toBe("DE-English");
   expect(editor.applyFromSurveyModel()).toBeTruthy();
-  expect(editor.json.languages?.showNamesInEnglish).toBeTruthy();
+  expect(editor.json.languages?.useEnglishNames).toBeTruthy();
   expect(surveyLocalization.showNamesInEnglish).toBeTruthy();
 
   surveyLocalization.showNamesInEnglish = false;

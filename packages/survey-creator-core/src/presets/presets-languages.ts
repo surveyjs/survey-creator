@@ -9,9 +9,9 @@ export class CreatorPresetLanguages extends CreatorPresetBase {
     super.applyCore(creator);
     const locale = this.json?.creator || "";
     const supportedLocales = this.json?.surveyLocales || [];
-    const showNamesInEnglish = this.json?.showNamesInEnglish;
+    const useEnglishNames = this.json?.useEnglishNames;
     creator.locale = locale;
     surveyLocalization.supportedLocales = supportedLocales;
-    surveyLocalization.showNamesInEnglish = showNamesInEnglish === true;
+    surveyLocalization.showNamesInEnglish = useEnglishNames === true;
   }
 }
