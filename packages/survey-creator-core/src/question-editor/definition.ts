@@ -509,6 +509,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "choicesMin", tab: "choices" },
       { name: "choicesMax", tab: "choices" },
       { name: "choicesStep", tab: "choices" },
+      { name: "allowClear", tab: "choices" },
       { name: "choicesVisibleIf", tab: "logic" },
       { name: "choicesEnableIf", tab: "logic" },
     ],
@@ -538,6 +539,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "choicesMin", tab: "choices" },
       { name: "choicesMax", tab: "choices" },
       { name: "choicesStep", tab: "choices" },
+      { name: "allowClear", tab: "choices" },
       { name: "choicesVisibleIf", tab: "logic" },
       { name: "choicesEnableIf", tab: "logic" },
     ],
@@ -639,6 +641,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   paneldynamic: {
     properties: [
       "renderMode",
+      "displayMode",
       "templateTabTitle",
       "tabTitlePlaceholder",
       "tabAlign",
@@ -659,6 +662,8 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "panelNextText",
       "showQuestionNumbers",
       "showRangeInProgress",
+      "showProgressBar",
+      "progressBarLocation",
       { name: "defaultPanelValue", tab: "data" },
       { name: "defaultValueFromLastPanel", tab: "data" },
       { name: "templateTitleLocation", tab: "questionSettings" },

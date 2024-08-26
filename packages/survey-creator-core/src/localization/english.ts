@@ -309,6 +309,9 @@ export var enStrings = {
       templateTitleLocation: "Question title alignment",
       templateErrorLocation: "Error message alignment",
       newPanelPosition: "New panel location",
+      showRangeInProgress: "Show the progress bar",
+      showProgressBar: "Show the progress bar",
+      progressBarLocation: "Progress bar alignment",
       keyName: "Prevent duplicate responses in the following question"
     },
     question: {
@@ -692,7 +695,6 @@ export var enStrings = {
     panelsState: "Inner panel collapse state",
     panelPrevText: "\"Previous Panel\" button text",
     panelNextText: "\"Next Panel\" button text",
-    showRangeInProgress: "Show the progress bar",
     panelRemoveButtonLocation: "\"Remove Panel\" button alignment",
     hideIfRowsEmpty: "Hide the question if it has no rows",
     hideColumnsIfEmpty: "Hide columns if there are no rows",
@@ -930,10 +932,11 @@ export var enStrings = {
     firstExpanded: "First panel is expanded",
     off: "Hide question numbers",
     list: "List",
+    carousel: "Carousel",
+    tab: "Tabs",
     progressTop: "Panel navigator + Progress bar at the top",
     progressBottom: "Panel navigator + Progress bar at the bottom",
     progressTopBottom: "Panel navigator + Progress bar at the top and bottom",
-    tab: "Tabs",
     horizontal: "Horizontal",
     vertical: "Vertical",
     top: "Top",
@@ -1115,6 +1118,11 @@ export var enStrings = {
       topbottom: "Top and bottom",
       aboveheader: "Above the header",
       belowheader: "Below the header"
+    },
+    progressBarLocation: {
+      "top": "Top",
+      "bottom": "Bottom",
+      "topBottom": "Top and bottom"
     },
     sum: "Sum",
     count: "Count",
