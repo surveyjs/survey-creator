@@ -49,6 +49,7 @@ export * from "../tabs/JsonEditorAce";
 export * from "../tabs/JsonEditorTextarea";
 export * from "../tabs/Logic";
 export * from "../tabs/Preview";
+export * from "../tabs/PropertyGridPlaceholder";
 export * from "../tabs/Theme";
 export * from "../tabs/translation/Translation";
 export * from "../tabs/SurveySimulator";

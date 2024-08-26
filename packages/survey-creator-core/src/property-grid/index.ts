@@ -850,7 +850,7 @@ export class PropertyGridModel {
     if (focus) {
       question.focus();
     } else {
-      if (this.isPagesAsCategory) {
+      if (this.showOneCategoryInPropertyGrid) {
         this.survey.currentPage = question.page;
       }
     }
@@ -985,10 +985,12 @@ export class PropertyGridModel {
   private onCreateSurvey(survey: SurveyModel): void {
     survey.questionErrorLocation = "bottom";
     survey.getCss().list = {};
-    survey.css = propertyGridCss;
+    const surveyCss = { ...propertyGridCss };
+    surveyCss.root += (this.showOneCategoryInPropertyGrid ? " spg-root--one-category" : "");
+    survey.css = surveyCss;
     if (!!this.obj) {
       const jsonGenerator = new PropertyJSONGenerator(this.obj, this.options, null, null, this.propertyGridDefinition);
-      if (this.isPagesAsCategory) {
+      if (this.showOneCategoryInPropertyGrid) {
         survey.css.page.root += " spg-panel__content";
         jsonGenerator.setupPages(survey);
       } else {
@@ -1050,9 +1052,8 @@ export class PropertyGridModel {
   public get survey() {
     return this.surveyValue;
   }
-  private get isPagesAsCategory(): boolean {
-    return this.options.showOneCategoryInPropertyGrid;
-  }
+  public showOneCategoryInPropertyGrid: boolean = false;
+
   public validate(): boolean {
     if (!this.survey) return;
     return !this.survey.hasErrors(true, true);

@@ -21,8 +21,9 @@ class TabControl extends SurveyElementBase<any, any> {
     return super.canRender();
   }
   renderElement() {
+    const className = "Tabs_22400_60650" + (this.props.model.sidePanel.visible ? "" : " svc-sidebar-tabs-collapsed");
     return (
-      <div className="Tabs_22400_60650">
+      <div className={className}>
         <div className="TopToolbar_22400_60651">
           <div className="CollapseButton_22400_60652">
             <TabButtonComponent model={this.props.model.expandCollapseAction} ></TabButtonComponent>
@@ -77,7 +78,7 @@ class TabButtonComponent extends SurveyElementBase<{ model: Action }, any> {
   protected renderElement(): JSX.Element | null {
     const className = new CssClassBuilder()
       .append("menu-toolbar-button")
-      .append("menu-toolbar-button--selected", !!this.props.model.pressed)
+      .append("menu-toolbar-button--selected", !!this.props.model.active)
       .toString();
     return (
       <div className="Layout_22408_73611">

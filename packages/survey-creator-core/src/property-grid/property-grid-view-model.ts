@@ -24,6 +24,7 @@ export class PropertyGridViewModel extends Base {
       target.searchManager.isVisible = newValue;
     }
   }) searchEnabled: boolean;
+  @property() showPlaceholder: boolean;
 
   constructor(private propertyGridModel: PropertyGridModel, private creator: SurveyCreatorModel) {
     super();
@@ -119,6 +120,10 @@ export class PropertyGridViewModel extends Base {
       });
     }
 
+    this.createObjectSwitcherAction();
+  }
+
+  private createObjectSwitcherAction() {
     const selectorModel = new ObjectSelectorModel(
       this.creator,
       (obj: Base, area: string, reason: string, displayName: string) => {
@@ -135,12 +140,20 @@ export class PropertyGridViewModel extends Base {
     );
     this.selectorPopupModel.cssClass += " svc-object-selector";
     this.selectorPopupModel.displayMode = this.creator.isTouch ? "overlay" : "popup";
+    this.selectorPopupModel.registerPropertyChangedHandlers(["isVisible"], () => {
+      if (!this.selectorPopupModel.isVisible) {
+        this.objectSelectionAction.pressed = false;
+      } else {
+        this.objectSelectionAction.pressed = true;
+      }
+    });
     this.objectSelectionAction = new Action({
       id: "svd-grid-object-selector",
       title: this.selectedElementName,
       css: "sv-action--object-selector sv-action-bar-item--secondary",
       component: "sv-action-bar-item-dropdown",
       disableHide: true,
+      pressed: false,
       action: () => {
         selectorModel.show(
           this.selectionController.creator.survey,

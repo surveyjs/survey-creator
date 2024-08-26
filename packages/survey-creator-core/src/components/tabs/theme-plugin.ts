@@ -54,12 +54,28 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   private inputFileElement: HTMLInputElement;
   private simulatorCssClasses: any = surveyCss[defaultV2ThemeName];
   private _availableThemes = [].concat(PredefinedThemes);
+  private _showOneCategoryInPropertyGrid: boolean = false;
 
   private tabControlModel: TabControlModel;
   public propertyGrid: PropertyGridModel;
   private propertyGridTab: SidebarPageModel;
   public model: ThemeTabViewModel;
   public themeModel: ThemeModel;
+
+  public get showOneCategoryInPropertyGrid(): boolean {
+    return this._showOneCategoryInPropertyGrid;
+  }
+  public set showOneCategoryInPropertyGrid(newValue) {
+    if (this._showOneCategoryInPropertyGrid !== newValue) {
+      this._showOneCategoryInPropertyGrid = newValue;
+      this.creator.sidebar.showOneCategoryInPropertyGrid = newValue;
+      this.propertyGrid.showOneCategoryInPropertyGrid = newValue;
+      this.propertyGrid["setObj"](this.creator.selectedElement);
+      if (this.creator.activeTab === "theme") {
+        this.setTabControl();
+      }
+    }
+  }
 
   private createVisibleUpdater() {
     return <any>new ComputedUpdater<boolean>(() => { return this.creator.activeTab === "theme"; });
@@ -199,9 +215,13 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   }
 
   private setTabControl() {
-    if (this.creator.showOneCategoryInPropertyGrid) {
+    if (this.showOneCategoryInPropertyGrid) {
+      this.updateTabControlActions();
       this.creator.sidebar.sideAreaComponentName = "svc-tab-control";
       this.creator.sidebar.sideAreaComponentData = this.tabControlModel;
+    } else {
+      this.creator.sidebar.sideAreaComponentName = "";
+      this.creator.sidebar.sideAreaComponentData = undefined;
     }
   }
 
@@ -247,6 +267,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   public activate(): void {
     this.model = new ThemeTabViewModel(this.creator, this.simulatorCssClasses);
     this.themeModel.initialize(this.creator.theme, this.creator.survey);
+    this.creator.sidebar.showOneCategoryInPropertyGrid = this.showOneCategoryInPropertyGrid;
     this.update();
     this.propertyGrid.survey.onOpenFileChooser.clear();
     this.propertyGrid.obj = this.themeModel;
@@ -257,7 +278,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.propertyGrid.survey.setVariable("advancedmode", !!this.advancedModeSwitcher?.checked);
     const themeBuilderCss = { ...propertyGridCss };
     themeBuilderCss.root += " spg-theme-builder-root";
-    if (this.creator.showOneCategoryInPropertyGrid) {
+    if (this.showOneCategoryInPropertyGrid) {
       themeBuilderCss.page.root += " spg-panel__content";
     }
     this.propertyGrid.survey.css = themeBuilderCss;
@@ -300,7 +321,11 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.updatePropertyGridColorEditorWithPredefinedColors();
     this.creator.sidebar.activePage = this.propertyGridTab.id;
     this.propertyGridTab.visible = true;
-    if (this.creator.showOneCategoryInPropertyGrid) {
+    this.setTabControl();
+    this.creator.expandCategoryIfNeeded();
+  }
+  private updateTabControlActions() {
+    if (this.showOneCategoryInPropertyGrid) {
       const pgTabs = this.propertyGrid.survey.pages.map(p => {
         const action = new Action({
           id: p.name,
@@ -315,11 +340,9 @@ export class ThemeTabPlugin implements ICreatorPlugin {
         return action;
       });
       this.tabControlModel.topToolbar.setItems(pgTabs);
-
-      this.setTabControl();
     }
-    this.creator.expandCategoryIfNeeded();
   }
+
   public update(): void {
     if (!this.model) return;
     this.model.simulator.landscape = this.creator.previewOrientation != "portrait";
@@ -404,6 +427,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       this.model.onSurveyCreatedCallback = undefined;
       this.model.dispose();
       this.model = undefined;
+      this.creator.sidebar.showOneCategoryInPropertyGrid = false;
     }
     this.creator.sidebar.sideAreaComponentName = undefined;
     this.creator.sidebar.sideAreaComponentData = undefined;

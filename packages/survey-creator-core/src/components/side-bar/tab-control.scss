@@ -31,6 +31,10 @@
   align-items: center;
   gap: var(--ctr-menu-toolbar-button-gap, 8px);
   border-radius: var(--ctr-menu-toolbar-button-corner-radius, 4px);
+  cursor: pointer;
+}
+.menu-toolbar-button:hover {
+  background: var(--ctr-menu-toolbar-button-background-color-hovered, $background-dim);
 }
 .menu-toolbar-button-icon {
   display: flex;
@@ -76,7 +80,8 @@
   display: flex;
   align-items: center;
 }
-.menu-toolbar-button--selected {
+
+.Tabs_22400_60650:not(.svc-sidebar-tabs-collapsed) .menu-toolbar-button--selected {
   display: flex;
   padding: var(--ctr-menu-toolbar-button-padding-top, 8px) var(--ctr-menu-toolbar-button-padding-right, 8px)
     var(--ctr-menu-toolbar-button-padding-bottom, 8px) var(--ctr-menu-toolbar-button-padding-left, 8px);
@@ -114,6 +119,7 @@
 }
 .Layout_24x24_21220_2484322 {
   flex: 1 0 0;
+  align-self: stretch;
 }
 .MenuButton_22400_60660 {
   display: flex;
@@ -158,4 +164,86 @@
 }
 .CreatorSettings_24x24_21220_2484322 {
   flex: 1 0 0;
+}
+
+.Header_21220_2028692 {
+  display: flex;
+  align-items: flex-start;
+  border-bottom: var(--ctr-property-grid-header-border-width-bottom, 2px) solid
+    var(--ctr-property-grid-header-border-color, $primary);
+}
+.Container_22233_64491 {
+  display: flex;
+  padding: var(--ctr-property-grid-header-padding-top, 12px) var(--ctr-property-grid-header-padding-right, 16px)
+    var(--ctr-property-grid-header-padding-bottom, 12px) var(--ctr-property-grid-header-padding-left, 16px);
+  justify-content: center;
+  align-items: center;
+  flex: 1 0 0;
+  align-self: stretch;
+
+  background: var(--ctr-property-grid-header-background-color, #fff);
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.Container_22233_64491.svc-property-grid-container-with-subtitle {
+  padding: var(--ctr-property-grid-header-padding-top-with-subtitle, 6px)
+    var(--ctr-property-grid-header-padding-right, 16px)
+    var(--ctr-property-grid-header-padding-bottom-with-subtitle, 6px) var(--ctr-property-grid-header-padding-left, 16px);
+}
+.TitleMenuButton_22233_64492 {
+  display: flex;
+  align-items: center;
+}
+.Button_22233_58736 {
+  display: flex;
+  padding: var(--ctr-menu-toolbar-button-padding-top, 8px) var(--ctr-menu-toolbar-button-padding-right, 8px)
+    var(--ctr-menu-toolbar-button-padding-bottom, 8px) var(--ctr-menu-toolbar-button-padding-left, 8px);
+  justify-content: center;
+  align-items: center;
+  gap: var(--ctr-menu-toolbar-button-gap, 8px);
+  border-radius: var(--ctr-menu-toolbar-button-corner-radius, 4px);
+  cursor: pointer;
+}
+
+.Button_22233_58736.svc-property-grid-button-with-subtitle {
+  display: flex;
+  padding: var(--ctr-menu-toolbar-button-padding-top-with-description, 4px)
+    var(--ctr-menu-toolbar-button-padding-right-with-description, 8px)
+    var(--ctr-menu-toolbar-button-padding-bottom, 8px) var(--ctr-menu-toolbar-button-padding-left-with-description, 8px);
+  justify-content: center;
+  align-items: center;
+  gap: var(--ctr-menu-toolbar-button-gap, 8px);
+}
+
+.Button_22233_58736:hover {
+  background: var(--ctr-menu-toolbar-button-background-color-hovered, #f3f3f3);
+}
+.Button_22233_58736.svc-menu-button--pressed {
+  opacity: var(--ctr-menu-toolbar-button-opacity-pressed, 0.5);
+  background: var(--ctr-menu-toolbar-button-background-color-pressed, #f3f3f3);
+}
+.Caption_22233_58737 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.Text_1_22233_58738 {
+  color: var(--ctr-menu-toolbar-button-text-color, rgba(0, 0, 0, 0.91));
+  font-family: var(--ctr-font-family, "Open Sans");
+  font-size: var(--ctr-font-default-size, 16px);
+  font-style: normal;
+  font-weight: 400;
+  line-height: var(--ctr-font-default-line-height, 24px) /* 150% */;
+  display: inline-block;
+}
+.Text_2_22233_58740 {
+  color: var(--ctr-menu-toolbar-button-text-color-secondary, rgba(0, 0, 0, 0.45));
+  font-family: var(--ctr-font-family, "Open Sans");
+  font-size: var(--ctr-font-small-size, 12px);
+  font-style: normal;
+  font-weight: 400;
+  line-height: var(--ctr-font-small-line-height, 16px) /* 133.333% */;
+  display: inline-block;
 }

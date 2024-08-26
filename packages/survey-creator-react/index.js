@@ -106,6 +106,7 @@ let json = {
 const options = {
   showLogicTab: true,
   showTranslationTab: true,
+  showThemeTab: true,
   showEmbeddedSurveyTab: true,
   isAutoSave: true
 };
@@ -202,10 +203,12 @@ creator.onMachineTranslate.add((_, options) => {
   options.strings.forEach(str => { translatedStrings.push(options.toLocale + ": " + str); });
   options.callback(translatedStrings);
 });
-creator.showOneCategoryInPropertyGrid = true;
-creator.JSON = json;
-creator.locale = "de";
+// creator.showOneCategoryInPropertyGrid = true;
+// creator.JSON = json;
+// creator.locale = "de";
 window.creator = creator;
+creator.getPlugin("designer").showOneCategoryInPropertyGrid = true;
+// creator.getPlugin("theme").showOneCategoryInPropertyGrid = true;
 
 creator.toolbox.searchEnabled = true;
 

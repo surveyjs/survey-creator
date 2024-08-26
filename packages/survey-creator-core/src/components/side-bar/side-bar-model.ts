@@ -28,9 +28,13 @@ export class SidebarModel extends Base {
       target.setActivePage(target.pages.filter(page => page.id === val)[0]);
     }
   }) activePage: string;
+  @property() showOneCategoryInPropertyGrid: boolean;
 
   sideAreaComponentName: string;
   sideAreaComponentData: any;
+
+  headerComponentName: string;
+  headerComponentData: any;
 
   public get activePageModel(): SidebarPageModel {
     return this._activePage;
@@ -57,7 +61,7 @@ export class SidebarModel extends Base {
       visible: <any>new ComputedUpdater<boolean>(() => {
         return notShortCircuitAnd(
           !notShortCircuitAnd(!this.creator.allowCollapseSidebar, !this.flyoutMode),
-          this.visible);
+          this.visible, !this.showOneCategoryInPropertyGrid);
       }),
       action: () => {
         this.collapseSidebar();
@@ -86,7 +90,7 @@ export class SidebarModel extends Base {
         },
         locTitleName: "ed.showPanel",
         visible: <any>new ComputedUpdater<boolean>(() => {
-          return notShortCircuitAnd(this.hasVisiblePages, !this.visible);
+          return notShortCircuitAnd(this.hasVisiblePages, !this.visible, !this.showOneCategoryInPropertyGrid);
         }),
         showTitle: false
       });
@@ -113,6 +117,9 @@ export class SidebarModel extends Base {
     this.createActions();
   }
 
+  public getActivePage(): SidebarPageModel {
+    return this._activePage;
+  }
   public setActivePage(newPage: SidebarPageModel): void {
     this.pages.forEach(page => page.visible = false);
     this._activePage = newPage;
