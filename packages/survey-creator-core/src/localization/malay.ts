@@ -995,6 +995,11 @@ export var msStrings = {
       datetime: "Tarikh dan Masa",
       currency: "Mata wang"
     },
+    inputTextAlignment: {
+      auto: "Auto",
+      left: "Kiri",
+      right: "Kanan"
+    },
     all: "semua",
     page: "halaman",
     survey: "tinjauan",
@@ -1439,6 +1444,7 @@ export var msStrings = {
     dataList: "Masukkan senarai pilihan yang akan dicadangkan kepada responden semasa input.",
     itemSize: "Seting hanya mengubah saiz medan input dan tidak mempengaruhi lebar kotak soalan.",
     itemTitleWidth: "Mengesetkan lebar yang konsisten untuk semua label item dalam piksel",
+    inputTextAlignment: "Pilih cara untuk menjajarkan nilai input dalam medan. Seting lalai \"Auto\" menjajarkan nilai input ke kanan jika mata wang atau topeng angka digunakan dan ke kiri jika tidak.",
     altText: "Berfungsi sebagai pengganti apabila imej tidak boleh dipaparkan pada peranti pengguna dan untuk tujuan kebolehcapaian.",
     rateColorMode: "Mentakrifkan warna emoji yang dipilih apabila jenis ikon Penarafan ditetapkan kepada \"Smileys\". Pilih antara: \"Lalai\" - emoji yang dipilih muncul dalam warna tinjauan lalai; \"Skala\" - emoji yang dipilih mewarisi warna dari skala penarafan.",
     expression: {
@@ -1555,6 +1561,7 @@ export var msStrings = {
     dataList: "Senarai data",
     itemSize: "Saiz item",
     itemTitleWidth: "Lebar label item (dalam piksel)",
+    inputTextAlignment: "Penjajaran nilai input",
     elements: "Unsur",
     content: "Kandungan",
     navigationButtonsVisibility: "Kebolehlihatan butang navigasi",
@@ -2693,3 +2700,9 @@ editorLocalization.locales["ms"] = msStrings;
 // maskType.numeric: "Numeric" => "Angka"
 // maskType.datetime: "Date and Time" => "Tarikh dan Masa"
 // maskType.currency: "Currency" => "Mata wang"
+
+// inputTextAlignment.auto: "Auto" => "Auto"
+// inputTextAlignment.left: "Left" => "Kiri"
+// inputTextAlignment.right: "Right" => "Kanan"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Pilih cara untuk menjajarkan nilai input dalam medan. Seting lalai \"Auto\" menjajarkan nilai input ke kanan jika mata wang atau topeng angka digunakan dan ke kiri jika tidak."
+// p.inputTextAlignment: "Input value alignment" => "Penjajaran nilai input"

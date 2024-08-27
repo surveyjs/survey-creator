@@ -995,6 +995,11 @@ export var fiStrings = {
       datetime: "Päivämäärä ja kellonaika",
       currency: "Valuutta"
     },
+    inputTextAlignment: {
+      auto: "Auto",
+      left: "Vasen",
+      right: "Oikea"
+    },
     all: "all",
     page: "page",
     survey: "survey",
@@ -1439,6 +1444,7 @@ export var fiStrings = {
     dataList: "Kirjoita luettelo vaihtoehdoista, joita vastaajalle ehdotetaan syötteen aikana.",
     itemSize: "Asetus muuttaa vain syöttökenttien kokoa eikä vaikuta kysymysruudun leveyteen.",
     itemTitleWidth: "Määrittää yhdenmukaisen leveyden kaikille tuoteotsikoille kuvapisteinä",
+    inputTextAlignment: "Valitse, miten syötteen arvo tasataan kenttään. Oletusasetus \"Auto\" kohdistaa syöttöarvon oikealle, jos valuuttaa tai numeerista peittoa käytetään, ja vasemmalle, jos ei.",
     altText: "Toimii korvikkeena, kun kuvaa ei voida näyttää käyttäjän laitteella, ja esteettömyyssyistä.",
     rateColorMode: "Määrittää valitun emojin värin, kun luokituskuvakkeen tyypiksi on asetettu \"Hymiöt\". Valitse seuraavista: \"Oletus\" - valittu emoji näkyy kyselyn oletusvärillä; \"Scale\" - valittu emoji perii värin luokitusasteikolta.",
     expression: {
@@ -1555,6 +1561,7 @@ export var fiStrings = {
     dataList: "Tietoluettelo",
     itemSize: "itemSize",
     itemTitleWidth: "Nimikkeen otsikon leveys (px)",
+    inputTextAlignment: "Syöttöarvon tasaus",
     elements: "Luonnonvoimat",
     content: "Sisältö",
     navigationButtonsVisibility: "navigationButtonsVisibility",
@@ -2740,3 +2747,9 @@ editorLocalization.locales["fi"] = fiStrings;
 // maskType.numeric: "Numeric" => "Numeerinen"
 // maskType.datetime: "Date and Time" => "Päivämäärä ja kellonaika"
 // maskType.currency: "Currency" => "Valuutta"
+
+// inputTextAlignment.auto: "Auto" => "Auto"
+// inputTextAlignment.left: "Left" => "Vasen"
+// inputTextAlignment.right: "Right" => "Oikea"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Valitse, miten syötteen arvo tasataan kenttään. Oletusasetus \"Auto\" kohdistaa syöttöarvon oikealle, jos valuuttaa tai numeerista peittoa käytetään, ja vasemmalle, jos ei."
+// p.inputTextAlignment: "Input value alignment" => "Syöttöarvon tasaus"

@@ -995,6 +995,11 @@ export var skStrings = {
       datetime: "Dátum a čas",
       currency: "Mena"
     },
+    inputTextAlignment: {
+      auto: "Auto",
+      left: "Vľavo",
+      right: "Doprava"
+    },
     all: "všetko",
     page: "stránka",
     survey: "prieskum",
@@ -1439,6 +1444,7 @@ export var skStrings = {
     dataList: "Zadajte zoznam možností, ktoré budú respondentovi navrhnuté počas vstupu.",
     itemSize: "Toto nastavenie zmení iba veľkosť vstupných polí a neovplyvní šírku poľa otázok.",
     itemTitleWidth: "Nastavuje konzistentnú šírku pre všetky štítky položiek v pixeloch",
+    inputTextAlignment: "Vyberte, ako chcete zarovnať vstupnú hodnotu v poli. Predvolené nastavenie \"Auto\" zarovná vstupnú hodnotu doprava, ak je použité maskovanie meny alebo čísel, a doľava, ak nie.",
     altText: "Slúži ako náhrada, keď obrázok nie je možné zobraziť na zariadení používateľa a na účely prístupnosti.",
     rateColorMode: "Definuje farbu vybraných emodži, keď je typ ikony hodnotenia nastavený na \"Smajlíky\". Vyberte si medzi: \"Predvolené\" - vybrané emodži sa zobrazia v predvolenej farbe prieskumu; \"Mierka\" - vybrané emodži zdedí farbu z hodnotiacej stupnice.",
     expression: {
@@ -1555,6 +1561,7 @@ export var skStrings = {
     dataList: "zoznam údajov",
     itemSize: "Veľkosť položky",
     itemTitleWidth: "Šírka označenia položky (v px)",
+    inputTextAlignment: "Zarovnanie vstupných hodnôt",
     elements: "Prvky",
     content: "Obsah",
     navigationButtonsVisibility: "Viditeľnosť navigačných tlačidiel",
@@ -2693,3 +2700,9 @@ editorLocalization.locales["sk"] = skStrings;
 // maskType.numeric: "Numeric" => "Numerický"
 // maskType.datetime: "Date and Time" => "Dátum a čas"
 // maskType.currency: "Currency" => "Mena"
+
+// inputTextAlignment.auto: "Auto" => "Auto"
+// inputTextAlignment.left: "Left" => "Vľavo"
+// inputTextAlignment.right: "Right" => "Doprava"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Vyberte, ako chcete zarovnať vstupnú hodnotu v poli. Predvolené nastavenie \"Auto\" zarovná vstupnú hodnotu doprava, ak je použité maskovanie meny alebo čísel, a doľava, ak nie."
+// p.inputTextAlignment: "Input value alignment" => "Zarovnanie vstupných hodnôt"

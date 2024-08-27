@@ -995,6 +995,11 @@ export var hebrewStrings = {
       datetime: "תאריך ושעה",
       currency: "מטבע"
     },
+    inputTextAlignment: {
+      auto: "אוטומטי",
+      left: "שמאל",
+      right: "ימין"
+    },
     all: "הכל",
     page: "עמוד",
     survey: "שאלון",
@@ -1439,6 +1444,7 @@ export var hebrewStrings = {
     dataList: "הזן רשימה של אפשרויות שיוצעו למשיב במהלך הקלט.",
     itemSize: "ההגדרה משנה את גודל שדות הקלט בלבד ואינה משפיעה על רוחב תיבת השאלה.",
     itemTitleWidth: "קובע רוחב עקבי לכל תוויות הפריטים בפיקסלים",
+    inputTextAlignment: "בחר כיצד ליישר ערך קלט בתוך השדה. הגדרת ברירת המחדל \"אוטומטי\" מיישרת את ערך הקלט ימינה אם מוחלת מסיכה על מטבע או מספר, ושמאלה אם לא.",
     altText: "משמש כתחליף כאשר לא ניתן להציג את התמונה במכשיר המשתמש ולמטרות נגישות.",
     rateColorMode: "מגדיר את צבע האמוג'י שנבחר כשסוג סמל הדירוג מוגדר ל\"סמיילי\". בחר בין: \"ברירת מחדל\" - האמוג'י שנבחר מופיע בצבע סקר ברירת מחדל; \"קנה מידה\" - האמוג'י שנבחר יורש צבע מסולם הדירוג.",
     expression: {
@@ -1555,6 +1561,7 @@ export var hebrewStrings = {
     dataList: "רשימת נתונים",
     itemSize: "גודל פריט",
     itemTitleWidth: "רוחב תווית פריט (בפיקסלים)",
+    inputTextAlignment: "יישור ערך קלט",
     elements: "רכיבים",
     content: "תוכן",
     navigationButtonsVisibility: "נראות כפתורי ניווט",
@@ -2308,3 +2315,9 @@ editorLocalization.locales["he"] = hebrewStrings;
 // maskType.numeric: "Numeric" => "מספריים"
 // maskType.datetime: "Date and Time" => "תאריך ושעה"
 // maskType.currency: "Currency" => "מטבע"
+
+// inputTextAlignment.auto: "Auto" => "אוטומטי"
+// inputTextAlignment.left: "Left" => "שמאל"
+// inputTextAlignment.right: "Right" => "ימין"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "בחר כיצד ליישר ערך קלט בתוך השדה. הגדרת ברירת המחדל \"אוטומטי\" מיישרת את ערך הקלט ימינה אם מוחלת מסיכה על מטבע או מספר, ושמאלה אם לא."
+// p.inputTextAlignment: "Input value alignment" => "יישור ערך קלט"

@@ -995,6 +995,11 @@ export var jaStrings = {
       datetime: "日付と時刻",
       currency: "通貨"
     },
+    inputTextAlignment: {
+      auto: "自動",
+      left: "左",
+      right: "右"
+    },
     all: "すべて",
     page: "ページ",
     survey: "アンケート",
@@ -1439,6 +1444,7 @@ export var jaStrings = {
     dataList: "入力時に回答者に提案される選択肢のリストを入力します。",
     itemSize: "この設定では、入力フィールドのサイズが変更されるだけで、質問ボックスの幅には影響しません。",
     itemTitleWidth: "すべてのアイテムラベルの幅をピクセル単位で統一します。",
+    inputTextAlignment: "フィールド内で入力値を揃える方法を選択します。デフォルト設定の「自動」では、通貨または数値のマスキングが適用されている場合は入力値が右に、適用されていない場合は左に揃えられます。",
     altText: "ユーザーのデバイスに画像を表示できない場合や、アクセシビリティの目的で代用します。",
     rateColorMode: "レーティングアイコンの種類が「スマイリー」に設定されている場合に選択した絵文字の色を定義します。以下から選択します: \"デフォルト\" - 選択した絵文字はデフォルトのアンケートカラーで表示されます。「スケール」 - 選択した絵文字は、評価スケールから色を継承します。",
     expression: {
@@ -1555,6 +1561,7 @@ export var jaStrings = {
     dataList: "データ一覧",
     itemSize: "アイテムサイズ",
     itemTitleWidth: "アイテムラベルの幅 (px)",
+    inputTextAlignment: "入力値の配置",
     elements: "元素",
     content: "コンテンツ",
     navigationButtonsVisibility: "ナビゲーションボタンの可視性",
@@ -2739,3 +2746,9 @@ editorLocalization.locales["ja"] = jaStrings;
 // maskType.numeric: "Numeric" => "数値"
 // maskType.datetime: "Date and Time" => "日付と時刻"
 // maskType.currency: "Currency" => "通貨"
+
+// inputTextAlignment.auto: "Auto" => "自動"
+// inputTextAlignment.left: "Left" => "左"
+// inputTextAlignment.right: "Right" => "右"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "フィールド内で入力値を揃える方法を選択します。デフォルト設定の「自動」では、通貨または数値のマスキングが適用されている場合は入力値が右に、適用されていない場合は左に揃えられます。"
+// p.inputTextAlignment: "Input value alignment" => "入力値の配置"

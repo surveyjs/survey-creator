@@ -995,6 +995,11 @@ var persianStrings = {
       datetime: "تاریخ و زمان",
       currency: "ارز"
     },
+    inputTextAlignment: {
+      auto: "خودکار",
+      left: "چپ",
+      right: "راست"
+    },
     all: "تمام",
     page: "صفحه",
     survey: "نظرسنجی",
@@ -1439,6 +1444,7 @@ var persianStrings = {
     dataList: "لیستی از انتخاب هایی را وارد کنید که در طول ورودی به مخاطب پیشنهاد می شود.",
     itemSize: "تنظیم فقط زمینه های ورودی را تغییر می دهد و بر عرض جعبه سوال تاثیر نمی گذارد.",
     itemTitleWidth: "عرض سازگار را برای همۀ برچسبهای فقره به تصویردانه تنظیم میکند",
+    inputTextAlignment: "نحوه تراز کردن مقدار ورودی در فیلد را انتخاب کنید. تنظیم پیش فرض \"خودکار\" مقدار ورودی را در صورت اعمال پوشش ارز یا عددی به سمت راست و در صورت عدم اعمال به سمت چپ تراز می کند.",
     altText: "به عنوان یک جایگزین زمانی که تصویر نمی تواند بر روی دستگاه کاربر و برای اهداف دسترسی نمایش داده شود.",
     rateColorMode: "رنگ ایموجی انتخاب شده را هنگامی که نوع نماد رتبه بندی روی \"Smileys\" تنظیم شده است، تعریف می کند. انتخاب بین: \"پیش فرض\" - ایموجی انتخاب شده در رنگ پیش فرض بررسی ظاهر می شود؛ \"Scale\" - ایموجی انتخاب شده رنگ را از مقیاس رتبه بندی به ارث می برد.",
     expression: {
@@ -1555,6 +1561,7 @@ var persianStrings = {
     dataList: "لیست داده ها",
     itemSize: "ابعاد مورد",
     itemTitleWidth: "عرض برچسب مورد (در پیکسل)",
+    inputTextAlignment: "تراز مقدار ورودی",
     elements: "عناصر",
     content: "محتوای",
     navigationButtonsVisibility: "پدیداری دکمه های ناوبری",
@@ -2695,3 +2702,9 @@ editorLocalization.locales["fa"] = persianStrings;
 // maskType.numeric: "Numeric" => "عددی"
 // maskType.datetime: "Date and Time" => "تاریخ و زمان"
 // maskType.currency: "Currency" => "ارز"
+
+// inputTextAlignment.auto: "Auto" => "خودکار"
+// inputTextAlignment.left: "Left" => "چپ"
+// inputTextAlignment.right: "Right" => "راست"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "نحوه تراز کردن مقدار ورودی در فیلد را انتخاب کنید. تنظیم پیش فرض \"خودکار\" مقدار ورودی را در صورت اعمال پوشش ارز یا عددی به سمت راست و در صورت عدم اعمال به سمت چپ تراز می کند."
+// p.inputTextAlignment: "Input value alignment" => "تراز مقدار ورودی"
