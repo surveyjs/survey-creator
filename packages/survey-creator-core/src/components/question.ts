@@ -19,7 +19,9 @@ import {
   QuestionPanelDynamicModel,
   ListModel,
   QuestionTextModel,
-  ActionContainer
+  ActionContainer,
+  Helpers,
+  PanelModel
 } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { editorLocalization, getLocString } from "../editorLocalization";
@@ -34,7 +36,7 @@ import { SurveyElementAdornerBase } from "./action-container-view-model";
 require("./question.scss");
 import { settings } from "../creator-settings";
 import { StringEditorConnector, StringItemsNavigatorBase } from "./string-editor";
-import { DragDropSurveyElements } from "../survey-elements";
+import { DragDropSurveyElements, isPanelDynamic } from "../survey-elements";
 import { QuestionToolbox, QuestionToolboxItem } from "../toolbox";
 
 export interface QuestionBannerParams {
@@ -130,49 +132,47 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
 
     if (this.isDragMe) {
       result += " svc-question__content--dragged";
+    }
+
+    if (!!this.dragTypeOverMe && (this.canExpandOnDrag) && this.dragInsideCollapsedContainer) {
+      this.dragIn();
+      result += " svc-question__content--collapsed-drag-over-inside";
     } else {
-      result = result.replace(" svc-question__content--dragged", "");
+      this.dragOut();
     }
 
     if (this.dragTypeOverMe === DragTypeOverMeEnum.InsideEmptyPanel) {
       result += " svc-question__content--drag-over-inside";
-    } else {
-      result = result.replace(" svc-question__content--drag-over-inside", "");
     }
+    if (!this.dragInsideCollapsedContainer) {
+      if (this.dragTypeOverMe === DragTypeOverMeEnum.Left) {
+        result += " svc-question__content--drag-over-left";
+      }
 
-    if (this.dragTypeOverMe === DragTypeOverMeEnum.Left) {
-      result += " svc-question__content--drag-over-left";
-    } else {
-      result = result.replace(" svc-question__content--drag-over-left", "");
-    }
+      if (this.dragTypeOverMe === DragTypeOverMeEnum.Right) {
+        result += " svc-question__content--drag-over-right";
+      }
 
-    if (this.dragTypeOverMe === DragTypeOverMeEnum.Right) {
-      result += " svc-question__content--drag-over-right";
-    } else {
-      result = result.replace(" svc-question__content--drag-over-right", "");
-    }
-
-    if (this.dragTypeOverMe === DragTypeOverMeEnum.Top) {
-      result += " svc-question__content--drag-over-top";
-    } else {
-      result = result.replace(" svc-question__content--drag-over-top", "");
-    }
-
-    if (this.dragTypeOverMe === DragTypeOverMeEnum.Bottom) {
-      result += " svc-question__content--drag-over-bottom";
-    } else {
-      result = result.replace(" svc-question__content--drag-over-bottom", "");
-    }
-    if (this.creator) {
-      result = this.creator.getElementAddornerCssCallback(this.surveyElement, result);
+      if (this.dragTypeOverMe === DragTypeOverMeEnum.Top) {
+        result += " svc-question__content--drag-over-top";
+      }
+      if (this.dragTypeOverMe === DragTypeOverMeEnum.Bottom) {
+        result += " svc-question__content--drag-over-bottom";
+      }
+      if (this.creator) {
+        result = this.creator.getElementAddornerCssCallback(this.surveyElement, result);
+      }
     }
     return result;
   }
-
+  protected expandWithDragIn() {
+    super.expandWithDragIn();
+    this.element.dragTypeOverMe = null;
+    this.creator.dragDropSurveyElements.dropTarget = null;
+  }
   get isDragMe(): boolean {
     return this.surveyElement.isDragMe;
   }
-
   get dragTypeOverMe() {
     return this.element.dragTypeOverMe;
   }
@@ -187,6 +187,12 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   }
   private get isMessagePanelVisible(): boolean {
     return (this.element)?.getPropertyValue("isMessagePanelVisible");
+  }
+  get cssCollapsedHiddenHeader(): string {
+    return (this.element as PanelModel | Question).cssHeader + " svc-question__header--hidden";
+  }
+  get cssCollapsedHiddenTitle(): string {
+    return this.element.cssTitle + " svc-element__title--hidden";
   }
   public createBannerParams(): QuestionBannerParams {
     return this.createCarryForwardParams() || this.createUsingRestfulParams() || this.createCustomMessagePanel();
@@ -338,16 +344,48 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     });
     return res;
   }
+
+  private buildDefaultJsonMap(availableItems: QuestionToolboxItem[]) {
+    const defaultJsons = {};
+    function addItemJson(toolboxItem: QuestionToolboxItem) {
+      const type = toolboxItem.json?.type || toolboxItem.id;
+      if (toolboxItem.json) {
+        if (!defaultJsons[type]) defaultJsons[type] = [];
+        defaultJsons[type].push(toolboxItem.json);
+      }
+    }
+    availableItems.forEach((toolboxItem: QuestionToolboxItem) => {
+      addItemJson(toolboxItem);
+      (toolboxItem.items || []).forEach((toolboxSubitem: QuestionToolboxItem) => {
+        addItemJson(toolboxSubitem);
+      });
+    });
+    return defaultJsons;
+  }
+
   public getConvertToTypesActions(parentAction?: Action): Array<IAction> {
     const availableItems = this.getConvertToTypes();
-
+    const defaultJsons = this.buildDefaultJsonMap(availableItems);
     const res = [];
     let lastItem = null;
     availableItems.forEach((item: QuestionToolboxItem) => {
       const needSeparator = lastItem && item.category != lastItem.category;
       const action = this.creator.createIActionBarItemByClass(item, needSeparator, (questionType: string, json?: any) => {
         const type = json?.type || questionType;
-        this.creator.convertCurrentQuestion(type, json);
+        let newJson = {};
+        (defaultJsons[type] || []).forEach((djson) => {
+          if (this.jsonIsCorresponded(djson)) {
+            newJson = { ...json };
+            const objJson = this.element.toJSON();
+            Object.keys(djson).forEach(p => {
+              if (p != "type" && !newJson[p]) newJson[p] = undefined;
+            });
+            Object.keys(json).forEach(p => {
+              if (p != "type" && !(!objJson[p] || djson[p])) newJson[p] = undefined;
+            });
+          }
+        });
+        this.creator.convertCurrentQuestion(type, newJson);
         parentAction?.hidePopup();
       });
       lastItem = item;
@@ -381,19 +419,16 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
         listModel.selectedItem = this.getSelectedItem(newItems, this.currentType);
 
         newItems.forEach(action => {
+          const toolboxItem = (this.creator.toolbox.getItemByName(action.id) as QuestionToolboxItem);
           if (action.items?.length > 0) {
             let selectedSubItem = undefined;
             action.items.forEach(item => {
               const elementType = this.element.getType();
-              const toolboxItem = (this.creator.toolbox.getItemByName(action.id) as QuestionToolboxItem).getSubitemByName(item.id);
-              const json = toolboxItem.json || {};
+              const toolboxSubitem = toolboxItem.getSubitemByName(item.id);
+              const json = toolboxSubitem.json || {};
               if (item.id == elementType || json.type == elementType) {
-                if (!selectedSubItem) selectedSubItem = item;
-                let jsonIsCorresponded = true;
-                Object.keys(json).forEach(p => {
-                  if (p != "type" && json[p] != this.element[p]) jsonIsCorresponded = false;
-                });
-                if (jsonIsCorresponded) selectedSubItem = item;
+                if (!listModel.selectedItem) selectedSubItem = item;
+                if (this.jsonIsCorresponded(json)) selectedSubItem = item;
               }
             });
             if (selectedSubItem) {
@@ -416,6 +451,15 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     });
     newAction.disableHide = true;
     return newAction;
+  }
+
+  private jsonIsCorresponded(json: any) {
+    let jsonIsCorresponded = true;
+    const objJson = this.element.toJSON();
+    Object.keys(json).forEach(p => {
+      if (p != "type" && !Helpers.isTwoValueEquals(json[p], objJson[p])) jsonIsCorresponded = false;
+    });
+    return jsonIsCorresponded;
   }
 
   private createConvertInputType() {
