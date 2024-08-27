@@ -654,13 +654,6 @@ export let svStrings = {
     allowResizeComment: "Tillåt användare att ändra storlek på textområden",
     textUpdateMode: "Uppdatera textfrågevärde",
     maskType: "Typ av indatamask",
-    maskTypes: {
-      none: "Ingen",
-      patternmask: "Mönster",
-      numericmask: "Numerisk",
-      datetimemask: "Datum och tid",
-      currencymask: "Valuta"
-    },
     focusOnFirstError: "Ställ in fokus på det första ogiltiga svaret",
     checkErrorsMode: "Kör validering",
     validateVisitedEmptyFields: "Validera tomma fält vid förlorat fokus",
@@ -995,6 +988,18 @@ export let svStrings = {
       url: "URL",
       week: "Vecka"
     },
+    maskType: {
+      none: "Ingen",
+      pattern: "Mönster",
+      numeric: "Numerisk",
+      datetime: "Datum och tid",
+      currency: "Valuta"
+    },
+    inputTextAlignment: {
+      auto: "Bil",
+      left: "Vänster",
+      right: "Höger"
+    },
     all: "all",
     page: "page",
     survey: "survey",
@@ -1153,6 +1158,10 @@ export let svStrings = {
     isPanelless: {
       "false": "Standard",
       "true": "Utan paneler"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "Samma som undersökning",
+      container: "Samma som behållare"
     }
   },
   // Operators
@@ -1310,7 +1319,8 @@ export let svStrings = {
     },
     file: {
       imageHeight: "Justerar höjden på bilden i undersökningsresultaten.",
-      imageWidth: "Justerar bredden på bilden i undersökningsresultaten."
+      imageWidth: "Justerar bredden på bilden i undersökningsresultaten.",
+      allowImagesPreview: "Visar miniatyrbilder av uppladdade filer när det är möjligt. Avmarkera om du vill visa filikoner i stället."
     },
     image: {
       contentMode: "Alternativet \"Auto\" bestämmer automatiskt vilket läge som är lämpligt för visning - bild, video eller YouTube - baserat på den angivna källadressen."
@@ -1434,6 +1444,7 @@ export let svStrings = {
     dataList: "Ange en lista med alternativ som kommer att föreslås för respondenten under inmatningen.",
     itemSize: "Inställningen ändrar bara storleken på inmatningsfälten och påverkar inte frågerutans bredd.",
     itemTitleWidth: "Anger konsekvent bredd för alla objektetiketter i pixlar",
+    inputTextAlignment: "Välj hur du vill justera indatavärdet i fältet. Standardinställningen \"Auto\" justerar indatavärdet till höger om valutamaskering eller numerisk maskering används och till vänster om inte.",
     altText: "Fungerar som ersättning när bilden inte kan visas på en användares enhet och i tillgänglighetssyfte.",
     rateColorMode: "Definierar färgen på den valda emojin när typen av betygsikon är inställd på \"Smileys\". Välj mellan: \"Standard\" - den valda emojin visas i standardundersökningsfärgen; \"Skala\" - den valda emojin ärver färg från betygsskalan.",
     expression: {
@@ -1484,7 +1495,8 @@ export let svStrings = {
     panellayoutcolumn: {
       effectiveWidth: "Accepterar värden %.",
       questionTitleWidth: "Accepterar värdena px."
-    }
+    },
+    progressBarInheritWidthFrom: "Alternativet \"Samma som behållare\" justerar automatiskt förloppsindikatorns bredd så att den passar in i HTML-elementet som undersökningen är placerad i."
   },
   // Properties
   p: {
@@ -1549,6 +1561,7 @@ export let svStrings = {
     dataList: "Lista över uppgifter",
     itemSize: "itemSize",
     itemTitleWidth: "Bredd på objektetikett (i px)",
+    inputTextAlignment: "Justering av indatavärde",
     elements: "Element",
     content: "Innehåll",
     navigationButtonsVisibility: "navigationButtonsVisibility",
@@ -1588,7 +1601,8 @@ export let svStrings = {
     scaleColorMode: "Färgläge för skala",
     rateColorMode: "Betygsätt färgläge",
     copyDisplayValue: "Kopiera visningsvärde",
-    effectiveColSpan: "Kolumn spännvidd"
+    effectiveColSpan: "Kolumn spännvidd",
+    progressBarInheritWidthFrom: "Bredd på förloppsindikatorns area"
   },
   theme: {
     advancedMode: "Avancerat läge",
@@ -2900,3 +2914,19 @@ editorLocalization.locales["sv"] = svStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Accepterar värden %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Accepterar värdena px."
 // p.effectiveColSpan: "Column span" => "Kolumn spännvidd"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "Samma som undersökning"
+// progressBarInheritWidthFrom.container: "Same as container" => "Samma som behållare"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Visar miniatyrbilder av uppladdade filer när det är möjligt. Avmarkera om du vill visa filikoner i stället."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "Alternativet \"Samma som behållare\" justerar automatiskt förloppsindikatorns bredd så att den passar in i HTML-elementet som undersökningen är placerad i."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "Bredd på förloppsindikatorns area"
+// maskType.none: "None" => "Ingen"
+// maskType.pattern: "Pattern" => "Mönster"
+// maskType.numeric: "Numeric" => "Numerisk"
+// maskType.datetime: "Date and Time" => "Datum och tid"
+// maskType.currency: "Currency" => "Valuta"
+
+// inputTextAlignment.auto: "Auto" => "Bil"
+// inputTextAlignment.left: "Left" => "Vänster"
+// inputTextAlignment.right: "Right" => "Höger"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Välj hur du vill justera indatavärdet i fältet. Standardinställningen \"Auto\" justerar indatavärdet till höger om valutamaskering eller numerisk maskering används och till vänster om inte."
+// p.inputTextAlignment: "Input value alignment" => "Justering av indatavärde"

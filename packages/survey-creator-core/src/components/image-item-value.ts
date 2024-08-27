@@ -99,4 +99,8 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
   get acceptedTypes() {
     return getAcceptedTypesByContentMode(this.question.contentMode);
   }
+  public dispose(): void {
+    this.itemsRoot = undefined;
+    super.dispose();
+  }
 }

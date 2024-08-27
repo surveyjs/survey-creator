@@ -5,6 +5,8 @@ import { CreatorTester } from "../creator-tester";
 import { TabDesignerPlugin } from "../../src/components/tabs/designer-plugin";
 import { LogoImageViewModel } from "../../src/components/header/logo-image";
 import { SurveyLogicUI } from "../../src/components/tabs/logic-ui";
+import { PageAdorner } from "../../src/components/page";
+import { QuestionAdornerViewModel } from "../../src/components/question";
 export * from "../../src/property-grid/matrices";
 
 test("Survey/page title/description placeholders text", () => {
@@ -289,4 +291,56 @@ test("overridingProperty affects LogoImageViewModel allowEdit", () => {
   expect(logoEditor.allowEdit).toBeFalsy();
 
   Serializer.removeProperty("survey", "logoToggle");
+});
+
+test("expand all and collapse all", () => {
+
+  const creator = new CreatorTester();
+  creator.expandCollapseButtonVisibility = "onhover";
+  creator.JSON = {
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          }
+        ]
+      },
+      {
+        "name": "page2",
+        "elements": [
+          {
+            "type": "panel",
+            "name": "panel1"
+          }
+        ]
+      }
+    ]
+  };
+  var designerPlugin = <TabDesignerPlugin>(
+    creator.getPlugin("designer")
+  );
+
+  const page1Adorner = new PageAdorner(creator, creator.survey.pages[0]);
+  const page2Adorner = new PageAdorner(creator, creator.survey.pages[1]);
+  const questionAdorner = new QuestionAdornerViewModel(creator, creator.survey.getAllQuestions()[0], undefined);
+  const panelAdorner = new QuestionAdornerViewModel(creator, creator.survey.getAllPanels()[0] as any, undefined);
+  expect(page1Adorner.collapsed).toBeFalsy();
+  expect(page2Adorner.collapsed).toBeFalsy();
+  expect(questionAdorner.collapsed).toBeFalsy();
+  expect(panelAdorner.collapsed).toBeFalsy();
+
+  designerPlugin.model.actionContainer.actions[0].action(designerPlugin.model.actionContainer.actions[0]);
+  expect(page1Adorner.collapsed).toBeTruthy();
+  expect(page2Adorner.collapsed).toBeTruthy();
+  expect(questionAdorner.collapsed).toBeTruthy();
+  expect(panelAdorner.collapsed).toBeTruthy();
+
+  designerPlugin.model.actionContainer.actions[1].action(designerPlugin.model.actionContainer.actions[1]);
+  expect(page1Adorner.collapsed).toBeFalsy();
+  expect(page2Adorner.collapsed).toBeFalsy();
+  expect(questionAdorner.collapsed).toBeFalsy();
+  expect(panelAdorner.collapsed).toBeFalsy();
 });

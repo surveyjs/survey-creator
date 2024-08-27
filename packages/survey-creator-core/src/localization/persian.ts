@@ -654,13 +654,6 @@ var persianStrings = {
     allowResizeComment: "اجازه دادن به کاربران برای تغییر اندازه مناطق متن",
     textUpdateMode: "بههنگامسازی مقدار سؤال متن",
     maskType: "نوع ماسک ورودی",
-    maskTypes: {
-      none: "هیچ کدام",
-      patternmask: "الگوی",
-      numericmask: "عددی",
-      datetimemask: "تاریخ و زمان",
-      currencymask: "ارز"
-    },
     focusOnFirstError: "تنظیم تمرکز روی اولین پاسخ نامعتبر",
     checkErrorsMode: "اجرای اعتبارسنجی",
     validateVisitedEmptyFields: "اعتبارسنجی فیلدهای خالی در فوکوس از دست رفته",
@@ -995,6 +988,18 @@ var persianStrings = {
       url: "آدرس",
       week: "هفته"
     },
+    maskType: {
+      none: "هیچ کدام",
+      pattern: "الگوی",
+      numeric: "عددی",
+      datetime: "تاریخ و زمان",
+      currency: "ارز"
+    },
+    inputTextAlignment: {
+      auto: "خودکار",
+      left: "چپ",
+      right: "راست"
+    },
     all: "تمام",
     page: "صفحه",
     survey: "نظرسنجی",
@@ -1153,6 +1158,10 @@ var persianStrings = {
     isPanelless: {
       "false": "پیش فرض",
       "true": "بدون پانل"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "همانند نظرسنجی",
+      container: "همانند کانتینر"
     }
   },
   // Operators
@@ -1310,7 +1319,8 @@ var persianStrings = {
     },
     file: {
       imageHeight: "ارتفاع تصویر را در نتایج نظرسنجی تنظیم می کند.",
-      imageWidth: "عرض تصویر را در نتایج نظرسنجی تنظیم می کند."
+      imageWidth: "عرض تصویر را در نتایج نظرسنجی تنظیم می کند.",
+      allowImagesPreview: "در صورت امکان، پیش نمایش تصاویر کوچک را برای فایل های آپلود شده نمایش می دهد. اگر می خواهید به جای آن نمادهای فایل را نشان دهید، انتخاب را لغو کنید."
     },
     image: {
       contentMode: "گزینه \"Auto\" به طور خودکار حالت مناسب برای نمایش - تصویر، ویدئو یا یوتیوب - را بر اساس URL منبع ارائه شده تعیین می کند."
@@ -1434,6 +1444,7 @@ var persianStrings = {
     dataList: "لیستی از انتخاب هایی را وارد کنید که در طول ورودی به مخاطب پیشنهاد می شود.",
     itemSize: "تنظیم فقط زمینه های ورودی را تغییر می دهد و بر عرض جعبه سوال تاثیر نمی گذارد.",
     itemTitleWidth: "عرض سازگار را برای همۀ برچسبهای فقره به تصویردانه تنظیم میکند",
+    inputTextAlignment: "نحوه تراز کردن مقدار ورودی در فیلد را انتخاب کنید. تنظیم پیش فرض \"خودکار\" مقدار ورودی را در صورت اعمال پوشش ارز یا عددی به سمت راست و در صورت عدم اعمال به سمت چپ تراز می کند.",
     altText: "به عنوان یک جایگزین زمانی که تصویر نمی تواند بر روی دستگاه کاربر و برای اهداف دسترسی نمایش داده شود.",
     rateColorMode: "رنگ ایموجی انتخاب شده را هنگامی که نوع نماد رتبه بندی روی \"Smileys\" تنظیم شده است، تعریف می کند. انتخاب بین: \"پیش فرض\" - ایموجی انتخاب شده در رنگ پیش فرض بررسی ظاهر می شود؛ \"Scale\" - ایموجی انتخاب شده رنگ را از مقیاس رتبه بندی به ارث می برد.",
     expression: {
@@ -1484,7 +1495,8 @@ var persianStrings = {
     panellayoutcolumn: {
       effectiveWidth: "مقادیر را می پذیرد.",
       questionTitleWidth: "مقادیر px را می پذیرد."
-    }
+    },
+    progressBarInheritWidthFrom: "گزینه \"همان کانتینر\" به طور خودکار عرض ناحیه نوار پیشرفت را تنظیم می کند تا در عنصر HTML که نظرسنجی در آن قرار می گیرد قرار گیرد."
   },
   // Properties
   p: {
@@ -1549,6 +1561,7 @@ var persianStrings = {
     dataList: "لیست داده ها",
     itemSize: "ابعاد مورد",
     itemTitleWidth: "عرض برچسب مورد (در پیکسل)",
+    inputTextAlignment: "تراز مقدار ورودی",
     elements: "عناصر",
     content: "محتوای",
     navigationButtonsVisibility: "پدیداری دکمه های ناوبری",
@@ -1588,7 +1601,8 @@ var persianStrings = {
     scaleColorMode: "مقیاس حالت رنگ",
     rateColorMode: "نرخ حالت رنگ",
     copyDisplayValue: "رونوشت مقدار نمایش",
-    effectiveColSpan: "دهانه ستون"
+    effectiveColSpan: "دهانه ستون",
+    progressBarInheritWidthFrom: "عرض مساحت نوار پیشرفت"
   },
   theme: {
     advancedMode: "حالت پیشرفته",
@@ -2678,3 +2692,19 @@ editorLocalization.locales["fa"] = persianStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "مقادیر را می پذیرد."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "مقادیر px را می پذیرد."
 // p.effectiveColSpan: "Column span" => "دهانه ستون"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "همانند نظرسنجی"
+// progressBarInheritWidthFrom.container: "Same as container" => "همانند کانتینر"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "در صورت امکان، پیش نمایش تصاویر کوچک را برای فایل های آپلود شده نمایش می دهد. اگر می خواهید به جای آن نمادهای فایل را نشان دهید، انتخاب را لغو کنید."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "گزینه \"همان کانتینر\" به طور خودکار عرض ناحیه نوار پیشرفت را تنظیم می کند تا در عنصر HTML که نظرسنجی در آن قرار می گیرد قرار گیرد."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "عرض مساحت نوار پیشرفت"
+// maskType.none: "None" => "هیچ کدام"
+// maskType.pattern: "Pattern" => "الگوی"
+// maskType.numeric: "Numeric" => "عددی"
+// maskType.datetime: "Date and Time" => "تاریخ و زمان"
+// maskType.currency: "Currency" => "ارز"
+
+// inputTextAlignment.auto: "Auto" => "خودکار"
+// inputTextAlignment.left: "Left" => "چپ"
+// inputTextAlignment.right: "Right" => "راست"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "نحوه تراز کردن مقدار ورودی در فیلد را انتخاب کنید. تنظیم پیش فرض \"خودکار\" مقدار ورودی را در صورت اعمال پوشش ارز یا عددی به سمت راست و در صورت عدم اعمال به سمت چپ تراز می کند."
+// p.inputTextAlignment: "Input value alignment" => "تراز مقدار ورودی"

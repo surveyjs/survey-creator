@@ -1109,8 +1109,8 @@ export class Translation extends Base implements ITranslationLocales {
   public get defaultLocale(): string {
     return surveyLocalization.defaultLocale;
   }
-  public getLocaleName(loc: string) {
-    return editorLocalization.getLocaleName(loc, this.defaultLocale);
+  public getLocaleName(loc: string, inEnglish?: boolean) {
+    return editorLocalization.getLocaleName(loc, this.defaultLocale, inEnglish);
   }
   public removeLocale(locale: string) {
     if (this.hasLocale(locale)) {

@@ -654,13 +654,6 @@ export var indonesianStrings = {
     allowResizeComment: "Mengizinkan pengguna mengubah ukuran area teks",
     textUpdateMode: "Memperbarui nilai pertanyaan teks",
     maskType: "Jenis masker input",
-    maskTypes: {
-      none: "Tidak",
-      patternmask: "Pola",
-      numericmask: "Numerik",
-      datetimemask: "Tanggal dan Waktu",
-      currencymask: "Mata uang"
-    },
     focusOnFirstError: "Mengatur fokus pada jawaban pertama yang tidak valid",
     checkErrorsMode: "Jalankan validasi",
     validateVisitedEmptyFields: "Memvalidasi bidang kosong saat fokus hilang",
@@ -995,6 +988,18 @@ export var indonesianStrings = {
       url: "URL",
       week: "Minggu"
     },
+    maskType: {
+      none: "Tidak",
+      pattern: "Pola",
+      numeric: "Numerik",
+      datetime: "Tanggal dan Waktu",
+      currency: "Mata uang"
+    },
+    inputTextAlignment: {
+      auto: "Auto",
+      left: "Kiri",
+      right: "Kanan"
+    },
     all: "semua",
     page: "halaman",
     survey: "survei",
@@ -1153,6 +1158,10 @@ export var indonesianStrings = {
     isPanelless: {
       "false": "Default",
       "true": "Tanpa Panel"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "Sama seperti survei",
+      container: "Sama seperti wadah"
     }
   },
   // Operators
@@ -1310,7 +1319,8 @@ export var indonesianStrings = {
     },
     file: {
       imageHeight: "Menyesuaikan tinggi gambar dalam hasil survei.",
-      imageWidth: "Menyesuaikan lebar gambar dalam hasil survei."
+      imageWidth: "Menyesuaikan lebar gambar dalam hasil survei.",
+      allowImagesPreview: "Menampilkan pratinjau thumbnail untuk file yang diunggah jika memungkinkan. Batalkan pilihan jika Anda ingin menampilkan ikon file sebagai gantinya."
     },
     image: {
       contentMode: "Opsi \"Otomatis\" secara otomatis menentukan mode yang sesuai untuk tampilan - Gambar, Video, atau YouTube - berdasarkan URL sumber yang disediakan."
@@ -1434,6 +1444,7 @@ export var indonesianStrings = {
     dataList: "Masukkan daftar pilihan yang akan disarankan kepada responden saat masukan.",
     itemSize: "Pengaturan hanya mengubah ukuran bidang input dan tidak memengaruhi lebar kotak pertanyaan.",
     itemTitleWidth: "Mengatur lebar yang konsisten untuk semua label item dalam piksel",
+    inputTextAlignment: "Pilih cara menyelaraskan nilai input dalam bidang. Pengaturan default \"Otomatis\" menyelaraskan nilai input ke kanan jika penyembunyian mata uang atau numerik diterapkan dan ke kiri jika tidak.",
     altText: "Berfungsi sebagai pengganti ketika gambar tidak dapat ditampilkan pada perangkat pengguna dan untuk tujuan aksesibilitas.",
     rateColorMode: "Menentukan warna emoji yang dipilih saat jenis ikon Peringkat diatur ke \"Smiley\". Pilih antara: \"Default\" - emoji yang dipilih muncul dalam warna survei default; \"Skala\" - emoji yang dipilih mewarisi warna dari skala peringkat.",
     expression: {
@@ -1484,7 +1495,8 @@ export var indonesianStrings = {
     panellayoutcolumn: {
       effectiveWidth: "Menerima nilai %",
       questionTitleWidth: "Menerima nilai px."
-    }
+    },
+    progressBarInheritWidthFrom: "Opsi \"Sama seperti wadah\" secara otomatis menyesuaikan lebar area bilah kemajuan agar sesuai dengan elemen HTML tempat survei ditempatkan."
   },
   // Properties
   p: {
@@ -1549,6 +1561,7 @@ export var indonesianStrings = {
     dataList: "Daftar data",
     itemSize: "ukuranBarang",
     itemTitleWidth: "Lebar label item (dalam px)",
+    inputTextAlignment: "Penyelarasan nilai input",
     elements: "Elemen",
     content: "Puas",
     navigationButtonsVisibility: "visibilitas tombol navigasi",
@@ -1588,7 +1601,8 @@ export var indonesianStrings = {
     scaleColorMode: "Mode skala warna",
     rateColorMode: "Mode warna tingkat",
     copyDisplayValue: "Salin nilai tampilan",
-    effectiveColSpan: "Rentang kolom"
+    effectiveColSpan: "Rentang kolom",
+    progressBarInheritWidthFrom: "Lebar area bilah kemajuan"
   },
   theme: {
     advancedMode: "Mode lanjutan",
@@ -2877,3 +2891,19 @@ editorLocalization.locales["id"] = indonesianStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Menerima nilai %"
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Menerima nilai px."
 // p.effectiveColSpan: "Column span" => "Rentang kolom"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "Sama seperti survei"
+// progressBarInheritWidthFrom.container: "Same as container" => "Sama seperti wadah"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Menampilkan pratinjau thumbnail untuk file yang diunggah jika memungkinkan. Batalkan pilihan jika Anda ingin menampilkan ikon file sebagai gantinya."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "Opsi \"Sama seperti wadah\" secara otomatis menyesuaikan lebar area bilah kemajuan agar sesuai dengan elemen HTML tempat survei ditempatkan."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "Lebar area bilah kemajuan"
+// maskType.none: "None" => "Tidak"
+// maskType.pattern: "Pattern" => "Pola"
+// maskType.numeric: "Numeric" => "Numerik"
+// maskType.datetime: "Date and Time" => "Tanggal dan Waktu"
+// maskType.currency: "Currency" => "Mata uang"
+
+// inputTextAlignment.auto: "Auto" => "Auto"
+// inputTextAlignment.left: "Left" => "Kiri"
+// inputTextAlignment.right: "Right" => "Kanan"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Pilih cara menyelaraskan nilai input dalam bidang. Pengaturan default \"Otomatis\" menyelaraskan nilai input ke kanan jika penyembunyian mata uang atau numerik diterapkan dan ke kiri jika tidak."
+// p.inputTextAlignment: "Input value alignment" => "Penyelarasan nilai input"

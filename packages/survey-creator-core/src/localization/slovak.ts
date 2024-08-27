@@ -654,13 +654,6 @@ export var skStrings = {
     allowResizeComment: "Povolenie používateľom meniť veľkosť textových oblastí",
     textUpdateMode: "Aktualizácia hodnoty textovej otázky",
     maskType: "Typ vstupnej masky",
-    maskTypes: {
-      none: "Žiadny",
-      patternmask: "Vzorka",
-      numericmask: "Numerický",
-      datetimemask: "Dátum a čas",
-      currencymask: "Mena"
-    },
     focusOnFirstError: "Zameranie na prvú neplatnú odpoveď",
     checkErrorsMode: "Spustenie overenia pravosti",
     validateVisitedEmptyFields: "Overenie prázdnych polí pri strate zamerania",
@@ -995,6 +988,18 @@ export var skStrings = {
       url: "URL adresa",
       week: "Týždeň"
     },
+    maskType: {
+      none: "Žiadny",
+      pattern: "Vzorka",
+      numeric: "Numerický",
+      datetime: "Dátum a čas",
+      currency: "Mena"
+    },
+    inputTextAlignment: {
+      auto: "Auto",
+      left: "Vľavo",
+      right: "Doprava"
+    },
     all: "všetko",
     page: "stránka",
     survey: "prieskum",
@@ -1153,6 +1158,10 @@ export var skStrings = {
     isPanelless: {
       "false": "Predvolený",
       "true": "Bez panelov"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "Rovnaké ako prieskum",
+      container: "Rovnaké ako kontajner"
     }
   },
   // Operators
@@ -1310,7 +1319,8 @@ export var skStrings = {
     },
     file: {
       imageHeight: "Upraví výšku obrázka vo výsledkoch prieskumu.",
-      imageWidth: "Upraví šírku obrázka vo výsledkoch prieskumu."
+      imageWidth: "Upraví šírku obrázka vo výsledkoch prieskumu.",
+      allowImagesPreview: "Ak je to možné, zobrazí náhľady miniatúr nahraných súborov. Zrušte výber, ak chcete namiesto toho zobraziť ikony súborov."
     },
     image: {
       contentMode: "Možnosť \"Auto\" automaticky určuje vhodný režim zobrazenia - obrázok, video alebo YouTube - na základe poskytnutej zdrojovej adresy URL."
@@ -1434,6 +1444,7 @@ export var skStrings = {
     dataList: "Zadajte zoznam možností, ktoré budú respondentovi navrhnuté počas vstupu.",
     itemSize: "Toto nastavenie zmení iba veľkosť vstupných polí a neovplyvní šírku poľa otázok.",
     itemTitleWidth: "Nastavuje konzistentnú šírku pre všetky štítky položiek v pixeloch",
+    inputTextAlignment: "Vyberte, ako chcete zarovnať vstupnú hodnotu v poli. Predvolené nastavenie \"Auto\" zarovná vstupnú hodnotu doprava, ak je použité maskovanie meny alebo čísel, a doľava, ak nie.",
     altText: "Slúži ako náhrada, keď obrázok nie je možné zobraziť na zariadení používateľa a na účely prístupnosti.",
     rateColorMode: "Definuje farbu vybraných emodži, keď je typ ikony hodnotenia nastavený na \"Smajlíky\". Vyberte si medzi: \"Predvolené\" - vybrané emodži sa zobrazia v predvolenej farbe prieskumu; \"Mierka\" - vybrané emodži zdedí farbu z hodnotiacej stupnice.",
     expression: {
@@ -1484,7 +1495,8 @@ export var skStrings = {
     panellayoutcolumn: {
       effectiveWidth: "Akceptuje hodnoty %.",
       questionTitleWidth: "Akceptuje hodnoty px."
-    }
+    },
+    progressBarInheritWidthFrom: "Možnosť \"Rovnaké ako kontajner\" automaticky upraví šírku oblasti indikátora priebehu tak, aby sa zmestila do prvku HTML, v ktorom je prieskum umiestnený."
   },
   // Properties
   p: {
@@ -1549,6 +1561,7 @@ export var skStrings = {
     dataList: "zoznam údajov",
     itemSize: "Veľkosť položky",
     itemTitleWidth: "Šírka označenia položky (v px)",
+    inputTextAlignment: "Zarovnanie vstupných hodnôt",
     elements: "Prvky",
     content: "Obsah",
     navigationButtonsVisibility: "Viditeľnosť navigačných tlačidiel",
@@ -1588,7 +1601,8 @@ export var skStrings = {
     scaleColorMode: "Farebný režim mierky",
     rateColorMode: "Režim hodnotenia farieb",
     copyDisplayValue: "Kopírovať zobrazenú hodnotu",
-    effectiveColSpan: "Rozpätie stĺpca"
+    effectiveColSpan: "Rozpätie stĺpca",
+    progressBarInheritWidthFrom: "Šírka oblasti indikátora priebehu"
   },
   theme: {
     advancedMode: "Rozšírený režim",
@@ -2676,3 +2690,19 @@ editorLocalization.locales["sk"] = skStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Akceptuje hodnoty %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Akceptuje hodnoty px."
 // p.effectiveColSpan: "Column span" => "Rozpätie stĺpca"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "Rovnaké ako prieskum"
+// progressBarInheritWidthFrom.container: "Same as container" => "Rovnaké ako kontajner"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Ak je to možné, zobrazí náhľady miniatúr nahraných súborov. Zrušte výber, ak chcete namiesto toho zobraziť ikony súborov."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "Možnosť \"Rovnaké ako kontajner\" automaticky upraví šírku oblasti indikátora priebehu tak, aby sa zmestila do prvku HTML, v ktorom je prieskum umiestnený."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "Šírka oblasti indikátora priebehu"
+// maskType.none: "None" => "Žiadny"
+// maskType.pattern: "Pattern" => "Vzorka"
+// maskType.numeric: "Numeric" => "Numerický"
+// maskType.datetime: "Date and Time" => "Dátum a čas"
+// maskType.currency: "Currency" => "Mena"
+
+// inputTextAlignment.auto: "Auto" => "Auto"
+// inputTextAlignment.left: "Left" => "Vľavo"
+// inputTextAlignment.right: "Right" => "Doprava"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Vyberte, ako chcete zarovnať vstupnú hodnotu v poli. Predvolené nastavenie \"Auto\" zarovná vstupnú hodnotu doprava, ak je použité maskovanie meny alebo čísel, a doľava, ak nie."
+// p.inputTextAlignment: "Input value alignment" => "Zarovnanie vstupných hodnôt"

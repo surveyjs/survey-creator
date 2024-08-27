@@ -654,13 +654,6 @@ export var danishStrings = {
     allowResizeComment: "Tillad brugere at ændre størrelsen på tekstområder",
     textUpdateMode: "Opdater værdi for tekstspørgsmål",
     maskType: "Type af inputmaske",
-    maskTypes: {
-      none: "Ingen",
-      patternmask: "Mønster",
-      numericmask: "Numerisk",
-      datetimemask: "Dato og klokkeslæt",
-      currencymask: "Valuta"
-    },
     focusOnFirstError: "Sæt fokus på det første ugyldige svar",
     checkErrorsMode: "Kør validering",
     validateVisitedEmptyFields: "Validere tomme felter ved mistet fokus",
@@ -995,6 +988,18 @@ export var danishStrings = {
       url: "URL-adresse",
       week: "Uge"
     },
+    maskType: {
+      none: "Ingen",
+      pattern: "Mønster",
+      numeric: "Numerisk",
+      datetime: "Dato og klokkeslæt",
+      currency: "Valuta"
+    },
+    inputTextAlignment: {
+      auto: "Auto",
+      left: "Venstre",
+      right: "Højre"
+    },
     all: "all",
     page: "page",
     survey: "survey",
@@ -1153,6 +1158,10 @@ export var danishStrings = {
     isPanelless: {
       "false": "Standard",
       "true": "Uden paneler"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "Samme som undersøgelse",
+      container: "Samme som container"
     }
   },
   // Operators
@@ -1310,7 +1319,8 @@ export var danishStrings = {
     },
     file: {
       imageHeight: "Justerer billedets højde i undersøgelsesresultaterne.",
-      imageWidth: "Justerer billedets bredde i undersøgelsesresultaterne."
+      imageWidth: "Justerer billedets bredde i undersøgelsesresultaterne.",
+      allowImagesPreview: "Viser miniaturebilleder for uploadede filer, når det er muligt. Fjern markeringen, hvis du vil vise filikoner i stedet."
     },
     image: {
       contentMode: "Indstillingen \"Auto\" bestemmer automatisk den passende tilstand til visning - Billede, Video eller YouTube - baseret på den angivne kilde-URL."
@@ -1434,6 +1444,7 @@ export var danishStrings = {
     dataList: "Angiv en liste over valgmuligheder, der vil blive foreslået svarpersonen under input.",
     itemSize: "Indstillingen ændrer kun størrelsen på inputfelterne og påvirker ikke bredden af spørgsmålsfeltet.",
     itemTitleWidth: "Angiver ensartet bredde for alle vareetiketter i pixel",
+    inputTextAlignment: "Vælg, hvordan inputværdien skal justeres i feltet. Standardindstillingen \"Auto\" justerer inputværdien til højre, hvis der anvendes valuta- eller numerisk maskering, og til venstre, hvis ikke.",
     altText: "Fungerer som erstatning, når billedet ikke kan vises på en brugers enhed og af tilgængelighedshensyn.",
     rateColorMode: "Definerer farven på den valgte emoji, når ikontypen Vurdering er indstillet til \"Smileys\". Vælg mellem: \"Standard\" - den valgte emoji vises i standard undersøgelsesfarve; \"Skala\" - den valgte emoji arver farve fra vurderingsskalaen.",
     expression: {
@@ -1484,7 +1495,8 @@ export var danishStrings = {
     panellayoutcolumn: {
       effectiveWidth: "Accepterer værdier %.",
       questionTitleWidth: "Accepterer værdier px."
-    }
+    },
+    progressBarInheritWidthFrom: "Indstillingen \"Samme som beholder\" justerer automatisk bredden på statuslinjens område, så den passer ind i det HTML-element, som undersøgelsen er placeret i."
   },
   // Properties
   p: {
@@ -1549,6 +1561,7 @@ export var danishStrings = {
     dataList: "Dataliste",
     itemSize: "itemSize",
     itemTitleWidth: "Bredde på vareetiket (i px)",
+    inputTextAlignment: "Justering af inputværdi",
     elements: "Elementer",
     content: "Indhold",
     navigationButtonsVisibility: "navigationButtonsVisibility",
@@ -1588,7 +1601,8 @@ export var danishStrings = {
     scaleColorMode: "Skaler farvetilstand",
     rateColorMode: "Bedøm farvetilstand",
     copyDisplayValue: "Kopiér visningsværdi",
-    effectiveColSpan: "Søjlespænd"
+    effectiveColSpan: "Søjlespænd",
+    progressBarInheritWidthFrom: "Bredde på statuslinjeområde"
   },
   theme: {
     advancedMode: "Avanceret tilstand",
@@ -2908,3 +2922,19 @@ editorLocalization.locales["da"] = danishStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Accepterer værdier %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Accepterer værdier px."
 // p.effectiveColSpan: "Column span" => "Søjlespænd"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "Samme som undersøgelse"
+// progressBarInheritWidthFrom.container: "Same as container" => "Samme som container"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Viser miniaturebilleder for uploadede filer, når det er muligt. Fjern markeringen, hvis du vil vise filikoner i stedet."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "Indstillingen \"Samme som beholder\" justerer automatisk bredden på statuslinjens område, så den passer ind i det HTML-element, som undersøgelsen er placeret i."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "Bredde på statuslinjeområde"
+// maskType.none: "None" => "Ingen"
+// maskType.pattern: "Pattern" => "Mønster"
+// maskType.numeric: "Numeric" => "Numerisk"
+// maskType.datetime: "Date and Time" => "Dato og klokkeslæt"
+// maskType.currency: "Currency" => "Valuta"
+
+// inputTextAlignment.auto: "Auto" => "Auto"
+// inputTextAlignment.left: "Left" => "Venstre"
+// inputTextAlignment.right: "Right" => "Højre"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Vælg, hvordan inputværdien skal justeres i feltet. Standardindstillingen \"Auto\" justerer inputværdien til højre, hvis der anvendes valuta- eller numerisk maskering, og til venstre, hvis ikke."
+// p.inputTextAlignment: "Input value alignment" => "Justering af inputværdi"

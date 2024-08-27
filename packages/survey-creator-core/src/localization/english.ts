@@ -309,6 +309,9 @@ export var enStrings = {
       templateTitleLocation: "Question title alignment",
       templateErrorLocation: "Error message alignment",
       newPanelPosition: "New panel location",
+      showRangeInProgress: "Show the progress bar",
+      showProgressBar: "Show the progress bar",
+      progressBarLocation: "Progress bar alignment",
       keyName: "Prevent duplicate responses in the following question"
     },
     question: {
@@ -656,13 +659,6 @@ export var enStrings = {
     allowResizeComment: "Allow users to resize text areas",
     textUpdateMode: "Update input field values",
     maskType: "Input mask type",
-    maskTypes: {
-      none: "None",
-      patternmask: "Pattern",
-      numericmask: "Numeric",
-      datetimemask: "Date and Time",
-      currencymask: "Currency"
-    },
     focusOnFirstError: "Set focus on the first invalid answer",
     checkErrorsMode: "Run validation",
     validateVisitedEmptyFields: "Validate empty fields on lost focus",
@@ -699,7 +695,6 @@ export var enStrings = {
     panelsState: "Inner panel collapse state",
     panelPrevText: "\"Previous Panel\" button text",
     panelNextText: "\"Next Panel\" button text",
-    showRangeInProgress: "Show the progress bar",
     panelRemoveButtonLocation: "\"Remove Panel\" button alignment",
     hideIfRowsEmpty: "Hide the question if it has no rows",
     hideColumnsIfEmpty: "Hide columns if there are no rows",
@@ -937,10 +932,11 @@ export var enStrings = {
     firstExpanded: "First panel is expanded",
     off: "Hide question numbers",
     list: "List",
+    carousel: "Carousel",
+    tab: "Tabs",
     progressTop: "Panel navigator + Progress bar at the top",
     progressBottom: "Panel navigator + Progress bar at the bottom",
     progressTopBottom: "Panel navigator + Progress bar at the top and bottom",
-    tab: "Tabs",
     horizontal: "Horizontal",
     vertical: "Vertical",
     top: "Top",
@@ -997,6 +993,18 @@ export var enStrings = {
       time: "Time",
       url: "URL",
       week: "Week"
+    },
+    maskType: {
+      none: "None",
+      pattern: "Pattern",
+      numeric: "Numeric",
+      datetime: "Date and Time",
+      currency: "Currency"
+    },
+    inputTextAlignment: {
+      auto: "Auto",
+      left: "Left",
+      right: "Right"
     },
     all: "All",
     page: "Page",
@@ -1116,6 +1124,11 @@ export var enStrings = {
       aboveheader: "Above the header",
       belowheader: "Below the header"
     },
+    progressBarLocation: {
+      "top": "Top",
+      "bottom": "Bottom",
+      "topBottom": "Top and bottom"
+    },
     sum: "Sum",
     count: "Count",
     min: "Min",
@@ -1157,6 +1170,10 @@ export var enStrings = {
       false: "Default",
       true: "Without Panels",
     },
+    progressBarInheritWidthFrom: {
+      survey: "Same as survey",
+      container: "Same as container"
+    }
   },
   // Operators
   op: {
@@ -1442,6 +1459,7 @@ export var enStrings = {
     dataList: "Enter a list of choices that will be suggested to the respondent during input.",
     itemSize: "The setting only resizes the input fields and doesn't affect the width of the question box.",
     itemTitleWidth: "Sets consistent width for all item labels in pixels",
+    inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not.",
     altText: "Serves as a substitute when the image cannot be displayed on a user's device and for accessibility purposes.",
     rateColorMode: "Defines the color of the selected emoji when the Rating icon type is set to \"Smileys\". Choose between: \"Default\" - the selected emoji appears in default survey color; \"Scale\" - the selected emoji inherits color from the rating scale.",
     expression: {
@@ -1493,6 +1511,7 @@ export var enStrings = {
       effectiveWidth: "Accepts values %.",
       questionTitleWidth: "Accepts values px."
     },
+    progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in."
   },
   // Properties
   p: {
@@ -1557,6 +1576,7 @@ export var enStrings = {
     dataList: "Items for auto-suggest",
     itemSize: "Input field width (in characters)",
     itemTitleWidth: "Item label width (in px)",
+    inputTextAlignment: "Input value alignment",
     elements: "Elements", // Auto-generated string
     content: "Content", // Auto-generated string
     navigationButtonsVisibility: "Show/hide navigation buttons",
@@ -1597,6 +1617,7 @@ export var enStrings = {
     rateColorMode: "Smileys color scheme",
     copyDisplayValue: "Copy display value", // Auto-generated string
     effectiveColSpan: "Column span",
+    progressBarInheritWidthFrom: "Progress bar area width",
   },
   theme: {
     advancedMode: "Advanced mode",

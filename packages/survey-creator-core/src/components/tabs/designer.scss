@@ -42,7 +42,8 @@ svc-tab-designer {
 
   .sd-title {
     display: flex;
-    &.sd-element__title--hidden {
+    &.sd-element__title--hidden,
+    &.svc-element__title--hidden {
       display: none;
     }
   }
@@ -113,4 +114,15 @@ svc-tab-designer {
 
 .svc-designer-placeholder-page .svc-row--ghost {
   display: none;
+}
+
+.svc-tab-designer__toolbar {
+  position: absolute;
+  bottom: calcSize(0);
+  right: 0;
+  .sv-action-bar {
+    padding: calcSize(1.5);
+    gap: calcSize(1);
+    flex-direction: column;
+  }
 }

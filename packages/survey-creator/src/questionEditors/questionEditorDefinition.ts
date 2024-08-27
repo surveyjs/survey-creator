@@ -298,6 +298,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "minValueExpression", tab: "logic" },
         { name: "maxValueExpression", tab: "logic" },
         { name: "size", tab: "layout" },
+        { name: "inputTextAlignment", tab: "layout" },
         { name: "maxLength", tab: "validation" },
         { name: "minErrorText", tab: "validation" },
         { name: "maxErrorText", tab: "validation" },
@@ -462,6 +463,7 @@ export class SurveyQuestionEditorDefinition {
         "maxLength",
         "size",
         "placeholder",
+        "inputTextAlignment",
         "requiredErrorText",
         "validators",
         { name: "defaultValueExpression", tab: "logic" },
@@ -481,6 +483,7 @@ export class SurveyQuestionEditorDefinition {
     paneldynamic: {
       properties: [
         "renderMode",
+        "displayMode",
         "templateTabTitle",
         "tabTitlePlaceholder",
         "tabAlign",
@@ -501,6 +504,8 @@ export class SurveyQuestionEditorDefinition {
         "panelNextText",
         "showQuestionNumbers",
         "showRangeInProgress",
+        "showProgressBar",
+        "progressBarLocation",
         { name: "defaultPanelValue", tab: "data" },
         { name: "defaultValueFromLastPanel", tab: "data" },
         { name: "templateTitleLocation", tab: "layout" },

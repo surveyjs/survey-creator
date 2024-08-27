@@ -1,4 +1,4 @@
-import { ItemValue, QuestionCheckboxBase, QuestionCheckboxModel, QuestionDropdownModel, QuestionMatrixDynamicModel, QuestionRankingModel, Serializer, surveyLocalization } from "survey-core";
+import { ItemValue, QuestionBooleanModel, QuestionCheckboxBase, QuestionCheckboxModel, QuestionDropdownModel, QuestionMatrixDynamicModel, QuestionRankingModel, Serializer, surveyLocalization } from "survey-core";
 import { QuestionEmbeddedCreatorModel } from "../src/components/embedded-creator";
 import { CreatorPresetEditorModel } from "../src/presets-editor";
 export * from "../src/preset-question-ranking";
@@ -353,7 +353,7 @@ test("Preset edit model, property grid, apply", () => {
   const propDef = editor.preset.getJson().propertyGrid?.definition;
   const surveyProps = propDef?.classes["survey"];
   expect(propDef?.autoGenerateProperties).toStrictEqual(false);
-  expect(surveyProps?.tabs).toHaveLength(1);
+  expect(surveyProps?.tabs).toHaveLength(2);
   expect(surveyProps?.properties).toHaveLength(4);
 
   const propGridSurvey = getPropGridSurvey(survey);
@@ -382,7 +382,7 @@ test("Preset edit model, property grid, apply", () => {
   expect(pageProps?.tabs).toHaveLength(0);
   expect(pageProps?.properties).toHaveLength(0);
   const panelBaseProps = propDef?.classes["panelbase"];
-  expect(panelBaseProps?.tabs).toHaveLength(0);
+  expect(panelBaseProps?.tabs).toHaveLength(1);
   expect(panelBaseProps?.properties).toHaveLength(3);
   const creator = editor.creator;
   creator.JSON = { pages: [{ name: "page1" }] };
@@ -391,7 +391,7 @@ test("Preset edit model, property grid, apply", () => {
   expect(panels2).toHaveLength(1);
   expect(panels2[0].elements).toHaveLength(3);
 });
-test("Preset edit model, live property grid & visible indexes", () => {
+test("Preset edit model, make general tab as second tab", () => {
   const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
   survey.currentPage = survey.getPageByName("page_propertyGrid_definition");
@@ -399,6 +399,12 @@ test("Preset edit model, live property grid & visible indexes", () => {
   const propGridCreator = getPropGridCreator(survey);
   propGridCreator.JSON = {
     elements: [
+      { type: "panel", "name": "logic",
+        elements: [
+          { type: "comment", name: "visibleIf" },
+          { type: "comment", name: "enableIf" }
+        ]
+      },
       { type: "panel", "name": "general",
         elements: [
           { type: "text", name: "name" },
@@ -413,25 +419,13 @@ test("Preset edit model, live property grid & visible indexes", () => {
   propGridCreator.survey.getQuestionByName("name").title = "Name 1";
   expect(editor.applyFromSurveyModel()).toBeTruthy();
   const creator = editor.creator;
-  const propDef = editor.preset.getJson().propertyGrid?.definition;
-  const textProps = propDef?.classes["text"];
-  expect(propDef?.autoGenerateProperties).toStrictEqual(false);
-  expect(textProps?.tabs).toHaveLength(0);
-  expect(textProps?.properties).toHaveLength(2);
-
   creator.JSON = { elements: [{ type: "text", name: "q1" }] };
   creator.selectElement(creator.survey.getQuestionByName("q1"));
   const propGridSurvey = getPropGridSurvey(survey);
   const panels = propGridSurvey.getAllPanels();
-  expect(panels).toHaveLength(1);
-  expect(panels[0].name).toBe("general");
-  const elements = panels[0].elements;
-  expect(elements).toHaveLength(5);
-  expect(elements[0].name).toBe("name");
-  expect(elements[1].name).toBe("inputType");
-  expect(elements[2].name).toBe("title");
-  expect(elements[3].name).toBe("placeholder");
-  expect(elements[4].name).toBe("description");
+  expect(panels).toHaveLength(2);
+  expect(panels[0].name).toBe("logic");
+  expect(panels[1].name).toBe("general");
 });
 test("Preset edit model, include columns types", () => {
   const editor = new CreatorPresetEditorModel();
@@ -780,6 +774,7 @@ function addLocale(name: string): void {
   if(!surveyLocalization.locales[name]) {
     surveyLocalization.locales[name] = {};
     surveyLocalization["localeNames"][name] = name.toUpperCase();
+    surveyLocalization["localeNamesInEnglish"][name] = name.toUpperCase() + "-English";
   }
 }
 function addLocales(): void {
@@ -814,6 +809,24 @@ test("Preset edit model, Languages tab", () => {
   expect(editor.applyFromSurveyModel()).toBeTruthy();
   expect(editor.creator.locale).toBeFalsy();
   expect(surveyLocalization.supportedLocales).toStrictEqual([]);
+});
+test("Preset edit model, Languages tab - show in English", () => {
+  addLocales();
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  const surveyLocalesQuestion = <QuestionCheckboxModel>survey.getQuestionByName("languages_surveyLocales");
+  const showInEnglishQuestion = <QuestionBooleanModel>survey.getQuestionByName("languages_surveyUseEnglishNames");
+
+  expect(showInEnglishQuestion.value).toBe(false);
+  const item = ItemValue.getItemByValue(surveyLocalesQuestion.choices, "de");
+  expect(item.text).toBe("DE");
+  showInEnglishQuestion.value = true;
+  expect(item.text).toBe("DE-English");
+  expect(editor.applyFromSurveyModel()).toBeTruthy();
+  expect(editor.json.languages?.useEnglishNames).toBeTruthy();
+  expect(surveyLocalization.showNamesInEnglish).toBeTruthy();
+
+  surveyLocalization.showNamesInEnglish = false;
 });
 test("Preset edit model, toolbox categories, restore after creator locale changed", () => {
   addLocales();

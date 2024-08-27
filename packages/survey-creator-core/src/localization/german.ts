@@ -654,13 +654,6 @@ var germanTranslation = {
     allowResizeComment: "Benutzern erlauben, die Größe von Textbereichen zu ändern",
     textUpdateMode: "Wert der Textfrage aktualisieren",
     maskType: "Typ der Eingabemaske",
-    maskTypes: {
-      none: "Nichts",
-      patternmask: "Muster",
-      numericmask: "Numerisch",
-      datetimemask: "Datum und Uhrzeit",
-      currencymask: "Währung"
-    },
     focusOnFirstError: "Fokus auf die erste ungültige Antwort setzen",
     checkErrorsMode: "Validierung ausführen",
     validateVisitedEmptyFields: "Validieren leerer Felder bei verlorenem Fokus",
@@ -995,6 +988,18 @@ var germanTranslation = {
       url: "Web-URL",
       week: "Woche"
     },
+    maskType: {
+      none: "Nichts",
+      pattern: "Muster",
+      numeric: "Numerisch",
+      datetime: "Datum und Uhrzeit",
+      currency: "Währung"
+    },
+    inputTextAlignment: {
+      auto: "Auto",
+      left: "Links",
+      right: "Rechts"
+    },
     all: "alle",
     page: "Seite",
     survey: "Umfrage",
@@ -1153,6 +1158,10 @@ var germanTranslation = {
     isPanelless: {
       "false": "Vorgabe",
       "true": "Ohne Paneele"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "Wie bei der Umfrage",
+      container: "Identisch mit Container"
     }
   },
   // Operators
@@ -1310,7 +1319,8 @@ var germanTranslation = {
     },
     file: {
       imageHeight: "Passt die Höhe des Bildes in den Umfrageergebnissen an.",
-      imageWidth: "Passt die Breite des Bildes in den Umfrageergebnissen an."
+      imageWidth: "Passt die Breite des Bildes in den Umfrageergebnissen an.",
+      allowImagesPreview: "Zeigt nach Möglichkeit Miniaturansichten für hochgeladene Dateien an. Deaktivieren Sie diese Option, wenn Sie stattdessen Dateisymbole anzeigen möchten."
     },
     image: {
       contentMode: "Die Option \"Auto\" bestimmt automatisch den geeigneten Anzeigemodus - Bild, Video oder YouTube - basierend auf der bereitgestellten Quell-URL."
@@ -1434,6 +1444,7 @@ var germanTranslation = {
     dataList: "Geben Sie eine Liste mit Auswahlmöglichkeiten ein, die dem Befragten während der Eingabe vorgeschlagen werden.",
     itemSize: "Die Einstellung ändert nur die Größe der Eingabefelder und wirkt sich nicht auf die Breite des Fragefelds aus.",
     itemTitleWidth: "Legt eine konsistente Breite für alle Elementbeschriftungen in Pixeln fest",
+    inputTextAlignment: "Wählen Sie aus, wie der Eingabewert innerhalb des Felds ausgerichtet werden soll. Die Standardeinstellung \"Auto\" richtet den Eingabewert nach rechts aus, wenn eine Währungs- oder numerische Maskierung angewendet wird, und nach links, wenn dies nicht der Fall ist.",
     altText: "Dient als Ersatz, wenn das Bild nicht auf dem Gerät eines Benutzers angezeigt werden kann, und aus Gründen der Barrierefreiheit.",
     rateColorMode: "Definiert die Farbe des ausgewählten Emojis, wenn der Symboltyp \"Bewertung\" auf \"Smileys\" eingestellt ist. Wählen Sie zwischen: \"Standard\" - das ausgewählte Emoji erscheint in der Standardfarbe der Umfrage; \"Skala\" - das ausgewählte Emoji erbt die Farbe von der Bewertungsskala.",
     expression: {
@@ -1484,7 +1495,8 @@ var germanTranslation = {
     panellayoutcolumn: {
       effectiveWidth: "Akzeptiert die Werte %.",
       questionTitleWidth: "Akzeptiert die Werte px."
-    }
+    },
+    progressBarInheritWidthFrom: "Die Option \"Wie Container\" passt die Breite des Fortschrittsbalkenbereichs automatisch an das HTML-Element an, in dem die Umfrage platziert wird."
   },
   // Properties
   p: {
@@ -1549,6 +1561,7 @@ var germanTranslation = {
     dataList: "Datenliste",
     itemSize: "Elementgröße",
     itemTitleWidth: "Breite der Artikelbeschriftung (in px)",
+    inputTextAlignment: "Ausrichtung der Eingabewerte",
     elements: "Elemente",
     content: "Inhalt",
     navigationButtonsVisibility: "Sichtbarkeit der Navigationsbuttons",
@@ -1588,7 +1601,8 @@ var germanTranslation = {
     scaleColorMode: "Farbmodus skalieren",
     rateColorMode: "Farbmodus bewerten",
     copyDisplayValue: "Anzeigewert kopieren",
-    effectiveColSpan: "Spaltenbereich"
+    effectiveColSpan: "Spaltenbereich",
+    progressBarInheritWidthFrom: "Breite des Fortschrittsbalkenbereichs"
   },
   theme: {
     advancedMode: "Erweiterter Modus",
@@ -2432,3 +2446,19 @@ editorLocalization.locales["de"] = germanTranslation;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Akzeptiert die Werte %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Akzeptiert die Werte px."
 // p.effectiveColSpan: "Column span" => "Spaltenbereich"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "Wie bei der Umfrage"
+// progressBarInheritWidthFrom.container: "Same as container" => "Identisch mit Container"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Zeigt nach Möglichkeit Miniaturansichten für hochgeladene Dateien an. Deaktivieren Sie diese Option, wenn Sie stattdessen Dateisymbole anzeigen möchten."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "Die Option \"Wie Container\" passt die Breite des Fortschrittsbalkenbereichs automatisch an das HTML-Element an, in dem die Umfrage platziert wird."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "Breite des Fortschrittsbalkenbereichs"
+// maskType.none: "None" => "Nichts"
+// maskType.pattern: "Pattern" => "Muster"
+// maskType.numeric: "Numeric" => "Numerisch"
+// maskType.datetime: "Date and Time" => "Datum und Uhrzeit"
+// maskType.currency: "Currency" => "Währung"
+
+// inputTextAlignment.auto: "Auto" => "Auto"
+// inputTextAlignment.left: "Left" => "Links"
+// inputTextAlignment.right: "Right" => "Rechts"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Wählen Sie aus, wie der Eingabewert innerhalb des Felds ausgerichtet werden soll. Die Standardeinstellung \"Auto\" richtet den Eingabewert nach rechts aus, wenn eine Währungs- oder numerische Maskierung angewendet wird, und nach links, wenn dies nicht der Fall ist."
+// p.inputTextAlignment: "Input value alignment" => "Ausrichtung der Eingabewerte"

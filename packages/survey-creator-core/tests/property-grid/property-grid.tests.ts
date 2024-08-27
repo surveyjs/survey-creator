@@ -32,7 +32,8 @@ import {
   QuestionImagePickerModel,
   ComponentCollection,
   QuestionBooleanModel,
-  QuestionRadiogroupModel
+  QuestionRadiogroupModel,
+  PageModel
 } from "survey-core";
 import {
   EmptySurveyCreatorOptions,
@@ -3336,10 +3337,26 @@ test("PropertyGridEditorMaskType editor", () => {
   expect(maskTypeQuestion.selectedItem.value).toEqual("pattern");
   expect(maskTypeQuestion.selectedItem.title).toEqual("Pattern");
 });
+test("PropertyGridEditorMaskType editor: choices redefinition", () => {
+  const prop = Serializer.findProperty("text", "maskType");
+  const oldChoicesValue = (prop as any).choicesValue;
+  const oldChoicesFunc = (prop as any).choicesfunc;
+  prop.setChoices(["none", "pattern", "numeric"], undefined);
+  const question = new QuestionTextModel("q1");
+  const propertyGrid = new PropertyGridModelTester(question);
+  const maskTypeQuestion = propertyGrid.survey.getQuestionByName("maskType");
+  expect(maskTypeQuestion.getType()).toEqual("buttongroup");
+  expect(maskTypeQuestion.choices).toHaveLength(3);
+  expect(maskTypeQuestion.choices[0].value).toBe("none");
+  expect(maskTypeQuestion.choices[1].value).toBe("pattern");
+  expect(maskTypeQuestion.choices[2].value).toBe("numeric");
+
+  Serializer.findProperty("text", "maskType").setChoices(oldChoicesValue as any, oldChoicesFunc);
+});
 test("PropertyGridEditorMaskType editor: localize item", () => {
   const enLocale = editorLocalization.getLocale("");
-  const oldMaskTypesNone = enLocale.pe.maskTypes.none;
-  enLocale.pe.maskTypes.none = "Unmasked";
+  const oldMaskTypesNone = enLocale.pv.maskType.none;
+  enLocale.pv.maskType.none = "Unmasked";
 
   const question = new QuestionTextModel("q1");
   const propertyGrid = new PropertyGridModelTester(question);
@@ -3348,7 +3365,7 @@ test("PropertyGridEditorMaskType editor: localize item", () => {
   expect(maskTypeQuestion.selectedItem.value).toEqual("none");
   expect(maskTypeQuestion.selectedItem.title).toEqual("Unmasked");
 
-  enLocale.pe.maskTypes.none = oldMaskTypesNone;
+  enLocale.pv.maskType.none = oldMaskTypesNone;
 });
 test("PropertyGridEditorMaskType editor: localize item", () => {
   ComponentCollection.Instance.add({
@@ -3475,4 +3492,29 @@ test("autoGrow & allowResize on setting comment question", () => {
   question.allowResize = true;
   expect(autoGrowQuestion.value === "true").toBeTruthy();
   expect(allowResizeQuestion.value === "true").toBeTruthy();
+});
+test("page class doesn't have layout category", () => {
+  const page = new PageModel("page");
+  const propertyGrid = new PropertyGridModelTester(page);
+  expect(propertyGrid.survey.getPanelByName("logic")).toBeTruthy();
+  expect(propertyGrid.survey.getPanelByName("layout")).toBeFalsy();
+});
+test("tagbox as property & required", () => {
+  Serializer.addProperty("survey", {
+    name: "prop1", category: "general", default: ["item1"],
+    isRequired: true, type: "multiplevalues", choices: ["item1", "item2", "item3"]
+  });
+
+  const survey = new SurveyModel();
+  const propertyGrid = new PropertyGridModelTester(survey);
+  const question = propertyGrid.survey.getQuestionByName("prop1");
+  expect(question.value).toHaveLength(1);
+  expect(question.value[0]).toBe("item1");
+  expect(question.errors).toHaveLength(0);
+  question.clearValue();
+  expect(question.errors).toHaveLength(1);
+  question.value = ["item1"];
+  expect(question.errors).toHaveLength(0);
+
+  Serializer.removeProperty("survey", "prop1");
 });

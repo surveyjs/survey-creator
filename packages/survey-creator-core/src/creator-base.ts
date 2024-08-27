@@ -1888,8 +1888,9 @@ export class SurveyCreatorModel extends Base
     this.dragDropSurveyElements.onDragEnd.add((sender, options) => {
       this.stopUndoRedoTransaction();
       const editTitle = isDraggedFromToolbox && this.startEditTitleOnQuestionAdded;
-      this.selectElement(options.draggedElement, undefined, true, editTitle);
       isDraggedFromToolbox = false;
+      if (!options.draggedElement) return;
+      this.selectElement(options.draggedElement, undefined, true, editTitle);
       this.onDragEnd.fire(this, options);
       if (!options.fromElement) {
         this.setModified({ type: "ADDED_FROM_TOOLBOX", question: options.draggedElement });
@@ -2187,7 +2188,8 @@ export class SurveyCreatorModel extends Base
       survey: survey,
       reason: reason,
       area: area,
-      model: !!model ? model : this.currentPlugin?.model
+      model: !!model ? model : this.currentPlugin?.model,
+      obj: area === "property-grid" && model ? model.obj : undefined
     });
     if (reason === "designer") {
       this.onDesignerSurveyCreated.fire(this, { survey: survey });
@@ -2242,6 +2244,8 @@ export class SurveyCreatorModel extends Base
     }
   }
   public onStateChanged: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
+
+  public onSurfaceToolbarActionExecuted: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
 
   notifier = new Notifier({
     root: "svc-notifier",
@@ -2302,7 +2306,7 @@ export class SurveyCreatorModel extends Base
       json: objJSON
     };
     this.onQuestionConverting.fire(this, options);
-    const newQuestion = <Question>QuestionConverter.convertObject(obj, className, options.json, defaultJSON || this.getDefaultElementJSON(className), !!defaultJSON);
+    const newQuestion = <Question>QuestionConverter.convertObject(obj, className, options.json, this.getDefaultElementJSON(className), defaultJSON);
     this.setModified({
       type: "QUESTION_CONVERTED",
       className: className,
@@ -3563,7 +3567,7 @@ export class SurveyCreatorModel extends Base
   /**
    * A function that is called each time users click the [Save button](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#showSaveButton) or [auto-save](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#isAutoSave) is triggered to save a survey JSON schema.
    * 
-   * For more information, refer to the Save and Load Survey Model Schemas help topic for your framework: [Angular](https://surveyjs.io/survey-creator/documentation/get-started-angular#save-and-load-survey-model-schemas) | [Vue](https://surveyjs.io/survey-creator/documentation/get-started-vue#save-and-load-survey-model-schemas) | [React](https://surveyjs.io/survey-creator/documentation/get-started-react#save-and-load-survey-model-schemas) | [Knockout / jQuery](https://surveyjs.io/survey-creator/documentation/get-started-knockout-jquery).
+   * For more information, refer to the Save and Load Survey Model Schemas help topic for your framework: [Angular](https://surveyjs.io/survey-creator/documentation/get-started-angular#save-and-load-survey-model-schemas) | [Vue](https://surveyjs.io/survey-creator/documentation/get-started-vue#save-and-load-survey-model-schemas) | [React](https://surveyjs.io/survey-creator/documentation/get-started-react#save-and-load-survey-model-schemas) | [HTML/CSS/JavaScript](https://surveyjs.io/survey-creator/documentation/get-started-html-css-javascript#save-and-load-survey-model-schemas).
    * @see saveThemeFunc
    */
   public get saveSurveyFunc() {
@@ -3684,7 +3688,7 @@ export class SurveyCreatorModel extends Base
       needSeparator: needSeparator
     });
     action.action = () => {
-      onSelectQuestionType(item.typeName);
+      onSelectQuestionType(item.typeName, item.json);
     };
 
     if (!!item.items && item.items.length > 0 && this.toolbox.showSubitems) {
@@ -3825,6 +3829,8 @@ export class SurveyCreatorModel extends Base
    * - `"never"` - Hides the expand/collapse buttons.
    */
   @property({ defaultValue: "never" }) expandCollapseButtonVisibility?: "never" | "onhover" | "always";
+
+  expandOnDragTimeOut: number = 1000;
 
   selectFromStringEditor: boolean;
 
