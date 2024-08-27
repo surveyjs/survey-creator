@@ -94,10 +94,6 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
         res.push(new ItemValue(locale));
       }
     });
-    res.sort((a: ItemValue, b: ItemValue): number => {
-      if(a.text === b.text) return 0;
-      return a.text < b.text ? -1 : 1;
-    });
     if(addEnLocale) {
       res.unshift(new ItemValue("en", editorLocalization.getLocaleName("en")));
     }

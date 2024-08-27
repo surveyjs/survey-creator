@@ -14,6 +14,7 @@ import { SurveyCreatorModel } from "../creator-base";
 import { settings } from "../creator-settings";
 import { DesignerStateManager } from "./tabs/designer-state-manager";
 import { TabDesignerPlugin } from "./tabs/designer-plugin";
+import { isPanelDynamic } from "../survey-elements";
 
 export class SurveyElementActionContainer extends AdaptiveActionContainer {
   private needToShrink(item: Action, shrinkStart: boolean, shrinkEnd: boolean) {
@@ -93,6 +94,11 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   protected expandCollapseAction: IAction;
   protected designerStateManager: DesignerStateManager;
   @property({ defaultValue: true }) allowDragging: boolean;
+
+  protected get dragInsideCollapsedContainer(): boolean {
+    return this.collapsed && this.creator.dragDropSurveyElements.insideContainer;
+  }
+
   @property({ defaultValue: true }) allowExpandCollapse: boolean;
   @property({
     onSet: (val, target: SurveyElementAdornerBase<T>) => {
@@ -107,6 +113,34 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     }
   }) collapsed: boolean;
   @property() renderedCollapsed: boolean;
+
+  private dragCollapsedTimer;
+
+  protected get canExpandOnDrag() {
+    return this.surveyElement.isPanel || this.surveyElement.isPage || isPanelDynamic(this.surveyElement);
+  }
+  private draggedIn = false;
+  protected dragIn() {
+    if (!this.draggedIn) {
+      if (this.canExpandOnDrag && this.collapsed) {
+        this.draggedIn = true;
+        this.dragCollapsedTimer = setTimeout(() => {
+          this.expandWithDragIn();
+        }, this.creator.expandOnDragTimeOut);
+      }
+    }
+  }
+  protected expandWithDragIn() {
+    this.collapsed = false;
+    this.dragCollapsedTimer = undefined;
+  }
+
+  protected dragOut() {
+    if (this.draggedIn) {
+      clearTimeout(this.dragCollapsedTimer);
+      this.draggedIn = false;
+    }
+  }
 
   public dblclick(event) {
     if (this.allowExpandCollapse) this.collapsed = !this.collapsed;

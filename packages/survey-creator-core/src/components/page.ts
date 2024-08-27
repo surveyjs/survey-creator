@@ -40,6 +40,10 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     this.attachElement(page);
   }
 
+  protected get dragInsideCollapsedContainer(): boolean {
+    return this.collapsed;
+  }
+
   protected attachElement(surveyElement: PageModel): void {
     super.attachElement(surveyElement);
     this.dragTypeOverMe = null;
@@ -183,6 +187,12 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       if (!!this.creator && !this.creator.showAddQuestionButton) {
         result += " svc-page--drag-over-empty-no-add-button";
       }
+    }
+    if (!!this.dragTypeOverMe && this.collapsed) {
+      this.dragIn();
+      result += " svc-page__content--collapsed-drag-over-inside";
+    } else {
+      this.dragOut();
     }
     if (this.isGhost) {
       return result + " svc-page__content--new";
