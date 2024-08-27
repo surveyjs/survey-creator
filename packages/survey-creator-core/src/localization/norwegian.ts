@@ -995,6 +995,11 @@ export var nbStrings = {
       datetime: "Dato og klokkeslett",
       currency: "Valuta"
     },
+    inputTextAlignment: {
+      auto: "Auto",
+      left: "Venstre",
+      right: "Høyre"
+    },
     all: "all",
     page: "page",
     survey: "survey",
@@ -1439,6 +1444,7 @@ export var nbStrings = {
     dataList: "Angi en liste over valg som skal foreslås for respondenten under inndata.",
     itemSize: "Innstillingen endrer bare størrelsen på inndatafeltene og påvirker ikke bredden på spørsmålsboksen.",
     itemTitleWidth: "Angir konsekvent bredde for alle elementetiketter i piksler",
+    inputTextAlignment: "Velg hvordan du vil justere inndataverdien i feltet. Standardinnstillingen \"Auto\" justerer inngangsverdien til høyre hvis valuta eller numerisk maskering brukes, og til venstre hvis ikke.",
     altText: "Fungerer som en erstatning når bildet ikke kan vises på en brukers enhet og av tilgjengelighetshensyn.",
     rateColorMode: "Definerer fargen på den valgte emojien når Vurdering-ikontypen er satt til \"Smileys\". Velg mellom: \"Standard\" - den valgte emojien vises i standard undersøkelsesfarge; \"Skala\" - den valgte emojien arver farge fra vurderingsskalaen.",
     expression: {
@@ -1555,6 +1561,7 @@ export var nbStrings = {
     dataList: "Dataliste",
     itemSize: "itemSize",
     itemTitleWidth: "Bredden på vareetiketten (i piksler)",
+    inputTextAlignment: "Justering av inngangsverdi",
     elements: "Elementer",
     content: "Innhold",
     navigationButtonsVisibility: "navigationButtonsVisibility",
@@ -2743,3 +2750,9 @@ editorLocalization.locales["nb"] = nbStrings;
 // maskType.numeric: "Numeric" => "Numerisk"
 // maskType.datetime: "Date and Time" => "Dato og klokkeslett"
 // maskType.currency: "Currency" => "Valuta"
+
+// inputTextAlignment.auto: "Auto" => "Auto"
+// inputTextAlignment.left: "Left" => "Venstre"
+// inputTextAlignment.right: "Right" => "Høyre"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Velg hvordan du vil justere inndataverdien i feltet. Standardinnstillingen \"Auto\" justerer inngangsverdien til høyre hvis valuta eller numerisk maskering brukes, og til venstre hvis ikke."
+// p.inputTextAlignment: "Input value alignment" => "Justering av inngangsverdi"

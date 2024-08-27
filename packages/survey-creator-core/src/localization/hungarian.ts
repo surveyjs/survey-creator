@@ -995,6 +995,11 @@ export var huStrings = {
       datetime: "Dátum és idő",
       currency: "Valuta"
     },
+    inputTextAlignment: {
+      auto: "Kocsi",
+      left: "Balra",
+      right: "Jobbra"
+    },
     all: "összes",
     page: "lap",
     survey: "kérdőív",
@@ -1439,6 +1444,7 @@ export var huStrings = {
     dataList: "Adja meg azoknak a választási lehetőségeknek a listáját, amelyeket a rendszer javasolni fog a válaszadónak a bevitel során.",
     itemSize: "A beállítás csak a beviteli mezőket méretezi át, és nincs hatással a kérdésmező szélességére.",
     itemTitleWidth: "Konzisztens szélességet állít be az összes elemfelirathoz képpontban",
+    inputTextAlignment: "Válassza ki, hogyan szeretné igazítani a bemeneti értéket a mezőn belül. Az alapértelmezett \"Automatikus\" beállítás a bemeneti értéket jobbra igazítja, ha pénznem vagy numerikus maszkolás van alkalmazva, és balra, ha nem.",
     altText: "Helyettesítőként szolgál, ha a kép nem jeleníthető meg a felhasználó eszközén, valamint kisegítő lehetőségek céljából.",
     rateColorMode: "Meghatározza a kiválasztott hangulatjel színét, ha az Értékelés ikon típusa \"Hangulatjelek\". Válasszon a következők közül: \"Alapértelmezett\" - a kiválasztott hangulatjel alapértelmezett felmérési színben jelenik meg; \"Skála\" - a kiválasztott hangulatjel örökli a színt a minősítési skálától.",
     expression: {
@@ -1555,6 +1561,7 @@ export var huStrings = {
     dataList: "Adatlista",
     itemSize: "Elem mérete",
     itemTitleWidth: "Elemcímke szélessége (képpontban)",
+    inputTextAlignment: "Bemeneti érték igazítása",
     elements: "Elemek",
     content: "Tartalom",
     navigationButtonsVisibility: "Navigációs gombok láthatósága",
@@ -2893,3 +2900,9 @@ editorLocalization.locales["hu"] = huStrings;
 // maskType.numeric: "Numeric" => "Numerikus"
 // maskType.datetime: "Date and Time" => "Dátum és idő"
 // maskType.currency: "Currency" => "Valuta"
+
+// inputTextAlignment.auto: "Auto" => "Kocsi"
+// inputTextAlignment.left: "Left" => "Balra"
+// inputTextAlignment.right: "Right" => "Jobbra"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Válassza ki, hogyan szeretné igazítani a bemeneti értéket a mezőn belül. Az alapértelmezett \"Automatikus\" beállítás a bemeneti értéket jobbra igazítja, ha pénznem vagy numerikus maszkolás van alkalmazva, és balra, ha nem."
+// p.inputTextAlignment: "Input value alignment" => "Bemeneti érték igazítása"
