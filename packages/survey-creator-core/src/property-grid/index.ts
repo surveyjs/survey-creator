@@ -447,6 +447,13 @@ export class PropertyGridTitleActionsCreator {
         action.iconName = this.getHelpActionIconName(question);
       }
     });
+    const baseOnMouseDown = action.doMouseDown;
+    action.doMouseDown = (args: any) => {
+      baseOnMouseDown.call(action);
+      const evt = !!args.originalEvent ? args.originalEvent : args;
+      evt.preventDefault();
+      evt.stopPropagation();
+    };
     return action;
   }
   private getHelpActionIconName(question: Question): string {

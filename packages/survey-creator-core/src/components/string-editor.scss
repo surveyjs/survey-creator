@@ -128,36 +128,6 @@
   line-height: 0px;
 }
 
-.svc-string-editor__button {
-  display: none;
-  position: relative;
-
-  use {
-    fill: $primary;
-  }
-}
-
-.svc-string-editor__button--edit {
-  height: calcSize(2);
-  width: calcSize(2);
-  padding: calcSize(1);
-
-  .sv-svg-icon {
-    vertical-align: bottom;
-  }
-
-  &.sv-svg-icon {
-    overflow: visible;
-  }
-}
-
-.svc-string-editor:hover:not(:focus-within) {
-  .svc-string-editor__button--edit {
-    //display: inline-block;
-    display: none;
-  }
-}
-
 .svc-string-editor:hover:not(.svc-string-editor--readonly):not(:focus-within) {
   .svc-string-editor__border--hover {
     opacity: 1;
@@ -202,13 +172,6 @@
         }
       }
     }
-  }
-}
-
-.sd-table__cell--actions,
-.sd-matrixdynamic__add-btn {
-  .svc-string-editor__button--done {
-    width: calcSize(2);
   }
 }
 
