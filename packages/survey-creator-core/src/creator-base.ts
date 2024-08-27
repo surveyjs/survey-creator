@@ -2245,6 +2245,8 @@ export class SurveyCreatorModel extends Base
   }
   public onStateChanged: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
 
+  public onSurfaceToolbarActionExecuted: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
+
   notifier = new Notifier({
     root: "svc-notifier",
     rootWithButtons: "",
