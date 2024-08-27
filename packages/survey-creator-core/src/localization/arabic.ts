@@ -995,6 +995,11 @@ export var arStrings = {
       datetime: "التاريخ والوقت",
       currency: "عملة"
     },
+    inputTextAlignment: {
+      auto: "تلقائي",
+      left: "يسار",
+      right: "يمين"
+    },
     all: "الكل",
     page: "الصفحة",
     survey: "الإستبيان",
@@ -1439,6 +1444,7 @@ export var arStrings = {
     dataList: "أدخل قائمة بالخيارات التي سيتم اقتراحها على المستجيب أثناء الإدخال.",
     itemSize: "يغير الإعداد حجم حقول الإدخال فقط ولا يؤثر على عرض مربع السؤال.",
     itemTitleWidth: "يضبط عرضا متناسقا لكل تسميات العناصر بالبكسل",
+    inputTextAlignment: "حدد كيفية محاذاة قيمة الإدخال داخل الحقل. يقوم الإعداد الافتراضي \"تلقائي\" بمحاذاة قيمة الإدخال إلى اليمين إذا تم تطبيق إخفاء العملة أو الرقمية وإلى اليسار إذا لم يكن كذلك.",
     altText: "يعمل كبديل عندما يتعذر عرض الصورة على جهاز المستخدم ولأغراض إمكانية الوصول.",
     rateColorMode: "يحدد لون الرموز التعبيرية المحددة عند تعيين نوع رمز التقييم على \"الوجوه الضاحكة\". اختر بين: \"افتراضي\" - يظهر الرمز التعبيري المحدد بلون الاستطلاع الافتراضي ؛ \"مقياس\" - يرث الرمز التعبيري المحدد اللون من مقياس التصنيف.",
     expression: {
@@ -1555,6 +1561,7 @@ export var arStrings = {
     dataList: "قائمة البيانات",
     itemSize: "itemSize",
     itemTitleWidth: "عرض تسمية العنصر (بالبكسل)",
+    inputTextAlignment: "محاذاة قيمة الإدخال",
     elements: "عناصر",
     content: "محتوى",
     navigationButtonsVisibility: "رؤية أزرار التنقل",
@@ -2651,3 +2658,9 @@ editorLocalization.locales["ar"] = arStrings;
 // maskType.numeric: "Numeric" => "عددي"
 // maskType.datetime: "Date and Time" => "التاريخ والوقت"
 // maskType.currency: "Currency" => "عملة"
+
+// inputTextAlignment.auto: "Auto" => "تلقائي"
+// inputTextAlignment.left: "Left" => "يسار"
+// inputTextAlignment.right: "Right" => "يمين"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "حدد كيفية محاذاة قيمة الإدخال داخل الحقل. يقوم الإعداد الافتراضي \"تلقائي\" بمحاذاة قيمة الإدخال إلى اليمين إذا تم تطبيق إخفاء العملة أو الرقمية وإلى اليسار إذا لم يكن كذلك."
+// p.inputTextAlignment: "Input value alignment" => "محاذاة قيمة الإدخال"

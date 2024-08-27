@@ -995,6 +995,11 @@ export const roStrings = {
       datetime: "Data și ora",
       currency: "Valută"
     },
+    inputTextAlignment: {
+      auto: "Automobil",
+      left: "Stânga",
+      right: "Dreapta"
+    },
     all: "Toate",
     page: "Pagină",
     survey: "Chestionar",
@@ -1439,6 +1444,7 @@ export const roStrings = {
     dataList: "Introduceți o listă de opțiuni care vor fi sugerate respondentului în timpul introducerii.",
     itemSize: "Setarea redimensionează doar câmpurile de intrare și nu afectează lățimea casetei întrebării.",
     itemTitleWidth: "Setează o lățime consistentă pentru toate etichetele elementelor în pixeli",
+    inputTextAlignment: "Selectați modul de aliniere a valorii de intrare în câmp. Setarea implicită \"Auto\" aliniază valoarea de intrare la dreapta dacă se aplică mascare monedară sau numerică și la stânga dacă nu.",
     altText: "Servește ca un substitut atunci când imaginea nu poate fi afișată pe dispozitivul utilizatorului și pentru scopuri de accesibilitate.",
     rateColorMode: "Definește culoarea emoji-ului selectat când tipul pictogramei de evaluare este setat la „Smileys”. Alegeți dintre: „Implicit” - emoji-ul selectat apare în culoarea implicită a chestionarului; „Scală” - emoji-ul selectat moștenește culoarea de la scala de evaluare.",
     expression: {
@@ -1555,6 +1561,7 @@ export const roStrings = {
     dataList: "Elemente pentru sugestii automate",
     itemSize: "Lățimea câmpului de intrare (în caractere)",
     itemTitleWidth: "Lățimea etichetei elementului (în px)",
+    inputTextAlignment: "Alinierea valorilor de intrare",
     elements: "Elemente",
     content: "Conținut",
     navigationButtonsVisibility: "Arată/ascunde butoanele de navigare",
@@ -1673,3 +1680,9 @@ editorLocalization.locales["ro"] = roStrings;
 // maskType.numeric: "Numeric" => "Numerică"
 // maskType.datetime: "Date and Time" => "Data și ora"
 // maskType.currency: "Currency" => "Valută"
+
+// inputTextAlignment.auto: "Auto" => "Automobil"
+// inputTextAlignment.left: "Left" => "Stânga"
+// inputTextAlignment.right: "Right" => "Dreapta"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Selectați modul de aliniere a valorii de intrare în câmp. Setarea implicită \"Auto\" aliniază valoarea de intrare la dreapta dacă se aplică mascare monedară sau numerică și la stânga dacă nu."
+// p.inputTextAlignment: "Input value alignment" => "Alinierea valorilor de intrare"

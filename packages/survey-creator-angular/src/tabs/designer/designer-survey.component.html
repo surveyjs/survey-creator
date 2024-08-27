@@ -25,6 +25,9 @@
     <svc-page-navigator [pagesController]="model.pagesController" [pageEditMode]="creator.pageEditMode">
     </svc-page-navigator>
   </div>
+  <div *ngIf="model.hasToolbar" class="svc-tab-designer__toolbar">
+    <sv-action-bar [model]="model.actionContainer"></sv-action-bar>
+  </div>
 </ng-template>
 
 <ng-template let-page="page" let-isGhost="isGhost" #pageContainer>

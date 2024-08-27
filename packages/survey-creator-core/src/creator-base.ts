@@ -2245,6 +2245,8 @@ export class SurveyCreatorModel extends Base
   }
   public onStateChanged: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
 
+  public onSurfaceToolbarActionExecuted: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
+
   notifier = new Notifier({
     root: "svc-notifier",
     rootWithButtons: "",
@@ -2304,7 +2306,7 @@ export class SurveyCreatorModel extends Base
       json: objJSON
     };
     this.onQuestionConverting.fire(this, options);
-    const newQuestion = <Question>QuestionConverter.convertObject(obj, className, options.json, defaultJSON || this.getDefaultElementJSON(className), !!defaultJSON);
+    const newQuestion = <Question>QuestionConverter.convertObject(obj, className, options.json, this.getDefaultElementJSON(className), defaultJSON);
     this.setModified({
       type: "QUESTION_CONVERTED",
       className: className,

@@ -995,6 +995,11 @@ var italianTranslation = {
       datetime: "Data e ora",
       currency: "Valuta"
     },
+    inputTextAlignment: {
+      auto: "Automatico",
+      left: "A sinistra",
+      right: "A destra"
+    },
     all: "Tutto",
     page: "Pagina",
     survey: "Sondaggio",
@@ -1439,6 +1444,7 @@ var italianTranslation = {
     dataList: "Inserisci un elenco di scelte che verranno suggerite al rispondente durante l'inserimento.",
     itemSize: "L'impostazione ridimensiona solo i campi di input e non influisce sulla larghezza della casella della domanda.",
     itemTitleWidth: "Imposta una larghezza coerente per tutte le etichette degli elementi in pixel",
+    inputTextAlignment: "Selezionare la modalità di allineamento del valore di input all'interno del campo. L'impostazione predefinita \"Auto\" allinea il valore di input a destra se viene applicata una maschera di valuta o numerica e a sinistra in caso contrario.",
     altText: "Funge da sostituto quando l'immagine non può essere visualizzata sul dispositivo di un utente e per motivi di accessibilità.",
     rateColorMode: "Definisce il colore dell'emoji selezionata quando il tipo di icona Valutazione è impostato su \"Smiley\". Scegli tra: \"Predefinito\" - l'emoji selezionata appare nel colore predefinito del sondaggio; \"Scala\": l'emoji selezionata eredita il colore dalla scala di valutazione.",
     expression: {
@@ -1555,6 +1561,7 @@ var italianTranslation = {
     dataList: "Lista dati",
     itemSize: "Dimensione opzione",
     itemTitleWidth: "Larghezza dell'etichetta dell'articolo (in px)",
+    inputTextAlignment: "Allineamento dei valori di input",
     elements: "Elementi",
     content: "Contenuto",
     navigationButtonsVisibility: "Visibilità Pulsanti di navigazione",
@@ -2498,3 +2505,9 @@ editorLocalization.locales["it"] = italianTranslation;
 // maskType.numeric: "Numeric" => "Numerico"
 // maskType.datetime: "Date and Time" => "Data e ora"
 // maskType.currency: "Currency" => "Valuta"
+
+// inputTextAlignment.auto: "Auto" => "Automatico"
+// inputTextAlignment.left: "Left" => "A sinistra"
+// inputTextAlignment.right: "Right" => "A destra"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Selezionare la modalità di allineamento del valore di input all'interno del campo. L'impostazione predefinita \"Auto\" allinea il valore di input a destra se viene applicata una maschera di valuta o numerica e a sinistra in caso contrario."
+// p.inputTextAlignment: "Input value alignment" => "Allineamento dei valori di input"
