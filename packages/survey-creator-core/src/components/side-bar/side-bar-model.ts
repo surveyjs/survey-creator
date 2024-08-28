@@ -42,7 +42,7 @@ export class SidebarModel extends Base {
       getAnimatedElement: () => {
         return this.rootElement;
       },
-      isAnimationEnabled: () => this.animationAllowed,
+      isAnimationEnabled: () => this.animationAllowed && this.creator["animationEnabled"],
       getRerenderEvent: () => this.onElementRerendered,
       getLeaveOptions: () => {
         return {

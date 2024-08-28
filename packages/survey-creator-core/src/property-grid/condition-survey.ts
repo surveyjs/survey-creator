@@ -6,6 +6,7 @@ import { PropertyEditorSetupValue } from "./index";
 import { assignDefaultV2Classes, wrapTextByCurlyBraces } from "../utils/utils";
 import { logicCss } from "../components/tabs/logic-theme";
 import { getLogicString } from "../components/tabs/logic-types";
+import { CreatorBase } from "src/creator-base";
 
 export class ConditionEditorItem {
   public conjunction: string = "and";
@@ -316,7 +317,8 @@ export class ConditionEditor extends PropertyEditorSetupValue {
   protected updatePlaceholderVisibileIf() {
     if (!!this.panel) {
       let expression = "";
-      if (this.isModal) {
+      //todo remove placeholder to V2 version
+      if (this.isModal && !(this.options as CreatorBase)["animationEnabled"]) {
         expression = "{panel.questionName} empty and {panelIndex} == 0";
       }
       this.panel.template.getQuestionByName("placeholder").visibleIf = expression;
