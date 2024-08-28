@@ -186,7 +186,7 @@ module.exports = function (options) {
         amd: "survey-core",
       },
       "survey-core/themes": {
-        root: "Survey.Themes",
+        root: "SurveyTheme",
         commonjs2: "survey-core/themes",
         commonjs: "survey-core/themes",
         amd: "survey-core/themes",
