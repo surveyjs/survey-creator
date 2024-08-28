@@ -128,8 +128,8 @@ test("Test question type converter on page for panel", async (t) => {
 
     await t
       .scroll(Selector(".svc-tab-designer"), "bottom")
-      .expect(Selector(".svc-panel__question-type-selector").visible).ok()
-      .click(Selector(".svc-panel__question-type-selector"))
+      .expect(Selector(".svc-element__question-type-selector").visible).ok()
+      .click(Selector(".svc-element__question-type-selector"))
       .expect(Selector(".sv-popup__container").filterVisible().visible).ok();
     await takeElementScreenshot("convert-to-popup-panel-not-empty.png", Selector(".sv-popup__container").filterVisible(), t, comparer);
   });

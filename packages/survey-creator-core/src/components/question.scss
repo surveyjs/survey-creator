@@ -923,35 +923,35 @@ svc-question,
   bottom: 0;
 }
 
-.svc-panel__question-type-selector {
-  appearance: none;
-  display: flex;
-  height: calcSize(5);
-  padding: calcSize(1);
-  box-sizing: border-box;
-  border: none;
-  border-radius: 2px;
-  background-color: transparent;
-  cursor: pointer;
-  margin-right: calcSize(1);
-  outline: none;
-  top: calcSize(2);
-  margin: 0;
-  position: absolute;
-  right: 0;
+// .svc-panel__question-type-selector {
+//   appearance: none;
+//   display: flex;
+//   height: calcSize(5);
+//   padding: calcSize(1);
+//   box-sizing: border-box;
+//   border: none;
+//   border-radius: 2px;
+//   background-color: transparent;
+//   cursor: pointer;
+//   margin-right: calcSize(1);
+//   outline: none;
+//   top: calcSize(2);
+//   margin: 0;
+//   position: absolute;
+//   right: 0;
 
-  use {
-    fill: var(--ctr-library-contextual-button-icon-color, $foreground-light);
-  }
+//   use {
+//     fill: var(--ctr-library-contextual-button-icon-color, $foreground-light);
+//   }
 
-  &:hover {
-    background-color: $background-dim;
-  }
+//   &:hover {
+//     background-color: $background-dim;
+//   }
 
-  &:focus {
-    background-color: $primary-light;
-  }
-}
+//   &:focus {
+//     background-color: $primary-light;
+//   }
+// }
 
 @container (max-width: #{$sd-panel-normal-min-width}) {
   .svc-panel__placeholder_frame {
