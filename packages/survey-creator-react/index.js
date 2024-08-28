@@ -107,6 +107,7 @@ const options = {
   showLogicTab: true,
   showTranslationTab: true,
   showEmbeddedSurveyTab: true,
+  showThemeTab: true,
   isAutoSave: true
 };
 
