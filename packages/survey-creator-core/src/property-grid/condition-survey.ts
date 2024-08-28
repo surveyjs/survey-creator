@@ -296,6 +296,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       this.onUpdateQuestionCssClasses(options);
     });
     this.text = !!this.object && this.propertyName ? this.object[this.propertyName] : "";
+    this.updatePlaceholderVisibileIf();
   }
   public get title(): string {
     return this.panel.title;
@@ -310,6 +311,16 @@ export class ConditionEditor extends PropertyEditorSetupValue {
   public set isModal(val: boolean) {
     if (val === this.isModalValue) return;
     this.isModalValue = val;
+    this.updatePlaceholderVisibileIf();
+  }
+  protected updatePlaceholderVisibileIf() {
+    if (!!this.panel) {
+      let expression = "";
+      if (this.isModal) {
+        expression = "{panel.questionName} empty and {panelIndex} == 0";
+      }
+      this.panel.template.getQuestionByName("placeholder").visibleIf = expression;
+    }
   }
   protected getSurveyJSON(): any {
     return {
@@ -375,6 +386,12 @@ export class ConditionEditor extends PropertyEditorSetupValue {
               type: "text",
               visible: false
             },
+            {
+              name: "placeholder",
+              type: "html",
+              visible: false,
+              html: `<div class='svc-logic-placeholder'><span class="svc-logic-placeholder__text">${editorLocalization.getString("pe.emptyLogicPopupMessage")}<span></div>`
+            }
           ]
         },
         {
