@@ -19,7 +19,8 @@ import {
   PopupBaseViewModel,
   surveyLocalization,
   QuestionTextBase,
-  IDialogOptions
+  IDialogOptions,
+  PageModel
 } from "survey-core";
 import { editorLocalization, getLocString } from "../editorLocalization";
 import { EditableObject } from "../editable-object";
@@ -802,6 +803,7 @@ export class PropertyGridModel {
 
   currentlySelectedProperty: string;
   currentlySelectedPanel: PanelModel;
+  currentlySelectedPage: PageModel;
 
   public objValueChangedCallback: () => void;
   public changedFromActionCallback: (obj: Base, propertyName: string) => void;
@@ -958,13 +960,24 @@ export class PropertyGridModel {
       this.objValueChangedCallback();
     }
     this.updateDependedPropertiesEditors();
-    this.survey.onFocusInPanel.add((sender, options) => {
-      if (this.currentlySelectedPanel !== options.panel) {
-        const questionToFocus = options.panel.getFirstQuestionToFocus(false, true);
-        this.currentlySelectedProperty = !!questionToFocus ? questionToFocus.name : "";
-        this.currentlySelectedPanel = options.panel;
-      }
-    });
+
+    if (this.showOneCategoryInPropertyGrid) {
+      this.survey.onCurrentPageChanged.add((sender, options) => {
+        if (this.currentlySelectedPage !== options.newCurrentPage) {
+          const questionToFocus = options.newCurrentPage.getFirstQuestionToFocus(false, true);
+          this.currentlySelectedPage = options.newCurrentPage;
+          this.currentlySelectedProperty = !!questionToFocus ? questionToFocus.name : "";
+        }
+      });
+    } else {
+      this.survey.onFocusInPanel.add((sender, options) => {
+        if (this.currentlySelectedPanel !== options.panel) {
+          const questionToFocus = options.panel.getFirstQuestionToFocus(false, true);
+          this.currentlySelectedProperty = !!questionToFocus ? questionToFocus.name : "";
+          this.currentlySelectedPanel = options.panel;
+        }
+      });
+    }
     this.survey.onFocusInQuestion.add((sender, options) => {
       this.currentlySelectedProperty = options.question.name;
       this.currentlySelectedPanel = <PanelModel>options.question.parent;
