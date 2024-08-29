@@ -486,3 +486,30 @@ test("Page selector with invisible page", async t => {
     await takeElementScreenshot("test-tab-page-selector-witn-invisible-page.png", ".svc-page-selector .sv-popup__container", t, comparer);
   });
 });
+
+test("Tagbox has wrong style on preview tab", async t => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1024, 768);
+    await setJSON({
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "tagbox",
+              "name": "question1",
+              "defaultValue": ["Item 2", "Item 3"],
+              "choices": ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5"]
+            }
+          ]
+        }
+      ]
+    });
+
+    const questionTagbox = Selector(".sd-input.sd-tagbox");
+    await t
+      .click(getTabbedMenuItemByText(creatorTabPreviewName))
+      .click(questionTagbox);
+    await takeElementScreenshot("test-tab-tagbox-style.png", Selector(".sv-popup__container").filterVisible(), t, comparer);
+  });
+});
