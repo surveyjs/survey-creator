@@ -38,15 +38,7 @@ svc-page {
   inset-inline-end: 0; // right
   padding: 0 calcSize(1);
   z-index: 1;
-  box-sizing: border-box;
-  width: 100%;
-  pointer-events: none;
-  display: flex;
 
-  .sv-action-bar {
-    flex-grow: 1;
-    justify-content: flex-end;
-  }
   .sv-action-bar-separator {
     margin: 0 calcSize(1);
   }
@@ -190,7 +182,7 @@ svc-page {
       background: var(--ctr-survey-page-background-color-selected, $secondary-backcolor-semi-light);
 
       .svc-page__content-actions {
-        display: flex;
+        display: block;
       }
     }
   }
@@ -309,7 +301,7 @@ svc-page {
     display: none;
   }
   .svc-page__content-actions {
-    display: flex;
+    display: block;
   }
   .sd-page {
     display: flex;
