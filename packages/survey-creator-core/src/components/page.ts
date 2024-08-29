@@ -35,6 +35,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       (type) => {
         this.currentAddQuestionType = type;
         this.addGhostPage(false);
+        this.creator.survey.currentPage = this.page;
       }
     );
     this.attachElement(page);
