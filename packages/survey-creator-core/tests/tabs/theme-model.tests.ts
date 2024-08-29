@@ -240,6 +240,23 @@ test("Theme builder switch themes", (): any => {
   expect(themeModel["--sjs-general-backcolor-dim"]).toEqual("rgba(36, 36, 36, 1)");
 });
 
+test("Theme builder switch themes with reset of previous values", (): any => {
+  const themeModel = new ThemeModel();
+  themeModel.initialize();
+
+  expect(themeModel.themeName).toEqual("default");
+  expect(themeModel["--sjs-shadow-inner"]).toEqual("inset 0px 1px 2px 0px rgba(0, 0, 0, 0.15)");
+  expect(themeModel["--sjs-shadow-inner-reset"]).toEqual("inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
+
+  themeModel.themeName = "contrast";
+  expect(themeModel["--sjs-shadow-inner"]).toEqual("0px 0px 0px 2px rgba(0, 0, 0, 1),0px -2px 0px 2px rgba(0, 0, 0, 1)");
+  expect(themeModel["--sjs-shadow-inner-reset"]).toEqual("0px 0px 0px 0px rgba(0, 0, 0, 1),0px 0px 0px 0px rgba(0, 0, 0, 1)");
+
+  themeModel.themeName = "default";
+  expect(themeModel["--sjs-shadow-inner"]).toEqual("inset 0px 1px 2px 0px rgba(0, 0, 0, 0.15)");
+  expect(themeModel["--sjs-shadow-inner-reset"]).toEqual("inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
+});
+
 test("Theme builder: composite question font", (): any => {
   const themeModel = new ThemeModel();
   themeModel.initialize();
@@ -597,7 +614,7 @@ test("Check reset for sjs-shadow-inner due to animation", () => {
   expect(themeModel.cssVariables["--sjs-shadow-inner"]).toBe("inset 0px 1px 2px 0px rgba(0, 0, 0, 0.15)");
   expect(themeModel.cssVariables["--sjs-shadow-inner-reset"]).toBe("inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
 
-  themeModel["--sjs-shadow-inner"] = "0px 1px 2px 0px rgba(0, 0, 0, 0.15), inset 0px 1px 2px 0px rgba(0, 0, 0, 0.15)";
-  expect(themeModel.cssVariables["--sjs-shadow-inner"]).toBe("0px 1px 2px 0px rgba(0, 0, 0, 0.15), inset 0px 1px 2px 0px rgba(0, 0, 0, 0.15)");
-  expect(themeModel.cssVariables["--sjs-shadow-inner-reset"]).toBe("0px 0px 0px 0px rgba(0, 0, 0, 0.15), inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
+  themeModel["--sjs-shadow-inner"] = "0px 1px 2px 0px rgba(0, 0, 0, 0.15),inset 0px 1px 2px 0px rgba(0, 0, 0, 0.15)";
+  expect(themeModel.cssVariables["--sjs-shadow-inner"]).toBe("0px 1px 2px 0px rgba(0, 0, 0, 0.15),inset 0px 1px 2px 0px rgba(0, 0, 0, 0.15)");
+  expect(themeModel.cssVariables["--sjs-shadow-inner-reset"]).toBe("0px 0px 0px 0px rgba(0, 0, 0, 0.15),inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
 });

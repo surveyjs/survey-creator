@@ -2188,7 +2188,8 @@ export class SurveyCreatorModel extends Base
       survey: survey,
       reason: reason,
       area: area,
-      model: !!model ? model : this.currentPlugin?.model
+      model: !!model ? model : this.currentPlugin?.model,
+      obj: area === "property-grid" && model ? model.obj : undefined
     });
     if (reason === "designer") {
       this.onDesignerSurveyCreated.fire(this, { survey: survey });
@@ -2243,6 +2244,8 @@ export class SurveyCreatorModel extends Base
     }
   }
   public onStateChanged: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
+
+  public onSurfaceToolbarActionExecuted: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
 
   notifier = new Notifier({
     root: "svc-notifier",
@@ -2303,7 +2306,7 @@ export class SurveyCreatorModel extends Base
       json: objJSON
     };
     this.onQuestionConverting.fire(this, options);
-    const newQuestion = <Question>QuestionConverter.convertObject(obj, className, options.json, defaultJSON || this.getDefaultElementJSON(className), !!defaultJSON);
+    const newQuestion = <Question>QuestionConverter.convertObject(obj, className, options.json, this.getDefaultElementJSON(className), defaultJSON);
     this.setModified({
       type: "QUESTION_CONVERTED",
       className: className,
@@ -3673,7 +3676,7 @@ export class SurveyCreatorModel extends Base
       needSeparator: needSeparator
     });
     action.action = () => {
-      onSelectQuestionType(item.typeName);
+      onSelectQuestionType(item.typeName, item.json);
     };
 
     if (!!item.items && item.items.length > 0 && this.toolbox.showSubitems) {

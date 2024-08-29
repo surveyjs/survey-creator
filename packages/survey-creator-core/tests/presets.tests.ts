@@ -259,15 +259,17 @@ test("apply creator locale", () => {
 test("apply supported locales", () => {
   expect(surveyLocalization.supportedLocales).toStrictEqual([]);
   const json: ICreatorPresetData = {
-    languages: { surveyLocales: ["de", "fr", "it"] }
+    languages: { surveyLocales: ["de", "fr", "it"], useEnglishNames: true }
   };
   const preset = new CreatorPreset(json);
   const creator = new CreatorTester();
 
   preset.apply(creator);
   expect(surveyLocalization.supportedLocales).toStrictEqual(["de", "fr", "it"]);
+  expect(surveyLocalization.showNamesInEnglish).toBeTruthy();
 
   preset.setJson({});
   preset.apply(creator);
   expect(surveyLocalization.supportedLocales).toStrictEqual([]);
+  expect(surveyLocalization.showNamesInEnglish).toBeFalsy();
 });

@@ -20,6 +20,7 @@ import {
   ListModel,
   QuestionTextModel,
   ActionContainer,
+  Helpers,
   PanelModel
 } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
@@ -343,16 +344,48 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     });
     return res;
   }
+
+  private buildDefaultJsonMap(availableItems: QuestionToolboxItem[]) {
+    const defaultJsons = {};
+    function addItemJson(toolboxItem: QuestionToolboxItem) {
+      const type = toolboxItem.json?.type || toolboxItem.id;
+      if (toolboxItem.json) {
+        if (!defaultJsons[type]) defaultJsons[type] = [];
+        defaultJsons[type].push(toolboxItem.json);
+      }
+    }
+    availableItems.forEach((toolboxItem: QuestionToolboxItem) => {
+      addItemJson(toolboxItem);
+      (toolboxItem.items || []).forEach((toolboxSubitem: QuestionToolboxItem) => {
+        addItemJson(toolboxSubitem);
+      });
+    });
+    return defaultJsons;
+  }
+
   public getConvertToTypesActions(parentAction?: Action): Array<IAction> {
     const availableItems = this.getConvertToTypes();
-
+    const defaultJsons = this.buildDefaultJsonMap(availableItems);
     const res = [];
     let lastItem = null;
     availableItems.forEach((item: QuestionToolboxItem) => {
       const needSeparator = lastItem && item.category != lastItem.category;
       const action = this.creator.createIActionBarItemByClass(item, needSeparator, (questionType: string, json?: any) => {
         const type = json?.type || questionType;
-        this.creator.convertCurrentQuestion(type, json);
+        let newJson = {};
+        (defaultJsons[type] || []).forEach((djson) => {
+          if (this.jsonIsCorresponded(djson)) {
+            newJson = { ...json };
+            const objJson = this.element.toJSON();
+            Object.keys(djson).forEach(p => {
+              if (p != "type" && !newJson[p]) newJson[p] = undefined;
+            });
+            Object.keys(json).forEach(p => {
+              if (p != "type" && !(!objJson[p] || djson[p])) newJson[p] = undefined;
+            });
+          }
+        });
+        this.creator.convertCurrentQuestion(type, newJson);
         parentAction?.hidePopup();
       });
       lastItem = item;
@@ -386,19 +419,16 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
         listModel.selectedItem = this.getSelectedItem(newItems, this.currentType);
 
         newItems.forEach(action => {
+          const toolboxItem = (this.creator.toolbox.getItemByName(action.id) as QuestionToolboxItem);
           if (action.items?.length > 0) {
             let selectedSubItem = undefined;
             action.items.forEach(item => {
               const elementType = this.element.getType();
-              const toolboxItem = (this.creator.toolbox.getItemByName(action.id) as QuestionToolboxItem).getSubitemByName(item.id);
-              const json = toolboxItem.json || {};
+              const toolboxSubitem = toolboxItem.getSubitemByName(item.id);
+              const json = toolboxSubitem.json || {};
               if (item.id == elementType || json.type == elementType) {
-                if (!selectedSubItem) selectedSubItem = item;
-                let jsonIsCorresponded = true;
-                Object.keys(json).forEach(p => {
-                  if (p != "type" && json[p] != this.element[p]) jsonIsCorresponded = false;
-                });
-                if (jsonIsCorresponded) selectedSubItem = item;
+                if (!listModel.selectedItem) selectedSubItem = item;
+                if (this.jsonIsCorresponded(json)) selectedSubItem = item;
               }
             });
             if (selectedSubItem) {
@@ -421,6 +451,15 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     });
     newAction.disableHide = true;
     return newAction;
+  }
+
+  private jsonIsCorresponded(json: any) {
+    let jsonIsCorresponded = true;
+    const objJson = this.element.toJSON();
+    Object.keys(json).forEach(p => {
+      if (p != "type" && !Helpers.isTwoValueEquals(json[p], objJson[p])) jsonIsCorresponded = false;
+    });
+    return jsonIsCorresponded;
   }
 
   private createConvertInputType() {
