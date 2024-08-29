@@ -172,10 +172,10 @@ test("Check shadow settings editor", () => {
   ];
 
   cssVariables = creator?.theme?.cssVariables;
-  expect(cssVariables["--sjs-shadow-inner"]).toBe("0px 3px 4px 0px rgba(0, 0, 0, 0.15), inset 0px 5px 6px 0px rgba(0, 0, 0, 0.15)");
-  expect(cssVariables["--sjs-shadow-inner-reset"]).toBe("0px 0px 0px 0px rgba(0, 0, 0, 0.15), inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
-  expect(themeModel.cssVariables["--sjs-shadow-inner"]).toBe("0px 3px 4px 0px rgba(0, 0, 0, 0.15), inset 0px 5px 6px 0px rgba(0, 0, 0, 0.15)");
-  expect(themeModel.cssVariables["--sjs-shadow-inner-reset"]).toBe("0px 0px 0px 0px rgba(0, 0, 0, 0.15), inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
+  expect(cssVariables["--sjs-shadow-inner"]).toBe("0px 3px 4px 0px rgba(0, 0, 0, 0.15),inset 0px 5px 6px 0px rgba(0, 0, 0, 0.15)");
+  expect(cssVariables["--sjs-shadow-inner-reset"]).toBe("0px 0px 0px 0px rgba(0, 0, 0, 0.15),inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
+  expect(themeModel.cssVariables["--sjs-shadow-inner"]).toBe("0px 3px 4px 0px rgba(0, 0, 0, 0.15),inset 0px 5px 6px 0px rgba(0, 0, 0, 0.15)");
+  expect(themeModel.cssVariables["--sjs-shadow-inner-reset"]).toBe("0px 0px 0px 0px rgba(0, 0, 0, 0.15),inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
 });
 
 test("Check all file edit questions has onChooseFiles callback", (): any => {
