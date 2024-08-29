@@ -1,9 +1,10 @@
-import { Base, PageModel, property, SurveyModel, ComputedUpdater, settings, IPage } from "survey-core";
+import { Base, PageModel, property, SurveyModel, ComputedUpdater, settings, IPage, ActionContainer } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
 import { getLocString } from "../../editorLocalization";
 import { PagesController } from "../../pages-controller";
 import { SurveyHelper } from "../../survey-helper";
 import { DragDropSurveyElements } from "../../survey-elements";
+import { SurveyElementActionContainer } from "../action-container-view-model";
 require("./designer.scss");
 
 export const initialSettingsAllowShowEmptyTitleInDesignMode = settings.allowShowEmptyTitleInDesignMode;
@@ -18,6 +19,8 @@ export class TabDesignerViewModel extends Base {
   @property() designerCss: string;
   @property() showPlaceholder: boolean;
   public creator: SurveyCreatorModel;
+
+  public actionContainer: ActionContainer;
 
   public get displayPageDropTarget() {
     return this.pagesController.page2Display === this.newPage ? "newGhostPage" : this.pagesController.page2Display.name;
@@ -67,8 +70,39 @@ export class TabDesignerViewModel extends Base {
     super();
     this.creator = creator;
     this.pagesControllerValue = new PagesController(creator);
+
+    this.initToolbar();
     this.initSurvey();
   }
+  private initToolbar() {
+    this.actionContainer = new ActionContainer();
+    const action = (action) => { this.creator.onSurfaceToolbarActionExecuted.fire(this.creator, { action: action }); };
+
+    let defaultActionBarCss = {
+      root: "sv-action-bar",
+      defaultSizeMode: "",
+      smallSizeMode: "",
+      item: "svc-page-navigator__selector",
+      itemWithTitle: "",
+      itemAsIcon: "",
+      itemActive: "",
+      itemPressed: "",
+      itemIcon: "svc-page-navigator__navigator-icon",
+      itemTitleWithIcon: "",
+    };
+    this.actionContainer.cssClasses = defaultActionBarCss;
+
+    this.actionContainer.setItems([{
+      id: "collapseAll",
+      iconName: "icon-collapseall-24x24",
+      action: action
+    }, {
+      id: "expandAll",
+      iconName: "icon-expandall-24x24",
+      action: action
+    }]);
+  }
+
   get survey() {
     return this.creator.survey;
   }
@@ -82,6 +116,9 @@ export class TabDesignerViewModel extends Base {
     if (this.creator.isMobileView)
       return getLocString("ed.surveyPlaceHolderMobile");
     return getLocString("ed.surveyPlaceHolder");
+  }
+  public get hasToolbar() {
+    return this.creator.expandCollapseButtonVisibility != "never";
   }
   private isUpdatingNewPage: boolean;
   public onDesignerSurveyPropertyChanged(obj: Base, propName: string): void {

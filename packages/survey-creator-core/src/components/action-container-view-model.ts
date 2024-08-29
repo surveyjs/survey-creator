@@ -187,6 +187,11 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this.creator.sidebar.onPropertyChanged.add(this.sidebarFlyoutModeChangedFunc);
     this.setShowAddQuestionButton(true);
     this.expandCollapseAction.visible = this.allowExpandCollapse;
+
+    this.creator.onSurfaceToolbarActionExecuted.add((_, options) => {
+      if (options.action.id == "collapseAll") this.collapsed = true;
+      if (options.action.id == "expandAll") this.collapsed = false;
+    });
   }
 
   protected detachElement(surveyElement: T): void {
