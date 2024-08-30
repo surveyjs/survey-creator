@@ -1072,3 +1072,38 @@ test("QuestionImageAdornerViewModel onOpenFileChooser event is raised", () => {
   expect(lastContext.elementType).toEqual("image");
   expect(lastContext.propertyName).toEqual("imageLink");
 });
+
+test("QuestionImageAdornerViewModel updated on locale changed", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    "locale": "default",
+    "title": {
+      "default": "Default Locale",
+      "fr": "French"
+    },
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "image",
+            "name": "question1",
+            "imageLink": {
+              "fr": "im2fr"
+            },
+          }
+        ]
+      }
+    ]
+  };
+  const question = <QuestionImageModel>creator.survey.getAllQuestions()[0];
+  const imageAdorner = new QuestionImageAdornerViewModel(creator, question, undefined as any, { getElementsByClassName: () => [{}] } as any);
+
+  expect(imageAdorner.isEmptyImageLink).toBeTruthy();
+  expect(imageAdorner.filePresentationModel.visible).toBeFalsy();
+
+  creator.survey.locale = "fr";
+  expect(imageAdorner.isEmptyImageLink).toBeFalsy();
+  expect(imageAdorner.filePresentationModel.visible).toBeTruthy();
+});
