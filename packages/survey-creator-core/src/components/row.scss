@@ -117,8 +117,6 @@
 }
 
 .sd-panel .svc-row > .sd-row.sd-row--multiple {
-  margin: -2px;
-  padding: 2px;
   width: calc(100% + #{$base-unit});
   padding-left: 0;
   margin-left: calcSize(-1);
