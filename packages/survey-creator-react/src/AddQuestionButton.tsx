@@ -58,7 +58,7 @@ export class AddQuestionButtonComponent extends SurveyElementBase<{ item: Action
       </span>
       {this.props.renderPopup !== false ? this.renderTypeSelector() : null}
     </div>
-      {this.props.renderPopup === false ? this.renderTypeSelector() : null}
+    {this.props.renderPopup === false ? this.renderTypeSelector() : null}
     </>);
   }
 }
