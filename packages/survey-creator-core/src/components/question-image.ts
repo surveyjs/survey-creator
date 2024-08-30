@@ -94,7 +94,7 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
   }
   public dispose(): void {
     this.surveyElement.unRegisterFunctionOnPropertyValueChanged("imageLink", "imageLinkValueChanged");
-    (this.surveyElement as QuestionImageModel).locImageLink.onStringChanged.remove(this.imageLinkValueChangedHandler);    
+    (this.surveyElement as QuestionImageModel).locImageLink.onStringChanged.remove(this.imageLinkValueChangedHandler);
     super.dispose();
     this.questionRoot = undefined;
   }
