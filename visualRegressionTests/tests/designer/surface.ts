@@ -1367,15 +1367,15 @@ test("Question add type selector button", async (t) => {
       ]
     };
     await setJSON(json);
-    await t.hover(Selector(".svc-panel__question-type-selector"));
+    await t.hover(Selector(".svc-panel__add-new-question-container .svc-element__question-type-selector"));
     await takeElementScreenshot("question-add-type-selector-button-panel-hover.png", Selector(".svc-panel__add-new-question-container"), t, comparer);
-    await ClientFunction(() => { (document.querySelector(".svc-panel__question-type-selector") as HTMLDivElement).focus(); })();
+    await ClientFunction(() => { (document.querySelector(".svc-panel__add-new-question-container .svc-element__question-type-selector") as HTMLDivElement).focus(); })();
     await takeElementScreenshot("question-add-type-selector-button-panel-focus.png", Selector(".svc-panel__add-new-question-container"), t, comparer);
 
-    await t.hover(Selector(".svc-element__question-type-selector"));
-    await takeElementScreenshot("question-add-type-selector-button-page-hover.png", Selector(".svc-element__add-new-question"), t, comparer);
-    await ClientFunction(() => { (document.querySelector(".svc-element__question-type-selector") as HTMLDivElement).focus(); })();
-    await takeElementScreenshot("question-add-type-selector-button-page-focus.png", Selector(".svc-element__add-new-question"), t, comparer);
+    await t.hover(Selector(".svc-page__footer .svc-element__question-type-selector"));
+    await takeElementScreenshot("question-add-type-selector-button-page-hover.png", Selector(".svc-page__footer .svc-element__add-new-question"), t, comparer);
+    await ClientFunction(() => { (document.querySelector(".svc-page__footer .svc-element__question-type-selector") as HTMLDivElement).focus(); })();
+    await takeElementScreenshot("question-add-type-selector-button-page-focus.png", Selector(".svc-page__footer .svc-element__add-new-question"), t, comparer);
   });
 });
 

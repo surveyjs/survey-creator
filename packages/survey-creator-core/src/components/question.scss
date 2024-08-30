@@ -967,7 +967,8 @@ svc-question,
   .svc-panel__placeholder_frame {
     padding: calcSize(10) calcSize(3) calcSize(10);
 
-    .svc-panel__add-new-question {
+    .svc-panel__add-new-question,
+    .svc-element__add-new-question {
       margin: 0;
     }
   }
@@ -978,11 +979,12 @@ svc-question,
       display: block;
     }
 
-    .svc-panel__question-type-selector {
+    .svc-element__question-type-selector {
       display: none;
     }
 
-    .svc-panel__add-new-question {
+    .svc-panel__add-new-question,
+    .svc-element__add-new-question {
       padding: calcSize(0.5) calcSize(0.5);
 
       .svc-text {

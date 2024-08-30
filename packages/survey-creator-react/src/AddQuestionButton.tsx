@@ -48,12 +48,17 @@ export class AddQuestionButtonComponent extends SurveyElementBase<{ item: Action
       }}
       onMouseOver={(e) => this.model.hoverStopper && this.model.hoverStopper(e.nativeEvent, e.currentTarget)}
     >
+      <SvgIcon
+        className={"svc-panel__add-new-question-icon"}
+        iconName={"icon-add_24x24"}
+        size={24}
+      ></SvgIcon>
       <span className="svc-text svc-text--normal svc-text--bold">
         {this.model.addNewQuestionText}
       </span>
       {this.props.renderPopup !== false ? this.renderTypeSelector() : null}
     </div>
-    {this.props.renderPopup === false ? this.renderTypeSelector() : null}
+      {this.props.renderPopup === false ? this.renderTypeSelector() : null}
     </>);
   }
 }
