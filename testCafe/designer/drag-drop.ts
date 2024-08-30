@@ -1849,3 +1849,67 @@ test("Drag Drop on the bottom of page in bypage mode", async (t) => {
   const resultJson = await getJSON();
   await t.expect(resultJson).eql(expectedJson);
 });
+
+test("Drag Drop indicator - rows", async (t) => {
+  await t.resizeWindow(1600, 1000);
+  const json = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          },
+          {
+            "type": "text",
+            "name": "question2",
+            "startWithNewLine": false
+          },
+          {
+            "type": "text",
+            "name": "question3"
+          },
+          {
+            "type": "text",
+            "name": "question4",
+            "startWithNewLine": false
+          }
+        ]
+      }
+    ]
+  };
+  await setJSON(json);
+
+  const toolboxToolAction = Selector(".svc-toolbox__tool > .sv-action__content");
+
+  await t
+    .hover(toolboxToolAction)
+    .dispatchEvent(toolboxToolAction, "pointerdown")
+
+    .hover(Selector(".svc-row").nth(0).find(".svc-question__adorner"), { offsetX: 100, offsetY: 5 })
+    .expect(Selector(".svc-row").nth(0).hasClass("svc-row--drag-over-top")).ok()
+
+    .hover(Selector(".svc-row").nth(0).find(".svc-question__adorner"), { offsetX: 100, offsetY: 150 })
+    .expect(Selector(".svc-row").nth(0).hasClass("svc-row--drag-over-top")).notOk()
+    .expect(Selector(".svc-row").nth(0).hasClass("svc-row--drag-over-bottom")).ok()
+
+    .hover(Selector(".svc-row").nth(1).find(".svc-question__adorner"), { offsetX: 100, offsetY: 5 })
+    .expect(Selector(".svc-row").nth(0).hasClass("svc-row--drag-over-top")).notOk()
+    .expect(Selector(".svc-row").nth(0).hasClass("svc-row--drag-over-bottom")).notOk()
+    .expect(Selector(".svc-row").nth(1).hasClass("svc-row--drag-over-top")).ok()
+
+    .hover(Selector(".svc-row").nth(1).find(".svc-question__adorner"), { offsetX: 100, offsetY: 150 })
+    .expect(Selector(".svc-row").nth(0).hasClass("svc-row--drag-over-top")).notOk()
+    .expect(Selector(".svc-row").nth(0).hasClass("svc-row--drag-over-bottom")).notOk()
+    .expect(Selector(".svc-row").nth(1).hasClass("svc-row--drag-over-top")).notOk()
+    .expect(Selector(".svc-row").nth(1).hasClass("svc-row--drag-over-bottom")).ok()
+
+    .hover(toolboxToolAction)
+    .dispatchEvent(toolboxToolAction, "pointerup")
+    .expect(Selector(".svc-row").nth(0).hasClass("svc-row--drag-over-top")).notOk()
+    .expect(Selector(".svc-row").nth(0).hasClass("svc-row--drag-over-bottom")).notOk()
+    .expect(Selector(".svc-row").nth(1).hasClass("svc-row--drag-over-top")).notOk()
+    .expect(Selector(".svc-row").nth(1).hasClass("svc-row--drag-over-bottom")).notOk();
+});

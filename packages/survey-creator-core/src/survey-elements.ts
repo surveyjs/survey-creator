@@ -160,8 +160,6 @@ export class DragDropSurveyElements extends DragDropCore<any> {
   protected getDropTargetByDataAttributeValue(dataAttributeValue: string, dropTargetNode: HTMLElement, event: PointerEvent): any {
     const oldDragOverIndicatorElement = this.dragOverIndicatorElement;
 
-    this.dragOverIndicatorElement = null;
-
     if (!dataAttributeValue) {
       // panel dynamic
       const nearestDropTargetElement = dropTargetNode.parentElement.closest<HTMLElement>(this.dropTargetDataAttributeName);
@@ -218,10 +216,10 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       let page: any = this.survey.getPageByName(dataAttributeValue);
       dropTarget.__page = page;
     }
+    this.dragOverIndicatorElement = dragOverElement;
     if (this.dragOverIndicatorElement != oldDragOverIndicatorElement) {
       this.removeDragOverMarker(oldDragOverIndicatorElement);
     }
-    this.dragOverIndicatorElement = dragOverElement;
     return dropTarget;
     // EO drop to question or panel
   }
@@ -340,6 +338,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
         this.dragOverIndicatorElement = row;
       } else {
         dragOverIndicator.dragTypeOverMe = this.dragOverLocation;
+        this.dragOverIndicatorElement = this.dropTarget;
       }
     }
     if (this.dragOverIndicatorElement != oldDragOverIndicatorElement) this.removeDragOverMarker(oldDragOverIndicatorElement);
@@ -440,10 +439,6 @@ export class DragDropSurveyElements extends DragDropCore<any> {
   private removeDragOverMarker(dropTarget: { dragTypeOverMe: boolean }): void {
     if (!!dropTarget) {
       dropTarget.dragTypeOverMe = null;
-    }
-    const row = this.parentElement?.dragDropFindRow(dropTarget);
-    if (!!row) {
-      row.dragTypeOverMe = null;
     }
   }
 
