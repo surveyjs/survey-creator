@@ -18,7 +18,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
   private _showOneCategoryInPropertyGrid: boolean = false;
   private propertyGridTab: SidebarPageModel;
   private toolboxTab: SidebarPageModel;
-  private placeholderPage: SidebarPageModel;
+  private propertyGridPlaceholderPage: SidebarPageModel;
   private surveySettingsAction: Action;
   private saveSurveyAction: Action;
   public previewAction: Action;
@@ -32,26 +32,48 @@ export class TabDesignerPlugin implements ICreatorPlugin {
   private get isSettingsActive(): boolean {
     return this.creator.showSidebar && this.isSurveySelected;
   }
-  private createVisibleUpdater() {
-    return <any>new ComputedUpdater<boolean>(() => { return this.creator.activeTab === "designer"; });
+  private get activePageIsPropertyGrid(): boolean {
+    return this.creator.sidebar.activePage === this.propertyGridTab.id;
   }
-  private setTabControl() {
+  private createVisibleUpdater() {
+    return <any>new ComputedUpdater<boolean>(() => {
+      const activePage = this.creator.sidebar.activePage;
+      return this.creator.activeTab === "designer" && activePage !== this.propertyGridPlaceholderPage.id;
+    });
+  }
+  private updateTabControl() {
     if (this.showOneCategoryInPropertyGrid) {
       this.updateTabControlActions();
       this.creator.sidebar.sideAreaComponentName = "svc-tab-control";
       this.creator.sidebar.sideAreaComponentData = this.tabControlModel;
-      this.creator.sidebar.headerComponentName = "svc-side-bar-property-grid-header";
-      this.creator.sidebar.headerComponentData = this.propertyGridViewModel;
     } else {
       this.creator.sidebar.sideAreaComponentName = "";
       this.creator.sidebar.sideAreaComponentData = undefined;
+    }
+  }
+
+  private updateHeaderComponent() {
+    if (this.showOneCategoryInPropertyGrid && this.activePageIsPropertyGrid) {
+      this.creator.sidebar.headerComponentName = "svc-side-bar-property-grid-header";
+      this.creator.sidebar.headerComponentData = this.propertyGridViewModel.objectSelectionAction;
+    } else {
       this.creator.sidebar.headerComponentName = "";
       this.creator.sidebar.headerComponentData = undefined;
     }
   }
 
   private updateActivePage() {
-    this.creator.sidebar.activePage = this.creator.survey.pageCount ? this.propertyGridTab.id : this.placeholderPage.id;
+    if (this.showOneCategoryInPropertyGrid) {
+      this.creator.sidebar.activePage = this.creator.survey.pageCount ? this.propertyGridTab.id : this.propertyGridPlaceholderPage.id;
+      this.updateHeaderComponent();
+    } else {
+      this.setPropertyGridIsActivePage();
+    }
+  }
+
+  private setPropertyGridIsActivePage() {
+    this.creator.sidebar.activePage = this.propertyGridTab.id;
+    this.updateHeaderComponent();
   }
 
   public get showOneCategoryInPropertyGrid(): boolean {
@@ -65,7 +87,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       this.propertyGridModel["setObj"](this.creator.selectedElement);
       if (this.creator.activeTab === "designer") {
         this.updateActivePage();
-        this.setTabControl();
+        this.updateTabControl();
       }
     }
   }
@@ -93,13 +115,14 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     });
 
     creator.onSelectedElementChanged.add((sender, options) => {
-      this.creator.sidebar.activePage = this.propertyGridTab.id;
+      this.setPropertyGridIsActivePage();
       this.updateTabControlActions();
     });
     this.toolboxTab = this.creator.sidebar.addPage("toolbox", "svc-toolbox", creator);
 
-    this.placeholderPage = this.creator.sidebar.addPage("propertyGridPlaceholder", "svc-property-grid-placeholder", this.propertyGridViewModel);
-    this.placeholderPage.caption = "Survey Settings";
+    this.propertyGridPlaceholderPage = this.creator.sidebar.addPage("propertyGridPlaceholder", "svc-property-grid-placeholder", this.propertyGridViewModel);
+    this.propertyGridPlaceholderPage.caption = "Survey Settings";
+    this.propertyGridPlaceholderPage.showToolbar = false;
 
     this.designerStateManager = new DesignerStateManager();
     this.designerStateManager.initForSurvey(this.creator.survey);
@@ -130,18 +153,17 @@ export class TabDesignerPlugin implements ICreatorPlugin {
   }
 
   private updateTabControlActions() {
-    const activePropertyGridPage = this.creator.sidebar.activePage === this.propertyGridTab.id;
     if (this.showOneCategoryInPropertyGrid) {
-      this.propertyGridViewModel.objectSelectionAction.tooltip = activePropertyGridPage && this.propertyGridModel.survey.currentPage.title;
+      this.propertyGridViewModel.objectSelectionAction.tooltip = this.propertyGridModel.survey.currentPage.title;
       const pgTabs = this.propertyGridModel.survey.pages.map(p => {
         const action = new Action({
           id: p.name,
           locTooltipName: "pe.tabs." + p.name,
           iconName: pgTabIcons[p.name] || pgTabIcons["specific"],
-          active: activePropertyGridPage && p.name === this.propertyGridModel.survey.currentPage.name,
+          active: this.activePageIsPropertyGrid && p.name === this.propertyGridModel.survey.currentPage.name,
           action: () => {
             this.creator.sidebar.expandSidebar();
-            this.creator.sidebar.activePage = this.propertyGridTab.id;
+            this.setPropertyGridIsActivePage();
             this.propertyGridModel.survey.currentPage = p;
             this.propertyGridViewModel.objectSelectionAction.tooltip = p.title;
             pgTabs.forEach(i => i.active = false);
@@ -158,7 +180,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     this.model = new TabDesignerViewModel(this.creator);
     this.creator.sidebar.showOneCategoryInPropertyGrid = this.showOneCategoryInPropertyGrid;
     this.updateActivePage();
-    this.setTabControl();
+    this.updateTabControl();
     this.creator.focusElement(undefined, true);
   }
 
@@ -167,10 +189,10 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       this.model.dispose();
     }
     this.model = undefined;
-    this.creator.sidebar.showOneCategoryInPropertyGrid = false;
     this.propertyGridTab.visible = false;
-    this.placeholderPage.visible = false;
+    this.propertyGridPlaceholderPage.visible = false;
     this.toolboxTab.visible = false;
+    this.creator.sidebar.showOneCategoryInPropertyGrid = false;
     this.creator.sidebar.sideAreaComponentName = undefined;
     this.creator.sidebar.sideAreaComponentData = undefined;
     this.creator.sidebar.headerComponentName = undefined;
@@ -281,7 +303,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       this.creator.setShowSidebar(true, true);
     }
     this.creator.selectElement(this.creator.survey);
-    this.creator.sidebar.activePage = this.propertyGridTab.id;
+    this.setPropertyGridIsActivePage();
   }
 
   public addFooterActions() {

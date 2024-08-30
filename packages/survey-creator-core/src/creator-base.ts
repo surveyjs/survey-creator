@@ -189,6 +189,17 @@ export class SurveyCreatorModel extends Base
    * Default value: `true`
    */
   @property({ defaultValue: true }) previewShowResults: boolean;
+
+  private _showOneCategoryInPropertyGrid: boolean;
+  get showOneCategoryInPropertyGrid(): boolean {
+    return this._showOneCategoryInPropertyGrid;
+  }
+  set showOneCategoryInPropertyGrid(newValue: boolean) {
+    this._showOneCategoryInPropertyGrid = newValue;
+    this.getPlugin("designer").showOneCategoryInPropertyGrid = newValue;
+    this.getPlugin("theme").showOneCategoryInPropertyGrid = newValue;
+  }
+
   get allowEditSurveyTitle(): boolean {
     return this.getPropertyValue("allowEditSurveyTitle", true);
   }

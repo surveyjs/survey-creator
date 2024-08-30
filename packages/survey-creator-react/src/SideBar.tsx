@@ -1,6 +1,6 @@
 import * as React from "react";
-import { SidebarPageModel, SidebarModel } from "survey-creator-core";
-import { Base, CssClassBuilder, getActionDropdownButtonTarget } from "survey-core";
+import { SidebarPageModel, SidebarModel, PropertyGridViewModel } from "survey-creator-core";
+import { Action, Base, CssClassBuilder, getActionDropdownButtonTarget } from "survey-core";
 import { SurveyElementBase, SurveyActionBar, ReactQuestionFactory, ReactElementFactory, Popup } from "survey-react-ui";
 
 interface ISidebarComponentProps {
@@ -37,12 +37,17 @@ export class SidebarComponent extends SurveyElementBase<ISidebarComponentProps, 
   }
 
   renderDefaultHeader(): JSX.Element {
-    const headerText = !!this.model.headerText ? <div className="svc-side-bar__container-title">{this.model.headerText}</div> : null;
+    const activePage = this.model.getActivePage();
+    const headerText = !!activePage.caption ? <div className="svc-side-bar__container-title">{activePage.caption}</div> : null;
+    const containerClass = "svc-side-bar__container-header" + (activePage.showToolbar ? "" : " Container_22233_64491");
     return (
-      <div className="svc-side-bar__container-header">
-        <div className="svc-side-bar__container-actions">
-          <SurveyActionBar model={(this.model as any).toolbar}></SurveyActionBar>
-        </div>
+      <div className={containerClass}>
+        {
+          activePage.showToolbar ?
+            <div className="svc-side-bar__container-actions">
+              <SurveyActionBar model={(this.model as any).toolbar}></SurveyActionBar>
+            </div> : null
+        }
         {headerText}
       </div>);
   }
@@ -106,34 +111,40 @@ ReactElementFactory.Instance.registerElement("svc-side-bar", (props) => {
   return React.createElement(SidebarComponent, props);
 });
 
-class SideBarPropertyGridHeader extends React.Component<any, any> {
-  render(): React.ReactNode {
+interface ISideBarPropertyGridHeaderProps {
+  model: Action;
+}
+
+class SideBarPropertyGridHeader extends SurveyElementBase<ISideBarPropertyGridHeaderProps, any> {
+  get objectSelectionAction(): Action {
+    return this.props.model;
+  }
+
+  protected getStateElement(): Base | null {
+    return this.objectSelectionAction;
+  }
+
+  renderElement(): JSX.Element {
     const buttonClassName = new CssClassBuilder()
       .append("Button_22233_58736")
-      .append("svc-menu-button--pressed", this.props.model.objectSelectionAction.pressed)
-      .append("svc-property-grid-button-with-subtitle", !!this.props.model.objectSelectionAction.tooltip)
+      .append("svc-property-grid-button-with-subtitle")
+      .append("svc-menu-button--pressed", this.objectSelectionAction.pressed)
       .toString();
 
-    const containerClassName = new CssClassBuilder()
-      .append("Container_22233_64491")
-      .append("svc-property-grid-container-with-subtitle", !!this.props.model.objectSelectionAction.tooltip)
-      .toString();
-
-    const tooltip = !!this.props.model.objectSelectionAction.tooltip ? <span className="Text_2_22233_58740">{this.props.model.objectSelectionAction.tooltip}</span> : null;
     return (
       <div className="Header_21220_2028692">
-        <div className={containerClassName}>
-          <div className="TitleMenuButton_22233_64492" onClick={() => this.props.model.objectSelectionAction.action()}>
+        <div className="Container_22233_64491 svc-property-grid-container-with-subtitle">
+          <div className="TitleMenuButton_22233_64492" onClick={() => this.objectSelectionAction.action()}>
             <div className={buttonClassName}>
               <div className="Caption_22233_58737">
-                <span className="Text_1_22233_58738">{this.props.model.objectSelectionAction.title}</span>
-                {tooltip}
+                <span className="Text_1_22233_58738">{this.objectSelectionAction.title}</span>
+                <span className="Text_2_22233_58740">{this.objectSelectionAction.tooltip}</span>
               </div>
             </div>
-            <Popup model={this.props.model.objectSelectionAction.popupModel} getTarget={getActionDropdownButtonTarget}></Popup>
+            <Popup model={this.objectSelectionAction.popupModel} getTarget={getActionDropdownButtonTarget}></Popup>
           </div>
         </div>
-      </div >
+      </div>
     );
   }
 }
