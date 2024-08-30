@@ -575,7 +575,7 @@ test("Ranking question inplace editor", async (t) => {
     .expect(items.nth(0).hasClass("svc-item-value--new")).notOk()
     .expect(items.nth(0).find(".svc-item-value-controls__add").visible).notOk()
     .expect(items.nth(0).find(".svc-item-value-controls__remove").visible).ok()
-    .expect(items.nth(0).find(".svc-item-value-controls__drag-icon").visible).notOk()
+    .expect(items.nth(0).find(".svc-item-value-controls__drag-icon").getStyleProperty("opacity")).eql("0")
     .hover(items.nth(0))
     .expect(items.nth(0).find(".svc-item-value-controls__drag-icon").visible).ok()
     .expect(items.nth(0).find("span").withText("Item 1").exists).ok()
