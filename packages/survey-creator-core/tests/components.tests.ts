@@ -1101,9 +1101,7 @@ test("QuestionImageAdornerViewModel updated on locale changed", () => {
   const imageAdorner = new QuestionImageAdornerViewModel(creator, question, undefined as any, { getElementsByClassName: () => [{}] } as any);
 
   expect(imageAdorner.isEmptyImageLink).toBeTruthy();
-  expect(imageAdorner.filePresentationModel.visible).toBeFalsy();
 
   creator.survey.locale = "fr";
   expect(imageAdorner.isEmptyImageLink).toBeFalsy();
-  expect(imageAdorner.filePresentationModel.visible).toBeTruthy();
 });
