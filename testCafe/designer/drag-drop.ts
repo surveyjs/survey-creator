@@ -1906,8 +1906,8 @@ test("Drag Drop indicator - rows", async (t) => {
     .expect(Selector(".svc-row").nth(1).hasClass("svc-row--drag-over-top")).notOk()
     .expect(Selector(".svc-row").nth(1).hasClass("svc-row--drag-over-bottom")).ok()
 
-    .hover(toolboxToolAction)
-    .dispatchEvent(toolboxToolAction, "pointerup")
+    .hover(Selector(".svc-page__content").nth(1), { offsetX: 100, offsetY: 1 })
+    .dispatchEvent(Selector(".svc-page__content").nth(1), "pointerup")
     .expect(Selector(".svc-row").nth(0).hasClass("svc-row--drag-over-top")).notOk()
     .expect(Selector(".svc-row").nth(0).hasClass("svc-row--drag-over-bottom")).notOk()
     .expect(Selector(".svc-row").nth(1).hasClass("svc-row--drag-over-top")).notOk()

@@ -337,7 +337,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
         row.dragTypeOverMe = this.dragOverLocation;
         this.dragOverIndicatorElement = row;
       } else {
-        dragOverIndicator.dragTypeOverMe = this.dragOverLocation;
+        this.dropTarget.dragTypeOverMe = this.dragOverLocation;
         this.dragOverIndicatorElement = this.dropTarget;
       }
     }
@@ -430,7 +430,8 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     if (isTargetIsContainer && this.insideContainer) {
       dest.insertElement(src);
     } else {
-      (dest.parent || dest.page).insertElement(src, dest, convertLocation());
+      const destParent = dest.parent || dest.page;
+      if (destParent) destParent.insertElement(src, dest, convertLocation());
     }
     (page.survey as SurveyModel).stopMovingQuestion();
     return dragged;
