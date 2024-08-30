@@ -1,6 +1,5 @@
 .svc-creator-popup {
-  &.sv-popup,
-  .sv-popup {
+  &.sv-popup {
     .sd-btn {
       background: var(--ctr-button-background-color, $background);
       color: var(--ctr-button-text-color, $primary);
@@ -20,13 +19,11 @@
     }
   }
 
-  &.sv-popup--modal,
-  .sv-popup--modal {
+  &.sv-popup--modal {
     background-color: var(--ctr-popup-haze-background-color, $background-semitransparent);
   }
 
-  &.sv-popup--modal,
-  .sv-popup--modal > .sv-popup__container {
+  &.sv-popup--modal > .sv-popup__container {
     background-color: var(--ctr-popup-background-color, $background-dim-light);
 
     & > .sv-popup__shadow > .sv-popup__body-content {
@@ -34,8 +31,7 @@
     }
   }
 
-  &.sv-popup--overlay,
-  .sv-popup--overlay:not(.sv-popup--dropdown-overlay) {
+  &.sv-popup--overlay:not(.sv-popup--dropdown-overlay) {
     .sv-popup__container {
       background: var(--ctr-popup-haze-background-color, $background-semitransparent);
     }
@@ -62,13 +58,13 @@
     color: var(--ctr-popup-title-color, $foreground);
   }
 
-  .sv-popup--dropdown {
+  &.sv-popup--dropdown {
     .sv-popup__body-content {
       background-color: var(--ctr-contextual-menu-background-color, $background);
     }
   }
 
-  .sv-popup--dropdown.svc-toolbox-subtypes {
+  &.sv-popup--dropdown.svc-toolbox-subtypes {
     .sv-popup__body-content {
       background: unset;
     }
@@ -134,7 +130,7 @@
   }
 
   //styles for dropdown overlay
-  .sv-popup--dropdown-overlay {
+  &.sv-popup--dropdown-overlay {
     .sv-popup__button.sv-popup__button {
       color: var(--ctr-actionbar-button-text-color, $primary);
     }
@@ -201,7 +197,7 @@
     }
   }
 
-  .sv-dropdown-popup.sv-popup--dropdown-overlay {
+  &.sv-dropdown-popup.sv-popup--dropdown-overlay {
     .sv-popup__body-footer {
       background-color: var(--ctr-contextual-menu-footer-background-color, $background-dim);
     }
