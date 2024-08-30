@@ -90,7 +90,7 @@ export class SurveyElementActionContainer extends AdaptiveActionContainer {
 }
 
 export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> extends Base {
-  public actionContainer: SurveyElementActionContainer;
+  public actionContainer: ActionContainer;
   protected expandCollapseAction: IAction;
   protected designerStateManager: DesignerStateManager;
   @property({ defaultValue: true }) allowDragging: boolean;
@@ -114,6 +114,12 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   }) collapsed: boolean;
   @property() renderedCollapsed: boolean;
 
+  protected createActionContainer(): ActionContainer {
+    const actionContainer = new SurveyElementActionContainer();
+    actionContainer.dotsItem.iconSize = 16;
+    actionContainer.dotsItem.popupModel.horizontalPosition = "center";
+    return actionContainer;
+  }
   private dragCollapsedTimer;
 
   protected get canExpandOnDrag() {
@@ -167,9 +173,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
         this.updateActionsProperties();
       }
     };
-    this.actionContainer = new SurveyElementActionContainer();
-    this.actionContainer.dotsItem.iconSize = 16;
-    this.actionContainer.dotsItem.popupModel.horizontalPosition = "center";
+    this.actionContainer = this.createActionContainer();
 
     const collapseIcon = "icon-collapse-detail-light_16x16";
     const expandIcon = "icon-restore_16x16";
