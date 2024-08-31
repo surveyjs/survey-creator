@@ -1363,7 +1363,7 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
           this.onModalPropertyEditorClosed(editor, property, question, options, "cancel");
           onClose && onClose("cancel");
         },
-        cssClass: "sv-property-editor",
+        cssClass: "sv-property-editor svc-creator-popup",
         title: question.title,
         displayMode: options.isMobileView ? "overlay" : "popup"
       }, options.rootElement);
