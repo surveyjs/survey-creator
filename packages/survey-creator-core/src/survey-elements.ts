@@ -362,9 +362,11 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       this.banDropHere();
       return;
     }
+    const oldInsideContainer = this.insideContainer;
     this.insideContainer = !calculateIsEdge(dropTargetNode, event.clientY) && !calculateIsSide(dropTargetNode, event.clientX);
     const dropTarget = this.getDropTargetByNode(dropTargetNode, event);
 
+    if (oldInsideContainer != this.insideContainer) dropTarget.dragTypeOverMe = null;
     let dragOverLocation = calculateDragOverLocation(event.clientX, event.clientY, dropTargetNode);
     if (dropTarget && (dropTarget.isPanel || dropTarget.isPage) && dropTarget.elements.length === 0) {
       if (dropTarget.isPage || this.insideContainer) {
