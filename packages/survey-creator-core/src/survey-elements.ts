@@ -328,11 +328,11 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       this.allowDropHere = false;
       return;
     }
-    const dragOverIndicator = this.dragOverIndicatorElement || this.dropTarget;
     if (dragOverLocation == DragTypeOverMeEnum.InsideEmptyPanel) {
-      dragOverIndicator.dragTypeOverMe = DragTypeOverMeEnum.InsideEmptyPanel;
+      this.dragOverIndicatorElement = this.dropTarget;
+      this.dragOverIndicatorElement.dragTypeOverMe = DragTypeOverMeEnum.InsideEmptyPanel;
     } else {
-      const row = this.parentElement.dragDropFindRow(dragOverIndicator);
+      const row = this.parentElement.dragDropFindRow(this.dropTarget);
       if (!!row && row.elements.length > 1 && (this.dragOverLocation === DragTypeOverMeEnum.Top || this.dragOverLocation === DragTypeOverMeEnum.Bottom)) {
         row.dragTypeOverMe = this.dragOverLocation;
         this.dragOverIndicatorElement = row;
