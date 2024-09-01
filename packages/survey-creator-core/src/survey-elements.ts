@@ -427,7 +427,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       srcContainer.removeElement(src);
     }
     let dest = this.dragOverIndicatorElement?.isPanel ? this.dragOverIndicatorElement : this.dropTarget;
-    if (isPanelDynamic(dest)) dest = dest.template;
+    if (isPanelDynamic(dest) && this.insideContainer) dest = dest.template;
     if (dest.isPage && dest.elements.length > 0 && !this.insideContainer) return;
     const isTargetIsContainer = dest.isPanel || dest.isPage;
     if (isTargetIsContainer && this.insideContainer) {
