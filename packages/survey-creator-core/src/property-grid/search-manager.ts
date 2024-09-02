@@ -88,7 +88,7 @@ export class SearchManagerPropertyGrid extends SearchManager {
   private expandAllParents(element: IElement) {
     if (!element) return;
     if (element.isCollapsed) {
-      element.expand();
+      (element as any).expand(false);
     }
     this.expandAllParents((<any>element).parent);
     this.expandAllParents((<any>element).parentQuestion);
