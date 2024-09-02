@@ -88,7 +88,7 @@
   animation-delay: $spg-row-fade-in-delay, 0s, 0s;
   animation-duration: $spg-row-fade-in-duration, $spg-row-move-in-duration, $spg-row-move-in-duration;
 }
-.spg-row--delayed-fade-in {
+.spg-row--delayed-enter {
   animation-delay: calc(#{$spg-row-fade-in-delay} + #{$spg-row-fade-in-animation-delay}),
     $spg-row-fade-in-animation-delay, $spg-row-fade-in-animation-delay;
 }
@@ -121,4 +121,14 @@
   animation-timing-function: $reverse-ease-out;
   animation-duration: $spg-collapse-fade-out-duration, $spg-collapse-move-out-duration, $spg-collapse-move-out-duration;
   animation-delay: 0s, $spg-collapse-move-out-delay, $spg-collapse-move-out-delay;
+}
+
+
+.svc-creator--disable-animations {
+  .spg-row--enter,
+  .spg-row--leave,
+  .spg-panel__content--enter,
+  .spg-panel__content--leave {
+    animation: none;
+  }
 }

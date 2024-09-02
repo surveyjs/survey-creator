@@ -112,8 +112,10 @@
     }
   }
 }
-.svc-row {
-  // @include disableAnimations;
+.svc-creator--disable-animations {
+  .svc-row {
+    @include disableLibraryAnimations;
+  }
 }
 
 .sd-panel .svc-row > .sd-row.sd-row--multiple {

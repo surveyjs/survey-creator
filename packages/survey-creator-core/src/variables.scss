@@ -153,7 +153,7 @@ $tab-min-height: var(--tab-min-height, auto);
   }
 }
 
-@mixin disableAnimations {
+@mixin disableLibraryAnimations {
   .sd-row--leave,
   .sd-row--enter {
     animation: none;
@@ -168,6 +168,12 @@ $tab-min-height: var(--tab-min-height, auto);
   }
   .sd-paneldynamic__panel-wrapper--enter,
   .sd-paneldynamic__panel-wrapper--leave {
+    animation: none;
+  }
+  .sd-item--enter {
+    animation: none;
+  }
+  .sd-item--leave {
     animation: none;
   }
   .sd-table__row--leave,

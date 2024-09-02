@@ -293,9 +293,10 @@
 .spg-comment.sl-comment {
   height: calcSize(17);
 }
-
-.sl-body {
-  // @include disableAnimations;
+.svc-creator--disable-animations {
+  .sl-body {
+    @include disableLibraryAnimations;
+  }
 }
 
 $sl-pd-list-fade-in-duration: var(--sl-pd-list-fade-in-duration, 250ms);
@@ -460,4 +461,19 @@ $sl-element-move-out-delay: var(--sjs-sl-element-move-out-delay, 100ms);
   min-height: 0 !important;
   animation-delay: 0s, $sl-element-move-out-delay;
   animation-duration: $sl-element-fade-out-duration, $sl-element-move-out-duration;
+}
+
+
+.svc-creator--disable-animations {
+  .sl-row--enter,
+  .sl-row--leave,
+  .sl-element-wrapper--enter,
+  .sl-element-wrapper--leave,
+  .sl-table__row--enter,
+  .sl-table__row--leave,
+  .sl-panel-wrapper--leave,
+  .sl-panel-wrapper--enter
+   {
+    animation: none;
+  }
 }

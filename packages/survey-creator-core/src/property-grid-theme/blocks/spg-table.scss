@@ -168,3 +168,10 @@
     --animation-timing-function: #{$reverse-ease-out};
   }
 }
+
+.svc-creator--disable-animations {
+  .spg-table__row--enter,
+  .spg-table__row--leave {
+    animation: none;
+  }
+}

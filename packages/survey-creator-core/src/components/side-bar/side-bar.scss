@@ -89,6 +89,13 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
   }
 }
 
+.svc-creator--disable-animations {
+  .svc-side-bar--leave,
+  .svc-side-bar--enter {
+    animation: none;
+  }
+}
+
 .svc-side-bar__container .svc-resizer {
   width: 3px;
   height: 100%;

@@ -4,7 +4,8 @@ import {
   QuestionSelectBase, QuestionRowModel, LocalizableString, ILocalizableString, ILocalizableOwner, PopupBaseViewModel,
   EventBase, hasLicense, slk, settings as SurveySettings, Event, Helpers as SurveyHelpers, MatrixDropdownColumn, JsonObject,
   dxSurveyService, ISurveyElement, PanelModelBase, surveyLocalization, QuestionMatrixDropdownModelBase, ITheme, Helpers,
-  chooseFiles, createDropdownActionModel
+  chooseFiles, createDropdownActionModel,
+  CssClassBuilder
 } from "survey-core";
 import { ICreatorPlugin, ISurveyCreatorOptions, settings, ICollectionItemAllowOperations } from "./creator-settings";
 import { editorLocalization } from "./editorLocalization";
@@ -2163,9 +2164,6 @@ export class SurveyCreatorModel extends Base
   private animationEnabled = false;
   public createSurvey(json: any, reason: string, model?: any, callback?: (survey: SurveyModel) => void, area?: string): SurveyModel {
     const survey = this.createSurveyCore(json, reason);
-    if(reason !== "test") {
-      survey["animationEnabled"] = this.animationEnabled;
-    }
     if (reason !== "designer" && reason !== "test" && reason !== "theme") {
       survey.fitToContainer = false;
       survey.applyTheme(designTabSurveyThemeJSON);
@@ -2728,7 +2726,7 @@ export class SurveyCreatorModel extends Base
           if(!el || this.rootElement.getAnimations({ subtree: true }).filter((animation => animation.effect.getComputedTiming().activeDuration !== Infinity && (animation.pending || animation.playState !== "finished")))[0]) return;
           clearInterval(this.currentFocusInterval);
           if (!!el) {
-            SurveyHelper.scrollIntoViewIfNeeded(el.parentElement ?? el, () => { return { block: "start", behavior: "smooth" }; }, true);
+            SurveyHelper.scrollIntoViewIfNeeded(el.parentElement ?? el, () => { return { block: "start", behavior: this.animationEnabled ? "smooth" : "instant" }; }, true);
             if (!propertyName && el.parentElement) {
               let elToFocus: HTMLElement = (typeof (focus) === "string") ? el.parentElement.querySelector(focus) : el.parentElement;
               elToFocus && elToFocus.focus({ preventScroll: true });
@@ -3859,6 +3857,14 @@ export class SurveyCreatorModel extends Base
     super.dispose();
   }
   @property({ defaultValue: true }) enableLinkFileEditor: boolean;
+  public getRootCss() {
+    return new CssClassBuilder()
+      .append("svc-creator")
+      .append("svc-creator--mobile", this.isMobileView)
+      .append("svc-creator--touch", this.isTouch)
+      .append("svc-creator--disable-animations", !this.animationEnabled)
+      .toString();
+  }
 }
 
 export class CreatorBase extends SurveyCreatorModel { }
