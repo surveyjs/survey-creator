@@ -54,6 +54,7 @@
 }
 
 .spg-checkbox .spg-checkbox__svg {
+  display: block;
   opacity: 0;
   fill: transparent;
   width: calcSize(2.5);
