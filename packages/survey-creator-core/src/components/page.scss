@@ -37,7 +37,7 @@ svc-page {
   opacity: 0;
   top: calcSize(1);
   inset-inline-end: 0; // right
-  padding: 0 calcSize(1.5);
+  padding: 0 calcSize(1.5) 0 calcSize(1);
   z-index: 1;
   transition: opacity $creator-transition-duration;
 

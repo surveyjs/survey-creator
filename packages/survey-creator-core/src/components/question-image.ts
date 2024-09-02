@@ -42,7 +42,8 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
   ) {
     super(creator, surveyElement, templateData);
     this.isEmptyImageLink = !this.question.imageLink;
-    this.surveyElement.registerFunctionOnPropertyValueChanged("imageLink", () => { this.imageLinkValueChangedHandler(); }, "imageLinkValueChanged");
+    this.surveyElement.registerFunctionOnPropertyValueChanged("imageLink", this.imageLinkValueChangedHandler, "imageLinkValueChanged");
+    (this.surveyElement as QuestionImageModel).locImageLink.onStringChanged.add(this.imageLinkValueChangedHandler);
     this.initFilePresentationModel();
   }
 
@@ -63,7 +64,7 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
   public get acceptedTypes(): string {
     return getAcceptedTypesByContentMode((this.surveyElement as QuestionImageModel).contentMode);
   }
-  imageLinkValueChangedHandler() {
+  imageLinkValueChangedHandler = () => {
     this.isEmptyImageLink = !this.question.imageLink;
     this.filePresentationModel.value = null;
     this.filePresentationModel.visible = !this.question.imageLink;
@@ -92,6 +93,8 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
       .append("svc-question__content--loading", this.isUploading).toString();
   }
   public dispose(): void {
+    this.surveyElement.unRegisterFunctionOnPropertyValueChanged("imageLink", "imageLinkValueChanged");
+    (this.surveyElement as QuestionImageModel).locImageLink.onStringChanged.remove(this.imageLinkValueChangedHandler);
     super.dispose();
     this.questionRoot = undefined;
   }

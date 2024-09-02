@@ -98,7 +98,7 @@ export class MatrixCellWrapperViewModel extends Base {
           editSurvey.apply();
           return true;
         },
-        cssClass: "svc-matrix-cell__popup",
+        cssClass: "svc-matrix-cell__popup svc-creator-popup",
         title: model.question.name,
         displayMode: this.creator.isMobileView ? "overlay" : "popup"
       }, model.creator.rootElement

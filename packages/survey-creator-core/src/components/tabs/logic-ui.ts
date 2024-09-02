@@ -196,6 +196,7 @@ export class SurveyLogicUI extends SurveyLogic {
         onStaying();
         return true;
       },
+      cssClass: "svc-creator-popup",
       title: this.getLocString("ed.lg.uncompletedRule_title"),
       displayMode: "popup"
     }, this.options.rootElement);

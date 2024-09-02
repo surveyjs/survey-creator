@@ -3629,6 +3629,7 @@ export class SurveyCreatorModel extends Base
         listModel.setItems(getActions());
       },
       allowSelection: false,
+      cssClass: "svc-creator-popup",
       verticalPosition: "bottom",
       horizontalPosition: "center",
       displayMode: this.isTouch ? "overlay" : "popup"
