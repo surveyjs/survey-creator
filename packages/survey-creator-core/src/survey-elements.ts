@@ -197,11 +197,6 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       }
     });
 
-    // drop to paneldynamic
-    if (dropTarget.getType() === "paneldynamic" && this.insideContainer) {
-      //dropTarget = (<any>dropTarget).template;
-    }
-
     // drop to matrix detail panel
     if ((dropTarget.getType() === "matrixdropdown" || dropTarget.getType() === "matrixdynamic") && (<any>dropTarget).detailPanelMode !== "none" && this.insideContainer) {
       dropTarget = (<any>dropTarget).detailPanel;
@@ -368,7 +363,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
 
     if (!!oldInsideContainer != !!this.insideContainer) dropTarget.dragTypeOverMe = null;
     let dragOverLocation = calculateDragOverLocation(event.clientX, event.clientY, dropTargetNode);
-    if (dropTarget && ((dropTarget.isPanel || dropTarget.isPage) && dropTarget.elements.length === 0 || isPanelDynamic(dropTarget) && dropTarget.templateValue.elements.length == 0)) {
+    if (dropTarget && ((dropTarget.isPanel || dropTarget.isPage) && dropTarget.elements.length === 0 || isPanelDynamic(dropTarget) && dropTarget.template.elements.length == 0)) {
       if (dropTarget.isPage || this.insideContainer) {
         dragOverLocation = DragTypeOverMeEnum.InsideEmptyPanel;
       }

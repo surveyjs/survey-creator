@@ -16,6 +16,7 @@ export class RowViewModel extends Base {
     public templateData: SurveyTemplateRendererTemplateData
   ) {
     super();
+    this.dragTypeOverMe = this.row.dragTypeOverMe;
     this.row.onPropertyChanged.add((s, o) => {
       if (o.name == "dragTypeOverMe") this.dragTypeOverMe = o.newValue;
     });
