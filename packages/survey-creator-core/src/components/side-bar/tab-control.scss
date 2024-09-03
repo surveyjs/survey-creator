@@ -5,7 +5,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
-  border-left: var(--ctr-property-grid-tabs-border-width, 1px) solid
+  border-inline-start: var(--ctr-property-grid-tabs-border-width, 1px) solid
     var(--ctr-property-grid-tabs-border-color, rgba(0, 0, 0, 0.16));
   background: var(--ctr-property-grid-tabs-background-color, #fff);
   box-sizing: border-box;
