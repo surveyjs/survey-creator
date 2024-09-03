@@ -17,26 +17,26 @@ import { TabDesignerPlugin } from "./tabs/designer-plugin";
 import { isPanelDynamic } from "../survey-elements";
 
 export class SurveyElementActionContainer extends AdaptiveActionContainer {
-  private needToShrink(item: Action, shrinkStart: boolean, shrinkEnd: boolean) {
-    return (item.innerItem.location == "start" && shrinkStart || item.innerItem.location != "start" && shrinkEnd);
+  private needToShrink(item: Action, shrinkLeftActions: boolean, shrinkRightActions: boolean) {
+    return (item.innerItem.location == "start" && shrinkLeftActions || item.innerItem.location != "start" && shrinkRightActions);
   }
-  private setModeForActions(shrinkStart: boolean, shrinkEnd: boolean, exclude: string[] = []): void {
+  private setModeForActions(shrinkLeftActions: boolean, shrinkRightActions: boolean, exclude: string[] = []): void {
     this.visibleActions.forEach((item) => {
       if (exclude.indexOf(item.id) != -1) {
         item.mode = "removed";
         return;
       }
-      if (this.needToShrink(item, shrinkStart, shrinkEnd)) {
-        item.mode = !item.innerItem.disableShrink && item.innerItem.iconName ? "small" : "removed";
+      if (this.needToShrink(item, shrinkLeftActions, shrinkRightActions)) {
+        item.mode = item.canShrink ? "small" : "removed";
         return;
       }
       item.mode = "large";
     });
   }
-  private calcItemSize(item: Action, shrinkStart: boolean, shrinkEnd: boolean, exclude: string[] = []) {
+  private calcItemSize(item: Action, shrinkLeftActions: boolean, shrinkRightActions: boolean, exclude: string[] = []) {
     if (exclude.indexOf(item.id) != -1) return 0;
-    if (this.needToShrink(item, shrinkStart, shrinkEnd)) {
-      if (item.innerItem.disableShrink || !item.innerItem.iconName) return 0;
+    if (this.needToShrink(item, shrinkLeftActions, shrinkRightActions)) {
+      if (!item.canShrink) return 0;
       return item.minDimension;
     }
     return item.maxDimension;
