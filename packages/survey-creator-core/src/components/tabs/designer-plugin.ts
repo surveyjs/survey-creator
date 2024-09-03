@@ -159,7 +159,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
         const action = new Action({
           id: p.name,
           locTooltipName: "pe.tabs." + p.name,
-          iconName: pgTabIcons[p.name] || pgTabIcons["specific"],
+          iconName: pgTabIcons[p.name] || pgTabIcons["undefined"],
           active: this.activePageIsPropertyGrid && p.name === this.propertyGridModel.survey.currentPage.name,
           action: () => {
             this.creator.sidebar.expandSidebar();

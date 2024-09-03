@@ -331,7 +331,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
         const action = new Action({
           id: p.name,
           tooltip: getLocString("pe.tabs." + p.name),
-          iconName: pgTabIcons[p.name] || pgTabIcons["specific"],
+          iconName: pgTabIcons[p.name] || pgTabIcons["undefined"],
           action: () => {
             this.propertyGrid.survey.currentPage = p;
             pgTabs.forEach(i => i.pressed = false);

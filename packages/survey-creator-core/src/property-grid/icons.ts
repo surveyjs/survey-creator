@@ -20,4 +20,5 @@ export const pgTabIcons = {
   "themes": "icon-pg-v1/pg-themes-24x24",
   "totals": "icon-pg-v1/pg-totals-24x24",
   "validation": "icon-pg-v1/pg-validation-24x24",
+  "undefined": "icon-pg-v1/pg-undefined-24x24",
 };
