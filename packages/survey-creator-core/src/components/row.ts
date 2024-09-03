@@ -3,7 +3,8 @@ import {
   SurveyModel,
   SurveyTemplateRendererTemplateData,
   QuestionRowModel,
-  DragTypeOverMeEnum
+  DragTypeOverMeEnum,
+  property
 } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 require("./row.scss");
@@ -15,8 +16,12 @@ export class RowViewModel extends Base {
     public templateData: SurveyTemplateRendererTemplateData
   ) {
     super();
+    this.dragTypeOverMe = this.row.dragTypeOverMe;
+    this.row.onPropertyChanged.add((s, o) => {
+      if (o.name == "dragTypeOverMe") this.dragTypeOverMe = o.newValue;
+    });
   }
-
+  @property() dragTypeOverMe: DragTypeOverMeEnum;
   public get cssClasses() {
     let result = "svc-row";
     let ghostClass = " svc-row--ghost";
@@ -28,10 +33,10 @@ export class RowViewModel extends Base {
       result += ghostClass;
     }
 
-    if(this.row.dragTypeOverMe === DragTypeOverMeEnum.Top) {
+    if (this.dragTypeOverMe === DragTypeOverMeEnum.Top) {
       result += " svc-row--drag-over-top";
     }
-    if(this.row.dragTypeOverMe === DragTypeOverMeEnum.Bottom) {
+    if (this.dragTypeOverMe === DragTypeOverMeEnum.Bottom) {
       result += " svc-row--drag-over-bottom";
     }
 
