@@ -1,4 +1,4 @@
-import { Base, SurveyModel, Action, ComputedUpdater } from "survey-core";
+import { Base, SurveyModel, Action, ComputedUpdater, CurrentPageChangedEvent } from "survey-core";
 import { notShortCircuitAnd } from "../../utils/utils";
 import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
@@ -154,7 +154,6 @@ export class TabDesignerPlugin implements ICreatorPlugin {
 
   private updateTabControlActions() {
     if (this.showOneCategoryInPropertyGrid) {
-      this.propertyGridViewModel.objectSelectionAction.tooltip = this.propertyGridModel.survey.currentPage.title;
       const pgTabs = this.propertyGridModel.survey.pages.map(p => {
         const action = new Action({
           id: p.name,
@@ -173,6 +172,15 @@ export class TabDesignerPlugin implements ICreatorPlugin {
         return action;
       });
       this.tabControlModel.topToolbar.setItems(pgTabs);
+
+      this.propertyGridModel.survey.onCurrentPageChanged.add((sender: SurveyModel, options: CurrentPageChangedEvent) => {
+        pgTabs.forEach(action => {
+          action.active = action.id === options.newCurrentPage.name;
+        });
+        this.propertyGridViewModel.objectSelectionAction.tooltip = options.newCurrentPage.title;
+      });
+
+      this.propertyGridViewModel.objectSelectionAction.tooltip = this.propertyGridModel.survey.currentPage.title;
     }
   }
 
