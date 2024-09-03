@@ -19,10 +19,10 @@
       :class="model.css()"
       v-key2click="{ disableTabStop: true }"
     >
-      <div className="svc-question__drop-indicator svc-question__drop-indicator--left"></div>
-      <div className="svc-question__drop-indicator svc-question__drop-indicator--right"></div>
-      <div className="svc-question__drop-indicator svc-question__drop-indicator--top"></div>
-      <div className="svc-question__drop-indicator svc-question__drop-indicator--bottom"></div>
+      <div class="svc-question__drop-indicator svc-question__drop-indicator--left"></div>
+      <div class="svc-question__drop-indicator svc-question__drop-indicator--right"></div>
+      <div class="svc-question__drop-indicator svc-question__drop-indicator--top"></div>
+      <div class="svc-question__drop-indicator svc-question__drop-indicator--bottom"></div>
       <div
         v-if="model.allowDragging"
         class="svc-question__drag-area"
