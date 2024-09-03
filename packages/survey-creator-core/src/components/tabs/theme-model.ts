@@ -209,6 +209,7 @@ export class ThemeModel extends Base implements ITheme {
     this.setThemeCssVariablesChanges("--sjs-primary-backcolor-dark", this.colorCalculator.colorSettings.newColorDark);
   }
   private cssVariablePropertiesChanged(name: string, value: any, property: JsonObjectProperty) {
+    let nameProcessed = true;
     if (name === "primaryColor") {
       this.setPropertyValue("--sjs-primary-backcolor", value);
       this.setThemeCssVariablesChanges("--sjs-primary-backcolor", value);
@@ -234,16 +235,22 @@ export class ThemeModel extends Base implements ITheme {
       let baseColor = parseColor(this.getPropertyValue("--sjs-general-backcolor")).color;
       let panelBackgroundTransparencyValue = this.getPropertyValue("panelBackgroundTransparency");
       this.setThemeCssVariablesChanges("--sjs-question-background", ingectAlpha(baseColor, panelBackgroundTransparencyValue / 100));
-    } else if (property.type === "font") {
+    } else {
+      nameProcessed = false;
+    }
+
+    let typeProcessed = true;
+    if (property.type === "font") {
       fontsettingsToCssVariable(value, property, this.themeCssVariablesChanges);
       this.onThemePropertyChanged.fire(this, { name, value });
     } else if (property.type === "backgroundcornerradius") {
       backgroundCornerRadiusToCssVariable(value, property, this.themeCssVariablesChanges);
       this.onThemePropertyChanged.fire(this, { name, value });
     } else {
-      return false;
+      typeProcessed = false;
     }
-    return true;
+
+    return nameProcessed || typeProcessed;
   }
 
   private setThemeCssVariablesChanges(name: string, value: any) {
