@@ -17,25 +17,25 @@ import { TabDesignerPlugin } from "./tabs/designer-plugin";
 import { isPanelDynamic } from "../survey-elements";
 
 export class SurveyElementActionContainer extends AdaptiveActionContainer {
-  private needToShrink(item: Action, shrinkLeftActions: boolean, shrinkRightActions: boolean) {
-    return (item.innerItem.location == "start" && shrinkLeftActions || item.innerItem.location != "start" && shrinkRightActions);
+  private needToShrink(item: Action, shrinkTypeConverterAction: boolean) {
+    return (item.innerItem.location == "start" && shrinkTypeConverterAction || item.innerItem.location != "start");
   }
-  private setModeForActions(shrinkLeftActions: boolean, shrinkRightActions: boolean, exclude: string[] = []): void {
+  private setModeForActions(shrinkTypeConverterAction: boolean, exclude: string[] = []): void {
     this.visibleActions.forEach((item) => {
       if (exclude.indexOf(item.id) != -1) {
         item.mode = "removed";
         return;
       }
-      if (this.needToShrink(item, shrinkLeftActions, shrinkRightActions)) {
+      if (this.needToShrink(item, shrinkTypeConverterAction)) {
         item.mode = item.canShrink ? "small" : "removed";
         return;
       }
       item.mode = "large";
     });
   }
-  private calcItemSize(item: Action, shrinkLeftActions: boolean, shrinkRightActions: boolean, exclude: string[] = []) {
+  private calcItemSize(item: Action, shrinkTypeConverterAction: boolean, exclude: string[] = []) {
     if (exclude.indexOf(item.id) != -1) return 0;
-    if (this.needToShrink(item, shrinkLeftActions, shrinkRightActions)) {
+    if (this.needToShrink(item, shrinkTypeConverterAction)) {
       if (!item.canShrink) return 0;
       return item.minDimension;
     }
@@ -53,23 +53,18 @@ export class SurveyElementActionContainer extends AdaptiveActionContainer {
       return;
     }
 
-    // if (dimension >= items.reduce((sum, i) => sum += this.skipInputType(i, i.maxDimension), 0)) {
-    //   this.setModeForActions({ "convertInputType": "removed" }, "large");
-    //   return;
-    // }
-
-    if (dimension >= items.reduce((sum, i) => sum += this.calcItemSize(i, false, true), 0)) {
-      this.setModeForActions(false, true);
+    if (dimension >= items.reduce((sum, i) => sum += this.calcItemSize(i, false), 0)) {
+      this.setModeForActions(false);
       return;
     }
 
-    if (dimension >= items.reduce((sum, i) => sum += this.calcItemSize(i, false, true, ["convertInputType"]), 0)) {
-      this.setModeForActions(false, true, ["convertInputType"]);
+    if (dimension >= items.reduce((sum, i) => sum += this.calcItemSize(i, false, ["convertInputType"]), 0)) {
+      this.setModeForActions(false, ["convertInputType"]);
       return;
     }
 
-    if (dimension >= items.reduce((sum, i) => sum += this.calcItemSize(i, true, true), 0)) {
-      this.setModeForActions(true, true);
+    if (dimension >= items.reduce((sum, i) => sum += this.calcItemSize(i, true), 0)) {
+      this.setModeForActions(true);
       return;
     }
 
