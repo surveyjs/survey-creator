@@ -115,8 +115,10 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     });
 
     creator.onSelectedElementChanged.add((sender, options) => {
-      this.setPropertyGridIsActivePage();
-      this.updateTabControlActions();
+      if (this.creator.activeTab === "designer") {
+        this.setPropertyGridIsActivePage();
+        this.updateTabControlActions();
+      }
     });
     this.toolboxTab = this.creator.sidebar.addPage("toolbox", "svc-toolbox", creator);
 
