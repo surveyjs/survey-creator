@@ -1,7 +1,8 @@
 @import "../../variables.scss";
 
 .svc-side-bar__container {
-  display: block;
+  flex-direction: column;
+  display: flex;
   position: relative;
   font-family: $font-family;
   min-width: 370px;
@@ -134,7 +135,7 @@
     z-index: 1000;
     position: absolute;
     right: 0;
-    display: inline-block;
+    display: flex;
     height: 100%;
     max-width: 100%;
   }
