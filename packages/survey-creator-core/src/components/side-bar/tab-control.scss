@@ -96,6 +96,10 @@
   }
 }
 
+.svc-creator--mobile .svc-sidebar-tabs-collapsed {
+  display: none;
+}
+
 .Icon_21220_2484300 {
   display: flex;
   width: var(--ctr-menu-toolbar-button-icon-width, 24px);

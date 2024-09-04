@@ -179,7 +179,6 @@
 
 .svd-grid-hide {
   margin-inline-end: auto;
-
 }
 
 .sv-mobile-side-bar {
@@ -189,6 +188,7 @@
 
   .svc-side-bar__container {
     width: 100%;
+    min-width: auto;
   }
 }
 

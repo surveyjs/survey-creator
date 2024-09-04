@@ -4,11 +4,9 @@ import { SurveyCreatorModel } from "../../creator-base";
 import { SidebarPageModel } from "./side-bar-page-model";
 import { ResizeManager } from "../../utils/resizer";
 import { notShortCircuitAnd } from "../../utils/utils";
-import { TabControlModel } from "./tab-control-model";
 
 export class SidebarModel extends Base {
   public toolbar: AdaptiveActionContainer = new AdaptiveActionContainer();
-  public tabControl: TabControlModel;
 
   private _expandAction: Action;
   private _collapseAction: Action;
