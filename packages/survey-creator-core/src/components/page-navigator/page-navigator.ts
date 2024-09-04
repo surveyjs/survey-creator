@@ -40,7 +40,7 @@ export class PageNavigatorViewModel extends Base {
       },
       allowSelection: true
     });
-    this.popupModel = new PopupModel("sv-list", { model: this.pageListModel });
+    this.popupModel = new PopupModel("sv-list", { model: this.pageListModel }, { cssClass: "svc-creator-popup" });
     !!this.pagesController && (this.popupModel.horizontalPosition = this.pagesController.creator["toolboxLocation"]);
     this.popupModel.onShow = () => {
       this.pageListModel.selectedItem = this.getActionBarByPage(this.pagesController.currentPage);

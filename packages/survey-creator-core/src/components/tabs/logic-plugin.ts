@@ -102,7 +102,6 @@ export class TabLogicPlugin implements ICreatorPlugin {
     this.filterQuestionAction = createDropdownActionModelAdvanced({
       id: "svc-logic-filter-question",
       visible: false,
-      component: "sv-action-bar-item-dropdown",
     }, {
       items: [{ id: null, title: this.showAllQuestionsText }],
       onSelectionChanged: (item: IAction) => {
@@ -113,6 +112,7 @@ export class TabLogicPlugin implements ICreatorPlugin {
     }, {
       verticalPosition: "bottom",
       horizontalPosition: "center",
+      cssClass: "svc-creator-popup",
       onShow: onQuestionPopupShow
     });
     items.push(this.filterQuestionAction);
@@ -127,7 +127,6 @@ export class TabLogicPlugin implements ICreatorPlugin {
     this.filterActionTypeAction = createDropdownActionModelAdvanced({
       id: "svc-logic-filter-actiontype",
       visible: false,
-      component: "sv-action-bar-item-dropdown",
     }, {
       items: [{ id: null, title: this.showAllActionTypesText }],
       onSelectionChanged: (item: IAction) => {
@@ -138,6 +137,7 @@ export class TabLogicPlugin implements ICreatorPlugin {
     }, {
       verticalPosition: "bottom",
       horizontalPosition: "center",
+      cssClass: "svc-creator-popup",
       onShow: onActionTypesPopupShow
     });
     items.push(this.filterActionTypeAction);

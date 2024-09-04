@@ -160,8 +160,6 @@ export class DragDropSurveyElements extends DragDropCore<any> {
   protected getDropTargetByDataAttributeValue(dataAttributeValue: string, dropTargetNode: HTMLElement, event: PointerEvent): any {
     const oldDragOverIndicatorElement = this.dragOverIndicatorElement;
 
-    this.dragOverIndicatorElement = null;
-
     if (!dataAttributeValue) {
       // panel dynamic
       const nearestDropTargetElement = dropTargetNode.parentElement.closest<HTMLElement>(this.dropTargetDataAttributeName);
@@ -199,11 +197,6 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       }
     });
 
-    // drop to paneldynamic
-    if (dropTarget.getType() === "paneldynamic" && this.insideContainer) {
-      dropTarget = (<any>dropTarget).template;
-    }
-
     // drop to matrix detail panel
     if ((dropTarget.getType() === "matrixdropdown" || dropTarget.getType() === "matrixdynamic") && (<any>dropTarget).detailPanelMode !== "none" && this.insideContainer) {
       dropTarget = (<any>dropTarget).detailPanel;
@@ -218,10 +211,10 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       let page: any = this.survey.getPageByName(dataAttributeValue);
       dropTarget.__page = page;
     }
+    this.dragOverIndicatorElement = dragOverElement;
     if (this.dragOverIndicatorElement != oldDragOverIndicatorElement) {
       this.removeDragOverMarker(oldDragOverIndicatorElement);
     }
-    this.dragOverIndicatorElement = dragOverElement;
     return dropTarget;
     // EO drop to question or panel
   }
@@ -330,16 +323,17 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       this.allowDropHere = false;
       return;
     }
-    const dragOverIndicator = this.dragOverIndicatorElement || this.dropTarget;
     if (dragOverLocation == DragTypeOverMeEnum.InsideEmptyPanel) {
-      dragOverIndicator.dragTypeOverMe = DragTypeOverMeEnum.InsideEmptyPanel;
+      this.dragOverIndicatorElement = this.dropTarget;
+      this.dragOverIndicatorElement.dragTypeOverMe = DragTypeOverMeEnum.InsideEmptyPanel;
     } else {
-      const row = this.parentElement.dragDropFindRow(dragOverIndicator);
+      const row = this.parentElement.dragDropFindRow(this.dropTarget);
       if (!!row && row.elements.length > 1 && (this.dragOverLocation === DragTypeOverMeEnum.Top || this.dragOverLocation === DragTypeOverMeEnum.Bottom)) {
         row.dragTypeOverMe = this.dragOverLocation;
         this.dragOverIndicatorElement = row;
       } else {
-        dragOverIndicator.dragTypeOverMe = this.dragOverLocation;
+        this.dropTarget.dragTypeOverMe = this.dragOverLocation;
+        this.dragOverIndicatorElement = this.dropTarget;
       }
     }
     if (this.dragOverIndicatorElement != oldDragOverIndicatorElement) this.removeDragOverMarker(oldDragOverIndicatorElement);
@@ -363,11 +357,13 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       this.banDropHere();
       return;
     }
+    const oldInsideContainer = this.insideContainer;
     this.insideContainer = !calculateIsEdge(dropTargetNode, event.clientY) && !calculateIsSide(dropTargetNode, event.clientX);
     const dropTarget = this.getDropTargetByNode(dropTargetNode, event);
 
+    if (!!oldInsideContainer != !!this.insideContainer) dropTarget.dragTypeOverMe = null;
     let dragOverLocation = calculateDragOverLocation(event.clientX, event.clientY, dropTargetNode);
-    if (dropTarget && (dropTarget.isPanel || dropTarget.isPage) && dropTarget.elements.length === 0) {
+    if (dropTarget && ((dropTarget.isPanel || dropTarget.isPage) && dropTarget.elements.length === 0 || isPanelDynamic(dropTarget) && dropTarget.template.elements.length == 0)) {
       if (dropTarget.isPage || this.insideContainer) {
         dragOverLocation = DragTypeOverMeEnum.InsideEmptyPanel;
       }
@@ -425,13 +421,15 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       (page.survey as SurveyModel).startMovingQuestion();
       srcContainer.removeElement(src);
     }
-    const dest = this.dragOverIndicatorElement?.isPanel ? this.dragOverIndicatorElement : this.dropTarget;
+    let dest = this.dragOverIndicatorElement?.isPanel ? this.dragOverIndicatorElement : this.dropTarget;
+    if (isPanelDynamic(dest) && this.insideContainer) dest = dest.template;
     if (dest.isPage && dest.elements.length > 0 && !this.insideContainer) return;
     const isTargetIsContainer = dest.isPanel || dest.isPage;
     if (isTargetIsContainer && this.insideContainer) {
       dest.insertElement(src);
     } else {
-      (dest.parent || dest.page).insertElement(src, dest, convertLocation());
+      const destParent = dest.parent || dest.page;
+      if (destParent) destParent.insertElement(src, dest, convertLocation());
     }
     (page.survey as SurveyModel).stopMovingQuestion();
     return dragged;
@@ -440,10 +438,6 @@ export class DragDropSurveyElements extends DragDropCore<any> {
   private removeDragOverMarker(dropTarget: { dragTypeOverMe: boolean }): void {
     if (!!dropTarget) {
       dropTarget.dragTypeOverMe = null;
-    }
-    const row = this.parentElement?.dragDropFindRow(dropTarget);
-    if (!!row) {
-      row.dragTypeOverMe = null;
     }
   }
 
