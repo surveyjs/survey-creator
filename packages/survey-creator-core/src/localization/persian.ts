@@ -307,6 +307,9 @@ var persianStrings = {
       templateTitleLocation: "هم ترازی عنوان پرسش",
       templateErrorLocation: "همترازسازی پیام خطا",
       newPanelPosition: "محل جدید پنل",
+      showRangeInProgress: "نمایش نوار پیشرفت",
+      showProgressBar: "نمایش نوار پیشرفت",
+      progressBarLocation: "تراز نوار پیشرفت",
       keyName: "جلوگیری از پاسخ های تکراری در سوال زیر"
     },
     question: {
@@ -690,7 +693,6 @@ var persianStrings = {
     panelsState: "پانل داخلی گسترش دولت",
     panelPrevText: "قبلی دکمه پنل tooltip",
     panelNextText: "بعدی دکمه پنل tooltip",
-    showRangeInProgress: "نمایش نوار پیشرفت",
     panelRemoveButtonLocation: "حذف محل دکمه پنل",
     hideIfRowsEmpty: "مخفی کردن سؤال اگر سطری وجود نداشته باشد",
     hideColumnsIfEmpty: "مخفی کردن ستونها اگر سطری وجود نداشته باشد",
@@ -927,10 +929,11 @@ var persianStrings = {
     firstExpanded: "گسترش یافته",
     off: "خاموش",
     list: "لیست",
+    carousel: "چرخ فلک",
+    tab: "زبانه",
     progressTop: "نوار پیشرفت  بالا",
     progressBottom: "نوار پیشرفت پایین",
     progressTopBottom: "نوار پیشرفت در بالا و پایین",
-    tab: "زبانه",
     horizontal: "افقی",
     vertical: "عمودی",
     top: "بالا",
@@ -1117,6 +1120,11 @@ var persianStrings = {
       topbottom: "بالا و پایین",
       aboveheader: "بالای سرصفحه",
       belowheader: "زیر سرایند"
+    },
+    progressBarLocation: {
+      top: "بالا",
+      bottom: "پایین",
+      topBottom: "بالا و پایین"
     },
     sum: "مجموع",
     count: "تعداد",
@@ -1348,7 +1356,8 @@ var persianStrings = {
       visibleIf: "از نماد چوب جادویی برای تنظیم یک قانون شرطی که دید ستون را تعیین می کند استفاده کنید.",
       enableIf: "از نماد چوب جادویی برای تنظیم یک قانون شرطی استفاده کنید که حالت فقط خواندنی را برای ستون غیرفعال می کند.",
       requiredIf: "از نماد چوب جادویی برای تنظیم یک قانون شرطی استفاده کنید که مانع از ارسال نظرسنجی می شود مگر اینکه حداقل یک سوال تو در تو پاسخ داشته باشد.",
-      showInMultipleColumns: "هنگامی که انتخاب می شود، یک ستون فردی برای هر گزینه انتخاب ایجاد می کند."
+      showInMultipleColumns: "هنگامی که انتخاب می شود، یک ستون فردی برای هر گزینه انتخاب ایجاد می کند.",
+      colCount: "گزینه های انتخاب را در یک طرح چند ستونی مرتب می کند. هنگامی که روی 0 تنظیم می شود، گزینه ها در یک خط نمایش داده می شوند. هنگامی که روی -1 تنظیم می شود، مقدار واقعی از ویژگی \"تعداد ستون های تو در تو\" ماتریس والد به ارث می رسد."
     },
     widthMode: "را انتخاب کنید از: \"استاتیک\" - مجموعه عرض ثابت؛ \"پاسخگو\" - باعث می شود نظرسنجی عرض کامل صفحه نمایش را اشغال کند؛ \"Auto\" - هر یک از این دو را بسته به نوع سوال مورد استفاده اعمال می کند.",
     cookieName: "کوکی ها کاربران را از پر کردن همان نظرسنجی دو بار جلوگیری می کند.",
@@ -2708,3 +2717,11 @@ editorLocalization.locales["fa"] = persianStrings;
 // inputTextAlignment.right: "Right" => "راست"
 // pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "نحوه تراز کردن مقدار ورودی در فیلد را انتخاب کنید. تنظیم پیش فرض \"خودکار\" مقدار ورودی را در صورت اعمال پوشش ارز یا عددی به سمت راست و در صورت عدم اعمال به سمت چپ تراز می کند."
 // p.inputTextAlignment: "Input value alignment" => "تراز مقدار ورودی"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "نمایش نوار پیشرفت"
+// paneldynamic.showProgressBar: "Show the progress bar" => "نمایش نوار پیشرفت"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "تراز نوار پیشرفت"
+// pv.carousel: "Carousel" => "چرخ فلک"
+// progressBarLocation.top: "Top" => "بالا"
+// progressBarLocation.bottom: "Bottom" => "پایین"
+// progressBarLocation.topBottom: "Top and bottom" => "بالا و پایین"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "گزینه های انتخاب را در یک طرح چند ستونی مرتب می کند. هنگامی که روی 0 تنظیم می شود، گزینه ها در یک خط نمایش داده می شوند. هنگامی که روی -1 تنظیم می شود، مقدار واقعی از ویژگی \"تعداد ستون های تو در تو\" ماتریس والد به ارث می رسد."

@@ -307,6 +307,9 @@ export var jaStrings = {
       templateTitleLocation: "質問タイトルの配置",
       templateErrorLocation: "エラー・メッセージのアライメント",
       newPanelPosition: "新しいパネルの位置",
+      showRangeInProgress: "進行状況バーを表示する",
+      showProgressBar: "進行状況バーを表示する",
+      progressBarLocation: "プログレスバーの配置",
       keyName: "次の質問で回答の重複を防ぐ"
     },
     question: {
@@ -690,7 +693,6 @@ export var jaStrings = {
     panelsState: "内側パネルの展開状態",
     panelPrevText: "前のパネルボタンのツールチップ",
     panelNextText: "[次へ] パネル ボタンのツールチップ",
-    showRangeInProgress: "進行状況バーを表示する",
     panelRemoveButtonLocation: "[パネルを削除] ボタンの位置",
     hideIfRowsEmpty: "行がない場合は質問を非表示にする",
     hideColumnsIfEmpty: "行がない場合は列を非表示にする",
@@ -927,10 +929,11 @@ export var jaStrings = {
     firstExpanded: "firstExpanded",
     off: "オフ",
     list: "リスト",
+    carousel: "回転木馬",
+    tab: "タブ",
     progressTop: "progressTop",
     progressBottom: "progressBottom",
     progressTopBottom: "progressTopBottom",
-    tab: "タブ",
     horizontal: "水平",
     vertical: "垂直",
     top: "上",
@@ -1117,6 +1120,11 @@ export var jaStrings = {
       topbottom: "上と下",
       aboveheader: "ヘッダーの上",
       belowheader: "ヘッダーの下"
+    },
+    progressBarLocation: {
+      top: "ページのトップへ",
+      bottom: "底",
+      topBottom: "上部と下部"
     },
     sum: "和",
     count: "数える",
@@ -1348,7 +1356,8 @@ export var jaStrings = {
       visibleIf: "魔法の杖アイコンを使用して、列の表示を決定する条件付きルールを設定します。",
       enableIf: "魔法の杖アイコンを使用して、列の読み取り専用モードを無効にする条件付きルールを設定します。",
       requiredIf: "魔法の杖アイコンを使用して、ネストされた質問に回答が少なくとも1つない限り、調査の送信を禁止する条件付きルールを設定します。",
-      showInMultipleColumns: "選択すると、選択肢オプションごとに個別の列が作成されます。"
+      showInMultipleColumns: "選択すると、選択肢オプションごとに個別の列が作成されます。",
+      colCount: "選択オプションを複数列のレイアウトで配置します。0 に設定すると、オプションは 1 行で表示されます。-1 に設定すると、実際の値は親行列の \"Nested column count\" プロパティから継承されます。"
     },
     widthMode: "次から選択します: \"Static\" - 固定幅を設定します。「レスポンシブ」 - アンケートを画面の全幅に表示します。「自動」 - 使用する質問タイプに応じて、2つのいずれかを適用します。",
     cookieName: "Cookieは、ユーザーが同じアンケートに2回記入するのを防ぎます。",
@@ -2752,3 +2761,11 @@ editorLocalization.locales["ja"] = jaStrings;
 // inputTextAlignment.right: "Right" => "右"
 // pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "フィールド内で入力値を揃える方法を選択します。デフォルト設定の「自動」では、通貨または数値のマスキングが適用されている場合は入力値が右に、適用されていない場合は左に揃えられます。"
 // p.inputTextAlignment: "Input value alignment" => "入力値の配置"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "進行状況バーを表示する"
+// paneldynamic.showProgressBar: "Show the progress bar" => "進行状況バーを表示する"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "プログレスバーの配置"
+// pv.carousel: "Carousel" => "回転木馬"
+// progressBarLocation.top: "Top" => "ページのトップへ"
+// progressBarLocation.bottom: "Bottom" => "底"
+// progressBarLocation.topBottom: "Top and bottom" => "上部と下部"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "選択オプションを複数列のレイアウトで配置します。0 に設定すると、オプションは 1 行で表示されます。-1 に設定すると、実際の値は親行列の \"Nested column count\" プロパティから継承されます。"

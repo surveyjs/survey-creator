@@ -307,6 +307,9 @@ export var msStrings = {
       templateTitleLocation: "Penjajaran tajuk soalan",
       templateErrorLocation: "Penjajaran mesej ralat",
       newPanelPosition: "Lokasi panel baru",
+      showRangeInProgress: "Tunjukkan bar kemajuan",
+      showProgressBar: "Tunjukkan bar kemajuan",
+      progressBarLocation: "Penjajaran bar kemajuan",
       keyName: "Mencegah jawapan pendua dalam soalan berikut"
     },
     question: {
@@ -690,7 +693,6 @@ export var msStrings = {
     panelsState: "Panel dalaman mengembangkan keadaan",
     panelPrevText: "Petua alat butang Panel Sebelumnya",
     panelNextText: "Petua alat butang Panel Seterusnya",
-    showRangeInProgress: "Tunjukkan bar kemajuan",
     panelRemoveButtonLocation: "Alih keluar lokasi butang Panel",
     hideIfRowsEmpty: "Sembunyikan soalan jika tiada baris",
     hideColumnsIfEmpty: "Menyembunyikan lajur jika tiada baris",
@@ -927,10 +929,11 @@ export var msStrings = {
     firstExpanded: "Pertama dikembangkan",
     off: "mati",
     list: "senarai",
+    carousel: "Carousel",
+    tab: "Tab",
     progressTop: "Perkembangan atas",
     progressBottom: "Perkembangan bawah",
     progressTopBottom: "Perkembangan atas bawah",
-    tab: "Tab",
     horizontal: "mendatar",
     vertical: "menegak",
     top: "atas",
@@ -1117,6 +1120,11 @@ export var msStrings = {
       topbottom: "atas dan bawah",
       aboveheader: "Di atas pengepala",
       belowheader: "Di bawah pengepala"
+    },
+    progressBarLocation: {
+      top: "Atas",
+      bottom: "Bawah",
+      topBottom: "Atas dan bawah"
     },
     sum: "Jumlah",
     count: "Kiraan",
@@ -1348,7 +1356,8 @@ export var msStrings = {
       visibleIf: "Gunakan ikon tongkat ajaib untuk mengesetkan peraturan bersyarat yang menentukan keterlihatan lajur.",
       enableIf: "Gunakan ikon tongkat ajaib untuk mengesetkan peraturan bersyarat yang menyahdayakan mod baca sahaja untuk lajur.",
       requiredIf: "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang menghalang penyerahan tinjauan melainkan sekurang-kurangnya satu soalan tersarang mempunyai jawapan.",
-      showInMultipleColumns: "Apabila dipilih, cipta lajur individu untuk setiap opsyen pilihan."
+      showInMultipleColumns: "Apabila dipilih, cipta lajur individu untuk setiap opsyen pilihan.",
+      colCount: "Mengatur pilihan pilihan dalam susun atur berbilang lajur. Apabila ditetapkan kepada 0, pilihan dipaparkan dalam satu baris. Apabila ditetapkan kepada -1, nilai sebenar diwarisi daripada sifat \"Kiraan lajur bersarang\" bagi matriks induk."
     },
     widthMode: "Pilih daripada: \"Statik\" - menetapkan lebar tetap; \"Responsif\" - membuat tinjauan menduduki lebar penuh skrin; \"Auto\" - terpakai salah satu daripada kedua-duanya bergantung kepada jenis soalan yang digunakan.",
     cookieName: "Kuki menghalang pengguna daripada mengisi tinjauan yang sama dua kali.",
@@ -2706,3 +2715,11 @@ editorLocalization.locales["ms"] = msStrings;
 // inputTextAlignment.right: "Right" => "Kanan"
 // pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Pilih cara untuk menjajarkan nilai input dalam medan. Seting lalai \"Auto\" menjajarkan nilai input ke kanan jika mata wang atau topeng angka digunakan dan ke kiri jika tidak."
 // p.inputTextAlignment: "Input value alignment" => "Penjajaran nilai input"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "Tunjukkan bar kemajuan"
+// paneldynamic.showProgressBar: "Show the progress bar" => "Tunjukkan bar kemajuan"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "Penjajaran bar kemajuan"
+// pv.carousel: "Carousel" => "Carousel"
+// progressBarLocation.top: "Top" => "Atas"
+// progressBarLocation.bottom: "Bottom" => "Bawah"
+// progressBarLocation.topBottom: "Top and bottom" => "Atas dan bawah"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Mengatur pilihan pilihan dalam susun atur berbilang lajur. Apabila ditetapkan kepada 0, pilihan dipaparkan dalam satu baris. Apabila ditetapkan kepada -1, nilai sebenar diwarisi daripada sifat \"Kiraan lajur bersarang\" bagi matriks induk."
