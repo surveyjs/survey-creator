@@ -2753,7 +2753,7 @@ export class SurveyCreatorModel extends Base
           StringEditorConnector.get((element as Question).locTitle).activateEditor();
         }
       }, 1);
-    }, 15);
+    }, 100);
   }
 
   private getSelectedSurveyElement(): IElement {
