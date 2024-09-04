@@ -264,8 +264,6 @@ td.st-table__cell:first-of-type {
     width: auto;
   }
 }
-.svc-creator--disable-animations {
-  .st-body {
-    @include disableLibraryAnimations;
-  }
+.st-body {
+  @include disableLibraryAnimations;
 }

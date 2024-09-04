@@ -293,10 +293,8 @@
 .spg-comment.sl-comment {
   height: calcSize(17);
 }
-.svc-creator--disable-animations {
-  .sl-body {
+.sl-body {
     @include disableLibraryAnimations;
-  }
 }
 
 $sl-pd-list-fade-in-duration: var(--sl-pd-list-fade-in-duration, 250ms);

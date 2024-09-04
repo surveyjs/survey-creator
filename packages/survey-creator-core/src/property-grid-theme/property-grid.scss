@@ -23,10 +23,8 @@
   border-right: 1px solid $border;
   box-sizing: border-box;
 }
-.svc-creator--disable-animations {
-  .spg-root-modern {
-    @include disableLibraryAnimations;
-  }
+.spg-root-modern {
+  @include disableLibraryAnimations;
 }
 
 .spg-container {
