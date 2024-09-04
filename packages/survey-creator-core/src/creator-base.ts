@@ -2719,6 +2719,9 @@ export class SurveyCreatorModel extends Base
     if(!selEl) return;
     clearInterval(this.currentFocusInterval);
     clearTimeout(this.currentFocusTimeout);
+    if(this.animationEnabled && this.survey.isLazyRendering) {
+      this.survey.disableLazyRenderingBeforeElement(selEl);
+    }
     this.currentFocusTimeout = setTimeout(() => {
       this.currentFocusInterval = setInterval(() => {
         const el = document.getElementById(selEl.id);
@@ -2726,7 +2729,7 @@ export class SurveyCreatorModel extends Base
           if(!el || this.rootElement.getAnimations({ subtree: true }).filter((animation => animation.effect.getComputedTiming().activeDuration !== Infinity && (animation.pending || animation.playState !== "finished")))[0]) return;
           clearInterval(this.currentFocusInterval);
           if (!!el) {
-            SurveyHelper.scrollIntoViewIfNeeded(el.parentElement ?? el, () => { return { block: "start", behavior: this.animationEnabled ? "smooth" : "instant" }; }, true);
+            SurveyHelper.scrollIntoViewIfNeeded(el.parentElement ?? el, () => { return { block: "start", behavior: this.animationEnabled ? "smooth" : undefined }; }, true);
             if (!propertyName && el.parentElement) {
               let elToFocus: HTMLElement = (typeof (focus) === "string") ? el.parentElement.querySelector(focus) : el.parentElement;
               elToFocus && elToFocus.focus({ preventScroll: true });
