@@ -1,4 +1,5 @@
 import { SidebarModel } from "../src/components/side-bar/side-bar-model";
+import { TabDesignerPlugin } from "../src/components/tabs/designer-plugin";
 import { CreatorTester } from "./creator-tester";
 
 test("Sidebar tabs initial", () => {
@@ -45,4 +46,46 @@ test("Sidebar: hasVisiblePages test", () => {
 
   creator.makeNewViewActive("translation");
   expect(creator.sidebar.hasVisiblePages).toEqual(true);
+});
+
+test("showOneCategoryInPropertyGrid: showPlaceholder into property grid if survey is empty", () => {
+  const creator = new CreatorTester(undefined, undefined, false);
+  const designerPlugin = creator.getPlugin("designer") as TabDesignerPlugin;
+  designerPlugin.showOneCategoryInPropertyGrid = true;
+
+  expect(creator.sidebar.activePage).toEqual("propertyGridPlaceholder");
+  expect(creator.sidebar.headerComponentName).toEqual("");
+  expect(creator.sidebar.headerComponentData).toEqual(undefined);
+
+  let tabs = designerPlugin["tabControlModel"].topToolbar.actions;
+  expect(tabs.length).toBe(10);
+  expect(tabs.map(t => t.id).join(",")).toBe("general,logo,navigation,question,pages,logic,data,validation,showOnCompleted,timer");
+  expect(designerPlugin.propertyGridViewModel.survey.currentPage.name).toBe("general");
+
+  creator.clickToolboxItem({ type: "text" });
+  expect(creator.sidebar.activePage).toEqual("propertyGrid");
+  expect(creator.sidebar.headerComponentName).toEqual("svc-side-bar-property-grid-header");
+  expect(creator.sidebar.headerComponentData).toEqual(designerPlugin.propertyGridViewModel.objectSelectionAction);
+  expect(designerPlugin.propertyGridViewModel.objectSelectionAction.title).toEqual("question1");
+  expect(designerPlugin.propertyGridViewModel.objectSelectionAction.tooltip).toEqual("General");
+  tabs = designerPlugin["tabControlModel"].topToolbar.actions;
+  expect(tabs.length).toBe(6);
+  expect(tabs.map(t => t.id).join(",")).toBe("general,layout,logic,mask,data,validation");
+  expect(designerPlugin.propertyGridViewModel.survey.currentPage.name).toBe("general");
+});
+
+test("showOneCategoryInPropertyGrid: tab control", () => {
+  const creator = new CreatorTester();
+  const designerPlugin = creator.getPlugin("designer") as TabDesignerPlugin;
+  designerPlugin.showOneCategoryInPropertyGrid = true;
+
+  expect(creator.sidebar.activePage).toEqual("propertyGrid");
+  expect(creator.sidebar.headerComponentName).toEqual("svc-side-bar-property-grid-header");
+  expect(creator.sidebar.headerComponentData).toEqual(designerPlugin.propertyGridViewModel.objectSelectionAction);
+  expect(designerPlugin.propertyGridViewModel.objectSelectionAction.title).toEqual("Survey");
+  expect(designerPlugin.propertyGridViewModel.objectSelectionAction.tooltip).toEqual("General");
+  const tabs = designerPlugin["tabControlModel"].topToolbar.actions;
+  expect(tabs.length).toBe(10);
+  expect(tabs.map(t => t.id).join(",")).toBe("general,logo,navigation,question,pages,logic,data,validation,showOnCompleted,timer");
+  expect(designerPlugin.propertyGridViewModel.survey.currentPage.name).toBe("general");
 });
