@@ -307,6 +307,9 @@ export var nbStrings = {
       templateTitleLocation: "Justering av spørsmålstittel",
       templateErrorLocation: "Justering av feilmelding",
       newPanelPosition: "Ny panelplassering",
+      showRangeInProgress: "Vis fremdriftslinjen",
+      showProgressBar: "Vis fremdriftslinjen",
+      progressBarLocation: "Justering av fremdriftslinje",
       keyName: "Forhindre dupliserte svar i følgende spørsmål"
     },
     question: {
@@ -690,7 +693,6 @@ export var nbStrings = {
     panelsState: "Utvidelsestilstand for Indre panel",
     panelPrevText: "Verktøytips for forrige panelknapp",
     panelNextText: "Verktøytips for neste panelknapp",
-    showRangeInProgress: "Vis fremdriftsindikator",
     panelRemoveButtonLocation: "Fjern plassering av panelknappen",
     hideIfRowsEmpty: "Skjul spørsmålet hvis det ikke er noen rader",
     hideColumnsIfEmpty: "Skjule kolonner hvis det ikke er noen rader",
@@ -927,10 +929,11 @@ export var nbStrings = {
     firstExpanded: "firstExpanded",
     off: "off",
     list: "list",
+    carousel: "Karusell",
+    tab: "Kategoriene",
     progressTop: "progressTop",
     progressBottom: "progressBottom",
     progressTopBottom: "progressTopBottom",
-    tab: "Kategoriene",
     horizontal: "horizontal",
     vertical: "vertical",
     top: "top",
@@ -1117,6 +1120,11 @@ export var nbStrings = {
       topbottom: "top and bottom",
       aboveheader: "Over overskriften",
       belowheader: "Under overskriften"
+    },
+    progressBarLocation: {
+      top: "Topp",
+      bottom: "Bunn",
+      topBottom: "Topp og bunn"
     },
     sum: "Sum",
     count: "Greve",
@@ -1348,7 +1356,8 @@ export var nbStrings = {
       visibleIf: "Bruk tryllestavikonet til å angi en betinget regel som bestemmer kolonnens synlighet.",
       enableIf: "Bruk tryllestavikonet til å angi en betinget regel som deaktiverer skrivebeskyttet modus for kolonnen.",
       requiredIf: "Bruk tryllestavikonet til å angi en betinget regel som forhindrer innsending av spørreundersøkelser med mindre minst ett nestet spørsmål har et svar.",
-      showInMultipleColumns: "Når dette alternativet er valgt, opprettes det én kolonne for hvert valgalternativ."
+      showInMultipleColumns: "Når dette alternativet er valgt, opprettes det én kolonne for hvert valgalternativ.",
+      colCount: "Ordner valgalternativer i et oppsett med flere kolonner. Når den er satt til 0, vises alternativene på én enkelt linje. Når satt til -1, arves den faktiske verdien fra egenskapen \"Nestet kolonneantall\" for den overordnede matrisen."
     },
     widthMode: "Velg mellom: \"Statisk\" - setter en fast bredde; \"Responsive\" - gjør at undersøkelsen opptar hele bredden på skjermen; \"Auto\" - gjelder en av de to avhengig av spørsmålstypene som brukes.",
     cookieName: "Informasjonskapsler hindrer brukere i å fylle ut den samme undersøkelsen to ganger.",
@@ -2756,3 +2765,11 @@ editorLocalization.locales["nb"] = nbStrings;
 // inputTextAlignment.right: "Right" => "Høyre"
 // pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Velg hvordan du vil justere inndataverdien i feltet. Standardinnstillingen \"Auto\" justerer inngangsverdien til høyre hvis valuta eller numerisk maskering brukes, og til venstre hvis ikke."
 // p.inputTextAlignment: "Input value alignment" => "Justering av inngangsverdi"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "Vis fremdriftslinjen"
+// paneldynamic.showProgressBar: "Show the progress bar" => "Vis fremdriftslinjen"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "Justering av fremdriftslinje"
+// pv.carousel: "Carousel" => "Karusell"
+// progressBarLocation.top: "Top" => "Topp"
+// progressBarLocation.bottom: "Bottom" => "Bunn"
+// progressBarLocation.topBottom: "Top and bottom" => "Topp og bunn"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Ordner valgalternativer i et oppsett med flere kolonner. Når den er satt til 0, vises alternativene på én enkelt linje. Når satt til -1, arves den faktiske verdien fra egenskapen \"Nestet kolonneantall\" for den overordnede matrisen."

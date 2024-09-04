@@ -307,6 +307,9 @@ export var nlStrings = {
       templateTitleLocation: "Uitlijning van vraagtitels",
       templateErrorLocation: "Uitlijning van foutmeldingen",
       newPanelPosition: "Nieuwe paneellocatie",
+      showRangeInProgress: "De voortgangsbalk weergeven",
+      showProgressBar: "De voortgangsbalk weergeven",
+      progressBarLocation: "Uitlijning van de voortgangsbalk",
       keyName: "Voorkom dubbele antwoorden in de volgende vraag"
     },
     question: {
@@ -690,7 +693,6 @@ export var nlStrings = {
     panelsState: "Uitvouwstatus binnenpaneel",
     panelPrevText: "Knopinfo vorige deelvensterknop",
     panelNextText: "knopinfo voor het volgende deelvenster",
-    showRangeInProgress: "Voortgangsbalk weergeven",
     panelRemoveButtonLocation: "Locatie van de knop Deelvenster verwijderen",
     hideIfRowsEmpty: "Verberg de vraag als er geen rijen zijn",
     hideColumnsIfEmpty: "Kolommen verbergen als er geen rijen zijn",
@@ -927,10 +929,11 @@ export var nlStrings = {
     firstExpanded: "Eerste uitgevouwen",
     off: "Uit",
     list: "Lijst",
+    carousel: "Carrousel",
+    tab: "Tabs",
     progressTop: "Voortgang top",
     progressBottom: "Voortgang bodem",
     progressTopBottom: "Voortgang top bodem",
-    tab: "Tabs",
     horizontal: "Horizontaal",
     vertical: "Verticaal",
     top: "Top",
@@ -1117,6 +1120,11 @@ export var nlStrings = {
       topbottom: "Top en beneden",
       aboveheader: "Boven de koptekst",
       belowheader: "Onder de kop"
+    },
+    progressBarLocation: {
+      top: "Boven",
+      bottom: "Bodem",
+      topBottom: "Boven en onder"
     },
     sum: "Som",
     count: "Tellen",
@@ -1348,7 +1356,8 @@ export var nlStrings = {
       visibleIf: "Gebruik het pictogram van de toverstaf om een voorwaardelijke regel in te stellen die de zichtbaarheid van de kolom bepaalt.",
       enableIf: "Gebruik het pictogram van de toverstaf om een voorwaardelijke regel in te stellen waarmee de alleen-lezen modus voor de kolom wordt uitgeschakeld.",
       requiredIf: "Gebruik het toverstafpictogram om een voorwaardelijke regel in te stellen die het verzenden van enquêtes verhindert, tenzij ten minste één geneste vraag een antwoord heeft.",
-      showInMultipleColumns: "Als deze optie is geselecteerd, wordt er een afzonderlijke kolom gemaakt voor elke keuzeoptie."
+      showInMultipleColumns: "Als deze optie is geselecteerd, wordt er een afzonderlijke kolom gemaakt voor elke keuzeoptie.",
+      colCount: "Rangschikt keuzeopties in een lay-out met meerdere kolommen. Als deze optie op 0 staat, worden ze op één regel weergegeven. Wanneer deze is ingesteld op -1, wordt de werkelijke waarde overgenomen van de eigenschap \"Aantal geneste kolommen\" van de bovenliggende matrix."
     },
     widthMode: "Kies uit: \"Statisch\" - stelt een vaste breedte in; \"Responsief\" - zorgt ervoor dat de enquête de volledige breedte van het scherm in beslag neemt; \"Auto\" - past een van de twee toe, afhankelijk van de gebruikte vraagtypen.",
     cookieName: "Cookies voorkomen dat gebruikers dezelfde enquête twee keer invullen.",
@@ -2734,3 +2743,11 @@ editorLocalization.locales["nl"] = nlStrings;
 // inputTextAlignment.right: "Right" => "Rechts"
 // pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Selecteer hoe u de invoerwaarde binnen het veld wilt uitlijnen. De standaardinstelling \"Auto\" lijnt de invoerwaarde uit aan de rechterkant als valuta- of numerieke maskering wordt toegepast en aan de linkerkant als dat niet het geval is."
 // p.inputTextAlignment: "Input value alignment" => "Uitlijning van invoerwaarden"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "De voortgangsbalk weergeven"
+// paneldynamic.showProgressBar: "Show the progress bar" => "De voortgangsbalk weergeven"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "Uitlijning van de voortgangsbalk"
+// pv.carousel: "Carousel" => "Carrousel"
+// progressBarLocation.top: "Top" => "Boven"
+// progressBarLocation.bottom: "Bottom" => "Bodem"
+// progressBarLocation.topBottom: "Top and bottom" => "Boven en onder"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Rangschikt keuzeopties in een lay-out met meerdere kolommen. Als deze optie op 0 staat, worden ze op één regel weergegeven. Wanneer deze is ingesteld op -1, wordt de werkelijke waarde overgenomen van de eigenschap \"Aantal geneste kolommen\" van de bovenliggende matrix."
