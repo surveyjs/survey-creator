@@ -48,12 +48,14 @@ test("SurveyElementActionContainer with subtypes fit", () => {
   ];
 
   actionContainer.setItems(actions.map(a => {
-    const action = new Action({ id: a.id });
+    const action = new Action({
+      id: a.id,
+      visible: !a.hidden,
+      iconName: a.iconName,
+      location: a.location
+    });
     action.minDimension = a.minDimension;
     action.maxDimension = a.maxDimension;
-    action.visible = !a.hidden;
-    action.innerItem.iconName = a.iconName;
-    action.innerItem.location = a.location;
     return action;
   }));
 
@@ -147,12 +149,14 @@ test("SurveyElementActionContainer without subtypes fit", () => {
   ];
 
   actionContainer.setItems(actions.map(a => {
-    const action = new Action({ id: a.id });
+    const action = new Action({
+      id: a.id,
+      visible: !a.hidden,
+      iconName: a.iconName,
+      location: a.location
+    });
     action.minDimension = a.minDimension;
     action.maxDimension = a.maxDimension;
-    action.visible = !a.hidden;
-    action.innerItem.iconName = a.iconName;
-    action.innerItem.location = a.location;
     return action;
   }));
 

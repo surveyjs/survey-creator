@@ -171,7 +171,7 @@ export var logicCss = {
   },
   dropdown: {
     root: "",
-    popup: "",
+    popup: "svc-creator-popup",
     small: "",
     control: "sl-dropdown",
     selectWrapper: "",

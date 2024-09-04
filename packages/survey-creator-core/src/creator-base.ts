@@ -1242,6 +1242,8 @@ export class SurveyCreatorModel extends Base
    * Provides access to the [Toolbox API](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolbox).
    * 
    * [Toolbox Customization](https://surveyjs.io/survey-creator/documentation/toolbox-customization (linkStyle))
+   * @see showToolbox
+   * @see toolboxLocation
    */
   public toolbox: QuestionToolbox;
   public get toolboxCategories(): Array<any> {
@@ -1298,6 +1300,15 @@ export class SurveyCreatorModel extends Base
   public get showToolbox() {
     return this.showToolboxValue && this.allowShowToolbox;
   }
+  /**
+   * Specifies whether to show the Toolbox.
+   * 
+   * Default value: `true`
+   * 
+   * [Toolbox Customization](https://surveyjs.io/survey-creator/documentation/toolbox-customization (linkStyle))
+   * @see toolbox
+   * @see toolboxLocation
+   */
   public set showToolbox(val: boolean) {
     if (<any>val !== true && <any>val !== false) {
       SurveyHelper.warnText("showToolbox is a boolean property now.");
@@ -3640,6 +3651,7 @@ export class SurveyCreatorModel extends Base
         listModel.setItems(getActions());
       },
       allowSelection: false,
+      cssClass: "svc-creator-popup",
       verticalPosition: "bottom",
       horizontalPosition: "center",
       displayMode: this.isTouch ? "overlay" : "popup"
@@ -3799,6 +3811,10 @@ export class SurveyCreatorModel extends Base
    * - `"left"` (default) - Displays the Toolbox on the left side of the design surface.
    * - `"right"` - Displays the Toolbox on the right side of the design surface.
    * - `"sidebar"` - Displays the Toolbox as an overlay on top of the Property Grid. Use the [`sidebarLocation`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#sidebarLocation) property to specify the Property Grid position.
+   * 
+   * [Toolbox Customization](https://surveyjs.io/survey-creator/documentation/toolbox-customization (linkStyle))
+   * @see showToolbox
+   * @see toolbox
    */
   @property({
     defaultValue: "left", onSet: (newValue, target: SurveyCreatorModel) => {

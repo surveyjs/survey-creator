@@ -7,15 +7,15 @@ import { CreatorPresetEditorModel } from "creator-presets-core";
 import { PresetsHeaderComponent } from "./Header";
 
 const presetApplyText = "Use the following code to apply the preset:";
-const presetApplyCode = `import { SurveyCreatorModel, SurveyCreatorPreset } from "survey-creator-core";
+const presetApplyCode = `import { SurveyCreatorModel, CreatorPreset } from "survey-creator-core";
 const creator = new SurveyCreatorModel({ ... });
 
 const presetJson = {
   // Copy the JSON object from below
 }
 
-const preset = new SurveyCreatorPreset(presetJson);
-preset.applyTo(creator);
+const preset = new CreatorPreset(presetJson);
+preset.apply(creator);
 `;
 
 export class CreatorPresetEditor extends CreatorPresetEditorModel {
