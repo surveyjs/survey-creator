@@ -25,16 +25,16 @@ In order to pipe selected choices to a Dynamic Matrix, follow these steps:
 2. Under **General**, assign a **Question name** and a user-friendly **Question title** to it.
 3. Under **Choice Options**, populate the question with **Choices**.
 4. Under **Data**, locate the **Join identifier** property and assign any unique value to it.
-5. Locate the **Store values in the following property** field and enter another unique value into it.
-   <img src="../images/eud-checkboxes-data.png" alt="Pipe choices from a Checkboxes question to a Dynamic Matrix" width="332" height="537">
+5. Locate the **Store values in the following property** field and enter another unique value into it.<br><br>
+    <img src="../images/eud-checkboxes-data.png" alt="Pipe choices from a Checkboxes question to a Dynamic Matrix" width="332" height="537">
 6. Add a **Dynamic Matrix** to the design surface.
 7. Under **Conditions**, locate the **Make the question visible if** property to make the matrix visible only when at least one checkbox of the source question is selected.
 8. Click the **Magic wand** icon on the right of the property. This action opens a popup with a GUI for setting up display logic.
-9. In the popup, select the source question ID (its "Question name" property value you assigned in step 2).
+9.  In the popup, select the source question ID (its "Question name" property value you assigned in step 2).
 10. Select the **Not Empty** condition from the drop-down menu and click **Apply**.
 11. Under **Data**, locate the **Join identifier** property and set it to the same value you have used for this property of the Checkboxes question in step 4.
 12. Select the column of the matrix to which you want to pipe selected choices. This action will display the settings of the column.
 13. Under **General**, locate the **Column name** field and enter the value you used for the **Store values in the following property** field of the Checkboxes question in step 5.
-14. Set the **Cell input type** to **Expression (read-only)**.        
-   <img src="../images/eud-column-settings.png" alt='Pipe selected choices to the rows of a Dynamic Matrix' width="1537" height="766">
+14. Set the **Cell input type** to **Expression (read-only)**.<br><br>
+    <img src="../images/eud-column-settings.png" alt='Pipe selected choices to the rows of a Dynamic Matrix' width="1537" height="766">
 15. Configure the remaining columns of the matrix.

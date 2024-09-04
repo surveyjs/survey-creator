@@ -110,6 +110,40 @@ test("Check imagepicker add/delete items style", async (t) => {
     .click(".svc-image-item-value-controls__add");
 });
 
+test("Check imagepicker add/delete - 5817", async (t) => {
+  await t.resizeWindow(1920, 1080);
+  await explicitErrorHandler();
+  await setJSON({
+    elements: [{
+      type: "imagepicker", name: "q1", choices: [
+        {
+          "value": "lion",
+          "imageLink": "lion.jpg"
+        },
+        {
+          "value": "giraffe",
+          "imageLink": "lion.jpg"
+        }
+      ]
+    }]
+  });
+  await ClientFunction(() => {
+    const creator = (window as any).creator;
+    creator.selectElement(creator.survey.getQuestionByName("q1"));
+  })();
+  await t
+    .expect(Selector(".svc-tab-designer .svc-image-item-value--new").visible).ok()
+    .click(".svc-image-item-value-controls__add")
+    .setFilesToUpload(getVisibleElement(".svc-image-item-value--new").find(".svc-choose-file-input"), "./image.jpg")
+    .expect(Selector(".svc-image-item-value").nth(2).find("img").hasAttribute("src")).ok()
+    .click(Selector(".svc-context-button--danger").nth(2))
+    .expect(Selector(".svc-image-item-value").nth(2).hasClass("svc-image-item-value--new")).ok()
+    .expect(Selector(".svc-tab-designer .svc-image-item-value--new").visible).ok()
+    .click(".svc-image-item-value-controls__add")
+    .setFilesToUpload(getVisibleElement(".svc-image-item-value--new").find(".svc-choose-file-input"), "./image.jpg")
+    .expect(Selector(".svc-image-item-value").nth(2).find("img").hasAttribute("src")).ok();
+});
+
 test("Check imagepicker delete item", async (t) => {
   await t.resizeWindow(1920, 1080);
   await explicitErrorHandler();
@@ -293,4 +327,72 @@ test("Question adorner - update other rows with lazy rendering on question colla
   await t.click(qCollapseButton);
   await t.expect(qContent.count).eql(3);
   await t.expect(qCollapseButton.count).eql(3);
+});
+test("Collapse all and expand all toolbar", async (t) => {
+  await t.resizeWindow(1600, 1080);
+  const json = {
+    elements: [
+      {
+        type: "text",
+        name: "question1"
+      },
+      {
+        type: "panel",
+        name: "panel1"
+      }
+    ]
+  };
+  await ClientFunction(() => {
+    window["creator"].expandCollapseButtonVisibility = "onhover";
+  })();
+  await setJSON(json);
+  await t.click("#collapseAll");
+  await t.expect(Selector(".svc-page__content--collapsed").exists).ok();
+  await t.click("#expandAll");
+  await t.expect(Selector(".svc-page__content--collapsed").exists).notOk();
+});
+test("Collapse all and expand all toolbar visibility", async (t) => {
+  await t.resizeWindow(1600, 1080);
+  const json = {
+    elements: [
+      {
+        type: "text",
+        name: "question1"
+      },
+      {
+        type: "panel",
+        name: "panel1"
+      }
+    ]
+  };
+  await ClientFunction(() => {
+    window["creator"].expandCollapseButtonVisibility = "never";
+  })();
+  await setJSON(json);
+  await t.expect(Selector("#collapseAll").exists).notOk();
+  await t.expect(Selector("#expandAll").exists).notOk();
+});
+test("Check page adorner state is restored after shrink and stretch", async (t) => {
+  await t.resizeWindow(1920, 1080);
+  const json = {
+    widthMode: "responsive",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "text",
+          }
+        ]
+      }
+    ]
+  };
+  await setJSON(json);
+  await t.click(".svc-page", { offsetX: 3, offsetY: 3 });
+  await t.expect(Selector(".svc-page__content-actions #duplicate .sv-action-bar-item__title--with-icon").visible).ok();
+  await t.resizeWindow(500, 1080);
+  await t.expect(Selector(".svc-page__content-actions #duplicate .sv-action-bar-item__title--with-icon").visible).notOk();
+  await t.resizeWindow(1920, 1080);
+  await t.expect(Selector(".svc-page__content-actions #duplicate .sv-action-bar-item__title--with-icon").visible).ok();
 });

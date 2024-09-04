@@ -99,7 +99,7 @@
   &:hover,
   &:focus {
     background-color: var(--ctr-expression-item-background-color-conjunction-hovered, $yellow);
-    color: var(--ctr-expression-item-text-color-conjunction-hovered, $foreground);
+    color: var(--ctr-expression-item-text-color-conjunction-hovered, $primary-foreground);
   }
 }
 
@@ -110,7 +110,7 @@
   &:hover,
   &:focus {
     background-color: var(--ctr-expression-item-background-color-operator-hovered, $yellow);
-    color: var(--ctr-expression-item-text-color-operator-hovered, $foreground);
+    color: var(--ctr-expression-item-text-color-operator-hovered, $primary-foreground);
   }
 }
 
@@ -121,7 +121,7 @@
   &:hover,
   &:focus {
     background-color: var(--ctr-expression-item-background-color-action-hovered, $red);
-    color: var(--ctr-expression-item-text-color-action-hovered, $foreground);
+    color: var(--ctr-expression-item-text-color-action-hovered, $primary-foreground);
   }
 }
 

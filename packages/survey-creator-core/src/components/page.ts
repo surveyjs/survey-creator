@@ -1,4 +1,4 @@
-import { ActionContainer, ComputedUpdater, CssClassBuilder, DragTypeOverMeEnum, IAction, IElement, PageModel, property } from "survey-core";
+import { Action, ActionContainer, ComputedUpdater, CssClassBuilder, DragTypeOverMeEnum, IAction, IElement, PageModel, property } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { IPortableMouseEvent } from "../utils/events";
 import { SurveyElementAdornerBase } from "./action-container-view-model";
@@ -38,6 +38,10 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       }
     );
     this.attachElement(page);
+  }
+
+  protected get dragInsideCollapsedContainer(): boolean {
+    return this.collapsed;
   }
 
   protected attachElement(surveyElement: PageModel): void {
@@ -135,6 +139,10 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     return this.getPage();
   }
 
+  protected createActionContainer(): ActionContainer<Action> {
+    return new ActionContainer();
+  }
+
   private addGhostPage = (selectCurrentPage: boolean = true) => {
     const currentPage = this.page;
     if (this.isGhost) {
@@ -183,6 +191,12 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       if (!!this.creator && !this.creator.showAddQuestionButton) {
         result += " svc-page--drag-over-empty-no-add-button";
       }
+    }
+    if (!!this.dragTypeOverMe && this.collapsed) {
+      this.dragIn();
+      result += " svc-page__content--collapsed-drag-over-inside";
+    } else {
+      this.dragOut();
     }
     if (this.isGhost) {
       return result + " svc-page__content--new";

@@ -2,6 +2,7 @@ import * as React from "react";
 import { Base, SurveyModel, PageModel } from "survey-core";
 import {
   ReactElementFactory,
+  SurveyActionBar,
   SurveyElementBase,
   SurveyHeader
 } from "survey-react-ui";
@@ -180,6 +181,11 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
         <div className="svc-tab-designer__page-navigator"><SurveyPageNavigator
           pagesController={this.model.pagesController} pageEditMode={this.model.creator.pageEditMode}
         ></SurveyPageNavigator></div>
+        : null
+      }
+      {this.model.hasToolbar ?
+        <div className="svc-tab-designer__toolbar">
+          <SurveyActionBar model={this.model.actionContainer} handleClick={false}></SurveyActionBar></div>
         : null
       }
     </React.Fragment>);

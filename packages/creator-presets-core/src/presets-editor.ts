@@ -42,10 +42,11 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     this.locTitle = new LocalizableString(undefined, false);
     this.locTitle.text = "Creator Presets";
     this.navigationBarValue = new NavigationBar();
-    this.addNavigationAction("preset", "Edit Preset");
+    const firstTabName = "preset";
+    this.addNavigationAction(firstTabName, "Edit Preset");
     this.addNavigationAction("creator", "Preview Survey Creator");
     this.addNavigationAction("results", "View Preset JSON");
-    this.activeTab = this.navigationBar.actions[0].id;
+    this.activeTab = firstTabName;
   }
   public dispose(): void {
     super.dispose();
@@ -86,12 +87,13 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
   public createCreator(options: ICreatorOptions): SurveyCreatorModel {
     return new SurveyCreatorModel(options);
   }
-  private addNavigationAction(id: string, title: string): void {
+  private addNavigationAction(tabName: string, title: string): void {
+    const id = "action-preset-" + tabName;
     const actionInfo = {
       id: id,
       title: title,
-      active: <any>new ComputedUpdater<boolean>(() => this.activeTab === id),
-      action: () => { this.setActiveTab(id); }
+      active: <any>new ComputedUpdater<boolean>(() => this.activeTab === tabName),
+      action: () => { this.setActiveTab(tabName); }
     };
     this.navigationBar.addAction(actionInfo);
   }

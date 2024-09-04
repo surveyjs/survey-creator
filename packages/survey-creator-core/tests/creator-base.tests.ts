@@ -56,6 +56,7 @@ import { PropertyGridEditorMatrixItemValues } from "../src/property-grid/matrice
 import { ObjectSelector } from "../src/property-grid/object-selector";
 import { TabDesignerViewModel } from "../src/components/tabs/designer";
 import { ConfigureTablePropertyEditorEvent } from "../src/creator-events-api";
+import { IQuestionToolboxItem } from "../src/toolbox";
 
 surveySettings.supportCreatorV2 = true;
 
@@ -1197,7 +1198,7 @@ test("Convert radiogroup question into dropdown, onQuestionCoverting", (): any =
   creator.onQuestionConverting.add((sender, options) => {
     options.json = objJSON;
   });
-  const json ={ elements: [{ type: "radiogroup", name: "q1", choices: [1, 2, 3, 4] }] };
+  const json = { elements: [{ type: "radiogroup", name: "q1", choices: [1, 2, 3, 4] }] };
   creator.JSON = json;
   creator.selectQuestionByName("q1");
   creator.convertCurrentQuestion("dropdown");
@@ -1327,6 +1328,41 @@ test("Question type selector popup displayMode", (): any => {
   creator.isTouch = true;
   selectorModel = creator.getQuestionTypeSelectorModel(() => { });
   expect(selectorModel.popupModel.displayMode).toBe("overlay");
+});
+
+test("Question type selector with custom toolbox item", (): any => {
+  const creator = new CreatorTester();
+  const customToolboxItem = <IQuestionToolboxItem>{
+    "id": "panel1",
+    "name": "panel1",
+    "iconName": "icon-panel",
+    "className": "",
+    "title": "",
+    "json": {
+      "type": "panel",
+      "name": "panel1",
+      "elements": [{ "type": "text", "name": "question1" }],
+    },
+    "isCopied": false,
+    "isUsed": true,
+    "isStandard": false,
+    "category": "Custom Questions"
+  };
+  creator.toolbox.addItem(customToolboxItem);
+
+  const survey: SurveyModel = creator.survey;
+  expect(survey.getAllQuestions().length).toEqual(0);
+
+  const selectorModel = creator.getQuestionTypeSelectorModel(() => { });
+  const listModel: ListModel = selectorModel.popupModel.contentComponentData.model;
+  selectorModel.popupModel.toggleVisibility();
+  const customItem = listModel.actions.filter((item) => item.id == "panel1")[0];
+  listModel.onItemClick(customItem);
+  expect(survey.getAllPanels().length).toEqual(1);
+  expect(survey.getAllPanels()[0].getType()).toEqual("panel");
+
+  const newQ = survey.getAllPanels()[0];
+  expect(newQ.elements.length).toEqual(1);
 });
 
 test("Add question with default choices", (): any => {
@@ -3956,15 +3992,24 @@ test("creator.addNewQuestionLast property", (): any => {
   creator.clickToolboxItem({ type: "text" });
   expect(creator.selectedElementName).toEqual("question2");
   creator.selectQuestionByName("question1");
-  creator.addNewQuestionInPage((str) => {}, undefined, "text");
+  creator.addNewQuestionInPage((str) => { }, undefined, "text");
   expect(creator.selectedElementName).toEqual("question3");
   expect(creator.survey.pages[0].elements[2].name).toEqual("question3");
   creator.selectQuestionByName("question1");
   creator.addNewQuestionLast = false;
-  creator.addNewQuestionInPage((str) => {}, undefined, "text");
+  creator.addNewQuestionInPage((str) => { }, undefined, "text");
   expect(creator.selectedElementName).toEqual("question4");
   expect(creator.survey.pages[0].elements[1].name).toEqual("question4");
   expect(creator.survey.pages[0].elements[3].name).toEqual("question3");
+});
+test("addNewQuestionInPage with json", (): any => {
+  const creator = new CreatorTester();
+  creator.addNewQuestionInPage((str) => { }, undefined, "text", { type: "text", inputType: "email" });
+  const newQuestion = creator.survey.pages[0].elements[0] as QuestionTextModel;
+
+  expect(creator.selectedElementName).toEqual("question1");
+  expect(newQuestion.name).toEqual("question1");
+  expect(newQuestion.inputType).toEqual("email");
 });
 test("Initial Property Grid category expanded state", (): any => {
   const creator = new CreatorTester();
@@ -4148,7 +4193,7 @@ test("Keep selection on deleting another question, #5634", (): any => {
   };
   let counter = 0;
   creator.onSelectedElementChanged.add((sender, options) => {
-    counter ++;
+    counter++;
   });
   creator.selectQuestionByName("q1");
   expect(counter).toBe(1);
@@ -4169,7 +4214,7 @@ test("Do not select a duplicated question if it is not selected, #5634", (): any
   };
   let counter = 0;
   creator.onSelectedElementChanged.add((sender, options) => {
-    counter ++;
+    counter++;
   });
   creator.selectQuestionByName("q1");
   expect(counter).toBe(1);
@@ -4538,4 +4583,27 @@ test("onSetPropertyEditorOptions -> onConfigureTablePropertyEditor", (): any => 
   onSetPropertyEditorOptions_allowBatchEdit = false;
   creator.onSetPropertyEditorOptionsCallback("choices", question, callBackOptions);
   expect(callBackOptions.allowBatchEdit).toBeFalsy();
+});
+test("creator.onSurveyInstanceCreated from property Grid", () => {
+  const creator = new CreatorTester();
+  const selectedTypes = new Array<string>();
+  creator.onSurveyInstanceCreated.add((sender, options) => {
+    if (options.area === "property-grid") {
+      if(options.obj) {
+        selectedTypes.push(options.obj.getType());
+      }
+    }
+  });
+  creator.JSON = {
+    elements: [
+      { name: "q1", type: "text" },
+      {
+        name: "q2",
+        type: "radiogroup"
+      }
+    ]
+  };
+  creator.selectQuestionByName("q1");
+  creator.selectQuestionByName("q2");
+  expect(selectedTypes).toStrictEqual(["survey", "text", "radiogroup"]);
 });

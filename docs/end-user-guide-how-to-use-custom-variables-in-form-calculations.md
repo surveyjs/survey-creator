@@ -17,24 +17,18 @@ The steps below describe how to create a custom variable using the `age()` funct
 
 1. In the Toolbox area, hover over **Single-Line Input** and select **Date** from the list of available input types.
 2. Enter a question ID in the **Question name** text box.
-3. Enter a user-friendly value in the **Question title** text box. This value will be visible to respondents.
-
+3. Enter a user-friendly value in the **Question title** text box. This value will be visible to respondents.<br><br>
     <img src="../images/eud-date.png" alt="Single-Line Input: Date type" width="1520" height="728">
-
 4. Switch to the survey-level settings in the top right corner.
 5. Under **Conditions**, locate the **Custom variables** subsection.
 6. Click the **Plus** icon to create a new variable.
 7. Enter a unique **Name** for the variable.
-8. Enter the following sample value in the **Expression** field: `age({date-of-birth})`, where `date-of-birth` is the "Question name" value of the field in which a respondent enters their date of birth.
-
+8. Enter the following sample value in the **Expression** field: `age({date-of-birth})`, where `date-of-birth` is the "Question name" value of the field in which a respondent enters their date of birth.<br><br>
     <img src="../images/eud-age-cv.png" alt="How to create a custom variable using the age() function" width="359" height="463">
-
 9. Add a dependent question to your form. In this example we are using a **Yes/No (Boolean)** question.
 10. Enter a question ID in the **Question name** text box.
-11. Enter a user-friendly value in the **Question title** text box.
-
+11. Enter a user-friendly value in the **Question title** text box.<br><br>
     <img src="../images/eud-boolean.png" alt="Yes/No (Boolean) question configuration" width="1520" height="721">
-
 12. Under **Condition**, locate the **Make the question visible if** property.
 13. Click the **Magic wand** icon on the right of the property to open a pop-up dialog.
 14. In the dialog, select the custom variable name assigned in step 7 and the condition that has to be met in order for the dependent question to be visible.

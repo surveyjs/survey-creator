@@ -36,7 +36,7 @@ svc-page {
   visibility: hidden;
   top: calcSize(1);
   inset-inline-end: 0; // right
-  padding: 0 calcSize(1.5);
+  padding: 0 calcSize(1.5) 0 calcSize(1);
   z-index: 1;
 
   .sv-action-bar-separator {
@@ -139,6 +139,33 @@ svc-page {
     visibility: visible;
   }
 }
+
+.svc-creator .svc-page .svc-page__content--collapsed {
+  &::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 2px $border dashed;
+    margin: -2px;
+    border-radius: calcSize(1.25);
+    box-sizing: content-box;
+    pointer-events: none;
+  }
+  &.svc-page__content--collapsed-drag-over-inside {
+    box-shadow: 0 0 0 2px $primary;
+    background: $primary-light;
+    animation: collapsed-drag-over-inside-blinking 1s infinite;
+    &::after {
+      border: 2px $primary solid;
+      background: $primary-light;
+      animation: collapsed-drag-over-inside-blinking 1s infinite;
+    }
+  }
+}
+
 .svc-creator--mobile {
   .svc-page .svc-page__content--collapsed {
     &::after {
@@ -151,8 +178,6 @@ svc-page {
   &.svc-creator .svc-page .svc-page__content--selected:focus,
   .svc-hovered.svc-page__content {
     &.svc-page__content--selected {
-      box-shadow: 0 0 0 2px inset $secondary;
-
       box-shadow: 0 0 0 2px inset var(--ctr-survey-page-border-color-selected, $secondary);
       background: var(--ctr-survey-page-background-color-selected, $secondary-backcolor-semi-light);
 

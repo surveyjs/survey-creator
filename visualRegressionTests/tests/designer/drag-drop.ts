@@ -555,6 +555,53 @@ test("Drag Drop to Multiline styles", async (t) => {
   });
 });
 
+test("Drag Drop inside panel dynamic top indicator", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await explicitErrorHandler();
+    await t.resizeWindow(832, 600);
+
+    const json = {
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "paneldynamic",
+              "name": "question1",
+              "templateElements": [
+                {
+                  "type": "text",
+                  "name": "question2"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(json);
+
+    const Page1 = Selector("[data-sv-drop-target-survey-element='page1']");
+
+    async function setClass(idx: number, suffix: string, remove: "add" | "remove" = "add") {
+      await ClientFunction((idx, suffix, remove) => {
+        const el = document.querySelectorAll(".svc-question__content")[idx];
+        if (remove != "remove") {
+          el.classList.add("svc-question__content--" + suffix);
+        }
+        else {
+          el.classList.remove("svc-question__content--" + suffix);
+        }
+      })(idx, suffix, remove);
+    }
+
+    await setClass(1, "drag-over-top");
+    await takeElementScreenshot("drag-drop-inside-panel-dynamic-top.png", Page1, t, comparer);
+    await setClass(1, "drag-over-top", "remove");
+  });
+});
+
 test("Toolbox Custom Component Icon", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(2560, 1440);
@@ -623,5 +670,88 @@ test("Drag Drop (choices): scroll", async (t) => {
       .dragToElement(CheckboxItem, newGhostPagePage, { speed: 0.5 });
 
     await takeElementScreenshot("drag-drop-scroll.png", newGhostPagePage, t, comparer);
+  });
+});
+
+test("Drag Drop to collapsed panel", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await ClientFunction(() => {
+      window["creator"].expandCollapseButtonVisibility = "onhover";
+      window["creator"].expandOnDragTimeOut = 1000000;
+      document.head.insertAdjacentHTML("beforeend", "<style>*, ::after, ::before { animation: initial!important; }</style>");
+    })();
+
+    await t.resizeWindow(1600, 1000);
+    const json = {
+      pages: [
+        {
+          name: "page1",
+          elements: [
+            {
+              type: "panel",
+              name: "panel1",
+              elements: [{
+                type: "text",
+                name: "q1"
+              }]
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(json);
+
+    const qCollapseButton = Selector(".svc-question__content #collapse");
+    const Panel = Selector("[data-sv-drop-target-survey-element=\"panel1\"]");
+    await t.hover(Panel, { offsetX: 5, offsetY: 5 });
+    await t.click(qCollapseButton.filterVisible());
+
+    const toolboxToolAction = Selector(".svc-toolbox__tool > .sv-action__content");
+    await t
+      .hover(toolboxToolAction)
+      .dispatchEvent(toolboxToolAction, "pointerdown")
+      .hover(Panel);
+    await takeElementScreenshot("drag-drop-in-collapsed-panel.png", Selector(".svc-page__content"), t, comparer);
+  });
+});
+
+test("Drag Drop to collapsed page", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await ClientFunction(() => {
+      window["creator"].expandCollapseButtonVisibility = "onhover";
+      window["creator"].expandOnDragTimeOut = 1000000;
+      document.head.insertAdjacentHTML("beforeend", "<style>*, ::after, ::before { animation: initial!important; }</style>");
+    })();
+
+    await t.resizeWindow(1600, 500);
+    const json = {
+      pages: [
+        {
+          name: "page1",
+          elements: [
+            {
+              type: "panel",
+              name: "panel1",
+              elements: [{
+                type: "text",
+                name: "q1"
+              }]
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(json);
+    const qCollapseButton = Selector(".svc-page__content #collapse");
+    const Page = Selector(".svc-page");
+    await t.hover(Page, { offsetX: 5, offsetY: 5 });
+    await t.click(qCollapseButton.filterVisible());
+
+    const toolboxToolAction = Selector(".svc-toolbox__tool > .sv-action__content");
+    await t
+      .hover(toolboxToolAction)
+      .dispatchEvent(toolboxToolAction, "pointerdown")
+      .hover(Page);
+    await takeElementScreenshot("drag-drop-in-collapsed-page.png", ".svc-tab-designer_content", t, comparer);
   });
 });

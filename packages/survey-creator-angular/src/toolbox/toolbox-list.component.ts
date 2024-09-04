@@ -1,7 +1,7 @@
 import { Component, Input } from "@angular/core";
 import { AngularComponentFactory, BaseAngular } from "survey-angular-ui";
 import { ListModel } from "survey-core";
-import { QuestionToolbox } from "survey-creator-core";
+import { CreatorBase } from "survey-creator-core";
 
 @Component({
   selector: "svc-toolbox-list ",
@@ -10,7 +10,7 @@ import { QuestionToolbox } from "survey-creator-core";
 })
 export class ToolboxListComponent extends BaseAngular<ListModel> {
   @Input() model!: ListModel;
-  @Input() toolbox!: QuestionToolbox;
+  @Input() creator!: CreatorBase;
 
   getModel() {
     return this.model;

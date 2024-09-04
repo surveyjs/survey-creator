@@ -654,13 +654,6 @@ export var msStrings = {
     allowResizeComment: "Benarkan pengguna mensaiz semula kawasan teks",
     textUpdateMode: "Mengemas kini nilai soalan teks",
     maskType: "Input jenis topeng",
-    maskTypes: {
-      none: "Tiada",
-      patternmask: "Corak",
-      numericmask: "Angka",
-      datetimemask: "Tarikh dan Masa",
-      currencymask: "Mata wang"
-    },
     focusOnFirstError: "Mengesetkan fokus pada jawapan tidak sah yang pertama",
     checkErrorsMode: "Jalankan pengesahihan",
     validateVisitedEmptyFields: "Sahkan medan kosong pada fokus yang hilang",
@@ -995,6 +988,18 @@ export var msStrings = {
       url: "URL",
       week: "Minggu"
     },
+    maskType: {
+      none: "Tiada",
+      pattern: "Corak",
+      numeric: "Angka",
+      datetime: "Tarikh dan Masa",
+      currency: "Mata wang"
+    },
+    inputTextAlignment: {
+      auto: "Auto",
+      left: "Kiri",
+      right: "Kanan"
+    },
     all: "semua",
     page: "halaman",
     survey: "tinjauan",
@@ -1153,6 +1158,10 @@ export var msStrings = {
     isPanelless: {
       "false": "Lalai",
       "true": "Tanpa Panel"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "Sama seperti tinjauan",
+      container: "Sama seperti bekas"
     }
   },
   // Operators
@@ -1310,7 +1319,8 @@ export var msStrings = {
     },
     file: {
       imageHeight: "Melaraskan ketinggian imej dalam hasil tinjauan.",
-      imageWidth: "Melaraskan lebar imej dalam hasil tinjauan."
+      imageWidth: "Melaraskan lebar imej dalam hasil tinjauan.",
+      allowImagesPreview: "Memaparkan pratonton lakaran kecil untuk fail yang dimuat naik apabila boleh. Nyahpilih jika anda mahu menunjukkan ikon fail."
     },
     image: {
       contentMode: "Pilihan \"Auto\" secara automatik menentukan mod yang sesuai untuk paparan - Imej, Video atau YouTube - berdasarkan URL sumber yang disediakan."
@@ -1434,6 +1444,7 @@ export var msStrings = {
     dataList: "Masukkan senarai pilihan yang akan dicadangkan kepada responden semasa input.",
     itemSize: "Seting hanya mengubah saiz medan input dan tidak mempengaruhi lebar kotak soalan.",
     itemTitleWidth: "Mengesetkan lebar yang konsisten untuk semua label item dalam piksel",
+    inputTextAlignment: "Pilih cara untuk menjajarkan nilai input dalam medan. Seting lalai \"Auto\" menjajarkan nilai input ke kanan jika mata wang atau topeng angka digunakan dan ke kiri jika tidak.",
     altText: "Berfungsi sebagai pengganti apabila imej tidak boleh dipaparkan pada peranti pengguna dan untuk tujuan kebolehcapaian.",
     rateColorMode: "Mentakrifkan warna emoji yang dipilih apabila jenis ikon Penarafan ditetapkan kepada \"Smileys\". Pilih antara: \"Lalai\" - emoji yang dipilih muncul dalam warna tinjauan lalai; \"Skala\" - emoji yang dipilih mewarisi warna dari skala penarafan.",
     expression: {
@@ -1484,7 +1495,8 @@ export var msStrings = {
     panellayoutcolumn: {
       effectiveWidth: "Menerima nilai %.",
       questionTitleWidth: "Menerima nilai px."
-    }
+    },
+    progressBarInheritWidthFrom: "Pilihan \"Sama seperti bekas\" melaraskan lebar kawasan bar kemajuan secara automatik agar sesuai dengan elemen HTML yang diletakkan dalam tinjauan."
   },
   // Properties
   p: {
@@ -1549,6 +1561,7 @@ export var msStrings = {
     dataList: "Senarai data",
     itemSize: "Saiz item",
     itemTitleWidth: "Lebar label item (dalam piksel)",
+    inputTextAlignment: "Penjajaran nilai input",
     elements: "Unsur",
     content: "Kandungan",
     navigationButtonsVisibility: "Kebolehlihatan butang navigasi",
@@ -1588,7 +1601,8 @@ export var msStrings = {
     scaleColorMode: "Mod warna skala",
     rateColorMode: "Mod warna kadar",
     copyDisplayValue: "Nilai paparan salin",
-    effectiveColSpan: "Rentang lajur"
+    effectiveColSpan: "Rentang lajur",
+    progressBarInheritWidthFrom: "Lebar kawasan bar kemajuan"
   },
   theme: {
     advancedMode: "Mod lanjutan",
@@ -2676,3 +2690,19 @@ editorLocalization.locales["ms"] = msStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Menerima nilai %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Menerima nilai px."
 // p.effectiveColSpan: "Column span" => "Rentang lajur"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "Sama seperti tinjauan"
+// progressBarInheritWidthFrom.container: "Same as container" => "Sama seperti bekas"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Memaparkan pratonton lakaran kecil untuk fail yang dimuat naik apabila boleh. Nyahpilih jika anda mahu menunjukkan ikon fail."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "Pilihan \"Sama seperti bekas\" melaraskan lebar kawasan bar kemajuan secara automatik agar sesuai dengan elemen HTML yang diletakkan dalam tinjauan."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "Lebar kawasan bar kemajuan"
+// maskType.none: "None" => "Tiada"
+// maskType.pattern: "Pattern" => "Corak"
+// maskType.numeric: "Numeric" => "Angka"
+// maskType.datetime: "Date and Time" => "Tarikh dan Masa"
+// maskType.currency: "Currency" => "Mata wang"
+
+// inputTextAlignment.auto: "Auto" => "Auto"
+// inputTextAlignment.left: "Left" => "Kiri"
+// inputTextAlignment.right: "Right" => "Kanan"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Pilih cara untuk menjajarkan nilai input dalam medan. Seting lalai \"Auto\" menjajarkan nilai input ke kanan jika mata wang atau topeng angka digunakan dan ke kiri jika tidak."
+// p.inputTextAlignment: "Input value alignment" => "Penjajaran nilai input"

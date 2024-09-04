@@ -309,6 +309,9 @@ export var enStrings = {
       templateTitleLocation: "Question title alignment",
       templateErrorLocation: "Error message alignment",
       newPanelPosition: "New panel location",
+      showRangeInProgress: "Show the progress bar",
+      showProgressBar: "Show the progress bar",
+      progressBarLocation: "Progress bar alignment",
       keyName: "Prevent duplicate responses in the following question"
     },
     question: {
@@ -656,13 +659,6 @@ export var enStrings = {
     allowResizeComment: "Allow users to resize text areas",
     textUpdateMode: "Update input field values",
     maskType: "Input mask type",
-    maskTypes: {
-      none: "None",
-      patternmask: "Pattern",
-      numericmask: "Numeric",
-      datetimemask: "Date and Time",
-      currencymask: "Currency"
-    },
     focusOnFirstError: "Set focus on the first invalid answer",
     checkErrorsMode: "Run validation",
     validateVisitedEmptyFields: "Validate empty fields on lost focus",
@@ -699,7 +695,6 @@ export var enStrings = {
     panelsState: "Inner panel collapse state",
     panelPrevText: "\"Previous Panel\" button text",
     panelNextText: "\"Next Panel\" button text",
-    showRangeInProgress: "Show the progress bar",
     panelRemoveButtonLocation: "\"Remove Panel\" button alignment",
     hideIfRowsEmpty: "Hide the question if it has no rows",
     hideColumnsIfEmpty: "Hide columns if there are no rows",
@@ -937,10 +932,11 @@ export var enStrings = {
     firstExpanded: "First panel is expanded",
     off: "Hide question numbers",
     list: "List",
+    carousel: "Carousel",
+    tab: "Tabs",
     progressTop: "Panel navigator + Progress bar at the top",
     progressBottom: "Panel navigator + Progress bar at the bottom",
     progressTopBottom: "Panel navigator + Progress bar at the top and bottom",
-    tab: "Tabs",
     horizontal: "Horizontal",
     vertical: "Vertical",
     top: "Top",
@@ -997,6 +993,18 @@ export var enStrings = {
       time: "Time",
       url: "URL",
       week: "Week"
+    },
+    maskType: {
+      none: "None",
+      pattern: "Pattern",
+      numeric: "Numeric",
+      datetime: "Date and Time",
+      currency: "Currency"
+    },
+    inputTextAlignment: {
+      auto: "Auto",
+      left: "Left",
+      right: "Right"
     },
     all: "All",
     page: "Page",
@@ -1116,6 +1124,11 @@ export var enStrings = {
       aboveheader: "Above the header",
       belowheader: "Below the header"
     },
+    progressBarLocation: {
+      "top": "Top",
+      "bottom": "Bottom",
+      "topBottom": "Top and bottom"
+    },
     sum: "Sum",
     count: "Count",
     min: "Min",
@@ -1157,6 +1170,10 @@ export var enStrings = {
       false: "Default",
       true: "Without Panels",
     },
+    progressBarInheritWidthFrom: {
+      survey: "Same as survey",
+      container: "Same as container"
+    }
   },
   // Operators
   op: {
@@ -1329,7 +1346,7 @@ export var enStrings = {
       contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options."
     },
     text: {
-      size: "This setting only resizes the input field and doesn't affect the width of the question box. To limit the accepted input length, go to <b>Validation → Maximum character limit</b>."
+      size: "This setting only resizes the input field and doesn't affect the width of the question box. To limit the accepted input length, go to \"Validation\" → \"Maximum character limit\"."
     },
     comment: {
       rows: "Sets the number of displayed lines in the input field. If the input takes up more lines, the scroll bar will appear."
@@ -1345,7 +1362,8 @@ export var enStrings = {
       visibleIf: "Use the magic wand icon to set a conditional rule that determines column visibility.",
       enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the column.",
       requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer.",
-      showInMultipleColumns: "When selected, creates an individual column for each choice option."
+      showInMultipleColumns: "When selected, creates an individual column for each choice option.",
+      colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix.",
     },
     widthMode: "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used.",
     cookieName: "Assign a unique cookie value for your survey. The cookie will be set in a respondent's browser upon survey completion to prevent repetitive survey submissions.",
@@ -1442,6 +1460,7 @@ export var enStrings = {
     dataList: "Enter a list of choices that will be suggested to the respondent during input.",
     itemSize: "The setting only resizes the input fields and doesn't affect the width of the question box.",
     itemTitleWidth: "Sets consistent width for all item labels in pixels",
+    inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not.",
     altText: "Serves as a substitute when the image cannot be displayed on a user's device and for accessibility purposes.",
     rateColorMode: "Defines the color of the selected emoji when the Rating icon type is set to \"Smileys\". Choose between: \"Default\" - the selected emoji appears in default survey color; \"Scale\" - the selected emoji inherits color from the rating scale.",
     expression: {
@@ -1452,7 +1471,7 @@ export var enStrings = {
     storeOthersAsComment: "Select to store the \"Other\" option value as a separate property in survey results.",
     format: "Use {0} as a placeholder for the actual value.",
     acceptedTypes: "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information.",
-    columnColCount: "Applies only if \"Cell input type\" is set to Radio Button Group or Checkboxes.",
+    columnColCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. Applies only to columns with \"Cell input type\" set to Radio Button Group or Checkboxes.",
     autocomplete: "Select the data type that the user's browser can retrieve. This data is sourced either from past values entered by the user or from pre-configured values if any have been saved by the user for autocompletion.",
     filePlaceholder: "Applies when \"File source type\" is \"Local file\" or when camera is unavailable",
     photoPlaceholder: "Applies when \"File source type\" is \"Camera\".",
@@ -1493,6 +1512,7 @@ export var enStrings = {
       effectiveWidth: "Accepts values %.",
       questionTitleWidth: "Accepts values px."
     },
+    progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in."
   },
   // Properties
   p: {
@@ -1557,6 +1577,7 @@ export var enStrings = {
     dataList: "Items for auto-suggest",
     itemSize: "Input field width (in characters)",
     itemTitleWidth: "Item label width (in px)",
+    inputTextAlignment: "Input value alignment",
     elements: "Elements", // Auto-generated string
     content: "Content", // Auto-generated string
     navigationButtonsVisibility: "Show/hide navigation buttons",
@@ -1597,6 +1618,7 @@ export var enStrings = {
     rateColorMode: "Smileys color scheme",
     copyDisplayValue: "Copy display value", // Auto-generated string
     effectiveColSpan: "Column span",
+    progressBarInheritWidthFrom: "Progress bar area width",
   },
   theme: {
     advancedMode: "Advanced mode",

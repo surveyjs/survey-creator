@@ -1231,6 +1231,8 @@ export class SurveyCreatorModel extends Base
    * Provides access to the [Toolbox API](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolbox).
    * 
    * [Toolbox Customization](https://surveyjs.io/survey-creator/documentation/toolbox-customization (linkStyle))
+   * @see showToolbox
+   * @see toolboxLocation
    */
   public toolbox: QuestionToolbox;
   public get toolboxCategories(): Array<any> {
@@ -1287,6 +1289,15 @@ export class SurveyCreatorModel extends Base
   public get showToolbox() {
     return this.showToolboxValue && this.allowShowToolbox;
   }
+  /**
+   * Specifies whether to show the Toolbox.
+   * 
+   * Default value: `true`
+   * 
+   * [Toolbox Customization](https://surveyjs.io/survey-creator/documentation/toolbox-customization (linkStyle))
+   * @see toolbox
+   * @see toolboxLocation
+   */
   public set showToolbox(val: boolean) {
     if (<any>val !== true && <any>val !== false) {
       SurveyHelper.warnText("showToolbox is a boolean property now.");
@@ -1888,8 +1899,9 @@ export class SurveyCreatorModel extends Base
     this.dragDropSurveyElements.onDragEnd.add((sender, options) => {
       this.stopUndoRedoTransaction();
       const editTitle = isDraggedFromToolbox && this.startEditTitleOnQuestionAdded;
-      this.selectElement(options.draggedElement, undefined, false, editTitle);
       isDraggedFromToolbox = false;
+      if (!options.draggedElement) return;
+      this.selectElement(options.draggedElement, undefined, false, editTitle);
       this.onDragEnd.fire(this, options);
       if (!options.fromElement) {
         this.setModified({ type: "ADDED_FROM_TOOLBOX", question: options.draggedElement });
@@ -2187,7 +2199,8 @@ export class SurveyCreatorModel extends Base
       survey: survey,
       reason: reason,
       area: area,
-      model: !!model ? model : this.currentPlugin?.model
+      model: !!model ? model : this.currentPlugin?.model,
+      obj: area === "property-grid" && model ? model.obj : undefined
     });
     if (reason === "designer") {
       this.onDesignerSurveyCreated.fire(this, { survey: survey });
@@ -2243,6 +2256,8 @@ export class SurveyCreatorModel extends Base
   }
   public onStateChanged: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
 
+  public onSurfaceToolbarActionExecuted: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
+
   notifier = new Notifier({
     root: "svc-notifier",
     rootWithButtons: "",
@@ -2294,7 +2309,7 @@ export class SurveyCreatorModel extends Base
     }
   }
 
-  protected convertQuestion(obj: Question, className: string): Question {
+  protected convertQuestion(obj: Question, className: string, defaultJSON: any = null): Question {
     const objJSON = QuestionConverter.getObjJSON(obj, this.getDefaultElementJSON(obj.getType()));
     const options: QuestionConvertingEvent = {
       sourceQuestion: obj,
@@ -2302,7 +2317,7 @@ export class SurveyCreatorModel extends Base
       json: objJSON
     };
     this.onQuestionConverting.fire(this, options);
-    const newQuestion = <Question>QuestionConverter.convertObject(obj, className, options.json, this.getDefaultElementJSON(className));
+    const newQuestion = <Question>QuestionConverter.convertObject(obj, className, options.json, this.getDefaultElementJSON(className), defaultJSON);
     this.setModified({
       type: "QUESTION_CONVERTED",
       className: className,
@@ -3551,7 +3566,7 @@ export class SurveyCreatorModel extends Base
   /**
    * A function that is called each time users click the [Save button](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#showSaveButton) or [auto-save](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#isAutoSave) is triggered to save a survey JSON schema.
    * 
-   * For more information, refer to the Save and Load Survey Model Schemas help topic for your framework: [Angular](https://surveyjs.io/survey-creator/documentation/get-started-angular#save-and-load-survey-model-schemas) | [Vue](https://surveyjs.io/survey-creator/documentation/get-started-vue#save-and-load-survey-model-schemas) | [React](https://surveyjs.io/survey-creator/documentation/get-started-react#save-and-load-survey-model-schemas) | [Knockout / jQuery](https://surveyjs.io/survey-creator/documentation/get-started-knockout-jquery).
+   * For more information, refer to the Save and Load Survey Model Schemas help topic for your framework: [Angular](https://surveyjs.io/survey-creator/documentation/get-started-angular#save-and-load-survey-model-schemas) | [Vue](https://surveyjs.io/survey-creator/documentation/get-started-vue#save-and-load-survey-model-schemas) | [React](https://surveyjs.io/survey-creator/documentation/get-started-react#save-and-load-survey-model-schemas) | [HTML/CSS/JavaScript](https://surveyjs.io/survey-creator/documentation/get-started-html-css-javascript#save-and-load-survey-model-schemas).
    * @see saveThemeFunc
    */
   public get saveSurveyFunc() {
@@ -3562,13 +3577,13 @@ export class SurveyCreatorModel extends Base
     this.showSaveButton = value != null && !this.isAutoSave;
   }
   @undoRedoTransaction()
-  public convertCurrentQuestion(newType: string) {
+  public convertCurrentQuestion(newType: string, defaultJSON: any = null) {
     var el = this.selectedElement;
-    if (!el || el.getType() === newType) return;
+    if (!el || el.getType() === newType && !defaultJSON) return;
     const objType = SurveyHelper.getObjectType(el);
     if (objType !== ObjType.Question && objType !== ObjType.Panel) return;
     this.addNewElementReason = "ELEMENT_CONVERTED";
-    el = this.convertQuestion(<Question>el, newType);
+    el = this.convertQuestion(<Question>el, newType, defaultJSON);
     this.selectElement(el, null, "#convertTo button");
   }
 
@@ -3603,9 +3618,9 @@ export class SurveyCreatorModel extends Base
   }
   public getQuestionTypeSelectorModel(beforeAdd: (type: string) => void, element?: SurveyElement) {
     let panel = !!element && element.isPanel ? <PanelModel>element : null;
-    const onSelectQuestionType = (questionType: string, subtype?: string) => {
+    const onSelectQuestionType = (questionType: string, json?: any) => {
       this.currentAddQuestionType = questionType;
-      this.addNewQuestionInPage(beforeAdd, panel, questionType, subtype);
+      this.addNewQuestionInPage(beforeAdd, panel, questionType, json);
       newAction.popupModel.hide();
     };
     const getActions = () => {
@@ -3625,6 +3640,7 @@ export class SurveyCreatorModel extends Base
         listModel.setItems(getActions());
       },
       allowSelection: false,
+      cssClass: "svc-creator-popup",
       verticalPosition: "bottom",
       horizontalPosition: "center",
       displayMode: this.isTouch ? "overlay" : "popup"
@@ -3644,24 +3660,25 @@ export class SurveyCreatorModel extends Base
   }
 
   @undoRedoTransaction()
-  public addNewQuestionInPage(beforeAdd: (string) => void, panel: IPanel = null, type: string = null, subtype: string = null) {
+  public addNewQuestionInPage(beforeAdd: (string) => void, panel: IPanel = null, type: string = null, initJson: any = null) {
     if (!type) type = this.currentAddQuestionType;
     if (!type) type = settings.designer.defaultAddQuestionType;
     beforeAdd(type);
-    let json = { type: type };
-    const toolboxItem = this.toolbox.getItemByName(type);
-    if (!!toolboxItem && !!toolboxItem.json) {
-      json = toolboxItem.json;
+    let json = initJson;
+    if (!json) {
+      const toolboxItem = this.toolbox.getItemByName(type);
+      if (!!toolboxItem && !!toolboxItem.json) {
+        json = toolboxItem.json;
+      } else {
+        json = { type: type };
+      }
     }
     let newElement = this.createNewElement(json);
-
-    let propertyName = QuestionToolbox.getSubTypePropertyName(type);
-    if (!!propertyName && !!subtype) (newElement as Question).setPropertyValue(propertyName, subtype);
 
     this.clickToolboxItem(newElement, panel, "ADDED_FROM_PAGEBUTTON");
   }
 
-  createIActionBarItemByClass(item: QuestionToolboxItem, needSeparator: boolean, onSelectQuestionType?: (questionType: string, subtype?: string) => void): Action {
+  createIActionBarItemByClass(item: QuestionToolboxItem, needSeparator: boolean, onSelectQuestionType?: (questionType: string, json?: any) => void): Action {
     const action = new Action({
       title: item.title,
       id: item.name,
@@ -3671,16 +3688,16 @@ export class SurveyCreatorModel extends Base
       needSeparator: needSeparator
     });
     action.action = () => {
-      onSelectQuestionType(item.typeName);
+      onSelectQuestionType(item.typeName, item.json);
     };
 
-    if (!!item.items && item.items.length > 0) {
+    if (!!item.items && item.items.length > 0 && this.toolbox.showSubitems) {
       const innerItems = item.items.map(i => new Action({
         id: i.id,
         title: i.title,
         action: () => {
           action.hidePopup();
-          onSelectQuestionType(item.typeName, i.id);
+          onSelectQuestionType(item.typeName, i.json);
         }
       }));
       action.setSubItems({ items: innerItems });
@@ -3783,6 +3800,10 @@ export class SurveyCreatorModel extends Base
    * - `"left"` (default) - Displays the Toolbox on the left side of the design surface.
    * - `"right"` - Displays the Toolbox on the right side of the design surface.
    * - `"sidebar"` - Displays the Toolbox as an overlay on top of the Property Grid. Use the [`sidebarLocation`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#sidebarLocation) property to specify the Property Grid position.
+   * 
+   * [Toolbox Customization](https://surveyjs.io/survey-creator/documentation/toolbox-customization (linkStyle))
+   * @see showToolbox
+   * @see toolbox
    */
   @property({
     defaultValue: "left", onSet: (newValue, target: SurveyCreatorModel) => {
@@ -3812,6 +3833,8 @@ export class SurveyCreatorModel extends Base
    * - `"never"` - Hides the expand/collapse buttons.
    */
   @property({ defaultValue: "never" }) expandCollapseButtonVisibility?: "never" | "onhover" | "always";
+
+  expandOnDragTimeOut: number = 1000;
 
   selectFromStringEditor: boolean;
 

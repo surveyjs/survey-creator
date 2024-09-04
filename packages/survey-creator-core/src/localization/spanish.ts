@@ -654,13 +654,6 @@ var spanishTranslation = {
     allowResizeComment: "Permitir a los usuarios cambiar el tamaño de las áreas de texto",
     textUpdateMode: "Actualizar valor del texto de la pregunta",
     maskType: "Tipo de máscara de entrada",
-    maskTypes: {
-      none: "Ninguno",
-      patternmask: "Patrón",
-      numericmask: "Numérico",
-      datetimemask: "Fecha y hora",
-      currencymask: "Divisa"
-    },
     focusOnFirstError: "Fijar foco en la primera respuesta no válida",
     checkErrorsMode: "Ejecutar validación",
     validateVisitedEmptyFields: "Validar campos vacíos en caso de pérdida de foco",
@@ -995,6 +988,18 @@ var spanishTranslation = {
       url: "URL",
       week: "Semana"
     },
+    maskType: {
+      none: "Ninguno",
+      pattern: "Patrón",
+      numeric: "Numérico",
+      datetime: "Fecha y hora",
+      currency: "Divisa"
+    },
+    inputTextAlignment: {
+      auto: "Automático",
+      left: "Izquierda",
+      right: "Derecha"
+    },
     all: "todas",
     page: "página",
     survey: "encuesta",
@@ -1153,6 +1158,10 @@ var spanishTranslation = {
     isPanelless: {
       "false": "Predeterminado",
       "true": "Sin paneles"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "Igual que la encuesta",
+      container: "Igual que el contenedor"
     }
   },
   // Operators
@@ -1310,7 +1319,8 @@ var spanishTranslation = {
     },
     file: {
       imageHeight: "Ajusta la altura de la imagen en los resultados de la encuesta.",
-      imageWidth: "Ajusta el ancho de la imagen en los resultados de la encuesta."
+      imageWidth: "Ajusta el ancho de la imagen en los resultados de la encuesta.",
+      allowImagesPreview: "Muestra vistas previas en miniatura de los archivos cargados cuando es posible. Anule la selección si desea mostrar los iconos de archivo en su lugar."
     },
     image: {
       contentMode: "La opción \"Auto\" determina automáticamente el modo adecuado para la visualización (Imagen, Video o YouTube) en función de la URL de origen proporcionada."
@@ -1434,6 +1444,7 @@ var spanishTranslation = {
     dataList: "Ingrese una lista de opciones que se sugerirán al encuestado durante la entrada.",
     itemSize: "La configuración solo cambia el tamaño de los campos de entrada y no afecta al ancho del cuadro de pregunta.",
     itemTitleWidth: "Establece un ancho coherente para todas las etiquetas de elementos en píxeles",
+    inputTextAlignment: "Seleccione cómo alinear el valor de entrada dentro del campo. La configuración predeterminada \"Auto\" alinea el valor de entrada a la derecha si se aplica el enmascaramiento numérico o de moneda y a la izquierda si no se aplica.",
     altText: "Sirve como sustituto cuando la imagen no se puede mostrar en el dispositivo de un usuario y por motivos de accesibilidad.",
     rateColorMode: "Define el color del emoji seleccionado cuando el tipo de icono de clasificación se establece en \"Emoticonos\". Elija entre: \"Predeterminado\": el emoji seleccionado aparece en el color predeterminado de la encuesta; \"Escala\": el emoji seleccionado hereda el color de la escala de calificación.",
     expression: {
@@ -1484,7 +1495,8 @@ var spanishTranslation = {
     panellayoutcolumn: {
       effectiveWidth: "Acepta valores %.",
       questionTitleWidth: "Acepta valores px."
-    }
+    },
+    progressBarInheritWidthFrom: "La opción \"Igual que el contenedor\" ajusta automáticamente el ancho del área de la barra de progreso para que quepa en el elemento HTML en el que se coloca la encuesta."
   },
   // Properties
   p: {
@@ -1549,6 +1561,7 @@ var spanishTranslation = {
     dataList: "Lista de datos",
     itemSize: "artículos",
     itemTitleWidth: "Ancho de la etiqueta del elemento (en px)",
+    inputTextAlignment: "Alineación de valores de entrada",
     elements: "Elementos",
     content: "Contenido",
     navigationButtonsVisibility: "Navegación botones visibilidad",
@@ -1588,7 +1601,8 @@ var spanishTranslation = {
     scaleColorMode: "Modo de color de escala",
     rateColorMode: "Modo de color de tasa",
     copyDisplayValue: "Copiar valor de visualización",
-    effectiveColSpan: "Tramo de columna"
+    effectiveColSpan: "Tramo de columna",
+    progressBarInheritWidthFrom: "Ancho del área de la barra de progreso"
   },
   theme: {
     advancedMode: "Modo avanzado",
@@ -2497,3 +2511,19 @@ editorLocalization.locales["es"] = spanishTranslation;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Acepta valores %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Acepta valores px."
 // p.effectiveColSpan: "Column span" => "Tramo de columna"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "Igual que la encuesta"
+// progressBarInheritWidthFrom.container: "Same as container" => "Igual que el contenedor"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Muestra vistas previas en miniatura de los archivos cargados cuando es posible. Anule la selección si desea mostrar los iconos de archivo en su lugar."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "La opción \"Igual que el contenedor\" ajusta automáticamente el ancho del área de la barra de progreso para que quepa en el elemento HTML en el que se coloca la encuesta."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "Ancho del área de la barra de progreso"
+// maskType.none: "None" => "Ninguno"
+// maskType.pattern: "Pattern" => "Patrón"
+// maskType.numeric: "Numeric" => "Numérico"
+// maskType.datetime: "Date and Time" => "Fecha y hora"
+// maskType.currency: "Currency" => "Divisa"
+
+// inputTextAlignment.auto: "Auto" => "Automático"
+// inputTextAlignment.left: "Left" => "Izquierda"
+// inputTextAlignment.right: "Right" => "Derecha"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Seleccione cómo alinear el valor de entrada dentro del campo. La configuración predeterminada \"Auto\" alinea el valor de entrada a la derecha si se aplica el enmascaramiento numérico o de moneda y a la izquierda si no se aplica."
+// p.inputTextAlignment: "Input value alignment" => "Alineación de valores de entrada"

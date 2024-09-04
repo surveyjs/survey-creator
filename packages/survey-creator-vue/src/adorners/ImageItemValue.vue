@@ -35,7 +35,10 @@
             :size="24"
           ></sv-svg-icon>
         </span>
-        <div v-if="adorner.canRenderControls" class="svc-context-container svc-image-item-value-controls">
+        <div
+          v-if="adorner.canRenderControls"
+          class="svc-context-container svc-image-item-value-controls"
+        >
           <span
             class="svc-context-button"
             @click="adorner.chooseFile(adorner)"
@@ -43,7 +46,12 @@
             :title="undefined"
             :aria-label="undefined"
           >
-            <sv-svg-icon role="button" :iconName="'icon-file'" :size="24" :title="adorner.selectFileTitle"></sv-svg-icon>
+            <sv-svg-icon
+              role="button"
+              :iconName="'icon-file'"
+              :size="24"
+              :title="adorner.selectFileTitle"
+            ></sv-svg-icon>
           </span>
           <span
             class="svc-context-button svc-context-button--danger"
@@ -52,7 +60,12 @@
             :title="undefined"
             :aria-label="undefined"
           >
-            <sv-svg-icon role="button" :iconName="'icon-delete'" :size="24" :title="adorner.removeFileTitle"></sv-svg-icon>
+            <sv-svg-icon
+              role="button"
+              :iconName="'icon-delete'"
+              :size="24"
+              :title="adorner.removeFileTitle"
+            ></sv-svg-icon>
           </span>
         </div>
       </template>
@@ -90,7 +103,11 @@
             :title="undefined"
             :aria-label="undefined"
           >
-            <sv-svg-icon :iconName="'icon-add-lg'" :size="24" :title="adorner.addFileTitle"></sv-svg-icon>
+            <sv-svg-icon
+              :iconName="'icon-add-lg'"
+              :size="24"
+              :title="adorner.addFileTitle"
+            ></sv-svg-icon>
           </span>
         </div>
       </template>
@@ -104,7 +121,7 @@ import {
   SurveyCreatorModel,
   ImageItemValueWrapperViewModel,
 } from "survey-creator-core";
-import { computed, onMounted, ref } from "vue";
+import { computed, onMounted, onUpdated, ref } from "vue";
 
 const props = defineProps<{
   componentName: string;
@@ -121,14 +138,19 @@ const question = computed(() => props.componentData.question);
 const item = computed(() => props.componentData.item);
 const root = ref<HTMLDivElement>();
 const adorner = useCreatorModel(
-  () =>
-    new ImageItemValueWrapperViewModel(
+  () => {
+    const viewModel = new ImageItemValueWrapperViewModel(
       creator.value,
       question.value,
       item.value,
       null as any,
       null as any
-    ),
+    );
+    if (root?.value) {
+      viewModel.itemsRoot = root.value;
+    }
+    return viewModel;
+  },
   [() => creator.value, () => question.value, () => item.value],
   (value) => {
     value.dispose();
@@ -142,7 +164,6 @@ const newItemStyle = computed(() => {
     height: needStyle ? question.value.renderedImageHeight + "px" : undefined,
   };
 });
-
 onMounted(() => {
   if (root.value) {
     adorner.value.itemsRoot = root.value;

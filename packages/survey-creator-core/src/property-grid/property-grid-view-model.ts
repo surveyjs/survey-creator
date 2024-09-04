@@ -131,6 +131,7 @@ export class PropertyGridViewModel extends Base {
       {
         verticalPosition: "bottom",
         horizontalPosition: "center",
+        cssClass: "svc-creator-popup",
       }
     );
     this.selectorPopupModel.cssClass += " svc-object-selector";

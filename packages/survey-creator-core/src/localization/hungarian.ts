@@ -654,13 +654,6 @@ export var huStrings = {
     allowResizeComment: "A szövegterületek átméretezésének engedélyezése a felhasználók számára",
     textUpdateMode: "Szöveges kérdés értékének frissítése",
     maskType: "Beviteli maszk típusa",
-    maskTypes: {
-      none: "Egyik sem",
-      patternmask: "Minta",
-      numericmask: "Numerikus",
-      datetimemask: "Dátum és idő",
-      currencymask: "Valuta"
-    },
     focusOnFirstError: "Fókusz beállítása az első érvénytelen válaszra",
     checkErrorsMode: "Érvényesítés futtatása",
     validateVisitedEmptyFields: "Üres mezők ellenőrzése elveszett fókusz esetén",
@@ -995,6 +988,18 @@ export var huStrings = {
       url: "URL",
       week: "Hét"
     },
+    maskType: {
+      none: "Egyik sem",
+      pattern: "Minta",
+      numeric: "Numerikus",
+      datetime: "Dátum és idő",
+      currency: "Valuta"
+    },
+    inputTextAlignment: {
+      auto: "Kocsi",
+      left: "Balra",
+      right: "Jobbra"
+    },
     all: "összes",
     page: "lap",
     survey: "kérdőív",
@@ -1153,6 +1158,10 @@ export var huStrings = {
     isPanelless: {
       "false": "Alapértelmezett",
       "true": "Panelek nélkül"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "Ugyanaz, mint a felmérés",
+      container: "Ugyanaz, mint a konténer"
     }
   },
   // Operators
@@ -1310,7 +1319,8 @@ export var huStrings = {
     },
     file: {
       imageHeight: "Beállítja a kép magasságát a felmérés eredményeiben.",
-      imageWidth: "Beállítja a kép szélességét a felmérés eredményeiben."
+      imageWidth: "Beállítja a kép szélességét a felmérés eredményeiben.",
+      allowImagesPreview: "Ha lehetséges, miniatűr előnézeteket jelenít meg a feltöltött fájlokhoz. Törölje a jelölést, ha inkább fájlikonokat szeretne megjeleníteni."
     },
     image: {
       contentMode: "Az \"Automatikus\" opció automatikusan meghatározza a megjelenítéshez megfelelő módot - Kép, Videó vagy YouTube - a megadott forrás URL alapján."
@@ -1434,6 +1444,7 @@ export var huStrings = {
     dataList: "Adja meg azoknak a választási lehetőségeknek a listáját, amelyeket a rendszer javasolni fog a válaszadónak a bevitel során.",
     itemSize: "A beállítás csak a beviteli mezőket méretezi át, és nincs hatással a kérdésmező szélességére.",
     itemTitleWidth: "Konzisztens szélességet állít be az összes elemfelirathoz képpontban",
+    inputTextAlignment: "Válassza ki, hogyan szeretné igazítani a bemeneti értéket a mezőn belül. Az alapértelmezett \"Automatikus\" beállítás a bemeneti értéket jobbra igazítja, ha pénznem vagy numerikus maszkolás van alkalmazva, és balra, ha nem.",
     altText: "Helyettesítőként szolgál, ha a kép nem jeleníthető meg a felhasználó eszközén, valamint kisegítő lehetőségek céljából.",
     rateColorMode: "Meghatározza a kiválasztott hangulatjel színét, ha az Értékelés ikon típusa \"Hangulatjelek\". Válasszon a következők közül: \"Alapértelmezett\" - a kiválasztott hangulatjel alapértelmezett felmérési színben jelenik meg; \"Skála\" - a kiválasztott hangulatjel örökli a színt a minősítési skálától.",
     expression: {
@@ -1484,7 +1495,8 @@ export var huStrings = {
     panellayoutcolumn: {
       effectiveWidth: "Elfogadja a % értékeket",
       questionTitleWidth: "Elfogadja a px értékeket."
-    }
+    },
+    progressBarInheritWidthFrom: "Az \"Ugyanaz, mint a tároló\" opció automatikusan beállítja a folyamatjelző sáv területének szélességét, hogy illeszkedjen ahhoz a HTML-elemhez, amelybe a felmérés kerül."
   },
   // Properties
   p: {
@@ -1549,6 +1561,7 @@ export var huStrings = {
     dataList: "Adatlista",
     itemSize: "Elem mérete",
     itemTitleWidth: "Elemcímke szélessége (képpontban)",
+    inputTextAlignment: "Bemeneti érték igazítása",
     elements: "Elemek",
     content: "Tartalom",
     navigationButtonsVisibility: "Navigációs gombok láthatósága",
@@ -1588,7 +1601,8 @@ export var huStrings = {
     scaleColorMode: "Színmód méretezése",
     rateColorMode: "Értékelje a színmódot",
     copyDisplayValue: "Megjelenített érték másolása",
-    effectiveColSpan: "Oszlop fesztávolsága"
+    effectiveColSpan: "Oszlop fesztávolsága",
+    progressBarInheritWidthFrom: "A folyamatjelző sáv területének szélessége"
   },
   theme: {
     advancedMode: "Speciális mód",
@@ -2876,3 +2890,19 @@ editorLocalization.locales["hu"] = huStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Elfogadja a % értékeket"
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Elfogadja a px értékeket."
 // p.effectiveColSpan: "Column span" => "Oszlop fesztávolsága"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "Ugyanaz, mint a felmérés"
+// progressBarInheritWidthFrom.container: "Same as container" => "Ugyanaz, mint a konténer"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Ha lehetséges, miniatűr előnézeteket jelenít meg a feltöltött fájlokhoz. Törölje a jelölést, ha inkább fájlikonokat szeretne megjeleníteni."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "Az \"Ugyanaz, mint a tároló\" opció automatikusan beállítja a folyamatjelző sáv területének szélességét, hogy illeszkedjen ahhoz a HTML-elemhez, amelybe a felmérés kerül."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "A folyamatjelző sáv területének szélessége"
+// maskType.none: "None" => "Egyik sem"
+// maskType.pattern: "Pattern" => "Minta"
+// maskType.numeric: "Numeric" => "Numerikus"
+// maskType.datetime: "Date and Time" => "Dátum és idő"
+// maskType.currency: "Currency" => "Valuta"
+
+// inputTextAlignment.auto: "Auto" => "Kocsi"
+// inputTextAlignment.left: "Left" => "Balra"
+// inputTextAlignment.right: "Right" => "Jobbra"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Válassza ki, hogyan szeretné igazítani a bemeneti értéket a mezőn belül. Az alapértelmezett \"Automatikus\" beállítás a bemeneti értéket jobbra igazítja, ha pénznem vagy numerikus maszkolás van alkalmazva, és balra, ha nem."
+// p.inputTextAlignment: "Input value alignment" => "Bemeneti érték igazítása"

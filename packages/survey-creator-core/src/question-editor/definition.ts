@@ -362,6 +362,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "minValueExpression", tab: "logic" },
       { name: "maxValueExpression", tab: "logic" },
       { name: "size", tab: "layout" },
+      { name: "inputTextAlignment", tab: "layout" },
       { name: "maxLength", tab: "validation" },
       { name: "minErrorText", tab: "validation" },
       { name: "maxErrorText", tab: "validation" },
@@ -509,6 +510,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "choicesMin", tab: "choices" },
       { name: "choicesMax", tab: "choices" },
       { name: "choicesStep", tab: "choices" },
+      { name: "allowClear", tab: "choices" },
       { name: "choicesVisibleIf", tab: "logic" },
       { name: "choicesEnableIf", tab: "logic" },
     ],
@@ -538,6 +540,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "choicesMin", tab: "choices" },
       { name: "choicesMax", tab: "choices" },
       { name: "choicesStep", tab: "choices" },
+      { name: "allowClear", tab: "choices" },
       { name: "choicesVisibleIf", tab: "logic" },
       { name: "choicesEnableIf", tab: "logic" },
     ],
@@ -612,6 +615,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "isRequired",
       "size",
       "placeholder",
+      "inputTextAlignment",
       { name: "maxLength", tab: "validation" },
       { name: "requiredErrorText", tab: "validation" },
       { name: "validators", tab: "validation" },
@@ -639,6 +643,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   paneldynamic: {
     properties: [
       "renderMode",
+      "displayMode",
       "templateTabTitle",
       "tabTitlePlaceholder",
       "tabAlign",
@@ -659,6 +664,8 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "panelNextText",
       "showQuestionNumbers",
       "showRangeInProgress",
+      "showProgressBar",
+      "progressBarLocation",
       { name: "defaultPanelValue", tab: "data" },
       { name: "defaultValueFromLastPanel", tab: "data" },
       { name: "templateTitleLocation", tab: "questionSettings" },
@@ -685,7 +692,6 @@ const defaultProperties: ISurveyPropertiesDefinition = {
     ],
     tabs: [
       { name: "questionSettings", index: 100 },
-      { name: "layout", index: 150 },
       { name: "logic", index: 200 },
       { name: "data", index: 300 },
       { name: "validation", index: 400 }
@@ -708,7 +714,10 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "showQuestionNumbers", tab: "numbering" },
       { name: "questionStartIndex", tab: "numbering" }
     ],
-    tabs: [{ name: "numbering", index: 350 }]
+    tabs: [
+      { name: "layout", index: 150 },
+      { name: "numbering", index: 350 }
+    ]
   },
   page: {
     properties: [

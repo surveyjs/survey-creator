@@ -1,6 +1,5 @@
-survey-creator:not(.svd-simulator-content),
-.svc-creator:not(.svd-simulator-content) {
-  .sv-popup {
+.svc-creator-popup {
+  &.sv-popup {
     .sd-btn {
       background: var(--ctr-button-background-color, $background);
       color: var(--ctr-button-text-color, $primary);
@@ -20,19 +19,19 @@ survey-creator:not(.svd-simulator-content),
     }
   }
 
-  .sv-popup--modal {
+  &.sv-popup--modal {
     background-color: var(--ctr-popup-haze-background-color, $background-semitransparent);
   }
 
-  .sv-popup--modal>.sv-popup__container {
+  &.sv-popup--modal > .sv-popup__container {
     background-color: var(--ctr-popup-background-color, $background-dim-light);
 
-    &>.sv-popup__shadow>.sv-popup__body-content {
+    & > .sv-popup__shadow > .sv-popup__body-content {
       background-color: var(--ctr-popup-background-color, $background-dim-light);
     }
   }
 
-  .sv-popup--overlay:not(.sv-popup--dropdown-overlay) {
+  &.sv-popup--overlay:not(.sv-popup--dropdown-overlay) {
     .sv-popup__container {
       background: var(--ctr-popup-haze-background-color, $background-semitransparent);
     }
@@ -59,13 +58,13 @@ survey-creator:not(.svd-simulator-content),
     color: var(--ctr-popup-title-color, $foreground);
   }
 
-  .sv-popup--dropdown {
+  &.sv-popup--dropdown {
     .sv-popup__body-content {
       background-color: var(--ctr-contextual-menu-background-color, $background);
     }
   }
 
-  .sv-popup--dropdown.toolbox-subtypes {
+  &.sv-popup--dropdown.svc-toolbox-subtypes {
     .sv-popup__body-content {
       background: unset;
     }
@@ -97,7 +96,7 @@ survey-creator:not(.svd-simulator-content),
     fill: var(--ctr-list-item-icon-color, $foreground-light);
   }
 
-  .sv-list__item--hovered>.sv-list__item-body {
+  .sv-list__item--hovered > .sv-list__item-body {
     color: var(--ctr-list-item-text-color-hovered, $foreground);
     background: var(--ctr-list-item-background-color-hovered, $background-dark);
 
@@ -108,7 +107,7 @@ survey-creator:not(.svd-simulator-content),
 
   .sv-list__item--selected,
   .sv-list__item.sv-list__item--selected:hover {
-    &>.sv-list__item-body {
+    & > .sv-list__item-body {
       color: var(--ctr-list-item-text-color-selected, $primary-foreground);
       background: var(--ctr-list-item-background-color-selected, $primary);
     }
@@ -118,7 +117,7 @@ survey-creator:not(.svd-simulator-content),
     }
 
     &.sv-list__item--group {
-      &>.sv-list__item-body {
+      & > .sv-list__item-body {
         background: var(--ctr-list-item-background-color-selected, $primary-light);
         color: var(--ctr-list-item-text-color-selected, $foreground);
         font-weight: 400;
@@ -131,7 +130,7 @@ survey-creator:not(.svd-simulator-content),
   }
 
   //styles for dropdown overlay
-  .sv-popup--dropdown-overlay {
+  &.sv-popup--dropdown-overlay {
     .sv-popup__button.sv-popup__button {
       color: var(--ctr-actionbar-button-text-color, $primary);
     }
@@ -181,7 +180,7 @@ survey-creator:not(.svd-simulator-content),
       }
 
       &.sv-list__item--selected.sv-list__item--group {
-        &>.sv-list__item-body {
+        & > .sv-list__item-body {
           background: var(--ctr-list-item-background-color-selected, $primary-light);
           color: var(--ctr-list-item-text-color-selected, $foreground);
           font-weight: 400;
@@ -196,10 +195,9 @@ survey-creator:not(.svd-simulator-content),
     .sd-btn {
       background: var(--ctr-button-background-color, rgba(0, 0, 0, 0));
     }
-
   }
 
-  .sv-dropdown-popup.sv-popup--dropdown-overlay {
+  &.sv-dropdown-popup.sv-popup--dropdown-overlay {
     .sv-popup__body-footer {
       background-color: var(--ctr-contextual-menu-footer-background-color, $background-dim);
     }
