@@ -106,6 +106,8 @@ var spanishTranslation = {
     redo: "Rehacer",
     undoTooltip: "Deshacer el último cambio",
     redoTooltip: "Rehacer el cambio",
+    expandAllTooltip: "Expandir todo",
+    collapseAllTooltip: "Contraer todo",
     showMoreChoices: "Mostrar más",
     showLessChoices: "Mostrar menos",
     copy: "Copiar",
@@ -2544,3 +2546,5 @@ editorLocalization.locales["es"] = spanishTranslation;
 // progressBarLocation.bottom: "Bottom" => "Fondo"
 // progressBarLocation.topBottom: "Top and bottom" => "Arriba y abajo"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Organiza las opciones de elección en un diseño de varias columnas. Cuando se establece en 0, las opciones se muestran en una sola línea. Cuando se establece en -1, el valor real se hereda de la propiedad \"Recuento de columnas anidadas\" de la matriz principal."
+// ed.expandAllTooltip: "Expand All" => "Expandir todo"
+// ed.collapseAllTooltip: "Collapse All" => "Contraer todo"

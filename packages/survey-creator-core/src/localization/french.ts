@@ -106,6 +106,8 @@ var frenchTranslation = {
     redo: "Rétablir",
     undoTooltip: "Annuler la dernière modification",
     redoTooltip: "Rétablir la modification",
+    expandAllTooltip: "Tout afficher",
+    collapseAllTooltip: "Réduire tout",
     showMoreChoices: "Afficher plus",
     showLessChoices: "Afficher moins",
     copy: "Copier",
@@ -2831,3 +2833,5 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // progressBarLocation.bottom: "Bottom" => "Fond"
 // progressBarLocation.topBottom: "Top and bottom" => "Haut et bas"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Organise les options de choix dans une mise en page à plusieurs colonnes. Lorsqu’elle est définie sur 0, les options sont affichées sur une seule ligne. Lorsqu’elle est définie sur -1, la valeur réelle est héritée de la propriété « Nombre de colonnes imbriquées » de la matrice parente."
+// ed.expandAllTooltip: "Expand All" => "Tout afficher"
+// ed.collapseAllTooltip: "Collapse All" => "Réduire tout"

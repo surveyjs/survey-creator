@@ -106,6 +106,8 @@ export var bgStrings = {
     redo: "Повтаряне",
     undoTooltip: "Отмяна на последната промяна",
     redoTooltip: "Повтаряне на последната промяна",
+    expandAllTooltip: "Разширете всички",
+    collapseAllTooltip: "Свиване на всички",
     showMoreChoices: "Покажи повече.",
     showLessChoices: "Покажи по-малко.",
     copy: "Копиране",
@@ -2333,3 +2335,5 @@ editorLocalization.locales["bg"] = bgStrings;
 // progressBarLocation.bottom: "Bottom" => "Дъно"
 // progressBarLocation.topBottom: "Top and bottom" => "Отгоре и отдолу"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Подрежда опциите за избор в оформление с няколко колони. Когато е зададено на 0, опциите се показват на един ред. Когато е зададена на -1, действителната стойност се наследява от свойството \"Брой вложени колони\" на родителската матрица."
+// ed.expandAllTooltip: "Expand All" => "Разширете всички"
+// ed.collapseAllTooltip: "Collapse All" => "Свиване на всички"

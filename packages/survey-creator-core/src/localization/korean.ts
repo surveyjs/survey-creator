@@ -106,6 +106,8 @@ export var koreanStrings = {
     redo: "복원",
     undoTooltip: "마지막 변경 사항 실행 취소",
     redoTooltip: "변경 내용 다시 실행",
+    expandAllTooltip: "모두 확장",
+    collapseAllTooltip: "모두 축소",
     showMoreChoices: "더 보기",
     showLessChoices: "간략하게 표시",
     copy: "복사",
@@ -2974,3 +2976,5 @@ editorLocalization.locales["ko"] = koreanStrings;
 // progressBarLocation.bottom: "Bottom" => "밑바닥"
 // progressBarLocation.topBottom: "Top and bottom" => "위쪽 및 아래쪽"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "선택 옵션을 여러 열 레이아웃으로 정렬합니다. 0으로 설정하면 옵션이 한 줄로 표시됩니다. -1로 설정하면 실제 값이 부모 행렬의 \"중첩 열 수\" 속성에서 상속됩니다."
+// ed.expandAllTooltip: "Expand All" => "모두 확장"
+// ed.collapseAllTooltip: "Collapse All" => "모두 축소"

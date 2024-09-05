@@ -106,6 +106,8 @@ var simplifiedChineseTranslation = {
     redo: "恢复",
     undoTooltip: "撤消上次更改",
     redoTooltip: "重做更改",
+    expandAllTooltip: "全部展开",
+    collapseAllTooltip: "全部折叠",
     showMoreChoices: "显示更多",
     showLessChoices: "显示更少",
     copy: "复制",
@@ -2912,3 +2914,5 @@ editorLocalization.locales["zh-cn"] = simplifiedChineseTranslation;
 // progressBarLocation.bottom: "Bottom" => "底"
 // progressBarLocation.topBottom: "Top and bottom" => "顶部和底部"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "在多列布局中排列选项。设置为 0 时，选项将以单行显示。当设置为 -1 时，实际值继承自父矩阵的 “Nested column count” 属性。"
+// ed.expandAllTooltip: "Expand All" => "全部展开"
+// ed.collapseAllTooltip: "Collapse All" => "全部折叠"

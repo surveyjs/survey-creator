@@ -106,6 +106,8 @@ export var ruStrings = {
     redo: "Повтор",
     undoTooltip: "Отменить последнее изменение",
     redoTooltip: "Повторите изменение",
+    expandAllTooltip: "Развернуть все",
+    collapseAllTooltip: "Свернуть все",
     showMoreChoices: "Развернуть",
     showLessChoices: "Показать меньше",
     copy: "Копировать",
@@ -2830,3 +2832,5 @@ editorLocalization.locales["ru"] = ruStrings;
 // progressBarLocation.bottom: "Bottom" => "Дно"
 // progressBarLocation.topBottom: "Top and bottom" => "Верх и низ"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Упорядочивает варианты выбора в макете с несколькими столбцами. Если установлено значение 0, параметры отображаются в одну строку. При значении -1 фактическое значение наследуется от свойства \"Количество вложенных столбцов\" родительской матрицы."
+// ed.expandAllTooltip: "Expand All" => "Развернуть все"
+// ed.collapseAllTooltip: "Collapse All" => "Свернуть все"

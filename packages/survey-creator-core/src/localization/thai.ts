@@ -106,6 +106,8 @@ export const thStrings = {
     redo: "ทำซ้ำ",
     undoTooltip: "เลิกทำการเปลี่ยนแปลงครั้งล่าสุด",
     redoTooltip: "ทำซ้ำการเปลี่ยนแปลง",
+    expandAllTooltip: "ขยายทั้งหมด",
+    collapseAllTooltip: "ยุบทั้งหมด",
     showMoreChoices: "แสดงเพิ่มเติม",
     showLessChoices: "แสดงน้อยลง",
     copy: "คัดลอก",
@@ -1703,3 +1705,5 @@ editorLocalization.locales["th"] = thStrings;
 // progressBarLocation.bottom: "Bottom" => "ก้น"
 // progressBarLocation.topBottom: "Top and bottom" => "ด้านบนและด้านล่าง"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "จัดเรียงตัวเลือกตัวเลือกในรูปแบบหลายคอลัมน์ เมื่อตั้งค่าเป็น 0 ตัวเลือกจะแสดงในบรรทัดเดียว เมื่อตั้งค่าเป็น -1 ค่าจริงจะถูกสืบทอดมาจากคุณสมบัติ \"จํานวนคอลัมน์ที่ซ้อนกัน\" ของเมทริกซ์หลัก"
+// ed.expandAllTooltip: "Expand All" => "ขยายทั้งหมด"
+// ed.collapseAllTooltip: "Collapse All" => "ยุบทั้งหมด"

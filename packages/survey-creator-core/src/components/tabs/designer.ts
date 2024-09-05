@@ -94,10 +94,12 @@ export class TabDesignerViewModel extends Base {
 
     this.actionContainer.setItems([{
       id: "collapseAll",
+      tooltip: getLocString("ed.collapseAllTooltip"),
       iconName: "icon-collapseall-24x24",
       action: action
     }, {
       id: "expandAll",
+      tooltip: getLocString("ed.expandAllTooltip"),
       iconName: "icon-expandall-24x24",
       action: action
     }]);
@@ -200,7 +202,7 @@ export class TabDesignerViewModel extends Base {
   }
   public getRootCss(): string {
     let rootCss = this.survey.css.root;
-    if (this.creator.showPageNavigator && this.survey.pageCount > 1 || this.creator.pageEditMode === "bypage") {
+    if (this.creator.showPageNavigator && this.survey.pageCount > 1 || this.creator.pageEditMode === "bypage" || this.hasToolbar) {
       rootCss += " svc-tab-designer--with-page-navigator";
     }
     if (this.showPlaceholder) {

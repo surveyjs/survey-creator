@@ -106,6 +106,8 @@ export var huStrings = {
     redo: "Ismét",
     undoTooltip: "Utolsó módosítás visszavonása",
     redoTooltip: "Ismételje meg a módosítást",
+    expandAllTooltip: "Összes kibontása",
+    collapseAllTooltip: "Az összes összecsukása",
     showMoreChoices: "Bővebben",
     showLessChoices: "Rövidebben",
     copy: "Másolat",
@@ -2923,3 +2925,5 @@ editorLocalization.locales["hu"] = huStrings;
 // progressBarLocation.bottom: "Bottom" => "Fenék"
 // progressBarLocation.topBottom: "Top and bottom" => "Felső és alsó"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Az adatválaszték-beállításokat többoszlopos elrendezésbe rendezi. Ha 0-ra van állítva, a beállítások egyetlen sorban jelennek meg. Ha -1 értékre van állítva, a tényleges érték a szülőmátrix \"Beágyazott oszlopok száma\" tulajdonságából öröklődik."
+// ed.expandAllTooltip: "Expand All" => "Összes kibontása"
+// ed.collapseAllTooltip: "Collapse All" => "Az összes összecsukása"

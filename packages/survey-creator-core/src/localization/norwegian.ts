@@ -106,6 +106,8 @@ export var nbStrings = {
     redo: "Gjenta",
     undoTooltip: "Angre siste endring",
     redoTooltip: "Gjør om siste endring",
+    expandAllTooltip: "Utvid alle",
+    collapseAllTooltip: "Skjul alle",
     showMoreChoices: "Vis mer",
     showLessChoices: "Vis mindre",
     copy: "Kopier",
@@ -2773,3 +2775,5 @@ editorLocalization.locales["nb"] = nbStrings;
 // progressBarLocation.bottom: "Bottom" => "Bunn"
 // progressBarLocation.topBottom: "Top and bottom" => "Topp og bunn"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Ordner valgalternativer i et oppsett med flere kolonner. Når den er satt til 0, vises alternativene på én enkelt linje. Når satt til -1, arves den faktiske verdien fra egenskapen \"Nestet kolonneantall\" for den overordnede matrisen."
+// ed.expandAllTooltip: "Expand All" => "Utvid alle"
+// ed.collapseAllTooltip: "Collapse All" => "Skjul alle"

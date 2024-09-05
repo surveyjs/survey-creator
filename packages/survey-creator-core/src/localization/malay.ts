@@ -106,6 +106,8 @@ export var msStrings = {
     redo: "Buat Semula",
     undoTooltip: "Buat asal perubahan terakhir",
     redoTooltip: "Buat semula perubahan",
+    expandAllTooltip: "Kembangkan Semua",
+    collapseAllTooltip: "Runtuhkan Semua",
     showMoreChoices: "Tunjuk lebih banyak",
     showLessChoices: "Tunjukkan kurang",
     copy: "Salin",
@@ -2723,3 +2725,5 @@ editorLocalization.locales["ms"] = msStrings;
 // progressBarLocation.bottom: "Bottom" => "Bawah"
 // progressBarLocation.topBottom: "Top and bottom" => "Atas dan bawah"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Mengatur pilihan pilihan dalam susun atur berbilang lajur. Apabila ditetapkan kepada 0, pilihan dipaparkan dalam satu baris. Apabila ditetapkan kepada -1, nilai sebenar diwarisi daripada sifat \"Kiraan lajur bersarang\" bagi matriks induk."
+// ed.expandAllTooltip: "Expand All" => "Kembangkan Semua"
+// ed.collapseAllTooltip: "Collapse All" => "Runtuhkan Semua"

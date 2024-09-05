@@ -106,6 +106,8 @@ var persianStrings = {
     redo: "بازانجام",
     undoTooltip: "بازگرداندن آخرین تغییر",
     redoTooltip: "انجام دادن تغییر",
+    expandAllTooltip: "گسترش همه",
+    collapseAllTooltip: "جمع کردن همه",
     showMoreChoices: "نمایش بیشتر",
     showLessChoices: "نمایش کمتر",
     copy: "کپی",
@@ -2725,3 +2727,5 @@ editorLocalization.locales["fa"] = persianStrings;
 // progressBarLocation.bottom: "Bottom" => "پایین"
 // progressBarLocation.topBottom: "Top and bottom" => "بالا و پایین"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "گزینه های انتخاب را در یک طرح چند ستونی مرتب می کند. هنگامی که روی 0 تنظیم می شود، گزینه ها در یک خط نمایش داده می شوند. هنگامی که روی -1 تنظیم می شود، مقدار واقعی از ویژگی \"تعداد ستون های تو در تو\" ماتریس والد به ارث می رسد."
+// ed.expandAllTooltip: "Expand All" => "گسترش همه"
+// ed.collapseAllTooltip: "Collapse All" => "جمع کردن همه"

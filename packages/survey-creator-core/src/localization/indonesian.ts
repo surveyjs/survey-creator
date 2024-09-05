@@ -106,6 +106,8 @@ export var indonesianStrings = {
     redo: "Ulangi",
     undoTooltip: "Mengurungkan perubahan terakhir",
     redoTooltip: "Mengulangi perubahan",
+    expandAllTooltip: "Perluas Semua",
+    collapseAllTooltip: "Ciutkan Semua",
     showMoreChoices: "Tampilkan lebih banyak",
     showLessChoices: "Tampilkan lebih sedikit",
     copy: "Menyalin",
@@ -2924,3 +2926,5 @@ editorLocalization.locales["id"] = indonesianStrings;
 // progressBarLocation.bottom: "Bottom" => "Dasar"
 // progressBarLocation.topBottom: "Top and bottom" => "Atas dan bawah"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Mengatur opsi pilihan dalam tata letak multi-kolom. Saat diatur ke 0, opsi ditampilkan dalam satu baris. Saat diatur ke -1, nilai aktual diwarisi dari properti \"Jumlah kolom berlapis\" dari matriks induk."
+// ed.expandAllTooltip: "Expand All" => "Perluas Semua"
+// ed.collapseAllTooltip: "Collapse All" => "Ciutkan Semua"

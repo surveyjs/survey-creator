@@ -106,6 +106,8 @@ export var turkishStrings = {
     redo: "İleri",
     undoTooltip: "Son değişikliği geri al",
     redoTooltip: "Son değişikliği ileri al",
+    expandAllTooltip: "Tümünü Genişlet",
+    collapseAllTooltip: "Tümünü Daralt",
     showMoreChoices: "Daha fazlasını göster",
     showLessChoices: "Daha az göster",
     copy: "Kopya etmek",
@@ -2765,3 +2767,5 @@ editorLocalization.locales["tr"] = turkishStrings;
 // progressBarLocation.bottom: "Bottom" => "Dip"
 // progressBarLocation.topBottom: "Top and bottom" => "Üst ve alt"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Seçim seçeneklerini çok sütunlu bir düzende düzenler. 0 olarak ayarlandığında, seçenekler tek bir satırda görüntülenir. -1 olarak ayarlandığında, gerçek değer üst matrisin \"İç içe sütun sayısı\" özelliğinden devralınır."
+// ed.expandAllTooltip: "Expand All" => "Tümünü Genişlet"
+// ed.collapseAllTooltip: "Collapse All" => "Tümünü Daralt"

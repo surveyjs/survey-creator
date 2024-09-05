@@ -106,6 +106,8 @@ export const roStrings = {
     redo: "Refă",
     undoTooltip: "Anulează ultima modificare",
     redoTooltip: "Refă modificarea",
+    expandAllTooltip: "Extindeți tot",
+    collapseAllTooltip: "Restrângeți tot",
     showMoreChoices: "Afișează mai multe",
     showLessChoices: "Afișează mai puține",
     copy: "Copiază",
@@ -1703,3 +1705,5 @@ editorLocalization.locales["ro"] = roStrings;
 // progressBarLocation.bottom: "Bottom" => "Fund"
 // progressBarLocation.topBottom: "Top and bottom" => "Sus și jos"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Aranjează opțiunile de alegere într-un aspect cu mai multe coloane. Când este setat la 0, opțiunile sunt afișate într-o singură linie. Când este setată la -1, valoarea reală este moștenită de la proprietatea \"Număr de coloane imbricate\" a matricei părinte."
+// ed.expandAllTooltip: "Expand All" => "Extindeți tot"
+// ed.collapseAllTooltip: "Collapse All" => "Restrângeți tot"

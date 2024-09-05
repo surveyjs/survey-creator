@@ -106,6 +106,8 @@ export var arStrings = {
     redo: "Redo",
     undoTooltip: "Undo last change",
     redoTooltip: "Redo the change",
+    expandAllTooltip: "توسيع الكل",
+    collapseAllTooltip: "طي الكل",
     showMoreChoices: "استعراض المزيد",
     showLessChoices: "عرض أقل",
     copy: "Copy",
@@ -2681,3 +2683,5 @@ editorLocalization.locales["ar"] = arStrings;
 // progressBarLocation.bottom: "Bottom" => "قاع"
 // progressBarLocation.topBottom: "Top and bottom" => "أعلى وأسفل"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "يرتب خيارات التحديد في تخطيط متعدد الأعمدة. عند التعيين على 0 ، يتم عرض الخيارات في سطر واحد. عند التعيين إلى -1، يتم توريث القيمة الفعلية من خاصية \"عدد الأعمدة المتداخلة\" للمصفوفة الأصل."
+// ed.expandAllTooltip: "Expand All" => "توسيع الكل"
+// ed.collapseAllTooltip: "Collapse All" => "طي الكل"
