@@ -264,7 +264,6 @@ td.st-table__cell:first-of-type {
     width: auto;
   }
 }
-
 .st-body {
-  @include disableAnimations;
+  @include disableLibraryAnimations;
 }

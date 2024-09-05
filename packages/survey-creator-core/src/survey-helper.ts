@@ -170,18 +170,18 @@ export class SurveyHelper {
     if (!!canShow && !canShow(obj, property)) return false;
     return true;
   }
-  public static scrollIntoViewIfNeeded(el: HTMLElement) {
+  public static scrollIntoViewIfNeeded(el: HTMLElement, getOptions?: (overTop: boolean) => ScrollIntoViewOptions, scrollIfElementBiggerThanContainer: boolean = false) {
     if (!el || !el.scrollIntoView) return;
     var rect = el.getBoundingClientRect();
     var scrollableDiv = SurveyHelper.getScrollableDiv(el);
     if (!scrollableDiv) return;
     var height = scrollableDiv.clientHeight;
     if (rect.top < scrollableDiv.offsetTop) {
-      el.scrollIntoView(true);
+      el.scrollIntoView(getOptions ? getOptions(true) : true);
     } else {
       let offsetTop = height + scrollableDiv.offsetTop;
-      if (rect.bottom > offsetTop && rect.height < height) {
-        el.scrollIntoView(false);
+      if (rect.bottom > offsetTop && (rect.height < height || scrollIfElementBiggerThanContainer)) {
+        el.scrollIntoView(getOptions ? getOptions(false) : false);
       }
     }
   }

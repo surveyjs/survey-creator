@@ -275,7 +275,7 @@ export class StringEditorViewModelBase extends Base {
   public activate = () => {
     const element = this.getEditorElement();
     if (element && element.offsetParent != null) {
-      element.focus();
+      element.focus({ preventScroll: true });
       select(element);
       return true;
     }

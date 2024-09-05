@@ -1,7 +1,8 @@
 <ng-template #template>
   <div class="svc-item-value-wrapper" (pointerdown)="adorner.onPointerDown($event)"
     [attr.data-sv-drop-target-item-value]="adorner.isDraggable ? item.value : null"
-    [ngClass]="{'svc-item-value--new': adorner.isNew, 'svc-item-value--dragging': adorner.isDragging, 'svc-item-value--ghost': adorner.isDragDropGhost, 'svc-item-value--movedown': adorner.isDragDropMoveDown, 'svc-item-value--moveup': adorner.isDragDropMoveUp}">
+    [ngClass]="{'svc-item-value--new': adorner.isNew, 'svc-item-value--dragging': adorner.isDragging, 'svc-item-value--ghost': adorner.isDragDropGhost, 'svc-item-value--movedown': adorner.isDragDropMoveDown, 'svc-item-value--moveup': adorner.isDragDropMoveUp}"
+    #container>
     <div class="svc-item-value__ghost"></div>
     <div class="svc-item-value-controls">
       <span *ngIf="adorner.isDraggable" class="svc-item-value-controls__button svc-item-value-controls__drag">

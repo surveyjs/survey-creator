@@ -111,6 +111,7 @@ test("Impossible to specify the default value for a masked Date field", async (t
     .click(getPropertyGridCategory(generalGroupName))
     .click(dataTab)
     .click(Selector("span").withExactText("Set Default Answer"))
+    .wait(1000)
     .pressKey("2")
     .pressKey("4")
     .expect(Selector(".sv-popup--modal input").value).eql("02/04/yyyy")
