@@ -14,7 +14,7 @@ import { pgTabIcons } from "../../property-grid/icons";
 export class TabDesignerPlugin implements ICreatorPlugin {
   public model: TabDesignerViewModel;
   public propertyGridViewModel: PropertyGridViewModel;
-  private propertyGridModel: PropertyGridModel;
+  private propertyGrid: PropertyGridModel;
   private _showOneCategoryInPropertyGrid: boolean = false;
   private propertyGridTab: SidebarPageModel;
   private toolboxTab: SidebarPageModel;
@@ -83,8 +83,8 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     if (this._showOneCategoryInPropertyGrid !== newValue) {
       this._showOneCategoryInPropertyGrid = newValue;
       this.creator.sidebar.hideSideBarVisibilityControlActions = newValue;
-      this.propertyGridModel.showOneCategoryInPropertyGrid = newValue;
-      this.propertyGridModel["setObj"](this.creator.selectedElement);
+      this.propertyGrid.showOneCategoryInPropertyGrid = newValue;
+      this.propertyGrid["setObj"](this.creator.selectedElement);
       if (this.creator.activeTab === "designer") {
         this.updateActivePage();
         this.updateTabControl();
@@ -95,8 +95,8 @@ export class TabDesignerPlugin implements ICreatorPlugin {
   constructor(private creator: SurveyCreatorModel) {
     creator.addPluginTab("designer", this);
     this.tabControlModel = new TabControlModel(this.creator.sidebar);
-    this.propertyGridModel = new PropertyGridModel(creator.survey as any as Base, creator, creator.getPropertyGridDefinition());
-    this.propertyGridViewModel = new PropertyGridViewModel(this.propertyGridModel, creator);
+    this.propertyGrid = new PropertyGridModel(creator.survey as any as Base, creator, creator.getPropertyGridDefinition());
+    this.propertyGridViewModel = new PropertyGridViewModel(this.propertyGrid, creator);
     this.propertyGridTab = this.creator.sidebar.addPage("propertyGrid", "svc-property-grid", this.propertyGridViewModel, () => {
       const result = [];
       if (!!this.propertyGridViewModel.prevSelectionAction) {
@@ -156,16 +156,16 @@ export class TabDesignerPlugin implements ICreatorPlugin {
 
   private updateTabControlActions() {
     if (this.showOneCategoryInPropertyGrid) {
-      const pgTabs = this.propertyGridModel.survey.pages.map(p => {
+      const pgTabs = this.propertyGrid.survey.pages.map(p => {
         const action = new Action({
           id: p.name,
           locTooltipName: "pe.tabs." + p.name,
           iconName: pgTabIcons[p.name] || pgTabIcons["undefined"],
-          active: this.activePageIsPropertyGrid && p.name === this.propertyGridModel.survey.currentPage.name,
+          active: this.activePageIsPropertyGrid && p.name === this.propertyGrid.survey.currentPage.name,
           action: () => {
             this.creator.sidebar.expandSidebar();
             this.setPropertyGridIsActivePage();
-            this.propertyGridModel.survey.currentPage = p;
+            this.propertyGrid.survey.currentPage = p;
             this.propertyGridViewModel.objectSelectionAction.tooltip = p.title;
             pgTabs.forEach(i => i.active = false);
             action.active = true;
@@ -175,14 +175,14 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       });
       this.tabControlModel.topToolbar.setItems(pgTabs);
 
-      this.propertyGridModel.survey.onCurrentPageChanged.add((sender: SurveyModel, options: CurrentPageChangedEvent) => {
+      this.propertyGrid.survey.onCurrentPageChanged.add((sender: SurveyModel, options: CurrentPageChangedEvent) => {
         pgTabs.forEach(action => {
           action.active = action.id === options.newCurrentPage.name;
         });
         this.propertyGridViewModel.objectSelectionAction.tooltip = options.newCurrentPage.title;
       });
 
-      this.propertyGridViewModel.objectSelectionAction.tooltip = this.propertyGridModel.survey.currentPage.title;
+      this.propertyGridViewModel.objectSelectionAction.tooltip = this.propertyGrid.survey.currentPage.title;
     }
   }
 
