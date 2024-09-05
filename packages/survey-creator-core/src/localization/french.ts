@@ -307,6 +307,9 @@ var frenchTranslation = {
       templateTitleLocation: "Alignement du titre de la question",
       templateErrorLocation: "Alignement des messages d’erreur",
       newPanelPosition: "Nouvel emplacement du panneau",
+      showRangeInProgress: "Afficher la barre de progression",
+      showProgressBar: "Afficher la barre de progression",
+      progressBarLocation: "Alignement de la barre de progression",
       keyName: "Éviter les réponses en double à la question suivante"
     },
     question: {
@@ -690,7 +693,6 @@ var frenchTranslation = {
     panelsState: "Déploiement de la section",
     panelPrevText: "Info-bulle du bouton Section précédente",
     panelNextText: "Info-bulle du bouton Section suivante",
-    showRangeInProgress: "Afficher la barre de progression",
     panelRemoveButtonLocation: "Emplacement du bouton Supprimer la Section",
     hideIfRowsEmpty: "Masquer la question s’il n’y a pas de lignes",
     hideColumnsIfEmpty: "Masquer les colonnes s’il n’y a pas de lignes",
@@ -927,10 +929,11 @@ var frenchTranslation = {
     firstExpanded: "Déployer la première section",
     off: "Désactiver",
     list: "liste",
+    carousel: "Carrousel",
+    tab: "Onglets",
     progressTop: "Barre de progression en haut",
     progressBottom: "Barre de progression en bas",
     progressTopBottom: "Barre de progression en haut et en bas",
-    tab: "Onglets",
     horizontal: "Horizontal",
     vertical: "Vertical",
     top: "Haut",
@@ -1117,6 +1120,11 @@ var frenchTranslation = {
       topbottom: "Haut et bas",
       aboveheader: "Au-dessus de l’en-tête",
       belowheader: "Sous l’en-tête"
+    },
+    progressBarLocation: {
+      top: "Retour au début",
+      bottom: "Fond",
+      topBottom: "Haut et bas"
     },
     sum: "Somme",
     count: "Compter",
@@ -1348,7 +1356,8 @@ var frenchTranslation = {
       visibleIf: "Utilisez l’icône en forme de baguette magique pour définir une règle conditionnelle qui détermine la visibilité des colonnes.",
       enableIf: "Utilisez l’icône en forme de baguette magique pour définir une règle conditionnelle qui désactive le mode lecture seule de la colonne.",
       requiredIf: "Utilisez l’icône en forme de baguette magique pour définir une règle conditionnelle qui empêche l’envoi d’un sondage à moins qu’au moins une question imbriquée n’ait une réponse.",
-      showInMultipleColumns: "Lorsque cette option est sélectionnée, une colonne individuelle est créée pour chaque option de choix."
+      showInMultipleColumns: "Lorsque cette option est sélectionnée, une colonne individuelle est créée pour chaque option de choix.",
+      colCount: "Organise les options de choix dans une mise en page à plusieurs colonnes. Lorsqu’elle est définie sur 0, les options sont affichées sur une seule ligne. Lorsqu’elle est définie sur -1, la valeur réelle est héritée de la propriété « Nombre de colonnes imbriquées » de la matrice parente."
     },
     widthMode: "Choisissez parmi : « Statique » - définit une largeur fixe ; « Responsive » - permet à l’enquête d’occuper toute la largeur de l’écran ; « Auto » - s’applique à l’un ou l’autre des deux en fonction des types de questions utilisés.",
     cookieName: "Les cookies empêchent les utilisateurs de remplir deux fois le même sondage.",
@@ -2814,3 +2823,11 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // inputTextAlignment.right: "Right" => "Droite"
 // pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Sélectionnez le mode d’alignement de la valeur d’entrée dans le champ. Le paramètre par défaut « Auto » aligne la valeur d’entrée à droite si le masquage monétaire ou numérique est appliqué et à gauche si ce n’est pas le cas."
 // p.inputTextAlignment: "Input value alignment" => "Alignement des valeurs d’entrée"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "Afficher la barre de progression"
+// paneldynamic.showProgressBar: "Show the progress bar" => "Afficher la barre de progression"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "Alignement de la barre de progression"
+// pv.carousel: "Carousel" => "Carrousel"
+// progressBarLocation.top: "Top" => "Retour au début"
+// progressBarLocation.bottom: "Bottom" => "Fond"
+// progressBarLocation.topBottom: "Top and bottom" => "Haut et bas"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Organise les options de choix dans une mise en page à plusieurs colonnes. Lorsqu’elle est définie sur 0, les options sont affichées sur une seule ligne. Lorsqu’elle est définie sur -1, la valeur réelle est héritée de la propriété « Nombre de colonnes imbriquées » de la matrice parente."

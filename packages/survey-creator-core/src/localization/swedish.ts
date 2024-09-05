@@ -307,6 +307,9 @@ export let svStrings = {
       templateTitleLocation: "Justering av frågerubrik",
       templateErrorLocation: "Justering av felmeddelande",
       newPanelPosition: "Ny panelplats",
+      showRangeInProgress: "Visa förloppsindikatorn",
+      showProgressBar: "Visa förloppsindikatorn",
+      progressBarLocation: "Justering av förloppsindikator",
       keyName: "Förhindra dubbletter av svar i följande fråga"
     },
     question: {
@@ -690,7 +693,6 @@ export let svStrings = {
     panelsState: "Expanderingsläge för innerpanelen",
     panelPrevText: "Knappbeskrivning för föregående panel",
     panelNextText: "Knappbeskrivning för knappen Nästa panel",
-    showRangeInProgress: "Visa förloppsindikator",
     panelRemoveButtonLocation: "Ta bort panelknappens placering",
     hideIfRowsEmpty: "Dölj frågan om det inte finns några rader",
     hideColumnsIfEmpty: "Dölj kolumner om det inte finns några rader",
@@ -927,10 +929,11 @@ export let svStrings = {
     firstExpanded: "firstExpanded",
     off: "off",
     list: "list",
+    carousel: "Karusell",
+    tab: "Flikar",
     progressTop: "progressTop",
     progressBottom: "progressBottom",
     progressTopBottom: "progressTopBottom",
-    tab: "Flikar",
     horizontal: "horizontal",
     vertical: "vertical",
     top: "top",
@@ -1117,6 +1120,11 @@ export let svStrings = {
       topbottom: "top and bottom",
       aboveheader: "Ovanför sidhuvudet",
       belowheader: "Nedanför rubriken"
+    },
+    progressBarLocation: {
+      top: "Topp",
+      bottom: "Botten",
+      topBottom: "Topp och botten"
     },
     sum: "Summa",
     count: "Räkna",
@@ -1348,7 +1356,8 @@ export let svStrings = {
       visibleIf: "Använd trollstavsikonen för att ange en villkorsregel som bestämmer kolumnens synlighet.",
       enableIf: "Använd trollstavsikonen för att ange en villkorsregel som inaktiverar skrivskyddat läge för kolumnen.",
       requiredIf: "Använd trollstavsikonen för att ställa in en villkorsregel som förhindrar att undersökningen skickas in om inte minst en kapslad fråga har ett svar.",
-      showInMultipleColumns: "När du väljer det här alternativet skapas en enskild kolumn för varje alternativ."
+      showInMultipleColumns: "När du väljer det här alternativet skapas en enskild kolumn för varje alternativ.",
+      colCount: "Ordnar valalternativ i en layout med flera kolumner. När värdet är 0 visas alternativen på en enda rad. När värdet är -1 ärvs det faktiska värdet från egenskapen \"Kapslad kolumnantal\" i den överordnade matrisen."
     },
     widthMode: "Välj mellan: \"Statisk\" - ställer in en fast bredd; \"Responsiv\" - gör att undersökningen upptar hela skärmens bredd; \"Auto\" - gäller någon av de två beroende på vilka frågetyper som används.",
     cookieName: "Cookies hindrar användare från att fylla i samma undersökning två gånger.",
@@ -2930,3 +2939,11 @@ editorLocalization.locales["sv"] = svStrings;
 // inputTextAlignment.right: "Right" => "Höger"
 // pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Välj hur du vill justera indatavärdet i fältet. Standardinställningen \"Auto\" justerar indatavärdet till höger om valutamaskering eller numerisk maskering används och till vänster om inte."
 // p.inputTextAlignment: "Input value alignment" => "Justering av indatavärde"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "Visa förloppsindikatorn"
+// paneldynamic.showProgressBar: "Show the progress bar" => "Visa förloppsindikatorn"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "Justering av förloppsindikator"
+// pv.carousel: "Carousel" => "Karusell"
+// progressBarLocation.top: "Top" => "Topp"
+// progressBarLocation.bottom: "Bottom" => "Botten"
+// progressBarLocation.topBottom: "Top and bottom" => "Topp och botten"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Ordnar valalternativ i en layout med flera kolumner. När värdet är 0 visas alternativen på en enda rad. När värdet är -1 ärvs det faktiska värdet från egenskapen \"Kapslad kolumnantal\" i den överordnade matrisen."

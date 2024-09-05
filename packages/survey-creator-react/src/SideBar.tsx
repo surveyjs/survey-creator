@@ -36,7 +36,7 @@ export class SidebarComponent extends SurveyElementBase<ISidebarComponentProps, 
     return super.canRender();
   }
   renderElement() {
-    const style = { display: !this.model.visible ? "none" : "" };
+    const style = { display: !this.model.renderedIsVisible ? "none" : "" };
     const className = "svc-side-bar" + (this.model.flyoutPanelMode ? " svc-flyout-side-bar" : "");
     const items = this.model.tabs.map((item) => <SidebarTab item={item} key={item.id} />);
     return (

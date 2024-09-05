@@ -179,17 +179,17 @@ module.exports = function (options) {
       umdNamedDefine: true
     },
     externals: {
-      knockout: {
-        root: "ko",
-        commonjs2: "knockout",
-        commonjs: "knockout",
-        amd: "knockout",
-      },
       "survey-core": {
         root: "Survey",
         commonjs2: "survey-core",
         commonjs: "survey-core",
         amd: "survey-core",
+      },
+      "survey-core/themes": {
+        root: "SurveyTheme",
+        commonjs2: "survey-core/themes",
+        commonjs: "survey-core/themes",
+        amd: "survey-core/themes",
       },
     },
     plugins: [

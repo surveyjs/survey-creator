@@ -1,3 +1,6 @@
+.spg-panel {
+  background: $background-dim;
+}
 .spg-panel__title {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -71,5 +74,62 @@
   .spg-panel__content {
     padding: 0px;
     box-shadow: unset;
+  }
+}
+.spg-row--enter.spg-row.spg-row.spg-row {
+  margin-top: 0;
+}
+.spg-row--enter {
+  animation-fill-mode: forwards;
+  animation-name: fadeIn, moveInWithOverflow;
+  min-height: 0 !important;
+  opacity: 0;
+  height: 0;
+  animation-timing-function: $ease-out;
+  animation-delay: $spg-row-fade-in-delay, 0s, 0s;
+  animation-duration: $spg-row-fade-in-duration, $spg-row-move-in-duration, $spg-row-move-in-duration;
+}
+.spg-row--delayed-enter {
+  animation-delay: calc(#{$spg-row-fade-in-delay} + #{$spg-row-fade-in-animation-delay}),
+    $spg-row-fade-in-animation-delay, $spg-row-fade-in-animation-delay;
+}
+
+.spg-row--leave {
+  animation-name: fadeIn, moveInWithOverflow;
+  animation-timing-function: $reverse-ease-out;
+  animation-fill-mode: forwards;
+  animation-direction: reverse;
+  min-height: 0 !important;
+  animation-delay: 0s, $spg-row-move-out-delay, $spg-row-move-out-delay;
+  animation-duration: $spg-row-fade-out-duration, $spg-row-move-out-duration, $spg-row-move-out-duration;
+}
+
+.spg-panel__content--enter {
+  animation-name: fadeIn, moveInWithOverflow;
+  min-height: 0 !important;
+  opacity: 0;
+  animation-fill-mode: forwards;
+  animation-timing-function: $ease-out;
+  animation-duration: $spg-expand-fade-in-duration, $spg-expand-move-in-duration, $spg-expand-move-in-duration;
+  animation-delay: $spg-expand-fade-in-delay, 0s, 0s;
+}
+
+.spg-panel__content--leave {
+  animation-name: fadeIn, moveInWithOverflow;
+  min-height: 0 !important;
+  animation-direction: reverse;
+  animation-fill-mode: forwards;
+  animation-timing-function: $reverse-ease-out;
+  animation-duration: $spg-collapse-fade-out-duration, $spg-collapse-move-out-duration, $spg-collapse-move-out-duration;
+  animation-delay: 0s, $spg-collapse-move-out-delay, $spg-collapse-move-out-delay;
+}
+
+
+.svc-creator--disable-animations {
+  .spg-row--enter,
+  .spg-row--leave,
+  .spg-panel__content--enter,
+  .spg-panel__content--leave {
+    animation: none;
   }
 }

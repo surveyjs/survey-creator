@@ -307,6 +307,9 @@ var polishStrings = {
       templateTitleLocation: "Wyrównanie tytułu pytania",
       templateErrorLocation: "Wyrównanie komunikatu o błędzie",
       newPanelPosition: "Nowa lokalizacja panelu",
+      showRangeInProgress: "Pokazywanie paska postępu",
+      showProgressBar: "Pokazywanie paska postępu",
+      progressBarLocation: "Wyrównanie paska postępu",
       keyName: "Zapobiegaj zduplikowanym odpowiedziom w następującym pytaniu"
     },
     question: {
@@ -690,7 +693,6 @@ var polishStrings = {
     panelsState: "Stan rozwinięcia panelu wewnętrznego",
     panelPrevText: "Poprzednia etykietka przycisku panelu",
     panelNextText: "Przycisk Następny panel — etykietka narzędzia",
-    showRangeInProgress: "Pokaż pasek postępu",
     panelRemoveButtonLocation: "Usuń położenie przycisku panelu",
     hideIfRowsEmpty: "Ukryj pytanie, jeśli nie ma wierszy",
     hideColumnsIfEmpty: "Ukryj kolumny, jeśli nie ma wierszy",
@@ -927,10 +929,11 @@ var polishStrings = {
     firstExpanded: "Pierwszy panel jest rozwinięty",
     off: "Ukryj numery pytań",
     list: "Lista",
+    carousel: "Karuzela",
+    tab: "Karty",
     progressTop: "Nawigator paneli + pasek postępu u góry",
     progressBottom: "Nawigator panelu + pasek postępu u dołu",
     progressTopBottom: "Nawigator panelu + pasek postępu u góry i u dołu",
-    tab: "Karty",
     horizontal: "Poziomy",
     vertical: "Pionowy",
     top: "Do góry",
@@ -1117,6 +1120,11 @@ var polishStrings = {
       topbottom: "Góra i dół",
       aboveheader: "Nad nagłówkiem",
       belowheader: "Pod nagłówkiem"
+    },
+    progressBarLocation: {
+      top: "Do góry",
+      bottom: "Dno",
+      topBottom: "Góra i dół"
     },
     sum: "Suma",
     count: "Hrabia",
@@ -1348,7 +1356,8 @@ var polishStrings = {
       visibleIf: "Użyj ikony magicznej różdżki, aby ustawić regułę warunkową, która określa widoczność kolumny.",
       enableIf: "Użyj ikony magicznej różdżki, aby ustawić regułę warunkową, która wyłącza tryb tylko do odczytu dla kolumny.",
       requiredIf: "Użyj ikony magicznej różdżki, aby ustawić regułę warunkową, która uniemożliwia przesłanie ankiety, chyba że co najmniej jedno zagnieżdżone pytanie ma odpowiedź.",
-      showInMultipleColumns: "Gdy ta opcja jest zaznaczona, tworzy osobną kolumnę dla każdej opcji wyboru."
+      showInMultipleColumns: "Gdy ta opcja jest zaznaczona, tworzy osobną kolumnę dla każdej opcji wyboru.",
+      colCount: "Rozmieszcza opcje wyboru w układzie wielokolumnowym. Po ustawieniu wartości 0 opcje są wyświetlane w jednym wierszu. Po ustawieniu wartości -1 rzeczywista wartość jest dziedziczona z właściwości \"Liczba kolumn zagnieżdżonych\" macierzy nadrzędnej."
     },
     widthMode: "Do wyboru: \"Statyczny\" - ustawia stałą szerokość; \"Responsywny\" - sprawia, że ankieta zajmuje całą szerokość ekranu; \"Auto\" – stosuje jedną z tych dwóch opcji w zależności od użytych typów pytań.",
     cookieName: "Pliki cookie uniemożliwiają użytkownikom dwukrotne wypełnienie tej samej ankiety.",
@@ -3020,3 +3029,11 @@ editorLocalization.locales["pl"] = polishStrings;
 // inputTextAlignment.right: "Right" => "Prawy"
 // pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Wybierz sposób wyrównania wartości wejściowej w polu. Ustawienie domyślne \"Auto\" wyrównuje wartość wejściową do prawej, jeśli stosowane jest maskowanie walutowe lub numeryczne, i do lewej, jeśli nie."
 // p.inputTextAlignment: "Input value alignment" => "Wyrównanie wartości wejściowej"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "Pokazywanie paska postępu"
+// paneldynamic.showProgressBar: "Show the progress bar" => "Pokazywanie paska postępu"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "Wyrównanie paska postępu"
+// pv.carousel: "Carousel" => "Karuzela"
+// progressBarLocation.top: "Top" => "Do góry"
+// progressBarLocation.bottom: "Bottom" => "Dno"
+// progressBarLocation.topBottom: "Top and bottom" => "Góra i dół"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Rozmieszcza opcje wyboru w układzie wielokolumnowym. Po ustawieniu wartości 0 opcje są wyświetlane w jednym wierszu. Po ustawieniu wartości -1 rzeczywista wartość jest dziedziczona z właściwości \"Liczba kolumn zagnieżdżonych\" macierzy nadrzędnej."
