@@ -307,6 +307,9 @@ export var czStrings = {
       templateTitleLocation: "Zarovnání názvu otázky",
       templateErrorLocation: "Zarovnání chybové zprávy",
       newPanelPosition: "Nové umístění panelu",
+      showRangeInProgress: "Zobrazení ukazatele průběhu",
+      showProgressBar: "Zobrazení ukazatele průběhu",
+      progressBarLocation: "Zarovnání indikátoru průběhu",
       keyName: "Zabraňte duplicitním odpovědím v následující otázce"
     },
     question: {
@@ -690,7 +693,6 @@ export var czStrings = {
     panelsState: "Stav rozbalení vnitřního panelu",
     panelPrevText: "Nápověda pro tlačítko \"Předchozí panel\"",
     panelNextText: "Nápověda pro tlačítko \"Další panel\"",
-    showRangeInProgress: "Zobrazit ukazatel postupu",
     panelRemoveButtonLocation: "Umístění tlačítka \"Odstranit panel\"",
     hideIfRowsEmpty: "Skrýt otázku, pokud neexistují žádné řádky",
     hideColumnsIfEmpty: "Skrýt sloupce, pokud neexistují žádné řádky",
@@ -927,10 +929,11 @@ export var czStrings = {
     firstExpanded: "firstExpanded",
     off: "vypnout",
     list: "seznam",
+    carousel: "Kolotoč",
+    tab: "Záložky",
     progressTop: "progressTop",
     progressBottom: "progressBottom",
     progressTopBottom: "progressTopBottom",
-    tab: "Záložky",
     horizontal: "horizontální",
     vertical: "vertikální",
     top: "nahoře",
@@ -1117,6 +1120,11 @@ export var czStrings = {
       topbottom: "nahoře a dole",
       aboveheader: "Nad záhlavím",
       belowheader: "Pod záhlavím"
+    },
+    progressBarLocation: {
+      top: "Vrchol",
+      bottom: "Dno",
+      topBottom: "Nahoře a dole"
     },
     sum: "Součet",
     count: "Počítat",
@@ -1348,7 +1356,8 @@ export var czStrings = {
       visibleIf: "Pomocí ikony kouzelné hůlky můžete nastavit podmíněné pravidlo, které určuje viditelnost sloupce.",
       enableIf: "Pomocí ikony kouzelné hůlky nastavte podmíněné pravidlo, které zakáže režim jen pro čtení pro sloupec.",
       requiredIf: "Pomocí ikony kouzelné hůlky nastavte podmíněné pravidlo, které zabrání odeslání průzkumu, pokud alespoň jedna vnořená otázka nemá odpověď.",
-      showInMultipleColumns: "Pokud je tato možnost vybraná, vytvoří samostatný sloupec pro každou možnost volby."
+      showInMultipleColumns: "Pokud je tato možnost vybraná, vytvoří samostatný sloupec pro každou možnost volby.",
+      colCount: "Uspořádá volby voleb ve vícesloupcovém rozvržení. Když je nastavená hodnota 0, volby se zobrazí na jednom řádku. Pokud je nastavena hodnota -1, skutečná hodnota je zděděna z vlastnosti \"Počet vnořených sloupců\" nadřazené matice."
     },
     widthMode: "Vyberte si z: \"Statické\" - nastaví pevnou šířku; \"Responzivní\" - způsobí, že průzkum bude zabírat celou šířku obrazovky; \"Auto\" – použije jednu z těchto dvou možností v závislosti na použitých typech otázek.",
     cookieName: "Cookies brání uživatelům vyplnit průzkum vícekrát.",
@@ -2327,3 +2336,11 @@ editorLocalization.locales["cs"] = czStrings;
 // inputTextAlignment.right: "Right" => "Vpravo"
 // pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Vyberte, jak chcete zarovnat vstupní hodnotu v poli. Výchozí nastavení \"Auto\" zarovná vstupní hodnotu doprava, pokud je použito maskování měny nebo čísel, a doleva, pokud ne."
 // p.inputTextAlignment: "Input value alignment" => "Zarovnání vstupní hodnoty"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "Zobrazení ukazatele průběhu"
+// paneldynamic.showProgressBar: "Show the progress bar" => "Zobrazení ukazatele průběhu"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "Zarovnání indikátoru průběhu"
+// pv.carousel: "Carousel" => "Kolotoč"
+// progressBarLocation.top: "Top" => "Vrchol"
+// progressBarLocation.bottom: "Bottom" => "Dno"
+// progressBarLocation.topBottom: "Top and bottom" => "Nahoře a dole"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Uspořádá volby voleb ve vícesloupcovém rozvržení. Když je nastavená hodnota 0, volby se zobrazí na jednom řádku. Pokud je nastavena hodnota -1, skutečná hodnota je zděděna z vlastnosti \"Počet vnořených sloupců\" nadřazené matice."

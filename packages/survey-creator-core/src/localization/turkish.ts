@@ -307,6 +307,9 @@ export var turkishStrings = {
       templateTitleLocation: "Soru başlığı hizalaması",
       templateErrorLocation: "Hata iletisi hizalaması",
       newPanelPosition: "Yeni panel konumu",
+      showRangeInProgress: "İlerleme çubuğunu gösterme",
+      showProgressBar: "İlerleme çubuğunu gösterme",
+      progressBarLocation: "İlerleme çubuğu hizalaması",
       keyName: "Aşağıdaki soruda yinelenen yanıtları önleyin"
     },
     question: {
@@ -690,7 +693,6 @@ export var turkishStrings = {
     panelsState: "İç panel genişletme durumu",
     panelPrevText: "Önceki Panel düğmesi araç ipucu",
     panelNextText: "Sonraki Panel düğmesi araç ipucu",
-    showRangeInProgress: "İlerleme çubuğunu göster",
     panelRemoveButtonLocation: "Panel düğmesinin konumunu kaldır",
     hideIfRowsEmpty: "Satır yoksa soruyu gizleme",
     hideColumnsIfEmpty: "Satır yoksa sütunları gizleme",
@@ -927,10 +929,11 @@ export var turkishStrings = {
     firstExpanded: "firstExpanded",
     off: "Kapalı",
     list: "Liste",
+    carousel: "Atlıkarınca",
+    tab: "Sekmeler",
     progressTop: "progressTop",
     progressBottom: "progressBottom",
     progressTopBottom: "progressTopBottom",
-    tab: "Sekmeler",
     horizontal: "Yatay",
     vertical: "Dikey",
     top: "Üst",
@@ -1117,6 +1120,11 @@ export var turkishStrings = {
       topbottom: "Üst ve alt",
       aboveheader: "Başlığın üstünde",
       belowheader: "Başlığın altında"
+    },
+    progressBarLocation: {
+      top: "Sayfanın Üstü",
+      bottom: "Dip",
+      topBottom: "Üst ve alt"
     },
     sum: "Toplam",
     count: "Saymak",
@@ -1348,7 +1356,8 @@ export var turkishStrings = {
       visibleIf: "Sütun görünürlüğünü belirleyen koşullu bir kural ayarlamak için sihirli değnek simgesini kullanın.",
       enableIf: "Sütunun salt okunur modunu devre dışı bırakan koşullu bir kural ayarlamak için sihirli değnek simgesini kullanın.",
       requiredIf: "En az bir iç içe geçmiş sorunun yanıtı olmadığı sürece anket gönderimini engelleyen koşullu bir kural ayarlamak için sihirli değnek simgesini kullanın.",
-      showInMultipleColumns: "Seçildiğinde, her seçim seçeneği için ayrı bir sütun oluşturur."
+      showInMultipleColumns: "Seçildiğinde, her seçim seçeneği için ayrı bir sütun oluşturur.",
+      colCount: "Seçim seçeneklerini çok sütunlu bir düzende düzenler. 0 olarak ayarlandığında, seçenekler tek bir satırda görüntülenir. -1 olarak ayarlandığında, gerçek değer üst matrisin \"İç içe sütun sayısı\" özelliğinden devralınır."
     },
     widthMode: "Şunlar arasından seçim yapın: \"Statik\" - sabit bir genişlik ayarlar; \"Duyarlı\" - anketin ekranın tüm genişliğini kaplamasını sağlar; \"Otomatik\" - kullanılan soru türlerine bağlı olarak ikisinden birini uygular.",
     cookieName: "Çerezler, kullanıcıların aynı anketi iki kez doldurmasını engeller.",
@@ -2748,3 +2757,11 @@ editorLocalization.locales["tr"] = turkishStrings;
 // inputTextAlignment.right: "Right" => "Sağ"
 // pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Alan içinde giriş değerinin nasıl hizalanacağını seçin. Varsayılan ayar olan \"Otomatik\", para birimi veya sayısal maskeleme uygulanmışsa giriş değerini sağa, uygulanmıyorsa sola hizalar."
 // p.inputTextAlignment: "Input value alignment" => "Giriş değeri hizalaması"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "İlerleme çubuğunu gösterme"
+// paneldynamic.showProgressBar: "Show the progress bar" => "İlerleme çubuğunu gösterme"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "İlerleme çubuğu hizalaması"
+// pv.carousel: "Carousel" => "Atlıkarınca"
+// progressBarLocation.top: "Top" => "Sayfanın Üstü"
+// progressBarLocation.bottom: "Bottom" => "Dip"
+// progressBarLocation.topBottom: "Top and bottom" => "Üst ve alt"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Seçim seçeneklerini çok sütunlu bir düzende düzenler. 0 olarak ayarlandığında, seçenekler tek bir satırda görüntülenir. -1 olarak ayarlandığında, gerçek değer üst matrisin \"İç içe sütun sayısı\" özelliğinden devralınır."

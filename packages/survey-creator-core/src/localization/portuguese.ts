@@ -307,6 +307,9 @@ var portugueseTranslation = {
       templateTitleLocation: "Alinhamento do título da pergunta",
       templateErrorLocation: "Alinhamento da mensagem de erro",
       newPanelPosition: "Nova localização do painel",
+      showRangeInProgress: "Mostrar a barra de progresso",
+      showProgressBar: "Mostrar a barra de progresso",
+      progressBarLocation: "Alinhamento da barra de progresso",
       keyName: "Evite respostas duplicadas na seguinte pergunta"
     },
     question: {
@@ -690,7 +693,6 @@ var portugueseTranslation = {
     panelsState: "Estado de expansão do painel interno",
     panelPrevText: "Dica de ferramenta do botão do painel anterior",
     panelNextText: "Dica de ferramenta do botão do painel seguinte",
-    showRangeInProgress: "MOstrar barra de progresso",
     panelRemoveButtonLocation: "Remover localização do botão do painel",
     hideIfRowsEmpty: "Oculte a pergunta se não houver linhas",
     hideColumnsIfEmpty: "Ocultar colunas se não houver linhas",
@@ -927,10 +929,11 @@ var portugueseTranslation = {
     firstExpanded: "primeiro expandido",
     off: "desligado",
     list: "lista",
+    carousel: "Carrossel",
+    tab: "Guias",
     progressTop: "progresso superior",
     progressBottom: "progresso inferior",
     progressTopBottom: "progresso superior inferior",
-    tab: "Guias",
     horizontal: "horizontal",
     vertical: "vertical",
     top: "superior",
@@ -1117,6 +1120,11 @@ var portugueseTranslation = {
       topbottom: "superior and bottom",
       aboveheader: "Acima do cabeçalho",
       belowheader: "Abaixo do cabeçalho"
+    },
+    progressBarLocation: {
+      top: "Início",
+      bottom: "Fundo",
+      topBottom: "Superior e inferior"
     },
     sum: "Soma",
     count: "Contar",
@@ -1348,7 +1356,8 @@ var portugueseTranslation = {
       visibleIf: "Use o ícone de varinha mágica para definir uma regra condicional que determina a visibilidade da coluna.",
       enableIf: "Use o ícone de varinha mágica para definir uma regra condicional que desabilita o modo somente leitura para a coluna.",
       requiredIf: "Use o ícone de varinha mágica para definir uma regra condicional que impeça o envio de questionários, a menos que pelo menos uma pergunta aninhada tenha uma resposta.",
-      showInMultipleColumns: "Quando selecionada, cria uma coluna individual para cada opção de escolha."
+      showInMultipleColumns: "Quando selecionada, cria uma coluna individual para cada opção de escolha.",
+      colCount: "Organiza as opções de escolha em um layout de várias colunas. Quando definido como 0, as opções são exibidas em uma única linha. Quando definido como -1, o valor real é herdado da propriedade \"Contagem de colunas aninhadas\" da matriz pai."
     },
     widthMode: "Escolha entre: \"Estático\" - define uma largura fixa; \"Responsivo\" - faz com que a pesquisa ocupe toda a largura da tela; \"Auto\" - aplica-se a qualquer um dos dois, dependendo dos tipos de pergunta usados.",
     cookieName: "Os cookies impedem que os usuários preencham a mesma pesquisa duas vezes.",
@@ -2419,3 +2428,11 @@ editorLocalization.locales["pt"] = portugueseTranslation;
 // inputTextAlignment.right: "Right" => "Certo"
 // pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Selecione como alinhar o valor de entrada dentro do campo. A configuração padrão \"Auto\" alinha o valor de entrada à direita se o mascaramento de moeda ou numérico for aplicado e à esquerda se não."
 // p.inputTextAlignment: "Input value alignment" => "Alinhamento de valor de entrada"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "Mostrar a barra de progresso"
+// paneldynamic.showProgressBar: "Show the progress bar" => "Mostrar a barra de progresso"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "Alinhamento da barra de progresso"
+// pv.carousel: "Carousel" => "Carrossel"
+// progressBarLocation.top: "Top" => "Início"
+// progressBarLocation.bottom: "Bottom" => "Fundo"
+// progressBarLocation.topBottom: "Top and bottom" => "Superior e inferior"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Organiza as opções de escolha em um layout de várias colunas. Quando definido como 0, as opções são exibidas em uma única linha. Quando definido como -1, o valor real é herdado da propriedade \"Contagem de colunas aninhadas\" da matriz pai."
