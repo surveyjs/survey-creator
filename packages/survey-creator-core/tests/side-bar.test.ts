@@ -94,3 +94,45 @@ test("showOneCategoryInPropertyGrid: tab control", () => {
   expect(tabs.map(t => t.id).join(",")).toBe("general,logo,navigation,question,pages,logic,data,validation,showOnCompleted,timer");
   expect(designerPlugin.propertyGridViewModel.survey.currentPage.name).toBe("general");
 });
+
+test("showOneCategoryInPropertyGrid: switch between tabs", () => {
+  const creator = new CreatorTester();
+  const designerPlugin = creator.getPlugin("designer") as TabDesignerPlugin;
+  designerPlugin.showOneCategoryInPropertyGrid = true;
+
+  expect(creator.sidebar.activePage).toEqual("propertyGrid");
+  expect(designerPlugin.propertyGridViewModel.objectSelectionAction.title).toEqual("Survey");
+  expect(designerPlugin.propertyGridViewModel.objectSelectionAction.tooltip).toEqual("General");
+  const tabs = designerPlugin["tabControlModel"].topToolbar.actions;
+  expect(tabs[0].active).toBe(true);
+  expect(tabs[4].active).toBe(false);
+  expect(designerPlugin.propertyGridViewModel.survey.currentPage.name).toBe("general");
+
+  tabs[4].action();
+  expect(designerPlugin.propertyGridViewModel.objectSelectionAction.title).toEqual("Survey");
+  expect(designerPlugin.propertyGridViewModel.objectSelectionAction.tooltip).toEqual("Pages");
+  expect(tabs[0].active).toBe(false);
+  expect(tabs[4].active).toBe(true);
+  expect(designerPlugin.propertyGridViewModel.survey.currentPage.name).toBe("pages");
+});
+
+test("showOneCategoryInPropertyGrid: switch tabs by search", () => {
+  const creator = new CreatorTester();
+  const designerPlugin = creator.getPlugin("designer") as TabDesignerPlugin;
+  designerPlugin.showOneCategoryInPropertyGrid = true;
+
+  expect(creator.sidebar.activePage).toEqual("propertyGrid");
+  expect(designerPlugin.propertyGridViewModel.objectSelectionAction.title).toEqual("Survey");
+  expect(designerPlugin.propertyGridViewModel.objectSelectionAction.tooltip).toEqual("General");
+  const tabs = designerPlugin["tabControlModel"].topToolbar.actions;
+  expect(tabs[0].active).toBe(true);
+  expect(tabs[4].active).toBe(false);
+  expect(designerPlugin.propertyGridViewModel.survey.currentPage.name).toBe("general");
+
+  designerPlugin.propertyGridViewModel.searchManager.filterString = "pages";
+  expect(designerPlugin.propertyGridViewModel.objectSelectionAction.title).toEqual("Survey");
+  expect(designerPlugin.propertyGridViewModel.objectSelectionAction.tooltip).toEqual("Pages");
+  expect(tabs[0].active).toBe(false);
+  expect(tabs[4].active).toBe(true);
+  expect(designerPlugin.propertyGridViewModel.survey.currentPage.name).toBe("pages");
+});
