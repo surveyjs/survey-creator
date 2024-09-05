@@ -14,7 +14,7 @@ import { updateCustomQuestionJSONs } from "./theme-custom-questions";
 
 export * from "./header-model";
 
-Object.keys(LibraryThemes).forEach(libraryThemeName => {
+Object.keys(LibraryThemes || {}).forEach(libraryThemeName => {
   const libraryTheme: ITheme = LibraryThemes[libraryThemeName];
   const creatorThemeVariables = {};
   const creatorTheme = {};
@@ -89,7 +89,7 @@ export function getThemeChanges(fullTheme: ITheme, baseTheme?: ITheme) {
 }
 
 export class ThemeModel extends Base implements ITheme {
-  public static DefaultTheme = Themes["default-light"];
+  public static DefaultTheme = Themes["default-light"] || {};
   public undoRedoManager: UndoRedoManager;
   private themeCssVariablesChanges: { [index: string]: string } = {};
   private colorCalculator = new ColorCalculator();

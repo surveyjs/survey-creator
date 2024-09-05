@@ -12,7 +12,7 @@ module.exports = {
     "\\.(css|scss)$": "<rootDir>/tests/empty-module.js",
     "\\.(jpg|png)$": "<rootDir>/tests/empty-module.js",
     "^react(.*)$": "<rootDir>/node_modules/react$1",
-    "survey-core": "<rootDir>/node_modules/survey-core",
+    "^survey-core(.*)$": "<rootDir>/node_modules/survey-core$1",
     "survey-creator-core": "<rootDir>/node_modules/survey-creator-core",
     "survey-react-ui": "<rootDir>/node_modules/survey-react-ui",
     "tslib": "<rootDir>/node_modules/tslib",
