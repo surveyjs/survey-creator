@@ -4,7 +4,7 @@
     ref="root"
   >
     <div @focusout="(e) => toolbox.focusOut(e)" class="svc-toolbox__panel">
-      <div class="svc-toolbox__scroller" @scroll="(e) => { toolbox.onScroll(toolbox, e); }">
+      <div class="svc-toolbox__scroller sv-drag-target-skipped" @scroll="(e) => { toolbox.onScroll(toolbox, e); }">
         <div v-if="toolbox.showSearch" class="svc-toolbox__search-container">
           <template v-if="toolbox.isCompactRendered">
             <svc-toolbox-tool
