@@ -91,7 +91,7 @@ export class SearchManagerPropertyGrid extends SearchManager {
       (<any>element).survey.currentPage = (<any>element).page;
     }
     if (element.isCollapsed) {
-      element.expand();
+      (element as any).expand(false);
     }
     this.expandAllParents((<any>element).parent);
     this.expandAllParents((<any>element).parentQuestion);

@@ -1,13 +1,7 @@
 <template>
   <template v-if="!model.isCreatorDisposed">
     <survey-popup-modal></survey-popup-modal>
-    <div
-      class="svc-creator"
-      :class="{
-        'svc-creator--mobile': model.isMobileView,
-      }"
-      ref="root"
-    >
+    <div :class="model.getRootCss()" ref="root">
       <div>
         <sv-svg-bundle></sv-svg-bundle>
       </div>

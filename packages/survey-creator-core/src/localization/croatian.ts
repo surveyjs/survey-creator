@@ -307,6 +307,9 @@ export var hrStrings = {
       templateTitleLocation: "Poravnanje naslova pitanja",
       templateErrorLocation: "Poravnanje poruke o pogrešci",
       newPanelPosition: "Novo mjesto ploče",
+      showRangeInProgress: "Prikaz trake napretka",
+      showProgressBar: "Prikaz trake napretka",
+      progressBarLocation: "Poravnanje trake napretka",
       keyName: "Spriječite dvostruke odgovore u sljedećem pitanju"
     },
     question: {
@@ -690,7 +693,6 @@ export var hrStrings = {
     panelsState: "Stanje proširenja unutarnje ploče",
     panelPrevText: "Opis alata gumba Prethodna ploča",
     panelNextText: "Opis alata gumba Sljedeća ploča",
-    showRangeInProgress: "Pokaži traku tijeka",
     panelRemoveButtonLocation: "Ukloni mjesto gumba ploče",
     hideIfRowsEmpty: "Sakrij pitanje ako nema redaka",
     hideColumnsIfEmpty: "Sakrij stupce ako nema redaka",
@@ -927,10 +929,11 @@ export var hrStrings = {
     firstExpanded: "firstExpanded",
     off: "isključeno",
     list: "popis",
+    carousel: "Vrtuljak",
+    tab: "Tabulatori",
     progressTop: "progressTop",
     progressBottom: "progressBottom",
     progressTopBottom: "progressTopBottom",
-    tab: "Tabulatori",
     horizontal: "horizontal",
     vertical: "vertical",
     top: "top",
@@ -1117,6 +1120,11 @@ export var hrStrings = {
       topbottom: "top and bottom",
       aboveheader: "Iznad zaglavlja",
       belowheader: "Ispod zaglavlja"
+    },
+    progressBarLocation: {
+      top: "Vrh",
+      bottom: "Dno",
+      topBottom: "Vrh i dno"
     },
     sum: "Suma",
     count: "Brojati",
@@ -1348,7 +1356,8 @@ export var hrStrings = {
       visibleIf: "Pomoću ikone čarobnog štapića postavite uvjetno pravilo koje određuje vidljivost stupca.",
       enableIf: "Pomoću ikone čarobnog štapića postavite uvjetno pravilo koje onemogućuje način samo za čitanje stupca.",
       requiredIf: "Pomoću ikone čarobnog štapića postavite uvjetno pravilo koje sprječava slanje upitnika, osim ako barem jedno ugniježđeno pitanje nema odgovor.",
-      showInMultipleColumns: "Kada je odabrano, stvara pojedinačni stupac za svaku mogućnost izbora."
+      showInMultipleColumns: "Kada je odabrano, stvara pojedinačni stupac za svaku mogućnost izbora.",
+      colCount: "Raspoređuje opcije izbora u rasporedu s više stupaca. Kada je postavljena na 0, opcije se prikazuju u jednom retku. Kada je postavljena na -1, stvarna vrijednost nasljeđuje se iz svojstva \"Broj ugniježđenih stupaca\" nadređene matrice."
     },
     widthMode: "Odaberite između: \"Statika\" - postavlja fiksnu širinu; \"Responsive\" - čini da anketa zauzima punu širinu zaslona; \"Auto\" - primjenjuje se bilo koji od dva ovisno o korištenim vrstama pitanja.",
     cookieName: "Kolačići sprječavaju korisnike da dvaput ispune istu anketu.",
@@ -2747,3 +2756,11 @@ editorLocalization.locales["hr"] = hrStrings;
 // inputTextAlignment.right: "Right" => "Desno"
 // pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Odaberite način poravnanja ulazne vrijednosti unutar polja. Zadana postavka \"Automatski\" poravnava ulaznu vrijednost udesno ako se primjenjuje valutno ili numeričko maskiranje i ulijevo ako nije."
 // p.inputTextAlignment: "Input value alignment" => "Usklađivanje ulaznih vrijednosti"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "Prikaz trake napretka"
+// paneldynamic.showProgressBar: "Show the progress bar" => "Prikaz trake napretka"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "Poravnanje trake napretka"
+// pv.carousel: "Carousel" => "Vrtuljak"
+// progressBarLocation.top: "Top" => "Vrh"
+// progressBarLocation.bottom: "Bottom" => "Dno"
+// progressBarLocation.topBottom: "Top and bottom" => "Vrh i dno"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Raspoređuje opcije izbora u rasporedu s više stupaca. Kada je postavljena na 0, opcije se prikazuju u jednom retku. Kada je postavljena na -1, stvarna vrijednost nasljeđuje se iz svojstva \"Broj ugniježđenih stupaca\" nadređene matrice."

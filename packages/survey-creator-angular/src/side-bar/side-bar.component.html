@@ -2,7 +2,7 @@
   <div class="svc-side-bar" [class.svc-flyout-side-bar]="model.flyoutPanelMode" [visible]="model.hasVisiblePages">
     <div class="svc-side-bar__shadow" (click)="model.collapseSidebar()"></div>
     <div class="svc-flex-row svc-side-bar__wrapper">
-      <div class="svc-side-bar__container" [visible]="model.visible" #container>
+      <div class="svc-side-bar__container" [visible]="model.renderedIsVisible" #container>
         <div class="svc-side-bar__container-header">
           <div class="svc-side-bar__container-actions">
             <sv-action-bar [model]="model.toolbar"></sv-action-bar>

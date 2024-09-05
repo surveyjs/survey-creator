@@ -307,6 +307,9 @@ var simplifiedChineseTranslation = {
       templateTitleLocation: "问题标题对齐方式",
       templateErrorLocation: "错误消息对齐",
       newPanelPosition: "新面板位置",
+      showRangeInProgress: "显示进度条",
+      showProgressBar: "显示进度条",
+      progressBarLocation: "进度条对齐",
       keyName: "防止在以下问题中重复回答"
     },
     question: {
@@ -690,7 +693,6 @@ var simplifiedChineseTranslation = {
     panelsState: "内面板展开状态",
     panelPrevText: "“上一个面板”按钮工具提示",
     panelNextText: "“下一个面板”按钮工具提示",
-    showRangeInProgress: "显示进度条",
     panelRemoveButtonLocation: "“删除面板”按钮位置",
     hideIfRowsEmpty: "如果没有行，则隐藏问题",
     hideColumnsIfEmpty: "如果没有行，则隐藏列",
@@ -927,10 +929,11 @@ var simplifiedChineseTranslation = {
     firstExpanded: "firstExpanded",
     off: "关闭",
     list: "列表",
+    carousel: "旋转 木马",
+    tab: "制表符",
     progressTop: "progressTop",
     progressBottom: "progressBottom",
     progressTopBottom: "progressTopBottom",
-    tab: "制表符",
     horizontal: "水平",
     vertical: "垂直",
     top: "顶",
@@ -1117,6 +1120,11 @@ var simplifiedChineseTranslation = {
       topbottom: "顶和底",
       aboveheader: "标题上方",
       belowheader: "在标题下方"
+    },
+    progressBarLocation: {
+      top: "返回页首",
+      bottom: "底",
+      topBottom: "顶部和底部"
     },
     sum: "和",
     count: "计数",
@@ -1348,7 +1356,8 @@ var simplifiedChineseTranslation = {
       visibleIf: "使用魔杖图标设置确定列可见性的条件规则。",
       enableIf: "使用魔杖图标设置禁用列只读模式的条件规则。",
       requiredIf: "使用魔杖图标设置条件规则，除非至少有一个嵌套问题有答案，否则该规则将阻止调查提交。",
-      showInMultipleColumns: "选中后，为每个选项创建一个单独的列。"
+      showInMultipleColumns: "选中后，为每个选项创建一个单独的列。",
+      colCount: "在多列布局中排列选项。设置为 0 时，选项将以单行显示。当设置为 -1 时，实际值继承自父矩阵的 “Nested column count” 属性。"
     },
     widthMode: "从以下选项中选择： “静态” - 设置固定宽度;“响应式” - 使调查占据屏幕的整个宽度;“自动” - 根据所使用的问题类型应用两者中的任何一个。",
     cookieName: "Cookie 可防止用户两次填写同一调查问卷。",
@@ -2895,3 +2904,11 @@ editorLocalization.locales["zh-cn"] = simplifiedChineseTranslation;
 // inputTextAlignment.right: "Right" => "右"
 // pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "选择如何在字段中对齐输入值。默认设置 “Auto” 如果应用了货币或数字掩码，则将输入值向右对齐，如果未应用，则向左对齐。"
 // p.inputTextAlignment: "Input value alignment" => "输入值对齐"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "显示进度条"
+// paneldynamic.showProgressBar: "Show the progress bar" => "显示进度条"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "进度条对齐"
+// pv.carousel: "Carousel" => "旋转 木马"
+// progressBarLocation.top: "Top" => "返回页首"
+// progressBarLocation.bottom: "Bottom" => "底"
+// progressBarLocation.topBottom: "Top and bottom" => "顶部和底部"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "在多列布局中排列选项。设置为 0 时，选项将以单行显示。当设置为 -1 时，实际值继承自父矩阵的 “Nested column count” 属性。"
