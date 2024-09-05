@@ -63,6 +63,7 @@
   outline: none;
   height: calcSize(2);
   box-sizing: content-box;
+  transition: background $creator-transition-duration, background-color $creator-transition-duration;
 
   .sv-svg-icon {
     display: block;
@@ -75,12 +76,13 @@
 
 .svc-item-value-controls__drag-icon {
   display: block;
+  transition: opacity $creator-transition-duration;
 }
 
 .svc-item-value-wrapper:hover:not(.svc-item-value--ghost),
 .svc-item-value-controls__drag:hover:not(.svc-item-value--ghost) {
   .svc-item-value-controls__drag-icon {
-    visibility: visible;
+    opacity: 1;
   }
 }
 
@@ -90,7 +92,7 @@
   opacity: 0.25;
 
   .svc-item-value-controls__drag-icon {
-    visibility: hidden;
+    opacity: 0;
   }
 
   use {
@@ -266,7 +268,7 @@
     }
 
     .svc-item-value-controls__drag-icon {
-      visibility: visible;
+      opacity: 1;
     }
 
     .svc-item-value-wrapper {
@@ -280,7 +282,7 @@
   .sd-selectbase,
   .svc-question__dropdown-choices {
     .svc-item-value-controls__drag-icon {
-      visibility: visible;
+      opacity: 1;
     }
 
     .svc-item-value-wrapper {

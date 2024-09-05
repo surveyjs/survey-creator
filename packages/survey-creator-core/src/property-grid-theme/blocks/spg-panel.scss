@@ -19,6 +19,7 @@
   font-size: calcSize(2);
   font-weight: 400;
   margin: 0;
+  transition: color $creator-transition-duration, background-color $creator-transition-duration, opacity $creator-transition-duration;
 }
 
 .spg-panel__title:disabled,

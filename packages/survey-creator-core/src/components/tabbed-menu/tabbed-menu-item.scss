@@ -6,6 +6,7 @@
   line-height: calcSize(4);
   box-sizing: border-box;
   cursor: pointer;
+  transition: box-shadow $creator-transition-duration, background-color $creator-transition-duration;
 
   &:hover,
   &:focus {

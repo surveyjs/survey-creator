@@ -458,26 +458,26 @@ test("check button hover/focus state", async (t) => {
   await t
     .click(getTabbedMenuItemByText(creatorTabLogicName))
     .expect(tableRulesSelector.count).eql(2)
-    .expect(removeButtonIcon.visible).notOk()
-    .expect(detailButtonIcon.visible).notOk()
+    .expect(removeButtonIcon.getStyleProperty("opacity")).eql("0")
+    .expect(detailButtonIcon.getStyleProperty("opacity")).eql("0")
 
     .hover(tableRulesSelector.nth(0))
     .hover(removeButtonIcon.nth(0))
     .expect(removeButtonIcon.nth(0).visible).ok()
-    .expect(removeButtonIcon.nth(1).visible).notOk()
+    .expect(removeButtonIcon.nth(1).getStyleProperty("opacity")).eql("0")
     .click(detailButtonIcon)
     .click(detailButtonIcon)
 
     .hover(tableRulesSelector.nth(1))
     .hover(removeButtonIcon.nth(1))
-    .expect(removeButtonIcon.nth(0).visible).notOk()
+    .expect(removeButtonIcon.nth(0).getStyleProperty("opacity")).eql("0")
     .expect(removeButtonIcon.nth(1).visible).ok()
 
     .click(detailButtonIcon.nth(1))
     .click(detailButtonIcon.nth(1))
     .pressKey("tab tab")
     .hover(logicAddNewRuleButton)
-    .expect(detailButtonIcon.nth(1).visible).notOk()
+    .expect(detailButtonIcon.nth(1).getStyleProperty("opacity")).eql("0")
     .expect(detailButton.nth(1).classNames).notContains(focusedClassName)
     .expect(removeButtonIcon.nth(1).visible).ok()
     .expect(removeButton.nth(1).classNames).contains(focusedClassName)
@@ -486,7 +486,7 @@ test("check button hover/focus state", async (t) => {
     .pressKey("shift+tab")
     .expect(detailButtonIcon.nth(1).visible).ok()
     .expect(detailButton.nth(1).classNames).contains(focusedClassName)
-    .expect(removeButtonIcon.nth(1).visible).notOk()
+    .expect(removeButtonIcon.nth(1).getStyleProperty("opacity")).eql("0")
     .expect(removeButton.nth(1).classNames).notContains(focusedClassName);
 });
 

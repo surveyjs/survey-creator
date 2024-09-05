@@ -47,6 +47,7 @@
   align-items: center;
   margin-right: calcSize(-2);
   border-radius: calcSize(4);
+  transition: background-color $creator-transition-duration, opacity $creator-transition-duration;
 
   &:hover {
     background-color: var(--ctr-survey-header-logo-placeholder-background-color-hovered, $primary-light);
@@ -64,6 +65,7 @@
 }
 
 .svc-logo-image-placeholder use {
+  transition: fill $creator-transition-duration;
   fill: var(--ctr-survey-header-logo-placeholder-icon-color, $foreground-light);
 }
 

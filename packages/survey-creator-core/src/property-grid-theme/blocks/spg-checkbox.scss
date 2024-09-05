@@ -31,6 +31,8 @@
   flex-shrink: 0;
   // padding: calcSize(0.5);
   padding: 1px 1px;
+  outline: 2px solid transparent;
+  transition: background $creator-transition-duration, background-color $creator-transition-duration, outline $creator-transition-duration;
 }
 
 .spg-checkbox:hover {
@@ -45,21 +47,25 @@
   }
 }
 
+.spg-checkbox:active .spg-checkbox__rectangle,
 .spg-checkbox__control:focus+.spg-checkbox__rectangle {
   outline: 2px solid var(--ctr-checkbox-border-color-focused, $primary);
   outline-offset: -2px;
 }
 
 .spg-checkbox .spg-checkbox__svg {
-  display: none;
-}
-
-.spg-checkbox--checked .spg-checkbox__svg {
   display: block;
+  opacity: 0;
+  fill: transparent;
   width: calcSize(2.5);
   height: calcSize(2.5);
   background-repeat: no-repeat;
   background-size: calcSize(2) calcSize(2);
+  transition: opacity $creator-transition-duration, fill $creator-transition-duration;
+}
+
+.spg-checkbox--checked .spg-checkbox__svg {
+  opacity: 1;
   fill: var(--ctr-checkbox-button-check-mark-color, $primary);
 }
 

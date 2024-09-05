@@ -163,6 +163,10 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
     padding: 0;
   }
 
+  .sv-action-bar-item {
+    transition: background-color $creator-transition-duration;
+  }
+
   .sv-action-bar-item:not(.sv-action-bar-item--pressed):enabled {
     &:focus {
       background: var(--ctr-menu-toolbar-button-background-color-pressed, $background-dim);
