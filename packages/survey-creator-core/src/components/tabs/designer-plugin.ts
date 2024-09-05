@@ -115,7 +115,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     });
 
     creator.onSelectedElementChanged.add((sender, options) => {
-      if (this.creator.activeTab === "designer") {
+      if (this.showOneCategoryInPropertyGrid && this.creator.activeTab === "designer") {
         this.setPropertyGridIsActivePage();
         this.updateTabControlActions();
       }

@@ -1,3 +1,4 @@
+import { settings as creatorSetting } from "../src/creator-settings";
 import { SidebarModel } from "../src/components/side-bar/side-bar-model";
 import { TabDesignerPlugin } from "../src/components/tabs/designer-plugin";
 import { CreatorTester } from "./creator-tester";
@@ -49,6 +50,8 @@ test("Sidebar: hasVisiblePages test", () => {
 });
 
 test("showOneCategoryInPropertyGrid: showPlaceholder into property grid if survey is empty", () => {
+  const savedNewJSON = creatorSetting.defaultNewSurveyJSON;
+  creatorSetting.defaultNewSurveyJSON = {};
   const creator = new CreatorTester(undefined, undefined, false);
   const designerPlugin = creator.getPlugin("designer") as TabDesignerPlugin;
   designerPlugin.showOneCategoryInPropertyGrid = true;
@@ -72,6 +75,8 @@ test("showOneCategoryInPropertyGrid: showPlaceholder into property grid if surve
   expect(tabs.length).toBe(6);
   expect(tabs.map(t => t.id).join(",")).toBe("general,layout,logic,mask,data,validation");
   expect(designerPlugin.propertyGridViewModel.survey.currentPage.name).toBe("general");
+
+  creatorSetting.defaultNewSurveyJSON = savedNewJSON;
 });
 
 test("showOneCategoryInPropertyGrid: tab control", () => {
