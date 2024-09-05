@@ -82,7 +82,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
   public set showOneCategoryInPropertyGrid(newValue) {
     if (this._showOneCategoryInPropertyGrid !== newValue) {
       this._showOneCategoryInPropertyGrid = newValue;
-      this.creator.sidebar.showOneCategoryInPropertyGrid = newValue;
+      this.creator.sidebar.hideSideBarVisibilityControlActions = newValue;
       this.propertyGridModel.showOneCategoryInPropertyGrid = newValue;
       this.propertyGridModel["setObj"](this.creator.selectedElement);
       if (this.creator.activeTab === "designer") {
@@ -188,7 +188,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
 
   public activate(): void {
     this.model = new TabDesignerViewModel(this.creator);
-    this.creator.sidebar.showOneCategoryInPropertyGrid = this.showOneCategoryInPropertyGrid;
+    this.creator.sidebar.hideSideBarVisibilityControlActions = this.showOneCategoryInPropertyGrid;
     this.updateActivePage();
     this.updateTabControl();
     this.creator.focusElement(undefined, true);
@@ -202,7 +202,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     this.propertyGridTab.visible = false;
     this.propertyGridPlaceholderPage.visible = false;
     this.toolboxTab.visible = false;
-    this.creator.sidebar.showOneCategoryInPropertyGrid = false;
+    this.creator.sidebar.hideSideBarVisibilityControlActions = false;
     this.creator.sidebar.sideAreaComponentName = undefined;
     this.creator.sidebar.sideAreaComponentData = undefined;
     this.creator.sidebar.headerComponentName = undefined;

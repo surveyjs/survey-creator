@@ -39,7 +39,7 @@ export class SidebarComponent extends SurveyElementBase<ISidebarComponentProps, 
   renderDefaultHeader(): JSX.Element {
     const activePage = this.model.getActivePage();
     const headerText = !!activePage.caption ? <div className="svc-side-bar__container-title">{activePage.caption}</div> : null;
-    const containerClass = "svc-side-bar__container-header" + (activePage.showToolbar ? "" : " Container_22233_64491");
+    const containerClass = "svc-side-bar__container-header" + (activePage.showToolbar ? "" : " svc-sidebar__header-container");
     return (
       <div className={containerClass}>
         {
@@ -126,19 +126,19 @@ class SideBarPropertyGridHeader extends SurveyElementBase<ISideBarPropertyGridHe
 
   renderElement(): JSX.Element {
     const buttonClassName = new CssClassBuilder()
-      .append("Button_22233_58736")
-      .append("svc-property-grid-button-with-subtitle")
-      .append("svc-menu-button--pressed", this.objectSelectionAction.pressed)
+      .append("svc-sidebar__header-button")
+      .append("svc-sidebar__header-button--with-subtitle")
+      .append("svc-sidebar__header-button--pressed", this.objectSelectionAction.pressed)
       .toString();
 
     return (
-      <div className="Header_21220_2028692">
-        <div className="Container_22233_64491 svc-property-grid-container-with-subtitle">
-          <div className="TitleMenuButton_22233_64492" onClick={() => this.objectSelectionAction.action()}>
+      <div className="svc-sidebar__header svc-sidebar__header--tabbed">
+        <div className="svc-sidebar__header-container svc-sidebar__header-container--with-subtitle">
+          <div className="svc-sidebar__header-content" onClick={() => this.objectSelectionAction.action()}>
             <div className={buttonClassName}>
-              <div className="Caption_22233_58737">
-                <span className="Text_1_22233_58738">{this.objectSelectionAction.title}</span>
-                <span className="Text_2_22233_58740">{this.objectSelectionAction.tooltip}</span>
+              <div className="svc-sidebar__header-caption">
+                <span className="svc-sidebar__header-title">{this.objectSelectionAction.title}</span>
+                <span className="svc-sidebar__header-subtitle">{this.objectSelectionAction.tooltip}</span>
               </div>
             </div>
             <Popup model={this.objectSelectionAction.popupModel} getTarget={getActionDropdownButtonTarget}></Popup>

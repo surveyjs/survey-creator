@@ -68,7 +68,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   public set showOneCategoryInPropertyGrid(newValue) {
     if (this._showOneCategoryInPropertyGrid !== newValue) {
       this._showOneCategoryInPropertyGrid = newValue;
-      this.creator.sidebar.showOneCategoryInPropertyGrid = newValue;
+      this.creator.sidebar.hideSideBarVisibilityControlActions = newValue;
       this.propertyGrid.showOneCategoryInPropertyGrid = newValue;
       this.propertyGridTab.showToolbar = !newValue;
       this.propertyGrid["setObj"](this.creator.selectedElement);
@@ -268,7 +268,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   public activate(): void {
     this.model = new ThemeTabViewModel(this.creator, this.simulatorCssClasses);
     this.themeModel.initialize(this.creator.theme, this.creator.survey);
-    this.creator.sidebar.showOneCategoryInPropertyGrid = this.showOneCategoryInPropertyGrid;
+    this.creator.sidebar.hideSideBarVisibilityControlActions = this.showOneCategoryInPropertyGrid;
     this.update();
     this.propertyGrid.survey.onOpenFileChooser.clear();
     this.propertyGrid.obj = this.themeModel;
@@ -428,7 +428,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       this.model.onSurveyCreatedCallback = undefined;
       this.model.dispose();
       this.model = undefined;
-      this.creator.sidebar.showOneCategoryInPropertyGrid = false;
+      this.creator.sidebar.hideSideBarVisibilityControlActions = false;
     }
     this.creator.sidebar.sideAreaComponentName = undefined;
     this.creator.sidebar.sideAreaComponentData = undefined;

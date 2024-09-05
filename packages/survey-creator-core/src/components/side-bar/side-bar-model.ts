@@ -27,7 +27,7 @@ export class SidebarModel extends Base {
       target.setActivePage(target.pages.filter(page => page.id === val)[0]);
     }
   }) activePage: string;
-  @property() showOneCategoryInPropertyGrid: boolean;
+  @property() hideSideBarVisibilityControlActions: boolean;
 
   sideAreaComponentName: string;
   sideAreaComponentData: any;
@@ -104,7 +104,7 @@ export class SidebarModel extends Base {
       visible: <any>new ComputedUpdater<boolean>(() => {
         return notShortCircuitAnd(
           !notShortCircuitAnd(!this.creator.allowCollapseSidebar, !this.flyoutMode),
-          this.visible, !this.showOneCategoryInPropertyGrid);
+          this.visible, !this.hideSideBarVisibilityControlActions);
       }),
       action: () => {
         this.collapseSidebar();
@@ -133,7 +133,7 @@ export class SidebarModel extends Base {
         },
         locTitleName: "ed.showPanel",
         visible: <any>new ComputedUpdater<boolean>(() => {
-          return notShortCircuitAnd(this.hasVisiblePages, !this.visible, !this.showOneCategoryInPropertyGrid);
+          return notShortCircuitAnd(this.hasVisiblePages, !this.visible, !this.hideSideBarVisibilityControlActions);
         }),
         showTitle: false
       });

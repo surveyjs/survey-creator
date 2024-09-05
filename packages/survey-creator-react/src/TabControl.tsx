@@ -21,22 +21,22 @@ class TabControl extends SurveyElementBase<any, any> {
     return super.canRender();
   }
   renderElement() {
-    const className = "Tabs_22400_60650" + (this.props.model.sidePanel.visible ? "" : " svc-sidebar-tabs-collapsed");
+    const className = "svc-sidebar-tabs" + (this.props.model.sidePanel.visible ? "" : " svc-sidebar-tabs--collapsed");
     return (
       <div className={className}>
-        <div className="TopToolbar_22400_60651">
-          <div className="CollapseButton_22400_60652">
+        <div className="svc-sidebar-tabs__top-container">
+          <div className="svc-sidebar-tabs__collapse-button">
             <TabButtonComponent model={this.props.model.expandCollapseAction} ></TabButtonComponent>
           </div>
-          <div className="Separator_22400_60653">
-            <div className="Line_21220_2204727"></div>
+          <div className="svc-sidebar-tabs__separator">
+            <div></div>
           </div>
-          <div className="Items_22400_60654">
+          <div className="svc-sidebar-tabs__items">
             <TabsComponent model={this.props.model.topToolbar}></TabsComponent>
           </div>
         </div>
-        <div className="BottomToolbar_22400_60665">
-          <div className="Items_22400_60666">
+        <div className="svc-sidebar-tabs__bottom-container">
+          <div className="svc-sidebar-tabs__items">
             <TabsComponent model={this.props.model.bottomToolbar}></TabsComponent>
           </div>
         </div>
@@ -77,18 +77,18 @@ class TabButtonComponent extends SurveyElementBase<{ model: Action }, any> {
 
   protected renderElement(): JSX.Element | null {
     const className = new CssClassBuilder()
-      .append("menu-toolbar-button")
-      .append("menu-toolbar-button--selected", !!this.props.model.active)
+      .append("svc-menu-action__button")
+      .append("svc-menu-action__button--selected", !!this.props.model.active)
       .toString();
     return (
-      <div className="Layout_22408_73611">
+      <div className="svc-menu-action">
         <div
           className={className}
           title={this.props.model.tooltip}
           onClick={() => { this.props.model.action(); }}
         >
-          <div className="menu-toolbar-button-icon">
-            <div className="Layout_24x24_21220_2484322">
+          <div className="svc-menu-action__icon">
+            <div className="svc-menu-action__icon-container">
               <SvgIcon iconName={this.props.model.iconName} size={24}></SvgIcon>
             </div>
           </div>
