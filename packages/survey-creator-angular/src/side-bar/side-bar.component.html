@@ -3,18 +3,28 @@
     <div class="svc-side-bar__shadow" (click)="model.collapseSidebar()"></div>
     <div class="svc-flex-row svc-side-bar__wrapper">
       <div class="svc-side-bar__container" [visible]="model.renderedIsVisible" #container>
-        <div class="svc-side-bar__container-header">
-          <div class="svc-side-bar__container-actions">
-            <sv-action-bar [model]="model.toolbar"></sv-action-bar>
+        <ng-container *ngIf="model.headerComponentName">
+          <ng-template
+            [component]="{ name: model.headerComponentName, data: { model: model.headerComponentData } }"></ng-template>
+        </ng-container>
+        <ng-container *ngIf="!model.headerComponentName">
+          <div class="svc-side-bar__container-header">
+            <div class="svc-side-bar__container-actions">
+              <sv-action-bar [model]="model.toolbar"></sv-action-bar>
+            </div>
+            <div *ngIf="!!model.headerText" class="svc-side-bar__container-title">{{model.headerText}}</div>
           </div>
-          <div *ngIf="!!model.headerText" class="svc-side-bar__container-title">{{model.headerText}}</div>
-        </div>
+        </ng-container>
         <div class="svc-side-bar__container-content">
           <ng-container *ngFor="let page of model.pages">
             <svc-side-bar-page [model]="page"></svc-side-bar-page>
           </ng-container>
         </div>
       </div>
+      <ng-container *ngIf="model.sideAreaComponentName">
+        <ng-template
+          [component]="{ name: model.sideAreaComponentName, data: { model: model.sideAreaComponentData } }"></ng-template>
+      </ng-container>
     </div>
   </div>
 </ng-template>
