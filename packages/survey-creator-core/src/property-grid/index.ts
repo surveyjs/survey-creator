@@ -447,6 +447,13 @@ export class PropertyGridTitleActionsCreator {
         action.iconName = this.getHelpActionIconName(question);
       }
     });
+    const baseOnMouseDown = action.doMouseDown;
+    action.doMouseDown = (args: any) => {
+      baseOnMouseDown.call(action);
+      const evt = !!args.originalEvent ? args.originalEvent : args;
+      evt.preventDefault();
+      evt.stopPropagation();
+    };
     return action;
   }
   private getHelpActionIconName(question: Question): string {
@@ -822,7 +829,9 @@ export class PropertyGridModel {
     for (var i = 0; i < panels.length; i++) {
       var panel = <PanelModel>panels[i];
       if (panel === question.parent) {
+        panel.blockAnimations();
         panel.expand();
+        panel.releaseAnimations();
       } else {
         panel.collapse();
       }
@@ -1363,7 +1372,7 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
           this.onModalPropertyEditorClosed(editor, property, question, options, "cancel");
           onClose && onClose("cancel");
         },
-        cssClass: "sv-property-editor",
+        cssClass: "sv-property-editor svc-creator-popup",
         title: question.title,
         displayMode: options.isMobileView ? "overlay" : "popup"
       }, options.rootElement);

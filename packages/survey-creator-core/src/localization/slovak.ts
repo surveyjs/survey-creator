@@ -307,6 +307,9 @@ export var skStrings = {
       templateTitleLocation: "Zarovnanie názvu otázky",
       templateErrorLocation: "Zarovnanie chybových hlásení",
       newPanelPosition: "Nové umiestnenie panela",
+      showRangeInProgress: "Zobrazenie indikátora priebehu",
+      showProgressBar: "Zobrazenie indikátora priebehu",
+      progressBarLocation: "Zarovnanie indikátora priebehu",
       keyName: "Zabránenie duplicitným odpovediam v nasledujúcej otázke"
     },
     question: {
@@ -690,7 +693,6 @@ export var skStrings = {
     panelsState: "Stav rozbalenia vnútorného panela",
     panelPrevText: "Popis tlačidla Predchádzajúci panel",
     panelNextText: "Popis tlačidla Nasledujúci panel",
-    showRangeInProgress: "Zobraziť indikátor priebehu",
     panelRemoveButtonLocation: "Odstrániť umiestnenie tlačidla panela",
     hideIfRowsEmpty: "Skryť otázku, ak nie sú žiadne riadky",
     hideColumnsIfEmpty: "Skryť stĺpce, ak nie sú k dispozícii žiadne riadky",
@@ -927,10 +929,11 @@ export var skStrings = {
     firstExpanded: "prvý rozbalený",
     off: "vyp.",
     list: "zoznam",
+    carousel: "Kolotoč",
+    tab: "Karty",
     progressTop: "horná časť priebehu",
     progressBottom: "spodná časť priebehu",
     progressTopBottom: "priebeh –​ horná a spodná časť",
-    tab: "Karty",
     horizontal: "vodorovné",
     vertical: "zvislé",
     top: "hore",
@@ -1117,6 +1120,11 @@ export var skStrings = {
       topbottom: "hore a dolu",
       aboveheader: "Nad hlavičkou",
       belowheader: "Pod hlavičkou"
+    },
+    progressBarLocation: {
+      top: "Vrchol",
+      bottom: "Dno",
+      topBottom: "Hore a dole"
     },
     sum: "Súčet",
     count: "Počítať",
@@ -1348,7 +1356,8 @@ export var skStrings = {
       visibleIf: "Pomocou ikony čarovného prútika nastavte podmienené pravidlo, ktoré určuje viditeľnosť stĺpca.",
       enableIf: "Pomocou ikony čarovnej paličky nastavte podmienené pravidlo, ktoré vypne režim iba na čítanie pre stĺpec.",
       requiredIf: "Pomocou ikony čarovného prútika nastavte podmienené pravidlo, ktoré zabráni odoslaniu prieskumu, pokiaľ aspoň jedna vnorená otázka nemá odpoveď.",
-      showInMultipleColumns: "Ak je táto voľba vybratá, vytvorí samostatný stĺpec pre každú možnosť výberu."
+      showInMultipleColumns: "Ak je táto voľba vybratá, vytvorí samostatný stĺpec pre každú možnosť výberu.",
+      colCount: "Usporiada možnosti výberu vo viacstĺpcovom rozložení. Ak je nastavená hodnota 0, možnosti sa zobrazia v jednom riadku. Ak je nastavená na -1, skutočná hodnota sa zdedí z vlastnosti \"Počet vnorených stĺpcov\" nadradenej matice."
     },
     widthMode: "Vyberte si z: \"Statický\" - nastavuje pevnú šírku; \"Responzívny\" - spôsobuje, že prieskum zaberá celú šírku obrazovky; \"Auto\" - použije ktorýkoľvek z týchto dvoch v závislosti od použitých typov otázok.",
     cookieName: "Súbory cookie zabraňujú používateľom vyplniť ten istý prieskum dvakrát.",
@@ -2706,3 +2715,11 @@ editorLocalization.locales["sk"] = skStrings;
 // inputTextAlignment.right: "Right" => "Doprava"
 // pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Vyberte, ako chcete zarovnať vstupnú hodnotu v poli. Predvolené nastavenie \"Auto\" zarovná vstupnú hodnotu doprava, ak je použité maskovanie meny alebo čísel, a doľava, ak nie."
 // p.inputTextAlignment: "Input value alignment" => "Zarovnanie vstupných hodnôt"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "Zobrazenie indikátora priebehu"
+// paneldynamic.showProgressBar: "Show the progress bar" => "Zobrazenie indikátora priebehu"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "Zarovnanie indikátora priebehu"
+// pv.carousel: "Carousel" => "Kolotoč"
+// progressBarLocation.top: "Top" => "Vrchol"
+// progressBarLocation.bottom: "Bottom" => "Dno"
+// progressBarLocation.topBottom: "Top and bottom" => "Hore a dole"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Usporiada možnosti výberu vo viacstĺpcovom rozložení. Ak je nastavená hodnota 0, možnosti sa zobrazia v jednom riadku. Ak je nastavená na -1, skutočná hodnota sa zdedí z vlastnosti \"Počet vnorených stĺpcov\" nadradenej matice."

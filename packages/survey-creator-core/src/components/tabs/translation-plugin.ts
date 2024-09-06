@@ -175,7 +175,8 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       onSelectionChanged: (item: IAction) => {
         this.model.filteredPage = !!item.id ? this.creator.survey.getPageByName(item.id) : null;
       },
-      horizontalPosition: "center"
+      horizontalPosition: "center",
+      cssClass: "svc-creator-popup",
     });
   }
   private createFilterStringsAction() {
@@ -190,7 +191,8 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       onSelectionChanged: (item: IAction) => {
         this.model.showAllStrings = item.id === "show-all-strings";
       },
-      horizontalPosition: "center"
+      horizontalPosition: "center",
+      cssClass: "svc-creator-popup",
     });
   }
   private updateFilterStrigsAction(updateSelectedItem: boolean = false) {

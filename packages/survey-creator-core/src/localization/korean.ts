@@ -307,6 +307,9 @@ export var koreanStrings = {
       templateTitleLocation: "질문 제목 정렬",
       templateErrorLocation: "오류 메시지 맞춤",
       newPanelPosition: "새 패널 위치",
+      showRangeInProgress: "진행률 표시줄 표시",
+      showProgressBar: "진행률 표시줄 표시",
+      progressBarLocation: "진행률 표시줄 맞춤",
       keyName: "다음 질문에서 중복 응답 방지"
     },
     question: {
@@ -690,7 +693,6 @@ export var koreanStrings = {
     panelsState: "내부 패널 확장 상태",
     panelPrevText: "이전 패널 단추 도구 설명",
     panelNextText: "다음 패널 단추 도구 설명",
-    showRangeInProgress: "진행률 표시줄 표시",
     panelRemoveButtonLocation: "패널 단추 위치 제거",
     hideIfRowsEmpty: "행이 없는 경우 질문 숨기기",
     hideColumnsIfEmpty: "행이 없는 경우 열 숨기기",
@@ -927,10 +929,11 @@ export var koreanStrings = {
     firstExpanded: "우선 확장",
     off: "꺼짐",
     list: "목록",
+    carousel: "회전목마",
+    tab: "탭",
     progressTop: "상단 진행률",
     progressBottom: "하단 진행률",
     progressTopBottom: "상하단 진행률",
-    tab: "탭",
     horizontal: "가로",
     vertical: "세로",
     top: "위",
@@ -1117,6 +1120,11 @@ export var koreanStrings = {
       topbottom: "위아래",
       aboveheader: "머리글 위",
       belowheader: "머리글 아래"
+    },
+    progressBarLocation: {
+      top: "맨 위로",
+      bottom: "밑바닥",
+      topBottom: "위쪽 및 아래쪽"
     },
     sum: "합계",
     count: "세다",
@@ -1348,7 +1356,8 @@ export var koreanStrings = {
       visibleIf: "마술 지팡이 아이콘을 사용하여 열 표시 유형을 결정하는 조건부 규칙을 설정합니다.",
       enableIf: "마술 지팡이 아이콘을 사용하여 열에 대해 읽기 전용 모드를 비활성화하는 조건부 규칙을 설정합니다.",
       requiredIf: "마술 지팡이 아이콘을 사용하여 하나 이상의 중첩된 질문에 답변이 없는 한 설문조사 제출을 금지하는 조건부 규칙을 설정합니다.",
-      showInMultipleColumns: "이 옵션을 선택하면 각 선택 옵션에 대한 개별 열이 만들어집니다."
+      showInMultipleColumns: "이 옵션을 선택하면 각 선택 옵션에 대한 개별 열이 만들어집니다.",
+      colCount: "선택 옵션을 여러 열 레이아웃으로 정렬합니다. 0으로 설정하면 옵션이 한 줄로 표시됩니다. -1로 설정하면 실제 값이 부모 행렬의 \"중첩 열 수\" 속성에서 상속됩니다."
     },
     widthMode: "다음 중에서 선택합니다. \"정적\" - 고정 너비를 설정합니다. \"반응형\" - 설문조사가 화면의 전체 너비를 차지하도록 합니다. \"자동\" - 사용된 질문 유형에 따라 둘 중 하나를 적용합니다.",
     cookieName: "쿠키는 사용자가 동일한 설문조사를 두 번 작성하는 것을 방지합니다.",
@@ -2957,3 +2966,11 @@ editorLocalization.locales["ko"] = koreanStrings;
 // inputTextAlignment.right: "Right" => "오른쪽"
 // pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "필드 내에서 입력 값을 정렬하는 방법을 선택합니다. 기본 설정인 \"Auto\"는 통화 또는 숫자 마스킹이 적용된 경우 입력 값을 오른쪽에 정렬하고 그렇지 않은 경우 왼쪽에 정렬합니다."
 // p.inputTextAlignment: "Input value alignment" => "입력 값 정렬"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "진행률 표시줄 표시"
+// paneldynamic.showProgressBar: "Show the progress bar" => "진행률 표시줄 표시"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "진행률 표시줄 맞춤"
+// pv.carousel: "Carousel" => "회전목마"
+// progressBarLocation.top: "Top" => "맨 위로"
+// progressBarLocation.bottom: "Bottom" => "밑바닥"
+// progressBarLocation.topBottom: "Top and bottom" => "위쪽 및 아래쪽"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "선택 옵션을 여러 열 레이아웃으로 정렬합니다. 0으로 설정하면 옵션이 한 줄로 표시됩니다. -1로 설정하면 실제 값이 부모 행렬의 \"중첩 열 수\" 속성에서 상속됩니다."

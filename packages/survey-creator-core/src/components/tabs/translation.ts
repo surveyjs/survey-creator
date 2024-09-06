@@ -1082,6 +1082,7 @@ export class Translation extends Base implements ITranslationLocales {
     }, {
       items: this.chooseLanguageActions,
       allowSelection: false,
+      cssClass: "svc-creator-popup",
       onSelectionChanged: (item: IAction) => {
         this.addLocale(item.id);
       }
@@ -1442,6 +1443,7 @@ export class TranslationEditor {
         componentName: "sv-string-viewer",
         data: { locStr: locStr, locString: locStr, model: locStr },
         onApply: (): boolean => { return true; },
+        cssClass: "svc-creator-popup",
         title: dialogTitle,
         displayMode: "popup"
       }, this.options.rootElement);
@@ -1463,7 +1465,7 @@ export class TranslationEditor {
         onHide: () => {
           this.dispose();
         },
-        cssClass: "sv-property-editor st-translation-dialog",
+        cssClass: "sv-property-editor st-translation-dialog svc-creator-popup",
         title: dialogTitle,
         displayMode: this.options.isMobileView ? "overlay" : "popup"
       }, this.options.rootElement);
@@ -1614,6 +1616,7 @@ export class TranslationEditor {
     }, {
       verticalPosition: "bottom",
       horizontalPosition: "center",
+      cssClass: "svc-creator-popup",
       onShow: onActionTypesPopupShow
     });
 

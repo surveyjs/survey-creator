@@ -307,6 +307,9 @@ var germanTranslation = {
       templateTitleLocation: "Ausrichtung des Fragetitels",
       templateErrorLocation: "Ausrichtung von Fehlermeldungen",
       newPanelPosition: "Neue Panel-Position",
+      showRangeInProgress: "Zeigen Sie den Fortschrittsbalken an",
+      showProgressBar: "Zeigen Sie den Fortschrittsbalken an",
+      progressBarLocation: "Ausrichtung der Fortschrittsleiste",
       keyName: "Doppelte Antworten in der folgenden Frage verhindern"
     },
     question: {
@@ -690,7 +693,6 @@ var germanTranslation = {
     panelsState: "Erweiterungszustand des inneren Bereichs",
     panelPrevText: "Text für die Schaltfläche \"Vorheriges Panel\".",
     panelNextText: "Text für die Schaltfläche \"Nächstes Panel\".",
-    showRangeInProgress: "Fortschrittsbalken anzeigen",
     panelRemoveButtonLocation: "Position der Schaltfläche \"Panel entfernen\"",
     hideIfRowsEmpty: "Frage ausblenden, wenn keine Zeilen vorhanden sind",
     hideColumnsIfEmpty: "Spalten ausblenden, wenn keine Zeilen vorhanden sind",
@@ -927,10 +929,11 @@ var germanTranslation = {
     firstExpanded: "ausgeklappt (erstes Element)",
     off: "aus",
     list: "Liste",
+    carousel: "Karussell",
+    tab: "Tabulatoren",
     progressTop: "oben (Fortschritt)",
     progressBottom: "unten (Fortschritt)",
     progressTopBottom: "oben und unten (Fortschritt)",
-    tab: "Tabulatoren",
     horizontal: "horizontal",
     vertical: "vertikal",
     top: "oben",
@@ -1117,6 +1120,11 @@ var germanTranslation = {
       topbottom: "oben und unten",
       aboveheader: "Über der Kopfzeile",
       belowheader: "Unterhalb der Kopfzeile"
+    },
+    progressBarLocation: {
+      top: "Nach oben",
+      bottom: "Unteres",
+      topBottom: "Oben und unten"
     },
     sum: "Summe",
     count: "Zahl",
@@ -1348,7 +1356,8 @@ var germanTranslation = {
       visibleIf: "Verwenden Sie das Zauberstabsymbol, um eine bedingte Regel festzulegen, die die Sichtbarkeit von Spalten bestimmt.",
       enableIf: "Verwenden Sie das Zauberstabsymbol, um eine Bedingungsregel festzulegen, die den schreibgeschützten Modus für die Spalte deaktiviert.",
       requiredIf: "Verwenden Sie das Zauberstabsymbol, um eine bedingte Regel festzulegen, die die Übermittlung von Umfragen verhindert, es sei denn, mindestens eine verschachtelte Frage enthält eine Antwort.",
-      showInMultipleColumns: "Wenn diese Option aktiviert ist, wird für jede Auswahloption eine eigene Spalte erstellt."
+      showInMultipleColumns: "Wenn diese Option aktiviert ist, wird für jede Auswahloption eine eigene Spalte erstellt.",
+      colCount: "Ordnet die Auswahloptionen in einem mehrspaltigen Layout an. Wenn der Wert auf 0 gesetzt ist, werden die Optionen in einer einzigen Zeile angezeigt. Wenn dieser Wert auf -1 festgelegt ist, wird der tatsächliche Wert von der Eigenschaft \"Anzahl der geschachtelten Spalten\" der übergeordneten Matrix geerbt."
     },
     widthMode: "Wählen Sie aus: \"Statisch\" - legt eine feste Breite fest; \"Responsive\" - lässt die Umfrage die gesamte Breite des Bildschirms einnehmen; \"Auto\" - wendet je nach verwendetem Fragetyp einen der beiden an.",
     cookieName: "Cookies verhindern, dass Benutzer dieselbe Umfrage zweimal ausfüllen.",
@@ -2462,3 +2471,11 @@ editorLocalization.locales["de"] = germanTranslation;
 // inputTextAlignment.right: "Right" => "Rechts"
 // pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Wählen Sie aus, wie der Eingabewert innerhalb des Felds ausgerichtet werden soll. Die Standardeinstellung \"Auto\" richtet den Eingabewert nach rechts aus, wenn eine Währungs- oder numerische Maskierung angewendet wird, und nach links, wenn dies nicht der Fall ist."
 // p.inputTextAlignment: "Input value alignment" => "Ausrichtung der Eingabewerte"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "Zeigen Sie den Fortschrittsbalken an"
+// paneldynamic.showProgressBar: "Show the progress bar" => "Zeigen Sie den Fortschrittsbalken an"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "Ausrichtung der Fortschrittsleiste"
+// pv.carousel: "Carousel" => "Karussell"
+// progressBarLocation.top: "Top" => "Nach oben"
+// progressBarLocation.bottom: "Bottom" => "Unteres"
+// progressBarLocation.topBottom: "Top and bottom" => "Oben und unten"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Ordnet die Auswahloptionen in einem mehrspaltigen Layout an. Wenn der Wert auf 0 gesetzt ist, werden die Optionen in einer einzigen Zeile angezeigt. Wenn dieser Wert auf -1 festgelegt ist, wird der tatsächliche Wert von der Eigenschaft \"Anzahl der geschachtelten Spalten\" der übergeordneten Matrix geerbt."

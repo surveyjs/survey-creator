@@ -247,7 +247,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       return;
     }
     //this.updateActionsProperties();
-    toggleHovered(event, element);
+    toggleHovered(event, element, this.creator.pageHoverDelay);
   }
   protected updateActionsProperties(): void {
     if (this.isDisposed) return;
@@ -536,6 +536,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       items: options.items,
       allowSelection: true,
       horizontalPosition: "center",
+      cssClass: "svc-creator-popup",
       onShow: () => {
         const listModel = newAction.popupModel.contentComponentData.model;
         options.updateListModel(listModel);

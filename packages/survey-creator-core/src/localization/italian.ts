@@ -307,6 +307,9 @@ var italianTranslation = {
       templateTitleLocation: "Allineamento del titolo della domanda",
       templateErrorLocation: "Allineamento dei messaggi di errore",
       newPanelPosition: "Nuova posizione del pannello",
+      showRangeInProgress: "Visualizzare la barra di avanzamento",
+      showProgressBar: "Visualizzare la barra di avanzamento",
+      progressBarLocation: "Allineamento della barra di avanzamento",
       keyName: "Impedisci risposte duplicate nella seguente domanda"
     },
     question: {
@@ -690,7 +693,6 @@ var italianTranslation = {
     panelsState: "Stato di espansione del pannello interno",
     panelPrevText: "Testo del tasto Pannello Precedente",
     panelNextText: "Testo del tasto Pannello Successivo",
-    showRangeInProgress: "Mostra la barra di avanzamento",
     panelRemoveButtonLocation: "Posizione del tasto Rimozione Pannello",
     hideIfRowsEmpty: "Nascondi la domanda se non ci sono righe",
     hideColumnsIfEmpty: "Nascondi le colonne se non ci sono righe",
@@ -927,10 +929,11 @@ var italianTranslation = {
     firstExpanded: "Il primo pannello è esteso",
     off: "Nascondi il numero delle domande",
     list: "Lista",
+    carousel: "Carosello",
+    tab: "Schede",
     progressTop: "Navigatore del pannello + Barra di avanzamento in alto",
     progressBottom: "Navigatore del pannello + Barra di avanzamento in basso",
     progressTopBottom: "Navigatore del pannello + Barra di avanzamento in alto e in basso",
-    tab: "Schede",
     horizontal: "Orizzontale",
     vertical: "Verticale",
     top: "In alto",
@@ -1117,6 +1120,11 @@ var italianTranslation = {
       topbottom: "In alto e in basso",
       aboveheader: "Sopra l'intestazione",
       belowheader: "Sotto l'intestazione"
+    },
+    progressBarLocation: {
+      top: "In alto",
+      bottom: "Fondoschiena",
+      topBottom: "Sopra e sotto"
     },
     sum: "Somma",
     count: "Contare",
@@ -1348,7 +1356,8 @@ var italianTranslation = {
       visibleIf: "Utilizzare l'icona della bacchetta magica per impostare una regola condizionale che determini la visibilità della colonna.",
       enableIf: "Utilizzare l'icona della bacchetta magica per impostare una regola condizionale che disabiliti la modalità di sola lettura per la colonna.",
       requiredIf: "Utilizza l'icona della bacchetta magica per impostare una regola condizionale che impedisca l'invio dell'indagine a meno che almeno una domanda nidificata non abbia una risposta.",
-      showInMultipleColumns: "Quando questa opzione è selezionata, crea una singola colonna per ogni opzione di scelta."
+      showInMultipleColumns: "Quando questa opzione è selezionata, crea una singola colonna per ogni opzione di scelta.",
+      colCount: "Dispone le opzioni di scelta in un layout a più colonne. Se impostato su 0, le opzioni vengono visualizzate in una singola riga. Se impostato su -1, il valore effettivo viene ereditato dalla proprietà \"Conteggio colonne nidificate\" della matrice padre."
     },
     widthMode: "Scegli tra: \"Statico\" - imposta una larghezza fissa; \"Responsive\" - fa sì che il sondaggio occupi l'intera larghezza dello schermo; \"Auto\": applica uno dei due a seconda del tipo di domanda utilizzato.",
     cookieName: "I cookie impediscono agli utenti di compilare due volte lo stesso sondaggio.",
@@ -2511,3 +2520,11 @@ editorLocalization.locales["it"] = italianTranslation;
 // inputTextAlignment.right: "Right" => "A destra"
 // pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Selezionare la modalità di allineamento del valore di input all'interno del campo. L'impostazione predefinita \"Auto\" allinea il valore di input a destra se viene applicata una maschera di valuta o numerica e a sinistra in caso contrario."
 // p.inputTextAlignment: "Input value alignment" => "Allineamento dei valori di input"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "Visualizzare la barra di avanzamento"
+// paneldynamic.showProgressBar: "Show the progress bar" => "Visualizzare la barra di avanzamento"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "Allineamento della barra di avanzamento"
+// pv.carousel: "Carousel" => "Carosello"
+// progressBarLocation.top: "Top" => "In alto"
+// progressBarLocation.bottom: "Bottom" => "Fondoschiena"
+// progressBarLocation.topBottom: "Top and bottom" => "Sopra e sotto"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Dispone le opzioni di scelta in un layout a più colonne. Se impostato su 0, le opzioni vengono visualizzate in una singola riga. Se impostato su -1, il valore effettivo viene ereditato dalla proprietà \"Conteggio colonne nidificate\" della matrice padre."
