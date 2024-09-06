@@ -1,7 +1,7 @@
 import * as React from "react";
-import { SidebarPageModel, SidebarModel, PropertyGridViewModel } from "survey-creator-core";
-import { Action, Base, CssClassBuilder, getActionDropdownButtonTarget } from "survey-core";
-import { SurveyElementBase, SurveyActionBar, ReactQuestionFactory, ReactElementFactory, Popup } from "survey-react-ui";
+import { SidebarPageModel, SidebarModel } from "survey-creator-core";
+import { Base } from "survey-core";
+import { SurveyElementBase, SurveyActionBar, ReactQuestionFactory, ReactElementFactory } from "survey-react-ui";
 
 interface ISidebarComponentProps {
   model: SidebarModel;
@@ -39,15 +39,11 @@ export class SidebarComponent extends SurveyElementBase<ISidebarComponentProps, 
   renderDefaultHeader(): JSX.Element {
     const activePage = this.model.getActivePage();
     const headerText = !!activePage.caption ? <div className="svc-side-bar__container-title">{activePage.caption}</div> : null;
-    const containerClass = "svc-side-bar__container-header" + (activePage.showToolbar ? "" : " svc-sidebar__header-container");
     return (
-      <div className={containerClass}>
-        {
-          activePage.showToolbar ?
-            <div className="svc-side-bar__container-actions">
-              <SurveyActionBar model={(this.model as any).toolbar}></SurveyActionBar>
-            </div> : null
-        }
+      <div className="svc-side-bar__container-header">
+        <div className="svc-side-bar__container-actions">
+          <SurveyActionBar model={(this.model as any).toolbar}></SurveyActionBar>
+        </div>
         {headerText}
       </div>);
   }
@@ -109,46 +105,4 @@ export default SidebarComponent;
 
 ReactElementFactory.Instance.registerElement("svc-side-bar", (props) => {
   return React.createElement(SidebarComponent, props);
-});
-
-interface ISideBarPropertyGridHeaderProps {
-  model: Action;
-}
-
-class SideBarPropertyGridHeader extends SurveyElementBase<ISideBarPropertyGridHeaderProps, any> {
-  get objectSelectionAction(): Action {
-    return this.props.model;
-  }
-
-  protected getStateElement(): Base | null {
-    return this.objectSelectionAction;
-  }
-
-  renderElement(): JSX.Element {
-    const buttonClassName = new CssClassBuilder()
-      .append("svc-sidebar__header-button")
-      .append("svc-sidebar__header-button--with-subtitle")
-      .append("svc-sidebar__header-button--pressed", this.objectSelectionAction.pressed)
-      .toString();
-
-    return (
-      <div className="svc-sidebar__header svc-sidebar__header--tabbed">
-        <div className="svc-sidebar__header-container svc-sidebar__header-container--with-subtitle">
-          <div className="svc-sidebar__header-content" onClick={() => this.objectSelectionAction.action()}>
-            <div className={buttonClassName}>
-              <div className="svc-sidebar__header-caption">
-                <span className="svc-sidebar__header-title">{this.objectSelectionAction.title}</span>
-                <span className="svc-sidebar__header-subtitle">{this.objectSelectionAction.tooltip}</span>
-              </div>
-            </div>
-            <Popup model={this.objectSelectionAction.popupModel} getTarget={getActionDropdownButtonTarget}></Popup>
-          </div>
-        </div>
-      </div>
-    );
-  }
-}
-
-ReactElementFactory.Instance.registerElement("svc-side-bar-property-grid-header", (props) => {
-  return React.createElement(SideBarPropertyGridHeader, props);
 });

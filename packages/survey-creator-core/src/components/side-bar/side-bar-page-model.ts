@@ -14,7 +14,6 @@ export class SidebarPageModel extends Base {
   }) visible: boolean;
   @property() componentData: any;
   @property() componentName: string;
-  @property() showToolbar: boolean = true;
 
   constructor(public id: string, public sidePanel: SidebarModel, componentName?: string, componentData?: any) {
     super();

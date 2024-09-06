@@ -70,7 +70,6 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       this._showOneCategoryInPropertyGrid = newValue;
       this.creator.sidebar.hideSideBarVisibilityControlActions = newValue;
       this.propertyGrid.showOneCategoryInPropertyGrid = newValue;
-      this.propertyGridTab.showToolbar = !newValue;
       this.propertyGrid["setObj"](this.creator.selectedElement);
       if (this.creator.activeTab === "theme") {
         this.setTabControl();

@@ -56,6 +56,9 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     if (this.showOneCategoryInPropertyGrid && this.activePageIsPropertyGrid) {
       this.creator.sidebar.headerComponentName = "svc-side-bar-property-grid-header";
       this.creator.sidebar.headerComponentData = this.propertyGridViewModel.objectSelectionAction;
+    } else if (this.showOneCategoryInPropertyGrid && this.creator.sidebar.activePage === this.propertyGridPlaceholderPage.id) {
+      this.creator.sidebar.headerComponentName = "svc-side-bar-property-grid-placeholder-header";
+      this.creator.sidebar.headerComponentData = this.propertyGridPlaceholderPage;
     } else {
       this.creator.sidebar.headerComponentName = "";
       this.creator.sidebar.headerComponentData = undefined;
@@ -124,7 +127,6 @@ export class TabDesignerPlugin implements ICreatorPlugin {
 
     this.propertyGridPlaceholderPage = this.creator.sidebar.addPage("propertyGridPlaceholder", "svc-property-grid-placeholder", this.propertyGridViewModel);
     this.propertyGridPlaceholderPage.caption = "Survey Settings";
-    this.propertyGridPlaceholderPage.showToolbar = false;
 
     this.designerStateManager = new DesignerStateManager();
     this.designerStateManager.initForSurvey(this.creator.survey);
