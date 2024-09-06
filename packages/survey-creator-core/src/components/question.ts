@@ -350,6 +350,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     const defaultJsons = {};
     function cleanDefaultsFromJson(type: any, toolboxItem: QuestionToolboxItem) {
       const question = QuestionFactory.Instance.createQuestion(type, "question");
+      if (!question) return toolboxItem.json;
       question.fromJSON(toolboxItem.json);
       const json = question.toJSON();
       delete json.name;
