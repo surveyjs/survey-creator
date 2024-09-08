@@ -737,7 +737,6 @@ export var jaStrings = {
     readOnly: '読み取り専用',
     enableIf: '次の場合に編集可能',
     emptyRowsText: '「行がありません」メッセージ',
-    size: '入力フィールドのサイズ（文字数）',
     separateSpecialChoices: '特別な選択肢を個別に表示（なし、その他、すべて選択）',
     choicesFromQuestion: '次の質問から選択肢をコピーする',
     choicesFromQuestionMode: 'どの選択肢をコピーするか',
