@@ -4,7 +4,7 @@ export var jaStrings = {
   // survey templates
   survey: {
     edit: "編集",
-    externalHelpLink: "アンケートの作成方法を見て学ぶ",
+    externalHelpLink: "アンケート作成方法の動画を見る",
     externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
     dropQuestion: "ツールボックスからここに質問をドロップしてください。",
     addLogicItem: "アンケートの流れをカスタマイズするルールを作成します。",
@@ -18,10 +18,10 @@ export var jaStrings = {
   },
   // Creator tabs
   tabs: {
-    preview: "アンケートをテストする",
+    preview: "プレビュー",
     theme: "テーマ",
     translation: "翻訳",
-    designer: "アンケートの設計者",
+    designer: "編集",
     editor: "JSONエディタ",
     logic: "アンケートのロジック"
   },
@@ -30,7 +30,7 @@ export var jaStrings = {
     default: "デフォルト",
     checkbox: "チェックボックス",
     comment: "コメント",
-    imagepicker: "画像ピッカー",
+    imagepicker: "画像選択",
     ranking: "ランキング",
     image: "画像",
     dropdown: "ドロップダウン",
@@ -46,18 +46,18 @@ export var jaStrings = {
     radiogroup: "ラジオグループ",
     rating: "評価",
     text: "単一入力",
-    boolean: "ブール",
+    boolean: "二者択一",
     expression: "式（読み取り専用）",
     signaturepad: "署名パッド",
     buttongroup: "ボタングループ"
   },
   toolboxCategories: {
-    general: "一般",
+    general: "全体の設定",
     choice: "選択の質問",
     text: "テキスト入力の質問",
     containers: "コンテナー",
     matrix: "マトリックスの質問",
-    misc: "雑貨"
+    misc: "その他"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -73,8 +73,8 @@ export var jaStrings = {
     hidePanel: "パネルを非表示にする",
     prevSelected: "前を選択",
     nextSelected: "[次へ] を選択します。",
-    prevFocus: "前に焦点を合わせる",
-    nextFocus: "次の焦点",
+    prevFocus: "前にフォーカス",
+    nextFocus: "次にフォーカス",
     surveyTypeName: "アンケート",
     pageTypeName: "ページ",
     panelTypeName: "パネル",
