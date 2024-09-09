@@ -18,7 +18,7 @@ export class TabButtonComponent extends BaseAngular<Action> {
       .append("svc-menu-action__button")
       .append("svc-menu-action__button--selected", !!this.model.active)
       .toString();
-    return className
+    return className;
   }
 }
 AngularComponentFactory.Instance.registerComponent("svc-tab-button", TabButtonComponent);
