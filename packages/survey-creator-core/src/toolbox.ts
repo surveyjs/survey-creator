@@ -355,8 +355,10 @@ export class QuestionToolbox
   @property({ defaultValue: true }) canCollapseCategories: boolean;
 
   public updateResponsiveness(isCompact: boolean, overflowBehavior: overflowBehaviorType) {
-    if (overflowBehavior == "scroll" && this.creator && !this.creator.isTouch) {
+    if (overflowBehavior == "scroll" && this.creator && !this.creator.isTouch ||
+      this.creator && this.creator.toolboxLocation === "sidebar") {
       this.isResponsivenessDisabled = true;
+      this.updateCallback && this.updateCallback(true);
       return;
     }
     if (this.hasCategories && this.showCategoryTitles) {
@@ -565,6 +567,7 @@ export class QuestionToolbox
     } else {
       this.dotsItem.popupModel.horizontalPosition = this.creator.toolboxLocation == "right" ? "left" : "right";
     }
+    this.updateResponsiveness(this.isCompact, this.overflowBehavior);
   }
 
   public get jsonText() {

@@ -21,14 +21,13 @@
   position: relative;
   width: 100%;
   box-sizing: border-box;
-}
-.spg-root-modern {
   @include disableLibraryAnimations;
+  /* disable library transition animations */
+  --sjs-transition-duration: 0ms;
 }
 
 .spg-container {
   width: 100%;
-  @include disableTransitionAnimations;
 }
 
 .spg-container.spg-container_search {

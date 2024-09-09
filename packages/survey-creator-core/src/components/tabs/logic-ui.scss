@@ -4,7 +4,6 @@
   width: 100%;
   height: 100%;
   background: $background-dim;
-  @include disableTransitionAnimations;
 }
 
 .svc-tab-logic-edit__content {
@@ -72,6 +71,7 @@
 }
 
 .svc-logic-operator.svc-logic-operator {
+  transition: background-color $creator-transition-duration, color $creator-transition-duration;
 
   &:hover,
   &:focus {
@@ -211,6 +211,11 @@
   &:focus {
     color: var(--ctr-expression-item-background-color-operator-hovered, $primary-foreground);
   }
+}
+
+.svc-logic-tab__content {
+  /* disable library transition animations */
+  --sjs-transition-duration: 0ms;
 }
 
 .svc-logic-tab__content {
