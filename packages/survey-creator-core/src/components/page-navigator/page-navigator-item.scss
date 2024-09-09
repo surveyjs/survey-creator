@@ -82,9 +82,7 @@ svc-page-navigator-item,
   background-color: var(--ctr-page-navigator-item-background-color-hovered, $background);
   border-radius: calcSize(12.5);
   box-shadow: $shadow-medium;
-  transition:
-    max-width 0.1s ease-in-out,
-    padding 0.2s ease-in-out;
+  transition: opacity $creator-transition-duration;
 
   .svc-page-navigator-item__dot {
     position: absolute;

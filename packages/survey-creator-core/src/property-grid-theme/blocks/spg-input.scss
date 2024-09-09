@@ -9,6 +9,7 @@
   height: calcSize(6);
   border: none;
   box-shadow: inset 0 0 0 var(--ctr-editor-border-width, 1px) var(--ctr-editor-border-color, $border-inside);
+  transition: box-shadow $creator-transition-duration;
 
   padding: calcSize(1.5) calcSize(2);
   outline: none;
@@ -57,6 +58,7 @@ input.spg-input:read-only::placeholder {
   height: calcSize(5);
   padding: calcSize(1);
   line-height: 0;
+  transition: background $creator-transition-duration, opacity $creator-transition-duration;
 
   &:focus,
   &:hover {

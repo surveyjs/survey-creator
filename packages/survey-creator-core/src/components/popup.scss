@@ -90,6 +90,7 @@
 
   .sv-list__item-body {
     color: var(--ctr-list-item-text-color, $foreground-dim);
+    transition: background-color $creator-transition-duration, color $creator-transition-duration;
   }
 
   .sv-list__item-icon use {

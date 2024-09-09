@@ -4,7 +4,8 @@ import {
   QuestionSelectBase, QuestionRowModel, LocalizableString, ILocalizableString, ILocalizableOwner, PopupBaseViewModel,
   EventBase, hasLicense, slk, settings as SurveySettings, Event, Helpers as SurveyHelpers, MatrixDropdownColumn, JsonObject,
   dxSurveyService, ISurveyElement, PanelModelBase, surveyLocalization, QuestionMatrixDropdownModelBase, ITheme, Helpers,
-  chooseFiles, createDropdownActionModel
+  chooseFiles, createDropdownActionModel,
+  CssClassBuilder
 } from "survey-core";
 import { ICreatorPlugin, ISurveyCreatorOptions, settings, ICollectionItemAllowOperations } from "./creator-settings";
 import { editorLocalization } from "./editorLocalization";
@@ -1901,7 +1902,7 @@ export class SurveyCreatorModel extends Base
       const editTitle = isDraggedFromToolbox && this.startEditTitleOnQuestionAdded;
       isDraggedFromToolbox = false;
       if (!options.draggedElement) return;
-      this.selectElement(options.draggedElement, undefined, false, editTitle);
+      this.selectElement(options.draggedElement, undefined, true, editTitle);
       this.onDragEnd.fire(this, options);
       if (!options.fromElement) {
         this.setModified({ type: "ADDED_FROM_TOOLBOX", question: options.draggedElement });
@@ -2171,10 +2172,9 @@ export class SurveyCreatorModel extends Base
     this.onGetObjectDisplayName.fire(this, options);
     return options.displayName;
   }
-
+  private animationEnabled = false;
   public createSurvey(json: any, reason: string, model?: any, callback?: (survey: SurveyModel) => void, area?: string): SurveyModel {
     const survey = this.createSurveyCore(json, reason);
-
     if (reason !== "designer" && reason !== "test" && reason !== "theme") {
       survey.fitToContainer = false;
       survey.applyTheme(designTabSurveyThemeJSON);
@@ -2723,23 +2723,36 @@ export class SurveyCreatorModel extends Base
       this.focusElement(element, focus, selEl, propertyName, startEdit);
     }
   }
+  private currentFocusInterval: any;
+  private currentFocusTimeout: any;
   public focusElement(element: any, focus: string | boolean, selEl: any = null, propertyName: string = null, startEdit: boolean = null) {
     if (!selEl) selEl = this.getSelectedSurveyElement();
-    setTimeout(() => {
-      if (!!selEl && (focus || startEdit && (!selEl.hasTitle || selEl.isPanel))) {
+    if(!selEl) return;
+    clearInterval(this.currentFocusInterval);
+    clearTimeout(this.currentFocusTimeout);
+    if(this.animationEnabled && this.survey.isLazyRendering) {
+      this.survey.disableLazyRenderingBeforeElement(selEl);
+    }
+    this.currentFocusTimeout = setTimeout(() => {
+      this.currentFocusInterval = setInterval(() => {
         const el = document.getElementById(selEl.id);
-        if (!!el) {
-          const blockValue = !this.rootElement || this.rootElement.clientHeight - 64 > el.clientHeight ? "center" : "start";
-          el.scrollIntoView({ block: blockValue });
-          if (!propertyName && el.parentElement) {
-            let elToFocus: HTMLElement = (typeof (focus) === "string") ? el.parentElement.querySelector(focus) : el.parentElement;
-            elToFocus && elToFocus.focus();
+        if (!!selEl && (focus || startEdit && (!selEl.hasTitle || selEl.isPanel))) {
+          if(!el || this.rootElement.getAnimations({ subtree: true }).filter((animation => animation.effect.getComputedTiming().activeDuration !== Infinity && (animation.pending || animation.playState !== "finished")))[0]) return;
+          clearInterval(this.currentFocusInterval);
+          if (!!el) {
+            SurveyHelper.scrollIntoViewIfNeeded(el.parentElement ?? el, () => { return { block: "start", behavior: this.animationEnabled ? "smooth" : undefined }; }, true);
+            if (!propertyName && el.parentElement) {
+              let elToFocus: HTMLElement = (typeof (focus) === "string") ? el.parentElement.querySelector(focus) : el.parentElement;
+              elToFocus && elToFocus.focus({ preventScroll: true });
+            }
           }
+        } else {
+          clearInterval(this.currentFocusInterval);
         }
-      }
-      if (startEdit && !!element) {
-        StringEditorConnector.get((element as Question).locTitle).activateEditor();
-      }
+        if (startEdit && !!element) {
+          StringEditorConnector.get((element as Question).locTitle).activateEditor();
+        }
+      }, 1);
     }, 100);
   }
 
@@ -2866,7 +2879,9 @@ export class SurveyCreatorModel extends Base
     if (!!expandedTabName && !this.getPropertyGridExpandedCategory() && !this.survey.isEmpty) {
       const panel = <PanelModel>this.designerPropertyGrid.survey.getPanelByName(expandedTabName);
       if (!!panel) {
+        panel.blockAnimations();
         panel.expand();
+        panel.releaseAnimations();
       }
     }
   }
@@ -3861,6 +3876,14 @@ export class SurveyCreatorModel extends Base
     super.dispose();
   }
   @property({ defaultValue: true }) enableLinkFileEditor: boolean;
+  public getRootCss() {
+    return new CssClassBuilder()
+      .append("svc-creator")
+      .append("svc-creator--mobile", this.isMobileView)
+      .append("svc-creator--touch", this.isTouch)
+      .append("svc-creator--disable-animations", !this.animationEnabled)
+      .toString();
+  }
 }
 
 export class CreatorBase extends SurveyCreatorModel { }

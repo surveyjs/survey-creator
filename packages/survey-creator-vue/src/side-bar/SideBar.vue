@@ -9,7 +9,11 @@
       @click="() => model.collapseSidebar()"
     ></div>
     <div class="svc-flex-column svc-side-bar__wrapper">
-      <div class="svc-side-bar__container" v-show="model.visible" ref="root">
+      <div
+        class="svc-side-bar__container"
+        v-show="model.renderedIsVisible"
+        ref="root"
+      >
         <div class="svc-side-bar__container-header">
           <div class="svc-side-bar__container-actions">
             <sv-action-bar :model="model.toolbar"></sv-action-bar>

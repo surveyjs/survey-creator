@@ -58,8 +58,8 @@ export class QuestionDropdownAdornerViewModel extends QuestionAdornerViewModel {
 
   public getRenderedItems(): ItemValue[] {
     return this.isCollapsed ?
-      this.question.visibleChoices.slice(0, this.visibleCount) :
-      this.question.visibleChoices;
+      this.question.renderedChoices.slice(0, this.visibleCount) :
+      this.question.renderedChoices;
   }
 
   public getButtonText(): string {

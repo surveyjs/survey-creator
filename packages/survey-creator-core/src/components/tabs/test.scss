@@ -64,6 +64,7 @@ svc-tab-test {
     @include smallBold;
     width: 100%;
     height: calcSize(4);
+    transition: background-color $creator-transition-duration;
   }
 
   .svc-page-selector {

@@ -38,6 +38,8 @@ export class RowWrapper extends CreatorModelElement<
         key={"svc-row-" + this.props.row.id}
         className={this.model.cssClasses}
       >
+        <div className="svc-row__drop-indicator svc-row__drop-indicator--top"></div>
+        <div className="svc-row__drop-indicator svc-row__drop-indicator--bottom"></div>
         {this.props.element}
       </div>
     );

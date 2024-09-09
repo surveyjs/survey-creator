@@ -5,6 +5,10 @@
     [attr.data-sv-drop-target-survey-element]="adorner.element.name || null" #container>
 
     <div [class]="adorner.css()" [key2click]="{ disableTabStop: true }" (click)="adorner.select(adorner, $event)">
+      <div class="svc-question__drop-indicator svc-question__drop-indicator--left"></div>
+      <div class="svc-question__drop-indicator svc-question__drop-indicator--right"></div>
+      <div class="svc-question__drop-indicator svc-question__drop-indicator--top"></div>
+      <div class="svc-question__drop-indicator svc-question__drop-indicator--bottom"></div>
       <div *ngIf="adorner.allowDragging" class="svc-question__drag-area" (pointerdown)="adorner.onPointerDown($event)">
         <svg class="svc-question__drag-element" [iconName]="'icon-drag-area-indicator_24x16'" [size]="24"
           sv-ng-svg-icon></svg>

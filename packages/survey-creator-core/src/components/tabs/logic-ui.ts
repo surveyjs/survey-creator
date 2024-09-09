@@ -92,7 +92,9 @@ export class SurveyLogicUI extends SurveyLogic {
   }
   public addNewUI() {
     if (this.items.length == 0 || !this.items[this.items.length - 1].isNew) {
+      this.matrixItems["lockResetRenderedTable"] = true;
       this.addNew();
+      this.matrixItems["lockResetRenderedTable"] = false;
     }
     const rows = this.matrixItems.visibleRows;
     rows[rows.length - 1].showDetailPanel();

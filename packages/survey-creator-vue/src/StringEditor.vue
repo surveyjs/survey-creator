@@ -1,14 +1,8 @@
 <template>
   <span :class="className">
     <span class="svc-string-editor__content">
-      <div class="svc-string-editor__border">
-        <sv-svg-icon
-          class="svc-string-editor__button svc-string-editor__button--edit"
-          @click="edit"
-          :iconName="'icon-edit'"
-          :size="16"
-        ></sv-svg-icon>
-      </div>
+      <div class="svc-string-editor__border svc-string-editor__border--hover"></div>
+      <div class="svc-string-editor__border svc-string-editor__border--focus"></div>
       <span class="svc-string-editor__input">
         <span
           role="textbox"

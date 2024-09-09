@@ -24,6 +24,7 @@ svc-page {
   box-sizing: border-box;
   width: 100%;
   outline: none;
+  transition: background $creator-transition-duration, box-shadow $creator-transition-duration;
 
   .sd-page {
     margin: 0;
@@ -33,11 +34,12 @@ svc-page {
 
 .svc-page__content-actions {
   position: absolute;
-  visibility: hidden;
+  opacity: 0;
   top: calcSize(1);
   inset-inline-end: 0; // right
   padding: 0 calcSize(1.5) 0 calcSize(1);
   z-index: 1;
+  transition: opacity $creator-transition-duration;
 
   .sv-action-bar-separator {
     margin: 0 calcSize(1);
@@ -57,6 +59,7 @@ svc-page {
     border-radius: var(--ctr-survey-page-toolbar-item-corner-radius, 4px);
     background-color: transparent;
     color: var(--ctr-survey-page-toolbar-item-text-color, $foreground);
+    transition: background-color $creator-transition-duration;
   }
 
   .sv-action-bar-item__icon {
@@ -139,7 +142,7 @@ svc-page {
   }
 
   .svc-page__content-actions {
-    visibility: visible;
+    opacity: 1;
   }
 }
 
@@ -183,6 +186,8 @@ svc-page {
   &.svc-creator .svc-page .svc-page__content--selected:focus,
   .svc-hovered.svc-page__content {
     &.svc-page__content--selected {
+      box-shadow: 0 0 0 2px inset $secondary;
+
       box-shadow: 0 0 0 2px inset var(--ctr-survey-page-border-color-selected, $secondary);
       background: var(--ctr-survey-page-background-color-selected, $secondary-backcolor-semi-light);
 
@@ -236,6 +241,7 @@ svc-page {
   cursor: pointer;
   margin-inline-end: calcSize(1); // margin-right
   outline: none;
+  transition: background-color $creator-transition-duration;
 
   use {
     fill: var(--ctr-library-contextual-button-icon-color, $foreground-light);
@@ -334,7 +340,7 @@ svc-page {
 .svc-creator .svc-page {
   .svc-page__content--collapse-always {
     .svc-page__content-actions {
-      visibility: visible;
+      opacity: 1;
 
       .sv-action {
         visibility: hidden;

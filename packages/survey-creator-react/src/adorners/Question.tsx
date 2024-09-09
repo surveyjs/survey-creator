@@ -62,7 +62,7 @@ export class QuestionAdornerComponent extends CreatorModelElement<
         data-sv-drop-target-survey-element={this.model.element.name || null}
         className={"svc-question__adorner " + this.model.rootCss()}
         onDoubleClick={e => { allowInteractions && this.model.dblclick(e.nativeEvent); e.stopPropagation(); }}
-        onMouseOut={e => allowInteractions && this.model.hover(e.nativeEvent, e.currentTarget)}
+        onMouseLeave={e => allowInteractions && this.model.hover(e.nativeEvent, e.currentTarget)}
         onMouseOver={e => allowInteractions && this.model.hover(e.nativeEvent, e.currentTarget)}
       >
         {content}
@@ -80,6 +80,10 @@ export class QuestionAdornerComponent extends CreatorModelElement<
         className={this.model.css()}
         onClick={(e) => this.model.select(this.model, new ReactMouseEvent(e))}
       >
+        <div className="svc-question__drop-indicator svc-question__drop-indicator--left"></div>
+        <div className="svc-question__drop-indicator svc-question__drop-indicator--right"></div>
+        <div className="svc-question__drop-indicator svc-question__drop-indicator--top"></div>
+        <div className="svc-question__drop-indicator svc-question__drop-indicator--bottom"></div>
         {allowInteractions ? this.renderHeader() : null}
         {content}
         {this.renderFooter()}

@@ -1454,7 +1454,7 @@ test("Matrix dropdown popup edit ", async (t) => {
     await t.click(Selector("button").withText("Cancel"));
     await t.hover(".svc-matrix-cell .sd-rating");
     await t.expect(Selector(".svc-matrix-cell__question-controls-button").filterVisible().visible).ok();
-    await t.click(Selector(".svc-matrix-cell__question-controls-button").filterVisible());
+    await t.click(Selector(".svc-matrix-cell__question-controls-button").nth(1));
     await resetHoverToCreator(t);
     await takeElementScreenshot("matrix-dropdown-popup-rating.png", Selector(".sv-popup__container").filterVisible(), t, comparer);
   });

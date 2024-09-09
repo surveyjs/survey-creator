@@ -68,7 +68,7 @@
 }
 
 .spg-row--multiple {
-  &>div>.spg-row-narrow__question {
+  & > div > .spg-row-narrow__question {
     margin-top: calcSize(-1);
   }
 }
@@ -122,7 +122,7 @@
   gap: calcSize(1);
   flex-wrap: wrap;
 
-  &>div {
+  & > div {
     flex-grow: 1;
     min-width: calcSize(25.5);
 
@@ -148,7 +148,7 @@
 .spg-question__erbox,
 .spg-question__erbox>svc-question-error,
 sv-question-error {
-  &>div {
+  & > div {
     display: flex;
     gap: calcSize(1);
   }
