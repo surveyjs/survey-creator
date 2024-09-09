@@ -1,7 +1,6 @@
 
 import { Component, Input } from "@angular/core";
 import { AngularComponentFactory, BaseAngular } from "survey-angular-ui";
-import { Action, CssClassBuilder } from "survey-core";
 import { SidebarPageModel } from "survey-creator-core";
 
 @Component({
