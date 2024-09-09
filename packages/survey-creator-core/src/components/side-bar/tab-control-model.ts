@@ -31,7 +31,7 @@ export class TabControlModel extends Base {
     super();
     this.createToggleAction();
     this.updateExpandCollapseAction();
-    this.sidePanel.registerFunctionOnPropertyValueChanged("visible", () => {
+    this.sidePanel.registerFunctionOnPropertyValueChanged("_visible", () => {
       this.updateExpandCollapseAction();
     });
   }
