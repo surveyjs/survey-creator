@@ -8,8 +8,7 @@
             <span class="svc-sidebar__header-subtitle">{{model.tooltip}}</span>
           </div>
         </div>
-        <sv-ng-popup [popupModel]="model.popupModel"></sv-ng-popup>
-        <!-- <sv-popup params="model: model.popupModel, getTarget: $parent.getTarget"></sv-popup> -->
+        <sv-ng-popup [popupModel]="model.popupModel" [getTarget]="getTarget"></sv-ng-popup>
       </div>
     </div>
   </div>

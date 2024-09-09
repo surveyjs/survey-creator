@@ -1,7 +1,7 @@
 
 import { Component, Input } from "@angular/core";
 import { AngularComponentFactory, BaseAngular } from "survey-angular-ui";
-import { Action, CssClassBuilder } from "survey-core";
+import { Action, CssClassBuilder, getActionDropdownButtonTarget } from "survey-core";
 
 @Component({
   selector: "svc-side-bar-property-grid-header",
@@ -10,6 +10,8 @@ import { Action, CssClassBuilder } from "survey-core";
 })
 export class SidebarPropertyGridHeaderComponent extends BaseAngular<Action> {
   @Input() model!: Action;
+  public getTarget: (container: HTMLElement) => HTMLElement = getActionDropdownButtonTarget;
+
   protected getModel(): Action {
     return this.model;
   }
