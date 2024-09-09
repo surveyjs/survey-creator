@@ -14,7 +14,12 @@
         v-show="model.renderedIsVisible"
         ref="root"
       >
-        <div class="svc-side-bar__container-header">
+        <component
+          v-if="model.headerComponentName"
+          :is="model.headerComponentName"
+          :model="model.headerComponentData"
+        ></component>      
+        <div v-else class="svc-side-bar__container-header">
           <div class="svc-side-bar__container-actions">
             <sv-action-bar :model="model.toolbar"></sv-action-bar>
           </div>
@@ -28,6 +33,11 @@
           </template>
         </div>
       </div>
+      <component
+        v-if="model.sideAreaComponentName"
+        :is="model.sideAreaComponentName"
+        :model="model.sideAreaComponentData"
+      ></component>      
     </div>
   </div>
 </template>

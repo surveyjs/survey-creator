@@ -9,6 +9,12 @@ import SideBar from "./side-bar/SideBar.vue";
 import SideBarPage from "./side-bar/SideBarPage.vue";
 import ObjectSelector from "./property-panel/ObjectSelector.vue";
 import PropertyGrid from "./property-panel/PropertyGrid.vue";
+import Tabs from "./tab-control/Tabs.vue";
+import TabControl from "./tab-control/TabControl.vue";
+import TabButton from "./tab-control/TabButton.vue";
+import Placeholder from "./tab-control/Placeholder.vue";
+import PlaceholderHeader from "./tab-control/PlaceholderHeader.vue";
+import PropertyGridHeader from "./tab-control/PropertyGridHeader.vue";
 
 import ActionButton from "./components/ActionButton.vue";
 import Switcher from "./components/Switcher.vue";
@@ -83,6 +89,12 @@ function registerComponents(app: App) {
 
   app.component("svc-side-bar", SideBar);
   app.component("svc-side-bar-page", SideBarPage);
+  app.component("svc-tabs", Tabs);
+  app.component("svc-tab-control", TabControl);
+  app.component("svc-tab-button", TabButton);
+  app.component("svc-property-grid-placeholder", Placeholder);
+  app.component("svc-side-bar-property-grid-placeholder-header", PlaceholderHeader);
+  app.component("svc-side-bar-property-grid-header", PropertyGridHeader);
 
   app.component("svc-property-grid", PropertyGrid);
   app.component("svc-object-selector", ObjectSelector);
