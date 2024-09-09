@@ -12,6 +12,8 @@ export * from "./tab-control/tab-button.component";
 export * from "./tab-control/tabs.component";
 export * from "./tab-control/tab-control.component";
 export * from "./tab-control/side-bar-property-grid-header.component";
+export * from "./tab-control/property-grid-placeholder.component";
+export * from "./tab-control/property-grid-placeholder-header.component";
 
 export * from "./property-panel/object-selector.component";
 export * from "./property-panel/property-grid.component";

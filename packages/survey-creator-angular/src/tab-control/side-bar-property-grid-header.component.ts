@@ -1,11 +1,11 @@
 
 import { Component, Input } from "@angular/core";
-import { BaseAngular } from "survey-angular-ui";
+import { AngularComponentFactory, BaseAngular } from "survey-angular-ui";
 import { Action, CssClassBuilder } from "survey-core";
 
 @Component({
   selector: "svc-side-bar-property-grid-header",
-  templateUrl: "./svc-side-bar-property-grid-header.component.html",
+  templateUrl: "./side-bar-property-grid-header.component.html",
   styles: [":host { display: none; }"]
 })
 export class SidebarPropertyGridHeaderComponent extends BaseAngular<Action> {
@@ -22,3 +22,4 @@ export class SidebarPropertyGridHeaderComponent extends BaseAngular<Action> {
       .toString();
   }
 }
+AngularComponentFactory.Instance.registerComponent("svc-side-bar-property-grid-header", SidebarPropertyGridHeaderComponent);
