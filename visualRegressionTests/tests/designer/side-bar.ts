@@ -1,5 +1,5 @@
-import { Selector } from "testcafe";
-import { url, objectSelectorButton, propertyGridSelector, expandButtonSelector, setJSON, takeElementScreenshot, wrapVisualTest, pageNavigator, getListItemByText, changeToolboxSearchEnabled } from "../../helper";
+import { Selector, ClientFunction } from "testcafe";
+import { url, objectSelectorButton, propertyGridSelector, expandButtonSelector, setJSON, takeElementScreenshot, wrapVisualTest, pageNavigator, getListItemByText, changeToolboxSearchEnabled, getAddNewQuestionButton } from "../../helper";
 import { largeSurvey } from "./surveys/large-survey";
 
 const title = "Sidebar Screenshot";
@@ -113,5 +113,17 @@ test("property grid search matrix", async (t) => {
 
     await t.typeText(".spg-search-editor_input", "choices");
     await takeElementScreenshot("side-bar-search-matrix.png", ".spg-matrixdynamic__content", t, comparer);
+  });
+});
+
+test("tabbed mode", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 900);
+    await ClientFunction(() => {
+      window["creator"].showOneCategoryInPropertyGrid = true;
+    })();
+    await takeElementScreenshot("side-bar-tabbed-placeholder.png", ".svc-side-bar", t, comparer);
+    await t.click(getAddNewQuestionButton());
+    await takeElementScreenshot("side-bar-tabbed-property-grid.png", ".svc-side-bar", t, comparer);
   });
 });

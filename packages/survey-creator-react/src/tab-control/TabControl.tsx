@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Action, ActionContainer, Base } from "survey-core";
 import { SurveyElementBase, ReactElementFactory } from "survey-react-ui";
-import { TabControlModel } from "survey-creator-core";
+import { MenuButton, TabControlModel } from "survey-creator-core";
 import { TabButtonComponent } from "./TabButton";
 
 interface ITabControlProps {
@@ -61,7 +61,7 @@ class TabsComponent extends SurveyElementBase<{ model: ActionContainer }, any> {
 
   protected renderElement(): JSX.Element | null {
     return <>{this.props.model.actions.map(
-      (item: Action, itemIndex: number) => <TabButtonComponent model={item} key={"item" + itemIndex}></TabButtonComponent>
+      (item: Action, itemIndex: number) => <TabButtonComponent model={item as MenuButton} key={"item" + itemIndex}></TabButtonComponent>
     )}</>;
   }
 }
