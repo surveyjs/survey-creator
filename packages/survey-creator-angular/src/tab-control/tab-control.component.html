@@ -1,19 +1,19 @@
 <ng-template #template>
-  <div [class]="sideBarClassName">
+  <div [class]="model.sideBarClassName">
     <div class="svc-sidebar-tabs__top-container">
       <div class="svc-sidebar-tabs__collapse-button">
-        <svc-tab-button [model]="this.model.expandCollapseAction"></svc-tab-button>
+        <svc-tab-button [model]="model.expandCollapseAction"></svc-tab-button>
       </div>
       <div class="svc-sidebar-tabs__separator">
         <div></div>
       </div>
       <div class="svc-sidebar-tabs__items">
-        <svc-tabs [model]="this.model.topToolbar"></svc-tabs>
+        <svc-tabs [model]="model.topToolbar"></svc-tabs>
       </div>
     </div>
     <div class="svc-sidebar-tabs__bottom-container">
       <div class="svc-sidebar-tabs__items">
-        <svc-tabs [model]="this.model.bottomToolbar"></svc-tabs>
+        <svc-tabs [model]="model.bottomToolbar"></svc-tabs>
       </div>
     </div>
   </div>

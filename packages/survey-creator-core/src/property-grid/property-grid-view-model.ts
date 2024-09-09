@@ -7,11 +7,12 @@ import { SurveyCreatorModel } from "../creator-base";
 import { settings } from "../creator-settings";
 import { getLocString } from "../editorLocalization";
 import { SearchManagerPropertyGrid } from "./search-manager";
+import { MenuButton } from "../utils/actions";
 
 export class PropertyGridViewModel extends Base {
   public nextSelectionAction: Action;
   public prevSelectionAction: Action;
-  public objectSelectionAction: Action;
+  public objectSelectionAction: MenuButton;
   public searchManager = new SearchManagerPropertyGrid();
   private selectorPopupModel: PopupModel;
 
@@ -148,7 +149,7 @@ export class PropertyGridViewModel extends Base {
         this.objectSelectionAction.pressed = true;
       }
     });
-    this.objectSelectionAction = new Action({
+    this.objectSelectionAction = new MenuButton({
       id: "svd-grid-object-selector",
       title: this.selectedElementName,
       css: "sv-action--object-selector sv-action-bar-item--secondary",
@@ -169,6 +170,7 @@ export class PropertyGridViewModel extends Base {
       },
       popupModel: this.selectorPopupModel
     });
+    this.objectSelectionAction.contentType = "text-description-vertical";
   }
 
   dispose() {

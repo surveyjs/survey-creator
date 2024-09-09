@@ -1,10 +1,11 @@
-import { Action, ActionContainer, Base } from "survey-core";
+import { ActionContainer, Base } from "survey-core";
 import { SidebarModel } from "./side-bar-model";
+import { MenuButton } from "../../utils/actions";
 
 export class TabControlModel extends Base {
   public topToolbar: ActionContainer = new ActionContainer();
   public bottomToolbar: ActionContainer = new ActionContainer();
-  public expandCollapseAction: Action;
+  public expandCollapseAction: MenuButton;
 
   private updateExpandCollapseAction() {
     this.expandCollapseAction.iconName = this.sidePanel.visible ? "icon-collapse-panel" : "icon-expand-panel";
@@ -13,10 +14,11 @@ export class TabControlModel extends Base {
   }
 
   private createToggleAction() {
-    this.expandCollapseAction = new Action({
+    this.expandCollapseAction = new MenuButton({
       id: "svd-grid-hide",
       showTitle: false,
       visible: true,
+      pressed: false,
       action: () => {
         if (this.sidePanel.visible) {
           this.sidePanel.collapseSidebar();
@@ -34,5 +36,9 @@ export class TabControlModel extends Base {
     this.sidePanel.registerFunctionOnPropertyValueChanged("_visible", () => {
       this.updateExpandCollapseAction();
     });
+  }
+
+  public get sideBarClassName(): string {
+    return "svc-sidebar-tabs" + (this.sidePanel.visible ? "" : " svc-sidebar-tabs--collapsed");
   }
 }

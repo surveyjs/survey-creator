@@ -7,9 +7,9 @@ import { PropertyGridViewModel } from "../../property-grid/property-grid-view-mo
 import { SidebarPageModel } from "../side-bar/side-bar-page-model";
 import { TabDesignerViewModel } from "./designer";
 import { DesignerStateManager } from "./designer-state-manager";
-import { getLocString } from "../../editorLocalization";
 import { TabControlModel } from "../side-bar/tab-control-model";
 import { pgTabIcons } from "../../property-grid/icons";
+import { MenuButton } from "../../utils/actions";
 
 export class TabDesignerPlugin implements ICreatorPlugin {
   public model: TabDesignerViewModel;
@@ -159,11 +159,12 @@ export class TabDesignerPlugin implements ICreatorPlugin {
   private updateTabControlActions() {
     if (this.showOneCategoryInPropertyGrid) {
       const pgTabs = this.propertyGrid.survey.pages.map(p => {
-        const action = new Action({
+        const action = new MenuButton({
           id: p.name,
           locTooltipName: "pe.tabs." + p.name,
           iconName: pgTabIcons[p.name] || pgTabIcons["undefined"],
           active: this.activePageIsPropertyGrid && p.name === this.propertyGrid.survey.currentPage.name,
+          pressed: false,
           action: () => {
             this.creator.sidebar.expandSidebar();
             this.setPropertyGridIsActivePage();

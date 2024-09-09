@@ -2,7 +2,10 @@ import {
   QuestionMatrixDynamicModel,
   IAction,
   MatrixDynamicRowModel,
-  MatrixDropdownRowModelBase
+  MatrixDropdownRowModelBase,
+  Action,
+  property,
+  CssClassBuilder
 } from "survey-core";
 
 export function findAction(actions: Array<IAction>, id: string): IAction {
@@ -58,4 +61,17 @@ export function updateMatixActionsClasses(actions: Array<IAction>) {
   actions.forEach(action => {
     action.innerCss = `${action.innerCss || ""} spg-action-button--muted`;
   });
+}
+
+export class MenuButton extends Action {
+  @property({ defaultValue: "icon" }) contentType: "icon" | "text-description-vertical";
+
+  public get buttonClassName(): string {
+    return new CssClassBuilder()
+      .append("svc-menu-action__button")
+      .append("svc-menu-action__button--with-subtitle", this.contentType === "text-description-vertical")
+      .append("svc-menu-action__button--pressed", this.pressed)
+      .append("svc-menu-action__button--selected", !!this.active)
+      .toString();
+  }
 }

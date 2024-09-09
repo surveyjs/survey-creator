@@ -86,6 +86,7 @@ export * from "../components/side-bar/tab-control-model";
 export * from "../components/switcher/switcher";
 export * from "../utils/events";
 export * from "../utils/utils";
+export { MenuButton } from "../utils/actions";
 export * from "../question-editor/definition";
 export * from "../question-editor/properties";
 export * from "../survey-helper";

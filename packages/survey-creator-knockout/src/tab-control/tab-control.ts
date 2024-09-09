@@ -7,12 +7,7 @@ ko.components.register("svc-tab-control", {
   viewModel: {
     createViewModel: (params: any) => {
       new ImplementorBase(params.model);
-      return {
-        model: params.model,
-        sideBarClassName: ko.computed<string>(() => {
-          return "svc-sidebar-tabs" + (params.model.sidePanel.visible ? "" : " svc-sidebar-tabs--collapsed");
-        })
-      };
+      return params;
     }
   },
   template: template.default

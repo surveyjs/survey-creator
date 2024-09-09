@@ -2,7 +2,7 @@
   <div class="svc-sidebar__header svc-sidebar__header--tabbed">
     <div class="svc-sidebar__header-container svc-sidebar__header-container--with-subtitle">
       <div class="svc-sidebar__header-content" @click="model.action()">
-        <div :class="buttonClassName">
+        <div :class="model.buttonClassName">
           <div class="svc-sidebar__header-caption">
             <span class="svc-sidebar__header-title">{{model.title}}</span>
             <span class="svc-sidebar__header-subtitle">{{model.tooltip}}</span>
@@ -16,19 +16,10 @@
 </template>
 
 <script lang="ts" setup>
-import type { ActionContainer } from "survey-core";
-import { Action, CssClassBuilder, getActionDropdownButtonTarget } from "survey-core";
-import { computed } from "vue";
+import { getActionDropdownButtonTarget } from "survey-core";
 import { useBase } from "survey-vue3-ui";
-const props = defineProps<{ model: Action }>();
-const buttonClassName = computed<string>(
-  () => {
-    return new CssClassBuilder()
-      .append("svc-sidebar__header-button")
-      .append("svc-sidebar__header-button--with-subtitle")
-      .append("svc-sidebar__header-button--pressed", props.model.pressed)
-      .toString();
-  }
-);
+import { MenuButton } from "survey-creator-core";
+const props = defineProps<{ model: MenuButton }>();
+
 useBase(() => props.model);
 </script>

@@ -12,9 +12,5 @@ export class TabControlComponent extends BaseAngular<TabControlModel> {
   protected getModel(): TabControlModel {
     return this.model;
   }
-
-  get sideBarClassName(): string {
-    return "svc-sidebar-tabs" + (this.model.sidePanel.visible ? "" : " svc-sidebar-tabs--collapsed");
-  }
 }
 AngularComponentFactory.Instance.registerComponent("svc-tab-control", TabControlComponent);

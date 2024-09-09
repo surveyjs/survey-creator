@@ -57,8 +57,8 @@ test("showOneCategoryInPropertyGrid: showPlaceholder into property grid if surve
   designerPlugin.showOneCategoryInPropertyGrid = true;
 
   expect(creator.sidebar.activePage).toEqual("propertyGridPlaceholder");
-  expect(creator.sidebar.headerComponentName).toEqual("");
-  expect(creator.sidebar.headerComponentData).toEqual(undefined);
+  expect(creator.sidebar.headerComponentName).toEqual("svc-side-bar-property-grid-placeholder-header");
+  expect(creator.sidebar.headerComponentData).toEqual(designerPlugin["propertyGridPlaceholderPage"]);
 
   let tabs = designerPlugin["tabControlModel"].topToolbar.actions;
   expect(tabs.length).toBe(10);

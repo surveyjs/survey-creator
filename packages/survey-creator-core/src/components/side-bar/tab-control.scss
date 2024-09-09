@@ -23,30 +23,6 @@
   display: flex;
   align-items: center;
 }
-.svc-menu-action__button {
-  display: flex;
-  padding: var(--ctr-menu-toolbar-button-padding-top, 8px) var(--ctr-menu-toolbar-button-padding-right, 8px)
-    var(--ctr-menu-toolbar-button-padding-bottom, 8px) var(--ctr-menu-toolbar-button-padding-left, 8px);
-  justify-content: center;
-  align-items: center;
-  gap: var(--ctr-menu-toolbar-button-gap, 8px);
-  border-radius: var(--ctr-menu-toolbar-button-corner-radius, 4px);
-  cursor: pointer;
-}
-.svc-menu-action__button:hover {
-  background: var(--ctr-menu-toolbar-button-background-color-hovered, $background-dim);
-}
-.svc-menu-action__icon {
-  display: flex;
-  width: var(--ctr-menu-toolbar-button-icon-width, 24px);
-  height: var(--ctr-menu-toolbar-button-icon-height, 24px);
-  justify-content: center;
-  align-items: center;
-
-  use {
-    fill: var(--ctr-menu-toolbar-button-icon-color, $foreground-light);
-  }
-}
 
 .svc-sidebar-tabs__separator {
   display: flex;
@@ -140,7 +116,8 @@
   display: flex;
   align-items: center;
 }
-.svc-sidebar__header-button {
+
+.svc-menu-action__button {
   display: flex;
   padding: var(--ctr-menu-toolbar-button-padding-top, 8px) var(--ctr-menu-toolbar-button-padding-right, 8px)
     var(--ctr-menu-toolbar-button-padding-bottom, 8px) var(--ctr-menu-toolbar-button-padding-left, 8px);
@@ -150,23 +127,29 @@
   border-radius: var(--ctr-menu-toolbar-button-corner-radius, 4px);
   cursor: pointer;
 }
-
-.svc-sidebar__header-button.svc-sidebar__header-button--with-subtitle {
-  display: flex;
+.svc-menu-action__button:hover {
+  background: var(--ctr-menu-toolbar-button-background-color-hovered, $background-dim);
+}
+.svc-menu-action__button.svc-menu-action__button--pressed {
+  opacity: var(--ctr-menu-toolbar-button-opacity-pressed, 0.5);
+  background: var(--ctr-menu-toolbar-button-background-color-pressed, #f3f3f3);
+}
+.svc-menu-action__button.svc-menu-action__button--with-subtitle {
   padding: var(--ctr-menu-toolbar-button-padding-top-with-description, 4px)
     var(--ctr-menu-toolbar-button-padding-right-with-description, 8px)
     var(--ctr-menu-toolbar-button-padding-bottom, 8px) var(--ctr-menu-toolbar-button-padding-left-with-description, 8px);
-  justify-content: center;
-  align-items: center;
-  gap: var(--ctr-menu-toolbar-button-gap, 8px);
 }
 
-.svc-sidebar__header-button:hover {
-  background: var(--ctr-menu-toolbar-button-background-color-hovered, #f3f3f3);
-}
-.svc-sidebar__header-button.svc-sidebar__header-button--pressed {
-  opacity: var(--ctr-menu-toolbar-button-opacity-pressed, 0.5);
-  background: var(--ctr-menu-toolbar-button-background-color-pressed, #f3f3f3);
+.svc-menu-action__icon {
+  display: flex;
+  width: var(--ctr-menu-toolbar-button-icon-width, 24px);
+  height: var(--ctr-menu-toolbar-button-icon-height, 24px);
+  justify-content: center;
+  align-items: center;
+
+  use {
+    fill: var(--ctr-menu-toolbar-button-icon-color, $foreground-light);
+  }
 }
 .svc-sidebar__header-caption {
   display: flex;

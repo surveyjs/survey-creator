@@ -1,6 +1,5 @@
-import { Component, Input } from "@angular/core";
-import { Action, CssClassBuilder } from "survey-core";
-import { BaseAngular, AngularComponentFactory, EmbeddedViewContentComponent } from "survey-angular-ui";
+import { Component } from "@angular/core";
+import { AngularComponentFactory, EmbeddedViewContentComponent } from "survey-angular-ui";
 import { editorLocalization } from "survey-creator-core";
 
 @Component({

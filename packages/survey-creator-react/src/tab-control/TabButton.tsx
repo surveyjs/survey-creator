@@ -1,10 +1,11 @@
 
 import * as React from "react";
-import { Action, Base, CssClassBuilder } from "survey-core";
+import { Base } from "survey-core";
 import { SurveyElementBase, SvgIcon } from "survey-react-ui";
+import { MenuButton } from "survey-creator-core";
 
-export class TabButtonComponent extends SurveyElementBase<{ model: Action }, any> {
-  constructor(props: { model: Action }) {
+export class TabButtonComponent extends SurveyElementBase<{ model: MenuButton }, any> {
+  constructor(props: { model: MenuButton }) {
     super(props);
   }
 
@@ -13,14 +14,10 @@ export class TabButtonComponent extends SurveyElementBase<{ model: Action }, any
   }
 
   protected renderElement(): JSX.Element | null {
-    const className = new CssClassBuilder()
-      .append("svc-menu-action__button")
-      .append("svc-menu-action__button--selected", !!this.props.model.active)
-      .toString();
     return (
       <div className="svc-menu-action">
         <div
-          className={className}
+          className={this.props.model.buttonClassName}
           title={this.props.model.tooltip}
           onClick={() => { this.props.model.action(); }}
         >

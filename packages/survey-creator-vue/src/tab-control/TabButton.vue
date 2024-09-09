@@ -1,6 +1,6 @@
 <template>
   <div class="svc-menu-action">
-    <div :class="buttonClassName" :title="model.tooltip" @click="model.action()">
+    <div :class="model.buttonClassName" :title="model.tooltip" @click="model.action()">
       <div class="svc-menu-action__icon">
         <div class="svc-menu-action__icon-container">
           <sv-svg-icon
@@ -14,18 +14,9 @@
 </template>
 
 <script lang="ts" setup>
-import { Action, CssClassBuilder } from "survey-core";
+import { MenuButton } from "survey-creator-core";
 import { useBase } from "survey-vue3-ui";
-import { computed } from "vue";
-const props = defineProps<{ model: Action }>();
-const buttonClassName = computed<string>(
-  () => {
-    const className = new CssClassBuilder()
-      .append("svc-menu-action__button")
-      .append("svc-menu-action__button--selected", !!props.model.active)
-      .toString();
-    return className;
-  }
-);
+const props = defineProps<{ model: MenuButton }>();
+
 useBase(() => props.model);
 </script>
