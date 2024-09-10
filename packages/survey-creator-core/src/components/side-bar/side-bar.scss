@@ -13,7 +13,7 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
   min-width: 370px;
   width: 450px;
   height: 100%;
-  border-inline-start: 1px solid var(--ctr-property-grid-border-color, $border);
+  // border-inline-start: 1px solid var(--ctr-property-grid-border-color, $border);
 }
 
 .svc-side-bar__wrapper {
@@ -200,7 +200,8 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
   width: auto;
   height: 100%;
   background-color: var(--ctr-property-grid-form-background-color, $background-dim);
-  border-inline-start: 1px solid transparent;
+  border-inline-start: 1px solid var(--ctr-property-grid-border-color, $border);
+  // border-inline-start: 1px solid transparent;
 }
 
 .svc-side-bar {
