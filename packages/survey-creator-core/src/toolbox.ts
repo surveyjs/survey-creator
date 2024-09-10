@@ -46,7 +46,7 @@ export interface IQuestionToolboxItem extends IAction {
    * 
    * [UI Icons](https://surveyjs.io/form-library/documentation/icons (linkStyle))
    */
-  iconName: string;
+  iconName?: string;
   /**
    * A JSON object used to create a new question or panel when users click this toolbox item. It must contain the `type` property.
    * 
@@ -57,7 +57,7 @@ export interface IQuestionToolboxItem extends IAction {
    * A user-friendly toolbox item title.
    */
   title: string;
-  className: string;
+  className?: string;
   /**
    * A toolbox item tooltip.
    * 
@@ -80,32 +80,8 @@ export interface IQuestionToolboxItem extends IAction {
    */
   enabled?: boolean;
   getArea?: (el: HTMLElement) => HTMLElement;
-  /**
-   * Removes all subitems from this toolbox item.
-   * 
-   * [Manage Toolbox Subitems](https://surveyjs.io/survey-creator/documentation/toolbox-customization#manage-toolbox-subitems (linkStyle))
-   * @see removeSubitem
-   * @see addSubitem
-   */
   clearSubitems?(): void;
-  /**
-   * Adds a subitem to this toolbox item.
-   * 
-   * [Manage Toolbox Subitems](https://surveyjs.io/survey-creator/documentation/toolbox-customization#manage-toolbox-subitems (linkStyle))
-   * @param subitem An `IQuestionToolboxItem` object that represents a subitem configuration.
-   * @param index *(Optional)* A zero-based index at which to insert the subitem. If you do not specify this parameter, the subitem is added to the end.
-   * @see removeSubitem
-   * @see clearSubitems
-   */
   addSubitem?(subitem: IQuestionToolboxItem, index: number): void;
-  /**
-   * Removes a specific subitem from this toolbox item.
-   * 
-   * [Manage Toolbox Subitems](https://surveyjs.io/survey-creator/documentation/toolbox-customization#manage-toolbox-subitems (linkStyle))
-   * @param subitem A subitem [`name`](https://surveyjs.io/survey-creator/documentation/api-reference/iquestiontoolboxitem#name) or an `IQuestionToolboxItem` object that represents a subitem configuration.
-   * @see clearSubitems
-   * @see addSubitem
-   */
   removeSubitem?(subitem: IQuestionToolboxItem | string): void;
 }
 
@@ -210,7 +186,13 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
     this.setSubItems({ items: items });
     this.component = QuestionToolbox.defaultItemGroupComponent;
   }
-
+  /**
+   * Removes all subitems from this toolbox item.
+   * 
+   * [Manage Toolbox Subitems](https://surveyjs.io/survey-creator/documentation/toolbox-customization#manage-toolbox-subitems (linkStyle))
+   * @see removeSubitem
+   * @see addSubitem
+   */
   public clearSubitems(): void {
     if (this.hasSubItems) {
       this.items = [];
@@ -218,7 +200,15 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
       this.popupModel.dispose();
     }
   }
-
+  /**
+   * Adds a subitem to this toolbox item.
+   * 
+   * [Manage Toolbox Subitems](https://surveyjs.io/survey-creator/documentation/toolbox-customization#manage-toolbox-subitems (linkStyle))
+   * @param subitem An `IQuestionToolboxItem` object that represents a subitem configuration.
+   * @param index *(Optional)* A zero-based index at which to insert the subitem. If you do not specify this parameter, the subitem is added to the end.
+   * @see removeSubitem
+   * @see clearSubitems
+   */
   public addSubitem(item: IQuestionToolboxItem, index: number = -1): void {
     if (!item) return;
     const newItem: QuestionToolboxItem = new QuestionToolboxItem(item);
@@ -233,7 +223,14 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
     }
     this.addSubitems(array);
   }
-
+  /**
+   * Removes a specific subitem from this toolbox item.
+   * 
+   * [Manage Toolbox Subitems](https://surveyjs.io/survey-creator/documentation/toolbox-customization#manage-toolbox-subitems (linkStyle))
+   * @param subitem A subitem [`name`](https://surveyjs.io/survey-creator/documentation/api-reference/iquestiontoolboxitem#name) or an `IQuestionToolboxItem` object that represents a subitem configuration.
+   * @see clearSubitems
+   * @see addSubitem
+   */
   public removeSubitem(item: IQuestionToolboxItem | string): void {
     if (!this.hasSubItems || !item) return;
 
@@ -761,7 +758,7 @@ export class QuestionToolbox
    * @param name A toolbox item's [`name`](https://surveyjs.io/survey-creator/documentation/api-reference/iquestiontoolboxitem#name).
    * @returns A toolbox item or `null` if a toolbox item with the specified name isn't found.
    */
-  public getItemByName(name: string): IQuestionToolboxItem {
+  public getItemByName(name: string): QuestionToolboxItem {
     if (!name) return null;
     const index: number = this.indexOf(name);
     return index > -1 ? this.actions[index] : null;
