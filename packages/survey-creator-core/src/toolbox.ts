@@ -155,13 +155,23 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
   /**
    * A user-friendly toolbox item title.
    */
-  title: string;
+  public get title(): string {
+    return this.getTitle();
+  }
+  public set title(val: string) {
+    this.setTitle(val);
+  }
   /**
    * Specifies whether users can interact with the toolbox item.
    * 
    * Default value: `true`
    */
-  enabled?: boolean;
+  public get enabled(): boolean {
+    return this.getEnabled();
+  }
+  public set enabled(val: boolean) {
+    this.setEnabled(val);
+  }
   className: string;
   /**
    * An icon name.
