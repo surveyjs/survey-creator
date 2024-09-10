@@ -30,7 +30,7 @@ export type overflowBehaviorType = "hideInMenu" | "scroll";
 /**
  * A toolbox item configuration.
  * 
- * `IQuestionToolboxItem` objects are used in such Toolbox API methods as [`getItemByName(name)`](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolbox#getItemByName), [`addItem(item, index)`](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolbox#addItem), [`replaceItem(item)`](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolbox#replaceItem), and others.
+ * `IQuestionToolboxItem` objects are used in such Toolbox API methods as [`addItem(item, index)`](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolbox#addItem), [`replaceItem(item)`](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolbox#replaceItem), [`addSubitem(subitem, index)`](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolboxitem#addSubitem), and others.
  * 
  * [Toolbox Customization](https://surveyjs.io/survey-creator/documentation/toolbox-customization (linkStyle))
  */
@@ -61,7 +61,7 @@ export interface IQuestionToolboxItem extends IAction {
   /**
    * A toolbox item tooltip.
    * 
-   * If `tooltip` is undefined, the [`title`](https://surveyjs.io/survey-creator/documentation/api-reference/iquestiontoolboxitem#title) property value is used instead.
+   * If `tooltip` is undefined, the [`title`](#title) property value is used instead.
    */
   tooltip?: string;
   isCopied?: boolean;
@@ -119,6 +119,11 @@ export class QuestionToolboxCategory extends Base {
     }
   }
 }
+/**
+ * A toolbox item instance.
+ * 
+ * An object of this class is returned by the `QuestionToolbox`'s [`getItemByName(name)`](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolbox#getItemByName) method.
+ */
 export class QuestionToolboxItem extends Action implements IQuestionToolboxItem {
   static getItemClassNames(iconName?: string): string {
     return new CssClassBuilder()
@@ -147,12 +152,49 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
         .toString();
     }) as any;
   }
+  /**
+   * A user-friendly toolbox item title.
+   */
+  title: string;
+  /**
+   * Specifies whether users can interact with the toolbox item.
+   * 
+   * Default value: `true`
+   */
+  enabled?: boolean;
   className: string;
+  /**
+   * An icon name.
+   * 
+   * [UI Icons](https://surveyjs.io/form-library/documentation/icons (linkStyle))
+   */
   iconName: string;
+  /**
+   * A toolbox item identifier.
+   * 
+   * > Toolbox item names must be unique.
+   */
   name: string;
+  /**
+   * A JSON object used to create a new question or panel when users click this toolbox item. It must contain the `type` property.
+   * 
+   * [View Toolbox Customization Demo](https://surveyjs.io/survey-creator/examples/survey-toolbox-customization/ (linkStyle))
+   */
   json: any;
+  /**
+   * A toolbox item tooltip.
+   * 
+   * If `tooltip` is undefined, the [`title`](#title) property value is used instead.
+   */
   tooltip: string;
   isCopied: boolean;
+  /**
+   * A category to which this toolbox item belongs.
+   * 
+   * Out-of-the-box categories include `"general"`, `"choice"`, `"text"`, `"containers"`, `"matrix"`, and `"misc"`.
+   * 
+   * Default value: `"general"`
+   */
   category: string;
   toJSON() {
     return this.item;
@@ -204,7 +246,7 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
    * Adds a subitem to this toolbox item.
    * 
    * [Manage Toolbox Subitems](https://surveyjs.io/survey-creator/documentation/toolbox-customization#manage-toolbox-subitems (linkStyle))
-   * @param subitem An `IQuestionToolboxItem` object that represents a subitem configuration.
+   * @param subitem An [`IQuestionToolboxItem`](https://surveyjs.io/survey-creator/documentation/api-reference/iquestiontoolboxitem) object that represents a subitem configuration.
    * @param index *(Optional)* A zero-based index at which to insert the subitem. If you do not specify this parameter, the subitem is added to the end.
    * @see removeSubitem
    * @see clearSubitems
@@ -227,7 +269,7 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
    * Removes a specific subitem from this toolbox item.
    * 
    * [Manage Toolbox Subitems](https://surveyjs.io/survey-creator/documentation/toolbox-customization#manage-toolbox-subitems (linkStyle))
-   * @param subitem A subitem [`name`](https://surveyjs.io/survey-creator/documentation/api-reference/iquestiontoolboxitem#name) or an `IQuestionToolboxItem` object that represents a subitem configuration.
+   * @param subitem A subitem [`name`](https://surveyjs.io/survey-creator/documentation/api-reference/iquestiontoolboxitem#name) or an [`IQuestionToolboxItem`](https://surveyjs.io/survey-creator/documentation/api-reference/iquestiontoolboxitem) object that represents a subitem configuration.
    * @see clearSubitems
    * @see addSubitem
    */
@@ -754,7 +796,7 @@ export class QuestionToolbox
     }
   }
   /**
-   * Returns a [toolbox item](https://surveyjs.io/survey-creator/documentation/api-reference/iquestiontoolboxitem) with a specified name.
+   * Returns a [toolbox item](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolboxitem) with a specified name.
    * @param name A toolbox item's [`name`](https://surveyjs.io/survey-creator/documentation/api-reference/iquestiontoolboxitem#name).
    * @returns A toolbox item or `null` if a toolbox item with the specified name isn't found.
    */
