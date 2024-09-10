@@ -8,13 +8,19 @@ import {
   actionModeType,
   IAction,
   ActionContainer,
-  ComputedUpdater
+  ComputedUpdater,
+  AnimationBoolean,
+  IAnimationConsumer,
+  classesToSelector,
+  PanelModel,
+  Question
 } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { settings } from "../creator-settings";
 import { DesignerStateManager } from "./tabs/designer-state-manager";
 import { TabDesignerPlugin } from "./tabs/designer-plugin";
 import { isPanelDynamic } from "../survey-elements";
+import { cleanHtmlElementAfterAnimation, prepareElementForVerticalAnimation } from "survey-core";
 
 export class SurveyElementActionContainer extends AdaptiveActionContainer {
   private needToShrink(item: Action, shrinkTypeConverterAction: boolean) {
@@ -107,7 +113,80 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       }, 50);
     }
   }) collapsed: boolean;
-  @property() renderedCollapsed: boolean;
+  @property() private _renderedCollapsed: boolean;
+
+  @property() isAnimationRunningCollapsed: boolean;
+
+  protected getAnimatedElement() {
+    return null;
+  }
+
+  protected getInnerAnimatedElements() {
+    return [] as unknown as NodeListOf<Element>;
+  }
+
+  protected getCollapsingCssClassName() {
+    return "svc-question--leave";
+  }
+  protected getExpandingCssClassName() {
+    return "svc-question--enter";
+  }
+
+  private getExpandCollapseAnimationOptions(): IAnimationConsumer {
+    const beforeRunAnimation = (el: HTMLElement, animatingClassName: string) => {
+      prepareElementForVerticalAnimation(el);
+      this.getInnerAnimatedElements().forEach((elem: HTMLElement) => {
+        prepareElementForVerticalAnimation(elem);
+        elem.classList.add(animatingClassName);
+      });
+    };
+    const afterRunAnimation = (el: HTMLElement, animatingClassName: string) => {
+      cleanHtmlElementAfterAnimation(el);
+      this.getInnerAnimatedElements().forEach((elem: HTMLElement) => {
+        cleanHtmlElementAfterAnimation(elem);
+        elem.classList.remove(animatingClassName);
+      });
+    };
+    return {
+      getRerenderEvent: () => this.onElementRerendered,
+      getEnterOptions: () => {
+        const className = this.getExpandingCssClassName();
+        return {
+          cssClass: className,
+          onBeforeRunAnimation: (el) => {
+            beforeRunAnimation(el, className);
+          },
+          onAfterRunAnimation: (el) => {
+            afterRunAnimation(el, className);
+          },
+        };
+      },
+      getLeaveOptions: () => {
+        const className = this.getCollapsingCssClassName();
+        return {
+          cssClass: className,
+          onBeforeRunAnimation: (el) => {
+            beforeRunAnimation(el, className);
+          },
+          onAfterRunAnimation: (el) => {
+            afterRunAnimation(el, className);
+          },
+        };
+      },
+      getAnimatedElement: () => this.getAnimatedElement(),
+      isAnimationEnabled: () => this.animationAllowed
+    };
+  }
+
+  private animationCollapsed = new AnimationBoolean(this.getExpandCollapseAnimationOptions(), (val) => {
+    this._renderedCollapsed = !val;
+  }, () => !this.renderedCollapsed);
+  public set renderedCollapsed(val: boolean) {
+    this.animationCollapsed.sync(!val);
+  }
+  public get renderedCollapsed(): boolean {
+    return !!this._renderedCollapsed;
+  }
 
   protected createActionContainer(): ActionContainer {
     const actionContainer = new SurveyElementActionContainer();

@@ -21,7 +21,8 @@ import {
   QuestionTextModel,
   ActionContainer,
   Helpers,
-  PanelModel
+  PanelModel,
+  classesToSelector
 } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { editorLocalization, getLocString } from "../editorLocalization";
@@ -165,6 +166,22 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     }
     return result;
   }
+
+  protected getAnimatedElement() {
+    const cssClasses = this.surveyElement.isPanel ? this.surveyElement.cssClasses.panel : this.surveyElement.cssClasses;
+    if (cssClasses.content) {
+      return this.surveyElement.getWrapperElement().querySelector(`:scope ${classesToSelector(cssClasses.content)}`) as HTMLElement;
+    }
+    return null;
+  }
+
+  protected getInnerAnimatedElements() {
+    const cssDescription = (this.surveyElement as unknown as Question | PanelModel).cssDescription;
+    const selectorArray = [":scope .svc-question__content-actions .sv-action-bar"];
+    if (cssDescription) selectorArray.push(`:scope ${classesToSelector(cssDescription)}`);
+    return this.surveyElement.getWrapperElement().querySelectorAll(selectorArray.join(","));
+  }
+
   protected expandWithDragIn() {
     super.expandWithDragIn();
     this.element.dragTypeOverMe = null;

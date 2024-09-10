@@ -109,7 +109,7 @@ svc-question {
   flex-grow: 1;
   border-radius: calcSize(0.5);
   box-sizing: border-box;
-  padding: calcSize(4) calcSize(5) calcSize(8);
+  padding: calcSize(4) calcSize(5) calcSize(2);
   background: $background;
   box-shadow: $shadow-small;
   outline: none;
@@ -165,6 +165,24 @@ svc-question {
   overflow: visible;
 }
 
+.svc-question--enter {
+  animation-name: fadeIn, moveInWithOverflow;
+  animation-fill-mode: forwards;
+  &.svc-question--enter.svc-question--enter.svc-question--enter.svc-question--enter{
+    opacity: 0;
+  }
+  animation-duration: 5s;
+  animation-delay: 5s, 0s;
+}
+.svc-question--leave {
+  animation-name: fadeIn, moveInWithOverflow;
+  animation-direction: reverse;
+  animation-fill-mode: forwards;
+  animation-duration: 5s;
+  animation-delay: 0s, 5s;
+}
+
+
 .svc-question__content {
   .sd-question:not(.sd-question--paneldynamic) {
     .sd-panel__content {
@@ -191,15 +209,19 @@ svc-question {
 }
 
 .svc-question__content-actions {
-  position: absolute;
+  position: relative;
   opacity: 0;
-  bottom: calcSize(2);
-  inset-inline-start: calcSize(4); // left
-  inset-inline-end: calcSize(3.5); // right
+  //inset-inline-start: calcSize(4); // left
+  //inset-inline-end: calcSize(3.5); // right
+  margin-left: calcSize(-1);
+  width: calc(100% + 20px);
   transition: opacity $creator-transition-duration;
 
   &:focus-within {
     opacity: 1;
+  }
+  .sv-action-bar {
+    margin-top: calcSize(2);
   }
 
   .sv-action--convertTo {

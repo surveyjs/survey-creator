@@ -1,4 +1,4 @@
-import { Action, ActionContainer, ComputedUpdater, CssClassBuilder, DragTypeOverMeEnum, IAction, IElement, PageModel, property } from "survey-core";
+import { Action, ActionContainer, classesToSelector, ComputedUpdater, CssClassBuilder, DragTypeOverMeEnum, IAction, IElement, PageModel, property } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { IPortableMouseEvent } from "../utils/events";
 import { SurveyElementAdornerBase } from "./action-container-view-model";
@@ -248,6 +248,20 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       this.footerActionsBar.setItems(footerActions);
     }
     return this._footerActionsBar;
+  }
+
+  protected getAnimatedElement() {
+    const cssClasses = this.surveyElement.cssClasses.page;
+    if (cssClasses?.description) {
+      return this.surveyElement.getWrapperElement()?.querySelector(`:scope ${classesToSelector(cssClasses.description)}`) as HTMLElement;
+    }
+    return null;
+  }
+
+  protected getInnerAnimatedElements() {
+    const cssClasses = this.surveyElement.cssClasses;
+    if (cssClasses.pageRow) return this.surveyElement.getWrapperElement()?.querySelectorAll(`:scope ${classesToSelector(cssClasses.pageRow)}`);
+    return null;
   }
 
 }
