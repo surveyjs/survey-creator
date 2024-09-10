@@ -6,7 +6,8 @@
 
 <script lang="ts" setup>
 import type { ActionContainer } from "survey-core";
+import { MenuButton } from "survey-creator-core";
 import { useBase } from "survey-vue3-ui";
-const props = defineProps<{ model: ActionContainer }>();
+const props = defineProps<{ model: ActionContainer<MenuButton> }>();
 useBase(() => props.model);
 </script>

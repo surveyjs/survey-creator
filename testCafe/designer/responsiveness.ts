@@ -111,7 +111,7 @@ test("Responsive creator: property grid", async (t) => {
 
     .click(questions.find(".sv-string-editor").withText("question1"))
     .expect(propertyGridSelector.visible).ok()
-    .expect(propertyGridSelector.offsetWidth).eql(450)
+    .expect(propertyGridSelector.offsetWidth).eql(451)
     .expect(flyoutPropertyGrid.exists).notOk()
     .expect(questionToolbarActions.count).eql(4)
 

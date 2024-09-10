@@ -3,8 +3,8 @@ import { SidebarModel } from "./side-bar-model";
 import { MenuButton } from "../../utils/actions";
 
 export class TabControlModel extends Base {
-  public topToolbar: ActionContainer = new ActionContainer();
-  public bottomToolbar: ActionContainer = new ActionContainer();
+  public topToolbar: ActionContainer<MenuButton> = new ActionContainer<MenuButton>();
+  public bottomToolbar: ActionContainer<MenuButton> = new ActionContainer<MenuButton>();
   public expandCollapseAction: MenuButton;
 
   private updateExpandCollapseAction() {
