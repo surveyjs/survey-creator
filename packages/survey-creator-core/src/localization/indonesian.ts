@@ -154,6 +154,7 @@ export var indonesianStrings = {
     translationPlaceHolder: "Terjemahan...",
     translationSource: "Sumber: ",
     translationTarget: "Target: ",
+    translationYouTubeNotSupported: "Tautan YouTube tidak didukung.",
     themeExportButton: "Ekspor",
     themeImportButton: "Mengimpor",
     surveyJsonExportButton: "Ekspor",
@@ -2924,3 +2925,4 @@ editorLocalization.locales["id"] = indonesianStrings;
 // progressBarLocation.bottom: "Bottom" => "Dasar"
 // progressBarLocation.topBottom: "Top and bottom" => "Atas dan bawah"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Mengatur opsi pilihan dalam tata letak multi-kolom. Saat diatur ke 0, opsi ditampilkan dalam satu baris. Saat diatur ke -1, nilai aktual diwarisi dari properti \"Jumlah kolom berlapis\" dari matriks induk."
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "Tautan YouTube tidak didukung."

@@ -154,6 +154,7 @@ export var danishStrings = {
     translationPlaceHolder: "Oversættelse...",
     translationSource: "Kilde: ",
     translationTarget: "Mål: ",
+    translationYouTubeNotSupported: "YouTube-links understøttes ikke.",
     themeExportButton: "Eksport",
     themeImportButton: "Import",
     surveyJsonExportButton: "Eksport",
@@ -2955,3 +2956,4 @@ editorLocalization.locales["da"] = danishStrings;
 // progressBarLocation.bottom: "Bottom" => "Bund"
 // progressBarLocation.topBottom: "Top and bottom" => "Top og bund"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Arrangerer valgmuligheder i et layout med flere kolonner. Når den er indstillet til 0, vises indstillingerne på en enkelt linje. Når den er angivet til -1, nedarves den faktiske værdi fra egenskaben \"Antal indlejrede kolonner\" for den overordnede matrix."
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "YouTube-links understøttes ikke."

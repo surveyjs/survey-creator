@@ -156,6 +156,7 @@ export var enStrings = {
     translationPlaceHolder: "Translation...",
     translationSource: "Source: ",
     translationTarget: "Target: ",
+    translationYouTubeNotSupported: "YouTube links are not supported.",
     themeExportButton: "Export",
     themeImportButton: "Import",
     surveyJsonExportButton: "Export",

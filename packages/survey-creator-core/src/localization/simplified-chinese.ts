@@ -154,6 +154,7 @@ var simplifiedChineseTranslation = {
     translationPlaceHolder: "译本。。。",
     translationSource: "源：",
     translationTarget: "目标：",
+    translationYouTubeNotSupported: "不支持 YouTube 链接。",
     themeExportButton: "出口",
     themeImportButton: "进口",
     surveyJsonExportButton: "出口",
@@ -2912,3 +2913,4 @@ editorLocalization.locales["zh-cn"] = simplifiedChineseTranslation;
 // progressBarLocation.bottom: "Bottom" => "底"
 // progressBarLocation.topBottom: "Top and bottom" => "顶部和底部"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "在多列布局中排列选项。设置为 0 时，选项将以单行显示。当设置为 -1 时，实际值继承自父矩阵的 “Nested column count” 属性。"
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "不支持 YouTube 链接。"

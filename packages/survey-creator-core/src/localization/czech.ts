@@ -154,6 +154,7 @@ export var czStrings = {
     translationPlaceHolder: "Překlad...",
     translationSource: "Zdroj: ",
     translationTarget: "Cíl: ",
+    translationYouTubeNotSupported: "Odkazy na YouTube nejsou podporovány.",
     themeExportButton: "Vývoz",
     themeImportButton: "Dovoz",
     surveyJsonExportButton: "Vývoz",
@@ -2344,3 +2345,4 @@ editorLocalization.locales["cs"] = czStrings;
 // progressBarLocation.bottom: "Bottom" => "Dno"
 // progressBarLocation.topBottom: "Top and bottom" => "Nahoře a dole"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Uspořádá volby voleb ve vícesloupcovém rozvržení. Když je nastavená hodnota 0, volby se zobrazí na jednom řádku. Pokud je nastavena hodnota -1, skutečná hodnota je zděděna z vlastnosti \"Počet vnořených sloupců\" nadřazené matice."
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "Odkazy na YouTube nejsou podporovány."
