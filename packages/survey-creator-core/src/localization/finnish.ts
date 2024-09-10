@@ -154,6 +154,7 @@ export var fiStrings = {
     translationPlaceHolder: "Käännös...",
     translationSource: "Lähde: ",
     translationTarget: "Kohde: ",
+    translationYouTubeNotSupported: "YouTube-linkkejä ei tueta.",
     themeExportButton: "Vienti",
     themeImportButton: "Tuoda",
     surveyJsonExportButton: "Vienti",
@@ -2770,3 +2771,4 @@ editorLocalization.locales["fi"] = fiStrings;
 // progressBarLocation.bottom: "Bottom" => "Pohja"
 // progressBarLocation.topBottom: "Top and bottom" => "Ylhäällä ja alhaalla"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Järjestää valintavaihtoehdot monisarakkeiseen asetteluun. Kun asetuksena on 0, asetukset näytetään yhdellä rivillä. Kun arvoksi on määritetty -1, todellinen arvo periytyy päämatriisin sisäkkäisten sarakkeiden määrä -ominaisuudesta."
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "YouTube-linkkejä ei tueta."

@@ -154,6 +154,7 @@ export var huStrings = {
     translationPlaceHolder: "Fordítás...",
     translationSource: "Forrás: ",
     translationTarget: "Cél: ",
+    translationYouTubeNotSupported: "A YouTube-linkek nem támogatottak.",
     themeExportButton: "Kivitel",
     themeImportButton: "Importál",
     surveyJsonExportButton: "Kivitel",
@@ -2923,3 +2924,4 @@ editorLocalization.locales["hu"] = huStrings;
 // progressBarLocation.bottom: "Bottom" => "Fenék"
 // progressBarLocation.topBottom: "Top and bottom" => "Felső és alsó"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Az adatválaszték-beállításokat többoszlopos elrendezésbe rendezi. Ha 0-ra van állítva, a beállítások egyetlen sorban jelennek meg. Ha -1 értékre van állítva, a tényleges érték a szülőmátrix \"Beágyazott oszlopok száma\" tulajdonságából öröklődik."
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "A YouTube-linkek nem támogatottak."

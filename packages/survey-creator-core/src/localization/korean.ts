@@ -154,6 +154,7 @@ export var koreanStrings = {
     translationPlaceHolder: "번역...",
     translationSource: "근원: ",
     translationTarget: "과녁: ",
+    translationYouTubeNotSupported: "YouTube 링크는 지원되지 않습니다.",
     themeExportButton: "수출",
     themeImportButton: "수입",
     surveyJsonExportButton: "수출",
@@ -2974,3 +2975,4 @@ editorLocalization.locales["ko"] = koreanStrings;
 // progressBarLocation.bottom: "Bottom" => "밑바닥"
 // progressBarLocation.topBottom: "Top and bottom" => "위쪽 및 아래쪽"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "선택 옵션을 여러 열 레이아웃으로 정렬합니다. 0으로 설정하면 옵션이 한 줄로 표시됩니다. -1로 설정하면 실제 값이 부모 행렬의 \"중첩 열 수\" 속성에서 상속됩니다."
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "YouTube 링크는 지원되지 않습니다."

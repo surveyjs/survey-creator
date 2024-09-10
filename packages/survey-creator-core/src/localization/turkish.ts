@@ -154,6 +154,7 @@ export var turkishStrings = {
     translationPlaceHolder: "Çeviri...",
     translationSource: "Kaynak: ",
     translationTarget: "Hedef: ",
+    translationYouTubeNotSupported: "YouTube bağlantıları desteklenmemektedir.",
     themeExportButton: "Ihracat",
     themeImportButton: "Ithalat",
     surveyJsonExportButton: "Ihracat",
@@ -2765,3 +2766,4 @@ editorLocalization.locales["tr"] = turkishStrings;
 // progressBarLocation.bottom: "Bottom" => "Dip"
 // progressBarLocation.topBottom: "Top and bottom" => "Üst ve alt"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Seçim seçeneklerini çok sütunlu bir düzende düzenler. 0 olarak ayarlandığında, seçenekler tek bir satırda görüntülenir. -1 olarak ayarlandığında, gerçek değer üst matrisin \"İç içe sütun sayısı\" özelliğinden devralınır."
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "YouTube bağlantıları desteklenmemektedir."

@@ -1580,7 +1580,7 @@ export class PropertyGridEditorDateTime extends PropertyGridEditor {
 
 function validateImageItemValueProperty(obj: Base, prop: JsonObjectProperty, val: any): string {
   if (obj.getType() !== "imageitemvalue" || prop.name !== "imageLink" || !Helpers.isUrlYoutubeVideo(val)) return undefined;
-  return "Error";
+  return editorLocalization.getString("ed.translationYouTubeNotSupported");
 }
 
 export class PropertyGridLinkEditor extends PropertyGridEditor {

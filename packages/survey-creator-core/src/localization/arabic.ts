@@ -154,6 +154,7 @@ export var arStrings = {
     translationPlaceHolder: "Translation...",
     translationSource: "مصدر: ",
     translationTarget: "هدف: ",
+    translationYouTubeNotSupported: "روابط يوتيوب غير مدعومة.",
     themeExportButton: "تصدير",
     themeImportButton: "استورد",
     surveyJsonExportButton: "تصدير",
@@ -2681,3 +2682,4 @@ editorLocalization.locales["ar"] = arStrings;
 // progressBarLocation.bottom: "Bottom" => "قاع"
 // progressBarLocation.topBottom: "Top and bottom" => "أعلى وأسفل"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "يرتب خيارات التحديد في تخطيط متعدد الأعمدة. عند التعيين على 0 ، يتم عرض الخيارات في سطر واحد. عند التعيين إلى -1، يتم توريث القيمة الفعلية من خاصية \"عدد الأعمدة المتداخلة\" للمصفوفة الأصل."
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "روابط يوتيوب غير مدعومة."

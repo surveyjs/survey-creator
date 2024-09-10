@@ -3453,6 +3453,7 @@ test("Image picker items doesn't support youtube, bug#5867", () => {
   expect(question.choices[0].imageLink).toBe(imgUrl);
   cell.value = "https://www.youtube.com/embed/tgbNymZ7vqY";
   expect(cell.errors).toHaveLength(1);
+  expect(cell.errors[0].text).toBe("YouTube links are not supported.");
   expect(question.choices[0].imageLink).toBe(imgUrl);
 });
 test("Show commentText & commentPlaceholder on setting showCommentArea, bug#5527", () => {

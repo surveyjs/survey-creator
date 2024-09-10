@@ -154,6 +154,7 @@ var polishStrings = {
     translationPlaceHolder: "Tłumaczenie...",
     translationSource: "Źródło: ",
     translationTarget: "Cel: ",
+    translationYouTubeNotSupported: "Linki do YouTube nie są obsługiwane.",
     themeExportButton: "Eksport",
     themeImportButton: "Import",
     surveyJsonExportButton: "Eksport",
@@ -3037,3 +3038,4 @@ editorLocalization.locales["pl"] = polishStrings;
 // progressBarLocation.bottom: "Bottom" => "Dno"
 // progressBarLocation.topBottom: "Top and bottom" => "Góra i dół"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Rozmieszcza opcje wyboru w układzie wielokolumnowym. Po ustawieniu wartości 0 opcje są wyświetlane w jednym wierszu. Po ustawieniu wartości -1 rzeczywista wartość jest dziedziczona z właściwości \"Liczba kolumn zagnieżdżonych\" macierzy nadrzędnej."
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "Linki do YouTube nie są obsługiwane."
