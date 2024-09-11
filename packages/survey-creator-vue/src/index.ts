@@ -74,195 +74,111 @@ import CellQuestionDropdownVue from "./adorners/CellQuestionDropdown.vue";
 import CustomWidget from "./adorners/CustomWidget.vue";
 import QuestionBanner from "./adorners/QuestionBanner.vue";
 
-function registerComponents() {
-  ComponentFactory.Instance.registerComponent("svc-tabbed-menu", TabbedMenu);
-  ComponentFactory.Instance.registerComponent(
-    "svc-tabbed-menu-item-wrapper",
-    TabbedMenuItemWrapper
-  );
-  ComponentFactory.Instance.registerComponent(
-    "svc-tabbed-menu-item",
-    TabbedMenuItem
-  );
-
-  ComponentFactory.Instance.registerComponent("svc-side-bar", SideBar);
-  ComponentFactory.Instance.registerComponent("svc-side-bar-tab", SideBarTab);
-
-  ComponentFactory.Instance.registerComponent(
-    "svc-property-grid",
-    PropertyGrid
-  );
-  ComponentFactory.Instance.registerComponent(
-    "svc-object-selector",
-    ObjectSelector
-  );
-  ComponentFactory.Instance.registerComponent("svc-search", Search);
-  ComponentFactory.Instance.registerComponent("svc-switcher", Switcher);
-
-  ComponentFactory.Instance.registerComponent(
-    "svc-action-button",
-    ActionButton
-  );
-
-  ComponentFactory.Instance.registerComponent(
-    "survey-embeddedsurvey",
-    EmbeddedSurvey
-  );
-  ComponentFactory.Instance.registerComponent(
-    "sv-logic-operator",
-    LogicOperator
-  );
-  ComponentFactory.Instance.registerComponent("survey-linkvalue", LinkValue);
-
-  ComponentFactory.Instance.registerComponent("survey-color", Color);
-  ComponentFactory.Instance.registerComponent("color-item", ColorItem);
-  ComponentFactory.Instance.registerComponent("survey-fileedit", File);
-  ComponentFactory.Instance.registerComponent("survey-spinedit", SpinEditor);
-  ComponentFactory.Instance.registerComponent(
-    "survey-textwithreset",
-    TextWithReset
-  );
-  ComponentFactory.Instance.registerComponent(
-    "survey-commentwithreset",
-    TextWithReset
-  );
-  ComponentFactory.Instance.registerComponent("survey-widget", SurveyComponent);
-  ComponentFactory.Instance.registerComponent("survey-simulator", Simulator);
-  ComponentFactory.Instance.registerComponent("svc-tab-test", Test);
-  ComponentFactory.Instance.registerComponent("svc-complete-page", TestAgain);
-  ComponentFactory.Instance.registerComponent("survey-results", SurveyResults);
-  ComponentFactory.Instance.registerComponent(
-    "survey-results-table-row",
-    SurveyResultsRow
-  );
-
-  ComponentFactory.Instance.registerComponent(
-    "json-error-item",
-    JsonEditorErrorItem
-  );
-  ComponentFactory.Instance.registerComponent(
-    "svc-tab-json-editor-textarea",
-    JsonEditorTextArea
-  );
-  ComponentFactory.Instance.registerComponent(
-    "svc-tab-json-editor-ace",
-    JsonEditorAce
-  );
-
-  ComponentFactory.Instance.registerComponent(
-    "svc-tab-translation",
-    Translation
-  );
-  ComponentFactory.Instance.registerComponent(
-    "sd-translation-line-skeleton",
-    TranslationLineSkeleton
-  );
-  ComponentFactory.Instance.registerComponent(
-    "svc-translate-from-action",
-    TranslateFromAction
-  );
-
-  ComponentFactory.Instance.registerComponent("svc-tab-logic", Logic);
-
-  ComponentFactory.Instance.registerComponent("svc-tab-theme", Theme);
-
-  ComponentFactory.Instance.registerComponent(
-    "svc-adaptive-toolbox",
-    AdaptiveToolbox
-  );
-  ComponentFactory.Instance.registerComponent("svc-toolbox", Toolbox);
-  ComponentFactory.Instance.registerComponent("svc-toolbox-list", ToolboxList);
-  ComponentFactory.Instance.registerComponent(
-    "svc-toolbox-category",
-    ToolboxCategory
-  );
-  ComponentFactory.Instance.registerComponent("svc-toolbox-tool", ToolboxTool);
-  ComponentFactory.Instance.registerComponent("svc-toolbox-item", ToolboxItem);
-  ComponentFactory.Instance.registerComponent(
-    "svc-toolbox-item-group",
-    ToolboxItemGroup
-  );
-
-  ComponentFactory.Instance.registerComponent(
-    editableStringRendererName,
-    StringEditor
-  );
-
-  ComponentFactory.Instance.registerComponent("svc-tab-designer", Designer);
-  ComponentFactory.Instance.registerComponent(
-    "svc-page-navigator",
-    PageNavigator
-  );
-  ComponentFactory.Instance.registerComponent(
-    "svc-page-navigator-item",
-    PageNavigatorItem
-  );
-  ComponentFactory.Instance.registerComponent("svc-page", Page);
-  ComponentFactory.Instance.registerComponent("svc-row", Row);
-  ComponentFactory.Instance.registerComponent(
-    "svc-add-new-question-btn",
-    PageAddQuestion
-  );
-  ComponentFactory.Instance.registerComponent("svc-question", QuestionAdorner);
-  ComponentFactory.Instance.registerComponent(
-    "svc-rating-question",
-    QuestionAdorner
-  );
-  ComponentFactory.Instance.registerComponent(
-    "svc-rating-question-content",
-    RatingAdorner
-  );
-  ComponentFactory.Instance.registerComponent(
-    "svc-image-question",
-    QuestionImageAdorner
-  );
-  ComponentFactory.Instance.registerComponent(
-    "svc-image-question-adorner",
-    ImageAdorner
-  );
-  ComponentFactory.Instance.registerComponent("svc-matrix-cell", MatrixCell);
-  ComponentFactory.Instance.registerComponent(
-    "svc-cell-question",
-    CellQuestion
-  );
-  ComponentFactory.Instance.registerComponent(
-    "svc-cell-dropdown-question",
-    CellQuestionDropdownVue
-  );
-  ComponentFactory.Instance.registerComponent(
-    "svc-question-editor-content",
-    QuestionEditor
-  );
-  ComponentFactory.Instance.registerComponent("svc-logo-image", Logo);
-  ComponentFactory.Instance.registerComponent("svc-panel", Panel);
-  ComponentFactory.Instance.registerComponent("svc-item-value", ItemValue);
-  ComponentFactory.Instance.registerComponent(
-    "svc-image-item-value",
-    ImageItemValue
-  );
-  ComponentFactory.Instance.registerComponent(
-    "svc-dropdown-question",
-    QuestionDropdown
-  );
-  ComponentFactory.Instance.registerComponent(
-    "svc-dropdown-question-adorner",
-    Dropdown
-  );
-  ComponentFactory.Instance.registerComponent(
-    "svc-widget-question",
-    CustomWidget
-  );
-  ComponentFactory.Instance.registerComponent(
-    "svc-question-banner",
-    QuestionBanner
-  );
+function registerComponentWithFunction(
+  registerFunc: (name: string, component: any) => void,
+  name: string,
+  component: any
+) {
+  registerFunc(name, component);
 }
-registerComponents();
+
+function registerComponents(
+  registerFunc: (name: string, component: any) => void
+) {
+  const registerComponent = registerComponentWithFunction.bind(
+    undefined,
+    registerFunc
+  );
+  registerComponent("svc-tabbed-menu", TabbedMenu);
+  registerComponent("svc-tabbed-menu-item-wrapper", TabbedMenuItemWrapper);
+  registerComponent("svc-tabbed-menu-item", TabbedMenuItem);
+
+  registerComponent("svc-side-bar", SideBar);
+  registerComponent("svc-side-bar-tab", SideBarTab);
+
+  registerComponent("svc-property-grid", PropertyGrid);
+  registerComponent("svc-object-selector", ObjectSelector);
+  registerComponent("svc-search", Search);
+  registerComponent("svc-switcher", Switcher);
+
+  registerComponent("svc-action-button", ActionButton);
+
+  registerComponent("survey-embeddedsurvey", EmbeddedSurvey);
+  registerComponent("sv-logic-operator", LogicOperator);
+  registerComponent("survey-linkvalue", LinkValue);
+
+  registerComponent("survey-color", Color);
+  registerComponent("color-item", ColorItem);
+  registerComponent("survey-fileedit", File);
+  registerComponent("survey-spinedit", SpinEditor);
+  registerComponent("survey-textwithreset", TextWithReset);
+  registerComponent("survey-commentwithreset", TextWithReset);
+  registerComponent("survey-widget", SurveyComponent);
+  registerComponent("survey-simulator", Simulator);
+  registerComponent("svc-tab-test", Test);
+  registerComponent("svc-complete-page", TestAgain);
+  registerComponent("survey-results", SurveyResults);
+  registerComponent("survey-results-table-row", SurveyResultsRow);
+
+  registerComponent("json-error-item", JsonEditorErrorItem);
+  registerComponent("svc-tab-json-editor-textarea", JsonEditorTextArea);
+  registerComponent("svc-tab-json-editor-ace", JsonEditorAce);
+
+  registerComponent("svc-tab-translation", Translation);
+  registerComponent("sd-translation-line-skeleton", TranslationLineSkeleton);
+  registerComponent("svc-translate-from-action", TranslateFromAction);
+
+  registerComponent("svc-tab-logic", Logic);
+
+  registerComponent("svc-tab-theme", Theme);
+
+  registerComponent("svc-adaptive-toolbox", AdaptiveToolbox);
+  registerComponent("svc-toolbox", Toolbox);
+  registerComponent("svc-toolbox-list", ToolboxList);
+  registerComponent("svc-toolbox-category", ToolboxCategory);
+  registerComponent("svc-toolbox-tool", ToolboxTool);
+  registerComponent("svc-toolbox-item", ToolboxItem);
+  registerComponent("svc-toolbox-item-group", ToolboxItemGroup);
+
+  registerComponent(editableStringRendererName, StringEditor);
+
+  registerComponent("svc-tab-designer", Designer);
+  registerComponent("svc-page-navigator", PageNavigator);
+  registerComponent("svc-page-navigator-item", PageNavigatorItem);
+  registerComponent("svc-page", Page);
+  registerComponent("svc-row", Row);
+  registerComponent("svc-add-new-question-btn", PageAddQuestion);
+  registerComponent("svc-question", QuestionAdorner);
+  registerComponent("svc-rating-question", QuestionAdorner);
+  registerComponent("svc-rating-question-content", RatingAdorner);
+  registerComponent("svc-image-question", QuestionImageAdorner);
+  registerComponent("svc-image-question-adorner", ImageAdorner);
+  registerComponent("svc-matrix-cell", MatrixCell);
+  registerComponent("svc-cell-question", CellQuestion);
+  registerComponent("svc-cell-dropdown-question", CellQuestionDropdownVue);
+  registerComponent("svc-question-editor-content", QuestionEditor);
+  registerComponent("svc-logo-image", Logo);
+  registerComponent("svc-panel", Panel);
+  registerComponent("svc-item-value", ItemValue);
+  registerComponent("svc-image-item-value", ImageItemValue);
+  registerComponent("svc-dropdown-question", QuestionDropdown);
+  registerComponent("svc-dropdown-question-adorner", Dropdown);
+  registerComponent("svc-widget-question", CustomWidget);
+  registerComponent("svc-question-banner", QuestionBanner);
+}
+
+registerComponents((name, component) =>
+  ComponentFactory.Instance.registerComponent(name, component)
+);
 
 export { SurveyCreatorComponent };
 
 export const surveyCreatorPlugin = {
   install(app: App) {
     app.component("SurveyCreatorComponent", SurveyCreatorComponent);
+    registerComponents((name, component) => {
+      app.component(name, component);
+      ComponentFactory.Instance.registerComponent(name, name);
+    });
   },
 };
