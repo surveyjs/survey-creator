@@ -154,6 +154,7 @@ export var hebrewStrings = {
     translationPlaceHolder: "תרגום...",
     translationSource: "מקור: ",
     translationTarget: "יעד: ",
+    translationYouTubeNotSupported: "קישורי YouTube אינם נתמכים.",
     themeExportButton: "ייצא",
     themeImportButton: "ייבא",
     surveyJsonExportButton: "ייצא",
@@ -2338,3 +2339,4 @@ editorLocalization.locales["he"] = hebrewStrings;
 // progressBarLocation.bottom: "Bottom" => "ישבן"
 // progressBarLocation.topBottom: "Top and bottom" => "עליון ותחתון"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "מסדר אפשרויות בחירה בפריסה מרובת עמודות. כאשר הן מוגדרות על 0, האפשרויות מוצגות בשורה אחת. כאשר הוא מוגדר ל- -1, הערך בפועל עובר בירושה מהמאפיין \"ספירת עמודות מקוננת\" של מטריצת האב."
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "קישורי YouTube אינם נתמכים."

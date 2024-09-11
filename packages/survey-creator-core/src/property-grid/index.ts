@@ -1559,6 +1559,9 @@ export class PropertyGridEditorString extends PropertyGridEditorStringBase {
     }
     return json;
   }
+  public validateValue(obj: Base, question: Question, prop: JsonObjectProperty, val: any): string {
+    return validateImageItemValueProperty(obj, prop, val);
+  }
 }
 
 export class PropertyGridEditorDateTime extends PropertyGridEditor {
@@ -1575,19 +1578,19 @@ export class PropertyGridEditorDateTime extends PropertyGridEditor {
   }
 }
 
+function validateImageItemValueProperty(obj: Base, prop: JsonObjectProperty, val: any): string {
+  if (obj.getType() !== "imageitemvalue" || prop.name !== "imageLink" || !Helpers.isUrlYoutubeVideo(val)) return undefined;
+  return editorLocalization.getString("ed.translationYouTubeNotSupported");
+}
+
 export class PropertyGridLinkEditor extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type === "url" || prop.type === "file";
   }
-  public getJSON(
-    obj: Base,
-    prop: JsonObjectProperty,
-    options: ISurveyCreatorOptions
-  ): any {
+  public getJSON(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): any {
     const res: any = { type: "fileedit", storeDataAsText: false, placeholder: editorLocalization.getString("pe.fileInputPlaceholder") };
     return res;
   }
-
   public onCreated(obj: Base, question: QuestionFileEditorModel, prop: JsonObjectProperty, options: ISurveyCreatorOptions) {
     if (["image", "imageitemvalue"].indexOf(obj.getType()) > -1) {
       const questionObj = obj.getType() == "imageitemvalue" ? (<any>obj).locOwner : <Question>obj;
@@ -1604,7 +1607,9 @@ export class PropertyGridLinkEditor extends PropertyGridEditor {
       options.chooseFiles(input, callback, { element: obj, elementType: obj.getType(), propertyName: question.name });
     });
   }
-
+  public validateValue(obj: Base, question: Question, prop: JsonObjectProperty, val: any): string {
+    return validateImageItemValueProperty(obj, prop, val);
+  }
 }
 
 export class PropertyGridEditorColor extends PropertyGridEditor {

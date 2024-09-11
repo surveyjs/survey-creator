@@ -338,6 +338,22 @@ test("Translation show All strings and property visibility, #1", () => {
   translation.showAllStrings = true;
   expect(translation.root.locItems).toHaveLength(2);
 });
+test("Translation tab & onShowingProperty errror. We should not have errors, #5869", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "checkbox", name: "question1", choices: ["item1", "item2"] }]
+  };
+  creator.onShowingProperty.add((sender, options) => {
+    if (options.obj.getType() == "survey") {
+      options.canShow = options.property.name == "title";
+    }
+  });
+  const tabTranslation = new TabTranslationPlugin(creator);
+  tabTranslation.activate();
+  const translation = tabTranslation.model;
+  translation.reset();
+  expect(translation.root.locItems).toHaveLength(0);
+});
 test("Translation make translation observable", () => {
   const creator = new CreatorTester();
   creator.JSON = {

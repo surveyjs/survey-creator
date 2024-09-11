@@ -154,6 +154,7 @@ export let svStrings = {
     translationPlaceHolder: "Översättning...",
     translationSource: "Källa: ",
     translationTarget: "Mål: ",
+    translationYouTubeNotSupported: "YouTube-länkar stöds inte.",
     themeExportButton: "Export",
     themeImportButton: "Import",
     surveyJsonExportButton: "Export",
@@ -2947,3 +2948,4 @@ editorLocalization.locales["sv"] = svStrings;
 // progressBarLocation.bottom: "Bottom" => "Botten"
 // progressBarLocation.topBottom: "Top and bottom" => "Topp och botten"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Ordnar valalternativ i en layout med flera kolumner. När värdet är 0 visas alternativen på en enda rad. När värdet är -1 ärvs det faktiska värdet från egenskapen \"Kapslad kolumnantal\" i den överordnade matrisen."
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "YouTube-länkar stöds inte."

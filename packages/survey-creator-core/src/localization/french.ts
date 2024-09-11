@@ -154,6 +154,7 @@ var frenchTranslation = {
     translationPlaceHolder: "Traduction...",
     translationSource: "Source: ",
     translationTarget: "Cible: ",
+    translationYouTubeNotSupported: "Les liens YouTube ne sont pas pris en charge.",
     themeExportButton: "Exportation",
     themeImportButton: "Importation",
     surveyJsonExportButton: "Exportation",
@@ -2831,3 +2832,4 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // progressBarLocation.bottom: "Bottom" => "Fond"
 // progressBarLocation.topBottom: "Top and bottom" => "Haut et bas"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Organise les options de choix dans une mise en page à plusieurs colonnes. Lorsqu’elle est définie sur 0, les options sont affichées sur une seule ligne. Lorsqu’elle est définie sur -1, la valeur réelle est héritée de la propriété « Nombre de colonnes imbriquées » de la matrice parente."
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "Les liens YouTube ne sont pas pris en charge."
