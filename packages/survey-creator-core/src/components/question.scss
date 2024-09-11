@@ -711,23 +711,6 @@ svc-question,
   }
 }
 
-.svc-question__content--html,
-.svc-question__content--image {
-  &.svc-question__content--empty {
-    padding-top: calcSize(5);
-  }
-}
-
-.svc-creator--mobile {
-
-  .svc-question__content--html,
-  .svc-question__content--image {
-    &.svc-question__content--empty {
-      padding-top: calcSize(3);
-    }
-  }
-}
-
 .sd-panel {
   .svc-question__content--image:not(.svc-question__content--empty) {
     padding-left: 1px;
