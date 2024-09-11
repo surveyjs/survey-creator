@@ -1,6 +1,6 @@
 import { Component, Input } from "@angular/core";
 import { AngularComponentFactory, BaseAngular } from "survey-angular-ui";
-import { ObjectSelectorModel, SidebarTabModel } from "survey-creator-core";
+import { ObjectSelectorModel } from "survey-creator-core";
 
 @Component({
   selector: "svc-object-selector",

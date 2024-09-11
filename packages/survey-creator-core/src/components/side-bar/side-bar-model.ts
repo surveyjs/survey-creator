@@ -1,36 +1,43 @@
 import { Base, property, AdaptiveActionContainer, Action, ComputedUpdater, propertyArray, AnimationBoolean, IAnimationConsumer } from "survey-core";
 import { getLocString } from "../../editorLocalization";
 import { SurveyCreatorModel } from "../../creator-base";
-import { SidebarTabModel } from "./side-bar-tab-model";
+import { SidebarPageModel } from "./side-bar-page-model";
 import { ResizeManager } from "../../utils/resizer";
 import { notShortCircuitAnd } from "../../utils/utils";
 
 export class SidebarModel extends Base {
   public toolbar: AdaptiveActionContainer = new AdaptiveActionContainer();
+
   private _expandAction: Action;
   private _collapseAction: Action;
-  private _activeTab: SidebarTabModel;
+  private _activePage: SidebarPageModel;
   private onSidebarVisibilityChanged;
   private resizeManager: ResizeManager;
 
-  @propertyArray() tabs: Array<SidebarTabModel>;
+  @propertyArray() pages: Array<SidebarPageModel>;
   @property() headerText: string;
   @property({ defaultValue: true }) _visible: boolean;
   @property({ defaultValue: true }) renderedIsVisible: boolean
   @property({ defaultValue: false }) collapsedManually: boolean;
   @property({ defaultValue: false }) expandedManually: boolean;
-  @property() hasVisibleTabs: boolean;
+  @property() hasVisiblePages: boolean;
   @property({ defaultValue: false }) flyoutMode: boolean;
   @property({
     onSet: (val, target: SidebarModel) => {
-      target.tabs.forEach(tab => tab.visible = false);
-      target._activeTab = target.tabs.filter(tab => tab.id === val)[0];
-      if (target._activeTab) {
-        target.headerText = target._activeTab.caption;
-        target._activeTab.visible = true;
-      }
+      target.setActivePage(target.pages.filter(page => page.id === val)[0]);
     }
-  }) activeTab: string;
+  }) activePage: string;
+  @property() hideSideBarVisibilityControlActions: boolean;
+
+  @property() sideAreaComponentName: string;
+  @property() sideAreaComponentData: any;
+
+  @property() headerComponentName: string;
+  @property() headerComponentData: any;
+
+  public get activePageModel(): SidebarPageModel {
+    return this._activePage;
+  }
 
   private rootElement: HTMLElement;
 
@@ -53,7 +60,8 @@ export class SidebarModel extends Base {
       getEnterOptions: () => {
         return {
           onBeforeRunAnimation: (el) => onBeforeRunAnimation,
-          cssClass: "svc-side-bar--enter" };
+          cssClass: "svc-side-bar--enter"
+        };
       }
     };
   }
@@ -63,10 +71,10 @@ export class SidebarModel extends Base {
     this.allowFlyoutMode = true;
   }, () => this.renderedIsVisible);
   public set visible(val: boolean) {
-    if(this._visible && !val && !this.flyoutMode) {
+    if (this._visible && !val && !this.flyoutMode) {
       this.allowFlyoutMode = false;
     }
-    if(this._visible !== val) {
+    if (this._visible !== val) {
       this._visible = val;
       this.visibilityAnimation.sync(val);
     }
@@ -82,8 +90,8 @@ export class SidebarModel extends Base {
   public get closeText(): string {
     return getLocString("pe.close");
   }
-  public getTabById(id: string) {
-    return this.tabs.filter(tab => tab.id === id)[0];
+  public getPageById(id: string) {
+    return this.pages.filter(page => page.id === id)[0];
   }
 
   private createActions() {
@@ -96,7 +104,7 @@ export class SidebarModel extends Base {
       visible: <any>new ComputedUpdater<boolean>(() => {
         return notShortCircuitAnd(
           !notShortCircuitAnd(!this.creator.allowCollapseSidebar, !this.flyoutMode),
-          this.visible);
+          this.visible, !this.hideSideBarVisibilityControlActions);
       }),
       action: () => {
         this.collapseSidebar();
@@ -125,7 +133,7 @@ export class SidebarModel extends Base {
         },
         locTitleName: "ed.showPanel",
         visible: <any>new ComputedUpdater<boolean>(() => {
-          return notShortCircuitAnd(this.hasVisibleTabs, !this.visible);
+          return notShortCircuitAnd(this.hasVisiblePages, !this.visible, !this.hideSideBarVisibilityControlActions);
         }),
         showTitle: false
       });
@@ -151,6 +159,19 @@ export class SidebarModel extends Base {
     this.visible = this.creator.showSidebar;
     this.createActions();
   }
+
+  public getActivePage(): SidebarPageModel {
+    return this._activePage;
+  }
+  public setActivePage(newPage: SidebarPageModel): void {
+    this.pages.forEach(page => page.visible = false);
+    this._activePage = newPage;
+    if (this._activePage) {
+      this.headerText = this._activePage.caption;
+      this._activePage.visible = true;
+    }
+  }
+
   public getExpandAction() {
     return this._expandAction;
   }
@@ -160,16 +181,16 @@ export class SidebarModel extends Base {
   public expandSidebar() {
     this.creator.setShowSidebar(true);
   }
-  public addTab(id: string, componentName?: string, model?: any, buildActions?: () => Array<Action>): SidebarTabModel {
-    const tab = new SidebarTabModel(id, this, componentName, model);
-    this.tabs.push(tab);
+  public addPage(id: string, componentName?: string, model?: any, buildActions?: () => Array<Action>): SidebarPageModel {
+    const page = new SidebarPageModel(id, this, componentName, model);
+    this.pages.push(page);
     if (!!buildActions) {
       (buildActions() || []).forEach(action => this.toolbar.actions.push(action));
     }
-    return tab;
+    return page;
   }
-  public updateHasVisibleTabs() {
-    this.hasVisibleTabs = (this.tabs || []).filter(tab => tab.visible).length > 0;
+  public updateHasVisiblePages() {
+    this.hasVisiblePages = (this.pages || []).filter(page => page.visible).length > 0;
   }
   public dispose(): void {
     if (!!this.creator && !this.isDisposed) {

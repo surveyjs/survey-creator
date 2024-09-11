@@ -2,13 +2,13 @@
   <component
     v-if="model.visible"
     :is="model.componentName"
-    :model="model.model"
+    :model="model.componentData"
   ></component>
 </template>
 
 <script lang="ts" setup>
-import type { SidebarTabModel } from "survey-creator-core";
+import type { SidebarPageModel } from "survey-creator-core";
 import { useBase } from "survey-vue3-ui";
-const props = defineProps<{ model: SidebarTabModel }>();
+const props = defineProps<{ model: SidebarPageModel }>();
 useBase(() => props.model);
 </script>
