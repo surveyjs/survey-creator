@@ -127,7 +127,7 @@ import {
   SurveyCreatorModel,
   ImageItemValueWrapperViewModel,
 } from "survey-creator-core";
-import { computed, onMounted, onUpdated, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 
 const props = defineProps<{
   componentName: string;

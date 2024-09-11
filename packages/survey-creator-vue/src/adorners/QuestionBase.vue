@@ -19,10 +19,18 @@
       :class="model.css()"
       v-key2click="{ disableTabStop: true }"
     >
-      <div class="svc-question__drop-indicator svc-question__drop-indicator--left"></div>
-      <div class="svc-question__drop-indicator svc-question__drop-indicator--right"></div>
-      <div class="svc-question__drop-indicator svc-question__drop-indicator--top"></div>
-      <div class="svc-question__drop-indicator svc-question__drop-indicator--bottom"></div>
+      <div
+        class="svc-question__drop-indicator svc-question__drop-indicator--left"
+      ></div>
+      <div
+        class="svc-question__drop-indicator svc-question__drop-indicator--right"
+      ></div>
+      <div
+        class="svc-question__drop-indicator svc-question__drop-indicator--top"
+      ></div>
+      <div
+        class="svc-question__drop-indicator svc-question__drop-indicator--bottom"
+      ></div>
       <div
         v-if="model.allowDragging"
         class="svc-question__drag-area"
@@ -47,7 +55,7 @@
       </div>
       <div v-if="!element.hasTitle" :class="model.cssCollapsedHiddenHeader">
         <div :class="model.cssCollapsedHiddenTitle">
-          <survey-string :locString="element.locTitle"/>
+          <survey-string :locString="element.locTitle" />
         </div>
       </div>
 
