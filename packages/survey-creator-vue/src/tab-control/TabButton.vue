@@ -1,12 +1,17 @@
 <template>
   <div class="svc-menu-action">
-    <div :class="model.buttonClassName" :title="model.tooltip" @click="model.action()">
+    <div
+      :class="model.buttonClassName"
+      :title="model.tooltip"
+      @click="model.action()"
+    >
       <div class="svc-menu-action__icon">
         <div class="svc-menu-action__icon-container">
-          <sv-svg-icon
+          <SvComponent
+            :is="'sv-svg-icon'"
             :iconName="model.iconName"
             :size="24"
-          ></sv-svg-icon>
+          ></SvComponent>
         </div>
       </div>
     </div>
@@ -15,7 +20,7 @@
 
 <script lang="ts" setup>
 import { MenuButton } from "survey-creator-core";
-import { useBase } from "survey-vue3-ui";
+import { SvComponent, useBase } from "survey-vue3-ui";
 const props = defineProps<{ model: MenuButton }>();
 
 useBase(() => props.model);

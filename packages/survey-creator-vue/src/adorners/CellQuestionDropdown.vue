@@ -1,17 +1,17 @@
 <template>
   <div class="svc-question__adorner">
     <div class="svc-question__content svc-question__content--in-popup">
-      <component :is="componentName" v-bind="componentData"></component>
+      <SvComponent :is="componentName" v-bind="componentData"></SvComponent>
       <div class="svc-question__dropdown-choices">
         <div
           v-for="item in element.visibleChoices"
           :key="item.value"
           class="svc-question__dropdown-choice"
         >
-          <component
+          <SvComponent
             :is="getItemValueComponentName(item)"
             v-bind="getItemValueComponentData(item)"
-          ></component>
+          ></SvComponent>
         </div>
       </div>
     </div>
@@ -19,6 +19,7 @@
 </template>
 
 <script lang="ts" setup>
+import { SvComponent } from "survey-vue3-ui";
 import type { ItemValue, QuestionDropdownModel } from "survey-core";
 import { useBase } from "survey-vue3-ui";
 import { computed } from "vue";

@@ -6,7 +6,7 @@
     @mouseout="deactivateZoom()"
   >
     <div v-if="!model.hasFrame" class="svd-simulator-content">
-      <survey-widget :model="model.survey"></survey-widget>
+      <SvComponent :is="'survey-widget'" :model="model.survey"></SvComponent>
     </div>
     <div
       v-if="model.hasFrame"
@@ -27,13 +27,17 @@
         }"
       >
         <div class="svd-simulator-content">
-          <survey-widget :model="model.survey"></survey-widget>
+          <SvComponent
+            :is="'survey-widget'"
+            :model="model.survey"
+          ></SvComponent>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script lang="ts" setup>
+import { SvComponent } from "survey-vue3-ui";
 import type { SurveySimulatorModel } from "survey-creator-core";
 import { useBase } from "survey-vue3-ui";
 import { computed } from "vue";
