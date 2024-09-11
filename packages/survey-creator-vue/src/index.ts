@@ -16,6 +16,7 @@ import Placeholder from "./tab-control/Placeholder.vue";
 import PlaceholderHeader from "./tab-control/PlaceholderHeader.vue";
 import PropertyGridHeader from "./tab-control/PropertyGridHeader.vue";
 
+import QuestionError from "./components/QuestionError.vue";
 import ActionButton from "./components/ActionButton.vue";
 import Switcher from "./components/Switcher.vue";
 import Simulator from "./tabs/preview/Simulator.vue";
@@ -118,6 +119,7 @@ function registerComponents(
   registerComponent("svc-switcher", Switcher);
 
   registerComponent("svc-action-button", ActionButton);
+  registerComponent("svc-question-error", QuestionError);
 
   registerComponent("survey-embeddedsurvey", EmbeddedSurvey);
   registerComponent("sv-logic-operator", LogicOperator);
