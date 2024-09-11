@@ -29,11 +29,11 @@ export class SidebarModel extends Base {
   }) activePage: string;
   @property() hideSideBarVisibilityControlActions: boolean;
 
-  sideAreaComponentName: string;
-  sideAreaComponentData: any;
+  @property() sideAreaComponentName: string;
+  @property() sideAreaComponentData: any;
 
-  headerComponentName: string;
-  headerComponentData: any;
+  @property() headerComponentName: string;
+  @property() headerComponentData: any;
 
   public get activePageModel(): SidebarPageModel {
     return this._activePage;
