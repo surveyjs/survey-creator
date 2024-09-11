@@ -154,6 +154,7 @@ var persianStrings = {
     translationPlaceHolder: "در حال ترجمه...",
     translationSource: "منبع: ",
     translationTarget: "هدف: ",
+    translationYouTubeNotSupported: "پیوندهای YouTube پشتیبانی نمی شوند.",
     themeExportButton: "صادرات",
     themeImportButton: "واردات",
     surveyJsonExportButton: "صادرات",
@@ -2725,3 +2726,4 @@ editorLocalization.locales["fa"] = persianStrings;
 // progressBarLocation.bottom: "Bottom" => "پایین"
 // progressBarLocation.topBottom: "Top and bottom" => "بالا و پایین"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "گزینه های انتخاب را در یک طرح چند ستونی مرتب می کند. هنگامی که روی 0 تنظیم می شود، گزینه ها در یک خط نمایش داده می شوند. هنگامی که روی -1 تنظیم می شود، مقدار واقعی از ویژگی \"تعداد ستون های تو در تو\" ماتریس والد به ارث می رسد."
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "پیوندهای YouTube پشتیبانی نمی شوند."

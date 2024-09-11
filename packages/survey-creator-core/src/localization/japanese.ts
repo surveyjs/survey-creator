@@ -154,6 +154,7 @@ export var jaStrings = {
     translationPlaceHolder: "翻訳。。。",
     translationSource: "源：",
     translationTarget: "ターゲット：",
+    translationYouTubeNotSupported: "YouTube リンクはサポートされていません。",
     themeExportButton: "輸出",
     themeImportButton: "輸入",
     surveyJsonExportButton: "輸出",
@@ -2769,3 +2770,4 @@ editorLocalization.locales["ja"] = jaStrings;
 // progressBarLocation.bottom: "Bottom" => "底"
 // progressBarLocation.topBottom: "Top and bottom" => "上部と下部"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "選択オプションを複数列のレイアウトで配置します。0 に設定すると、オプションは 1 行で表示されます。-1 に設定すると、実際の値は親行列の \"Nested column count\" プロパティから継承されます。"
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "YouTube リンクはサポートされていません。"

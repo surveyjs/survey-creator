@@ -154,6 +154,7 @@ export var mnStrings = {
     translationPlaceHolder: "Орчуулга...",
     translationSource: "Эх сурвалж: ",
     translationTarget: "Зорилго: ",
+    translationYouTubeNotSupported: "YouTube-ийн холбоосууд дэмжигдээгүй.",
     themeExportButton: "Экспорт",
     themeImportButton: "Импорт",
     surveyJsonExportButton: "Экспорт",
@@ -2426,3 +2427,4 @@ editorLocalization.locales["mn"] = mnStrings;
 // progressBarLocation.bottom: "Bottom" => "Доод"
 // progressBarLocation.topBottom: "Top and bottom" => "Дээд, доод"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Сонголт хийх сонголтуудыг олон баганатай загвараар зохион байгуулна. 0-д тавихад сонголтуудыг нэг мөр харуулдаг. -1-д тавихад бодит үнэ цэнэ нь эцэг эхийн матрицын \"Nested column count\" өмчөөс өвлөгддөг."
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "YouTube-ийн холбоосууд дэмжигдээгүй."

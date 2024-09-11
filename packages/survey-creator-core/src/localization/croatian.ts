@@ -154,6 +154,7 @@ export var hrStrings = {
     translationPlaceHolder: "Prevođenje...",
     translationSource: "Izvor: ",
     translationTarget: "Cilj: ",
+    translationYouTubeNotSupported: "YouTube veze nisu podržane.",
     themeExportButton: "Izvoz",
     themeImportButton: "Uvoz",
     surveyJsonExportButton: "Izvoz",
@@ -2764,3 +2765,4 @@ editorLocalization.locales["hr"] = hrStrings;
 // progressBarLocation.bottom: "Bottom" => "Dno"
 // progressBarLocation.topBottom: "Top and bottom" => "Vrh i dno"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Raspoređuje opcije izbora u rasporedu s više stupaca. Kada je postavljena na 0, opcije se prikazuju u jednom retku. Kada je postavljena na -1, stvarna vrijednost nasljeđuje se iz svojstva \"Broj ugniježđenih stupaca\" nadređene matrice."
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "YouTube veze nisu podržane."

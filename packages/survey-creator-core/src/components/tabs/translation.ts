@@ -513,7 +513,9 @@ export class TranslationGroup extends TranslationItemBase {
     return res;
   }
   private canShowProperty(property: JsonObjectProperty, isEmpty: boolean, isShowing: boolean = true): boolean {
-    if (!!this.translation) return this.translation.canShowProperty(this.obj, property, isEmpty, isShowing);
+    const obj = Array.isArray(this.obj) ? (this.obj.length > 0 ? <any>this.obj[0] : undefined) : this.obj;
+    if(!obj) return false;
+    if (!!this.translation) return this.translation.canShowProperty(obj, property, isEmpty, isShowing);
     return isShowing;
   }
   private createTranslationItem(obj: any, property: JsonObjectProperty): TranslationItem {
