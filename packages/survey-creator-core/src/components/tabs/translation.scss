@@ -4,7 +4,11 @@
   width: 100%;
   height: 100%;
   background-color: var(--ctr-surface-background-color, $background-dim);
-  @include disableTransitionAnimations;
+}
+
+.svc-translation-tab {
+  /* disable library transition animations */
+  --sjs-transition-duration: 0ms;
 }
 
 .st-properties {
@@ -264,7 +268,6 @@ td.st-table__cell:first-of-type {
     width: auto;
   }
 }
-
 .st-body {
-  @include disableAnimations;
+  @include disableLibraryAnimations;
 }

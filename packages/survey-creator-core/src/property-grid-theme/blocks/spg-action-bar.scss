@@ -29,6 +29,7 @@
   border-radius: calcSize(12.5);
   background-color: transparent;
   cursor: pointer;
+  transition: background-color $creator-transition-duration, opacity $creator-transition-duration;
 
   &:hover,
   &:focus {
@@ -47,6 +48,7 @@
 
   use {
     fill: var(--ctr-actionbar-button-icon-color, $foreground-light);
+    transition: fill $creator-transition-duration;
   }
 }
 

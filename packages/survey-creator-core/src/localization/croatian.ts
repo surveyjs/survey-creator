@@ -154,6 +154,7 @@ export var hrStrings = {
     translationPlaceHolder: "Prevođenje...",
     translationSource: "Izvor: ",
     translationTarget: "Cilj: ",
+    translationYouTubeNotSupported: "YouTube veze nisu podržane.",
     themeExportButton: "Izvoz",
     themeImportButton: "Uvoz",
     surveyJsonExportButton: "Izvoz",
@@ -307,6 +308,9 @@ export var hrStrings = {
       templateTitleLocation: "Poravnanje naslova pitanja",
       templateErrorLocation: "Poravnanje poruke o pogrešci",
       newPanelPosition: "Novo mjesto ploče",
+      showRangeInProgress: "Prikaz trake napretka",
+      showProgressBar: "Prikaz trake napretka",
+      progressBarLocation: "Poravnanje trake napretka",
       keyName: "Spriječite dvostruke odgovore u sljedećem pitanju"
     },
     question: {
@@ -654,13 +658,6 @@ export var hrStrings = {
     allowResizeComment: "Dopusti korisnicima promjenu veličine tekstnih područja",
     textUpdateMode: "Ažuriranje vrijednosti tekstnog pitanja",
     maskType: "Vrsta maske za unos",
-    maskTypes: {
-      none: "Nijedan",
-      patternmask: "Uzorak",
-      numericmask: "Brojčani",
-      datetimemask: "Datum i vrijeme",
-      currencymask: "Valuta"
-    },
     focusOnFirstError: "Postavljanje fokusa na prvi odgovor koji nije valjan",
     checkErrorsMode: "Pokreni provjeru valjanosti",
     validateVisitedEmptyFields: "Provjera valjanosti praznih polja pri izgubljenom fokusu",
@@ -697,7 +694,6 @@ export var hrStrings = {
     panelsState: "Stanje proširenja unutarnje ploče",
     panelPrevText: "Opis alata gumba Prethodna ploča",
     panelNextText: "Opis alata gumba Sljedeća ploča",
-    showRangeInProgress: "Pokaži traku tijeka",
     panelRemoveButtonLocation: "Ukloni mjesto gumba ploče",
     hideIfRowsEmpty: "Sakrij pitanje ako nema redaka",
     hideColumnsIfEmpty: "Sakrij stupce ako nema redaka",
@@ -934,10 +930,11 @@ export var hrStrings = {
     firstExpanded: "firstExpanded",
     off: "isključeno",
     list: "popis",
+    carousel: "Vrtuljak",
+    tab: "Tabulatori",
     progressTop: "progressTop",
     progressBottom: "progressBottom",
     progressTopBottom: "progressTopBottom",
-    tab: "Tabulatori",
     horizontal: "horizontal",
     vertical: "vertical",
     top: "top",
@@ -994,6 +991,18 @@ export var hrStrings = {
       time: "Vrijeme",
       url: "URL",
       week: "Tjedan"
+    },
+    maskType: {
+      none: "Nijedan",
+      pattern: "Uzorak",
+      numeric: "Brojčani",
+      datetime: "Datum i vrijeme",
+      currency: "Valuta"
+    },
+    inputTextAlignment: {
+      auto: "Automobil",
+      left: "Lijevo",
+      right: "Desno"
     },
     all: "all",
     page: "page",
@@ -1113,6 +1122,11 @@ export var hrStrings = {
       aboveheader: "Iznad zaglavlja",
       belowheader: "Ispod zaglavlja"
     },
+    progressBarLocation: {
+      top: "Vrh",
+      bottom: "Dno",
+      topBottom: "Vrh i dno"
+    },
     sum: "Suma",
     count: "Brojati",
     min: "Min",
@@ -1153,6 +1167,10 @@ export var hrStrings = {
     isPanelless: {
       "false": "Propust",
       "true": "Bez panela"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "Isto kao i anketa",
+      container: "Isto kao spremnik"
     }
   },
   // Operators
@@ -1310,7 +1328,8 @@ export var hrStrings = {
     },
     file: {
       imageHeight: "Podešava visinu slike u rezultatima upitnika.",
-      imageWidth: "Podešava širinu slike u rezultatima upitnika."
+      imageWidth: "Podešava širinu slike u rezultatima upitnika.",
+      allowImagesPreview: "Prikazuje pretpreglede minijatura za prenesene datoteke kada je to moguće. Poništite odabir želite li umjesto toga prikazati ikone datoteka."
     },
     image: {
       contentMode: "Opcija \"Automatski\" automatski određuje odgovarajući način prikaza - Slika, Videozapis ili YouTube - na temelju navedenog izvornog URL-a."
@@ -1338,7 +1357,8 @@ export var hrStrings = {
       visibleIf: "Pomoću ikone čarobnog štapića postavite uvjetno pravilo koje određuje vidljivost stupca.",
       enableIf: "Pomoću ikone čarobnog štapića postavite uvjetno pravilo koje onemogućuje način samo za čitanje stupca.",
       requiredIf: "Pomoću ikone čarobnog štapića postavite uvjetno pravilo koje sprječava slanje upitnika, osim ako barem jedno ugniježđeno pitanje nema odgovor.",
-      showInMultipleColumns: "Kada je odabrano, stvara pojedinačni stupac za svaku mogućnost izbora."
+      showInMultipleColumns: "Kada je odabrano, stvara pojedinačni stupac za svaku mogućnost izbora.",
+      colCount: "Raspoređuje opcije izbora u rasporedu s više stupaca. Kada je postavljena na 0, opcije se prikazuju u jednom retku. Kada je postavljena na -1, stvarna vrijednost nasljeđuje se iz svojstva \"Broj ugniježđenih stupaca\" nadređene matrice."
     },
     widthMode: "Odaberite između: \"Statika\" - postavlja fiksnu širinu; \"Responsive\" - čini da anketa zauzima punu širinu zaslona; \"Auto\" - primjenjuje se bilo koji od dva ovisno o korištenim vrstama pitanja.",
     cookieName: "Kolačići sprječavaju korisnike da dvaput ispune istu anketu.",
@@ -1434,6 +1454,7 @@ export var hrStrings = {
     dataList: "Unesite popis izbora koji će se predložiti ispitaniku tijekom unosa.",
     itemSize: "Postavka samo mijenja veličinu ulaznih polja i ne utječe na širinu okvira pitanja.",
     itemTitleWidth: "Postavlja dosljednu širinu za sve natpise stavki u pikselima",
+    inputTextAlignment: "Odaberite način poravnanja ulazne vrijednosti unutar polja. Zadana postavka \"Automatski\" poravnava ulaznu vrijednost udesno ako se primjenjuje valutno ili numeričko maskiranje i ulijevo ako nije.",
     altText: "Služi kao zamjena kada se slika ne može prikazati na korisnikovom uređaju i u svrhu pristupačnosti.",
     rateColorMode: "Definira boju odabranog emojija kada je vrsta ikone Ocjena postavljena na \"Smajlići\". Odaberite između: \"Zadano\" - odabrani emoji pojavljuje se u zadanoj boji ankete; \"Skala\" - odabrani emoji nasljeđuje boju od ljestvice ocjenjivanja.",
     expression: {
@@ -1484,7 +1505,8 @@ export var hrStrings = {
     panellayoutcolumn: {
       effectiveWidth: "Prihvaća vrijednosti %.",
       questionTitleWidth: "Prihvaća vrijednosti px."
-    }
+    },
+    progressBarInheritWidthFrom: "Opcija \"Isto kao spremnik\" automatski prilagođava širinu područja trake napretka kako bi se uklopila u HTML element u koji je upitnik postavljen."
   },
   // Properties
   p: {
@@ -1549,6 +1571,7 @@ export var hrStrings = {
     dataList: "Popis podataka",
     itemSize: "itemSize",
     itemTitleWidth: "Širina natpisa stavke (u px)",
+    inputTextAlignment: "Usklađivanje ulaznih vrijednosti",
     elements: "Elemenata",
     content: "Sadržaj",
     navigationButtonsVisibility: "navigationButtonsVisibility",
@@ -1588,7 +1611,8 @@ export var hrStrings = {
     scaleColorMode: "Način skaliranja boje",
     rateColorMode: "Način ocjenjivanja boja",
     copyDisplayValue: "Kopiraj vrijednost prikaza",
-    effectiveColSpan: "Raspon stupaca"
+    effectiveColSpan: "Raspon stupaca",
+    progressBarInheritWidthFrom: "Širina područja trake napretka"
   },
   theme: {
     advancedMode: "Napredni način rada",
@@ -2717,3 +2741,28 @@ editorLocalization.locales["hr"] = hrStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Prihvaća vrijednosti %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Prihvaća vrijednosti px."
 // p.effectiveColSpan: "Column span" => "Raspon stupaca"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "Isto kao i anketa"
+// progressBarInheritWidthFrom.container: "Same as container" => "Isto kao spremnik"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Prikazuje pretpreglede minijatura za prenesene datoteke kada je to moguće. Poništite odabir želite li umjesto toga prikazati ikone datoteka."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "Opcija \"Isto kao spremnik\" automatski prilagođava širinu područja trake napretka kako bi se uklopila u HTML element u koji je upitnik postavljen."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "Širina područja trake napretka"
+// maskType.none: "None" => "Nijedan"
+// maskType.pattern: "Pattern" => "Uzorak"
+// maskType.numeric: "Numeric" => "Brojčani"
+// maskType.datetime: "Date and Time" => "Datum i vrijeme"
+// maskType.currency: "Currency" => "Valuta"
+
+// inputTextAlignment.auto: "Auto" => "Automobil"
+// inputTextAlignment.left: "Left" => "Lijevo"
+// inputTextAlignment.right: "Right" => "Desno"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Odaberite način poravnanja ulazne vrijednosti unutar polja. Zadana postavka \"Automatski\" poravnava ulaznu vrijednost udesno ako se primjenjuje valutno ili numeričko maskiranje i ulijevo ako nije."
+// p.inputTextAlignment: "Input value alignment" => "Usklađivanje ulaznih vrijednosti"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "Prikaz trake napretka"
+// paneldynamic.showProgressBar: "Show the progress bar" => "Prikaz trake napretka"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "Poravnanje trake napretka"
+// pv.carousel: "Carousel" => "Vrtuljak"
+// progressBarLocation.top: "Top" => "Vrh"
+// progressBarLocation.bottom: "Bottom" => "Dno"
+// progressBarLocation.topBottom: "Top and bottom" => "Vrh i dno"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Raspoređuje opcije izbora u rasporedu s više stupaca. Kada je postavljena na 0, opcije se prikazuju u jednom retku. Kada je postavljena na -1, stvarna vrijednost nasljeđuje se iz svojstva \"Broj ugniježđenih stupaca\" nadređene matrice."
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "YouTube veze nisu podržane."

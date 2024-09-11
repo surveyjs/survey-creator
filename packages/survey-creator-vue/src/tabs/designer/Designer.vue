@@ -118,6 +118,9 @@
             :pageEditMode="model.creator.pageEditMode"
           />
         </div>
+        <div v-if="model.hasToolbar" class="svc-tab-designer__toolbar">
+          <sv-action-bar :model="model.actionContainer"></sv-action-bar>
+        </div>
       </template>
     </div>
   </div>

@@ -167,6 +167,7 @@ export var translationCss = {
   },
   dropdown: {
     root: "st-selectbase",
+    popup: "st-dropdown-popup svc-creator-popup",
     small: "st-row__question--small",
     control: "st-input st-dropdown",
     other: "st-comment st-question__other",

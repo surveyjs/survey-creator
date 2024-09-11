@@ -521,8 +521,9 @@ test("Page adorner - collapse button in differen modes", async (t) => {
   await t.hover(getToolboxItemByText("Single-Line Input"));
   const qContent = Selector(".svc-page__content");
   const qCollapseButton = Selector(".svc-page__content #collapse");
+  const actions = Selector(".svc-page__content-actions");
   await t.hover(qContent, { offsetX: 10, offsetY: 10 });
-  await t.expect(Selector(".svc-page__content").hasClass("svc-hovered")).ok();
+  await t.expect(Selector(".svc-page__content").hasClass("svc-hovered")).ok({ timeout: 3000 });
   await t.expect(qCollapseButton.visible).notOk();
   await t.click(qContent, { offsetX: 10, offsetY: 10 });
   await t.expect(qContent.hasClass("svc-page__content--selected")).ok();
@@ -532,7 +533,7 @@ test("Page adorner - collapse button in differen modes", async (t) => {
   json.elements[0].name = "question2";
   await setJSON(json);
   await t.hover(getToolboxItemByText("Single-Line Input"));
-  await t.expect(qCollapseButton.visible).notOk();
+  await t.expect(actions.getStyleProperty("opacity")).eql("0");
   await t.hover(qContent, { offsetX: 10, offsetY: 10 });
   await t.expect(qCollapseButton.visible).ok();
   await t.click(qContent, { offsetX: 10, offsetY: 10 });

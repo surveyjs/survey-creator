@@ -154,6 +154,7 @@ export var msStrings = {
     translationPlaceHolder: "Penterjemahan...",
     translationSource: "Sumber: ",
     translationTarget: "Sasaran: ",
+    translationYouTubeNotSupported: "Pautan YouTube tidak disokong.",
     themeExportButton: "Eksport",
     themeImportButton: "Import",
     surveyJsonExportButton: "Eksport",
@@ -307,6 +308,9 @@ export var msStrings = {
       templateTitleLocation: "Penjajaran tajuk soalan",
       templateErrorLocation: "Penjajaran mesej ralat",
       newPanelPosition: "Lokasi panel baru",
+      showRangeInProgress: "Tunjukkan bar kemajuan",
+      showProgressBar: "Tunjukkan bar kemajuan",
+      progressBarLocation: "Penjajaran bar kemajuan",
       keyName: "Mencegah jawapan pendua dalam soalan berikut"
     },
     question: {
@@ -654,13 +658,6 @@ export var msStrings = {
     allowResizeComment: "Benarkan pengguna mensaiz semula kawasan teks",
     textUpdateMode: "Mengemas kini nilai soalan teks",
     maskType: "Input jenis topeng",
-    maskTypes: {
-      none: "Tiada",
-      patternmask: "Corak",
-      numericmask: "Angka",
-      datetimemask: "Tarikh dan Masa",
-      currencymask: "Mata wang"
-    },
     focusOnFirstError: "Mengesetkan fokus pada jawapan tidak sah yang pertama",
     checkErrorsMode: "Jalankan pengesahihan",
     validateVisitedEmptyFields: "Sahkan medan kosong pada fokus yang hilang",
@@ -697,7 +694,6 @@ export var msStrings = {
     panelsState: "Panel dalaman mengembangkan keadaan",
     panelPrevText: "Petua alat butang Panel Sebelumnya",
     panelNextText: "Petua alat butang Panel Seterusnya",
-    showRangeInProgress: "Tunjukkan bar kemajuan",
     panelRemoveButtonLocation: "Alih keluar lokasi butang Panel",
     hideIfRowsEmpty: "Sembunyikan soalan jika tiada baris",
     hideColumnsIfEmpty: "Menyembunyikan lajur jika tiada baris",
@@ -934,10 +930,11 @@ export var msStrings = {
     firstExpanded: "Pertama dikembangkan",
     off: "mati",
     list: "senarai",
+    carousel: "Carousel",
+    tab: "Tab",
     progressTop: "Perkembangan atas",
     progressBottom: "Perkembangan bawah",
     progressTopBottom: "Perkembangan atas bawah",
-    tab: "Tab",
     horizontal: "mendatar",
     vertical: "menegak",
     top: "atas",
@@ -994,6 +991,18 @@ export var msStrings = {
       time: "Masa",
       url: "URL",
       week: "Minggu"
+    },
+    maskType: {
+      none: "Tiada",
+      pattern: "Corak",
+      numeric: "Angka",
+      datetime: "Tarikh dan Masa",
+      currency: "Mata wang"
+    },
+    inputTextAlignment: {
+      auto: "Auto",
+      left: "Kiri",
+      right: "Kanan"
     },
     all: "semua",
     page: "halaman",
@@ -1113,6 +1122,11 @@ export var msStrings = {
       aboveheader: "Di atas pengepala",
       belowheader: "Di bawah pengepala"
     },
+    progressBarLocation: {
+      top: "Atas",
+      bottom: "Bawah",
+      topBottom: "Atas dan bawah"
+    },
     sum: "Jumlah",
     count: "Kiraan",
     min: "Min",
@@ -1153,6 +1167,10 @@ export var msStrings = {
     isPanelless: {
       "false": "Lalai",
       "true": "Tanpa Panel"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "Sama seperti tinjauan",
+      container: "Sama seperti bekas"
     }
   },
   // Operators
@@ -1310,7 +1328,8 @@ export var msStrings = {
     },
     file: {
       imageHeight: "Melaraskan ketinggian imej dalam hasil tinjauan.",
-      imageWidth: "Melaraskan lebar imej dalam hasil tinjauan."
+      imageWidth: "Melaraskan lebar imej dalam hasil tinjauan.",
+      allowImagesPreview: "Memaparkan pratonton lakaran kecil untuk fail yang dimuat naik apabila boleh. Nyahpilih jika anda mahu menunjukkan ikon fail."
     },
     image: {
       contentMode: "Pilihan \"Auto\" secara automatik menentukan mod yang sesuai untuk paparan - Imej, Video atau YouTube - berdasarkan URL sumber yang disediakan."
@@ -1338,7 +1357,8 @@ export var msStrings = {
       visibleIf: "Gunakan ikon tongkat ajaib untuk mengesetkan peraturan bersyarat yang menentukan keterlihatan lajur.",
       enableIf: "Gunakan ikon tongkat ajaib untuk mengesetkan peraturan bersyarat yang menyahdayakan mod baca sahaja untuk lajur.",
       requiredIf: "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang menghalang penyerahan tinjauan melainkan sekurang-kurangnya satu soalan tersarang mempunyai jawapan.",
-      showInMultipleColumns: "Apabila dipilih, cipta lajur individu untuk setiap opsyen pilihan."
+      showInMultipleColumns: "Apabila dipilih, cipta lajur individu untuk setiap opsyen pilihan.",
+      colCount: "Mengatur pilihan pilihan dalam susun atur berbilang lajur. Apabila ditetapkan kepada 0, pilihan dipaparkan dalam satu baris. Apabila ditetapkan kepada -1, nilai sebenar diwarisi daripada sifat \"Kiraan lajur bersarang\" bagi matriks induk."
     },
     widthMode: "Pilih daripada: \"Statik\" - menetapkan lebar tetap; \"Responsif\" - membuat tinjauan menduduki lebar penuh skrin; \"Auto\" - terpakai salah satu daripada kedua-duanya bergantung kepada jenis soalan yang digunakan.",
     cookieName: "Kuki menghalang pengguna daripada mengisi tinjauan yang sama dua kali.",
@@ -1434,6 +1454,7 @@ export var msStrings = {
     dataList: "Masukkan senarai pilihan yang akan dicadangkan kepada responden semasa input.",
     itemSize: "Seting hanya mengubah saiz medan input dan tidak mempengaruhi lebar kotak soalan.",
     itemTitleWidth: "Mengesetkan lebar yang konsisten untuk semua label item dalam piksel",
+    inputTextAlignment: "Pilih cara untuk menjajarkan nilai input dalam medan. Seting lalai \"Auto\" menjajarkan nilai input ke kanan jika mata wang atau topeng angka digunakan dan ke kiri jika tidak.",
     altText: "Berfungsi sebagai pengganti apabila imej tidak boleh dipaparkan pada peranti pengguna dan untuk tujuan kebolehcapaian.",
     rateColorMode: "Mentakrifkan warna emoji yang dipilih apabila jenis ikon Penarafan ditetapkan kepada \"Smileys\". Pilih antara: \"Lalai\" - emoji yang dipilih muncul dalam warna tinjauan lalai; \"Skala\" - emoji yang dipilih mewarisi warna dari skala penarafan.",
     expression: {
@@ -1484,7 +1505,8 @@ export var msStrings = {
     panellayoutcolumn: {
       effectiveWidth: "Menerima nilai %.",
       questionTitleWidth: "Menerima nilai px."
-    }
+    },
+    progressBarInheritWidthFrom: "Pilihan \"Sama seperti bekas\" melaraskan lebar kawasan bar kemajuan secara automatik agar sesuai dengan elemen HTML yang diletakkan dalam tinjauan."
   },
   // Properties
   p: {
@@ -1549,6 +1571,7 @@ export var msStrings = {
     dataList: "Senarai data",
     itemSize: "Saiz item",
     itemTitleWidth: "Lebar label item (dalam piksel)",
+    inputTextAlignment: "Penjajaran nilai input",
     elements: "Unsur",
     content: "Kandungan",
     navigationButtonsVisibility: "Kebolehlihatan butang navigasi",
@@ -1588,7 +1611,8 @@ export var msStrings = {
     scaleColorMode: "Mod warna skala",
     rateColorMode: "Mod warna kadar",
     copyDisplayValue: "Nilai paparan salin",
-    effectiveColSpan: "Rentang lajur"
+    effectiveColSpan: "Rentang lajur",
+    progressBarInheritWidthFrom: "Lebar kawasan bar kemajuan"
   },
   theme: {
     advancedMode: "Mod lanjutan",
@@ -2676,3 +2700,28 @@ editorLocalization.locales["ms"] = msStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Menerima nilai %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Menerima nilai px."
 // p.effectiveColSpan: "Column span" => "Rentang lajur"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "Sama seperti tinjauan"
+// progressBarInheritWidthFrom.container: "Same as container" => "Sama seperti bekas"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Memaparkan pratonton lakaran kecil untuk fail yang dimuat naik apabila boleh. Nyahpilih jika anda mahu menunjukkan ikon fail."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "Pilihan \"Sama seperti bekas\" melaraskan lebar kawasan bar kemajuan secara automatik agar sesuai dengan elemen HTML yang diletakkan dalam tinjauan."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "Lebar kawasan bar kemajuan"
+// maskType.none: "None" => "Tiada"
+// maskType.pattern: "Pattern" => "Corak"
+// maskType.numeric: "Numeric" => "Angka"
+// maskType.datetime: "Date and Time" => "Tarikh dan Masa"
+// maskType.currency: "Currency" => "Mata wang"
+
+// inputTextAlignment.auto: "Auto" => "Auto"
+// inputTextAlignment.left: "Left" => "Kiri"
+// inputTextAlignment.right: "Right" => "Kanan"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Pilih cara untuk menjajarkan nilai input dalam medan. Seting lalai \"Auto\" menjajarkan nilai input ke kanan jika mata wang atau topeng angka digunakan dan ke kiri jika tidak."
+// p.inputTextAlignment: "Input value alignment" => "Penjajaran nilai input"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "Tunjukkan bar kemajuan"
+// paneldynamic.showProgressBar: "Show the progress bar" => "Tunjukkan bar kemajuan"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "Penjajaran bar kemajuan"
+// pv.carousel: "Carousel" => "Carousel"
+// progressBarLocation.top: "Top" => "Atas"
+// progressBarLocation.bottom: "Bottom" => "Bawah"
+// progressBarLocation.topBottom: "Top and bottom" => "Atas dan bawah"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Mengatur pilihan pilihan dalam susun atur berbilang lajur. Apabila ditetapkan kepada 0, pilihan dipaparkan dalam satu baris. Apabila ditetapkan kepada -1, nilai sebenar diwarisi daripada sifat \"Kiraan lajur bersarang\" bagi matriks induk."
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "Pautan YouTube tidak disokong."

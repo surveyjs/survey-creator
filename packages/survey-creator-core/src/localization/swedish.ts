@@ -154,6 +154,7 @@ export let svStrings = {
     translationPlaceHolder: "Översättning...",
     translationSource: "Källa: ",
     translationTarget: "Mål: ",
+    translationYouTubeNotSupported: "YouTube-länkar stöds inte.",
     themeExportButton: "Export",
     themeImportButton: "Import",
     surveyJsonExportButton: "Export",
@@ -307,6 +308,9 @@ export let svStrings = {
       templateTitleLocation: "Justering av frågerubrik",
       templateErrorLocation: "Justering av felmeddelande",
       newPanelPosition: "Ny panelplats",
+      showRangeInProgress: "Visa förloppsindikatorn",
+      showProgressBar: "Visa förloppsindikatorn",
+      progressBarLocation: "Justering av förloppsindikator",
       keyName: "Förhindra dubbletter av svar i följande fråga"
     },
     question: {
@@ -654,13 +658,6 @@ export let svStrings = {
     allowResizeComment: "Tillåt användare att ändra storlek på textområden",
     textUpdateMode: "Uppdatera textfrågevärde",
     maskType: "Typ av indatamask",
-    maskTypes: {
-      none: "Ingen",
-      patternmask: "Mönster",
-      numericmask: "Numerisk",
-      datetimemask: "Datum och tid",
-      currencymask: "Valuta"
-    },
     focusOnFirstError: "Ställ in fokus på det första ogiltiga svaret",
     checkErrorsMode: "Kör validering",
     validateVisitedEmptyFields: "Validera tomma fält vid förlorat fokus",
@@ -697,7 +694,6 @@ export let svStrings = {
     panelsState: "Expanderingsläge för innerpanelen",
     panelPrevText: "Knappbeskrivning för föregående panel",
     panelNextText: "Knappbeskrivning för knappen Nästa panel",
-    showRangeInProgress: "Visa förloppsindikator",
     panelRemoveButtonLocation: "Ta bort panelknappens placering",
     hideIfRowsEmpty: "Dölj frågan om det inte finns några rader",
     hideColumnsIfEmpty: "Dölj kolumner om det inte finns några rader",
@@ -934,10 +930,11 @@ export let svStrings = {
     firstExpanded: "firstExpanded",
     off: "off",
     list: "list",
+    carousel: "Karusell",
+    tab: "Flikar",
     progressTop: "progressTop",
     progressBottom: "progressBottom",
     progressTopBottom: "progressTopBottom",
-    tab: "Flikar",
     horizontal: "horizontal",
     vertical: "vertical",
     top: "top",
@@ -994,6 +991,18 @@ export let svStrings = {
       time: "Tid",
       url: "URL",
       week: "Vecka"
+    },
+    maskType: {
+      none: "Ingen",
+      pattern: "Mönster",
+      numeric: "Numerisk",
+      datetime: "Datum och tid",
+      currency: "Valuta"
+    },
+    inputTextAlignment: {
+      auto: "Bil",
+      left: "Vänster",
+      right: "Höger"
     },
     all: "all",
     page: "page",
@@ -1113,6 +1122,11 @@ export let svStrings = {
       aboveheader: "Ovanför sidhuvudet",
       belowheader: "Nedanför rubriken"
     },
+    progressBarLocation: {
+      top: "Topp",
+      bottom: "Botten",
+      topBottom: "Topp och botten"
+    },
     sum: "Summa",
     count: "Räkna",
     min: "Min",
@@ -1153,6 +1167,10 @@ export let svStrings = {
     isPanelless: {
       "false": "Standard",
       "true": "Utan paneler"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "Samma som undersökning",
+      container: "Samma som behållare"
     }
   },
   // Operators
@@ -1310,7 +1328,8 @@ export let svStrings = {
     },
     file: {
       imageHeight: "Justerar höjden på bilden i undersökningsresultaten.",
-      imageWidth: "Justerar bredden på bilden i undersökningsresultaten."
+      imageWidth: "Justerar bredden på bilden i undersökningsresultaten.",
+      allowImagesPreview: "Visar miniatyrbilder av uppladdade filer när det är möjligt. Avmarkera om du vill visa filikoner i stället."
     },
     image: {
       contentMode: "Alternativet \"Auto\" bestämmer automatiskt vilket läge som är lämpligt för visning - bild, video eller YouTube - baserat på den angivna källadressen."
@@ -1338,7 +1357,8 @@ export let svStrings = {
       visibleIf: "Använd trollstavsikonen för att ange en villkorsregel som bestämmer kolumnens synlighet.",
       enableIf: "Använd trollstavsikonen för att ange en villkorsregel som inaktiverar skrivskyddat läge för kolumnen.",
       requiredIf: "Använd trollstavsikonen för att ställa in en villkorsregel som förhindrar att undersökningen skickas in om inte minst en kapslad fråga har ett svar.",
-      showInMultipleColumns: "När du väljer det här alternativet skapas en enskild kolumn för varje alternativ."
+      showInMultipleColumns: "När du väljer det här alternativet skapas en enskild kolumn för varje alternativ.",
+      colCount: "Ordnar valalternativ i en layout med flera kolumner. När värdet är 0 visas alternativen på en enda rad. När värdet är -1 ärvs det faktiska värdet från egenskapen \"Kapslad kolumnantal\" i den överordnade matrisen."
     },
     widthMode: "Välj mellan: \"Statisk\" - ställer in en fast bredd; \"Responsiv\" - gör att undersökningen upptar hela skärmens bredd; \"Auto\" - gäller någon av de två beroende på vilka frågetyper som används.",
     cookieName: "Cookies hindrar användare från att fylla i samma undersökning två gånger.",
@@ -1434,6 +1454,7 @@ export let svStrings = {
     dataList: "Ange en lista med alternativ som kommer att föreslås för respondenten under inmatningen.",
     itemSize: "Inställningen ändrar bara storleken på inmatningsfälten och påverkar inte frågerutans bredd.",
     itemTitleWidth: "Anger konsekvent bredd för alla objektetiketter i pixlar",
+    inputTextAlignment: "Välj hur du vill justera indatavärdet i fältet. Standardinställningen \"Auto\" justerar indatavärdet till höger om valutamaskering eller numerisk maskering används och till vänster om inte.",
     altText: "Fungerar som ersättning när bilden inte kan visas på en användares enhet och i tillgänglighetssyfte.",
     rateColorMode: "Definierar färgen på den valda emojin när typen av betygsikon är inställd på \"Smileys\". Välj mellan: \"Standard\" - den valda emojin visas i standardundersökningsfärgen; \"Skala\" - den valda emojin ärver färg från betygsskalan.",
     expression: {
@@ -1484,7 +1505,8 @@ export let svStrings = {
     panellayoutcolumn: {
       effectiveWidth: "Accepterar värden %.",
       questionTitleWidth: "Accepterar värdena px."
-    }
+    },
+    progressBarInheritWidthFrom: "Alternativet \"Samma som behållare\" justerar automatiskt förloppsindikatorns bredd så att den passar in i HTML-elementet som undersökningen är placerad i."
   },
   // Properties
   p: {
@@ -1549,6 +1571,7 @@ export let svStrings = {
     dataList: "Lista över uppgifter",
     itemSize: "itemSize",
     itemTitleWidth: "Bredd på objektetikett (i px)",
+    inputTextAlignment: "Justering av indatavärde",
     elements: "Element",
     content: "Innehåll",
     navigationButtonsVisibility: "navigationButtonsVisibility",
@@ -1588,7 +1611,8 @@ export let svStrings = {
     scaleColorMode: "Färgläge för skala",
     rateColorMode: "Betygsätt färgläge",
     copyDisplayValue: "Kopiera visningsvärde",
-    effectiveColSpan: "Kolumn spännvidd"
+    effectiveColSpan: "Kolumn spännvidd",
+    progressBarInheritWidthFrom: "Bredd på förloppsindikatorns area"
   },
   theme: {
     advancedMode: "Avancerat läge",
@@ -2900,3 +2924,28 @@ editorLocalization.locales["sv"] = svStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Accepterar värden %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Accepterar värdena px."
 // p.effectiveColSpan: "Column span" => "Kolumn spännvidd"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "Samma som undersökning"
+// progressBarInheritWidthFrom.container: "Same as container" => "Samma som behållare"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Visar miniatyrbilder av uppladdade filer när det är möjligt. Avmarkera om du vill visa filikoner i stället."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "Alternativet \"Samma som behållare\" justerar automatiskt förloppsindikatorns bredd så att den passar in i HTML-elementet som undersökningen är placerad i."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "Bredd på förloppsindikatorns area"
+// maskType.none: "None" => "Ingen"
+// maskType.pattern: "Pattern" => "Mönster"
+// maskType.numeric: "Numeric" => "Numerisk"
+// maskType.datetime: "Date and Time" => "Datum och tid"
+// maskType.currency: "Currency" => "Valuta"
+
+// inputTextAlignment.auto: "Auto" => "Bil"
+// inputTextAlignment.left: "Left" => "Vänster"
+// inputTextAlignment.right: "Right" => "Höger"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Välj hur du vill justera indatavärdet i fältet. Standardinställningen \"Auto\" justerar indatavärdet till höger om valutamaskering eller numerisk maskering används och till vänster om inte."
+// p.inputTextAlignment: "Input value alignment" => "Justering av indatavärde"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "Visa förloppsindikatorn"
+// paneldynamic.showProgressBar: "Show the progress bar" => "Visa förloppsindikatorn"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "Justering av förloppsindikator"
+// pv.carousel: "Carousel" => "Karusell"
+// progressBarLocation.top: "Top" => "Topp"
+// progressBarLocation.bottom: "Bottom" => "Botten"
+// progressBarLocation.topBottom: "Top and bottom" => "Topp och botten"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Ordnar valalternativ i en layout med flera kolumner. När värdet är 0 visas alternativen på en enda rad. När värdet är -1 ärvs det faktiska värdet från egenskapen \"Kapslad kolumnantal\" i den överordnade matrisen."
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "YouTube-länkar stöds inte."

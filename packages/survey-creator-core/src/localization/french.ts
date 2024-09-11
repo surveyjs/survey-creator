@@ -154,6 +154,7 @@ var frenchTranslation = {
     translationPlaceHolder: "Traduction...",
     translationSource: "Source: ",
     translationTarget: "Cible: ",
+    translationYouTubeNotSupported: "Les liens YouTube ne sont pas pris en charge.",
     themeExportButton: "Exportation",
     themeImportButton: "Importation",
     surveyJsonExportButton: "Exportation",
@@ -307,6 +308,9 @@ var frenchTranslation = {
       templateTitleLocation: "Alignement du titre de la question",
       templateErrorLocation: "Alignement des messages d’erreur",
       newPanelPosition: "Nouvel emplacement du panneau",
+      showRangeInProgress: "Afficher la barre de progression",
+      showProgressBar: "Afficher la barre de progression",
+      progressBarLocation: "Alignement de la barre de progression",
       keyName: "Éviter les réponses en double à la question suivante"
     },
     question: {
@@ -654,13 +658,6 @@ var frenchTranslation = {
     allowResizeComment: "Autoriser les utilisateurs à redimensionner les zones de texte",
     textUpdateMode: "Mettre à jour la valeur de la question textuelle",
     maskType: "Type de masque de saisie",
-    maskTypes: {
-      none: "Aucun",
-      patternmask: "Modèle",
-      numericmask: "Numérique",
-      datetimemask: "Date et heure",
-      currencymask: "Monnaie"
-    },
     focusOnFirstError: "Renvoyer vers la première question ayant une erreur",
     checkErrorsMode: "Exécuter la validation",
     validateVisitedEmptyFields: "Valider les champs vides en cas de perte de focus",
@@ -697,7 +694,6 @@ var frenchTranslation = {
     panelsState: "Déploiement de la section",
     panelPrevText: "Info-bulle du bouton Section précédente",
     panelNextText: "Info-bulle du bouton Section suivante",
-    showRangeInProgress: "Afficher la barre de progression",
     panelRemoveButtonLocation: "Emplacement du bouton Supprimer la Section",
     hideIfRowsEmpty: "Masquer la question s’il n’y a pas de lignes",
     hideColumnsIfEmpty: "Masquer les colonnes s’il n’y a pas de lignes",
@@ -934,10 +930,11 @@ var frenchTranslation = {
     firstExpanded: "Déployer la première section",
     off: "Désactiver",
     list: "liste",
+    carousel: "Carrousel",
+    tab: "Onglets",
     progressTop: "Barre de progression en haut",
     progressBottom: "Barre de progression en bas",
     progressTopBottom: "Barre de progression en haut et en bas",
-    tab: "Onglets",
     horizontal: "Horizontal",
     vertical: "Vertical",
     top: "Haut",
@@ -994,6 +991,18 @@ var frenchTranslation = {
       time: "Heure",
       url: "URL",
       week: "Semaine"
+    },
+    maskType: {
+      none: "Aucun",
+      pattern: "Modèle",
+      numeric: "Numérique",
+      datetime: "Date et heure",
+      currency: "Monnaie"
+    },
+    inputTextAlignment: {
+      auto: "Auto",
+      left: "Gauche",
+      right: "Droite"
     },
     all: "Tous",
     page: "Page",
@@ -1113,6 +1122,11 @@ var frenchTranslation = {
       aboveheader: "Au-dessus de l’en-tête",
       belowheader: "Sous l’en-tête"
     },
+    progressBarLocation: {
+      top: "Retour au début",
+      bottom: "Fond",
+      topBottom: "Haut et bas"
+    },
     sum: "Somme",
     count: "Compter",
     min: "Min",
@@ -1153,6 +1167,10 @@ var frenchTranslation = {
     isPanelless: {
       "false": "Faire défaut",
       "true": "Sans panneaux"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "Identique à l’enquête",
+      container: "Identique au conteneur"
     }
   },
   // Operators
@@ -1310,7 +1328,8 @@ var frenchTranslation = {
     },
     file: {
       imageHeight: "Ajuste la hauteur de l’image dans les résultats de l’enquête.",
-      imageWidth: "Ajuste la largeur de l’image dans les résultats de l’enquête."
+      imageWidth: "Ajuste la largeur de l’image dans les résultats de l’enquête.",
+      allowImagesPreview: "Affiche des aperçus miniatures pour les fichiers téléchargés lorsque cela est possible. Désélectionnez si vous souhaitez afficher les icônes de fichier à la place."
     },
     image: {
       contentMode: "L’option « Auto » détermine automatiquement le mode d’affichage approprié - Image, Vidéo ou YouTube - en fonction de l’URL source fournie."
@@ -1338,7 +1357,8 @@ var frenchTranslation = {
       visibleIf: "Utilisez l’icône en forme de baguette magique pour définir une règle conditionnelle qui détermine la visibilité des colonnes.",
       enableIf: "Utilisez l’icône en forme de baguette magique pour définir une règle conditionnelle qui désactive le mode lecture seule de la colonne.",
       requiredIf: "Utilisez l’icône en forme de baguette magique pour définir une règle conditionnelle qui empêche l’envoi d’un sondage à moins qu’au moins une question imbriquée n’ait une réponse.",
-      showInMultipleColumns: "Lorsque cette option est sélectionnée, une colonne individuelle est créée pour chaque option de choix."
+      showInMultipleColumns: "Lorsque cette option est sélectionnée, une colonne individuelle est créée pour chaque option de choix.",
+      colCount: "Organise les options de choix dans une mise en page à plusieurs colonnes. Lorsqu’elle est définie sur 0, les options sont affichées sur une seule ligne. Lorsqu’elle est définie sur -1, la valeur réelle est héritée de la propriété « Nombre de colonnes imbriquées » de la matrice parente."
     },
     widthMode: "Choisissez parmi : « Statique » - définit une largeur fixe ; « Responsive » - permet à l’enquête d’occuper toute la largeur de l’écran ; « Auto » - s’applique à l’un ou l’autre des deux en fonction des types de questions utilisés.",
     cookieName: "Les cookies empêchent les utilisateurs de remplir deux fois le même sondage.",
@@ -1434,6 +1454,7 @@ var frenchTranslation = {
     dataList: "Entrez une liste de choix qui seront suggérés au répondant lors de la saisie.",
     itemSize: "Le paramètre ne redimensionne que les champs de saisie et n’affecte pas la largeur de la zone de question.",
     itemTitleWidth: "Définit une largeur cohérente pour toutes les étiquettes d’élément en pixels",
+    inputTextAlignment: "Sélectionnez le mode d’alignement de la valeur d’entrée dans le champ. Le paramètre par défaut « Auto » aligne la valeur d’entrée à droite si le masquage monétaire ou numérique est appliqué et à gauche si ce n’est pas le cas.",
     altText: "Sert de substitut lorsque l’image ne peut pas être affichée sur l’appareil d’un utilisateur et à des fins d’accessibilité.",
     rateColorMode: "Définit la couleur de l’emoji sélectionné lorsque le type d’icône d’évaluation est défini sur « Smileys ». Choisissez entre : « Par défaut » - l’emoji sélectionné apparaît dans la couleur par défaut de l’enquête ; « Échelle » - l’emoji sélectionné hérite de la couleur de l’échelle d’évaluation.",
     expression: {
@@ -1484,7 +1505,8 @@ var frenchTranslation = {
     panellayoutcolumn: {
       effectiveWidth: "Accepte les valeurs %.",
       questionTitleWidth: "Accepte les valeurs px."
-    }
+    },
+    progressBarInheritWidthFrom: "L’option « Identique au conteneur » ajuste automatiquement la largeur de la zone de la barre de progression pour s’adapter à l’élément HTML dans lequel l’enquête est placée."
   },
   // Properties
   p: {
@@ -1549,6 +1571,7 @@ var frenchTranslation = {
     dataList: "Liste de données",
     itemSize: "Nombre maximum de caractères",
     itemTitleWidth: "Largeur de l’étiquette de l’article (en px)",
+    inputTextAlignment: "Alignement des valeurs d’entrée",
     elements: "Éléments",
     content: "Contenu",
     navigationButtonsVisibility: "Visibilité des boutons de navigation",
@@ -1588,7 +1611,8 @@ var frenchTranslation = {
     scaleColorMode: "Mode de couleur de mise à l’échelle",
     rateColorMode: "Évaluer le mode de couleur",
     copyDisplayValue: "Copier la valeur d’affichage",
-    effectiveColSpan: "Portée de poteau"
+    effectiveColSpan: "Portée de poteau",
+    progressBarInheritWidthFrom: "Largeur de la zone de la barre de progression"
   },
   theme: {
     advancedMode: "Mode avancé",
@@ -2784,3 +2808,28 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Accepte les valeurs %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Accepte les valeurs px."
 // p.effectiveColSpan: "Column span" => "Portée de poteau"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "Identique à l’enquête"
+// progressBarInheritWidthFrom.container: "Same as container" => "Identique au conteneur"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Affiche des aperçus miniatures pour les fichiers téléchargés lorsque cela est possible. Désélectionnez si vous souhaitez afficher les icônes de fichier à la place."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "L’option « Identique au conteneur » ajuste automatiquement la largeur de la zone de la barre de progression pour s’adapter à l’élément HTML dans lequel l’enquête est placée."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "Largeur de la zone de la barre de progression"
+// maskType.none: "None" => "Aucun"
+// maskType.pattern: "Pattern" => "Modèle"
+// maskType.numeric: "Numeric" => "Numérique"
+// maskType.datetime: "Date and Time" => "Date et heure"
+// maskType.currency: "Currency" => "Monnaie"
+
+// inputTextAlignment.auto: "Auto" => "Auto"
+// inputTextAlignment.left: "Left" => "Gauche"
+// inputTextAlignment.right: "Right" => "Droite"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Sélectionnez le mode d’alignement de la valeur d’entrée dans le champ. Le paramètre par défaut « Auto » aligne la valeur d’entrée à droite si le masquage monétaire ou numérique est appliqué et à gauche si ce n’est pas le cas."
+// p.inputTextAlignment: "Input value alignment" => "Alignement des valeurs d’entrée"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "Afficher la barre de progression"
+// paneldynamic.showProgressBar: "Show the progress bar" => "Afficher la barre de progression"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "Alignement de la barre de progression"
+// pv.carousel: "Carousel" => "Carrousel"
+// progressBarLocation.top: "Top" => "Retour au début"
+// progressBarLocation.bottom: "Bottom" => "Fond"
+// progressBarLocation.topBottom: "Top and bottom" => "Haut et bas"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Organise les options de choix dans une mise en page à plusieurs colonnes. Lorsqu’elle est définie sur 0, les options sont affichées sur une seule ligne. Lorsqu’elle est définie sur -1, la valeur réelle est héritée de la propriété « Nombre de colonnes imbriquées » de la matrice parente."
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "Les liens YouTube ne sont pas pris en charge."

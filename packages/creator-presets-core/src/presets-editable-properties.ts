@@ -107,7 +107,7 @@ export class SurveyQuestionPresetPropertiesDetail {
         }
         clVal.forEach(propName => {
           if(this.propertiesHash[propName] === clName) {
-            const tabName = tab.name !== "general" ? tab.name : undefined;
+            const tabName = tab.name;
             if(!!tabName && tabNames.indexOf(tab.name) < 0) {
               tabNames.push(tab.name);
               tabs.push({ name: tab.name, index: tabNames.length * tabStep });

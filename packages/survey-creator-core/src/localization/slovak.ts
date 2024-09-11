@@ -154,6 +154,7 @@ export var skStrings = {
     translationPlaceHolder: "Preklad...",
     translationSource: "Zdroj: ",
     translationTarget: "Cieľ: ",
+    translationYouTubeNotSupported: "Odkazy na YouTube nie sú podporované.",
     themeExportButton: "Vývoz",
     themeImportButton: "Import",
     surveyJsonExportButton: "Vývoz",
@@ -307,6 +308,9 @@ export var skStrings = {
       templateTitleLocation: "Zarovnanie názvu otázky",
       templateErrorLocation: "Zarovnanie chybových hlásení",
       newPanelPosition: "Nové umiestnenie panela",
+      showRangeInProgress: "Zobrazenie indikátora priebehu",
+      showProgressBar: "Zobrazenie indikátora priebehu",
+      progressBarLocation: "Zarovnanie indikátora priebehu",
       keyName: "Zabránenie duplicitným odpovediam v nasledujúcej otázke"
     },
     question: {
@@ -654,13 +658,6 @@ export var skStrings = {
     allowResizeComment: "Povolenie používateľom meniť veľkosť textových oblastí",
     textUpdateMode: "Aktualizácia hodnoty textovej otázky",
     maskType: "Typ vstupnej masky",
-    maskTypes: {
-      none: "Žiadny",
-      patternmask: "Vzorka",
-      numericmask: "Numerický",
-      datetimemask: "Dátum a čas",
-      currencymask: "Mena"
-    },
     focusOnFirstError: "Zameranie na prvú neplatnú odpoveď",
     checkErrorsMode: "Spustenie overenia pravosti",
     validateVisitedEmptyFields: "Overenie prázdnych polí pri strate zamerania",
@@ -697,7 +694,6 @@ export var skStrings = {
     panelsState: "Stav rozbalenia vnútorného panela",
     panelPrevText: "Popis tlačidla Predchádzajúci panel",
     panelNextText: "Popis tlačidla Nasledujúci panel",
-    showRangeInProgress: "Zobraziť indikátor priebehu",
     panelRemoveButtonLocation: "Odstrániť umiestnenie tlačidla panela",
     hideIfRowsEmpty: "Skryť otázku, ak nie sú žiadne riadky",
     hideColumnsIfEmpty: "Skryť stĺpce, ak nie sú k dispozícii žiadne riadky",
@@ -934,10 +930,11 @@ export var skStrings = {
     firstExpanded: "prvý rozbalený",
     off: "vyp.",
     list: "zoznam",
+    carousel: "Kolotoč",
+    tab: "Karty",
     progressTop: "horná časť priebehu",
     progressBottom: "spodná časť priebehu",
     progressTopBottom: "priebeh –​ horná a spodná časť",
-    tab: "Karty",
     horizontal: "vodorovné",
     vertical: "zvislé",
     top: "hore",
@@ -994,6 +991,18 @@ export var skStrings = {
       time: "Čas",
       url: "URL adresa",
       week: "Týždeň"
+    },
+    maskType: {
+      none: "Žiadny",
+      pattern: "Vzorka",
+      numeric: "Numerický",
+      datetime: "Dátum a čas",
+      currency: "Mena"
+    },
+    inputTextAlignment: {
+      auto: "Auto",
+      left: "Vľavo",
+      right: "Doprava"
     },
     all: "všetko",
     page: "stránka",
@@ -1113,6 +1122,11 @@ export var skStrings = {
       aboveheader: "Nad hlavičkou",
       belowheader: "Pod hlavičkou"
     },
+    progressBarLocation: {
+      top: "Vrchol",
+      bottom: "Dno",
+      topBottom: "Hore a dole"
+    },
     sum: "Súčet",
     count: "Počítať",
     min: "Min",
@@ -1153,6 +1167,10 @@ export var skStrings = {
     isPanelless: {
       "false": "Predvolený",
       "true": "Bez panelov"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "Rovnaké ako prieskum",
+      container: "Rovnaké ako kontajner"
     }
   },
   // Operators
@@ -1310,7 +1328,8 @@ export var skStrings = {
     },
     file: {
       imageHeight: "Upraví výšku obrázka vo výsledkoch prieskumu.",
-      imageWidth: "Upraví šírku obrázka vo výsledkoch prieskumu."
+      imageWidth: "Upraví šírku obrázka vo výsledkoch prieskumu.",
+      allowImagesPreview: "Ak je to možné, zobrazí náhľady miniatúr nahraných súborov. Zrušte výber, ak chcete namiesto toho zobraziť ikony súborov."
     },
     image: {
       contentMode: "Možnosť \"Auto\" automaticky určuje vhodný režim zobrazenia - obrázok, video alebo YouTube - na základe poskytnutej zdrojovej adresy URL."
@@ -1338,7 +1357,8 @@ export var skStrings = {
       visibleIf: "Pomocou ikony čarovného prútika nastavte podmienené pravidlo, ktoré určuje viditeľnosť stĺpca.",
       enableIf: "Pomocou ikony čarovnej paličky nastavte podmienené pravidlo, ktoré vypne režim iba na čítanie pre stĺpec.",
       requiredIf: "Pomocou ikony čarovného prútika nastavte podmienené pravidlo, ktoré zabráni odoslaniu prieskumu, pokiaľ aspoň jedna vnorená otázka nemá odpoveď.",
-      showInMultipleColumns: "Ak je táto voľba vybratá, vytvorí samostatný stĺpec pre každú možnosť výberu."
+      showInMultipleColumns: "Ak je táto voľba vybratá, vytvorí samostatný stĺpec pre každú možnosť výberu.",
+      colCount: "Usporiada možnosti výberu vo viacstĺpcovom rozložení. Ak je nastavená hodnota 0, možnosti sa zobrazia v jednom riadku. Ak je nastavená na -1, skutočná hodnota sa zdedí z vlastnosti \"Počet vnorených stĺpcov\" nadradenej matice."
     },
     widthMode: "Vyberte si z: \"Statický\" - nastavuje pevnú šírku; \"Responzívny\" - spôsobuje, že prieskum zaberá celú šírku obrazovky; \"Auto\" - použije ktorýkoľvek z týchto dvoch v závislosti od použitých typov otázok.",
     cookieName: "Súbory cookie zabraňujú používateľom vyplniť ten istý prieskum dvakrát.",
@@ -1434,6 +1454,7 @@ export var skStrings = {
     dataList: "Zadajte zoznam možností, ktoré budú respondentovi navrhnuté počas vstupu.",
     itemSize: "Toto nastavenie zmení iba veľkosť vstupných polí a neovplyvní šírku poľa otázok.",
     itemTitleWidth: "Nastavuje konzistentnú šírku pre všetky štítky položiek v pixeloch",
+    inputTextAlignment: "Vyberte, ako chcete zarovnať vstupnú hodnotu v poli. Predvolené nastavenie \"Auto\" zarovná vstupnú hodnotu doprava, ak je použité maskovanie meny alebo čísel, a doľava, ak nie.",
     altText: "Slúži ako náhrada, keď obrázok nie je možné zobraziť na zariadení používateľa a na účely prístupnosti.",
     rateColorMode: "Definuje farbu vybraných emodži, keď je typ ikony hodnotenia nastavený na \"Smajlíky\". Vyberte si medzi: \"Predvolené\" - vybrané emodži sa zobrazia v predvolenej farbe prieskumu; \"Mierka\" - vybrané emodži zdedí farbu z hodnotiacej stupnice.",
     expression: {
@@ -1484,7 +1505,8 @@ export var skStrings = {
     panellayoutcolumn: {
       effectiveWidth: "Akceptuje hodnoty %.",
       questionTitleWidth: "Akceptuje hodnoty px."
-    }
+    },
+    progressBarInheritWidthFrom: "Možnosť \"Rovnaké ako kontajner\" automaticky upraví šírku oblasti indikátora priebehu tak, aby sa zmestila do prvku HTML, v ktorom je prieskum umiestnený."
   },
   // Properties
   p: {
@@ -1549,6 +1571,7 @@ export var skStrings = {
     dataList: "zoznam údajov",
     itemSize: "Veľkosť položky",
     itemTitleWidth: "Šírka označenia položky (v px)",
+    inputTextAlignment: "Zarovnanie vstupných hodnôt",
     elements: "Prvky",
     content: "Obsah",
     navigationButtonsVisibility: "Viditeľnosť navigačných tlačidiel",
@@ -1588,7 +1611,8 @@ export var skStrings = {
     scaleColorMode: "Farebný režim mierky",
     rateColorMode: "Režim hodnotenia farieb",
     copyDisplayValue: "Kopírovať zobrazenú hodnotu",
-    effectiveColSpan: "Rozpätie stĺpca"
+    effectiveColSpan: "Rozpätie stĺpca",
+    progressBarInheritWidthFrom: "Šírka oblasti indikátora priebehu"
   },
   theme: {
     advancedMode: "Rozšírený režim",
@@ -2676,3 +2700,28 @@ editorLocalization.locales["sk"] = skStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Akceptuje hodnoty %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Akceptuje hodnoty px."
 // p.effectiveColSpan: "Column span" => "Rozpätie stĺpca"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "Rovnaké ako prieskum"
+// progressBarInheritWidthFrom.container: "Same as container" => "Rovnaké ako kontajner"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Ak je to možné, zobrazí náhľady miniatúr nahraných súborov. Zrušte výber, ak chcete namiesto toho zobraziť ikony súborov."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "Možnosť \"Rovnaké ako kontajner\" automaticky upraví šírku oblasti indikátora priebehu tak, aby sa zmestila do prvku HTML, v ktorom je prieskum umiestnený."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "Šírka oblasti indikátora priebehu"
+// maskType.none: "None" => "Žiadny"
+// maskType.pattern: "Pattern" => "Vzorka"
+// maskType.numeric: "Numeric" => "Numerický"
+// maskType.datetime: "Date and Time" => "Dátum a čas"
+// maskType.currency: "Currency" => "Mena"
+
+// inputTextAlignment.auto: "Auto" => "Auto"
+// inputTextAlignment.left: "Left" => "Vľavo"
+// inputTextAlignment.right: "Right" => "Doprava"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Vyberte, ako chcete zarovnať vstupnú hodnotu v poli. Predvolené nastavenie \"Auto\" zarovná vstupnú hodnotu doprava, ak je použité maskovanie meny alebo čísel, a doľava, ak nie."
+// p.inputTextAlignment: "Input value alignment" => "Zarovnanie vstupných hodnôt"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "Zobrazenie indikátora priebehu"
+// paneldynamic.showProgressBar: "Show the progress bar" => "Zobrazenie indikátora priebehu"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "Zarovnanie indikátora priebehu"
+// pv.carousel: "Carousel" => "Kolotoč"
+// progressBarLocation.top: "Top" => "Vrchol"
+// progressBarLocation.bottom: "Bottom" => "Dno"
+// progressBarLocation.topBottom: "Top and bottom" => "Hore a dole"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Usporiada možnosti výberu vo viacstĺpcovom rozložení. Ak je nastavená hodnota 0, možnosti sa zobrazia v jednom riadku. Ak je nastavená na -1, skutočná hodnota sa zdedí z vlastnosti \"Počet vnorených stĺpcov\" nadradenej matice."
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "Odkazy na YouTube nie sú podporované."

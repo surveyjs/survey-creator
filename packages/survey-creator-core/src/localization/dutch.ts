@@ -154,6 +154,7 @@ export var nlStrings = {
     translationPlaceHolder: "Vertaling...",
     translationSource: "Bron: ",
     translationTarget: "Doel: ",
+    translationYouTubeNotSupported: "YouTube-links worden niet ondersteund.",
     themeExportButton: "Exporteren",
     themeImportButton: "Importeren",
     surveyJsonExportButton: "Exporteren",
@@ -307,6 +308,9 @@ export var nlStrings = {
       templateTitleLocation: "Uitlijning van vraagtitels",
       templateErrorLocation: "Uitlijning van foutmeldingen",
       newPanelPosition: "Nieuwe paneellocatie",
+      showRangeInProgress: "De voortgangsbalk weergeven",
+      showProgressBar: "De voortgangsbalk weergeven",
+      progressBarLocation: "Uitlijning van de voortgangsbalk",
       keyName: "Voorkom dubbele antwoorden in de volgende vraag"
     },
     question: {
@@ -654,13 +658,6 @@ export var nlStrings = {
     allowResizeComment: "Gebruikers toestaan het formaat van tekstgebieden te wijzigen",
     textUpdateMode: "Modus tekstvernieuwing",
     maskType: "Type invoermasker",
-    maskTypes: {
-      none: "Geen",
-      patternmask: "Patroon",
-      numericmask: "Numeriek",
-      datetimemask: "Datum en tijd",
-      currencymask: "Valuta"
-    },
     focusOnFirstError: "Focus op eerste fout zetten",
     checkErrorsMode: "Validatie uitvoeren",
     validateVisitedEmptyFields: "Lege velden valideren bij verloren focus",
@@ -697,7 +694,6 @@ export var nlStrings = {
     panelsState: "Uitvouwstatus binnenpaneel",
     panelPrevText: "Knopinfo vorige deelvensterknop",
     panelNextText: "knopinfo voor het volgende deelvenster",
-    showRangeInProgress: "Voortgangsbalk weergeven",
     panelRemoveButtonLocation: "Locatie van de knop Deelvenster verwijderen",
     hideIfRowsEmpty: "Verberg de vraag als er geen rijen zijn",
     hideColumnsIfEmpty: "Kolommen verbergen als er geen rijen zijn",
@@ -934,10 +930,11 @@ export var nlStrings = {
     firstExpanded: "Eerste uitgevouwen",
     off: "Uit",
     list: "Lijst",
+    carousel: "Carrousel",
+    tab: "Tabs",
     progressTop: "Voortgang top",
     progressBottom: "Voortgang bodem",
     progressTopBottom: "Voortgang top bodem",
-    tab: "Tabs",
     horizontal: "Horizontaal",
     vertical: "Verticaal",
     top: "Top",
@@ -994,6 +991,18 @@ export var nlStrings = {
       time: "Tijd",
       url: "Url",
       week: "Week"
+    },
+    maskType: {
+      none: "Geen",
+      pattern: "Patroon",
+      numeric: "Numeriek",
+      datetime: "Datum en tijd",
+      currency: "Valuta"
+    },
+    inputTextAlignment: {
+      auto: "Auto",
+      left: "Links",
+      right: "Rechts"
     },
     all: "Alle",
     page: "Pagina",
@@ -1113,6 +1122,11 @@ export var nlStrings = {
       aboveheader: "Boven de koptekst",
       belowheader: "Onder de kop"
     },
+    progressBarLocation: {
+      top: "Boven",
+      bottom: "Bodem",
+      topBottom: "Boven en onder"
+    },
     sum: "Som",
     count: "Tellen",
     min: "Min",
@@ -1153,6 +1167,10 @@ export var nlStrings = {
     isPanelless: {
       "false": "Verstek",
       "true": "Zonder panelen"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "Zelfde als enquête",
+      container: "Zelfde als container"
     }
   },
   // Operators
@@ -1310,7 +1328,8 @@ export var nlStrings = {
     },
     file: {
       imageHeight: "Hiermee past u de hoogte van de afbeelding in de enquêteresultaten aan.",
-      imageWidth: "Hiermee past u de breedte van de afbeelding in de enquêteresultaten aan."
+      imageWidth: "Hiermee past u de breedte van de afbeelding in de enquêteresultaten aan.",
+      allowImagesPreview: "Geeft indien mogelijk miniatuurvoorbeelden weer voor geüploade bestanden. Schakel de selectie uit als u in plaats daarvan bestandspictogrammen wilt weergeven."
     },
     image: {
       contentMode: "De optie \"Auto\" bepaalt automatisch de geschikte modus voor weergave - Afbeelding, Video of YouTube - op basis van de opgegeven bron-URL."
@@ -1338,7 +1357,8 @@ export var nlStrings = {
       visibleIf: "Gebruik het pictogram van de toverstaf om een voorwaardelijke regel in te stellen die de zichtbaarheid van de kolom bepaalt.",
       enableIf: "Gebruik het pictogram van de toverstaf om een voorwaardelijke regel in te stellen waarmee de alleen-lezen modus voor de kolom wordt uitgeschakeld.",
       requiredIf: "Gebruik het toverstafpictogram om een voorwaardelijke regel in te stellen die het verzenden van enquêtes verhindert, tenzij ten minste één geneste vraag een antwoord heeft.",
-      showInMultipleColumns: "Als deze optie is geselecteerd, wordt er een afzonderlijke kolom gemaakt voor elke keuzeoptie."
+      showInMultipleColumns: "Als deze optie is geselecteerd, wordt er een afzonderlijke kolom gemaakt voor elke keuzeoptie.",
+      colCount: "Rangschikt keuzeopties in een lay-out met meerdere kolommen. Als deze optie op 0 staat, worden ze op één regel weergegeven. Wanneer deze is ingesteld op -1, wordt de werkelijke waarde overgenomen van de eigenschap \"Aantal geneste kolommen\" van de bovenliggende matrix."
     },
     widthMode: "Kies uit: \"Statisch\" - stelt een vaste breedte in; \"Responsief\" - zorgt ervoor dat de enquête de volledige breedte van het scherm in beslag neemt; \"Auto\" - past een van de twee toe, afhankelijk van de gebruikte vraagtypen.",
     cookieName: "Cookies voorkomen dat gebruikers dezelfde enquête twee keer invullen.",
@@ -1434,6 +1454,7 @@ export var nlStrings = {
     dataList: "Voer een lijst met keuzes in die tijdens de invoer aan de respondent worden voorgesteld.",
     itemSize: "De instelling wijzigt alleen de grootte van de invoervelden en heeft geen invloed op de breedte van het vraagvak.",
     itemTitleWidth: "Hiermee stelt u een consistente breedte in voor alle artikellabels in pixels",
+    inputTextAlignment: "Selecteer hoe u de invoerwaarde binnen het veld wilt uitlijnen. De standaardinstelling \"Auto\" lijnt de invoerwaarde uit aan de rechterkant als valuta- of numerieke maskering wordt toegepast en aan de linkerkant als dat niet het geval is.",
     altText: "Dient als vervanging wanneer de afbeelding niet kan worden weergegeven op het apparaat van een gebruiker en voor toegankelijkheidsdoeleinden.",
     rateColorMode: "Definieert de kleur van de geselecteerde emoji wanneer het type Beoordelingspictogram is ingesteld op \"Smileys\". Kies tussen: \"Standaard\" - de geselecteerde emoji verschijnt in de standaard enquêtekleur; \"Schaal\" - de geselecteerde emoji erft de kleur van de beoordelingsschaal.",
     expression: {
@@ -1484,7 +1505,8 @@ export var nlStrings = {
     panellayoutcolumn: {
       effectiveWidth: "Accepteert waarden %.",
       questionTitleWidth: "Accepteert waarden px."
-    }
+    },
+    progressBarInheritWidthFrom: "Met de optie \"Zelfde als container\" wordt de breedte van het gebied van de voortgangsbalk automatisch aangepast aan het HTML-element waarin de enquête is geplaatst."
   },
   // Properties
   p: {
@@ -1549,6 +1571,7 @@ export var nlStrings = {
     dataList: "Gegevenslijst",
     itemSize: "Item grootte",
     itemTitleWidth: "Breedte artikellabel (in px)",
+    inputTextAlignment: "Uitlijning van invoerwaarden",
     elements: "Elementen",
     content: "Tevreden",
     navigationButtonsVisibility: "Navigatie Knoppen zichtbaarheid",
@@ -1588,7 +1611,8 @@ export var nlStrings = {
     scaleColorMode: "Kleurmodus schalen",
     rateColorMode: "Kleurmodus beoordelen",
     copyDisplayValue: "Weergavewaarde kopiëren",
-    effectiveColSpan: "Kolom spanwijdte"
+    effectiveColSpan: "Kolom spanwijdte",
+    progressBarInheritWidthFrom: "Breedte van het voortgangsbalkgebied"
   },
   theme: {
     advancedMode: "Geavanceerde modus",
@@ -2704,3 +2728,28 @@ editorLocalization.locales["nl"] = nlStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Accepteert waarden %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Accepteert waarden px."
 // p.effectiveColSpan: "Column span" => "Kolom spanwijdte"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "Zelfde als enquête"
+// progressBarInheritWidthFrom.container: "Same as container" => "Zelfde als container"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Geeft indien mogelijk miniatuurvoorbeelden weer voor geüploade bestanden. Schakel de selectie uit als u in plaats daarvan bestandspictogrammen wilt weergeven."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "Met de optie \"Zelfde als container\" wordt de breedte van het gebied van de voortgangsbalk automatisch aangepast aan het HTML-element waarin de enquête is geplaatst."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "Breedte van het voortgangsbalkgebied"
+// maskType.none: "None" => "Geen"
+// maskType.pattern: "Pattern" => "Patroon"
+// maskType.numeric: "Numeric" => "Numeriek"
+// maskType.datetime: "Date and Time" => "Datum en tijd"
+// maskType.currency: "Currency" => "Valuta"
+
+// inputTextAlignment.auto: "Auto" => "Auto"
+// inputTextAlignment.left: "Left" => "Links"
+// inputTextAlignment.right: "Right" => "Rechts"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Selecteer hoe u de invoerwaarde binnen het veld wilt uitlijnen. De standaardinstelling \"Auto\" lijnt de invoerwaarde uit aan de rechterkant als valuta- of numerieke maskering wordt toegepast en aan de linkerkant als dat niet het geval is."
+// p.inputTextAlignment: "Input value alignment" => "Uitlijning van invoerwaarden"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "De voortgangsbalk weergeven"
+// paneldynamic.showProgressBar: "Show the progress bar" => "De voortgangsbalk weergeven"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "Uitlijning van de voortgangsbalk"
+// pv.carousel: "Carousel" => "Carrousel"
+// progressBarLocation.top: "Top" => "Boven"
+// progressBarLocation.bottom: "Bottom" => "Bodem"
+// progressBarLocation.topBottom: "Top and bottom" => "Boven en onder"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Rangschikt keuzeopties in een lay-out met meerdere kolommen. Als deze optie op 0 staat, worden ze op één regel weergegeven. Wanneer deze is ingesteld op -1, wordt de werkelijke waarde overgenomen van de eigenschap \"Aantal geneste kolommen\" van de bovenliggende matrix."
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "YouTube-links worden niet ondersteund."

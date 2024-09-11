@@ -154,6 +154,7 @@ export const roStrings = {
     translationPlaceHolder: "Traducere...",
     translationSource: "Sursă: ",
     translationTarget: "Țintă: ",
+    translationYouTubeNotSupported: "Linkurile YouTube nu sunt acceptate.",
     themeExportButton: "Exportă",
     themeImportButton: "Importă",
     surveyJsonExportButton: "Exportă",
@@ -307,6 +308,9 @@ export const roStrings = {
       templateTitleLocation: "Alinierea titlului întrebării",
       templateErrorLocation: "Alinierea mesajului de eroare",
       newPanelPosition: "Locația noului panou",
+      showRangeInProgress: "Afișați bara de progres",
+      showProgressBar: "Afișați bara de progres",
+      progressBarLocation: "Alinierea barei de progres",
       keyName: "Prevenirea răspunsurilor duplicate în următoarea întrebare"
     },
     question: {
@@ -654,13 +658,6 @@ export const roStrings = {
     allowResizeComment: "Permite utilizatorilor să redimensioneze zonele de text",
     textUpdateMode: "Actualizează valorile câmpurilor de intrare",
     maskType: "Tip mască de intrare",
-    maskTypes: {
-      none: "Niciuna",
-      patternmask: "Model",
-      numericmask: "Numeric",
-      datetimemask: "Dată și oră",
-      currencymask: "Valută"
-    },
     focusOnFirstError: "Focalizați pe primul răspuns invalid",
     checkErrorsMode: "Rulați validarea",
     validateVisitedEmptyFields: "Validarea câmpurilor goale pentru focalizarea pierdută",
@@ -697,7 +694,6 @@ export const roStrings = {
     panelsState: "Starea de colaps a panoului intern",
     panelPrevText: "Textul butonului „Panoul anterior”",
     panelNextText: "Textul butonului „Panoul următor”",
-    showRangeInProgress: "Afișați bara de progres",
     panelRemoveButtonLocation: "Alinierea butonului „Elimină panou”",
     hideIfRowsEmpty: "Ascunde întrebarea dacă nu are rânduri",
     hideColumnsIfEmpty: "Ascunde coloanele dacă nu sunt rânduri",
@@ -934,10 +930,11 @@ export const roStrings = {
     firstExpanded: "Primul panou este extins",
     off: "Ascunde numerele întrebărilor",
     list: "Listă",
+    carousel: "Carusel",
+    tab: "File",
     progressTop: "Navigator panou + bară de progres în partea de sus",
     progressBottom: "Navigator panou + bară de progres în partea de jos",
     progressTopBottom: "Navigator panou + bară de progres în partea de sus și de jos",
-    tab: "File",
     horizontal: "Orizontal",
     vertical: "Vertical",
     top: "Deasupra",
@@ -994,6 +991,18 @@ export const roStrings = {
       time: "Ora",
       url: "URL",
       week: "Săptămână"
+    },
+    maskType: {
+      none: "Niciunul",
+      pattern: "Model",
+      numeric: "Numerică",
+      datetime: "Data și ora",
+      currency: "Valută"
+    },
+    inputTextAlignment: {
+      auto: "Automobil",
+      left: "Stânga",
+      right: "Dreapta"
     },
     all: "Toate",
     page: "Pagină",
@@ -1113,6 +1122,11 @@ export const roStrings = {
       aboveheader: "Deasupra antetului",
       belowheader: "Sub antet"
     },
+    progressBarLocation: {
+      top: "Culme",
+      bottom: "Fund",
+      topBottom: "Sus și jos"
+    },
     sum: "Sumă",
     count: "Numără",
     min: "Min",
@@ -1153,6 +1167,10 @@ export const roStrings = {
     isPanelless: {
       "false": "Implicit",
       "true": "Fără panouri"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "La fel ca sondajul",
+      container: "La fel ca containerul"
     }
   },
   // Operators
@@ -1310,7 +1328,8 @@ export const roStrings = {
     },
     file: {
       imageHeight: "Reglează înălțimea imaginii în rezultatele chestionarului.",
-      imageWidth: "Reglează lățimea imaginii în rezultatele chestionarului."
+      imageWidth: "Reglează lățimea imaginii în rezultatele chestionarului.",
+      allowImagesPreview: "Afișează previzualizări în miniatură pentru fișierele încărcate atunci când este posibil. Deselectați dacă doriți să afișați pictogramele fișierelor."
     },
     image: {
       contentMode: "Opțiunea „Auto” determină automat modul potrivit pentru afișare - Imagine, Video sau YouTube - pe baza URL-ului sursă furnizat."
@@ -1338,7 +1357,8 @@ export const roStrings = {
       visibleIf: "Utilizați pictograma bagheta magică pentru a seta o regulă condițională care determină vizibilitatea coloanei.",
       enableIf: "Utilizați pictograma bagheta magică pentru a seta o regulă condițională care dezactivează modul doar citire pentru coloană.",
       requiredIf: "Utilizați pictograma bagheta magică pentru a seta o regulă condițională care împiedică trimiterea chestionarului dacă cel puțin o întrebare inclusă nu are un răspuns.",
-      showInMultipleColumns: "Când este selectat, creează o coloană individuală pentru fiecare opțiune de alegere."
+      showInMultipleColumns: "Când este selectat, creează o coloană individuală pentru fiecare opțiune de alegere.",
+      colCount: "Aranjează opțiunile de alegere într-un aspect cu mai multe coloane. Când este setat la 0, opțiunile sunt afișate într-o singură linie. Când este setată la -1, valoarea reală este moștenită de la proprietatea \"Număr de coloane imbricate\" a matricei părinte."
     },
     widthMode: "Alegeți dintre: „Static” - setează o lățime fixă; „Responsive” - face ca chestionarul să ocupe întreaga lățime a ecranului; „Auto” - aplică una dintre cele două în funcție de tipurile de întrebări utilizate.",
     cookieName: "Atribuiți o valoare unică cookie-ului pentru chestionarul dvs. Cookie-ul va fi setat în browserul unui respondent la finalizarea chestionarului pentru a preveni trimiterea repetată a chestionarului.",
@@ -1434,6 +1454,7 @@ export const roStrings = {
     dataList: "Introduceți o listă de opțiuni care vor fi sugerate respondentului în timpul introducerii.",
     itemSize: "Setarea redimensionează doar câmpurile de intrare și nu afectează lățimea casetei întrebării.",
     itemTitleWidth: "Setează o lățime consistentă pentru toate etichetele elementelor în pixeli",
+    inputTextAlignment: "Selectați modul de aliniere a valorii de intrare în câmp. Setarea implicită \"Auto\" aliniază valoarea de intrare la dreapta dacă se aplică mascare monedară sau numerică și la stânga dacă nu.",
     altText: "Servește ca un substitut atunci când imaginea nu poate fi afișată pe dispozitivul utilizatorului și pentru scopuri de accesibilitate.",
     rateColorMode: "Definește culoarea emoji-ului selectat când tipul pictogramei de evaluare este setat la „Smileys”. Alegeți dintre: „Implicit” - emoji-ul selectat apare în culoarea implicită a chestionarului; „Scală” - emoji-ul selectat moștenește culoarea de la scala de evaluare.",
     expression: {
@@ -1484,7 +1505,8 @@ export const roStrings = {
     panellayoutcolumn: {
       effectiveWidth: "Acceptă valori în %.",
       questionTitleWidth: "Acceptă valori în px."
-    }
+    },
+    progressBarInheritWidthFrom: "Opțiunea \"La fel ca containerul\" ajustează automat lățimea zonei barei de progres pentru a se potrivi cu elementul HTML în care este plasat sondajul."
   },
   // Properties
   p: {
@@ -1549,6 +1571,7 @@ export const roStrings = {
     dataList: "Elemente pentru sugestii automate",
     itemSize: "Lățimea câmpului de intrare (în caractere)",
     itemTitleWidth: "Lățimea etichetei elementului (în px)",
+    inputTextAlignment: "Alinierea valorilor de intrare",
     elements: "Elemente",
     content: "Conținut",
     navigationButtonsVisibility: "Arată/ascunde butoanele de navigare",
@@ -1588,7 +1611,8 @@ export const roStrings = {
     scaleColorMode: "Modul de culoare al pictogramei de evaluare",
     rateColorMode: "Schema de culori a pictogramelor Smileys",
     copyDisplayValue: "Copiază valoarea afișată",
-    effectiveColSpan: "Span de coloană eficient"
+    effectiveColSpan: "Span de coloană eficient",
+    progressBarInheritWidthFrom: "Lățimea zonei barei de progres"
   },
   theme: {
     advancedMode: "Mod avansat",
@@ -1656,3 +1680,28 @@ editorLocalization.locales["ro"] = roStrings;
 // Remove those strings that you have corrected manually
 // pe.validateVisitedEmptyFields: "Validate empty fields on lost focus" => "Validarea câmpurilor goale pentru focalizarea pierdută"
 // pehelp.validateVisitedEmptyFields: "Enable this option to trigger validation when a user focuses on an empty input field and then leaves it without making any changes." => "Activați această opțiune pentru a declanșa validarea atunci când un utilizator se concentrează pe un câmp de introducere gol și apoi îl lasă fără a efectua modificări."
+// progressBarInheritWidthFrom.survey: "Same as survey" => "La fel ca sondajul"
+// progressBarInheritWidthFrom.container: "Same as container" => "La fel ca containerul"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Afișează previzualizări în miniatură pentru fișierele încărcate atunci când este posibil. Deselectați dacă doriți să afișați pictogramele fișierelor."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "Opțiunea \"La fel ca containerul\" ajustează automat lățimea zonei barei de progres pentru a se potrivi cu elementul HTML în care este plasat sondajul."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "Lățimea zonei barei de progres"
+// maskType.none: "None" => "Niciunul"
+// maskType.pattern: "Pattern" => "Model"
+// maskType.numeric: "Numeric" => "Numerică"
+// maskType.datetime: "Date and Time" => "Data și ora"
+// maskType.currency: "Currency" => "Valută"
+
+// inputTextAlignment.auto: "Auto" => "Automobil"
+// inputTextAlignment.left: "Left" => "Stânga"
+// inputTextAlignment.right: "Right" => "Dreapta"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Selectați modul de aliniere a valorii de intrare în câmp. Setarea implicită \"Auto\" aliniază valoarea de intrare la dreapta dacă se aplică mascare monedară sau numerică și la stânga dacă nu."
+// p.inputTextAlignment: "Input value alignment" => "Alinierea valorilor de intrare"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "Afișați bara de progres"
+// paneldynamic.showProgressBar: "Show the progress bar" => "Afișați bara de progres"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "Alinierea barei de progres"
+// pv.carousel: "Carousel" => "Carusel"
+// progressBarLocation.top: "Top" => "Culme"
+// progressBarLocation.bottom: "Bottom" => "Fund"
+// progressBarLocation.topBottom: "Top and bottom" => "Sus și jos"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Aranjează opțiunile de alegere într-un aspect cu mai multe coloane. Când este setat la 0, opțiunile sunt afișate într-o singură linie. Când este setată la -1, valoarea reală este moștenită de la proprietatea \"Număr de coloane imbricate\" a matricei părinte."
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "Linkurile YouTube nu sunt acceptate."

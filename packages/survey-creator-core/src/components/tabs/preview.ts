@@ -261,6 +261,7 @@ export class PreviewViewModel extends Base {
           this.survey.pages[i].passed = true;
         }
       },
+      cssClass: "svc-creator-popup",
       verticalPosition: "top",
       horizontalPosition: "center"
     });

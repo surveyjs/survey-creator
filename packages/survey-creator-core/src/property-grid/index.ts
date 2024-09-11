@@ -447,6 +447,13 @@ export class PropertyGridTitleActionsCreator {
         action.iconName = this.getHelpActionIconName(question);
       }
     });
+    const baseOnMouseDown = action.doMouseDown;
+    action.doMouseDown = (args: any) => {
+      baseOnMouseDown.call(action);
+      const evt = !!args.originalEvent ? args.originalEvent : args;
+      evt.preventDefault();
+      evt.stopPropagation();
+    };
     return action;
   }
   private getHelpActionIconName(question: Question): string {
@@ -822,7 +829,9 @@ export class PropertyGridModel {
     for (var i = 0; i < panels.length; i++) {
       var panel = <PanelModel>panels[i];
       if (panel === question.parent) {
+        panel.blockAnimations();
         panel.expand();
+        panel.releaseAnimations();
       } else {
         panel.collapse();
       }
@@ -1083,7 +1092,7 @@ export class PropertyGridModel {
   }
   private onValueChanging(options: any) {
     var q = options.question;
-    if (!q || !q.property || Helpers.isTwoValueEquals(options.value, options.oldValue, false, false, false)) return;
+    if (!q || !q.property || !Array.isArray(options.value) && Helpers.isTwoValueEquals(options.value, options.oldValue, false, false, false)) return;
     PropertyGridEditorCollection.onValueChanging(this.obj, q.property, q, options);
     var changingOptions = {
       obj: this.obj,
@@ -1363,7 +1372,7 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
           this.onModalPropertyEditorClosed(editor, property, question, options, "cancel");
           onClose && onClose("cancel");
         },
-        cssClass: "sv-property-editor",
+        cssClass: "sv-property-editor svc-creator-popup",
         title: question.title,
         displayMode: options.isMobileView ? "overlay" : "popup"
       }, options.rootElement);
@@ -1550,6 +1559,9 @@ export class PropertyGridEditorString extends PropertyGridEditorStringBase {
     }
     return json;
   }
+  public validateValue(obj: Base, question: Question, prop: JsonObjectProperty, val: any): string {
+    return validateImageItemValueProperty(obj, prop, val);
+  }
 }
 
 export class PropertyGridEditorDateTime extends PropertyGridEditor {
@@ -1566,19 +1578,19 @@ export class PropertyGridEditorDateTime extends PropertyGridEditor {
   }
 }
 
+function validateImageItemValueProperty(obj: Base, prop: JsonObjectProperty, val: any): string {
+  if (obj.getType() !== "imageitemvalue" || prop.name !== "imageLink" || !Helpers.isUrlYoutubeVideo(val)) return undefined;
+  return editorLocalization.getString("ed.translationYouTubeNotSupported");
+}
+
 export class PropertyGridLinkEditor extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type === "url" || prop.type === "file";
   }
-  public getJSON(
-    obj: Base,
-    prop: JsonObjectProperty,
-    options: ISurveyCreatorOptions
-  ): any {
+  public getJSON(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): any {
     const res: any = { type: "fileedit", storeDataAsText: false, placeholder: editorLocalization.getString("pe.fileInputPlaceholder") };
     return res;
   }
-
   public onCreated(obj: Base, question: QuestionFileEditorModel, prop: JsonObjectProperty, options: ISurveyCreatorOptions) {
     if (["image", "imageitemvalue"].indexOf(obj.getType()) > -1) {
       const questionObj = obj.getType() == "imageitemvalue" ? (<any>obj).locOwner : <Question>obj;
@@ -1595,7 +1607,9 @@ export class PropertyGridLinkEditor extends PropertyGridEditor {
       options.chooseFiles(input, callback, { element: obj, elementType: obj.getType(), propertyName: question.name });
     });
   }
-
+  public validateValue(obj: Base, question: Question, prop: JsonObjectProperty, val: any): string {
+    return validateImageItemValueProperty(obj, prop, val);
+  }
 }
 
 export class PropertyGridEditorColor extends PropertyGridEditor {

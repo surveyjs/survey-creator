@@ -154,6 +154,7 @@ export var arStrings = {
     translationPlaceHolder: "Translation...",
     translationSource: "مصدر: ",
     translationTarget: "هدف: ",
+    translationYouTubeNotSupported: "روابط يوتيوب غير مدعومة.",
     themeExportButton: "تصدير",
     themeImportButton: "استورد",
     surveyJsonExportButton: "تصدير",
@@ -307,6 +308,9 @@ export var arStrings = {
       templateTitleLocation: "محاذاة عنوان السؤال",
       templateErrorLocation: "محاذاة رسالة الخطأ",
       newPanelPosition: "موقع لوحة جديد",
+      showRangeInProgress: "إظهار شريط التقدم",
+      showProgressBar: "إظهار شريط التقدم",
+      progressBarLocation: "محاذاة شريط التقدم",
       keyName: "منع تكرار الردود في السؤال التالي"
     },
     question: {
@@ -654,13 +658,6 @@ export var arStrings = {
     allowResizeComment: "السماح للمستخدمين بتغيير حجم مناطق النص",
     textUpdateMode: "تحديث قيمة السؤال النصي",
     maskType: "نوع قناع الإدخال",
-    maskTypes: {
-      none: "اي",
-      patternmask: "رسم",
-      numericmask: "عددي",
-      datetimemask: "التاريخ والوقت",
-      currencymask: "عملة"
-    },
     focusOnFirstError: "تعيين التركيز على أول إجابة غير صالحة",
     checkErrorsMode: "تشغيل التحقق من الصحة",
     validateVisitedEmptyFields: "التحقق من صحة الحقول الفارغة على التركيز المفقود",
@@ -697,7 +694,6 @@ export var arStrings = {
     panelsState: "حالة توسيع اللوحة الداخلية",
     panelPrevText: "تلميح أداة زر اللوحة السابق",
     panelNextText: "تلميح أداة زر اللوحة التالية",
-    showRangeInProgress: "إظهار شريط التقدم",
     panelRemoveButtonLocation: "إزالة موقع زر اللوحة",
     hideIfRowsEmpty: "إخفاء السؤال إذا لم تكن هناك صفوف",
     hideColumnsIfEmpty: "إخفاء الأعمدة في حالة عدم وجود صفوف",
@@ -934,10 +930,11 @@ export var arStrings = {
     firstExpanded: "توسيع أول لوح",
     off: "إيقاف",
     list: "قائمة",
+    carousel: "دائري",
+    tab: "علامات التبويب",
     progressTop: "التقدم بالأعلى",
     progressBottom: "التقدم بالأسف",
     progressTopBottom: "التقدم بالأعلى والأسفل معاً",
-    tab: "علامات التبويب",
     horizontal: "عرضي",
     vertical: "عمودي",
     top: "الأعلى",
@@ -994,6 +991,18 @@ export var arStrings = {
       time: "الوقت",
       url: "الرابط",
       week: "أسبوع"
+    },
+    maskType: {
+      none: "اي",
+      pattern: "رسم",
+      numeric: "عددي",
+      datetime: "التاريخ والوقت",
+      currency: "عملة"
+    },
+    inputTextAlignment: {
+      auto: "تلقائي",
+      left: "يسار",
+      right: "يمين"
     },
     all: "الكل",
     page: "الصفحة",
@@ -1113,6 +1122,11 @@ export var arStrings = {
       aboveheader: "فوق الرأس",
       belowheader: "أسفل الرأس"
     },
+    progressBarLocation: {
+      top: "أعلى",
+      bottom: "قاع",
+      topBottom: "أعلى وأسفل"
+    },
     sum: "مجموع",
     count: "عد",
     min: "دقيقه",
@@ -1153,6 +1167,10 @@ export var arStrings = {
     isPanelless: {
       "false": "افتراضي",
       "true": "بدون لوحات"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "نفس المسح",
+      container: "نفس الحاوية"
     }
   },
   // Operators
@@ -1310,7 +1328,8 @@ export var arStrings = {
     },
     file: {
       imageHeight: "يضبط ارتفاع الصورة في نتائج الاستطلاع.",
-      imageWidth: "يضبط عرض الصورة في نتائج الاستطلاع."
+      imageWidth: "يضبط عرض الصورة في نتائج الاستطلاع.",
+      allowImagesPreview: "يعرض معاينات الصور المصغرة للملفات التي تم تحميلها عندما يكون ذلك ممكنا. قم بإلغاء تحديد ما إذا كنت تريد إظهار رموز الملفات بدلا من ذلك."
     },
     image: {
       contentMode: "يحدد الخيار \"تلقائي\" تلقائيا الوضع المناسب للعرض - الصورة أو الفيديو أو YouTube - بناء على عنوان URL المصدر المقدم."
@@ -1338,7 +1357,8 @@ export var arStrings = {
       visibleIf: "استخدم أيقونة العصا السحرية لتعيين قاعدة شرطية تحدد رؤية العمود.",
       enableIf: "استخدم أيقونة العصا السحرية لتعيين قاعدة شرطية تعطل وضع القراءة فقط للعمود.",
       requiredIf: "استخدم أيقونة العصا السحرية لتعيين قاعدة شرطية تمنع إرسال الاستطلاع ما لم يكن لسؤال واحد متداخل على الأقل إجابة.",
-      showInMultipleColumns: "عند تحديده، ينشئ عمود منفرد لكل خيار اختيار."
+      showInMultipleColumns: "عند تحديده، ينشئ عمود منفرد لكل خيار اختيار.",
+      colCount: "يرتب خيارات التحديد في تخطيط متعدد الأعمدة. عند التعيين على 0 ، يتم عرض الخيارات في سطر واحد. عند التعيين إلى -1، يتم توريث القيمة الفعلية من خاصية \"عدد الأعمدة المتداخلة\" للمصفوفة الأصل."
     },
     widthMode: "اختر من بين: \"ثابت\" - يحدد عرضا ثابتا ؛ \"متجاوب\" - يجعل الاستطلاع يشغل العرض الكامل للشاشة ؛ \"تلقائي\" - ينطبق على أي من الاثنين اعتمادا على أنواع الأسئلة المستخدمة.",
     cookieName: "تمنع ملفات تعريف الارتباط المستخدمين من ملء نفس الاستبيان مرتين.",
@@ -1434,6 +1454,7 @@ export var arStrings = {
     dataList: "أدخل قائمة بالخيارات التي سيتم اقتراحها على المستجيب أثناء الإدخال.",
     itemSize: "يغير الإعداد حجم حقول الإدخال فقط ولا يؤثر على عرض مربع السؤال.",
     itemTitleWidth: "يضبط عرضا متناسقا لكل تسميات العناصر بالبكسل",
+    inputTextAlignment: "حدد كيفية محاذاة قيمة الإدخال داخل الحقل. يقوم الإعداد الافتراضي \"تلقائي\" بمحاذاة قيمة الإدخال إلى اليمين إذا تم تطبيق إخفاء العملة أو الرقمية وإلى اليسار إذا لم يكن كذلك.",
     altText: "يعمل كبديل عندما يتعذر عرض الصورة على جهاز المستخدم ولأغراض إمكانية الوصول.",
     rateColorMode: "يحدد لون الرموز التعبيرية المحددة عند تعيين نوع رمز التقييم على \"الوجوه الضاحكة\". اختر بين: \"افتراضي\" - يظهر الرمز التعبيري المحدد بلون الاستطلاع الافتراضي ؛ \"مقياس\" - يرث الرمز التعبيري المحدد اللون من مقياس التصنيف.",
     expression: {
@@ -1484,7 +1505,8 @@ export var arStrings = {
     panellayoutcolumn: {
       effectiveWidth: "يقبل القيم٪",
       questionTitleWidth: "يقبل القيم px."
-    }
+    },
+    progressBarInheritWidthFrom: "يقوم خيار \"نفس الحاوية\" بضبط عرض منطقة شريط التقدم تلقائيا ليلائم عنصر HTML الذي يتم وضع الاستطلاع فيه."
   },
   // Properties
   p: {
@@ -1549,6 +1571,7 @@ export var arStrings = {
     dataList: "قائمة البيانات",
     itemSize: "itemSize",
     itemTitleWidth: "عرض تسمية العنصر (بالبكسل)",
+    inputTextAlignment: "محاذاة قيمة الإدخال",
     elements: "عناصر",
     content: "محتوى",
     navigationButtonsVisibility: "رؤية أزرار التنقل",
@@ -1588,7 +1611,8 @@ export var arStrings = {
     scaleColorMode: "مقياس وضع اللون",
     rateColorMode: "معدل وضع اللون",
     copyDisplayValue: "نسخ قيمة العرض",
-    effectiveColSpan: "امتداد العمود"
+    effectiveColSpan: "امتداد العمود",
+    progressBarInheritWidthFrom: "عرض منطقة شريط التقدم"
   },
   theme: {
     advancedMode: "الوضع المتقدم",
@@ -2634,3 +2658,28 @@ editorLocalization.locales["ar"] = arStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "يقبل القيم٪"
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "يقبل القيم px."
 // p.effectiveColSpan: "Column span" => "امتداد العمود"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "نفس المسح"
+// progressBarInheritWidthFrom.container: "Same as container" => "نفس الحاوية"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "يعرض معاينات الصور المصغرة للملفات التي تم تحميلها عندما يكون ذلك ممكنا. قم بإلغاء تحديد ما إذا كنت تريد إظهار رموز الملفات بدلا من ذلك."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "يقوم خيار \"نفس الحاوية\" بضبط عرض منطقة شريط التقدم تلقائيا ليلائم عنصر HTML الذي يتم وضع الاستطلاع فيه."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "عرض منطقة شريط التقدم"
+// maskType.none: "None" => "اي"
+// maskType.pattern: "Pattern" => "رسم"
+// maskType.numeric: "Numeric" => "عددي"
+// maskType.datetime: "Date and Time" => "التاريخ والوقت"
+// maskType.currency: "Currency" => "عملة"
+
+// inputTextAlignment.auto: "Auto" => "تلقائي"
+// inputTextAlignment.left: "Left" => "يسار"
+// inputTextAlignment.right: "Right" => "يمين"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "حدد كيفية محاذاة قيمة الإدخال داخل الحقل. يقوم الإعداد الافتراضي \"تلقائي\" بمحاذاة قيمة الإدخال إلى اليمين إذا تم تطبيق إخفاء العملة أو الرقمية وإلى اليسار إذا لم يكن كذلك."
+// p.inputTextAlignment: "Input value alignment" => "محاذاة قيمة الإدخال"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "إظهار شريط التقدم"
+// paneldynamic.showProgressBar: "Show the progress bar" => "إظهار شريط التقدم"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "محاذاة شريط التقدم"
+// pv.carousel: "Carousel" => "دائري"
+// progressBarLocation.top: "Top" => "أعلى"
+// progressBarLocation.bottom: "Bottom" => "قاع"
+// progressBarLocation.topBottom: "Top and bottom" => "أعلى وأسفل"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "يرتب خيارات التحديد في تخطيط متعدد الأعمدة. عند التعيين على 0 ، يتم عرض الخيارات في سطر واحد. عند التعيين إلى -1، يتم توريث القيمة الفعلية من خاصية \"عدد الأعمدة المتداخلة\" للمصفوفة الأصل."
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "روابط يوتيوب غير مدعومة."

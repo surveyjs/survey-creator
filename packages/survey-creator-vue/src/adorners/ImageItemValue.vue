@@ -127,7 +127,7 @@ import {
   SurveyCreatorModel,
   ImageItemValueWrapperViewModel,
 } from "survey-creator-core";
-import { computed, onMounted, ref } from "vue";
+import { computed, onMounted, onUpdated, ref } from "vue";
 
 const props = defineProps<{
   componentName: string;
@@ -144,14 +144,19 @@ const question = computed(() => props.componentData.question);
 const item = computed(() => props.componentData.item);
 const root = ref<HTMLDivElement>();
 const adorner = useCreatorModel(
-  () =>
-    new ImageItemValueWrapperViewModel(
+  () => {
+    const viewModel = new ImageItemValueWrapperViewModel(
       creator.value,
       question.value,
       item.value,
       null as any,
       null as any
-    ),
+    );
+    if (root?.value) {
+      viewModel.itemsRoot = root.value;
+    }
+    return viewModel;
+  },
   [() => creator.value, () => question.value, () => item.value],
   (value) => {
     value.dispose();
@@ -165,7 +170,6 @@ const newItemStyle = computed(() => {
     height: needStyle ? question.value.renderedImageHeight + "px" : undefined,
   };
 });
-
 onMounted(() => {
   if (root.value) {
     adorner.value.itemsRoot = root.value;

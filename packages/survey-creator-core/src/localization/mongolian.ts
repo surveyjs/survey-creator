@@ -154,6 +154,7 @@ export var mnStrings = {
     translationPlaceHolder: "Орчуулга...",
     translationSource: "Эх сурвалж: ",
     translationTarget: "Зорилго: ",
+    translationYouTubeNotSupported: "YouTube-ийн холбоосууд дэмжигдээгүй.",
     themeExportButton: "Экспорт",
     themeImportButton: "Импорт",
     surveyJsonExportButton: "Экспорт",
@@ -307,6 +308,9 @@ export var mnStrings = {
       templateTitleLocation: "Асуулт нэрийн уялдаа",
       templateErrorLocation: "Алдааны мессежийн зохицуулалт",
       newPanelPosition: "Шинэ панелийн байршил",
+      showRangeInProgress: "Хөгжил дэвшлийн барыг харуул",
+      showProgressBar: "Хөгжил дэвшлийн барыг харуул",
+      progressBarLocation: "Хөгжлийн барын зохицуулалт",
       keyName: "Дараах асуултад хувилж хариулахаас сэргийлье"
     },
     question: {
@@ -654,13 +658,6 @@ export var mnStrings = {
     allowResizeComment: "Хэрэглэгчдэд текстийн газруудыг дахин ашиглах боломж олго",
     textUpdateMode: "Текст асуултын утгыг шинэчлэх",
     maskType: "Оролтын багны төрөл",
-    maskTypes: {
-      none: "Хэн ч биш",
-      patternmask: "Загвар",
-      numericmask: "Тоо нь",
-      datetimemask: "Огноо, цаг",
-      currencymask: "Валютын ханш"
-    },
     focusOnFirstError: "Анхны буруу хариулт руу чиглүүлэх",
     checkErrorsMode: "Баталгаажуулалт ажиллуулах",
     validateVisitedEmptyFields: "Алдагдсан фокус дээр хоосон талбайг баталгаажуулах",
@@ -697,7 +694,6 @@ export var mnStrings = {
     panelsState: "Дотоод панелийн өргөссөн төлөв",
     panelPrevText: "Өмнөх панелийн товч",
     panelNextText: "Дараагийн панелийн товч",
-    showRangeInProgress: "Явцын талбарыг харуулах",
     panelRemoveButtonLocation: "Панел устгах товчны байршил",
     hideIfRowsEmpty: "Мөр байхгүй тохиолдолд асуултыг нуух",
     hideColumnsIfEmpty: "Мөр байхгүй тохиолдолд баганыг нуух",
@@ -934,10 +930,11 @@ export var mnStrings = {
     firstExpanded: "Эхний панел өргөссөн",
     off: "Асуултын тоог нуух",
     list: "Жагсаалт",
+    carousel: "Карусел",
+    tab: "Табууд",
     progressTop: "Панел чиглүүлэгч + Явцын мөр дээд хэсэгт байрлах",
     progressBottom: "Панел чиглүүлэгч + Явцын мөр доод хэсэгт байрлах",
     progressTopBottom: "Панел чиглүүлэгч + Явцын мөр дээд ба доод хэсэгт байрлах",
-    tab: "Табууд",
     horizontal: "Хэвтээ",
     vertical: "Босоо",
     top: "Дээд",
@@ -994,6 +991,18 @@ export var mnStrings = {
       time: "Цаг хугацаа",
       url: "URL",
       week: "Долоо хоног"
+    },
+    maskType: {
+      none: "Хэн ч биш",
+      pattern: "Загвар",
+      numeric: "Тоо нь",
+      datetime: "Огноо, цаг",
+      currency: "Валютын ханш"
+    },
+    inputTextAlignment: {
+      auto: "Авто",
+      left: "Зүүн",
+      right: "Баруун талд"
     },
     all: "Бүх",
     page: "Хуудас",
@@ -1113,6 +1122,11 @@ export var mnStrings = {
       aboveheader: "Толгой дээгүүр",
       belowheader: "Гарчигны доор"
     },
+    progressBarLocation: {
+      top: "Дээд",
+      bottom: "Доод",
+      topBottom: "Дээд, доод"
+    },
     sum: "Сум",
     count: "Тооллого",
     min: "Мин",
@@ -1153,6 +1167,10 @@ export var mnStrings = {
     isPanelless: {
       "false": "Дефолт",
       "true": "Панелгүйгээр"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "Судалгаатай адил",
+      container: "Савтай адил"
     }
   },
   // Operators
@@ -1310,7 +1328,8 @@ export var mnStrings = {
     },
     file: {
       imageHeight: "Судалгааны үр дүнгээр дүрсний өндрийг тохируулна.",
-      imageWidth: "Судалгааны үр дүн дэх зургийн өргөнийг тохируулна."
+      imageWidth: "Судалгааны үр дүн дэх зургийн өргөнийг тохируулна.",
+      allowImagesPreview: "Боломжтой бол татаж авсан файлуудад зориулсан эрхий хурууны урьдчилсан үзүүлэлтийг үзүүлнэ. Оронд нь файлын зургуудыг үзүүлэхийг хүсвэл сонгогдоогүй."
     },
     image: {
       contentMode: "\"Авто\" сонголт нь эх сурвалж URL-д суурилсан зураг, видео, эсвэл YouTube - харуулах тохиромжтой хэв маягийг автоматаар тодорхойлдог."
@@ -1338,7 +1357,8 @@ export var mnStrings = {
       visibleIf: "Ид шидийн wand icon-ийг ашиглан баганын харагдах байдлыг тодорхойлох нөхцөлтэй дүрмийг тогтоо.",
       enableIf: "Шидэт wand зургыг ашиглан баганын зөвхөн унших хэв маягийг хаах нөхцөлтэй дүрмийг тогтоо.",
       requiredIf: "Наад зах нь нэг үүрээ засах асуулт хариулт байхгүй л бол судалгаа явуулахаас сэргийлдэг нөхцөлийн дүрмийг тогтоохын тулд шидэт туузны зургыг ашигла.",
-      showInMultipleColumns: "Сонгогдсон тохиолдолд сонголт бүрд зориулж багана үүсгэнэ."
+      showInMultipleColumns: "Сонгогдсон тохиолдолд сонголт бүрд зориулж багана үүсгэнэ.",
+      colCount: "Сонголт хийх сонголтуудыг олон баганатай загвараар зохион байгуулна. 0-д тавихад сонголтуудыг нэг мөр харуулдаг. -1-д тавихад бодит үнэ цэнэ нь эцэг эхийн матрицын \"Nested column count\" өмчөөс өвлөгддөг."
     },
     widthMode: "Сонгоно уу: \"Статик\" - тогтмол өргөнийг тогтоох; \"Responsive\" - судалгааг дэлгэцийн бүрэн өргөнийг эзэлдэг болгодог; \"Авто\" - ашигласан асуултын төрлөөс хамааран аль нэгийг нь хэрэглэнэ.",
     cookieName: "Хэрэглэгч нэг судалгааг хоёр удаа бөглөхөөс Күүки сэргийлнэ.",
@@ -1434,6 +1454,7 @@ export var mnStrings = {
     dataList: "Санал болгох сонголтуудын жагсаалтыг оруулах үед хариулагчид санал болгох болно.",
     itemSize: "Тохиргоо нь зөвхөн оролтын талбаруудыг дахин тохируулдаг бөгөөд асуултын хайрцагны өргөнд нөлөөлдөггүй.",
     itemTitleWidth: "Пикселд бүх зүйлийн шошгоны тогтмол өргөнийг тогтоох",
+    inputTextAlignment: "Талбар доторх оролтын үнэ цэнийг хэрхэн уялдуулахыг сонго. \"Авто\" гэсэн дефолт тохиргоо нь валют эсвэл тоон маск хэрэглэх бол оролтын үнэ цэнийг баруун тийш, хэрэв үгүй бол зүүн тийш нь уялдуулна.",
     altText: "Хэрэглэгчийн төхөөрөмж дээр болон хүртээмжийн зорилгоор дүрсийг харуулах боломжгүй үед орлуулагчаар үйлчилнэ.",
     rateColorMode: "Rating icon төрлийн \"Smileys\" гэж тогтооход сонгосон эможигийн өнгийг тодорхойлно. Аль нэгийг нь сонгоно уу: \"Default\" - сонгосон эможи нь стандарт судалгааны өнгөөр гарч ирдэг; \"Scale\" - сонгосон эможи нь үнэлгээний хэмжүүрээс өнгийг өвлөн авдаг.",
     expression: {
@@ -1484,7 +1505,8 @@ export var mnStrings = {
     panellayoutcolumn: {
       effectiveWidth: "Үнэт зүйлсийг %-ийг хүлээн зөвшөөрдөг.",
       questionTitleWidth: "Үнэ цэнэ px-ийг хүлээн зөвшөөрдөг."
-    }
+    },
+    progressBarInheritWidthFrom: "\"As as container\" сонголт автоматаар судалгаанд байрлуулсан HTML элементэд тохируулахын тулд progress bar area өргөнийг тохируулдаг."
   },
   // Properties
   p: {
@@ -1549,6 +1571,7 @@ export var mnStrings = {
     dataList: "Өгөгдлийн жагсаалт",
     itemSize: "Элементийн хэмжээ",
     itemTitleWidth: "Барааны шошгоны өргөн (px-д)",
+    inputTextAlignment: "Оролтын үнэ цэнийн зохицуулалт",
     elements: "Элементүүд",
     content: "Контент",
     navigationButtonsVisibility: "Чиглүүлэх товчны харагдац",
@@ -1588,7 +1611,8 @@ export var mnStrings = {
     scaleColorMode: "Масштабын өнгө загвар",
     rateColorMode: "Хэмжээ өнгөний хэв маяг",
     copyDisplayValue: "Copy display value",
-    effectiveColSpan: "Баганын хугацаа"
+    effectiveColSpan: "Баганын хугацаа",
+    progressBarInheritWidthFrom: "Прогресс барын бүсийн өргөн"
   },
   theme: {
     advancedMode: "Дэвшилтэт хэв маяг",
@@ -2379,3 +2403,28 @@ editorLocalization.locales["mn"] = mnStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Үнэт зүйлсийг %-ийг хүлээн зөвшөөрдөг."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Үнэ цэнэ px-ийг хүлээн зөвшөөрдөг."
 // p.effectiveColSpan: "Column span" => "Баганын хугацаа"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "Судалгаатай адил"
+// progressBarInheritWidthFrom.container: "Same as container" => "Савтай адил"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Боломжтой бол татаж авсан файлуудад зориулсан эрхий хурууны урьдчилсан үзүүлэлтийг үзүүлнэ. Оронд нь файлын зургуудыг үзүүлэхийг хүсвэл сонгогдоогүй."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "\"As as container\" сонголт автоматаар судалгаанд байрлуулсан HTML элементэд тохируулахын тулд progress bar area өргөнийг тохируулдаг."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "Прогресс барын бүсийн өргөн"
+// maskType.none: "None" => "Хэн ч биш"
+// maskType.pattern: "Pattern" => "Загвар"
+// maskType.numeric: "Numeric" => "Тоо нь"
+// maskType.datetime: "Date and Time" => "Огноо, цаг"
+// maskType.currency: "Currency" => "Валютын ханш"
+
+// inputTextAlignment.auto: "Auto" => "Авто"
+// inputTextAlignment.left: "Left" => "Зүүн"
+// inputTextAlignment.right: "Right" => "Баруун талд"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Талбар доторх оролтын үнэ цэнийг хэрхэн уялдуулахыг сонго. \"Авто\" гэсэн дефолт тохиргоо нь валют эсвэл тоон маск хэрэглэх бол оролтын үнэ цэнийг баруун тийш, хэрэв үгүй бол зүүн тийш нь уялдуулна."
+// p.inputTextAlignment: "Input value alignment" => "Оролтын үнэ цэнийн зохицуулалт"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "Хөгжил дэвшлийн барыг харуул"
+// paneldynamic.showProgressBar: "Show the progress bar" => "Хөгжил дэвшлийн барыг харуул"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "Хөгжлийн барын зохицуулалт"
+// pv.carousel: "Carousel" => "Карусел"
+// progressBarLocation.top: "Top" => "Дээд"
+// progressBarLocation.bottom: "Bottom" => "Доод"
+// progressBarLocation.topBottom: "Top and bottom" => "Дээд, доод"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Сонголт хийх сонголтуудыг олон баганатай загвараар зохион байгуулна. 0-д тавихад сонголтуудыг нэг мөр харуулдаг. -1-д тавихад бодит үнэ цэнэ нь эцэг эхийн матрицын \"Nested column count\" өмчөөс өвлөгддөг."
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "YouTube-ийн холбоосууд дэмжигдээгүй."

@@ -4,7 +4,7 @@ export var jaStrings = {
   // survey templates
   survey: {
     edit: "編集",
-    externalHelpLink: "アンケートの作成方法を見て学ぶ",
+    externalHelpLink: "アンケート作成方法の動画を見る",
     externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
     dropQuestion: "ツールボックスからここに質問をドロップしてください。",
     addLogicItem: "アンケートの流れをカスタマイズするルールを作成します。",
@@ -18,10 +18,10 @@ export var jaStrings = {
   },
   // Creator tabs
   tabs: {
-    preview: "アンケートをテストする",
+    preview: "プレビュー",
     theme: "テーマ",
     translation: "翻訳",
-    designer: "アンケートの設計者",
+    designer: "編集",
     editor: "JSONエディタ",
     logic: "アンケートのロジック"
   },
@@ -30,7 +30,7 @@ export var jaStrings = {
     default: "デフォルト",
     checkbox: "チェックボックス",
     comment: "コメント",
-    imagepicker: "画像ピッカー",
+    imagepicker: "画像選択",
     ranking: "ランキング",
     image: "画像",
     dropdown: "ドロップダウン",
@@ -46,18 +46,18 @@ export var jaStrings = {
     radiogroup: "ラジオグループ",
     rating: "評価",
     text: "単一入力",
-    boolean: "ブール",
+    boolean: "二者択一",
     expression: "式（読み取り専用）",
     signaturepad: "署名パッド",
     buttongroup: "ボタングループ"
   },
   toolboxCategories: {
-    general: "一般",
+    general: "全体の設定",
     choice: "選択の質問",
     text: "テキスト入力の質問",
     containers: "コンテナー",
     matrix: "マトリックスの質問",
-    misc: "雑貨"
+    misc: "その他"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -73,8 +73,8 @@ export var jaStrings = {
     hidePanel: "パネルを非表示にする",
     prevSelected: "前を選択",
     nextSelected: "[次へ] を選択します。",
-    prevFocus: "前に焦点を合わせる",
-    nextFocus: "次の焦点",
+    prevFocus: "前にフォーカス",
+    nextFocus: "次にフォーカス",
     surveyTypeName: "アンケート",
     pageTypeName: "ページ",
     panelTypeName: "パネル",
@@ -154,6 +154,7 @@ export var jaStrings = {
     translationPlaceHolder: "翻訳。。。",
     translationSource: "源：",
     translationTarget: "ターゲット：",
+    translationYouTubeNotSupported: "YouTube リンクはサポートされていません。",
     themeExportButton: "輸出",
     themeImportButton: "輸入",
     surveyJsonExportButton: "輸出",
@@ -307,6 +308,9 @@ export var jaStrings = {
       templateTitleLocation: "質問タイトルの配置",
       templateErrorLocation: "エラー・メッセージのアライメント",
       newPanelPosition: "新しいパネルの位置",
+      showRangeInProgress: "進行状況バーを表示する",
+      showProgressBar: "進行状況バーを表示する",
+      progressBarLocation: "プログレスバーの配置",
       keyName: "次の質問で回答の重複を防ぐ"
     },
     question: {
@@ -654,13 +658,6 @@ export var jaStrings = {
     allowResizeComment: "ユーザーがテキスト領域のサイズを変更できるようにする",
     textUpdateMode: "テキストの質問値を更新する",
     maskType: "定型入力の種類",
-    maskTypes: {
-      none: "何一つ",
-      patternmask: "パターン",
-      numericmask: "数値",
-      datetimemask: "日付と時刻",
-      currencymask: "通貨"
-    },
     focusOnFirstError: "最初の無効な回答にフォーカスを設定する",
     checkErrorsMode: "検証の実行",
     validateVisitedEmptyFields: "フォーカスを失った空のフィールドの検証",
@@ -697,7 +694,6 @@ export var jaStrings = {
     panelsState: "内側パネルの展開状態",
     panelPrevText: "前のパネルボタンのツールチップ",
     panelNextText: "[次へ] パネル ボタンのツールチップ",
-    showRangeInProgress: "進行状況バーを表示する",
     panelRemoveButtonLocation: "[パネルを削除] ボタンの位置",
     hideIfRowsEmpty: "行がない場合は質問を非表示にする",
     hideColumnsIfEmpty: "行がない場合は列を非表示にする",
@@ -934,10 +930,11 @@ export var jaStrings = {
     firstExpanded: "firstExpanded",
     off: "オフ",
     list: "リスト",
+    carousel: "回転木馬",
+    tab: "タブ",
     progressTop: "progressTop",
     progressBottom: "progressBottom",
     progressTopBottom: "progressTopBottom",
-    tab: "タブ",
     horizontal: "水平",
     vertical: "垂直",
     top: "上",
@@ -994,6 +991,18 @@ export var jaStrings = {
       time: "時間",
       url: "リンク",
       week: "週"
+    },
+    maskType: {
+      none: "何一つ",
+      pattern: "パターン",
+      numeric: "数値",
+      datetime: "日付と時刻",
+      currency: "通貨"
+    },
+    inputTextAlignment: {
+      auto: "自動",
+      left: "左",
+      right: "右"
     },
     all: "すべて",
     page: "ページ",
@@ -1113,6 +1122,11 @@ export var jaStrings = {
       aboveheader: "ヘッダーの上",
       belowheader: "ヘッダーの下"
     },
+    progressBarLocation: {
+      top: "ページのトップへ",
+      bottom: "底",
+      topBottom: "上部と下部"
+    },
     sum: "和",
     count: "数える",
     min: "分",
@@ -1153,6 +1167,10 @@ export var jaStrings = {
     isPanelless: {
       "false": "デフォルト",
       "true": "パネルなし"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "調査と同じ",
+      container: "コンテナと同じ"
     }
   },
   // Operators
@@ -1310,7 +1328,8 @@ export var jaStrings = {
     },
     file: {
       imageHeight: "アンケート結果の画像の高さを調整します。",
-      imageWidth: "アンケート結果の画像の幅を調整します。"
+      imageWidth: "アンケート結果の画像の幅を調整します。",
+      allowImagesPreview: "可能な場合は、アップロードされたファイルのサムネイル プレビューを表示します。代わりにファイルアイコンを表示する場合は、選択を解除します。"
     },
     image: {
       contentMode: "「自動」オプションでは、指定されたソースURLに基づいて、表示に適したモード(画像、動画、YouTube)が自動的に決定されます。"
@@ -1338,7 +1357,8 @@ export var jaStrings = {
       visibleIf: "魔法の杖アイコンを使用して、列の表示を決定する条件付きルールを設定します。",
       enableIf: "魔法の杖アイコンを使用して、列の読み取り専用モードを無効にする条件付きルールを設定します。",
       requiredIf: "魔法の杖アイコンを使用して、ネストされた質問に回答が少なくとも1つない限り、調査の送信を禁止する条件付きルールを設定します。",
-      showInMultipleColumns: "選択すると、選択肢オプションごとに個別の列が作成されます。"
+      showInMultipleColumns: "選択すると、選択肢オプションごとに個別の列が作成されます。",
+      colCount: "選択オプションを複数列のレイアウトで配置します。0 に設定すると、オプションは 1 行で表示されます。-1 に設定すると、実際の値は親行列の \"Nested column count\" プロパティから継承されます。"
     },
     widthMode: "次から選択します: \"Static\" - 固定幅を設定します。「レスポンシブ」 - アンケートを画面の全幅に表示します。「自動」 - 使用する質問タイプに応じて、2つのいずれかを適用します。",
     cookieName: "Cookieは、ユーザーが同じアンケートに2回記入するのを防ぎます。",
@@ -1434,6 +1454,7 @@ export var jaStrings = {
     dataList: "入力時に回答者に提案される選択肢のリストを入力します。",
     itemSize: "この設定では、入力フィールドのサイズが変更されるだけで、質問ボックスの幅には影響しません。",
     itemTitleWidth: "すべてのアイテムラベルの幅をピクセル単位で統一します。",
+    inputTextAlignment: "フィールド内で入力値を揃える方法を選択します。デフォルト設定の「自動」では、通貨または数値のマスキングが適用されている場合は入力値が右に、適用されていない場合は左に揃えられます。",
     altText: "ユーザーのデバイスに画像を表示できない場合や、アクセシビリティの目的で代用します。",
     rateColorMode: "レーティングアイコンの種類が「スマイリー」に設定されている場合に選択した絵文字の色を定義します。以下から選択します: \"デフォルト\" - 選択した絵文字はデフォルトのアンケートカラーで表示されます。「スケール」 - 選択した絵文字は、評価スケールから色を継承します。",
     expression: {
@@ -1484,7 +1505,8 @@ export var jaStrings = {
     panellayoutcolumn: {
       effectiveWidth: "値 % を受け入れます。",
       questionTitleWidth: "値 px を受け入れます。"
-    }
+    },
+    progressBarInheritWidthFrom: "「コンテナと同じ」オプションは、調査が配置されているHTML要素に収まるようにプログレスバーの領域幅を自動調整します。"
   },
   // Properties
   p: {
@@ -1549,6 +1571,7 @@ export var jaStrings = {
     dataList: "データ一覧",
     itemSize: "アイテムサイズ",
     itemTitleWidth: "アイテムラベルの幅 (px)",
+    inputTextAlignment: "入力値の配置",
     elements: "元素",
     content: "コンテンツ",
     navigationButtonsVisibility: "ナビゲーションボタンの可視性",
@@ -1588,7 +1611,8 @@ export var jaStrings = {
     scaleColorMode: "スケールカラーモード",
     rateColorMode: "レートカラーモード",
     copyDisplayValue: "表示値をコピー",
-    effectiveColSpan: "列スパン"
+    effectiveColSpan: "列スパン",
+    progressBarInheritWidthFrom: "プログレスバー領域の幅"
   },
   theme: {
     advancedMode: "詳細モード",
@@ -2722,3 +2746,28 @@ editorLocalization.locales["ja"] = jaStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "値 % を受け入れます。"
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "値 px を受け入れます。"
 // p.effectiveColSpan: "Column span" => "列スパン"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "調査と同じ"
+// progressBarInheritWidthFrom.container: "Same as container" => "コンテナと同じ"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "可能な場合は、アップロードされたファイルのサムネイル プレビューを表示します。代わりにファイルアイコンを表示する場合は、選択を解除します。"
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "「コンテナと同じ」オプションは、調査が配置されているHTML要素に収まるようにプログレスバーの領域幅を自動調整します。"
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "プログレスバー領域の幅"
+// maskType.none: "None" => "何一つ"
+// maskType.pattern: "Pattern" => "パターン"
+// maskType.numeric: "Numeric" => "数値"
+// maskType.datetime: "Date and Time" => "日付と時刻"
+// maskType.currency: "Currency" => "通貨"
+
+// inputTextAlignment.auto: "Auto" => "自動"
+// inputTextAlignment.left: "Left" => "左"
+// inputTextAlignment.right: "Right" => "右"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "フィールド内で入力値を揃える方法を選択します。デフォルト設定の「自動」では、通貨または数値のマスキングが適用されている場合は入力値が右に、適用されていない場合は左に揃えられます。"
+// p.inputTextAlignment: "Input value alignment" => "入力値の配置"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "進行状況バーを表示する"
+// paneldynamic.showProgressBar: "Show the progress bar" => "進行状況バーを表示する"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "プログレスバーの配置"
+// pv.carousel: "Carousel" => "回転木馬"
+// progressBarLocation.top: "Top" => "ページのトップへ"
+// progressBarLocation.bottom: "Bottom" => "底"
+// progressBarLocation.topBottom: "Top and bottom" => "上部と下部"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "選択オプションを複数列のレイアウトで配置します。0 に設定すると、オプションは 1 行で表示されます。-1 に設定すると、実際の値は親行列の \"Nested column count\" プロパティから継承されます。"
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "YouTube リンクはサポートされていません。"

@@ -154,6 +154,7 @@ export var czStrings = {
     translationPlaceHolder: "Překlad...",
     translationSource: "Zdroj: ",
     translationTarget: "Cíl: ",
+    translationYouTubeNotSupported: "Odkazy na YouTube nejsou podporovány.",
     themeExportButton: "Vývoz",
     themeImportButton: "Dovoz",
     surveyJsonExportButton: "Vývoz",
@@ -307,6 +308,9 @@ export var czStrings = {
       templateTitleLocation: "Zarovnání názvu otázky",
       templateErrorLocation: "Zarovnání chybové zprávy",
       newPanelPosition: "Nové umístění panelu",
+      showRangeInProgress: "Zobrazení ukazatele průběhu",
+      showProgressBar: "Zobrazení ukazatele průběhu",
+      progressBarLocation: "Zarovnání indikátoru průběhu",
       keyName: "Zabraňte duplicitním odpovědím v následující otázce"
     },
     question: {
@@ -654,13 +658,6 @@ export var czStrings = {
     allowResizeComment: "Povolit uživatelům změnit velikost textových polí",
     textUpdateMode: "Aktualizovat hodnotu textové otázky",
     maskType: "Typ vstupní masky",
-    maskTypes: {
-      none: "Žádný",
-      patternmask: "Vzor",
-      numericmask: "Číselný",
-      datetimemask: "Datum a čas",
-      currencymask: "Měna"
-    },
     focusOnFirstError: "Zvýraznit první neplatnou odpověď",
     checkErrorsMode: "Spustit ověření",
     validateVisitedEmptyFields: "Ověření prázdných polí při ztrátě fokusu",
@@ -697,7 +694,6 @@ export var czStrings = {
     panelsState: "Stav rozbalení vnitřního panelu",
     panelPrevText: "Nápověda pro tlačítko \"Předchozí panel\"",
     panelNextText: "Nápověda pro tlačítko \"Další panel\"",
-    showRangeInProgress: "Zobrazit ukazatel postupu",
     panelRemoveButtonLocation: "Umístění tlačítka \"Odstranit panel\"",
     hideIfRowsEmpty: "Skrýt otázku, pokud neexistují žádné řádky",
     hideColumnsIfEmpty: "Skrýt sloupce, pokud neexistují žádné řádky",
@@ -934,10 +930,11 @@ export var czStrings = {
     firstExpanded: "firstExpanded",
     off: "vypnout",
     list: "seznam",
+    carousel: "Kolotoč",
+    tab: "Záložky",
     progressTop: "progressTop",
     progressBottom: "progressBottom",
     progressTopBottom: "progressTopBottom",
-    tab: "Záložky",
     horizontal: "horizontální",
     vertical: "vertikální",
     top: "nahoře",
@@ -994,6 +991,18 @@ export var czStrings = {
       time: "Čas",
       url: "URL",
       week: "Týden"
+    },
+    maskType: {
+      none: "Žádný",
+      pattern: "Vzor",
+      numeric: "Číselný",
+      datetime: "Datum a čas",
+      currency: "Měna"
+    },
+    inputTextAlignment: {
+      auto: "Auto",
+      left: "Vlevo",
+      right: "Vpravo"
     },
     all: "vše",
     page: "stránka",
@@ -1113,6 +1122,11 @@ export var czStrings = {
       aboveheader: "Nad záhlavím",
       belowheader: "Pod záhlavím"
     },
+    progressBarLocation: {
+      top: "Vrchol",
+      bottom: "Dno",
+      topBottom: "Nahoře a dole"
+    },
     sum: "Součet",
     count: "Počítat",
     min: "Min",
@@ -1153,6 +1167,10 @@ export var czStrings = {
     isPanelless: {
       "false": "Výchozí",
       "true": "Bez panelů"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "Stejné jako v průzkumu",
+      container: "Stejné jako u kontejneru"
     }
   },
   // Operators
@@ -1310,7 +1328,8 @@ export var czStrings = {
     },
     file: {
       imageHeight: "Upraví výšku obrázku ve výsledcích měření.",
-      imageWidth: "Upraví šířku obrázku ve výsledcích měření."
+      imageWidth: "Upraví šířku obrázku ve výsledcích měření.",
+      allowImagesPreview: "Pokud je to možné, zobrazuje náhledy miniatur pro nahrané soubory. Zrušte výběr, pokud chcete místo toho zobrazit ikony souborů."
     },
     image: {
       contentMode: "Možnost \"Auto\" automaticky určí vhodný režim pro zobrazení – Obrázek, Video nebo YouTube – na základě zadané zdrojové adresy URL."
@@ -1338,7 +1357,8 @@ export var czStrings = {
       visibleIf: "Pomocí ikony kouzelné hůlky můžete nastavit podmíněné pravidlo, které určuje viditelnost sloupce.",
       enableIf: "Pomocí ikony kouzelné hůlky nastavte podmíněné pravidlo, které zakáže režim jen pro čtení pro sloupec.",
       requiredIf: "Pomocí ikony kouzelné hůlky nastavte podmíněné pravidlo, které zabrání odeslání průzkumu, pokud alespoň jedna vnořená otázka nemá odpověď.",
-      showInMultipleColumns: "Pokud je tato možnost vybraná, vytvoří samostatný sloupec pro každou možnost volby."
+      showInMultipleColumns: "Pokud je tato možnost vybraná, vytvoří samostatný sloupec pro každou možnost volby.",
+      colCount: "Uspořádá volby voleb ve vícesloupcovém rozvržení. Když je nastavená hodnota 0, volby se zobrazí na jednom řádku. Pokud je nastavena hodnota -1, skutečná hodnota je zděděna z vlastnosti \"Počet vnořených sloupců\" nadřazené matice."
     },
     widthMode: "Vyberte si z: \"Statické\" - nastaví pevnou šířku; \"Responzivní\" - způsobí, že průzkum bude zabírat celou šířku obrazovky; \"Auto\" – použije jednu z těchto dvou možností v závislosti na použitých typech otázek.",
     cookieName: "Cookies brání uživatelům vyplnit průzkum vícekrát.",
@@ -1434,6 +1454,7 @@ export var czStrings = {
     dataList: "Zadejte seznam možností, které budou respondentovi navrženy během vstupu.",
     itemSize: "Nastavení mění pouze velikost vstupních polí a nemá vliv na šířku pole pro otázky.",
     itemTitleWidth: "Nastaví konzistentní šířku pro všechny popisky položek v pixelech",
+    inputTextAlignment: "Vyberte, jak chcete zarovnat vstupní hodnotu v poli. Výchozí nastavení \"Auto\" zarovná vstupní hodnotu doprava, pokud je použito maskování měny nebo čísel, a doleva, pokud ne.",
     altText: "Slouží jako náhrada v případě, že obrázek nelze zobrazit na zařízení uživatele, a pro účely usnadnění.",
     rateColorMode: "Definuje barvu vybraného emotikonu, když je typ ikony Hodnocení nastaven na \"Smajlíky\". Vyberte si mezi: \"Výchozí\" - vybraný emotikon se zobrazí ve výchozí barvě průzkumu; \"Měřítko\" - vybraný emotikon zdědí barvu ze stupnice hodnocení.",
     expression: {
@@ -1484,7 +1505,8 @@ export var czStrings = {
     panellayoutcolumn: {
       effectiveWidth: "Přijímá hodnoty %.",
       questionTitleWidth: "Přijímá hodnoty px."
-    }
+    },
+    progressBarInheritWidthFrom: "Možnost \"Stejné jako kontejner\" automaticky upraví šířku oblasti indikátoru průběhu tak, aby se vešla do prvku HTML, do kterého je průzkum umístěn."
   },
   // Properties
   p: {
@@ -1549,6 +1571,7 @@ export var czStrings = {
     dataList: "Datový list",
     itemSize: "Velikost položky",
     itemTitleWidth: "Šířka popisku položky (v px)",
+    inputTextAlignment: "Zarovnání vstupní hodnoty",
     elements: "Prvky",
     content: "Obsah",
     navigationButtonsVisibility: "Viditelnost navigačních tlačítek",
@@ -1588,7 +1611,8 @@ export var czStrings = {
     scaleColorMode: "Barevný režim měřítka",
     rateColorMode: "Barevný režim s ohodnocením",
     copyDisplayValue: "Kopírovat zobrazovanou hodnotu",
-    effectiveColSpan: "Rozpětí sloupců"
+    effectiveColSpan: "Rozpětí sloupců",
+    progressBarInheritWidthFrom: "Šířka oblasti indikátoru průběhu"
   },
   theme: {
     advancedMode: "Pokročilý režim",
@@ -2297,3 +2321,28 @@ editorLocalization.locales["cs"] = czStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Přijímá hodnoty %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Přijímá hodnoty px."
 // p.effectiveColSpan: "Column span" => "Rozpětí sloupců"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "Stejné jako v průzkumu"
+// progressBarInheritWidthFrom.container: "Same as container" => "Stejné jako u kontejneru"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Pokud je to možné, zobrazuje náhledy miniatur pro nahrané soubory. Zrušte výběr, pokud chcete místo toho zobrazit ikony souborů."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "Možnost \"Stejné jako kontejner\" automaticky upraví šířku oblasti indikátoru průběhu tak, aby se vešla do prvku HTML, do kterého je průzkum umístěn."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "Šířka oblasti indikátoru průběhu"
+// maskType.none: "None" => "Žádný"
+// maskType.pattern: "Pattern" => "Vzor"
+// maskType.numeric: "Numeric" => "Číselný"
+// maskType.datetime: "Date and Time" => "Datum a čas"
+// maskType.currency: "Currency" => "Měna"
+
+// inputTextAlignment.auto: "Auto" => "Auto"
+// inputTextAlignment.left: "Left" => "Vlevo"
+// inputTextAlignment.right: "Right" => "Vpravo"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Vyberte, jak chcete zarovnat vstupní hodnotu v poli. Výchozí nastavení \"Auto\" zarovná vstupní hodnotu doprava, pokud je použito maskování měny nebo čísel, a doleva, pokud ne."
+// p.inputTextAlignment: "Input value alignment" => "Zarovnání vstupní hodnoty"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "Zobrazení ukazatele průběhu"
+// paneldynamic.showProgressBar: "Show the progress bar" => "Zobrazení ukazatele průběhu"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "Zarovnání indikátoru průběhu"
+// pv.carousel: "Carousel" => "Kolotoč"
+// progressBarLocation.top: "Top" => "Vrchol"
+// progressBarLocation.bottom: "Bottom" => "Dno"
+// progressBarLocation.topBottom: "Top and bottom" => "Nahoře a dole"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Uspořádá volby voleb ve vícesloupcovém rozvržení. Když je nastavená hodnota 0, volby se zobrazí na jednom řádku. Pokud je nastavena hodnota -1, skutečná hodnota je zděděna z vlastnosti \"Počet vnořených sloupců\" nadřazené matice."
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "Odkazy na YouTube nejsou podporovány."

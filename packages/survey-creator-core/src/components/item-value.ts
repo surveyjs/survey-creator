@@ -44,7 +44,7 @@ export class ItemValueWrapperViewModel extends Base {
       this.registerOnPropertyChanged(key, specificChoices[key]);
     }
     if (this.isNew) {
-      question.visibleChoicesChangedCallback = () => {
+      question.renderedChoicesChangedCallback = () => {
         this.updateNewItemValue();
       };
       this.updateNewItemValue();

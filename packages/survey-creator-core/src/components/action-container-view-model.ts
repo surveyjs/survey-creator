@@ -14,28 +14,29 @@ import { SurveyCreatorModel } from "../creator-base";
 import { settings } from "../creator-settings";
 import { DesignerStateManager } from "./tabs/designer-state-manager";
 import { TabDesignerPlugin } from "./tabs/designer-plugin";
+import { isPanelDynamic } from "../survey-elements";
 
 export class SurveyElementActionContainer extends AdaptiveActionContainer {
-  private needToShrink(item: Action, shrinkStart: boolean, shrinkEnd: boolean) {
-    return (item.innerItem.location == "start" && shrinkStart || item.innerItem.location != "start" && shrinkEnd);
+  private needToShrink(item: Action, shrinkTypeConverterAction: boolean) {
+    return (item.innerItem.location == "start" && shrinkTypeConverterAction || item.innerItem.location != "start");
   }
-  private setModeForActions(shrinkStart: boolean, shrinkEnd: boolean, exclude: string[] = []): void {
+  private setModeForActions(shrinkTypeConverterAction: boolean, exclude: string[] = []): void {
     this.visibleActions.forEach((item) => {
       if (exclude.indexOf(item.id) != -1) {
         item.mode = "removed";
         return;
       }
-      if (this.needToShrink(item, shrinkStart, shrinkEnd)) {
-        item.mode = !item.innerItem.disableShrink && item.innerItem.iconName ? "small" : "removed";
+      if (this.needToShrink(item, shrinkTypeConverterAction)) {
+        item.mode = item.canShrink ? "small" : "removed";
         return;
       }
       item.mode = "large";
     });
   }
-  private calcItemSize(item: Action, shrinkStart: boolean, shrinkEnd: boolean, exclude: string[] = []) {
+  private calcItemSize(item: Action, shrinkTypeConverterAction: boolean, exclude: string[] = []) {
     if (exclude.indexOf(item.id) != -1) return 0;
-    if (this.needToShrink(item, shrinkStart, shrinkEnd)) {
-      if (item.innerItem.disableShrink || !item.innerItem.iconName) return 0;
+    if (this.needToShrink(item, shrinkTypeConverterAction)) {
+      if (!item.canShrink) return 0;
       return item.minDimension;
     }
     return item.maxDimension;
@@ -52,23 +53,18 @@ export class SurveyElementActionContainer extends AdaptiveActionContainer {
       return;
     }
 
-    // if (dimension >= items.reduce((sum, i) => sum += this.skipInputType(i, i.maxDimension), 0)) {
-    //   this.setModeForActions({ "convertInputType": "removed" }, "large");
-    //   return;
-    // }
-
-    if (dimension >= items.reduce((sum, i) => sum += this.calcItemSize(i, false, true), 0)) {
-      this.setModeForActions(false, true);
+    if (dimension >= items.reduce((sum, i) => sum += this.calcItemSize(i, false), 0)) {
+      this.setModeForActions(false);
       return;
     }
 
-    if (dimension >= items.reduce((sum, i) => sum += this.calcItemSize(i, false, true, ["convertInputType"]), 0)) {
-      this.setModeForActions(false, true, ["convertInputType"]);
+    if (dimension >= items.reduce((sum, i) => sum += this.calcItemSize(i, false, ["convertInputType"]), 0)) {
+      this.setModeForActions(false, ["convertInputType"]);
       return;
     }
 
-    if (dimension >= items.reduce((sum, i) => sum += this.calcItemSize(i, true, true), 0)) {
-      this.setModeForActions(true, true);
+    if (dimension >= items.reduce((sum, i) => sum += this.calcItemSize(i, true), 0)) {
+      this.setModeForActions(true);
       return;
     }
 
@@ -89,10 +85,15 @@ export class SurveyElementActionContainer extends AdaptiveActionContainer {
 }
 
 export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> extends Base {
-  public actionContainer: SurveyElementActionContainer;
+  public actionContainer: ActionContainer;
   protected expandCollapseAction: IAction;
   protected designerStateManager: DesignerStateManager;
   @property({ defaultValue: true }) allowDragging: boolean;
+
+  protected get dragInsideCollapsedContainer(): boolean {
+    return this.collapsed && this.creator.dragDropSurveyElements.insideContainer;
+  }
+
   @property({ defaultValue: true }) allowExpandCollapse: boolean;
   @property({
     onSet: (val, target: SurveyElementAdornerBase<T>) => {
@@ -107,6 +108,40 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     }
   }) collapsed: boolean;
   @property() renderedCollapsed: boolean;
+
+  protected createActionContainer(): ActionContainer {
+    const actionContainer = new SurveyElementActionContainer();
+    actionContainer.dotsItem.iconSize = 16;
+    actionContainer.dotsItem.popupModel.horizontalPosition = "center";
+    return actionContainer;
+  }
+  private dragCollapsedTimer;
+
+  protected get canExpandOnDrag() {
+    return this.surveyElement.isPanel || this.surveyElement.isPage || isPanelDynamic(this.surveyElement);
+  }
+  private draggedIn = false;
+  protected dragIn() {
+    if (!this.draggedIn) {
+      if (this.canExpandOnDrag && this.collapsed) {
+        this.draggedIn = true;
+        this.dragCollapsedTimer = setTimeout(() => {
+          this.expandWithDragIn();
+        }, this.creator.expandOnDragTimeOut);
+      }
+    }
+  }
+  protected expandWithDragIn() {
+    this.collapsed = false;
+    this.dragCollapsedTimer = undefined;
+  }
+
+  protected dragOut() {
+    if (this.draggedIn) {
+      clearTimeout(this.dragCollapsedTimer);
+      this.draggedIn = false;
+    }
+  }
 
   public dblclick(event) {
     if (this.allowExpandCollapse) this.collapsed = !this.collapsed;
@@ -133,9 +168,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
         this.updateActionsProperties();
       }
     };
-    this.actionContainer = new SurveyElementActionContainer();
-    this.actionContainer.dotsItem.iconSize = 16;
-    this.actionContainer.dotsItem.popupModel.horizontalPosition = "center";
+    this.actionContainer = this.createActionContainer();
 
     const collapseIcon = "icon-collapse-detail-light_16x16";
     const expandIcon = "icon-restore_16x16";
@@ -153,6 +186,11 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this.creator.sidebar.onPropertyChanged.add(this.sidebarFlyoutModeChangedFunc);
     this.setShowAddQuestionButton(true);
     this.expandCollapseAction.visible = this.allowExpandCollapse;
+
+    this.creator.onSurfaceToolbarActionExecuted.add((_, options) => {
+      if (options.action.id == "collapseAll") this.collapsed = true;
+      if (options.action.id == "expandAll") this.collapsed = false;
+    });
   }
 
   protected detachElement(surveyElement: T): void {

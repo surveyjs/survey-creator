@@ -154,6 +154,7 @@ export var ruStrings = {
     translationPlaceHolder: "Перевод...",
     translationSource: "Источник: ",
     translationTarget: "Цель: ",
+    translationYouTubeNotSupported: "Ссылки на YouTube не поддерживаются.",
     themeExportButton: "Экспорт",
     themeImportButton: "Импорт",
     surveyJsonExportButton: "Экспорт",
@@ -307,6 +308,9 @@ export var ruStrings = {
       templateTitleLocation: "Выравнивание заголовка вопроса",
       templateErrorLocation: "Выравнивание сообщений об ошибках",
       newPanelPosition: "Новое расположение панели",
+      showRangeInProgress: "Отображение индикатора выполнения",
+      showProgressBar: "Отображение индикатора выполнения",
+      progressBarLocation: "Выравнивание полосы прогресса",
       keyName: "Предотвращение дублирования ответов в следующем вопросе"
     },
     question: {
@@ -654,13 +658,6 @@ export var ruStrings = {
     allowResizeComment: "Разрешить пользователям изменять размер текстовых областей",
     textUpdateMode: "Обновление значения текстового вопроса",
     maskType: "Тип входной маски",
-    maskTypes: {
-      none: "Никакой",
-      patternmask: "Рисунок",
-      numericmask: "Числовой",
-      datetimemask: "Дата и время",
-      currencymask: "Валюта"
-    },
     focusOnFirstError: "Установка фокуса на первом недопустимом ответе",
     checkErrorsMode: "Запуск проверки",
     validateVisitedEmptyFields: "Проверка пустых полей при потере фокуса",
@@ -697,7 +694,6 @@ export var ruStrings = {
     panelsState: "Состояние расширения внутренней панели",
     panelPrevText: "Предыдущая всплывающая подсказка кнопки «Панель»",
     panelNextText: "Всплывающая подсказка кнопки «Следующая панель»",
-    showRangeInProgress: "Показать индикатор выполнения",
     panelRemoveButtonLocation: "Удалить расположение кнопки «Панель»",
     hideIfRowsEmpty: "Скрыть вопрос, если нет строк",
     hideColumnsIfEmpty: "Скрытие столбцов, если строк нет",
@@ -934,10 +930,11 @@ export var ruStrings = {
     firstExpanded: "Расширен первый",
     off: "Выключить",
     list: "Список",
+    carousel: "Карусель",
+    tab: "Вкладки",
     progressTop: "progressTop",
     progressBottom: "progressBottom",
     progressTopBottom: "progressTopBottom",
-    tab: "Вкладки",
     horizontal: "Горизонтально",
     vertical: "Вертикально",
     top: "Сверху",
@@ -994,6 +991,18 @@ export var ruStrings = {
       time: "Время",
       url: "URL-адрес",
       week: "Неделя"
+    },
+    maskType: {
+      none: "Никакой",
+      pattern: "Рисунок",
+      numeric: "Числовой",
+      datetime: "Дата и время",
+      currency: "Валюта"
+    },
+    inputTextAlignment: {
+      auto: "Авто",
+      left: "Слева",
+      right: "Справа"
     },
     all: "Все",
     page: "Страница",
@@ -1113,6 +1122,11 @@ export var ruStrings = {
       aboveheader: "Над заголовком",
       belowheader: "Под заголовком"
     },
+    progressBarLocation: {
+      top: "Вверх",
+      bottom: "Низ",
+      topBottom: "Верх и низ"
+    },
     sum: "Сумма",
     count: "Считать",
     min: "Мин",
@@ -1153,6 +1167,10 @@ export var ruStrings = {
     isPanelless: {
       "false": "По умолчанию",
       "true": "Без панелей"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "То же, что и опрос",
+      container: "То же, что и контейнер"
     }
   },
   // Operators
@@ -1310,7 +1328,8 @@ export var ruStrings = {
     },
     file: {
       imageHeight: "Настройка высоты изображения в результатах съемки.",
-      imageWidth: "Настройка ширины изображения в результатах съемки."
+      imageWidth: "Настройка ширины изображения в результатах съемки.",
+      allowImagesPreview: "Отображает предварительный просмотр миниатюр для загруженных файлов, когда это возможно. Снимите флажок, если вместо этого вы хотите отображать значки файлов."
     },
     image: {
       contentMode: "Опция \"Авто\" автоматически определяет подходящий режим отображения - Изображение, Видео или YouTube - на основе предоставленного исходного URL-адреса."
@@ -1338,7 +1357,8 @@ export var ruStrings = {
       visibleIf: "Используйте значок волшебной палочки, чтобы задать условное правило, определяющее видимость столбцов.",
       enableIf: "Используйте значок волшебной палочки, чтобы задать условное правило, которое отключает режим только для чтения для столбца.",
       requiredIf: "Используйте значок волшебной палочки, чтобы задать условное правило, которое запрещает отправку опроса, если хотя бы один вложенный вопрос не содержит ответа.",
-      showInMultipleColumns: "При выборе этого параметра создается отдельный столбец для каждого варианта выбора."
+      showInMultipleColumns: "При выборе этого параметра создается отдельный столбец для каждого варианта выбора.",
+      colCount: "Упорядочивает варианты выбора в макете с несколькими столбцами. Если установлено значение 0, параметры отображаются в одну строку. При значении -1 фактическое значение наследуется от свойства \"Количество вложенных столбцов\" родительской матрицы."
     },
     widthMode: "Выберите один из: \"Статический\" - задает фиксированную ширину; «Отзывчивый» - заставляет опрос занимать всю ширину экрана; \"Авто\" - применяет любой из двух вариантов в зависимости от используемых типов вопросов.",
     cookieName: "Файлы cookie не позволяют пользователям заполнять один и тот же опрос дважды.",
@@ -1434,6 +1454,7 @@ export var ruStrings = {
     dataList: "Введите список вариантов, которые будут предложены респонденту во время ввода.",
     itemSize: "Этот параметр изменяет только размер полей ввода и не влияет на ширину поля вопроса.",
     itemTitleWidth: "Устанавливает одинаковую ширину для всех меток элементов в пикселях",
+    inputTextAlignment: "Выберите способ выравнивания вводимого значения в поле. Настройка по умолчанию \"Auto\" выравнивает вводимое значение по правому краю, если применяется маскирование валюты или число, то по левому краю.",
     altText: "Служит заменой, когда изображение не может быть отображено на устройстве пользователя, а также в целях обеспечения доступности.",
     rateColorMode: "Определяет цвет выбранного эмодзи, если для параметра «Тип значка рейтинга» установлено значение «Смайлики». Выберите между: \"По умолчанию\" - выбранный эмодзи отображается в цвете опроса по умолчанию; «Шкала» - выбранный эмодзи наследует цвет от шкалы оценки.",
     expression: {
@@ -1484,7 +1505,8 @@ export var ruStrings = {
     panellayoutcolumn: {
       effectiveWidth: "Принимает значения %.",
       questionTitleWidth: "Принимает значения px."
-    }
+    },
+    progressBarInheritWidthFrom: "Опция \"То же, что и контейнер\" автоматически настраивает ширину области индикатора выполнения в соответствии с HTML-элементом, в который помещается опрос."
   },
   // Properties
   p: {
@@ -1549,6 +1571,7 @@ export var ruStrings = {
     dataList: "Список данных",
     itemSize: "Размер элементов",
     itemTitleWidth: "Ширина метки элемента (в пикселях)",
+    inputTextAlignment: "Выравнивание вводимого значения",
     elements: "Азы",
     content: "Содержание",
     navigationButtonsVisibility: "Отображение навигационных кнопок",
@@ -1588,7 +1611,8 @@ export var ruStrings = {
     scaleColorMode: "Цветовой режим масштабирования",
     rateColorMode: "Оцените цветовой режим",
     copyDisplayValue: "Копирование отображаемого значения",
-    effectiveColSpan: "Пролет колонны"
+    effectiveColSpan: "Пролет колонны",
+    progressBarInheritWidthFrom: "Ширина области индикатора выполнения"
   },
   theme: {
     advancedMode: "Расширенный режим",
@@ -2783,3 +2807,28 @@ editorLocalization.locales["ru"] = ruStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Принимает значения %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Принимает значения px."
 // p.effectiveColSpan: "Column span" => "Пролет колонны"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "То же, что и опрос"
+// progressBarInheritWidthFrom.container: "Same as container" => "То же, что и контейнер"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Отображает предварительный просмотр миниатюр для загруженных файлов, когда это возможно. Снимите флажок, если вместо этого вы хотите отображать значки файлов."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "Опция \"То же, что и контейнер\" автоматически настраивает ширину области индикатора выполнения в соответствии с HTML-элементом, в который помещается опрос."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "Ширина области индикатора выполнения"
+// maskType.none: "None" => "Никакой"
+// maskType.pattern: "Pattern" => "Рисунок"
+// maskType.numeric: "Numeric" => "Числовой"
+// maskType.datetime: "Date and Time" => "Дата и время"
+// maskType.currency: "Currency" => "Валюта"
+
+// inputTextAlignment.auto: "Auto" => "Авто"
+// inputTextAlignment.left: "Left" => "Слева"
+// inputTextAlignment.right: "Right" => "Справа"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Выберите способ выравнивания входного значения в поле. Настройка по умолчанию \"Auto\" выравнивает вводимое значение по правому краю, если применяется маскирование валюты или число, то по левому краю"
+// p.inputTextAlignment: "Input value alignment" => "Выравнивание вводимого значения"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "Отображение индикатора выполнения"
+// paneldynamic.showProgressBar: "Show the progress bar" => "Отображение индикатора выполнения"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "Выравнивание полосы прогресса"
+// pv.carousel: "Carousel" => "Карусель"
+// progressBarLocation.top: "Top" => "Вверх"
+// progressBarLocation.bottom: "Bottom" => "Дно"
+// progressBarLocation.topBottom: "Top and bottom" => "Верх и низ"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Упорядочивает варианты выбора в макете с несколькими столбцами. Если установлено значение 0, параметры отображаются в одну строку. При значении -1 фактическое значение наследуется от свойства \"Количество вложенных столбцов\" родительской матрицы."
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "Ссылки на YouTube не поддерживаются."

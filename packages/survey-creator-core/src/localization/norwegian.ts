@@ -154,6 +154,7 @@ export var nbStrings = {
     translationPlaceHolder: "Oversettelse...",
     translationSource: "Kilde: ",
     translationTarget: "Mål: ",
+    translationYouTubeNotSupported: "YouTube-linker støttes ikke.",
     themeExportButton: "Eksport",
     themeImportButton: "Importere",
     surveyJsonExportButton: "Eksport",
@@ -307,6 +308,9 @@ export var nbStrings = {
       templateTitleLocation: "Justering av spørsmålstittel",
       templateErrorLocation: "Justering av feilmelding",
       newPanelPosition: "Ny panelplassering",
+      showRangeInProgress: "Vis fremdriftslinjen",
+      showProgressBar: "Vis fremdriftslinjen",
+      progressBarLocation: "Justering av fremdriftslinje",
       keyName: "Forhindre dupliserte svar i følgende spørsmål"
     },
     question: {
@@ -654,13 +658,6 @@ export var nbStrings = {
     allowResizeComment: "Tillat brukere å endre størrelse på tekstområder",
     textUpdateMode: "Oppdatere tekstspørsmålsverdi",
     maskType: "Type inndatamaske",
-    maskTypes: {
-      none: "Ingen",
-      patternmask: "Mønster",
-      numericmask: "Numerisk",
-      datetimemask: "Dato og klokkeslett",
-      currencymask: "Valuta"
-    },
     focusOnFirstError: "Sette fokus på det første ugyldige svaret",
     checkErrorsMode: "Kjør validering",
     validateVisitedEmptyFields: "Validere tomme felt ved tapt fokus",
@@ -697,7 +694,6 @@ export var nbStrings = {
     panelsState: "Utvidelsestilstand for Indre panel",
     panelPrevText: "Verktøytips for forrige panelknapp",
     panelNextText: "Verktøytips for neste panelknapp",
-    showRangeInProgress: "Vis fremdriftsindikator",
     panelRemoveButtonLocation: "Fjern plassering av panelknappen",
     hideIfRowsEmpty: "Skjul spørsmålet hvis det ikke er noen rader",
     hideColumnsIfEmpty: "Skjule kolonner hvis det ikke er noen rader",
@@ -934,10 +930,11 @@ export var nbStrings = {
     firstExpanded: "firstExpanded",
     off: "off",
     list: "list",
+    carousel: "Karusell",
+    tab: "Kategoriene",
     progressTop: "progressTop",
     progressBottom: "progressBottom",
     progressTopBottom: "progressTopBottom",
-    tab: "Kategoriene",
     horizontal: "horizontal",
     vertical: "vertical",
     top: "top",
@@ -994,6 +991,18 @@ export var nbStrings = {
       time: "Tid",
       url: "URL",
       week: "Uke"
+    },
+    maskType: {
+      none: "Ingen",
+      pattern: "Mønster",
+      numeric: "Numerisk",
+      datetime: "Dato og klokkeslett",
+      currency: "Valuta"
+    },
+    inputTextAlignment: {
+      auto: "Auto",
+      left: "Venstre",
+      right: "Høyre"
     },
     all: "all",
     page: "page",
@@ -1113,6 +1122,11 @@ export var nbStrings = {
       aboveheader: "Over overskriften",
       belowheader: "Under overskriften"
     },
+    progressBarLocation: {
+      top: "Topp",
+      bottom: "Bunn",
+      topBottom: "Topp og bunn"
+    },
     sum: "Sum",
     count: "Greve",
     min: "Min",
@@ -1153,6 +1167,10 @@ export var nbStrings = {
     isPanelless: {
       "false": "Standard",
       "true": "Uten paneler"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "Samme som undersøkelse",
+      container: "Samme som container"
     }
   },
   // Operators
@@ -1310,7 +1328,8 @@ export var nbStrings = {
     },
     file: {
       imageHeight: "Justerer høyden på bildet i undersøkelsesresultatene.",
-      imageWidth: "Justerer bredden på bildet i undersøkelsesresultatene."
+      imageWidth: "Justerer bredden på bildet i undersøkelsesresultatene.",
+      allowImagesPreview: "Viser miniatyrforhåndsvisninger for opplastede filer når det er mulig. Fjern merket hvis du vil vise filikoner i stedet."
     },
     image: {
       contentMode: "Alternativet \"Auto\" bestemmer automatisk passende modus for visning - Bilde, Video eller YouTube - basert på kildens URL som er oppgitt."
@@ -1338,7 +1357,8 @@ export var nbStrings = {
       visibleIf: "Bruk tryllestavikonet til å angi en betinget regel som bestemmer kolonnens synlighet.",
       enableIf: "Bruk tryllestavikonet til å angi en betinget regel som deaktiverer skrivebeskyttet modus for kolonnen.",
       requiredIf: "Bruk tryllestavikonet til å angi en betinget regel som forhindrer innsending av spørreundersøkelser med mindre minst ett nestet spørsmål har et svar.",
-      showInMultipleColumns: "Når dette alternativet er valgt, opprettes det én kolonne for hvert valgalternativ."
+      showInMultipleColumns: "Når dette alternativet er valgt, opprettes det én kolonne for hvert valgalternativ.",
+      colCount: "Ordner valgalternativer i et oppsett med flere kolonner. Når den er satt til 0, vises alternativene på én enkelt linje. Når satt til -1, arves den faktiske verdien fra egenskapen \"Nestet kolonneantall\" for den overordnede matrisen."
     },
     widthMode: "Velg mellom: \"Statisk\" - setter en fast bredde; \"Responsive\" - gjør at undersøkelsen opptar hele bredden på skjermen; \"Auto\" - gjelder en av de to avhengig av spørsmålstypene som brukes.",
     cookieName: "Informasjonskapsler hindrer brukere i å fylle ut den samme undersøkelsen to ganger.",
@@ -1434,6 +1454,7 @@ export var nbStrings = {
     dataList: "Angi en liste over valg som skal foreslås for respondenten under inndata.",
     itemSize: "Innstillingen endrer bare størrelsen på inndatafeltene og påvirker ikke bredden på spørsmålsboksen.",
     itemTitleWidth: "Angir konsekvent bredde for alle elementetiketter i piksler",
+    inputTextAlignment: "Velg hvordan du vil justere inndataverdien i feltet. Standardinnstillingen \"Auto\" justerer inngangsverdien til høyre hvis valuta eller numerisk maskering brukes, og til venstre hvis ikke.",
     altText: "Fungerer som en erstatning når bildet ikke kan vises på en brukers enhet og av tilgjengelighetshensyn.",
     rateColorMode: "Definerer fargen på den valgte emojien når Vurdering-ikontypen er satt til \"Smileys\". Velg mellom: \"Standard\" - den valgte emojien vises i standard undersøkelsesfarge; \"Skala\" - den valgte emojien arver farge fra vurderingsskalaen.",
     expression: {
@@ -1484,7 +1505,8 @@ export var nbStrings = {
     panellayoutcolumn: {
       effectiveWidth: "Godtar verdier %.",
       questionTitleWidth: "Godtar verdier px."
-    }
+    },
+    progressBarInheritWidthFrom: "Alternativet \"Samme som beholder\" justerer automatisk fremdriftslinjens områdebredde slik at den passer inn i HTML-elementet undersøkelsen er plassert i."
   },
   // Properties
   p: {
@@ -1549,6 +1571,7 @@ export var nbStrings = {
     dataList: "Dataliste",
     itemSize: "itemSize",
     itemTitleWidth: "Bredden på vareetiketten (i piksler)",
+    inputTextAlignment: "Justering av inngangsverdi",
     elements: "Elementer",
     content: "Innhold",
     navigationButtonsVisibility: "navigationButtonsVisibility",
@@ -1588,7 +1611,8 @@ export var nbStrings = {
     scaleColorMode: "Skaler farge, modus",
     rateColorMode: "Vurder farge, modus",
     copyDisplayValue: "Kopier visningsverdi",
-    effectiveColSpan: "Spaltespenn"
+    effectiveColSpan: "Spaltespenn",
+    progressBarInheritWidthFrom: "Bredde på fremdriftslinjeområde"
   },
   theme: {
     advancedMode: "Avansert modus",
@@ -2726,3 +2750,28 @@ editorLocalization.locales["nb"] = nbStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Godtar verdier %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Godtar verdier px."
 // p.effectiveColSpan: "Column span" => "Spaltespenn"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "Samme som undersøkelse"
+// progressBarInheritWidthFrom.container: "Same as container" => "Samme som container"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Viser miniatyrforhåndsvisninger for opplastede filer når det er mulig. Fjern merket hvis du vil vise filikoner i stedet."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "Alternativet \"Samme som beholder\" justerer automatisk fremdriftslinjens områdebredde slik at den passer inn i HTML-elementet undersøkelsen er plassert i."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "Bredde på fremdriftslinjeområde"
+// maskType.none: "None" => "Ingen"
+// maskType.pattern: "Pattern" => "Mønster"
+// maskType.numeric: "Numeric" => "Numerisk"
+// maskType.datetime: "Date and Time" => "Dato og klokkeslett"
+// maskType.currency: "Currency" => "Valuta"
+
+// inputTextAlignment.auto: "Auto" => "Auto"
+// inputTextAlignment.left: "Left" => "Venstre"
+// inputTextAlignment.right: "Right" => "Høyre"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Velg hvordan du vil justere inndataverdien i feltet. Standardinnstillingen \"Auto\" justerer inngangsverdien til høyre hvis valuta eller numerisk maskering brukes, og til venstre hvis ikke."
+// p.inputTextAlignment: "Input value alignment" => "Justering av inngangsverdi"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "Vis fremdriftslinjen"
+// paneldynamic.showProgressBar: "Show the progress bar" => "Vis fremdriftslinjen"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "Justering av fremdriftslinje"
+// pv.carousel: "Carousel" => "Karusell"
+// progressBarLocation.top: "Top" => "Topp"
+// progressBarLocation.bottom: "Bottom" => "Bunn"
+// progressBarLocation.topBottom: "Top and bottom" => "Topp og bunn"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Ordner valgalternativer i et oppsett med flere kolonner. Når den er satt til 0, vises alternativene på én enkelt linje. Når satt til -1, arves den faktiske verdien fra egenskapen \"Nestet kolonneantall\" for den overordnede matrisen."
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "YouTube-linker støttes ikke."

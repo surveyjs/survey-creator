@@ -34,9 +34,11 @@ $border-light: var(--sjs-border-light, var(--border-light, #eaeaea));
 $border-inside: var(--sjs-border-inside, var(--border-inside, rgba(0, 0, 0, 0.16)));
 
 $shadow-small: 0px 1px 2px 0px var(--ctr-shadow-small-color, rgba(0, 0, 0, 0.15));
+$shadow-small-reset: 0px 0px 0px 0px var(--ctr-shadow-small-color, rgba(0, 0, 0, 0.15));
 $shadow-medium: 0px 2px 6px 0px var(--ctr-shadow-medium-color, rgba(0, 0, 0, 0.10));
 $shadow-large: 0px 8px 16px 0px var(--ctr-shadow-large-color, rgba(0, 0, 0, 0.10));
 $shadow-inner: var(--sjs-shadow-inner, inset 0px 1px 2px 0px rgba(0, 0, 0, 0.15));
+$shadow-inner-reset: var(--sjs-shadow-inner, inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15));
 $shadow-x-large: 0px 0px 0px 0px var(--ctr-shadow-x-large-color, rgba(0, 0, 0, 0.10));
 
 $red: var(--sjs-special-red, var(--red, #e60a3e));
@@ -153,34 +155,35 @@ $tab-min-height: var(--tab-min-height, auto);
   }
 }
 
-@mixin disableAnimations {
-
-  .sd-row--fade-out,
-  .sd-row--fade-in {
+@mixin disableLibraryAnimations {
+  .sd-row--leave,
+  .sd-row--enter {
     animation: none;
   }
-
-  .sd-element-wrapper--fade-out,
-  .sd-element-wrapper--fade-in {
+  .sd-element-wrapper--leave,
+  .sd-element-wrapper--enter {
     animation: none;
   }
-
-  .sd-element__content--fade-in,
-  .sd-element__content--fade-out {
+  .sd-element__content--enter,
+  .sd-element__content--leave {
     animation: none;
   }
-
-  .sd-paneldynamic__panel-wrapper--fade-in,
-  .sd-paneldynamic__panel-wrapper--fade-out,
-  .sd-paneldynamic__panel-wrapper--fade-out-left,
-  .sd-paneldynamic__panel-wrapper--fade-out-right,
-  .sd-paneldynamic__panel-wrapper--fade-in-left,
-  .sd-paneldynamic__panel-wrapper--fade-in-right {
+  .sd-paneldynamic__panel-wrapper--enter,
+  .sd-paneldynamic__panel-wrapper--leave {
     animation: none;
   }
-
-  .sd-table__row--fade-out,
-  .sd-table__row--fade-in {
+  .sd-item--enter {
+    animation: none;
+  }
+  .sd-item--leave {
+    animation: none;
+  }
+  .sd-table__row--leave,
+  .sd-table__row--enter {
     animation: none;
   }
 }
+
+$creator-transition-duration: var(--sjs-creator-transition-duration, 150ms);
+$ease-out: cubic-bezier(0, 0, 0.58, 1);
+$reverse-ease-out: cubic-bezier(0.42, 0, 1, 1);

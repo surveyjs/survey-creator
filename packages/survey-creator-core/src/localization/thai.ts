@@ -154,6 +154,7 @@ export const thStrings = {
     translationPlaceHolder: "การแปล...",
     translationSource: "ต้นทาง: ",
     translationTarget: "ปลายทาง: ",
+    translationYouTubeNotSupported: "ไม่รองรับลิงก์ YouTube",
     themeExportButton: "ส่งออก",
     themeImportButton: "นำเข้า",
     surveyJsonExportButton: "ส่งออก",
@@ -307,6 +308,9 @@ export const thStrings = {
       templateTitleLocation: "การจัดตำแหน่งชื่อคำถาม",
       templateErrorLocation: "การจัดตำแหน่งข้อความข้อผิดพลาด",
       newPanelPosition: "ตำแหน่งแผงใหม่",
+      showRangeInProgress: "แสดงแถบความคืบหน้า",
+      showProgressBar: "แสดงแถบความคืบหน้า",
+      progressBarLocation: "การจัดตําแหน่งแถบความคืบหน้า",
       keyName: "ป้องกันการตอบซ้ำในคำถามต่อไปนี้"
     },
     question: {
@@ -654,13 +658,6 @@ export const thStrings = {
     allowResizeComment: "อนุญาตให้ผู้ใช้ปรับขนาดพื้นที่ข้อความ",
     textUpdateMode: "อัปเดตค่าช่องป้อนข้อมูล",
     maskType: "ประเภทหน้ากากอินพุต",
-    maskTypes: {
-      none: "ไม่มี",
-      patternmask: "รูปแบบ",
-      numericmask: "ตัวเลข",
-      datetimemask: "วันที่และเวลา",
-      currencymask: "สกุลเงิน"
-    },
     focusOnFirstError: "ตั้งโฟกัสที่คำตอบที่ไม่ถูกต้องแรก",
     checkErrorsMode: "รันการตรวจสอบ",
     validateVisitedEmptyFields: "ตรวจสอบฟิลด์ว่างเมื่อเสียโฟกัส",
@@ -697,7 +694,6 @@ export const thStrings = {
     panelsState: "สถานะแผงภายใน",
     panelPrevText: "ข้อความปุ่ม \"แผงก่อนหน้า\"",
     panelNextText: "ข้อความปุ่ม \"แผงถัดไป\"",
-    showRangeInProgress: "แสดงแถบความคืบหน้า",
     panelRemoveButtonLocation: "การจัดตำแหน่งปุ่ม \"ลบแผง\"",
     hideIfRowsEmpty: "ซ่อนคำถามหากไม่มีแถว",
     hideColumnsIfEmpty: "ซ่อนคอลัมน์หากไม่มีแถว",
@@ -934,10 +930,11 @@ export const thStrings = {
     firstExpanded: "แผงแรกขยาย",
     off: "ซ่อนหมายเลขคำถาม",
     list: "รายการ",
+    carousel: "ม้าหมุน",
+    tab: "แท็บ",
     progressTop: "ตัวนำทางแผง + แถบความคืบหน้าด้านบน",
     progressBottom: "ตัวนำทางแผง + แถบความคืบหน้าด้านล่าง",
     progressTopBottom: "ตัวนำทางแผง + แถบความคืบหน้าด้านบนและล่าง",
-    tab: "แท็บ",
     horizontal: "แนวนอน",
     vertical: "แนวตั้ง",
     top: "ด้านบน",
@@ -994,6 +991,18 @@ export const thStrings = {
       time: "เวลา",
       url: "URL",
       week: "สัปดาห์"
+    },
+    maskType: {
+      none: "ไม่มีใคร",
+      pattern: "แบบ",
+      numeric: "ตัวเลข",
+      datetime: "วันที่และเวลา",
+      currency: "เงินตรา"
+    },
+    inputTextAlignment: {
+      auto: "รถ",
+      left: "ซ้าย",
+      right: "ขวา"
     },
     all: "ทั้งหมด",
     page: "หน้า",
@@ -1113,6 +1122,11 @@ export const thStrings = {
       aboveheader: "เหนือหัวเรื่อง",
       belowheader: "ใต้หัวเรื่อง"
     },
+    progressBarLocation: {
+      top: "ด้านบน",
+      bottom: "ก้น",
+      topBottom: "ด้านบนและด้านล่าง"
+    },
     sum: "รวม",
     count: "นับ",
     min: "ขั้นต่ำ",
@@ -1153,6 +1167,10 @@ export const thStrings = {
     isPanelless: {
       "false": "ค่าเริ่มต้น",
       "true": "ไม่มีแผง"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "เช่นเดียวกับแบบสํารวจ",
+      container: "เหมือนกับคอนเทนเนอร์"
     }
   },
   // Operators
@@ -1310,7 +1328,8 @@ export const thStrings = {
     },
     file: {
       imageHeight: "ปรับความสูงของภาพในผลลัพธ์แบบสำรวจ",
-      imageWidth: "ปรับความกว้างของภาพในผลลัพธ์แบบสำรวจ"
+      imageWidth: "ปรับความกว้างของภาพในผลลัพธ์แบบสำรวจ",
+      allowImagesPreview: "แสดงตัวอย่างภาพขนาดย่อสําหรับไฟล์ที่อัปโหลดเมื่อเป็นไปได้ ยกเลิกการเลือกหากคุณต้องการแสดงไอคอนไฟล์แทน"
     },
     image: {
       contentMode: "ตัวเลือก \"อัตโนมัติ\" จะกำหนดโหมดเนื้อหาที่เหมาะสมโดยอัตโนมัติตาม URL ที่ให้มา"
@@ -1338,7 +1357,8 @@ export const thStrings = {
       visibleIf: "ใช้ไอคอนไม้เท้าวิเศษเพื่อตั้งกฎเงื่อนไขที่กำหนดการมองเห็นของคอลัมน์",
       enableIf: "ใช้ไอคอนไม้เท้าวิเศษเพื่อตั้งกฎเงื่อนไขที่ปิดโหมดอ่านอย่างเดียวสำหรับคอลัมน์",
       requiredIf: "ใช้ไอคอนไม้เท้าวิเศษเพื่อตั้งกฎเงื่อนไขที่ป้องกันการส่งแบบสำรวจถ้าไม่มีคำถามที่ตอบแล้ว",
-      showInMultipleColumns: "เมื่อเลือก จะสร้างคอลัมน์แยกสำหรับตัวเลือกแต่ละตัว"
+      showInMultipleColumns: "เมื่อเลือก จะสร้างคอลัมน์แยกสำหรับตัวเลือกแต่ละตัว",
+      colCount: "จัดเรียงตัวเลือกตัวเลือกในรูปแบบหลายคอลัมน์ เมื่อตั้งค่าเป็น 0 ตัวเลือกจะแสดงในบรรทัดเดียว เมื่อตั้งค่าเป็น -1 ค่าจริงจะถูกสืบทอดมาจากคุณสมบัติ \"จํานวนคอลัมน์ที่ซ้อนกัน\" ของเมทริกซ์หลัก"
     },
     widthMode: "เลือกจาก: \"คงที่\" - ตั้งค่าความกว้างคงที่; \"ตอบสนอง\" - ทำให้แบบสำรวจเต็มความกว้างของหน้าจอ; \"อัตโนมัติ\" - ใช้ค่าใดค่าหนึ่งในสองค่าตามประเภทคำถามที่ใช้",
     cookieName: "กำหนดค่า cookie ที่ไม่ซ้ำกันสำหรับแบบสำรวจของคุณ Cookie จะถูกตั้งค่าในเบราว์เซอร์ของผู้ตอบเมื่อแบบสำรวจเสร็จสมบูรณ์เพื่อป้องกันการส่งแบบสำรวจซ้ำ",
@@ -1434,6 +1454,7 @@ export const thStrings = {
     dataList: "ป้อนรายการตัวเลือกที่จะเสนอแนะให้ผู้ตอบระหว่างการป้อนข้อมูล",
     itemSize: "การตั้งค่านี้เพียงแค่เปลี่ยนขนาดของช่องป้อนข้อมูลและไม่ส่งผลต่อความกว้างของกล่องคำถาม",
     itemTitleWidth: "ตั้งความกว้างที่สม่ำเสมอสำหรับป้ายชื่อรายการทั้งหมดเป็นพิกเซล",
+    inputTextAlignment: "เลือกวิธีจัดตําแหน่งค่าอินพุตภายในฟิลด์ การตั้งค่าเริ่มต้น \"อัตโนมัติ\" จะจัดตําแหน่งค่าอินพุตไปทางขวาหากมีการใช้การปิดบังสกุลเงินหรือตัวเลข และไปทางซ้ายหากไม่ใช้",
     altText: "ใช้เป็นข้อความสำรองเมื่อภาพไม่สามารถแสดงบนอุปกรณ์ของผู้ใช้และเพื่อวัตถุประสงค์ในการเข้าถึง",
     rateColorMode: "กำหนดสีของอีโมจิที่เลือกเมื่อประเภทไอคอนการให้คะแนนตั้งเป็น \"สไมลี่\" เลือกระหว่าง: \"ค่าเริ่มต้น\" - อีโมจิที่เลือกจะแสดงในสีแบบสำรวจเริ่มต้น; \"มาตราส่วน\" - อีโมจิที่เลือกจะสืบทอดสีจากมาตราส่วนการให้คะแนน",
     expression: {
@@ -1484,7 +1505,8 @@ export const thStrings = {
     panellayoutcolumn: {
       effectiveWidth: "รับค่าของ %",
       questionTitleWidth: "รับค่าของ px"
-    }
+    },
+    progressBarInheritWidthFrom: "ตัวเลือก \"เหมือนกับคอนเทนเนอร์\" จะปรับความกว้างของพื้นที่แถบความคืบหน้าโดยอัตโนมัติเพื่อให้พอดีกับองค์ประกอบ HTML ที่วางแบบสํารวจ"
   },
   // Properties
   p: {
@@ -1549,6 +1571,7 @@ export const thStrings = {
     dataList: "รายการสำหรับการเสนอแนะ",
     itemSize: "ความกว้างของช่องป้อนข้อมูล (ในอักขระ)",
     itemTitleWidth: "ความกว้างป้ายชื่อรายการ (ใน px)",
+    inputTextAlignment: "การจัดตําแหน่งค่าอินพุต",
     elements: "องค์ประกอบ",
     content: "เนื้อหา",
     navigationButtonsVisibility: "แสดง/ซ่อนปุ่มนำทาง",
@@ -1588,7 +1611,8 @@ export const thStrings = {
     scaleColorMode: "โหมดสีไอคอนการให้คะแนน",
     rateColorMode: "โทนสีของสไมลี่",
     copyDisplayValue: "คัดลอกค่าที่แสดง",
-    effectiveColSpan: "การขยายคอลัมน์"
+    effectiveColSpan: "การขยายคอลัมน์",
+    progressBarInheritWidthFrom: "ความกว้างของพื้นที่แถบความคืบหน้า"
   },
   theme: {
     advancedMode: "โหมดขั้นสูง",
@@ -1656,3 +1680,28 @@ editorLocalization.locales["th"] = thStrings;
 // Remove those strings that you have corrected manually
 // pe.validateVisitedEmptyFields: "Validate empty fields on lost focus" => "ตรวจสอบฟิลด์ว่างเมื่อเสียโฟกัส"
 // pehelp.validateVisitedEmptyFields: "Enable this option to trigger validation when a user focuses on an empty input field and then leaves it without making any changes." => "เปิดใช้งานตัวเลือกนี้เพื่อทริกเกอร์การตรวจสอบความถูกต้องเมื่อผู้ใช้มุ่งเน้นไปที่ฟิลด์อินพุตที่ว่างเปล่า แล้วปล่อยออกจากฟิลด์โดยไม่ทําการเปลี่ยนแปลงใดๆ"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "เช่นเดียวกับแบบสํารวจ"
+// progressBarInheritWidthFrom.container: "Same as container" => "เหมือนกับคอนเทนเนอร์"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "แสดงตัวอย่างภาพขนาดย่อสําหรับไฟล์ที่อัปโหลดเมื่อเป็นไปได้ ยกเลิกการเลือกหากคุณต้องการแสดงไอคอนไฟล์แทน"
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "ตัวเลือก \"เหมือนกับคอนเทนเนอร์\" จะปรับความกว้างของพื้นที่แถบความคืบหน้าโดยอัตโนมัติเพื่อให้พอดีกับองค์ประกอบ HTML ที่วางแบบสํารวจ"
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "ความกว้างของพื้นที่แถบความคืบหน้า"
+// maskType.none: "None" => "ไม่มีใคร"
+// maskType.pattern: "Pattern" => "แบบ"
+// maskType.numeric: "Numeric" => "ตัวเลข"
+// maskType.datetime: "Date and Time" => "วันที่และเวลา"
+// maskType.currency: "Currency" => "เงินตรา"
+
+// inputTextAlignment.auto: "Auto" => "รถ"
+// inputTextAlignment.left: "Left" => "ซ้าย"
+// inputTextAlignment.right: "Right" => "ขวา"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "เลือกวิธีจัดตําแหน่งค่าอินพุตภายในฟิลด์ การตั้งค่าเริ่มต้น \"อัตโนมัติ\" จะจัดตําแหน่งค่าอินพุตไปทางขวาหากมีการใช้การปิดบังสกุลเงินหรือตัวเลข และไปทางซ้ายหากไม่ใช้"
+// p.inputTextAlignment: "Input value alignment" => "การจัดตําแหน่งค่าอินพุต"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "แสดงแถบความคืบหน้า"
+// paneldynamic.showProgressBar: "Show the progress bar" => "แสดงแถบความคืบหน้า"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "การจัดตําแหน่งแถบความคืบหน้า"
+// pv.carousel: "Carousel" => "ม้าหมุน"
+// progressBarLocation.top: "Top" => "ด้านบน"
+// progressBarLocation.bottom: "Bottom" => "ก้น"
+// progressBarLocation.topBottom: "Top and bottom" => "ด้านบนและด้านล่าง"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "จัดเรียงตัวเลือกตัวเลือกในรูปแบบหลายคอลัมน์ เมื่อตั้งค่าเป็น 0 ตัวเลือกจะแสดงในบรรทัดเดียว เมื่อตั้งค่าเป็น -1 ค่าจริงจะถูกสืบทอดมาจากคุณสมบัติ \"จํานวนคอลัมน์ที่ซ้อนกัน\" ของเมทริกซ์หลัก"
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "ไม่รองรับลิงก์ YouTube"

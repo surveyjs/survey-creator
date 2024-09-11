@@ -178,16 +178,16 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
     return (
       <span className={this.className}>
         <span className="svc-string-editor__content">
-          <div className="svc-string-editor__border"
+          <div className="svc-string-editor__border svc-string-editor__border--hover"
             onClick={this.edit}
           >
-            <SvgIcon
-              className="svc-string-editor__button svc-string-editor__button--edit"
-              size={16}
-              iconName={"icon-edit"}
-            ></SvgIcon>
-
           </div>
+
+          <div className="svc-string-editor__border svc-string-editor__border--focus"
+            onClick={this.edit}
+          >
+          </div>
+
           <span className="svc-string-editor__input">
             {control}
             <div className="svc-string-editor__controls"

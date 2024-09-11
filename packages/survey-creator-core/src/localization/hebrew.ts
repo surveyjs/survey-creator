@@ -154,6 +154,7 @@ export var hebrewStrings = {
     translationPlaceHolder: "תרגום...",
     translationSource: "מקור: ",
     translationTarget: "יעד: ",
+    translationYouTubeNotSupported: "קישורי YouTube אינם נתמכים.",
     themeExportButton: "ייצא",
     themeImportButton: "ייבא",
     surveyJsonExportButton: "ייצא",
@@ -307,6 +308,9 @@ export var hebrewStrings = {
       templateTitleLocation: "יישור כותרת שאלה",
       templateErrorLocation: "יישור הודעת שגיאה",
       newPanelPosition: "מיקום חדש בלוח",
+      showRangeInProgress: "הצגת מד ההתקדמות",
+      showProgressBar: "הצגת מד ההתקדמות",
+      progressBarLocation: "יישור מד התקדמות",
       keyName: "מניעת תגובות כפולות בשאלה הבאה"
     },
     question: {
@@ -654,13 +658,6 @@ export var hebrewStrings = {
     allowResizeComment: "אפשר התאמה ידנית של אזורי טקסט על ידי המשתמש",
     textUpdateMode: "עדכן את ערך הטקסט של השאלה",
     maskType: "סוג מסיכת קלט",
-    maskTypes: {
-      none: "ללא",
-      patternmask: "תבנית",
-      numericmask: "מספריים",
-      datetimemask: "תאריך ושעה",
-      currencymask: "מטבע"
-    },
     focusOnFirstError: "קפיצה לתשובה השגויה הראשונה",
     checkErrorsMode: "הפעל את האימות",
     validateVisitedEmptyFields: "אימות שדות ריקים במיקוד שאבד",
@@ -697,7 +694,6 @@ export var hebrewStrings = {
     panelsState: "מצב הרחבת הפאנל הפנימי",
     panelPrevText: "טקסט הרחבת הפאנל הקודם",
     panelNextText: "טקסט הרחבת הפאנל הבא",
-    showRangeInProgress: "הצג את סרגל ההתקדמות",
     panelRemoveButtonLocation: "מיקום לחצן 'הסר פאנל'",
     hideIfRowsEmpty: "הסתר את השאלה אם אין שורות",
     hideColumnsIfEmpty: "הסתר עמודות אם אין שורות",
@@ -934,10 +930,11 @@ export var hebrewStrings = {
     firstExpanded: "הפאנל הראשון מורחב",
     off: "הסתר מספרי שאלות",
     list: "רשימה",
+    carousel: "קרוסלה",
+    tab: "כרטיסיות",
     progressTop: "ניווט בפאנל + סרגל התקדמות בחלק העליון",
     progressBottom: "ניווט בפאנל + סרגל התקדמות בחלק התחתון",
     progressTopBottom: "ניווט בפאנל + סרגל התקדמות בחלק העליון והתחתון",
-    tab: "כרטיסיות",
     horizontal: "אופקי",
     vertical: "אנכי",
     top: "עליון",
@@ -994,6 +991,18 @@ export var hebrewStrings = {
       time: "שעה",
       url: "כתובת URL",
       week: "שבוע"
+    },
+    maskType: {
+      none: "ללא",
+      pattern: "תבנית",
+      numeric: "מספריים",
+      datetime: "תאריך ושעה",
+      currency: "מטבע"
+    },
+    inputTextAlignment: {
+      auto: "אוטומטי",
+      left: "שמאל",
+      right: "ימין"
     },
     all: "הכל",
     page: "עמוד",
@@ -1113,6 +1122,11 @@ export var hebrewStrings = {
       aboveheader: "מעל הכותרת העליונה",
       belowheader: "מתחת לכותרת העליונה"
     },
+    progressBarLocation: {
+      top: "סביבון",
+      bottom: "ישבן",
+      topBottom: "עליון ותחתון"
+    },
     sum: "סכום",
     count: "מנה",
     min: "דקות",
@@ -1153,6 +1167,10 @@ export var hebrewStrings = {
     isPanelless: {
       "false": "ברירת מחדל",
       "true": "ללא פאנלים"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "זהה לסקר",
+      container: "זהה למיכל"
     }
   },
   // Operators
@@ -1310,7 +1328,8 @@ export var hebrewStrings = {
     },
     file: {
       imageHeight: "התאמת גובה התמונה בתוצאות הסקר.",
-      imageWidth: "התאמת רוחב התמונה בתוצאות הסקר."
+      imageWidth: "התאמת רוחב התמונה בתוצאות הסקר.",
+      allowImagesPreview: "מציג תצוגות מקדימות של תמונות ממוזערות עבור קבצים שהועלו במידת האפשר. בטל את הבחירה אם ברצונך להציג סמלי קבצים במקום זאת."
     },
     image: {
       contentMode: "האפשרות \"אוטומטי\" קובעת אוטומטית את המצב המתאים לתצוגה - תמונה, וידאו או YouTube - בהתבסס על כתובת האתר המקורית שסופקה."
@@ -1338,7 +1357,8 @@ export var hebrewStrings = {
       visibleIf: "השתמש בסמל מטה הקסם כדי להגדיר כלל תנאי הקובע את נראות העמודה.",
       enableIf: "השתמש בסמל מטה הקסם כדי להגדיר כלל תנאי שמשבית את מצב הקריאה בלבד עבור העמודה.",
       requiredIf: "השתמש בסמל מטה הקסם כדי להגדיר כלל תנאי המונע שליחת סקר, אלא אם לשאלה מקוננת אחת לפחות יש תשובה.",
-      showInMultipleColumns: "כשבוחרים באפשרות זו, יוצר עמודה נפרדת לכל אחת מאפשרויות הבחירה."
+      showInMultipleColumns: "כשבוחרים באפשרות זו, יוצר עמודה נפרדת לכל אחת מאפשרויות הבחירה.",
+      colCount: "מסדר אפשרויות בחירה בפריסה מרובת עמודות. כאשר הן מוגדרות על 0, האפשרויות מוצגות בשורה אחת. כאשר הוא מוגדר ל- -1, הערך בפועל עובר בירושה מהמאפיין \"ספירת עמודות מקוננת\" של מטריצת האב."
     },
     widthMode: "בחר מתוך: \"סטטי\" - קובע רוחב קבוע; \"מגיב\" - עושה את הסקר לתפוס את מלוא רוחב המסך; \"אוטומטי\" - חל על כל אחד מהשניים בהתאם לסוגי השאלות המשמשים.",
     cookieName: "עוגיות מונעות ממשתמשים למלא את אותו סקר פעמיים.",
@@ -1434,6 +1454,7 @@ export var hebrewStrings = {
     dataList: "הזן רשימה של אפשרויות שיוצעו למשיב במהלך הקלט.",
     itemSize: "ההגדרה משנה את גודל שדות הקלט בלבד ואינה משפיעה על רוחב תיבת השאלה.",
     itemTitleWidth: "קובע רוחב עקבי לכל תוויות הפריטים בפיקסלים",
+    inputTextAlignment: "בחר כיצד ליישר ערך קלט בתוך השדה. הגדרת ברירת המחדל \"אוטומטי\" מיישרת את ערך הקלט ימינה אם מוחלת מסיכה על מטבע או מספר, ושמאלה אם לא.",
     altText: "משמש כתחליף כאשר לא ניתן להציג את התמונה במכשיר המשתמש ולמטרות נגישות.",
     rateColorMode: "מגדיר את צבע האמוג'י שנבחר כשסוג סמל הדירוג מוגדר ל\"סמיילי\". בחר בין: \"ברירת מחדל\" - האמוג'י שנבחר מופיע בצבע סקר ברירת מחדל; \"קנה מידה\" - האמוג'י שנבחר יורש צבע מסולם הדירוג.",
     expression: {
@@ -1484,7 +1505,8 @@ export var hebrewStrings = {
     panellayoutcolumn: {
       effectiveWidth: "מקבל ערכים %.",
       questionTitleWidth: "מקבל ערכים px."
-    }
+    },
+    progressBarInheritWidthFrom: "האפשרות \"זהה לגורם מכיל\" מתאימה אוטומטית את רוחב אזור מד ההתקדמות כך שיתאים לרכיב HTML שבו ממוקם הסקר."
   },
   // Properties
   p: {
@@ -1549,6 +1571,7 @@ export var hebrewStrings = {
     dataList: "רשימת נתונים",
     itemSize: "גודל פריט",
     itemTitleWidth: "רוחב תווית פריט (בפיקסלים)",
+    inputTextAlignment: "יישור ערך קלט",
     elements: "רכיבים",
     content: "תוכן",
     navigationButtonsVisibility: "נראות כפתורי ניווט",
@@ -1588,7 +1611,8 @@ export var hebrewStrings = {
     scaleColorMode: "מצב צבע לסולם",
     rateColorMode: "מצב צבע לדירוג",
     copyDisplayValue: "העתקת ערך תצוגה",
-    effectiveColSpan: "טווח עמודות"
+    effectiveColSpan: "טווח עמודות",
+    progressBarInheritWidthFrom: "רוחב אזור מד התקדמות"
   },
   theme: {
     advancedMode: "מצב מתקדם",
@@ -2291,3 +2315,28 @@ editorLocalization.locales["he"] = hebrewStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "מקבל ערכים %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "מקבל ערכים px."
 // p.effectiveColSpan: "Column span" => "טווח עמודות"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "זהה לסקר"
+// progressBarInheritWidthFrom.container: "Same as container" => "זהה למיכל"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "מציג תצוגות מקדימות של תמונות ממוזערות עבור קבצים שהועלו במידת האפשר. בטל את הבחירה אם ברצונך להציג סמלי קבצים במקום זאת."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "האפשרות \"זהה לגורם מכיל\" מתאימה אוטומטית את רוחב אזור מד ההתקדמות כך שיתאים לרכיב HTML שבו ממוקם הסקר."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "רוחב אזור מד התקדמות"
+// maskType.none: "None" => "ללא"
+// maskType.pattern: "Pattern" => "תבנית"
+// maskType.numeric: "Numeric" => "מספריים"
+// maskType.datetime: "Date and Time" => "תאריך ושעה"
+// maskType.currency: "Currency" => "מטבע"
+
+// inputTextAlignment.auto: "Auto" => "אוטומטי"
+// inputTextAlignment.left: "Left" => "שמאל"
+// inputTextAlignment.right: "Right" => "ימין"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "בחר כיצד ליישר ערך קלט בתוך השדה. הגדרת ברירת המחדל \"אוטומטי\" מיישרת את ערך הקלט ימינה אם מוחלת מסיכה על מטבע או מספר, ושמאלה אם לא."
+// p.inputTextAlignment: "Input value alignment" => "יישור ערך קלט"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "הצגת מד ההתקדמות"
+// paneldynamic.showProgressBar: "Show the progress bar" => "הצגת מד ההתקדמות"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "יישור מד התקדמות"
+// pv.carousel: "Carousel" => "קרוסלה"
+// progressBarLocation.top: "Top" => "סביבון"
+// progressBarLocation.bottom: "Bottom" => "ישבן"
+// progressBarLocation.topBottom: "Top and bottom" => "עליון ותחתון"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "מסדר אפשרויות בחירה בפריסה מרובת עמודות. כאשר הן מוגדרות על 0, האפשרויות מוצגות בשורה אחת. כאשר הוא מוגדר ל- -1, הערך בפועל עובר בירושה מהמאפיין \"ספירת עמודות מקוננת\" של מטריצת האב."
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "קישורי YouTube אינם נתמכים."

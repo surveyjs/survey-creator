@@ -154,6 +154,7 @@ export var bgStrings = {
     translationPlaceHolder: "Превод...",
     translationSource: "Източник: ",
     translationTarget: "Цел: ",
+    translationYouTubeNotSupported: "Връзките в YouTube не се поддържат.",
     themeExportButton: "Износ",
     themeImportButton: "Внос",
     surveyJsonExportButton: "Износ",
@@ -307,6 +308,9 @@ export var bgStrings = {
       templateTitleLocation: "Подравняване на заглавието на въпроса",
       templateErrorLocation: "Подравняване на съобщение за грешка",
       newPanelPosition: "Ново местоположение на панела",
+      showRangeInProgress: "Показване на лентата за напредъка",
+      showProgressBar: "Показване на лентата за напредъка",
+      progressBarLocation: "Подравняване на лентата за напредъка",
       keyName: "Предотвратяване на дублиращи се отговори в следния въпрос"
     },
     question: {
@@ -654,13 +658,6 @@ export var bgStrings = {
     allowResizeComment: "Позволява на потребителите да преоразмеряват текстови области",
     textUpdateMode: "Актуализиране стойността на текстовия въпрос",
     maskType: "Тип маска за въвеждане",
-    maskTypes: {
-      none: "Никой",
-      patternmask: "Шарка",
-      numericmask: "Цифров",
-      datetimemask: "Дата и час",
-      currencymask: "Валута"
-    },
     focusOnFirstError: "Фокусиране върху първия невалиден отговор",
     checkErrorsMode: "Стартиране на валидацията",
     validateVisitedEmptyFields: "Проверка на празни полета при загубен фокус",
@@ -697,7 +694,6 @@ export var bgStrings = {
     panelsState: "Разширено състояние на вътрешния панел",
     panelPrevText: "Подсказка към бутона за предишен панел",
     panelNextText: "Подсказка към бутона за следващ панел",
-    showRangeInProgress: "Показване на лентата на напредък",
     panelRemoveButtonLocation: "Премахване местоположението на бутона на панела",
     hideIfRowsEmpty: "Скриване на въпроса, ако няма редове",
     hideColumnsIfEmpty: "Скриване на колони, ако няма редове",
@@ -934,10 +930,11 @@ export var bgStrings = {
     firstExpanded: "Първият панел е разширен.",
     off: "Скриване на номерата на въпросите",
     list: "Списък",
+    carousel: "Въртележката",
+    tab: "Раздели",
     progressTop: "Панел навигатор + Лента за напредък в горната част",
     progressBottom: "Панел навигатор + Лента за напредък в долната част",
     progressTopBottom: "Панел навигатор + Лента за напредък в горната и долната част",
-    tab: "Раздели",
     horizontal: "Хоризонтален",
     vertical: "Вертикален",
     top: "Горен",
@@ -994,6 +991,18 @@ export var bgStrings = {
       time: "Време",
       url: "URL",
       week: "Седмица"
+    },
+    maskType: {
+      none: "Никой",
+      pattern: "Шарка",
+      numeric: "Цифров",
+      datetime: "Дата и час",
+      currency: "Валута"
+    },
+    inputTextAlignment: {
+      auto: "Авто",
+      left: "Ляво",
+      right: "Дясно"
     },
     all: "Всички",
     page: "Старница",
@@ -1113,6 +1122,11 @@ export var bgStrings = {
       aboveheader: "Над горния колонтитул",
       belowheader: "Под заглавката"
     },
+    progressBarLocation: {
+      top: "Връх",
+      bottom: "Дъно",
+      topBottom: "Отгоре и отдолу"
+    },
     sum: "Сума",
     count: "Граф",
     min: "Мин",
@@ -1153,6 +1167,10 @@ export var bgStrings = {
     isPanelless: {
       "false": "По подразбиране",
       "true": "Без панели"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "Същото като проучването",
+      container: "Същото като контейнера"
     }
   },
   // Operators
@@ -1310,7 +1328,8 @@ export var bgStrings = {
     },
     file: {
       imageHeight: "Регулира височината на изображението в резултатите от проучването.",
-      imageWidth: "Регулира ширината на изображението в резултатите от проучването."
+      imageWidth: "Регулира ширината на изображението в резултатите от проучването.",
+      allowImagesPreview: "Показва визуализации на миниатюри за качени файлове, когато е възможно. Премахнете отметката, ако вместо това искате да показвате икони на файлове."
     },
     image: {
       contentMode: "Опцията \"Auto\" автоматично определя подходящия режим за показване - Image, Video или YouTube - въз основа на предоставения URL адрес на източника."
@@ -1338,7 +1357,8 @@ export var bgStrings = {
       visibleIf: "Използвайте иконата на магическа пръчка, за да зададете условно правило, което определя видимостта на колоната.",
       enableIf: "Използвайте иконата на магическа пръчка, за да зададете условно правило, което забранява режима само за четене за колоната.",
       requiredIf: "Използвайте иконата на магическа пръчка, за да зададете условно правило, което не позволява подаване на проучване, освен ако поне един вложен въпрос няма отговор.",
-      showInMultipleColumns: "Когато е избрано, създава отделна колона за всяка опция за избор."
+      showInMultipleColumns: "Когато е избрано, създава отделна колона за всяка опция за избор.",
+      colCount: "Подрежда опциите за избор в оформление с няколко колони. Когато е зададено на 0, опциите се показват на един ред. Когато е зададена на -1, действителната стойност се наследява от свойството \"Брой вложени колони\" на родителската матрица."
     },
     widthMode: "Изберете от: \"Статичен\" - задава фиксирана ширина; \"Responsive\" - прави проучването да заема цялата ширина на екрана; \"Auto\" - прилага се всеки от двата в зависимост от използваните типове въпроси.",
     cookieName: "Бисквитките не позволяват на потребителите да попълнят една и съща анкета два пъти.",
@@ -1434,6 +1454,7 @@ export var bgStrings = {
     dataList: "Въведете списък с възможности за избор, които ще бъдат предложени на респондента по време на въвеждането.",
     itemSize: "Настройката само преоразмерява входните полета и не влияе на ширината на полето за въпроси.",
     itemTitleWidth: "Задава еднаква ширина за всички етикети на елементи в пиксели",
+    inputTextAlignment: "Изберете как да подравните входната стойност в полето. Настройката по подразбиране \"Автоматично\" подравнява входната стойност надясно, ако е приложено валутно или цифрово маскиране, и наляво, ако не.",
     altText: "Служи като заместител, когато изображението не може да бъде показано на устройството на потребителя и за целите на достъпността.",
     rateColorMode: "Определя цвета на избрания емотикон, когато типът на иконата за оценка е зададен на \"Усмивки\". Изберете между: \"По подразбиране\" - избраният емотикон се появява в цвета на проучването по подразбиране; \"Скала\" - избраният емотикон наследява цвят от рейтинговата скала.",
     expression: {
@@ -1484,7 +1505,8 @@ export var bgStrings = {
     panellayoutcolumn: {
       effectiveWidth: "Приема стойности %.",
       questionTitleWidth: "Приема стойности px."
-    }
+    },
+    progressBarInheritWidthFrom: "Опцията \"Същото като контейнер\" автоматично регулира ширината на областта на лентата за напредъка, за да се побере в HTML елемента, в който е поставена анкетата."
   },
   // Properties
   p: {
@@ -1549,6 +1571,7 @@ export var bgStrings = {
     dataList: "Списък с данни",
     itemSize: "Размер на елемента",
     itemTitleWidth: "Ширина на етикета на елемента (в пиксели)",
+    inputTextAlignment: "Подравняване на входните стойности",
     elements: "Елементи",
     content: "Съдържание",
     navigationButtonsVisibility: "Видимост на бутоните за навигация",
@@ -1588,7 +1611,8 @@ export var bgStrings = {
     scaleColorMode: "Режим на мащабиране на цветовете",
     rateColorMode: "Режим на оценяване на цветовете",
     copyDisplayValue: "Копиране на показваната стойност",
-    effectiveColSpan: "Обхват на колоната"
+    effectiveColSpan: "Обхват на колоната",
+    progressBarInheritWidthFrom: "Ширина на областта на лентата за напредък"
   },
   theme: {
     advancedMode: "Разширен режим",
@@ -2286,3 +2310,28 @@ editorLocalization.locales["bg"] = bgStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Приема стойности %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Приема стойности px."
 // p.effectiveColSpan: "Column span" => "Обхват на колоната"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "Същото като проучването"
+// progressBarInheritWidthFrom.container: "Same as container" => "Същото като контейнера"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Показва визуализации на миниатюри за качени файлове, когато е възможно. Премахнете отметката, ако вместо това искате да показвате икони на файлове."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "Опцията \"Същото като контейнер\" автоматично регулира ширината на областта на лентата за напредъка, за да се побере в HTML елемента, в който е поставена анкетата."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "Ширина на областта на лентата за напредък"
+// maskType.none: "None" => "Никой"
+// maskType.pattern: "Pattern" => "Шарка"
+// maskType.numeric: "Numeric" => "Цифров"
+// maskType.datetime: "Date and Time" => "Дата и час"
+// maskType.currency: "Currency" => "Валута"
+
+// inputTextAlignment.auto: "Auto" => "Авто"
+// inputTextAlignment.left: "Left" => "Ляво"
+// inputTextAlignment.right: "Right" => "Дясно"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Изберете как да подравните входната стойност в полето. Настройката по подразбиране \"Автоматично\" подравнява входната стойност надясно, ако е приложено валутно или цифрово маскиране, и наляво, ако не."
+// p.inputTextAlignment: "Input value alignment" => "Подравняване на входните стойности"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "Показване на лентата за напредъка"
+// paneldynamic.showProgressBar: "Show the progress bar" => "Показване на лентата за напредъка"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "Подравняване на лентата за напредъка"
+// pv.carousel: "Carousel" => "Въртележката"
+// progressBarLocation.top: "Top" => "Връх"
+// progressBarLocation.bottom: "Bottom" => "Дъно"
+// progressBarLocation.topBottom: "Top and bottom" => "Отгоре и отдолу"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Подрежда опциите за избор в оформление с няколко колони. Когато е зададено на 0, опциите се показват на един ред. Когато е зададена на -1, действителната стойност се наследява от свойството \"Брой вложени колони\" на родителската матрица."
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "Връзките в YouTube не се поддържат."

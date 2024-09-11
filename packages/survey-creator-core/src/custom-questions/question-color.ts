@@ -133,7 +133,8 @@ export class QuestionColorModel extends QuestionTextModel {
     }, {
       showPointer: false,
       verticalPosition: "bottom",
-      horizontalPosition: "center"
+      horizontalPosition: "center",
+      cssClass: "svc-creator-popup",
     });
     action.disableTabStop = true;
     const popupModel = <PopupModel>action.popupModel;

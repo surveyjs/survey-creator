@@ -3,6 +3,7 @@
     class="svc-item-value-wrapper"
     @pointerdown="adorner.onPointerDown($event)"
     :data-sv-drop-target-item-value="adorner.isDraggable ? item.value : null"
+    ref="root"
     :class="{
       'svc-item-value--new': adorner.isNew,
       'svc-item-value--dragging': adorner.isDragging,
@@ -67,8 +68,9 @@ import {
   ItemValueWrapperViewModel,
   type SurveyCreatorModel,
 } from "survey-creator-core";
-import { computed } from "vue";
+import { computed, onBeforeUnmount, onMounted, ref, watch } from "vue";
 
+const root = ref<HTMLElement>();
 const props = defineProps<{
   componentName: string;
   componentData: {
@@ -82,6 +84,23 @@ const props = defineProps<{
 const creator = computed(() => props.componentData.data.creator);
 const question = computed(() => props.componentData.question);
 const item = computed(() => props.componentData.item);
+
+const stopWatch = watch(
+  () => item.value,
+  (newValue, oldValue) => {
+    if (newValue && root.value) {
+      newValue.setRootElement(root.value);
+    }
+    if (oldValue) {
+      oldValue.setRootElement(undefined as any);
+    }
+  }
+);
+onMounted(() => {
+  if (root.value && item.value) {
+    item.value.setRootElement(root.value);
+  }
+});
 const adorner = useCreatorModel(
   () =>
     new ItemValueWrapperViewModel(creator.value, question.value, item.value),
@@ -90,4 +109,9 @@ const adorner = useCreatorModel(
     value.dispose();
   }
 );
+
+onBeforeUnmount(() => {
+  stopWatch();
+  item.value.setRootElement(undefined as any);
+});
 </script>

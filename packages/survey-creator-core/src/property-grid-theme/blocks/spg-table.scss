@@ -62,7 +62,9 @@
   width: max-content;
   padding-right: calcSize(4);
   background-size: calcSize(3) calcSize(3);
-  background-position: right calcSize(0.5) top 50%, 0 0;
+  background-position:
+    right calcSize(0.5) top 50%,
+    0 0;
   background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 15L17 10H7L12 15Z' fill='%2390909080'/%3E%3C/svg%3E%0A");
   background-repeat: no-repeat;
 }
@@ -81,7 +83,7 @@
   }
 }
 
-.spg-table__cell--actions>.spg-matrixdynamic__drag-element {
+.spg-table__cell--actions > .spg-matrixdynamic__drag-element {
   display: inline-block;
   margin-top: calcSize(0.5);
   cursor: move;
@@ -109,7 +111,67 @@
     white-space: unset;
   }
 }
-
 .spg-table__question-wrapper {
+  box-sizing: border-box;
   padding: calcSize(0.5) 0;
+}
+
+.spg-table__row--leave,
+.spg-table__row--enter {
+  animation-name: empty;
+  --move-whole-animation-duration: calc(var(--move-animation-duration) + var(--move-animation-delay));
+  --fade-whole-animation-duration: calc(var(--fade-animation-duration) + var(--fade-animation-delay));
+  animation-duration: max(var(--fade-whole-animation-duration), var(--move-whole-animation-duration));
+  & > td {
+    & > div {
+      animation-name: fadeIn, moveInWithOverflow;
+      opacity: 0;
+      animation-direction: var(--animation-direction);
+      animation-timing-function: var(--animation-timing-function);
+      animation-fill-mode: forwards;
+      animation-duration: var(--fade-animation-duration), var(--move-animation-duration), var(--move-animation-duration);
+      animation-delay: var(--fade-animation-delay), var(--move-animation-delay), var(--move-animation-delay);
+    }
+  }
+}
+.spg-table__row--enter {
+  --move-animation-delay: 0s;
+  --move-animation-duration: #{$spg-matrix-row-move-in-duration};
+  --fade-animation-duration: #{$spg-matrix-row-fade-in-duration};
+  --fade-animation-delay: #{$spg-matrix-row-fade-in-delay};
+  --animation-direction: normal;
+  --animation-timing-function: #{$ease-out};
+}
+.spg-table__row--leave {
+  --move-animation-delay: #{$spg-matrix-row-move-out-delay};
+  --move-animation-duration: #{$spg-matrix-row-move-out-duration};
+  --fade-animation-duration: #{$spg-matrix-row-fade-out-duration};
+  --fade-animation-delay: 0s;
+  --animation-direction: reverse;
+  --animation-timing-function: #{$reverse-ease-out};
+}
+.spg-table__row--detail {
+  &.spg-table__row--enter {
+    --move-animation-delay: 0s;
+    --move-animation-duration: #{$spg-matrix-detail-row-move-in-duration};
+    --fade-animation-duration: #{$spg-matrix-detail-row-fade-in-duration};
+    --fade-animation-delay: #{$spg-matrix-detail-row-fade-in-delay};
+    --animation-direction: normal;
+    --animation-timing-function: #{$ease-out};
+  }
+  &.spg-table__row--leave {
+    --move-animation-delay: #{$spg-matrix-detail-row-move-out-delay};
+    --move-animation-duration: #{$spg-matrix-detail-row-move-out-duration};
+    --fade-animation-duration: #{$spg-matrix-detail-row-fade-out-duration};
+    --fade-animation-delay: 0s;
+    --animation-direction: reverse;
+    --animation-timing-function: #{$reverse-ease-out};
+  }
+}
+
+.svc-creator--disable-animations {
+  .spg-table__row--enter,
+  .spg-table__row--leave {
+    animation: none;
+  }
 }

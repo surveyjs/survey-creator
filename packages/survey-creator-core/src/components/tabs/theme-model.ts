@@ -14,7 +14,7 @@ import { updateCustomQuestionJSONs } from "./theme-custom-questions";
 
 export * from "./header-model";
 
-Object.keys(LibraryThemes).forEach(libraryThemeName => {
+Object.keys(LibraryThemes || {}).forEach(libraryThemeName => {
   const libraryTheme: ITheme = LibraryThemes[libraryThemeName];
   const creatorThemeVariables = {};
   const creatorTheme = {};
@@ -89,7 +89,7 @@ export function getThemeChanges(fullTheme: ITheme, baseTheme?: ITheme) {
 }
 
 export class ThemeModel extends Base implements ITheme {
-  public static DefaultTheme = Themes["default-light"];
+  public static DefaultTheme = Themes["default-light"] || {};
   public undoRedoManager: UndoRedoManager;
   private themeCssVariablesChanges: { [index: string]: string } = {};
   private colorCalculator = new ColorCalculator();
@@ -209,48 +209,48 @@ export class ThemeModel extends Base implements ITheme {
     this.setThemeCssVariablesChanges("--sjs-primary-backcolor-dark", this.colorCalculator.colorSettings.newColorDark);
   }
   private cssVariablePropertiesChanged(name: string, value: any, property: JsonObjectProperty) {
+    let nameProcessed = true;
     if (name === "primaryColor") {
       this.setPropertyValue("--sjs-primary-backcolor", value);
       this.setThemeCssVariablesChanges("--sjs-primary-backcolor", value);
       this.updatePropertiesDependentOnPrimaryColor(value);
-    }
-    if (name === "--sjs-primary-backcolor") {
+    } else if (name === "--sjs-primary-backcolor") {
       this["primaryColor"] = value;
       this.updatePropertiesDependentOnPrimaryColor(value);
-    }
-    if (name === "--sjs-shadow-inner" || name === "--sjs-shadow-small") {
+    } else if (name === "--sjs-shadow-inner" || name === "--sjs-shadow-small") {
       const newBoxShadowReset = createBoxShadowReset(value);
       this.setPropertyValue(name + "-reset", newBoxShadowReset);
       this.setThemeCssVariablesChanges(name + "-reset", newBoxShadowReset);
-    }
-
-    if (name == "scale") {
+    } else if (name == "scale") {
       this.setThemeCssVariablesChanges("--sjs-base-unit", (value * 8 / 100) + "px");
-    }
-    if (name == "fontSize") {
+    } else if (name == "fontSize") {
       this.setThemeCssVariablesChanges("--sjs-font-size", (value * 16 / 100) + "px");
-    }
-    if (name == "cornerRadius") {
+    } else if (name == "cornerRadius") {
       this.setThemeCssVariablesChanges("--sjs-corner-radius", value + "px");
-    }
-    if (name === "questionBackgroundTransparency" || name === "editorPanel") {
+    } else if (name === "questionBackgroundTransparency" || name === "editorPanel") {
       let baseColor = parseColor(this.getPropertyValue("--sjs-general-backcolor-dim-light")).color;
       let questionBackgroundTransparencyValue = this.getPropertyValue("questionBackgroundTransparency");
       this.setThemeCssVariablesChanges("--sjs-editor-background", ingectAlpha(baseColor, questionBackgroundTransparencyValue / 100));
-    }
-    if (name === "panelBackgroundTransparency" || name === "questionPanel") {
+    } else if (name === "panelBackgroundTransparency" || name === "questionPanel") {
       let baseColor = parseColor(this.getPropertyValue("--sjs-general-backcolor")).color;
       let panelBackgroundTransparencyValue = this.getPropertyValue("panelBackgroundTransparency");
       this.setThemeCssVariablesChanges("--sjs-question-background", ingectAlpha(baseColor, panelBackgroundTransparencyValue / 100));
+    } else {
+      nameProcessed = false;
     }
+
+    let typeProcessed = true;
     if (property.type === "font") {
       fontsettingsToCssVariable(value, property, this.themeCssVariablesChanges);
       this.onThemePropertyChanged.fire(this, { name, value });
-    }
-    if (property.type === "backgroundcornerradius") {
+    } else if (property.type === "backgroundcornerradius") {
       backgroundCornerRadiusToCssVariable(value, property, this.themeCssVariablesChanges);
       this.onThemePropertyChanged.fire(this, { name, value });
+    } else {
+      typeProcessed = false;
     }
+
+    return nameProcessed || typeProcessed;
   }
 
   private setThemeCssVariablesChanges(name: string, value: any) {
@@ -422,15 +422,18 @@ export class ThemeModel extends Base implements ITheme {
     }
 
     if (this.blockThemeChangedNotifications > 0) return;
+    let processedInternally = false;
     if (this !== sender) {
       const senderJSON = sender.toJSON();
       if (!!senderJSON.cssVariables) {
         Object.keys(senderJSON.cssVariables).forEach(key => this.setThemeCssVariablesChanges(key, senderJSON.cssVariables[key]));
       }
       this.onThemePropertyChanged.fire(this, { name, value: newValue });
+      processedInternally = true;
     }
     if (name.indexOf("--") === 0) {
       this.setThemeCssVariablesChanges(name, newValue);
+      processedInternally = true;
     }
 
     if (this.generalPropertiesChanged(name, newValue)) {
@@ -452,7 +455,13 @@ export class ThemeModel extends Base implements ITheme {
       return;
     }
 
-    this.cssVariablePropertiesChanged(name, newValue, sender.getPropertyByName(name));
+    if (this.cssVariablePropertiesChanged(name, newValue, sender.getPropertyByName(name))) {
+      processedInternally = true;
+    }
+
+    if (!processedInternally) {
+      this.onThemePropertyChanged.fire(this, { name, value: newValue });
+    }
 
     this.blockThemeChangedNotifications -= 1;
     if (!!this.undoRedoManager && this.blockThemeChangedNotifications == 0) {

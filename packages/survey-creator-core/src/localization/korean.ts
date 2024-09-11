@@ -154,6 +154,7 @@ export var koreanStrings = {
     translationPlaceHolder: "번역...",
     translationSource: "근원: ",
     translationTarget: "과녁: ",
+    translationYouTubeNotSupported: "YouTube 링크는 지원되지 않습니다.",
     themeExportButton: "수출",
     themeImportButton: "수입",
     surveyJsonExportButton: "수출",
@@ -307,6 +308,9 @@ export var koreanStrings = {
       templateTitleLocation: "질문 제목 정렬",
       templateErrorLocation: "오류 메시지 맞춤",
       newPanelPosition: "새 패널 위치",
+      showRangeInProgress: "진행률 표시줄 표시",
+      showProgressBar: "진행률 표시줄 표시",
+      progressBarLocation: "진행률 표시줄 맞춤",
       keyName: "다음 질문에서 중복 응답 방지"
     },
     question: {
@@ -654,13 +658,6 @@ export var koreanStrings = {
     allowResizeComment: "사용자가 텍스트 영역의 크기를 조정할 수 있도록 허용",
     textUpdateMode: "텍스트 질문 값 업데이트",
     maskType: "입력 마스크 유형",
-    maskTypes: {
-      none: "없음",
-      patternmask: "무늬",
-      numericmask: "숫자",
-      datetimemask: "날짜 및 시간",
-      currencymask: "통화"
-    },
     focusOnFirstError: "첫 번째 오답에 포커스 설정",
     checkErrorsMode: "유효성 검사 실행",
     validateVisitedEmptyFields: "초점이 손실된 빈 필드 유효성 검사",
@@ -697,7 +694,6 @@ export var koreanStrings = {
     panelsState: "내부 패널 확장 상태",
     panelPrevText: "이전 패널 단추 도구 설명",
     panelNextText: "다음 패널 단추 도구 설명",
-    showRangeInProgress: "진행률 표시줄 표시",
     panelRemoveButtonLocation: "패널 단추 위치 제거",
     hideIfRowsEmpty: "행이 없는 경우 질문 숨기기",
     hideColumnsIfEmpty: "행이 없는 경우 열 숨기기",
@@ -934,10 +930,11 @@ export var koreanStrings = {
     firstExpanded: "우선 확장",
     off: "꺼짐",
     list: "목록",
+    carousel: "회전목마",
+    tab: "탭",
     progressTop: "상단 진행률",
     progressBottom: "하단 진행률",
     progressTopBottom: "상하단 진행률",
-    tab: "탭",
     horizontal: "가로",
     vertical: "세로",
     top: "위",
@@ -994,6 +991,18 @@ export var koreanStrings = {
       time: "시간",
       url: "URL (영문)",
       week: "주"
+    },
+    maskType: {
+      none: "없음",
+      pattern: "무늬",
+      numeric: "숫자",
+      datetime: "날짜 및 시간",
+      currency: "통화"
+    },
+    inputTextAlignment: {
+      auto: "자동",
+      left: "왼쪽",
+      right: "오른쪽"
     },
     all: "모두",
     page: "페이지",
@@ -1113,6 +1122,11 @@ export var koreanStrings = {
       aboveheader: "머리글 위",
       belowheader: "머리글 아래"
     },
+    progressBarLocation: {
+      top: "맨 위로",
+      bottom: "밑바닥",
+      topBottom: "위쪽 및 아래쪽"
+    },
     sum: "합계",
     count: "세다",
     min: "분",
@@ -1153,6 +1167,10 @@ export var koreanStrings = {
     isPanelless: {
       "false": "기본값",
       "true": "패널 없음"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "설문 조사와 동일",
+      container: "컨테이너와 동일"
     }
   },
   // Operators
@@ -1310,7 +1328,8 @@ export var koreanStrings = {
     },
     file: {
       imageHeight: "현장조사 결과에서 이미지의 높이를 조정합니다.",
-      imageWidth: "현장조사 결과에서 이미지의 너비를 조정합니다."
+      imageWidth: "현장조사 결과에서 이미지의 너비를 조정합니다.",
+      allowImagesPreview: "가능한 경우 업로드된 파일에 대한 썸네일 미리보기를 표시합니다. 대신 파일 아이콘을 표시하려면 선택을 취소합니다."
     },
     image: {
       contentMode: "\"자동\" 옵션은 제공된 소스 URL을 기반으로 표시에 적합한 모드(이미지, 비디오 또는 YouTube)를 자동으로 결정합니다."
@@ -1338,7 +1357,8 @@ export var koreanStrings = {
       visibleIf: "마술 지팡이 아이콘을 사용하여 열 표시 유형을 결정하는 조건부 규칙을 설정합니다.",
       enableIf: "마술 지팡이 아이콘을 사용하여 열에 대해 읽기 전용 모드를 비활성화하는 조건부 규칙을 설정합니다.",
       requiredIf: "마술 지팡이 아이콘을 사용하여 하나 이상의 중첩된 질문에 답변이 없는 한 설문조사 제출을 금지하는 조건부 규칙을 설정합니다.",
-      showInMultipleColumns: "이 옵션을 선택하면 각 선택 옵션에 대한 개별 열이 만들어집니다."
+      showInMultipleColumns: "이 옵션을 선택하면 각 선택 옵션에 대한 개별 열이 만들어집니다.",
+      colCount: "선택 옵션을 여러 열 레이아웃으로 정렬합니다. 0으로 설정하면 옵션이 한 줄로 표시됩니다. -1로 설정하면 실제 값이 부모 행렬의 \"중첩 열 수\" 속성에서 상속됩니다."
     },
     widthMode: "다음 중에서 선택합니다. \"정적\" - 고정 너비를 설정합니다. \"반응형\" - 설문조사가 화면의 전체 너비를 차지하도록 합니다. \"자동\" - 사용된 질문 유형에 따라 둘 중 하나를 적용합니다.",
     cookieName: "쿠키는 사용자가 동일한 설문조사를 두 번 작성하는 것을 방지합니다.",
@@ -1434,6 +1454,7 @@ export var koreanStrings = {
     dataList: "입력 시 응답자에게 제안될 선택 사항 목록을 입력합니다.",
     itemSize: "이 설정은 입력 필드의 크기만 조정하며 질문 상자의 너비에는 영향을 주지 않습니다.",
     itemTitleWidth: "모든 항목 레이블에 대해 일관된 너비를 픽셀 단위로 설정합니다.",
+    inputTextAlignment: "필드 내에서 입력 값을 정렬하는 방법을 선택합니다. 기본 설정인 \"Auto\"는 통화 또는 숫자 마스킹이 적용된 경우 입력 값을 오른쪽에 정렬하고 그렇지 않은 경우 왼쪽에 정렬합니다.",
     altText: "사용자의 장치에 이미지를 표시할 수 없는 경우 접근성을 위해 대신 사용할 수 있습니다.",
     rateColorMode: "등급 아이콘 유형이 \"스마일리\"로 설정된 경우 선택한 이모티콘의 색상을 정의합니다. 다음 중 하나를 선택합니다. \"기본값\" - 선택한 이모티콘이 기본 설문조사 색상으로 표시됩니다. \"척도\"-선택한 이모티콘은 등급 척도에서 색상을 상속합니다.",
     expression: {
@@ -1484,7 +1505,8 @@ export var koreanStrings = {
     panellayoutcolumn: {
       effectiveWidth: "% 값을 허용합니다.",
       questionTitleWidth: "px 값을 허용합니다."
-    }
+    },
+    progressBarInheritWidthFrom: "\"컨테이너와 동일\" 옵션은 설문조사가 배치된 HTML 요소에 맞게 진행률 표시줄 영역 너비를 자동으로 조정합니다."
   },
   // Properties
   p: {
@@ -1549,6 +1571,7 @@ export var koreanStrings = {
     dataList: "데이터 목록",
     itemSize: "항목 크기",
     itemTitleWidth: "항목 레이블 너비(px)",
+    inputTextAlignment: "입력 값 정렬",
     elements: "요소",
     content: "콘텐츠",
     navigationButtonsVisibility: "탐색 버튼 선명도",
@@ -1588,7 +1611,8 @@ export var koreanStrings = {
     scaleColorMode: "스케일 컬러 모드",
     rateColorMode: "비율 색상 모드",
     copyDisplayValue: "표시 값 복사",
-    effectiveColSpan: "열 범위"
+    effectiveColSpan: "열 범위",
+    progressBarInheritWidthFrom: "진행률 표시줄 영역 너비"
   },
   theme: {
     advancedMode: "어드밴스드 모드",
@@ -2927,3 +2951,28 @@ editorLocalization.locales["ko"] = koreanStrings;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "% 값을 허용합니다."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "px 값을 허용합니다."
 // p.effectiveColSpan: "Column span" => "열 범위"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "설문 조사와 동일"
+// progressBarInheritWidthFrom.container: "Same as container" => "컨테이너와 동일"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "가능한 경우 업로드된 파일에 대한 썸네일 미리보기를 표시합니다. 대신 파일 아이콘을 표시하려면 선택을 취소합니다."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "\"컨테이너와 동일\" 옵션은 설문조사가 배치된 HTML 요소에 맞게 진행률 표시줄 영역 너비를 자동으로 조정합니다."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "진행률 표시줄 영역 너비"
+// maskType.none: "None" => "없음"
+// maskType.pattern: "Pattern" => "무늬"
+// maskType.numeric: "Numeric" => "숫자"
+// maskType.datetime: "Date and Time" => "날짜 및 시간"
+// maskType.currency: "Currency" => "통화"
+
+// inputTextAlignment.auto: "Auto" => "자동"
+// inputTextAlignment.left: "Left" => "왼쪽"
+// inputTextAlignment.right: "Right" => "오른쪽"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "필드 내에서 입력 값을 정렬하는 방법을 선택합니다. 기본 설정인 \"Auto\"는 통화 또는 숫자 마스킹이 적용된 경우 입력 값을 오른쪽에 정렬하고 그렇지 않은 경우 왼쪽에 정렬합니다."
+// p.inputTextAlignment: "Input value alignment" => "입력 값 정렬"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "진행률 표시줄 표시"
+// paneldynamic.showProgressBar: "Show the progress bar" => "진행률 표시줄 표시"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "진행률 표시줄 맞춤"
+// pv.carousel: "Carousel" => "회전목마"
+// progressBarLocation.top: "Top" => "맨 위로"
+// progressBarLocation.bottom: "Bottom" => "밑바닥"
+// progressBarLocation.topBottom: "Top and bottom" => "위쪽 및 아래쪽"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "선택 옵션을 여러 열 레이아웃으로 정렬합니다. 0으로 설정하면 옵션이 한 줄로 표시됩니다. -1로 설정하면 실제 값이 부모 행렬의 \"중첩 열 수\" 속성에서 상속됩니다."
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "YouTube 링크는 지원되지 않습니다."

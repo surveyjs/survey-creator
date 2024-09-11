@@ -58,15 +58,18 @@ test("Page hover test", async t => {
   const page = Selector(".svc-page__content");
   const question = Selector(".svc-question__adorner");
   await t.hover(page, { offsetX: 5, offsetY: 5 })
+    .wait(300)
     .expect(page.hasClass("svc-hovered-ready")).ok({ timeout: 500 })
     .expect(page.hasClass("svc-hovered")).notOk({ timeout: 200 })
     .expect(page.hasClass("svc-hovered")).ok({ timeout: 3000 })
     .hover(Selector(".sd-page__title"))
+    .wait(300)
     .expect(page.hasClass("svc-hovered")).ok({ timeout: 200 })
     .hover(Selector(".svc-toolbox"))
     .expect(page.hasClass("svc-hovered")).notOk({ timeout: 500 })
-    .hover(question, { offsetX: 5, offsetY: 5 })
-    .expect(question.hasClass("svc-hovered")).ok({ timeout: 500 })
+    .hover(question, { offsetX: -10, offsetY: 0 })
+    .wait(300)
+    .expect(question.hasClass("svc-hovered")).ok({ timeout: 3000 })
     .wait(3000)
     .expect(page.hasClass("svc-hovered")).notOk();
 

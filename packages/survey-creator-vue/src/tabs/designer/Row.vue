@@ -1,5 +1,7 @@
 <template>
   <div :class="model.cssClasses">
+    <div class="svc-row__drop-indicator svc-row__drop-indicator--top"></div>
+    <div class="svc-row__drop-indicator svc-row__drop-indicator--bottom"></div>
     <slot></slot>
   </div>
 </template>

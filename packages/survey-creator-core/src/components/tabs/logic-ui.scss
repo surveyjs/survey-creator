@@ -4,7 +4,6 @@
   width: 100%;
   height: 100%;
   background: $background-dim;
-  @include disableTransitionAnimations;
 }
 
 .svc-tab-logic-edit__content {
@@ -72,6 +71,7 @@
 }
 
 .svc-logic-operator.svc-logic-operator {
+  transition: background-color $creator-transition-duration, color $creator-transition-duration;
 
   &:hover,
   &:focus {
@@ -99,7 +99,7 @@
   &:hover,
   &:focus {
     background-color: var(--ctr-expression-item-background-color-conjunction-hovered, $yellow);
-    color: var(--ctr-expression-item-text-color-conjunction-hovered, $foreground);
+    color: var(--ctr-expression-item-text-color-conjunction-hovered, $primary-foreground);
   }
 }
 
@@ -110,7 +110,7 @@
   &:hover,
   &:focus {
     background-color: var(--ctr-expression-item-background-color-operator-hovered, $yellow);
-    color: var(--ctr-expression-item-text-color-operator-hovered, $foreground);
+    color: var(--ctr-expression-item-text-color-operator-hovered, $primary-foreground);
   }
 }
 
@@ -121,7 +121,7 @@
   &:hover,
   &:focus {
     background-color: var(--ctr-expression-item-background-color-action-hovered, $red);
-    color: var(--ctr-expression-item-text-color-action-hovered, $foreground);
+    color: var(--ctr-expression-item-text-color-action-hovered, $primary-foreground);
   }
 }
 
@@ -214,6 +214,11 @@
 }
 
 .svc-logic-tab__content {
+  /* disable library transition animations */
+  --sjs-transition-duration: 0ms;
+}
+
+.svc-logic-tab__content {
   &.svc-logic-tab__empty {
     display: flex;
     flex-direction: column;
@@ -229,6 +234,7 @@
   .svc-logic-tab__content-action {
     margin-left: 25%;
     margin-right: 25%;
+    margin-top: calcSize(5);
     margin-bottom: calcSize(8);
   }
 
@@ -292,6 +298,7 @@
 }
 
 .sl-table__cell--detail-panel {
+  padding: 0;
   .sd-body {
     margin: 0;
     min-width: none;

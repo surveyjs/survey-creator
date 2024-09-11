@@ -3,9 +3,9 @@
     <template v-for="(item, index) in model.renderedActions" :key="index">
       <SvComponent
         :is="'svc-toolbox-tool'"
-        :creator="toolbox.creator"
+        :creator="creator"
         :item="item"
-        :parentModel="toolbox"
+        :parentModel="model"
         :isCompact="false"
       ></SvComponent>
     </template>
@@ -14,9 +14,9 @@
 <script lang="ts" setup>
 import { SvComponent } from "survey-vue3-ui";
 import type { ListModel } from "survey-core";
-import type { QuestionToolbox } from "survey-creator-core";
+import type { CreatorBase } from "survey-creator-core";
 defineProps<{
   model: ListModel;
-  toolbox: QuestionToolbox;
+  creator: CreatorBase;
 }>();
 </script>

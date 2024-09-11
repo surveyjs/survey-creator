@@ -154,6 +154,7 @@ var simplifiedChineseTranslation = {
     translationPlaceHolder: "译本。。。",
     translationSource: "源：",
     translationTarget: "目标：",
+    translationYouTubeNotSupported: "不支持 YouTube 链接。",
     themeExportButton: "出口",
     themeImportButton: "进口",
     surveyJsonExportButton: "出口",
@@ -307,6 +308,9 @@ var simplifiedChineseTranslation = {
       templateTitleLocation: "问题标题对齐方式",
       templateErrorLocation: "错误消息对齐",
       newPanelPosition: "新面板位置",
+      showRangeInProgress: "显示进度条",
+      showProgressBar: "显示进度条",
+      progressBarLocation: "进度条对齐",
       keyName: "防止在以下问题中重复回答"
     },
     question: {
@@ -654,13 +658,6 @@ var simplifiedChineseTranslation = {
     allowResizeComment: "允许用户调整文本区域的大小",
     textUpdateMode: "更新文本问题值",
     maskType: "输入掩码类型",
-    maskTypes: {
-      none: "没有",
-      patternmask: "模式",
-      numericmask: "数值的",
-      datetimemask: "日期和时间",
-      currencymask: "货币"
-    },
     focusOnFirstError: "将焦点放在第一个无效答案上",
     checkErrorsMode: "运行验证",
     validateVisitedEmptyFields: "验证失去焦点时的空字段",
@@ -697,7 +694,6 @@ var simplifiedChineseTranslation = {
     panelsState: "内面板展开状态",
     panelPrevText: "“上一个面板”按钮工具提示",
     panelNextText: "“下一个面板”按钮工具提示",
-    showRangeInProgress: "显示进度条",
     panelRemoveButtonLocation: "“删除面板”按钮位置",
     hideIfRowsEmpty: "如果没有行，则隐藏问题",
     hideColumnsIfEmpty: "如果没有行，则隐藏列",
@@ -934,10 +930,11 @@ var simplifiedChineseTranslation = {
     firstExpanded: "firstExpanded",
     off: "关闭",
     list: "列表",
+    carousel: "旋转 木马",
+    tab: "制表符",
     progressTop: "progressTop",
     progressBottom: "progressBottom",
     progressTopBottom: "progressTopBottom",
-    tab: "制表符",
     horizontal: "水平",
     vertical: "垂直",
     top: "顶",
@@ -994,6 +991,18 @@ var simplifiedChineseTranslation = {
       time: "时间",
       url: "网址",
       week: "周"
+    },
+    maskType: {
+      none: "没有",
+      pattern: "模式",
+      numeric: "数值的",
+      datetime: "日期和时间",
+      currency: "货币"
+    },
+    inputTextAlignment: {
+      auto: "自动",
+      left: "左",
+      right: "右"
     },
     all: "全部",
     page: "页",
@@ -1113,6 +1122,11 @@ var simplifiedChineseTranslation = {
       aboveheader: "标题上方",
       belowheader: "在标题下方"
     },
+    progressBarLocation: {
+      top: "返回页首",
+      bottom: "底",
+      topBottom: "顶部和底部"
+    },
     sum: "和",
     count: "计数",
     min: "最小值",
@@ -1153,6 +1167,10 @@ var simplifiedChineseTranslation = {
     isPanelless: {
       "false": "违约",
       "true": "不带面板"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "与调查相同",
+      container: "与容器相同"
     }
   },
   // Operators
@@ -1310,7 +1328,8 @@ var simplifiedChineseTranslation = {
     },
     file: {
       imageHeight: "调整调查结果中图像的高度。",
-      imageWidth: "调整调查结果中图像的宽度。"
+      imageWidth: "调整调查结果中图像的宽度。",
+      allowImagesPreview: "尽可能显示已上传文件的缩略图预览。取消选择是否要显示文件图标。"
     },
     image: {
       contentMode: "“自动”选项会根据提供的源 URL 自动确定适合的显示模式 - 图像、视频或 YouTube。"
@@ -1338,7 +1357,8 @@ var simplifiedChineseTranslation = {
       visibleIf: "使用魔杖图标设置确定列可见性的条件规则。",
       enableIf: "使用魔杖图标设置禁用列只读模式的条件规则。",
       requiredIf: "使用魔杖图标设置条件规则，除非至少有一个嵌套问题有答案，否则该规则将阻止调查提交。",
-      showInMultipleColumns: "选中后，为每个选项创建一个单独的列。"
+      showInMultipleColumns: "选中后，为每个选项创建一个单独的列。",
+      colCount: "在多列布局中排列选项。设置为 0 时，选项将以单行显示。当设置为 -1 时，实际值继承自父矩阵的 “Nested column count” 属性。"
     },
     widthMode: "从以下选项中选择： “静态” - 设置固定宽度;“响应式” - 使调查占据屏幕的整个宽度;“自动” - 根据所使用的问题类型应用两者中的任何一个。",
     cookieName: "Cookie 可防止用户两次填写同一调查问卷。",
@@ -1434,6 +1454,7 @@ var simplifiedChineseTranslation = {
     dataList: "输入将在输入期间向受访者建议的选项列表。",
     itemSize: "该设置仅调整输入字段的大小，不会影响问题框的宽度。",
     itemTitleWidth: "为所有项目标签设置一致的宽度（以像素为单位）",
+    inputTextAlignment: "选择如何在字段中对齐输入值。默认设置 “Auto” 如果应用了货币或数字掩码，则将输入值向右对齐，如果未应用，则向左对齐。",
     altText: "当图像无法在用户设备上显示时，出于辅助功能的目的，可作为替代。",
     rateColorMode: "定义当评级图标类型设置为“笑脸”时所选表情符号的颜色。选择：“默认” - 所选表情符号以默认调查颜色显示;“比例” - 所选的表情符号继承了评分量表的颜色。",
     expression: {
@@ -1484,7 +1505,8 @@ var simplifiedChineseTranslation = {
     panellayoutcolumn: {
       effectiveWidth: "接受值 %。",
       questionTitleWidth: "接受值 px。"
-    }
+    },
+    progressBarInheritWidthFrom: "“与容器相同”选项会自动调整进度条区域的宽度，以适应放置调查的 HTML 元素。"
   },
   // Properties
   p: {
@@ -1549,6 +1571,7 @@ var simplifiedChineseTranslation = {
     dataList: "数据列表",
     itemSize: "itemSize",
     itemTitleWidth: "项目标签宽度（以 px 为单位）",
+    inputTextAlignment: "输入值对齐",
     elements: "元素",
     content: "内容",
     navigationButtonsVisibility: "导航按钮可见",
@@ -1588,7 +1611,8 @@ var simplifiedChineseTranslation = {
     scaleColorMode: "缩放颜色模式",
     rateColorMode: "评价颜色模式",
     copyDisplayValue: "复制显示值",
-    effectiveColSpan: "柱跨度"
+    effectiveColSpan: "柱跨度",
+    progressBarInheritWidthFrom: "进度条区域宽度"
   },
   theme: {
     advancedMode: "高级模式",
@@ -2865,3 +2889,28 @@ editorLocalization.locales["zh-cn"] = simplifiedChineseTranslation;
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "接受值 %。"
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "接受值 px。"
 // p.effectiveColSpan: "Column span" => "柱跨度"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "与调查相同"
+// progressBarInheritWidthFrom.container: "Same as container" => "与容器相同"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "尽可能显示已上传文件的缩略图预览。取消选择是否要显示文件图标。"
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "“与容器相同”选项会自动调整进度条区域的宽度，以适应放置调查的 HTML 元素。"
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "进度条区域宽度"
+// maskType.none: "None" => "没有"
+// maskType.pattern: "Pattern" => "模式"
+// maskType.numeric: "Numeric" => "数值的"
+// maskType.datetime: "Date and Time" => "日期和时间"
+// maskType.currency: "Currency" => "货币"
+
+// inputTextAlignment.auto: "Auto" => "自动"
+// inputTextAlignment.left: "Left" => "左"
+// inputTextAlignment.right: "Right" => "右"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "选择如何在字段中对齐输入值。默认设置 “Auto” 如果应用了货币或数字掩码，则将输入值向右对齐，如果未应用，则向左对齐。"
+// p.inputTextAlignment: "Input value alignment" => "输入值对齐"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "显示进度条"
+// paneldynamic.showProgressBar: "Show the progress bar" => "显示进度条"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "进度条对齐"
+// pv.carousel: "Carousel" => "旋转 木马"
+// progressBarLocation.top: "Top" => "返回页首"
+// progressBarLocation.bottom: "Bottom" => "底"
+// progressBarLocation.topBottom: "Top and bottom" => "顶部和底部"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "在多列布局中排列选项。设置为 0 时，选项将以单行显示。当设置为 -1 时，实际值继承自父矩阵的 “Nested column count” 属性。"
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "不支持 YouTube 链接。"
