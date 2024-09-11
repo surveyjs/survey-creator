@@ -40,26 +40,27 @@ export class AddQuestionButtonComponent extends SurveyElementBase<{ item: Action
   }
   protected renderElement(): JSX.Element {
     const addButtonClass = this.props.buttonClass || "svc-btn";
-    return attachKey2click(<><div
-      className={"svc-element__add-new-question " + addButtonClass}
-      onClick={(e) => {
-        e.stopPropagation();
-        this.model.addNewQuestion(this.model, new ReactMouseEvent(e));
-      }}
-      onMouseOver={(e) => this.model.hoverStopper && this.model.hoverStopper(e.nativeEvent, e.currentTarget)}
-    >
-      <SvgIcon
-        className={"svc-panel__add-new-question-icon"}
-        iconName={"icon-add_24x24"}
-        size={24}
-      ></SvgIcon>
-      <span className="svc-text svc-text--normal svc-text--bold">
-        {this.model.addNewQuestionText}
-      </span>
-      {this.props.renderPopup !== false ? this.renderTypeSelector() : null}
-    </div>
-    {this.props.renderPopup === false ? this.renderTypeSelector() : null}
-    </>);
+    return <>
+      {attachKey2click(<div
+        className={"svc-element__add-new-question " + addButtonClass}
+        onClick={(e) => {
+          e.stopPropagation();
+          this.model.addNewQuestion(this.model, new ReactMouseEvent(e));
+        }}
+        onMouseOver={(e) => this.model.hoverStopper && this.model.hoverStopper(e.nativeEvent, e.currentTarget)}
+      >
+        <SvgIcon
+          className={"svc-panel__add-new-question-icon"}
+          iconName={"icon-add_24x24"}
+          size={24}
+        ></SvgIcon>
+        <span className="svc-text svc-text--normal svc-text--bold">
+          {this.model.addNewQuestionText}
+        </span>
+        {this.props.renderPopup !== false ? this.renderTypeSelector() : null}
+      </div>)}
+      {this.props.renderPopup === false ? this.renderTypeSelector() : null}
+    </>;
   }
 }
 
