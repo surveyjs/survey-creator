@@ -1,6 +1,6 @@
 <template>
   <SvComponent
-    :name="'svc-action-button'"
+    :is="'svc-action-button'"
     :text="question.linkValueText"
     :click="question.doLinkClick.bind(question)"
     :selected="question.isSelected"
@@ -10,7 +10,7 @@
   >
   </SvComponent>
   <SvComponent
-    :name="'svc-action-button'"
+    :is="'svc-action-button'"
     v-if="!question.isReadOnly && question.showClear"
     :text="clearCaption"
     :click="question.doClearClick.bind(question)"

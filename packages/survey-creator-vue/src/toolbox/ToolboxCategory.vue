@@ -21,14 +21,14 @@
         class="svc-toolbox__category-header__controls"
       >
         <SvComponent
-          :name="'sv-svg-icon'"
+          :is="'sv-svg-icon'"
           :iconName="'icon-arrow-down'"
           class="svc-toolbox__category-header__button svc-string-editor__button--expand"
           :size="24"
           v-show="category.collapsed"
         ></SvComponent>
         <SvComponent
-          :name="'sv-svg-icon'"
+          :is="'sv-svg-icon'"
           :iconName="'icon-arrow-up'"
           class="svc-toolbox__category-header__button svc-string-editor__button--collapse"
           :size="24"
@@ -37,7 +37,7 @@
       </div>
     </div>
     <SvComponent
-      :name="'svc-toolbox-tool'"
+      :is="'svc-toolbox-tool'"
       v-for="(item, index) in category.items"
       :item="item"
       :key="index"

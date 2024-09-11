@@ -6,14 +6,14 @@
       </div>
       <div class="svd-test-results__header-types">
         <SvComponent
-          :name="'svc-action-button'"
+          :is="'svc-action-button'"
           :text="model.surveyResultsTableText"
           :click="model.selectTableClick"
           :disabled="false"
           :selected="model.isTableSelected"
         ></SvComponent>
         <SvComponent
-          :name="'svc-action-button'"
+          :is="'svc-action-button'"
           :text="model.surveyResultsJsonText"
           :click="model.selectJsonClick"
           :disabled="false"
@@ -42,7 +42,7 @@
         </thead>
         <tbody>
           <SvComponent
-            :name="'survey-results-table-row'"
+            :is="'survey-results-table-row'"
             v-for="(row, index) in model.resultData"
             :model="row"
             :key="index"

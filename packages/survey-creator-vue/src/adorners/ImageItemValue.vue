@@ -21,10 +21,7 @@
 
       <template v-if="!adorner.isNew && !adorner.isUploading">
         <div v-if="!adorner.isNew" class="svc-image-item-value__item">
-          <SvComponent
-            :name="componentName"
-            v-bind="componentData"
-          ></SvComponent>
+          <SvComponent :is="componentName" v-bind="componentData"></SvComponent>
         </div>
         <span
           v-if="adorner.isDraggable && adorner.canRenderControls"
@@ -34,7 +31,7 @@
           :aria-label="undefined"
         >
           <SvComponent
-            :name="'sv-svg-icon'"
+            :is="'sv-svg-icon'"
             :iconName="'icon-drag-area-indicator'"
             :size="24"
           ></SvComponent>
@@ -51,7 +48,7 @@
             :aria-label="undefined"
           >
             <SvComponent
-              :name="'sv-svg-icon'"
+              :is="'sv-svg-icon'"
               role="button"
               :iconName="'icon-file'"
               :size="24"
@@ -66,7 +63,7 @@
             :aria-label="undefined"
           >
             <SvComponent
-              :name="'sv-svg-icon'"
+              :is="'sv-svg-icon'"
               role="button"
               :iconName="'icon-delete'"
               :size="24"
@@ -90,7 +87,7 @@
                   class="svc-image-item-value__loading"
                   v-if="adorner.isUploading"
                 >
-                  <SvComponent :name="'sv-loading-indicator'"></SvComponent>
+                  <SvComponent :is="'sv-loading-indicator'"></SvComponent>
                 </div>
               </div>
             </label>
@@ -110,7 +107,7 @@
             :aria-label="undefined"
           >
             <SvComponent
-              :name="'sv-svg-icon'"
+              :is="'sv-svg-icon'"
               :iconName="'icon-add-lg'"
               :size="24"
               :title="adorner.addFileTitle"

@@ -6,7 +6,7 @@
     @mouseout="deactivateZoom()"
   >
     <div v-if="!model.hasFrame" class="svd-simulator-content">
-      <SvComponent :name="'survey-widget'" :model="model.survey"></SvComponent>
+      <SvComponent :is="'survey-widget'" :model="model.survey"></SvComponent>
     </div>
     <div
       v-if="model.hasFrame"
@@ -28,7 +28,7 @@
       >
         <div class="svd-simulator-content">
           <SvComponent
-            :name="'survey-widget'"
+            :is="'survey-widget'"
             :model="model.survey"
           ></SvComponent>
         </div>

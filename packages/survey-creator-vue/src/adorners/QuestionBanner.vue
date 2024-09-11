@@ -4,7 +4,7 @@
       <span>{{ model.text }}{{ " " }}</span>
       <span class="svc-carry-forward-panel__link">
         <SvComponent
-          :name="'svc-action-button'"
+          :is="'svc-action-button'"
           :text="model.actionText"
           :click="model.onClick.bind(model)"
         >

@@ -8,14 +8,14 @@
           :class="model.getChoiceCss()"
         >
           <SvComponent
-            :name="getItemValueComponentName(item)"
+            :is="getItemValueComponentName(item)"
             v-bind="getItemValueComponentData(item)"
           >
           </SvComponent>
         </div>
       </div>
       <SvComponent
-        :name="'svc-action-button'"
+        :is="'svc-action-button'"
         v-if="model.needToCollapse"
         :text="model.getButtonText()"
         :click="model.switchCollapse.bind(model)"

@@ -3,10 +3,7 @@
     class="spg-container"
     :class="{ 'spg-container_search': model.searchEnabled }"
   >
-    <SvComponent
-      :name="'svc-search'"
-      :model="model.searchManager"
-    ></SvComponent>
+    <SvComponent :is="'svc-search'" :model="model.searchManager"></SvComponent>
     <SurveyComponent
       v-if="!!model.survey"
       :survey="model.survey"

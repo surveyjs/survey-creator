@@ -30,7 +30,7 @@
         tabindex="-1"
       >
         <SvComponent
-          :name="'sv-svg-icon'"
+          :is="'sv-svg-icon'"
           :iconName="question.cssClasses.decreaseButtonIcon"
           :size="'auto'"
         ></SvComponent>
@@ -46,7 +46,7 @@
         tabindex="-1"
       >
         <SvComponent
-          :name="'sv-svg-icon'"
+          :is="'sv-svg-icon'"
           :iconName="question.cssClasses.increaseButtonIcon"
           :size="'auto'"
         ></SvComponent>

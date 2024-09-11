@@ -1,7 +1,7 @@
 <template>
   <div class="svc-flex-column">
     <SvComponent
-      :name="'svc-adaptive-toolbox'"
+      :is="'svc-adaptive-toolbox'"
       v-if="model.isToolboxVisible"
       :creator="model.creator"
     />
@@ -21,7 +21,7 @@
           class="svc-designer-header"
         >
           <SvComponent
-            :name="'survey-header'"
+            :is="'survey-header'"
             :survey="model.creator.survey"
           ></SvComponent>
         </div>
@@ -37,7 +37,7 @@
             data-sv-drop-target-survey-element="newGhostPage"
           >
             <SvComponent
-              :name="'svc-page'"
+              :is="'svc-page'"
               :survey="model.creator.survey"
               :creator="model.creator"
               :page="model.newPage"
@@ -58,10 +58,7 @@
             v-if="model.creator.allowEditSurveyTitle"
             class="svc-designer-header"
           >
-            <SvComponent
-              :name="'survey-header'"
-              :survey="model.creator.survey"
-            />
+            <SvComponent :is="'survey-header'" :survey="model.creator.survey" />
           </div>
           <!--
           <SvComponent
@@ -81,7 +78,7 @@
               :data-sv-drop-target-page="page.name"
             >
               <SvComponent
-                :name="'svc-page'"
+                :is="'svc-page'"
                 :survey="model.creator.survey"
                 :creator="model.creator"
                 :page="page"
@@ -98,7 +95,7 @@
             :data-sv-drop-target-page="model.pagesController.page2Display.name"
           >
             <SvComponent
-              :name="'svc-page'"
+              :is="'svc-page'"
               :page="model.pagesController.page2Display"
               :creator="model.creator"
             />
@@ -116,7 +113,7 @@
           class="svc-tab-designer__page-navigator"
         >
           <SvComponent
-            :name="'svc-page-navigator'"
+            :is="'svc-page-navigator'"
             :pagesController="model.pagesController"
             :pageEditMode="model.creator.pageEditMode"
           />

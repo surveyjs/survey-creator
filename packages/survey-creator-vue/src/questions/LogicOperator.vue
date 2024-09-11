@@ -17,7 +17,7 @@
       >
         <div :class="question.cssClasses.controlValue">
           <SvComponent
-            :name="'survey-string'"
+            :is="'survey-string'"
             v-if="question.selectedItemLocText"
             :locString="question.selectedItemLocText"
           ></SvComponent>
@@ -30,7 +30,7 @@
           v-show="!question.isEmpty()"
         >
           <SvComponent
-            :name="'sv-svg-icon'"
+            :is="'sv-svg-icon'"
             :class="question.cssClasses.cleanButtonSvg"
             :iconName="question.cssClasses.cleanButtonIconId"
             :size="'auto'"
@@ -38,10 +38,7 @@
           ></SvComponent>
         </div>
       </div>
-      <SvComponent
-        :name="'sv-popup'"
-        :model="question.popupModel"
-      ></SvComponent>
+      <SvComponent :is="'sv-popup'" :model="question.popupModel"></SvComponent>
     </template>
     <div
       disabled
@@ -50,7 +47,7 @@
       :id="question.inputId"
     >
       <SvComponent
-        :name="'survey-string'"
+        :is="'survey-string'"
         v-if="question.selectedItemLocText"
         :locString="question.selectedItemLocText"
       ></SvComponent>

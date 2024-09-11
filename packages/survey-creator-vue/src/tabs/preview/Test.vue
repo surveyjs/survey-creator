@@ -7,12 +7,12 @@
   >
     <div class="svc-plugin-tab__content" @scroll="model.onScroll()">
       <SvComponent
-        :name="'survey-simulator'"
+        :is="'survey-simulator'"
         :model="model.simulator"
       ></SvComponent>
       <template v-if="model.showResults">
         <SvComponent
-          :name="'survey-results'"
+          :is="'survey-results'"
           :survey="model.survey"
         ></SvComponent>
       </template>
@@ -21,7 +21,7 @@
       v-if="model.isPageToolbarVisible"
       class="svc-plugin-tab__content-actions svc-test-tab__content-actions"
     >
-      <SvComponent :name="'sv-action-bar'" :model="model.pages"></SvComponent>
+      <SvComponent :is="'sv-action-bar'" :model="model.pages"></SvComponent>
     </div>
   </div>
 </template>

@@ -2,7 +2,7 @@
   <div class="svc-tabbed-menu" ref="container">
     <template v-for="action in model.renderedActions" :key="action.id">
       <SvComponent
-        :name="'svc-tabbed-menu-item-wrapper'"
+        :is="'svc-tabbed-menu-item-wrapper'"
         :item="action"
       ></SvComponent>
     </template>

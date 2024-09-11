@@ -25,7 +25,7 @@
         v-on:pointerdown="(e) => model.onPointerDown(e)"
       >
         <SvComponent
-          :name="'sv-svg-icon'"
+          :is="'sv-svg-icon'"
           class="svc-question__drag-element"
           v-bind="{
             css: 'svc-question__drag-element',
@@ -35,7 +35,7 @@
         ></SvComponent>
         <div class="svc-question__top-actions">
           <SvComponent
-            :name="'sv-action-bar'"
+            :is="'sv-action-bar'"
             :model="model.topActionContainer"
             :handleClick="false"
           ></SvComponent>
@@ -43,7 +43,7 @@
       </div>
 
       <SvComponent
-        :name="'sv-template-renderer'"
+        :is="'sv-template-renderer'"
         :componentName="componentName"
         :componentData="componentData"
       ></SvComponent>
@@ -59,7 +59,7 @@
       </div>
       <SvComponent
         v-if="model.isEmptyElement && showPlaceholderComponent"
-        :name="placeholderComponent"
+        :is="placeholderComponent"
         v-bind="placeholderComponentData"
       ></SvComponent>
       <!-- ko if: koIsEmptyElement() && !!$data.placeholderComponentData -->
@@ -75,12 +75,12 @@
       <!-- /ko -->
       <SvComponent
         v-if="adornerComponent"
-        :name="adornerComponent"
+        :is="adornerComponent"
         :model="model"
         :element="element"
       />
       <SvComponent
-        :name="'svc-question-banner'"
+        :is="'svc-question-banner'"
         v-if="model.isBannerShowing"
         :model="questionBannerParams"
       ></SvComponent>
@@ -94,7 +94,7 @@
         "
       >
         <SvComponent
-          :name="'sv-action-bar'"
+          :is="'sv-action-bar'"
           :model="model.actionContainer"
           :handleClick="false"
         ></SvComponent>

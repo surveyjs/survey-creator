@@ -2,7 +2,7 @@
   <div :class="model.cssClasses.root">
     <template v-for="(item, index) in model.renderedActions" :key="index">
       <SvComponent
-        :name="'svc-toolbox-tool'"
+        :is="'svc-toolbox-tool'"
         :creator="toolbox.creator"
         :item="item"
         :parentModel="toolbox"

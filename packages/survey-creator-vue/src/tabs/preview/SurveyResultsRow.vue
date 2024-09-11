@@ -11,13 +11,13 @@
         :style="{ left: model.markerMargin }"
       >
         <SvComponent
-          :name="'sv-svg-icon'"
+          :is="'sv-svg-icon'"
           :iconName="'icon-expand_16x16'"
           :size="16"
         ></SvComponent>
       </span>
       <SvComponent
-        :name="'survey-string'"
+        :is="'survey-string'"
         v-if="model.question"
         :locString="model.question.locTitle"
       ></SvComponent>
@@ -34,7 +34,7 @@
   </tr>
   <template v-if="model.isNode && !model.collapsed">
     <SvComponent
-      :name="'survey-results-table-row'"
+      :is="'survey-results-table-row'"
       v-for="(row, index) in model.data"
       :model="row"
       :key="index + 1"

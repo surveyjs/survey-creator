@@ -26,20 +26,20 @@
         @pointerdown="adorner.onPointerDown($event)"
       >
         <SvComponent
-          :name="'sv-svg-icon'"
+          :is="'sv-svg-icon'"
           class="svc-question__drag-element"
           :iconName="'icon-drag-area-indicator_24x16'"
           :size="24"
         ></SvComponent>
         <div class="svc-question__top-actions">
           <SvComponent
-            :name="'sv-action-bar'"
+            :is="'sv-action-bar'"
             :model="adorner.topActionContainer"
             :handleClick="false"
           ></SvComponent>
         </div>
       </div>
-      <SvComponent :name="componentName" v-bind="componentData"></SvComponent>
+      <SvComponent :is="componentName" v-bind="componentData"></SvComponent>
       <div
         v-if="adorner.isEmptyElement"
         class="svc-panel__placeholder_frame-wrapper"
@@ -55,7 +55,7 @@
             @click="addNewQuestion"
           >
             <SvComponent
-              :name="'sv-svg-icon'"
+              :is="'sv-svg-icon'"
               class="svc-panel__add-new-question-icon"
               :iconName="'icon-add_24x24'"
               :size="24"
@@ -72,7 +72,7 @@
       >
         <div class="svc-panel__question-type-selector-popup">
           <SvComponent
-            :name="'sv-popup'"
+            :is="'sv-popup'"
             :model="adorner.questionTypeSelectorModel.popupModel"
           ></SvComponent>
         </div>
@@ -83,7 +83,7 @@
             @click="addNewQuestion"
           >
             <SvComponent
-              :name="'sv-svg-icon'"
+              :is="'sv-svg-icon'"
               class="svc-panel__add-new-question-icon"
               :iconName="'icon-add_24x24'"
               :size="24"
@@ -100,7 +100,7 @@
             class="svc-panel__question-type-selector"
           >
             <SvComponent
-              :name="'sv-svg-icon'"
+              :is="'sv-svg-icon'"
               class="svc-panel__question-type-selector-icon"
               :iconName="adorner.questionTypeSelectorModel.iconName"
               :size="24"
@@ -115,7 +115,7 @@
         @focusin="adorner.select(adorner, $event)"
       >
         <SvComponent
-          :name="'sv-action-bar'"
+          :is="'sv-action-bar'"
           :model="adorner.actionContainer"
           :handleClick="false"
         ></SvComponent>

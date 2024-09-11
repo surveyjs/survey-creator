@@ -1,7 +1,7 @@
 <template>
   <div class="svc-question__adorner">
     <div class="svc-question__content svc-question__content--in-popup">
-      <SvComponent :name="componentName" v-bind="componentData"></SvComponent>
+      <SvComponent :is="componentName" v-bind="componentData"></SvComponent>
     </div>
   </div>
 </template>

@@ -8,16 +8,16 @@
       :class="{ 'svc-page-navigator__selector--opened': model.isPopupOpened }"
     >
       <SvComponent
-        :name="'sv-svg-icon'"
+        :is="'sv-svg-icon'"
         class="svc-page-navigator__navigator-icon"
         :iconName="model.icon"
         :size="24"
       ></SvComponent>
-      <SvComponent :name="'sv-popup'" :model="model.popupModel"></SvComponent>
+      <SvComponent :is="'sv-popup'" :model="model.popupModel"></SvComponent>
     </div>
     <div>
       <SvComponent
-        :name="'svc-page-navigator-item'"
+        :is="'svc-page-navigator-item'"
         v-for="(item, index) in model.visibleItems"
         :key="index"
         :model="item"

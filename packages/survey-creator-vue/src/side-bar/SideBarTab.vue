@@ -1,7 +1,7 @@
 <template>
   <SvComponent
     v-if="model.visible"
-    :name="model.componentName"
+    :is="model.componentName"
     :model="model.model"
   ></SvComponent>
 </template>

@@ -1,6 +1,6 @@
 <template>
   <SvComponent
-    :name="'sv-svg-icon'"
+    :is="'sv-svg-icon'"
     :iconName="item.iconName"
     :size="item.iconSize"
     :class="'svc-json-error__icon'"
@@ -8,7 +8,7 @@
   <div class="svc-json-error__container">
     <div class="svc-json-error__title">
       <SvComponent
-        :name="'survey-string'"
+        :is="'survey-string'"
         :locString="item.locTitle"
       ></SvComponent>
     </div>
@@ -22,7 +22,7 @@
       class="svc-json-error__fix-button"
     >
       <SvComponent
-        :name="'sv-svg-icon'"
+        :is="'sv-svg-icon'"
         :iconName="item.data.fixButtonIcon"
         :size="'auto'"
       ></SvComponent>

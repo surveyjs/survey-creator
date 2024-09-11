@@ -41,7 +41,7 @@
         @click="question.doClean"
       >
         <SvComponent
-          :name="'sv-svg-icon'"
+          :is="'sv-svg-icon'"
           :iconName="question.cssClasses.clearButtonIcon"
           :size="'auto'"
           :title="question.clearButtonCaption"
@@ -56,7 +56,7 @@
         v-key2click
       >
         <SvComponent
-          :name="'sv-svg-icon'"
+          :is="'sv-svg-icon'"
           :iconName="question.cssClasses.chooseButtonIcon"
           :size="'auto'"
           :title="question.chooseButtonCaption"

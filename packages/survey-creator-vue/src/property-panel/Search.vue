@@ -2,7 +2,7 @@
   <div v-if="model.isVisible" class="spg-search-editor_container">
     <div class="spg-search-editor_search-icon">
       <SvComponent
-        :name="'sv-svg-icon'"
+        :is="'sv-svg-icon'"
         :iconName="'icon-search'"
         :size="'auto'"
       ></SvComponent>
@@ -19,7 +19,7 @@
         {{ model.matchCounterText }}
       </div>
       <SvComponent
-        :name="'sv-action-bar'"
+        :is="'sv-action-bar'"
         :model="model.searchActionBar"
       ></SvComponent>
     </div>

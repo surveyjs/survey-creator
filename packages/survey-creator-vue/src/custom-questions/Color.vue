@@ -2,7 +2,7 @@
   <div :class="question.cssClasses.root" @keydown="question.onKeyDown">
     <label :class="question.getSwatchCss()" :style="question.getSwatchStyle()">
       <SvComponent
-        :name="'sv-svg-icon'"
+        :is="'sv-svg-icon'"
         :iconName="question.cssClasses.swatchIcon"
         :size="'auto'"
       ></SvComponent>
@@ -33,11 +33,11 @@
     />
     <template v-if="question.showDropdownAction">
       <SvComponent
-        :name="'sv-action-bar-item'"
+        :is="'sv-action-bar-item'"
         :item="question.dropdownAction"
       ></SvComponent>
       <SvComponent
-        :name="'sv-popup'"
+        :is="'sv-popup'"
         :model="question.dropdownAction.popupModel"
       ></SvComponent>
     </template>

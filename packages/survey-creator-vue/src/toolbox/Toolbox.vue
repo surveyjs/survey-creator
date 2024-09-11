@@ -5,7 +5,7 @@
         v-if="!(toolbox.categories.length == 1 || !toolbox.showCategoryTitles)"
       >
         <SvComponent
-          :name="'svc-toolbox-category'"
+          :is="'svc-toolbox-category'"
           v-for="(category, index) in toolbox.categories"
           :category="category"
           :key="index"
@@ -18,7 +18,7 @@
       >
         <div class="svc-toolbox__category">
           <SvComponent
-            :name="'svc-toolbox-tool'"
+            :is="'svc-toolbox-tool'"
             v-for="(item, index) in toolbox.visibleActions"
             :creator="model"
             :key="index"

@@ -3,7 +3,7 @@
     <span class="svc-string-editor__content">
       <div class="svc-string-editor__border">
         <SvComponent
-          :name="'sv-svg-icon'"
+          :is="'sv-svg-icon'"
           class="svc-string-editor__button svc-string-editor__button--edit"
           @click="edit"
           :iconName="'icon-edit'"
@@ -50,7 +50,7 @@
           ref="root"
         ></span>
         <SvComponent
-          :name="'sv-character-counter'"
+          :is="'sv-character-counter'"
           v-if="showCharacterCounter"
           :counter="characterCounter"
           :remainingCharacterCounter="getCharacterCounterClass"

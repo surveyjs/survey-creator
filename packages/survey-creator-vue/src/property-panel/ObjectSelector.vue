@@ -1,6 +1,6 @@
 <template>
   <template v-if="model.isVisible">
-    <SvComponent :name="'sv-list'" :model="model.list"></SvComponent>
+    <SvComponent :is="'sv-list'" :model="model.list"></SvComponent>
   </template>
 </template>
 <script lang="ts" setup>

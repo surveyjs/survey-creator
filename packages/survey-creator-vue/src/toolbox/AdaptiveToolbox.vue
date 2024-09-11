@@ -12,7 +12,7 @@
         <div v-if="toolbox.showSearch" class="svc-toolbox__search-container">
           <template v-if="toolbox.isCompactRendered">
             <SvComponent
-              :name="'svc-toolbox-tool'"
+              :is="'svc-toolbox-tool'"
               :creator="creator"
               key="searchitem"
               :item="toolbox.searchItem"
@@ -24,7 +24,7 @@
             ></div>
           </template>
           <SvComponent
-            :name="'svc-search'"
+            :is="'svc-search'"
             :model="toolbox.searchManager"
           ></SvComponent>
         </div>
@@ -34,7 +34,7 @@
         <div class="svc-toolbox__container">
           <template v-if="!toolbox.showInSingleCategory">
             <SvComponent
-              :name="'svc-toolbox-category'"
+              :is="'svc-toolbox-category'"
               v-for="(category, index) in toolbox.categories"
               :key="index"
               :category="category"
@@ -45,7 +45,7 @@
             <div class="svc-toolbox__category">
               <template v-for="(item, index) in renderedActions" :key="index">
                 <SvComponent
-                  :name="'svc-toolbox-tool'"
+                  :is="'svc-toolbox-tool'"
                   :creator="creator"
                   :item="item"
                   :parentModel="toolbox"

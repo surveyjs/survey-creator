@@ -18,7 +18,7 @@
         :aria-label="undefined"
       >
         <SvComponent
-          :name="'sv-svg-icon'"
+          :is="'sv-svg-icon'"
           :iconName="'icon-file'"
           :size="24"
           @click="model.chooseFile(model)"
@@ -31,7 +31,7 @@
     v-if="model.isUploading && !model.isEmptyElement"
   >
     <div class="svc-image-question__loading">
-      <SvComponent :name="'sv-loading-indicator'"></SvComponent>
+      <SvComponent :is="'sv-loading-indicator'"></SvComponent>
     </div>
   </div>
 </template>

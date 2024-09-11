@@ -18,7 +18,7 @@
         class="svc-item-value-controls__button svc-item-value-controls__drag"
       >
         <SvComponent
-          :name="'sv-svg-icon'"
+          :is="'sv-svg-icon'"
           class="svc-item-value-controls__drag-icon"
           :iconName="'icon-drag-area-indicator'"
           :size="24"
@@ -32,7 +32,7 @@
         @click="adorner.add(adorner)"
         :aria-label="undefined"
         ><SvComponent
-          :name="'sv-svg-icon'"
+          :is="'sv-svg-icon'"
           :iconName="'icon-add_16x16'"
           :size="16"
           :title="undefined"
@@ -46,7 +46,7 @@
         @blur="adorner.onFocusOut($event)"
         :aria-label="undefined"
         ><SvComponent
-          :name="'sv-svg-icon'"
+          :is="'sv-svg-icon'"
           :iconName="'icon-remove_16x16'"
           :size="16"
           :title="undefined"
@@ -54,7 +54,7 @@
       ></span>
     </div>
     <div class="svc-item-value__item" @click="adorner.select(adorner, $event)">
-      <SvComponent :name="componentName" v-bind="componentData"></SvComponent>
+      <SvComponent :is="componentName" v-bind="componentData"></SvComponent>
     </div>
   </div>
 </template>

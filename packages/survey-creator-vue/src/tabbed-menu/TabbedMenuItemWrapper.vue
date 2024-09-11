@@ -5,7 +5,7 @@
   >
     <div class="sv-action__content">
       <SvComponent
-        :name="item.component || 'svc-tabbed-menu-item'"
+        :is="item.component || 'svc-tabbed-menu-item'"
         :item="item"
       ></SvComponent>
     </div>

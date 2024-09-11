@@ -18,12 +18,12 @@
   >
     <div class="svc-page__content-actions">
       <SvComponent
-        :name="'sv-action-bar'"
+        :is="'sv-action-bar'"
         :model="model.actionContainer"
       ></SvComponent>
     </div>
     <SvComponent
-      :name="'survey-page'"
+      :is="'survey-page'"
       :survey="model.creator.survey"
       :page="model.page"
     />
@@ -33,7 +33,7 @@
       </div>
     </div>
     <SvComponent
-      :name="'sv-action-bar'"
+      :is="'sv-action-bar'"
       :model="model.footerActionsBar"
     ></SvComponent>
   </div>

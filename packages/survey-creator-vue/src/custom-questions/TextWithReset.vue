@@ -1,6 +1,6 @@
 <template>
   <div :class="question.getRootClass()">
-    <SvComponent :name="getComponentName()" :question="question"></SvComponent>
+    <SvComponent :is="getComponentName()" :question="question"></SvComponent>
     <button
       :class="question.cssClasses.resetButton"
       :disabled="question.resetValueAdorner.isDisabled"
@@ -8,7 +8,7 @@
       :title="question.resetValueAdorner.caption"
     >
       <SvComponent
-        :name="'sv-svg-icon'"
+        :is="'sv-svg-icon'"
         :iconName="question.cssClasses.resetButtonIcon"
         :size="'auto'"
       ></SvComponent>

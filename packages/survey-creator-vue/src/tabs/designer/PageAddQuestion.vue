@@ -27,7 +27,7 @@
       class="svc-page__question-type-selector"
     >
       <SvComponent
-        :name="'sv-svg-icon'"
+        :is="'sv-svg-icon'"
         class="svc-page__question-type-selector-icon"
         v-bind="{
           iconName: item.data.questionTypeSelectorModel.iconName,
@@ -36,7 +36,7 @@
         }"
       ></SvComponent>
       <SvComponent
-        :name="'sv-popup'"
+        :is="'sv-popup'"
         :model="item.data.questionTypeSelectorModel.popupModel"
       ></SvComponent>
     </button>

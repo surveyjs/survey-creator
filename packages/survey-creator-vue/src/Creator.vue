@@ -1,6 +1,6 @@
 <template>
   <template v-if="!model.isCreatorDisposed">
-    <SvComponent :name="'survey-popup-modal'"></SvComponent>
+    <SvComponent :is="'survey-popup-modal'"></SvComponent>
     <div
       class="svc-creator"
       :class="{
@@ -9,7 +9,7 @@
       ref="root"
     >
       <div>
-        <SvComponent :name="'sv-svg-bundle'"></SvComponent>
+        <SvComponent :is="'sv-svg-bundle'"></SvComponent>
       </div>
       <div
         class="svc-full-container svc-creator__area svc-flex-column"
@@ -29,7 +29,7 @@
             <div class="svc-top-bar">
               <div class="svc-tabbed-menu-wrapper" v-show="model.showTabs">
                 <SvComponent
-                  :name="'svc-tabbed-menu'"
+                  :is="'svc-tabbed-menu'"
                   :model="model.tabbedMenu"
                 ></SvComponent>
               </div>
@@ -39,7 +39,7 @@
                 :v-show="model.showToolbar"
               >
                 <SvComponent
-                  :name="'sv-action-bar'"
+                  :is="'sv-action-bar'"
                   :model="model.toolbar"
                 ></SvComponent>
               </div>
@@ -64,7 +64,7 @@
                     }"
                   >
                     <SvComponent
-                      :name="tab.componentContent"
+                      :is="tab.componentContent"
                       :model="tab.data.model"
                     ></SvComponent>
                   </div>
@@ -74,7 +74,7 @@
             <div v-if="model.isMobileView" class="svc-footer-bar">
               <div class="svc-toolbar-wrapper" :v-show="model.isMobileView">
                 <SvComponent
-                  :name="'sv-action-bar'"
+                  :is="'sv-action-bar'"
                   :model="model.footerToolbar"
                 ></SvComponent>
               </div>
@@ -85,7 +85,7 @@
             :class="{ 'sv-mobile-side-bar': model.isMobileView }"
           >
             <SvComponent
-              :name="'svc-side-bar'"
+              :is="'svc-side-bar'"
               :model="model.sidebar"
             ></SvComponent>
           </div>
@@ -96,10 +96,7 @@
             v-html="model.licenseText"
           ></span>
         </div>
-        <SvComponent
-          :name="'sv-notifier'"
-          :model="model.notifier"
-        ></SvComponent>
+        <SvComponent :is="'sv-notifier'" :model="model.notifier"></SvComponent>
       </div>
     </div>
   </template>

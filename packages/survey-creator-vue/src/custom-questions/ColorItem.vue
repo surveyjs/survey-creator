@@ -1,6 +1,6 @@
 <template>
   <span class="spg-color-editor__color-swatch" :style="getStyle()"></span>
-  <SvComponent :name="'survey-string'" :locString="item.locTitle"></SvComponent>
+  <SvComponent :is="'survey-string'" :locString="item.locTitle"></SvComponent>
 </template>
 <script setup lang="ts">
 import { SvComponent } from "survey-vue3-ui";

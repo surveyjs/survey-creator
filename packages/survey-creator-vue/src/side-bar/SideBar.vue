@@ -13,7 +13,7 @@
         <div class="svc-side-bar__container-header">
           <div class="svc-side-bar__container-actions">
             <SvComponent
-              :name="'sv-action-bar'"
+              :is="'sv-action-bar'"
               :model="model.toolbar"
             ></SvComponent>
           </div>
@@ -23,7 +23,7 @@
         </div>
         <div class="svc-side-bar__container-content">
           <template v-for="(tab, index) in model.tabs" :key="index">
-            <SvComponent :name="'svc-side-bar-tab'" :model="tab"></SvComponent>
+            <SvComponent :is="'svc-side-bar-tab'" :model="tab"></SvComponent>
           </template>
         </div>
       </div>

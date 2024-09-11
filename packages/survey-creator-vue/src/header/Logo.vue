@@ -31,7 +31,7 @@
             :aria-label="undefined"
           >
             <SvComponent
-              :name="'sv-svg-icon'"
+              :is="'sv-svg-icon'"
               :iconName="'icon-file'"
               :size="24"
             ></SvComponent>
@@ -44,17 +44,17 @@
             :aria-label="undefined"
           >
             <SvComponent
-              :name="'sv-svg-icon'"
+              :is="'sv-svg-icon'"
               :iconName="'icon-clear'"
               :size="24"
             ></SvComponent>
           </span>
         </div>
-        <SvComponent :name="'sv-logo-image'" :data="survey"></SvComponent>
+        <SvComponent :is="'sv-logo-image'" :data="survey"></SvComponent>
       </div>
     </template>
     <div class="svc-logo-image__loading" v-if="model.isUploading">
-      <SvComponent :name="'sv-loading-indicator'"></SvComponent>
+      <SvComponent :is="'sv-loading-indicator'"></SvComponent>
     </div>
   </div>
 </template>

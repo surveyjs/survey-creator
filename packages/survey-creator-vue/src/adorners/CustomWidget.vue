@@ -21,14 +21,14 @@
         @pointerdown="model.onPointerDown($event)"
       >
         <SvComponent
-          :name="'sv-svg-icon'"
+          :is="'sv-svg-icon'"
           class="svc-question__drag-element"
           :iconName="'icon-drag-area-indicator_24x16'"
           :size="24"
         ></SvComponent>
       </div>
       <div class="svc-widget__content">
-        <SvComponent :name="componentName" v-bind="componentData"></SvComponent>
+        <SvComponent :is="componentName" v-bind="componentData"></SvComponent>
       </div>
       <div v-if="model.isEmptyElement" class="svc-panel__placeholder_frame">
         <div
@@ -38,7 +38,7 @@
       </div>
       <div class="svc-question__content-actions">
         <SvComponent
-          :name="'sv-action-bar'"
+          :is="'sv-action-bar'"
           :model="model.actionContainer"
           :handleClick="false"
         ></SvComponent>
@@ -46,7 +46,7 @@
     </div>
 
     <template v-if="!model.element.isInteractiveDesignElement">
-      <SvComponent :name="componentName" v-bind="componentData"></SvComponent>
+      <SvComponent :is="componentName" v-bind="componentData"></SvComponent>
       <div v-if="model.isEmptyElement" class="svc-panel__placeholder_frame">
         <div class="svc-panel__placeholder">{{ model.placeholderText }}</div>
       </div>

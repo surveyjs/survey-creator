@@ -21,7 +21,7 @@
         v-key2click
       >
         <SvComponent
-          :name="'sv-svg-icon'"
+          :is="'sv-svg-icon'"
           :iconName="'icon-edit'"
           :size="24"
         ></SvComponent>

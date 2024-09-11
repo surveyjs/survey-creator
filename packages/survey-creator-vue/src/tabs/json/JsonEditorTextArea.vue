@@ -11,7 +11,7 @@
       >
       </textarea>
       <div class="svc-json-editor-tab__errros_list" v-show="model.hasErrors">
-        <SvComponent :name="'sv-list'" :model="model.errorList"></SvComponent>
+        <SvComponent :is="'sv-list'" :model="model.errorList"></SvComponent>
       </div>
     </div>
   </div>

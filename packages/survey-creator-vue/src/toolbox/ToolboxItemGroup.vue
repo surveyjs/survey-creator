@@ -1,13 +1,13 @@
 <template>
   <SvComponent
-    :name="'svc-toolbox-item'"
+    :is="'svc-toolbox-item'"
     :viewModel="viewModel"
     :item="item"
     :creator="creator"
     :isCompact="isCompact"
   ></SvComponent>
   <SvComponent
-    :name="'sv-popup'"
+    :is="'sv-popup'"
     :model="item.popupModel"
     :getArea="item.getArea"
   ></SvComponent>
