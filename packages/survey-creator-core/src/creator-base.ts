@@ -190,6 +190,23 @@ export class SurveyCreatorModel extends Base
    * Default value: `true`
    */
   @property({ defaultValue: true }) previewShowResults: boolean;
+
+  private _showOneCategoryInPropertyGrid: boolean;
+  get showOneCategoryInPropertyGrid(): boolean {
+    return this._showOneCategoryInPropertyGrid;
+  }
+  set showOneCategoryInPropertyGrid(newValue: boolean) {
+    this._showOneCategoryInPropertyGrid = newValue;
+    const designerPlugin = this.getPlugin("designer");
+    if (designerPlugin) {
+      designerPlugin.showOneCategoryInPropertyGrid = newValue;
+    }
+    const themePlugin = this.getPlugin("theme");
+    if (themePlugin) {
+      themePlugin.showOneCategoryInPropertyGrid = newValue;
+    }
+  }
+
   get allowEditSurveyTitle(): boolean {
     return this.getPropertyValue("allowEditSurveyTitle", true);
   }
@@ -2769,9 +2786,9 @@ export class SurveyCreatorModel extends Base
 
   //#region Obsolete designerPropertyGrid
   protected get designerPropertyGrid(): PropertyGridModel {
-    const propertyGridTab = this.sidebar.getTabById(this.sidebar.activeTab);
+    const propertyGridTab = this.sidebar.getPageById(this.sidebar.activePage);
     if (!propertyGridTab) return null;
-    return propertyGridTab.model ? (propertyGridTab.model.propertyGridModel as any as PropertyGridModel) : null;
+    return propertyGridTab.componentData ? (propertyGridTab.componentData.propertyGridModel as any as PropertyGridModel) : null;
   }
   public get propertyGrid(): SurveyModel {
     return this.designerPropertyGrid.survey;

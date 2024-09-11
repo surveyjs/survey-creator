@@ -6,11 +6,17 @@ $side-bar-leave-duration: var(--svc-side-bar-leave-duration, 500ms);
 $cubic-ease-out: cubic-bezier(0.33, 1, 0.68, 1);
 $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
 .svc-side-bar__container {
-  display: block;
+  flex-direction: column;
+  display: flex;
   position: relative;
   font-family: $font-family;
   min-width: 370px;
   width: 450px;
+  height: 100%;
+  // border-inline-start: 1px solid var(--ctr-property-grid-border-color, $border);
+}
+
+.svc-side-bar__wrapper {
   height: 100%;
 }
 @keyframes sideBarMoveIn {
@@ -190,11 +196,12 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
   }
 }
 
-.svc-flex-column.svc-side-bar__wrapper {
+.svc-flex-row.svc-side-bar__wrapper {
   width: auto;
-  border-left: 1px solid var(--ctr-property-grid-border-color, $border);
   height: 100%;
   background-color: var(--ctr-property-grid-form-background-color, $background-dim);
+  border-inline-start: 1px solid var(--ctr-property-grid-border-color, $border);
+  // border-inline-start: 1px solid transparent;
 }
 
 .svc-side-bar {
@@ -221,7 +228,7 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
     z-index: 1000;
     position: absolute;
     right: 0;
-    display: inline-block;
+    display: flex;
     height: 100%;
     max-width: 100%;
   }
@@ -274,6 +281,7 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
 
   .svc-side-bar__container {
     width: 100%;
+    min-width: auto;
   }
 }
 

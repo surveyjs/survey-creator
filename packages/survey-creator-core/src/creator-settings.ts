@@ -195,6 +195,7 @@ export interface ICreatorPlugin {
   dispose?: () => void;
   onDesignerSurveyPropertyChanged?: (obj: Base, propName: string) => void;
   model: Base;
+  showOneCategoryInPropertyGrid?: boolean;
 }
 
 export interface ISurveyCreatorOptions {
@@ -215,6 +216,7 @@ export interface ISurveyCreatorOptions {
   inplaceEditForValues: boolean;
   rootElement?: HTMLElement;
   previewShowResults: boolean;
+  showOneCategoryInPropertyGrid: boolean;
   getObjectDisplayName(obj: Base, area: string, reason: string, displayName: string): string;
   getElementAddornerCssCallback(obj: Base, className: string): string;
   onCanShowPropertyCallback(
@@ -356,6 +358,7 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   machineTranslationValue: boolean = false;
   inplaceEditForValues: boolean = false;
   maxNestedPanels: number = -1;
+  showOneCategoryInPropertyGrid: boolean;
 
   getObjectDisplayName(obj: Base, area: string, reason: string, displayName: string): string {
     return displayName;
