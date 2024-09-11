@@ -1,6 +1,6 @@
 <template>
   <div class="svc-side-bar__container-header svc-sidebar__header-container">
-    <div class="svc-side-bar__container-title">{{model.caption}}</div>
+    <div class="svc-side-bar__container-title">{{ model.caption }}</div>
   </div>
 </template>
 

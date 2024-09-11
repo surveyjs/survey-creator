@@ -14,11 +14,11 @@
         v-show="model.renderedIsVisible"
         ref="root"
       >
-        <component
+        <SvComponent
           v-if="model.headerComponentName"
           :is="model.headerComponentName"
           :model="model.headerComponentData"
-        ></component>
+        ></SvComponent>
         <div v-else class="svc-side-bar__container-header">
           <div class="svc-side-bar__container-actions">
             <SvComponent

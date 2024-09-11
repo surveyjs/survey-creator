@@ -1,22 +1,24 @@
 <template>
   <div :key="errorKey">
-    <sv-svg-icon
+    <SvComponent
+      :is="'sv-svg-icon'"
       :class="cssClasses.error.icon"
       :iconName="'icon-alert_24x24'"
       :size="24"
-    ></sv-svg-icon>
+    ></SvComponent>
     <span
       :class="
         cssClasses ? cssClasses.error.item || undefined : 'panel-error-item'
       "
     >
-      <survey-string :locString="error.locText" />
+      <SvComponent :is="'survey-string'" :locString="error.locText" />
     </span>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { SurveyError } from "survey-core";
+import { SvComponent } from "survey-vue3-ui";
 defineProps<{
   errorKey: string;
   error: SurveyError;
