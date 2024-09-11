@@ -19,7 +19,8 @@ import {
   PopupBaseViewModel,
   surveyLocalization,
   QuestionTextBase,
-  IDialogOptions
+  IDialogOptions,
+  IAction
 } from "survey-core";
 import { editorLocalization, getLocString } from "../editorLocalization";
 import { EditableObject } from "../editable-object";
@@ -419,7 +420,7 @@ export class PropertyGridTitleActionsCreator {
     property: JsonObjectProperty,
     question: Question,
     enabled: boolean
-  ): any {
+  ): IAction {
     var setupAction = {
       id: "property-grid-setup",
       iconName: property.isArray ? "icon-fast-entry" : "icon-wizard",
@@ -432,7 +433,7 @@ export class PropertyGridTitleActionsCreator {
     };
     return setupAction;
   }
-  private createPropertyHelpAction(question: Question): any {
+  private createPropertyHelpAction(question: Question): Action | null {
     if (!question.description) return null;
     const action = new Action({
       title: "",
@@ -664,11 +665,17 @@ export class PropertyJSONGenerator {
     }
     return panel;
   }
-  private updateQuestionJSONOnSameLine(json: any) {
+  private updateQuestionJSONOnSameLine(json: any): void {
     json.titleLocation = "left";
     json.minWidth = "50px";
   }
-  private createPanelJSON(category: string, title: string, isChild: boolean): any {
+  private createPanelJSON(category: string, title: string, isChild: boolean): {
+    type: "panel",
+    name: string,
+    title: string,
+    elements: Array<unknown>,
+    state?: "collapsed",
+  } {
     const res: any = {
       type: "panel",
       name: category,
