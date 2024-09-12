@@ -163,6 +163,7 @@
 		"linebreak-style": [
 			"off",
 			"windows"
-		]
+		],
+		"react/no-is-mounted": "off"
 	}
 }
