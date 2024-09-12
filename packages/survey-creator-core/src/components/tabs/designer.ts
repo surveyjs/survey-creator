@@ -94,12 +94,12 @@ export class TabDesignerViewModel extends Base {
 
     this.actionContainer.setItems([{
       id: "collapseAll",
-      tooltip: getLocString("ed.collapseAllTooltip"),
+      locTooltipName: "ed.collapseAllTooltip",
       iconName: "icon-collapseall-24x24",
       action: action
     }, {
       id: "expandAll",
-      tooltip: getLocString("ed.expandAllTooltip"),
+      locTooltipName: "ed.expandAllTooltip",
       iconName: "icon-expandall-24x24",
       action: action
     }]);
