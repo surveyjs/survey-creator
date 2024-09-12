@@ -630,7 +630,7 @@ svc-question,
       &.sd-panel__header--hidden,
       &.sd-question__header--hidden,
       &.svc-question__header--hidden {
-        display: block
+        display: block;
       }
 
       .sd-element__title,
@@ -638,21 +638,20 @@ svc-question,
 
         &.sd-element__title--hidden,
         &.svc-element__title--hidden {
+          display: block;
 
           &>.svc-string-editor,
           &>sv-ng-string>.svc-string-editor {
             display: inline-flex;
 
             &::before {
-              content: '('
+              content: "(";
             }
 
             &::after {
-              content: ')'
+              content: ")";
             }
           }
-
-          display: block;
         }
       }
     }

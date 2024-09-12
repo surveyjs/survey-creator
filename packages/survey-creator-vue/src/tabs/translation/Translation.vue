@@ -18,8 +18,7 @@
 
 <script lang="ts" setup>
 import type { Translation } from "survey-creator-core";
-import { useBase } from "survey-vue3-ui";
-
+import { useBase, SurveyComponent } from "survey-vue3-ui";
 const props = defineProps<{ model: Translation }>();
 useBase(() => props.model);
 </script>
