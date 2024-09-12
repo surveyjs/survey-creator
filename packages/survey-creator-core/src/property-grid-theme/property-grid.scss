@@ -23,9 +23,9 @@
   width: 100%;
   border-inline-end: 1px solid $border;
   box-sizing: border-box;
-  @include disableLibraryAnimations;
   /* disable library transition animations */
   --sjs-transition-duration: 0ms;
+  @include disableLibraryAnimations;
 }
 
 .spg-container {
