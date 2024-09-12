@@ -123,6 +123,8 @@ export var nlStrings = {
     toolboxNoResultsFound: "Geen resultaten gevonden",
     propertyGridFilteredTextPlaceholder: "Typ om te zoeken...",
     propertyGridNoResultsFound: "Geen resultaten gevonden",
+    propertyGridPlaceholderTitle: "Begin met het configureren van uw formulier",
+    propertyGridPlaceholderDescription: "Klik op een categoriepictogram om de enquête-instellingen te verkennen. Aanvullende instellingen worden beschikbaar zodra u een enquête-element aan het ontwerpoppervlak toevoegt.",
     correctJSON: "Corrigeer JSON.",
     surveyResults: "Enquêteresultaat: ",
     surveyResultsTable: "Als tabel",
@@ -634,6 +636,7 @@ export var nlStrings = {
     maxImageHeight: "Maximale beeldhoogte",
     minValue: "Minimale waarde",
     maxValue: "Maximale waarde",
+    caseInsensitive: "Hoofdlettergevoelig",
     minLength: "Minimale lengte",
     allowDigits: "Cijfers toestaan",
     minCount: "Minimum aantal",
@@ -1360,6 +1363,7 @@ export var nlStrings = {
       showInMultipleColumns: "Als deze optie is geselecteerd, wordt er een afzonderlijke kolom gemaakt voor elke keuzeoptie.",
       colCount: "Rangschikt keuzeopties in een lay-out met meerdere kolommen. Als deze optie op 0 staat, worden ze op één regel weergegeven. Wanneer deze is ingesteld op -1, wordt de werkelijke waarde overgenomen van de eigenschap \"Aantal geneste kolommen\" van de bovenliggende matrix."
     },
+    caseInsensitive: "Selecteer of hoofdletters en kleine letters in de reguliere expressie als gelijkwaardig moeten worden behandeld.",
     widthMode: "Kies uit: \"Statisch\" - stelt een vaste breedte in; \"Responsief\" - zorgt ervoor dat de enquête de volledige breedte van het scherm in beslag neemt; \"Auto\" - past een van de twee toe, afhankelijk van de gebruikte vraagtypen.",
     cookieName: "Cookies voorkomen dat gebruikers dezelfde enquête twee keer invullen.",
     logo: "Plak een afbeeldingslink (geen maximale grootte) of klik op het mappictogram om door een bestand vanaf uw computer te bladeren (maximaal 64 KB).",
@@ -2753,3 +2757,7 @@ editorLocalization.locales["nl"] = nlStrings;
 // progressBarLocation.topBottom: "Top and bottom" => "Boven en onder"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Rangschikt keuzeopties in een lay-out met meerdere kolommen. Als deze optie op 0 staat, worden ze op één regel weergegeven. Wanneer deze is ingesteld op -1, wordt de werkelijke waarde overgenomen van de eigenschap \"Aantal geneste kolommen\" van de bovenliggende matrix."
 // ed.translationYouTubeNotSupported: "YouTube links are not supported." => "YouTube-links worden niet ondersteund."
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "Begin met het configureren van uw formulier"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Klik op een categoriepictogram om de enquête-instellingen te verkennen. Aanvullende instellingen worden beschikbaar zodra u een enquête-element aan het ontwerpoppervlak toevoegt."
+// pe.caseInsensitive: "Case insensitive" => "Hoofdlettergevoelig"
+// pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Selecteer of hoofdletters en kleine letters in de reguliere expressie als gelijkwaardig moeten worden behandeld."

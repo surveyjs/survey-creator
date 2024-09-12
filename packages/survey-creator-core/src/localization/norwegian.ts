@@ -123,6 +123,8 @@ export var nbStrings = {
     toolboxNoResultsFound: "Fant ingen resultater",
     propertyGridFilteredTextPlaceholder: "Skriv for å søke ...",
     propertyGridNoResultsFound: "Fant ingen resultater",
+    propertyGridPlaceholderTitle: "Begynn å konfigurere skjemaet",
+    propertyGridPlaceholderDescription: "Klikk på et kategoriikon for å utforske undersøkelsesinnstillingene. Flere innstillinger blir tilgjengelige når du legger til et undersøkelseselement på designoverflaten.",
     correctJSON: "Vennligst korriger JSON.",
     surveyResults: "Skjemaresultat: ",
     surveyResultsTable: "Som tabell",
@@ -634,6 +636,7 @@ export var nbStrings = {
     maxImageHeight: "Maksimal bildehøyde",
     minValue: "Minimumsverdi",
     maxValue: "Maksimal verdi",
+    caseInsensitive: "Skiller ikke mellom store og små bokstaver",
     minLength: "Minimum lengde",
     allowDigits: "Tillat tall",
     minCount: "Minimum count",
@@ -1360,6 +1363,7 @@ export var nbStrings = {
       showInMultipleColumns: "Når dette alternativet er valgt, opprettes det én kolonne for hvert valgalternativ.",
       colCount: "Ordner valgalternativer i et oppsett med flere kolonner. Når den er satt til 0, vises alternativene på én enkelt linje. Når satt til -1, arves den faktiske verdien fra egenskapen \"Nestet kolonneantall\" for den overordnede matrisen."
     },
+    caseInsensitive: "Velg om store og små bokstaver i det regulære uttrykket må behandles som likeverdige.",
     widthMode: "Velg mellom: \"Statisk\" - setter en fast bredde; \"Responsive\" - gjør at undersøkelsen opptar hele bredden på skjermen; \"Auto\" - gjelder en av de to avhengig av spørsmålstypene som brukes.",
     cookieName: "Informasjonskapsler hindrer brukere i å fylle ut den samme undersøkelsen to ganger.",
     logo: "Lim inn en bildekobling (ingen størrelsesbegrensninger) eller klikk på mappeikonet for å bla gjennom en fil fra datamaskinen din (opptil 64KB).",
@@ -2775,3 +2779,7 @@ editorLocalization.locales["nb"] = nbStrings;
 // progressBarLocation.topBottom: "Top and bottom" => "Topp og bunn"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Ordner valgalternativer i et oppsett med flere kolonner. Når den er satt til 0, vises alternativene på én enkelt linje. Når satt til -1, arves den faktiske verdien fra egenskapen \"Nestet kolonneantall\" for den overordnede matrisen."
 // ed.translationYouTubeNotSupported: "YouTube links are not supported." => "YouTube-linker støttes ikke."
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "Begynn å konfigurere skjemaet"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Klikk på et kategoriikon for å utforske undersøkelsesinnstillingene. Flere innstillinger blir tilgjengelige når du legger til et undersøkelseselement på designoverflaten."
+// pe.caseInsensitive: "Case insensitive" => "Skiller ikke mellom store og små bokstaver"
+// pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Velg om store og små bokstaver i det regulære uttrykket må behandles som likeverdige."
