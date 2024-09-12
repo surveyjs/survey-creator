@@ -24,11 +24,18 @@ export class TabTranslationComponent extends SurveyElementBase<any, any> {
   }
   renderElementContent(): JSX.Element {
     if (this.model.isEmpty) {
-      return (
-        <div className="st-no-strings">
-          <span>{this.model.noStringsText}</span>
+      // return (
+      //   <div className="st-no-strings">
+      //     <span>{this.model.noStringsText}</span>
+      //   </div>
+      // );
+      return (<>
+        <div className="svc-designer-placeholder__image"></div >
+        <div className="svc-designer-placeholder__text">
+          <div className="svc-designer-placeholder__title">{this.model.placeholderTitleText}</div>
+          <div className="svc-designer-placeholder__description">{this.model.placeholderDescriptionText}</div>
         </div>
-      );
+      </>);
     } else {
       return (
         <div className="st-content">

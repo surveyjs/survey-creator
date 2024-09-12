@@ -156,7 +156,14 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
     </React.Fragment>);
   }
   renderPlaceHolderContent(): JSX.Element {
-    return <span className="svc-designer-placeholder-text svc-text svc-text--normal">{this.model.placeholderText}</span>;
+    // return <span className="svc-designer-placeholder-text svc-text svc-text--normal">{this.model.placeholderText}</span>;
+    return (<>
+      <div className="svc-designer-placeholder__image"></div >
+      <div className="svc-designer-placeholder__text">
+        <div className="svc-designer-placeholder__title">{this.model.placeholderTitleText}</div>
+        <div className="svc-designer-placeholder__description">{this.model.placeholderDescriptionText}</div>
+      </div>
+    </>);
   }
   renderTabContent(): JSX.Element {
     const survey: SurveyModel = this.creator.survey;

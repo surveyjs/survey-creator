@@ -117,6 +117,16 @@ export class TabDesignerViewModel extends Base {
       return getLocString("ed.surveyPlaceHolderMobile");
     return getLocString("ed.surveyPlaceHolder");
   }
+  public get placeholderTitleText(): string {
+    if (this.creator.isMobileView)
+      return getLocString("ed.surveyPlaceholderTitleMobile");
+    return getLocString("ed.surveyPlaceholderTitle");
+  }
+  public get placeholderDescriptionText(): string {
+    if (this.creator.isMobileView)
+      return getLocString("ed.surveyPlaceholderDescriptionMobile");
+    return getLocString("ed.surveyPlaceholderDescription");
+  }
   public get hasToolbar() {
     return this.creator.expandCollapseButtonVisibility != "never";
   }

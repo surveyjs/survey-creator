@@ -43,12 +43,12 @@ export class TabLogicComponent extends SurveyElementBase<any, any> {
 
   renderElement(): JSX.Element {
     var logic = this.model;
-    var rootClass = "svc-creator-tab__content";
+    var rootClass = "svc-creator-tab__content svc-logic-tab";
     var content = this.renderViewContent();
     return <div className={rootClass}>{content}</div>;
   }
   private renderViewContent(): JSX.Element {
-    const logicTabClassName = "svc-plugin-tab__content svc-logic-tab__content " + (this.model.hasItems ? "" : "svc-logic-tab__empty");
+    const logicTabClassName = "svc-plugin-tab__content svc-logic-tab svc-logic-tab__content " + (this.model.hasItems ? "" : "svc-logic-tab__empty");
     const addLogic = !this.model.readOnly ? <TabLogicAddButtonComponent button={this.model.addNewButton} /> : undefined;
     return (
       <Fragment>
@@ -56,7 +56,12 @@ export class TabLogicComponent extends SurveyElementBase<any, any> {
           <Survey model={this.model.itemsSurvey}></Survey>
           {this.model.hasItems ? null : (
             <div className="svc-logic-tab__content-empty" >
-              <span className="svc-text">{this.model.emptyTabPlaceholder}</span>
+              {/* <span className="svc-text">{this.model.emptyTabPlaceholder}</span> */}
+              <div className="svc-designer-placeholder__image"></div >
+              <div className="svc-designer-placeholder__text">
+                <div className="svc-designer-placeholder__title">{this.model.placeholderTitleText}</div>
+                <div className="svc-designer-placeholder__description">{this.model.placeholderDescriptionText}</div>
+              </div>
             </div>)}
           {addLogic}
         </div>
