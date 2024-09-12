@@ -2216,7 +2216,7 @@ test("Question adorner - no title collapsed", async (t) => {
 
 test("Page adorner - collapsed", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1600, 500);
+    await t.resizeWindow(1652, 500);
     const json = {
       elements: [
         {
@@ -2245,7 +2245,7 @@ test("Page adorner - collapsed", async (t) => {
 
 test("Question adorner - collapsed mobile", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(500, 1080);
+    await t.resizeWindow(552, 1080);
     const json = {
       elements: [
         {
