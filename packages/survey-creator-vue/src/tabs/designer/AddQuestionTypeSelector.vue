@@ -11,24 +11,29 @@
     :aria-label="questionTypeSelectorModel.title"
     class="svc-element__question-type-selector"
   >
-    <sv-svg-icon
+    <SvComponent
+      :is="'sv-svg-icon'"
       class="svc-element__question-type-selector-icon"
       v-bind="{
         iconName: questionTypeSelectorModel.iconName,
         size: 24,
         title: questionTypeSelectorModel.title,
       }"
-    ></sv-svg-icon>
-    <sv-popup v-if="renderPopup"
+    ></SvComponent>
+    <SvComponent
+      v-if="renderPopup"
+      :is="'sv-popup'"
       :model="questionTypeSelectorModel.popupModel"
-    ></sv-popup>
+    ></SvComponent>
   </button>
 </template>
 <script lang="ts" setup>
 import { computed } from "vue";
 import type { Action } from "survey-core";
 import type {} from "survey-creator-core";
+import { key2ClickDirective as vKey2click } from "survey-vue3-ui";
 import { useBase } from "survey-vue3-ui";
+import { SvComponent } from "survey-vue3-ui";
 const props = defineProps<{ questionTypeSelectorModel: any, renderPopup: any}>();
 useBase(() => props.questionTypeSelectorModel);
 </script>

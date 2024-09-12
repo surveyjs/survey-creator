@@ -15,7 +15,8 @@
     </span>
     <SvComponent
       :is="'svc-add-question-type-selector'"
-      v-if="needRenderPopup" :questionTypeSelectorModel="item.data.questionTypeSelectorModel" :renderPopup="needRenderPopup"
+      v-if="needRenderPopup" 
+      :questionTypeSelectorModel="item.data.questionTypeSelectorModel" :renderPopup="needRenderPopup"
     ></SvComponent>
   </div>
   <SvComponent
@@ -27,6 +28,8 @@
 import { computed } from "vue";
 import type { Action } from "survey-core";
 import type {} from "survey-creator-core";
+import { key2ClickDirective as vKey2click } from "survey-vue3-ui";
+import { SvComponent } from "survey-vue3-ui";
 import { useBase } from "survey-vue3-ui";
 const props = defineProps<{ item: Action, buttonClass?: string, renderPopup?: any}>();
 useBase(() => props.item.data);

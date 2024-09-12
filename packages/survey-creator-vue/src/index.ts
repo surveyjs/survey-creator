@@ -167,7 +167,7 @@ function registerComponents(
   registerComponent("svc-page", Page);
   registerComponent("svc-row", Row);
   registerComponent("svc-add-new-question-btn", AddQuestion);
-  registerComponent("svc-element__question-type-selector", AddQuestionTypeSelector);
+  registerComponent("svc-add-question-type-selector", AddQuestionTypeSelector);
   registerComponent("svc-question", QuestionAdorner);
   registerComponent("svc-rating-question", QuestionAdorner);
   registerComponent("svc-rating-question-content", RatingAdorner);
