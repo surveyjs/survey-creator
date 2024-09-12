@@ -15,8 +15,8 @@ svc-question {
   height: auto;
   width: 100%;
   display: flex;
-  flex-direction: column;
-  justify-content: stretch;
+  flex-direction: row;
+  align-items: stretch;
 
   &.svc-question__adorner--collapsed {
     height: fit-content;
