@@ -29,6 +29,10 @@ svc-tab-designer {
   min-width: calcSize(84);
 }
 
+.svc-content-wrapper {
+  width: 100%;
+  display: flex;
+}
 .svc-tab-designer {
   .svc-designer-header {
     .sd-container-modern__title {
@@ -44,7 +48,18 @@ svc-tab-designer {
     display: flex;
     &.sd-element__title--hidden,
     &.svc-element__title--hidden {
-      display: none;
+      opacity: 0;
+      transition: opacity 1s;
+      &>.svc-string-editor,
+      &>sv-ng-string>.svc-string-editor{
+        display: inline-flex;
+        &::before {
+          content: '('
+        }
+        &::after {
+          content: ')'
+        }
+      }
     }
   }
 
