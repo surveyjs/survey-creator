@@ -333,6 +333,50 @@ test("undo/redo DnD ", (): any => {
   expect(creator.survey.pages[0].elements.map(e => e.name)).toEqual(["question1", "question2"]);
   expect(creator.survey.pages[0].rows.length).toEqual(1);
 });
+test("undo/redo DnD stops transaction onDragClear", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "radiogroup",
+            "name": "question1",
+            "choices": [
+              "item1",
+              "item2",
+              "item3"
+            ]
+          },
+          {
+            "type": "radiogroup",
+            "name": "question2",
+            "startWithNewLine": false,
+            "choices": [
+              "item1",
+              "item2",
+              "item3"
+            ]
+          }
+        ]
+      }
+    ]
+  };
+
+  const q1 = creator.survey.pages[0].elements[0];
+  const q2 = creator.survey.pages[0].elements[1];
+  creator.dragDropSurveyElements.onDragStart.fire({ dropTarget: q2, draggedElement: q1 }, {});
+
+  expect(creator.undoRedoManager["transactionCounter"]).toEqual(1);
+  expect(creator.undoRedoManager["_preparingTransaction"]).toBeDefined();
+
+  creator.dragDropSurveyElements.onDragClear.fire({ dropTarget: q2, draggedElement: q1 }, {});
+
+  expect(creator.undoRedoManager["transactionCounter"]).toEqual(0);
+  expect(creator.undoRedoManager["_preparingTransaction"]).toBe(null);
+});
 test("Undo restore deleted page and question", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
