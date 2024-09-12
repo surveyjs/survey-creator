@@ -638,6 +638,7 @@ var italianTranslation = {
     maxImageHeight: "Altezza massima dell'immagine",
     minValue: "Valore minimo",
     maxValue: "Valore massimo",
+    caseInsensitive: "Senza distinzione tra maiuscole e minuscole",
     minLength: "Lunghezza minima (in caratteri)",
     allowDigits: "Ammetti le cifre",
     minCount: "Numero minimo",
@@ -1364,6 +1365,7 @@ var italianTranslation = {
       showInMultipleColumns: "Quando questa opzione è selezionata, crea una singola colonna per ogni opzione di scelta.",
       colCount: "Dispone le opzioni di scelta in un layout a più colonne. Se impostato su 0, le opzioni vengono visualizzate in una singola riga. Se impostato su -1, il valore effettivo viene ereditato dalla proprietà \"Conteggio colonne nidificate\" della matrice padre."
     },
+    caseInsensitive: "Selezionare se le lettere maiuscole e minuscole nell'espressione regolare devono essere considerate equivalenti.",
     widthMode: "Scegli tra: \"Statico\" - imposta una larghezza fissa; \"Responsive\" - fa sì che il sondaggio occupi l'intera larghezza dello schermo; \"Auto\": applica uno dei due a seconda del tipo di domanda utilizzato.",
     cookieName: "I cookie impediscono agli utenti di compilare due volte lo stesso sondaggio.",
     logo: "Incolla un link immagine (senza limiti di dimensione) o fai clic sull'icona della cartella per sfogliare un file dal tuo computer (fino a 64 KB).",
@@ -2534,6 +2536,7 @@ editorLocalization.locales["it"] = italianTranslation;
 // progressBarLocation.topBottom: "Top and bottom" => "Sopra e sotto"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Dispone le opzioni di scelta in un layout a più colonne. Se impostato su 0, le opzioni vengono visualizzate in una singola riga. Se impostato su -1, il valore effettivo viene ereditato dalla proprietà \"Conteggio colonne nidificate\" della matrice padre."
 // ed.translationYouTubeNotSupported: "YouTube links are not supported." => "I link di YouTube non sono supportati."
-
 // ed.propertyGridPlaceholderTitle: "Start configuring your form" => "Inizia a configurare il tuo modulo"
 // ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Fai clic sull'icona di una categoria per esplorare le impostazioni dell'indagine. Dopo l'aggiunta di un elemento di rilievo all'area di progettazione, saranno disponibili impostazioni aggiuntive."
+// pe.caseInsensitive: "Case insensitive" => "Senza distinzione tra maiuscole e minuscole"
+// pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Selezionare se le lettere maiuscole e minuscole nell'espressione regolare devono essere considerate equivalenti."

@@ -638,6 +638,7 @@ var polishStrings = {
     maxImageHeight: "Maksymalna wysokość obrazu",
     minValue: "Wartość minimalna",
     maxValue: "Wartość maksymalna",
+    caseInsensitive: "Bez uwzględniania wielkości liter",
     minLength: "Minimalna długość (w znakach)",
     allowDigits: "Zezwalaj na cyfry",
     minCount: "Minimalna liczba",
@@ -1364,6 +1365,7 @@ var polishStrings = {
       showInMultipleColumns: "Gdy ta opcja jest zaznaczona, tworzy osobną kolumnę dla każdej opcji wyboru.",
       colCount: "Rozmieszcza opcje wyboru w układzie wielokolumnowym. Po ustawieniu wartości 0 opcje są wyświetlane w jednym wierszu. Po ustawieniu wartości -1 rzeczywista wartość jest dziedziczona z właściwości \"Liczba kolumn zagnieżdżonych\" macierzy nadrzędnej."
     },
+    caseInsensitive: "Wybierz, czy wielkie i małe litery w wyrażeniu regularnym mają być traktowane jako równoważne.",
     widthMode: "Do wyboru: \"Statyczny\" - ustawia stałą szerokość; \"Responsywny\" - sprawia, że ankieta zajmuje całą szerokość ekranu; \"Auto\" – stosuje jedną z tych dwóch opcji w zależności od użytych typów pytań.",
     cookieName: "Pliki cookie uniemożliwiają użytkownikom dwukrotne wypełnienie tej samej ankiety.",
     logo: "Wklej link do obrazu (bez ograniczeń rozmiaru) lub kliknij ikonę folderu, aby przeglądać plik z komputera (do 64 KB).",
@@ -3043,6 +3045,7 @@ editorLocalization.locales["pl"] = polishStrings;
 // progressBarLocation.topBottom: "Top and bottom" => "Góra i dół"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Rozmieszcza opcje wyboru w układzie wielokolumnowym. Po ustawieniu wartości 0 opcje są wyświetlane w jednym wierszu. Po ustawieniu wartości -1 rzeczywista wartość jest dziedziczona z właściwości \"Liczba kolumn zagnieżdżonych\" macierzy nadrzędnej."
 // ed.translationYouTubeNotSupported: "YouTube links are not supported." => "Linki do YouTube nie są obsługiwane."
-
 // ed.propertyGridPlaceholderTitle: "Start configuring your form" => "Rozpocznij konfigurowanie formularza"
 // ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Kliknij dowolną ikonę kategorii, aby zapoznać się z ustawieniami ankiety. Dodatkowe ustawienia staną się dostępne po dodaniu elementu ankiety do powierzchni projektowej."
+// pe.caseInsensitive: "Case insensitive" => "Bez uwzględniania wielkości liter"
+// pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Wybierz, czy wielkie i małe litery w wyrażeniu regularnym mają być traktowane jako równoważne."
