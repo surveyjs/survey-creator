@@ -17,6 +17,7 @@
   >
 </template>
 <script lang="ts" setup>
+import { key2ClickDirective as vKey2click } from "survey-vue3-ui";
 const props = defineProps<{
   classes?: string;
   selected?: boolean;

@@ -26,7 +26,7 @@ test("show/hidetabs", () => {
 });
 test("Update top toolbars on setting tabs", () => {
   const creator = new CreatorTester();
-  expect(creator.sidebar.getTabById("propertyGrid").visible).toBeTruthy();
+  expect(creator.sidebar.getPageById("propertyGrid").visible).toBeTruthy();
   expect(creator.toolbar.getActionById("svd-settings").visible).toBeTruthy();
   const preset = new CreatorPreset({ tabs: { items: ["preview"] } });
   preset.apply(creator);
@@ -34,18 +34,18 @@ test("Update top toolbars on setting tabs", () => {
   expect(creator.tabs[0].id).toBe("test");
   expect(creator.activeTab).toBe("test");
   expect(creator.toolbar.getActionById("svd-settings").visible).toBeFalsy();
-  expect(creator.sidebar.getTabById("propertyGrid").visible).toBeFalsy();
+  expect(creator.sidebar.getPageById("propertyGrid").visible).toBeFalsy();
 });
 test("active tab", () => {
   const creator = new CreatorTester();
   expect(creator.toolbar.getActionById("svd-settings").visible).toBeTruthy();
-  expect(creator.sidebar.getTabById("propertyGrid").visible).toBeTruthy();
+  expect(creator.sidebar.getPageById("propertyGrid").visible).toBeTruthy();
   const preset = new CreatorPreset({ tabs: { items: ["designer", "editor"], activeTab: "editor" } });
   preset.apply(creator);
   expect(creator.tabs).toHaveLength(2);
   expect(creator.activeTab).toBe("editor");
   expect(creator.toolbar.getActionById("svd-settings").visible).toBeFalsy();
-  expect(creator.sidebar.getTabById("propertyGrid").visible).toBeFalsy();
+  expect(creator.sidebar.getPageById("propertyGrid").visible).toBeFalsy();
 });
 test("incorrect active tab", () => {
   const creator = new CreatorTester();

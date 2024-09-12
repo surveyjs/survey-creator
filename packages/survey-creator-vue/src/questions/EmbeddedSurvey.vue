@@ -1,11 +1,13 @@
 <template>
-  <survey-page
+  <SvComponent
+    :is="'survey-page'"
     v-if="!!question && !!survey && survey.currentPage"
     :page="survey.currentPage"
     :survey="survey"
-  ></survey-page>
+  ></SvComponent>
 </template>
 <script lang="ts" setup>
+import { SvComponent } from "survey-vue3-ui";
 import type { QuestionEmbeddedSurveyModel } from "survey-creator-core";
 import { useQuestion } from "survey-vue3-ui";
 import { computed, ref } from "vue";

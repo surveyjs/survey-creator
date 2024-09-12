@@ -1109,7 +1109,7 @@ test("Show error on entering non-unique column value", (): any => {
   };
   const matrixQuestion = <QuestionMatrixDynamicModel>creator.survey.getAllQuestions()[0];
   creator.selectElement(matrixQuestion.columns[1]); //
-  const questionName = creator.sidebar.getTabById("propertyGrid").model.survey.getQuestionByName("name");
+  const questionName = creator.sidebar.getPageById("propertyGrid").componentData.survey.getQuestionByName("name");
   expect(questionName.value).toEqual("col2");
   questionName.value = "col1";
   expect(questionName.errors).toHaveLength(1);
@@ -2605,7 +2605,7 @@ test("Modify property editor settings on event", (): any => {
     elements: [{ type: "text", name: "q1" }]
   };
   creator.selectElement(creator.survey.getAllQuestions()[0]);
-  const placeholderQuestion = creator.sidebar.getTabById("propertyGrid").model.survey.getQuestionByName("placeholder");
+  const placeholderQuestion = creator.sidebar.getPageById("propertyGrid").componentData.survey.getQuestionByName("placeholder");
   expect(placeholderQuestion.textUpdateMode).toEqual("onTyping");
   expect(placeholderQuestion.dataList).toHaveLength(2);
 });
@@ -2621,7 +2621,7 @@ test("Modify property editor via property grid survey", (): any => {
     elements: [{ type: "text", name: "q1" }]
   };
   creator.selectElement(creator.survey.getAllQuestions()[0]);
-  const placeholderQuestion = creator.sidebar.getTabById("propertyGrid").model.survey.getQuestionByName("placeholder");
+  const placeholderQuestion = creator.sidebar.getPageById("propertyGrid").componentData.survey.getQuestionByName("placeholder");
   expect(placeholderQuestion.textUpdateMode).toEqual("onTyping");
   expect(placeholderQuestion.dataList).toHaveLength(2);
 });
@@ -2644,13 +2644,13 @@ test("Modify property editor titleActions on event", (): any => {
     elements: [{ type: "checkbox", name: "q1" }, { type: "checkbox", name: "q2" }]
   };
   creator.selectElement(creator.survey.getAllQuestions()[0]);
-  let choicesQuestion = creator.sidebar.getTabById("propertyGrid").model.survey.getQuestionByName("choices");
+  let choicesQuestion = creator.sidebar.getPageById("propertyGrid").componentData.survey.getQuestionByName("choices");
   expect(choicesQuestion).toBeTruthy();
   expect(choicesQuestion.getType()).toEqual("matrixdynamic");
   expect(choicesQuestion.getTitleActions()).toHaveLength(4);
   const question = <QuestionCheckboxModel>creator.survey.getAllQuestions()[1];
   creator.selectElement(question);
-  choicesQuestion = creator.sidebar.getTabById("propertyGrid").model.survey.getQuestionByName("choices");
+  choicesQuestion = creator.sidebar.getPageById("propertyGrid").componentData.survey.getQuestionByName("choices");
   expect(choicesQuestion.getTitleActions()).toHaveLength(5);
   expect(question.choices).toHaveLength(0);
   choicesQuestion.titleActions[4].action();
