@@ -125,6 +125,8 @@ export var czStrings = {
     toolboxNoResultsFound: "Nebyly nalezeny žádné výsledky",
     propertyGridFilteredTextPlaceholder: "Zadejte hledaný text...",
     propertyGridNoResultsFound: "Nebyly nalezeny žádné výsledky",
+    propertyGridPlaceholderTitle: "Začněte konfigurovat formulář",
+    propertyGridPlaceholderDescription: "Kliknutím na libovolnou ikonu kategorie můžete prozkoumat nastavení průzkumu. Další nastavení budou k dispozici, jakmile přidáte element survey na návrhovou plochu.",
     correctJSON: "Opravte JSON.",
     surveyResults: "Výsledek průzkumu: ",
     surveyResultsTable: "Jako tabulka",
@@ -156,6 +158,7 @@ export var czStrings = {
     translationPlaceHolder: "Překlad...",
     translationSource: "Zdroj: ",
     translationTarget: "Cíl: ",
+    translationYouTubeNotSupported: "Odkazy na YouTube nejsou podporovány.",
     themeExportButton: "Vývoz",
     themeImportButton: "Dovoz",
     surveyJsonExportButton: "Vývoz",
@@ -2346,5 +2349,7 @@ editorLocalization.locales["cs"] = czStrings;
 // progressBarLocation.bottom: "Bottom" => "Dno"
 // progressBarLocation.topBottom: "Top and bottom" => "Nahoře a dole"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Uspořádá volby voleb ve vícesloupcovém rozvržení. Když je nastavená hodnota 0, volby se zobrazí na jednom řádku. Pokud je nastavena hodnota -1, skutečná hodnota je zděděna z vlastnosti \"Počet vnořených sloupců\" nadřazené matice."
-// ed.expandAllTooltip: "Expand All" => "Rozbalit vše"
-// ed.collapseAllTooltip: "Collapse All" => "Sbalit vše"
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "Odkazy na YouTube nejsou podporovány."
+
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "Začněte konfigurovat formulář"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Kliknutím na libovolnou ikonu kategorie můžete prozkoumat nastavení průzkumu. Další nastavení budou k dispozici, jakmile přidáte element survey na návrhovou plochu."

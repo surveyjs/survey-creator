@@ -125,6 +125,8 @@ export const roStrings = {
     toolboxNoResultsFound: "Nu au fost găsite rezultate",
     propertyGridFilteredTextPlaceholder: "Tastați pentru a căuta...",
     propertyGridNoResultsFound: "Nu au fost găsite rezultate",
+    propertyGridPlaceholderTitle: "Începeți să configurați formularul",
+    propertyGridPlaceholderDescription: "Faceți clic pe orice pictogramă de categorie pentru a explora setările sondajului. Setările suplimentare vor deveni disponibile odată ce adăugați un element de chestionar la suprafața de proiectare.",
     correctJSON: "Vă rugăm să corectați JSON.",
     surveyResults: "Rezultatele chestionarului ",
     surveyResultsTable: "Ca tabel",
@@ -156,6 +158,7 @@ export const roStrings = {
     translationPlaceHolder: "Traducere...",
     translationSource: "Sursă: ",
     translationTarget: "Țintă: ",
+    translationYouTubeNotSupported: "Linkurile YouTube nu sunt acceptate.",
     themeExportButton: "Exportă",
     themeImportButton: "Importă",
     surveyJsonExportButton: "Exportă",
@@ -1705,5 +1708,7 @@ editorLocalization.locales["ro"] = roStrings;
 // progressBarLocation.bottom: "Bottom" => "Fund"
 // progressBarLocation.topBottom: "Top and bottom" => "Sus și jos"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Aranjează opțiunile de alegere într-un aspect cu mai multe coloane. Când este setat la 0, opțiunile sunt afișate într-o singură linie. Când este setată la -1, valoarea reală este moștenită de la proprietatea \"Număr de coloane imbricate\" a matricei părinte."
-// ed.expandAllTooltip: "Expand All" => "Extindeți tot"
-// ed.collapseAllTooltip: "Collapse All" => "Restrângeți tot"
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "Linkurile YouTube nu sunt acceptate."
+
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "Începeți să configurați formularul"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Faceți clic pe orice pictogramă de categorie pentru a explora setările sondajului. Setările suplimentare vor deveni disponibile odată ce adăugați un element de chestionar la suprafața de proiectare."

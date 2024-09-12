@@ -125,6 +125,8 @@ export var nbStrings = {
     toolboxNoResultsFound: "Fant ingen resultater",
     propertyGridFilteredTextPlaceholder: "Skriv for å søke ...",
     propertyGridNoResultsFound: "Fant ingen resultater",
+    propertyGridPlaceholderTitle: "Begynn å konfigurere skjemaet",
+    propertyGridPlaceholderDescription: "Klikk på et kategoriikon for å utforske undersøkelsesinnstillingene. Flere innstillinger blir tilgjengelige når du legger til et undersøkelseselement på designoverflaten.",
     correctJSON: "Vennligst korriger JSON.",
     surveyResults: "Skjemaresultat: ",
     surveyResultsTable: "Som tabell",
@@ -156,6 +158,7 @@ export var nbStrings = {
     translationPlaceHolder: "Oversettelse...",
     translationSource: "Kilde: ",
     translationTarget: "Mål: ",
+    translationYouTubeNotSupported: "YouTube-linker støttes ikke.",
     themeExportButton: "Eksport",
     themeImportButton: "Importere",
     surveyJsonExportButton: "Eksport",
@@ -2775,5 +2778,7 @@ editorLocalization.locales["nb"] = nbStrings;
 // progressBarLocation.bottom: "Bottom" => "Bunn"
 // progressBarLocation.topBottom: "Top and bottom" => "Topp og bunn"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Ordner valgalternativer i et oppsett med flere kolonner. Når den er satt til 0, vises alternativene på én enkelt linje. Når satt til -1, arves den faktiske verdien fra egenskapen \"Nestet kolonneantall\" for den overordnede matrisen."
-// ed.expandAllTooltip: "Expand All" => "Utvid alle"
-// ed.collapseAllTooltip: "Collapse All" => "Skjul alle"
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "YouTube-linker støttes ikke."
+
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "Begynn å konfigurere skjemaet"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Klikk på et kategoriikon for å utforske undersøkelsesinnstillingene. Flere innstillinger blir tilgjengelige når du legger til et undersøkelseselement på designoverflaten."

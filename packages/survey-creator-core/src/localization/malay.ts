@@ -125,6 +125,8 @@ export var msStrings = {
     toolboxNoResultsFound: "Tiada keputusan ditemui",
     propertyGridFilteredTextPlaceholder: "Taip untuk mencari...",
     propertyGridNoResultsFound: "Tiada keputusan ditemui",
+    propertyGridPlaceholderTitle: "Mula mengkonfigurasi borang anda",
+    propertyGridPlaceholderDescription: "Klik mana-mana ikon kategori untuk meneroka tetapan tinjauan. Seting tambahan akan tersedia sebaik sahaja anda menambah elemen tinjauan pada permukaan reka bentuk.",
     correctJSON: "Pilih JSON yang betul.",
     surveyResults: "Keputusan Tinjauan: ",
     surveyResultsTable: "Sebagai Jadual",
@@ -156,6 +158,7 @@ export var msStrings = {
     translationPlaceHolder: "Penterjemahan...",
     translationSource: "Sumber: ",
     translationTarget: "Sasaran: ",
+    translationYouTubeNotSupported: "Pautan YouTube tidak disokong.",
     themeExportButton: "Eksport",
     themeImportButton: "Import",
     surveyJsonExportButton: "Eksport",
@@ -2725,5 +2728,7 @@ editorLocalization.locales["ms"] = msStrings;
 // progressBarLocation.bottom: "Bottom" => "Bawah"
 // progressBarLocation.topBottom: "Top and bottom" => "Atas dan bawah"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Mengatur pilihan pilihan dalam susun atur berbilang lajur. Apabila ditetapkan kepada 0, pilihan dipaparkan dalam satu baris. Apabila ditetapkan kepada -1, nilai sebenar diwarisi daripada sifat \"Kiraan lajur bersarang\" bagi matriks induk."
-// ed.expandAllTooltip: "Expand All" => "Kembangkan Semua"
-// ed.collapseAllTooltip: "Collapse All" => "Runtuhkan Semua"
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "Pautan YouTube tidak disokong."
+
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "Mula mengkonfigurasi borang anda"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Klik mana-mana ikon kategori untuk meneroka tetapan tinjauan. Seting tambahan akan tersedia sebaik sahaja anda menambah elemen tinjauan pada permukaan reka bentuk."

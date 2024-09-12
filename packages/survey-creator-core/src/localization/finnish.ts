@@ -125,6 +125,8 @@ export var fiStrings = {
     toolboxNoResultsFound: "Tuloksia ei löytynyt",
     propertyGridFilteredTextPlaceholder: "Kirjoita etsiäksesi...",
     propertyGridNoResultsFound: "Tuloksia ei löytynyt",
+    propertyGridPlaceholderTitle: "Aloita lomakkeen määrittäminen",
+    propertyGridPlaceholderDescription: "Napsauta mitä tahansa luokkakuvaketta tutustuaksesi kyselyn asetuksiin. Lisäasetukset ovat käytettävissä, kun lisäät mittauselementin suunnittelupintaan.",
     correctJSON: "Korjaa JSON.",
     surveyResults: "Kyselyn tulos:",
     surveyResultsTable: "Taulukossa",
@@ -156,6 +158,7 @@ export var fiStrings = {
     translationPlaceHolder: "Käännös...",
     translationSource: "Lähde: ",
     translationTarget: "Kohde: ",
+    translationYouTubeNotSupported: "YouTube-linkkejä ei tueta.",
     themeExportButton: "Vienti",
     themeImportButton: "Tuoda",
     surveyJsonExportButton: "Vienti",
@@ -2772,5 +2775,7 @@ editorLocalization.locales["fi"] = fiStrings;
 // progressBarLocation.bottom: "Bottom" => "Pohja"
 // progressBarLocation.topBottom: "Top and bottom" => "Ylhäällä ja alhaalla"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Järjestää valintavaihtoehdot monisarakkeiseen asetteluun. Kun asetuksena on 0, asetukset näytetään yhdellä rivillä. Kun arvoksi on määritetty -1, todellinen arvo periytyy päämatriisin sisäkkäisten sarakkeiden määrä -ominaisuudesta."
-// ed.expandAllTooltip: "Expand All" => "Laajenna kaikki"
-// ed.collapseAllTooltip: "Collapse All" => "Kutista kaikki"
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "YouTube-linkkejä ei tueta."
+
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "Aloita lomakkeen määrittäminen"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Napsauta mitä tahansa luokkakuvaketta tutustuaksesi kyselyn asetuksiin. Lisäasetukset ovat käytettävissä, kun lisäät mittauselementin suunnittelupintaan."

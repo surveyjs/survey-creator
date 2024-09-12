@@ -125,6 +125,8 @@ export var hrStrings = {
     toolboxNoResultsFound: "Nisu pronađeni rezultati",
     propertyGridFilteredTextPlaceholder: "Upišite za pretraživanje...",
     propertyGridNoResultsFound: "Nisu pronađeni rezultati",
+    propertyGridPlaceholderTitle: "Počnite konfigurirati svoj obrazac",
+    propertyGridPlaceholderDescription: "Kliknite bilo koju ikonu kategorije da biste istražili postavke upitnika. Dodatne postavke postat će dostupne nakon što dodate element upitnika na površinu dizajna.",
     correctJSON: "Ispravite JSON.",
     surveyResults: "Rezultat ankete: ",
     surveyResultsTable: "Kao tablica",
@@ -156,6 +158,7 @@ export var hrStrings = {
     translationPlaceHolder: "Prevođenje...",
     translationSource: "Izvor: ",
     translationTarget: "Cilj: ",
+    translationYouTubeNotSupported: "YouTube veze nisu podržane.",
     themeExportButton: "Izvoz",
     themeImportButton: "Uvoz",
     surveyJsonExportButton: "Izvoz",
@@ -2766,5 +2769,7 @@ editorLocalization.locales["hr"] = hrStrings;
 // progressBarLocation.bottom: "Bottom" => "Dno"
 // progressBarLocation.topBottom: "Top and bottom" => "Vrh i dno"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Raspoređuje opcije izbora u rasporedu s više stupaca. Kada je postavljena na 0, opcije se prikazuju u jednom retku. Kada je postavljena na -1, stvarna vrijednost nasljeđuje se iz svojstva \"Broj ugniježđenih stupaca\" nadređene matrice."
-// ed.expandAllTooltip: "Expand All" => "Proširi sve"
-// ed.collapseAllTooltip: "Collapse All" => "Sažmi sve"
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "YouTube veze nisu podržane."
+
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "Počnite konfigurirati svoj obrazac"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Kliknite bilo koju ikonu kategorije da biste istražili postavke upitnika. Dodatne postavke postat će dostupne nakon što dodate element upitnika na površinu dizajna."

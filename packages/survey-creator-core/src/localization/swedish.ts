@@ -125,6 +125,8 @@ export let svStrings = {
     toolboxNoResultsFound: "Inga resultat hittades",
     propertyGridFilteredTextPlaceholder: "Skriv för att söka...",
     propertyGridNoResultsFound: "Inga resultat hittades",
+    propertyGridPlaceholderTitle: "Börja konfigurera formuläret",
+    propertyGridPlaceholderDescription: "Klicka på en kategoriikon för att utforska undersökningsinställningarna. Ytterligare inställningar blir tillgängliga när du lägger till ett undersökningselement på designytan.",
     correctJSON: "Var vänligen korrigera JSON.",
     surveyResults: "Enkät resultat: ",
     surveyResultsTable: "Som tabell",
@@ -156,6 +158,7 @@ export let svStrings = {
     translationPlaceHolder: "Översättning...",
     translationSource: "Källa: ",
     translationTarget: "Mål: ",
+    translationYouTubeNotSupported: "YouTube-länkar stöds inte.",
     themeExportButton: "Export",
     themeImportButton: "Import",
     surveyJsonExportButton: "Export",
@@ -2949,5 +2952,7 @@ editorLocalization.locales["sv"] = svStrings;
 // progressBarLocation.bottom: "Bottom" => "Botten"
 // progressBarLocation.topBottom: "Top and bottom" => "Topp och botten"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Ordnar valalternativ i en layout med flera kolumner. När värdet är 0 visas alternativen på en enda rad. När värdet är -1 ärvs det faktiska värdet från egenskapen \"Kapslad kolumnantal\" i den överordnade matrisen."
-// ed.expandAllTooltip: "Expand All" => "Expandera alla"
-// ed.collapseAllTooltip: "Collapse All" => "Komprimera alla"
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "YouTube-länkar stöds inte."
+
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "Börja konfigurera formuläret"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Klicka på en kategoriikon för att utforska undersökningsinställningarna. Ytterligare inställningar blir tillgängliga när du lägger till ett undersökningselement på designytan."

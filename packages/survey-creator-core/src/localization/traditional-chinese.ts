@@ -125,6 +125,8 @@ var traditionalChineseTranslation = {
     toolboxNoResultsFound: "未找到結果",
     propertyGridFilteredTextPlaceholder: "鍵入以搜尋...",
     propertyGridNoResultsFound: "未找到結果",
+    propertyGridPlaceholderTitle: "開始配置表單",
+    propertyGridPlaceholderDescription: "按兩下任何類別圖示以瀏覽調查設置。將測量元素添加到設計圖面后，其他設置將變為可用。",
     correctJSON: "修正 JSON",
     surveyResults: "問卷結果: ",
     surveyResultsTable: "如表",
@@ -156,6 +158,7 @@ var traditionalChineseTranslation = {
     translationPlaceHolder: "譯本。。。",
     translationSource: "源：",
     translationTarget: "目標：",
+    translationYouTubeNotSupported: "不支援YouTube連結。",
     themeExportButton: "出口",
     themeImportButton: "進口",
     surveyJsonExportButton: "出口",
@@ -3044,5 +3047,7 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // progressBarLocation.bottom: "Bottom" => "底"
 // progressBarLocation.topBottom: "Top and bottom" => "頂部和底部"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "在多列佈局中排列選項。設置為 0 時，選項將以單行顯示。當設置為 -1 時，實際值繼承自父矩陣的 “Nested column count” 屬性。"
-// ed.expandAllTooltip: "Expand All" => "全部展開"
-// ed.collapseAllTooltip: "Collapse All" => "全部摺疊"
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "不支援YouTube連結。"
+
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "開始配置表單"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "按兩下任何類別圖示以瀏覽調查設置。將測量元素添加到設計圖面后，其他設置將變為可用。"

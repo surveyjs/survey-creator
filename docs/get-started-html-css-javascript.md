@@ -15,7 +15,7 @@ This step-by-step tutorial will help you get started with the [Survey Creator](h
 
 ## Link Resources
 
-Survey Creator consists of two parts: `survey-creator-core` (platform-independent code) and `survey-creator-js` (view models). Each part includes style sheets and scripts. Insert links to these resources within the `<head>` tag on your HTML page as shown below. Survey Creator also requires [SurveyJS Form Library resources](http://localhost:62946/form-library/documentation/get-started-html-css-javascript#link-surveyjs-resources). Link them _before_ the Survey Creator resources:
+Survey Creator consists of two parts: `survey-creator-core` (platform-independent code) and `survey-creator-js` (view models). Each part includes style sheets and scripts. Insert links to these resources within the `<head>` tag on your HTML page as shown below. Survey Creator also requires [SurveyJS Form Library resources](/form-library/documentation/get-started-html-css-javascript#link-surveyjs-resources) and a script with predefined theme configurations (if you are going to use [Theme Editor](https://surveyjs.io/survey-creator/documentation/theme-editor)). Link them _before_ the Survey Creator resources:
 
 ```html
 <head>
@@ -24,6 +24,9 @@ Survey Creator consists of two parts: `survey-creator-core` (platform-independen
     <link  href="https://unpkg.com/survey-core/defaultV2.min.css" type="text/css" rel="stylesheet">
     <script src="https://unpkg.com/survey-core/survey.core.min.js"></script>
     <script src="https://unpkg.com/survey-js-ui/survey-js-ui.min.js"></script>
+
+    <!-- (Optional) Predefined theme configurations -->
+    <script src="https://unpkg.com/survey-core/themes/index.min.js"></script>
     
     <!-- Survey Creator resources -->
     <link  href="https://unpkg.com/survey-creator-core/survey-creator-core.min.css" type="text/css" rel="stylesheet">

@@ -21,7 +21,7 @@
 
       <template v-if="!adorner.isNew && !adorner.isUploading">
         <div v-if="!adorner.isNew" class="svc-image-item-value__item">
-          <component :is="componentName" v-bind="componentData"></component>
+          <SvComponent :is="componentName" v-bind="componentData"></SvComponent>
         </div>
         <span
           v-if="adorner.isDraggable && adorner.canRenderControls"
@@ -30,10 +30,11 @@
           :title="undefined"
           :aria-label="undefined"
         >
-          <sv-svg-icon
+          <SvComponent
+            :is="'sv-svg-icon'"
             :iconName="'icon-drag-area-indicator'"
             :size="24"
-          ></sv-svg-icon>
+          ></SvComponent>
         </span>
         <div
           v-if="adorner.canRenderControls"
@@ -46,12 +47,13 @@
             :title="undefined"
             :aria-label="undefined"
           >
-            <sv-svg-icon
+            <SvComponent
+              :is="'sv-svg-icon'"
               role="button"
               :iconName="'icon-file'"
               :size="24"
               :title="adorner.selectFileTitle"
-            ></sv-svg-icon>
+            ></SvComponent>
           </span>
           <span
             class="svc-context-button svc-context-button--danger"
@@ -60,12 +62,13 @@
             :title="undefined"
             :aria-label="undefined"
           >
-            <sv-svg-icon
+            <SvComponent
+              :is="'sv-svg-icon'"
               role="button"
               :iconName="'icon-delete'"
               :size="24"
               :title="adorner.removeFileTitle"
-            ></sv-svg-icon>
+            ></SvComponent>
           </span>
         </div>
       </template>
@@ -84,7 +87,7 @@
                   class="svc-image-item-value__loading"
                   v-if="adorner.isUploading"
                 >
-                  <sv-loading-indicator></sv-loading-indicator>
+                  <SvComponent :is="'sv-loading-indicator'"></SvComponent>
                 </div>
               </div>
             </label>
@@ -103,11 +106,12 @@
             :title="undefined"
             :aria-label="undefined"
           >
-            <sv-svg-icon
+            <SvComponent
+              :is="'sv-svg-icon'"
               :iconName="'icon-add-lg'"
               :size="24"
               :title="adorner.addFileTitle"
-            ></sv-svg-icon>
+            ></SvComponent>
           </span>
         </div>
       </template>
@@ -115,13 +119,15 @@
   </div>
 </template>
 <script lang="ts" setup>
+import { SvComponent } from "survey-vue3-ui";
+import { key2ClickDirective as vKey2click } from "survey-vue3-ui";
 import { useCreatorModel } from "@/creator-model";
 import type { ImageItemValue, QuestionImagePickerModel } from "survey-core";
 import {
   SurveyCreatorModel,
   ImageItemValueWrapperViewModel,
 } from "survey-creator-core";
-import { computed, onMounted, onUpdated, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 
 const props = defineProps<{
   componentName: string;

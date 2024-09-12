@@ -125,6 +125,8 @@ var italianTranslation = {
     toolboxNoResultsFound: "Nessun risultato trovato",
     propertyGridFilteredTextPlaceholder: "Digita per cercare...",
     propertyGridNoResultsFound: "Nessun risultato trovato",
+    propertyGridPlaceholderTitle: "Inizia a configurare il tuo modulo",
+    propertyGridPlaceholderDescription: "Fai clic sull'icona di una categoria per esplorare le impostazioni dell'indagine. Dopo l'aggiunta di un elemento di rilievo all'area di progettazione, saranno disponibili impostazioni aggiuntive.",
     correctJSON: "Correggi il tuo JSON",
     surveyResults: "Risultati del sondaggio: ",
     surveyResultsTable: "Come tabella",
@@ -156,6 +158,7 @@ var italianTranslation = {
     translationPlaceHolder: "Traduzione...",
     translationSource: "Fonte: ",
     translationTarget: "Bersaglio: ",
+    translationYouTubeNotSupported: "I link di YouTube non sono supportati.",
     themeExportButton: "Esportazione",
     themeImportButton: "Importazione",
     surveyJsonExportButton: "Esportazione",
@@ -2530,5 +2533,7 @@ editorLocalization.locales["it"] = italianTranslation;
 // progressBarLocation.bottom: "Bottom" => "Fondoschiena"
 // progressBarLocation.topBottom: "Top and bottom" => "Sopra e sotto"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Dispone le opzioni di scelta in un layout a più colonne. Se impostato su 0, le opzioni vengono visualizzate in una singola riga. Se impostato su -1, il valore effettivo viene ereditato dalla proprietà \"Conteggio colonne nidificate\" della matrice padre."
-// ed.expandAllTooltip: "Expand All" => "Espandi tutto"
-// ed.collapseAllTooltip: "Collapse All" => "Comprimi tutto"
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "I link di YouTube non sono supportati."
+
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "Inizia a configurare il tuo modulo"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Fai clic sull'icona di una categoria per esplorare le impostazioni dell'indagine. Dopo l'aggiunta di un elemento di rilievo all'area di progettazione, saranno disponibili impostazioni aggiuntive."

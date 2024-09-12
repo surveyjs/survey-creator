@@ -125,6 +125,8 @@ export var bgStrings = {
     toolboxNoResultsFound: "Няма намерени резултати",
     propertyGridFilteredTextPlaceholder: "Въведи за търсене...",
     propertyGridNoResultsFound: "Няма намерени резултати",
+    propertyGridPlaceholderTitle: "Започнете да конфигурирате формуляра си",
+    propertyGridPlaceholderDescription: "Щракнете върху която и да е икона на категория, за да разгледате настройките на проучването. Допълнителни настройки ще станат налични, след като добавите елемент на проучване към повърхността за проектиране.",
     correctJSON: "Моля, коригирай JSON.",
     surveyResults: "Резултати от анкетата ",
     surveyResultsTable: "Като таблица",
@@ -156,6 +158,7 @@ export var bgStrings = {
     translationPlaceHolder: "Превод...",
     translationSource: "Източник: ",
     translationTarget: "Цел: ",
+    translationYouTubeNotSupported: "Връзките в YouTube не се поддържат.",
     themeExportButton: "Износ",
     themeImportButton: "Внос",
     surveyJsonExportButton: "Износ",
@@ -2335,5 +2338,7 @@ editorLocalization.locales["bg"] = bgStrings;
 // progressBarLocation.bottom: "Bottom" => "Дъно"
 // progressBarLocation.topBottom: "Top and bottom" => "Отгоре и отдолу"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Подрежда опциите за избор в оформление с няколко колони. Когато е зададено на 0, опциите се показват на един ред. Когато е зададена на -1, действителната стойност се наследява от свойството \"Брой вложени колони\" на родителската матрица."
-// ed.expandAllTooltip: "Expand All" => "Разширете всички"
-// ed.collapseAllTooltip: "Collapse All" => "Свиване на всички"
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "Връзките в YouTube не се поддържат."
+
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "Започнете да конфигурирате формуляра си"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Щракнете върху която и да е икона на категория, за да разгледате настройките на проучването. Допълнителни настройки ще станат налични, след като добавите елемент на проучване към повърхността за проектиране."

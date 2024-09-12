@@ -125,6 +125,8 @@ export var ruStrings = {
     toolboxNoResultsFound: "Никаких результатов не найдено",
     propertyGridFilteredTextPlaceholder: "Введите для поиска...",
     propertyGridNoResultsFound: "Никаких результатов не найдено",
+    propertyGridPlaceholderTitle: "Начните настройку формы",
+    propertyGridPlaceholderDescription: "Нажмите на любой значок категории, чтобы ознакомиться с настройками опроса. Дополнительные настройки станут доступны после добавления элемента опроса в область конструктора.",
     correctJSON: "Пожалуйста, исправьте JSON.",
     surveyResults: "Результаты обследования",
     surveyResultsTable: "Как таблица",
@@ -156,6 +158,7 @@ export var ruStrings = {
     translationPlaceHolder: "Перевод...",
     translationSource: "Источник: ",
     translationTarget: "Цель: ",
+    translationYouTubeNotSupported: "Ссылки на YouTube не поддерживаются.",
     themeExportButton: "Экспорт",
     themeImportButton: "Импорт",
     surveyJsonExportButton: "Экспорт",
@@ -2832,5 +2835,7 @@ editorLocalization.locales["ru"] = ruStrings;
 // progressBarLocation.bottom: "Bottom" => "Дно"
 // progressBarLocation.topBottom: "Top and bottom" => "Верх и низ"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Упорядочивает варианты выбора в макете с несколькими столбцами. Если установлено значение 0, параметры отображаются в одну строку. При значении -1 фактическое значение наследуется от свойства \"Количество вложенных столбцов\" родительской матрицы."
-// ed.expandAllTooltip: "Expand All" => "Развернуть все"
-// ed.collapseAllTooltip: "Collapse All" => "Свернуть все"
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "Ссылки на YouTube не поддерживаются."
+
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "Начните настройку формы"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Нажмите на любой значок категории, чтобы ознакомиться с настройками опроса. Дополнительные настройки станут доступны после добавления элемента опроса в область конструктора."

@@ -575,3 +575,77 @@ test("Check question converter with single subitem (json)", (): any => {
 
   surveySettings.animationEnabled = true;
 });
+
+test("Check question converter with subitems (rating, json)", (): any => {
+  surveySettings.animationEnabled = false;
+  const creator = new CreatorTester();
+
+  // create subitems from new items (the same type, different json)
+
+  const ratingItem = creator.toolbox.getItemByName("rating");
+
+  // Remove Default Subitems
+  ratingItem.removeSubitem("labels");
+  ratingItem.removeSubitem("stars");
+  ratingItem.removeSubitem("smileys");
+
+  ratingItem.title = "Rating Scale";
+
+  ratingItem.addSubitem({
+    name: "ratingstars",
+    json: {
+      type: "rating",
+      rateType: "stars"
+    },
+    title: "Rating Stars"
+  });
+
+  ratingItem.addSubitem({
+    name: "csat", json:
+    {
+      type: "rating",
+      "rateType": "smileys",
+      "rateCount": 5,
+      "title": "How satisfied?",
+      "minRateDescription": "Very unsatisfied",
+      "maxRateDescription": "Very satisfied"
+    },
+    title: "Customer Satisfaction Score"
+  });
+
+  ratingItem.addSubitem({
+    name: "nps", json:
+    {
+      type: "rating",
+      "rateType": "labels",
+      "title": "How likely?",
+      "rateCount": 11,
+      "rateMin": 0,
+      "rateMax": 10
+    },
+    title: "Net Promoter Score"
+  });
+
+  creator.JSON = {
+    elements: [
+      { type: "rating", name: "q1" },
+    ]
+  };
+  expect(creator.survey.getQuestionByName("q1").rateCount).toBe(5);
+  getQuestionConverterList(creator, "q1").getActionById("rating").items[1].action();
+  expect(creator.survey.getQuestionByName("q1").rateCount).toBe(5);
+  expect(creator.survey.getQuestionByName("q1").minRateDescription).toBe("Very unsatisfied");
+  expect(creator.survey.getQuestionByName("q1").maxRateDescription).toBe("Very satisfied");
+  expect(creator.survey.getQuestionByName("q1").title).toBe("How satisfied?");
+  getQuestionConverterList(creator, "q1").getActionById("rating").items[2].action();
+  expect(creator.survey.getQuestionByName("q1").rateCount).toBe(11);
+  expect(creator.survey.getQuestionByName("q1").minRateDescription).toBeFalsy();
+  expect(creator.survey.getQuestionByName("q1").maxRateDescription).toBeFalsy();
+  expect(creator.survey.getQuestionByName("q1").title).toBe("How likely?");
+  getQuestionConverterList(creator, "q1").getActionById("rating").items[1].action();
+  expect(creator.survey.getQuestionByName("q1").rateCount).toBe(5);
+  expect(creator.survey.getQuestionByName("q1").minRateDescription).toBe("Very unsatisfied");
+  expect(creator.survey.getQuestionByName("q1").maxRateDescription).toBe("Very satisfied");
+  expect(creator.survey.getQuestionByName("q1").title).toBe("How satisfied?");
+  surveySettings.animationEnabled = true;
+});

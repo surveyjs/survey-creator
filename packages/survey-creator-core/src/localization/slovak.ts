@@ -125,6 +125,8 @@ export var skStrings = {
     toolboxNoResultsFound: "Nenašli sa žiadne výsledky",
     propertyGridFilteredTextPlaceholder: "Zadajte reťazec pre vyhľadávanie...",
     propertyGridNoResultsFound: "Nenašli sa žiadne výsledky",
+    propertyGridPlaceholderTitle: "Začnite konfigurovať formulár",
+    propertyGridPlaceholderDescription: "Kliknutím na ikonu ľubovoľnej kategórie preskúmate nastavenia prieskumu. Ďalšie nastavenia budú k dispozícii po pridaní prvku prieskumu na návrhovú plochu.",
     correctJSON: "Opravte JSON.",
     surveyResults: "Výsledok prieskumu: ",
     surveyResultsTable: "Ako tabuľku",
@@ -156,6 +158,7 @@ export var skStrings = {
     translationPlaceHolder: "Preklad...",
     translationSource: "Zdroj: ",
     translationTarget: "Cieľ: ",
+    translationYouTubeNotSupported: "Odkazy na YouTube nie sú podporované.",
     themeExportButton: "Vývoz",
     themeImportButton: "Import",
     surveyJsonExportButton: "Vývoz",
@@ -2725,5 +2728,7 @@ editorLocalization.locales["sk"] = skStrings;
 // progressBarLocation.bottom: "Bottom" => "Dno"
 // progressBarLocation.topBottom: "Top and bottom" => "Hore a dole"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Usporiada možnosti výberu vo viacstĺpcovom rozložení. Ak je nastavená hodnota 0, možnosti sa zobrazia v jednom riadku. Ak je nastavená na -1, skutočná hodnota sa zdedí z vlastnosti \"Počet vnorených stĺpcov\" nadradenej matice."
-// ed.expandAllTooltip: "Expand All" => "Rozbaliť všetko"
-// ed.collapseAllTooltip: "Collapse All" => "Zbaliť všetko"
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "Odkazy na YouTube nie sú podporované."
+
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "Začnite konfigurovať formulár"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Kliknutím na ikonu ľubovoľnej kategórie preskúmate nastavenia prieskumu. Ďalšie nastavenia budú k dispozícii po pridaní prvku prieskumu na návrhovú plochu."

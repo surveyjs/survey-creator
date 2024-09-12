@@ -125,6 +125,8 @@ export var turkishStrings = {
     toolboxNoResultsFound: "Sonuç bulunamadı",
     propertyGridFilteredTextPlaceholder: "Aramak için yazın...",
     propertyGridNoResultsFound: "Sonuç bulunamadı",
+    propertyGridPlaceholderTitle: "Formunuzu yapılandırmaya başlayın",
+    propertyGridPlaceholderDescription: "Anket ayarlarını keşfetmek için herhangi bir kategori simgesini tıklayın. Tasarım yüzeyine bir anket öğesi eklediğinizde ek ayarlar kullanılabilir hale gelir.",
     correctJSON: "JSON nesnesini doğrular.",
     surveyResults: "Anket Sonucu: ",
     surveyResultsTable: "Tablo olarak",
@@ -156,6 +158,7 @@ export var turkishStrings = {
     translationPlaceHolder: "Çeviri...",
     translationSource: "Kaynak: ",
     translationTarget: "Hedef: ",
+    translationYouTubeNotSupported: "YouTube bağlantıları desteklenmemektedir.",
     themeExportButton: "Ihracat",
     themeImportButton: "Ithalat",
     surveyJsonExportButton: "Ihracat",
@@ -2767,5 +2770,7 @@ editorLocalization.locales["tr"] = turkishStrings;
 // progressBarLocation.bottom: "Bottom" => "Dip"
 // progressBarLocation.topBottom: "Top and bottom" => "Üst ve alt"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Seçim seçeneklerini çok sütunlu bir düzende düzenler. 0 olarak ayarlandığında, seçenekler tek bir satırda görüntülenir. -1 olarak ayarlandığında, gerçek değer üst matrisin \"İç içe sütun sayısı\" özelliğinden devralınır."
-// ed.expandAllTooltip: "Expand All" => "Tümünü Genişlet"
-// ed.collapseAllTooltip: "Collapse All" => "Tümünü Daralt"
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "YouTube bağlantıları desteklenmemektedir."
+
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "Formunuzu yapılandırmaya başlayın"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Anket ayarlarını keşfetmek için herhangi bir kategori simgesini tıklayın. Tasarım yüzeyine bir anket öğesi eklediğinizde ek ayarlar kullanılabilir hale gelir."

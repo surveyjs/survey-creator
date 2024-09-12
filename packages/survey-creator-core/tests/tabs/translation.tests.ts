@@ -1,4 +1,4 @@
-import { Serializer, SurveyModel, surveyLocalization, Base, QuestionDropdownModel, PanelModel, QuestionMatrixDropdownModel, QuestionTextModel, QuestionCommentModel, ListModel, Action, IAction, ItemValue, QuestionMatrixDynamicModel } from "survey-core";
+import { Serializer, SurveyModel, surveyLocalization, Base, QuestionDropdownModel, PanelModel, QuestionMatrixDropdownModel, QuestionTextModel, QuestionCommentModel, ListModel, Action, IAction, ItemValue, QuestionMatrixDynamicModel, QuestionMatrixModel } from "survey-core";
 import { Translation, TranslationItem } from "../../src/components/tabs/translation";
 import { TabTranslationPlugin } from "../../src/components/tabs/translation-plugin";
 import { EmptySurveyCreatorOptions, settings } from "../../src/creator-settings";
@@ -337,6 +337,22 @@ test("Translation show All strings and property visibility, #1", () => {
   expect(translation.root.locItems).toHaveLength(1);
   translation.showAllStrings = true;
   expect(translation.root.locItems).toHaveLength(2);
+});
+test("Translation tab & onShowingProperty errror. We should not have errors, #5869", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "checkbox", name: "question1", choices: ["item1", "item2"] }]
+  };
+  creator.onShowingProperty.add((sender, options) => {
+    if (options.obj.getType() == "survey") {
+      options.canShow = options.property.name == "title";
+    }
+  });
+  const tabTranslation = new TabTranslationPlugin(creator);
+  tabTranslation.activate();
+  const translation = tabTranslation.model;
+  translation.reset();
+  expect(translation.root.locItems).toHaveLength(0);
 });
 test("Translation make translation observable", () => {
   const creator = new CreatorTester();
@@ -2143,4 +2159,43 @@ test("onTranslationStringVisibility for imageLink, Issue #5734", (): void => {
   const items = translation.root.groups[0].groups[0].groups[0].items;
   expect(items).toHaveLength(4);
   expect(items[1].name).toBe("spanishUrl.imageLink");
+});
+test("Translate matrix cells, Bug#8759", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "matrix",
+        name: "q1",
+        columns: ["col1", "col2"],
+        rows: ["row1", "row2"],
+        cells: {
+          "default": {
+            "col1": "col1_default",
+            "col2": "col2_default"
+          },
+          row1: { col1: "row1_col1" },
+          row2: { col2: "row2_col2" }
+        }
+      }
+    ]
+  });
+  const translation = new Translation(survey);
+  translation.reset();
+  let group = translation.root.groups[0];
+  expect(group.items).toHaveLength(1);
+  expect(group.items[0].name).toEqual("q1");
+  group = group.groups[0];
+  expect(group.groups).toHaveLength(3);
+  group = group.groups[2];
+  expect(group.name).toBe("cells");
+  expect(group.text).toBe("Cells");
+  expect(group.items).toHaveLength(4);
+  const item = <TranslationItem>group.items[3];
+  expect(item.text).toBe("Row 2, Col 2");
+  expect(item.getLocText("")).toBe("row2_col2");
+  item.setLocText("de", "de_row2_col2");
+  const matrix = <QuestionMatrixModel>survey.getQuestionByName("q1");
+  const locstr = matrix.cells.getCellDisplayLocText("row2", matrix.columns[1]);
+  expect(locstr).toBeTruthy();
+  expect(locstr.getLocaleText("de")).toBe("de_row2_col2");
 });

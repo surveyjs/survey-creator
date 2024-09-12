@@ -125,6 +125,8 @@ var persianStrings = {
     toolboxNoResultsFound: "نتیجه ای یافت نشد",
     propertyGridFilteredTextPlaceholder: "جستجو...",
     propertyGridNoResultsFound: "نتیجه ای یافت نشد",
+    propertyGridPlaceholderTitle: "شروع به پیکربندی فرم خود کنید",
+    propertyGridPlaceholderDescription: "برای کاوش در تنظیمات نظرسنجی، روی هر نماد دسته کلیک کنید. پس از افزودن یک عنصر نظرسنجی به سطح طراحی، تنظیمات اضافی در دسترس خواهند بود.",
     correctJSON: "لطفا JSON را تصحیح کنید.",
     surveyResults: "نتایج نظرسنجی: ",
     surveyResultsTable: "به صورت جدول",
@@ -156,6 +158,7 @@ var persianStrings = {
     translationPlaceHolder: "در حال ترجمه...",
     translationSource: "منبع: ",
     translationTarget: "هدف: ",
+    translationYouTubeNotSupported: "پیوندهای YouTube پشتیبانی نمی شوند.",
     themeExportButton: "صادرات",
     themeImportButton: "واردات",
     surveyJsonExportButton: "صادرات",
@@ -2727,5 +2730,7 @@ editorLocalization.locales["fa"] = persianStrings;
 // progressBarLocation.bottom: "Bottom" => "پایین"
 // progressBarLocation.topBottom: "Top and bottom" => "بالا و پایین"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "گزینه های انتخاب را در یک طرح چند ستونی مرتب می کند. هنگامی که روی 0 تنظیم می شود، گزینه ها در یک خط نمایش داده می شوند. هنگامی که روی -1 تنظیم می شود، مقدار واقعی از ویژگی \"تعداد ستون های تو در تو\" ماتریس والد به ارث می رسد."
-// ed.expandAllTooltip: "Expand All" => "گسترش همه"
-// ed.collapseAllTooltip: "Collapse All" => "جمع کردن همه"
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "پیوندهای YouTube پشتیبانی نمی شوند."
+
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "شروع به پیکربندی فرم خود کنید"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "برای کاوش در تنظیمات نظرسنجی، روی هر نماد دسته کلیک کنید. پس از افزودن یک عنصر نظرسنجی به سطح طراحی، تنظیمات اضافی در دسترس خواهند بود."

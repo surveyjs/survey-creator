@@ -125,6 +125,8 @@ var portugueseTranslation = {
     toolboxNoResultsFound: "Nenhum resultado encontrado",
     propertyGridFilteredTextPlaceholder: "Escreva para pesquisar...",
     propertyGridNoResultsFound: "Nenhum resultado encontrado",
+    propertyGridPlaceholderTitle: "Comece a configurar seu formulário",
+    propertyGridPlaceholderDescription: "Clique em qualquer ícone de categoria para explorar as configurações do questionário. Configurações adicionais ficarão disponíveis quando você adicionar um elemento de levantamento topográfico à superfície de design.",
     correctJSON: "Por favor corrija o JSON.",
     surveyResults: "Resultado da pesquisa: ",
     surveyResultsTable: "Como Tabela",
@@ -156,6 +158,7 @@ var portugueseTranslation = {
     translationPlaceHolder: "Tradução...",
     translationSource: "Fonte: ",
     translationTarget: "Alvo: ",
+    translationYouTubeNotSupported: "Os links do YouTube não são suportados.",
     themeExportButton: "Exportação",
     themeImportButton: "Importação",
     surveyJsonExportButton: "Exportação",
@@ -2438,5 +2441,7 @@ editorLocalization.locales["pt"] = portugueseTranslation;
 // progressBarLocation.bottom: "Bottom" => "Fundo"
 // progressBarLocation.topBottom: "Top and bottom" => "Superior e inferior"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Organiza as opções de escolha em um layout de várias colunas. Quando definido como 0, as opções são exibidas em uma única linha. Quando definido como -1, o valor real é herdado da propriedade \"Contagem de colunas aninhadas\" da matriz pai."
-// ed.expandAllTooltip: "Expand All" => "Expandir tudo"
-// ed.collapseAllTooltip: "Collapse All" => "Recolher tudo"
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "Os links do YouTube não são suportados."
+
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "Comece a configurar seu formulário"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Clique em qualquer ícone de categoria para explorar as configurações do questionário. Configurações adicionais ficarão disponíveis quando você adicionar um elemento de levantamento topográfico à superfície de design."

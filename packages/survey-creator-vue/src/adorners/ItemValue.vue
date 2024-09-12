@@ -18,12 +18,13 @@
         v-if="adorner.isDraggable"
         class="svc-item-value-controls__button svc-item-value-controls__drag"
       >
-        <sv-svg-icon
+        <SvComponent
+          :is="'sv-svg-icon'"
           class="svc-item-value-controls__drag-icon"
           :iconName="'icon-drag-area-indicator'"
           :size="24"
           :title="adorner.dragTooltip"
-        ></sv-svg-icon>
+        ></SvComponent>
       </span>
       <span
         v-if="adorner.allowAdd"
@@ -31,11 +32,12 @@
         v-key2click
         @click="adorner.add(adorner)"
         :aria-label="undefined"
-        ><sv-svg-icon
+        ><SvComponent
+          :is="'sv-svg-icon'"
           :iconName="'icon-add_16x16'"
           :size="16"
           :title="undefined"
-        ></sv-svg-icon
+        ></SvComponent
       ></span>
       <span
         v-if="adorner.allowRemove"
@@ -44,20 +46,23 @@
         @click="adorner.remove(adorner)"
         @blur="adorner.onFocusOut($event)"
         :aria-label="undefined"
-        ><sv-svg-icon
+        ><SvComponent
+          :is="'sv-svg-icon'"
           :iconName="'icon-remove_16x16'"
           :size="16"
           :title="undefined"
-        ></sv-svg-icon
+        ></SvComponent
       ></span>
     </div>
     <div class="svc-item-value__item" @click="adorner.select(adorner, $event)">
-      <component :is="componentName" v-bind="componentData"></component>
+      <SvComponent :is="componentName" v-bind="componentData"></SvComponent>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { SvComponent } from "survey-vue3-ui";
+import { key2ClickDirective as vKey2click } from "survey-vue3-ui";
 import { useCreatorModel } from "@/creator-model";
 import type { ItemValue, QuestionSelectBase } from "survey-core";
 import {

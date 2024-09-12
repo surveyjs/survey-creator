@@ -125,6 +125,8 @@ export var arStrings = {
     toolboxNoResultsFound: "لم يتم العثور على نتائج",
     propertyGridFilteredTextPlaceholder: "Type to search...",
     propertyGridNoResultsFound: "لم يتم العثور على نتائج",
+    propertyGridPlaceholderTitle: "بدء تكوين النموذج الخاص بك",
+    propertyGridPlaceholderDescription: "انقر فوق أي رمز فئة لاستكشاف إعدادات الاستطلاع. ستتوفر إعدادات إضافية بمجرد إضافة عنصر استطلاع إلى سطح التصميم.",
     correctJSON: "Please correct JSON.",
     surveyResults: "Survey Results ",
     surveyResultsTable: "As Table",
@@ -156,6 +158,7 @@ export var arStrings = {
     translationPlaceHolder: "Translation...",
     translationSource: "مصدر: ",
     translationTarget: "هدف: ",
+    translationYouTubeNotSupported: "روابط يوتيوب غير مدعومة.",
     themeExportButton: "تصدير",
     themeImportButton: "استورد",
     surveyJsonExportButton: "تصدير",
@@ -2683,5 +2686,7 @@ editorLocalization.locales["ar"] = arStrings;
 // progressBarLocation.bottom: "Bottom" => "قاع"
 // progressBarLocation.topBottom: "Top and bottom" => "أعلى وأسفل"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "يرتب خيارات التحديد في تخطيط متعدد الأعمدة. عند التعيين على 0 ، يتم عرض الخيارات في سطر واحد. عند التعيين إلى -1، يتم توريث القيمة الفعلية من خاصية \"عدد الأعمدة المتداخلة\" للمصفوفة الأصل."
-// ed.expandAllTooltip: "Expand All" => "توسيع الكل"
-// ed.collapseAllTooltip: "Collapse All" => "طي الكل"
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "روابط يوتيوب غير مدعومة."
+
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "بدء تكوين النموذج الخاص بك"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "انقر فوق أي رمز فئة لاستكشاف إعدادات الاستطلاع. ستتوفر إعدادات إضافية بمجرد إضافة عنصر استطلاع إلى سطح التصميم."

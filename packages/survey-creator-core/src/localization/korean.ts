@@ -125,6 +125,8 @@ export var koreanStrings = {
     toolboxNoResultsFound: "결과를 찾을 수 없습니다.",
     propertyGridFilteredTextPlaceholder: "검색하려면 입력...",
     propertyGridNoResultsFound: "결과를 찾을 수 없습니다.",
+    propertyGridPlaceholderTitle: "양식 구성 시작",
+    propertyGridPlaceholderDescription: "범주 아이콘을 클릭하여 설문조사 설정을 탐색합니다. 디자인 화면에 설문 조사 요소를 추가하면 추가 설정을 사용할 수 있게 됩니다.",
     correctJSON: "JSON 데이터를 수정하십시오.",
     surveyResults: "설문 결과: ",
     surveyResultsTable: "테이블로",
@@ -156,6 +158,7 @@ export var koreanStrings = {
     translationPlaceHolder: "번역...",
     translationSource: "근원: ",
     translationTarget: "과녁: ",
+    translationYouTubeNotSupported: "YouTube 링크는 지원되지 않습니다.",
     themeExportButton: "수출",
     themeImportButton: "수입",
     surveyJsonExportButton: "수출",
@@ -2976,5 +2979,7 @@ editorLocalization.locales["ko"] = koreanStrings;
 // progressBarLocation.bottom: "Bottom" => "밑바닥"
 // progressBarLocation.topBottom: "Top and bottom" => "위쪽 및 아래쪽"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "선택 옵션을 여러 열 레이아웃으로 정렬합니다. 0으로 설정하면 옵션이 한 줄로 표시됩니다. -1로 설정하면 실제 값이 부모 행렬의 \"중첩 열 수\" 속성에서 상속됩니다."
-// ed.expandAllTooltip: "Expand All" => "모두 확장"
-// ed.collapseAllTooltip: "Collapse All" => "모두 축소"
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "YouTube 링크는 지원되지 않습니다."
+
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "양식 구성 시작"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "범주 아이콘을 클릭하여 설문조사 설정을 탐색합니다. 디자인 화면에 설문 조사 요소를 추가하면 추가 설정을 사용할 수 있게 됩니다."

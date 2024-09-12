@@ -57,3 +57,12 @@
     border-color: var(--ctr-button-group-border-color-focused, $primary);
   }
 }
+
+.spg-root-modern.spg-root--one-category {
+  background-color: var(--ctr-property-grid-form-background-color, $background-dim);
+  border-right: unset;
+
+  .spg-page.spg-body__page {
+    box-shadow: unset;
+  }
+}

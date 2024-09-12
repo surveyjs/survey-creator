@@ -6,7 +6,9 @@ import {
   PopupBaseViewModel, IDialogOptions, settings as surveySettings,
   MatrixDropdownColumn,
   CssClassBuilder,
-  createPopupModelWithListModel
+  createPopupModelWithListModel,
+  MatrixCells,
+  QuestionMatrixModel
 } from "survey-core";
 import { unparse, parse } from "papaparse";
 import { editorLocalization } from "../../editorLocalization";
@@ -443,7 +445,35 @@ export class TranslationGroup extends TranslationItemBase {
         this.createGroups(value, property);
       }
     }
+    this.createMatrixCellsGroup();
     this.sortItems();
+  }
+  private createMatrixCellsGroup(): void {
+    Serializer.getPropertiesByObj(this.obj).forEach(prop => {
+      if(prop.type === "cells" && this.canShowProperty(prop, true)) {
+        this.createMatrixCellsGroupCore(prop);
+      }
+    });
+  }
+  private createMatrixCellsGroupCore(prop: JsonObjectProperty): void {
+    const cells = <MatrixCells>this.obj[prop.name];
+    if(cells.isEmpty) return;
+    const matrix = <QuestionMatrixModel>this.obj;
+    const root = new TranslationGroup(prop.name, cells, this.translation, editorLocalization.getPropertyName(prop.name));
+    const defaultName = surveySettings.matrix.defaultRowName;
+    const rows = [{ value: defaultName, text: editorLocalization.getString("qt.default") }];
+    matrix.rows.forEach(row => rows.push({ value: row.value, text: row.text }));
+    rows.forEach(row => {
+      matrix.columns.forEach(col => {
+        const locStr = cells.getCellLocText(row.value, col);
+        if(!!locStr) {
+          const name = editorLocalization.getPropertyName(row.text, "") + ", " + editorLocalization.getPropertyName(col.title);
+          const item = new TranslationItem(name, locStr, "", this.translation, locStr);
+          root.items.push(item);
+        }
+      });
+    });
+    this.addNewGroup(root);
   }
   private sortItems() {
     if (!settings.translation.sortByName) return;
@@ -483,7 +513,9 @@ export class TranslationGroup extends TranslationItemBase {
     return res;
   }
   private canShowProperty(property: JsonObjectProperty, isEmpty: boolean, isShowing: boolean = true): boolean {
-    if (!!this.translation) return this.translation.canShowProperty(this.obj, property, isEmpty, isShowing);
+    const obj = Array.isArray(this.obj) ? (this.obj.length > 0 ? <any>this.obj[0] : undefined) : this.obj;
+    if(!obj) return false;
+    if (!!this.translation) return this.translation.canShowProperty(obj, property, isEmpty, isShowing);
     return isShowing;
   }
   private createTranslationItem(obj: any, property: JsonObjectProperty): TranslationItem {

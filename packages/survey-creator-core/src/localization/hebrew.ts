@@ -125,6 +125,8 @@ export var hebrewStrings = {
     toolboxNoResultsFound: "לא נמצאו תוצאות",
     propertyGridFilteredTextPlaceholder: "הקלד כדי לחפש...",
     propertyGridNoResultsFound: "לא נמצאו תוצאות",
+    propertyGridPlaceholderTitle: "התחל לקבוע את תצורת הטופס שלך",
+    propertyGridPlaceholderDescription: "לחץ על סמל קטגוריה כלשהו כדי לחקור את הגדרות הסקר. הגדרות נוספות יהיו זמינות לאחר הוספת רכיב סקר למשטח העיצוב.",
     correctJSON: "אנא תקנו את ה-JSON.",
     surveyResults: "תוצאות הסקר",
     surveyResultsTable: "כטבלה",
@@ -156,6 +158,7 @@ export var hebrewStrings = {
     translationPlaceHolder: "תרגום...",
     translationSource: "מקור: ",
     translationTarget: "יעד: ",
+    translationYouTubeNotSupported: "קישורי YouTube אינם נתמכים.",
     themeExportButton: "ייצא",
     themeImportButton: "ייבא",
     surveyJsonExportButton: "ייצא",
@@ -2340,5 +2343,7 @@ editorLocalization.locales["he"] = hebrewStrings;
 // progressBarLocation.bottom: "Bottom" => "ישבן"
 // progressBarLocation.topBottom: "Top and bottom" => "עליון ותחתון"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "מסדר אפשרויות בחירה בפריסה מרובת עמודות. כאשר הן מוגדרות על 0, האפשרויות מוצגות בשורה אחת. כאשר הוא מוגדר ל- -1, הערך בפועל עובר בירושה מהמאפיין \"ספירת עמודות מקוננת\" של מטריצת האב."
-// ed.expandAllTooltip: "Expand All" => "הרחב הכל"
-// ed.collapseAllTooltip: "Collapse All" => "כווץ הכל"
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "קישורי YouTube אינם נתמכים."
+
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "התחל לקבוע את תצורת הטופס שלך"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "לחץ על סמל קטגוריה כלשהו כדי לחקור את הגדרות הסקר. הגדרות נוספות יהיו זמינות לאחר הוספת רכיב סקר למשטח העיצוב."

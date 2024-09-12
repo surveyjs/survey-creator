@@ -125,6 +125,8 @@ export const thStrings = {
     toolboxNoResultsFound: "ไม่พบผลลัพธ์",
     propertyGridFilteredTextPlaceholder: "พิมพ์เพื่อค้นหา...",
     propertyGridNoResultsFound: "ไม่พบผลลัพธ์",
+    propertyGridPlaceholderTitle: "เริ่มกําหนดค่าฟอร์มของคุณ",
+    propertyGridPlaceholderDescription: "คลิกไอคอนหมวดหมู่ใดก็ได้เพื่อสํารวจการตั้งค่าแบบสํารวจ การตั้งค่าเพิ่มเติมจะพร้อมใช้งานเมื่อคุณเพิ่มองค์ประกอบแบบสํารวจลงในพื้นผิวการออกแบบ",
     correctJSON: "กรุณาแก้ไข JSON",
     surveyResults: "ผลลัพธ์ของแบบสำรวจ",
     surveyResultsTable: "เป็นตาราง",
@@ -156,6 +158,7 @@ export const thStrings = {
     translationPlaceHolder: "การแปล...",
     translationSource: "ต้นทาง: ",
     translationTarget: "ปลายทาง: ",
+    translationYouTubeNotSupported: "ไม่รองรับลิงก์ YouTube",
     themeExportButton: "ส่งออก",
     themeImportButton: "นำเข้า",
     surveyJsonExportButton: "ส่งออก",
@@ -1705,5 +1708,7 @@ editorLocalization.locales["th"] = thStrings;
 // progressBarLocation.bottom: "Bottom" => "ก้น"
 // progressBarLocation.topBottom: "Top and bottom" => "ด้านบนและด้านล่าง"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "จัดเรียงตัวเลือกตัวเลือกในรูปแบบหลายคอลัมน์ เมื่อตั้งค่าเป็น 0 ตัวเลือกจะแสดงในบรรทัดเดียว เมื่อตั้งค่าเป็น -1 ค่าจริงจะถูกสืบทอดมาจากคุณสมบัติ \"จํานวนคอลัมน์ที่ซ้อนกัน\" ของเมทริกซ์หลัก"
-// ed.expandAllTooltip: "Expand All" => "ขยายทั้งหมด"
-// ed.collapseAllTooltip: "Collapse All" => "ยุบทั้งหมด"
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "ไม่รองรับลิงก์ YouTube"
+
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "เริ่มกําหนดค่าฟอร์มของคุณ"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "คลิกไอคอนหมวดหมู่ใดก็ได้เพื่อสํารวจการตั้งค่าแบบสํารวจ การตั้งค่าเพิ่มเติมจะพร้อมใช้งานเมื่อคุณเพิ่มองค์ประกอบแบบสํารวจลงในพื้นผิวการออกแบบ"

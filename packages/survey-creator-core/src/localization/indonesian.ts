@@ -125,6 +125,8 @@ export var indonesianStrings = {
     toolboxNoResultsFound: "Tidak ada hasil yang ditemukan",
     propertyGridFilteredTextPlaceholder: "Ketik untuk mencari...",
     propertyGridNoResultsFound: "Tidak ada hasil yang ditemukan",
+    propertyGridPlaceholderTitle: "Mulai mengonfigurasi formulir Anda",
+    propertyGridPlaceholderDescription: "Klik ikon kategori apa pun untuk menjelajahi pengaturan survei. Pengaturan tambahan akan tersedia setelah Anda menambahkan elemen survei ke permukaan desain.",
     correctJSON: "Please correct JSON.",
     surveyResults: "Hasil survei: ",
     surveyResultsTable: "Sebagai tabel",
@@ -156,6 +158,7 @@ export var indonesianStrings = {
     translationPlaceHolder: "Terjemahan...",
     translationSource: "Sumber: ",
     translationTarget: "Target: ",
+    translationYouTubeNotSupported: "Tautan YouTube tidak didukung.",
     themeExportButton: "Ekspor",
     themeImportButton: "Mengimpor",
     surveyJsonExportButton: "Ekspor",
@@ -2926,5 +2929,7 @@ editorLocalization.locales["id"] = indonesianStrings;
 // progressBarLocation.bottom: "Bottom" => "Dasar"
 // progressBarLocation.topBottom: "Top and bottom" => "Atas dan bawah"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Mengatur opsi pilihan dalam tata letak multi-kolom. Saat diatur ke 0, opsi ditampilkan dalam satu baris. Saat diatur ke -1, nilai aktual diwarisi dari properti \"Jumlah kolom berlapis\" dari matriks induk."
-// ed.expandAllTooltip: "Expand All" => "Perluas Semua"
-// ed.collapseAllTooltip: "Collapse All" => "Ciutkan Semua"
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "Tautan YouTube tidak didukung."
+
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "Mulai mengonfigurasi formulir Anda"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Klik ikon kategori apa pun untuk menjelajahi pengaturan survei. Pengaturan tambahan akan tersedia setelah Anda menambahkan elemen survei ke permukaan desain."

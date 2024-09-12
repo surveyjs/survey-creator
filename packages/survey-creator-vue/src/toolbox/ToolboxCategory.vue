@@ -1,7 +1,10 @@
 <template>
   <div
     class="svc-toolbox__category"
-    :class="{ 'svc-toolbox__category--collapsed': category.collapsed, 'svc-toolbox__category--empty': category.empty }"
+    :class="{
+      'svc-toolbox__category--collapsed': category.collapsed,
+      'svc-toolbox__category--empty': category.empty,
+    }"
   >
     <div
       class="svc-toolbox__category-header"
@@ -17,31 +20,36 @@
         v-if="toolbox.canCollapseCategories"
         class="svc-toolbox__category-header__controls"
       >
-        <sv-svg-icon
+        <SvComponent
+          :is="'sv-svg-icon'"
           :iconName="'icon-arrow-down'"
           class="svc-toolbox__category-header__button svc-string-editor__button--expand"
           :size="24"
           v-show="category.collapsed"
-        ></sv-svg-icon>
-        <sv-svg-icon
+        ></SvComponent>
+        <SvComponent
+          :is="'sv-svg-icon'"
           :iconName="'icon-arrow-up'"
           class="svc-toolbox__category-header__button svc-string-editor__button--collapse"
           :size="24"
           v-show="!category.collapsed"
-        ></sv-svg-icon>
+        ></SvComponent>
       </div>
     </div>
-    <svc-toolbox-tool
+    <SvComponent
+      :is="'svc-toolbox-tool'"
       v-for="(item, index) in category.items"
       :item="item"
       :key="index"
       :creator="toolbox.creator"
       :parentModel="toolbox"
       :isCompact="false"
-    ></svc-toolbox-tool>
+    ></SvComponent>
   </div>
 </template>
 <script lang="ts" setup>
+import { key2ClickDirective as vKey2click } from "survey-vue3-ui";
+import { SvComponent } from "survey-vue3-ui";
 import type {
   QuestionToolbox,
   QuestionToolboxCategory,
