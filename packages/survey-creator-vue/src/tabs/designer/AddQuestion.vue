@@ -13,9 +13,15 @@
     <span class="svc-text svc-text--normal svc-text--bold">
       {{ item.data.addNewQuestionText }}
     </span>
-    <svc-add-question-type-selector v-if="needRenderPopup" :questionTypeSelectorModel="item.data.questionTypeSelectorModel" :renderPopup="needRenderPopup"></svc-add-question-type-selector>
+    <SvComponent
+      :is="'svc-add-question-type-selector'"
+      v-if="needRenderPopup" :questionTypeSelectorModel="item.data.questionTypeSelectorModel" :renderPopup="needRenderPopup"
+    ></SvComponent>
   </div>
-  <svc-add-question-type-selector v-if="!needRenderPopup" :questionTypeSelectorModel="item.data.questionTypeSelectorModel" :renderPopup="needRenderPopup"></svc-add-question-type-selector>
+  <SvComponent
+    :is="'svc-add-question-type-selector'"
+    v-if="!needRenderPopup" :questionTypeSelectorModel="item.data.questionTypeSelectorModel" :renderPopup="needRenderPopup"
+  ></SvComponent>
 </template>
 <script lang="ts" setup>
 import { computed } from "vue";
