@@ -55,16 +55,18 @@ export class QuestionAdornerComponent extends CreatorModelElement<
   renderElement(): JSX.Element {
     const allowInteractions = this.model.element
       .isInteractiveDesignElement;
+    const titleForCollapsedState = this.renderQuestionTitle();
     const content = this.renderContent(allowInteractions);
     return (
       <div
         ref={this.rootRef}
         data-sv-drop-target-survey-element={this.model.element.name || null}
-        className={"svc-question__adorner " + this.model.rootCss()}
+        className={this.model.rootCss()}
         onDoubleClick={e => { allowInteractions && this.model.dblclick(e.nativeEvent); e.stopPropagation(); }}
         onMouseLeave={e => allowInteractions && this.model.hover(e.nativeEvent, e.currentTarget)}
         onMouseOver={e => allowInteractions && this.model.hover(e.nativeEvent, e.currentTarget)}
       >
+        {titleForCollapsedState}
         {content}
       </div>
     );
@@ -118,7 +120,6 @@ export class QuestionAdornerComponent extends CreatorModelElement<
   protected renderElementContent(): JSX.Element {
     return (
       <>
-        {this.renderQuestionTitle()}
         {this.props.element}
         {this.renderElementPlaceholder()}
         {this.renderCarryForwardBanner()}
