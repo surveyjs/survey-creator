@@ -1,46 +1,56 @@
 <template>
-  <div
-    :class="toolbox.classNames"
-    ref="root"
-  >
+  <div :class="toolbox.classNames" ref="root">
     <div @focusout="(e) => toolbox.focusOut(e)" class="svc-toolbox__panel">
-      <div class="svc-toolbox__scroller sv-drag-target-skipped" @scroll="(e) => { toolbox.onScroll(toolbox, e); }">
+      <div
+        class="svc-toolbox__scroller sv-drag-target-skipped"
+        @scroll="
+          (e) => {
+            toolbox.onScroll(toolbox, e);
+          }
+        "
+      >
         <div v-if="toolbox.showSearch" class="svc-toolbox__search-container">
           <template v-if="toolbox.isCompactRendered">
-            <svc-toolbox-tool
+            <SvComponent
+              :is="'svc-toolbox-tool'"
               :creator="creator"
               key="searchitem"
               :item="toolbox.searchItem"
               :parentModel="toolbox"
               :isCompact="toolbox.isCompactRendered"
-            ></svc-toolbox-tool>
+            ></SvComponent>
             <div
               class="svc-toolbox__category-separator svc-toolbox__category-separator--search"
             ></div>
           </template>
-          <svc-search :model="toolbox.searchManager"></svc-search>
+          <SvComponent
+            :is="'svc-search'"
+            :model="toolbox.searchManager"
+          ></SvComponent>
         </div>
         <div v-if="toolbox.showPlaceholder" class="svc-toolbox__placeholder">
           {{ toolbox.toolboxNoResultsFound }}
         </div>
         <div class="svc-toolbox__container">
           <template v-if="!toolbox.showInSingleCategory">
-            <svc-toolbox-category
+            <SvComponent
+              :is="'svc-toolbox-category'"
               v-for="(category, index) in toolbox.categories"
               :key="index"
               :category="category"
               :toolbox="toolbox"
-            ></svc-toolbox-category>
+            ></SvComponent>
           </template>
           <template v-if="toolbox.showInSingleCategory">
             <div class="svc-toolbox__category">
               <template v-for="(item, index) in renderedActions" :key="index">
-                <svc-toolbox-tool
+                <SvComponent
+                  :is="'svc-toolbox-tool'"
                   :creator="creator"
                   :item="item"
                   :parentModel="toolbox"
                   :isCompact="toolbox.isCompactRendered"
-                ></svc-toolbox-tool>
+                ></SvComponent>
               </template>
             </div>
           </template>
@@ -50,6 +60,7 @@
   </div>
 </template>
 <script lang="ts" setup>
+import { SvComponent } from "survey-vue3-ui";
 import { VerticalResponsivityManager } from "survey-core";
 import type { SurveyCreatorModel } from "survey-creator-core";
 import { useBase } from "survey-vue3-ui";

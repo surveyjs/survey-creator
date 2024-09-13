@@ -9,6 +9,7 @@ import { SurveyCreatorModel, type ICreatorOptions } from "survey-creator-core";
 import "survey-core/survey.i18n";
 import "survey-creator-core/survey-creator-core.i18n";
 import { shallowRef } from "vue";
+import { SurveyCreatorComponent } from "survey-creator-vue";
 const props = defineProps<{options: ICreatorOptions, useSlk: boolean}>()
 if (props.useSlk) {
   slk("YjA3ZGFkZTMtNjU5NS00YTYxLTkzZmEtYWJiOThjMWVhNjk3OzE9MjAzNC0xMC0xNiwyPTIwMzQtMTAtMTYsND0yMDM0LTEwLTE2");

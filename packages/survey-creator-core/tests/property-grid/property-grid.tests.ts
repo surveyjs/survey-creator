@@ -3427,7 +3427,7 @@ test("showRefuseItem&showDontKnowItem in question&column", () => {
   prop1.visible = false;
   prop2.visible = false;
 });
-test("It is impossible to clear value for numeric property, bug##5395", () => {
+test("It is impossible to clear value for numeric property, bug#5395", () => {
   const question = new QuestionImagePickerModel("q1");
   const propertyGrid = new PropertyGridModelTester(question);
   const imageHeightQuestion = <QuestionTextModel>propertyGrid.survey.getQuestionByName("imageHeight");
@@ -3439,7 +3439,24 @@ test("It is impossible to clear value for numeric property, bug##5395", () => {
   expect(question.imageHeight).not.toBe(0);
   expect(question.imageHeight).toBeFalsy();
 });
-test("Show commentText & commentPlaceholder on setting showCommentArea, bug##5527", () => {
+test("Image picker items doesn't support youtube, bug#5867", () => {
+  const question = new QuestionImagePickerModel("q1");
+  question.choices = [{ value: "item1", imageLink: "abc" }];
+  const propertyGrid = new PropertyGridModelTester(question);
+  const matrix = <QuestionMatrixDynamicModel>propertyGrid.survey.getQuestionByName("choices");
+  expect(matrix.visibleRows).toHaveLength(1);
+  const cell = matrix.visibleRows[0].cells[2].question;
+  expect(cell.value).toBe("abc");
+  const imgUrl = "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg";
+  cell.value = imgUrl;
+  expect(cell.errors).toHaveLength(0);
+  expect(question.choices[0].imageLink).toBe(imgUrl);
+  cell.value = "https://www.youtube.com/embed/tgbNymZ7vqY";
+  expect(cell.errors).toHaveLength(1);
+  expect(cell.errors[0].text).toBe("YouTube links are not supported.");
+  expect(question.choices[0].imageLink).toBe(imgUrl);
+});
+test("Show commentText & commentPlaceholder on setting showCommentArea, bug#5527", () => {
   const question = new QuestionImagePickerModel("q1");
   const propertyGrid = new PropertyGridModelTester(question);
   const showCommentAreaQuestion = propertyGrid.survey.getQuestionByName("showCommentArea");

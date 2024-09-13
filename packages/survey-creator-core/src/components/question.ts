@@ -22,7 +22,8 @@ import {
   ActionContainer,
   Helpers,
   PanelModel,
-  classesToSelector
+  classesToSelector,
+  QuestionFactory
 } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { editorLocalization, getLocString } from "../editorLocalization";
@@ -367,11 +368,20 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
 
   private buildDefaultJsonMap(availableItems: QuestionToolboxItem[]) {
     const defaultJsons = {};
+    function cleanDefaultsFromJson(type: any, toolboxItem: QuestionToolboxItem) {
+      const question = QuestionFactory.Instance.createQuestion(type, "question");
+      if (!question) return toolboxItem.json;
+      question.fromJSON(toolboxItem.json);
+      const json = question.toJSON();
+      delete json.name;
+      return json;
+    }
     function addItemJson(toolboxItem: QuestionToolboxItem) {
       const type = toolboxItem.json?.type || toolboxItem.id;
       if (toolboxItem.json) {
+        const json = cleanDefaultsFromJson(type, toolboxItem);
         if (!defaultJsons[type]) defaultJsons[type] = [];
-        defaultJsons[type].push(toolboxItem.json);
+        defaultJsons[type].push(json);
       }
     }
     availableItems.forEach((toolboxItem: QuestionToolboxItem) => {

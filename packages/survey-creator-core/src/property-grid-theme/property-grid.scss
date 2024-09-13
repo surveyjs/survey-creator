@@ -17,14 +17,15 @@
 @import "blocks/spg-overriding.scss";
 @import "blocks/spg-search-editor.scss";
 @import "blocks/spg-buttongroup.scss";
+
 .spg-root-modern {
   position: relative;
   width: 100%;
-  border-right: 1px solid $border;
+  border-inline-end: 1px solid $border;
   box-sizing: border-box;
-  @include disableLibraryAnimations;
   /* disable library transition animations */
   --sjs-transition-duration: 0ms;
+  @include disableLibraryAnimations;
 }
 
 .spg-container {

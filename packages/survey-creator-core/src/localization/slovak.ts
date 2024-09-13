@@ -123,6 +123,8 @@ export var skStrings = {
     toolboxNoResultsFound: "Nenašli sa žiadne výsledky",
     propertyGridFilteredTextPlaceholder: "Zadajte reťazec pre vyhľadávanie...",
     propertyGridNoResultsFound: "Nenašli sa žiadne výsledky",
+    propertyGridPlaceholderTitle: "Začnite konfigurovať formulár",
+    propertyGridPlaceholderDescription: "Kliknutím na ikonu ľubovoľnej kategórie preskúmate nastavenia prieskumu. Ďalšie nastavenia budú k dispozícii po pridaní prvku prieskumu na návrhovú plochu.",
     correctJSON: "Opravte JSON.",
     surveyResults: "Výsledok prieskumu: ",
     surveyResultsTable: "Ako tabuľku",
@@ -154,6 +156,7 @@ export var skStrings = {
     translationPlaceHolder: "Preklad...",
     translationSource: "Zdroj: ",
     translationTarget: "Cieľ: ",
+    translationYouTubeNotSupported: "Odkazy na YouTube nie sú podporované.",
     themeExportButton: "Vývoz",
     themeImportButton: "Import",
     surveyJsonExportButton: "Vývoz",
@@ -633,6 +636,7 @@ export var skStrings = {
     maxImageHeight: "Maximálna výška obrázka",
     minValue: "Minimálna hodnota",
     maxValue: "Maximálna hodnota",
+    caseInsensitive: "Nerozlišujú sa veľké a malé písmená",
     minLength: "Minimálna dĺžka",
     allowDigits: "Povoliť čísla",
     minCount: "Minimálny počet",
@@ -1359,6 +1363,7 @@ export var skStrings = {
       showInMultipleColumns: "Ak je táto voľba vybratá, vytvorí samostatný stĺpec pre každú možnosť výberu.",
       colCount: "Usporiada možnosti výberu vo viacstĺpcovom rozložení. Ak je nastavená hodnota 0, možnosti sa zobrazia v jednom riadku. Ak je nastavená na -1, skutočná hodnota sa zdedí z vlastnosti \"Počet vnorených stĺpcov\" nadradenej matice."
     },
+    caseInsensitive: "Vyberte, či sa veľké a malé písmená v regulárnom výraze musia považovať za ekvivalentné.",
     widthMode: "Vyberte si z: \"Statický\" - nastavuje pevnú šírku; \"Responzívny\" - spôsobuje, že prieskum zaberá celú šírku obrazovky; \"Auto\" - použije ktorýkoľvek z týchto dvoch v závislosti od použitých typov otázok.",
     cookieName: "Súbory cookie zabraňujú používateľom vyplniť ten istý prieskum dvakrát.",
     logo: "Prilepte odkaz na obrázok (bez obmedzenia veľkosti) alebo kliknite na ikonu priečinka a prehľadávajte súbor z počítača (až 64 kB).",
@@ -2723,3 +2728,8 @@ editorLocalization.locales["sk"] = skStrings;
 // progressBarLocation.bottom: "Bottom" => "Dno"
 // progressBarLocation.topBottom: "Top and bottom" => "Hore a dole"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Usporiada možnosti výberu vo viacstĺpcovom rozložení. Ak je nastavená hodnota 0, možnosti sa zobrazia v jednom riadku. Ak je nastavená na -1, skutočná hodnota sa zdedí z vlastnosti \"Počet vnorených stĺpcov\" nadradenej matice."
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "Odkazy na YouTube nie sú podporované."
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "Začnite konfigurovať formulár"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Kliknutím na ikonu ľubovoľnej kategórie preskúmate nastavenia prieskumu. Ďalšie nastavenia budú k dispozícii po pridaní prvku prieskumu na návrhovú plochu."
+// pe.caseInsensitive: "Case insensitive" => "Nerozlišujú sa veľké a malé písmená"
+// pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Vyberte, či sa veľké a malé písmená v regulárnom výraze musia považovať za ekvivalentné."

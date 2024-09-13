@@ -123,6 +123,8 @@ var simplifiedChineseTranslation = {
     toolboxNoResultsFound: "未找到结果",
     propertyGridFilteredTextPlaceholder: "键入以搜索...",
     propertyGridNoResultsFound: "未找到结果",
+    propertyGridPlaceholderTitle: "开始配置表单",
+    propertyGridPlaceholderDescription: "单击任何类别图标以浏览调查设置。将测量元素添加到设计图面后，其他设置将变为可用。",
     correctJSON: "请修正 JSON 数据",
     surveyResults: "问卷结果: ",
     surveyResultsTable: "表格形式",
@@ -154,6 +156,7 @@ var simplifiedChineseTranslation = {
     translationPlaceHolder: "译本。。。",
     translationSource: "源：",
     translationTarget: "目标：",
+    translationYouTubeNotSupported: "不支持 YouTube 链接。",
     themeExportButton: "出口",
     themeImportButton: "进口",
     surveyJsonExportButton: "出口",
@@ -633,6 +636,7 @@ var simplifiedChineseTranslation = {
     maxImageHeight: "最大图像高度",
     minValue: "最小值",
     maxValue: "最大值",
+    caseInsensitive: "不区分大小写",
     minLength: "最小长度",
     allowDigits: "允许的位数",
     minCount: "最小数量",
@@ -1359,6 +1363,7 @@ var simplifiedChineseTranslation = {
       showInMultipleColumns: "选中后，为每个选项创建一个单独的列。",
       colCount: "在多列布局中排列选项。设置为 0 时，选项将以单行显示。当设置为 -1 时，实际值继承自父矩阵的 “Nested column count” 属性。"
     },
+    caseInsensitive: "如果必须将正则表达式中的大写字母和小写字母视为等效字母，请选择此项。",
     widthMode: "从以下选项中选择： “静态” - 设置固定宽度;“响应式” - 使调查占据屏幕的整个宽度;“自动” - 根据所使用的问题类型应用两者中的任何一个。",
     cookieName: "Cookie 可防止用户两次填写同一调查问卷。",
     logo: "粘贴图像链接（无大小限制）或单击文件夹图标以浏览计算机中的文件（最大 64KB）。",
@@ -2912,3 +2917,8 @@ editorLocalization.locales["zh-cn"] = simplifiedChineseTranslation;
 // progressBarLocation.bottom: "Bottom" => "底"
 // progressBarLocation.topBottom: "Top and bottom" => "顶部和底部"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "在多列布局中排列选项。设置为 0 时，选项将以单行显示。当设置为 -1 时，实际值继承自父矩阵的 “Nested column count” 属性。"
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "不支持 YouTube 链接。"
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "开始配置表单"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "单击任何类别图标以浏览调查设置。将测量元素添加到设计图面后，其他设置将变为可用。"
+// pe.caseInsensitive: "Case insensitive" => "不区分大小写"
+// pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "如果必须将正则表达式中的大写字母和小写字母视为等效字母，请选择此项。"

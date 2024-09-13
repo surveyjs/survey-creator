@@ -1,0 +1,177 @@
+@import "../../variables.scss";
+
+.svc-sidebar-tabs {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-inline-start: var(--ctr-property-grid-tabs-border-width, 1px) solid
+    var(--ctr-property-grid-tabs-border-color, rgba(0, 0, 0, 0.16));
+  background: var(--ctr-property-grid-tabs-background-color, #fff);
+  box-sizing: border-box;
+}
+.svc-sidebar-tabs__top-container {
+  display: flex;
+  padding: var(--ctr-property-grid-tabs-padding-top, 12px) var(--ctr-property-grid-tabs-padding-right, 12px)
+    var(--ctr-property-grid-tabs-padding-bottom, 12px) var(--ctr-property-grid-tabs-padding-left, 12px);
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  gap: var(--ctr-property-grid-tabs-separator-margin, 12px);
+}
+.svc-sidebar-tabs__collapse-button {
+  display: flex;
+  align-items: center;
+}
+
+.svc-sidebar-tabs__separator {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  align-self: stretch;
+
+  & > div {
+    height: var(--ctr-separator-width, 1px);
+    background: var(--ctr-separator-color, rgba(0, 0, 0, 0.16));
+    width: 100%;
+  }
+}
+.svc-sidebar-tabs__items {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  gap: var(--ctr-property-grid-tabs-gap, 12px);
+}
+
+.svc-sidebar-tabs:not(.svc-sidebar-tabs--collapsed) .svc-menu-action__button--selected {
+  display: flex;
+  padding: var(--ctr-menu-toolbar-button-padding-top, 8px) var(--ctr-menu-toolbar-button-padding-right, 8px)
+    var(--ctr-menu-toolbar-button-padding-bottom, 8px) var(--ctr-menu-toolbar-button-padding-left, 8px);
+  justify-content: center;
+  align-items: center;
+  gap: var(--ctr-menu-toolbar-button-gap, 8px);
+  border-radius: var(--ctr-menu-toolbar-button-corner-radius, 4px);
+  background: var(--ctr-menu-toolbar-button-background-color-selected, #fff);
+
+  use {
+    fill: var(--ctr-menu-toolbar-button-icon-color-selected, $primary);
+  }
+}
+
+.svc-creator--mobile .svc-sidebar-tabs--collapsed {
+  display: none;
+}
+
+.svc-menu-action {
+  display: flex;
+  align-items: center;
+}
+.svc-menu-action__icon-container {
+  flex: 1 0 0;
+  align-self: stretch;
+}
+.svc-sidebar-tabs__bottom-container {
+  display: flex;
+  padding: var(--ctr-property-grid-tabs-padding-top, 12px) var(--ctr-property-grid-tabs-padding-right, 12px)
+    var(--ctr-property-grid-tabs-padding-bottom, 12px) var(--ctr-property-grid-tabs-padding-left, 12px);
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  gap: var(--ctr-property-grid-tabs-separator-margin, 12px);
+}
+
+.svc-sidebar__header.svc-sidebar__header--tabbed {
+  display: flex;
+  align-items: flex-start;
+  border-bottom: var(--ctr-property-grid-header-border-width-bottom, 2px) solid
+    var(--ctr-property-grid-header-border-color, $primary);
+}
+.svc-sidebar__header-container {
+  display: flex;
+  padding: var(--ctr-property-grid-header-padding-top, 12px) var(--ctr-property-grid-header-padding-right, 16px)
+    var(--ctr-property-grid-header-padding-bottom, 12px) var(--ctr-property-grid-header-padding-left, 16px);
+  justify-content: center;
+  align-items: center;
+  flex: 1 0 0;
+  align-self: stretch;
+
+  background: var(--ctr-property-grid-header-background-color, #fff);
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.svc-sidebar__header-container.svc-sidebar__header-container--with-subtitle {
+  padding: var(--ctr-property-grid-header-padding-top-with-subtitle, 6px)
+    var(--ctr-property-grid-header-padding-right, 16px)
+    var(--ctr-property-grid-header-padding-bottom-with-subtitle, 6px) var(--ctr-property-grid-header-padding-left, 16px);
+}
+
+.svc-sidebar__header-container .svc-side-bar__container-title {
+  justify-content: center;
+}
+
+.svc-sidebar__header-content {
+  display: flex;
+  align-items: center;
+}
+
+.svc-menu-action__button {
+  display: flex;
+  padding: var(--ctr-menu-toolbar-button-padding-top, 8px) var(--ctr-menu-toolbar-button-padding-right, 8px)
+    var(--ctr-menu-toolbar-button-padding-bottom, 8px) var(--ctr-menu-toolbar-button-padding-left, 8px);
+  justify-content: center;
+  align-items: center;
+  gap: var(--ctr-menu-toolbar-button-gap, 8px);
+  border-radius: var(--ctr-menu-toolbar-button-corner-radius, 4px);
+  cursor: pointer;
+}
+.svc-menu-action__button:hover {
+  background: var(--ctr-menu-toolbar-button-background-color-hovered, $background-dim);
+}
+.svc-menu-action__button.svc-menu-action__button--pressed {
+  opacity: var(--ctr-menu-toolbar-button-opacity-pressed, 0.5);
+  background: var(--ctr-menu-toolbar-button-background-color-pressed, #f3f3f3);
+}
+.svc-menu-action__button.svc-menu-action__button--with-subtitle {
+  padding: var(--ctr-menu-toolbar-button-padding-top-with-description, 4px)
+    var(--ctr-menu-toolbar-button-padding-right-with-description, 8px)
+    var(--ctr-menu-toolbar-button-padding-bottom, 8px) var(--ctr-menu-toolbar-button-padding-left-with-description, 8px);
+}
+
+.svc-menu-action__icon {
+  display: flex;
+  width: var(--ctr-menu-toolbar-button-icon-width, 24px);
+  height: var(--ctr-menu-toolbar-button-icon-height, 24px);
+  justify-content: center;
+  align-items: center;
+
+  use {
+    fill: var(--ctr-menu-toolbar-button-icon-color, $foreground-light);
+  }
+}
+.svc-sidebar__header-caption {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.svc-sidebar__header-title {
+  color: var(--ctr-menu-toolbar-button-text-color, rgba(0, 0, 0, 0.91));
+  font-family: var(--ctr-font-family, "Open Sans");
+  font-size: var(--ctr-font-default-size, 16px);
+  font-style: normal;
+  font-weight: 400;
+  line-height: var(--ctr-font-default-line-height, 24px) /* 150% */;
+  display: inline-block;
+}
+.svc-sidebar__header-subtitle {
+  color: var(--ctr-menu-toolbar-button-text-color-secondary, rgba(0, 0, 0, 0.45));
+  font-family: var(--ctr-font-family, "Open Sans");
+  font-size: var(--ctr-font-small-size, 12px);
+  font-style: normal;
+  font-weight: 400;
+  line-height: var(--ctr-font-small-line-height, 16px) /* 133.333% */;
+  display: inline-block;
+}

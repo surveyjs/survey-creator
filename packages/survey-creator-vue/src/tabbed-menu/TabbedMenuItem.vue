@@ -17,6 +17,7 @@
   </div>
 </template>
 <script setup lang="ts">
+import { key2ClickDirective as vKey2click } from "survey-vue3-ui";
 import type { TabbedMenuItem } from "survey-creator-core";
 import { useBase } from "survey-vue3-ui";
 const props = defineProps<{ item: TabbedMenuItem }>();

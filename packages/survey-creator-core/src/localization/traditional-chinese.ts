@@ -123,6 +123,8 @@ var traditionalChineseTranslation = {
     toolboxNoResultsFound: "未找到結果",
     propertyGridFilteredTextPlaceholder: "鍵入以搜尋...",
     propertyGridNoResultsFound: "未找到結果",
+    propertyGridPlaceholderTitle: "開始配置表單",
+    propertyGridPlaceholderDescription: "按兩下任何類別圖示以瀏覽調查設置。將測量元素添加到設計圖面后，其他設置將變為可用。",
     correctJSON: "修正 JSON",
     surveyResults: "問卷結果: ",
     surveyResultsTable: "如表",
@@ -154,6 +156,7 @@ var traditionalChineseTranslation = {
     translationPlaceHolder: "譯本。。。",
     translationSource: "源：",
     translationTarget: "目標：",
+    translationYouTubeNotSupported: "不支援YouTube連結。",
     themeExportButton: "出口",
     themeImportButton: "進口",
     surveyJsonExportButton: "出口",
@@ -633,6 +636,7 @@ var traditionalChineseTranslation = {
     maxImageHeight: "最大圖像高度",
     minValue: "最小值",
     maxValue: "最大值",
+    caseInsensitive: "不區分大小寫",
     minLength: "最小長度（以字元為單位）",
     allowDigits: "允許數位",
     minCount: "最小計數",
@@ -1359,6 +1363,7 @@ var traditionalChineseTranslation = {
       showInMultipleColumns: "選取後，為每個選項創建一個單獨的列。",
       colCount: "在多列佈局中排列選項。設置為 0 時，選項將以單行顯示。當設置為 -1 時，實際值繼承自父矩陣的 “Nested column count” 屬性。"
     },
+    caseInsensitive: "如果必須將正則表示式中的大寫字母和小寫字母視為等效字母，請選擇此項。",
     widthMode: "從以下選項中選擇： 「靜態」 - 設置固定寬度;“回應式” - 使調查佔據螢幕的整個寬度;“自動” - 根據所使用的問題類型應用兩者中的任何一個。",
     cookieName: "Cookie 可防止使用者兩次填寫同一調查問卷。",
     logo: "粘貼圖像連結（無大小限制）或按下資料夾圖示以瀏覽電腦中的檔（最大 64KB）。",
@@ -3042,3 +3047,8 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // progressBarLocation.bottom: "Bottom" => "底"
 // progressBarLocation.topBottom: "Top and bottom" => "頂部和底部"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "在多列佈局中排列選項。設置為 0 時，選項將以單行顯示。當設置為 -1 時，實際值繼承自父矩陣的 “Nested column count” 屬性。"
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "不支援YouTube連結。"
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "開始配置表單"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "按兩下任何類別圖示以瀏覽調查設置。將測量元素添加到設計圖面后，其他設置將變為可用。"
+// pe.caseInsensitive: "Case insensitive" => "不區分大小寫"
+// pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "如果必須將正則表示式中的大寫字母和小寫字母視為等效字母，請選擇此項。"

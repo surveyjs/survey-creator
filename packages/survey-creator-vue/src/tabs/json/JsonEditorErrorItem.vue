@@ -1,12 +1,16 @@
 <template>
-  <sv-svg-icon
+  <SvComponent
+    :is="'sv-svg-icon'"
     :iconName="item.iconName"
     :size="item.iconSize"
     :class="'svc-json-error__icon'"
-  ></sv-svg-icon>
+  ></SvComponent>
   <div class="svc-json-error__container">
     <div class="svc-json-error__title">
-      <survey-string :locString="item.locTitle"></survey-string>
+      <SvComponent
+        :is="'survey-string'"
+        :locString="item.locTitle"
+      ></SvComponent>
     </div>
     <button
       type="button"
@@ -17,14 +21,17 @@
       :aria-label="item.data.fixButtonTitle"
       class="svc-json-error__fix-button"
     >
-      <sv-svg-icon
+      <SvComponent
+        :is="'sv-svg-icon'"
         :iconName="item.data.fixButtonIcon"
         :size="'auto'"
-      ></sv-svg-icon>
+      ></SvComponent>
     </button>
   </div>
 </template>
 <script lang="ts" setup>
+import { key2ClickDirective as vKey2click } from "survey-vue3-ui";
+import { SvComponent } from "survey-vue3-ui";
 import type { Action } from "survey-core";
 import { useBase } from "survey-vue3-ui";
 const props = defineProps<{ item: Action }>();

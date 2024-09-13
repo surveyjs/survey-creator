@@ -1,5 +1,6 @@
 <template>
-  <svc-action-button
+  <SvComponent
+    :is="'svc-action-button'"
     :text="question.linkValueText"
     :click="question.doLinkClick.bind(question)"
     :selected="question.isSelected"
@@ -7,8 +8,9 @@
     :classes="question.linkSetButtonCssClasses"
     :title="question.tooltip"
   >
-  </svc-action-button>
-  <svc-action-button
+  </SvComponent>
+  <SvComponent
+    :is="'svc-action-button'"
     v-if="!question.isReadOnly && question.showClear"
     :text="clearCaption"
     :click="question.doClearClick.bind(question)"
@@ -16,9 +18,10 @@
     :disabled="false"
     :classes="question.linkClearButtonCssClasses"
   >
-  </svc-action-button>
+  </SvComponent>
 </template>
 <script lang="ts" setup>
+import { SvComponent } from "survey-vue3-ui";
 import {
   editorLocalization,
   type QuestionLinkValueModel,
