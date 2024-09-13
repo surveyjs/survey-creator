@@ -51,6 +51,7 @@ svc-tab-designer {
       opacity: 0;
       transition: opacity 1s;
       &>.svc-string-editor,
+      &>.svc-fake-title,
       &>sv-ng-string>.svc-string-editor{
         display: inline-flex;
         &::before {
