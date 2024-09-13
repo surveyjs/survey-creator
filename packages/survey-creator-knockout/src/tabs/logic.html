@@ -5,7 +5,8 @@
     <!-- /ko -->
     <!-- ko if: !hasItems -->
     <div class="svc-logic-tab__content-empty">
-      <span class="svc-text" data-bind="text: $data.emptyTabPlaceholder"></span>
+      <svc-surface-placeholder
+        params="name: 'logic', placeholderTitleText: $data.placeholderTitleText, placeholderDescriptionText: $data.placeholderDescriptionText"></svc-surface-placeholder>
     </div>
     <!-- /ko -->
     <!-- ko if: !readOnly -->

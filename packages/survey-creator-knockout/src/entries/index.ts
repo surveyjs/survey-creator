@@ -32,6 +32,8 @@ export * from "../action-button";
 
 export * from "../tabs/json-error-item";
 
+export * from "../components/surface-placeholder";
+
 //custom questions for property grid
 export * from "../custom-questions/color-item";
 export * from "../custom-questions/question-color";
