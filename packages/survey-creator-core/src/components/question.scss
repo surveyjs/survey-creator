@@ -17,6 +17,9 @@ svc-question {
   display: flex;
   flex-direction: row;
   align-items: stretch;
+  & > * {
+    flex-grow: 1;
+  }
 
   &.svc-question__adorner--collapsed {
     height: fit-content;
