@@ -123,6 +123,8 @@ export var hebrewStrings = {
     toolboxNoResultsFound: "לא נמצאו תוצאות",
     propertyGridFilteredTextPlaceholder: "הקלד כדי לחפש...",
     propertyGridNoResultsFound: "לא נמצאו תוצאות",
+    propertyGridPlaceholderTitle: "התחל לקבוע את תצורת הטופס שלך",
+    propertyGridPlaceholderDescription: "לחץ על סמל קטגוריה כלשהו כדי לחקור את הגדרות הסקר. הגדרות נוספות יהיו זמינות לאחר הוספת רכיב סקר למשטח העיצוב.",
     correctJSON: "אנא תקנו את ה-JSON.",
     surveyResults: "תוצאות הסקר",
     surveyResultsTable: "כטבלה",
@@ -634,6 +636,7 @@ export var hebrewStrings = {
     maxImageHeight: "גובה תמונה מקסימלי",
     minValue: "ערך מינימלי",
     maxValue: "ערך מקסימלי",
+    caseInsensitive: "לא תלוי רישיות",
     minLength: "אורך מינימלי (בתווים)",
     allowDigits: "אפשר ספרות",
     minCount: "מינימום כמות",
@@ -1360,6 +1363,7 @@ export var hebrewStrings = {
       showInMultipleColumns: "כשבוחרים באפשרות זו, יוצר עמודה נפרדת לכל אחת מאפשרויות הבחירה.",
       colCount: "מסדר אפשרויות בחירה בפריסה מרובת עמודות. כאשר הן מוגדרות על 0, האפשרויות מוצגות בשורה אחת. כאשר הוא מוגדר ל- -1, הערך בפועל עובר בירושה מהמאפיין \"ספירת עמודות מקוננת\" של מטריצת האב."
     },
+    caseInsensitive: "בחר אם יש להתייחס לאותיות רישיות וקטנות בביטוי הרגיל כשוות ערך.",
     widthMode: "בחר מתוך: \"סטטי\" - קובע רוחב קבוע; \"מגיב\" - עושה את הסקר לתפוס את מלוא רוחב המסך; \"אוטומטי\" - חל על כל אחד מהשניים בהתאם לסוגי השאלות המשמשים.",
     cookieName: "עוגיות מונעות ממשתמשים למלא את אותו סקר פעמיים.",
     logo: "הדבק קישור לתמונה (ללא מגבלות גודל) או לחץ על סמל התיקייה כדי לעיין בקובץ מהמחשב שלך (עד 64KB).",
@@ -2340,3 +2344,7 @@ editorLocalization.locales["he"] = hebrewStrings;
 // progressBarLocation.topBottom: "Top and bottom" => "עליון ותחתון"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "מסדר אפשרויות בחירה בפריסה מרובת עמודות. כאשר הן מוגדרות על 0, האפשרויות מוצגות בשורה אחת. כאשר הוא מוגדר ל- -1, הערך בפועל עובר בירושה מהמאפיין \"ספירת עמודות מקוננת\" של מטריצת האב."
 // ed.translationYouTubeNotSupported: "YouTube links are not supported." => "קישורי YouTube אינם נתמכים."
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "התחל לקבוע את תצורת הטופס שלך"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "לחץ על סמל קטגוריה כלשהו כדי לחקור את הגדרות הסקר. הגדרות נוספות יהיו זמינות לאחר הוספת רכיב סקר למשטח העיצוב."
+// pe.caseInsensitive: "Case insensitive" => "לא תלוי רישיות"
+// pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "בחר אם יש להתייחס לאותיות רישיות וקטנות בביטוי הרגיל כשוות ערך."

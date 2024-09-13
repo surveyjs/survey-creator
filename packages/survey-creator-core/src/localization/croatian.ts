@@ -123,6 +123,8 @@ export var hrStrings = {
     toolboxNoResultsFound: "Nisu pronađeni rezultati",
     propertyGridFilteredTextPlaceholder: "Upišite za pretraživanje...",
     propertyGridNoResultsFound: "Nisu pronađeni rezultati",
+    propertyGridPlaceholderTitle: "Počnite konfigurirati svoj obrazac",
+    propertyGridPlaceholderDescription: "Kliknite bilo koju ikonu kategorije da biste istražili postavke upitnika. Dodatne postavke postat će dostupne nakon što dodate element upitnika na površinu dizajna.",
     correctJSON: "Ispravite JSON.",
     surveyResults: "Rezultat ankete: ",
     surveyResultsTable: "Kao tablica",
@@ -634,6 +636,7 @@ export var hrStrings = {
     maxImageHeight: "Maksimalna visina slike",
     minValue: "Minimalna vrijednost",
     maxValue: "Maksimalna vrijednost",
+    caseInsensitive: "Bez osjetljivosti na velika i mala slova",
     minLength: "Minimalna duljina",
     allowDigits: "Dopustite znamenke",
     minCount: "Minimalno brojanje",
@@ -1360,6 +1363,7 @@ export var hrStrings = {
       showInMultipleColumns: "Kada je odabrano, stvara pojedinačni stupac za svaku mogućnost izbora.",
       colCount: "Raspoređuje opcije izbora u rasporedu s više stupaca. Kada je postavljena na 0, opcije se prikazuju u jednom retku. Kada je postavljena na -1, stvarna vrijednost nasljeđuje se iz svojstva \"Broj ugniježđenih stupaca\" nadređene matrice."
     },
+    caseInsensitive: "Odaberite ako se velika i mala slova u regularnom izrazu moraju tretirati kao ekvivalentna.",
     widthMode: "Odaberite između: \"Statika\" - postavlja fiksnu širinu; \"Responsive\" - čini da anketa zauzima punu širinu zaslona; \"Auto\" - primjenjuje se bilo koji od dva ovisno o korištenim vrstama pitanja.",
     cookieName: "Kolačići sprječavaju korisnike da dvaput ispune istu anketu.",
     logo: "Zalijepite slikovnu vezu (bez ograničenja veličine) ili kliknite ikonu mape da biste pregledali datoteku s računala (do 64 KB).",
@@ -2766,3 +2770,7 @@ editorLocalization.locales["hr"] = hrStrings;
 // progressBarLocation.topBottom: "Top and bottom" => "Vrh i dno"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Raspoređuje opcije izbora u rasporedu s više stupaca. Kada je postavljena na 0, opcije se prikazuju u jednom retku. Kada je postavljena na -1, stvarna vrijednost nasljeđuje se iz svojstva \"Broj ugniježđenih stupaca\" nadređene matrice."
 // ed.translationYouTubeNotSupported: "YouTube links are not supported." => "YouTube veze nisu podržane."
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "Počnite konfigurirati svoj obrazac"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Kliknite bilo koju ikonu kategorije da biste istražili postavke upitnika. Dodatne postavke postat će dostupne nakon što dodate element upitnika na površinu dizajna."
+// pe.caseInsensitive: "Case insensitive" => "Bez osjetljivosti na velika i mala slova"
+// pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Odaberite ako se velika i mala slova u regularnom izrazu moraju tretirati kao ekvivalentna."

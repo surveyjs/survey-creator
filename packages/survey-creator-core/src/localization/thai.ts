@@ -123,6 +123,8 @@ export const thStrings = {
     toolboxNoResultsFound: "ไม่พบผลลัพธ์",
     propertyGridFilteredTextPlaceholder: "พิมพ์เพื่อค้นหา...",
     propertyGridNoResultsFound: "ไม่พบผลลัพธ์",
+    propertyGridPlaceholderTitle: "เริ่มกําหนดค่าฟอร์มของคุณ",
+    propertyGridPlaceholderDescription: "คลิกไอคอนหมวดหมู่ใดก็ได้เพื่อสํารวจการตั้งค่าแบบสํารวจ การตั้งค่าเพิ่มเติมจะพร้อมใช้งานเมื่อคุณเพิ่มองค์ประกอบแบบสํารวจลงในพื้นผิวการออกแบบ",
     correctJSON: "กรุณาแก้ไข JSON",
     surveyResults: "ผลลัพธ์ของแบบสำรวจ",
     surveyResultsTable: "เป็นตาราง",
@@ -634,6 +636,7 @@ export const thStrings = {
     maxImageHeight: "ความสูงสูงสุดของพื้นที่แสดงผล",
     minValue: "ค่าขั้นต่ำ",
     maxValue: "ค่าสูงสุด",
+    caseInsensitive: "ไม่คํานึงถึงตัวพิมพ์เล็กและตัวพิมพ์ใหญ่",
     minLength: "ความยาวขั้นต่ำ (ในตัวอักษร)",
     allowDigits: "อนุญาตให้มีตัวเลข",
     minCount: "จำนวนขั้นต่ำ",
@@ -1360,6 +1363,7 @@ export const thStrings = {
       showInMultipleColumns: "เมื่อเลือก จะสร้างคอลัมน์แยกสำหรับตัวเลือกแต่ละตัว",
       colCount: "จัดเรียงตัวเลือกตัวเลือกในรูปแบบหลายคอลัมน์ เมื่อตั้งค่าเป็น 0 ตัวเลือกจะแสดงในบรรทัดเดียว เมื่อตั้งค่าเป็น -1 ค่าจริงจะถูกสืบทอดมาจากคุณสมบัติ \"จํานวนคอลัมน์ที่ซ้อนกัน\" ของเมทริกซ์หลัก"
     },
+    caseInsensitive: "เลือกว่าตัวพิมพ์ใหญ่และตัวพิมพ์เล็กในนิพจน์ทั่วไปต้องถือว่าเทียบเท่าหรือไม่",
     widthMode: "เลือกจาก: \"คงที่\" - ตั้งค่าความกว้างคงที่; \"ตอบสนอง\" - ทำให้แบบสำรวจเต็มความกว้างของหน้าจอ; \"อัตโนมัติ\" - ใช้ค่าใดค่าหนึ่งในสองค่าตามประเภทคำถามที่ใช้",
     cookieName: "กำหนดค่า cookie ที่ไม่ซ้ำกันสำหรับแบบสำรวจของคุณ Cookie จะถูกตั้งค่าในเบราว์เซอร์ของผู้ตอบเมื่อแบบสำรวจเสร็จสมบูรณ์เพื่อป้องกันการส่งแบบสำรวจซ้ำ",
     logo: "วางลิงก์ภาพ (ไม่มีขนาดจำกัด) หรือคลิกไอคอนโฟลเดอร์เพื่อเลือกไฟล์จากคอมพิวเตอร์ของคุณ (สูงสุด 64KB)",
@@ -1705,3 +1709,7 @@ editorLocalization.locales["th"] = thStrings;
 // progressBarLocation.topBottom: "Top and bottom" => "ด้านบนและด้านล่าง"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "จัดเรียงตัวเลือกตัวเลือกในรูปแบบหลายคอลัมน์ เมื่อตั้งค่าเป็น 0 ตัวเลือกจะแสดงในบรรทัดเดียว เมื่อตั้งค่าเป็น -1 ค่าจริงจะถูกสืบทอดมาจากคุณสมบัติ \"จํานวนคอลัมน์ที่ซ้อนกัน\" ของเมทริกซ์หลัก"
 // ed.translationYouTubeNotSupported: "YouTube links are not supported." => "ไม่รองรับลิงก์ YouTube"
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "เริ่มกําหนดค่าฟอร์มของคุณ"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "คลิกไอคอนหมวดหมู่ใดก็ได้เพื่อสํารวจการตั้งค่าแบบสํารวจ การตั้งค่าเพิ่มเติมจะพร้อมใช้งานเมื่อคุณเพิ่มองค์ประกอบแบบสํารวจลงในพื้นผิวการออกแบบ"
+// pe.caseInsensitive: "Case insensitive" => "ไม่คํานึงถึงตัวพิมพ์เล็กและตัวพิมพ์ใหญ่"
+// pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "เลือกว่าตัวพิมพ์ใหญ่และตัวพิมพ์เล็กในนิพจน์ทั่วไปต้องถือว่าเทียบเท่าหรือไม่"

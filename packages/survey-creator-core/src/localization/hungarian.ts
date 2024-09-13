@@ -123,6 +123,8 @@ export var huStrings = {
     toolboxNoResultsFound: "Nincs találat",
     propertyGridFilteredTextPlaceholder: "Írja be a kereséshez...",
     propertyGridNoResultsFound: "Nincs találat",
+    propertyGridPlaceholderTitle: "Kezdje el konfigurálni az űrlapot",
+    propertyGridPlaceholderDescription: "Kattintson bármelyik kategória ikonjára a felmérési beállítások felfedezéséhez. További beállítások válnak elérhetővé, ha hozzáad egy földmérési elemet a tervezési felülethez.",
     correctJSON: "Kérem javítsa a JSON-t.",
     surveyResults: "Kérdőív eredménye: ",
     surveyResultsTable: "Táblaként",
@@ -634,6 +636,7 @@ export var huStrings = {
     maxImageHeight: "Maximális képmagasság",
     minValue: "Minimális érték",
     maxValue: "Maximális érték",
+    caseInsensitive: "Kis- és nagybetűk megkülönböztetése",
     minLength: "Minimális hossz",
     allowDigits: "Számjegyek engedélyezése",
     minCount: "Minimális darabszám",
@@ -1360,6 +1363,7 @@ export var huStrings = {
       showInMultipleColumns: "Ha be van jelölve, minden választási lehetőséghez külön oszlopot hoz létre.",
       colCount: "Az adatválaszték-beállításokat többoszlopos elrendezésbe rendezi. Ha 0-ra van állítva, a beállítások egyetlen sorban jelennek meg. Ha -1 értékre van állítva, a tényleges érték a szülőmátrix \"Beágyazott oszlopok száma\" tulajdonságából öröklődik."
     },
+    caseInsensitive: "Válassza ki, hogy a reguláris kifejezés kis- és nagybetűit egyenértékűként kell-e kezelni.",
     widthMode: "Válasszon a következők közül: \"Statikus\" - rögzített szélességet állít be; \"Reszponzív\" - a felmérés a képernyő teljes szélességét elfoglalja; \"Automatikus\" - a használt kérdéstípusoktól függően a kettő egyikét alkalmazza.",
     cookieName: "A cookie-k megakadályozzák, hogy a felhasználók kétszer töltsék ki ugyanazt a felmérést.",
     logo: "Illesszen be egy képhivatkozást (méretkorlátozás nélkül), vagy kattintson a mappa ikonra egy fájl böngészéséhez a számítógépről (legfeljebb 64 KB).",
@@ -2925,3 +2929,7 @@ editorLocalization.locales["hu"] = huStrings;
 // progressBarLocation.topBottom: "Top and bottom" => "Felső és alsó"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Az adatválaszték-beállításokat többoszlopos elrendezésbe rendezi. Ha 0-ra van állítva, a beállítások egyetlen sorban jelennek meg. Ha -1 értékre van állítva, a tényleges érték a szülőmátrix \"Beágyazott oszlopok száma\" tulajdonságából öröklődik."
 // ed.translationYouTubeNotSupported: "YouTube links are not supported." => "A YouTube-linkek nem támogatottak."
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "Kezdje el konfigurálni az űrlapot"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Kattintson bármelyik kategória ikonjára a felmérési beállítások felfedezéséhez. További beállítások válnak elérhetővé, ha hozzáad egy földmérési elemet a tervezési felülethez."
+// pe.caseInsensitive: "Case insensitive" => "Kis- és nagybetűk megkülönböztetése"
+// pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Válassza ki, hogy a reguláris kifejezés kis- és nagybetűit egyenértékűként kell-e kezelni."

@@ -123,6 +123,8 @@ export var koreanStrings = {
     toolboxNoResultsFound: "결과를 찾을 수 없습니다.",
     propertyGridFilteredTextPlaceholder: "검색하려면 입력...",
     propertyGridNoResultsFound: "결과를 찾을 수 없습니다.",
+    propertyGridPlaceholderTitle: "양식 구성 시작",
+    propertyGridPlaceholderDescription: "범주 아이콘을 클릭하여 설문조사 설정을 탐색합니다. 디자인 화면에 설문 조사 요소를 추가하면 추가 설정을 사용할 수 있게 됩니다.",
     correctJSON: "JSON 데이터를 수정하십시오.",
     surveyResults: "설문 결과: ",
     surveyResultsTable: "테이블로",
@@ -634,6 +636,7 @@ export var koreanStrings = {
     maxImageHeight: "최대 이미지 높이",
     minValue: "최소값",
     maxValue: "최대값",
+    caseInsensitive: "대소문자 구분 안 함",
     minLength: "최소 길이(문자)",
     allowDigits: "숫자 허용",
     minCount: "최소 개수",
@@ -1360,6 +1363,7 @@ export var koreanStrings = {
       showInMultipleColumns: "이 옵션을 선택하면 각 선택 옵션에 대한 개별 열이 만들어집니다.",
       colCount: "선택 옵션을 여러 열 레이아웃으로 정렬합니다. 0으로 설정하면 옵션이 한 줄로 표시됩니다. -1로 설정하면 실제 값이 부모 행렬의 \"중첩 열 수\" 속성에서 상속됩니다."
     },
+    caseInsensitive: "정규식에서 대문자와 소문자를 동등하게 취급해야 하는 경우 선택합니다.",
     widthMode: "다음 중에서 선택합니다. \"정적\" - 고정 너비를 설정합니다. \"반응형\" - 설문조사가 화면의 전체 너비를 차지하도록 합니다. \"자동\" - 사용된 질문 유형에 따라 둘 중 하나를 적용합니다.",
     cookieName: "쿠키는 사용자가 동일한 설문조사를 두 번 작성하는 것을 방지합니다.",
     logo: "이미지 링크(크기 제한 없음)를 붙여넣거나 폴더 아이콘을 클릭하여 컴퓨터에서 파일을 찾습니다(최대 64KB).",
@@ -2976,3 +2980,7 @@ editorLocalization.locales["ko"] = koreanStrings;
 // progressBarLocation.topBottom: "Top and bottom" => "위쪽 및 아래쪽"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "선택 옵션을 여러 열 레이아웃으로 정렬합니다. 0으로 설정하면 옵션이 한 줄로 표시됩니다. -1로 설정하면 실제 값이 부모 행렬의 \"중첩 열 수\" 속성에서 상속됩니다."
 // ed.translationYouTubeNotSupported: "YouTube links are not supported." => "YouTube 링크는 지원되지 않습니다."
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "양식 구성 시작"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "범주 아이콘을 클릭하여 설문조사 설정을 탐색합니다. 디자인 화면에 설문 조사 요소를 추가하면 추가 설정을 사용할 수 있게 됩니다."
+// pe.caseInsensitive: "Case insensitive" => "대소문자 구분 안 함"
+// pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "정규식에서 대문자와 소문자를 동등하게 취급해야 하는 경우 선택합니다."
