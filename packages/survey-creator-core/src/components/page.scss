@@ -10,6 +10,11 @@ svc-page {
   .sd-page__title {
     margin: calcSize(3) 0 0 0;
     color: var(--ctr-survey-page-header-title-color-placeholder, $foreground-dim);
+    gap: calcSize(0.5);
+  }
+
+  .sd-page__num {
+    color: var(--ctr-survey-page-header-title-color-placeholder, $foreground-light);
   }
 
   .svc-panel__placeholder {
