@@ -82,13 +82,11 @@ export class QuestionImageAdornerComponent extends QuestionAdornerComponent {
         question: this.imageModel.filePresentationModel
       });
       return (<>
-        {this.renderQuestionTitle()}
         {fileQuestion}
       </>);
     } else {
       return (
         <>
-          {this.renderQuestionTitle()}
           {this.props.element}
           {this.renderElementPlaceholder()}
         </>

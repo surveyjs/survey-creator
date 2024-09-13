@@ -1,5 +1,5 @@
 
-import { QuestionImageModel, SurveyElement, SurveyTemplateRendererTemplateData, SurveyModel, property, QuestionFileModel, Base, Serializer, CssClassBuilder } from "survey-core";
+import { QuestionImageModel, SurveyElement, SurveyTemplateRendererTemplateData, SurveyModel, property, QuestionFileModel, Base, Serializer, CssClassBuilder, classesToSelector } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { QuestionAdornerViewModel } from "./question";
 import { getAcceptedTypesByContentMode } from "../utils/utils";
@@ -86,6 +86,17 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
 
   public get chooseImageText(): string {
     return getLocString("ed.imageChooseImage");
+  }
+
+  protected getAnimatedElement() {
+    if (this.isEmptyImageLink) {
+      const cssClasses = this.filePresentationModel.cssClasses;
+      if (cssClasses.root) {
+        return this.surveyElement.getWrapperElement().querySelector(`:scope ${classesToSelector(cssClasses.root)}`) as HTMLElement;
+      }
+    }
+    return super.getAnimatedElement();
+
   }
   public css() {
     return new CssClassBuilder()

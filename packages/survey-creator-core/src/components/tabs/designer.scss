@@ -43,25 +43,8 @@ svc-tab-designer {
   .svc-tab-designer_content {
     width: 100%;
   }
-
   .sd-title {
     display: flex;
-    &.sd-element__title--hidden,
-    &.svc-element__title--hidden {
-      opacity: 0;
-      transition: opacity 1s;
-      &>.svc-string-editor,
-      &>.svc-fake-title,
-      &>sv-ng-string>.svc-string-editor{
-        display: inline-flex;
-        &::before {
-          content: '('
-        }
-        &::after {
-          content: ')'
-        }
-      }
-    }
   }
 
   .sd-container-modern {
