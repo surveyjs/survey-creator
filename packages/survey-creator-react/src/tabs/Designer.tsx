@@ -8,7 +8,7 @@ import {
 } from "survey-react-ui";
 import { SurveyCreatorModel, TabDesignerViewModel } from "survey-creator-core";
 import { SurveyPageNavigator } from "../PageNavigator";
-import { SurveyNavigation } from "../Navigation";
+import { SurfacePlaceholder } from "../components/SurfacePlaceholder";
 
 interface ITabDesignerComponentProps {
   data: TabDesignerViewModel;
@@ -156,14 +156,7 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
     </React.Fragment>);
   }
   renderPlaceHolderContent(): JSX.Element {
-    // return <span className="svc-designer-placeholder-text svc-text svc-text--normal">{this.model.placeholderText}</span>;
-    return (<>
-      <div className="svc-designer-placeholder__image"></div >
-      <div className="svc-designer-placeholder__text">
-        <div className="svc-designer-placeholder__title">{this.model.placeholderTitleText}</div>
-        <div className="svc-designer-placeholder__description">{this.model.placeholderDescriptionText}</div>
-      </div>
-    </>);
+    return <SurfacePlaceholder name={"designer"} placeholderTitleText={this.model.placeholderTitleText} placeholderDescriptionText={this.model.placeholderDescriptionText} />;
   }
   renderTabContent(): JSX.Element {
     const survey: SurveyModel = this.creator.survey;

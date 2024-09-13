@@ -1,0 +1,83 @@
+@import "../variables.scss";
+
+.svc-surface-placeholder {
+  display: flex;
+  width: 100%;
+  max-width: var(--ctr-surface-placeholder-max-width, 720px);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0px;
+  padding: calcSize(2);
+  box-sizing: border-box;
+}
+
+.svc-surface-placeholder__image {
+  display: flex;
+  flex-direction: row;
+  gap: 0px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+  padding: 133px 168px 133px 168px;
+  display: flex;
+  flex-direction: row;
+  gap: 0px;
+  align-items: center;
+  justify-content: center;
+}
+
+.svc-surface-placeholder__image--designer {
+  background: url("../images/placeholder-designer.png") no-repeat;
+}
+
+.svc-surface-placeholder__image--preview {
+  background: url("../images/placeholder-preview.png") no-repeat;
+}
+
+.svc-surface-placeholder__image--theme {
+  background: url("../images/placeholder-themes.png") no-repeat;
+}
+
+.svc-surface-placeholder__image--logic {
+  background: url("../images/placeholder-logic.png") no-repeat;
+}
+
+.svc-surface-placeholder__image--translation {
+  background: url("../images/placeholder-translations.png") no-repeat;
+}
+
+.svc-surface-placeholder__text {
+  padding: var(--ctr-surface-placeholder-text-margin-top, 32px) 0px var(--ctr-surface-placeholder-text-margin-bottom, 24px) 0px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ctr-surface-placeholder-text-gap, 8px);
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  flex-shrink: 0;
+  width: 100%;
+}
+
+.svc-surface-placeholder__title {
+  color: var(--ctr-surface-placeholder-text-title-color, rgba(0, 0, 0, 0.91));
+  text-align: center;
+  font-family: var(--ctr-medium-bold-font-family, "OpenSans-Bold", sans-serif);
+  font-size: var(--ctr-medium-bold-font-size, 24px);
+  line-height: var(--ctr-medium-bold-line-height, 32px);
+  font-weight: var(--ctr-medium-bold-font-weight, 700);
+  align-self: stretch;
+}
+
+.svc-surface-placeholder__description {
+  color: var(--ctr-surface-placeholder-text-description-color,
+      rgba(0, 0, 0, 0.45));
+  text-align: center;
+  font-family: var(--ctr-default-font-family, "OpenSans-Regular", sans-serif);
+  font-size: var(--ctr-default-font-size, 16px);
+  line-height: var(--ctr-default-line-height, 24px);
+  font-weight: var(--ctr-default-font-weight, 400);
+  align-self: stretch;
+}
