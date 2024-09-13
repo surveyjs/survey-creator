@@ -250,17 +250,20 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     return this._footerActionsBar;
   }
 
+  private getWrapperElement() {
+    return document.querySelector(`[data-sv-drop-target-page="${this.page.name}"]`);
+  }
   protected getAnimatedElement() {
     const cssClasses = this.surveyElement.cssClasses.page;
     if (cssClasses?.description) {
-      return this.surveyElement.getWrapperElement()?.querySelector(`:scope ${classesToSelector(cssClasses.description)}`) as HTMLElement;
+      return this.getWrapperElement()?.querySelector(`:scope ${classesToSelector(cssClasses.description)}`) as HTMLElement;
     }
     return null;
   }
 
   protected getInnerAnimatedElements() {
     const cssClasses = this.surveyElement.cssClasses;
-    if (cssClasses.pageRow) return this.surveyElement.getWrapperElement()?.querySelectorAll(`:scope ${classesToSelector(cssClasses.pageRow)}`);
+    if (cssClasses.pageRow) return this.getWrapperElement()?.querySelectorAll(":scope .svc-page__footer, :scope .svc-row");
     return null;
   }
 
