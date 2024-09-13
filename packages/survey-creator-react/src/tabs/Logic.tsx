@@ -3,7 +3,7 @@ import * as React from "react";
 import { Action, Base } from "survey-core";
 import { ReactElementFactory, SurveyElementBase, Survey, attachKey2click } from "survey-react-ui";
 import { SurveyLogicUI } from "survey-creator-core";
-import { SurfacePlaceholder } from "src/components/SurfacePlaceholder";
+import { SurfacePlaceholder } from "../components/SurfacePlaceholder";
 
 export class TabLogicAddButtonComponent extends SurveyElementBase<any, any> {
   private get model(): Action {

@@ -3,7 +3,9 @@
     <div class="svc-plugin-tab__content svc-logic-tab__content" [class.svc-logic-tab--empty]="!model.hasItems">
       <survey-content [model]="model.itemsSurvey"></survey-content>
       <div *ngIf="!model.hasItems" class="svc-logic-tab__content-empty">
-        <span class="svc-text">{{model.emptyTabPlaceholder}}</span>
+        <svc-surface-placeholder [name]="'logic'" [placeholderTitleText]="model.placeholderTitleText"
+          [placeholderDescriptionText]="model.placeholderDescriptionText">
+        </svc-surface-placeholder>
       </div>
       <ng-container *ngIf="!model.readOnly">
         <svc-tab-logic-add-btn [model]="model.addNewButton"></svc-tab-logic-add-btn>

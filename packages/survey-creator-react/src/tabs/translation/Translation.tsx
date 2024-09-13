@@ -6,7 +6,7 @@ import {
   Survey
 } from "survey-react-ui";
 import { Translation } from "survey-creator-core";
-import { SurfacePlaceholder } from "src/components/SurfacePlaceholder";
+import { SurfacePlaceholder } from "../../components/SurfacePlaceholder";
 
 export class TabTranslationComponent extends SurveyElementBase<any, any> {
   private get model(): Translation {
