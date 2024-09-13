@@ -1925,6 +1925,9 @@ export class SurveyCreatorModel extends Base
         this.setModified({ type: "ADDED_FROM_TOOLBOX", question: options.draggedElement });
       }
     });
+    this.dragDropSurveyElements.onDragClear.add((sender, options) => {
+      this.stopUndoRedoTransaction();
+    });
   }
   private initDragDropChoices() {
     this.dragDropChoices = new DragDropChoices(null, this);

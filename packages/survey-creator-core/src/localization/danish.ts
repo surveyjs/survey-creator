@@ -123,6 +123,8 @@ export var danishStrings = {
     toolboxNoResultsFound: "Ingen resultater fundet",
     propertyGridFilteredTextPlaceholder: "Skriv for at søge...",
     propertyGridNoResultsFound: "Ingen resultater fundet",
+    propertyGridPlaceholderTitle: "Begynd at konfigurere formularen",
+    propertyGridPlaceholderDescription: "Klik på et kategoriikon for at udforske undersøgelsesindstillinger. Yderligere indstillinger bliver tilgængelige, når du føjer et undersøgelseselement til designoverfladen.",
     correctJSON: "Ret venligst JSON.",
     surveyResults: "Undersøgelsesresultat: ",
     surveyResultsTable: "Som tabel",
@@ -634,6 +636,7 @@ export var danishStrings = {
     maxImageHeight: "Maksimal billedhøjde",
     minValue: "Mindste værdi",
     maxValue: "Maksimal værdi",
+    caseInsensitive: "Der skelnes ikke mellem store og små bogstaver",
     minLength: "Mindste længde (med bogstaver)",
     allowDigits: "Tillad cifre",
     minCount: "Mindste antal",
@@ -1360,6 +1363,7 @@ export var danishStrings = {
       showInMultipleColumns: "Når denne indstilling er valgt, oprettes der en individuel kolonne for hver valgmulighed.",
       colCount: "Arrangerer valgmuligheder i et layout med flere kolonner. Når den er indstillet til 0, vises indstillingerne på en enkelt linje. Når den er angivet til -1, nedarves den faktiske værdi fra egenskaben \"Antal indlejrede kolonner\" for den overordnede matrix."
     },
+    caseInsensitive: "Vælg, om store og små bogstaver i det regulære udtryk skal behandles som ækvivalente.",
     widthMode: "Vælg mellem: \"Statisk\" - indstiller en fast bredde; \"Responsive\" - får undersøgelsen til at optage skærmens fulde bredde; \"Auto\" - gælder for en af de to afhængigt af de anvendte spørgsmålstyper.",
     cookieName: "Cookies forhindrer brugere i at udfylde den samme undersøgelse to gange.",
     logo: "Indsæt et billedlink (ingen størrelsesbegrænsninger), eller klik på mappeikonet for at gennemse en fil fra din computer (op til 64 KB).",
@@ -2957,3 +2961,7 @@ editorLocalization.locales["da"] = danishStrings;
 // progressBarLocation.topBottom: "Top and bottom" => "Top og bund"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Arrangerer valgmuligheder i et layout med flere kolonner. Når den er indstillet til 0, vises indstillingerne på en enkelt linje. Når den er angivet til -1, nedarves den faktiske værdi fra egenskaben \"Antal indlejrede kolonner\" for den overordnede matrix."
 // ed.translationYouTubeNotSupported: "YouTube links are not supported." => "YouTube-links understøttes ikke."
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "Begynd at konfigurere formularen"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Klik på et kategoriikon for at udforske undersøgelsesindstillinger. Yderligere indstillinger bliver tilgængelige, når du føjer et undersøgelseselement til designoverfladen."
+// pe.caseInsensitive: "Case insensitive" => "Der skelnes ikke mellem store og små bogstaver"
+// pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Vælg, om store og små bogstaver i det regulære udtryk skal behandles som ækvivalente."

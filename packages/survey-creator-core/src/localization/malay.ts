@@ -123,6 +123,8 @@ export var msStrings = {
     toolboxNoResultsFound: "Tiada keputusan ditemui",
     propertyGridFilteredTextPlaceholder: "Taip untuk mencari...",
     propertyGridNoResultsFound: "Tiada keputusan ditemui",
+    propertyGridPlaceholderTitle: "Mula mengkonfigurasi borang anda",
+    propertyGridPlaceholderDescription: "Klik mana-mana ikon kategori untuk meneroka tetapan tinjauan. Seting tambahan akan tersedia sebaik sahaja anda menambah elemen tinjauan pada permukaan reka bentuk.",
     correctJSON: "Pilih JSON yang betul.",
     surveyResults: "Keputusan Tinjauan: ",
     surveyResultsTable: "Sebagai Jadual",
@@ -634,6 +636,7 @@ export var msStrings = {
     maxImageHeight: "Ketinggian imej maksimum",
     minValue: "Nilai minimum",
     maxValue: "Nilai maksimum",
+    caseInsensitive: "Tidak sensitif huruf besar",
     minLength: "Panjang minimum",
     allowDigits: "Benarkan digit",
     minCount: "Bilangan minimum",
@@ -1360,6 +1363,7 @@ export var msStrings = {
       showInMultipleColumns: "Apabila dipilih, cipta lajur individu untuk setiap opsyen pilihan.",
       colCount: "Mengatur pilihan pilihan dalam susun atur berbilang lajur. Apabila ditetapkan kepada 0, pilihan dipaparkan dalam satu baris. Apabila ditetapkan kepada -1, nilai sebenar diwarisi daripada sifat \"Kiraan lajur bersarang\" bagi matriks induk."
     },
+    caseInsensitive: "Pilih jika huruf besar dan huruf kecil dalam ungkapan biasa mesti dianggap sebagai setara.",
     widthMode: "Pilih daripada: \"Statik\" - menetapkan lebar tetap; \"Responsif\" - membuat tinjauan menduduki lebar penuh skrin; \"Auto\" - terpakai salah satu daripada kedua-duanya bergantung kepada jenis soalan yang digunakan.",
     cookieName: "Kuki menghalang pengguna daripada mengisi tinjauan yang sama dua kali.",
     logo: "Tampal pautan imej (tiada had saiz) atau klik ikon folder untuk menyemak lalu fail daripada komputer anda (sehingga 64KB).",
@@ -2725,3 +2729,7 @@ editorLocalization.locales["ms"] = msStrings;
 // progressBarLocation.topBottom: "Top and bottom" => "Atas dan bawah"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Mengatur pilihan pilihan dalam susun atur berbilang lajur. Apabila ditetapkan kepada 0, pilihan dipaparkan dalam satu baris. Apabila ditetapkan kepada -1, nilai sebenar diwarisi daripada sifat \"Kiraan lajur bersarang\" bagi matriks induk."
 // ed.translationYouTubeNotSupported: "YouTube links are not supported." => "Pautan YouTube tidak disokong."
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "Mula mengkonfigurasi borang anda"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Klik mana-mana ikon kategori untuk meneroka tetapan tinjauan. Seting tambahan akan tersedia sebaik sahaja anda menambah elemen tinjauan pada permukaan reka bentuk."
+// pe.caseInsensitive: "Case insensitive" => "Tidak sensitif huruf besar"
+// pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Pilih jika huruf besar dan huruf kecil dalam ungkapan biasa mesti dianggap sebagai setara."

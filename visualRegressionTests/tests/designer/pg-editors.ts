@@ -650,7 +650,7 @@ test("Check overriding property editor", async (t) => {
 
 test("Check comment editor with reset button", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1920, 1920);
+    await t.resizeWindow(1920, 900);
     await ClientFunction(() => {
       (<any>window).Survey.Serializer.addProperty("survey", {
         name: "test:text",
