@@ -114,55 +114,29 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
 
   css() {
     if (!this.surveyElement.isInteractiveDesignElement) return "";
-
-    let result = "svc-question__content";
-    result += typeof this.surveyElement.getType === "function" ? (" svc-question__content--" + this.surveyElement.getType()) : "";
-    if (this.creator.isElementSelected(this.surveyElement)) {
-      result += " svc-question__content--selected";
+    const cssClassBuilder = new CssClassBuilder().append("svc-question__content")
+      .append("svc-question__content--selected", !!this.creator.isElementSelected(this.surveyElement))
+      .append("svc-question__content--empty", this.isEmptyElement)
+      .append("svc-question__content--empty-template", this.isEmptyTemplate)
+      .append("svc-question__content--collapsed", this.renderedCollapsed)
+      .append("svc-question__content--dragged", this.isDragMe)
+      .append("svc-question__content--drag-over-inside", this.dragTypeOverMe === DragTypeOverMeEnum.InsideEmptyPanel)
+      .append("svc-question__content--drag-over-left", !this.dragInsideCollapsedContainer && this.dragTypeOverMe === DragTypeOverMeEnum.Left)
+      .append("svc-question__content--drag-over-right", !this.dragInsideCollapsedContainer && this.dragTypeOverMe === DragTypeOverMeEnum.Right)
+      .append("svc-question__content--drag-over-top", !this.dragInsideCollapsedContainer && this.dragTypeOverMe === DragTypeOverMeEnum.Top)
+      .append("svc-question__content--drag-over-bottom", !this.dragInsideCollapsedContainer && this.dragTypeOverMe === DragTypeOverMeEnum.Bottom);
+    if(typeof this.surveyElement.getType === "function") {
+      cssClassBuilder.append("svc-question__content--" + this.surveyElement.getType());
     }
-
-    if (this.isEmptyElement) {
-      result += " svc-question__content--empty";
-    }
-    if (this.isEmptyTemplate) {
-      result += " svc-question__content--empty-template";
-    }
-    if (this.renderedCollapsed) {
-      result += " svc-question__content--collapsed";
-    }
-
-    if (this.isDragMe) {
-      result += " svc-question__content--dragged";
-    }
-
     if (!!this.dragTypeOverMe && (this.canExpandOnDrag) && this.dragInsideCollapsedContainer) {
       this.dragIn();
-      result += " svc-question__content--collapsed-drag-over-inside";
+      cssClassBuilder.append("svc-question__content--collapsed-drag-over-inside");
     } else {
       this.dragOut();
     }
-
-    if (this.dragTypeOverMe === DragTypeOverMeEnum.InsideEmptyPanel) {
-      result += " svc-question__content--drag-over-inside";
-    }
-    if (!this.dragInsideCollapsedContainer) {
-      if (this.dragTypeOverMe === DragTypeOverMeEnum.Left) {
-        result += " svc-question__content--drag-over-left";
-      }
-
-      if (this.dragTypeOverMe === DragTypeOverMeEnum.Right) {
-        result += " svc-question__content--drag-over-right";
-      }
-
-      if (this.dragTypeOverMe === DragTypeOverMeEnum.Top) {
-        result += " svc-question__content--drag-over-top";
-      }
-      if (this.dragTypeOverMe === DragTypeOverMeEnum.Bottom) {
-        result += " svc-question__content--drag-over-bottom";
-      }
-      if (this.creator) {
-        result = this.creator.getElementAddornerCssCallback(this.surveyElement, result);
-      }
+    let result = cssClassBuilder.toString();
+    if (this.creator) {
+      result = this.creator.getElementAddornerCssCallback(this.surveyElement, result);
     }
     return result;
   }
@@ -190,10 +164,10 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     return (this.element)?.getPropertyValue("isMessagePanelVisible");
   }
   get cssCollapsedHiddenHeader(): string {
-    return (this.element as PanelModel | Question).cssHeader + " svc-question__header--hidden";
+    return new CssClassBuilder().append((this.element as PanelModel | Question).cssHeader).append("svc-question__header--hidden").toString();
   }
   get cssCollapsedHiddenTitle(): string {
-    return this.element.cssTitle + " svc-element__title--hidden";
+    return new CssClassBuilder().append(this.element.cssTitle).append("svc-element__title--hidden").toString();
   }
   public createBannerParams(): QuestionBannerParams {
     return this.createCarryForwardParams() || this.createUsingRestfulParams() || this.createCustomMessagePanel();

@@ -1,4 +1,4 @@
-import { Base, PageModel, property, SurveyModel, ComputedUpdater, settings, IPage, ActionContainer } from "survey-core";
+import { Base, PageModel, property, SurveyModel, ComputedUpdater, settings, IPage, ActionContainer, CssClassBuilder } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
 import { getLocString } from "../../editorLocalization";
 import { PagesController } from "../../pages-controller";
@@ -199,14 +199,10 @@ export class TabDesignerViewModel extends Base {
     this.creator.selectedElement = this.creator.survey;
   }
   public getRootCss(): string {
-    let rootCss = this.survey.css.root;
-    if (this.creator.showPageNavigator && this.survey.pageCount > 1 || this.creator.pageEditMode === "bypage") {
-      rootCss += " svc-tab-designer--with-page-navigator";
-    }
-    if (this.showPlaceholder) {
-      rootCss += " svc-tab-designer--with-place-holder";
-    }
-    rootCss += " svc-tab-designer--" + this.creator.pageEditMode + "-mode";
-    return rootCss;
+    return new CssClassBuilder()
+      .append(this.survey.css.root)
+      .append("svc-tab-designer--with-page-navigator", this.creator.showPageNavigator && this.survey.pageCount > 1 || this.creator.pageEditMode === "bypage")
+      .append("svc-tab-designer--with-place-holder", this.showPlaceholder)
+      .append(`svc-tab-designer--${this.creator.pageEditMode}-mode`).toString();
   }
 }

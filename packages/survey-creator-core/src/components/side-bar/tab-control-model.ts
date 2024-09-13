@@ -1,4 +1,4 @@
-import { ActionContainer, Base } from "survey-core";
+import { ActionContainer, Base, CssClassBuilder } from "survey-core";
 import { SidebarModel } from "./side-bar-model";
 import { MenuButton } from "../../utils/actions";
 
@@ -39,6 +39,6 @@ export class TabControlModel extends Base {
   }
 
   public get sideBarClassName(): string {
-    return "svc-sidebar-tabs" + (this.sidePanel.visible ? "" : " svc-sidebar-tabs--collapsed");
+    return new CssClassBuilder().append("svc-sidebar-tabs").append("svc-sidebar-tabs--collapsed", !this.sidePanel.visible).toString();
   }
 }

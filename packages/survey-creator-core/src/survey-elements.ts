@@ -1,4 +1,4 @@
-import { DragDropAllowEvent, DragDropCore, DragTypeOverMeEnum, IElement, IPanel, IShortcutText, ISurveyElement, JsonObject, PageModel, PanelModelBase, QuestionPanelDynamicModel, QuestionRowModel, Serializer, SurveyModel } from "survey-core";
+import { CssClassBuilder, DragDropAllowEvent, DragDropCore, DragTypeOverMeEnum, IElement, IPanel, IShortcutText, ISurveyElement, JsonObject, PageModel, PanelModelBase, QuestionPanelDynamicModel, QuestionRowModel, Serializer, SurveyModel } from "survey-core";
 import { settings } from "./creator-settings";
 import { IQuestionToolboxItem } from "./toolbox";
 import { SurveyHelper } from "./survey-helper";
@@ -119,11 +119,12 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     return span;
   }
 
-  protected getDraggedElementClass() {
-    let result = "svc-dragged-element-shortcut";
-    if (!!this.draggedElement.toolboxItemIconName) result += " svc-dragged-element-shortcut--has-icon";
-    if (this.isDraggedElementSelected) result += " svc-dragged-element-shortcut--selected";
-    return result;
+  protected getDraggedElementClass(): string {
+    return new CssClassBuilder()
+      .append("svc-dragged-element-shortcut")
+      .append("svc-dragged-element-shortcut--has-icon", !!this.draggedElement.toolboxItemIconName)
+      .append("svc-dragged-element-shortcut--selected", this.isDraggedElementSelected)
+      .toString();
   }
 
   protected createElementFromJson(json: object): HTMLElement {

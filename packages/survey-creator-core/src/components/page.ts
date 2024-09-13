@@ -184,31 +184,22 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   }
 
   get css(): string {
-    let result = "";
-    if (!!this.dragTypeOverMe && this.showPlaceholder) {
-      result = "svc-question__content--drag-over-inside";
-    } else if (!!this.dragTypeOverMe && this.page.elements.length === 0 && this.creator.survey.pages.length > 0) {
-      result = "svc-page--drag-over-empty";
-      if (!!this.creator && !this.creator.showAddQuestionButton) {
-        result += " svc-page--drag-over-empty-no-add-button";
-      }
-    }
+    const isEmptyPage = !!((this.page.elements.length === 0 && this.creator.survey.pages.length > 0) && !this.showPlaceholder);
+    const cssClassBuilder = new CssClassBuilder()
+      .append("svc-question__content--drag-over-inside", !!this.dragTypeOverMe && this.showPlaceholder)
+      .append("svc-page--drag-over-empty", !!this.dragTypeOverMe && isEmptyPage)
+      .append("svc-page--drag-over-empty-no-add-button", !!this.dragTypeOverMe && isEmptyPage && !!this.creator && !this.creator.showAddQuestionButton)
+      .append("svc-page__content--new", !!this.isGhost)
+      .append("svc-page__content--selected", !this.isGhost && !!this.creator.isElementSelected(this.page))
+      .append(`svc-page__content--collapse-${this.creator.expandCollapseButtonVisibility}`, !this.isGhost)
+      .append("svc-page__content--collapsed", !this.isGhost && this.renderedCollapsed);
     if (!!this.dragTypeOverMe && this.collapsed) {
       this.dragIn();
-      result += " svc-page__content--collapsed-drag-over-inside";
+      cssClassBuilder.append("svc-page__content--collapsed-drag-over-inside");
     } else {
       this.dragOut();
     }
-    if (this.isGhost) {
-      return result + " svc-page__content--new";
-    }
-    if (this.creator.isElementSelected(this.page)) {
-      result += " svc-page__content--selected";
-    }
-
-    result += (" svc-page__content--collapse-" + this.creator.expandCollapseButtonVisibility);
-    if (this.renderedCollapsed) result += (" svc-page__content--collapsed");
-    return result.trim();
+    return cssClassBuilder.toString();
   }
   public hover(event: MouseEvent, element: HTMLElement | any) {
     toggleHovered(event, element, this.creator.pageHoverDelay);
