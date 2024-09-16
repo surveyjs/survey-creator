@@ -10,6 +10,12 @@
     v-key2click
     v-on:mouseover="(e) => item.data.hoverStopper && item.data.hoverStopper(e, e.currentTarget)"
   >
+    <SvComponent
+      :is="'sv-svg-icon'"
+      class="svc-panel__add-new-question-icon"
+      :iconName="'icon-add_24x24'"
+      :size="24"
+    ></SvComponent>
     <span class="svc-text svc-text--normal svc-text--bold">
       {{ item.data.addNewQuestionText }}
     </span>
