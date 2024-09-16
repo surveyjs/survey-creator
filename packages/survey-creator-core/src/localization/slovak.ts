@@ -106,6 +106,8 @@ export var skStrings = {
     redo: "Opakovať",
     undoTooltip: "Zrušiť poslednú zmenu",
     redoTooltip: "Opakovať zmenu",
+    expandAllTooltip: "Rozbaliť všetko",
+    collapseAllTooltip: "Zbaliť všetko",
     showMoreChoices: "Zobraziť viac",
     showLessChoices: "Zobraziť menej",
     copy: "Kopírovať",
@@ -123,6 +125,8 @@ export var skStrings = {
     toolboxNoResultsFound: "Nenašli sa žiadne výsledky",
     propertyGridFilteredTextPlaceholder: "Zadajte reťazec pre vyhľadávanie...",
     propertyGridNoResultsFound: "Nenašli sa žiadne výsledky",
+    propertyGridPlaceholderTitle: "Začnite konfigurovať formulár",
+    propertyGridPlaceholderDescription: "Kliknutím na ikonu ľubovoľnej kategórie preskúmate nastavenia prieskumu. Ďalšie nastavenia budú k dispozícii po pridaní prvku prieskumu na návrhovú plochu.",
     correctJSON: "Opravte JSON.",
     surveyResults: "Výsledok prieskumu: ",
     surveyResultsTable: "Ako tabuľku",
@@ -154,6 +158,7 @@ export var skStrings = {
     translationPlaceHolder: "Preklad...",
     translationSource: "Zdroj: ",
     translationTarget: "Cieľ: ",
+    translationYouTubeNotSupported: "Odkazy na YouTube nie sú podporované.",
     themeExportButton: "Vývoz",
     themeImportButton: "Import",
     surveyJsonExportButton: "Vývoz",
@@ -307,6 +312,9 @@ export var skStrings = {
       templateTitleLocation: "Zarovnanie názvu otázky",
       templateErrorLocation: "Zarovnanie chybových hlásení",
       newPanelPosition: "Nové umiestnenie panela",
+      showRangeInProgress: "Zobrazenie indikátora priebehu",
+      showProgressBar: "Zobrazenie indikátora priebehu",
+      progressBarLocation: "Zarovnanie indikátora priebehu",
       keyName: "Zabránenie duplicitným odpovediam v nasledujúcej otázke"
     },
     question: {
@@ -630,6 +638,7 @@ export var skStrings = {
     maxImageHeight: "Maximálna výška obrázka",
     minValue: "Minimálna hodnota",
     maxValue: "Maximálna hodnota",
+    caseInsensitive: "Nerozlišujú sa veľké a malé písmená",
     minLength: "Minimálna dĺžka",
     allowDigits: "Povoliť čísla",
     minCount: "Minimálny počet",
@@ -690,7 +699,6 @@ export var skStrings = {
     panelsState: "Stav rozbalenia vnútorného panela",
     panelPrevText: "Popis tlačidla Predchádzajúci panel",
     panelNextText: "Popis tlačidla Nasledujúci panel",
-    showRangeInProgress: "Zobraziť indikátor priebehu",
     panelRemoveButtonLocation: "Odstrániť umiestnenie tlačidla panela",
     hideIfRowsEmpty: "Skryť otázku, ak nie sú žiadne riadky",
     hideColumnsIfEmpty: "Skryť stĺpce, ak nie sú k dispozícii žiadne riadky",
@@ -927,10 +935,11 @@ export var skStrings = {
     firstExpanded: "prvý rozbalený",
     off: "vyp.",
     list: "zoznam",
+    carousel: "Kolotoč",
+    tab: "Karty",
     progressTop: "horná časť priebehu",
     progressBottom: "spodná časť priebehu",
     progressTopBottom: "priebeh –​ horná a spodná časť",
-    tab: "Karty",
     horizontal: "vodorovné",
     vertical: "zvislé",
     top: "hore",
@@ -1117,6 +1126,11 @@ export var skStrings = {
       topbottom: "hore a dolu",
       aboveheader: "Nad hlavičkou",
       belowheader: "Pod hlavičkou"
+    },
+    progressBarLocation: {
+      top: "Vrchol",
+      bottom: "Dno",
+      topBottom: "Hore a dole"
     },
     sum: "Súčet",
     count: "Počítať",
@@ -1348,8 +1362,10 @@ export var skStrings = {
       visibleIf: "Pomocou ikony čarovného prútika nastavte podmienené pravidlo, ktoré určuje viditeľnosť stĺpca.",
       enableIf: "Pomocou ikony čarovnej paličky nastavte podmienené pravidlo, ktoré vypne režim iba na čítanie pre stĺpec.",
       requiredIf: "Pomocou ikony čarovného prútika nastavte podmienené pravidlo, ktoré zabráni odoslaniu prieskumu, pokiaľ aspoň jedna vnorená otázka nemá odpoveď.",
-      showInMultipleColumns: "Ak je táto voľba vybratá, vytvorí samostatný stĺpec pre každú možnosť výberu."
+      showInMultipleColumns: "Ak je táto voľba vybratá, vytvorí samostatný stĺpec pre každú možnosť výberu.",
+      colCount: "Usporiada možnosti výberu vo viacstĺpcovom rozložení. Ak je nastavená hodnota 0, možnosti sa zobrazia v jednom riadku. Ak je nastavená na -1, skutočná hodnota sa zdedí z vlastnosti \"Počet vnorených stĺpcov\" nadradenej matice."
     },
+    caseInsensitive: "Vyberte, či sa veľké a malé písmená v regulárnom výraze musia považovať za ekvivalentné.",
     widthMode: "Vyberte si z: \"Statický\" - nastavuje pevnú šírku; \"Responzívny\" - spôsobuje, že prieskum zaberá celú šírku obrazovky; \"Auto\" - použije ktorýkoľvek z týchto dvoch v závislosti od použitých typov otázok.",
     cookieName: "Súbory cookie zabraňujú používateľom vyplniť ten istý prieskum dvakrát.",
     logo: "Prilepte odkaz na obrázok (bez obmedzenia veľkosti) alebo kliknite na ikonu priečinka a prehľadávajte súbor z počítača (až 64 kB).",
@@ -2706,3 +2722,16 @@ editorLocalization.locales["sk"] = skStrings;
 // inputTextAlignment.right: "Right" => "Doprava"
 // pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Vyberte, ako chcete zarovnať vstupnú hodnotu v poli. Predvolené nastavenie \"Auto\" zarovná vstupnú hodnotu doprava, ak je použité maskovanie meny alebo čísel, a doľava, ak nie."
 // p.inputTextAlignment: "Input value alignment" => "Zarovnanie vstupných hodnôt"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "Zobrazenie indikátora priebehu"
+// paneldynamic.showProgressBar: "Show the progress bar" => "Zobrazenie indikátora priebehu"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "Zarovnanie indikátora priebehu"
+// pv.carousel: "Carousel" => "Kolotoč"
+// progressBarLocation.top: "Top" => "Vrchol"
+// progressBarLocation.bottom: "Bottom" => "Dno"
+// progressBarLocation.topBottom: "Top and bottom" => "Hore a dole"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Usporiada možnosti výberu vo viacstĺpcovom rozložení. Ak je nastavená hodnota 0, možnosti sa zobrazia v jednom riadku. Ak je nastavená na -1, skutočná hodnota sa zdedí z vlastnosti \"Počet vnorených stĺpcov\" nadradenej matice."
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "Odkazy na YouTube nie sú podporované."
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "Začnite konfigurovať formulár"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Kliknutím na ikonu ľubovoľnej kategórie preskúmate nastavenia prieskumu. Ďalšie nastavenia budú k dispozícii po pridaní prvku prieskumu na návrhovú plochu."
+// pe.caseInsensitive: "Case insensitive" => "Nerozlišujú sa veľké a malé písmená"
+// pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Vyberte, či sa veľké a malé písmená v regulárnom výraze musia považovať za ekvivalentné."

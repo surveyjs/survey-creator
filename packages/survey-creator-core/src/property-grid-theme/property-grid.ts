@@ -21,7 +21,10 @@ export var propertyGridCss = {
     edit: "spg-btn spg-footer__edit-btn"
   },
   panel: {
+    expandableAnimating: "",
     title: "spg-title spg-panel__title",
+    contentEnter: "spg-panel__content--enter",
+    contentLeave: "spg-panel__content--leave",
     titleExpandable: "spg-panel__title--expandable",
     titleExpanded: "spg-panel__title--expanded",
     titleCollapsed: "spg-panel__title--collapsed",
@@ -69,6 +72,9 @@ export var propertyGridCss = {
   pageTitle: "spg-title spg-page__title",
   pageDescription: "spg-description spg-page__description",
   row: "spg-row spg-clearfix",
+  rowEnter: "spg-row--enter",
+  rowLeave: "spg-row--leave",
+  rowDelayedEnter: "spg-row--delayed-fade-in",
   rowMultiple: "spg-row--multiple",
   question: {
     mainRoot: "spg-question spg-row__question",
@@ -177,7 +183,7 @@ export var propertyGridCss = {
   },
   dropdown: {
     root: "",
-    popup: "spg-dropdown-popup",
+    popup: "spg-dropdown-popup svc-creator-popup",
     small: "spg-row__question--small sd-row__question--small",
     control: "spg-input spg-dropdown sd-input sd-dropdown",
     filterStringInput: "sd-dropdown__filter-string-input spg-dropdown__filter-string-input",
@@ -225,6 +231,8 @@ export var propertyGridCss = {
     cell: "spg-table__cell",
     headerCell: "spg-table__cell spg-table__cell--header",
     emptyCell: "spg-table__cell--empty",
+    rowEnter: "spg-table__row--enter",
+    rowLeave: "spg-table__row--leave",
   },
   matrixdynamic: {
     tableWrapper: "spg-table-wrapper",
@@ -254,6 +262,8 @@ export var propertyGridCss = {
     emptyRowsText: "spg-matrixdynamic__placeholder-text",
     cellQuestionWrapper: "spg-table__question-wrapper",
     emptyCell: "spg-table__cell--empty",
+    rowEnter: "spg-table__row--enter",
+    rowLeave: "spg-table__row--leave",
   },
   rating: {
     root: "spg-rating",

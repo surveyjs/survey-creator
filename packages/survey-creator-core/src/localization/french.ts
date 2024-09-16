@@ -106,6 +106,8 @@ var frenchTranslation = {
     redo: "Rétablir",
     undoTooltip: "Annuler la dernière modification",
     redoTooltip: "Rétablir la modification",
+    expandAllTooltip: "Tout afficher",
+    collapseAllTooltip: "Réduire tout",
     showMoreChoices: "Afficher plus",
     showLessChoices: "Afficher moins",
     copy: "Copier",
@@ -123,6 +125,8 @@ var frenchTranslation = {
     toolboxNoResultsFound: "Aucun résultat trouvé",
     propertyGridFilteredTextPlaceholder: "Tapez pour rechercher...",
     propertyGridNoResultsFound: "Aucun résultat trouvé",
+    propertyGridPlaceholderTitle: "Commencez à configurer votre formulaire",
+    propertyGridPlaceholderDescription: "Cliquez sur n’importe quelle icône de catégorie pour explorer les paramètres de l’enquête. Des paramètres supplémentaires seront disponibles une fois que vous aurez ajouté un élément de topographie à l’aire de conception.",
     correctJSON: "Merci de corriger le JSON",
     surveyResults: "Résultat du sondage : ",
     surveyResultsTable: "Format tableau",
@@ -154,6 +158,7 @@ var frenchTranslation = {
     translationPlaceHolder: "Traduction...",
     translationSource: "Source: ",
     translationTarget: "Cible: ",
+    translationYouTubeNotSupported: "Les liens YouTube ne sont pas pris en charge.",
     themeExportButton: "Exportation",
     themeImportButton: "Importation",
     surveyJsonExportButton: "Exportation",
@@ -307,6 +312,9 @@ var frenchTranslation = {
       templateTitleLocation: "Alignement du titre de la question",
       templateErrorLocation: "Alignement des messages d’erreur",
       newPanelPosition: "Nouvel emplacement du panneau",
+      showRangeInProgress: "Afficher la barre de progression",
+      showProgressBar: "Afficher la barre de progression",
+      progressBarLocation: "Alignement de la barre de progression",
       keyName: "Éviter les réponses en double à la question suivante"
     },
     question: {
@@ -630,6 +638,7 @@ var frenchTranslation = {
     maxImageHeight: "Hauteur maximale de l’image",
     minValue: "Valeur minimum",
     maxValue: "Valeur maximum",
+    caseInsensitive: "Insensible à la casse",
     minLength: "Longueur minimum",
     allowDigits: "Autoriser les chiffres",
     minCount: "Nombre minimum",
@@ -690,7 +699,6 @@ var frenchTranslation = {
     panelsState: "Déploiement de la section",
     panelPrevText: "Info-bulle du bouton Section précédente",
     panelNextText: "Info-bulle du bouton Section suivante",
-    showRangeInProgress: "Afficher la barre de progression",
     panelRemoveButtonLocation: "Emplacement du bouton Supprimer la Section",
     hideIfRowsEmpty: "Masquer la question s’il n’y a pas de lignes",
     hideColumnsIfEmpty: "Masquer les colonnes s’il n’y a pas de lignes",
@@ -927,10 +935,11 @@ var frenchTranslation = {
     firstExpanded: "Déployer la première section",
     off: "Désactiver",
     list: "liste",
+    carousel: "Carrousel",
+    tab: "Onglets",
     progressTop: "Barre de progression en haut",
     progressBottom: "Barre de progression en bas",
     progressTopBottom: "Barre de progression en haut et en bas",
-    tab: "Onglets",
     horizontal: "Horizontal",
     vertical: "Vertical",
     top: "Haut",
@@ -1117,6 +1126,11 @@ var frenchTranslation = {
       topbottom: "Haut et bas",
       aboveheader: "Au-dessus de l’en-tête",
       belowheader: "Sous l’en-tête"
+    },
+    progressBarLocation: {
+      top: "Retour au début",
+      bottom: "Fond",
+      topBottom: "Haut et bas"
     },
     sum: "Somme",
     count: "Compter",
@@ -1348,8 +1362,10 @@ var frenchTranslation = {
       visibleIf: "Utilisez l’icône en forme de baguette magique pour définir une règle conditionnelle qui détermine la visibilité des colonnes.",
       enableIf: "Utilisez l’icône en forme de baguette magique pour définir une règle conditionnelle qui désactive le mode lecture seule de la colonne.",
       requiredIf: "Utilisez l’icône en forme de baguette magique pour définir une règle conditionnelle qui empêche l’envoi d’un sondage à moins qu’au moins une question imbriquée n’ait une réponse.",
-      showInMultipleColumns: "Lorsque cette option est sélectionnée, une colonne individuelle est créée pour chaque option de choix."
+      showInMultipleColumns: "Lorsque cette option est sélectionnée, une colonne individuelle est créée pour chaque option de choix.",
+      colCount: "Organise les options de choix dans une mise en page à plusieurs colonnes. Lorsqu’elle est définie sur 0, les options sont affichées sur une seule ligne. Lorsqu’elle est définie sur -1, la valeur réelle est héritée de la propriété « Nombre de colonnes imbriquées » de la matrice parente."
     },
+    caseInsensitive: "Indiquez si les lettres majuscules et minuscules de l’expression régulière doivent être traitées comme équivalentes.",
     widthMode: "Choisissez parmi : « Statique » - définit une largeur fixe ; « Responsive » - permet à l’enquête d’occuper toute la largeur de l’écran ; « Auto » - s’applique à l’un ou l’autre des deux en fonction des types de questions utilisés.",
     cookieName: "Les cookies empêchent les utilisateurs de remplir deux fois le même sondage.",
     logo: "Collez un lien d’image (aucune limite de taille) ou cliquez sur l’icône de dossier pour parcourir un fichier à partir de votre ordinateur (jusqu’à 64 Ko).",
@@ -2814,3 +2830,16 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // inputTextAlignment.right: "Right" => "Droite"
 // pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Sélectionnez le mode d’alignement de la valeur d’entrée dans le champ. Le paramètre par défaut « Auto » aligne la valeur d’entrée à droite si le masquage monétaire ou numérique est appliqué et à gauche si ce n’est pas le cas."
 // p.inputTextAlignment: "Input value alignment" => "Alignement des valeurs d’entrée"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "Afficher la barre de progression"
+// paneldynamic.showProgressBar: "Show the progress bar" => "Afficher la barre de progression"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "Alignement de la barre de progression"
+// pv.carousel: "Carousel" => "Carrousel"
+// progressBarLocation.top: "Top" => "Retour au début"
+// progressBarLocation.bottom: "Bottom" => "Fond"
+// progressBarLocation.topBottom: "Top and bottom" => "Haut et bas"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Organise les options de choix dans une mise en page à plusieurs colonnes. Lorsqu’elle est définie sur 0, les options sont affichées sur une seule ligne. Lorsqu’elle est définie sur -1, la valeur réelle est héritée de la propriété « Nombre de colonnes imbriquées » de la matrice parente."
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "Les liens YouTube ne sont pas pris en charge."
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "Commencez à configurer votre formulaire"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Cliquez sur n’importe quelle icône de catégorie pour explorer les paramètres de l’enquête. Des paramètres supplémentaires seront disponibles une fois que vous aurez ajouté un élément de topographie à l’aire de conception."
+// pe.caseInsensitive: "Case insensitive" => "Insensible à la casse"
+// pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Indiquez si les lettres majuscules et minuscules de l’expression régulière doivent être traitées comme équivalentes."

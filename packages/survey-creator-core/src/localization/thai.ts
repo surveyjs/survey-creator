@@ -106,6 +106,8 @@ export const thStrings = {
     redo: "ทำซ้ำ",
     undoTooltip: "เลิกทำการเปลี่ยนแปลงครั้งล่าสุด",
     redoTooltip: "ทำซ้ำการเปลี่ยนแปลง",
+    expandAllTooltip: "ขยายทั้งหมด",
+    collapseAllTooltip: "ยุบทั้งหมด",
     showMoreChoices: "แสดงเพิ่มเติม",
     showLessChoices: "แสดงน้อยลง",
     copy: "คัดลอก",
@@ -123,6 +125,8 @@ export const thStrings = {
     toolboxNoResultsFound: "ไม่พบผลลัพธ์",
     propertyGridFilteredTextPlaceholder: "พิมพ์เพื่อค้นหา...",
     propertyGridNoResultsFound: "ไม่พบผลลัพธ์",
+    propertyGridPlaceholderTitle: "เริ่มกําหนดค่าฟอร์มของคุณ",
+    propertyGridPlaceholderDescription: "คลิกไอคอนหมวดหมู่ใดก็ได้เพื่อสํารวจการตั้งค่าแบบสํารวจ การตั้งค่าเพิ่มเติมจะพร้อมใช้งานเมื่อคุณเพิ่มองค์ประกอบแบบสํารวจลงในพื้นผิวการออกแบบ",
     correctJSON: "กรุณาแก้ไข JSON",
     surveyResults: "ผลลัพธ์ของแบบสำรวจ",
     surveyResultsTable: "เป็นตาราง",
@@ -154,6 +158,7 @@ export const thStrings = {
     translationPlaceHolder: "การแปล...",
     translationSource: "ต้นทาง: ",
     translationTarget: "ปลายทาง: ",
+    translationYouTubeNotSupported: "ไม่รองรับลิงก์ YouTube",
     themeExportButton: "ส่งออก",
     themeImportButton: "นำเข้า",
     surveyJsonExportButton: "ส่งออก",
@@ -307,6 +312,9 @@ export const thStrings = {
       templateTitleLocation: "การจัดตำแหน่งชื่อคำถาม",
       templateErrorLocation: "การจัดตำแหน่งข้อความข้อผิดพลาด",
       newPanelPosition: "ตำแหน่งแผงใหม่",
+      showRangeInProgress: "แสดงแถบความคืบหน้า",
+      showProgressBar: "แสดงแถบความคืบหน้า",
+      progressBarLocation: "การจัดตําแหน่งแถบความคืบหน้า",
       keyName: "ป้องกันการตอบซ้ำในคำถามต่อไปนี้"
     },
     question: {
@@ -630,6 +638,7 @@ export const thStrings = {
     maxImageHeight: "ความสูงสูงสุดของพื้นที่แสดงผล",
     minValue: "ค่าขั้นต่ำ",
     maxValue: "ค่าสูงสุด",
+    caseInsensitive: "ไม่คํานึงถึงตัวพิมพ์เล็กและตัวพิมพ์ใหญ่",
     minLength: "ความยาวขั้นต่ำ (ในตัวอักษร)",
     allowDigits: "อนุญาตให้มีตัวเลข",
     minCount: "จำนวนขั้นต่ำ",
@@ -690,7 +699,6 @@ export const thStrings = {
     panelsState: "สถานะแผงภายใน",
     panelPrevText: "ข้อความปุ่ม \"แผงก่อนหน้า\"",
     panelNextText: "ข้อความปุ่ม \"แผงถัดไป\"",
-    showRangeInProgress: "แสดงแถบความคืบหน้า",
     panelRemoveButtonLocation: "การจัดตำแหน่งปุ่ม \"ลบแผง\"",
     hideIfRowsEmpty: "ซ่อนคำถามหากไม่มีแถว",
     hideColumnsIfEmpty: "ซ่อนคอลัมน์หากไม่มีแถว",
@@ -927,10 +935,11 @@ export const thStrings = {
     firstExpanded: "แผงแรกขยาย",
     off: "ซ่อนหมายเลขคำถาม",
     list: "รายการ",
+    carousel: "ม้าหมุน",
+    tab: "แท็บ",
     progressTop: "ตัวนำทางแผง + แถบความคืบหน้าด้านบน",
     progressBottom: "ตัวนำทางแผง + แถบความคืบหน้าด้านล่าง",
     progressTopBottom: "ตัวนำทางแผง + แถบความคืบหน้าด้านบนและล่าง",
-    tab: "แท็บ",
     horizontal: "แนวนอน",
     vertical: "แนวตั้ง",
     top: "ด้านบน",
@@ -1117,6 +1126,11 @@ export const thStrings = {
       topbottom: "ด้านบนและล่าง",
       aboveheader: "เหนือหัวเรื่อง",
       belowheader: "ใต้หัวเรื่อง"
+    },
+    progressBarLocation: {
+      top: "ด้านบน",
+      bottom: "ก้น",
+      topBottom: "ด้านบนและด้านล่าง"
     },
     sum: "รวม",
     count: "นับ",
@@ -1348,8 +1362,10 @@ export const thStrings = {
       visibleIf: "ใช้ไอคอนไม้เท้าวิเศษเพื่อตั้งกฎเงื่อนไขที่กำหนดการมองเห็นของคอลัมน์",
       enableIf: "ใช้ไอคอนไม้เท้าวิเศษเพื่อตั้งกฎเงื่อนไขที่ปิดโหมดอ่านอย่างเดียวสำหรับคอลัมน์",
       requiredIf: "ใช้ไอคอนไม้เท้าวิเศษเพื่อตั้งกฎเงื่อนไขที่ป้องกันการส่งแบบสำรวจถ้าไม่มีคำถามที่ตอบแล้ว",
-      showInMultipleColumns: "เมื่อเลือก จะสร้างคอลัมน์แยกสำหรับตัวเลือกแต่ละตัว"
+      showInMultipleColumns: "เมื่อเลือก จะสร้างคอลัมน์แยกสำหรับตัวเลือกแต่ละตัว",
+      colCount: "จัดเรียงตัวเลือกตัวเลือกในรูปแบบหลายคอลัมน์ เมื่อตั้งค่าเป็น 0 ตัวเลือกจะแสดงในบรรทัดเดียว เมื่อตั้งค่าเป็น -1 ค่าจริงจะถูกสืบทอดมาจากคุณสมบัติ \"จํานวนคอลัมน์ที่ซ้อนกัน\" ของเมทริกซ์หลัก"
     },
+    caseInsensitive: "เลือกว่าตัวพิมพ์ใหญ่และตัวพิมพ์เล็กในนิพจน์ทั่วไปต้องถือว่าเทียบเท่าหรือไม่",
     widthMode: "เลือกจาก: \"คงที่\" - ตั้งค่าความกว้างคงที่; \"ตอบสนอง\" - ทำให้แบบสำรวจเต็มความกว้างของหน้าจอ; \"อัตโนมัติ\" - ใช้ค่าใดค่าหนึ่งในสองค่าตามประเภทคำถามที่ใช้",
     cookieName: "กำหนดค่า cookie ที่ไม่ซ้ำกันสำหรับแบบสำรวจของคุณ Cookie จะถูกตั้งค่าในเบราว์เซอร์ของผู้ตอบเมื่อแบบสำรวจเสร็จสมบูรณ์เพื่อป้องกันการส่งแบบสำรวจซ้ำ",
     logo: "วางลิงก์ภาพ (ไม่มีขนาดจำกัด) หรือคลิกไอคอนโฟลเดอร์เพื่อเลือกไฟล์จากคอมพิวเตอร์ของคุณ (สูงสุด 64KB)",
@@ -1686,3 +1702,16 @@ editorLocalization.locales["th"] = thStrings;
 // inputTextAlignment.right: "Right" => "ขวา"
 // pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "เลือกวิธีจัดตําแหน่งค่าอินพุตภายในฟิลด์ การตั้งค่าเริ่มต้น \"อัตโนมัติ\" จะจัดตําแหน่งค่าอินพุตไปทางขวาหากมีการใช้การปิดบังสกุลเงินหรือตัวเลข และไปทางซ้ายหากไม่ใช้"
 // p.inputTextAlignment: "Input value alignment" => "การจัดตําแหน่งค่าอินพุต"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "แสดงแถบความคืบหน้า"
+// paneldynamic.showProgressBar: "Show the progress bar" => "แสดงแถบความคืบหน้า"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "การจัดตําแหน่งแถบความคืบหน้า"
+// pv.carousel: "Carousel" => "ม้าหมุน"
+// progressBarLocation.top: "Top" => "ด้านบน"
+// progressBarLocation.bottom: "Bottom" => "ก้น"
+// progressBarLocation.topBottom: "Top and bottom" => "ด้านบนและด้านล่าง"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "จัดเรียงตัวเลือกตัวเลือกในรูปแบบหลายคอลัมน์ เมื่อตั้งค่าเป็น 0 ตัวเลือกจะแสดงในบรรทัดเดียว เมื่อตั้งค่าเป็น -1 ค่าจริงจะถูกสืบทอดมาจากคุณสมบัติ \"จํานวนคอลัมน์ที่ซ้อนกัน\" ของเมทริกซ์หลัก"
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "ไม่รองรับลิงก์ YouTube"
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "เริ่มกําหนดค่าฟอร์มของคุณ"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "คลิกไอคอนหมวดหมู่ใดก็ได้เพื่อสํารวจการตั้งค่าแบบสํารวจ การตั้งค่าเพิ่มเติมจะพร้อมใช้งานเมื่อคุณเพิ่มองค์ประกอบแบบสํารวจลงในพื้นผิวการออกแบบ"
+// pe.caseInsensitive: "Case insensitive" => "ไม่คํานึงถึงตัวพิมพ์เล็กและตัวพิมพ์ใหญ่"
+// pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "เลือกว่าตัวพิมพ์ใหญ่และตัวพิมพ์เล็กในนิพจน์ทั่วไปต้องถือว่าเทียบเท่าหรือไม่"

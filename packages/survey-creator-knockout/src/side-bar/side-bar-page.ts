@@ -1,12 +1,12 @@
-import { SidebarTabModel } from "survey-creator-core";
+import { SidebarPageModel } from "survey-creator-core";
 import * as ko from "knockout";
 import { ImplementorBase } from "survey-knockout-ui";
-const template = require("./side-bar-tab.html");
+const template = require("./side-bar-page.html");
 
-ko.components.register("svc-side-bar-tab", {
+ko.components.register("svc-side-bar-page", {
   viewModel: {
     createViewModel: (params: any) => {
-      const item: SidebarTabModel = params.item;
+      const item: SidebarPageModel = params.item;
       new ImplementorBase(item);
       return params;
     },

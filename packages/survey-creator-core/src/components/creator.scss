@@ -172,3 +172,7 @@ survey-creator {
   top: initial;
   bottom: calcSize(-0.5);
 }
+
+.svc-creator--disable-animations {
+  --sjs-creator-transition-duration: 0ms;
+}

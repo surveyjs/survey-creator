@@ -122,7 +122,6 @@ test.before(async (t) => {
 })("Categories Responsiveness large -> small", async (t) => {
   await changeToolboxScrolling(false);
   await changeToolboxSearchEnabled(false);
-
   await setupCategories(t);
   await t
     .expect(categoriesHeader.count).eql(3)

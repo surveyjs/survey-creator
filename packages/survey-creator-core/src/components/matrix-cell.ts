@@ -56,7 +56,11 @@ export class MatrixCellWrapperEditSurvey {
         questionJSON[key] = !columnJSON[key];
       }
     }
-    column.fromJSON(questionJSON);
+    for(let key in questionJSON) {
+      if(!Helpers.isTwoValueEquals(questionJSON[key], columnJSON[key])) {
+        column[key] = questionJSON[key];
+      }
+    }
     matrix.onColumnCellTypeChanged(column);
     this.creator.setModified({ type: "MATRIX_CELL_EDITOR", column: column });
   }
@@ -98,7 +102,7 @@ export class MatrixCellWrapperViewModel extends Base {
           editSurvey.apply();
           return true;
         },
-        cssClass: "svc-matrix-cell__popup",
+        cssClass: "svc-matrix-cell__popup svc-creator-popup",
         title: model.question.name,
         displayMode: this.creator.isMobileView ? "overlay" : "popup"
       }, model.creator.rootElement

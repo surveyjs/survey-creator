@@ -106,6 +106,8 @@ export var danishStrings = {
     redo: "Annuller fortryd",
     undoTooltip: "Fortryd seneste ændring",
     redoTooltip: "Fortryd ændringen",
+    expandAllTooltip: "Udvid alle",
+    collapseAllTooltip: "Skjul alle",
     showMoreChoices: "Vis mere",
     showLessChoices: "Vis mindre",
     copy: "Eksemplar",
@@ -123,6 +125,8 @@ export var danishStrings = {
     toolboxNoResultsFound: "Ingen resultater fundet",
     propertyGridFilteredTextPlaceholder: "Skriv for at søge...",
     propertyGridNoResultsFound: "Ingen resultater fundet",
+    propertyGridPlaceholderTitle: "Begynd at konfigurere formularen",
+    propertyGridPlaceholderDescription: "Klik på et kategoriikon for at udforske undersøgelsesindstillinger. Yderligere indstillinger bliver tilgængelige, når du føjer et undersøgelseselement til designoverfladen.",
     correctJSON: "Ret venligst JSON.",
     surveyResults: "Undersøgelsesresultat: ",
     surveyResultsTable: "Som tabel",
@@ -154,6 +158,7 @@ export var danishStrings = {
     translationPlaceHolder: "Oversættelse...",
     translationSource: "Kilde: ",
     translationTarget: "Mål: ",
+    translationYouTubeNotSupported: "YouTube-links understøttes ikke.",
     themeExportButton: "Eksport",
     themeImportButton: "Import",
     surveyJsonExportButton: "Eksport",
@@ -307,6 +312,9 @@ export var danishStrings = {
       templateTitleLocation: "Tilpasning af spørgsmålets titel",
       templateErrorLocation: "Justering af fejlmeddelelse",
       newPanelPosition: "Ny panelplacering",
+      showRangeInProgress: "Vis statuslinjen",
+      showProgressBar: "Vis statuslinjen",
+      progressBarLocation: "Justering af statuslinje",
       keyName: "Undgå dublerede svar i følgende spørgsmål"
     },
     question: {
@@ -630,6 +638,7 @@ export var danishStrings = {
     maxImageHeight: "Maksimal billedhøjde",
     minValue: "Mindste værdi",
     maxValue: "Maksimal værdi",
+    caseInsensitive: "Der skelnes ikke mellem store og små bogstaver",
     minLength: "Mindste længde (med bogstaver)",
     allowDigits: "Tillad cifre",
     minCount: "Mindste antal",
@@ -690,7 +699,6 @@ export var danishStrings = {
     panelsState: "Udvid tilstand for indvendigt panel",
     panelPrevText: "Forrige værktøjstip til panelknap",
     panelNextText: "Værktøjstip til knappen Næste panel",
-    showRangeInProgress: "Vis statuslinje",
     panelRemoveButtonLocation: "Fjern placering af panelknap",
     hideIfRowsEmpty: "Skjul spørgsmålet, hvis der ikke er nogen rækker",
     hideColumnsIfEmpty: "Skjule kolonner, hvis der ikke er nogen rækker",
@@ -927,10 +935,11 @@ export var danishStrings = {
     firstExpanded: "firstExpanded",
     off: "off",
     list: "list",
+    carousel: "Karrusel",
+    tab: "Faner",
     progressTop: "progressTop",
     progressBottom: "progressBottom",
     progressTopBottom: "progressTopBottom",
-    tab: "Faner",
     horizontal: "horizontal",
     vertical: "vertical",
     top: "top",
@@ -1117,6 +1126,11 @@ export var danishStrings = {
       topbottom: "top and bottom",
       aboveheader: "Over overskriften",
       belowheader: "Under overskriften"
+    },
+    progressBarLocation: {
+      top: "Top",
+      bottom: "Bund",
+      topBottom: "Top og bund"
     },
     sum: "Sum",
     count: "Tælle",
@@ -1348,8 +1362,10 @@ export var danishStrings = {
       visibleIf: "Brug tryllestavsikonet til at angive en betinget regel, der bestemmer kolonnesynligheden.",
       enableIf: "Brug tryllestavsikonet til at angive en betinget regel, der deaktiverer skrivebeskyttet tilstand for kolonnen.",
       requiredIf: "Brug tryllestavsikonet til at angive en betinget regel, der forhindrer indsendelse af undersøgelser, medmindre mindst ét indlejret spørgsmål har et svar.",
-      showInMultipleColumns: "Når denne indstilling er valgt, oprettes der en individuel kolonne for hver valgmulighed."
+      showInMultipleColumns: "Når denne indstilling er valgt, oprettes der en individuel kolonne for hver valgmulighed.",
+      colCount: "Arrangerer valgmuligheder i et layout med flere kolonner. Når den er indstillet til 0, vises indstillingerne på en enkelt linje. Når den er angivet til -1, nedarves den faktiske værdi fra egenskaben \"Antal indlejrede kolonner\" for den overordnede matrix."
     },
+    caseInsensitive: "Vælg, om store og små bogstaver i det regulære udtryk skal behandles som ækvivalente.",
     widthMode: "Vælg mellem: \"Statisk\" - indstiller en fast bredde; \"Responsive\" - får undersøgelsen til at optage skærmens fulde bredde; \"Auto\" - gælder for en af de to afhængigt af de anvendte spørgsmålstyper.",
     cookieName: "Cookies forhindrer brugere i at udfylde den samme undersøgelse to gange.",
     logo: "Indsæt et billedlink (ingen størrelsesbegrænsninger), eller klik på mappeikonet for at gennemse en fil fra din computer (op til 64 KB).",
@@ -2938,3 +2954,16 @@ editorLocalization.locales["da"] = danishStrings;
 // inputTextAlignment.right: "Right" => "Højre"
 // pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Vælg, hvordan inputværdien skal justeres i feltet. Standardindstillingen \"Auto\" justerer inputværdien til højre, hvis der anvendes valuta- eller numerisk maskering, og til venstre, hvis ikke."
 // p.inputTextAlignment: "Input value alignment" => "Justering af inputværdi"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "Vis statuslinjen"
+// paneldynamic.showProgressBar: "Show the progress bar" => "Vis statuslinjen"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "Justering af statuslinje"
+// pv.carousel: "Carousel" => "Karrusel"
+// progressBarLocation.top: "Top" => "Top"
+// progressBarLocation.bottom: "Bottom" => "Bund"
+// progressBarLocation.topBottom: "Top and bottom" => "Top og bund"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Arrangerer valgmuligheder i et layout med flere kolonner. Når den er indstillet til 0, vises indstillingerne på en enkelt linje. Når den er angivet til -1, nedarves den faktiske værdi fra egenskaben \"Antal indlejrede kolonner\" for den overordnede matrix."
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "YouTube-links understøttes ikke."
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "Begynd at konfigurere formularen"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Klik på et kategoriikon for at udforske undersøgelsesindstillinger. Yderligere indstillinger bliver tilgængelige, når du føjer et undersøgelseselement til designoverfladen."
+// pe.caseInsensitive: "Case insensitive" => "Der skelnes ikke mellem store og små bogstaver"
+// pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Vælg, om store og små bogstaver i det regulære udtryk skal behandles som ækvivalente."

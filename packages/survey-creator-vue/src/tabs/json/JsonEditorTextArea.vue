@@ -11,12 +11,13 @@
       >
       </textarea>
       <div class="svc-json-editor-tab__errros_list" v-show="model.hasErrors">
-        <sv-list :model="model.errorList"></sv-list>
+        <SvComponent :is="'sv-list'" :model="model.errorList"></SvComponent>
       </div>
     </div>
   </div>
 </template>
 <script lang="ts" setup>
+import { SvComponent } from "survey-vue3-ui";
 import type { TextareaJsonEditorModel } from "survey-creator-core";
 import { useBase } from "survey-vue3-ui";
 import { ref, onMounted } from "vue";

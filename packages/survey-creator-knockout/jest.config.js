@@ -12,7 +12,7 @@ module.exports = {
   moduleNameMapper: {
     "\\.(css|scss)$": "<rootDir>/tests/empty-module.js",
     "\\.(jpg|png)$": "<rootDir>/tests/empty-module.js",
-    "survey-core": "<rootDir>/node_modules/survey-core",
+    "^survey-core(.*)$": "<rootDir>/node_modules/survey-core$1",
     "survey-creator-core": "<rootDir>/node_modules/survey-creator-core",
     "survey-knockout-ui": "<rootDir>/node_modules/survey-knockout-ui",
     "tslib": "<rootDir>/node_modules/tslib",

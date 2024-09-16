@@ -106,6 +106,8 @@ export var arStrings = {
     redo: "Redo",
     undoTooltip: "Undo last change",
     redoTooltip: "Redo the change",
+    expandAllTooltip: "توسيع الكل",
+    collapseAllTooltip: "طي الكل",
     showMoreChoices: "استعراض المزيد",
     showLessChoices: "عرض أقل",
     copy: "Copy",
@@ -123,6 +125,8 @@ export var arStrings = {
     toolboxNoResultsFound: "لم يتم العثور على نتائج",
     propertyGridFilteredTextPlaceholder: "Type to search...",
     propertyGridNoResultsFound: "لم يتم العثور على نتائج",
+    propertyGridPlaceholderTitle: "بدء تكوين النموذج الخاص بك",
+    propertyGridPlaceholderDescription: "انقر فوق أي رمز فئة لاستكشاف إعدادات الاستطلاع. ستتوفر إعدادات إضافية بمجرد إضافة عنصر استطلاع إلى سطح التصميم.",
     correctJSON: "Please correct JSON.",
     surveyResults: "Survey Results ",
     surveyResultsTable: "As Table",
@@ -154,6 +158,7 @@ export var arStrings = {
     translationPlaceHolder: "Translation...",
     translationSource: "مصدر: ",
     translationTarget: "هدف: ",
+    translationYouTubeNotSupported: "روابط يوتيوب غير مدعومة.",
     themeExportButton: "تصدير",
     themeImportButton: "استورد",
     surveyJsonExportButton: "تصدير",
@@ -307,6 +312,9 @@ export var arStrings = {
       templateTitleLocation: "محاذاة عنوان السؤال",
       templateErrorLocation: "محاذاة رسالة الخطأ",
       newPanelPosition: "موقع لوحة جديد",
+      showRangeInProgress: "إظهار شريط التقدم",
+      showProgressBar: "إظهار شريط التقدم",
+      progressBarLocation: "محاذاة شريط التقدم",
       keyName: "منع تكرار الردود في السؤال التالي"
     },
     question: {
@@ -630,6 +638,7 @@ export var arStrings = {
     maxImageHeight: "الحد الأقصى لارتفاع الصورة",
     minValue: "أقل قيمة",
     maxValue: "أكبر قيمة",
+    caseInsensitive: "غير حساس لحالة الأحرف",
     minLength: "Minimum length",
     allowDigits: "Allow digits",
     minCount: "Minimum count",
@@ -690,7 +699,6 @@ export var arStrings = {
     panelsState: "حالة توسيع اللوحة الداخلية",
     panelPrevText: "تلميح أداة زر اللوحة السابق",
     panelNextText: "تلميح أداة زر اللوحة التالية",
-    showRangeInProgress: "إظهار شريط التقدم",
     panelRemoveButtonLocation: "إزالة موقع زر اللوحة",
     hideIfRowsEmpty: "إخفاء السؤال إذا لم تكن هناك صفوف",
     hideColumnsIfEmpty: "إخفاء الأعمدة في حالة عدم وجود صفوف",
@@ -927,10 +935,11 @@ export var arStrings = {
     firstExpanded: "توسيع أول لوح",
     off: "إيقاف",
     list: "قائمة",
+    carousel: "دائري",
+    tab: "علامات التبويب",
     progressTop: "التقدم بالأعلى",
     progressBottom: "التقدم بالأسف",
     progressTopBottom: "التقدم بالأعلى والأسفل معاً",
-    tab: "علامات التبويب",
     horizontal: "عرضي",
     vertical: "عمودي",
     top: "الأعلى",
@@ -1117,6 +1126,11 @@ export var arStrings = {
       topbottom: "الاعلى والأسفل",
       aboveheader: "فوق الرأس",
       belowheader: "أسفل الرأس"
+    },
+    progressBarLocation: {
+      top: "أعلى",
+      bottom: "قاع",
+      topBottom: "أعلى وأسفل"
     },
     sum: "مجموع",
     count: "عد",
@@ -1348,8 +1362,10 @@ export var arStrings = {
       visibleIf: "استخدم أيقونة العصا السحرية لتعيين قاعدة شرطية تحدد رؤية العمود.",
       enableIf: "استخدم أيقونة العصا السحرية لتعيين قاعدة شرطية تعطل وضع القراءة فقط للعمود.",
       requiredIf: "استخدم أيقونة العصا السحرية لتعيين قاعدة شرطية تمنع إرسال الاستطلاع ما لم يكن لسؤال واحد متداخل على الأقل إجابة.",
-      showInMultipleColumns: "عند تحديده، ينشئ عمود منفرد لكل خيار اختيار."
+      showInMultipleColumns: "عند تحديده، ينشئ عمود منفرد لكل خيار اختيار.",
+      colCount: "يرتب خيارات التحديد في تخطيط متعدد الأعمدة. عند التعيين على 0 ، يتم عرض الخيارات في سطر واحد. عند التعيين إلى -1، يتم توريث القيمة الفعلية من خاصية \"عدد الأعمدة المتداخلة\" للمصفوفة الأصل."
     },
+    caseInsensitive: "حدد ما إذا كان يجب التعامل مع الأحرف الكبيرة والصغيرة في التعبير العادي على أنها مكافئة.",
     widthMode: "اختر من بين: \"ثابت\" - يحدد عرضا ثابتا ؛ \"متجاوب\" - يجعل الاستطلاع يشغل العرض الكامل للشاشة ؛ \"تلقائي\" - ينطبق على أي من الاثنين اعتمادا على أنواع الأسئلة المستخدمة.",
     cookieName: "تمنع ملفات تعريف الارتباط المستخدمين من ملء نفس الاستبيان مرتين.",
     logo: "الصق رابط صورة (بلا حدود للحجم) أو انقر فوق رمز المجلد لاستعراض ملف من جهاز الكمبيوتر الخاص بك (حتى 64 كيلوبايت).",
@@ -2664,3 +2680,16 @@ editorLocalization.locales["ar"] = arStrings;
 // inputTextAlignment.right: "Right" => "يمين"
 // pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "حدد كيفية محاذاة قيمة الإدخال داخل الحقل. يقوم الإعداد الافتراضي \"تلقائي\" بمحاذاة قيمة الإدخال إلى اليمين إذا تم تطبيق إخفاء العملة أو الرقمية وإلى اليسار إذا لم يكن كذلك."
 // p.inputTextAlignment: "Input value alignment" => "محاذاة قيمة الإدخال"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "إظهار شريط التقدم"
+// paneldynamic.showProgressBar: "Show the progress bar" => "إظهار شريط التقدم"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "محاذاة شريط التقدم"
+// pv.carousel: "Carousel" => "دائري"
+// progressBarLocation.top: "Top" => "أعلى"
+// progressBarLocation.bottom: "Bottom" => "قاع"
+// progressBarLocation.topBottom: "Top and bottom" => "أعلى وأسفل"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "يرتب خيارات التحديد في تخطيط متعدد الأعمدة. عند التعيين على 0 ، يتم عرض الخيارات في سطر واحد. عند التعيين إلى -1، يتم توريث القيمة الفعلية من خاصية \"عدد الأعمدة المتداخلة\" للمصفوفة الأصل."
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "روابط يوتيوب غير مدعومة."
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "بدء تكوين النموذج الخاص بك"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "انقر فوق أي رمز فئة لاستكشاف إعدادات الاستطلاع. ستتوفر إعدادات إضافية بمجرد إضافة عنصر استطلاع إلى سطح التصميم."
+// pe.caseInsensitive: "Case insensitive" => "غير حساس لحالة الأحرف"
+// pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "حدد ما إذا كان يجب التعامل مع الأحرف الكبيرة والصغيرة في التعبير العادي على أنها مكافئة."

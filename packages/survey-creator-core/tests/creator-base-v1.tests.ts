@@ -836,7 +836,7 @@ test(
       elements: [{ type: "text", name: "q1", title: "question1", description: "New Title" }],
     };
     creator.selectElement(creator.survey.getQuestionByName("q1"));
-    const propertyGrid = creator.sidebar.getTabById("propertyGrid").model as PropertyGridViewModel;
+    const propertyGrid = creator.sidebar.getPageById("propertyGrid").componentData as PropertyGridViewModel;
     expect(propertyGrid).toBeTruthy();
     const selectorBarItem = propertyGrid.objectSelectionAction;
     expect(selectorBarItem).toBeTruthy();

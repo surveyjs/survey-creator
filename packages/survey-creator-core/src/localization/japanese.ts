@@ -4,7 +4,7 @@ export var jaStrings = {
   // survey templates
   survey: {
     edit: "編集",
-    externalHelpLink: "アンケートの作成方法を見て学ぶ",
+    externalHelpLink: "アンケート作成方法の動画を見る",
     externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
     dropQuestion: "ツールボックスからここに質問をドロップしてください。",
     addLogicItem: "アンケートの流れをカスタマイズするルールを作成します。",
@@ -18,10 +18,10 @@ export var jaStrings = {
   },
   // Creator tabs
   tabs: {
-    preview: "アンケートをテストする",
+    preview: "プレビュー",
     theme: "テーマ",
     translation: "翻訳",
-    designer: "アンケートの設計者",
+    designer: "編集",
     editor: "JSONエディタ",
     logic: "アンケートのロジック"
   },
@@ -30,7 +30,7 @@ export var jaStrings = {
     default: "デフォルト",
     checkbox: "チェックボックス",
     comment: "コメント",
-    imagepicker: "画像ピッカー",
+    imagepicker: "画像選択",
     ranking: "ランキング",
     image: "画像",
     dropdown: "ドロップダウン",
@@ -46,18 +46,18 @@ export var jaStrings = {
     radiogroup: "ラジオグループ",
     rating: "評価",
     text: "単一入力",
-    boolean: "ブール",
+    boolean: "二者択一",
     expression: "式（読み取り専用）",
     signaturepad: "署名パッド",
     buttongroup: "ボタングループ"
   },
   toolboxCategories: {
-    general: "一般",
+    general: "全体の設定",
     choice: "選択の質問",
     text: "テキスト入力の質問",
     containers: "コンテナー",
     matrix: "マトリックスの質問",
-    misc: "雑貨"
+    misc: "その他"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -73,8 +73,8 @@ export var jaStrings = {
     hidePanel: "パネルを非表示にする",
     prevSelected: "前を選択",
     nextSelected: "[次へ] を選択します。",
-    prevFocus: "前に焦点を合わせる",
-    nextFocus: "次の焦点",
+    prevFocus: "前にフォーカス",
+    nextFocus: "次にフォーカス",
     surveyTypeName: "アンケート",
     pageTypeName: "ページ",
     panelTypeName: "パネル",
@@ -106,6 +106,8 @@ export var jaStrings = {
     redo: "やり直す",
     undoTooltip: "最後の変更を元に戻す",
     redoTooltip: "変更をやり直す",
+    expandAllTooltip: "すべて展開",
+    collapseAllTooltip: "すべて折りたたむ",
     showMoreChoices: "さらに表示",
     showLessChoices: "表示を減らす",
     copy: "コピー",
@@ -123,6 +125,8 @@ export var jaStrings = {
     toolboxNoResultsFound: "結果が見つかりませんでした",
     propertyGridFilteredTextPlaceholder: "検索するタイプ...",
     propertyGridNoResultsFound: "結果が見つかりませんでした",
+    propertyGridPlaceholderTitle: "フォームの設定を開始する",
+    propertyGridPlaceholderDescription: "任意のカテゴリアイコンをクリックして、アンケート設定を探索します。追加の設定は、デザイン画面にアンケート要素を追加すると使用可能になります。",
     correctJSON: "JSONを修正してください。",
     surveyResults: "アンケート結果： ",
     surveyResultsTable: "表として",
@@ -154,6 +158,7 @@ export var jaStrings = {
     translationPlaceHolder: "翻訳。。。",
     translationSource: "源：",
     translationTarget: "ターゲット：",
+    translationYouTubeNotSupported: "YouTube リンクはサポートされていません。",
     themeExportButton: "輸出",
     themeImportButton: "輸入",
     surveyJsonExportButton: "輸出",
@@ -307,6 +312,9 @@ export var jaStrings = {
       templateTitleLocation: "質問タイトルの配置",
       templateErrorLocation: "エラー・メッセージのアライメント",
       newPanelPosition: "新しいパネルの位置",
+      showRangeInProgress: "進行状況バーを表示する",
+      showProgressBar: "進行状況バーを表示する",
+      progressBarLocation: "プログレスバーの配置",
       keyName: "次の質問で回答の重複を防ぐ"
     },
     question: {
@@ -630,6 +638,7 @@ export var jaStrings = {
     maxImageHeight: "最大画像の高さ",
     minValue: "最小値",
     maxValue: "最大値",
+    caseInsensitive: "大文字と小文字を区別しない",
     minLength: "最小長",
     allowDigits: "数字を許可",
     minCount: "最小数",
@@ -690,7 +699,6 @@ export var jaStrings = {
     panelsState: "内側パネルの展開状態",
     panelPrevText: "前のパネルボタンのツールチップ",
     panelNextText: "[次へ] パネル ボタンのツールチップ",
-    showRangeInProgress: "進行状況バーを表示する",
     panelRemoveButtonLocation: "[パネルを削除] ボタンの位置",
     hideIfRowsEmpty: "行がない場合は質問を非表示にする",
     hideColumnsIfEmpty: "行がない場合は列を非表示にする",
@@ -927,10 +935,11 @@ export var jaStrings = {
     firstExpanded: "firstExpanded",
     off: "オフ",
     list: "リスト",
+    carousel: "回転木馬",
+    tab: "タブ",
     progressTop: "progressTop",
     progressBottom: "progressBottom",
     progressTopBottom: "progressTopBottom",
-    tab: "タブ",
     horizontal: "水平",
     vertical: "垂直",
     top: "上",
@@ -1117,6 +1126,11 @@ export var jaStrings = {
       topbottom: "上と下",
       aboveheader: "ヘッダーの上",
       belowheader: "ヘッダーの下"
+    },
+    progressBarLocation: {
+      top: "ページのトップへ",
+      bottom: "底",
+      topBottom: "上部と下部"
     },
     sum: "和",
     count: "数える",
@@ -1348,8 +1362,10 @@ export var jaStrings = {
       visibleIf: "魔法の杖アイコンを使用して、列の表示を決定する条件付きルールを設定します。",
       enableIf: "魔法の杖アイコンを使用して、列の読み取り専用モードを無効にする条件付きルールを設定します。",
       requiredIf: "魔法の杖アイコンを使用して、ネストされた質問に回答が少なくとも1つない限り、調査の送信を禁止する条件付きルールを設定します。",
-      showInMultipleColumns: "選択すると、選択肢オプションごとに個別の列が作成されます。"
+      showInMultipleColumns: "選択すると、選択肢オプションごとに個別の列が作成されます。",
+      colCount: "選択オプションを複数列のレイアウトで配置します。0 に設定すると、オプションは 1 行で表示されます。-1 に設定すると、実際の値は親行列の \"Nested column count\" プロパティから継承されます。"
     },
+    caseInsensitive: "正規表現の大文字と小文字を同等に扱う必要がある場合に選択します。",
     widthMode: "次から選択します: \"Static\" - 固定幅を設定します。「レスポンシブ」 - アンケートを画面の全幅に表示します。「自動」 - 使用する質問タイプに応じて、2つのいずれかを適用します。",
     cookieName: "Cookieは、ユーザーが同じアンケートに2回記入するのを防ぎます。",
     logo: "画像リンクを貼り付けるか(サイズ制限なし)、フォルダアイコンをクリックして、コンピューターからファイルを参照します(最大64KB)。",
@@ -2752,3 +2768,16 @@ editorLocalization.locales["ja"] = jaStrings;
 // inputTextAlignment.right: "Right" => "右"
 // pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "フィールド内で入力値を揃える方法を選択します。デフォルト設定の「自動」では、通貨または数値のマスキングが適用されている場合は入力値が右に、適用されていない場合は左に揃えられます。"
 // p.inputTextAlignment: "Input value alignment" => "入力値の配置"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "進行状況バーを表示する"
+// paneldynamic.showProgressBar: "Show the progress bar" => "進行状況バーを表示する"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "プログレスバーの配置"
+// pv.carousel: "Carousel" => "回転木馬"
+// progressBarLocation.top: "Top" => "ページのトップへ"
+// progressBarLocation.bottom: "Bottom" => "底"
+// progressBarLocation.topBottom: "Top and bottom" => "上部と下部"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "選択オプションを複数列のレイアウトで配置します。0 に設定すると、オプションは 1 行で表示されます。-1 に設定すると、実際の値は親行列の \"Nested column count\" プロパティから継承されます。"
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "YouTube リンクはサポートされていません。"
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "フォームの設定を開始する"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "任意のカテゴリアイコンをクリックして、アンケート設定を探索します。追加の設定は、デザイン画面にアンケート要素を追加すると使用可能になります。"
+// pe.caseInsensitive: "Case insensitive" => "大文字と小文字を区別しない"
+// pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "正規表現の大文字と小文字を同等に扱う必要がある場合に選択します。"

@@ -106,6 +106,8 @@ export var indonesianStrings = {
     redo: "Ulangi",
     undoTooltip: "Mengurungkan perubahan terakhir",
     redoTooltip: "Mengulangi perubahan",
+    expandAllTooltip: "Perluas Semua",
+    collapseAllTooltip: "Ciutkan Semua",
     showMoreChoices: "Tampilkan lebih banyak",
     showLessChoices: "Tampilkan lebih sedikit",
     copy: "Menyalin",
@@ -123,6 +125,8 @@ export var indonesianStrings = {
     toolboxNoResultsFound: "Tidak ada hasil yang ditemukan",
     propertyGridFilteredTextPlaceholder: "Ketik untuk mencari...",
     propertyGridNoResultsFound: "Tidak ada hasil yang ditemukan",
+    propertyGridPlaceholderTitle: "Mulai mengonfigurasi formulir Anda",
+    propertyGridPlaceholderDescription: "Klik ikon kategori apa pun untuk menjelajahi pengaturan survei. Pengaturan tambahan akan tersedia setelah Anda menambahkan elemen survei ke permukaan desain.",
     correctJSON: "Please correct JSON.",
     surveyResults: "Hasil survei: ",
     surveyResultsTable: "Sebagai tabel",
@@ -154,6 +158,7 @@ export var indonesianStrings = {
     translationPlaceHolder: "Terjemahan...",
     translationSource: "Sumber: ",
     translationTarget: "Target: ",
+    translationYouTubeNotSupported: "Tautan YouTube tidak didukung.",
     themeExportButton: "Ekspor",
     themeImportButton: "Mengimpor",
     surveyJsonExportButton: "Ekspor",
@@ -307,6 +312,9 @@ export var indonesianStrings = {
       templateTitleLocation: "Perataan judul pertanyaan",
       templateErrorLocation: "Perataan pesan kesalahan",
       newPanelPosition: "Lokasi panel baru",
+      showRangeInProgress: "Menampilkan bilah kemajuan",
+      showProgressBar: "Menampilkan bilah kemajuan",
+      progressBarLocation: "Perataan bilah kemajuan",
       keyName: "Cegah respons duplikat dalam pertanyaan berikut"
     },
     question: {
@@ -630,6 +638,7 @@ export var indonesianStrings = {
     maxImageHeight: "Tinggi gambar maksimum",
     minValue: "Nilai minimum",
     maxValue: "Nilai maksimum",
+    caseInsensitive: "Tidak peka huruf besar/kecil",
     minLength: "Panjang minimum",
     allowDigits: "Bolehkan angka",
     minCount: "Hitungan minimum",
@@ -690,7 +699,6 @@ export var indonesianStrings = {
     panelsState: "Status perluasan panel dalam",
     panelPrevText: "Tooltip tombol Panel sebelumnya",
     panelNextText: "Tooltip tombol Panel Berikutnya",
-    showRangeInProgress: "Perlihatkan bilah kemajuan",
     panelRemoveButtonLocation: "Hapus lokasi tombol Panel",
     hideIfRowsEmpty: "Menyembunyikan pertanyaan jika tidak ada baris",
     hideColumnsIfEmpty: "Menyembunyikan kolom jika tidak ada baris",
@@ -927,10 +935,11 @@ export var indonesianStrings = {
     firstExpanded: "perluasanPertama",
     off: "mati",
     list: "daftar",
+    carousel: "Korsel",
+    tab: "Tab",
     progressTop: "progress atas",
     progressBottom: "progress bawah",
     progressTopBottom: "progress atas bawah",
-    tab: "Tab",
     horizontal: "horizontal",
     vertical: "vertikal",
     top: "atas",
@@ -1117,6 +1126,11 @@ export var indonesianStrings = {
       topbottom: "atas dan bawah",
       aboveheader: "Di atas header",
       belowheader: "Di bawah header"
+    },
+    progressBarLocation: {
+      top: "Puncak",
+      bottom: "Dasar",
+      topBottom: "Atas dan bawah"
     },
     sum: "Jumlah",
     count: "Hitung",
@@ -1348,8 +1362,10 @@ export var indonesianStrings = {
       visibleIf: "Gunakan ikon tongkat ajaib untuk mengatur aturan bersyarat yang menentukan visibilitas kolom.",
       enableIf: "Gunakan ikon tongkat ajaib untuk mengatur aturan bersyarat yang menonaktifkan mode baca-saja untuk kolom.",
       requiredIf: "Gunakan ikon tongkat ajaib untuk menetapkan aturan bersyarat yang mencegah pengiriman survei kecuali setidaknya satu pertanyaan bertingkat memiliki jawaban.",
-      showInMultipleColumns: "Saat dipilih, buat kolom individual untuk setiap opsi pilihan."
+      showInMultipleColumns: "Saat dipilih, buat kolom individual untuk setiap opsi pilihan.",
+      colCount: "Mengatur opsi pilihan dalam tata letak multi-kolom. Saat diatur ke 0, opsi ditampilkan dalam satu baris. Saat diatur ke -1, nilai aktual diwarisi dari properti \"Jumlah kolom berlapis\" dari matriks induk."
     },
+    caseInsensitive: "Pilih apakah huruf besar dan kecil dalam ekspresi reguler harus diperlakukan sebagai setara.",
     widthMode: "Pilih dari: \"Statis\" - menetapkan lebar tetap; \"Responsif\" - membuat survei menempati lebar penuh layar; \"Otomatis\" - berlaku salah satu dari keduanya tergantung pada jenis pertanyaan yang digunakan.",
     cookieName: "Cookie mencegah pengguna mengisi survei yang sama dua kali.",
     logo: "Tempel tautan gambar (tanpa batas ukuran) atau klik ikon folder untuk menelusuri file dari komputer Anda (hingga 64 KB).",
@@ -2907,3 +2923,16 @@ editorLocalization.locales["id"] = indonesianStrings;
 // inputTextAlignment.right: "Right" => "Kanan"
 // pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Pilih cara menyelaraskan nilai input dalam bidang. Pengaturan default \"Otomatis\" menyelaraskan nilai input ke kanan jika penyembunyian mata uang atau numerik diterapkan dan ke kiri jika tidak."
 // p.inputTextAlignment: "Input value alignment" => "Penyelarasan nilai input"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "Menampilkan bilah kemajuan"
+// paneldynamic.showProgressBar: "Show the progress bar" => "Menampilkan bilah kemajuan"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "Perataan bilah kemajuan"
+// pv.carousel: "Carousel" => "Korsel"
+// progressBarLocation.top: "Top" => "Puncak"
+// progressBarLocation.bottom: "Bottom" => "Dasar"
+// progressBarLocation.topBottom: "Top and bottom" => "Atas dan bawah"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Mengatur opsi pilihan dalam tata letak multi-kolom. Saat diatur ke 0, opsi ditampilkan dalam satu baris. Saat diatur ke -1, nilai aktual diwarisi dari properti \"Jumlah kolom berlapis\" dari matriks induk."
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "Tautan YouTube tidak didukung."
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "Mulai mengonfigurasi formulir Anda"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Klik ikon kategori apa pun untuk menjelajahi pengaturan survei. Pengaturan tambahan akan tersedia setelah Anda menambahkan elemen survei ke permukaan desain."
+// pe.caseInsensitive: "Case insensitive" => "Tidak peka huruf besar/kecil"
+// pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Pilih apakah huruf besar dan kecil dalam ekspresi reguler harus diperlakukan sebagai setara."

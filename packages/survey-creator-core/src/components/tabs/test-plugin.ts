@@ -158,6 +158,7 @@ export class TabTestPlugin implements ICreatorPlugin {
         allowSelection: true,
         onSelectionChanged: (item: any) => { this.setDevice(item.id); },
         horizontalPosition: "center",
+        cssClass: "svc-creator-popup",
         onHide: () => { this.deviceSelectorAction.enabled = true; },
         onShow: () => { this.deviceSelectorAction.enabled = false; }
       });
@@ -221,8 +222,11 @@ export class TabTestPlugin implements ICreatorPlugin {
       this.changeThemePopupModel = new PopupModel(
         "sv-list",
         { model: this.changeThemeModel },
-        "bottom",
-        "center"
+        {
+          verticalPosition: "bottom",
+          horizontalPosition: "center",
+          cssClass: "svc-creator-popup",
+        }
       );
       const getStartThemeName = (): string => {
         const availableThemes = themeMapper.filter(item => item.theme.root === this.simulatorTheme.root);
@@ -262,6 +266,7 @@ export class TabTestPlugin implements ICreatorPlugin {
         this.languageSelectorAction.title = editorLocalization.getLocaleName(item.id);
       },
       horizontalPosition: "center",
+      cssClass: "svc-creator-popup",
       onHide: () => { this.languageSelectorAction.enabled = true; },
       onShow: () => { this.languageSelectorAction.enabled = false; }
     });

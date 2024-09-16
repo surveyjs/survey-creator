@@ -19,39 +19,59 @@
       "
     >
       <div
+        class="svc-question__drop-indicator svc-question__drop-indicator--left"
+      ></div>
+      <div
+        class="svc-question__drop-indicator svc-question__drop-indicator--right"
+      ></div>
+      <div
+        class="svc-question__drop-indicator svc-question__drop-indicator--top"
+      ></div>
+      <div
+        class="svc-question__drop-indicator svc-question__drop-indicator--bottom"
+      ></div>
+      <div
         v-if="
           adorner.allowDragging && adorner.element.isInteractiveDesignElement
         "
         class="svc-question__drag-area"
         @pointerdown="adorner.onPointerDown($event)"
       >
-        <sv-svg-icon
+        <SvComponent
+          :is="'sv-svg-icon'"
           class="svc-question__drag-element"
           :iconName="'icon-drag-area-indicator_24x16'"
           :size="24"
-        ></sv-svg-icon>
+        ></SvComponent>
         <div class="svc-question__top-actions">
-          <sv-action-bar
+          <SvComponent
+            :is="'sv-action-bar'"
             :model="adorner.topActionContainer"
             :handleClick="false"
-          ></sv-action-bar>
+          ></SvComponent>
         </div>
       </div>
-      <component :is="componentName" v-bind="componentData"></component>
-      <div v-if="adorner.isEmptyElement" class="svc-panel__placeholder_frame-wrapper">
+      <SvComponent :is="componentName" v-bind="componentData"></SvComponent>
+      <div
+        v-if="adorner.isEmptyElement"
+        class="svc-panel__placeholder_frame-wrapper"
+      >
         <div class="svc-panel__placeholder_frame">
-          <div class="svc-panel__placeholder">{{ adorner.placeholderText }}</div>
+          <div class="svc-panel__placeholder">
+            {{ adorner.placeholderText }}
+          </div>
           <div
             v-if="adorner.showAddQuestionButton"
             class="svc-panel__add-new-question svc-action-button"
             v-key2click
             @click="addNewQuestion"
           >
-            <sv-svg-icon
+            <SvComponent
+              :is="'sv-svg-icon'"
               class="svc-panel__add-new-question-icon"
               :iconName="'icon-add_24x24'"
               :size="24"
-            ></sv-svg-icon>
+            ></SvComponent>
             <span class="svc-text svc-text--normal svc-text--bold">
               {{ adorner.addNewQuestionText }}
             </span>
@@ -62,9 +82,11 @@
         v-if="!adorner.isEmptyElement && adorner.showAddQuestionButton"
         class="svc-panel__add-new-question-container"
       >
-        <div class="svc-panel__question-type-selector-popup"><sv-popup
-              :model="adorner.questionTypeSelectorModel.popupModel"
-            ></sv-popup>
+        <div class="svc-panel__question-type-selector-popup">
+          <SvComponent
+            :is="'sv-popup'"
+            :model="adorner.questionTypeSelectorModel.popupModel"
+          ></SvComponent>
         </div>
         <div class="svc-panel__add-new-question-wrapper">
           <div
@@ -72,11 +94,12 @@
             v-key2click
             @click="addNewQuestion"
           >
-            <sv-svg-icon
+            <SvComponent
+              :is="'sv-svg-icon'"
               class="svc-panel__add-new-question-icon"
               :iconName="'icon-add_24x24'"
               :size="24"
-            ></sv-svg-icon>
+            ></SvComponent>
             <span class="svc-text svc-text--normal svc-text--bold">
               {{ adorner.addNewQuestionText }}
             </span>
@@ -88,11 +111,12 @@
             @click="selectQuestionType"
             class="svc-panel__question-type-selector"
           >
-            <sv-svg-icon
+            <SvComponent
+              :is="'sv-svg-icon'"
               class="svc-panel__question-type-selector-icon"
               :iconName="adorner.questionTypeSelectorModel.iconName"
               :size="24"
-              ></sv-svg-icon>
+            ></SvComponent>
           </button>
         </div>
       </div>
@@ -102,15 +126,18 @@
         class="svc-question__content-actions"
         @focusin="adorner.select(adorner, $event)"
       >
-        <sv-action-bar
+        <SvComponent
+          :is="'sv-action-bar'"
           :model="adorner.actionContainer"
           :handleClick="false"
-        ></sv-action-bar>
+        ></SvComponent>
       </div>
     </div>
   </div>
 </template>
 <script lang="ts" setup>
+import { key2ClickDirective as vKey2click } from "survey-vue3-ui";
+import { SvComponent } from "survey-vue3-ui";
 import { useCreatorModel } from "@/creator-model";
 import type { Question } from "survey-core";
 import {

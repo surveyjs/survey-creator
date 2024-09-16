@@ -1,0 +1,21 @@
+<div data-bind="css: model.sideBarClassName">
+  <div class="svc-sidebar-tabs__top-container">
+    <div class="svc-sidebar-tabs__collapse-button">
+      <!-- ko component: { name: 'svc-tab-button', params: { model: model.expandCollapseAction } } -->
+      <!-- /ko -->
+    </div>
+    <div class="svc-sidebar-tabs__separator">
+      <div></div>
+    </div>
+    <div class="svc-sidebar-tabs__items">
+      <!-- ko component: { name: 'svc-tabs', params: { model: model.topToolbar } } -->
+      <!-- /ko -->
+    </div>
+  </div>
+  <div class="svc-sidebar-tabs__bottom-container">
+    <div class="svc-sidebar-tabs__items">
+      <!-- ko component: { name: 'svc-tabs', params: { model: model.bottomToolbar } } -->
+      <!-- /ko -->
+    </div>
+  </div>
+</div>

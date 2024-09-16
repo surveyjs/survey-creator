@@ -1,4 +1,4 @@
-import { ActionContainer, ComputedUpdater, CssClassBuilder, DragTypeOverMeEnum, IAction, IElement, PageModel, property } from "survey-core";
+import { Action, ActionContainer, ComputedUpdater, CssClassBuilder, DragTypeOverMeEnum, IAction, IElement, PageModel, property } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { IPortableMouseEvent } from "../utils/events";
 import { SurveyElementAdornerBase } from "./action-container-view-model";
@@ -34,7 +34,8 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     this.questionTypeSelectorModel = this.creator.getQuestionTypeSelectorModel(
       (type) => {
         this.currentAddQuestionType = type;
-        this.addGhostPage();
+        this.addGhostPage(false);
+        this.creator.survey.currentPage = this.page;
       }
     );
     this.attachElement(page);
@@ -137,6 +138,10 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   }
   get page(): PageModel {
     return this.getPage();
+  }
+
+  protected createActionContainer(): ActionContainer<Action> {
+    return new ActionContainer();
   }
 
   private addGhostPage = (selectCurrentPage: boolean = true) => {

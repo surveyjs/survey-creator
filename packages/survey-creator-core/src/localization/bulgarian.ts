@@ -106,6 +106,8 @@ export var bgStrings = {
     redo: "Повтаряне",
     undoTooltip: "Отмяна на последната промяна",
     redoTooltip: "Повтаряне на последната промяна",
+    expandAllTooltip: "Разширете всички",
+    collapseAllTooltip: "Свиване на всички",
     showMoreChoices: "Покажи повече.",
     showLessChoices: "Покажи по-малко.",
     copy: "Копиране",
@@ -123,6 +125,8 @@ export var bgStrings = {
     toolboxNoResultsFound: "Няма намерени резултати",
     propertyGridFilteredTextPlaceholder: "Въведи за търсене...",
     propertyGridNoResultsFound: "Няма намерени резултати",
+    propertyGridPlaceholderTitle: "Започнете да конфигурирате формуляра си",
+    propertyGridPlaceholderDescription: "Щракнете върху която и да е икона на категория, за да разгледате настройките на проучването. Допълнителни настройки ще станат налични, след като добавите елемент на проучване към повърхността за проектиране.",
     correctJSON: "Моля, коригирай JSON.",
     surveyResults: "Резултати от анкетата ",
     surveyResultsTable: "Като таблица",
@@ -154,6 +158,7 @@ export var bgStrings = {
     translationPlaceHolder: "Превод...",
     translationSource: "Източник: ",
     translationTarget: "Цел: ",
+    translationYouTubeNotSupported: "Връзките в YouTube не се поддържат.",
     themeExportButton: "Износ",
     themeImportButton: "Внос",
     surveyJsonExportButton: "Износ",
@@ -307,6 +312,9 @@ export var bgStrings = {
       templateTitleLocation: "Подравняване на заглавието на въпроса",
       templateErrorLocation: "Подравняване на съобщение за грешка",
       newPanelPosition: "Ново местоположение на панела",
+      showRangeInProgress: "Показване на лентата за напредъка",
+      showProgressBar: "Показване на лентата за напредъка",
+      progressBarLocation: "Подравняване на лентата за напредъка",
       keyName: "Предотвратяване на дублиращи се отговори в следния въпрос"
     },
     question: {
@@ -630,6 +638,7 @@ export var bgStrings = {
     maxImageHeight: "Максимална височина на изображението",
     minValue: "Минимална стойност",
     maxValue: "Максимална стойност",
+    caseInsensitive: "Без чувствителност към малки и големи букви",
     minLength: "Минимална дължина (в символи)",
     allowDigits: "Разрешаване на цифри",
     minCount: "Минимален брой",
@@ -690,7 +699,6 @@ export var bgStrings = {
     panelsState: "Разширено състояние на вътрешния панел",
     panelPrevText: "Подсказка към бутона за предишен панел",
     panelNextText: "Подсказка към бутона за следващ панел",
-    showRangeInProgress: "Показване на лентата на напредък",
     panelRemoveButtonLocation: "Премахване местоположението на бутона на панела",
     hideIfRowsEmpty: "Скриване на въпроса, ако няма редове",
     hideColumnsIfEmpty: "Скриване на колони, ако няма редове",
@@ -927,10 +935,11 @@ export var bgStrings = {
     firstExpanded: "Първият панел е разширен.",
     off: "Скриване на номерата на въпросите",
     list: "Списък",
+    carousel: "Въртележката",
+    tab: "Раздели",
     progressTop: "Панел навигатор + Лента за напредък в горната част",
     progressBottom: "Панел навигатор + Лента за напредък в долната част",
     progressTopBottom: "Панел навигатор + Лента за напредък в горната и долната част",
-    tab: "Раздели",
     horizontal: "Хоризонтален",
     vertical: "Вертикален",
     top: "Горен",
@@ -1117,6 +1126,11 @@ export var bgStrings = {
       topbottom: "Отгоре и отдолу",
       aboveheader: "Над горния колонтитул",
       belowheader: "Под заглавката"
+    },
+    progressBarLocation: {
+      top: "Връх",
+      bottom: "Дъно",
+      topBottom: "Отгоре и отдолу"
     },
     sum: "Сума",
     count: "Граф",
@@ -1348,8 +1362,10 @@ export var bgStrings = {
       visibleIf: "Използвайте иконата на магическа пръчка, за да зададете условно правило, което определя видимостта на колоната.",
       enableIf: "Използвайте иконата на магическа пръчка, за да зададете условно правило, което забранява режима само за четене за колоната.",
       requiredIf: "Използвайте иконата на магическа пръчка, за да зададете условно правило, което не позволява подаване на проучване, освен ако поне един вложен въпрос няма отговор.",
-      showInMultipleColumns: "Когато е избрано, създава отделна колона за всяка опция за избор."
+      showInMultipleColumns: "Когато е избрано, създава отделна колона за всяка опция за избор.",
+      colCount: "Подрежда опциите за избор в оформление с няколко колони. Когато е зададено на 0, опциите се показват на един ред. Когато е зададена на -1, действителната стойност се наследява от свойството \"Брой вложени колони\" на родителската матрица."
     },
+    caseInsensitive: "Изберете дали главните и малките букви в регулярния израз трябва да се третират като еквивалентни.",
     widthMode: "Изберете от: \"Статичен\" - задава фиксирана ширина; \"Responsive\" - прави проучването да заема цялата ширина на екрана; \"Auto\" - прилага се всеки от двата в зависимост от използваните типове въпроси.",
     cookieName: "Бисквитките не позволяват на потребителите да попълнят една и съща анкета два пъти.",
     logo: "Поставете връзка към изображение (без ограничения за размера) или щракнете върху иконата на папката, за да прегледате файл от компютъра си (до 64 КБ).",
@@ -2316,3 +2332,16 @@ editorLocalization.locales["bg"] = bgStrings;
 // inputTextAlignment.right: "Right" => "Дясно"
 // pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Изберете как да подравните входната стойност в полето. Настройката по подразбиране \"Автоматично\" подравнява входната стойност надясно, ако е приложено валутно или цифрово маскиране, и наляво, ако не."
 // p.inputTextAlignment: "Input value alignment" => "Подравняване на входните стойности"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "Показване на лентата за напредъка"
+// paneldynamic.showProgressBar: "Show the progress bar" => "Показване на лентата за напредъка"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "Подравняване на лентата за напредъка"
+// pv.carousel: "Carousel" => "Въртележката"
+// progressBarLocation.top: "Top" => "Връх"
+// progressBarLocation.bottom: "Bottom" => "Дъно"
+// progressBarLocation.topBottom: "Top and bottom" => "Отгоре и отдолу"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Подрежда опциите за избор в оформление с няколко колони. Когато е зададено на 0, опциите се показват на един ред. Когато е зададена на -1, действителната стойност се наследява от свойството \"Брой вложени колони\" на родителската матрица."
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "Връзките в YouTube не се поддържат."
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "Започнете да конфигурирате формуляра си"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Щракнете върху която и да е икона на категория, за да разгледате настройките на проучването. Допълнителни настройки ще станат налични, след като добавите елемент на проучване към повърхността за проектиране."
+// pe.caseInsensitive: "Case insensitive" => "Без чувствителност към малки и големи букви"
+// pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Изберете дали главните и малките букви в регулярния израз трябва да се третират като еквивалентни."

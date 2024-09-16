@@ -106,6 +106,8 @@ export var fiStrings = {
     redo: "Tee uudelleen",
     undoTooltip: "Kumoa viimeinen muutos",
     redoTooltip: "Tee muutos uudelleen",
+    expandAllTooltip: "Laajenna kaikki",
+    collapseAllTooltip: "Kutista kaikki",
     showMoreChoices: "Näytä lisää",
     showLessChoices: "Näytä vähemmän",
     copy: "Kopioi",
@@ -123,6 +125,8 @@ export var fiStrings = {
     toolboxNoResultsFound: "Tuloksia ei löytynyt",
     propertyGridFilteredTextPlaceholder: "Kirjoita etsiäksesi...",
     propertyGridNoResultsFound: "Tuloksia ei löytynyt",
+    propertyGridPlaceholderTitle: "Aloita lomakkeen määrittäminen",
+    propertyGridPlaceholderDescription: "Napsauta mitä tahansa luokkakuvaketta tutustuaksesi kyselyn asetuksiin. Lisäasetukset ovat käytettävissä, kun lisäät mittauselementin suunnittelupintaan.",
     correctJSON: "Korjaa JSON.",
     surveyResults: "Kyselyn tulos:",
     surveyResultsTable: "Taulukossa",
@@ -154,6 +158,7 @@ export var fiStrings = {
     translationPlaceHolder: "Käännös...",
     translationSource: "Lähde: ",
     translationTarget: "Kohde: ",
+    translationYouTubeNotSupported: "YouTube-linkkejä ei tueta.",
     themeExportButton: "Vienti",
     themeImportButton: "Tuoda",
     surveyJsonExportButton: "Vienti",
@@ -307,6 +312,9 @@ export var fiStrings = {
       templateTitleLocation: "Kysymyksen otsikon tasaus",
       templateErrorLocation: "Virhesanoman tasaus",
       newPanelPosition: "Uusi paneelin sijainti",
+      showRangeInProgress: "Edistymispalkin näyttäminen",
+      showProgressBar: "Edistymispalkin näyttäminen",
+      progressBarLocation: "Edistymispalkin tasaus",
       keyName: "Päällekkäisten vastausten estäminen seuraavassa kysymyksessä"
     },
     question: {
@@ -630,6 +638,7 @@ export var fiStrings = {
     maxImageHeight: "Kuvan enimmäiskorkeus",
     minValue: "Vähimmäisarvo",
     maxValue: "Suurin arvo",
+    caseInsensitive: "Isot ja pienet kirjaimet eivät ole merkitseviä",
     minLength: "Vähimmäispituus",
     allowDigits: "Salli numerot",
     minCount: "Vähimmäismäärä",
@@ -690,7 +699,6 @@ export var fiStrings = {
     panelsState: "Sisäpaneelin laajennustila",
     panelPrevText: "Edellinen paneeli -painikkeen työkaluvihje",
     panelNextText: "Seuraava paneeli -painikkeen työkaluvihje",
-    showRangeInProgress: "Näytä edistymispalkki",
     panelRemoveButtonLocation: "Poista paneelipainikkeen sijainti",
     hideIfRowsEmpty: "Piilota kysymys, jos rivejä ei ole",
     hideColumnsIfEmpty: "Piilota sarakkeet, jos rivejä ei ole",
@@ -927,10 +935,11 @@ export var fiStrings = {
     firstExpanded: "firstExpanded",
     off: "off",
     list: "list",
+    carousel: "Karuselli",
+    tab: "Välilehdet",
     progressTop: "progressTop",
     progressBottom: "progressBottom",
     progressTopBottom: "progressTopBottom",
-    tab: "Välilehdet",
     horizontal: "horizontal",
     vertical: "vertical",
     top: "top",
@@ -1117,6 +1126,11 @@ export var fiStrings = {
       topbottom: "top and bottom",
       aboveheader: "Otsikon yläpuolella",
       belowheader: "Otsikon alapuolella"
+    },
+    progressBarLocation: {
+      top: "Huippu",
+      bottom: "Pohja",
+      topBottom: "Ylhäällä ja alhaalla"
     },
     sum: "Summa",
     count: "Kreivi",
@@ -1348,8 +1362,10 @@ export var fiStrings = {
       visibleIf: "Määritä taikasauvakuvakkeen avulla ehdollinen sääntö, joka määrittää sarakkeen näkyvyyden.",
       enableIf: "Määritä taikasauvakuvakkeen avulla ehdollinen sääntö, joka poistaa sarakkeen vain luku -tilan käytöstä.",
       requiredIf: "Määritä taikasauvakuvakkeen avulla ehdollinen sääntö, joka estää kyselyn lähettämisen, ellei vähintään yhteen sisäkkäiseen kysymykseen ole vastausta.",
-      showInMultipleColumns: "Kun tämä asetus on valittuna, kullekin vaihtoehdolle luodaan oma sarake."
+      showInMultipleColumns: "Kun tämä asetus on valittuna, kullekin vaihtoehdolle luodaan oma sarake.",
+      colCount: "Järjestää valintavaihtoehdot monisarakkeiseen asetteluun. Kun asetuksena on 0, asetukset näytetään yhdellä rivillä. Kun arvoksi on määritetty -1, todellinen arvo periytyy päämatriisin sisäkkäisten sarakkeiden määrä -ominaisuudesta."
     },
+    caseInsensitive: "Valitse, onko säännöllisen lausekkeen isoja ja pieniä kirjaimia käsiteltävä vastaavina.",
     widthMode: "Valitse seuraavista: \"Staattinen\" - asettaa kiinteän leveyden; \"Reagoiva\" - tekee kyselystä koko näytön leveyden; \"Auto\" - soveltaa jompaakumpaa näistä kahdesta riippuen käytetyistä kysymystyypeistä.",
     cookieName: "Evästeet estävät käyttäjiä täyttämästä samaa kyselyä kahdesti.",
     logo: "Liitä kuvalinkki (ei kokorajoituksia) tai napsauta kansiokuvaketta selataksesi tiedostoa tietokoneeltasi (enintään 64 kt).",
@@ -2753,3 +2769,16 @@ editorLocalization.locales["fi"] = fiStrings;
 // inputTextAlignment.right: "Right" => "Oikea"
 // pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Valitse, miten syötteen arvo tasataan kenttään. Oletusasetus \"Auto\" kohdistaa syöttöarvon oikealle, jos valuuttaa tai numeerista peittoa käytetään, ja vasemmalle, jos ei."
 // p.inputTextAlignment: "Input value alignment" => "Syöttöarvon tasaus"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "Edistymispalkin näyttäminen"
+// paneldynamic.showProgressBar: "Show the progress bar" => "Edistymispalkin näyttäminen"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "Edistymispalkin tasaus"
+// pv.carousel: "Carousel" => "Karuselli"
+// progressBarLocation.top: "Top" => "Huippu"
+// progressBarLocation.bottom: "Bottom" => "Pohja"
+// progressBarLocation.topBottom: "Top and bottom" => "Ylhäällä ja alhaalla"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Järjestää valintavaihtoehdot monisarakkeiseen asetteluun. Kun asetuksena on 0, asetukset näytetään yhdellä rivillä. Kun arvoksi on määritetty -1, todellinen arvo periytyy päämatriisin sisäkkäisten sarakkeiden määrä -ominaisuudesta."
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "YouTube-linkkejä ei tueta."
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "Aloita lomakkeen määrittäminen"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Napsauta mitä tahansa luokkakuvaketta tutustuaksesi kyselyn asetuksiin. Lisäasetukset ovat käytettävissä, kun lisäät mittauselementin suunnittelupintaan."
+// pe.caseInsensitive: "Case insensitive" => "Isot ja pienet kirjaimet eivät ole merkitseviä"
+// pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Valitse, onko säännöllisen lausekkeen isoja ja pieniä kirjaimia käsiteltävä vastaavina."

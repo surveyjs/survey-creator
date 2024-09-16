@@ -4,7 +4,8 @@ import {
   QuestionSelectBase, QuestionRowModel, LocalizableString, ILocalizableString, ILocalizableOwner, PopupBaseViewModel,
   EventBase, hasLicense, slk, settings as SurveySettings, Event, Helpers as SurveyHelpers, MatrixDropdownColumn, JsonObject,
   dxSurveyService, ISurveyElement, PanelModelBase, surveyLocalization, QuestionMatrixDropdownModelBase, ITheme, Helpers,
-  chooseFiles, createDropdownActionModel
+  chooseFiles, createDropdownActionModel,
+  CssClassBuilder
 } from "survey-core";
 import { ICreatorPlugin, ISurveyCreatorOptions, settings, ICollectionItemAllowOperations } from "./creator-settings";
 import { editorLocalization } from "./editorLocalization";
@@ -189,6 +190,23 @@ export class SurveyCreatorModel extends Base
    * Default value: `true`
    */
   @property({ defaultValue: true }) previewShowResults: boolean;
+
+  private _showOneCategoryInPropertyGrid: boolean;
+  get showOneCategoryInPropertyGrid(): boolean {
+    return this._showOneCategoryInPropertyGrid;
+  }
+  set showOneCategoryInPropertyGrid(newValue: boolean) {
+    this._showOneCategoryInPropertyGrid = newValue;
+    const designerPlugin = this.getPlugin("designer");
+    if (designerPlugin) {
+      designerPlugin.showOneCategoryInPropertyGrid = newValue;
+    }
+    const themePlugin = this.getPlugin("theme");
+    if (themePlugin) {
+      themePlugin.showOneCategoryInPropertyGrid = newValue;
+    }
+  }
+
   get allowEditSurveyTitle(): boolean {
     return this.getPropertyValue("allowEditSurveyTitle", true);
   }
@@ -1231,6 +1249,8 @@ export class SurveyCreatorModel extends Base
    * Provides access to the [Toolbox API](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolbox).
    * 
    * [Toolbox Customization](https://surveyjs.io/survey-creator/documentation/toolbox-customization (linkStyle))
+   * @see showToolbox
+   * @see toolboxLocation
    */
   public toolbox: QuestionToolbox;
   public get toolboxCategories(): Array<any> {
@@ -1287,6 +1307,15 @@ export class SurveyCreatorModel extends Base
   public get showToolbox() {
     return this.showToolboxValue && this.allowShowToolbox;
   }
+  /**
+   * Specifies whether to show the Toolbox.
+   * 
+   * Default value: `true`
+   * 
+   * [Toolbox Customization](https://surveyjs.io/survey-creator/documentation/toolbox-customization (linkStyle))
+   * @see toolbox
+   * @see toolboxLocation
+   */
   public set showToolbox(val: boolean) {
     if (<any>val !== true && <any>val !== false) {
       SurveyHelper.warnText("showToolbox is a boolean property now.");
@@ -1890,11 +1919,14 @@ export class SurveyCreatorModel extends Base
       const editTitle = isDraggedFromToolbox && this.startEditTitleOnQuestionAdded;
       isDraggedFromToolbox = false;
       if (!options.draggedElement) return;
-      this.selectElement(options.draggedElement, undefined, false, editTitle);
+      this.selectElement(options.draggedElement, undefined, true, editTitle);
       this.onDragEnd.fire(this, options);
       if (!options.fromElement) {
         this.setModified({ type: "ADDED_FROM_TOOLBOX", question: options.draggedElement });
       }
+    });
+    this.dragDropSurveyElements.onDragClear.add((sender, options) => {
+      this.stopUndoRedoTransaction();
     });
   }
   private initDragDropChoices() {
@@ -2160,10 +2192,9 @@ export class SurveyCreatorModel extends Base
     this.onGetObjectDisplayName.fire(this, options);
     return options.displayName;
   }
-
+  private animationEnabled = false;
   public createSurvey(json: any, reason: string, model?: any, callback?: (survey: SurveyModel) => void, area?: string): SurveyModel {
     const survey = this.createSurveyCore(json, reason);
-
     if (reason !== "designer" && reason !== "test" && reason !== "theme") {
       survey.fitToContainer = false;
       survey.applyTheme(designTabSurveyThemeJSON);
@@ -2712,23 +2743,36 @@ export class SurveyCreatorModel extends Base
       this.focusElement(element, focus, selEl, propertyName, startEdit);
     }
   }
+  private currentFocusInterval: any;
+  private currentFocusTimeout: any;
   public focusElement(element: any, focus: string | boolean, selEl: any = null, propertyName: string = null, startEdit: boolean = null) {
     if (!selEl) selEl = this.getSelectedSurveyElement();
-    setTimeout(() => {
-      if (!!selEl && (focus || startEdit && (!selEl.hasTitle || selEl.isPanel))) {
+    if(!selEl) return;
+    clearInterval(this.currentFocusInterval);
+    clearTimeout(this.currentFocusTimeout);
+    if(this.animationEnabled && this.survey.isLazyRendering) {
+      this.survey.disableLazyRenderingBeforeElement(selEl);
+    }
+    this.currentFocusTimeout = setTimeout(() => {
+      this.currentFocusInterval = setInterval(() => {
         const el = document.getElementById(selEl.id);
-        if (!!el) {
-          const blockValue = !this.rootElement || this.rootElement.clientHeight - 64 > el.clientHeight ? "center" : "start";
-          el.scrollIntoView({ block: blockValue });
-          if (!propertyName && el.parentElement) {
-            let elToFocus: HTMLElement = (typeof (focus) === "string") ? el.parentElement.querySelector(focus) : el.parentElement;
-            elToFocus && elToFocus.focus();
+        if (!!selEl && (focus || startEdit && (!selEl.hasTitle || selEl.isPanel))) {
+          if(!el || this.rootElement.getAnimations({ subtree: true }).filter((animation => animation.effect.getComputedTiming().activeDuration !== Infinity && (animation.pending || animation.playState !== "finished")))[0]) return;
+          clearInterval(this.currentFocusInterval);
+          if (!!el) {
+            SurveyHelper.scrollIntoViewIfNeeded(el.parentElement ?? el, () => { return { block: "start", behavior: this.animationEnabled ? "smooth" : undefined }; }, true);
+            if (!propertyName && el.parentElement) {
+              let elToFocus: HTMLElement = (typeof (focus) === "string") ? el.parentElement.querySelector(focus) : el.parentElement;
+              elToFocus && elToFocus.focus({ preventScroll: true });
+            }
           }
+        } else {
+          clearInterval(this.currentFocusInterval);
         }
-      }
-      if (startEdit && !!element) {
-        StringEditorConnector.get((element as Question).locTitle).activateEditor();
-      }
+        if (startEdit && !!element) {
+          StringEditorConnector.get((element as Question).locTitle).activateEditor();
+        }
+      }, 1);
     }, 100);
   }
 
@@ -2745,9 +2789,9 @@ export class SurveyCreatorModel extends Base
 
   //#region Obsolete designerPropertyGrid
   protected get designerPropertyGrid(): PropertyGridModel {
-    const propertyGridTab = this.sidebar.getTabById(this.sidebar.activeTab);
+    const propertyGridTab = this.sidebar.getPageById(this.sidebar.activePage);
     if (!propertyGridTab) return null;
-    return propertyGridTab.model ? (propertyGridTab.model.propertyGridModel as any as PropertyGridModel) : null;
+    return propertyGridTab.componentData ? (propertyGridTab.componentData.propertyGridModel as any as PropertyGridModel) : null;
   }
   public get propertyGrid(): SurveyModel {
     return this.designerPropertyGrid.survey;
@@ -2855,7 +2899,9 @@ export class SurveyCreatorModel extends Base
     if (!!expandedTabName && !this.getPropertyGridExpandedCategory() && !this.survey.isEmpty) {
       const panel = <PanelModel>this.designerPropertyGrid.survey.getPanelByName(expandedTabName);
       if (!!panel) {
+        panel.blockAnimations();
         panel.expand();
+        panel.releaseAnimations();
       }
     }
   }
@@ -3629,6 +3675,7 @@ export class SurveyCreatorModel extends Base
         listModel.setItems(getActions());
       },
       allowSelection: false,
+      cssClass: "svc-creator-popup",
       verticalPosition: "bottom",
       horizontalPosition: "center",
       displayMode: this.isTouch ? "overlay" : "popup"
@@ -3788,6 +3835,10 @@ export class SurveyCreatorModel extends Base
    * - `"left"` (default) - Displays the Toolbox on the left side of the design surface.
    * - `"right"` - Displays the Toolbox on the right side of the design surface.
    * - `"sidebar"` - Displays the Toolbox as an overlay on top of the Property Grid. Use the [`sidebarLocation`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#sidebarLocation) property to specify the Property Grid position.
+   * 
+   * [Toolbox Customization](https://surveyjs.io/survey-creator/documentation/toolbox-customization (linkStyle))
+   * @see showToolbox
+   * @see toolbox
    */
   @property({
     defaultValue: "left", onSet: (newValue, target: SurveyCreatorModel) => {
@@ -3845,6 +3896,14 @@ export class SurveyCreatorModel extends Base
     super.dispose();
   }
   @property({ defaultValue: true }) enableLinkFileEditor: boolean;
+  public getRootCss() {
+    return new CssClassBuilder()
+      .append("svc-creator")
+      .append("svc-creator--mobile", this.isMobileView)
+      .append("svc-creator--touch", this.isTouch)
+      .append("svc-creator--disable-animations", !this.animationEnabled)
+      .toString();
+  }
 }
 
 export class CreatorBase extends SurveyCreatorModel { }

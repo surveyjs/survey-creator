@@ -106,6 +106,8 @@ var traditionalChineseTranslation = {
     redo: "重做",
     undoTooltip: "恢復上次更改",
     redoTooltip: "重做更改",
+    expandAllTooltip: "全部展開",
+    collapseAllTooltip: "全部摺疊",
     showMoreChoices: "顯示更多",
     showLessChoices: "顯示更少",
     copy: "複製",
@@ -123,6 +125,8 @@ var traditionalChineseTranslation = {
     toolboxNoResultsFound: "未找到結果",
     propertyGridFilteredTextPlaceholder: "鍵入以搜尋...",
     propertyGridNoResultsFound: "未找到結果",
+    propertyGridPlaceholderTitle: "開始配置表單",
+    propertyGridPlaceholderDescription: "按兩下任何類別圖示以瀏覽調查設置。將測量元素添加到設計圖面后，其他設置將變為可用。",
     correctJSON: "修正 JSON",
     surveyResults: "問卷結果: ",
     surveyResultsTable: "如表",
@@ -154,6 +158,7 @@ var traditionalChineseTranslation = {
     translationPlaceHolder: "譯本。。。",
     translationSource: "源：",
     translationTarget: "目標：",
+    translationYouTubeNotSupported: "不支援YouTube連結。",
     themeExportButton: "出口",
     themeImportButton: "進口",
     surveyJsonExportButton: "出口",
@@ -307,6 +312,9 @@ var traditionalChineseTranslation = {
       templateTitleLocation: "問題標題對齊方式",
       templateErrorLocation: "錯誤消息對齊",
       newPanelPosition: "新面板位置",
+      showRangeInProgress: "顯示進度條",
+      showProgressBar: "顯示進度條",
+      progressBarLocation: "進度條對齊",
       keyName: "防止在以下問題中重複回答"
     },
     question: {
@@ -630,6 +638,7 @@ var traditionalChineseTranslation = {
     maxImageHeight: "最大圖像高度",
     minValue: "最小值",
     maxValue: "最大值",
+    caseInsensitive: "不區分大小寫",
     minLength: "最小長度（以字元為單位）",
     allowDigits: "允許數位",
     minCount: "最小計數",
@@ -690,7 +699,6 @@ var traditionalChineseTranslation = {
     panelsState: "內面板展開狀態",
     panelPrevText: "“上一個面板”按鈕工具提示",
     panelNextText: "“下一個面板”按鈕工具提示",
-    showRangeInProgress: "顯示進度條",
     panelRemoveButtonLocation: "“刪除面板”按鈕位置",
     hideIfRowsEmpty: "如果沒有行，則隱藏問題",
     hideColumnsIfEmpty: "如果沒有行，則隱藏列",
@@ -927,10 +935,11 @@ var traditionalChineseTranslation = {
     firstExpanded: "第一個面板展開",
     off: "隱藏問題編號",
     list: "清單",
+    carousel: "旋轉 木馬",
+    tab: "製表元",
     progressTop: "面板導航器 + 頂部的進度條",
     progressBottom: "面板導航器 + 底部的進度條",
     progressTopBottom: "面板導航器 + 頂部和底部的進度條",
-    tab: "製表元",
     horizontal: "水準",
     vertical: "垂直",
     top: "返回頁首",
@@ -1117,6 +1126,11 @@ var traditionalChineseTranslation = {
       topbottom: "頂部和底部",
       aboveheader: "標題上方",
       belowheader: "在標題下方"
+    },
+    progressBarLocation: {
+      top: "返回頁首",
+      bottom: "底",
+      topBottom: "頂部和底部"
     },
     sum: "和",
     count: "計數",
@@ -1348,8 +1362,10 @@ var traditionalChineseTranslation = {
       visibleIf: "使用魔杖圖示設置確定列可見性的條件規則。",
       enableIf: "使用魔杖圖示設置禁用列唯讀模式的條件規則。",
       requiredIf: "使用魔杖圖示設置條件規則，除非至少有一個嵌套問題有答案，否則該規則將阻止調查提交。",
-      showInMultipleColumns: "選取後，為每個選項創建一個單獨的列。"
+      showInMultipleColumns: "選取後，為每個選項創建一個單獨的列。",
+      colCount: "在多列佈局中排列選項。設置為 0 時，選項將以單行顯示。當設置為 -1 時，實際值繼承自父矩陣的 “Nested column count” 屬性。"
     },
+    caseInsensitive: "如果必須將正則表示式中的大寫字母和小寫字母視為等效字母，請選擇此項。",
     widthMode: "從以下選項中選擇： 「靜態」 - 設置固定寬度;“回應式” - 使調查佔據螢幕的整個寬度;“自動” - 根據所使用的問題類型應用兩者中的任何一個。",
     cookieName: "Cookie 可防止使用者兩次填寫同一調查問卷。",
     logo: "粘貼圖像連結（無大小限制）或按下資料夾圖示以瀏覽電腦中的檔（最大 64KB）。",
@@ -3025,3 +3041,16 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // inputTextAlignment.right: "Right" => "右"
 // pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "選擇如何在欄位中對齊輸入值。默認設置 「Auto」 如果應用了貨幣或數位掩碼，則將輸入值向右對齊，如果未應用，則向左對齊。"
 // p.inputTextAlignment: "Input value alignment" => "輸入值對齊"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "顯示進度條"
+// paneldynamic.showProgressBar: "Show the progress bar" => "顯示進度條"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "進度條對齊"
+// pv.carousel: "Carousel" => "旋轉 木馬"
+// progressBarLocation.top: "Top" => "返回頁首"
+// progressBarLocation.bottom: "Bottom" => "底"
+// progressBarLocation.topBottom: "Top and bottom" => "頂部和底部"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "在多列佈局中排列選項。設置為 0 時，選項將以單行顯示。當設置為 -1 時，實際值繼承自父矩陣的 “Nested column count” 屬性。"
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "不支援YouTube連結。"
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "開始配置表單"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "按兩下任何類別圖示以瀏覽調查設置。將測量元素添加到設計圖面后，其他設置將變為可用。"
+// pe.caseInsensitive: "Case insensitive" => "不區分大小寫"
+// pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "如果必須將正則表示式中的大寫字母和小寫字母視為等效字母，請選擇此項。"

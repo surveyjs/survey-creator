@@ -1,15 +1,9 @@
 <template>
   <template v-if="!model.isCreatorDisposed">
-    <survey-popup-modal></survey-popup-modal>
-    <div
-      class="svc-creator"
-      :class="{
-        'svc-creator--mobile': model.isMobileView,
-      }"
-      ref="root"
-    >
+    <SvComponent :is="'survey-popup-modal'"></SvComponent>
+    <div :class="model.getRootCss()" ref="root">
       <div>
-        <sv-svg-bundle></sv-svg-bundle>
+        <SvComponent :is="'sv-svg-bundle'"></SvComponent>
       </div>
       <div
         class="svc-full-container svc-creator__area svc-flex-column"
@@ -28,14 +22,20 @@
           >
             <div class="svc-top-bar">
               <div class="svc-tabbed-menu-wrapper" v-show="model.showTabs">
-                <svc-tabbed-menu :model="model.tabbedMenu"></svc-tabbed-menu>
+                <SvComponent
+                  :is="'svc-tabbed-menu'"
+                  :model="model.tabbedMenu"
+                ></SvComponent>
               </div>
               <div
                 v-if="model.showToolbar"
                 class="svc-toolbar-wrapper"
                 :v-show="model.showToolbar"
               >
-                <sv-action-bar :model="model.toolbar"></sv-action-bar>
+                <SvComponent
+                  :is="'sv-action-bar'"
+                  :model="model.toolbar"
+                ></SvComponent>
               </div>
             </div>
             <div
@@ -57,17 +57,20 @@
                         model.toolboxLocation == 'right',
                     }"
                   >
-                    <component
+                    <SvComponent
                       :is="tab.componentContent"
                       :model="tab.data.model"
-                    ></component>
+                    ></SvComponent>
                   </div>
                 </template>
               </div>
             </div>
             <div v-if="model.isMobileView" class="svc-footer-bar">
               <div class="svc-toolbar-wrapper" :v-show="model.isMobileView">
-                <sv-action-bar :model="model.footerToolbar"></sv-action-bar>
+                <SvComponent
+                  :is="'sv-action-bar'"
+                  :model="model.footerToolbar"
+                ></SvComponent>
               </div>
             </div>
           </div>
@@ -75,7 +78,10 @@
             v-if="model.sidebar"
             :class="{ 'sv-mobile-side-bar': model.isMobileView }"
           >
-            <svc-side-bar :model="model.sidebar"></svc-side-bar>
+            <SvComponent
+              :is="'svc-side-bar'"
+              :model="model.sidebar"
+            ></SvComponent>
           </div>
         </div>
         <div class="svc-creator__banner" v-if="!model.haveCommercialLicense">
@@ -84,15 +90,16 @@
             v-html="model.licenseText"
           ></span>
         </div>
-        <sv-notifier :model="model.notifier"></sv-notifier>
+        <SvComponent :is="'sv-notifier'" :model="model.notifier"></SvComponent>
       </div>
     </div>
   </template>
 </template>
 <script setup lang="ts">
+import { SvComponent } from "survey-vue3-ui";
 import type { SurveyCreatorModel } from "survey-creator-core";
 import { useBase } from "survey-vue3-ui";
-import { computed, onMounted, onUnmounted, ref, toRaw, watch } from "vue";
+import { computed, onMounted, onUnmounted, ref, toRaw } from "vue";
 const props = defineProps<{ model: SurveyCreatorModel }>();
 const model = computed(() => {
   return toRaw(props.model);

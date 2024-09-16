@@ -1,9 +1,11 @@
 @import "../variables.scss";
+
 .svc-context-container {
   display: flex;
   gap: calcSize(1);
   width: max-content;
 }
+
 .svc-context-button {
   display: block;
   box-sizing: border-box;
@@ -14,11 +16,15 @@
   cursor: pointer;
   padding: calcSize(1.5);
   outline: none;
+
   use {
     fill: $foreground-light;
+    transition: fill $creator-transition-duration;
   }
 }
+
 .svc-context-button {
+
   &:hover,
   &:focus {
     use {
@@ -26,7 +32,9 @@
     }
   }
 }
+
 .svc-context-button--danger {
+
   &:hover,
   &:focus {
     use {

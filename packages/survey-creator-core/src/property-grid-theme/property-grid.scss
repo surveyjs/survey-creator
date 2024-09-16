@@ -1,5 +1,5 @@
 @import "../variables.scss";
-
+@import "./blocks/variables.scss";
 @import "blocks/spg-action-bar.scss";
 @import "blocks/spg-question.scss";
 @import "blocks/spg-input.scss";
@@ -21,14 +21,15 @@
 .spg-root-modern {
   position: relative;
   width: 100%;
-  border-right: 1px solid $border;
+  border-inline-end: 1px solid $border;
   box-sizing: border-box;
-  @include disableAnimations;
+  /* disable library transition animations */
+  --sjs-transition-duration: 0ms;
+  @include disableLibraryAnimations;
 }
 
 .spg-container {
   width: 100%;
-  @include disableTransitionAnimations;
 }
 
 .spg-container.spg-container_search {

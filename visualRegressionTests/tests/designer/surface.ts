@@ -1454,7 +1454,7 @@ test("Matrix dropdown popup edit ", async (t) => {
     await t.click(Selector("button").withText("Cancel"));
     await t.hover(".svc-matrix-cell .sd-rating");
     await t.expect(Selector(".svc-matrix-cell__question-controls-button").filterVisible().visible).ok();
-    await t.click(Selector(".svc-matrix-cell__question-controls-button").filterVisible());
+    await t.click(Selector(".svc-matrix-cell__question-controls-button").nth(1));
     await resetHoverToCreator(t);
     await takeElementScreenshot("matrix-dropdown-popup-rating.png", Selector(".sv-popup__container").filterVisible(), t, comparer);
   });
@@ -2216,7 +2216,7 @@ test("Question adorner - no title collapsed", async (t) => {
 
 test("Page adorner - collapsed", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1600, 500);
+    await t.resizeWindow(1652, 500);
     const json = {
       elements: [
         {
@@ -2245,7 +2245,7 @@ test("Page adorner - collapsed", async (t) => {
 
 test("Question adorner - collapsed mobile", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(500, 1080);
+    await t.resizeWindow(552, 1080);
     const json = {
       elements: [
         {

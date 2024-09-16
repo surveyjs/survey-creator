@@ -106,6 +106,8 @@ var germanTranslation = {
     redo: "Wiederherstellen",
     undoTooltip: "Letzte Änderung rückgängig machen",
     redoTooltip: "Letzte Änderung wiederherstellen",
+    expandAllTooltip: "Alle aufklappen",
+    collapseAllTooltip: "Alle einklappen",
     showMoreChoices: "Zeige mehr",
     showLessChoices: "Zeige weniger",
     copy: "Kopieren",
@@ -123,6 +125,8 @@ var germanTranslation = {
     toolboxNoResultsFound: "Keine Ergebnisse gefunden",
     propertyGridFilteredTextPlaceholder: "Tippen, um zu suchen ...",
     propertyGridNoResultsFound: "Keine Ergebnisse gefunden",
+    propertyGridPlaceholderTitle: "Beginnen Sie mit der Konfiguration Ihres Formulars",
+    propertyGridPlaceholderDescription: "Klicken Sie auf ein beliebiges Kategoriesymbol, um die Umfrageeinstellungen zu erkunden. Zusätzliche Einstellungen sind verfügbar, sobald Sie der Entwurfsoberfläche ein Vermessungselement hinzufügen.",
     correctJSON: "Bitte JSON korrigieren.",
     surveyResults: "Umfrageergebnis: ",
     surveyResultsTable: "Als Tabelle",
@@ -154,6 +158,7 @@ var germanTranslation = {
     translationPlaceHolder: "Übersetzung ...",
     translationSource: "Quelle: ",
     translationTarget: "Ziel: ",
+    translationYouTubeNotSupported: "YouTube-Links werden nicht unterstützt.",
     themeExportButton: "Exportieren",
     themeImportButton: "Importieren",
     surveyJsonExportButton: "Exportieren",
@@ -307,6 +312,9 @@ var germanTranslation = {
       templateTitleLocation: "Ausrichtung des Fragetitels",
       templateErrorLocation: "Ausrichtung von Fehlermeldungen",
       newPanelPosition: "Neue Panel-Position",
+      showRangeInProgress: "Zeigen Sie den Fortschrittsbalken an",
+      showProgressBar: "Zeigen Sie den Fortschrittsbalken an",
+      progressBarLocation: "Ausrichtung der Fortschrittsleiste",
       keyName: "Doppelte Antworten in der folgenden Frage verhindern"
     },
     question: {
@@ -630,6 +638,7 @@ var germanTranslation = {
     maxImageHeight: "Maximale Bildhöhe",
     minValue: "Minimaler Wert",
     maxValue: "Maximaler Wert",
+    caseInsensitive: "Schreibungsunabhängig",
     minLength: "Minimale Länge",
     allowDigits: "Ziffern erlaubt",
     minCount: "Minimale Anzahl",
@@ -690,7 +699,6 @@ var germanTranslation = {
     panelsState: "Erweiterungszustand des inneren Bereichs",
     panelPrevText: "Text für die Schaltfläche \"Vorheriges Panel\".",
     panelNextText: "Text für die Schaltfläche \"Nächstes Panel\".",
-    showRangeInProgress: "Fortschrittsbalken anzeigen",
     panelRemoveButtonLocation: "Position der Schaltfläche \"Panel entfernen\"",
     hideIfRowsEmpty: "Frage ausblenden, wenn keine Zeilen vorhanden sind",
     hideColumnsIfEmpty: "Spalten ausblenden, wenn keine Zeilen vorhanden sind",
@@ -927,10 +935,11 @@ var germanTranslation = {
     firstExpanded: "ausgeklappt (erstes Element)",
     off: "aus",
     list: "Liste",
+    carousel: "Karussell",
+    tab: "Tabulatoren",
     progressTop: "oben (Fortschritt)",
     progressBottom: "unten (Fortschritt)",
     progressTopBottom: "oben und unten (Fortschritt)",
-    tab: "Tabulatoren",
     horizontal: "horizontal",
     vertical: "vertikal",
     top: "oben",
@@ -1117,6 +1126,11 @@ var germanTranslation = {
       topbottom: "oben und unten",
       aboveheader: "Über der Kopfzeile",
       belowheader: "Unterhalb der Kopfzeile"
+    },
+    progressBarLocation: {
+      top: "Nach oben",
+      bottom: "Unteres",
+      topBottom: "Oben und unten"
     },
     sum: "Summe",
     count: "Zahl",
@@ -1348,8 +1362,10 @@ var germanTranslation = {
       visibleIf: "Verwenden Sie das Zauberstabsymbol, um eine bedingte Regel festzulegen, die die Sichtbarkeit von Spalten bestimmt.",
       enableIf: "Verwenden Sie das Zauberstabsymbol, um eine Bedingungsregel festzulegen, die den schreibgeschützten Modus für die Spalte deaktiviert.",
       requiredIf: "Verwenden Sie das Zauberstabsymbol, um eine bedingte Regel festzulegen, die die Übermittlung von Umfragen verhindert, es sei denn, mindestens eine verschachtelte Frage enthält eine Antwort.",
-      showInMultipleColumns: "Wenn diese Option aktiviert ist, wird für jede Auswahloption eine eigene Spalte erstellt."
+      showInMultipleColumns: "Wenn diese Option aktiviert ist, wird für jede Auswahloption eine eigene Spalte erstellt.",
+      colCount: "Ordnet die Auswahloptionen in einem mehrspaltigen Layout an. Wenn der Wert auf 0 gesetzt ist, werden die Optionen in einer einzigen Zeile angezeigt. Wenn dieser Wert auf -1 festgelegt ist, wird der tatsächliche Wert von der Eigenschaft \"Anzahl der geschachtelten Spalten\" der übergeordneten Matrix geerbt."
     },
+    caseInsensitive: "Wählen Sie diese Option aus, wenn Groß- und Kleinbuchstaben im regulären Ausdruck als gleichwertig behandelt werden müssen.",
     widthMode: "Wählen Sie aus: \"Statisch\" - legt eine feste Breite fest; \"Responsive\" - lässt die Umfrage die gesamte Breite des Bildschirms einnehmen; \"Auto\" - wendet je nach verwendetem Fragetyp einen der beiden an.",
     cookieName: "Cookies verhindern, dass Benutzer dieselbe Umfrage zweimal ausfüllen.",
     logo: "Fügen Sie einen Bildlink ein (keine Größenbeschränkung) oder klicken Sie auf das Ordnersymbol, um eine Datei von Ihrem Computer (bis zu 64 KB) zu durchsuchen.",
@@ -2462,3 +2478,16 @@ editorLocalization.locales["de"] = germanTranslation;
 // inputTextAlignment.right: "Right" => "Rechts"
 // pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Wählen Sie aus, wie der Eingabewert innerhalb des Felds ausgerichtet werden soll. Die Standardeinstellung \"Auto\" richtet den Eingabewert nach rechts aus, wenn eine Währungs- oder numerische Maskierung angewendet wird, und nach links, wenn dies nicht der Fall ist."
 // p.inputTextAlignment: "Input value alignment" => "Ausrichtung der Eingabewerte"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "Zeigen Sie den Fortschrittsbalken an"
+// paneldynamic.showProgressBar: "Show the progress bar" => "Zeigen Sie den Fortschrittsbalken an"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "Ausrichtung der Fortschrittsleiste"
+// pv.carousel: "Carousel" => "Karussell"
+// progressBarLocation.top: "Top" => "Nach oben"
+// progressBarLocation.bottom: "Bottom" => "Unteres"
+// progressBarLocation.topBottom: "Top and bottom" => "Oben und unten"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Ordnet die Auswahloptionen in einem mehrspaltigen Layout an. Wenn der Wert auf 0 gesetzt ist, werden die Optionen in einer einzigen Zeile angezeigt. Wenn dieser Wert auf -1 festgelegt ist, wird der tatsächliche Wert von der Eigenschaft \"Anzahl der geschachtelten Spalten\" der übergeordneten Matrix geerbt."
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "YouTube-Links werden nicht unterstützt."
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "Beginnen Sie mit der Konfiguration Ihres Formulars"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Klicken Sie auf ein beliebiges Kategoriesymbol, um die Umfrageeinstellungen zu erkunden. Zusätzliche Einstellungen sind verfügbar, sobald Sie der Entwurfsoberfläche ein Vermessungselement hinzufügen."
+// pe.caseInsensitive: "Case insensitive" => "Schreibungsunabhängig"
+// pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Wählen Sie diese Option aus, wenn Groß- und Kleinbuchstaben im regulären Ausdruck als gleichwertig behandelt werden müssen."

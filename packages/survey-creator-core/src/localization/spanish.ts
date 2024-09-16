@@ -106,6 +106,8 @@ var spanishTranslation = {
     redo: "Rehacer",
     undoTooltip: "Deshacer el último cambio",
     redoTooltip: "Rehacer el cambio",
+    expandAllTooltip: "Expandir todo",
+    collapseAllTooltip: "Contraer todo",
     showMoreChoices: "Mostrar más",
     showLessChoices: "Mostrar menos",
     copy: "Copiar",
@@ -123,6 +125,8 @@ var spanishTranslation = {
     toolboxNoResultsFound: "No se han encontrado resultados",
     propertyGridFilteredTextPlaceholder: "Escribe para buscar...",
     propertyGridNoResultsFound: "No se han encontrado resultados",
+    propertyGridPlaceholderTitle: "Empieza a configurar tu formulario",
+    propertyGridPlaceholderDescription: "Haga clic en cualquier icono de categoría para explorar la configuración de la encuesta. Los ajustes adicionales estarán disponibles una vez que agregue un elemento de topografía a la superficie de diseño.",
     correctJSON: "Por favor, corrija JSON",
     surveyResults: "Resultado de la encuesta:",
     surveyResultsTable: "Como Tabla",
@@ -154,6 +158,7 @@ var spanishTranslation = {
     translationPlaceHolder: "Traducción...",
     translationSource: "Fuente: ",
     translationTarget: "Blanco: ",
+    translationYouTubeNotSupported: "Los enlaces de YouTube no son compatibles.",
     themeExportButton: "Exportar",
     themeImportButton: "Importación",
     surveyJsonExportButton: "Exportar",
@@ -307,6 +312,9 @@ var spanishTranslation = {
       templateTitleLocation: "Alineación del título de la pregunta",
       templateErrorLocation: "Alineación de mensajes de error",
       newPanelPosition: "Nueva ubicación del panel",
+      showRangeInProgress: "Mostrar la barra de progreso",
+      showProgressBar: "Mostrar la barra de progreso",
+      progressBarLocation: "Alineación de la barra de progreso",
       keyName: "Evitar respuestas duplicadas en la siguiente pregunta"
     },
     question: {
@@ -630,6 +638,7 @@ var spanishTranslation = {
     maxImageHeight: "Alto de imagen máximo",
     minValue: "Valor mínimo",
     maxValue: "Valor máximo",
+    caseInsensitive: "No distingue entre mayúsculas y minúscu",
     minLength: "Longitud mínima",
     allowDigits: "Permitir dígitos",
     minCount: "Cantidad mínima",
@@ -690,7 +699,6 @@ var spanishTranslation = {
     panelsState: "Estado de expansión del panel interno",
     panelPrevText: "Tooltip del botón de panel previo",
     panelNextText: "Tooltip del botón de siguiente panel",
-    showRangeInProgress: "Mostrar barra de progreso",
     panelRemoveButtonLocation: "Localización del botón eliminar panel",
     hideIfRowsEmpty: "Ocultar pregunta si no hay más filas",
     hideColumnsIfEmpty: "Ocultar columnas si no hay filas",
@@ -927,10 +935,11 @@ var spanishTranslation = {
     firstExpanded: "Primer Expandido",
     off: "no mostrar",
     list: "lista",
+    carousel: "Carrusel",
+    tab: "Pestañas",
     progressTop: "Progreso superior",
     progressBottom: "Progreso inferior",
     progressTopBottom: "Progreso inferior/superior",
-    tab: "Pestañas",
     horizontal: "horizontal",
     vertical: "vertical",
     top: "arriba",
@@ -1117,6 +1126,11 @@ var spanishTranslation = {
       topbottom: "arriba y abajo",
       aboveheader: "Encima del encabezado",
       belowheader: "Debajo del encabezado"
+    },
+    progressBarLocation: {
+      top: "Arriba",
+      bottom: "Fondo",
+      topBottom: "Arriba y abajo"
     },
     sum: "Suma",
     count: "Contar",
@@ -1348,8 +1362,10 @@ var spanishTranslation = {
       visibleIf: "Utilice el icono de la varita mágica para establecer una regla condicional que determine la visibilidad de la columna.",
       enableIf: "Utilice el icono de la varita mágica para establecer una regla condicional que deshabilite el modo de solo lectura para la columna.",
       requiredIf: "Utilice el icono de la varita mágica para establecer una regla condicional que impida el envío de encuestas a menos que al menos una pregunta anidada tenga una respuesta.",
-      showInMultipleColumns: "Cuando se selecciona, crea una columna individual para cada opción de opción."
+      showInMultipleColumns: "Cuando se selecciona, crea una columna individual para cada opción de opción.",
+      colCount: "Organiza las opciones de elección en un diseño de varias columnas. Cuando se establece en 0, las opciones se muestran en una sola línea. Cuando se establece en -1, el valor real se hereda de la propiedad \"Recuento de columnas anidadas\" de la matriz principal."
     },
+    caseInsensitive: "Seleccione si las letras mayúsculas y minúsculas de la expresión regular deben tratarse como equivalentes.",
     widthMode: "Elija entre: \"Estático\": establece un ancho fijo; \"Responsivo\": hace que la encuesta ocupe todo el ancho de la pantalla; \"Auto\": aplica cualquiera de los dos dependiendo de los tipos de preguntas utilizados.",
     cookieName: "Las cookies impiden que los usuarios completen la misma encuesta dos veces.",
     logo: "Pegue un enlace de imagen (sin límites de tamaño) o haga clic en el icono de la carpeta para buscar un archivo desde su computadora (hasta 64 KB).",
@@ -2527,3 +2543,16 @@ editorLocalization.locales["es"] = spanishTranslation;
 // inputTextAlignment.right: "Right" => "Derecha"
 // pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Seleccione cómo alinear el valor de entrada dentro del campo. La configuración predeterminada \"Auto\" alinea el valor de entrada a la derecha si se aplica el enmascaramiento numérico o de moneda y a la izquierda si no se aplica."
 // p.inputTextAlignment: "Input value alignment" => "Alineación de valores de entrada"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "Mostrar la barra de progreso"
+// paneldynamic.showProgressBar: "Show the progress bar" => "Mostrar la barra de progreso"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "Alineación de la barra de progreso"
+// pv.carousel: "Carousel" => "Carrusel"
+// progressBarLocation.top: "Top" => "Arriba"
+// progressBarLocation.bottom: "Bottom" => "Fondo"
+// progressBarLocation.topBottom: "Top and bottom" => "Arriba y abajo"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Organiza las opciones de elección en un diseño de varias columnas. Cuando se establece en 0, las opciones se muestran en una sola línea. Cuando se establece en -1, el valor real se hereda de la propiedad \"Recuento de columnas anidadas\" de la matriz principal."
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "Los enlaces de YouTube no son compatibles."
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "Empieza a configurar tu formulario"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Haga clic en cualquier icono de categoría para explorar la configuración de la encuesta. Los ajustes adicionales estarán disponibles una vez que agregue un elemento de topografía a la superficie de diseño."
+// pe.caseInsensitive: "Case insensitive" => "No distingue entre mayúsculas y minúscu"
+// pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Seleccione si las letras mayúsculas y minúsculas de la expresión regular deben tratarse como equivalentes."

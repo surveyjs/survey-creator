@@ -1264,3 +1264,35 @@ test("Theme builder switch themes with reset of previous values", (): any => {
   expect(themeModel.cssVariables["--sjs-shadow-inner"]).toEqual("inset 0px 1px 2px 0px rgba(0, 0, 0, 0.15)");
   expect(themeModel.cssVariables["--sjs-shadow-inner-reset"]).toEqual("inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
 });
+
+test("onThemePropertyChanged event for a custom property", (): any => {
+  Serializer.addProperty("theme", {
+    name: "paddingTopScale",
+  });
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const themeModel = themePlugin.themeModel as ThemeModel;
+  const propertyGridSurvey = themePlugin.propertyGrid.survey;
+  const paddingTopScale = propertyGridSurvey.getQuestionByName("paddingTopScale");
+
+  let pluginThemeModifiedCount = 0;
+  let pluginLog = "";
+  themePlugin.onThemePropertyChanged.add((s, o) => {
+    pluginThemeModifiedCount++;
+    pluginLog += "->" + o.name;
+  });
+  let builderThemeModifiedCount = 0;
+  themeModel.onThemePropertyChanged.add(() => builderThemeModifiedCount++);
+
+  expect(pluginThemeModifiedCount).toBe(0);
+  expect(builderThemeModifiedCount).toBe(0);
+  expect(pluginLog).toBe("");
+  paddingTopScale.value = "5";
+
+  expect(pluginThemeModifiedCount).toBe(1);
+  expect(builderThemeModifiedCount).toBe(1);
+  expect(pluginLog).toBe("->paddingTopScale");
+
+  Serializer.removeProperty("theme", "paddingTopScale");
+});

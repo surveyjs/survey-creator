@@ -106,6 +106,8 @@ export var mnStrings = {
     redo: "Дахих",
     undoTooltip: "Сүүлийн өөрчлөлтийг буцаах",
     redoTooltip: "Сүүлин өөрчлөлтийг дахих ",
+    expandAllTooltip: "Бүх хүрээгээ тэлнэ",
+    collapseAllTooltip: "Бүх нуралт",
     showMoreChoices: "Дэлгэрэнгүй харуулах",
     showLessChoices: "Бага мэдээлэл харуулах",
     copy: "Хуулах",
@@ -123,6 +125,8 @@ export var mnStrings = {
     toolboxNoResultsFound: "Ямар ч үр дүн олдсонгүй",
     propertyGridFilteredTextPlaceholder: "Хайхын тулд бичнэ үү.....",
     propertyGridNoResultsFound: "Ямар ч үр дүн олдсонгүй",
+    propertyGridPlaceholderTitle: "Формоо тохируулж эхлэх",
+    propertyGridPlaceholderDescription: "Судалгааны тохиргоог судлахын тулд ямар ч категорийн зургыг дарна уу. Дизайны гадаргуу дээр судалгааны элемент нэмсний дараа нэмэлт тохиргоо хийх боломжтой болно.",
     correctJSON: "JSON засна уу.",
     surveyResults: "Санал асуулгын хариу",
     surveyResultsTable: "Санал асуулгын хариултыг хүснэгтээр харуулах",
@@ -154,6 +158,7 @@ export var mnStrings = {
     translationPlaceHolder: "Орчуулга...",
     translationSource: "Эх сурвалж: ",
     translationTarget: "Зорилго: ",
+    translationYouTubeNotSupported: "YouTube-ийн холбоосууд дэмжигдээгүй.",
     themeExportButton: "Экспорт",
     themeImportButton: "Импорт",
     surveyJsonExportButton: "Экспорт",
@@ -307,6 +312,9 @@ export var mnStrings = {
       templateTitleLocation: "Асуулт нэрийн уялдаа",
       templateErrorLocation: "Алдааны мессежийн зохицуулалт",
       newPanelPosition: "Шинэ панелийн байршил",
+      showRangeInProgress: "Хөгжил дэвшлийн барыг харуул",
+      showProgressBar: "Хөгжил дэвшлийн барыг харуул",
+      progressBarLocation: "Хөгжлийн барын зохицуулалт",
       keyName: "Дараах асуултад хувилж хариулахаас сэргийлье"
     },
     question: {
@@ -630,6 +638,7 @@ export var mnStrings = {
     maxImageHeight: "Зургийн өндрийн хамгийн их хэмжээ",
     minValue: "Хамгийн бага утга",
     maxValue: "Хамгийн их утга",
+    caseInsensitive: "Кейс үл мэдрэмтгий",
     minLength: "Хамгийн бага урт (тэмдэгтээр)",
     allowDigits: "Тоо зөвшөөрөх",
     minCount: "Хамгийн бага тоо",
@@ -690,7 +699,6 @@ export var mnStrings = {
     panelsState: "Дотоод панелийн өргөссөн төлөв",
     panelPrevText: "Өмнөх панелийн товч",
     panelNextText: "Дараагийн панелийн товч",
-    showRangeInProgress: "Явцын талбарыг харуулах",
     panelRemoveButtonLocation: "Панел устгах товчны байршил",
     hideIfRowsEmpty: "Мөр байхгүй тохиолдолд асуултыг нуух",
     hideColumnsIfEmpty: "Мөр байхгүй тохиолдолд баганыг нуух",
@@ -927,10 +935,11 @@ export var mnStrings = {
     firstExpanded: "Эхний панел өргөссөн",
     off: "Асуултын тоог нуух",
     list: "Жагсаалт",
+    carousel: "Карусел",
+    tab: "Табууд",
     progressTop: "Панел чиглүүлэгч + Явцын мөр дээд хэсэгт байрлах",
     progressBottom: "Панел чиглүүлэгч + Явцын мөр доод хэсэгт байрлах",
     progressTopBottom: "Панел чиглүүлэгч + Явцын мөр дээд ба доод хэсэгт байрлах",
-    tab: "Табууд",
     horizontal: "Хэвтээ",
     vertical: "Босоо",
     top: "Дээд",
@@ -1117,6 +1126,11 @@ export var mnStrings = {
       topbottom: "Дээд ба доод",
       aboveheader: "Толгой дээгүүр",
       belowheader: "Гарчигны доор"
+    },
+    progressBarLocation: {
+      top: "Дээд",
+      bottom: "Доод",
+      topBottom: "Дээд, доод"
     },
     sum: "Сум",
     count: "Тооллого",
@@ -1348,8 +1362,10 @@ export var mnStrings = {
       visibleIf: "Ид шидийн wand icon-ийг ашиглан баганын харагдах байдлыг тодорхойлох нөхцөлтэй дүрмийг тогтоо.",
       enableIf: "Шидэт wand зургыг ашиглан баганын зөвхөн унших хэв маягийг хаах нөхцөлтэй дүрмийг тогтоо.",
       requiredIf: "Наад зах нь нэг үүрээ засах асуулт хариулт байхгүй л бол судалгаа явуулахаас сэргийлдэг нөхцөлийн дүрмийг тогтоохын тулд шидэт туузны зургыг ашигла.",
-      showInMultipleColumns: "Сонгогдсон тохиолдолд сонголт бүрд зориулж багана үүсгэнэ."
+      showInMultipleColumns: "Сонгогдсон тохиолдолд сонголт бүрд зориулж багана үүсгэнэ.",
+      colCount: "Сонголт хийх сонголтуудыг олон баганатай загвараар зохион байгуулна. 0-д тавихад сонголтуудыг нэг мөр харуулдаг. -1-д тавихад бодит үнэ цэнэ нь эцэг эхийн матрицын \"Nested column count\" өмчөөс өвлөгддөг."
     },
+    caseInsensitive: "Тогтмол илэрхийлэлд байгаа uppercase болон lowercase үсгийг эн тэнцүү гэж үзэх ёстой эсэхийг сонгоно уу.",
     widthMode: "Сонгоно уу: \"Статик\" - тогтмол өргөнийг тогтоох; \"Responsive\" - судалгааг дэлгэцийн бүрэн өргөнийг эзэлдэг болгодог; \"Авто\" - ашигласан асуултын төрлөөс хамааран аль нэгийг нь хэрэглэнэ.",
     cookieName: "Хэрэглэгч нэг судалгааг хоёр удаа бөглөхөөс Күүки сэргийлнэ.",
     logo: "Зургийн холбоосыг (хэмжээ хязгаар байхгүй) эсвэл фолдерын icon дарж компьютерээсээ файлыг (64KB хүртэл) харна уу.",
@@ -2409,3 +2425,16 @@ editorLocalization.locales["mn"] = mnStrings;
 // inputTextAlignment.right: "Right" => "Баруун талд"
 // pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Талбар доторх оролтын үнэ цэнийг хэрхэн уялдуулахыг сонго. \"Авто\" гэсэн дефолт тохиргоо нь валют эсвэл тоон маск хэрэглэх бол оролтын үнэ цэнийг баруун тийш, хэрэв үгүй бол зүүн тийш нь уялдуулна."
 // p.inputTextAlignment: "Input value alignment" => "Оролтын үнэ цэнийн зохицуулалт"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "Хөгжил дэвшлийн барыг харуул"
+// paneldynamic.showProgressBar: "Show the progress bar" => "Хөгжил дэвшлийн барыг харуул"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "Хөгжлийн барын зохицуулалт"
+// pv.carousel: "Carousel" => "Карусел"
+// progressBarLocation.top: "Top" => "Дээд"
+// progressBarLocation.bottom: "Bottom" => "Доод"
+// progressBarLocation.topBottom: "Top and bottom" => "Дээд, доод"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Сонголт хийх сонголтуудыг олон баганатай загвараар зохион байгуулна. 0-д тавихад сонголтуудыг нэг мөр харуулдаг. -1-д тавихад бодит үнэ цэнэ нь эцэг эхийн матрицын \"Nested column count\" өмчөөс өвлөгддөг."
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "YouTube-ийн холбоосууд дэмжигдээгүй."
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "Формоо тохируулж эхлэх"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Судалгааны тохиргоог судлахын тулд ямар ч категорийн зургыг дарна уу. Дизайны гадаргуу дээр судалгааны элемент нэмсний дараа нэмэлт тохиргоо хийх боломжтой болно."
+// pe.caseInsensitive: "Case insensitive" => "Кейс үл мэдрэмтгий"
+// pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Тогтмол илэрхийлэлд байгаа uppercase болон lowercase үсгийг эн тэнцүү гэж үзэх ёстой эсэхийг сонгоно уу."

@@ -2,7 +2,7 @@ import { ListModel, Action, IAction, Base, createDropdownActionModel, PageModel,
 import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
 import { editorLocalization } from "../../editorLocalization";
-import { SidebarTabModel } from "../side-bar/side-bar-tab-model";
+import { SidebarPageModel } from "../side-bar/side-bar-page-model";
 import { Translation, createImportCSVAction, createExportCSVAction } from "./translation";
 
 export class TabTranslationPlugin implements ICreatorPlugin {
@@ -11,13 +11,13 @@ export class TabTranslationPlugin implements ICreatorPlugin {
   private mergeLocaleWithDefaultAction: Action;
   private importCsvAction: Action;
   private exportCsvAction: Action;
-  private sidebarTab: SidebarTabModel;
+  private sidebarTab: SidebarPageModel;
 
   public model: Translation;
 
   constructor(private creator: SurveyCreatorModel) {
     creator.addPluginTab("translation", this);
-    this.sidebarTab = this.creator.sidebar.addTab("translation");
+    this.sidebarTab = this.creator.sidebar.addPage("translation");
     this.sidebarTab.caption = editorLocalization.getString("ed.translationPropertyGridTitle");
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
   }
@@ -43,9 +43,9 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.model.importFinishedCallback = (): void => {
       this.creator.onTranslationImported.fire(this.creator, {});
     };
-    this.sidebarTab.model = this.model.settingsSurvey;
+    this.sidebarTab.componentData = this.model.settingsSurvey;
     this.sidebarTab.componentName = "survey-widget";
-    this.creator.sidebar.activeTab = this.sidebarTab.id;
+    this.creator.sidebar.activePage = this.sidebarTab.id;
 
     this.mergeLocaleWithDefaultAction.title = this.createMergeLocaleWithDefaultActionTitleUpdater();
     this.mergeLocaleWithDefaultAction.tooltip = this.createMergeLocaleWithDefaultActionTitleUpdater();
@@ -152,7 +152,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     items.push(this.mergeLocaleWithDefaultAction);
 
     this.importCsvAction = createImportCSVAction(() => { this.model.importFromCSVFileDOM(); }, true);
-    this.importCsvAction.enabled = <any>(new ComputedUpdater(() => !this.creator.readOnly)),
+    this.importCsvAction.enabled = <any>(new ComputedUpdater(() => !this.creator.readOnly));
     this.importCsvAction.visible = false;
     items.push(this.importCsvAction);
 
@@ -175,7 +175,8 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       onSelectionChanged: (item: IAction) => {
         this.model.filteredPage = !!item.id ? this.creator.survey.getPageByName(item.id) : null;
       },
-      horizontalPosition: "center"
+      horizontalPosition: "center",
+      cssClass: "svc-creator-popup",
     });
   }
   private createFilterStringsAction() {
@@ -190,7 +191,8 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       onSelectionChanged: (item: IAction) => {
         this.model.showAllStrings = item.id === "show-all-strings";
       },
-      horizontalPosition: "center"
+      horizontalPosition: "center",
+      cssClass: "svc-creator-popup",
     });
   }
   private updateFilterStrigsAction(updateSelectedItem: boolean = false) {

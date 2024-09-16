@@ -17,7 +17,7 @@
 </template>
 <script lang="ts" setup>
 import type { SurveyLogicUI } from "survey-creator-core";
-import { useBase } from "survey-vue3-ui";
+import { useBase, SurveyComponent } from "survey-vue3-ui";
 import LogicAddButton from "./LogicAddButton.vue";
 
 const props = defineProps<{

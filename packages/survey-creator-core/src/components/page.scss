@@ -10,6 +10,11 @@ svc-page {
   .sd-page__title {
     margin: calcSize(3) 0 0 0;
     color: var(--ctr-survey-page-header-title-color-placeholder, $foreground-dim);
+    gap: calcSize(0.5);
+  }
+
+  .sd-page__num {
+    color: var(--ctr-survey-page-header-title-color-placeholder, $foreground-light);
   }
 
   .svc-panel__placeholder {
@@ -24,6 +29,7 @@ svc-page {
   box-sizing: border-box;
   width: 100%;
   outline: none;
+  transition: background $creator-transition-duration, box-shadow $creator-transition-duration;
 
   .sd-page {
     margin: 0;
@@ -33,15 +39,17 @@ svc-page {
 
 .svc-page__content-actions {
   position: absolute;
-  visibility: hidden;
+  opacity: 0;
   top: calcSize(1);
   inset-inline-end: 0; // right
-  padding: 0 calcSize(1);
+  padding: 0 calcSize(1.5) 0 calcSize(1);
   z-index: 1;
+  transition: opacity $creator-transition-duration;
 
   .sv-action-bar-separator {
     margin: 0 calcSize(1);
   }
+
   h4.sd-title {
     .sv-string-editor {
       &[aria-placeholder]:empty:before {
@@ -56,6 +64,7 @@ svc-page {
     border-radius: var(--ctr-survey-page-toolbar-item-corner-radius, 4px);
     background-color: transparent;
     color: var(--ctr-survey-page-toolbar-item-text-color, $foreground);
+    transition: background-color $creator-transition-duration;
   }
 
   .sv-action-bar-item__icon {
@@ -131,12 +140,14 @@ svc-page {
   &::after {
     display: none;
   }
+
   &.svc-page__content--selected {
     box-shadow: 0 0 0 2px $secondary;
     background: $secondary-backcolor-semi-light;
   }
+
   .svc-page__content-actions {
-    visibility: visible;
+    opacity: 1;
   }
 }
 
@@ -154,10 +165,12 @@ svc-page {
     box-sizing: content-box;
     pointer-events: none;
   }
+
   &.svc-page__content--collapsed-drag-over-inside {
     box-shadow: 0 0 0 2px $primary;
     background: $primary-light;
     animation: collapsed-drag-over-inside-blinking 1s infinite;
+
     &::after {
       border: 2px $primary solid;
       background: $primary-light;
@@ -178,6 +191,8 @@ svc-page {
   &.svc-creator .svc-page .svc-page__content--selected:focus,
   .svc-hovered.svc-page__content {
     &.svc-page__content--selected {
+      box-shadow: 0 0 0 2px inset $secondary;
+
       box-shadow: 0 0 0 2px inset var(--ctr-survey-page-border-color-selected, $secondary);
       background: var(--ctr-survey-page-background-color-selected, $secondary-backcolor-semi-light);
 
@@ -186,6 +201,7 @@ svc-page {
       }
     }
   }
+
   .svc-page__content:not(.svc-page__content--new):focus,
   .svc-hovered.svc-page__content:not(.svc-page__content--new) {
     box-shadow: 0 0 0 2px inset $secondary-light;
@@ -230,6 +246,7 @@ svc-page {
   cursor: pointer;
   margin-inline-end: calcSize(1); // margin-right
   outline: none;
+  transition: background-color $creator-transition-duration;
 
   use {
     fill: var(--ctr-library-contextual-button-icon-color, $foreground-light);
@@ -285,58 +302,70 @@ svc-page {
       pointer-events: none;
     }
 
-    .sv-list__item.sv-list__item--selected.sv-list__item--group > .sv-list__item-body {
+    .sv-list__item.sv-list__item--selected.sv-list__item--group>.sv-list__item-body {
       background-color: $primary;
       color: $primary-foreground;
       font-weight: 600;
     }
 
-    .sv-list__item.sv-list__item--selected.sv-list__item--group > .sv-list__item-body use {
+    .sv-list__item.sv-list__item--selected.sv-list__item--group>.sv-list__item-body use {
       fill: $background;
     }
   }
 }
+
 .svc-page__content--collapsed {
-  & > * {
+  &>* {
     display: none;
   }
+
   .svc-page__content-actions {
     display: block;
   }
+
   .sd-page {
     display: flex;
-    & > * {
+
+    &>* {
       display: none;
     }
+
     .sd-title {
       display: block;
     }
   }
 }
+
 .svc-page__content.svc-page__content--collapsed {
   .sd-page {
     padding-bottom: 0;
   }
 }
+
 .svc-creator .svc-page {
   .svc-page__content--collapse-always {
     .svc-page__content-actions {
-      visibility: visible;
+      opacity: 1;
+
       .sv-action {
         visibility: hidden;
       }
+
       .sv-action.sv-action-bar-item--collapse {
         visibility: visible;
+
         .sv-action-bar-separator {
           visibility: hidden;
         }
       }
     }
+
     &.svc-page__content--selected,
     &.svc-hovered {
       .svc-page__content-actions {
         .sv-action {
           visibility: visible;
+
           .sv-action-bar-separator {
             visibility: visible;
           }
