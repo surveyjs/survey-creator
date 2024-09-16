@@ -182,6 +182,7 @@ $svc-collapse-move-out-delay: var(--sjs-svc-collapse-move-out-delay, 100ms);
   &.svc-question--enter.svc-question--enter.svc-question--enter.svc-question--enter.svc-question--enter.svc-question--enter.svc-question--enter.svc-question--enter.svc-question--enter.svc-question--enter.svc-question--enter.svc-question--enter {
     opacity: 0;
   }
+  animation-timing-function: $ease-out;
   animation-duration: $svc-expand-fade-in-duration, $svc-expand-move-in-duration;
   animation-delay: $svc-expand-fade-in-delay, 0s;
 }
@@ -189,6 +190,7 @@ $svc-collapse-move-out-delay: var(--sjs-svc-collapse-move-out-delay, 100ms);
   animation-name: fadeIn, moveInWithOverflow;
   animation-direction: reverse;
   animation-fill-mode: forwards;
+  animation-timing-function: $reverse-ease-out;
   animation-duration: $svc-collapse-fade-out-duration, $svc-collapse-move-out-duration;
   animation-delay: 0s, $svc-collapse-move-out-delay;
 }
