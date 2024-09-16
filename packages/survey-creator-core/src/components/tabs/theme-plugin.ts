@@ -93,6 +93,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       action: () => {
         advancedMode.checked = !advancedMode.checked;
         this.propertyGrid.survey.setVariable("advancedmode", advancedMode.checked);
+        this.propertyGrid.survey.getQuestionByName("advancedMode").value = advancedMode.checked;
       }
     });
     advancedMode.checked = !!this.propertyGrid.survey.getVariable("advancedmode");
@@ -105,7 +106,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     const question = Serializer.createClass("html") as QuestionHtmlModel;
     question.fromJSON({
       name: titleId,
-      visibleIf: "{advancedmode} = true",
+      visibleIf: "{advancedMode} = true",
       html: `<div class='spg-theme-group-caption'>${getLocString(titleId)}</div>`
     });
     panel.addElement(question);
@@ -211,7 +212,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   private setVisibleIf(panelName: string, visibilityValue: boolean) {
     const panel = this.propertyGrid.survey.getPanelByName(panelName);
     if (!!panel) {
-      panel.visibleIf = `{advancedmode} = ${visibilityValue}`;
+      panel.visibleIf = `{advancedMode} = ${visibilityValue}`;
     }
   }
 
@@ -281,6 +282,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.onAvailableThemesChanged(this.availableThemes);
     this.updateAllowModifyTheme();
     this.propertyGrid.survey.setVariable("advancedmode", !!this.advancedModeSwitcher?.checked);
+    this.propertyGrid.survey.getQuestionByName("advancedMode").value = !!this.advancedModeSwitcher?.checked;
     const themeBuilderCss = { ...propertyGridCss };
     themeBuilderCss.root += " spg-theme-builder-root";
 
@@ -319,6 +321,11 @@ export class ThemeTabPlugin implements ICreatorPlugin {
         } else {
           options.cssClasses.panel.container = "spg-nested-panel";
           options.cssClasses.panel.content = "spg-nested-panel__content";
+        }
+      } else {
+        if (options.panel.parent?.isPage) {
+          options.cssClasses.panel.container = "spg-panel-as-page";
+          options.cssClasses.panel.content = "spg-panel-as-page__content";
         }
       }
     });

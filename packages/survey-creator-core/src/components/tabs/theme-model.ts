@@ -610,6 +610,18 @@ Serializer.addClass(
           editor.min = 0;
         }
       }
+    }, {
+      name: "advancedMode",
+      type: "switchToggle",
+      isSerializable: false,
+      default: false,
+      displayName: "Advanced Mode",
+      onPropertyEditorUpdate: function (obj: any, editor: any) {
+        if (!!editor) {
+          // editor.unit = "px";
+          // editor.min = 0;
+        }
+      }
     },
     {
       type: "spinedit",

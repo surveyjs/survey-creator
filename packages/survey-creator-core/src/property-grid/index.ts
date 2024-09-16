@@ -1543,6 +1543,16 @@ export class PropertyGridEditorUndefinedBoolean extends PropertyGridEditor {
     }
   }
 }
+
+export class PropertyGridEditorToggle extends PropertyGridEditor {
+  public fit(prop: JsonObjectProperty): boolean {
+    return prop.type == "toggle";
+  }
+  public getJSON(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): any {
+    const res: any = { type: "boolean", renderAs: "toggle" };
+    return res;
+  }
+}
 export abstract class PropertyGridEditorStringBase extends PropertyGridEditor {
   protected updateMaxLength(prop: JsonObjectProperty, json: any): any {
     if (prop.maxLength > 0) {
@@ -2103,6 +2113,7 @@ PropertyGridEditorCollection.register(new PropertyGridEditorColor());
 PropertyGridEditorCollection.register(new PropertyGridEditorColorWithAlpha());
 PropertyGridEditorCollection.register(new PropertyGridEditorDateTime());
 PropertyGridEditorCollection.register(new PropertyGridEditorUndefinedBoolean());
+PropertyGridEditorCollection.register(new PropertyGridEditorToggle());
 
 QuestionFactory.Instance.registerQuestion("buttongroup", (name) => {
   return new QuestionButtonGroupModel(name);
