@@ -3637,20 +3637,6 @@ export class SurveyCreatorModel extends Base
   public get addNewQuestionText() {
     return this.getAddNewQuestionText();
   }
-  public getAvailableToolboxItems(element?: SurveyElement, isAddNew: boolean = true): Array<QuestionToolboxItem> {
-    const res: Array<QuestionToolboxItem> = [].concat(this.toolbox.items);
-    if (!element || this.maxNestedPanels < 0) return res;
-    if (!isAddNew && element.isPanel) return res;
-
-    if (this.maxNestedPanels < SurveyHelper.getElementDeepLength(element)) {
-      for (let i = res.length - 1; i >= 0; i--) {
-        if (res[i].isPanel) {
-          res.splice(i, 1);
-        }
-      }
-    }
-    return res;
-  }
   public getQuestionTypeSelectorModel(beforeAdd: (type: string) => void, element?: SurveyElement) {
     let panel = !!element && element.isPanel ? <PanelModel>element : null;
     const onSelectQuestionType = (questionType: string, json?: any) => {
@@ -3711,33 +3697,6 @@ export class SurveyCreatorModel extends Base
     let newElement = this.createNewElement(json);
 
     this.clickToolboxItem(newElement, panel, "ADDED_FROM_PAGEBUTTON");
-  }
-
-  createIActionBarItemByClass(item: QuestionToolboxItem, needSeparator: boolean, onSelectQuestionType?: (questionType: string, json?: any) => void): Action {
-    const action = new Action({
-      title: item.title,
-      id: item.name,
-      iconName: item.iconName,
-      visible: item.visible,
-      enabled: item.enabled,
-      needSeparator: needSeparator
-    });
-    action.action = () => {
-      onSelectQuestionType(item.typeName, item.json);
-    };
-
-    if (!!item.items && item.items.length > 0 && this.toolbox.showSubitems) {
-      const innerItems = item.items.map(i => new Action({
-        id: i.id,
-        title: i.title,
-        action: () => {
-          action.hidePopup();
-          onSelectQuestionType(item.typeName, i.json);
-        }
-      }));
-      action.setSubItems({ items: innerItems });
-    }
-    return action;
   }
 
   public onElementMenuItemsChanged(element: any, items: Action[]) {

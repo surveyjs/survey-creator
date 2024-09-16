@@ -372,36 +372,39 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     });
     return defaultJsons;
   }
-
-  public getConvertToTypesActions(parentAction?: Action): Array<IAction> {
+  private convertQuestion(questionType: string, json: any, defaultJsons: any) {
+    const type = json?.type || questionType;
+    let newJson = {};
+    (defaultJsons[type] || []).forEach((djson) => {
+      if (this.jsonIsCorresponded(djson)) {
+        newJson = { ...json };
+        const objJson = this.element.toJSON();
+        Object.keys(djson).forEach(p => {
+          if (p != "type" && !newJson[p]) newJson[p] = undefined;
+        });
+        Object.keys(json || {}).forEach(p => {
+          if (p != "type" && !(!objJson[p] || djson[p])) newJson[p] = undefined;
+        });
+      }
+    });
+    this.creator.convertCurrentQuestion(type, newJson);
+  }
+  public getConvertToTypesActions(listModel: ListModel): Array<IAction> {
     const availableItems = this.getConvertToTypes();
     const defaultJsons = this.buildDefaultJsonMap(availableItems);
-    const res = [];
+    const newItems = [];
     let lastItem = null;
     availableItems.forEach((item: QuestionToolboxItem) => {
       const needSeparator = lastItem && item.category != lastItem.category;
       const action = this.creator.createIActionBarItemByClass(item, needSeparator, (questionType: string, json?: any) => {
-        const type = json?.type || questionType;
-        let newJson = {};
-        (defaultJsons[type] || []).forEach((djson) => {
-          if (this.jsonIsCorresponded(djson)) {
-            newJson = { ...json };
-            const objJson = this.element.toJSON();
-            Object.keys(djson).forEach(p => {
-              if (p != "type" && !newJson[p]) newJson[p] = undefined;
-            });
-            Object.keys(json).forEach(p => {
-              if (p != "type" && !(!objJson[p] || djson[p])) newJson[p] = undefined;
-            });
-          }
-        });
-        this.creator.convertCurrentQuestion(type, newJson);
-        parentAction?.hidePopup();
+        this.convertQuestion(questionType, json, defaultJsons);
+        this.getActionById("convertTo").hidePopup();
       });
       lastItem = item;
-      res.push(action);
+      newItems.push(action);
     });
-    return res;
+    listModel.setItems(newItems);
+    return newItems;
   }
   private get currentType(): string {
     return this.surveyElement.getType();
@@ -424,8 +427,8 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       actionData: actionData,
       items: actions,
       updateListModel: (listModel: ListModel) => {
-        const newItems = this.getConvertToTypesActions(newAction);
-        listModel.setItems(newItems);
+        const newItems = this.getConvertToTypesActions(listModel);
+
         listModel.selectedItem = this.getSelectedItem(newItems, this.currentType);
 
         newItems.forEach(action => {
