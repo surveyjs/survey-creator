@@ -169,21 +169,28 @@ svc-question {
   overflow: visible;
 }
 
+$svc-expand-fade-in-duration: var(--sjs-svc-expand-fade-in-duration, 500ms);
+$svc-expand-fade-in-delay: var(--sjs-svc-expand-fade-in-delay, 150ms);
+$svc-expand-move-in-duration: var(--sjs-svc-expand-move-in-duration, 150ms);
+$svc-collapse-fade-out-duration: var(--sjs-svc-collapse-fade-out-duration, 150ms);
+$svc-collapse-move-out-duration: var(--sjs-svc-collapse-move-out-duration, 250ms);
+$svc-collapse-move-out-delay: var(--sjs-svc-collapse-move-out-delay, 100ms);
+
 .svc-question--enter {
   animation-name: fadeIn, moveInWithOverflow;
   animation-fill-mode: forwards;
   &.svc-question--enter.svc-question--enter.svc-question--enter.svc-question--enter.svc-question--enter.svc-question--enter.svc-question--enter.svc-question--enter.svc-question--enter.svc-question--enter.svc-question--enter.svc-question--enter {
     opacity: 0;
   }
-  animation-duration: 1s;
-  animation-delay: 1s, 0s;
+  animation-duration: $svc-expand-fade-in-duration, $svc-expand-move-in-duration;
+  animation-delay: $svc-expand-fade-in-delay, 0s;
 }
 .svc-question--leave {
   animation-name: fadeIn, moveInWithOverflow;
   animation-direction: reverse;
   animation-fill-mode: forwards;
-  animation-duration: 1s;
-  animation-delay: 0s, 1s;
+  animation-duration: $svc-collapse-fade-out-duration, $svc-collapse-move-out-duration;
+  animation-delay: 0s, $svc-collapse-move-out-delay;
 }
 
 .svc-question__content {
@@ -624,7 +631,7 @@ svc-question,
 }
 .svc-question__header--hidden {
   opacity: 0;
-  transition: opacity 1s;
+  transition: opacity 150ms;
   padding-bottom: calcSize(2);
   box-sizing: border-box;
   padding: 0 calcSize(5);
