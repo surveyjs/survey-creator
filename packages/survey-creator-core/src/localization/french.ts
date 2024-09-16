@@ -106,6 +106,8 @@ var frenchTranslation = {
     redo: "Rétablir",
     undoTooltip: "Annuler la dernière modification",
     redoTooltip: "Rétablir la modification",
+    expandAllTooltip: "Tout afficher",
+    collapseAllTooltip: "Réduire tout",
     showMoreChoices: "Afficher plus",
     showLessChoices: "Afficher moins",
     copy: "Copier",

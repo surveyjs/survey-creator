@@ -106,6 +106,8 @@ var traditionalChineseTranslation = {
     redo: "重做",
     undoTooltip: "恢復上次更改",
     redoTooltip: "重做更改",
+    expandAllTooltip: "全部展開",
+    collapseAllTooltip: "全部摺疊",
     showMoreChoices: "顯示更多",
     showLessChoices: "顯示更少",
     copy: "複製",

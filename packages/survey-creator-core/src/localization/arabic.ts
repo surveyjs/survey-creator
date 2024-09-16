@@ -106,6 +106,8 @@ export var arStrings = {
     redo: "Redo",
     undoTooltip: "Undo last change",
     redoTooltip: "Redo the change",
+    expandAllTooltip: "توسيع الكل",
+    collapseAllTooltip: "طي الكل",
     showMoreChoices: "استعراض المزيد",
     showLessChoices: "عرض أقل",
     copy: "Copy",

@@ -106,6 +106,8 @@ export var danishStrings = {
     redo: "Annuller fortryd",
     undoTooltip: "Fortryd seneste ændring",
     redoTooltip: "Fortryd ændringen",
+    expandAllTooltip: "Udvid alle",
+    collapseAllTooltip: "Skjul alle",
     showMoreChoices: "Vis mere",
     showLessChoices: "Vis mindre",
     copy: "Eksemplar",

@@ -106,6 +106,8 @@ export var mnStrings = {
     redo: "Дахих",
     undoTooltip: "Сүүлийн өөрчлөлтийг буцаах",
     redoTooltip: "Сүүлин өөрчлөлтийг дахих ",
+    expandAllTooltip: "Бүх хүрээгээ тэлнэ",
+    collapseAllTooltip: "Бүх нуралт",
     showMoreChoices: "Дэлгэрэнгүй харуулах",
     showLessChoices: "Бага мэдээлэл харуулах",
     copy: "Хуулах",

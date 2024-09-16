@@ -106,6 +106,8 @@ var persianStrings = {
     redo: "بازانجام",
     undoTooltip: "بازگرداندن آخرین تغییر",
     redoTooltip: "انجام دادن تغییر",
+    expandAllTooltip: "گسترش همه",
+    collapseAllTooltip: "جمع کردن همه",
     showMoreChoices: "نمایش بیشتر",
     showLessChoices: "نمایش کمتر",
     copy: "کپی",

@@ -106,6 +106,8 @@ export const thStrings = {
     redo: "ทำซ้ำ",
     undoTooltip: "เลิกทำการเปลี่ยนแปลงครั้งล่าสุด",
     redoTooltip: "ทำซ้ำการเปลี่ยนแปลง",
+    expandAllTooltip: "ขยายทั้งหมด",
+    collapseAllTooltip: "ยุบทั้งหมด",
     showMoreChoices: "แสดงเพิ่มเติม",
     showLessChoices: "แสดงน้อยลง",
     copy: "คัดลอก",
