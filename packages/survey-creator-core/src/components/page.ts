@@ -208,6 +208,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
 
     result += (" svc-page__content--collapse-" + this.creator.expandCollapseButtonVisibility);
     if (this.renderedCollapsed) result += (" svc-page__content--collapsed");
+    if (this.animationRunning) result += (" svc-page__content--animation-running");
     return result.trim();
   }
   public hover(event: MouseEvent, element: HTMLElement | any) {
@@ -263,7 +264,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
 
   protected getInnerAnimatedElements() {
     const cssClasses = this.surveyElement.cssClasses;
-    if (cssClasses.pageRow) return this.getWrapperElement()?.querySelectorAll(":scope .svc-page__footer, :scope .svc-row");
+    if (cssClasses.pageRow) return this.getWrapperElement()?.querySelectorAll(":scope .svc-page__footer, :scope .sd-body__page > .svc-row");
     return null;
   }
 

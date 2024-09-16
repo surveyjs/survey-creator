@@ -28,7 +28,7 @@ svc-page {
 
   .sd-page {
     margin: 0;
-    padding: calcSize(1) calcSize(3) calcSize(2);
+    padding: calcSize(1) calcSize(3) 0;
   }
 }
 
@@ -146,6 +146,22 @@ svc-page {
   }
 }
 
+.svc-page__content--animation-running {
+  .svc-row {
+    .svc-question--enter {
+      animation: none;
+    }  
+    .svc-question--leave {
+      animation-name: moveInWithOverflow;
+      animation-direction: reverse;
+      animation-fill-mode: forwards;
+      animation-timing-function: $reverse-ease-out;
+      animation-duration: $svc-collapse-move-out-duration;
+      animation-delay: $svc-collapse-move-out-delay;
+    }
+  } 
+}
+
 .svc-creator .svc-page .svc-page__content--collapsed {
   &::after {
     content: "";
@@ -207,6 +223,7 @@ svc-page {
   overflow: visible;
   margin-left: calcSize(3);
   margin-right: calcSize(3);
+  margin-top: calcSize(2);
   gap: calcSize(2);
 
   .sv-action {

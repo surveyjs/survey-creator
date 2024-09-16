@@ -95,6 +95,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   protected expandCollapseAction: IAction;
   protected designerStateManager: DesignerStateManager;
   @property({ defaultValue: true }) allowDragging: boolean;
+  @property({ defaultValue: false }) animationRunning: boolean;
 
   protected get dragInsideCollapsedContainer(): boolean {
     return this.collapsed && this.creator.dragDropSurveyElements.insideContainer;
@@ -141,6 +142,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       });
     };
     const afterRunAnimation = (el: HTMLElement, animatingClassName: string) => {
+      this.animationRunning = false;
       cleanHtmlElementAfterAnimation(el);
       this.getInnerAnimatedElements().forEach((elem: HTMLElement) => {
         cleanHtmlElementAfterAnimation(elem);
@@ -182,6 +184,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this._renderedCollapsed = !val;
   }, () => !this.renderedCollapsed);
   public set renderedCollapsed(val: boolean) {
+    this.animationRunning = true;
     this.animationCollapsed.sync(!val);
   }
   public get renderedCollapsed(): boolean {
