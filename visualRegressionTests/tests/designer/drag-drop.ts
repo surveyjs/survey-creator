@@ -723,7 +723,7 @@ test("Drag Drop to collapsed page", async (t) => {
       document.head.insertAdjacentHTML("beforeend", "<style>*, ::after, ::before { animation: initial!important; }</style>");
     })();
 
-    await t.resizeWindow(1600, 500);
+    await t.resizeWindow(1652, 500);
     const json = {
       pages: [
         {

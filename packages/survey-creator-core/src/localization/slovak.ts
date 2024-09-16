@@ -106,6 +106,8 @@ export var skStrings = {
     redo: "Opakovať",
     undoTooltip: "Zrušiť poslednú zmenu",
     redoTooltip: "Opakovať zmenu",
+    expandAllTooltip: "Rozbaliť všetko",
+    collapseAllTooltip: "Zbaliť všetko",
     showMoreChoices: "Zobraziť viac",
     showLessChoices: "Zobraziť menej",
     copy: "Kopírovať",

@@ -253,6 +253,7 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
   .svc-side-bar__wrapper {
     left: 0;
     right: unset;
+    flex-direction: row-reverse;
   }
 
   .svc-side-bar__container-header .sv-action-bar {
@@ -264,8 +265,14 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
     flex: 1;
     display: flex;
   }
+}
 
-  .svd-grid-hide .sv-svg-icon {
+[dir="rtl"],
+[style*="direction:rtl"],
+[style*="direction: rtl"],
+.svc-full-container.svc-creator__side-bar--left {
+  .svd-grid-hide .sv-svg-icon,
+  .svd-grid-expand .sv-svg-icon {
     transform: rotate(180deg);
   }
 }
