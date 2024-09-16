@@ -615,6 +615,12 @@ Serializer.addClass(
       type: "switchToggle",
       isSerializable: false,
       default: false,
+      onPropertyEditorUpdate: function (obj: any, editor: any) {
+        if (!!editor) {
+          editor.titleLocation = "hidden"
+          editor.renderAs = "switch";
+        }
+      }
     }, {
       type: "spinedit",
       isSerializable: false,

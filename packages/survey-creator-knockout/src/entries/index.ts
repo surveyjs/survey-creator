@@ -38,6 +38,7 @@ export * from "../custom-questions/question-color";
 export * from "../custom-questions/spin-editor";
 export * from "../custom-questions/question-file";
 export * from "../custom-questions/text-with-reset";
+export * from "../custom-questions/boolean-switch";
 
 export * from "../page-navigator/page-navigator";
 export * from "../page-navigator/page-navigator-item";

@@ -112,6 +112,8 @@ require("../components/side-bar/tab-control.scss");
 require("../property-grid-theme/property-grid.scss");
 require("../utils/design.scss");
 require("../utils/layout.scss");
+require("../custom-questions/boolean-switch.scss");
+
 
 import { settings, checkLibraryVersion } from "survey-core";
 settings.supportCreatorV2 = true;
