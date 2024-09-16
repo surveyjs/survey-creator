@@ -56,6 +56,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   private simulatorCssClasses: any = surveyCss[defaultV2ThemeName];
   private _availableThemes = [].concat(PredefinedThemes);
   private _showOneCategoryInPropertyGrid: boolean = false;
+  private _advancedModeValue = false;
 
   private tabControlModel: TabControlModel;
   public propertyGrid: PropertyGridModel;
@@ -70,6 +71,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     if (this._showOneCategoryInPropertyGrid !== newValue) {
       this._showOneCategoryInPropertyGrid = newValue;
       this.creator.sidebar.hideSideBarVisibilityControlActions = newValue;
+      this.updateAdvancedModeQuestion();
       this.propertyGrid.showOneCategoryInPropertyGrid = newValue;
       this.propertyGrid["setObj"](this.creator.selectedElement);
       if (this.creator.activeTab === "theme") {
@@ -78,6 +80,13 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     }
   }
 
+  private updateAdvancedModeQuestion(): void {
+    const advancedModeQuestion = this.propertyGrid.survey.getQuestionByName("advancedMode");
+    if (advancedModeQuestion) {
+      advancedModeQuestion.visible = this.showOneCategoryInPropertyGrid;
+      advancedModeQuestion.value = this._advancedModeValue;
+    }
+  }
   private createVisibleUpdater() {
     return <any>new ComputedUpdater<boolean>(() => { return this.creator.activeTab === "theme"; });
   }
@@ -92,11 +101,12 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       visible: !this.creator.isMobileView,
       action: () => {
         advancedMode.checked = !advancedMode.checked;
-        this.propertyGrid.survey.setVariable("advancedmode", advancedMode.checked);
-        this.propertyGrid.survey.getQuestionByName("advancedMode").value = advancedMode.checked;
+        if (!!this.propertyGrid.survey.getQuestionByName("advancedMode")) {
+          this.propertyGrid.survey.getQuestionByName("advancedMode").value = advancedMode.checked;
+        }
       }
     });
-    advancedMode.checked = !!this.propertyGrid.survey.getVariable("advancedmode");
+    advancedMode.checked = this._advancedModeValue;
     this.advancedModeSwitcher = advancedMode;
   }
 
@@ -281,8 +291,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.propertyGrid.survey.getAllQuestions().forEach(q => q.readOnly = false);
     this.onAvailableThemesChanged(this.availableThemes);
     this.updateAllowModifyTheme();
-    this.propertyGrid.survey.setVariable("advancedmode", !!this.advancedModeSwitcher?.checked);
-    this.propertyGrid.survey.getQuestionByName("advancedMode").value = !!this.advancedModeSwitcher?.checked;
+    this.updateAdvancedModeQuestion();
     const themeBuilderCss = { ...propertyGridCss };
     themeBuilderCss.root += " spg-theme-builder-root";
 
@@ -322,10 +331,12 @@ export class ThemeTabPlugin implements ICreatorPlugin {
           options.cssClasses.panel.container = "spg-nested-panel";
           options.cssClasses.panel.content = "spg-nested-panel__content";
         }
-      } else {
-        if (options.panel.parent?.isPage) {
-          options.cssClasses.panel.container = "spg-panel-as-page";
-          options.cssClasses.panel.content = "spg-panel-as-page__content";
+      } else if (this.showOneCategoryInPropertyGrid && options.panel.parent?.isPage) {
+        options.cssClasses.panel.container = "spg-panel-by-page";
+        options.cssClasses.panel.content = "spg-panel-by-page__content";
+
+        if (options.panel.name === "appearanceadvancedmode" || options.panel.name === "appearanceother") {
+          options.cssClasses.panel.container += " spg-panel--hidden-border";
         }
       }
     });
@@ -446,6 +457,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       this.model = undefined;
       this.creator.sidebar.hideSideBarVisibilityControlActions = false;
     }
+    this._advancedModeValue = !!this.propertyGrid.survey.getQuestionByName("advancedMode")?.value;
     this.creator.sidebar.sideAreaComponentName = undefined;
     this.creator.sidebar.sideAreaComponentData = undefined;
     this.creator.sidebar.headerComponentName = undefined;
