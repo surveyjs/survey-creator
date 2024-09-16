@@ -309,7 +309,7 @@ test("Question type popup - wide", async (t) => {
   await setJSON(json);
   await t
     .resizeWindow(1920, 900)
-    .click(Selector("button.svc-page__question-type-selector"))
+    .click(Selector("button.svc-element__question-type-selector"))
     .expect(Selector(".sv-popup:not(.sv-popup--overlay) li").withText("Single-Line Input").visible).ok();
 });
 
@@ -328,7 +328,7 @@ test("Question type popup - narrow", async (t) => {
   await setJSON(json);
   await t
     .resizeWindow(380, 600)
-    .click(Selector("button.svc-page__question-type-selector"))
+    .click(Selector("button.svc-element__question-type-selector"))
     .expect(Selector(".sv-popup.sv-popup--overlay li").withText("Single-Line Input").filterVisible().exists).ok();
 });
 

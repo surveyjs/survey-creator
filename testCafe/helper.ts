@@ -123,7 +123,7 @@ export function getListItemByText(text) {
   return Selector(".sv-popup__content .sv-list .sv-list__item").withText(text).filterVisible();
 }
 export function getAddNewQuestionButton() {
-  return Selector(".svc-page__add-new-question > span").withText("Add Question");
+  return Selector(".svc-element__add-new-question > span").withText("Add Question");
 }
 
 export function getVisibleElement(selector: string | Selector): Selector {
@@ -137,7 +137,7 @@ export function getSubToolboxItemByText(text: string) {
 }
 export async function addQuestionByAddQuestionButton(t: TestController, text: string) {
   await t
-    .click(Selector(".svc-page__add-new-question .svc-page__question-type-selector"))
+    .click(Selector(".svc-element__add-new-question .svc-element__question-type-selector"))
     .click(Selector(".sv-list__item span").withExactText(text).filterVisible());
 }
 
