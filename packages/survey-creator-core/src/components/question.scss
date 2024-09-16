@@ -169,9 +169,9 @@ svc-question {
   overflow: visible;
 }
 
-$svc-expand-fade-in-duration: var(--sjs-svc-expand-fade-in-duration, 500ms);
-$svc-expand-fade-in-delay: var(--sjs-svc-expand-fade-in-delay, 150ms);
-$svc-expand-move-in-duration: var(--sjs-svc-expand-move-in-duration, 150ms);
+$svc-expand-fade-in-duration: var(--sjs-svc-expand-fade-in-duration, 150ms);
+$svc-expand-move-in-duration: var(--sjs-svc-expand-move-in-duration, 250ms);
+$svc-expand-fade-in-delay: var(--sjs-svc-expand-fade-in-delay, 250ms);
 $svc-collapse-fade-out-duration: var(--sjs-svc-collapse-fade-out-duration, 150ms);
 $svc-collapse-move-out-duration: var(--sjs-svc-collapse-move-out-duration, 250ms);
 $svc-collapse-move-out-delay: var(--sjs-svc-collapse-move-out-delay, 100ms);
