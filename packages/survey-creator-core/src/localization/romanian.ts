@@ -106,6 +106,8 @@ export const roStrings = {
     redo: "Refă",
     undoTooltip: "Anulează ultima modificare",
     redoTooltip: "Refă modificarea",
+    expandAllTooltip: "Extindeți tot",
+    collapseAllTooltip: "Restrângeți tot",
     showMoreChoices: "Afișează mai multe",
     showLessChoices: "Afișează mai puține",
     copy: "Copiază",

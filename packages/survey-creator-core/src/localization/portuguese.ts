@@ -106,6 +106,8 @@ var portugueseTranslation = {
     redo: "Refazer",
     undoTooltip: "Desfazer última alteração",
     redoTooltip: "Refazer a alteração",
+    expandAllTooltip: "Expandir tudo",
+    collapseAllTooltip: "Recolher tudo",
     showMoreChoices: "Mostrar mais",
     showLessChoices: "Mostrar menos",
     copy: "Copiar",

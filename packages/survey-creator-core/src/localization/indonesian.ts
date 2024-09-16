@@ -106,6 +106,8 @@ export var indonesianStrings = {
     redo: "Ulangi",
     undoTooltip: "Mengurungkan perubahan terakhir",
     redoTooltip: "Mengulangi perubahan",
+    expandAllTooltip: "Perluas Semua",
+    collapseAllTooltip: "Ciutkan Semua",
     showMoreChoices: "Tampilkan lebih banyak",
     showLessChoices: "Tampilkan lebih sedikit",
     copy: "Menyalin",

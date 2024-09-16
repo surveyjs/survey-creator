@@ -106,6 +106,8 @@ export var fiStrings = {
     redo: "Tee uudelleen",
     undoTooltip: "Kumoa viimeinen muutos",
     redoTooltip: "Tee muutos uudelleen",
+    expandAllTooltip: "Laajenna kaikki",
+    collapseAllTooltip: "Kutista kaikki",
     showMoreChoices: "Näytä lisää",
     showLessChoices: "Näytä vähemmän",
     copy: "Kopioi",

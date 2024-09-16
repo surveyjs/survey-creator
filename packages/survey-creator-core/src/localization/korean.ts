@@ -106,6 +106,8 @@ export var koreanStrings = {
     redo: "복원",
     undoTooltip: "마지막 변경 사항 실행 취소",
     redoTooltip: "변경 내용 다시 실행",
+    expandAllTooltip: "모두 확장",
+    collapseAllTooltip: "모두 축소",
     showMoreChoices: "더 보기",
     showLessChoices: "간략하게 표시",
     copy: "복사",
