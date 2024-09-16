@@ -106,6 +106,8 @@ export var hrStrings = {
     redo: "Ponoviti",
     undoTooltip: "Poništi posljednju promjenu",
     redoTooltip: "Preusmjeti promjenu",
+    expandAllTooltip: "Proširi sve",
+    collapseAllTooltip: "Sažmi sve",
     showMoreChoices: "Pokaži više",
     showLessChoices: "Pokaži manje",
     copy: "Kopirati",

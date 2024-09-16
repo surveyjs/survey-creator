@@ -106,6 +106,8 @@ export var ruStrings = {
     redo: "Повтор",
     undoTooltip: "Отменить последнее изменение",
     redoTooltip: "Повторите изменение",
+    expandAllTooltip: "Развернуть все",
+    collapseAllTooltip: "Свернуть все",
     showMoreChoices: "Развернуть",
     showLessChoices: "Показать меньше",
     copy: "Копировать",

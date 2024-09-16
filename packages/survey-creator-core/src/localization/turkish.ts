@@ -106,6 +106,8 @@ export var turkishStrings = {
     redo: "İleri",
     undoTooltip: "Son değişikliği geri al",
     redoTooltip: "Son değişikliği ileri al",
+    expandAllTooltip: "Tümünü Genişlet",
+    collapseAllTooltip: "Tümünü Daralt",
     showMoreChoices: "Daha fazlasını göster",
     showLessChoices: "Daha az göster",
     copy: "Kopya etmek",
