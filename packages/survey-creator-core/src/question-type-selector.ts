@@ -1,13 +1,10 @@
-import { Action, Helpers, IAction, ListModel, QuestionFactory, SurveyElement } from "survey-core";
+import { Action, Helpers, IAction, ListModel, PageModel, QuestionFactory, SurveyElement } from "survey-core";
 import { QuestionToolbox, QuestionToolboxItem } from "./toolbox";
 import { ICreatorOptions } from "./creator-options";
 import { SurveyHelper } from "./survey-helper";
 import { QuestionConverter } from "./questionconverter";
-export class QuestionTypeSelector {
-  /**
-   *
-   */
-  constructor(private creatorOptions: ICreatorOptions, private toolbox: QuestionToolbox, private element?: SurveyElement) {
+export class QuestionTypeSelectorBase {
+  constructor(private creatorOptions: ICreatorOptions, protected toolbox: QuestionToolbox) {
 
   }
   public getAvailableToolboxItems(element?: SurveyElement, isAddNew: boolean = true): Array<QuestionToolboxItem> {
@@ -24,6 +21,25 @@ export class QuestionTypeSelector {
       }
     }
     return res;
+  }
+  protected onSelectQuestionType(questionType: string, json: any, defaultJsons: any) {
+
+  }
+}
+export class QuestionTypeSelector extends QuestionTypeSelectorBase {
+  constructor(creatorOptions: ICreatorOptions, toolbox: QuestionToolbox, private page?: PageModel) {
+    super(creatorOptions, toolbox);
+  }
+  protected onSelectQuestionType(questionType: string, json: any, defaultJsons: any) {
+
+  }
+}
+export class QuestionTypeConverter extends QuestionTypeSelectorBase {
+  /**
+   *
+   */
+  constructor(creatorOptions: ICreatorOptions, toolbox: QuestionToolbox, private element?: SurveyElement) {
+    super(creatorOptions, toolbox);
   }
 
   private getConvertToTypes(): Array<QuestionToolboxItem> {
