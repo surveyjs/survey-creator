@@ -335,8 +335,11 @@ export class ThemeTabPlugin implements ICreatorPlugin {
         options.cssClasses.panel.container = "spg-panel-by-page";
         options.cssClasses.panel.content = "spg-panel-by-page__content";
 
-        if (options.panel.name === "appearanceadvancedmode" || options.panel.name === "appearanceother") {
+        if (options.panel.name === "appearanceother") {
           options.cssClasses.panel.container += " spg-panel--hidden-border";
+        }
+        if (options.panel.name === "appearanceadvancedmode") {
+          options.cssClasses.panel.container += " spg-panel--hidden-border spg-panel--padding";
         }
       }
     });
@@ -361,6 +364,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
           action: () => {
             this.creator.sidebar.expandSidebar();
             this.propertyGrid.survey.currentPage = p;
+            this.propertyGridTab.subTitle = p.title;
             pgTabs.forEach(i => i.active = false);
             action.active = true;
           }
@@ -368,6 +372,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
         return action;
       });
       this.tabControlModel.topToolbar.setItems(pgTabs);
+      this.propertyGridTab.subTitle = this.propertyGrid.survey.currentPage.title;
     }
   }
 

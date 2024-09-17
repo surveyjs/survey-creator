@@ -1,6 +1,10 @@
 <template>
   <div class="svc-side-bar__container-header svc-sidebar__header-container">
-    <div class="svc-side-bar__container-title">{{ model.caption }}</div>
+    <div v-if="!model.subTitle" class="svc-side-bar__container-title">{{ model.caption }}</div>
+    <div v-if="!!model.subTitle" class="svc-sidebar__header-caption">
+      <span class="svc-sidebar__header-title">{{ model.caption }}</span>
+      <span class="svc-sidebar__header-subtitle">{{ model.subTitle }}</span>
+    </div>
   </div>
 </template>
 

@@ -7,6 +7,7 @@ export class SidebarPageModel extends Base {
       target.sidePanel.headerText = target.caption;
     }
   }) caption: string;
+  @property() subTitle: string;
   @property({
     onSet: (newVal, target: SidebarPageModel) => {
       target.sidePanel.updateHasVisiblePages();

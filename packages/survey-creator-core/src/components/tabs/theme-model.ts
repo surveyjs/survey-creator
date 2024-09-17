@@ -617,7 +617,7 @@ Serializer.addClass(
       default: false,
       onPropertyEditorUpdate: function (obj: any, editor: any) {
         if (!!editor) {
-          editor.titleLocation = "hidden"
+          editor.titleLocation = "hidden";
           editor.renderAs = "switch";
         }
       }

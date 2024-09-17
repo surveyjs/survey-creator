@@ -3,7 +3,11 @@ import { Base } from "survey-core";
 import { SidebarPageModel } from "survey-creator-core";
 import { SurveyElementBase, ReactElementFactory } from "survey-react-ui";
 
-class SideBarPropertyGridPlaceholderHeader extends SurveyElementBase<any, any> {
+interface ISideBarPropertyGridPlaceholderHeadeProps {
+  model: SidebarPageModel;
+}
+
+class SideBarPropertyGridPlaceholderHeader extends SurveyElementBase<ISideBarPropertyGridPlaceholderHeadeProps, any> {
   get activePage(): SidebarPageModel {
     return this.props.model;
   }
@@ -15,7 +19,13 @@ class SideBarPropertyGridPlaceholderHeader extends SurveyElementBase<any, any> {
   renderElement(): JSX.Element {
     return (
       <div className="svc-side-bar__container-header svc-sidebar__header-container">
-        <div className="svc-side-bar__container-title">{this.activePage.caption}</div>
+        {(this.activePage.subTitle) ?
+          <div className="svc-sidebar__header-caption">
+            <span className="svc-sidebar__header-title">{this.activePage.caption}</span>
+            <span className="svc-sidebar__header-subtitle">{this.activePage.subTitle}</span>
+          </div>
+          : <div className="svc-side-bar__container-title">{this.activePage.caption}</div>
+        }
       </div>);
   }
 }
