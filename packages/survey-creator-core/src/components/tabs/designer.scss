@@ -112,17 +112,16 @@ svc-tab-designer {
 }
 
 .svc-designer-placeholder-page {
-  margin-top: calcSize(2);
+  .svc-page__footer {
+    width: calcSize(33);
+    margin: auto;
+  }
+
+  .svc-row--ghost {
+    display: none;
+  }
 }
 
-.svc-designer-placeholder-page .svc-page__footer {
-  width: calcSize(33);
-  margin: auto;
-}
-
-.svc-designer-placeholder-page .svc-row--ghost {
-  display: none;
-}
 
 .svc-tab-designer__toolbar {
   position: absolute;
