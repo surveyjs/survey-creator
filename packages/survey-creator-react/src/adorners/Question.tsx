@@ -104,12 +104,12 @@ export class QuestionAdornerComponent extends CreatorModelElement<
   }
 
   protected renderQuestionTitle(): JSX.Element {
-    if (this.model.element.hasTitle || this.model.element.isPanel) return null;
+    if (this.model.element.hasTitle) return null;
     const element = this.model.element as Question | PanelModel;
     return (
       <div className={this.model.cssCollapsedHiddenHeader} >
         <div className={this.model.cssCollapsedHiddenTitle} >
-          {SurveyElementBase.renderLocString(element.locTitle, null, "q_title")}
+          {element.title ? SurveyElementBase.renderLocString(element.locTitle, null, "q_title") : <span className="svc-fake-title">{element.name}</span>}
         </div>
       </div>
     );

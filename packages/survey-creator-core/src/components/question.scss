@@ -153,11 +153,6 @@ svc-question {
     user-select: all;
     pointer-events: all;
   }
-
-  .sd-question__header--hidden,
-  .svc-question__header--hidden {
-    padding-bottom: calcSize(1);
-  }
 }
 
 .svc-question__content>div,
@@ -604,6 +599,26 @@ svc-question,
   z-index: 1;
 }
 
+.svc-element__header--hidden {
+  display: block;
+  padding-bottom: calcSize(1);
+  box-sizing: border-box;
+  .svc-string-editor,
+  .svc-fake-title,
+  sv-ng-string>.svc-string-editor{
+    display: inline-flex;
+    &::before {
+      content: '('
+    }
+    &::after {
+      content: ')'
+    }
+  }
+  .svc-element__title--hidden {
+    display: none;
+  }
+}
+
 .svc-question__adorner {
   .svc-question__content--collapsed {
     &>* {
@@ -627,32 +642,11 @@ svc-question,
         display: none;
       }
 
-      &.sd-panel__header--hidden,
-      &.sd-question__header--hidden,
-      &.svc-question__header--hidden {
+      &.svc-element__header--hidden {
         display: block;
       }
-
-      .sd-element__title,
-      .sd-title.sd-element__title {
-
-        &.sd-element__title--hidden,
-        &.svc-element__title--hidden {
-          display: block;
-
-          &>.svc-string-editor,
-          &>sv-ng-string>.svc-string-editor {
-            display: inline-flex;
-
-            &::before {
-              content: "(";
-            }
-
-            &::after {
-              content: ")";
-            }
-          }
-        }
+      .svc-element__title--hidden {
+        display: block;
       }
     }
   }
@@ -1043,9 +1037,7 @@ svc-question,
 .svc-question__content.svc-question__content--collapsed {
   .sd-element--complex>.sd-element__header--location-top {
 
-    &.sd-panel__header--hidden,
-    &.sd-question__header--hidden,
-    &.svc-question__header--hidden {
+    &.svc-element__header--hidden {
       padding: 0;
     }
   }
@@ -1060,9 +1052,7 @@ svc-question,
     padding-bottom: calc(0.5 * var(--sd-base-vertical-padding));
     padding-top: 0;
 
-    &.sd-panel__header--hidden,
-    &.sd-question__header--hidden,
-    &.svc-question__header--hidden {
+    &.svc-element__header--hidden {
       padding-bottom: calcSize(1);
     }
 
