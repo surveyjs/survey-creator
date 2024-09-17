@@ -106,6 +106,8 @@ export var msStrings = {
     redo: "Buat Semula",
     undoTooltip: "Buat asal perubahan terakhir",
     redoTooltip: "Buat semula perubahan",
+    expandAllTooltip: "Kembangkan Semua",
+    collapseAllTooltip: "Runtuhkan Semua",
     showMoreChoices: "Tunjuk lebih banyak",
     showLessChoices: "Tunjukkan kurang",
     copy: "Salin",

@@ -231,7 +231,7 @@ test("Matrix dropdown with detail panel - add question button", async (t) => {
     .click(Selector(".sd-question[data-name=question1] .svc-panel__add-new-question"))
     .expect((Selector(".sd-question[data-name=question1] .sd-table__row").nth(1).find("#convertTo").withText("Single-Line Input").visible)).ok()
     .expect(Selector(".sd-question[data-name=question2]").visible).ok()
-    .click(Selector(".sd-question[data-name=question1] .svc-panel__add-new-question"))
+    .click(Selector(".sd-question[data-name=question1] .svc-element__add-new-question"))
     .expect(Selector(".sd-question[data-name=question3]").visible).ok();
 });
 

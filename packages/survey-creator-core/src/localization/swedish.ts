@@ -106,6 +106,8 @@ export let svStrings = {
     redo: "Göra om",
     undoTooltip: "Ångra senaste ändring",
     redoTooltip: "Gör om ändringen",
+    expandAllTooltip: "Expandera alla",
+    collapseAllTooltip: "Komprimera alla",
     showMoreChoices: "Visa mer",
     showLessChoices: "Visa mindre",
     copy: "Kopia",

@@ -106,6 +106,8 @@ export var hebrewStrings = {
     redo: "בצע מחדש",
     undoTooltip: "בטל שינוי אחרון",
     redoTooltip: "בצע מחדש את השינוי",
+    expandAllTooltip: "הרחב הכל",
+    collapseAllTooltip: "כווץ הכל",
     showMoreChoices: "הצג עוד",
     showLessChoices: "הצג פחות",
     copy: "העתק",

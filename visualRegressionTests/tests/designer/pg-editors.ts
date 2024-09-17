@@ -366,7 +366,7 @@ test("Dropdown popup in property grid", async (t) => {
     await t.resizeWindow(1240, 870);
 
     await t
-      .click(Selector(".svc-page__add-new-question"))
+      .click(Selector(".svc-element__add-new-question"))
       .click(Selector(".spg-dropdown[aria-label='Input type']"));
 
     await takeElementScreenshot("pg-dropdown-editor.png", Selector(".svc-side-bar"), t, comparer);
@@ -650,7 +650,7 @@ test("Check overriding property editor", async (t) => {
 
 test("Check comment editor with reset button", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1920, 1920);
+    await t.resizeWindow(1920, 900);
     await ClientFunction(() => {
       (<any>window).Survey.Serializer.addProperty("survey", {
         name: "test:text",

@@ -75,18 +75,19 @@ survey-creator,
   padding: calcSize(16.5) 0;
   top: 0;
   bottom: 0;
-  right: 0;
+  right: calcSize(1.5);
 }
 
 .svc-page-navigator {
   padding: calcSize(1.5);
+  padding-right: 0;
   width: calcSize(5.5);
 }
 
 .svc-creator__toolbox--right,
-[dir='rtl'],
-[style*='direction:rtl'],
-[style*='direction: rtl'] {
+[dir="rtl"],
+[style*="direction:rtl"],
+[style*="direction: rtl"] {
   .svc-tab-designer--with-page-navigator {
     .svc-tab-designer_content {
       margin-right: 0;
@@ -96,7 +97,12 @@ survey-creator,
 
   .svc-tab-designer__page-navigator {
     right: unset;
-    left: calcSize(1);
+    left: calcSize(1.5);
+  }
+
+  .svc-page-navigator {
+    padding: calcSize(1.5);
+    padding-left: 0;
   }
 }
 

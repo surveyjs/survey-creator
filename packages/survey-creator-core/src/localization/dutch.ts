@@ -106,6 +106,8 @@ export var nlStrings = {
     redo: "Opnieuw uitvoeren",
     undoTooltip: "Maak de laatste wijziging ongedaan",
     redoTooltip: "Voer de wijziging opnieuw uit",
+    expandAllTooltip: "Alles uitvouwen",
+    collapseAllTooltip: "Alles inklappen",
     showMoreChoices: "Toon meer",
     showLessChoices: "Toon minder",
     copy: "Kopiëren",

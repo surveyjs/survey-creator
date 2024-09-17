@@ -106,6 +106,8 @@ export var jaStrings = {
     redo: "やり直す",
     undoTooltip: "最後の変更を元に戻す",
     redoTooltip: "変更をやり直す",
+    expandAllTooltip: "すべて展開",
+    collapseAllTooltip: "すべて折りたたむ",
     showMoreChoices: "さらに表示",
     showLessChoices: "表示を減らす",
     copy: "コピー",

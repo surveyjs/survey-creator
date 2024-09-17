@@ -106,6 +106,8 @@ var germanTranslation = {
     redo: "Wiederherstellen",
     undoTooltip: "Letzte Änderung rückgängig machen",
     redoTooltip: "Letzte Änderung wiederherstellen",
+    expandAllTooltip: "Alle aufklappen",
+    collapseAllTooltip: "Alle einklappen",
     showMoreChoices: "Zeige mehr",
     showLessChoices: "Zeige weniger",
     copy: "Kopieren",

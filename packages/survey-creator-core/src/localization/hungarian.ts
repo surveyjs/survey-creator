@@ -106,6 +106,8 @@ export var huStrings = {
     redo: "Ismét",
     undoTooltip: "Utolsó módosítás visszavonása",
     redoTooltip: "Ismételje meg a módosítást",
+    expandAllTooltip: "Összes kibontása",
+    collapseAllTooltip: "Az összes összecsukása",
     showMoreChoices: "Bővebben",
     showLessChoices: "Rövidebben",
     copy: "Másolat",

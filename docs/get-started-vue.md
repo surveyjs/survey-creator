@@ -115,7 +115,20 @@ const creator = new SurveyCreatorModel(creatorOptions);
 
 ### Render Survey Creator
 
-Survey Creator rendering code is encapsulated in the `SurveyCreatorComponent`. To use it in your template, you need to install `surveyPlugin` (for SurveyJS Form Library) and `surveyCreatorPlugin`. Open the `main.ts` file, import these plugins, and install them using the `app.use()` method *in the exact order shown below*:
+To render Survey Creator, add `SurveyCreatorComponent` to your template, and pass the model instance you created in the previous step to the component's `model` attribute:
+
+```html
+<script setup lang="ts">
+import { SurveyCreatorComponent } from "survey-creator-vue";
+// ...
+</script>
+
+<template>
+  <SurveyCreatorComponent :model="creator" />
+</template>
+```
+
+The code above registers `SurveyCreatorComponent` locally. If you want to register it globally, open the `main.ts` file, import `surveyPlugin` (for SurveyJS Form Library) and `surveyCreatorPlugin`, and install them using the `app.use()` method *in the exact order shown below*. In this case, you don't need to import `SurveyCreatorComponent` within each Vue component where you want to use it.
 
 ```js
 // main.ts
@@ -128,18 +141,6 @@ createApp(App)
   .use(surveyPlugin)
   .use(surveyCreatorPlugin)
   .mount("#app");
-```
-
-To render Survey Creator, add `SurveyCreatorComponent` to your template, and pass the model instance you created in the previous step to the component's `model` attribute:
-
-```html
-<script setup lang="ts">
-// ...
-</script>
-
-<template>
-  <SurveyCreatorComponent :model="creator" />
-</template>
 ```
 
 <details>
@@ -153,6 +154,7 @@ import "survey-creator-core/survey-creator-core.min.css";
 
 import type { ICreatorOptions } from "survey-creator-core";
 import { SurveyCreatorModel } from "survey-creator-core";
+import { SurveyCreatorComponent } from "survey-creator-vue";
 
 const creatorOptions: ICreatorOptions = {
   showLogicTab: true,
@@ -164,19 +166,6 @@ const creator = new SurveyCreatorModel(creatorOptions);
 <template>
   <SurveyCreatorComponent :model="creator" />
 </template>
-```
-
-```js
-// main.ts
-import { createApp } from "vue";
-import App from "./App.vue";
-import { surveyPlugin } from "survey-vue3-ui";
-import { surveyCreatorPlugin } from "survey-creator-vue";
-
-createApp(App)
-  .use(surveyPlugin)
-  .use(surveyCreatorPlugin)
-  .mount("#app");
 ```
 </details>
 
@@ -291,6 +280,7 @@ import "survey-creator-core/survey-creator-core.min.css";
 
 import type { ICreatorOptions } from "survey-creator-core";
 import { SurveyCreatorModel } from "survey-creator-core";
+import { SurveyCreatorComponent } from "survey-creator-vue";
 
 const creatorOptions: ICreatorOptions = {
   showLogicTab: true,
@@ -349,19 +339,6 @@ creator.saveSurveyFunc = (saveNo: number, callback: Function) => {
   <SurveyCreatorComponent :model="creator" />
 </template>
 ```
-
-```js
-// main.ts
-import { createApp } from "vue";
-import App from "./App.vue";
-import { surveyPlugin } from "survey-vue3-ui";
-import { surveyCreatorPlugin } from "survey-creator-vue";
-
-createApp(App)
-  .use(surveyPlugin)
-  .use(surveyCreatorPlugin)
-  .mount("#app");
-```
 </details>
 
 ### Manage Image Uploads
@@ -414,6 +391,7 @@ import "survey-creator-core/survey-creator-core.min.css";
 
 import type { ICreatorOptions } from "survey-creator-core";
 import { SurveyCreatorModel } from "survey-creator-core";
+import { SurveyCreatorComponent } from "survey-creator-vue";
 
 const creatorOptions: ICreatorOptions = {
   showLogicTab: true,
@@ -492,19 +470,6 @@ creator.saveSurveyFunc = (saveNo: number, callback: Function) => {
 <template>
   <SurveyCreatorComponent :model="creator" />
 </template>
-```
-
-```js
-// main.ts
-import { createApp } from "vue";
-import App from "./App.vue";
-import { surveyPlugin } from "survey-vue3-ui";
-import { surveyCreatorPlugin } from "survey-creator-vue";
-
-createApp(App)
-  .use(surveyPlugin)
-  .use(surveyCreatorPlugin)
-  .mount("#app");
 ```
 </details>
 

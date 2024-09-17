@@ -10,6 +10,11 @@ svc-page {
   .sd-page__title {
     margin: calcSize(3) 0 0 0;
     color: var(--ctr-survey-page-header-title-color-placeholder, $foreground-dim);
+    gap: calcSize(0.5);
+  }
+
+  .sd-page__num {
+    color: var(--ctr-survey-page-header-title-color-placeholder, $foreground-light);
   }
 
   .svc-panel__placeholder {
@@ -236,17 +241,17 @@ svc-page {
   }
 }
 
-.svc-page__add-new-question {
+.svc-element__add-new-question {
   .svc-text {
     margin-left: calcSize(6);
   }
 }
 
-.svc-page__add-new-question {
+.svc-element__add-new-question {
   -webkit-tap-highlight-color: transparent;
 }
 
-.svc-page__question-type-selector {
+.svc-element__question-type-selector {
   appearance: none;
   display: flex;
   height: calcSize(5);
@@ -298,7 +303,7 @@ svc-page {
   }
 }
 
-.svc-page__add-new-question,
+.svc-element__add-new-question,
 .svc-question__adorner {
   .sv-list__item.sv-list__item--disabled {
     opacity: 0.25;
