@@ -60,7 +60,8 @@ import ToolboxList from "./toolbox/ToolboxList.vue";
 
 import Designer from "./tabs/designer/Designer.vue";
 import Page from "./tabs/designer/Page.vue";
-import PageAddQuestion from "./tabs/designer/PageAddQuestion.vue";
+import AddQuestion from "./tabs/designer/AddQuestion.vue";
+import AddQuestionTypeSelector from "./tabs/designer/AddQuestionTypeSelector.vue";
 import Row from "./tabs/designer/Row.vue";
 import QuestionAdorner from "./adorners/Question.vue";
 import QuestionImageAdorner from "./adorners/QuestionImage.vue";
@@ -167,7 +168,8 @@ function registerComponents(
   registerComponent("svc-page-navigator-item", PageNavigatorItem);
   registerComponent("svc-page", Page);
   registerComponent("svc-row", Row);
-  registerComponent("svc-add-new-question-btn", PageAddQuestion);
+  registerComponent("svc-add-new-question-btn", AddQuestion);
+  registerComponent("svc-add-question-type-selector", AddQuestionTypeSelector);
   registerComponent("svc-question", QuestionAdorner);
   registerComponent("svc-rating-question", QuestionAdorner);
   registerComponent("svc-rating-question-content", RatingAdorner);

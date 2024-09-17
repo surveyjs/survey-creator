@@ -488,7 +488,7 @@ test("Toolbox disabled items", async (t) => {
     await takeElementScreenshot("toolbox-compact-disabled-items.png", toolboxElement, t, comparer);
 
     await t
-      .click(Selector("button.svc-page__question-type-selector"))
+      .click(Selector("button.svc-element__question-type-selector"))
       .expect(Selector(".sv-popup__container").filterVisible().visible).ok();
     await takeElementScreenshot("add-new-disabled-items.png", Selector(".sv-popup__container").filterVisible(), t, comparer);
   });

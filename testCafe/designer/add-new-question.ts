@@ -23,7 +23,7 @@ test("Add New Question", async t => {
     .click(getAddNewQuestionButton())
     .expect(Selector("span").withText("question1").visible).ok()
     .expect(getVisibleElement(".svc-question__content.svc-question__content--selected").exists).ok()
-    .click(Selector(".svc-page__add-new-question > button.svc-page__question-type-selector"))
+    .click(Selector(".svc-element__add-new-question > button.svc-element__question-type-selector"))
     .wait(100)
     .pressKey("p")
     .click(Selector(".sv-popup:not(.sv-popup--overlay) li").withExactText("Panel").filterVisible())
@@ -126,13 +126,13 @@ test("Add question when a question in dynamic panel is selected", async (t) => {
 
   await t
     .click(Selector(".sv-string-editor").withText("question1"))
-    .click(Selector(".svc-page__add-new-question").nth(0))
+    .click(Selector(".svc-element__add-new-question").nth(0))
     .expect(Selector("[data-name=\"question2\"]").exists).ok();
 });
 test("Add New Question with sub type", async t => {
   await t
     .maximizeWindow()
-    .click(Selector(".svc-page__add-new-question button"))
+    .click(Selector(".svc-element__add-new-question button"))
     .hover(getListItemByText("Rating Scale").filterVisible())
     .wait(400)
     .click(getListItemByText("Stars").nth(1))
