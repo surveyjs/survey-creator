@@ -172,8 +172,12 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
 
   protected getAnimatedElement() {
     const cssClasses = this.surveyElement.isPanel ? this.surveyElement.cssClasses.panel : this.surveyElement.cssClasses;
-    if (cssClasses.content) {
-      return this.surveyElement.getWrapperElement().querySelector(`:scope ${classesToSelector(cssClasses.content)}`) as HTMLElement;
+    let cssContent = cssClasses.content;
+    if (this.surveyElement.isDescendantOf("rating")) {
+      cssContent = "svc-rating-question-content";
+    }
+    if (cssContent) {
+      return this.surveyElement.getWrapperElement().querySelector(`:scope ${classesToSelector(cssContent)}`) as HTMLElement;
     }
     return null;
   }
