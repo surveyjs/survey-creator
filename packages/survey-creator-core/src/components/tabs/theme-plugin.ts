@@ -292,7 +292,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.onAvailableThemesChanged(this.availableThemes);
     this.updateAllowModifyTheme();
     this.updateAdvancedModeQuestion();
-    const themeBuilderCss = { ...propertyGridCss };
+    const themeBuilderCss = JSON.parse(JSON.stringify(propertyGridCss));
     themeBuilderCss.root += " spg-theme-builder-root";
 
     if (this.showOneCategoryInPropertyGrid) {
