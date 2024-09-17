@@ -3645,10 +3645,11 @@ export class SurveyCreatorModel extends Base
       newAction.popupModel.hide();
     };
     const getActions = () => {
-      const availableTypes = this.getAvailableToolboxItems(element).map((item) => {
-        return this.createIActionBarItemByClass(item, item.needSeparator, onSelectQuestionType);
-      });
-      return availableTypes;
+      // const availableTypes = this.getAvailableToolboxItems(element).map((item) => {
+      //   return this.createIActionBarItemByClass(item, item.needSeparator, onSelectQuestionType);
+      // });
+      // return availableTypes;
+      return [];
     };
 
     const newAction = createDropdownActionModel({

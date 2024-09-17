@@ -27,6 +27,7 @@ import {
 import { SurveyCreatorModel } from "../creator-base";
 import { editorLocalization, getLocString } from "../editorLocalization";
 import { QuestionConverter } from "../questionconverter";
+import { QuestionTypeSelector } from "../question-type-selector";
 import { IPortableDragEvent, IPortableEvent, IPortableMouseEvent } from "../utils/events";
 import {
   isPropertyVisible,
@@ -54,6 +55,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   placeholderComponentData: any;
 
   private dragOrClickHelper: DragOrClickHelper;
+  private questionTypeSelector: QuestionTypeSelector;
   public topActionContainer: ActionContainer;
   constructor(
     creator: SurveyCreatorModel,
@@ -61,6 +63,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     public templateData: SurveyTemplateRendererTemplateData
   ) {
     super(creator, surveyElement);
+    this.questionTypeSelector = new QuestionTypeSelector(this.creator, this.creator.toolbox, this.element);
     this.actionContainer.sizeMode = "small";
     this.topActionContainer = new ActionContainer();
     this.topActionContainer.sizeMode = "small";
@@ -325,132 +328,47 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     return true;
   }
 
-  private getConvertToTypes(): Array<QuestionToolboxItem> {
-    const availableItems = this.creator.getAvailableToolboxItems(this.element, false);
-    const itemNames = [];
-    availableItems.forEach(item => {
-      if (itemNames.indexOf(item.typeName) == -1) {
-        itemNames.push(item.typeName);
-      }
-    });
-    const convertClasses: string[] = QuestionConverter.getConvertToClasses(this.currentType, itemNames, true);
-
-    const res = [];
-    convertClasses.forEach((className: string) => {
-      const items = this.creator.toolbox.items.filter(item => item.name == className);
-      if (Array.isArray(items) && items.length > 0) {
-        const item = items[0];
-        res.push(item);
-      }
-    });
-    return res;
-  }
-
-  private buildDefaultJsonMap(availableItems: QuestionToolboxItem[]) {
-    const defaultJsons = {};
-    function cleanDefaultsFromJson(type: any, toolboxItem: QuestionToolboxItem) {
-      const question = QuestionFactory.Instance.createQuestion(type, "question");
-      if (!question) return toolboxItem.json;
-      question.fromJSON(toolboxItem.json);
-      const json = question.toJSON();
-      delete json.name;
-      return json;
-    }
-    function addItemJson(toolboxItem: QuestionToolboxItem) {
-      const type = toolboxItem.json?.type || toolboxItem.id;
-      if (toolboxItem.json) {
-        const json = cleanDefaultsFromJson(type, toolboxItem);
-        if (!defaultJsons[type]) defaultJsons[type] = [];
-        defaultJsons[type].push(json);
-      }
-    }
-    availableItems.forEach((toolboxItem: QuestionToolboxItem) => {
-      addItemJson(toolboxItem);
-      (toolboxItem.items || []).forEach((toolboxSubitem: QuestionToolboxItem) => {
-        addItemJson(toolboxSubitem);
-      });
-    });
-    return defaultJsons;
-  }
-  private convertQuestion(questionType: string, json: any, defaultJsons: any) {
-    const type = json?.type || questionType;
-    let newJson = {};
-    (defaultJsons[type] || []).forEach((djson) => {
-      if (this.jsonIsCorresponded(djson)) {
-        newJson = { ...json };
-        const objJson = this.element.toJSON();
-        Object.keys(djson).forEach(p => {
-          if (p != "type" && !newJson[p]) newJson[p] = undefined;
-        });
-        Object.keys(json || {}).forEach(p => {
-          if (p != "type" && !(!objJson[p] || djson[p])) newJson[p] = undefined;
-        });
-      }
-    });
-    this.creator.convertCurrentQuestion(type, newJson);
-  }
-  public getConvertToTypesActions(listModel: ListModel): Array<IAction> {
-    const availableItems = this.getConvertToTypes();
-    const defaultJsons = this.buildDefaultJsonMap(availableItems);
-    const newItems = [];
-    let lastItem = null;
-    availableItems.forEach((item: QuestionToolboxItem) => {
-      const needSeparator = lastItem && item.category != lastItem.category;
-      const action = this.creator.createIActionBarItemByClass(item, needSeparator, (questionType: string, json?: any) => {
-        this.convertQuestion(questionType, json, defaultJsons);
-        this.getActionById("convertTo").hidePopup();
-      });
-      lastItem = item;
-      newItems.push(action);
-    });
-    listModel.setItems(newItems);
-    return newItems;
-  }
-  private get currentType(): string {
-    return this.surveyElement.getType();
-  }
-
   private createConvertToAction() {
-    const actions = this.getConvertToTypesActions();
-    const allowChangeType: boolean = actions.length > 0;
-    const selItem = this.getSelectedItem(actions, this.currentType);
-    let actionTitle = !!selItem ? selItem.title : editorLocalization.getString("qt." + this.currentType);
+    // const actions = this.getConvertToTypesActions();
+    // const allowChangeType: boolean = actions.length > 0;
+    // const selItem = this.getSelectedItem(actions, this.currentType);
+    let actionTitle = editorLocalization.getString("qt." + this.element.getType());
 
     const actionData: IAction = {
       id: "convertTo",
-      enabled: allowChangeType,
+      enabled: true,
       visibleIndex: 0,
       title: actionTitle,
       iconName: "icon-chevron_16x16"
     };
     const newAction = this.createDropdownModel({
       actionData: actionData,
-      items: actions,
+      items: [],
       updateListModel: (listModel: ListModel) => {
-        const newItems = this.getConvertToTypesActions(listModel);
+        // const newItems = this.getConvertToTypesActions(listModel);
 
-        listModel.selectedItem = this.getSelectedItem(newItems, this.currentType);
+        // listModel.selectedItem = this.getSelectedItem(newItems, this.currentType);
 
-        newItems.forEach(action => {
-          const toolboxItem = (this.creator.toolbox.getItemByName(action.id) as QuestionToolboxItem);
-          if (action.items?.length > 0) {
-            let selectedSubItem = undefined;
-            action.items.forEach(item => {
-              const elementType = this.element.getType();
-              const toolboxSubitem = toolboxItem.getSubitemByName(item.id);
-              const json = toolboxSubitem.json || {};
-              if (item.id == elementType || json.type == elementType) {
-                if (!listModel.selectedItem) selectedSubItem = item;
-                if (this.jsonIsCorresponded(json)) selectedSubItem = item;
-              }
-            });
-            if (selectedSubItem) {
-              const _listModel = action.popupModel.contentComponentData.model;
-              _listModel.selectedItem = selectedSubItem;
-              listModel.selectedItem = action;
-            }
-          }
-        });
+        // newItems.forEach(action => {
+        //   const toolboxItem = (this.creator.toolbox.getItemByName(action.id) as QuestionToolboxItem);
+        //   if (action.items?.length > 0) {
+        //     let selectedSubItem = undefined;
+        //     action.items.forEach(item => {
+        //       const elementType = this.element.getType();
+        //       const toolboxSubitem = toolboxItem.getSubitemByName(item.id);
+        //       const json = toolboxSubitem.json || {};
+        //       if (item.id == elementType || json.type == elementType) {
+        //         if (!listModel.selectedItem) selectedSubItem = item;
+        //         if (this.jsonIsCorresponded(json)) selectedSubItem = item;
+        //       }
+        //     });
+        //     if (selectedSubItem) {
+        //       const _listModel = action.popupModel.contentComponentData.model;
+        //       _listModel.selectedItem = selectedSubItem;
+        //       listModel.selectedItem = action;
+        //     }
+        //   }
+        // });
       }
     });
     newAction.iconName = <any>new ComputedUpdater(() => {
@@ -464,15 +382,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     });
     newAction.disableHide = true;
     return newAction;
-  }
-
-  private jsonIsCorresponded(json: any) {
-    let jsonIsCorresponded = true;
-    const objJson = this.element.toJSON();
-    Object.keys(json).forEach(p => {
-      if (p != "type" && !Helpers.isTwoValueEquals(json[p], objJson[p])) jsonIsCorresponded = false;
-    });
-    return jsonIsCorresponded;
   }
 
   private createConvertInputType() {
@@ -552,7 +461,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       cssClass: "svc-creator-popup",
       onShow: () => {
         const listModel = newAction.popupModel.contentComponentData.model;
-        options.updateListModel(listModel);
+        this.questionTypeSelector.updateQuestionTypeListModel(listModel);
       },
     });
     newAction.popupModel.displayMode = this.creator.isTouch ? "overlay" : "popup";
