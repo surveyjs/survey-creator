@@ -1,4 +1,5 @@
-<div class="spg-boolean-switch" data-bind="click: function() { question.value = !question.value; }">
+<div class="spg-boolean-switch" role="checkbox"
+  data-bind="click: function() { question.value = !question.value; }, attr: {id: question.inputId, 'aria-required': question.ariaRequired, 'aria-label': question.ariaLabel, 'aria-invalid': question.ariaInvalid, 'aria-errormessage': question.ariaErrormessage}">
   <div class="spg-boolean-switch__button" tabindex="0"
     data-bind="css: { 'spg-boolean-switch__button--checked': question.koValue }">
     <div class="spg-boolean-switch__thumb">

@@ -6,7 +6,13 @@ export class SurveyQuestionBooleanSwitch extends SurveyQuestionElementBase {
   protected renderElement(): JSX.Element {
     return (
       <div className="spg-boolean-switch" onClick={() => this.questionBase.value = !this.questionBase.value}>
-        <div className={"spg-boolean-switch__button" + (this.questionBase.value ? " spg-boolean-switch__button--checked" : "")} tabIndex={0}>
+        <div className={"spg-boolean-switch__button" + (this.questionBase.value ? " spg-boolean-switch__button--checked" : "")} tabIndex={0}
+          role="checkbox"
+          aria-required={this.questionBase.ariaRequired}
+          aria-label={this.questionBase.ariaLabel}
+          aria-invalid={this.questionBase.ariaInvalid}
+          aria-errormessage={this.questionBase.ariaErrormessage}
+        >
           <div className="spg-boolean-switch__thumb">
             <div className="spg-boolean-switch__thumb-circle spg-boolean-switch__thumb--left"></div>
           </div>
