@@ -108,6 +108,8 @@ export var enStrings = {
     redo: "Redo",
     undoTooltip: "Undo last change",
     redoTooltip: "Redo the change",
+    expandAllTooltip: "Expand All",
+    collapseAllTooltip: "Collapse All",
     showMoreChoices: "Show more",
     showLessChoices: "Show less",
     copy: "Copy",

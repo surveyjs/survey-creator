@@ -106,6 +106,8 @@ var simplifiedChineseTranslation = {
     redo: "恢复",
     undoTooltip: "撤消上次更改",
     redoTooltip: "重做更改",
+    expandAllTooltip: "全部展开",
+    collapseAllTooltip: "全部折叠",
     showMoreChoices: "显示更多",
     showLessChoices: "显示更少",
     copy: "复制",

@@ -106,6 +106,8 @@ export var bgStrings = {
     redo: "Повтаряне",
     undoTooltip: "Отмяна на последната промяна",
     redoTooltip: "Повтаряне на последната промяна",
+    expandAllTooltip: "Разширете всички",
+    collapseAllTooltip: "Свиване на всички",
     showMoreChoices: "Покажи повече.",
     showLessChoices: "Покажи по-малко.",
     copy: "Копиране",

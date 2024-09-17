@@ -1345,6 +1345,17 @@ test("choices values check on unique", () => {
   cellQuestion.value = "item4";
   expect(cellQuestion.errors).toHaveLength(0);
 });
+test("Do not set non-unique duplicated values, Bug#5891", () => {
+  const question = new QuestionDropdownModel("q1");
+  question.choices = ["item1", "item2", "item3"];
+  const propertyGrid = new PropertyGridModelTester(question);
+  const matrix = <QuestionMatrixDynamicModel>propertyGrid.survey.getQuestionByName("choices");
+  const rows = matrix.visibleRows;
+  rows[1].getQuestionByColumnName("value").value = "item1";
+  expect(question.choices[1].value).toBe("item2");
+  rows[1].getQuestionByColumnName("text").value = "abc";
+  expect(question.choices[1].value).toBe("item2");
+});
 test("choices values check on unique when value is the detail panel", () => {
   const prop = Serializer.findProperty("itemvalue", "value");
   const prevShowMode = prop.showMode;

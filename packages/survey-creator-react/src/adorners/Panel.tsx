@@ -12,6 +12,7 @@ import {
   Popup
 } from "survey-react-ui";
 import { QuestionAdornerComponent, QuestionAdornerComponentProps } from "./Question";
+import { AddQuestionButtonComponent } from "../AddQuestionButton";
 
 export class PanelAdornerComponent extends QuestionAdornerComponent {
   renderElementPlaceholder(): JSX.Element {
@@ -55,40 +56,9 @@ export class PanelAdornerComponent extends QuestionAdornerComponent {
             <Popup model={this.model.questionTypeSelectorModel.popupModel}></Popup>
           </div>
           <div className="svc-panel__add-new-question-wrapper">
-            {attachKey2click(<div
-              className="svc-panel__add-new-question svc-action-button"
-              onClick={(e) => {
-                e.stopPropagation();
-                this.model.addNewQuestion();
-              }}
-            >
-              <SvgIcon
-                className={"svc-panel__add-new-question-icon"}
-                iconName={"icon-add_24x24"}
-                size={24}
-              ></SvgIcon>
-              <span className="svc-text svc-text--normal svc-text--bold">
-                {this.model.addNewQuestionText}
-              </span>
-
-            </div>, undefined)}
-            {attachKey2click(<button
-              type="button"
-              onClick={(e) => {
-                e.stopPropagation();
-                this.model.questionTypeSelectorModel.action();
-              }}
-              className="svc-panel__question-type-selector"
-              title={this.model.addNewQuestionText}
-            >
-              <span className="svc-panel__question-type-selector-icon">
-                <SvgIcon
-                  iconName={this.model.questionTypeSelectorModel.iconName}
-                  size={24}
-                ></SvgIcon>
-              </span>
-            </button>)}
-          </div></div>) : null}
+            <AddQuestionButtonComponent item={{ data: this.model } as any} buttonClass={"svc-action-button"} renderPopup={false} />
+          </div>
+        </div>) : null}
 
       {super.renderFooter()}
     </React.Fragment>);

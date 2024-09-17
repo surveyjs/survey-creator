@@ -101,3 +101,16 @@
   overflow: hidden;
   height: 86px;
 }
+
+[dir="rtl"],
+[style*="direction:rtl"],
+[style*="direction: rtl"],
+.svc-creator__side-bar--left {
+  .svc-property-grid-placeholder__image {
+    transform: rotateY(180deg);
+  }
+}
+
+.svc-creator__side-bar--left .svc-property-grid-placeholder__content {
+  flex-direction: row-reverse;
+}

@@ -106,6 +106,8 @@ export var nbStrings = {
     redo: "Gjenta",
     undoTooltip: "Angre siste endring",
     redoTooltip: "Gjør om siste endring",
+    expandAllTooltip: "Utvid alle",
+    collapseAllTooltip: "Skjul alle",
     showMoreChoices: "Vis mer",
     showLessChoices: "Vis mindre",
     copy: "Kopier",

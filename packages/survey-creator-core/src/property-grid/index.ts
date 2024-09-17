@@ -278,6 +278,10 @@ export var PropertyGridEditorCollection = {
     }
     var row = options.row;
     if (!!row) {
+      const questions = row.questions;
+      for(let i = 0; i < questions.length; i ++) {
+        if(questions[i].errors.length > 0) return;
+      }
       var cellQuestion = row.getQuestionByName(options.columnName);
       if (!!cellQuestion) {
         row.runCondition({}, { question: cellQuestion });

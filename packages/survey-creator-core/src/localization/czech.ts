@@ -106,6 +106,8 @@ export var czStrings = {
     redo: "Opětovně vrátit",
     undoTooltip: "Vrátit poslední změnu",
     redoTooltip: "Znovu provést změnu",
+    expandAllTooltip: "Rozbalit vše",
+    collapseAllTooltip: "Sbalit vše",
     showMoreChoices: "Zobrazit více",
     showLessChoices: "Zobrazit méně",
     copy: "Kopírovat",

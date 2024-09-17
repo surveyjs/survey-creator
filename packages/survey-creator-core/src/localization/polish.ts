@@ -106,6 +106,8 @@ var polishStrings = {
     redo: "Ponów",
     undoTooltip: "Cofanie ostatniej zmiany",
     redoTooltip: "Ponowne wprowadzanie zmian",
+    expandAllTooltip: "Rozwiń wszystko",
+    collapseAllTooltip: "Zwiń wszystko",
     showMoreChoices: "Pokaż więcej",
     showLessChoices: "Pokaż mniej",
     copy: "Kopiować",

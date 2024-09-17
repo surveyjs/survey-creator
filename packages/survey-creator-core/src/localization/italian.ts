@@ -106,6 +106,8 @@ var italianTranslation = {
     redo: "Ripristina",
     undoTooltip: "Annulla l'ultima modifica",
     redoTooltip: "Ripristina l'ultima modifica",
+    expandAllTooltip: "Espandi tutto",
+    collapseAllTooltip: "Comprimi tutto",
     showMoreChoices: "Mostra di più",
     showLessChoices: "Mostra meno",
     copy: "Copia",
