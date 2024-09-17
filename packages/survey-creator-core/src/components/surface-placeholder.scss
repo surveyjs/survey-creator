@@ -91,3 +91,36 @@
   font-weight: var(--ctr-default-font-weight, 400);
   align-self: stretch;
 }
+
+.svc-designer__placeholder-container {
+  padding-bottom: calcSize(8);
+}
+
+.svc-logic-tab--empty> :last-child {
+  margin-bottom: calcSize(12);
+}
+
+.svc-test-tab--empty,
+.svc-translation-tab--empty {
+  .svc-surface-placeholder {
+    padding-bottom: calcSize(12);
+  }
+}
+
+.svc-creator--mobile {
+  .svc-designer__placeholder-container {
+    padding-bottom: calcSize(2);
+  }
+
+  .svc-logic-tab--empty> :last-child {
+    margin-bottom: calcSize(2);
+  }
+
+  .svc-test-tab--empty,
+  .svc-translation-tab--empty {
+    .svc-surface-placeholder {
+      padding-bottom: calcSize(2);
+    }
+  }
+
+}
