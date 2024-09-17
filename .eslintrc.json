@@ -164,6 +164,6 @@
 			"off",
 			"windows"
 		],
- 		"react/no-is-mounted": "off"
+		"react/no-is-mounted": "off"
 	}
 }

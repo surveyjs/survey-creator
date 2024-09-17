@@ -618,7 +618,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       this.creator.fastCopyQuestion(this.surveyElement, true);
     }, 1);
   }
-  addNewQuestion(): void {
+  addNewQuestion = () => {
     this.creator.addNewQuestionInPage((type) => { }, this.surveyElement instanceof PanelModelBase ? this.surveyElement : null,
       this.currentAddQuestionType || settings.designer.defaultAddQuestionType);
   }
