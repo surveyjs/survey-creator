@@ -134,6 +134,12 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     if (this.renderedCollapsed) {
       result += " svc-question__content--collapsed";
     }
+    if ((this.surveyElement.isPanel && !this.surveyElement.hasTitle) || (!this.surveyElement.isPanel && (this.surveyElement as Question).getTitleLocation() === "hidden")) {
+      result += " svc-question__content--title-hidden";
+    }
+    if ((this.surveyElement as Question).hasTitleOnBottom) {
+      result += " svc-question__content--title-bottom";
+    }
 
     if (this.isDragMe) {
       result += " svc-question__content--dragged";
