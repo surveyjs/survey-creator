@@ -1792,7 +1792,7 @@ test("Show/hide property grid", (): any => {
   settingsBarItem.action();
   expect(creator.selectedElementName).toEqual("survey");
 
-  const hidePropertyModelBarItem = creator.sidebar.toolbar.actions.filter(item => { return item.id === "svd-grid-hide"; })[0];
+  const hidePropertyModelBarItem = creator.sidebar.header.toolbar.actions.filter(item => { return item.id === "svd-grid-hide"; })[0];
   expect(hidePropertyModelBarItem).toBeTruthy();
   hidePropertyModelBarItem.action();
   expect(creator.showSidebar).toBeFalsy();
@@ -1836,7 +1836,7 @@ test("Show/hide property grid and settings button active state", (): any => {
   expect(creator.selectedElementName).toEqual("survey");
   expect(settingsBarItem.active).toBeTruthy();
 
-  const hidePropertyModelBarItem = creator.sidebar.toolbar.actions.filter((item) => { return item.id === "svd-grid-hide"; })[0];
+  const hidePropertyModelBarItem = creator.sidebar.header.toolbar.actions.filter((item) => { return item.id === "svd-grid-hide"; })[0];
   expect(hidePropertyModelBarItem).toBeTruthy();
   hidePropertyModelBarItem.action();
   expect(creator.showSidebar).toBeFalsy();
@@ -1878,7 +1878,7 @@ test("set showSidebar is equivalent to action", (): any => {
 
   creator.sidebar.collapsedManually = false;
   creator.sidebar.expandedManually = false;
-  const hidePropertyModelBarItem = creator.sidebar.toolbar.actions.filter((item) => { return item.id === "svd-grid-hide"; })[0];
+  const hidePropertyModelBarItem = creator.sidebar.header.toolbar.actions.filter((item) => { return item.id === "svd-grid-hide"; })[0];
   expect(hidePropertyModelBarItem).toBeTruthy();
   hidePropertyModelBarItem.action();
   expect(creator.showSidebar).toBeFalsy();
@@ -1902,7 +1902,7 @@ test("Show/hide property grid by collapse/expand actions", (): any => {
     ]
   };
   const expandBarItem = creator.toolbarItems.filter((item) => { return item.id === "svd-grid-expand"; })[0];
-  const hidePropertyModelBarItem = creator.sidebar.toolbar.actions.filter((item) => { return item.id === "svd-grid-hide"; })[0];
+  const hidePropertyModelBarItem = creator.sidebar.header.toolbar.actions.filter((item) => { return item.id === "svd-grid-hide"; })[0];
 
   expect(creator.showSidebar).toBeTruthy();
   expect(expandBarItem).toBeTruthy();
@@ -1936,7 +1936,7 @@ test("Hide property grid is always visible in flyoutMode", (): any => {
       }
     ]
   };
-  const hidePropertyModelBarItem = creator.sidebar.toolbar.actions.filter((item) => { return item.id === "svd-grid-hide"; })[0];
+  const hidePropertyModelBarItem = creator.sidebar.header.toolbar.actions.filter((item) => { return item.id === "svd-grid-hide"; })[0];
 
   expect(creator.showSidebar).toBeTruthy();
   expect(creator.sidebar.visible).toBeTruthy();
@@ -4589,7 +4589,7 @@ test("creator.onSurveyInstanceCreated from property Grid", () => {
   const selectedTypes = new Array<string>();
   creator.onSurveyInstanceCreated.add((sender, options) => {
     if (options.area === "property-grid") {
-      if(options.obj) {
+      if (options.obj) {
         selectedTypes.push(options.obj.getType());
       }
     }
