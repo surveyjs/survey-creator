@@ -14,7 +14,7 @@ test("Sidebar tabs with showTranslationTab: true", () => {
 
 test("Sidebar: activate tab change", () => {
   const creator = new CreatorTester({ showTranslationTab: true });
-  expect(creator.sidebar.headerText).toEqual(undefined);
+  expect(creator.sidebar.header.title).toEqual(undefined);
   expect(creator.sidebar.activePage).toEqual("propertyGrid");
   expect(creator.sidebar.pages[0].visible).toEqual(true); // propertyGrid
   expect(creator.sidebar.pages[1].visible).toEqual(false); // toolbox
@@ -22,7 +22,7 @@ test("Sidebar: activate tab change", () => {
   expect(creator.sidebar.pages[3].visible).toEqual(false); // translation
 
   creator.sidebar.activePage = "translation";
-  expect(creator.sidebar.headerText).toEqual("Language Settings");
+  expect(creator.sidebar.header.title).toEqual("Language Settings");
   expect(creator.sidebar.activePage).toEqual("translation");
   expect(creator.sidebar.pages[0].visible).toEqual(false); // propertyGrid
   expect(creator.sidebar.pages[1].visible).toEqual(false); // toolbox
@@ -30,7 +30,7 @@ test("Sidebar: activate tab change", () => {
   expect(creator.sidebar.pages[3].visible).toEqual(true); // translation
 
   creator.sidebar.activePage = "toolbox";
-  expect(creator.sidebar.headerText).toEqual(undefined);
+  expect(creator.sidebar.header.title).toEqual(undefined);
   expect(creator.sidebar.activePage).toEqual("toolbox");
   expect(creator.sidebar.pages[0].visible).toEqual(false); // propertyGrid
   expect(creator.sidebar.pages[1].visible).toEqual(true); // toolbox
