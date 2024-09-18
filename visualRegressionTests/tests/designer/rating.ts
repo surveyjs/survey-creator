@@ -130,7 +130,7 @@ test("Multi row rating adorner", async (t) => {
     const question2 = Selector("div[data-name=question2]");
     await takeElementScreenshot("rating-multiline-text.png", question2, t, comparer);
 
-    await t.resizeWindow(550, 900);
+    await t.resizeWindow(549, 900);
     await takeElementScreenshot("rating-multiline-mobile.png", question, t, comparer);
     await takeElementScreenshot("rating-multiline-text-mobile.png", question2, t, comparer);
 
@@ -157,7 +157,7 @@ test("Multi row rating adorner smileys", async (t) => {
     const question2 = Selector("div[data-name=question2]");
     await takeElementScreenshot("rating-multiline-smileys-text.png", question2, t, comparer);
 
-    await t.resizeWindow(550, 900);
+    await t.resizeWindow(549, 900);
     await takeElementScreenshot("rating-multiline-smileys-mobile.png", question, t, comparer);
     await takeElementScreenshot("rating-multiline-smileys-text-mobile.png", question2, t, comparer);
 
@@ -184,7 +184,7 @@ test("Multi row rating adorner stars", async (t) => {
     const question2 = Selector("div[data-name=question2]");
     await takeElementScreenshot("rating-multiline-stars-text.png", question2, t, comparer);
 
-    await t.resizeWindow(550, 900);
+    await t.resizeWindow(549, 900);
     await takeElementScreenshot("rating-multiline-stars-mobile.png", question, t, comparer);
     await takeElementScreenshot("rating-multiline-stars-text-mobile.png", question2, t, comparer);
 
