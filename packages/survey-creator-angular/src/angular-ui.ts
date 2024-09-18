@@ -7,6 +7,7 @@ export * from "./tabbed-menu/tabbed-menu/tabbed-menu.component";
 export * from "./tabbed-menu/tabbed-menu/tabbed-menu-item-wrapper.component";
 export * from "./side-bar/side-bar.component";
 export * from "./side-bar/side-bar-page.component";
+export * from "./side-bar/side-bar-header.component";
 
 export * from "./tab-control/tab-button.component";
 export * from "./tab-control/tabs.component";

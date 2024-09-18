@@ -57,8 +57,8 @@ test("showOneCategoryInPropertyGrid: showPlaceholder into property grid if surve
   designerPlugin.showOneCategoryInPropertyGrid = true;
 
   expect(creator.sidebar.activePage).toEqual("propertyGridPlaceholder");
-  expect(creator.sidebar.headerComponentName).toEqual("svc-side-bar-property-grid-placeholder-header");
-  expect(creator.sidebar.headerComponentData).toEqual(designerPlugin["propertyGridPlaceholderPage"]);
+  expect(creator.sidebar.header.componentName).toEqual("svc-side-bar-property-grid-placeholder-header");
+  expect(creator.sidebar.header.componentData).toEqual(designerPlugin["propertyGridPlaceholderPage"]);
 
   let tabs = designerPlugin["tabControlModel"].topToolbar.actions;
   expect(tabs.length).toBe(10);
@@ -67,8 +67,8 @@ test("showOneCategoryInPropertyGrid: showPlaceholder into property grid if surve
 
   creator.clickToolboxItem({ type: "text" });
   expect(creator.sidebar.activePage).toEqual("propertyGrid");
-  expect(creator.sidebar.headerComponentName).toEqual("svc-side-bar-property-grid-header");
-  expect(creator.sidebar.headerComponentData).toEqual(designerPlugin.propertyGridViewModel.objectSelectionAction);
+  expect(creator.sidebar.header.componentName).toEqual("svc-side-bar-property-grid-header");
+  expect(creator.sidebar.header.componentData).toEqual(designerPlugin.propertyGridViewModel.objectSelectionAction);
   expect(designerPlugin.propertyGridViewModel.objectSelectionAction.title).toEqual("question1");
   expect(designerPlugin.propertyGridViewModel.objectSelectionAction.tooltip).toEqual("General");
   tabs = designerPlugin["tabControlModel"].topToolbar.actions;
@@ -85,8 +85,8 @@ test("showOneCategoryInPropertyGrid: tab control", () => {
   designerPlugin.showOneCategoryInPropertyGrid = true;
 
   expect(creator.sidebar.activePage).toEqual("propertyGrid");
-  expect(creator.sidebar.headerComponentName).toEqual("svc-side-bar-property-grid-header");
-  expect(creator.sidebar.headerComponentData).toEqual(designerPlugin.propertyGridViewModel.objectSelectionAction);
+  expect(creator.sidebar.header.componentName).toEqual("svc-side-bar-property-grid-header");
+  expect(creator.sidebar.header.componentData).toEqual(designerPlugin.propertyGridViewModel.objectSelectionAction);
   expect(designerPlugin.propertyGridViewModel.objectSelectionAction.title).toEqual("Survey");
   expect(designerPlugin.propertyGridViewModel.objectSelectionAction.tooltip).toEqual("General");
   const tabs = designerPlugin["tabControlModel"].topToolbar.actions;

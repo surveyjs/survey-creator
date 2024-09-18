@@ -37,6 +37,7 @@ export * from "../TabbedMenu";
 export * from "../Navigation";
 export * from "../tab-control/TabControl";
 export * from "../tab-control/TabButton";
+export * from "../SideBarHeader";
 export * from "../SideBarPropertyGridHeader";
 export * from "../SideBarPropertyGridPlaceholderHeader";
 export * from "../SideBar";

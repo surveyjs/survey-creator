@@ -231,13 +231,13 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       this.updateTabControlActions();
       this.creator.sidebar.sideAreaComponentName = "svc-tab-control";
       this.creator.sidebar.sideAreaComponentData = this.tabControlModel;
-      this.creator.sidebar.headerComponentName = "svc-side-bar-property-grid-placeholder-header";
-      this.creator.sidebar.headerComponentData = this.propertyGridTab;
+      this.creator.sidebar.header.componentName = "svc-side-bar-property-grid-placeholder-header";
+      this.creator.sidebar.header.componentData = this.creator.sidebar.header;
     } else {
       this.creator.sidebar.sideAreaComponentName = "";
       this.creator.sidebar.sideAreaComponentData = undefined;
-      this.creator.sidebar.headerComponentName = "";
-      this.creator.sidebar.headerComponentData = undefined;
+      this.creator.sidebar.header.componentName = "";
+      this.creator.sidebar.header.componentData = undefined;
     }
   }
 
@@ -364,7 +364,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
           action: () => {
             this.creator.sidebar.expandSidebar();
             this.propertyGrid.survey.currentPage = p;
-            this.propertyGridTab.subTitle = p.title;
+            this.creator.sidebar.header.subTitle = p.title;
             pgTabs.forEach(i => i.active = false);
             action.active = true;
           }
@@ -372,7 +372,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
         return action;
       });
       this.tabControlModel.topToolbar.setItems(pgTabs);
-      this.propertyGridTab.subTitle = this.propertyGrid.survey.currentPage.title;
+      this.creator.sidebar.header.subTitle = this.propertyGrid.survey.currentPage.title;
     }
   }
 
@@ -465,8 +465,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this._advancedModeValue = !!this.propertyGrid.survey.getQuestionByName("advancedMode")?.value;
     this.creator.sidebar.sideAreaComponentName = undefined;
     this.creator.sidebar.sideAreaComponentData = undefined;
-    this.creator.sidebar.headerComponentName = undefined;
-    this.creator.sidebar.headerComponentData = undefined;
+    this.creator.sidebar.header.reset();
     this.propertyGridTab.visible = false;
     this.testAgainAction.visible = false;
     this.invisibleToggleAction && (this.invisibleToggleAction.visible = false);

@@ -81,6 +81,7 @@ export * from "../svgbundle";
 export * from "../textWorker";
 export * from "../toolbox";
 export * from "../components/side-bar/side-bar-model";
+export * from "../components/side-bar/side-bar-header-model";
 export * from "../components/side-bar/side-bar-page-model";
 export * from "../components/side-bar/tab-control-model";
 export * from "../components/switcher/switcher";

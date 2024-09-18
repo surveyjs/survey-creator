@@ -46,6 +46,7 @@ export * from "../property-panel/object-selector";
 export * from "../property-panel/search";
 export * from "../property-panel/property-grid";
 export * from "../side-bar/side-bar";
+export * from "../side-bar/side-bar-header";
 export * from "../side-bar/side-bar-page";
 export * from "../tab-control/property-grid-placeholder";
 export * from "../tab-control/property-grid-placeholder-header";
