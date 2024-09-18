@@ -51,7 +51,7 @@
           ></SvComponent>
         </div>
       </div>
-      <div v-if="!adorner.element.hasTitle" :class="adorner.cssCollapsedHiddenHeader">
+      <div v-if="adorner.showHiddenTitle" :class="adorner.cssCollapsedHiddenHeader">
         <div :class="adorner.cssCollapsedHiddenTitle">
           <SvComponent v-if="!!adorner.element.title" :is="'survey-string'" :locString="adorner.element.locTitle" />
           <span v-else class="svc-fake-title">{{adorner.element.name}}</span>

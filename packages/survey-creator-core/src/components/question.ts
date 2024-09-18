@@ -294,6 +294,9 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     return false;
   }
 
+  public get showHiddenTitle() {
+    return !this.element.hasTitle && this.element.isInteractiveDesignElement;
+  }
   public get placeholderText(): string {
     if (this.surveyElement instanceof QuestionHtmlModel) {
       return getLocString("ed.htmlPlaceHolder");
