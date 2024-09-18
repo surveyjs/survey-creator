@@ -3,12 +3,18 @@ import { QuestionToolbox, QuestionToolboxItem } from "./toolbox";
 import { ICreatorOptions } from "./creator-options";
 import { SurveyHelper } from "./survey-helper";
 import { QuestionConverter } from "./questionconverter";
+
+interface ICreatorQuestionConverter {
+  maxNestedPanels?: number;
+  toolbox: QuestionToolbox;
+  convertCurrentQuestion(string, any);
+}
 export class QuestionTypeSelectorBase {
-  constructor(private creatorOptions: ICreatorOptions, protected toolbox: QuestionToolbox) {
+  constructor(protected creatorOptions: ICreatorQuestionConverter) {
 
   }
   public getAvailableToolboxItems(element?: SurveyElement, isAddNew: boolean = true): Array<QuestionToolboxItem> {
-    const res: Array<QuestionToolboxItem> = [...this.toolbox.items];
+    const res: Array<QuestionToolboxItem> = this.creatorOptions.toolbox.items.slice();
     const maxNestedPanels = this.creatorOptions.maxNestedPanels || -1;
     if (!element || maxNestedPanels < 0) return res;
     if (!isAddNew && element.isPanel) return res;
@@ -27,8 +33,8 @@ export class QuestionTypeSelectorBase {
   }
 }
 export class QuestionTypeSelector extends QuestionTypeSelectorBase {
-  constructor(creatorOptions: ICreatorOptions, toolbox: QuestionToolbox, private page?: PageModel) {
-    super(creatorOptions, toolbox);
+  constructor(creatorOptions: ICreatorQuestionConverter, private page?: PageModel) {
+    super(creatorOptions);
   }
   protected onSelectQuestionType(questionType: string, json: any, defaultJsons: any) {
 
@@ -38,8 +44,8 @@ export class QuestionTypeConverter extends QuestionTypeSelectorBase {
   /**
    *
    */
-  constructor(creatorOptions: ICreatorOptions, toolbox: QuestionToolbox, private element?: SurveyElement) {
-    super(creatorOptions, toolbox);
+  constructor(creatorOptions: ICreatorQuestionConverter, private element?: SurveyElement) {
+    super(creatorOptions);
   }
 
   private getConvertToTypes(): Array<QuestionToolboxItem> {
@@ -55,7 +61,7 @@ export class QuestionTypeConverter extends QuestionTypeSelectorBase {
 
     const res: Array<QuestionToolboxItem> = [];
     convertClasses.forEach((className: string) => {
-      const items = this.toolbox.items.filter(item => item.name == className);
+      const items = this.creatorOptions.toolbox.items.filter(item => item.name == className);
       if (Array.isArray(items) && items.length > 0) {
         const item = items[0];
         res.push(item);
@@ -121,38 +127,58 @@ export class QuestionTypeConverter extends QuestionTypeSelectorBase {
         });
       }
     });
-    //this.creator.convertCurrentQuestion(type, newJson);
+    this.creatorOptions.convertCurrentQuestion(type, newJson);
   }
 
-  public updateQuestionTypeListModel(listModel: ListModel): Array<IAction> {
+  public updateQuestionTypeListModel(listModel: ListModel) {
+    this.updateQuestionTypeOrSubtypeListModel(listModel, false);
+  }
+  public updateQuestionSubtypeListModel(listModel: ListModel) {
+    this.updateQuestionTypeOrSubtypeListModel(listModel, true);
+  }
+
+  private updateQuestionTypeOrSubtypeListModel(listModel: ListModel, subtypeOnly: boolean) {
     const availableItems = this.getConvertToTypes();
     const defaultJsons = this.buildDefaultJsonMap(availableItems);
     const newItems: Array<IAction> = [];
     let lastItem: QuestionToolboxItem;
+    let selectedAction: IAction;
+    let selectedSubaction: IAction = undefined;
+    let selectedSubactions = undefined;
     availableItems.forEach((item: QuestionToolboxItem) => {
       const needSeparator = lastItem && item.category != lastItem.category;
       const action = this.createIActionBarItemByClass(item, needSeparator, defaultJsons);
-      if (this.toolboxItemIsCorresponded(item)) listModel.selectedItem = action;
-      if (item.items?.length > 0 && this.toolbox.showSubitems) {
-        let selectedSubaction = undefined;
+      if (this.toolboxItemIsCorresponded(item)) selectedAction = action;
+      if (item.items?.length > 0 && this.creatorOptions.toolbox.showSubitems) {
         const subactions = [];
+        let selectedSubactionLocal: IAction = undefined;
         item.items.forEach(subitem => {
-          const subaction = this.createIActionBarItemByClass(subitem, needSeparator, defaultJsons);
-          if (this.toolboxItemIsCorresponded(subitem)) selectedSubaction = action;
+          const subaction = this.createIActionBarItemByClass(subitem, false, defaultJsons);
+          if (this.toolboxItemIsCorresponded(subitem)) selectedSubactionLocal = subitem;
           subactions.push(subaction);
         });
         action.setSubItems({ items: subactions });
-        if (selectedSubaction) {
-          const _listModel = action.popupModel.contentComponentData.model;
-          _listModel.selectedItem = selectedSubaction;
-          listModel.selectedItem = action;
+        if (selectedSubactionLocal) {
+          selectedAction = action;
+          selectedSubaction = selectedSubactionLocal;
+          selectedSubactions = subactions;
         }
       }
       lastItem = item;
       newItems.push(action);
     });
-    listModel.setItems(newItems);
-    return newItems;
+
+    if (subtypeOnly) {
+      if (selectedSubaction) {
+        listModel.setItems(selectedSubactions);
+        listModel.selectedItem = selectedSubaction;
+      }
+    } else {
+      const _listModel = selectedAction?.popupModel?.contentComponentData.model;
+      if (_listModel) _listModel.selectedItem = selectedSubaction;
+      listModel.setItems(newItems);
+      listModel.selectedItem = selectedAction;
+    }
   }
 
   protected onSelectQuestionType(questionType: string, json: any, defaultJsons: any) {
@@ -172,5 +198,4 @@ export class QuestionTypeConverter extends QuestionTypeSelectorBase {
     };
     return action;
   }
-
 }

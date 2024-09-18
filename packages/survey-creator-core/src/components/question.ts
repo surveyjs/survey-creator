@@ -27,7 +27,7 @@ import {
 import { SurveyCreatorModel } from "../creator-base";
 import { editorLocalization, getLocString } from "../editorLocalization";
 import { QuestionConverter } from "../questionconverter";
-import { QuestionTypeSelector } from "../question-type-selector";
+import { QuestionTypeConverter } from "../question-type-selector";
 import { IPortableDragEvent, IPortableEvent, IPortableMouseEvent } from "../utils/events";
 import {
   isPropertyVisible,
@@ -55,7 +55,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   placeholderComponentData: any;
 
   private dragOrClickHelper: DragOrClickHelper;
-  private questionTypeSelector: QuestionTypeSelector;
+  private questionTypeConverter: QuestionTypeConverter;
   public topActionContainer: ActionContainer;
   constructor(
     creator: SurveyCreatorModel,
@@ -63,7 +63,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     public templateData: SurveyTemplateRendererTemplateData
   ) {
     super(creator, surveyElement);
-    this.questionTypeSelector = new QuestionTypeSelector(this.creator, this.creator.toolbox, this.element);
+    this.questionTypeConverter = new QuestionTypeConverter(this.creator, this.element);
     this.actionContainer.sizeMode = "small";
     this.topActionContainer = new ActionContainer();
     this.topActionContainer.sizeMode = "small";
@@ -344,32 +344,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     const newAction = this.createDropdownModel({
       actionData: actionData,
       items: [],
-      updateListModel: (listModel: ListModel) => {
-        // const newItems = this.getConvertToTypesActions(listModel);
-
-        // listModel.selectedItem = this.getSelectedItem(newItems, this.currentType);
-
-        // newItems.forEach(action => {
-        //   const toolboxItem = (this.creator.toolbox.getItemByName(action.id) as QuestionToolboxItem);
-        //   if (action.items?.length > 0) {
-        //     let selectedSubItem = undefined;
-        //     action.items.forEach(item => {
-        //       const elementType = this.element.getType();
-        //       const toolboxSubitem = toolboxItem.getSubitemByName(item.id);
-        //       const json = toolboxSubitem.json || {};
-        //       if (item.id == elementType || json.type == elementType) {
-        //         if (!listModel.selectedItem) selectedSubItem = item;
-        //         if (this.jsonIsCorresponded(json)) selectedSubItem = item;
-        //       }
-        //     });
-        //     if (selectedSubItem) {
-        //       const _listModel = action.popupModel.contentComponentData.model;
-        //       _listModel.selectedItem = selectedSubItem;
-        //       listModel.selectedItem = action;
-        //     }
-        //   }
-        // });
-      }
+      updateListModel: (listModel: ListModel) => this.questionTypeConverter.updateQuestionTypeListModel(listModel)
     });
     newAction.iconName = <any>new ComputedUpdater(() => {
       if (newAction.mode === "small") {
@@ -393,18 +368,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     let propName = QuestionToolbox.getSubTypePropertyName(questionType);
     const questionSubType = this.surveyElement.getPropertyValue(propName);
 
-    const getAvailableTypes = () => {
-      return toolboxItem.items.map(item => {
-        return {
-          id: item.id,
-          title: item.title,
-          action: (item: any) => {
-            const newValue = this.getUpdatedPropertyValue(propName, item.id);
-            this.surveyElement.setPropertyValue(propName, newValue);
-          }
-        };
-      });
-    };
     const actionData: IAction = {
       id: "convertInputType",
       visibleIndex: 1,
@@ -414,26 +377,22 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     };
     const newAction = this.createDropdownModel({
       actionData: actionData,
-      items: getAvailableTypes(),
-      updateListModel: (listModel: ListModel) => {
-        const newItems = getAvailableTypes();
-        listModel.setItems(newItems);
-        listModel.selectedItem = this.getSelectedItem(newItems, this.surveyElement.getPropertyValue(propName));
-      }
+      items: [],
+      updateListModel: (listModel: ListModel) => this.questionTypeConverter.updateQuestionSubtypeListModel(listModel)
     });
 
-    this.surveyElement.registerFunctionOnPropertyValueChanged(
-      propName,
-      () => {
-        const item = this.getSelectedItem(getAvailableTypes(), this.surveyElement.getPropertyValue(propName));
-        if (!item) return;
-        const popup = newAction.popupModel;
-        const list = popup.contentComponentData.model;
-        list.selectedItem = item;
-        newAction.title = item.title;
-      },
-      "inputTypeAdorner"
-    );
+    // this.surveyElement.registerFunctionOnPropertyValueChanged(
+    //   propName,
+    //   () => {
+    //     const item = this.getSelectedItem(getAvailableTypes(), this.surveyElement.getPropertyValue(propName));
+    //     if (!item) return;
+    //     const popup = newAction.popupModel;
+    //     const list = popup.contentComponentData.model;
+    //     list.selectedItem = item;
+    //     newAction.title = item.title;
+    //   },
+    //   "inputTypeAdorner"
+    // );
     newAction.removePriority = 1;
     return newAction;
   }
@@ -461,7 +420,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       cssClass: "svc-creator-popup",
       onShow: () => {
         const listModel = newAction.popupModel.contentComponentData.model;
-        this.questionTypeSelector.updateQuestionTypeListModel(listModel);
+        options.updateListModel(listModel);
       },
     });
     newAction.popupModel.displayMode = this.creator.isTouch ? "overlay" : "popup";
