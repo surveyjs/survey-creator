@@ -53,7 +53,7 @@
           ></SvComponent>
         </div>
       </div>
-      <div v-if="!element.hasTitle" :class="model.cssCollapsedHiddenHeader">
+      <div v-if="model.showHiddenTitle" :class="model.cssCollapsedHiddenHeader">
         <div :class="model.cssCollapsedHiddenTitle">
           <SvComponent :is="'survey-string'" :locString="element.locTitle" />
         </div>
