@@ -5,6 +5,7 @@ import { assign } from "../../utils/utils";
 
 export class HeaderModel extends Base implements IHeader {
   height: number;
+  mobileHeight: number;
   inheritWidthFrom: "survey" | "container";
   textAreaWidth: number;
   overlapEnabled: boolean;
@@ -169,6 +170,18 @@ Serializer.addClass(
       name: "height",
       visibleIf: (obj) => obj.headerView === "advanced",
       default: 256,
+      onPropertyEditorUpdate: function (obj: any, editor: any) {
+        if (!!editor) {
+          editor.unit = "px";
+          editor.min = 0;
+        }
+      }
+    },
+    {
+      type: "spinedit",
+      name: "mobileHeight",
+      visibleIf: (obj) => obj.headerView === "advanced",
+      default: 0,
       onPropertyEditorUpdate: function (obj: any, editor: any) {
         if (!!editor) {
           editor.unit = "px";
