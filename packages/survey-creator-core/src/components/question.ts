@@ -190,7 +190,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     return (this.element)?.getPropertyValue("isMessagePanelVisible");
   }
   get cssCollapsedHiddenHeader(): string {
-    return (this.element as PanelModel | Question).cssHeader + " svc-question__header--hidden";
+    return (this.element as PanelModel | Question).cssHeader + " svc-element__header--hidden";
   }
   get cssCollapsedHiddenTitle(): string {
     return this.element.cssTitle + " svc-element__title--hidden";
@@ -294,6 +294,9 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     return false;
   }
 
+  public get showHiddenTitle() {
+    return !this.element.hasTitle && this.element.isInteractiveDesignElement;
+  }
   public get placeholderText(): string {
     if (this.surveyElement instanceof QuestionHtmlModel) {
       return getLocString("ed.htmlPlaceHolder");
