@@ -6,6 +6,7 @@ import TabbedMenu from "./tabbed-menu/TabbedMenu.vue";
 import TabbedMenuItemWrapper from "./tabbed-menu/TabbedMenuItemWrapper.vue";
 import TabbedMenuItem from "./tabbed-menu/TabbedMenuItem.vue";
 import SideBar from "./side-bar/SideBar.vue";
+import SideBarHeader from "./side-bar/SideBarHeader.vue";
 import SideBarPage from "./side-bar/SideBarPage.vue";
 import ObjectSelector from "./property-panel/ObjectSelector.vue";
 import PropertyGrid from "./property-panel/PropertyGrid.vue";
@@ -103,7 +104,7 @@ function registerComponents(
   registerComponent("svc-tabbed-menu-item", TabbedMenuItem);
 
   registerComponent("svc-side-bar", SideBar);
-
+  registerComponent("svc-side-bar-header", SideBarHeader);
   registerComponent("svc-side-bar-page", SideBarPage);
   registerComponent("svc-tabs", Tabs);
   registerComponent("svc-tab-control", TabControl);
