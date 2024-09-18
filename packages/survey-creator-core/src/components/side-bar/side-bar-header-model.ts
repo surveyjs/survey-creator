@@ -9,6 +9,13 @@ export class SidebarHeaderModel extends Base {
   @property() componentData: any;
   @property() componentName: string;
 
+  public get component(): string {
+    return this.componentName || "svc-side-bar-default-header";
+  }
+  public get componentModel(): string {
+    return this.componentData || this;
+  }
+
   public reset() {
     this.title = "";
     this.subTitle = "";

@@ -1,13 +1,13 @@
 import * as React from "react";
 import { Base } from "survey-core";
-import { SurveyElementBase, ReactElementFactory, SurveyActionBar } from "survey-react-ui";
 import { SidebarHeaderModel } from "survey-creator-core";
+import { SurveyElementBase, ReactElementFactory } from "survey-react-ui";
 
 interface ISideBarHeaderProps {
   model: SidebarHeaderModel;
 }
 
-export class SideBarHeader extends SurveyElementBase<ISideBarHeaderProps, any> {
+class SideBarHeader extends SurveyElementBase<ISideBarHeaderProps, any> {
   get model(): SidebarHeaderModel {
     return this.props.model;
   }
@@ -17,15 +17,16 @@ export class SideBarHeader extends SurveyElementBase<ISideBarHeaderProps, any> {
   }
 
   renderElement(): JSX.Element {
-    const title = !!this.model.title ? <div className="svc-side-bar__container-title">{this.model.title}</div> : null;
     return (
-      <div className="svc-side-bar__container-header">
-        <div className="svc-side-bar__container-actions">
-          <SurveyActionBar model={this.model.toolbar}></SurveyActionBar>
-        </div>
-        {title}
-      </div>
-    );
+      <div className="svc-side-bar__container-header svc-sidebar__header-container">
+        {(this.model.subTitle) ?
+          <div className="svc-sidebar__header-caption">
+            <span className="svc-sidebar__header-title">{this.model.title}</span>
+            <span className="svc-sidebar__header-subtitle">{this.model.subTitle}</span>
+          </div>
+          : <div className="svc-side-bar__container-title">{this.model.title}</div>
+        }
+      </div>);
   }
 }
 

@@ -6,7 +6,7 @@ import TabbedMenu from "./tabbed-menu/TabbedMenu.vue";
 import TabbedMenuItemWrapper from "./tabbed-menu/TabbedMenuItemWrapper.vue";
 import TabbedMenuItem from "./tabbed-menu/TabbedMenuItem.vue";
 import SideBar from "./side-bar/SideBar.vue";
-import SideBarHeader from "./side-bar/SideBarHeader.vue";
+import SideBarDefaultHeader from "./side-bar/SideBarDefaultHeader.vue";
 import SideBarPage from "./side-bar/SideBarPage.vue";
 import ObjectSelector from "./property-panel/ObjectSelector.vue";
 import PropertyGrid from "./property-panel/PropertyGrid.vue";
@@ -14,8 +14,8 @@ import Tabs from "./tab-control/Tabs.vue";
 import TabControl from "./tab-control/TabControl.vue";
 import TabButton from "./tab-control/TabButton.vue";
 import Placeholder from "./tab-control/Placeholder.vue";
-import PlaceholderHeader from "./tab-control/PlaceholderHeader.vue";
-import PropertyGridHeader from "./tab-control/PropertyGridHeader.vue";
+import SideBarHeader from "./side-bar/SideBarHeader.vue";
+import SideBarPropertyGridHeader from "./side-bar/SideBarPropertyGridHeader.vue";
 
 import QuestionError from "./components/QuestionError.vue";
 import ActionButton from "./components/ActionButton.vue";
@@ -104,17 +104,14 @@ function registerComponents(
   registerComponent("svc-tabbed-menu-item", TabbedMenuItem);
 
   registerComponent("svc-side-bar", SideBar);
-  registerComponent("svc-side-bar-header", SideBarHeader);
+  registerComponent("svc-side-bar-default-header", SideBarDefaultHeader);
   registerComponent("svc-side-bar-page", SideBarPage);
   registerComponent("svc-tabs", Tabs);
   registerComponent("svc-tab-control", TabControl);
   registerComponent("svc-tab-button", TabButton);
   registerComponent("svc-property-grid-placeholder", Placeholder);
-  registerComponent(
-    "svc-side-bar-property-grid-placeholder-header",
-    PlaceholderHeader
-  );
-  registerComponent("svc-side-bar-property-grid-header", PropertyGridHeader);
+  registerComponent("svc-side-bar-header", SideBarHeader);
+  registerComponent("svc-side-bar-property-grid-header", SideBarPropertyGridHeader);
 
   registerComponent("svc-property-grid", PropertyGrid);
   registerComponent("svc-object-selector", ObjectSelector);

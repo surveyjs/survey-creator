@@ -15,8 +15,8 @@
         ref="root"
       >
         <SvComponent
-          :is="model.header.componentName || 'svc-side-bar-header'"
-          :model="model.header.componentData || model.header"
+          :is="model.header.component"
+          :model="model.header.componentModel"
         ></SvComponent>
         <div class="svc-side-bar__container-content">
           <template v-for="(page, index) in model.pages" :key="index">

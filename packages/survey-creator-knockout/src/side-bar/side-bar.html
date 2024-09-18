@@ -3,7 +3,7 @@
   <div class="svc-side-bar__shadow" data-bind="click: collapseSidebar"></div>
   <div class="svc-flex-row svc-side-bar__wrapper">
     <div class="svc-side-bar__container" data-bind="visible: renderedIsVisible">
-      <!-- ko component: { name: header.componentName || 'svc-side-bar-header', params: { model: header.componentData || header } } -->
+      <!-- ko component: { name: header.component, params: { model: header.componentModel } } -->
       <!-- /ko -->
       <div class="svc-side-bar__container-content">
         <!-- ko foreach: pages -->

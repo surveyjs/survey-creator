@@ -57,7 +57,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       this.creator.sidebar.header.componentName = "svc-side-bar-property-grid-header";
       this.creator.sidebar.header.componentData = this.propertyGridViewModel.objectSelectionAction;
     } else if (this.showOneCategoryInPropertyGrid && this.creator.sidebar.activePage === this.propertyGridPlaceholderPage.id) {
-      this.creator.sidebar.header.componentName = "svc-side-bar-property-grid-placeholder-header";
+      this.creator.sidebar.header.componentName = "svc-side-bar-header";
       this.creator.sidebar.header.componentData = this.creator.sidebar.header;
     } else {
       this.creator.sidebar.header.componentName = "";

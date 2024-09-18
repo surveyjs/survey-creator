@@ -231,7 +231,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       this.updateTabControlActions();
       this.creator.sidebar.sideAreaComponentName = "svc-tab-control";
       this.creator.sidebar.sideAreaComponentData = this.tabControlModel;
-      this.creator.sidebar.header.componentName = "svc-side-bar-property-grid-placeholder-header";
+      this.creator.sidebar.header.componentName = "svc-side-bar-header";
       this.creator.sidebar.header.componentData = this.creator.sidebar.header;
     } else {
       this.creator.sidebar.sideAreaComponentName = "";
