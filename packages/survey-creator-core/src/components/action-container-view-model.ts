@@ -13,7 +13,8 @@ import {
   IAnimationConsumer,
   classesToSelector,
   PanelModel,
-  Question
+  Question,
+  CssClassBuilder
 } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { settings } from "../creator-settings";
@@ -21,6 +22,7 @@ import { DesignerStateManager } from "./tabs/designer-state-manager";
 import { TabDesignerPlugin } from "./tabs/designer-plugin";
 import { isPanelDynamic } from "../survey-elements";
 import { cleanHtmlElementAfterAnimation, prepareElementForVerticalAnimation } from "survey-core";
+import { toggleHovered } from "src/utils/utils";
 
 export class SurveyElementActionContainer extends AdaptiveActionContainer {
   private needToShrink(item: Action, shrinkTypeConverterAction: boolean) {
@@ -131,6 +133,26 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   }
   protected getExpandingCssClassName() {
     return "svc-question--enter";
+  }
+
+  private hoverTimeout: any;
+  @property({ defaultValue: false }) private isHovered: boolean;
+
+  public hover(e: MouseEvent, element: HTMLElement | any) {
+    const processedFlagName = "__svc_question_processed";
+    if (!e[processedFlagName] && e.type === "mouseover") {
+      if (!this.hoverTimeout) {
+        this.hoverTimeout = setTimeout(() => {
+          this.isHovered = true;
+          this.hoverTimeout = undefined;
+        }, this.creator.pageHoverDelay);
+      }
+      e[processedFlagName] = true;
+    } else {
+      clearTimeout(this.hoverTimeout);
+      this.hoverTimeout = undefined;
+      this.isHovered = false;
+    }
   }
 
   private getExpandCollapseAnimationOptions(): IAnimationConsumer {
@@ -426,5 +448,8 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   protected duplicate(): void { }
   protected delete(): void {
     this.creator.deleteElement(this.surveyElement);
+  }
+  protected getCss(): string {
+    return new CssClassBuilder().append("svc-hovered svc-hovered-ready", this.isHovered).toString();
   }
 }

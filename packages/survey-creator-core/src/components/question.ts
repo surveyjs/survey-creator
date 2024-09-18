@@ -109,6 +109,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   rootCss() {
     const isStartWithNewLine = this.surveyElement.isQuestion && !(<Question>this.surveyElement).startWithNewLine;
     return new CssClassBuilder()
+      .append(super.getCss())
       .append("svc-question__adorner")
       .append("svc-question__adorner--collapsed", this.renderedCollapsed)
       .append("svc-question__adorner--start-with-new-line", isStartWithNewLine)
@@ -273,8 +274,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     if (!this.surveyElement.isInteractiveDesignElement) {
       return;
     }
-    //this.updateActionsProperties();
-    toggleHovered(event, element, this.creator.pageHoverDelay);
+    super.hover(event, element);
   }
   protected updateActionsProperties(): void {
     if (this.isDisposed) return;

@@ -184,7 +184,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   }
 
   get css(): string {
-    let result = "";
+    let result = super.getCss();
     if (!!this.dragTypeOverMe && this.showPlaceholder) {
       result = "svc-question__content--drag-over-inside";
     } else if (!!this.dragTypeOverMe && this.page.elements.length === 0 && this.creator.survey.pages.length > 0) {
@@ -211,9 +211,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     if (this.animationRunning) result += (" svc-page__content--animation-running");
     return result.trim();
   }
-  public hover(event: MouseEvent, element: HTMLElement | any) {
-    toggleHovered(event, element, this.creator.pageHoverDelay);
-  }
+
   public hoverStopper(event: MouseEvent, element: HTMLElement | any) {
     event["__svc_question_processed"] = true;
   }
