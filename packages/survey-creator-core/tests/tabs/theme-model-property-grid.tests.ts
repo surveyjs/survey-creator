@@ -752,6 +752,7 @@ test("headerViewContainer init state", (): any => {
     "descriptionPositionY": "bottom",
     "textAreaWidth": 512,
     "height": 256,
+    "mobileHeight": 0,
     "headerDescription": {
       "family": "Open Sans",
       "size": 16,
