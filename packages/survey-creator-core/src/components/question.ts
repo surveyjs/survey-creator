@@ -27,7 +27,7 @@ import {
 import { SurveyCreatorModel } from "../creator-base";
 import { editorLocalization, getLocString } from "../editorLocalization";
 import { QuestionConverter } from "../questionconverter";
-import { QuestionSubtypeConverter, QuestionTypeConverter } from "../question-type-selector";
+import { QuestionSubtypeConverter, QuestionTypeConverter, QuestionTypeSelector } from "../question-type-selector";
 import { IPortableDragEvent, IPortableEvent, IPortableMouseEvent } from "../utils/events";
 import {
   isPropertyVisible,
@@ -58,6 +58,11 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   private questionTypeConverter: QuestionTypeConverter;
   private questionSubtypeConverter: QuestionSubtypeConverter;
   public topActionContainer: ActionContainer;
+
+  protected createQuestionTypeSelector(creator: SurveyCreatorModel, surveyElement: SurveyElement): QuestionTypeSelector {
+    return new QuestionTypeSelector(creator, surveyElement as PanelModel);
+  }
+
   constructor(
     creator: SurveyCreatorModel,
     surveyElement: SurveyElement,

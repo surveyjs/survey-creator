@@ -91,6 +91,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   protected designerStateManager: DesignerStateManager;
 
   protected questionTypeSelector: QuestionTypeSelector;
+  public questionTypeSelectorModel: Action;
 
   @property({ defaultValue: true }) allowDragging: boolean;
 
@@ -154,6 +155,9 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   private allowEditOption: boolean;
   private selectedPropPageFunc: (sender: Base, options: any) => void;
   private sidebarFlyoutModeChangedFunc: (sender: Base, options: any) => void;
+  protected createQuestionTypeSelector(creator: SurveyCreatorModel, surveyElement: SurveyElement): QuestionTypeSelector {
+    return null;
+  }
 
   constructor(
     public creator: SurveyCreatorModel,
@@ -162,7 +166,11 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     super();
     this.designerStateManager = (creator.getPlugin("designer") as TabDesignerPlugin)?.designerStateManager;
     this.designerStateManager?.initForElement(surveyElement);
-    this.questionTypeSelector = new QuestionTypeSelector(creator, surveyElement);
+    this.questionTypeSelectorModel = this.createQuestionTypeSelector(creator, surveyElement).getQuestionTypeSelectorModel({
+      actionData: {
+        iconName: "icon-more"
+      }
+    });
     this.selectedPropPageFunc = (sender: Base, options: any) => {
       if (options.name === "isSelectedInDesigner") {
         this.onElementSelectedChanged(options.newValue);

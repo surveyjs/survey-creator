@@ -1,4 +1,4 @@
-import { Action, ActionContainer, ComputedUpdater, CssClassBuilder, DragTypeOverMeEnum, IAction, IElement, PageModel, property } from "survey-core";
+import { Action, ActionContainer, ComputedUpdater, CssClassBuilder, DragTypeOverMeEnum, IAction, IElement, PageModel, property, SurveyElement } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { IPortableMouseEvent } from "../utils/events";
 import { SurveyElementAdornerBase } from "./action-container-view-model";
@@ -7,6 +7,7 @@ import { getLocString } from "../editorLocalization";
 require("./page.scss");
 import { SurveyHelper } from "../survey-helper";
 import { settings } from "../creator-settings";
+import { QuestionTypeSelector, QuestionTypeSelectorForPage } from "../question-type-selector";
 
 export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   @property({ defaultValue: false }) isSelected: boolean;
@@ -25,19 +26,24 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     this.showPlaceholder = !this.isGhost && (elements || this.page.elements).length === 0;
   }
 
+  protected createQuestionTypeSelector(creator: SurveyCreatorModel, surveyElement: SurveyElement): QuestionTypeSelector {
+    return new QuestionTypeSelectorForPage(creator, surveyElement as PageModel);
+  }
+
   constructor(creator: SurveyCreatorModel, page: PageModel) {
     super(creator, page);
     this.actionContainer.sizeMode = "small";
     if (this.isGhost) this.expandCollapseAction.visible = false;
     this.expandCollapseAction.needSeparator = true;
     if (this.creator.expandCollapseButtonVisibility != "never") this.actionContainer.addAction(this.expandCollapseAction);
-    this.questionTypeSelectorModel = this.creator.getQuestionTypeSelectorModel(
-      (type) => {
-        this.currentAddQuestionType = type;
-        this.addGhostPage(false);
-        this.creator.survey.currentPage = this.page;
-      }
-    );
+    this.questionTypeSelector = new QuestionTypeSelectorForPage(creator, this.surveyElement as PageModel);
+    // this.questionTypeSelectorModel = this.creator.getQuestionTypeSelectorModel(
+    //   (type) => {
+    //     this.currentAddQuestionType = type;
+    //     this.addGhostPage(false);
+    //     this.creator.survey.currentPage = this.page;
+    //   }
+    // );
     this.attachElement(page);
   }
 

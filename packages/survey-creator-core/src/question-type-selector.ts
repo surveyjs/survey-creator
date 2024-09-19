@@ -1,4 +1,4 @@
-import { Action, createDropdownActionModel, Helpers, IAction, ListModel, PageModel, QuestionFactory, SurveyElement } from "survey-core";
+import { Action, createDropdownActionModel, Helpers, IAction, IPanel, ListModel, PageModel, PanelModelBase, QuestionFactory, SurveyElement } from "survey-core";
 import { QuestionToolbox, QuestionToolboxItem } from "./toolbox";
 import { ICreatorOptions } from "./creator-options";
 import { SurveyHelper } from "./survey-helper";
@@ -8,8 +8,9 @@ interface ICreatorQuestionConverter {
   maxNestedPanels?: number;
   toolbox: QuestionToolbox;
   convertCurrentQuestion(string, any);
+  addNewQuestionInPage(beforeAdd: (string) => void, panel: IPanel, type: string, initJson: any);
 }
-export class QuestionTypeSelectorBase {
+export abstract class QuestionTypeSelectorBase {
   constructor(protected creatorOptions: ICreatorQuestionConverter) {
 
   }
@@ -28,16 +29,77 @@ export class QuestionTypeSelectorBase {
     }
     return res;
   }
-  protected onSelectQuestionType(questionType: string, json: any, defaultJsons: any) {
-
+  protected abstract updateQuestionTypeListModel(listModel: ListModel);
+  protected createIActionBarItemByClass(item: QuestionToolboxItem, needSeparator: boolean, defaultJsons: any): Action {
+    const action = new Action({
+      title: item.title,
+      id: item.name,
+      iconName: item.iconName,
+      visible: item.visible,
+      enabled: item.enabled,
+      needSeparator: needSeparator
+    });
+    action.action = () => {
+      this.onSelectQuestionType(item.typeName, item.json, defaultJsons);
+    };
+    return action;
   }
+  public getQuestionTypeSelectorModel(options: { actionData: IAction }): Action {
+    const newAction = createDropdownActionModel(options.actionData, {
+      items: [],
+      allowSelection: true,
+      horizontalPosition: "center",
+      cssClass: "svc-creator-popup",
+      onShow: () => {
+        const listModel = newAction.popupModel.contentComponentData.model;
+        this.updateQuestionTypeListModel(listModel);
+      },
+    });
+    const listModel = new ListModel([]);
+    this.updateQuestionTypeListModel(listModel);
+    if (!listModel.actions.length) return null;
+    if (listModel.selectedItem) newAction.title = listModel.selectedItem.title;
+    return newAction;
+  }
+
+  protected abstract onSelectQuestionType(questionType: string, json: any, defaultJsons: any);
 }
 export class QuestionTypeSelector extends QuestionTypeSelectorBase {
-  constructor(creatorOptions: ICreatorQuestionConverter, private element?: SurveyElement) {
+  constructor(creatorOptions: ICreatorQuestionConverter, protected element?: PanelModelBase) {
     super(creatorOptions);
   }
-  protected onSelectQuestionType(questionType: string, json: any, defaultJsons: any) {
 
+  protected updateQuestionTypeListModel(listModel: ListModel) {
+    const availableItems = this.getAvailableToolboxItems();
+    const newItems: Array<IAction> = [];
+    let lastItem: QuestionToolboxItem;
+    availableItems.forEach((item: QuestionToolboxItem) => {
+      const needSeparator = lastItem && item.category != lastItem.category;
+      const action = this.createIActionBarItemByClass(item, needSeparator, {});
+      if (item.items?.length > 0 && this.creatorOptions.toolbox.showSubitems) {
+        const subactions = [];
+        item.items.forEach(subitem => {
+          const subaction = this.createIActionBarItemByClass(subitem, false, {});
+          subactions.push(subaction);
+        });
+        action.setSubItems({ items: subactions });
+      }
+      newItems.push(action);
+    });
+    listModel.setItems(newItems);
+  }
+
+  protected onSelectQuestionType(questionType: string, json: any, defaultJsons: any) {
+    this.creatorOptions.addNewQuestionInPage(() => { }, this.element, questionType, json);
+  }
+}
+
+export class QuestionTypeSelectorForPage extends QuestionTypeSelector {
+  constructor(creatorOptions: ICreatorQuestionConverter, element?: PanelModelBase) {
+    super(creatorOptions, element);
+  }
+  protected onSelectQuestionType(questionType: string, json: any, defaultJsons: any) {
+    this.creatorOptions.addNewQuestionInPage(() => { }, this.element, questionType, json);
   }
 }
 export class QuestionTypeConverter extends QuestionTypeSelectorBase {
@@ -134,24 +196,6 @@ export class QuestionTypeConverter extends QuestionTypeSelectorBase {
     this.updateQuestionTypeOrSubtypeListModel(listModel, false);
   }
 
-  public getQuestionTypeSelectorModel(options: { actionData: IAction }): Action {
-    const newAction = createDropdownActionModel(options.actionData, {
-      items: [],
-      allowSelection: true,
-      horizontalPosition: "center",
-      cssClass: "svc-creator-popup",
-      onShow: () => {
-        const listModel = newAction.popupModel.contentComponentData.model;
-        this.updateQuestionTypeListModel(listModel);
-      },
-    });
-    const listModel = new ListModel([]);
-    this.updateQuestionTypeListModel(listModel);
-    if (!listModel.actions.length) return null;
-    if (listModel.selectedItem) newAction.title = listModel.selectedItem.title;
-    return newAction;
-  }
-
   protected updateQuestionTypeOrSubtypeListModel(listModel: ListModel, subtypeOnly: boolean) {
     const availableItems = this.getConvertToTypes();
     const defaultJsons = this.buildDefaultJsonMap(availableItems);
@@ -199,27 +243,13 @@ export class QuestionTypeConverter extends QuestionTypeSelectorBase {
   protected onSelectQuestionType(questionType: string, json: any, defaultJsons: any) {
     this.convertQuestion(questionType, json, defaultJsons);
   }
-  private createIActionBarItemByClass(item: QuestionToolboxItem, needSeparator: boolean, defaultJsons: any): Action {
-    const action = new Action({
-      title: item.title,
-      id: item.name,
-      iconName: item.iconName,
-      visible: item.visible,
-      enabled: item.enabled,
-      needSeparator: needSeparator
-    });
-    action.action = () => {
-      this.onSelectQuestionType(item.typeName, item.json, defaultJsons);
-    };
-    return action;
-  }
 }
 export class QuestionSubtypeConverter extends QuestionTypeConverter {
   constructor(creatorOptions: ICreatorQuestionConverter, element?: SurveyElement) {
     super(creatorOptions, element);
   }
   protected onSelectQuestionType(questionType: string, json: any, defaultJsons: any) {
-
+    super.onSelectQuestionType(questionType, json, defaultJsons);
   }
   public updateQuestionTypeListModel(listModel: ListModel) {
     this.updateQuestionTypeOrSubtypeListModel(listModel, true);
