@@ -295,7 +295,8 @@ svc-page {
 .svc-page__placeholder_frame {
   min-width: auto;
   max-width: 100%;
-  padding: 0 calcSize(3) calcSize(2);
+  margin-top: calcSize(2);
+  padding: 0 calcSize(3);
 
   .svc-panel__placeholder_frame {
     padding: calcSize(6) calcSize(8);

@@ -108,7 +108,8 @@ svc-tab-designer {
 
 .svc-designer-placeholder-page .svc-page__footer {
   width: calcSize(33);
-  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .svc-designer-placeholder-page .svc-row--ghost {
