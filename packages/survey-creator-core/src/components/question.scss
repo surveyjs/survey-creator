@@ -236,6 +236,7 @@ svc-question {
   //inset-inline-start: calcSize(4); // left
   //inset-inline-end: calcSize(3.5); // right
   margin-left: calcSize(-1);
+  margin-top: auto;
   width: calc(100% + 2.5 * #{$base-unit});
   transition: opacity $creator-transition-duration;
 
