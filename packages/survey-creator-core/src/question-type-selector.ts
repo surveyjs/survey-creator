@@ -135,19 +135,7 @@ export class QuestionTypeConverter extends QuestionTypeSelectorBase {
   }
 
   public getQuestionTypeSelectorModel(options: { actionData: IAction }): Action {
-    const newAction = createDropdownActionModel({
-      id: options.actionData.id,
-      css: "sv-action--convertTo sv-action-bar-item--secondary",
-      iconName: options.actionData.iconName,
-      iconSize: 16,
-      title: options.actionData.title,
-      enabled: options.actionData.enabled,
-      visibleIndex: options.actionData.visibleIndex,
-      disableShrink: options.actionData.disableShrink,
-      location: "start",
-      action: (newType) => {
-      },
-    }, {
+    const newAction = createDropdownActionModel(options.actionData, {
       items: [],
       allowSelection: true,
       horizontalPosition: "center",

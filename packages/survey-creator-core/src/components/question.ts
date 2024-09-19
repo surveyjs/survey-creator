@@ -334,7 +334,12 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       enabled: true,
       visibleIndex: 0,
       title: "TYPE",
-      iconName: "icon-chevron_16x16"
+      iconName: "icon-chevron_16x16",
+      css: "sv-action--convertTo sv-action-bar-item--secondary",
+      iconSize: 16,
+      disableShrink: true,
+      location: "start",
+      action: () => { }
     };
     const newAction = this.questionTypeConverter.getQuestionTypeSelectorModel({
       actionData: actionData
@@ -357,12 +362,16 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   private createConvertInputType() {
     const actionData: IAction = {
       id: "convertInputType",
+      css: "sv-action--convertTo sv-action-bar-item--secondary",
+      iconSize: 16,
       visibleIndex: 1,
       title: "SUBTYPE",
       disableShrink: true,
-      iconName: "icon-chevron_16x16"
+      iconName: "icon-chevron_16x16",
+      location: "start",
+      action: () => { }
     };
-    const newAction = this.questionTypeConverter.getQuestionTypeSelectorModel({
+    const newAction = this.questionSubtypeConverter.getQuestionTypeSelectorModel({
       actionData: actionData
     });
 
@@ -453,7 +462,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     this.creator.addNewQuestionInPage((type) => { }, this.surveyElement instanceof PanelModelBase ? this.surveyElement : null,
       this.currentAddQuestionType || settings.designer.defaultAddQuestionType);
   }
-  questionTypeSelectorModel = this.creator.getQuestionTypeSelectorModel((type) => { this.currentAddQuestionType = type; }, this.surveyElement);
   public get addNewQuestionText(): string {
     if (!this.currentAddQuestionType && this.creator)
       return this.creator.getLocString("ed.addNewQuestion");
