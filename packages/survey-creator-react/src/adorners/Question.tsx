@@ -106,7 +106,7 @@ export class QuestionAdornerComponent extends CreatorModelElement<
   }
 
   protected renderQuestionTitle(): JSX.Element {
-    if (this.model.element.hasTitle) return null;
+    if (!this.model.showHiddenTitle) return null;
     const element = this.model.element as Question | PanelModel;
     const title = <div className={this.model.cssCollapsedHiddenTitle} >
       {element.title ? SurveyElementBase.renderLocString(element.locTitle, null, "q_title") : <span className="svc-fake-title">{element.name}</span>}

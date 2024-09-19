@@ -16,7 +16,7 @@
       </div>
     </div>
     <!-- /ko -->
-    <!-- ko ifnot: $data.element.hasTitle -->
+    <!-- ko if: $data.showHiddenTitle -->
     <div data-bind="css: $data.cssCollapsedHiddenHeader">
       <div data-bind="css: $data.cssCollapsedHiddenTitle">
         <!-- ko template: { name: 'survey-string', data: $data.element.locTitle } --><!-- /ko -->

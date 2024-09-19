@@ -16,7 +16,7 @@
           <sv-action-bar [model]="adorner.topActionContainer" [handleClick]="false"></sv-action-bar>
         </div>
       </div>
-      <div *ngIf="!model.hasTitle" [class]="adorner.cssCollapsedHiddenHeader">
+      <div *ngIf="adorner.showHiddenTitle" [class]="adorner.cssCollapsedHiddenHeader">
         <div [class]="adorner.cssCollapsedHiddenTitle">
           <sv-ng-string [model]="model.locTitle"></sv-ng-string>
         </div>

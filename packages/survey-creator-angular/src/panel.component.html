@@ -17,11 +17,11 @@
           <sv-action-bar [model]="adorner.topActionContainer" [handleClick]="false"></sv-action-bar>
         </div>
       </div>
-      <div *ngIf="!model.hasTitle" [class]="adorner.cssCollapsedHiddenHeader"></div>
-      <div [class]="adorner.cssCollapsedHiddenTitle">
-        <sv-ng-string *ngIf="!!model.title" [model]="model.locTitle"></sv-ng-string>
-        <span *ngIf="!model.title" class="svc-fake-title">{{model.name}}</span>
-      </div>
+      <div *ngIf="adorner.showHiddenTitle" [class]="adorner.cssCollapsedHiddenHeader">
+        <div [class]="adorner.cssCollapsedHiddenTitle">
+          <sv-ng-string *ngIf="!!model.title" [model]="model.locTitle"></sv-ng-string>
+          <span *ngIf="!model.title" class="svc-fake-title">{{model.name}}</span>
+        </div>
       </div>
       <ng-template [component]="{ name: componentName, data: componentData }"></ng-template>
 

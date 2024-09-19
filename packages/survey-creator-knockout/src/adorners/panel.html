@@ -17,9 +17,7 @@
     </div>
     <!-- /ko -->
 
-    <!-- ko component: { name: 'sv-template-renderer', params: { componentData: null, templateData: templateData } } -->
-    <!-- /ko -->
-    <!-- ko ifnot: $data.element.hasTitle -->
+    <!-- ko if: $data.showHiddenTitle -->
     <div data-bind="css: $data.cssCollapsedHiddenHeader">
       <div data-bind="css: $data.cssCollapsedHiddenTitle">
         <!-- ko if: !!$data.element.title -->
@@ -30,6 +28,8 @@
         <!-- /ko -->
       </div>
     </div>
+    <!-- /ko -->
+    <!-- ko component: { name: 'sv-template-renderer', params: { componentData: null, templateData: templateData } } -->
     <!-- /ko -->
     <!-- ko if: koIsEmptyElement() -->
     <div class="svc-panel__placeholder_frame-wrapper">
