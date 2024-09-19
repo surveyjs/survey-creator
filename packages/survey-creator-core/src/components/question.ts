@@ -27,7 +27,7 @@ import {
 import { SurveyCreatorModel } from "../creator-base";
 import { editorLocalization, getLocString } from "../editorLocalization";
 import { QuestionConverter } from "../questionconverter";
-import { QuestionTypeConverter } from "../question-type-selector";
+import { QuestionSubtypeConverter, QuestionTypeConverter } from "../question-type-selector";
 import { IPortableDragEvent, IPortableEvent, IPortableMouseEvent } from "../utils/events";
 import {
   isPropertyVisible,
@@ -56,6 +56,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
 
   private dragOrClickHelper: DragOrClickHelper;
   private questionTypeConverter: QuestionTypeConverter;
+  private questionSubtypeConverter: QuestionSubtypeConverter;
   public topActionContainer: ActionContainer;
   constructor(
     creator: SurveyCreatorModel,
@@ -63,7 +64,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     public templateData: SurveyTemplateRendererTemplateData
   ) {
     super(creator, surveyElement);
-    this.questionTypeConverter = new QuestionTypeConverter(this.creator, this.element);
     this.actionContainer.sizeMode = "small";
     this.topActionContainer = new ActionContainer();
     this.topActionContainer.sizeMode = "small";
@@ -329,22 +329,15 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   }
 
   private createConvertToAction() {
-    // const actions = this.getConvertToTypesActions();
-    // const allowChangeType: boolean = actions.length > 0;
-    // const selItem = this.getSelectedItem(actions, this.currentType);
-    let actionTitle = editorLocalization.getString("qt." + this.element.getType());
-
     const actionData: IAction = {
       id: "convertTo",
       enabled: true,
       visibleIndex: 0,
-      title: actionTitle,
+      title: "TYPE",
       iconName: "icon-chevron_16x16"
     };
-    const newAction = this.createDropdownModel({
-      actionData: actionData,
-      items: [],
-      updateListModel: (listModel: ListModel) => this.questionTypeConverter.updateQuestionTypeListModel(listModel)
+    const newAction = this.questionTypeConverter.getQuestionTypeSelectorModel({
+      actionData: actionData
     });
     newAction.iconName = <any>new ComputedUpdater(() => {
       if (newAction.mode === "small") {
@@ -356,29 +349,21 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       return newAction.mode === "small" ? 24 : 16;
     });
     newAction.disableHide = true;
+    newAction.popupModel.displayMode = this.creator.isTouch ? "overlay" : "popup";
+    newAction.data.locOwner = this.creator;
     return newAction;
   }
 
   private createConvertInputType() {
-    const questionType = this.surveyElement.getType();
-    if (questionType !== "text" && questionType !== "rating") return null;
-    const toolboxItem = this.creator.toolbox.items.filter(item => item.id === questionType)[0];
-    if (!toolboxItem || !toolboxItem.hasSubItems) return null;
-
-    let propName = QuestionToolbox.getSubTypePropertyName(questionType);
-    const questionSubType = this.surveyElement.getPropertyValue(propName);
-
     const actionData: IAction = {
       id: "convertInputType",
       visibleIndex: 1,
-      title: editorLocalization.getPropertyValueInEditor(propName, questionSubType),
+      title: "SUBTYPE",
       disableShrink: true,
       iconName: "icon-chevron_16x16"
     };
-    const newAction = this.createDropdownModel({
-      actionData: actionData,
-      items: [],
-      updateListModel: (listModel: ListModel) => this.questionTypeConverter.updateQuestionSubtypeListModel(listModel)
+    const newAction = this.questionTypeConverter.getQuestionTypeSelectorModel({
+      actionData: actionData
     });
 
     // this.surveyElement.registerFunctionOnPropertyValueChanged(
@@ -393,38 +378,11 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     //   },
     //   "inputTypeAdorner"
     // );
-    newAction.removePriority = 1;
-    return newAction;
-  }
-  private getSelectedItem(actions: IAction[], id: string): IAction {
-    const selectedItems = actions.filter(item => item.id === id);
-    return selectedItems.length > 0 ? selectedItems[0] : undefined;
-  }
-  private createDropdownModel(options: { actionData: IAction, items: Array<IAction>, updateListModel: (listModel: ListModel) => void }): Action {
-    const newAction = createDropdownActionModel({
-      id: options.actionData.id,
-      css: "sv-action--convertTo sv-action-bar-item--secondary",
-      iconName: options.actionData.iconName,
-      iconSize: 16,
-      title: options.actionData.title,
-      enabled: options.actionData.enabled,
-      visibleIndex: options.actionData.visibleIndex,
-      disableShrink: options.actionData.disableShrink,
-      location: "start",
-      action: (newType) => {
-      },
-    }, {
-      items: options.items,
-      allowSelection: true,
-      horizontalPosition: "center",
-      cssClass: "svc-creator-popup",
-      onShow: () => {
-        const listModel = newAction.popupModel.contentComponentData.model;
-        options.updateListModel(listModel);
-      },
-    });
-    newAction.popupModel.displayMode = this.creator.isTouch ? "overlay" : "popup";
-    newAction.data.locOwner = this.creator;
+    if (newAction) {
+      newAction.removePriority = 1;
+      newAction.popupModel.displayMode = this.creator.isTouch ? "overlay" : "popup";
+      newAction.data.locOwner = this.creator;
+    }
     return newAction;
   }
 
@@ -469,6 +427,8 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   }
   protected buildActions(items: Array<Action>): void {
     super.buildActions(items);
+    this.questionTypeConverter = new QuestionTypeConverter(this.creator, this.element);
+    this.questionSubtypeConverter = new QuestionSubtypeConverter(this.creator, this.element);
     let element = this.surveyElement;
     items.push(this.createConvertToAction());
     const inputTypeConverter = this.createConvertInputType();

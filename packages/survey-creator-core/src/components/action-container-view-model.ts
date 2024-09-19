@@ -15,6 +15,7 @@ import { settings } from "../creator-settings";
 import { DesignerStateManager } from "./tabs/designer-state-manager";
 import { TabDesignerPlugin } from "./tabs/designer-plugin";
 import { isPanelDynamic } from "../survey-elements";
+import { QuestionTypeSelector } from "../question-type-selector";
 
 export class SurveyElementActionContainer extends AdaptiveActionContainer {
   private needToShrink(item: Action, shrinkTypeConverterAction: boolean) {
@@ -88,6 +89,9 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   public actionContainer: ActionContainer;
   protected expandCollapseAction: IAction;
   protected designerStateManager: DesignerStateManager;
+
+  protected questionTypeSelector: QuestionTypeSelector;
+
   @property({ defaultValue: true }) allowDragging: boolean;
 
   protected get dragInsideCollapsedContainer(): boolean {
@@ -158,6 +162,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     super();
     this.designerStateManager = (creator.getPlugin("designer") as TabDesignerPlugin)?.designerStateManager;
     this.designerStateManager?.initForElement(surveyElement);
+    this.questionTypeSelector = new QuestionTypeSelector(creator, surveyElement);
     this.selectedPropPageFunc = (sender: Base, options: any) => {
       if (options.name === "isSelectedInDesigner") {
         this.onElementSelectedChanged(options.newValue);

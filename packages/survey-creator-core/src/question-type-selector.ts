@@ -1,4 +1,4 @@
-import { Action, Helpers, IAction, ListModel, PageModel, QuestionFactory, SurveyElement } from "survey-core";
+import { Action, createDropdownActionModel, Helpers, IAction, ListModel, PageModel, QuestionFactory, SurveyElement } from "survey-core";
 import { QuestionToolbox, QuestionToolboxItem } from "./toolbox";
 import { ICreatorOptions } from "./creator-options";
 import { SurveyHelper } from "./survey-helper";
@@ -33,7 +33,7 @@ export class QuestionTypeSelectorBase {
   }
 }
 export class QuestionTypeSelector extends QuestionTypeSelectorBase {
-  constructor(creatorOptions: ICreatorQuestionConverter, private page?: PageModel) {
+  constructor(creatorOptions: ICreatorQuestionConverter, private element?: SurveyElement) {
     super(creatorOptions);
   }
   protected onSelectQuestionType(questionType: string, json: any, defaultJsons: any) {
@@ -130,14 +130,41 @@ export class QuestionTypeConverter extends QuestionTypeSelectorBase {
     this.creatorOptions.convertCurrentQuestion(type, newJson);
   }
 
-  public updateQuestionTypeListModel(listModel: ListModel) {
+  protected updateQuestionTypeListModel(listModel: ListModel) {
     this.updateQuestionTypeOrSubtypeListModel(listModel, false);
   }
-  public updateQuestionSubtypeListModel(listModel: ListModel) {
-    this.updateQuestionTypeOrSubtypeListModel(listModel, true);
+
+  public getQuestionTypeSelectorModel(options: { actionData: IAction }): Action {
+    const newAction = createDropdownActionModel({
+      id: options.actionData.id,
+      css: "sv-action--convertTo sv-action-bar-item--secondary",
+      iconName: options.actionData.iconName,
+      iconSize: 16,
+      title: options.actionData.title,
+      enabled: options.actionData.enabled,
+      visibleIndex: options.actionData.visibleIndex,
+      disableShrink: options.actionData.disableShrink,
+      location: "start",
+      action: (newType) => {
+      },
+    }, {
+      items: [],
+      allowSelection: true,
+      horizontalPosition: "center",
+      cssClass: "svc-creator-popup",
+      onShow: () => {
+        const listModel = newAction.popupModel.contentComponentData.model;
+        this.updateQuestionTypeListModel(listModel);
+      },
+    });
+    const listModel = new ListModel([]);
+    this.updateQuestionTypeListModel(listModel);
+    if (!listModel.actions.length) return null;
+    if (listModel.selectedItem) newAction.title = listModel.selectedItem.title;
+    return newAction;
   }
 
-  private updateQuestionTypeOrSubtypeListModel(listModel: ListModel, subtypeOnly: boolean) {
+  protected updateQuestionTypeOrSubtypeListModel(listModel: ListModel, subtypeOnly: boolean) {
     const availableItems = this.getConvertToTypes();
     const defaultJsons = this.buildDefaultJsonMap(availableItems);
     const newItems: Array<IAction> = [];
@@ -197,5 +224,16 @@ export class QuestionTypeConverter extends QuestionTypeSelectorBase {
       this.onSelectQuestionType(item.typeName, item.json, defaultJsons);
     };
     return action;
+  }
+}
+export class QuestionSubtypeConverter extends QuestionTypeConverter {
+  constructor(creatorOptions: ICreatorQuestionConverter, element?: SurveyElement) {
+    super(creatorOptions, element);
+  }
+  protected onSelectQuestionType(questionType: string, json: any, defaultJsons: any) {
+
+  }
+  public updateQuestionTypeListModel(listModel: ListModel) {
+    this.updateQuestionTypeOrSubtypeListModel(listModel, true);
   }
 }

@@ -1279,7 +1279,6 @@ export class SurveyCreatorModel extends Base
     this.patchMetadata();
     this.initSurveyWithJSON(undefined, false);
     this.toolbox = new QuestionToolbox(this.options && this.options.questionTypes ? this.options.questionTypes : null, this, true);
-    this.updateToolboxIsCompact();
     this.initTabs();
     this.initDragDrop();
     this.syncSaveButtons = this.options.saveSurveyAndTheme !== undefined ? this.options.saveSurveyAndTheme : this.options.syncSaveButtons;
