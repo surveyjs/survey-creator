@@ -63,13 +63,10 @@
       }
     }
 
-    .sd-page {
-      padding: calcSize(1) calcSize(3) calcSize(3);
-    }
-
     .svc-page__footer {
       margin-left: calcSize(3);
       margin-right: calcSize(3);
+      margin-top: calcSize(3);
     }
   }
 
@@ -78,7 +75,7 @@
 
     &.svc-question__content--selected {
       padding-top: calcSize(3);
-      padding-bottom: calcSize(8);
+      padding-bottom: calcSize(2);
     }
   }
 
@@ -123,8 +120,7 @@
   }
 
   .svc-question__content-actions {
-    width: calc(100% - 3 * #{$base-unit});
-    left: calcSize(2);
+    width: calc(100% + 3 * #{$base-unit});
 
     .sv-action-bar-item {
       border: 0;
