@@ -111,6 +111,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     return new CssClassBuilder()
       .append(super.getCss())
       .append("svc-question__adorner")
+      .append("svc-question__adorner--selected", !!this.creator.isElementSelected(this.surveyElement))
       .append("svc-question__adorner--collapsed", this.renderedCollapsed)
       .append("svc-question__adorner--start-with-new-line", isStartWithNewLine)
       .append("svc-question__adorner--collapse-" + this.creator.expandCollapseButtonVisibility, true).toString();
