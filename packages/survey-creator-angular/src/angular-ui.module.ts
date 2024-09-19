@@ -12,16 +12,16 @@ import { SidebarComponent } from "./side-bar/side-bar.component";
 import { SidebarPageComponent } from "./side-bar/side-bar-page.component";
 import { SidebarDefaultHeaderComponent } from "./side-bar/side-bar-default-header.component";
 
-import { TabButtonComponent } from "./tab-control/tab-button.component";
-import { TabsComponent } from "./tab-control/tabs.component";
-import { TabControlComponent } from "./tab-control/tab-control.component";
+import { TabButtonComponent } from "./side-bar/tab-button.component";
+import { TabsComponent } from "./side-bar/tabs.component";
+import { TabControlComponent } from "./side-bar/tab-control.component";
 import { SidebarPropertyGridHeaderComponent } from "./side-bar/side-bar-property-grid-header.component"
-import { PropertyGridPlaceholderComponent } from "./tab-control/property-grid-placeholder.component";
+import { PropertyGridPlaceholderComponent } from "./side-bar/property-grid-placeholder.component";
 import { SidebarHeaderComponent } from "./side-bar/side-bar-header.component";
 
-import { ObjectSelectorComponent } from "./property-panel/object-selector.component";
-import { PropertyGridComponent } from "./property-panel/property-grid.component";
-import { SearchComponent } from "./property-panel/search.component";
+import { ObjectSelectorComponent } from "./side-bar/object-selector.component";
+import { PropertyGridComponent } from "./side-bar/property-grid.component";
+import { SearchComponent } from "./side-bar/search.component";
 import { TextareaJsonEditorComponent } from "./tabs/json/json-editor-textarea.component";
 import { AceJsonEditorComponent } from "./tabs/json/json-editor-ace.component";
 import { LogicTabComponent } from "./tabs/logic/logic.component";
