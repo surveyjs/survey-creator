@@ -193,7 +193,8 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     const cssRoot = this.surveyElement.isPanel ? (this.surveyElement as PanelModel).getContainerCss() : (this.surveyElement as Question).getRootCss();
     const cssDescription = (this.surveyElement as unknown as Question | PanelModel).cssDescription;
     const selectorArray = [
-      `:scope > .svc-question__adorner > .svc-question__content > *:not(.svc-question__drag-area):not(${classesToSelector(cssRoot)})`
+      `:scope > .svc-question__adorner > .svc-question__content > *:not(.svc-question__drag-area):not(${classesToSelector(cssRoot)})`,
+      ":scope > .svc-question__adorner",
     ];
     if (cssDescription) selectorArray.push(`:scope ${classesToSelector(cssDescription)}`);
     return this.surveyElement.getWrapperElement().querySelectorAll(selectorArray.join(","));

@@ -158,16 +158,22 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   private getExpandCollapseAnimationOptions(): IAnimationConsumer {
     const beforeRunAnimation = (el: HTMLElement, animatingClassName: string) => {
       prepareElementForVerticalAnimation(el);
-      this.getInnerAnimatedElements().forEach((elem: HTMLElement) => {
+      const innerAnimatedElements = this.getInnerAnimatedElements();
+      innerAnimatedElements.forEach((elem: HTMLElement) => {
         prepareElementForVerticalAnimation(elem);
+      });
+      innerAnimatedElements.forEach((elem: HTMLElement) => {
         elem.classList.add(animatingClassName);
       });
     };
     const afterRunAnimation = (el: HTMLElement, animatingClassName: string) => {
       this.animationRunning = false;
       cleanHtmlElementAfterAnimation(el);
-      this.getInnerAnimatedElements().forEach((elem: HTMLElement) => {
+      const innerAnimatedElements = this.getInnerAnimatedElements();
+      innerAnimatedElements.forEach((elem: HTMLElement) => {
         cleanHtmlElementAfterAnimation(elem);
+      });
+      innerAnimatedElements.forEach((elem: HTMLElement) => {
         elem.classList.remove(animatingClassName);
       });
     };

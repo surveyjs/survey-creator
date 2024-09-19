@@ -182,27 +182,61 @@ svc-question {
 .svc-question__placeholders > div {
   overflow: visible;
 }
-
-.svc-question--enter {
-  .svc-question--enter {
-    animation: none;
-  }
+.svc-question--enter, .svc-question--leave {
   animation-name: fadeIn, moveInWithOverflow;
   animation-fill-mode: forwards;
-  &.svc-question--enter.svc-question--enter.svc-question--enter.svc-question--enter.svc-question--enter.svc-question--enter.svc-question--enter.svc-question--enter.svc-question--enter.svc-question--enter.svc-question--enter.svc-question--enter {
+  animation-direction: var(--animation-direction);
+  animation-timing-function: var(--animation-timing-function);
+  animation-duration: var(--fade-animation-duration), var(--move-animation-duration);
+  animation-delay: var(--fade-animation-delay), var(--move-animation-delay);
+}
+.svc-question--enter {
+  &:not(.svc-question__adorner).svc-question--enter.svc-question--enter.svc-question--enter.svc-question--enter.svc-question--enter.svc-question--enter.svc-question--enter.svc-question--enter.svc-question--enter.svc-question--enter.svc-question--enter {
     opacity: 0;
   }
-  animation-timing-function: $ease-out;
-  animation-duration: $svc-expand-fade-in-duration, $svc-expand-move-in-duration;
-  animation-delay: $svc-expand-fade-in-delay, 0s;
+  --fade-animation-duration: #{$svc-expand-fade-in-duration};
+  --move-animation-duration:  #{$svc-expand-move-in-duration};
+  --fade-animation-delay: #{$svc-expand-fade-in-delay};
+  --move-animation-delay: 0s;
+  --animation-timing-function: #{$ease-out};
+  --animation-direction: normal;
 }
 .svc-question--leave {
-  animation-name: fadeIn, moveInWithOverflow;
-  animation-direction: reverse;
-  animation-fill-mode: forwards;
-  animation-timing-function: $reverse-ease-out;
-  animation-duration: $svc-collapse-fade-out-duration, $svc-collapse-move-out-duration;
-  animation-delay: 0s, $svc-collapse-move-out-delay;
+  --fade-animation-duration: #{$svc-collapse-fade-out-duration};
+  --move-animation-duration:  #{$svc-collapse-move-out-duration};
+  --fade-animation-delay: 0s;
+  --move-animation-delay: #{$svc-collapse-move-out-delay};
+  --animation-direction: reverse;
+  --animation-timing-function: #{$reverse-ease-out};
+} 
+
+@keyframes changeAlignSelf {
+  from {
+    align-self: flex-start;
+  }
+  to {
+    align-self: stretch;
+  }
+}
+
+.svc-question--enter, .svc-question--leave {
+  &.svc-question__adorner
+   {
+    animation-name: changeAlignSelf;
+    animation-duration: 0s;
+  }
+}
+.svc-question--enter {
+  &.svc-question__adorner {
+    align-self: flex-start;
+    animation-delay: var(--move-animation-duration);
+   }
+}
+
+.svc-question--leave {
+  &.svc-question__adorner {
+    animation-delay: var(--move-animation-delay);
+   }
 }
 
 .svc-question__content {
