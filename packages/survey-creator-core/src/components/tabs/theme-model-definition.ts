@@ -68,6 +68,7 @@ const themeModelProperties: ISurveyPropertiesDefinition = {
       { name: "surveyTitle" },
       { name: "surveyDescription" },
       { name: "height", tab: "layout" },
+      { name: "mobileHeight", tab: "layout" },
       { name: "inheritWidthFrom", tab: "layout" },
       { name: "textAreaWidth", tab: "layout" },
 

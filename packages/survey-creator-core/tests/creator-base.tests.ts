@@ -820,6 +820,7 @@ test("Don't add extra subscriptions and fully unsubscribe title/description chan
     ]
   };
   const designerPlugin = <TabDesignerPlugin>(creator.getPlugin("designer"));
+  designerPlugin.model.newPage.unRegisterFunctionOnPropertiesValueChanged(["title"]);
   expect(creator.survey.pages).toHaveLength(1);
   expect(designerPlugin.model.newPage).toBeTruthy();
   let pageModel = new PageAdorner(creator, designerPlugin.model.newPage);
