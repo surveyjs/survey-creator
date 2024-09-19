@@ -700,6 +700,16 @@ svc-question,
     transition: opacity 150ms;
   }
 }
+.svc-element__header--hidden.sd-question__header--location--left {
+  .svc-string-editor,
+  sv-ng-string > .svc-string-editor {
+    display: inline-block;
+    &::before, &::after {
+      content: none;
+    }
+  }
+
+}
 
 .svc-question__adorner {
   &.svc-question__adorner--collapsed {
@@ -731,6 +741,9 @@ svc-question,
         & > *:not(.sd-element__title) {
           display: none;
         }
+      }
+      .sd-question__header--location--left {
+        display: none;
       }
     }
   }
