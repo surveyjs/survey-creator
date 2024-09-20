@@ -362,8 +362,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       return newAction.mode === "small" ? 24 : 16;
     });
     newAction.disableHide = true;
-    newAction.popupModel.displayMode = this.creator.isTouch ? "overlay" : "popup";
-    newAction.data.locOwner = this.creator;
     return newAction;
   }
 
@@ -467,12 +465,11 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     }, 1);
   }
   addNewQuestion = () => {
-    this.creator.addNewQuestionInPage((type) => { }, this.surveyElement instanceof PanelModelBase ? this.surveyElement : null,
-      this.currentAddQuestionType || settings.designer.defaultAddQuestionType);
+    this.questionTypeSelector.addNewQuestion();
   }
   public get addNewQuestionText(): string {
     if (!this.currentAddQuestionType && this.creator)
       return this.creator.getLocString("ed.addNewQuestion");
-    return !!this.creator ? this.creator.getAddNewQuestionText(this.currentAddQuestionType) : "";
+    return !!this.creator ? this.questionTypeSelector.getAddNewQuestionText(this.currentAddQuestionType) : "";
   }
 }

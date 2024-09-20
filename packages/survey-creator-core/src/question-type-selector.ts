@@ -1,11 +1,13 @@
-import { Action, createDropdownActionModel, Helpers, IAction, IPanel, ListModel, PageModel, PanelModelBase, QuestionFactory, SurveyElement } from "survey-core";
+import { Action, createDropdownActionModel, Helpers, IAction, IPanel, ListModel, PageModel, PanelModelBase, property, QuestionFactory, SurveyElement } from "survey-core";
 import { QuestionToolbox, QuestionToolboxItem } from "./toolbox";
 import { ICreatorOptions } from "./creator-options";
 import { SurveyHelper } from "./survey-helper";
 import { QuestionConverter } from "./questionconverter";
+import { editorLocalization } from "./editorLocalization";
 
 interface ICreatorQuestionConverter {
   maxNestedPanels?: number;
+  isTouch?: boolean;
   toolbox: QuestionToolbox;
   convertCurrentQuestion(string, any);
   addNewQuestionInPage(beforeAdd: (string) => void, panel: IPanel, type: string, initJson: any);
@@ -14,6 +16,10 @@ export abstract class QuestionTypeSelectorBase {
   constructor(protected creatorOptions: ICreatorQuestionConverter) {
 
   }
+  public getLocString(str: string) {
+    return editorLocalization.getString(str);
+  }
+
   public getAvailableToolboxItems(element?: SurveyElement, isAddNew: boolean = true): Array<QuestionToolboxItem> {
     const res: Array<QuestionToolboxItem> = this.creatorOptions.toolbox.items.slice();
     const maxNestedPanels = this.creatorOptions.maxNestedPanels || -1;
@@ -55,7 +61,9 @@ export abstract class QuestionTypeSelectorBase {
         this.updateQuestionTypeListModel(listModel);
       },
     });
-    const listModel = new ListModel([]);
+    newAction.popupModel.displayMode = this.creatorOptions.isTouch ? "overlay" : "popup";
+    newAction.data.locOwner = this.creatorOptions;
+    const listModel = newAction.popupModel.contentComponentData.model;
     this.updateQuestionTypeListModel(listModel);
     if (!listModel.actions.length) return null;
     if (listModel.selectedItem) newAction.title = listModel.selectedItem.title;
@@ -65,10 +73,29 @@ export abstract class QuestionTypeSelectorBase {
   protected abstract onSelectQuestionType(questionType: string, json: any, defaultJsons: any);
 }
 export class QuestionTypeSelector extends QuestionTypeSelectorBase {
+  public currentAddQuestionType: string;
+  public currentAddQuestionJson: string;
   constructor(creatorOptions: ICreatorQuestionConverter, protected element?: PanelModelBase) {
     super(creatorOptions);
   }
-
+  public getAddNewQuestionText(currentAddQuestionType: string = null) {
+    if (!currentAddQuestionType)
+      currentAddQuestionType = this.currentAddQuestionType;
+    if (!!currentAddQuestionType) {
+      const str = this.getLocString("ed.addNewTypeQuestion");
+      const items = this.creatorOptions.toolbox.items.filter((item) => item.name == currentAddQuestionType);
+      if (Array.isArray(items) && items.length > 0 && !!str && !!str["format"]) {
+        return str["format"](items[0].title);
+      }
+    }
+    return this.getLocString("ed.addNewQuestion");
+  }
+  public get addNewQuestionText() {
+    return this.getAddNewQuestionText();
+  }
+  public addNewQuestion() {
+    this.creatorOptions.addNewQuestionInPage(() => { }, this.element, this.currentAddQuestionType, this.currentAddQuestionJson);
+  }
   protected updateQuestionTypeListModel(listModel: ListModel) {
     const availableItems = this.getAvailableToolboxItems();
     const newItems: Array<IAction> = [];
@@ -90,6 +117,8 @@ export class QuestionTypeSelector extends QuestionTypeSelectorBase {
   }
 
   protected onSelectQuestionType(questionType: string, json: any, defaultJsons: any) {
+    this.currentAddQuestionType = questionType;
+    this.currentAddQuestionJson = json;
     this.creatorOptions.addNewQuestionInPage(() => { }, this.element, questionType, json);
   }
 }
@@ -103,9 +132,6 @@ export class QuestionTypeSelectorForPage extends QuestionTypeSelector {
   }
 }
 export class QuestionTypeConverter extends QuestionTypeSelectorBase {
-  /**
-   *
-   */
   constructor(creatorOptions: ICreatorQuestionConverter, private element?: SurveyElement) {
     super(creatorOptions);
   }
@@ -140,11 +166,11 @@ export class QuestionTypeConverter extends QuestionTypeSelectorBase {
     return jsonIsCorresponded;
   }
 
-  private toolboxItemIsCorresponded(toolboxItem: QuestionToolboxItem) {
+  private toolboxItemIsCorresponded(toolboxItem: QuestionToolboxItem, someItemSelectedAlready: boolean) {
     const elementType = this.element.getType();
     const json = this.cleanDefaultsFromJson(elementType, toolboxItem);
     if (toolboxItem.id == elementType || toolboxItem.json.type == elementType) {
-      return this.jsonIsCorresponded(json);
+      return !someItemSelectedAlready || this.jsonIsCorresponded(json);
     }
   }
 
@@ -207,13 +233,13 @@ export class QuestionTypeConverter extends QuestionTypeSelectorBase {
     availableItems.forEach((item: QuestionToolboxItem) => {
       const needSeparator = lastItem && item.category != lastItem.category;
       const action = this.createIActionBarItemByClass(item, needSeparator, defaultJsons);
-      if (this.toolboxItemIsCorresponded(item)) selectedAction = action;
+      if (this.toolboxItemIsCorresponded(item, !!selectedAction)) selectedAction = action;
       if (item.items?.length > 0 && this.creatorOptions.toolbox.showSubitems) {
         const subactions = [];
         let selectedSubactionLocal: IAction = undefined;
         item.items.forEach(subitem => {
           const subaction = this.createIActionBarItemByClass(subitem, false, defaultJsons);
-          if (this.toolboxItemIsCorresponded(subitem)) selectedSubactionLocal = subitem;
+          if (this.toolboxItemIsCorresponded(subitem, !!selectedAction)) selectedSubactionLocal = subitem;
           subactions.push(subaction);
         });
         action.setSubItems({ items: subactions });

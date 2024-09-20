@@ -1,9 +1,11 @@
-import { SurveyModel, IAction, Base, Question } from "survey-core";
-import { SurveyCreatorModel, isStringEditable } from "../src/creator-base";
+import { SurveyModel, IAction, Base, Question, SurveyElement, SurveyTemplateRendererTemplateData } from "survey-core";
+import { CreatorBase, SurveyCreatorModel, isStringEditable } from "../src/creator-base";
 import { settings as creatorSetting } from "../src/creator-settings";
 import { ICreatorOptions } from "../src/creator-options";
 import { SurveyLogic } from "../src/components/tabs/logic";
 import { QuestionLinkValueModel } from "../src/components/link-value";
+import { QuestionAdornerViewModel } from "../src/components/question";
+import { QuestionTypeSelector } from "../src/question-type-selector";
 
 const dummyQuestion = new QuestionLinkValueModel("q1");
 
@@ -54,5 +56,24 @@ export class CreatorTester extends SurveyCreatorModel {
     const res = super.createSurveyLogicForUpdate();
     res["createdId"] = ++this.logicCreatedId;
     return res;
+  }
+
+  getAvailableToolboxItems(question?: SurveyElement) {
+    if (question) return new QuestionAdornerViewModelTester(this, question, undefined).getConvertToTypesActions();
+    return new QuestionTypeSelector(this).getAvailableToolboxItems();
+  }
+}
+
+export class QuestionAdornerViewModelTester extends QuestionAdornerViewModel {
+  /**
+   *
+   */
+  constructor(creator: SurveyCreatorModel,
+    surveyElement: SurveyElement,
+    public templateData: SurveyTemplateRendererTemplateData) {
+    super(creator, surveyElement, templateData);
+  }
+  public getConvertToTypesActions() {
+    return this.getActionById("convertTo").popupModel.contentComponentData.model.actions;
   }
 }

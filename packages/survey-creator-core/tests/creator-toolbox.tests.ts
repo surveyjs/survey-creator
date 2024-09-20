@@ -1,6 +1,6 @@
 import { SurveyModel, QuestionTextModel, QuestionRatingModel, CustomWidgetCollection, Serializer, SurveyElement, Action } from "survey-core";
 import { ToolboxToolViewModel } from "../src/components/toolbox/toolbox-tool";
-import { CreatorTester } from "./creator-tester";
+import { CreatorTester, QuestionAdornerViewModelTester } from "./creator-tester";
 import { PageAdorner } from "../src/components/page";
 import { QuestionAdornerViewModel } from "../src/components/question";
 
@@ -127,7 +127,7 @@ test("Has one item type in convertTo", (): any => {
   const question = creator.survey.getQuestionByName("q1");
   creator.selectElement(question);
 
-  const questionModel = new QuestionAdornerViewModel(
+  const questionModel = new QuestionAdornerViewModelTester(
     creator,
     question,
     undefined
@@ -178,7 +178,7 @@ test("ConvertTo, show custom widgets in ConvertTo action", (): any => {
   const question = creator.survey.getQuestionByName("q1");
   creator.selectElement(question);
 
-  const questionModel = new QuestionAdornerViewModel(
+  const questionModel = new QuestionAdornerViewModelTester(
     creator,
     question,
     undefined
@@ -218,7 +218,7 @@ test("Add-remove toolbox items, #5067", (): any => {
   }], true);
   creator.clickToolboxItem(creator.toolbox.getItemByName(itemName).json);
   expect(creator.selectedElement.getType()).toEqual("text");
-  const adorner = new QuestionAdornerViewModel(creator, <SurveyElement>creator.selectedElement, undefined);
+  const adorner = new QuestionAdornerViewModelTester(creator, <SurveyElement>creator.selectedElement, undefined);
   expect(adorner.getConvertToTypesActions()).toHaveLength(0);
 });
 test("Doesn't duplicate custom toolbox items with built-in ones in convertTo", (): any => {
@@ -241,7 +241,7 @@ test("Doesn't duplicate custom toolbox items with built-in ones in convertTo", (
   };
   const question = creator.survey.getQuestionByName("q1");
   creator.selectElement(question);
-  const questionModel = new QuestionAdornerViewModel(
+  const questionModel = new QuestionAdornerViewModelTester(
     creator,
     question,
     undefined as any
@@ -272,7 +272,7 @@ test("Check convertTo action with subitems", (): any => {
   expect(question.getType()).toBe("text");
 
   creator.selectElement(question);
-  const questionModel = new QuestionAdornerViewModel(creator, question, undefined as any);
+  const questionModel = new QuestionAdornerViewModelTester(creator, question, undefined as any);
 
   const items = questionModel.getConvertToTypesActions();
   const ratingItem = items.filter(i => i.id == "rating")[0] as Action;

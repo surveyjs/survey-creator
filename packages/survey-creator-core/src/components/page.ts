@@ -233,7 +233,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   public get addNewQuestionText(): string {
     if (!this.currentAddQuestionType && this.creator)
       return this.creator.getLocString("ed.addNewQuestion");
-    return !!this.creator ? this.creator.getAddNewQuestionText(this.currentAddQuestionType) : "";
+    return !!this.creator ? this.questionTypeSelector.getAddNewQuestionText(this.currentAddQuestionType) : "";
   }
   private _footerActionsBar: ActionContainer;
   public get footerActionsBar(): ActionContainer {

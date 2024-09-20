@@ -48,7 +48,7 @@ import {
   isStringEditable
 } from "../src/creator-base";
 import { SurveyHelper } from "../src/survey-helper";
-import { CreatorTester } from "./creator-tester";
+import { CreatorTester, QuestionAdornerViewModelTester } from "./creator-tester";
 import { EditorLocalization, editorLocalization } from "../src/editorLocalization";
 import { ICreatorPlugin, settings } from "../src/creator-settings";
 import { PropertyGridEditorCollection } from "../src/property-grid/index";
@@ -57,6 +57,7 @@ import { ObjectSelector } from "../src/property-grid/object-selector";
 import { TabDesignerViewModel } from "../src/components/tabs/designer";
 import { ConfigureTablePropertyEditorEvent } from "../src/creator-events-api";
 import { IQuestionToolboxItem } from "../src/toolbox";
+import { QuestionTypeSelector } from "../src/question-type-selector";
 
 surveySettings.supportCreatorV2 = true;
 
@@ -1241,19 +1242,22 @@ test("Convert text question into single matrix", (): any => {
   expect(el.rows[0].value).toEqual("Row 1");
 });
 test("Question type selector", (): any => {
+  surveySettings.animationEnabled = false;
   const creator = new CreatorTester();
+  const selector = new QuestionTypeSelector(creator);
   const survey: SurveyModel = creator.survey;
   expect(survey.getAllQuestions().length).toEqual(0);
-  expect(creator.addNewQuestionText).toEqual("Add Question");
-  const selectorModel = creator.getQuestionTypeSelectorModel(() => { });
+  expect(selector.addNewQuestionText).toEqual("Add Question");
+  const selectorModel = selector.getQuestionTypeSelectorModel({ actionData: {} });
   const listModel: ListModel = selectorModel.popupModel.contentComponentData.model;
   selectorModel.popupModel.toggleVisibility();
   const ratingItem = listModel.actions.filter((item) => item.id == "rating")[0];
+  expect(ratingItem).toBeTruthy();
   listModel.onItemClick(ratingItem);
-  expect(creator.addNewQuestionText).toEqual("Add Rating Scale");
+  expect(selector.addNewQuestionText).toEqual("Add Rating Scale");
   expect(survey.getAllQuestions().length).toEqual(1);
   expect(survey.getAllQuestions()[0].getType()).toEqual("rating");
-  expect(creator.addNewQuestionInPage(() => { }));
+  expect(selector.addNewQuestion());
   expect(survey.getAllQuestions().length).toEqual(2);
   expect(survey.getAllQuestions()[1].getType()).toEqual("rating");
 });
@@ -1282,10 +1286,11 @@ test("Question type custom widgets", (): any => {
   CustomWidgetCollection.Instance.add(widget, "customtype");
 
   const creator = new CreatorTester();
+  const selector = new QuestionTypeSelector(creator);
   const survey: SurveyModel = creator.survey;
   expect(survey.getAllQuestions().length).toEqual(0);
-  expect(creator.addNewQuestionText).toEqual("Add Question");
-  const selectorModel = creator.getQuestionTypeSelectorModel(() => { });
+  expect(selector.addNewQuestionText).toEqual("Add Question");
+  const selectorModel = selector.getQuestionTypeSelectorModel({} as any);
   const listModel: ListModel = selectorModel.popupModel.contentComponentData.model;
   selectorModel.popupModel.toggleVisibility();
   const customItem = listModel.actions.filter((item) => item.id == "test_widget")[0];
@@ -1293,10 +1298,10 @@ test("Question type custom widgets", (): any => {
   expect(customItem.iconName).toEqual("icon-editor");
 
   listModel.onItemClick(customItem);
-  expect(creator.addNewQuestionText).toEqual("Add Test Widget");
+  expect(selector.addNewQuestionText).toEqual("Add Test Widget");
   expect(survey.getAllQuestions().length).toEqual(1);
   expect(survey.getAllQuestions()[0].getType()).toEqual("test_widget");
-  expect(creator.addNewQuestionInPage(() => { }));
+  expect(selector.addNewQuestion());
   expect(survey.getAllQuestions().length).toEqual(2);
   expect(survey.getAllQuestions()[1].getType()).toEqual("test_widget");
   CustomWidgetCollection.Instance.clear();
@@ -1309,29 +1314,32 @@ test("Question type selector localization", (): any => {
   locStrings.ed.addNewQuestion = "Add New Question";
   locStrings.ed.addNewTypeQuestion = "Add New {0}";
   const creator = new CreatorTester();
+  const selector = new QuestionTypeSelector(creator);
   const survey: SurveyModel = creator.survey;
-  expect(creator.addNewQuestionText).toEqual("Add New Question");
-  const selectorModel = creator.getQuestionTypeSelectorModel(() => { });
+  expect(selector.addNewQuestionText).toEqual("Add New Question");
+  const selectorModel = selector.getQuestionTypeSelectorModel(<any>{});
   const listModel: ListModel = selectorModel.popupModel.contentComponentData.model;
   selectorModel.popupModel.toggleVisibility();
   const ratingItem = listModel.actions.filter((item) => item.id == "rating")[0];
   listModel.onItemClick(ratingItem);
-  expect(creator.addNewQuestionText).toEqual("Add New Rating Scale");
+  expect(selector.addNewQuestionText).toEqual("Add New Rating Scale");
   locStrings.ed.addNewQuestion = oldAddNewQuestion;
   locStrings.ed.addNewTypeQuestion = oldAddNewTypeQuestion;
 });
 
 test("Question type selector popup displayMode", (): any => {
   let creator = new CreatorTester();
-  let selectorModel = creator.getQuestionTypeSelectorModel(() => { });
+  const selector = new QuestionTypeSelector(creator);
+  let selectorModel = selector.getQuestionTypeSelectorModel(<any>{});
   expect(selectorModel.popupModel.displayMode).toBe("popup");
   creator.isTouch = true;
-  selectorModel = creator.getQuestionTypeSelectorModel(() => { });
+  selectorModel = selector.getQuestionTypeSelectorModel(<any>{});
   expect(selectorModel.popupModel.displayMode).toBe("overlay");
 });
 
 test("Question type selector with custom toolbox item", (): any => {
   const creator = new CreatorTester();
+  const selector = new QuestionTypeSelector(creator);
   const customToolboxItem = <IQuestionToolboxItem>{
     "id": "panel1",
     "name": "panel1",
@@ -1353,7 +1361,7 @@ test("Question type selector with custom toolbox item", (): any => {
   const survey: SurveyModel = creator.survey;
   expect(survey.getAllQuestions().length).toEqual(0);
 
-  const selectorModel = creator.getQuestionTypeSelectorModel(() => { });
+  const selectorModel = selector.getQuestionTypeSelectorModel(<any>{});
   const listModel: ListModel = selectorModel.popupModel.contentComponentData.model;
   selectorModel.popupModel.toggleVisibility();
   const customItem = listModel.actions.filter((item) => item.id == "panel1")[0];
@@ -1367,9 +1375,10 @@ test("Question type selector with custom toolbox item", (): any => {
 
 test("Add question with default choices", (): any => {
   const creator = new CreatorTester();
+  const selector = new QuestionTypeSelector(creator);
   const survey: SurveyModel = creator.survey;
-  creator.currentAddQuestionType = "radiogroup";
-  creator.addNewQuestionInPage(() => { });
+  selector.currentAddQuestionType = "radiogroup";
+  selector.addNewQuestion();
   const question = <QuestionRadiogroupModel>survey.getAllQuestions()[0];
   expect(question.getType()).toEqual("radiogroup");
   expect(question.visibleChoices.length).toEqual(6);
@@ -2222,7 +2231,7 @@ test("ConvertTo, show the current question type selected", (): any => {
   const question = creator.survey.getQuestionByName("q1");
   creator.selectElement(question);
 
-  const questionModel = new QuestionAdornerViewModel(
+  const questionModel = new QuestionAdornerViewModelTester(
     creator,
     question,
     undefined
@@ -2252,7 +2261,7 @@ test("ConvertTo, show it for a panel", (): any => {
   const panel = creator.survey.getPanelByName("panel");
   creator.selectElement(panel);
 
-  const panelModel = new QuestionAdornerViewModel(
+  const panelModel = new QuestionAdornerViewModelTester(
     creator,
     panel,
     undefined
@@ -2270,7 +2279,7 @@ test("ConvertTo, show it for a panel", (): any => {
   creator.convertCurrentQuestion("paneldynamic");
   expect((<any>creator.selectedElement).getType()).toEqual("paneldynamic");
 });
-test("ConvertTo & addNewQuestion for panel & maxNestedPanels ", (): any => {
+test("ConvertTo & addNewQuestion for panel and maxNestedPanels ", (): any => {
   const creator = new CreatorTester({ maxNestedPanels: 0 });
   creator.JSON = {
     elements: [
@@ -2301,8 +2310,8 @@ test("ConvertTo & addNewQuestion for panel & maxNestedPanels ", (): any => {
   const panel5 = creator.survey.getPanelByName("panel5");
   const panel6 = creator.survey.getQuestionByName("panel6");
   const itemCount = creator.getAvailableToolboxItems().length;
-  const panel6Model = new QuestionAdornerViewModel(creator, panel6, undefined);
-  const panel5Model = new QuestionAdornerViewModel(creator, panel5, undefined);
+  const panel6Model = new QuestionAdornerViewModelTester(creator, panel6, undefined);
+  const panel5Model = new QuestionAdornerViewModelTester(creator, panel5, undefined);
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount);
   expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount);
   creator.maxNestedPanels = 3;
@@ -2421,7 +2430,7 @@ test("ConvertTo separators", (): any => {
   const question = creator.survey.getQuestionByName("q1");
   creator.selectElement(question);
 
-  const questionModel = new QuestionAdornerViewModel(
+  const questionModel = new QuestionAdornerViewModelTester(
     creator,
     question,
     undefined
@@ -2436,7 +2445,7 @@ test("ConvertTo separators", (): any => {
   const panel = creator.survey.getPanelByName("panel");
   creator.selectElement(panel);
 
-  const panelModel = new QuestionAdornerViewModel(
+  const panelModel = new QuestionAdornerViewModelTester(
     creator,
     panel,
     undefined

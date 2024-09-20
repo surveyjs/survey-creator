@@ -250,7 +250,6 @@ export class SurveyCreatorModel extends Base
   @property() showOptions: boolean;
   @property({ defaultValue: false }) showSearch: boolean;
   @property({ defaultValue: true }) generateValidJSON: boolean;
-  @property({ defaultValue: "" }) currentAddQuestionType: string;
   /**
    * Specifies the orientation of the selected device in the Preview tab.
    *
@@ -3619,55 +3618,6 @@ export class SurveyCreatorModel extends Base
     this.addNewElementReason = "ELEMENT_CONVERTED";
     el = this.convertQuestion(<Question>el, newType, defaultJSON);
     this.selectElement(el, null, "#convertTo button");
-  }
-
-  public getAddNewQuestionText(currentAddQuestionType: string = null) {
-    if (!currentAddQuestionType)
-      currentAddQuestionType = this.currentAddQuestionType;
-    if (!!currentAddQuestionType) {
-      const str = this.getLocString("ed.addNewTypeQuestion");
-      const items = this.toolbox.items.filter((item) => item.name == currentAddQuestionType);
-      if (Array.isArray(items) && items.length > 0 && !!str && !!str["format"]) {
-        return str["format"](items[0].title);
-      }
-    }
-    return this.getLocString("ed.addNewQuestion");
-  }
-  public get addNewQuestionText() {
-    return this.getAddNewQuestionText();
-  }
-  public getQuestionTypeSelectorModel(beforeAdd: (type: string) => void, element?: SurveyElement) {
-    let panel = !!element && element.isPanel ? <PanelModel>element : null;
-    const onSelectQuestionType = (questionType: string, json?: any) => {
-      this.currentAddQuestionType = questionType;
-      this.addNewQuestionInPage(beforeAdd, panel, questionType, json);
-      newAction.popupModel.hide();
-    };
-    const getActions = () => {
-      // const availableTypes = this.getAvailableToolboxItems(element).map((item) => {
-      //   return this.createIActionBarItemByClass(item, item.needSeparator, onSelectQuestionType);
-      // });
-      // return availableTypes;
-      return [];
-    };
-
-    const newAction = createDropdownActionModel({
-      iconName: "icon-more",
-      title: this.getLocString("ed.addNewQuestion"),
-    }, {
-      items: getActions(),
-      onShow: () => {
-        const listModel = newAction.popupModel.contentComponentData.model;
-        listModel.setItems(getActions());
-      },
-      allowSelection: false,
-      cssClass: "svc-creator-popup",
-      verticalPosition: "bottom",
-      horizontalPosition: "center",
-      displayMode: this.isTouch ? "overlay" : "popup"
-    });
-
-    return newAction;
   }
 
   public getUpdatedPageAdornerFooterActions(pageAdorner: PageAdorner, actions: Array<IAction>) {
