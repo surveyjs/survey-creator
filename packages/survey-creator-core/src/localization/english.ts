@@ -1514,6 +1514,7 @@ export var enStrings = {
       inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in.",
       textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels.",
       overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey.",
+      mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content.",
     },
     panellayoutcolumn: {
       effectiveWidth: "Accepts values %.",
@@ -1601,6 +1602,7 @@ export var enStrings = {
     imageFit: "Image and thumbnail fit",
     altText: "Alt text",
     height: "Height", // Auto-generated string
+    mobileHeight: "Height on smartphones",
     penColor: "Pen color", // Auto-generated string
     backgroundColor: "Background color",
     templateElements: "Template elements", // Auto-generated string
