@@ -76,6 +76,7 @@ if (!ComponentCollection.Instance.getCustomQuestionByName("shadoweffects")) {
           return createBoxShadow(Array.isArray(value) ? value : [value]);
         }
       };
+      (<QuestionPanelDynamicModel>question.contentQuestion).panels.forEach(p => p.questions.forEach(q => q.allowRootStyle = false));
     },
   });
 }
