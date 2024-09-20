@@ -17,9 +17,20 @@
     </div>
     <!-- /ko -->
 
+    <!-- ko if: $data.showHiddenTitle -->
+    <div data-bind="css: $data.cssCollapsedHiddenHeader">
+      <div data-bind="css: $data.cssCollapsedHiddenTitle">
+        <!-- ko if: !!$data.element.title -->
+        <!-- ko template: { name: 'survey-string', data: $data.element.locTitle } --><!-- /ko -->
+        <!-- /ko -->
+        <!-- ko ifnot: !!$data.element.title -->
+        <span class="svc-fake-title" data-bind="text: element.name"></span>
+        <!-- /ko -->
+      </div>
+    </div>
+    <!-- /ko -->
     <!-- ko component: { name: 'sv-template-renderer', params: { componentData: null, templateData: templateData } } -->
     <!-- /ko -->
-
     <!-- ko if: koIsEmptyElement() -->
     <div class="svc-panel__placeholder_frame-wrapper">
       <div class="svc-panel__placeholder_frame">
