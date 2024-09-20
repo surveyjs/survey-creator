@@ -135,7 +135,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     if (this.renderedCollapsed) {
       result += " svc-question__content--collapsed";
     }
-    if ((this.surveyElement.isPanel && !this.surveyElement.hasTitle) || (!this.surveyElement.isPanel && (this.surveyElement as Question).getTitleLocation() === "hidden")) {
+    if (!this.surveyElement.hasTitle || (!this.surveyElement.isPanel && (this.surveyElement as Question).getTitleLocation() === "hidden")) {
       result += " svc-question__content--title-hidden";
     }
     if ((this.surveyElement as Question).hasTitleOnBottom) {
@@ -187,10 +187,10 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       cssContent = "svc-rating-question-content";
     }
     if(this.isTitleLeft) {
-      return this.surveyElement.getWrapperElement().querySelector(`:scope ${classesToSelector((this.surveyElement as Question).getRootCss())}`);
+      return this.surveyElement.getWrapperElement()?.querySelector(`:scope ${classesToSelector((this.surveyElement as Question).getRootCss())}`);
     }
     if (cssContent) {
-      return this.surveyElement.getWrapperElement().querySelector(`:scope ${classesToSelector(cssContent)}`) as HTMLElement;
+      return this.surveyElement.getWrapperElement()?.querySelector(`:scope ${classesToSelector(cssContent)}`) as HTMLElement;
     }
     return null;
   }
@@ -203,7 +203,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       ":scope > .svc-question__adorner",
     ];
     if (!this.isTitleLeft && cssDescription) selectorArray.push(`:scope ${classesToSelector(cssDescription)}`);
-    return this.surveyElement.getWrapperElement().querySelectorAll(selectorArray.join(","));
+    return this.surveyElement.getWrapperElement()?.querySelectorAll(selectorArray.join(","));
   }
 
   protected expandWithDragIn() {
