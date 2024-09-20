@@ -2072,7 +2072,7 @@ test("Composite question - check no scroll", async (t) => {
         ],
       });
     })();
-    await t.resizeWindow(1152, 900);
+    await t.resizeWindow(1151, 900);
     await setJSON({
       "pages": [
         {
@@ -2245,7 +2245,7 @@ test("Page adorner - collapsed", async (t) => {
 
 test("Question adorner - collapsed mobile", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(552, 1080);
+    await t.resizeWindow(551, 1080);
     const json = {
       elements: [
         {
