@@ -1,0 +1,48 @@
+@import "../variables.scss";
+
+.svc-creator-popup {
+  .sd-btn.sv-popup__button {
+    border-radius: var(--ctr-button-corner-radius-small, $corner-radius);
+    padding: var(--ctr-button-padding-vertical-small, calcSize(2))
+      var(--ctr-button-padding-horizontal-small, calcSize(6)) var(--ctr-button-padding-vertical-small, calcSize(2))
+      var(--ctr-button-padding-horizontal-small, calcSize(6));
+    display: flex;
+    flex-direction: row;
+    gap: var(--ctr-button-gap, calcSize(4));
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+    box-shadow: $shadow-small;
+
+    span {
+      text-align: center;
+      font-family: var(--ctr-default-bold-font-family, $font-family);
+      font-size: var(--ctr-default-bold-font-size, $font-size);
+      line-height: var(--ctr-default-bold-line-height, calc(1.5 * var(--default-font-size)));
+      font-weight: var(--ctr-default-bold-font-weight, 600);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .sv-popup__button--cancel {
+    background: var(--ctr-button-background-color, $background);
+    color: var(--ctr-button-text-color, $primary);
+
+    &:hover {
+      background: var(--ctr-button-background-color-hovered, $background-dark);
+    }
+  }
+
+  .sv-popup__button--apply {
+    background: var(--ctr-button-background-color-cta, $primary);
+    color: var(--ctr-button-text-color-cta, $primary-foreground);
+
+    &:hover {
+      background: var(--ctr-button-background-color-cta-hovered, $primary-background-dark);
+    }
+  }
+}
