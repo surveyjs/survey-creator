@@ -22,6 +22,10 @@
     padding-left: calcSize(5);
     width: calc(100% - 2.5 * #{$base-unit});
     box-sizing: border-box;
+    & > .sv-action-bar {
+      width: calc(100% - #{calcSize(5)});
+      left: calcSize(5);
+    }
   }
 }
 
