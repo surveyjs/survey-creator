@@ -208,7 +208,7 @@ svc-question {
   --move-animation-delay: #{$svc-collapse-move-out-delay};
   --animation-direction: reverse;
   --animation-timing-function: #{$reverse-ease-out};
-} 
+}
 
 @keyframes changeAlignSelf {
   from {
@@ -237,6 +237,12 @@ svc-question {
   &.svc-question__adorner {
     animation-delay: var(--move-animation-delay);
    }
+}
+
+.svc-creator--disable-animations {
+  .svc-question--enter, .svc-question--leave {
+    animation: none;
+  }
 }
 
 .svc-question__content {
@@ -467,6 +473,11 @@ svc-question {
        animation-name: fadeIn, moveInWithOverflow;
      }
    }
+  }
+  &.svc-creator--disable-animations {
+    .svc-question--enter {
+      animation: none;
+    }
   } 
 }
 

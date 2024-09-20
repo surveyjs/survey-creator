@@ -166,6 +166,13 @@ svc-page {
     }
   } 
 }
+.svc-creator--disable-animations {
+  .svc-row {
+    .svc-question--leave {
+      animation: none;
+     }
+  }
+}
 
 .svc-creator .svc-page .svc-page__content--collapsed {
   &::after {

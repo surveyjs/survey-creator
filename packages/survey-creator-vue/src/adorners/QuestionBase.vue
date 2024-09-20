@@ -9,6 +9,16 @@
     :data-sv-drop-target-survey-element="model.element.name || null"
     data-bind="css: rootCss(), attr: { 'data-sv-drop-target-survey-element': element.name || null }, event: { mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }"
   >
+    <div v-if="model.showHiddenTitle" :class="model.cssCollapsedHiddenHeader">
+      <div :class="model.cssCollapsedHiddenTitle">
+        <SvComponent
+          v-if="!!element.hasTitle"
+          :is="'survey-string'"
+          :locString="element.locTitle"
+        />
+        <span v-else class="svc-fake-title">{{ element.name }}</span>
+      </div>
+    </div>
     <div
       v-on:click="
         (e) => {
@@ -51,11 +61,6 @@
             :model="model.topActionContainer"
             :handleClick="false"
           ></SvComponent>
-        </div>
-      </div>
-      <div v-if="model.showHiddenTitle" :class="model.cssCollapsedHiddenHeader">
-        <div :class="model.cssCollapsedHiddenTitle">
-          <SvComponent :is="'survey-string'" :locString="element.locTitle" />
         </div>
       </div>
 
