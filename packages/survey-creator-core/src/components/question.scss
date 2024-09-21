@@ -1351,7 +1351,7 @@ svc-question,
     box-shadow: $shadow-small;
 
     .svc-question__content-actions {
-      display: none;
+      opacity: 0;
     }
   }
 }
