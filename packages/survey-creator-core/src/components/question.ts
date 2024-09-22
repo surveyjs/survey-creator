@@ -352,16 +352,19 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     const newAction = this.questionTypeConverter.getQuestionTypeSelectorModel({
       actionData: actionData
     });
-    newAction.iconName = <any>new ComputedUpdater(() => {
-      if (newAction.mode === "small") {
-        return this.creator.toolbox.getItemByName(this.element.getType())?.iconName;
-      }
-      return "icon-chevron_16x16";
-    });
-    newAction.iconSize = <any>new ComputedUpdater(() => {
-      return newAction.mode === "small" ? 24 : 16;
-    });
-    newAction.disableHide = true;
+    if (newAction) {
+      newAction.iconName = <any>new ComputedUpdater(() => {
+        if (newAction.mode === "small") {
+          return this.creator.toolbox.getItemByName(this.element.getType())?.iconName;
+        }
+        return "icon-chevron_16x16";
+      });
+      newAction.iconSize = <any>new ComputedUpdater(() => {
+        return newAction.mode === "small" ? 24 : 16;
+      });
+      newAction.disableHide = true;
+    }
+
     return newAction;
   }
 
@@ -381,18 +384,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       actionData: actionData
     });
 
-    // this.surveyElement.registerFunctionOnPropertyValueChanged(
-    //   propName,
-    //   () => {
-    //     const item = this.getSelectedItem(getAvailableTypes(), this.surveyElement.getPropertyValue(propName));
-    //     if (!item) return;
-    //     const popup = newAction.popupModel;
-    //     const list = popup.contentComponentData.model;
-    //     list.selectedItem = item;
-    //     newAction.title = item.title;
-    //   },
-    //   "inputTypeAdorner"
-    // );
     if (newAction) {
       newAction.removePriority = 1;
       newAction.popupModel.displayMode = this.creator.isTouch ? "overlay" : "popup";
@@ -445,12 +436,14 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     this.questionTypeConverter = new QuestionTypeConverter(this.creator, this.element);
     this.questionSubtypeConverter = new QuestionSubtypeConverter(this.creator, this.element);
     let element = this.surveyElement;
-    items.push(this.createConvertToAction());
+    const typeConverter = this.createConvertToAction();
+    items.push(typeConverter);
     const inputTypeConverter = this.createConvertInputType();
     if (!!inputTypeConverter) {
       items.push(inputTypeConverter);
     }
     items[items.length - 1].css += " sv-action--convertTo-last";
+
     if (
       typeof element["isRequired"] !== "undefined" &&
       propertyExists(element, "isRequired") &&

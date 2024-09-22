@@ -3,6 +3,7 @@ import { ToolboxToolViewModel } from "../src/components/toolbox/toolbox-tool";
 import { CreatorTester, QuestionAdornerViewModelTester } from "./creator-tester";
 import { PageAdorner } from "../src/components/page";
 import { QuestionAdornerViewModel } from "../src/components/question";
+import { QuestionTypeSelector } from "../src/question-type-selector";
 
 test("Reason of question Added from toolbox, onclicking add question button, on duplicated question, panel, page", (): any => {
   const creator = new CreatorTester();
@@ -200,9 +201,10 @@ test("Add-remove toolbox items, #5271", (): any => {
       creator.toolbox.removeItem("dropdown");
     }
   });
-  creator.currentAddQuestionType = "dropdown";
+  const selector = new QuestionTypeSelector(creator);
+  selector.currentAddQuestionType = "dropdown";
   creator.addNewQuestionInPage(() => { }, undefined, "dropdown");
-  expect(creator.getAddNewQuestionText()).toEqual("Add Question");
+  expect(selector.getAddNewQuestionText()).toEqual("Add Question");
 });
 test("Add-remove toolbox items, #5067", (): any => {
   const creator = new CreatorTester();

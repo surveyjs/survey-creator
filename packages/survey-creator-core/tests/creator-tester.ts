@@ -59,8 +59,7 @@ export class CreatorTester extends SurveyCreatorModel {
   }
 
   getAvailableToolboxItems(question?: SurveyElement) {
-    if (question) return new QuestionAdornerViewModelTester(this, question, undefined).getConvertToTypesActions();
-    return new QuestionTypeSelector(this).getAvailableToolboxItems();
+    return new QuestionTypeSelector(this, question as any).getAvailableToolboxItems(question);
   }
 }
 

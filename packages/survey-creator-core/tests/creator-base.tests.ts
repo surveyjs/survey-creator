@@ -2164,7 +2164,7 @@ test("QuestionAdornerViewModel and onElementAllowOperations", (): any => {
   creator.selectElement(q2Model.element);
   expect(q2Model.getActionById("convertTo").visible).toBeFalsy();
   expect(q2Model.getActionById("isrequired").visible).toBeTruthy();
-  expect(q2Model.getActionById("convertInputType")).toBeFalsy();
+  expect(q2Model.getActionById("convertInputType").visible).toBeFalsy();
   creator.selectElement(q3Model.element);
   expect(q3Model.getActionById("convertTo").visible).toBeTruthy();
   expect(q3Model.getActionById("isrequired").visible).toBeFalsy();

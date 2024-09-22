@@ -3632,7 +3632,6 @@ export class SurveyCreatorModel extends Base
 
   @undoRedoTransaction()
   public addNewQuestionInPage(beforeAdd: (string) => void, panel: IPanel = null, type: string = null, initJson: any = null) {
-    if (!type) type = this.currentAddQuestionType;
     if (!type) type = settings.designer.defaultAddQuestionType;
     beforeAdd(type);
     let json = initJson;
