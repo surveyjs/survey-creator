@@ -16,8 +16,7 @@ import {
   Question,
   CssClassBuilder
 } from "survey-core";
-import { SurveyCreatorModel } from "../creator-base";
-import { settings } from "../creator-settings";
+import { CreatorBase, SurveyCreatorModel } from "../creator-base";
 import { DesignerStateManager } from "./tabs/designer-state-manager";
 import { TabDesignerPlugin } from "./tabs/designer-plugin";
 import { isPanelDynamic } from "../survey-elements";
@@ -296,11 +295,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this.creator.sidebar.onPropertyChanged.add(this.sidebarFlyoutModeChangedFunc);
     this.setShowAddQuestionButton(true);
     this.expandCollapseAction.visible = this.allowExpandCollapse;
-
-    this.creator.onSurfaceToolbarActionExecuted.add((_, options) => {
-      if (options.action.id == "collapseAll") this.collapsed = true;
-      if (options.action.id == "expandAll") this.collapsed = false;
-    });
+    this.creator.expandCollapseManager.add(this);
   }
 
   protected detachElement(surveyElement: T): void {
@@ -337,6 +332,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   public dispose(): void {
     super.dispose();
     this.detachElement(this.surveyElement);
+    this.creator.expandCollapseManager.remove(this);
     if (!this.actionContainer.isDisposed) {
       this.actionContainer.dispose();
     }
