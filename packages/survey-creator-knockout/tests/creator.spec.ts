@@ -37,6 +37,8 @@ test("isGhost value for attached element", (): any => {
   );
   expect(creator.survey.pages).toHaveLength(1);
   expect(designerPlugin.model.newPage).toBeTruthy();
+  designerPlugin.model.newPage.unRegisterFunctionOnPropertiesValueChanged(["title"]);
+  creator.survey.pages[0].unRegisterFunctionOnPropertiesValueChanged(["title"]);
   let pageAdornerModel = new CreatorSurveyPageComponent(creator as any, designerPlugin.model.newPage as any);
   expect(pageAdornerModel.isGhost).toBeTruthy();
   expect(designerPlugin.model.newPage["onPropChangeFunctions"].filter(f => f.name === "title").length).toBe(1);

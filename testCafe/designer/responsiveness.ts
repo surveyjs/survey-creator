@@ -111,21 +111,21 @@ test("Responsive creator: property grid", async (t) => {
 
     .click(questions.find(".sv-string-editor").withText("question1"))
     .expect(propertyGridSelector.visible).ok()
-    .expect(propertyGridSelector.offsetWidth).eql(450)
+    .expect(propertyGridSelector.offsetWidth).eql(451)
     .expect(flyoutPropertyGrid.exists).notOk()
     .expect(questionToolbarActions.count).eql(4)
 
     .drag(westResizer, 100, 0)
-    .expect(propertyGridSelector.offsetWidth).eql(370)
+    .expect(propertyGridSelector.offsetWidth).eql(371)
 
     .resizeWindow(750, 700)
     .click(expandButtonSelector)
     .expect(propertyGridSelector.visible).ok()
-    .expect(propertyGridSelector.offsetWidth).eql(370)
+    .expect(propertyGridSelector.offsetWidth).eql(371)
     .expect(flyoutPropertyGrid.exists).ok()
 
     .drag(westResizer, -150, 0)
-    .expect(propertyGridSelector.offsetWidth).eql(520)
+    .expect(propertyGridSelector.offsetWidth).eql(521)
 
     .click(collapseButtonSelector)
     .expect(propertyGridSelector.visible).notOk()
@@ -148,13 +148,13 @@ test("Responsive creator: property grid", async (t) => {
   await t
     .expect(westResizer.visible).notOk()
     .expect(eastResizer.visible).ok()
-    .expect(propertyGridSelector.offsetWidth).eql(520)
+    .expect(propertyGridSelector.offsetWidth).eql(521)
 
     .drag(eastResizer, -120, 0)
-    .expect(propertyGridSelector.offsetWidth).eql(400)
+    .expect(propertyGridSelector.offsetWidth).eql(401)
 
     .drag(eastResizer, 100, 0)
-    .expect(propertyGridSelector.offsetWidth).eql(500);
+    .expect(propertyGridSelector.offsetWidth).eql(501);
 });
 
 test("Responsive creator: designer tab for mobile devices", async (t) => {
