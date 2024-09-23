@@ -1,12 +1,13 @@
-import { Base, property, AdaptiveActionContainer, Action, ComputedUpdater, propertyArray, AnimationBoolean, IAnimationConsumer } from "survey-core";
+import { Base, property, Action, ComputedUpdater, propertyArray, AnimationBoolean, IAnimationConsumer } from "survey-core";
 import { getLocString } from "../../editorLocalization";
 import { SurveyCreatorModel } from "../../creator-base";
 import { SidebarPageModel } from "./side-bar-page-model";
+import { SidebarHeaderModel } from "./side-bar-header-model";
 import { ResizeManager } from "../../utils/resizer";
 import { notShortCircuitAnd } from "../../utils/utils";
 
 export class SidebarModel extends Base {
-  public toolbar: AdaptiveActionContainer = new AdaptiveActionContainer();
+  public header: SidebarHeaderModel = new SidebarHeaderModel();
 
   private _expandAction: Action;
   private _collapseAction: Action;
@@ -15,7 +16,6 @@ export class SidebarModel extends Base {
   private resizeManager: ResizeManager;
 
   @propertyArray() pages: Array<SidebarPageModel>;
-  @property() headerText: string;
   @property({ defaultValue: true }) _visible: boolean;
   @property({ defaultValue: true }) renderedIsVisible: boolean
   @property({ defaultValue: false }) collapsedManually: boolean;
@@ -31,13 +31,6 @@ export class SidebarModel extends Base {
 
   @property() sideAreaComponentName: string;
   @property() sideAreaComponentData: any;
-
-  @property() headerComponentName: string;
-  @property() headerComponentData: any;
-
-  public get activePageModel(): SidebarPageModel {
-    return this._activePage;
-  }
 
   private rootElement: HTMLElement;
 
@@ -117,7 +110,7 @@ export class SidebarModel extends Base {
         }
       }
     });
-    this.toolbar.actions.push(this._collapseAction);
+    this.header.toolbar.actions.push(this._collapseAction);
     if (this.creator.allowCollapseSidebar) {
       this._expandAction = new Action({
         id: "svd-grid-expand",
@@ -167,7 +160,7 @@ export class SidebarModel extends Base {
     this.pages.forEach(page => page.visible = false);
     this._activePage = newPage;
     if (this._activePage) {
-      this.headerText = this._activePage.caption;
+      this.header.title = this._activePage.caption;
       this._activePage.visible = true;
     }
   }
@@ -185,7 +178,7 @@ export class SidebarModel extends Base {
     const page = new SidebarPageModel(id, this, componentName, model);
     this.pages.push(page);
     if (!!buildActions) {
-      (buildActions() || []).forEach(action => this.toolbar.actions.push(action));
+      (buildActions() || []).forEach(action => this.header.toolbar.actions.push(action));
     }
     return page;
   }

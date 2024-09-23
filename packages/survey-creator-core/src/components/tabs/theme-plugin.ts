@@ -56,6 +56,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   private simulatorCssClasses: any = surveyCss[defaultV2ThemeName];
   private _availableThemes = [].concat(PredefinedThemes);
   private _showOneCategoryInPropertyGrid: boolean = false;
+  private _advancedModeValue = false;
 
   private tabControlModel: TabControlModel;
   public propertyGrid: PropertyGridModel;
@@ -70,6 +71,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     if (this._showOneCategoryInPropertyGrid !== newValue) {
       this._showOneCategoryInPropertyGrid = newValue;
       this.creator.sidebar.hideSideBarVisibilityControlActions = newValue;
+      this.updateAdvancedModeQuestion();
       this.propertyGrid.showOneCategoryInPropertyGrid = newValue;
       this.propertyGrid["setObj"](this.creator.selectedElement);
       if (this.creator.activeTab === "theme") {
@@ -78,6 +80,13 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     }
   }
 
+  private updateAdvancedModeQuestion(): void {
+    const advancedModeQuestion = this.propertyGrid.survey.getQuestionByName("advancedMode");
+    if (advancedModeQuestion) {
+      advancedModeQuestion.visible = this.showOneCategoryInPropertyGrid;
+      advancedModeQuestion.value = this._advancedModeValue;
+    }
+  }
   private createVisibleUpdater() {
     return <any>new ComputedUpdater<boolean>(() => { return this.creator.activeTab === "theme"; });
   }
@@ -92,10 +101,12 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       visible: !this.creator.isMobileView,
       action: () => {
         advancedMode.checked = !advancedMode.checked;
-        this.propertyGrid.survey.setVariable("advancedmode", advancedMode.checked);
+        if (!!this.propertyGrid.survey.getQuestionByName("advancedMode")) {
+          this.propertyGrid.survey.getQuestionByName("advancedMode").value = advancedMode.checked;
+        }
       }
     });
-    advancedMode.checked = !!this.propertyGrid.survey.getVariable("advancedmode");
+    advancedMode.checked = this._advancedModeValue;
     this.advancedModeSwitcher = advancedMode;
   }
 
@@ -105,7 +116,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     const question = Serializer.createClass("html") as QuestionHtmlModel;
     question.fromJSON({
       name: titleId,
-      visibleIf: "{advancedmode} = true",
+      visibleIf: "{advancedMode} = true",
       html: `<div class='spg-theme-group-caption'>${getLocString(titleId)}</div>`
     });
     panel.addElement(question);
@@ -211,7 +222,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   private setVisibleIf(panelName: string, visibilityValue: boolean) {
     const panel = this.propertyGrid.survey.getPanelByName(panelName);
     if (!!panel) {
-      panel.visibleIf = `{advancedmode} = ${visibilityValue}`;
+      panel.visibleIf = `{advancedMode} = ${visibilityValue}`;
     }
   }
 
@@ -220,13 +231,13 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       this.updateTabControlActions();
       this.creator.sidebar.sideAreaComponentName = "svc-tab-control";
       this.creator.sidebar.sideAreaComponentData = this.tabControlModel;
-      this.creator.sidebar.headerComponentName = "svc-side-bar-property-grid-placeholder-header";
-      this.creator.sidebar.headerComponentData = this.propertyGridTab;
+      this.creator.sidebar.header.componentName = "svc-side-bar-header";
+      this.creator.sidebar.header.componentData = this.creator.sidebar.header;
     } else {
       this.creator.sidebar.sideAreaComponentName = "";
       this.creator.sidebar.sideAreaComponentData = undefined;
-      this.creator.sidebar.headerComponentName = "";
-      this.creator.sidebar.headerComponentData = undefined;
+      this.creator.sidebar.header.componentName = "";
+      this.creator.sidebar.header.componentData = undefined;
     }
   }
 
@@ -280,8 +291,8 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.propertyGrid.survey.getAllQuestions().forEach(q => q.readOnly = false);
     this.onAvailableThemesChanged(this.availableThemes);
     this.updateAllowModifyTheme();
-    this.propertyGrid.survey.setVariable("advancedmode", !!this.advancedModeSwitcher?.checked);
-    const themeBuilderCss = { ...propertyGridCss };
+    this.updateAdvancedModeQuestion();
+    const themeBuilderCss = JSON.parse(JSON.stringify(propertyGridCss));
     themeBuilderCss.root += " spg-theme-builder-root";
 
     if (this.showOneCategoryInPropertyGrid) {
@@ -320,6 +331,16 @@ export class ThemeTabPlugin implements ICreatorPlugin {
           options.cssClasses.panel.container = "spg-nested-panel";
           options.cssClasses.panel.content = "spg-nested-panel__content";
         }
+      } else if (this.showOneCategoryInPropertyGrid && options.panel.parent?.isPage) {
+        options.cssClasses.panel.container = "spg-panel-by-page";
+        options.cssClasses.panel.content = "spg-panel-by-page__content";
+
+        if (options.panel.name === "appearanceother") {
+          options.cssClasses.panel.container += " spg-panel--hidden-border";
+        }
+        if (options.panel.name === "appearanceadvancedmode") {
+          options.cssClasses.panel.container += " spg-panel--hidden-border spg-panel--padding";
+        }
       }
     });
 
@@ -343,6 +364,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
           action: () => {
             this.creator.sidebar.expandSidebar();
             this.propertyGrid.survey.currentPage = p;
+            this.creator.sidebar.header.subTitle = p.title;
             pgTabs.forEach(i => i.active = false);
             action.active = true;
           }
@@ -350,6 +372,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
         return action;
       });
       this.tabControlModel.topToolbar.setItems(pgTabs);
+      this.creator.sidebar.header.subTitle = this.propertyGrid.survey.currentPage.title;
     }
   }
 
@@ -439,10 +462,10 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       this.model = undefined;
       this.creator.sidebar.hideSideBarVisibilityControlActions = false;
     }
+    this._advancedModeValue = !!this.propertyGrid.survey.getQuestionByName("advancedMode")?.value;
     this.creator.sidebar.sideAreaComponentName = undefined;
     this.creator.sidebar.sideAreaComponentData = undefined;
-    this.creator.sidebar.headerComponentName = undefined;
-    this.creator.sidebar.headerComponentData = undefined;
+    this.creator.sidebar.header.reset();
     this.propertyGridTab.visible = false;
     this.testAgainAction.visible = false;
     this.invisibleToggleAction && (this.invisibleToggleAction.visible = false);
