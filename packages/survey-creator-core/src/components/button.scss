@@ -13,7 +13,9 @@
     justify-content: center;
     flex-shrink: 0;
     position: relative;
-    box-shadow: $shadow-small;
+    box-shadow: var(--ctr-button-shadow-offset-x, 0px) var(--ctr-button-shadow-offset-y, 1px)
+      var(--ctr-button-shadow-blur, 2px) var(--ctr-button-shadow-spread, 0px)
+      var(--ctr-button-shadow-color, rgba(0, 0, 0, 0.15));
 
     span {
       text-align: center;
