@@ -191,9 +191,7 @@ svc-question {
   animation-delay: var(--fade-animation-delay), var(--move-animation-delay);
 }
 .svc-question--enter {
-  &:not(.svc-question__adorner).svc-question--enter.svc-question--enter.svc-question--enter.svc-question--enter.svc-question--enter.svc-question--enter.svc-question--enter.svc-question--enter.svc-question--enter.svc-question--enter.svc-question--enter {
     opacity: 0;
-  }
   --fade-animation-duration: #{$svc-expand-fade-in-duration};
   --move-animation-duration:  #{$svc-expand-move-in-duration};
   --fade-animation-delay: #{$svc-expand-fade-in-delay};
@@ -222,6 +220,7 @@ svc-question {
 .svc-question--enter, .svc-question--leave {
   &.svc-question__adorner
    {
+    opacity: 1;
     animation-name: changeAlignSelf;
     animation-duration: 0s;
   }
@@ -418,6 +417,9 @@ svc-question {
 .svc-hovered > .svc-question__content {
   & > .svc-question__content-actions {
     opacity: 1;
+    &.svc-question--enter {
+      opacity: 0;
+    }
   }
 }
 
@@ -427,11 +429,9 @@ svc-question {
   .sd-question__title {
     color: $foreground-light;
   }
-  &.svc-question__content {
-    & > .svc-question__content-actions {
+  & > .svc-question__content-actions {
       opacity: 0;
     }
-  }
 }
 
 .svc-creator--mobile {
