@@ -12,6 +12,7 @@
         e.stopPropagation();
       }
     "
+    ref="root"
     @dblclick="(e) => model.dblclick(e)"
     @mouseover="hover"
     @mouseleave="hover"
@@ -45,11 +46,13 @@ import { useCreatorModel } from "@/creator-model";
 import type { SurveyModel, PageModel } from "survey-core";
 import type { SurveyCreatorModel } from "survey-creator-core";
 import { PageAdorner } from "survey-creator-core";
+import { onMounted, onUpdated, ref } from "vue";
 const props = defineProps<{
   creator: SurveyCreatorModel;
   survey?: SurveyModel;
   page: PageModel;
 }>();
+const root = ref();
 const model = useCreatorModel(
   () => new PageAdorner(props.creator, props.page),
   [() => props.page],
@@ -57,6 +60,16 @@ const model = useCreatorModel(
     value.dispose();
   }
 );
+onUpdated(() => {
+  if (root.value && model.value) {
+    model.value.rootElement = root.value;
+  }
+});
+onMounted(() => {
+  if (root.value && model.value) {
+    model.value.rootElement = root.value;
+  }
+});
 const hover = (event: MouseEvent) => {
   model.value.hover(event, event.currentTarget);
 };

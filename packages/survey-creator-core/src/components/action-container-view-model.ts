@@ -97,6 +97,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   protected designerStateManager: DesignerStateManager;
   @property({ defaultValue: true }) allowDragging: boolean;
   @property({ defaultValue: false }) animationRunning: boolean;
+  public rootElement: HTMLElement;
 
   protected get dragInsideCollapsedContainer(): boolean {
     return this.collapsed && this.creator.dragDropSurveyElements.insideContainer;
@@ -331,6 +332,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
 
   public dispose(): void {
     super.dispose();
+    this.rootElement = undefined;
     this.detachElement(this.surveyElement);
     this.creator.expandCollapseManager.remove(this);
     if (!this.actionContainer.isDisposed) {

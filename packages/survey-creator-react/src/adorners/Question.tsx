@@ -25,7 +25,10 @@ export class QuestionAdornerComponent extends CreatorModelElement<
 > {
   private modelValue: QuestionAdornerViewModel;
   protected rootRef: React.RefObject<HTMLDivElement>;
-
+  constructor(props: QuestionAdornerComponentProps) {
+    super(props);
+    this.rootRef = React.createRef();
+  }
   protected createModel(props: any): void {
     if (this.modelValue) {
       this.modelValue.dispose();
@@ -130,6 +133,16 @@ export class QuestionAdornerComponent extends CreatorModelElement<
       </>
     );
   }
+  componentDidMount() {
+    super.componentDidMount();
+    this.model.rootElement = this.rootRef.current;
+  }
+  componentDidUpdate(prevProps: any, prevState: any): void {
+    super.componentDidUpdate(prevProps, prevState);
+    if(this.rootRef?.current && this.modelValue) {
+      this.modelValue.rootElement = this.rootRef.current;
+    }
+  }
   renderElementPlaceholder(): JSX.Element {
     if (!this.model.isEmptyElement) {
       return null;
@@ -143,6 +156,11 @@ export class QuestionAdornerComponent extends CreatorModelElement<
         </div>
       </div>
     );
+  }
+  componentWillUnmount(): void {
+    if(this.model) {
+      this.model.dispose();
+    }
   }
 }
 

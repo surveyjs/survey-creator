@@ -12,7 +12,6 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   @property({ defaultValue: false }) isSelected: boolean;
   @property({ defaultValue: true }) isPageLive: boolean;
   @property() showPlaceholder: boolean;
-  public onPageSelectedCallback: () => void;
   public questionTypeSelectorModel: any;
   @property({ defaultValue: "" }) currentAddQuestionType: string;
   @property({ defaultValue: null }) dragTypeOverMe: DragTypeOverMeEnum;
@@ -101,8 +100,8 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     if (isSelected && this.creator.pageEditMode === "bypage") {
       this.setSurveyElement(<PageModel>this.creator.selectedElement);
     }
-    if (isSelected && !!this.onPageSelectedCallback) {
-      this.onPageSelectedCallback();
+    if (isSelected) {
+      this.onPageSelected();
     }
   }
   private patchPageForDragDrop(page: PageModel, addGhostPage: () => void) {
@@ -171,9 +170,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     if (!model.isGhost) {
       if (model.creator.pageEditMode !== "single") {
         model.creator.selectElement(model.page, undefined, false);
-        if (!!this.onPageSelectedCallback) {
-          this.onPageSelectedCallback();
-        }
+        this.onPageSelected();
       }
       else {
         model.creator.selectElement(model.creator.survey, undefined, false);
@@ -199,16 +196,15 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     } else {
       this.dragOut();
     }
+    result += (" svc-page__content--collapse-" + this.creator.expandCollapseButtonVisibility);
+    if (this.renderedCollapsed) result += (" svc-page__content--collapsed");
+    if (this.animationRunning) result += (" svc-page__content--animation-running");
     if (this.isGhost) {
       return result + " svc-page__content--new";
     }
     if (this.creator.isElementSelected(this.page)) {
       result += " svc-page__content--selected";
     }
-
-    result += (" svc-page__content--collapse-" + this.creator.expandCollapseButtonVisibility);
-    if (this.renderedCollapsed) result += (" svc-page__content--collapsed");
-    if (this.animationRunning) result += (" svc-page__content--animation-running");
     return result.trim();
   }
 
@@ -248,22 +244,22 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     }
     return this._footerActionsBar;
   }
-
-  private getWrapperElement() {
-    return document.querySelector(`[data-sv-drop-target-page="${this.page.name}"]`);
-  }
   protected getAnimatedElement() {
     const cssClasses = this.surveyElement.cssClasses.page;
     if (cssClasses?.description) {
-      return this.getWrapperElement()?.querySelector(`:scope ${classesToSelector(cssClasses.description)}`) as HTMLElement;
+      return this.rootElement?.querySelector(`:scope ${classesToSelector(cssClasses.description)}`) as HTMLElement;
     }
     return null;
   }
 
   protected getInnerAnimatedElements() {
     const cssClasses = this.surveyElement.cssClasses;
-    if (cssClasses.pageRow) return this.getWrapperElement()?.querySelectorAll(":scope .svc-page__footer, :scope .sd-body__page > .svc-row");
+    if (cssClasses.pageRow) return this.rootElement?.querySelectorAll(":scope .svc-page__footer, :scope .sd-body__page > .svc-row");
     return null;
   }
-
+  public onPageSelected() {
+    if(this.rootElement) {
+      SurveyHelper.scrollIntoViewIfNeeded(this.rootElement);
+    }
+  }
 }

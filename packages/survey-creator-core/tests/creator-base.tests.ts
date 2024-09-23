@@ -125,13 +125,20 @@ test("Update JSON before drag&drop", (): any => {
   expect(json.type).toEqual("panel");
   expect(json.elements[0].name).toEqual("question2");
 });
+class PageAdornerTester extends PageAdorner {
+  public onPageSelectedCallback: () => void;
+  public onPageSelected(): void {
+    super.onPageSelected();
+    this.onPageSelectedCallback && this.onPageSelectedCallback();
+  }
+}
 test("PageAdorner", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
     elements: [{ type: "text", name: "question1" }]
   };
   expect(creator.currentPage.onPropertyChanged.isEmpty).toBeTruthy();
-  const pageModel = new PageAdorner(creator, creator.survey.currentPage);
+  const pageModel = new PageAdornerTester(creator, creator.survey.currentPage);
   let counter = 0;
   pageModel.onPageSelectedCallback = (): any => {
     counter++;
