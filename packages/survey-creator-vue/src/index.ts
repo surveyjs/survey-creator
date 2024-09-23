@@ -6,15 +6,16 @@ import TabbedMenu from "./tabbed-menu/TabbedMenu.vue";
 import TabbedMenuItemWrapper from "./tabbed-menu/TabbedMenuItemWrapper.vue";
 import TabbedMenuItem from "./tabbed-menu/TabbedMenuItem.vue";
 import SideBar from "./side-bar/SideBar.vue";
+import SideBarDefaultHeader from "./side-bar/SideBarDefaultHeader.vue";
 import SideBarPage from "./side-bar/SideBarPage.vue";
-import ObjectSelector from "./property-panel/ObjectSelector.vue";
-import PropertyGrid from "./property-panel/PropertyGrid.vue";
-import Tabs from "./tab-control/Tabs.vue";
-import TabControl from "./tab-control/TabControl.vue";
-import TabButton from "./tab-control/TabButton.vue";
-import Placeholder from "./tab-control/Placeholder.vue";
-import PlaceholderHeader from "./tab-control/PlaceholderHeader.vue";
-import PropertyGridHeader from "./tab-control/PropertyGridHeader.vue";
+import ObjectSelector from "./side-bar/ObjectSelector.vue";
+import PropertyGrid from "./side-bar/PropertyGrid.vue";
+import Tabs from "./side-bar/Tabs.vue";
+import TabControl from "./side-bar/TabControl.vue";
+import TabButton from "./side-bar/TabButton.vue";
+import Placeholder from "./side-bar/PropertyGridPlaceholder.vue";
+import SideBarHeader from "./side-bar/SideBarHeader.vue";
+import SideBarPropertyGridHeader from "./side-bar/SideBarPropertyGridHeader.vue";
 
 import QuestionError from "./components/QuestionError.vue";
 import ActionButton from "./components/ActionButton.vue";
@@ -46,6 +47,7 @@ import ColorItem from "./custom-questions/ColorItem.vue";
 import File from "./custom-questions/File.vue";
 import SpinEditor from "./custom-questions/SpinEditor.vue";
 import TextWithReset from "./custom-questions/TextWithReset.vue";
+import BooleanSwitch from "./custom-questions/BooleanSwitch.vue";
 import { editableStringRendererName } from "survey-creator-core";
 
 import StringEditor from "./StringEditor.vue";
@@ -73,7 +75,7 @@ import ItemValue from "./adorners/ItemValue.vue";
 import ImageItemValue from "./adorners/ImageItemValue.vue";
 import QuestionEditor from "./QuestionEditor.vue";
 import Logo from "./header/Logo.vue";
-import Search from "./property-panel/Search.vue";
+import Search from "./side-bar/Search.vue";
 import PageNavigator from "./page-navigator/PageNavigator.vue";
 import PageNavigatorItem from "./page-navigator/PageNavigatorItem.vue";
 import Dropdown from "./adorners/Dropdown.vue";
@@ -102,17 +104,14 @@ function registerComponents(
   registerComponent("svc-tabbed-menu-item", TabbedMenuItem);
 
   registerComponent("svc-side-bar", SideBar);
-
+  registerComponent("svc-side-bar-default-header", SideBarDefaultHeader);
   registerComponent("svc-side-bar-page", SideBarPage);
   registerComponent("svc-tabs", Tabs);
   registerComponent("svc-tab-control", TabControl);
   registerComponent("svc-tab-button", TabButton);
   registerComponent("svc-property-grid-placeholder", Placeholder);
-  registerComponent(
-    "svc-side-bar-property-grid-placeholder-header",
-    PlaceholderHeader
-  );
-  registerComponent("svc-side-bar-property-grid-header", PropertyGridHeader);
+  registerComponent("svc-side-bar-header", SideBarHeader);
+  registerComponent("svc-side-bar-property-grid-header", SideBarPropertyGridHeader);
 
   registerComponent("svc-property-grid", PropertyGrid);
   registerComponent("svc-object-selector", ObjectSelector);
@@ -128,6 +127,7 @@ function registerComponents(
 
   registerComponent("survey-color", Color);
   registerComponent("color-item", ColorItem);
+  registerComponent("sv-boolean-switch", BooleanSwitch);
   registerComponent("survey-fileedit", File);
   registerComponent("survey-spinedit", SpinEditor);
   registerComponent("survey-textwithreset", TextWithReset);

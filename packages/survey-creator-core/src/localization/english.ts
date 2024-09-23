@@ -893,6 +893,7 @@ export var enStrings = {
       fontSize: "Survey font size",
       scale: "Survey scale factor",
       cornerRadius: "Corner radius",
+      advancedMode: "Advanced mode",
       pageTitle: "Title font",
       pageDescription: "Description font",
       questionTitle: "Title font",
