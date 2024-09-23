@@ -17,17 +17,11 @@
         var(--ctr-popup-shadow-3-blur, 64px) var(--ctr-popup-shadow-3-spread, 0px)
         var(--ctr-popup-shadow-3-color, rgba(0, 76, 68, 0.1));
 
-    .sv-popup__body-header {
-      margin-bottom: 0;
-    }
-    .sv-popup__body-footer {
-      margin-top: 0;
-    }
     .sv-footer-action-bar {
       gap: var(--ctr-popup-buttons-gap, calcSize(1.5));
     }
 
-    & > .sv-popup__shadow > .sv-popup__body-content {
+    & > .sv-popup__body-content {
       background-color: var(--ctr-popup-background-color, $background-dim-light);
 
       padding: var(--ctr-popup-padding-top, calcSize(4)) var(--ctr-popup-padding-right, calcSize(4))
