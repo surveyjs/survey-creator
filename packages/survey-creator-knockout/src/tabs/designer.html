@@ -13,8 +13,9 @@
     <!-- /ko -->
     <div class="svc-designer__placeholder-container"
       data-bind="attr: { 'data-sv-drop-target-survey-element': 'newGhostPage' }">
-      <span class="svc-designer-placeholder-text svc-text svc-text--normal" data-bind="text: placeholderText"> </span>
-      <svc-page class="svc-designer-placeholder-page" params="survey: survey, creator: creator, page: newPage">
+      <!-- ko component: { name: 'svc-surface-placeholder', params: { name: 'designer', placeholderTitleText: $data.placeholderTitleText, placeholderDescriptionText: $data.placeholderDescriptionText } } -->
+      <!-- /ko -->
+      <svc-page class=" svc-designer-placeholder-page" params="survey: survey, creator: creator, page: newPage">
       </svc-page>
     </div>
     <!-- /ko -->

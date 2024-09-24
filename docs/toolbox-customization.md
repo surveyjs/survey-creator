@@ -96,17 +96,17 @@ Ungrouped items fall into the General category. You can use [localization capabi
 ```
 
 ```js
-const translations = SurveyCreator.localization.getLocale("");
-translations.ed.toolboxGeneralCategory = "Common";
+const translations = SurveyCreator.editorLocalization.getLocale("");
+translations.toolboxCategories["general"] = "Common";
 ```
 
 In modular applications, use the code below:
 
 ```js
 import "survey-creator-core/survey-creator-core.i18n";
-import { localization } from "survey-creator-core";
-const translations = localization.getLocale("");
-translations.ed.toolboxGeneralCategory = "Common";
+import { editorLocalization } from "survey-creator-core";
+const translations = editorLocalization.getLocale("");
+translations.toolboxCategories["general"] = "Common";
 ```
 
 The following properties control the behavior of categories:

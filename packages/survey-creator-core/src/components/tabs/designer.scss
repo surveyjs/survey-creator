@@ -93,33 +93,39 @@ svc-tab-designer {
 .svc-designer__placeholder-container {
   display: flex;
   flex-grow: 1;
+  flex-shrink: 0;
   width: 100%;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 0px;
   padding: calcSize(2);
   box-sizing: border-box;
   text-align: center;
+  position: relative;
+
+  .sd-page {
+    display: none;
+  }
 }
 
 .svc-designer-placeholder-page {
-  margin-top: calcSize(2);
-}
+  .svc-page__footer {
+    width: calcSize(33);
+    margin-left: auto;
+    margin-right: auto;
+  }
 
-.svc-designer-placeholder-page .svc-page__footer {
-  width: calcSize(33);
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.svc-designer-placeholder-page .svc-row--ghost {
-  display: none;
+  .svc-row--ghost {
+    display: none;
+  }
 }
 
 .svc-tab-designer__toolbar {
   position: absolute;
   bottom: calcSize(0);
   right: 0;
+
   .sv-action-bar {
     padding: calcSize(1.5);
     gap: calcSize(1);

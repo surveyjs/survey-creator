@@ -1,10 +1,11 @@
 <ng-template #template>
-  <div class="svc-creator-tab__content svc-translation-tab">
-    <div class="st-content">
-      <div *ngIf="model.isEmpty" class="st-no-strings">
-        <span>{{model.noStringsText}}</span>
-      </div>
-      <div *ngIf="!model.isEmpty" class="svc-flex-column st-strings-wrapper">
+  <div class="svc-creator-tab__content svc-translation-tab" [class]="model.isEmpty ? 'svc-translation-tab--empty' : ''">
+    <svc-surface-placeholder *ngIf="model.isEmpty" [name]="'translation'"
+      [placeholderTitleText]="model.placeholderTitleText"
+      [placeholderDescriptionText]="model.placeholderDescriptionText">
+    </svc-surface-placeholder>
+    <div *ngIf="!model.isEmpty" class="st-content">
+      <div class="svc-flex-column st-strings-wrapper">
         <div class="svc-flex-row st-strings-header">
           <survey-content [model]="model.stringsHeaderSurvey"></survey-content>
         </div>

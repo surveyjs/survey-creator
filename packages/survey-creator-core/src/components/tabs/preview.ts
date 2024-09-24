@@ -338,6 +338,16 @@ export class PreviewViewModel extends Base {
     const isNextEnabled = this.survey && this.survey.visiblePages.indexOf(this.activePage) !== this.survey.visiblePages.length - 1;
     this.nextPageAction.enabled = isNextEnabled;
   }
+  public get placeholderTitleText(): string {
+    if (this.isMobileView)
+      return getLocString("ed.previewPlaceholderTitleMobile");
+    return getLocString("ed.previewPlaceholderTitle");
+  }
+  public get placeholderDescriptionText(): string {
+    if (this.isMobileView)
+      return getLocString("ed.previewPlaceholderDescriptionMobile");
+    return getLocString("ed.previewPlaceholderDescription");
+  }
   public onScroll() {
     this.survey.onScroll();
     return true;

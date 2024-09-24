@@ -1,6 +1,7 @@
 @import "../variables.scss";
 @import "./notifier.scss";
 @import "./popup.scss";
+@import "./surface-placeholder.scss";
 
 survey-creator,
 .svc-creator {
@@ -46,12 +47,22 @@ survey-creator,
   }
 }
 
-survey-creator {
+survey-creator,
+.svc-creator {
   .sv-drag-drop-choices-shortcut {
     .sv-drag-drop-choices-shortcut__content {
       background: var(--ctr-survey-radio-button-group-item-background-color-floating, $background);
 
       .sd-item__decorator {}
+
+      .svc-item-value__item {
+        overflow: hidden;
+
+        .sv-string-viewer,
+        .sv-string-editor {
+          white-space: nowrap;
+        }
+      }
     }
   }
 }

@@ -184,6 +184,18 @@ export var enStrings = {
     pagePlaceHolder: "The page is empty. Drag an element from the toolbox or click the button below.",
     imagePlaceHolder: "Drag and drop an image here or click the button below and choose an image to upload",
     surveyPlaceHolderMobile: "Click the \"Add Question\" button below to start creating your form.",
+    surveyPlaceholderTitle: "Your form is empty",
+    surveyPlaceholderTitleMobile: "Your form is empty",
+    surveyPlaceholderDescription: "Drag an element from the toolbox or click the button below.",
+    surveyPlaceholderDescriptionMobile: "Drag an element from the toolbox or click the button below.",
+    previewPlaceholderTitle: "No preview",
+    previewPlaceholderTitleMobile: "No preview",
+    previewPlaceholderDescription: "The survey doesn't contain any visible elements.",
+    previewPlaceholderDescriptionMobile: "The survey doesn't contain any visible elements.",
+    translationsPlaceholderTitle: "No strings to translate",
+    translationsPlaceholderTitleMobile: "No strings to translate",
+    translationsPlaceholderDescription: "Add elements to your form or change the strings filter in the toolbar.",
+    translationsPlaceholderDescriptionMobile: "Add elements to your form or change the strings filter in the toolbar.",
     pagePlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the page.",
     panelPlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the panel.",
     imagePlaceHolderMobile: "Click the button below and choose an image to upload",
@@ -196,6 +208,10 @@ export var enStrings = {
     lg: {
       addNewItem: "Add New Rule",
       empty_tab: "Create a rule to customize the flow of the survey.",
+      logicPlaceholderTitle: "No logical rules",
+      logicPlaceholderTitleMobile: "No logical rules",
+      logicPlaceholderDescription: "Create a rule to customize the flow of the survey.",
+      logicPlaceholderDescriptionMobile: "Create a rule to customize the flow of the survey.",
       page_visibilityName: "Show/hide page",
       page_enableName: "Enable/disable page",
       page_requireName: "Make page required",
@@ -877,6 +893,7 @@ export var enStrings = {
       fontSize: "Survey font size",
       scale: "Survey scale factor",
       cornerRadius: "Corner radius",
+      advancedMode: "Advanced mode",
       pageTitle: "Title font",
       pageDescription: "Description font",
       questionTitle: "Title font",
@@ -1514,6 +1531,7 @@ export var enStrings = {
       inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in.",
       textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels.",
       overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey.",
+      mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content.",
     },
     panellayoutcolumn: {
       effectiveWidth: "Accepts values %.",
@@ -1601,6 +1619,7 @@ export var enStrings = {
     imageFit: "Image and thumbnail fit",
     altText: "Alt text",
     height: "Height", // Auto-generated string
+    mobileHeight: "Height on smartphones",
     penColor: "Pen color", // Auto-generated string
     backgroundColor: "Background color",
     templateElements: "Template elements", // Auto-generated string

@@ -66,10 +66,10 @@ Hints are stored in the `pehelp` object (stands for "property editor help") with
 
 ```js
 // Get current locale translations
-const translations = SurveyCreator.localization.getLocale("");
+const translations = SurveyCreator.editorLocalization.getLocale("");
 // In modular applications
-import { localization } from "survey-creator-core";
-const translations = localization.getLocale("");
+import { editorLocalization } from "survey-creator-core";
+const translations = editorLocalization.getLocale("");
 
 translations.pehelp.title = "A hint for the Title property editor";
 ```
