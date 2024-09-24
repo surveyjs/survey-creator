@@ -112,26 +112,27 @@ svc-page {
   }
 }
 
-.svc-page__content:not(.svc-page__content--new):focus,
-.svc-hovered.svc-page__content:not(.svc-page__content--new) {
+.svc-page__content:focus,
+.svc-hovered.svc-page__content {
   box-shadow: 0 0 0 2px $secondary-light;
   background: var(--ctr-survey-page-background-color-hovered, $secondary-backcolor-semi-light);
 }
+.svc-page__content--new.svc-page__content--new {
+  box-shadow: none;
+  background-color: transparent;
+}
 
-.svc-creator .svc-page .svc-page__content--selected,
-.svc-creator .svc-page .svc-page__content--selected:focus,
+.svc-page__content--selected,
 .svc-hovered.svc-page__content {
-  outline-color: transparent;
-
-  &.svc-page__content--selected {
-    box-shadow: 0 0 0 2px $secondary;
-    background: $secondary-backcolor-semi-light;
-  }
-
   .svc-page__content-actions {
     opacity: 1;
   }
 }
+.svc-page__content--selected.svc-page__content--selected {
+  box-shadow: 0 0 0 2px $secondary;
+  background: $secondary-backcolor-semi-light;
+}
+
 
 .svc-page__content--animation-running {
   .svc-row {
@@ -158,17 +159,15 @@ svc-page {
 .svc-page__content--collapse-onhover, .svc-page__content--collapse-always {
   outline: 2px transparent dashed;
   transition: outline-color $creator-transition-duration;
-
+  &.svc-page__content--selected,
+  &.svc-page__content.svc-hovered {
+    outline-color: transparent;
+  }
   &.svc-page__content--collapsed-drag-over-inside {
     box-shadow: 0 0 0 2px $primary;
     background: $primary-light;
     animation: collapsed-drag-over-inside-blinking 1s infinite;
     outline-color: transparent;
-    &::after {
-      border: 2px $primary solid;
-      background: $primary-light;
-      animation: collapsed-drag-over-inside-blinking 1s infinite;
-    }
   }
 } 
 .svc-page__content--collapsed {
