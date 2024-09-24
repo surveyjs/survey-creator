@@ -306,7 +306,7 @@ test("Check question converter selected item for subitems", (): any => {
   const popupViewModelSubtype = new PopupDropdownViewModel(popupSubtype); // need for popupModel.onShow
   popupSubtype.toggleVisibility();
   const listSubtype = popupSubtype.contentComponentData.model;
-  expect(listSubtype.selectedItem.id).toBe("email");
+  expect(listSubtype.selectedItem.id).toBe("text-email");
 
   surveySettings.animationEnabled = true;
 });
@@ -496,6 +496,56 @@ test("Check question converter with subitems (json)", (): any => {
   surveySettings.animationEnabled = true;
 });
 
+test("Check question converter with subitems for input type", (): any => {
+  surveySettings.animationEnabled = false;
+  const creator = new CreatorTester();
+
+  // create subitems from new items (the same type, different json)
+  const texts = creator.toolbox.getItemByName("text") as QuestionToolboxItem;
+  texts.addSubitem({
+    name: "postalCode",
+    title: "Postal Code",
+    json: {
+      type: "text",
+      maxLength: 7,
+    }
+  });
+
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1" },
+    ]
+  };
+
+  function inputTypeList(question: SurveyElement) {
+    const questionAdorner = new QuestionAdornerViewModel(
+      creator,
+      question,
+      <any>undefined
+    );
+    const convertToAction = questionAdorner.actionContainer.getActionById("convertInputType");
+    const popup = convertToAction.popupModel;
+    const popupViewModel = new PopupDropdownViewModel(popup); // need for popupModel.onShow
+    popup.toggleVisibility();
+    return popup.contentComponentData.model;
+  }
+
+  const question = creator.survey.getQuestionByName("q1");
+  creator.selectElement(question);
+  let list = inputTypeList(question);
+
+  const newSubTypeAction = list.getActionById("postalCode");
+  newSubTypeAction.action(newSubTypeAction);
+  const questionConverted = creator.survey.getQuestionByName("q1");
+  expect(questionConverted.inputType).toBe("text");
+  expect(questionConverted.maxLength).toBe(7);
+
+  list = inputTypeList(questionConverted);
+  expect(list.selectedItem.id).toBe("postalCode");
+
+  surveySettings.animationEnabled = true;
+});
+
 test("Check question converter with subitems (types)", (): any => {
   surveySettings.animationEnabled = false;
   const creator = new CreatorTester();
@@ -585,9 +635,9 @@ test("Check question converter with subitems (rating, json)", (): any => {
   const ratingItem = creator.toolbox.getItemByName("rating");
 
   // Remove Default Subitems
-  ratingItem.removeSubitem("labels");
-  ratingItem.removeSubitem("stars");
-  ratingItem.removeSubitem("smileys");
+  ratingItem.removeSubitem("rating-labels");
+  ratingItem.removeSubitem("rating-stars");
+  ratingItem.removeSubitem("rating-smileys");
 
   ratingItem.title = "Rating Scale";
 
