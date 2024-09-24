@@ -8,7 +8,9 @@ export class ExpandCollapseManager {
       const isExpandAction = options.action.id == "expandAll";
       if(isCollapseAction || isExpandAction) {
         for(let i = this.adorners.length - 1; i >= 0; i--) {
-          this.adorners[i].collapsed = isCollapseAction;
+          if (this.adorners[i].allowExpandCollapse) {
+            this.adorners[i].collapsed = isCollapseAction;
+          }
         }
       }
     });

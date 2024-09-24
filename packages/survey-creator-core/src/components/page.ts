@@ -43,7 +43,9 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   protected get dragInsideCollapsedContainer(): boolean {
     return this.collapsed;
   }
-
+  protected getAllowExpandCollapse(options: any): boolean {
+    return !this.isGhost && super.getAllowExpandCollapse(options);
+  }
   protected attachElement(surveyElement: PageModel): void {
     super.attachElement(surveyElement);
     this.dragTypeOverMe = null;
@@ -196,9 +198,11 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     } else {
       this.dragOut();
     }
-    result += (" svc-page__content--collapse-" + this.creator.expandCollapseButtonVisibility);
-    if (this.renderedCollapsed) result += (" svc-page__content--collapsed");
-    if (this.animationRunning) result += (" svc-page__content--animation-running");
+    if(this.allowExpandCollapse) {
+      result += (" svc-page__content--collapse-" + this.creator.expandCollapseButtonVisibility);
+      if (this.renderedCollapsed) result += (" svc-page__content--collapsed");
+      if (this.expandCollapseAnimationRunning) result += (" svc-page__content--animation-running");
+    }
     if (this.isGhost) {
       return result + " svc-page__content--new";
     }

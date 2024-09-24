@@ -96,7 +96,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   protected expandCollapseAction: IAction;
   protected designerStateManager: DesignerStateManager;
   @property({ defaultValue: true }) allowDragging: boolean;
-  @property({ defaultValue: false }) animationRunning: boolean;
+  @property({ defaultValue: false }) expandCollapseAnimationRunning: boolean;
   public rootElement: HTMLElement;
 
   protected get dragInsideCollapsedContainer(): boolean {
@@ -167,7 +167,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       });
     };
     const afterRunAnimation = (el: HTMLElement, animatingClassName: string) => {
-      this.animationRunning = false;
+      this.expandCollapseAnimationRunning = false;
       cleanHtmlElementAfterAnimation(el);
       const innerAnimatedElements = this.getInnerAnimatedElements();
       innerAnimatedElements.forEach((elem: HTMLElement) => {
@@ -212,7 +212,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this._renderedCollapsed = !val;
   }, () => !this.renderedCollapsed);
   public set renderedCollapsed(val: boolean) {
-    if (this.animationAllowed) this.animationRunning = true;
+    if (this.animationAllowed) this.expandCollapseAnimationRunning = true;
     this.animationCollapsed.sync(!val);
   }
   public get renderedCollapsed(): boolean {
@@ -353,9 +353,12 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       this.isOperationsAllow()
     );
   }
+  protected getAllowExpandCollapse(options: any): boolean {
+    return this.creator.expandCollapseButtonVisibility != "never" && (options.allowExpandCollapse == undefined || !!options.allowExpandCollapse);
+  }
   protected updateElementAllowOptions(options: any, operationsAllow: boolean): void {
     this.allowDragging = operationsAllow && options.allowDragging;
-    this.allowExpandCollapse = this.creator.expandCollapseButtonVisibility != "never" && (options.allowExpandCollapse == undefined || !!options.allowExpandCollapse);
+    this.allowExpandCollapse = this.getAllowExpandCollapse(options);
     this.allowEditOption = (options.allowEdit == undefined || !!options.allowEdit);
     this.updateActionVisibility("delete", operationsAllow && options.allowDelete);
     this.updateActionVisibility("duplicate", operationsAllow && options.allowCopy);
