@@ -1,5 +1,5 @@
 import { QuestionAdornerViewModel } from "../src/components/question";
-import { Action, PopupDropdownViewModel, QuestionRadiogroupModel, settings, SurveyElement, settings as surveySettings } from "survey-core";
+import { Action, ComponentCollection, PopupDropdownViewModel, QuestionRadiogroupModel, settings, SurveyElement, settings as surveySettings } from "survey-core";
 import { CreatorTester } from "./creator-tester";
 import { PageAdorner } from "../src/components/page";
 import { TabDesignerPlugin } from "../src/components/tabs/designer-plugin";
@@ -542,6 +542,86 @@ test("Check question converter with subitems for input type", (): any => {
 
   list = inputTypeList(questionConverted);
   expect(list.selectedItem.id).toBe("postalCode");
+
+  surveySettings.animationEnabled = true;
+});
+
+test("Check question converter with subitems for input type, bug #5884", (): any => {
+  surveySettings.animationEnabled = false;
+  const creator = new CreatorTester();
+
+  ComponentCollection.Instance.add({
+    name: "numericentry",
+    iconName: "icon-text",
+    title: "Numeric Entry with Min/Max",
+    defaultQuestionTitle: "Numeric Entry with Min/Max",
+    questionJSON: {
+      "type": "text",
+      "maskType": "numeric",
+      "maskSettings": {
+        "precision": 3,
+        "min": 0,
+        "max": 5
+      }
+    }
+  });
+
+  const singleLineInputItem = creator.toolbox.getItemByName("text");
+
+  singleLineInputItem.addSubitem({
+    name: "numericEntry",
+    title: "Numeric Entry with Min/Max",
+    json: {
+      "type": "numericentry",
+      "maskType": "numeric",
+      "maskSettings": {
+        "precision": 3,
+        "min": 0,
+        "max": 5
+      }
+    }
+  });
+
+  creator.JSON = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "numericentry",
+            "name": "question1"
+          }
+        ]
+      }
+    ]
+  };
+
+  function inputTypeList(question: SurveyElement) {
+    const questionAdorner = new QuestionAdornerViewModel(
+      creator,
+      question,
+      <any>undefined
+    );
+    const convertToAction = questionAdorner.actionContainer.getActionById("convertInputType");
+    const popup = convertToAction.popupModel;
+    const popupViewModel = new PopupDropdownViewModel(popup); // need for popupModel.onShow
+    popup.toggleVisibility();
+    return popup.contentComponentData.model;
+  }
+
+  const question = creator.survey.getQuestionByName("question1");
+  creator.selectElement(question);
+  let list = inputTypeList(question);
+
+  const newSubTypeAction = list.getActionById("numericEntry");
+  newSubTypeAction.action(newSubTypeAction);
+  const questionConverted = creator.survey.getQuestionByName("question1");
+  expect(questionConverted.getElement().maskType).toBe("numeric");
+  expect(questionConverted.getElement().maskSettings).toBeTruthy();
+
+  list = inputTypeList(questionConverted);
+  expect(list.selectedItem.id).toBe("numericEntry");
 
   surveySettings.animationEnabled = true;
 });

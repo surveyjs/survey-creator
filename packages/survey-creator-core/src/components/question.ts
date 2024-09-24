@@ -351,14 +351,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
 
   private buildDefaultJsonMap(availableItems: QuestionToolboxItem[]) {
     const defaultJsons = {};
-    function cleanDefaultsFromJson(type: any, toolboxItem: QuestionToolboxItem) {
-      const question = QuestionFactory.Instance.createQuestion(type, "question");
-      if (!question) return toolboxItem.json;
-      question.fromJSON(toolboxItem.json);
-      const json = question.toJSON();
-      delete json.name;
-      return json;
-    }
     function addItemJson(toolboxItem: QuestionToolboxItem) {
       const type = toolboxItem.json?.type || toolboxItem.id;
       if (toolboxItem.json) {
@@ -429,30 +421,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       actionData: actionData,
       items: actions,
       updateListModel: (listModel: ListModel) => {
-        const newItems = this.getConvertToTypesActions();
-        listModel.setItems(newItems);
-        listModel.selectedItem = this.getSelectedItem(newItems, this.currentType);
-
-        newItems.forEach(action => {
-          const toolboxItem = (this.creator.toolbox.getItemByName(action.id) as QuestionToolboxItem);
-          if (action.items?.length > 0) {
-            let selectedSubItem = undefined;
-            action.items.forEach(item => {
-              const elementType = this.element.getType();
-              const toolboxSubitem = toolboxItem.getSubitemByName(item.id);
-              const json = toolboxSubitem.json || {};
-              if (item.id == elementType || json.type == elementType) {
-                if (!listModel.selectedItem) selectedSubItem = item;
-                if (this.jsonIsCorresponded(json)) selectedSubItem = item;
-              }
-            });
-            if (selectedSubItem) {
-              const _listModel = action.popupModel.contentComponentData.model;
-              _listModel.selectedItem = selectedSubItem;
-              listModel.selectedItem = action;
-            }
-          }
-        });
+        this.updateQuestionTypeOrSubtypeListModel(listModel, false);
       }
     });
     newAction.iconName = <any>new ComputedUpdater(() => {
@@ -547,9 +516,12 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   private createConvertInputType() {
     const defaultJsons = this.buildDefaultJsonMap(this.getConvertToTypes());
     const questionType = this.surveyElement.getType();
-    if (questionType !== "text" && questionType !== "rating") return null;
-    const toolboxItem = this.creator.toolbox.items.filter(item => item.id === questionType)[0];
-    if (!toolboxItem || !toolboxItem.hasSubItems) return null;
+    //if (questionType !== "text" && questionType !== "rating") return null;
+    //const toolboxItem = this.creator.toolbox.items.filter(item => item.id === questionType)[0];
+    //if (!toolboxItem || !toolboxItem.hasSubItems) return null;
+    const listModel = new ListModel([]);
+    this.updateQuestionTypeOrSubtypeListModel(listModel, true);
+    if (listModel.actions.length == 0) return null;
 
     const actionData: IAction = {
       id: "convertInputType",
