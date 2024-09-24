@@ -9,10 +9,11 @@
           <div *ngIf="survey.renderedHasHeader" [class]="survey.css.header" [survey]="survey" sv-ng-survey-header></div>
         </div>
         <div class="svc-designer__placeholder-container" [attr.data-sv-drop-target-survey-element]="'newGhostPage'">
-          <span class="svc-designer-placeholder-text svc-text svc-text--normal">
-            {{ model.placeholderText }}
-          </span>
-          <svc-page class="svc-designer-placeholder-page" [model]="model.newPage" [survey]="survey" [creator]="creator"></svc-page>
+          <svc-surface-placeholder [name]="'designer'" [placeholderTitleText]="model.placeholderTitleText"
+            [placeholderDescriptionText]="model.placeholderDescriptionText">
+          </svc-surface-placeholder>
+          <svc-page class="svc-designer-placeholder-page" [model]="model.newPage" [survey]="survey"
+            [creator]="creator"></svc-page>
         </div>
       </ng-container>
 
