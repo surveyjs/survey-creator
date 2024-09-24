@@ -121,9 +121,7 @@ svc-page {
 .svc-creator .svc-page .svc-page__content--selected,
 .svc-creator .svc-page .svc-page__content--selected:focus,
 .svc-hovered.svc-page__content {
-  &::after {
-    display: none;
-  }
+  outline-color: transparent;
 
   &.svc-page__content--selected {
     box-shadow: 0 0 0 2px $secondary;
@@ -165,7 +163,7 @@ svc-page {
     box-shadow: 0 0 0 2px $primary;
     background: $primary-light;
     animation: collapsed-drag-over-inside-blinking 1s infinite;
-
+    outline-color: transparent;
     &::after {
       border: 2px $primary solid;
       background: $primary-light;
