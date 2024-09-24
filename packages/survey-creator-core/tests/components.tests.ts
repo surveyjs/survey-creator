@@ -853,7 +853,8 @@ test("QuestionImageAdornerViewModel isUploading", () => {
     elements: [{ type: "image", name: "q1" }]
   };
   const question = <QuestionImageModel>creator.survey.getAllQuestions()[0];
-  const imageAdorner = new QuestionImageAdornerViewModel(creator, question, undefined as any, { getElementsByClassName: () => [{}] } as any);
+  const imageAdorner = new QuestionImageAdornerViewModel(creator, question, undefined as any);
+  imageAdorner.rootElement = { getElementsByClassName: () => [{}] } as any;
   let uploadCount = 0;
   creator.onOpenFileChooser.add((s, o) => {
     o.callback([{}]);
