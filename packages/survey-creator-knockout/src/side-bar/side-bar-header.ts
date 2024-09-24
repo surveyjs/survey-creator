@@ -2,9 +2,9 @@
 import * as ko from "knockout";
 import { ImplementorBase } from "survey-knockout-ui";
 
-const template = require("./property-grid-placeholder-header.html");
+const template = require("./side-bar-header.html");
 
-ko.components.register("svc-side-bar-property-grid-placeholder-header", {
+ko.components.register("svc-side-bar-header", {
   viewModel: {
     createViewModel: (params: any) => {
       new ImplementorBase(params.model);

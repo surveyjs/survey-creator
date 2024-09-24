@@ -13,6 +13,7 @@ ko.components.register("svc-side-bar", {
       const subscrib = ko.computed(() => {
         const model: SidebarModel = ko.unwrap(params.model);
         new ImplementorBase(model);
+        new ImplementorBase(model.header);
       });
 
       ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {

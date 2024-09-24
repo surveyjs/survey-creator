@@ -1,7 +1,7 @@
 import * as React from "react";
 import { SidebarPageModel, SidebarModel } from "survey-creator-core";
 import { Base } from "survey-core";
-import { SurveyElementBase, SurveyActionBar, ReactQuestionFactory, ReactElementFactory } from "survey-react-ui";
+import { SurveyElementBase, ReactQuestionFactory, ReactElementFactory } from "survey-react-ui";
 
 interface ISidebarComponentProps {
   model: SidebarModel;
@@ -36,32 +36,14 @@ export class SidebarComponent extends SurveyElementBase<ISidebarComponentProps, 
     return super.canRender();
   }
 
-  renderDefaultHeader(): JSX.Element {
-    const activePage = this.model.getActivePage();
-    const headerText = !!activePage.caption ? <div className="svc-side-bar__container-title">{activePage.caption}</div> : null;
-    return (
-      <div className="svc-side-bar__container-header">
-        <div className="svc-side-bar__container-actions">
-          <SurveyActionBar model={(this.model as any).toolbar}></SurveyActionBar>
-        </div>
-        {headerText}
-      </div>);
-  }
-
   renderElement(): JSX.Element {
     const style = { display: !this.model.renderedIsVisible ? "none" : "" };
     const className = "svc-side-bar" + (this.model.flyoutPanelMode ? " svc-flyout-side-bar" : "");
     const items = this.model.pages.map((page) => <SidebarPage page={page} key={page.id} />);
+    const headerArea = ReactElementFactory.Instance.createElement(this.model.header.component, { model: this.model.header.componentModel });
     let sideArea = null;
     if (this.model.sideAreaComponentName) {
       sideArea = ReactElementFactory.Instance.createElement(this.model.sideAreaComponentName, { model: this.model.sideAreaComponentData });
-    }
-
-    let headerArea = null;
-    if (this.model.headerComponentName) {
-      headerArea = ReactElementFactory.Instance.createElement(this.model.headerComponentName, { model: this.model.headerComponentData });
-    } else {
-      headerArea = this.renderDefaultHeader();
     }
 
     return (

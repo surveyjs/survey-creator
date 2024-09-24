@@ -14,7 +14,7 @@ test("Sidebar tabs with showTranslationTab: true", () => {
 
 test("Sidebar: activate tab change", () => {
   const creator = new CreatorTester({ showTranslationTab: true });
-  expect(creator.sidebar.headerText).toEqual(undefined);
+  expect(creator.sidebar.header.title).toEqual(undefined);
   expect(creator.sidebar.activePage).toEqual("propertyGrid");
   expect(creator.sidebar.pages[0].visible).toEqual(true); // propertyGrid
   expect(creator.sidebar.pages[1].visible).toEqual(false); // toolbox
@@ -22,7 +22,7 @@ test("Sidebar: activate tab change", () => {
   expect(creator.sidebar.pages[3].visible).toEqual(false); // translation
 
   creator.sidebar.activePage = "translation";
-  expect(creator.sidebar.headerText).toEqual("Language Settings");
+  expect(creator.sidebar.header.title).toEqual("Language Settings");
   expect(creator.sidebar.activePage).toEqual("translation");
   expect(creator.sidebar.pages[0].visible).toEqual(false); // propertyGrid
   expect(creator.sidebar.pages[1].visible).toEqual(false); // toolbox
@@ -30,7 +30,7 @@ test("Sidebar: activate tab change", () => {
   expect(creator.sidebar.pages[3].visible).toEqual(true); // translation
 
   creator.sidebar.activePage = "toolbox";
-  expect(creator.sidebar.headerText).toEqual(undefined);
+  expect(creator.sidebar.header.title).toEqual(undefined);
   expect(creator.sidebar.activePage).toEqual("toolbox");
   expect(creator.sidebar.pages[0].visible).toEqual(false); // propertyGrid
   expect(creator.sidebar.pages[1].visible).toEqual(true); // toolbox
@@ -57,8 +57,8 @@ test("showOneCategoryInPropertyGrid: showPlaceholder into property grid if surve
   designerPlugin.showOneCategoryInPropertyGrid = true;
 
   expect(creator.sidebar.activePage).toEqual("propertyGridPlaceholder");
-  expect(creator.sidebar.headerComponentName).toEqual("svc-side-bar-property-grid-placeholder-header");
-  expect(creator.sidebar.headerComponentData).toEqual(designerPlugin["propertyGridPlaceholderPage"]);
+  expect(creator.sidebar.header.componentName).toEqual("svc-side-bar-header");
+  expect(creator.sidebar.header.componentData).toEqual(creator.sidebar.header);
 
   let tabs = designerPlugin["tabControlModel"].topToolbar.actions;
   expect(tabs.length).toBe(10);
@@ -67,8 +67,8 @@ test("showOneCategoryInPropertyGrid: showPlaceholder into property grid if surve
 
   creator.clickToolboxItem({ type: "text" });
   expect(creator.sidebar.activePage).toEqual("propertyGrid");
-  expect(creator.sidebar.headerComponentName).toEqual("svc-side-bar-property-grid-header");
-  expect(creator.sidebar.headerComponentData).toEqual(designerPlugin.propertyGridViewModel.objectSelectionAction);
+  expect(creator.sidebar.header.componentName).toEqual("svc-side-bar-property-grid-header");
+  expect(creator.sidebar.header.componentData).toEqual(designerPlugin.propertyGridViewModel.objectSelectionAction);
   expect(designerPlugin.propertyGridViewModel.objectSelectionAction.title).toEqual("question1");
   expect(designerPlugin.propertyGridViewModel.objectSelectionAction.tooltip).toEqual("General");
   tabs = designerPlugin["tabControlModel"].topToolbar.actions;
@@ -85,8 +85,8 @@ test("showOneCategoryInPropertyGrid: tab control", () => {
   designerPlugin.showOneCategoryInPropertyGrid = true;
 
   expect(creator.sidebar.activePage).toEqual("propertyGrid");
-  expect(creator.sidebar.headerComponentName).toEqual("svc-side-bar-property-grid-header");
-  expect(creator.sidebar.headerComponentData).toEqual(designerPlugin.propertyGridViewModel.objectSelectionAction);
+  expect(creator.sidebar.header.componentName).toEqual("svc-side-bar-property-grid-header");
+  expect(creator.sidebar.header.componentData).toEqual(designerPlugin.propertyGridViewModel.objectSelectionAction);
   expect(designerPlugin.propertyGridViewModel.objectSelectionAction.title).toEqual("Survey");
   expect(designerPlugin.propertyGridViewModel.objectSelectionAction.tooltip).toEqual("General");
   const tabs = designerPlugin["tabControlModel"].topToolbar.actions;

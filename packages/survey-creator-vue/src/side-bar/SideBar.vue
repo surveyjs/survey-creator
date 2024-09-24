@@ -15,21 +15,9 @@
         ref="root"
       >
         <SvComponent
-          v-if="model.headerComponentName"
-          :is="model.headerComponentName"
-          :model="model.headerComponentData"
+          :is="model.header.component"
+          :model="model.header.componentModel"
         ></SvComponent>
-        <div v-else class="svc-side-bar__container-header">
-          <div class="svc-side-bar__container-actions">
-            <SvComponent
-              :is="'sv-action-bar'"
-              :model="model.toolbar"
-            ></SvComponent>
-          </div>
-          <div v-if="!!model.headerText" class="svc-side-bar__container-title">
-            {{ model.headerText }}
-          </div>
-        </div>
         <div class="svc-side-bar__container-content">
           <template v-for="(page, index) in model.pages" :key="index">
             <SvComponent :is="'svc-side-bar-page'" :model="page"></SvComponent>

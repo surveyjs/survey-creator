@@ -610,8 +610,18 @@ Serializer.addClass(
           editor.min = 0;
         }
       }
-    },
-    {
+    }, {
+      name: "advancedMode",
+      type: "switchToggle",
+      isSerializable: false,
+      default: false,
+      onPropertyEditorUpdate: function (obj: any, editor: any) {
+        if (!!editor) {
+          editor.titleLocation = "hidden";
+          editor.renderAs = "switch";
+        }
+      }
+    }, {
       type: "spinedit",
       isSerializable: false,
       name: "fontSize",
