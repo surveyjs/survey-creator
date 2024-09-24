@@ -195,15 +195,16 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     return null;
   }
 
-  protected getInnerAnimatedElements() {
+  protected getInnerAnimatedElements(): Array<HTMLElement> {
     const cssRoot = this.surveyElement.isPanel ? (this.surveyElement as PanelModel).getContainerCss() : (this.surveyElement as Question).getRootCss();
     const cssDescription = (this.surveyElement as unknown as Question | PanelModel).cssDescription;
     const selectorArray = [
       `:scope > .svc-question__content > *:not(.svc-question__drag-area):not(${classesToSelector(cssRoot)})`,
-      ":scope",
     ];
     if (!this.isTitleLeft && cssDescription) selectorArray.push(`:scope ${classesToSelector(cssDescription)}`);
-    return this.rootElement?.querySelectorAll(selectorArray.join(","));
+    const res = [].slice.call(this.rootElement?.querySelectorAll(selectorArray.join(",")));
+    res.push(this.rootElement);
+    return res;
   }
 
   protected expandWithDragIn() {

@@ -125,7 +125,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   }
 
   protected getInnerAnimatedElements() {
-    return [] as unknown as NodeListOf<Element>;
+    return [] as Array<HTMLElement>;
   }
 
   protected getCollapsingCssClassName() {
