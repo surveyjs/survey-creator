@@ -468,9 +468,9 @@ test("QuestionImageAdornerViewModel pass question into onUploadFile event", () =
   const imageAdorner = new QuestionImageAdornerViewModel(
     creator,
     question,
-    <any>{},
-    rootElement
+    <any>{}
   );
+  imageAdorner.rootElement = rootElement;
 
   let counter = 0;
   creator.onUploadFile.add((s, o) => {
