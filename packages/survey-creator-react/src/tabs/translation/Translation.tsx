@@ -18,7 +18,7 @@ export class TabTranslationComponent extends SurveyElementBase<any, any> {
   renderElement(): JSX.Element {
     if (!this.model) return null;
     return (
-      <div className={"svc-creator-tab__content svc-translation-tab" + this.model.isEmpty ? " svc-translation-tab--empty" : ""}>
+      <div className={"svc-creator-tab__content svc-translation-tab" + (this.model.isEmpty ? " svc-translation-tab--empty" : "")}>
         {this.renderElementContent()}
       </div>
     );
