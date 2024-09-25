@@ -314,9 +314,9 @@ test("Check survey timer", async (t) => {
     await takeElementScreenshot("survey-timer.png", Selector(".svc-creator__content-wrapper"), t, comparer);
   });
 });
-test("empty survey", async (t) => {
+test("empty survey preview", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    const simulator = Selector(".svd-simulator-content");
+    const simulator = Selector(".svc-test-tab--empty");
     await t.resizeWindow(800, 600);
 
     await setJSON({});

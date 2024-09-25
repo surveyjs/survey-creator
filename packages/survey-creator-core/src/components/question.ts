@@ -22,6 +22,7 @@ import {
   ActionContainer,
   Helpers,
   PanelModel,
+  classesToSelector,
   QuestionFactory
 } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
@@ -108,6 +109,10 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   rootCss() {
     const isStartWithNewLine = this.surveyElement.isQuestion && !(<Question>this.surveyElement).startWithNewLine;
     return new CssClassBuilder()
+      .append(super.getCss())
+      .append("svc-question__adorner")
+      .append("svc-question__adorner--selected", !!this.creator.isElementSelected(this.surveyElement))
+      .append("svc-question__adorner--collapsed", this.renderedCollapsed)
       .append("svc-question__adorner--start-with-new-line", isStartWithNewLine)
       .append("svc-question__adorner--collapse-" + this.creator.expandCollapseButtonVisibility, true).toString();
   }
@@ -129,6 +134,12 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     }
     if (this.renderedCollapsed) {
       result += " svc-question__content--collapsed";
+    }
+    if (!this.surveyElement.hasTitle || (!this.surveyElement.isPanel && (this.surveyElement as Question).getTitleLocation() === "hidden")) {
+      result += " svc-question__content--title-hidden";
+    }
+    if ((this.surveyElement as Question).hasTitleOnBottom) {
+      result += " svc-question__content--title-bottom";
     }
 
     if (this.isDragMe) {
@@ -166,6 +177,36 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     }
     return result;
   }
+  private get isTitleLeft() {
+    return (!this.surveyElement.isPanel && (this.surveyElement as Question).getTitleLocation() === "left");
+  }
+  protected getAnimatedElement() {
+    const cssClasses = this.surveyElement.isPanel ? this.surveyElement.cssClasses.panel : this.surveyElement.cssClasses;
+    let cssContent = cssClasses.content;
+    if (this.surveyElement.isDescendantOf("rating")) {
+      cssContent = "svc-rating-question-content";
+    }
+    if(this.isTitleLeft) {
+      return this.rootElement?.querySelector(`:scope ${classesToSelector((this.surveyElement as Question).getRootCss())}`);
+    }
+    if (cssContent) {
+      return this.rootElement?.querySelector(`:scope ${classesToSelector(cssContent)}`) as HTMLElement;
+    }
+    return null;
+  }
+
+  protected getInnerAnimatedElements(): Array<HTMLElement> {
+    const cssRoot = this.surveyElement.isPanel ? (this.surveyElement as PanelModel).getContainerCss() : (this.surveyElement as Question).getRootCss();
+    const cssDescription = (this.surveyElement as unknown as Question | PanelModel).cssDescription;
+    const selectorArray = [
+      `:scope > .svc-question__content > *:not(.svc-question__drag-area):not(${classesToSelector(cssRoot)})`,
+    ];
+    if (!this.isTitleLeft && cssDescription) selectorArray.push(`:scope ${classesToSelector(cssDescription)}`);
+    const res = [].slice.call(this.rootElement?.querySelectorAll(selectorArray.join(",")));
+    res.push(this.rootElement);
+    return res;
+  }
+
   protected expandWithDragIn() {
     super.expandWithDragIn();
     this.element.dragTypeOverMe = null;
@@ -247,8 +288,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     if (!this.surveyElement.isInteractiveDesignElement) {
       return;
     }
-    //this.updateActionsProperties();
-    toggleHovered(event, element, this.creator.pageHoverDelay);
+    super.hover(event, element);
   }
   protected updateActionsProperties(): void {
     if (this.isDisposed) return;
@@ -295,7 +335,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   }
 
   public get showHiddenTitle() {
-    return !this.element.hasTitle && this.element.isInteractiveDesignElement;
+    return (!this.element.hasTitle || this.isTitleLeft) && this.element.isInteractiveDesignElement;
   }
   public get placeholderText(): string {
     if (this.surveyElement instanceof QuestionHtmlModel) {

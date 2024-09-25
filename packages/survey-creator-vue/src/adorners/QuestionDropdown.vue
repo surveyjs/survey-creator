@@ -1,7 +1,6 @@
 <template>
   <QuestionBase
-    v-if="model"
-    :model="model"
+    :create-model="createModel"
     :element="componentData.element"
     :component-name="componentName"
     :component-data="componentData"
@@ -10,7 +9,6 @@
 </template>
 <script lang="ts" setup>
 import QuestionBase from "./QuestionBase.vue";
-import { useCreatorModel } from "../creator-model";
 import {
   SurveyCreatorModel,
   QuestionDropdownAdornerViewModel,
@@ -20,16 +18,10 @@ const props = defineProps<{
   componentName: string;
   componentData: any;
 }>();
-const model = useCreatorModel(
-  () =>
-    new QuestionDropdownAdornerViewModel(
-      props.componentData.data as SurveyCreatorModel,
-      props.componentData.element as Question,
-      null as any
-    ),
-  [() => props.componentName, () => props.componentData],
-  (value) => {
-    value.dispose();
-  }
-);
+const createModel = () =>
+  new QuestionDropdownAdornerViewModel(
+    props.componentData.data as SurveyCreatorModel,
+    props.componentData.element as Question,
+    null as any
+  );
 </script>

@@ -25,6 +25,7 @@ export * from "./tabs/logic/logic.component";
 export * from "./tabs/logic/logic-add-btn.component";
 export * from "./components/action-button.component";
 export * from "./components/question-error.component";
+export * from "./components/surface-placeholder.component";
 export * from "./components/switcher.component";
 export * from "./questions/question-link-value.component";
 export * from "./questions/question-embedded-survey.component";

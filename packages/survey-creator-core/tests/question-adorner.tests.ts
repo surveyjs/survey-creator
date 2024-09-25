@@ -649,3 +649,186 @@ test("Check question converter with subitems (rating, json)", (): any => {
   expect(creator.survey.getQuestionByName("q1").title).toBe("How satisfied?");
   surveySettings.animationEnabled = true;
 });
+
+test("Check question adorner expand/collapse animation options", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1", description: "description" },
+    ]
+  };
+  const question = creator.survey.getQuestionByName("q1");
+  creator.selectElement(question);
+  const questionAdorner = new QuestionAdornerViewModel(
+    creator,
+    question,
+    <any>undefined
+  );
+  const animationOptions = questionAdorner["getExpandCollapseAnimationOptions"]();
+
+  settings.animationEnabled = true;
+  questionAdorner.enableOnElementRenderedEvent();
+  expect(animationOptions.isAnimationEnabled()).toBeTruthy();
+  questionAdorner.blockAnimations();
+  expect(animationOptions.isAnimationEnabled()).toBeFalsy();
+  questionAdorner.releaseAnimations();
+  expect(animationOptions.isAnimationEnabled()).toBeTruthy();
+  settings.animationEnabled = false;
+  expect(animationOptions.isAnimationEnabled()).toBeFalsy();
+
+  const rootElement = document.createElement("div");
+  const adornerContentElement = document.createElement("div");
+  adornerContentElement.className = "svc-question__content";
+  const questionRootElement = document.createElement("div");
+  questionRootElement.className = question.getRootCss();
+  const questionContentElement = document.createElement("div");
+  questionContentElement.className = question.cssClasses.content;
+  const dragAreaElement = document.createElement("div");
+  dragAreaElement.className = "svc-question__drag-area";
+  const descriptionElement = document.createElement("div");
+  descriptionElement.className = question.cssDescription;
+  const actionsElement = document.createElement("div");
+  actionsElement.className = "svc-question__content-actions";
+
+  questionRootElement.appendChild(questionContentElement);
+  questionRootElement.appendChild(descriptionElement);
+  adornerContentElement.appendChild(dragAreaElement);
+  adornerContentElement.appendChild(questionRootElement);
+  adornerContentElement.appendChild(actionsElement);
+  rootElement.appendChild(adornerContentElement);
+
+  questionAdorner.rootElement = rootElement;
+
+  expect(animationOptions.getAnimatedElement()).toBe(questionContentElement);
+
+  expect(questionAdorner["getInnerAnimatedElements"]()).toEqual([descriptionElement, actionsElement, rootElement]);
+
+  const enterClass = "svc-question--enter";
+  const enterOptions = animationOptions.getEnterOptions && animationOptions.getEnterOptions();
+  expect(enterOptions?.cssClass).toBe(enterClass);
+  enterOptions?.onBeforeRunAnimation && enterOptions?.onBeforeRunAnimation(questionContentElement);
+  expect(rootElement.classList.contains(enterClass)).toBeTruthy();
+  expect(actionsElement.classList.contains(enterClass)).toBeTruthy();
+  expect(descriptionElement.classList.contains(enterClass)).toBeTruthy();
+  expect(adornerContentElement.classList.contains(enterClass)).toBeFalsy();
+  expect(dragAreaElement.classList.contains(enterClass)).toBeFalsy();
+  expect(questionRootElement.classList.contains(enterClass)).toBeFalsy();
+  expect(questionContentElement.classList.contains(enterClass)).toBeFalsy();
+
+  expect(rootElement.style.getPropertyValue("--animation-height-to")).toBe("0px");
+  expect(actionsElement.style.getPropertyValue("--animation-height-to")).toBe("0px");
+  expect(descriptionElement.style.getPropertyValue("--animation-height-to")).toBe("0px");
+
+  enterOptions?.onAfterRunAnimation && enterOptions?.onAfterRunAnimation(questionContentElement);
+  expect(rootElement.classList.contains(enterClass)).toBeFalsy();
+  expect(actionsElement.classList.contains(enterClass)).toBeFalsy();
+  expect(descriptionElement.classList.contains(enterClass)).toBeFalsy();
+  expect(rootElement.style.getPropertyValue("--animation-height-to")).toBe("");
+  expect(actionsElement.style.getPropertyValue("--animation-height-to")).toBe("");
+  expect(descriptionElement.style.getPropertyValue("--animation-height-to")).toBe("");
+
+  const leaveClass = "svc-question--leave";
+  const leaveOptions = animationOptions.getLeaveOptions && animationOptions.getLeaveOptions();
+  expect(leaveOptions?.cssClass).toBe(leaveClass);
+  leaveOptions?.onBeforeRunAnimation && leaveOptions?.onBeforeRunAnimation(questionContentElement);
+  expect(rootElement.classList.contains(leaveClass)).toBeTruthy();
+  expect(actionsElement.classList.contains(leaveClass)).toBeTruthy();
+  expect(descriptionElement.classList.contains(leaveClass)).toBeTruthy();
+  expect(adornerContentElement.classList.contains(leaveClass)).toBeFalsy();
+  expect(dragAreaElement.classList.contains(leaveClass)).toBeFalsy();
+  expect(questionRootElement.classList.contains(leaveClass)).toBeFalsy();
+  expect(questionContentElement.classList.contains(leaveClass)).toBeFalsy();
+
+  expect(rootElement.style.getPropertyValue("--animation-height-to")).toBe("0px");
+  expect(actionsElement.style.getPropertyValue("--animation-height-to")).toBe("0px");
+  expect(descriptionElement.style.getPropertyValue("--animation-height-to")).toBe("0px");
+
+  leaveOptions?.onAfterRunAnimation && leaveOptions?.onAfterRunAnimation(questionContentElement);
+  expect(rootElement.classList.contains(leaveClass)).toBeFalsy();
+  expect(actionsElement.classList.contains(leaveClass)).toBeFalsy();
+  expect(descriptionElement.classList.contains(leaveClass)).toBeFalsy();
+  expect(rootElement.style.getPropertyValue("--animation-height-to")).toBe("");
+  expect(actionsElement.style.getPropertyValue("--animation-height-to")).toBe("");
+  expect(descriptionElement.style.getPropertyValue("--animation-height-to")).toBe("");
+});
+
+test("Check question getAnimatedElement methods - title location left", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1", description: "description", titleLocation: "left" },
+    ]
+  };
+  const question = creator.survey.getQuestionByName("q1");
+  creator.selectElement(question);
+  const questionAdorner = new QuestionAdornerViewModel(
+    creator,
+    question,
+    <any>undefined
+  );
+  const animationOptions = questionAdorner["getExpandCollapseAnimationOptions"]();
+  const rootElement = document.createElement("div");
+  const adornerContentElement = document.createElement("div");
+  adornerContentElement.className = "svc-question__content";
+  const questionRootElement = document.createElement("div");
+  questionRootElement.className = question.getRootCss();
+  const questionContentElement = document.createElement("div");
+  questionContentElement.className = question.cssClasses.content;
+  const dragAreaElement = document.createElement("div");
+  dragAreaElement.className = "svc-question__drag-area";
+  const descriptionElement = document.createElement("div");
+  descriptionElement.className = question.cssDescription;
+  const actionsElement = document.createElement("div");
+  actionsElement.className = "svc-question__content-actions";
+  questionRootElement.appendChild(questionContentElement);
+  questionRootElement.appendChild(descriptionElement);
+  adornerContentElement.appendChild(dragAreaElement);
+  adornerContentElement.appendChild(questionRootElement);
+  adornerContentElement.appendChild(actionsElement);
+  rootElement.appendChild(adornerContentElement);
+  questionAdorner.rootElement = rootElement;
+
+  expect(questionAdorner["getInnerAnimatedElements"]()).toEqual([actionsElement, rootElement]);
+  expect(animationOptions.getAnimatedElement()).toBe(questionRootElement);
+});
+
+test("Check panel getAnimatedElement methods", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "panel", name: "p1", description: "description" },
+    ]
+  };
+  const panel = creator.survey.getPanelByName("p1");
+  creator.selectElement(panel);
+  const panelAdorner = new QuestionAdornerViewModel(
+    creator,
+    panel,
+    <any>undefined
+  );
+  const animationOptions = panelAdorner["getExpandCollapseAnimationOptions"]();
+  const rootElement = document.createElement("div");
+  const adornerContentElement = document.createElement("div");
+  adornerContentElement.className = "svc-question__content";
+  const panelRootElement = document.createElement("div");
+  panelRootElement.className = panel.getContainerCss();
+  const panelContentElement = document.createElement("div");
+  panelContentElement.className = panel.cssClasses.panel.content;
+  const dragAreaElement = document.createElement("div");
+  dragAreaElement.className = "svc-question__drag-area";
+  const descriptionElement = document.createElement("div");
+  descriptionElement.className = panel.cssDescription;
+  const actionsElement = document.createElement("div");
+  actionsElement.className = "svc-question__content-actions";
+  panelRootElement.appendChild(panelContentElement);
+  panelRootElement.appendChild(descriptionElement);
+  adornerContentElement.appendChild(dragAreaElement);
+  adornerContentElement.appendChild(panelRootElement);
+  adornerContentElement.appendChild(actionsElement);
+  rootElement.appendChild(adornerContentElement);
+  panelAdorner.rootElement = rootElement;
+
+  expect(panelAdorner["getInnerAnimatedElements"]()).toEqual([descriptionElement, actionsElement, rootElement]);
+  expect(animationOptions.getAnimatedElement()).toBe(panelContentElement);
+});
+

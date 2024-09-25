@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, ViewContainerRef, ViewEncapsulation } from "@angular/core";
+import { ChangeDetectorRef, Component, ElementRef, Input, ViewChild, ViewContainerRef, ViewEncapsulation } from "@angular/core";
 import { AngularComponentFactory, BaseAngular, EmbeddedViewContentComponent } from "survey-angular-ui";
 import { PageModel, PanelModel, Question, SurveyModel } from "survey-core";
 import { SurveyCreatorModel, QuestionAdornerViewModel } from "survey-creator-core";
@@ -12,6 +12,7 @@ import { CreatorModelComponent } from "./creator-model.component";
 export class QuestionDesignerComponent extends CreatorModelComponent<QuestionAdornerViewModel> {
   @Input() componentName!: string;
   @Input() componentData!: any;
+  @ViewChild("container", { read: ElementRef }) container!: ElementRef<HTMLDivElement>
   public adorner!: QuestionAdornerViewModel;
   protected get creator(): SurveyCreatorModel {
     return this.componentData.data;
@@ -46,6 +47,12 @@ export class QuestionDesignerComponent extends CreatorModelComponent<QuestionAdo
   public addNewQuestion(event: any) {
     event.stopPropagation();
     this.adorner.addNewQuestion();
+  }
+  public override ngAfterViewChecked(): void {
+    super.ngAfterViewChecked();
+    if(this.adorner && this.container?.nativeElement) {
+      this.adorner.rootElement = this.container.nativeElement;
+    }
   }
   override ngOnDestroy(): void {
     super.ngOnDestroy();

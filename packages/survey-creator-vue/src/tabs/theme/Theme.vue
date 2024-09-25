@@ -5,7 +5,10 @@
       'svc-creator-tab__content--with-toolbar': model.isPageToolbarVisible,
     }"
   >
-    <div class="svc-plugin-tab__content">
+    <div v-if="model.survey.isEmpty" class="svc-test-tab--empty">
+      <SurfacePlaceholder :name="'theme'" :placeholderTitleText="model.placeholderTitleText" :placeholderDescriptionText="model.placeholderDescriptionText" />
+    </div>
+    <div v-if="!model.survey.isEmpty" class="svc-plugin-tab__content">
       <SvComponent
         :is="'survey-simulator'"
         :model="model.simulator"
@@ -28,6 +31,7 @@
 import { SvComponent } from "survey-vue3-ui";
 import type { ThemeTabViewModel } from "survey-creator-core";
 import { useBase } from "survey-vue3-ui";
+import SurfacePlaceholder from "../../components/SurfacePlaceholder.vue";
 const props = defineProps<{ model: ThemeTabViewModel }>();
 useBase(() => props.model);
 </script>

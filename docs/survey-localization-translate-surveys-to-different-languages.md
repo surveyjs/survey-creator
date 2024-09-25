@@ -49,7 +49,7 @@ import "survey-creator-core/i18n/italian";
 The default language for UI elements is English. To select another language, set the `currentLocale` property or Survey Creator's [`locale`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#locale) property. For example, the following code translates the Survey Creator UI to French:
 
 ```js
-SurveyCreator.localization.currentLocale = "fr";
+SurveyCreator.editorLocalization.currentLocale = "fr";
 
 // In modular applications:
 import { editorLocalization } from "survey-creator-core";
@@ -65,7 +65,7 @@ You can modify individual translation strings. Call the `getLocale(locale)` meth
 
 ```js
 // Get current locale translations
-const translations = SurveyCreator.localization.getLocale("");
+const translations = SurveyCreator.editorLocalization.getLocale("");
 // In modular applications
 import { editorLocalization } from "survey-creator-core";
 const translations = editorLocalization.getLocale("");

@@ -1,12 +1,12 @@
 <!-- ko using: model -->
-<div class="svc-creator-tab__content svc-translation-tab">
+<div class="svc-creator-tab__content svc-translation-tab"
+  data-bind="css: { 'svc-translation-tab--empty': $data.isEmpty }">
+  <!-- ko if: $data.isEmpty -->
+  <svc-surface-placeholder
+    params="name: 'translation', placeholderTitleText: $data.placeholderTitleText, placeholderDescriptionText: $data.placeholderDescriptionText"></svc-surface-placeholder>
+  <!-- /ko -->
+  <!-- ko ifnot: $data.isEmpty -->
   <div class="st-content">
-    <!-- ko if: $data.isEmpty -->
-    <div class="st-no-strings">
-      <span data-bind="text: $data.noStringsText"></span>
-    </div>
-    <!-- /ko -->
-    <!-- ko ifnot: $data.isEmpty -->
     <div class="svc-flex-column st-strings-wrapper">
       <div class="svc-flex-row st-strings-header">
         <!-- ko template: { name: 'survey-content', data: $data.stringsHeaderSurvey  } --><!-- /ko -->
@@ -15,7 +15,7 @@
         <!-- ko template: { name: 'survey-content', data: $data.stringsSurvey  } --><!-- /ko -->
       </div>
     </div>
-    <!-- /ko -->
   </div>
+  <!-- /ko -->
 </div>
 <!-- /ko -->

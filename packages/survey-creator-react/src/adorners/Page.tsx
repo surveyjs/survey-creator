@@ -43,6 +43,12 @@ export class CreatorSurveyPageComponent extends CreatorModelElement<
       props.page
     );
   }
+  public componentDidUpdate(prevProps: any, prevState: any): void {
+    super.componentDidUpdate(prevProps, prevState);
+    if (!!this.rootRef?.current) {
+      this.model.rootElement = this.rootRef.current;
+    }
+  }
   protected getUpdatedModelProps(): string[] {
     return ["creator", "page"];
   }
@@ -51,15 +57,13 @@ export class CreatorSurveyPageComponent extends CreatorModelElement<
   }
   componentDidMount() {
     super.componentDidMount();
-    this.model.onPageSelectedCallback = () => {
-      if (!!this.rootRef.current) {
-        SurveyHelper.scrollIntoViewIfNeeded(this.rootRef.current);
-      }
-    };
+    if (!!this.rootRef.current) {
+      this.model.rootElement = this.rootRef.current;
+    }
   }
   componentWillUnmount() {
     super.componentWillUnmount();
-    this.model.onPageSelectedCallback = undefined;
+    this.model.dispose();
   }
   protected canRender(): boolean {
     return (

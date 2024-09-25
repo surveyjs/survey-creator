@@ -59,7 +59,6 @@ test("Page hover test", async t => {
   const question = Selector(".svc-question__adorner");
   await t.hover(page, { offsetX: 5, offsetY: 5 })
     .wait(300)
-    .expect(page.hasClass("svc-hovered-ready")).ok({ timeout: 500 })
     .expect(page.hasClass("svc-hovered")).notOk({ timeout: 200 })
     .expect(page.hasClass("svc-hovered")).ok({ timeout: 3000 })
     .hover(Selector(".sd-page__title"))

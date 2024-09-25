@@ -18,8 +18,11 @@ ko.components.register("svc-image-question", {
         params.componentData,
         params.templateData.data as QuestionImageModel,
         params.templateData,
-        componentInfo.element.parentElement
       );
+      model.rootElement = componentInfo.element.parentElement;
+      ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
+        model.rootElement = undefined;
+      });
       createQuestionViewModel(params, componentInfo, model);
       model["adornerComponent"] = "svc-image-question-adorner";
       model["koIsEmptyImageLink"] = ko.computed(() => {
