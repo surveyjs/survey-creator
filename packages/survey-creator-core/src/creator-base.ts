@@ -15,7 +15,7 @@ import { IsTouch } from "survey-core";
 import { QuestionConverter } from "./questionconverter";
 import { SurveyTextWorker } from "./textWorker";
 import { QuestionToolbox, QuestionToolboxItem } from "./toolbox";
-import { getNextItemValue, getNextItemText } from "./utils/utils";
+import { getNextItemValue, getNextItemText, assign } from "./utils/utils";
 import { PropertyGridModel } from "./property-grid";
 import { ObjType, SurveyHelper } from "./survey-helper";
 import { ICreatorSelectionOwner } from "./selection-owner";
@@ -59,6 +59,7 @@ require("./components/string-editor.scss");
 require("./creator-theme/creator.scss");
 
 import designTabSurveyThemeJSON from "./designTabSurveyThemeJSON";
+import { ICreatorTheme } from "./creator-theme/creator-theme-model";
 
 export interface IKeyboardShortcut {
   name?: string;
@@ -2747,17 +2748,17 @@ export class SurveyCreatorModel extends Base
   private currentFocusTimeout: any;
   public focusElement(element: any, focus: string | boolean, selEl: any = null, propertyName: string = null, startEdit: boolean = null) {
     if (!selEl) selEl = this.getSelectedSurveyElement();
-    if(!selEl) return;
+    if (!selEl) return;
     clearInterval(this.currentFocusInterval);
     clearTimeout(this.currentFocusTimeout);
-    if(this.animationEnabled && this.survey.isLazyRendering) {
+    if (this.animationEnabled && this.survey.isLazyRendering) {
       this.survey.disableLazyRenderingBeforeElement(selEl);
     }
     this.currentFocusTimeout = setTimeout(() => {
       this.currentFocusInterval = setInterval(() => {
         const el = document.getElementById(selEl.id);
         if (!!selEl && (focus || startEdit && (!selEl.hasTitle || selEl.isPanel))) {
-          if(!el || this.rootElement.getAnimations({ subtree: true }).filter((animation => animation.effect.getComputedTiming().activeDuration !== Infinity && (animation.pending || animation.playState !== "finished")))[0]) return;
+          if (!el || this.rootElement.getAnimations({ subtree: true }).filter((animation => animation.effect.getComputedTiming().activeDuration !== Infinity && (animation.pending || animation.playState !== "finished")))[0]) return;
           clearInterval(this.currentFocusInterval);
           if (!!el) {
             SurveyHelper.scrollIntoViewIfNeeded(el.parentElement ?? el, () => { return { block: "start", behavior: this.animationEnabled ? "smooth" : undefined }; }, true);
@@ -3902,7 +3903,30 @@ export class SurveyCreatorModel extends Base
       .append("svc-creator--mobile", this.isMobileView)
       .append("svc-creator--touch", this.isTouch)
       .append("svc-creator--disable-animations", !this.animationEnabled)
+      .append(this.themedClasses())
       .toString();
+  }
+
+  private themedClasses(): string {
+    if (!this.creatorTheme) return "";
+    return new CssClassBuilder()
+      .append("svc-creator-v1", this.creatorTheme.themeName == "v1")
+      .append("svc-creator-v2", this.creatorTheme.themeName == "v2")
+      .append("svc-creator--light", this.creatorTheme.themeName == "v2" && this.creatorTheme.palette === "light")
+      .append("svc-creator--dark", this.creatorTheme.themeName == "v2" && this.creatorTheme.palette === "dark")
+      .append("svc-creator--contrast", this.creatorTheme.themeName == "v2" && this.creatorTheme.palette === "contrast")
+      .toString();
+  }
+
+  @property({ defaultValue: {} }) cssVariables: { [index: string]: string } = {};
+  @property() creatorTheme: ICreatorTheme;
+  public get themeVariables() {
+    return assign({}, this.cssVariables);
+  }
+  public applyTheme(theme: ICreatorTheme): void {
+    if (!theme) return;
+    this.creatorTheme = theme;
+    // this.cssVariables = theme.cssVariables;
   }
 }
 

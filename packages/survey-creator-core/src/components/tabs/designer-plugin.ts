@@ -1,5 +1,5 @@
 import { Base, SurveyModel, Action, ComputedUpdater, CurrentPageChangedEvent } from "survey-core";
-import { notShortCircuitAnd } from "../../utils/utils";
+import { notShortCircuitAnd, assign } from "../../utils/utils";
 import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
 import { PropertyGridModel } from "../../property-grid";
@@ -10,6 +10,9 @@ import { DesignerStateManager } from "./designer-state-manager";
 import { TabControlModel } from "../side-bar/tab-control-model";
 import { pgTabIcons } from "../../property-grid/icons";
 import { MenuButton } from "../../utils/actions";
+import { editorLocalization } from "../../editorLocalization";
+import { creatorThemeModelPropertyGridDefinition } from "../../creator-theme/creator-theme-model-definition";
+import { CreatorThemeModel, ICreatorTheme } from "../../creator-theme/creator-theme-model";
 
 export class TabDesignerPlugin implements ICreatorPlugin {
   public model: TabDesignerViewModel;
@@ -19,6 +22,9 @@ export class TabDesignerPlugin implements ICreatorPlugin {
   private propertyGridTab: SidebarPageModel;
   private toolboxTab: SidebarPageModel;
   private propertyGridPlaceholderPage: SidebarPageModel;
+  private themeModel: CreatorThemeModel;
+  private themePropertyGrid: PropertyGridModel;
+  private themePropertyGridTab: SidebarPageModel;
   private surveySettingsAction: Action;
   private saveSurveyAction: Action;
   public previewAction: Action;
@@ -95,6 +101,49 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     }
   }
 
+  private syncTheme(theme?: ICreatorTheme) {
+    const newTheme = theme || this.themeModel.toJSON();
+    this.creator.applyTheme(newTheme);
+  }
+
+  private createCreatorThemeSettingsPage(creator: SurveyCreatorModel) {
+    this.themeModel = new CreatorThemeModel();
+    this.themePropertyGrid = new PropertyGridModel(undefined, creator, creatorThemeModelPropertyGridDefinition);
+    this.themePropertyGrid.showOneCategoryInPropertyGrid = true;
+    this.themePropertyGrid["setObj"](this.themeModel);
+    this.themePropertyGrid.surveyInstanceCreatedArea = "designer-tab:creator-settings";
+    const themePropertyGridViewModel = new PropertyGridViewModel(this.themePropertyGrid, creator);
+    themePropertyGridViewModel.searchEnabled = false;
+    this.themePropertyGridTab = this.creator.sidebar.addPage("creatorTheme", "svc-property-grid", themePropertyGridViewModel);
+    this.themePropertyGridTab.caption = editorLocalization.getString("ed.creatorSettingTitle");
+    this.themePropertyGridTab.deactivateCallback = () => {
+      settingsAction.active = false;
+    };
+    this.themeModel.onThemeSelected.add((sender, options) => {
+      this.syncTheme();
+    });
+    this.themeModel.onThemePropertyChanged.add((sender, options) => {
+      const newCssVariables = {};
+      const newVariable = {};
+      newVariable[options.name] = options.value;
+      assign(newCssVariables, this.creator.cssVariables, newVariable);
+      this.creator.cssVariables = newCssVariables;
+    });
+
+    const settingsAction = new MenuButton({
+      id: "theme-settings",
+      locTooltipName: "pe.tabs.settings",
+      iconName: "icon-settings",
+      pressed: false,
+      action: () => {
+        this.creator.sidebar.expandSidebar();
+        this.creator.sidebar.activePage = this.themePropertyGridTab.id;
+        settingsAction.active = true;
+      }
+    });
+    this.tabControlModel.bottomToolbar.setItems([settingsAction]);
+  }
+
   constructor(private creator: SurveyCreatorModel) {
     creator.addPluginTab("designer", this);
     this.tabControlModel = new TabControlModel(this.creator.sidebar);
@@ -127,6 +176,8 @@ export class TabDesignerPlugin implements ICreatorPlugin {
 
     this.propertyGridPlaceholderPage = this.creator.sidebar.addPage("propertyGridPlaceholder", "svc-property-grid-placeholder", this.propertyGridViewModel);
     this.propertyGridPlaceholderPage.caption = "Survey Settings";
+
+    this.createCreatorThemeSettingsPage(creator);
 
     this.designerStateManager = new DesignerStateManager();
     this.designerStateManager.initForSurvey(this.creator.survey);

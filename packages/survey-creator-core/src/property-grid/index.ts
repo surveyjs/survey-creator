@@ -1709,6 +1709,14 @@ export class PropertyGridEditorColor extends PropertyGridEditor {
     const res: any = { type: "color", allowEmptyValue: true };
     return res;
   }
+  public onCreated(obj: Base, question: Question, prop: JsonObjectProperty) {
+    question.valueFromDataCallback = function (val: any): any {
+      return val;
+    };
+    question.valueToDataCallback = function (val: any): any {
+      return val;
+    };
+  }
 }
 
 export class PropertyGridEditorColorWithAlpha extends PropertyGridEditor {

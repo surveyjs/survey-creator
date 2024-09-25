@@ -95,6 +95,8 @@ export * from "../utils/resizer";
 export * from "../plugins/undo-redo";
 export * from "../plugins/undo-redo/undo-redo-manager";
 export * from "../pages-controller";
+export * from "../creator-theme/creator-theme-model-definition";
+export * from "../creator-theme/creator-theme-model";
 export * from "../presets/presets-base";
 export * from "../presets/presets";
 export * from "../presets/presets-properties";
@@ -114,6 +116,8 @@ require("../property-grid-theme/property-grid.scss");
 require("../utils/design.scss");
 require("../utils/layout.scss");
 require("../custom-questions/boolean-switch.scss");
+require("../creator-theme/themes/themes.scss");
+require("../creator-theme/palettes/palettes.scss");
 
 import { settings, checkLibraryVersion } from "survey-core";
 settings.supportCreatorV2 = true;

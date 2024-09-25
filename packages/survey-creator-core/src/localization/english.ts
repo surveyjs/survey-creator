@@ -71,6 +71,7 @@ export var enStrings = {
     surveySettingsTooltip: "Survey settings",
     themeSettings: "Theme Settings",
     themeSettingsTooltip: "Theme settings",
+    creatorSettingTitle: "Creator Settings",
     showPanel: "Show Panel",
     hidePanel: "Hide Panel",
     prevSelected: "Select previous",
