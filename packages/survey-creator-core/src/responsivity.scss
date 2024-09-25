@@ -62,11 +62,16 @@
         margin: calcSize(2.5) 0 0 0;
       }
     }
+  }
 
+  .svc-page__footer {
+    margin-left: calcSize(3);
+    margin-right: calcSize(3);
+    margin-top: calcSize(3);
+  }
+  .svc-designer-placeholder-page {
     .svc-page__footer {
-      margin-left: calcSize(3);
-      margin-right: calcSize(3);
-      margin-top: calcSize(3);
+      margin-top: 0;
     }
   }
 
