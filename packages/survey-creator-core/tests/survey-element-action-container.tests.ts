@@ -212,17 +212,4 @@ test("actions and creator.onPropertyValueChanging", () => {
   isRequiredNewValue = true;
   q1Adapter.actionContainer.getActionById("isrequired").action();
   expect(q1.isRequired).toBeTruthy();
-
-  // let action = q1Adapter.getActionById("convertInputType");
-  // expect(action).toBeTruthy();
-  // const popup = action.popupModel;
-  // expect(popup).toBeTruthy();
-  // const popupViewModel = new PopupDropdownViewModel(popup); // need for popupModel.onShow
-  // popup.show();
-  // const list = popup.contentComponentData.model;
-  // const telItem = list.actions.filter(item => item.id === "text-tel")[0];
-  // list.onItemClick(telItem);
-
-  // expect(q1.inputType).toBe("date");
-  // expect(action.title).toBe("Date");
 });

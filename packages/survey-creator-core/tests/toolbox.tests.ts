@@ -843,9 +843,9 @@ test("Toolbox item removeSubitem function", (): any => {
   ratingItem.removeSubitem(ratingItem.items[0]);
   expect(ratingItem.items.length).toBe(2);
 
-  ratingItem.removeSubitem("rating-stars");
+  ratingItem.removeSubitem("stars");
   expect(ratingItem.items.length).toBe(1);
-  expect(ratingItem.items[0].id).toBe("rating-smileys");
+  expect(ratingItem.items[0].id).toBe("smileys");
   expect(ratingItem.component).toBe("svc-toolbox-item-group");
 
   ratingItem.removeSubitem(ratingItem.items[0]);

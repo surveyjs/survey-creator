@@ -306,7 +306,7 @@ test("Check question converter selected item for subitems", (): any => {
   const popupViewModelSubtype = new PopupDropdownViewModel(popupSubtype); // need for popupModel.onShow
   popupSubtype.toggleVisibility();
   const listSubtype = popupSubtype.contentComponentData.model;
-  expect(listSubtype.selectedItem.id).toBe("text-email");
+  expect(listSubtype.selectedItem.id).toBe("email");
 
   surveySettings.animationEnabled = true;
 });
@@ -448,7 +448,13 @@ test("Check question converter selected item for single subitems (json)", (): an
   const popupViewModelSubtype2 = new PopupDropdownViewModel(popupSubtype2); // need for popupModel.onShow
   popupSubtype2.toggleVisibility();
   const listSubtype2 = popupSubtype2.contentComponentData.model;
-  expect(listSubtype2.selectedItem?.id).toBe(undefined);
+  expect(listSubtype2.actions.length).toBe(2);
+  expect(listSubtype2.selectedItem.title).toBe("Long Text");
+  expect(listSubtype2.selectedItem.id).toBe("comment-default");
+  expect(listSubtype2.selectedItem.component).toBeFalsy();
+  expect(listSubtype2.selectedItem.iconName).toBeFalsy();
+  expect(listSubtype2.selectedItem.markerIconName).toBeFalsy();
+  expect(listSubtype2.selectedItem.items?.length).toBeFalsy();
 
   surveySettings.animationEnabled = true;
 });
@@ -691,7 +697,7 @@ test("Check question converter with single subitem (json)", (): any => {
   getQuestionConverterList(creator, "q1").getActionById("comment").action();
   expect(creator.survey.getQuestionByName("q1").maxLength).toBe(-1);
 
-  getQuestionConverterList(creator, "q1").getActionById("comment").items[0].action();
+  getQuestionConverterList(creator, "q1").getActionById("comment").items[1].action();
   expect(creator.survey.getQuestionByName("q1").maxLength).toBe(280);
 
   getQuestionConverterList(creator, "q1").getActionById("comment").action();
@@ -700,7 +706,7 @@ test("Check question converter with single subitem (json)", (): any => {
   getQuestionConverterList(creator, "q1").getActionById("radiogroup").action();
   expect(creator.survey.getQuestionByName("q1").maxLength).toBe(undefined);
 
-  getQuestionConverterList(creator, "q1").getActionById("comment").items[0].action();
+  getQuestionConverterList(creator, "q1").getActionById("comment").items[1].action();
   expect(creator.survey.getQuestionByName("q1").maxLength).toBe(280);
 
   surveySettings.animationEnabled = true;
@@ -715,9 +721,9 @@ test("Check question converter with subitems (rating, json)", (): any => {
   const ratingItem = creator.toolbox.getItemByName("rating");
 
   // Remove Default Subitems
-  ratingItem.removeSubitem("rating-labels");
-  ratingItem.removeSubitem("rating-stars");
-  ratingItem.removeSubitem("rating-smileys");
+  ratingItem.removeSubitem("labels");
+  ratingItem.removeSubitem("stars");
+  ratingItem.removeSubitem("smileys");
 
   ratingItem.title = "Rating Scale";
 
@@ -762,17 +768,17 @@ test("Check question converter with subitems (rating, json)", (): any => {
     ]
   };
   expect(creator.survey.getQuestionByName("q1").rateCount).toBe(5);
-  getQuestionConverterList(creator, "q1").getActionById("rating").items[1].action();
+  getQuestionConverterList(creator, "q1").getActionById("rating").items[2].action();
   expect(creator.survey.getQuestionByName("q1").rateCount).toBe(5);
   expect(creator.survey.getQuestionByName("q1").minRateDescription).toBe("Very unsatisfied");
   expect(creator.survey.getQuestionByName("q1").maxRateDescription).toBe("Very satisfied");
   expect(creator.survey.getQuestionByName("q1").title).toBe("How satisfied?");
-  getQuestionConverterList(creator, "q1").getActionById("rating").items[2].action();
+  getQuestionConverterList(creator, "q1").getActionById("rating").items[3].action();
   expect(creator.survey.getQuestionByName("q1").rateCount).toBe(11);
   expect(creator.survey.getQuestionByName("q1").minRateDescription).toBeFalsy();
   expect(creator.survey.getQuestionByName("q1").maxRateDescription).toBeFalsy();
   expect(creator.survey.getQuestionByName("q1").title).toBe("How likely?");
-  getQuestionConverterList(creator, "q1").getActionById("rating").items[1].action();
+  getQuestionConverterList(creator, "q1").getActionById("rating").items[2].action();
   expect(creator.survey.getQuestionByName("q1").rateCount).toBe(5);
   expect(creator.survey.getQuestionByName("q1").minRateDescription).toBe("Very unsatisfied");
   expect(creator.survey.getQuestionByName("q1").maxRateDescription).toBe("Very satisfied");

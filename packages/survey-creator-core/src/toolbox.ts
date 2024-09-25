@@ -719,7 +719,7 @@ export class QuestionToolbox
     const newItems: Array<QuestionToolboxItem> = property.choices.map(ch => {
       const newJson = { ...parentItem.json };
       newJson[propName] = ch;
-      const newId = parentItem.id + "-" + ch;
+      const newId = parentItem.id != ch ? ch : parentItem.id + "-default";
 
       const innerItem = new QuestionToolboxItem({
         id: newId,

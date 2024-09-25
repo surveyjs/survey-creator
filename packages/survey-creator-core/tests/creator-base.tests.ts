@@ -2479,9 +2479,9 @@ test("convertInputType, change inputType for a text question", (): any => {
   let list = popup.contentComponentData.model;
   expect(list).toBeTruthy();
   expect(list.selectedItem).toBeTruthy();
-  expect(list.selectedItem.id).toEqual("text-text");
+  expect(list.selectedItem.id).toEqual("text-default");
 
-  const telItem = list.actions.filter(item => item.id === "text-tel")[0];
+  const telItem = list.actions.filter(item => item.id === "tel")[0];
   list.onItemClick(telItem);
   question = creator.survey.getQuestionByName("q2");
   questionModel = new QuestionAdornerViewModel(creator, question, undefined);
@@ -2495,7 +2495,7 @@ test("convertInputType, change inputType for a text question", (): any => {
   expect(popup).toBeTruthy();
   popup.show();
   list = popup.contentComponentData.model;
-  expect(list.selectedItem.id).toEqual("text-password");
+  expect(list.selectedItem.id).toEqual("password");
 });
 test("convertInputType, hide it for readOnly creator", (): any => {
   const creator = new CreatorTester();

@@ -39,6 +39,7 @@ import { settings } from "../creator-settings";
 import { StringEditorConnector, StringItemsNavigatorBase } from "./string-editor";
 import { DragDropSurveyElements, isPanelDynamic } from "../survey-elements";
 import { QuestionToolbox, QuestionToolboxItem } from "../toolbox";
+import { isUndefined } from "lodash";
 
 export interface QuestionBannerParams {
   text: string;
@@ -437,14 +438,16 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     return newAction;
   }
 
-  private jsonIsCorresponded(json: any) {
+  private jsonsAreCompatible(objJson, json) {
     let jsonIsCorresponded = true;
-    const objJson = this.element.toJSON();
     Object.keys(json).forEach(p => {
       const propertyValue = objJson[p] === undefined ? this.element.getDefaultPropertyValue(p) : objJson[p];
       if (p != "type" && !Helpers.isTwoValueEquals(json[p], propertyValue)) jsonIsCorresponded = false;
     });
     return jsonIsCorresponded;
+  }
+  private jsonIsCorresponded(json: any) {
+    return this.jsonsAreCompatible(this.element.toJSON(), json);
   }
 
   private toolboxItemIsCorresponded(toolboxItem: QuestionToolboxItem, someItemSelectedAlready: boolean) {
@@ -483,11 +486,23 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       if (item.items?.length > 0 && this.creator.toolbox.showSubitems) {
         const subactions = [];
         let selectedSubactionLocal: IAction = undefined;
+        let allChildsAreCompatibleToParent = false;
         item.items.forEach(subitem => {
           const subaction = this.creator.createIActionBarItemByClass(subitem, false, (questionType, json) => { this.convertQuestion(questionType, json, defaultJsons); });
           if (this.toolboxItemIsCorresponded(subitem, !!selectedAction)) selectedSubactionLocal = subitem;
+          if (this.jsonsAreCompatible(item.json, subitem.json)) allChildsAreCompatibleToParent = true;
           subactions.push(subaction);
         });
+        if (!allChildsAreCompatibleToParent && subactions.length > 0) {
+          const defaultSubaction = this.creator.createIActionBarItemByClass(item, false, (questionType, json) => { this.convertQuestion(questionType, json, defaultJsons); });
+          defaultSubaction.id = action.id + "-default";
+          defaultSubaction.iconName = undefined;
+          defaultSubaction.markerIconName = undefined;
+          defaultSubaction.items = [];
+          defaultSubaction.component = undefined;
+          subactions.unshift(defaultSubaction);
+          if (selectedAction == action && !selectedSubactionLocal) selectedSubactionLocal = defaultSubaction;
+        }
         action.setSubItems({ items: subactions });
         if (selectedSubactionLocal) {
           selectedAction = action;
