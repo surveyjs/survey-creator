@@ -355,7 +355,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     function addItemJson(toolboxItem: QuestionToolboxItem) {
       const type = toolboxItem.json?.type || toolboxItem.id;
       if (toolboxItem.json) {
-        const json = toolboxItem.json;//cleanDefaultsFromJson(type, toolboxItem);
+        const json = toolboxItem.json;
         if (!defaultJsons[type]) defaultJsons[type] = [];
         defaultJsons[type].push(json);
       }
@@ -529,11 +529,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   }
 
   private createConvertInputType() {
-    const defaultJsons = this.buildDefaultJsonMap(this.getConvertToTypes());
-    const questionType = this.surveyElement.getType();
-    //if (questionType !== "text" && questionType !== "rating") return null;
-    //const toolboxItem = this.creator.toolbox.items.filter(item => item.id === questionType)[0];
-    //if (!toolboxItem || !toolboxItem.hasSubItems) return null;
     const listModel = new ListModel([]);
     this.updateQuestionTypeOrSubtypeListModel(listModel, true);
     if (listModel.actions.length == 0) return null;
