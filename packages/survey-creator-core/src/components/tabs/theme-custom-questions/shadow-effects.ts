@@ -68,7 +68,14 @@ if (!ComponentCollection.Instance.getCustomQuestionByName("shadoweffects")) {
         if (typeof value == "undefined") return [{}];
         return typeof value == "string" ? parseBoxShadow(value) : value;
       };
-      question.valueToDataCallback = (value: string | Array<Object>): string => !!value ? (typeof value == "string" ? value : createBoxShadow(Array.isArray(value) ? value : [value])) : "";
+      question.valueToDataCallback = (value: string | Array<Object>): string => {
+        if (!value) return "";
+        if (typeof value == "string") {
+          return value;
+        } else {
+          return createBoxShadow(Array.isArray(value) ? value : [value]);
+        }
+      };
       (<QuestionPanelDynamicModel>question.contentQuestion).panels.forEach(p => p.questions.forEach(q => q.allowRootStyle = false));
     },
   });
@@ -120,4 +127,9 @@ export function parseBoxShadow(value: string = ""): Array<Object> {
     res["isInset"] = isInset;
     return res;
   });
+}
+
+export function trimBoxShadowValue(value: string): string {
+  if (!value) return value;
+  return value.replace(/\)\,\s/g, "),");
 }
