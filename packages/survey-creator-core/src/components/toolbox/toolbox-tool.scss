@@ -7,9 +7,9 @@
   align-items: center;
   z-index: 20;
   outline: none;
-  padding-top: var(--ctr-toolbox-item-padding-top, calcSize(0));
+  padding-top: 0;
   padding-right: var(--ctr-toolbox-item-padding-right, calcSize(1.5));
-  padding-bottom: var(--ctr-toolbox-item-padding-bottom, calcSize(0));
+  padding-bottom: 0;
   padding-left: var(--ctr-toolbox-item-padding-left, calcSize(1.5));
 
   sv-svg-icon,
@@ -21,6 +21,24 @@
 }
 
 .svc-toolbox__tool {
+  cursor: default;
+
+  .sv-action__content {
+    display: flex;
+    // padding: calcSize(0.25) 0;
+    padding-block-start: calcSize(0.5);
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.svc-toolbox__tool--has-subitems{
+  align-items: var(--ctr-toolbox-item-with-submenu-button-align, flex-start);
+  .sv-action__content {
+    align-items: var(--ctr-toolbox-item-with-submenu-button-align, flex-start);
+  }
+}
+.svc-toolbox__tool {
 
   sv-svg-icon,
   .sv-svg-icon {
@@ -31,8 +49,10 @@
 // is always visible
 .svc-toolbox__item-container {
   outline: none;
-  padding: calcSize(1) 0;
-
+  padding-top: var(--ctr-toolbox-item-padding-top, calcSize(1));
+  padding-right: 0;
+  padding-bottom: var(--ctr-toolbox-item-padding-bottom, calcSize(1));
+  padding-left: 0;
   .sv-svg-icon use {
     fill: var(--ctr-toolbox-item-icon-color, $foreground-light);
   }
@@ -167,6 +187,7 @@
     border-radius: var(--ctr-toolbox-item-corner-radius, calcSize(12.5));
     background-color: var(--ctr-toolbox-item-background-color-hovered, $background);
     box-shadow: $shadow-medium;
+    box-shadow: var(--ctr-toolbox-item-shadow-hovered-1-offset-x, 0px) var(--ctr-toolbox-item-shadow-hovered-1-offset-y, 2px) var(--ctr-toolbox-item-shadow-hovered-1-blur, 6px) var(--ctr-toolbox-item-shadow-hovered-1-spread, 0px) var(--ctr-toolbox-item-shadow-hovered-1-color, rgba(0, 0, 0, 0.10)), var(--ctr-toolbox-item-shadow-hovered-2-offset-x, 0px) var(--ctr-toolbox-item-shadow-hovered-2-offset-y, 1px) var(--ctr-toolbox-item-shadow-hovered-2-blur, 2px) var(--ctr-toolbox-item-shadow-hovered-2-spread, 0px) var(--ctr-toolbox-item-shadow-hovered-2-color, rgba(0, 0, 0, 0.00));
     transition: 0.1s ease-in-out;
 
     .svc-toolbox__item-title {
@@ -236,6 +257,8 @@
 
 .svc-toolbox-subtypes {
   .sv-popup__container {
+    padding: 0;
+    padding-inline-start: var(--ctr-toolbox-submenu-offset, 0);
     box-shadow: unset;
     background: unset;
   }
@@ -250,12 +273,14 @@
   }
 
   .sv-popup__body-content {
-    background: unset;
+    border-radius: var(--ctr-toolbox-submenu-corner-radius, calcSize(1));
+    box-shadow: var(--ctr-toolbox-submenu-shadow-1-offset-x, 0px) var(--ctr-toolbox-submenu-shadow-1-offset-y, 2px) var(--ctr-toolbox-submenu-shadow-1-blur, 8px) var(--ctr-toolbox-submenu-shadow-1-spread, 0px) var(--ctr-toolbox-submenu-shadow-1-color, transparent), var(--ctr-toolbox-submenu-shadow-2-offset-x, 0px) var(--ctr-toolbox-submenu-shadow-2-offset-y, 16px) var(--ctr-toolbox-submenu-shadow-2-blur, 32px) var(--ctr-toolbox-submenu-shadow-2-spread, 0px) var(--ctr-toolbox-submenu-shadow-2-color, transparent);
+    background: var(--ctr-toolbox-submenu-background-color, unset);
     padding: 0;
   }
 
   .sv-popup__scrolling-content {
-    padding: calcSize(1) calcSize(2);
+    padding: var(--ctr-toolbox-submenu-group-margin-top, calcSize(1)) var(--ctr-toolbox-submenu-group-margin-right, 12px) var(--ctr-toolbox-submenu-group-margin-bottom-last, 12px) var(--ctr-toolbox-submenu-group-margin-left, 12px);;
     overflow: visible;
   }
 
@@ -267,9 +292,9 @@
   .svc-toolbox__item.svc-toolbox__item-subtype {
     opacity: var(--ctr-toolbox-item-opacity-submenu, 0.85);
     overflow: hidden;
-    border-radius: calcSize(12.5);
+    border-radius: var(--ctr-toolbox-item-corner-radius, calcSize(12.5));
     background: var(--ctr-toolbox-item-background-color-submenu, $layer-2-background-500);
-    box-shadow: $shadow-small, $shadow-medium;
+    box-shadow: var(--ctr-toolbox-item-shadow-hovered-1-offset-x, 0px) var(--ctr-toolbox-item-shadow-hovered-1-offset-y, 2px) var(--ctr-toolbox-item-shadow-hovered-1-blur, 6px) var(--ctr-toolbox-item-shadow-hovered-1-spread, 0px) var(--ctr-toolbox-item-shadow-hovered-1-color, rgba(0, 0, 0, 0.10)), var(--ctr-toolbox-item-shadow-hovered-2-offset-x, 0px) var(--ctr-toolbox-item-shadow-hovered-2-offset-y, 1px) var(--ctr-toolbox-item-shadow-hovered-2-blur, 2px) var(--ctr-toolbox-item-shadow-hovered-2-spread, 0px) var(--ctr-toolbox-item-shadow-hovered-2-color, rgba(0, 0, 0, 0.00));
     transition: 0.1s ease-in-out;
     padding: calcSize(1.5) calcSize(2);
 

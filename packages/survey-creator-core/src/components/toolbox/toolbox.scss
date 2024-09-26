@@ -16,6 +16,7 @@ svc-toolbox {
   }
 
   .spg-search-editor_container {
+    background: var(--ctr-toolbox-background-color, $background-dim);
     padding-top: calcSize(1.5);
     padding-inline-end: calcSize(2);
     padding-bottom: calcSize(2.5);
@@ -49,12 +50,12 @@ svc-toolbox {
   padding: calcSize(1) calcSize(1.5) calcSize(2);
   box-sizing: border-box;
   overflow: hidden;
-  direction: rtl;
+  direction: var(--ctr-toolbox-scroller-direction, rtl);
   flex-grow: 1;
 
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: var(--ctr-toolbox-scroller-align-items, flex-end);
 }
 
 .svc-side-bar {
@@ -90,6 +91,11 @@ svc-toolbox {
   }
 }
 
+.svc-toolbox__panel {
+  border-right: var(--ctr-toolbox-border-width-right, 0) solid var(--ctr-toolbox-border-color, transparent);
+  background: var(--ctr-toolbox-background-color, $background-dim);
+}
+
 .svc-toolbox--flyout {
   width: 100vw;
   margin-right: calc(-100vw + calcSize(10.5));
@@ -103,7 +109,6 @@ svc-toolbox {
   .svc-toolbox__panel {
     z-index: 200;
     position: relative;
-    background: var(--ctr-toolbox-background-color, $background-dim);
     width: fit-content;
     box-shadow:
       1px 0 0 0 $border-inside,
@@ -215,20 +220,19 @@ svc-toolbox {
   top: 0;
   z-index: 30;
   padding-top: calcSize(1);
-  margin-bottom: calcSize(1);
+  margin-bottom: var(--ctr-toolbox-search-margin-bottom, calcSize(1));
   margin-right: calcSize(-1.5);
   margin-left: calcSize(-1.5);
   display: none;
   flex-direction: column;
   width: calc(100% + calcSize(3));
   box-sizing: border-box;
-  background: var(--ctr-property-grid-search-background-color, $background-dim);
+  background: var(--ctr-toolbox-background-color, $background-dim);
 }
 
 .svc-toolbox__category {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
 }
 
 .svc-toolbox__tool:not(.sv-dots) {
@@ -244,9 +248,15 @@ svc-toolbox {
 
 .svc-toolbox__category-separator {
   height: 1px;
-  width: calcSize(5);
+  width: var(--ctr-toolbox-separator-width, calcSize(5));
   background-color: var(--ctr-toolbox-separator-color, $border);
   margin: calcSize(1.5) calcSize(0.5) calcSize(1);
+}
+
+.svc-toolbox--compact {
+  .svc-toolbox__category-separator {
+    width: calcSize(5);
+  }
 }
 
 .svc-toolbox--filtering {
@@ -295,18 +305,6 @@ svc-toolbox {
 .svc-toolbox__category-header:hover {
   .svc-toolbox__category-header__controls {
     display: block;
-  }
-}
-
-.svc-toolbox__tool {
-  cursor: default;
-
-  .sv-action__content {
-    display: flex;
-    // padding: calcSize(0.25) 0;
-    padding-block-start: calcSize(0.5);
-    flex-direction: column;
-    align-items: flex-start;
   }
 }
 
