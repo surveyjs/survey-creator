@@ -1,0 +1,8 @@
+<ng-template #template>
+  <div class="svc-side-bar__container-header">
+    <div class="svc-side-bar__container-actions">
+      <sv-action-bar [model]="model.toolbar"></sv-action-bar>
+    </div>
+    <div *ngIf="!!model.title" class="svc-side-bar__container-title">{{model.title}}</div>
+  </div>
+</ng-template>

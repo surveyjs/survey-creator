@@ -29,9 +29,7 @@
           class="svc-designer__placeholder-container"
           :data-sv-drop-target-survey-element="'newGhostPage'"
         >
-          <span class="svc-designer-placeholder-text svc-text svc-text--normal">
-            {{ model.placeholderText }}
-          </span>
+          <SurfacePlaceholder :name="'designer'" :placeholderTitleText="model.placeholderTitleText" :placeholderDescriptionText="model.placeholderDescriptionText" />
           <div
             className="svc-designer-placeholder-page"
             data-sv-drop-target-survey-element="newGhostPage"
@@ -130,6 +128,7 @@ import { SvComponent } from "survey-vue3-ui";
 import type { TabDesignerViewModel } from "survey-creator-core";
 import { useBase } from "survey-vue3-ui";
 import { computed } from "vue";
+import SurfacePlaceholder from "../../components/SurfacePlaceholder.vue";
 const props = defineProps<{ model: TabDesignerViewModel }>();
 const survey = computed(() => props.model.survey);
 useBase(() => props.model);

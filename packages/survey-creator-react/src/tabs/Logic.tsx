@@ -3,6 +3,7 @@ import * as React from "react";
 import { Action, Base } from "survey-core";
 import { ReactElementFactory, SurveyElementBase, Survey, attachKey2click } from "survey-react-ui";
 import { SurveyLogicUI } from "survey-creator-core";
+import { SurfacePlaceholder } from "../components/SurfacePlaceholder";
 
 export class TabLogicAddButtonComponent extends SurveyElementBase<any, any> {
   private get model(): Action {
@@ -43,12 +44,12 @@ export class TabLogicComponent extends SurveyElementBase<any, any> {
 
   renderElement(): JSX.Element {
     var logic = this.model;
-    var rootClass = "svc-creator-tab__content";
+    var rootClass = "svc-creator-tab__content svc-logic-tab";
     var content = this.renderViewContent();
     return <div className={rootClass}>{content}</div>;
   }
   private renderViewContent(): JSX.Element {
-    const logicTabClassName = "svc-plugin-tab__content svc-logic-tab__content " + (this.model.hasItems ? "" : "svc-logic-tab__empty");
+    const logicTabClassName = "svc-plugin-tab__content svc-logic-tab svc-logic-tab__content " + (this.model.hasItems ? "" : "svc-logic-tab--empty");
     const addLogic = !this.model.readOnly ? <TabLogicAddButtonComponent button={this.model.addNewButton} /> : undefined;
     return (
       <Fragment>
@@ -56,7 +57,7 @@ export class TabLogicComponent extends SurveyElementBase<any, any> {
           <Survey model={this.model.itemsSurvey}></Survey>
           {this.model.hasItems ? null : (
             <div className="svc-logic-tab__content-empty" >
-              <span className="svc-text">{this.model.emptyTabPlaceholder}</span>
+              <SurfacePlaceholder name={"logic"} placeholderTitleText={this.model.placeholderTitleText} placeholderDescriptionText={this.model.placeholderDescriptionText} />
             </div>)}
           {addLogic}
         </div>

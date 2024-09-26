@@ -1,5 +1,5 @@
 
-import { QuestionImageModel, SurveyElement, SurveyTemplateRendererTemplateData, SurveyModel, property, QuestionFileModel, Base, Serializer, CssClassBuilder } from "survey-core";
+import { QuestionImageModel, SurveyElement, SurveyTemplateRendererTemplateData, SurveyModel, property, QuestionFileModel, Base, Serializer, CssClassBuilder, classesToSelector } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { QuestionAdornerViewModel } from "./question";
 import { getAcceptedTypesByContentMode } from "../utils/utils";
@@ -38,7 +38,6 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
     creator: SurveyCreatorModel,
     surveyElement: SurveyElement,
     templateData: SurveyTemplateRendererTemplateData,
-    public questionRoot: HTMLElement
   ) {
     super(creator, surveyElement, templateData);
     this.isEmptyImageLink = !this.question.imageLink;
@@ -51,7 +50,7 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
   @property({ defaultValue: false }) isEmptyImageLink;
 
   chooseFile(model: QuestionImageAdornerViewModel) {
-    const fileInput = <HTMLInputElement>model.questionRoot.getElementsByClassName("svc-choose-file-input")[0];
+    const fileInput = <HTMLInputElement>model.rootElement.getElementsByClassName("svc-choose-file-input")[0];
     const context = { element: model.question, elementType: model.question.getType(), propertyName: "imageLink" };
     model.creator.chooseFiles(fileInput, (files: File[]) => {
       model.isUploading = true;
@@ -87,6 +86,17 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
   public get chooseImageText(): string {
     return getLocString("ed.imageChooseImage");
   }
+
+  protected getAnimatedElement() {
+    if (this.isEmptyImageLink) {
+      const cssClasses = this.filePresentationModel.cssClasses;
+      if (cssClasses.root) {
+        return this.surveyElement.getWrapperElement().querySelector(`:scope ${classesToSelector(cssClasses.root)}`) as HTMLElement;
+      }
+    }
+    return super.getAnimatedElement();
+
+  }
   public css() {
     return new CssClassBuilder()
       .append(super.css())
@@ -96,6 +106,5 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
     this.surveyElement.unRegisterFunctionOnPropertyValueChanged("imageLink", "imageLinkValueChanged");
     (this.surveyElement as QuestionImageModel).locImageLink.onStringChanged.remove(this.imageLinkValueChangedHandler);
     super.dispose();
-    this.questionRoot = undefined;
   }
 }

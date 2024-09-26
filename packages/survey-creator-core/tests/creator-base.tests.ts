@@ -125,13 +125,20 @@ test("Update JSON before drag&drop", (): any => {
   expect(json.type).toEqual("panel");
   expect(json.elements[0].name).toEqual("question2");
 });
+class PageAdornerTester extends PageAdorner {
+  public onPageSelectedCallback: () => void;
+  public onPageSelected(): void {
+    super.onPageSelected();
+    this.onPageSelectedCallback && this.onPageSelectedCallback();
+  }
+}
 test("PageAdorner", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
     elements: [{ type: "text", name: "question1" }]
   };
   expect(creator.currentPage.onPropertyChanged.isEmpty).toBeTruthy();
-  const pageModel = new PageAdorner(creator, creator.survey.currentPage);
+  const pageModel = new PageAdornerTester(creator, creator.survey.currentPage);
   let counter = 0;
   pageModel.onPageSelectedCallback = (): any => {
     counter++;
@@ -1793,7 +1800,7 @@ test("Show/hide property grid", (): any => {
   settingsBarItem.action();
   expect(creator.selectedElementName).toEqual("survey");
 
-  const hidePropertyModelBarItem = creator.sidebar.toolbar.actions.filter(item => { return item.id === "svd-grid-hide"; })[0];
+  const hidePropertyModelBarItem = creator.sidebar.header.toolbar.actions.filter(item => { return item.id === "svd-grid-hide"; })[0];
   expect(hidePropertyModelBarItem).toBeTruthy();
   hidePropertyModelBarItem.action();
   expect(creator.showSidebar).toBeFalsy();
@@ -1837,7 +1844,7 @@ test("Show/hide property grid and settings button active state", (): any => {
   expect(creator.selectedElementName).toEqual("survey");
   expect(settingsBarItem.active).toBeTruthy();
 
-  const hidePropertyModelBarItem = creator.sidebar.toolbar.actions.filter((item) => { return item.id === "svd-grid-hide"; })[0];
+  const hidePropertyModelBarItem = creator.sidebar.header.toolbar.actions.filter((item) => { return item.id === "svd-grid-hide"; })[0];
   expect(hidePropertyModelBarItem).toBeTruthy();
   hidePropertyModelBarItem.action();
   expect(creator.showSidebar).toBeFalsy();
@@ -1879,7 +1886,7 @@ test("set showSidebar is equivalent to action", (): any => {
 
   creator.sidebar.collapsedManually = false;
   creator.sidebar.expandedManually = false;
-  const hidePropertyModelBarItem = creator.sidebar.toolbar.actions.filter((item) => { return item.id === "svd-grid-hide"; })[0];
+  const hidePropertyModelBarItem = creator.sidebar.header.toolbar.actions.filter((item) => { return item.id === "svd-grid-hide"; })[0];
   expect(hidePropertyModelBarItem).toBeTruthy();
   hidePropertyModelBarItem.action();
   expect(creator.showSidebar).toBeFalsy();
@@ -1903,7 +1910,7 @@ test("Show/hide property grid by collapse/expand actions", (): any => {
     ]
   };
   const expandBarItem = creator.toolbarItems.filter((item) => { return item.id === "svd-grid-expand"; })[0];
-  const hidePropertyModelBarItem = creator.sidebar.toolbar.actions.filter((item) => { return item.id === "svd-grid-hide"; })[0];
+  const hidePropertyModelBarItem = creator.sidebar.header.toolbar.actions.filter((item) => { return item.id === "svd-grid-hide"; })[0];
 
   expect(creator.showSidebar).toBeTruthy();
   expect(expandBarItem).toBeTruthy();
@@ -1937,7 +1944,7 @@ test("Hide property grid is always visible in flyoutMode", (): any => {
       }
     ]
   };
-  const hidePropertyModelBarItem = creator.sidebar.toolbar.actions.filter((item) => { return item.id === "svd-grid-hide"; })[0];
+  const hidePropertyModelBarItem = creator.sidebar.header.toolbar.actions.filter((item) => { return item.id === "svd-grid-hide"; })[0];
 
   expect(creator.showSidebar).toBeTruthy();
   expect(creator.sidebar.visible).toBeTruthy();
@@ -2472,21 +2479,29 @@ test("convertInputType, change inputType for a text question", (): any => {
   expect(action).toBeTruthy();
   expect(action.css.indexOf("sv-action--convertTo-last") > -1).toBeTruthy();
   expect(action.title).toBe("Text");
-  const popup = action.popupModel;
-  const popupViewModel = new PopupDropdownViewModel(popup); // need for popupModel.onShow
+  let popup = action.popupModel;
+  let popupViewModel = new PopupDropdownViewModel(popup); // need for popupModel.onShow
   expect(popup).toBeTruthy();
   popup.show();
-  const list = popup.contentComponentData.model;
+  let list = popup.contentComponentData.model;
   expect(list).toBeTruthy();
   expect(list.selectedItem).toBeTruthy();
-  expect(list.selectedItem.id).toEqual("text");
+  expect(list.selectedItem.id).toEqual("text-default");
 
   const telItem = list.actions.filter(item => item.id === "tel")[0];
   list.onItemClick(telItem);
+  question = creator.survey.getQuestionByName("q2");
+  questionModel = new QuestionAdornerViewModel(creator, question, undefined);
+  action = questionModel.getActionById("convertInputType");
   expect(question.inputType).toBe("tel");
   expect(action.title).toBe("Phone Number");
   question.inputType = "password";
   expect(action.title).toBe("Password");
+  popup = action.popupModel;
+  popupViewModel = new PopupDropdownViewModel(popup); // need for popupModel.onShow
+  expect(popup).toBeTruthy();
+  popup.show();
+  list = popup.contentComponentData.model;
   expect(list.selectedItem.id).toEqual("password");
 });
 test("convertInputType, hide it for readOnly creator", (): any => {
@@ -4590,7 +4605,7 @@ test("creator.onSurveyInstanceCreated from property Grid", () => {
   const selectedTypes = new Array<string>();
   creator.onSurveyInstanceCreated.add((sender, options) => {
     if (options.area === "property-grid") {
-      if(options.obj) {
+      if (options.obj) {
         selectedTypes.push(options.obj.getType());
       }
     }

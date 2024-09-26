@@ -74,6 +74,7 @@
   }
 
   //2 level nested
+  .spg-panel-by-page,
   .spg-nested-panel {
     padding-bottom: calcSize(5);
 
@@ -89,10 +90,13 @@
     }
   }
 
+  .spg-panel-by-page__content>.spg-row:first-of-type,
   .spg-nested-panel__content>.spg-row:first-of-type {
     margin-top: 0;
   }
 
+  .spg-panel-by-page.spg-panel--hidden-border,
+  .spg-row:last-of-type>div>.spg-panel-by-page,
   .spg-paneldynamic__panel-wrapper>.spg-nested-panel,
   .spg-row:last-of-type>div>.spg-nested-panel {
     padding-bottom: 0;
@@ -101,6 +105,11 @@
       content: none;
     }
   }
+
+  .spg-panel-by-page.spg-panel--padding {
+    padding-top: calcSize(2);
+    padding-bottom: calcSize(3);
+}
 
   .spg-theme-group-caption {
     @include defaultBold;

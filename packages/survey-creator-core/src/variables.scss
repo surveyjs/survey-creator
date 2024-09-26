@@ -187,3 +187,10 @@ $tab-min-height: var(--tab-min-height, auto);
 $creator-transition-duration: var(--sjs-creator-transition-duration, 150ms);
 $ease-out: cubic-bezier(0, 0, 0.58, 1);
 $reverse-ease-out: cubic-bezier(0.42, 0, 1, 1);
+
+$svc-expand-fade-in-duration: var(--sjs-svc-expand-fade-in-duration, 150ms);
+$svc-expand-move-in-duration: var(--sjs-svc-expand-move-in-duration, 250ms);
+$svc-expand-fade-in-delay: var(--sjs-svc-expand-fade-in-delay, 250ms);
+$svc-collapse-fade-out-duration: var(--sjs-svc-collapse-fade-out-duration, 150ms);
+$svc-collapse-move-out-duration: var(--sjs-svc-collapse-move-out-duration, 250ms);
+$svc-collapse-move-out-delay: var(--sjs-svc-collapse-move-out-delay, 100ms);
