@@ -719,10 +719,11 @@ export class QuestionToolbox
     const newItems: Array<QuestionToolboxItem> = property.choices.map(ch => {
       const newJson = { ...parentItem.json };
       newJson[propName] = ch;
+      const newId = parentItem.id != ch ? ch : parentItem.id + "-default";
 
       const innerItem = new QuestionToolboxItem({
-        id: ch,
-        name: ch,
+        id: newId,
+        name: newId,
         title: editorLocalization.getPropertyValueInEditor(propName, ch),
         className: QuestionToolboxItem.getItemClassNames() + " svc-toolbox__item-subtype",
         json: newJson,
