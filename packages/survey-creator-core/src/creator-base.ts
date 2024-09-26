@@ -52,7 +52,7 @@ import {
   CreateCustomMessagePanelEvent, ActiveTabChangingEvent, ActiveTabChangedEvent, BeforeUndoEvent, BeforeRedoEvent,
   PageAddingEvent, DragStartEndEvent
 } from "./creator-events-api";
-import { SurveyElementActionContainer } from "./components/action-container-view-model";
+import { ExpandCollapseManager } from "./expand-collapse-manager";
 
 require("./components/creator.scss");
 require("./components/string-editor.scss");
@@ -2277,6 +2277,7 @@ export class SurveyCreatorModel extends Base
   public onStateChanged: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
 
   public onSurfaceToolbarActionExecuted: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
+  public expandCollapseManager = new ExpandCollapseManager(this);
 
   notifier = new Notifier({
     root: "svc-notifier",

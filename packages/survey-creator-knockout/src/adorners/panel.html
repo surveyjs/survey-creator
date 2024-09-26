@@ -1,5 +1,17 @@
 <div class="svc-question__adorner"
   data-bind="css: rootCss(), attr: { 'data-sv-drop-target-survey-element': element.name || null }, event: { dblclick: (d, e) => dblclick(e), mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }">
+  <!-- ko if: $data.showHiddenTitle -->
+  <div data-bind="css: $data.cssCollapsedHiddenHeader">
+    <div data-bind="css: $data.cssCollapsedHiddenTitle">
+      <!-- ko if: !!$data.element.hasTitle -->
+      <!-- ko template: { name: 'survey-string', data: $data.element.locTitle } --><!-- /ko -->
+      <!-- /ko -->
+      <!-- ko ifnot: !!$data.element.hasTitle -->
+      <span class="svc-fake-title" data-bind="text: element.name"></span>
+      <!-- /ko -->
+    </div>
+  </div>
+  <!-- /ko -->
   <div
     data-bind="click: $data.element.isInteractiveDesignElement ? koSelect : null, key2click: { disableTabStop: true }, clickBubble: false, css: css()">
     <div class="svc-question__drop-indicator svc-question__drop-indicator--left"></div>
@@ -12,19 +24,6 @@
       <!-- /ko -->
       <div class="svc-question__top-actions">
         <!-- ko component: { name: 'sv-action-bar', params: { model: topActionContainer, handleClick: false } } -->
-        <!-- /ko -->
-      </div>
-    </div>
-    <!-- /ko -->
-
-    <!-- ko if: $data.showHiddenTitle -->
-    <div data-bind="css: $data.cssCollapsedHiddenHeader">
-      <div data-bind="css: $data.cssCollapsedHiddenTitle">
-        <!-- ko if: !!$data.element.title -->
-        <!-- ko template: { name: 'survey-string', data: $data.element.locTitle } --><!-- /ko -->
-        <!-- /ko -->
-        <!-- ko ifnot: !!$data.element.title -->
-        <span class="svc-fake-title" data-bind="text: element.name"></span>
         <!-- /ko -->
       </div>
     </div>

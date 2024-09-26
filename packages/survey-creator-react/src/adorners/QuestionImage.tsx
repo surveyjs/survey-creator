@@ -11,24 +11,14 @@ import {
 import { Base } from "survey-core";
 
 export class QuestionImageAdornerComponent extends QuestionAdornerComponent {
-  constructor(props: QuestionAdornerComponentProps) {
-    super(props);
-    this.rootRef = React.createRef();
-  }
   protected createQuestionViewModel(props: any): QuestionAdornerViewModel {
     return new QuestionImageAdornerViewModel(
       props.componentData,
       props.question as any,
-      null,
-      null
-    );
+      null);
   }
   public get imageModel(): QuestionImageAdornerViewModel {
     return this.model as QuestionImageAdornerViewModel;
-  }
-  componentDidMount() {
-    super.componentDidMount();
-    this.imageModel.questionRoot = this.rootRef.current;
   }
   protected renderHeader(): JSX.Element {
     return (<React.Fragment>
@@ -82,13 +72,11 @@ export class QuestionImageAdornerComponent extends QuestionAdornerComponent {
         question: this.imageModel.filePresentationModel
       });
       return (<>
-        {this.renderQuestionTitle()}
         {fileQuestion}
       </>);
     } else {
       return (
         <>
-          {this.renderQuestionTitle()}
           {this.props.element}
           {this.renderElementPlaceholder()}
         </>

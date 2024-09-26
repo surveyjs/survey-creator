@@ -125,13 +125,20 @@ test("Update JSON before drag&drop", (): any => {
   expect(json.type).toEqual("panel");
   expect(json.elements[0].name).toEqual("question2");
 });
+class PageAdornerTester extends PageAdorner {
+  public onPageSelectedCallback: () => void;
+  public onPageSelected(): void {
+    super.onPageSelected();
+    this.onPageSelectedCallback && this.onPageSelectedCallback();
+  }
+}
 test("PageAdorner", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
     elements: [{ type: "text", name: "question1" }]
   };
   expect(creator.currentPage.onPropertyChanged.isEmpty).toBeTruthy();
-  const pageModel = new PageAdorner(creator, creator.survey.currentPage);
+  const pageModel = new PageAdornerTester(creator, creator.survey.currentPage);
   let counter = 0;
   pageModel.onPageSelectedCallback = (): any => {
     counter++;
@@ -2472,21 +2479,29 @@ test("convertInputType, change inputType for a text question", (): any => {
   expect(action).toBeTruthy();
   expect(action.css.indexOf("sv-action--convertTo-last") > -1).toBeTruthy();
   expect(action.title).toBe("Text");
-  const popup = action.popupModel;
-  const popupViewModel = new PopupDropdownViewModel(popup); // need for popupModel.onShow
+  let popup = action.popupModel;
+  let popupViewModel = new PopupDropdownViewModel(popup); // need for popupModel.onShow
   expect(popup).toBeTruthy();
   popup.show();
-  const list = popup.contentComponentData.model;
+  let list = popup.contentComponentData.model;
   expect(list).toBeTruthy();
   expect(list.selectedItem).toBeTruthy();
-  expect(list.selectedItem.id).toEqual("text");
+  expect(list.selectedItem.id).toEqual("text-default");
 
   const telItem = list.actions.filter(item => item.id === "tel")[0];
   list.onItemClick(telItem);
+  question = creator.survey.getQuestionByName("q2");
+  questionModel = new QuestionAdornerViewModel(creator, question, undefined);
+  action = questionModel.getActionById("convertInputType");
   expect(question.inputType).toBe("tel");
   expect(action.title).toBe("Phone Number");
   question.inputType = "password";
   expect(action.title).toBe("Password");
+  popup = action.popupModel;
+  popupViewModel = new PopupDropdownViewModel(popup); // need for popupModel.onShow
+  expect(popup).toBeTruthy();
+  popup.show();
+  list = popup.contentComponentData.model;
   expect(list.selectedItem.id).toEqual("password");
 });
 test("convertInputType, hide it for readOnly creator", (): any => {
