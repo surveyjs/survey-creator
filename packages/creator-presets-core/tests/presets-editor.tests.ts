@@ -854,3 +854,17 @@ test("Preset edit model, tabs page with creator, default items", () => {
   nextBtn.action();
   expect(survey.isFirstPage).toBeTruthy();
 });
+test("Preset edit model, save creator JSON on applying new preset", () => {
+  const editor = new CreatorPresetEditorModel({});
+  const survey = editor.model;
+  editor.creator.JSON = { elements: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }] };
+  const itemsQuestion = survey.getQuestionByName("tabs_items");
+  const defultTabs = JSON.parse(JSON.stringify(itemsQuestion.value));
+  expect(defultTabs).toEqual(["designer", "preview", "editor"]);
+  itemsQuestion.value = ["preview", "logic"];
+  const activeTabQuestion = survey.getQuestionByName("tabs_activeTab");
+  activeTabQuestion.value = "logic";
+  editor.applyFromSurveyModel();
+  const creator = editor.creator;
+  expect(creator.survey.getAllQuestions()).toHaveLength(2);
+});
