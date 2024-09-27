@@ -5,7 +5,7 @@ import { settings } from "../../creator-settings";
 
 import { DefaultFonts, fontsettingsFromCssVariable, fontsettingsToCssVariable } from "./theme-custom-questions/font-settings";
 import { backgroundCornerRadiusFromCssVariable, backgroundCornerRadiusToCssVariable } from "./theme-custom-questions/background-corner-radius";
-import { createBoxShadowReset } from "./theme-custom-questions/shadow-effects";
+import { createBoxShadowReset, trimBoxShadowValue } from "./theme-custom-questions/shadow-effects";
 import { HeaderModel } from "./header-model";
 import * as LibraryThemes from "survey-core/themes";
 import { ColorCalculator, assign, ingectAlpha, parseColor, roundTo2Decimals } from "../../utils/utils";
@@ -787,6 +787,9 @@ Serializer.addProperties("theme",
   }, {
     type: "shadoweffects",
     name: "--sjs-shadow-small",
+    onSetValue: function (obj: any, value: any) {
+      obj.setPropertyValue("--sjs-shadow-small", trimBoxShadowValue(value));
+    },
   }, {
     type: "font",
     name: "questionTitle",
@@ -807,6 +810,9 @@ Serializer.addProperties("theme",
   {
     type: "shadoweffects",
     name: "--sjs-shadow-inner",
+    onSetValue: function (obj: any, value: any) {
+      obj.setPropertyValue("--sjs-shadow-inner", trimBoxShadowValue(value));
+    },
   }, {
     type: "font",
     name: "editorFont",
@@ -852,10 +858,34 @@ Serializer.addProperties("theme",
   { name: "--sjs-secondary-backcolor-semi-light", visible: false },
   { name: "--sjs-secondary-forecolor", visible: false },
   { name: "--sjs-secondary-forecolor-light", visible: false },
-  { name: "--sjs-shadow-small-reset", visible: false },
-  { name: "--sjs-shadow-medium", visible: false },
-  { name: "--sjs-shadow-large", visible: false },
-  { name: "--sjs-shadow-inner-reset", visible: false },
+  {
+    name: "--sjs-shadow-small-reset",
+    visible: false,
+    onSetValue: function (obj: any, value: any) {
+      obj.setPropertyValue("--sjs-shadow-small-reset", trimBoxShadowValue(value));
+    },
+  },
+  {
+    name: "--sjs-shadow-medium",
+    visible: false,
+    onSetValue: function (obj: any, value: any) {
+      obj.setPropertyValue("--sjs-shadow-medium", trimBoxShadowValue(value));
+    },
+  },
+  {
+    name: "--sjs-shadow-large",
+    visible: false,
+    onSetValue: function (obj: any, value: any) {
+      obj.setPropertyValue("--sjs-shadow-large", trimBoxShadowValue(value));
+    },
+  },
+  {
+    name: "--sjs-shadow-inner-reset",
+    visible: false,
+    onSetValue: function (obj: any, value: any) {
+      obj.setPropertyValue("--sjs-shadow-inner-reset", trimBoxShadowValue(value));
+    },
+  },
   { name: "--sjs-border-light", visible: false },
   { name: "--sjs-border-default", visible: false },
   { name: "--sjs-border-inside", visible: false },
