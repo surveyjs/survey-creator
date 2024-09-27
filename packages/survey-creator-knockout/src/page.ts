@@ -49,11 +49,8 @@ ko.components.register("svc-page", {
       const creator: SurveyCreator = params.creator;
 
       const pageAdornerViewModel = new CreatorSurveyPageComponent(creator, params.page);
-      pageAdornerViewModel.onPageSelectedCallback = () => {
-        SurveyHelper.scrollIntoViewIfNeeded(componentInfo.element);
-      };
+      pageAdornerViewModel.rootElement = componentInfo.element;
       ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
-        pageAdornerViewModel.onPageSelectedCallback = undefined;
         pageAdornerViewModel.fixedDispose();
       });
 

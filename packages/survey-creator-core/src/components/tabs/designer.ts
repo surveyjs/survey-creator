@@ -4,7 +4,6 @@ import { getLocString } from "../../editorLocalization";
 import { PagesController } from "../../pages-controller";
 import { SurveyHelper } from "../../survey-helper";
 import { DragDropSurveyElements } from "../../survey-elements";
-import { SurveyElementActionContainer } from "../action-container-view-model";
 require("./designer.scss");
 
 export const initialSettingsAllowShowEmptyTitleInDesignMode = settings.allowShowEmptyTitleInDesignMode;
@@ -118,6 +117,16 @@ export class TabDesignerViewModel extends Base {
     if (this.creator.isMobileView)
       return getLocString("ed.surveyPlaceHolderMobile");
     return getLocString("ed.surveyPlaceHolder");
+  }
+  public get placeholderTitleText(): string {
+    if (this.creator.isMobileView)
+      return getLocString("ed.surveyPlaceholderTitleMobile");
+    return getLocString("ed.surveyPlaceholderTitle");
+  }
+  public get placeholderDescriptionText(): string {
+    if (this.creator.isMobileView)
+      return getLocString("ed.surveyPlaceholderDescriptionMobile");
+    return getLocString("ed.surveyPlaceholderDescription");
   }
   public get hasToolbar() {
     return this.creator.expandCollapseButtonVisibility != "never";

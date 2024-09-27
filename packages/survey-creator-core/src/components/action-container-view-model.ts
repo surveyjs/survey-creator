@@ -8,13 +8,20 @@ import {
   actionModeType,
   IAction,
   ActionContainer,
-  ComputedUpdater
+  ComputedUpdater,
+  AnimationBoolean,
+  IAnimationConsumer,
+  classesToSelector,
+  PanelModel,
+  Question,
+  CssClassBuilder
 } from "survey-core";
-import { SurveyCreatorModel } from "../creator-base";
-import { settings } from "../creator-settings";
+import { CreatorBase, SurveyCreatorModel } from "../creator-base";
 import { DesignerStateManager } from "./tabs/designer-state-manager";
 import { TabDesignerPlugin } from "./tabs/designer-plugin";
 import { isPanelDynamic } from "../survey-elements";
+import { cleanHtmlElementAfterAnimation, prepareElementForVerticalAnimation } from "survey-core";
+import { toggleHovered } from "src/utils/utils";
 
 export class SurveyElementActionContainer extends AdaptiveActionContainer {
   private needToShrink(item: Action, shrinkTypeConverterAction: boolean) {
@@ -89,6 +96,8 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   protected expandCollapseAction: IAction;
   protected designerStateManager: DesignerStateManager;
   @property({ defaultValue: true }) allowDragging: boolean;
+  @property({ defaultValue: false }) expandCollapseAnimationRunning: boolean;
+  public rootElement: HTMLElement;
 
   protected get dragInsideCollapsedContainer(): boolean {
     return this.collapsed && this.creator.dragDropSurveyElements.insideContainer;
@@ -107,7 +116,108 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       }, 50);
     }
   }) collapsed: boolean;
-  @property() renderedCollapsed: boolean;
+  @property() private _renderedCollapsed: boolean;
+
+  @property() isAnimationRunningCollapsed: boolean;
+
+  protected getAnimatedElement() {
+    return null;
+  }
+
+  protected getInnerAnimatedElements() {
+    return [] as Array<HTMLElement>;
+  }
+
+  protected getCollapsingCssClassName() {
+    return "svc-question--leave";
+  }
+  protected getExpandingCssClassName() {
+    return "svc-question--enter";
+  }
+
+  private hoverTimeout: any;
+  @property({ defaultValue: false }) private isHovered: boolean;
+
+  public hover(e: MouseEvent, element: HTMLElement | any) {
+    const processedFlagName = "__svc_question_processed";
+    if (!e[processedFlagName] && e.type === "mouseover") {
+      if (!this.hoverTimeout) {
+        this.hoverTimeout = setTimeout(() => {
+          this.isHovered = true;
+          this.hoverTimeout = undefined;
+        }, this.creator.pageHoverDelay);
+      }
+      e[processedFlagName] = true;
+    } else {
+      clearTimeout(this.hoverTimeout);
+      this.hoverTimeout = undefined;
+      this.isHovered = false;
+    }
+  }
+
+  private getExpandCollapseAnimationOptions(): IAnimationConsumer {
+    const beforeRunAnimation = (el: HTMLElement, animatingClassName: string) => {
+      prepareElementForVerticalAnimation(el);
+      const innerAnimatedElements = this.getInnerAnimatedElements();
+      innerAnimatedElements.forEach((elem: HTMLElement) => {
+        prepareElementForVerticalAnimation(elem);
+      });
+      innerAnimatedElements.forEach((elem: HTMLElement) => {
+        elem.classList.add(animatingClassName);
+      });
+    };
+    const afterRunAnimation = (el: HTMLElement, animatingClassName: string) => {
+      this.expandCollapseAnimationRunning = false;
+      cleanHtmlElementAfterAnimation(el);
+      const innerAnimatedElements = this.getInnerAnimatedElements();
+      innerAnimatedElements.forEach((elem: HTMLElement) => {
+        cleanHtmlElementAfterAnimation(elem);
+      });
+      innerAnimatedElements.forEach((elem: HTMLElement) => {
+        elem.classList.remove(animatingClassName);
+      });
+    };
+    return {
+      getRerenderEvent: () => this.onElementRerendered,
+      getEnterOptions: () => {
+        const className = this.getExpandingCssClassName();
+        return {
+          cssClass: className,
+          onBeforeRunAnimation: (el) => {
+            beforeRunAnimation(el, className);
+          },
+          onAfterRunAnimation: (el) => {
+            afterRunAnimation(el, className);
+          },
+        };
+      },
+      getLeaveOptions: () => {
+        const className = this.getCollapsingCssClassName();
+        return {
+          cssClass: className,
+          onBeforeRunAnimation: (el) => {
+            beforeRunAnimation(el, className);
+          },
+          onAfterRunAnimation: (el) => {
+            afterRunAnimation(el, className);
+          },
+        };
+      },
+      getAnimatedElement: () => this.getAnimatedElement(),
+      isAnimationEnabled: () => this.animationAllowed
+    };
+  }
+
+  private animationCollapsed = new AnimationBoolean(this.getExpandCollapseAnimationOptions(), (val) => {
+    this._renderedCollapsed = !val;
+  }, () => !this.renderedCollapsed);
+  public set renderedCollapsed(val: boolean) {
+    if (this.animationAllowed) this.expandCollapseAnimationRunning = true;
+    this.animationCollapsed.sync(!val);
+  }
+  public get renderedCollapsed(): boolean {
+    return !!this._renderedCollapsed;
+  }
 
   protected createActionContainer(): ActionContainer {
     const actionContainer = new SurveyElementActionContainer();
@@ -186,11 +296,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this.creator.sidebar.onPropertyChanged.add(this.sidebarFlyoutModeChangedFunc);
     this.setShowAddQuestionButton(true);
     this.expandCollapseAction.visible = this.allowExpandCollapse;
-
-    this.creator.onSurfaceToolbarActionExecuted.add((_, options) => {
-      if (options.action.id == "collapseAll") this.collapsed = true;
-      if (options.action.id == "expandAll") this.collapsed = false;
-    });
+    this.creator.expandCollapseManager.add(this);
   }
 
   protected detachElement(surveyElement: T): void {
@@ -226,7 +332,9 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
 
   public dispose(): void {
     super.dispose();
+    this.rootElement = undefined;
     this.detachElement(this.surveyElement);
+    this.creator.expandCollapseManager.remove(this);
     if (!this.actionContainer.isDisposed) {
       this.actionContainer.dispose();
     }
@@ -245,9 +353,12 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       this.isOperationsAllow()
     );
   }
+  protected getAllowExpandCollapse(options: any): boolean {
+    return this.creator.expandCollapseButtonVisibility != "never" && (options.allowExpandCollapse == undefined || !!options.allowExpandCollapse);
+  }
   protected updateElementAllowOptions(options: any, operationsAllow: boolean): void {
     this.allowDragging = operationsAllow && options.allowDragging;
-    this.allowExpandCollapse = this.creator.expandCollapseButtonVisibility != "never" && (options.allowExpandCollapse == undefined || !!options.allowExpandCollapse);
+    this.allowExpandCollapse = this.getAllowExpandCollapse(options);
     this.allowEditOption = (options.allowEdit == undefined || !!options.allowEdit);
     this.updateActionVisibility("delete", operationsAllow && options.allowDelete);
     this.updateActionVisibility("duplicate", operationsAllow && options.allowCopy);
@@ -344,5 +455,8 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   protected duplicate(): void { }
   protected delete(): void {
     this.creator.deleteElement(this.surveyElement);
+  }
+  protected getCss(): string {
+    return new CssClassBuilder().append("svc-hovered svc-hovered-ready", this.isHovered).toString();
   }
 }
