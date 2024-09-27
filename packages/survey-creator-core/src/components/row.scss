@@ -3,10 +3,6 @@
 .svc-row {
   width: 100%;
   position: relative;
-
-  .sv-skeleton-element {
-    min-height: calcSize(23);
-  }
 }
 
 .svc-row:not(.svc-row--ghost) > .sd-row {
