@@ -2914,7 +2914,13 @@ export class SurveyCreatorModel extends Base
         propertyName = this.designerPropertyGrid.currentlySelectedProperty;
       }
       if (!!propertyName) {
-        this.designerPropertyGrid.selectProperty(propertyName, focus || !this.selectFromStringEditor);
+        if(this.sidebar.renderedIsVisible) {
+          this.designerPropertyGrid.selectProperty(propertyName, focus || !this.selectFromStringEditor);
+        } else {
+          this.sidebar.onNextExpandCallback = () => {
+            this.designerPropertyGrid.selectProperty(propertyName, focus || !this.selectFromStringEditor);
+          };
+        }
       }
       this.expandCategoryIfNeeded();
       this.selectFromStringEditor = false;
