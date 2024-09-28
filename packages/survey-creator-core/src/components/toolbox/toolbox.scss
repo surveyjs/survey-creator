@@ -190,7 +190,9 @@ svc-toolbox {
     border-left: var(--ctr-toolbox-border-width-right, 0) solid var(--ctr-toolbox-border-color, transparent);
     border-right: none;
   }
-
+  .svc-toolbox__category {
+    direction: rtl;
+  }
   .svc-toolbox--compact {
     margin-right: 0;
     margin-left: var(--ctr-toolbox-margin-right-compact, calc(-100vw + calcSize(10.5)));;
@@ -250,6 +252,7 @@ svc-toolbox {
 .svc-toolbox__category {
   display: flex;
   flex-direction: column;
+  direction: ltr;
 }
 
 .svc-toolbox__tool:not(.sv-dots) {
