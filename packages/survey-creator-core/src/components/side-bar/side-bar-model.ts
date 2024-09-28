@@ -77,7 +77,7 @@ export class SidebarModel extends Base {
       }
     };
   }
-  private allowFlyoutMode: boolean = true;
+  @property({}) private allowFlyoutMode: boolean = true;
   private afterExpand() {
     this.onNextExpandCallback && this.onNextExpandCallback();
     this.onNextExpandCallback = undefined;
