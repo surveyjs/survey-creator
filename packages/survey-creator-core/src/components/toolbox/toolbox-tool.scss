@@ -21,7 +21,9 @@
 }
 
 .svc-toolbox__tool {
-
+  .sv-action__content {
+    position: relative;
+  }
   sv-svg-icon,
   .sv-svg-icon {
     pointer-events: none;
@@ -188,6 +190,11 @@
   .sv-svg-icon use {
     fill: var(--ctr-toolbox-item-icon-color-hovered, $primary);
   }
+}
+.svc-toolbox__item-submenu-button {
+  position: absolute;
+  right: 0;
+  z-index: 20;
 }
 
 [dir="rtl"],

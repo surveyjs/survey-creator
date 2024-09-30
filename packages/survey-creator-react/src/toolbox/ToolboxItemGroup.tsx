@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Base } from "survey-core";
-import { Popup, ReactElementFactory } from "survey-react-ui";
+import { Popup, ReactElementFactory, SvgIcon } from "survey-react-ui";
 import { CreatorModelElement } from "../ModelElement";
 import { ISurveyCreatorToolboxItemProps, SurveyCreatorToolboxItem } from "./ToolboxItem";
 
@@ -30,6 +30,7 @@ export class SurveyCreatorToolboxItemGroup extends CreatorModelElement<ISurveyCr
   render(): JSX.Element {
     return <>
       <SurveyCreatorToolboxItem item={this.item} creator={this.creator} parentModel={this.parentModel} isCompact={this.isCompact} ></SurveyCreatorToolboxItem >
+      <SvgIcon size={16} iconName={"icon-next_16x16"} className="svc-toolbox__item-submenu-button"></SvgIcon>
       <Popup model={this.item.popupModel} getArea={this.item.getArea} />
     </>;
   }
