@@ -213,12 +213,6 @@ svc-toolbox {
         $shadow-large;
     }
   }
-
-  .svc-toolbox__tool {
-    .sv-action__content {
-      align-items: var(--ctr-toolbox-scroller-align-items, flex-end);
-    }
-  }
 }
 
 .svc-toolbox--compact:not(.svc-toolbox--flyout) {
