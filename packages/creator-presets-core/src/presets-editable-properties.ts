@@ -345,7 +345,7 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     creator.showTabsDefault = false;
     creator.showToolbarDefault = false;
     creator.allowCollapseSidebar = false;
-    creator.sidebar.toolbar.setItems([]);
+    creator.toolbar.setItems([]);
     creator.showAddQuestionButton = false;
     creator.expandCollapseButtonVisibility = "always";
     creator.toolbox.forceCompact = false;

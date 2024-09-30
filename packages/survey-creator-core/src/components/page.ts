@@ -1,4 +1,4 @@
-import { Action, ActionContainer, ComputedUpdater, CssClassBuilder, DragTypeOverMeEnum, IAction, IElement, PageModel, property } from "survey-core";
+import { Action, ActionContainer, classesToSelector, ComputedUpdater, CssClassBuilder, DragTypeOverMeEnum, IAction, IElement, PageModel, property } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { IPortableMouseEvent } from "../utils/events";
 import { SurveyElementAdornerBase } from "./action-container-view-model";
@@ -12,7 +12,6 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   @property({ defaultValue: false }) isSelected: boolean;
   @property({ defaultValue: true }) isPageLive: boolean;
   @property() showPlaceholder: boolean;
-  public onPageSelectedCallback: () => void;
   public questionTypeSelectorModel: any;
   @property({ defaultValue: "" }) currentAddQuestionType: string;
   @property({ defaultValue: null }) dragTypeOverMe: DragTypeOverMeEnum;
@@ -44,7 +43,9 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   protected get dragInsideCollapsedContainer(): boolean {
     return this.collapsed;
   }
-
+  protected getAllowExpandCollapse(options: any): boolean {
+    return !this.isGhost && super.getAllowExpandCollapse(options);
+  }
   protected attachElement(surveyElement: PageModel): void {
     super.attachElement(surveyElement);
     this.dragTypeOverMe = null;
@@ -101,8 +102,8 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     if (isSelected && this.creator.pageEditMode === "bypage") {
       this.setSurveyElement(<PageModel>this.creator.selectedElement);
     }
-    if (isSelected && !!this.onPageSelectedCallback) {
-      this.onPageSelectedCallback();
+    if (isSelected) {
+      this.onPageSelected();
     }
   }
   private patchPageForDragDrop(page: PageModel, addGhostPage: () => void) {
@@ -171,9 +172,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     if (!model.isGhost) {
       if (model.creator.pageEditMode !== "single") {
         model.creator.selectElement(model.page, undefined, false);
-        if (!!this.onPageSelectedCallback) {
-          this.onPageSelectedCallback();
-        }
+        this.onPageSelected();
       }
       else {
         model.creator.selectElement(model.creator.survey, undefined, false);
@@ -184,7 +183,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   }
 
   get css(): string {
-    let result = "";
+    let result = super.getCss();
     if (!!this.dragTypeOverMe && this.showPlaceholder) {
       result = "svc-question__content--drag-over-inside";
     } else if (!!this.dragTypeOverMe && this.page.elements.length === 0 && this.creator.survey.pages.length > 0) {
@@ -199,20 +198,20 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     } else {
       this.dragOut();
     }
+    if(this.allowExpandCollapse) {
+      result += (" svc-page__content--collapse-" + this.creator.expandCollapseButtonVisibility);
+      if (this.renderedCollapsed) result += (" svc-page__content--collapsed");
+      if (this.expandCollapseAnimationRunning) result += (" svc-page__content--animation-running");
+    }
     if (this.isGhost) {
       return result + " svc-page__content--new";
     }
     if (this.creator.isElementSelected(this.page)) {
       result += " svc-page__content--selected";
     }
-
-    result += (" svc-page__content--collapse-" + this.creator.expandCollapseButtonVisibility);
-    if (this.renderedCollapsed) result += (" svc-page__content--collapsed");
     return result.trim();
   }
-  public hover(event: MouseEvent, element: HTMLElement | any) {
-    toggleHovered(event, element, this.creator.pageHoverDelay);
-  }
+
   public hoverStopper(event: MouseEvent, element: HTMLElement | any) {
     event["__svc_question_processed"] = true;
   }
@@ -249,5 +248,22 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     }
     return this._footerActionsBar;
   }
+  protected getAnimatedElement() {
+    const cssClasses = this.surveyElement.cssClasses.page;
+    if (cssClasses?.description) {
+      return this.rootElement?.querySelector(`:scope ${classesToSelector(cssClasses.description)}`) as HTMLElement;
+    }
+    return null;
+  }
 
+  protected getInnerAnimatedElements() {
+    const cssClasses = this.surveyElement.cssClasses;
+    if (cssClasses.pageRow) return [].slice.call(this.rootElement?.querySelectorAll(`:scope .svc-page__footer, :scope ${classesToSelector(this.surveyElement.cssRoot)} > .svc-row`));
+    return null;
+  }
+  public onPageSelected() {
+    if(this.rootElement) {
+      SurveyHelper.scrollIntoViewIfNeeded(this.rootElement);
+    }
+  }
 }

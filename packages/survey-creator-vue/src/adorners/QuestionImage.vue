@@ -1,43 +1,37 @@
 <template>
   <QuestionBase
-    :model="(model as QuestionImageAdornerViewModel)"
+    :create-model="createModel"
     :element="props.componentData.element"
     :show-placeholder-component="true"
     :component-data="componentData"
     :component-name="componentName"
     :placeholder-component="'survey-file'"
-    :placeholder-component-data="{ question: model?.filePresentationModel }"
+    :get-placeholder-component-data="getPlaceholderComponentData"
     :adorner-component="'svc-image-question-adorner'"
-    ref="root"
   ></QuestionBase>
 </template>
 <script lang="ts" setup>
 import QuestionBase from "./QuestionBase.vue";
-import { useCreatorModel } from "../creator-model";
 import {
   SurveyCreatorModel,
   QuestionImageAdornerViewModel,
+  QuestionAdornerViewModel,
 } from "survey-creator-core";
-import { onMounted, ref } from "vue";
 import type { Question } from "survey-core";
 const props = defineProps<{
   componentName: string;
   componentData: any;
 }>();
-const root = ref();
-const model = useCreatorModel(
-  () =>
-    new QuestionImageAdornerViewModel(
-      props.componentData.data as SurveyCreatorModel,
-      props.componentData.element as Question,
-      null as any,
-      null as any
-    ),
-  [() => props.componentName, () => props.componentData]
-);
-onMounted(() => {
-  if (model.value && root.value) {
-    model.value.questionRoot = root.value.questionRoot;
-  }
-});
+const createModel = () => {
+  return new QuestionImageAdornerViewModel(
+    props.componentData.data as SurveyCreatorModel,
+    props.componentData.element as Question,
+    null as any
+  );
+};
+const getPlaceholderComponentData = (model: QuestionAdornerViewModel) => {
+  return {
+    question: (model as QuestionImageAdornerViewModel)?.filePresentationModel,
+  };
+};
 </script>

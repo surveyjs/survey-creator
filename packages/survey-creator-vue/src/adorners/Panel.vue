@@ -10,6 +10,19 @@
     ref="root"
   >
     <div
+      v-if="adorner.showHiddenTitle"
+      :class="adorner.cssCollapsedHiddenHeader"
+    >
+      <div :class="adorner.cssCollapsedHiddenTitle">
+        <SvComponent
+          v-if="!!adorner.element.hasTitle"
+          :is="'survey-string'"
+          :locString="adorner.element.locTitle"
+        />
+        <span v-else class="svc-fake-title">{{ adorner.element.name }}</span>
+      </div>
+    </div>
+    <div
       :class="adorner.css()"
       v-key2click="{ disableTabStop: true }"
       @click="
@@ -49,12 +62,6 @@
             :model="adorner.topActionContainer"
             :handleClick="false"
           ></SvComponent>
-        </div>
-      </div>
-      <div v-if="adorner.showHiddenTitle" :class="adorner.cssCollapsedHiddenHeader">
-        <div :class="adorner.cssCollapsedHiddenTitle">
-          <SvComponent v-if="!!adorner.element.title" :is="'survey-string'" :locString="adorner.element.locTitle" />
-          <span v-else class="svc-fake-title">{{adorner.element.name}}</span>
         </div>
       </div>
       <SvComponent :is="componentName" v-bind="componentData"></SvComponent>
@@ -97,7 +104,9 @@
         <div class="svc-panel__add-new-question-wrapper">
           <SvComponent
             :is="'svc-add-new-question-btn'"
-            :item="{ data: adorner }" :buttonClass="'svc-action-button'" :renderPopup="false"
+            :item="{ data: adorner }"
+            :buttonClass="'svc-action-button'"
+            :renderPopup="false"
           ></SvComponent>
         </div>
       </div>

@@ -29,6 +29,10 @@ svc-tab-designer {
   min-width: calcSize(84);
 }
 
+.svc-content-wrapper {
+  width: 100%;
+  display: flex;
+}
 .svc-tab-designer {
   .svc-designer-header {
     .sd-container-modern__title {
@@ -39,7 +43,6 @@ svc-tab-designer {
   .svc-tab-designer_content {
     width: 100%;
   }
-
   .sd-title {
     display: flex;
   }
@@ -116,7 +119,6 @@ svc-tab-designer {
     display: none;
   }
 }
-
 
 .svc-tab-designer__toolbar {
   position: absolute;
