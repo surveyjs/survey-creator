@@ -14,6 +14,7 @@ if (settings.iconSet === "v1") {
     "clear-24x24": "clear",
     "close-24x24": "closecamera",
     "file-72x72": "defaultfile",
+    "toolbox-file-24x24-2": "file",
     "chevronleft-16x16": "left",
     "plus-32x32": "modernbooleancheckchecked",
     "minus-32x32": "modernbooleancheckunchecked",
