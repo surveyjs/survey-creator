@@ -1599,10 +1599,10 @@ export class SurveyCreatorModel extends Base
   protected registerIcons() {
     let path;
     if (settings.useLegacyIcons) {
-      path = svgBundle["iconsPathV1"];
+      path = svgBundle.V1;
       SvgRegistry.registerIconsFromFolder(path);
     } else {
-      path = svgBundle["iconsPathV2"];
+      path = svgBundle.V2;
       renamedIcons["toolbox-file-24x24-2"] = "file";
       path.keys().forEach((key: string) => {
         const iconId = key.substring(2, key.length - 4).toLowerCase();
