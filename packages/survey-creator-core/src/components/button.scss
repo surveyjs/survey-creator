@@ -1,6 +1,6 @@
 @import "../variables.scss";
 
-.svc-creator-popup {
+.svc-creator-popup.sv-popup--modal {
   .sd-btn.sv-popup__button {
     border-radius: var(--ctr-button-corner-radius-small, $corner-radius);
     padding: var(--ctr-button-padding-vertical-small, calcSize(2))
