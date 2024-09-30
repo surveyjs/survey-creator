@@ -19,7 +19,6 @@
     width: var(--ctr-toolbox-item-icon-width, unset);
   }
 }
-
 .svc-toolbox__tool {
   .sv-action__content {
     position: relative;
@@ -27,6 +26,11 @@
   sv-svg-icon,
   .sv-svg-icon {
     pointer-events: none;
+  }
+}
+.svc-toolbox__tool--has-subitems{
+  .svc-toolbox__item {
+    padding-right: 48px;
   }
 }
 
@@ -193,8 +197,23 @@
 }
 .svc-toolbox__item-submenu-button {
   position: absolute;
-  right: 0;
+  right: calcSize(1);
+  top: calcSize(1.5);
+  display: inline-flex;
+  padding: var(--ctr-toolbox-item-submenu-button-padding-top, 4px) var(--ctr-toolbox-item-submenu-button-padding-right, 4px) var(--ctr-toolbox-item-submenu-button-padding-bottom, 4px) var(--ctr-toolbox-item-submenu-button-padding-left, 4px);
+  width: calcSize(3);
+  height: calcSize(3);
+  box-sizing: border-box;
+  align-items: center;
+  border-radius: var(--ctr-toolbox-item-submenu-button-corner-radius, 1024px);
+  background: var(--ctr-toolbox-item-submenu-button-background-color, $background-dim);
   z-index: 20;
+  &:hover {
+    background: var(--ctr-toolbox-item-submenu-button-background-color-hovered, $background);
+  }
+}
+.svc-toolbox__tool .svc-toolbox__item-submenu-button {
+  pointer-events: initial;
 }
 
 [dir="rtl"],
