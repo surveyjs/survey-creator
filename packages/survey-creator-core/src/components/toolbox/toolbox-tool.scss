@@ -46,6 +46,7 @@
   .sv-action__content {
     align-items: var(--ctr-toolbox-item-with-submenu-button-align, flex-start);
   }
+  align-self: var(--ctr-toolbox-item-with-submenu-button-align, flex-start);
 }
 .svc-toolbox__tool {
 
