@@ -2189,8 +2189,8 @@ test("Translate matrix cells, Bug#8759", () => {
   group = group.groups[2];
   expect(group.name).toBe("cells");
   expect(group.text).toBe("Cells");
-  expect(group.items).toHaveLength(4);
-  const item = <TranslationItem>group.items[3];
+  expect(group.items).toHaveLength(6);//2 default values
+  const item = <TranslationItem>group.items[3 + 2];
   expect(item.text).toBe("Row 2, Col 2");
   expect(item.getLocText("")).toBe("row2_col2");
   item.setLocText("de", "de_row2_col2");
