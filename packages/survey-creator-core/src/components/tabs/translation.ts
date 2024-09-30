@@ -465,7 +465,7 @@ export class TranslationGroup extends TranslationItemBase {
     matrix.rows.forEach(row => rows.push({ value: row.value, text: row.text }));
     rows.forEach(row => {
       matrix.columns.forEach(col => {
-        const locStr = cells.getCellLocText(row.value, col);
+        const locStr = cells.getCellDisplayLocText(row.value, col);
         if(!!locStr) {
           const name = editorLocalization.getPropertyName(row.text, "") + ", " + editorLocalization.getPropertyName(col.title);
           const item = new TranslationItem(name, locStr, "", this.translation, locStr);
