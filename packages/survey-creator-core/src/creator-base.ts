@@ -5,7 +5,9 @@ import {
   EventBase, hasLicense, slk, settings as SurveySettings, Event, Helpers as SurveyHelpers, MatrixDropdownColumn, JsonObject,
   dxSurveyService, ISurveyElement, PanelModelBase, surveyLocalization, QuestionMatrixDropdownModelBase, ITheme, Helpers,
   chooseFiles, createDropdownActionModel,
-  CssClassBuilder
+  CssClassBuilder,
+  SvgRegistry,
+  renamedIcons
 } from "survey-core";
 import { ICreatorPlugin, ISurveyCreatorOptions, settings, ICollectionItemAllowOperations } from "./creator-settings";
 import { editorLocalization } from "./editorLocalization";
@@ -59,6 +61,7 @@ require("./components/string-editor.scss");
 require("./creator-theme/creator.scss");
 
 import designTabSurveyThemeJSON from "./designTabSurveyThemeJSON";
+import { svgBundle } from "./svgbundle";
 
 export interface IKeyboardShortcut {
   name?: string;
@@ -1275,6 +1278,7 @@ export class SurveyCreatorModel extends Base
     this.tabbedMenu.locOwner = this;
     this.selectionHistoryControllerValue = new SelectionHistory(this);
     this.sidebar = new SidebarModel(this);
+    this.registerIcons();
     this.setOptions(this.options);
     this.patchMetadata();
     this.initSurveyWithJSON(undefined, false);
@@ -1591,6 +1595,21 @@ export class SurveyCreatorModel extends Base
   }
   public getOptions(): ICreatorOptions {
     return this.options || {};
+  }
+  protected registerIcons() {
+    let path;
+    if (settings.useLegacyIcons) {
+      path = svgBundle["iconsPathV1"];
+      SvgRegistry.registerIconsFromFolder(path);
+    } else {
+      path = svgBundle["iconsPathV2"];
+      renamedIcons["toolbox-file-24x24-2"] = "file";
+      path.keys().forEach((key: string) => {
+        const iconId = key.substring(2, key.length - 4).toLowerCase();
+        SvgRegistry.registerIconFromSvg(renamedIcons[iconId] || iconId, path(key));
+      });
+    }
+
   }
   protected setOptions(options: ICreatorOptions): void {
     if (!options) options = {};
