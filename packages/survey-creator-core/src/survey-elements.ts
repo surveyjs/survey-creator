@@ -326,6 +326,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       }
       dragOverLocation = dragOverLocationIfNotAllowed;
       this.dragOverLocation = dragOverLocation;
+      this.insideContainer = false;
       if (!this.isAllowDragOver(dropTarget, dragOverLocation)) {
         this.allowDropHere = false;
         return;
