@@ -1141,6 +1141,53 @@ test("Support onDragDropAllow, Bug#4572", (): any => {
   expect(counter).toBe(2);
   expect(ddHelper["allowDropHere"]).toBeTruthy();
 });
+
+test("Raise onDragDropAllow again if DragTypeOverMeEnum.InsideEmptyPanel is not allowed", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          }
+        ]
+      },
+      {
+        "name": "page2",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question2"
+          }
+        ]
+      }
+    ]
+  };
+  let counter: Array<string> = [];
+  creator.onDragDropAllow.add((sender, options) => {
+    if (!options.insertAfter && !options.insertBefore) {
+      counter.push("inside");
+      options.allow = false;
+    }
+    counter.push("not inside");
+    options.allow = true;
+  });
+  const ddHelper: any = creator.dragDropSurveyElements;
+  const q1 = creator.survey.getQuestionByName("question1");
+  const q2 = creator.survey.getQuestionByName("question2");
+  ddHelper.draggedElement = q2;
+  ddHelper["allowDropHere"] = true;
+  ddHelper.dragOverCore(q1, DragTypeOverMeEnum.InsideEmptyPanel, DragTypeOverMeEnum.Top);
+  expect(counter).toStrictEqual(["inside", "not inside"]);
+  counter = [];
+  ddHelper.dragOverCore(q1, DragTypeOverMeEnum.Top, DragTypeOverMeEnum.Top);
+  expect(counter).toStrictEqual(["not inside"]);
+});
+
 test("Support onDragDropAllow&allowDropNextToAnother, #5621", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {

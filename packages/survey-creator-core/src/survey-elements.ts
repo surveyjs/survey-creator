@@ -306,7 +306,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     }
     return allowOptions.allow;
   }
-  public dragOverCore(dropTarget: ISurveyElement, dragOverLocation: DragTypeOverMeEnum): void {
+  public dragOverCore(dropTarget: ISurveyElement, dragOverLocation: DragTypeOverMeEnum, dragOverLocationIfNotAllowed: DragTypeOverMeEnum): void {
     const oldDragOverIndicatorElement = this.dragOverIndicatorElement;
     const oldDropTarget = this.dropTarget;
     if (this.isSameElement(dropTarget)) {
@@ -320,8 +320,16 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       ? this.dropTarget
       : ((<any>this.dropTarget).page || (<any>this.dropTarget).__page);
     if (!this.isAllowDragOver(dropTarget, dragOverLocation)) {
-      this.allowDropHere = false;
-      return;
+      if (dragOverLocation != DragTypeOverMeEnum.InsideEmptyPanel) {
+        this.allowDropHere = false;
+        return;
+      }
+      dragOverLocation = dragOverLocationIfNotAllowed;
+      this.dragOverLocation = dragOverLocation;
+      if (!this.isAllowDragOver(dropTarget, dragOverLocation)) {
+        this.allowDropHere = false;
+        return;
+      }
     }
     if (dragOverLocation == DragTypeOverMeEnum.InsideEmptyPanel) {
       this.dragOverIndicatorElement = this.dropTarget;
@@ -362,7 +370,8 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     const dropTarget = this.getDropTargetByNode(dropTargetNode, event);
 
     if (!!oldInsideContainer != !!this.insideContainer) dropTarget.dragTypeOverMe = null;
-    let dragOverLocation = calculateDragOverLocation(event.clientX, event.clientY, dropTargetNode);
+    const dragOverLocationSide = calculateDragOverLocation(event.clientX, event.clientY, dropTargetNode);
+    let dragOverLocation = dragOverLocationSide;
     if (dropTarget && ((dropTarget.isPanel || dropTarget.isPage) && dropTarget.elements.length === 0 || isPanelDynamic(dropTarget) && dropTarget.template.elements.length == 0)) {
       if (dropTarget.isPage || this.insideContainer) {
         dragOverLocation = DragTypeOverMeEnum.InsideEmptyPanel;
@@ -381,7 +390,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
 
     this.allowDropHere = true;
 
-    this.dragOverCore(dropTarget, dragOverLocation);
+    this.dragOverCore(dropTarget, dragOverLocation, dragOverLocationSide);
   }
 
   protected onStartDrag(): void {
