@@ -21,7 +21,6 @@ import { DesignerStateManager } from "./tabs/designer-state-manager";
 import { TabDesignerPlugin } from "./tabs/designer-plugin";
 import { isPanelDynamic } from "../survey-elements";
 import { cleanHtmlElementAfterAnimation, prepareElementForVerticalAnimation } from "survey-core";
-import { toggleHovered } from "src/utils/utils";
 
 export class SurveyElementActionContainer extends AdaptiveActionContainer {
   private needToShrink(item: Action, shrinkTypeConverterAction: boolean) {

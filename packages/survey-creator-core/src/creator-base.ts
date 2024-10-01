@@ -59,7 +59,7 @@ require("./components/string-editor.scss");
 require("./creator-theme/creator.scss");
 
 import designTabSurveyThemeJSON from "./designTabSurveyThemeJSON";
-import { ICreatorTheme } from "./creator-theme/creator-theme-model";
+import { ICreatorTheme } from "./creator-theme/creator-themes";
 
 export interface IKeyboardShortcut {
   name?: string;
@@ -2791,7 +2791,7 @@ export class SurveyCreatorModel extends Base
 
   //#region Obsolete designerPropertyGrid
   protected get designerPropertyGrid(): PropertyGridModel {
-    const propertyGridTab = this.sidebar.getPageById(this.sidebar.activePage);
+    const propertyGridTab = this.sidebar.getPageById("propertyGrid");
     if (!propertyGridTab) return null;
     return propertyGridTab.componentData ? (propertyGridTab.componentData.propertyGridModel as any as PropertyGridModel) : null;
   }
@@ -3904,30 +3904,19 @@ export class SurveyCreatorModel extends Base
       .append("svc-creator--mobile", this.isMobileView)
       .append("svc-creator--touch", this.isTouch)
       .append("svc-creator--disable-animations", !this.animationEnabled)
-      .append(this.themedClasses())
       .toString();
   }
 
-  private themedClasses(): string {
-    if (!this.creatorTheme) return "";
-    return new CssClassBuilder()
-      .append("svc-creator-v1", this.creatorTheme.themeName == "v1")
-      .append("svc-creator-v2", this.creatorTheme.themeName == "v2")
-      .append("svc-creator--light", this.creatorTheme.themeName == "v2" && this.creatorTheme.palette === "light")
-      .append("svc-creator--dark", this.creatorTheme.themeName == "v2" && this.creatorTheme.palette === "dark")
-      .append("svc-creator--contrast", this.creatorTheme.themeName == "v2" && this.creatorTheme.palette === "contrast")
-      .toString();
-  }
-
-  @property({ defaultValue: {} }) cssVariables: { [index: string]: string } = {};
-  @property() creatorTheme: ICreatorTheme;
+  @property({ defaultValue: {} }) private cssVariables: { [index: string]: string } = {};
+  @property() private creatorTheme: ICreatorTheme;
   public get themeVariables() {
     return assign({}, this.cssVariables);
   }
+
   public applyTheme(theme: ICreatorTheme): void {
     if (!theme) return;
     this.creatorTheme = theme;
-    // this.cssVariables = theme.cssVariables;
+    this.cssVariables = theme.cssVariables;
   }
 }
 

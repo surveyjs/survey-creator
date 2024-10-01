@@ -1,12 +1,14 @@
 import { Serializer, Base, property, ArrayChanges, EventBase, ILoadFromJSONOptions, ISaveToJSONOptions } from "survey-core";
 import { getLocString } from "../editorLocalization";
 import { assign, roundTo2Decimals } from "../utils/utils";
+import { CreatorPalettes, CreatorThemes, ICreatorTheme } from "./creator-themes";
 
-export interface ICreatorTheme {
-  themeName?: string;
-  palette?: string;
-  cssVariables?: { [index: string]: string };
-}
+export * from "./themes/theme-20";
+export * from "./themes/theme-24";
+export * from "./themes/palette-base";
+export * from "./themes/palette-light";
+export * from "./themes/palette-dark";
+export * from "./themes/palette-contrast";
 
 export class CreatorThemeModel extends Base implements ICreatorTheme {
   cssVariables?: { [index: string]: string } = {};
@@ -77,6 +79,8 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
 
     const result = super.toJSON(options);
     const cssVariables = {};
+    const currentPalette = this.themeName === "20" ? "base" : this.palette;
+    assign(cssVariables, CreatorThemes[this.themeName].cssVariables, CreatorPalettes[currentPalette]);
     Object.keys(result).forEach(key => {
       if (key.indexOf("--") == 0) {
         cssVariables[key] = result[key];
@@ -95,10 +99,10 @@ Serializer.addClass(
       type: "dropdown",
       name: "themeName",
       choices: [
-        { value: "v1", text: getLocString("theme.names.v1") },
-        { value: "v2", text: getLocString("theme.names.v2") }
+        { value: "20", text: getLocString("theme.names.20") },
+        { value: "24", text: getLocString("theme.names.24") }
       ],
-      default: "v1"
+      default: "20"
     }, {
       type: "buttongroup",
       name: "palette",
@@ -109,7 +113,7 @@ Serializer.addClass(
         { value: "contrast" },
       ],
       enableIf: (obj: CreatorThemeModel): boolean => {
-        return !obj || obj.themeName === "v2";
+        return !obj || obj.themeName === "24";
       },
     }, {
       type: "spinedit",
