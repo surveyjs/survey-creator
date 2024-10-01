@@ -302,6 +302,10 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
       this.addSubitems(array);
     }
   }
+
+  public get subitemsButtonIcon() {
+    return "icon-next_16x16";
+  }
 }
 
 /**

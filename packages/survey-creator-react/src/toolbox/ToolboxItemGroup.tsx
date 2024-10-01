@@ -30,9 +30,11 @@ export class SurveyCreatorToolboxItemGroup extends CreatorModelElement<ISurveyCr
   render(): JSX.Element {
     return <>
       <SurveyCreatorToolboxItem item={this.item} creator={this.creator} parentModel={this.parentModel} isCompact={this.isCompact} ></SurveyCreatorToolboxItem >
-      <SvgIcon onMouseOver={(event: any) => {
+      <div className="svc-toolbox__item-submenu-button" onMouseOver={(event: any) => {
         this.parentModel.mouseOverHandler(this.item);
-      }} size={24} iconName={"icon-next_16x16"} className="svc-toolbox__item-submenu-button"></SvgIcon>
+      }}>
+        <SvgIcon size={24} iconName={this.item.subitemsButtonIcon} ></SvgIcon>
+      </div>
       <Popup model={this.item.popupModel} getArea={this.item.getArea} />
     </>;
   }

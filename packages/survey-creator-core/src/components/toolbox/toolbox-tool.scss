@@ -11,7 +11,7 @@
   padding-right: var(--ctr-toolbox-item-padding-right, calcSize(1.5));
   padding-bottom: var(--ctr-toolbox-item-padding-bottom, calcSize(0));
   padding-left: var(--ctr-toolbox-item-padding-left, calcSize(1.5));
-
+  border-radius: var(--ctr-toolbox-item-corner-radius, calcSize(12.5));
   sv-svg-icon,
   .sv-svg-icon {
     display: block;
@@ -29,8 +29,10 @@
   }
 }
 .svc-toolbox__tool--has-subitems{
+  align-items: stretch;
+  align-self: stretch;
   .svc-toolbox__item {
-    padding-right: 48px;
+    align-self: stretch;
   }
 }
 
@@ -113,6 +115,9 @@
   .svc-toolbox__tool {
     align-items: flex-end;
   }
+  .svc-toolbox__tool--has-subitems{
+    align-items: stretch;
+  }
 
   .svc-toolbox__item-banner {
     .svc-toolbox__item-icon {
@@ -170,7 +175,6 @@
   .svc-toolbox__tool--hovered>.sv-action__content>.svc-toolbox__item:not(.sv-dots),
   .svc-toolbox__item:not(.sv-dots):hover {
     overflow: hidden;
-    border-radius: var(--ctr-toolbox-item-corner-radius, calcSize(12.5));
     background-color: var(--ctr-toolbox-item-background-color-hovered, $background);
     box-shadow: $shadow-medium;
     transition: 0.1s ease-in-out;
@@ -197,7 +201,7 @@
 }
 .svc-toolbox__item-submenu-button {
   position: absolute;
-  right: calcSize(1);
+  right: calcSize(1.5);
   top: calcSize(1.5);
   display: inline-flex;
   padding: var(--ctr-toolbox-item-submenu-button-padding-top, 4px) var(--ctr-toolbox-item-submenu-button-padding-right, 4px) var(--ctr-toolbox-item-submenu-button-padding-bottom, 4px) var(--ctr-toolbox-item-submenu-button-padding-left, 4px);
@@ -210,6 +214,12 @@
   z-index: 20;
   &:hover {
     background: var(--ctr-toolbox-item-submenu-button-background-color-hovered, $background);
+    svg {
+      fill: var(--ctr-toolbox-item-submenu-button-icon-color, $layer-1-foreground-50)
+    }
+  }
+  svg {
+    fill: var(--ctr-toolbox-item-submenu-button-icon-color, $layer-1-foreground-50)
   }
 }
 .svc-toolbox__tool .svc-toolbox__item-submenu-button {
@@ -221,6 +231,11 @@
 [style*="direction: rtl"] {
   .svc-toolbox-popup {
     direction: rtl;
+  }
+  .svc-toolbox__item-submenu-button {
+    right: initial;
+    left: calcSize(1.5);
+    transform: rotate(180deg)
   }
 }
 
