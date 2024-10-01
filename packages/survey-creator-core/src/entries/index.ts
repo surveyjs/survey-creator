@@ -116,8 +116,6 @@ require("../property-grid-theme/property-grid.scss");
 require("../utils/design.scss");
 require("../utils/layout.scss");
 require("../custom-questions/boolean-switch.scss");
-require("../creator-theme/themes/themes.scss");
-require("../creator-theme/palettes/palettes.scss");
 
 import { settings, checkLibraryVersion } from "survey-core";
 settings.supportCreatorV2 = true;

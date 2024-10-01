@@ -12,7 +12,8 @@ import { pgTabIcons } from "../../property-grid/icons";
 import { MenuButton } from "../../utils/actions";
 import { editorLocalization } from "../../editorLocalization";
 import { creatorThemeModelPropertyGridDefinition } from "../../creator-theme/creator-theme-model-definition";
-import { CreatorThemeModel, ICreatorTheme } from "../../creator-theme/creator-theme-model";
+import { CreatorThemeModel } from "../../creator-theme/creator-theme-model";
+import { ICreatorTheme } from "../../creator-theme/creator-themes";
 
 export class TabDesignerPlugin implements ICreatorPlugin {
   public model: TabDesignerViewModel;
@@ -123,11 +124,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       this.syncTheme();
     });
     this.themeModel.onThemePropertyChanged.add((sender, options) => {
-      const newCssVariables = {};
-      const newVariable = {};
-      newVariable[options.name] = options.value;
-      assign(newCssVariables, this.creator.cssVariables, newVariable);
-      this.creator.cssVariables = newCssVariables;
+      this.syncTheme();
     });
 
     const settingsAction = new MenuButton({
