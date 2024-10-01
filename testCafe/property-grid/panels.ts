@@ -50,3 +50,28 @@ test("Panel stay focused on question change", async (t) => {
     .click(question1)
     .expect(Selector("div [data-name=\"minWidth\"] input").focused).ok();
 });
+
+test("Show/hide panel header on entering/deleting the panel title, Bug#5720", async (t) => {
+  const json = {
+    elements: [
+      {
+        type: "panel",
+        name: "panel1"
+      }
+    ]
+  };
+  const panel = Selector(".svc-panel__placeholder");
+  const hiddenPanelHeader = Selector(".svc-element__header--hidden");
+  const titleEditor = Selector("[data-name='title']").find("textarea");
+  await setJSON(json);
+  await t
+    .click(panel)
+    .expect(hiddenPanelHeader.exists).ok()
+    .click(titleEditor)
+    .typeText(titleEditor, "MyTitle")
+    .expect(hiddenPanelHeader.exists).notOk()
+    .expect(Selector(".sv-string-editor").withText("MyTitle").exists).ok()
+    .selectText(titleEditor)
+    .pressKey("delete")
+    .expect(hiddenPanelHeader.exists).ok();
+});
