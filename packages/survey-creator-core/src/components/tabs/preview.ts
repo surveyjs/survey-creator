@@ -72,7 +72,7 @@ export class PreviewViewModel extends Base {
 
   constructor(protected surveyProvider: SurveyCreatorModel, private startThemeClasses: any = defaultV2Css) {
     super();
-    this.simulator = new SurveySimulatorModel();
+    this.simulator = new SurveySimulatorModel(surveyProvider);
   }
 
   public get isMobileView() {
