@@ -78,8 +78,9 @@ export class CreatorSurveyPageComponent extends CreatorModelElement<
     return (
       attachKey2click(<div
         ref={this.rootRef}
-        className={"svc-page__content " + this.model.css}
         id={this.props.page.id}
+        data-sv-drop-target-survey-page={!this.model.isGhost ? this.model.page.name || null : null}
+        className={"svc-page__content " + this.model.css}
         onClick={(e) => {
           return this.model.select(this.model, new ReactMouseEvent(e));
         }}
@@ -87,6 +88,8 @@ export class CreatorSurveyPageComponent extends CreatorModelElement<
         onMouseLeave={(e) => this.model.hover(e.nativeEvent, e.currentTarget)}
         onMouseOver={(e) => this.model.hover(e.nativeEvent, e.currentTarget)}
       >
+        <div className="svc-question__drop-indicator svc-question__drop-indicator--top"></div>
+        <div className="svc-question__drop-indicator svc-question__drop-indicator--bottom"></div>
         {this.renderHeader()}
         {this.renderContent()}
         {this.renderPlaceholder()}
@@ -108,9 +111,20 @@ export class CreatorSurveyPageComponent extends CreatorModelElement<
     return (<SurveyPage page={this.props.page} survey={this.props.survey} creator={this.props.creator} css={this.model.css}></SurveyPage>);
   }
   protected renderHeader(): JSX.Element {
-    return (<div className="svc-page__content-actions">
+    const actions = (<div className="svc-page__content-actions">
       <SurveyActionBar model={this.model.actionContainer}></SurveyActionBar>
     </div>);
+    if (this.model.isGhost) {
+      return actions;
+    }
+    return (
+      <div className={"svc-question__drag-area"}
+        onPointerDown={(event: any) => this.model.onPointerDown(event)}
+      >
+        <SvgIcon className="svc-question__drag-element" size={24} iconName={"icon-drag-area-indicator_24x16"}></SvgIcon>
+        {actions}
+      </div>
+    );
   }
   protected renderFooter(): JSX.Element {
     return <SurveyActionBar model={this.model.footerActionsBar}></SurveyActionBar>;

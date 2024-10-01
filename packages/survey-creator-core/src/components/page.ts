@@ -1,4 +1,4 @@
-import { Action, ActionContainer, classesToSelector, ComputedUpdater, CssClassBuilder, DragTypeOverMeEnum, IAction, IElement, PageModel, property } from "survey-core";
+import { Action, ActionContainer, classesToSelector, ComputedUpdater, CssClassBuilder, DragOrClickHelper, DragTypeOverMeEnum, IAction, IElement, PageModel, property } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { IPortableMouseEvent } from "../utils/events";
 import { SurveyElementAdornerBase } from "./action-container-view-model";
@@ -7,12 +7,14 @@ import { getLocString } from "../editorLocalization";
 require("./page.scss");
 import { SurveyHelper } from "../survey-helper";
 import { settings } from "../creator-settings";
+import { DragDropSurveyElements } from "../survey-elements";
 
 export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   @property({ defaultValue: false }) isSelected: boolean;
   @property({ defaultValue: true }) isPageLive: boolean;
   @property() showPlaceholder: boolean;
   public questionTypeSelectorModel: any;
+  private dragOrClickHelper: DragOrClickHelper;
   @property({ defaultValue: "" }) currentAddQuestionType: string;
   @property({ defaultValue: null }) dragTypeOverMe: DragTypeOverMeEnum;
   private updateDragTypeOverMe() {
@@ -38,6 +40,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       }
     );
     this.attachElement(page);
+    this.dragOrClickHelper = new DragOrClickHelper(this.startDragSurveyElement);
   }
 
   protected get dragInsideCollapsedContainer(): boolean {
@@ -184,21 +187,30 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
 
   get css(): string {
     let result = super.getCss();
-    if (!!this.dragTypeOverMe && this.showPlaceholder) {
-      result = "svc-question__content--drag-over-inside";
-    } else if (!!this.dragTypeOverMe && this.page.elements.length === 0 && this.creator.survey.pages.length > 0) {
-      result = "svc-page--drag-over-empty";
-      if (!!this.creator && !this.creator.showAddQuestionButton) {
-        result += " svc-page--drag-over-empty-no-add-button";
+    if (this.dragDropHelper.draggedElement && this.dragDropHelper.draggedElement.isPage) {
+      if (this.dragTypeOverMe === DragTypeOverMeEnum.Top) {
+        result += " svc-question__content--drag-over-top";
+      }
+      if (this.dragTypeOverMe === DragTypeOverMeEnum.Bottom) {
+        result += " svc-question__content--drag-over-bottom";
+      }
+    } else {
+      if (!!this.dragTypeOverMe && this.showPlaceholder) {
+        result = "svc-question__content--drag-over-inside";
+      } else if (!!this.dragTypeOverMe && this.page.elements.length === 0 && this.creator.survey.pages.length > 0) {
+        result = "svc-page--drag-over-empty";
+        if (!!this.creator && !this.creator.showAddQuestionButton) {
+          result += " svc-page--drag-over-empty-no-add-button";
+        }
+      }
+      if (!!this.dragTypeOverMe && this.collapsed) {
+        this.dragIn();
+        result += " svc-page__content--collapsed-drag-over-inside";
+      } else {
+        this.dragOut();
       }
     }
-    if (!!this.dragTypeOverMe && this.collapsed) {
-      this.dragIn();
-      result += " svc-page__content--collapsed-drag-over-inside";
-    } else {
-      this.dragOut();
-    }
-    if(this.allowExpandCollapse) {
+    if (this.allowExpandCollapse) {
       result += (" svc-page__content--collapse-" + this.creator.expandCollapseButtonVisibility);
       if (this.renderedCollapsed) result += (" svc-page__content--collapsed");
       if (this.expandCollapseAnimationRunning) result += (" svc-page__content--animation-running");
@@ -262,8 +274,21 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     return null;
   }
   public onPageSelected() {
-    if(this.rootElement) {
+    if (this.rootElement) {
       SurveyHelper.scrollIntoViewIfNeeded(this.rootElement);
     }
+  }
+  private get dragDropHelper(): DragDropSurveyElements {
+    return this.creator.dragDropSurveyElements;
+  }
+  onPointerDown(pointerDownEvent: PointerEvent) {
+    this.dragOrClickHelper.onPointerDown(pointerDownEvent);
+  }
+  startDragSurveyElement = (event: PointerEvent) => {
+    const element = <any>this.surveyElement;
+    const isElementSelected = this.creator.selectedElement === element;
+    this.dragDropHelper.startDragSurveyElement(event, element, isElementSelected);
+    this.creator.expandCollapseManager.updateCollapsed(true);
+    return true;
   }
 }
