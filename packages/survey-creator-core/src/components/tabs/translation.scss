@@ -265,10 +265,6 @@ td.st-table__cell:first-of-type {
   border-bottom: 1px solid var(--ctr-string-table-row-border-color, $border-light);
 }
 
-.st-translation-dialog .sv-popup__body-header {
-  margin-bottom: calcSize(4);
-}
-
 .st-translation-dialog .st-strings-wrapper {
   border-radius: 4px;
   box-shadow: $shadow-small;
