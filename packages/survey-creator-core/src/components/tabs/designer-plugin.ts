@@ -251,12 +251,9 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       action: () => {
         this.selectSurvey();
         if (!this.creator.isMobileView) {
-          if(this.creator.sidebar.renderedIsVisible) {
+          this.creator.sidebar.executeOnExpand(() => {
             this.creator.propertyGrid.getAllQuestions()[0].focus();
-          }
-          this.creator.sidebar.onNextExpandCallback = () => {
-            this.creator.propertyGrid.getAllQuestions()[0].focus();
-          };
+          });
         }
       },
       active: this.isSettingsActive,

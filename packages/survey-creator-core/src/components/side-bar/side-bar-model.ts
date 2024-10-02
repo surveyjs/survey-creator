@@ -15,7 +15,7 @@ export class SidebarModel extends Base {
   private onSidebarVisibilityChanged;
   private resizeManager: ResizeManager;
 
-  onNextExpandCallback: () => void;
+  onExpandCallback: () => void;
 
   @propertyArray() pages: Array<SidebarPageModel>;
   @property({ defaultValue: true }) _visible: boolean;
@@ -79,8 +79,14 @@ export class SidebarModel extends Base {
   }
   @property({}) private allowFlyoutMode: boolean = true;
   private afterExpand() {
-    this.onNextExpandCallback && this.onNextExpandCallback();
-    this.onNextExpandCallback = undefined;
+    this.onExpandCallback && this.onExpandCallback();
+    this.onExpandCallback = undefined;
+  }
+  public executeOnExpand(callback: () => void) {
+    if(this.renderedIsVisible) {
+      callback();
+    }
+    this.onExpandCallback = callback;
   }
   public visibilityAnimation = new AnimationBoolean(this.getAnimationOptions(), (val: boolean) => {
     this.renderedIsVisible = val;
