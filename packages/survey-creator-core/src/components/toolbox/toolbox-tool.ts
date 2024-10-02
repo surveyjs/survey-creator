@@ -51,7 +51,10 @@ export class ToolboxToolViewModel extends Base {
   }
 
   public onMouseOver(itemValue, mouseoverEvent) {
-    //this.model.mouseOverHandler(itemValue);
+    this.model.mouseOverHandler(itemValue);
+  }
+  public onMouseOverTool(itemValue, mouseoverEvent) {
+    if (itemValue.popupModel?.isVisible) this.onMouseOver(itemValue, mouseoverEvent);
   }
 
   public onMouseLeave(itemValue, mouseoverEvent) {
