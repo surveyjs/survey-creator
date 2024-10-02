@@ -78,7 +78,7 @@ test("Creator theme model de/serialization", (): any => {
 
   const themeJson: ICreatorTheme = {
     themeName: "custom",
-    palette: "light",
+    colorPalette: "light",
     cssVariables: {
       "--sjs-base-unit": "6px",
       "--ctr-surface-background-color": "rgba(253, 255, 148, 0.5)",
@@ -89,7 +89,7 @@ test("Creator theme model de/serialization", (): any => {
   themeModel.fromJSON(themeJson);
   expect(themeModel.scale).toBe(75);
   expect(themeModel.themeName).toBe("custom");
-  expect(themeModel.palette).toBe("light");
+  expect(themeModel.colorPalette).toBe("light");
 
   expect(themeModel["--sjs-base-unit"]).toBe("6px");
   expect(themeModel["--ctr-surface-background-color"]).toBe("rgba(253, 255, 148, 0.5)");

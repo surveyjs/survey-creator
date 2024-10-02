@@ -3917,11 +3917,8 @@ export class SurveyCreatorModel extends Base
       .toString();
   }
 
-  @property({ defaultValue: {} }) private cssVariables: { [index: string]: string } = {};
+  @property({ defaultValue: {} }) themeVariables: { [index: string]: string } = {};
   @property() private creatorTheme: ICreatorTheme;
-  public get themeVariables() {
-    return assign({}, this.cssVariables);
-  }
 
   public applyTheme(theme: ICreatorTheme, palette?: any): void {
     if (!theme) return;
@@ -3929,7 +3926,7 @@ export class SurveyCreatorModel extends Base
 
     const newCssVariable = {};
     assign(newCssVariable, theme?.cssVariables, palette?.cssVariables);
-    this.cssVariables = newCssVariable;
+    this.themeVariables = newCssVariable;
   }
 }
 

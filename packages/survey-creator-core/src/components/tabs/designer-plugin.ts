@@ -104,7 +104,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
 
   private syncTheme(theme?: ICreatorTheme) {
     const newTheme = theme || this.themeModel.toJSON();
-    this.creator.applyTheme(CreatorThemes[newTheme.themeName], CreatorPalettes[newTheme.palette]);
+    this.creator.applyTheme(CreatorThemes[newTheme.themeName], CreatorPalettes[newTheme.colorPalette]);
   }
 
   private createCreatorThemeSettingsPage(creator: SurveyCreatorModel) {
@@ -121,7 +121,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       settingsAction.active = false;
     };
     this.themeModel.onThemeSelected.add((sender, options) => {
-      this.syncTheme();
+      this.syncTheme(options.theme);
     });
     this.themeModel.onThemePropertyChanged.add((sender, options) => {
       this.syncTheme();

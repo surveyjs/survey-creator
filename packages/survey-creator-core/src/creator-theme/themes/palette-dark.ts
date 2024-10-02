@@ -63,4 +63,4 @@ const Palette = {
 export default Palette;
 export const PaletteDark = Palette;
 
-CreatorPalettes[Palette.themeName] = Palette;
+CreatorPalettes[Palette.colorPalette] = Palette;

@@ -1,6 +1,6 @@
 export interface ICreatorTheme {
   themeName?: string;
-  palette?: string;
+  colorPalette?: string;
   cssVariables?: { [index: string]: string };
 }
 

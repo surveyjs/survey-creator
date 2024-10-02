@@ -14,7 +14,7 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
   cssVariables?: { [index: string]: string } = {};
 
   @property() themeName: string;
-  @property() palette: string;
+  @property() colorPalette: string;
   @property() scale: number;
 
   public onThemeSelected = new EventBase<CreatorThemeModel, { theme: ICreatorTheme }>();
@@ -48,7 +48,10 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
     this.onThemePropertyChanged.fire(this, { name, value });
   }
   private onThemePropertyValueChangedCallback(name: string, oldValue: any, newValue: any, sender: Base, arrayChanges: ArrayChanges) {
-    if (name === "themeName" || name === "palette") {
+    if (name === "themeName" || name === "colorPalette") {
+      if (name === "themeName") {
+        this.colorPalette = undefined;
+      }
       this.onThemeSelected.fire(this, { theme: this.toJSON() });
     } else if (name.indexOf("--") === 0) {
       this.setThemeCssVariablesChanges(name, newValue);
@@ -79,8 +82,10 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
 
     const result = super.toJSON(options);
     const cssVariables = {};
-    const currentPalette = this.themeName === "20" ? "base" : this.palette;
-    assign(cssVariables, CreatorThemes[this.themeName].cssVariables, CreatorPalettes[currentPalette].cssVariables);
+    const currentTheme = CreatorThemes[this.themeName];
+    let currentPaletteName = this.colorPalette || currentTheme.colorPalette;
+    const currentPalette = CreatorPalettes[currentPaletteName];
+    assign(cssVariables, CreatorThemes[this.themeName]?.cssVariables, currentPalette?.cssVariables);
     Object.keys(result).forEach(key => {
       if (key.indexOf("--") == 0) {
         cssVariables[key] = result[key];
@@ -88,6 +93,7 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
       }
     });
     result.cssVariables = cssVariables;
+    result.colorPalette = currentPaletteName;
     return result;
   }
 }
@@ -102,10 +108,9 @@ Serializer.addClass(
         { value: "20", text: getLocString("theme.names.20") },
         { value: "24", text: getLocString("theme.names.24") }
       ],
-      default: "20"
     }, {
       type: "buttongroup",
-      name: "palette",
+      name: "colorPalette",
       displayName: "",
       choices: [
         { value: "light" },
