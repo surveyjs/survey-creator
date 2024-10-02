@@ -13,7 +13,7 @@ import { MenuButton } from "../../utils/actions";
 import { editorLocalization } from "../../editorLocalization";
 import { creatorThemeModelPropertyGridDefinition } from "../../creator-theme/creator-theme-model-definition";
 import { CreatorThemeModel } from "../../creator-theme/creator-theme-model";
-import { ICreatorTheme } from "../../creator-theme/creator-themes";
+import { CreatorPalettes, CreatorThemes, ICreatorTheme } from "../../creator-theme/creator-themes";
 
 export class TabDesignerPlugin implements ICreatorPlugin {
   public model: TabDesignerViewModel;
@@ -104,7 +104,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
 
   private syncTheme(theme?: ICreatorTheme) {
     const newTheme = theme || this.themeModel.toJSON();
-    this.creator.applyTheme(newTheme);
+    this.creator.applyTheme(CreatorThemes[newTheme.themeName], CreatorPalettes[newTheme.palette]);
   }
 
   private createCreatorThemeSettingsPage(creator: SurveyCreatorModel) {

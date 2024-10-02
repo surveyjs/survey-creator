@@ -80,7 +80,7 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
     const result = super.toJSON(options);
     const cssVariables = {};
     const currentPalette = this.themeName === "20" ? "base" : this.palette;
-    assign(cssVariables, CreatorThemes[this.themeName].cssVariables, CreatorPalettes[currentPalette]);
+    assign(cssVariables, CreatorThemes[this.themeName].cssVariables, CreatorPalettes[currentPalette].cssVariables);
     Object.keys(result).forEach(key => {
       if (key.indexOf("--") == 0) {
         cssVariables[key] = result[key];

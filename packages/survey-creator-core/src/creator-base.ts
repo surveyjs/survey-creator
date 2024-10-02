@@ -3923,10 +3923,13 @@ export class SurveyCreatorModel extends Base
     return assign({}, this.cssVariables);
   }
 
-  public applyTheme(theme: ICreatorTheme): void {
+  public applyTheme(theme: ICreatorTheme, palette?: any): void {
     if (!theme) return;
     this.creatorTheme = theme;
-    this.cssVariables = theme.cssVariables;
+
+    const newCssVariable = {};
+    assign(newCssVariable, theme?.cssVariables, palette?.cssVariables);
+    this.cssVariables = newCssVariable;
   }
 }
 

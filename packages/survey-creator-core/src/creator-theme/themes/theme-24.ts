@@ -1,6 +1,8 @@
 import { CreatorThemes } from "../creator-themes";
 
 const Theme = {
+  themeName: "24",
+  colorPalette: "light",
   "cssVariables": {
     "--ctr-toolbox-group-header-margin-left": " 0px",
     "--ctr-button-group-item-border-width": " 0px",
@@ -307,4 +309,4 @@ const Theme = {
 export default Theme;
 export const Theme24 = Theme;
 
-CreatorThemes["24"] = Theme;
+CreatorThemes[Theme.themeName] = Theme;
