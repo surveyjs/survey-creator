@@ -1843,6 +1843,7 @@ export class SurveyCreatorModel extends Base
     }
     this.existingPages = {};
     const survey = this.createSurvey({}, "designer", undefined, (survey: SurveyModel) => {
+      survey.skeletonHeight = 188;
       survey.css = defaultV2Css;
       survey.setIsMobile(!!this.isMobileView);
       survey.setDesignMode(true);
@@ -2762,7 +2763,16 @@ export class SurveyCreatorModel extends Base
           if (!el || this.rootElement.getAnimations({ subtree: true }).filter((animation => animation.effect.getComputedTiming().activeDuration !== Infinity && (animation.pending || animation.playState !== "finished")))[0]) return;
           clearInterval(this.currentFocusInterval);
           if (!!el) {
-            SurveyHelper.scrollIntoViewIfNeeded(el.parentElement ?? el, () => { return { block: "start", behavior: this.animationEnabled ? "smooth" : undefined }; }, true);
+            const isNeedScroll = SurveyHelper.isNeedScrollIntoView(el.parentElement ?? el, true);
+            if (!!isNeedScroll) {
+              const elementPage = this.getPageByElement(selEl);
+              const scrollIntoViewOptions: ScrollIntoViewOptions = { block: "start", behavior: this.animationEnabled ? "smooth" : undefined };
+              if (!!elementPage) {
+                this.survey.scrollElementToTop(selEl, undefined, elementPage, selEl.id, true, scrollIntoViewOptions, this.rootElement);
+              } else {
+                SurveyHelper.scrollIntoViewIfNeeded(el.parentElement ?? el, () => { return scrollIntoViewOptions; }, true);
+              }
+            }
             if (!propertyName && el.parentElement) {
               let elToFocus: HTMLElement = (typeof (focus) === "string") ? el.parentElement.querySelector(focus) : el.parentElement;
               elToFocus && elToFocus.focus({ preventScroll: true });

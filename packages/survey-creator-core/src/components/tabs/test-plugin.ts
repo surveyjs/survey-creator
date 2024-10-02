@@ -151,7 +151,7 @@ export class TabTestPlugin implements ICreatorPlugin {
         iconName: "icon-device-desktop",
         mode: "small",
         visible: <any>new ComputedUpdater<boolean>(() => {
-          return notShortCircuitAnd(this.creator.activeTab === "test", this.creator.showSimulatorInTestSurveyTab);
+          return notShortCircuitAnd(this.creator.activeTab === "test", this.creator.showSimulatorInTestSurveyTab, !this.creator.isTouch);
         }),
       }, {
         items: deviceSelectorItems,
@@ -169,7 +169,7 @@ export class TabTestPlugin implements ICreatorPlugin {
         iconName: "icon-device-rotate",
         mode: "small",
         visible: <any>new ComputedUpdater<boolean>(() => {
-          return notShortCircuitAnd(this.creator.activeTab === "test", this.creator.showSimulatorInTestSurveyTab);
+          return notShortCircuitAnd(this.creator.activeTab === "test", this.creator.showSimulatorInTestSurveyTab, !this.creator.isTouch);
         }),
         action: () => {
           this.model.simulator.landscape = !this.model.simulator.landscape;
