@@ -3912,6 +3912,7 @@ export class SurveyCreatorModel extends Base
       .append("svc-creator--disable-animations", !this.animationEnabled)
       .toString();
   }
+  public collapsePagesOnDragStart = false;
 }
 
 export class CreatorBase extends SurveyCreatorModel { }

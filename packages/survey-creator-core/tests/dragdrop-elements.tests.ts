@@ -1347,3 +1347,41 @@ test("onQuestionAdded fires when drag drop new element", () => {
   });
   expect(log).toBe("->added:q4");
 });
+test("draggedElementType", () => {
+  const survey = new SurveyModel({});
+  const ddHelper: any = new DragDropSurveyElements(survey);
+
+  expect(ddHelper.draggedElement).toBe(null);
+  expect(ddHelper.draggedElementType).toBe("survey-element");
+
+  ddHelper.draggedElement = {};
+  expect(ddHelper.draggedElementType).toBe("survey-element");
+
+  ddHelper.draggedElement = { isPage: true };
+  expect(ddHelper.draggedElementType).toBe("survey-page");
+});
+test("drag drop page", () => {
+  const json = {
+    "pages": [
+      { "name": "page1", "elements": [{ "type": "text", "name": "q1" }] },
+      { "name": "page2", "elements": [{ "type": "text", "name": "q2" }] },
+      { "name": "page3", "elements": [{ "type": "text", "name": "q3" }] },
+    ]
+  };
+  const survey = new SurveyModel(json);
+
+  const [p1, p2, p3] = survey.pages;
+
+  const ddHelper: any = new DragDropSurveyElements(survey);
+  ddHelper.draggedElement = p3;
+
+  ddHelper.dragOverCore(p2, DragTypeOverMeEnum.Top);
+  ddHelper.doDrop();
+  expect(survey.toJSON()).toStrictEqual({
+    "pages": [
+      { "name": "page1", "elements": [{ "type": "text", "name": "q1" }] },
+      { "name": "page3", "elements": [{ "type": "text", "name": "q3" }] },
+      { "name": "page2", "elements": [{ "type": "text", "name": "q2" }] },
+    ]
+  });
+});
