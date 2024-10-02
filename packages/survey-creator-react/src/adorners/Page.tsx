@@ -114,7 +114,7 @@ export class CreatorSurveyPageComponent extends CreatorModelElement<
     const actions = (<div className="svc-page__content-actions">
       <SurveyActionBar model={this.model.actionContainer}></SurveyActionBar>
     </div>);
-    if (this.model.isGhost) {
+    if (this.model.isGhost || !this.model.allowDragging) {
       return actions;
     }
     return (
