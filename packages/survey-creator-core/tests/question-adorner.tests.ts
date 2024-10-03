@@ -1,5 +1,5 @@
 import { QuestionAdornerViewModel } from "../src/components/question";
-import { Action, PopupDropdownViewModel, QuestionRadiogroupModel, settings, SurveyElement, settings as surveySettings } from "survey-core";
+import { Action, ComponentCollection, PopupDropdownViewModel, QuestionRadiogroupModel, settings, SurveyElement, settings as surveySettings } from "survey-core";
 import { CreatorTester } from "./creator-tester";
 import { PageAdorner } from "../src/components/page";
 import { TabDesignerPlugin } from "../src/components/tabs/designer-plugin";
@@ -448,7 +448,13 @@ test("Check question converter selected item for single subitems (json)", (): an
   const popupViewModelSubtype2 = new PopupDropdownViewModel(popupSubtype2); // need for popupModel.onShow
   popupSubtype2.toggleVisibility();
   const listSubtype2 = popupSubtype2.contentComponentData.model;
-  expect(listSubtype2.selectedItem?.id).toBe(undefined);
+  expect(listSubtype2.actions.length).toBe(2);
+  expect(listSubtype2.selectedItem.title).toBe("Long Text");
+  expect(listSubtype2.selectedItem.id).toBe("comment-default");
+  expect(listSubtype2.selectedItem.component).toBeFalsy();
+  expect(listSubtype2.selectedItem.iconName).toBeFalsy();
+  expect(listSubtype2.selectedItem.markerIconName).toBeFalsy();
+  expect(listSubtype2.selectedItem.items?.length).toBeFalsy();
 
   surveySettings.animationEnabled = true;
 });
@@ -492,6 +498,136 @@ test("Check question converter with subitems (json)", (): any => {
   booleanCheckAction2.action();
   const questionConverted2 = creator.survey.getQuestionByName("q1");
   expect(questionConverted2.renderAs).toBe("default");
+
+  surveySettings.animationEnabled = true;
+});
+
+test("Check question converter with subitems for input type", (): any => {
+  surveySettings.animationEnabled = false;
+  const creator = new CreatorTester();
+
+  // create subitems from new items (the same type, different json)
+  const texts = creator.toolbox.getItemByName("text") as QuestionToolboxItem;
+  texts.addSubitem({
+    name: "postalCode",
+    title: "Postal Code",
+    json: {
+      type: "text",
+      maxLength: 7,
+    }
+  });
+
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1" },
+    ]
+  };
+
+  function inputTypeList(question: SurveyElement) {
+    const questionAdorner = new QuestionAdornerViewModel(
+      creator,
+      question,
+      <any>undefined
+    );
+    const convertToAction = questionAdorner.actionContainer.getActionById("convertInputType");
+    const popup = convertToAction.popupModel;
+    const popupViewModel = new PopupDropdownViewModel(popup); // need for popupModel.onShow
+    popup.toggleVisibility();
+    return popup.contentComponentData.model;
+  }
+
+  const question = creator.survey.getQuestionByName("q1");
+  creator.selectElement(question);
+  let list = inputTypeList(question);
+
+  const newSubTypeAction = list.getActionById("postalCode");
+  newSubTypeAction.action(newSubTypeAction);
+  const questionConverted = creator.survey.getQuestionByName("q1");
+  expect(questionConverted.inputType).toBe("text");
+  expect(questionConverted.maxLength).toBe(7);
+
+  list = inputTypeList(questionConverted);
+  expect(list.selectedItem.id).toBe("postalCode");
+
+  surveySettings.animationEnabled = true;
+});
+
+test("Check question converter with subitems for input type, bug #5884", (): any => {
+  surveySettings.animationEnabled = false;
+  const creator = new CreatorTester();
+
+  ComponentCollection.Instance.add({
+    name: "numericentry",
+    iconName: "icon-text",
+    title: "Numeric Entry with Min/Max",
+    defaultQuestionTitle: "Numeric Entry with Min/Max",
+    questionJSON: {
+      "type": "text",
+      "maskType": "numeric",
+      "maskSettings": {
+        "precision": 3,
+        "min": 0,
+        "max": 5
+      }
+    }
+  });
+
+  const singleLineInputItem = creator.toolbox.getItemByName("text");
+
+  singleLineInputItem.addSubitem({
+    name: "numericEntry",
+    title: "Numeric Entry with Min/Max",
+    json: {
+      "type": "numericentry",
+      "maskType": "numeric",
+      "maskSettings": {
+        "precision": 3,
+        "min": 0,
+        "max": 5
+      }
+    }
+  });
+
+  creator.JSON = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "numericentry",
+            "name": "question1"
+          }
+        ]
+      }
+    ]
+  };
+
+  function inputTypeList(question: SurveyElement) {
+    const questionAdorner = new QuestionAdornerViewModel(
+      creator,
+      question,
+      <any>undefined
+    );
+    const convertToAction = questionAdorner.actionContainer.getActionById("convertInputType");
+    const popup = convertToAction.popupModel;
+    const popupViewModel = new PopupDropdownViewModel(popup); // need for popupModel.onShow
+    popup.toggleVisibility();
+    return popup.contentComponentData.model;
+  }
+
+  const question = creator.survey.getQuestionByName("question1");
+  creator.selectElement(question);
+  let list = inputTypeList(question);
+
+  const newSubTypeAction = list.getActionById("numericEntry");
+  newSubTypeAction.action(newSubTypeAction);
+  const questionConverted = creator.survey.getQuestionByName("question1");
+  expect(questionConverted.getElement().maskType).toBe("numeric");
+  expect(questionConverted.getElement().maskSettings).toBeTruthy();
+
+  list = inputTypeList(questionConverted);
+  expect(list.selectedItem.id).toBe("numericEntry");
 
   surveySettings.animationEnabled = true;
 });
@@ -561,7 +697,7 @@ test("Check question converter with single subitem (json)", (): any => {
   getQuestionConverterList(creator, "q1").getActionById("comment").action();
   expect(creator.survey.getQuestionByName("q1").maxLength).toBe(-1);
 
-  getQuestionConverterList(creator, "q1").getActionById("comment").items[0].action();
+  getQuestionConverterList(creator, "q1").getActionById("comment").items[1].action();
   expect(creator.survey.getQuestionByName("q1").maxLength).toBe(280);
 
   getQuestionConverterList(creator, "q1").getActionById("comment").action();
@@ -570,7 +706,7 @@ test("Check question converter with single subitem (json)", (): any => {
   getQuestionConverterList(creator, "q1").getActionById("radiogroup").action();
   expect(creator.survey.getQuestionByName("q1").maxLength).toBe(undefined);
 
-  getQuestionConverterList(creator, "q1").getActionById("comment").items[0].action();
+  getQuestionConverterList(creator, "q1").getActionById("comment").items[1].action();
   expect(creator.survey.getQuestionByName("q1").maxLength).toBe(280);
 
   surveySettings.animationEnabled = true;
@@ -632,17 +768,17 @@ test("Check question converter with subitems (rating, json)", (): any => {
     ]
   };
   expect(creator.survey.getQuestionByName("q1").rateCount).toBe(5);
-  getQuestionConverterList(creator, "q1").getActionById("rating").items[1].action();
+  getQuestionConverterList(creator, "q1").getActionById("rating").items[2].action();
   expect(creator.survey.getQuestionByName("q1").rateCount).toBe(5);
   expect(creator.survey.getQuestionByName("q1").minRateDescription).toBe("Very unsatisfied");
   expect(creator.survey.getQuestionByName("q1").maxRateDescription).toBe("Very satisfied");
   expect(creator.survey.getQuestionByName("q1").title).toBe("How satisfied?");
-  getQuestionConverterList(creator, "q1").getActionById("rating").items[2].action();
+  getQuestionConverterList(creator, "q1").getActionById("rating").items[3].action();
   expect(creator.survey.getQuestionByName("q1").rateCount).toBe(11);
   expect(creator.survey.getQuestionByName("q1").minRateDescription).toBeFalsy();
   expect(creator.survey.getQuestionByName("q1").maxRateDescription).toBeFalsy();
   expect(creator.survey.getQuestionByName("q1").title).toBe("How likely?");
-  getQuestionConverterList(creator, "q1").getActionById("rating").items[1].action();
+  getQuestionConverterList(creator, "q1").getActionById("rating").items[2].action();
   expect(creator.survey.getQuestionByName("q1").rateCount).toBe(5);
   expect(creator.survey.getQuestionByName("q1").minRateDescription).toBe("Very unsatisfied");
   expect(creator.survey.getQuestionByName("q1").maxRateDescription).toBe("Very satisfied");

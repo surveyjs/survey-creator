@@ -1,7 +1,7 @@
 import { CreatorTester } from "../creator-tester";
 import { TestSurveyTabViewModel } from "../../src/components/tabs/test";
 import { SurveyResultsItemModel, SurveyResultsModel } from "../../src/components/results";
-import { IAction, ListModel, Question, QuestionDropdownModel, SurveyModel, StylesManager } from "survey-core";
+import { IAction, ListModel, Question, QuestionDropdownModel, SurveyModel, StylesManager, _setIsTouch } from "survey-core";
 import { TabTestPlugin } from "../../src/components/tabs/test-plugin";
 import { SurveySimulatorModel, simulatorDevices } from "../../src/components/simulator";
 import { editorLocalization } from "../../src/editorLocalization";
@@ -232,6 +232,35 @@ test("Show/hide device similator", (): any => {
   testPlugin.activate();
   similatorAction = creator.toolbar.actions.filter((action) => action.id === "deviceSelector")[0];
   expect(similatorAction).toBeFalsy();
+});
+test("Hide similatorAction on mobile devices", (): any => {
+  let creator: CreatorTester = new CreatorTester();
+  creator.isTouch = true;
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.makeNewViewActive("test");
+  let similatorAction = creator.toolbar.actions.filter((action) => action.id === "deviceSelector")[0];
+  expect(similatorAction).toBeTruthy();
+  expect(similatorAction.visible).toBeFalsy();
+
+  let orientationSelectorAction = creator.toolbar.actions.filter((action) => action.id === "orientationSelector")[0];
+  expect(orientationSelectorAction).toBeTruthy();
+  expect(orientationSelectorAction.visible).toBeFalsy();
+});
+test("Check popup viewType", (): any => {
+  _setIsTouch(true);
+  const creator: CreatorTester = new CreatorTester();
+  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
+  creator.JSON = { elements: [{ type: "dropdown", name: "q1", choices: ["Item1", "Item2", "Item3"] }] };
+  creator.makeNewViewActive("test");
+  const model: TestSurveyTabViewModel = testPlugin.model;
+  const question = <QuestionDropdownModel>model.survey.getAllQuestions()[0];
+  model.survey.onOpenDropdownMenu.add((_, options) => {
+    expect(options.menuType).toEqual("popup");
+  });
+
+  question.dropdownListModel.popupModel.toggleVisibility();
+  expect(question.dropdownListModel.popupModel.isVisible).toBeTruthy();
+  _setIsTouch(false);
 });
 test("pages, PageListItems, makes items enable/disable and do not touch visibility", (): any => {
   var creator = new CreatorTester();

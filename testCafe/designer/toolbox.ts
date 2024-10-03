@@ -352,12 +352,13 @@ test("toolbox subTypes: add items by drag-n-drop", async (t) => {
 
   await t
     .expect(toolboxSubTypesPopup.visible).notOk()
-    .hover(getToolboxItemByText("Rating Scale"))
+    .hover(getToolboxItemByText("Rating Scale").parent(".svc-toolbox__tool").find(".svc-toolbox__item-submenu-button"))
     .wait(400)
     .expect(toolboxSubTypesPopup.visible).ok()
 
-    .hover(getSubToolboxItemByText("Stars"))
-    .dragToElement(getSubToolboxItemByText("Stars"), ".svc-designer__placeholder-container", { speed: 0.5 })
+    .hover(getSubToolboxItemByText("Smileys"), { speed: 0.1 })
+    .wait(400)
+    .dragToElement(getSubToolboxItemByText("Smileys"), ".svc-designer__placeholder-container", { speed: 0.5 })
     .expect(Selector(".svc-question__content").filterVisible().count).eql(1)
 
     .hover(getToolboxItemByText("Rating Scale"))
@@ -375,7 +376,7 @@ test("toolbox subTypes: add items by drag-n-drop", async (t) => {
           {
             "type": "rating",
             "name": "question1",
-            "rateType": "stars"
+            "rateType": "smileys"
           }
         ]
       },
@@ -402,9 +403,8 @@ test("toolbox subTypes: add items by click", async (t) => {
     .click(getToolboxItemByText("Single-Line Input"))
     .wait(400)
     .expect(Selector(".svc-question__content").filterVisible().count).eql(1)
-    .expect(toolboxSubTypesPopup.visible).ok()
 
-    .hover(getToolboxItemByText("Single-Line Input"))
+    .hover(getToolboxItemByText("Single-Line Input").parent(".svc-toolbox__tool").find(".svc-toolbox__item-submenu-button"))
     .wait(400)
     .expect(toolboxSubTypesPopup.visible).ok()
 
@@ -441,7 +441,7 @@ test("toolbox subTypes: hide subTypes popup", async (t) => {
 
   await t
     .expect(toolboxSubTypesPopup.visible).notOk()
-    .hover(getToolboxItemByText("Rating Scale"))
+    .hover(getToolboxItemByText("Rating Scale").parent(".svc-toolbox__tool").find(".svc-toolbox__item-submenu-button"))
     .wait(400)
     .expect(toolboxSubTypesPopup.visible).ok()
 
