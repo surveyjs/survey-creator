@@ -28,7 +28,7 @@ test("object selector with search and selected item", async (t) => {
       .resizeWindow(1280, 900)
       .click(pageNavigator)
       .click(getListItemByText("educationalNeeds"))
-      .click(Selector(".svc-string-editor__input").withText("Do you live?"))
+      .click(Selector(".svc-string-editor__input").withText("Patient Name"))
 
       .click(objectSelectorButton)
       .wait(1000);

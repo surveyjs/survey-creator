@@ -321,8 +321,8 @@ test("Question adorner - update other rows with lazy rendering on question colla
   await setJSON(jsonL);
   const qContent = Selector(".svc-question__content");
   const qCollapseButton = Selector(".svc-question__content #collapse");
-  await t.expect(qContent.count).eql(1);
-  await t.expect(qCollapseButton.count).eql(1);
+  await t.expect(qContent.count).eql(2);
+  await t.expect(qCollapseButton.count).eql(2);
 
   await t.click(qCollapseButton);
   await t.expect(qContent.count).eql(3);

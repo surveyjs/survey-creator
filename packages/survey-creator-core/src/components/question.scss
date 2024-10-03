@@ -101,7 +101,11 @@ svc-question {
 }
 
 .svc-question__content {
-  scroll-margin-top: 8px;
+  scroll-margin-top: calcSize(1);
+
+  .sd-element {
+    scroll-margin-top: calcSize(5);
+  }
 }
 
 .svc-question__content {

@@ -15,6 +15,9 @@ import { settings } from "../src/creator-settings";
 import { IQuestionToolboxItem, QuestionToolbox, QuestionToolboxItem } from "../src/toolbox";
 import { CreatorTester } from "./creator-tester";
 import { ToolboxToolViewModel } from "../src/components/toolbox/toolbox-tool";
+import { editorLocalization } from "../src/editorLocalization";
+export * from "../src/localization/english";
+export * from "../src/localization/german";
 
 test("toolbox support options", (): any => {
   var allTypes = ElementFactory.Instance.getAllToolboxTypes();
@@ -851,4 +854,25 @@ test("Toolbox item removeSubitem function", (): any => {
   ratingItem.removeSubitem(ratingItem.items[0]);
   expect(ratingItem.hasSubItems).toBe(false);
   expect(ratingItem.component).toBe("");
+});
+
+test("ICustomQuestionTypeConfiguration.title should support a localizable, Bug#5904", (): any => {
+  editorLocalization.locales["en"] = editorLocalization.getLocale();
+  expect(editorLocalization.locales["en"]).toBeTruthy();
+  expect(editorLocalization.locales["de"]).toBeTruthy();
+  ComponentCollection.Instance.clear();
+  ComponentCollection.Instance.add(<any>{
+    name: "newquestion",
+    title: { en: "New Question en", de: "New Question de" },
+    questionJSON: {
+      type: "dropdown",
+      choices: [1, 2, 3, 4, 5]
+    }
+  });
+  const creator = new CreatorTester({ questionTypes: ["text", "checkbox"] });
+  const item = creator.toolbox.getItemByName("newquestion") as QuestionToolboxItem;
+  expect(item.title).toBe("New Question en");
+  creator.locale = "de";
+  expect(item.title).toBe("New Question de");
+  ComponentCollection.Instance.clear();
 });

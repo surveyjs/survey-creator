@@ -35,17 +35,18 @@ test("On the right side (default)", async (t) => {
     await t.resizeWindow(1920, 500);
     await setJSON(json);
     await t.wait(500);
-    const pageNavigatorElement = Selector(".svc-tab-designer__page-navigator");
+    const pageNavigatorContainer = Selector(".svc-tab-designer__page-navigator");
+    const pageNavigatorElement = Selector(".svc-page-navigator");
 
     await t.expect(pageNavigatorElement.visible).ok();
     await t.wait(1000);
-    await takeElementScreenshot("page-navigator-right.png", pageNavigatorElement, t, comparer);
+    await takeElementScreenshot("page-navigator-right.png", pageNavigatorContainer, t, comparer);
 
     await t.hover(Selector(".svc-page-navigator-item-content:not(.svc-page-navigator-item--selected)"));
     await t.wait(1000);
-    await takeElementScreenshot("page-navigator-right-hovered.png", pageNavigatorElement, t, comparer);
+    await takeElementScreenshot("page-navigator-right-hovered.png", pageNavigatorContainer, t, comparer);
 
-    await t.resizeWindow(1920, 1092);
+    await t.resizeWindow(1920, 1300);
     await t.wait(1000);
     await t.expect(pageNavigatorElement.visible).notOk();
   });
@@ -73,18 +74,19 @@ test("On the left side", async (t) => {
     await setJSON(json);
     await t.wait(500);
 
-    const pageNavigatorElement = Selector(".svc-tab-designer__page-navigator");
+    const pageNavigatorContainer = Selector(".svc-tab-designer__page-navigator");
+    const pageNavigatorElement = Selector(".svc-page-navigator");
     await changeToolboxLocation("right");
 
     await t.expect(pageNavigatorElement.visible).ok();
     await t.wait(1000);
-    await takeElementScreenshot("page-navigator-left.png", pageNavigatorElement, t, comparer);
+    await takeElementScreenshot("page-navigator-left.png", pageNavigatorContainer, t, comparer);
 
     await t.hover(Selector(".svc-page-navigator-item-content:not(.svc-page-navigator-item--selected)"));
     await t.wait(1000);
-    await takeElementScreenshot("page-navigator-left-hovered.png", pageNavigatorElement, t, comparer);
+    await takeElementScreenshot("page-navigator-left-hovered.png", pageNavigatorContainer, t, comparer);
 
-    await t.resizeWindow(1920, 1092);
+    await t.resizeWindow(1920, 1300);
     await t.wait(1000);
     await t.expect(pageNavigatorElement.visible).notOk();
   });

@@ -170,20 +170,26 @@ export class SurveyHelper {
     if (!!canShow && !canShow(obj, property)) return false;
     return true;
   }
-  public static scrollIntoViewIfNeeded(el: HTMLElement, getOptions?: (overTop: boolean) => ScrollIntoViewOptions, scrollIfElementBiggerThanContainer: boolean = false) {
+  public static isNeedScrollIntoView(el: HTMLElement, scrollIfElementBiggerThanContainer: boolean = false): undefined | "top" | "bottom" {
     if (!el || !el.scrollIntoView) return;
     var rect = el.getBoundingClientRect();
     var scrollableDiv = SurveyHelper.getScrollableDiv(el);
     if (!scrollableDiv) return;
     var height = scrollableDiv.clientHeight;
     if (rect.top < scrollableDiv.offsetTop) {
-      el.scrollIntoView(getOptions ? getOptions(true) : true);
+      return "top";
     } else {
       let offsetTop = height + scrollableDiv.offsetTop;
       if (rect.bottom > offsetTop && (rect.height < height || scrollIfElementBiggerThanContainer)) {
-        el.scrollIntoView(getOptions ? getOptions(false) : false);
+        return "bottom";
       }
     }
+  }
+  public static scrollIntoViewIfNeeded(el: HTMLElement, getOptions?: (overTop: boolean) => ScrollIntoViewOptions, scrollIfElementBiggerThanContainer: boolean = false) {
+    const isNeedScroll = SurveyHelper.isNeedScrollIntoView(el, scrollIfElementBiggerThanContainer);
+    if (!isNeedScroll) return;
+    const isNeedScrollToTop = isNeedScroll === "top";
+    el.scrollIntoView(getOptions ? getOptions(isNeedScrollToTop) : isNeedScrollToTop);
   }
   public static getScrollableDiv(el: HTMLElement): HTMLElement {
     while (!!el) {

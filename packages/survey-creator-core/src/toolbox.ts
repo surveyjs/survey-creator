@@ -1266,7 +1266,7 @@ export class QuestionToolbox
     const iconName: string = json.iconName ? json.iconName : QuestionToolbox.defaultIconName;
     let title: string = editorLocalization.getString("qt." + json.name);
     if (!title || title == json.name) {
-      title = json.title;
+      title = this.getTitleFromJsonTitle(json.title, json.name);
     }
     if (!title) {
       title = json.name;
@@ -1289,6 +1289,18 @@ export class QuestionToolbox
       category: category
     });
     return this.getOrCreateToolboxItem(item);
+  }
+  private getTitleFromJsonTitle(title: any, name: string): string {
+    if(!title) return title;
+    if(typeof title === "string") return title;
+    if(typeof title !== "object") return title;
+    for(let key in title) {
+      const loc = editorLocalization.locales[key];
+      if(title[key] && loc && loc.qt) {
+        loc.qt[name] = title[key];
+      }
+    }
+    return editorLocalization.getString("qt." + name);
   }
   private getQuestionJSON(question: any): any {
     var json = new JsonObject().toJsonObject(question);
