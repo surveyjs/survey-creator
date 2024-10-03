@@ -10,6 +10,7 @@ svc-toolbox {
   height: 100%;
   display: flex;
   flex-direction: column;
+  min-width: 238.55px;
 
   .svc-item__banner {
     background-color: var(--ctr-toolbox-item-background-color-hovered, $background);
