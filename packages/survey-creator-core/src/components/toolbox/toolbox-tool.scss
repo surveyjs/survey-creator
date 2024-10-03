@@ -34,6 +34,17 @@
   }
 }
 
+.svc-toolbox__tool--has-subitems{
+  .svc-toolbox__item {
+    padding-right: calcSize(6);
+  }
+}
+.svc-toolbox--compact {
+  .svc-toolbox__item {
+    padding-right: calcSize(1.5);
+  }
+}
+
 // is always visible
 .svc-toolbox__item-container {
   outline: none;
