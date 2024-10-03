@@ -222,9 +222,6 @@
     fill: var(--ctr-toolbox-item-submenu-button-icon-color, $layer-1-foreground-50)
   }
 }
-.svc-toolbox__item-submenu-wrapper {
-  position: relative;
-}
 
 .svc-toolbox--compact .svc-toolbox__item-submenu-button {
   display: none;
