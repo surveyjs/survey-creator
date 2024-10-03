@@ -8,7 +8,7 @@ import {
   ResponsivityManager,
   AdaptiveActionContainer
 } from "survey-core";
-import { attachKey2click, ReactElementFactory, SurveyElementBase } from "survey-react-ui";
+import { attachKey2click, ReactElementFactory, SurveyElementBase, SvgIcon } from "survey-react-ui";
 
 export interface ITabbedMenuComponentProps {
   model: TabbedMenuContainer;
@@ -95,13 +95,13 @@ class TabbedMenuItemWrapper extends SurveyElementBase<
 }
 
 export interface ITabbedMenuItemComponentProps {
-  item: Action;
+  item: TabbedMenuItem;
 }
 export class TabbedMenuItemComponent extends SurveyElementBase<
   ITabbedMenuItemComponentProps,
   any
 > {
-  get item(): Action {
+  get item(): TabbedMenuItem {
     return this.props.item;
   }
   protected getStateElement(): Base {
@@ -110,17 +110,10 @@ export class TabbedMenuItemComponent extends SurveyElementBase<
 
   render(): JSX.Element {
     const item = this.item;
-    let className: string = "svc-tabbed-menu-item";
-    if (item.active) className += " svc-tabbed-menu-item--selected";
-    if (item.enabled !== undefined && !item.enabled)
-      className += " svc-tabbed-menu-item--disabled";
-    let titleClassName: string =
-      "svc-text svc-tabbed-menu-item__text svc-text--normal";
-    if (item.active) titleClassName += " svc-text--bold";
-
     return (attachKey2click(
-      <div className={className} onClick={() => item.action(item)}>
-        <span className={titleClassName}>{item.title}</span>
+      <div className={item.getRootCss()} onClick={() => item.action(item)}>
+        {item.hasTitle ? <span className={item.getTitleCss()}>{item.title}</span> : null}
+        {item.hasIcon ? <SvgIcon iconName={item.iconName} className={item.getIconCss()} size={"auto"} title={item.tooltip || item.title}></SvgIcon> : null}
       </div>
     )
     );
