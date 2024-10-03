@@ -44,9 +44,10 @@
         </div>
         <!-- /ko -->
       </div>
-      <div data-bind="if: creator.sidebar, css: { 'sv-mobile-side-bar': creator.isMobileView }">
-        <svc-side-bar params="model: creator.sidebar"> </svc-side-bar>
-      </div>
+      <!-- ko if: creator.sidebar -->
+      <!-- ko component: { name: 'svc-side-bar', params: { model: creator.sidebar } } -->
+      <!-- /ko -->
+      <!-- /ko -->
     </div>
     <!-- ko ifnot: creator.haveCommercialLicense -->
     <div class="svc-creator__banner">

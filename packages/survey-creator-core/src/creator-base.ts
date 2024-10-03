@@ -2922,7 +2922,9 @@ export class SurveyCreatorModel extends Base
         propertyName = this.designerPropertyGrid.currentlySelectedProperty;
       }
       if (!!propertyName) {
-        this.designerPropertyGrid.selectProperty(propertyName, focus || !this.selectFromStringEditor);
+        this.sidebar.executeOnExpand(() => {
+          this.designerPropertyGrid.selectProperty(propertyName, focus || !this.selectFromStringEditor);
+        });
       }
       this.expandCategoryIfNeeded();
       this.selectFromStringEditor = false;

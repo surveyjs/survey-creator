@@ -9,7 +9,7 @@ const title = "Responsiveness";
 
 fixture`${title}`.page`${url}`;
 
-const flyoutPropertyGrid = Selector(".svc-flyout-side-bar");
+const flyoutPropertyGrid = Selector(".svc-side-bar--flyout");
 
 test("Check base responsiveness for tabbed menu", async (t) => {
   const tabbedMenuItemSelector = Selector(".svc-tabbed-menu .svc-tabbed-menu-item-container:nth-of-type(5)");
@@ -129,7 +129,7 @@ test("Responsive creator: property grid", async (t) => {
 
     .click(collapseButtonSelector)
     .expect(propertyGridSelector.visible).notOk()
-    .expect(flyoutPropertyGrid.exists).notOk()
+    .expect(flyoutPropertyGrid.exists).ok()
 
     .click(questions.find(".sv-string-editor").withText("question2"))
     .expect(questionToolbarActions.count).eql(5)
@@ -140,7 +140,7 @@ test("Responsive creator: property grid", async (t) => {
 
     .click(collapseButtonSelector)
     .expect(propertyGridSelector.visible).notOk()
-    .expect(flyoutPropertyGrid.exists).notOk()
+    .expect(flyoutPropertyGrid.exists).ok()
 
     .click(expandButtonSelector);
   await changeSidebarLocation("left");
@@ -180,7 +180,7 @@ test("Responsive creator: designer tab for mobile devices", async (t) => {
 });
 
 test("property grid for mobile devices", async (t) => {
-  const mobilePropertGrid = Selector(".sv-mobile-side-bar .svc-side-bar__container");
+  const mobilePropertGrid = Selector(".svc-side-bar--mobile .svc-side-bar__container");
 
   await t
     .resizeWindow(750, 600)
