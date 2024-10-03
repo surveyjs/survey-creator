@@ -561,6 +561,7 @@ export class SurveyQuestionEditorDefinition {
       properties: [
         "navigationTitle",
         "navigationDescription",
+        "timeLimit",
         "maxTimeToFinish",
         { name: "questionsOrder", tab: "layout" },
         { name: "navigationButtonsVisibility", tab: "layout" },
@@ -640,6 +641,12 @@ export class SurveyQuestionEditorDefinition {
         { name: "completedHtmlOnCondition", tab: "showOnCompleted" },
         { name: "loadingHtml", tab: "showOnCompleted" },
         { name: "completedBeforeHtml", tab: "showOnCompleted" },
+
+        { name: "showTimer", tab: "timer" },
+        { name: "timerLocation", tab: "timer" },
+        { name: "timeLimit", tab: "timer" },
+        { name: "timeLimitPerPage", tab: "timer" },
+        { name: "timerInfoMode", tab: "timer" },
 
         { name: "maxTimeToFinish", tab: "timer" },
         { name: "maxTimeToFinishPage", tab: "timer" },
