@@ -45,6 +45,10 @@ svc-page {
   }
 }
 
+.svc-page__content--dragged {
+  opacity: 0.25;
+}
+
 .svc-page__content-actions {
   position: absolute;
   opacity: 0;

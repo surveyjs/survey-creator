@@ -215,6 +215,9 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       if (this.renderedCollapsed) result += (" svc-page__content--collapsed");
       if (this.expandCollapseAnimationRunning) result += (" svc-page__content--animation-running");
     }
+    if (this.isDragMe) {
+      result += " svc-page__content--dragged";
+    }
     if (this.isGhost) {
       return result + " svc-page__content--new";
     }
@@ -277,6 +280,9 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     if (this.rootElement) {
       SurveyHelper.scrollIntoViewIfNeeded(this.rootElement);
     }
+  }
+  get isDragMe(): boolean {
+    return this.surveyElement.isDragMe;
   }
   private get dragDropHelper(): DragDropSurveyElements {
     return this.creator.dragDropSurveyElements;
