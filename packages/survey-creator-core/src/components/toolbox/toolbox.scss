@@ -70,6 +70,9 @@ svc-toolbox {
 .svc-toolbox--compact {
   width: var(--ctr-toolbox-width-compact, 100vw);
   margin-right: var(--ctr-toolbox-margin-right-compact,calc(-100vw + calcSize(10.5)));
+  .svc-toolbox__panel {
+    width: calcSize(10.5);
+  }  
   .svc-toolbox__scroller {
     padding: var(--ctr-toolbox-padding-top, calcSize(1))  var(--ctr-toolbox-group-padding-right-compact, calcSize(1.5)) var(--ctr-toolbox-padding-bottom, calcSize(2)) var(--ctr-toolbox-group-padding-left-compact, calcSize(1.5));
   }  

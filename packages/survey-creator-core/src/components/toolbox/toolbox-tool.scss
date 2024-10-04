@@ -7,56 +7,33 @@
   align-items: center;
   z-index: 20;
   outline: none;
-  padding-top: 0;
+  padding-top: var(--ctr-toolbox-item-padding-top, calcSize(1));
+  padding-bottom: var(--ctr-toolbox-item-padding-bottom, calcSize(1));
   padding-right: var(--ctr-toolbox-item-padding-right, calcSize(1.5));
-  padding-bottom: 0;
   padding-left: var(--ctr-toolbox-item-padding-left, calcSize(1.5));
   border-radius: var(--ctr-toolbox-item-corner-radius, calcSize(12.5));
-  sv-svg-icon,
-  .sv-svg-icon {
-    display: block;
-    height: var(--ctr-toolbox-item-icon-height, calcSize(3));
-    width: var(--ctr-toolbox-item-icon-width, unset);
-  }
+}
+.svc-toolbox__item-icon {
+  display: block;
+  height: var(--ctr-toolbox-item-icon-height, calcSize(3));
+  width: var(--ctr-toolbox-item-icon-width, unset);
+  pointer-events: none;
 }
 .svc-toolbox__tool {
   cursor: default;
   align-items: flex-start;
-
-  .sv-action__content {
-    display: flex;
-    // padding: calcSize(0.25) 0;
-    padding-block-start: calcSize(0.5);
-    flex-direction: column;
-    align-items: var(--ctr-toolbox-item-with-submenu-button-align, flex-start);
-  }
-  .sv-action__content {
-    position: relative;
-  }
-  sv-svg-icon,
-  .sv-svg-icon {
-    pointer-events: none;
-  }
 }
-.svc-toolbox__tool--has-subitems {
-  .svc-toolbox__item {
-    padding-right: calcSize(6);
-  }
-}
-.svc-toolbox--compact {
-  .svc-toolbox__item {
-    padding-right: calcSize(1.5);
-  }
+.svc-toolbox__tool-content {
+  display: flex;
+  // padding: calcSize(0.25) 0;
+  padding-block-start: calcSize(0.5);
+  flex-direction: column;
+  align-items: var(--ctr-toolbox-item-with-submenu-button-align, flex-start);
+  position: relative;
 }
 
-.svc-toolbox--compact {
-  .svc-toolbox__tool {
-    padding: 0px var(--ctr-toolbox-item-margin-horizontal-no-text, 0px);
-  }
-  .svc-toolbox__item {
-    padding: 0 var(--ctr-toolbox-item-padding-right-no-text, calcSize(2)) 0
-      var(--ctr-toolbox-item-padding-left-no-text, calcSize(1.5));
-  }
+.svc-toolbox__item--has-subitems {
+  padding-right: calcSize(6);
 }
 
 .svc-toolbox__tool--has-subitems {
@@ -64,31 +41,11 @@
   align-self: var(--ctr-toolbox-item-with-submenu-button-align, flex-start);
 }
 
-.svc-toolbox__tool--has-subitems {
-  .svc-toolbox__item {
-    padding-right: calcSize(6);
-  }
-}
-
-.svc-toolbox__tool--has-subitems {
-  .svc-toolbox__item {
-    padding-right: calcSize(6);
-  }
-}
-.svc-toolbox--compact {
-  .svc-toolbox__item {
-    padding-right: calcSize(1.5);
-  }
-}
-
 // is always visible
 .svc-toolbox__item-container {
+  display: flex;
   outline: none;
-  padding-top: var(--ctr-toolbox-item-padding-top, calcSize(1));
-  padding-right: 0;
-  padding-bottom: var(--ctr-toolbox-item-padding-bottom, calcSize(1));
-  padding-left: 0;
-  .sv-svg-icon use {
+  use {
     fill: var(--ctr-toolbox-item-icon-color, $foreground-light);
   }
 }
@@ -96,12 +53,13 @@
 //is visible only on hover
 .svc-toolbox__item-banner {
   opacity: 0;
-  display: var(--ctr-toolbox-item-banner-display, flex);
+  display: none;
   box-sizing: border-box;
   align-items: center;
   margin-right: 0;
   margin-left: calcSize(-4.5);
   height: calcSize(5);
+  position: absolute;
 
   .svc-toolbox__item-icon {
     position: absolute;
@@ -131,7 +89,6 @@
   }
 
   .svc-toolbox__tool:hover,
-  .svc-toolbox__tool--hovered,
   .svc-toolbox__item:focus {
     .svc-toolbox__item-banner {
       padding-right: calcSize(1.5);
@@ -174,17 +131,9 @@
     align-items: var(--ctr-toolbox-item-with-submenu-button-align, flex-end);
     align-self: var(--ctr-toolbox-item-with-submenu-button-align, flex-end);
   }
-  .svc-toolbox__tool--has-subitems {
-    .svc-toolbox__item {
-      padding-left: calcSize(6);
-      padding-right: calcSize(1.5);
-    }
-  }
-  .svc-toolbox__tool--has-subitems {
-    .svc-toolbox__item {
-      padding-left: calcSize(6);
-      padding-right: calcSize(1.5);
-    }
+  .svc-toolbox__item--has-subitems {
+    padding-left: calcSize(6);
+    padding-right: calcSize(1.5);
   }
 
   .svc-toolbox__item-banner {
@@ -210,9 +159,9 @@
 }
 
 .svc-toolbox__tool:hover,
-.svc-toolbox__tool--hovered,
 .svc-toolbox__item:focus {
   .svc-toolbox__item-banner {
+    display: var(--ctr-toolbox-item-banner-display, flex);
     max-width: calcSize(100);
     padding-left: var(--ctr-toolbox-item-padding-left, calcSize(1.5));
     padding-right: var(--ctr-toolbox-item-padding-right, calcSize(2));
@@ -234,14 +183,10 @@
 .svc-toolbox__tool--disabled {
   pointer-events: none;
 
-  .sv-svg-icon {
-    opacity: var(--ctr-toolbox-item-icon-opacity-disabled, 0.15);
-
-    use {
+  use {
+      opacity: var(--ctr-toolbox-item-icon-opacity-disabled, 0.15);
       fill: var(--ctr-toolbox-item-icon-color-disabled, rgba(0, 0, 0, 0.91));
     }
-  }
-
   .svc-toolbox__item-title {
     opacity: var(--ctr-toolbox-item-text-opacity-disabled, 0.25);
   }
@@ -249,7 +194,7 @@
 
 .svc-toolbox {
   .svc-toolbox__item:not(.sv-dots):focus,
-  .svc-toolbox__tool--hovered > .sv-action__content > .svc-toolbox__item:not(.sv-dots),
+  .svc-toolbox__tool:hover > .sv-action__content > .svc-toolbox__item:not(.sv-dots),
   .svc-toolbox__item:not(.sv-dots):hover {
     overflow: hidden;
     background-color: var(--ctr-toolbox-item-background-color-hovered, $background);
@@ -331,8 +276,8 @@
     .sv-list__item-body {
       padding-top: calcSize(1.5);
       padding-bottom: calcSize(1.5);
-      padding-inline-start: calcSize(2);
-      padding-inline-end: calcSize(5);
+      padding-left: calcSize(2);
+      padding-right: calcSize(5);
     }
   }
 }
@@ -359,7 +304,7 @@
 .svc-toolbox-subtypes {
   .sv-popup__container {
     padding: 0;
-    padding-inline-start: var(--ctr-toolbox-submenu-offset, 0px);
+    padding-left: var(--ctr-toolbox-submenu-offset, 0px);
     box-shadow: unset;
     background: unset;
   }
@@ -417,7 +362,6 @@
   }
 
   .svc-toolbox__tool:hover,
-  .svc-toolbox__tool--hovered,
   .svc-toolbox__item:focus {
     .svc-toolbox__item-subtype {
       background: var(--ctr-toolbox-item-background-color-hovered, $layer-1-background-500);
@@ -431,5 +375,15 @@
 
   .svc-toolbox__item-title {
     padding: 0;
+  }
+}
+
+.svc-toolbox--compact {
+  .svc-toolbox__tool {
+    padding: 0px var(--ctr-toolbox-item-margin-horizontal-no-text, 0px);
+  }
+  .svc-toolbox__item {
+    padding-left: var(--ctr-toolbox-item-padding-left-no-text, calcSize(1.5));
+    padding-right:  var(--ctr-toolbox-item-padding-right-no-text, calcSize(2));
   }
 }

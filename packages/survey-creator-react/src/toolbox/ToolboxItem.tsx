@@ -80,7 +80,7 @@ export class SurveyCreatorToolboxTool extends CreatorModelElement<
         {(item.needSeparator && !this.creator.toolbox.showCategoryTitles) ? (
           <div className="svc-toolbox__category-separator"></div>
         ) : null}
-        <div className="sv-action__content"
+        <div className="svc-toolbox__tool-content sv-action__content"
           onPointerDown={(event: any) => {
             event.persist();
             this.model.onPointerDown(event);
@@ -124,7 +124,7 @@ export class SurveyCreatorToolboxItem extends CreatorModelElement<
   render(): JSX.Element {
     return attachKey2click(
       <div
-        className={"svc-toolbox__item " + this.item.className}
+        className={this.item.renderedCss}
         tabIndex={0}
         role="button"
         aria-label={this.item.tooltip}
