@@ -1,9 +1,9 @@
 <!-- ko if: page -->
 <div class="svc-page__content"
-  data-bind="click: select, key2click, clickBubble: false, css: css, attr: { id: page.id, 'data-sv-drop-target-survey-page': !page.isGhost ? page.name || null : null }, event: { dblclick: (d, e) => dblclick(e), mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }">
+  data-bind="click: select, key2click, clickBubble: false, css: css, attr: { id: page.id, 'data-sv-drop-target-survey-page': dropTargetName }, event: { dblclick: (d, e) => dblclick(e), mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }">
   <div class="svc-question__drop-indicator svc-question__drop-indicator--top"></div>
   <div class="svc-question__drop-indicator svc-question__drop-indicator--bottom"></div>
-  <!-- ko if: allowDragging && !page.isGhost -->
+  <!-- ko if: allowDragging && !isGhost -->
   <div class="svc-question__drag-area"
     data-bind="event: { pointerdown: (model, event)=>{ onPointerDown(event); return true; } }">
     <!-- ko component: { name: 'sv-svg-icon', params: { css: 'svc-question__drag-element', iconName: 'icon-drag-area-indicator_24x16', size: 24 } } -->
@@ -14,7 +14,7 @@
     </div>
   </div>
   <!-- /ko -->
-  <!-- ko if: !allowDragging || page.isGhost -->
+  <!-- ko if: !allowDragging || isGhost -->
   <div class="svc-page__content-actions">
     <!-- ko component: { name: 'sv-action-bar', params: { model: actionContainer } } -->
     <!-- /ko -->

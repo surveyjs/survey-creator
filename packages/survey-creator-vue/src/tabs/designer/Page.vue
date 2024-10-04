@@ -5,7 +5,7 @@
     :id="model.page.id"
     class="svc-page__content"
     :class="model.css"
-    :data-sv-drop-target-survey-page="!model.page.isGhost ? model.page.name || null : null"
+    :data-sv-drop-target-survey-page="model.dropTargetName"
     v-key2click
     @click="
       (e) => {
@@ -25,7 +25,7 @@
       class="svc-question__drop-indicator svc-question__drop-indicator--bottom"
     ></div>
     <div
-      v-if="model.allowDragging && !model.page.isGhost"
+      v-if="model.allowDragging && !model.isGhost"
       class="svc-question__drag-area"
       v-on:pointerdown="(e) => model.onPointerDown(e)"
     >
@@ -45,7 +45,7 @@
         ></SvComponent>
       </div>
     </div>
-    <div v-if="!model.allowDragging || model.page.isGhost" class="svc-page__content-actions">
+    <div v-if="!model.allowDragging || model.isGhost" class="svc-page__content-actions">
       <SvComponent
         :is="'sv-action-bar'"
         :model="model.actionContainer"

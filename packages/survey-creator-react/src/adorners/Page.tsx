@@ -79,7 +79,7 @@ export class CreatorSurveyPageComponent extends CreatorModelElement<
       attachKey2click(<div
         ref={this.rootRef}
         id={this.props.page.id}
-        data-sv-drop-target-survey-page={!this.model.isGhost ? this.model.page.name || null : null}
+        data-sv-drop-target-survey-page={this.model.dropTargetName}
         className={"svc-page__content " + this.model.css}
         onClick={(e) => {
           return this.model.select(this.model, new ReactMouseEvent(e));

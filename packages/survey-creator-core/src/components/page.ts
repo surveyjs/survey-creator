@@ -293,4 +293,10 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     }
     return true;
   }
+  get dropTargetName(): string {
+    if (!this.isGhost && !!this.page) {
+      return this.page.name;
+    }
+    return null;
+  }
 }
