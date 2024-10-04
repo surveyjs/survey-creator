@@ -1,5 +1,5 @@
 import { QuestionAdornerViewModel } from "../src/components/question";
-import { Action, ComponentCollection, PopupDropdownViewModel, QuestionRadiogroupModel, settings, SurveyElement, settings as surveySettings } from "survey-core";
+import { Action, ComponentCollection, DragTypeOverMeEnum, PopupDropdownViewModel, QuestionRadiogroupModel, settings, SurveyElement, settings as surveySettings } from "survey-core";
 import { CreatorTester } from "./creator-tester";
 import { PageAdorner } from "../src/components/page";
 import { TabDesignerPlugin } from "../src/components/tabs/designer-plugin";
@@ -968,3 +968,104 @@ test("Check panel getAnimatedElement methods", () => {
   expect(animationOptions.getAnimatedElement()).toBe(panelContentElement);
 });
 
+test("Check question adorner rootCss method", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2", startWithNewLine: false }
+    ]
+  };
+  const question = creator.survey.getQuestionByName("q1");
+  const questonAdorner = new QuestionAdornerViewModel(
+    creator,
+    question,
+    <any>undefined
+  );
+  const questonAdorner2 = new QuestionAdornerViewModel(
+    creator,
+    creator.survey.getQuestionByName("q2"),
+    <any>undefined
+  );
+  expect(questonAdorner.rootCss().includes("svc-question__adorner--selected")).toBeFalsy();
+  question.setPropertyValue("isSelectedInDesigner", true);
+  expect(questonAdorner.rootCss().includes("svc-question__adorner--selected")).toBeTruthy();
+
+  expect(questonAdorner.rootCss().includes("svc-question__adorner--collapsed")).toBeFalsy();
+  questonAdorner.collapsed = true;
+  expect(questonAdorner.rootCss().includes("svc-question__adorner--collapsed")).toBeTruthy();
+
+  expect(questonAdorner.rootCss().includes("svc-question__adorner--start-with-new-line")).toBeFalsy();
+  expect(questonAdorner2.rootCss().includes("svc-question__adorner--start-with-new-line")).toBeTruthy();
+
+  const regex = /svc-question__adorner--collapse-(\w+)/;
+  let match = questonAdorner.rootCss().match(regex);
+  expect(match && match[1]).toBe("never");
+  creator.expandCollapseButtonVisibility = "always";
+  match = questonAdorner.rootCss().match(regex);
+  expect(match && match[1]).toBe("always");
+  creator.expandCollapseButtonVisibility = "onhover";
+  match = questonAdorner.rootCss().match(regex);
+  expect(match && match[1]).toBe("onhover");
+});
+
+test("Check question adorner css method", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "html", name: "q2", startWithNewLine: false },
+      { type: "paneldynamic", name: "q3" }
+    ]
+  };
+  const question = creator.survey.getQuestionByName("q1");
+  const questionAdorner = new QuestionAdornerViewModel(
+    creator,
+    question,
+    <any>undefined
+  );
+  const questionAdorner2 = new QuestionAdornerViewModel(
+    creator,
+    creator.survey.getQuestionByName("q2"),
+    <any>undefined
+  );
+  const questionAdorner3 = new QuestionAdornerViewModel(
+    creator,
+    creator.survey.getQuestionByName("q3"),
+    <any>undefined
+  );
+  expect(questionAdorner.css().includes("svc-question__content--selected")).toBeFalsy();
+  question.setPropertyValue("isSelectedInDesigner", true);
+  expect(questionAdorner.css().includes("svc-question__content--selected")).toBeTruthy();
+
+  expect(questionAdorner.css().includes("svc-question__content--text")).toBeTruthy();
+  expect(questionAdorner2.css().includes("svc-question__content--html")).toBeTruthy();
+
+  expect(questionAdorner.css().includes("svc-question__content--empty")).toBeFalsy();
+  expect(questionAdorner.css().includes("svc-question__content--empty-template")).toBeFalsy();
+  expect(questionAdorner2.css().includes("svc-question__content--empty")).toBeTruthy();
+  expect(questionAdorner3.css().includes("svc-question__content--empty-template")).toBeTruthy();
+
+  expect(questionAdorner.css().includes("svc-question__content--collapsed")).toBeFalsy();
+  questionAdorner.collapsed = true;
+  expect(questionAdorner.css().includes("svc-question__content--collapsed")).toBeTruthy();
+
+  expect(questionAdorner.css().includes("svc-question__content--dragged")).toBeFalsy();
+  question.isDragMe = true;
+  expect(questionAdorner.css().includes("svc-question__content--dragged")).toBeTruthy();
+
+  expect(questionAdorner.css().includes("svc-question__content--title-hidden")).toBeFalsy();
+  question.titleLocation = "hidden";
+  expect(questionAdorner.css().includes("svc-question__content--title-hidden")).toBeTruthy();
+
+  expect(questionAdorner.css().includes("svc-question__content--title-bottom")).toBeFalsy();
+  question.titleLocation = "bottom";
+  expect(questionAdorner.css().includes("svc-question__content--title-bottom")).toBeTruthy();
+
+  const hash = { "inside": DragTypeOverMeEnum.InsideEmptyPanel, "left": DragTypeOverMeEnum.Left, "right": DragTypeOverMeEnum.Right, "top": DragTypeOverMeEnum.Top, "bottom": DragTypeOverMeEnum.Bottom };
+  Object.keys(hash).forEach((direction) => {
+    expect(questionAdorner.css().includes(`svc-question__content--drag-over-${direction}`)).toBeFalsy();
+    question.dragTypeOverMe = hash[direction];
+    expect(questionAdorner.css().includes(`svc-question__content--drag-over-${direction}`)).toBeTruthy();
+  });
+});
