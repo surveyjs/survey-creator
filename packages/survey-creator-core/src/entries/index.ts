@@ -114,6 +114,7 @@ require("../components/side-bar/tab-control.scss");
 require("../property-grid-theme/property-grid.scss");
 require("../utils/design.scss");
 require("../utils/layout.scss");
+require("../utils/scrollbar.scss");
 require("../custom-questions/boolean-switch.scss");
 
 import { settings, checkLibraryVersion } from "survey-core";

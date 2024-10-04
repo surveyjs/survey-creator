@@ -24,6 +24,7 @@ import { editorLocalization, getLocString } from "./editorLocalization";
 import { settings } from "./creator-settings";
 import { DragDropSurveyElements } from "./survey-elements";
 import { SearchManagerToolbox } from "./property-grid/search-manager";
+import { initOverlayedScrollbar } from "./utils/utils";
 
 export type overflowBehaviorType = "hideInMenu" | "scroll";
 
@@ -595,6 +596,7 @@ export class QuestionToolbox
 
   public setRootElement(element: HTMLElement) {
     this._containerElementValue = element?.querySelector(this.containerSelector);
+    initOverlayedScrollbar(this._containerElementValue);
   }
 
   public get containerElement() {

@@ -463,3 +463,14 @@ export function saveToFileHandler(fileName: string, blob: Blob) {
     document.body.removeChild(elem);
   }
 }
+
+export function initOverlayedScrollbar(element: HTMLElement) {
+  const scrollbar = document.createElement("div");
+  scrollbar.classList.add("svc-overlayed-scrollbar");
+  const scrollbarContent = document.createElement("div");
+  scrollbarContent.classList.add("svc-overlayed-scrollbar__content");
+  scrollbar.appendChild(scrollbarContent);
+  element.addEventListener("scroll", () => { if (element.scrollTop != scrollbar.scrollTop) scrollbar.scrollTop = element.scrollTop; });
+  scrollbar.addEventListener("scroll", () => { if (element.scrollTop != scrollbar.scrollTop) element.scrollTop = scrollbar.scrollTop; });
+  element.appendChild(scrollbar);
+}
