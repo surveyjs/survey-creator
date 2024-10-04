@@ -182,6 +182,18 @@ export const roStrings = {
     pagePlaceHolder: "Pagina este goală. Trageți un element din cutia de instrumente sau faceți clic pe butonul de mai jos.",
     imagePlaceHolder: "Trageți și lăsați o imagine aici sau faceți clic pe butonul de mai jos și alegeți o imagine de încărcat",
     surveyPlaceHolderMobile: "Faceți clic pe butonul \"Adaugă întrebare\" de mai jos pentru a începe crearea formularului.",
+    surveyPlaceholderTitle: "Formularul tău este gol",
+    surveyPlaceholderTitleMobile: "Formularul tău este gol",
+    surveyPlaceholderDescription: "Trageți un element din caseta de instrumente sau faceți clic pe butonul de mai jos.",
+    surveyPlaceholderDescriptionMobile: "Trageți un element din caseta de instrumente sau faceți clic pe butonul de mai jos.",
+    previewPlaceholderTitle: "Fără previzualizare",
+    previewPlaceholderTitleMobile: "Fără previzualizare",
+    previewPlaceholderDescription: "Sondajul nu conține elemente vizibile.",
+    previewPlaceholderDescriptionMobile: "Sondajul nu conține elemente vizibile.",
+    translationsPlaceholderTitle: "Fără șiruri de tradus",
+    translationsPlaceholderTitleMobile: "Fără șiruri de tradus",
+    translationsPlaceholderDescription: "Adăugați elemente la formular sau modificați filtrul șiruri din bara de instrumente.",
+    translationsPlaceholderDescriptionMobile: "Adăugați elemente la formular sau modificați filtrul șiruri din bara de instrumente.",
     pagePlaceHolderMobile: "Faceți clic pe butonul \"Adaugă întrebare\" de mai jos pentru a adăuga un nou element pe pagină.",
     panelPlaceHolderMobile: "Faceți clic pe butonul \"Adaugă întrebare\" de mai jos pentru a adăuga un nou element în panou.",
     imagePlaceHolderMobile: "Faceți clic pe butonul de mai jos și alegeți o imagine de încărcat",
@@ -194,6 +206,10 @@ export const roStrings = {
     lg: {
       addNewItem: "Adăugați regulă nouă",
       empty_tab: "Creați o regulă pentru a personaliza fluxul chestionarului.",
+      logicPlaceholderTitle: "Fără reguli logice",
+      logicPlaceholderTitleMobile: "Fără reguli logice",
+      logicPlaceholderDescription: "Creați o regulă pentru a personaliza fluxul sondajului.",
+      logicPlaceholderDescriptionMobile: "Creați o regulă pentru a personaliza fluxul sondajului.",
       page_visibilityName: "Afișează/ascunde pagina",
       page_enableName: "Activează/dezactivează pagina",
       page_requireName: "Fă pagina obligatorie",
@@ -617,6 +633,7 @@ export const roStrings = {
     questionsOrder: "Ordinea întrebărilor",
     timeLimit: "Limită de timp pentru finalizarea chestionarului",
     timeLimitPerPage: "Limită de timp pentru finalizarea unei pagini",
+    showTimer: "Utilizarea unui cronometru",
     timerLocation: "Alinierea timerului",
     timerInfoMode: "Modul timerului",
     renderMode: "Modul de afișare a panoului",
@@ -875,6 +892,7 @@ export const roStrings = {
       fontSize: "Dimensiunea fontului chestionarului",
       scale: "Factor de scalare chestionar",
       cornerRadius: "Raza colțului",
+      advancedMode: "Mod avansat",
       pageTitle: "Font titlu",
       pageDescription: "Font descriere",
       questionTitle: "Font titlu",
@@ -1421,6 +1439,7 @@ export const roStrings = {
       questionsOrder: "Păstrează ordinea originală a întrebărilor sau le randomizează. Opțiunea „Moștenește” aplică setarea de la nivel de chestionar („Original” implicit). Efectul acestei setări este vizibil doar în fila Previzualizare.",
       navigationButtonsVisibility: "Setează vizibilitatea butoanelor de navigare pe pagină. Opțiunea „Moștenește” aplică setarea de la nivel de chestionar, care implicit este „Vizibilă”."
     },
+    timerLocation: "Setează locația unui cronometru pe o pagină.",
     panelsState: "Alegeți dintre: „Blocat” - utilizatorii nu pot extinde sau colapsa panouri; „Colapsați toate” - toate panourile încep într-o stare colapsată; „Extindeți toate” - toate panourile încep într-o stare extinsă; „Primul extins” - doar primul panou este extins inițial. Se aplică dacă „Modul de afișare a panoului” este setat la „Listă” și proprietatea „Șablon titlu panou” este specificată.",
     imageLinkName: "Introduceți un nume de proprietate comun în cadrul array-ului de obiecte care conține URL-urile fișierelor imagine sau video pe care doriți să le afișați în lista de opțiuni.",
     choices: "Valoarea din stânga servește ca un ID al elementului utilizat în regulile condiționale, valoarea din dreapta este afișată respondenților.",
@@ -1502,7 +1521,8 @@ export const roStrings = {
     header: {
       inheritWidthFrom: "Opțiunea \"La fel ca și containerul\" ajustează automat lățimea zonei de conținut a antetului pentru a se potrivi în elementul HTML în care este plasat chestionarul.",
       textAreaWidth: "Lățimea zonei de antet care conține titlul și descrierea chestionarului, măsurată în pixeli.",
-      overlapEnabled: "Face ca partea de jos a antetului să fie suprapusă cu partea de sus a chestionarului."
+      overlapEnabled: "Face ca partea de jos a antetului să fie suprapusă cu partea de sus a chestionarului.",
+      mobileHeight: "Când este setată la 0, înălțimea este calculată automat pentru a găzdui conținutul antetului."
     },
     panellayoutcolumn: {
       effectiveWidth: "Acceptă valori în %.",
@@ -1590,6 +1610,7 @@ export const roStrings = {
     imageFit: "Potrivirea imaginii și miniaturilor",
     altText: "Text alternativ",
     height: "Înălțime",
+    mobileHeight: "Înălțimea pe smartphone-uri",
     penColor: "Culoarea stiloului",
     backgroundColor: "Culoarea fundalului",
     templateElements: "Elemente template",
@@ -1711,3 +1732,25 @@ editorLocalization.locales["ro"] = roStrings;
 // ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Faceți clic pe orice pictogramă de categorie pentru a explora setările sondajului. Setările suplimentare vor deveni disponibile odată ce adăugați un element de chestionar la suprafața de proiectare."
 // pe.caseInsensitive: "Case insensitive" => "Insensibil la majuscule și minuscule"
 // pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Selectați dacă literele mari și mici din expresia regulată trebuie tratate ca echivalente."
+
+// ed.surveyPlaceholderTitle: "Your form is empty" => "Formularul tău este gol"
+// ed.surveyPlaceholderTitleMobile: "Your form is empty" => "Formularul tău este gol"
+// ed.surveyPlaceholderDescription: "Drag an element from the toolbox or click the button below." => "Trageți un element din caseta de instrumente sau faceți clic pe butonul de mai jos."
+// ed.surveyPlaceholderDescriptionMobile: "Drag an element from the toolbox or click the button below." => "Trageți un element din caseta de instrumente sau faceți clic pe butonul de mai jos."
+// ed.previewPlaceholderTitle: "No preview" => "Fără previzualizare"
+// ed.previewPlaceholderTitleMobile: "No preview" => "Fără previzualizare"
+// ed.previewPlaceholderDescription: "The survey doesn't contain any visible elements." => "Sondajul nu conține elemente vizibile."
+// ed.previewPlaceholderDescriptionMobile: "The survey doesn't contain any visible elements." => "Sondajul nu conține elemente vizibile."
+// ed.translationsPlaceholderTitle: "No strings to translate" => "Fără șiruri de tradus"
+// ed.translationsPlaceholderTitleMobile: "No strings to translate" => "Fără șiruri de tradus"
+// ed.translationsPlaceholderDescription: "Add elements to your form or change the strings filter in the toolbar." => "Adăugați elemente la formular sau modificați filtrul șiruri din bara de instrumente."
+// ed.translationsPlaceholderDescriptionMobile: "Add elements to your form or change the strings filter in the toolbar." => "Adăugați elemente la formular sau modificați filtrul șiruri din bara de instrumente."
+// lg.logicPlaceholderTitle: "No logical rules" => "Fără reguli logice"
+// lg.logicPlaceholderTitleMobile: "No logical rules" => "Fără reguli logice"
+// lg.logicPlaceholderDescription: "Create a rule to customize the flow of the survey." => "Creați o regulă pentru a personaliza fluxul sondajului."
+// lg.logicPlaceholderDescriptionMobile: "Create a rule to customize the flow of the survey." => "Creați o regulă pentru a personaliza fluxul sondajului."
+// pe.showTimer: "Use a timer" => "Utilizarea unui cronometru"
+// theme.advancedMode: "Advanced mode" => "Mod avansat"
+// pehelp.timerLocation: "Sets the location of a timer on a page." => "Setează locația unui cronometru pe o pagină."
+// header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Când este setată la 0, înălțimea este calculată automat pentru a găzdui conținutul antetului."
+// p.mobileHeight: "Height on smartphones" => "Înălțimea pe smartphone-uri"

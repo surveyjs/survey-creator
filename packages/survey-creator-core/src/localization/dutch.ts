@@ -182,6 +182,18 @@ export var nlStrings = {
     pagePlaceHolder: "De pagina is leeg. Sleep een element uit de gereedschapskist of klik op de knop hieronder.",
     imagePlaceHolder: "Sleep een afbeelding hierheen of klik op de onderstaande knop en kies een afbeelding om te uploaden",
     surveyPlaceHolderMobile: "Klik hieronder op de knop \"Vraag toevoegen\" om te beginnen met het maken van uw formulier.",
+    surveyPlaceholderTitle: "Uw formulier is leeg",
+    surveyPlaceholderTitleMobile: "Uw formulier is leeg",
+    surveyPlaceholderDescription: "Sleep een element uit de gereedschapskist of klik op de knop hieronder.",
+    surveyPlaceholderDescriptionMobile: "Sleep een element uit de gereedschapskist of klik op de knop hieronder.",
+    previewPlaceholderTitle: "Geen voorbeeld",
+    previewPlaceholderTitleMobile: "Geen voorbeeld",
+    previewPlaceholderDescription: "De enquête bevat geen zichtbare elementen.",
+    previewPlaceholderDescriptionMobile: "De enquête bevat geen zichtbare elementen.",
+    translationsPlaceholderTitle: "Geen verplichtingen om te vertalen",
+    translationsPlaceholderTitleMobile: "Geen verplichtingen om te vertalen",
+    translationsPlaceholderDescription: "Voeg elementen toe aan uw formulier of wijzig het tekenreeksfilter in de werkbalk.",
+    translationsPlaceholderDescriptionMobile: "Voeg elementen toe aan uw formulier of wijzig het tekenreeksfilter in de werkbalk.",
     pagePlaceHolderMobile: "Klik op de knop \"Vraag toevoegen\" hieronder om een nieuw element aan de pagina toe te voegen.",
     panelPlaceHolderMobile: "Klik op de knop \"Vraag toevoegen\" hieronder om een nieuw element aan het paneel toe te voegen.",
     imagePlaceHolderMobile: "Klik op de onderstaande knop en kies een afbeelding om te uploaden",
@@ -194,6 +206,10 @@ export var nlStrings = {
     lg: {
       addNewItem: "Nieuwe regel toevoegen",
       empty_tab: "Maak een regel om de stroom van de enquête aan te passen.",
+      logicPlaceholderTitle: "Geen logische regels",
+      logicPlaceholderTitleMobile: "Geen logische regels",
+      logicPlaceholderDescription: "Maak een regel om de stroom van de enquête aan te passen.",
+      logicPlaceholderDescriptionMobile: "Maak een regel om de stroom van de enquête aan te passen.",
       page_visibilityName: "Pagina zichtbaarheid",
       page_enableName: "Pagina inschakelen (uitschakelen)",
       page_requireName: "Pagina verplicht maken",
@@ -617,6 +633,7 @@ export var nlStrings = {
     questionsOrder: "Volgorde elementen op pagina",
     timeLimit: "Maximale tijd om de enquête te voltooien",
     timeLimitPerPage: "Maximale tijd om een pagina in de enquête te voltooien",
+    showTimer: "Gebruik een timer",
     timerLocation: "Toon timerpaneel",
     timerInfoMode: "Modus timerpaneel",
     renderMode: "Render-modus",
@@ -875,6 +892,7 @@ export var nlStrings = {
       fontSize: "Tekengrootte",
       scale: "Schub",
       cornerRadius: "De straal van de hoek",
+      advancedMode: "Geavanceerde modus",
       pageTitle: "Titel lettertype",
       pageDescription: "Beschrijving lettertype",
       questionTitle: "Titel lettertype",
@@ -1421,6 +1439,7 @@ export var nlStrings = {
       questionsOrder: "Behoudt de oorspronkelijke volgorde van vragen of maakt ze willekeurig. De optie \"Overerven\" past de instelling op enquêteniveau toe (\"Standaard Origineel\"). Het effect van deze instelling is alleen zichtbaar op het tabblad Voorbeeld.",
       navigationButtonsVisibility: "Hiermee stelt u de zichtbaarheid van navigatieknoppen op de pagina in. De optie \"Overerven\" past de instelling op enquêteniveau toe, die standaard op \"Zichtbaar\" staat."
     },
+    timerLocation: "Hiermee stelt u de locatie van een timer op een pagina in.",
     panelsState: "Kies uit: \"Vergrendeld\" - gebruikers kunnen panelen niet uitvouwen of samenvouwen; \"Alles samenvouwen\" - alle deelvensters beginnen in een samengevouwen toestand; \"Alles uitvouwen\" - alle deelvensters beginnen in een uitgevouwen staat; \"Eerst uitgevouwen\" - alleen het eerste paneel wordt in eerste instantie uitgevouwen.",
     imageLinkName: "Voer de naam van een gedeelde eigenschap in binnen de matrix met objecten die de URL's van afbeeldings- of videobestanden bevat die u in de keuzelijst wilt weergeven.",
     choices: "De linkerwaarde dient als een item-ID die wordt gebruikt in voorwaardelijke regels, de rechterwaarde wordt weergegeven aan respondenten.",
@@ -1502,7 +1521,8 @@ export var nlStrings = {
     header: {
       inheritWidthFrom: "Met de optie \"Zelfde als container\" wordt de breedte van het inhoudsgebied van de koptekst automatisch aangepast aan het HTML-element waarin de enquête wordt geplaatst.",
       textAreaWidth: "De breedte van het koptekstgebied dat de titel en beschrijving van de enquête bevat, gemeten in pixels.",
-      overlapEnabled: "Hiermee wordt de onderkant van de koptekst overlapt met de bovenkant van de enquête."
+      overlapEnabled: "Hiermee wordt de onderkant van de koptekst overlapt met de bovenkant van de enquête.",
+      mobileHeight: "Als deze optie is ingesteld op 0, wordt de hoogte automatisch berekend om de inhoud van de koptekst te accommoderen."
     },
     panellayoutcolumn: {
       effectiveWidth: "Accepteert waarden %.",
@@ -1590,6 +1610,7 @@ export var nlStrings = {
     imageFit: "Passend bij het beeld",
     altText: "Alternatieve tekst",
     height: "Hoogte",
+    mobileHeight: "Hoogte op smartphones",
     penColor: "Kleur van de pen",
     backgroundColor: "Achtergrondkleur",
     templateElements: "Sjabloonelementen",
@@ -2758,3 +2779,25 @@ editorLocalization.locales["nl"] = nlStrings;
 // ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Klik op een categoriepictogram om de enquête-instellingen te verkennen. Aanvullende instellingen worden beschikbaar zodra u een enquête-element aan het ontwerpoppervlak toevoegt."
 // pe.caseInsensitive: "Case insensitive" => "Hoofdlettergevoelig"
 // pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Selecteer of hoofdletters en kleine letters in de reguliere expressie als gelijkwaardig moeten worden behandeld."
+
+// ed.surveyPlaceholderTitle: "Your form is empty" => "Uw formulier is leeg"
+// ed.surveyPlaceholderTitleMobile: "Your form is empty" => "Uw formulier is leeg"
+// ed.surveyPlaceholderDescription: "Drag an element from the toolbox or click the button below." => "Sleep een element uit de gereedschapskist of klik op de knop hieronder."
+// ed.surveyPlaceholderDescriptionMobile: "Drag an element from the toolbox or click the button below." => "Sleep een element uit de gereedschapskist of klik op de knop hieronder."
+// ed.previewPlaceholderTitle: "No preview" => "Geen voorbeeld"
+// ed.previewPlaceholderTitleMobile: "No preview" => "Geen voorbeeld"
+// ed.previewPlaceholderDescription: "The survey doesn't contain any visible elements." => "De enquête bevat geen zichtbare elementen."
+// ed.previewPlaceholderDescriptionMobile: "The survey doesn't contain any visible elements." => "De enquête bevat geen zichtbare elementen."
+// ed.translationsPlaceholderTitle: "No strings to translate" => "Geen verplichtingen om te vertalen"
+// ed.translationsPlaceholderTitleMobile: "No strings to translate" => "Geen verplichtingen om te vertalen"
+// ed.translationsPlaceholderDescription: "Add elements to your form or change the strings filter in the toolbar." => "Voeg elementen toe aan uw formulier of wijzig het tekenreeksfilter in de werkbalk."
+// ed.translationsPlaceholderDescriptionMobile: "Add elements to your form or change the strings filter in the toolbar." => "Voeg elementen toe aan uw formulier of wijzig het tekenreeksfilter in de werkbalk."
+// lg.logicPlaceholderTitle: "No logical rules" => "Geen logische regels"
+// lg.logicPlaceholderTitleMobile: "No logical rules" => "Geen logische regels"
+// lg.logicPlaceholderDescription: "Create a rule to customize the flow of the survey." => "Maak een regel om de stroom van de enquête aan te passen."
+// lg.logicPlaceholderDescriptionMobile: "Create a rule to customize the flow of the survey." => "Maak een regel om de stroom van de enquête aan te passen."
+// pe.showTimer: "Use a timer" => "Gebruik een timer"
+// theme.advancedMode: "Advanced mode" => "Geavanceerde modus"
+// pehelp.timerLocation: "Sets the location of a timer on a page." => "Hiermee stelt u de locatie van een timer op een pagina in."
+// header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Als deze optie is ingesteld op 0, wordt de hoogte automatisch berekend om de inhoud van de koptekst te accommoderen."
+// p.mobileHeight: "Height on smartphones" => "Hoogte op smartphones"

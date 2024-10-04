@@ -182,6 +182,18 @@ export var jaStrings = {
     pagePlaceHolder: "ページは空です。ツールボックスから要素をドラッグするか、下のボタンをクリックします。",
     imagePlaceHolder: "ここに画像をドラッグ&ドロップするか、下のボタンをクリックしてアップロードする画像を選択してください",
     surveyPlaceHolderMobile: "下の「質問を追加」ボタンをクリックして、フォームの作成を開始してください。",
+    surveyPlaceholderTitle: "フォームが空です",
+    surveyPlaceholderTitleMobile: "フォームが空です",
+    surveyPlaceholderDescription: "ツールボックスから要素をドラッグするか、下のボタンをクリックします。",
+    surveyPlaceholderDescriptionMobile: "ツールボックスから要素をドラッグするか、下のボタンをクリックします。",
+    previewPlaceholderTitle: "プレビューなし",
+    previewPlaceholderTitleMobile: "プレビューなし",
+    previewPlaceholderDescription: "調査には、表示されている要素は含まれていません。",
+    previewPlaceholderDescriptionMobile: "調査には、表示されている要素は含まれていません。",
+    translationsPlaceholderTitle: "翻訳する文字列はありません",
+    translationsPlaceholderTitleMobile: "翻訳する文字列はありません",
+    translationsPlaceholderDescription: "フォームに要素を追加するか、ツールバーの文字列フィルターを変更します。",
+    translationsPlaceholderDescriptionMobile: "フォームに要素を追加するか、ツールバーの文字列フィルターを変更します。",
     pagePlaceHolderMobile: "下の「質問を追加」ボタンをクリックして、ページに新しい要素を追加します。",
     panelPlaceHolderMobile: "下の「質問を追加」ボタンをクリックして、パネルに新しい要素を追加します。",
     imagePlaceHolderMobile: "下のボタンをクリックして、アップロードする画像を選択してください",
@@ -194,6 +206,10 @@ export var jaStrings = {
     lg: {
       addNewItem: "新しいルールを追加",
       empty_tab: "調査のフローをカスタマイズするルールを作成します。",
+      logicPlaceholderTitle: "論理的なルールはありません",
+      logicPlaceholderTitleMobile: "論理的なルールはありません",
+      logicPlaceholderDescription: "調査のフローをカスタマイズするルールを作成します。",
+      logicPlaceholderDescriptionMobile: "調査のフローをカスタマイズするルールを作成します。",
       page_visibilityName: "ページの可視性",
       page_enableName: "有効 (無効) ページ",
       page_requireName: "ページを必須にする",
@@ -617,6 +633,7 @@ export var jaStrings = {
     questionsOrder: "ページ上の要素の順序",
     timeLimit: "アンケート終了までの最長時間",
     timeLimitPerPage: "アンケートの1ページを終了するまでの最長時間",
+    showTimer: "タイマーを使用する",
     timerLocation: "タイマーパネルを表示する",
     timerInfoMode: "タイマーパネルモードを表示",
     renderMode: "レンダーモード",
@@ -875,6 +892,7 @@ export var jaStrings = {
       fontSize: "フォントサイズ",
       scale: "規模",
       cornerRadius: "コーナR(Corner Radius)",
+      advancedMode: "詳細モード",
       pageTitle: "タイトルのフォント",
       pageDescription: "説明フォント",
       questionTitle: "タイトルのフォント",
@@ -1421,6 +1439,7 @@ export var jaStrings = {
       questionsOrder: "質問の元の順序を維持するか、ランダム化します。「継承」オプションは、アンケートレベルの設定(デフォルトでは「オリジナル」)を適用します。この設定の効果は、「プレビュー」タブにのみ表示されます。",
       navigationButtonsVisibility: "ページ上のナビゲーションボタンの表示を設定します。「継承」オプションは、アンケートレベルの設定を適用し、デフォルトは「表示」です。"
     },
+    timerLocation: "ページ上のタイマーの位置を設定します。",
     panelsState: "次から選択します: 「ロック」 - ユーザーはパネルを展開または折りたたむことはできません。\"Collapse all\" - すべてのパネルが折りたたまれた状態で開始されます。\"Expand all\" - すべてのパネルが展開された状態で開始されます。\"First expanded\" - 最初のパネルのみが最初に展開されます。",
     imageLinkName: "選択リストに表示する画像またはビデオ ファイルの URL を含むオブジェクトの配列内に共有プロパティ名を入力します。",
     choices: "左の値は条件付きルールで使用される項目IDとして機能し、右の値は回答者に表示されます。",
@@ -1502,7 +1521,8 @@ export var jaStrings = {
     header: {
       inheritWidthFrom: "「コンテナと同じ」オプションは、アンケートが配置されるHTML要素に収まるようにヘッダーコンテンツ領域の幅を自動調整します。",
       textAreaWidth: "調査のタイトルと説明を含むヘッダー領域の幅 (ピクセル単位)。",
-      overlapEnabled: "ヘッダーの下部を調査の上部にオーバーレイします。"
+      overlapEnabled: "ヘッダーの下部を調査の上部にオーバーレイします。",
+      mobileHeight: "0 に設定すると、ヘッダーのコンテンツに合わせて高さが自動的に計算されます。"
     },
     panellayoutcolumn: {
       effectiveWidth: "値 % を受け入れます。",
@@ -1590,6 +1610,7 @@ export var jaStrings = {
     imageFit: "画像のフィット",
     altText: "代替テキスト",
     height: "高さ",
+    mobileHeight: "スマートフォンでの高さ",
     penColor: "ペンの色",
     backgroundColor: "背景色",
     templateElements: "テンプレート要素",
@@ -2776,3 +2797,25 @@ editorLocalization.locales["ja"] = jaStrings;
 // ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "任意のカテゴリアイコンをクリックして、アンケート設定を探索します。追加の設定は、デザイン画面にアンケート要素を追加すると使用可能になります。"
 // pe.caseInsensitive: "Case insensitive" => "大文字と小文字を区別しない"
 // pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "正規表現の大文字と小文字を同等に扱う必要がある場合に選択します。"
+
+// ed.surveyPlaceholderTitle: "Your form is empty" => "フォームが空です"
+// ed.surveyPlaceholderTitleMobile: "Your form is empty" => "フォームが空です"
+// ed.surveyPlaceholderDescription: "Drag an element from the toolbox or click the button below." => "ツールボックスから要素をドラッグするか、下のボタンをクリックします。"
+// ed.surveyPlaceholderDescriptionMobile: "Drag an element from the toolbox or click the button below." => "ツールボックスから要素をドラッグするか、下のボタンをクリックします。"
+// ed.previewPlaceholderTitle: "No preview" => "プレビューなし"
+// ed.previewPlaceholderTitleMobile: "No preview" => "プレビューなし"
+// ed.previewPlaceholderDescription: "The survey doesn't contain any visible elements." => "調査には、表示されている要素は含まれていません。"
+// ed.previewPlaceholderDescriptionMobile: "The survey doesn't contain any visible elements." => "調査には、表示されている要素は含まれていません。"
+// ed.translationsPlaceholderTitle: "No strings to translate" => "翻訳する文字列はありません"
+// ed.translationsPlaceholderTitleMobile: "No strings to translate" => "翻訳する文字列はありません"
+// ed.translationsPlaceholderDescription: "Add elements to your form or change the strings filter in the toolbar." => "フォームに要素を追加するか、ツールバーの文字列フィルターを変更します。"
+// ed.translationsPlaceholderDescriptionMobile: "Add elements to your form or change the strings filter in the toolbar." => "フォームに要素を追加するか、ツールバーの文字列フィルターを変更します。"
+// lg.logicPlaceholderTitle: "No logical rules" => "論理的なルールはありません"
+// lg.logicPlaceholderTitleMobile: "No logical rules" => "論理的なルールはありません"
+// lg.logicPlaceholderDescription: "Create a rule to customize the flow of the survey." => "調査のフローをカスタマイズするルールを作成します。"
+// lg.logicPlaceholderDescriptionMobile: "Create a rule to customize the flow of the survey." => "調査のフローをカスタマイズするルールを作成します。"
+// pe.showTimer: "Use a timer" => "タイマーを使用する"
+// theme.advancedMode: "Advanced mode" => "詳細モード"
+// pehelp.timerLocation: "Sets the location of a timer on a page." => "ページ上のタイマーの位置を設定します。"
+// header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "0 に設定すると、ヘッダーのコンテンツに合わせて高さが自動的に計算されます。"
+// p.mobileHeight: "Height on smartphones" => "スマートフォンでの高さ"

@@ -182,6 +182,18 @@ var simplifiedChineseTranslation = {
     pagePlaceHolder: "页面为空。从工具箱中拖动元素或单击下面的按钮。",
     imagePlaceHolder: "将图像拖放到此处或单击下面的按钮并选择要上传的图像",
     surveyPlaceHolderMobile: "单击下面的“添加问题”按钮开始创建表单。",
+    surveyPlaceholderTitle: "您的表单为空",
+    surveyPlaceholderTitleMobile: "您的表单为空",
+    surveyPlaceholderDescription: "从工具箱中拖动元素或单击下面的按钮。",
+    surveyPlaceholderDescriptionMobile: "从工具箱中拖动元素或单击下面的按钮。",
+    previewPlaceholderTitle: "无预览",
+    previewPlaceholderTitleMobile: "无预览",
+    previewPlaceholderDescription: "调查不包含任何可见元素。",
+    previewPlaceholderDescriptionMobile: "调查不包含任何可见元素。",
+    translationsPlaceholderTitle: "无需翻译字符串",
+    translationsPlaceholderTitleMobile: "无需翻译字符串",
+    translationsPlaceholderDescription: "将元素添加到表单或更改工具栏中的字符串筛选器。",
+    translationsPlaceholderDescriptionMobile: "将元素添加到表单或更改工具栏中的字符串筛选器。",
     pagePlaceHolderMobile: "单击下面的“添加问题”按钮，向页面添加新元素。",
     panelPlaceHolderMobile: "单击下面的“添加问题”按钮，将新元素添加到面板中。",
     imagePlaceHolderMobile: "点击下面的按钮，选择要上传的图片",
@@ -194,6 +206,10 @@ var simplifiedChineseTranslation = {
     lg: {
       addNewItem: "添加新规则",
       empty_tab: "创建规则以自定义调查流。",
+      logicPlaceholderTitle: "无逻辑规则",
+      logicPlaceholderTitleMobile: "无逻辑规则",
+      logicPlaceholderDescription: "创建规则以自定义调查流程。",
+      logicPlaceholderDescriptionMobile: "创建规则以自定义调查流程。",
       page_visibilityName: "显示（隐藏）页面",
       page_enableName: "启用（禁用）页面",
       page_requireName: "将页面设为必填项",
@@ -617,6 +633,7 @@ var simplifiedChineseTranslation = {
     questionsOrder: "页内问题顺序",
     timeLimit: "完成调查的最长时间",
     timeLimitPerPage: "完成调查中页面的最长时间",
+    showTimer: "使用计时器",
     timerLocation: "显示计时器面板",
     timerInfoMode: "显示计时器面板模式",
     renderMode: "渲染模式",
@@ -875,6 +892,7 @@ var simplifiedChineseTranslation = {
       fontSize: "字体大小",
       scale: "规模",
       cornerRadius: "拐角半径",
+      advancedMode: "高级模式",
       pageTitle: "标题字体",
       pageDescription: "描述字体",
       questionTitle: "标题字体",
@@ -1421,6 +1439,7 @@ var simplifiedChineseTranslation = {
       questionsOrder: "保持问题的原始顺序或随机化问题。“继承”选项应用调查级别设置（默认为“原始”）。此设置的效果仅在“预览”选项卡中可见。",
       navigationButtonsVisibility: "设置导航按钮在页面上的可见性。“继承”选项应用调查级别设置，默认为“可见”。"
     },
+    timerLocation: "设置计时器在页面上的位置。",
     panelsState: "从以下选项中选择：“锁定” - 用户无法展开或折叠面板;“全部折叠” - 所有面板都以折叠状态启动;“全部展开” - 所有面板都以展开状态启动;“首先展开” - 最初只有第一个面板被展开。",
     imageLinkName: "在对象数组中输入共享属性名称，该数组包含要在选项列表中显示的图像或视频文件 URL。",
     choices: "左边的值用作条件规则中使用的项目 ID，右边的值显示给受访者。",
@@ -1502,7 +1521,8 @@ var simplifiedChineseTranslation = {
     header: {
       inheritWidthFrom: "“与容器相同”选项会自动调整标题内容区域的宽度，以适应放置调查的 HTML 元素。",
       textAreaWidth: "包含调查标题和描述的标题区域的宽度，以像素为单位。",
-      overlapEnabled: "使标题的底部与调查的顶部重叠。"
+      overlapEnabled: "使标题的底部与调查的顶部重叠。",
+      mobileHeight: "设置为 0 时，将自动计算高度以适应标题的内容。"
     },
     panellayoutcolumn: {
       effectiveWidth: "接受值 %。",
@@ -1590,6 +1610,7 @@ var simplifiedChineseTranslation = {
     imageFit: "图像贴合",
     altText: "可选文字",
     height: "高度",
+    mobileHeight: "智能手机上的身高",
     penColor: "笔颜色",
     backgroundColor: "背景色",
     templateElements: "模板元素",
@@ -2919,3 +2940,25 @@ editorLocalization.locales["zh-cn"] = simplifiedChineseTranslation;
 // ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "单击任何类别图标以浏览调查设置。将测量元素添加到设计图面后，其他设置将变为可用。"
 // pe.caseInsensitive: "Case insensitive" => "不区分大小写"
 // pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "如果必须将正则表达式中的大写字母和小写字母视为等效字母，请选择此项。"
+
+// ed.surveyPlaceholderTitle: "Your form is empty" => "您的表单为空"
+// ed.surveyPlaceholderTitleMobile: "Your form is empty" => "您的表单为空"
+// ed.surveyPlaceholderDescription: "Drag an element from the toolbox or click the button below." => "从工具箱中拖动元素或单击下面的按钮。"
+// ed.surveyPlaceholderDescriptionMobile: "Drag an element from the toolbox or click the button below." => "从工具箱中拖动元素或单击下面的按钮。"
+// ed.previewPlaceholderTitle: "No preview" => "无预览"
+// ed.previewPlaceholderTitleMobile: "No preview" => "无预览"
+// ed.previewPlaceholderDescription: "The survey doesn't contain any visible elements." => "调查不包含任何可见元素。"
+// ed.previewPlaceholderDescriptionMobile: "The survey doesn't contain any visible elements." => "调查不包含任何可见元素。"
+// ed.translationsPlaceholderTitle: "No strings to translate" => "无需翻译字符串"
+// ed.translationsPlaceholderTitleMobile: "No strings to translate" => "无需翻译字符串"
+// ed.translationsPlaceholderDescription: "Add elements to your form or change the strings filter in the toolbar." => "将元素添加到表单或更改工具栏中的字符串筛选器。"
+// ed.translationsPlaceholderDescriptionMobile: "Add elements to your form or change the strings filter in the toolbar." => "将元素添加到表单或更改工具栏中的字符串筛选器。"
+// lg.logicPlaceholderTitle: "No logical rules" => "无逻辑规则"
+// lg.logicPlaceholderTitleMobile: "No logical rules" => "无逻辑规则"
+// lg.logicPlaceholderDescription: "Create a rule to customize the flow of the survey." => "创建规则以自定义调查流程。"
+// lg.logicPlaceholderDescriptionMobile: "Create a rule to customize the flow of the survey." => "创建规则以自定义调查流程。"
+// pe.showTimer: "Use a timer" => "使用计时器"
+// theme.advancedMode: "Advanced mode" => "高级模式"
+// pehelp.timerLocation: "Sets the location of a timer on a page." => "设置计时器在页面上的位置。"
+// header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "设置为 0 时，将自动计算高度以适应标题的内容。"
+// p.mobileHeight: "Height on smartphones" => "智能手机上的身高"

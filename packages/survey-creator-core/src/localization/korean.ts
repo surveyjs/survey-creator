@@ -182,6 +182,18 @@ export var koreanStrings = {
     pagePlaceHolder: "페이지가 비어 있습니다. 도구 상자에서 요소를 드래그하거나 아래 버튼을 클릭합니다.",
     imagePlaceHolder: "여기에 이미지를 끌어다 놓거나 아래 버튼을 클릭하고 업로드할 이미지를 선택하세요.",
     surveyPlaceHolderMobile: "아래의 \"질문 추가\" 버튼을 클릭하여 양식 작성을 시작하십시오.",
+    surveyPlaceholderTitle: "양식이 비어 있습니다.",
+    surveyPlaceholderTitleMobile: "양식이 비어 있습니다.",
+    surveyPlaceholderDescription: "도구 상자에서 요소를 드래그하거나 아래 버튼을 클릭합니다.",
+    surveyPlaceholderDescriptionMobile: "도구 상자에서 요소를 드래그하거나 아래 버튼을 클릭합니다.",
+    previewPlaceholderTitle: "미리보기 없음",
+    previewPlaceholderTitleMobile: "미리보기 없음",
+    previewPlaceholderDescription: "설문조사에 가시적인 요소가 포함되어 있지 않습니다.",
+    previewPlaceholderDescriptionMobile: "설문조사에 가시적인 요소가 포함되어 있지 않습니다.",
+    translationsPlaceholderTitle: "번역할 문자열이 없습니다.",
+    translationsPlaceholderTitleMobile: "번역할 문자열이 없습니다.",
+    translationsPlaceholderDescription: "양식에 요소를 추가하거나 도구 모음에서 문자열 필터를 변경합니다.",
+    translationsPlaceholderDescriptionMobile: "양식에 요소를 추가하거나 도구 모음에서 문자열 필터를 변경합니다.",
     pagePlaceHolderMobile: "아래의 \"질문 추가\" 버튼을 클릭하여 페이지에 새 요소를 추가하세요.",
     panelPlaceHolderMobile: "아래의 \"질문 추가\" 버튼을 클릭하여 패널에 새 요소를 추가합니다.",
     imagePlaceHolderMobile: "아래 버튼을 클릭하고 업로드할 이미지를 선택하세요.",
@@ -194,6 +206,10 @@ export var koreanStrings = {
     lg: {
       addNewItem: "새 규칙 추가",
       empty_tab: "설문 조사의 흐름을 사용자 지정하는 규칙을 만듭니다.",
+      logicPlaceholderTitle: "논리적 규칙 없음",
+      logicPlaceholderTitleMobile: "논리적 규칙 없음",
+      logicPlaceholderDescription: "설문조사의 흐름을 사용자 지정하는 규칙을 만듭니다.",
+      logicPlaceholderDescriptionMobile: "설문조사의 흐름을 사용자 지정하는 규칙을 만듭니다.",
       page_visibilityName: "페이지 표시(숨기기)",
       page_enableName: "사용(사용 안 함) 페이지",
       page_requireName: "페이지를 필수로 설정",
@@ -617,6 +633,7 @@ export var koreanStrings = {
     questionsOrder: "페이지의 요소 순서",
     timeLimit: "설문 조사를 마칠 수있는 최대 시간",
     timeLimitPerPage: "설문 조사에서 페이지를 마칠 수있는 최대 시간",
+    showTimer: "타이머 사용",
     timerLocation: "타이머 패널 표시",
     timerInfoMode: "타이머 패널 모드 표시",
     renderMode: "렌더링 모드",
@@ -875,6 +892,7 @@ export var koreanStrings = {
       fontSize: "글꼴 크기",
       scale: "저울",
       cornerRadius: "코너 반경",
+      advancedMode: "어드밴스드 모드",
       pageTitle: "제목 글꼴",
       pageDescription: "설명 글꼴",
       questionTitle: "제목 글꼴",
@@ -1421,6 +1439,7 @@ export var koreanStrings = {
       questionsOrder: "질문의 원래 순서를 유지하거나 무작위화합니다. \"상속\" 옵션은 설문조사 수준 설정(기본적으로 \"원본\")을 적용합니다. 이 설정의 효과는 미리보기 탭에서만 볼 수 있습니다.",
       navigationButtonsVisibility: "페이지에서 탐색 단추의 표시 여부를 설정합니다. \"상속\" 옵션은 설문조사 수준 설정을 적용하며, 기본값은 \"표시\"입니다."
     },
+    timerLocation: "페이지에서 타이머의 위치를 설정합니다.",
     panelsState: "다음 중에서 선택: \"잠김\" - 사용자가 패널을 확장하거나 축소할 수 없습니다. \"모두 축소\" - 모든 패널이 축소된 상태에서 시작됩니다. \"모두 확장\" - 모든 패널이 확장된 상태에서 시작됩니다. \"첫 번째 확장\" - 첫 번째 패널만 처음에 확장됩니다.",
     imageLinkName: "선택 목록에 표시할 이미지 또는 비디오 파일 URL이 포함된 객체 배열 내에 공유 속성 이름을 입력합니다.",
     choices: "왼쪽 값은 조건부 규칙에 사용되는 항목 ID 역할을 하며, 오른쪽 값은 응답자에게 표시됩니다.",
@@ -1502,7 +1521,8 @@ export var koreanStrings = {
     header: {
       inheritWidthFrom: "\"컨테이너와 동일\" 옵션은 설문조사가 배치된 HTML 요소에 맞게 헤더 콘텐츠 영역 너비를 자동으로 조정합니다.",
       textAreaWidth: "설문조사 제목과 설명이 포함된 헤더 영역의 너비로, 픽셀 단위로 측정됩니다.",
-      overlapEnabled: "헤더의 아래쪽을 현장조사의 위쪽과 겹쳐서 만듭니다."
+      overlapEnabled: "헤더의 아래쪽을 현장조사의 위쪽과 겹쳐서 만듭니다.",
+      mobileHeight: "0으로 설정하면 헤더의 내용을 수용하기 위해 높이가 자동으로 계산됩니다."
     },
     panellayoutcolumn: {
       effectiveWidth: "% 값을 허용합니다.",
@@ -1590,6 +1610,7 @@ export var koreanStrings = {
     imageFit: "이미지 핏",
     altText: "대체 텍스트",
     height: "높이",
+    mobileHeight: "스마트폰의 높이",
     penColor: "펜 색상",
     backgroundColor: "배경색",
     templateElements: "템플릿 요소",
@@ -2981,3 +3002,25 @@ editorLocalization.locales["ko"] = koreanStrings;
 // ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "범주 아이콘을 클릭하여 설문조사 설정을 탐색합니다. 디자인 화면에 설문 조사 요소를 추가하면 추가 설정을 사용할 수 있게 됩니다."
 // pe.caseInsensitive: "Case insensitive" => "대소문자 구분 안 함"
 // pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "정규식에서 대문자와 소문자를 동등하게 취급해야 하는 경우 선택합니다."
+
+// ed.surveyPlaceholderTitle: "Your form is empty" => "양식이 비어 있습니다."
+// ed.surveyPlaceholderTitleMobile: "Your form is empty" => "양식이 비어 있습니다."
+// ed.surveyPlaceholderDescription: "Drag an element from the toolbox or click the button below." => "도구 상자에서 요소를 드래그하거나 아래 버튼을 클릭합니다."
+// ed.surveyPlaceholderDescriptionMobile: "Drag an element from the toolbox or click the button below." => "도구 상자에서 요소를 드래그하거나 아래 버튼을 클릭합니다."
+// ed.previewPlaceholderTitle: "No preview" => "미리보기 없음"
+// ed.previewPlaceholderTitleMobile: "No preview" => "미리보기 없음"
+// ed.previewPlaceholderDescription: "The survey doesn't contain any visible elements." => "설문조사에 가시적인 요소가 포함되어 있지 않습니다."
+// ed.previewPlaceholderDescriptionMobile: "The survey doesn't contain any visible elements." => "설문조사에 가시적인 요소가 포함되어 있지 않습니다."
+// ed.translationsPlaceholderTitle: "No strings to translate" => "번역할 문자열이 없습니다."
+// ed.translationsPlaceholderTitleMobile: "No strings to translate" => "번역할 문자열이 없습니다."
+// ed.translationsPlaceholderDescription: "Add elements to your form or change the strings filter in the toolbar." => "양식에 요소를 추가하거나 도구 모음에서 문자열 필터를 변경합니다."
+// ed.translationsPlaceholderDescriptionMobile: "Add elements to your form or change the strings filter in the toolbar." => "양식에 요소를 추가하거나 도구 모음에서 문자열 필터를 변경합니다."
+// lg.logicPlaceholderTitle: "No logical rules" => "논리적 규칙 없음"
+// lg.logicPlaceholderTitleMobile: "No logical rules" => "논리적 규칙 없음"
+// lg.logicPlaceholderDescription: "Create a rule to customize the flow of the survey." => "설문조사의 흐름을 사용자 지정하는 규칙을 만듭니다."
+// lg.logicPlaceholderDescriptionMobile: "Create a rule to customize the flow of the survey." => "설문조사의 흐름을 사용자 지정하는 규칙을 만듭니다."
+// pe.showTimer: "Use a timer" => "타이머 사용"
+// theme.advancedMode: "Advanced mode" => "어드밴스드 모드"
+// pehelp.timerLocation: "Sets the location of a timer on a page." => "페이지에서 타이머의 위치를 설정합니다."
+// header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "0으로 설정하면 헤더의 내용을 수용하기 위해 높이가 자동으로 계산됩니다."
+// p.mobileHeight: "Height on smartphones" => "스마트폰의 높이"

@@ -182,6 +182,18 @@ var polishStrings = {
     pagePlaceHolder: "Strona jest pusta. Przeciągnij element z przybornika lub kliknij przycisk poniżej.",
     imagePlaceHolder: "Przeciągnij i upuść obraz tutaj lub kliknij przycisk poniżej i wybierz obraz do przesłania",
     surveyPlaceHolderMobile: "Kliknij przycisk \"Dodaj pytanie\" poniżej, aby rozpocząć tworzenie formularza.",
+    surveyPlaceholderTitle: "Twój formularz jest pusty",
+    surveyPlaceholderTitleMobile: "Twój formularz jest pusty",
+    surveyPlaceholderDescription: "Przeciągnij element z przybornika lub kliknij przycisk poniżej.",
+    surveyPlaceholderDescriptionMobile: "Przeciągnij element z przybornika lub kliknij przycisk poniżej.",
+    previewPlaceholderTitle: "Brak podglądu",
+    previewPlaceholderTitleMobile: "Brak podglądu",
+    previewPlaceholderDescription: "Ankieta nie zawiera żadnych widocznych elementów.",
+    previewPlaceholderDescriptionMobile: "Ankieta nie zawiera żadnych widocznych elementów.",
+    translationsPlaceholderTitle: "Brak ciągów do tłumaczenia",
+    translationsPlaceholderTitleMobile: "Brak ciągów do tłumaczenia",
+    translationsPlaceholderDescription: "Dodaj elementy do formularza lub zmień filtr ciągów na pasku narzędzi.",
+    translationsPlaceholderDescriptionMobile: "Dodaj elementy do formularza lub zmień filtr ciągów na pasku narzędzi.",
     pagePlaceHolderMobile: "Kliknij przycisk \"Dodaj pytanie\" poniżej, aby dodać nowy element do strony.",
     panelPlaceHolderMobile: "Kliknij przycisk \"Dodaj pytanie\" poniżej, aby dodać nowy element do panelu.",
     imagePlaceHolderMobile: "Kliknij poniższy przycisk i wybierz obraz do przesłania",
@@ -194,6 +206,10 @@ var polishStrings = {
     lg: {
       addNewItem: "Dodaj nową regułę",
       empty_tab: "Utwórz regułę, aby dostosować przepływ ankiety.",
+      logicPlaceholderTitle: "Brak reguł logicznych",
+      logicPlaceholderTitleMobile: "Brak reguł logicznych",
+      logicPlaceholderDescription: "Utwórz regułę, aby dostosować przepływ ankiety.",
+      logicPlaceholderDescriptionMobile: "Utwórz regułę, aby dostosować przepływ ankiety.",
       page_visibilityName: "Pokaż (ukryj) stronę",
       page_enableName: "Włącz (wyłącz) stronę",
       page_requireName: "Ustaw stronę jako wymaganą",
@@ -617,6 +633,7 @@ var polishStrings = {
     questionsOrder: "Elements order on the page",
     timeLimit: "Maximum time to finish the survey",
     timeLimitPerPage: "Maximum time to finish a page in the survey",
+    showTimer: "Korzystanie z minutnika",
     timerLocation: "Show timer panel",
     timerInfoMode: "Show timer panel mode",
     renderMode: "Render mode",
@@ -875,6 +892,7 @@ var polishStrings = {
       fontSize: "Rozmiar czcionki",
       scale: "Skala",
       cornerRadius: "Promień naroża",
+      advancedMode: "Tryb zaawansowany",
       pageTitle: "Czcionka tytułu",
       pageDescription: "Czcionka opisu",
       questionTitle: "Czcionka tytułu",
@@ -1421,6 +1439,7 @@ var polishStrings = {
       questionsOrder: "Zachowuje pierwotną kolejność pytań lub losuje je. Opcja \"Dziedzicz\" stosuje ustawienie na poziomie ankiety (domyślnie \"Oryginalne\"). Efekt tego ustawienia jest widoczny tylko na karcie Podgląd.",
       navigationButtonsVisibility: "Ustawia widoczność przycisków nawigacyjnych na stronie. Opcja \"Dziedzicz\" stosuje ustawienie na poziomie ankiety, które domyślnie ma wartość \"Widoczny\"."
     },
+    timerLocation: "Ustawia położenie czasomierza na stronie.",
     panelsState: "Do wyboru: \"Zablokowany\" - użytkownicy nie mogą rozwijać ani zwijać paneli; \"Zwiń wszystko\" - wszystkie panele rozpoczynają się w stanie zwiniętym; \"Rozwiń wszystko\" - wszystkie panele rozpoczynają się w stanie rozwiniętym; \"Pierwszy rozwinięty\" - początkowo rozwijany jest tylko pierwszy panel.",
     imageLinkName: "Wprowadź nazwę właściwości współużytkowanej w tablicy obiektów zawierających adresy URL obrazów lub plików wideo, które mają być wyświetlane na liście wyborów.",
     choices: "Lewa wartość służy jako identyfikator elementu używany w regułach warunkowych, prawa wartość jest wyświetlana respondentom.",
@@ -1502,7 +1521,8 @@ var polishStrings = {
     header: {
       inheritWidthFrom: "Opcja \"Taki sam jak kontener\" automatycznie dostosowuje szerokość obszaru zawartości nagłówka, aby pasowała do elementu HTML, w którym umieszczono ankietę.",
       textAreaWidth: "Szerokość obszaru nagłówka, który zawiera tytuł i opis ankiety, mierzona w pikselach.",
-      overlapEnabled: "Powoduje, że dolna krawędź nagłówka jest nakładana na górną krawędź ankiety."
+      overlapEnabled: "Powoduje, że dolna krawędź nagłówka jest nakładana na górną krawędź ankiety.",
+      mobileHeight: "Po ustawieniu wartości 0 wysokość jest obliczana automatycznie, aby pomieścić zawartość nagłówka."
     },
     panellayoutcolumn: {
       effectiveWidth: "Akceptuje wartości %.",
@@ -1590,6 +1610,7 @@ var polishStrings = {
     imageFit: "Dopasowanie obrazu",
     altText: "Tekst alternatywny",
     height: "Wysokość",
+    mobileHeight: "Wysokość na smartfonach",
     penColor: "Kolor pióra",
     backgroundColor: "Kolor tła",
     templateElements: "Elementy szablonu",
@@ -3044,3 +3065,25 @@ editorLocalization.locales["pl"] = polishStrings;
 // ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Kliknij dowolną ikonę kategorii, aby zapoznać się z ustawieniami ankiety. Dodatkowe ustawienia staną się dostępne po dodaniu elementu ankiety do powierzchni projektowej."
 // pe.caseInsensitive: "Case insensitive" => "Bez uwzględniania wielkości liter"
 // pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Wybierz, czy wielkie i małe litery w wyrażeniu regularnym mają być traktowane jako równoważne."
+
+// ed.surveyPlaceholderTitle: "Your form is empty" => "Twój formularz jest pusty"
+// ed.surveyPlaceholderTitleMobile: "Your form is empty" => "Twój formularz jest pusty"
+// ed.surveyPlaceholderDescription: "Drag an element from the toolbox or click the button below." => "Przeciągnij element z przybornika lub kliknij przycisk poniżej."
+// ed.surveyPlaceholderDescriptionMobile: "Drag an element from the toolbox or click the button below." => "Przeciągnij element z przybornika lub kliknij przycisk poniżej."
+// ed.previewPlaceholderTitle: "No preview" => "Brak podglądu"
+// ed.previewPlaceholderTitleMobile: "No preview" => "Brak podglądu"
+// ed.previewPlaceholderDescription: "The survey doesn't contain any visible elements." => "Ankieta nie zawiera żadnych widocznych elementów."
+// ed.previewPlaceholderDescriptionMobile: "The survey doesn't contain any visible elements." => "Ankieta nie zawiera żadnych widocznych elementów."
+// ed.translationsPlaceholderTitle: "No strings to translate" => "Brak ciągów do tłumaczenia"
+// ed.translationsPlaceholderTitleMobile: "No strings to translate" => "Brak ciągów do tłumaczenia"
+// ed.translationsPlaceholderDescription: "Add elements to your form or change the strings filter in the toolbar." => "Dodaj elementy do formularza lub zmień filtr ciągów na pasku narzędzi."
+// ed.translationsPlaceholderDescriptionMobile: "Add elements to your form or change the strings filter in the toolbar." => "Dodaj elementy do formularza lub zmień filtr ciągów na pasku narzędzi."
+// lg.logicPlaceholderTitle: "No logical rules" => "Brak reguł logicznych"
+// lg.logicPlaceholderTitleMobile: "No logical rules" => "Brak reguł logicznych"
+// lg.logicPlaceholderDescription: "Create a rule to customize the flow of the survey." => "Utwórz regułę, aby dostosować przepływ ankiety."
+// lg.logicPlaceholderDescriptionMobile: "Create a rule to customize the flow of the survey." => "Utwórz regułę, aby dostosować przepływ ankiety."
+// pe.showTimer: "Use a timer" => "Korzystanie z minutnika"
+// theme.advancedMode: "Advanced mode" => "Tryb zaawansowany"
+// pehelp.timerLocation: "Sets the location of a timer on a page." => "Ustawia położenie czasomierza na stronie."
+// header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Po ustawieniu wartości 0 wysokość jest obliczana automatycznie, aby pomieścić zawartość nagłówka."
+// p.mobileHeight: "Height on smartphones" => "Wysokość na smartfonach"

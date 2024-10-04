@@ -182,6 +182,18 @@ export var skStrings = {
     pagePlaceHolder: "Stránka je prázdna. Potiahnite prvok z panela s nástrojmi alebo kliknite na tlačidlo nižšie.",
     imagePlaceHolder: "Presuňte obrázok sem alebo kliknite na tlačidlo nižšie a vyberte obrázok, ktorý chcete nahrať",
     surveyPlaceHolderMobile: "Kliknite na tlačidlo \"Pridať otázku\" nižšie a začnite vytvárať formulár.",
+    surveyPlaceholderTitle: "Formulár je prázdny",
+    surveyPlaceholderTitleMobile: "Formulár je prázdny",
+    surveyPlaceholderDescription: "Presuňte prvok z panela s nástrojmi alebo kliknite na tlačidlo nižšie.",
+    surveyPlaceholderDescriptionMobile: "Presuňte prvok z panela s nástrojmi alebo kliknite na tlačidlo nižšie.",
+    previewPlaceholderTitle: "Žiadny náhľad",
+    previewPlaceholderTitleMobile: "Žiadny náhľad",
+    previewPlaceholderDescription: "Prieskum neobsahuje žiadne viditeľné prvky.",
+    previewPlaceholderDescriptionMobile: "Prieskum neobsahuje žiadne viditeľné prvky.",
+    translationsPlaceholderTitle: "Žiadne reťazce na preklad",
+    translationsPlaceholderTitleMobile: "Žiadne reťazce na preklad",
+    translationsPlaceholderDescription: "Pridajte prvky do formulára alebo zmeňte filter reťazcov na paneli s nástrojmi.",
+    translationsPlaceholderDescriptionMobile: "Pridajte prvky do formulára alebo zmeňte filter reťazcov na paneli s nástrojmi.",
     pagePlaceHolderMobile: "Kliknite na tlačidlo \"Pridať otázku\" nižšie a pridajte na stránku nový prvok.",
     panelPlaceHolderMobile: "Kliknite na tlačidlo \"Pridať otázku\" nižšie a pridajte na panel nový prvok.",
     imagePlaceHolderMobile: "Kliknite na tlačidlo nižšie a vyberte obrázok, ktorý chcete nahrať",
@@ -194,6 +206,10 @@ export var skStrings = {
     lg: {
       addNewItem: "Pridať nové pravidlo",
       empty_tab: "Vytvorte pravidlo na prispôsobenie toku prieskumu.",
+      logicPlaceholderTitle: "Žiadne logické pravidlá",
+      logicPlaceholderTitleMobile: "Žiadne logické pravidlá",
+      logicPlaceholderDescription: "Vytvorte pravidlo na prispôsobenie toku prieskumu.",
+      logicPlaceholderDescriptionMobile: "Vytvorte pravidlo na prispôsobenie toku prieskumu.",
       page_visibilityName: "Viditeľnosť strany",
       page_enableName: "Povoliť (zakázať) stránku",
       page_requireName: "Nastavenie požadovanej strany",
@@ -617,6 +633,7 @@ export var skStrings = {
     questionsOrder: "Poradie prvkov na stránke",
     timeLimit: "Maximálny čas na dokončenie prieskumu",
     timeLimitPerPage: "Maximálny čas na dokončenie stránky v rámci prieskumu",
+    showTimer: "Použitie časovača",
     timerLocation: "Zobraziť panel s časovačom",
     timerInfoMode: "Zobraziť režim panela s časovačom",
     renderMode: "Režim vykresľovania",
@@ -875,6 +892,7 @@ export var skStrings = {
       fontSize: "Veľkosť písma",
       scale: "Stupnica",
       cornerRadius: "Polomer rohov",
+      advancedMode: "Pokročilý režim",
       pageTitle: "Písmo názvu",
       pageDescription: "Popisné písmo",
       questionTitle: "Písmo názvu",
@@ -1421,6 +1439,7 @@ export var skStrings = {
       questionsOrder: "Zachová pôvodné poradie otázok alebo ich náhodne vyberie. Možnosť \"Zdediť\" použije nastavenie na úrovni prieskumu (\"Originál\" v predvolenom nastavení). Efekt tohto nastavenia je viditeľný iba na karte Ukážka.",
       navigationButtonsVisibility: "Nastavuje viditeľnosť navigačných tlačidiel na stránke. Možnosť Zdediť použije nastavenie na úrovni prieskumu, ktoré je predvolene nastavené na \"Viditeľné\"."
     },
+    timerLocation: "Nastaví umiestnenie časovača na strane.",
     panelsState: "Vyberte si z: \"Zamknuté\" - používatelia nemôžu rozširovať ani zbaliť panely; \"Zbaliť všetko\" - všetky panely začínajú v zbalenom stave; \"Rozbaliť všetko\" - všetky panely začínajú v rozšírenom stave; \"Prvý rozšírený\" - pôvodne sa rozšíril iba prvý panel.",
     imageLinkName: "Zadajte zdieľaný názov vlastnosti do poľa objektov obsahujúceho URL adresy obrázkov alebo videosúborov, ktoré chcete zobraziť v zozname výberu.",
     choices: "Ľavá hodnota slúži ako ID položky používané v podmienených pravidlách, pravá hodnota sa zobrazuje respondentom.",
@@ -1502,7 +1521,8 @@ export var skStrings = {
     header: {
       inheritWidthFrom: "Možnosť \"Rovnaké ako kontajner\" automaticky upraví šírku oblasti obsahu hlavičky tak, aby sa zmestila do prvku HTML, do ktorého je prieskum umiestnený.",
       textAreaWidth: "Šírka oblasti hlavičky, ktorá obsahuje názov a popis prieskumu, meraná v pixeloch.",
-      overlapEnabled: "Vytvorí spodnú časť hlavičky prekrytú hornou časťou prieskumu."
+      overlapEnabled: "Vytvorí spodnú časť hlavičky prekrytú hornou časťou prieskumu.",
+      mobileHeight: "Ak je nastavená hodnota 0, výška sa vypočíta automaticky, aby sa prispôsobila obsahu hlavičky."
     },
     panellayoutcolumn: {
       effectiveWidth: "Akceptuje hodnoty %.",
@@ -1590,6 +1610,7 @@ export var skStrings = {
     imageFit: "umiestnenie obrázka",
     altText: "Alternatívny text",
     height: "výška",
+    mobileHeight: "Výška na smartfónoch",
     penColor: "farba pera",
     backgroundColor: "farba pozadia",
     templateElements: "Prvky šablóny",
@@ -2730,3 +2751,25 @@ editorLocalization.locales["sk"] = skStrings;
 // ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Kliknutím na ikonu ľubovoľnej kategórie preskúmate nastavenia prieskumu. Ďalšie nastavenia budú k dispozícii po pridaní prvku prieskumu na návrhovú plochu."
 // pe.caseInsensitive: "Case insensitive" => "Nerozlišujú sa veľké a malé písmená"
 // pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Vyberte, či sa veľké a malé písmená v regulárnom výraze musia považovať za ekvivalentné."
+
+// ed.surveyPlaceholderTitle: "Your form is empty" => "Formulár je prázdny"
+// ed.surveyPlaceholderTitleMobile: "Your form is empty" => "Formulár je prázdny"
+// ed.surveyPlaceholderDescription: "Drag an element from the toolbox or click the button below." => "Presuňte prvok z panela s nástrojmi alebo kliknite na tlačidlo nižšie."
+// ed.surveyPlaceholderDescriptionMobile: "Drag an element from the toolbox or click the button below." => "Presuňte prvok z panela s nástrojmi alebo kliknite na tlačidlo nižšie."
+// ed.previewPlaceholderTitle: "No preview" => "Žiadny náhľad"
+// ed.previewPlaceholderTitleMobile: "No preview" => "Žiadny náhľad"
+// ed.previewPlaceholderDescription: "The survey doesn't contain any visible elements." => "Prieskum neobsahuje žiadne viditeľné prvky."
+// ed.previewPlaceholderDescriptionMobile: "The survey doesn't contain any visible elements." => "Prieskum neobsahuje žiadne viditeľné prvky."
+// ed.translationsPlaceholderTitle: "No strings to translate" => "Žiadne reťazce na preklad"
+// ed.translationsPlaceholderTitleMobile: "No strings to translate" => "Žiadne reťazce na preklad"
+// ed.translationsPlaceholderDescription: "Add elements to your form or change the strings filter in the toolbar." => "Pridajte prvky do formulára alebo zmeňte filter reťazcov na paneli s nástrojmi."
+// ed.translationsPlaceholderDescriptionMobile: "Add elements to your form or change the strings filter in the toolbar." => "Pridajte prvky do formulára alebo zmeňte filter reťazcov na paneli s nástrojmi."
+// lg.logicPlaceholderTitle: "No logical rules" => "Žiadne logické pravidlá"
+// lg.logicPlaceholderTitleMobile: "No logical rules" => "Žiadne logické pravidlá"
+// lg.logicPlaceholderDescription: "Create a rule to customize the flow of the survey." => "Vytvorte pravidlo na prispôsobenie toku prieskumu."
+// lg.logicPlaceholderDescriptionMobile: "Create a rule to customize the flow of the survey." => "Vytvorte pravidlo na prispôsobenie toku prieskumu."
+// pe.showTimer: "Use a timer" => "Použitie časovača"
+// theme.advancedMode: "Advanced mode" => "Pokročilý režim"
+// pehelp.timerLocation: "Sets the location of a timer on a page." => "Nastaví umiestnenie časovača na strane."
+// header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Ak je nastavená hodnota 0, výška sa vypočíta automaticky, aby sa prispôsobila obsahu hlavičky."
+// p.mobileHeight: "Height on smartphones" => "Výška na smartfónoch"

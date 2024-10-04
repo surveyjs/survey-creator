@@ -182,6 +182,18 @@ export var mnStrings = {
     pagePlaceHolder: "Хуудас хоосон байна. Багажны хайрцагнаас элементийг чирэх эсвэл доорх товчийг дарна уу.",
     imagePlaceHolder: "Энд зураг чирж унагаах эсвэл доорх товчийг дарж татаж авах зургийг сонгоно уу",
     surveyPlaceHolderMobile: "Доорх \"Асуулт нэмэх\" товчийг дарж формоо үүсгэж эхэлнэ.",
+    surveyPlaceholderTitle: "Таны маягт хоосон байна",
+    surveyPlaceholderTitleMobile: "Таны маягт хоосон байна",
+    surveyPlaceholderDescription: "Toolbox-аас элементийг чирч авах эсвэл доорх товчийг дар.",
+    surveyPlaceholderDescriptionMobile: "Toolbox-аас элементийг чирч авах эсвэл доорх товчийг дар.",
+    previewPlaceholderTitle: "Урьдчилсан танилцуулга байхгүй",
+    previewPlaceholderTitleMobile: "Урьдчилсан танилцуулга байхгүй",
+    previewPlaceholderDescription: "Судалгаанд ямар ч үзэгдэх зүйл байдаггүй.",
+    previewPlaceholderDescriptionMobile: "Судалгаанд ямар ч үзэгдэх зүйл байдаггүй.",
+    translationsPlaceholderTitle: "Орчуулах мөр байхгүй",
+    translationsPlaceholderTitleMobile: "Орчуулах мөр байхгүй",
+    translationsPlaceholderDescription: "Маягт дээрээ элементүүдийг нэмэх эсвэл toolbar дээрх strings шүүлтүүрийг өөрчил.",
+    translationsPlaceholderDescriptionMobile: "Маягт дээрээ элементүүдийг нэмэх эсвэл toolbar дээрх strings шүүлтүүрийг өөрчил.",
     pagePlaceHolderMobile: "Хуудас дээр шинэ элемент нэмэхийн тулд доорх \"Асуулт нэмэх\" товчийг дарна уу.",
     panelPlaceHolderMobile: "Доорх \"Асуулт нэмэх\" товчийг дарж панел дээр шинэ элемент нэмнэ.",
     imagePlaceHolderMobile: "Доорх товчийг дарж татаж авах зургийг сонгоно уу",
@@ -194,6 +206,10 @@ export var mnStrings = {
     lg: {
       addNewItem: "Шинэ дүрэм нэмэх",
       empty_tab: "Санал асуулгын урсгалыг өөрчлөх дүрэм үүсгэнэ үү.",
+      logicPlaceholderTitle: "Логик дүрэм байхгүй",
+      logicPlaceholderTitleMobile: "Логик дүрэм байхгүй",
+      logicPlaceholderDescription: "Судалгааны явцыг тохируулах дүрэм зохио.",
+      logicPlaceholderDescriptionMobile: "Судалгааны явцыг тохируулах дүрэм зохио.",
       page_visibilityName: "Хуудас харуулах (нуух)",
       page_enableName: "Хуудас идэвхжүүлэх (идэвхгүй болгох)",
       page_requireName: "Шаардлагатай хуудас хийх",
@@ -617,6 +633,7 @@ export var mnStrings = {
     questionsOrder: "Хуудас дээрх элементийн дараалал",
     timeLimit: "Санал асуулга бөглөж дуусах хугацаа (секундээр)",
     timeLimitPerPage: "Нэг хуудас бөглөж дуусах хугацаа (секундээр)",
+    showTimer: "Цаг хэмжигч ашигла",
     timerLocation: "Тоолуурын байршил",
     timerInfoMode: "Тоолуурын горим",
     renderMode: "Панелийн дэлгэцийн горим",
@@ -875,6 +892,7 @@ export var mnStrings = {
       fontSize: "Фонтын хэмжээ",
       scale: "Хэмжүүр",
       cornerRadius: "Булангийн радиус",
+      advancedMode: "Дэвшилтэт режим",
       pageTitle: "Нүүр фонт",
       pageDescription: "Дүрслэлийн фонт",
       questionTitle: "Нүүр фонт",
@@ -1421,6 +1439,7 @@ export var mnStrings = {
       questionsOrder: "Асуултуудын анхны дарааллыг хадгалах эсвэл санамсаргүйгээр авч явдаг. \"Өв залгамж\" сонголт нь судалгааны түвшний тохиргоог (\"Оригинал\" дефолтоор) хэрэгжүүлдэг. Энэ тохиргооны үр нөлөө нь зөвхөн Preview таб-д харагдана.",
       navigationButtonsVisibility: "Хуудсан дээр навигацийн товчны харагдах байдлыг тогтоо. \"Өв залгамжлах\" хувилбар нь \"Үзэгдэх\" гэсэн сонголт бүхий судалгааны түвшний тохиргоог хэрэгжүүлдэг."
     },
+    timerLocation: "Хуудас дээрх цаг хэмжигчийн байрлалыг тогтооно.",
     panelsState: "Сонгоно уу: \"Locked\" - хэрэглэгчид панелуудыг өргөтгөх, нураах боломжгүй; \"Бүх нуралт\" - бүх панел нурсан байдлаас эхэлнэ; \"Бүх хүрээг өргөтгөнө\" - бүх панелууд өргөтгөсөн байдлаас эхэлнэ; \"First expanded\" - зөвхөн эхний панел нь эхэндээ өргөжсөн.",
     imageLinkName: "Сонгосон жагсаалтанд харуулахыг хүссэн зураг эсвэл видео файл URL-уудыг агуулсан олон тооны эд зүйлсийн дотор хуваалцсан өмчийн нэрийг оруулна уу.",
     choices: "Зүүн үнэ цэнэ нь нөхцөлийн дүрэмд хэрэглэгддэг зүйл ID, зөв үнэ цэнийг хариулагчдад үзүүлдэг.",
@@ -1502,7 +1521,8 @@ export var mnStrings = {
     header: {
       inheritWidthFrom: "\"As as container\" сонголт автоматаар судалгаа хийсэн HTML элементэд тохируулахын тулд толгойн агуулгын хэсгийн өргөнийг тохируулдаг.",
       textAreaWidth: "Пикселээр хэмжсэн судалгааны нэр, тодорхойлолт бүхий толгойн хэсгийн өргөн.",
-      overlapEnabled: "Толгойн доод хэсгийг судалгааны дээд хэсэгт оруулав."
+      overlapEnabled: "Толгойн доод хэсгийг судалгааны дээд хэсэгт оруулав.",
+      mobileHeight: "0 гэж тохируулбал өндөрийг гарчгийн агуулгад тохируулахын тулд автоматаар тооцоолдог."
     },
     panellayoutcolumn: {
       effectiveWidth: "Үнэт зүйлсийг %-ийг хүлээн зөвшөөрдөг.",
@@ -1590,6 +1610,7 @@ export var mnStrings = {
     imageFit: "Зураг багтаах",
     altText: "Тайлбар",
     height: "Өндөр",
+    mobileHeight: "Ухаалаг гар утасны өндөр",
     penColor: "Балны өнгө",
     backgroundColor: "Дэвсгэр өнгө",
     templateElements: "Загварын элементүүд",
@@ -2433,3 +2454,25 @@ editorLocalization.locales["mn"] = mnStrings;
 // ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Судалгааны тохиргоог судлахын тулд ямар ч категорийн зургыг дарна уу. Дизайны гадаргуу дээр судалгааны элемент нэмсний дараа нэмэлт тохиргоо хийх боломжтой болно."
 // pe.caseInsensitive: "Case insensitive" => "Кейс үл мэдрэмтгий"
 // pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Тогтмол илэрхийлэлд байгаа uppercase болон lowercase үсгийг эн тэнцүү гэж үзэх ёстой эсэхийг сонгоно уу."
+
+// ed.surveyPlaceholderTitle: "Your form is empty" => "Таны маягт хоосон байна"
+// ed.surveyPlaceholderTitleMobile: "Your form is empty" => "Таны маягт хоосон байна"
+// ed.surveyPlaceholderDescription: "Drag an element from the toolbox or click the button below." => "Toolbox-аас элементийг чирч авах эсвэл доорх товчийг дар."
+// ed.surveyPlaceholderDescriptionMobile: "Drag an element from the toolbox or click the button below." => "Toolbox-аас элементийг чирч авах эсвэл доорх товчийг дар."
+// ed.previewPlaceholderTitle: "No preview" => "Урьдчилсан танилцуулга байхгүй"
+// ed.previewPlaceholderTitleMobile: "No preview" => "Урьдчилсан танилцуулга байхгүй"
+// ed.previewPlaceholderDescription: "The survey doesn't contain any visible elements." => "Судалгаанд ямар ч үзэгдэх зүйл байдаггүй."
+// ed.previewPlaceholderDescriptionMobile: "The survey doesn't contain any visible elements." => "Судалгаанд ямар ч үзэгдэх зүйл байдаггүй."
+// ed.translationsPlaceholderTitle: "No strings to translate" => "Орчуулах мөр байхгүй"
+// ed.translationsPlaceholderTitleMobile: "No strings to translate" => "Орчуулах мөр байхгүй"
+// ed.translationsPlaceholderDescription: "Add elements to your form or change the strings filter in the toolbar." => "Маягт дээрээ элементүүдийг нэмэх эсвэл toolbar дээрх strings шүүлтүүрийг өөрчил."
+// ed.translationsPlaceholderDescriptionMobile: "Add elements to your form or change the strings filter in the toolbar." => "Маягт дээрээ элементүүдийг нэмэх эсвэл toolbar дээрх strings шүүлтүүрийг өөрчил."
+// lg.logicPlaceholderTitle: "No logical rules" => "Логик дүрэм байхгүй"
+// lg.logicPlaceholderTitleMobile: "No logical rules" => "Логик дүрэм байхгүй"
+// lg.logicPlaceholderDescription: "Create a rule to customize the flow of the survey." => "Судалгааны явцыг тохируулах дүрэм зохио."
+// lg.logicPlaceholderDescriptionMobile: "Create a rule to customize the flow of the survey." => "Судалгааны явцыг тохируулах дүрэм зохио."
+// pe.showTimer: "Use a timer" => "Цаг хэмжигч ашигла"
+// theme.advancedMode: "Advanced mode" => "Дэвшилтэт режим"
+// pehelp.timerLocation: "Sets the location of a timer on a page." => "Хуудас дээрх цаг хэмжигчийн байрлалыг тогтооно."
+// header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "0 гэж тохируулбал өндөрийг гарчгийн агуулгад тохируулахын тулд автоматаар тооцоолдог."
+// p.mobileHeight: "Height on smartphones" => "Ухаалаг гар утасны өндөр"

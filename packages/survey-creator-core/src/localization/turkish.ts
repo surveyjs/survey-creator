@@ -182,6 +182,18 @@ export var turkishStrings = {
     pagePlaceHolder: "Sayfa boş. Araç kutusundan bir öğeyi sürükleyin veya aşağıdaki düğmeyi tıklatın.",
     imagePlaceHolder: "Bir resmi buraya sürükleyip bırakın veya aşağıdaki düğmeyi tıklayın ve yüklemek için bir resim seçin",
     surveyPlaceHolderMobile: "Formunuzu oluşturmaya başlamak için aşağıdaki \"Soru Ekle\" butonuna tıklayın.",
+    surveyPlaceholderTitle: "Formunuz boş",
+    surveyPlaceholderTitleMobile: "Formunuz boş",
+    surveyPlaceholderDescription: "Araç kutusundan bir öğeyi sürükleyin veya aşağıdaki düğmeyi tıklayın.",
+    surveyPlaceholderDescriptionMobile: "Araç kutusundan bir öğeyi sürükleyin veya aşağıdaki düğmeyi tıklayın.",
+    previewPlaceholderTitle: "Önizleme yok",
+    previewPlaceholderTitleMobile: "Önizleme yok",
+    previewPlaceholderDescription: "Anket herhangi bir görünür unsur içermiyor.",
+    previewPlaceholderDescriptionMobile: "Anket herhangi bir görünür unsur içermiyor.",
+    translationsPlaceholderTitle: "Çevrilecek dize yok",
+    translationsPlaceholderTitleMobile: "Çevrilecek dize yok",
+    translationsPlaceholderDescription: "Formunuza öğeler ekleyin veya araç çubuğundaki dizeler filtresini değiştirin.",
+    translationsPlaceholderDescriptionMobile: "Formunuza öğeler ekleyin veya araç çubuğundaki dizeler filtresini değiştirin.",
     pagePlaceHolderMobile: "Sayfaya yeni bir öğe eklemek için aşağıdaki \"Soru Ekle\" düğmesini tıklayın.",
     panelPlaceHolderMobile: "Panele yeni bir öğe eklemek için aşağıdaki \"Soru Ekle\" düğmesini tıklayın.",
     imagePlaceHolderMobile: "Aşağıdaki düğmeyi tıklayın ve yüklemek için bir resim seçin",
@@ -194,6 +206,10 @@ export var turkishStrings = {
     lg: {
       addNewItem: "Yeni Kural Ekle",
       empty_tab: "Anketin akışını özelleştirmek için bir kural oluşturun.",
+      logicPlaceholderTitle: "Mantıksal kural yok",
+      logicPlaceholderTitleMobile: "Mantıksal kural yok",
+      logicPlaceholderDescription: "Anketin akışını özelleştirmek için bir kural oluşturun.",
+      logicPlaceholderDescriptionMobile: "Anketin akışını özelleştirmek için bir kural oluşturun.",
       page_visibilityName: "Sayfa görünürse",
       page_enableName: "Sayfayı etkinleştir (devre dışı bırak)",
       page_requireName: "Sayfayı gerekli hale getirme",
@@ -617,6 +633,7 @@ export var turkishStrings = {
     questionsOrder: "Sayfadaki öğelerin sırası",
     timeLimit: "Anketi bitirmek için maksimum süre",
     timeLimitPerPage: "Ankette bir sayfayı bitirmek için maksimum süre",
+    showTimer: "Bir zamanlayıcı kullanın",
     timerLocation: "Zamanlayıcı panelini göster",
     timerInfoMode: "Zamanlayıcı paneli modunu göster",
     renderMode: "İşleme modu",
@@ -875,6 +892,7 @@ export var turkishStrings = {
       fontSize: "Yazı boyutu",
       scale: "Ölçeklemek",
       cornerRadius: "Köşe yarıçapı",
+      advancedMode: "Gelişmiş mod",
       pageTitle: "Başlık yazı tipi",
       pageDescription: "Açıklama yazı tipi",
       questionTitle: "Başlık yazı tipi",
@@ -1421,6 +1439,7 @@ export var turkishStrings = {
       questionsOrder: "Soruların orijinal sırasını korur veya rastgele hale getirir. \"Devral\" seçeneği, anket düzeyindeki ayarı (varsayılan olarak \"Orijinal\") uygular. Bu ayarın etkisi yalnızca Önizleme sekmesinde görünür.",
       navigationButtonsVisibility: "Sayfadaki gezinme düğmelerinin görünürlüğünü ayarlar. \"Devral\" seçeneği, varsayılan olarak \"Görünür\" olan anket düzeyi ayarını uygular."
     },
+    timerLocation: "Sayfadaki bir zamanlayıcının konumunu ayarlar.",
     panelsState: "Şunlar arasından seçim yapın: \"Kilitli\" - kullanıcılar panelleri genişletemez veya daraltamaz; \"Tümünü daralt\" - tüm paneller daraltılmış durumda başlar; \"Tümünü genişlet\" - tüm paneller genişletilmiş bir durumda başlar; \"İlk genişletildi\" - başlangıçta yalnızca ilk panel genişletilir.",
     imageLinkName: "Seçim listesinde görüntülemek istediğiniz görüntü veya video dosyası URL'lerini içeren nesne dizisi içinde paylaşılan bir özellik adı girin.",
     choices: "Soldaki değer, koşullu kurallarda kullanılan bir öğe kimliği görevi görür, sağdaki değer yanıtlayanlara gösterilir.",
@@ -1502,7 +1521,8 @@ export var turkishStrings = {
     header: {
       inheritWidthFrom: "\"Kapsayıcı ile aynı\" seçeneği, başlık içerik alanı genişliğini anketin yerleştirildiği HTML öğesine sığacak şekilde otomatik olarak ayarlar.",
       textAreaWidth: "Anket başlığını ve açıklamasını içeren üstbilgi alanının piksel cinsinden genişliği.",
-      overlapEnabled: "Üstbilginin alt kısmını, anketin üst kısmıyla kaplanmış hale getirir."
+      overlapEnabled: "Üstbilginin alt kısmını, anketin üst kısmıyla kaplanmış hale getirir.",
+      mobileHeight: "0 olarak ayarlandığında, üstbilginin içeriğine uyum sağlamak için yükseklik otomatik olarak hesaplanır."
     },
     panellayoutcolumn: {
       effectiveWidth: "% değerlerini kabul eder.",
@@ -1590,6 +1610,7 @@ export var turkishStrings = {
     imageFit: "Görsel'u uyumlandır",
     altText: "Alternatif metin",
     height: "Yükseklik",
+    mobileHeight: "Akıllı telefonlarda yükseklik",
     penColor: "Kalem rengi",
     backgroundColor: "Arka plan rengi",
     templateElements: "Şablon öğeleri",
@@ -2772,3 +2793,25 @@ editorLocalization.locales["tr"] = turkishStrings;
 // ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Anket ayarlarını keşfetmek için herhangi bir kategori simgesini tıklayın. Tasarım yüzeyine bir anket öğesi eklediğinizde ek ayarlar kullanılabilir hale gelir."
 // pe.caseInsensitive: "Case insensitive" => "Büyük/küçük harfe duyarlı değil"
 // pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Normal ifadedeki büyük ve küçük harflerin eşdeğer olarak kabul edilmesi gerekip gerekmediğini seçin."
+
+// ed.surveyPlaceholderTitle: "Your form is empty" => "Formunuz boş"
+// ed.surveyPlaceholderTitleMobile: "Your form is empty" => "Formunuz boş"
+// ed.surveyPlaceholderDescription: "Drag an element from the toolbox or click the button below." => "Araç kutusundan bir öğeyi sürükleyin veya aşağıdaki düğmeyi tıklayın."
+// ed.surveyPlaceholderDescriptionMobile: "Drag an element from the toolbox or click the button below." => "Araç kutusundan bir öğeyi sürükleyin veya aşağıdaki düğmeyi tıklayın."
+// ed.previewPlaceholderTitle: "No preview" => "Önizleme yok"
+// ed.previewPlaceholderTitleMobile: "No preview" => "Önizleme yok"
+// ed.previewPlaceholderDescription: "The survey doesn't contain any visible elements." => "Anket herhangi bir görünür unsur içermiyor."
+// ed.previewPlaceholderDescriptionMobile: "The survey doesn't contain any visible elements." => "Anket herhangi bir görünür unsur içermiyor."
+// ed.translationsPlaceholderTitle: "No strings to translate" => "Çevrilecek dize yok"
+// ed.translationsPlaceholderTitleMobile: "No strings to translate" => "Çevrilecek dize yok"
+// ed.translationsPlaceholderDescription: "Add elements to your form or change the strings filter in the toolbar." => "Formunuza öğeler ekleyin veya araç çubuğundaki dizeler filtresini değiştirin."
+// ed.translationsPlaceholderDescriptionMobile: "Add elements to your form or change the strings filter in the toolbar." => "Formunuza öğeler ekleyin veya araç çubuğundaki dizeler filtresini değiştirin."
+// lg.logicPlaceholderTitle: "No logical rules" => "Mantıksal kural yok"
+// lg.logicPlaceholderTitleMobile: "No logical rules" => "Mantıksal kural yok"
+// lg.logicPlaceholderDescription: "Create a rule to customize the flow of the survey." => "Anketin akışını özelleştirmek için bir kural oluşturun."
+// lg.logicPlaceholderDescriptionMobile: "Create a rule to customize the flow of the survey." => "Anketin akışını özelleştirmek için bir kural oluşturun."
+// pe.showTimer: "Use a timer" => "Bir zamanlayıcı kullanın"
+// theme.advancedMode: "Advanced mode" => "Gelişmiş mod"
+// pehelp.timerLocation: "Sets the location of a timer on a page." => "Sayfadaki bir zamanlayıcının konumunu ayarlar."
+// header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "0 olarak ayarlandığında, üstbilginin içeriğine uyum sağlamak için yükseklik otomatik olarak hesaplanır."
+// p.mobileHeight: "Height on smartphones" => "Akıllı telefonlarda yükseklik"

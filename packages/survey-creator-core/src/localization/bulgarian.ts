@@ -182,6 +182,18 @@ export var bgStrings = {
     pagePlaceHolder: "Страницата е празна. Плъзнете елемент от кутията с инструменти или щракнете върху бутона по-долу.",
     imagePlaceHolder: "Плъзни и пусни изображение тук или щракни върху бутона по-долу и избери изображение за качване.",
     surveyPlaceHolderMobile: "Кликнете върху бутона \"Добавяне на въпрос\" по-долу, за да започнете да създавате своя формуляр.",
+    surveyPlaceholderTitle: "Вашият формуляр е празен",
+    surveyPlaceholderTitleMobile: "Вашият формуляр е празен",
+    surveyPlaceholderDescription: "Плъзнете елемент от кутията с инструменти или щракнете върху бутона по-долу.",
+    surveyPlaceholderDescriptionMobile: "Плъзнете елемент от кутията с инструменти или щракнете върху бутона по-долу.",
+    previewPlaceholderTitle: "Няма предварителен преглед",
+    previewPlaceholderTitleMobile: "Няма предварителен преглед",
+    previewPlaceholderDescription: "Проучването не съдържа никакви видими елементи.",
+    previewPlaceholderDescriptionMobile: "Проучването не съдържа никакви видими елементи.",
+    translationsPlaceholderTitle: "Няма низове за превод",
+    translationsPlaceholderTitleMobile: "Няма низове за превод",
+    translationsPlaceholderDescription: "Добавете елементи към вашата форма или променете филтъра за низове в лентата с инструменти.",
+    translationsPlaceholderDescriptionMobile: "Добавете елементи към вашата форма или променете филтъра за низове в лентата с инструменти.",
     pagePlaceHolderMobile: "Кликнете върху бутона \"Добавяне на въпрос\" по-долу, за да добавите нов елемент към страницата.",
     panelPlaceHolderMobile: "Кликнете върху бутона \"Добавяне на въпрос\" по-долу, за да добавите нов елемент към панела.",
     imagePlaceHolderMobile: "Кликнете върху бутона по-долу и изберете изображение за качване",
@@ -194,6 +206,10 @@ export var bgStrings = {
     lg: {
       addNewItem: "Добавяне на ново правило",
       empty_tab: "Създай правило за персонализиране на анкетата.",
+      logicPlaceholderTitle: "Няма логически правила",
+      logicPlaceholderTitleMobile: "Няма логически правила",
+      logicPlaceholderDescription: "Създайте правило за персонализиране на потока на проучването.",
+      logicPlaceholderDescriptionMobile: "Създайте правило за персонализиране на потока на проучването.",
       page_visibilityName: "Показване (скриване) на страница",
       page_enableName: "Активиране (деактивиране) на страница",
       page_requireName: "Направи страницата задължителна",
@@ -617,6 +633,7 @@ export var bgStrings = {
     questionsOrder: "Подреждане на елементите на страницата",
     timeLimit: "Време за завършване на анкетата (в секунди)",
     timeLimitPerPage: "Времево ограничение за завършване на една страница (в секунди)",
+    showTimer: "Използване на таймер",
     timerLocation: "Местоположение на таймера",
     timerInfoMode: "Режим на таймера",
     renderMode: "Режим на показване на панела",
@@ -875,6 +892,7 @@ export var bgStrings = {
       fontSize: "Размер на шрифта",
       scale: "Мащаб",
       cornerRadius: "Радиус на ъгъла",
+      advancedMode: "Разширен режим",
       pageTitle: "Шрифт на заглавието",
       pageDescription: "Шрифт за описание",
       questionTitle: "Шрифт на заглавието",
@@ -1421,6 +1439,7 @@ export var bgStrings = {
       questionsOrder: "Запазва първоначалния ред на въпросите или ги рандомизира. Опцията \"Наследяване\" прилага настройката на ниво проучване (\"Оригинал\" по подразбиране). Ефектът от тази настройка се вижда само в раздела Визуализация .",
       navigationButtonsVisibility: "Задава видимостта на бутоните за навигация на страницата. Опцията \"Наследяване\" прилага настройката на ниво проучване, която по подразбиране е \"Видима\"."
     },
+    timerLocation: "Задава местоположението на таймер на страница.",
     panelsState: "Изберете от: \"Заключени\" - потребителите не могат да разширяват или свиват панели; \"Свиване на всички\" - всички панели започват в срутено състояние; \"Разширяване на всички\" - всички панели започват в разширено състояние; \"Първо разширен\" - само първият панел първоначално се разширява.",
     imageLinkName: "Въведете име на споделено свойство в масива от обекти, съдържащ URL адресите на изображения или видеофайлове, които искате да покажете в списъка за избор.",
     choices: "Лявата стойност служи като ИД на артикул, използван в условни правила, дясната стойност се показва на респондентите.",
@@ -1502,7 +1521,8 @@ export var bgStrings = {
     header: {
       inheritWidthFrom: "Опцията \"Същото като контейнера\" автоматично регулира ширината на областта на съдържанието на заглавката, за да се побере в HTML елемента, в който е поставена анкетата.",
       textAreaWidth: "Ширината на областта на заглавката, която съдържа заглавието и описанието на проучването, измерена в пиксели.",
-      overlapEnabled: "Прави долната част на заглавката наслагвана с горната част на проучването."
+      overlapEnabled: "Прави долната част на заглавката наслагвана с горната част на проучването.",
+      mobileHeight: "Когато е зададена на 0, височината се изчислява автоматично, за да побере съдържанието на заглавката."
     },
     panellayoutcolumn: {
       effectiveWidth: "Приема стойности %.",
@@ -1590,6 +1610,7 @@ export var bgStrings = {
     imageFit: "Напасване на изображението",
     altText: "Алтернативен текст",
     height: "Височина",
+    mobileHeight: "Височина на смартфони",
     penColor: "Цвят на писалката",
     backgroundColor: "Цвят на фона",
     templateElements: "Елементи на шаблона",
@@ -2340,3 +2361,25 @@ editorLocalization.locales["bg"] = bgStrings;
 // ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Щракнете върху която и да е икона на категория, за да разгледате настройките на проучването. Допълнителни настройки ще станат налични, след като добавите елемент на проучване към повърхността за проектиране."
 // pe.caseInsensitive: "Case insensitive" => "Без чувствителност към малки и големи букви"
 // pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Изберете дали главните и малките букви в регулярния израз трябва да се третират като еквивалентни."
+
+// ed.surveyPlaceholderTitle: "Your form is empty" => "Вашият формуляр е празен"
+// ed.surveyPlaceholderTitleMobile: "Your form is empty" => "Вашият формуляр е празен"
+// ed.surveyPlaceholderDescription: "Drag an element from the toolbox or click the button below." => "Плъзнете елемент от кутията с инструменти или щракнете върху бутона по-долу."
+// ed.surveyPlaceholderDescriptionMobile: "Drag an element from the toolbox or click the button below." => "Плъзнете елемент от кутията с инструменти или щракнете върху бутона по-долу."
+// ed.previewPlaceholderTitle: "No preview" => "Няма предварителен преглед"
+// ed.previewPlaceholderTitleMobile: "No preview" => "Няма предварителен преглед"
+// ed.previewPlaceholderDescription: "The survey doesn't contain any visible elements." => "Проучването не съдържа никакви видими елементи."
+// ed.previewPlaceholderDescriptionMobile: "The survey doesn't contain any visible elements." => "Проучването не съдържа никакви видими елементи."
+// ed.translationsPlaceholderTitle: "No strings to translate" => "Няма низове за превод"
+// ed.translationsPlaceholderTitleMobile: "No strings to translate" => "Няма низове за превод"
+// ed.translationsPlaceholderDescription: "Add elements to your form or change the strings filter in the toolbar." => "Добавете елементи към вашата форма или променете филтъра за низове в лентата с инструменти."
+// ed.translationsPlaceholderDescriptionMobile: "Add elements to your form or change the strings filter in the toolbar." => "Добавете елементи към вашата форма или променете филтъра за низове в лентата с инструменти."
+// lg.logicPlaceholderTitle: "No logical rules" => "Няма логически правила"
+// lg.logicPlaceholderTitleMobile: "No logical rules" => "Няма логически правила"
+// lg.logicPlaceholderDescription: "Create a rule to customize the flow of the survey." => "Създайте правило за персонализиране на потока на проучването."
+// lg.logicPlaceholderDescriptionMobile: "Create a rule to customize the flow of the survey." => "Създайте правило за персонализиране на потока на проучването."
+// pe.showTimer: "Use a timer" => "Използване на таймер"
+// theme.advancedMode: "Advanced mode" => "Разширен режим"
+// pehelp.timerLocation: "Sets the location of a timer on a page." => "Задава местоположението на таймер на страница."
+// header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Когато е зададена на 0, височината се изчислява автоматично, за да побере съдържанието на заглавката."
+// p.mobileHeight: "Height on smartphones" => "Височина на смартфони"

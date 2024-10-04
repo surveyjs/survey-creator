@@ -182,6 +182,18 @@ export var msStrings = {
     pagePlaceHolder: "Halaman kosong. Seret elemen dari kotak alat atau klik butang di bawah.",
     imagePlaceHolder: "Seret dan lepaskan imej di sini atau klik butang di bawah dan pilih imej untuk dimuat naik",
     surveyPlaceHolderMobile: "Klik butang \"Tambah Soalan\" di bawah untuk mula membuat borang anda.",
+    surveyPlaceholderTitle: "Borang anda kosong",
+    surveyPlaceholderTitleMobile: "Borang anda kosong",
+    surveyPlaceholderDescription: "Seret elemen daripada kotak alat atau klik butang di bawah.",
+    surveyPlaceholderDescriptionMobile: "Seret elemen daripada kotak alat atau klik butang di bawah.",
+    previewPlaceholderTitle: "Tiada pratonton",
+    previewPlaceholderTitleMobile: "Tiada pratonton",
+    previewPlaceholderDescription: "Tinjauan tidak mengandungi sebarang elemen yang boleh dilihat.",
+    previewPlaceholderDescriptionMobile: "Tinjauan tidak mengandungi sebarang elemen yang boleh dilihat.",
+    translationsPlaceholderTitle: "Tiada tali untuk diterjemahkan",
+    translationsPlaceholderTitleMobile: "Tiada tali untuk diterjemahkan",
+    translationsPlaceholderDescription: "Tambah elemen pada borang anda atau tukar penapis rentetan dalam bar alat.",
+    translationsPlaceholderDescriptionMobile: "Tambah elemen pada borang anda atau tukar penapis rentetan dalam bar alat.",
     pagePlaceHolderMobile: "Klik butang \"Tambah Soalan\" di bawah untuk menambah elemen baru ke halaman.",
     panelPlaceHolderMobile: "Klik butang \"Tambah Soalan\" di bawah untuk menambah elemen baru ke panel.",
     imagePlaceHolderMobile: "Klik butang di bawah dan pilih imej untuk dimuat naik",
@@ -194,6 +206,10 @@ export var msStrings = {
     lg: {
       addNewItem: "Tambah peraturan baru",
       empty_tab: "Cipta peraturan untuk menyesuaikan aliran tinjauan.",
+      logicPlaceholderTitle: "Tiada peraturan logik",
+      logicPlaceholderTitleMobile: "Tiada peraturan logik",
+      logicPlaceholderDescription: "Buat peraturan untuk menyesuaikan aliran tinjauan.",
+      logicPlaceholderDescriptionMobile: "Buat peraturan untuk menyesuaikan aliran tinjauan.",
       page_visibilityName: "Kebolehlihatan halaman",
       page_enableName: "Halaman Dayakan (nyahdayakan)",
       page_requireName: "Buat halaman diperlukan",
@@ -617,6 +633,7 @@ export var msStrings = {
     questionsOrder: "Susunan elemen pada halaman",
     timeLimit: "Masa maksimum untuk menyelesaikan tinjauan",
     timeLimitPerPage: "Masa maksimum untuk menyelesaikan halaman dalam tinjauan",
+    showTimer: "Gunakan pemasa",
     timerLocation: "Tunjukkan panel pemasa",
     timerInfoMode: "Tunjukkan mod panel pemasa",
     renderMode: "Mod penyampaian",
@@ -875,6 +892,7 @@ export var msStrings = {
       fontSize: "Saiz fon",
       scale: "Skala",
       cornerRadius: "Jejari penjuru",
+      advancedMode: "Mod lanjutan",
       pageTitle: "Fon tajuk",
       pageDescription: "Fon perihalan",
       questionTitle: "Fon tajuk",
@@ -1421,6 +1439,7 @@ export var msStrings = {
       questionsOrder: "Mengekalkan susunan soalan asal atau rawak mereka. Pilihan \"Warisan\" menggunakan seting peringkat tinjauan (\"Asal\" secara lalai). Kesan seting ini hanya kelihatan dalam tab Pratonton.",
       navigationButtonsVisibility: "Mengesetkan keterlihatan butang navigasi pada halaman. Opsyen \"Warisan\" menggunakan seting aras tinjauan, yang lalai kepada \"Boleh Dilihat\"."
     },
+    timerLocation: "Menetapkan lokasi pemasa pada halaman.",
     panelsState: "Pilih daripada: \"Dikunci\" - pengguna tidak boleh mengembangkan atau meruntuhkan panel; \"Runtuhkan semua\" - semua panel bermula dalam keadaan runtuh; \"Kembangkan semua\" - semua panel bermula dalam keadaan yang diperluaskan; \"Pertama diperluaskan\" - hanya panel pertama yang pada mulanya diperluaskan.",
     imageLinkName: "Masukkan nama sifat dikongsi dalam tatasusunan objek yang mengandungi URL fail imej atau video yang anda ingin paparkan dalam senarai pilihan.",
     choices: "Nilai kiri berfungsi sebagai ID item yang digunakan dalam peraturan bersyarat, nilai yang betul dipaparkan kepada responden.",
@@ -1502,7 +1521,8 @@ export var msStrings = {
     header: {
       inheritWidthFrom: "Pilihan \"Sama seperti bekas\" melaraskan secara automatik lebar kawasan kandungan pengepala agar sesuai dengan elemen HTML tempat tinjauan diletakkan.",
       textAreaWidth: "Lebar kawasan pengepala yang mengandungi tajuk dan perihalan tinjauan, diukur dalam piksel.",
-      overlapEnabled: "Menjadikan bahagian bawah pengepala bertindih dengan bahagian atas tinjauan."
+      overlapEnabled: "Menjadikan bahagian bawah pengepala bertindih dengan bahagian atas tinjauan.",
+      mobileHeight: "Apabila ditetapkan kepada 0, ketinggian dikira secara automatik untuk menampung kandungan pengepala."
     },
     panellayoutcolumn: {
       effectiveWidth: "Menerima nilai %.",
@@ -1590,6 +1610,7 @@ export var msStrings = {
     imageFit: "Muat imej",
     altText: "Teks alt",
     height: "tinggi",
+    mobileHeight: "Ketinggian pada telefon pintar",
     penColor: "Warna pen",
     backgroundColor: "Warna latar belakang",
     templateElements: "Unsur templat",
@@ -2730,3 +2751,25 @@ editorLocalization.locales["ms"] = msStrings;
 // ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Klik mana-mana ikon kategori untuk meneroka tetapan tinjauan. Seting tambahan akan tersedia sebaik sahaja anda menambah elemen tinjauan pada permukaan reka bentuk."
 // pe.caseInsensitive: "Case insensitive" => "Tidak sensitif huruf besar"
 // pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Pilih jika huruf besar dan huruf kecil dalam ungkapan biasa mesti dianggap sebagai setara."
+
+// ed.surveyPlaceholderTitle: "Your form is empty" => "Borang anda kosong"
+// ed.surveyPlaceholderTitleMobile: "Your form is empty" => "Borang anda kosong"
+// ed.surveyPlaceholderDescription: "Drag an element from the toolbox or click the button below." => "Seret elemen daripada kotak alat atau klik butang di bawah."
+// ed.surveyPlaceholderDescriptionMobile: "Drag an element from the toolbox or click the button below." => "Seret elemen daripada kotak alat atau klik butang di bawah."
+// ed.previewPlaceholderTitle: "No preview" => "Tiada pratonton"
+// ed.previewPlaceholderTitleMobile: "No preview" => "Tiada pratonton"
+// ed.previewPlaceholderDescription: "The survey doesn't contain any visible elements." => "Tinjauan tidak mengandungi sebarang elemen yang boleh dilihat."
+// ed.previewPlaceholderDescriptionMobile: "The survey doesn't contain any visible elements." => "Tinjauan tidak mengandungi sebarang elemen yang boleh dilihat."
+// ed.translationsPlaceholderTitle: "No strings to translate" => "Tiada tali untuk diterjemahkan"
+// ed.translationsPlaceholderTitleMobile: "No strings to translate" => "Tiada tali untuk diterjemahkan"
+// ed.translationsPlaceholderDescription: "Add elements to your form or change the strings filter in the toolbar." => "Tambah elemen pada borang anda atau tukar penapis rentetan dalam bar alat."
+// ed.translationsPlaceholderDescriptionMobile: "Add elements to your form or change the strings filter in the toolbar." => "Tambah elemen pada borang anda atau tukar penapis rentetan dalam bar alat."
+// lg.logicPlaceholderTitle: "No logical rules" => "Tiada peraturan logik"
+// lg.logicPlaceholderTitleMobile: "No logical rules" => "Tiada peraturan logik"
+// lg.logicPlaceholderDescription: "Create a rule to customize the flow of the survey." => "Buat peraturan untuk menyesuaikan aliran tinjauan."
+// lg.logicPlaceholderDescriptionMobile: "Create a rule to customize the flow of the survey." => "Buat peraturan untuk menyesuaikan aliran tinjauan."
+// pe.showTimer: "Use a timer" => "Gunakan pemasa"
+// theme.advancedMode: "Advanced mode" => "Mod lanjutan"
+// pehelp.timerLocation: "Sets the location of a timer on a page." => "Menetapkan lokasi pemasa pada halaman."
+// header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Apabila ditetapkan kepada 0, ketinggian dikira secara automatik untuk menampung kandungan pengepala."
+// p.mobileHeight: "Height on smartphones" => "Ketinggian pada telefon pintar"

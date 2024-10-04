@@ -182,6 +182,18 @@ var germanTranslation = {
     pagePlaceHolder: "Die Seite ist leer. Ziehen Sie ein Element aus der Toolbox oder klicken Sie auf die Schaltfläche unten.",
     imagePlaceHolder: "Ziehen Sie ein Bild per Drag & Drop hierher oder klicken Sie auf die Schaltfläche unten und wählen Sie ein Bild zum Hochladen aus",
     surveyPlaceHolderMobile: "Klicken Sie unten auf die Schaltfläche \"Frage hinzufügen\", um mit der Erstellung Ihres Formulars zu beginnen.",
+    surveyPlaceholderTitle: "Ihr Formular ist leer",
+    surveyPlaceholderTitleMobile: "Ihr Formular ist leer",
+    surveyPlaceholderDescription: "Ziehen Sie ein Element aus der Toolbox oder klicken Sie auf die Schaltfläche unten.",
+    surveyPlaceholderDescriptionMobile: "Ziehen Sie ein Element aus der Toolbox oder klicken Sie auf die Schaltfläche unten.",
+    previewPlaceholderTitle: "Keine Vorschau",
+    previewPlaceholderTitleMobile: "Keine Vorschau",
+    previewPlaceholderDescription: "Die Umfrage enthält keine sichtbaren Elemente.",
+    previewPlaceholderDescriptionMobile: "Die Umfrage enthält keine sichtbaren Elemente.",
+    translationsPlaceholderTitle: "Keine Zeichenfolgen zu übersetzen",
+    translationsPlaceholderTitleMobile: "Keine Zeichenfolgen zu übersetzen",
+    translationsPlaceholderDescription: "Fügen Sie Ihrem Formular Elemente hinzu oder ändern Sie den Zeichenfolgenfilter in der Symbolleiste.",
+    translationsPlaceholderDescriptionMobile: "Fügen Sie Ihrem Formular Elemente hinzu oder ändern Sie den Zeichenfolgenfilter in der Symbolleiste.",
     pagePlaceHolderMobile: "Klicken Sie unten auf die Schaltfläche \"Frage hinzufügen\", um der Seite ein neues Element hinzuzufügen.",
     panelPlaceHolderMobile: "Klicken Sie unten auf die Schaltfläche \"Frage hinzufügen\", um dem Bedienfeld ein neues Element hinzuzufügen.",
     imagePlaceHolderMobile: "Klicken Sie auf die Schaltfläche unten und wählen Sie ein Bild zum Hochladen aus",
@@ -194,6 +206,10 @@ var germanTranslation = {
     lg: {
       addNewItem: "Neue Regel hinzufügen",
       empty_tab: "Erstellen Sie eine Regel, um den Fluss der Umfrage anzupassen.",
+      logicPlaceholderTitle: "Keine logischen Regeln",
+      logicPlaceholderTitleMobile: "Keine logischen Regeln",
+      logicPlaceholderDescription: "Erstellen Sie eine Regel, um den Ablauf der Umfrage anzupassen.",
+      logicPlaceholderDescriptionMobile: "Erstellen Sie eine Regel, um den Ablauf der Umfrage anzupassen.",
       page_visibilityName: "Seite anzeigen/verstecken",
       page_enableName: "Seite aktivieren/deaktivieren",
       page_requireName: "Seite als erforderlich festlegen",
@@ -617,6 +633,7 @@ var germanTranslation = {
     questionsOrder: "Reihenfolge der Fragen auf der Seite",
     timeLimit: "Maximale Zeit, um die Umfrage zu beenden",
     timeLimitPerPage: "Maximale Zeit, um eine Seite der Umfrage zu beenden",
+    showTimer: "Verwenden eines Timers",
     timerLocation: "Position des Timers",
     timerInfoMode: "Modus des Timers",
     renderMode: "Anzeigemodus",
@@ -875,6 +892,7 @@ var germanTranslation = {
       fontSize: "Schriftgrad",
       scale: "Maßstab",
       cornerRadius: "Ecken-Radius",
+      advancedMode: "Erweiterter Modus",
       pageTitle: "Schriftart des Titels",
       pageDescription: "Beschreibung Schriftart",
       questionTitle: "Schriftart des Titels",
@@ -1421,6 +1439,7 @@ var germanTranslation = {
       questionsOrder: "Behält die ursprüngliche Reihenfolge der Fragen bei oder randomisiert sie. Mit der Option \"Vererben\" wird die Einstellung auf Umfrageebene (\"Original\" standardmäßig) angewendet. Die Auswirkungen dieser Einstellung sind nur auf dem Tab \"Vorschau\" sichtbar.",
       navigationButtonsVisibility: "Legt die Sichtbarkeit von Navigationsschaltflächen auf der Seite fest. Mit der Option \"Vererben\" wird die Einstellung auf Umfrageebene angewendet, die standardmäßig auf \"Sichtbar\" eingestellt ist."
     },
+    timerLocation: "Legt die Position eines Timers auf einer Seite fest.",
     panelsState: "Wählen Sie aus: \"Gesperrt\" - Benutzer können Panele nicht erweitern oder reduzieren; \"Alle ausblenden\" - alle Panele beginnen in einem zusammengeklappten Zustand; \"Alle erweitern\" - alle Panele beginnen in einem erweiterten Zustand; \"First expanded\" - nur das erste Panel wird zunächst erweitert.",
     imageLinkName: "Geben Sie einen freigegebenen Eigenschaftsnamen in das Array von Objekten ein, das die Bild- oder Videodatei-URLs enthält, die in der Auswahlliste angezeigt werden sollen.",
     choices: "Der linke Wert dient als Element-ID, die in bedingten Regeln verwendet wird, der rechte Wert wird den Befragten angezeigt.",
@@ -1502,7 +1521,8 @@ var germanTranslation = {
     header: {
       inheritWidthFrom: "Die Option \"Wie Container\" passt die Breite des Inhaltsbereichs der Kopfzeile automatisch an das HTML-Element an, in dem die Umfrage platziert wird.",
       textAreaWidth: "Die Breite des Kopfbereichs, der den Titel und die Beschreibung der Umfrage enthält, gemessen in Pixeln.",
-      overlapEnabled: "Legt fest, dass der untere Rand der Kopfzeile mit dem oberen Rand des Survey überlagert wird."
+      overlapEnabled: "Legt fest, dass der untere Rand der Kopfzeile mit dem oberen Rand des Survey überlagert wird.",
+      mobileHeight: "Wenn der Wert auf 0 gesetzt ist, wird die Höhe automatisch berechnet, um den Inhalt der Kopfzeile aufzunehmen."
     },
     panellayoutcolumn: {
       effectiveWidth: "Akzeptiert die Werte %.",
@@ -1590,6 +1610,7 @@ var germanTranslation = {
     imageFit: "Passform des Bildes",
     altText: "altText",
     height: "Höhe",
+    mobileHeight: "Höhe auf Smartphones",
     penColor: "Stiftfarbe",
     backgroundColor: "Hintergrundfarbe",
     templateElements: "VorlagenElemente",
@@ -2486,3 +2507,25 @@ editorLocalization.locales["de"] = germanTranslation;
 // ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Klicken Sie auf ein beliebiges Kategoriesymbol, um die Umfrageeinstellungen zu erkunden. Zusätzliche Einstellungen sind verfügbar, sobald Sie der Entwurfsoberfläche ein Vermessungselement hinzufügen."
 // pe.caseInsensitive: "Case insensitive" => "Schreibungsunabhängig"
 // pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Wählen Sie diese Option aus, wenn Groß- und Kleinbuchstaben im regulären Ausdruck als gleichwertig behandelt werden müssen."
+
+// ed.surveyPlaceholderTitle: "Your form is empty" => "Ihr Formular ist leer"
+// ed.surveyPlaceholderTitleMobile: "Your form is empty" => "Ihr Formular ist leer"
+// ed.surveyPlaceholderDescription: "Drag an element from the toolbox or click the button below." => "Ziehen Sie ein Element aus der Toolbox oder klicken Sie auf die Schaltfläche unten."
+// ed.surveyPlaceholderDescriptionMobile: "Drag an element from the toolbox or click the button below." => "Ziehen Sie ein Element aus der Toolbox oder klicken Sie auf die Schaltfläche unten."
+// ed.previewPlaceholderTitle: "No preview" => "Keine Vorschau"
+// ed.previewPlaceholderTitleMobile: "No preview" => "Keine Vorschau"
+// ed.previewPlaceholderDescription: "The survey doesn't contain any visible elements." => "Die Umfrage enthält keine sichtbaren Elemente."
+// ed.previewPlaceholderDescriptionMobile: "The survey doesn't contain any visible elements." => "Die Umfrage enthält keine sichtbaren Elemente."
+// ed.translationsPlaceholderTitle: "No strings to translate" => "Keine Zeichenfolgen zu übersetzen"
+// ed.translationsPlaceholderTitleMobile: "No strings to translate" => "Keine Zeichenfolgen zu übersetzen"
+// ed.translationsPlaceholderDescription: "Add elements to your form or change the strings filter in the toolbar." => "Fügen Sie Ihrem Formular Elemente hinzu oder ändern Sie den Zeichenfolgenfilter in der Symbolleiste."
+// ed.translationsPlaceholderDescriptionMobile: "Add elements to your form or change the strings filter in the toolbar." => "Fügen Sie Ihrem Formular Elemente hinzu oder ändern Sie den Zeichenfolgenfilter in der Symbolleiste."
+// lg.logicPlaceholderTitle: "No logical rules" => "Keine logischen Regeln"
+// lg.logicPlaceholderTitleMobile: "No logical rules" => "Keine logischen Regeln"
+// lg.logicPlaceholderDescription: "Create a rule to customize the flow of the survey." => "Erstellen Sie eine Regel, um den Ablauf der Umfrage anzupassen."
+// lg.logicPlaceholderDescriptionMobile: "Create a rule to customize the flow of the survey." => "Erstellen Sie eine Regel, um den Ablauf der Umfrage anzupassen."
+// pe.showTimer: "Use a timer" => "Verwenden eines Timers"
+// theme.advancedMode: "Advanced mode" => "Erweiterter Modus"
+// pehelp.timerLocation: "Sets the location of a timer on a page." => "Legt die Position eines Timers auf einer Seite fest."
+// header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Wenn der Wert auf 0 gesetzt ist, wird die Höhe automatisch berechnet, um den Inhalt der Kopfzeile aufzunehmen."
+// p.mobileHeight: "Height on smartphones" => "Höhe auf Smartphones"

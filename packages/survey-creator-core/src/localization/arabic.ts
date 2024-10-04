@@ -182,6 +182,18 @@ export var arStrings = {
     pagePlaceHolder: "الصفحة فارغة. اسحب عنصرا من صندوق الأدوات أو انقر فوق الزر أدناه.",
     imagePlaceHolder: "قم بسحب وإسقاط صورة هنا أو انقر فوق الزر أدناه واختر صورة لتحميلها",
     surveyPlaceHolderMobile: "انقر فوق الزر \"إضافة سؤال\" أدناه لبدء إنشاء النموذج الخاص بك.",
+    surveyPlaceholderTitle: "النموذج فارغ",
+    surveyPlaceholderTitleMobile: "النموذج فارغ",
+    surveyPlaceholderDescription: "اسحب عنصرا من صندوق الأدوات أو انقر فوق الزر أدناه.",
+    surveyPlaceholderDescriptionMobile: "اسحب عنصرا من صندوق الأدوات أو انقر فوق الزر أدناه.",
+    previewPlaceholderTitle: "لا معاينة",
+    previewPlaceholderTitleMobile: "لا معاينة",
+    previewPlaceholderDescription: "لا يحتوي الاستطلاع على أي عناصر مرئية.",
+    previewPlaceholderDescriptionMobile: "لا يحتوي الاستطلاع على أي عناصر مرئية.",
+    translationsPlaceholderTitle: "لا توجد سلاسل للترجمة",
+    translationsPlaceholderTitleMobile: "لا توجد سلاسل للترجمة",
+    translationsPlaceholderDescription: "أضف عناصر إلى النموذج أو قم بتغيير عامل تصفية السلاسل في شريط الأدوات.",
+    translationsPlaceholderDescriptionMobile: "أضف عناصر إلى النموذج أو قم بتغيير عامل تصفية السلاسل في شريط الأدوات.",
     pagePlaceHolderMobile: "انقر فوق الزر \"إضافة سؤال\" أدناه لإضافة عنصر جديد إلى الصفحة.",
     panelPlaceHolderMobile: "انقر فوق الزر \"إضافة سؤال\" أدناه لإضافة عنصر جديد إلى اللوحة.",
     imagePlaceHolderMobile: "انقر فوق الزر أدناه واختر صورة لتحميلها",
@@ -194,6 +206,10 @@ export var arStrings = {
     lg: {
       addNewItem: "إضافة قاعدة جديدة",
       empty_tab: "قم بإنشاء إرتباط لتخصيص تدفق الإستبيان",
+      logicPlaceholderTitle: "لا توجد قواعد منطقية",
+      logicPlaceholderTitleMobile: "لا توجد قواعد منطقية",
+      logicPlaceholderDescription: "إنشاء قاعدة لتخصيص تدفق الاستطلاع.",
+      logicPlaceholderDescriptionMobile: "إنشاء قاعدة لتخصيص تدفق الاستطلاع.",
       page_visibilityName: "إظهار (إخفاء) صفحة",
       page_enableName: "تمكين (تعطيل) الصفحة",
       page_requireName: "اجعل الصفحة مطلوبة",
@@ -617,6 +633,7 @@ export var arStrings = {
     questionsOrder: "ترتيب العناصر على الصفحة",
     timeLimit: "أقصى وقت لإنهاء الإستبيان",
     timeLimitPerPage: "أقصى وقت لإنهاء الصفحة في الإستبيان",
+    showTimer: "استخدام مؤقت",
     timerLocation: "إظهار لوحة المؤقت",
     timerInfoMode: "إظهار نمط لوحة المؤقت",
     renderMode: "نمط العرض",
@@ -875,6 +892,7 @@ export var arStrings = {
       fontSize: "حجم الخط",
       scale: "مِيزَان",
       cornerRadius: "نصف قطر الزاوية",
+      advancedMode: "الوضع المتقدم",
       pageTitle: "خط العنوان",
       pageDescription: "خط الوصف",
       questionTitle: "خط العنوان",
@@ -1421,6 +1439,7 @@ export var arStrings = {
       questionsOrder: "يحافظ على الترتيب الأصلي للأسئلة أو يحولها عشوائيا. يطبق خيار \"الوراثة\" إعداد مستوى الاستطلاع (\"أصلي\" افتراضيا). يكون تأثير هذا الإعداد مرئيا فقط في علامة التبويب معاينة.",
       navigationButtonsVisibility: "يضبط رؤية أزرار التنقل على الصفحة. يطبق خيار \"الوراثة\" إعداد مستوى الاستطلاع ، والذي يتم تعيينه افتراضيا على \"مرئي\"."
     },
+    timerLocation: "يضبط موقع المؤقت على الصفحة.",
     panelsState: "اختر من بين: \"مقفل\" - لا يمكن للمستخدمين توسيع اللوحات أو طيها ؛ \"طي الكل\" - تبدأ جميع اللوحات في حالة انهيار ؛ \"توسيع الكل\" - تبدأ جميع اللوحات في حالة موسعة ؛ \"تم توسيعه أولا\" - تم توسيع اللوحة الأولى فقط في البداية.",
     imageLinkName: "أدخل اسم خاصية مشتركة ضمن صفيف الكائنات التي تحتوي على عناوين URL لملفات الصور أو الفيديو التي تريد عرضها في قائمة الاختيارات.",
     choices: "تعمل القيمة اليسرى كمعرف عنصر مستخدم في القواعد الشرطية ، ويتم عرض القيمة الصحيحة للمستجيبين.",
@@ -1502,7 +1521,8 @@ export var arStrings = {
     header: {
       inheritWidthFrom: "يقوم خيار \"نفس الحاوية\" بضبط عرض منطقة محتوى الرأس تلقائيا ليلائم عنصر HTML الذي يتم وضع الاستطلاع فيه.",
       textAreaWidth: "عرض ناحية الرأس التي تحتوي على عنوان الاستطلاع ووصفه، مقاسا بالبكسل.",
-      overlapEnabled: "يجعل الجزء السفلي من الرأس متراكبا مع الجزء العلوي من الاستطلاع."
+      overlapEnabled: "يجعل الجزء السفلي من الرأس متراكبا مع الجزء العلوي من الاستطلاع.",
+      mobileHeight: "عند التعيين إلى 0 ، يتم حساب الارتفاع تلقائيا لاستيعاب محتوى الرأس."
     },
     panellayoutcolumn: {
       effectiveWidth: "يقبل القيم٪",
@@ -1590,6 +1610,7 @@ export var arStrings = {
     imageFit: "إحتواء الصورة",
     altText: "نص بديل",
     height: "height",
+    mobileHeight: "الارتفاع على الهواتف الذكية",
     penColor: "لون القلم",
     backgroundColor: "لون الخلفية",
     templateElements: "عناصر القالب",
@@ -2688,3 +2709,25 @@ editorLocalization.locales["ar"] = arStrings;
 // ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "انقر فوق أي رمز فئة لاستكشاف إعدادات الاستطلاع. ستتوفر إعدادات إضافية بمجرد إضافة عنصر استطلاع إلى سطح التصميم."
 // pe.caseInsensitive: "Case insensitive" => "غير حساس لحالة الأحرف"
 // pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "حدد ما إذا كان يجب التعامل مع الأحرف الكبيرة والصغيرة في التعبير العادي على أنها مكافئة."
+
+// ed.surveyPlaceholderTitle: "Your form is empty" => "النموذج فارغ"
+// ed.surveyPlaceholderTitleMobile: "Your form is empty" => "النموذج فارغ"
+// ed.surveyPlaceholderDescription: "Drag an element from the toolbox or click the button below." => "اسحب عنصرا من صندوق الأدوات أو انقر فوق الزر أدناه."
+// ed.surveyPlaceholderDescriptionMobile: "Drag an element from the toolbox or click the button below." => "اسحب عنصرا من صندوق الأدوات أو انقر فوق الزر أدناه."
+// ed.previewPlaceholderTitle: "No preview" => "لا معاينة"
+// ed.previewPlaceholderTitleMobile: "No preview" => "لا معاينة"
+// ed.previewPlaceholderDescription: "The survey doesn't contain any visible elements." => "لا يحتوي الاستطلاع على أي عناصر مرئية."
+// ed.previewPlaceholderDescriptionMobile: "The survey doesn't contain any visible elements." => "لا يحتوي الاستطلاع على أي عناصر مرئية."
+// ed.translationsPlaceholderTitle: "No strings to translate" => "لا توجد سلاسل للترجمة"
+// ed.translationsPlaceholderTitleMobile: "No strings to translate" => "لا توجد سلاسل للترجمة"
+// ed.translationsPlaceholderDescription: "Add elements to your form or change the strings filter in the toolbar." => "أضف عناصر إلى النموذج أو قم بتغيير عامل تصفية السلاسل في شريط الأدوات."
+// ed.translationsPlaceholderDescriptionMobile: "Add elements to your form or change the strings filter in the toolbar." => "أضف عناصر إلى النموذج أو قم بتغيير عامل تصفية السلاسل في شريط الأدوات."
+// lg.logicPlaceholderTitle: "No logical rules" => "لا توجد قواعد منطقية"
+// lg.logicPlaceholderTitleMobile: "No logical rules" => "لا توجد قواعد منطقية"
+// lg.logicPlaceholderDescription: "Create a rule to customize the flow of the survey." => "إنشاء قاعدة لتخصيص تدفق الاستطلاع."
+// lg.logicPlaceholderDescriptionMobile: "Create a rule to customize the flow of the survey." => "إنشاء قاعدة لتخصيص تدفق الاستطلاع."
+// pe.showTimer: "Use a timer" => "استخدام مؤقت"
+// theme.advancedMode: "Advanced mode" => "الوضع المتقدم"
+// pehelp.timerLocation: "Sets the location of a timer on a page." => "يضبط موقع المؤقت على الصفحة."
+// header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "عند التعيين إلى 0 ، يتم حساب الارتفاع تلقائيا لاستيعاب محتوى الرأس."
+// p.mobileHeight: "Height on smartphones" => "الارتفاع على الهواتف الذكية"

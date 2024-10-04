@@ -182,6 +182,18 @@ export var hebrewStrings = {
     pagePlaceHolder: "הדף ריק. גרור רכיב מארגז הכלים או לחץ על הלחצן למטה.",
     imagePlaceHolder: "גרור ושחרר תמונה לכאן או לחץ על הכפתור למטה ובחר תמונה להעלאה",
     surveyPlaceHolderMobile: "לחץ על הלחצן \"הוסף שאלה\" למטה כדי להתחיל ליצור את הטופס שלך.",
+    surveyPlaceholderTitle: "הטופס שלך ריק",
+    surveyPlaceholderTitleMobile: "הטופס שלך ריק",
+    surveyPlaceholderDescription: "גרור רכיב מארגז הכלים או לחץ על הלחצן למטה.",
+    surveyPlaceholderDescriptionMobile: "גרור רכיב מארגז הכלים או לחץ על הלחצן למטה.",
+    previewPlaceholderTitle: "ללא תצוגה מקדימה",
+    previewPlaceholderTitleMobile: "ללא תצוגה מקדימה",
+    previewPlaceholderDescription: "הסקר אינו מכיל רכיבים גלויים.",
+    previewPlaceholderDescriptionMobile: "הסקר אינו מכיל רכיבים גלויים.",
+    translationsPlaceholderTitle: "אין מחרוזות לתרגם",
+    translationsPlaceholderTitleMobile: "אין מחרוזות לתרגם",
+    translationsPlaceholderDescription: "הוסף רכיבים לטופס או שנה את מסנן המחרוזות בסרגל הכלים.",
+    translationsPlaceholderDescriptionMobile: "הוסף רכיבים לטופס או שנה את מסנן המחרוזות בסרגל הכלים.",
     pagePlaceHolderMobile: "לחץ על כפתור \"הוסף שאלה\" למטה כדי להוסיף אלמנט חדש לדף.",
     panelPlaceHolderMobile: "לחץ על הלחצן \"הוסף שאלה\" למטה כדי להוסיף אלמנט חדש לחלונית.",
     imagePlaceHolderMobile: "לחץ על הלחצן למטה ובחר תמונה להעלאה",
@@ -194,6 +206,10 @@ export var hebrewStrings = {
     lg: {
       addNewItem: "הוספת כלל חדש",
       empty_tab: "צור כלל כדי להתאים אישית את זרימת הסקר.",
+      logicPlaceholderTitle: "אין כללים לוגיים",
+      logicPlaceholderTitleMobile: "אין כללים לוגיים",
+      logicPlaceholderDescription: "צור כלל כדי להתאים אישית את זרימת הסקר.",
+      logicPlaceholderDescriptionMobile: "צור כלל כדי להתאים אישית את זרימת הסקר.",
       page_visibilityName: "הצג (הסתר) עמוד",
       page_enableName: "הפוך דף לזמין (הפוך ללא זמין)",
       page_requireName: "הפיכת הדף לנדרש",
@@ -617,6 +633,7 @@ export var hebrewStrings = {
     questionsOrder: "סדר הרכיבים בעמוד",
     timeLimit: "גבול זמן לסיום הסקר (בשניות)",
     timeLimitPerPage: "גבול זמן לסיום עמוד אחד (בשניות)",
+    showTimer: "שימוש בטיימר",
     timerLocation: "מיקום הטיימר",
     timerInfoMode: "מצב הטיימר",
     renderMode: "מצב תצוגת הפאנל",
@@ -875,6 +892,7 @@ export var hebrewStrings = {
       fontSize: "גודל גופן",
       scale: "סולם",
       cornerRadius: "רדיוס פינה",
+      advancedMode: "מצב מתקדם",
       pageTitle: "גופן כותרת",
       pageDescription: "גופן תיאור",
       questionTitle: "גופן כותרת",
@@ -1421,6 +1439,7 @@ export var hebrewStrings = {
       questionsOrder: "שומר על הסדר המקורי של השאלות או מסדר אותן באופן אקראי. האפשרות \"ירושה\" מחילה את ההגדרה ברמת הסקר (\"מקורי\" כברירת מחדל). ההשפעה של הגדרה זו גלויה רק בכרטיסיה תצוגה מקדימה.",
       navigationButtonsVisibility: "מגדיר את התצוגה של לחצני ניווט בעמוד. האפשרות \"ירושה\" מחילה את ההגדרה ברמת הסקר, המוגדרת כברירת מחדל ל\"גלוי\"."
     },
+    timerLocation: "הגדרת המיקום של טיימר בעמוד.",
     panelsState: "בחר מתוך: \"נעול\" - משתמשים אינם יכולים להרחיב או לכווץ חלוניות; \"כווץ הכל\" - כל הלוחות מתחילים במצב מכווץ; \"הרחב הכל\" - כל הלוחות מתחילים במצב מורחב; \"מורחב ראשון\" - רק הלוח הראשון מורחב בתחילה.",
     imageLinkName: "הזן שם מאפיין משותף בתוך מערך האובייקטים המכיל את כתובות ה- URL של תמונות או קבצי וידאו שברצונך להציג ברשימת האפשרויות.",
     choices: "הערך השמאלי משמש כמזהה פריט המשמש בכללי תנאי, הערך הימני מוצג למשיבים.",
@@ -1502,7 +1521,8 @@ export var hebrewStrings = {
     header: {
       inheritWidthFrom: "האפשרות \"זהה לגורם מכיל\" מתאימה אוטומטית את רוחב אזור התוכן של הכותרת העליונה כך שיתאים לרכיב HTML שבו ממוקם הסקר.",
       textAreaWidth: "רוחב אזור הכותרת המכיל את כותרת הסקר ותיאורו, נמדד בפיקסלים.",
-      overlapEnabled: "הופך את החלק התחתון של הכותרת לשכבת-על עם החלק העליון של הסקר."
+      overlapEnabled: "הופך את החלק התחתון של הכותרת לשכבת-על עם החלק העליון של הסקר.",
+      mobileHeight: "כאשר הוא מוגדר ל- 0, הגובה מחושב באופן אוטומטי כדי להתאים לתוכן הכותרת."
     },
     panellayoutcolumn: {
       effectiveWidth: "מקבל ערכים %.",
@@ -1590,6 +1610,7 @@ export var hebrewStrings = {
     imageFit: "התאמת התמונה",
     altText: "טקסט חלופי",
     height: "גובה",
+    mobileHeight: "גובה בסמארטפונים",
     penColor: "צבע העט",
     backgroundColor: "צבע רקע",
     templateElements: "רכיבי תבנית",
@@ -2345,3 +2366,25 @@ editorLocalization.locales["he"] = hebrewStrings;
 // ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "לחץ על סמל קטגוריה כלשהו כדי לחקור את הגדרות הסקר. הגדרות נוספות יהיו זמינות לאחר הוספת רכיב סקר למשטח העיצוב."
 // pe.caseInsensitive: "Case insensitive" => "לא תלוי רישיות"
 // pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "בחר אם יש להתייחס לאותיות רישיות וקטנות בביטוי הרגיל כשוות ערך."
+
+// ed.surveyPlaceholderTitle: "Your form is empty" => "הטופס שלך ריק"
+// ed.surveyPlaceholderTitleMobile: "Your form is empty" => "הטופס שלך ריק"
+// ed.surveyPlaceholderDescription: "Drag an element from the toolbox or click the button below." => "גרור רכיב מארגז הכלים או לחץ על הלחצן למטה."
+// ed.surveyPlaceholderDescriptionMobile: "Drag an element from the toolbox or click the button below." => "גרור רכיב מארגז הכלים או לחץ על הלחצן למטה."
+// ed.previewPlaceholderTitle: "No preview" => "ללא תצוגה מקדימה"
+// ed.previewPlaceholderTitleMobile: "No preview" => "ללא תצוגה מקדימה"
+// ed.previewPlaceholderDescription: "The survey doesn't contain any visible elements." => "הסקר אינו מכיל רכיבים גלויים."
+// ed.previewPlaceholderDescriptionMobile: "The survey doesn't contain any visible elements." => "הסקר אינו מכיל רכיבים גלויים."
+// ed.translationsPlaceholderTitle: "No strings to translate" => "אין מחרוזות לתרגם"
+// ed.translationsPlaceholderTitleMobile: "No strings to translate" => "אין מחרוזות לתרגם"
+// ed.translationsPlaceholderDescription: "Add elements to your form or change the strings filter in the toolbar." => "הוסף רכיבים לטופס או שנה את מסנן המחרוזות בסרגל הכלים."
+// ed.translationsPlaceholderDescriptionMobile: "Add elements to your form or change the strings filter in the toolbar." => "הוסף רכיבים לטופס או שנה את מסנן המחרוזות בסרגל הכלים."
+// lg.logicPlaceholderTitle: "No logical rules" => "אין כללים לוגיים"
+// lg.logicPlaceholderTitleMobile: "No logical rules" => "אין כללים לוגיים"
+// lg.logicPlaceholderDescription: "Create a rule to customize the flow of the survey." => "צור כלל כדי להתאים אישית את זרימת הסקר."
+// lg.logicPlaceholderDescriptionMobile: "Create a rule to customize the flow of the survey." => "צור כלל כדי להתאים אישית את זרימת הסקר."
+// pe.showTimer: "Use a timer" => "שימוש בטיימר"
+// theme.advancedMode: "Advanced mode" => "מצב מתקדם"
+// pehelp.timerLocation: "Sets the location of a timer on a page." => "הגדרת המיקום של טיימר בעמוד."
+// header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "כאשר הוא מוגדר ל- 0, הגובה מחושב באופן אוטומטי כדי להתאים לתוכן הכותרת."
+// p.mobileHeight: "Height on smartphones" => "גובה בסמארטפונים"

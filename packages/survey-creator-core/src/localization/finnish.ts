@@ -182,6 +182,18 @@ export var fiStrings = {
     pagePlaceHolder: "Sivu on tyhjä. Vedä elementti työkalupakista tai napsauta alla olevaa painiketta.",
     imagePlaceHolder: "Vedä ja pudota kuva tähän tai napsauta alla olevaa painiketta ja valitse ladattava kuva",
     surveyPlaceHolderMobile: "Napsauta alla olevaa Lisää kysymys -painiketta aloittaaksesi lomakkeen luomisen.",
+    surveyPlaceholderTitle: "Lomake on tyhjä",
+    surveyPlaceholderTitleMobile: "Lomake on tyhjä",
+    surveyPlaceholderDescription: "Vedä elementti työkalupakista tai napsauta alla olevaa painiketta.",
+    surveyPlaceholderDescriptionMobile: "Vedä elementti työkalupakista tai napsauta alla olevaa painiketta.",
+    previewPlaceholderTitle: "Ei esikatselua",
+    previewPlaceholderTitleMobile: "Ei esikatselua",
+    previewPlaceholderDescription: "Kysely ei sisällä näkyviä elementtejä.",
+    previewPlaceholderDescriptionMobile: "Kysely ei sisällä näkyviä elementtejä.",
+    translationsPlaceholderTitle: "Ei käännettäviä merkkijonoja",
+    translationsPlaceholderTitleMobile: "Ei käännettäviä merkkijonoja",
+    translationsPlaceholderDescription: "Lisää elementtejä lomakkeeseen tai muuta työkalurivin merkkijonosuodatinta.",
+    translationsPlaceholderDescriptionMobile: "Lisää elementtejä lomakkeeseen tai muuta työkalurivin merkkijonosuodatinta.",
     pagePlaceHolderMobile: "Napsauta alla olevaa Lisää kysymys -painiketta lisätäksesi sivulle uuden elementin.",
     panelPlaceHolderMobile: "Napsauta alla olevaa Lisää kysymys -painiketta lisätäksesi uuden elementin paneeliin.",
     imagePlaceHolderMobile: "Klikkaa alla olevaa painiketta ja valitse ladattava kuva",
@@ -194,6 +206,10 @@ export var fiStrings = {
     lg: {
       addNewItem: "Lisää uusi sääntö",
       empty_tab: "Luo sääntö kyselyn kulun mukauttamista varten.",
+      logicPlaceholderTitle: "Ei loogisia sääntöjä",
+      logicPlaceholderTitleMobile: "Ei loogisia sääntöjä",
+      logicPlaceholderDescription: "Luo sääntö kyselyn kulun mukauttamista varten.",
+      logicPlaceholderDescriptionMobile: "Luo sääntö kyselyn kulun mukauttamista varten.",
       page_visibilityName: "Sivun näkyvyys",
       page_enableName: "Ota käyttöön (poista käytöstä) sivu",
       page_requireName: "Tee sivusta pakollinen",
@@ -617,6 +633,7 @@ export var fiStrings = {
     questionsOrder: "Elementtien järjestys sivulla",
     timeLimit: "Enimmäisaika saada kysely täytettyä",
     timeLimitPerPage: "Enimmäisaika kyselyn sivun täyttämiseen",
+    showTimer: "Käytä ajastinta",
     timerLocation: "Näytä ajastus -paneeli",
     timerInfoMode: "Näytä ajastus -paneelin tila",
     renderMode: "Renderöinnin tila",
@@ -875,6 +892,7 @@ export var fiStrings = {
       fontSize: "Kirjasinkoko",
       scale: "Mittakaava",
       cornerRadius: "Kulman säde",
+      advancedMode: "Edistynyt tila",
       pageTitle: "Otsikon fontti",
       pageDescription: "Kuvauksen fontti",
       questionTitle: "Otsikon fontti",
@@ -1421,6 +1439,7 @@ export var fiStrings = {
       questionsOrder: "Säilyttää kysymysten alkuperäisen järjestyksen tai satunnaistaa ne. \"Peri\" -vaihtoehto käyttää kyselytason asetusta (\"Alkuperäinen\" oletuksena). Tämän asetuksen vaikutus näkyy vain Esikatselu-välilehdessä.",
       navigationButtonsVisibility: "Määrittää navigointipainikkeiden näkyvyyden sivulla. \"Peri\" -vaihtoehto käyttää kyselytason asetusta, jonka oletusarvo on \"Näkyvä\"."
     },
+    timerLocation: "Määrittää ajastimen sijainnin sivulla.",
     panelsState: "Valitse seuraavista: \"Lukittu\" - käyttäjät eivät voi laajentaa tai kutistaa paneeleja; \"Kutista kaikki\" - kaikki paneelit alkavat romahtaneessa tilassa; \"Laajenna kaikki\" - kaikki paneelit alkavat laajennetussa tilassa; \"Ensimmäinen laajennettu\" - vain ensimmäistä paneelia laajennetaan aluksi.",
     imageLinkName: "Kirjoita jaetun ominaisuuden nimi objektiryhmään, joka sisältää valintaluettelossa näytettävät kuvan tai videotiedoston URL-osoitteet.",
     choices: "Vasen arvo toimii ehdollisissa säännöissä käytettynä kohteen tunnuksena, oikea arvo näytetään vastaajille.",
@@ -1502,7 +1521,8 @@ export var fiStrings = {
     header: {
       inheritWidthFrom: "Sama kuin säilö -vaihtoehto säätää automaattisesti otsikon sisältöalueen leveyttä sopimaan HTML-elementtiin, johon kysely sijoitetaan.",
       textAreaWidth: "Kyselyn otsikon ja kuvauksen sisältävän otsikkoalueen leveys pikseleinä mitattuna.",
-      overlapEnabled: "Suurentaa otsikon alaosan kyselyn yläosan päälle."
+      overlapEnabled: "Suurentaa otsikon alaosan kyselyn yläosan päälle.",
+      mobileHeight: "Kun arvoksi on määritetty 0, korkeus lasketaan automaattisesti otsikon sisällön mukaan."
     },
     panellayoutcolumn: {
       effectiveWidth: "Hyväksyy arvot %.",
@@ -1590,6 +1610,7 @@ export var fiStrings = {
     imageFit: "Kuva sopii",
     altText: "Vaihtoehtoinen teksti",
     height: "Korkeus",
+    mobileHeight: "Korkeus älypuhelimissa",
     penColor: "Kynän väri",
     backgroundColor: "Taustaväri",
     templateElements: "Mallin elementit",
@@ -2777,3 +2798,25 @@ editorLocalization.locales["fi"] = fiStrings;
 // ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Napsauta mitä tahansa luokkakuvaketta tutustuaksesi kyselyn asetuksiin. Lisäasetukset ovat käytettävissä, kun lisäät mittauselementin suunnittelupintaan."
 // pe.caseInsensitive: "Case insensitive" => "Isot ja pienet kirjaimet eivät ole merkitseviä"
 // pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Valitse, onko säännöllisen lausekkeen isoja ja pieniä kirjaimia käsiteltävä vastaavina."
+
+// ed.surveyPlaceholderTitle: "Your form is empty" => "Lomake on tyhjä"
+// ed.surveyPlaceholderTitleMobile: "Your form is empty" => "Lomake on tyhjä"
+// ed.surveyPlaceholderDescription: "Drag an element from the toolbox or click the button below." => "Vedä elementti työkalupakista tai napsauta alla olevaa painiketta."
+// ed.surveyPlaceholderDescriptionMobile: "Drag an element from the toolbox or click the button below." => "Vedä elementti työkalupakista tai napsauta alla olevaa painiketta."
+// ed.previewPlaceholderTitle: "No preview" => "Ei esikatselua"
+// ed.previewPlaceholderTitleMobile: "No preview" => "Ei esikatselua"
+// ed.previewPlaceholderDescription: "The survey doesn't contain any visible elements." => "Kysely ei sisällä näkyviä elementtejä."
+// ed.previewPlaceholderDescriptionMobile: "The survey doesn't contain any visible elements." => "Kysely ei sisällä näkyviä elementtejä."
+// ed.translationsPlaceholderTitle: "No strings to translate" => "Ei käännettäviä merkkijonoja"
+// ed.translationsPlaceholderTitleMobile: "No strings to translate" => "Ei käännettäviä merkkijonoja"
+// ed.translationsPlaceholderDescription: "Add elements to your form or change the strings filter in the toolbar." => "Lisää elementtejä lomakkeeseen tai muuta työkalurivin merkkijonosuodatinta."
+// ed.translationsPlaceholderDescriptionMobile: "Add elements to your form or change the strings filter in the toolbar." => "Lisää elementtejä lomakkeeseen tai muuta työkalurivin merkkijonosuodatinta."
+// lg.logicPlaceholderTitle: "No logical rules" => "Ei loogisia sääntöjä"
+// lg.logicPlaceholderTitleMobile: "No logical rules" => "Ei loogisia sääntöjä"
+// lg.logicPlaceholderDescription: "Create a rule to customize the flow of the survey." => "Luo sääntö kyselyn kulun mukauttamista varten."
+// lg.logicPlaceholderDescriptionMobile: "Create a rule to customize the flow of the survey." => "Luo sääntö kyselyn kulun mukauttamista varten."
+// pe.showTimer: "Use a timer" => "Käytä ajastinta"
+// theme.advancedMode: "Advanced mode" => "Edistynyt tila"
+// pehelp.timerLocation: "Sets the location of a timer on a page." => "Määrittää ajastimen sijainnin sivulla."
+// header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Kun arvoksi on määritetty 0, korkeus lasketaan automaattisesti otsikon sisällön mukaan."
+// p.mobileHeight: "Height on smartphones" => "Korkeus älypuhelimissa"

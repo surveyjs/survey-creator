@@ -182,6 +182,18 @@ export var nbStrings = {
     pagePlaceHolder: "Siden er tom. Dra et element fra verktøykassen, eller klikk på knappen nedenfor.",
     imagePlaceHolder: "Dra og slipp et bilde her, eller klikk på knappen nedenfor og velg et bilde du vil laste opp",
     surveyPlaceHolderMobile: "Klikk på \"Legg til spørsmål\" -knappen nedenfor for å begynne å lage skjemaet ditt.",
+    surveyPlaceholderTitle: "Skjemaet ditt er tomt",
+    surveyPlaceholderTitleMobile: "Skjemaet ditt er tomt",
+    surveyPlaceholderDescription: "Dra et element fra verktøykassen eller klikk på knappen nedenfor.",
+    surveyPlaceholderDescriptionMobile: "Dra et element fra verktøykassen eller klikk på knappen nedenfor.",
+    previewPlaceholderTitle: "Ingen forhåndsvisning",
+    previewPlaceholderTitleMobile: "Ingen forhåndsvisning",
+    previewPlaceholderDescription: "Undersøkelsen inneholder ingen synlige elementer.",
+    previewPlaceholderDescriptionMobile: "Undersøkelsen inneholder ingen synlige elementer.",
+    translationsPlaceholderTitle: "Ingen strenger å oversette",
+    translationsPlaceholderTitleMobile: "Ingen strenger å oversette",
+    translationsPlaceholderDescription: "Legg til elementer i skjemaet, eller endre strengfilteret på verktøylinjen.",
+    translationsPlaceholderDescriptionMobile: "Legg til elementer i skjemaet, eller endre strengfilteret på verktøylinjen.",
     pagePlaceHolderMobile: "Klikk på \"Legg til spørsmål\" -knappen nedenfor for å legge til et nytt element på siden.",
     panelPlaceHolderMobile: "Klikk på \"Legg til spørsmål\" -knappen nedenfor for å legge til et nytt element i panelet.",
     imagePlaceHolderMobile: "Klikk på knappen nedenfor og velg et bilde du vil laste opp",
@@ -194,6 +206,10 @@ export var nbStrings = {
     lg: {
       addNewItem: "Legg til ny regel",
       empty_tab: "Opprett en regel for å tilpasse flyten i evalueringen.",
+      logicPlaceholderTitle: "Ingen logiske regler",
+      logicPlaceholderTitleMobile: "Ingen logiske regler",
+      logicPlaceholderDescription: "Opprett en regel for å tilpasse flyten i evalueringen.",
+      logicPlaceholderDescriptionMobile: "Opprett en regel for å tilpasse flyten i evalueringen.",
       page_visibilityName: "Sidesynlighet",
       page_enableName: "Aktivere (deaktivere) side",
       page_requireName: "Gjøre siden obligatorisk",
@@ -617,6 +633,7 @@ export var nbStrings = {
     questionsOrder: "Rekkefølge på elementer på siden",
     timeLimit: "Maks tid for å gjøre ferdig skjema",
     timeLimitPerPage: "Maks tid til å gjøre ferdig en side i skjema",
+    showTimer: "Bruk en tidtaker",
     timerLocation: "Vis tidtaking",
     timerInfoMode: "Vis tidtaking-modus",
     renderMode: "Gjengivelse modus",
@@ -875,6 +892,7 @@ export var nbStrings = {
       fontSize: "Skriftstørrelse",
       scale: "Skala",
       cornerRadius: "Hjørne radius",
+      advancedMode: "Avansert modus",
       pageTitle: "Tittel skrift",
       pageDescription: "Beskrivelse font",
       questionTitle: "Tittel skrift",
@@ -1421,6 +1439,7 @@ export var nbStrings = {
       questionsOrder: "Beholder den opprinnelige rekkefølgen på spørsmål eller randomiserer dem. Alternativet \"Arv\" bruker innstillingen på undersøkelsesnivå (\"Original\" som standard). Effekten av denne innstillingen er bare synlig i kategorien Forhåndsvisning.",
       navigationButtonsVisibility: "Angir synligheten til navigasjonsknapper på siden. Alternativet \"Arv\" bruker innstillingen på undersøkelsesnivå, som som standard er \"Synlig\"."
     },
+    timerLocation: "Angir plasseringen av en tidtaker på en side.",
     panelsState: "Velg mellom: \"Låst\" - brukere kan ikke utvide eller skjule paneler; \"Skjul alle\" - alle paneler starter i kollapset tilstand; \"Utvid alle\" - alle paneler starter i utvidet tilstand; \"Først utvidet\" - bare det første panelet er i utgangspunktet utvidet.",
     imageLinkName: "Skriv inn et navn på en delt egenskap i matrisen med objekter som inneholder URL-adressene til bildet eller videofilen du vil vise i valglisten.",
     choices: "Den venstre verdien fungerer som en vare-ID som brukes i betingede regler, den riktige verdien vises for respondentene.",
@@ -1502,7 +1521,8 @@ export var nbStrings = {
     header: {
       inheritWidthFrom: "Alternativet \"Samme som beholder\" justerer automatisk bredden på overskriftsinnholdsområdet slik at det passer inn i HTML-elementet undersøkelsen er plassert i.",
       textAreaWidth: "Bredden på overskriftsområdet som inneholder evalueringstittelen og beskrivelsen, målt i piksler.",
-      overlapEnabled: "Gjør bunnen av toppteksten overlagt med toppen av undersøkelsen."
+      overlapEnabled: "Gjør bunnen av toppteksten overlagt med toppen av undersøkelsen.",
+      mobileHeight: "Når den er satt til 0, beregnes høyden automatisk for å få plass til overskriftens innhold."
     },
     panellayoutcolumn: {
       effectiveWidth: "Godtar verdier %.",
@@ -1590,6 +1610,7 @@ export var nbStrings = {
     imageFit: "Tilpasning til bildet",
     altText: "Alternativ tekst",
     height: "Høyde",
+    mobileHeight: "Høyde på smarttelefoner",
     penColor: "Farge på penn",
     backgroundColor: "Bakgrunnsfarge",
     templateElements: "Mal elementer",
@@ -2780,3 +2801,25 @@ editorLocalization.locales["nb"] = nbStrings;
 // ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Klikk på et kategoriikon for å utforske undersøkelsesinnstillingene. Flere innstillinger blir tilgjengelige når du legger til et undersøkelseselement på designoverflaten."
 // pe.caseInsensitive: "Case insensitive" => "Skiller ikke mellom store og små bokstaver"
 // pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Velg om store og små bokstaver i det regulære uttrykket må behandles som likeverdige."
+
+// ed.surveyPlaceholderTitle: "Your form is empty" => "Skjemaet ditt er tomt"
+// ed.surveyPlaceholderTitleMobile: "Your form is empty" => "Skjemaet ditt er tomt"
+// ed.surveyPlaceholderDescription: "Drag an element from the toolbox or click the button below." => "Dra et element fra verktøykassen eller klikk på knappen nedenfor."
+// ed.surveyPlaceholderDescriptionMobile: "Drag an element from the toolbox or click the button below." => "Dra et element fra verktøykassen eller klikk på knappen nedenfor."
+// ed.previewPlaceholderTitle: "No preview" => "Ingen forhåndsvisning"
+// ed.previewPlaceholderTitleMobile: "No preview" => "Ingen forhåndsvisning"
+// ed.previewPlaceholderDescription: "The survey doesn't contain any visible elements." => "Undersøkelsen inneholder ingen synlige elementer."
+// ed.previewPlaceholderDescriptionMobile: "The survey doesn't contain any visible elements." => "Undersøkelsen inneholder ingen synlige elementer."
+// ed.translationsPlaceholderTitle: "No strings to translate" => "Ingen strenger å oversette"
+// ed.translationsPlaceholderTitleMobile: "No strings to translate" => "Ingen strenger å oversette"
+// ed.translationsPlaceholderDescription: "Add elements to your form or change the strings filter in the toolbar." => "Legg til elementer i skjemaet, eller endre strengfilteret på verktøylinjen."
+// ed.translationsPlaceholderDescriptionMobile: "Add elements to your form or change the strings filter in the toolbar." => "Legg til elementer i skjemaet, eller endre strengfilteret på verktøylinjen."
+// lg.logicPlaceholderTitle: "No logical rules" => "Ingen logiske regler"
+// lg.logicPlaceholderTitleMobile: "No logical rules" => "Ingen logiske regler"
+// lg.logicPlaceholderDescription: "Create a rule to customize the flow of the survey." => "Opprett en regel for å tilpasse flyten i evalueringen."
+// lg.logicPlaceholderDescriptionMobile: "Create a rule to customize the flow of the survey." => "Opprett en regel for å tilpasse flyten i evalueringen."
+// pe.showTimer: "Use a timer" => "Bruk en tidtaker"
+// theme.advancedMode: "Advanced mode" => "Avansert modus"
+// pehelp.timerLocation: "Sets the location of a timer on a page." => "Angir plasseringen av en tidtaker på en side."
+// header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Når den er satt til 0, beregnes høyden automatisk for å få plass til overskriftens innhold."
+// p.mobileHeight: "Height on smartphones" => "Høyde på smarttelefoner"

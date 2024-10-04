@@ -182,6 +182,18 @@ var frenchTranslation = {
     pagePlaceHolder: "La page est vide. Faites glisser un élément de la boîte à outils ou cliquez sur le bouton ci-dessous.",
     imagePlaceHolder: "Glissez et déposez une image ici ou cliquez sur le bouton ci-dessous pour choisir une image à télécharger",
     surveyPlaceHolderMobile: "Cliquez sur le bouton « Ajouter une question » ci-dessous pour commencer à créer votre formulaire.",
+    surveyPlaceholderTitle: "Votre formulaire est vide",
+    surveyPlaceholderTitleMobile: "Votre formulaire est vide",
+    surveyPlaceholderDescription: "Faites glisser un élément depuis la boîte à outils ou cliquez sur le bouton ci-dessous.",
+    surveyPlaceholderDescriptionMobile: "Faites glisser un élément depuis la boîte à outils ou cliquez sur le bouton ci-dessous.",
+    previewPlaceholderTitle: "Pas d’aperçu",
+    previewPlaceholderTitleMobile: "Pas d’aperçu",
+    previewPlaceholderDescription: "L’enquête ne contient aucun élément visible.",
+    previewPlaceholderDescriptionMobile: "L’enquête ne contient aucun élément visible.",
+    translationsPlaceholderTitle: "Pas de chaînes à traduire",
+    translationsPlaceholderTitleMobile: "Pas de chaînes à traduire",
+    translationsPlaceholderDescription: "Ajoutez des éléments à votre formulaire ou modifiez le filtre de chaînes dans la barre d’outils.",
+    translationsPlaceholderDescriptionMobile: "Ajoutez des éléments à votre formulaire ou modifiez le filtre de chaînes dans la barre d’outils.",
     pagePlaceHolderMobile: "Cliquez sur le bouton « Ajouter une question » ci-dessous pour ajouter un nouvel élément à la page.",
     panelPlaceHolderMobile: "Cliquez sur le bouton « Ajouter une question » ci-dessous pour ajouter un nouvel élément au panneau.",
     imagePlaceHolderMobile: "Cliquez sur le bouton ci-dessous et choisissez une image à télécharger",
@@ -194,6 +206,10 @@ var frenchTranslation = {
     lg: {
       addNewItem: "Ajouter une nouvelle règle",
       empty_tab: "Créez une règle pour personnaliser le déroulement du sondage.",
+      logicPlaceholderTitle: "Pas de règles logiques",
+      logicPlaceholderTitleMobile: "Pas de règles logiques",
+      logicPlaceholderDescription: "Créez une règle pour personnaliser le flux de l’enquête.",
+      logicPlaceholderDescriptionMobile: "Créez une règle pour personnaliser le flux de l’enquête.",
       page_visibilityName: "Afficher/masquer la page",
       page_enableName: "Activer (désactiver) la page",
       page_requireName: "Rendre la page obligatoire",
@@ -617,6 +633,7 @@ var frenchTranslation = {
     questionsOrder: "Ordre des éléments sur la page",
     timeLimit: "Temps maximum pour terminer le sondage",
     timeLimitPerPage: "Temps maximum pour terminer une page",
+    showTimer: "Utiliser une minuterie",
     timerLocation: "Afficher le panneau chronomètre",
     timerInfoMode: "Mode d'affichage du panneau chronomètre",
     renderMode: "Mode de rendu",
@@ -875,6 +892,7 @@ var frenchTranslation = {
       fontSize: "Taille de la police",
       scale: "Écaille",
       cornerRadius: "Rayon d’angle",
+      advancedMode: "Mode avancé",
       pageTitle: "Police de titre",
       pageDescription: "Police de description",
       questionTitle: "Police de titre",
@@ -1421,6 +1439,7 @@ var frenchTranslation = {
       questionsOrder: "Conserve l’ordre d’origine des questions ou les rend aléatoires. L’option « Hériter » applique le paramètre au niveau de l’enquête (« Original » par défaut). L’effet de ce paramètre n’est visible que dans l’onglet Aperçu.",
       navigationButtonsVisibility: "Définit la visibilité des boutons de navigation sur la page. L’option « Hériter » applique le paramètre au niveau de l’enquête, qui est par défaut « Visible »."
     },
+    timerLocation: "Définit l’emplacement d’un minuteur sur une page.",
     panelsState: "Choisissez parmi : « Verrouillé » - les utilisateurs ne peuvent pas développer ou réduire les panneaux ; « Réduire tout » - tous les panneaux commencent dans un état réduit ; « Développer tout » - tous les panneaux commencent dans un état développé ; « Premier développé » - seul le premier panneau est initialement développé.",
     imageLinkName: "Entrez un nom de propriété partagée dans le tableau d’objets qui contient les URL de fichier image ou vidéo que vous souhaitez afficher dans la liste de choix.",
     choices: "La valeur de gauche sert d’ID d’élément utilisé dans les règles conditionnelles, la valeur de droite est affichée aux personnes interrogées.",
@@ -1502,7 +1521,8 @@ var frenchTranslation = {
     header: {
       inheritWidthFrom: "L’option « Identique au conteneur » ajuste automatiquement la largeur de la zone de contenu de l’en-tête pour s’adapter à l’élément HTML dans lequel l’enquête est placée.",
       textAreaWidth: "Largeur de la zone d’en-tête contenant le titre et la description de l’enquête, mesurée en pixels.",
-      overlapEnabled: "Fait en sorte que le bas de l’en-tête soit superposé au haut de l’enquête."
+      overlapEnabled: "Fait en sorte que le bas de l’en-tête soit superposé au haut de l’enquête.",
+      mobileHeight: "Lorsqu’elle est définie sur 0, la hauteur est calculée automatiquement pour s’adapter au contenu de l’en-tête."
     },
     panellayoutcolumn: {
       effectiveWidth: "Accepte les valeurs %.",
@@ -1590,6 +1610,7 @@ var frenchTranslation = {
     imageFit: "Ajustement de l’image",
     altText: "Texte de remplacement",
     height: "Hauteur",
+    mobileHeight: "Hauteur sur les smartphones",
     penColor: "Couleur du stylo",
     backgroundColor: "Couleur d’arrière-plan",
     templateElements: "Modèle des éléments",
@@ -2838,3 +2859,25 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Cliquez sur n’importe quelle icône de catégorie pour explorer les paramètres de l’enquête. Des paramètres supplémentaires seront disponibles une fois que vous aurez ajouté un élément de topographie à l’aire de conception."
 // pe.caseInsensitive: "Case insensitive" => "Insensible à la casse"
 // pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Indiquez si les lettres majuscules et minuscules de l’expression régulière doivent être traitées comme équivalentes."
+
+// ed.surveyPlaceholderTitle: "Your form is empty" => "Votre formulaire est vide"
+// ed.surveyPlaceholderTitleMobile: "Your form is empty" => "Votre formulaire est vide"
+// ed.surveyPlaceholderDescription: "Drag an element from the toolbox or click the button below." => "Faites glisser un élément depuis la boîte à outils ou cliquez sur le bouton ci-dessous."
+// ed.surveyPlaceholderDescriptionMobile: "Drag an element from the toolbox or click the button below." => "Faites glisser un élément depuis la boîte à outils ou cliquez sur le bouton ci-dessous."
+// ed.previewPlaceholderTitle: "No preview" => "Pas d’aperçu"
+// ed.previewPlaceholderTitleMobile: "No preview" => "Pas d’aperçu"
+// ed.previewPlaceholderDescription: "The survey doesn't contain any visible elements." => "L’enquête ne contient aucun élément visible."
+// ed.previewPlaceholderDescriptionMobile: "The survey doesn't contain any visible elements." => "L’enquête ne contient aucun élément visible."
+// ed.translationsPlaceholderTitle: "No strings to translate" => "Pas de chaînes à traduire"
+// ed.translationsPlaceholderTitleMobile: "No strings to translate" => "Pas de chaînes à traduire"
+// ed.translationsPlaceholderDescription: "Add elements to your form or change the strings filter in the toolbar." => "Ajoutez des éléments à votre formulaire ou modifiez le filtre de chaînes dans la barre d’outils."
+// ed.translationsPlaceholderDescriptionMobile: "Add elements to your form or change the strings filter in the toolbar." => "Ajoutez des éléments à votre formulaire ou modifiez le filtre de chaînes dans la barre d’outils."
+// lg.logicPlaceholderTitle: "No logical rules" => "Pas de règles logiques"
+// lg.logicPlaceholderTitleMobile: "No logical rules" => "Pas de règles logiques"
+// lg.logicPlaceholderDescription: "Create a rule to customize the flow of the survey." => "Créez une règle pour personnaliser le flux de l’enquête."
+// lg.logicPlaceholderDescriptionMobile: "Create a rule to customize the flow of the survey." => "Créez une règle pour personnaliser le flux de l’enquête."
+// pe.showTimer: "Use a timer" => "Utiliser une minuterie"
+// theme.advancedMode: "Advanced mode" => "Mode avancé"
+// pehelp.timerLocation: "Sets the location of a timer on a page." => "Définit l’emplacement d’un minuteur sur une page."
+// header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Lorsqu’elle est définie sur 0, la hauteur est calculée automatiquement pour s’adapter au contenu de l’en-tête."
+// p.mobileHeight: "Height on smartphones" => "Hauteur sur les smartphones"

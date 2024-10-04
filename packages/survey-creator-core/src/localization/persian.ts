@@ -182,6 +182,18 @@ var persianStrings = {
     pagePlaceHolder: "صفحه خالی است. یک عنصر را از جعبه ابزار بکشید یا روی دکمه زیر کلیک کنید.",
     imagePlaceHolder: "یک تصویر را در اینجا بکشید و رها کنید یا روی دکمه زیر کلیک کنید و تصویری را برای اپلود انتخاب کنید",
     surveyPlaceHolderMobile: "روی دکمه \"افزودن سؤال\" در زیر کلیک کنید تا شروع به ایجاد فرم خود کنید.",
+    surveyPlaceholderTitle: "فرم شما خالی است",
+    surveyPlaceholderTitleMobile: "فرم شما خالی است",
+    surveyPlaceholderDescription: "یک عنصر را از جعبه ابزار بکشید یا روی دکمه زیر کلیک کنید.",
+    surveyPlaceholderDescriptionMobile: "یک عنصر را از جعبه ابزار بکشید یا روی دکمه زیر کلیک کنید.",
+    previewPlaceholderTitle: "بدون پیش نمایش",
+    previewPlaceholderTitleMobile: "بدون پیش نمایش",
+    previewPlaceholderDescription: "این نظرسنجی حاوی هیچ عنصر قابل مشاهده ای نیست.",
+    previewPlaceholderDescriptionMobile: "این نظرسنجی حاوی هیچ عنصر قابل مشاهده ای نیست.",
+    translationsPlaceholderTitle: "بدون رشته برای ترجمه",
+    translationsPlaceholderTitleMobile: "بدون رشته برای ترجمه",
+    translationsPlaceholderDescription: "عناصر را به فرم خود اضافه کنید یا فیلتر رشته ها را در نوار ابزار تغییر دهید.",
+    translationsPlaceholderDescriptionMobile: "عناصر را به فرم خود اضافه کنید یا فیلتر رشته ها را در نوار ابزار تغییر دهید.",
     pagePlaceHolderMobile: "روی دکمه \"افزودن سؤال\" در زیر کلیک کنید تا عنصر جدیدی به صفحه اضافه شود.",
     panelPlaceHolderMobile: "روی دکمه \"افزودن سؤال\" در زیر کلیک کنید تا یک عنصر جدید به پانل اضافه شود.",
     imagePlaceHolderMobile: "روی دکمه زیر کلیک کنید و تصویری را برای اپلود انتخاب کنید",
@@ -194,6 +206,10 @@ var persianStrings = {
     lg: {
       addNewItem: "اضافه کردن آیتم جدید",
       empty_tab: "یک آیتم را برای سفارشی کردن جریان نظرسنجی انتخاب کنید",
+      logicPlaceholderTitle: "بدون قوانین منطقی",
+      logicPlaceholderTitleMobile: "بدون قوانین منطقی",
+      logicPlaceholderDescription: "یک قانون برای سفارشی کردن جریان نظرسنجی ایجاد کنید.",
+      logicPlaceholderDescriptionMobile: "یک قانون برای سفارشی کردن جریان نظرسنجی ایجاد کنید.",
       page_visibilityName: "قابلیت رویت صفحه ",
       page_enableName: "فعال/غیرفعال کردن صفحه",
       page_requireName: "ایجاد صفحه مورد نیاز است",
@@ -617,6 +633,7 @@ var persianStrings = {
     questionsOrder: "ترتیب المان ها در صفحه",
     timeLimit: "نهایت زمان برای اتمام نظرسنجی",
     timeLimitPerPage: "نهایت زمان برای اتمام این صفحه نظرسنجی",
+    showTimer: "از تایمر استفاده کنید",
     timerLocation: "نمایش پنل زمان سنج",
     timerInfoMode: "نمایش حالت پنل زمان سنج",
     renderMode: "حالت رندر",
@@ -875,6 +892,7 @@ var persianStrings = {
       fontSize: "اندازه قلم",
       scale: "مقیاس",
       cornerRadius: "شعاع گوشه",
+      advancedMode: "حالت پیشرفته",
       pageTitle: "قلم عنوان",
       pageDescription: "قلم توصیف",
       questionTitle: "قلم عنوان",
@@ -1421,6 +1439,7 @@ var persianStrings = {
       questionsOrder: "ترتیب اصلی سوالات را نگه می دارد یا انها را تصادفی می کند. گزینه \"ارث\" تنظیم سطح نظرسنجی (\"اصلی\" به طور پیش فرض) را اعمال می کند. اثر این تنظیم فقط در تب Preview قابل مشاهده است.",
       navigationButtonsVisibility: "قابلیت مشاهده دکمههای پیمایش را روی صفحه تنظیم میکند. گزینه \"به ارث بردن\" تنظیم سطح نظرسنجی را اعمال می کند که به طور پیش فرض به \"قابل مشاهده\" است."
     },
+    timerLocation: "مکان یک تایمر را در یک صفحه تنظیم می کند.",
     panelsState: "انتخاب از: \"قفل شده\" - کاربران نمی توانند پانل ها را گسترش یا سقوط دهند؛ \"سقوط همه\" - تمام پانل ها در یک حالت فروپاشی شروع می شوند؛ \"گسترش همه\" - تمام پانل ها در یک حالت گسترش یافته شروع می شوند؛ \"اولین گسترش\" - تنها پانل اول در ابتدا گسترش یافته است.",
     imageLinkName: "یک نام خصوصیت مشترک را درون ارایۀ اشیایی که حاوی نشانیهای اینترنتی پرونده تصویر یا ویدئویی است که میخواهید در فهرست انتخاب نمایش داده شود، وارد کنید.",
     choices: "مقدار سمت چپ به عنوان یک شناسه مورد استفاده در قوانین شرطی عمل می کند، مقدار مناسب برای پاسخ دهندگان نمایش داده می شود.",
@@ -1502,7 +1521,8 @@ var persianStrings = {
     header: {
       inheritWidthFrom: "گزینه \"همان کانتینر\" به طور خودکار عرض ناحیه محتوای هدر را تنظیم می کند تا در عنصر HTML که نظرسنجی در آن قرار می گیرد قرار گیرد.",
       textAreaWidth: "عرض ناحیه سرصفحه که حاوی عنوان و توضیحات نظرسنجی است که بر حسب پیکسل اندازه گیری می شود.",
-      overlapEnabled: "پایین سربرگ را با بالای نظرسنجی پوشانده می کند."
+      overlapEnabled: "پایین سربرگ را با بالای نظرسنجی پوشانده می کند.",
+      mobileHeight: "هنگامی که روی 0 تنظیم می شود، ارتفاع به طور خودکار محاسبه می شود تا محتوای هدر را در خود جای دهد."
     },
     panellayoutcolumn: {
       effectiveWidth: "مقادیر را می پذیرد.",
@@ -1590,6 +1610,7 @@ var persianStrings = {
     imageFit: "متناسب با تصویر",
     altText: "متن دگرساز",
     height: "ارتفاع",
+    mobileHeight: "ارتفاع در گوشی های هوشمند",
     penColor: "رنگ قلم",
     backgroundColor: "رنگ پسزمینه",
     templateElements: "عناصر قالب",
@@ -2732,3 +2753,25 @@ editorLocalization.locales["fa"] = persianStrings;
 // ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "برای کاوش در تنظیمات نظرسنجی، روی هر نماد دسته کلیک کنید. پس از افزودن یک عنصر نظرسنجی به سطح طراحی، تنظیمات اضافی در دسترس خواهند بود."
 // pe.caseInsensitive: "Case insensitive" => "غیر حساس به حروف بزرگ"
 // pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "انتخاب کنید که آیا حروف بزرگ و کوچک در عبارت منظم باید معادل در نظر گرفته شوند."
+
+// ed.surveyPlaceholderTitle: "Your form is empty" => "فرم شما خالی است"
+// ed.surveyPlaceholderTitleMobile: "Your form is empty" => "فرم شما خالی است"
+// ed.surveyPlaceholderDescription: "Drag an element from the toolbox or click the button below." => "یک عنصر را از جعبه ابزار بکشید یا روی دکمه زیر کلیک کنید."
+// ed.surveyPlaceholderDescriptionMobile: "Drag an element from the toolbox or click the button below." => "یک عنصر را از جعبه ابزار بکشید یا روی دکمه زیر کلیک کنید."
+// ed.previewPlaceholderTitle: "No preview" => "بدون پیش نمایش"
+// ed.previewPlaceholderTitleMobile: "No preview" => "بدون پیش نمایش"
+// ed.previewPlaceholderDescription: "The survey doesn't contain any visible elements." => "این نظرسنجی حاوی هیچ عنصر قابل مشاهده ای نیست."
+// ed.previewPlaceholderDescriptionMobile: "The survey doesn't contain any visible elements." => "این نظرسنجی حاوی هیچ عنصر قابل مشاهده ای نیست."
+// ed.translationsPlaceholderTitle: "No strings to translate" => "بدون رشته برای ترجمه"
+// ed.translationsPlaceholderTitleMobile: "No strings to translate" => "بدون رشته برای ترجمه"
+// ed.translationsPlaceholderDescription: "Add elements to your form or change the strings filter in the toolbar." => "عناصر را به فرم خود اضافه کنید یا فیلتر رشته ها را در نوار ابزار تغییر دهید."
+// ed.translationsPlaceholderDescriptionMobile: "Add elements to your form or change the strings filter in the toolbar." => "عناصر را به فرم خود اضافه کنید یا فیلتر رشته ها را در نوار ابزار تغییر دهید."
+// lg.logicPlaceholderTitle: "No logical rules" => "بدون قوانین منطقی"
+// lg.logicPlaceholderTitleMobile: "No logical rules" => "بدون قوانین منطقی"
+// lg.logicPlaceholderDescription: "Create a rule to customize the flow of the survey." => "یک قانون برای سفارشی کردن جریان نظرسنجی ایجاد کنید."
+// lg.logicPlaceholderDescriptionMobile: "Create a rule to customize the flow of the survey." => "یک قانون برای سفارشی کردن جریان نظرسنجی ایجاد کنید."
+// pe.showTimer: "Use a timer" => "از تایمر استفاده کنید"
+// theme.advancedMode: "Advanced mode" => "حالت پیشرفته"
+// pehelp.timerLocation: "Sets the location of a timer on a page." => "مکان یک تایمر را در یک صفحه تنظیم می کند."
+// header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "هنگامی که روی 0 تنظیم می شود، ارتفاع به طور خودکار محاسبه می شود تا محتوای هدر را در خود جای دهد."
+// p.mobileHeight: "Height on smartphones" => "ارتفاع در گوشی های هوشمند"

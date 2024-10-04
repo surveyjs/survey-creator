@@ -182,6 +182,18 @@ export var hrStrings = {
     pagePlaceHolder: "Stranica je prazna. Povucite element iz alatnog okvira ili kliknite donji gumb.",
     imagePlaceHolder: "Povucite i ispustite sliku ovdje ili kliknite donji gumb i odaberite sliku koju želite prenijeti",
     surveyPlaceHolderMobile: "Kliknite donji gumb \"Dodaj pitanje\" da biste započeli stvaranje obrasca.",
+    surveyPlaceholderTitle: "Obrazac je prazan",
+    surveyPlaceholderTitleMobile: "Obrazac je prazan",
+    surveyPlaceholderDescription: "Povucite element iz okvira s alatima ili kliknite gumb ispod.",
+    surveyPlaceholderDescriptionMobile: "Povucite element iz okvira s alatima ili kliknite gumb ispod.",
+    previewPlaceholderTitle: "Nema pregleda",
+    previewPlaceholderTitleMobile: "Nema pregleda",
+    previewPlaceholderDescription: "Anketa ne sadrži vidljive elemente.",
+    previewPlaceholderDescriptionMobile: "Anketa ne sadrži vidljive elemente.",
+    translationsPlaceholderTitle: "Nema obaveza za prevođenje",
+    translationsPlaceholderTitleMobile: "Nema obaveza za prevođenje",
+    translationsPlaceholderDescription: "Dodajte elemente u obrazac ili promijenite filtar nizova na alatnoj traci.",
+    translationsPlaceholderDescriptionMobile: "Dodajte elemente u obrazac ili promijenite filtar nizova na alatnoj traci.",
     pagePlaceHolderMobile: "Kliknite donji gumb \"Dodaj pitanje\" da biste na stranicu dodali novi element.",
     panelPlaceHolderMobile: "Kliknite donji gumb \"Dodaj pitanje\" da biste na ploču dodali novi element.",
     imagePlaceHolderMobile: "Kliknite donji gumb i odaberite sliku koju želite prenijeti",
@@ -194,6 +206,10 @@ export var hrStrings = {
     lg: {
       addNewItem: "Dodaj novo pravilo",
       empty_tab: "Stvorite pravilo za prilagodbu tijeka upitnika.",
+      logicPlaceholderTitle: "Nema logičkih pravila",
+      logicPlaceholderTitleMobile: "Nema logičkih pravila",
+      logicPlaceholderDescription: "Stvorite pravilo za prilagodbu tijeka upitnika.",
+      logicPlaceholderDescriptionMobile: "Stvorite pravilo za prilagodbu tijeka upitnika.",
       page_visibilityName: "Vidljivost stranice",
       page_enableName: "Omogući (onemogući stranicu)",
       page_requireName: "Učini stranicu obaveznom",
@@ -617,6 +633,7 @@ export var hrStrings = {
     questionsOrder: "Redoslijed elemenata na stranici",
     timeLimit: "Maksimalno vrijeme za dovršaje ankete",
     timeLimitPerPage: "Maksimalno vrijeme za dovršanje stranice u anketi",
+    showTimer: "Koristite mjerač vremena",
     timerLocation: "Pokaži ploču timera",
     timerInfoMode: "Prikazate način rada timer panela",
     renderMode: "Način prikaza",
@@ -875,6 +892,7 @@ export var hrStrings = {
       fontSize: "Veličina fonta",
       scale: "Vaga",
       cornerRadius: "Kutni radijus",
+      advancedMode: "Napredni način rada",
       pageTitle: "Font naslova",
       pageDescription: "Font opisa",
       questionTitle: "Font naslova",
@@ -1421,6 +1439,7 @@ export var hrStrings = {
       questionsOrder: "Zadržava izvorni redoslijed pitanja ili ih randomizira. Mogućnost \"Naslijedi\" primjenjuje postavku na razini upitnika (\"Original\" prema zadanim postavkama). Efekt ove postavke vidljiv je samo na kartici Pretpregled.",
       navigationButtonsVisibility: "Postavlja vidljivost navigacijskih gumba na stranici. Opcija \"Naslijedi\" primjenjuje postavku na razini upitnika, koja je zadana kao \"Vidljivo\"."
     },
+    timerLocation: "Postavlja lokaciju mjerača vremena na stranici.",
     panelsState: "Odaberite između: \"Zaključano\" - korisnici ne mogu proširiti ili sažeti ploče; \"Sažmite sve\" - sve ploče počinju u urušenom stanju; \"Proširite sve\" - sve ploče počinju u proširenom stanju; \"Prvo prošireno\" - samo je prva ploča u početku proširena.",
     imageLinkName: "Unesite naziv zajedničkog svojstva unutar polja objekata koje sadrži URL-ove slike ili videodatoteke koje želite prikazati na popisu izbora.",
     choices: "Lijeva vrijednost služi kao ID artikla koji se koristi u uvjetnim pravilima, a ispitanicima se prikazuje prava vrijednost.",
@@ -1502,7 +1521,8 @@ export var hrStrings = {
     header: {
       inheritWidthFrom: "Opcija \"Isto kao spremnik\" automatski prilagođava širinu područja sadržaja zaglavlja kako bi se uklopila u HTML element u koji je upitnik postavljen.",
       textAreaWidth: "Širina područja zaglavlja koje sadrži naslov i opis upitnika, mjerena u pikselima.",
-      overlapEnabled: "Čini dno zaglavlja prekrivenim vrhom upitnika."
+      overlapEnabled: "Čini dno zaglavlja prekrivenim vrhom upitnika.",
+      mobileHeight: "Kada je postavljena na 0, visina se automatski izračunava kako bi se prilagodio sadržaju zaglavlja."
     },
     panellayoutcolumn: {
       effectiveWidth: "Prihvaća vrijednosti %.",
@@ -1590,6 +1610,7 @@ export var hrStrings = {
     imageFit: "Prilagodba slike",
     altText: "Zamjenski tekst",
     height: "Visina",
+    mobileHeight: "Visina na pametnim telefonima",
     penColor: "Boja olovke",
     backgroundColor: "Boja pozadine",
     templateElements: "Elementi predloška",
@@ -2771,3 +2792,25 @@ editorLocalization.locales["hr"] = hrStrings;
 // ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Kliknite bilo koju ikonu kategorije da biste istražili postavke upitnika. Dodatne postavke postat će dostupne nakon što dodate element upitnika na površinu dizajna."
 // pe.caseInsensitive: "Case insensitive" => "Bez osjetljivosti na velika i mala slova"
 // pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Odaberite ako se velika i mala slova u regularnom izrazu moraju tretirati kao ekvivalentna."
+
+// ed.surveyPlaceholderTitle: "Your form is empty" => "Obrazac je prazan"
+// ed.surveyPlaceholderTitleMobile: "Your form is empty" => "Obrazac je prazan"
+// ed.surveyPlaceholderDescription: "Drag an element from the toolbox or click the button below." => "Povucite element iz okvira s alatima ili kliknite gumb ispod."
+// ed.surveyPlaceholderDescriptionMobile: "Drag an element from the toolbox or click the button below." => "Povucite element iz okvira s alatima ili kliknite gumb ispod."
+// ed.previewPlaceholderTitle: "No preview" => "Nema pregleda"
+// ed.previewPlaceholderTitleMobile: "No preview" => "Nema pregleda"
+// ed.previewPlaceholderDescription: "The survey doesn't contain any visible elements." => "Anketa ne sadrži vidljive elemente."
+// ed.previewPlaceholderDescriptionMobile: "The survey doesn't contain any visible elements." => "Anketa ne sadrži vidljive elemente."
+// ed.translationsPlaceholderTitle: "No strings to translate" => "Nema obaveza za prevođenje"
+// ed.translationsPlaceholderTitleMobile: "No strings to translate" => "Nema obaveza za prevođenje"
+// ed.translationsPlaceholderDescription: "Add elements to your form or change the strings filter in the toolbar." => "Dodajte elemente u obrazac ili promijenite filtar nizova na alatnoj traci."
+// ed.translationsPlaceholderDescriptionMobile: "Add elements to your form or change the strings filter in the toolbar." => "Dodajte elemente u obrazac ili promijenite filtar nizova na alatnoj traci."
+// lg.logicPlaceholderTitle: "No logical rules" => "Nema logičkih pravila"
+// lg.logicPlaceholderTitleMobile: "No logical rules" => "Nema logičkih pravila"
+// lg.logicPlaceholderDescription: "Create a rule to customize the flow of the survey." => "Stvorite pravilo za prilagodbu tijeka upitnika."
+// lg.logicPlaceholderDescriptionMobile: "Create a rule to customize the flow of the survey." => "Stvorite pravilo za prilagodbu tijeka upitnika."
+// pe.showTimer: "Use a timer" => "Koristite mjerač vremena"
+// theme.advancedMode: "Advanced mode" => "Napredni način rada"
+// pehelp.timerLocation: "Sets the location of a timer on a page." => "Postavlja lokaciju mjerača vremena na stranici."
+// header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Kada je postavljena na 0, visina se automatski izračunava kako bi se prilagodio sadržaju zaglavlja."
+// p.mobileHeight: "Height on smartphones" => "Visina na pametnim telefonima"

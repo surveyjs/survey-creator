@@ -182,6 +182,18 @@ export var huStrings = {
     pagePlaceHolder: "Az oldal üres. Húzzon egy elemet az eszköztárról, vagy kattintson az alábbi gombra.",
     imagePlaceHolder: "Húzzon ide egy képet, vagy kattintson az alábbi gombra, és válassza ki a feltölteni kívánt képet",
     surveyPlaceHolderMobile: "Kattintson az alábbi \"Kérdés hozzáadása\" gombra az űrlap létrehozásának megkezdéséhez.",
+    surveyPlaceholderTitle: "Az űrlap üres",
+    surveyPlaceholderTitleMobile: "Az űrlap üres",
+    surveyPlaceholderDescription: "Húzzon egy elemet az eszköztárról, vagy kattintson az alábbi gombra.",
+    surveyPlaceholderDescriptionMobile: "Húzzon egy elemet az eszköztárról, vagy kattintson az alábbi gombra.",
+    previewPlaceholderTitle: "Nincs előnézet",
+    previewPlaceholderTitleMobile: "Nincs előnézet",
+    previewPlaceholderDescription: "A felmérés nem tartalmaz látható elemeket.",
+    previewPlaceholderDescriptionMobile: "A felmérés nem tartalmaz látható elemeket.",
+    translationsPlaceholderTitle: "Nincsenek lefordítandó karakterláncok",
+    translationsPlaceholderTitleMobile: "Nincsenek lefordítandó karakterláncok",
+    translationsPlaceholderDescription: "Adjon hozzá elemeket az űrlaphoz, vagy módosítsa a karakterláncszűrő szűrőjét az eszköztáron.",
+    translationsPlaceholderDescriptionMobile: "Adjon hozzá elemeket az űrlaphoz, vagy módosítsa a karakterláncszűrő szűrőjét az eszköztáron.",
     pagePlaceHolderMobile: "Kattintson az alábbi \"Kérdés hozzáadása\" gombra, hogy új elemet adjon az oldalhoz.",
     panelPlaceHolderMobile: "Kattintson az alábbi \"Kérdés hozzáadása\" gombra, hogy új elemet adjon a panelhez.",
     imagePlaceHolderMobile: "Kattintson az alábbi gombra, és válassza ki a feltölteni kívánt képet",
@@ -194,6 +206,10 @@ export var huStrings = {
     lg: {
       addNewItem: "Új szabály hozzáadása",
       empty_tab: "Hozzon létre egy szabályt a felmérés folyamatának testreszabásához.",
+      logicPlaceholderTitle: "Nincsenek logikai szabályok",
+      logicPlaceholderTitleMobile: "Nincsenek logikai szabályok",
+      logicPlaceholderDescription: "Hozzon létre egy szabályt a felmérés folyamatának testreszabásához.",
+      logicPlaceholderDescriptionMobile: "Hozzon létre egy szabályt a felmérés folyamatának testreszabásához.",
       page_visibilityName: "Oldal megjelenítése (elrejtése)",
       page_enableName: "Oldal engedélyezése (letiltása)",
       page_requireName: "Az oldal kötelezővé tétele",
@@ -617,6 +633,7 @@ export var huStrings = {
     questionsOrder: "Elemek rendezése a lapon",
     timeLimit: "A kérdőív kitöltésére fordítható maximális idő",
     timeLimitPerPage: "Egy lap kitöltésére fordítható maximális idő",
+    showTimer: "Időzítő használata",
     timerLocation: "Időzító mutatása",
     timerInfoMode: "Időzító módja",
     renderMode: "Megjelenítés módja",
@@ -875,6 +892,7 @@ export var huStrings = {
       fontSize: "Betűméret",
       scale: "Hangsor",
       cornerRadius: "Sarok sugara",
+      advancedMode: "Speciális mód",
       pageTitle: "Cím betűtípusa",
       pageDescription: "Leírás betűtípus",
       questionTitle: "Cím betűtípusa",
@@ -1421,6 +1439,7 @@ export var huStrings = {
       questionsOrder: "Megtartja a kérdések eredeti sorrendjét, vagy véletlenszerűvé teszi őket. Az \"Öröklés\" opció a felmérési szintű beállítást alkalmazza (\"Eredeti\" alapértelmezés szerint). A beállítás hatása csak az Előnézet lapon látható.",
       navigationButtonsVisibility: "Beállítja a navigációs gombok láthatóságát az oldalon. Az \"Öröklés\" opció a felmérés szintű beállítást alkalmazza, amely alapértelmezés szerint \"Látható\"."
     },
+    timerLocation: "Beállítja az időzítő helyét az oldalon.",
     panelsState: "Válasszon a következők közül: \"Zárolt\" - a felhasználók nem bonthatják ki vagy csukhatják össze a paneleket; \"Az összes összecsukása\" - minden panel összecsukott állapotban indul; \"Összes kibontása\" - minden panel kibővített állapotban indul; \"Először bővített\" - csak az első panel bővül.",
     imageLinkName: "Adjon meg egy megosztott tulajdonságnevet az objektumok tömbjében, amely tartalmazza az adatválaszték-listában megjeleníteni kívánt kép- vagy videofájl URL-címeit.",
     choices: "A bal oldali érték a feltételes szabályokban használt elemazonosítóként szolgál, a jobb oldali érték megjelenik a válaszadók számára.",
@@ -1502,7 +1521,8 @@ export var huStrings = {
     header: {
       inheritWidthFrom: "Az \"Ugyanaz, mint a tároló\" beállítás automatikusan beállítja a fejléc tartalomterületének szélességét, hogy illeszkedjen ahhoz a HTML-elemhez, amelybe a felmérés kerül.",
       textAreaWidth: "A felmérés címét és leírását tartalmazó fejlécterület szélessége képpontban mérve.",
-      overlapEnabled: "A fejléc alját a felmérés tetejével átfedésbe helyezi."
+      overlapEnabled: "A fejléc alját a felmérés tetejével átfedésbe helyezi.",
+      mobileHeight: "Ha 0-ra van állítva, a magasság automatikusan kiszámításra kerül, hogy elférjen a fejléc tartalma."
     },
     panellayoutcolumn: {
       effectiveWidth: "Elfogadja a % értékeket",
@@ -1590,6 +1610,7 @@ export var huStrings = {
     imageFit: "Kép illeszkedése",
     altText: "Helyettesítő szöveg",
     height: "Magasság",
+    mobileHeight: "Magasság az okostelefonokon",
     penColor: "Toll színe",
     backgroundColor: "Háttérszín",
     templateElements: "Sablon elemek",
@@ -2930,3 +2951,25 @@ editorLocalization.locales["hu"] = huStrings;
 // ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Kattintson bármelyik kategória ikonjára a felmérési beállítások felfedezéséhez. További beállítások válnak elérhetővé, ha hozzáad egy földmérési elemet a tervezési felülethez."
 // pe.caseInsensitive: "Case insensitive" => "Kis- és nagybetűk megkülönböztetése"
 // pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Válassza ki, hogy a reguláris kifejezés kis- és nagybetűit egyenértékűként kell-e kezelni."
+
+// ed.surveyPlaceholderTitle: "Your form is empty" => "Az űrlap üres"
+// ed.surveyPlaceholderTitleMobile: "Your form is empty" => "Az űrlap üres"
+// ed.surveyPlaceholderDescription: "Drag an element from the toolbox or click the button below." => "Húzzon egy elemet az eszköztárról, vagy kattintson az alábbi gombra."
+// ed.surveyPlaceholderDescriptionMobile: "Drag an element from the toolbox or click the button below." => "Húzzon egy elemet az eszköztárról, vagy kattintson az alábbi gombra."
+// ed.previewPlaceholderTitle: "No preview" => "Nincs előnézet"
+// ed.previewPlaceholderTitleMobile: "No preview" => "Nincs előnézet"
+// ed.previewPlaceholderDescription: "The survey doesn't contain any visible elements." => "A felmérés nem tartalmaz látható elemeket."
+// ed.previewPlaceholderDescriptionMobile: "The survey doesn't contain any visible elements." => "A felmérés nem tartalmaz látható elemeket."
+// ed.translationsPlaceholderTitle: "No strings to translate" => "Nincsenek lefordítandó karakterláncok"
+// ed.translationsPlaceholderTitleMobile: "No strings to translate" => "Nincsenek lefordítandó karakterláncok"
+// ed.translationsPlaceholderDescription: "Add elements to your form or change the strings filter in the toolbar." => "Adjon hozzá elemeket az űrlaphoz, vagy módosítsa a karakterláncszűrő szűrőjét az eszköztáron."
+// ed.translationsPlaceholderDescriptionMobile: "Add elements to your form or change the strings filter in the toolbar." => "Adjon hozzá elemeket az űrlaphoz, vagy módosítsa a karakterláncszűrő szűrőjét az eszköztáron."
+// lg.logicPlaceholderTitle: "No logical rules" => "Nincsenek logikai szabályok"
+// lg.logicPlaceholderTitleMobile: "No logical rules" => "Nincsenek logikai szabályok"
+// lg.logicPlaceholderDescription: "Create a rule to customize the flow of the survey." => "Hozzon létre egy szabályt a felmérés folyamatának testreszabásához."
+// lg.logicPlaceholderDescriptionMobile: "Create a rule to customize the flow of the survey." => "Hozzon létre egy szabályt a felmérés folyamatának testreszabásához."
+// pe.showTimer: "Use a timer" => "Időzítő használata"
+// theme.advancedMode: "Advanced mode" => "Speciális mód"
+// pehelp.timerLocation: "Sets the location of a timer on a page." => "Beállítja az időzítő helyét az oldalon."
+// header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Ha 0-ra van állítva, a magasság automatikusan kiszámításra kerül, hogy elférjen a fejléc tartalma."
+// p.mobileHeight: "Height on smartphones" => "Magasság az okostelefonokon"

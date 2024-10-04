@@ -182,6 +182,18 @@ export var indonesianStrings = {
     pagePlaceHolder: "Halaman kosong. Seret elemen dari kotak alat atau klik tombol di bawah.",
     imagePlaceHolder: "Seret dan lepas gambar di sini atau klik tombol di bawah ini dan pilih gambar untuk diunggah",
     surveyPlaceHolderMobile: "Klik tombol \"Tambahkan Pertanyaan\" di bawah ini untuk mulai membuat formulir Anda.",
+    surveyPlaceholderTitle: "Formulir Anda kosong",
+    surveyPlaceholderTitleMobile: "Formulir Anda kosong",
+    surveyPlaceholderDescription: "Seret elemen dari kotak alat atau klik tombol di bawah ini.",
+    surveyPlaceholderDescriptionMobile: "Seret elemen dari kotak alat atau klik tombol di bawah ini.",
+    previewPlaceholderTitle: "Tidak ada pratinjau",
+    previewPlaceholderTitleMobile: "Tidak ada pratinjau",
+    previewPlaceholderDescription: "Survei tidak berisi elemen yang terlihat.",
+    previewPlaceholderDescriptionMobile: "Survei tidak berisi elemen yang terlihat.",
+    translationsPlaceholderTitle: "Tidak ada ikatan untuk diterjemahkan",
+    translationsPlaceholderTitleMobile: "Tidak ada ikatan untuk diterjemahkan",
+    translationsPlaceholderDescription: "Tambahkan elemen ke formulir Anda atau ubah filter string di toolbar.",
+    translationsPlaceholderDescriptionMobile: "Tambahkan elemen ke formulir Anda atau ubah filter string di toolbar.",
     pagePlaceHolderMobile: "Klik tombol \"Tambahkan Pertanyaan\" di bawah ini untuk menambahkan elemen baru ke halaman.",
     panelPlaceHolderMobile: "Klik tombol \"Tambahkan Pertanyaan\" di bawah ini untuk menambahkan elemen baru ke panel.",
     imagePlaceHolderMobile: "Klik tombol di bawah ini dan pilih gambar untuk diunggah",
@@ -194,6 +206,10 @@ export var indonesianStrings = {
     lg: {
       addNewItem: "Tambahkan Aturan Baru",
       empty_tab: "Buat aturan untuk menyesuaikan alur survei.",
+      logicPlaceholderTitle: "Tidak ada aturan logis",
+      logicPlaceholderTitleMobile: "Tidak ada aturan logis",
+      logicPlaceholderDescription: "Buat aturan untuk menyesuaikan alur survei.",
+      logicPlaceholderDescriptionMobile: "Buat aturan untuk menyesuaikan alur survei.",
       page_visibilityName: "Tampilkan (sembunyikan) halaman",
       page_enableName: "Aktifkan (nonaktifkan) halaman",
       page_requireName: "Buat halaman diperlukan",
@@ -617,6 +633,7 @@ export var indonesianStrings = {
     questionsOrder: "Urutakan elemen pada halaan",
     timeLimit: "Waktu maksimum untuk menyelesaikan survei",
     timeLimitPerPage: "Waktu maksimum untuk menyelesaikan suatu halaman",
+    showTimer: "Gunakan pengatur waktu",
     timerLocation: "Tampilkan panel pengatur waktu",
     timerInfoMode: "Tampilkan mode panel pengatur waktu",
     renderMode: "Mode render",
@@ -875,6 +892,7 @@ export var indonesianStrings = {
       fontSize: "Ukuran font",
       scale: "Sisik",
       cornerRadius: "Radius sudut",
+      advancedMode: "Mode lanjutan",
       pageTitle: "Font judul",
       pageDescription: "Font deskripsi",
       questionTitle: "Font judul",
@@ -1421,6 +1439,7 @@ export var indonesianStrings = {
       questionsOrder: "Menyimpan urutan pertanyaan asli atau mengacaknya. Opsi \"Warisi\" menerapkan setelan tingkat survei (\"Asli\" secara default). Efek pengaturan ini hanya terlihat di tab Pratinjau.",
       navigationButtonsVisibility: "Mengatur visibilitas tombol navigasi di halaman. Opsi \"Warisi\" menerapkan pengaturan tingkat survei, yang defaultnya adalah \"Terlihat\"."
     },
+    timerLocation: "Mengatur lokasi pengatur waktu pada halaman.",
     panelsState: "Pilih dari: \"Terkunci\" - pengguna tidak dapat memperluas atau menciutkan panel; \"Runtuhkan semua\" - semua panel dimulai dalam keadaan diciutkan; \"Perluas semua\" - semua panel dimulai dalam keadaan diperluas; \"Pertama diperluas\" - hanya panel pertama yang awalnya diperluas.",
     imageLinkName: "Masukkan nama properti bersama dalam array objek yang berisi URL file gambar atau video yang ingin Anda tampilkan di daftar pilihan.",
     choices: "Nilai kiri berfungsi sebagai ID item yang digunakan dalam aturan bersyarat, nilai yang tepat ditampilkan kepada responden.",
@@ -1502,7 +1521,8 @@ export var indonesianStrings = {
     header: {
       inheritWidthFrom: "Opsi \"Sama seperti wadah\" secara otomatis menyesuaikan lebar area konten header agar sesuai dengan elemen HTML tempat survei ditempatkan.",
       textAreaWidth: "Lebar area header yang berisi judul dan deskripsi survei, diukur dalam piksel.",
-      overlapEnabled: "Membuat bagian bawah header dilapisi dengan bagian atas survei."
+      overlapEnabled: "Membuat bagian bawah header dilapisi dengan bagian atas survei.",
+      mobileHeight: "Saat diatur ke 0, tinggi dihitung secara otomatis untuk mengakomodasi konten header."
     },
     panellayoutcolumn: {
       effectiveWidth: "Menerima nilai %",
@@ -1590,6 +1610,7 @@ export var indonesianStrings = {
     imageFit: "Kecocokan gambar",
     altText: "Teks alternatif",
     height: "Tinggi",
+    mobileHeight: "Tinggi di smartphone",
     penColor: "Warna pena",
     backgroundColor: "Warna latar belakang",
     templateElements: "Elemen template",
@@ -2931,3 +2952,25 @@ editorLocalization.locales["id"] = indonesianStrings;
 // ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Klik ikon kategori apa pun untuk menjelajahi pengaturan survei. Pengaturan tambahan akan tersedia setelah Anda menambahkan elemen survei ke permukaan desain."
 // pe.caseInsensitive: "Case insensitive" => "Tidak peka huruf besar/kecil"
 // pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Pilih apakah huruf besar dan kecil dalam ekspresi reguler harus diperlakukan sebagai setara."
+
+// ed.surveyPlaceholderTitle: "Your form is empty" => "Formulir Anda kosong"
+// ed.surveyPlaceholderTitleMobile: "Your form is empty" => "Formulir Anda kosong"
+// ed.surveyPlaceholderDescription: "Drag an element from the toolbox or click the button below." => "Seret elemen dari kotak alat atau klik tombol di bawah ini."
+// ed.surveyPlaceholderDescriptionMobile: "Drag an element from the toolbox or click the button below." => "Seret elemen dari kotak alat atau klik tombol di bawah ini."
+// ed.previewPlaceholderTitle: "No preview" => "Tidak ada pratinjau"
+// ed.previewPlaceholderTitleMobile: "No preview" => "Tidak ada pratinjau"
+// ed.previewPlaceholderDescription: "The survey doesn't contain any visible elements." => "Survei tidak berisi elemen yang terlihat."
+// ed.previewPlaceholderDescriptionMobile: "The survey doesn't contain any visible elements." => "Survei tidak berisi elemen yang terlihat."
+// ed.translationsPlaceholderTitle: "No strings to translate" => "Tidak ada ikatan untuk diterjemahkan"
+// ed.translationsPlaceholderTitleMobile: "No strings to translate" => "Tidak ada ikatan untuk diterjemahkan"
+// ed.translationsPlaceholderDescription: "Add elements to your form or change the strings filter in the toolbar." => "Tambahkan elemen ke formulir Anda atau ubah filter string di toolbar."
+// ed.translationsPlaceholderDescriptionMobile: "Add elements to your form or change the strings filter in the toolbar." => "Tambahkan elemen ke formulir Anda atau ubah filter string di toolbar."
+// lg.logicPlaceholderTitle: "No logical rules" => "Tidak ada aturan logis"
+// lg.logicPlaceholderTitleMobile: "No logical rules" => "Tidak ada aturan logis"
+// lg.logicPlaceholderDescription: "Create a rule to customize the flow of the survey." => "Buat aturan untuk menyesuaikan alur survei."
+// lg.logicPlaceholderDescriptionMobile: "Create a rule to customize the flow of the survey." => "Buat aturan untuk menyesuaikan alur survei."
+// pe.showTimer: "Use a timer" => "Gunakan pengatur waktu"
+// theme.advancedMode: "Advanced mode" => "Mode lanjutan"
+// pehelp.timerLocation: "Sets the location of a timer on a page." => "Mengatur lokasi pengatur waktu pada halaman."
+// header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Saat diatur ke 0, tinggi dihitung secara otomatis untuk mengakomodasi konten header."
+// p.mobileHeight: "Height on smartphones" => "Tinggi di smartphone"

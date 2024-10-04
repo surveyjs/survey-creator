@@ -182,6 +182,18 @@ export var ruStrings = {
     pagePlaceHolder: "Страница пуста. Перетащите элемент с панели инструментов или нажмите кнопку ниже.",
     imagePlaceHolder: "Перетащите изображение сюда или нажмите кнопку ниже и выберите изображение для загрузки",
     surveyPlaceHolderMobile: "Нажмите кнопку «Добавить вопрос» ниже, чтобы начать создание формы.",
+    surveyPlaceholderTitle: "Ваша форма пуста",
+    surveyPlaceholderTitleMobile: "Ваша форма пуста",
+    surveyPlaceholderDescription: "Перетащите элемент из панели инструментов или нажмите кнопку ниже.",
+    surveyPlaceholderDescriptionMobile: "Перетащите элемент из панели инструментов или нажмите кнопку ниже.",
+    previewPlaceholderTitle: "Без предварительного просмотра",
+    previewPlaceholderTitleMobile: "Без предварительного просмотра",
+    previewPlaceholderDescription: "Опрос не содержит никаких видимых элементов.",
+    previewPlaceholderDescriptionMobile: "Опрос не содержит никаких видимых элементов.",
+    translationsPlaceholderTitle: "Никаких строк для перевода",
+    translationsPlaceholderTitleMobile: "Никаких строк для перевода",
+    translationsPlaceholderDescription: "Добавляйте элементы в форму или изменяйте фильтр строк на панели инструментов.",
+    translationsPlaceholderDescriptionMobile: "Добавляйте элементы в форму или изменяйте фильтр строк на панели инструментов.",
     pagePlaceHolderMobile: "Нажмите кнопку «Добавить вопрос» ниже, чтобы добавить новый элемент на страницу.",
     panelPlaceHolderMobile: "Нажмите кнопку «Добавить вопрос» ниже, чтобы добавить новый элемент на панель.",
     imagePlaceHolderMobile: "Нажмите кнопку ниже и выберите изображение для загрузки",
@@ -194,6 +206,10 @@ export var ruStrings = {
     lg: {
       addNewItem: "Добавить новое правило",
       empty_tab: "Создайте правило для настройки потока опроса.",
+      logicPlaceholderTitle: "Никаких логических правил",
+      logicPlaceholderTitleMobile: "Никаких логических правил",
+      logicPlaceholderDescription: "Создайте правило для настройки потока опроса.",
+      logicPlaceholderDescriptionMobile: "Создайте правило для настройки потока опроса.",
       page_visibilityName: "Видимость страницы",
       page_enableName: "Включить (отключить) страницу",
       page_requireName: "Сделать страницу обязательной",
@@ -617,6 +633,7 @@ export var ruStrings = {
     questionsOrder: "Сортировка элементов на странице",
     timeLimit: "Максимальное время в секундах, чтобы заполнить опросник",
     timeLimitPerPage: "Максимальное время в секундах, чтобы заполнить страницу опросника",
+    showTimer: "Используйте таймер",
     timerLocation: "Показывать панель таймера",
     timerInfoMode: "Показывать режим панели таймера",
     renderMode: "Режим отображения панели",
@@ -875,6 +892,7 @@ export var ruStrings = {
       fontSize: "Размер шрифта",
       scale: "Шкала",
       cornerRadius: "Радиус закругления угла",
+      advancedMode: "Расширенный режим",
       pageTitle: "Шрифт заголовка",
       pageDescription: "Описание шрифта",
       questionTitle: "Шрифт заголовка",
@@ -1421,6 +1439,7 @@ export var ruStrings = {
       questionsOrder: "Сохраняет исходный порядок вопросов или рандомизирует их. Опция «Наследовать» применяет настройку уровня опроса («Оригинал» по умолчанию). Эффект этого параметра виден только на вкладке «Предварительный просмотр».",
       navigationButtonsVisibility: "Задает видимость кнопок навигации на странице. Опция \"Наследовать\" применяет настройку уровня опроса, которая по умолчанию имеет значение \"Видимый\"."
     },
+    timerLocation: "Задает расположение таймера на странице.",
     panelsState: "Выберите один из следующих вариантов: \"Заблокировано\" - пользователи не могут разворачивать или сворачивать панели; \"Свернуть все\" - все панели запускаются в свернутом состоянии; \"Развернуть все\" - все панели запускаются в развернутом состоянии; \"First expanded\" - изначально разворачивается только первая панель.",
     imageLinkName: "Введите имя общего свойства в массиве объектов, содержащем URL-адреса изображений или видеофайлов, которые необходимо отобразить в списке вариантов.",
     choices: "Левое значение служит идентификатором элемента, используемым в условных правилах, правое значение отображается респондентам.",
@@ -1502,7 +1521,8 @@ export var ruStrings = {
     header: {
       inheritWidthFrom: "Опция \"То же самое, что и контейнер\" автоматически настраивает ширину области содержимого заголовка в соответствии с элементом HTML, в который помещается опрос.",
       textAreaWidth: "Ширина области заголовка, содержащей название и описание опроса, измеряется в пикселях.",
-      overlapEnabled: "Делает нижнюю часть заголовка наложенной на верхнюю часть опроса."
+      overlapEnabled: "Делает нижнюю часть заголовка наложенной на верхнюю часть опроса.",
+      mobileHeight: "Если задано значение 0, высота вычисляется автоматически для размещения содержимого заголовка."
     },
     panellayoutcolumn: {
       effectiveWidth: "Принимает значения %.",
@@ -1590,6 +1610,7 @@ export var ruStrings = {
     imageFit: "Подгонка под изображение",
     altText: "Замещающий текст",
     height: "Высота",
+    mobileHeight: "Высота на смартфонах",
     penColor: "Цвет пера",
     backgroundColor: "Цвет фона",
     templateElements: "Элементы шаблона",
@@ -2837,3 +2858,25 @@ editorLocalization.locales["ru"] = ruStrings;
 // ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Нажмите на любой значок категории, чтобы ознакомиться с настройками опроса. Дополнительные настройки станут доступны после добавления элемента опроса в область конструктора."
 // pe.caseInsensitive: "Case insensitive" => "Учет регистра"
 // pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Выберите, если прописные и строчные буквы в регулярном выражении должны рассматриваться как эквивалентные."
+
+// ed.surveyPlaceholderTitle: "Your form is empty" => "Ваша форма пуста"
+// ed.surveyPlaceholderTitleMobile: "Your form is empty" => "Ваша форма пуста"
+// ed.surveyPlaceholderDescription: "Drag an element from the toolbox or click the button below." => "Перетащите элемент из панели инструментов или нажмите кнопку ниже."
+// ed.surveyPlaceholderDescriptionMobile: "Drag an element from the toolbox or click the button below." => "Перетащите элемент из панели инструментов или нажмите кнопку ниже."
+// ed.previewPlaceholderTitle: "No preview" => "Без предварительного просмотра"
+// ed.previewPlaceholderTitleMobile: "No preview" => "Без предварительного просмотра"
+// ed.previewPlaceholderDescription: "The survey doesn't contain any visible elements." => "Опрос не содержит никаких видимых элементов."
+// ed.previewPlaceholderDescriptionMobile: "The survey doesn't contain any visible elements." => "Опрос не содержит никаких видимых элементов."
+// ed.translationsPlaceholderTitle: "No strings to translate" => "Никаких строк для перевода"
+// ed.translationsPlaceholderTitleMobile: "No strings to translate" => "Никаких строк для перевода"
+// ed.translationsPlaceholderDescription: "Add elements to your form or change the strings filter in the toolbar." => "Добавляйте элементы в форму или изменяйте фильтр строк на панели инструментов."
+// ed.translationsPlaceholderDescriptionMobile: "Add elements to your form or change the strings filter in the toolbar." => "Добавляйте элементы в форму или изменяйте фильтр строк на панели инструментов."
+// lg.logicPlaceholderTitle: "No logical rules" => "Никаких логических правил"
+// lg.logicPlaceholderTitleMobile: "No logical rules" => "Никаких логических правил"
+// lg.logicPlaceholderDescription: "Create a rule to customize the flow of the survey." => "Создайте правило для настройки потока опроса."
+// lg.logicPlaceholderDescriptionMobile: "Create a rule to customize the flow of the survey." => "Создайте правило для настройки потока опроса."
+// pe.showTimer: "Use a timer" => "Используйте таймер"
+// theme.advancedMode: "Advanced mode" => "Расширенный режим"
+// pehelp.timerLocation: "Sets the location of a timer on a page." => "Задает расположение таймера на странице."
+// header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Если задано значение 0, высота вычисляется автоматически для размещения содержимого заголовка."
+// p.mobileHeight: "Height on smartphones" => "Высота на смартфонах"

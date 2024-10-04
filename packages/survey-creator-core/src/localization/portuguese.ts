@@ -182,6 +182,18 @@ var portugueseTranslation = {
     pagePlaceHolder: "A página está vazia. Arraste um elemento da caixa de ferramentas ou clique no botão abaixo.",
     imagePlaceHolder: "Arraste e solte uma imagem aqui ou clique no botão abaixo e escolha uma imagem para carregar",
     surveyPlaceHolderMobile: "Clique no botão \"Adicionar pergunta\" abaixo para começar a criar seu formulário.",
+    surveyPlaceholderTitle: "Seu formulário está vazio",
+    surveyPlaceholderTitleMobile: "Seu formulário está vazio",
+    surveyPlaceholderDescription: "Arraste um elemento da caixa de ferramentas ou clique no botão abaixo.",
+    surveyPlaceholderDescriptionMobile: "Arraste um elemento da caixa de ferramentas ou clique no botão abaixo.",
+    previewPlaceholderTitle: "Sem visualização",
+    previewPlaceholderTitleMobile: "Sem visualização",
+    previewPlaceholderDescription: "A pesquisa não contém nenhum elemento visível.",
+    previewPlaceholderDescriptionMobile: "A pesquisa não contém nenhum elemento visível.",
+    translationsPlaceholderTitle: "Sem strings para traduzir",
+    translationsPlaceholderTitleMobile: "Sem strings para traduzir",
+    translationsPlaceholderDescription: "Adicione elementos ao seu formulário ou altere o filtro de strings na barra de ferramentas.",
+    translationsPlaceholderDescriptionMobile: "Adicione elementos ao seu formulário ou altere o filtro de strings na barra de ferramentas.",
     pagePlaceHolderMobile: "Clique no botão \"Adicionar pergunta\" abaixo para adicionar um novo elemento à página.",
     panelPlaceHolderMobile: "Clique no botão \"Adicionar pergunta\" abaixo para adicionar um novo elemento ao painel.",
     imagePlaceHolderMobile: "Clique no botão abaixo e escolha uma imagem para carregar",
@@ -194,6 +206,10 @@ var portugueseTranslation = {
     lg: {
       addNewItem: "Adicionar nova regra",
       empty_tab: "Crie uma regra para personalizar o fluxo do questionário.",
+      logicPlaceholderTitle: "Sem regras lógicas",
+      logicPlaceholderTitleMobile: "Sem regras lógicas",
+      logicPlaceholderDescription: "Crie uma regra para personalizar o fluxo da pesquisa.",
+      logicPlaceholderDescriptionMobile: "Crie uma regra para personalizar o fluxo da pesquisa.",
       page_visibilityName: "Mostrar (esconder) página",
       page_enableName: "Ativar (desativar) página",
       page_requireName: "Tornar a página obrigatória",
@@ -617,6 +633,7 @@ var portugueseTranslation = {
     questionsOrder: "Ordenar elementos na página",
     timeLimit: "Tempo máximo para finalizar pesquisa",
     timeLimitPerPage: "Tempo máximo para finalizar página da pesquisa",
+    showTimer: "Use um cronômetro",
     timerLocation: "Mostrar o painel de cronômetro",
     timerInfoMode: "Mostrar painel de modo de cronômetro",
     renderMode: "Modo de renderização",
@@ -875,6 +892,7 @@ var portugueseTranslation = {
       fontSize: "Tamanho da fonte",
       scale: "Escala",
       cornerRadius: "Raio de canto",
+      advancedMode: "Modo avançado",
       pageTitle: "Fonte do título",
       pageDescription: "Fonte de descrição",
       questionTitle: "Fonte do título",
@@ -1421,6 +1439,7 @@ var portugueseTranslation = {
       questionsOrder: "Mantém a ordem original das perguntas ou as randomiza. A opção \"Herdar\" aplica a configuração de nível de pesquisa (\"Original\" por padrão). O efeito dessa configuração só é visível na guia Visualização.",
       navigationButtonsVisibility: "Define a visibilidade dos botões de navegação na página. A opção \"Herdar\" aplica a configuração de nível de pesquisa, que tem como padrão \"Visível\"."
     },
+    timerLocation: "Define a localização de um cronômetro em uma página.",
     panelsState: "Escolha entre: \"Bloqueado\" - os usuários não podem expandir ou recolher painéis; \"Recolher tudo\" - todos os painéis começam em estado colapsado; \"Expandir tudo\" - todos os painéis começam em um estado expandido; \"Primeiro expandido\" - apenas o primeiro painel é inicialmente expandido.",
     imageLinkName: "Insira um nome de propriedade compartilhada na matriz de objetos que contém as URLs de arquivo de imagem ou vídeo que você deseja exibir na lista de opções.",
     choices: "O valor esquerdo serve como um ID de item usado em regras condicionais, o valor direito é exibido aos respondentes.",
@@ -1502,7 +1521,8 @@ var portugueseTranslation = {
     header: {
       inheritWidthFrom: "A opção \"Igual ao contêiner\" ajusta automaticamente a largura da área de conteúdo do cabeçalho para caber no elemento HTML em que a pesquisa é colocada.",
       textAreaWidth: "A largura da área do cabeçalho que contém o título e a descrição da pesquisa, medida em pixels.",
-      overlapEnabled: "Faz com que a parte inferior do cabeçalho seja sobreposta à parte superior do levantamento."
+      overlapEnabled: "Faz com que a parte inferior do cabeçalho seja sobreposta à parte superior do levantamento.",
+      mobileHeight: "Quando definido como 0, a altura é calculada automaticamente para acomodar o conteúdo do cabeçalho."
     },
     panellayoutcolumn: {
       effectiveWidth: "Aceita valores %.",
@@ -1590,6 +1610,7 @@ var portugueseTranslation = {
     imageFit: "Ajustar imagem",
     altText: "Texto alternativo",
     height: "altura",
+    mobileHeight: "Altura em smartphones",
     penColor: "Cor de caneta",
     backgroundColor: "Cor de fundo",
     templateElements: "Modelo de elementos",
@@ -2443,3 +2464,25 @@ editorLocalization.locales["pt"] = portugueseTranslation;
 // ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Clique em qualquer ícone de categoria para explorar as configurações do questionário. Configurações adicionais ficarão disponíveis quando você adicionar um elemento de levantamento topográfico à superfície de design."
 // pe.caseInsensitive: "Case insensitive" => "Diferencia maiúsculas de minúsculas"
 // pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Selecione se letras maiúsculas e minúsculas na expressão regular devem ser tratadas como equivalentes."
+
+// ed.surveyPlaceholderTitle: "Your form is empty" => "Seu formulário está vazio"
+// ed.surveyPlaceholderTitleMobile: "Your form is empty" => "Seu formulário está vazio"
+// ed.surveyPlaceholderDescription: "Drag an element from the toolbox or click the button below." => "Arraste um elemento da caixa de ferramentas ou clique no botão abaixo."
+// ed.surveyPlaceholderDescriptionMobile: "Drag an element from the toolbox or click the button below." => "Arraste um elemento da caixa de ferramentas ou clique no botão abaixo."
+// ed.previewPlaceholderTitle: "No preview" => "Sem visualização"
+// ed.previewPlaceholderTitleMobile: "No preview" => "Sem visualização"
+// ed.previewPlaceholderDescription: "The survey doesn't contain any visible elements." => "A pesquisa não contém nenhum elemento visível."
+// ed.previewPlaceholderDescriptionMobile: "The survey doesn't contain any visible elements." => "A pesquisa não contém nenhum elemento visível."
+// ed.translationsPlaceholderTitle: "No strings to translate" => "Sem strings para traduzir"
+// ed.translationsPlaceholderTitleMobile: "No strings to translate" => "Sem strings para traduzir"
+// ed.translationsPlaceholderDescription: "Add elements to your form or change the strings filter in the toolbar." => "Adicione elementos ao seu formulário ou altere o filtro de strings na barra de ferramentas."
+// ed.translationsPlaceholderDescriptionMobile: "Add elements to your form or change the strings filter in the toolbar." => "Adicione elementos ao seu formulário ou altere o filtro de strings na barra de ferramentas."
+// lg.logicPlaceholderTitle: "No logical rules" => "Sem regras lógicas"
+// lg.logicPlaceholderTitleMobile: "No logical rules" => "Sem regras lógicas"
+// lg.logicPlaceholderDescription: "Create a rule to customize the flow of the survey." => "Crie uma regra para personalizar o fluxo da pesquisa."
+// lg.logicPlaceholderDescriptionMobile: "Create a rule to customize the flow of the survey." => "Crie uma regra para personalizar o fluxo da pesquisa."
+// pe.showTimer: "Use a timer" => "Use um cronômetro"
+// theme.advancedMode: "Advanced mode" => "Modo avançado"
+// pehelp.timerLocation: "Sets the location of a timer on a page." => "Define a localização de um cronômetro em uma página."
+// header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Quando definido como 0, a altura é calculada automaticamente para acomodar o conteúdo do cabeçalho."
+// p.mobileHeight: "Height on smartphones" => "Altura em smartphones"

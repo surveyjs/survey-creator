@@ -182,6 +182,18 @@ export var czStrings = {
     pagePlaceHolder: "Stránka je prázdná. Přetáhněte prvek z palety nástrojů nebo klikněte na tlačítko níže.",
     imagePlaceHolder: "Obrázek můžete vložit jeho přetažením na toto místo nebo kliknutím na tlačítko níže",
     surveyPlaceHolderMobile: "Kliknutím na tlačítko \"Přidat otázku\" níže zahájíte vytváření formuláře.",
+    surveyPlaceholderTitle: "Váš formulář je prázdný",
+    surveyPlaceholderTitleMobile: "Váš formulář je prázdný",
+    surveyPlaceholderDescription: "Přetáhněte prvek z panelu nástrojů nebo klikněte na tlačítko níže.",
+    surveyPlaceholderDescriptionMobile: "Přetáhněte prvek z panelu nástrojů nebo klikněte na tlačítko níže.",
+    previewPlaceholderTitle: "Žádný náhled",
+    previewPlaceholderTitleMobile: "Žádný náhled",
+    previewPlaceholderDescription: "Průzkum neobsahuje žádné viditelné prvky.",
+    previewPlaceholderDescriptionMobile: "Průzkum neobsahuje žádné viditelné prvky.",
+    translationsPlaceholderTitle: "Žádné řetězce k překladu",
+    translationsPlaceholderTitleMobile: "Žádné řetězce k překladu",
+    translationsPlaceholderDescription: "Přidejte do formuláře prvky nebo změňte filtr řetězců na panelu nástrojů.",
+    translationsPlaceholderDescriptionMobile: "Přidejte do formuláře prvky nebo změňte filtr řetězců na panelu nástrojů.",
     pagePlaceHolderMobile: "Kliknutím na tlačítko \"Přidat otázku\" níže přidáte na stránku nový prvek.",
     panelPlaceHolderMobile: "Kliknutím na tlačítko \"Přidat otázku\" níže přidáte do panelu nový prvek.",
     imagePlaceHolderMobile: "Klikněte na tlačítko níže a vyberte obrázek, který chcete nahrát",
@@ -194,6 +206,10 @@ export var czStrings = {
     lg: {
       addNewItem: "Přidat nové pravidlo",
       empty_tab: "Vytvořte pravidlo pro přizpůsobení průběhu průzkumu.",
+      logicPlaceholderTitle: "Žádná logická pravidla",
+      logicPlaceholderTitleMobile: "Žádná logická pravidla",
+      logicPlaceholderDescription: "Vytvořte pravidlo pro přizpůsobení toku průzkumu.",
+      logicPlaceholderDescriptionMobile: "Vytvořte pravidlo pro přizpůsobení toku průzkumu.",
       page_visibilityName: "Viditelnost stránky",
       page_enableName: "Zapnutí (vypnutí) stránky",
       page_requireName: "Nastavit stránku jako povinné",
@@ -617,6 +633,7 @@ export var czStrings = {
     questionsOrder: "Pořadí prvků na stránce",
     timeLimit: "Maximální doba pro dokončení průzkumu",
     timeLimitPerPage: "Maximální doba pro dokončení stránky v průzkumu",
+    showTimer: "Použití časovače",
     timerLocation: "Zobrazit panel časovače",
     timerInfoMode: "Zobrazit režim panelu časovače",
     renderMode: "Režim vykreslování",
@@ -875,6 +892,7 @@ export var czStrings = {
       fontSize: "Velikost písma",
       scale: "Škála",
       cornerRadius: "Poloměr rohu",
+      advancedMode: "Pokročilý režim",
       pageTitle: "Písmo nadpisu",
       pageDescription: "Popisné písmo",
       questionTitle: "Písmo nadpisu",
@@ -1421,6 +1439,7 @@ export var czStrings = {
       questionsOrder: "Zachová původní pořadí otázek nebo je náhodně vybere. Možnost \"Zdědit\" použije nastavení na úrovni průzkumu (ve výchozím nastavení \"Původní\"). Účinek tohoto nastavení je viditelný pouze na kartě Náhled.",
       navigationButtonsVisibility: "Nastaví viditelnost navigačních tlačítek na stránce. Možnost \"Zdědit\" použije nastavení na úrovni průzkumu, které je ve výchozím nastavení \"Viditelné\"."
     },
+    timerLocation: "Nastaví umístění časovače na stránce.",
     panelsState: "Vyberte si z těchto možností: \"Uzamčeno\" - uživatelé nemohou rozbalit nebo sbalit panely; \"Sbalit vše\" - všechny panely začínají ve sbaleném stavu; \"Rozbalit vše\" - všechny panely začínají v rozbaleném stavu; \"První rozbalený\" - zpočátku se rozbalí pouze první panel.",
     imageLinkName: "Zadejte název sdílené vlastnosti v poli objektů, které obsahuje adresy URL souborů obrázků nebo videí, které chcete zobrazit v seznamu voleb.",
     choices: "Levá hodnota slouží jako ID položky používané v podmíněných pravidlech, pravá hodnota se zobrazuje respondentům.",
@@ -1502,7 +1521,8 @@ export var czStrings = {
     header: {
       inheritWidthFrom: "Možnost \"Stejné jako kontejner\" automaticky upraví šířku oblasti obsahu záhlaví tak, aby se vešla do prvku HTML, do kterého je průzkum umístěn.",
       textAreaWidth: "Šířka oblasti záhlaví, která obsahuje název a popis průzkumu, měřená v pixelech.",
-      overlapEnabled: "Nastaví dolní část záhlaví tak, aby překrývala horní část průzkumu."
+      overlapEnabled: "Nastaví dolní část záhlaví tak, aby překrývala horní část průzkumu.",
+      mobileHeight: "Při nastavení na 0 se výška vypočítá automaticky tak, aby se přizpůsobila obsahu záhlaví."
     },
     panellayoutcolumn: {
       effectiveWidth: "Přijímá hodnoty %.",
@@ -1590,6 +1610,7 @@ export var czStrings = {
     imageFit: "Přizpůsobení obrázku",
     altText: "Alternativní text",
     height: "Výška",
+    mobileHeight: "Výška na chytrých telefonech",
     penColor: "Barva pera",
     backgroundColor: "Barva pozadí",
     templateElements: "Prvky šablony",
@@ -2351,3 +2372,25 @@ editorLocalization.locales["cs"] = czStrings;
 // ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Kliknutím na libovolnou ikonu kategorie můžete prozkoumat nastavení průzkumu. Další nastavení budou k dispozici, jakmile přidáte element survey na návrhovou plochu."
 // pe.caseInsensitive: "Case insensitive" => "Nerozlišuje malá a velká písmena"
 // pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Vyberte, zda mají být velká a malá písmena v regulárním výrazu považována za ekvivalentní."
+
+// ed.surveyPlaceholderTitle: "Your form is empty" => "Váš formulář je prázdný"
+// ed.surveyPlaceholderTitleMobile: "Your form is empty" => "Váš formulář je prázdný"
+// ed.surveyPlaceholderDescription: "Drag an element from the toolbox or click the button below." => "Přetáhněte prvek z panelu nástrojů nebo klikněte na tlačítko níže."
+// ed.surveyPlaceholderDescriptionMobile: "Drag an element from the toolbox or click the button below." => "Přetáhněte prvek z panelu nástrojů nebo klikněte na tlačítko níže."
+// ed.previewPlaceholderTitle: "No preview" => "Žádný náhled"
+// ed.previewPlaceholderTitleMobile: "No preview" => "Žádný náhled"
+// ed.previewPlaceholderDescription: "The survey doesn't contain any visible elements." => "Průzkum neobsahuje žádné viditelné prvky."
+// ed.previewPlaceholderDescriptionMobile: "The survey doesn't contain any visible elements." => "Průzkum neobsahuje žádné viditelné prvky."
+// ed.translationsPlaceholderTitle: "No strings to translate" => "Žádné řetězce k překladu"
+// ed.translationsPlaceholderTitleMobile: "No strings to translate" => "Žádné řetězce k překladu"
+// ed.translationsPlaceholderDescription: "Add elements to your form or change the strings filter in the toolbar." => "Přidejte do formuláře prvky nebo změňte filtr řetězců na panelu nástrojů."
+// ed.translationsPlaceholderDescriptionMobile: "Add elements to your form or change the strings filter in the toolbar." => "Přidejte do formuláře prvky nebo změňte filtr řetězců na panelu nástrojů."
+// lg.logicPlaceholderTitle: "No logical rules" => "Žádná logická pravidla"
+// lg.logicPlaceholderTitleMobile: "No logical rules" => "Žádná logická pravidla"
+// lg.logicPlaceholderDescription: "Create a rule to customize the flow of the survey." => "Vytvořte pravidlo pro přizpůsobení toku průzkumu."
+// lg.logicPlaceholderDescriptionMobile: "Create a rule to customize the flow of the survey." => "Vytvořte pravidlo pro přizpůsobení toku průzkumu."
+// pe.showTimer: "Use a timer" => "Použití časovače"
+// theme.advancedMode: "Advanced mode" => "Pokročilý režim"
+// pehelp.timerLocation: "Sets the location of a timer on a page." => "Nastaví umístění časovače na stránce."
+// header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Při nastavení na 0 se výška vypočítá automaticky tak, aby se přizpůsobila obsahu záhlaví."
+// p.mobileHeight: "Height on smartphones" => "Výška na chytrých telefonech"
