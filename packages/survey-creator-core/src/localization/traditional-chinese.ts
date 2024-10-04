@@ -375,7 +375,7 @@ var traditionalChineseTranslation = {
       description: "頁面描述",
       visibleIf: "如果出現以下情況，則使頁面可見",
       requiredIf: "如果出現以下情況，則使頁面為必填項",
-      maxTimeToFinish: "完成頁面的時間限制（秒為單位 ）",
+      timeLimit: "完成頁面的時間限制（秒為單位 ）",
       questionsOrder: "頁面上的問題順序"
     },
     matrixdropdowncolumn: {
@@ -615,10 +615,10 @@ var traditionalChineseTranslation = {
     questionErrorLocation: "問題錯誤定位",
     focusFirstQuestionAutomatic: "改變頁面時聚焦在第一個問題",
     questionsOrder: "Elements order on the page",
-    maxTimeToFinish: "完成調查的最長時間",
-    maxTimeToFinishPage: "完成調查中頁面的最長時間",
-    showTimerPanel: "顯示計時器面板",
-    showTimerPanelMode: "顯示計時器面板模式",
+    timeLimit: "完成調查的最長時間",
+    timeLimitPerPage: "完成調查中頁面的最長時間",
+    timerLocation: "顯示計時器面板",
+    timerInfoMode: "顯示計時器面板模式",
     renderMode: "渲染模式",
     allowAddPanel: "允許添加面板",
     allowRemovePanel: "允許刪除面板",
@@ -1038,11 +1038,8 @@ var traditionalChineseTranslation = {
     showNavigationButtons: {
       none: "隱藏"
     },
-    showTimerPanel: {
-      none: "隱藏"
-    },
-    showTimerPanelMode: {
-      all: "雙"
+    timerInfoMode: {
+      combined: "雙"
     },
     addRowLocation: {
       default: "取決於矩陣佈局"
@@ -1410,11 +1407,11 @@ var traditionalChineseTranslation = {
     imageFit: "從以下選項中選擇：「無」 - 影像保持其原始大小;“包含” - 調整圖像大小以適應其縱橫比;“封面” - 圖像填充整個框，同時保持其縱橫比;“填充” - 拉伸圖像以填充框，而不保持其縱橫比。",
     autoGrow: "在輸入數據時逐漸增加輸入欄位的高度。覆蓋「輸入欄位高度（以行為單位）」設置。",
     allowResize: "調整大小的手柄（或手柄）出現在角落，可以拖動以更改輸入字段的大小。",
-    maxTimeToFinish: "以秒為單位的時間間隔，在此時間間隔之後，調查將自動前進到“感謝”頁面。",
-    maxTimeToFinishPage: "以秒為單位的時間間隔，在此時間間隔之後，調查將自動前進到下一頁。",
+    timeLimit: "以秒為單位的時間間隔，在此時間間隔之後，調查將自動前進到“感謝”頁面。",
+    timeLimitPerPage: "以秒為單位的時間間隔，在此時間間隔之後，調查將自動前進到下一頁。",
     validateVisitedEmptyFields: "啟用此選項可在使用者將焦點放在空輸入欄位上，然後離開該欄位而不進行任何更改時觸發驗證。",
     page: {
-      maxTimeToFinish: "以秒為單位的時間間隔，在此時間間隔之後，調查將自動前進到下一頁。",
+      timeLimit: "以秒為單位的時間間隔，在此時間間隔之後，調查將自動前進到下一頁。",
       visibleIf: "使用魔杖圖示設置確定頁面可見性的條件規則。",
       enableIf: "使用魔杖圖示設置禁用頁面只讀模式的條件規則。",
       requiredIf: "使用魔杖圖示設置條件規則，除非至少有一個嵌套問題有答案，否則該規則將阻止調查提交。",
@@ -1424,7 +1421,6 @@ var traditionalChineseTranslation = {
       questionsOrder: "保持問題的原始順序或隨機化問題。繼承「選項應用調查級別設置（預設為」原始」。）。此設置的效果僅在「預覽」選項卡中可見。",
       navigationButtonsVisibility: "設置導航按鈕在頁面上的可見性。“繼承”選項應用調查級別設置，預設為“可見”。"
     },
-    showTimerPanel: "設置計時器在頁面上的可見性和位置。",
     panelsState: "從以下選項中選擇：「鎖定」 - 使用者無法展開或摺疊面板;“全部摺疊” - 所有面板都以摺疊狀態啟動;“全部展開” - 所有面板都以展開狀態啟動;“首先展開” - 最初只有第一個面板被展開。",
     imageLinkName: "在物件陣列中輸入共用屬性名稱，該數位包含要在選項清單中顯示的圖像或視頻檔URL。",
     choices: "左邊的值用作條件規則中使用的專案ID，右邊的值顯示給受訪者。",
@@ -1936,7 +1932,7 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // pe.editText: "Edit Answer button text" => "編輯應答按鈕文本"
 // image.imageHeight: "Image height (in CSS-accepted values)" => "圖片高度（以 CSS 接受的值為單位）"
 // image.imageWidth: "Image width (in CSS-accepted values)" => "影像寬度（以 CSS 接受的值為單位）"
-// page.maxTimeToFinish: "Time limit to finish the page (in seconds)" => "完成頁面的時間限制（秒為單位 ）"
+// page.timeLimit: "Time limit to finish the page (in seconds)" => "完成頁面的時間限制（秒為單位 ）"
 // question.page: "Parent page" => "父頁面"
 // pe.noEntriesText: "Empty entries text" => "空條目文本"
 // pe.html: "HTML markup" => "網頁標記"
@@ -2814,9 +2810,9 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // pehelp.imageFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "從以下選項中選擇：「無」 - 影像保持其原始大小;“包含” - 調整圖像大小以適應其縱橫比;“封面” - 圖像填充整個框，同時保持其縱橫比;“填充” - 拉伸圖像以填充框，而不保持其縱橫比。"
 // pehelp.autoGrow: "Gradually increases the height of the input field as data is being entered. Overrides the \"Input field height (in lines)\" setting." => "在輸入數據時逐漸增加輸入欄位的高度。覆蓋「輸入欄位高度（以行為單位）」設置。"
 // pehelp.allowResize: "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field." => "調整大小的手柄（或手柄）出現在角落，可以拖動以更改輸入字段的大小。"
-// pehelp.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "以秒為單位的時間間隔，在此時間間隔之後，調查將自動前進到“感謝”頁面。"
-// pehelp.maxTimeToFinishPage: "A time interval in seconds after which the survey auto-advances to the next page." => "以秒為單位的時間間隔，在此時間間隔之後，調查將自動前進到下一頁。"
-// page.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the next page." => "以秒為單位的時間間隔，在此時間間隔之後，調查將自動前進到下一頁。"
+// pehelp.timeLimit: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "以秒為單位的時間間隔，在此時間間隔之後，調查將自動前進到“感謝”頁面。"
+// pehelp.timeLimitPerPage: "A time interval in seconds after which the survey auto-advances to the next page." => "以秒為單位的時間間隔，在此時間間隔之後，調查將自動前進到下一頁。"
+// page.timeLimit: "A time interval in seconds after which the survey auto-advances to the next page." => "以秒為單位的時間間隔，在此時間間隔之後，調查將自動前進到下一頁。"
 // page.visibleIf: "Use the magic wand icon to set a conditional rule that determines page visibility." => "使用魔杖圖示設置確定頁面可見性的條件規則。"
 // page.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the page." => "使用魔杖圖示設置禁用頁面只讀模式的條件規則。"
 // page.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "使用魔杖圖示設置條件規則，除非至少有一個嵌套問題有答案，否則該規則將阻止調查提交。"
@@ -2824,7 +2820,6 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "設置與輸入無效的問題相關的錯誤消息的位置。選擇：「頂部」 - 錯誤文本放置在問題框的頂部;“底部” - 錯誤文本放置在問題框的底部。“繼承”選項將應用調查級別設置（預設為“頂部”）。"
 // page.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "保持問題的原始順序或隨機化問題。繼承「選項應用調查級別設置（預設為」原始」。）。此設置的效果僅在「預覽」選項卡中可見。"
 // page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "設置導航按鈕在頁面上的可見性。“繼承”選項應用調查級別設置，預設為“可見”。"
-// pehelp.showTimerPanel: "Sets the visibility and location of a timer on a page." => "設置計時器在頁面上的可見性和位置。"
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "從以下選項中選擇：「鎖定」 - 使用者無法展開或摺疊面板;“全部摺疊” - 所有面板都以摺疊狀態啟動;“全部展開” - 所有面板都以展開狀態啟動;“首先展開” - 最初只有第一個面板被展開。"
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "在物件陣列中輸入共用屬性名稱，該數位包含要在選項清單中顯示的圖像或視頻檔URL。"
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "左邊的值用作條件規則中使用的專案ID，右邊的值顯示給受訪者。"

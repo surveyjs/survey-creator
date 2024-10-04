@@ -375,7 +375,7 @@ export var danishStrings = {
       description: "Sidebeskrivelse",
       visibleIf: "Gør siden synlig, hvis",
       requiredIf: "Gør siden påkrævet, hvis",
-      maxTimeToFinish: "Tidsgrænse for at afslutte siden (i sekunder)",
+      timeLimit: "Tidsgrænse for at afslutte siden (i sekunder)",
       questionsOrder: "Spørgsmålsrækkefølge på siden"
     },
     matrixdropdowncolumn: {
@@ -615,10 +615,10 @@ export var danishStrings = {
     questionErrorLocation: "Spørgsmålsfejl placering",
     focusFirstQuestionAutomatic: "Fokusér første spørgsmål ved sideskift",
     questionsOrder: "Rækkefølge af spørgsmål på siden",
-    maxTimeToFinish: "Maximal tid til at gennemføre undersøgelsen",
-    maxTimeToFinishPage: "Maximal tid til at gennemføre en side i undersøgelsen",
-    showTimerPanel: "Vis tidspanel",
-    showTimerPanelMode: "Vis tidspanel tilstand",
+    timeLimit: "Maximal tid til at gennemføre undersøgelsen",
+    timeLimitPerPage: "Maximal tid til at gennemføre en side i undersøgelsen",
+    timerLocation: "Vis tidspanel",
+    timerInfoMode: "Vis tidspanel tilstand",
     renderMode: "Renderingstilstand",
     allowAddPanel: "Tillad at tilføje et panel",
     allowRemovePanel: "Tillad at fjerne et panel",
@@ -1038,11 +1038,8 @@ export var danishStrings = {
     showNavigationButtons: {
       none: "Skjult"
     },
-    showTimerPanel: {
-      none: "Skjult"
-    },
-    showTimerPanelMode: {
-      all: "Begge"
+    timerInfoMode: {
+      combined: "Begge"
     },
     addRowLocation: {
       default: "Afhænger af matrixlayout"
@@ -1410,11 +1407,11 @@ export var danishStrings = {
     imageFit: "Vælg mellem: \"Ingen\" - billedet bevarer sin oprindelige størrelse; \"Contain\" - billedet ændres til at passe, samtidig med at dets billedformat opretholdes; \"Cover\" - billedet fylder hele kassen, samtidig med at billedformatet opretholdes; \"Fyld\" - billedet strækkes for at udfylde boksen uden at opretholde dets billedformat.",
     autoGrow: "Øger gradvist inputfeltets højde, efterhånden som data indtastes. Tilsidesætter indstillingen \"Inputfelthøjde (i linjer)\".",
     allowResize: "Størrelseshåndtaget (eller grebet) vises i hjørnet og kan trækkes for at ændre størrelsen på indtastningsfeltet.",
-    maxTimeToFinish: "Et tidsinterval i sekunder, hvorefter undersøgelsen automatisk går videre til siden Tak.",
-    maxTimeToFinishPage: "Et tidsinterval i sekunder, hvorefter undersøgelsen automatisk går videre til næste side.",
+    timeLimit: "Et tidsinterval i sekunder, hvorefter undersøgelsen automatisk går videre til siden Tak.",
+    timeLimitPerPage: "Et tidsinterval i sekunder, hvorefter undersøgelsen automatisk går videre til næste side.",
     validateVisitedEmptyFields: "Aktivér denne indstilling for at udløse validering, når en bruger fokuserer på et tomt inputfelt og derefter forlader det uden at foretage ændringer.",
     page: {
-      maxTimeToFinish: "Et tidsinterval i sekunder, hvorefter undersøgelsen automatisk går videre til næste side.",
+      timeLimit: "Et tidsinterval i sekunder, hvorefter undersøgelsen automatisk går videre til næste side.",
       visibleIf: "Brug tryllestavsikonet til at indstille en betinget regel, der bestemmer sidens synlighed.",
       enableIf: "Brug tryllestavsikonet til at angive en betinget regel, der deaktiverer skrivebeskyttet tilstand for siden.",
       requiredIf: "Brug tryllestavsikonet til at angive en betinget regel, der forhindrer indsendelse af undersøgelser, medmindre mindst ét indlejret spørgsmål har et svar.",
@@ -1424,7 +1421,6 @@ export var danishStrings = {
       questionsOrder: "Bevarer den oprindelige rækkefølge af spørgsmål eller randomiserer dem. Indstillingen \"Arv\" anvender indstillingen på undersøgelsesniveau (\"Original\" som standard). Effekten af denne indstilling er kun synlig under fanen Eksempel.",
       navigationButtonsVisibility: "Indstiller synligheden af navigationsknapper på siden. Indstillingen \"Arv\" anvender indstillingen på undersøgelsesniveau, som som standard er \"Synlig\"."
     },
-    showTimerPanel: "Indstiller synligheden og placeringen af en timer på en side.",
     panelsState: "Vælg mellem: \"Låst\" - brugere kan ikke udvide eller skjule paneler; \"Skjul alle\" - alle paneler starter i kollapset tilstand; \"Udvid alle\" - alle paneler starter i udvidet tilstand; \"Først udvidet\" - kun det første panel udvides oprindeligt.",
     imageLinkName: "Angiv et delt egenskabsnavn i den række objekter, der indeholder de URL-adresser til billeder eller videofiler, du vil have vist på valglisten.",
     choices: "Den venstre værdi fungerer som et vare-id, der bruges i betingede regler, den rigtige værdi vises for respondenterne.",
@@ -1906,7 +1902,7 @@ editorLocalization.locales["da"] = danishStrings;
 // pe.editText: "Edit Answer button text" => "Tekst til knappen Rediger svar"
 // image.imageHeight: "Image height (in CSS-accepted values)" => "Billedhøjde (i CSS-accepterede værdier)"
 // image.imageWidth: "Image width (in CSS-accepted values)" => "Billedbredde (i CSS-accepterede værdier)"
-// page.maxTimeToFinish: "Time limit to finish the page (in seconds)" => "Tidsgrænse for at afslutte siden (i sekunder)"
+// page.timeLimit: "Time limit to finish the page (in seconds)" => "Tidsgrænse for at afslutte siden (i sekunder)"
 // question.page: "Parent page" => "Overordnet side"
 // pe.noEntriesText: "Empty entries text" => "Tekst til tomme poster"
 // pe.html: "HTML markup" => "HTML-markering"
@@ -2727,9 +2723,9 @@ editorLocalization.locales["da"] = danishStrings;
 // pehelp.imageFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Vælg mellem: \"Ingen\" - billedet bevarer sin oprindelige størrelse; \"Contain\" - billedet ændres til at passe, samtidig med at dets billedformat opretholdes; \"Cover\" - billedet fylder hele kassen, samtidig med at billedformatet opretholdes; \"Fyld\" - billedet strækkes for at udfylde boksen uden at opretholde dets billedformat."
 // pehelp.autoGrow: "Gradually increases the height of the input field as data is being entered. Overrides the \"Input field height (in lines)\" setting." => "Øger gradvist inputfeltets højde, efterhånden som data indtastes. Tilsidesætter indstillingen \"Inputfelthøjde (i linjer)\"."
 // pehelp.allowResize: "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field." => "Størrelseshåndtaget (eller grebet) vises i hjørnet og kan trækkes for at ændre størrelsen på indtastningsfeltet."
-// pehelp.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "Et tidsinterval i sekunder, hvorefter undersøgelsen automatisk går videre til siden Tak."
-// pehelp.maxTimeToFinishPage: "A time interval in seconds after which the survey auto-advances to the next page." => "Et tidsinterval i sekunder, hvorefter undersøgelsen automatisk går videre til næste side."
-// page.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the next page." => "Et tidsinterval i sekunder, hvorefter undersøgelsen automatisk går videre til næste side."
+// pehelp.timeLimit: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "Et tidsinterval i sekunder, hvorefter undersøgelsen automatisk går videre til siden Tak."
+// pehelp.timeLimitPerPage: "A time interval in seconds after which the survey auto-advances to the next page." => "Et tidsinterval i sekunder, hvorefter undersøgelsen automatisk går videre til næste side."
+// page.timeLimit: "A time interval in seconds after which the survey auto-advances to the next page." => "Et tidsinterval i sekunder, hvorefter undersøgelsen automatisk går videre til næste side."
 // page.visibleIf: "Use the magic wand icon to set a conditional rule that determines page visibility." => "Brug tryllestavsikonet til at indstille en betinget regel, der bestemmer sidens synlighed."
 // page.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the page." => "Brug tryllestavsikonet til at angive en betinget regel, der deaktiverer skrivebeskyttet tilstand for siden."
 // page.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "Brug tryllestavsikonet til at angive en betinget regel, der forhindrer indsendelse af undersøgelser, medmindre mindst ét indlejret spørgsmål har et svar."
@@ -2737,7 +2733,6 @@ editorLocalization.locales["da"] = danishStrings;
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Angiver placeringen af en fejlmeddelelse i forhold til spørgsmålet med ugyldigt input. Vælg mellem: \"Top\" - en fejltekst placeres øverst i spørgsmålsfeltet; \"Nederst\" - en fejltekst placeres nederst i spørgsmålsfeltet. Indstillingen \"Nedarv\" anvender indstillingen på undersøgelsesniveau (\"Top\" som standard)."
 // page.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Bevarer den oprindelige rækkefølge af spørgsmål eller randomiserer dem. Indstillingen \"Arv\" anvender indstillingen på undersøgelsesniveau (\"Original\" som standard). Effekten af denne indstilling er kun synlig under fanen Eksempel."
 // page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Indstiller synligheden af navigationsknapper på siden. Indstillingen \"Arv\" anvender indstillingen på undersøgelsesniveau, som som standard er \"Synlig\"."
-// pehelp.showTimerPanel: "Sets the visibility and location of a timer on a page." => "Indstiller synligheden og placeringen af en timer på en side."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "Vælg mellem: \"Låst\" - brugere kan ikke udvide eller skjule paneler; \"Skjul alle\" - alle paneler starter i kollapset tilstand; \"Udvid alle\" - alle paneler starter i udvidet tilstand; \"Først udvidet\" - kun det første panel udvides oprindeligt."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "Angiv et delt egenskabsnavn i den række objekter, der indeholder de URL-adresser til billeder eller videofiler, du vil have vist på valglisten."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "Den venstre værdi fungerer som et vare-id, der bruges i betingede regler, den rigtige værdi vises for respondenterne."

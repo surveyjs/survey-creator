@@ -375,7 +375,7 @@ export var skStrings = {
       description: "Popis stránky",
       visibleIf: "Zviditeľniť stránku, ak",
       requiredIf: "Nastavte stránku ako povinnú, ak",
-      maxTimeToFinish: "Časový limit na dokončenie stránky (v sekundách)",
+      timeLimit: "Časový limit na dokončenie stránky (v sekundách)",
       questionsOrder: "Poradie otázok na stránke"
     },
     matrixdropdowncolumn: {
@@ -615,10 +615,10 @@ export var skStrings = {
     questionErrorLocation: "Poloha chyby otázky",
     focusFirstQuestionAutomatic: "Prechod na prvú otázku pri zmene stránky",
     questionsOrder: "Poradie prvkov na stránke",
-    maxTimeToFinish: "Maximálny čas na dokončenie prieskumu",
-    maxTimeToFinishPage: "Maximálny čas na dokončenie stránky v rámci prieskumu",
-    showTimerPanel: "Zobraziť panel s časovačom",
-    showTimerPanelMode: "Zobraziť režim panela s časovačom",
+    timeLimit: "Maximálny čas na dokončenie prieskumu",
+    timeLimitPerPage: "Maximálny čas na dokončenie stránky v rámci prieskumu",
+    timerLocation: "Zobraziť panel s časovačom",
+    timerInfoMode: "Zobraziť režim panela s časovačom",
     renderMode: "Režim vykresľovania",
     allowAddPanel: "Povoliť pridanie panela",
     allowRemovePanel: "Povoliť odstránenie panela",
@@ -1038,11 +1038,8 @@ export var skStrings = {
     showNavigationButtons: {
       none: "Skrytý"
     },
-    showTimerPanel: {
-      none: "Skrytý"
-    },
-    showTimerPanelMode: {
-      all: "Obidva"
+    timerInfoMode: {
+      combined: "Obidva"
     },
     addRowLocation: {
       default: "Závisí od rozloženia matice"
@@ -1410,11 +1407,11 @@ export var skStrings = {
     imageFit: "Vyberte si z: \"Žiadne\" - obrázok si zachováva svoju pôvodnú veľkosť; \"Obsahovať\" - veľkosť obrázka sa zmení tak, aby sa zmestil pri zachovaní pomeru strán; \"Obal\" - obrázok vyplní celé pole pri zachovaní pomeru strán; \"Vyplniť\" - obrázok je natiahnutý tak, aby vyplnil pole bez zachovania pomeru strán.",
     autoGrow: "Postupne zvyšuje výšku vstupného poľa pri zadávaní údajov. Prepíše nastavenie Výška vstupného poľa (v riadkoch).",
     allowResize: "Rukoväť na zmenu veľkosti (alebo uchopenie) sa zobrazí v rohu a potiahnutím môžete zmeniť veľkosť vstupného poľa.",
-    maxTimeToFinish: "Časový interval v sekundách, po ktorom prieskum automaticky prejde na stránku s poďakovaním.",
-    maxTimeToFinishPage: "Časový interval v sekundách, po ktorom prieskum automaticky prejde na ďalšiu stránku.",
+    timeLimit: "Časový interval v sekundách, po ktorom prieskum automaticky prejde na stránku s poďakovaním.",
+    timeLimitPerPage: "Časový interval v sekundách, po ktorom prieskum automaticky prejde na ďalšiu stránku.",
     validateVisitedEmptyFields: "Povoľte túto možnosť, ak chcete spustiť overenie, keď sa používateľ zameria na prázdne vstupné pole a potom ho opustí bez vykonania akýchkoľvek zmien.",
     page: {
-      maxTimeToFinish: "Časový interval v sekundách, po ktorom prieskum automaticky prejde na ďalšiu stránku.",
+      timeLimit: "Časový interval v sekundách, po ktorom prieskum automaticky prejde na ďalšiu stránku.",
       visibleIf: "Pomocou ikony čarovnej paličky nastavte podmienené pravidlo, ktoré určuje viditeľnosť stránky.",
       enableIf: "Pomocou ikony čarovného prútika nastavte podmienené pravidlo, ktoré vypne režim iba na čítanie pre stránku.",
       requiredIf: "Pomocou ikony čarovného prútika nastavte podmienené pravidlo, ktoré zabráni odoslaniu prieskumu, pokiaľ aspoň jedna vnorená otázka nemá odpoveď.",
@@ -1424,7 +1421,6 @@ export var skStrings = {
       questionsOrder: "Zachová pôvodné poradie otázok alebo ich náhodne vyberie. Možnosť \"Zdediť\" použije nastavenie na úrovni prieskumu (\"Originál\" v predvolenom nastavení). Efekt tohto nastavenia je viditeľný iba na karte Ukážka.",
       navigationButtonsVisibility: "Nastavuje viditeľnosť navigačných tlačidiel na stránke. Možnosť Zdediť použije nastavenie na úrovni prieskumu, ktoré je predvolene nastavené na \"Viditeľné\"."
     },
-    showTimerPanel: "Nastavuje viditeľnosť a umiestnenie časovača na stránke.",
     panelsState: "Vyberte si z: \"Zamknuté\" - používatelia nemôžu rozširovať ani zbaliť panely; \"Zbaliť všetko\" - všetky panely začínajú v zbalenom stave; \"Rozbaliť všetko\" - všetky panely začínajú v rozšírenom stave; \"Prvý rozšírený\" - pôvodne sa rozšíril iba prvý panel.",
     imageLinkName: "Zadajte zdieľaný názov vlastnosti do poľa objektov obsahujúceho URL adresy obrázkov alebo videosúborov, ktoré chcete zobraziť v zozname výberu.",
     choices: "Ľavá hodnota slúži ako ID položky používané v podmienených pravidlách, pravá hodnota sa zobrazuje respondentom.",
@@ -1775,7 +1771,7 @@ editorLocalization.locales["sk"] = skStrings;
 // pe.portraitOrientation: "Switch to portrait orientation" => "Prepnutie na orientáciu na výšku"
 // image.imageHeight: "Image height (in CSS-accepted values)" => "Výška snímky (v hodnotách akceptovaných šablónou CSS)"
 // image.imageWidth: "Image width (in CSS-accepted values)" => "Šírka obrázka (v akceptovaných hodnotách CSS)"
-// page.maxTimeToFinish: "Time limit to finish the page (in seconds)" => "Časový limit na dokončenie stránky (v sekundách)"
+// page.timeLimit: "Time limit to finish the page (in seconds)" => "Časový limit na dokončenie stránky (v sekundách)"
 // question.page: "Parent page" => "Nadradená stránka"
 // pe.noEntriesText: "Empty entries text" => "Text prázdnych položiek"
 // pe.setValue: "Answer" => "Odpoveď"
@@ -2495,9 +2491,9 @@ editorLocalization.locales["sk"] = skStrings;
 // pehelp.imageFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Vyberte si z: \"Žiadne\" - obrázok si zachováva svoju pôvodnú veľkosť; \"Obsahovať\" - veľkosť obrázka sa zmení tak, aby sa zmestil pri zachovaní pomeru strán; \"Obal\" - obrázok vyplní celé pole pri zachovaní pomeru strán; \"Vyplniť\" - obrázok je natiahnutý tak, aby vyplnil pole bez zachovania pomeru strán."
 // pehelp.autoGrow: "Gradually increases the height of the input field as data is being entered. Overrides the \"Input field height (in lines)\" setting." => "Postupne zvyšuje výšku vstupného poľa pri zadávaní údajov. Prepíše nastavenie Výška vstupného poľa (v riadkoch)."
 // pehelp.allowResize: "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field." => "Rukoväť na zmenu veľkosti (alebo uchopenie) sa zobrazí v rohu a potiahnutím môžete zmeniť veľkosť vstupného poľa."
-// pehelp.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "Časový interval v sekundách, po ktorom prieskum automaticky prejde na stránku s poďakovaním."
-// pehelp.maxTimeToFinishPage: "A time interval in seconds after which the survey auto-advances to the next page." => "Časový interval v sekundách, po ktorom prieskum automaticky prejde na ďalšiu stránku."
-// page.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the next page." => "Časový interval v sekundách, po ktorom prieskum automaticky prejde na ďalšiu stránku."
+// pehelp.timeLimit: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "Časový interval v sekundách, po ktorom prieskum automaticky prejde na stránku s poďakovaním."
+// pehelp.timeLimitPerPage: "A time interval in seconds after which the survey auto-advances to the next page." => "Časový interval v sekundách, po ktorom prieskum automaticky prejde na ďalšiu stránku."
+// page.timeLimit: "A time interval in seconds after which the survey auto-advances to the next page." => "Časový interval v sekundách, po ktorom prieskum automaticky prejde na ďalšiu stránku."
 // page.visibleIf: "Use the magic wand icon to set a conditional rule that determines page visibility." => "Pomocou ikony čarovnej paličky nastavte podmienené pravidlo, ktoré určuje viditeľnosť stránky."
 // page.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the page." => "Pomocou ikony čarovného prútika nastavte podmienené pravidlo, ktoré vypne režim iba na čítanie pre stránku."
 // page.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "Pomocou ikony čarovného prútika nastavte podmienené pravidlo, ktoré zabráni odoslaniu prieskumu, pokiaľ aspoň jedna vnorená otázka nemá odpoveď."
@@ -2505,7 +2501,6 @@ editorLocalization.locales["sk"] = skStrings;
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Nastaví umiestnenie chybového hlásenia vo vzťahu k otázke s neplatným zadaním. Vyberte si medzi: \"Hore\" - v hornej časti poľa otázok sa umiestni chybový text; \"Dole\" - v dolnej časti poľa otázok je umiestnený chybový text. Možnosť \"Zdediť\" použije nastavenie na úrovni prieskumu (\"Predvolene hore\")."
 // page.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Zachová pôvodné poradie otázok alebo ich náhodne vyberie. Možnosť \"Zdediť\" použije nastavenie na úrovni prieskumu (\"Originál\" v predvolenom nastavení). Efekt tohto nastavenia je viditeľný iba na karte Ukážka."
 // page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Nastavuje viditeľnosť navigačných tlačidiel na stránke. Možnosť Zdediť použije nastavenie na úrovni prieskumu, ktoré je predvolene nastavené na \"Viditeľné\"."
-// pehelp.showTimerPanel: "Sets the visibility and location of a timer on a page." => "Nastavuje viditeľnosť a umiestnenie časovača na stránke."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "Vyberte si z: \"Zamknuté\" - používatelia nemôžu rozširovať ani zbaliť panely; \"Zbaliť všetko\" - všetky panely začínajú v zbalenom stave; \"Rozbaliť všetko\" - všetky panely začínajú v rozšírenom stave; \"Prvý rozšírený\" - pôvodne sa rozšíril iba prvý panel."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "Zadajte zdieľaný názov vlastnosti do poľa objektov obsahujúceho URL adresy obrázkov alebo videosúborov, ktoré chcete zobraziť v zozname výberu."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "Ľavá hodnota slúži ako ID položky používané v podmienených pravidlách, pravá hodnota sa zobrazuje respondentom."

@@ -375,7 +375,7 @@ export var ruStrings = {
       description: "Описание страницы",
       visibleIf: "Сделайте страницу видимой, если",
       requiredIf: "Сделайте страницу обязательной, если",
-      maxTimeToFinish: "Ограничение по времени завершения страницы (в секундах)",
+      timeLimit: "Ограничение по времени завершения страницы (в секундах)",
       questionsOrder: "Порядок вопросов на странице"
     },
     matrixdropdowncolumn: {
@@ -615,10 +615,10 @@ export var ruStrings = {
     questionErrorLocation: "Размещение ошибки опроса",
     focusFirstQuestionAutomatic: "Фокусирование на первом вопросе при изменении страницы",
     questionsOrder: "Сортировка элементов на странице",
-    maxTimeToFinish: "Максимальное время в секундах, чтобы заполнить опросник",
-    maxTimeToFinishPage: "Максимальное время в секундах, чтобы заполнить страницу опросника",
-    showTimerPanel: "Показывать панель таймера",
-    showTimerPanelMode: "Показывать режим панели таймера",
+    timeLimit: "Максимальное время в секундах, чтобы заполнить опросник",
+    timeLimitPerPage: "Максимальное время в секундах, чтобы заполнить страницу опросника",
+    timerLocation: "Показывать панель таймера",
+    timerInfoMode: "Показывать режим панели таймера",
     renderMode: "Режим отображения панели",
     allowAddPanel: "Разрешить добавление панели",
     allowRemovePanel: "Разрешить удаление панели",
@@ -1038,11 +1038,8 @@ export var ruStrings = {
     showNavigationButtons: {
       none: "Скрытый"
     },
-    showTimerPanel: {
-      none: "Скрытый"
-    },
-    showTimerPanelMode: {
-      all: "Оба"
+    timerInfoMode: {
+      combined: "Оба"
     },
     addRowLocation: {
       default: "Зависит от компоновки матрицы"
@@ -1410,11 +1407,11 @@ export var ruStrings = {
     imageFit: "Выберите один из следующих вариантов: \"Нет\" - изображение сохраняет свой первоначальный размер; \"Contain\" - размер изображения изменяется по размеру с сохранением его пропорций; «Обложка» - изображение заполняет всю коробку, сохраняя при этом соотношение сторон; \"Заливка\" - изображение растягивается для заполнения поля без сохранения его пропорций.",
     autoGrow: "Постепенно увеличивает высоту поля ввода по мере ввода данных. Переопределяет настройку «Высота поля ввода (в строках)».",
     allowResize: "Маркер изменения размера (или ручка) отображается в углу, и его можно перетащить, чтобы изменить размер поля ввода.",
-    maxTimeToFinish: "Интервал времени в секундах, по истечении которого опрос автоматически переходит на страницу благодарности.",
-    maxTimeToFinishPage: "Интервал времени в секундах, по истечении которого опрос автоматически переходит на следующую страницу.",
+    timeLimit: "Интервал времени в секундах, по истечении которого опрос автоматически переходит на страницу благодарности.",
+    timeLimitPerPage: "Интервал времени в секундах, по истечении которого опрос автоматически переходит на следующую страницу.",
     validateVisitedEmptyFields: "Включите этот параметр, чтобы активировать проверку, когда пользователь фокусируется на пустом поле ввода, а затем покидает его, не внося никаких изменений.",
     page: {
-      maxTimeToFinish: "Интервал времени в секундах, по истечении которого опрос автоматически переходит на следующую страницу.",
+      timeLimit: "Интервал времени в секундах, по истечении которого опрос автоматически переходит на следующую страницу.",
       visibleIf: "Используйте значок волшебной палочки, чтобы задать условное правило, определяющее видимость страницы.",
       enableIf: "Используйте значок волшебной палочки, чтобы задать условное правило, которое отключает режим только для чтения для страницы.",
       requiredIf: "Используйте значок волшебной палочки, чтобы задать условное правило, которое запрещает отправку опроса, если хотя бы один вложенный вопрос не содержит ответа.",
@@ -1424,7 +1421,6 @@ export var ruStrings = {
       questionsOrder: "Сохраняет исходный порядок вопросов или рандомизирует их. Опция «Наследовать» применяет настройку уровня опроса («Оригинал» по умолчанию). Эффект этого параметра виден только на вкладке «Предварительный просмотр».",
       navigationButtonsVisibility: "Задает видимость кнопок навигации на странице. Опция \"Наследовать\" применяет настройку уровня опроса, которая по умолчанию имеет значение \"Видимый\"."
     },
-    showTimerPanel: "Задает видимость и расположение таймера на странице.",
     panelsState: "Выберите один из следующих вариантов: \"Заблокировано\" - пользователи не могут разворачивать или сворачивать панели; \"Свернуть все\" - все панели запускаются в свернутом состоянии; \"Развернуть все\" - все панели запускаются в развернутом состоянии; \"First expanded\" - изначально разворачивается только первая панель.",
     imageLinkName: "Введите имя общего свойства в массиве объектов, содержащем URL-адреса изображений или видеофайлов, которые необходимо отобразить в списке вариантов.",
     choices: "Левое значение служит идентификатором элемента, используемым в условных правилах, правое значение отображается респондентам.",
@@ -1819,7 +1815,7 @@ editorLocalization.locales["ru"] = ruStrings;
 // pe.editText: "Edit Answer button text" => "Редактировать текст кнопки «Ответ»"
 // image.imageHeight: "Image height (in CSS-accepted values)" => "Высота изображения (в значениях, принимаемых CSS)"
 // image.imageWidth: "Image width (in CSS-accepted values)" => "Ширина изображения (в значениях, принимаемых CSS)"
-// page.maxTimeToFinish: "Time limit to finish the page (in seconds)" => "Ограничение по времени завершения страницы (в секундах)"
+// page.timeLimit: "Time limit to finish the page (in seconds)" => "Ограничение по времени завершения страницы (в секундах)"
 // question.page: "Parent page" => "Родительская страница"
 // pe.renderMode: "Panel display mode" => "Режим отображения панели"
 // pe.noEntriesText: "Empty entries text" => "Пустой текст записей"
@@ -2602,9 +2598,9 @@ editorLocalization.locales["ru"] = ruStrings;
 // pehelp.imageFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Выберите один из следующих вариантов: \"Нет\" - изображение сохраняет свой первоначальный размер; \"Contain\" - размер изображения изменяется по размеру с сохранением его пропорций; «Обложка» - изображение заполняет всю коробку, сохраняя при этом соотношение сторон; \"Заливка\" - изображение растягивается для заполнения поля без сохранения его пропорций."
 // pehelp.autoGrow: "Gradually increases the height of the input field as data is being entered. Overrides the \"Input field height (in lines)\" setting." => "Постепенно увеличивает высоту поля ввода по мере ввода данных. Переопределяет настройку «Высота поля ввода (в строках)»."
 // pehelp.allowResize: "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field." => "Маркер изменения размера (или ручка) отображается в углу, и его можно перетащить, чтобы изменить размер поля ввода."
-// pehelp.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "Интервал времени в секундах, по истечении которого опрос автоматически переходит на страницу благодарности."
-// pehelp.maxTimeToFinishPage: "A time interval in seconds after which the survey auto-advances to the next page." => "Интервал времени в секундах, по истечении которого опрос автоматически переходит на следующую страницу."
-// page.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the next page." => "Интервал времени в секундах, по истечении которого опрос автоматически переходит на следующую страницу."
+// pehelp.timeLimit: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "Интервал времени в секундах, по истечении которого опрос автоматически переходит на страницу благодарности."
+// pehelp.timeLimitPerPage: "A time interval in seconds after which the survey auto-advances to the next page." => "Интервал времени в секундах, по истечении которого опрос автоматически переходит на следующую страницу."
+// page.timeLimit: "A time interval in seconds after which the survey auto-advances to the next page." => "Интервал времени в секундах, по истечении которого опрос автоматически переходит на следующую страницу."
 // page.visibleIf: "Use the magic wand icon to set a conditional rule that determines page visibility." => "Используйте значок волшебной палочки, чтобы задать условное правило, определяющее видимость страницы."
 // page.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the page." => "Используйте значок волшебной палочки, чтобы задать условное правило, которое отключает режим только для чтения для страницы."
 // page.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "Используйте значок волшебной палочки, чтобы задать условное правило, которое запрещает отправку опроса, если хотя бы один вложенный вопрос не содержит ответа."
@@ -2612,7 +2608,6 @@ editorLocalization.locales["ru"] = ruStrings;
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Задает расположение сообщения об ошибке по отношению к вопросу с недопустимыми входными данными. Выберите между: «Сверху» - текст ошибки размещается в верхней части поля вопроса; «Внизу» - текст ошибки размещается в нижней части окна вопроса. Опция «Наследовать» применяет настройку уровня опроса («Сверху» по умолчанию)."
 // page.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Сохраняет исходный порядок вопросов или рандомизирует их. Опция «Наследовать» применяет настройку уровня опроса («Оригинал» по умолчанию). Эффект этого параметра виден только на вкладке «Предварительный просмотр»."
 // page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Задает видимость кнопок навигации на странице. Опция \"Наследовать\" применяет настройку уровня опроса, которая по умолчанию имеет значение \"Видимый\"."
-// pehelp.showTimerPanel: "Sets the visibility and location of a timer on a page." => "Задает видимость и расположение таймера на странице."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "Выберите один из следующих вариантов: \"Заблокировано\" - пользователи не могут разворачивать или сворачивать панели; \"Свернуть все\" - все панели запускаются в свернутом состоянии; \"Развернуть все\" - все панели запускаются в развернутом состоянии; \"First expanded\" - изначально разворачивается только первая панель."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "Введите имя общего свойства в массиве объектов, содержащем URL-адреса изображений или видеофайлов, которые необходимо отобразить в списке вариантов."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "Левое значение служит идентификатором элемента, используемым в условных правилах, правое значение отображается респондентам."

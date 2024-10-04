@@ -375,7 +375,7 @@ export var hrStrings = {
       description: "Opis stranice",
       visibleIf: "Učini stranicu vidljivom ako",
       requiredIf: "Učini stranicu potrebnom ako",
-      maxTimeToFinish: "Vremensko ograničenje za dovršetak stranice (u sekundama)",
+      timeLimit: "Vremensko ograničenje za dovršetak stranice (u sekundama)",
       questionsOrder: "Redoslijed pitanja na stranici"
     },
     matrixdropdowncolumn: {
@@ -615,10 +615,10 @@ export var hrStrings = {
     questionErrorLocation: "Mjesto pogreške u pitanju",
     focusFirstQuestionAutomatic: "Usredotočite prvo pitanje na promjenu stranice",
     questionsOrder: "Redoslijed elemenata na stranici",
-    maxTimeToFinish: "Maksimalno vrijeme za dovršaje ankete",
-    maxTimeToFinishPage: "Maksimalno vrijeme za dovršanje stranice u anketi",
-    showTimerPanel: "Pokaži ploču timera",
-    showTimerPanelMode: "Prikazate način rada timer panela",
+    timeLimit: "Maksimalno vrijeme za dovršaje ankete",
+    timeLimitPerPage: "Maksimalno vrijeme za dovršanje stranice u anketi",
+    timerLocation: "Pokaži ploču timera",
+    timerInfoMode: "Prikazate način rada timer panela",
     renderMode: "Način prikaza",
     allowAddPanel: "Dopustite dodavanje ploče",
     allowRemovePanel: "Dopustite uklanjanje ploče",
@@ -1038,11 +1038,8 @@ export var hrStrings = {
     showNavigationButtons: {
       none: "Skriven"
     },
-    showTimerPanel: {
-      none: "Skriven"
-    },
-    showTimerPanelMode: {
-      all: "Oba"
+    timerInfoMode: {
+      combined: "Oba"
     },
     addRowLocation: {
       default: "Ovisi o izgledu matrice"
@@ -1410,11 +1407,11 @@ export var hrStrings = {
     imageFit: "Odaberite između: \"Nema\" - slika zadržava svoju izvornu veličinu; \"Sadrži\" - slika se mijenja kako bi stala uz zadržavanje omjera slike; \"Poklopac\" - slika ispunjava cijelu kutiju zadržavajući omjer slike; \"Ispuna\" - slika se rasteže kako bi ispunila kutiju bez zadržavanja omjera slike.",
     autoGrow: "Postupno povećava visinu polja unosa tijekom unosa podataka. Nadjačava postavku \"Visina polja unosa (u crtama)\".",
     allowResize: "Ručica za promjenu veličine (ili držač) pojavljuje se u kutu i može se povući kako bi se promijenila veličina polja za unos.",
-    maxTimeToFinish: "Vremenski interval u sekundama nakon kojeg anketa automatski prelazi na stranicu zahvale.",
-    maxTimeToFinishPage: "Vremenski interval u sekundama nakon kojeg anketa automatski prelazi na sljedeću stranicu.",
+    timeLimit: "Vremenski interval u sekundama nakon kojeg anketa automatski prelazi na stranicu zahvale.",
+    timeLimitPerPage: "Vremenski interval u sekundama nakon kojeg anketa automatski prelazi na sljedeću stranicu.",
     validateVisitedEmptyFields: "Omogućite ovu mogućnost da biste pokrenuli provjeru valjanosti kada se korisnik usredotoči na prazno polje za unos, a zatim ga napusti bez ikakvih promjena.",
     page: {
-      maxTimeToFinish: "Vremenski interval u sekundama nakon kojeg anketa automatski prelazi na sljedeću stranicu.",
+      timeLimit: "Vremenski interval u sekundama nakon kojeg anketa automatski prelazi na sljedeću stranicu.",
       visibleIf: "Pomoću ikone čarobnog štapića postavite uvjetno pravilo koje određuje vidljivost stranice.",
       enableIf: "Pomoću ikone čarobnog štapića postavite uvjetno pravilo koje onemogućuje način samo za čitanje stranice.",
       requiredIf: "Pomoću ikone čarobnog štapića postavite uvjetno pravilo koje sprječava slanje upitnika, osim ako barem jedno ugniježđeno pitanje nema odgovor.",
@@ -1424,7 +1421,6 @@ export var hrStrings = {
       questionsOrder: "Zadržava izvorni redoslijed pitanja ili ih randomizira. Mogućnost \"Naslijedi\" primjenjuje postavku na razini upitnika (\"Original\" prema zadanim postavkama). Efekt ove postavke vidljiv je samo na kartici Pretpregled.",
       navigationButtonsVisibility: "Postavlja vidljivost navigacijskih gumba na stranici. Opcija \"Naslijedi\" primjenjuje postavku na razini upitnika, koja je zadana kao \"Vidljivo\"."
     },
-    showTimerPanel: "Postavlja vidljivost i mjesto mjerača vremena na stranici.",
     panelsState: "Odaberite između: \"Zaključano\" - korisnici ne mogu proširiti ili sažeti ploče; \"Sažmite sve\" - sve ploče počinju u urušenom stanju; \"Proširite sve\" - sve ploče počinju u proširenom stanju; \"Prvo prošireno\" - samo je prva ploča u početku proširena.",
     imageLinkName: "Unesite naziv zajedničkog svojstva unutar polja objekata koje sadrži URL-ove slike ili videodatoteke koje želite prikazati na popisu izbora.",
     choices: "Lijeva vrijednost služi kao ID artikla koji se koristi u uvjetnim pravilima, a ispitanicima se prikazuje prava vrijednost.",
@@ -1776,7 +1772,7 @@ editorLocalization.locales["hr"] = hrStrings;
 // pe.portraitOrientation: "Switch to portrait orientation" => "Prebacivanje na okomito usmjerenje"
 // image.imageHeight: "Image height (in CSS-accepted values)" => "Visina slike (u CSS-prihvaćenim vrijednostima)"
 // image.imageWidth: "Image width (in CSS-accepted values)" => "Širina slike (u CSS-prihvaćenim vrijednostima)"
-// page.maxTimeToFinish: "Time limit to finish the page (in seconds)" => "Vremensko ograničenje za dovršetak stranice (u sekundama)"
+// page.timeLimit: "Time limit to finish the page (in seconds)" => "Vremensko ograničenje za dovršetak stranice (u sekundama)"
 // question.page: "Parent page" => "Nadređena stranica"
 // pe.noEntriesText: "Empty entries text" => "Prazan tekst unosa"
 // pe.setValue: "Answer" => "Odgovor"
@@ -2536,9 +2532,9 @@ editorLocalization.locales["hr"] = hrStrings;
 // pehelp.imageFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Odaberite između: \"Nema\" - slika zadržava svoju izvornu veličinu; \"Sadrži\" - slika se mijenja kako bi stala uz zadržavanje omjera slike; \"Poklopac\" - slika ispunjava cijelu kutiju zadržavajući omjer slike; \"Ispuna\" - slika se rasteže kako bi ispunila kutiju bez zadržavanja omjera slike."
 // pehelp.autoGrow: "Gradually increases the height of the input field as data is being entered. Overrides the \"Input field height (in lines)\" setting." => "Postupno povećava visinu polja unosa tijekom unosa podataka. Nadjačava postavku \"Visina polja unosa (u crtama)\"."
 // pehelp.allowResize: "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field." => "Ručica za promjenu veličine (ili držač) pojavljuje se u kutu i može se povući kako bi se promijenila veličina polja za unos."
-// pehelp.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "Vremenski interval u sekundama nakon kojeg anketa automatski prelazi na stranicu zahvale."
-// pehelp.maxTimeToFinishPage: "A time interval in seconds after which the survey auto-advances to the next page." => "Vremenski interval u sekundama nakon kojeg anketa automatski prelazi na sljedeću stranicu."
-// page.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the next page." => "Vremenski interval u sekundama nakon kojeg anketa automatski prelazi na sljedeću stranicu."
+// pehelp.timeLimit: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "Vremenski interval u sekundama nakon kojeg anketa automatski prelazi na stranicu zahvale."
+// pehelp.timeLimitPerPage: "A time interval in seconds after which the survey auto-advances to the next page." => "Vremenski interval u sekundama nakon kojeg anketa automatski prelazi na sljedeću stranicu."
+// page.timeLimit: "A time interval in seconds after which the survey auto-advances to the next page." => "Vremenski interval u sekundama nakon kojeg anketa automatski prelazi na sljedeću stranicu."
 // page.visibleIf: "Use the magic wand icon to set a conditional rule that determines page visibility." => "Pomoću ikone čarobnog štapića postavite uvjetno pravilo koje određuje vidljivost stranice."
 // page.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the page." => "Pomoću ikone čarobnog štapića postavite uvjetno pravilo koje onemogućuje način samo za čitanje stranice."
 // page.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "Pomoću ikone čarobnog štapića postavite uvjetno pravilo koje sprječava slanje upitnika, osim ako barem jedno ugniježđeno pitanje nema odgovor."
@@ -2546,7 +2542,6 @@ editorLocalization.locales["hr"] = hrStrings;
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Postavlja mjesto poruke o pogrešci u odnosu na pitanje s unosom koji nije valjan. Odaberite između: \"Vrh\" - tekst pogreške nalazi se na vrhu okvira pitanja; \"Dno\" - tekst pogreške nalazi se na dnu okvira pitanja. Mogućnost \"Naslijedi\" primjenjuje postavku na razini upitnika (\"Vrh\" prema zadanim postavkama)."
 // page.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Zadržava izvorni redoslijed pitanja ili ih randomizira. Mogućnost \"Naslijedi\" primjenjuje postavku na razini upitnika (\"Original\" prema zadanim postavkama). Efekt ove postavke vidljiv je samo na kartici Pretpregled."
 // page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Postavlja vidljivost navigacijskih gumba na stranici. Opcija \"Naslijedi\" primjenjuje postavku na razini upitnika, koja je zadana kao \"Vidljivo\"."
-// pehelp.showTimerPanel: "Sets the visibility and location of a timer on a page." => "Postavlja vidljivost i mjesto mjerača vremena na stranici."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "Odaberite između: \"Zaključano\" - korisnici ne mogu proširiti ili sažeti ploče; \"Sažmite sve\" - sve ploče počinju u urušenom stanju; \"Proširite sve\" - sve ploče počinju u proširenom stanju; \"Prvo prošireno\" - samo je prva ploča u početku proširena."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "Unesite naziv zajedničkog svojstva unutar polja objekata koje sadrži URL-ove slike ili videodatoteke koje želite prikazati na popisu izbora."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "Lijeva vrijednost služi kao ID artikla koji se koristi u uvjetnim pravilima, a ispitanicima se prikazuje prava vrijednost."

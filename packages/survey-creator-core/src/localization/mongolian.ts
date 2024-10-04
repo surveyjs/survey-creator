@@ -375,7 +375,7 @@ export var mnStrings = {
       description: "Хуудасны тодорхойлолт",
       visibleIf: "Хуудсыг ил тод болгох",
       requiredIf: "Шаардлагатай хуудсыг хий",
-      maxTimeToFinish: "Нэг хуудас бөглөж дуусах хугацаа (секундээр)",
+      timeLimit: "Нэг хуудас бөглөж дуусах хугацаа (секундээр)",
       questionsOrder: "Асуулт самбар хуудсан дээр"
     },
     matrixdropdowncolumn: {
@@ -615,10 +615,10 @@ export var mnStrings = {
     questionErrorLocation: "Алдааны мэдэгдлийн байршил",
     focusFirstQuestionAutomatic: "Эхний асуултыг шинэ хуудсанд төвлөрүүлэх",
     questionsOrder: "Хуудас дээрх элементийн дараалал",
-    maxTimeToFinish: "Санал асуулга бөглөж дуусах хугацаа (секундээр)",
-    maxTimeToFinishPage: "Нэг хуудас бөглөж дуусах хугацаа (секундээр)",
-    showTimerPanel: "Тоолуурын байршил",
-    showTimerPanelMode: "Тоолуурын горим",
+    timeLimit: "Санал асуулга бөглөж дуусах хугацаа (секундээр)",
+    timeLimitPerPage: "Нэг хуудас бөглөж дуусах хугацаа (секундээр)",
+    timerLocation: "Тоолуурын байршил",
+    timerInfoMode: "Тоолуурын горим",
     renderMode: "Панелийн дэлгэцийн горим",
     allowAddPanel: "Панел нэмэхийг зөвшөөрөх",
     allowRemovePanel: "Панел хасахыг зөвшөөрөх",
@@ -1038,11 +1038,8 @@ export var mnStrings = {
     showNavigationButtons: {
       none: "Нуусан"
     },
-    showTimerPanel: {
-      none: "Нуусан"
-    },
-    showTimerPanelMode: {
-      all: "Аль аль нь"
+    timerInfoMode: {
+      combined: "Аль аль нь"
     },
     addRowLocation: {
       default: "Матрицын загвараас шалтгаалах"
@@ -1410,11 +1407,11 @@ export var mnStrings = {
     imageFit: "Сонгоно уу: \"None\" - зураг анхны хэмжээгээ хадгалдаг; \"Агуулах\" - дүрсийг тал харьцаагаа хадгалахын зэрэгцээ тохируулахын тулд дахин тохируулдаг; \"Cover\" - дүрс нь тал харьцаагаа хадгалахын зэрэгцээ хайрцгийг бүхэлд нь дүүргэдэг; \"Fill\" - дүрс нь тал харьцаагаа хадгалахгүйгээр хайрцгийг дүүргэхийн тулд сунаж тогтсон.",
     autoGrow: "Өгөгдлийг оруулж байгаа үед оролтын талбайн өндрийг аажмаар нэмэгдүүлдэг. \"Input талбарын өндрийг (in lines)\" тохиргоог давхардна.",
     allowResize: "Resize бариул (эсвэл бариул) буланд гарч, оролтын талбарын хэмжээг өөрчлөхийн тулд чирэгдэж болно.",
-    maxTimeToFinish: "Цаг хугацааны интервал секундын дотор. Үүний дараа судалгаа автоматаар \"Thank You\" хуудас руу орж байна.",
-    maxTimeToFinishPage: "Судалгааны автоматаар дараагийн хуудас руу урагшлах секундын дотор цаг хугацаа.",
+    timeLimit: "Цаг хугацааны интервал секундын дотор. Үүний дараа судалгаа автоматаар \"Thank You\" хуудас руу орж байна.",
+    timeLimitPerPage: "Судалгааны автоматаар дараагийн хуудас руу урагшлах секундын дотор цаг хугацаа.",
     validateVisitedEmptyFields: "Хэрэглэгч хоосон оролтын талбар дээр төвлөрч, дараа нь ямар нэгэн өөрчлөлт хийхгүйгээр орхих үед баталгаажуулалтыг өдөөх боломжийг энэ боломжийг олго.",
     page: {
-      maxTimeToFinish: "Судалгааны автоматаар дараагийн хуудас руу урагшлах секундын дотор цаг хугацаа.",
+      timeLimit: "Судалгааны автоматаар дараагийн хуудас руу урагшлах секундын дотор цаг хугацаа.",
       visibleIf: "Илбийн wand icon-ийг ашиглан хуудасны харагдах байдлыг тодорхойлох нөхцөлтэй дүрэм тогтооно.",
       enableIf: "Зөвхөн хуудсанд зориулсан унших хэв маягийг хаах нөхцөлтэй дүрмийг тогтоохын тулд шидэт wand зургыг ашигла.",
       requiredIf: "Наад зах нь нэг үүрээ засах асуулт хариулт байхгүй л бол судалгаа явуулахаас сэргийлдэг нөхцөлийн дүрмийг тогтоохын тулд шидэт туузны зургыг ашигла.",
@@ -1424,7 +1421,6 @@ export var mnStrings = {
       questionsOrder: "Асуултуудын анхны дарааллыг хадгалах эсвэл санамсаргүйгээр авч явдаг. \"Өв залгамж\" сонголт нь судалгааны түвшний тохиргоог (\"Оригинал\" дефолтоор) хэрэгжүүлдэг. Энэ тохиргооны үр нөлөө нь зөвхөн Preview таб-д харагдана.",
       navigationButtonsVisibility: "Хуудсан дээр навигацийн товчны харагдах байдлыг тогтоо. \"Өв залгамжлах\" хувилбар нь \"Үзэгдэх\" гэсэн сонголт бүхий судалгааны түвшний тохиргоог хэрэгжүүлдэг."
     },
-    showTimerPanel: "Хуудас дээр цаг хэмжигч харагдах байдал, байршлыг тогтооно.",
     panelsState: "Сонгоно уу: \"Locked\" - хэрэглэгчид панелуудыг өргөтгөх, нураах боломжгүй; \"Бүх нуралт\" - бүх панел нурсан байдлаас эхэлнэ; \"Бүх хүрээг өргөтгөнө\" - бүх панелууд өргөтгөсөн байдлаас эхэлнэ; \"First expanded\" - зөвхөн эхний панел нь эхэндээ өргөжсөн.",
     imageLinkName: "Сонгосон жагсаалтанд харуулахыг хүссэн зураг эсвэл видео файл URL-уудыг агуулсан олон тооны эд зүйлсийн дотор хуваалцсан өмчийн нэрийг оруулна уу.",
     choices: "Зүүн үнэ цэнэ нь нөхцөлийн дүрэмд хэрэглэгддэг зүйл ID, зөв үнэ цэнийг хариулагчдад үзүүлдэг.",
@@ -2198,9 +2194,9 @@ editorLocalization.locales["mn"] = mnStrings;
 // pehelp.imageFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Сонгоно уу: \"None\" - зураг анхны хэмжээгээ хадгалдаг; \"Агуулах\" - дүрсийг тал харьцаагаа хадгалахын зэрэгцээ тохируулахын тулд дахин тохируулдаг; \"Cover\" - дүрс нь тал харьцаагаа хадгалахын зэрэгцээ хайрцгийг бүхэлд нь дүүргэдэг; \"Fill\" - дүрс нь тал харьцаагаа хадгалахгүйгээр хайрцгийг дүүргэхийн тулд сунаж тогтсон."
 // pehelp.autoGrow: "Gradually increases the height of the input field as data is being entered. Overrides the \"Input field height (in lines)\" setting." => "Өгөгдлийг оруулж байгаа үед оролтын талбайн өндрийг аажмаар нэмэгдүүлдэг. \"Input талбарын өндрийг (in lines)\" тохиргоог давхардна."
 // pehelp.allowResize: "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field." => "Resize бариул (эсвэл бариул) буланд гарч, оролтын талбарын хэмжээг өөрчлөхийн тулд чирэгдэж болно."
-// pehelp.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "Цаг хугацааны интервал секундын дотор. Үүний дараа судалгаа автоматаар \"Thank You\" хуудас руу орж байна."
-// pehelp.maxTimeToFinishPage: "A time interval in seconds after which the survey auto-advances to the next page." => "Судалгааны автоматаар дараагийн хуудас руу урагшлах секундын дотор цаг хугацаа."
-// page.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the next page." => "Судалгааны автоматаар дараагийн хуудас руу урагшлах секундын дотор цаг хугацаа."
+// pehelp.timeLimit: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "Цаг хугацааны интервал секундын дотор. Үүний дараа судалгаа автоматаар \"Thank You\" хуудас руу орж байна."
+// pehelp.timeLimitPerPage: "A time interval in seconds after which the survey auto-advances to the next page." => "Судалгааны автоматаар дараагийн хуудас руу урагшлах секундын дотор цаг хугацаа."
+// page.timeLimit: "A time interval in seconds after which the survey auto-advances to the next page." => "Судалгааны автоматаар дараагийн хуудас руу урагшлах секундын дотор цаг хугацаа."
 // page.visibleIf: "Use the magic wand icon to set a conditional rule that determines page visibility." => "Илбийн wand icon-ийг ашиглан хуудасны харагдах байдлыг тодорхойлох нөхцөлтэй дүрэм тогтооно."
 // page.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the page." => "Зөвхөн хуудсанд зориулсан унших хэв маягийг хаах нөхцөлтэй дүрмийг тогтоохын тулд шидэт wand зургыг ашигла."
 // page.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "Наад зах нь нэг үүрээ засах асуулт хариулт байхгүй л бол судалгаа явуулахаас сэргийлдэг нөхцөлийн дүрмийг тогтоохын тулд шидэт туузны зургыг ашигла."
@@ -2208,7 +2204,6 @@ editorLocalization.locales["mn"] = mnStrings;
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Асуулттай холбоотой алдааны мессежийн байршлыг хүчингүй оруулсан байдлаар тогтооно. Аль нэгийг сонгоно уу: \"Топ\" - асуултын хайрцагны дээд хэсэгт алдаа текст байрлуулсан байна; \"Bottom\" - асуултын хайрцагны доод хэсэгт алдаа текст байрлуулна. \"Өв залгамж\" сонголт нь судалгааны түвшний тохиргоог (\"Top\" by default) хэрэгжүүлдэг."
 // page.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Асуултуудын анхны дарааллыг хадгалах эсвэл санамсаргүйгээр авч явдаг. \"Өв залгамж\" сонголт нь судалгааны түвшний тохиргоог (\"Оригинал\" дефолтоор) хэрэгжүүлдэг. Энэ тохиргооны үр нөлөө нь зөвхөн Preview таб-д харагдана."
 // page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Хуудсан дээр навигацийн товчны харагдах байдлыг тогтоо. \"Өв залгамжлах\" хувилбар нь \"Үзэгдэх\" гэсэн сонголт бүхий судалгааны түвшний тохиргоог хэрэгжүүлдэг."
-// pehelp.showTimerPanel: "Sets the visibility and location of a timer on a page." => "Хуудас дээр цаг хэмжигч харагдах байдал, байршлыг тогтооно."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "Сонгоно уу: \"Locked\" - хэрэглэгчид панелуудыг өргөтгөх, нураах боломжгүй; \"Бүх нуралт\" - бүх панел нурсан байдлаас эхэлнэ; \"Бүх хүрээг өргөтгөнө\" - бүх панелууд өргөтгөсөн байдлаас эхэлнэ; \"First expanded\" - зөвхөн эхний панел нь эхэндээ өргөжсөн."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "Сонгосон жагсаалтанд харуулахыг хүссэн зураг эсвэл видео файл URL-уудыг агуулсан олон тооны эд зүйлсийн дотор хуваалцсан өмчийн нэрийг оруулна уу."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "Зүүн үнэ цэнэ нь нөхцөлийн дүрэмд хэрэглэгддэг зүйл ID, зөв үнэ цэнийг хариулагчдад үзүүлдэг."

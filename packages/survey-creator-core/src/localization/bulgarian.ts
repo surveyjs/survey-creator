@@ -375,7 +375,7 @@ export var bgStrings = {
       description: "Описание на страницата",
       visibleIf: "Направете страницата видима, ако",
       requiredIf: "Направете страницата задължителна, ако",
-      maxTimeToFinish: "Времево ограничение за завършване на страницата (в секунди)",
+      timeLimit: "Времево ограничение за завършване на страницата (в секунди)",
       questionsOrder: "Ред на въпросите на страницата"
     },
     matrixdropdowncolumn: {
@@ -615,10 +615,10 @@ export var bgStrings = {
     questionErrorLocation: "Местоположение на съобщението за грешка",
     focusFirstQuestionAutomatic: "Постави първия въпрос на нова страница",
     questionsOrder: "Подреждане на елементите на страницата",
-    maxTimeToFinish: "Време за завършване на анкетата (в секунди)",
-    maxTimeToFinishPage: "Времево ограничение за завършване на една страница (в секунди)",
-    showTimerPanel: "Местоположение на таймера",
-    showTimerPanelMode: "Режим на таймера",
+    timeLimit: "Време за завършване на анкетата (в секунди)",
+    timeLimitPerPage: "Времево ограничение за завършване на една страница (в секунди)",
+    timerLocation: "Местоположение на таймера",
+    timerInfoMode: "Режим на таймера",
     renderMode: "Режим на показване на панела",
     allowAddPanel: "Разрешаване добавянето на панели",
     allowRemovePanel: "Разрешаване премахването на панели",
@@ -1038,11 +1038,8 @@ export var bgStrings = {
     showNavigationButtons: {
       none: "Скрит"
     },
-    showTimerPanel: {
-      none: "Скрит"
-    },
-    showTimerPanelMode: {
-      all: "И двете"
+    timerInfoMode: {
+      combined: "И двете"
     },
     addRowLocation: {
       default: "Зависи от оформлението на матрицата."
@@ -1410,11 +1407,11 @@ export var bgStrings = {
     imageFit: "Изберете от: \"Няма\" - изображението запазва оригиналния си размер; \"Съдържа\" - изображението се преоразмерява, за да се побере, като същевременно се запазва съотношението на страните; \"Cover\" - изображението запълва цялата кутия, като същевременно запазва съотношението на страните; \"Fill\" - изображението се разтяга, за да запълни кутията, без да се поддържа съотношението на страните.",
     autoGrow: "Постепенно увеличава височината на входното поле при въвеждане на данни. Замества настройката \"Височина на входното поле (в редове)\".",
     allowResize: "Манипулаторът за преоразмеряване (или ръкохватката) се появява в ъгъла и може да се плъзга, за да се промени размерът на входното поле.",
-    maxTimeToFinish: "Интервал от време в секунди, след което проучването автоматично преминава към страницата \"Благодаря\".",
-    maxTimeToFinishPage: "Интервал от време в секунди, след който проучването автоматично преминава към следващата страница.",
+    timeLimit: "Интервал от време в секунди, след което проучването автоматично преминава към страницата \"Благодаря\".",
+    timeLimitPerPage: "Интервал от време в секунди, след който проучването автоматично преминава към следващата страница.",
     validateVisitedEmptyFields: "Активирайте тази опция, за да задействате проверка, когато потребителят се фокусира върху празно поле за въвеждане и след това го напусне, без да прави никакви промени.",
     page: {
-      maxTimeToFinish: "Интервал от време в секунди, след който проучването автоматично преминава към следващата страница.",
+      timeLimit: "Интервал от време в секунди, след който проучването автоматично преминава към следващата страница.",
       visibleIf: "Използвайте иконата на магическа пръчка, за да зададете условно правило, което определя видимостта на страницата.",
       enableIf: "Използвайте иконата на магическа пръчка, за да зададете условно правило, което забранява режима само за четене за страницата.",
       requiredIf: "Използвайте иконата на магическа пръчка, за да зададете условно правило, което не позволява подаване на проучване, освен ако поне един вложен въпрос няма отговор.",
@@ -1424,7 +1421,6 @@ export var bgStrings = {
       questionsOrder: "Запазва първоначалния ред на въпросите или ги рандомизира. Опцията \"Наследяване\" прилага настройката на ниво проучване (\"Оригинал\" по подразбиране). Ефектът от тази настройка се вижда само в раздела Визуализация .",
       navigationButtonsVisibility: "Задава видимостта на бутоните за навигация на страницата. Опцията \"Наследяване\" прилага настройката на ниво проучване, която по подразбиране е \"Видима\"."
     },
-    showTimerPanel: "Задава видимостта и местоположението на таймера на страницата.",
     panelsState: "Изберете от: \"Заключени\" - потребителите не могат да разширяват или свиват панели; \"Свиване на всички\" - всички панели започват в срутено състояние; \"Разширяване на всички\" - всички панели започват в разширено състояние; \"Първо разширен\" - само първият панел първоначално се разширява.",
     imageLinkName: "Въведете име на споделено свойство в масива от обекти, съдържащ URL адресите на изображения или видеофайлове, които искате да покажете в списъка за избор.",
     choices: "Лявата стойност служи като ИД на артикул, използван в условни правила, дясната стойност се показва на респондентите.",
@@ -2105,9 +2101,9 @@ editorLocalization.locales["bg"] = bgStrings;
 // pehelp.imageFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Изберете от: \"Няма\" - изображението запазва оригиналния си размер; \"Съдържа\" - изображението се преоразмерява, за да се побере, като същевременно се запазва съотношението на страните; \"Cover\" - изображението запълва цялата кутия, като същевременно запазва съотношението на страните; \"Fill\" - изображението се разтяга, за да запълни кутията, без да се поддържа съотношението на страните."
 // pehelp.autoGrow: "Gradually increases the height of the input field as data is being entered. Overrides the \"Input field height (in lines)\" setting." => "Постепенно увеличава височината на входното поле при въвеждане на данни. Замества настройката \"Височина на входното поле (в редове)\"."
 // pehelp.allowResize: "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field." => "Манипулаторът за преоразмеряване (или ръкохватката) се появява в ъгъла и може да се плъзга, за да се промени размерът на входното поле."
-// pehelp.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "Интервал от време в секунди, след което проучването автоматично преминава към страницата \"Благодаря\"."
-// pehelp.maxTimeToFinishPage: "A time interval in seconds after which the survey auto-advances to the next page." => "Интервал от време в секунди, след който проучването автоматично преминава към следващата страница."
-// page.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the next page." => "Интервал от време в секунди, след който проучването автоматично преминава към следващата страница."
+// pehelp.timeLimit: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "Интервал от време в секунди, след което проучването автоматично преминава към страницата \"Благодаря\"."
+// pehelp.timeLimitPerPage: "A time interval in seconds after which the survey auto-advances to the next page." => "Интервал от време в секунди, след който проучването автоматично преминава към следващата страница."
+// page.timeLimit: "A time interval in seconds after which the survey auto-advances to the next page." => "Интервал от време в секунди, след който проучването автоматично преминава към следващата страница."
 // page.visibleIf: "Use the magic wand icon to set a conditional rule that determines page visibility." => "Използвайте иконата на магическа пръчка, за да зададете условно правило, което определя видимостта на страницата."
 // page.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the page." => "Използвайте иконата на магическа пръчка, за да зададете условно правило, което забранява режима само за четене за страницата."
 // page.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "Използвайте иконата на магическа пръчка, за да зададете условно правило, което не позволява подаване на проучване, освен ако поне един вложен въпрос няма отговор."
@@ -2115,7 +2111,6 @@ editorLocalization.locales["bg"] = bgStrings;
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Задава местоположението на съобщение за грешка във връзка с въпроса с невалиден вход. Изберете между: \"Top\" - в горната част на полето за въпроси се поставя текст за грешка; \"Отдолу\" - в долната част на полето за въпроси се поставя текст за грешка. Опцията \"Наследяване\" прилага настройката за ниво проучване (\"Top\" по подразбиране)."
 // page.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Запазва първоначалния ред на въпросите или ги рандомизира. Опцията \"Наследяване\" прилага настройката на ниво проучване (\"Оригинал\" по подразбиране). Ефектът от тази настройка се вижда само в раздела Визуализация ."
 // page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Задава видимостта на бутоните за навигация на страницата. Опцията \"Наследяване\" прилага настройката на ниво проучване, която по подразбиране е \"Видима\"."
-// pehelp.showTimerPanel: "Sets the visibility and location of a timer on a page." => "Задава видимостта и местоположението на таймера на страницата."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "Изберете от: \"Заключени\" - потребителите не могат да разширяват или свиват панели; \"Свиване на всички\" - всички панели започват в срутено състояние; \"Разширяване на всички\" - всички панели започват в разширено състояние; \"Първо разширен\" - само първият панел първоначално се разширява."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "Въведете име на споделено свойство в масива от обекти, съдържащ URL адресите на изображения или видеофайлове, които искате да покажете в списъка за избор."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "Лявата стойност служи като ИД на артикул, използван в условни правила, дясната стойност се показва на респондентите."

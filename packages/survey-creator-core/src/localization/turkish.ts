@@ -375,7 +375,7 @@ export var turkishStrings = {
       description: "Sayfa açıklaması",
       visibleIf: "Aşağıdaki durumlarda sayfayı görünür hale getirin",
       requiredIf: "Aşağıdaki durumlarda sayfayı gerekli hale getirin",
-      maxTimeToFinish: "Sayfayı bitirmek için zaman sınırı (saniye cinsinden)",
+      timeLimit: "Sayfayı bitirmek için zaman sınırı (saniye cinsinden)",
       questionsOrder: "Sayfadaki soru sırası"
     },
     matrixdropdowncolumn: {
@@ -615,10 +615,10 @@ export var turkishStrings = {
     questionErrorLocation: "Soru hatası konumu",
     focusFirstQuestionAutomatic: "İlk soruyu sayfayı değiştirmeye odakla",
     questionsOrder: "Sayfadaki öğelerin sırası",
-    maxTimeToFinish: "Anketi bitirmek için maksimum süre",
-    maxTimeToFinishPage: "Ankette bir sayfayı bitirmek için maksimum süre",
-    showTimerPanel: "Zamanlayıcı panelini göster",
-    showTimerPanelMode: "Zamanlayıcı paneli modunu göster",
+    timeLimit: "Anketi bitirmek için maksimum süre",
+    timeLimitPerPage: "Ankette bir sayfayı bitirmek için maksimum süre",
+    timerLocation: "Zamanlayıcı panelini göster",
+    timerInfoMode: "Zamanlayıcı paneli modunu göster",
     renderMode: "İşleme modu",
     allowAddPanel: "Panel eklemeye izin ver",
     allowRemovePanel: "Panel silmeye izin ver",
@@ -1038,11 +1038,8 @@ export var turkishStrings = {
     showNavigationButtons: {
       none: "Gizli"
     },
-    showTimerPanel: {
-      none: "Gizli"
-    },
-    showTimerPanelMode: {
-      all: "Her ikisi"
+    timerInfoMode: {
+      combined: "Her ikisi"
     },
     addRowLocation: {
       default: "Matris düzenine bağlıdır"
@@ -1410,11 +1407,11 @@ export var turkishStrings = {
     imageFit: "Şunlar arasından seçim yapın: \"Yok\" - görüntü orijinal boyutunu korur; \"İçer\" - görüntü, en boy oranı korunurken sığacak şekilde yeniden boyutlandırılır; \"Kapak\" - görüntü, en boy oranını korurken tüm kutuyu doldurur; \"Doldur\" - görüntü, en boy oranını korumadan kutuyu dolduracak şekilde uzatılır.",
     autoGrow: "Veriler girilirken giriş alanının yüksekliğini kademeli olarak artırır. \"Giriş alanı yüksekliği (satırlarda)\" ayarını geçersiz kılar.",
     allowResize: "Yeniden boyutlandırma tutamacı (veya tutamak) köşede görünür ve giriş alanının boyutunu değiştirmek için sürüklenebilir.",
-    maxTimeToFinish: "Anketin otomatik olarak Teşekkür Ederiz sayfasına ilerlediği saniye cinsinden bir zaman aralığı.",
-    maxTimeToFinishPage: "Anketin otomatik olarak bir sonraki sayfaya ilerlediği saniye cinsinden bir zaman aralığı.",
+    timeLimit: "Anketin otomatik olarak Teşekkür Ederiz sayfasına ilerlediği saniye cinsinden bir zaman aralığı.",
+    timeLimitPerPage: "Anketin otomatik olarak bir sonraki sayfaya ilerlediği saniye cinsinden bir zaman aralığı.",
     validateVisitedEmptyFields: "Bir kullanıcı boş bir giriş alanına odaklandığında ve ardından herhangi bir değişiklik yapmadan bu alandan ayrıldığında doğrulamayı tetiklemek için bu seçeneği etkinleştirin.",
     page: {
-      maxTimeToFinish: "Anketin otomatik olarak bir sonraki sayfaya ilerlediği saniye cinsinden bir zaman aralığı.",
+      timeLimit: "Anketin otomatik olarak bir sonraki sayfaya ilerlediği saniye cinsinden bir zaman aralığı.",
       visibleIf: "Sayfa görünürlüğünü belirleyen koşullu bir kural belirlemek için sihirli değnek simgesini kullanın.",
       enableIf: "Sayfanın salt okunur modunu devre dışı bırakan koşullu bir kural ayarlamak için sihirli değnek simgesini kullanın.",
       requiredIf: "En az bir iç içe geçmiş sorunun yanıtı olmadığı sürece anket gönderimini engelleyen koşullu bir kural ayarlamak için sihirli değnek simgesini kullanın.",
@@ -1424,7 +1421,6 @@ export var turkishStrings = {
       questionsOrder: "Soruların orijinal sırasını korur veya rastgele hale getirir. \"Devral\" seçeneği, anket düzeyindeki ayarı (varsayılan olarak \"Orijinal\") uygular. Bu ayarın etkisi yalnızca Önizleme sekmesinde görünür.",
       navigationButtonsVisibility: "Sayfadaki gezinme düğmelerinin görünürlüğünü ayarlar. \"Devral\" seçeneği, varsayılan olarak \"Görünür\" olan anket düzeyi ayarını uygular."
     },
-    showTimerPanel: "Sayfadaki bir zamanlayıcının görünürlüğünü ve konumunu ayarlar.",
     panelsState: "Şunlar arasından seçim yapın: \"Kilitli\" - kullanıcılar panelleri genişletemez veya daraltamaz; \"Tümünü daralt\" - tüm paneller daraltılmış durumda başlar; \"Tümünü genişlet\" - tüm paneller genişletilmiş bir durumda başlar; \"İlk genişletildi\" - başlangıçta yalnızca ilk panel genişletilir.",
     imageLinkName: "Seçim listesinde görüntülemek istediğiniz görüntü veya video dosyası URL'lerini içeren nesne dizisi içinde paylaşılan bir özellik adı girin.",
     choices: "Soldaki değer, koşullu kurallarda kullanılan bir öğe kimliği görevi görür, sağdaki değer yanıtlayanlara gösterilir.",
@@ -1789,7 +1785,7 @@ editorLocalization.locales["tr"] = turkishStrings;
 // pe.portraitOrientation: "Switch to portrait orientation" => "Dikey yöne geçme"
 // image.imageHeight: "Image height (in CSS-accepted values)" => "Görüntü yüksekliği (CSS tarafından kabul edilen değerlerde)"
 // image.imageWidth: "Image width (in CSS-accepted values)" => "Resim genişliği (CSS tarafından kabul edilen değerlerde)"
-// page.maxTimeToFinish: "Time limit to finish the page (in seconds)" => "Sayfayı bitirmek için zaman sınırı (saniye cinsinden)"
+// page.timeLimit: "Time limit to finish the page (in seconds)" => "Sayfayı bitirmek için zaman sınırı (saniye cinsinden)"
 // question.page: "Parent page" => "Ana sayfa"
 // pe.noEntriesText: "Empty entries text" => "Boş giriş metni"
 // pe.setValue: "Answer" => "Cevap"
@@ -2537,9 +2533,9 @@ editorLocalization.locales["tr"] = turkishStrings;
 // pehelp.imageFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Şunlar arasından seçim yapın: \"Yok\" - görüntü orijinal boyutunu korur; \"İçer\" - görüntü, en boy oranı korunurken sığacak şekilde yeniden boyutlandırılır; \"Kapak\" - görüntü, en boy oranını korurken tüm kutuyu doldurur; \"Doldur\" - görüntü, en boy oranını korumadan kutuyu dolduracak şekilde uzatılır."
 // pehelp.autoGrow: "Gradually increases the height of the input field as data is being entered. Overrides the \"Input field height (in lines)\" setting." => "Veriler girilirken giriş alanının yüksekliğini kademeli olarak artırır. \"Giriş alanı yüksekliği (satırlarda)\" ayarını geçersiz kılar."
 // pehelp.allowResize: "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field." => "Yeniden boyutlandırma tutamacı (veya tutamak) köşede görünür ve giriş alanının boyutunu değiştirmek için sürüklenebilir."
-// pehelp.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "Anketin otomatik olarak Teşekkür Ederiz sayfasına ilerlediği saniye cinsinden bir zaman aralığı."
-// pehelp.maxTimeToFinishPage: "A time interval in seconds after which the survey auto-advances to the next page." => "Anketin otomatik olarak bir sonraki sayfaya ilerlediği saniye cinsinden bir zaman aralığı."
-// page.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the next page." => "Anketin otomatik olarak bir sonraki sayfaya ilerlediği saniye cinsinden bir zaman aralığı."
+// pehelp.timeLimit: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "Anketin otomatik olarak Teşekkür Ederiz sayfasına ilerlediği saniye cinsinden bir zaman aralığı."
+// pehelp.timeLimitPerPage: "A time interval in seconds after which the survey auto-advances to the next page." => "Anketin otomatik olarak bir sonraki sayfaya ilerlediği saniye cinsinden bir zaman aralığı."
+// page.timeLimit: "A time interval in seconds after which the survey auto-advances to the next page." => "Anketin otomatik olarak bir sonraki sayfaya ilerlediği saniye cinsinden bir zaman aralığı."
 // page.visibleIf: "Use the magic wand icon to set a conditional rule that determines page visibility." => "Sayfa görünürlüğünü belirleyen koşullu bir kural belirlemek için sihirli değnek simgesini kullanın."
 // page.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the page." => "Sayfanın salt okunur modunu devre dışı bırakan koşullu bir kural ayarlamak için sihirli değnek simgesini kullanın."
 // page.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "En az bir iç içe geçmiş sorunun yanıtı olmadığı sürece anket gönderimini engelleyen koşullu bir kural ayarlamak için sihirli değnek simgesini kullanın."
@@ -2547,7 +2543,6 @@ editorLocalization.locales["tr"] = turkishStrings;
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Geçersiz girişi olan soruyla ilgili olarak bir hata mesajının konumunu ayarlar. Şunlar arasından seçim yapın: \"Üst\" - soru kutusunun en üstüne bir hata metni yerleştirilir; \"Alt\" - soru kutusunun altına bir hata metni yerleştirilir. \"Devral\" seçeneği, anket düzeyindeki ayarı uygular (varsayılan olarak \"Üst\")."
 // page.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Soruların orijinal sırasını korur veya rastgele hale getirir. \"Devral\" seçeneği, anket düzeyindeki ayarı (varsayılan olarak \"Orijinal\") uygular. Bu ayarın etkisi yalnızca Önizleme sekmesinde görünür."
 // page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Sayfadaki gezinme düğmelerinin görünürlüğünü ayarlar. \"Devral\" seçeneği, varsayılan olarak \"Görünür\" olan anket düzeyi ayarını uygular."
-// pehelp.showTimerPanel: "Sets the visibility and location of a timer on a page." => "Sayfadaki bir zamanlayıcının görünürlüğünü ve konumunu ayarlar."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "Şunlar arasından seçim yapın: \"Kilitli\" - kullanıcılar panelleri genişletemez veya daraltamaz; \"Tümünü daralt\" - tüm paneller daraltılmış durumda başlar; \"Tümünü genişlet\" - tüm paneller genişletilmiş bir durumda başlar; \"İlk genişletildi\" - başlangıçta yalnızca ilk panel genişletilir."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "Seçim listesinde görüntülemek istediğiniz görüntü veya video dosyası URL'lerini içeren nesne dizisi içinde paylaşılan bir özellik adı girin."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "Soldaki değer, koşullu kurallarda kullanılan bir öğe kimliği görevi görür, sağdaki değer yanıtlayanlara gösterilir."

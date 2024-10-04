@@ -375,7 +375,7 @@ export var koreanStrings = {
       description: "페이지 설명",
       visibleIf: "다음과 같은 경우 페이지를 표시합니다.",
       requiredIf: "다음과 같은 경우 페이지를 필수로 만듭니다.",
-      maxTimeToFinish: "페이지 완료 시간 제한(초)",
+      timeLimit: "페이지 완료 시간 제한(초)",
       questionsOrder: "페이지의 질문 순서"
     },
     matrixdropdowncolumn: {
@@ -615,10 +615,10 @@ export var koreanStrings = {
     questionErrorLocation: "질문 위치 오류",
     focusFirstQuestionAutomatic: "페이지 변경시 첫 번째 질문에 초점",
     questionsOrder: "페이지의 요소 순서",
-    maxTimeToFinish: "설문 조사를 마칠 수있는 최대 시간",
-    maxTimeToFinishPage: "설문 조사에서 페이지를 마칠 수있는 최대 시간",
-    showTimerPanel: "타이머 패널 표시",
-    showTimerPanelMode: "타이머 패널 모드 표시",
+    timeLimit: "설문 조사를 마칠 수있는 최대 시간",
+    timeLimitPerPage: "설문 조사에서 페이지를 마칠 수있는 최대 시간",
+    timerLocation: "타이머 패널 표시",
+    timerInfoMode: "타이머 패널 모드 표시",
     renderMode: "렌더링 모드",
     allowAddPanel: "패널 추가 허용",
     allowRemovePanel: "패널 제거 허용",
@@ -1038,11 +1038,8 @@ export var koreanStrings = {
     showNavigationButtons: {
       none: "숨겨진"
     },
-    showTimerPanel: {
-      none: "숨겨진"
-    },
-    showTimerPanelMode: {
-      all: "둘다"
+    timerInfoMode: {
+      combined: "둘다"
     },
     addRowLocation: {
       default: "행렬 레이아웃에 따라 다름"
@@ -1410,11 +1407,11 @@ export var koreanStrings = {
     imageFit: "다음 중에서 선택: \"없음\" - 이미지가 원래 크기를 유지합니다. \"Contain\" - 가로 세로 비율을 유지하면서 이미지의 크기가 조정됩니다. \"표지\" - 이미지가 종횡비를 유지하면서 전체 상자를 채웁니다. \"채우기\" - 가로 세로 비율을 유지하지 않고 상자를 채우기 위해 이미지가 늘어납니다.",
     autoGrow: "데이터가 입력될 때 입력 필드의 높이를 점진적으로 늘립니다. \"입력 필드 높이(줄 단위)\" 설정을 재정의합니다.",
     allowResize: "크기 조정 핸들(또는 그립)이 모서리에 나타나며 드래그하여 입력 필드의 크기를 변경할 수 있습니다.",
-    maxTimeToFinish: "설문조사가 감사 인사 페이지로 자동 전환되기까지의 시간 간격(초)입니다.",
-    maxTimeToFinishPage: "설문조사가 다음 페이지로 자동 넘어가는 시간 간격(초)입니다.",
+    timeLimit: "설문조사가 감사 인사 페이지로 자동 전환되기까지의 시간 간격(초)입니다.",
+    timeLimitPerPage: "설문조사가 다음 페이지로 자동 넘어가는 시간 간격(초)입니다.",
     validateVisitedEmptyFields: "이 옵션을 사용하면 사용자가 빈 입력 필드에 집중한 다음 변경하지 않고 떠날 때 유효성 검사를 트리거합니다.",
     page: {
-      maxTimeToFinish: "설문조사가 다음 페이지로 자동 넘어가는 시간 간격(초)입니다.",
+      timeLimit: "설문조사가 다음 페이지로 자동 넘어가는 시간 간격(초)입니다.",
       visibleIf: "마술 지팡이 아이콘을 사용하여 페이지 표시 여부를 결정하는 조건부 규칙을 설정할 수 있습니다.",
       enableIf: "마술 지팡이 아이콘을 사용하여 페이지에 대해 읽기 전용 모드를 비활성화하는 조건부 규칙을 설정합니다.",
       requiredIf: "마술 지팡이 아이콘을 사용하여 하나 이상의 중첩된 질문에 답변이 없는 한 설문조사 제출을 금지하는 조건부 규칙을 설정합니다.",
@@ -1424,7 +1421,6 @@ export var koreanStrings = {
       questionsOrder: "질문의 원래 순서를 유지하거나 무작위화합니다. \"상속\" 옵션은 설문조사 수준 설정(기본적으로 \"원본\")을 적용합니다. 이 설정의 효과는 미리보기 탭에서만 볼 수 있습니다.",
       navigationButtonsVisibility: "페이지에서 탐색 단추의 표시 여부를 설정합니다. \"상속\" 옵션은 설문조사 수준 설정을 적용하며, 기본값은 \"표시\"입니다."
     },
-    showTimerPanel: "페이지에서 타이머의 표시 여부와 위치를 설정합니다.",
     panelsState: "다음 중에서 선택: \"잠김\" - 사용자가 패널을 확장하거나 축소할 수 없습니다. \"모두 축소\" - 모든 패널이 축소된 상태에서 시작됩니다. \"모두 확장\" - 모든 패널이 확장된 상태에서 시작됩니다. \"첫 번째 확장\" - 첫 번째 패널만 처음에 확장됩니다.",
     imageLinkName: "선택 목록에 표시할 이미지 또는 비디오 파일 URL이 포함된 객체 배열 내에 공유 속성 이름을 입력합니다.",
     choices: "왼쪽 값은 조건부 규칙에 사용되는 항목 ID 역할을 하며, 오른쪽 값은 응답자에게 표시됩니다.",
@@ -1919,7 +1915,7 @@ editorLocalization.locales["ko"] = koreanStrings;
 // pe.editText: "Edit Answer button text" => "답변 편집 단추 텍스트"
 // image.imageHeight: "Image height (in CSS-accepted values)" => "이미지 높이(CSS에서 허용하는 값)"
 // image.imageWidth: "Image width (in CSS-accepted values)" => "이미지 너비(CSS에서 허용하는 값)"
-// page.maxTimeToFinish: "Time limit to finish the page (in seconds)" => "페이지 완료 시간 제한(초)"
+// page.timeLimit: "Time limit to finish the page (in seconds)" => "페이지 완료 시간 제한(초)"
 // question.page: "Parent page" => "상위 페이지"
 // pe.noEntriesText: "Empty entries text" => "빈 항목 텍스트"
 // pe.html: "HTML markup" => "HTML 마크업"
@@ -2746,9 +2742,9 @@ editorLocalization.locales["ko"] = koreanStrings;
 // pehelp.imageFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "다음 중에서 선택: \"없음\" - 이미지가 원래 크기를 유지합니다. \"Contain\" - 가로 세로 비율을 유지하면서 이미지의 크기가 조정됩니다. \"표지\" - 이미지가 종횡비를 유지하면서 전체 상자를 채웁니다. \"채우기\" - 가로 세로 비율을 유지하지 않고 상자를 채우기 위해 이미지가 늘어납니다."
 // pehelp.autoGrow: "Gradually increases the height of the input field as data is being entered. Overrides the \"Input field height (in lines)\" setting." => "데이터가 입력될 때 입력 필드의 높이를 점진적으로 늘립니다. \"입력 필드 높이(줄 단위)\" 설정을 재정의합니다."
 // pehelp.allowResize: "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field." => "크기 조정 핸들(또는 그립)이 모서리에 나타나며 드래그하여 입력 필드의 크기를 변경할 수 있습니다."
-// pehelp.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "설문조사가 감사 인사 페이지로 자동 전환되기까지의 시간 간격(초)입니다."
-// pehelp.maxTimeToFinishPage: "A time interval in seconds after which the survey auto-advances to the next page." => "설문조사가 다음 페이지로 자동 넘어가는 시간 간격(초)입니다."
-// page.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the next page." => "설문조사가 다음 페이지로 자동 넘어가는 시간 간격(초)입니다."
+// pehelp.timeLimit: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "설문조사가 감사 인사 페이지로 자동 전환되기까지의 시간 간격(초)입니다."
+// pehelp.timeLimitPerPage: "A time interval in seconds after which the survey auto-advances to the next page." => "설문조사가 다음 페이지로 자동 넘어가는 시간 간격(초)입니다."
+// page.timeLimit: "A time interval in seconds after which the survey auto-advances to the next page." => "설문조사가 다음 페이지로 자동 넘어가는 시간 간격(초)입니다."
 // page.visibleIf: "Use the magic wand icon to set a conditional rule that determines page visibility." => "마술 지팡이 아이콘을 사용하여 페이지 표시 여부를 결정하는 조건부 규칙을 설정할 수 있습니다."
 // page.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the page." => "마술 지팡이 아이콘을 사용하여 페이지에 대해 읽기 전용 모드를 비활성화하는 조건부 규칙을 설정합니다."
 // page.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "마술 지팡이 아이콘을 사용하여 하나 이상의 중첩된 질문에 답변이 없는 한 설문조사 제출을 금지하는 조건부 규칙을 설정합니다."
@@ -2756,7 +2752,6 @@ editorLocalization.locales["ko"] = koreanStrings;
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "잘못된 입력이 있는 질문과 관련된 오류 메시지의 위치를 설정합니다. 다음 중 하나를 선택합니다. \"상단\" - 오류 텍스트가 질문 상자 상단에 배치됩니다. \"하단\" - 오류 텍스트가 질문 상자 하단에 배치됩니다. \"상속\" 옵션은 설문조사 수준 설정(기본적으로 \"상단\")을 적용합니다."
 // page.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "질문의 원래 순서를 유지하거나 무작위화합니다. \"상속\" 옵션은 설문조사 수준 설정(기본적으로 \"원본\")을 적용합니다. 이 설정의 효과는 미리보기 탭에서만 볼 수 있습니다."
 // page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "페이지에서 탐색 단추의 표시 여부를 설정합니다. \"상속\" 옵션은 설문조사 수준 설정을 적용하며, 기본값은 \"표시\"입니다."
-// pehelp.showTimerPanel: "Sets the visibility and location of a timer on a page." => "페이지에서 타이머의 표시 여부와 위치를 설정합니다."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "다음 중에서 선택: \"잠김\" - 사용자가 패널을 확장하거나 축소할 수 없습니다. \"모두 축소\" - 모든 패널이 축소된 상태에서 시작됩니다. \"모두 확장\" - 모든 패널이 확장된 상태에서 시작됩니다. \"첫 번째 확장\" - 첫 번째 패널만 처음에 확장됩니다."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "선택 목록에 표시할 이미지 또는 비디오 파일 URL이 포함된 객체 배열 내에 공유 속성 이름을 입력합니다."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "왼쪽 값은 조건부 규칙에 사용되는 항목 ID 역할을 하며, 오른쪽 값은 응답자에게 표시됩니다."

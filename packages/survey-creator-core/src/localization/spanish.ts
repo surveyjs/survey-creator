@@ -375,7 +375,7 @@ var spanishTranslation = {
       description: "Descripción de la página",
       visibleIf: "Hacer que la página sea visible si",
       requiredIf: "Haga que la página sea obligatoria si",
-      maxTimeToFinish: "Tiempo límite para finalizar la página (en segundos)",
+      timeLimit: "Tiempo límite para finalizar la página (en segundos)",
       questionsOrder: "Orden de las preguntas en la página"
     },
     matrixdropdowncolumn: {
@@ -615,10 +615,10 @@ var spanishTranslation = {
     questionErrorLocation: "Ubicación de error de la pregunta",
     focusFirstQuestionAutomatic: "Enfoca la primera pregunta al cambiar la página",
     questionsOrder: "Orden de elementos en la página",
-    maxTimeToFinish: "Tiempo máximo para terminar la encuesta",
-    maxTimeToFinishPage: "Tiempo máximo para terminar una página en la encuesta",
-    showTimerPanel: "Mostrar panel de temporizador",
-    showTimerPanelMode: "Mostrar modo de panel del temporizador",
+    timeLimit: "Tiempo máximo para terminar la encuesta",
+    timeLimitPerPage: "Tiempo máximo para terminar una página en la encuesta",
+    timerLocation: "Mostrar panel de temporizador",
+    timerInfoMode: "Mostrar modo de panel del temporizador",
     renderMode: "Modo de renderizado",
     allowAddPanel: "Permitir agregar un panel",
     allowRemovePanel: "Permitir eliminar el panel",
@@ -1038,11 +1038,8 @@ var spanishTranslation = {
     showNavigationButtons: {
       none: "Oculto"
     },
-    showTimerPanel: {
-      none: "Oculto"
-    },
-    showTimerPanelMode: {
-      all: "Ambos"
+    timerInfoMode: {
+      combined: "Ambos"
     },
     addRowLocation: {
       default: "Depende de la disposición de la matriz"
@@ -1410,11 +1407,11 @@ var spanishTranslation = {
     imageFit: "Elija entre: \"Ninguno\": la imagen mantiene su tamaño original; \"Contener\": se cambia el tamaño de la imagen para que se ajuste manteniendo su relación de aspecto; \"Portada\": la imagen llena toda la caja manteniendo su relación de aspecto; \"Relleno\": la imagen se estira para llenar el cuadro sin mantener su relación de aspecto.",
     autoGrow: "Aumenta gradualmente la altura del campo de entrada a medida que se introducen los datos. Anula el ajuste \"Altura del campo de entrada (en líneas)\".",
     allowResize: "El controlador de cambio de tamaño (o pinzamiento) aparece en la esquina y se puede arrastrar para modificar el tamaño del campo de entrada.",
-    maxTimeToFinish: "Un intervalo de tiempo en segundos después del cual la encuesta avanza automáticamente a la página de agradecimiento.",
-    maxTimeToFinishPage: "Un intervalo de tiempo en segundos después del cual la encuesta avanza automáticamente a la página siguiente.",
+    timeLimit: "Un intervalo de tiempo en segundos después del cual la encuesta avanza automáticamente a la página de agradecimiento.",
+    timeLimitPerPage: "Un intervalo de tiempo en segundos después del cual la encuesta avanza automáticamente a la página siguiente.",
     validateVisitedEmptyFields: "Habilite esta opción para desencadenar la validación cuando un usuario se centre en un campo de entrada vacío y, a continuación, lo abandone sin realizar ningún cambio.",
     page: {
-      maxTimeToFinish: "Un intervalo de tiempo en segundos después del cual la encuesta avanza automáticamente a la página siguiente.",
+      timeLimit: "Un intervalo de tiempo en segundos después del cual la encuesta avanza automáticamente a la página siguiente.",
       visibleIf: "Utilice el icono de la varita mágica para establecer una regla condicional que determine la visibilidad de la página.",
       enableIf: "Utilice el icono de la varita mágica para establecer una regla condicional que deshabilite el modo de solo lectura de la página.",
       requiredIf: "Utilice el icono de la varita mágica para establecer una regla condicional que impida el envío de encuestas a menos que al menos una pregunta anidada tenga una respuesta.",
@@ -1424,7 +1421,6 @@ var spanishTranslation = {
       questionsOrder: "Mantiene el orden original de las preguntas o las aleatoriza. La opción \"Heredar\" aplica la configuración a nivel de encuesta (\"Original\" de forma predeterminada). El efecto de esta configuración solo es visible en la pestaña Vista previa.",
       navigationButtonsVisibility: "Establece la visibilidad de los botones de navegación en la página. La opción \"Heredar\" aplica la configuración de nivel de encuesta, que por defecto es \"Visible\"."
     },
-    showTimerPanel: "Establece la visibilidad y la ubicación de un temporizador en una página.",
     panelsState: "Elija entre: \"Bloqueado\": los usuarios no pueden expandir ni contraer paneles; \"Contraer todo\": todos los paneles comienzan en un estado contraído; \"Expandir todo\": todos los paneles comienzan en un estado expandido; \"Primero expandido\": solo el primer panel se expande inicialmente.",
     imageLinkName: "Introduzca un nombre de propiedad compartida dentro de la matriz de objetos que contiene las direcciones URL de los archivos de imagen o vídeo que desea mostrar en la lista de opciones.",
     choices: "El valor de la izquierda sirve como un identificador de elemento utilizado en las reglas condicionales, el valor de la derecha se muestra a los encuestados.",
@@ -2316,9 +2312,9 @@ editorLocalization.locales["es"] = spanishTranslation;
 // pehelp.imageFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Elija entre: \"Ninguno\": la imagen mantiene su tamaño original; \"Contener\": se cambia el tamaño de la imagen para que se ajuste manteniendo su relación de aspecto; \"Portada\": la imagen llena toda la caja manteniendo su relación de aspecto; \"Relleno\": la imagen se estira para llenar el cuadro sin mantener su relación de aspecto."
 // pehelp.autoGrow: "Gradually increases the height of the input field as data is being entered. Overrides the \"Input field height (in lines)\" setting." => "Aumenta gradualmente la altura del campo de entrada a medida que se introducen los datos. Anula el ajuste \"Altura del campo de entrada (en líneas)\"."
 // pehelp.allowResize: "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field." => "El controlador de cambio de tamaño (o pinzamiento) aparece en la esquina y se puede arrastrar para modificar el tamaño del campo de entrada."
-// pehelp.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "Un intervalo de tiempo en segundos después del cual la encuesta avanza automáticamente a la página de agradecimiento."
-// pehelp.maxTimeToFinishPage: "A time interval in seconds after which the survey auto-advances to the next page." => "Un intervalo de tiempo en segundos después del cual la encuesta avanza automáticamente a la página siguiente."
-// page.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the next page." => "Un intervalo de tiempo en segundos después del cual la encuesta avanza automáticamente a la página siguiente."
+// pehelp.timeLimit: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "Un intervalo de tiempo en segundos después del cual la encuesta avanza automáticamente a la página de agradecimiento."
+// pehelp.timeLimitPerPage: "A time interval in seconds after which the survey auto-advances to the next page." => "Un intervalo de tiempo en segundos después del cual la encuesta avanza automáticamente a la página siguiente."
+// page.timeLimit: "A time interval in seconds after which the survey auto-advances to the next page." => "Un intervalo de tiempo en segundos después del cual la encuesta avanza automáticamente a la página siguiente."
 // page.visibleIf: "Use the magic wand icon to set a conditional rule that determines page visibility." => "Utilice el icono de la varita mágica para establecer una regla condicional que determine la visibilidad de la página."
 // page.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the page." => "Utilice el icono de la varita mágica para establecer una regla condicional que deshabilite el modo de solo lectura de la página."
 // page.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "Utilice el icono de la varita mágica para establecer una regla condicional que impida el envío de encuestas a menos que al menos una pregunta anidada tenga una respuesta."
@@ -2326,7 +2322,6 @@ editorLocalization.locales["es"] = spanishTranslation;
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Establece la ubicación de un mensaje de error en relación con la pregunta con entrada no válida. Elija entre: \"Arriba\": se coloca un texto de error en la parte superior del cuadro de pregunta; \"Abajo\": se coloca un texto de error en la parte inferior del cuadro de pregunta. La opción \"Heredar\" aplica la configuración a nivel de encuesta (\"Superior\" de forma predeterminada)."
 // page.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Mantiene el orden original de las preguntas o las aleatoriza. La opción \"Heredar\" aplica la configuración a nivel de encuesta (\"Original\" de forma predeterminada). El efecto de esta configuración solo es visible en la pestaña Vista previa."
 // page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Establece la visibilidad de los botones de navegación en la página. La opción \"Heredar\" aplica la configuración de nivel de encuesta, que por defecto es \"Visible\"."
-// pehelp.showTimerPanel: "Sets the visibility and location of a timer on a page." => "Establece la visibilidad y la ubicación de un temporizador en una página."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "Elija entre: \"Bloqueado\": los usuarios no pueden expandir ni contraer paneles; \"Contraer todo\": todos los paneles comienzan en un estado contraído; \"Expandir todo\": todos los paneles comienzan en un estado expandido; \"Primero expandido\": solo el primer panel se expande inicialmente."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "Introduzca un nombre de propiedad compartida dentro de la matriz de objetos que contiene las direcciones URL de los archivos de imagen o vídeo que desea mostrar en la lista de opciones."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "El valor de la izquierda sirve como un identificador de elemento utilizado en las reglas condicionales, el valor de la derecha se muestra a los encuestados."

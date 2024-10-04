@@ -375,7 +375,7 @@ export var indonesianStrings = {
       description: "Deskripsi halaman",
       visibleIf: "Membuat halaman terlihat jika",
       requiredIf: "Buat halaman diperlukan jika",
-      maxTimeToFinish: "Batas waktu untuk menyelesaikan halaman (dalam detik)",
+      timeLimit: "Batas waktu untuk menyelesaikan halaman (dalam detik)",
       questionsOrder: "Urutan pertanyaan di halaman"
     },
     matrixdropdowncolumn: {
@@ -615,10 +615,10 @@ export var indonesianStrings = {
     questionErrorLocation: "Lokasi Pertanyaan Error",
     focusFirstQuestionAutomatic: "Fokus ke pertanyaan pertama saat pergantian halaman",
     questionsOrder: "Urutakan elemen pada halaan",
-    maxTimeToFinish: "Waktu maksimum untuk menyelesaikan survei",
-    maxTimeToFinishPage: "Waktu maksimum untuk menyelesaikan suatu halaman",
-    showTimerPanel: "Tampilkan panel pengatur waktu",
-    showTimerPanelMode: "Tampilkan mode panel pengatur waktu",
+    timeLimit: "Waktu maksimum untuk menyelesaikan survei",
+    timeLimitPerPage: "Waktu maksimum untuk menyelesaikan suatu halaman",
+    timerLocation: "Tampilkan panel pengatur waktu",
+    timerInfoMode: "Tampilkan mode panel pengatur waktu",
     renderMode: "Mode render",
     allowAddPanel: "Bolehkan penambahan panel",
     allowRemovePanel: "Bolehkan penghapusan panel",
@@ -1038,11 +1038,8 @@ export var indonesianStrings = {
     showNavigationButtons: {
       none: "Sembunyi"
     },
-    showTimerPanel: {
-      none: "Sembunyi"
-    },
-    showTimerPanelMode: {
-      all: "Keduanya"
+    timerInfoMode: {
+      combined: "Keduanya"
     },
     addRowLocation: {
       default: "Tergantung pada tata letak matriks"
@@ -1410,11 +1407,11 @@ export var indonesianStrings = {
     imageFit: "Pilih dari: \"Tidak ada\" - gambar mempertahankan ukuran aslinya; \"Berisi\" - gambar diubah ukurannya agar pas dengan tetap mempertahankan rasio aspeknya; \"Cover\" - gambar mengisi seluruh kotak sambil mempertahankan rasio aspeknya; \"Isi\" - gambar direntangkan untuk mengisi kotak tanpa mempertahankan rasio aspeknya.",
     autoGrow: "Secara bertahap meningkatkan ketinggian bidang input saat data dimasukkan. Mengganti setelan \"Tinggi bidang input (dalam baris)\".",
     allowResize: "Gagang pengubah ukuran (atau pegangan) muncul di sudut dan dapat diseret untuk mengubah ukuran bidang input.",
-    maxTimeToFinish: "Interval waktu dalam hitungan detik setelah survei maju secara otomatis ke halaman Terima Kasih.",
-    maxTimeToFinishPage: "Interval waktu dalam hitungan detik setelah survei maju secara otomatis ke halaman berikutnya.",
+    timeLimit: "Interval waktu dalam hitungan detik setelah survei maju secara otomatis ke halaman Terima Kasih.",
+    timeLimitPerPage: "Interval waktu dalam hitungan detik setelah survei maju secara otomatis ke halaman berikutnya.",
     validateVisitedEmptyFields: "Aktifkan opsi ini untuk memicu validasi saat pengguna berfokus pada bidang input kosong dan kemudian meninggalkannya tanpa membuat perubahan apa pun.",
     page: {
-      maxTimeToFinish: "Interval waktu dalam hitungan detik setelah survei maju secara otomatis ke halaman berikutnya.",
+      timeLimit: "Interval waktu dalam hitungan detik setelah survei maju secara otomatis ke halaman berikutnya.",
       visibleIf: "Gunakan ikon tongkat ajaib untuk menetapkan aturan bersyarat yang menentukan visibilitas halaman.",
       enableIf: "Gunakan ikon tongkat ajaib untuk mengatur aturan bersyarat yang menonaktifkan mode baca-saja untuk halaman.",
       requiredIf: "Gunakan ikon tongkat ajaib untuk menetapkan aturan bersyarat yang mencegah pengiriman survei kecuali setidaknya satu pertanyaan bertingkat memiliki jawaban.",
@@ -1424,7 +1421,6 @@ export var indonesianStrings = {
       questionsOrder: "Menyimpan urutan pertanyaan asli atau mengacaknya. Opsi \"Warisi\" menerapkan setelan tingkat survei (\"Asli\" secara default). Efek pengaturan ini hanya terlihat di tab Pratinjau.",
       navigationButtonsVisibility: "Mengatur visibilitas tombol navigasi di halaman. Opsi \"Warisi\" menerapkan pengaturan tingkat survei, yang defaultnya adalah \"Terlihat\"."
     },
-    showTimerPanel: "Mengatur visibilitas dan lokasi timer pada halaman.",
     panelsState: "Pilih dari: \"Terkunci\" - pengguna tidak dapat memperluas atau menciutkan panel; \"Runtuhkan semua\" - semua panel dimulai dalam keadaan diciutkan; \"Perluas semua\" - semua panel dimulai dalam keadaan diperluas; \"Pertama diperluas\" - hanya panel pertama yang awalnya diperluas.",
     imageLinkName: "Masukkan nama properti bersama dalam array objek yang berisi URL file gambar atau video yang ingin Anda tampilkan di daftar pilihan.",
     choices: "Nilai kiri berfungsi sebagai ID item yang digunakan dalam aturan bersyarat, nilai yang tepat ditampilkan kepada responden.",
@@ -1894,7 +1890,7 @@ editorLocalization.locales["id"] = indonesianStrings;
 // pe.editText: "Edit Answer button text" => "Teks tombol Edit Jawaban"
 // image.imageHeight: "Image height (in CSS-accepted values)" => "Tinggi gambar (dalam nilai yang diterima CSS)"
 // image.imageWidth: "Image width (in CSS-accepted values)" => "Lebar gambar (dalam nilai yang diterima CSS)"
-// page.maxTimeToFinish: "Time limit to finish the page (in seconds)" => "Batas waktu untuk menyelesaikan halaman (dalam detik)"
+// page.timeLimit: "Time limit to finish the page (in seconds)" => "Batas waktu untuk menyelesaikan halaman (dalam detik)"
 // question.page: "Parent page" => "Halaman induk"
 // pe.noEntriesText: "Empty entries text" => "Teks entri kosong"
 // pe.setValue: "Answer" => "Menjawab"
@@ -2696,9 +2692,9 @@ editorLocalization.locales["id"] = indonesianStrings;
 // pehelp.imageFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Pilih dari: \"Tidak ada\" - gambar mempertahankan ukuran aslinya; \"Berisi\" - gambar diubah ukurannya agar pas dengan tetap mempertahankan rasio aspeknya; \"Cover\" - gambar mengisi seluruh kotak sambil mempertahankan rasio aspeknya; \"Isi\" - gambar direntangkan untuk mengisi kotak tanpa mempertahankan rasio aspeknya."
 // pehelp.autoGrow: "Gradually increases the height of the input field as data is being entered. Overrides the \"Input field height (in lines)\" setting." => "Secara bertahap meningkatkan ketinggian bidang input saat data dimasukkan. Mengganti setelan \"Tinggi bidang input (dalam baris)\"."
 // pehelp.allowResize: "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field." => "Gagang pengubah ukuran (atau pegangan) muncul di sudut dan dapat diseret untuk mengubah ukuran bidang input."
-// pehelp.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "Interval waktu dalam hitungan detik setelah survei maju secara otomatis ke halaman Terima Kasih."
-// pehelp.maxTimeToFinishPage: "A time interval in seconds after which the survey auto-advances to the next page." => "Interval waktu dalam hitungan detik setelah survei maju secara otomatis ke halaman berikutnya."
-// page.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the next page." => "Interval waktu dalam hitungan detik setelah survei maju secara otomatis ke halaman berikutnya."
+// pehelp.timeLimit: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "Interval waktu dalam hitungan detik setelah survei maju secara otomatis ke halaman Terima Kasih."
+// pehelp.timeLimitPerPage: "A time interval in seconds after which the survey auto-advances to the next page." => "Interval waktu dalam hitungan detik setelah survei maju secara otomatis ke halaman berikutnya."
+// page.timeLimit: "A time interval in seconds after which the survey auto-advances to the next page." => "Interval waktu dalam hitungan detik setelah survei maju secara otomatis ke halaman berikutnya."
 // page.visibleIf: "Use the magic wand icon to set a conditional rule that determines page visibility." => "Gunakan ikon tongkat ajaib untuk menetapkan aturan bersyarat yang menentukan visibilitas halaman."
 // page.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the page." => "Gunakan ikon tongkat ajaib untuk mengatur aturan bersyarat yang menonaktifkan mode baca-saja untuk halaman."
 // page.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "Gunakan ikon tongkat ajaib untuk menetapkan aturan bersyarat yang mencegah pengiriman survei kecuali setidaknya satu pertanyaan bertingkat memiliki jawaban."
@@ -2706,7 +2702,6 @@ editorLocalization.locales["id"] = indonesianStrings;
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Mengatur lokasi pesan kesalahan sehubungan dengan pertanyaan dengan input yang tidak valid. Pilih antara: \"Atas\" - teks kesalahan ditempatkan di bagian atas kotak pertanyaan; \"Bawah\" - teks kesalahan ditempatkan di bagian bawah kotak pertanyaan. Opsi \"Warisi\" menerapkan setelan tingkat survei (\"Teratas\" secara default)."
 // page.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Menyimpan urutan pertanyaan asli atau mengacaknya. Opsi \"Warisi\" menerapkan setelan tingkat survei (\"Asli\" secara default). Efek pengaturan ini hanya terlihat di tab Pratinjau."
 // page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Mengatur visibilitas tombol navigasi di halaman. Opsi \"Warisi\" menerapkan pengaturan tingkat survei, yang defaultnya adalah \"Terlihat\"."
-// pehelp.showTimerPanel: "Sets the visibility and location of a timer on a page." => "Mengatur visibilitas dan lokasi timer pada halaman."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "Pilih dari: \"Terkunci\" - pengguna tidak dapat memperluas atau menciutkan panel; \"Runtuhkan semua\" - semua panel dimulai dalam keadaan diciutkan; \"Perluas semua\" - semua panel dimulai dalam keadaan diperluas; \"Pertama diperluas\" - hanya panel pertama yang awalnya diperluas."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "Masukkan nama properti bersama dalam array objek yang berisi URL file gambar atau video yang ingin Anda tampilkan di daftar pilihan."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "Nilai kiri berfungsi sebagai ID item yang digunakan dalam aturan bersyarat, nilai yang tepat ditampilkan kepada responden."

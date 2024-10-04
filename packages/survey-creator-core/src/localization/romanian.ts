@@ -375,7 +375,7 @@ export const roStrings = {
       description: "Descrierea paginii",
       visibleIf: "Fă pagina vizibilă dacă",
       requiredIf: "Fă pagina obligatorie dacă",
-      maxTimeToFinish: "Limită de timp pentru finalizarea paginii",
+      timeLimit: "Limită de timp pentru finalizarea paginii",
       questionsOrder: "Ordinea întrebărilor pe pagină"
     },
     matrixdropdowncolumn: {
@@ -615,10 +615,10 @@ export const roStrings = {
     questionErrorLocation: "Alinierea mesajului de eroare",
     focusFirstQuestionAutomatic: "Focalizați pe prima întrebare la o pagină nouă",
     questionsOrder: "Ordinea întrebărilor",
-    maxTimeToFinish: "Limită de timp pentru finalizarea chestionarului",
-    maxTimeToFinishPage: "Limită de timp pentru finalizarea unei pagini",
-    showTimerPanel: "Alinierea timerului",
-    showTimerPanelMode: "Modul timerului",
+    timeLimit: "Limită de timp pentru finalizarea chestionarului",
+    timeLimitPerPage: "Limită de timp pentru finalizarea unei pagini",
+    timerLocation: "Alinierea timerului",
+    timerInfoMode: "Modul timerului",
     renderMode: "Modul de afișare a panoului",
     allowAddPanel: "Permite adăugarea panoului",
     allowRemovePanel: "Permite eliminarea panoului",
@@ -1038,11 +1038,8 @@ export const roStrings = {
     showNavigationButtons: {
       none: "Ascuns"
     },
-    showTimerPanel: {
-      none: "Ascuns"
-    },
-    showTimerPanelMode: {
-      all: "Ambele"
+    timerInfoMode: {
+      combined: "Ambele"
     },
     addRowLocation: {
       default: "Pe baza aspectului matricei"
@@ -1410,11 +1407,11 @@ export const roStrings = {
     imageFit: "Alegeți dintre: „Niciunul” - imaginea își menține dimensiunea originală; „Conține” - imaginea este redimensionată pentru a se potrivi păstrând aspectul său; „Acoperă” - imaginea umple întreaga casetă păstrând aspectul său; „Umple” - imaginea este întinsă pentru a umple caseta fără a păstra aspectul său.",
     autoGrow: "Opțiunea „Moștenește” aplică setarea de la nivel de chestionar („Dezactivat” implicit).",
     allowResize: "Opțiunea „Moștenește” aplică setarea de la nivel de chestionar („Activat” implicit).",
-    maxTimeToFinish: "Un interval de timp în secunde după care chestionarul avansează automat la pagina „Mulțumim”.",
-    maxTimeToFinishPage: "Un interval de timp în secunde după care chestionarul avansează automat la pagina următoare. Ascunde butonul de navigare „Anterior”.",
+    timeLimit: "Un interval de timp în secunde după care chestionarul avansează automat la pagina „Mulțumim”.",
+    timeLimitPerPage: "Un interval de timp în secunde după care chestionarul avansează automat la pagina următoare. Ascunde butonul de navigare „Anterior”.",
     validateVisitedEmptyFields: "Activați această opțiune pentru a declanșa validarea atunci când un utilizator se concentrează pe un câmp de introducere gol și apoi îl lasă fără a efectua modificări.",
     page: {
-      maxTimeToFinish: "Un interval de timp în secunde după care chestionarul avansează automat la pagina următoare. Ascunde butonul de navigare „Anterior”.",
+      timeLimit: "Un interval de timp în secunde după care chestionarul avansează automat la pagina următoare. Ascunde butonul de navigare „Anterior”.",
       visibleIf: "Utilizați pictograma bagheta magică pentru a seta o regulă condițională care determină vizibilitatea paginii.",
       enableIf: "Utilizați pictograma bagheta magică pentru a seta o regulă condițională care dezactivează modul doar citire pentru pagină.",
       requiredIf: "Utilizați pictograma bagheta magică pentru a seta o regulă condițională care împiedică trimiterea chestionarului dacă cel puțin o întrebare inclusă nu are un răspuns.",
@@ -1424,7 +1421,6 @@ export const roStrings = {
       questionsOrder: "Păstrează ordinea originală a întrebărilor sau le randomizează. Opțiunea „Moștenește” aplică setarea de la nivel de chestionar („Original” implicit). Efectul acestei setări este vizibil doar în fila Previzualizare.",
       navigationButtonsVisibility: "Setează vizibilitatea butoanelor de navigare pe pagină. Opțiunea „Moștenește” aplică setarea de la nivel de chestionar, care implicit este „Vizibilă”."
     },
-    showTimerPanel: "Setează vizibilitatea și locația unui cronometru pe o pagină.",
     panelsState: "Alegeți dintre: „Blocat” - utilizatorii nu pot extinde sau colapsa panouri; „Colapsați toate” - toate panourile încep într-o stare colapsată; „Extindeți toate” - toate panourile încep într-o stare extinsă; „Primul extins” - doar primul panou este extins inițial. Se aplică dacă „Modul de afișare a panoului” este setat la „Listă” și proprietatea „Șablon titlu panou” este specificată.",
     imageLinkName: "Introduceți un nume de proprietate comun în cadrul array-ului de obiecte care conține URL-urile fișierelor imagine sau video pe care doriți să le afișați în lista de opțiuni.",
     choices: "Valoarea din stânga servește ca un ID al elementului utilizat în regulile condiționale, valoarea din dreapta este afișată respondenților.",
