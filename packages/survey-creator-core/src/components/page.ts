@@ -39,7 +39,9 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     );
     this.attachElement(page);
   }
-
+  protected updateActionVisibility(id: string, isVisible: boolean) {
+    super.updateActionVisibility(id, !this.isGhost && isVisible);
+  }
   protected get dragInsideCollapsedContainer(): boolean {
     return this.collapsed;
   }
