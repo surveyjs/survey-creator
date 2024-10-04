@@ -1911,7 +1911,7 @@ export class SurveyCreatorModel extends Base
     this.dragDropSurveyElements.onGetMaxNestedPanels = (): number => { return this.maxNestedPanels; };
     let isDraggedFromToolbox = false;
     this.dragDropSurveyElements.onDragStart.add((sender, options) => {
-      isDraggedFromToolbox = !sender.draggedElement.parent;
+      isDraggedFromToolbox = !sender.draggedElement.parent && !sender.draggedElement.isPage;
       this.onDragStart.fire(this, options);
       this.startUndoRedoTransaction("drag drop");
     });
