@@ -106,6 +106,8 @@ export var czStrings = {
     redo: "Opětovně vrátit",
     undoTooltip: "Vrátit poslední změnu",
     redoTooltip: "Znovu provést změnu",
+    expandAllTooltip: "Rozbalit vše",
+    collapseAllTooltip: "Sbalit vše",
     showMoreChoices: "Zobrazit více",
     showLessChoices: "Zobrazit méně",
     copy: "Kopírovat",
@@ -123,6 +125,8 @@ export var czStrings = {
     toolboxNoResultsFound: "Nebyly nalezeny žádné výsledky",
     propertyGridFilteredTextPlaceholder: "Zadejte hledaný text...",
     propertyGridNoResultsFound: "Nebyly nalezeny žádné výsledky",
+    propertyGridPlaceholderTitle: "Začněte konfigurovat formulář",
+    propertyGridPlaceholderDescription: "Kliknutím na libovolnou ikonu kategorie můžete prozkoumat nastavení průzkumu. Další nastavení budou k dispozici, jakmile přidáte element survey na návrhovou plochu.",
     correctJSON: "Opravte JSON.",
     surveyResults: "Výsledek průzkumu: ",
     surveyResultsTable: "Jako tabulka",
@@ -634,6 +638,7 @@ export var czStrings = {
     maxImageHeight: "Maximální výška obrázku",
     minValue: "Minimální hodnota",
     maxValue: "Maximální hodnota",
+    caseInsensitive: "Nerozlišuje malá a velká písmena",
     minLength: "Minimální délka",
     allowDigits: "Povolit číslice",
     minCount: "Minimální počet",
@@ -1360,6 +1365,7 @@ export var czStrings = {
       showInMultipleColumns: "Pokud je tato možnost vybraná, vytvoří samostatný sloupec pro každou možnost volby.",
       colCount: "Uspořádá volby voleb ve vícesloupcovém rozvržení. Když je nastavená hodnota 0, volby se zobrazí na jednom řádku. Pokud je nastavena hodnota -1, skutečná hodnota je zděděna z vlastnosti \"Počet vnořených sloupců\" nadřazené matice."
     },
+    caseInsensitive: "Vyberte, zda mají být velká a malá písmena v regulárním výrazu považována za ekvivalentní.",
     widthMode: "Vyberte si z: \"Statické\" - nastaví pevnou šířku; \"Responzivní\" - způsobí, že průzkum bude zabírat celou šířku obrazovky; \"Auto\" – použije jednu z těchto dvou možností v závislosti na použitých typech otázek.",
     cookieName: "Cookies brání uživatelům vyplnit průzkum vícekrát.",
     logo: "Vložte odkaz na obrázek (bez omezení velikosti) nebo klikněte na ikonu složky a procházejte soubor z počítače (až 64 kB).",
@@ -2346,3 +2352,7 @@ editorLocalization.locales["cs"] = czStrings;
 // progressBarLocation.topBottom: "Top and bottom" => "Nahoře a dole"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Uspořádá volby voleb ve vícesloupcovém rozvržení. Když je nastavená hodnota 0, volby se zobrazí na jednom řádku. Pokud je nastavena hodnota -1, skutečná hodnota je zděděna z vlastnosti \"Počet vnořených sloupců\" nadřazené matice."
 // ed.translationYouTubeNotSupported: "YouTube links are not supported." => "Odkazy na YouTube nejsou podporovány."
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "Začněte konfigurovat formulář"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Kliknutím na libovolnou ikonu kategorie můžete prozkoumat nastavení průzkumu. Další nastavení budou k dispozici, jakmile přidáte element survey na návrhovou plochu."
+// pe.caseInsensitive: "Case insensitive" => "Nerozlišuje malá a velká písmena"
+// pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Vyberte, zda mají být velká a malá písmena v regulárním výrazu považována za ekvivalentní."

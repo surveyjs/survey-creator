@@ -128,8 +128,8 @@ test("Test question type converter on page for panel", async (t) => {
 
     await t
       .scroll(Selector(".svc-tab-designer"), "bottom")
-      .expect(Selector(".svc-panel__question-type-selector").visible).ok()
-      .click(Selector(".svc-panel__question-type-selector"))
+      .expect(Selector(".svc-element__question-type-selector").visible).ok()
+      .click(Selector(".svc-element__question-type-selector"))
       .expect(Selector(".sv-popup__container").filterVisible().visible).ok();
     await takeElementScreenshot("convert-to-popup-panel-not-empty.png", Selector(".sv-popup__container").filterVisible(), t, comparer);
   });
@@ -191,7 +191,7 @@ test("Test question type selector", async (t) => {
     await setJSON(surveyJSON);
 
     await t
-      .click(Selector(".svc-page__content--new .svc-page__question-type-selector-icon"))
+      .click(Selector(".svc-page__content--new .svc-element__question-type-selector-icon"))
       .expect(Selector(".sv-popup__container").filterVisible().visible).ok();
     await takeElementScreenshot("select-type-popup.png", Selector(".sv-popup__container").filterVisible(), t, comparer);
   });
@@ -507,7 +507,7 @@ test("Page and question borders", async (t) => {
     await takeElementScreenshot("page-content-hover.png", designerTabContent, t, comparer);
     await t.hover(qContent, { offsetX: 5, offsetY: 5 }).wait(300);
     await takeElementScreenshot("question-content-hover.png", pageContent, t, comparer);
-    await t.hover(pageContent.find(".svc-page__add-new-question"));
+    await t.hover(pageContent.find(".svc-element__add-new-question"));
     await takeElementScreenshot("question-add-hover.png", pageContent, t, comparer);
     await t.click(qContent, { offsetX: 5, offsetY: 5 });
     await takeElementScreenshot("question-content-click.png", pageContent, t, comparer);
@@ -1367,15 +1367,15 @@ test("Question add type selector button", async (t) => {
       ]
     };
     await setJSON(json);
-    await t.hover(Selector(".svc-panel__question-type-selector"));
+    await t.hover(Selector(".svc-panel__add-new-question-container .svc-element__question-type-selector"));
     await takeElementScreenshot("question-add-type-selector-button-panel-hover.png", Selector(".svc-panel__add-new-question-container"), t, comparer);
-    await ClientFunction(() => { (document.querySelector(".svc-panel__question-type-selector") as HTMLDivElement).focus(); })();
+    await ClientFunction(() => { (document.querySelector(".svc-panel__add-new-question-container .svc-element__question-type-selector") as HTMLDivElement).focus(); })();
     await takeElementScreenshot("question-add-type-selector-button-panel-focus.png", Selector(".svc-panel__add-new-question-container"), t, comparer);
 
-    await t.hover(Selector(".svc-page__question-type-selector"));
-    await takeElementScreenshot("question-add-type-selector-button-page-hover.png", Selector(".svc-page__add-new-question"), t, comparer);
-    await ClientFunction(() => { (document.querySelector(".svc-page__question-type-selector") as HTMLDivElement).focus(); })();
-    await takeElementScreenshot("question-add-type-selector-button-page-focus.png", Selector(".svc-page__add-new-question"), t, comparer);
+    await t.hover(Selector(".svc-page__footer .svc-element__question-type-selector"));
+    await takeElementScreenshot("question-add-type-selector-button-page-hover.png", Selector(".svc-page__footer .svc-element__add-new-question"), t, comparer);
+    await ClientFunction(() => { (document.querySelector(".svc-page__footer .svc-element__question-type-selector") as HTMLDivElement).focus(); })();
+    await takeElementScreenshot("question-add-type-selector-button-page-focus.png", Selector(".svc-page__footer .svc-element__add-new-question"), t, comparer);
   });
 });
 
@@ -2072,7 +2072,7 @@ test("Composite question - check no scroll", async (t) => {
         ],
       });
     })();
-    await t.resizeWindow(1152, 900);
+    await t.resizeWindow(1151, 900);
     await setJSON({
       "pages": [
         {
@@ -2216,7 +2216,7 @@ test("Question adorner - no title collapsed", async (t) => {
 
 test("Page adorner - collapsed", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1600, 500);
+    await t.resizeWindow(1652, 500);
     const json = {
       elements: [
         {
@@ -2245,7 +2245,7 @@ test("Page adorner - collapsed", async (t) => {
 
 test("Question adorner - collapsed mobile", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(500, 1080);
+    await t.resizeWindow(551, 1080);
     const json = {
       elements: [
         {
@@ -2282,7 +2282,7 @@ test("Question types with subtypes", async (t) => {
     await t.resizeWindow(1000, 700);
 
     await t
-      .click(Selector(".svc-page__question-type-selector"))
+      .click(Selector(".svc-element__question-type-selector"))
       .hover(getListItemByText("Rating Scale").filterVisible())
       .wait(400)
       .hover(getListItemByText("Labels").nth(1));

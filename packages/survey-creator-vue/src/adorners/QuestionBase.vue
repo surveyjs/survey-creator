@@ -1,5 +1,6 @@
 <template>
   <div
+    v-if="model"
     class="svc-question__adorner"
     :class="model.rootCss()"
     ref="root"
@@ -9,6 +10,16 @@
     :data-sv-drop-target-survey-element="model.element.name || null"
     data-bind="css: rootCss(), attr: { 'data-sv-drop-target-survey-element': element.name || null }, event: { mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }"
   >
+    <div v-if="model.showHiddenTitle" :class="model.cssCollapsedHiddenHeader">
+      <div :class="model.cssCollapsedHiddenTitle">
+        <SvComponent
+          v-if="!!element.hasTitle"
+          :is="'survey-string'"
+          :locString="element.locTitle"
+        />
+        <span v-else class="svc-fake-title">{{ element.name }}</span>
+      </div>
+    </div>
     <div
       v-on:click="
         (e) => {
@@ -53,11 +64,6 @@
           ></SvComponent>
         </div>
       </div>
-      <div v-if="!element.hasTitle" :class="model.cssCollapsedHiddenHeader">
-        <div :class="model.cssCollapsedHiddenTitle">
-          <SvComponent :is="'survey-string'" :locString="element.locTitle" />
-        </div>
-      </div>
 
       <SvComponent
         :is="'sv-template-renderer'"
@@ -77,7 +83,9 @@
       <SvComponent
         v-if="model.isEmptyElement && showPlaceholderComponent"
         :is="placeholderComponent"
-        v-bind="placeholderComponentData"
+        v-bind="
+          getPlaceholderComponentData && getPlaceholderComponentData(model)
+        "
       ></SvComponent>
       <!-- ko if: koIsEmptyElement() && !!$data.placeholderComponentData -->
       <!-- ko let: { question: placeholderComponentData.data }  -->
@@ -122,23 +130,39 @@
 <script lang="ts" setup>
 import { key2ClickDirective as vKey2click } from "survey-vue3-ui";
 import { SvComponent } from "survey-vue3-ui";
-import type { QuestionAdornerViewModel } from "survey-creator-core";
-import { computed, ref } from "vue";
+import { QuestionAdornerViewModel } from "survey-creator-core";
+import { computed, onMounted, onUpdated, ref } from "vue";
+import { useCreatorModel } from "@/creator-model";
 const props = defineProps<{
-  model: QuestionAdornerViewModel;
+  createModel: () => QuestionAdornerViewModel;
   element: any;
   adornerComponent?: string;
   showPlaceholderComponent?: boolean;
   placeholderComponent?: string;
-  placeholderComponentData?: any;
+  getPlaceholderComponentData?: (adorner: QuestionAdornerViewModel) => any;
   componentName: string;
   componentData: any;
 }>();
 const root = ref();
-defineExpose({
-  questionRoot: root,
-});
-const questionBannerParams = computed(() =>
-  props.model.isBannerShowing ? props.model.createBannerParams() : null
+
+const model = useCreatorModel(
+  () => props.createModel(),
+  [() => props.componentName, () => props.componentData],
+  (value) => {
+    value.dispose();
+  }
 );
+const questionBannerParams = computed(() =>
+  model.value.isBannerShowing ? model.value.createBannerParams() : null
+);
+onUpdated(() => {
+  if (root.value && model.value) {
+    model.value.rootElement = root.value;
+  }
+});
+onMounted(() => {
+  if (root.value && model.value) {
+    model.value.rootElement = root.value;
+  }
+});
 </script>

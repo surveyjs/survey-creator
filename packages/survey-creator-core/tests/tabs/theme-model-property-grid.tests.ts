@@ -287,16 +287,16 @@ test("advancedModeSwitcher state after switch tabs", (): any => {
   const actions = (propertyGridGroups[3] as any as SurveyElement).getTitleActions();
   expect(actions.length).toBe(1);
   expect(actions[0].checked).toBeFalsy();
-  expect(propertyGridSurvey.getVariable("advancedmode")).toBeFalsy();
+  expect(propertyGridSurvey.getQuestionByName("advancedMode").value).toBeFalsy();
 
   actions[0].action();
   expect(actions[0].checked).toBeTruthy();
-  expect(propertyGridSurvey.getVariable("advancedmode")).toBeTruthy();
+  expect(propertyGridSurvey.getQuestionByName("advancedMode").value).toBeTruthy();
 
   creator.activeTab = "designer";
   creator.activeTab = "theme";
   expect(actions[0].checked).toBeTruthy();
-  expect(propertyGridSurvey.getVariable("advancedmode")).toBeTruthy();
+  expect(propertyGridSurvey.getQuestionByName("advancedMode").value).toBeTruthy();
 });
 
 test("onAllowModifyTheme events + use creator.readOnly", (): any => {
@@ -752,6 +752,7 @@ test("headerViewContainer init state", (): any => {
     "descriptionPositionY": "bottom",
     "textAreaWidth": 512,
     "height": 256,
+    "mobileHeight": 0,
     "headerDescription": {
       "family": "Open Sans",
       "size": 16,
@@ -1093,7 +1094,7 @@ test("Check subcategory order", (): any => {
 
     themePlugin.activate();
     let propertyGridSurvey = themePlugin.propertyGrid.survey;
-    const subcategoriesTrueOrder = ["appearancecolor", "appearancefont", "appearanceother", "appearanceprimarycolor", "appearancepage", "appearancequestion", "appearanceinput", "appearancelines"];
+    const subcategoriesTrueOrder = ["appearancecolor", "appearancefont", "appearanceother", "appearanceadvancedmode", "appearanceprimarycolor", "appearancepage", "appearancequestion", "appearanceinput", "appearancelines"];
     const subcategories = propertyGridSurvey.getPanelByName("appearance").elements.filter(pe => pe.isPanel).map(pe => pe.name);
 
     expect(subcategories).toStrictEqual(subcategoriesTrueOrder);

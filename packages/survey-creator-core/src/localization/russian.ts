@@ -106,6 +106,8 @@ export var ruStrings = {
     redo: "Повтор",
     undoTooltip: "Отменить последнее изменение",
     redoTooltip: "Повторите изменение",
+    expandAllTooltip: "Развернуть все",
+    collapseAllTooltip: "Свернуть все",
     showMoreChoices: "Развернуть",
     showLessChoices: "Показать меньше",
     copy: "Копировать",
@@ -123,6 +125,8 @@ export var ruStrings = {
     toolboxNoResultsFound: "Никаких результатов не найдено",
     propertyGridFilteredTextPlaceholder: "Введите для поиска...",
     propertyGridNoResultsFound: "Никаких результатов не найдено",
+    propertyGridPlaceholderTitle: "Начните настройку формы",
+    propertyGridPlaceholderDescription: "Нажмите на любой значок категории, чтобы ознакомиться с настройками опроса. Дополнительные настройки станут доступны после добавления элемента опроса в область конструктора.",
     correctJSON: "Пожалуйста, исправьте JSON.",
     surveyResults: "Результаты обследования",
     surveyResultsTable: "Как таблица",
@@ -634,6 +638,7 @@ export var ruStrings = {
     maxImageHeight: "Максимальная высота изображения",
     minValue: "Минимальное значение",
     maxValue: "Максимальное значение",
+    caseInsensitive: "Учет регистра",
     minLength: "Минимальная длина (в символах)",
     allowDigits: "Разрешить цифры",
     minCount: "Минимальное количество",
@@ -1360,6 +1365,7 @@ export var ruStrings = {
       showInMultipleColumns: "При выборе этого параметра создается отдельный столбец для каждого варианта выбора.",
       colCount: "Упорядочивает варианты выбора в макете с несколькими столбцами. Если установлено значение 0, параметры отображаются в одну строку. При значении -1 фактическое значение наследуется от свойства \"Количество вложенных столбцов\" родительской матрицы."
     },
+    caseInsensitive: "Выберите, если прописные и строчные буквы в регулярном выражении должны рассматриваться как эквивалентные.",
     widthMode: "Выберите один из: \"Статический\" - задает фиксированную ширину; «Отзывчивый» - заставляет опрос занимать всю ширину экрана; \"Авто\" - применяет любой из двух вариантов в зависимости от используемых типов вопросов.",
     cookieName: "Файлы cookie не позволяют пользователям заполнять один и тот же опрос дважды.",
     logo: "Вставьте ссылку на изображение (без ограничений по размеру) или нажмите значок папки, чтобы просмотреть файл с компьютера (до 64 КБ).",
@@ -2832,3 +2838,7 @@ editorLocalization.locales["ru"] = ruStrings;
 // progressBarLocation.topBottom: "Top and bottom" => "Верх и низ"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Упорядочивает варианты выбора в макете с несколькими столбцами. Если установлено значение 0, параметры отображаются в одну строку. При значении -1 фактическое значение наследуется от свойства \"Количество вложенных столбцов\" родительской матрицы."
 // ed.translationYouTubeNotSupported: "YouTube links are not supported." => "Ссылки на YouTube не поддерживаются."
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "Начните настройку формы"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Нажмите на любой значок категории, чтобы ознакомиться с настройками опроса. Дополнительные настройки станут доступны после добавления элемента опроса в область конструктора."
+// pe.caseInsensitive: "Case insensitive" => "Учет регистра"
+// pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Выберите, если прописные и строчные буквы в регулярном выражении должны рассматриваться как эквивалентные."

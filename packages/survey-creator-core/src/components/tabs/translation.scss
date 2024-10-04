@@ -11,6 +11,18 @@
   --sjs-transition-duration: 0ms;
 }
 
+.svc-translation-tab--empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  flex-shrink: 0;
+  width: 100%;
+  gap: 0px;
+}
+
+
 .st-properties {
   background-color: var(--ctr-property-grid-background-color, $background-dim);
   flex-grow: 1;
@@ -253,10 +265,6 @@ td.st-table__cell:first-of-type {
   border-bottom: 1px solid var(--ctr-string-table-row-border-color, $border-light);
 }
 
-.st-translation-dialog .sv-popup__body-header {
-  margin-bottom: calcSize(4);
-}
-
 .st-translation-dialog .st-strings-wrapper {
   border-radius: 4px;
   box-shadow: $shadow-small;
@@ -268,6 +276,7 @@ td.st-table__cell:first-of-type {
     width: auto;
   }
 }
+
 .st-body {
   @include disableLibraryAnimations;
 }

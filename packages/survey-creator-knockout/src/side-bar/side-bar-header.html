@@ -1,0 +1,11 @@
+<div class="svc-side-bar__container-header svc-sidebar__header-container">
+  <!-- ko if: !model.subTitle -->
+  <div class="svc-side-bar__container-title" data-bind="text: model.title"></div>
+  <!-- /ko -->
+  <!-- ko if: model.subTitle -->
+  <div class="svc-sidebar__header-caption">
+    <span class="svc-sidebar__header-title" data-bind="text: model.title"></span>
+    <span class="svc-sidebar__header-subtitle" data-bind="text: model.subTitle"></span>
+  </div>
+  <!-- /ko -->
+</div>

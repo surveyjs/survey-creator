@@ -4,7 +4,6 @@ import { getLocString } from "../../editorLocalization";
 import { PagesController } from "../../pages-controller";
 import { SurveyHelper } from "../../survey-helper";
 import { DragDropSurveyElements } from "../../survey-elements";
-import { SurveyElementActionContainer } from "../action-container-view-model";
 require("./designer.scss");
 
 export const initialSettingsAllowShowEmptyTitleInDesignMode = settings.allowShowEmptyTitleInDesignMode;
@@ -94,10 +93,12 @@ export class TabDesignerViewModel extends Base {
 
     this.actionContainer.setItems([{
       id: "collapseAll",
+      locTooltipName: "ed.collapseAllTooltip",
       iconName: "icon-collapseall-24x24",
       action: action
     }, {
       id: "expandAll",
+      locTooltipName: "ed.expandAllTooltip",
       iconName: "icon-expandall-24x24",
       action: action
     }]);
@@ -116,6 +117,16 @@ export class TabDesignerViewModel extends Base {
     if (this.creator.isMobileView)
       return getLocString("ed.surveyPlaceHolderMobile");
     return getLocString("ed.surveyPlaceHolder");
+  }
+  public get placeholderTitleText(): string {
+    if (this.creator.isMobileView)
+      return getLocString("ed.surveyPlaceholderTitleMobile");
+    return getLocString("ed.surveyPlaceholderTitle");
+  }
+  public get placeholderDescriptionText(): string {
+    if (this.creator.isMobileView)
+      return getLocString("ed.surveyPlaceholderDescriptionMobile");
+    return getLocString("ed.surveyPlaceholderDescription");
   }
   public get hasToolbar() {
     return this.creator.expandCollapseButtonVisibility != "never";
@@ -201,7 +212,7 @@ export class TabDesignerViewModel extends Base {
   public getRootCss(): string {
     return new CssClassBuilder()
       .append(this.survey.css.root)
-      .append("svc-tab-designer--with-page-navigator", this.creator.showPageNavigator && this.survey.pageCount > 1 || this.creator.pageEditMode === "bypage")
+      .append("svc-tab-designer--with-page-navigator", this.creator.showPageNavigator && this.survey.pageCount > 1 || this.creator.pageEditMode === "bypage" || this.hasToolbar)
       .append("svc-tab-designer--with-place-holder", this.showPlaceholder)
       .append(`svc-tab-designer--${this.creator.pageEditMode}-mode`).toString();
   }

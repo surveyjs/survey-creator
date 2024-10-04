@@ -6,6 +6,7 @@
     @mouseover="model.hover($event, $event.currentTarget)"
     @mouseleave="model.hover($event, $event.currentTarget)"
     :data-sv-drop-target-survey-element="model.element.name || null"
+    ref="root"
   >
     <div
       v-if="model.element.isInteractiveDesignElement"
@@ -62,12 +63,13 @@ import {
   SurveyCreatorModel,
   QuestionAdornerViewModel,
 } from "survey-creator-core";
+import { onMounted, onUpdated, ref } from "vue";
 
 const props = defineProps<{
   componentName: string;
   componentData: any;
 }>();
-// useBase(() => new PageAdorner(props.creator, props.page));
+const root = ref();
 const model = useCreatorModel(
   () =>
     new QuestionAdornerViewModel(
@@ -80,4 +82,14 @@ const model = useCreatorModel(
     value.dispose();
   }
 );
+onUpdated(() => {
+  if (root.value && model.value) {
+    model.value.rootElement = root.value;
+  }
+});
+onMounted(() => {
+  if (root.value && model.value) {
+    model.value.rootElement = root.value;
+  }
+});
 </script>

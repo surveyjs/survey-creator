@@ -113,6 +113,10 @@
           "Title": "Format User Input for Single-Line Fields"
         },
         {
+          "Name": "end-user-guide-how-to-vertically-align-input-fields-in-survey",
+          "Title": "Vertically Align Input Fields"
+        },
+        {
           "Name": "end-user-guide-how-to-calculate-duration-between-dates-within-form",
           "Title": "Calculate Duration Between Dates"
         },
@@ -139,6 +143,10 @@
         {
           "Name": "end-user-guide-how-to-create-transfer-list",
           "Title": "Create a Transfer List"
+        },
+        {
+          "Name": "end-user-guide-how-to-create-quiz-or-assessment-test",
+          "Title": "Create a Quiz or Assessment Test"
         }
       ]
     },
@@ -162,6 +170,10 @@
         {
           "Name": "questiontoolbox",
           "Title": "QuestionToolbox"
+        },
+        {
+          "Name": "questiontoolboxitem",
+          "Title": "QuestionToolboxItem"
         },
         {
           "Name": "iquestiontoolboxitem",

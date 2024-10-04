@@ -278,6 +278,10 @@ export var PropertyGridEditorCollection = {
     }
     var row = options.row;
     if (!!row) {
+      const questions = row.questions;
+      for(let i = 0; i < questions.length; i ++) {
+        if(questions[i].errors.length > 0) return;
+      }
       var cellQuestion = row.getQuestionByName(options.columnName);
       if (!!cellQuestion) {
         row.runCondition({}, { question: cellQuestion });
@@ -1506,6 +1510,38 @@ export class PropertyGridEditorBoolean extends PropertyGridEditor {
   }
 }
 
+export class PropertyGridEditorSwitchToggle extends PropertyGridEditor {
+  public fit(prop: JsonObjectProperty, context?: string): boolean {
+    return prop.type == "switchToggle";
+  }
+  public getJSON(
+    obj: Base,
+    prop: JsonObjectProperty,
+    options: ISurveyCreatorOptions
+  ): any {
+    const res: any = {
+      type: "boolean",
+      default: false,
+    };
+    const choices = prop.getChoices(obj, (choices: any) => { });
+    if (Array.isArray(choices) && choices.length >= 2) {
+      const jsonChoices = [];
+      for (let i = 0; i < 2; i++) {
+        const val = choices[i].value || choices[i];
+        jsonChoices.push({ value: val, text: editorLocalization.getPropertyValueInEditor(prop.name, val) });
+      }
+      const defaultValue = prop.getDefaultValue(obj) || jsonChoices[0].value;
+      const indexTrue = defaultValue === choices[1].value ? 1 : 0;
+      const indexFalse = indexTrue === 0 ? 1 : 0;
+      res.valueTrue = jsonChoices[indexTrue].value;
+      res.valueFalse = jsonChoices[indexFalse].value;
+      res.labelTrue = jsonChoices[indexTrue].text;
+      res.labelFalse = jsonChoices[indexFalse].text;
+    }
+    return res;
+  }
+}
+
 export class PropertyGridEditorUndefinedBoolean extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty, context?: string): boolean {
     return prop.type == "boolean" && !!prop.defaultValueFunc && prop.defaultValueFunc(null) === undefined;
@@ -1539,6 +1575,7 @@ export class PropertyGridEditorUndefinedBoolean extends PropertyGridEditor {
     }
   }
 }
+
 export abstract class PropertyGridEditorStringBase extends PropertyGridEditor {
   protected updateMaxLength(prop: JsonObjectProperty, json: any): any {
     if (prop.maxLength > 0) {
@@ -2099,6 +2136,7 @@ PropertyGridEditorCollection.register(new PropertyGridEditorColor());
 PropertyGridEditorCollection.register(new PropertyGridEditorColorWithAlpha());
 PropertyGridEditorCollection.register(new PropertyGridEditorDateTime());
 PropertyGridEditorCollection.register(new PropertyGridEditorUndefinedBoolean());
+PropertyGridEditorCollection.register(new PropertyGridEditorSwitchToggle());
 
 QuestionFactory.Instance.registerQuestion("buttongroup", (name) => {
   return new QuestionButtonGroupModel(name);

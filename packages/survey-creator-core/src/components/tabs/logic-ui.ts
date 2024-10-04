@@ -515,4 +515,15 @@ export class SurveyLogicUI extends SurveyLogic {
   public get emptyTabPlaceholder(): string {
     return getLogicString("empty_tab");
   }
+  public get placeholderTitleText(): string {
+    if (this.options.isMobileView)
+      return getLogicString("logicPlaceholderTitleMobile");
+    return getLogicString("logicPlaceholderTitle");
+  }
+  public get placeholderDescriptionText(): string {
+    if (this.options.isMobileView)
+      return getLogicString("logicPlaceholderDescriptionMobile");
+    return getLogicString("logicPlaceholderDescription");
+  }
+
 }

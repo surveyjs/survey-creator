@@ -106,6 +106,8 @@ export var fiStrings = {
     redo: "Tee uudelleen",
     undoTooltip: "Kumoa viimeinen muutos",
     redoTooltip: "Tee muutos uudelleen",
+    expandAllTooltip: "Laajenna kaikki",
+    collapseAllTooltip: "Kutista kaikki",
     showMoreChoices: "Näytä lisää",
     showLessChoices: "Näytä vähemmän",
     copy: "Kopioi",
@@ -123,6 +125,8 @@ export var fiStrings = {
     toolboxNoResultsFound: "Tuloksia ei löytynyt",
     propertyGridFilteredTextPlaceholder: "Kirjoita etsiäksesi...",
     propertyGridNoResultsFound: "Tuloksia ei löytynyt",
+    propertyGridPlaceholderTitle: "Aloita lomakkeen määrittäminen",
+    propertyGridPlaceholderDescription: "Napsauta mitä tahansa luokkakuvaketta tutustuaksesi kyselyn asetuksiin. Lisäasetukset ovat käytettävissä, kun lisäät mittauselementin suunnittelupintaan.",
     correctJSON: "Korjaa JSON.",
     surveyResults: "Kyselyn tulos:",
     surveyResultsTable: "Taulukossa",
@@ -634,6 +638,7 @@ export var fiStrings = {
     maxImageHeight: "Kuvan enimmäiskorkeus",
     minValue: "Vähimmäisarvo",
     maxValue: "Suurin arvo",
+    caseInsensitive: "Isot ja pienet kirjaimet eivät ole merkitseviä",
     minLength: "Vähimmäispituus",
     allowDigits: "Salli numerot",
     minCount: "Vähimmäismäärä",
@@ -1360,6 +1365,7 @@ export var fiStrings = {
       showInMultipleColumns: "Kun tämä asetus on valittuna, kullekin vaihtoehdolle luodaan oma sarake.",
       colCount: "Järjestää valintavaihtoehdot monisarakkeiseen asetteluun. Kun asetuksena on 0, asetukset näytetään yhdellä rivillä. Kun arvoksi on määritetty -1, todellinen arvo periytyy päämatriisin sisäkkäisten sarakkeiden määrä -ominaisuudesta."
     },
+    caseInsensitive: "Valitse, onko säännöllisen lausekkeen isoja ja pieniä kirjaimia käsiteltävä vastaavina.",
     widthMode: "Valitse seuraavista: \"Staattinen\" - asettaa kiinteän leveyden; \"Reagoiva\" - tekee kyselystä koko näytön leveyden; \"Auto\" - soveltaa jompaakumpaa näistä kahdesta riippuen käytetyistä kysymystyypeistä.",
     cookieName: "Evästeet estävät käyttäjiä täyttämästä samaa kyselyä kahdesti.",
     logo: "Liitä kuvalinkki (ei kokorajoituksia) tai napsauta kansiokuvaketta selataksesi tiedostoa tietokoneeltasi (enintään 64 kt).",
@@ -2772,3 +2778,7 @@ editorLocalization.locales["fi"] = fiStrings;
 // progressBarLocation.topBottom: "Top and bottom" => "Ylhäällä ja alhaalla"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Järjestää valintavaihtoehdot monisarakkeiseen asetteluun. Kun asetuksena on 0, asetukset näytetään yhdellä rivillä. Kun arvoksi on määritetty -1, todellinen arvo periytyy päämatriisin sisäkkäisten sarakkeiden määrä -ominaisuudesta."
 // ed.translationYouTubeNotSupported: "YouTube links are not supported." => "YouTube-linkkejä ei tueta."
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "Aloita lomakkeen määrittäminen"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Napsauta mitä tahansa luokkakuvaketta tutustuaksesi kyselyn asetuksiin. Lisäasetukset ovat käytettävissä, kun lisäät mittauselementin suunnittelupintaan."
+// pe.caseInsensitive: "Case insensitive" => "Isot ja pienet kirjaimet eivät ole merkitseviä"
+// pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Valitse, onko säännöllisen lausekkeen isoja ja pieniä kirjaimia käsiteltävä vastaavina."

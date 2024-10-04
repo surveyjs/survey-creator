@@ -106,6 +106,8 @@ export const roStrings = {
     redo: "Refă",
     undoTooltip: "Anulează ultima modificare",
     redoTooltip: "Refă modificarea",
+    expandAllTooltip: "Extindeți tot",
+    collapseAllTooltip: "Restrângeți tot",
     showMoreChoices: "Afișează mai multe",
     showLessChoices: "Afișează mai puține",
     copy: "Copiază",
@@ -123,6 +125,8 @@ export const roStrings = {
     toolboxNoResultsFound: "Nu au fost găsite rezultate",
     propertyGridFilteredTextPlaceholder: "Tastați pentru a căuta...",
     propertyGridNoResultsFound: "Nu au fost găsite rezultate",
+    propertyGridPlaceholderTitle: "Începeți să configurați formularul",
+    propertyGridPlaceholderDescription: "Faceți clic pe orice pictogramă de categorie pentru a explora setările sondajului. Setările suplimentare vor deveni disponibile odată ce adăugați un element de chestionar la suprafața de proiectare.",
     correctJSON: "Vă rugăm să corectați JSON.",
     surveyResults: "Rezultatele chestionarului ",
     surveyResultsTable: "Ca tabel",
@@ -634,6 +638,7 @@ export const roStrings = {
     maxImageHeight: "Înălțimea maximă a zonei de afișare",
     minValue: "Valoarea minimă",
     maxValue: "Valoarea maximă",
+    caseInsensitive: "Insensibil la majuscule și minuscule",
     minLength: "Lungimea minimă (în caractere)",
     allowDigits: "Permiteți cifre",
     minCount: "Numărul minim",
@@ -1360,6 +1365,7 @@ export const roStrings = {
       showInMultipleColumns: "Când este selectat, creează o coloană individuală pentru fiecare opțiune de alegere.",
       colCount: "Aranjează opțiunile de alegere într-un aspect cu mai multe coloane. Când este setat la 0, opțiunile sunt afișate într-o singură linie. Când este setată la -1, valoarea reală este moștenită de la proprietatea \"Număr de coloane imbricate\" a matricei părinte."
     },
+    caseInsensitive: "Selectați dacă literele mari și mici din expresia regulată trebuie tratate ca echivalente.",
     widthMode: "Alegeți dintre: „Static” - setează o lățime fixă; „Responsive” - face ca chestionarul să ocupe întreaga lățime a ecranului; „Auto” - aplică una dintre cele două în funcție de tipurile de întrebări utilizate.",
     cookieName: "Atribuiți o valoare unică cookie-ului pentru chestionarul dvs. Cookie-ul va fi setat în browserul unui respondent la finalizarea chestionarului pentru a preveni trimiterea repetată a chestionarului.",
     logo: "Introduceți un link către o imagine (fără limită de dimensiune) sau faceți clic pe pictograma folder pentru a naviga un fișier de pe computerul dvs. (până la 64KB).",
@@ -1705,3 +1711,7 @@ editorLocalization.locales["ro"] = roStrings;
 // progressBarLocation.topBottom: "Top and bottom" => "Sus și jos"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Aranjează opțiunile de alegere într-un aspect cu mai multe coloane. Când este setat la 0, opțiunile sunt afișate într-o singură linie. Când este setată la -1, valoarea reală este moștenită de la proprietatea \"Număr de coloane imbricate\" a matricei părinte."
 // ed.translationYouTubeNotSupported: "YouTube links are not supported." => "Linkurile YouTube nu sunt acceptate."
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "Începeți să configurați formularul"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Faceți clic pe orice pictogramă de categorie pentru a explora setările sondajului. Setările suplimentare vor deveni disponibile odată ce adăugați un element de chestionar la suprafața de proiectare."
+// pe.caseInsensitive: "Case insensitive" => "Insensibil la majuscule și minuscule"
+// pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Selectați dacă literele mari și mici din expresia regulată trebuie tratate ca echivalente."

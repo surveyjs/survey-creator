@@ -52,7 +52,8 @@ import {
   CreateCustomMessagePanelEvent, ActiveTabChangingEvent, ActiveTabChangedEvent, BeforeUndoEvent, BeforeRedoEvent,
   PageAddingEvent, DragStartEndEvent
 } from "./creator-events-api";
-import { SurveyElementActionContainer } from "./components/action-container-view-model";
+import { ExpandCollapseManager } from "./expand-collapse-manager";
+import { TabbedMenuContainer, TabbedMenuItem } from "./tabbed-menu";
 
 require("./components/creator.scss");
 require("./components/string-editor.scss");
@@ -69,25 +70,6 @@ export interface IKeyboardShortcut {
 }
 //Obsolete
 export class CreatorAction extends Action {
-}
-
-export interface ITabbedMenuItem extends IAction {
-  componentContent: string;
-  renderTab?: () => any;
-}
-export class TabbedMenuItem extends Action implements ITabbedMenuItem {
-  constructor(item: ITabbedMenuItem) {
-    super(item);
-  }
-  componentContent: string;
-  renderTab?: () => any;
-}
-export class TabbedMenuContainer extends AdaptiveActionContainer<TabbedMenuItem> {
-  constructor() {
-    super();
-    this.dotsItem.popupModel.horizontalPosition = "center";
-    this.minVisibleItemsCount = 1;
-  }
 }
 
 export class ToolbarActionContainer extends ActionContainer {
@@ -366,7 +348,6 @@ export class SurveyCreatorModel extends Base
   }
 
   protected plugins: { [name: string]: ICreatorPlugin } = {};
-
   /**
    * Adds a custom tab to Survey Creator.
    * 
@@ -384,26 +365,7 @@ export class SurveyCreatorModel extends Base
     componentName?: string,
     index?: number
   ) {
-    const tabName = name === "test" ? "preview" : name;
-    const locStrName = !title ? "tabs." + tabName : (title.indexOf("ed.") == 0 ? title : "");
-    if (!!locStrName) {
-      title = undefined;
-    }
-    const tab: TabbedMenuItem = new TabbedMenuItem({
-      id: name,
-      locTitleName: locStrName,
-      title: title,
-      componentContent: componentName ? componentName : "svc-tab-" + name,
-      data: plugin,
-      action: () => { this.makeNewViewActive(name); },
-      active: this.viewType === name,
-      disableHide: this.viewType === name
-    });
-    if (index >= 0 && index < this.tabs.length) {
-      this.tabs.splice(index, 0, tab);
-    } else {
-      this.tabs.push(tab);
-    }
+    this.tabbedMenu.addTab(name, plugin, title, componentName, index);
     this.addPlugin(name, plugin);
   }
   public addPlugin(name: string, plugin: ICreatorPlugin): void {
@@ -1077,8 +1039,15 @@ export class SurveyCreatorModel extends Base
    * @see themeForPreview
    */
   public allowChangeThemeInPreview = true;
-
-  public tabbedMenu: AdaptiveActionContainer<TabbedMenuItem>;
+  private _tabResponsivenessMode: "menu" | "icons" = "menu";
+  public get tabResponsivenessMode(): "menu" | "icons" {
+    return this._tabResponsivenessMode;
+  }
+  public set tabResponsivenessMode(val: "menu" | "icons") {
+    this._tabResponsivenessMode = val;
+    this.tabbedMenu.updateResponsivenessMode();
+  }
+  public tabbedMenu: TabbedMenuContainer;
 
   get tabs() {
     return this.tabbedMenu.actions;
@@ -1271,7 +1240,7 @@ export class SurveyCreatorModel extends Base
     this.previewOrientation = options.previewOrientation;
     this.toolbarValue = new ToolbarActionContainer(this);
     this.toolbarValue.locOwner = this;
-    this.tabbedMenu = new TabbedMenuContainer();
+    this.tabbedMenu = new TabbedMenuContainer(this);
     this.tabbedMenu.locOwner = this;
     this.selectionHistoryControllerValue = new SelectionHistory(this);
     this.sidebar = new SidebarModel(this);
@@ -1842,6 +1811,7 @@ export class SurveyCreatorModel extends Base
     }
     this.existingPages = {};
     const survey = this.createSurvey({}, "designer", undefined, (survey: SurveyModel) => {
+      survey.skeletonHeight = 188;
       survey.css = defaultV2Css;
       survey.setIsMobile(!!this.isMobileView);
       survey.setDesignMode(true);
@@ -1924,6 +1894,9 @@ export class SurveyCreatorModel extends Base
       if (!options.fromElement) {
         this.setModified({ type: "ADDED_FROM_TOOLBOX", question: options.draggedElement });
       }
+    });
+    this.dragDropSurveyElements.onDragClear.add((sender, options) => {
+      this.stopUndoRedoTransaction();
     });
   }
   private initDragDropChoices() {
@@ -2274,6 +2247,7 @@ export class SurveyCreatorModel extends Base
   public onStateChanged: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
 
   public onSurfaceToolbarActionExecuted: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
+  public expandCollapseManager = new ExpandCollapseManager(this);
 
   notifier = new Notifier({
     root: "svc-notifier",
@@ -2744,20 +2718,26 @@ export class SurveyCreatorModel extends Base
   private currentFocusTimeout: any;
   public focusElement(element: any, focus: string | boolean, selEl: any = null, propertyName: string = null, startEdit: boolean = null) {
     if (!selEl) selEl = this.getSelectedSurveyElement();
-    if(!selEl) return;
+    if (!selEl) return;
     clearInterval(this.currentFocusInterval);
     clearTimeout(this.currentFocusTimeout);
-    if(this.animationEnabled && this.survey.isLazyRendering) {
-      this.survey.disableLazyRenderingBeforeElement(selEl);
-    }
     this.currentFocusTimeout = setTimeout(() => {
       this.currentFocusInterval = setInterval(() => {
         const el = document.getElementById(selEl.id);
         if (!!selEl && (focus || startEdit && (!selEl.hasTitle || selEl.isPanel))) {
-          if(!el || this.rootElement.getAnimations({ subtree: true }).filter((animation => animation.effect.getComputedTiming().activeDuration !== Infinity && (animation.pending || animation.playState !== "finished")))[0]) return;
+          if (!el || this.rootElement.getAnimations({ subtree: true }).filter((animation => animation.effect.getComputedTiming().activeDuration !== Infinity && (animation.pending || animation.playState !== "finished")))[0]) return;
           clearInterval(this.currentFocusInterval);
           if (!!el) {
-            SurveyHelper.scrollIntoViewIfNeeded(el.parentElement ?? el, () => { return { block: "start", behavior: this.animationEnabled ? "smooth" : undefined }; }, true);
+            const isNeedScroll = SurveyHelper.isNeedScrollIntoView(el.parentElement ?? el, true);
+            if (!!isNeedScroll) {
+              const elementPage = this.getPageByElement(selEl);
+              const scrollIntoViewOptions: ScrollIntoViewOptions = { block: "start", behavior: this.animationEnabled ? "smooth" : undefined };
+              if (!!elementPage) {
+                this.survey.scrollElementToTop(selEl, undefined, elementPage, selEl.id, true, scrollIntoViewOptions, this.rootElement);
+              } else {
+                SurveyHelper.scrollIntoViewIfNeeded(el.parentElement ?? el, () => { return scrollIntoViewOptions; }, true);
+              }
+            }
             if (!propertyName && el.parentElement) {
               let elToFocus: HTMLElement = (typeof (focus) === "string") ? el.parentElement.querySelector(focus) : el.parentElement;
               elToFocus && elToFocus.focus({ preventScroll: true });
@@ -2911,7 +2891,9 @@ export class SurveyCreatorModel extends Base
         propertyName = this.designerPropertyGrid.currentlySelectedProperty;
       }
       if (!!propertyName) {
-        this.designerPropertyGrid.selectProperty(propertyName, focus || !this.selectFromStringEditor);
+        this.sidebar.executeOnExpand(() => {
+          this.designerPropertyGrid.selectProperty(propertyName, focus || !this.selectFromStringEditor);
+        });
       }
       this.expandCategoryIfNeeded();
       this.selectFromStringEditor = false;

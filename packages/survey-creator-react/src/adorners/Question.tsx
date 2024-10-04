@@ -25,7 +25,10 @@ export class QuestionAdornerComponent extends CreatorModelElement<
 > {
   private modelValue: QuestionAdornerViewModel;
   protected rootRef: React.RefObject<HTMLDivElement>;
-
+  constructor(props: QuestionAdornerComponentProps) {
+    super(props);
+    this.rootRef = React.createRef();
+  }
   protected createModel(props: any): void {
     if (this.modelValue) {
       this.modelValue.dispose();
@@ -55,16 +58,18 @@ export class QuestionAdornerComponent extends CreatorModelElement<
   renderElement(): JSX.Element {
     const allowInteractions = this.model.element
       .isInteractiveDesignElement;
+    const titleForCollapsedState = this.renderQuestionTitle();
     const content = this.renderContent(allowInteractions);
     return (
       <div
         ref={this.rootRef}
         data-sv-drop-target-survey-element={this.model.element.name || null}
-        className={"svc-question__adorner " + this.model.rootCss()}
+        className={this.model.rootCss()}
         onDoubleClick={e => { allowInteractions && this.model.dblclick(e.nativeEvent); e.stopPropagation(); }}
         onMouseLeave={e => allowInteractions && this.model.hover(e.nativeEvent, e.currentTarget)}
         onMouseOver={e => allowInteractions && this.model.hover(e.nativeEvent, e.currentTarget)}
       >
+        {titleForCollapsedState}
         {content}
       </div>
     );
@@ -104,12 +109,16 @@ export class QuestionAdornerComponent extends CreatorModelElement<
   }
 
   protected renderQuestionTitle(): JSX.Element {
-    if (this.model.element.hasTitle || this.model.element.isPanel) return null;
+    if (!this.model.showHiddenTitle) return null;
     const element = this.model.element as Question | PanelModel;
     return (
       <div className={this.model.cssCollapsedHiddenHeader} >
-        <div className={this.model.cssCollapsedHiddenTitle} >
-          {SurveyElementBase.renderLocString(element.locTitle, null, "q_title")}
+        <div
+          ref={node => node && (!this.model.renderedCollapsed ?
+            node.setAttribute("inert", "") : node.removeAttribute("inert")
+          )}
+          className={this.model.cssCollapsedHiddenTitle} >
+          {element.hasTitle ? SurveyElementBase.renderLocString(element.locTitle, null, "q_title") : <span className="svc-fake-title">{element.name}</span>}
         </div>
       </div>
     );
@@ -118,12 +127,21 @@ export class QuestionAdornerComponent extends CreatorModelElement<
   protected renderElementContent(): JSX.Element {
     return (
       <>
-        {this.renderQuestionTitle()}
         {this.props.element}
         {this.renderElementPlaceholder()}
         {this.renderCarryForwardBanner()}
       </>
     );
+  }
+  componentDidMount() {
+    super.componentDidMount();
+    this.model.rootElement = this.rootRef.current;
+  }
+  componentDidUpdate(prevProps: any, prevState: any): void {
+    super.componentDidUpdate(prevProps, prevState);
+    if(this.rootRef?.current && this.modelValue) {
+      this.modelValue.rootElement = this.rootRef.current;
+    }
   }
   renderElementPlaceholder(): JSX.Element {
     if (!this.model.isEmptyElement) {
@@ -138,6 +156,11 @@ export class QuestionAdornerComponent extends CreatorModelElement<
         </div>
       </div>
     );
+  }
+  componentWillUnmount(): void {
+    if(this.model) {
+      this.model.dispose();
+    }
   }
 }
 

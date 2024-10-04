@@ -99,6 +99,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "alternateRows", tab: "layout" },
         { name: "showColumnHeader", tab: "layout" },
         { name: "columnsVisibleIf", tab: "logic" },
+        { name: "rowsVisibleIf", tab: "logic" },
         { name: "columnLayout", tab: "layout" },
         { name: "transposeData", tab: "layout" },
         { name: "horizontalScroll", tab: "layout" },
@@ -141,7 +142,6 @@ export class SurveyQuestionEditorDefinition {
         "placeholder",
         { name: "hideIfRowsEmpty", tab: "rows" },
         { name: "hideIfRowsEmpty", tab: "rows" },
-        { name: "rowsVisibleIf", tab: "logic" },
         { name: "rowTitleWidth", tab: "layout" },
         { name: "keyDuplicationError", tab: "validation" },
       ],
@@ -561,6 +561,7 @@ export class SurveyQuestionEditorDefinition {
       properties: [
         "navigationTitle",
         "navigationDescription",
+        "timeLimit",
         "maxTimeToFinish",
         { name: "questionsOrder", tab: "layout" },
         { name: "navigationButtonsVisibility", tab: "layout" },
@@ -640,6 +641,12 @@ export class SurveyQuestionEditorDefinition {
         { name: "completedHtmlOnCondition", tab: "showOnCompleted" },
         { name: "loadingHtml", tab: "showOnCompleted" },
         { name: "completedBeforeHtml", tab: "showOnCompleted" },
+
+        { name: "showTimer", tab: "timer" },
+        { name: "timerLocation", tab: "timer" },
+        { name: "timeLimit", tab: "timer" },
+        { name: "timeLimitPerPage", tab: "timer" },
+        { name: "timerInfoMode", tab: "timer" },
 
         { name: "maxTimeToFinish", tab: "timer" },
         { name: "maxTimeToFinishPage", tab: "timer" },

@@ -11,7 +11,7 @@ import {
   QuestionMatrixModel
 } from "survey-core";
 import { unparse, parse } from "papaparse";
-import { editorLocalization } from "../../editorLocalization";
+import { editorLocalization, getLocString } from "../../editorLocalization";
 import { EmptySurveyCreatorOptions, ISurveyCreatorOptions, settings } from "../../creator-settings";
 import { setSurveyJSONForPropertyGrid } from "../../property-grid/index";
 require("./translation.scss");
@@ -465,7 +465,7 @@ export class TranslationGroup extends TranslationItemBase {
     matrix.rows.forEach(row => rows.push({ value: row.value, text: row.text }));
     rows.forEach(row => {
       matrix.columns.forEach(col => {
-        const locStr = cells.getCellLocText(row.value, col);
+        const locStr = cells.getCellDisplayLocText(row.value, col);
         if(!!locStr) {
           const name = editorLocalization.getPropertyName(row.text, "") + ", " + editorLocalization.getPropertyName(col.title);
           const item = new TranslationItem(name, locStr, "", this.translation, locStr);
@@ -1232,6 +1232,16 @@ export class Translation extends Base implements ITranslationLocales {
   }
   public get noStringsText(): string {
     return editorLocalization.getString("ed.translationNoStrings");
+  }
+  public get placeholderTitleText(): string {
+    if (this.options.isMobileView)
+      return getLocString("ed.translationsPlaceholderTitleMobile");
+    return getLocString("ed.translationsPlaceholderTitle");
+  }
+  public get placeholderDescriptionText(): string {
+    if (this.options.isMobileView)
+      return getLocString("ed.translationsPlaceholderDescriptionMobile");
+    return getLocString("ed.translationsPlaceholderDescription");
   }
   public exportToCSV(): string {
     if (!this.root) {

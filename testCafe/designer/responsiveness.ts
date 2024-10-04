@@ -9,7 +9,7 @@ const title = "Responsiveness";
 
 fixture`${title}`.page`${url}`;
 
-const flyoutPropertyGrid = Selector(".svc-flyout-side-bar");
+const flyoutPropertyGrid = Selector(".svc-side-bar--flyout");
 
 test("Check base responsiveness for tabbed menu", async (t) => {
   const tabbedMenuItemSelector = Selector(".svc-tabbed-menu .svc-tabbed-menu-item-container:nth-of-type(5)");
@@ -111,25 +111,25 @@ test("Responsive creator: property grid", async (t) => {
 
     .click(questions.find(".sv-string-editor").withText("question1"))
     .expect(propertyGridSelector.visible).ok()
-    .expect(propertyGridSelector.offsetWidth).eql(450)
+    .expect(propertyGridSelector.offsetWidth).eql(451)
     .expect(flyoutPropertyGrid.exists).notOk()
     .expect(questionToolbarActions.count).eql(4)
 
     .drag(westResizer, 100, 0)
-    .expect(propertyGridSelector.offsetWidth).eql(370)
+    .expect(propertyGridSelector.offsetWidth).eql(371)
 
     .resizeWindow(750, 700)
     .click(expandButtonSelector)
     .expect(propertyGridSelector.visible).ok()
-    .expect(propertyGridSelector.offsetWidth).eql(370)
+    .expect(propertyGridSelector.offsetWidth).eql(371)
     .expect(flyoutPropertyGrid.exists).ok()
 
     .drag(westResizer, -150, 0)
-    .expect(propertyGridSelector.offsetWidth).eql(520)
+    .expect(propertyGridSelector.offsetWidth).eql(521)
 
     .click(collapseButtonSelector)
     .expect(propertyGridSelector.visible).notOk()
-    .expect(flyoutPropertyGrid.exists).notOk()
+    .expect(flyoutPropertyGrid.exists).ok()
 
     .click(questions.find(".sv-string-editor").withText("question2"))
     .expect(questionToolbarActions.count).eql(5)
@@ -140,7 +140,7 @@ test("Responsive creator: property grid", async (t) => {
 
     .click(collapseButtonSelector)
     .expect(propertyGridSelector.visible).notOk()
-    .expect(flyoutPropertyGrid.exists).notOk()
+    .expect(flyoutPropertyGrid.exists).ok()
 
     .click(expandButtonSelector);
   await changeSidebarLocation("left");
@@ -148,13 +148,13 @@ test("Responsive creator: property grid", async (t) => {
   await t
     .expect(westResizer.visible).notOk()
     .expect(eastResizer.visible).ok()
-    .expect(propertyGridSelector.offsetWidth).eql(520)
+    .expect(propertyGridSelector.offsetWidth).eql(521)
 
     .drag(eastResizer, -120, 0)
-    .expect(propertyGridSelector.offsetWidth).eql(400)
+    .expect(propertyGridSelector.offsetWidth).eql(401)
 
     .drag(eastResizer, 100, 0)
-    .expect(propertyGridSelector.offsetWidth).eql(500);
+    .expect(propertyGridSelector.offsetWidth).eql(501);
 });
 
 test("Responsive creator: designer tab for mobile devices", async (t) => {
@@ -180,7 +180,7 @@ test("Responsive creator: designer tab for mobile devices", async (t) => {
 });
 
 test("property grid for mobile devices", async (t) => {
-  const mobilePropertGrid = Selector(".sv-mobile-side-bar .svc-side-bar__container");
+  const mobilePropertGrid = Selector(".svc-side-bar--mobile .svc-side-bar__container");
 
   await t
     .resizeWindow(750, 600)
@@ -309,7 +309,7 @@ test("Question type popup - wide", async (t) => {
   await setJSON(json);
   await t
     .resizeWindow(1920, 900)
-    .click(Selector("button.svc-page__question-type-selector"))
+    .click(Selector("button.svc-element__question-type-selector"))
     .expect(Selector(".sv-popup:not(.sv-popup--overlay) li").withText("Single-Line Input").visible).ok();
 });
 
@@ -328,7 +328,7 @@ test("Question type popup - narrow", async (t) => {
   await setJSON(json);
   await t
     .resizeWindow(380, 600)
-    .click(Selector("button.svc-page__question-type-selector"))
+    .click(Selector("button.svc-element__question-type-selector"))
     .expect(Selector(".sv-popup.sv-popup--overlay li").withText("Single-Line Input").filterVisible().exists).ok();
 });
 

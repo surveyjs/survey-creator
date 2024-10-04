@@ -39,6 +39,6 @@ export class TabControlModel extends Base {
   }
 
   public get sideBarClassName(): string {
-    return new CssClassBuilder().append("svc-sidebar-tabs").append("svc-sidebar-tabs--collapsed", !this.sidePanel.visible).toString();
+    return new CssClassBuilder().append("svc-sidebar-tabs").append("svc-sidebar-tabs--collapsed", !this.sidePanel.renderedIsVisible).toString();
   }
 }

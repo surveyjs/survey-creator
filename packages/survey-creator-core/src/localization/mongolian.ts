@@ -106,6 +106,8 @@ export var mnStrings = {
     redo: "Дахих",
     undoTooltip: "Сүүлийн өөрчлөлтийг буцаах",
     redoTooltip: "Сүүлин өөрчлөлтийг дахих ",
+    expandAllTooltip: "Бүх хүрээгээ тэлнэ",
+    collapseAllTooltip: "Бүх нуралт",
     showMoreChoices: "Дэлгэрэнгүй харуулах",
     showLessChoices: "Бага мэдээлэл харуулах",
     copy: "Хуулах",
@@ -123,6 +125,8 @@ export var mnStrings = {
     toolboxNoResultsFound: "Ямар ч үр дүн олдсонгүй",
     propertyGridFilteredTextPlaceholder: "Хайхын тулд бичнэ үү.....",
     propertyGridNoResultsFound: "Ямар ч үр дүн олдсонгүй",
+    propertyGridPlaceholderTitle: "Формоо тохируулж эхлэх",
+    propertyGridPlaceholderDescription: "Судалгааны тохиргоог судлахын тулд ямар ч категорийн зургыг дарна уу. Дизайны гадаргуу дээр судалгааны элемент нэмсний дараа нэмэлт тохиргоо хийх боломжтой болно.",
     correctJSON: "JSON засна уу.",
     surveyResults: "Санал асуулгын хариу",
     surveyResultsTable: "Санал асуулгын хариултыг хүснэгтээр харуулах",
@@ -634,6 +638,7 @@ export var mnStrings = {
     maxImageHeight: "Зургийн өндрийн хамгийн их хэмжээ",
     minValue: "Хамгийн бага утга",
     maxValue: "Хамгийн их утга",
+    caseInsensitive: "Кейс үл мэдрэмтгий",
     minLength: "Хамгийн бага урт (тэмдэгтээр)",
     allowDigits: "Тоо зөвшөөрөх",
     minCount: "Хамгийн бага тоо",
@@ -1360,6 +1365,7 @@ export var mnStrings = {
       showInMultipleColumns: "Сонгогдсон тохиолдолд сонголт бүрд зориулж багана үүсгэнэ.",
       colCount: "Сонголт хийх сонголтуудыг олон баганатай загвараар зохион байгуулна. 0-д тавихад сонголтуудыг нэг мөр харуулдаг. -1-д тавихад бодит үнэ цэнэ нь эцэг эхийн матрицын \"Nested column count\" өмчөөс өвлөгддөг."
     },
+    caseInsensitive: "Тогтмол илэрхийлэлд байгаа uppercase болон lowercase үсгийг эн тэнцүү гэж үзэх ёстой эсэхийг сонгоно уу.",
     widthMode: "Сонгоно уу: \"Статик\" - тогтмол өргөнийг тогтоох; \"Responsive\" - судалгааг дэлгэцийн бүрэн өргөнийг эзэлдэг болгодог; \"Авто\" - ашигласан асуултын төрлөөс хамааран аль нэгийг нь хэрэглэнэ.",
     cookieName: "Хэрэглэгч нэг судалгааг хоёр удаа бөглөхөөс Күүки сэргийлнэ.",
     logo: "Зургийн холбоосыг (хэмжээ хязгаар байхгүй) эсвэл фолдерын icon дарж компьютерээсээ файлыг (64KB хүртэл) харна уу.",
@@ -2428,3 +2434,7 @@ editorLocalization.locales["mn"] = mnStrings;
 // progressBarLocation.topBottom: "Top and bottom" => "Дээд, доод"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Сонголт хийх сонголтуудыг олон баганатай загвараар зохион байгуулна. 0-д тавихад сонголтуудыг нэг мөр харуулдаг. -1-д тавихад бодит үнэ цэнэ нь эцэг эхийн матрицын \"Nested column count\" өмчөөс өвлөгддөг."
 // ed.translationYouTubeNotSupported: "YouTube links are not supported." => "YouTube-ийн холбоосууд дэмжигдээгүй."
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "Формоо тохируулж эхлэх"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Судалгааны тохиргоог судлахын тулд ямар ч категорийн зургыг дарна уу. Дизайны гадаргуу дээр судалгааны элемент нэмсний дараа нэмэлт тохиргоо хийх боломжтой болно."
+// pe.caseInsensitive: "Case insensitive" => "Кейс үл мэдрэмтгий"
+// pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Тогтмол илэрхийлэлд байгаа uppercase болон lowercase үсгийг эн тэнцүү гэж үзэх ёстой эсэхийг сонгоно уу."

@@ -1,6 +1,8 @@
 @import "../variables.scss";
 @import "./notifier.scss";
 @import "./popup.scss";
+@import "./button.scss";
+@import "./surface-placeholder.scss";
 
 survey-creator,
 .svc-creator {
@@ -46,12 +48,23 @@ survey-creator,
   }
 }
 
-survey-creator {
+survey-creator,
+.svc-creator {
   .sv-drag-drop-choices-shortcut {
     .sv-drag-drop-choices-shortcut__content {
       background: var(--ctr-survey-radio-button-group-item-background-color-floating, $background);
 
-      .sd-item__decorator {}
+      .sd-item__decorator {
+      }
+
+      .svc-item-value__item {
+        overflow: hidden;
+
+        .sv-string-viewer,
+        .sv-string-editor {
+          white-space: nowrap;
+        }
+      }
     }
   }
 }
@@ -67,8 +80,6 @@ survey-creator {
   height: 0;
   flex-grow: 1;
 }
-
-
 
 .svc-creator__content-holder {
   width: 100%;
@@ -125,7 +136,9 @@ survey-creator {
   /* Shadow / Medium */
   border-radius: calcSize(12.5);
   box-shadow: $shadow-medium;
-  transition: max-width 0.1s ease-in-out, padding 0.2s ease-in-out;
+  transition:
+    max-width 0.1s ease-in-out,
+    padding 0.2s ease-in-out;
 }
 
 .svc-creator__non-commercial-text {

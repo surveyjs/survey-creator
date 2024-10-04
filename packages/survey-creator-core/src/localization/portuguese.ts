@@ -106,6 +106,8 @@ var portugueseTranslation = {
     redo: "Refazer",
     undoTooltip: "Desfazer última alteração",
     redoTooltip: "Refazer a alteração",
+    expandAllTooltip: "Expandir tudo",
+    collapseAllTooltip: "Recolher tudo",
     showMoreChoices: "Mostrar mais",
     showLessChoices: "Mostrar menos",
     copy: "Copiar",
@@ -123,6 +125,8 @@ var portugueseTranslation = {
     toolboxNoResultsFound: "Nenhum resultado encontrado",
     propertyGridFilteredTextPlaceholder: "Escreva para pesquisar...",
     propertyGridNoResultsFound: "Nenhum resultado encontrado",
+    propertyGridPlaceholderTitle: "Comece a configurar seu formulário",
+    propertyGridPlaceholderDescription: "Clique em qualquer ícone de categoria para explorar as configurações do questionário. Configurações adicionais ficarão disponíveis quando você adicionar um elemento de levantamento topográfico à superfície de design.",
     correctJSON: "Por favor corrija o JSON.",
     surveyResults: "Resultado da pesquisa: ",
     surveyResultsTable: "Como Tabela",
@@ -634,6 +638,7 @@ var portugueseTranslation = {
     maxImageHeight: "Altura máxima da imagem",
     minValue: "Valor mínimo",
     maxValue: "Valor máximo.",
+    caseInsensitive: "Diferencia maiúsculas de minúsculas",
     minLength: "Comprimento mínimo (em caracteres)",
     allowDigits: "Permitir dígitos",
     minCount: "Contagem mínima",
@@ -1360,6 +1365,7 @@ var portugueseTranslation = {
       showInMultipleColumns: "Quando selecionada, cria uma coluna individual para cada opção de escolha.",
       colCount: "Organiza as opções de escolha em um layout de várias colunas. Quando definido como 0, as opções são exibidas em uma única linha. Quando definido como -1, o valor real é herdado da propriedade \"Contagem de colunas aninhadas\" da matriz pai."
     },
+    caseInsensitive: "Selecione se letras maiúsculas e minúsculas na expressão regular devem ser tratadas como equivalentes.",
     widthMode: "Escolha entre: \"Estático\" - define uma largura fixa; \"Responsivo\" - faz com que a pesquisa ocupe toda a largura da tela; \"Auto\" - aplica-se a qualquer um dos dois, dependendo dos tipos de pergunta usados.",
     cookieName: "Os cookies impedem que os usuários preencham a mesma pesquisa duas vezes.",
     logo: "Cole um link de imagem (sem limites de tamanho) ou clique no ícone de pasta para procurar um arquivo do seu computador (até 64 KB).",
@@ -2438,3 +2444,7 @@ editorLocalization.locales["pt"] = portugueseTranslation;
 // progressBarLocation.topBottom: "Top and bottom" => "Superior e inferior"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Organiza as opções de escolha em um layout de várias colunas. Quando definido como 0, as opções são exibidas em uma única linha. Quando definido como -1, o valor real é herdado da propriedade \"Contagem de colunas aninhadas\" da matriz pai."
 // ed.translationYouTubeNotSupported: "YouTube links are not supported." => "Os links do YouTube não são suportados."
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "Comece a configurar seu formulário"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Clique em qualquer ícone de categoria para explorar as configurações do questionário. Configurações adicionais ficarão disponíveis quando você adicionar um elemento de levantamento topográfico à superfície de design."
+// pe.caseInsensitive: "Case insensitive" => "Diferencia maiúsculas de minúsculas"
+// pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Selecione se letras maiúsculas e minúsculas na expressão regular devem ser tratadas como equivalentes."

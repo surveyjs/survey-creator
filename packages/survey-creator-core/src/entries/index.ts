@@ -12,6 +12,7 @@ export { ICreatorOptions } from "../creator-options";
 
 export * from "../creator-events-api";
 export * from "../creator-base";
+export * from "../tabbed-menu";
 export * from "../creator-responsivity-manager";
 
 export * from "../components/tabs/json-editor-ace";
@@ -81,6 +82,7 @@ export * from "../svgbundle";
 export * from "../textWorker";
 export * from "../toolbox";
 export * from "../components/side-bar/side-bar-model";
+export * from "../components/side-bar/side-bar-header-model";
 export * from "../components/side-bar/side-bar-page-model";
 export * from "../components/side-bar/tab-control-model";
 export * from "../components/switcher/switcher";
@@ -112,6 +114,7 @@ require("../components/side-bar/tab-control.scss");
 require("../property-grid-theme/property-grid.scss");
 require("../utils/design.scss");
 require("../utils/layout.scss");
+require("../custom-questions/boolean-switch.scss");
 
 import { settings, checkLibraryVersion } from "survey-core";
 settings.supportCreatorV2 = true;

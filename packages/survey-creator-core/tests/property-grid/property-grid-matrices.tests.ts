@@ -513,6 +513,18 @@ test("Several errors in choices, Bug #4701", () => {
   expect(row1Q.errors).toHaveLength(0);
   expect(row2Q.errors).toHaveLength(0);
 });
+test("Apply value correctly after errors, Bug #5915", () => {
+  const q = new QuestionCheckboxBase("q1");
+  q.choices = ["item1", "item2", "item3"];
+  var propertyGrid = new PropertyGridModelTester(q);
+  const qChoices = <QuestionMatrixDynamicModel>propertyGrid.survey.getQuestionByName("choices");
+  const rows = qChoices.visibleRows;
+  expect(rows).toHaveLength(3);
+  rows[1].cells[0].value = "item1";
+  rows[0].cells[0].value = "item2";
+  expect(q.choices[0].value).toBe("item2");
+  expect(q.choices[1].value).toBe("item1");
+});
 test("Show text column in itemvalue (choices) if inplaceEditForValues is false (default)", () => {
   const q = new QuestionCheckboxBase("q1");
   q.choices = ["item1", "item2", "item3"];

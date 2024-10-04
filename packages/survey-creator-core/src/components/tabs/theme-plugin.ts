@@ -15,6 +15,7 @@ import { themeModelPropertyGridDefinition } from "./theme-model-definition";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
 import { TabControlModel } from "../side-bar/tab-control-model";
 import { pgTabIcons } from "../../property-grid/icons";
+import { MenuButton } from "../../utils/actions";
 
 /**
  * An object that enables you to modify, add, and remove UI themes and handle theme-related events. To access this object, use the [`themeEditor`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#themeEditor) property on a Survey Creator instance:
@@ -55,6 +56,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   private simulatorCssClasses: any = surveyCss[defaultV2ThemeName];
   private _availableThemes = [].concat(PredefinedThemes);
   private _showOneCategoryInPropertyGrid: boolean = false;
+  private _advancedModeValue = false;
 
   private tabControlModel: TabControlModel;
   public propertyGrid: PropertyGridModel;
@@ -69,14 +71,22 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     if (this._showOneCategoryInPropertyGrid !== newValue) {
       this._showOneCategoryInPropertyGrid = newValue;
       this.creator.sidebar.hideSideBarVisibilityControlActions = newValue;
+      this.updateAdvancedModeQuestion();
       this.propertyGrid.showOneCategoryInPropertyGrid = newValue;
       this.propertyGrid["setObj"](this.creator.selectedElement);
       if (this.creator.activeTab === "theme") {
-        this.setTabControl();
+        this.updateTabControl();
       }
     }
   }
 
+  private updateAdvancedModeQuestion(): void {
+    const advancedModeQuestion = this.propertyGrid.survey.getQuestionByName("advancedMode");
+    if (advancedModeQuestion) {
+      advancedModeQuestion.visible = this.showOneCategoryInPropertyGrid;
+      advancedModeQuestion.value = this._advancedModeValue;
+    }
+  }
   private createVisibleUpdater() {
     return <any>new ComputedUpdater<boolean>(() => { return this.creator.activeTab === "theme"; });
   }
@@ -91,10 +101,12 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       visible: !this.creator.isMobileView,
       action: () => {
         advancedMode.checked = !advancedMode.checked;
-        this.propertyGrid.survey.setVariable("advancedmode", advancedMode.checked);
+        if (!!this.propertyGrid.survey.getQuestionByName("advancedMode")) {
+          this.propertyGrid.survey.getQuestionByName("advancedMode").value = advancedMode.checked;
+        }
       }
     });
-    advancedMode.checked = !!this.propertyGrid.survey.getVariable("advancedmode");
+    advancedMode.checked = this._advancedModeValue;
     this.advancedModeSwitcher = advancedMode;
   }
 
@@ -104,7 +116,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     const question = Serializer.createClass("html") as QuestionHtmlModel;
     question.fromJSON({
       name: titleId,
-      visibleIf: "{advancedmode} = true",
+      visibleIf: "{advancedMode} = true",
       html: `<div class='spg-theme-group-caption'>${getLocString(titleId)}</div>`
     });
     panel.addElement(question);
@@ -210,18 +222,22 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   private setVisibleIf(panelName: string, visibilityValue: boolean) {
     const panel = this.propertyGrid.survey.getPanelByName(panelName);
     if (!!panel) {
-      panel.visibleIf = `{advancedmode} = ${visibilityValue}`;
+      panel.visibleIf = `{advancedMode} = ${visibilityValue}`;
     }
   }
 
-  private setTabControl() {
+  private updateTabControl() {
     if (this.showOneCategoryInPropertyGrid) {
       this.updateTabControlActions();
       this.creator.sidebar.sideAreaComponentName = "svc-tab-control";
       this.creator.sidebar.sideAreaComponentData = this.tabControlModel;
+      this.creator.sidebar.header.componentName = "svc-side-bar-header";
+      this.creator.sidebar.header.componentData = this.creator.sidebar.header;
     } else {
       this.creator.sidebar.sideAreaComponentName = "";
       this.creator.sidebar.sideAreaComponentData = undefined;
+      this.creator.sidebar.header.componentName = "";
+      this.creator.sidebar.header.componentData = undefined;
     }
   }
 
@@ -275,10 +291,12 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.propertyGrid.survey.getAllQuestions().forEach(q => q.readOnly = false);
     this.onAvailableThemesChanged(this.availableThemes);
     this.updateAllowModifyTheme();
-    this.propertyGrid.survey.setVariable("advancedmode", !!this.advancedModeSwitcher?.checked);
-    const themeBuilderCss = { ...propertyGridCss };
+    this.updateAdvancedModeQuestion();
+    const themeBuilderCss = JSON.parse(JSON.stringify(propertyGridCss));
     themeBuilderCss.root += " spg-theme-builder-root";
+
     if (this.showOneCategoryInPropertyGrid) {
+      themeBuilderCss.root += " spg-root--one-category";
       themeBuilderCss.page.root += " spg-panel__content";
     }
     this.propertyGrid.survey.css = themeBuilderCss;
@@ -313,6 +331,16 @@ export class ThemeTabPlugin implements ICreatorPlugin {
           options.cssClasses.panel.container = "spg-nested-panel";
           options.cssClasses.panel.content = "spg-nested-panel__content";
         }
+      } else if (this.showOneCategoryInPropertyGrid && options.panel.parent?.isPage) {
+        options.cssClasses.panel.container = "spg-panel-by-page";
+        options.cssClasses.panel.content = "spg-panel-by-page__content";
+
+        if (options.panel.name === "appearanceother") {
+          options.cssClasses.panel.container += " spg-panel--hidden-border";
+        }
+        if (options.panel.name === "appearanceadvancedmode") {
+          options.cssClasses.panel.container += " spg-panel--hidden-border spg-panel--padding";
+        }
       }
     });
 
@@ -321,25 +349,30 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.updatePropertyGridColorEditorWithPredefinedColors();
     this.creator.sidebar.activePage = this.propertyGridTab.id;
     this.propertyGridTab.visible = true;
-    this.setTabControl();
+    this.updateTabControl();
     this.creator.expandCategoryIfNeeded();
   }
   private updateTabControlActions() {
     if (this.showOneCategoryInPropertyGrid) {
       const pgTabs = this.propertyGrid.survey.pages.map(p => {
-        const action = new Action({
+        const action = new MenuButton({
           id: p.name,
-          tooltip: getLocString("pe.tabs." + p.name),
+          locTooltipName: getLocString("pe.tabs." + p.name),
           iconName: pgTabIcons[p.name] || pgTabIcons["undefined"],
+          active: p.name === this.propertyGrid.survey.currentPage.name,
+          pressed: false,
           action: () => {
+            this.creator.sidebar.expandSidebar();
             this.propertyGrid.survey.currentPage = p;
-            pgTabs.forEach(i => i.pressed = false);
-            action.pressed = true;
+            this.creator.sidebar.header.subTitle = p.title;
+            pgTabs.forEach(i => i.active = false);
+            action.active = true;
           }
         });
         return action;
       });
       this.tabControlModel.topToolbar.setItems(pgTabs);
+      this.creator.sidebar.header.subTitle = this.propertyGrid.survey.currentPage.title;
     }
   }
 
@@ -405,7 +438,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     });
 
     this.resetTheme.enabled = getThemeFullName(this.themeModel.defaultSessionTheme) !== getThemeFullName(this.creator.theme) || this.isModified;
-    this.setTabControl();
+    this.updateTabControl();
   }
   private updateAllowModifyTheme() {
     const opt: { theme: ITheme, allow: boolean } = { theme: this.themeModel, allow: !this.creator.readOnly };
@@ -429,8 +462,10 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       this.model = undefined;
       this.creator.sidebar.hideSideBarVisibilityControlActions = false;
     }
+    this._advancedModeValue = !!this.propertyGrid.survey.getQuestionByName("advancedMode")?.value;
     this.creator.sidebar.sideAreaComponentName = undefined;
     this.creator.sidebar.sideAreaComponentData = undefined;
+    this.creator.sidebar.header.reset();
     this.propertyGridTab.visible = false;
     this.testAgainAction.visible = false;
     this.invisibleToggleAction && (this.invisibleToggleAction.visible = false);

@@ -1,39 +1,28 @@
 <template>
-  <div
-    class="svc-side-bar"
-    :class="{ 'svc-flyout-side-bar': model.flyoutPanelMode }"
-    v-show="model.hasVisiblePages"
-  >
+  <div class="svc-side-bar" :class="model.rootCss" v-show="model.renderRoot">
     <div
       class="svc-side-bar__shadow"
+      v-show="model.renderContainer"
       @click="() => model.collapseSidebar()"
     ></div>
     <div class="svc-flex-row svc-side-bar__wrapper">
       <div
-        class="svc-side-bar__container"
-        v-show="model.renderedIsVisible"
-        ref="root"
+        class="svc-side-bar__container-wrapper"
+        v-show="model.renderContainer"
       >
-        <SvComponent
-          v-if="model.headerComponentName"
-          :is="model.headerComponentName"
-          :model="model.headerComponentData"
-        ></SvComponent>
-        <div v-else class="svc-side-bar__container-header">
-          <div class="svc-side-bar__container-actions">
-            <SvComponent
-              :is="'sv-action-bar'"
-              :model="model.toolbar"
-            ></SvComponent>
+        <div class="svc-side-bar__container" ref="root">
+          <SvComponent
+            :is="model.header.component"
+            :model="model.header.componentModel"
+          ></SvComponent>
+          <div class="svc-side-bar__container-content">
+            <template v-for="(page, index) in model.pages" :key="index">
+              <SvComponent
+                :is="'svc-side-bar-page'"
+                :model="page"
+              ></SvComponent>
+            </template>
           </div>
-          <div v-if="!!model.headerText" class="svc-side-bar__container-title">
-            {{ model.headerText }}
-          </div>
-        </div>
-        <div class="svc-side-bar__container-content">
-          <template v-for="(page, index) in model.pages" :key="index">
-            <SvComponent :is="'svc-side-bar-page'" :model="page"></SvComponent>
-          </template>
         </div>
       </div>
       <SvComponent

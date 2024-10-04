@@ -106,6 +106,8 @@ export var turkishStrings = {
     redo: "İleri",
     undoTooltip: "Son değişikliği geri al",
     redoTooltip: "Son değişikliği ileri al",
+    expandAllTooltip: "Tümünü Genişlet",
+    collapseAllTooltip: "Tümünü Daralt",
     showMoreChoices: "Daha fazlasını göster",
     showLessChoices: "Daha az göster",
     copy: "Kopya etmek",
@@ -123,6 +125,8 @@ export var turkishStrings = {
     toolboxNoResultsFound: "Sonuç bulunamadı",
     propertyGridFilteredTextPlaceholder: "Aramak için yazın...",
     propertyGridNoResultsFound: "Sonuç bulunamadı",
+    propertyGridPlaceholderTitle: "Formunuzu yapılandırmaya başlayın",
+    propertyGridPlaceholderDescription: "Anket ayarlarını keşfetmek için herhangi bir kategori simgesini tıklayın. Tasarım yüzeyine bir anket öğesi eklediğinizde ek ayarlar kullanılabilir hale gelir.",
     correctJSON: "JSON nesnesini doğrular.",
     surveyResults: "Anket Sonucu: ",
     surveyResultsTable: "Tablo olarak",
@@ -634,6 +638,7 @@ export var turkishStrings = {
     maxImageHeight: "Maksimum görüntü yüksekliği",
     minValue: "Minimum değer",
     maxValue: "Maksimum değer",
+    caseInsensitive: "Büyük/küçük harfe duyarlı değil",
     minLength: "Minimum uzunluk",
     allowDigits: "Rakamlara izin ver",
     minCount: "Minimum miktar",
@@ -1360,6 +1365,7 @@ export var turkishStrings = {
       showInMultipleColumns: "Seçildiğinde, her seçim seçeneği için ayrı bir sütun oluşturur.",
       colCount: "Seçim seçeneklerini çok sütunlu bir düzende düzenler. 0 olarak ayarlandığında, seçenekler tek bir satırda görüntülenir. -1 olarak ayarlandığında, gerçek değer üst matrisin \"İç içe sütun sayısı\" özelliğinden devralınır."
     },
+    caseInsensitive: "Normal ifadedeki büyük ve küçük harflerin eşdeğer olarak kabul edilmesi gerekip gerekmediğini seçin.",
     widthMode: "Şunlar arasından seçim yapın: \"Statik\" - sabit bir genişlik ayarlar; \"Duyarlı\" - anketin ekranın tüm genişliğini kaplamasını sağlar; \"Otomatik\" - kullanılan soru türlerine bağlı olarak ikisinden birini uygular.",
     cookieName: "Çerezler, kullanıcıların aynı anketi iki kez doldurmasını engeller.",
     logo: "Bilgisayarınızdan bir dosyaya (64 KB'a kadar) göz atmak için bir resim bağlantısı yapıştırın (boyut sınırı yok) veya klasör simgesini tıklayın.",
@@ -2767,3 +2773,7 @@ editorLocalization.locales["tr"] = turkishStrings;
 // progressBarLocation.topBottom: "Top and bottom" => "Üst ve alt"
 // matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Seçim seçeneklerini çok sütunlu bir düzende düzenler. 0 olarak ayarlandığında, seçenekler tek bir satırda görüntülenir. -1 olarak ayarlandığında, gerçek değer üst matrisin \"İç içe sütun sayısı\" özelliğinden devralınır."
 // ed.translationYouTubeNotSupported: "YouTube links are not supported." => "YouTube bağlantıları desteklenmemektedir."
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "Formunuzu yapılandırmaya başlayın"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Anket ayarlarını keşfetmek için herhangi bir kategori simgesini tıklayın. Tasarım yüzeyine bir anket öğesi eklediğinizde ek ayarlar kullanılabilir hale gelir."
+// pe.caseInsensitive: "Case insensitive" => "Büyük/küçük harfe duyarlı değil"
+// pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Normal ifadedeki büyük ve küçük harflerin eşdeğer olarak kabul edilmesi gerekip gerekmediğini seçin."

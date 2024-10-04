@@ -96,17 +96,17 @@ Ungrouped items fall into the General category. You can use [localization capabi
 ```
 
 ```js
-const translations = SurveyCreator.localization.getLocale("");
-translations.ed.toolboxGeneralCategory = "Common";
+const translations = SurveyCreator.editorLocalization.getLocale("");
+translations.toolboxCategories["general"] = "Common";
 ```
 
 In modular applications, use the code below:
 
 ```js
 import "survey-creator-core/survey-creator-core.i18n";
-import { localization } from "survey-creator-core";
-const translations = localization.getLocale("");
-translations.ed.toolboxGeneralCategory = "Common";
+import { editorLocalization } from "survey-creator-core";
+const translations = editorLocalization.getLocale("");
+translations.toolboxCategories["general"] = "Common";
 ```
 
 The following properties control the behavior of categories:
@@ -145,7 +145,7 @@ Toolbox items can have nested items, or "subitems". They appear when users hover
 
 <img src="./images/toolbox-subitems.png" alt="Survey Creator: Toolbox subitems" width="953" height="690">
 
-To create a custom subitem, pass its [configuration object](/survey-creator/documentation/api-reference/iquestiontoolboxitem) to the [`addSubitem(subitem, index)`](/survey-creator/documentation/api-reference/iquestiontoolboxitem#addSubitem) method. Call this method on a toolbox item instance to which you want to add the subitem. For instance, the following code adds a "Limited to 280 characters" subitem to the Long Text toolbox item:
+To create a custom subitem, pass its [configuration object](/survey-creator/documentation/api-reference/iquestiontoolboxitem) to the [`addSubitem(subitem, index)`](/survey-creator/documentation/api-reference/questiontoolboxitem#addSubitem) method. Call this method on a toolbox item instance to which you want to add the subitem. For instance, the following code adds a "Limited to 280 characters" subitem to the Long Text toolbox item:
 
 ```js
 import { SurveyCreatorModel } from "survey-creator-core";
@@ -165,7 +165,7 @@ longTextItem.addSubitem({
 
 [View Demo](/survey-creator/examples/manage-toolbox-subitems/ (linkStyle))
 
-If you want to remove a specific subitem, call the [`removeSubitem(subitem)`](/survey-creator/documentation/api-reference/iquestiontoolboxitem#removeSubitem) method on a toolbox item instance. You can also remove all subitems of a toolbox item by calling the [`clearSubitems()`](/survey-creator/documentation/api-reference/iquestiontoolboxitem#clearSubitems) method:
+If you want to remove a specific subitem, call the [`removeSubitem(subitem)`](/survey-creator/documentation/api-reference/questiontoolboxitem#removeSubitem) method on a toolbox item instance. You can also remove all subitems of a toolbox item by calling the [`clearSubitems()`](/survey-creator/documentation/api-reference/questiontoolboxitem#clearSubitems) method:
 
 ```js
 // Remove the Labels subitem of the Rating Scale toolbox item

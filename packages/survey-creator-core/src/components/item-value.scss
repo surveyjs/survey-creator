@@ -53,6 +53,7 @@
   flex-shrink: 0;
   min-width: 72px;
   justify-content: flex-end;
+  align-self: flex-start;
 }
 
 .svc-item-value-controls__button {
@@ -198,6 +199,12 @@
   }
 }
 
+.sv-drag-drop-choices-shortcut {
+  .sv-ranking-item__text {
+    overflow: hidden;
+  }
+}
+
 .svc-item-value--ghost {
   .svc-item-value__ghost {
     display: block;
@@ -205,6 +212,17 @@
 
   .svc-item-value-controls {
     visibility: hidden;
+  }
+
+  .svc-item-value__item {
+    display: none;
+  }
+
+  height: calcSize(6);
+
+  .sv-string-viewer,
+  .sv-string-editor {
+    white-space: unset;
   }
 }
 

@@ -155,12 +155,9 @@ svc-toolbox {
 [dir="rtl"],
 [style*="direction:rtl"],
 [style*="direction: rtl"] {
-  &:not(.svc-creator__toolbox--right) {
-    .svc-toolbox__search-container {
-      direction: rtl;
-    }
+  .svc-toolbox__search-container {
+    direction: rtl;
   }
-
   .svc-toolbox__scroller {
     direction: ltr;
   }
@@ -193,6 +190,14 @@ svc-toolbox {
     .sv-action__content {
       align-items: flex-end;
     }
+  }
+}
+.svc-creator__toolbox--right {
+  .svc-toolbox__search-container {
+    direction: initial;
+  }
+  .svc-toolbox-popup {
+    direction: initial;
   }
 }
 

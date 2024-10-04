@@ -219,15 +219,19 @@
 }
 
 .svc-logic-tab__content {
-  &.svc-logic-tab__empty {
+  &.svc-logic-tab--empty {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    flex-grow: 1;
+    flex-shrink: 0;
+    width: 100%;
+    gap: 0px;
 
     .svc-logic-tab__content-action {
       width: calcSize(33);
-      margin-top: calcSize(4);
+      margin-top: calcSize(1);
     }
   }
 
@@ -299,6 +303,7 @@
 
 .sl-table__cell--detail-panel {
   padding: 0;
+
   .sd-body {
     margin: 0;
     min-width: none;

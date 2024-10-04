@@ -56,3 +56,17 @@ test("Top menu with single item", async (t) => {
     await takeElementScreenshot("top-menu-designer-tab-single-item.png", topBarElement, t, comparer);
   });
 });
+
+test("Tabbed menu: icons responsivity", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(900, 1080);
+    const topBarElement = Selector(".svc-top-bar");
+    await setJSON({ pages: [{ name: "page1" }] });
+    await ClientFunction(() => (window as any).creator.tabResponsivenessMode = "icons")();
+    await takeElementScreenshot("top-menu-responsivity-icons-big.png", topBarElement, t, comparer);
+    await t.resizeWindow(700, 1080);
+    await takeElementScreenshot("top-menu-responsivity-icons-medium.png", topBarElement, t, comparer);
+    await t.resizeWindow(600, 1080);
+    await takeElementScreenshot("top-menu-responsivity-icons-small.png", topBarElement, t, comparer);
+  });
+});

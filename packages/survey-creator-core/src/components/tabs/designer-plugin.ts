@@ -54,14 +54,14 @@ export class TabDesignerPlugin implements ICreatorPlugin {
 
   private updateHeaderComponent() {
     if (this.showOneCategoryInPropertyGrid && this.activePageIsPropertyGrid) {
-      this.creator.sidebar.headerComponentName = "svc-side-bar-property-grid-header";
-      this.creator.sidebar.headerComponentData = this.propertyGridViewModel.objectSelectionAction;
+      this.creator.sidebar.header.componentName = "svc-side-bar-property-grid-header";
+      this.creator.sidebar.header.componentData = this.propertyGridViewModel.objectSelectionAction;
     } else if (this.showOneCategoryInPropertyGrid && this.creator.sidebar.activePage === this.propertyGridPlaceholderPage.id) {
-      this.creator.sidebar.headerComponentName = "svc-side-bar-property-grid-placeholder-header";
-      this.creator.sidebar.headerComponentData = this.propertyGridPlaceholderPage;
+      this.creator.sidebar.header.componentName = "svc-side-bar-header";
+      this.creator.sidebar.header.componentData = this.creator.sidebar.header;
     } else {
-      this.creator.sidebar.headerComponentName = "";
-      this.creator.sidebar.headerComponentData = undefined;
+      this.creator.sidebar.header.componentName = "";
+      this.creator.sidebar.header.componentData = undefined;
     }
   }
 
@@ -208,8 +208,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     this.creator.sidebar.hideSideBarVisibilityControlActions = false;
     this.creator.sidebar.sideAreaComponentName = undefined;
     this.creator.sidebar.sideAreaComponentData = undefined;
-    this.creator.sidebar.headerComponentName = undefined;
-    this.creator.sidebar.headerComponentData = undefined;
+    this.creator.sidebar.header.reset();
     return true;
   }
   public onDesignerSurveyPropertyChanged(obj: Base, propName: string): void {
@@ -252,7 +251,9 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       action: () => {
         this.selectSurvey();
         if (!this.creator.isMobileView) {
-          this.creator.propertyGrid.getAllQuestions()[0].focus();
+          this.creator.sidebar.executeOnExpand(() => {
+            this.creator.propertyGrid.getAllQuestions()[0].focus();
+          });
         }
       },
       active: this.isSettingsActive,
