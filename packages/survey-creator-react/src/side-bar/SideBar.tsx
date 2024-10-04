@@ -37,8 +37,8 @@ export class SidebarComponent extends SurveyElementBase<ISidebarComponentProps, 
   }
 
   renderElement(): JSX.Element {
-    const style = { display: !this.model.renderedIsVisible ? "none" : "" };
-    const className = "svc-side-bar" + (this.model.flyoutPanelMode ? " svc-flyout-side-bar" : "");
+    const style = { display: this.model.renderRoot ? "" : "none" };
+    const containerStyle = { display: this.model.renderContainer ? "" : "none" };
     const items = this.model.pages.map((page) => <SidebarPage page={page} key={page.id} />);
     const headerArea = ReactElementFactory.Instance.createElement(this.model.header.component, { model: this.model.header.componentModel });
     let sideArea = null;
@@ -47,12 +47,14 @@ export class SidebarComponent extends SurveyElementBase<ISidebarComponentProps, 
     }
 
     return (
-      <div className={className} style={{ display: !this.model.hasVisiblePages ? "none" : "" }}>
-        <div className="svc-side-bar__shadow" onClick={() => this.model.collapseSidebar()}></div>
+      <div className={this.model.rootCss} style={style}>
+        <div className="svc-side-bar__shadow" onClick={() => this.model.collapseSidebar()} style={containerStyle}></div>
         <div className="svc-flex-row svc-side-bar__wrapper">
-          <div ref={this.containerRef} style={style} className="svc-side-bar__container">
-            {headerArea}
-            <div className="svc-side-bar__container-content">{items}</div>
+          <div className="svc-side-bar__container-wrapper" style={containerStyle}>
+            <div ref={this.containerRef} className="svc-side-bar__container">
+              {headerArea}
+              <div className="svc-side-bar__container-content">{items}</div>
+            </div>
           </div>
           {sideArea}
         </div>
