@@ -38,6 +38,16 @@
     pointer-events: none;
   }
 }
+.svc-toolbox__tool--has-subitems {
+  .svc-toolbox__item {
+    padding-right: calcSize(6);
+  }
+}
+.svc-toolbox--compact {
+  .svc-toolbox__item {
+    padding-right: calcSize(1.5);
+  }
+}
 
 .svc-toolbox--compact {
   .svc-toolbox__tool {
@@ -163,6 +173,12 @@
   .svc-toolbox__tool--has-subitems {
     align-items: var(--ctr-toolbox-item-with-submenu-button-align, flex-end);
     align-self: var(--ctr-toolbox-item-with-submenu-button-align, flex-end);
+  }
+  .svc-toolbox__tool--has-subitems {
+    .svc-toolbox__item {
+      padding-left: calcSize(6);
+      padding-right: calcSize(1.5);
+    }
   }
   .svc-toolbox__tool--has-subitems {
     .svc-toolbox__item {

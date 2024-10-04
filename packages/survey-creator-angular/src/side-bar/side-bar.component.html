@@ -1,14 +1,16 @@
 <ng-template #template>
-  <div class="svc-side-bar" [class.svc-flyout-side-bar]="model.flyoutPanelMode" [visible]="model.hasVisiblePages">
-    <div class="svc-side-bar__shadow" (click)="model.collapseSidebar()"></div>
+  <div [class]="model.rootCss" [visible]="model.renderRoot">
+    <div class="svc-side-bar__shadow" (click)="model.collapseSidebar()" [visible]="model.renderContainer"></div>
     <div class="svc-flex-row svc-side-bar__wrapper">
-      <div class="svc-side-bar__container" [visible]="model.renderedIsVisible" #container>
-        <ng-template
-          [component]="{ name: model.header.component, data: { model: model.header.componentModel } }"></ng-template>
-        <div class="svc-side-bar__container-content">
-          <ng-container *ngFor="let page of model.pages">
-            <svc-side-bar-page [model]="page"></svc-side-bar-page>
-          </ng-container>
+      <div class="svc-side-bar__container-wrapper" [visible]="model.renderContainer">
+        <div class="svc-side-bar__container" [visible]="model.renderedIsVisible" #container>
+          <ng-template
+            [component]="{ name: model.header.component, data: { model: model.header.componentModel } }"></ng-template>
+          <div class="svc-side-bar__container-content">
+            <ng-container *ngFor="let page of model.pages">
+              <svc-side-bar-page [model]="page"></svc-side-bar-page>
+            </ng-container>
+          </div>
         </div>
       </div>
       <ng-container *ngIf="model.sideAreaComponentName">
