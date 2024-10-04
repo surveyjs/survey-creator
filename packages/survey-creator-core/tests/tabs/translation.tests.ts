@@ -543,6 +543,51 @@ test("Make invisible locales in language selector, that has been already choosen
   expect(list.actions[1].visible).toBeFalsy();
   surveyLocalization.supportedLocales = [];
 });
+test("A language selector shows 'No data to display'", () => {
+  surveyLocalization.supportedLocales = ["en", "fr"];
+  const creator = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      {
+        name: "page1",
+        elements: [{ type: "text", name: "question1" }]
+      },
+      {
+        name: "page2",
+        elements: [{ type: "text", name: "question2" }]
+      }
+    ]
+  };
+  const tabTranslation = new TabTranslationPlugin(creator);
+  tabTranslation.activate();
+  const translation = tabTranslation.model;
+  const question = <QuestionMatrixDynamicModel>translation.settingsSurvey.getQuestionByName("locales");
+
+  const addLanguageAction = translation["addLanguageAction"];
+  const list = translation["addLanguageAction"].data;
+  expect(translation["isChooseLanguageEnabled"]).toBeTruthy();
+  expect(addLanguageAction.popupModel.isVisible).toBeFalsy();
+  expect(list.isEmpty).toBeFalsy();
+
+  addLanguageAction.action();
+  expect(addLanguageAction.popupModel.isVisible).toBeTruthy();
+  expect(list.isEmpty).toBeFalsy();
+  expect(list.actions[1].visible).toBeTruthy();
+
+  list.onItemClick(list.actions[1]);
+  expect(addLanguageAction.popupModel.isVisible).toBeFalsy();
+  expect(list.isEmpty).toBeTruthy();
+
+  question.removeRow(1, false);
+  expect(list.isEmpty).toBeFalsy();
+
+  addLanguageAction.action();
+  expect(addLanguageAction.popupModel.isVisible).toBeTruthy();
+  expect(list.isEmpty).toBeFalsy();
+  expect(list.actions[1].visible).toBeTruthy();
+
+  surveyLocalization.supportedLocales = [];
+});
 test("Make invisible locales in language selector, that has been already choosen", () => {
   const survey = new SurveyModel({
     pages: [
