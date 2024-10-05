@@ -723,6 +723,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
     properties: [
       "navigationTitle",
       "navigationDescription",
+      "timeLimit",
       "maxTimeToFinish",
       { name: "questionsOrder", tab: "questionSettings" },
       { name: "navigationButtonsVisibility", tab: "navigation" }
@@ -801,6 +802,12 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "completedHtmlOnCondition", tab: "showOnCompleted" },
       { name: "loadingHtml", tab: "showOnCompleted" },
       { name: "completedBeforeHtml", tab: "showOnCompleted" },
+
+      { name: "showTimer", tab: "timer" },
+      { name: "timerLocation", tab: "timer" },
+      { name: "timeLimit", tab: "timer" },
+      { name: "timeLimitPerPage", tab: "timer" },
+      { name: "timerInfoMode", tab: "timer" },
 
       { name: "maxTimeToFinish", tab: "timer" },
       { name: "maxTimeToFinishPage", tab: "timer" },

@@ -50,7 +50,7 @@ export class CreatorResponsivityManager {
     if (typeof ResizeObserver !== "undefined") {
       this.resizeObserver = new ResizeObserver((_) => this.process());
       this.resizeObserver.observe(this.findCorrectParent(this.container));
-      this.process();
+      this.process(true);
       if (this.currentWidth == "xs" || this.currentWidth == "s" || this.currentWidth === "m") {
         this.creator.setShowSidebar(false);
       }
@@ -74,7 +74,10 @@ export class CreatorResponsivityManager {
     this.creator.sidebar.flyoutMode = flyoutSidebar;
 
   }
-  process() {
+  process(isFirst: boolean = false) {
+    if(isFirst) {
+      this.creator.sidebar.blockAnimations();
+    }
     this.currentWidth = this.getScreenWidth();
     if (this.currentWidth === "xl" || this.currentWidth === "xxl") {
       this._process(false, true, false);
@@ -90,6 +93,9 @@ export class CreatorResponsivityManager {
       this.initMobileView();
     } else {
       this.resetMobileView();
+    }
+    if (isFirst) {
+      this.creator.sidebar.releaseAnimations();
     }
   }
 
