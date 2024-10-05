@@ -65,6 +65,10 @@ export class AdaptiveToolbox extends Toolbox {
               }
             </div>
           </div>
+          <div className="svc-toolbox__scrollbar" onScroll={(event) => this.toolbox.onScrollbarScroll(event.nativeEvent)}>
+            <div className="svc-toolbox__scrollbar-sizer">
+            </div>
+          </div>
         </div>
       </div>
     );

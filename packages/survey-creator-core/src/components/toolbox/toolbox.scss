@@ -49,9 +49,15 @@ svc-toolbox {
 .svc-toolbox__scroller {
   padding: var(--ctr-toolbox-padding-top, calcSize(1))  var(--ctr-toolbox-group-padding-right, calcSize(1.5)) var(--ctr-toolbox-padding-bottom, calcSize(2)) var(--ctr-toolbox-group-padding-left, calcSize(1.5));
   box-sizing: border-box;
-  overflow: hidden;
   direction: var(--ctr-toolbox-scroller-direction, rtl);
   flex-grow: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 
   display: flex;
   flex-direction: column;
@@ -60,7 +66,19 @@ svc-toolbox {
 .svc-toolbox__container {
   direction: initial;
 }
-
+.svc-toolbox__scrollbar {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  overflow: scroll;
+  width: calcSize(1.51);
+  margin-left: calcSize(-0.1);
+  display: none;
+}
+.svc-toolbox:hover .svc-toolbox__scrollbar {
+  display: block;
+}
 .svc-side-bar {
   .svc-toolbox__scroller {
     direction: initial;
@@ -68,9 +86,13 @@ svc-toolbox {
 }
 
 .svc-toolbox--compact {
-  width: var(--ctr-toolbox-width-compact, 100vw);
-  margin-right: var(--ctr-toolbox-margin-right-compact,calc(-100vw + calcSize(10.5)));
+  width: var(--ctr-toolbox-width-compact, 82px);
+  //margin-right: var(--ctr-toolbox-margin-right-compact,calc(-100vw + calcSize(10.5)));
+  .svc-toolbox__panel {
+    overflow: visible;
+  }
   .svc-toolbox__scroller {
+    width: fit-content;
     padding: var(--ctr-toolbox-padding-top, calcSize(1))  var(--ctr-toolbox-group-padding-right-compact, calcSize(1.5)) var(--ctr-toolbox-padding-bottom, calcSize(2)) var(--ctr-toolbox-group-padding-left-compact, calcSize(1.5));
   }  
   .spg-search-editor_container {
@@ -112,6 +134,10 @@ svc-toolbox {
 .svc-toolbox__panel {
   border-right: var(--ctr-toolbox-border-width-right, 0px) solid var(--ctr-toolbox-border-color, transparent);
   background: var(--ctr-toolbox-background-color, $background-dim);
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .svc-toolbox--flyout {
@@ -132,12 +158,6 @@ svc-toolbox {
       1px 0 0 0 $border-inside,
       $shadow-medium,
       $shadow-large;
-  }
-}
-
-.svc-toolbox--scrollable {
-  .svc-toolbox__scroller {
-    overflow-y: auto;
   }
 }
 
@@ -168,11 +188,7 @@ svc-toolbox {
   }
 }
 
-.svc-toolbox__panel {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
+
 
 .svc-creator__toolbox--right,
 [dir="rtl"],

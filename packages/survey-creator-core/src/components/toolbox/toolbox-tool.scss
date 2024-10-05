@@ -86,18 +86,44 @@
 //is visible only on hover
 .svc-toolbox__item-banner {
   opacity: 0;
-  display: var(--ctr-toolbox-item-banner-display, flex);
+  display: flex;
   box-sizing: border-box;
   align-items: center;
   margin-right: 0;
-  margin-left: calcSize(-4.5);
+  margin-left: var(--ctr-toolbox-item-banner-margin-left, calcSize(-4.5));
   height: calcSize(5);
+  height: 100%;
+  background-color: $background;
+  /* Shadow / Medium */
+  border-radius: var(--ctr-tooltip-corder-radius, calcSize(12.5));
+  box-shadow: $shadow-medium;
+  transition:
+    max-width 0.1s ease-in-out,
+    padding 0.2s ease-in-out;
+  background-color: var(--ctr-tooltip-background-color, $background);
+  overflow: visible;
 
   .svc-toolbox__item-icon {
     position: absolute;
-    display: block;
+    display: var(--ctr-toolbox-item-banner-icon-display, block);
     left: calcSize(1.5);
     top: calcSize(1);
+  }
+
+  &:after {
+    content: " ";
+    display: block;
+    width: 0;
+    height: 0;
+    border-left: calc(1 * var(--base-unit, 8px)) solid transparent;
+    border-right: calc(1 * var(--base-unit, 8px)) solid transparent;
+    border-bottom: calc(1 * var(--base-unit, 8px)) solid var(--ctr-tooltip-background-color, $background);
+    align-self: center;
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    transform: translate(4px, -4px) rotate(-90deg);
+    box-shadow: $shadow-medium;
   }
 
   .svc-toolbox__item-title {

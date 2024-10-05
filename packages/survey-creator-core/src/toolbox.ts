@@ -348,6 +348,10 @@ export class QuestionToolbox
     "html", "expression", "image", "signaturepad"
   ];
   private _containerElementValue: HTMLElement;
+  private _scrollbarElement: HTMLElement;
+  private _containerBodyElement: HTMLElement;
+  private _scrollbarSizerElement: HTMLElement;
+  private _containerBodyResizeObserver: ResizeObserver;
   public presetDefaultItems: Array<IQuestionToolboxItem>;
 
   public get itemSelector(): string {
@@ -589,6 +593,19 @@ export class QuestionToolbox
 
   public setRootElement(element: HTMLElement) {
     this._containerElementValue = element?.querySelector(this.containerSelector);
+    this._scrollbarElement = element?.querySelector(".svc-toolbox__scrollbar");
+    this._scrollbarSizerElement = element?.querySelector(".svc-toolbox__scrollbar-sizer");
+    this._containerBodyElement = element?.querySelector(".svc-toolbox__container");
+    if (!element) return;
+    this._containerBodyResizeObserver = new ResizeObserver(entries => {
+      for (let entry of entries) {
+        const height = entry.contentBoxSize
+          ? entry.contentBoxSize[0].blockSize
+          : entry.contentRect.width;
+        this._scrollbarSizerElement.style.height = height + "px";
+      }
+    });
+    this._containerBodyResizeObserver.observe(this._containerBodyElement);
   }
 
   public get containerElement() {
@@ -1346,6 +1363,11 @@ export class QuestionToolbox
   }
   public onScroll(model, event) {
     this.hideAllInnerPopups();
+    this._scrollbarElement.scrollTop = this._containerElementValue.scrollTop;
   }
+  public onScrollbarScroll(event) {
+    this._containerElementValue.scrollTop = this._scrollbarElement.scrollTop;
+  }
+
   //public dispose(): void { } Don't we need to dispose toolbox?
 }
