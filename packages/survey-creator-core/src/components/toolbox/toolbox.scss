@@ -71,11 +71,13 @@ svc-toolbox {
   position: absolute;
   top: 0;
   bottom: 0;
-  right: 0;
+  right: var(--ctr-toolbox-scrollbar-right, initial);
+  left: var(--ctr-toolbox-scrollbar-left, 0);
   overflow: scroll;
-  width: calcSize(1.51);
-  margin-left: calcSize(-0.1);
+  width: calcSize(2);
+  margin-left: calcSize(-0.5);
   display: none;
+  z-index: 30;
 }
 .svc-toolbox:hover .svc-toolbox__scrollbar {
   display: block;

@@ -62,14 +62,14 @@
   height: 100%;
   background-color: $background;
   /* Shadow / Medium */
-  border-radius: var(--ctr-tooltip-corder-radius, calcSize(12.5));
-  box-shadow: $shadow-medium;
+  //border-radius: var(--ctr-tooltip-corder-radius, calcSize(12.5));
+  //box-shadow: $shadow-medium;
   transition:
     max-width 0.1s ease-in-out,
     padding 0.2s ease-in-out;
   background-color: var(--ctr-tooltip-background-color, $background);
   overflow: visible;
-
+  position: absolute;
   .svc-toolbox__item-icon {
     position: absolute;
     display: var(--ctr-toolbox-item-banner-icon-display, block);
@@ -221,7 +221,7 @@
   .svc-toolbox__item:not(.sv-dots):focus,
   .svc-toolbox__tool:hover > .sv-action__content > .svc-toolbox__item:not(.sv-dots),
   .svc-toolbox__item:not(.sv-dots):hover {
-    overflow: hidden;
+    overflow: visible;
     background-color: var(--ctr-toolbox-item-background-color-hovered, $background);
     box-shadow: $shadow-medium;
     box-shadow:
