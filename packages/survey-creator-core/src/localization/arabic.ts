@@ -182,6 +182,18 @@ export var arStrings = {
     pagePlaceHolder: "الصفحة فارغة. اسحب عنصرا من صندوق الأدوات أو انقر فوق الزر أدناه.",
     imagePlaceHolder: "قم بسحب وإسقاط صورة هنا أو انقر فوق الزر أدناه واختر صورة لتحميلها",
     surveyPlaceHolderMobile: "انقر فوق الزر \"إضافة سؤال\" أدناه لبدء إنشاء النموذج الخاص بك.",
+    surveyPlaceholderTitle: "النموذج فارغ",
+    surveyPlaceholderTitleMobile: "النموذج فارغ",
+    surveyPlaceholderDescription: "اسحب عنصرا من صندوق الأدوات أو انقر فوق الزر أدناه.",
+    surveyPlaceholderDescriptionMobile: "اسحب عنصرا من صندوق الأدوات أو انقر فوق الزر أدناه.",
+    previewPlaceholderTitle: "لا معاينة",
+    previewPlaceholderTitleMobile: "لا معاينة",
+    previewPlaceholderDescription: "لا يحتوي الاستطلاع على أي عناصر مرئية.",
+    previewPlaceholderDescriptionMobile: "لا يحتوي الاستطلاع على أي عناصر مرئية.",
+    translationsPlaceholderTitle: "لا توجد سلاسل للترجمة",
+    translationsPlaceholderTitleMobile: "لا توجد سلاسل للترجمة",
+    translationsPlaceholderDescription: "أضف عناصر إلى النموذج أو قم بتغيير عامل تصفية السلاسل في شريط الأدوات.",
+    translationsPlaceholderDescriptionMobile: "أضف عناصر إلى النموذج أو قم بتغيير عامل تصفية السلاسل في شريط الأدوات.",
     pagePlaceHolderMobile: "انقر فوق الزر \"إضافة سؤال\" أدناه لإضافة عنصر جديد إلى الصفحة.",
     panelPlaceHolderMobile: "انقر فوق الزر \"إضافة سؤال\" أدناه لإضافة عنصر جديد إلى اللوحة.",
     imagePlaceHolderMobile: "انقر فوق الزر أدناه واختر صورة لتحميلها",
@@ -194,6 +206,10 @@ export var arStrings = {
     lg: {
       addNewItem: "إضافة قاعدة جديدة",
       empty_tab: "قم بإنشاء إرتباط لتخصيص تدفق الإستبيان",
+      logicPlaceholderTitle: "لا توجد قواعد منطقية",
+      logicPlaceholderTitleMobile: "لا توجد قواعد منطقية",
+      logicPlaceholderDescription: "إنشاء قاعدة لتخصيص تدفق الاستطلاع.",
+      logicPlaceholderDescriptionMobile: "إنشاء قاعدة لتخصيص تدفق الاستطلاع.",
       page_visibilityName: "إظهار (إخفاء) صفحة",
       page_enableName: "تمكين (تعطيل) الصفحة",
       page_requireName: "اجعل الصفحة مطلوبة",
@@ -375,7 +391,7 @@ export var arStrings = {
       description: "وصف الصفحة",
       visibleIf: "اجعل الصفحة مرئية إذا",
       requiredIf: "اجعل الصفحة مطلوبة إذا",
-      maxTimeToFinish: "الحد الزمني لإنهاء الصفحة (بالثواني)",
+      timeLimit: "الحد الزمني لإنهاء الصفحة (بالثواني)",
       questionsOrder: "ترتيب الأسئلة على الصفحة"
     },
     matrixdropdowncolumn: {
@@ -615,10 +631,11 @@ export var arStrings = {
     questionErrorLocation: "موقع خطأ في السؤال",
     focusFirstQuestionAutomatic: "ركز المؤشر على السؤال الأول عند تغير الصفحة",
     questionsOrder: "ترتيب العناصر على الصفحة",
-    maxTimeToFinish: "أقصى وقت لإنهاء الإستبيان",
-    maxTimeToFinishPage: "أقصى وقت لإنهاء الصفحة في الإستبيان",
-    showTimerPanel: "إظهار لوحة المؤقت",
-    showTimerPanelMode: "إظهار نمط لوحة المؤقت",
+    timeLimit: "أقصى وقت لإنهاء الإستبيان",
+    timeLimitPerPage: "أقصى وقت لإنهاء الصفحة في الإستبيان",
+    showTimer: "استخدام مؤقت",
+    timerLocation: "إظهار لوحة المؤقت",
+    timerInfoMode: "إظهار نمط لوحة المؤقت",
     renderMode: "نمط العرض",
     allowAddPanel: "السماح بإضافة لوحة",
     allowRemovePanel: "السماح بإزالة لوحة",
@@ -875,6 +892,7 @@ export var arStrings = {
       fontSize: "حجم الخط",
       scale: "مِيزَان",
       cornerRadius: "نصف قطر الزاوية",
+      advancedMode: "الوضع المتقدم",
       pageTitle: "خط العنوان",
       pageDescription: "خط الوصف",
       questionTitle: "خط العنوان",
@@ -1038,11 +1056,8 @@ export var arStrings = {
     showNavigationButtons: {
       none: "مخفي"
     },
-    showTimerPanel: {
-      none: "مخفي"
-    },
-    showTimerPanelMode: {
-      all: "كلا"
+    timerInfoMode: {
+      combined: "كلا"
     },
     addRowLocation: {
       default: "يعتمد على تخطيط المصفوفة"
@@ -1410,11 +1425,11 @@ export var arStrings = {
     imageFit: "اختر من بين: \"لا شيء\" - تحافظ الصورة على حجمها الأصلي ؛ \"احتواء\" - يتم تغيير حجم الصورة لتلائم مع الحفاظ على نسبة العرض إلى الارتفاع ؛ \"الغلاف\" - تملأ الصورة المربع بأكمله مع الحفاظ على نسبة العرض إلى الارتفاع ؛ \"تعبئة\" - يتم تمديد الصورة لملء المربع دون الحفاظ على نسبة العرض إلى الارتفاع.",
     autoGrow: "يزيد تدريجيا من ارتفاع حقل الإدخال أثناء إدخال البيانات. يتجاوز إعداد \"ارتفاع حقل الإدخال (في الأسطر)\".",
     allowResize: "يظهر مقبض تغيير الحجم (أو المقبض) في الزاوية ويمكن سحبه لتغيير حجم حقل الإدخال.",
-    maxTimeToFinish: "فاصل زمني بالثواني وبعد ذلك يتقدم الاستطلاع تلقائيا إلى صفحة الشكر.",
-    maxTimeToFinishPage: "فاصل زمني بالثواني يتقدم بعده الاستطلاع تلقائيا إلى الصفحة التالية.",
+    timeLimit: "فاصل زمني بالثواني وبعد ذلك يتقدم الاستطلاع تلقائيا إلى صفحة الشكر.",
+    timeLimitPerPage: "فاصل زمني بالثواني يتقدم بعده الاستطلاع تلقائيا إلى الصفحة التالية.",
     validateVisitedEmptyFields: "قم بتمكين هذا الخيار لتشغيل التحقق من الصحة عندما يركز المستخدم على حقل إدخال فارغ ثم يتركه دون إجراء أي تغييرات.",
     page: {
-      maxTimeToFinish: "فاصل زمني بالثواني يتقدم بعده الاستطلاع تلقائيا إلى الصفحة التالية.",
+      timeLimit: "فاصل زمني بالثواني يتقدم بعده الاستطلاع تلقائيا إلى الصفحة التالية.",
       visibleIf: "استخدم أيقونة العصا السحرية لتعيين قاعدة شرطية تحدد رؤية الصفحة.",
       enableIf: "استخدم أيقونة العصا السحرية لتعيين قاعدة شرطية تعطل وضع القراءة فقط للصفحة.",
       requiredIf: "استخدم أيقونة العصا السحرية لتعيين قاعدة شرطية تمنع إرسال الاستطلاع ما لم يكن لسؤال واحد متداخل على الأقل إجابة.",
@@ -1424,7 +1439,7 @@ export var arStrings = {
       questionsOrder: "يحافظ على الترتيب الأصلي للأسئلة أو يحولها عشوائيا. يطبق خيار \"الوراثة\" إعداد مستوى الاستطلاع (\"أصلي\" افتراضيا). يكون تأثير هذا الإعداد مرئيا فقط في علامة التبويب معاينة.",
       navigationButtonsVisibility: "يضبط رؤية أزرار التنقل على الصفحة. يطبق خيار \"الوراثة\" إعداد مستوى الاستطلاع ، والذي يتم تعيينه افتراضيا على \"مرئي\"."
     },
-    showTimerPanel: "يضبط رؤية وموقع المؤقت على الصفحة.",
+    timerLocation: "يضبط موقع المؤقت على الصفحة.",
     panelsState: "اختر من بين: \"مقفل\" - لا يمكن للمستخدمين توسيع اللوحات أو طيها ؛ \"طي الكل\" - تبدأ جميع اللوحات في حالة انهيار ؛ \"توسيع الكل\" - تبدأ جميع اللوحات في حالة موسعة ؛ \"تم توسيعه أولا\" - تم توسيع اللوحة الأولى فقط في البداية.",
     imageLinkName: "أدخل اسم خاصية مشتركة ضمن صفيف الكائنات التي تحتوي على عناوين URL لملفات الصور أو الفيديو التي تريد عرضها في قائمة الاختيارات.",
     choices: "تعمل القيمة اليسرى كمعرف عنصر مستخدم في القواعد الشرطية ، ويتم عرض القيمة الصحيحة للمستجيبين.",
@@ -1506,7 +1521,8 @@ export var arStrings = {
     header: {
       inheritWidthFrom: "يقوم خيار \"نفس الحاوية\" بضبط عرض منطقة محتوى الرأس تلقائيا ليلائم عنصر HTML الذي يتم وضع الاستطلاع فيه.",
       textAreaWidth: "عرض ناحية الرأس التي تحتوي على عنوان الاستطلاع ووصفه، مقاسا بالبكسل.",
-      overlapEnabled: "يجعل الجزء السفلي من الرأس متراكبا مع الجزء العلوي من الاستطلاع."
+      overlapEnabled: "يجعل الجزء السفلي من الرأس متراكبا مع الجزء العلوي من الاستطلاع.",
+      mobileHeight: "عند التعيين إلى 0 ، يتم حساب الارتفاع تلقائيا لاستيعاب محتوى الرأس."
     },
     panellayoutcolumn: {
       effectiveWidth: "يقبل القيم٪",
@@ -1594,6 +1610,7 @@ export var arStrings = {
     imageFit: "إحتواء الصورة",
     altText: "نص بديل",
     height: "height",
+    mobileHeight: "الارتفاع على الهواتف الذكية",
     penColor: "لون القلم",
     backgroundColor: "لون الخلفية",
     templateElements: "عناصر القالب",
@@ -1737,7 +1754,7 @@ editorLocalization.locales["ar"] = arStrings;
 // pe.includeIntoResult: "Include into survey results" => "تضمين نتائج الاستطلاع"
 // image.imageHeight: "Image height (in CSS-accepted values)" => "ارتفاع الصورة (بالقيم المقبولة من CSS)"
 // image.imageWidth: "Image width (in CSS-accepted values)" => "عرض الصورة (بالقيم المقبولة من CSS)"
-// page.maxTimeToFinish: "Time limit to finish the page (in seconds)" => "الحد الزمني لإنهاء الصفحة (بالثواني)"
+// page.timeLimit: "Time limit to finish the page (in seconds)" => "الحد الزمني لإنهاء الصفحة (بالثواني)"
 // question.page: "Parent page" => "الصفحة الرئيسية"
 // pe.noEntriesText: "Empty entries text" => "نص إدخالات فارغ"
 // pe.setValue: "Answer" => "جواب"
@@ -2453,9 +2470,9 @@ editorLocalization.locales["ar"] = arStrings;
 // pehelp.imageFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "اختر من بين: \"لا شيء\" - تحافظ الصورة على حجمها الأصلي ؛ \"احتواء\" - يتم تغيير حجم الصورة لتلائم مع الحفاظ على نسبة العرض إلى الارتفاع ؛ \"الغلاف\" - تملأ الصورة المربع بأكمله مع الحفاظ على نسبة العرض إلى الارتفاع ؛ \"تعبئة\" - يتم تمديد الصورة لملء المربع دون الحفاظ على نسبة العرض إلى الارتفاع."
 // pehelp.autoGrow: "Gradually increases the height of the input field as data is being entered. Overrides the \"Input field height (in lines)\" setting." => "يزيد تدريجيا من ارتفاع حقل الإدخال أثناء إدخال البيانات. يتجاوز إعداد \"ارتفاع حقل الإدخال (في الأسطر)\"."
 // pehelp.allowResize: "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field." => "يظهر مقبض تغيير الحجم (أو المقبض) في الزاوية ويمكن سحبه لتغيير حجم حقل الإدخال."
-// pehelp.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "فاصل زمني بالثواني وبعد ذلك يتقدم الاستطلاع تلقائيا إلى صفحة الشكر."
-// pehelp.maxTimeToFinishPage: "A time interval in seconds after which the survey auto-advances to the next page." => "فاصل زمني بالثواني يتقدم بعده الاستطلاع تلقائيا إلى الصفحة التالية."
-// page.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the next page." => "فاصل زمني بالثواني يتقدم بعده الاستطلاع تلقائيا إلى الصفحة التالية."
+// pehelp.timeLimit: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "فاصل زمني بالثواني وبعد ذلك يتقدم الاستطلاع تلقائيا إلى صفحة الشكر."
+// pehelp.timeLimitPerPage: "A time interval in seconds after which the survey auto-advances to the next page." => "فاصل زمني بالثواني يتقدم بعده الاستطلاع تلقائيا إلى الصفحة التالية."
+// page.timeLimit: "A time interval in seconds after which the survey auto-advances to the next page." => "فاصل زمني بالثواني يتقدم بعده الاستطلاع تلقائيا إلى الصفحة التالية."
 // page.visibleIf: "Use the magic wand icon to set a conditional rule that determines page visibility." => "استخدم أيقونة العصا السحرية لتعيين قاعدة شرطية تحدد رؤية الصفحة."
 // page.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the page." => "استخدم أيقونة العصا السحرية لتعيين قاعدة شرطية تعطل وضع القراءة فقط للصفحة."
 // page.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "استخدم أيقونة العصا السحرية لتعيين قاعدة شرطية تمنع إرسال الاستطلاع ما لم يكن لسؤال واحد متداخل على الأقل إجابة."
@@ -2463,7 +2480,6 @@ editorLocalization.locales["ar"] = arStrings;
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "تعيين موقع رسالة خطأ فيما يتعلق بالسؤال مع إدخال غير صالح. اختر بين: \"أعلى\" - يتم وضع نص خطأ في أعلى مربع السؤال ؛ \"أسفل\" - يتم وضع نص خطأ في أسفل مربع السؤال. يطبق خيار \"الوراثة\" إعداد مستوى الاستطلاع (\"أعلى\" افتراضيا)."
 // page.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "يحافظ على الترتيب الأصلي للأسئلة أو يحولها عشوائيا. يطبق خيار \"الوراثة\" إعداد مستوى الاستطلاع (\"أصلي\" افتراضيا). يكون تأثير هذا الإعداد مرئيا فقط في علامة التبويب معاينة."
 // page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "يضبط رؤية أزرار التنقل على الصفحة. يطبق خيار \"الوراثة\" إعداد مستوى الاستطلاع ، والذي يتم تعيينه افتراضيا على \"مرئي\"."
-// pehelp.showTimerPanel: "Sets the visibility and location of a timer on a page." => "يضبط رؤية وموقع المؤقت على الصفحة."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "اختر من بين: \"مقفل\" - لا يمكن للمستخدمين توسيع اللوحات أو طيها ؛ \"طي الكل\" - تبدأ جميع اللوحات في حالة انهيار ؛ \"توسيع الكل\" - تبدأ جميع اللوحات في حالة موسعة ؛ \"تم توسيعه أولا\" - تم توسيع اللوحة الأولى فقط في البداية."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "أدخل اسم خاصية مشتركة ضمن صفيف الكائنات التي تحتوي على عناوين URL لملفات الصور أو الفيديو التي تريد عرضها في قائمة الاختيارات."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "تعمل القيمة اليسرى كمعرف عنصر مستخدم في القواعد الشرطية ، ويتم عرض القيمة الصحيحة للمستجيبين."
@@ -2693,3 +2709,25 @@ editorLocalization.locales["ar"] = arStrings;
 // ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "انقر فوق أي رمز فئة لاستكشاف إعدادات الاستطلاع. ستتوفر إعدادات إضافية بمجرد إضافة عنصر استطلاع إلى سطح التصميم."
 // pe.caseInsensitive: "Case insensitive" => "غير حساس لحالة الأحرف"
 // pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "حدد ما إذا كان يجب التعامل مع الأحرف الكبيرة والصغيرة في التعبير العادي على أنها مكافئة."
+
+// ed.surveyPlaceholderTitle: "Your form is empty" => "النموذج فارغ"
+// ed.surveyPlaceholderTitleMobile: "Your form is empty" => "النموذج فارغ"
+// ed.surveyPlaceholderDescription: "Drag an element from the toolbox or click the button below." => "اسحب عنصرا من صندوق الأدوات أو انقر فوق الزر أدناه."
+// ed.surveyPlaceholderDescriptionMobile: "Drag an element from the toolbox or click the button below." => "اسحب عنصرا من صندوق الأدوات أو انقر فوق الزر أدناه."
+// ed.previewPlaceholderTitle: "No preview" => "لا معاينة"
+// ed.previewPlaceholderTitleMobile: "No preview" => "لا معاينة"
+// ed.previewPlaceholderDescription: "The survey doesn't contain any visible elements." => "لا يحتوي الاستطلاع على أي عناصر مرئية."
+// ed.previewPlaceholderDescriptionMobile: "The survey doesn't contain any visible elements." => "لا يحتوي الاستطلاع على أي عناصر مرئية."
+// ed.translationsPlaceholderTitle: "No strings to translate" => "لا توجد سلاسل للترجمة"
+// ed.translationsPlaceholderTitleMobile: "No strings to translate" => "لا توجد سلاسل للترجمة"
+// ed.translationsPlaceholderDescription: "Add elements to your form or change the strings filter in the toolbar." => "أضف عناصر إلى النموذج أو قم بتغيير عامل تصفية السلاسل في شريط الأدوات."
+// ed.translationsPlaceholderDescriptionMobile: "Add elements to your form or change the strings filter in the toolbar." => "أضف عناصر إلى النموذج أو قم بتغيير عامل تصفية السلاسل في شريط الأدوات."
+// lg.logicPlaceholderTitle: "No logical rules" => "لا توجد قواعد منطقية"
+// lg.logicPlaceholderTitleMobile: "No logical rules" => "لا توجد قواعد منطقية"
+// lg.logicPlaceholderDescription: "Create a rule to customize the flow of the survey." => "إنشاء قاعدة لتخصيص تدفق الاستطلاع."
+// lg.logicPlaceholderDescriptionMobile: "Create a rule to customize the flow of the survey." => "إنشاء قاعدة لتخصيص تدفق الاستطلاع."
+// pe.showTimer: "Use a timer" => "استخدام مؤقت"
+// theme.advancedMode: "Advanced mode" => "الوضع المتقدم"
+// pehelp.timerLocation: "Sets the location of a timer on a page." => "يضبط موقع المؤقت على الصفحة."
+// header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "عند التعيين إلى 0 ، يتم حساب الارتفاع تلقائيا لاستيعاب محتوى الرأس."
+// p.mobileHeight: "Height on smartphones" => "الارتفاع على الهواتف الذكية"

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Base } from "survey-core";
-import { Popup, ReactElementFactory } from "survey-react-ui";
+import { Popup, ReactElementFactory, SvgIcon } from "survey-react-ui";
 import { CreatorModelElement } from "../ModelElement";
 import { ISurveyCreatorToolboxItemProps, SurveyCreatorToolboxItem } from "./ToolboxItem";
 
@@ -13,6 +13,9 @@ export class SurveyCreatorToolboxItemGroup extends CreatorModelElement<ISurveyCr
   }
   public get item() {
     return this.props.item;
+  }
+  public get model() {
+    return this.props.model;
   }
   public get creator() {
     return this.props.creator;
@@ -29,7 +32,13 @@ export class SurveyCreatorToolboxItemGroup extends CreatorModelElement<ISurveyCr
   }
   render(): JSX.Element {
     return <>
-      <SurveyCreatorToolboxItem item={this.item} creator={this.creator} parentModel={this.parentModel} isCompact={this.isCompact} ></SurveyCreatorToolboxItem >
+      <SurveyCreatorToolboxItem item={this.item} creator={this.creator} model={this.model} parentModel={this.parentModel} isCompact={this.isCompact} ></SurveyCreatorToolboxItem >
+      <div className="svc-toolbox__item-submenu-button"
+        onMouseOver={(event: any) => this.model.onMouseOver(this.item, event)}
+        onMouseLeave={(event: any) => this.model.onMouseLeave(this.item, event)}
+      >
+        <SvgIcon size={24} iconName={this.item.subitemsButtonIcon} ></SvgIcon>
+      </div>
       <Popup model={this.item.popupModel} getArea={this.item.getArea} />
     </>;
   }
