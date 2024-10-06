@@ -182,6 +182,18 @@ var frenchTranslation = {
     pagePlaceHolder: "La page est vide. Faites glisser un élément de la boîte à outils ou cliquez sur le bouton ci-dessous.",
     imagePlaceHolder: "Glissez et déposez une image ici ou cliquez sur le bouton ci-dessous pour choisir une image à télécharger",
     surveyPlaceHolderMobile: "Cliquez sur le bouton « Ajouter une question » ci-dessous pour commencer à créer votre formulaire.",
+    surveyPlaceholderTitle: "Votre formulaire est vide",
+    surveyPlaceholderTitleMobile: "Votre formulaire est vide",
+    surveyPlaceholderDescription: "Faites glisser un élément depuis la boîte à outils ou cliquez sur le bouton ci-dessous.",
+    surveyPlaceholderDescriptionMobile: "Faites glisser un élément depuis la boîte à outils ou cliquez sur le bouton ci-dessous.",
+    previewPlaceholderTitle: "Pas d’aperçu",
+    previewPlaceholderTitleMobile: "Pas d’aperçu",
+    previewPlaceholderDescription: "L’enquête ne contient aucun élément visible.",
+    previewPlaceholderDescriptionMobile: "L’enquête ne contient aucun élément visible.",
+    translationsPlaceholderTitle: "Pas de chaînes à traduire",
+    translationsPlaceholderTitleMobile: "Pas de chaînes à traduire",
+    translationsPlaceholderDescription: "Ajoutez des éléments à votre formulaire ou modifiez le filtre de chaînes dans la barre d’outils.",
+    translationsPlaceholderDescriptionMobile: "Ajoutez des éléments à votre formulaire ou modifiez le filtre de chaînes dans la barre d’outils.",
     pagePlaceHolderMobile: "Cliquez sur le bouton « Ajouter une question » ci-dessous pour ajouter un nouvel élément à la page.",
     panelPlaceHolderMobile: "Cliquez sur le bouton « Ajouter une question » ci-dessous pour ajouter un nouvel élément au panneau.",
     imagePlaceHolderMobile: "Cliquez sur le bouton ci-dessous et choisissez une image à télécharger",
@@ -194,6 +206,10 @@ var frenchTranslation = {
     lg: {
       addNewItem: "Ajouter une nouvelle règle",
       empty_tab: "Créez une règle pour personnaliser le déroulement du sondage.",
+      logicPlaceholderTitle: "Pas de règles logiques",
+      logicPlaceholderTitleMobile: "Pas de règles logiques",
+      logicPlaceholderDescription: "Créez une règle pour personnaliser le flux de l’enquête.",
+      logicPlaceholderDescriptionMobile: "Créez une règle pour personnaliser le flux de l’enquête.",
       page_visibilityName: "Afficher/masquer la page",
       page_enableName: "Activer (désactiver) la page",
       page_requireName: "Rendre la page obligatoire",
@@ -375,7 +391,7 @@ var frenchTranslation = {
       description: "Description de la page",
       visibleIf: "Rendre la page visible si",
       requiredIf: "Rendez la page obligatoire si",
-      maxTimeToFinish: "Limite de temps pour terminer la page (en secondes)",
+      timeLimit: "Limite de temps pour terminer la page (en secondes)",
       questionsOrder: "Ordre des questions sur la page"
     },
     matrixdropdowncolumn: {
@@ -615,10 +631,11 @@ var frenchTranslation = {
     questionErrorLocation: "Emplacement de l'erreur",
     focusFirstQuestionAutomatic: "Focus sur la première question au changement de page",
     questionsOrder: "Ordre des éléments sur la page",
-    maxTimeToFinish: "Temps maximum pour terminer le sondage",
-    maxTimeToFinishPage: "Temps maximum pour terminer une page",
-    showTimerPanel: "Afficher le panneau chronomètre",
-    showTimerPanelMode: "Mode d'affichage du panneau chronomètre",
+    timeLimit: "Temps maximum pour terminer le sondage",
+    timeLimitPerPage: "Temps maximum pour terminer une page",
+    showTimer: "Utiliser une minuterie",
+    timerLocation: "Afficher le panneau chronomètre",
+    timerInfoMode: "Mode d'affichage du panneau chronomètre",
     renderMode: "Mode de rendu",
     allowAddPanel: "Autoriser l'ajout de sections",
     allowRemovePanel: "Autoriser la suppression de sections",
@@ -875,6 +892,7 @@ var frenchTranslation = {
       fontSize: "Taille de la police",
       scale: "Écaille",
       cornerRadius: "Rayon d’angle",
+      advancedMode: "Mode avancé",
       pageTitle: "Police de titre",
       pageDescription: "Police de description",
       questionTitle: "Police de titre",
@@ -1038,11 +1056,8 @@ var frenchTranslation = {
     showNavigationButtons: {
       none: "Masqué"
     },
-    showTimerPanel: {
-      none: "Masqué"
-    },
-    showTimerPanelMode: {
-      all: "Les deux"
+    timerInfoMode: {
+      combined: "Les deux"
     },
     addRowLocation: {
       default: "Dépend de la disposition de la matrice"
@@ -1410,11 +1425,11 @@ var frenchTranslation = {
     imageFit: "Choisissez parmi : « Aucun » - l’image conserve sa taille d’origine ; « Contenir » - l’image est redimensionnée pour s’adapter tout en conservant son rapport hauteur/largeur ; « Couverture » - l’image remplit toute la boîte tout en conservant son rapport hauteur/largeur ; « Remplir » - l’image est étirée pour remplir la boîte sans conserver son rapport hauteur/largeur.",
     autoGrow: "Augmente progressivement la hauteur du champ de saisie au fur et à mesure de la saisie des données. Remplace le paramètre « Hauteur du champ de saisie (en lignes) ».",
     allowResize: "La poignée de redimensionnement (ou poignée) apparaît dans le coin et peut être déplacée pour modifier la taille du champ de saisie.",
-    maxTimeToFinish: "Intervalle de temps en secondes après lequel l’enquête passe automatiquement à la page de remerciement.",
-    maxTimeToFinishPage: "Intervalle de temps en secondes après lequel l’enquête passe automatiquement à la page suivante.",
+    timeLimit: "Intervalle de temps en secondes après lequel l’enquête passe automatiquement à la page de remerciement.",
+    timeLimitPerPage: "Intervalle de temps en secondes après lequel l’enquête passe automatiquement à la page suivante.",
     validateVisitedEmptyFields: "Activez cette option pour déclencher la validation lorsqu’un utilisateur se concentre sur un champ de saisie vide, puis le quitte sans apporter de modifications.",
     page: {
-      maxTimeToFinish: "Intervalle de temps en secondes après lequel l’enquête passe automatiquement à la page suivante.",
+      timeLimit: "Intervalle de temps en secondes après lequel l’enquête passe automatiquement à la page suivante.",
       visibleIf: "Utilisez l’icône de la baguette magique pour définir une règle conditionnelle qui détermine la visibilité de la page.",
       enableIf: "Utilisez l’icône en forme de baguette magique pour définir une règle conditionnelle qui désactive le mode lecture seule de la page.",
       requiredIf: "Utilisez l’icône en forme de baguette magique pour définir une règle conditionnelle qui empêche l’envoi d’un sondage à moins qu’au moins une question imbriquée n’ait une réponse.",
@@ -1424,7 +1439,7 @@ var frenchTranslation = {
       questionsOrder: "Conserve l’ordre d’origine des questions ou les rend aléatoires. L’option « Hériter » applique le paramètre au niveau de l’enquête (« Original » par défaut). L’effet de ce paramètre n’est visible que dans l’onglet Aperçu.",
       navigationButtonsVisibility: "Définit la visibilité des boutons de navigation sur la page. L’option « Hériter » applique le paramètre au niveau de l’enquête, qui est par défaut « Visible »."
     },
-    showTimerPanel: "Définit la visibilité et l’emplacement d’un minuteur sur une page.",
+    timerLocation: "Définit l’emplacement d’un minuteur sur une page.",
     panelsState: "Choisissez parmi : « Verrouillé » - les utilisateurs ne peuvent pas développer ou réduire les panneaux ; « Réduire tout » - tous les panneaux commencent dans un état réduit ; « Développer tout » - tous les panneaux commencent dans un état développé ; « Premier développé » - seul le premier panneau est initialement développé.",
     imageLinkName: "Entrez un nom de propriété partagée dans le tableau d’objets qui contient les URL de fichier image ou vidéo que vous souhaitez afficher dans la liste de choix.",
     choices: "La valeur de gauche sert d’ID d’élément utilisé dans les règles conditionnelles, la valeur de droite est affichée aux personnes interrogées.",
@@ -1506,7 +1521,8 @@ var frenchTranslation = {
     header: {
       inheritWidthFrom: "L’option « Identique au conteneur » ajuste automatiquement la largeur de la zone de contenu de l’en-tête pour s’adapter à l’élément HTML dans lequel l’enquête est placée.",
       textAreaWidth: "Largeur de la zone d’en-tête contenant le titre et la description de l’enquête, mesurée en pixels.",
-      overlapEnabled: "Fait en sorte que le bas de l’en-tête soit superposé au haut de l’enquête."
+      overlapEnabled: "Fait en sorte que le bas de l’en-tête soit superposé au haut de l’enquête.",
+      mobileHeight: "Lorsqu’elle est définie sur 0, la hauteur est calculée automatiquement pour s’adapter au contenu de l’en-tête."
     },
     panellayoutcolumn: {
       effectiveWidth: "Accepte les valeurs %.",
@@ -1594,6 +1610,7 @@ var frenchTranslation = {
     imageFit: "Ajustement de l’image",
     altText: "Texte de remplacement",
     height: "Hauteur",
+    mobileHeight: "Hauteur sur les smartphones",
     penColor: "Couleur du stylo",
     backgroundColor: "Couleur d’arrière-plan",
     templateElements: "Modèle des éléments",
@@ -1813,7 +1830,7 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // pe.editText: "Edit Answer button text" => "Modifier le texte du bouton de réponse"
 // image.imageHeight: "Image height (in CSS-accepted values)" => "Hauteur de l’image (en valeurs acceptées par CSS)"
 // image.imageWidth: "Image width (in CSS-accepted values)" => "Largeur de l’image (en valeurs acceptées par CSS)"
-// page.maxTimeToFinish: "Time limit to finish the page (in seconds)" => "Limite de temps pour terminer la page (en secondes)"
+// page.timeLimit: "Time limit to finish the page (in seconds)" => "Limite de temps pour terminer la page (en secondes)"
 // question.page: "Parent page" => "Page parent"
 // pe.noEntriesText: "Empty entries text" => "Texte des entrées vides"
 // pe.html: "HTML markup" => "Balisage HTML"
@@ -2602,9 +2619,9 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // pehelp.imageFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Choisissez parmi : « Aucun » - l’image conserve sa taille d’origine ; « Contenir » - l’image est redimensionnée pour s’adapter tout en conservant son rapport hauteur/largeur ; « Couverture » - l’image remplit toute la boîte tout en conservant son rapport hauteur/largeur ; « Remplir » - l’image est étirée pour remplir la boîte sans conserver son rapport hauteur/largeur."
 // pehelp.autoGrow: "Gradually increases the height of the input field as data is being entered. Overrides the \"Input field height (in lines)\" setting." => "Augmente progressivement la hauteur du champ de saisie au fur et à mesure de la saisie des données. Remplace le paramètre « Hauteur du champ de saisie (en lignes) »."
 // pehelp.allowResize: "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field." => "La poignée de redimensionnement (ou poignée) apparaît dans le coin et peut être déplacée pour modifier la taille du champ de saisie."
-// pehelp.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "Intervalle de temps en secondes après lequel l’enquête passe automatiquement à la page de remerciement."
-// pehelp.maxTimeToFinishPage: "A time interval in seconds after which the survey auto-advances to the next page." => "Intervalle de temps en secondes après lequel l’enquête passe automatiquement à la page suivante."
-// page.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the next page." => "Intervalle de temps en secondes après lequel l’enquête passe automatiquement à la page suivante."
+// pehelp.timeLimit: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "Intervalle de temps en secondes après lequel l’enquête passe automatiquement à la page de remerciement."
+// pehelp.timeLimitPerPage: "A time interval in seconds after which the survey auto-advances to the next page." => "Intervalle de temps en secondes après lequel l’enquête passe automatiquement à la page suivante."
+// page.timeLimit: "A time interval in seconds after which the survey auto-advances to the next page." => "Intervalle de temps en secondes après lequel l’enquête passe automatiquement à la page suivante."
 // page.visibleIf: "Use the magic wand icon to set a conditional rule that determines page visibility." => "Utilisez l’icône de la baguette magique pour définir une règle conditionnelle qui détermine la visibilité de la page."
 // page.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the page." => "Utilisez l’icône en forme de baguette magique pour définir une règle conditionnelle qui désactive le mode lecture seule de la page."
 // page.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "Utilisez l’icône en forme de baguette magique pour définir une règle conditionnelle qui empêche l’envoi d’un sondage à moins qu’au moins une question imbriquée n’ait une réponse."
@@ -2612,7 +2629,6 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Définit l’emplacement d’un message d’erreur par rapport à la question dont l’entrée n’est pas valide. Choisissez entre : « Haut » - un texte d’erreur est placé en haut de la zone de question ; « Bas » - un texte d’erreur est placé en bas de la zone de question. L’option « Hériter » applique le paramètre au niveau de l’enquête (« Top » par défaut)."
 // page.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Conserve l’ordre d’origine des questions ou les rend aléatoires. L’option « Hériter » applique le paramètre au niveau de l’enquête (« Original » par défaut). L’effet de ce paramètre n’est visible que dans l’onglet Aperçu."
 // page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Définit la visibilité des boutons de navigation sur la page. L’option « Hériter » applique le paramètre au niveau de l’enquête, qui est par défaut « Visible »."
-// pehelp.showTimerPanel: "Sets the visibility and location of a timer on a page." => "Définit la visibilité et l’emplacement d’un minuteur sur une page."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "Choisissez parmi : « Verrouillé » - les utilisateurs ne peuvent pas développer ou réduire les panneaux ; « Réduire tout » - tous les panneaux commencent dans un état réduit ; « Développer tout » - tous les panneaux commencent dans un état développé ; « Premier développé » - seul le premier panneau est initialement développé."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "Entrez un nom de propriété partagée dans le tableau d’objets qui contient les URL de fichier image ou vidéo que vous souhaitez afficher dans la liste de choix."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "La valeur de gauche sert d’ID d’élément utilisé dans les règles conditionnelles, la valeur de droite est affichée aux personnes interrogées."
@@ -2843,3 +2859,25 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Cliquez sur n’importe quelle icône de catégorie pour explorer les paramètres de l’enquête. Des paramètres supplémentaires seront disponibles une fois que vous aurez ajouté un élément de topographie à l’aire de conception."
 // pe.caseInsensitive: "Case insensitive" => "Insensible à la casse"
 // pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Indiquez si les lettres majuscules et minuscules de l’expression régulière doivent être traitées comme équivalentes."
+
+// ed.surveyPlaceholderTitle: "Your form is empty" => "Votre formulaire est vide"
+// ed.surveyPlaceholderTitleMobile: "Your form is empty" => "Votre formulaire est vide"
+// ed.surveyPlaceholderDescription: "Drag an element from the toolbox or click the button below." => "Faites glisser un élément depuis la boîte à outils ou cliquez sur le bouton ci-dessous."
+// ed.surveyPlaceholderDescriptionMobile: "Drag an element from the toolbox or click the button below." => "Faites glisser un élément depuis la boîte à outils ou cliquez sur le bouton ci-dessous."
+// ed.previewPlaceholderTitle: "No preview" => "Pas d’aperçu"
+// ed.previewPlaceholderTitleMobile: "No preview" => "Pas d’aperçu"
+// ed.previewPlaceholderDescription: "The survey doesn't contain any visible elements." => "L’enquête ne contient aucun élément visible."
+// ed.previewPlaceholderDescriptionMobile: "The survey doesn't contain any visible elements." => "L’enquête ne contient aucun élément visible."
+// ed.translationsPlaceholderTitle: "No strings to translate" => "Pas de chaînes à traduire"
+// ed.translationsPlaceholderTitleMobile: "No strings to translate" => "Pas de chaînes à traduire"
+// ed.translationsPlaceholderDescription: "Add elements to your form or change the strings filter in the toolbar." => "Ajoutez des éléments à votre formulaire ou modifiez le filtre de chaînes dans la barre d’outils."
+// ed.translationsPlaceholderDescriptionMobile: "Add elements to your form or change the strings filter in the toolbar." => "Ajoutez des éléments à votre formulaire ou modifiez le filtre de chaînes dans la barre d’outils."
+// lg.logicPlaceholderTitle: "No logical rules" => "Pas de règles logiques"
+// lg.logicPlaceholderTitleMobile: "No logical rules" => "Pas de règles logiques"
+// lg.logicPlaceholderDescription: "Create a rule to customize the flow of the survey." => "Créez une règle pour personnaliser le flux de l’enquête."
+// lg.logicPlaceholderDescriptionMobile: "Create a rule to customize the flow of the survey." => "Créez une règle pour personnaliser le flux de l’enquête."
+// pe.showTimer: "Use a timer" => "Utiliser une minuterie"
+// theme.advancedMode: "Advanced mode" => "Mode avancé"
+// pehelp.timerLocation: "Sets the location of a timer on a page." => "Définit l’emplacement d’un minuteur sur une page."
+// header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Lorsqu’elle est définie sur 0, la hauteur est calculée automatiquement pour s’adapter au contenu de l’en-tête."
+// p.mobileHeight: "Height on smartphones" => "Hauteur sur les smartphones"

@@ -182,6 +182,18 @@ export const thStrings = {
     pagePlaceHolder: "หน้านี้ว่างเปล่า ลากองค์ประกอบจากกล่องเครื่องมือหรือคลิกปุ่มด้านล่าง",
     imagePlaceHolder: "ลากและวางภาพที่นี่หรือคลิกปุ่มด้านล่างและเลือกภาพที่จะอัปโหลด",
     surveyPlaceHolderMobile: "คลิกปุ่ม \"เพิ่มคำถาม\" ด้านล่างเพื่อเริ่มสร้างฟอร์มของคุณ",
+    surveyPlaceholderTitle: "แบบฟอร์มของคุณว่างเปล่า",
+    surveyPlaceholderTitleMobile: "แบบฟอร์มของคุณว่างเปล่า",
+    surveyPlaceholderDescription: "ลากองค์ประกอบจากกล่องเครื่องมือหรือคลิกปุ่มด้านล่าง",
+    surveyPlaceholderDescriptionMobile: "ลากองค์ประกอบจากกล่องเครื่องมือหรือคลิกปุ่มด้านล่าง",
+    previewPlaceholderTitle: "ไม่มีการแสดงตัวอย่าง",
+    previewPlaceholderTitleMobile: "ไม่มีการแสดงตัวอย่าง",
+    previewPlaceholderDescription: "แบบสํารวจไม่มีองค์ประกอบที่มองเห็นได้",
+    previewPlaceholderDescriptionMobile: "แบบสํารวจไม่มีองค์ประกอบที่มองเห็นได้",
+    translationsPlaceholderTitle: "ไม่มีข้อผูกมัดให้แปล",
+    translationsPlaceholderTitleMobile: "ไม่มีข้อผูกมัดให้แปล",
+    translationsPlaceholderDescription: "เพิ่มองค์ประกอบลงในฟอร์มของคุณหรือเปลี่ยนตัวกรองสตริงในแถบเครื่องมือ",
+    translationsPlaceholderDescriptionMobile: "เพิ่มองค์ประกอบลงในฟอร์มของคุณหรือเปลี่ยนตัวกรองสตริงในแถบเครื่องมือ",
     pagePlaceHolderMobile: "คลิกปุ่ม \"เพิ่มคำถาม\" ด้านล่างเพื่อเพิ่มองค์ประกอบใหม่ลงในหน้า",
     panelPlaceHolderMobile: "คลิกปุ่ม \"เพิ่มคำถาม\" ด้านล่างเพื่อเพิ่มองค์ประกอบใหม่ลงในแผง",
     imagePlaceHolderMobile: "คลิกปุ่มด้านล่างและเลือกภาพที่จะอัปโหลด",
@@ -194,6 +206,10 @@ export const thStrings = {
     lg: {
       addNewItem: "เพิ่มกฎใหม่",
       empty_tab: "สร้างกฎเพื่อปรับแต่งการไหลของแบบสำรวจ",
+      logicPlaceholderTitle: "ไม่มีกฎตรรกะ",
+      logicPlaceholderTitleMobile: "ไม่มีกฎตรรกะ",
+      logicPlaceholderDescription: "สร้างกฎเพื่อปรับแต่งโฟลว์ของแบบสํารวจ",
+      logicPlaceholderDescriptionMobile: "สร้างกฎเพื่อปรับแต่งโฟลว์ของแบบสํารวจ",
       page_visibilityName: "แสดง/ซ่อนหน้า",
       page_enableName: "เปิดใช้งาน/ปิดใช้งานหน้า",
       page_requireName: "ทำให้หน้าจำเป็น",
@@ -375,7 +391,7 @@ export const thStrings = {
       description: "คำอธิบายหน้า",
       visibleIf: "ทำให้หน้ามองเห็นได้ถ้า",
       requiredIf: "ทำให้หน้าจำเป็นถ้า",
-      maxTimeToFinish: "เวลาจำกัดในการทำให้เสร็จ",
+      timeLimit: "เวลาจำกัดในการทำให้เสร็จ",
       questionsOrder: "ลำดับคำถามในหน้า"
     },
     matrixdropdowncolumn: {
@@ -615,10 +631,11 @@ export const thStrings = {
     questionErrorLocation: "การจัดตำแหน่งข้อความข้อผิดพลาด",
     focusFirstQuestionAutomatic: "โฟกัสคำถามแรกในหน้าใหม่",
     questionsOrder: "ลำดับคำถาม",
-    maxTimeToFinish: "เวลาจำกัดในการทำให้เสร็จ",
-    maxTimeToFinishPage: "เวลาจำกัดในการทำหน้าให้เสร็จ",
-    showTimerPanel: "การจัดตำแหน่งตัวจับเวลา",
-    showTimerPanelMode: "โหมดตัวจับเวลา",
+    timeLimit: "เวลาจำกัดในการทำให้เสร็จ",
+    timeLimitPerPage: "เวลาจำกัดในการทำหน้าให้เสร็จ",
+    showTimer: "ใช้ตัวจับเวลา",
+    timerLocation: "การจัดตำแหน่งตัวจับเวลา",
+    timerInfoMode: "โหมดตัวจับเวลา",
     renderMode: "โหมดแสดงผลแผง",
     allowAddPanel: "เปิดใช้งานการเพิ่มแผง",
     allowRemovePanel: "เปิดใช้งานการลบแผง",
@@ -875,6 +892,7 @@ export const thStrings = {
       fontSize: "ขนาดฟอนต์ของแบบสำรวจ",
       scale: "ปัจจัยขยายแบบสำรวจ",
       cornerRadius: "รัศมีมุม",
+      advancedMode: "โหมดขั้นสูง",
       pageTitle: "ฟอนต์ชื่อเรื่อง",
       pageDescription: "ฟอนต์คำอธิบาย",
       questionTitle: "ฟอนต์ชื่อคำถาม",
@@ -1038,11 +1056,8 @@ export const thStrings = {
     showNavigationButtons: {
       none: "ซ่อน"
     },
-    showTimerPanel: {
-      none: "ซ่อน"
-    },
-    showTimerPanelMode: {
-      all: "ทั้งสอง"
+    timerInfoMode: {
+      combined: "ทั้งสอง"
     },
     addRowLocation: {
       default: "ตามเค้าโครงเมทริกซ์"
@@ -1410,11 +1425,11 @@ export const thStrings = {
     imageFit: "เลือกจาก: \"ไม่มี\" - ภาพคงขนาดเดิม; \"พอดี\" - ภาพถูกปรับขนาดให้พอดีขณะที่รักษาสัดส่วน; \"ครอบคลุม\" - ภาพเติมเต็มกล่องทั้งหมดขณะที่รักษาสัดส่วน; \"เติม\" - ภาพถูกยืดให้เต็มกล่องโดยไม่รักษาสัดส่วน",
     autoGrow: "ตัวเลือก \"สืบทอด\" จะใช้การตั้งค่าระดับแบบสำรวจ (ค่าเริ่มต้นคือ \"ปิดใช้งาน\")",
     allowResize: "ตัวเลือก \"สืบทอด\" จะใช้การตั้งค่าระดับแบบสำรวจ (ค่าเริ่มต้นคือ \"เปิดใช้งาน\")",
-    maxTimeToFinish: "ช่วงเวลาที่กำหนดในวินาทีหลังจากนั้นแบบสำรวจจะเปลี่ยนไปยังหน้าขอบคุณโดยอัตโนมัติ",
-    maxTimeToFinishPage: "ช่วงเวลาที่กำหนดในวินาทีหลังจากนั้นแบบสำรวจจะเปลี่ยนไปยังหน้าถัดไปโดยอัตโนมัติ ซ่อนปุ่มนำทาง \"ก่อนหน้า\"",
+    timeLimit: "ช่วงเวลาที่กำหนดในวินาทีหลังจากนั้นแบบสำรวจจะเปลี่ยนไปยังหน้าขอบคุณโดยอัตโนมัติ",
+    timeLimitPerPage: "ช่วงเวลาที่กำหนดในวินาทีหลังจากนั้นแบบสำรวจจะเปลี่ยนไปยังหน้าถัดไปโดยอัตโนมัติ ซ่อนปุ่มนำทาง \"ก่อนหน้า\"",
     validateVisitedEmptyFields: "เปิดใช้งานตัวเลือกนี้เพื่อทริกเกอร์การตรวจสอบความถูกต้องเมื่อผู้ใช้มุ่งเน้นไปที่ฟิลด์อินพุตที่ว่างเปล่า แล้วปล่อยออกจากฟิลด์โดยไม่ทําการเปลี่ยนแปลงใดๆ",
     page: {
-      maxTimeToFinish: "ช่วงเวลาที่กำหนดในวินาทีหลังจากนั้นแบบสำรวจจะเปลี่ยนไปยังหน้าถัดไปโดยอัตโนมัติ ซ่อนปุ่มนำทาง \"ก่อนหน้า\"",
+      timeLimit: "ช่วงเวลาที่กำหนดในวินาทีหลังจากนั้นแบบสำรวจจะเปลี่ยนไปยังหน้าถัดไปโดยอัตโนมัติ ซ่อนปุ่มนำทาง \"ก่อนหน้า\"",
       visibleIf: "ใช้ไอคอนไม้เท้าวิเศษเพื่อตั้งกฎเงื่อนไขที่กำหนดการมองเห็นของหน้า",
       enableIf: "ใช้ไอคอนไม้เท้าวิเศษเพื่อตั้งกฎเงื่อนไขที่ปิดโหมดอ่านอย่างเดียวสำหรับหน้า",
       requiredIf: "ใช้ไอคอนไม้เท้าวิเศษเพื่อตั้งกฎเงื่อนไขที่ป้องกันการส่งแบบสำรวจถ้าไม่มีคำถามที่ตอบแล้ว",
@@ -1424,7 +1439,7 @@ export const thStrings = {
       questionsOrder: "รักษาลำดับดั้งเดิมของคำถามหรือตั้งค่าให้สุ่ม ตัวเลือก \"สืบทอด\" จะใช้การตั้งค่าระดับแบบสำรวจ (ค่าเริ่มต้นคือ \"ดั้งเดิม\") ผลของการตั้งค่านี้จะแสดงในแท็บพรีวิวเท่านั้น",
       navigationButtonsVisibility: "ตั้งการมองเห็นของปุ่มนำทางในหน้า ตัวเลือก \"สืบทอด\" จะใช้การตั้งค่าระดับแบบสำรวจซึ่งค่าเริ่มต้นคือ \"มองเห็นได้\""
     },
-    showTimerPanel: "ตั้งการมองเห็นและตำแหน่งของตัวจับเวลาบนหน้า",
+    timerLocation: "ตั้งค่าตําแหน่งของตัวจับเวลาบนหน้า",
     panelsState: "เลือกจาก: \"ล็อก\" - ผู้ใช้ไม่สามารถขยายหรือยุบแผง; \"ยุบทั้งหมด\" - แผงทั้งหมดเริ่มในสภาพยุบ; \"ขยายทั้งหมด\" - แผงทั้งหมดเริ่มในสภาพขยาย; \"แผงแรกขยาย\" - เฉพาะแผงแรกเท่านั้นที่ขยายเริ่มต้น ใช้เมื่อ \"โหมดแสดงแผง\" ตั้งเป็น \"รายการ\" และกำหนดคุณสมบัติ \"รูปแบบชื่อแผง\"",
     imageLinkName: "ป้อนชื่อคุณสมบัติร่วมกันในชุดของวัตถุที่มีลิงก์ไฟล์รูปภาพหรือวิดีโอที่คุณต้องการแสดงในรายการตัวเลือก",
     choices: "ค่าด้านซ้ายทำหน้าที่เป็น ID รายการที่ใช้ในกฎเงื่อนไข ค่าด้านขวาจะแสดงให้ผู้ตอบเห็น",
@@ -1506,7 +1521,8 @@ export const thStrings = {
     header: {
       inheritWidthFrom: "ตัวเลือก \"เช่นเดียวกับคอนเทนเนอร์\" ปรับความกว้างของพื้นที่เนื้อหาหัวเรื่องให้เหมาะสมกับองค์ประกอบ HTML ที่แบบสำรวจอยู่ในนั้น",
       textAreaWidth: "ความกว้างของพื้นที่หัวเรื่องที่มีชื่อแบบสำรวจและคำอธิบาย วัดเป็นพิกเซล",
-      overlapEnabled: "ทำให้ส่วนล่างของหัวเรื่องซ้อนทับกับส่วนบนของแบบสำรวจ"
+      overlapEnabled: "ทำให้ส่วนล่างของหัวเรื่องซ้อนทับกับส่วนบนของแบบสำรวจ",
+      mobileHeight: "เมื่อตั้งค่าเป็น 0 ความสูงจะถูกคํานวณโดยอัตโนมัติเพื่อรองรับเนื้อหาของส่วนหัว"
     },
     panellayoutcolumn: {
       effectiveWidth: "รับค่าของ %",
@@ -1594,6 +1610,7 @@ export const thStrings = {
     imageFit: "ความพอดีของภาพและขนาดย่อ",
     altText: "ข้อความสำรอง",
     height: "ความสูง",
+    mobileHeight: "ความสูงบนสมาร์ทโฟน",
     penColor: "สีปากกา",
     backgroundColor: "สีพื้นหลัง",
     templateElements: "องค์ประกอบเทมเพลต",
@@ -1715,3 +1732,25 @@ editorLocalization.locales["th"] = thStrings;
 // ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "คลิกไอคอนหมวดหมู่ใดก็ได้เพื่อสํารวจการตั้งค่าแบบสํารวจ การตั้งค่าเพิ่มเติมจะพร้อมใช้งานเมื่อคุณเพิ่มองค์ประกอบแบบสํารวจลงในพื้นผิวการออกแบบ"
 // pe.caseInsensitive: "Case insensitive" => "ไม่คํานึงถึงตัวพิมพ์เล็กและตัวพิมพ์ใหญ่"
 // pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "เลือกว่าตัวพิมพ์ใหญ่และตัวพิมพ์เล็กในนิพจน์ทั่วไปต้องถือว่าเทียบเท่าหรือไม่"
+
+// ed.surveyPlaceholderTitle: "Your form is empty" => "แบบฟอร์มของคุณว่างเปล่า"
+// ed.surveyPlaceholderTitleMobile: "Your form is empty" => "แบบฟอร์มของคุณว่างเปล่า"
+// ed.surveyPlaceholderDescription: "Drag an element from the toolbox or click the button below." => "ลากองค์ประกอบจากกล่องเครื่องมือหรือคลิกปุ่มด้านล่าง"
+// ed.surveyPlaceholderDescriptionMobile: "Drag an element from the toolbox or click the button below." => "ลากองค์ประกอบจากกล่องเครื่องมือหรือคลิกปุ่มด้านล่าง"
+// ed.previewPlaceholderTitle: "No preview" => "ไม่มีการแสดงตัวอย่าง"
+// ed.previewPlaceholderTitleMobile: "No preview" => "ไม่มีการแสดงตัวอย่าง"
+// ed.previewPlaceholderDescription: "The survey doesn't contain any visible elements." => "แบบสํารวจไม่มีองค์ประกอบที่มองเห็นได้"
+// ed.previewPlaceholderDescriptionMobile: "The survey doesn't contain any visible elements." => "แบบสํารวจไม่มีองค์ประกอบที่มองเห็นได้"
+// ed.translationsPlaceholderTitle: "No strings to translate" => "ไม่มีข้อผูกมัดให้แปล"
+// ed.translationsPlaceholderTitleMobile: "No strings to translate" => "ไม่มีข้อผูกมัดให้แปล"
+// ed.translationsPlaceholderDescription: "Add elements to your form or change the strings filter in the toolbar." => "เพิ่มองค์ประกอบลงในฟอร์มของคุณหรือเปลี่ยนตัวกรองสตริงในแถบเครื่องมือ"
+// ed.translationsPlaceholderDescriptionMobile: "Add elements to your form or change the strings filter in the toolbar." => "เพิ่มองค์ประกอบลงในฟอร์มของคุณหรือเปลี่ยนตัวกรองสตริงในแถบเครื่องมือ"
+// lg.logicPlaceholderTitle: "No logical rules" => "ไม่มีกฎตรรกะ"
+// lg.logicPlaceholderTitleMobile: "No logical rules" => "ไม่มีกฎตรรกะ"
+// lg.logicPlaceholderDescription: "Create a rule to customize the flow of the survey." => "สร้างกฎเพื่อปรับแต่งโฟลว์ของแบบสํารวจ"
+// lg.logicPlaceholderDescriptionMobile: "Create a rule to customize the flow of the survey." => "สร้างกฎเพื่อปรับแต่งโฟลว์ของแบบสํารวจ"
+// pe.showTimer: "Use a timer" => "ใช้ตัวจับเวลา"
+// theme.advancedMode: "Advanced mode" => "โหมดขั้นสูง"
+// pehelp.timerLocation: "Sets the location of a timer on a page." => "ตั้งค่าตําแหน่งของตัวจับเวลาบนหน้า"
+// header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "เมื่อตั้งค่าเป็น 0 ความสูงจะถูกคํานวณโดยอัตโนมัติเพื่อรองรับเนื้อหาของส่วนหัว"
+// p.mobileHeight: "Height on smartphones" => "ความสูงบนสมาร์ทโฟน"

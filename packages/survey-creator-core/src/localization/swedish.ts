@@ -182,6 +182,18 @@ export let svStrings = {
     pagePlaceHolder: "Sidan är tom. Dra ett element från verktygslådan eller klicka på knappen nedan.",
     imagePlaceHolder: "Dra och släpp en bild här eller klicka på knappen nedan och välj en bild att ladda upp",
     surveyPlaceHolderMobile: "Klicka på knappen \"Lägg till fråga\" nedan för att börja skapa ditt formulär.",
+    surveyPlaceholderTitle: "Formuläret är tomt",
+    surveyPlaceholderTitleMobile: "Formuläret är tomt",
+    surveyPlaceholderDescription: "Dra ett element från verktygslådan eller klicka på knappen nedan.",
+    surveyPlaceholderDescriptionMobile: "Dra ett element från verktygslådan eller klicka på knappen nedan.",
+    previewPlaceholderTitle: "Ingen förhandsgranskning",
+    previewPlaceholderTitleMobile: "Ingen förhandsgranskning",
+    previewPlaceholderDescription: "Undersökningen innehåller inga synliga element.",
+    previewPlaceholderDescriptionMobile: "Undersökningen innehåller inga synliga element.",
+    translationsPlaceholderTitle: "Inga strängar att översätta",
+    translationsPlaceholderTitleMobile: "Inga strängar att översätta",
+    translationsPlaceholderDescription: "Lägg till element i formuläret eller ändra strängfiltret i verktygsfältet.",
+    translationsPlaceholderDescriptionMobile: "Lägg till element i formuläret eller ändra strängfiltret i verktygsfältet.",
     pagePlaceHolderMobile: "Klicka på knappen \"Lägg till fråga\" nedan för att lägga till ett nytt element på sidan.",
     panelPlaceHolderMobile: "Klicka på knappen \"Lägg till fråga\" nedan för att lägga till ett nytt element i panelen.",
     imagePlaceHolderMobile: "Klicka på knappen nedan och välj en bild att ladda upp",
@@ -194,6 +206,10 @@ export let svStrings = {
     lg: {
       addNewItem: "Lägg till ny regel",
       empty_tab: "Skapa en regel för att anpassa undersökningens flöde.",
+      logicPlaceholderTitle: "Inga logiska regler",
+      logicPlaceholderTitleMobile: "Inga logiska regler",
+      logicPlaceholderDescription: "Skapa en regel för att anpassa flödet i undersökningen.",
+      logicPlaceholderDescriptionMobile: "Skapa en regel för att anpassa flödet i undersökningen.",
       page_visibilityName: "Visa (dölj) sida",
       page_enableName: "Aktivera (inaktivera) sida",
       page_requireName: "Gör sidan obligatorisk",
@@ -375,7 +391,7 @@ export let svStrings = {
       description: "Beskrivning av sidan",
       visibleIf: "Gör sidan synlig om",
       requiredIf: "Gör sidan obligatorisk om",
-      maxTimeToFinish: "Tidsgräns för att avsluta sidan (i sekunder)",
+      timeLimit: "Tidsgräns för att avsluta sidan (i sekunder)",
       questionsOrder: "Frågeordning på sidan"
     },
     matrixdropdowncolumn: {
@@ -615,10 +631,11 @@ export let svStrings = {
     questionErrorLocation: "Fråga fel placerad",
     focusFirstQuestionAutomatic: "Fokusera på första frågan vid ändring av sidan",
     questionsOrder: "Element ordning på sidan",
-    maxTimeToFinish: "Max tid för att slutföra enkäten",
-    maxTimeToFinishPage: "Max tid för att göra färdigt en sida i enkäten",
-    showTimerPanel: "Visa tidtagning",
-    showTimerPanelMode: "Visa tidtagning läge",
+    timeLimit: "Max tid för att slutföra enkäten",
+    timeLimitPerPage: "Max tid för att göra färdigt en sida i enkäten",
+    showTimer: "Använd en timer",
+    timerLocation: "Visa tidtagning",
+    timerInfoMode: "Visa tidtagning läge",
     renderMode: "Rendering läge",
     allowAddPanel: "Tillåt att lägga till panel",
     allowRemovePanel: "Tillåt att ta bort panel",
@@ -875,6 +892,7 @@ export let svStrings = {
       fontSize: "Teckenstorlek",
       scale: "Skala",
       cornerRadius: "Hörn radie",
+      advancedMode: "Avancerat läge",
       pageTitle: "Titel typsnitt",
       pageDescription: "Beskrivning teckensnitt",
       questionTitle: "Titel typsnitt",
@@ -1038,11 +1056,8 @@ export let svStrings = {
     showNavigationButtons: {
       none: "Dold"
     },
-    showTimerPanel: {
-      none: "Dold"
-    },
-    showTimerPanelMode: {
-      all: "Båda"
+    timerInfoMode: {
+      combined: "Båda"
     },
     addRowLocation: {
       default: "Beror på matrislayout"
@@ -1410,11 +1425,11 @@ export let svStrings = {
     imageFit: "Välj mellan: \"Ingen\" - bilden behåller sin ursprungliga storlek; \"Innehåll\" - bildens storlek ändras så att den passar samtidigt som bildförhållandet bibehålls. \"Cover\" - bilden fyller hela rutan samtidigt som bildförhållandet bibehålls; \"Fyll\" - bilden sträcks ut för att fylla rutan utan att behålla bildförhållandet.",
     autoGrow: "Ökar gradvis höjden på inmatningsfältet när data matas in. Åsidosätter inställningen \"Inmatningsfältets höjd (i rader)\".",
     allowResize: "Storlekshandtaget (eller greppet) visas i hörnet och kan dras för att ändra storleken på inmatningsfältet.",
-    maxTimeToFinish: "Ett tidsintervall i sekunder varefter undersökningen automatiskt går vidare till Tack-sidan.",
-    maxTimeToFinishPage: "Ett tidsintervall i sekunder varefter undersökningen automatiskt går vidare till nästa sida.",
+    timeLimit: "Ett tidsintervall i sekunder varefter undersökningen automatiskt går vidare till Tack-sidan.",
+    timeLimitPerPage: "Ett tidsintervall i sekunder varefter undersökningen automatiskt går vidare till nästa sida.",
     validateVisitedEmptyFields: "Aktivera det här alternativet för att utlösa validering när en användare fokuserar på ett tomt inmatningsfält och sedan lämnar det utan att göra några ändringar.",
     page: {
-      maxTimeToFinish: "Ett tidsintervall i sekunder varefter undersökningen automatiskt går vidare till nästa sida.",
+      timeLimit: "Ett tidsintervall i sekunder varefter undersökningen automatiskt går vidare till nästa sida.",
       visibleIf: "Använd trollstavsikonen för att ställa in en villkorsregel som bestämmer sidans synlighet.",
       enableIf: "Använd trollstavsikonen för att ställa in en villkorsregel som inaktiverar det skrivskyddade läget för sidan.",
       requiredIf: "Använd trollstavsikonen för att ställa in en villkorsregel som förhindrar att undersökningen skickas in om inte minst en kapslad fråga har ett svar.",
@@ -1424,7 +1439,7 @@ export let svStrings = {
       questionsOrder: "Behåller den ursprungliga ordningen på frågorna eller slumpar dem. Alternativet \"Ärv\" tillämpar inställningen på undersökningsnivå (\"Original\" som standard). Effekten av den här inställningen visas bara på fliken Förhandsgranska.",
       navigationButtonsVisibility: "Ställer in synligheten för navigeringsknapparna på sidan. Alternativet \"Ärv\" tillämpar inställningen på undersökningsnivå, som standard är \"Synlig\"."
     },
-    showTimerPanel: "Ställer in synligheten och placeringen av en timer på en sida.",
+    timerLocation: "Ställer in platsen för en timer på en sida.",
     panelsState: "Välj mellan: \"Låst\" - användare kan inte expandera eller komprimera paneler; \"Komprimera alla\" - alla paneler börjar i ett komprimerat tillstånd; \"Expandera alla\" - alla paneler börjar i ett expanderat tillstånd; \"Först expanderad\" - endast den första panelen expanderas initialt.",
     imageLinkName: "Ange ett delat egenskapsnamn i matrisen med objekt som innehåller de bild- eller videofils-URL:er som du vill visa i alternativlistan.",
     choices: "Det vänstra värdet fungerar som ett objekt-ID som används i villkorsregler, det högra värdet visas för respondenterna.",
@@ -1506,7 +1521,8 @@ export let svStrings = {
     header: {
       inheritWidthFrom: "Alternativet \"Samma som behållare\" justerar automatiskt bredden på rubrikens innehållsområde så att det passar in i HTML-elementet som undersökningen placeras i.",
       textAreaWidth: "Bredden på rubrikområdet som innehåller undersökningens titel och beskrivning, mätt i pixlar.",
-      overlapEnabled: "Gör så att den nedre delen av sidhuvudet överlappas med den övre delen av undersökningen."
+      overlapEnabled: "Gör så att den nedre delen av sidhuvudet överlappas med den övre delen av undersökningen.",
+      mobileHeight: "När värdet är 0 beräknas höjden automatiskt för att passa rubrikens innehåll."
     },
     panellayoutcolumn: {
       effectiveWidth: "Accepterar värden %.",
@@ -1594,6 +1610,7 @@ export let svStrings = {
     imageFit: "Bildens anpassning",
     altText: "Alt-text",
     height: "Höjd",
+    mobileHeight: "Höjd på smartphones",
     penColor: "Pennans färg",
     backgroundColor: "Bakgrundsfärg",
     templateElements: "Mallelement",
@@ -1899,7 +1916,7 @@ editorLocalization.locales["sv"] = svStrings;
 // pe.editText: "Edit Answer button text" => "Text för knappen Redigera svar"
 // image.imageHeight: "Image height (in CSS-accepted values)" => "Bildhöjd (i CSS-accepterade värden)"
 // image.imageWidth: "Image width (in CSS-accepted values)" => "Bildbredd (i CSS-godkända värden)"
-// page.maxTimeToFinish: "Time limit to finish the page (in seconds)" => "Tidsgräns för att avsluta sidan (i sekunder)"
+// page.timeLimit: "Time limit to finish the page (in seconds)" => "Tidsgräns för att avsluta sidan (i sekunder)"
 // question.page: "Parent page" => "Överordnad sida"
 // pe.noEntriesText: "Empty entries text" => "Tomma poster text"
 // pe.html: "HTML markup" => "HTML-kod"
@@ -2719,9 +2736,9 @@ editorLocalization.locales["sv"] = svStrings;
 // pehelp.imageFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Välj mellan: \"Ingen\" - bilden behåller sin ursprungliga storlek; \"Innehåll\" - bildens storlek ändras så att den passar samtidigt som bildförhållandet bibehålls. \"Cover\" - bilden fyller hela rutan samtidigt som bildförhållandet bibehålls; \"Fyll\" - bilden sträcks ut för att fylla rutan utan att behålla bildförhållandet."
 // pehelp.autoGrow: "Gradually increases the height of the input field as data is being entered. Overrides the \"Input field height (in lines)\" setting." => "Ökar gradvis höjden på inmatningsfältet när data matas in. Åsidosätter inställningen \"Inmatningsfältets höjd (i rader)\"."
 // pehelp.allowResize: "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field." => "Storlekshandtaget (eller greppet) visas i hörnet och kan dras för att ändra storleken på inmatningsfältet."
-// pehelp.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "Ett tidsintervall i sekunder varefter undersökningen automatiskt går vidare till Tack-sidan."
-// pehelp.maxTimeToFinishPage: "A time interval in seconds after which the survey auto-advances to the next page." => "Ett tidsintervall i sekunder varefter undersökningen automatiskt går vidare till nästa sida."
-// page.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the next page." => "Ett tidsintervall i sekunder varefter undersökningen automatiskt går vidare till nästa sida."
+// pehelp.timeLimit: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "Ett tidsintervall i sekunder varefter undersökningen automatiskt går vidare till Tack-sidan."
+// pehelp.timeLimitPerPage: "A time interval in seconds after which the survey auto-advances to the next page." => "Ett tidsintervall i sekunder varefter undersökningen automatiskt går vidare till nästa sida."
+// page.timeLimit: "A time interval in seconds after which the survey auto-advances to the next page." => "Ett tidsintervall i sekunder varefter undersökningen automatiskt går vidare till nästa sida."
 // page.visibleIf: "Use the magic wand icon to set a conditional rule that determines page visibility." => "Använd trollstavsikonen för att ställa in en villkorsregel som bestämmer sidans synlighet."
 // page.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the page." => "Använd trollstavsikonen för att ställa in en villkorsregel som inaktiverar det skrivskyddade läget för sidan."
 // page.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "Använd trollstavsikonen för att ställa in en villkorsregel som förhindrar att undersökningen skickas in om inte minst en kapslad fråga har ett svar."
@@ -2729,7 +2746,6 @@ editorLocalization.locales["sv"] = svStrings;
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Anger platsen för ett felmeddelande i förhållande till frågan med ogiltig inmatning. Välj mellan: \"Överst\" - en feltext placeras högst upp i frågerutan; \"Nederst\" - en feltext placeras längst ner i frågerutan. Alternativet \"Ärv\" tillämpar inställningen på undersökningsnivå (\"Topp\" som standard)."
 // page.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Behåller den ursprungliga ordningen på frågorna eller slumpar dem. Alternativet \"Ärv\" tillämpar inställningen på undersökningsnivå (\"Original\" som standard). Effekten av den här inställningen visas bara på fliken Förhandsgranska."
 // page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Ställer in synligheten för navigeringsknapparna på sidan. Alternativet \"Ärv\" tillämpar inställningen på undersökningsnivå, som standard är \"Synlig\"."
-// pehelp.showTimerPanel: "Sets the visibility and location of a timer on a page." => "Ställer in synligheten och placeringen av en timer på en sida."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "Välj mellan: \"Låst\" - användare kan inte expandera eller komprimera paneler; \"Komprimera alla\" - alla paneler börjar i ett komprimerat tillstånd; \"Expandera alla\" - alla paneler börjar i ett expanderat tillstånd; \"Först expanderad\" - endast den första panelen expanderas initialt."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "Ange ett delat egenskapsnamn i matrisen med objekt som innehåller de bild- eller videofils-URL:er som du vill visa i alternativlistan."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "Det vänstra värdet fungerar som ett objekt-ID som används i villkorsregler, det högra värdet visas för respondenterna."
@@ -2959,3 +2975,25 @@ editorLocalization.locales["sv"] = svStrings;
 // ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Klicka på en kategoriikon för att utforska undersökningsinställningarna. Ytterligare inställningar blir tillgängliga när du lägger till ett undersökningselement på designytan."
 // pe.caseInsensitive: "Case insensitive" => "Skiftlägesokänsligt"
 // pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Välj om versaler och gemener i det reguljära uttrycket ska behandlas som likvärdiga."
+
+// ed.surveyPlaceholderTitle: "Your form is empty" => "Formuläret är tomt"
+// ed.surveyPlaceholderTitleMobile: "Your form is empty" => "Formuläret är tomt"
+// ed.surveyPlaceholderDescription: "Drag an element from the toolbox or click the button below." => "Dra ett element från verktygslådan eller klicka på knappen nedan."
+// ed.surveyPlaceholderDescriptionMobile: "Drag an element from the toolbox or click the button below." => "Dra ett element från verktygslådan eller klicka på knappen nedan."
+// ed.previewPlaceholderTitle: "No preview" => "Ingen förhandsgranskning"
+// ed.previewPlaceholderTitleMobile: "No preview" => "Ingen förhandsgranskning"
+// ed.previewPlaceholderDescription: "The survey doesn't contain any visible elements." => "Undersökningen innehåller inga synliga element."
+// ed.previewPlaceholderDescriptionMobile: "The survey doesn't contain any visible elements." => "Undersökningen innehåller inga synliga element."
+// ed.translationsPlaceholderTitle: "No strings to translate" => "Inga strängar att översätta"
+// ed.translationsPlaceholderTitleMobile: "No strings to translate" => "Inga strängar att översätta"
+// ed.translationsPlaceholderDescription: "Add elements to your form or change the strings filter in the toolbar." => "Lägg till element i formuläret eller ändra strängfiltret i verktygsfältet."
+// ed.translationsPlaceholderDescriptionMobile: "Add elements to your form or change the strings filter in the toolbar." => "Lägg till element i formuläret eller ändra strängfiltret i verktygsfältet."
+// lg.logicPlaceholderTitle: "No logical rules" => "Inga logiska regler"
+// lg.logicPlaceholderTitleMobile: "No logical rules" => "Inga logiska regler"
+// lg.logicPlaceholderDescription: "Create a rule to customize the flow of the survey." => "Skapa en regel för att anpassa flödet i undersökningen."
+// lg.logicPlaceholderDescriptionMobile: "Create a rule to customize the flow of the survey." => "Skapa en regel för att anpassa flödet i undersökningen."
+// pe.showTimer: "Use a timer" => "Använd en timer"
+// theme.advancedMode: "Advanced mode" => "Avancerat läge"
+// pehelp.timerLocation: "Sets the location of a timer on a page." => "Ställer in platsen för en timer på en sida."
+// header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "När värdet är 0 beräknas höjden automatiskt för att passa rubrikens innehåll."
+// p.mobileHeight: "Height on smartphones" => "Höjd på smartphones"
