@@ -226,9 +226,13 @@ test("Toolbox with subtypes (ltr)", async (t) => {
     const subtypesPopup = Selector(".sv-popup.sv-popup-inner.svc-toolbox-subtypes .sv-popup__container").filterVisible();
 
     await setJSON({ pages: [{ name: "page1" }] });
+    const itemSelector = getToolboxItemByText("Rating Scale").parent(".svc-toolbox__tool");
     await t.resizeWindow(2560, 1440)
       .wait(300)
-      .hover(getToolboxItemByText("Rating Scale"));
+      .hover(itemSelector);
+    await takeElementScreenshot("toolbox-left-rating-subtypes-item.png", itemSelector, t, comparer);
+    await t.hover(itemSelector.find(".svc-toolbox__item-submenu-button"));
+
     await takeElementScreenshot("toolbox-left-rating-subtypes.png", toolboxElement, t, comparer);
 
     await t.hover(getToolboxItemByText("Stars"));
@@ -257,11 +261,14 @@ test("Toolbox with subtypes (rtl)", async (t) => {
 
     const toolboxElement = Selector(".svc-toolbox");
     const subtypesPopup = Selector(".sv-popup.sv-popup-inner.svc-toolbox-subtypes .sv-popup__container").filterVisible();
+    const itemSelector = getToolboxItemByText("Rating Scale").parent(".svc-toolbox__tool");
 
     await setJSON({ pages: [{ name: "page1" }] });
     await t.resizeWindow(2560, 1440)
       .wait(300)
-      .hover(getToolboxItemByText("Rating Scale"));
+      .hover(itemSelector);
+    await takeElementScreenshot("toolbox-right-rating-subtypes-item.png", itemSelector, t, comparer);
+    await t.hover(itemSelector.find(".svc-toolbox__item-submenu-button"));
     await takeElementScreenshot("toolbox-right-rating-subtypes.png", toolboxElement, t, comparer);
 
     await t.hover(getToolboxItemByText("Stars"));

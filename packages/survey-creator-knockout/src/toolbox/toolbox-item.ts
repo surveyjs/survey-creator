@@ -7,7 +7,14 @@ const template = require("./toolbox-item.html");
 export class KnockoutToolboxItemViewModel {
   public title: ko.Observable<string> = ko.observable("");
   public iconName: ko.Observable<string> = ko.observable("");
-
+  public onMouseOver(data, event) {
+    this.model.onMouseOver(this.item, event);
+    return true;
+  }
+  public onMouseLeave(data, event) {
+    this.model.onMouseLeave(this.item, event);
+    return true;
+  }
   constructor(
     protected model: ToolboxToolViewModel,
     protected item: IQuestionToolboxItem,

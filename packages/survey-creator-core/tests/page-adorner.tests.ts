@@ -1,5 +1,6 @@
 import { DragTypeOverMeEnum } from "survey-core";
 import { PageAdorner } from "../src/components/page";
+import { TabDesignerViewModel } from "../src/components/tabs/designer";
 import { settings } from "../src/creator-settings";
 import { CreatorTester } from "./creator-tester";
 
@@ -102,4 +103,24 @@ test("Check css when dragging page over top/bottom", () => {
   expect(pageAdorner.css).toBe("svc-question__content--drag-over-top");
   pageAdorner.dragTypeOverMe = DragTypeOverMeEnum.Bottom;
   expect(pageAdorner.css).toBe("svc-question__content--drag-over-bottom");
+});
+test("Check ghost page adorner actions visibility", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      { name: "page1" },
+    ]
+  };
+  creator.sidebar.flyoutMode = true;
+  const pageAdorner = new PageAdorner(
+    creator,
+    creator.survey.pages[0]
+  );
+  const newPage = (creator.getPlugin("designer").model as TabDesignerViewModel).newPage;
+  const pageAdornerGhost = new PageAdorner(
+    creator,
+    newPage
+  );
+  expect(pageAdorner.getActionById("settings").visible).toBeTruthy();
+  expect(pageAdornerGhost.getActionById("settings").visible).toBeFalsy();
 });

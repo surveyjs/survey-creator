@@ -369,7 +369,7 @@ export var tgStrings = {
       // description: "Page description",
       // visibleIf: "Make the page visible if",
       // requiredIf: "Make the page required if",
-      // maxTimeToFinish: "Time limit to complete the page",
+      // timeLimit: "Time limit to complete the page",
       // questionsOrder: "Question order on the page"
     },
     matrixdropdowncolumn: {
@@ -606,10 +606,10 @@ export var tgStrings = {
     questionErrorLocation: "Ҷойгиркунии хатогии саволнома",
     focusFirstQuestionAutomatic: "Гузариш ба саволи якум дар ивазкунии саҳифа",
     questionsOrder: "Мураттабсозии элементҳо дар саҳифа",
-    maxTimeToFinish: "Вақти максималӣ дар сонияҳо, барои пур кардани саволнома",
-    maxTimeToFinishPage: "Вақти максималӣ дар сонияҳо, барои пур кардани саҳифаи саволнома",
-    showTimerPanel: "Нишон додани бастаи вақтсанҷ",
-    showTimerPanelMode: "Нишон додани ҳолати бастаи таймер",
+    timeLimit: "Вақти максималӣ дар сонияҳо, барои пур кардани саволнома",
+    timeLimitPerPage: "Вақти максималӣ дар сонияҳо, барои пур кардани саҳифаи саволнома",
+    timerLocation: "Нишон додани бастаи вақтсанҷ",
+    timerInfoMode: "Нишон додани ҳолати бастаи таймер",
     // renderMode: "Panel display mode",
     allowAddPanel: "Иҷозат додан ба илова кардани бастаҳо",
     allowRemovePanel: "Иҷозат додан ба нест кардани бастаҳо",
@@ -1022,10 +1022,7 @@ export var tgStrings = {
     showNavigationButtons: {
       // none: "Hidden"
     },
-    showTimerPanel: {
-      // none: "Hidden"
-    },
-    showTimerPanelMode: {
+    timerInfoMode: {
       // all: "Both"
     },
     addRowLocation: {
@@ -1378,10 +1375,10 @@ export var tgStrings = {
     // imageFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio.",
     // autoGrow: "Gradually increases the height of the input field as data is being entered. Overrides the \"Input field height (in lines)\" setting.",
     // allowResize: "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field.",
-    // maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the \"Thank You\" page.",
-    // maxTimeToFinishPage: "A time interval in seconds after which the survey auto-advances to the next page. Hides the \"Previous\" navigation button.",
+    // timeLimit: "A time interval in seconds after which the survey auto-advances to the \"Thank You\" page.",
+    // timeLimitPerPage: "A time interval in seconds after which the survey auto-advances to the next page. Hides the \"Previous\" navigation button.",
     page: {
-      // maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the next page. Hides the \"Previous\" navigation button.",
+      // timeLimit: "A time interval in seconds after which the survey auto-advances to the next page. Hides the \"Previous\" navigation button.",
       // visibleIf: "Use the magic wand icon to set a conditional rule that determines page visibility.",
       // enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the page.",
       // requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer.",
@@ -1391,7 +1388,6 @@ export var tgStrings = {
       // questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab.",
       // navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
     },
-    // showTimerPanel: "Sets the visibility and location of a timer on a page.",
     // panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded. Applies if \"Panel display mode\" is set to \"List\" and the \"Panel title pattern\" property is specified.",
     // imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list.",
     // choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents.",

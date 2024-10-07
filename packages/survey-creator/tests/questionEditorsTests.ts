@@ -1231,17 +1231,18 @@ QUnit.test(
   function (assert) {
     var survey = new Survey.SurveyModel({});
     var editor = new SurveyQuestionEditor(survey);
-    var propertyEditor = editor.getPropertyEditorByName("maxTimeToFinish");
+    const propName = "timeLimit";
+    var propertyEditor = editor.getPropertyEditorByName(propName);
     propertyEditor.editor.koValue(5);
     propertyEditor.editor.apply();
     assert.equal(
-      editor.editableObj["maxTimeToFinish"],
+      editor.editableObj[propName],
       5,
       "Editable obj is set"
     );
-    assert.equal(editor.obj["maxTimeToFinish"], 0, "obj is not set");
+    assert.equal(editor.obj[propName], 0, "obj is not set");
     editor.reset();
-    assert.equal(survey["maxTimeToFinish"], 0, "survey is not set");
+    assert.equal(survey[propName], 0, "survey is not set");
   }
 );
 

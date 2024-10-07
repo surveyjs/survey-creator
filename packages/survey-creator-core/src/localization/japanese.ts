@@ -182,6 +182,18 @@ export var jaStrings = {
     pagePlaceHolder: "ページは空です。ツールボックスから要素をドラッグするか、下のボタンをクリックします。",
     imagePlaceHolder: "ここに画像をドラッグ&ドロップするか、下のボタンをクリックしてアップロードする画像を選択してください",
     surveyPlaceHolderMobile: "下の「質問を追加」ボタンをクリックして、フォームの作成を開始してください。",
+    surveyPlaceholderTitle: "フォームが空です",
+    surveyPlaceholderTitleMobile: "フォームが空です",
+    surveyPlaceholderDescription: "ツールボックスから要素をドラッグするか、下のボタンをクリックします。",
+    surveyPlaceholderDescriptionMobile: "ツールボックスから要素をドラッグするか、下のボタンをクリックします。",
+    previewPlaceholderTitle: "プレビューなし",
+    previewPlaceholderTitleMobile: "プレビューなし",
+    previewPlaceholderDescription: "調査には、表示されている要素は含まれていません。",
+    previewPlaceholderDescriptionMobile: "調査には、表示されている要素は含まれていません。",
+    translationsPlaceholderTitle: "翻訳する文字列はありません",
+    translationsPlaceholderTitleMobile: "翻訳する文字列はありません",
+    translationsPlaceholderDescription: "フォームに要素を追加するか、ツールバーの文字列フィルターを変更します。",
+    translationsPlaceholderDescriptionMobile: "フォームに要素を追加するか、ツールバーの文字列フィルターを変更します。",
     pagePlaceHolderMobile: "下の「質問を追加」ボタンをクリックして、ページに新しい要素を追加します。",
     panelPlaceHolderMobile: "下の「質問を追加」ボタンをクリックして、パネルに新しい要素を追加します。",
     imagePlaceHolderMobile: "下のボタンをクリックして、アップロードする画像を選択してください",
@@ -194,6 +206,10 @@ export var jaStrings = {
     lg: {
       addNewItem: "新しいルールを追加",
       empty_tab: "調査のフローをカスタマイズするルールを作成します。",
+      logicPlaceholderTitle: "論理的なルールはありません",
+      logicPlaceholderTitleMobile: "論理的なルールはありません",
+      logicPlaceholderDescription: "調査のフローをカスタマイズするルールを作成します。",
+      logicPlaceholderDescriptionMobile: "調査のフローをカスタマイズするルールを作成します。",
       page_visibilityName: "ページの可視性",
       page_enableName: "有効 (無効) ページ",
       page_requireName: "ページを必須にする",
@@ -375,7 +391,7 @@ export var jaStrings = {
       description: "ページの説明",
       visibleIf: "次の場合にページを表示します",
       requiredIf: "次の場合は、ページを必須にします",
-      maxTimeToFinish: "ページを終了するための制限時間 (秒単位)",
+      timeLimit: "ページを終了するための制限時間 (秒単位)",
       questionsOrder: "ページ上の質問の順序"
     },
     matrixdropdowncolumn: {
@@ -615,10 +631,11 @@ export var jaStrings = {
     questionErrorLocation: "質問エラーの場所",
     focusFirstQuestionAutomatic: "ページを変える際に最初の質問に焦点を合わせる",
     questionsOrder: "ページ上の要素の順序",
-    maxTimeToFinish: "アンケート終了までの最長時間",
-    maxTimeToFinishPage: "アンケートの1ページを終了するまでの最長時間",
-    showTimerPanel: "タイマーパネルを表示する",
-    showTimerPanelMode: "タイマーパネルモードを表示",
+    timeLimit: "アンケート終了までの最長時間",
+    timeLimitPerPage: "アンケートの1ページを終了するまでの最長時間",
+    showTimer: "タイマーを使用する",
+    timerLocation: "タイマーパネルを表示する",
+    timerInfoMode: "タイマーパネルモードを表示",
     renderMode: "レンダーモード",
     allowAddPanel: "パネルの追加を許可",
     allowRemovePanel: "パネルの削除を許可",
@@ -875,6 +892,7 @@ export var jaStrings = {
       fontSize: "フォントサイズ",
       scale: "規模",
       cornerRadius: "コーナR(Corner Radius)",
+      advancedMode: "詳細モード",
       pageTitle: "タイトルのフォント",
       pageDescription: "説明フォント",
       questionTitle: "タイトルのフォント",
@@ -1038,11 +1056,8 @@ export var jaStrings = {
     showNavigationButtons: {
       none: "隠れた"
     },
-    showTimerPanel: {
-      none: "隠れた"
-    },
-    showTimerPanelMode: {
-      all: "両方とも"
+    timerInfoMode: {
+      combined: "両方とも"
     },
     addRowLocation: {
       default: "マトリックスレイアウトに依存"
@@ -1410,11 +1425,11 @@ export var jaStrings = {
     imageFit: "次から選択: 「なし」 - 画像は元のサイズを維持します。\"Contain\" - 画像はアスペクト比を維持しながらサイズ変更されます。「表紙」-画像は縦横比を維持しながらボックス全体を埋めます。\"Fill\" - 画像は、アスペクト比を維持せずにボックスを埋めるように引き伸ばされます。",
     autoGrow: "データの入力中に入力フィールドの高さを徐々に増やします。「入力フィールドの高さ(行単位)」の設定を上書きします。",
     allowResize: "サイズ変更ハンドル(またはグリップ)が隅に表示され、ドラッグして入力フィールドのサイズを変更できます。",
-    maxTimeToFinish: "アンケートが [ありがとうございます] ページに自動移動するまでの時間間隔 (秒単位)。",
-    maxTimeToFinishPage: "アンケートが次のページに自動進むまでの時間間隔 (秒単位)。",
+    timeLimit: "アンケートが [ありがとうございます] ページに自動移動するまでの時間間隔 (秒単位)。",
+    timeLimitPerPage: "アンケートが次のページに自動進むまでの時間間隔 (秒単位)。",
     validateVisitedEmptyFields: "このオプションを有効にすると、ユーザーが空の入力フィールドに注目し、変更を加えずにそのフィールドを離れたときに検証がトリガーされます。",
     page: {
-      maxTimeToFinish: "アンケートが次のページに自動進むまでの時間間隔 (秒単位)。",
+      timeLimit: "アンケートが次のページに自動進むまでの時間間隔 (秒単位)。",
       visibleIf: "魔法の杖アイコンを使用して、ページの表示を決定する条件付きルールを設定します。",
       enableIf: "魔法の杖アイコンを使用して、ページの読み取り専用モードを無効にする条件付きルールを設定します。",
       requiredIf: "魔法の杖アイコンを使用して、ネストされた質問に回答が少なくとも1つない限り、調査の送信を禁止する条件付きルールを設定します。",
@@ -1424,7 +1439,7 @@ export var jaStrings = {
       questionsOrder: "質問の元の順序を維持するか、ランダム化します。「継承」オプションは、アンケートレベルの設定(デフォルトでは「オリジナル」)を適用します。この設定の効果は、「プレビュー」タブにのみ表示されます。",
       navigationButtonsVisibility: "ページ上のナビゲーションボタンの表示を設定します。「継承」オプションは、アンケートレベルの設定を適用し、デフォルトは「表示」です。"
     },
-    showTimerPanel: "ページ上のタイマーの表示と位置を設定します。",
+    timerLocation: "ページ上のタイマーの位置を設定します。",
     panelsState: "次から選択します: 「ロック」 - ユーザーはパネルを展開または折りたたむことはできません。\"Collapse all\" - すべてのパネルが折りたたまれた状態で開始されます。\"Expand all\" - すべてのパネルが展開された状態で開始されます。\"First expanded\" - 最初のパネルのみが最初に展開されます。",
     imageLinkName: "選択リストに表示する画像またはビデオ ファイルの URL を含むオブジェクトの配列内に共有プロパティ名を入力します。",
     choices: "左の値は条件付きルールで使用される項目IDとして機能し、右の値は回答者に表示されます。",
@@ -1506,7 +1521,8 @@ export var jaStrings = {
     header: {
       inheritWidthFrom: "「コンテナと同じ」オプションは、アンケートが配置されるHTML要素に収まるようにヘッダーコンテンツ領域の幅を自動調整します。",
       textAreaWidth: "調査のタイトルと説明を含むヘッダー領域の幅 (ピクセル単位)。",
-      overlapEnabled: "ヘッダーの下部を調査の上部にオーバーレイします。"
+      overlapEnabled: "ヘッダーの下部を調査の上部にオーバーレイします。",
+      mobileHeight: "0 に設定すると、ヘッダーのコンテンツに合わせて高さが自動的に計算されます。"
     },
     panellayoutcolumn: {
       effectiveWidth: "値 % を受け入れます。",
@@ -1594,6 +1610,7 @@ export var jaStrings = {
     imageFit: "画像のフィット",
     altText: "代替テキスト",
     height: "高さ",
+    mobileHeight: "スマートフォンでの高さ",
     penColor: "ペンの色",
     backgroundColor: "背景色",
     templateElements: "テンプレート要素",
@@ -1775,7 +1792,7 @@ editorLocalization.locales["ja"] = jaStrings;
 // pe.portraitOrientation: "Switch to portrait orientation" => "縦向きに切り替える"
 // image.imageHeight: "Image height (in CSS-accepted values)" => "画像の高さ (CSS で受け入れられる値)"
 // image.imageWidth: "Image width (in CSS-accepted values)" => "画像の幅 (CSS で受け入れられる値)"
-// page.maxTimeToFinish: "Time limit to finish the page (in seconds)" => "ページを終了するための制限時間 (秒単位)"
+// page.timeLimit: "Time limit to finish the page (in seconds)" => "ページを終了するための制限時間 (秒単位)"
 // question.page: "Parent page" => "親ページ"
 // pe.noEntriesText: "Empty entries text" => "空のエントリのテキスト"
 // pe.setValue: "Answer" => "答える"
@@ -2541,9 +2558,9 @@ editorLocalization.locales["ja"] = jaStrings;
 // pehelp.imageFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "次から選択: 「なし」 - 画像は元のサイズを維持します。\"Contain\" - 画像はアスペクト比を維持しながらサイズ変更されます。「表紙」-画像は縦横比を維持しながらボックス全体を埋めます。\"Fill\" - 画像は、アスペクト比を維持せずにボックスを埋めるように引き伸ばされます。"
 // pehelp.autoGrow: "Gradually increases the height of the input field as data is being entered. Overrides the \"Input field height (in lines)\" setting." => "データの入力中に入力フィールドの高さを徐々に増やします。「入力フィールドの高さ(行単位)」の設定を上書きします。"
 // pehelp.allowResize: "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field." => "サイズ変更ハンドル(またはグリップ)が隅に表示され、ドラッグして入力フィールドのサイズを変更できます。"
-// pehelp.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "アンケートが [ありがとうございます] ページに自動移動するまでの時間間隔 (秒単位)。"
-// pehelp.maxTimeToFinishPage: "A time interval in seconds after which the survey auto-advances to the next page." => "アンケートが次のページに自動進むまでの時間間隔 (秒単位)。"
-// page.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the next page." => "アンケートが次のページに自動進むまでの時間間隔 (秒単位)。"
+// pehelp.timeLimit: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "アンケートが [ありがとうございます] ページに自動移動するまでの時間間隔 (秒単位)。"
+// pehelp.timeLimitPerPage: "A time interval in seconds after which the survey auto-advances to the next page." => "アンケートが次のページに自動進むまでの時間間隔 (秒単位)。"
+// page.timeLimit: "A time interval in seconds after which the survey auto-advances to the next page." => "アンケートが次のページに自動進むまでの時間間隔 (秒単位)。"
 // page.visibleIf: "Use the magic wand icon to set a conditional rule that determines page visibility." => "魔法の杖アイコンを使用して、ページの表示を決定する条件付きルールを設定します。"
 // page.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the page." => "魔法の杖アイコンを使用して、ページの読み取り専用モードを無効にする条件付きルールを設定します。"
 // page.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "魔法の杖アイコンを使用して、ネストされた質問に回答が少なくとも1つない限り、調査の送信を禁止する条件付きルールを設定します。"
@@ -2551,7 +2568,6 @@ editorLocalization.locales["ja"] = jaStrings;
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "無効な入力を含む質問に関連するエラーメッセージの場所を設定します。次から選択します: \"Top\" - 質問ボックスの上部にエラーテキストが配置されます。\"Bottom\" - 質問ボックスの下部にエラーテキストが配置されます。「継承」オプションは、アンケートレベルの設定(デフォルトでは「トップ」)を適用します。"
 // page.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "質問の元の順序を維持するか、ランダム化します。「継承」オプションは、アンケートレベルの設定(デフォルトでは「オリジナル」)を適用します。この設定の効果は、「プレビュー」タブにのみ表示されます。"
 // page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "ページ上のナビゲーションボタンの表示を設定します。「継承」オプションは、アンケートレベルの設定を適用し、デフォルトは「表示」です。"
-// pehelp.showTimerPanel: "Sets the visibility and location of a timer on a page." => "ページ上のタイマーの表示と位置を設定します。"
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "次から選択します: 「ロック」 - ユーザーはパネルを展開または折りたたむことはできません。\"Collapse all\" - すべてのパネルが折りたたまれた状態で開始されます。\"Expand all\" - すべてのパネルが展開された状態で開始されます。\"First expanded\" - 最初のパネルのみが最初に展開されます。"
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "選択リストに表示する画像またはビデオ ファイルの URL を含むオブジェクトの配列内に共有プロパティ名を入力します。"
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "左の値は条件付きルールで使用される項目IDとして機能し、右の値は回答者に表示されます。"
@@ -2781,3 +2797,25 @@ editorLocalization.locales["ja"] = jaStrings;
 // ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "任意のカテゴリアイコンをクリックして、アンケート設定を探索します。追加の設定は、デザイン画面にアンケート要素を追加すると使用可能になります。"
 // pe.caseInsensitive: "Case insensitive" => "大文字と小文字を区別しない"
 // pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "正規表現の大文字と小文字を同等に扱う必要がある場合に選択します。"
+
+// ed.surveyPlaceholderTitle: "Your form is empty" => "フォームが空です"
+// ed.surveyPlaceholderTitleMobile: "Your form is empty" => "フォームが空です"
+// ed.surveyPlaceholderDescription: "Drag an element from the toolbox or click the button below." => "ツールボックスから要素をドラッグするか、下のボタンをクリックします。"
+// ed.surveyPlaceholderDescriptionMobile: "Drag an element from the toolbox or click the button below." => "ツールボックスから要素をドラッグするか、下のボタンをクリックします。"
+// ed.previewPlaceholderTitle: "No preview" => "プレビューなし"
+// ed.previewPlaceholderTitleMobile: "No preview" => "プレビューなし"
+// ed.previewPlaceholderDescription: "The survey doesn't contain any visible elements." => "調査には、表示されている要素は含まれていません。"
+// ed.previewPlaceholderDescriptionMobile: "The survey doesn't contain any visible elements." => "調査には、表示されている要素は含まれていません。"
+// ed.translationsPlaceholderTitle: "No strings to translate" => "翻訳する文字列はありません"
+// ed.translationsPlaceholderTitleMobile: "No strings to translate" => "翻訳する文字列はありません"
+// ed.translationsPlaceholderDescription: "Add elements to your form or change the strings filter in the toolbar." => "フォームに要素を追加するか、ツールバーの文字列フィルターを変更します。"
+// ed.translationsPlaceholderDescriptionMobile: "Add elements to your form or change the strings filter in the toolbar." => "フォームに要素を追加するか、ツールバーの文字列フィルターを変更します。"
+// lg.logicPlaceholderTitle: "No logical rules" => "論理的なルールはありません"
+// lg.logicPlaceholderTitleMobile: "No logical rules" => "論理的なルールはありません"
+// lg.logicPlaceholderDescription: "Create a rule to customize the flow of the survey." => "調査のフローをカスタマイズするルールを作成します。"
+// lg.logicPlaceholderDescriptionMobile: "Create a rule to customize the flow of the survey." => "調査のフローをカスタマイズするルールを作成します。"
+// pe.showTimer: "Use a timer" => "タイマーを使用する"
+// theme.advancedMode: "Advanced mode" => "詳細モード"
+// pehelp.timerLocation: "Sets the location of a timer on a page." => "ページ上のタイマーの位置を設定します。"
+// header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "0 に設定すると、ヘッダーのコンテンツに合わせて高さが自動的に計算されます。"
+// p.mobileHeight: "Height on smartphones" => "スマートフォンでの高さ"
