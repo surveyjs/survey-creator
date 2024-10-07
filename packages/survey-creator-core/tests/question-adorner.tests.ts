@@ -803,7 +803,7 @@ test("Check question adorner expand/collapse animation options", (): any => {
   const animationOptions = questionAdorner["getExpandCollapseAnimationOptions"]();
 
   settings.animationEnabled = true;
-  questionAdorner.enableOnElementRenderedEvent();
+  questionAdorner.enableOnElementRerenderedEvent();
   expect(animationOptions.isAnimationEnabled()).toBeTruthy();
   questionAdorner.blockAnimations();
   expect(animationOptions.isAnimationEnabled()).toBeFalsy();
