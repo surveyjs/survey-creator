@@ -284,7 +284,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     }
   }
   protected getAllowDragging(options: any): boolean {
-    return this.creator.allowDragPages && super.getAllowDragging(options);;
+    return this.creator.allowDragPages && super.getAllowDragging(options);
   }
   get isDragMe(): boolean {
     return this.surveyElement.isDragMe;
