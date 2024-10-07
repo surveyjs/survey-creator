@@ -1898,7 +1898,7 @@ export class SurveyCreatorModel extends Base
     this.dragDropSurveyElements.onDragClear.add((sender, options) => {
       isDraggedFromToolbox = false;
       this.stopUndoRedoTransaction();
-      if (this.collapsePagesOnDragStart) {
+      if (this.collapsePagesOnDrag) {
         this.designerStateManager?.release();
         this.restorePagesState();
       }
@@ -3907,7 +3907,7 @@ export class SurveyCreatorModel extends Base
       .toString();
   }
   public allowDragPages = false;
-  public collapsePagesOnDragStart = false;
+  public collapsePagesOnDrag = false;
 }
 
 export class CreatorBase extends SurveyCreatorModel { }

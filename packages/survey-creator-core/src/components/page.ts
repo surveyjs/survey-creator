@@ -299,7 +299,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     const element = <any>this.surveyElement;
     const isElementSelected = this.creator.selectedElement === element;
     this.dragDropHelper.startDragSurveyElement(event, element, isElementSelected);
-    if (this.creator.collapsePagesOnDragStart) {
+    if (this.creator.collapsePagesOnDrag) {
       this.creator.designerStateManager?.suspend();
       this.creator.collapseAllPages();
     }
