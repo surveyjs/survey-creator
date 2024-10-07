@@ -182,6 +182,18 @@ export var czStrings = {
     pagePlaceHolder: "Stránka je prázdná. Přetáhněte prvek z palety nástrojů nebo klikněte na tlačítko níže.",
     imagePlaceHolder: "Obrázek můžete vložit jeho přetažením na toto místo nebo kliknutím na tlačítko níže",
     surveyPlaceHolderMobile: "Kliknutím na tlačítko \"Přidat otázku\" níže zahájíte vytváření formuláře.",
+    surveyPlaceholderTitle: "Váš formulář je prázdný",
+    surveyPlaceholderTitleMobile: "Váš formulář je prázdný",
+    surveyPlaceholderDescription: "Přetáhněte prvek z panelu nástrojů nebo klikněte na tlačítko níže.",
+    surveyPlaceholderDescriptionMobile: "Přetáhněte prvek z panelu nástrojů nebo klikněte na tlačítko níže.",
+    previewPlaceholderTitle: "Žádný náhled",
+    previewPlaceholderTitleMobile: "Žádný náhled",
+    previewPlaceholderDescription: "Průzkum neobsahuje žádné viditelné prvky.",
+    previewPlaceholderDescriptionMobile: "Průzkum neobsahuje žádné viditelné prvky.",
+    translationsPlaceholderTitle: "Žádné řetězce k překladu",
+    translationsPlaceholderTitleMobile: "Žádné řetězce k překladu",
+    translationsPlaceholderDescription: "Přidejte do formuláře prvky nebo změňte filtr řetězců na panelu nástrojů.",
+    translationsPlaceholderDescriptionMobile: "Přidejte do formuláře prvky nebo změňte filtr řetězců na panelu nástrojů.",
     pagePlaceHolderMobile: "Kliknutím na tlačítko \"Přidat otázku\" níže přidáte na stránku nový prvek.",
     panelPlaceHolderMobile: "Kliknutím na tlačítko \"Přidat otázku\" níže přidáte do panelu nový prvek.",
     imagePlaceHolderMobile: "Klikněte na tlačítko níže a vyberte obrázek, který chcete nahrát",
@@ -194,6 +206,10 @@ export var czStrings = {
     lg: {
       addNewItem: "Přidat nové pravidlo",
       empty_tab: "Vytvořte pravidlo pro přizpůsobení průběhu průzkumu.",
+      logicPlaceholderTitle: "Žádná logická pravidla",
+      logicPlaceholderTitleMobile: "Žádná logická pravidla",
+      logicPlaceholderDescription: "Vytvořte pravidlo pro přizpůsobení toku průzkumu.",
+      logicPlaceholderDescriptionMobile: "Vytvořte pravidlo pro přizpůsobení toku průzkumu.",
       page_visibilityName: "Viditelnost stránky",
       page_enableName: "Zapnutí (vypnutí) stránky",
       page_requireName: "Nastavit stránku jako povinné",
@@ -375,7 +391,7 @@ export var czStrings = {
       description: "Popis stránky",
       visibleIf: "Zviditelněte stránku, pokud",
       requiredIf: "Zajistěte, aby stránka byla povinná, pokud",
-      maxTimeToFinish: "Časový limit pro dokončení stránky (v sekundách)",
+      timeLimit: "Časový limit pro dokončení stránky (v sekundách)",
       questionsOrder: "Pořadí otázek na stránce"
     },
     matrixdropdowncolumn: {
@@ -615,10 +631,11 @@ export var czStrings = {
     questionErrorLocation: "Umístění chyby v otázce",
     focusFirstQuestionAutomatic: "Zaměřte se na první otázku týkající se změny stránky",
     questionsOrder: "Pořadí prvků na stránce",
-    maxTimeToFinish: "Maximální doba pro dokončení průzkumu",
-    maxTimeToFinishPage: "Maximální doba pro dokončení stránky v průzkumu",
-    showTimerPanel: "Zobrazit panel časovače",
-    showTimerPanelMode: "Zobrazit režim panelu časovače",
+    timeLimit: "Maximální doba pro dokončení průzkumu",
+    timeLimitPerPage: "Maximální doba pro dokončení stránky v průzkumu",
+    showTimer: "Použití časovače",
+    timerLocation: "Zobrazit panel časovače",
+    timerInfoMode: "Zobrazit režim panelu časovače",
     renderMode: "Režim vykreslování",
     allowAddPanel: "Povolit přidání panelu",
     allowRemovePanel: "Povolit odstranění panelu",
@@ -875,6 +892,7 @@ export var czStrings = {
       fontSize: "Velikost písma",
       scale: "Škála",
       cornerRadius: "Poloměr rohu",
+      advancedMode: "Pokročilý režim",
       pageTitle: "Písmo nadpisu",
       pageDescription: "Popisné písmo",
       questionTitle: "Písmo nadpisu",
@@ -1038,11 +1056,8 @@ export var czStrings = {
     showNavigationButtons: {
       none: "Skrytý"
     },
-    showTimerPanel: {
-      none: "Skrytý"
-    },
-    showTimerPanelMode: {
-      all: "Obě"
+    timerInfoMode: {
+      combined: "Obě"
     },
     addRowLocation: {
       default: "Závisí na rozložení matice"
@@ -1410,11 +1425,11 @@ export var czStrings = {
     imageFit: "Vyberte si z těchto možností: \"Žádné\" - obrázek si zachová svou původní velikost; \"Obsahovat\" - velikost obrázku se změní tak, aby se vešel při zachování poměru stran; \"Obálka\" - obrázek vyplní celý rámeček při zachování poměru stran; \"Výplň\" - obrázek je roztažen tak, aby vyplnil rámeček bez zachování poměru stran.",
     autoGrow: "Postupně zvětšuje výšku vstupního pole při zadávání dat. Přepíše nastavení \"Výška vstupního pole (v řádcích)\".",
     allowResize: "Úchyt pro změnu velikosti (nebo uzel) se zobrazí v rohu a lze jej přetáhnout a změnit tak velikost vstupního pole.",
-    maxTimeToFinish: "Časový interval v sekundách, po jehož uplynutí se průzkum automaticky přesune na stránku s poděkováním.",
-    maxTimeToFinishPage: "Časový interval v sekundách, po jehož uplynutí se průzkum automaticky přesune na další stránku.",
+    timeLimit: "Časový interval v sekundách, po jehož uplynutí se průzkum automaticky přesune na stránku s poděkováním.",
+    timeLimitPerPage: "Časový interval v sekundách, po jehož uplynutí se průzkum automaticky přesune na další stránku.",
     validateVisitedEmptyFields: "Tuto možnost povolte, chcete-li spustit ověření, když se uživatel zaměří na prázdné vstupní pole a poté ho opustí, aniž by provedl jakékoli změny.",
     page: {
-      maxTimeToFinish: "Časový interval v sekundách, po jehož uplynutí se průzkum automaticky přesune na další stránku.",
+      timeLimit: "Časový interval v sekundách, po jehož uplynutí se průzkum automaticky přesune na další stránku.",
       visibleIf: "Pomocí ikony kouzelné hůlky můžete nastavit podmíněné pravidlo, které určuje viditelnost stránky.",
       enableIf: "Pomocí ikony kouzelné hůlky nastavte podmíněné pravidlo, které zakáže režim pouze pro čtení stránky.",
       requiredIf: "Pomocí ikony kouzelné hůlky nastavte podmíněné pravidlo, které zabrání odeslání průzkumu, pokud alespoň jedna vnořená otázka nemá odpověď.",
@@ -1424,7 +1439,7 @@ export var czStrings = {
       questionsOrder: "Zachová původní pořadí otázek nebo je náhodně vybere. Možnost \"Zdědit\" použije nastavení na úrovni průzkumu (ve výchozím nastavení \"Původní\"). Účinek tohoto nastavení je viditelný pouze na kartě Náhled.",
       navigationButtonsVisibility: "Nastaví viditelnost navigačních tlačítek na stránce. Možnost \"Zdědit\" použije nastavení na úrovni průzkumu, které je ve výchozím nastavení \"Viditelné\"."
     },
-    showTimerPanel: "Nastaví viditelnost a umístění časovače na stránce.",
+    timerLocation: "Nastaví umístění časovače na stránce.",
     panelsState: "Vyberte si z těchto možností: \"Uzamčeno\" - uživatelé nemohou rozbalit nebo sbalit panely; \"Sbalit vše\" - všechny panely začínají ve sbaleném stavu; \"Rozbalit vše\" - všechny panely začínají v rozbaleném stavu; \"První rozbalený\" - zpočátku se rozbalí pouze první panel.",
     imageLinkName: "Zadejte název sdílené vlastnosti v poli objektů, které obsahuje adresy URL souborů obrázků nebo videí, které chcete zobrazit v seznamu voleb.",
     choices: "Levá hodnota slouží jako ID položky používané v podmíněných pravidlech, pravá hodnota se zobrazuje respondentům.",
@@ -1506,7 +1521,8 @@ export var czStrings = {
     header: {
       inheritWidthFrom: "Možnost \"Stejné jako kontejner\" automaticky upraví šířku oblasti obsahu záhlaví tak, aby se vešla do prvku HTML, do kterého je průzkum umístěn.",
       textAreaWidth: "Šířka oblasti záhlaví, která obsahuje název a popis průzkumu, měřená v pixelech.",
-      overlapEnabled: "Nastaví dolní část záhlaví tak, aby překrývala horní část průzkumu."
+      overlapEnabled: "Nastaví dolní část záhlaví tak, aby překrývala horní část průzkumu.",
+      mobileHeight: "Při nastavení na 0 se výška vypočítá automaticky tak, aby se přizpůsobila obsahu záhlaví."
     },
     panellayoutcolumn: {
       effectiveWidth: "Přijímá hodnoty %.",
@@ -1594,6 +1610,7 @@ export var czStrings = {
     imageFit: "Přizpůsobení obrázku",
     altText: "Alternativní text",
     height: "Výška",
+    mobileHeight: "Výška na chytrých telefonech",
     penColor: "Barva pera",
     backgroundColor: "Barva pozadí",
     templateElements: "Prvky šablony",
@@ -2116,9 +2133,9 @@ editorLocalization.locales["cs"] = czStrings;
 // pehelp.imageFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Vyberte si z těchto možností: \"Žádné\" - obrázek si zachová svou původní velikost; \"Obsahovat\" - velikost obrázku se změní tak, aby se vešel při zachování poměru stran; \"Obálka\" - obrázek vyplní celý rámeček při zachování poměru stran; \"Výplň\" - obrázek je roztažen tak, aby vyplnil rámeček bez zachování poměru stran."
 // pehelp.autoGrow: "Gradually increases the height of the input field as data is being entered. Overrides the \"Input field height (in lines)\" setting." => "Postupně zvětšuje výšku vstupního pole při zadávání dat. Přepíše nastavení \"Výška vstupního pole (v řádcích)\"."
 // pehelp.allowResize: "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field." => "Úchyt pro změnu velikosti (nebo uzel) se zobrazí v rohu a lze jej přetáhnout a změnit tak velikost vstupního pole."
-// pehelp.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "Časový interval v sekundách, po jehož uplynutí se průzkum automaticky přesune na stránku s poděkováním."
-// pehelp.maxTimeToFinishPage: "A time interval in seconds after which the survey auto-advances to the next page." => "Časový interval v sekundách, po jehož uplynutí se průzkum automaticky přesune na další stránku."
-// page.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the next page." => "Časový interval v sekundách, po jehož uplynutí se průzkum automaticky přesune na další stránku."
+// pehelp.timeLimit: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "Časový interval v sekundách, po jehož uplynutí se průzkum automaticky přesune na stránku s poděkováním."
+// pehelp.timeLimitPerPage: "A time interval in seconds after which the survey auto-advances to the next page." => "Časový interval v sekundách, po jehož uplynutí se průzkum automaticky přesune na další stránku."
+// page.timeLimit: "A time interval in seconds after which the survey auto-advances to the next page." => "Časový interval v sekundách, po jehož uplynutí se průzkum automaticky přesune na další stránku."
 // page.visibleIf: "Use the magic wand icon to set a conditional rule that determines page visibility." => "Pomocí ikony kouzelné hůlky můžete nastavit podmíněné pravidlo, které určuje viditelnost stránky."
 // page.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the page." => "Pomocí ikony kouzelné hůlky nastavte podmíněné pravidlo, které zakáže režim pouze pro čtení stránky."
 // page.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "Pomocí ikony kouzelné hůlky nastavte podmíněné pravidlo, které zabrání odeslání průzkumu, pokud alespoň jedna vnořená otázka nemá odpověď."
@@ -2126,7 +2143,6 @@ editorLocalization.locales["cs"] = czStrings;
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Nastaví umístění chybové zprávy ve vztahu k otázce s neplatným vstupem. Vyberte si mezi: \"Nahoře\" - text chyby je umístěn v horní části pole s otázkou; \"Bottom\" - text chyby je umístěn ve spodní části pole s otázkou. Možnost \"Zdědit\" použije nastavení na úrovni průzkumu (ve výchozím nastavení \"Nahoře\")."
 // page.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Zachová původní pořadí otázek nebo je náhodně vybere. Možnost \"Zdědit\" použije nastavení na úrovni průzkumu (ve výchozím nastavení \"Původní\"). Účinek tohoto nastavení je viditelný pouze na kartě Náhled."
 // page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Nastaví viditelnost navigačních tlačítek na stránce. Možnost \"Zdědit\" použije nastavení na úrovni průzkumu, které je ve výchozím nastavení \"Viditelné\"."
-// pehelp.showTimerPanel: "Sets the visibility and location of a timer on a page." => "Nastaví viditelnost a umístění časovače na stránce."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "Vyberte si z těchto možností: \"Uzamčeno\" - uživatelé nemohou rozbalit nebo sbalit panely; \"Sbalit vše\" - všechny panely začínají ve sbaleném stavu; \"Rozbalit vše\" - všechny panely začínají v rozbaleném stavu; \"První rozbalený\" - zpočátku se rozbalí pouze první panel."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "Zadejte název sdílené vlastnosti v poli objektů, které obsahuje adresy URL souborů obrázků nebo videí, které chcete zobrazit v seznamu voleb."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "Levá hodnota slouží jako ID položky používané v podmíněných pravidlech, pravá hodnota se zobrazuje respondentům."
@@ -2356,3 +2372,25 @@ editorLocalization.locales["cs"] = czStrings;
 // ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Kliknutím na libovolnou ikonu kategorie můžete prozkoumat nastavení průzkumu. Další nastavení budou k dispozici, jakmile přidáte element survey na návrhovou plochu."
 // pe.caseInsensitive: "Case insensitive" => "Nerozlišuje malá a velká písmena"
 // pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Vyberte, zda mají být velká a malá písmena v regulárním výrazu považována za ekvivalentní."
+
+// ed.surveyPlaceholderTitle: "Your form is empty" => "Váš formulář je prázdný"
+// ed.surveyPlaceholderTitleMobile: "Your form is empty" => "Váš formulář je prázdný"
+// ed.surveyPlaceholderDescription: "Drag an element from the toolbox or click the button below." => "Přetáhněte prvek z panelu nástrojů nebo klikněte na tlačítko níže."
+// ed.surveyPlaceholderDescriptionMobile: "Drag an element from the toolbox or click the button below." => "Přetáhněte prvek z panelu nástrojů nebo klikněte na tlačítko níže."
+// ed.previewPlaceholderTitle: "No preview" => "Žádný náhled"
+// ed.previewPlaceholderTitleMobile: "No preview" => "Žádný náhled"
+// ed.previewPlaceholderDescription: "The survey doesn't contain any visible elements." => "Průzkum neobsahuje žádné viditelné prvky."
+// ed.previewPlaceholderDescriptionMobile: "The survey doesn't contain any visible elements." => "Průzkum neobsahuje žádné viditelné prvky."
+// ed.translationsPlaceholderTitle: "No strings to translate" => "Žádné řetězce k překladu"
+// ed.translationsPlaceholderTitleMobile: "No strings to translate" => "Žádné řetězce k překladu"
+// ed.translationsPlaceholderDescription: "Add elements to your form or change the strings filter in the toolbar." => "Přidejte do formuláře prvky nebo změňte filtr řetězců na panelu nástrojů."
+// ed.translationsPlaceholderDescriptionMobile: "Add elements to your form or change the strings filter in the toolbar." => "Přidejte do formuláře prvky nebo změňte filtr řetězců na panelu nástrojů."
+// lg.logicPlaceholderTitle: "No logical rules" => "Žádná logická pravidla"
+// lg.logicPlaceholderTitleMobile: "No logical rules" => "Žádná logická pravidla"
+// lg.logicPlaceholderDescription: "Create a rule to customize the flow of the survey." => "Vytvořte pravidlo pro přizpůsobení toku průzkumu."
+// lg.logicPlaceholderDescriptionMobile: "Create a rule to customize the flow of the survey." => "Vytvořte pravidlo pro přizpůsobení toku průzkumu."
+// pe.showTimer: "Use a timer" => "Použití časovače"
+// theme.advancedMode: "Advanced mode" => "Pokročilý režim"
+// pehelp.timerLocation: "Sets the location of a timer on a page." => "Nastaví umístění časovače na stránce."
+// header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Při nastavení na 0 se výška vypočítá automaticky tak, aby se přizpůsobila obsahu záhlaví."
+// p.mobileHeight: "Height on smartphones" => "Výška na chytrých telefonech"

@@ -160,11 +160,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
   }
   renderSidebar() {
     if (!!this.creator.sidebar) {
-      const className = this.creator.isMobileView ? "sv-mobile-side-bar" : "";
-      return (
-        <div className={className}>
-          {ReactElementFactory.Instance.createElement("svc-side-bar", { model: this.creator.sidebar })}
-        </div>);
+      return ReactElementFactory.Instance.createElement("svc-side-bar", { model: this.creator.sidebar });
     } else {
       return null;
     }

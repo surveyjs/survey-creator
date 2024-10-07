@@ -1,4 +1,5 @@
 import { PageAdorner } from "../src/components/page";
+import { TabDesignerViewModel } from "../src/components/tabs/designer";
 import { settings } from "../src/creator-settings";
 import { CreatorTester } from "./creator-tester";
 
@@ -78,4 +79,23 @@ test("Check page getAnimatedElement methods", () => {
   expect(pageAdorner["getInnerAnimatedElements"]()).toEqual([rowElement, footerElement]);
   expect(animationOptions.getAnimatedElement()).toBe(descriptionElement);
 });
-
+test("Check ghost page adorner actions visibility", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      { name: "page1" },
+    ]
+  };
+  creator.sidebar.flyoutMode = true;
+  const pageAdorner = new PageAdorner(
+    creator,
+    creator.survey.pages[0]
+  );
+  const newPage = (creator.getPlugin("designer").model as TabDesignerViewModel).newPage;
+  const pageAdornerGhost = new PageAdorner(
+    creator,
+    newPage
+  );
+  expect(pageAdorner.getActionById("settings").visible).toBeTruthy();
+  expect(pageAdornerGhost.getActionById("settings").visible).toBeFalsy();
+});

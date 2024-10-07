@@ -394,7 +394,7 @@ export var enStrings = {
       description: "Page description",
       visibleIf: "Make the page visible if",
       requiredIf: "Make the page required if",
-      maxTimeToFinish: "Time limit to complete the page",
+      timeLimit: "Time limit to complete the page",
       questionsOrder: "Question order on the page"
     },
     matrixdropdowncolumn: {
@@ -634,10 +634,11 @@ export var enStrings = {
     questionErrorLocation: "Error message alignment",
     focusFirstQuestionAutomatic: "Focus first question on a new page",
     questionsOrder: "Question order",
-    maxTimeToFinish: "Time limit to complete the survey",
-    maxTimeToFinishPage: "Time limit to complete one page",
-    showTimerPanel: "Timer alignment",
-    showTimerPanelMode: "Timer mode",
+    timeLimit: "Time limit to complete the survey",
+    timeLimitPerPage: "Time limit to complete one page",
+    showTimer: "Use a timer",
+    timerLocation: "Timer alignment",
+    timerInfoMode: "Timer mode",
     renderMode: "Panel display mode",
     allowAddPanel: "Enable panel addition",
     allowRemovePanel: "Enable panel removal",
@@ -1059,11 +1060,8 @@ export var enStrings = {
     showNavigationButtons: {
       none: "Hidden"
     },
-    showTimerPanel: {
-      none: "Hidden"
-    },
-    showTimerPanelMode: {
-      all: "Both"
+    timerInfoMode: {
+      combined: "Both"
     },
     addRowLocation: {
       default: "Based on matrix layout"
@@ -1434,11 +1432,11 @@ export var enStrings = {
     imageFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio.",
     autoGrow: "The \"Inherit\" option applies a survey-level setting (\"Disabled\" by default).",
     allowResize: "The \"Inherit\" option applies a survey-level setting (\"Enabled\" by default).",
-    maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the \"Thank You\" page.",
-    maxTimeToFinishPage: "A time interval in seconds after which the survey auto-advances to the next page. Hides the \"Previous\" navigation button.",
+    timeLimit: "A time interval in seconds after which the survey auto-advances to the \"Thank You\" page. When set to 0, counts the time spent on the survey.",
+    timeLimitPerPage: "A time interval in seconds after which the survey auto-advances to the next page. Hides the \"Previous\" navigation button. When set to 0, counts the time spent on the current page.",
     validateVisitedEmptyFields: "Enable this option to trigger validation when a user focuses on an empty input field and then leaves it without making any changes.",
     page: {
-      maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the next page. Hides the \"Previous\" navigation button.",
+      timeLimit: "A time interval in seconds after which the survey auto-advances to the next page. Hides the \"Previous\" navigation button. When set to 0, counts the time spent on the current page.",
       // isRequired: "Prevents survey submission unless at least one nested question has an answer.",
       visibleIf: "Use the magic wand icon to set a conditional rule that determines page visibility.",
       enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the page.",
@@ -1449,7 +1447,7 @@ export var enStrings = {
       questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab.",
       navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
     },
-    showTimerPanel: "Sets the visibility and location of a timer on a page.",
+    timerLocation: "Sets the location of a timer on a page.",
     panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded. Applies if \"Panel display mode\" is set to \"List\" and the \"Panel title pattern\" property is specified.",
     imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list.",
     choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents.",

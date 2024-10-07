@@ -219,7 +219,7 @@ test("toolboxLocation sidebar: check toolbox items", async (t) => {
 test("tablet size click outside", async (t) => {
   await t.resizeWindow(820, 1180);
 
-  const getSidebarOpen = ClientFunction(() => { return !!window["creator"].sidebar.flyoutPanelMode; });
+  const getSidebarOpen = ClientFunction(() => { return !!window["creator"].sidebar.flyoutPanelMode && !!window["creator"].sidebar.renderedIsVisible; });
 
   const showSidebarButton = Selector("[title='Show Panel']");
   const shadowArea = Selector(".svc-side-bar__shadow");
@@ -248,7 +248,7 @@ test("Focus in Property grid", async (t) => {
   });
   await t.resizeWindow(820, 1180);
 
-  const getSidebarOpen = ClientFunction(() => { return !!window["creator"].sidebar.flyoutPanelMode; });
+  const getSidebarOpen = ClientFunction(() => { return !!window["creator"].sidebar.flyoutPanelMode && !!window["creator"].sidebar.renderedIsVisible; });
 
   const hideSidebarButton = Selector("[title='Hide Panel']");
 

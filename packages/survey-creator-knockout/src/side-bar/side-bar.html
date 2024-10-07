@@ -1,15 +1,17 @@
 <!-- ko using: model -->
-<div class="svc-side-bar" data-bind="css: { 'svc-flyout-side-bar' : flyoutPanelMode }, visible: hasVisiblePages">
-  <div class="svc-side-bar__shadow" data-bind="click: collapseSidebar"></div>
+<div data-bind="css: rootCss, visible: renderRoot">
+  <div class="svc-side-bar__shadow" data-bind="click: collapseSidebar, visible: renderContainer"></div>
   <div class="svc-flex-row svc-side-bar__wrapper">
-    <div class="svc-side-bar__container" data-bind="visible: renderedIsVisible">
-      <!-- ko component: { name: header.component, params: { model: header.componentModel } } -->
-      <!-- /ko -->
-      <div class="svc-side-bar__container-content">
-        <!-- ko foreach: pages -->
-        <!-- ko component: { name: 'svc-side-bar-page', params: { item: $data } } -->
+    <div class="svc-side-bar__container-wrapper" data-bind="visible: renderContainer">
+      <div class="svc-side-bar__container">
+        <!-- ko component: { name: header.component, params: { model: header.componentModel } } -->
         <!-- /ko -->
-        <!-- /ko-->
+        <div class="svc-side-bar__container-content">
+          <!-- ko foreach: pages -->
+          <!-- ko component: { name: 'svc-side-bar-page', params: { item: $data } } -->
+          <!-- /ko -->
+          <!-- /ko-->
+        </div>
       </div>
     </div>
     <!-- ko if: sideAreaComponentName -->

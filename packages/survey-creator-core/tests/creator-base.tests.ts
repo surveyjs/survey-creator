@@ -4623,3 +4623,21 @@ test("creator.onSurveyInstanceCreated from property Grid", () => {
   creator.selectQuestionByName("q2");
   expect(selectedTypes).toStrictEqual(["survey", "text", "radiogroup"]);
 });
+
+test("check tabResponsivenessMode property", () => {
+  const creator = new CreatorTester();
+  creator.tabResponsivenessMode = "menu";
+  expect(creator.tabbedMenu.actions.every((action) => action.disableShrink)).toBeTruthy();
+
+  creator.tabResponsivenessMode = "icons";
+  expect(creator.tabbedMenu.actions.every((action) => !action.disableShrink)).toBeTruthy();
+  const firstTab = creator.tabbedMenu.actions[0];
+  expect(firstTab.hasTitle).toBeTruthy();
+  expect(firstTab.hasIcon).toBeFalsy();
+  firstTab.mode = "small";
+  expect(firstTab.hasTitle).toBeFalsy();
+  expect(firstTab.hasIcon).toBeTruthy();
+
+  creator.tabResponsivenessMode = "menu";
+  expect(creator.tabbedMenu.actions.every((action) => action.disableShrink)).toBeTruthy();
+});

@@ -74,15 +74,11 @@
               </div>
             </div>
           </div>
-          <div
+          <SvComponent
+            :is="'svc-side-bar'"
+            :model="model.sidebar"
             v-if="model.sidebar"
-            :class="{ 'sv-mobile-side-bar': model.isMobileView }"
-          >
-            <SvComponent
-              :is="'svc-side-bar'"
-              :model="model.sidebar"
-            ></SvComponent>
-          </div>
+          ></SvComponent>
         </div>
         <div class="svc-creator__banner" v-if="!model.haveCommercialLicense">
           <span

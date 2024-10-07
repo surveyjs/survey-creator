@@ -411,7 +411,9 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
         action: () => {
           this.creator.setShowSidebar(true, true);
           if (!this.creator.isMobileView) {
-            this.creator.propertyGrid.getAllQuestions()[0].focus();
+            this.creator.sidebar.executeOnExpand(() => {
+              this.creator.propertyGrid.getAllQuestions()[0].focus();
+            });
           }
         }
       })
