@@ -129,7 +129,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       .append("svc-question__content--collapsed", this.renderedCollapsed)
       .append("svc-question__content--dragged", this.isDragMe)
       .append("svc-question__content--title-hidden", !this.surveyElement.hasTitle || (!this.surveyElement.isPanel && (this.surveyElement as Question).getTitleLocation() === "hidden"))
-      .append("svc-question__content--title-bottom", (this.surveyElement as Question).hasTitleOnBottom)
+      .append("svc-question__content--title-bottom", !!(this.surveyElement as Question).hasTitleOnBottom)
       .append("svc-question__content--drag-over-inside", this.dragTypeOverMe === DragTypeOverMeEnum.InsideEmptyPanel)
       .append("svc-question__content--drag-over-left", !this.dragInsideCollapsedContainer && this.dragTypeOverMe === DragTypeOverMeEnum.Left)
       .append("svc-question__content--drag-over-right", !this.dragInsideCollapsedContainer && this.dragTypeOverMe === DragTypeOverMeEnum.Right)
