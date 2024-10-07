@@ -10,10 +10,8 @@ svc-toolbox {
   height: 100%;
   display: flex;
   flex-direction: column;
-
-  .svc-item__banner {
-    background-color: var(--ctr-toolbox-item-background-color-hovered, $background);
-  }
+  border-right: var(--ctr-toolbox-border-width-right, 0px) solid var(--ctr-toolbox-border-color, transparent);
+  background: var(--ctr-toolbox-background-color, $background-dim);
 
   .spg-search-editor_container {
     background: var(--ctr-toolbox-background-color, $background-dim);
@@ -50,7 +48,6 @@ svc-toolbox {
   padding: var(--ctr-toolbox-padding-top, calcSize(1)) var(--ctr-toolbox-group-padding-right, calcSize(1.5))
     var(--ctr-toolbox-padding-bottom, calcSize(2)) var(--ctr-toolbox-group-padding-left, calcSize(1.5));
   box-sizing: border-box;
-  direction: var(--ctr-toolbox-scroller-direction, rtl);
   flex-grow: 1;
   overflow-y: auto;
   overflow-x: hidden;
@@ -78,6 +75,13 @@ svc-toolbox {
   margin-left: calcSize(-0.5);
   display: none;
   z-index: 30;
+  @-moz-document url-prefix() {
+    scrollbar-width: thin;
+    scrollbar-color: $border transparent;
+  }
+  // &::-webkit-scrollbar-track {
+  //   background: var(--ctr-toolbox-background-color, $background-dim);
+  // }
 }
 .svc-toolbox:hover .svc-toolbox__scrollbar {
   display: block;
@@ -95,7 +99,7 @@ svc-toolbox {
     overflow: visible;
   }
   .svc-toolbox__scroller {
-    width: fit-content;
+    width: 100vw;
     padding: var(--ctr-toolbox-padding-top, calcSize(1)) var(--ctr-toolbox-group-padding-right-compact, calcSize(1.5))
       var(--ctr-toolbox-padding-bottom, calcSize(2)) var(--ctr-toolbox-group-padding-left-compact, calcSize(1.5));
   }
@@ -144,10 +148,10 @@ svc-toolbox {
 }
 
 .svc-toolbox__panel {
-  border-right: var(--ctr-toolbox-border-width-right, 0px) solid var(--ctr-toolbox-border-color, transparent);
-  background: var(--ctr-toolbox-background-color, $background-dim);
   position: relative;
-  height: 100%;
+  flex-grow: 1;
+  flex-shrink: 1;
+  height: 0;
   display: flex;
   flex-direction: column;
 }
@@ -173,17 +177,7 @@ svc-toolbox {
   }
 }
 
-.svc-toolbox--scrollable.svc-toolbox--scroll-locked {
-  .svc-toolbox__scroller {
-    overflow: scroll;
-  }
-}
-
 .svc-toolbox--searchable {
-  .svc-toolbox__scroller {
-    padding-top: 0;
-  }
-
   .svc-toolbox__search-container {
     display: flex;
   }
@@ -271,12 +265,8 @@ svc-toolbox {
   top: 0;
   z-index: 30;
   padding-top: calcSize(1);
-  margin-bottom: var(--ctr-toolbox-search-margin-bottom, calcSize(1));
-  margin-right: calcSize(-1.5);
-  margin-left: calcSize(-1.5);
   display: none;
   flex-direction: column;
-  width: calc(100% + calcSize(3));
   box-sizing: border-box;
   background: var(--ctr-toolbox-background-color, $background-dim);
 }

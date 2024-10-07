@@ -52,9 +52,9 @@ export class AdaptiveToolbox extends Toolbox {
     const placeholder = this.toolbox.showPlaceholder ? <div className="svc-toolbox__placeholder">{this.toolbox.toolboxNoResultsFound}</div> : null;
     return (
       <div ref={this.rootRef} className={this.toolbox.classNames}>
+        {search}
         <div onBlur={(e) => this.toolbox.focusOut(e)} className="svc-toolbox__panel">
           <div className="svc-toolbox__scroller sv-drag-target-skipped" onScroll={(event) => this.toolbox.onScroll(this.toolbox, event)}>
-            {search}
             {placeholder}
             <div className="svc-toolbox__container">
               {(this.toolbox.showInSingleCategory) ?
