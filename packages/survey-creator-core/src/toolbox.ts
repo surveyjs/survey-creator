@@ -520,7 +520,7 @@ export class QuestionToolbox
       component: "sv-action-bar-item",
       tooltip: surveyLocalization.getString("search"),
       action: () => {
-        (document.querySelector(".svc-toolbox__panel input") as HTMLInputElement).focus();
+        (this.rootElement.querySelector("input") as HTMLInputElement).focus();
         this.isFocused = true;
       }
     });

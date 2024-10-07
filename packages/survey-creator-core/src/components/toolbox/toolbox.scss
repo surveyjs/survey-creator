@@ -10,17 +10,16 @@ svc-toolbox {
   height: 100%;
   display: flex;
   flex-direction: column;
-  border-right: var(--ctr-toolbox-border-width-right, 0px) solid var(--ctr-toolbox-border-color, transparent);
-  background: var(--ctr-toolbox-background-color, $background-dim);
-
+  width: var(--ctr-toolbox-min-width, calcSize(32));
   .spg-search-editor_container {
     background: var(--ctr-toolbox-background-color, $background-dim);
-    padding-top: calcSize(1.5);
-    padding-inline-end: calcSize(2);
+    padding-top: calcSize(1);
+    padding-inline-end: calcSize(0.5);
     padding-bottom: calcSize(2.5);
-    padding-inline-start: calcSize(3);
+    padding-inline-start: calcSize(1.5);
     width: unset;
     flex-grow: 1;
+    border-bottom: none;
   }
 
   .spg-search-editor_input {
@@ -44,6 +43,26 @@ svc-toolbox {
   }
 }
 
+.svc-toolbox__panel {
+  position: relative;
+  flex-grow: 1;
+  flex-shrink: 1;
+  height: 0;
+  display: flex;
+  flex-direction: column;
+  border-right: var(--ctr-toolbox-border-width-right, 0px) solid var(--ctr-toolbox-border-color, transparent);
+  background: var(--ctr-toolbox-background-color, $background-dim);
+}
+
+.svc-toolbox__scroll-wrapper {
+  position: relative;
+  flex-grow: 1;
+  flex-shrink: 1;
+  height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
 .svc-toolbox__scroller {
   padding: var(--ctr-toolbox-padding-top, calcSize(1)) var(--ctr-toolbox-group-padding-right, calcSize(1.5))
     var(--ctr-toolbox-padding-bottom, calcSize(2)) var(--ctr-toolbox-group-padding-left, calcSize(1.5));
@@ -61,9 +80,7 @@ svc-toolbox {
   flex-direction: column;
   align-items: var(--ctr-toolbox-scroller-align-items, flex-end);
 }
-.svc-toolbox__container {
-  direction: initial;
-}
+
 .svc-toolbox__scrollbar {
   position: absolute;
   top: 0;
@@ -107,6 +124,9 @@ svc-toolbox {
     opacity: 0;
     position: absolute;
   }
+  .svc-toolbox__search-container {
+    border-bottom: 0;
+  }
   .svc-toolbox__category-separator {
     margin-top: calc(var(--ctr-toolbox-separator-padding-top, calcSize(1)) + var(--ctr-toolbox-gap, calcSize(0.5)));
     width: var(--ctr-toolbox-separator-width-compact, calcSize(5));
@@ -140,6 +160,7 @@ svc-toolbox {
   z-index: 20;
   justify-content: center;
   align-items: center;
+  width: fit-content;
 
   .sv-dots__item {
     margin-top: 0;
@@ -147,18 +168,9 @@ svc-toolbox {
   }
 }
 
-.svc-toolbox__panel {
-  position: relative;
-  flex-grow: 1;
-  flex-shrink: 1;
-  height: 0;
-  display: flex;
-  flex-direction: column;
-}
-
 .svc-toolbox--flyout {
-  width: 100vw;
-  margin-right: calc(-100vw + calcSize(10.5));
+  overflow: visible;
+  max-width: calcSize(9);
   overflow: visible;
 
   .spg-search-editor_container {
@@ -168,8 +180,8 @@ svc-toolbox {
 
   .svc-toolbox__panel {
     z-index: 200;
+    width: var(--ctr-toolbox-min-width, calcSize(32));
     position: relative;
-    width: fit-content;
     box-shadow:
       1px 0 0 0 $border-inside,
       $shadow-medium,
@@ -247,16 +259,7 @@ svc-toolbox {
 }
 
 .svc-toolbox__container {
-  direction: ltr;
-}
-
-.svc-toolbox--compact:not(.svc-toolbox--flyout) {
-  .svc-toolbox__search-container {
-    max-width: fit-content;
-    margin-left: 0;
-    margin-right: 0;
-    width: calcSize(6);
-  }
+  width: 100%;
 }
 
 .svc-toolbox__search-container {
@@ -264,11 +267,18 @@ svc-toolbox {
   position: sticky;
   top: 0;
   z-index: 30;
-  padding-top: calcSize(1);
+  padding-top: var(--ctr-toolbox-padding-top, calcSize(1));
+  padding-left: var(--ctr-toolbox-group-padding-left, calcSize(1));
+  padding-right: var(--ctr-toolbox-group-padding-left, calcSize(1));
   display: none;
   flex-direction: column;
   box-sizing: border-box;
   background: var(--ctr-toolbox-background-color, $background-dim);
+  border-bottom: var(--ctr-toolbox-search-border-width-bottom, 1px) solid var(--ctr-toolbox-search-border-color, #DCDCDC);
+
+  svg {
+    pointer-events: none;
+  } 
 }
 
 .svc-toolbox__category {
@@ -280,7 +290,6 @@ svc-toolbox {
 .svc-toolbox__tool:not(.sv-dots) {
   display: flex;
   flex-direction: column;
-  width: auto;
 }
 
 .svc-toolbox__tool .sv-dots__item {
