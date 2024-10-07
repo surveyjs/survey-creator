@@ -123,7 +123,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     const type = typeof this.surveyElement.getType === "function" ? this.surveyElement.getType() : undefined;
     const cssClassBuilder = new CssClassBuilder().append("svc-question__content")
       .append("svc-question__content--selected", !!this.creator.isElementSelected(this.surveyElement))
-      .append(`"svc-question__content--${type}"`, !!type)
+      .append(`svc-question__content--${type}`, !!type)
       .append("svc-question__content--empty", this.isEmptyElement)
       .append("svc-question__content--empty-template", this.isEmptyTemplate)
       .append("svc-question__content--collapsed", this.renderedCollapsed)
