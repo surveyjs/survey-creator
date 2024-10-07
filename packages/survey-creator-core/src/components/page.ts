@@ -2,12 +2,12 @@ import { Action, ActionContainer, classesToSelector, ComputedUpdater, CssClassBu
 import { SurveyCreatorModel } from "../creator-base";
 import { IPortableMouseEvent } from "../utils/events";
 import { SurveyElementAdornerBase } from "./action-container-view-model";
-import { toggleHovered } from "../utils/utils";
 import { getLocString } from "../editorLocalization";
-require("./page.scss");
 import { SurveyHelper } from "../survey-helper";
 import { settings } from "../creator-settings";
 import { DragDropSurveyElements } from "../survey-elements";
+
+require("./page.scss");
 
 export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   @property({ defaultValue: false }) isSelected: boolean;
@@ -281,6 +281,9 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       SurveyHelper.scrollIntoViewIfNeeded(this.rootElement);
     }
   }
+  protected getAllowDragging(options: any): boolean {
+    return this.creator.allowDragPages && super.getAllowDragging(options);;
+  }
   get isDragMe(): boolean {
     return this.surveyElement.isDragMe;
   }
@@ -295,7 +298,8 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     const isElementSelected = this.creator.selectedElement === element;
     this.dragDropHelper.startDragSurveyElement(event, element, isElementSelected);
     if (this.creator.collapsePagesOnDragStart) {
-      this.creator.expandCollapseManager.updateCollapsed(true);
+      this.creator.designerStateManager?.suspend();
+      this.creator.collapseAllPages();
     }
     return true;
   }

@@ -59,6 +59,14 @@ export class DesignerStateManager {
     return res;
   }
   public onInitElementStateCallback: (element: SurveyElement, state: ElementState) => void;
-  constructor() {
+  private _suspendCounter = 0;
+  public suspend() {
+    this._suspendCounter++;
+  }
+  public release() {
+    this._suspendCounter--;
+  }
+  public get isSuspended() {
+    return this._suspendCounter > 0;
   }
 }
