@@ -3,13 +3,6 @@ import { getLocString } from "../editorLocalization";
 import { assign, roundTo2Decimals } from "../utils/utils";
 import { CreatorPalettes, CreatorThemes, ICreatorTheme } from "./creator-themes";
 
-export * from "./themes/theme-20";
-export * from "./themes/theme-24";
-export * from "./themes/palette-base";
-export * from "./themes/palette-light";
-export * from "./themes/palette-dark";
-export * from "./themes/palette-contrast";
-
 export class CreatorThemeModel extends Base implements ICreatorTheme {
   cssVariables?: { [index: string]: string } = {};
 
