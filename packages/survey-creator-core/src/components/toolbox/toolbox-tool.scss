@@ -126,77 +126,6 @@
   }
 }
 
-.svc-creator__toolbox--right,
-[dir="rtl"],
-[style*="direction:rtl"],
-[style*="direction: rtl"] {
-  .svc-toolbox--compact {
-    .svc-toolbox__item {
-      padding: 0 var(--ctr-toolbox-item-padding-right-no-text, calcSize(1.5)) 0
-        var(--ctr-toolbox-item-padding-left-no-text, calcSize(2));
-    }
-  }
-
-  .svc-toolbox__tool:hover,
-  .svc-toolbox__item:focus {
-    .svc-toolbox__item-banner {
-      padding-right: calcSize(1.5);
-      padding-left: calcSize(2);
-      margin-left: calcSize(-3.5);
-      margin-right: calcSize(-3);
-      flex-direction: row-reverse;
-      transform: translateX(calc(1.5 * #{$base-unit}));
-
-      .svc-toolbox__item-title {
-        padding-right: calcSize(4);
-        padding-left: calcSize(1);
-      }
-    }
-  }
-
-  .svc-toolbox__item-banner {
-    margin-right: calcSize(-4.5);
-    margin-left: 0;
-  }
-
-  .svc-toolbox__item {
-    flex-direction: row-reverse;
-  }
-
-  .svc-toolbox__tool.sv-dots {
-    place-self: flex-end;
-  }
-
-  .svc-toolbox__category {
-    align-items: flex-end;
-  }
-
-  .svc-toolbox__tool {
-    align-items: flex-end;
-    align-self: flex-end;
-  }
-
-  .svc-toolbox__tool--has-subitems {
-    align-items: var(--ctr-toolbox-item-align, flex-end);
-    align-self: var(--ctr-toolbox-item-align, flex-end);
-  }
-  .svc-toolbox__item--has-subitems {
-    padding-left: calcSize(6);
-    padding-right: calcSize(1.5);
-  }
-
-  .svc-toolbox__item-banner {
-    .svc-toolbox__item-icon {
-      left: auto;
-      right: calcSize(1.5);
-    }
-  }
-
-  .svc-toolbox-popup {
-    direction: rtl;
-  }
-}
-
 .svc-toolbox__item-title {
   @include smallBold;
 
@@ -294,21 +223,7 @@
 .svc-toolbox--compact .svc-toolbox__item-submenu-button {
   display: none;
 }
-.svc-creator__toolbox--right,
-[dir="rtl"],
-[style*="direction:rtl"],
-[style*="direction: rtl"] {
-  .svc-toolbox-popup {
-    direction: rtl;
-  }
-  .svc-toolbox__item-submenu-button {
-    right: initial;
-    left: calcSize(1.5);
-    .sv-svg-icon {
-      transform: rotate(180deg);
-    }
-  }
-}
+
 .svc-toolbox-popup {
   .sv-list__item {
     &:first-child {
