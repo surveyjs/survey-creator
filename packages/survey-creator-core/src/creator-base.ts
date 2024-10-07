@@ -160,6 +160,7 @@ export class SurveyCreatorModel extends Base
    * @see saveThemeFunc
    */
   @property({ defaultValue: false }) showThemeTab: boolean;
+  @property({ defaultValue: false }) showCreatorThemeSettings: boolean;
   /**
    * Specifies whether to display the Translation tab.
    *
@@ -3920,12 +3921,12 @@ export class SurveyCreatorModel extends Base
   @property({ defaultValue: {} }) themeVariables: { [index: string]: string } = {};
   @property() private creatorTheme: ICreatorTheme;
 
-  public applyTheme(theme: ICreatorTheme, palette?: any): void {
+  public applyTheme(theme: ICreatorTheme): void {
     if (!theme) return;
     this.creatorTheme = theme;
 
     const newCssVariable = {};
-    assign(newCssVariable, theme?.cssVariables, palette?.cssVariables);
+    assign(newCssVariable, theme?.cssVariables);
     this.themeVariables = newCssVariable;
   }
 }

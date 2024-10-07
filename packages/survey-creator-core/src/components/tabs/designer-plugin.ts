@@ -1,5 +1,5 @@
 import { Base, SurveyModel, Action, ComputedUpdater, CurrentPageChangedEvent } from "survey-core";
-import { notShortCircuitAnd, assign } from "../../utils/utils";
+import { notShortCircuitAnd } from "../../utils/utils";
 import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
 import { PropertyGridModel } from "../../property-grid";
@@ -13,7 +13,7 @@ import { MenuButton } from "../../utils/actions";
 import { editorLocalization } from "../../editorLocalization";
 import { creatorThemeModelPropertyGridDefinition } from "../../creator-theme/creator-theme-model-definition";
 import { CreatorThemeModel } from "../../creator-theme/creator-theme-model";
-import { CreatorPalettes, CreatorThemes, ICreatorTheme } from "../../creator-theme/creator-themes";
+import { CreatorThemes, ICreatorTheme } from "../../creator-theme/creator-themes";
 
 export class TabDesignerPlugin implements ICreatorPlugin {
   public model: TabDesignerViewModel;
@@ -104,7 +104,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
 
   private syncTheme(theme?: ICreatorTheme) {
     const newTheme = theme || this.themeModel.toJSON();
-    this.creator.applyTheme(CreatorThemes[newTheme.themeName], CreatorPalettes[newTheme.colorPalette]);
+    this.creator.applyTheme(newTheme);
   }
 
   private createCreatorThemeSettingsPage(creator: SurveyCreatorModel) {
@@ -174,7 +174,9 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     this.propertyGridPlaceholderPage = this.creator.sidebar.addPage("propertyGridPlaceholder", "svc-property-grid-placeholder", this.propertyGridViewModel);
     this.propertyGridPlaceholderPage.caption = "Survey Settings";
 
-    this.createCreatorThemeSettingsPage(creator);
+    if (this.creator.showCreatorThemeSettings) {
+      this.createCreatorThemeSettingsPage(creator);
+    }
 
     this.designerStateManager = new DesignerStateManager();
     this.designerStateManager.initForSurvey(this.creator.survey);

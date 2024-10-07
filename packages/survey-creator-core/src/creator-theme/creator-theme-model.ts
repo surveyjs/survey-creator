@@ -1,13 +1,18 @@
 import { Serializer, Base, property, ArrayChanges, EventBase, ILoadFromJSONOptions, ISaveToJSONOptions } from "survey-core";
 import { getLocString } from "../editorLocalization";
 import { assign, roundTo2Decimals } from "../utils/utils";
-import { CreatorPalettes, CreatorThemes, ICreatorTheme } from "./creator-themes";
+import { CreatorThemes, ICreatorTheme, PredefinedCreatorThemes } from "./creator-themes";
+import * as Themes from "../themes/index";
+
+Object.keys(Themes || {}).forEach(libraryThemeName => {
+  const theme: ICreatorTheme = Themes[libraryThemeName];
+  CreatorThemes[theme.themeName] = theme;
+});
 
 export class CreatorThemeModel extends Base implements ICreatorTheme {
   cssVariables?: { [index: string]: string } = {};
 
   @property() themeName: string;
-  @property() colorPalette: string;
   @property() scale: number;
 
   public onThemeSelected = new EventBase<CreatorThemeModel, { theme: ICreatorTheme }>();
@@ -41,10 +46,7 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
     this.onThemePropertyChanged.fire(this, { name, value });
   }
   private onThemePropertyValueChangedCallback(name: string, oldValue: any, newValue: any, sender: Base, arrayChanges: ArrayChanges) {
-    if (name === "themeName" || name === "colorPalette") {
-      if (name === "themeName") {
-        this.colorPalette = undefined;
-      }
+    if (name === "themeName") {
       this.onThemeSelected.fire(this, { theme: this.toJSON() });
     } else if (name.indexOf("--") === 0) {
       this.setThemeCssVariablesChanges(name, newValue);
@@ -75,10 +77,7 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
 
     const result = super.toJSON(options);
     const cssVariables = {};
-    const currentTheme = CreatorThemes[this.themeName];
-    let currentPaletteName = this.colorPalette || currentTheme.colorPalette;
-    const currentPalette = CreatorPalettes[currentPaletteName];
-    assign(cssVariables, CreatorThemes[this.themeName]?.cssVariables, currentPalette?.cssVariables);
+    assign(cssVariables, CreatorThemes[this.themeName]?.cssVariables);
     Object.keys(result).forEach(key => {
       if (key.indexOf("--") == 0) {
         cssVariables[key] = result[key];
@@ -86,7 +85,6 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
       }
     });
     result.cssVariables = cssVariables;
-    result.colorPalette = currentPaletteName;
     return result;
   }
 }
@@ -97,22 +95,7 @@ Serializer.addClass(
     {
       type: "dropdown",
       name: "themeName",
-      choices: [
-        { value: "20", text: getLocString("theme.names.20") },
-        { value: "24", text: getLocString("theme.names.24") }
-      ],
-    }, {
-      type: "buttongroup",
-      name: "colorPalette",
-      displayName: "",
-      choices: [
-        { value: "light" },
-        { value: "dark" },
-        { value: "contrast" },
-      ],
-      enableIf: (obj: CreatorThemeModel): boolean => {
-        return !obj || obj.themeName === "24";
-      },
+      choices: PredefinedCreatorThemes.map(theme => ({ value: theme, text: getLocString("theme.creatorNames." + theme) })),
     }, {
       type: "spinedit",
       name: "scale",

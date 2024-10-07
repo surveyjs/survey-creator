@@ -1711,7 +1711,13 @@ export var enStrings = {
       tulip: "Tulip",
       brown: "Brown",
       green: "Green"
-    }
+    },
+    creatorNames: {
+      "sc2020": "Survey Creator 2020",
+      "default-light": "Light",
+      "default-dark": "Dark",
+      "default-contrast": "Contrast"
+    },
   }
 };
 
