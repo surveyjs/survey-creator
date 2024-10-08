@@ -783,7 +783,9 @@ svc-question,
       &>.svc-question__dropdown-choices--wrapper,
       &>.svc-panel__placeholder_frame-wrapper,
       &>.svc-question__content-actions,
-      &>.sd-file {
+      &>.svc-panel__add-new-question-container,
+      &>.sd-file,
+      &>sv-ng-file-question {
         display: none;
       }
 
