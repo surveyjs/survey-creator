@@ -182,6 +182,18 @@ export var fiStrings = {
     pagePlaceHolder: "Sivu on tyhjä. Vedä elementti työkalupakista tai napsauta alla olevaa painiketta.",
     imagePlaceHolder: "Vedä ja pudota kuva tähän tai napsauta alla olevaa painiketta ja valitse ladattava kuva",
     surveyPlaceHolderMobile: "Napsauta alla olevaa Lisää kysymys -painiketta aloittaaksesi lomakkeen luomisen.",
+    surveyPlaceholderTitle: "Lomake on tyhjä",
+    surveyPlaceholderTitleMobile: "Lomake on tyhjä",
+    surveyPlaceholderDescription: "Vedä elementti työkalupakista tai napsauta alla olevaa painiketta.",
+    surveyPlaceholderDescriptionMobile: "Vedä elementti työkalupakista tai napsauta alla olevaa painiketta.",
+    previewPlaceholderTitle: "Ei esikatselua",
+    previewPlaceholderTitleMobile: "Ei esikatselua",
+    previewPlaceholderDescription: "Kysely ei sisällä näkyviä elementtejä.",
+    previewPlaceholderDescriptionMobile: "Kysely ei sisällä näkyviä elementtejä.",
+    translationsPlaceholderTitle: "Ei käännettäviä merkkijonoja",
+    translationsPlaceholderTitleMobile: "Ei käännettäviä merkkijonoja",
+    translationsPlaceholderDescription: "Lisää elementtejä lomakkeeseen tai muuta työkalurivin merkkijonosuodatinta.",
+    translationsPlaceholderDescriptionMobile: "Lisää elementtejä lomakkeeseen tai muuta työkalurivin merkkijonosuodatinta.",
     pagePlaceHolderMobile: "Napsauta alla olevaa Lisää kysymys -painiketta lisätäksesi sivulle uuden elementin.",
     panelPlaceHolderMobile: "Napsauta alla olevaa Lisää kysymys -painiketta lisätäksesi uuden elementin paneeliin.",
     imagePlaceHolderMobile: "Klikkaa alla olevaa painiketta ja valitse ladattava kuva",
@@ -194,6 +206,10 @@ export var fiStrings = {
     lg: {
       addNewItem: "Lisää uusi sääntö",
       empty_tab: "Luo sääntö kyselyn kulun mukauttamista varten.",
+      logicPlaceholderTitle: "Ei loogisia sääntöjä",
+      logicPlaceholderTitleMobile: "Ei loogisia sääntöjä",
+      logicPlaceholderDescription: "Luo sääntö kyselyn kulun mukauttamista varten.",
+      logicPlaceholderDescriptionMobile: "Luo sääntö kyselyn kulun mukauttamista varten.",
       page_visibilityName: "Sivun näkyvyys",
       page_enableName: "Ota käyttöön (poista käytöstä) sivu",
       page_requireName: "Tee sivusta pakollinen",
@@ -375,7 +391,7 @@ export var fiStrings = {
       description: "Sivun kuvaus",
       visibleIf: "Tee sivusta näkyvä, jos",
       requiredIf: "Tee sivusta pakollinen, jos",
-      maxTimeToFinish: "Sivun viimeistelyn aikaraja (sekunteina)",
+      timeLimit: "Sivun viimeistelyn aikaraja (sekunteina)",
       questionsOrder: "Kyselyjärjestys sivulla"
     },
     matrixdropdowncolumn: {
@@ -615,10 +631,11 @@ export var fiStrings = {
     questionErrorLocation: "Kysymyksen virheen sijainti",
     focusFirstQuestionAutomatic: "Fokusoi ensimmäiseen kysymykseen sivun vaihtuessa",
     questionsOrder: "Elementtien järjestys sivulla",
-    maxTimeToFinish: "Enimmäisaika saada kysely täytettyä",
-    maxTimeToFinishPage: "Enimmäisaika kyselyn sivun täyttämiseen",
-    showTimerPanel: "Näytä ajastus -paneeli",
-    showTimerPanelMode: "Näytä ajastus -paneelin tila",
+    timeLimit: "Enimmäisaika saada kysely täytettyä",
+    timeLimitPerPage: "Enimmäisaika kyselyn sivun täyttämiseen",
+    showTimer: "Käytä ajastinta",
+    timerLocation: "Näytä ajastus -paneeli",
+    timerInfoMode: "Näytä ajastus -paneelin tila",
     renderMode: "Renderöinnin tila",
     allowAddPanel: "Salli paneelin lisääminen",
     allowRemovePanel: "Salli paneelin poistaminen",
@@ -875,6 +892,7 @@ export var fiStrings = {
       fontSize: "Kirjasinkoko",
       scale: "Mittakaava",
       cornerRadius: "Kulman säde",
+      advancedMode: "Edistynyt tila",
       pageTitle: "Otsikon fontti",
       pageDescription: "Kuvauksen fontti",
       questionTitle: "Otsikon fontti",
@@ -1038,11 +1056,8 @@ export var fiStrings = {
     showNavigationButtons: {
       none: "Piilevä"
     },
-    showTimerPanel: {
-      none: "Piilevä"
-    },
-    showTimerPanelMode: {
-      all: "Molemmat"
+    timerInfoMode: {
+      combined: "Molemmat"
     },
     addRowLocation: {
       default: "Riippuu matriisin asettelusta"
@@ -1410,11 +1425,11 @@ export var fiStrings = {
     imageFit: "Valitse seuraavista: \"Ei mitään\" - kuva säilyttää alkuperäisen kokonsa; \"Sisältää\" - kuvan kokoa muutetaan sopivaksi säilyttäen samalla kuvasuhteensa; \"Kansi\" - kuva täyttää koko laatikon säilyttäen samalla kuvasuhteensa; \"Täytä\" - kuva venytetään täyttämään laatikko säilyttämättä sen kuvasuhdetta.",
     autoGrow: "Lisää vähitellen syöttökentän korkeutta, kun tietoja syötetään. Ohittaa \"Syöttökentän korkeus (viivoina)\" -asetuksen.",
     allowResize: "Koonmuuttokahva (tai kahva) tulee näkyviin kulmaan, ja sitä vetämällä voit muuttaa syöttökentän kokoa.",
-    maxTimeToFinish: "Sekunteina oleva aikaväli, jonka jälkeen kysely etenee automaattisesti Kiitos-sivulle.",
-    maxTimeToFinishPage: "Sekunteina ilmaistu aikaväli, jonka jälkeen kysely siirtyy automaattisesti seuraavalle sivulle.",
+    timeLimit: "Sekunteina oleva aikaväli, jonka jälkeen kysely etenee automaattisesti Kiitos-sivulle.",
+    timeLimitPerPage: "Sekunteina ilmaistu aikaväli, jonka jälkeen kysely siirtyy automaattisesti seuraavalle sivulle.",
     validateVisitedEmptyFields: "Ota tämä asetus käyttöön, jos haluat käynnistää vahvistuksen, kun käyttäjä keskittyy tyhjään syöttökenttään ja poistuu siitä tekemättä muutoksia.",
     page: {
-      maxTimeToFinish: "Sekunteina ilmaistu aikaväli, jonka jälkeen kysely siirtyy automaattisesti seuraavalle sivulle.",
+      timeLimit: "Sekunteina ilmaistu aikaväli, jonka jälkeen kysely siirtyy automaattisesti seuraavalle sivulle.",
       visibleIf: "Käytä taikasauvakuvaketta asettaaksesi ehdollisen säännön, joka määrittää sivun näkyvyyden.",
       enableIf: "Määritä taikasauvakuvakkeen avulla ehdollinen sääntö, joka poistaa sivun vain luku -tilan käytöstä.",
       requiredIf: "Määritä taikasauvakuvakkeen avulla ehdollinen sääntö, joka estää kyselyn lähettämisen, ellei vähintään yhteen sisäkkäiseen kysymykseen ole vastausta.",
@@ -1424,7 +1439,7 @@ export var fiStrings = {
       questionsOrder: "Säilyttää kysymysten alkuperäisen järjestyksen tai satunnaistaa ne. \"Peri\" -vaihtoehto käyttää kyselytason asetusta (\"Alkuperäinen\" oletuksena). Tämän asetuksen vaikutus näkyy vain Esikatselu-välilehdessä.",
       navigationButtonsVisibility: "Määrittää navigointipainikkeiden näkyvyyden sivulla. \"Peri\" -vaihtoehto käyttää kyselytason asetusta, jonka oletusarvo on \"Näkyvä\"."
     },
-    showTimerPanel: "Määrittää ajastimen näkyvyyden ja sijainnin sivulla.",
+    timerLocation: "Määrittää ajastimen sijainnin sivulla.",
     panelsState: "Valitse seuraavista: \"Lukittu\" - käyttäjät eivät voi laajentaa tai kutistaa paneeleja; \"Kutista kaikki\" - kaikki paneelit alkavat romahtaneessa tilassa; \"Laajenna kaikki\" - kaikki paneelit alkavat laajennetussa tilassa; \"Ensimmäinen laajennettu\" - vain ensimmäistä paneelia laajennetaan aluksi.",
     imageLinkName: "Kirjoita jaetun ominaisuuden nimi objektiryhmään, joka sisältää valintaluettelossa näytettävät kuvan tai videotiedoston URL-osoitteet.",
     choices: "Vasen arvo toimii ehdollisissa säännöissä käytettynä kohteen tunnuksena, oikea arvo näytetään vastaajille.",
@@ -1506,7 +1521,8 @@ export var fiStrings = {
     header: {
       inheritWidthFrom: "Sama kuin säilö -vaihtoehto säätää automaattisesti otsikon sisältöalueen leveyttä sopimaan HTML-elementtiin, johon kysely sijoitetaan.",
       textAreaWidth: "Kyselyn otsikon ja kuvauksen sisältävän otsikkoalueen leveys pikseleinä mitattuna.",
-      overlapEnabled: "Suurentaa otsikon alaosan kyselyn yläosan päälle."
+      overlapEnabled: "Suurentaa otsikon alaosan kyselyn yläosan päälle.",
+      mobileHeight: "Kun arvoksi on määritetty 0, korkeus lasketaan automaattisesti otsikon sisällön mukaan."
     },
     panellayoutcolumn: {
       effectiveWidth: "Hyväksyy arvot %.",
@@ -1594,6 +1610,7 @@ export var fiStrings = {
     imageFit: "Kuva sopii",
     altText: "Vaihtoehtoinen teksti",
     height: "Korkeus",
+    mobileHeight: "Korkeus älypuhelimissa",
     penColor: "Kynän väri",
     backgroundColor: "Taustaväri",
     templateElements: "Mallin elementit",
@@ -1776,7 +1793,7 @@ editorLocalization.locales["fi"] = fiStrings;
 // pe.portraitOrientation: "Switch to portrait orientation" => "Pystysuuntaan vaihtaminen"
 // image.imageHeight: "Image height (in CSS-accepted values)" => "Kuvan korkeus (CSS:n hyväksymissä arvoissa)"
 // image.imageWidth: "Image width (in CSS-accepted values)" => "Kuvan leveys (CSS-hyväksytyissä arvoissa)"
-// page.maxTimeToFinish: "Time limit to finish the page (in seconds)" => "Sivun viimeistelyn aikaraja (sekunteina)"
+// page.timeLimit: "Time limit to finish the page (in seconds)" => "Sivun viimeistelyn aikaraja (sekunteina)"
 // question.page: "Parent page" => "Pääsivu"
 // pe.noEntriesText: "Empty entries text" => "Tyhjät merkinnät -teksti"
 // pe.setValue: "Answer" => "Vastata"
@@ -2542,9 +2559,9 @@ editorLocalization.locales["fi"] = fiStrings;
 // pehelp.imageFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Valitse seuraavista: \"Ei mitään\" - kuva säilyttää alkuperäisen kokonsa; \"Sisältää\" - kuvan kokoa muutetaan sopivaksi säilyttäen samalla kuvasuhteensa; \"Kansi\" - kuva täyttää koko laatikon säilyttäen samalla kuvasuhteensa; \"Täytä\" - kuva venytetään täyttämään laatikko säilyttämättä sen kuvasuhdetta."
 // pehelp.autoGrow: "Gradually increases the height of the input field as data is being entered. Overrides the \"Input field height (in lines)\" setting." => "Lisää vähitellen syöttökentän korkeutta, kun tietoja syötetään. Ohittaa \"Syöttökentän korkeus (viivoina)\" -asetuksen."
 // pehelp.allowResize: "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field." => "Koonmuuttokahva (tai kahva) tulee näkyviin kulmaan, ja sitä vetämällä voit muuttaa syöttökentän kokoa."
-// pehelp.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "Sekunteina oleva aikaväli, jonka jälkeen kysely etenee automaattisesti Kiitos-sivulle."
-// pehelp.maxTimeToFinishPage: "A time interval in seconds after which the survey auto-advances to the next page." => "Sekunteina ilmaistu aikaväli, jonka jälkeen kysely siirtyy automaattisesti seuraavalle sivulle."
-// page.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the next page." => "Sekunteina ilmaistu aikaväli, jonka jälkeen kysely siirtyy automaattisesti seuraavalle sivulle."
+// pehelp.timeLimit: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "Sekunteina oleva aikaväli, jonka jälkeen kysely etenee automaattisesti Kiitos-sivulle."
+// pehelp.timeLimitPerPage: "A time interval in seconds after which the survey auto-advances to the next page." => "Sekunteina ilmaistu aikaväli, jonka jälkeen kysely siirtyy automaattisesti seuraavalle sivulle."
+// page.timeLimit: "A time interval in seconds after which the survey auto-advances to the next page." => "Sekunteina ilmaistu aikaväli, jonka jälkeen kysely siirtyy automaattisesti seuraavalle sivulle."
 // page.visibleIf: "Use the magic wand icon to set a conditional rule that determines page visibility." => "Käytä taikasauvakuvaketta asettaaksesi ehdollisen säännön, joka määrittää sivun näkyvyyden."
 // page.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the page." => "Määritä taikasauvakuvakkeen avulla ehdollinen sääntö, joka poistaa sivun vain luku -tilan käytöstä."
 // page.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "Määritä taikasauvakuvakkeen avulla ehdollinen sääntö, joka estää kyselyn lähettämisen, ellei vähintään yhteen sisäkkäiseen kysymykseen ole vastausta."
@@ -2552,7 +2569,6 @@ editorLocalization.locales["fi"] = fiStrings;
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Määrittää virhesanoman sijainnin suhteessa kysymykseen, jonka syöte on virheellinen. Valitse seuraavista: \"Top\" - virheteksti sijoitetaan kysymysruudun yläosaan; \"Pohja\" - virheteksti sijoitetaan kysymysruudun alaosaan. \"Peri\"-vaihtoehto käyttää kyselytason asetusta (\"Ylin\" oletuksena)."
 // page.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Säilyttää kysymysten alkuperäisen järjestyksen tai satunnaistaa ne. \"Peri\" -vaihtoehto käyttää kyselytason asetusta (\"Alkuperäinen\" oletuksena). Tämän asetuksen vaikutus näkyy vain Esikatselu-välilehdessä."
 // page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Määrittää navigointipainikkeiden näkyvyyden sivulla. \"Peri\" -vaihtoehto käyttää kyselytason asetusta, jonka oletusarvo on \"Näkyvä\"."
-// pehelp.showTimerPanel: "Sets the visibility and location of a timer on a page." => "Määrittää ajastimen näkyvyyden ja sijainnin sivulla."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "Valitse seuraavista: \"Lukittu\" - käyttäjät eivät voi laajentaa tai kutistaa paneeleja; \"Kutista kaikki\" - kaikki paneelit alkavat romahtaneessa tilassa; \"Laajenna kaikki\" - kaikki paneelit alkavat laajennetussa tilassa; \"Ensimmäinen laajennettu\" - vain ensimmäistä paneelia laajennetaan aluksi."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "Kirjoita jaetun ominaisuuden nimi objektiryhmään, joka sisältää valintaluettelossa näytettävät kuvan tai videotiedoston URL-osoitteet."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "Vasen arvo toimii ehdollisissa säännöissä käytettynä kohteen tunnuksena, oikea arvo näytetään vastaajille."
@@ -2782,3 +2798,25 @@ editorLocalization.locales["fi"] = fiStrings;
 // ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Napsauta mitä tahansa luokkakuvaketta tutustuaksesi kyselyn asetuksiin. Lisäasetukset ovat käytettävissä, kun lisäät mittauselementin suunnittelupintaan."
 // pe.caseInsensitive: "Case insensitive" => "Isot ja pienet kirjaimet eivät ole merkitseviä"
 // pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Valitse, onko säännöllisen lausekkeen isoja ja pieniä kirjaimia käsiteltävä vastaavina."
+
+// ed.surveyPlaceholderTitle: "Your form is empty" => "Lomake on tyhjä"
+// ed.surveyPlaceholderTitleMobile: "Your form is empty" => "Lomake on tyhjä"
+// ed.surveyPlaceholderDescription: "Drag an element from the toolbox or click the button below." => "Vedä elementti työkalupakista tai napsauta alla olevaa painiketta."
+// ed.surveyPlaceholderDescriptionMobile: "Drag an element from the toolbox or click the button below." => "Vedä elementti työkalupakista tai napsauta alla olevaa painiketta."
+// ed.previewPlaceholderTitle: "No preview" => "Ei esikatselua"
+// ed.previewPlaceholderTitleMobile: "No preview" => "Ei esikatselua"
+// ed.previewPlaceholderDescription: "The survey doesn't contain any visible elements." => "Kysely ei sisällä näkyviä elementtejä."
+// ed.previewPlaceholderDescriptionMobile: "The survey doesn't contain any visible elements." => "Kysely ei sisällä näkyviä elementtejä."
+// ed.translationsPlaceholderTitle: "No strings to translate" => "Ei käännettäviä merkkijonoja"
+// ed.translationsPlaceholderTitleMobile: "No strings to translate" => "Ei käännettäviä merkkijonoja"
+// ed.translationsPlaceholderDescription: "Add elements to your form or change the strings filter in the toolbar." => "Lisää elementtejä lomakkeeseen tai muuta työkalurivin merkkijonosuodatinta."
+// ed.translationsPlaceholderDescriptionMobile: "Add elements to your form or change the strings filter in the toolbar." => "Lisää elementtejä lomakkeeseen tai muuta työkalurivin merkkijonosuodatinta."
+// lg.logicPlaceholderTitle: "No logical rules" => "Ei loogisia sääntöjä"
+// lg.logicPlaceholderTitleMobile: "No logical rules" => "Ei loogisia sääntöjä"
+// lg.logicPlaceholderDescription: "Create a rule to customize the flow of the survey." => "Luo sääntö kyselyn kulun mukauttamista varten."
+// lg.logicPlaceholderDescriptionMobile: "Create a rule to customize the flow of the survey." => "Luo sääntö kyselyn kulun mukauttamista varten."
+// pe.showTimer: "Use a timer" => "Käytä ajastinta"
+// theme.advancedMode: "Advanced mode" => "Edistynyt tila"
+// pehelp.timerLocation: "Sets the location of a timer on a page." => "Määrittää ajastimen sijainnin sivulla."
+// header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Kun arvoksi on määritetty 0, korkeus lasketaan automaattisesti otsikon sisällön mukaan."
+// p.mobileHeight: "Height on smartphones" => "Korkeus älypuhelimissa"
