@@ -166,11 +166,6 @@ svc-toolbox {
   justify-content: center;
   align-items: center;
   width: fit-content;
-
-  .sv-dots__item {
-    margin-top: 0;
-    width: calcSize(5);
-  }
 }
 
 .svc-toolbox--flyout {
@@ -224,16 +219,6 @@ svc-toolbox {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-}
-
-.svc-toolbox__tool:not(.sv-dots) {
-  display: flex;
-  flex-direction: column;
-}
-
-.svc-toolbox__tool .sv-dots__item {
-  width: calcSize(6);
-  margin-top: calcSize(0.5);
 }
 
 .svc-toolbox__category-separator {

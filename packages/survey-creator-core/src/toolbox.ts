@@ -530,11 +530,10 @@ export class QuestionToolbox
   }
 
   private initDotsItem() {
-    const originalCss = this.dotsItem.css;
+    this.dotsItem.innerCss = "svc-toolbox__item svc-toolbox__item--dots sv-dots__item";
     this.dotsItem.css = new ComputedUpdater(() => {
       return new CssClassBuilder()
-        .append("svc-toolbox__tool")
-        .append(originalCss)
+        .append("svc-toolbox__tool svc-toolbox__tool--dots")
         .append("sv-action--hidden", !this.dotsItem.isVisible)
         .toString();
     }) as any;

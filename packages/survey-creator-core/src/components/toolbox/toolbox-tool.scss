@@ -339,6 +339,12 @@
   }
 }
 
+.svc-toolbox__tool--dots {
+  align-self: flex-start;
+}
+.svc-toolbox__item--dots {
+  padding-inline-end: var(--ctr-toolbox-item-padding-left);
+}
 .svc-toolbox--compact {
   .svc-toolbox__tool {
     padding: 0px var(--ctr-toolbox-item-margin-horizontal-no-text, 0px);
