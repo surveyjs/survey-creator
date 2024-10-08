@@ -185,6 +185,7 @@
 
   .svc-toolbox__item:not(.sv-dots):focus,
   .svc-toolbox__tool--hovered>.sv-action__content>.svc-toolbox__item:not(.sv-dots),
+  .svc-toolbox__tool:hover>.sv-action__content>.svc-toolbox__item:not(.sv-dots),
   .svc-toolbox__item:not(.sv-dots):hover {
     overflow: hidden;
     background-color: var(--ctr-toolbox-item-background-color-hovered, $background);
