@@ -2,7 +2,7 @@ import { Serializer, Base, property, ArrayChanges, EventBase, ILoadFromJSONOptio
 import { getLocString } from "../editorLocalization";
 import { assign, roundTo2Decimals } from "../utils/utils";
 import { CreatorThemes, ICreatorTheme, PredefinedCreatorThemes } from "./creator-themes";
-import * as Themes from "../themes/index";
+import * as Themes from "survey-creator-core/themes";
 
 Object.keys(Themes || {}).forEach(libraryThemeName => {
   const theme: ICreatorTheme = Themes[libraryThemeName];

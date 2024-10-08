@@ -16,19 +16,11 @@ const config = {
     "index": path.resolve(__dirname, "./src/themes/index.ts"),
   },
   plugins: [new FixStyleOnlyEntriesPlugin()],
-  externals: {
-    "creator-core": {
-      root: "SurveyCreatorCore",
-      commonjs2: "creator-core",
-      commonjs: "creator-core",
-      amd: "creator-core"
-    }
-  }
 };
 
 module.exports = function (options) {
   options.platform = "";
-  options.libraryName = "CreatorTheme";
+  options.libraryName = "SurveyCreatorTheme";
   options.tsConfigFile = path.resolve(__dirname, "./tsconfig.themes.json");
   const mainConfig = webpackCommonConfig(options);
   mainConfig.entry = {};
