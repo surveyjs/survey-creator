@@ -297,7 +297,7 @@
   }
 
   .sv-popup__scrolling-content {
-    padding-top: calc(var(--ctr-toolbox-submenu-group-margin-top, calcSize(1)));
+    padding-top: calc(var(--ctr-toolbox-submenu-group-margin-top, calcSize(1.5)));
     padding-inline-end: var(--ctr-toolbox-submenu-group-margin-right, 12px);
     padding-bottom: var(--ctr-toolbox-submenu-group-margin-bottom-last, 12px);
     padding-inline-start: var(--ctr-toolbox-submenu-group-margin-left, 12px);
@@ -324,7 +324,7 @@
     transition: 0.1s ease-in-out;
     padding: calcSize(1.5) calcSize(2);
     align-self: flex-start;
-    min-width: calcSize(17);
+    min-width: var(--ctr-toolbox-submenu-item-min-width, initial);
     box-sizing: border-box;
 
     .svc-toolbox__item-title {
