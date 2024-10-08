@@ -782,7 +782,8 @@ svc-question,
 
       &>.svc-question__dropdown-choices--wrapper,
       &>.svc-panel__placeholder_frame-wrapper,
-      &>.svc-question__content-actions {
+      &>.svc-question__content-actions,
+      &>.sd-file {
         display: none;
       }
 
