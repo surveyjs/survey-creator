@@ -3292,6 +3292,59 @@ test("Custom trigger in logic", () => {
   delete SurveyLogic.types["increment_counter"];
   Serializer.removeClass("incrementcountertrigger");
 });
+test("Custom trigger vs depends on in logic, Bug#5937", () => {
+  Serializer.addClass(
+    LocationTrigger.triggerName, LocationTrigger.properties,
+    function () {
+      return new LocationTrigger();
+    },
+    "surveytrigger"
+  );
+  SurveyLogic.types.push({
+    name: LocationTrigger.triggerName,
+    baseClass: LocationTrigger.triggerName,
+    propertyName: "expression"
+  });
+
+  const survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" }
+    ],
+    triggers: [
+      {
+        type: LocationTrigger.triggerName,
+        expression: "{q1} = 1",
+        country: "germany",
+        city: "berlin"
+      }
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  expect(logic.matrixItems.visibleRows).toHaveLength(1);
+  const row = logic.matrixItems.visibleRows[0];
+  row.showDetailPanel();
+  const panel = logic.itemEditor.panels[0];
+  expect(panel.getQuestionByName("logicTypeName").value).toBe(LocationTrigger.triggerName);
+  const triggerEditorPanel = <PanelModel>panel.getElementByName("triggerEditorPanel");
+  const countryQuestion = <QuestionDropdownModel>triggerEditorPanel.getQuestionByName("country");
+  const cityQuestion = <QuestionDropdownModel>triggerEditorPanel.getQuestionByName("city");
+  expect(countryQuestion.value).toBe("germany");
+  expect(countryQuestion.choices).toHaveLength(2);
+  expect(cityQuestion.value).toBe("berlin");
+  expect(cityQuestion.choices).toHaveLength(2);
+  expect(cityQuestion.choices[0].value).toBe("berlin");
+  expect(cityQuestion.choices[1].value).toBe("frankfurt");
+
+  countryQuestion.value = "usa";
+  expect(cityQuestion.value).toBeFalsy();
+  expect(cityQuestion.choices).toHaveLength(2);
+  expect(cityQuestion.choices[0].value).toBe("new-york");
+  expect(cityQuestion.choices[1].value).toBe("los-angeles");
+
+  delete SurveyLogic.types[LocationTrigger.triggerName];
+  Serializer.removeClass(LocationTrigger.triggerName);
+});
 test("SurveyLogicItem,  setValue for paneldynamic, Bug#4824", () => {
   const survey = new SurveyModel({
     elements: [
@@ -3417,5 +3470,66 @@ class IncrementCounterTrigger extends SurveyTrigger {
   }
   public set initialNumber(val: number) {
     this.setPropertyValue("initialNumber", val);
+  }
+}
+
+class LocationTrigger extends SurveyTrigger {
+  static countries = [
+    {
+      value: "usa",
+      text: "USA",
+      cities: [
+        { value: "new-york", text: "New York" },
+        { value: "los-angeles", text: "Los Angeles" },
+      ],
+    },
+    {
+      value: "germany",
+      text: "Germany",
+      cities: [
+        { value: "berlin", text: "Berlin" },
+        { value: "frankfurt", text: "Frankfurt" },
+      ],
+    },
+  ];
+  static triggerName = "locationtrigger";
+  static properties = [
+    {
+      type: "dropdown",
+      name: "country",
+      displayName: "Country",
+      choices: LocationTrigger.countries
+    },
+    {
+      type: "dropdown",
+      name: "city",
+      dependsOn: "country",
+      visibleIf: (obj: any) => {
+        return !!obj.country;
+      },
+      choices: (obj, choicesCallback) => {
+        if (!obj.country) choicesCallback([]);
+        const currentCountry = LocationTrigger.countries.find(
+          ({ value }) => value === obj.country
+        );
+        choicesCallback(currentCountry?.cities);
+      },
+    },
+  ];
+
+  getType(): string {
+    return LocationTrigger.triggerName;
+  }
+  get country(): string {
+    return this.getPropertyValue("country", "");
+  }
+  set country(val: string) {
+    this.setPropertyValue("country", val);
+  }
+  get city(): string {
+    return this.getPropertyValue("city", "");
+  }
+  set city(val: string) {
+    this.setPropertyValue("city", val);
   }
 }
