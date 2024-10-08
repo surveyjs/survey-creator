@@ -9,8 +9,8 @@
   outline: none;
   padding-top: var(--ctr-toolbox-item-padding-top, calcSize(1));
   padding-bottom: var(--ctr-toolbox-item-padding-bottom, calcSize(1));
-  padding-right: var(--ctr-toolbox-item-padding-right, calcSize(1.5));
-  padding-left: var(--ctr-toolbox-item-padding-left, calcSize(1.5));
+  padding-inline-end: var(--ctr-toolbox-item-padding-right, calcSize(1.5));
+  padding-inline-start: var(--ctr-toolbox-item-padding-left, calcSize(1.5));
   border-radius: var(--ctr-toolbox-item-corner-radius, calcSize(12.5));
 }
 .svc-toolbox__item-icon {
@@ -37,7 +37,7 @@
 }
 
 .svc-toolbox__item--has-subitems {
-  padding-right: calcSize(6);
+  padding-inline-end: calcSize(6);
 }
 
 .svc-toolbox__tool--has-subitems {
@@ -60,14 +60,14 @@
   display: none;
   box-sizing: border-box;
   align-items: center;
-  margin-right: 0;
-  left: var(--ctr-toolbox-item-banner-left, calcSize(-4.5));
+  margin-inline-end: 0;
+  inset-inline-start: var(--ctr-toolbox-item-banner-left, calcSize(-4.5));
   max-width: calcSize(100);
   padding-top: var(--ctr-tooltip-padding-top, calcSize(2));
-  padding-right: var(--ctr-tooltip-padding-right, calcSize(3)); 
+  padding-inline-end: var(--ctr-tooltip-padding-right, calcSize(3)); 
   padding-bottom: var(--ctr-tooltip-padding-bottom, calcSize(2));
-  padding-left: var(--ctr-tooltip-padding-left, calcSize(3));
-  margin-right: calcSize(-2);
+  padding-inline-start: var(--ctr-tooltip-padding-left, calcSize(3));
+  margin-inline-end: calcSize(-2);
   white-space: nowrap;
   @include smallBold;
   color: var(--ctr-toolbox-item-text-color, $foreground-light);
@@ -88,7 +88,7 @@
   .svc-toolbox__item-icon {
     position: absolute;
     display: var(--ctr-toolbox-item-banner-icon-display, block);
-    left: calcSize(1.5);
+    inset-inline-start: calcSize(1.5);
     top: calcSize(1);
   }
 
@@ -97,12 +97,12 @@
     display: block;
     width: 0;
     height: 0;
-    border-left: calcSize(0.5) solid transparent;
-    border-right: calcSize(0.5) solid transparent;
+    border-inline-start: calcSize(0.5) solid transparent;
+    border-inline-end: calcSize(0.5) solid transparent;
     border-bottom: calcSize(0.5) solid var(--ctr-tooltip-background-color, $background);
     align-self: center;
     position: absolute;
-    right: 100%;
+    inset-inline-end: 100%;
     top: 50%;
     transform: translate(2px, -2px) rotate(-90deg);
   }
@@ -130,8 +130,8 @@
   @include smallBold;
 
   display: block;
-  padding-left: calcSize(1);
-  padding-right: calcSize(1.5);
+  padding-inline-start: calcSize(1);
+  padding-inline-end: calcSize(1.5);
   white-space: nowrap;
   color: var(--ctr-toolbox-item-text-color, $foreground-light);
 }
@@ -143,7 +143,7 @@
     opacity: 1;
 
     // .svc-toolbox__item-title {
-    //   padding-left: calcSize(4);
+    //   padding-inline-start: calcSize(4);
     // }
   }
   .svc-toolbox__item-submenu-button {
@@ -203,7 +203,7 @@
 }
 .svc-toolbox__item-submenu-button {
   position: absolute;
-  right: var(--ctr-toolbox-item-submenu-button-right, calcSize(1.5));
+  inset-inline-end: var(--ctr-toolbox-item-submenu-button-right, calcSize(1.5));
   top: calcSize(1.5);
   display: inline-flex;
   padding: var(--ctr-toolbox-item-submenu-button-padding-top, 4px)
@@ -235,8 +235,8 @@
     .sv-list__item-body {
       padding-top: calcSize(1.5);
       padding-bottom: calcSize(1.5);
-      padding-left: calcSize(2);
-      padding-right: calcSize(5);
+      padding-inline-start: calcSize(2);
+      padding-inline-end: calcSize(5);
     }
   }
 }
@@ -263,7 +263,7 @@
 .svc-toolbox-subtypes {
   .sv-popup__container {
     padding: 0;
-    padding-left: var(--ctr-toolbox-submenu-offset, 0px);
+    padding-inline-start: var(--ctr-toolbox-submenu-offset, 0px);
     box-shadow: unset;
     background: unset;
   }
@@ -288,9 +288,9 @@
 
   .sv-popup__scrolling-content {
     padding-top: calc(var(--ctr-toolbox-submenu-group-margin-top, calcSize(1)));
-    padding-right: var(--ctr-toolbox-submenu-group-margin-right, 12px);
+    padding-inline-end: var(--ctr-toolbox-submenu-group-margin-right, 12px);
     padding-bottom: var(--ctr-toolbox-submenu-group-margin-bottom-last, 12px);
-    padding-left: var(--ctr-toolbox-submenu-group-margin-left, 12px);
+    padding-inline-start: var(--ctr-toolbox-submenu-group-margin-left, 12px);
     overflow: visible;
   }
 
@@ -344,7 +344,7 @@
     padding: 0px var(--ctr-toolbox-item-margin-horizontal-no-text, 0px);
   }
   .svc-toolbox__item {
-    padding-left: var(--ctr-toolbox-item-padding-left-no-text, calcSize(1.5));
-    padding-right: var(--ctr-toolbox-item-padding-right-no-text, calcSize(2));
+    padding-inline-start: var(--ctr-toolbox-item-padding-left-no-text, calcSize(1.5));
+    padding-inline-end: var(--ctr-toolbox-item-padding-right-no-text, calcSize(2));
   }
 }
