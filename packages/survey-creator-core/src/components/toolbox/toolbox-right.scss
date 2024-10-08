@@ -1,8 +1,11 @@
 @import "../../variables.scss";
-
+.svc-creator__toolbox--right,
 [dir="rtl"],
 [style*="direction:rtl"],
 [style*="direction: rtl"] {
+  .svc-toolbox {
+    direction: rtl;
+  }
   .svc-toolbox__item-banner {
     &:after {
       transform: translate(-2px, -2px) rotate(90deg);
@@ -13,10 +16,9 @@
   }
 }
 .svc-creator__toolbox--right {
-  .svc-toolbox__search-container {
-    direction: initial;
-  }
-  .svc-toolbox-popup {
+  .sv-popup__body-content,
+  .svc-toolbox__search-container
+  {
     direction: initial;
   }
 }
