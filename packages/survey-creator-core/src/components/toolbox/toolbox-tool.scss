@@ -166,9 +166,9 @@
   }
 }
 
-.svc-toolbox__item:not(.sv-dots):focus,
+.svc-toolbox__item:focus,
 .svc-toolbox__tool--has-subitems:hover > .svc-toolbox__tool-content > .svc-toolbox__item,
-.svc-toolbox__item:not(.sv-dots):hover {
+.svc-toolbox__item:hover {
   overflow: visible;
   background-color: var(--ctr-toolbox-item-background-color-hovered, $background);
   box-shadow: $shadow-medium;
@@ -241,22 +241,24 @@
   }
 }
 
-.svc-toolbox,
-.svc-toolbox:not(.svc-toolbox--compact) {
-  .svc-toolbox__tool--pressed {
-    .svc-toolbox__item:not(.sv-dots) {
-      color: var(--ctr-toolbox-item-text-color-hovered, $foreground);
-      opacity: 0.5;
+.svc-toolbox__tool.svc-toolbox__tool--pressed {
+  .svc-toolbox__item {
+    background: var(--ctr-toolbox-item-background-color-pressed, inherit);
+    box-shadow: var(--ctr-toolbox-item-shadow-pressed-offset-x, 0px) var(--ctr-toolbox-item-shadow-pressed-offset-y, 1px) var(--ctr-toolbox-item-shadow-pressed-blur, 2px) var(--ctr-toolbox-item-shadow-pressed-spread, 0px) var(--ctr-toolbox-item-shadow-pressed-color, rgba(0, 0, 0, 0.00));
+  }
+  
+  .svc-toolbox__item-title {
+    color: var(--ctr-toolbox-item-text-color-pressed, $foreground);
+    opacity: var(--ctr-toolbox-item-text-opacity-pressed, 0.5);
+  }
 
-      .sv-svg-icon use {
-        fill: var(--ctr-toolbox-item-icon-color-pressed, $foreground);
-        opacity: 0.5;
-      }
-    }
+  .sv-svg-icon use {
+    fill: var(--ctr-toolbox-item-icon-color-pressed, $foreground);
+    opacity: var(--ctr-toolbox-item-icon-opacity-pressed, 0.5);
+  }
 
-    .svc-toolbox__item.svc-toolbox__item-subtype {
-      opacity: unset;
-    }
+  .svc-toolbox__item.svc-toolbox__item-subtype {
+    opacity: unset;
   }
 }
 
