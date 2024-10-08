@@ -61,7 +61,6 @@ require("./components/creator.scss");
 require("./components/string-editor.scss");
 require("./creator-theme/creator.scss");
 
-
 export interface IKeyboardShortcut {
   name?: string;
   affectedTab?: string;
