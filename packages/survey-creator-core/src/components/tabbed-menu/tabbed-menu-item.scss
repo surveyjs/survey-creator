@@ -48,6 +48,7 @@
 .svc-tabbed-menu-item__text.svc-tabbed-menu-item__text {
   white-space: nowrap;
   display: block;
+  color: var(--ctr-menu-item-text-color, $foreground);
   font-size: var(--ctr-font-default-size, 16px);
   line-height: var(--ctr-font-default-line-height, 24px);
 }
