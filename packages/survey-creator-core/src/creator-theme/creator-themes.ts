@@ -4,4 +4,4 @@ export interface ICreatorTheme {
 }
 
 export const CreatorThemes: { [index: string]: ICreatorTheme } = {};
-export const PredefinedCreatorThemes: string[] = ["sc2020", "default-light", "default-dark", "default-contrast"];
+export const PredefinedCreatorThemes: string[] = ["sc2020"];

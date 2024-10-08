@@ -4,8 +4,11 @@ import { assign, roundTo2Decimals } from "../utils/utils";
 import { CreatorThemes, ICreatorTheme, PredefinedCreatorThemes } from "./creator-themes";
 import * as Themes from "survey-creator-core/themes";
 
-Object.keys(Themes || {}).forEach(libraryThemeName => {
-  const theme: ICreatorTheme = Themes[libraryThemeName];
+Object.keys(Themes || {}).forEach(themeName => {
+  const theme: ICreatorTheme = Themes[themeName];
+  if (PredefinedCreatorThemes.indexOf(theme.themeName) === -1) {
+    PredefinedCreatorThemes.push(theme.themeName);
+  }
   CreatorThemes[theme.themeName] = theme;
 });
 
