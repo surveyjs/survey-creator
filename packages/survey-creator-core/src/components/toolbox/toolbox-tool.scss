@@ -196,6 +196,7 @@
 .svc-toolbox__tool .sv-dots__item.sv-action-bar-item--pressed {
   background-color: var(--ctr-toolbox-button-background-color-hovered, $primary-light);
   border-radius: var(--ctr-toolbox-item-corner-radius, calcSize(12.5));
+  box-shadow: none;
 
   .sv-svg-icon use {
     fill: var(--ctr-toolbox-item-icon-color-hovered, $primary);
@@ -345,7 +346,8 @@
   align-self: flex-start;
 }
 .svc-toolbox__item--dots {
-  padding-inline-end: var(--ctr-toolbox-item-padding-left);
+  padding-inline-end: var(--ctr-toolbox-item-padding-left, calcSize(1.5));
+  margin-top: calcSize(0.5);
 }
 .svc-toolbox--compact {
   .svc-toolbox__tool {
