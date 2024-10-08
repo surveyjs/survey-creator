@@ -122,16 +122,6 @@
   }
 }
 
-.svc-toolbox--compact {
-  .svc-toolbox__tool {
-    align-self: flex-start;
-  }
-  .svc-toolbox__item {
-    box-sizing: border-box;
-    align-self: flex-start;
-  }
-}
-
 .svc-toolbox__item-title {
   @include smallBold;
 
@@ -224,10 +214,6 @@
   svg {
     fill: var(--ctr-toolbox-item-submenu-button-icon-color, $layer-1-foreground-50);
   }
-}
-
-.svc-toolbox--compact .svc-toolbox__item-submenu-button {
-  display: none;
 }
 
 .svc-toolbox-popup {
@@ -357,11 +343,20 @@
   margin-top: calcSize(0.5);
 }
 .svc-toolbox--compact {
+  .svc-toolbox__item-submenu-button {
+    display: none;
+  }
   .svc-toolbox__tool {
     padding: 0px var(--ctr-toolbox-item-margin-horizontal-no-text, 0px);
+    align-self: flex-start;
+  }
+  .svc-toolbox__search-button {
+    padding-inline-start: var(--ctr-toolbox-item-margin-horizontal-no-text, calcSize(0.5));
   }
   .svc-toolbox__item {
     padding-inline-start: var(--ctr-toolbox-item-padding-left-no-text, calcSize(1.5));
     padding-inline-end: var(--ctr-toolbox-item-padding-right-no-text, calcSize(2));
+    box-sizing: border-box;
+    align-self: flex-start;
   }
 }

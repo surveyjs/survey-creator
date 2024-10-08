@@ -71,13 +71,12 @@ svc-toolbox {
   overflow-y: auto;
   overflow-x: hidden;
 
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-
   display: flex;
   flex-direction: column;
   align-items: var(--ctr-toolbox-scroller-align-items, flex-end);
 
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
   &::-webkit-scrollbar {
     display: none;
   }
@@ -114,6 +113,20 @@ svc-toolbox {
   }
 }
 
+.svc-toolbox--scrollable {
+  .svc-toolbox__scroller,
+  .svc-toolbox__search-container {
+    padding-inline-start: var(--ctr-toolbox-group-padding-left, calcSize(3))
+  }
+}
+
+.svc-toolbox--scrollable.svc-toolbox--compact {
+  .svc-toolbox__scroller,
+  .svc-toolbox__search-container {
+    padding-inline-start: var(--ctr-toolbox-group-padding-left-compact, calcSize(3))
+  }
+}
+
 .svc-toolbox--compact {
   width: var(--ctr-toolbox-width-compact, 82px);
   //margin-inline-end: var(--ctr-toolbox-margin-right-compact,calc(-100vw + calcSize(10.5)));
@@ -122,7 +135,7 @@ svc-toolbox {
   }
   .svc-toolbox__scroller {
     width: 100vw;
-    padding: var(--ctr-toolbox-padding-top, calcSize(1)) var(--ctr-toolbox-group-padding-right-compact, calcSize(1.5))
+    padding: var(--ctr-toolbox-padding-top, calcSize(1.5)) var(--ctr-toolbox-group-padding-right-compact, calcSize(1.5))
       var(--ctr-toolbox-padding-bottom, calcSize(2)) var(--ctr-toolbox-group-padding-left-compact, calcSize(1.5));
   }
   .spg-search-editor_container {
