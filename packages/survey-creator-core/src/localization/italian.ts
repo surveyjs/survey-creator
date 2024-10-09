@@ -1521,7 +1521,7 @@ var italianTranslation = {
     header: {
       inheritWidthFrom: "L'opzione \"Uguale al contenitore\" regola automaticamente la larghezza dell'area del contenuto dell'intestazione per adattarla all'elemento HTML in cui è posizionato il sondaggio.",
       textAreaWidth: "La larghezza dell'area dell'intestazione che contiene il titolo e la descrizione del sondaggio, misurata in pixel.",
-      overlapEnabled: "Sovrappone la parte inferiore dell'intestazione alla parte superiore del rilevamento.",
+      overlapEnabled: "Se abilitata, la parte superiore del sondaggio si sovrappone alla parte inferiore dell'intestazione.",
       mobileHeight: "Se impostata su 0, l'altezza viene calcolata automaticamente per adattarsi al contenuto dell'intestazione."
     },
     panellayoutcolumn: {
@@ -2523,7 +2523,6 @@ editorLocalization.locales["it"] = italianTranslation;
 // theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "Imposta il colore di sfondo principale del rilevamento."
 // header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "L'opzione \"Uguale al contenitore\" regola automaticamente la larghezza dell'area del contenuto dell'intestazione per adattarla all'elemento HTML in cui è posizionato il sondaggio."
 // header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "La larghezza dell'area dell'intestazione che contiene il titolo e la descrizione del sondaggio, misurata in pixel."
-// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "Sovrappone la parte inferiore dell'intestazione alla parte superiore del rilevamento."
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Accetta valori %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Accetta valori px."
 // p.effectiveColSpan: "Column span" => "Estensione delle colonne"
@@ -2578,3 +2577,4 @@ editorLocalization.locales["it"] = italianTranslation;
 // pehelp.timerLocation: "Sets the location of a timer on a page." => "Imposta la posizione di un timer su una pagina."
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Se impostata su 0, l'altezza viene calcolata automaticamente per adattarsi al contenuto dell'intestazione."
 // p.mobileHeight: "Height on smartphones" => "Altezza su smartphone"
+// header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Se abilitata, la parte superiore del sondaggio si sovrappone alla parte inferiore dell'intestazione."

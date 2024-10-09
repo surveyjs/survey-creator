@@ -1521,7 +1521,7 @@ export var arStrings = {
     header: {
       inheritWidthFrom: "يقوم خيار \"نفس الحاوية\" بضبط عرض منطقة محتوى الرأس تلقائيا ليلائم عنصر HTML الذي يتم وضع الاستطلاع فيه.",
       textAreaWidth: "عرض ناحية الرأس التي تحتوي على عنوان الاستطلاع ووصفه، مقاسا بالبكسل.",
-      overlapEnabled: "يجعل الجزء السفلي من الرأس متراكبا مع الجزء العلوي من الاستطلاع.",
+      overlapEnabled: "عند التمكين، يقوم الجزء العلوي من الاستطلاع بتراكب الجزء السفلي من الرأس.",
       mobileHeight: "عند التعيين إلى 0 ، يتم حساب الارتفاع تلقائيا لاستيعاب محتوى الرأس."
     },
     panellayoutcolumn: {
@@ -2676,7 +2676,6 @@ editorLocalization.locales["ar"] = arStrings;
 // theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "يضبط لون الخلفية الرئيسي للاستطلاع."
 // header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "يقوم خيار \"نفس الحاوية\" بضبط عرض منطقة محتوى الرأس تلقائيا ليلائم عنصر HTML الذي يتم وضع الاستطلاع فيه."
 // header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "عرض ناحية الرأس التي تحتوي على عنوان الاستطلاع ووصفه، مقاسا بالبكسل."
-// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "يجعل الجزء السفلي من الرأس متراكبا مع الجزء العلوي من الاستطلاع."
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "يقبل القيم٪"
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "يقبل القيم px."
 // p.effectiveColSpan: "Column span" => "امتداد العمود"
@@ -2731,3 +2730,4 @@ editorLocalization.locales["ar"] = arStrings;
 // pehelp.timerLocation: "Sets the location of a timer on a page." => "يضبط موقع المؤقت على الصفحة."
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "عند التعيين إلى 0 ، يتم حساب الارتفاع تلقائيا لاستيعاب محتوى الرأس."
 // p.mobileHeight: "Height on smartphones" => "الارتفاع على الهواتف الذكية"
+// header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "عند التمكين، يقوم الجزء العلوي من الاستطلاع بتراكب الجزء السفلي من الرأس."

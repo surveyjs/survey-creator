@@ -1521,7 +1521,7 @@ export var huStrings = {
     header: {
       inheritWidthFrom: "Az \"Ugyanaz, mint a tároló\" beállítás automatikusan beállítja a fejléc tartalomterületének szélességét, hogy illeszkedjen ahhoz a HTML-elemhez, amelybe a felmérés kerül.",
       textAreaWidth: "A felmérés címét és leírását tartalmazó fejlécterület szélessége képpontban mérve.",
-      overlapEnabled: "A fejléc alját a felmérés tetejével átfedésbe helyezi.",
+      overlapEnabled: "Ha engedélyezve van, a felmérés teteje átfedi a fejléc alját.",
       mobileHeight: "Ha 0-ra van állítva, a magasság automatikusan kiszámításra kerül, hogy elférjen a fejléc tartalma."
     },
     panellayoutcolumn: {
@@ -2918,7 +2918,6 @@ editorLocalization.locales["hu"] = huStrings;
 // theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "Beállítja a felmérés fő háttérszínét."
 // header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "Az \"Ugyanaz, mint a tároló\" beállítás automatikusan beállítja a fejléc tartalomterületének szélességét, hogy illeszkedjen ahhoz a HTML-elemhez, amelybe a felmérés kerül."
 // header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "A felmérés címét és leírását tartalmazó fejlécterület szélessége képpontban mérve."
-// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "A fejléc alját a felmérés tetejével átfedésbe helyezi."
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Elfogadja a % értékeket"
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Elfogadja a px értékeket."
 // p.effectiveColSpan: "Column span" => "Oszlop fesztávolsága"
@@ -2973,3 +2972,4 @@ editorLocalization.locales["hu"] = huStrings;
 // pehelp.timerLocation: "Sets the location of a timer on a page." => "Beállítja az időzítő helyét az oldalon."
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Ha 0-ra van állítva, a magasság automatikusan kiszámításra kerül, hogy elférjen a fejléc tartalma."
 // p.mobileHeight: "Height on smartphones" => "Magasság az okostelefonokon"
+// header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Ha engedélyezve van, a felmérés teteje átfedi a fejléc alját."

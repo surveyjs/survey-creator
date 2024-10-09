@@ -1521,7 +1521,7 @@ export var indonesianStrings = {
     header: {
       inheritWidthFrom: "Opsi \"Sama seperti wadah\" secara otomatis menyesuaikan lebar area konten header agar sesuai dengan elemen HTML tempat survei ditempatkan.",
       textAreaWidth: "Lebar area header yang berisi judul dan deskripsi survei, diukur dalam piksel.",
-      overlapEnabled: "Membuat bagian bawah header dilapisi dengan bagian atas survei.",
+      overlapEnabled: "Saat diaktifkan, bagian atas survei melapisi bagian bawah header.",
       mobileHeight: "Saat diatur ke 0, tinggi dihitung secara otomatis untuk mengakomodasi konten header."
     },
     panellayoutcolumn: {
@@ -2919,7 +2919,6 @@ editorLocalization.locales["id"] = indonesianStrings;
 // theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "Mengatur warna latar belakang utama survei."
 // header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "Opsi \"Sama seperti wadah\" secara otomatis menyesuaikan lebar area konten header agar sesuai dengan elemen HTML tempat survei ditempatkan."
 // header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "Lebar area header yang berisi judul dan deskripsi survei, diukur dalam piksel."
-// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "Membuat bagian bawah header dilapisi dengan bagian atas survei."
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Menerima nilai %"
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Menerima nilai px."
 // p.effectiveColSpan: "Column span" => "Rentang kolom"
@@ -2974,3 +2973,4 @@ editorLocalization.locales["id"] = indonesianStrings;
 // pehelp.timerLocation: "Sets the location of a timer on a page." => "Mengatur lokasi pengatur waktu pada halaman."
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Saat diatur ke 0, tinggi dihitung secara otomatis untuk mengakomodasi konten header."
 // p.mobileHeight: "Height on smartphones" => "Tinggi di smartphone"
+// header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Saat diaktifkan, bagian atas survei melapisi bagian bawah header."

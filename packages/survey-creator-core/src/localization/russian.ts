@@ -1521,7 +1521,7 @@ export var ruStrings = {
     header: {
       inheritWidthFrom: "Опция \"То же самое, что и контейнер\" автоматически настраивает ширину области содержимого заголовка в соответствии с элементом HTML, в который помещается опрос.",
       textAreaWidth: "Ширина области заголовка, содержащей название и описание опроса, измеряется в пикселях.",
-      overlapEnabled: "Делает нижнюю часть заголовка наложенной на верхнюю часть опроса.",
+      overlapEnabled: "Когда этот параметр включен, верхняя часть опроса накладывается на нижнюю часть заголовка.",
       mobileHeight: "Если задано значение 0, высота вычисляется автоматически для размещения содержимого заголовка."
     },
     panellayoutcolumn: {
@@ -2825,7 +2825,6 @@ editorLocalization.locales["ru"] = ruStrings;
 // theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "Задает основной цвет фона опроса."
 // header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "Опция \"То же самое, что и контейнер\" автоматически настраивает ширину области содержимого заголовка в соответствии с элементом HTML, в который помещается опрос."
 // header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "Ширина области заголовка, содержащей название и описание опроса, измеряется в пикселях."
-// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "Делает нижнюю часть заголовка наложенной на верхнюю часть опроса."
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Принимает значения %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Принимает значения px."
 // p.effectiveColSpan: "Column span" => "Пролет колонны"
@@ -2880,3 +2879,4 @@ editorLocalization.locales["ru"] = ruStrings;
 // pehelp.timerLocation: "Sets the location of a timer on a page." => "Задает расположение таймера на странице."
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Если задано значение 0, высота вычисляется автоматически для размещения содержимого заголовка."
 // p.mobileHeight: "Height on smartphones" => "Высота на смартфонах"
+// header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Когда этот параметр включен, верхняя часть опроса накладывается на нижнюю часть заголовка."

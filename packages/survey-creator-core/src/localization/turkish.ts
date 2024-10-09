@@ -1521,7 +1521,7 @@ export var turkishStrings = {
     header: {
       inheritWidthFrom: "\"Kapsayıcı ile aynı\" seçeneği, başlık içerik alanı genişliğini anketin yerleştirildiği HTML öğesine sığacak şekilde otomatik olarak ayarlar.",
       textAreaWidth: "Anket başlığını ve açıklamasını içeren üstbilgi alanının piksel cinsinden genişliği.",
-      overlapEnabled: "Üstbilginin alt kısmını, anketin üst kısmıyla kaplanmış hale getirir.",
+      overlapEnabled: "Etkinleştirildiğinde, anketin üst kısmı başlığın alt kısmıyla kaplanır.",
       mobileHeight: "0 olarak ayarlandığında, üstbilginin içeriğine uyum sağlamak için yükseklik otomatik olarak hesaplanır."
     },
     panellayoutcolumn: {
@@ -2760,7 +2760,6 @@ editorLocalization.locales["tr"] = turkishStrings;
 // theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "Anketin ana arka plan rengini ayarlar."
 // header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "\"Kapsayıcı ile aynı\" seçeneği, başlık içerik alanı genişliğini anketin yerleştirildiği HTML öğesine sığacak şekilde otomatik olarak ayarlar."
 // header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "Anket başlığını ve açıklamasını içeren üstbilgi alanının piksel cinsinden genişliği."
-// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "Üstbilginin alt kısmını, anketin üst kısmıyla kaplanmış hale getirir."
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "% değerlerini kabul eder."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Px değerlerini kabul eder."
 // p.effectiveColSpan: "Column span" => "Sütun aralığı"
@@ -2815,3 +2814,4 @@ editorLocalization.locales["tr"] = turkishStrings;
 // pehelp.timerLocation: "Sets the location of a timer on a page." => "Sayfadaki bir zamanlayıcının konumunu ayarlar."
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "0 olarak ayarlandığında, üstbilginin içeriğine uyum sağlamak için yükseklik otomatik olarak hesaplanır."
 // p.mobileHeight: "Height on smartphones" => "Akıllı telefonlarda yükseklik"
+// header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Etkinleştirildiğinde, anketin üst kısmı başlığın alt kısmıyla kaplanır."
