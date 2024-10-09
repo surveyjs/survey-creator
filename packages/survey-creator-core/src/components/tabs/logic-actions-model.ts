@@ -4,6 +4,7 @@ import { PropertyJSONGenerator } from "../../property-grid";
 import { ISurveyCreatorOptions } from "../../creator-settings";
 import { SurveyLogicAction } from "./logic-items";
 import { SurveyLogicType } from "./logic-types";
+import { PropertyGridEditorCollection } from "../../property-grid/index";
 
 export class LogicActionModelBase {
   public isTrigger: boolean;
@@ -179,6 +180,21 @@ export class LogicActionTriggerModel extends LogicActionModelBase {
       panel.visible = panel.elements.filter(el => el.visible).length > 0;
     } else {
       panel.visible = false;
+    }
+  }
+  public onPanelQuestionValueChanged(panel: PanelModel, qName: string): void {
+    if(this.panelObj) {
+      const prop = Serializer.findProperty(this.panelObj.getType(), qName);
+      const depProps = prop?.getDependedProperties();
+      if(Array.isArray(depProps) && depProps.length > 0) {
+        depProps.forEach(dp => {
+          const dQ = panel.getQuestionByName(dp);
+          const dProp = Serializer.findProperty(this.panelObj.getType(), dp);
+          if(!!dQ && !!dProp) {
+            PropertyGridEditorCollection.onMasterValueChanged(this.panelObj, dProp, dQ);
+          }
+        });
+      }
     }
   }
   private updatePanelQuestionsValue(panel: PanelModel) {
