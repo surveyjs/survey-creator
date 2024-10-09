@@ -1,3 +1,5 @@
+@import "../variables.scss";
+
 .spg-boolean-switch,
 .spg-boolean-switch * {
   box-sizing: border-box;
@@ -17,11 +19,9 @@
   background: var(--ctr-toggle-button-background-color, #ffffff);
   outline: none;
   border-radius: var(--ctr-toggle-button-corner-radius, 1024px);
-  border-style: solid;
-  border-color: var(--ctr-toggle-button-border-color, rgba(0, 0, 0, 0.16));
-  border-width: 1px;
-  margin: 1px;
-  padding: var(--ctr-toggle-button-padding-top, 4px) var(--ctr-toggle-button-padding-right, 4px) var(--ctr-toggle-button-padding-bottom, 4px) var(--ctr-toggle-button-padding-left, 4px);
+  box-shadow: 0px 0px 0px 1px var(--ctr-toggle-button-border-color, rgba(0, 0, 0, 0.16));
+  padding: var(--ctr-toggle-button-padding-top, 4px) var(--ctr-toggle-button-padding-right, 4px)
+    var(--ctr-toggle-button-padding-bottom, 4px) var(--ctr-toggle-button-padding-left, 4px);
   display: flex;
   flex-direction: row;
   gap: var(--ctr-toggle-button-gap, 4px);
@@ -32,9 +32,7 @@
 
   &:focus,
   &:focus-visible {
-    border-color: var(--ctr-toggle-button-border-color-focused, #19b394);
-    border-width: 2px;
-    margin: 0;
+    box-shadow: 0px 0px 0px 2px var(--ctr-toggle-button-border-color-focused, #19b394);
   }
 }
 
@@ -102,11 +100,11 @@
 }
 
 .spg-boolean-switch__title {
-  color: var(--ctr-toggle-button-label-text-color, rgba(0, 0, 0, 0.91));
+  color: var(--ctr-toggle-button-label-text-color, #{$foreground-dim});
   text-align: left;
-  font-family: var(--ctr-default-font-family, "OpenSans-Regular", sans-serif);
-  font-size: var(--ctr-default-font-size, 16px);
-  line-height: var(--ctr-default-line-height, 24px);
+  font-family: var(--ctr-default-font-family, #{$font-family});
+  font-size: var(--ctr-default-font-size, #{$font-size});
+  line-height: var(--ctr-default-line-height, calc(1.5 * #{$font-size}));
   font-weight: var(--ctr-default-font-weight, 400);
   position: relative;
   display: flex;

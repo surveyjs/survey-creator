@@ -8,6 +8,7 @@
     >
     <div class="spg-boolean-switch__button" tabindex="0"
       :class="question.value ? 'spg-boolean-switch__button--checked' : ''"
+      v-key2click="{ disableTabStop: true }"
       >
       <div class="spg-boolean-switch__thumb">
         <div class="spg-boolean-switch__thumb-circle spg-boolean-switch__thumb--left"></div>
