@@ -211,7 +211,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this._renderedCollapsed = !val;
   }, () => !this.renderedCollapsed);
   public set renderedCollapsed(val: boolean) {
-    if (this.animationAllowed) this.expandCollapseAnimationRunning = true;
+    if (this.animationAllowed && val !== this.renderedCollapsed) this.expandCollapseAnimationRunning = true;
     this.animationCollapsed.sync(!val);
   }
   public get renderedCollapsed(): boolean {

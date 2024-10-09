@@ -1529,7 +1529,7 @@ export var enStrings = {
     header: {
       inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in.",
       textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels.",
-      overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey.",
+      overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header.",
       mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content.",
     },
     panellayoutcolumn: {

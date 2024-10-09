@@ -1521,7 +1521,7 @@ var polishStrings = {
     header: {
       inheritWidthFrom: "Opcja \"Taki sam jak kontener\" automatycznie dostosowuje szerokość obszaru zawartości nagłówka, aby pasowała do elementu HTML, w którym umieszczono ankietę.",
       textAreaWidth: "Szerokość obszaru nagłówka, który zawiera tytuł i opis ankiety, mierzona w pikselach.",
-      overlapEnabled: "Powoduje, że dolna krawędź nagłówka jest nakładana na górną krawędź ankiety.",
+      overlapEnabled: "Gdy ta opcja jest włączona, górna krawędź ankiety nakłada się na dolną część nagłówka.",
       mobileHeight: "Po ustawieniu wartości 0 wysokość jest obliczana automatycznie, aby pomieścić zawartość nagłówka."
     },
     panellayoutcolumn: {
@@ -3032,7 +3032,6 @@ editorLocalization.locales["pl"] = polishStrings;
 // theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "Ustawia główny kolor tła ankiety."
 // header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "Opcja \"Taki sam jak kontener\" automatycznie dostosowuje szerokość obszaru zawartości nagłówka, aby pasowała do elementu HTML, w którym umieszczono ankietę."
 // header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "Szerokość obszaru nagłówka, który zawiera tytuł i opis ankiety, mierzona w pikselach."
-// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "Powoduje, że dolna krawędź nagłówka jest nakładana na górną krawędź ankiety."
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Akceptuje wartości %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Akceptuje wartości px."
 // p.effectiveColSpan: "Column span" => "Rozpiętość kolumn"
@@ -3087,3 +3086,4 @@ editorLocalization.locales["pl"] = polishStrings;
 // pehelp.timerLocation: "Sets the location of a timer on a page." => "Ustawia położenie czasomierza na stronie."
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Po ustawieniu wartości 0 wysokość jest obliczana automatycznie, aby pomieścić zawartość nagłówka."
 // p.mobileHeight: "Height on smartphones" => "Wysokość na smartfonach"
+// header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Gdy ta opcja jest włączona, górna krawędź ankiety nakłada się na dolną część nagłówka."

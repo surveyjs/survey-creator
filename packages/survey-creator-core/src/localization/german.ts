@@ -1521,7 +1521,7 @@ var germanTranslation = {
     header: {
       inheritWidthFrom: "Die Option \"Wie Container\" passt die Breite des Inhaltsbereichs der Kopfzeile automatisch an das HTML-Element an, in dem die Umfrage platziert wird.",
       textAreaWidth: "Die Breite des Kopfbereichs, der den Titel und die Beschreibung der Umfrage enthält, gemessen in Pixeln.",
-      overlapEnabled: "Legt fest, dass der untere Rand der Kopfzeile mit dem oberen Rand des Survey überlagert wird.",
+      overlapEnabled: "Wenn diese Option aktiviert ist, überlagert der obere Rand der Umfrage den unteren Rand der Kopfzeile.",
       mobileHeight: "Wenn der Wert auf 0 gesetzt ist, wird die Höhe automatisch berechnet, um den Inhalt der Kopfzeile aufzunehmen."
     },
     panellayoutcolumn: {
@@ -2474,7 +2474,6 @@ editorLocalization.locales["de"] = germanTranslation;
 // theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "Legt die Haupthintergrundfarbe der Umfrage fest."
 // header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "Die Option \"Wie Container\" passt die Breite des Inhaltsbereichs der Kopfzeile automatisch an das HTML-Element an, in dem die Umfrage platziert wird."
 // header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "Die Breite des Kopfbereichs, der den Titel und die Beschreibung der Umfrage enthält, gemessen in Pixeln."
-// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "Legt fest, dass der untere Rand der Kopfzeile mit dem oberen Rand des Survey überlagert wird."
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Akzeptiert die Werte %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Akzeptiert die Werte px."
 // p.effectiveColSpan: "Column span" => "Spaltenbereich"
@@ -2529,3 +2528,4 @@ editorLocalization.locales["de"] = germanTranslation;
 // pehelp.timerLocation: "Sets the location of a timer on a page." => "Legt die Position eines Timers auf einer Seite fest."
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Wenn der Wert auf 0 gesetzt ist, wird die Höhe automatisch berechnet, um den Inhalt der Kopfzeile aufzunehmen."
 // p.mobileHeight: "Height on smartphones" => "Höhe auf Smartphones"
+// header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Wenn diese Option aktiviert ist, überlagert der obere Rand der Umfrage den unteren Rand der Kopfzeile."

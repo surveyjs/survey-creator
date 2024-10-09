@@ -1521,7 +1521,7 @@ export var nbStrings = {
     header: {
       inheritWidthFrom: "Alternativet \"Samme som beholder\" justerer automatisk bredden på overskriftsinnholdsområdet slik at det passer inn i HTML-elementet undersøkelsen er plassert i.",
       textAreaWidth: "Bredden på overskriftsområdet som inneholder evalueringstittelen og beskrivelsen, målt i piksler.",
-      overlapEnabled: "Gjør bunnen av toppteksten overlagt med toppen av undersøkelsen.",
+      overlapEnabled: "Når den er aktivert, overlapper toppen av evalueringen bunnen av overskriften.",
       mobileHeight: "Når den er satt til 0, beregnes høyden automatisk for å få plass til overskriftens innhold."
     },
     panellayoutcolumn: {
@@ -2768,7 +2768,6 @@ editorLocalization.locales["nb"] = nbStrings;
 // theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "Angir hovedbakgrunnsfargen for undersøkelsen."
 // header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "Alternativet \"Samme som beholder\" justerer automatisk bredden på overskriftsinnholdsområdet slik at det passer inn i HTML-elementet undersøkelsen er plassert i."
 // header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "Bredden på overskriftsområdet som inneholder evalueringstittelen og beskrivelsen, målt i piksler."
-// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "Gjør bunnen av toppteksten overlagt med toppen av undersøkelsen."
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Godtar verdier %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Godtar verdier px."
 // p.effectiveColSpan: "Column span" => "Spaltespenn"
@@ -2823,3 +2822,4 @@ editorLocalization.locales["nb"] = nbStrings;
 // pehelp.timerLocation: "Sets the location of a timer on a page." => "Angir plasseringen av en tidtaker på en side."
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Når den er satt til 0, beregnes høyden automatisk for å få plass til overskriftens innhold."
 // p.mobileHeight: "Height on smartphones" => "Høyde på smarttelefoner"
+// header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Når den er aktivert, overlapper toppen av evalueringen bunnen av overskriften."

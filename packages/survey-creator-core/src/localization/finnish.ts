@@ -1521,7 +1521,7 @@ export var fiStrings = {
     header: {
       inheritWidthFrom: "Sama kuin säilö -vaihtoehto säätää automaattisesti otsikon sisältöalueen leveyttä sopimaan HTML-elementtiin, johon kysely sijoitetaan.",
       textAreaWidth: "Kyselyn otsikon ja kuvauksen sisältävän otsikkoalueen leveys pikseleinä mitattuna.",
-      overlapEnabled: "Suurentaa otsikon alaosan kyselyn yläosan päälle.",
+      overlapEnabled: "Kun tämä asetus on käytössä, kyselyn yläosa peittää otsikon alaosan.",
       mobileHeight: "Kun arvoksi on määritetty 0, korkeus lasketaan automaattisesti otsikon sisällön mukaan."
     },
     panellayoutcolumn: {
@@ -2765,7 +2765,6 @@ editorLocalization.locales["fi"] = fiStrings;
 // theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "Määrittää kyselyn päätaustavärin."
 // header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "Sama kuin säilö -vaihtoehto säätää automaattisesti otsikon sisältöalueen leveyttä sopimaan HTML-elementtiin, johon kysely sijoitetaan."
 // header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "Kyselyn otsikon ja kuvauksen sisältävän otsikkoalueen leveys pikseleinä mitattuna."
-// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "Suurentaa otsikon alaosan kyselyn yläosan päälle."
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Hyväksyy arvot %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Hyväksyy arvot px."
 // p.effectiveColSpan: "Column span" => "Sarakkeen jänneväli"
@@ -2820,3 +2819,4 @@ editorLocalization.locales["fi"] = fiStrings;
 // pehelp.timerLocation: "Sets the location of a timer on a page." => "Määrittää ajastimen sijainnin sivulla."
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Kun arvoksi on määritetty 0, korkeus lasketaan automaattisesti otsikon sisällön mukaan."
 // p.mobileHeight: "Height on smartphones" => "Korkeus älypuhelimissa"
+// header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Kun tämä asetus on käytössä, kyselyn yläosa peittää otsikon alaosan."
