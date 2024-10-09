@@ -1914,7 +1914,7 @@ test("Drag Drop indicator - rows", async (t) => {
     .expect(Selector(".svc-row").nth(1).hasClass("svc-row--drag-over-bottom")).notOk();
 });
 
-test.only("Drag Drop page with other pages collapsed on start drag", async (t) => {
+test("Drag Drop page with other pages collapsed on start drag", async (t) => {
   await ClientFunction(() => {
     window["creator"].expandCollapseButtonVisibility = "always";
     window["creator"].allowDragPages = true;
