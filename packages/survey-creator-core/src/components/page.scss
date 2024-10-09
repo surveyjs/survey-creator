@@ -36,12 +36,8 @@ svc-page {
     padding: calcSize(1) calcSize(3) 0;
   }
 
-  &.svc-question__drop-indicator--top {
-    top: calcSize(1);
-  }
-
-  &.svc-question__drop-indicator--bottom {
-    bottom: calcSize(1);
+  &>.svc-question__drag-area {
+    padding-top: calcSize(1.25);
   }
 }
 
@@ -141,7 +137,6 @@ svc-page {
   }
 
   &>.svc-question__drag-area {
-    padding-top: calcSize(1.25);
     z-index: 1;
 
     .svc-question__drag-element {
