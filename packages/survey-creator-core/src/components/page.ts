@@ -17,9 +17,15 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   private dragOrClickHelper: DragOrClickHelper;
   @property({ defaultValue: "" }) currentAddQuestionType: string;
   @property({ defaultValue: null }) dragTypeOverMe: DragTypeOverMeEnum;
+  @property({ defaultValue: false }) isDragMe: boolean;
   private updateDragTypeOverMe() {
     if (!this.isDisposed) {
       this.dragTypeOverMe = this.page?.dragTypeOverMe;
+    }
+  }
+  private updateIsDragMe() {
+    if (!this.isDisposed) {
+      this.isDragMe = this.page?.isDragMe;
     }
   }
   private updateShowPlaceholder(elements?: Array<IElement>) {
@@ -77,6 +83,12 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
           this.updateDragTypeOverMe();
         }
       );
+      surveyElement.registerFunctionOnPropertiesValueChanged(
+        ["isDragMe"],
+        () => {
+          this.updateIsDragMe();
+        }
+      );
       surveyElement.registerFunctionOnPropertiesValueChanged(["elements"], (newValue: Array<IElement>) => {
         this.updateShowPlaceholder(newValue);
       });
@@ -86,12 +98,13 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       surveyElement.setWasShown(true);
       this.checkActionProperties();
       this.dragTypeOverMe = surveyElement.dragTypeOverMe;
+      this.isDragMe = surveyElement.isDragMe;
     }
   }
 
   protected detachElement(surveyElement: PageModel): void {
     if (!!surveyElement) {
-      surveyElement.unRegisterFunctionOnPropertiesValueChanged(["dragTypeOverMe"]);
+      surveyElement.unRegisterFunctionOnPropertiesValueChanged(["dragTypeOverMe", "isDragMe"]);
       surveyElement.unRegisterFunctionOnPropertiesValueChanged(["title", "description"], "add_ghost");
       surveyElement["surveyChangedCallback"] = undefined;
     }
@@ -285,9 +298,6 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   }
   protected getAllowDragging(options: any): boolean {
     return this.creator.allowDragPages && super.getAllowDragging(options);
-  }
-  get isDragMe(): boolean {
-    return this.surveyElement.isDragMe;
   }
   private get dragDropHelper(): DragDropSurveyElements {
     return this.creator.dragDropSurveyElements;
