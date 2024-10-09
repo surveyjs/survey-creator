@@ -161,7 +161,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       const pgTabs = this.propertyGrid.survey.pages.map(p => {
         const action = new MenuButton({
           id: p.name,
-          locTooltipName: "pe.tabs." + p.name,
+          tooltip: p.title,
           iconName: pgTabIcons[p.name] || pgTabIcons["undefined"],
           active: this.activePageIsPropertyGrid && p.name === this.propertyGrid.survey.currentPage.name,
           pressed: false,
@@ -185,7 +185,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
         this.propertyGridViewModel.objectSelectionAction.tooltip = options.newCurrentPage.title;
       });
 
-      this.propertyGridViewModel.objectSelectionAction.tooltip = this.propertyGrid.survey.currentPage.title;
+      this.propertyGridViewModel.objectSelectionAction.tooltip = this.propertyGrid.survey.currentPage?.title;
     }
   }
 
