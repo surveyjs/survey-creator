@@ -1521,7 +1521,7 @@ var portugueseTranslation = {
     header: {
       inheritWidthFrom: "A opção \"Igual ao contêiner\" ajusta automaticamente a largura da área de conteúdo do cabeçalho para caber no elemento HTML em que a pesquisa é colocada.",
       textAreaWidth: "A largura da área do cabeçalho que contém o título e a descrição da pesquisa, medida em pixels.",
-      overlapEnabled: "Faz com que a parte inferior do cabeçalho seja sobreposta à parte superior do levantamento.",
+      overlapEnabled: "Quando ativado, a parte superior da pesquisa se sobrepõe à parte inferior do cabeçalho.",
       mobileHeight: "Quando definido como 0, a altura é calculada automaticamente para acomodar o conteúdo do cabeçalho."
     },
     panellayoutcolumn: {
@@ -2431,7 +2431,6 @@ editorLocalization.locales["pt"] = portugueseTranslation;
 // theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "Define a cor de fundo principal da pesquisa."
 // header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "A opção \"Igual ao contêiner\" ajusta automaticamente a largura da área de conteúdo do cabeçalho para caber no elemento HTML em que a pesquisa é colocada."
 // header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "A largura da área do cabeçalho que contém o título e a descrição da pesquisa, medida em pixels."
-// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "Faz com que a parte inferior do cabeçalho seja sobreposta à parte superior do levantamento."
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Aceita valores %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Aceita valores px."
 // p.effectiveColSpan: "Column span" => "Extensão da coluna"
@@ -2486,3 +2485,4 @@ editorLocalization.locales["pt"] = portugueseTranslation;
 // pehelp.timerLocation: "Sets the location of a timer on a page." => "Define a localização de um cronômetro em uma página."
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Quando definido como 0, a altura é calculada automaticamente para acomodar o conteúdo do cabeçalho."
 // p.mobileHeight: "Height on smartphones" => "Altura em smartphones"
+// header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Quando ativado, a parte superior da pesquisa se sobrepõe à parte inferior do cabeçalho."

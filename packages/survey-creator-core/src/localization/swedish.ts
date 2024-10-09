@@ -1521,7 +1521,7 @@ export let svStrings = {
     header: {
       inheritWidthFrom: "Alternativet \"Samma som behållare\" justerar automatiskt bredden på rubrikens innehållsområde så att det passar in i HTML-elementet som undersökningen placeras i.",
       textAreaWidth: "Bredden på rubrikområdet som innehåller undersökningens titel och beskrivning, mätt i pixlar.",
-      overlapEnabled: "Gör så att den nedre delen av sidhuvudet överlappas med den övre delen av undersökningen.",
+      overlapEnabled: "När det här alternativet är aktiverat täcker den övre delen av undersökningen den nedre delen av sidhuvudet.",
       mobileHeight: "När värdet är 0 beräknas höjden automatiskt för att passa rubrikens innehåll."
     },
     panellayoutcolumn: {
@@ -2942,7 +2942,6 @@ editorLocalization.locales["sv"] = svStrings;
 // theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "Ställer in undersökningens huvudsakliga bakgrundsfärg."
 // header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "Alternativet \"Samma som behållare\" justerar automatiskt bredden på rubrikens innehållsområde så att det passar in i HTML-elementet som undersökningen placeras i."
 // header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "Bredden på rubrikområdet som innehåller undersökningens titel och beskrivning, mätt i pixlar."
-// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "Gör så att den nedre delen av sidhuvudet överlappas med den övre delen av undersökningen."
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Accepterar värden %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Accepterar värdena px."
 // p.effectiveColSpan: "Column span" => "Kolumn spännvidd"
@@ -2997,3 +2996,4 @@ editorLocalization.locales["sv"] = svStrings;
 // pehelp.timerLocation: "Sets the location of a timer on a page." => "Ställer in platsen för en timer på en sida."
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "När värdet är 0 beräknas höjden automatiskt för att passa rubrikens innehåll."
 // p.mobileHeight: "Height on smartphones" => "Höjd på smartphones"
+// header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "När det här alternativet är aktiverat täcker den övre delen av undersökningen den nedre delen av sidhuvudet."

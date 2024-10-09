@@ -1521,7 +1521,7 @@ export var mnStrings = {
     header: {
       inheritWidthFrom: "\"As as container\" сонголт автоматаар судалгаа хийсэн HTML элементэд тохируулахын тулд толгойн агуулгын хэсгийн өргөнийг тохируулдаг.",
       textAreaWidth: "Пикселээр хэмжсэн судалгааны нэр, тодорхойлолт бүхий толгойн хэсгийн өргөн.",
-      overlapEnabled: "Толгойн доод хэсгийг судалгааны дээд хэсэгт оруулав.",
+      overlapEnabled: "Идэвхжүүлбэл судалгааны дээд хэсэг нь header-ийн доод хэсгийг давхарладаг.",
       mobileHeight: "0 гэж тохируулбал өндөрийг гарчгийн агуулгад тохируулахын тулд автоматаар тооцоолдог."
     },
     panellayoutcolumn: {
@@ -2421,7 +2421,6 @@ editorLocalization.locales["mn"] = mnStrings;
 // theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "Судалгааны үндсэн нөхцөл байдлын өнгийг тогтооно."
 // header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "\"As as container\" сонголт автоматаар судалгаа хийсэн HTML элементэд тохируулахын тулд толгойн агуулгын хэсгийн өргөнийг тохируулдаг."
 // header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "Пикселээр хэмжсэн судалгааны нэр, тодорхойлолт бүхий толгойн хэсгийн өргөн."
-// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "Толгойн доод хэсгийг судалгааны дээд хэсэгт оруулав."
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Үнэт зүйлсийг %-ийг хүлээн зөвшөөрдөг."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Үнэ цэнэ px-ийг хүлээн зөвшөөрдөг."
 // p.effectiveColSpan: "Column span" => "Баганын хугацаа"
@@ -2476,3 +2475,4 @@ editorLocalization.locales["mn"] = mnStrings;
 // pehelp.timerLocation: "Sets the location of a timer on a page." => "Хуудас дээрх цаг хэмжигчийн байрлалыг тогтооно."
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "0 гэж тохируулбал өндөрийг гарчгийн агуулгад тохируулахын тулд автоматаар тооцоолдог."
 // p.mobileHeight: "Height on smartphones" => "Ухаалаг гар утасны өндөр"
+// header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Идэвхжүүлбэл судалгааны дээд хэсэг нь header-ийн доод хэсгийг давхарладаг."

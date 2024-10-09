@@ -1521,7 +1521,7 @@ export var koreanStrings = {
     header: {
       inheritWidthFrom: "\"컨테이너와 동일\" 옵션은 설문조사가 배치된 HTML 요소에 맞게 헤더 콘텐츠 영역 너비를 자동으로 조정합니다.",
       textAreaWidth: "설문조사 제목과 설명이 포함된 헤더 영역의 너비로, 픽셀 단위로 측정됩니다.",
-      overlapEnabled: "헤더의 아래쪽을 현장조사의 위쪽과 겹쳐서 만듭니다.",
+      overlapEnabled: "활성화하면 설문조사의 상단이 헤더의 하단에 오버레이됩니다.",
       mobileHeight: "0으로 설정하면 헤더의 내용을 수용하기 위해 높이가 자동으로 계산됩니다."
     },
     panellayoutcolumn: {
@@ -2969,7 +2969,6 @@ editorLocalization.locales["ko"] = koreanStrings;
 // theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "현장조사의 기본 배경색을 설정합니다."
 // header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "\"컨테이너와 동일\" 옵션은 설문조사가 배치된 HTML 요소에 맞게 헤더 콘텐츠 영역 너비를 자동으로 조정합니다."
 // header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "설문조사 제목과 설명이 포함된 헤더 영역의 너비로, 픽셀 단위로 측정됩니다."
-// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "헤더의 아래쪽을 현장조사의 위쪽과 겹쳐서 만듭니다."
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "% 값을 허용합니다."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "px 값을 허용합니다."
 // p.effectiveColSpan: "Column span" => "열 범위"
@@ -3024,3 +3023,4 @@ editorLocalization.locales["ko"] = koreanStrings;
 // pehelp.timerLocation: "Sets the location of a timer on a page." => "페이지에서 타이머의 위치를 설정합니다."
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "0으로 설정하면 헤더의 내용을 수용하기 위해 높이가 자동으로 계산됩니다."
 // p.mobileHeight: "Height on smartphones" => "스마트폰의 높이"
+// header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "활성화하면 설문조사의 상단이 헤더의 하단에 오버레이됩니다."

@@ -1521,7 +1521,7 @@ export var jaStrings = {
     header: {
       inheritWidthFrom: "「コンテナと同じ」オプションは、アンケートが配置されるHTML要素に収まるようにヘッダーコンテンツ領域の幅を自動調整します。",
       textAreaWidth: "調査のタイトルと説明を含むヘッダー領域の幅 (ピクセル単位)。",
-      overlapEnabled: "ヘッダーの下部を調査の上部にオーバーレイします。",
+      overlapEnabled: "有効にすると、調査の上部がヘッダーの下部に重なります。",
       mobileHeight: "0 に設定すると、ヘッダーのコンテンツに合わせて高さが自動的に計算されます。"
     },
     panellayoutcolumn: {
@@ -2764,7 +2764,6 @@ editorLocalization.locales["ja"] = jaStrings;
 // theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "調査のメインの背景色を設定します。"
 // header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "「コンテナと同じ」オプションは、アンケートが配置されるHTML要素に収まるようにヘッダーコンテンツ領域の幅を自動調整します。"
 // header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "調査のタイトルと説明を含むヘッダー領域の幅 (ピクセル単位)。"
-// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "ヘッダーの下部を調査の上部にオーバーレイします。"
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "値 % を受け入れます。"
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "値 px を受け入れます。"
 // p.effectiveColSpan: "Column span" => "列スパン"
@@ -2819,3 +2818,4 @@ editorLocalization.locales["ja"] = jaStrings;
 // pehelp.timerLocation: "Sets the location of a timer on a page." => "ページ上のタイマーの位置を設定します。"
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "0 に設定すると、ヘッダーのコンテンツに合わせて高さが自動的に計算されます。"
 // p.mobileHeight: "Height on smartphones" => "スマートフォンでの高さ"
+// header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "有効にすると、調査の上部がヘッダーの下部に重なります。"

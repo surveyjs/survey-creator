@@ -1521,7 +1521,7 @@ var spanishTranslation = {
     header: {
       inheritWidthFrom: "La opción \"Igual que el contenedor\" ajusta automáticamente el ancho del área de contenido del encabezado para que quepa en el elemento HTML en el que se coloca la encuesta.",
       textAreaWidth: "El ancho del área de encabezado que contiene el título y la descripción de la encuesta, medido en píxeles.",
-      overlapEnabled: "Hace que la parte inferior del encabezado se superponga con la parte superior de la encuesta.",
+      overlapEnabled: "Cuando se habilita, la parte superior de la encuesta se superpone a la parte inferior del encabezado.",
       mobileHeight: "Cuando se establece en 0, la altura se calcula automáticamente para acomodar el contenido del encabezado."
     },
     panellayoutcolumn: {
@@ -2539,7 +2539,6 @@ editorLocalization.locales["es"] = spanishTranslation;
 // theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "Establece el color de fondo principal de la encuesta."
 // header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "La opción \"Igual que el contenedor\" ajusta automáticamente el ancho del área de contenido del encabezado para que quepa en el elemento HTML en el que se coloca la encuesta."
 // header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "El ancho del área de encabezado que contiene el título y la descripción de la encuesta, medido en píxeles."
-// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "Hace que la parte inferior del encabezado se superponga con la parte superior de la encuesta."
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Acepta valores %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Acepta valores px."
 // p.effectiveColSpan: "Column span" => "Tramo de columna"
@@ -2594,3 +2593,4 @@ editorLocalization.locales["es"] = spanishTranslation;
 // pehelp.timerLocation: "Sets the location of a timer on a page." => "Establece la ubicación de un temporizador en una página."
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Cuando se establece en 0, la altura se calcula automáticamente para acomodar el contenido del encabezado."
 // p.mobileHeight: "Height on smartphones" => "Altura en smartphones"
+// header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Cuando se habilita, la parte superior de la encuesta se superpone a la parte inferior del encabezado."

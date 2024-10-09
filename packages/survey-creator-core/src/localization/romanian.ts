@@ -1521,7 +1521,7 @@ export const roStrings = {
     header: {
       inheritWidthFrom: "Opțiunea \"La fel ca și containerul\" ajustează automat lățimea zonei de conținut a antetului pentru a se potrivi în elementul HTML în care este plasat chestionarul.",
       textAreaWidth: "Lățimea zonei de antet care conține titlul și descrierea chestionarului, măsurată în pixeli.",
-      overlapEnabled: "Face ca partea de jos a antetului să fie suprapusă cu partea de sus a chestionarului.",
+      overlapEnabled: "Când este activată, partea de sus a chestionarului se suprapune cu partea de jos a antetului.",
       mobileHeight: "Când este setată la 0, înălțimea este calculată automat pentru a găzdui conținutul antetului."
     },
     panellayoutcolumn: {
@@ -1754,3 +1754,4 @@ editorLocalization.locales["ro"] = roStrings;
 // pehelp.timerLocation: "Sets the location of a timer on a page." => "Setează locația unui cronometru pe o pagină."
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Când este setată la 0, înălțimea este calculată automat pentru a găzdui conținutul antetului."
 // p.mobileHeight: "Height on smartphones" => "Înălțimea pe smartphone-uri"
+// header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Când este activată, partea de sus a chestionarului se suprapune cu partea de jos a antetului."

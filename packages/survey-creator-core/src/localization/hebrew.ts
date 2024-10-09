@@ -1521,7 +1521,7 @@ export var hebrewStrings = {
     header: {
       inheritWidthFrom: "האפשרות \"זהה לגורם מכיל\" מתאימה אוטומטית את רוחב אזור התוכן של הכותרת העליונה כך שיתאים לרכיב HTML שבו ממוקם הסקר.",
       textAreaWidth: "רוחב אזור הכותרת המכיל את כותרת הסקר ותיאורו, נמדד בפיקסלים.",
-      overlapEnabled: "הופך את החלק התחתון של הכותרת לשכבת-על עם החלק העליון של הסקר.",
+      overlapEnabled: "כאשר אפשרות זו מופעלת, החלק העליון של הסקר מכסה את החלק התחתון של הכותרת.",
       mobileHeight: "כאשר הוא מוגדר ל- 0, הגובה מחושב באופן אוטומטי כדי להתאים לתוכן הכותרת."
     },
     panellayoutcolumn: {
@@ -2333,7 +2333,6 @@ editorLocalization.locales["he"] = hebrewStrings;
 // theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "מגדיר את צבע הרקע הראשי של הסקר."
 // header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "האפשרות \"זהה לגורם מכיל\" מתאימה אוטומטית את רוחב אזור התוכן של הכותרת העליונה כך שיתאים לרכיב HTML שבו ממוקם הסקר."
 // header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "רוחב אזור הכותרת המכיל את כותרת הסקר ותיאורו, נמדד בפיקסלים."
-// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "הופך את החלק התחתון של הכותרת לשכבת-על עם החלק העליון של הסקר."
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "מקבל ערכים %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "מקבל ערכים px."
 // p.effectiveColSpan: "Column span" => "טווח עמודות"
@@ -2388,3 +2387,4 @@ editorLocalization.locales["he"] = hebrewStrings;
 // pehelp.timerLocation: "Sets the location of a timer on a page." => "הגדרת המיקום של טיימר בעמוד."
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "כאשר הוא מוגדר ל- 0, הגובה מחושב באופן אוטומטי כדי להתאים לתוכן הכותרת."
 // p.mobileHeight: "Height on smartphones" => "גובה בסמארטפונים"
+// header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "כאשר אפשרות זו מופעלת, החלק העליון של הסקר מכסה את החלק התחתון של הכותרת."

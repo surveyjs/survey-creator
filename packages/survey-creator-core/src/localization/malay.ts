@@ -1521,7 +1521,7 @@ export var msStrings = {
     header: {
       inheritWidthFrom: "Pilihan \"Sama seperti bekas\" melaraskan secara automatik lebar kawasan kandungan pengepala agar sesuai dengan elemen HTML tempat tinjauan diletakkan.",
       textAreaWidth: "Lebar kawasan pengepala yang mengandungi tajuk dan perihalan tinjauan, diukur dalam piksel.",
-      overlapEnabled: "Menjadikan bahagian bawah pengepala bertindih dengan bahagian atas tinjauan.",
+      overlapEnabled: "Apabila didayakan, bahagian atas tinjauan menindih bahagian bawah pengepala.",
       mobileHeight: "Apabila ditetapkan kepada 0, ketinggian dikira secara automatik untuk menampung kandungan pengepala."
     },
     panellayoutcolumn: {
@@ -2718,7 +2718,6 @@ editorLocalization.locales["ms"] = msStrings;
 // theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "Menetapkan warna latar belakang utama tinjauan."
 // header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "Pilihan \"Sama seperti bekas\" melaraskan secara automatik lebar kawasan kandungan pengepala agar sesuai dengan elemen HTML tempat tinjauan diletakkan."
 // header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "Lebar kawasan pengepala yang mengandungi tajuk dan perihalan tinjauan, diukur dalam piksel."
-// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "Menjadikan bahagian bawah pengepala bertindih dengan bahagian atas tinjauan."
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Menerima nilai %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Menerima nilai px."
 // p.effectiveColSpan: "Column span" => "Rentang lajur"
@@ -2773,3 +2772,4 @@ editorLocalization.locales["ms"] = msStrings;
 // pehelp.timerLocation: "Sets the location of a timer on a page." => "Menetapkan lokasi pemasa pada halaman."
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Apabila ditetapkan kepada 0, ketinggian dikira secara automatik untuk menampung kandungan pengepala."
 // p.mobileHeight: "Height on smartphones" => "Ketinggian pada telefon pintar"
+// header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Apabila didayakan, bahagian atas tinjauan menindih bahagian bawah pengepala."
