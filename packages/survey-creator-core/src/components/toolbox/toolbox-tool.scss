@@ -63,9 +63,9 @@
   margin-inline-end: 0;
   inset-inline-start: var(--ctr-toolbox-item-banner-left, calcSize(-4.5));
   max-width: calcSize(100);
-  padding-top: var(--ctr-tooltip-padding-top, calcSize(2));
+  padding-top: var(--ctr-tooltip-padding-top, calcSize(1.5));
   padding-inline-end: var(--ctr-tooltip-padding-right, calcSize(3));
-  padding-bottom: var(--ctr-tooltip-padding-bottom, calcSize(2));
+  padding-bottom: var(--ctr-tooltip-padding-bottom, calcSize(1.5));
   padding-inline-start: var(--ctr-tooltip-padding-left, calcSize(3));
   margin-inline-end: calcSize(-2);
   white-space: nowrap;
