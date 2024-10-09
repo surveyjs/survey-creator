@@ -92,7 +92,7 @@ svc-toolbox {
   overflow-x: hidden;
   width: calcSize(2);
   margin-inline-start: calcSize(-0.5);
-  display: none;
+  display: var(--ctr-toolbox-scrollbar-display, block);
   z-index: 30;
   @-moz-document url-prefix() {
     scrollbar-width: thin;
@@ -129,7 +129,6 @@ svc-toolbox {
 
 .svc-toolbox--compact {
   width: var(--ctr-toolbox-width-compact, calcSize(10.5));
-  //margin-inline-end: var(--ctr-toolbox-margin-right-compact,calc(-100vw + calcSize(10.5)));
   .svc-toolbox__panel {
     overflow: visible;
   }

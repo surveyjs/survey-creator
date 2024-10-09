@@ -25,12 +25,15 @@
   align-self: var(--ctr-toolbox-item-align, flex-start);
   &:first-child > .svc-toolbox__tool-content {
     padding-block-start: 0;
+    .svc-toolbox__item-banner {
+      top: 50%;
+    }
   }
 }
 .svc-toolbox__tool-content {
   display: flex;
   // padding: calcSize(0.25) 0;
-  padding-block-start: calcSize(0.5);
+  padding-block-start: var(--ctr-toolbox-group-gap, calcSize(0.5));
   flex-direction: column;
   align-items: var(--ctr-toolbox-item-align, flex-start);
   position: relative;
@@ -61,16 +64,16 @@
   box-sizing: border-box;
   align-items: center;
   margin-inline-end: 0;
-  inset-inline-start: var(--ctr-toolbox-item-banner-left, calcSize(-4.5));
+  inset-inline-start: var(--ctr-toolbox-item-banner-left, 0);
   max-width: calcSize(100);
   padding-top: var(--ctr-tooltip-padding-top, calcSize(1.5));
   padding-inline-end: var(--ctr-tooltip-padding-right, calcSize(3));
   padding-bottom: var(--ctr-tooltip-padding-bottom, calcSize(1.5));
-  padding-inline-start: var(--ctr-tooltip-padding-left, calcSize(3));
+  padding-inline-start: var(--ctr-tooltip-padding-left, calcSize(5.5));
   margin-inline-end: calcSize(-2);
   white-space: nowrap;
   @include smallBold;
-  color: var(--ctr-toolbox-item-text-color, $foreground-light);
+  color: var(--ctr-toolbox-item-text-color, $foreground);
 
   background-color: $background;
   /* Shadow / Medium */
@@ -89,7 +92,7 @@
   overflow: visible;
   position: absolute;
   z-index: 200;
-  top: 50%;
+  top: calc(50% + var(--ctr-toolbox-group-gap, calcSize(0.5)) / 2);
   transform: translate(0, -50%);
   .svc-toolbox__item-icon {
     position: absolute;
@@ -100,7 +103,7 @@
 
   &:after {
     content: " ";
-    display: block;
+    display: var(--ctr-toolbox-item-banner-beak-display, none);
     width: 0;
     height: 0;
     border-inline-start: calcSize(0.5) solid transparent;
@@ -113,9 +116,6 @@
     transform: translate(2px, -2px) rotate(-90deg);
   }
 
-  .svc-toolbox__item-title {
-    color: var(--ctr-toolbox-item-text-color-hovered, $foreground);
-  }
 
   .sv-svg-icon use {
     fill: var(--ctr-toolbox-item-icon-color-hovered, $primary);
@@ -355,7 +355,7 @@
   }
   .svc-toolbox__item {
     padding-inline-start: var(--ctr-toolbox-item-padding-left-no-text, calcSize(1.5));
-    padding-inline-end: var(--ctr-toolbox-item-padding-right-no-text, calcSize(2));
+    padding-inline-end: var(--ctr-toolbox-item-padding-right-no-text, calcSize(1.5));
     box-sizing: border-box;
     align-self: flex-start;
   }
