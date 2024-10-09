@@ -2157,6 +2157,7 @@ test("Support property availableInMatrixColumn attribute && correct category, #5
 
   Serializer.removeProperty("question", "prop1");
   Serializer.removeProperty("question", "prop2");
+  Serializer.removeProperty("question", "prop3");
 });
 
 test("Validate Selected Element Errors", (): any => {
