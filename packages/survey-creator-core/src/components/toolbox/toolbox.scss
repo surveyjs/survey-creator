@@ -10,7 +10,7 @@ svc-toolbox {
   height: 100%;
   display: flex;
   flex-direction: column;
-  width: var(--ctr-toolbox-min-width, auto);
+  width: var(--ctr-toolbox-min-width, calcSize(28));
   .spg-search-editor_container {
     background: var(--ctr-toolbox-background-color, $background-dim);
     padding-top: calcSize(1);
