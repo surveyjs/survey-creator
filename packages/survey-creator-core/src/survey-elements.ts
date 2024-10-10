@@ -17,14 +17,14 @@ export function calculateDragOverLocation(clientX: number, clientY: number, rect
   const dx = clientX - rect.x;
   const dy = clientY - rect.y;
 
-  if (direction = "top-bottom") {
+  if (direction == "top-bottom") {
     if (dy >= rect.height / 2) {
       return DragTypeOverMeEnum.Bottom;
     } else {
       return DragTypeOverMeEnum.Top;
     }
   }
-  if (direction = "left-right") {
+  if (direction == "left-right") {
     if (dx >= rect.width / 2) {
       return DragTypeOverMeEnum.Right;
     } else {
@@ -379,11 +379,13 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       clientX: event.clientX,
       clientY: event.clientY,
       dragOverRect: dropTargetRect,
+      insideContainer: this.insideContainer,
       dragOverLocation
     };
     if (this.onDragOverLocationCalculating) {
       this.onDragOverLocationCalculating(options);
       dragOverLocation = options.dragOverLocation;
+      this.insideContainer = options.insideContainer;
     }
     const isDropTargetValid = this.isDropTargetValid(
       dropTarget,

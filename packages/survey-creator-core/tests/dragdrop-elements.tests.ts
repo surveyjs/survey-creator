@@ -1,5 +1,5 @@
 import { DragTypeOverMeEnum, Question, QuestionTextModel, SurveyModel } from "survey-core";
-import { DragDropSurveyElements, calculateIsEdge, calculateIsSide } from "../src/survey-elements";
+import { DragDropSurveyElements, calculateDragOverLocation, calculateIsEdge, calculateIsSide } from "../src/survey-elements";
 import { CreatorTester } from "./creator-tester";
 
 test("calculateVerticalMiddleOfHTMLElement", () => {
@@ -1141,7 +1141,69 @@ test("Support onDragDropAllow, Bug#4572", (): any => {
   expect(counter).toBe(2);
   expect(ddHelper["allowDropHere"]).toBeTruthy();
 });
-
+test("Test onDragOverLocationCalculating", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          }
+        ]
+      },
+      {
+        "name": "page2",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question2"
+          }
+        ]
+      },
+      {
+        "name": "page2",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question3"
+          }
+        ]
+      }
+    ]
+  };
+  creator.onDragOverLocationCalculating.add((sender, options) => {
+    if (options.draggedSurveyElement.name == "question2" && options.insideContainer) {
+      options.insideContainer = false;
+      options.dragOverLocation = calculateDragOverLocation(options.clientX, options.clientY, options.dragOverRect, "top-bottom");
+    }
+  });
+  const ddHelper: any = creator.dragDropSurveyElements;
+  const q1 = creator.survey.getQuestionByName("question1");
+  const q2 = creator.survey.getQuestionByName("question2");
+  const q3 = creator.survey.getQuestionByName("question3");
+  ddHelper.draggedElement = q2;
+  ddHelper["allowDropHere"] = true;
+  ddHelper["findDropTargetNodeFromPoint"] = () => ({ getBoundingClientRect: () => ({ x: 10, y: 10, width: 200, height: 100 }) });
+  ddHelper["getDropTargetByNode"] = () => q1;
+  ddHelper["isDropTargetValid"] = () => true;
+  ddHelper.dragOver({ clientX: 40, clientY: 50 });
+  expect(ddHelper.dragOverLocation).toBe(DragTypeOverMeEnum.Top);
+  expect(ddHelper.insideContainer).toBeFalsy();
+  ddHelper.dragOver({ clientX: 100, clientY: 90 });
+  expect(ddHelper.dragOverLocation).toBe(DragTypeOverMeEnum.Bottom);
+  expect(ddHelper.insideContainer).toBeFalsy();
+  ddHelper.draggedElement = q3;
+  ddHelper.dragOver({ clientX: 40, clientY: 50 });
+  expect(ddHelper.dragOverLocation).toBe(DragTypeOverMeEnum.Left);
+  expect(ddHelper.insideContainer).toBeTruthy();
+  ddHelper.dragOver({ clientX: 100, clientY: 90 });
+  expect(ddHelper.dragOverLocation).toBe(DragTypeOverMeEnum.Bottom);
+  expect(ddHelper.insideContainer).toBeTruthy();
+});
 test("Support onDragDropAllow&allowDropNextToAnother, #5621", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
