@@ -51,9 +51,6 @@ export class QuestionAdornerComponent extends CreatorModelElement<
   protected getStateElement(): Base {
     return this.model;
   }
-  protected canRender(): boolean {
-    return super.canRender() && !this.model.isDragged;
-  }
 
   renderElement(): JSX.Element {
     const allowInteractions = this.model.element
