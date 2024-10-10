@@ -335,6 +335,9 @@ export class SurveyQuestionProperties {
         }
       });
       this.setUsedProperties(result, usedProperties);
+      if(this.isColumnObj) {
+        this.getAllDefinitionsByClassCore(this.obj.templateQuestion.getType(), usedProperties, result, undefined, true);
+      }
       this.addNonTabProperties(result, usedProperties, true);
       return result;
     }
@@ -350,7 +353,7 @@ export class SurveyQuestionProperties {
     }
     return result;
   }
-  private getAllDefinitionsByClassCore(className: string, usedProperties: any, result: Array<ISurveyQuestionEditorDefinition>, baseClass: string): boolean {
+  private getAllDefinitionsByClassCore(className: string, usedProperties: any, result: Array<ISurveyQuestionEditorDefinition>, baseClass: string, isColumn?: boolean): boolean {
     let res = false;
     let curClassName = className;
     while (curClassName && (!baseClass || !Serializer.isDescendantOf(baseClass, curClassName))) {
@@ -358,38 +361,53 @@ export class SurveyQuestionProperties {
         Serializer.findClass(curClassName)
       );
       if (!metaClass) break;
-      res = this.getAllDefinitionsByClassSingleCore(metaClass.name, usedProperties, result);
+      res = this.getAllDefinitionsByClassSingleCore(metaClass.name, usedProperties, result, isColumn);
       curClassName = metaClass.parentName;
     }
     return res;
   }
-  private getAllDefinitionsByClassSingleCore(className: string, usedProperties: any, result: Array<ISurveyQuestionEditorDefinition>): boolean {
+  private getAllDefinitionsByClassSingleCore(className: string, usedProperties: any, result: Array<ISurveyQuestionEditorDefinition>, isColumn: boolean): boolean {
     const classRes = this.getClassDefintion(className);
     let res = false;
     if (!classRes) return res;
+    let columnDef: ISurveyQuestionEditorDefinition = undefined;
     if (classRes.properties) {
       var i = 0;
       while (i < classRes.properties.length) {
-        var prop = classRes.properties[i];
-        var propName = typeof prop == "string" ? prop : prop.name;
-        var tabName = settings.propertyGrid.generalTabName;
+        const prop = classRes.properties[i];
+        const propName = typeof prop == "string" ? prop : prop.name;
+        let tabName = settings.propertyGrid.generalTabName;
         if (typeof prop !== "string" && !!prop.tab) {
           tabName = prop.tab;
         }
-        var jsonProp = !!this.propertiesHash[propName]
+        const jsonProp = !!this.propertiesHash[propName]
           ? this.propertiesHash[propName].property
           : null;
-        var jsonPropertyCategory = this.getJsonPropertyCategory(jsonProp);
-        if (!!jsonPropertyCategory && jsonPropertyCategory !== tabName) {
-          classRes.properties.splice(i, 1);
-        } else {
-          usedProperties[propName] = true;
-          i++;
+        if(!isColumn || jsonProp?.availableInMatrixColumn) {
+          const jsonPropertyCategory = this.getJsonPropertyCategory(jsonProp);
+          if (!!jsonPropertyCategory && jsonPropertyCategory !== tabName) {
+            classRes.properties.splice(i, 1);
+          } else {
+            usedProperties[propName] = true;
+          }
+          if(isColumn) {
+            if(!columnDef) {
+              columnDef = { properties: [], tabs: [] };
+            }
+            columnDef.properties.push(prop);
+          }
         }
+        i++;
       }
     }
+    if(isColumn) {
+      if(!!columnDef) {
+        result.unshift(columnDef);
+      }
+      return res;
+    }
     if (classRes.tabs) {
-      for (var i = 0; i < classRes.tabs.length; i++) {
+      for (let i = 0; i < classRes.tabs.length; i++) {
         const tabName = classRes.tabs[i].name;
         res = res || tabName === otherTabName;
         if (!!this.getPropertyAsCategory(tabName)) {
@@ -407,11 +425,13 @@ export class SurveyQuestionProperties {
     if (!!jsonProperty.category) return jsonProperty.category;
     return null;
   }
+  private get isColumnObj() { return this.obj.getType() === "matrixdropdowncolumn"; }
   private getUnusedProperties(usedProperties: any, isFormMode: boolean = false): Array<JsonObjectProperty> {
     const res = [];
+    const isColumn = this.isColumnObj;
     for (var i = 0; i < this.properties.length; i++) {
       const prop = this.properties[i];
-      if (this.isJSONPropertyVisible(prop) && !usedProperties[prop.name] && (!isFormMode || prop.showMode === "form")) {
+      if (this.isJSONPropertyVisible(prop) && !usedProperties[prop.name] && (!isFormMode || prop.showMode === "form" || isColumn && prop.availableInMatrixColumn)) {
         res.push(prop);
       }
     }
