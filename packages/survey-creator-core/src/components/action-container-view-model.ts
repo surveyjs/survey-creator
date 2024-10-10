@@ -2,26 +2,20 @@ import {
   Base,
   AdaptiveActionContainer,
   Action,
-  SurveyModel,
   SurveyElement,
   property,
-  actionModeType,
   IAction,
   ActionContainer,
   ComputedUpdater,
   AnimationBoolean,
   IAnimationConsumer,
-  classesToSelector,
-  PanelModel,
-  Question,
   CssClassBuilder
 } from "survey-core";
-import { CreatorBase, SurveyCreatorModel } from "../creator-base";
+import { SurveyCreatorModel } from "../creator-base";
 import { DesignerStateManager } from "./tabs/designer-state-manager";
 import { TabDesignerPlugin } from "./tabs/designer-plugin";
 import { isPanelDynamic } from "../survey-elements";
 import { cleanHtmlElementAfterAnimation, prepareElementForVerticalAnimation } from "survey-core";
-import { toggleHovered } from "src/utils/utils";
 
 export class SurveyElementActionContainer extends AdaptiveActionContainer {
   private needToShrink(item: Action, shrinkTypeConverterAction: boolean) {
@@ -258,26 +252,24 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     event.stopPropagation();
   }
   private allowEditOption: boolean;
-  private selectedPropPageFunc: (sender: Base, options: any) => void;
-  private sidebarFlyoutModeChangedFunc: (sender: Base, options: any) => void;
-
+  private selectedPropPageFunc: (sender: Base, options: any) => void = (_, options) => {
+    if (options.name === "isSelectedInDesigner") {
+      this.onElementSelectedChanged(options.newValue);
+    }
+  };
+  private sidebarFlyoutModeChangedFunc: (sender: Base, options: any) => void = (_, options) => {
+    if (options.name === "flyoutMode") {
+      this.updateActionsProperties();
+    }
+  };;
+  protected surveyElement: T
   constructor(
     public creator: SurveyCreatorModel,
-    protected surveyElement: T
+    surveyElement: T
   ) {
     super();
     this.designerStateManager = (creator.getPlugin("designer") as TabDesignerPlugin)?.designerStateManager;
     this.designerStateManager?.initForElement(surveyElement);
-    this.selectedPropPageFunc = (sender: Base, options: any) => {
-      if (options.name === "isSelectedInDesigner") {
-        this.onElementSelectedChanged(options.newValue);
-      }
-    };
-    this.sidebarFlyoutModeChangedFunc = (sender: Base, options: any) => {
-      if (options.name === "flyoutMode") {
-        this.updateActionsProperties();
-      }
-    };
     this.actionContainer = this.createActionContainer();
 
     const collapseIcon = "icon-collapse-detail-light_16x16";
@@ -291,37 +283,37 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
         this.collapsed = !this.collapsed;
       }
     };
-    this.collapsed = !!surveyElement && (this.designerStateManager?.getElementState(surveyElement).collapsed);
-    this.setSurveyElement(surveyElement);
-    this.creator.sidebar.onPropertyChanged.add(this.sidebarFlyoutModeChangedFunc);
-    this.setShowAddQuestionButton(true);
-    this.expandCollapseAction.visible = this.allowExpandCollapse;
-    this.creator.expandCollapseManager.add(this);
+    this.attachToUI(surveyElement);
+  }
+  protected updateActionsContainer(surveyElement: SurveyElement, clear: boolean = false) {
+    if(clear) {
+      this.actionContainer.actions.forEach(action => action.dispose && action.dispose());
+    } else {
+      const actions: Array<Action> = [];
+      this.buildActions(actions);
+      this.creator.onElementMenuItemsChanged(surveyElement, actions);
+      this.actionContainer.setItems(actions);
+    }
   }
 
   protected detachElement(surveyElement: T): void {
     if (surveyElement) {
       surveyElement.onPropertyChanged.remove(this.selectedPropPageFunc);
+      this.updateActionsContainer(surveyElement, true);
     }
   }
   protected attachElement(surveyElement: T): void {
     if (surveyElement) {
       surveyElement.onPropertyChanged.add(this.selectedPropPageFunc);
+      this.collapsed = !!surveyElement && (this.designerStateManager?.getElementState(surveyElement).collapsed);
+      this.updateActionsContainer(surveyElement);
+      this.updateActionsProperties();
     }
   }
   protected setSurveyElement(surveyElement: T): void {
     this.detachElement(this.surveyElement);
     this.surveyElement = surveyElement;
     this.attachElement(this.surveyElement);
-    if (this.surveyElement) {
-      var actions: Array<Action> = [];
-      this.buildActions(actions);
-      this.creator.onElementMenuItemsChanged(this.surveyElement, actions);
-      const prevActions = this.actionContainer.actions;
-      prevActions.forEach(action => action.dispose && action.dispose());
-      this.actionContainer.setItems(actions);
-      this.updateActionsProperties();
-    }
   }
 
   protected checkActionProperties(): void {
@@ -329,18 +321,29 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       this.updateActionsProperties();
     }
   }
-
-  public dispose(): void {
-    super.dispose();
+  public attachToUI(surveyElement: T, rootElement?: HTMLElement) {
+    if(!!rootElement) {
+      this.rootElement = rootElement;
+    }
+    if(this.surveyElement != surveyElement) {
+      this.setSurveyElement(surveyElement);
+      this.creator.sidebar.onPropertyChanged.add(this.sidebarFlyoutModeChangedFunc);
+      this.creator.expandCollapseManager.add(this);
+    }
+  }
+  public detachFromUI() {
     this.rootElement = undefined;
     this.detachElement(this.surveyElement);
+    this.surveyElement = undefined;
+    this.creator.sidebar.onPropertyChanged.remove(this.sidebarFlyoutModeChangedFunc);
     this.creator.expandCollapseManager.remove(this);
+  }
+  public dispose(): void {
+    this.detachFromUI();
     if (!this.actionContainer.isDisposed) {
       this.actionContainer.dispose();
     }
-    this.creator.sidebar.onPropertyChanged.remove(this.sidebarFlyoutModeChangedFunc);
-    this.selectedPropPageFunc = undefined;
-    this.sidebarFlyoutModeChangedFunc = undefined;
+    super.dispose();
   }
   protected onElementSelectedChanged(isSelected: boolean): void {
     if (!isSelected) return;
@@ -348,6 +351,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   }
   protected updateActionsProperties(): void {
     if (this.isDisposed) return;
+    this.expandCollapseAction.visible = this.allowExpandCollapse;
     this.updateElementAllowOptions(
       this.creator.getElementAllowOperations(this.surveyElement),
       this.isOperationsAllow()

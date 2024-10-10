@@ -1,4 +1,4 @@
-import { Action, ActionContainer, classesToSelector, ComputedUpdater, CssClassBuilder, DragTypeOverMeEnum, IAction, IElement, PageModel, property } from "survey-core";
+import { Action, ActionContainer, classesToSelector, ComputedUpdater, CssClassBuilder, DragTypeOverMeEnum, IAction, IElement, PageModel, property, SurveyElement } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { IPortableMouseEvent } from "../utils/events";
 import { SurveyElementAdornerBase } from "./action-container-view-model";
@@ -27,9 +27,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   constructor(creator: SurveyCreatorModel, page: PageModel) {
     super(creator, page);
     this.actionContainer.sizeMode = "small";
-    if (this.isGhost) this.expandCollapseAction.visible = false;
     this.expandCollapseAction.needSeparator = true;
-    if (this.creator.expandCollapseButtonVisibility != "never") this.actionContainer.addAction(this.expandCollapseAction);
     this.questionTypeSelectorModel = this.creator.getQuestionTypeSelectorModel(
       (type) => {
         this.currentAddQuestionType = type;
@@ -37,10 +35,13 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
         this.creator.survey.currentPage = this.page;
       }
     );
-    this.attachElement(page);
   }
   protected updateActionVisibility(id: string, isVisible: boolean) {
     super.updateActionVisibility(id, !this.isGhost && isVisible);
+  }
+  protected updateActionsContainer(surveyElement: SurveyElement, clear?: boolean): void {
+    super.updateActionsContainer(surveyElement, clear);
+    if (this.creator.expandCollapseButtonVisibility != "never") this.actionContainer.addAction(this.expandCollapseAction);
   }
   protected get dragInsideCollapsedContainer(): boolean {
     return this.collapsed;
@@ -120,7 +121,6 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   public dispose(): void {
     this.detachElement(this.page);
     super.dispose();
-    this.onPropertyValueChangedCallback = undefined;
   }
   protected calcIsGhostPage(page: PageModel) {
     return this.creator.survey.pages.indexOf(page) < 0;

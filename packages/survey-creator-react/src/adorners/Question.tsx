@@ -29,11 +29,12 @@ export class QuestionAdornerComponent extends CreatorModelElement<
     super(props);
     this.rootRef = React.createRef();
   }
-  protected createModel(props: any): void {
-    if (this.modelValue) {
-      this.modelValue.dispose();
+  protected createModel(props: QuestionAdornerComponentProps): void {
+    if(this.model) {
+      this.model.attachToUI(props.question, this.rootRef.current);
+    } else {
+      this.modelValue = this.createQuestionViewModel(props);
     }
-    this.modelValue = this.createQuestionViewModel(props);
   }
   protected createQuestionViewModel(props: any): QuestionAdornerViewModel {
     return new QuestionAdornerViewModel(
@@ -135,13 +136,7 @@ export class QuestionAdornerComponent extends CreatorModelElement<
   }
   componentDidMount() {
     super.componentDidMount();
-    this.model.rootElement = this.rootRef.current;
-  }
-  componentDidUpdate(prevProps: any, prevState: any): void {
-    super.componentDidUpdate(prevProps, prevState);
-    if(this.rootRef?.current && this.modelValue) {
-      this.modelValue.rootElement = this.rootRef.current;
-    }
+    this.model.attachToUI(this.props.question, this.rootRef.current);
   }
   renderElementPlaceholder(): JSX.Element {
     if (!this.model.isEmptyElement) {
@@ -158,9 +153,8 @@ export class QuestionAdornerComponent extends CreatorModelElement<
     );
   }
   componentWillUnmount(): void {
-    if(this.model) {
-      this.model.dispose();
-    }
+    super.componentWillUnmount();
+    this.model.detachFromUI();
   }
 }
 
