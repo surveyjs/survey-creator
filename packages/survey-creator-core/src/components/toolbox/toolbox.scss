@@ -10,7 +10,7 @@ svc-toolbox {
   height: 100%;
   display: flex;
   flex-direction: column;
-  width: var(--ctr-toolbox-min-width, 224.99px);
+  width: var(--ctr-toolbox-min-width, calcSize(28));
   .spg-search-editor_container {
     background: var(--ctr-toolbox-background-color, $background-dim);
     padding-top: calcSize(1);
@@ -112,20 +112,6 @@ svc-toolbox {
     direction: initial;
   }
 }
-
-.svc-toolbox--scrollable {
-  width: var(--ctr-toolbox-min-width, 236.99px);
-}
-
-
-.svc-toolbox--scrollable,
-.svc-toolbox--scrollable.svc-toolbox--compact {
-  .svc-toolbox__scroller,
-  .svc-toolbox__search-container {
-    padding-inline-start: var(--ctr-toolbox-group-padding-left, calcSize(3))
-  }
-}
-
 
 .svc-toolbox--compact {
   width: var(--ctr-toolbox-width-compact, calcSize(10.5));
