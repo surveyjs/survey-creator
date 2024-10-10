@@ -788,7 +788,15 @@ svc-question,
       &>sv-ng-file-question {
         display: none;
       }
-
+      .svc-question__drop-indicator {
+        display: block;
+      }
+      .svc-question__drag-area {
+        display: flex;
+      }
+      .svc-content-wrapper {
+        display: flex;
+      }
       .sd-element {
         &>*:not(.sd-element__header) {
           display: none;
