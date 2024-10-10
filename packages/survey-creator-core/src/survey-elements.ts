@@ -363,7 +363,8 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     const dropTarget = this.getDropTargetByNode(dropTargetNode, event);
 
     if (!!oldInsideContainer != !!this.insideContainer) dropTarget.dragTypeOverMe = null;
-    let dragOverLocation = calculateDragOverLocation(event.clientX, event.clientY, dropTargetNode);
+    let dragOverLocationCalculated = calculateDragOverLocation(event.clientX, event.clientY, dropTargetNode);
+    let dragOverLocation = dragOverLocationCalculated;
     if (dropTarget && ((dropTarget.isPanel || dropTarget.isPage) && dropTarget.elements.length === 0 || isPanelDynamic(dropTarget) && dropTarget.template.elements.length == 0)) {
       if (dropTarget.isPage || this.insideContainer) {
         dragOverLocation = DragTypeOverMeEnum.InsideEmptyPanel;
@@ -373,9 +374,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       survey: this.survey,
       draggedSurveyElement: this.draggedElement,
       dragOverSurveyElement: dropTarget,
-      clientX: event.clientX,
-      clientY: event.clientY,
-      dragOverHtmlElement: dropTargetNode,
+      dragOverLocationCalculated,
       dragOverLocation
     };
     if (this.onDragOverLocationCalculating) {
