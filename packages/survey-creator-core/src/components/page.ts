@@ -185,33 +185,25 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   }
 
   get css(): string {
-    let result = super.getCss();
-    if (!!this.dragTypeOverMe && this.showPlaceholder) {
-      result = "svc-question__content--drag-over-inside";
-    } else if (!!this.dragTypeOverMe && this.page.elements.length === 0 && this.creator.survey.pages.length > 0) {
-      result = "svc-page--drag-over-empty";
-      if (!!this.creator && !this.creator.showAddQuestionButton) {
-        result += " svc-page--drag-over-empty-no-add-button";
-      }
-    }
+    const isEmptyPage = !!((this.page.elements.length === 0 && this.creator.survey.pages.length > 0) && !this.showPlaceholder);
+    const cssClassBuilder = new CssClassBuilder()
+      .append(super.getCss())
+      .append("svc-question__content--drag-over-inside", !!this.dragTypeOverMe && this.showPlaceholder)
+      .append("svc-page--drag-over-empty", !!this.dragTypeOverMe && isEmptyPage)
+      .append("svc-page--drag-over-empty-no-add-button", !!this.dragTypeOverMe && isEmptyPage && !!this.creator && !this.creator.showAddQuestionButton)
+      .append(`svc-page__content--collapse-${this.creator.expandCollapseButtonVisibility}`, this.allowExpandCollapse)
+      .append("svc-page__content--collapsed", this.allowExpandCollapse && this.renderedCollapsed)
+      .append("svc-page__content--animation-running", this.allowExpandCollapse && this.expandCollapseAnimationRunning)
+      .append("svc-page__content--new", !!this.isGhost)
+      .append("svc-page__content--selected", !this.isGhost && !!this.creator.isElementSelected(this.page));
+
     if (!!this.dragTypeOverMe && this.collapsed) {
       this.dragIn();
-      result += " svc-page__content--collapsed-drag-over-inside";
+      cssClassBuilder.append("svc-page__content--collapsed-drag-over-inside");
     } else {
       this.dragOut();
     }
-    if(this.allowExpandCollapse) {
-      result += (" svc-page__content--collapse-" + this.creator.expandCollapseButtonVisibility);
-      if (this.renderedCollapsed) result += (" svc-page__content--collapsed");
-      if (this.expandCollapseAnimationRunning) result += (" svc-page__content--animation-running");
-    }
-    if (this.isGhost) {
-      return result + " svc-page__content--new";
-    }
-    if (this.creator.isElementSelected(this.page)) {
-      result += " svc-page__content--selected";
-    }
-    return result.trim();
+    return cssClassBuilder.toString();
   }
 
   public hoverStopper(event: MouseEvent, element: HTMLElement | any) {
@@ -264,7 +256,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     return null;
   }
   public onPageSelected() {
-    if(this.rootElement) {
+    if (this.rootElement) {
       SurveyHelper.scrollIntoViewIfNeeded(this.rootElement);
     }
   }

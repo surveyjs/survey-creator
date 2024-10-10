@@ -3,7 +3,7 @@ import { TabDesignerViewModel } from "../src/components/tabs/designer";
 import { settings } from "../src/creator-settings";
 import { CreatorTester } from "./creator-tester";
 
-test("Check page adorner css on drag over", (): any => {
+test("Check page adorner css", () => {
   const creator = new CreatorTester();
   creator.JSON = {
     pages: [
@@ -14,14 +14,48 @@ test("Check page adorner css on drag over", (): any => {
     creator,
     creator.survey.pages[0]
   );
-  expect(pageAdorner.css).toBe("");
-  pageAdorner.dragTypeOverMe = true as any;
-  expect(pageAdorner.css).toBe("svc-question__content--drag-over-inside");
-  pageAdorner.showPlaceholder = false;
-  expect(pageAdorner.css).toBe("svc-page--drag-over-empty");
-  settings.designer.showAddQuestionButton = false;
-  expect(pageAdorner.css).toBe("svc-page--drag-over-empty svc-page--drag-over-empty-no-add-button");
-  settings.designer.showAddQuestionButton = true;
+  const ghostPageAdorner = new PageAdorner(
+    creator,
+    (creator.getPlugin("designer").model as TabDesignerViewModel).newPage
+  );
+  expect(pageAdorner.css.includes("svc-hovered")).toBeFalsy();
+  pageAdorner["isHovered"] = true;
+  expect(pageAdorner.css.includes("svc-hovered")).toBeTruthy();
+  pageAdorner["isHovered"] = false;
+  expect(pageAdorner.css.includes("svc-hovered")).toBeFalsy();
+
+  expect(pageAdorner.css.includes("svc-page__content--new")).toBeFalsy();
+  expect(ghostPageAdorner.css.includes("svc-page__content--new")).toBeTruthy();
+
+  expect(pageAdorner.css.includes("svc-page__content--selected")).toBeFalsy();
+  pageAdorner.page.setPropertyValue("isSelectedInDesigner", true);
+  expect(pageAdorner.css.includes("svc-page__content--selected")).toBeTruthy();
+
+  expect(ghostPageAdorner.css.includes("svc-page__content--selected")).toBeFalsy();
+  ghostPageAdorner.page.setPropertyValue("isSelectedInDesigner", true);
+  expect(ghostPageAdorner.css.includes("svc-page__content--selected")).toBeFalsy();
+
+  pageAdorner.allowExpandCollapse = false;
+  const regex = /svc-page__content--collapse-(\w+)/;
+  let match = pageAdorner.css.match(regex);
+  expect(match && match[1]).toBe(null);
+  pageAdorner.allowExpandCollapse = true;
+  match = pageAdorner.css.match(regex);
+  expect(match && match[1]).toBe("never");
+  creator.expandCollapseButtonVisibility = "always";
+  match = pageAdorner.css.match(regex);
+  expect(match && match[1]).toBe("always");
+  creator.expandCollapseButtonVisibility = "onhover";
+  match = pageAdorner.css.match(regex);
+  expect(match && match[1]).toBe("onhover");
+
+  expect(pageAdorner.css.includes("svc-page__content--collapsed")).toBeFalsy();
+  pageAdorner.collapsed = true;
+  expect(pageAdorner.css.includes("svc-page__content--collapsed")).toBeTruthy();
+
+  expect(pageAdorner.css.includes("svc-page__content--animation-running")).toBeFalsy();
+  pageAdorner.expandCollapseAnimationRunning = true;
+  expect(pageAdorner.css.includes("svc-page__content--animation-running")).toBeTruthy();
 });
 
 test("Check page adorner css on drag over", (): any => {
