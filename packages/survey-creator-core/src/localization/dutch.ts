@@ -1521,7 +1521,7 @@ export var nlStrings = {
     header: {
       inheritWidthFrom: "Met de optie \"Zelfde als container\" wordt de breedte van het inhoudsgebied van de koptekst automatisch aangepast aan het HTML-element waarin de enquête wordt geplaatst.",
       textAreaWidth: "De breedte van het koptekstgebied dat de titel en beschrijving van de enquête bevat, gemeten in pixels.",
-      overlapEnabled: "Hiermee wordt de onderkant van de koptekst overlapt met de bovenkant van de enquête.",
+      overlapEnabled: "Als deze optie is ingeschakeld, overlapt de bovenkant van de enquête de onderkant van de koptekst.",
       mobileHeight: "Als deze optie is ingesteld op 0, wordt de hoogte automatisch berekend om de inhoud van de koptekst te accommoderen."
     },
     panellayoutcolumn: {
@@ -2746,7 +2746,6 @@ editorLocalization.locales["nl"] = nlStrings;
 // theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "Hiermee stelt u de hoofdachtergrondkleur van de enquête in."
 // header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "Met de optie \"Zelfde als container\" wordt de breedte van het inhoudsgebied van de koptekst automatisch aangepast aan het HTML-element waarin de enquête wordt geplaatst."
 // header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "De breedte van het koptekstgebied dat de titel en beschrijving van de enquête bevat, gemeten in pixels."
-// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "Hiermee wordt de onderkant van de koptekst overlapt met de bovenkant van de enquête."
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Accepteert waarden %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Accepteert waarden px."
 // p.effectiveColSpan: "Column span" => "Kolom spanwijdte"
@@ -2801,3 +2800,4 @@ editorLocalization.locales["nl"] = nlStrings;
 // pehelp.timerLocation: "Sets the location of a timer on a page." => "Hiermee stelt u de locatie van een timer op een pagina in."
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Als deze optie is ingesteld op 0, wordt de hoogte automatisch berekend om de inhoud van de koptekst te accommoderen."
 // p.mobileHeight: "Height on smartphones" => "Hoogte op smartphones"
+// header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Als deze optie is ingeschakeld, overlapt de bovenkant van de enquête de onderkant van de koptekst."

@@ -1521,7 +1521,7 @@ export var hrStrings = {
     header: {
       inheritWidthFrom: "Opcija \"Isto kao spremnik\" automatski prilagođava širinu područja sadržaja zaglavlja kako bi se uklopila u HTML element u koji je upitnik postavljen.",
       textAreaWidth: "Širina područja zaglavlja koje sadrži naslov i opis upitnika, mjerena u pikselima.",
-      overlapEnabled: "Čini dno zaglavlja prekrivenim vrhom upitnika.",
+      overlapEnabled: "Kada je omogućeno, vrh upitnika prekriva dno zaglavlja.",
       mobileHeight: "Kada je postavljena na 0, visina se automatski izračunava kako bi se prilagodio sadržaju zaglavlja."
     },
     panellayoutcolumn: {
@@ -2759,7 +2759,6 @@ editorLocalization.locales["hr"] = hrStrings;
 // theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "Postavlja glavnu boju pozadine upitnika."
 // header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "Opcija \"Isto kao spremnik\" automatski prilagođava širinu područja sadržaja zaglavlja kako bi se uklopila u HTML element u koji je upitnik postavljen."
 // header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "Širina područja zaglavlja koje sadrži naslov i opis upitnika, mjerena u pikselima."
-// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "Čini dno zaglavlja prekrivenim vrhom upitnika."
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Prihvaća vrijednosti %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Prihvaća vrijednosti px."
 // p.effectiveColSpan: "Column span" => "Raspon stupaca"
@@ -2814,3 +2813,4 @@ editorLocalization.locales["hr"] = hrStrings;
 // pehelp.timerLocation: "Sets the location of a timer on a page." => "Postavlja lokaciju mjerača vremena na stranici."
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Kada je postavljena na 0, visina se automatski izračunava kako bi se prilagodio sadržaju zaglavlja."
 // p.mobileHeight: "Height on smartphones" => "Visina na pametnim telefonima"
+// header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Kada je omogućeno, vrh upitnika prekriva dno zaglavlja."

@@ -1521,7 +1521,7 @@ export var skStrings = {
     header: {
       inheritWidthFrom: "Možnosť \"Rovnaké ako kontajner\" automaticky upraví šírku oblasti obsahu hlavičky tak, aby sa zmestila do prvku HTML, do ktorého je prieskum umiestnený.",
       textAreaWidth: "Šírka oblasti hlavičky, ktorá obsahuje názov a popis prieskumu, meraná v pixeloch.",
-      overlapEnabled: "Vytvorí spodnú časť hlavičky prekrytú hornou časťou prieskumu.",
+      overlapEnabled: "Ak je táto možnosť povolená, horná časť prieskumu prekrýva spodnú časť hlavičky.",
       mobileHeight: "Ak je nastavená hodnota 0, výška sa vypočíta automaticky, aby sa prispôsobila obsahu hlavičky."
     },
     panellayoutcolumn: {
@@ -2718,7 +2718,6 @@ editorLocalization.locales["sk"] = skStrings;
 // theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "Nastaví hlavnú farbu pozadia prieskumu."
 // header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "Možnosť \"Rovnaké ako kontajner\" automaticky upraví šírku oblasti obsahu hlavičky tak, aby sa zmestila do prvku HTML, do ktorého je prieskum umiestnený."
 // header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "Šírka oblasti hlavičky, ktorá obsahuje názov a popis prieskumu, meraná v pixeloch."
-// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "Vytvorí spodnú časť hlavičky prekrytú hornou časťou prieskumu."
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Akceptuje hodnoty %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Akceptuje hodnoty px."
 // p.effectiveColSpan: "Column span" => "Rozpätie stĺpca"
@@ -2773,3 +2772,4 @@ editorLocalization.locales["sk"] = skStrings;
 // pehelp.timerLocation: "Sets the location of a timer on a page." => "Nastaví umiestnenie časovača na strane."
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Ak je nastavená hodnota 0, výška sa vypočíta automaticky, aby sa prispôsobila obsahu hlavičky."
 // p.mobileHeight: "Height on smartphones" => "Výška na smartfónoch"
+// header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Ak je táto možnosť povolená, horná časť prieskumu prekrýva spodnú časť hlavičky."

@@ -1521,7 +1521,7 @@ export var bgStrings = {
     header: {
       inheritWidthFrom: "Опцията \"Същото като контейнера\" автоматично регулира ширината на областта на съдържанието на заглавката, за да се побере в HTML елемента, в който е поставена анкетата.",
       textAreaWidth: "Ширината на областта на заглавката, която съдържа заглавието и описанието на проучването, измерена в пиксели.",
-      overlapEnabled: "Прави долната част на заглавката наслагвана с горната част на проучването.",
+      overlapEnabled: "Когато е разрешено, горната част на проучването се наслагва върху долната част на заглавката.",
       mobileHeight: "Когато е зададена на 0, височината се изчислява автоматично, за да побере съдържанието на заглавката."
     },
     panellayoutcolumn: {
@@ -2328,7 +2328,6 @@ editorLocalization.locales["bg"] = bgStrings;
 // theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "Задава основния цвят на фона на проучването."
 // header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "Опцията \"Същото като контейнера\" автоматично регулира ширината на областта на съдържанието на заглавката, за да се побере в HTML елемента, в който е поставена анкетата."
 // header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "Ширината на областта на заглавката, която съдържа заглавието и описанието на проучването, измерена в пиксели."
-// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "Прави долната част на заглавката наслагвана с горната част на проучването."
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Приема стойности %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Приема стойности px."
 // p.effectiveColSpan: "Column span" => "Обхват на колоната"
@@ -2383,3 +2382,4 @@ editorLocalization.locales["bg"] = bgStrings;
 // pehelp.timerLocation: "Sets the location of a timer on a page." => "Задава местоположението на таймер на страница."
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Когато е зададена на 0, височината се изчислява автоматично, за да побере съдържанието на заглавката."
 // p.mobileHeight: "Height on smartphones" => "Височина на смартфони"
+// header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Когато е разрешено, горната част на проучването се наслагва върху долната част на заглавката."

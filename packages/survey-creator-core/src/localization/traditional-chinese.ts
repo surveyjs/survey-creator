@@ -1521,7 +1521,7 @@ var traditionalChineseTranslation = {
     header: {
       inheritWidthFrom: "“與容器相同”選項會自動調整標題內容區域的寬度，以適應放置調查的 HTML 元素。",
       textAreaWidth: "包含調查標題和描述的標題區域的寬度，以像素為單位。",
-      overlapEnabled: "使標題的底部與調查的頂部重疊。",
+      overlapEnabled: "啟用后，調查的頂部將覆蓋頁眉的底部。",
       mobileHeight: "設置為 0 時，將自動計算高度以適應標題的內容。"
     },
     panellayoutcolumn: {
@@ -3037,7 +3037,6 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "設置調查的主要背景顏色。"
 // header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "“與容器相同”選項會自動調整標題內容區域的寬度，以適應放置調查的 HTML 元素。"
 // header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "包含調查標題和描述的標題區域的寬度，以像素為單位。"
-// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "使標題的底部與調查的頂部重疊。"
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "接受值 。"
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "接受值 px。"
 // p.effectiveColSpan: "Column span" => "柱跨度"
@@ -3092,3 +3091,4 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // pehelp.timerLocation: "Sets the location of a timer on a page." => "設置計時器在頁面上的位置。"
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "設置為 0 時，將自動計算高度以適應標題的內容。"
 // p.mobileHeight: "Height on smartphones" => "智能手機上的身高"
+// header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "啟用后，調查的頂部將覆蓋頁眉的底部。"
