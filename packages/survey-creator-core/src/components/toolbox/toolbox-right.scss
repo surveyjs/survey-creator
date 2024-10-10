@@ -1,0 +1,24 @@
+@import "../../variables.scss";
+.svc-creator__toolbox--right,
+[dir="rtl"],
+[style*="direction:rtl"],
+[style*="direction: rtl"] {
+  .svc-toolbox {
+    direction: rtl;
+  }
+  .svc-toolbox__item-banner {
+    &:after {
+      transform: translate(-2px, -2px) rotate(90deg);
+    }
+  }
+  .svc-toolbox__item-submenu-button {
+      transform: rotate(180deg);
+  }
+}
+.svc-creator__toolbox--right {
+  .sv-popup__body-content,
+  .spg-search-editor_container
+  {
+    direction: initial;
+  }
+}

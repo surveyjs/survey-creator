@@ -364,6 +364,7 @@ test("Toolbox with search", async (t) => {
     const toolboxElement = Selector(".svc-toolbox");
 
     await setJSON({ pages: [{ name: "page1" }] });
+    await changeToolboxScrolling(false);
     await ClientFunction(() => {
       window["creator"].toolbox.searchEnabled = true;
     })();
@@ -388,6 +389,7 @@ test("Toolbox with search in categories", async (t) => {
     const toolboxElement = Selector(".svc-toolbox");
 
     await setJSON({ pages: [{ name: "page1" }] });
+    await changeToolboxScrolling(false);
     await ClientFunction(() => {
       window["creator"].toolbox.searchEnabled = true;
       window["creator"].toolbox.showCategoryTitles = true;
@@ -422,11 +424,13 @@ test("Toolbox right with search", async (t) => {
     const toolboxElement = Selector(".svc-toolbox");
 
     await setJSON({ pages: [{ name: "page1" }] });
+    await changeToolboxScrolling(false);
     await ClientFunction(() => {
       window["creator"].toolbox.searchEnabled = true;
     })();
     await changeToolboxLocation("right");
-    await t.resizeWindow(2560, 1440);
+    await t.resizeWindow(2560, 1440)
+      .click(collapseButtonSelector);
     await takeElementScreenshot("toolbox-search-right.png", toolboxElement, t, comparer);
     await t.click(Selector(".svc-toolbox__search-button"));
     await t.click(Selector(".svc-toolbox input"));
@@ -442,12 +446,14 @@ test("Toolbox RTL with search", async (t) => {
     const toolboxElement = Selector(".svc-toolbox");
 
     await setJSON({ pages: [{ name: "page1" }] });
+    await changeToolboxScrolling(false);
     await ClientFunction(() => {
       window["creator"].toolbox.searchEnabled = true;
       document.body.setAttribute("dir", "rtl");
     })();
 
-    await t.resizeWindow(2560, 1440);
+    await t.resizeWindow(2560, 1440)
+      .click(collapseButtonSelector);
     await takeElementScreenshot("toolbox-search-rtl.png", toolboxElement, t, comparer);
     await t.typeText(Selector(".svc-toolbox input"), "single");
     await takeElementScreenshot("toolbox-search-rtl-entered.png", toolboxElement, t, comparer);
