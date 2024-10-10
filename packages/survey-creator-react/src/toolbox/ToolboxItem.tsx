@@ -23,12 +23,19 @@ import { CreatorModelElement } from "../ModelElement";
 export interface ISurveyCreatorToolboxItemProps {
   creator: SurveyCreatorModel;
   item: QuestionToolboxItem;
+  model: ToolboxToolViewModel;
+  parentModel: ActionContainer;
+  isCompact: boolean;
+}
+export interface ISurveyCreatorToolboxToolProps {
+  creator: SurveyCreatorModel;
+  item: QuestionToolboxItem;
   parentModel: ActionContainer;
   isCompact: boolean;
 }
 
 export class SurveyCreatorToolboxTool extends CreatorModelElement<
-  ISurveyCreatorToolboxItemProps,
+  ISurveyCreatorToolboxToolProps,
   any
 > {
   model: ToolboxToolViewModel;
@@ -64,6 +71,7 @@ export class SurveyCreatorToolboxTool extends CreatorModelElement<
         item: item,
         creator: this.creator,
         parentModel: this.creator.toolbox,
+        model: this.model,
         isCompact: this.isCompact
       }
     );
@@ -78,7 +86,7 @@ export class SurveyCreatorToolboxTool extends CreatorModelElement<
             this.model.onPointerDown(event);
           }}
           onMouseOver={(event: any) => {
-            this.model.onMouseOver(item, event);
+            this.model.onMouseOverTool(item, event);
           }}
           onMouseLeave={(event: any) => {
             this.model.onMouseLeave(item, event);
@@ -94,14 +102,9 @@ export class SurveyCreatorToolboxTool extends CreatorModelElement<
 export class SurveyCreatorToolboxItem extends CreatorModelElement<
   ISurveyCreatorToolboxItemProps,
   any
-> {
-  model: ToolboxToolViewModel;
+  > {
   constructor(props) {
     super(props);
-  }
-  protected createModel(props: any): void {
-    const toolboxItem: IQuestionToolboxItem = props.item;
-    this.model = new ToolboxToolViewModel(toolboxItem, props.creator, props.parentModel);
   }
   protected getUpdatedModelProps(): string[] {
     return ["creator", "item"];
@@ -111,6 +114,9 @@ export class SurveyCreatorToolboxItem extends CreatorModelElement<
   }
   public get creator() {
     return this.props.creator;
+  }
+  public get model() {
+    return this.props.model;
   }
   protected getStateElement(): Base {
     return this.model;

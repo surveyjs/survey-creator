@@ -182,6 +182,18 @@ export var nlStrings = {
     pagePlaceHolder: "De pagina is leeg. Sleep een element uit de gereedschapskist of klik op de knop hieronder.",
     imagePlaceHolder: "Sleep een afbeelding hierheen of klik op de onderstaande knop en kies een afbeelding om te uploaden",
     surveyPlaceHolderMobile: "Klik hieronder op de knop \"Vraag toevoegen\" om te beginnen met het maken van uw formulier.",
+    surveyPlaceholderTitle: "Uw formulier is leeg",
+    surveyPlaceholderTitleMobile: "Uw formulier is leeg",
+    surveyPlaceholderDescription: "Sleep een element uit de gereedschapskist of klik op de knop hieronder.",
+    surveyPlaceholderDescriptionMobile: "Sleep een element uit de gereedschapskist of klik op de knop hieronder.",
+    previewPlaceholderTitle: "Geen voorbeeld",
+    previewPlaceholderTitleMobile: "Geen voorbeeld",
+    previewPlaceholderDescription: "De enquête bevat geen zichtbare elementen.",
+    previewPlaceholderDescriptionMobile: "De enquête bevat geen zichtbare elementen.",
+    translationsPlaceholderTitle: "Geen verplichtingen om te vertalen",
+    translationsPlaceholderTitleMobile: "Geen verplichtingen om te vertalen",
+    translationsPlaceholderDescription: "Voeg elementen toe aan uw formulier of wijzig het tekenreeksfilter in de werkbalk.",
+    translationsPlaceholderDescriptionMobile: "Voeg elementen toe aan uw formulier of wijzig het tekenreeksfilter in de werkbalk.",
     pagePlaceHolderMobile: "Klik op de knop \"Vraag toevoegen\" hieronder om een nieuw element aan de pagina toe te voegen.",
     panelPlaceHolderMobile: "Klik op de knop \"Vraag toevoegen\" hieronder om een nieuw element aan het paneel toe te voegen.",
     imagePlaceHolderMobile: "Klik op de onderstaande knop en kies een afbeelding om te uploaden",
@@ -194,6 +206,10 @@ export var nlStrings = {
     lg: {
       addNewItem: "Nieuwe regel toevoegen",
       empty_tab: "Maak een regel om de stroom van de enquête aan te passen.",
+      logicPlaceholderTitle: "Geen logische regels",
+      logicPlaceholderTitleMobile: "Geen logische regels",
+      logicPlaceholderDescription: "Maak een regel om de stroom van de enquête aan te passen.",
+      logicPlaceholderDescriptionMobile: "Maak een regel om de stroom van de enquête aan te passen.",
       page_visibilityName: "Pagina zichtbaarheid",
       page_enableName: "Pagina inschakelen (uitschakelen)",
       page_requireName: "Pagina verplicht maken",
@@ -375,7 +391,7 @@ export var nlStrings = {
       description: "Pagina beschrijving",
       visibleIf: "Maak de pagina zichtbaar als",
       requiredIf: "Maak de pagina vereist als",
-      maxTimeToFinish: "Tijdslimiet om de pagina te voltooien (in seconden)",
+      timeLimit: "Tijdslimiet om de pagina te voltooien (in seconden)",
       questionsOrder: "Volgorde van vragen op de pagina"
     },
     matrixdropdowncolumn: {
@@ -615,10 +631,11 @@ export var nlStrings = {
     questionErrorLocation: "Plek vraagfoutmelding",
     focusFirstQuestionAutomatic: "Op volgende pagina focus op de eerste vraag zetten",
     questionsOrder: "Volgorde elementen op pagina",
-    maxTimeToFinish: "Maximale tijd om de enquête te voltooien",
-    maxTimeToFinishPage: "Maximale tijd om een pagina in de enquête te voltooien",
-    showTimerPanel: "Toon timerpaneel",
-    showTimerPanelMode: "Modus timerpaneel",
+    timeLimit: "Maximale tijd om de enquête te voltooien",
+    timeLimitPerPage: "Maximale tijd om een pagina in de enquête te voltooien",
+    showTimer: "Gebruik een timer",
+    timerLocation: "Toon timerpaneel",
+    timerInfoMode: "Modus timerpaneel",
     renderMode: "Render-modus",
     allowAddPanel: "Sta het toevoegen van een paneel toe",
     allowRemovePanel: "Laat het verwijderen van het paneel toe",
@@ -875,6 +892,7 @@ export var nlStrings = {
       fontSize: "Tekengrootte",
       scale: "Schub",
       cornerRadius: "De straal van de hoek",
+      advancedMode: "Geavanceerde modus",
       pageTitle: "Titel lettertype",
       pageDescription: "Beschrijving lettertype",
       questionTitle: "Titel lettertype",
@@ -1038,11 +1056,8 @@ export var nlStrings = {
     showNavigationButtons: {
       none: "Verborgen"
     },
-    showTimerPanel: {
-      none: "Verborgen"
-    },
-    showTimerPanelMode: {
-      all: "Beide"
+    timerInfoMode: {
+      combined: "Beide"
     },
     addRowLocation: {
       default: "Afhankelijk van de matrixindeling"
@@ -1410,11 +1425,11 @@ export var nlStrings = {
     imageFit: "Kies uit: \"Geen\" - afbeelding behoudt zijn oorspronkelijke grootte; \"Bevatten\" - het formaat van de afbeelding wordt aangepast aan de beeldverhouding met behoud van de beeldverhouding; \"Omslag\" - afbeelding vult het hele vak met behoud van de beeldverhouding; \"Vullen\" - de afbeelding wordt uitgerekt om het vak te vullen zonder de beeldverhouding te behouden.",
     autoGrow: "Verhoogt geleidelijk de hoogte van het invoerveld terwijl gegevens worden ingevoerd. Hiermee wordt de instelling \"Invoerveldhoogte (in lijnen)\" overschreven.",
     allowResize: "De formaatgreep (of greep) verschijnt in de hoek en kan worden gesleept om de grootte van het invoerveld te wijzigen.",
-    maxTimeToFinish: "Een tijdsinterval in seconden, waarna de enquête automatisch doorgaat naar de bedankpagina.",
-    maxTimeToFinishPage: "Een tijdsinterval in seconden, waarna de enquête automatisch doorgaat naar de volgende pagina.",
+    timeLimit: "Een tijdsinterval in seconden, waarna de enquête automatisch doorgaat naar de bedankpagina.",
+    timeLimitPerPage: "Een tijdsinterval in seconden, waarna de enquête automatisch doorgaat naar de volgende pagina.",
     validateVisitedEmptyFields: "Schakel deze optie in om validatie te activeren wanneer een gebruiker zich richt op een leeg invoerveld en dit vervolgens verlaat zonder wijzigingen aan te brengen.",
     page: {
-      maxTimeToFinish: "Een tijdsinterval in seconden, waarna de enquête automatisch doorgaat naar de volgende pagina.",
+      timeLimit: "Een tijdsinterval in seconden, waarna de enquête automatisch doorgaat naar de volgende pagina.",
       visibleIf: "Gebruik het toverstafpictogram om een voorwaardelijke regel in te stellen die de zichtbaarheid van de pagina bepaalt.",
       enableIf: "Gebruik het pictogram van de toverstaf om een voorwaardelijke regel in te stellen waarmee de alleen-lezen modus voor de pagina wordt uitgeschakeld.",
       requiredIf: "Gebruik het toverstafpictogram om een voorwaardelijke regel in te stellen die het verzenden van enquêtes verhindert, tenzij ten minste één geneste vraag een antwoord heeft.",
@@ -1424,7 +1439,7 @@ export var nlStrings = {
       questionsOrder: "Behoudt de oorspronkelijke volgorde van vragen of maakt ze willekeurig. De optie \"Overerven\" past de instelling op enquêteniveau toe (\"Standaard Origineel\"). Het effect van deze instelling is alleen zichtbaar op het tabblad Voorbeeld.",
       navigationButtonsVisibility: "Hiermee stelt u de zichtbaarheid van navigatieknoppen op de pagina in. De optie \"Overerven\" past de instelling op enquêteniveau toe, die standaard op \"Zichtbaar\" staat."
     },
-    showTimerPanel: "Hiermee stelt u de zichtbaarheid en locatie van een timer op een pagina in.",
+    timerLocation: "Hiermee stelt u de locatie van een timer op een pagina in.",
     panelsState: "Kies uit: \"Vergrendeld\" - gebruikers kunnen panelen niet uitvouwen of samenvouwen; \"Alles samenvouwen\" - alle deelvensters beginnen in een samengevouwen toestand; \"Alles uitvouwen\" - alle deelvensters beginnen in een uitgevouwen staat; \"Eerst uitgevouwen\" - alleen het eerste paneel wordt in eerste instantie uitgevouwen.",
     imageLinkName: "Voer de naam van een gedeelde eigenschap in binnen de matrix met objecten die de URL's van afbeeldings- of videobestanden bevat die u in de keuzelijst wilt weergeven.",
     choices: "De linkerwaarde dient als een item-ID die wordt gebruikt in voorwaardelijke regels, de rechterwaarde wordt weergegeven aan respondenten.",
@@ -1506,7 +1521,8 @@ export var nlStrings = {
     header: {
       inheritWidthFrom: "Met de optie \"Zelfde als container\" wordt de breedte van het inhoudsgebied van de koptekst automatisch aangepast aan het HTML-element waarin de enquête wordt geplaatst.",
       textAreaWidth: "De breedte van het koptekstgebied dat de titel en beschrijving van de enquête bevat, gemeten in pixels.",
-      overlapEnabled: "Hiermee wordt de onderkant van de koptekst overlapt met de bovenkant van de enquête."
+      overlapEnabled: "Als deze optie is ingeschakeld, overlapt de bovenkant van de enquête de onderkant van de koptekst.",
+      mobileHeight: "Als deze optie is ingesteld op 0, wordt de hoogte automatisch berekend om de inhoud van de koptekst te accommoderen."
     },
     panellayoutcolumn: {
       effectiveWidth: "Accepteert waarden %.",
@@ -1594,6 +1610,7 @@ export var nlStrings = {
     imageFit: "Passend bij het beeld",
     altText: "Alternatieve tekst",
     height: "Hoogte",
+    mobileHeight: "Hoogte op smartphones",
     penColor: "Kleur van de pen",
     backgroundColor: "Achtergrondkleur",
     templateElements: "Sjabloonelementen",
@@ -1777,7 +1794,7 @@ editorLocalization.locales["nl"] = nlStrings;
 // pe.portraitOrientation: "Switch to portrait orientation" => "Overschakelen naar staande stand"
 // image.imageHeight: "Image height (in CSS-accepted values)" => "Afbeeldingshoogte (in css-geaccepteerde waarden)"
 // image.imageWidth: "Image width (in CSS-accepted values)" => "Afbeeldingsbreedte (in css-geaccepteerde waarden)"
-// page.maxTimeToFinish: "Time limit to finish the page (in seconds)" => "Tijdslimiet om de pagina te voltooien (in seconden)"
+// page.timeLimit: "Time limit to finish the page (in seconds)" => "Tijdslimiet om de pagina te voltooien (in seconden)"
 // question.page: "Parent page" => "Bovenliggende pagina"
 // pe.noEntriesText: "Empty entries text" => "Lege invoertekst"
 // pe.setValue: "Answer" => "Antwoorden"
@@ -2522,9 +2539,9 @@ editorLocalization.locales["nl"] = nlStrings;
 // pehelp.imageFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Kies uit: \"Geen\" - afbeelding behoudt zijn oorspronkelijke grootte; \"Bevatten\" - het formaat van de afbeelding wordt aangepast aan de beeldverhouding met behoud van de beeldverhouding; \"Omslag\" - afbeelding vult het hele vak met behoud van de beeldverhouding; \"Vullen\" - de afbeelding wordt uitgerekt om het vak te vullen zonder de beeldverhouding te behouden."
 // pehelp.autoGrow: "Gradually increases the height of the input field as data is being entered. Overrides the \"Input field height (in lines)\" setting." => "Verhoogt geleidelijk de hoogte van het invoerveld terwijl gegevens worden ingevoerd. Hiermee wordt de instelling \"Invoerveldhoogte (in lijnen)\" overschreven."
 // pehelp.allowResize: "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field." => "De formaatgreep (of greep) verschijnt in de hoek en kan worden gesleept om de grootte van het invoerveld te wijzigen."
-// pehelp.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "Een tijdsinterval in seconden, waarna de enquête automatisch doorgaat naar de bedankpagina."
-// pehelp.maxTimeToFinishPage: "A time interval in seconds after which the survey auto-advances to the next page." => "Een tijdsinterval in seconden, waarna de enquête automatisch doorgaat naar de volgende pagina."
-// page.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the next page." => "Een tijdsinterval in seconden, waarna de enquête automatisch doorgaat naar de volgende pagina."
+// pehelp.timeLimit: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "Een tijdsinterval in seconden, waarna de enquête automatisch doorgaat naar de bedankpagina."
+// pehelp.timeLimitPerPage: "A time interval in seconds after which the survey auto-advances to the next page." => "Een tijdsinterval in seconden, waarna de enquête automatisch doorgaat naar de volgende pagina."
+// page.timeLimit: "A time interval in seconds after which the survey auto-advances to the next page." => "Een tijdsinterval in seconden, waarna de enquête automatisch doorgaat naar de volgende pagina."
 // page.visibleIf: "Use the magic wand icon to set a conditional rule that determines page visibility." => "Gebruik het toverstafpictogram om een voorwaardelijke regel in te stellen die de zichtbaarheid van de pagina bepaalt."
 // page.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the page." => "Gebruik het pictogram van de toverstaf om een voorwaardelijke regel in te stellen waarmee de alleen-lezen modus voor de pagina wordt uitgeschakeld."
 // page.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "Gebruik het toverstafpictogram om een voorwaardelijke regel in te stellen die het verzenden van enquêtes verhindert, tenzij ten minste één geneste vraag een antwoord heeft."
@@ -2532,7 +2549,6 @@ editorLocalization.locales["nl"] = nlStrings;
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Hiermee stelt u de locatie van een foutmelding in ten opzichte van de vraag met ongeldige invoer. Kies tussen: \"Top\" - er wordt een fouttekst bovenaan het vraagvak geplaatst; \"Onderaan\" - er wordt een fouttekst onderaan het vraagvak geplaatst. De optie \"Overnemen\" past de instelling op enquêteniveau toe (\"Top\" standaard)."
 // page.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Behoudt de oorspronkelijke volgorde van vragen of maakt ze willekeurig. De optie \"Overerven\" past de instelling op enquêteniveau toe (\"Standaard Origineel\"). Het effect van deze instelling is alleen zichtbaar op het tabblad Voorbeeld."
 // page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Hiermee stelt u de zichtbaarheid van navigatieknoppen op de pagina in. De optie \"Overerven\" past de instelling op enquêteniveau toe, die standaard op \"Zichtbaar\" staat."
-// pehelp.showTimerPanel: "Sets the visibility and location of a timer on a page." => "Hiermee stelt u de zichtbaarheid en locatie van een timer op een pagina in."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "Kies uit: \"Vergrendeld\" - gebruikers kunnen panelen niet uitvouwen of samenvouwen; \"Alles samenvouwen\" - alle deelvensters beginnen in een samengevouwen toestand; \"Alles uitvouwen\" - alle deelvensters beginnen in een uitgevouwen staat; \"Eerst uitgevouwen\" - alleen het eerste paneel wordt in eerste instantie uitgevouwen."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "Voer de naam van een gedeelde eigenschap in binnen de matrix met objecten die de URL's van afbeeldings- of videobestanden bevat die u in de keuzelijst wilt weergeven."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "De linkerwaarde dient als een item-ID die wordt gebruikt in voorwaardelijke regels, de rechterwaarde wordt weergegeven aan respondenten."
@@ -2730,7 +2746,6 @@ editorLocalization.locales["nl"] = nlStrings;
 // theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "Hiermee stelt u de hoofdachtergrondkleur van de enquête in."
 // header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "Met de optie \"Zelfde als container\" wordt de breedte van het inhoudsgebied van de koptekst automatisch aangepast aan het HTML-element waarin de enquête wordt geplaatst."
 // header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "De breedte van het koptekstgebied dat de titel en beschrijving van de enquête bevat, gemeten in pixels."
-// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "Hiermee wordt de onderkant van de koptekst overlapt met de bovenkant van de enquête."
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Accepteert waarden %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Accepteert waarden px."
 // p.effectiveColSpan: "Column span" => "Kolom spanwijdte"
@@ -2763,3 +2778,26 @@ editorLocalization.locales["nl"] = nlStrings;
 // ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Klik op een categoriepictogram om de enquête-instellingen te verkennen. Aanvullende instellingen worden beschikbaar zodra u een enquête-element aan het ontwerpoppervlak toevoegt."
 // pe.caseInsensitive: "Case insensitive" => "Hoofdlettergevoelig"
 // pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Selecteer of hoofdletters en kleine letters in de reguliere expressie als gelijkwaardig moeten worden behandeld."
+
+// ed.surveyPlaceholderTitle: "Your form is empty" => "Uw formulier is leeg"
+// ed.surveyPlaceholderTitleMobile: "Your form is empty" => "Uw formulier is leeg"
+// ed.surveyPlaceholderDescription: "Drag an element from the toolbox or click the button below." => "Sleep een element uit de gereedschapskist of klik op de knop hieronder."
+// ed.surveyPlaceholderDescriptionMobile: "Drag an element from the toolbox or click the button below." => "Sleep een element uit de gereedschapskist of klik op de knop hieronder."
+// ed.previewPlaceholderTitle: "No preview" => "Geen voorbeeld"
+// ed.previewPlaceholderTitleMobile: "No preview" => "Geen voorbeeld"
+// ed.previewPlaceholderDescription: "The survey doesn't contain any visible elements." => "De enquête bevat geen zichtbare elementen."
+// ed.previewPlaceholderDescriptionMobile: "The survey doesn't contain any visible elements." => "De enquête bevat geen zichtbare elementen."
+// ed.translationsPlaceholderTitle: "No strings to translate" => "Geen verplichtingen om te vertalen"
+// ed.translationsPlaceholderTitleMobile: "No strings to translate" => "Geen verplichtingen om te vertalen"
+// ed.translationsPlaceholderDescription: "Add elements to your form or change the strings filter in the toolbar." => "Voeg elementen toe aan uw formulier of wijzig het tekenreeksfilter in de werkbalk."
+// ed.translationsPlaceholderDescriptionMobile: "Add elements to your form or change the strings filter in the toolbar." => "Voeg elementen toe aan uw formulier of wijzig het tekenreeksfilter in de werkbalk."
+// lg.logicPlaceholderTitle: "No logical rules" => "Geen logische regels"
+// lg.logicPlaceholderTitleMobile: "No logical rules" => "Geen logische regels"
+// lg.logicPlaceholderDescription: "Create a rule to customize the flow of the survey." => "Maak een regel om de stroom van de enquête aan te passen."
+// lg.logicPlaceholderDescriptionMobile: "Create a rule to customize the flow of the survey." => "Maak een regel om de stroom van de enquête aan te passen."
+// pe.showTimer: "Use a timer" => "Gebruik een timer"
+// theme.advancedMode: "Advanced mode" => "Geavanceerde modus"
+// pehelp.timerLocation: "Sets the location of a timer on a page." => "Hiermee stelt u de locatie van een timer op een pagina in."
+// header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Als deze optie is ingesteld op 0, wordt de hoogte automatisch berekend om de inhoud van de koptekst te accommoderen."
+// p.mobileHeight: "Height on smartphones" => "Hoogte op smartphones"
+// header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Als deze optie is ingeschakeld, overlapt de bovenkant van de enquête de onderkant van de koptekst."

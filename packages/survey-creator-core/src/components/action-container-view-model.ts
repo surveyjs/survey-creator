@@ -212,7 +212,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this._renderedCollapsed = !val;
   }, () => !this.renderedCollapsed);
   public set renderedCollapsed(val: boolean) {
-    if (this.animationAllowed) this.expandCollapseAnimationRunning = true;
+    if (this.animationAllowed && val !== this.renderedCollapsed) this.expandCollapseAnimationRunning = true;
     this.animationCollapsed.sync(!val);
   }
   public get renderedCollapsed(): boolean {
@@ -412,7 +412,9 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
         action: () => {
           this.creator.setShowSidebar(true, true);
           if (!this.creator.isMobileView) {
-            this.creator.propertyGrid.getAllQuestions()[0].focus();
+            this.creator.sidebar.executeOnExpand(() => {
+              this.creator.propertyGrid.getAllQuestions()[0].focus();
+            });
           }
         }
       })

@@ -182,6 +182,18 @@ export var koreanStrings = {
     pagePlaceHolder: "페이지가 비어 있습니다. 도구 상자에서 요소를 드래그하거나 아래 버튼을 클릭합니다.",
     imagePlaceHolder: "여기에 이미지를 끌어다 놓거나 아래 버튼을 클릭하고 업로드할 이미지를 선택하세요.",
     surveyPlaceHolderMobile: "아래의 \"질문 추가\" 버튼을 클릭하여 양식 작성을 시작하십시오.",
+    surveyPlaceholderTitle: "양식이 비어 있습니다.",
+    surveyPlaceholderTitleMobile: "양식이 비어 있습니다.",
+    surveyPlaceholderDescription: "도구 상자에서 요소를 드래그하거나 아래 버튼을 클릭합니다.",
+    surveyPlaceholderDescriptionMobile: "도구 상자에서 요소를 드래그하거나 아래 버튼을 클릭합니다.",
+    previewPlaceholderTitle: "미리보기 없음",
+    previewPlaceholderTitleMobile: "미리보기 없음",
+    previewPlaceholderDescription: "설문조사에 가시적인 요소가 포함되어 있지 않습니다.",
+    previewPlaceholderDescriptionMobile: "설문조사에 가시적인 요소가 포함되어 있지 않습니다.",
+    translationsPlaceholderTitle: "번역할 문자열이 없습니다.",
+    translationsPlaceholderTitleMobile: "번역할 문자열이 없습니다.",
+    translationsPlaceholderDescription: "양식에 요소를 추가하거나 도구 모음에서 문자열 필터를 변경합니다.",
+    translationsPlaceholderDescriptionMobile: "양식에 요소를 추가하거나 도구 모음에서 문자열 필터를 변경합니다.",
     pagePlaceHolderMobile: "아래의 \"질문 추가\" 버튼을 클릭하여 페이지에 새 요소를 추가하세요.",
     panelPlaceHolderMobile: "아래의 \"질문 추가\" 버튼을 클릭하여 패널에 새 요소를 추가합니다.",
     imagePlaceHolderMobile: "아래 버튼을 클릭하고 업로드할 이미지를 선택하세요.",
@@ -194,6 +206,10 @@ export var koreanStrings = {
     lg: {
       addNewItem: "새 규칙 추가",
       empty_tab: "설문 조사의 흐름을 사용자 지정하는 규칙을 만듭니다.",
+      logicPlaceholderTitle: "논리적 규칙 없음",
+      logicPlaceholderTitleMobile: "논리적 규칙 없음",
+      logicPlaceholderDescription: "설문조사의 흐름을 사용자 지정하는 규칙을 만듭니다.",
+      logicPlaceholderDescriptionMobile: "설문조사의 흐름을 사용자 지정하는 규칙을 만듭니다.",
       page_visibilityName: "페이지 표시(숨기기)",
       page_enableName: "사용(사용 안 함) 페이지",
       page_requireName: "페이지를 필수로 설정",
@@ -375,7 +391,7 @@ export var koreanStrings = {
       description: "페이지 설명",
       visibleIf: "다음과 같은 경우 페이지를 표시합니다.",
       requiredIf: "다음과 같은 경우 페이지를 필수로 만듭니다.",
-      maxTimeToFinish: "페이지 완료 시간 제한(초)",
+      timeLimit: "페이지 완료 시간 제한(초)",
       questionsOrder: "페이지의 질문 순서"
     },
     matrixdropdowncolumn: {
@@ -615,10 +631,11 @@ export var koreanStrings = {
     questionErrorLocation: "질문 위치 오류",
     focusFirstQuestionAutomatic: "페이지 변경시 첫 번째 질문에 초점",
     questionsOrder: "페이지의 요소 순서",
-    maxTimeToFinish: "설문 조사를 마칠 수있는 최대 시간",
-    maxTimeToFinishPage: "설문 조사에서 페이지를 마칠 수있는 최대 시간",
-    showTimerPanel: "타이머 패널 표시",
-    showTimerPanelMode: "타이머 패널 모드 표시",
+    timeLimit: "설문 조사를 마칠 수있는 최대 시간",
+    timeLimitPerPage: "설문 조사에서 페이지를 마칠 수있는 최대 시간",
+    showTimer: "타이머 사용",
+    timerLocation: "타이머 패널 표시",
+    timerInfoMode: "타이머 패널 모드 표시",
     renderMode: "렌더링 모드",
     allowAddPanel: "패널 추가 허용",
     allowRemovePanel: "패널 제거 허용",
@@ -875,6 +892,7 @@ export var koreanStrings = {
       fontSize: "글꼴 크기",
       scale: "저울",
       cornerRadius: "코너 반경",
+      advancedMode: "어드밴스드 모드",
       pageTitle: "제목 글꼴",
       pageDescription: "설명 글꼴",
       questionTitle: "제목 글꼴",
@@ -1038,11 +1056,8 @@ export var koreanStrings = {
     showNavigationButtons: {
       none: "숨겨진"
     },
-    showTimerPanel: {
-      none: "숨겨진"
-    },
-    showTimerPanelMode: {
-      all: "둘다"
+    timerInfoMode: {
+      combined: "둘다"
     },
     addRowLocation: {
       default: "행렬 레이아웃에 따라 다름"
@@ -1410,11 +1425,11 @@ export var koreanStrings = {
     imageFit: "다음 중에서 선택: \"없음\" - 이미지가 원래 크기를 유지합니다. \"Contain\" - 가로 세로 비율을 유지하면서 이미지의 크기가 조정됩니다. \"표지\" - 이미지가 종횡비를 유지하면서 전체 상자를 채웁니다. \"채우기\" - 가로 세로 비율을 유지하지 않고 상자를 채우기 위해 이미지가 늘어납니다.",
     autoGrow: "데이터가 입력될 때 입력 필드의 높이를 점진적으로 늘립니다. \"입력 필드 높이(줄 단위)\" 설정을 재정의합니다.",
     allowResize: "크기 조정 핸들(또는 그립)이 모서리에 나타나며 드래그하여 입력 필드의 크기를 변경할 수 있습니다.",
-    maxTimeToFinish: "설문조사가 감사 인사 페이지로 자동 전환되기까지의 시간 간격(초)입니다.",
-    maxTimeToFinishPage: "설문조사가 다음 페이지로 자동 넘어가는 시간 간격(초)입니다.",
+    timeLimit: "설문조사가 감사 인사 페이지로 자동 전환되기까지의 시간 간격(초)입니다.",
+    timeLimitPerPage: "설문조사가 다음 페이지로 자동 넘어가는 시간 간격(초)입니다.",
     validateVisitedEmptyFields: "이 옵션을 사용하면 사용자가 빈 입력 필드에 집중한 다음 변경하지 않고 떠날 때 유효성 검사를 트리거합니다.",
     page: {
-      maxTimeToFinish: "설문조사가 다음 페이지로 자동 넘어가는 시간 간격(초)입니다.",
+      timeLimit: "설문조사가 다음 페이지로 자동 넘어가는 시간 간격(초)입니다.",
       visibleIf: "마술 지팡이 아이콘을 사용하여 페이지 표시 여부를 결정하는 조건부 규칙을 설정할 수 있습니다.",
       enableIf: "마술 지팡이 아이콘을 사용하여 페이지에 대해 읽기 전용 모드를 비활성화하는 조건부 규칙을 설정합니다.",
       requiredIf: "마술 지팡이 아이콘을 사용하여 하나 이상의 중첩된 질문에 답변이 없는 한 설문조사 제출을 금지하는 조건부 규칙을 설정합니다.",
@@ -1424,7 +1439,7 @@ export var koreanStrings = {
       questionsOrder: "질문의 원래 순서를 유지하거나 무작위화합니다. \"상속\" 옵션은 설문조사 수준 설정(기본적으로 \"원본\")을 적용합니다. 이 설정의 효과는 미리보기 탭에서만 볼 수 있습니다.",
       navigationButtonsVisibility: "페이지에서 탐색 단추의 표시 여부를 설정합니다. \"상속\" 옵션은 설문조사 수준 설정을 적용하며, 기본값은 \"표시\"입니다."
     },
-    showTimerPanel: "페이지에서 타이머의 표시 여부와 위치를 설정합니다.",
+    timerLocation: "페이지에서 타이머의 위치를 설정합니다.",
     panelsState: "다음 중에서 선택: \"잠김\" - 사용자가 패널을 확장하거나 축소할 수 없습니다. \"모두 축소\" - 모든 패널이 축소된 상태에서 시작됩니다. \"모두 확장\" - 모든 패널이 확장된 상태에서 시작됩니다. \"첫 번째 확장\" - 첫 번째 패널만 처음에 확장됩니다.",
     imageLinkName: "선택 목록에 표시할 이미지 또는 비디오 파일 URL이 포함된 객체 배열 내에 공유 속성 이름을 입력합니다.",
     choices: "왼쪽 값은 조건부 규칙에 사용되는 항목 ID 역할을 하며, 오른쪽 값은 응답자에게 표시됩니다.",
@@ -1506,7 +1521,8 @@ export var koreanStrings = {
     header: {
       inheritWidthFrom: "\"컨테이너와 동일\" 옵션은 설문조사가 배치된 HTML 요소에 맞게 헤더 콘텐츠 영역 너비를 자동으로 조정합니다.",
       textAreaWidth: "설문조사 제목과 설명이 포함된 헤더 영역의 너비로, 픽셀 단위로 측정됩니다.",
-      overlapEnabled: "헤더의 아래쪽을 현장조사의 위쪽과 겹쳐서 만듭니다."
+      overlapEnabled: "활성화하면 설문조사의 상단이 헤더의 하단에 오버레이됩니다.",
+      mobileHeight: "0으로 설정하면 헤더의 내용을 수용하기 위해 높이가 자동으로 계산됩니다."
     },
     panellayoutcolumn: {
       effectiveWidth: "% 값을 허용합니다.",
@@ -1594,6 +1610,7 @@ export var koreanStrings = {
     imageFit: "이미지 핏",
     altText: "대체 텍스트",
     height: "높이",
+    mobileHeight: "스마트폰의 높이",
     penColor: "펜 색상",
     backgroundColor: "배경색",
     templateElements: "템플릿 요소",
@@ -1919,7 +1936,7 @@ editorLocalization.locales["ko"] = koreanStrings;
 // pe.editText: "Edit Answer button text" => "답변 편집 단추 텍스트"
 // image.imageHeight: "Image height (in CSS-accepted values)" => "이미지 높이(CSS에서 허용하는 값)"
 // image.imageWidth: "Image width (in CSS-accepted values)" => "이미지 너비(CSS에서 허용하는 값)"
-// page.maxTimeToFinish: "Time limit to finish the page (in seconds)" => "페이지 완료 시간 제한(초)"
+// page.timeLimit: "Time limit to finish the page (in seconds)" => "페이지 완료 시간 제한(초)"
 // question.page: "Parent page" => "상위 페이지"
 // pe.noEntriesText: "Empty entries text" => "빈 항목 텍스트"
 // pe.html: "HTML markup" => "HTML 마크업"
@@ -2746,9 +2763,9 @@ editorLocalization.locales["ko"] = koreanStrings;
 // pehelp.imageFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "다음 중에서 선택: \"없음\" - 이미지가 원래 크기를 유지합니다. \"Contain\" - 가로 세로 비율을 유지하면서 이미지의 크기가 조정됩니다. \"표지\" - 이미지가 종횡비를 유지하면서 전체 상자를 채웁니다. \"채우기\" - 가로 세로 비율을 유지하지 않고 상자를 채우기 위해 이미지가 늘어납니다."
 // pehelp.autoGrow: "Gradually increases the height of the input field as data is being entered. Overrides the \"Input field height (in lines)\" setting." => "데이터가 입력될 때 입력 필드의 높이를 점진적으로 늘립니다. \"입력 필드 높이(줄 단위)\" 설정을 재정의합니다."
 // pehelp.allowResize: "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field." => "크기 조정 핸들(또는 그립)이 모서리에 나타나며 드래그하여 입력 필드의 크기를 변경할 수 있습니다."
-// pehelp.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "설문조사가 감사 인사 페이지로 자동 전환되기까지의 시간 간격(초)입니다."
-// pehelp.maxTimeToFinishPage: "A time interval in seconds after which the survey auto-advances to the next page." => "설문조사가 다음 페이지로 자동 넘어가는 시간 간격(초)입니다."
-// page.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the next page." => "설문조사가 다음 페이지로 자동 넘어가는 시간 간격(초)입니다."
+// pehelp.timeLimit: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "설문조사가 감사 인사 페이지로 자동 전환되기까지의 시간 간격(초)입니다."
+// pehelp.timeLimitPerPage: "A time interval in seconds after which the survey auto-advances to the next page." => "설문조사가 다음 페이지로 자동 넘어가는 시간 간격(초)입니다."
+// page.timeLimit: "A time interval in seconds after which the survey auto-advances to the next page." => "설문조사가 다음 페이지로 자동 넘어가는 시간 간격(초)입니다."
 // page.visibleIf: "Use the magic wand icon to set a conditional rule that determines page visibility." => "마술 지팡이 아이콘을 사용하여 페이지 표시 여부를 결정하는 조건부 규칙을 설정할 수 있습니다."
 // page.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the page." => "마술 지팡이 아이콘을 사용하여 페이지에 대해 읽기 전용 모드를 비활성화하는 조건부 규칙을 설정합니다."
 // page.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "마술 지팡이 아이콘을 사용하여 하나 이상의 중첩된 질문에 답변이 없는 한 설문조사 제출을 금지하는 조건부 규칙을 설정합니다."
@@ -2756,7 +2773,6 @@ editorLocalization.locales["ko"] = koreanStrings;
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "잘못된 입력이 있는 질문과 관련된 오류 메시지의 위치를 설정합니다. 다음 중 하나를 선택합니다. \"상단\" - 오류 텍스트가 질문 상자 상단에 배치됩니다. \"하단\" - 오류 텍스트가 질문 상자 하단에 배치됩니다. \"상속\" 옵션은 설문조사 수준 설정(기본적으로 \"상단\")을 적용합니다."
 // page.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "질문의 원래 순서를 유지하거나 무작위화합니다. \"상속\" 옵션은 설문조사 수준 설정(기본적으로 \"원본\")을 적용합니다. 이 설정의 효과는 미리보기 탭에서만 볼 수 있습니다."
 // page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "페이지에서 탐색 단추의 표시 여부를 설정합니다. \"상속\" 옵션은 설문조사 수준 설정을 적용하며, 기본값은 \"표시\"입니다."
-// pehelp.showTimerPanel: "Sets the visibility and location of a timer on a page." => "페이지에서 타이머의 표시 여부와 위치를 설정합니다."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "다음 중에서 선택: \"잠김\" - 사용자가 패널을 확장하거나 축소할 수 없습니다. \"모두 축소\" - 모든 패널이 축소된 상태에서 시작됩니다. \"모두 확장\" - 모든 패널이 확장된 상태에서 시작됩니다. \"첫 번째 확장\" - 첫 번째 패널만 처음에 확장됩니다."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "선택 목록에 표시할 이미지 또는 비디오 파일 URL이 포함된 객체 배열 내에 공유 속성 이름을 입력합니다."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "왼쪽 값은 조건부 규칙에 사용되는 항목 ID 역할을 하며, 오른쪽 값은 응답자에게 표시됩니다."
@@ -2953,7 +2969,6 @@ editorLocalization.locales["ko"] = koreanStrings;
 // theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "현장조사의 기본 배경색을 설정합니다."
 // header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "\"컨테이너와 동일\" 옵션은 설문조사가 배치된 HTML 요소에 맞게 헤더 콘텐츠 영역 너비를 자동으로 조정합니다."
 // header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "설문조사 제목과 설명이 포함된 헤더 영역의 너비로, 픽셀 단위로 측정됩니다."
-// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "헤더의 아래쪽을 현장조사의 위쪽과 겹쳐서 만듭니다."
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "% 값을 허용합니다."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "px 값을 허용합니다."
 // p.effectiveColSpan: "Column span" => "열 범위"
@@ -2986,3 +3001,26 @@ editorLocalization.locales["ko"] = koreanStrings;
 // ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "범주 아이콘을 클릭하여 설문조사 설정을 탐색합니다. 디자인 화면에 설문 조사 요소를 추가하면 추가 설정을 사용할 수 있게 됩니다."
 // pe.caseInsensitive: "Case insensitive" => "대소문자 구분 안 함"
 // pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "정규식에서 대문자와 소문자를 동등하게 취급해야 하는 경우 선택합니다."
+
+// ed.surveyPlaceholderTitle: "Your form is empty" => "양식이 비어 있습니다."
+// ed.surveyPlaceholderTitleMobile: "Your form is empty" => "양식이 비어 있습니다."
+// ed.surveyPlaceholderDescription: "Drag an element from the toolbox or click the button below." => "도구 상자에서 요소를 드래그하거나 아래 버튼을 클릭합니다."
+// ed.surveyPlaceholderDescriptionMobile: "Drag an element from the toolbox or click the button below." => "도구 상자에서 요소를 드래그하거나 아래 버튼을 클릭합니다."
+// ed.previewPlaceholderTitle: "No preview" => "미리보기 없음"
+// ed.previewPlaceholderTitleMobile: "No preview" => "미리보기 없음"
+// ed.previewPlaceholderDescription: "The survey doesn't contain any visible elements." => "설문조사에 가시적인 요소가 포함되어 있지 않습니다."
+// ed.previewPlaceholderDescriptionMobile: "The survey doesn't contain any visible elements." => "설문조사에 가시적인 요소가 포함되어 있지 않습니다."
+// ed.translationsPlaceholderTitle: "No strings to translate" => "번역할 문자열이 없습니다."
+// ed.translationsPlaceholderTitleMobile: "No strings to translate" => "번역할 문자열이 없습니다."
+// ed.translationsPlaceholderDescription: "Add elements to your form or change the strings filter in the toolbar." => "양식에 요소를 추가하거나 도구 모음에서 문자열 필터를 변경합니다."
+// ed.translationsPlaceholderDescriptionMobile: "Add elements to your form or change the strings filter in the toolbar." => "양식에 요소를 추가하거나 도구 모음에서 문자열 필터를 변경합니다."
+// lg.logicPlaceholderTitle: "No logical rules" => "논리적 규칙 없음"
+// lg.logicPlaceholderTitleMobile: "No logical rules" => "논리적 규칙 없음"
+// lg.logicPlaceholderDescription: "Create a rule to customize the flow of the survey." => "설문조사의 흐름을 사용자 지정하는 규칙을 만듭니다."
+// lg.logicPlaceholderDescriptionMobile: "Create a rule to customize the flow of the survey." => "설문조사의 흐름을 사용자 지정하는 규칙을 만듭니다."
+// pe.showTimer: "Use a timer" => "타이머 사용"
+// theme.advancedMode: "Advanced mode" => "어드밴스드 모드"
+// pehelp.timerLocation: "Sets the location of a timer on a page." => "페이지에서 타이머의 위치를 설정합니다."
+// header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "0으로 설정하면 헤더의 내용을 수용하기 위해 높이가 자동으로 계산됩니다."
+// p.mobileHeight: "Height on smartphones" => "스마트폰의 높이"
+// header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "활성화하면 설문조사의 상단이 헤더의 하단에 오버레이됩니다."

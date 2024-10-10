@@ -182,6 +182,18 @@ var persianStrings = {
     pagePlaceHolder: "صفحه خالی است. یک عنصر را از جعبه ابزار بکشید یا روی دکمه زیر کلیک کنید.",
     imagePlaceHolder: "یک تصویر را در اینجا بکشید و رها کنید یا روی دکمه زیر کلیک کنید و تصویری را برای اپلود انتخاب کنید",
     surveyPlaceHolderMobile: "روی دکمه \"افزودن سؤال\" در زیر کلیک کنید تا شروع به ایجاد فرم خود کنید.",
+    surveyPlaceholderTitle: "فرم شما خالی است",
+    surveyPlaceholderTitleMobile: "فرم شما خالی است",
+    surveyPlaceholderDescription: "یک عنصر را از جعبه ابزار بکشید یا روی دکمه زیر کلیک کنید.",
+    surveyPlaceholderDescriptionMobile: "یک عنصر را از جعبه ابزار بکشید یا روی دکمه زیر کلیک کنید.",
+    previewPlaceholderTitle: "بدون پیش نمایش",
+    previewPlaceholderTitleMobile: "بدون پیش نمایش",
+    previewPlaceholderDescription: "این نظرسنجی حاوی هیچ عنصر قابل مشاهده ای نیست.",
+    previewPlaceholderDescriptionMobile: "این نظرسنجی حاوی هیچ عنصر قابل مشاهده ای نیست.",
+    translationsPlaceholderTitle: "بدون رشته برای ترجمه",
+    translationsPlaceholderTitleMobile: "بدون رشته برای ترجمه",
+    translationsPlaceholderDescription: "عناصر را به فرم خود اضافه کنید یا فیلتر رشته ها را در نوار ابزار تغییر دهید.",
+    translationsPlaceholderDescriptionMobile: "عناصر را به فرم خود اضافه کنید یا فیلتر رشته ها را در نوار ابزار تغییر دهید.",
     pagePlaceHolderMobile: "روی دکمه \"افزودن سؤال\" در زیر کلیک کنید تا عنصر جدیدی به صفحه اضافه شود.",
     panelPlaceHolderMobile: "روی دکمه \"افزودن سؤال\" در زیر کلیک کنید تا یک عنصر جدید به پانل اضافه شود.",
     imagePlaceHolderMobile: "روی دکمه زیر کلیک کنید و تصویری را برای اپلود انتخاب کنید",
@@ -194,6 +206,10 @@ var persianStrings = {
     lg: {
       addNewItem: "اضافه کردن آیتم جدید",
       empty_tab: "یک آیتم را برای سفارشی کردن جریان نظرسنجی انتخاب کنید",
+      logicPlaceholderTitle: "بدون قوانین منطقی",
+      logicPlaceholderTitleMobile: "بدون قوانین منطقی",
+      logicPlaceholderDescription: "یک قانون برای سفارشی کردن جریان نظرسنجی ایجاد کنید.",
+      logicPlaceholderDescriptionMobile: "یک قانون برای سفارشی کردن جریان نظرسنجی ایجاد کنید.",
       page_visibilityName: "قابلیت رویت صفحه ",
       page_enableName: "فعال/غیرفعال کردن صفحه",
       page_requireName: "ایجاد صفحه مورد نیاز است",
@@ -375,7 +391,7 @@ var persianStrings = {
       description: "توضیحات صفحه",
       visibleIf: "صفحه را مرئی کنید اگر",
       requiredIf: "ایجاد صفحه مورد نیاز اگر",
-      maxTimeToFinish: "محدودیت زمانی برای تمام کردن صفحه (به ثانیه)",
+      timeLimit: "محدودیت زمانی برای تمام کردن صفحه (به ثانیه)",
       questionsOrder: "سفارش سوال در صفحه"
     },
     matrixdropdowncolumn: {
@@ -615,10 +631,11 @@ var persianStrings = {
     questionErrorLocation: "محل خطای سوال",
     focusFirstQuestionAutomatic: "تمرکز بر روی اولین سوال با تغییر صفحه",
     questionsOrder: "ترتیب المان ها در صفحه",
-    maxTimeToFinish: "نهایت زمان برای اتمام نظرسنجی",
-    maxTimeToFinishPage: "نهایت زمان برای اتمام این صفحه نظرسنجی",
-    showTimerPanel: "نمایش پنل زمان سنج",
-    showTimerPanelMode: "نمایش حالت پنل زمان سنج",
+    timeLimit: "نهایت زمان برای اتمام نظرسنجی",
+    timeLimitPerPage: "نهایت زمان برای اتمام این صفحه نظرسنجی",
+    showTimer: "از تایمر استفاده کنید",
+    timerLocation: "نمایش پنل زمان سنج",
+    timerInfoMode: "نمایش حالت پنل زمان سنج",
     renderMode: "حالت رندر",
     allowAddPanel: "اجازه افزودن پنل",
     allowRemovePanel: "اجازه حذف پنل",
@@ -875,6 +892,7 @@ var persianStrings = {
       fontSize: "اندازه قلم",
       scale: "مقیاس",
       cornerRadius: "شعاع گوشه",
+      advancedMode: "حالت پیشرفته",
       pageTitle: "قلم عنوان",
       pageDescription: "قلم توصیف",
       questionTitle: "قلم عنوان",
@@ -1038,11 +1056,8 @@ var persianStrings = {
     showNavigationButtons: {
       none: "پنهان"
     },
-    showTimerPanel: {
-      none: "پنهان"
-    },
-    showTimerPanelMode: {
-      all: "هر دو"
+    timerInfoMode: {
+      combined: "هر دو"
     },
     addRowLocation: {
       default: "بستگی به طرح ماتریس دارد"
@@ -1410,11 +1425,11 @@ var persianStrings = {
     imageFit: "انتخاب از: \"هیچ\" - تصویر اندازه اصلی خود را حفظ می کند؛ \"شامل\" - تصویر تغییر اندازه به جا در حالی که حفظ نسبت ابعاد ان؛ \"Cover\" - تصویر کل جعبه را پر می کند در حالی که نسبت ابعاد ان را حفظ می کند. \"Fill\" - تصویر برای پر کردن جعبه بدون حفظ نسبت ابعاد ان کشیده می شود.",
     autoGrow: "به تدریج ارتفاع میدان ورودی را افزایش می دهد زیرا داده ها وارد می شوند. تنظیم \"ارتفاع میدان ورودی (در خطوط)\" را لغو می کند.",
     allowResize: "دسته تغییر اندازه (یا گرفتن) در گوشه ظاهر می شود و می تواند برای تغییر اندازه میدان ورودی کشیده شود.",
-    maxTimeToFinish: "یک فاصله زمانی در ثانیه که پس از ان نظرسنجی به طور خودکار به صفحه تشکر از شما پیش می رود.",
-    maxTimeToFinishPage: "یک فاصله زمانی در ثانیه که پس از ان نظرسنجی به طور خودکار به صفحه بعدی پیش می رود.",
+    timeLimit: "یک فاصله زمانی در ثانیه که پس از ان نظرسنجی به طور خودکار به صفحه تشکر از شما پیش می رود.",
+    timeLimitPerPage: "یک فاصله زمانی در ثانیه که پس از ان نظرسنجی به طور خودکار به صفحه بعدی پیش می رود.",
     validateVisitedEmptyFields: "این گزینه را فعال کنید تا زمانی که کاربر روی یک فیلد ورودی خالی تمرکز می کند و سپس بدون ایجاد هیچ تغییری آن را ترک می کند، اعتبارسنجی را فعال کنید.",
     page: {
-      maxTimeToFinish: "یک فاصله زمانی در ثانیه که پس از ان نظرسنجی به طور خودکار به صفحه بعدی پیش می رود.",
+      timeLimit: "یک فاصله زمانی در ثانیه که پس از ان نظرسنجی به طور خودکار به صفحه بعدی پیش می رود.",
       visibleIf: "از نماد چوب جادویی برای تنظیم یک قانون شرطی استفاده کنید که دید صفحه را تعیین می کند.",
       enableIf: "از نماد چوب جادویی برای تنظیم یک قانون شرطی استفاده کنید که حالت فقط خواندنی را برای صفحه غیرفعال می کند.",
       requiredIf: "از نماد چوب جادویی برای تنظیم یک قانون شرطی استفاده کنید که مانع از ارسال نظرسنجی می شود مگر اینکه حداقل یک سوال تو در تو پاسخ داشته باشد.",
@@ -1424,7 +1439,7 @@ var persianStrings = {
       questionsOrder: "ترتیب اصلی سوالات را نگه می دارد یا انها را تصادفی می کند. گزینه \"ارث\" تنظیم سطح نظرسنجی (\"اصلی\" به طور پیش فرض) را اعمال می کند. اثر این تنظیم فقط در تب Preview قابل مشاهده است.",
       navigationButtonsVisibility: "قابلیت مشاهده دکمههای پیمایش را روی صفحه تنظیم میکند. گزینه \"به ارث بردن\" تنظیم سطح نظرسنجی را اعمال می کند که به طور پیش فرض به \"قابل مشاهده\" است."
     },
-    showTimerPanel: "قابلیت مشاهده و مکان یک تایمر را در یک صفحه تنظیم می کند.",
+    timerLocation: "مکان یک تایمر را در یک صفحه تنظیم می کند.",
     panelsState: "انتخاب از: \"قفل شده\" - کاربران نمی توانند پانل ها را گسترش یا سقوط دهند؛ \"سقوط همه\" - تمام پانل ها در یک حالت فروپاشی شروع می شوند؛ \"گسترش همه\" - تمام پانل ها در یک حالت گسترش یافته شروع می شوند؛ \"اولین گسترش\" - تنها پانل اول در ابتدا گسترش یافته است.",
     imageLinkName: "یک نام خصوصیت مشترک را درون ارایۀ اشیایی که حاوی نشانیهای اینترنتی پرونده تصویر یا ویدئویی است که میخواهید در فهرست انتخاب نمایش داده شود، وارد کنید.",
     choices: "مقدار سمت چپ به عنوان یک شناسه مورد استفاده در قوانین شرطی عمل می کند، مقدار مناسب برای پاسخ دهندگان نمایش داده می شود.",
@@ -1506,7 +1521,8 @@ var persianStrings = {
     header: {
       inheritWidthFrom: "گزینه \"همان کانتینر\" به طور خودکار عرض ناحیه محتوای هدر را تنظیم می کند تا در عنصر HTML که نظرسنجی در آن قرار می گیرد قرار گیرد.",
       textAreaWidth: "عرض ناحیه سرصفحه که حاوی عنوان و توضیحات نظرسنجی است که بر حسب پیکسل اندازه گیری می شود.",
-      overlapEnabled: "پایین سربرگ را با بالای نظرسنجی پوشانده می کند."
+      overlapEnabled: "هنگامی که فعال باشد، بالای نظرسنجی پایین هدر را همپوشانی می کند.",
+      mobileHeight: "هنگامی که روی 0 تنظیم می شود، ارتفاع به طور خودکار محاسبه می شود تا محتوای هدر را در خود جای دهد."
     },
     panellayoutcolumn: {
       effectiveWidth: "مقادیر را می پذیرد.",
@@ -1594,6 +1610,7 @@ var persianStrings = {
     imageFit: "متناسب با تصویر",
     altText: "متن دگرساز",
     height: "ارتفاع",
+    mobileHeight: "ارتفاع در گوشی های هوشمند",
     penColor: "رنگ قلم",
     backgroundColor: "رنگ پسزمینه",
     templateElements: "عناصر قالب",
@@ -1737,7 +1754,7 @@ editorLocalization.locales["fa"] = persianStrings;
 // pe.portraitOrientation: "Switch to portrait orientation" => "تغییر جهت به جهت تصویر"
 // image.imageHeight: "Image height (in CSS-accepted values)" => "ارتفاع تصویر (در مقادیر پذیرفته شده توسط CSS)"
 // image.imageWidth: "Image width (in CSS-accepted values)" => "عرض تصویر) در مقادیر پذیرفته شده CSS ("
-// page.maxTimeToFinish: "Time limit to finish the page (in seconds)" => "محدودیت زمانی برای تمام کردن صفحه (به ثانیه)"
+// page.timeLimit: "Time limit to finish the page (in seconds)" => "محدودیت زمانی برای تمام کردن صفحه (به ثانیه)"
 // question.page: "Parent page" => "صفحه اصلی"
 // pe.noEntriesText: "Empty entries text" => "متن مدخلهای خالی"
 // pe.setValue: "Answer" => "پاسخ"
@@ -2497,9 +2514,9 @@ editorLocalization.locales["fa"] = persianStrings;
 // pehelp.imageFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "انتخاب از: \"هیچ\" - تصویر اندازه اصلی خود را حفظ می کند؛ \"شامل\" - تصویر تغییر اندازه به جا در حالی که حفظ نسبت ابعاد ان؛ \"Cover\" - تصویر کل جعبه را پر می کند در حالی که نسبت ابعاد ان را حفظ می کند. \"Fill\" - تصویر برای پر کردن جعبه بدون حفظ نسبت ابعاد ان کشیده می شود."
 // pehelp.autoGrow: "Gradually increases the height of the input field as data is being entered. Overrides the \"Input field height (in lines)\" setting." => "به تدریج ارتفاع میدان ورودی را افزایش می دهد زیرا داده ها وارد می شوند. تنظیم \"ارتفاع میدان ورودی (در خطوط)\" را لغو می کند."
 // pehelp.allowResize: "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field." => "دسته تغییر اندازه (یا گرفتن) در گوشه ظاهر می شود و می تواند برای تغییر اندازه میدان ورودی کشیده شود."
-// pehelp.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "یک فاصله زمانی در ثانیه که پس از ان نظرسنجی به طور خودکار به صفحه تشکر از شما پیش می رود."
-// pehelp.maxTimeToFinishPage: "A time interval in seconds after which the survey auto-advances to the next page." => "یک فاصله زمانی در ثانیه که پس از ان نظرسنجی به طور خودکار به صفحه بعدی پیش می رود."
-// page.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the next page." => "یک فاصله زمانی در ثانیه که پس از ان نظرسنجی به طور خودکار به صفحه بعدی پیش می رود."
+// pehelp.timeLimit: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "یک فاصله زمانی در ثانیه که پس از ان نظرسنجی به طور خودکار به صفحه تشکر از شما پیش می رود."
+// pehelp.timeLimitPerPage: "A time interval in seconds after which the survey auto-advances to the next page." => "یک فاصله زمانی در ثانیه که پس از ان نظرسنجی به طور خودکار به صفحه بعدی پیش می رود."
+// page.timeLimit: "A time interval in seconds after which the survey auto-advances to the next page." => "یک فاصله زمانی در ثانیه که پس از ان نظرسنجی به طور خودکار به صفحه بعدی پیش می رود."
 // page.visibleIf: "Use the magic wand icon to set a conditional rule that determines page visibility." => "از نماد چوب جادویی برای تنظیم یک قانون شرطی استفاده کنید که دید صفحه را تعیین می کند."
 // page.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the page." => "از نماد چوب جادویی برای تنظیم یک قانون شرطی استفاده کنید که حالت فقط خواندنی را برای صفحه غیرفعال می کند."
 // page.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "از نماد چوب جادویی برای تنظیم یک قانون شرطی استفاده کنید که مانع از ارسال نظرسنجی می شود مگر اینکه حداقل یک سوال تو در تو پاسخ داشته باشد."
@@ -2507,7 +2524,6 @@ editorLocalization.locales["fa"] = persianStrings;
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "مکان یک پیام خطا را در رابطه با سؤال با ورودی نامعتبر تنظیم می کند. انتخاب بین: \"بالا\" - یک متن خطا در بالای جعبه سوال قرار می گیرد؛ \"پایین\" - یک متن خطا در پایین جعبه سوال قرار می گیرد. گزینه \"ارث\" تنظیم سطح نظرسنجی (\"بالا\" به طور پیش فرض) را اعمال می کند."
 // page.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "ترتیب اصلی سوالات را نگه می دارد یا انها را تصادفی می کند. گزینه \"ارث\" تنظیم سطح نظرسنجی (\"اصلی\" به طور پیش فرض) را اعمال می کند. اثر این تنظیم فقط در تب Preview قابل مشاهده است."
 // page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "قابلیت مشاهده دکمههای پیمایش را روی صفحه تنظیم میکند. گزینه \"به ارث بردن\" تنظیم سطح نظرسنجی را اعمال می کند که به طور پیش فرض به \"قابل مشاهده\" است."
-// pehelp.showTimerPanel: "Sets the visibility and location of a timer on a page." => "قابلیت مشاهده و مکان یک تایمر را در یک صفحه تنظیم می کند."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "انتخاب از: \"قفل شده\" - کاربران نمی توانند پانل ها را گسترش یا سقوط دهند؛ \"سقوط همه\" - تمام پانل ها در یک حالت فروپاشی شروع می شوند؛ \"گسترش همه\" - تمام پانل ها در یک حالت گسترش یافته شروع می شوند؛ \"اولین گسترش\" - تنها پانل اول در ابتدا گسترش یافته است."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "یک نام خصوصیت مشترک را درون ارایۀ اشیایی که حاوی نشانیهای اینترنتی پرونده تصویر یا ویدئویی است که میخواهید در فهرست انتخاب نمایش داده شود، وارد کنید."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "مقدار سمت چپ به عنوان یک شناسه مورد استفاده در قوانین شرطی عمل می کند، مقدار مناسب برای پاسخ دهندگان نمایش داده می شود."
@@ -2704,7 +2720,6 @@ editorLocalization.locales["fa"] = persianStrings;
 // theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "رنگ پس زمینه اصلی نظرسنجی را تنظیم می کند."
 // header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "گزینه \"همان کانتینر\" به طور خودکار عرض ناحیه محتوای هدر را تنظیم می کند تا در عنصر HTML که نظرسنجی در آن قرار می گیرد قرار گیرد."
 // header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "عرض ناحیه سرصفحه که حاوی عنوان و توضیحات نظرسنجی است که بر حسب پیکسل اندازه گیری می شود."
-// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "پایین سربرگ را با بالای نظرسنجی پوشانده می کند."
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "مقادیر را می پذیرد."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "مقادیر px را می پذیرد."
 // p.effectiveColSpan: "Column span" => "دهانه ستون"
@@ -2737,3 +2752,26 @@ editorLocalization.locales["fa"] = persianStrings;
 // ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "برای کاوش در تنظیمات نظرسنجی، روی هر نماد دسته کلیک کنید. پس از افزودن یک عنصر نظرسنجی به سطح طراحی، تنظیمات اضافی در دسترس خواهند بود."
 // pe.caseInsensitive: "Case insensitive" => "غیر حساس به حروف بزرگ"
 // pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "انتخاب کنید که آیا حروف بزرگ و کوچک در عبارت منظم باید معادل در نظر گرفته شوند."
+
+// ed.surveyPlaceholderTitle: "Your form is empty" => "فرم شما خالی است"
+// ed.surveyPlaceholderTitleMobile: "Your form is empty" => "فرم شما خالی است"
+// ed.surveyPlaceholderDescription: "Drag an element from the toolbox or click the button below." => "یک عنصر را از جعبه ابزار بکشید یا روی دکمه زیر کلیک کنید."
+// ed.surveyPlaceholderDescriptionMobile: "Drag an element from the toolbox or click the button below." => "یک عنصر را از جعبه ابزار بکشید یا روی دکمه زیر کلیک کنید."
+// ed.previewPlaceholderTitle: "No preview" => "بدون پیش نمایش"
+// ed.previewPlaceholderTitleMobile: "No preview" => "بدون پیش نمایش"
+// ed.previewPlaceholderDescription: "The survey doesn't contain any visible elements." => "این نظرسنجی حاوی هیچ عنصر قابل مشاهده ای نیست."
+// ed.previewPlaceholderDescriptionMobile: "The survey doesn't contain any visible elements." => "این نظرسنجی حاوی هیچ عنصر قابل مشاهده ای نیست."
+// ed.translationsPlaceholderTitle: "No strings to translate" => "بدون رشته برای ترجمه"
+// ed.translationsPlaceholderTitleMobile: "No strings to translate" => "بدون رشته برای ترجمه"
+// ed.translationsPlaceholderDescription: "Add elements to your form or change the strings filter in the toolbar." => "عناصر را به فرم خود اضافه کنید یا فیلتر رشته ها را در نوار ابزار تغییر دهید."
+// ed.translationsPlaceholderDescriptionMobile: "Add elements to your form or change the strings filter in the toolbar." => "عناصر را به فرم خود اضافه کنید یا فیلتر رشته ها را در نوار ابزار تغییر دهید."
+// lg.logicPlaceholderTitle: "No logical rules" => "بدون قوانین منطقی"
+// lg.logicPlaceholderTitleMobile: "No logical rules" => "بدون قوانین منطقی"
+// lg.logicPlaceholderDescription: "Create a rule to customize the flow of the survey." => "یک قانون برای سفارشی کردن جریان نظرسنجی ایجاد کنید."
+// lg.logicPlaceholderDescriptionMobile: "Create a rule to customize the flow of the survey." => "یک قانون برای سفارشی کردن جریان نظرسنجی ایجاد کنید."
+// pe.showTimer: "Use a timer" => "از تایمر استفاده کنید"
+// theme.advancedMode: "Advanced mode" => "حالت پیشرفته"
+// pehelp.timerLocation: "Sets the location of a timer on a page." => "مکان یک تایمر را در یک صفحه تنظیم می کند."
+// header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "هنگامی که روی 0 تنظیم می شود، ارتفاع به طور خودکار محاسبه می شود تا محتوای هدر را در خود جای دهد."
+// p.mobileHeight: "Height on smartphones" => "ارتفاع در گوشی های هوشمند"
+// header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "هنگامی که فعال باشد، بالای نظرسنجی پایین هدر را همپوشانی می کند."

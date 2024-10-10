@@ -182,6 +182,18 @@ export var msStrings = {
     pagePlaceHolder: "Halaman kosong. Seret elemen dari kotak alat atau klik butang di bawah.",
     imagePlaceHolder: "Seret dan lepaskan imej di sini atau klik butang di bawah dan pilih imej untuk dimuat naik",
     surveyPlaceHolderMobile: "Klik butang \"Tambah Soalan\" di bawah untuk mula membuat borang anda.",
+    surveyPlaceholderTitle: "Borang anda kosong",
+    surveyPlaceholderTitleMobile: "Borang anda kosong",
+    surveyPlaceholderDescription: "Seret elemen daripada kotak alat atau klik butang di bawah.",
+    surveyPlaceholderDescriptionMobile: "Seret elemen daripada kotak alat atau klik butang di bawah.",
+    previewPlaceholderTitle: "Tiada pratonton",
+    previewPlaceholderTitleMobile: "Tiada pratonton",
+    previewPlaceholderDescription: "Tinjauan tidak mengandungi sebarang elemen yang boleh dilihat.",
+    previewPlaceholderDescriptionMobile: "Tinjauan tidak mengandungi sebarang elemen yang boleh dilihat.",
+    translationsPlaceholderTitle: "Tiada tali untuk diterjemahkan",
+    translationsPlaceholderTitleMobile: "Tiada tali untuk diterjemahkan",
+    translationsPlaceholderDescription: "Tambah elemen pada borang anda atau tukar penapis rentetan dalam bar alat.",
+    translationsPlaceholderDescriptionMobile: "Tambah elemen pada borang anda atau tukar penapis rentetan dalam bar alat.",
     pagePlaceHolderMobile: "Klik butang \"Tambah Soalan\" di bawah untuk menambah elemen baru ke halaman.",
     panelPlaceHolderMobile: "Klik butang \"Tambah Soalan\" di bawah untuk menambah elemen baru ke panel.",
     imagePlaceHolderMobile: "Klik butang di bawah dan pilih imej untuk dimuat naik",
@@ -194,6 +206,10 @@ export var msStrings = {
     lg: {
       addNewItem: "Tambah peraturan baru",
       empty_tab: "Cipta peraturan untuk menyesuaikan aliran tinjauan.",
+      logicPlaceholderTitle: "Tiada peraturan logik",
+      logicPlaceholderTitleMobile: "Tiada peraturan logik",
+      logicPlaceholderDescription: "Buat peraturan untuk menyesuaikan aliran tinjauan.",
+      logicPlaceholderDescriptionMobile: "Buat peraturan untuk menyesuaikan aliran tinjauan.",
       page_visibilityName: "Kebolehlihatan halaman",
       page_enableName: "Halaman Dayakan (nyahdayakan)",
       page_requireName: "Buat halaman diperlukan",
@@ -375,7 +391,7 @@ export var msStrings = {
       description: "Perihalan halaman",
       visibleIf: "Jadikan halaman kelihatan jika",
       requiredIf: "Jadikan halaman diperlukan jika",
-      maxTimeToFinish: "Had masa untuk menyelesaikan halaman (dalam beberapa saat)",
+      timeLimit: "Had masa untuk menyelesaikan halaman (dalam beberapa saat)",
       questionsOrder: "Tertib soalan pada halaman"
     },
     matrixdropdowncolumn: {
@@ -615,10 +631,11 @@ export var msStrings = {
     questionErrorLocation: "Lokasi ralat soalan",
     focusFirstQuestionAutomatic: "Fokus soalan pertama pada perubahan halaman",
     questionsOrder: "Susunan elemen pada halaman",
-    maxTimeToFinish: "Masa maksimum untuk menyelesaikan tinjauan",
-    maxTimeToFinishPage: "Masa maksimum untuk menyelesaikan halaman dalam tinjauan",
-    showTimerPanel: "Tunjukkan panel pemasa",
-    showTimerPanelMode: "Tunjukkan mod panel pemasa",
+    timeLimit: "Masa maksimum untuk menyelesaikan tinjauan",
+    timeLimitPerPage: "Masa maksimum untuk menyelesaikan halaman dalam tinjauan",
+    showTimer: "Gunakan pemasa",
+    timerLocation: "Tunjukkan panel pemasa",
+    timerInfoMode: "Tunjukkan mod panel pemasa",
     renderMode: "Mod penyampaian",
     allowAddPanel: "Benarkan menambahkan panel",
     allowRemovePanel: "Benarkan alih keluar panel",
@@ -875,6 +892,7 @@ export var msStrings = {
       fontSize: "Saiz fon",
       scale: "Skala",
       cornerRadius: "Jejari penjuru",
+      advancedMode: "Mod lanjutan",
       pageTitle: "Fon tajuk",
       pageDescription: "Fon perihalan",
       questionTitle: "Fon tajuk",
@@ -1038,11 +1056,8 @@ export var msStrings = {
     showNavigationButtons: {
       none: "Tersembunyi"
     },
-    showTimerPanel: {
-      none: "Tersembunyi"
-    },
-    showTimerPanelMode: {
-      all: "Kedua-duanya"
+    timerInfoMode: {
+      combined: "Kedua-duanya"
     },
     addRowLocation: {
       default: "Bergantung pada tataletak matriks"
@@ -1410,11 +1425,11 @@ export var msStrings = {
     imageFit: "Pilih daripada: \"Tiada\" - imej mengekalkan saiz asalnya; \"Mengandungi\" - imej diubah saiznya agar sesuai sambil mengekalkan nisbah aspeknya; \"Cover\" - imej mengisi keseluruhan kotak sambil mengekalkan nisbah aspeknya; \"Isian\" - imej diregangkan untuk mengisi kotak tanpa mengekalkan nisbah aspeknya.",
     autoGrow: "Secara beransur-ansur meningkatkan ketinggian medan input apabila data dimasukkan. Membatalkan seting \"Ketinggian medan input (dalam garisan)\".",
     allowResize: "Pemegang saiz semula (atau cengkaman) muncul di sudut dan boleh diseret untuk mengubah saiz medan input.",
-    maxTimeToFinish: "Selang masa dalam beberapa saat selepas itu tinjauan secara automatik maju ke halaman Terima Kasih.",
-    maxTimeToFinishPage: "Selang masa dalam beberapa saat selepas itu tinjauan secara automatik maju ke halaman seterusnya.",
+    timeLimit: "Selang masa dalam beberapa saat selepas itu tinjauan secara automatik maju ke halaman Terima Kasih.",
+    timeLimitPerPage: "Selang masa dalam beberapa saat selepas itu tinjauan secara automatik maju ke halaman seterusnya.",
     validateVisitedEmptyFields: "Dayakan pilihan ini untuk mencetuskan pengesahan apabila pengguna memfokuskan pada medan input kosong dan kemudian meninggalkannya tanpa membuat sebarang perubahan.",
     page: {
-      maxTimeToFinish: "Selang masa dalam beberapa saat selepas itu tinjauan secara automatik maju ke halaman seterusnya.",
+      timeLimit: "Selang masa dalam beberapa saat selepas itu tinjauan secara automatik maju ke halaman seterusnya.",
       visibleIf: "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang menentukan keterlihatan halaman.",
       enableIf: "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang menyahdayakan mod baca sahaja untuk halaman.",
       requiredIf: "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang menghalang penyerahan tinjauan melainkan sekurang-kurangnya satu soalan tersarang mempunyai jawapan.",
@@ -1424,7 +1439,7 @@ export var msStrings = {
       questionsOrder: "Mengekalkan susunan soalan asal atau rawak mereka. Pilihan \"Warisan\" menggunakan seting peringkat tinjauan (\"Asal\" secara lalai). Kesan seting ini hanya kelihatan dalam tab Pratonton.",
       navigationButtonsVisibility: "Mengesetkan keterlihatan butang navigasi pada halaman. Opsyen \"Warisan\" menggunakan seting aras tinjauan, yang lalai kepada \"Boleh Dilihat\"."
     },
-    showTimerPanel: "Mengesetkan kebolehlihatan dan lokasi pemasa pada halaman.",
+    timerLocation: "Menetapkan lokasi pemasa pada halaman.",
     panelsState: "Pilih daripada: \"Dikunci\" - pengguna tidak boleh mengembangkan atau meruntuhkan panel; \"Runtuhkan semua\" - semua panel bermula dalam keadaan runtuh; \"Kembangkan semua\" - semua panel bermula dalam keadaan yang diperluaskan; \"Pertama diperluaskan\" - hanya panel pertama yang pada mulanya diperluaskan.",
     imageLinkName: "Masukkan nama sifat dikongsi dalam tatasusunan objek yang mengandungi URL fail imej atau video yang anda ingin paparkan dalam senarai pilihan.",
     choices: "Nilai kiri berfungsi sebagai ID item yang digunakan dalam peraturan bersyarat, nilai yang betul dipaparkan kepada responden.",
@@ -1506,7 +1521,8 @@ export var msStrings = {
     header: {
       inheritWidthFrom: "Pilihan \"Sama seperti bekas\" melaraskan secara automatik lebar kawasan kandungan pengepala agar sesuai dengan elemen HTML tempat tinjauan diletakkan.",
       textAreaWidth: "Lebar kawasan pengepala yang mengandungi tajuk dan perihalan tinjauan, diukur dalam piksel.",
-      overlapEnabled: "Menjadikan bahagian bawah pengepala bertindih dengan bahagian atas tinjauan."
+      overlapEnabled: "Apabila didayakan, bahagian atas tinjauan menindih bahagian bawah pengepala.",
+      mobileHeight: "Apabila ditetapkan kepada 0, ketinggian dikira secara automatik untuk menampung kandungan pengepala."
     },
     panellayoutcolumn: {
       effectiveWidth: "Menerima nilai %.",
@@ -1594,6 +1610,7 @@ export var msStrings = {
     imageFit: "Muat imej",
     altText: "Teks alt",
     height: "tinggi",
+    mobileHeight: "Ketinggian pada telefon pintar",
     penColor: "Warna pen",
     backgroundColor: "Warna latar belakang",
     templateElements: "Unsur templat",
@@ -1775,7 +1792,7 @@ editorLocalization.locales["ms"] = msStrings;
 // pe.portraitOrientation: "Switch to portrait orientation" => "Bertukar kepada orientasi potret"
 // image.imageHeight: "Image height (in CSS-accepted values)" => "Ketinggian imej (dalam nilai diterima CSS)"
 // image.imageWidth: "Image width (in CSS-accepted values)" => "Lebar imej (dalam nilai diterima CSS)"
-// page.maxTimeToFinish: "Time limit to finish the page (in seconds)" => "Had masa untuk menyelesaikan halaman (dalam beberapa saat)"
+// page.timeLimit: "Time limit to finish the page (in seconds)" => "Had masa untuk menyelesaikan halaman (dalam beberapa saat)"
 // question.page: "Parent page" => "Halaman induk"
 // pe.noEntriesText: "Empty entries text" => "Kosongkan teks entri"
 // pe.setValue: "Answer" => "Jawapan"
@@ -2495,9 +2512,9 @@ editorLocalization.locales["ms"] = msStrings;
 // pehelp.imageFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Pilih daripada: \"Tiada\" - imej mengekalkan saiz asalnya; \"Mengandungi\" - imej diubah saiznya agar sesuai sambil mengekalkan nisbah aspeknya; \"Cover\" - imej mengisi keseluruhan kotak sambil mengekalkan nisbah aspeknya; \"Isian\" - imej diregangkan untuk mengisi kotak tanpa mengekalkan nisbah aspeknya."
 // pehelp.autoGrow: "Gradually increases the height of the input field as data is being entered. Overrides the \"Input field height (in lines)\" setting." => "Secara beransur-ansur meningkatkan ketinggian medan input apabila data dimasukkan. Membatalkan seting \"Ketinggian medan input (dalam garisan)\"."
 // pehelp.allowResize: "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field." => "Pemegang saiz semula (atau cengkaman) muncul di sudut dan boleh diseret untuk mengubah saiz medan input."
-// pehelp.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "Selang masa dalam beberapa saat selepas itu tinjauan secara automatik maju ke halaman Terima Kasih."
-// pehelp.maxTimeToFinishPage: "A time interval in seconds after which the survey auto-advances to the next page." => "Selang masa dalam beberapa saat selepas itu tinjauan secara automatik maju ke halaman seterusnya."
-// page.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the next page." => "Selang masa dalam beberapa saat selepas itu tinjauan secara automatik maju ke halaman seterusnya."
+// pehelp.timeLimit: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "Selang masa dalam beberapa saat selepas itu tinjauan secara automatik maju ke halaman Terima Kasih."
+// pehelp.timeLimitPerPage: "A time interval in seconds after which the survey auto-advances to the next page." => "Selang masa dalam beberapa saat selepas itu tinjauan secara automatik maju ke halaman seterusnya."
+// page.timeLimit: "A time interval in seconds after which the survey auto-advances to the next page." => "Selang masa dalam beberapa saat selepas itu tinjauan secara automatik maju ke halaman seterusnya."
 // page.visibleIf: "Use the magic wand icon to set a conditional rule that determines page visibility." => "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang menentukan keterlihatan halaman."
 // page.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the page." => "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang menyahdayakan mod baca sahaja untuk halaman."
 // page.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang menghalang penyerahan tinjauan melainkan sekurang-kurangnya satu soalan tersarang mempunyai jawapan."
@@ -2505,7 +2522,6 @@ editorLocalization.locales["ms"] = msStrings;
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Mengesetkan lokasi mesej ralat berhubung dengan soalan dengan input tidak sah. Pilih antara: \"Atas\" - teks ralat diletakkan di bahagian atas kotak soalan; \"Bawah\" - teks ralat diletakkan di bahagian bawah kotak soalan. Pilihan \"Warisan\" menggunakan tetapan peringkat tinjauan (\"Atas\" secara lalai)."
 // page.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Mengekalkan susunan soalan asal atau rawak mereka. Pilihan \"Warisan\" menggunakan seting peringkat tinjauan (\"Asal\" secara lalai). Kesan seting ini hanya kelihatan dalam tab Pratonton."
 // page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Mengesetkan keterlihatan butang navigasi pada halaman. Opsyen \"Warisan\" menggunakan seting aras tinjauan, yang lalai kepada \"Boleh Dilihat\"."
-// pehelp.showTimerPanel: "Sets the visibility and location of a timer on a page." => "Mengesetkan kebolehlihatan dan lokasi pemasa pada halaman."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "Pilih daripada: \"Dikunci\" - pengguna tidak boleh mengembangkan atau meruntuhkan panel; \"Runtuhkan semua\" - semua panel bermula dalam keadaan runtuh; \"Kembangkan semua\" - semua panel bermula dalam keadaan yang diperluaskan; \"Pertama diperluaskan\" - hanya panel pertama yang pada mulanya diperluaskan."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "Masukkan nama sifat dikongsi dalam tatasusunan objek yang mengandungi URL fail imej atau video yang anda ingin paparkan dalam senarai pilihan."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "Nilai kiri berfungsi sebagai ID item yang digunakan dalam peraturan bersyarat, nilai yang betul dipaparkan kepada responden."
@@ -2702,7 +2718,6 @@ editorLocalization.locales["ms"] = msStrings;
 // theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "Menetapkan warna latar belakang utama tinjauan."
 // header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "Pilihan \"Sama seperti bekas\" melaraskan secara automatik lebar kawasan kandungan pengepala agar sesuai dengan elemen HTML tempat tinjauan diletakkan."
 // header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "Lebar kawasan pengepala yang mengandungi tajuk dan perihalan tinjauan, diukur dalam piksel."
-// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "Menjadikan bahagian bawah pengepala bertindih dengan bahagian atas tinjauan."
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Menerima nilai %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Menerima nilai px."
 // p.effectiveColSpan: "Column span" => "Rentang lajur"
@@ -2735,3 +2750,26 @@ editorLocalization.locales["ms"] = msStrings;
 // ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Klik mana-mana ikon kategori untuk meneroka tetapan tinjauan. Seting tambahan akan tersedia sebaik sahaja anda menambah elemen tinjauan pada permukaan reka bentuk."
 // pe.caseInsensitive: "Case insensitive" => "Tidak sensitif huruf besar"
 // pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Pilih jika huruf besar dan huruf kecil dalam ungkapan biasa mesti dianggap sebagai setara."
+
+// ed.surveyPlaceholderTitle: "Your form is empty" => "Borang anda kosong"
+// ed.surveyPlaceholderTitleMobile: "Your form is empty" => "Borang anda kosong"
+// ed.surveyPlaceholderDescription: "Drag an element from the toolbox or click the button below." => "Seret elemen daripada kotak alat atau klik butang di bawah."
+// ed.surveyPlaceholderDescriptionMobile: "Drag an element from the toolbox or click the button below." => "Seret elemen daripada kotak alat atau klik butang di bawah."
+// ed.previewPlaceholderTitle: "No preview" => "Tiada pratonton"
+// ed.previewPlaceholderTitleMobile: "No preview" => "Tiada pratonton"
+// ed.previewPlaceholderDescription: "The survey doesn't contain any visible elements." => "Tinjauan tidak mengandungi sebarang elemen yang boleh dilihat."
+// ed.previewPlaceholderDescriptionMobile: "The survey doesn't contain any visible elements." => "Tinjauan tidak mengandungi sebarang elemen yang boleh dilihat."
+// ed.translationsPlaceholderTitle: "No strings to translate" => "Tiada tali untuk diterjemahkan"
+// ed.translationsPlaceholderTitleMobile: "No strings to translate" => "Tiada tali untuk diterjemahkan"
+// ed.translationsPlaceholderDescription: "Add elements to your form or change the strings filter in the toolbar." => "Tambah elemen pada borang anda atau tukar penapis rentetan dalam bar alat."
+// ed.translationsPlaceholderDescriptionMobile: "Add elements to your form or change the strings filter in the toolbar." => "Tambah elemen pada borang anda atau tukar penapis rentetan dalam bar alat."
+// lg.logicPlaceholderTitle: "No logical rules" => "Tiada peraturan logik"
+// lg.logicPlaceholderTitleMobile: "No logical rules" => "Tiada peraturan logik"
+// lg.logicPlaceholderDescription: "Create a rule to customize the flow of the survey." => "Buat peraturan untuk menyesuaikan aliran tinjauan."
+// lg.logicPlaceholderDescriptionMobile: "Create a rule to customize the flow of the survey." => "Buat peraturan untuk menyesuaikan aliran tinjauan."
+// pe.showTimer: "Use a timer" => "Gunakan pemasa"
+// theme.advancedMode: "Advanced mode" => "Mod lanjutan"
+// pehelp.timerLocation: "Sets the location of a timer on a page." => "Menetapkan lokasi pemasa pada halaman."
+// header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Apabila ditetapkan kepada 0, ketinggian dikira secara automatik untuk menampung kandungan pengepala."
+// p.mobileHeight: "Height on smartphones" => "Ketinggian pada telefon pintar"
+// header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Apabila didayakan, bahagian atas tinjauan menindih bahagian bawah pengepala."

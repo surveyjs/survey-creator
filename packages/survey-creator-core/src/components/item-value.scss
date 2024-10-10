@@ -206,6 +206,8 @@
 }
 
 .svc-item-value--ghost {
+  height: calcSize(6);
+
   .svc-item-value__ghost {
     display: block;
   }
@@ -217,8 +219,6 @@
   .svc-item-value__item {
     display: none;
   }
-
-  height: calcSize(6);
 
   .sv-string-viewer,
   .sv-string-editor {

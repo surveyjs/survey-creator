@@ -9,7 +9,7 @@
       @pointerdown="model?.onPointerDown"
       @mousemove="
         (e) => {
-          model?.onMouseOver(item, e);
+          model?.onMouseOverTool(item, e);
         }
       "
       @mouseleave="

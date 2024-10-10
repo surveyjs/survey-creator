@@ -182,6 +182,18 @@ var simplifiedChineseTranslation = {
     pagePlaceHolder: "页面为空。从工具箱中拖动元素或单击下面的按钮。",
     imagePlaceHolder: "将图像拖放到此处或单击下面的按钮并选择要上传的图像",
     surveyPlaceHolderMobile: "单击下面的“添加问题”按钮开始创建表单。",
+    surveyPlaceholderTitle: "您的表单为空",
+    surveyPlaceholderTitleMobile: "您的表单为空",
+    surveyPlaceholderDescription: "从工具箱中拖动元素或单击下面的按钮。",
+    surveyPlaceholderDescriptionMobile: "从工具箱中拖动元素或单击下面的按钮。",
+    previewPlaceholderTitle: "无预览",
+    previewPlaceholderTitleMobile: "无预览",
+    previewPlaceholderDescription: "调查不包含任何可见元素。",
+    previewPlaceholderDescriptionMobile: "调查不包含任何可见元素。",
+    translationsPlaceholderTitle: "无需翻译字符串",
+    translationsPlaceholderTitleMobile: "无需翻译字符串",
+    translationsPlaceholderDescription: "将元素添加到表单或更改工具栏中的字符串筛选器。",
+    translationsPlaceholderDescriptionMobile: "将元素添加到表单或更改工具栏中的字符串筛选器。",
     pagePlaceHolderMobile: "单击下面的“添加问题”按钮，向页面添加新元素。",
     panelPlaceHolderMobile: "单击下面的“添加问题”按钮，将新元素添加到面板中。",
     imagePlaceHolderMobile: "点击下面的按钮，选择要上传的图片",
@@ -194,6 +206,10 @@ var simplifiedChineseTranslation = {
     lg: {
       addNewItem: "添加新规则",
       empty_tab: "创建规则以自定义调查流。",
+      logicPlaceholderTitle: "无逻辑规则",
+      logicPlaceholderTitleMobile: "无逻辑规则",
+      logicPlaceholderDescription: "创建规则以自定义调查流程。",
+      logicPlaceholderDescriptionMobile: "创建规则以自定义调查流程。",
       page_visibilityName: "显示（隐藏）页面",
       page_enableName: "启用（禁用）页面",
       page_requireName: "将页面设为必填项",
@@ -375,7 +391,7 @@ var simplifiedChineseTranslation = {
       description: "页面描述",
       visibleIf: "如果出现以下情况，则使页面可见",
       requiredIf: "如果出现以下情况，则使页面为必填项",
-      maxTimeToFinish: "完成页面的时间限制（以秒为单位）",
+      timeLimit: "完成页面的时间限制（以秒为单位）",
       questionsOrder: "页面上的问题顺序"
     },
     matrixdropdowncolumn: {
@@ -615,10 +631,11 @@ var simplifiedChineseTranslation = {
     questionErrorLocation: "问题错误定位",
     focusFirstQuestionAutomatic: "改变页面时聚焦在第一个问题",
     questionsOrder: "页内问题顺序",
-    maxTimeToFinish: "完成调查的最长时间",
-    maxTimeToFinishPage: "完成调查中页面的最长时间",
-    showTimerPanel: "显示计时器面板",
-    showTimerPanelMode: "显示计时器面板模式",
+    timeLimit: "完成调查的最长时间",
+    timeLimitPerPage: "完成调查中页面的最长时间",
+    showTimer: "使用计时器",
+    timerLocation: "显示计时器面板",
+    timerInfoMode: "显示计时器面板模式",
     renderMode: "渲染模式",
     allowAddPanel: "允许添加面板",
     allowRemovePanel: "允许删除面板",
@@ -875,6 +892,7 @@ var simplifiedChineseTranslation = {
       fontSize: "字体大小",
       scale: "规模",
       cornerRadius: "拐角半径",
+      advancedMode: "高级模式",
       pageTitle: "标题字体",
       pageDescription: "描述字体",
       questionTitle: "标题字体",
@@ -1038,11 +1056,8 @@ var simplifiedChineseTranslation = {
     showNavigationButtons: {
       none: "隐藏"
     },
-    showTimerPanel: {
-      none: "隐藏"
-    },
-    showTimerPanelMode: {
-      all: "双"
+    timerInfoMode: {
+      combined: "双"
     },
     addRowLocation: {
       default: "取决于矩阵布局"
@@ -1410,11 +1425,11 @@ var simplifiedChineseTranslation = {
     imageFit: "从以下选项中选择：“无” - 图像保持其原始大小;“包含” - 调整图像大小以适应其纵横比;“封面” - 图像填充整个框，同时保持其纵横比;“填充” - 拉伸图像以填充框，而不保持其纵横比。",
     autoGrow: "在输入数据时逐渐增加输入字段的高度。覆盖“输入字段高度（以行为单位）”设置。",
     allowResize: "调整大小的手柄（或手柄）出现在角落，可以拖动以更改输入字段的大小。",
-    maxTimeToFinish: "以秒为单位的时间间隔，在此时间间隔之后，调查将自动前进到“感谢”页面。",
-    maxTimeToFinishPage: "以秒为单位的时间间隔，在此时间间隔之后，调查将自动前进到下一页。",
+    timeLimit: "以秒为单位的时间间隔，在此时间间隔之后，调查将自动前进到“感谢”页面。",
+    timeLimitPerPage: "以秒为单位的时间间隔，在此时间间隔之后，调查将自动前进到下一页。",
     validateVisitedEmptyFields: "启用此选项可在用户将焦点放在空输入字段上，然后离开该字段而不进行任何更改时触发验证。",
     page: {
-      maxTimeToFinish: "以秒为单位的时间间隔，在此时间间隔之后，调查将自动前进到下一页。",
+      timeLimit: "以秒为单位的时间间隔，在此时间间隔之后，调查将自动前进到下一页。",
       visibleIf: "使用魔杖图标设置确定页面可见性的条件规则。",
       enableIf: "使用魔杖图标设置禁用页面只读模式的条件规则。",
       requiredIf: "使用魔杖图标设置条件规则，除非至少有一个嵌套问题有答案，否则该规则将阻止调查提交。",
@@ -1424,7 +1439,7 @@ var simplifiedChineseTranslation = {
       questionsOrder: "保持问题的原始顺序或随机化问题。“继承”选项应用调查级别设置（默认为“原始”）。此设置的效果仅在“预览”选项卡中可见。",
       navigationButtonsVisibility: "设置导航按钮在页面上的可见性。“继承”选项应用调查级别设置，默认为“可见”。"
     },
-    showTimerPanel: "设置计时器在页面上的可见性和位置。",
+    timerLocation: "设置计时器在页面上的位置。",
     panelsState: "从以下选项中选择：“锁定” - 用户无法展开或折叠面板;“全部折叠” - 所有面板都以折叠状态启动;“全部展开” - 所有面板都以展开状态启动;“首先展开” - 最初只有第一个面板被展开。",
     imageLinkName: "在对象数组中输入共享属性名称，该数组包含要在选项列表中显示的图像或视频文件 URL。",
     choices: "左边的值用作条件规则中使用的项目 ID，右边的值显示给受访者。",
@@ -1506,7 +1521,8 @@ var simplifiedChineseTranslation = {
     header: {
       inheritWidthFrom: "“与容器相同”选项会自动调整标题内容区域的宽度，以适应放置调查的 HTML 元素。",
       textAreaWidth: "包含调查标题和描述的标题区域的宽度，以像素为单位。",
-      overlapEnabled: "使标题的底部与调查的顶部重叠。"
+      overlapEnabled: "启用后，调查的顶部将覆盖页眉的底部。",
+      mobileHeight: "设置为 0 时，将自动计算高度以适应标题的内容。"
     },
     panellayoutcolumn: {
       effectiveWidth: "接受值 %。",
@@ -1594,6 +1610,7 @@ var simplifiedChineseTranslation = {
     imageFit: "图像贴合",
     altText: "可选文字",
     height: "高度",
+    mobileHeight: "智能手机上的身高",
     penColor: "笔颜色",
     backgroundColor: "背景色",
     templateElements: "模板元素",
@@ -1879,7 +1896,7 @@ editorLocalization.locales["zh-cn"] = simplifiedChineseTranslation;
 // pe.editText: "Edit Answer button text" => "编辑应答按钮文本"
 // image.imageHeight: "Image height (in CSS-accepted values)" => "图片高度（以 CSS 接受的值为单位）"
 // image.imageWidth: "Image width (in CSS-accepted values)" => "图像宽度（以 CSS 接受的值为单位）"
-// page.maxTimeToFinish: "Time limit to finish the page (in seconds)" => "完成页面的时间限制（以秒为单位）"
+// page.timeLimit: "Time limit to finish the page (in seconds)" => "完成页面的时间限制（以秒为单位）"
 // question.page: "Parent page" => "父页面"
 // pe.noEntriesText: "Empty entries text" => "空条目文本"
 // pe.setValue: "Answer" => "答"
@@ -2684,9 +2701,9 @@ editorLocalization.locales["zh-cn"] = simplifiedChineseTranslation;
 // pehelp.imageFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "从以下选项中选择：“无” - 图像保持其原始大小;“包含” - 调整图像大小以适应其纵横比;“封面” - 图像填充整个框，同时保持其纵横比;“填充” - 拉伸图像以填充框，而不保持其纵横比。"
 // pehelp.autoGrow: "Gradually increases the height of the input field as data is being entered. Overrides the \"Input field height (in lines)\" setting." => "在输入数据时逐渐增加输入字段的高度。覆盖“输入字段高度（以行为单位）”设置。"
 // pehelp.allowResize: "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field." => "调整大小的手柄（或手柄）出现在角落，可以拖动以更改输入字段的大小。"
-// pehelp.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "以秒为单位的时间间隔，在此时间间隔之后，调查将自动前进到“感谢”页面。"
-// pehelp.maxTimeToFinishPage: "A time interval in seconds after which the survey auto-advances to the next page." => "以秒为单位的时间间隔，在此时间间隔之后，调查将自动前进到下一页。"
-// page.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the next page." => "以秒为单位的时间间隔，在此时间间隔之后，调查将自动前进到下一页。"
+// pehelp.timeLimit: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "以秒为单位的时间间隔，在此时间间隔之后，调查将自动前进到“感谢”页面。"
+// pehelp.timeLimitPerPage: "A time interval in seconds after which the survey auto-advances to the next page." => "以秒为单位的时间间隔，在此时间间隔之后，调查将自动前进到下一页。"
+// page.timeLimit: "A time interval in seconds after which the survey auto-advances to the next page." => "以秒为单位的时间间隔，在此时间间隔之后，调查将自动前进到下一页。"
 // page.visibleIf: "Use the magic wand icon to set a conditional rule that determines page visibility." => "使用魔杖图标设置确定页面可见性的条件规则。"
 // page.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the page." => "使用魔杖图标设置禁用页面只读模式的条件规则。"
 // page.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "使用魔杖图标设置条件规则，除非至少有一个嵌套问题有答案，否则该规则将阻止调查提交。"
@@ -2694,7 +2711,6 @@ editorLocalization.locales["zh-cn"] = simplifiedChineseTranslation;
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "设置与输入无效的问题相关的错误消息的位置。选择：“顶部” - 错误文本放置在问题框的顶部;“底部” - 错误文本放置在问题框的底部。“继承”选项将应用调查级别设置（默认为“顶部”）。"
 // page.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "保持问题的原始顺序或随机化问题。“继承”选项应用调查级别设置（默认为“原始”）。此设置的效果仅在“预览”选项卡中可见。"
 // page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "设置导航按钮在页面上的可见性。“继承”选项应用调查级别设置，默认为“可见”。"
-// pehelp.showTimerPanel: "Sets the visibility and location of a timer on a page." => "设置计时器在页面上的可见性和位置。"
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "从以下选项中选择：“锁定” - 用户无法展开或折叠面板;“全部折叠” - 所有面板都以折叠状态启动;“全部展开” - 所有面板都以展开状态启动;“首先展开” - 最初只有第一个面板被展开。"
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "在对象数组中输入共享属性名称，该数组包含要在选项列表中显示的图像或视频文件 URL。"
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "左边的值用作条件规则中使用的项目 ID，右边的值显示给受访者。"
@@ -2891,7 +2907,6 @@ editorLocalization.locales["zh-cn"] = simplifiedChineseTranslation;
 // theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "设置调查的主要背景颜色。"
 // header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "“与容器相同”选项会自动调整标题内容区域的宽度，以适应放置调查的 HTML 元素。"
 // header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "包含调查标题和描述的标题区域的宽度，以像素为单位。"
-// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "使标题的底部与调查的顶部重叠。"
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "接受值 %。"
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "接受值 px。"
 // p.effectiveColSpan: "Column span" => "柱跨度"
@@ -2924,3 +2939,26 @@ editorLocalization.locales["zh-cn"] = simplifiedChineseTranslation;
 // ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "单击任何类别图标以浏览调查设置。将测量元素添加到设计图面后，其他设置将变为可用。"
 // pe.caseInsensitive: "Case insensitive" => "不区分大小写"
 // pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "如果必须将正则表达式中的大写字母和小写字母视为等效字母，请选择此项。"
+
+// ed.surveyPlaceholderTitle: "Your form is empty" => "您的表单为空"
+// ed.surveyPlaceholderTitleMobile: "Your form is empty" => "您的表单为空"
+// ed.surveyPlaceholderDescription: "Drag an element from the toolbox or click the button below." => "从工具箱中拖动元素或单击下面的按钮。"
+// ed.surveyPlaceholderDescriptionMobile: "Drag an element from the toolbox or click the button below." => "从工具箱中拖动元素或单击下面的按钮。"
+// ed.previewPlaceholderTitle: "No preview" => "无预览"
+// ed.previewPlaceholderTitleMobile: "No preview" => "无预览"
+// ed.previewPlaceholderDescription: "The survey doesn't contain any visible elements." => "调查不包含任何可见元素。"
+// ed.previewPlaceholderDescriptionMobile: "The survey doesn't contain any visible elements." => "调查不包含任何可见元素。"
+// ed.translationsPlaceholderTitle: "No strings to translate" => "无需翻译字符串"
+// ed.translationsPlaceholderTitleMobile: "No strings to translate" => "无需翻译字符串"
+// ed.translationsPlaceholderDescription: "Add elements to your form or change the strings filter in the toolbar." => "将元素添加到表单或更改工具栏中的字符串筛选器。"
+// ed.translationsPlaceholderDescriptionMobile: "Add elements to your form or change the strings filter in the toolbar." => "将元素添加到表单或更改工具栏中的字符串筛选器。"
+// lg.logicPlaceholderTitle: "No logical rules" => "无逻辑规则"
+// lg.logicPlaceholderTitleMobile: "No logical rules" => "无逻辑规则"
+// lg.logicPlaceholderDescription: "Create a rule to customize the flow of the survey." => "创建规则以自定义调查流程。"
+// lg.logicPlaceholderDescriptionMobile: "Create a rule to customize the flow of the survey." => "创建规则以自定义调查流程。"
+// pe.showTimer: "Use a timer" => "使用计时器"
+// theme.advancedMode: "Advanced mode" => "高级模式"
+// pehelp.timerLocation: "Sets the location of a timer on a page." => "设置计时器在页面上的位置。"
+// header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "设置为 0 时，将自动计算高度以适应标题的内容。"
+// p.mobileHeight: "Height on smartphones" => "智能手机上的身高"
+// header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "启用后，调查的顶部将覆盖页眉的底部。"

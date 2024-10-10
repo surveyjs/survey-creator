@@ -164,6 +164,10 @@ module.exports = function (options) {
           test: /\.svg$/,
           loader: "svg-inline-loader",
         },
+        {
+          test: /\.(png|jpg)$/,
+          type: 'asset/inline' // https://webpack.js.org/guides/asset-modules/
+        }
       ],
     },
     output: {

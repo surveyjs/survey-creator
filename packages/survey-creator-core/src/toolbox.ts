@@ -144,9 +144,9 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
         .append("svc-toolbox__tool")
         .append("svc-toolbox__tool--action")
         .append(originalCss)
-        .append("svc-toolbox__tool--hovered", this.isHovered)
         .append("svc-toolbox__tool--pressed", this.isPressed)
         .append("svc-toolbox__tool--has-icon", !!this.iconName)
+        .append("svc-toolbox__tool--has-subitems", !!(this.items?.length > 0))
         .append("svc-toolbox__tool--disabled", this.enabled === false)
         .append("sv-action--hidden", !this.isVisible)
         .toString();
@@ -300,6 +300,10 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
     } else {
       this.addSubitems(array);
     }
+  }
+
+  public get subitemsButtonIcon() {
+    return "icon-next_16x16";
   }
 }
 

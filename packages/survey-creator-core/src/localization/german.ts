@@ -182,6 +182,18 @@ var germanTranslation = {
     pagePlaceHolder: "Die Seite ist leer. Ziehen Sie ein Element aus der Toolbox oder klicken Sie auf die Schaltfläche unten.",
     imagePlaceHolder: "Ziehen Sie ein Bild per Drag & Drop hierher oder klicken Sie auf die Schaltfläche unten und wählen Sie ein Bild zum Hochladen aus",
     surveyPlaceHolderMobile: "Klicken Sie unten auf die Schaltfläche \"Frage hinzufügen\", um mit der Erstellung Ihres Formulars zu beginnen.",
+    surveyPlaceholderTitle: "Ihr Formular ist leer",
+    surveyPlaceholderTitleMobile: "Ihr Formular ist leer",
+    surveyPlaceholderDescription: "Ziehen Sie ein Element aus der Toolbox oder klicken Sie auf die Schaltfläche unten.",
+    surveyPlaceholderDescriptionMobile: "Ziehen Sie ein Element aus der Toolbox oder klicken Sie auf die Schaltfläche unten.",
+    previewPlaceholderTitle: "Keine Vorschau",
+    previewPlaceholderTitleMobile: "Keine Vorschau",
+    previewPlaceholderDescription: "Die Umfrage enthält keine sichtbaren Elemente.",
+    previewPlaceholderDescriptionMobile: "Die Umfrage enthält keine sichtbaren Elemente.",
+    translationsPlaceholderTitle: "Keine Zeichenfolgen zu übersetzen",
+    translationsPlaceholderTitleMobile: "Keine Zeichenfolgen zu übersetzen",
+    translationsPlaceholderDescription: "Fügen Sie Ihrem Formular Elemente hinzu oder ändern Sie den Zeichenfolgenfilter in der Symbolleiste.",
+    translationsPlaceholderDescriptionMobile: "Fügen Sie Ihrem Formular Elemente hinzu oder ändern Sie den Zeichenfolgenfilter in der Symbolleiste.",
     pagePlaceHolderMobile: "Klicken Sie unten auf die Schaltfläche \"Frage hinzufügen\", um der Seite ein neues Element hinzuzufügen.",
     panelPlaceHolderMobile: "Klicken Sie unten auf die Schaltfläche \"Frage hinzufügen\", um dem Bedienfeld ein neues Element hinzuzufügen.",
     imagePlaceHolderMobile: "Klicken Sie auf die Schaltfläche unten und wählen Sie ein Bild zum Hochladen aus",
@@ -194,6 +206,10 @@ var germanTranslation = {
     lg: {
       addNewItem: "Neue Regel hinzufügen",
       empty_tab: "Erstellen Sie eine Regel, um den Fluss der Umfrage anzupassen.",
+      logicPlaceholderTitle: "Keine logischen Regeln",
+      logicPlaceholderTitleMobile: "Keine logischen Regeln",
+      logicPlaceholderDescription: "Erstellen Sie eine Regel, um den Ablauf der Umfrage anzupassen.",
+      logicPlaceholderDescriptionMobile: "Erstellen Sie eine Regel, um den Ablauf der Umfrage anzupassen.",
       page_visibilityName: "Seite anzeigen/verstecken",
       page_enableName: "Seite aktivieren/deaktivieren",
       page_requireName: "Seite als erforderlich festlegen",
@@ -375,7 +391,7 @@ var germanTranslation = {
       description: "Seitenbeschreibung",
       visibleIf: "Seite sichtbar machen, wenn",
       requiredIf: "Seite erforderlich machen, wenn",
-      maxTimeToFinish: "Zeitlimit zum Beenden der Seite (in Sekunden)",
+      timeLimit: "Zeitlimit zum Beenden der Seite (in Sekunden)",
       questionsOrder: "Reihenfolge der Fragen auf der Seite"
     },
     matrixdropdowncolumn: {
@@ -615,10 +631,11 @@ var germanTranslation = {
     questionErrorLocation: "Position der Fehlermeldungen",
     focusFirstQuestionAutomatic: "Erste Frage auf einer neuen Seite fokussieren",
     questionsOrder: "Reihenfolge der Fragen auf der Seite",
-    maxTimeToFinish: "Maximale Zeit, um die Umfrage zu beenden",
-    maxTimeToFinishPage: "Maximale Zeit, um eine Seite der Umfrage zu beenden",
-    showTimerPanel: "Position des Timers",
-    showTimerPanelMode: "Modus des Timers",
+    timeLimit: "Maximale Zeit, um die Umfrage zu beenden",
+    timeLimitPerPage: "Maximale Zeit, um eine Seite der Umfrage zu beenden",
+    showTimer: "Verwenden eines Timers",
+    timerLocation: "Position des Timers",
+    timerInfoMode: "Modus des Timers",
     renderMode: "Anzeigemodus",
     allowAddPanel: "Hinzufügen eines Panels erlauben",
     allowRemovePanel: "Entfernen eines Panels erlauben",
@@ -875,6 +892,7 @@ var germanTranslation = {
       fontSize: "Schriftgrad",
       scale: "Maßstab",
       cornerRadius: "Ecken-Radius",
+      advancedMode: "Erweiterter Modus",
       pageTitle: "Schriftart des Titels",
       pageDescription: "Beschreibung Schriftart",
       questionTitle: "Schriftart des Titels",
@@ -1038,11 +1056,8 @@ var germanTranslation = {
     showNavigationButtons: {
       none: "Versteckt"
     },
-    showTimerPanel: {
-      none: "Versteckt"
-    },
-    showTimerPanelMode: {
-      all: "Beide"
+    timerInfoMode: {
+      combined: "Beide"
     },
     addRowLocation: {
       default: "Basierend auf dem Matrix-Layout"
@@ -1410,11 +1425,11 @@ var germanTranslation = {
     imageFit: "Wählen Sie aus: \"Keine\" - das Bild behält seine ursprüngliche Größe; \"Enthalten\" - die Größe des Bildes wird angepasst, wobei das Seitenverhältnis beibehalten wird. \"Cover\" - das Bild füllt den gesamten Rahmen aus, während das Seitenverhältnis beibehalten wird. \"Füllen\" - Das Bild wird gestreckt, um den Rahmen auszufüllen, ohne das Seitenverhältnis beizubehalten.",
     autoGrow: "Erhöht die Höhe des Eingabefelds schrittweise, während Daten eingegeben werden. Überschreibt die Einstellung \"Höhe des Eingabefelds (in Zeilen)\".",
     allowResize: "Der Ziehpunkt (oder Griff) wird in der Ecke angezeigt und kann gezogen werden, um die Größe des Eingabefelds zu ändern.",
-    maxTimeToFinish: "Ein Zeitintervall in Sekunden, nach dem die Umfrage automatisch zur Danke-Seite wechselt.",
-    maxTimeToFinishPage: "Ein Zeitintervall in Sekunden, nach dem die Umfrage automatisch zur nächsten Seite wechselt.",
+    timeLimit: "Ein Zeitintervall in Sekunden, nach dem die Umfrage automatisch zur Danke-Seite wechselt.",
+    timeLimitPerPage: "Ein Zeitintervall in Sekunden, nach dem die Umfrage automatisch zur nächsten Seite wechselt.",
     validateVisitedEmptyFields: "Aktivieren Sie diese Option, um die Validierung auszulösen, wenn sich ein Benutzer auf ein leeres Eingabefeld konzentriert und es dann verlässt, ohne Änderungen vorzunehmen.",
     page: {
-      maxTimeToFinish: "Ein Zeitintervall in Sekunden, nach dem die Umfrage automatisch zur nächsten Seite wechselt.",
+      timeLimit: "Ein Zeitintervall in Sekunden, nach dem die Umfrage automatisch zur nächsten Seite wechselt.",
       visibleIf: "Verwenden Sie das Zauberstabsymbol, um eine bedingte Regel festzulegen, die die Sichtbarkeit der Seite bestimmt.",
       enableIf: "Verwenden Sie das Zauberstabsymbol, um eine bedingte Regel festzulegen, die den schreibgeschützten Modus für die Seite deaktiviert.",
       requiredIf: "Verwenden Sie das Zauberstabsymbol, um eine bedingte Regel festzulegen, die die Übermittlung von Umfragen verhindert, es sei denn, mindestens eine verschachtelte Frage enthält eine Antwort.",
@@ -1424,7 +1439,7 @@ var germanTranslation = {
       questionsOrder: "Behält die ursprüngliche Reihenfolge der Fragen bei oder randomisiert sie. Mit der Option \"Vererben\" wird die Einstellung auf Umfrageebene (\"Original\" standardmäßig) angewendet. Die Auswirkungen dieser Einstellung sind nur auf dem Tab \"Vorschau\" sichtbar.",
       navigationButtonsVisibility: "Legt die Sichtbarkeit von Navigationsschaltflächen auf der Seite fest. Mit der Option \"Vererben\" wird die Einstellung auf Umfrageebene angewendet, die standardmäßig auf \"Sichtbar\" eingestellt ist."
     },
-    showTimerPanel: "Legt die Sichtbarkeit und Position eines Timers auf einer Seite fest.",
+    timerLocation: "Legt die Position eines Timers auf einer Seite fest.",
     panelsState: "Wählen Sie aus: \"Gesperrt\" - Benutzer können Panele nicht erweitern oder reduzieren; \"Alle ausblenden\" - alle Panele beginnen in einem zusammengeklappten Zustand; \"Alle erweitern\" - alle Panele beginnen in einem erweiterten Zustand; \"First expanded\" - nur das erste Panel wird zunächst erweitert.",
     imageLinkName: "Geben Sie einen freigegebenen Eigenschaftsnamen in das Array von Objekten ein, das die Bild- oder Videodatei-URLs enthält, die in der Auswahlliste angezeigt werden sollen.",
     choices: "Der linke Wert dient als Element-ID, die in bedingten Regeln verwendet wird, der rechte Wert wird den Befragten angezeigt.",
@@ -1506,7 +1521,8 @@ var germanTranslation = {
     header: {
       inheritWidthFrom: "Die Option \"Wie Container\" passt die Breite des Inhaltsbereichs der Kopfzeile automatisch an das HTML-Element an, in dem die Umfrage platziert wird.",
       textAreaWidth: "Die Breite des Kopfbereichs, der den Titel und die Beschreibung der Umfrage enthält, gemessen in Pixeln.",
-      overlapEnabled: "Legt fest, dass der untere Rand der Kopfzeile mit dem oberen Rand des Survey überlagert wird."
+      overlapEnabled: "Wenn diese Option aktiviert ist, überlagert der obere Rand der Umfrage den unteren Rand der Kopfzeile.",
+      mobileHeight: "Wenn der Wert auf 0 gesetzt ist, wird die Höhe automatisch berechnet, um den Inhalt der Kopfzeile aufzunehmen."
     },
     panellayoutcolumn: {
       effectiveWidth: "Akzeptiert die Werte %.",
@@ -1594,6 +1610,7 @@ var germanTranslation = {
     imageFit: "Passform des Bildes",
     altText: "altText",
     height: "Höhe",
+    mobileHeight: "Höhe auf Smartphones",
     penColor: "Stiftfarbe",
     backgroundColor: "Hintergrundfarbe",
     templateElements: "VorlagenElemente",
@@ -2250,9 +2267,9 @@ editorLocalization.locales["de"] = germanTranslation;
 // pehelp.imageFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Wählen Sie aus: \"Keine\" - das Bild behält seine ursprüngliche Größe; \"Enthalten\" - die Größe des Bildes wird angepasst, wobei das Seitenverhältnis beibehalten wird. \"Cover\" - das Bild füllt den gesamten Rahmen aus, während das Seitenverhältnis beibehalten wird. \"Füllen\" - Das Bild wird gestreckt, um den Rahmen auszufüllen, ohne das Seitenverhältnis beizubehalten."
 // pehelp.autoGrow: "Gradually increases the height of the input field as data is being entered. Overrides the \"Input field height (in lines)\" setting." => "Erhöht die Höhe des Eingabefelds schrittweise, während Daten eingegeben werden. Überschreibt die Einstellung \"Höhe des Eingabefelds (in Zeilen)\"."
 // pehelp.allowResize: "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field." => "Der Ziehpunkt (oder Griff) wird in der Ecke angezeigt und kann gezogen werden, um die Größe des Eingabefelds zu ändern."
-// pehelp.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "Ein Zeitintervall in Sekunden, nach dem die Umfrage automatisch zur Danke-Seite wechselt."
-// pehelp.maxTimeToFinishPage: "A time interval in seconds after which the survey auto-advances to the next page." => "Ein Zeitintervall in Sekunden, nach dem die Umfrage automatisch zur nächsten Seite wechselt."
-// page.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the next page." => "Ein Zeitintervall in Sekunden, nach dem die Umfrage automatisch zur nächsten Seite wechselt."
+// pehelp.timeLimit: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "Ein Zeitintervall in Sekunden, nach dem die Umfrage automatisch zur Danke-Seite wechselt."
+// pehelp.timeLimitPerPage: "A time interval in seconds after which the survey auto-advances to the next page." => "Ein Zeitintervall in Sekunden, nach dem die Umfrage automatisch zur nächsten Seite wechselt."
+// page.timeLimit: "A time interval in seconds after which the survey auto-advances to the next page." => "Ein Zeitintervall in Sekunden, nach dem die Umfrage automatisch zur nächsten Seite wechselt."
 // page.visibleIf: "Use the magic wand icon to set a conditional rule that determines page visibility." => "Verwenden Sie das Zauberstabsymbol, um eine bedingte Regel festzulegen, die die Sichtbarkeit der Seite bestimmt."
 // page.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the page." => "Verwenden Sie das Zauberstabsymbol, um eine bedingte Regel festzulegen, die den schreibgeschützten Modus für die Seite deaktiviert."
 // page.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "Verwenden Sie das Zauberstabsymbol, um eine bedingte Regel festzulegen, die die Übermittlung von Umfragen verhindert, es sei denn, mindestens eine verschachtelte Frage enthält eine Antwort."
@@ -2260,7 +2277,6 @@ editorLocalization.locales["de"] = germanTranslation;
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Legt die Position einer Fehlermeldung in Bezug auf die Frage mit ungültiger Eingabe fest. Wählen Sie zwischen: \"Oben\" - ein Fehlertext wird am oberen Rand des Fragefelds platziert; \"Unten\" - ein Fehlertext wird am unteren Rand des Fragefelds platziert. Die Option \"Vererben\" wendet die Einstellung auf Umfrageebene an (standardmäßig \"Oben\")."
 // page.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Behält die ursprüngliche Reihenfolge der Fragen bei oder randomisiert sie. Mit der Option \"Vererben\" wird die Einstellung auf Umfrageebene (\"Original\" standardmäßig) angewendet. Die Auswirkungen dieser Einstellung sind nur auf der Registerkarte Vorschau sichtbar."
 // page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Legt die Sichtbarkeit von Navigationsschaltflächen auf der Seite fest. Mit der Option \"Vererben\" wird die Einstellung auf Umfrageebene angewendet, die standardmäßig auf \"Sichtbar\" eingestellt ist."
-// pehelp.showTimerPanel: "Sets the visibility and location of a timer on a page." => "Legt die Sichtbarkeit und Position eines Timers auf einer Seite fest."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "Wählen Sie aus: \"Gesperrt\" - Benutzer können Bedienfelder nicht erweitern oder reduzieren; \"Alle ausblenden\" - alle Bedienfelder beginnen in einem zusammengeklappten Zustand; \"Alle erweitern\" - alle Bedienfelder beginnen in einem erweiterten Zustand; \"First expanded\" - nur das erste Panel wird zunächst erweitert."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "Geben Sie einen freigegebenen Eigenschaftsnamen in das Array von Objekten ein, das die Bild- oder Videodatei-URLs enthält, die in der Auswahlliste angezeigt werden sollen."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "Der linke Wert dient als Element-ID, die in bedingten Regeln verwendet wird, der rechte Wert wird den Befragten angezeigt."
@@ -2458,7 +2474,6 @@ editorLocalization.locales["de"] = germanTranslation;
 // theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "Legt die Haupthintergrundfarbe der Umfrage fest."
 // header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "Die Option \"Wie Container\" passt die Breite des Inhaltsbereichs der Kopfzeile automatisch an das HTML-Element an, in dem die Umfrage platziert wird."
 // header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "Die Breite des Kopfbereichs, der den Titel und die Beschreibung der Umfrage enthält, gemessen in Pixeln."
-// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "Legt fest, dass der untere Rand der Kopfzeile mit dem oberen Rand des Survey überlagert wird."
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Akzeptiert die Werte %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Akzeptiert die Werte px."
 // p.effectiveColSpan: "Column span" => "Spaltenbereich"
@@ -2491,3 +2506,26 @@ editorLocalization.locales["de"] = germanTranslation;
 // ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Klicken Sie auf ein beliebiges Kategoriesymbol, um die Umfrageeinstellungen zu erkunden. Zusätzliche Einstellungen sind verfügbar, sobald Sie der Entwurfsoberfläche ein Vermessungselement hinzufügen."
 // pe.caseInsensitive: "Case insensitive" => "Schreibungsunabhängig"
 // pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Wählen Sie diese Option aus, wenn Groß- und Kleinbuchstaben im regulären Ausdruck als gleichwertig behandelt werden müssen."
+
+// ed.surveyPlaceholderTitle: "Your form is empty" => "Ihr Formular ist leer"
+// ed.surveyPlaceholderTitleMobile: "Your form is empty" => "Ihr Formular ist leer"
+// ed.surveyPlaceholderDescription: "Drag an element from the toolbox or click the button below." => "Ziehen Sie ein Element aus der Toolbox oder klicken Sie auf die Schaltfläche unten."
+// ed.surveyPlaceholderDescriptionMobile: "Drag an element from the toolbox or click the button below." => "Ziehen Sie ein Element aus der Toolbox oder klicken Sie auf die Schaltfläche unten."
+// ed.previewPlaceholderTitle: "No preview" => "Keine Vorschau"
+// ed.previewPlaceholderTitleMobile: "No preview" => "Keine Vorschau"
+// ed.previewPlaceholderDescription: "The survey doesn't contain any visible elements." => "Die Umfrage enthält keine sichtbaren Elemente."
+// ed.previewPlaceholderDescriptionMobile: "The survey doesn't contain any visible elements." => "Die Umfrage enthält keine sichtbaren Elemente."
+// ed.translationsPlaceholderTitle: "No strings to translate" => "Keine Zeichenfolgen zu übersetzen"
+// ed.translationsPlaceholderTitleMobile: "No strings to translate" => "Keine Zeichenfolgen zu übersetzen"
+// ed.translationsPlaceholderDescription: "Add elements to your form or change the strings filter in the toolbar." => "Fügen Sie Ihrem Formular Elemente hinzu oder ändern Sie den Zeichenfolgenfilter in der Symbolleiste."
+// ed.translationsPlaceholderDescriptionMobile: "Add elements to your form or change the strings filter in the toolbar." => "Fügen Sie Ihrem Formular Elemente hinzu oder ändern Sie den Zeichenfolgenfilter in der Symbolleiste."
+// lg.logicPlaceholderTitle: "No logical rules" => "Keine logischen Regeln"
+// lg.logicPlaceholderTitleMobile: "No logical rules" => "Keine logischen Regeln"
+// lg.logicPlaceholderDescription: "Create a rule to customize the flow of the survey." => "Erstellen Sie eine Regel, um den Ablauf der Umfrage anzupassen."
+// lg.logicPlaceholderDescriptionMobile: "Create a rule to customize the flow of the survey." => "Erstellen Sie eine Regel, um den Ablauf der Umfrage anzupassen."
+// pe.showTimer: "Use a timer" => "Verwenden eines Timers"
+// theme.advancedMode: "Advanced mode" => "Erweiterter Modus"
+// pehelp.timerLocation: "Sets the location of a timer on a page." => "Legt die Position eines Timers auf einer Seite fest."
+// header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Wenn der Wert auf 0 gesetzt ist, wird die Höhe automatisch berechnet, um den Inhalt der Kopfzeile aufzunehmen."
+// p.mobileHeight: "Height on smartphones" => "Höhe auf Smartphones"
+// header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Wenn diese Option aktiviert ist, überlagert der obere Rand der Umfrage den unteren Rand der Kopfzeile."

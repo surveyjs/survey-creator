@@ -1,4 +1,4 @@
-import { Base, property, Action, ComputedUpdater, propertyArray, AnimationBoolean, IAnimationConsumer } from "survey-core";
+import { Base, property, Action, ComputedUpdater, propertyArray, AnimationBoolean, IAnimationConsumer, CssClassBuilder } from "survey-core";
 import { getLocString } from "../../editorLocalization";
 import { SurveyCreatorModel } from "../../creator-base";
 import { SidebarPageModel } from "./side-bar-page-model";
@@ -14,6 +14,8 @@ export class SidebarModel extends Base {
   private _activePage: SidebarPageModel;
   private onSidebarVisibilityChanged;
   private resizeManager: ResizeManager;
+
+  onExpandCallback: () => void;
 
   @propertyArray() pages: Array<SidebarPageModel>;
   @property({ defaultValue: true }) _visible: boolean;
@@ -33,10 +35,26 @@ export class SidebarModel extends Base {
   @property() sideAreaComponentData: any;
 
   private rootElement: HTMLElement;
-
+  public get rootCss(): string {
+    return new CssClassBuilder()
+      .append("svc-side-bar")
+      .append("svc-side-bar--flyout", this.flyoutPanelMode)
+      .append("svc-side-bar--mobile", this.creator.isMobileView)
+      .append("svc-side-bar--side-area", !!this.sideAreaComponentName)
+      .toString();
+  }
+  public get renderRoot(): boolean {
+    return this.hasVisiblePages && (!this.creator.isMobileView || this.renderedIsVisible);
+  }
+  public get renderContainer(): boolean {
+    return this.renderedIsVisible;
+  }
   private getAnimationOptions(): IAnimationConsumer {
-    const onBeforeRunAnimation = (el) => {
-      el.style.setProperty("--animation-width", el.offsetWidth + "px");
+    const onBeforeRunAnimation = (el: HTMLElement) => {
+      const animatedElements = el.querySelectorAll(".svc-side-bar__container-wrapper,.svc-side-bar__wrapper");
+      animatedElements.forEach((el: HTMLElement) => {
+        el.style.setProperty("--animation-width", el.offsetWidth + "px");
+      });
     };
     return {
       getAnimatedElement: () => {
@@ -52,13 +70,24 @@ export class SidebarModel extends Base {
       },
       getEnterOptions: () => {
         return {
-          onBeforeRunAnimation: (el) => onBeforeRunAnimation,
-          cssClass: "svc-side-bar--enter"
+          onBeforeRunAnimation: onBeforeRunAnimation,
+          cssClass: "svc-side-bar--enter",
+          onAfterRunAnimation: () => this.afterExpand()
         };
       }
     };
   }
-  private allowFlyoutMode: boolean = true;
+  @property({}) private allowFlyoutMode: boolean = true;
+  private afterExpand() {
+    this.onExpandCallback && this.onExpandCallback();
+    this.onExpandCallback = undefined;
+  }
+  public executeOnExpand(callback: () => void) {
+    if(this.renderedIsVisible) {
+      callback();
+    }
+    this.onExpandCallback = callback;
+  }
   public visibilityAnimation = new AnimationBoolean(this.getAnimationOptions(), (val: boolean) => {
     this.renderedIsVisible = val;
     this.allowFlyoutMode = true;
@@ -69,6 +98,9 @@ export class SidebarModel extends Base {
     }
     if (this._visible !== val) {
       this._visible = val;
+      if(!this.animationAllowed) {
+        this.afterExpand();
+      }
       this.visibilityAnimation.sync(val);
     }
   }
@@ -77,7 +109,7 @@ export class SidebarModel extends Base {
   }
 
   public get flyoutPanelMode(): boolean {
-    return this.renderedIsVisible && this.flyoutMode && this.allowFlyoutMode;
+    return this.flyoutMode && this.allowFlyoutMode;
   }
 
   public get closeText(): string {
@@ -196,7 +228,7 @@ export class SidebarModel extends Base {
   }
   public initResizeManager(container: HTMLDivElement): void {
     this.resizeManager = new ResizeManager(container, this.getCurrentHandles());
-    this.rootElement = container?.parentElement?.parentElement;
+    this.rootElement = container?.parentElement?.parentElement.parentElement;
   }
   public resetResizeManager(): void {
     if (!!this.resizeManager) {
