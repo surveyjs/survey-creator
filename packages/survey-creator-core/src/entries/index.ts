@@ -100,6 +100,7 @@ export * from "../presets/presets";
 export * from "../presets/presets-properties";
 export * from "../presets/presets-tabs";
 export * from "../presets/presets-toolbox";
+export * from "../survey-elements";
 
 require("../components/property-panel/property-panel-item.scss");
 require("../components/property-panel/property-panel.scss");
