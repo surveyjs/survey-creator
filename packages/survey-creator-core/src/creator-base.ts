@@ -3890,7 +3890,7 @@ export class SurveyCreatorModel extends Base
   }
 
   @property({ defaultValue: {} }) themeVariables: { [index: string]: string } = {};
-  @property() private creatorTheme: ICreatorTheme;
+  @property() creatorTheme: ICreatorTheme;
 
   public applyTheme(theme: ICreatorTheme): void {
     if (!theme) return;

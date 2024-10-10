@@ -13,7 +13,7 @@ import { MenuButton } from "../../utils/actions";
 import { editorLocalization } from "../../editorLocalization";
 import { creatorThemeModelPropertyGridDefinition } from "../../creator-theme/creator-theme-model-definition";
 import { CreatorThemeModel } from "../../creator-theme/creator-theme-model";
-import { CreatorThemes, ICreatorTheme } from "../../creator-theme/creator-themes";
+import { ICreatorTheme } from "../../creator-theme/creator-themes";
 
 export class TabDesignerPlugin implements ICreatorPlugin {
   public model: TabDesignerViewModel;
@@ -106,12 +106,17 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     const newTheme = theme || this.themeModel.toJSON();
     this.creator.applyTheme(newTheme);
   }
-
+  updateThemeSettings() {
+    if (this.creator.showCreatorThemeSettings) {
+      this.themeModel.loadTheme(this.creator.creatorTheme);
+      this.themePropertyGrid.obj = this.themeModel;
+    }
+  }
   private createCreatorThemeSettingsPage(creator: SurveyCreatorModel) {
     this.themeModel = new CreatorThemeModel();
     this.themePropertyGrid = new PropertyGridModel(undefined, creator, creatorThemeModelPropertyGridDefinition);
     this.themePropertyGrid.showOneCategoryInPropertyGrid = true;
-    this.themePropertyGrid["setObj"](this.themeModel);
+    // this.themePropertyGrid["setObj"](this.themeModel);
     this.themePropertyGrid.surveyInstanceCreatedArea = "designer-tab:creator-settings";
     const themePropertyGridViewModel = new PropertyGridViewModel(this.themePropertyGrid, creator);
     themePropertyGridViewModel.searchEnabled = false;
@@ -122,6 +127,8 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     };
     this.themeModel.onThemeSelected.add((sender, options) => {
       this.syncTheme(options.theme);
+      this.themePropertyGrid.survey.editingObj = undefined;
+      this.themePropertyGrid.survey.editingObj = sender;
     });
     this.themeModel.onThemePropertyChanged.add((sender, options) => {
       this.syncTheme();
@@ -244,6 +251,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     this.creator.sidebar.hideSideBarVisibilityControlActions = this.showOneCategoryInPropertyGrid;
     this.updateActivePage();
     this.updateTabControl();
+    this.updateThemeSettings();
     this.creator.focusElement(undefined, true);
   }
 

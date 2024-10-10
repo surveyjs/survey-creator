@@ -3,12 +3,11 @@ import { ISurveyPropertiesDefinition, ISurveyPropertyGridDefinition } from "../q
 const creatorThemeModelProperties: ISurveyPropertiesDefinition = {
   "creatorTheme": {
     properties: [
-      { name: "themeName" },
-      { name: "palette" },
-      { name: "--ctr-surface-background-color" },
-      { name: "--sjs-primary-background-500" },
-      { name: "--sjs-secondary-background-500" },
-      { name: "scale" },
+      { name: "themeName", index: 1 },
+      { name: "--sjs-special-background", index: 10 },
+      { name: "--sjs-primary-background-500", index: 20 },
+      { name: "--sjs-secondary-background-500", index: 30 },
+      { name: "scale", index: 40 },
     ],
   },
 };

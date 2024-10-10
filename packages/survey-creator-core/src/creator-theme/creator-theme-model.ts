@@ -13,6 +13,19 @@ Object.keys(Themes || {}).forEach(themeName => {
 });
 
 export class CreatorThemeModel extends Base implements ICreatorTheme {
+  public static DefaultTheme = {
+    themeName: "sc2020",
+    cssVariables: {
+      "--sjs-special-background": "#F3F3F3FF",
+      "--sjs-primary-background-500": "#19B394FF",
+      "--sjs-primary-background-10": "#19B3941A",
+      "--sjs-primary-background-400": "#14A48BFF",
+      "--sjs-secondary-background-500": "#FF9814FF",
+      "--sjs-secondary-background-25": "#FF981440",
+      "--sjs-secondary-background-10": "#FF98141A",
+      "--sjs-base-unit": "8px"
+    }
+  };
   cssVariables?: { [index: string]: string } = {};
 
   @property() themeName: string;
@@ -49,12 +62,36 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
     this.onThemePropertyChanged.fire(this, { name, value });
   }
   private onThemePropertyValueChangedCallback(name: string, oldValue: any, newValue: any, sender: Base, arrayChanges: ArrayChanges) {
+    if (this.blockThemeChangedNotifications > 0) return;
+
     if (name === "themeName") {
+      this.loadTheme({ themeName: newValue });
       this.onThemeSelected.fire(this, { theme: this.toJSON() });
     } else if (name.indexOf("--") === 0) {
       this.setThemeCssVariablesChanges(name, newValue);
     } else if (name == "scale") {
       this.setThemeCssVariablesChanges("--sjs-base-unit", (newValue * 8 / 100) + "px");
+    }
+  }
+
+  private blockThemeChangedNotifications = 0;
+  public loadTheme(theme: ICreatorTheme = {}) {
+    this.blockThemeChangedNotifications += 1;
+    try {
+      const baseTheme = CreatorThemes[theme.themeName] || CreatorThemeModel.DefaultTheme;
+      this.themeName = baseTheme.themeName;
+
+      const effectiveThemeCssVariables = {};
+      assign(effectiveThemeCssVariables, CreatorThemeModel.DefaultTheme.cssVariables || {}, baseTheme.cssVariables || {});
+      assign(effectiveThemeCssVariables, theme.cssVariables || {}, this.cssVariables);
+
+      const effectiveTheme: ICreatorTheme = {};
+      assign(effectiveTheme, theme, { cssVariables: effectiveThemeCssVariables, themeName: this.themeName });
+
+      // this.initializeColorCalculator(effectiveTheme.cssVariables);
+      this.fromJSON(effectiveTheme);
+    } finally {
+      this.blockThemeChangedNotifications -= 1;
     }
   }
 
@@ -99,22 +136,6 @@ Serializer.addClass(
       type: "dropdown",
       name: "themeName",
       choices: PredefinedCreatorThemes.map(theme => ({ value: theme, text: getLocString("theme.creatorNames." + theme) })),
-    }, {
-      type: "spinedit",
-      name: "scale",
-      displayName: "Scaling",
-      isSerializable: false,
-      onPropertyEditorUpdate: function (obj: any, editor: any) {
-        if (!!editor) {
-          editor.unit = "%";
-          editor.min = 0;
-          editor.step = 5;
-        }
-      }
-    }, {
-      type: "spinedit",
-      name: "--sjs-base-unit",
-      visible: false,
     }
   ],
   (json) => { return new CreatorThemeModel(); }
@@ -123,7 +144,7 @@ Serializer.addClass(
 Serializer.addProperties("creatortheme", [
   {
     type: "color",
-    name: "--ctr-surface-background-color",
+    name: "--sjs-special-background",
     displayName: "Surface background"
   }, {
     type: "color",
@@ -133,5 +154,21 @@ Serializer.addProperties("creatortheme", [
     type: "color",
     name: "--sjs-secondary-background-500",
     displayName: ""
+  }, {
+    type: "spinedit",
+    name: "scale",
+    displayName: "Scaling",
+    isSerializable: false,
+    onPropertyEditorUpdate: function (obj: any, editor: any) {
+      if (!!editor) {
+        editor.unit = "%";
+        editor.min = 0;
+        editor.step = 5;
+      }
+    }
+  }, {
+    type: "spinedit",
+    name: "--sjs-base-unit",
+    visible: false,
   },
 ]);
