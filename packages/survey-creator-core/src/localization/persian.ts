@@ -1521,7 +1521,7 @@ var persianStrings = {
     header: {
       inheritWidthFrom: "گزینه \"همان کانتینر\" به طور خودکار عرض ناحیه محتوای هدر را تنظیم می کند تا در عنصر HTML که نظرسنجی در آن قرار می گیرد قرار گیرد.",
       textAreaWidth: "عرض ناحیه سرصفحه که حاوی عنوان و توضیحات نظرسنجی است که بر حسب پیکسل اندازه گیری می شود.",
-      overlapEnabled: "پایین سربرگ را با بالای نظرسنجی پوشانده می کند.",
+      overlapEnabled: "هنگامی که فعال باشد، بالای نظرسنجی پایین هدر را همپوشانی می کند.",
       mobileHeight: "هنگامی که روی 0 تنظیم می شود، ارتفاع به طور خودکار محاسبه می شود تا محتوای هدر را در خود جای دهد."
     },
     panellayoutcolumn: {
@@ -2720,7 +2720,6 @@ editorLocalization.locales["fa"] = persianStrings;
 // theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "رنگ پس زمینه اصلی نظرسنجی را تنظیم می کند."
 // header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "گزینه \"همان کانتینر\" به طور خودکار عرض ناحیه محتوای هدر را تنظیم می کند تا در عنصر HTML که نظرسنجی در آن قرار می گیرد قرار گیرد."
 // header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "عرض ناحیه سرصفحه که حاوی عنوان و توضیحات نظرسنجی است که بر حسب پیکسل اندازه گیری می شود."
-// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "پایین سربرگ را با بالای نظرسنجی پوشانده می کند."
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "مقادیر را می پذیرد."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "مقادیر px را می پذیرد."
 // p.effectiveColSpan: "Column span" => "دهانه ستون"
@@ -2775,3 +2774,4 @@ editorLocalization.locales["fa"] = persianStrings;
 // pehelp.timerLocation: "Sets the location of a timer on a page." => "مکان یک تایمر را در یک صفحه تنظیم می کند."
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "هنگامی که روی 0 تنظیم می شود، ارتفاع به طور خودکار محاسبه می شود تا محتوای هدر را در خود جای دهد."
 // p.mobileHeight: "Height on smartphones" => "ارتفاع در گوشی های هوشمند"
+// header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "هنگامی که فعال باشد، بالای نظرسنجی پایین هدر را همپوشانی می کند."

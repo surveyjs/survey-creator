@@ -12,8 +12,6 @@ import {
   CssClassBuilder
 } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
-import { DesignerStateManager } from "./tabs/designer-state-manager";
-import { TabDesignerPlugin } from "./tabs/designer-plugin";
 import { isPanelDynamic } from "../survey-elements";
 import { cleanHtmlElementAfterAnimation, prepareElementForVerticalAnimation } from "survey-core";
 
@@ -86,9 +84,9 @@ export class SurveyElementActionContainer extends AdaptiveActionContainer {
 }
 
 export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> extends Base {
+  public static AdornerValueName = "__sjs_creator_adorner";
   public actionContainer: ActionContainer;
   protected expandCollapseAction: IAction;
-  protected designerStateManager: DesignerStateManager;
   @property({ defaultValue: true }) allowDragging: boolean;
   @property({ defaultValue: false }) expandCollapseAnimationRunning: boolean;
   public rootElement: HTMLElement;
@@ -101,8 +99,8 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   @property({
     onSet: (val, target: SurveyElementAdornerBase<T>) => {
       target.renderedCollapsed = val;
-      if (target.designerStateManager && target.surveyElement) {
-        target.designerStateManager.getElementState(target.surveyElement).collapsed = val;
+      if (target.creator.designerStateManager && !target.creator.designerStateManager.isSuspended && target.surveyElement) {
+        target.creator.designerStateManager.getElementState(target.surveyElement).collapsed = val;
       }
       setTimeout(() => {
         target.creator.survey.pages.forEach(p => p.ensureRowsVisibility());
@@ -268,8 +266,8 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     surveyElement: T
   ) {
     super();
-    this.designerStateManager = (creator.getPlugin("designer") as TabDesignerPlugin)?.designerStateManager;
-    this.designerStateManager?.initForElement(surveyElement);
+    creator.designerStateManager?.initForElement(surveyElement);
+
     this.actionContainer = this.createActionContainer();
 
     const collapseIcon = "icon-collapse-detail-light_16x16";
@@ -296,8 +294,28 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     }
   }
 
+  public static GetAdorner<V = SurveyElementAdornerBase>(surveyElement: SurveyElement): V {
+    return surveyElement.getPropertyValue(SurveyElementAdornerBase.AdornerValueName) as V;
+  }
+  public static RestoreStateFor(surveyElement: SurveyElement): void {
+    const adorner = SurveyElementAdornerBase.GetAdorner(surveyElement);
+    if (!!adorner) {
+      adorner.restoreState();
+    }
+  }
+
+  protected restoreState(): void {
+    if (!!this.surveyElement) {
+      const state = this.creator.designerStateManager?.getElementState(this.surveyElement);
+      this.collapsed = state.collapsed;
+    }
+  }
+
   protected detachElement(surveyElement: T): void {
     if (surveyElement) {
+      if (surveyElement.getPropertyValue(SurveyElementAdornerBase.AdornerValueName) === this) {
+        surveyElement.setPropertyValue(SurveyElementAdornerBase.AdornerValueName, null);
+      }
       surveyElement.onPropertyChanged.remove(this.selectedPropPageFunc);
       this.updateActionsContainer(surveyElement, true);
     }
@@ -305,9 +323,10 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   protected attachElement(surveyElement: T): void {
     if (surveyElement) {
       surveyElement.onPropertyChanged.add(this.selectedPropPageFunc);
-      this.collapsed = !!surveyElement && (this.designerStateManager?.getElementState(surveyElement).collapsed);
+      this.restoreState();
       this.updateActionsContainer(surveyElement);
       this.updateActionsProperties();
+      surveyElement.setPropertyValue(SurveyElementAdornerBase.AdornerValueName, this);
     }
   }
   protected setSurveyElement(surveyElement: T): void {
@@ -357,11 +376,14 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       this.isOperationsAllow()
     );
   }
+  protected getAllowDragging(options: any): boolean {
+    return options.allowDragging;
+  }
   protected getAllowExpandCollapse(options: any): boolean {
     return this.creator.expandCollapseButtonVisibility != "never" && (options.allowExpandCollapse == undefined || !!options.allowExpandCollapse);
   }
   protected updateElementAllowOptions(options: any, operationsAllow: boolean): void {
-    this.allowDragging = operationsAllow && options.allowDragging;
+    this.allowDragging = operationsAllow && this.getAllowDragging(options);
     this.allowExpandCollapse = this.getAllowExpandCollapse(options);
     this.allowEditOption = (options.allowEdit == undefined || !!options.allowEdit);
     this.updateActionVisibility("delete", operationsAllow && options.allowDelete);

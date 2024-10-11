@@ -1,3 +1,4 @@
+import { DragTypeOverMeEnum } from "survey-core";
 import { PageAdorner } from "../src/components/page";
 import { TabDesignerViewModel } from "../src/components/tabs/designer";
 import { settings } from "../src/creator-settings";
@@ -78,6 +79,30 @@ test("Check page getAnimatedElement methods", () => {
 
   expect(pageAdorner["getInnerAnimatedElements"]()).toEqual([rowElement, footerElement]);
   expect(animationOptions.getAnimatedElement()).toBe(descriptionElement);
+});
+test("Check css when dragging page over top/bottom", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      { name: "page1" },
+    ]
+  };
+  const pageAdorner = new PageAdorner(
+    creator,
+    creator.survey.pages[0]
+  );
+  expect(pageAdorner.css).toBe("");
+  creator.dragDropSurveyElements.draggedElement = creator.survey.pages[0];
+  pageAdorner.dragTypeOverMe = DragTypeOverMeEnum.InsideEmptyPanel;
+  expect(pageAdorner.css).toBe("");
+  pageAdorner.dragTypeOverMe = DragTypeOverMeEnum.Left;
+  expect(pageAdorner.css).toBe("");
+  pageAdorner.dragTypeOverMe = DragTypeOverMeEnum.Right;
+  expect(pageAdorner.css).toBe("");
+  pageAdorner.dragTypeOverMe = DragTypeOverMeEnum.Top;
+  expect(pageAdorner.css).toBe("svc-question__content--drag-over-top");
+  pageAdorner.dragTypeOverMe = DragTypeOverMeEnum.Bottom;
+  expect(pageAdorner.css).toBe("svc-question__content--drag-over-bottom");
 });
 test("Check ghost page adorner actions visibility", (): any => {
   const creator = new CreatorTester();

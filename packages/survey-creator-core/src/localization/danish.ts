@@ -1521,7 +1521,7 @@ export var danishStrings = {
     header: {
       inheritWidthFrom: "Indstillingen \"Samme som beholder\" justerer automatisk bredden på sidehovedindholdsområdet, så den passer ind i det HTML-element, som undersøgelsen er placeret i.",
       textAreaWidth: "Bredden af det sidehovedområde, der indeholder undersøgelsens titel og beskrivelse, målt i pixel.",
-      overlapEnabled: "Gør bunden af sidehovedet overlejret med toppen af undersøgelsen.",
+      overlapEnabled: "Når den er aktiveret, overlejres toppen af undersøgelsen bunden af sidehovedet.",
       mobileHeight: "Når den er indstillet til 0, beregnes højden automatisk for at rumme sidehovedets indhold."
     },
     panellayoutcolumn: {
@@ -2950,7 +2950,6 @@ editorLocalization.locales["da"] = danishStrings;
 // theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "Indstiller undersøgelsens primære baggrundsfarve."
 // header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "Indstillingen \"Samme som beholder\" justerer automatisk bredden på sidehovedindholdsområdet, så den passer ind i det HTML-element, som undersøgelsen er placeret i."
 // header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "Bredden af det sidehovedområde, der indeholder undersøgelsens titel og beskrivelse, målt i pixel."
-// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "Gør bunden af sidehovedet overlejret med toppen af undersøgelsen."
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Accepterer værdier %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Accepterer værdier px."
 // p.effectiveColSpan: "Column span" => "Søjlespænd"
@@ -3005,3 +3004,4 @@ editorLocalization.locales["da"] = danishStrings;
 // pehelp.timerLocation: "Sets the location of a timer on a page." => "Indstiller placeringen af en timer på en side."
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Når den er indstillet til 0, beregnes højden automatisk for at rumme sidehovedets indhold."
 // p.mobileHeight: "Height on smartphones" => "Højde på smartphones"
+// header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Når den er aktiveret, overlejres toppen af undersøgelsen bunden af sidehovedet."

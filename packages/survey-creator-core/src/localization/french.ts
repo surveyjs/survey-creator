@@ -1521,7 +1521,7 @@ var frenchTranslation = {
     header: {
       inheritWidthFrom: "L’option « Identique au conteneur » ajuste automatiquement la largeur de la zone de contenu de l’en-tête pour s’adapter à l’élément HTML dans lequel l’enquête est placée.",
       textAreaWidth: "Largeur de la zone d’en-tête contenant le titre et la description de l’enquête, mesurée en pixels.",
-      overlapEnabled: "Fait en sorte que le bas de l’en-tête soit superposé au haut de l’enquête.",
+      overlapEnabled: "Lorsque cette option est activée, la partie supérieure de l’enquête se superpose au bas de l’en-tête.",
       mobileHeight: "Lorsqu’elle est définie sur 0, la hauteur est calculée automatiquement pour s’adapter au contenu de l’en-tête."
     },
     panellayoutcolumn: {
@@ -2826,7 +2826,6 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "Définit la couleur d’arrière-plan principale de l’enquête."
 // header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "L’option « Identique au conteneur » ajuste automatiquement la largeur de la zone de contenu de l’en-tête pour s’adapter à l’élément HTML dans lequel l’enquête est placée."
 // header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "Largeur de la zone d’en-tête contenant le titre et la description de l’enquête, mesurée en pixels."
-// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "Fait en sorte que le bas de l’en-tête soit superposé au haut de l’enquête."
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Accepte les valeurs %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Accepte les valeurs px."
 // p.effectiveColSpan: "Column span" => "Portée de poteau"
@@ -2881,3 +2880,4 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // pehelp.timerLocation: "Sets the location of a timer on a page." => "Définit l’emplacement d’un minuteur sur une page."
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Lorsqu’elle est définie sur 0, la hauteur est calculée automatiquement pour s’adapter au contenu de l’en-tête."
 // p.mobileHeight: "Height on smartphones" => "Hauteur sur les smartphones"
+// header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Lorsque cette option est activée, la partie supérieure de l’enquête se superpose au bas de l’en-tête."

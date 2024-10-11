@@ -357,7 +357,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       const pgTabs = this.propertyGrid.survey.pages.map(p => {
         const action = new MenuButton({
           id: p.name,
-          locTooltipName: getLocString("pe.tabs." + p.name),
+          tooltip: p.title,
           iconName: pgTabIcons[p.name] || pgTabIcons["undefined"],
           active: p.name === this.propertyGrid.survey.currentPage.name,
           pressed: false,

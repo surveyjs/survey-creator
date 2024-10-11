@@ -1521,7 +1521,7 @@ export const thStrings = {
     header: {
       inheritWidthFrom: "ตัวเลือก \"เช่นเดียวกับคอนเทนเนอร์\" ปรับความกว้างของพื้นที่เนื้อหาหัวเรื่องให้เหมาะสมกับองค์ประกอบ HTML ที่แบบสำรวจอยู่ในนั้น",
       textAreaWidth: "ความกว้างของพื้นที่หัวเรื่องที่มีชื่อแบบสำรวจและคำอธิบาย วัดเป็นพิกเซล",
-      overlapEnabled: "ทำให้ส่วนล่างของหัวเรื่องซ้อนทับกับส่วนบนของแบบสำรวจ",
+      overlapEnabled: "เมื่อเปิดใช้งาน ด้านบนของแบบสํารวจจะซ้อนทับด้านล่างของส่วนหัว",
       mobileHeight: "เมื่อตั้งค่าเป็น 0 ความสูงจะถูกคํานวณโดยอัตโนมัติเพื่อรองรับเนื้อหาของส่วนหัว"
     },
     panellayoutcolumn: {
@@ -1754,3 +1754,4 @@ editorLocalization.locales["th"] = thStrings;
 // pehelp.timerLocation: "Sets the location of a timer on a page." => "ตั้งค่าตําแหน่งของตัวจับเวลาบนหน้า"
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "เมื่อตั้งค่าเป็น 0 ความสูงจะถูกคํานวณโดยอัตโนมัติเพื่อรองรับเนื้อหาของส่วนหัว"
 // p.mobileHeight: "Height on smartphones" => "ความสูงบนสมาร์ทโฟน"
+// header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "เมื่อเปิดใช้งาน ด้านบนของแบบสํารวจจะซ้อนทับด้านล่างของส่วนหัว"
