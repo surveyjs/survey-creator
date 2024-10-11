@@ -288,6 +288,8 @@ test("Left toolbox - scroll", async (t) => {
     await t
       .resizeWindow(1510, 870);
     await takeElementScreenshot("toolbox-left-scroll.png", toolboxElement, t, comparer);
+    await t.hover(toolboxItem);
+    await takeElementScreenshot("toolbox-left-scroll-hover-item.png", creatorTabElement, t, comparer);
 
     await t
       .hover(translationTab) // move cursor from toolboxItem
@@ -315,17 +317,20 @@ test("Right toolbox - scroll", async (t) => {
     await changeToolboxScrolling(true);
 
     const toolboxElement = Selector(".svc-toolbox");
+    const creatorTabElement = Selector(".svc-creator-tab");
     await t
       .resizeWindow(1510, 870);
     await takeElementScreenshot("toolbox-right-scroll.png", toolboxElement, t, comparer);
+    await t.hover(toolboxItem);
+    await takeElementScreenshot("toolbox-right-scroll-hover-item.png", creatorTabElement, t, comparer);
 
     await t
       .hover(translationTab) // move cursor from toolboxItem
       .resizeWindow(1240, 870);
-    await takeElementScreenshot("toolbox-right-scroll-compact.png", toolboxElement, t, comparer);
+    await takeElementScreenshot("toolbox-right-scroll-compact.png", creatorTabElement, t, comparer);
 
     await t.hover(toolboxItem);
-    await takeElementScreenshot("toolbox-right-scroll-compact-hover-item.png", toolboxElement, t, comparer);
+    await takeElementScreenshot("toolbox-right-scroll-compact-hover-item.png", creatorTabElement, t, comparer);
   });
 });
 
@@ -344,16 +349,17 @@ test("Right toolbox (rtl) - scroll", async (t) => {
       .click(collapseButtonSelector);
     await changeToolboxScrolling(true);
     const toolboxElement = Selector(".svc-toolbox");
-
+    const creatorTabElement = Selector(".svc-creator-tab");
     await t
       .hover(translationTab) // move cursor from toolboxItem
       .resizeWindow(1510, 870);
     await takeElementScreenshot("toolbox-right-rtl-scroll.png", toolboxElement, t, comparer);
-
+    await t.hover(toolboxItem);
+    await takeElementScreenshot("toolbox-right-rtl-scroll-hover-item.png", toolboxElement, t, comparer);
     await t
       .hover(translationTab) // move cursor from toolboxItem
       .resizeWindow(1240, 870);
-    await takeElementScreenshot("toolbox-right-rtl-scroll-compact.png", toolboxElement, t, comparer);
+    await takeElementScreenshot("toolbox-right-rtl-scroll-compact.png", creatorTabElement, t, comparer);
 
     await t.hover(toolboxItem);
     await takeElementScreenshot("toolbox-right-rtl-scroll-compact-hover-item.png", toolboxElement, t, comparer);

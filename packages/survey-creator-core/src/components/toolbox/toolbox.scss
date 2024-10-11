@@ -13,10 +13,11 @@ svc-toolbox {
   width: var(--ctr-toolbox-min-width, 224.984375px /*calcSize(28)*/);
   .spg-search-editor_container {
     background: var(--ctr-toolbox-background-color, $background-dim);
-    padding-top: calcSize(1);
-    padding-inline-end: calcSize(0.5);
-    padding-bottom: calcSize(2.5);
-    padding-inline-start: calcSize(1.5);
+    padding-top: var(--ctr-toolbox-search-padding-top, calcSize(1));
+    padding-inline-end: var(--ctr-toolbox-search-padding-right, calcSize(1));
+    padding-bottom: var(--ctr-toolbox-search-padding-bottom, calcSize(2.5));
+    padding-inline-start: var(--ctr-toolbox-search-padding-left, calcSize(1.5));
+
     width: unset;
     flex-grow: 1;
     border-bottom: none;
@@ -211,7 +212,7 @@ svc-toolbox {
   flex-direction: column;
   box-sizing: border-box;
   background: var(--ctr-toolbox-background-color, $background-dim);
-  border-bottom: var(--ctr-toolbox-search-border-width-bottom, 1px) solid var(--ctr-toolbox-search-border-color, #DCDCDC);
+  border-bottom: var(--ctr-toolbox-search-border-width-bottom, 1px) solid var(--ctr-toolbox-search-border-color, $border);
 
   svg {
     pointer-events: none;
@@ -240,8 +241,8 @@ svc-toolbox {
 
 .svc-toolbox__category-header-wrapper {
   padding: var(--ctr-toolbox-group-header-margin-top, 0px) var(--ctr-toolbox-group-header-margin-left, 0px) var(--ctr-toolbox-group-header-margin-bottom, 0px) var(--ctr-toolbox-group-header-margin-left, 0px);
-  margin-inline-start: calc(0px - var(--ctr-toolbox-group-padding-left, -12px));
-  margin-inline-end: calc(0px - var(--ctr-toolbox-group-padding-right, -12px));
+  margin-inline-start: calc(0px - var(--ctr-toolbox-group-padding-left, 0px));
+  margin-inline-end: calc(0px - var(--ctr-toolbox-group-padding-right, 0px));
   align-self: stretch;
 }
 .svc-toolbox__category-header {
