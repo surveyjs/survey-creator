@@ -189,7 +189,7 @@ export class SidebarModel extends Base {
     return this._activePage;
   }
   public setActivePage(newPage: SidebarPageModel): void {
-    if (!!this._activePage && !!this._activePage.deactivateCallback) {
+    if (!!this._activePage && this._activePage.id !== newPage.id && !!this._activePage.deactivateCallback) {
       this._activePage.deactivateCallback();
     }
     this.pages.forEach(page => page.visible = false);
