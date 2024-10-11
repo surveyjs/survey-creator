@@ -92,7 +92,7 @@ svc-toolbox {
   overflow-x: hidden;
   width: calcSize(2);
   margin-inline-start: calcSize(-0.5);
-  display: var(--ctr-toolbox-scrollbar-display, block);
+  display: var(--ctr-toolbox-scrollbar-display, none);
   z-index: 30;
   @-moz-document url-prefix() {
     scrollbar-width: thin;
