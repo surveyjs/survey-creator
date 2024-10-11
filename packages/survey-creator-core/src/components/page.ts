@@ -34,8 +34,6 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
 
   constructor(creator: SurveyCreatorModel, page: PageModel) {
     super(creator, page);
-    this.actionContainer.sizeMode = "small";
-    this.expandCollapseAction.needSeparator = true;
     this.questionTypeSelectorModel = this.creator.getQuestionTypeSelectorModel(
       (type) => {
         this.currentAddQuestionType = type;
@@ -160,7 +158,14 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   }
 
   protected createActionContainer(): ActionContainer<Action> {
-    return new ActionContainer();
+    const container = new ActionContainer();
+    container.sizeMode = "small";
+    return container;
+  }
+  protected getExpandCollapseAction(): IAction {
+    const action = super.getExpandCollapseAction();
+    action.needSeparator = true;
+    return action;
   }
 
   private addGhostPage = (selectCurrentPage: boolean = true) => {

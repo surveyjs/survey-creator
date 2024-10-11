@@ -210,6 +210,9 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   public get renderedCollapsed(): boolean {
     return !!this._renderedCollapsed;
   }
+  protected createActionContainers() {
+    this.actionContainer = this.createActionContainer();
+  }
 
   protected createActionContainer(): ActionContainer {
     const actionContainer = new SurveyElementActionContainer();
@@ -266,32 +269,9 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     surveyElement: T
   ) {
     super();
-    creator.designerStateManager?.initForElement(surveyElement);
-
-    this.actionContainer = this.createActionContainer();
-
-    const collapseIcon = "icon-collapse-detail-light_16x16";
-    const expandIcon = "icon-restore_16x16";
-    this.expandCollapseAction = {
-      id: "collapse",
-      css: "sv-action-bar-item--secondary sv-action-bar-item--collapse",
-      iconName: new ComputedUpdater<string>(() => this.collapsed ? expandIcon : collapseIcon) as any,
-      iconSize: 16,
-      action: () => {
-        this.collapsed = !this.collapsed;
-      }
-    };
+    this.expandCollapseAction = this.getExpandCollapseAction();
+    this.createActionContainers();
     this.attachToUI(surveyElement);
-  }
-  protected updateActionsContainer(surveyElement: SurveyElement, clear: boolean = false) {
-    if(clear) {
-      this.actionContainer.actions.forEach(action => action.dispose && action.dispose());
-    } else {
-      const actions: Array<Action> = [];
-      this.buildActions(actions);
-      this.creator.onElementMenuItemsChanged(surveyElement, actions);
-      this.actionContainer.setItems(actions);
-    }
   }
 
   public static GetAdorner<V = SurveyElementAdornerBase>(surveyElement: SurveyElement): V {
@@ -322,6 +302,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   }
   protected attachElement(surveyElement: T): void {
     if (surveyElement) {
+      this.creator?.designerStateManager?.initForElement(surveyElement);
       surveyElement.onPropertyChanged.add(this.selectedPropPageFunc);
       this.restoreState();
       this.updateActionsContainer(surveyElement);
@@ -368,9 +349,31 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     if (!isSelected) return;
     this.updateActionsProperties();
   }
+  protected getExpandCollapseAction(): IAction {
+    const collapseIcon = "icon-collapse-detail-light_16x16";
+    const expandIcon = "icon-restore_16x16";
+    return {
+      id: "collapse",
+      css: "sv-action-bar-item--secondary sv-action-bar-item--collapse",
+      iconName: new ComputedUpdater<string>(() => this.collapsed ? expandIcon : collapseIcon) as any,
+      iconSize: 16,
+      action: () => {
+        this.collapsed = !this.collapsed;
+      }
+    };
+  }
+  protected updateActionsContainer(surveyElement: SurveyElement, clear: boolean = false) {
+    if(clear) {
+      this.actionContainer.actions.forEach(action => action.dispose && action.dispose());
+    } else {
+      const actions: Array<Action> = [];
+      this.buildActions(actions);
+      this.creator.onElementMenuItemsChanged(surveyElement, actions);
+      this.actionContainer.setItems(actions);
+    }
+  }
   protected updateActionsProperties(): void {
     if (this.isDisposed) return;
-    this.expandCollapseAction.visible = this.allowExpandCollapse;
     this.updateElementAllowOptions(
       this.creator.getElementAllowOperations(this.surveyElement),
       this.isOperationsAllow()
@@ -388,6 +391,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this.allowEditOption = (options.allowEdit == undefined || !!options.allowEdit);
     this.updateActionVisibility("delete", operationsAllow && options.allowDelete);
     this.updateActionVisibility("duplicate", operationsAllow && options.allowCopy);
+    this.updateActionVisibility("collapse", this.allowExpandCollapse);
     if (options.allowShowSettings === undefined) {
       const settingsVisibility = (options.allowEdit !== undefined) ? (operationsAllow && options.allowEdit) : this.creator.sidebar.flyoutMode;
       this.updateActionVisibility("settings", settingsVisibility);
@@ -406,11 +410,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     action.visible = isVisible;
   }
   public getActionById(id: string): Action {
-    let actions = this.actionContainer.actions;
-    for (var i = 0; i < actions.length; i++) {
-      if (actions[i].id === id) return actions[i];
-    }
-    return null;
+    return this.actionContainer.getActionById(id);
   }
   protected buildActions(items: Array<Action>) {
     items.push(

@@ -62,10 +62,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     public templateData: SurveyTemplateRendererTemplateData
   ) {
     super(creator, surveyElement);
-    this.actionContainer.sizeMode = "small";
-    this.topActionContainer = new ActionContainer();
-    this.topActionContainer.sizeMode = "small";
-    this.topActionContainer.setItems([this.expandCollapseAction]);
     if (
       surveyElement.isQuestion &&
       !!surveyElement["setCanShowOptionItemCallback"]
@@ -288,6 +284,20 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       return;
     }
     super.hover(event, element);
+  }
+  protected createActionContainers(): void {
+    super.createActionContainers();
+    this.actionContainer.sizeMode = "small";
+    this.topActionContainer = new ActionContainer();
+    this.topActionContainer.sizeMode = "small";
+    this.topActionContainer.setItems([this.expandCollapseAction]);
+  }
+  public getActionById(id: string): Action {
+    let res = super.getActionById(id);
+    if(!res) {
+      res = this.topActionContainer.getActionById(id);
+    }
+    return res;
   }
   protected updateActionsProperties(): void {
     if (this.isDisposed) return;
