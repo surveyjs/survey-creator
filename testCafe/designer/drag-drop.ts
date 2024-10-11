@@ -235,7 +235,7 @@ test("Drag Drop Toolbox Responsivity", async (t) => {
     .expect(tabbedMenuItemSelector.hasClass("sv-action--hidden")).notOk()
     .resizeWindow(970, 632)
     .expect(tabbedMenuItemSelector.hasClass("sv-action--hidden")).ok()
-    .click(".svc-toolbox__tool.sv-dots");
+    .click(".svc-toolbox__tool--dots");
 
   const PopupSelector = Selector(".sv-popup .sv-popup__container").filterVisible();
   const DynamicPanelItem = PopupSelector.find(".sv-list__item").withText("Dynamic Panel");
