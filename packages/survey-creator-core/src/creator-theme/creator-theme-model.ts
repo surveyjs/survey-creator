@@ -23,13 +23,17 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
       "--sjs-secondary-background-500": "#FF9814FF",
       "--sjs-secondary-background-25": "#FF981440",
       "--sjs-secondary-background-10": "#FF98141A",
-      "--sjs-base-unit": "8px"
+      "--sjs-font-unit": "16px",
+      "--sjs-base-unit": "8px",
+      "--sjs-surface-base-unit": "8px",
     }
   };
   cssVariables?: { [index: string]: string } = {};
 
   @property() themeName: string;
   @property() scale: number;
+  @property() fontSize: number;
+  @property() surfaceBaseUnit: number;
 
   public onThemeSelected = new EventBase<CreatorThemeModel, { theme: ICreatorTheme }>();
   public onThemePropertyChanged = new EventBase<CreatorThemeModel, { name: string, value: any }>();
@@ -69,8 +73,12 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
       this.onThemeSelected.fire(this, { theme: this.toJSON() });
     } else if (name.indexOf("--") === 0) {
       this.setThemeCssVariablesChanges(name, newValue);
+    } else if (name == "fontSize") {
+      this.setThemeCssVariablesChanges("--sjs-font-unit", (newValue * 16 / 100) + "px");
     } else if (name == "scale") {
       this.setThemeCssVariablesChanges("--sjs-base-unit", (newValue * 8 / 100) + "px");
+    } else if (name == "surfaceBaseUnit") {
+      this.setThemeCssVariablesChanges("--sjs-surface-base-unit", (newValue * 8 / 100) + "px");
     }
   }
 
@@ -106,13 +114,21 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
     if (json.cssVariables) {
       super.fromJSON(json.cssVariables, options);
 
+      this.fontSize = !!this["--sjs-font-unit"] ? roundTo2Decimals(parseFloat(this["--sjs-font-unit"]) * 100 / 16) : undefined;
       this.scale = !!this["--sjs-base-unit"] ? roundTo2Decimals(parseFloat(this["--sjs-base-unit"]) * 100 / 8) : undefined;
+      this.surfaceBaseUnit = !!this["--sjs-surface-base-unit"] ? roundTo2Decimals(parseFloat(this["--sjs-surface-base-unit"]) * 100 / 8) : undefined;
     }
   }
 
   toJSON(options?: ISaveToJSONOptions): ICreatorTheme {
+    if (this.fontSize !== undefined) {
+      this["--sjs-font-unit"] = (this.fontSize * 16 / 100) + "px";
+    }
     if (this.scale !== undefined) {
       this["--sjs-base-unit"] = (this.scale * 8 / 100) + "px";
+    }
+    if (this.surfaceBaseUnit !== undefined) {
+      this["--sjs-surface-base-unit"] = (this.surfaceBaseUnit * 8 / 100) + "px";
     }
 
     const result = super.toJSON(options);
@@ -135,7 +151,7 @@ Serializer.addClass(
     {
       type: "dropdown",
       name: "themeName",
-      choices: PredefinedCreatorThemes.map(theme => ({ value: theme, text: getLocString("theme.creatorNames." + theme) })),
+      choices: PredefinedCreatorThemes.map(theme => ({ value: theme, text: getLocString("creatortheme.names." + theme) })),
     }
   ],
   (json) => { return new CreatorThemeModel(); }
@@ -145,30 +161,90 @@ Serializer.addProperties("creatortheme", [
   {
     type: "color",
     name: "--sjs-special-background",
-    displayName: "Surface background"
+    onPropertyEditorUpdate: function (obj: any, editor: any) {
+      if (!!editor) {
+        editor.title = getLocString("creatortheme.--sjs-special-background");
+      }
+    }
   }, {
     type: "color",
     name: "--sjs-primary-background-500",
-    displayName: "Accent colors"
+    onPropertyEditorUpdate: function (obj: any, editor: any) {
+      if (!!editor) {
+        editor.title = getLocString("creatortheme.--sjs-primary-background-500");
+      }
+    },
   }, {
     type: "color",
     name: "--sjs-secondary-background-500",
     displayName: ""
   }, {
     type: "spinedit",
-    name: "scale",
-    displayName: "Scaling",
+    name: "--sjs-font-unit",
+    visible: false,
+  }, {
+    type: "spinedit",
+    name: "fontSize",
     isSerializable: false,
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
         editor.unit = "%";
         editor.min = 0;
         editor.step = 5;
+        editor.title = getLocString("creatortheme.fontSize");
+        editor.titleLocation = "left";
+        editor.descriptionLocation = "hidden";
+      }
+    }
+  }, {
+    type: "spinedit",
+    name: "scale",
+    isSerializable: false,
+    onPropertyEditorUpdate: function (obj: any, editor: any) {
+      if (!!editor) {
+        editor.unit = "%";
+        editor.min = 0;
+        editor.step = 5;
+        editor.title = getLocString("creatortheme.userInterfaceBaseUnit");
+        editor.titleLocation = "left";
+        editor.descriptionLocation = "hidden";
       }
     }
   }, {
     type: "spinedit",
     name: "--sjs-base-unit",
     visible: false,
+  }, {
+    type: "spinedit",
+    name: "scale",
+    isSerializable: false,
+    onPropertyEditorUpdate: function (obj: any, editor: any) {
+      if (!!editor) {
+        editor.unit = "%";
+        editor.min = 0;
+        editor.step = 5;
+        editor.title = getLocString("creatortheme.userInterfaceBaseUnit");
+        editor.titleLocation = "left";
+        editor.descriptionLocation = "hidden";
+      }
+    }
+  }, {
+    type: "spinedit",
+    name: "--sjs-surface-base-unit",
+    visible: false,
+  }, {
+    type: "spinedit",
+    name: "surfaceBaseUnit",
+    isSerializable: false,
+    onPropertyEditorUpdate: function (obj: any, editor: any) {
+      if (!!editor) {
+        editor.unit = "%";
+        editor.min = 0;
+        editor.step = 5;
+        editor.title = getLocString("creatortheme.surfaceBaseUnit");
+        editor.titleLocation = "left";
+        editor.descriptionLocation = "hidden";
+      }
+    }
   },
 ]);

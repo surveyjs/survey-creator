@@ -94,6 +94,11 @@ jobs:
 
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
+      npm run build:themes
+    displayName: 'Build Creator V2 Core themes'
+
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
       npm run build:i18n
     displayName: 'Build Creator V2 Core i18n'
 

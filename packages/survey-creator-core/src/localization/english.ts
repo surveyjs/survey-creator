@@ -1710,7 +1710,15 @@ export var enStrings = {
       brown: "Brown",
       green: "Green"
     },
-    creatorNames: {
+  },
+  creatortheme: {
+    "--sjs-special-background": "Surface background",
+    "--sjs-primary-background-500": "Accent colors",
+    "surfaceBaseUnit": "Surface",
+    "userInterfaceBaseUnit": "User interface",
+    "fontSize": "Font",
+
+    names: {
       "sc2020": "Survey Creator 2020",
       "default-light": "Light",
       "default-dark": "Dark",
