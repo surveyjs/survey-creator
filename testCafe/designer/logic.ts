@@ -396,6 +396,7 @@ test("Modified rules without saving", async (t) => {
     .click(logicDetailButtonElement.nth(0))
     .click(logicQuestionSelector)
     .click(getListItemByText("q3"))
+    .wait(1000)
     .typeText(logicQuestionValueSelector, "45", { replace: true, paste: true })
     .click(logicActionSelector)
     .click(getListItemByText("Complete survey"));

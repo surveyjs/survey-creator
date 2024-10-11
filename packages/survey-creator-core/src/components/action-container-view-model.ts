@@ -11,7 +11,7 @@ import {
   IAnimationConsumer,
   CssClassBuilder
 } from "survey-core";
-import { CreatorBase, SurveyCreatorModel } from "../creator-base";
+import { SurveyCreatorModel } from "../creator-base";
 import { isPanelDynamic } from "../survey-elements";
 import { cleanHtmlElementAfterAnimation, prepareElementForVerticalAnimation } from "survey-core";
 
@@ -210,6 +210,9 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   public get renderedCollapsed(): boolean {
     return !!this._renderedCollapsed;
   }
+  protected createActionContainers() {
+    this.actionContainer = this.createActionContainer();
+  }
 
   protected createActionContainer(): ActionContainer {
     const actionContainer = new SurveyElementActionContainer();
@@ -250,44 +253,25 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     event.stopPropagation();
   }
   private allowEditOption: boolean;
-  private selectedPropPageFunc: (sender: Base, options: any) => void;
-  private sidebarFlyoutModeChangedFunc: (sender: Base, options: any) => void;
-
+  private selectedPropPageFunc: (sender: Base, options: any) => void = (_, options) => {
+    if (options.name === "isSelectedInDesigner") {
+      this.onElementSelectedChanged(options.newValue);
+    }
+  };
+  private sidebarFlyoutModeChangedFunc: (sender: Base, options: any) => void = (_, options) => {
+    if (options.name === "flyoutMode") {
+      this.updateActionsProperties();
+    }
+  };;
+  protected surveyElement: T
   constructor(
     public creator: SurveyCreatorModel,
-    protected surveyElement: T
+    surveyElement: T
   ) {
     super();
-    creator.designerStateManager?.initForElement(surveyElement);
-    this.selectedPropPageFunc = (sender: Base, options: any) => {
-      if (options.name === "isSelectedInDesigner") {
-        this.onElementSelectedChanged(options.newValue);
-      }
-    };
-    this.sidebarFlyoutModeChangedFunc = (sender: Base, options: any) => {
-      if (options.name === "flyoutMode") {
-        this.updateActionsProperties();
-      }
-    };
-    this.actionContainer = this.createActionContainer();
-
-    const collapseIcon = "icon-collapse-detail-light_16x16";
-    const expandIcon = "icon-restore_16x16";
-    this.expandCollapseAction = {
-      id: "collapse",
-      css: "sv-action-bar-item--secondary sv-action-bar-item--collapse",
-      iconName: new ComputedUpdater<string>(() => this.collapsed ? expandIcon : collapseIcon) as any,
-      iconSize: 16,
-      action: () => {
-        this.collapsed = !this.collapsed;
-      }
-    };
-    this.restoreState();
-    this.setSurveyElement(surveyElement);
-    this.creator.sidebar.onPropertyChanged.add(this.sidebarFlyoutModeChangedFunc);
-    this.setShowAddQuestionButton(true);
-    this.expandCollapseAction.visible = this.allowExpandCollapse;
-    this.creator.expandCollapseManager.add(this);
+    this.expandCollapseAction = this.getExpandCollapseAction();
+    this.createActionContainers();
+    this.attachToUI(surveyElement);
   }
 
   public static GetAdorner<V = SurveyElementAdornerBase>(surveyElement: SurveyElement): V {
@@ -313,11 +297,16 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
         surveyElement.setPropertyValue(SurveyElementAdornerBase.AdornerValueName, null);
       }
       surveyElement.onPropertyChanged.remove(this.selectedPropPageFunc);
+      this.updateActionsContainer(surveyElement, true);
     }
   }
   protected attachElement(surveyElement: T): void {
     if (surveyElement) {
+      this.creator?.designerStateManager?.initForElement(surveyElement);
       surveyElement.onPropertyChanged.add(this.selectedPropPageFunc);
+      this.restoreState();
+      this.updateActionsContainer(surveyElement);
+      this.updateActionsProperties();
       surveyElement.setPropertyValue(SurveyElementAdornerBase.AdornerValueName, this);
     }
   }
@@ -325,15 +314,6 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this.detachElement(this.surveyElement);
     this.surveyElement = surveyElement;
     this.attachElement(this.surveyElement);
-    if (this.surveyElement) {
-      var actions: Array<Action> = [];
-      this.buildActions(actions);
-      this.creator.onElementMenuItemsChanged(this.surveyElement, actions);
-      const prevActions = this.actionContainer.actions;
-      prevActions.forEach(action => action.dispose && action.dispose());
-      this.actionContainer.setItems(actions);
-      this.updateActionsProperties();
-    }
   }
 
   protected checkActionProperties(): void {
@@ -341,22 +321,56 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       this.updateActionsProperties();
     }
   }
-
-  public dispose(): void {
-    super.dispose();
+  public attachToUI(surveyElement: T, rootElement?: HTMLElement) {
+    if(!!rootElement) {
+      this.rootElement = rootElement;
+    }
+    if(this.surveyElement != surveyElement) {
+      this.setSurveyElement(surveyElement);
+      this.creator.sidebar.onPropertyChanged.add(this.sidebarFlyoutModeChangedFunc);
+      this.creator.expandCollapseManager.add(this);
+    }
+  }
+  public detachFromUI() {
     this.rootElement = undefined;
     this.detachElement(this.surveyElement);
+    this.surveyElement = undefined;
+    this.creator.sidebar.onPropertyChanged.remove(this.sidebarFlyoutModeChangedFunc);
     this.creator.expandCollapseManager.remove(this);
+  }
+  public dispose(): void {
+    this.detachFromUI();
     if (!this.actionContainer.isDisposed) {
       this.actionContainer.dispose();
     }
-    this.creator.sidebar.onPropertyChanged.remove(this.sidebarFlyoutModeChangedFunc);
-    this.selectedPropPageFunc = undefined;
-    this.sidebarFlyoutModeChangedFunc = undefined;
+    super.dispose();
   }
   protected onElementSelectedChanged(isSelected: boolean): void {
     if (!isSelected) return;
     this.updateActionsProperties();
+  }
+  protected getExpandCollapseAction(): IAction {
+    const collapseIcon = "icon-collapse-detail-light_16x16";
+    const expandIcon = "icon-restore_16x16";
+    return {
+      id: "collapse",
+      css: "sv-action-bar-item--secondary sv-action-bar-item--collapse",
+      iconName: new ComputedUpdater<string>(() => this.collapsed ? expandIcon : collapseIcon) as any,
+      iconSize: 16,
+      action: () => {
+        this.collapsed = !this.collapsed;
+      }
+    };
+  }
+  protected updateActionsContainer(surveyElement: SurveyElement, clear: boolean = false) {
+    if(clear) {
+      this.actionContainer.actions.forEach(action => action.dispose && action.dispose());
+    } else {
+      const actions: Array<Action> = [];
+      this.buildActions(actions);
+      this.creator.onElementMenuItemsChanged(surveyElement, actions);
+      this.actionContainer.setItems(actions);
+    }
   }
   protected updateActionsProperties(): void {
     if (this.isDisposed) return;
@@ -377,6 +391,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this.allowEditOption = (options.allowEdit == undefined || !!options.allowEdit);
     this.updateActionVisibility("delete", operationsAllow && options.allowDelete);
     this.updateActionVisibility("duplicate", operationsAllow && options.allowCopy);
+    this.updateActionVisibility("collapse", this.allowExpandCollapse);
     if (options.allowShowSettings === undefined) {
       const settingsVisibility = (options.allowEdit !== undefined) ? (operationsAllow && options.allowEdit) : this.creator.sidebar.flyoutMode;
       this.updateActionVisibility("settings", settingsVisibility);
@@ -395,11 +410,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     action.visible = isVisible;
   }
   public getActionById(id: string): Action {
-    let actions = this.actionContainer.actions;
-    for (var i = 0; i < actions.length; i++) {
-      if (actions[i].id === id) return actions[i];
-    }
-    return null;
+    return this.actionContainer.getActionById(id);
   }
   protected buildActions(items: Array<Action>) {
     items.push(
