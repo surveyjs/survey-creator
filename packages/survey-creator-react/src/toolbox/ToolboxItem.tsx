@@ -130,27 +130,29 @@ export class SurveyCreatorToolboxItem extends CreatorModelElement<
       :
       null
     );
-    return attachKey2click(
+    const item = attachKey2click(
+      <div
+        className={this.item.renderedCss}
+        tabIndex={0}
+        role="button"
+        aria-label={this.item.tooltip}
+        onClick={(event: any) => {
+          event.persist();
+          this.model.click(event);
+        }}
+      >
+        <span className="svc-toolbox__item-container">
+          {!!this.item.iconName ? <SvgIcon size={24} iconName={this.item.iconName}></SvgIcon> : null}
+        </span>
+        {(this.props.isCompact ?
+          null
+          :
+          <span className="svc-toolbox__item-title">{this.item.title}</span>
+        )}
+      </div>);
+    return (
       <>
-        <div
-          className={this.item.renderedCss}
-          tabIndex={0}
-          role="button"
-          aria-label={this.item.tooltip}
-          onClick={(event: any) => {
-            event.persist();
-            this.model.click(event);
-          }}
-        >
-          <span className="svc-toolbox__item-container">
-            {!!this.item.iconName ? <SvgIcon size={24} iconName={this.item.iconName}></SvgIcon> : null}
-          </span>
-          {(this.props.isCompact ?
-            null
-            :
-            <span className="svc-toolbox__item-title">{this.item.title}</span>
-          )}
-        </div>
+        {item}
         {banner}
       </>
     );
