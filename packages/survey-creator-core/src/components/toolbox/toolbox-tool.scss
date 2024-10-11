@@ -60,7 +60,6 @@
 //is visible only on hover
 .svc-toolbox__item-banner {
   opacity: 0;
-  display: none;
   box-sizing: border-box;
   align-items: center;
   margin-inline-end: 0;
@@ -74,7 +73,7 @@
   white-space: nowrap;
   @include smallBold;
   color: var(--ctr-toolbox-item-text-color, $foreground);
-
+  transition: opacity $creator-transition-duration;
   background-color: $background;
   /* Shadow / Medium */
   border-radius: var(--ctr-tooltip-corder-radius, calcSize(12.5));
@@ -133,7 +132,7 @@
 }
 
 .svc-toolbox__tool:hover,
-.svc-toolbox__item:focus {
+.svc-toolbox__tool:focus-within {
   .svc-toolbox__item-banner {
     display: var(--ctr-toolbox-item-banner-display, flex);
     opacity: 1;
@@ -176,6 +175,15 @@
       var(--ctr-toolbox-item-shadow-hovered-2-blur, 2px) var(--ctr-toolbox-item-shadow-hovered-2-spread, 0px)
       var(--ctr-toolbox-item-shadow-hovered-2-color, transparent);
   transition: 0.1s ease-in-out;
+
+  .svc-toolbox--compact {
+    .svc-toolbox__item:focus,
+    .svc-toolbox__tool--has-subitems:hover > .svc-toolbox__tool-content > .svc-toolbox__item,
+    .svc-toolbox__item:hover {
+      background-color: transparent;
+      box-shadow: none;
+    }
+  }
 
   .svc-toolbox__item-title {
     color: var(--ctr-toolbox-item-text-color-hovered, $foreground);
