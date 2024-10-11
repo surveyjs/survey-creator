@@ -425,6 +425,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       }
       if (options.name == "logoPosition") {
         this.creator.survey.logoPosition = options.value;
+        this.model.survey.logoPosition = options.value;
       }
       this.resetTheme.enabled = true;
       this.saveThemeAction.enabled = true;
