@@ -733,6 +733,8 @@ export class SurveyCreatorModel extends Base
    */
   public onDragDropAllow: EventBase<SurveyCreatorModel, DragDropAllowEvent> = this.addCreatorEvent<SurveyCreatorModel, DragDropAllowEvent>();
 
+  public onDragOverLocationCalculating: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
+
   /**
    * An event that allows you to create a custom message panel.
    * 
@@ -1878,6 +1880,7 @@ export class SurveyCreatorModel extends Base
       settings.dragDrop.restrictDragQuestionBetweenPages;
     this.dragDropSurveyElements = new DragDropSurveyElements(null, this);
     this.dragDropSurveyElements.onGetMaxNestedPanels = (): number => { return this.maxNestedPanels; };
+    this.dragDropSurveyElements.onDragOverLocationCalculating = (options) => { this.onDragOverLocationCalculating.fire(this, options); };
     let isDraggedFromToolbox = false;
     this.dragDropSurveyElements.onDragStart.add((sender, options) => {
       isDraggedFromToolbox = !sender.draggedElement.parent && !sender.draggedElement.isPage;

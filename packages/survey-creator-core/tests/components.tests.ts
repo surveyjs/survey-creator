@@ -984,15 +984,15 @@ test("QuestionRatingAdornerViewModel allowAdd allowRemove on property readonly",
 });
 
 test("calculateDragOverLocation", () => {
-  let location = calculateDragOverLocation(150, 120, <any>{ getBoundingClientRect: () => ({ x: 100, y: 100, width: 300, height: 100 }) });
+  let location = calculateDragOverLocation(150, 120, { x: 100, y: 100, width: 300, height: 100 });
   expect(location).toBe(DragTypeOverMeEnum.Left);
   // creatorSettings.dragDrop.allowDragToTheSameLine = false;
-  location = calculateDragOverLocation(150, 120, <any>{ getBoundingClientRect: () => ({ x: 100, y: 100, width: 300, height: 100 }) }, true);
+  location = calculateDragOverLocation(150, 120, { x: 100, y: 100, width: 300, height: 100 }, "top-bottom");
   expect(location).toBe(DragTypeOverMeEnum.Top);
-  location = calculateDragOverLocation(350, 170, <any>{ getBoundingClientRect: () => ({ x: 100, y: 100, width: 300, height: 100 }) }, true);
+  location = calculateDragOverLocation(350, 170, { x: 100, y: 100, width: 300, height: 100 }, "top-bottom");
   expect(location).toBe(DragTypeOverMeEnum.Bottom);
   // creatorSettings.dragDrop.allowDragToTheSameLine = true;
-  location = calculateDragOverLocation(350, 170, <any>{ getBoundingClientRect: () => ({ x: 100, y: 100, width: 300, height: 100 }) });
+  location = calculateDragOverLocation(350, 170, { x: 100, y: 100, width: 300, height: 100 });
   expect(location).toBe(DragTypeOverMeEnum.Right);
 });
 
