@@ -365,7 +365,7 @@ test("Right toolbox (rtl) - scroll", async (t) => {
     await takeElementScreenshot("toolbox-right-rtl-scroll-compact.png", creatorTabElement, t, comparer);
 
     await t.hover(toolboxItem);
-    await takeElementScreenshot("toolbox-right-rtl-scroll-compact-hover-item.png", toolboxElement, t, comparer);
+    await takeElementScreenshot("toolbox-right-rtl-scroll-compact-hover-item.png", creatorTabElement, t, comparer);
   });
 });
 test("Toolbox with search", async (t) => {
@@ -474,7 +474,7 @@ test("Toolbox RTL with search", async (t) => {
 test("Toolbox RTL with search compact", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     const toolboxElement = Selector(".svc-toolbox");
-
+    const creatorTabElement = Selector(".svc-creator-tab");
     await setJSON({ pages: [{ name: "page1" }] });
     await ClientFunction(() => {
       window["creator"].toolbox.searchEnabled = true;
@@ -482,13 +482,13 @@ test("Toolbox RTL with search compact", async (t) => {
     })();
 
     await t.resizeWindow(1240, 870);
-    await takeElementScreenshot("toolbox-search-rtl-compact.png", toolboxElement, t, comparer);
+    await takeElementScreenshot("toolbox-search-rtl-compact.png", creatorTabElement, t, comparer);
     await t.click(Selector(".svc-toolbox__search-button"));
     await t.click(Selector(".svc-toolbox input"));
     await t.typeText(Selector(".svc-toolbox input"), "single");
-    await takeElementScreenshot("toolbox-search-rtl-compact-entered.png", toolboxElement, t, comparer);
+    await takeElementScreenshot("toolbox-search-rtl-compact-entered.png", creatorTabElement, t, comparer);
     await t.typeText(Selector(".svc-toolbox input"), "qwerty");
-    await takeElementScreenshot("toolbox-search-rtl-compact-placeholder.png", toolboxElement, t, comparer);
+    await takeElementScreenshot("toolbox-search-rtl-compact-placeholder.png", creatorTabElement, t, comparer);
   });
 });
 
