@@ -59,7 +59,7 @@
         </div>
         <div class="svc-toolbox__scrollbar" @scroll="
             (e) => {
-              toolbox.onScrollbarScroll(toolbox, e);
+              toolbox.onScrollbarScroll(e);
             }
           ">
           <div class="svc-toolbox__scrollbar-sizer">
