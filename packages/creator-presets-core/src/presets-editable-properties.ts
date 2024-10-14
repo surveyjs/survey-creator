@@ -4,7 +4,7 @@ import { JsonObjectProperty, ItemValue, QuestionDropdownModel,
 import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
 import { SurveyCreatorModel, defaultPropertyGridDefinition, ISurveyPropertyGridDefinition, ISurveyPropertiesDefinition,
   SurveyQuestionProperties, editorLocalization, PropertyGridModel, TabDesignerPlugin,
-  ICreatorOptions, settings, IQuestionToolboxItem, SurveyHelper } from "survey-creator-core";
+  ICreatorOptions, settings, IQuestionToolboxItem, SurveyHelper, calculateDragOverLocation, PageAdorner } from "survey-creator-core";
 import { QuestionEmbeddedCreatorModel } from "./components/embedded-creator";
 require("./presets-editable-properties.scss");
 
@@ -438,16 +438,22 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
       }
       this.setupCreatorToolbox(sender);
     });
+    creator.onDragOverLocationCalculating.add((sender, options) => {
+      if (options.draggedSurveyElement?.isPanel && options.insideContainer) {
+        options.insideContainer = false;
+        options.dragOverLocation = calculateDragOverLocation(options.clientX, options.clientY, options.dragOverRect, "top-bottom");
+      }
+      if (options.draggedSurveyElement?.isQuestion && options.dragOverSurveyElement?.isPanel) {
+        options.insideContainer = true;
+      }
+    });
     creator.onDragDropAllow.add((sender, options) => {
-      options["allowDropNextToAnother"] = false;
+      options.allowDropNextToAnother = false;
       const target: any = options.target;
       const src: any = options.draggedElement;
-      if(!target || !src) return;
-      if(src.isPanel) {
-        options.allow = target.isPanel && (!!options.insertAfter || !!options.insertBefore);
-      }
-      if(src.isQuestion) {
-        options.allow = target.isQuestion || (!options.insertAfter && !options.insertBefore);
+      if (!!target && src?.isQuestion) {
+        const adorner = PageAdorner.GetAdorner(target);
+        options.allow = !target.isPage && (!target.isPanel || adorner.collapsed);
       }
     });
   }
