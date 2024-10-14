@@ -438,10 +438,8 @@ test("Toolbox right with search", async (t) => {
       window["creator"].toolbox.searchEnabled = true;
     })();
     await changeToolboxLocation("right");
-    await t.resizeWindow(2560, 1440)
-      .click(collapseButtonSelector);
+    await t.resizeWindow(2560, 1440);
     await takeElementScreenshot("toolbox-search-right.png", toolboxElement, t, comparer);
-    await t.click(Selector(".svc-toolbox__search-button"));
     await t.click(Selector(".svc-toolbox input"));
     await t.typeText(Selector(".svc-toolbox input"), "single");
     await takeElementScreenshot("toolbox-search-right-entered.png", toolboxElement, t, comparer);

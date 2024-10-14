@@ -123,7 +123,11 @@ export class SurveyCreatorToolboxItem extends CreatorModelElement<
   }
   render(): JSX.Element {
     const banner = (this.props.isCompact ?
-      <span className="svc-toolbox__item-banner">
+      <span className="svc-toolbox__item-banner"
+        onClick={(event: any) => {
+          event.persist();
+          this.model.click(event);
+        }}>
         <SvgIcon size={24} iconName={this.item.iconName} className="svc-toolbox__item-icon" title={this.item.tooltip}></SvgIcon>
         <span>{this.item.title}</span>
       </span>
