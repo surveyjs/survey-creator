@@ -4,7 +4,7 @@
     role="button"
     :aria-label="item.tooltip"
     :title="item.tooltip"
-    :class="item.className"
+    :class="item.renderedCss"
     @click="viewModel.click($event)"
     v-key2click
   >
@@ -14,23 +14,21 @@
         v-if="item.iconName"
         :iconName="item.iconName"
         :size="24"
-        :title="item.tooltip"
       ></SvComponent>
-    </span>
-    <span v-if="isCompact" class="svc-toolbox__item-banner svc-item__banner">
-      <SvComponent
-        :is="'sv-svg-icon'"
-        :iconName="item.iconName"
-        :size="24"
-        :title="item.tooltip"
-        class="svc-toolbox__item-icon"
-      ></SvComponent>
-      <span class="svc-toolbox__item-title">{{ item.title }}</span>
     </span>
     <span v-if="!isCompact" class="svc-toolbox__item-title">
       {{ item.title }}
     </span>
   </div>
+  <span v-if="isCompact" class="svc-toolbox__item-banner svc-item__banner">
+      <SvComponent
+        :is="'sv-svg-icon'"
+        :iconName="item.iconName"
+        :size="24"
+        class="svc-toolbox__item-icon"
+      ></SvComponent>
+      <span class="svc-toolbox__item-title">{{ item.title }}</span>
+  </span>
 </template>
 <script lang="ts" setup>
 import { key2ClickDirective as vKey2click } from "survey-vue3-ui";
@@ -39,10 +37,11 @@ import type {
   SurveyCreatorModel,
   IQuestionToolboxItem,
   ToolboxToolViewModel,
+  QuestionToolboxItem,
 } from "survey-creator-core";
 defineProps<{
   creator: SurveyCreatorModel;
-  item: IQuestionToolboxItem;
+  item: QuestionToolboxItem;
   isCompact: boolean;
   viewModel: ToolboxToolViewModel;
 }>();
