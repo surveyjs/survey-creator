@@ -15,7 +15,7 @@
           v-key2click
         >
           <svg>
-            <use xlink:href="#icon-logo"></use>
+            <use xlink:href="#icon-image-48x48"></use>
           </svg>
         </div>
       </template>
