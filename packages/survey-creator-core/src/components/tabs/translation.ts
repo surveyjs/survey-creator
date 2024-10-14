@@ -733,7 +733,6 @@ export class Translation extends Base implements ITranslationLocales {
     if (!this.root) return;
     this.root.deleteLocaleStrings(locale);
     this.removeLocale(locale);
-    this.updateChooseLanguageActions();
     this.reset();
   }
   private removingLocale: string;
@@ -787,6 +786,12 @@ export class Translation extends Base implements ITranslationLocales {
 
   private calcIsChooseLanguageEnabled() {
     this.isChooseLanguageEnabled = this.chooseLanguageActions.filter((item: IAction) => item.visible).length > 0;
+  }
+  private refreshAddLanguageActionListModel() {
+    const listModel = this.addLanguageAction.data;
+    if (listModel) {
+      listModel.refresh();
+    }
   }
 
   private updateLocales() {
@@ -1169,6 +1174,7 @@ export class Translation extends Base implements ITranslationLocales {
     if (Array.isArray(actions)) {
       actions.forEach(item => item.visible = this.isLocaleVisible(locales, item.data.value));
     }
+    this.refreshAddLanguageActionListModel();
     this.calcIsChooseLanguageEnabled();
   }
   public resetLocales(): void {

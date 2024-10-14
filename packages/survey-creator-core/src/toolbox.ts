@@ -144,7 +144,6 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
         .append("svc-toolbox__tool")
         .append("svc-toolbox__tool--action")
         .append(originalCss)
-        .append("svc-toolbox__tool--hovered", this.isHovered)
         .append("svc-toolbox__tool--pressed", this.isPressed)
         .append("svc-toolbox__tool--has-icon", !!this.iconName)
         .append("svc-toolbox__tool--has-subitems", !!(this.items?.length > 0))

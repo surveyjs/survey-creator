@@ -82,6 +82,15 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     this.editSurvey.onValueChanged.add((sender, options) => {
       this.onValueChanged(options);
     });
+    this.editSurvey.onDynamicPanelItemValueChanged.add((sender, options) => {
+      const q = options.panel.getQuestionByName(options.name);
+      if(!!q && q.parent?.name === "triggerEditorPanel") {
+        const action = <LogicActionTriggerModel>this.getActionModelByPanel(options.panel);
+        if(action) {
+          action.onPanelQuestionValueChanged(<PanelModel>q.parent, options.name);
+        }
+      }
+    });
     this.setEditableItem(editableItem);
   }
   public get editableItem(): SurveyLogicItem {

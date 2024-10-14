@@ -49,7 +49,6 @@ export interface QuestionBannerParams {
 }
 
 export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
-  @property() isDragged: boolean;
   @property({ defaultValue: "" }) currentAddQuestionType: string;
 
   placeholderComponent: string;
@@ -63,10 +62,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     public templateData: SurveyTemplateRendererTemplateData
   ) {
     super(creator, surveyElement);
-    this.actionContainer.sizeMode = "small";
-    this.topActionContainer = new ActionContainer();
-    this.topActionContainer.sizeMode = "small";
-    this.topActionContainer.setItems([this.expandCollapseAction]);
     if (
       surveyElement.isQuestion &&
       !!surveyElement["setCanShowOptionItemCallback"]
@@ -274,13 +269,12 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     res.text = res.messageText;
     return res;
   }
-  public dispose(): void {
+  public detachFromUI(): void {
     this.surveyElement.unRegisterFunctionOnPropertyValueChanged("isRequired", "isRequiredAdorner");
     this.surveyElement.unRegisterFunctionOnPropertyValueChanged("inputType", "inputTypeAdorner");
     if (!!this.surveyElement["setCanShowOptionItemCallback"]) {
       (<any>this.surveyElement).setCanShowOptionItemCallback(undefined);
     }
-    super.dispose();
   }
   get isDraggable() {
     return true;
@@ -290,6 +284,20 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       return;
     }
     super.hover(event, element);
+  }
+  protected createActionContainers(): void {
+    super.createActionContainers();
+    this.actionContainer.sizeMode = "small";
+    this.topActionContainer = new ActionContainer();
+    this.topActionContainer.sizeMode = "small";
+    this.topActionContainer.setItems([this.expandCollapseAction]);
+  }
+  public getActionById(id: string): Action {
+    let res = super.getActionById(id);
+    if(!res) {
+      res = this.topActionContainer.getActionById(id);
+    }
+    return res;
   }
   protected updateActionsProperties(): void {
     if (this.isDisposed) return;

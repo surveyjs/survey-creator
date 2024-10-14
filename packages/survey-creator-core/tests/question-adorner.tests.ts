@@ -1,5 +1,5 @@
 import { QuestionAdornerViewModel } from "../src/components/question";
-import { Action, ComponentCollection, PopupDropdownViewModel, QuestionRadiogroupModel, settings, SurveyElement, settings as surveySettings } from "survey-core";
+import { Action, ComponentCollection, PopupDropdownViewModel, QuestionRadiogroupModel, settings, SurveyElement, SurveyModel, settings as surveySettings } from "survey-core";
 import { CreatorTester } from "./creator-tester";
 import { PageAdorner } from "../src/components/page";
 import { TabDesignerPlugin } from "../src/components/tabs/designer-plugin";
@@ -803,7 +803,7 @@ test("Check question adorner expand/collapse animation options", (): any => {
   const animationOptions = questionAdorner["getExpandCollapseAnimationOptions"]();
 
   settings.animationEnabled = true;
-  questionAdorner.enableOnElementRenderedEvent();
+  questionAdorner.enableOnElementRerenderedEvent();
   expect(animationOptions.isAnimationEnabled()).toBeTruthy();
   questionAdorner.blockAnimations();
   expect(animationOptions.isAnimationEnabled()).toBeFalsy();
@@ -968,3 +968,31 @@ test("Check panel getAnimatedElement methods", () => {
   expect(animationOptions.getAnimatedElement()).toBe(panelContentElement);
 });
 
+test("Don't reset collapased state for moved question", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [{ "type": "text", "name": "question1" }]
+      },
+      {
+        "name": "page2",
+        "elements": [{ "type": "text", "name": "question2" }]
+      },
+    ]
+  };
+  const page1 = creator.survey.pages[0];
+  const page2 = creator.survey.pages[1];
+  let pageAdorner = new PageAdorner(creator, page1);
+  creator.collapseAllPages();
+  expect(pageAdorner.collapsed).toBeTruthy();
+  creator.designerStateManager.suspend();
+  creator.survey.pages.splice(0, 1);
+  creator.survey.pages.splice(1, 0, page1);
+  pageAdorner = new PageAdorner(creator, page1);
+  creator.designerStateManager.release();
+  creator.restorePagesState();
+  expect(pageAdorner.collapsed).toBeTruthy();
+});

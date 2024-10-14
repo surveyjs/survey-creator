@@ -182,6 +182,18 @@ export var huStrings = {
     pagePlaceHolder: "Az oldal üres. Húzzon egy elemet az eszköztárról, vagy kattintson az alábbi gombra.",
     imagePlaceHolder: "Húzzon ide egy képet, vagy kattintson az alábbi gombra, és válassza ki a feltölteni kívánt képet",
     surveyPlaceHolderMobile: "Kattintson az alábbi \"Kérdés hozzáadása\" gombra az űrlap létrehozásának megkezdéséhez.",
+    surveyPlaceholderTitle: "Az űrlap üres",
+    surveyPlaceholderTitleMobile: "Az űrlap üres",
+    surveyPlaceholderDescription: "Húzzon egy elemet az eszköztárról, vagy kattintson az alábbi gombra.",
+    surveyPlaceholderDescriptionMobile: "Húzzon egy elemet az eszköztárról, vagy kattintson az alábbi gombra.",
+    previewPlaceholderTitle: "Nincs előnézet",
+    previewPlaceholderTitleMobile: "Nincs előnézet",
+    previewPlaceholderDescription: "A felmérés nem tartalmaz látható elemeket.",
+    previewPlaceholderDescriptionMobile: "A felmérés nem tartalmaz látható elemeket.",
+    translationsPlaceholderTitle: "Nincsenek lefordítandó karakterláncok",
+    translationsPlaceholderTitleMobile: "Nincsenek lefordítandó karakterláncok",
+    translationsPlaceholderDescription: "Adjon hozzá elemeket az űrlaphoz, vagy módosítsa a karakterláncszűrő szűrőjét az eszköztáron.",
+    translationsPlaceholderDescriptionMobile: "Adjon hozzá elemeket az űrlaphoz, vagy módosítsa a karakterláncszűrő szűrőjét az eszköztáron.",
     pagePlaceHolderMobile: "Kattintson az alábbi \"Kérdés hozzáadása\" gombra, hogy új elemet adjon az oldalhoz.",
     panelPlaceHolderMobile: "Kattintson az alábbi \"Kérdés hozzáadása\" gombra, hogy új elemet adjon a panelhez.",
     imagePlaceHolderMobile: "Kattintson az alábbi gombra, és válassza ki a feltölteni kívánt képet",
@@ -194,6 +206,10 @@ export var huStrings = {
     lg: {
       addNewItem: "Új szabály hozzáadása",
       empty_tab: "Hozzon létre egy szabályt a felmérés folyamatának testreszabásához.",
+      logicPlaceholderTitle: "Nincsenek logikai szabályok",
+      logicPlaceholderTitleMobile: "Nincsenek logikai szabályok",
+      logicPlaceholderDescription: "Hozzon létre egy szabályt a felmérés folyamatának testreszabásához.",
+      logicPlaceholderDescriptionMobile: "Hozzon létre egy szabályt a felmérés folyamatának testreszabásához.",
       page_visibilityName: "Oldal megjelenítése (elrejtése)",
       page_enableName: "Oldal engedélyezése (letiltása)",
       page_requireName: "Az oldal kötelezővé tétele",
@@ -375,7 +391,7 @@ export var huStrings = {
       description: "Oldal leírása",
       visibleIf: "Tegye láthatóvá az oldalt, ha",
       requiredIf: "Az oldal kötelezővé tétele, ha",
-      maxTimeToFinish: "Az oldal befejezésének határideje (másodpercben)",
+      timeLimit: "Az oldal befejezésének határideje (másodpercben)",
       questionsOrder: "Kérdések sorrendje az oldalon"
     },
     matrixdropdowncolumn: {
@@ -615,10 +631,11 @@ export var huStrings = {
     questionErrorLocation: "Kérdés hibaüzenetének helyzete",
     focusFirstQuestionAutomatic: "Első kérdés automatikus kijelölése lapváltás esetén",
     questionsOrder: "Elemek rendezése a lapon",
-    maxTimeToFinish: "A kérdőív kitöltésére fordítható maximális idő",
-    maxTimeToFinishPage: "Egy lap kitöltésére fordítható maximális idő",
-    showTimerPanel: "Időzító mutatása",
-    showTimerPanelMode: "Időzító módja",
+    timeLimit: "A kérdőív kitöltésére fordítható maximális idő",
+    timeLimitPerPage: "Egy lap kitöltésére fordítható maximális idő",
+    showTimer: "Időzítő használata",
+    timerLocation: "Időzító mutatása",
+    timerInfoMode: "Időzító módja",
     renderMode: "Megjelenítés módja",
     allowAddPanel: "Új panel hozzáadásának engedélyezése",
     allowRemovePanel: "Panel eltávolításának engedélyezése",
@@ -875,6 +892,7 @@ export var huStrings = {
       fontSize: "Betűméret",
       scale: "Hangsor",
       cornerRadius: "Sarok sugara",
+      advancedMode: "Speciális mód",
       pageTitle: "Cím betűtípusa",
       pageDescription: "Leírás betűtípus",
       questionTitle: "Cím betűtípusa",
@@ -1038,11 +1056,8 @@ export var huStrings = {
     showNavigationButtons: {
       none: "Rejtett"
     },
-    showTimerPanel: {
-      none: "Rejtett"
-    },
-    showTimerPanelMode: {
-      all: "Mindkettő"
+    timerInfoMode: {
+      combined: "Mindkettő"
     },
     addRowLocation: {
       default: "A mátrix elrendezésétől függ"
@@ -1410,11 +1425,11 @@ export var huStrings = {
     imageFit: "Válasszon a következők közül: \"Nincs\" - a kép megőrzi eredeti méretét; \"Tartalmaz\" - a kép átméreteződik, hogy illeszkedjen, miközben megtartja képarányát; \"Borító\" - a kép kitölti az egész dobozt, miközben megtartja képarányát; \"Kitöltés\" - a kép a doboz kitöltéséhez nyúlik a képarány megtartása nélkül.",
     autoGrow: "Fokozatosan növeli a beviteli mező magasságát az adatok bevitele közben. Felülbírálja a \"Beviteli mező magassága (sorokban)\" beállítást.",
     allowResize: "Az átméretező fogópont (vagy fogópont) megjelenik a sarokban, és húzással módosítható a beviteli mező mérete.",
-    maxTimeToFinish: "Az az időintervallum másodpercben, amely után a felmérés automatikusan továbblép a Köszönet oldalra.",
-    maxTimeToFinishPage: "Az az időintervallum másodpercben, amely után a felmérés automatikusan továbblép a következő oldalra.",
+    timeLimit: "Az az időintervallum másodpercben, amely után a felmérés automatikusan továbblép a Köszönet oldalra.",
+    timeLimitPerPage: "Az az időintervallum másodpercben, amely után a felmérés automatikusan továbblép a következő oldalra.",
     validateVisitedEmptyFields: "Engedélyezze ezt a beállítást, ha érvényesítést indít el, amikor a felhasználó egy üres beviteli mezőre összpontosít, majd módosítás nélkül elhagyja azt.",
     page: {
-      maxTimeToFinish: "Az az időintervallum másodpercben, amely után a felmérés automatikusan továbblép a következő oldalra.",
+      timeLimit: "Az az időintervallum másodpercben, amely után a felmérés automatikusan továbblép a következő oldalra.",
       visibleIf: "A varázspálca ikonnal állítson be egy feltételes szabályt, amely meghatározza az oldal láthatóságát.",
       enableIf: "A varázspálca ikonnal állítson be egy feltételes szabályt, amely letiltja az oldal írásvédett módját.",
       requiredIf: "A varázspálca ikonnal állítson be egy feltételes szabályt, amely megakadályozza a felmérés elküldését, kivéve, ha legalább egy beágyazott kérdésre van válasz.",
@@ -1424,7 +1439,7 @@ export var huStrings = {
       questionsOrder: "Megtartja a kérdések eredeti sorrendjét, vagy véletlenszerűvé teszi őket. Az \"Öröklés\" opció a felmérési szintű beállítást alkalmazza (\"Eredeti\" alapértelmezés szerint). A beállítás hatása csak az Előnézet lapon látható.",
       navigationButtonsVisibility: "Beállítja a navigációs gombok láthatóságát az oldalon. Az \"Öröklés\" opció a felmérés szintű beállítást alkalmazza, amely alapértelmezés szerint \"Látható\"."
     },
-    showTimerPanel: "Beállítja az időzítő láthatóságát és helyét az oldalon.",
+    timerLocation: "Beállítja az időzítő helyét az oldalon.",
     panelsState: "Válasszon a következők közül: \"Zárolt\" - a felhasználók nem bonthatják ki vagy csukhatják össze a paneleket; \"Az összes összecsukása\" - minden panel összecsukott állapotban indul; \"Összes kibontása\" - minden panel kibővített állapotban indul; \"Először bővített\" - csak az első panel bővül.",
     imageLinkName: "Adjon meg egy megosztott tulajdonságnevet az objektumok tömbjében, amely tartalmazza az adatválaszték-listában megjeleníteni kívánt kép- vagy videofájl URL-címeit.",
     choices: "A bal oldali érték a feltételes szabályokban használt elemazonosítóként szolgál, a jobb oldali érték megjelenik a válaszadók számára.",
@@ -1506,7 +1521,8 @@ export var huStrings = {
     header: {
       inheritWidthFrom: "Az \"Ugyanaz, mint a tároló\" beállítás automatikusan beállítja a fejléc tartalomterületének szélességét, hogy illeszkedjen ahhoz a HTML-elemhez, amelybe a felmérés kerül.",
       textAreaWidth: "A felmérés címét és leírását tartalmazó fejlécterület szélessége képpontban mérve.",
-      overlapEnabled: "A fejléc alját a felmérés tetejével átfedésbe helyezi."
+      overlapEnabled: "Ha engedélyezve van, a felmérés teteje átfedi a fejléc alját.",
+      mobileHeight: "Ha 0-ra van állítva, a magasság automatikusan kiszámításra kerül, hogy elférjen a fejléc tartalma."
     },
     panellayoutcolumn: {
       effectiveWidth: "Elfogadja a % értékeket",
@@ -1594,6 +1610,7 @@ export var huStrings = {
     imageFit: "Kép illeszkedése",
     altText: "Helyettesítő szöveg",
     height: "Magasság",
+    mobileHeight: "Magasság az okostelefonokon",
     penColor: "Toll színe",
     backgroundColor: "Háttérszín",
     templateElements: "Sablon elemek",
@@ -1886,7 +1903,7 @@ editorLocalization.locales["hu"] = huStrings;
 // pe.editText: "Edit Answer button text" => "A Válasz gomb szövegének szerkesztése"
 // image.imageHeight: "Image height (in CSS-accepted values)" => "Képmagasság (CSS által elfogadott értékekben)"
 // image.imageWidth: "Image width (in CSS-accepted values)" => "Képszélesség (CSS által elfogadott értékekben)"
-// page.maxTimeToFinish: "Time limit to finish the page (in seconds)" => "Az oldal befejezésének határideje (másodpercben)"
+// page.timeLimit: "Time limit to finish the page (in seconds)" => "Az oldal befejezésének határideje (másodpercben)"
 // question.page: "Parent page" => "Szülőoldal"
 // pe.noEntriesText: "Empty entries text" => "Üres bejegyzések szövege"
 // pe.setValue: "Answer" => "Válasz"
@@ -2695,9 +2712,9 @@ editorLocalization.locales["hu"] = huStrings;
 // pehelp.imageFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Válasszon a következők közül: \"Nincs\" - a kép megőrzi eredeti méretét; \"Tartalmaz\" - a kép átméreteződik, hogy illeszkedjen, miközben megtartja képarányát; \"Borító\" - a kép kitölti az egész dobozt, miközben megtartja képarányát; \"Kitöltés\" - a kép a doboz kitöltéséhez nyúlik a képarány megtartása nélkül."
 // pehelp.autoGrow: "Gradually increases the height of the input field as data is being entered. Overrides the \"Input field height (in lines)\" setting." => "Fokozatosan növeli a beviteli mező magasságát az adatok bevitele közben. Felülbírálja a \"Beviteli mező magassága (sorokban)\" beállítást."
 // pehelp.allowResize: "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field." => "Az átméretező fogópont (vagy fogópont) megjelenik a sarokban, és húzással módosítható a beviteli mező mérete."
-// pehelp.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "Az az időintervallum másodpercben, amely után a felmérés automatikusan továbblép a Köszönet oldalra."
-// pehelp.maxTimeToFinishPage: "A time interval in seconds after which the survey auto-advances to the next page." => "Az az időintervallum másodpercben, amely után a felmérés automatikusan továbblép a következő oldalra."
-// page.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the next page." => "Az az időintervallum másodpercben, amely után a felmérés automatikusan továbblép a következő oldalra."
+// pehelp.timeLimit: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "Az az időintervallum másodpercben, amely után a felmérés automatikusan továbblép a Köszönet oldalra."
+// pehelp.timeLimitPerPage: "A time interval in seconds after which the survey auto-advances to the next page." => "Az az időintervallum másodpercben, amely után a felmérés automatikusan továbblép a következő oldalra."
+// page.timeLimit: "A time interval in seconds after which the survey auto-advances to the next page." => "Az az időintervallum másodpercben, amely után a felmérés automatikusan továbblép a következő oldalra."
 // page.visibleIf: "Use the magic wand icon to set a conditional rule that determines page visibility." => "A varázspálca ikonnal állítson be egy feltételes szabályt, amely meghatározza az oldal láthatóságát."
 // page.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the page." => "A varázspálca ikonnal állítson be egy feltételes szabályt, amely letiltja az oldal írásvédett módját."
 // page.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "A varázspálca ikonnal állítson be egy feltételes szabályt, amely megakadályozza a felmérés elküldését, kivéve, ha legalább egy beágyazott kérdésre van válasz."
@@ -2705,7 +2722,6 @@ editorLocalization.locales["hu"] = huStrings;
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Beállítja az érvénytelen bevitelű kérdéssel kapcsolatos hibaüzenet helyét. Válasszon a következők közül: \"Felső\" - egy hibaüzenet kerül a kérdésmező tetejére; \"Alsó\" - egy hibaüzenet kerül a kérdésmező aljára. Az \"Öröklés\" opció a felmérés szintű beállítást alkalmazza (\"Felül\" alapértelmezés szerint)."
 // page.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Megtartja a kérdések eredeti sorrendjét, vagy véletlenszerűvé teszi őket. Az \"Öröklés\" opció a felmérési szintű beállítást alkalmazza (\"Eredeti\" alapértelmezés szerint). A beállítás hatása csak az Előnézet lapon látható."
 // page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Beállítja a navigációs gombok láthatóságát az oldalon. Az \"Öröklés\" opció a felmérés szintű beállítást alkalmazza, amely alapértelmezés szerint \"Látható\"."
-// pehelp.showTimerPanel: "Sets the visibility and location of a timer on a page." => "Beállítja az időzítő láthatóságát és helyét az oldalon."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "Válasszon a következők közül: \"Zárolt\" - a felhasználók nem bonthatják ki vagy csukhatják össze a paneleket; \"Az összes összecsukása\" - minden panel összecsukott állapotban indul; \"Összes kibontása\" - minden panel kibővített állapotban indul; \"Először bővített\" - csak az első panel bővül."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "Adjon meg egy megosztott tulajdonságnevet az objektumok tömbjében, amely tartalmazza az adatválaszték-listában megjeleníteni kívánt kép- vagy videofájl URL-címeit."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "A bal oldali érték a feltételes szabályokban használt elemazonosítóként szolgál, a jobb oldali érték megjelenik a válaszadók számára."
@@ -2902,7 +2918,6 @@ editorLocalization.locales["hu"] = huStrings;
 // theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "Beállítja a felmérés fő háttérszínét."
 // header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "Az \"Ugyanaz, mint a tároló\" beállítás automatikusan beállítja a fejléc tartalomterületének szélességét, hogy illeszkedjen ahhoz a HTML-elemhez, amelybe a felmérés kerül."
 // header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "A felmérés címét és leírását tartalmazó fejlécterület szélessége képpontban mérve."
-// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "A fejléc alját a felmérés tetejével átfedésbe helyezi."
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Elfogadja a % értékeket"
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Elfogadja a px értékeket."
 // p.effectiveColSpan: "Column span" => "Oszlop fesztávolsága"
@@ -2935,3 +2950,26 @@ editorLocalization.locales["hu"] = huStrings;
 // ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Kattintson bármelyik kategória ikonjára a felmérési beállítások felfedezéséhez. További beállítások válnak elérhetővé, ha hozzáad egy földmérési elemet a tervezési felülethez."
 // pe.caseInsensitive: "Case insensitive" => "Kis- és nagybetűk megkülönböztetése"
 // pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Válassza ki, hogy a reguláris kifejezés kis- és nagybetűit egyenértékűként kell-e kezelni."
+
+// ed.surveyPlaceholderTitle: "Your form is empty" => "Az űrlap üres"
+// ed.surveyPlaceholderTitleMobile: "Your form is empty" => "Az űrlap üres"
+// ed.surveyPlaceholderDescription: "Drag an element from the toolbox or click the button below." => "Húzzon egy elemet az eszköztárról, vagy kattintson az alábbi gombra."
+// ed.surveyPlaceholderDescriptionMobile: "Drag an element from the toolbox or click the button below." => "Húzzon egy elemet az eszköztárról, vagy kattintson az alábbi gombra."
+// ed.previewPlaceholderTitle: "No preview" => "Nincs előnézet"
+// ed.previewPlaceholderTitleMobile: "No preview" => "Nincs előnézet"
+// ed.previewPlaceholderDescription: "The survey doesn't contain any visible elements." => "A felmérés nem tartalmaz látható elemeket."
+// ed.previewPlaceholderDescriptionMobile: "The survey doesn't contain any visible elements." => "A felmérés nem tartalmaz látható elemeket."
+// ed.translationsPlaceholderTitle: "No strings to translate" => "Nincsenek lefordítandó karakterláncok"
+// ed.translationsPlaceholderTitleMobile: "No strings to translate" => "Nincsenek lefordítandó karakterláncok"
+// ed.translationsPlaceholderDescription: "Add elements to your form or change the strings filter in the toolbar." => "Adjon hozzá elemeket az űrlaphoz, vagy módosítsa a karakterláncszűrő szűrőjét az eszköztáron."
+// ed.translationsPlaceholderDescriptionMobile: "Add elements to your form or change the strings filter in the toolbar." => "Adjon hozzá elemeket az űrlaphoz, vagy módosítsa a karakterláncszűrő szűrőjét az eszköztáron."
+// lg.logicPlaceholderTitle: "No logical rules" => "Nincsenek logikai szabályok"
+// lg.logicPlaceholderTitleMobile: "No logical rules" => "Nincsenek logikai szabályok"
+// lg.logicPlaceholderDescription: "Create a rule to customize the flow of the survey." => "Hozzon létre egy szabályt a felmérés folyamatának testreszabásához."
+// lg.logicPlaceholderDescriptionMobile: "Create a rule to customize the flow of the survey." => "Hozzon létre egy szabályt a felmérés folyamatának testreszabásához."
+// pe.showTimer: "Use a timer" => "Időzítő használata"
+// theme.advancedMode: "Advanced mode" => "Speciális mód"
+// pehelp.timerLocation: "Sets the location of a timer on a page." => "Beállítja az időzítő helyét az oldalon."
+// header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Ha 0-ra van állítva, a magasság automatikusan kiszámításra kerül, hogy elférjen a fejléc tartalma."
+// p.mobileHeight: "Height on smartphones" => "Magasság az okostelefonokon"
+// header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Ha engedélyezve van, a felmérés teteje átfedi a fejléc alját."

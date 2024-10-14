@@ -182,6 +182,18 @@ export var hebrewStrings = {
     pagePlaceHolder: "הדף ריק. גרור רכיב מארגז הכלים או לחץ על הלחצן למטה.",
     imagePlaceHolder: "גרור ושחרר תמונה לכאן או לחץ על הכפתור למטה ובחר תמונה להעלאה",
     surveyPlaceHolderMobile: "לחץ על הלחצן \"הוסף שאלה\" למטה כדי להתחיל ליצור את הטופס שלך.",
+    surveyPlaceholderTitle: "הטופס שלך ריק",
+    surveyPlaceholderTitleMobile: "הטופס שלך ריק",
+    surveyPlaceholderDescription: "גרור רכיב מארגז הכלים או לחץ על הלחצן למטה.",
+    surveyPlaceholderDescriptionMobile: "גרור רכיב מארגז הכלים או לחץ על הלחצן למטה.",
+    previewPlaceholderTitle: "ללא תצוגה מקדימה",
+    previewPlaceholderTitleMobile: "ללא תצוגה מקדימה",
+    previewPlaceholderDescription: "הסקר אינו מכיל רכיבים גלויים.",
+    previewPlaceholderDescriptionMobile: "הסקר אינו מכיל רכיבים גלויים.",
+    translationsPlaceholderTitle: "אין מחרוזות לתרגם",
+    translationsPlaceholderTitleMobile: "אין מחרוזות לתרגם",
+    translationsPlaceholderDescription: "הוסף רכיבים לטופס או שנה את מסנן המחרוזות בסרגל הכלים.",
+    translationsPlaceholderDescriptionMobile: "הוסף רכיבים לטופס או שנה את מסנן המחרוזות בסרגל הכלים.",
     pagePlaceHolderMobile: "לחץ על כפתור \"הוסף שאלה\" למטה כדי להוסיף אלמנט חדש לדף.",
     panelPlaceHolderMobile: "לחץ על הלחצן \"הוסף שאלה\" למטה כדי להוסיף אלמנט חדש לחלונית.",
     imagePlaceHolderMobile: "לחץ על הלחצן למטה ובחר תמונה להעלאה",
@@ -194,6 +206,10 @@ export var hebrewStrings = {
     lg: {
       addNewItem: "הוספת כלל חדש",
       empty_tab: "צור כלל כדי להתאים אישית את זרימת הסקר.",
+      logicPlaceholderTitle: "אין כללים לוגיים",
+      logicPlaceholderTitleMobile: "אין כללים לוגיים",
+      logicPlaceholderDescription: "צור כלל כדי להתאים אישית את זרימת הסקר.",
+      logicPlaceholderDescriptionMobile: "צור כלל כדי להתאים אישית את זרימת הסקר.",
       page_visibilityName: "הצג (הסתר) עמוד",
       page_enableName: "הפוך דף לזמין (הפוך ללא זמין)",
       page_requireName: "הפיכת הדף לנדרש",
@@ -375,7 +391,7 @@ export var hebrewStrings = {
       description: "תיאור הדף",
       visibleIf: "הפוך את הדף לגלוי אם",
       requiredIf: "הפוך את הדף לנדרש אם",
-      maxTimeToFinish: "גבול זמן לסיום העמוד (בשניות)",
+      timeLimit: "גבול זמן לסיום העמוד (בשניות)",
       questionsOrder: "סדר השאלות בדף"
     },
     matrixdropdowncolumn: {
@@ -615,10 +631,11 @@ export var hebrewStrings = {
     questionErrorLocation: "מיקום הודעת השגיאה",
     focusFirstQuestionAutomatic: "התמקד על השאלה הראשונה בעמוד חדש",
     questionsOrder: "סדר הרכיבים בעמוד",
-    maxTimeToFinish: "גבול זמן לסיום הסקר (בשניות)",
-    maxTimeToFinishPage: "גבול זמן לסיום עמוד אחד (בשניות)",
-    showTimerPanel: "מיקום הטיימר",
-    showTimerPanelMode: "מצב הטיימר",
+    timeLimit: "גבול זמן לסיום הסקר (בשניות)",
+    timeLimitPerPage: "גבול זמן לסיום עמוד אחד (בשניות)",
+    showTimer: "שימוש בטיימר",
+    timerLocation: "מיקום הטיימר",
+    timerInfoMode: "מצב הטיימר",
     renderMode: "מצב תצוגת הפאנל",
     allowAddPanel: "אפשר הוספת פאנלים",
     allowRemovePanel: "אפשר הסרת פאנלים",
@@ -875,6 +892,7 @@ export var hebrewStrings = {
       fontSize: "גודל גופן",
       scale: "סולם",
       cornerRadius: "רדיוס פינה",
+      advancedMode: "מצב מתקדם",
       pageTitle: "גופן כותרת",
       pageDescription: "גופן תיאור",
       questionTitle: "גופן כותרת",
@@ -1038,11 +1056,8 @@ export var hebrewStrings = {
     showNavigationButtons: {
       none: "מוסתר"
     },
-    showTimerPanel: {
-      none: "מוסתר"
-    },
-    showTimerPanelMode: {
-      all: "שני הצדדים"
+    timerInfoMode: {
+      combined: "שני הצדדים"
     },
     addRowLocation: {
       default: "תלוי בפריסת המטריצה"
@@ -1410,11 +1425,11 @@ export var hebrewStrings = {
     imageFit: "בחר מתוך: \"ללא\" - התמונה שומרת על גודלה המקורי; \"להכיל\" - גודל התמונה משתנה כדי להתאים תוך שמירה על יחס גובה-רוחב שלה; \"כיסוי\" - התמונה ממלאת את התיבה כולה תוך שמירה על יחס הגובה-רוחב שלה; \"מילוי\" - התמונה נמתחת כדי למלא את התיבה מבלי לשמור על יחס הגובה-רוחב שלה.",
     autoGrow: "מגדיל בהדרגה את גובה שדה הקלט בעת הזנת הנתונים. דורס את ההגדרה \"גובה שדה קלט (בקווים)\".",
     allowResize: "נקודת האחיזה לשינוי גודל (או נקודת האחיזה) מופיעה בפינה וניתן לגרור אותה כדי לשנות את גודל שדה הקלט.",
-    maxTimeToFinish: "מרווח זמן בשניות שלאחריו הסקר מתקדם אוטומטית לדף התודה.",
-    maxTimeToFinishPage: "מרווח זמן בשניות שלאחריו הסקר מתקדם אוטומטית לעמוד הבא.",
+    timeLimit: "מרווח זמן בשניות שלאחריו הסקר מתקדם אוטומטית לדף התודה.",
+    timeLimitPerPage: "מרווח זמן בשניות שלאחריו הסקר מתקדם אוטומטית לעמוד הבא.",
     validateVisitedEmptyFields: "הפעל אפשרות זו כדי להפעיל אימות כאשר משתמש מתמקד בשדה קלט ריק ולאחר מכן עוזב אותו מבלי לבצע שינויים.",
     page: {
-      maxTimeToFinish: "מרווח זמן בשניות שלאחריו הסקר מתקדם אוטומטית לעמוד הבא.",
+      timeLimit: "מרווח זמן בשניות שלאחריו הסקר מתקדם אוטומטית לעמוד הבא.",
       visibleIf: "השתמש בסמל מטה הקסם כדי להגדיר כלל תנאי הקובע את תצוגת העמוד.",
       enableIf: "השתמש בסמל מטה הקסם כדי להגדיר כלל תנאי שמשבית את מצב הקריאה בלבד של העמוד.",
       requiredIf: "השתמש בסמל מטה הקסם כדי להגדיר כלל תנאי המונע שליחת סקר, אלא אם לשאלה מקוננת אחת לפחות יש תשובה.",
@@ -1424,7 +1439,7 @@ export var hebrewStrings = {
       questionsOrder: "שומר על הסדר המקורי של השאלות או מסדר אותן באופן אקראי. האפשרות \"ירושה\" מחילה את ההגדרה ברמת הסקר (\"מקורי\" כברירת מחדל). ההשפעה של הגדרה זו גלויה רק בכרטיסיה תצוגה מקדימה.",
       navigationButtonsVisibility: "מגדיר את התצוגה של לחצני ניווט בעמוד. האפשרות \"ירושה\" מחילה את ההגדרה ברמת הסקר, המוגדרת כברירת מחדל ל\"גלוי\"."
     },
-    showTimerPanel: "מגדיר את הניראות והמיקום של טיימר בדף.",
+    timerLocation: "הגדרת המיקום של טיימר בעמוד.",
     panelsState: "בחר מתוך: \"נעול\" - משתמשים אינם יכולים להרחיב או לכווץ חלוניות; \"כווץ הכל\" - כל הלוחות מתחילים במצב מכווץ; \"הרחב הכל\" - כל הלוחות מתחילים במצב מורחב; \"מורחב ראשון\" - רק הלוח הראשון מורחב בתחילה.",
     imageLinkName: "הזן שם מאפיין משותף בתוך מערך האובייקטים המכיל את כתובות ה- URL של תמונות או קבצי וידאו שברצונך להציג ברשימת האפשרויות.",
     choices: "הערך השמאלי משמש כמזהה פריט המשמש בכללי תנאי, הערך הימני מוצג למשיבים.",
@@ -1506,7 +1521,8 @@ export var hebrewStrings = {
     header: {
       inheritWidthFrom: "האפשרות \"זהה לגורם מכיל\" מתאימה אוטומטית את רוחב אזור התוכן של הכותרת העליונה כך שיתאים לרכיב HTML שבו ממוקם הסקר.",
       textAreaWidth: "רוחב אזור הכותרת המכיל את כותרת הסקר ותיאורו, נמדד בפיקסלים.",
-      overlapEnabled: "הופך את החלק התחתון של הכותרת לשכבת-על עם החלק העליון של הסקר."
+      overlapEnabled: "כאשר אפשרות זו מופעלת, החלק העליון של הסקר מכסה את החלק התחתון של הכותרת.",
+      mobileHeight: "כאשר הוא מוגדר ל- 0, הגובה מחושב באופן אוטומטי כדי להתאים לתוכן הכותרת."
     },
     panellayoutcolumn: {
       effectiveWidth: "מקבל ערכים %.",
@@ -1594,6 +1610,7 @@ export var hebrewStrings = {
     imageFit: "התאמת התמונה",
     altText: "טקסט חלופי",
     height: "גובה",
+    mobileHeight: "גובה בסמארטפונים",
     penColor: "צבע העט",
     backgroundColor: "צבע רקע",
     templateElements: "רכיבי תבנית",
@@ -2110,9 +2127,9 @@ editorLocalization.locales["he"] = hebrewStrings;
 // pehelp.imageFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "בחר מתוך: \"ללא\" - התמונה שומרת על גודלה המקורי; \"להכיל\" - גודל התמונה משתנה כדי להתאים תוך שמירה על יחס גובה-רוחב שלה; \"כיסוי\" - התמונה ממלאת את התיבה כולה תוך שמירה על יחס הגובה-רוחב שלה; \"מילוי\" - התמונה נמתחת כדי למלא את התיבה מבלי לשמור על יחס הגובה-רוחב שלה."
 // pehelp.autoGrow: "Gradually increases the height of the input field as data is being entered. Overrides the \"Input field height (in lines)\" setting." => "מגדיל בהדרגה את גובה שדה הקלט בעת הזנת הנתונים. דורס את ההגדרה \"גובה שדה קלט (בקווים)\"."
 // pehelp.allowResize: "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field." => "נקודת האחיזה לשינוי גודל (או נקודת האחיזה) מופיעה בפינה וניתן לגרור אותה כדי לשנות את גודל שדה הקלט."
-// pehelp.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "מרווח זמן בשניות שלאחריו הסקר מתקדם אוטומטית לדף התודה."
-// pehelp.maxTimeToFinishPage: "A time interval in seconds after which the survey auto-advances to the next page." => "מרווח זמן בשניות שלאחריו הסקר מתקדם אוטומטית לעמוד הבא."
-// page.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the next page." => "מרווח זמן בשניות שלאחריו הסקר מתקדם אוטומטית לעמוד הבא."
+// pehelp.timeLimit: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "מרווח זמן בשניות שלאחריו הסקר מתקדם אוטומטית לדף התודה."
+// pehelp.timeLimitPerPage: "A time interval in seconds after which the survey auto-advances to the next page." => "מרווח זמן בשניות שלאחריו הסקר מתקדם אוטומטית לעמוד הבא."
+// page.timeLimit: "A time interval in seconds after which the survey auto-advances to the next page." => "מרווח זמן בשניות שלאחריו הסקר מתקדם אוטומטית לעמוד הבא."
 // page.visibleIf: "Use the magic wand icon to set a conditional rule that determines page visibility." => "השתמש בסמל מטה הקסם כדי להגדיר כלל תנאי הקובע את תצוגת העמוד."
 // page.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the page." => "השתמש בסמל מטה הקסם כדי להגדיר כלל תנאי שמשבית את מצב הקריאה בלבד של העמוד."
 // page.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "השתמש בסמל מטה הקסם כדי להגדיר כלל תנאי המונע שליחת סקר, אלא אם לשאלה מקוננת אחת לפחות יש תשובה."
@@ -2120,7 +2137,6 @@ editorLocalization.locales["he"] = hebrewStrings;
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "הגדרת המיקום של הודעת שגיאה ביחס לשאלה עם קלט לא חוקי. בחר בין: \"למעלה\" - טקסט שגיאה ממוקם בחלק העליון של תיבת השאלה; \"תחתית\" - טקסט שגיאה ממוקם בחלק התחתון של תיבת השאלה. האפשרות \"ירושה\" מחילה את ההגדרה ברמת הסקר (\"למעלה\" כברירת מחדל)."
 // page.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "שומר על הסדר המקורי של השאלות או מסדר אותן באופן אקראי. האפשרות \"ירושה\" מחילה את ההגדרה ברמת הסקר (\"מקורי\" כברירת מחדל). ההשפעה של הגדרה זו גלויה רק בכרטיסיה תצוגה מקדימה."
 // page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "מגדיר את התצוגה של לחצני ניווט בעמוד. האפשרות \"ירושה\" מחילה את ההגדרה ברמת הסקר, המוגדרת כברירת מחדל ל\"גלוי\"."
-// pehelp.showTimerPanel: "Sets the visibility and location of a timer on a page." => "מגדיר את הניראות והמיקום של טיימר בדף."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "בחר מתוך: \"נעול\" - משתמשים אינם יכולים להרחיב או לכווץ חלוניות; \"כווץ הכל\" - כל הלוחות מתחילים במצב מכווץ; \"הרחב הכל\" - כל הלוחות מתחילים במצב מורחב; \"מורחב ראשון\" - רק הלוח הראשון מורחב בתחילה."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "הזן שם מאפיין משותף בתוך מערך האובייקטים המכיל את כתובות ה- URL של תמונות או קבצי וידאו שברצונך להציג ברשימת האפשרויות."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "הערך השמאלי משמש כמזהה פריט המשמש בכללי תנאי, הערך הימני מוצג למשיבים."
@@ -2317,7 +2333,6 @@ editorLocalization.locales["he"] = hebrewStrings;
 // theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "מגדיר את צבע הרקע הראשי של הסקר."
 // header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "האפשרות \"זהה לגורם מכיל\" מתאימה אוטומטית את רוחב אזור התוכן של הכותרת העליונה כך שיתאים לרכיב HTML שבו ממוקם הסקר."
 // header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "רוחב אזור הכותרת המכיל את כותרת הסקר ותיאורו, נמדד בפיקסלים."
-// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "הופך את החלק התחתון של הכותרת לשכבת-על עם החלק העליון של הסקר."
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "מקבל ערכים %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "מקבל ערכים px."
 // p.effectiveColSpan: "Column span" => "טווח עמודות"
@@ -2350,3 +2365,26 @@ editorLocalization.locales["he"] = hebrewStrings;
 // ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "לחץ על סמל קטגוריה כלשהו כדי לחקור את הגדרות הסקר. הגדרות נוספות יהיו זמינות לאחר הוספת רכיב סקר למשטח העיצוב."
 // pe.caseInsensitive: "Case insensitive" => "לא תלוי רישיות"
 // pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "בחר אם יש להתייחס לאותיות רישיות וקטנות בביטוי הרגיל כשוות ערך."
+
+// ed.surveyPlaceholderTitle: "Your form is empty" => "הטופס שלך ריק"
+// ed.surveyPlaceholderTitleMobile: "Your form is empty" => "הטופס שלך ריק"
+// ed.surveyPlaceholderDescription: "Drag an element from the toolbox or click the button below." => "גרור רכיב מארגז הכלים או לחץ על הלחצן למטה."
+// ed.surveyPlaceholderDescriptionMobile: "Drag an element from the toolbox or click the button below." => "גרור רכיב מארגז הכלים או לחץ על הלחצן למטה."
+// ed.previewPlaceholderTitle: "No preview" => "ללא תצוגה מקדימה"
+// ed.previewPlaceholderTitleMobile: "No preview" => "ללא תצוגה מקדימה"
+// ed.previewPlaceholderDescription: "The survey doesn't contain any visible elements." => "הסקר אינו מכיל רכיבים גלויים."
+// ed.previewPlaceholderDescriptionMobile: "The survey doesn't contain any visible elements." => "הסקר אינו מכיל רכיבים גלויים."
+// ed.translationsPlaceholderTitle: "No strings to translate" => "אין מחרוזות לתרגם"
+// ed.translationsPlaceholderTitleMobile: "No strings to translate" => "אין מחרוזות לתרגם"
+// ed.translationsPlaceholderDescription: "Add elements to your form or change the strings filter in the toolbar." => "הוסף רכיבים לטופס או שנה את מסנן המחרוזות בסרגל הכלים."
+// ed.translationsPlaceholderDescriptionMobile: "Add elements to your form or change the strings filter in the toolbar." => "הוסף רכיבים לטופס או שנה את מסנן המחרוזות בסרגל הכלים."
+// lg.logicPlaceholderTitle: "No logical rules" => "אין כללים לוגיים"
+// lg.logicPlaceholderTitleMobile: "No logical rules" => "אין כללים לוגיים"
+// lg.logicPlaceholderDescription: "Create a rule to customize the flow of the survey." => "צור כלל כדי להתאים אישית את זרימת הסקר."
+// lg.logicPlaceholderDescriptionMobile: "Create a rule to customize the flow of the survey." => "צור כלל כדי להתאים אישית את זרימת הסקר."
+// pe.showTimer: "Use a timer" => "שימוש בטיימר"
+// theme.advancedMode: "Advanced mode" => "מצב מתקדם"
+// pehelp.timerLocation: "Sets the location of a timer on a page." => "הגדרת המיקום של טיימר בעמוד."
+// header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "כאשר הוא מוגדר ל- 0, הגובה מחושב באופן אוטומטי כדי להתאים לתוכן הכותרת."
+// p.mobileHeight: "Height on smartphones" => "גובה בסמארטפונים"
+// header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "כאשר אפשרות זו מופעלת, החלק העליון של הסקר מכסה את החלק התחתון של הכותרת."
