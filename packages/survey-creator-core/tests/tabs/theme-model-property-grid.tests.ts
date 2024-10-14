@@ -782,6 +782,7 @@ test("set headerViewContainer basic", (): any => {
 
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
+  const simulatorSurvey = themePlugin.model.survey;
   const themeModel = themePlugin.themeModel as ThemeModel;
   const groupHeader = themePlugin.propertyGrid.survey.pages[0].getElementByName("header");
   const headerViewContainer = groupHeader.elements[0].contentPanel;
@@ -789,6 +790,7 @@ test("set headerViewContainer basic", (): any => {
   const surveyDescriptionQuestion = headerViewContainer.getElementByName("surveyDescription");
   const header = themeModel.header as HeaderModel;
 
+  expect(simulatorSurvey.logoPosition).toEqual("left");
   expect(creator.survey.logoPosition).toEqual("left");
   expect(header["surveyTitle"]).toStrictEqual({ family: "Open Sans", weight: "700", size: 32 });
   expect(header["surveyDescription"]).toStrictEqual({ family: "Open Sans", weight: "400", size: 16 });
@@ -806,6 +808,7 @@ test("set headerViewContainer basic", (): any => {
 
   expect(creator.theme.header).toBeUndefined();
   expect(creator.survey.logoPosition).toEqual("right");
+  expect(simulatorSurvey.logoPosition).toEqual("right");
 });
 
 test("set headerViewContainer basic restore", (): any => {

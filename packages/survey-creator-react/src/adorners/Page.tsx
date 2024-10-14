@@ -34,9 +34,9 @@ export class CreatorSurveyPageComponent extends CreatorModelElement<
     super(props);
     this.rootRef = React.createRef();
   }
-  protected createModel(props: any): void {
+  protected createModel(props: ICreatorSurveyPageComponentProps): void {
     if (this.model) {
-      this.model.dispose();
+      this.model.attachToUI(props.page, this.rootRef.current);
     }
     this.model = new PageAdorner(
       props.creator,
@@ -45,9 +45,6 @@ export class CreatorSurveyPageComponent extends CreatorModelElement<
   }
   public componentDidUpdate(prevProps: any, prevState: any): void {
     super.componentDidUpdate(prevProps, prevState);
-    if (!!this.rootRef?.current) {
-      this.model.rootElement = this.rootRef.current;
-    }
   }
   protected getUpdatedModelProps(): string[] {
     return ["creator", "page"];
@@ -57,13 +54,11 @@ export class CreatorSurveyPageComponent extends CreatorModelElement<
   }
   componentDidMount() {
     super.componentDidMount();
-    if (!!this.rootRef.current) {
-      this.model.rootElement = this.rootRef.current;
-    }
+    this.model.attachToUI(this.props.page, this.rootRef.current);
   }
   componentWillUnmount() {
     super.componentWillUnmount();
-    this.model.dispose();
+    this.model.detachFromUI();
   }
   protected canRender(): boolean {
     return (
