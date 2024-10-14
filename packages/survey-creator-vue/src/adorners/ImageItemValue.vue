@@ -32,7 +32,7 @@
         >
           <SvComponent
             :is="'sv-svg-icon'"
-            :iconName="'icon-drag-area-indicator'"
+            :iconName="'icon-drag-24x24'"
             :size="24"
           ></SvComponent>
         </span>
@@ -50,7 +50,7 @@
             <SvComponent
               :is="'sv-svg-icon'"
               role="button"
-              :iconName="'icon-file'"
+              :iconName="'icon-choosefile'"
               :size="24"
               :title="adorner.selectFileTitle"
             ></SvComponent>
@@ -109,7 +109,7 @@
             <SvComponent
               :is="'sv-svg-icon'"
               :iconName="'icon-add-lg'"
-              :size="24"
+              :size="48"
               :title="adorner.addFileTitle"
             ></SvComponent>
           </span>
