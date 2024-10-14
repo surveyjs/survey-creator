@@ -23,7 +23,7 @@
   cursor: default;
   align-items: var(--ctr-toolbox-item-align, flex-start);
   align-self: var(--ctr-toolbox-item-align, flex-start);
-  &:first-child > .svc-toolbox__tool-content {
+  &:first-of-type > .svc-toolbox__tool-content {
     padding-block-start: 0;
     .svc-toolbox__item-banner {
       top: 50%;
@@ -226,7 +226,7 @@
 
 .svc-toolbox-popup {
   .sv-list__item {
-    &:first-child {
+    &:first-of-type {
       .sv-list__item-separator {
         display: none;
       }
