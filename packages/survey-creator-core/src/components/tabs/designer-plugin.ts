@@ -111,7 +111,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
 
   private syncTheme(theme?: ICreatorTheme) {
     const newTheme = theme || this.themeModel.toJSON();
-    this.creator.applyTheme(newTheme);
+    this.creator.syncTheme(newTheme);
   }
   updateThemeSettings() {
     if (this.creator.showCreatorThemeSettings) {
@@ -142,8 +142,8 @@ export class TabDesignerPlugin implements ICreatorPlugin {
 
     const settingsAction = new MenuButton({
       id: "theme-settings",
-      locTooltipName: "pe.tabs.settings",
-      iconName: "icon-settings",
+      locTooltipName: "pe.tabs.creatorSettingTitle",
+      iconName: "icon-config",
       pressed: false,
       action: () => {
         this.creator.sidebar.expandSidebar();

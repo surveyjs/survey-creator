@@ -13,24 +13,11 @@ Object.keys(Themes || {}).forEach(themeName => {
 });
 
 export class CreatorThemeModel extends Base implements ICreatorTheme {
-  public static DefaultTheme = {
-    themeName: "sc2020",
-    cssVariables: {
-      "--sjs-special-background": "#F3F3F3FF",
-      "--sjs-primary-background-500": "#19B394FF",
-      "--sjs-primary-background-10": "#19B3941A",
-      "--sjs-primary-background-400": "#14A48BFF",
-      "--sjs-secondary-background-500": "#FF9814FF",
-      "--sjs-secondary-background-25": "#FF981440",
-      "--sjs-secondary-background-10": "#FF98141A",
-      "--sjs-font-unit": "16px",
-      "--sjs-base-unit": "8px",
-      "--sjs-surface-base-unit": "8px",
-    }
-  };
-  cssVariables?: { [index: string]: string } = {};
+  static defautlThemeName = "sc2020";
+  initialCssVariables: { [index: string]: string } = {};
+  themeCssVariablesChanges?: { [index: string]: string } = {};
 
-  @property() themeName: string;
+  @property() themeName: string = CreatorThemeModel.defautlThemeName;
   @property() scale: number;
   @property() fontSize: number;
   @property() surfaceBaseUnit: number;
@@ -61,9 +48,15 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
     return "creatortheme";
   }
 
+  public get cssVariables(): { [index: string]: string } {
+    return this.toJSON()["cssVariables"] || {};
+  }
+
   private setThemeCssVariablesChanges(name: string, value: any) {
-    this.cssVariables[name] = value;
-    this.onThemePropertyChanged.fire(this, { name, value });
+    if (this.themeCssVariablesChanges[name] !== value) {
+      this.themeCssVariablesChanges[name] = value;
+      this.onThemePropertyChanged.fire(this, { name, value });
+    }
   }
   private onThemePropertyValueChangedCallback(name: string, oldValue: any, newValue: any, sender: Base, arrayChanges: ArrayChanges) {
     if (this.blockThemeChangedNotifications > 0) return;
@@ -86,12 +79,12 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
   public loadTheme(theme: ICreatorTheme = {}) {
     this.blockThemeChangedNotifications += 1;
     try {
-      const baseTheme = CreatorThemes[theme.themeName] || CreatorThemeModel.DefaultTheme;
-      this.themeName = baseTheme.themeName;
+      const baseTheme = CreatorThemes[theme.themeName] || {};
+      this.themeName = theme.themeName || baseTheme.themeName || CreatorThemeModel.defautlThemeName;
 
       const effectiveThemeCssVariables = {};
-      assign(effectiveThemeCssVariables, CreatorThemeModel.DefaultTheme.cssVariables || {}, baseTheme.cssVariables || {});
-      assign(effectiveThemeCssVariables, theme.cssVariables || {}, this.cssVariables);
+      assign(effectiveThemeCssVariables, /*CreatorThemeModel.DefaultTheme.cssVariables || {},*/ baseTheme.cssVariables || {});
+      assign(effectiveThemeCssVariables, theme.cssVariables || {}, this.themeCssVariablesChanges);
 
       const effectiveTheme: ICreatorTheme = {};
       assign(effectiveTheme, theme, { cssVariables: effectiveThemeCssVariables, themeName: this.themeName });
@@ -113,6 +106,8 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
 
     if (json.cssVariables) {
       super.fromJSON(json.cssVariables, options);
+      this.initialCssVariables = {};
+      assign(this.initialCssVariables, json.cssVariables);
 
       this.fontSize = !!this["--sjs-font-unit"] ? roundTo2Decimals(parseFloat(this["--sjs-font-unit"]) * 100 / 16) : undefined;
       this.scale = !!this["--sjs-base-unit"] ? roundTo2Decimals(parseFloat(this["--sjs-base-unit"]) * 100 / 8) : undefined;
@@ -133,14 +128,16 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
 
     const result = super.toJSON(options);
     const cssVariables = {};
-    assign(cssVariables, CreatorThemes[this.themeName]?.cssVariables);
+    assign(cssVariables, this.initialCssVariables, this.themeCssVariablesChanges);
+    result.cssVariables = cssVariables;
     Object.keys(result).forEach(key => {
       if (key.indexOf("--") == 0) {
-        cssVariables[key] = result[key];
         delete result[key];
       }
     });
-    result.cssVariables = cssVariables;
+    if (Object.keys(result.cssVariables).length === 0) {
+      delete result.cssVariables;
+    }
     return result;
   }
 }
@@ -161,6 +158,7 @@ Serializer.addProperties("creatortheme", [
   {
     type: "color",
     name: "--sjs-special-background",
+    default: "#F3F3F3FF",
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
         editor.title = getLocString("creatortheme.--sjs-special-background");
@@ -169,6 +167,7 @@ Serializer.addProperties("creatortheme", [
   }, {
     type: "color",
     name: "--sjs-primary-background-500",
+    default: "#19B394FF",
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
         editor.title = getLocString("creatortheme.--sjs-primary-background-500");
@@ -177,15 +176,18 @@ Serializer.addProperties("creatortheme", [
   }, {
     type: "color",
     name: "--sjs-secondary-background-500",
+    default: "#FF9814FF",
     displayName: ""
   }, {
     type: "spinedit",
     name: "--sjs-font-unit",
+    default: "16px",
     visible: false,
   }, {
     type: "spinedit",
     name: "fontSize",
     isSerializable: false,
+    default: 100,
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
         editor.unit = "%";
@@ -198,26 +200,14 @@ Serializer.addProperties("creatortheme", [
     }
   }, {
     type: "spinedit",
-    name: "scale",
-    isSerializable: false,
-    onPropertyEditorUpdate: function (obj: any, editor: any) {
-      if (!!editor) {
-        editor.unit = "%";
-        editor.min = 0;
-        editor.step = 5;
-        editor.title = getLocString("creatortheme.userInterfaceBaseUnit");
-        editor.titleLocation = "left";
-        editor.descriptionLocation = "hidden";
-      }
-    }
-  }, {
-    type: "spinedit",
     name: "--sjs-base-unit",
+    default: "8px",
     visible: false,
   }, {
     type: "spinedit",
     name: "scale",
     isSerializable: false,
+    default: 100,
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
         editor.unit = "%";
@@ -231,11 +221,13 @@ Serializer.addProperties("creatortheme", [
   }, {
     type: "spinedit",
     name: "--sjs-surface-base-unit",
+    default: "8px",
     visible: false,
   }, {
     type: "spinedit",
     name: "surfaceBaseUnit",
     isSerializable: false,
+    default: 100,
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
         editor.unit = "%";

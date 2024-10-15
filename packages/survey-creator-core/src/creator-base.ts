@@ -3895,6 +3895,13 @@ export class SurveyCreatorModel extends Base
   @property() creatorTheme: ICreatorTheme;
 
   public applyTheme(theme: ICreatorTheme): void {
+    this.syncTheme(theme);
+    const designerPlugin = this.getPlugin("designer") as TabDesignerPlugin;
+    if (designerPlugin) {
+      designerPlugin.updateThemeSettings();
+    }
+  }
+  public syncTheme(theme: ICreatorTheme): void {
     if (!theme) return;
     this.creatorTheme = theme;
 
