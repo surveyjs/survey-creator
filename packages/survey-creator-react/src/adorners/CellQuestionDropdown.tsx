@@ -26,9 +26,6 @@ export class CellQuestionDropdownAdornerComponent extends CreatorModelElement<
     return this.model;
   }
   render(): JSX.Element {
-    if (this.model.isDragged) {
-      return null;
-    }
     const question = this.props.question as QuestionSelectBase;
     const textStyle = (this.props.question as any).textStyle;
     return (

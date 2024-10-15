@@ -770,6 +770,33 @@ test("Preset edit model, Property grid change the new category name", () => {
   expect(locCategoryName2.text).toBe("general");
   expect(action2.enabled).toBeFalsy();
 });
+test("Preset edit model, Property grid change the new category title and then name", () => {
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  survey.currentPage = survey.getPageByName("page_propertyGrid_definition");
+  survey.setValue("propertyGrid_definition_selector", "survey");
+  const propGridCreator = getPropGridCreator(survey);
+  propGridCreator.selectElement(propGridCreator.survey.getQuestionByName("title"));
+  propGridCreator.clickToolboxItem(propGridCreator.toolbox.getItemByName("panel").json);
+  const newPanel = propGridCreator.survey.getPanelByName("category1");
+  newPanel.title = "My Category";
+
+  let propGridSurvey = getPropGridSurvey(survey);
+  let categoryPanel = propGridSurvey.getPanelByName("category1");
+  expect(categoryPanel).toBeTruthy();
+  expect(categoryPanel.title).toBe("My Category");
+
+  const panel1Adorner = new QuestionPresetAdornerViewModel(editor.creator, newPanel, null);
+  const action1 = panel1Adorner.actionContainer.getActionById("svc_category_name");
+  expect(action1).toBeTruthy();
+  const locCategoryName1 = action1.locTitle;
+  locCategoryName1.text = "my_new_category";
+  propGridSurvey = getPropGridSurvey(survey);
+  expect(propGridSurvey.getPanelByName("category1")).toBeFalsy();
+  categoryPanel = propGridSurvey.getPanelByName("my_new_category");
+  expect(categoryPanel).toBeTruthy();
+  expect(categoryPanel.title).toBe("My Category");
+});
 function addLocale(name: string): void {
   if(!surveyLocalization.locales[name]) {
     surveyLocalization.locales[name] = {};

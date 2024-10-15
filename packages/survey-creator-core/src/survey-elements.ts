@@ -11,17 +11,24 @@ export function calculateIsSide(dropTargetNode: HTMLElement, clientX: number) {
   const rect = dropTargetNode.getBoundingClientRect();
   return clientX - rect.left <= DragDropSurveyElements.edgeHeight || rect.right - clientX <= DragDropSurveyElements.edgeHeight;
 }
-export function calculateDragOverLocation(clientX: number, clientY: number, dropTargetNode: HTMLElement): DragTypeOverMeEnum {
-  const rect = dropTargetNode.getBoundingClientRect();
+
+export function calculateDragOverLocation(clientX: number, clientY: number, rect: DOMRectInit, direction: "top-bottom" | "left-right" = null): DragTypeOverMeEnum {
   const tg = rect.height / rect.width;
   const dx = clientX - rect.x;
   const dy = clientY - rect.y;
 
-  if (!settings.dragDrop.allowDragToTheSameLine) {
+  if (direction == "top-bottom") {
     if (dy >= rect.height / 2) {
       return DragTypeOverMeEnum.Bottom;
     } else {
       return DragTypeOverMeEnum.Top;
+    }
+  }
+  if (direction == "left-right") {
+    if (dx >= rect.width / 2) {
+      return DragTypeOverMeEnum.Right;
+    } else {
+      return DragTypeOverMeEnum.Left;
     }
   }
 
@@ -61,10 +68,14 @@ export class DragDropSurveyElements extends DragDropCore<any> {
   protected dragOverLocation: DragTypeOverMeEnum;
 
   protected get draggedElementType(): string {
+    if (!!this.draggedElement && this.draggedElement.isPage) {
+      return "survey-page";
+    }
     return "survey-element";
   }
   protected isDraggedElementSelected: boolean = false;
   public onGetMaxNestedPanels: () => number;
+  public onDragOverLocationCalculating: (options: any) => void;
   public get maxNestedPanels(): number { return this.onGetMaxNestedPanels ? this.onGetMaxNestedPanels() : -1; }
 
   // private isRight: boolean;
@@ -255,15 +266,6 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     return oldPage && oldPage !== newPage;
   }
 
-  private getPanelDropTarget(HTMLElement: HTMLElement, dropTarget: any, event: PointerEvent) {
-    if (dropTarget.questions.length !== 0) {
-      HTMLElement = this.findDeepestDropTargetChild(HTMLElement);
-      dropTarget = this.getDropTargetByNode(HTMLElement, event);
-    }
-
-    return dropTarget;
-  }
-
   protected findDeepestDropTargetChild(parent: HTMLElement): HTMLElement {
     const selector = this.dropTargetDataAttributeName;
 
@@ -362,11 +364,28 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     const dropTarget = this.getDropTargetByNode(dropTargetNode, event);
 
     if (!!oldInsideContainer != !!this.insideContainer) dropTarget.dragTypeOverMe = null;
-    let dragOverLocation = calculateDragOverLocation(event.clientX, event.clientY, dropTargetNode);
+    const dropTargetRect = dropTargetNode.getBoundingClientRect();
+    const calcDirection = !settings.dragDrop.allowDragToTheSameLine || (!!this.draggedElement && this.draggedElement.isPage) ? "top-bottom" : null;
+    let dragOverLocation = calculateDragOverLocation(event.clientX, event.clientY, dropTargetRect, calcDirection);
     if (dropTarget && ((dropTarget.isPanel || dropTarget.isPage) && dropTarget.elements.length === 0 || isPanelDynamic(dropTarget) && dropTarget.template.elements.length == 0)) {
       if (dropTarget.isPage || this.insideContainer) {
         dragOverLocation = DragTypeOverMeEnum.InsideEmptyPanel;
       }
+    }
+    const options = {
+      survey: this.survey,
+      draggedSurveyElement: this.draggedElement,
+      dragOverSurveyElement: dropTarget,
+      clientX: event.clientX,
+      clientY: event.clientY,
+      dragOverRect: dropTargetRect,
+      insideContainer: this.insideContainer,
+      dragOverLocation
+    };
+    if (this.onDragOverLocationCalculating) {
+      this.onDragOverLocationCalculating(options);
+      dragOverLocation = options.dragOverLocation;
+      this.insideContainer = options.insideContainer;
     }
     const isDropTargetValid = this.isDropTargetValid(
       dropTarget,
@@ -405,6 +424,13 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     const page = this.parentElement;
     const dragged = this.draggedElement;
     const src = this.draggedElement;
+
+    if (dragged.isPage && dragged instanceof PageModel) {
+      const survey = dragged.survey;
+      survey.pages.splice(survey.pages.indexOf(dragged), 1);
+      survey.pages.splice(survey.pages.indexOf(this.dropTarget) + (this.dragOverLocation === DragTypeOverMeEnum.Top ? 0 : 1), 0, dragged);
+      return dragged;
+    }
 
     const convertLocation = () => {
       switch (this.dragOverLocation) {

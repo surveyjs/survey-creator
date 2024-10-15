@@ -63,9 +63,6 @@ export class ImageItemValueAdornerComponent extends CreatorModelElement<
   }
 
   render(): JSX.Element {
-    // if (this.model.question.isDragged) {
-    //   return null;
-    // }
     this.model.item = this.props.item;
     const isNew = !this.props.question.isItemInList(this.props.item);
     this.model.isNew = isNew;

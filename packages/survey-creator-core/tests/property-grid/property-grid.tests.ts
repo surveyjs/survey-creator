@@ -2122,6 +2122,44 @@ test("title for expression property for expression column, Bug#5531", () => {
   const expressionQuestion = propertyGrid.survey.getQuestionByName("expression");
   expect(expressionQuestion.title).toEqual("Expression");
 });
+test("Support property availableInMatrixColumn attribute, #5877", (): any => {
+  Serializer.addProperty("question", { name: "prop1", category: "general", availableInMatrixColumn: true });
+  Serializer.addProperty("question", { name: "prop2", category: "general" });
+
+  const question = new QuestionMatrixDynamicModel("q1");
+  const column = question.addColumn("col1");
+  const propertyGrid = new PropertyGridModelTester(column);
+  const prop1Question = <QuestionCommentModel>propertyGrid.survey.getQuestionByName("prop1");
+  const prop2Question = <QuestionCommentModel>propertyGrid.survey.getQuestionByName("prop2");
+  expect(prop1Question).toBeTruthy();
+  expect(prop1Question.parent.name).toBe("general");
+  expect(prop2Question).toBeFalsy();
+
+  Serializer.removeProperty("question", "prop1");
+  Serializer.removeProperty("question", "prop2");
+});
+test("Support property availableInMatrixColumn attribute && correct category, #5877", (): any => {
+  Serializer.addProperty("question", { name: "prop1", availableInMatrixColumn: true });
+  Serializer.addProperty("question", { name: "prop2" });
+  Serializer.addProperty("question", { name: "prop3", availableInMatrixColumn: true });
+
+  const def = SurveyQuestionEditorDefinition.definition["question"];
+  def.properties?.push({ name: "prop1", tab: "validation" });
+  def.properties?.push({ name: "prop2", tab: "validation" });
+  const question = new QuestionMatrixDynamicModel("q1");
+  const column = question.addColumn("col1");
+  const propertyGrid = new PropertyGridModelTester(column);
+  const prop1Question = <QuestionCommentModel>propertyGrid.survey.getQuestionByName("prop1");
+  const prop2Question = <QuestionCommentModel>propertyGrid.survey.getQuestionByName("prop2");
+  expect(prop1Question).toBeTruthy();
+  expect(prop1Question.parent.name).toBe("validation");
+  expect(prop2Question).toBeFalsy();
+
+  Serializer.removeProperty("question", "prop1");
+  Serializer.removeProperty("question", "prop2");
+  Serializer.removeProperty("question", "prop3");
+});
+
 test("Validate Selected Element Errors", (): any => {
   var titleProp = Serializer.findProperty("question", "title");
   var oldIsRequired = titleProp.isRequired;

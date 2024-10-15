@@ -60,9 +60,6 @@ export class ItemValueAdornerComponent extends CreatorModelElement<
   }
 
   render(): JSX.Element {
-    // if (this.model.question.isDragged) {
-    //   return null;
-    // }
     this.model.item = this.props.item;
     const button = this.model.allowAdd ? (
       attachKey2click(<span

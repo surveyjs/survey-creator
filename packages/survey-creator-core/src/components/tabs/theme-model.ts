@@ -254,8 +254,10 @@ export class ThemeModel extends Base implements ITheme {
   }
 
   private setThemeCssVariablesChanges(name: string, value: any) {
-    this.themeCssVariablesChanges[name] = value;
-    this.onThemePropertyChanged.fire(this, { name, value });
+    if (this.themeCssVariablesChanges[name] !== value) {
+      this.themeCssVariablesChanges[name] = value;
+      this.onThemePropertyChanged.fire(this, { name, value });
+    }
   }
 
   constructor() {
