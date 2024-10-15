@@ -13,10 +13,10 @@ svc-toolbox {
   width: var(--ctr-toolbox-min-width, 224.984375px /*calcSize(28)*/);
   .spg-search-editor_container {
     background: var(--ctr-toolbox-background-color, $background-dim);
-    padding-top: var(--ctr-toolbox-search-padding-top, calcSize(1));
-    padding-inline-end: var(--ctr-toolbox-search-padding-right, calcSize(1));
+    padding-top: var(--ctr-toolbox-search-padding-top, calcSize(2.5));
+    padding-inline-end: var(--ctr-toolbox-search-padding-right, calcSize(2));
     padding-bottom: var(--ctr-toolbox-search-padding-bottom, calcSize(2.5));
-    padding-inline-start: var(--ctr-toolbox-search-padding-left, calcSize(1.5));
+    padding-inline-start: var(--ctr-toolbox-search-padding-left, calcSize(3));
 
     width: unset;
     flex-grow: 1;
@@ -134,6 +134,9 @@ svc-toolbox {
   }
   .svc-toolbox__search-container {
     border-bottom: 0;
+    padding-top: var(--ctr-toolbox-padding-top, calcSize(1.5));
+    padding-inline-start: var(--ctr-toolbox-group-padding-left, calcSize(1.5));
+    padding-inline-end: var(--ctr-toolbox-group-padding-left, calcSize(1));
   }
   .svc-toolbox__category-separator {
     margin-top: calc(var(--ctr-toolbox-separator-padding-top, 8px) + var(--ctr-toolbox-gap, 4px));
@@ -205,9 +208,6 @@ svc-toolbox {
   position: sticky;
   top: 0;
   z-index: 30;
-  padding-top: var(--ctr-toolbox-padding-top, calcSize(1.5));
-  padding-inline-start: var(--ctr-toolbox-group-padding-left, calcSize(1.5));
-  padding-inline-end: var(--ctr-toolbox-group-padding-left, calcSize(1));
   display: none;
   flex-direction: column;
   box-sizing: border-box;

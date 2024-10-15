@@ -93,6 +93,7 @@
   z-index: 200;
   top: calc(50% + var(--ctr-toolbox-group-gap, 4px) / 2);
   transform: translate(0, -50%);
+  pointer-events: none;
   .svc-toolbox__item-icon {
     position: absolute;
     display: var(--ctr-toolbox-item-banner-icon-display, block);
@@ -136,6 +137,7 @@
   .svc-toolbox__item-banner {
     display: var(--ctr-toolbox-item-banner-display, flex);
     opacity: 1;
+    pointer-events: initial;
 
     // .svc-toolbox__item-title {
     //   padding-inline-start: calcSize(4);
