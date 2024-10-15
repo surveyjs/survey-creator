@@ -510,6 +510,7 @@ export class QuestionToolbox
     useDefaultCategories = false
   ) {
     super();
+    this.subItemsShowDelay = 0;
     this.searchManager.isVisible = this.searchEnabled;
     this.searchManager.toolbox = this;
     this.searchItem = new Action({
