@@ -7,7 +7,7 @@
     </span>
     <span *ngIf="!isCompact" class="svc-toolbox__item-title">{{item.title}}</span>
     </div>
-  <span *ngIf="isCompact" class="svc-toolbox__item-banner">
+  <span *ngIf="isCompact" class="svc-toolbox__item-banner" (click)="viewModel.click($event)">
     <svg *ngIf="item.iconName" [iconName]="item.iconName" [size]="24" class="svc-toolbox__item-icon" sv-ng-svg-icon></svg>
     <span>{{item.title}}</span>
     </span>

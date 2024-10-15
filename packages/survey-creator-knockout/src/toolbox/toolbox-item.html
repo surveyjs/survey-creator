@@ -11,7 +11,7 @@
   <!-- /ko -->
   </div>
 <!-- ko if: isCompact -->
-<span class="svc-toolbox__item-banner">
+<span class="svc-toolbox__item-banner" data-bind="click: (target, event)=>{ target.model.click(event); return true;}">
   <!-- ko component: { name: 'sv-svg-icon', params: { iconName: iconName, size: 24, css: "svc-toolbox__item-icon" }  } -->
   <!-- /ko -->
   <span data-bind="text: title"></span>

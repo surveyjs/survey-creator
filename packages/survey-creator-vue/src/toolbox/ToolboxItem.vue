@@ -20,7 +20,7 @@
       {{ item.title }}
     </span>
   </div>
-  <span v-if="isCompact" class="svc-toolbox__item-banner">
+  <span v-if="isCompact" class="svc-toolbox__item-banner" @click="viewModel.click($event)">
       <SvComponent
         :is="'sv-svg-icon'"
         :iconName="item.iconName"
