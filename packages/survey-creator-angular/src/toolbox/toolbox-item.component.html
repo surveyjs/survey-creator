@@ -7,8 +7,8 @@
     </span>
     <span *ngIf="!isCompact" class="svc-toolbox__item-title">{{item.title}}</span>
     </div>
-  <span *ngIf="isCompact" class="svc-toolbox__item-banner svc-item__banner">
+  <span *ngIf="isCompact" class="svc-toolbox__item-banner">
     <svg *ngIf="item.iconName" [iconName]="item.iconName" [size]="24" class="svc-toolbox__item-icon" sv-ng-svg-icon></svg>
-    <span class="svc-toolbox__item-title">{{item.title}}</span>
+    <span>{{item.title}}</span>
     </span>
 </ng-template>

@@ -1,16 +1,16 @@
 <ng-template #template>
   <div [class]="model.classNames" #container>
     <div (focusout)="model.focusOut($event)" class="svc-toolbox__panel">
-      <svc-search [model]="model.searchManager"></svc-search>
+      <div *ngIf="model.showSearch" class="svc-toolbox__search-container">
+        <ng-container *ngIf="model.isCompactRendered">
+          <svc-toolbox-tool [creator]="creator" [item]="searchItem" [parentModel]="model"
+            [isCompact]="model.isCompactRendered"></svc-toolbox-tool>
+          <div class="svc-toolbox__category-separator svc-toolbox__category-separator--search"></div>
+        </ng-container>
+        <svc-search [model]="model.searchManager"></svc-search>
+      </div>
       <div class="svc-toolbox__scroll-wrapper">
         <div class="svc-toolbox__scroller sv-drag-target-skipped" (scroll)="model.onScroll(model, $event)">
-          <div *ngIf="model.showSearch" class="svc-toolbox__search-container">
-            <ng-container *ngIf="model.isCompactRendered">
-              <svc-toolbox-tool [creator]="creator" [item]="searchItem" [parentModel]="model"
-                [isCompact]="model.isCompactRendered"></svc-toolbox-tool>
-              <div class="svc-toolbox__category-separator svc-toolbox__category-separator--search"></div>
-            </ng-container>
-          </div>
           <div *ngIf="model.showPlaceholder" class="svc-toolbox__placeholder">{{model.toolboxNoResultsFound}}</div>
           <div class="svc-toolbox__container">
             <ng-container *ngIf="!model.showInSingleCategory">
