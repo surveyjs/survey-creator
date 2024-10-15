@@ -259,6 +259,34 @@ test("headerViewContainer: background color", (): any => {
   expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBeUndefined();
 });
 
+test("headerViewContainer: background color reset #5940", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+
+  creator.activeTab = "theme";
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  let themeModel = themePlugin.themeModel as ThemeModel;
+  let header = themeModel.header as HeaderModel;
+
+  header["headerView"] = "advanced";
+  expect(header["backgroundColorSwitch"]).toBe("accentColor");
+  expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBeUndefined();
+  expect(themeModel.cssVariables["--sjs-header-backcolor"]).toBeUndefined();
+
+  header["backgroundColorSwitch"] = "none";
+  expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBe("transparent");
+  expect(themeModel.cssVariables["--sjs-header-backcolor"]).toBe("transparent");
+
+  header["backgroundColorSwitch"] = "accentColor";
+  expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBeUndefined();
+  expect(themeModel.cssVariables["--sjs-header-backcolor"]).toBeUndefined();
+
+  creator.activeTab = "designer";
+  creator.activeTab = "theme";
+  expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBeUndefined();
+  expect(themeModel.cssVariables["--sjs-header-backcolor"]).toBeUndefined();
+});
+
 test("header custom background color and theme changes", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");

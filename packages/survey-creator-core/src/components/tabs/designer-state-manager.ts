@@ -15,13 +15,13 @@ export class DesignerStateManager {
   }
 
   private onQuestionAddedHandler = (sender, opts): void => {
-    this.createElementState(opts.question, false);
+    this.createElementState(opts.question, this.isSuspended);
   }
   private onPageAddedHandler = (sender, opts): void => {
-    this.createElementState(opts.page, false);
+    this.createElementState(opts.page, this.isSuspended);
   }
   private onPanelAddedHandler = (sender, opts): void => {
-    this.createElementState(opts.panel, false);
+    this.createElementState(opts.panel, this.isSuspended);
   }
   initForSurvey(survey: SurveyModel) {
     survey.onQuestionAdded.add(this.onQuestionAddedHandler);
@@ -59,6 +59,14 @@ export class DesignerStateManager {
     return res;
   }
   public onInitElementStateCallback: (element: SurveyElement, state: ElementState) => void;
-  constructor() {
+  private _suspendCounter = 0;
+  public suspend() {
+    this._suspendCounter++;
+  }
+  public release() {
+    this._suspendCounter--;
+  }
+  public get isSuspended() {
+    return this._suspendCounter > 0;
   }
 }

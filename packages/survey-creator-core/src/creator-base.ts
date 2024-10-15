@@ -53,14 +53,14 @@ import {
   PageAddingEvent, DragStartEndEvent
 } from "./creator-events-api";
 import { ExpandCollapseManager } from "./expand-collapse-manager";
+import designTabSurveyThemeJSON from "./designTabSurveyThemeJSON";
+import { ICreatorTheme } from "./creator-theme/creator-themes";
+import { SurveyElementAdornerBase } from "./components/action-container-view-model";
 import { TabbedMenuContainer, TabbedMenuItem } from "./tabbed-menu";
 
 require("./components/creator.scss");
 require("./components/string-editor.scss");
 require("./creator-theme/creator.scss");
-
-import designTabSurveyThemeJSON from "./designTabSurveyThemeJSON";
-import { ICreatorTheme } from "./creator-theme/creator-themes";
 
 export interface IKeyboardShortcut {
   name?: string;
@@ -734,6 +734,8 @@ export class SurveyCreatorModel extends Base
    * @see onDragEnd
    */
   public onDragDropAllow: EventBase<SurveyCreatorModel, DragDropAllowEvent> = this.addCreatorEvent<SurveyCreatorModel, DragDropAllowEvent>();
+
+  public onDragOverLocationCalculating: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
 
   /**
    * An event that allows you to create a custom message panel.
@@ -1880,26 +1882,49 @@ export class SurveyCreatorModel extends Base
       settings.dragDrop.restrictDragQuestionBetweenPages;
     this.dragDropSurveyElements = new DragDropSurveyElements(null, this);
     this.dragDropSurveyElements.onGetMaxNestedPanels = (): number => { return this.maxNestedPanels; };
+    this.dragDropSurveyElements.onDragOverLocationCalculating = (options) => { this.onDragOverLocationCalculating.fire(this, options); };
     let isDraggedFromToolbox = false;
     this.dragDropSurveyElements.onDragStart.add((sender, options) => {
-      isDraggedFromToolbox = !sender.draggedElement.parent;
+      isDraggedFromToolbox = !sender.draggedElement.parent && !sender.draggedElement.isPage;
       this.onDragStart.fire(this, options);
       this.startUndoRedoTransaction("drag drop");
     });
     this.dragDropSurveyElements.onDragEnd.add((sender, options) => {
       this.stopUndoRedoTransaction();
       const editTitle = isDraggedFromToolbox && this.startEditTitleOnQuestionAdded;
-      isDraggedFromToolbox = false;
       if (!options.draggedElement) return;
       this.selectElement(options.draggedElement, undefined, true, editTitle);
       this.onDragEnd.fire(this, options);
-      if (!options.fromElement) {
+      if (!options.fromElement && !options.draggedElement.isPage) {
         this.setModified({ type: "ADDED_FROM_TOOLBOX", question: options.draggedElement });
       }
     });
     this.dragDropSurveyElements.onDragClear.add((sender, options) => {
+      isDraggedFromToolbox = false;
       this.stopUndoRedoTransaction();
+      if (this.collapsePagesOnDrag) {
+        this.designerStateManager?.release();
+        this.restorePagesState();
+      }
     });
+  }
+  public get designerStateManager() {
+    return (this.getPlugin("designer") as TabDesignerPlugin).designerStateManager;
+  }
+  public collapseAllPages(): void {
+    this.survey.pages.forEach(page => {
+      const pageAdorner = SurveyElementAdornerBase.GetAdorner(page);
+      if (pageAdorner) {
+        pageAdorner.collapsed = true;
+      }
+    });
+  }
+  public restorePagesState(): void {
+    setTimeout(() => {
+      this.survey.pages.forEach(page => {
+        SurveyElementAdornerBase.RestoreStateFor(page);
+      });
+    }, 10);
   }
   private initDragDropChoices() {
     this.dragDropChoices = new DragDropChoices(null, this);
@@ -3909,6 +3934,9 @@ export class SurveyCreatorModel extends Base
     assign(newCssVariable, theme?.cssVariables);
     this.themeVariables = newCssVariable;
   }
+
+  public allowDragPages = false;
+  public collapsePagesOnDrag = false;
 }
 
 export class CreatorBase extends SurveyCreatorModel { }

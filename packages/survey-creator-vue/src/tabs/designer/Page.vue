@@ -5,6 +5,7 @@
     :id="model.page.id"
     class="svc-page__content"
     :class="model.css"
+    :data-sv-drop-target-survey-page="model.dropTargetName"
     v-key2click
     @click="
       (e) => {
@@ -17,7 +18,34 @@
     @mouseover="hover"
     @mouseleave="hover"
   >
-    <div class="svc-page__content-actions">
+    <div
+      class="svc-question__drop-indicator svc-question__drop-indicator--top"
+    ></div>
+    <div
+      class="svc-question__drop-indicator svc-question__drop-indicator--bottom"
+    ></div>
+    <div
+      v-if="model.allowDragging && !model.isGhost"
+      class="svc-question__drag-area"
+      v-on:pointerdown="(e) => model.onPointerDown(e)"
+    >
+      <SvComponent
+        :is="'sv-svg-icon'"
+        class="svc-question__drag-element"
+        v-bind="{
+          css: 'svc-question__drag-element',
+          iconName: 'icon-drag-area-indicator_24x16',
+          size: 24,
+        }"
+      ></SvComponent>
+      <div class="svc-page__content-actions">
+        <SvComponent
+          :is="'sv-action-bar'"
+          :model="model.actionContainer"
+        ></SvComponent>
+      </div>
+    </div>
+    <div v-if="!model.allowDragging || model.isGhost" class="svc-page__content-actions">
       <SvComponent
         :is="'sv-action-bar'"
         :model="model.actionContainer"

@@ -1913,3 +1913,121 @@ test("Drag Drop indicator - rows", async (t) => {
     .expect(Selector(".svc-row").nth(1).hasClass("svc-row--drag-over-top")).notOk()
     .expect(Selector(".svc-row").nth(1).hasClass("svc-row--drag-over-bottom")).notOk();
 });
+
+test("Drag Drop page with other pages collapsed on start drag", async (t) => {
+  await ClientFunction(() => {
+    window["creator"].expandCollapseButtonVisibility = "always";
+    window["creator"].allowDragPages = true;
+    window["creator"].collapsePagesOnDrag = true;
+  })();
+
+  await t.resizeWindow(1600, 900);
+  const json = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          }
+        ]
+      },
+      {
+        "name": "page2",
+        "elements": [
+          {
+            "type": "boolean",
+            "name": "question2"
+          }
+        ]
+      },
+      {
+        "name": "page3",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question3"
+          }
+        ]
+      },
+      {
+        "name": "page4",
+        "elements": [
+          {
+            "type": "rating",
+            "name": "question4"
+          }
+        ]
+      }
+    ]
+  };
+  await setJSON(json);
+
+  const expectedJson = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page4",
+        "elements": [
+          {
+            "type": "rating",
+            "name": "question4"
+          }
+        ]
+      },
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          }
+        ]
+      },
+      {
+        "name": "page2",
+        "elements": [
+          {
+            "type": "boolean",
+            "name": "question2"
+          }
+        ]
+      },
+      {
+        "name": "page3",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question3"
+          }
+        ]
+      }
+    ]
+  };
+
+  const page1 = Selector("[data-sv-drop-target-survey-page=\"page1\"]");
+  const page4 = Selector("[data-sv-drop-target-survey-page=\"page4\"]");
+  const page4DragHandle = Selector("[data-sv-drop-target-survey-page=\"page4\"] > .svc-question__drag-area > .svc-question__drag-element");
+
+  await t
+    .scrollIntoView(page4)
+    .hover(page4, { offsetX: 150, offsetY: 20 })
+    .expect(Selector(".svc-page__content--collapsed").count).eql(0)
+    .dispatchEvent(page4DragHandle, "pointerdown")
+    .hover(page4, { speed: 0.05 })
+    .expect(page4.hasClass("svc-page__content--dragged")).ok()
+    .expect(Selector(".svc-page__content--collapsed").count).eql(4)
+    .hover(page1, { offsetX: 150, offsetY: 60, speed: 0.05 })
+    .expect(page1.find(".svc-question__drop-indicator--top").visible).notOk()
+    .expect(page1.find(".svc-question__drop-indicator--bottom").visible).ok()
+    .hover(page1, { offsetX: 150, offsetY: 10, speed: 0.05 })
+    .expect(page1.find(".svc-question__drop-indicator--top").visible).ok()
+    .expect(page1.find(".svc-question__drop-indicator--bottom").visible).notOk()
+    .dispatchEvent(page4DragHandle, "pointerup")
+    .wait(500)
+    .expect(Selector(".svc-page__content--collapsed").count).eql(0);
+  const resultJson0 = await getJSON();
+  await t.expect(resultJson0).eql(expectedJson);
+});
