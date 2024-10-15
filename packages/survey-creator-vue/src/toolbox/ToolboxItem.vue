@@ -20,14 +20,14 @@
       {{ item.title }}
     </span>
   </div>
-  <span v-if="isCompact" class="svc-toolbox__item-banner svc-item__banner">
+  <span v-if="isCompact" class="svc-toolbox__item-banner">
       <SvComponent
         :is="'sv-svg-icon'"
         :iconName="item.iconName"
         :size="24"
         class="svc-toolbox__item-icon"
       ></SvComponent>
-      <span class="svc-toolbox__item-title">{{ item.title }}</span>
+      <span>{{ item.title }}</span>
   </span>
 </template>
 <script lang="ts" setup>
