@@ -46,6 +46,7 @@ const Theme = {
     "--ctr-toolbox-item-shadow-subitem-1-color": "#00000000",
     "--ctr-toolbox-item-shadow-subitem-2-color": "#00000000",
     "--ctr-toolbox-submenu-margin-left": "0px",
+    "--ctr-survey-page-drag-indicator-opacity": "50px",
     "--ctr-toolbox-item-icon-color": "var(--sjs-primary-background-500)",
     "--ctr-toolbox-item-text-color": "var(--sjs-layer-1-foreground-100)",
     "--ctr-toolbox-item-icon-color-pressed": "var(--sjs-layer-1-foreground-100)",
