@@ -130,6 +130,10 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   private hoverTimeout: any;
   @property({ defaultValue: false }) private isHovered: boolean;
 
+  protected get hoverDelay():number {
+    return this.creator.pageHoverDelay;
+  }
+
   public hover(e: MouseEvent, element: HTMLElement | any) {
     const processedFlagName = "__svc_question_processed";
     if (!e[processedFlagName] && e.type === "mouseover") {
@@ -137,7 +141,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
         this.hoverTimeout = setTimeout(() => {
           this.isHovered = true;
           this.hoverTimeout = undefined;
-        }, this.creator.pageHoverDelay);
+        }, this.hoverDelay);
       }
       e[processedFlagName] = true;
     } else {

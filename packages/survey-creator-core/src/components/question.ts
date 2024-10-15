@@ -279,6 +279,12 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   get isDraggable() {
     return true;
   }
+  get hoverDelay():number {
+    if (this.creator["animationEnabled"]) {
+      return this.creator.pageHoverDelay;
+    }
+    return 0;
+  }
   public hover(event: MouseEvent, element: HTMLElement | any) {
     if (!this.surveyElement.isInteractiveDesignElement) {
       return;
