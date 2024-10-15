@@ -14,6 +14,7 @@ import { editorLocalization } from "../../editorLocalization";
 import { creatorThemeModelPropertyGridDefinition } from "../../creator-theme/creator-theme-model-definition";
 import { CreatorThemeModel } from "../../creator-theme/creator-theme-model";
 import { ICreatorTheme } from "../../creator-theme/creator-themes";
+import { getPredefinedColorsItemValues } from "./themes";
 
 export class TabDesignerPlugin implements ICreatorPlugin {
   public model: TabDesignerViewModel;
@@ -113,10 +114,18 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     const newTheme = theme || this.themeModel.toJSON();
     this.creator.syncTheme(newTheme);
   }
+  private updatePredefinedColorChoices() {
+    this.themePropertyGrid.survey.getAllQuestions().forEach(question => {
+      if (question.name === "--sjs-primary-background-500" || question.name === "--sjs-secondary-background-500") {
+        (question as any).choices = getPredefinedColorsItemValues(this.themeModel["isLight"] === false ? "dark" : "light");
+      }
+    });
+  }
   updateThemeSettings() {
     if (this.creator.showCreatorThemeSettings) {
       this.themeModel.loadTheme(this.creator.creatorTheme);
       this.themePropertyGrid.obj = this.themeModel;
+      this.updatePredefinedColorChoices();
     }
   }
   private createCreatorThemeSettingsPage(creator: SurveyCreatorModel) {
@@ -135,6 +144,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       this.syncTheme(options.theme);
       this.themePropertyGrid.survey.editingObj = undefined;
       this.themePropertyGrid.survey.editingObj = sender;
+      this.updatePredefinedColorChoices();
     });
     this.themeModel.onThemePropertyChanged.add((sender, options) => {
       this.syncTheme();

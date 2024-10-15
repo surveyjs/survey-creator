@@ -63,7 +63,7 @@
   color: var(--ctr-property-grid-placeholder-text-title-color, rgba(0, 0, 0, 0.91));
   text-align: center;
   font-family: var(--ctr-font-family, "Open Sans");
-  font-size: var(--ctr-font-default-size, var(--sjs-font-unit, 16px));
+  font-size: var(--ctr-font-default-size, 16px);
   font-style: normal;
   font-weight: 600;
   line-height: var(--ctr-font-default-line-height, 24px) /* 150% */;

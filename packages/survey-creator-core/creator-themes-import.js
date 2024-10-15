@@ -8,18 +8,23 @@ const cssVariablesRegExp = /(?<variable>--\w*(-*\w*)*)/gi;
 var themeNameMap = {
   "v2-20": "sc2020",
   "v2-24": "default"
-}
+};
 var creatorThemePalettes = {
   "default": ["light", "dark", "contrast"]
-}
+};
+var palettes = {
+  "light": ["default-light", "default-contrast"],
+  "dark": ["default-dark"],
+};
+
 const baseThemeCssVariable = getCssVariablesFormFile(baseThemeName + ".css");
 const themeDistinctions = {};
 
 function getUsedCssVariables(path) {
-  fs.readdirSync(path, {withFileTypes: true}).forEach(item => {
+  fs.readdirSync(path, { withFileTypes: true }).forEach(item => {
     if(item.isDirectory()) {
       getUsedCssVariables(path + item.name + "/");
-    } else if(item.name.indexOf(".scss") === (item.name.length - 5 )) {
+    } else if(item.name.indexOf(".scss") === (item.name.length - 5)) {
       const data = fs.readFileSync(path + item.name, "utf8");
 
       const matches = data.matchAll(cssVariablesRegExp);
@@ -28,7 +33,7 @@ function getUsedCssVariables(path) {
         if(usedCssVariablesList.indexOf(variable) === -1) {
           usedCssVariablesList.push(variable);
         }
-      });    
+      });
     }
   });
 }
@@ -37,11 +42,11 @@ function getCssVariablesFormFile(fileName) {
   try {
     const data = fs.readFileSync(sourcePath + fileName, "utf8");
     // console.log(data);
-  
+
     const matches = data.matchAll(regularExpression);
     const themeCssVariables = {};
-    Array.from(matches, m => themeCssVariables[m.groups["var1"]] = m.groups["var2"]);    
-    return themeCssVariables;  
+    Array.from(matches, m => themeCssVariables[m.groups["var1"]] = m.groups["var2"]);
+    return themeCssVariables;
   } catch (err) {
     console.error(err);
   }
@@ -49,6 +54,24 @@ function getCssVariablesFormFile(fileName) {
 
 function capitalizedFirstLetter(word) {
   return word.charAt(0).toUpperCase() + word.slice(1);
+}
+
+function getCorrectValue(variableKey, value) {
+  if(variableKey.indexOf("-opacity-") > -1) {
+    return parseInt(value) / 100;
+  } else {
+    return value;
+  }
+}
+
+function isLightTheme(themeName) {
+  let result = true;
+  Object.keys(palettes).forEach(palette => {
+    if(palettes[palette].indexOf(themeName) > -1) {
+      result = palette === "light";
+    }
+  });
+  return result;
 }
 
 function writeTheme(themeName, cssVariables, variableName) {
@@ -62,8 +85,9 @@ function writeThemePalette(themeName, paletteName, cssVariables) {
   const fileName = [themeName, paletteName].join("-");
   const baseThemeVariable = capitalizedFirstLetter(themeName);
   const variableName = [baseThemeVariable, capitalizedFirstLetter(paletteName)].join("");
+  const isLight = isLightTheme(fileName);
 
-  const theme = { themeName: fileName, cssVariables: cssVariables };
+  const theme = { themeName: fileName, isLight: isLight, cssVariables: cssVariables };
   const themeJson = JSON.stringify(theme, null, 2);
   const importsString = `import { assign } from "./utils";\nimport { ${baseThemeVariable} } from "./${themeName}";\n`;
   const useImportString = `const themeCssVariables = {};\nassign(themeCssVariables, ${baseThemeVariable}.cssVariables, Theme.cssVariables);\nassign(Theme, { cssVariables: themeCssVariables });\n`;
@@ -82,16 +106,13 @@ Object.keys(themeNameMap).forEach(themeName => {
     const distinctions = {};
     Object.keys(curThemeCssVariables || {}).forEach(variableKey => {
       const variableValue = curThemeCssVariables[variableKey];
-      if(variableValue !== baseThemeCssVariable[variableKey]) {
-        distinctions[variableKey] = variableValue;
-      } else if(usedCssVariablesList.indexOf(variableKey) !== -1) {
-        distinctions[variableKey] = variableValue
+      if(variableValue !== baseThemeCssVariable[variableKey] || usedCssVariablesList.indexOf(variableKey) !== -1) {
+        distinctions[variableKey] = getCorrectValue(variableKey, variableValue);
       }
     });
     themeDistinctions[themeNameMap[themeName]] = distinctions;
   }
 });
-
 
 Object.keys(themeNameMap).forEach(themeName => {
   let indexFileContent = "";

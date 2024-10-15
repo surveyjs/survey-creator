@@ -21,6 +21,7 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
   @property() scale: number;
   @property() fontSize: number;
   @property() surfaceBaseUnit: number;
+  @property() isLight: boolean = true;
 
   public onThemeSelected = new EventBase<CreatorThemeModel, { theme: ICreatorTheme }>();
   public onThemePropertyChanged = new EventBase<CreatorThemeModel, { name: string, value: any }>();
@@ -67,7 +68,7 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
     } else if (name.indexOf("--") === 0) {
       this.setThemeCssVariablesChanges(name, newValue);
     } else if (name == "fontSize") {
-      this.setThemeCssVariablesChanges("--sjs-font-unit", (newValue * 16 / 100) + "px");
+      this.setThemeCssVariablesChanges("--sjs-font-unit", (newValue * 8 / 100) + "px");
     } else if (name == "scale") {
       this.setThemeCssVariablesChanges("--sjs-base-unit", (newValue * 8 / 100) + "px");
     } else if (name == "surfaceBaseUnit") {
@@ -83,11 +84,11 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
       this.themeName = theme.themeName || baseTheme.themeName || CreatorThemeModel.defautlThemeName;
 
       const effectiveThemeCssVariables = {};
-      assign(effectiveThemeCssVariables, /*CreatorThemeModel.DefaultTheme.cssVariables || {},*/ baseTheme.cssVariables || {});
+      assign(effectiveThemeCssVariables, baseTheme.cssVariables || {});
       assign(effectiveThemeCssVariables, theme.cssVariables || {}, this.themeCssVariablesChanges);
 
       const effectiveTheme: ICreatorTheme = {};
-      assign(effectiveTheme, theme, { cssVariables: effectiveThemeCssVariables, themeName: this.themeName });
+      assign(effectiveTheme, baseTheme, theme, { cssVariables: effectiveThemeCssVariables, themeName: this.themeName });
 
       // this.initializeColorCalculator(effectiveTheme.cssVariables);
       this.fromJSON(effectiveTheme);
@@ -109,7 +110,7 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
       this.initialCssVariables = {};
       assign(this.initialCssVariables, json.cssVariables);
 
-      this.fontSize = !!this["--sjs-font-unit"] ? roundTo2Decimals(parseFloat(this["--sjs-font-unit"]) * 100 / 16) : undefined;
+      this.fontSize = !!this["--sjs-font-unit"] ? roundTo2Decimals(parseFloat(this["--sjs-font-unit"]) * 100 / 8) : undefined;
       this.scale = !!this["--sjs-base-unit"] ? roundTo2Decimals(parseFloat(this["--sjs-base-unit"]) * 100 / 8) : undefined;
       this.surfaceBaseUnit = !!this["--sjs-surface-base-unit"] ? roundTo2Decimals(parseFloat(this["--sjs-surface-base-unit"]) * 100 / 8) : undefined;
     }
@@ -117,7 +118,7 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
 
   toJSON(options?: ISaveToJSONOptions): ICreatorTheme {
     if (this.fontSize !== undefined) {
-      this["--sjs-font-unit"] = (this.fontSize * 16 / 100) + "px";
+      this["--sjs-font-unit"] = (this.fontSize * 8 / 100) + "px";
     }
     if (this.scale !== undefined) {
       this["--sjs-base-unit"] = (this.scale * 8 / 100) + "px";
@@ -181,7 +182,7 @@ Serializer.addProperties("creatortheme", [
   }, {
     type: "spinedit",
     name: "--sjs-font-unit",
-    default: "16px",
+    default: "8px",
     visible: false,
   }, {
     type: "spinedit",
@@ -238,5 +239,9 @@ Serializer.addProperties("creatortheme", [
         editor.descriptionLocation = "hidden";
       }
     }
+  }, {
+    name: "isLight:boolean",
+    visible: false,
+    isSerializable: false,
   },
 ]);

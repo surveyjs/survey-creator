@@ -3,6 +3,7 @@ import { Default } from "./default";
 
 const Theme = {
   "themeName": "default-contrast",
+  "isLight": true,
   "cssVariables": {
     "--sjs-layer-1-background-500": "#FFFFFFFF",
     "--sjs-layer-1-background-400": "#EBEBEBFF",
