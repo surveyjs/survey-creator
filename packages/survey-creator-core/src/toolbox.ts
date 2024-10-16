@@ -17,7 +17,9 @@ import {
   CssClassBuilder,
   HashTable,
   surveyLocalization,
-  ComputedUpdater
+  ComputedUpdater,
+  AnimationBoolean,
+  IAnimationConsumer
 } from "survey-core";
 import { SurveyCreatorModel, toolboxLocationType } from "./creator-base";
 import { editorLocalization, getLocString } from "./editorLocalization";
@@ -446,11 +448,41 @@ export class QuestionToolbox
     defaultValue: false,
     onSet: (val: boolean, target: QuestionToolbox) => {
       target.updateResponsiveness(val, target.overflowBehavior);
+      target.compactAnimation.sync(!(val && !target.isFocused));
     }
   }) isCompact: boolean;
 
+  @property({ defaultValue: false }) isCompactRendered: boolean;
+
+  private getAnimationOptions(): IAnimationConsumer {
+    return {
+      getAnimatedElement: () => {
+        return this.rootElement;
+      },
+      isAnimationEnabled: () => this.animationAllowed,
+      getRerenderEvent: () => this.onElementRerendered,
+      getLeaveOptions: () => {
+        return {
+          cssClass: "svc-toolbox--leave"
+        };
+      },
+      getEnterOptions: () => {
+        return {
+          cssClass: "svc-toolbox--enter",
+        };
+      }
+    };
+  }
+
+  public compactAnimation = new AnimationBoolean(this.getAnimationOptions(), (val: boolean) => {
+    this.isCompactRendered = !val;
+  }, () => !this.isCompactRendered);
+
   @property({
     defaultValue: false,
+    onSet: (val: boolean, target: QuestionToolbox) => {
+      target.compactAnimation.sync(!(target.isCompact && !val));
+    }
   }) isFocused: boolean;
   /**
    * Specifies how the Toolbox behaves when it contains more items than can fit on the screen.
@@ -582,10 +614,6 @@ export class QuestionToolbox
     //}
   }
 
-  public get isCompactRendered() {
-    return this.isCompact && !this.isFocused;
-  }
-
   public get showSearch() {
     return this.searchEnabled && this.items.length > QuestionToolbox.MINELEMENTCOUNT;
   }
@@ -639,7 +667,7 @@ export class QuestionToolbox
       .append("svc-toolbox--searchable", this.searchEnabled)
       .append("svc-toolbox--no-separators", !this.showSeparators)
       .append("svc-toolbox--compact", this.isCompactRendered)
-      .append("svc-toolbox--flyout", this.isCompact && this.isFocused)
+      .append("svc-toolbox--flyout", this.isCompactRendered && this.isFocused)
       .append("svc-toolbox--scrollable", this.overflowBehavior == "scroll").toString();
   }
   public setLocation(toolboxLocation: toolboxLocationType) {

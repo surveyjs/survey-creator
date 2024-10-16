@@ -111,6 +111,7 @@ require("../components/toolbox/toolbox-tool.scss");
 require("../components/question-dropdown.scss");
 require("../components/toolbox/toolbox.scss");
 require("../components/toolbox/toolbox-right.scss");
+require("../components/toolbox/toolbox-animation.scss");
 require("../components/side-bar/side-bar.scss");
 require("../components/side-bar/tab-control.scss");
 require("../property-grid-theme/property-grid.scss");
