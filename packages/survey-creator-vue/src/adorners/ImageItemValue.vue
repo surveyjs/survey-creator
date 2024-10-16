@@ -109,7 +109,7 @@
             <SvComponent
               :is="'sv-svg-icon'"
               :iconName="'icon-add-lg'"
-              :size="48"
+              :size="24"
               :title="adorner.addFileTitle"
             ></SvComponent>
           </span>

@@ -22,7 +22,7 @@
 
   box-sizing: border-box;
   border-radius: calcSize(12.5);
-  padding: 0;
+  padding: 12px;
   transition: background-color $creator-transition-duration;
 
   &:hover:enabled,
