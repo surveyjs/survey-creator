@@ -114,8 +114,8 @@ Object.keys(themeNameMap).forEach(themeName => {
   }
 });
 
+let indexFileContent = "";
 Object.keys(themeNameMap).forEach(themeName => {
-  let indexFileContent = "";
   if(themeName !== baseThemeName) {
     const currentTheme = themeNameMap[themeName];
     console.log("Theme - " + currentTheme);
@@ -128,6 +128,5 @@ Object.keys(themeNameMap).forEach(themeName => {
       indexFileContent += writeThemePalette(currentTheme, paletteName, curPaletteCssVariables);
     });
   }
-  fs.writeFileSync(_dirPath + "index.ts", indexFileContent);
 });
-
+fs.writeFileSync(_dirPath + "index.ts", indexFileContent);

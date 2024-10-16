@@ -15,7 +15,9 @@ test("Creator theme model de/serialization", (): any => {
   const themeJson: ICreatorTheme = {
     themeName: "custom",
     cssVariables: {
-      "--sjs-base-unit": "6px",
+      "--ctr-size-unit": "6px",
+      "--ctr-corner-radius-unit": "6px",
+      "--ctr-spacing-unit": "6px",
       "--sjs-special-background": "rgba(253, 255, 148, 0.5)",
       "--sjs-primary-background-500": "rgba(248, 248, 248, 1)",
       "--sjs-secondary-background-500": "#0b864b",
@@ -25,7 +27,7 @@ test("Creator theme model de/serialization", (): any => {
   expect(themeModel.scale).toBe(75);
   expect(themeModel.themeName).toBe("custom");
 
-  expect(themeModel["--sjs-base-unit"]).toBe("6px");
+  expect(themeModel["--ctr-size-unit"]).toBe("6px");
   expect(themeModel["--sjs-special-background"]).toBe("rgba(253, 255, 148, 0.5)");
   expect(themeModel["--sjs-primary-background-500"]).toBe("rgba(248, 248, 248, 1)");
   expect(themeModel["--sjs-secondary-background-500"]).toBe("#0b864b");
@@ -75,9 +77,12 @@ test("creator.applyTheme", () => {
       "--sjs-special-background": "rgba(253, 255, 148, 0.5)",
       "--sjs-primary-background-500": "rgba(248, 248, 248, 1)",
       "--sjs-secondary-background-500": "#0b864b",
-      "--sjs-font-unit": "18px",
-      "--sjs-base-unit": "6px",
-      "--sjs-surface-base-unit": "10px",
+      "--ctr-font-unit": "18px",
+      "--ctr-line-height-unit": "18px",
+      "--ctr-size-unit": "6px",
+      "--ctr-corner-radius-unit": "6px",
+      "--ctr-spacing-unit": "6px",
+      "--ctr-surface-base-unit": "10px",
       "--sjs-test": "green"
     }
   };
@@ -92,4 +97,39 @@ test("creator.applyTheme", () => {
 
   const themeModelJson = themeModel.toJSON();
   expect(themeModelJson).toStrictEqual(themeJson);
+});
+
+test("Creator theme check scale", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true, showCreatorThemeSettings: true });
+  const designerPlugin: TabDesignerPlugin = <TabDesignerPlugin>creator.getPlugin("designer");
+  const themeModel = designerPlugin["themeModel"];
+  let scale = designerPlugin["themePropertyGrid"].survey.findQuestionByName("scale");
+  let fontScale = designerPlugin["themePropertyGrid"].survey.findQuestionByName("fontScale");
+
+  const themeJson: ICreatorTheme = {
+    themeName: "custom",
+    cssVariables: {
+      "--ctr-font-unit": "10px",
+      "--ctr-line-height-unit": "10px",
+      "--ctr-spacing-unit": "12px",
+      "--ctr-size-unit": "12px",
+      "--ctr-corner-radius-unit": "12px",
+    }
+  };
+  themeModel.fromJSON(themeJson);
+  expect(themeModel.themeName).toBe("custom");
+  expect(themeModel.fontScale).toBe(125);
+  expect(themeModel.scale).toBe(150);
+
+  fontScale.value = 150;
+
+  let themeModelJsonCssVariables = themeModel.toJSON().cssVariables || {};
+  expect(themeModelJsonCssVariables["--ctr-font-unit"]).toEqual("12px");
+  expect(themeModelJsonCssVariables["--ctr-line-height-unit"]).toEqual("12px");
+
+  scale.value = 225;
+  themeModelJsonCssVariables = themeModel.toJSON().cssVariables || {};
+  expect(themeModelJsonCssVariables["--ctr-size-unit"]).toEqual("18px");
+  expect(themeModelJsonCssVariables["--ctr-spacing-unit"]).toEqual("18px");
+  expect(themeModelJsonCssVariables["--ctr-corner-radius-unit"]).toEqual("18px");
 });

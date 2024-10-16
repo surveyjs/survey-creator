@@ -1714,9 +1714,9 @@ export var enStrings = {
   creatortheme: {
     "--sjs-special-background": "Surface background",
     "--sjs-primary-background-500": "Accent colors",
-    "surfaceBaseUnit": "Surface",
+    "surfaceScale": "Surface",
     "userInterfaceBaseUnit": "User interface",
-    "fontSize": "Font",
+    "fontScale": "Font",
 
     names: {
       "sc2020": "Survey Creator 2020",

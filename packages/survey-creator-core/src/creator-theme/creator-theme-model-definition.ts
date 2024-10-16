@@ -7,9 +7,9 @@ const creatorThemeModelProperties: ISurveyPropertiesDefinition = {
       { name: "--sjs-special-background", index: 10 },
       { name: "--sjs-primary-background-500", index: 20 },
       { name: "--sjs-secondary-background-500", index: 30 },
-      { name: "fontSize", index: 40 },
+      { name: "fontScale", index: 40 },
       { name: "scale", index: 50 },
-      { name: "surfaceBaseUnit", index: 60 },
+      { name: "surfaceScale", index: 60 },
     ],
   },
 };
