@@ -1,9 +1,10 @@
-import { Base, PageModel, property, SurveyModel, ComputedUpdater, settings, IPage, ActionContainer } from "survey-core";
+import { Base, PageModel, property, SurveyModel, ComputedUpdater, settings, IPage, ActionContainer, propertyArray, IAnimationGroupConsumer, AnimationGroup, prepareElementForVerticalAnimation, cleanHtmlElementAfterAnimation } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
 import { getLocString } from "../../editorLocalization";
 import { PagesController } from "../../pages-controller";
 import { SurveyHelper } from "../../survey-helper";
 import { DragDropSurveyElements } from "../../survey-elements";
+import { SurveyElementAdornerBase } from "../action-container-view-model";
 require("./designer.scss");
 
 export const initialSettingsAllowShowEmptyTitleInDesignMode = settings.allowShowEmptyTitleInDesignMode;
@@ -160,6 +161,9 @@ export class TabDesignerViewModel extends Base {
       return this.calculateDesignerCss();
     });
     this.designerCss = <any>this.cssUpdater;
+    this.survey.registerFunctionOnPropertyValueChanged("pages", () => {
+      this.pages = this.survey.pages;
+    });
     this.pagesController.onSurveyChanged();
   }
   private checkNewPage(updatePageController: boolean) {
@@ -204,6 +208,42 @@ export class TabDesignerViewModel extends Base {
       this.creator.selectElement(this.survey);
     }
     return true;
+  }
+
+  @propertyArray() _pages: Array<PageModel> = [];
+
+  public get pages(): Array<PageModel> {
+    return this._pages;
+  }
+  public set pages(val: Array<PageModel>) {
+    this.pagesAnimation.sync(val);
+  }
+
+  private pagesAnimation = new AnimationGroup(this.getPagesAnimationOptions(), (val) => {
+    this._pages = val;
+  }, () => this._pages)
+
+  private getPagesAnimationOptions(): IAnimationGroupConsumer<PageModel> {
+    return {
+      getEnterOptions: (item, info) => {
+        return {
+          onBeforeRunAnimation: prepareElementForVerticalAnimation,
+          cssClass: "svc-page--enter",
+          onAfterRunAnimation: cleanHtmlElementAfterAnimation
+        };
+      },
+      getLeaveOptions: (item, info) => {
+        return {
+          onBeforeRunAnimation: prepareElementForVerticalAnimation,
+          cssClass: "svc-page--leave",
+          onAfterRunAnimation: cleanHtmlElementAfterAnimation };
+      },
+      isAnimationEnabled: () => {
+        return this.animationAllowed;
+      },
+      getAnimatedElement: (item) => SurveyElementAdornerBase.GetAdorner(item)?.rootElement.parentElement,
+      getRerenderEvent: () => this.onElementRerendered
+    };
   }
 
   public clickDesigner() {

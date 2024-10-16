@@ -186,10 +186,14 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   }
 
   addNewQuestion = (model: PageAdorner, event: IPortableMouseEvent, type?: string) => {
+    const isGhost = this.isGhost;
+    const page = this.page;
+    if(isGhost) page?.blockAnimations();
     this.creator.addNewQuestionInPage((type) => {
       this.addGhostPage(false);
       this.creator.survey.currentPage = this.page;
     }, null, type || this.currentAddQuestionType || settings.designer.defaultAddQuestionType);
+    if(isGhost) page?.releaseAnimations();
   }
   select(model: PageAdorner, event: IPortableMouseEvent) {
     if (!model.isGhost) {

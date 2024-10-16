@@ -63,7 +63,7 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
     const renderedPages = [];
 
     if (this.creator.pageEditMode !== "bypage") {
-      const pages = this.creator.survey.pages;
+      const pages = this.model.pages;
 
       pages.forEach((page, index) => {
         let cachedPage = this.renderedPagesCache[page.id];

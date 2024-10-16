@@ -392,3 +392,37 @@ svc-page {
     }
   }
 }
+
+$svc-page-fade-in-duration: var(--sjs-svc-page-fade-in-duration, 250ms);
+$svc-page-move-in-duration: var(--sjs-svc-page-move-in-duration, 250ms);
+$svc-page-fade-in-delay: var(--sjs-svc-page-fade-in-delay, 100ms);
+$svc-page-fade-out-duration: var(--sjs-svc-page-fade-out-duration, 250ms);
+$svc-page-move-out-duration: var(--sjs-svc-page-move-out-duration, 250ms);
+$svc-page-move-out-delay: var(--sjs-svc-page-move-out-delay, 100ms);
+
+.svc-page--enter,
+.svc-page--leave {
+  animation-name: fadeIn, moveInWithOverflow;
+  animation-fill-mode: forwards;
+  animation-duration: var(--fade-animation-duration), var(--move-animation-duration);
+  animation-direction: var(--animation-direction);
+  animation-timing-function: var(--animation-timing-function);
+  animation-delay: var(--fade-animation-delay), var(--move-animation-delay);
+}
+.svc-page--enter {
+  opacity: 0;
+  --animation-direction: normal;
+  --animation-timing-function: #{$ease-out};
+  --fade-animation-duration: #{$svc-page-fade-in-duration};
+  --move-animation-duration: #{$svc-page-move-in-duration};
+  --fade-animation-delay: #{$svc-page-fade-in-delay};
+  --move-animation-delay: 0s;
+}
+.svc-page--leave {
+  --animation-direction: reverse;
+  --animation-timing-function: #{$reverse-ease-out};
+  --fade-animation-duration: #{$svc-page-fade-out-duration};
+  --move-animation-duration: #{$svc-page-move-out-duration};
+  --fade-animation-delay: 0s;
+  --move-animation-delay: #{$svc-page-move-out-delay};
+}

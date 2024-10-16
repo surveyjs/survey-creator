@@ -61,12 +61,7 @@ export class CreatorSurveyPageComponent extends CreatorModelElement<
     this.model.detachFromUI();
   }
   protected canRender(): boolean {
-    return (
-      !!this.model &&
-      this.model.isPageLive &&
-      !!this.model.page &&
-      !!this.model.page.survey
-    );
+    return super.canRender();
   }
   renderElement(): JSX.Element {
     if (!this.props.page) return null;
