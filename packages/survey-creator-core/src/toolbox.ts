@@ -602,12 +602,14 @@ export class QuestionToolbox
     this._containerBodyElement = element?.querySelector(".svc-toolbox__container");
     if (!element) return;
     this._containerBodyResizeObserver = new ResizeObserver(entries => {
-      for (let entry of entries) {
-        const height = entry.contentBoxSize
-          ? entry.contentBoxSize[0].blockSize
-          : entry.contentRect.width;
-        this._scrollbarSizerElement.style.height = height + "px";
-      }
+      requestAnimationFrame(() => {
+        for (let entry of entries) {
+          const height = entry.contentBoxSize
+            ? entry.contentBoxSize[0].blockSize
+            : entry.contentRect.width;
+          this._scrollbarSizerElement.style.height = height + "px";
+        }
+      });
     });
     this._containerBodyResizeObserver.observe(this._containerBodyElement);
   }
