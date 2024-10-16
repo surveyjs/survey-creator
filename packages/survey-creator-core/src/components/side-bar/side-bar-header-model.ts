@@ -12,7 +12,7 @@ export class SidebarHeaderModel extends Base {
   public get component(): string {
     return this.componentName || "svc-side-bar-default-header";
   }
-  public get componentModel(): string {
+  public get componentModel(): any {
     return this.componentData || this;
   }
 
