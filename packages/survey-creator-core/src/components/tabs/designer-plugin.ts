@@ -281,7 +281,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     this.model = undefined;
     this.propertyGridTab.visible = false;
     this.propertyGridPlaceholderPage.visible = false;
-    this.themePropertyGridTab.visible = false;
+    if (!!this.themePropertyGridTab) this.themePropertyGridTab.visible = false;
     this.toolboxTab.visible = false;
     this.creator.sidebar.hideSideBarVisibilityControlActions = false;
     this.creator.sidebar.sideAreaComponentName = undefined;
