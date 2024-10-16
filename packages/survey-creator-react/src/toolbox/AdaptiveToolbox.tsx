@@ -30,6 +30,7 @@ export class AdaptiveToolbox extends Toolbox {
   }
   componentWillUnmount() {
     this.manager && (this.manager.dispose());
+    this.toolbox.unsubscribeRootElement();
     super.componentWillUnmount();
   }
 

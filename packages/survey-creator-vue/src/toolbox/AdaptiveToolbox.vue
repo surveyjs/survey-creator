@@ -94,6 +94,7 @@ onMounted(() => {
 });
 onUnmounted(() => {
   responsivityManager?.dispose();
+  toolbox.value.unsubscribeRootElement();
 });
 const renderedActions = computed(() => toolbox.value.renderedActions);
 </script>
