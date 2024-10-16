@@ -58,6 +58,7 @@ export class SearchManagerToolbox extends SearchManager {
   @property() toolbox: QuestionToolbox;
   public filterStringPlaceholder = getLocString("ed.toolboxFilteredTextPlaceholder");
   protected setFiterString(newValue: string, oldValue: string) {
+    this.toolbox.showSeparators = !newValue;
     this.toolbox.items.forEach(item => item.visible = item.hasText(newValue));
     this.toolbox.showPlaceholder = !this.toolbox.items.filter(i => i.visible).length;
     this.toolbox.categories.forEach(category => {

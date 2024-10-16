@@ -232,7 +232,7 @@ svc-toolbox {
   margin: calcSize(1.5) calcSize(0.5) calcSize(1);
 }
 
-.svc-toolbox--filtering {
+.svc-toolbox--no-separators {
   .svc-toolbox__category-separator {
     display: none;
   }

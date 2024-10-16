@@ -501,8 +501,10 @@ export class QuestionToolbox
    * [Manage Toolbox Subitems](https://surveyjs.io/survey-creator/documentation/toolbox-customization#manage-toolbox-subitems (linkStyle))
    */
   @property({ defaultValue: true }) showSubitems: boolean;
+
   public searchManager = new SearchManagerToolbox();
   @property() showPlaceholder: boolean;
+  @property({ defaultValue: true }) showSeparators: boolean;
 
   constructor(
     private supportedQuestions: Array<string> = null,
@@ -630,7 +632,7 @@ export class QuestionToolbox
     return new CssClassBuilder()
       .append("svc-toolbox")
       .append("svc-toolbox--searchable", this.searchEnabled)
-      .append("svc-toolbox--filtering", !!this.searchManager.filterString)
+      .append("svc-toolbox--no-separators", !this.showSeparators)
       .append("svc-toolbox--compact", this.isCompactRendered)
       .append("svc-toolbox--flyout", this.isCompact && this.isFocused)
       .append("svc-toolbox--scrollable", this.overflowBehavior == "scroll").toString();
