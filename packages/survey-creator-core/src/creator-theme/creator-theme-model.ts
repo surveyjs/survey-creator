@@ -63,7 +63,6 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
     return this.toJSON()["cssVariables"] || {};
   }
 
-
   private setThemeCssVariablesChanges(name: string, value: any) {
     if (this.themeCssVariablesChanges[name] !== value) {
       this.themeCssVariablesChanges[name] = value;
