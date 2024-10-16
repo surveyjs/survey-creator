@@ -132,7 +132,6 @@
   --ctr-page-navigator-item-opacity-step-2: 50px;
   --ctr-page-navigator-item-opacity-step-3: 25px;
   --ctr-toolbox-search-corner-radius: 0px;
-  --ctr-toolbox-padding-top-with-search: 0px;
   --lbr-shadow-x-large-offset-x: 0px;
   --lbr-shadow-x-large-offset-y: 32px;
   --lbr-shadow-x-large-blur: 64px;
@@ -300,9 +299,19 @@
   --ctr-super-tooltip-padding-right: 0px;
   --ctr-super-tooltip-padding-top: 0px;
   --ctr-super-tooltip-padding-bottom: 0px;
-  --lbr-blank-form-item-padding-left: 0px;
-  --lbr-blank-form-item-padding-right: 0px;
+  --lbr-blank-form-text-item-padding-left: 0px;
+  --lbr-blank-form-text-item-padding-right: 0px;
   --ctr-survey-item-actionbar-padding-right-add: 0px;
+  --lbr-blank-form-field-padding-top: 0px;
+  --lbr-blank-form-field-padding-bottom: 0px;
+  --lbr-blank-form-field-padding-left: 0px;
+  --lbr-blank-form-field-padding-right: 0px;
+  --ctr-line-height-unit: 8px;
+  --ctr-font-unit: 8px;
+  --ctr-spacing-unit: 8px;
+  --ctr-corner-radius-unit: 8px;
+  --ctr-stroke-unit: 1px;
+  --ctr-size-unit: 8px;
 }
 
  /* Aliases  */
@@ -1109,7 +1118,7 @@
   --ctr-survey-placeholder-background-color: var(--sjs-layer-1-background-500);
   --ctr-survey-placeholder-border-color: var(--sjs-border-25);
   --ctr-survey-placeholder-border-width: var(--sjs-stroke-x1);
-  --ctr-survey-drop-indicator-color: var(--sjs-secondary-background-500);
+  --ctr-survey-drop-indicator-color: var(--sjs-primary-background-500);
   --ctr-survey-drop-indicator-corner-radius: var(--sjs-corner-radius-round);
   --ctr-survey-drop-indicator-width: var(--sjs-size-x025);
   --ctr-search-background-color: var(--sjs-layer-1-background-500);
@@ -1147,7 +1156,7 @@
   --ctr-search-count-text-color: var(--sjs-layer-1-foreground-50);
   --ctr-search-count-text-margin-right: var(--sjs-spacing-x1);
   --ctr-property-grid-search-count-text-color: var(--sjs-layer-3-foreground-50);
-  --ctr-scrollbar-background-color: var(--sjs-border-25);
+  --ctr-scrollbar-background-color: var(--sjs-border-10);
   --ctr-scrollbar-corner-radius: var(--sjs-corner-radius-round);
   --ctr-scrollbar-padding-horizontal: var(--sjs-spacing-x05);
   --ctr-scrollbar-padding-vertical: var(--sjs-spacing-x05);
@@ -1381,7 +1390,6 @@
   --ctr-search-icon-height-small: var(--sjs-size-x2);
   --ctr-toolbox-search-icon-color: var(--sjs-primary-background-500);
   --ctr-toolbox-search-clear-button-icon-color-hovered: var(--sjs-semantic-red-background-500);
-  --ctr-toolbox-search-margin-bottom: var(--sjs-spacing-x1);
   --ctr-toolbox-group-header-margin-top: var(--sjs-spacing-x1);
   --ctr-toolbox-group-header-margin-bottom: var(--sjs-spacing-x1);
   --ctr-toolbox-separator-max-width-compact: var(--sjs-size-max);
@@ -2761,7 +2769,7 @@
   --lbr-step-progress-bar-padding-left-fit-to-survey-with-number: var(--sjs-spacing-x1n);
   --lbr-step-progress-bar-padding-right-fit-to-survey-with-number: var(--sjs-spacing-x1n);
   --lbr-step-progress-bar-width: var(--sjs-size-x80);
-  --ctr-toolbox-min-width: var(--sjs-size-x28);
+  --ctr-toolbox-min-width: var(--sjs-size-x32);
   --ctr-popup-menu-margin-top-tablet: var(--sjs-spacing-x8);
   --ctr-popup-menu-margin-bottom-tablet: var(--sjs-spacing-x8);
   --ctr-popup-menu-margin-left-tablet: var(--sjs-spacing-x3);
@@ -2827,8 +2835,8 @@
   --ctr-toolbox-group-padding-left-compact: var(--sjs-spacing-x150);
   --ctr-toolbox-group-padding-right-compact: var(--sjs-spacing-x150);
   --ctr-radio-button-button-corner-radius: var(--sjs-corner-radius-round);
-  --ctr-checkbox-button-check-mark-width: var(--sjs-size-x250);
-  --ctr-checkbox-button-check-mark-height: var(--sjs-size-x250);
+  --ctr-checkbox-button-check-mark-width: var(--sjs-size-x2);
+  --ctr-checkbox-button-check-mark-height: var(--sjs-size-x2);
   --lbr-drop-down-content-margin-top: var(--sjs-spacing-x1);
   --lbr-drop-down-content-margin-bottom: var(--sjs-spacing-x1);
   --ctr-property-grid-width: var(--sjs-size-x60);
@@ -3028,7 +3036,7 @@
   --ctr-property-grid-advanced-mode-switcher-margin-bottom: var(--sjs-spacing-x3);
   --ctr-toggle-button-thumb-border-color: var(--sjs-border-10);
   --ctr-toolbox-item-submenu-button-background-color: var(--sjs-layer-1-background-500);
-  --ctr-toolbox-item-submenu-button-background-color-hovered: var(--sjs-layer-1-background-400);
+  --ctr-toolbox-item-submenu-button-background-color-hovered: var(--sjs-primary-background-10);
   --ctr-toolbox-item-submenu-button-corner-radius: var(--sjs-corner-radius-x05);
   --ctr-toolbox-item-submenu-button-padding-left: var(--sjs-spacing-x05);
   --ctr-toolbox-item-submenu-button-padding-right: var(--sjs-spacing-x05);
@@ -3224,20 +3232,32 @@
   --ctr-super-tooltip-shadow-1-spread: var(--ctr-shadow-medium-spread);
   --ctr-super-tooltip-shadow-1-color: var(--ctr-shadow-medium-color);
   --lbr-timer-gap: var(--sjs-spacing-x05n);
-  --lbr-blank-form-item-padding-top: var(--sjs-spacing-x1);
-  --lbr-blank-form-item-padding-bottom: var(--sjs-spacing-x1);
-  --lbr-blank-form-item-text-color: var(--sjs-layer-1-foreground-100);
-  --lbr-blank-form-item-text-color-placeholder: var(--sjs-layer-1-foreground-50);
-  --lbr-blank-form-item-border-width-field: var(--sjs-stroke-x1);
-  --lbr-blank-form-item-border-width-field-focused: var(--sjs-stroke-x2);
-  --lbr-blank-form-item-border-color-field: var(--sjs-border-10);
-  --lbr-blank-form-item-border-color-field-focused: var(--sjs-primary-background-500);
+  --lbr-blank-form-text-item-padding-top: var(--sjs-spacing-x1);
+  --lbr-blank-form-text-item-padding-bottom: var(--sjs-spacing-x1);
+  --lbr-blank-form-text-item-text-color: var(--sjs-layer-1-foreground-100);
+  --lbr-blank-form-text-item-text-color-placeholder: var(--sjs-layer-1-foreground-50);
+  --lbr-blank-form-field-border-width: var(--sjs-stroke-x1);
+  --lbr-blank-form-field-border-width-focused: var(--sjs-stroke-x2);
+  --lbr-blank-form-field-border-color: var(--sjs-border-10);
+  --lbr-blank-form-field-border-color-focused: var(--sjs-primary-background-500);
   --lbr-blank-form-gap: var(--sjs-spacing-x1);
-  --lbr-blank-form-line-height: var(--sjs-spacing-x1);
+  --lbr-blank-form-line-height: var(--sjs-spacing-x2);
   --ctr-survey-blank-form-add-row-button-margin-left: var(--sjs-spacing-x3n);
   --ctr-survey-blank-form-add-row-button-margin-top: var(--sjs-spacing-x2);
   --ctr-survey-blank-form-add-row-button-margin-buttom: var(--sjs-spacing-x1n);
   --ctr-menu-item-padding-bottom: var(--sjs-spacing-x250);
   --ctr-menu-item-padding-top: var(--sjs-spacing-x250);
+  --ctr-survey-blank-form-item-text-color-placeholder: var(--sjs-layer-1-foreground-50);
+  --lbr-blank-form-field-label-text-color: var(--sjs-layer-1-foreground-50);
+  --lbr-blank-form-field-label-margin-top: var(--sjs-spacing-x05);
+  --lbr-blank-form-field-margin-bottom: var(--sjs-spacing-x150n);
+  --lbr-blank-form-field-margin-top: var(--sjs-spacing-x1);
+  --lbr-blank-form-field-text-color: var(--sjs-layer-1-foreground-100);
+  --ctr-scrollbar-padding-horizontal-hovered: var(--sjs-spacing-x025);
+  --ctr-scrollbar-padding-vertical-hovered: var(--sjs-spacing-x025);
+  --ctr-toolbox-search-margin-bottom-compact: var(--sjs-spacing-x1n);
+  --lbr-slider-margin-top: var(--sjs-spacing-x1);
+  --lbr-button-padding-right-mobile: var(--sjs-spacing-x3);
+  --lbr-button-padding-left-mobile: var(--sjs-spacing-x3);
 }
 
