@@ -126,3 +126,24 @@ test("Check responsiveness is working correctly after model update", async t => 
     .resizeWindow(1920, 1080)
     .expect(mobileSelector.exists).notOk();
 });
+
+test("Check cleaning json doesn't cause warnings", async t => {
+  await ClientFunction(() => {
+    console.error = (msg) => {
+      throw new Error(msg);
+    };
+    console.warn = (msg) => {
+      throw new Error(msg);
+    };
+  })();
+  await setJSON({
+    elements: [
+      {
+        type: "text",
+        name: "q1"
+      }
+    ]
+  });
+  await setJSON({});
+});
+
