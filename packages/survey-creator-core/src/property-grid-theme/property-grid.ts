@@ -390,7 +390,7 @@ export var propertyGridCss = {
     control: "spg-input-container__input",
     buttonsContainer: "spg-input-container__buttons-container",
     chooseButtonIcon: "icon-choosefile",
-    clearButtonIcon: "icon-clear",
+    clearButtonIcon: "icon-cancel-24x24",
     fileInput: "sd-visuallyhidden",
     clearButton: "spg-input__edit-button",
     chooseButton: "spg-input__edit-button spg-file-edit__choose-button",

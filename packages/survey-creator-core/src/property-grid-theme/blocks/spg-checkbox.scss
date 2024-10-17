@@ -32,6 +32,9 @@
   // padding: calcSize(0.5);
   padding: 1px 1px;
   outline: 2px solid transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   transition: background $creator-transition-duration, background-color $creator-transition-duration, outline $creator-transition-duration;
 }
 
@@ -57,8 +60,8 @@
   display: block;
   opacity: 0;
   fill: transparent;
-  width: calcSize(2.5);
-  height: calcSize(2.5);
+  width: calcSize(2);
+  height: calcSize(2);
   background-repeat: no-repeat;
   background-size: calcSize(2) calcSize(2);
   transition: opacity $creator-transition-duration, fill $creator-transition-duration;
