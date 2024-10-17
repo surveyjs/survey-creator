@@ -20,13 +20,15 @@
         v-if="toolbox.canCollapseCategories"
         class="svc-toolbox__category-header__controls"
       >
-        <SvComponent
-          :is="'sv-svg-icon'"
-          :iconName="'icon-arrow-down'"
-          class="svc-toolbox__category-header__button svc-string-editor__button--expand"
-          :size="24"
-          v-show="category.collapsed"
-        ></SvComponent>
+        <div className="svc-toolbox__category-header-wrapper">
+          <SvComponent
+            :is="'sv-svg-icon'"
+            :iconName="'icon-arrow-down'"
+            class="svc-toolbox__category-header__button svc-string-editor__button--expand"
+            :size="24"
+            v-show="category.collapsed"
+          ></SvComponent>
+        </div>
         <SvComponent
           :is="'sv-svg-icon'"
           :iconName="'icon-arrow-up'"
