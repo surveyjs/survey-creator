@@ -16,7 +16,7 @@
       :iconName="'icon-add_24x24'"
       :size="24"
     ></SvComponent>
-    <span class="svc-text svc-text--normal svc-text--bold">
+    <span class="svc-add-new-item__text">
       {{ item.data.addNewQuestionText }}
     </span>
     <SvComponent

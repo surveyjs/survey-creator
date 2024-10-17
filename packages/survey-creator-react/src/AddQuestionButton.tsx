@@ -54,7 +54,7 @@ export class AddQuestionButtonComponent extends SurveyElementBase<{ item: Action
           iconName={"icon-add_24x24"}
           size={24}
         ></SvgIcon>
-        <span className="svc-text svc-text--normal svc-text--bold">
+        <span className="svc-add-new-item__text">
           {this.model.addNewQuestionText}
         </span>
         {this.props.renderPopup !== false ? this.renderTypeSelector() : null}

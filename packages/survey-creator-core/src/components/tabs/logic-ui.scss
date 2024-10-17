@@ -253,7 +253,7 @@
     }
   }
 
-  .svc-logic-tab__content-action--disabled .svc-text {
+  .svc-logic-tab__content-action--disabled .svc-add-new-item__text {
     color: var(--ctr-button-text-color-disabled, $foreground);
     opacity: var(--ctr-button-text-opacity-disabled, 0.25);
   }
@@ -265,7 +265,7 @@
 }
 
 .svc-logic-tab__content-empty {
-  .svc-text {
+  .svc-add-new-item__text {
     color: var(--ctr-surface-placeholder-text-description-color, $foreground);
   }
 }

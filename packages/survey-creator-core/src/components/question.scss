@@ -999,13 +999,13 @@ svc-question,
       outline: none;
     }
 
-    .svc-text {
+    .svc-add-new-item__text {
       display: flex;
       align-items: center;
       flex-grow: 1;
       justify-content: center;
       margin: calcSize(1) calcSize(3);
-      line-height: calcSize(2);
+      line-height: var(--sjs-line-height-x2, #{calcSize(2)});
       color: var(--ctr-survey-action-button-text-color-positive, $primary);
       text-wrap: nowrap;
     }
@@ -1075,13 +1075,13 @@ svc-question,
     outline: none;
   }
 
-  .svc-text {
+  .svc-add-new-item__text {
     display: flex;
     align-items: center;
     flex-grow: 1;
     justify-content: center;
     margin: calcSize(1) calcSize(3);
-    line-height: calcSize(2);
+    line-height: var(--sjs-line-height-x2, #{calcSize(2)});
     color: var(--ctr-survey-action-button-text-color-positive, $primary);
     text-wrap: nowrap;
   }
@@ -1168,7 +1168,7 @@ svc-question,
     .svc-element__add-new-question {
       padding: calcSize(0.5) calcSize(0.5);
 
-      .svc-text {
+      .svc-add-new-item__text {
         display: none;
       }
     }
