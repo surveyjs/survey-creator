@@ -16,8 +16,6 @@ export const CreatorThemes: { [index: string]: ICreatorTheme } = {
       "--sjs-secondary-background-25": "#FF981440",
       "--sjs-secondary-background-10": "#FF98141A",
       "--ctr-surface-background-color": "var(--sjs-special-background)",
-      "--sjs-font-size": "8px",
-      "--sjs-base-unit": "8px",
     }
   }
 };
