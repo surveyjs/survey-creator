@@ -1570,8 +1570,10 @@ export class SurveyCreatorModel extends Base
   protected registerIcons() {
     let path;
     if (settings.useLegacyIcons) {
+      SurveySettings.useLegacyIcons = true;
       path = svgBundle.V1;
     } else {
+      SurveySettings.useLegacyIcons = false;
       path = svgBundle.V2;
     }
 
