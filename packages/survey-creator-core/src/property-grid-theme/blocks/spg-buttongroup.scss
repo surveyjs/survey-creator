@@ -10,6 +10,7 @@
   }
 
   .sv-button-group__item {
+    @include ctrDefaultFont;
     background: var(--ctr-button-group-item-background-color, $background);
     transition: background $creator-transition-duration, background-color $creator-transition-duration, color $creator-transition-duration;
 
@@ -29,6 +30,7 @@
   }
 
   .sv-button-group__item--selected {
+    @include ctrDefaultBoldFont;
     color: var(--ctr-button-group-item-text-color-selected, $primary);
 
     .sv-button-group__item-icon use {

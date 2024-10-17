@@ -36,6 +36,7 @@
     }
 
     .spg-table__question-wrapper {
+      @include ctrDefaultFont;
       padding: calcSize(1.5) calcSize(1);
 
       .spg-checkbox {
@@ -181,6 +182,7 @@ td.st-table__cell:first-of-type {
 }
 
 .st-navigation-btn {
+  @include ctrDefaultBoldFont;
   padding-left: calcSize(1.5);
   padding-right: calcSize(2);
   white-space: nowrap;
@@ -251,11 +253,8 @@ td.st-table__cell:first-of-type {
 
 .st-translation-machine-from__btn:disabled .sd-action__title,
 .st-translation-machine-from__title {
+  @include ctrDefaultFont;
   color: $foreground-dim-light;
-  font-family: $font-family;
-  font-size: calcSize(2);
-  line-height: calcSize(3);
-  font-weight: 400;
 }
 
 .st-body__footer {

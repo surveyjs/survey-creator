@@ -59,6 +59,7 @@
 }
 
 .svc-remaining-character-counter {
+  @include ctrSmallFont;
   display: none;
   position: relative;
   outline: none;
@@ -66,11 +67,7 @@
   padding: 0px;
   vertical-align: top;
   margin-inline-start: calcSize(2);
-  font-size: calcSize(1.5);
-  font-family: $font-family;
-  font-weight: 400;
   color: $foreground-light;
-  line-height: calcSize(2);
 }
 
 .svc-string-editor__border {

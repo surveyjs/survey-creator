@@ -67,7 +67,7 @@
 }
 
 .svc-creator--mobile .spg-search-editor_input {
-  $fontSize: calcSize(1.5);
+  $fontSize: var(--ctr-font-small-size, #{calcSize(1.5)});
   font-size: Max(16px, #{$fontSize});
 }
 
@@ -116,13 +116,8 @@
 }
 
 .spg-search-editor_toolbar-counter {
+  @include ctrSmallBoldFont;
   color: var(--ctr-property-grid-search-count-text-color, $foreground-light);
-
-  font-family: $font-family;
-  font-style: normal;
-  font-weight: 600;
-  font-size: calcSize(1.5);
-  line-height: calcSize(2);
   display: flex;
   flex-shrink: 0;
 }

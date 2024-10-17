@@ -1,17 +1,16 @@
 @import "../variables.scss";
 
 .svd-test-results {
-  font-family: $font-family;
   border-radius: 4px;
   box-shadow: inset 0px 1px 0px 0px var(--sjs-border-inside, var(--border-inside, rgba(0, 0, 0, 0.16)));
   padding: calc(12 * var(--sjs-base-unit, var(--base-unit, 8px)));
 
   .svd-test-results__header {
+    @include ctrDefaultFont;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: calcSize(2) calcSize(3);
-    font-size: calcSize(2);
     color: $foreground-light;
     border-bottom: 2px solid $border-light;
     background-color: $background;
@@ -64,11 +63,10 @@
       }
 
       th {
+        @include ctrSmallBoldFont;
         padding: calcSize(1) calcSize(1);
         background-color: $background-dim;
         text-align: left;
-        font-weight: 600;
-        font-size: 12px;
         color: $foreground-light;
 
         &:nth-child(1) {
@@ -84,9 +82,9 @@
         user-select: text;
 
         &:nth-child(1) {
+          @include ctrDefaultFont;
           position: relative;
           width: 50%;
-          font-weight: 600;
         }
 
         &:nth-child(2) {

@@ -99,10 +99,6 @@
 }
 
 .sl-table__cell {
-  color: $foreground;
-  font-weight: bold;
-  font-size: calcSize(2);
-  font-family: $font-family;
   vertical-align: top;
   padding: 0;
   width: 100%;
@@ -185,14 +181,12 @@
   }
 
   button.sl-panel__done-button {
+    @include ctrDefaultBoldFont;
     width: auto;
     padding: calcSize(1) calcSize(4);
     margin: calcSize(2) 0 0 0;
     color: var(--ctr-expression-item-text-color-button, $primary);
     background-color: var(--ctr-expression-item-background-color-button, $primary-light);
-
-    font-family: $font-family;
-    font-size: calcSize(2);
     border-radius: calcSize(12.5);
 
     display: flex;
@@ -211,12 +205,12 @@
   }
 
   .sv-action-bar-item__title {
+    @include ctrDefaultBoldFont;
     color: inherit;
     display: flex;
     align-items: center;
     flex-grow: 1;
     justify-content: center;
-    font-weight: 600;
   }
 }
 
@@ -255,11 +249,9 @@
 }
 
 .sl-question__title {
+  @include ctrDefaultBoldFont;
   color: var(--ctr-expression-item-text-color-function, $foreground);
-  font-size: calcSize(2);
-  line-height: calcSize(3);
   margin: 0;
-  font-weight: 600;
 
   span+span {
     display: none;
