@@ -15,6 +15,7 @@ test("Left toolbox", async (t) => {
     const toolboxItem = Selector(".svc-toolbox__item");
     const toolboxItemDots = Selector(".svc-toolbox__tool .sv-dots__item");
     const toolboxElement = Selector(".svc-toolbox");
+    const creatorTabElement = Selector(".svc-creator-tab");
 
     await setJSON({ pages: [{ name: "page1" }] });
     await t.resizeWindow(2560, 1440);
@@ -34,10 +35,10 @@ test("Left toolbox", async (t) => {
     await t
       .hover(translationTab) // move cursor from toolboxItem
       .resizeWindow(1240, 870);
-    await takeElementScreenshot("toolbox-left-adaptive-compact.png", toolboxElement, t, comparer);
+    await takeElementScreenshot("toolbox-left-adaptive-compact.png", creatorTabElement, t, comparer);
 
     await t.hover(toolboxItem);
-    await takeElementScreenshot("toolbox-left-compact-hover-item.png", toolboxElement, t, comparer);
+    await takeElementScreenshot("toolbox-left-compact-hover-item.png", creatorTabElement, t, comparer);
 
     await t.click(toolboxItemDots);
     await takeElementScreenshot("toolbox-left-popup.png", null, t, comparer);
@@ -60,6 +61,7 @@ test("Right toolbox", async (t) => {
     await changeToolboxLocation("right");
 
     const toolboxElement = Selector(".svc-toolbox");
+    const creatorTabElement = Selector(".svc-creator-tab");
     await takeElementScreenshot("toolbox-right.png", toolboxElement, t, comparer);
 
     await t.hover(toolboxItem);
@@ -76,10 +78,10 @@ test("Right toolbox", async (t) => {
     await t
       .hover(translationTab) // move cursor from toolboxItem
       .resizeWindow(1240, 870);
-    await takeElementScreenshot("toolbox-right-adaptive-compact.png", toolboxElement, t, comparer);
+    await takeElementScreenshot("toolbox-right-adaptive-compact.png", creatorTabElement, t, comparer);
 
     await t.hover(toolboxItem);
-    await takeElementScreenshot("toolbox-right-compact-hover-item.png", toolboxElement, t, comparer);
+    await takeElementScreenshot("toolbox-right-compact-hover-item.png", creatorTabElement, t, comparer);
 
     await t.click(toolboxItemDots);
     await takeElementScreenshot("toolbox-right-popup.png", null, t, comparer);
@@ -103,6 +105,7 @@ test("Right toolbox (rtl)", async (t) => {
       .click(collapseButtonSelector);
 
     const toolboxElement = Selector(".svc-toolbox");
+    const creatorTabElement = Selector(".svc-creator-tab");
     await takeElementScreenshot("toolbox-right-rtl.png", toolboxElement, t, comparer);
 
     await t.hover(toolboxItem);
@@ -119,10 +122,10 @@ test("Right toolbox (rtl)", async (t) => {
     await t
       .hover(translationTab) // move cursor from toolboxItem
       .resizeWindow(1240, 870);
-    await takeElementScreenshot("toolbox-right-rtl-adaptive-compact.png", toolboxElement, t, comparer);
+    await takeElementScreenshot("toolbox-right-rtl-adaptive-compact.png", creatorTabElement, t, comparer);
 
     await t.hover(toolboxItem);
-    await takeElementScreenshot("toolbox-right-rtl-compact-hover-item.png", toolboxElement, t, comparer);
+    await takeElementScreenshot("toolbox-right-rtl-compact-hover-item.png", creatorTabElement, t, comparer);
 
     await t.click(toolboxItemDots);
     await takeElementScreenshot("toolbox-right-rtl-popup.png", null, t, comparer);
@@ -288,6 +291,8 @@ test("Left toolbox - scroll", async (t) => {
     await t
       .resizeWindow(1510, 870);
     await takeElementScreenshot("toolbox-left-scroll.png", toolboxElement, t, comparer);
+    await t.hover(toolboxItem);
+    await takeElementScreenshot("toolbox-left-scroll-hover-item.png", creatorTabElement, t, comparer);
 
     await t
       .hover(translationTab) // move cursor from toolboxItem
@@ -315,17 +320,20 @@ test("Right toolbox - scroll", async (t) => {
     await changeToolboxScrolling(true);
 
     const toolboxElement = Selector(".svc-toolbox");
+    const creatorTabElement = Selector(".svc-creator-tab");
     await t
       .resizeWindow(1510, 870);
     await takeElementScreenshot("toolbox-right-scroll.png", toolboxElement, t, comparer);
+    await t.hover(toolboxItem);
+    await takeElementScreenshot("toolbox-right-scroll-hover-item.png", creatorTabElement, t, comparer);
 
     await t
       .hover(translationTab) // move cursor from toolboxItem
       .resizeWindow(1240, 870);
-    await takeElementScreenshot("toolbox-right-scroll-compact.png", toolboxElement, t, comparer);
+    await takeElementScreenshot("toolbox-right-scroll-compact.png", creatorTabElement, t, comparer);
 
     await t.hover(toolboxItem);
-    await takeElementScreenshot("toolbox-right-scroll-compact-hover-item.png", toolboxElement, t, comparer);
+    await takeElementScreenshot("toolbox-right-scroll-compact-hover-item.png", creatorTabElement, t, comparer);
   });
 });
 
@@ -344,19 +352,20 @@ test("Right toolbox (rtl) - scroll", async (t) => {
       .click(collapseButtonSelector);
     await changeToolboxScrolling(true);
     const toolboxElement = Selector(".svc-toolbox");
-
+    const creatorTabElement = Selector(".svc-creator-tab");
     await t
       .hover(translationTab) // move cursor from toolboxItem
       .resizeWindow(1510, 870);
     await takeElementScreenshot("toolbox-right-rtl-scroll.png", toolboxElement, t, comparer);
-
+    await t.hover(toolboxItem);
+    await takeElementScreenshot("toolbox-right-rtl-scroll-hover-item.png", toolboxElement, t, comparer);
     await t
       .hover(translationTab) // move cursor from toolboxItem
       .resizeWindow(1240, 870);
-    await takeElementScreenshot("toolbox-right-rtl-scroll-compact.png", toolboxElement, t, comparer);
+    await takeElementScreenshot("toolbox-right-rtl-scroll-compact.png", creatorTabElement, t, comparer);
 
     await t.hover(toolboxItem);
-    await takeElementScreenshot("toolbox-right-rtl-scroll-compact-hover-item.png", toolboxElement, t, comparer);
+    await takeElementScreenshot("toolbox-right-rtl-scroll-compact-hover-item.png", creatorTabElement, t, comparer);
   });
 });
 test("Toolbox with search", async (t) => {
@@ -364,6 +373,7 @@ test("Toolbox with search", async (t) => {
     const toolboxElement = Selector(".svc-toolbox");
 
     await setJSON({ pages: [{ name: "page1" }] });
+    await changeToolboxScrolling(false);
     await ClientFunction(() => {
       window["creator"].toolbox.searchEnabled = true;
     })();
@@ -388,6 +398,7 @@ test("Toolbox with search in categories", async (t) => {
     const toolboxElement = Selector(".svc-toolbox");
 
     await setJSON({ pages: [{ name: "page1" }] });
+    await changeToolboxScrolling(false);
     await ClientFunction(() => {
       window["creator"].toolbox.searchEnabled = true;
       window["creator"].toolbox.showCategoryTitles = true;
@@ -422,13 +433,13 @@ test("Toolbox right with search", async (t) => {
     const toolboxElement = Selector(".svc-toolbox");
 
     await setJSON({ pages: [{ name: "page1" }] });
+    await changeToolboxScrolling(false);
     await ClientFunction(() => {
       window["creator"].toolbox.searchEnabled = true;
     })();
     await changeToolboxLocation("right");
-    await t.resizeWindow(2560, 1440);
+    await t.resizeWindow(2560, 1440).click(collapseButtonSelector);
     await takeElementScreenshot("toolbox-search-right.png", toolboxElement, t, comparer);
-    await t.click(Selector(".svc-toolbox__search-button"));
     await t.click(Selector(".svc-toolbox input"));
     await t.typeText(Selector(".svc-toolbox input"), "single");
     await takeElementScreenshot("toolbox-search-right-entered.png", toolboxElement, t, comparer);
@@ -442,12 +453,14 @@ test("Toolbox RTL with search", async (t) => {
     const toolboxElement = Selector(".svc-toolbox");
 
     await setJSON({ pages: [{ name: "page1" }] });
+    await changeToolboxScrolling(false);
     await ClientFunction(() => {
       window["creator"].toolbox.searchEnabled = true;
       document.body.setAttribute("dir", "rtl");
     })();
 
-    await t.resizeWindow(2560, 1440);
+    await t.resizeWindow(2560, 1440)
+      .click(collapseButtonSelector);
     await takeElementScreenshot("toolbox-search-rtl.png", toolboxElement, t, comparer);
     await t.typeText(Selector(".svc-toolbox input"), "single");
     await takeElementScreenshot("toolbox-search-rtl-entered.png", toolboxElement, t, comparer);
@@ -459,7 +472,7 @@ test("Toolbox RTL with search", async (t) => {
 test("Toolbox RTL with search compact", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     const toolboxElement = Selector(".svc-toolbox");
-
+    const creatorTabElement = Selector(".svc-creator-tab");
     await setJSON({ pages: [{ name: "page1" }] });
     await ClientFunction(() => {
       window["creator"].toolbox.searchEnabled = true;
@@ -467,13 +480,13 @@ test("Toolbox RTL with search compact", async (t) => {
     })();
 
     await t.resizeWindow(1240, 870);
-    await takeElementScreenshot("toolbox-search-rtl-compact.png", toolboxElement, t, comparer);
+    await takeElementScreenshot("toolbox-search-rtl-compact.png", creatorTabElement, t, comparer);
     await t.click(Selector(".svc-toolbox__search-button"));
     await t.click(Selector(".svc-toolbox input"));
     await t.typeText(Selector(".svc-toolbox input"), "single");
-    await takeElementScreenshot("toolbox-search-rtl-compact-entered.png", toolboxElement, t, comparer);
+    await takeElementScreenshot("toolbox-search-rtl-compact-entered.png", creatorTabElement, t, comparer);
     await t.typeText(Selector(".svc-toolbox input"), "qwerty");
-    await takeElementScreenshot("toolbox-search-rtl-compact-placeholder.png", toolboxElement, t, comparer);
+    await takeElementScreenshot("toolbox-search-rtl-compact-placeholder.png", creatorTabElement, t, comparer);
   });
 });
 

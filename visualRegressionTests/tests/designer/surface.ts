@@ -1,5 +1,5 @@
 import { ClientFunction, Selector } from "testcafe";
-import { url, setJSON, takeElementScreenshot, addQuestionByAddQuestionButton, wrapVisualTest, getTabbedMenuItemByText, creatorTabPreviewName, creatorTabDesignerName, resetHoverToCreator, getToolboxItemByText, getPropertyGridCategory, generalGroupName, getListItemByText, surveySettingsButtonSelector, changeToolboxScrolling, changeToolboxSearchEnabled } from "../../helper";
+import { url, setJSON, takeElementScreenshot, addQuestionByAddQuestionButton, wrapVisualTest, getTabbedMenuItemByText, creatorTabPreviewName, creatorTabDesignerName, resetHoverToCreator, getPropertyGridCategory, generalGroupName, getListItemByText, surveySettingsButtonSelector, changeToolboxScrolling, changeToolboxSearchEnabled, getToolboxItemByAriaLabel } from "../../helper";
 
 const title = "Designer surface";
 
@@ -407,8 +407,8 @@ test("Choices (Tagbox): Layout", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t
       .resizeWindow(1280, 900)
-      .hover(getToolboxItemByText("Multi-Select Dropdown"), { speed: 0.5 })
-      .click(getToolboxItemByText("Multi-Select Dropdown"), { speed: 0.5 })
+      .hover(getToolboxItemByAriaLabel("Multi-Select Dropdown"), { speed: 0.5 })
+      .click(getToolboxItemByAriaLabel("Multi-Select Dropdown"), { speed: 0.5 })
       .click(getPropertyGridCategory(generalGroupName))
       .click(getPropertyGridCategory("Data"))
       .click(Selector("span").withExactText("Set Default Answer"))

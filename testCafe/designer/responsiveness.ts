@@ -36,7 +36,7 @@ test("Check base responsiveness for toolbox", async (t) => {
     .expect(tabbedMenuItemSelector.hasClass("sv-action--hidden")).notOk()
     .resizeWindow(1280, 632)
     .expect(tabbedMenuItemSelector.hasClass("sv-action--hidden")).ok()
-    .click(".svc-toolbox__tool.sv-dots");
+    .click(".svc-toolbox__tool--dots");
   const popupSelector = Selector(".sv-popup .sv-popup__container").filterVisible();
   await t
     .expect(popupSelector.find(".sv-list__item").withText("Dynamic Panel").visible).ok()

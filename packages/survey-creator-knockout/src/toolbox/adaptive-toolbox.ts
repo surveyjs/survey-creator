@@ -12,6 +12,7 @@ ko.components.register("svc-adaptive-toolbox", {
       const manager: VerticalResponsivityManager = new VerticalResponsivityManager(model.toolbox.containerElement as HTMLDivElement, params.model.toolbox, params.model.toolbox.itemSelector);
       ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
         manager.dispose();
+        model.toolbox.unsubscribeRootElement();
         model.dispose();
       });
       return model;
