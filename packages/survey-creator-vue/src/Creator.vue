@@ -1,7 +1,7 @@
 <template>
   <template v-if="!model.isCreatorDisposed">
     <SvComponent :is="'survey-popup-modal'"></SvComponent>
-    <div :class="model.getRootCss()" ref="root">
+    <div :class="model.getRootCss()" :style="model.themeVariables" ref="root">
       <div>
         <SvComponent :is="'sv-svg-bundle'"></SvComponent>
       </div>

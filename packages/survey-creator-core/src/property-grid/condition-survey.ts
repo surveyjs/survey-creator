@@ -6,7 +6,7 @@ import { PropertyEditorSetupValue } from "./index";
 import { assignDefaultV2Classes, wrapTextByCurlyBraces } from "../utils/utils";
 import { logicCss } from "../components/tabs/logic-theme";
 import { getLogicString } from "../components/tabs/logic-types";
-import { CreatorBase } from "src/creator-base";
+import { CreatorBase } from "../creator-base";
 
 export class ConditionEditorItem {
   public conjunction: string = "and";

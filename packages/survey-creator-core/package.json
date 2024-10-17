@@ -10,6 +10,7 @@
   "scripts": {
     "build": "webpack --env buildType=dev && webpack --env buildType=prod",
     "build:i18n": "webpack --config ./webpack.i18n.js --env buildType=dev && webpack --config ./webpack.i18n.js --env buildType=prod",
+    "build:themes": "node creator-themes-import.js && webpack --config ./webpack.themes.config.js --env buildType=dev && webpack --config ./webpack.themes.config.js --env buildType=prod",
     "test": "jest",
     "test:cov": "jest --coverage",
     "test:dev": "jest --watch",
