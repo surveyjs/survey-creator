@@ -32,7 +32,9 @@ export class SurveyCreatorToolboxCategory extends SurveyElementBase<ISurveyCreat
     const items = this.renderCategoryContent();
     return (
       <div className={this.class} key={this.category.name}>
-        {header}
+        <div className="svc-toolbox__category-header-wrapper">
+          {header}
+        </div>
         {items}
       </div>
     );

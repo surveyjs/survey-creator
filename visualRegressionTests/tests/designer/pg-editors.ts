@@ -1,4 +1,4 @@
-import { url, setJSON, takeElementScreenshot, getToolboxItemByText, getPropertyGridCategory, generalGroupName, wrapVisualTest, addQuestionByAddQuestionButton, resetHoverToCreator, surveySettingsButtonSelector, inputMaskSettingsGroupName, getListItemByText, getVisibleElement, changeToolboxSearchEnabled } from "../../helper";
+import { url, setJSON, takeElementScreenshot, getPropertyGridCategory, generalGroupName, wrapVisualTest, addQuestionByAddQuestionButton, resetHoverToCreator, surveySettingsButtonSelector, inputMaskSettingsGroupName, getListItemByText, getVisibleElement, changeToolboxSearchEnabled, getToolboxItemByAriaLabel } from "../../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Property Grid Editors";
 
@@ -156,8 +156,8 @@ test("Default value popup", async (t) => {
     const dataTab = Selector("h4").withExactText("Data");
 
     await t
-      .hover(getToolboxItemByText("Single-Line Input"), { offsetX: 25 })
-      .click(getToolboxItemByText("Single-Line Input"), { offsetX: 25 })
+      .hover(getToolboxItemByAriaLabel("Single-Line Input"), { offsetX: 25 })
+      .click(getToolboxItemByAriaLabel("Single-Line Input"), { offsetX: 25 })
       .click(generalTab)
       .click(dataTab)
       .click(Selector(".svc-action-button.svc-question-link__set-button").withText("Set Default Answer"));
@@ -187,8 +187,8 @@ test("Custom button into fast entry popup", async (t) => {
     const choicesTab = Selector("h4").withExactText("Choice Options");
 
     await t
-      .hover(getToolboxItemByText("Dropdown"))
-      .click(getToolboxItemByText("Dropdown"))
+      .hover(getToolboxItemByAriaLabel("Dropdown"))
+      .click(getToolboxItemByAriaLabel("Dropdown"))
       .click(generalTab)
       .click(choicesTab)
       .click(Selector(".spg-action-button[title='Edit']"));
@@ -204,8 +204,8 @@ test("Logic popup", async (t) => {
     const logicTab = Selector("h4").withExactText("Conditions");
 
     await t
-      .hover(getToolboxItemByText("Single-Line Input"), { offsetX: 25 })
-      .click(getToolboxItemByText("Single-Line Input"), { offsetX: 25 })
+      .hover(getToolboxItemByAriaLabel("Single-Line Input"), { offsetX: 25 })
+      .click(getToolboxItemByAriaLabel("Single-Line Input"), { offsetX: 25 })
       .click(generalTab)
       .click(logicTab)
       .click(Selector(".spg-panel__content div[data-name='visibleIf'] button[title='Edit']"));
@@ -267,8 +267,8 @@ test("Logic popup mobile", async (t) => {
     const logicTab = Selector("h4").withExactText("Conditions");
 
     await t
-      .hover(getToolboxItemByText("Single-Line Input"), { offsetX: 25 })
-      .click(getToolboxItemByText("Single-Line Input"), { offsetX: 25 });
+      .hover(getToolboxItemByAriaLabel("Single-Line Input"), { offsetX: 25 })
+      .click(getToolboxItemByAriaLabel("Single-Line Input"), { offsetX: 25 });
     await t.resizeWindow(500, 870)
       .click(Selector("button[title='Open settings']").filterVisible(), { offsetX: 25 });
 

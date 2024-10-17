@@ -29,6 +29,7 @@ export class AdaptiveToolboxComponent extends BaseAngular<QuestionToolbox> imple
   }
   override ngOnDestroy(): void {
     this.responsivityManager?.dispose();
+    this.model.unsubscribeRootElement();
     super.ngOnDestroy();
   }
 }
