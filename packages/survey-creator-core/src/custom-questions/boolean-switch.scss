@@ -100,12 +100,10 @@
 }
 
 .spg-boolean-switch__title {
+  @include ctrDefaultFont;
+
   color: var(--ctr-toggle-button-label-text-color, #{$foreground-dim});
   text-align: left;
-  font-family: var(--ctr-default-font-family, #{$font-family});
-  font-size: var(--ctr-default-font-size, 16px);
-  line-height: var(--ctr-default-line-height, 24px);
-  font-weight: var(--ctr-default-font-weight, 400);
   position: relative;
   display: flex;
   align-items: center;

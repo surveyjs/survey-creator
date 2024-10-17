@@ -1,3 +1,5 @@
+@import "./font-sizes.scss";
+
 $primary: var(--sjs-primary-backcolor, var(--primary, #19b394));
 $primary-light: var(--sjs-primary-backcolor-light, var(--primary-light, rgba(25, 179, 148, 0.1)));
 $primary-background-dark: var(--sjs-primary-backcolor-dark, rgb(20, 164, 139));
@@ -85,17 +87,6 @@ $sd-panel-medium-min-width: 176px;
   line-height: var(--ctr-font-small-line-height, var(--ctr-small-bold-line-height, 16px));
 }
 
-@mixin defaultBold {
-  --default-bold-font-size: var(--sjs-font-size, calc(2 * #{$base-unit}));
-  --ctr-default-bold-line-height: calc(1.5 * var(--default-bold-font-size));
-
-  font-family: $font-family;
-  font-style: normal;
-  font-weight: 600;
-  font-size: var(--ctr-font-default-size, var(--default-bold-font-size, 16px));
-  line-height: var(--ctr-font-default-line-height, var(--ctr-default-bold-line-height, 24px));
-}
-
 @mixin defaultFont {
   --default-font-size: var(--sjs-font-size, calc(2 * #{$base-unit}));
   --ctr-default-line-height: calc(1.5 * var(--default-font-size));
@@ -104,6 +95,11 @@ $sd-panel-medium-min-width: 176px;
   font-weight: 400;
   font-size: var(--ctr-font-default-size, var(--default-font-size, 16px));
   line-height: var(--ctr-font-default-line-height, var(--ctr-default-line-height, 24px));
+}
+
+@mixin defaultBold {
+  @include defaultFont;
+  font-weight: 600;
 }
 
 @mixin borderLight {

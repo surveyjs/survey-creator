@@ -1,0 +1,112 @@
+$font-unit: var(--ctr-font-unit, 8px);
+$line-height-unit: var(--ctr-line-height-unit, 8px);
+
+.svc-creator {
+  --sjs-font-size-x1: calc(#{$font-unit} * 1);
+  --sjs-font-size-x150: calc(#{$font-unit} * 1.5);
+  --sjs-font-size-x2: calc(#{$font-unit} * 2);
+  --sjs-font-size-x3: calc(#{$font-unit} * 3);
+  --sjs-font-size-x4: calc(#{$font-unit} * 4);
+  --sjs-font-size-x5: calc(#{$font-unit} * 5);
+  --sjs-font-size-x6: calc(#{$font-unit} * 6);
+  --sjs-font-size-x7: calc(#{$font-unit} * 7);
+  --sjs-font-size-x8: calc(#{$font-unit} * 8);
+  --sjs-line-height-x1: calc(#{$line-height-unit} * 1);
+  --sjs-line-height-x150: calc(#{$line-height-unit} * 1.5);
+  --sjs-line-height-x2: calc(#{$line-height-unit} * 2);
+  --sjs-line-height-x3: calc(#{$line-height-unit} * 3);
+  --sjs-line-height-x4: calc(#{$line-height-unit} * 4);
+  --sjs-line-height-x5: calc(#{$line-height-unit} * 5);
+  --sjs-line-height-x6: calc(#{$line-height-unit} * 6);
+  --sjs-line-height-x7: calc(#{$line-height-unit} * 7);
+  --sjs-line-height-x8: calc(#{$line-height-unit} * 8);
+}
+
+@mixin ctrLargeFont {
+  font-family: var(--ctr-font-family, "Open Sans");
+  font-size: var(--ctr-font-large-size, 32px);
+  font-style: normal;
+  font-weight: 400;
+  line-height: var(--ctr-font-large-line-height, 40px);
+}
+
+@mixin ctrLargeBoldFont {
+  @include largeFont;
+  font-weight: 700;
+}
+
+@mixin ctrMediumFont {
+  font-family: var(--ctr-font-family, "Open Sans");
+  font-size: var(--ctr-font-medium-size, 24px);
+  font-style: normal;
+  font-weight: 400;
+  line-height: var(--ctr-font-medium-line-height, 32px);
+}
+
+@mixin ctrMediumBoldFont {
+  @include ctrMediumFont;
+  font-weight: 700;
+}
+
+@mixin ctrDefaultFont {
+  font-family: var(--ctr-font-family, "Open Sans");
+  font-size: var(--ctr-font-default-size, 16px);
+  font-style: normal;
+  font-weight: 400;
+  line-height: var(--ctr-font-default-line-height, 24px);
+}
+
+@mixin ctrDefaultBoldFont {
+  @include ctrDefaultFont;
+  font-weight: 600;
+}
+
+@mixin ctrDefaultBoldUnderlineFont {
+  @include ctrDefaultBoldFont;
+  font-weight: 600;
+  text-decoration-line: underline;
+}
+
+@mixin ctrDefaultUnderlineFont {
+  @include ctrDefaultFont;
+  text-decoration-line: underline;
+}
+
+@mixin ctrDefaultAllCapsFont {
+  @include ctrDefaultFont;
+  font-weight: 600;
+  line-height: var(--ctr-font-default-line-height-all-caps, 16px);
+  text-transform: uppercase;
+}
+
+@mixin ctrSmallFont {
+  font-family: var(--ctr-font-family, "Open Sans");
+  font-size: var(--ctr-font-small-size, 12px);
+  font-style: normal;
+  font-weight: 400;
+  line-height: var(--ctr-font-small-line-height, 16px);
+}
+
+@mixin ctrSmallBoldFont {
+  @include ctrSmallFont;
+  font-weight: 600;
+}
+
+@mixin ctrSmallUnderlineFont {
+  @include ctrSmallFont;
+  text-decoration-line: underline;
+}
+
+@mixin ctrSmallAllCapsFont {
+  @include ctrSmallFont;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+@mixin ctrCodeFont {
+  font-family: var(--ctr-font-family-code, "DM Mono");
+  font-size: var(--ctr-font-code-size, 16px);
+  font-style: normal;
+  font-weight: 400;
+  line-height: var(--ctr-font-code-line-height, 24px);
+}
