@@ -83,7 +83,7 @@ export class SidebarModel extends Base {
     this.onExpandCallback = undefined;
   }
   public executeOnExpand(callback: () => void) {
-    if(this.renderedIsVisible) {
+    if (this.renderedIsVisible) {
       callback();
     }
     this.onExpandCallback = callback;
@@ -98,7 +98,7 @@ export class SidebarModel extends Base {
     }
     if (this._visible !== val) {
       this._visible = val;
-      if(!this.animationAllowed) {
+      if (!this.animationAllowed) {
         this.afterExpand();
       }
       this.visibilityAnimation.sync(val);
@@ -239,5 +239,8 @@ export class SidebarModel extends Base {
       this.resizeManager = undefined;
     }
     this.rootElement = undefined;
+  }
+  public get toolbar() {
+    return this.header?.toolbar;
   }
 }
