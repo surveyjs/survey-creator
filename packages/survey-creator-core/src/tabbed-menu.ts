@@ -34,8 +34,7 @@ export class TabbedMenuItem extends Action implements ITabbedMenuItem {
   }
   getTitleCss(): string {
     return new CssClassBuilder()
-      .append("svc-text svc-tabbed-menu-item__text svc-text--normal")
-      .append("svc-text--bold", this.active)
+      .append("svc-tabbed-menu-item__text")
       .toString();
   }
   getIconCss(): string {

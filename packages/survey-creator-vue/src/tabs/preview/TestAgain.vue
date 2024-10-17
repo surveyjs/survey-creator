@@ -5,7 +5,7 @@
     @click="action.action()"
     v-key2click
   >
-    <span class="svc-text svc-text--normal svc-text--bold">
+    <span class="svc-add-new-item__text">
       {{ action.title }}
     </span>
   </div>

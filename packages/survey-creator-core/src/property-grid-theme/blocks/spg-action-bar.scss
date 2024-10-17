@@ -14,6 +14,7 @@
 }
 
 .spg-action-button {
+  @include ctrDefaultBoldFont;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -22,10 +23,6 @@
   box-sizing: border-box;
   border: none;
   color: var(--ctr-actionbar-button-text-color, $primary);
-  font-weight: 600;
-  font-size: calcSize(2);
-  line-height: calcSize(3);
-  font-family: $font-family;
   border-radius: calcSize(12.5);
   background-color: transparent;
   cursor: pointer;

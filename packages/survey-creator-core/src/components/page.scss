@@ -238,13 +238,18 @@ svc-page {
 }
 
 .svc-element__add-new-question {
-  .svc-text {
+  .svc-add-new-item__text {
     margin-left: calcSize(6);
   }
 }
 
 .svc-element__add-new-question {
   -webkit-tap-highlight-color: transparent;
+}
+
+.svc-add-new-item__text {
+  @include ctrDefaultBoldFont;
+  color: $foreground;
 }
 
 .svc-element__question-type-selector {

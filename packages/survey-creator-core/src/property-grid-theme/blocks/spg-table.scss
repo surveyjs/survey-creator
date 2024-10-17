@@ -35,9 +35,8 @@
 }
 
 .spg-table__cell:not(.spg-table__cell--detail-panel) .spg-input {
+  @include ctrDefaultFont;
   appearance: none;
-  line-height: calcSize(3);
-  font-size: calcSize(2);
   box-shadow: none;
   border-radius: calcSize(0.5);
   background-color: var(--ctr-data-table-row-background-color, transparent);
@@ -90,10 +89,8 @@
 }
 
 .spg-table__cell--header {
-  font-size: calcSize(1.5);
-  font-weight: normal;
+  @include ctrSmallFont;
   color: var(--ctr-data-table-cell-text-color-header, $foreground-light);
-  line-height: calcSize(3);
   background: var(--ctr-data-table-row-background-color-header, $background-dim);
   text-align: left;
   white-space: nowrap;

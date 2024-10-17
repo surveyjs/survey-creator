@@ -4,7 +4,7 @@
     (mouseover)="adorner.hoverStopper && adorner.hoverStopper($event, $event.currentTarget)"
     data-bind="clickBubble: false">
     <svg class="svc-panel__add-new-question-icon" [iconName]="('icon-add_24x24')" [size]="24" sv-ng-svg-icon></svg>
-    <span class="svc-text svc-text--normal svc-text--bold">
+    <span class="svc-add-new-item__text">
       {{ adorner.addNewQuestionText }}
     </span>
     <ng-template *ngIf="renderPopup"

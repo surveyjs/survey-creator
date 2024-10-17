@@ -72,23 +72,16 @@
 }
 
 .svc-surface-placeholder__title {
+  @include ctrMediumBoldFont;
   color: var(--ctr-surface-placeholder-text-title-color, rgba(0, 0, 0, 0.91));
   text-align: center;
-  font-family: var(--ctr-medium-bold-font-family, "Open Sans");
-  font-size: var(--ctr-medium-bold-font-size, 24px);
-  line-height: var(--ctr-medium-bold-line-height, 32px);
-  font-weight: var(--ctr-medium-bold-font-weight, 700);
   align-self: stretch;
 }
 
 .svc-surface-placeholder__description {
-  color: var(--ctr-surface-placeholder-text-description-color,
-      rgba(0, 0, 0, 0.45));
+  @include ctrDefaultFont;
+  color: var(--ctr-surface-placeholder-text-description-color, rgba(0, 0, 0, 0.45));
   text-align: center;
-  font-family: var(--ctr-default-font-family, "Open Sans");
-  font-size: var(--ctr-default-font-size, 16px);
-  line-height: var(--ctr-default-line-height, 24px);
-  font-weight: var(--ctr-default-font-weight, 400);
   align-self: stretch;
 }
 

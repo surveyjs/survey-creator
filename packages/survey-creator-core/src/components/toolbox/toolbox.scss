@@ -265,10 +265,7 @@ svc-toolbox {
 }
 
 .svc-toolbox__category-title {
-  font-family: $font-family;
-  font-size: calcSize(1.5);
-  font-weight: bold;
-  line-height: calcSize(2);
+  @include ctrSmallBoldFont;
   color: $foreground;
   vertical-align: middle;
   display: block;
