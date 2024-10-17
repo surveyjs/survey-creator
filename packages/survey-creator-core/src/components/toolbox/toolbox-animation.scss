@@ -30,13 +30,14 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
 
 .svc-toolbox--enter,
 .svc-toolbox--leave
- {
+{
   animation-fill-mode: forwards;
-  animation-duration: var(--move-animation-duration);
-  animation-delay: var(--move-animation-delay);
+  animation-duration: var(--move-animation-duration), var(--animation-duration);
+  animation-delay: var(--move-animation-delay), 0s;
   animation-direction: var(--animation-direction);
   animation-timing-function: var(--animation-timing-function);
-  animation-name: toolboxMoveIn;
+  animation-name: toolboxMoveIn, empty;
+  animation-fill-mode: forwards;
   .svc-toolbox__item-submenu-button,
   .svc-toolbox__item-title,
   .spg-search-editor_input {
@@ -45,6 +46,8 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
     animation-direction: var(--animation-direction);
     animation-timing-function: var(--animation-timing-function);
     animation-name: toolboxFadeIn;
+    animation-fill-mode: forwards;
+    opacity: 0;
   }
 }
 .svc-toolbox--enter {
@@ -54,6 +57,7 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
   --move-animation-delay: 0s;
   --animation-timing-function: #{$ease-out};
   --animation-direction: normal;
+  --animation-duration: calc(var(--fade-animation-delay) + var(--fade-animation-duration));
   --animation-timing-function: #{$cubic-ease-out};
 }
 .svc-toolbox--leave {
@@ -62,10 +66,11 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
   --fade-animation-delay: 0s;
   --move-animation-delay: #{$svc-toolbox-move-out-delay};
   --animation-direction: reverse;
+  --animation-duration: 0s;
   --animation-timing-function: #{$reverse-cubic-ease-out};
-  .svc-toolbox__item-submenu-button,
-  .svc-toolbox__item-title,
-  .spg-search-editor_input {
-    opacity: 0;
-  }
 }
+
+.svc-toolbox--flyout-to-compact-running {
+  width: var(--toolbox-width-compact);
+}
+

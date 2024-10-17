@@ -6,13 +6,17 @@ svc-toolbox {
   position: absolute;
 }
 
+.svc-toolbox--compact-ready {
+  width: var(--toolbox-width-compact);
+}
+
 .svc-toolbox {
   --toolbox-width : var(--ctr-toolbox-min-width, 224.984375px /*calcSize(28)*/);
   --toolbox-width-compact: var(--ctr-toolbox-width-compact, calcSize(10.5));
+  width: auto;
   height: 100%;
   display: flex;
   flex-direction: column;
-  width: var(--toolbox-width);
   .spg-search-editor_container {
     background: var(--ctr-toolbox-background-color, $background-dim);
     padding-top: var(--ctr-toolbox-search-padding-top, calcSize(2.5));
@@ -55,6 +59,7 @@ svc-toolbox {
   flex-direction: column;
   border-inline-end: var(--ctr-toolbox-border-width-right, 0px) solid var(--ctr-toolbox-border-color, transparent);
   background: var(--ctr-toolbox-background-color, $background-dim);
+  width: var(--toolbox-width);
 }
 
 .svc-toolbox__scroll-wrapper {
@@ -116,14 +121,10 @@ svc-toolbox {
   }
 }
 
-.svc-toolbox--scrollable {
-  width: var(--ctr-toolbox-min-width, 236.984375px);
-}
-
 .svc-toolbox--compact {
-  width: var(--toolbox-width-compact);
   .svc-toolbox__panel {
     overflow: visible;
+    width: var(--toolbox-width-compact);
   }
   .svc-toolbox__scroller {
     width: 100vw;
@@ -178,6 +179,7 @@ svc-toolbox {
 
 .svc-toolbox--flyout {
   overflow: visible;
+  width: var(--toolbox-width-compact);
   max-width: var(--ctr-toolbox-width-compact, calcSize(10.5));
   overflow: visible;
 

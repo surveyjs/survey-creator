@@ -77,6 +77,7 @@ export class CreatorResponsivityManager {
   process(isFirst: boolean = false) {
     if(isFirst) {
       this.creator.sidebar.blockAnimations();
+      this.creator.toolbox.blockAnimations();
     }
     this.currentWidth = this.getScreenWidth();
     if (this.currentWidth === "xl" || this.currentWidth === "xxl") {
@@ -96,6 +97,7 @@ export class CreatorResponsivityManager {
     }
     if (isFirst) {
       this.creator.sidebar.releaseAnimations();
+      this.creator.toolbox.releaseAnimations();
     }
   }
 
