@@ -1106,6 +1106,24 @@ export class PropertyGridModel {
       }
     });
   }
+  public expandCategoryIfNeeded(): void {
+    const expandedTabName = creatorSettings.propertyGrid.defaultExpandedTabName;
+    if (!!expandedTabName && !this.getPropertyGridExpandedCategory()) {
+      const panel = <PanelModel>this.survey.getPanelByName(expandedTabName);
+      if (!!panel) {
+        panel.blockAnimations();
+        panel.expand();
+        panel.releaseAnimations();
+      }
+    }
+  }
+  private getPropertyGridExpandedCategory(): string {
+    const panels = this.survey.getAllPanels();
+    for (var i = 0; i < panels.length; i++) {
+      if ((<PanelModel>panels[i]).isExpanded) return panels[i].name;
+    }
+    return "";
+  }
   private collapseOtherPanels(panel: PanelModel): void {
     this.collapseAllCategoriesExcept(panel);
   }

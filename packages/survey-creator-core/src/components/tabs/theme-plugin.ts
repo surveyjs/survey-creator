@@ -345,7 +345,12 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.creator.sidebar.activePage = this.propertyGridTab.id;
     this.propertyGridTab.visible = true;
     this.updateTabControl();
-    this.creator.expandCategoryIfNeeded();
+    this.expandCategoryIfNeeded();
+  }
+  private expandCategoryIfNeeded() {
+    if (!this.model.survey.isEmpty) {
+      this.propertyGrid.expandCategoryIfNeeded();
+    }
   }
   private updateTabControlActions() {
     if (this.showOneCategoryInPropertyGrid) {

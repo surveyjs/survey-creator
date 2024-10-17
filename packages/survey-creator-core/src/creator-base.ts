@@ -2895,23 +2895,9 @@ export class SurveyCreatorModel extends Base
       this.designerPropertyGrid.setPropertyGridDefinition(val);
     }
   }
-  private getPropertyGridExpandedCategory(): string {
-    if (!this.designerPropertyGrid) return undefined;
-    const panels = this.designerPropertyGrid.survey.getAllPanels();
-    for (var i = 0; i < panels.length; i++) {
-      if ((<PanelModel>panels[i]).isExpanded) return panels[i].name;
-    }
-    return "";
-  }
   public expandCategoryIfNeeded(): void {
-    const expandedTabName = settings.propertyGrid.defaultExpandedTabName;
-    if (!!expandedTabName && !this.getPropertyGridExpandedCategory() && !this.survey.isEmpty) {
-      const panel = <PanelModel>this.designerPropertyGrid.survey.getPanelByName(expandedTabName);
-      if (!!panel) {
-        panel.blockAnimations();
-        panel.expand();
-        panel.releaseAnimations();
-      }
+    if (!this.survey.isEmpty) {
+      this.designerPropertyGrid.expandCategoryIfNeeded();
     }
   }
   private selectionChanged(element: Base, propertyName?: string, focus = true) {
