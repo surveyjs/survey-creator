@@ -21,7 +21,7 @@
         <SvComponent
           :is="'sv-svg-icon'"
           class="svc-item-value-controls__drag-icon"
-          :iconName="'icon-drag-area-indicator'"
+          :iconName="'icon-drag-24x24'"
           :size="24"
           :title="adorner.dragTooltip"
         ></SvComponent>

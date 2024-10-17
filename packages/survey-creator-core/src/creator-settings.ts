@@ -178,7 +178,8 @@ export var settings = {
   jsonEditor: {
     indentation: 2,
     exportFileName: "survey.json"
-  }
+  },
+  useLegacyIcons: true
 };
 export interface ICollectionItemAllowOperations {
   allowDelete: boolean;
