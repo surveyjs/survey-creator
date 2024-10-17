@@ -16,6 +16,24 @@ var palettes = {
   "light": ["default-light", "default-contrast"],
   "dark": ["default-dark"],
 };
+var themeConstants = {
+  "default": {
+    "--ctr-toolbox-scrollbar-left": "auto",
+    "--ctr-toolbox-scrollbar-right": "0",
+    "--ctr-toolbox-scrollbar-display": "none",
+    "--ctr-toolbox-scroller-align-items": "flex-start",
+    "--ctr-toolbox-item-submenu-button-right": "8px",
+    "--ctr-toolbox-item-align": "stretch",
+    "--ctr-toolbox-submenu-offset": "13px",
+    "--ctr-toolbox-width-compact": "72px",
+    "--ctr-toolbox-separator-width": "calc(100% + 8px)",
+    "--ctr-toolbox-separator-width-compact": "40px",
+    "--ctr-toolbox-item-banner-icon-display": "none",
+    "--ctr-toolbox-item-banner-beak-display": "block",
+    "--ctr-toolbox-item-banner-left": "64px",
+    "--ctr-toolbox-submenu-item-min-width": "calc(17 * 8px)",
+  }
+};
 
 const baseThemeCssVariable = getCssVariablesFormFile(baseThemeName + ".css");
 const themeDistinctions = {};
@@ -103,7 +121,7 @@ getUsedCssVariables("./src/");
 Object.keys(themeNameMap).forEach(themeName => {
   if(themeName !== baseThemeName && !!baseThemeCssVariable) {
     const curThemeCssVariables = getCssVariablesFormFile(themeName + ".css");
-    const distinctions = {};
+    const distinctions = themeConstants[themeNameMap[themeName]] || {};
     Object.keys(curThemeCssVariables || {}).forEach(variableKey => {
       const variableValue = curThemeCssVariables[variableKey];
       if(variableValue !== baseThemeCssVariable[variableKey] || usedCssVariablesList.indexOf(variableKey) !== -1) {

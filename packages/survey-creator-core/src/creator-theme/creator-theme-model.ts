@@ -236,6 +236,9 @@ Serializer.addProperties("creatortheme", [
     name: "fontScale",
     isSerializable: false,
     default: 100,
+    enableIf: (obj: CreatorThemeModel): boolean => {
+      return !obj || obj.themeName !== CreatorThemeModel.defautlThemeName;
+    },
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
         editor.unit = "%";
@@ -263,6 +266,9 @@ Serializer.addProperties("creatortheme", [
     name: "scale",
     isSerializable: false,
     default: 100,
+    enableIf: (obj: CreatorThemeModel): boolean => {
+      return !obj || obj.themeName !== CreatorThemeModel.defautlThemeName;
+    },
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
         editor.unit = "%";
@@ -282,6 +288,9 @@ Serializer.addProperties("creatortheme", [
     name: "surfaceScale",
     isSerializable: false,
     default: 100,
+    enableIf: (obj: CreatorThemeModel): boolean => {
+      return !obj || obj.themeName !== CreatorThemeModel.defautlThemeName;
+    },
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
         editor.unit = "%";
