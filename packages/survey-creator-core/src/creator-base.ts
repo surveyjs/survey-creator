@@ -1805,6 +1805,12 @@ export class SurveyCreatorModel extends Base
     }
   }
   private existingPages: {};
+  private getSurfaceCss() {
+    const result = JSON.parse(JSON.stringify(defaultV2Css));
+    result.header += " svc-surface-header";
+
+    return result;
+  }
   /**
    * Returns true if initial survey was empty. It was not set via JSON property and default new survey is empty as well.
    * @returns true if initial survey doesn't have any elements or properties
@@ -1816,7 +1822,7 @@ export class SurveyCreatorModel extends Base
     this.existingPages = {};
     const survey = this.createSurvey({}, "designer", undefined, (survey: SurveyModel) => {
       survey.skeletonHeight = 188;
-      survey.css = defaultV2Css;
+      survey.css = this.getSurfaceCss();
       survey.setIsMobile(!!this.isMobileView);
       survey.setDesignMode(true);
       survey.lazyRendering = true;

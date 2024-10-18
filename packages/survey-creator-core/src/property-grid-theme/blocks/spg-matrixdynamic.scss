@@ -65,6 +65,7 @@
 .spg-matrixdynamic__placeholder-text {
   @include ctrDefaultFont;
   color: var(--ctr-survey-placeholder-text-color, $foreground-light);
+  text-align: center;
 }
 
 .spg-matrixdynamic__add-btn {

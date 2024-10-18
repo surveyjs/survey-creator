@@ -68,7 +68,6 @@
 }
 
 .st-strings {
-  height: calc(100% - calc(6 * #{$base-unit}));
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -105,7 +104,7 @@
 
 .st-title.st-panel__title,
 .st-table__cell.st-table__cell--header {
-  @include smallBold;
+  @include ctrSmallBoldFont;
   text-align: left;
 }
 
@@ -114,13 +113,13 @@
 }
 
 .st-title.st-panel__title {
-  height: calcSize(4);
-  line-height: calcSize(4);
-  padding-left: calcSize(3);
   margin: 0;
   color: var(--ctr-string-table-group-header-text-color, $foreground-light);
   background-color: var(--ctr-string-table-group-header-background-color, $background-dim-light);
   border-bottom: 1px solid var(--ctr-string-table-row-border-color, $border-light);
+  padding: var(--ctr-string-table-row-padding-top, #{calcSize(1)})
+    var(--ctr-string-table-row-padding-right, #{calcSize(3)}) var(--ctr-string-table-row-padding-bottom, #{calcSize(1)})
+    var(--ctr-string-table-row-padding-left, #{calcSize(3)});
 }
 
 .st-table {
@@ -140,7 +139,7 @@
 }
 
 td.st-table__cell:first-of-type {
-  @include defaultBold;
+  @include ctrDefaultBoldFont;
   color: var(--ctr-string-table-row-text-color-title, $foreground);
   max-width: 300px;
   padding-right: calcSize(3);
@@ -165,7 +164,7 @@ td.st-table__cell:first-of-type {
 }
 
 .st-comment {
-  @include defaultFont;
+  @include ctrDefaultFont;
   display: block;
   width: calc(100% - 3 * #{$base-unit});
   border: unset;

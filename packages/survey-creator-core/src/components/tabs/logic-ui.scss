@@ -344,7 +344,7 @@
   }
 }
 
-.svc-logic-placeholder__text {
+.svc-logic-placeholder__text.svc-logic-placeholder__text {
   @include ctrDefaultFont;
   text-align: center;
   color: $foreground-light;

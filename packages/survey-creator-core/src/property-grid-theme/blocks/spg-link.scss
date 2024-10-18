@@ -4,8 +4,9 @@
 
 .sv-string-viewer {
   .spg-link {
-    @include ctrDefaultBoldUnderlineFont;
     display: initial;
     color: $primary;
+    font-weight: 600;
+    text-decoration-line: underline;
   }
 }

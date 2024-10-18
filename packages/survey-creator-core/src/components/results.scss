@@ -26,6 +26,7 @@
   }
 
   .svd-test-results__text {
+    @include ctrDefaultFont;
     display: flex;
     padding: calcSize(2) calcSize(3);
     width: calc(100% - calcSize(6));
@@ -75,6 +76,7 @@
       }
 
       td {
+        @include ctrDefaultFont;
         padding: calcSize(1) calcSize(1);
         max-width: calcSize(50);
         overflow: auto;
@@ -82,7 +84,7 @@
         user-select: text;
 
         &:nth-child(1) {
-          @include ctrDefaultFont;
+          @include ctrDefaultBoldFont;
           position: relative;
           width: 50%;
         }

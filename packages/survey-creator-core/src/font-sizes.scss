@@ -32,7 +32,7 @@ $font-family: var(--ctr-font-family, var(--sjs-font-family, var(--font-family)))
 }
 
 @mixin ctrLargeBoldFont {
-  @include largeFont;
+  @include ctrLargeFont;
   font-weight: 700;
 }
 
