@@ -1,5 +1,43 @@
 @import "../../variables.scss";
 
+.svc-property-panel__group {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  padding: calcSize(2);
+  border: none;
+  outline: none;
+  color: $foreground-light;
+  cursor: pointer;
+  text-align: left;
+  background: $background;
+  box-shadow: inset 0px -1px 0px $border;
+  font-family: $font-family;
+  font-size: calcSize(2);
+}
+
+.svc-property-panel__group:disabled,
+.svc-property-panel__group:disabled:hover {
+  background-color: $background;
+  color: $foreground;
+  opacity: 0.25;
+  cursor: default;
+}
+
+.svc-property-panel__group:hover {
+  background-color: $background-dim;
+  color: $foreground-light;
+  font-weight: 400;
+}
+
+.svc-property-panel__group--active,
+.svc-property-panel__group--active:hover {
+  color: $foreground;
+  font-weight: 600;
+  background-color: $background;
+}
+
 .svc-property-grid-placeholder {
   display: flex;
   padding: var(--ctr-property-grid-placeholder-padding-top, 96px)
