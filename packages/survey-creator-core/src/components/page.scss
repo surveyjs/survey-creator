@@ -238,7 +238,7 @@ svc-page {
 }
 
 .svc-element__add-new-question {
-  .svc-add-new-item__text {
+  .svc-add-new-item-button__text {
     margin-left: calcSize(6);
   }
 }
@@ -247,7 +247,7 @@ svc-page {
   -webkit-tap-highlight-color: transparent;
 }
 
-.svc-add-new-item__text {
+.svc-add-new-item-button__text {
   @include ctrDefaultBoldFont;
   color: $foreground;
 }

@@ -9,7 +9,7 @@
         model.enabled !== undefined && !model.enabled,
     }"
   >
-    <span class="svc-add-new-item__text">
+    <span class="svc-add-new-item-button__text">
       {{ model.title }}
     </span>
   </div>

@@ -995,7 +995,7 @@ svc-question,
       outline: none;
     }
 
-    .svc-add-new-item__text {
+    .svc-add-new-item-button__text {
       display: flex;
       align-items: center;
       flex-grow: 1;
@@ -1071,7 +1071,7 @@ svc-question,
     outline: none;
   }
 
-  .svc-add-new-item__text {
+  .svc-add-new-item-button__text {
     display: flex;
     align-items: center;
     flex-grow: 1;
@@ -1164,7 +1164,7 @@ svc-question,
     .svc-element__add-new-question {
       padding: calcSize(0.5) calcSize(0.5);
 
-      .svc-add-new-item__text {
+      .svc-add-new-item-button__text {
         display: none;
       }
     }

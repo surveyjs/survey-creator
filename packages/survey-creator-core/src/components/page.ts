@@ -270,7 +270,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       this._footerActionsBar.containerCss = "svc-page__footer";
       this._footerActionsBar.cssClasses = {
         item: "svc-btn",
-        itemTitle: "svc-add-new-item__text"
+        itemTitle: "svc-add-new-item-button__text"
       };
       let footerActions: Array<IAction> = [{
         css: "svc-add-new-question-action",
