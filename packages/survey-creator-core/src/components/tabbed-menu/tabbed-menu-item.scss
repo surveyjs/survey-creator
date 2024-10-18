@@ -46,12 +46,16 @@
 }
 
 .svc-tabbed-menu-item__text.svc-tabbed-menu-item__text {
+  @include ctrDefaultFont;
   white-space: nowrap;
   display: block;
   color: var(--ctr-menu-item-text-color, $foreground);
-  font-size: var(--ctr-font-default-size, 16px);
-  line-height: var(--ctr-font-default-line-height, 24px);
 }
+
+.svc-tabbed-menu-item--selected .svc-tabbed-menu-item__text {
+  @include ctrDefaultBoldFont;
+}
+
 .svc-tabbed-menu-item__icon {
   width: var(--ctr-menu-item-icon-width, 24px);
   height: var(--ctr-menu-item-icon-height, 24px);

@@ -34,7 +34,7 @@
 }
 
 .svc-logo-image-placeholder {
-  font-size: calcSize(4);
+  @include ctrLargeFont;
   color: $foreground-light;
   opacity: 0.25;
   white-space: nowrap;

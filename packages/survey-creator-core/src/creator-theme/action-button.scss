@@ -1,4 +1,5 @@
 .svc-action-button {
+  @include ctrDefaultBoldFont;
   display: inline-block;
 
   padding: calcSize(0.5) calcSize(2);
@@ -6,10 +7,6 @@
   border-radius: calcSize(12.5);
 
   color: var(--ctr-survey-action-button-text-color-positive, $primary);
-
-  font-weight: 600;
-  font-size: calcSize(2);
-  line-height: calcSize(3);
 
   border: calcSize(0.25) solid transparent;
 

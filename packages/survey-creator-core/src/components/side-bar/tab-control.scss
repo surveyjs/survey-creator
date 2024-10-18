@@ -171,20 +171,12 @@
   align-items: center;
 }
 .svc-sidebar__header-title {
+  @include ctrDefaultFont;
   color: var(--ctr-menu-toolbar-button-text-color, rgba(0, 0, 0, 0.91));
-  font-family: var(--ctr-font-family, "Open Sans");
-  font-size: var(--ctr-font-default-size, 16px);
-  font-style: normal;
-  font-weight: 400;
-  line-height: var(--ctr-font-default-line-height, 24px) /* 150% */;
   display: inline-block;
 }
 .svc-sidebar__header-subtitle {
+  @include ctrSmallFont;
   color: var(--ctr-menu-toolbar-button-text-color-secondary, rgba(0, 0, 0, 0.45));
-  font-family: var(--ctr-font-family, "Open Sans");
-  font-size: var(--ctr-font-small-size, 12px);
-  font-style: normal;
-  font-weight: 400;
-  line-height: var(--ctr-font-small-line-height, 16px) /* 133.333% */;
   display: inline-block;
 }

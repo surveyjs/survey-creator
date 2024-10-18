@@ -36,24 +36,19 @@
 }
 
 .svc-logic-paneldynamic div.svc-logic-operator {
-  height: calcSize(3);
   box-sizing: content-box;
   max-width: calcSize(40);
 }
 
 .svc-logic-paneldynamic .svc-logic-operator {
+  @include ctrDefaultBoldFont;
   -webkit-appearance: none;
   appearance: none;
   padding: calcSize(1) calcSize(2);
   border-radius: calcSize(12.5);
   border: none;
   outline: none;
-  font-weight: 600;
-  font-family: $font-family;
-  font-size: calcSize(2);
   color: var(--ctr-expression-item-text-color-parameter-empty, $foreground-light);
-  height: calcSize(5);
-  line-height: calcSize(3);
   cursor: pointer;
 
   option {
@@ -253,7 +248,7 @@
     }
   }
 
-  .svc-logic-tab__content-action--disabled .svc-text {
+  .svc-logic-tab__content-action--disabled .svc-add-new-item-button__text {
     color: var(--ctr-button-text-color-disabled, $foreground);
     opacity: var(--ctr-button-text-opacity-disabled, 0.25);
   }
@@ -265,14 +260,12 @@
 }
 
 .svc-logic-tab__content-empty {
-  .svc-text {
+  .svc-add-new-item-button__text {
     color: var(--ctr-surface-placeholder-text-description-color, $foreground);
   }
 }
 
 .svc-logic-paneldynamic {
-  font-family: $font-family;
-
   .sd-row--multiple {
     padding: 0;
     background: none;
@@ -351,12 +344,8 @@
   }
 }
 
-.svc-logic-placeholder__text {
-  font-family: $font-family;
-  font-style: normal;
-  font-weight: 400;
-  font-size: calcSize(2);
-  line-height: calcSize(3);
+.svc-logic-placeholder__text.svc-logic-placeholder__text {
+  @include ctrDefaultFont;
   text-align: center;
   color: $foreground-light;
   display: block;
