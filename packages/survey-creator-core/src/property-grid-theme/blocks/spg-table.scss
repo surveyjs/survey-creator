@@ -42,7 +42,7 @@
   border-radius: calcSize(0.5);
   background-color: var(--ctr-data-table-row-background-color, transparent);
   padding: calcSize(1);
-  padding-right: 0;
+  padding-right: calcSize(3);
   height: auto;
 
   &[type="color"] {
@@ -72,6 +72,15 @@
 
   .spg-dropdown_chevron-button {
     width: calcSize(3);
+    margin-left: calcSize(-3);
+  }
+
+  .sd-dropdown_chevron-button-svg {
+    opacity: var(--ctr-data-table-cell-drop-down-arrow-opacity, 0.5);
+    
+    use {
+      fill: var(--ctr-data-table-cell-drop-down-arrow-color, $foreground-light);
+    }
   }
 }
 
