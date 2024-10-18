@@ -104,9 +104,8 @@
 }
 
 .svc-string-editor__error {
+  @include ctrDefaultFont;
   margin-left: calcSize(1);
-  line-height: calcSize(4);
-  font-size: calcSize(2);
   color: red;
   display: none;
 }

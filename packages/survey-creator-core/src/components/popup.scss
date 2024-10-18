@@ -91,6 +91,7 @@
   }
 
   .sv-list__item-body {
+    @include ctrDefaultFont;
     color: var(--ctr-list-item-text-color, $foreground-dim);
     transition: background-color $creator-transition-duration, color $creator-transition-duration;
   }
@@ -111,6 +112,7 @@
   .sv-list__item--selected,
   .sv-list__item.sv-list__item--selected:hover {
     & > .sv-list__item-body {
+      @include ctrDefaultBoldFont;
       color: var(--ctr-list-item-text-color-selected, $primary-foreground);
       background: var(--ctr-list-item-background-color-selected, $primary);
     }
