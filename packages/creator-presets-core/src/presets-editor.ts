@@ -31,6 +31,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
   private presetValue: CreatorPreset;
   private creatorValue: SurveyCreatorModel;
   private modelValue: SurveyModel;
+  private resultModelValue: SurveyModel;
   private navigationBarValue: NavigationBar;
   public locTitle: LocalizableString;
   constructor(json?: ICreatorPresetData) {
@@ -39,6 +40,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     this.presetValue = new CreatorPreset(json);
     this.creatorValue = this.createCreator({});
     this.modelValue = this.createModel();
+    this.resultModelValue = this.createResultModel();
     this.locTitle = new LocalizableString(undefined, false);
     this.locTitle.text = "Creator Presets";
     this.navigationBarValue = new NavigationBar();
@@ -60,6 +62,10 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
   public get preset(): CreatorPreset { return this.presetValue; }
   public get creator(): SurveyCreatorModel { return this.creatorValue; }
   public get model(): SurveyModel { return this.modelValue; }
+  public get resultModel(): SurveyModel {
+    this.upldateResultJson();
+    return this.resultModelValue;
+  }
   public get navigationBar(): ActionContainer { return this.navigationBarValue; }
   public get activeTab(): string {
     return this.getPropertyValue("activeTab");
@@ -78,6 +84,12 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
   }
   public set json(val: ICreatorPresetData) {
     this.preset.setJson(val);
+    this.modelValue = this.createModel();
+    this.upldateResultJson();
+    this.applyFromSurveyModel(true);
+  }
+  public get jsonText(): string {
+    return JSON.stringify(this.json, null, 2);
   }
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any): void {
     if(name === "activeTab" && oldValue === "preset") {
@@ -138,6 +150,95 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
       editablePresets.forEach(item => item.updateOnMatrixDetailPanelVisibleChanged(model, this.creator, options));
     });
     return model;
+  }
+  protected createResultModel(): SurveyModel {
+    const model = new SurveyModel({
+      elements: [
+        { type: "html", name: "q1", html: this.getResultHtml() },
+        { type: "comment", name: "json", title: "Preset JSON:", rows: 60, cols: 120, readOnly: true }
+      ]
+    });
+    model.showPrevButton = false;
+    model.showCompleteButton = false;
+    model.showQuestionNumbers = false;
+    model.width = "900px";
+    model.onGetQuestionTitleActions.add((sender, options) => {
+      if(options.question.name === "json") {
+        const question = options.question;
+        options.titleActions.push({
+          id: "json_copy",
+          iconName: "icon-copy",
+          title: "Copy",
+          action: () => {
+            navigator.clipboard.writeText(question.value);
+          }
+        });
+        options.titleActions.push({
+          id: "json_download",
+          iconName: "icon-download",
+          title: "Download",
+          action: () => {
+            this.downloadJsonFile(question.value);
+          }
+        });
+        options.titleActions.push({
+          id: "icon-load",
+          iconName: "icon-load",
+          title: "Load",
+          action: () => {
+            this.loadJsonFile();
+          }
+        });
+      }
+    });
+    return model;
+  }
+  private getResultHtml(): string {
+    return `<div>Use the following code to apply the preset:
+<div style="line-height:1"><pre><code>import { SurveyCreatorModel, CreatorPreset } from "survey-creator-core";
+const creator = new SurveyCreatorModel({ ... });
+
+const presetJson = {
+  // Copy the JSON object from below
+}
+
+const preset = new CreatorPreset(presetJson);
+preset.apply(creator);</div></pre></code></div>
+`;
+  }
+  private downloadJsonFile(text: string): void {
+    const jsonBlob = new Blob([text], { type: "application/json" });
+    const elem = window.document.createElement("a");
+    elem.href = window.URL.createObjectURL(jsonBlob);
+    elem.download = "preset.json";
+    document.body.appendChild(elem);
+    elem.click();
+    document.body.removeChild(elem);
+  }
+  inputFileElement: HTMLInputElement;
+  private loadJsonFile(): void {
+    if (!this.inputFileElement) {
+      this.inputFileElement = document.createElement("input");
+      this.inputFileElement.type = "file";
+      this.inputFileElement.style.display = "none";
+      this.inputFileElement.onchange = () => {
+        if (this.inputFileElement.files.length < 1) return;
+        this.importFromFile(this.inputFileElement.files[0]);
+        this.inputFileElement.value = "";
+      };
+    }
+    this.inputFileElement.click();
+  }
+  private importFromFile(file: File) {
+    let fileReader = new FileReader();
+    fileReader.onload = (e) => {
+      const surveyJSONText = fileReader.result as string;
+      this.json = JSON.parse(surveyJSONText);
+    };
+    fileReader.readAsText(file);
+  }
+  private upldateResultJson(): void {
+    this.resultModelValue.getQuestionByName("json").value = this.jsonText;
   }
   public applyFromSurveyModel(reCreateCretor: boolean = true): boolean {
     if(!this.validateEditableModel(this.model)) return false;
