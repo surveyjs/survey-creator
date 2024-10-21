@@ -171,6 +171,7 @@ svc-toolbox {
 }
 
 .svc-toolbox--flyout {
+  --toolbox-width: var(--ctr-toolbox-min-width, calc(32 *#{$base-unit}));
   overflow: visible;
   max-width: var(--ctr-toolbox-width-compact, calcSize(10.5));
   overflow: visible;
