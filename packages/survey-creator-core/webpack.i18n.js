@@ -16,7 +16,13 @@ const config = {
       commonjs2: "survey-creator-core",
       commonjs: "survey-creator-core",
       amd: "survey-creator-core"
-    }
+    },
+    "survey-creator-core/themes": {
+      root: "SurveyCreatorTheme",
+      commonjs2: "survey-creator-core/themes",
+      commonjs: "survey-creator-core/themes",
+      amd: "survey-creator-core/themes",
+    },
   }
 };
 

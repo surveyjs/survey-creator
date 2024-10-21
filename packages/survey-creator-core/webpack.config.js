@@ -195,6 +195,12 @@ module.exports = function (options) {
         commonjs: "survey-core/themes",
         amd: "survey-core/themes",
       },
+      "survey-creator-core/themes": {
+        root: "SurveyCreatorTheme",
+        commonjs2: "survey-creator-core/themes",
+        commonjs: "survey-creator-core/themes",
+        amd: "survey-creator-core/themes",
+      },
     },
     plugins: [
       new DashedNamePlugin(),

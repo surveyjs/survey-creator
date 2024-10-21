@@ -137,8 +137,11 @@
   border-radius: var(--ctr-menu-toolbar-button-corner-radius, 4px);
   cursor: pointer;
 }
-.svc-menu-action__button:hover {
+.svc-menu-action__button:hover,
+.svc-menu-action__button:focus,
+.svc-menu-action__button:focus-within {
   background: var(--ctr-menu-toolbar-button-background-color-hovered, $background-dim);
+  outline: unset;
 }
 .svc-menu-action__button.svc-menu-action__button--pressed {
   opacity: var(--ctr-menu-toolbar-button-opacity-pressed, 0.5);

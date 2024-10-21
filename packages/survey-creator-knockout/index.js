@@ -12,6 +12,7 @@ function init() {
       showLogicTab: true,
       showTranslationTab: true,
       showThemeTab: true,
+      showCreatorThemeSettings: true,
       showEmbeddedSurveyTab: true,
       isAutoSave: true,
       inplaceEditForValues: true

@@ -1350,12 +1350,12 @@ export class QuestionToolbox
     return this.getOrCreateToolboxItem(item);
   }
   private getTitleFromJsonTitle(title: any, name: string): string {
-    if(!title) return title;
-    if(typeof title === "string") return title;
-    if(typeof title !== "object") return title;
-    for(let key in title) {
+    if (!title) return title;
+    if (typeof title === "string") return title;
+    if (typeof title !== "object") return title;
+    for (let key in title) {
       const loc = editorLocalization.locales[key];
-      if(title[key] && loc && loc.qt) {
+      if (title[key] && loc && loc.qt) {
         loc.qt[name] = title[key];
       }
     }
