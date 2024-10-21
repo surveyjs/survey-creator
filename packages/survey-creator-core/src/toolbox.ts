@@ -464,13 +464,13 @@ export class QuestionToolbox
       getRerenderEvent: () => this.onElementRerendered,
       getLeaveOptions: () => {
         return {
-          cssClass: "svc-toolbox--leave",
+          cssClass: "svc-toolbox__panel--leave",
           onAfterRunAnimation: () => { this.isFlyoutToCompactRunning = false; }
         };
       },
       getEnterOptions: () => {
         return {
-          cssClass: "svc-toolbox--enter"
+          cssClass: "svc-toolbox__panel--enter"
         };
       }
     };

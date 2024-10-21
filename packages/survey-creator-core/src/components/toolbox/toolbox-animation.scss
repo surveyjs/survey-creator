@@ -51,8 +51,8 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
   }
 }
 
-.svc-toolbox--enter,
-.svc-toolbox--leave
+.svc-toolbox__panel--enter,
+.svc-toolbox__panel--leave
 {
   animation-fill-mode: forwards;
   animation-duration: var(--move-animation-duration), var(--animation-duration);
@@ -84,7 +84,7 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
     opacity: 0;
   }
 }
-.svc-toolbox--enter {
+.svc-toolbox__panel--enter {
   --fade-animation-duration: #{$svc-toolbox-fade-in-duration};
   --move-animation-duration:  #{$svc-toolbox-move-in-duration};
   --fade-animation-delay: #{$svc-toolbox-fade-in-delay};
@@ -93,7 +93,7 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
   --animation-duration: calc(var(--fade-animation-delay) + var(--fade-animation-duration));
   --animation-timing-function: #{$cubic-ease-out};
 }
-.svc-toolbox--leave {
+.svc-toolbox__panel--leave {
   --fade-animation-duration: #{$svc-toolbox-fade-out-duration};
   --move-animation-duration:  #{$svc-toolbox-move-out-duration};
   --fade-animation-delay: 0s;
