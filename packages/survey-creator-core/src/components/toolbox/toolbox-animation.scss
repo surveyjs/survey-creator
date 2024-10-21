@@ -74,7 +74,6 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
   --move-animation-duration:  #{$svc-toolbox-move-in-duration};
   --fade-animation-delay: #{$svc-toolbox-fade-in-delay};
   --move-animation-delay: 0s;
-  --animation-timing-function: #{$ease-out};
   --animation-direction: normal;
   --animation-duration: calc(var(--fade-animation-delay) + var(--fade-animation-duration));
   --animation-timing-function: #{$cubic-ease-out};
