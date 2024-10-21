@@ -46,8 +46,8 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   protected updateActionVisibility(id: string, isVisible: boolean) {
     super.updateActionVisibility(id, !this.isGhost && isVisible);
   }
-  protected updateActionsContainer(surveyElement: SurveyElement, clear?: boolean): void {
-    super.updateActionsContainer(surveyElement, clear);
+  protected updateActionsContainer(surveyElement: SurveyElement): void {
+    super.updateActionsContainer(surveyElement);
     if (this.creator.expandCollapseButtonVisibility != "never") this.actionContainer.addAction(this.expandCollapseAction);
   }
   protected get dragInsideCollapsedContainer(): boolean {
@@ -131,10 +131,6 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       delete page["_addGhostPageViewModel"];
       addGhostPage();
     };
-  }
-  public dispose(): void {
-    this.detachElement(this.page);
-    super.dispose();
   }
   protected calcIsGhostPage(page: PageModel) {
     return this.creator.survey.pages.indexOf(page) < 0;
