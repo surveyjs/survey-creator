@@ -89,8 +89,8 @@
     background-color: transparent;
     color: var(--ctr-menu-toolbar-button-text-color, $foreground);
     transition: background-color $creator-transition-duration;
+    height: auto;
   }
-
 
   .sv-action-bar-item__icon {
     use {

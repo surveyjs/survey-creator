@@ -279,9 +279,11 @@ $tabs-width: calc(var(--ctr-menu-toolbar-button-padding-left, 8px) + var(--ctr-m
 
   .sv-action-bar-item {
     flex-shrink: 1;
+    height: auto;
   }
 
   .sv-action-bar-item__title {
+    @include ctrDefaultFont;
     overflow: hidden;
     text-overflow: ellipsis;
   }
