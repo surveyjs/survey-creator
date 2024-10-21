@@ -18,7 +18,7 @@
       var(--ctr-button-shadow-color, rgba(0, 0, 0, 0.15));
 
     span {
-      @include defaultBold;
+      @include ctrDefaultBoldFont;
 
       text-align: center;
       position: relative;

@@ -95,12 +95,12 @@ svc-toolbox {
   margin-inline-start: calcSize(-0.5);
   display: var(--ctr-toolbox-scrollbar-display, none);
   z-index: 30;
+  padding: var(--ctr-toolbox-padding-top, calcSize(1)) 0
+  var(--ctr-toolbox-padding-bottom, calcSize(2)) 0;
   @-moz-document url-prefix() {
     scrollbar-width: thin;
     scrollbar-color: $border transparent;
   }
-  padding: var(--ctr-toolbox-padding-top, calcSize(1)) 0
-  var(--ctr-toolbox-padding-bottom, calcSize(2)) 0;
   // &::-webkit-scrollbar-track {
   //   background: var(--ctr-toolbox-background-color, $background-dim);
   // }

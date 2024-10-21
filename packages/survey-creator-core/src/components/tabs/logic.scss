@@ -83,7 +83,7 @@
 .sl-table__cell .svc-action-button:focus,
 .sl-table__cell .svc-action-button:hover:enabled,
 .sl-table__cell .svc-action-button:focus:enabled {
-  @include mediumBold;
+  @include ctrMediumBoldFont;
 
   background: transparent;
   //color: $foreground;

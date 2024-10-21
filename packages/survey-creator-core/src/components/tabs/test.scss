@@ -103,7 +103,7 @@ svc-tab-test {
   }
 
   .sv-action-bar-item {
-    @include smallBold;
+    @include ctrSmallBoldFont;
     width: 100%;
     height: calcSize(4);
     transition: background-color $creator-transition-duration;

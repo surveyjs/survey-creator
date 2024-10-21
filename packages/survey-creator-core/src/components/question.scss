@@ -517,7 +517,7 @@ svc-question {
 }
 
 .svc-dragged-element-shortcut__text {
-  @include smallBold;
+  @include ctrSmallBoldFont;
   line-height: calcSize(2);
 }
 

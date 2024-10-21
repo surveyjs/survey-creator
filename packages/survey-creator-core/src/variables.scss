@@ -56,8 +56,6 @@ $blue: var(--sjs-special-blue, #437fd9);
 $blue-light: var(--sjs-special-blue-light, var(--blue-light, rgba(67, 127, 217, 0.1)));
 $blue-forecolor: var(--sjs-special-blue-forecolor, #ffffff);
 
-$font-family: var(--ctr-font-family, var(--sjs-font-family, var(--font-family)));
-$font-size: var(--sjs-font-size, calc(2 * (var(--sjs-base-unit, var(--base-unit, 8px)))));
 $base-unit: var(--sjs-base-unit, var(--base-unit, 8px));
 
 $sd-panel-normal-min-width: 496px;
@@ -75,53 +73,9 @@ $sd-panel-medium-min-width: 176px;
   }
 }
 
-@mixin smallBold {
-  --small-bold-font-size: var(--sjs-font-size, calc(2 * #{$base-unit}));
-  --ctr-small-bold-font-size: calc(0.75 * var(--small-bold-font-size));
-  --ctr-small-bold-line-height: var(--small-bold-font-size);
-
-  font-family: $font-family;
-  font-style: normal;
-  font-weight: 600;
-  font-size: var(--ctr-font-small-size, var(--ctr-small-bold-font-size, 12px));
-  line-height: var(--ctr-font-small-line-height, var(--ctr-small-bold-line-height, 16px));
-}
-
-@mixin defaultFont {
-  --default-font-size: var(--sjs-font-size, calc(2 * #{$base-unit}));
-  --ctr-default-line-height: calc(1.5 * var(--default-font-size));
-
-  font-family: $font-family;
-  font-weight: 400;
-  font-size: var(--ctr-font-default-size, var(--default-font-size, 16px));
-  line-height: var(--ctr-font-default-line-height, var(--ctr-default-line-height, 24px));
-}
-
-@mixin defaultBold {
-  @include defaultFont;
-  font-weight: 600;
-}
-
-@mixin borderLight {
-  --border-light-font-size: #{$base-unit};
-  border: calc(0.25 * var(--border-light-font-size)) solid $border-light;
-  border-radius: $corner-radius;
-}
-
 // creator variables
 
 $tab-min-height: var(--tab-min-height, auto);
-
-@mixin mediumBold {
-  --ctr-medium-bold-font-size: calc(3 * #{$base-unit});
-  --ctr-medium-bold-line-height: calc(4 * #{$base-unit});
-
-  font-family: $font-family;
-  font-style: normal;
-  font-weight: 700;
-  font-size: var(--ctr-font-medium-size, var(--ctr-medium-bold-font-size, 24px));
-  line-height: var(--ctr-font-medium-line-height, var(--ctr-medium-bold-line-height, 32px));
-}
 
 @mixin textEllipsis {
   overflow: hidden;
@@ -134,21 +88,6 @@ $tab-min-height: var(--tab-min-height, auto);
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
-}
-
-@mixin centerText {
-  --center-text-font-size: #{$base-unit};
-  font-family: $font-family;
-  font-style: normal;
-  font-weight: 400;
-  font-size: calc(2 * var(--center-text-font-size));
-  color: $foreground;
-  width: 100%;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  text-align: center;
-  overflow: hidden;
 }
 
 @mixin disableTransitionAnimations {
