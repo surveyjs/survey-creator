@@ -249,6 +249,11 @@ jobs:
       workingDir: $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
     condition: ne(variables.NPM_CACHE_RESTORED, 'true')
 
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
+      npx puppeteer browsers install chrome
+    displayName: "install chrome"
+
   # update 'file' npm dependencies in case of cache
   - task: CopyFiles@2
     inputs:
@@ -444,6 +449,12 @@ jobs:
       workingDir: $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
     condition: ne(variables.NPM_CACHE_RESTORED, 'true')
 
+
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
+      npx puppeteer browsers install chrome
+    displayName: "install chrome"
+
   # update 'file' npm dependencies in case of cache
   - task: CopyFiles@2
     inputs:
@@ -597,6 +608,12 @@ jobs:
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
       npm i
     displayName: 'npm install'
+
+
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
+      npx puppeteer browsers install chrome
+    displayName: "install chrome"
     
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
@@ -725,6 +742,11 @@ jobs:
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue
       npm i
     displayName: 'npm install'
+
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue
+      npx puppeteer browsers install chrome
+    displayName: "install chrome"
     
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue
@@ -899,6 +921,11 @@ jobs:
       verbose: false
       workingDir: $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js
     condition: ne(variables.NPM_CACHE_RESTORED, 'true')
+
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js
+      npx puppeteer browsers install chrome
+    displayName: "install chrome"
 
   # update 'file' npm dependencies in case of cache
   - task: CopyFiles@2
