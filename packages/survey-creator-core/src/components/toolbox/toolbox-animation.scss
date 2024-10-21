@@ -17,9 +17,21 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
     opacity: 1;
   }
 }
+
 @keyframes toolboxMoveIn {
   from {
     width: var(--toolbox-width-compact);
+    overflow: hidden;
+  }
+  to {
+    width: var(--toolbox-width);
+    overflow: hidden;
+  }
+}
+
+@keyframes toolboxSeparatorSearchMoveIn {
+  from {
+    width: var(--ctr-toolbox-separator-width-compact, calcSize(5));
     overflow: hidden;
   }
   to {
@@ -56,6 +68,9 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
     animation-timing-function: var(--animation-timing-function);
     animation-name: toolboxSeparatorMoveIn;
     animation-fill-mode: forwards;
+  }
+  .svc-toolbox__category-separator--search {
+    animation-name: toolboxSeparatorSearchMoveIn;
   }
   .svc-toolbox__item-submenu-button,
   .svc-toolbox__item-title,

@@ -38,12 +38,12 @@ export class AdaptiveToolbox extends Toolbox {
     const searchButton = this.toolbox.isCompactRendered ?
       <>
         <SurveyCreatorToolboxTool item={this.toolbox.searchItem as any} creator={this.creator} parentModel={this.toolbox} isCompact={this.toolbox.isCompactRendered} key={"searchitem"} ></SurveyCreatorToolboxTool>
-        <div className="svc-toolbox__category-separator svc-toolbox__category-separator--search"></div>
       </> :
       null;
     return (<div className="svc-toolbox__search-container">
       {searchButton}
       <SearchComponent model={this.toolbox.searchManager}></SearchComponent>
+      <div className="svc-toolbox__category-separator svc-toolbox__category-separator--search"></div>
     </div>);
   }
 
