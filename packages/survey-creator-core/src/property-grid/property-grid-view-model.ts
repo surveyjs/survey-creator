@@ -1,4 +1,4 @@
-import { Base, SurveyModel, property, PopupModel, Action } from "survey-core";
+import { Base, SurveyModel, property, PopupModel, Action, CssClassBuilder } from "survey-core";
 import { PropertyGridModel } from "./index";
 import { SelectionHistory } from "../selection-history";
 import { SurveyHelper } from "../survey-helper";
@@ -47,6 +47,13 @@ export class PropertyGridViewModel extends Base {
       }
     });
     this.onSurveyChanged();
+  }
+
+  public get rootCss(): string {
+    return new CssClassBuilder()
+      .append("spg-container")
+      .append("spg-container_search", this.searchEnabled)
+      .toString();
   }
 
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {

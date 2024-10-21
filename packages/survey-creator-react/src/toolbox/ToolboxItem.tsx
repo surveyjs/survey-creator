@@ -80,7 +80,7 @@ export class SurveyCreatorToolboxTool extends CreatorModelElement<
         {(item.needSeparator && !this.creator.toolbox.showCategoryTitles) ? (
           <div className="svc-toolbox__category-separator"></div>
         ) : null}
-        <div className="sv-action__content"
+        <div className="svc-toolbox__tool-content sv-action__content"
           onPointerDown={(event: any) => {
             event.persist();
             this.model.onPointerDown(event);
@@ -122,30 +122,43 @@ export class SurveyCreatorToolboxItem extends CreatorModelElement<
     return this.model;
   }
   render(): JSX.Element {
-    return attachKey2click(
+    const banner = (this.props.isCompact ?
+      <span className="svc-toolbox__item-banner"
+        onClick={(event: any) => {
+          event.persist();
+          this.model.click(event);
+        }}>
+        <SvgIcon size={24} iconName={this.item.iconName} className="svc-toolbox__item-icon" title={this.item.tooltip}></SvgIcon>
+        <span>{this.item.title}</span>
+      </span>
+      :
+      null
+    );
+    const item = attachKey2click(
       <div
-        className={"svc-toolbox__item " + this.item.className}
+        className={this.item.renderedCss}
         tabIndex={0}
         role="button"
         aria-label={this.item.tooltip}
-        title={this.item.tooltip}
         onClick={(event: any) => {
           event.persist();
           this.model.click(event);
         }}
       >
         <span className="svc-toolbox__item-container">
-          {!!this.item.iconName ? <SvgIcon size={24} iconName={this.item.iconName} title={this.item.tooltip}></SvgIcon> : null}
+          {!!this.item.iconName ? <SvgIcon size={24} iconName={this.item.iconName}></SvgIcon> : null}
         </span>
         {(this.props.isCompact ?
-          <span className="svc-toolbox__item-banner svc-item__banner">
-            <SvgIcon size={24} iconName={this.item.iconName} className="svc-toolbox__item-icon" title={this.item.tooltip}></SvgIcon>
-            <span className="svc-toolbox__item-title">{this.item.title}</span>
-          </span>
+          null
           :
           <span className="svc-toolbox__item-title">{this.item.title}</span>
         )}
-      </div>
+      </div>);
+    return (
+      <>
+        {item}
+        {banner}
+      </>
     );
   }
 }

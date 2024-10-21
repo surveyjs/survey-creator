@@ -331,6 +331,7 @@ $tabs-width: calc(var(--ctr-menu-toolbar-button-padding-left, 8px) + var(--ctr-m
 
 .svc-side-bar {
   .svc-toolbox {
+    padding-top: calcSize(0.5);
     width: 100%;
   }
 }

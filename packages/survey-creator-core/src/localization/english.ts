@@ -71,6 +71,7 @@ export var enStrings = {
     surveySettingsTooltip: "Survey settings",
     themeSettings: "Theme Settings",
     themeSettingsTooltip: "Theme settings",
+    creatorSettingTitle: "Creator Settings",
     showPanel: "Show Panel",
     hidePanel: "Hide Panel",
     prevSelected: "Select previous",
@@ -1708,7 +1709,21 @@ export var enStrings = {
       tulip: "Tulip",
       brown: "Brown",
       green: "Green"
-    }
+    },
+  },
+  creatortheme: {
+    "--sjs-special-background": "Surface background",
+    "--sjs-primary-background-500": "Accent colors",
+    "surfaceScale": "Surface",
+    "userInterfaceBaseUnit": "User interface",
+    "fontScale": "Font",
+
+    names: {
+      "sc2020": "Survey Creator 2020",
+      "default-light": "Light",
+      "default-dark": "Dark",
+      "default-contrast": "Contrast"
+    },
   }
 };
 

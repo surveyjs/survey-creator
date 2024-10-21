@@ -132,6 +132,9 @@ export function getVisibleElement(selector: string | Selector): Selector {
 export function getToolboxItemByText(text: string) {
   return getVisibleElement(".svc-toolbox__item-title").withExactText(text);
 }
+export function getToolboxItemByAriaLabel(text: string) {
+  return getVisibleElement(".svc-toolbox__item").withAttribute("aria-label", text);
+}
 export function getSubToolboxItemByText(text: string) {
   return getVisibleElement(".svc-toolbox__item-subtype").withExactText(text);
 }

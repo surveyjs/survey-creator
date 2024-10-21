@@ -1,7 +1,6 @@
 <template>
   <div
-    class="spg-container"
-    :class="{ 'spg-container_search': model.searchEnabled }"
+    :class="model.rootCss"
   >
     <SvComponent :is="'svc-search'" :model="model.searchManager"></SvComponent>
     <SurveyComponent

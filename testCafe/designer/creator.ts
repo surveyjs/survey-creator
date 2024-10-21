@@ -126,3 +126,26 @@ test("Check responsiveness is working correctly after model update", async t => 
     .resizeWindow(1920, 1080)
     .expect(mobileSelector.exists).notOk();
 });
+
+test("Check cleaning json doesn't cause warnings", async t => {
+  await ClientFunction(() => {
+    // eslint-disable-next-line
+    console.error = (msg) => {
+      throw new Error(msg);
+    };
+    // eslint-disable-next-line
+    console.warn = (msg) => {
+      throw new Error(msg);
+    };
+  })();
+  await setJSON({
+    elements: [
+      {
+        type: "text",
+        name: "q1"
+      }
+    ]
+  });
+  await setJSON({});
+});
+

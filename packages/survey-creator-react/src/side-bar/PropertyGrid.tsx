@@ -24,9 +24,8 @@ export class PropertyGridComponent extends SurveyElementBase<IPropertyGridCompon
   }
 
   renderElement() {
-    const rootClassName = this.model.searchEnabled ? "spg-container spg-container_search" : "spg-container";
     return (
-      <div className={rootClassName}>
+      <div className={this.model.rootCss}>
         <SearchComponent model={this.model.searchManager}></SearchComponent>
         <Survey model={this.model.survey}></Survey>
       </div>

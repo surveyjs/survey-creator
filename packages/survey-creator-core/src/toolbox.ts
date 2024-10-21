@@ -173,6 +173,13 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
     this.setEnabled(val);
   }
   className: string;
+
+  public get renderedCss(): string {
+    return new CssClassBuilder()
+      .append("svc-toolbox__item")
+      .append(this.className)
+      .append("svc-toolbox__item--has-subitems", this.hasSubItems).toString();
+  }
   /**
    * An icon name.
    * 
@@ -347,6 +354,11 @@ export class QuestionToolbox
     "html", "expression", "image", "signaturepad"
   ];
   private _containerElementValue: HTMLElement;
+  private _rootElementValue: HTMLElement;
+  private _scrollbarElement: HTMLElement;
+  private _containerBodyElement: HTMLElement;
+  private _scrollbarSizerElement: HTMLElement;
+  private _containerBodyResizeObserver: ResizeObserver;
   public presetDefaultItems: Array<IQuestionToolboxItem>;
 
   public get itemSelector(): string {
@@ -490,13 +502,9 @@ export class QuestionToolbox
    */
   @property({ defaultValue: true }) showSubitems: boolean;
 
-  @property({ defaultValue: false }) isScrollLocked: boolean;
-  public lockScrollBar(val: boolean) {
-    if (!this._containerElementValue) return;
-    this.isScrollLocked = val && this._containerElementValue.scrollHeight > this._containerElementValue.clientHeight;
-  }
   public searchManager = new SearchManagerToolbox();
   @property() showPlaceholder: boolean;
+  @property({ defaultValue: true }) showSeparators: boolean;
 
   constructor(
     private supportedQuestions: Array<string> = null,
@@ -504,6 +512,7 @@ export class QuestionToolbox
     useDefaultCategories = false
   ) {
     super();
+    this.subItemsShowDelay = 0;
     this.searchManager.isVisible = this.searchEnabled;
     this.searchManager.toolbox = this;
     this.searchItem = new Action({
@@ -514,7 +523,7 @@ export class QuestionToolbox
       component: "sv-action-bar-item",
       tooltip: surveyLocalization.getString("search"),
       action: () => {
-        (document.querySelector(".svc-toolbox__panel input") as HTMLInputElement).focus();
+        (this.rootElement.querySelector("input") as HTMLInputElement).focus();
         this.isFocused = true;
       }
     });
@@ -524,11 +533,10 @@ export class QuestionToolbox
   }
 
   private initDotsItem() {
-    const originalCss = this.dotsItem.css;
+    this.dotsItem.innerCss = "svc-toolbox__item svc-toolbox__item--dots sv-dots__item";
     this.dotsItem.css = new ComputedUpdater(() => {
       return new CssClassBuilder()
-        .append("svc-toolbox__tool")
-        .append(originalCss)
+        .append("svc-toolbox__tool svc-toolbox__tool--dots")
         .append("sv-action--hidden", !this.dotsItem.isVisible)
         .toString();
     }) as any;
@@ -587,13 +595,34 @@ export class QuestionToolbox
   }
 
   public setRootElement(element: HTMLElement) {
+    this._rootElementValue = element;
     this._containerElementValue = element?.querySelector(this.containerSelector);
+    this._scrollbarElement = element?.querySelector(".svc-toolbox__scrollbar");
+    this._scrollbarSizerElement = element?.querySelector(".svc-toolbox__scrollbar-sizer");
+    this._containerBodyElement = element?.querySelector(".svc-toolbox__container");
+    if (!element) return;
+    this._containerBodyResizeObserver = new ResizeObserver(entries => {
+      for (let entry of entries) {
+        const height = entry.contentBoxSize
+          ? entry.contentBoxSize[0].blockSize
+          : entry.contentRect.width;
+        this._scrollbarSizerElement.style.height = height + "px";
+      }
+    });
+    this._containerBodyResizeObserver.observe(this._containerBodyElement);
   }
-
+  public unsubscribeRootElement() {
+    if (!!this._containerBodyResizeObserver) {
+      this._containerBodyResizeObserver.disconnect();
+      this._containerBodyResizeObserver = undefined;
+    }
+  }
   public get containerElement() {
     return this._containerElementValue;
   }
-
+  public get rootElement() {
+    return this._rootElementValue;
+  }
   public focusOut(e) {
     if (e.relatedTarget !== e.currentTarget &&
       !e.currentTarget.contains(e.relatedTarget)) {
@@ -608,9 +637,8 @@ export class QuestionToolbox
     return new CssClassBuilder()
       .append("svc-toolbox")
       .append("svc-toolbox--searchable", this.searchEnabled)
-      .append("svc-toolbox--filtering", !!this.searchManager.filterString)
+      .append("svc-toolbox--no-separators", !this.showSeparators)
       .append("svc-toolbox--compact", this.isCompactRendered)
-      .append("svc-toolbox--scroll-locked", this.isScrollLocked)
       .append("svc-toolbox--flyout", this.isCompact && this.isFocused)
       .append("svc-toolbox--scrollable", this.overflowBehavior == "scroll").toString();
   }
@@ -1345,6 +1373,11 @@ export class QuestionToolbox
   }
   public onScroll(model, event) {
     this.hideAllInnerPopups();
+    this._scrollbarElement.scrollTop = this._containerElementValue.scrollTop;
   }
+  public onScrollbarScroll(event) {
+    this._containerElementValue.scrollTop = this._scrollbarElement.scrollTop;
+  }
+
   //public dispose(): void { } Don't we need to dispose toolbox?
 }

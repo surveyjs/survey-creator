@@ -5,7 +5,7 @@
       v-if="item.needSeparator && !creator.toolbox.showCategoryTitles"
     ></div>
     <div
-      class="sv-action__content"
+      class="svc-toolbox__tool-content sv-action__content"
       @pointerdown="model?.onPointerDown"
       @mousemove="
         (e) => {

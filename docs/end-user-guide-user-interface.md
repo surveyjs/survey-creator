@@ -28,7 +28,7 @@ The Designer tab allows you to configure your survey. You can drag and drop ques
 
 The Toolbox contains the question and panel types described below.
 
-<div id="#radiogroup"></div>
+<div id="radiogroup"></div>
 
 #### Radio Button Group
 
@@ -38,7 +38,7 @@ Respondents use radio buttons to select a single answer. Use the Radio Button Gr
 
 See also: [Dropdown](#dropdown)
 
-<div id="#rating"></div>
+<div id="rating"></div>
 
 #### Rating Scale
 
@@ -52,7 +52,7 @@ Expand the **Rate Values** category and select a required **Rate type**:
 Alternatively, you can change the rate type using an adorner directly on the design surface:
     <img src="../images/survey-creator-rate-type-using-adorner.png" alt="Survey Creator - Change rate type using an adorner" width="75%">
 
-<div id="#checkbox"></div>
+<div id="checkbox"></div>
 
 #### Checkboxes
 
@@ -72,7 +72,7 @@ Respondents can select one or multiple answers from a drop-down list. Unlike a s
 
 <img src="../images/question-types-multi-select-dropdown.png" alt="SurveyJS Question types - Multi-select Dropdown" width="75%">
 
-<div id="#boolean"></div>
+<div id="boolean"></div>
 
 #### Yes/No (Boolean)
 
@@ -80,7 +80,7 @@ Respondents switch a Boolean editor to Yes or No. The response is saved in the s
 
 <img src="../images/question-types-boolean.png" alt="SurveyJS Question types - Yes/No (Boolean)" width="75%">
 
-<div id="#file"></div>
+<div id="file"></div>
 
 #### File Upload
 
@@ -118,7 +118,7 @@ Respondents drag and drop items from a list to rearrange them according to rank 
 
 <img src="../images/question-types-ranking.png" alt="SurveyJS Question types - Ranking" width="75%">
 
-<div id="#single-input"></div>
+<div id="single-input"></div>
 
 #### Single-Line Input
 
@@ -131,7 +131,7 @@ See also:
 - [Long Text](#long-text)
 - [Multiple Textboxes](#multiple-textboxes)
 
-<div id="#comment"></div>
+<div id="comment"></div>
 
 #### Long Text
 
@@ -144,7 +144,7 @@ See also:
 - [Single-Line Input](#single-line-input)
 - [Multiple Textboxes](#multiple-textboxes)
 
-<div id="#multiple-text"></div>
+<div id="multiple-text"></div>
 
 #### Multiple Textboxes
 
@@ -162,7 +162,7 @@ The Dynamic Panel type is a template panel that can contain multiple questions. 
 
 <img src="../images/question-types-dynamic-panel.png" alt="SurveyJS Question types - Dynamic panel" width="75%">
 
-<div id="#single-choice-matrix"></div>
+<div id="single-choice-matrix"></div>
 
 #### Single-Select Matrix
 
@@ -183,7 +183,7 @@ See also:
 - [Multi-Select Matrix](#multi-select-matrix)
 - [Dynamic Matrix](#dynamic-matrix)
 
-<div id="#multiple-choice-matrix"></div>
+<div id="multiple-choice-matrix"></div>
 
 #### Multi-Select Matrix
 
@@ -233,7 +233,7 @@ To specify an expression, enter it into the **Expression** field in the **Genera
 
 Use the Image type to add an image or video to the survey. This type is used for presentation only and does not produce a value to be saved in the survey results.
 
-<div id="#signature-pad"></div>
+<div id="signature-pad"></div>
 
 #### Signature
 

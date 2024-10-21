@@ -83,7 +83,7 @@ export class SidebarModel extends Base {
     this.onExpandCallback = undefined;
   }
   public executeOnExpand(callback: () => void) {
-    if(this.renderedIsVisible) {
+    if (this.renderedIsVisible) {
       callback();
     }
     this.onExpandCallback = callback;
@@ -98,7 +98,7 @@ export class SidebarModel extends Base {
     }
     if (this._visible !== val) {
       this._visible = val;
-      if(!this.animationAllowed) {
+      if (!this.animationAllowed) {
         this.afterExpand();
       }
       this.visibilityAnimation.sync(val);
@@ -189,6 +189,9 @@ export class SidebarModel extends Base {
     return this._activePage;
   }
   public setActivePage(newPage: SidebarPageModel): void {
+    if (!!this._activePage && this._activePage.id !== newPage.id && !!this._activePage.deactivateCallback) {
+      this._activePage.deactivateCallback();
+    }
     this.pages.forEach(page => page.visible = false);
     this._activePage = newPage;
     if (this._activePage) {
@@ -236,5 +239,8 @@ export class SidebarModel extends Base {
       this.resizeManager = undefined;
     }
     this.rootElement = undefined;
+  }
+  public get toolbar() {
+    return this.header?.toolbar;
   }
 }

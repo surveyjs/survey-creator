@@ -5,7 +5,7 @@ import { ICreatorPlugin } from "../../creator-settings";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { ThemeTabViewModel } from "./theme-builder";
 import { SidebarPageModel } from "../side-bar/side-bar-page-model";
-import { PredefinedColors, PredefinedThemes, Themes } from "./themes";
+import { getPredefinedColorsItemValues, PredefinedColors, PredefinedThemes, Themes } from "./themes";
 import { assign, notShortCircuitAnd, saveToFileHandler } from "../../utils/utils";
 import { PropertyGridModel } from "../../property-grid";
 import { PropertyGridViewModel } from "../../property-grid/property-grid-view-model";
@@ -148,11 +148,6 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       pageDescriptionQuestion.readOnly = !pageElements.some(p => !!p.description);
     }
   }
-  private getPredefinedColorsItemValues() {
-    return Object.keys(PredefinedColors[this.themeModel.colorPalette]).map(colorName =>
-      new ItemValue(PredefinedColors[this.themeModel.colorPalette][colorName], getLocString("theme.colors." + colorName))
-    );
-  }
   private updatePropertyGridColorEditorWithPredefinedColors() {
     const page = this.propertyGrid.survey.pages[0];
     const header = page?.getElementByName("header") as PanelModel;
@@ -160,13 +155,13 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       const headerViewContainer = (header.elements[0] as QuestionCompositeModel).contentPanel;
       const headerBackgroundQuestion = headerViewContainer.getQuestionByName("backgroundColor") as QuestionSelectBase;
       if (!!headerBackgroundQuestion) {
-        headerBackgroundQuestion.choices = this.getPredefinedColorsItemValues();
+        headerBackgroundQuestion.choices = getPredefinedColorsItemValues(this.themeModel.colorPalette);
       }
     }
 
     this.propertyGrid.survey.getAllQuestions().forEach(question => {
       if (["color", "coloralpha"].indexOf(question.getType()) !== -1) {
-        (question as any).choices = this.getPredefinedColorsItemValues();
+        (question as any).choices = getPredefinedColorsItemValues(this.themeModel.colorPalette);
       }
     });
   }
@@ -350,7 +345,12 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.creator.sidebar.activePage = this.propertyGridTab.id;
     this.propertyGridTab.visible = true;
     this.updateTabControl();
-    this.creator.expandCategoryIfNeeded();
+    this.expandCategoryIfNeeded();
+  }
+  private expandCategoryIfNeeded() {
+    if (!this.model.survey.isEmpty) {
+      this.propertyGrid.expandCategoryIfNeeded();
+    }
   }
   private updateTabControlActions() {
     if (this.showOneCategoryInPropertyGrid) {
