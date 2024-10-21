@@ -25,7 +25,6 @@
         "eslint-plugin-react": "^7.25.1",
         "husky": "^7.0.4",
         "testcafe": "3.3.0",
-        "puppeteer": "23.5.3",
         "get-func-name": "2.0.0",
         "@types/lodash": "4.14.186"
     }
