@@ -124,6 +124,7 @@ svc-toolbox {
 .svc-toolbox--compact {
   .svc-toolbox__panel {
     overflow: visible;
+    max-width: var(--toolbox-width-compact);
     width: var(--toolbox-width-compact);
   }
   .svc-toolbox__scroller {
@@ -182,6 +183,7 @@ svc-toolbox {
   width: var(--toolbox-width-compact);
   max-width: var(--ctr-toolbox-width-compact, calcSize(10.5));
   overflow: visible;
+  border-inline-end: var(--ctr-toolbox-border-width-right, 0px) solid transparent;
 
   .spg-search-editor_container {
     opacity: 1;
