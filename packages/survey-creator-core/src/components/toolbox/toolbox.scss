@@ -134,7 +134,7 @@ svc-toolbox {
   .svc-toolbox__search-container {
     padding-top: var(--ctr-toolbox-padding-top, calcSize(1.5));
     padding-inline-start: var(--ctr-toolbox-group-padding-left, calcSize(1.5));
-    padding-inline-end: var(--ctr-toolbox-group-padding-left, calcSize(1));
+    padding-inline-end: var(--ctr-toolbox-group-padding-left, calcSize(3));
     padding-bottom: calc(var(--ctr-toolbox-separator-padding-top, 8px) + var(--ctr-toolbox-gap, 4px));
   }
   .svc-toolbox__category-separator {
