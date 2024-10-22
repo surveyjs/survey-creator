@@ -322,6 +322,7 @@ svc-page {
     }
 
     .sv-list__item.sv-list__item--selected.sv-list__item--group>.sv-list__item-body {
+      @include ctrDefaultBoldFont;
       background-color: $primary;
       color: $primary-foreground;
     }
