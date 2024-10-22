@@ -116,7 +116,9 @@ svc-toolbox {
     direction: initial;
   }
 }
-
+.svc-toolbox--scrollable {
+  --toolbox-width: var(--ctr-toolbox-min-width, 236.984375px);
+}
 .svc-toolbox--compact {
   .svc-toolbox__panel {
     overflow: visible;
