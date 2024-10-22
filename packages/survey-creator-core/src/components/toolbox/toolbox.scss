@@ -8,7 +8,7 @@ svc-toolbox {
 
 .svc-toolbox {
   --toolbox-width: var(--ctr-toolbox-min-width, 224.984375px /*calcSize(28)*/);
-  --toolbox-width-compact: var(--ctr-toolbox-width-compact, calc(10.5 *#{$base-unit}));
+  --toolbox-width-compact: var(--ctr-toolbox-width-compact, calc(9 *#{$base-unit}));
 
   width: auto;
   height: 100%;
@@ -97,7 +97,7 @@ svc-toolbox {
   overflow-x: hidden;
   width: calcSize(2);
   margin-inline-start: calcSize(-0.5);
-  display: var(--ctr-toolbox-scrollbar-display, none);
+  display: none;
   z-index: 30;
   padding: var(--ctr-toolbox-padding-top, calcSize(1)) 0 var(--ctr-toolbox-padding-bottom, calcSize(2)) 0;
   @-moz-document url-prefix() {
@@ -136,7 +136,7 @@ svc-toolbox {
   .svc-toolbox__search-container {
     padding-top: var(--ctr-toolbox-padding-top, calcSize(1.5));
     padding-inline-start: var(--ctr-toolbox-group-padding-left, calcSize(1.5));
-    padding-inline-end: var(--ctr-toolbox-group-padding-left, calcSize(3));
+    padding-inline-end: var(--ctr-toolbox-group-padding-left, calcSize(1.5));
     padding-bottom: calc(var(--ctr-toolbox-separator-padding-top, 8px) + var(--ctr-toolbox-gap, 4px));
   }
   .svc-toolbox__category-separator {
@@ -234,11 +234,16 @@ svc-toolbox {
   min-height: 1px;
   width: var(--toolbox-width);
   align-self: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .svc-toolbox--no-separators {
   .svc-toolbox__category-separator {
     display: none;
+  }
+  .svc-toolbox__category-separator--search {
+    display: block;
   }
 }
 
