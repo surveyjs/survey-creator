@@ -132,3 +132,20 @@
     animation: none;
   }
 }
+.spg-panel.spg-panel--group {
+  &>.spg-panel__content {
+    padding: 0;
+    box-shadow: none;
+  }
+  .spg-panel__title {
+    @include question_tile;
+    box-shadow: none;
+    background-color: transparent;
+  }
+  .spg-row {
+    margin-top: calcSize(1)
+  }
+  .spg-row:first-of-type {
+    margin-top: 0;
+  }
+}
