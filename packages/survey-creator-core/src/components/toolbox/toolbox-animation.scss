@@ -1,10 +1,10 @@
 @import "../../variables.scss";
-$svc-toolbox-fade-in-duration: var(--sjs-svc-toolbox-fade-in-duration, 1500ms);
-$svc-toolbox-move-in-duration: var(--sjs-svc-toolbox-move-in-duration, 2500ms);
-$svc-toolbox-fade-in-delay: var(--sjs-svc-toolbox-fade-in-delay, 2500ms);
-$svc-toolbox-fade-out-duration: var(--sjs-svc-toolbox-fade-out-duration, 1500ms);
-$svc-toolbox-move-out-duration: var(--sjs-svc-toolbox-move-out-duration, 2500ms);
-$svc-toolbox-move-out-delay: var(--sjs-svc-toolbox-move-out-delay, 1000ms);
+$svc-toolbox-fade-in-duration: var(--sjs-svc-toolbox-fade-in-duration, 150ms);
+$svc-toolbox-move-in-duration: var(--sjs-svc-toolbox-move-in-duration, 250ms);
+$svc-toolbox-fade-in-delay: var(--sjs-svc-toolbox-fade-in-delay, 250ms);
+$svc-toolbox-fade-out-duration: var(--sjs-svc-toolbox-fade-out-duration, 150ms);
+$svc-toolbox-move-out-duration: var(--sjs-svc-toolbox-move-out-duration, 250ms);
+$svc-toolbox-move-out-delay: var(--sjs-svc-toolbox-move-out-delay, 100ms);
 
 $cubic-ease-out: cubic-bezier(0.33, 1, 0.68, 1);
 $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
