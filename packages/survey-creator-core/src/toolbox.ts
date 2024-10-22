@@ -483,7 +483,7 @@ export class QuestionToolbox
   @property({
     defaultValue: false,
     onSet: (val: boolean, target: QuestionToolbox) => {
-      if (target.animationAllowed && target.isCompact && val) target.isFlyoutToCompactRunning = true;
+      if (target.animationAllowed) target.isFlyoutToCompactRunning = target.isCompact && !val;
       target.compactAnimation.sync(!(target.isCompact && !val));
     }
   }) isFocused: boolean;

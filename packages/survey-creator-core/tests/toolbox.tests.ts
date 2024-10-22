@@ -8,7 +8,8 @@ import {
   CustomWidgetCollection,
   Question,
   QuestionButtonGroupModel,
-  DragOrClickHelper
+  DragOrClickHelper,
+  settings as surveySettings
 } from "survey-core";
 import { QuestionLinkValueModel } from "../src/components/link-value";
 import { settings } from "../src/creator-settings";
@@ -830,4 +831,49 @@ test("ICustomQuestionTypeConfiguration.title should support a localizable, Bug#5
   creator.locale = "de";
   expect(item.title).toBe("New Question de");
   ComponentCollection.Instance.clear();
+});
+
+test("Check toolbox getAnimatedElement methods", (): any => {
+  const creator = new CreatorTester();
+
+  const toolbox = creator.toolbox;
+  const animationOptions = toolbox["getAnimationOptions"]();
+  const rootElement = document.createElement("div");
+  const panelElement = document.createElement("div");
+  panelElement.className = "svc-toolbox__panel";
+  rootElement.appendChild(panelElement);
+  toolbox["_rootElementValue"] = rootElement;
+
+  expect(animationOptions.getAnimatedElement()).toBe(panelElement);
+
+  const leaveClass = "svc-toolbox__panel--leave";
+  const enterClass = "svc-toolbox__panel--enter";
+  const isFlyoutToCompactRunningClass = "svc-toolbox--flyout-to-compact-running";
+  surveySettings.animationEnabled = true;
+  toolbox.enableOnElementRerenderedEvent();
+  expect(animationOptions.isAnimationEnabled()).toBeTruthy();
+  toolbox.blockAnimations();
+  expect(animationOptions.isAnimationEnabled()).toBeFalsy();
+  toolbox.releaseAnimations();
+  expect(animationOptions.isAnimationEnabled()).toBeTruthy();
+  surveySettings.animationEnabled = false;
+  expect(animationOptions.isAnimationEnabled()).toBeFalsy();
+
+  const enterOptions = animationOptions.getEnterOptions && animationOptions.getEnterOptions();
+  expect(enterOptions?.cssClass).toBe(enterClass);
+  const leaveOptions = animationOptions.getLeaveOptions && animationOptions.getLeaveOptions();
+  expect(leaveOptions?.cssClass).toBe(leaveClass);
+
+  surveySettings.animationEnabled = true;
+  toolbox.isCompact = true;
+  toolbox.isFocused = true;
+  expect(toolbox.isFlyoutToCompactRunning).toBeFalsy();
+  expect(toolbox.classNames.indexOf(isFlyoutToCompactRunningClass) >= 0).toBeFalsy();
+  toolbox.isFocused = false;
+  expect(toolbox.isFlyoutToCompactRunning).toBeTruthy();
+  expect(toolbox.classNames.indexOf(isFlyoutToCompactRunningClass) >= 0).toBeTruthy();
+  leaveOptions?.onAfterRunAnimation && leaveOptions?.onAfterRunAnimation(panelElement);
+  expect(toolbox.isFlyoutToCompactRunning).toBeFalsy();
+  expect(toolbox.classNames.indexOf(isFlyoutToCompactRunningClass) >= 0).toBeFalsy();
+  surveySettings.animationEnabled = false;
 });
