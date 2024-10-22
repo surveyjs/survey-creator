@@ -109,3 +109,10 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
   border-inline-end: var(--ctr-toolbox-border-width-right, 0px) solid transparent;
 }
 
+.svc-creator--disable-animations {
+  .svc-toolbox__panel--enter,
+  .svc-toolbox__panel--leave
+  {
+    animation: none;
+  }
+}
