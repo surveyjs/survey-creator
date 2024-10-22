@@ -120,6 +120,7 @@ svc-toolbox {
   --toolbox-width: var(--ctr-toolbox-min-width, 236.984375px);
 }
 .svc-toolbox--compact {
+  margin-inline-end: var(--ctr-toolbox-margin-left-compact, calcSize(1.5));
   .svc-toolbox__panel {
     overflow: visible;
     width: var(--toolbox-width-compact);

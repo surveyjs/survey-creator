@@ -25,6 +25,7 @@ var themeConstants = {
     "--ctr-toolbox-item-align": "stretch",
     "--ctr-toolbox-submenu-offset": "13px",
     "--ctr-toolbox-width-compact": "72px",
+    "--ctr-toolbox-margin-left-compact": "0px",
     "--ctr-toolbox-separator-width": "208px",
     "--ctr-toolbox-separator-width-compact": "40px",
     "--ctr-toolbox-item-banner-icon-display": "none",
