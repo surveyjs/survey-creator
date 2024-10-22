@@ -39,7 +39,7 @@ jobs:
 
   - task: NodeTool@0
     inputs:
-      versionSpec: '14.x'
+      versionSpec: '16.x'
     displayName: 'Install Node.js'
 
   - task: CopyFiles@2
@@ -77,10 +77,16 @@ jobs:
   - task: Npm@1
     displayName: 'NPM install survey-creator v1'
     inputs:
-      command: install
+      command: custom
+      customCommand: install --legacy-peer-deps 
       verbose: false
       workingDir: $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
     condition: ne(variables.NPM_CACHE_RESTORED, 'true')
+
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
+      npx puppeteer browsers install chrome
+    displayName: "install chrome"
 
   - task: CopyFiles@2
     inputs:
@@ -162,7 +168,7 @@ jobs:
 
   - task: NodeTool@0
     inputs:
-      versionSpec: '14.x'
+      versionSpec: '16.x'
     displayName: 'Install Node.js'
 
   - task: CopyFiles@2
@@ -365,7 +371,7 @@ jobs:
 
   - task: NodeTool@0
     inputs:
-      versionSpec: '14.x'
+      versionSpec: '16.x'
     displayName: 'Install Node.js'
   
   - task: CopyFiles@2
@@ -464,6 +470,11 @@ jobs:
       verbose: false
       workingDir: $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
     condition: ne(variables.NPM_CACHE_RESTORED, 'true')
+
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
+      npx puppeteer browsers install chrome
+    displayName: "install chrome"
 
   # update 'file' npm dependencies in case of cache
   - script: |
@@ -589,7 +600,7 @@ jobs:
 
   - task: NodeTool@0
     inputs:
-      versionSpec: '14.x'
+      versionSpec: '16.x'
     displayName: 'Install Node.js'
 
   - task: CopyFiles@2
@@ -689,6 +700,11 @@ jobs:
       verbose: false
       workingDir: $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
     condition: ne(variables.NPM_CACHE_RESTORED, 'true')
+
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
+      npx puppeteer browsers install chrome
+    displayName: "install chrome"
 
   # update 'file' npm dependencies in case of cache
   - script: |
@@ -815,7 +831,7 @@ jobs:
 
   - task: NodeTool@0
     inputs:
-      versionSpec: '14.x'
+      versionSpec: '16.x'
     displayName: 'Install Node.js'
   
   - powershell: |
@@ -877,6 +893,11 @@ jobs:
       npm i
       rm node_modules/survey-angular-ui
     displayName: 'npm install'
+
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
+      npx puppeteer browsers install chrome
+    displayName: "install chrome"
 
   - task: CopyFiles@2
     inputs:
@@ -1017,6 +1038,11 @@ jobs:
     displayName: 'npm install'
 
   - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue
+      npx puppeteer browsers install chrome
+    displayName: "install chrome"    
+
+  - script: |
      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue
      npm run remove-package-lock
     displayName: 'npm run remove-package-lock'
@@ -1090,7 +1116,7 @@ jobs:
 
   - task: NodeTool@0
     inputs:
-      versionSpec: '14.x'
+      versionSpec: '16.x'
     displayName: 'Install Node.js'
   
   - task: CopyFiles@2
@@ -1189,6 +1215,11 @@ jobs:
       verbose: false
       workingDir: $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js
     condition: ne(variables.NPM_CACHE_RESTORED, 'true')
+
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js
+      npx puppeteer browsers install chrome
+    displayName: "install chrome"
 
   # update 'file' npm dependencies in case of cache
   - script: |

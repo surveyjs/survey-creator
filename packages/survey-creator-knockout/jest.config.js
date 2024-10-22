@@ -15,6 +15,7 @@ module.exports = {
     "^survey-core(.*)$": "<rootDir>/node_modules/survey-core$1",
     "survey-creator-core": "<rootDir>/node_modules/survey-creator-core",
     "survey-knockout-ui": "<rootDir>/node_modules/survey-knockout-ui",
+    "^knockout$": "<rootDir>/node_modules/knockout",
     "tslib": "<rootDir>/node_modules/tslib",
   },
   testRegex: "(/tests/.*|(\\.|/)(test|spec))\\.tsx?$",
