@@ -96,8 +96,14 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
     return this.toJSON()["cssVariables"] || {};
   }
 
+  private cssVariableChangedHandler() {
+    if (this.themeName === CreatorThemeModel.defautlThemeName && Object.keys(this.cssVariables).length === 0) {
+      this.loadTheme({ themeName: CreatorThemeModel.defautlThemeName });
+    }
+  }
   private setThemeCssVariablesChanges(name: string, value: any) {
     if (this.themeCssVariablesChanges[name] !== value) {
+      this.cssVariableChangedHandler();
       this.themeCssVariablesChanges[name] = value;
       this.onThemePropertyChanged.fire(this, { name, value });
     }
@@ -170,7 +176,7 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
   }
 
   private blockThemeChangedNotifications = 0;
-  public loadTheme(theme: ICreatorTheme = { themeName: CreatorThemeModel.defautlThemeName }) {
+  public loadTheme(theme: ICreatorTheme = {}) {
     this.blockThemeChangedNotifications += 1;
     try {
       const baseTheme = CreatorThemes[theme.themeName] || {};
