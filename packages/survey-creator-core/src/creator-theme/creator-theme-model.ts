@@ -1,6 +1,6 @@
 import { Serializer, Base, property, ArrayChanges, EventBase, ILoadFromJSONOptions, ISaveToJSONOptions } from "survey-core";
 import { getLocString } from "../editorLocalization";
-import { assign, roundTo2Decimals } from "../utils/utils";
+import { assign, roundTo2Decimals, ColorCalculator } from "../utils/utils";
 import { CreatorThemes, ICreatorTheme, PredefinedCreatorThemes } from "./creator-themes";
 import * as Themes from "survey-creator-core/themes";
 
@@ -14,8 +14,12 @@ Object.keys(Themes || {}).forEach(themeName => {
 
 export class CreatorThemeModel extends Base implements ICreatorTheme {
   static defautlThemeName = "sc2020";
+
   initialCssVariables: { [index: string]: string } = {};
   themeCssVariablesChanges?: { [index: string]: string } = {};
+  private primaryColorCalculator = new ColorCalculator();
+  private secondaryColorCalculator = new ColorCalculator();
+  private backgroundColorCalculator = new ColorCalculator();
 
   unitDictionary: { [index: string]: number } = {
     "--ctr-font-unit": 8,
@@ -35,6 +39,35 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
 
   public onThemeSelected = new EventBase<CreatorThemeModel, { theme: ICreatorTheme }>();
   public onThemePropertyChanged = new EventBase<CreatorThemeModel, { name: string, value: any }>();
+
+  private initializeColorCalculators(cssVariables: { [index: string]: string }) {
+    this.initializeColorCalculator(this.primaryColorCalculator, cssVariables, "--sjs-primary-background-500", "--sjs-primary-background-10", "--sjs-primary-background-400");
+    this.initializeColorCalculator(this.secondaryColorCalculator, cssVariables, "--sjs-secondary-background-500", "--sjs-secondary-background-10", "--sjs-secondary-background-25");
+    this.initializeColorCalculator(this.backgroundColorCalculator, cssVariables, "--sjs-special-background", "--sjs-special-haze", "--sjs-special-glow");
+  }
+  private initializeColorCalculator(calculator: ColorCalculator, cssVariables: { [index: string]: string }, baseColorName: string, lightColorName: string, darkColorName: string) {
+    if (!cssVariables[baseColorName] ||
+      !cssVariables[lightColorName] ||
+      !cssVariables[darkColorName]) {
+      return;
+    }
+
+    calculator.initialize(
+      cssVariables[baseColorName],
+      cssVariables[lightColorName],
+      cssVariables[darkColorName]
+    );
+  }
+
+  private updateColorPropertiesDependentOnBaseColor(calculator: ColorCalculator, value: string, baseColorName: string, lightColorName: string, darkColorName: string) {
+    this.setPropertyValue(baseColorName, value);
+    this.setThemeCssVariablesChanges(baseColorName, value);
+    calculator.calculateColors(value);
+    this.setPropertyValue(lightColorName, calculator.colorSettings.newColorLight);
+    this.setPropertyValue(darkColorName, calculator.colorSettings.newColorDark);
+    this.setThemeCssVariablesChanges(lightColorName, calculator.colorSettings.newColorLight);
+    this.setThemeCssVariablesChanges(darkColorName, calculator.colorSettings.newColorDark);
+  }
 
   constructor() {
     super();
@@ -63,8 +96,14 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
     return this.toJSON()["cssVariables"] || {};
   }
 
+  private cssVariableChangedHandler() {
+    if (this.themeName === CreatorThemeModel.defautlThemeName && Object.keys(this.cssVariables).length === 0) {
+      this.loadTheme({ themeName: CreatorThemeModel.defautlThemeName });
+    }
+  }
   private setThemeCssVariablesChanges(name: string, value: any) {
     if (this.themeCssVariablesChanges[name] !== value) {
+      this.cssVariableChangedHandler();
       this.themeCssVariablesChanges[name] = value;
       this.onThemePropertyChanged.fire(this, { name, value });
     }
@@ -75,6 +114,12 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
     if (name === "themeName") {
       this.loadTheme({ themeName: newValue });
       this.onThemeSelected.fire(this, { theme: this.toJSON() });
+    } else if (name === "--sjs-primary-background-500") {
+      this.updateColorPropertiesDependentOnBaseColor(this.primaryColorCalculator, newValue, "--sjs-primary-background-500", "--sjs-primary-background-10", "--sjs-primary-background-400");
+    } else if (name === "--sjs-secondary-background-500") {
+      this.updateColorPropertiesDependentOnBaseColor(this.secondaryColorCalculator, newValue, "--sjs-secondary-background-500", "--sjs-secondary-background-10", "--sjs-secondary-background-25");
+    } else if (name === "--sjs-special-background") {
+      this.updateColorPropertiesDependentOnBaseColor(this.backgroundColorCalculator, newValue, "--sjs-special-background", "--sjs-special-haze", "--sjs-special-glow");
     } else if (name.indexOf("--") === 0) {
       this.setThemeCssVariablesChanges(name, newValue);
     } else if (name == "fontScale" || name == "scale" || name == "surfaceScale") {
@@ -144,7 +189,7 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
       const effectiveTheme: ICreatorTheme = {};
       assign(effectiveTheme, baseTheme, theme, { cssVariables: effectiveThemeCssVariables, themeName: this.themeName });
 
-      // this.initializeColorCalculator(effectiveTheme.cssVariables);
+      this.initializeColorCalculators(effectiveTheme.cssVariables);
       this.fromJSON(effectiveTheme);
     } finally {
       this.blockThemeChangedNotifications -= 1;
@@ -306,4 +351,10 @@ Serializer.addProperties("creatortheme", [
     visible: false,
     isSerializable: false,
   },
+  { name: "--sjs-primary-background-400", visible: false },
+  { name: "--sjs-primary-background-10", visible: false },
+  { name: "--sjs-secondary-background-25", visible: false },
+  { name: "--sjs-secondary-background-10", visible: false },
+  { name: "--sjs-special-haze", visible: false },
+  { name: "--sjs-special-glow", visible: false },
 ]);
