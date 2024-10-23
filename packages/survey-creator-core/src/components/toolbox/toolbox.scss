@@ -129,6 +129,7 @@ svc-toolbox {
     width: 100vw;
     padding: var(--ctr-toolbox-padding-top, calcSize(1.5)) var(--ctr-toolbox-group-padding-right-compact, calcSize(1.5))
       var(--ctr-toolbox-padding-bottom, calcSize(2)) var(--ctr-toolbox-group-padding-left-compact, calcSize(1.5));
+    pointer-events: none;
   }
   .spg-search-editor_container {
     opacity: 0;
