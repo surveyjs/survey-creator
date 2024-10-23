@@ -596,7 +596,7 @@ svc-question {
 }
 
 .svc-question__drop-indicator--top {
-  top: -8px;
+  top: -9px;
 }
 
 .svc-question__drop-indicator--bottom {
@@ -939,6 +939,7 @@ svc-question,
   display: flex;
   flex-grow: 1;
   box-sizing: border-box;
+  position: relative;
 }
 
 .svc-question__content--empty-template {
