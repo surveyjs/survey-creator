@@ -125,12 +125,16 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     if (this.creator.showCreatorThemeSettings) {
       this.themeModel.loadTheme(this.creator.creatorTheme);
       this.themePropertyGrid.obj = this.themeModel;
+      this.themePropertyGrid.survey.onUpdatePanelCssClasses.add((_, options) => {
+        options.cssClasses.panel.container += " spg-panel--group";
+      });
       this.updatePredefinedColorChoices();
     }
   }
   private createCreatorThemeSettingsPage(creator: SurveyCreatorModel) {
     this.themeModel = new CreatorThemeModel();
     this.themePropertyGrid = new PropertyGridModel(undefined, creator, creatorThemeModelPropertyGridDefinition);
+    this.themePropertyGrid.survey.css.root += "svc-creator-theme-settings";
     this.themePropertyGrid.showOneCategoryInPropertyGrid = true;
     this.themePropertyGrid.surveyInstanceCreatedArea = "designer-tab:creator-settings";
     const themePropertyGridViewModel = new PropertyGridViewModel(this.themePropertyGrid, creator);

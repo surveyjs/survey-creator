@@ -260,6 +260,7 @@ Serializer.addProperties("creatortheme", [
     default: "#19B394FF",
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
+        editor.titleLocation = "left";
         editor.title = getLocString("creatortheme.--sjs-primary-background-500");
       }
     },
@@ -267,7 +268,13 @@ Serializer.addProperties("creatortheme", [
     type: "color",
     name: "--sjs-secondary-background-500",
     default: "#FF9814FF",
-    displayName: ""
+    displayName: "",
+    onPropertyEditorUpdate: function (obj: any, editor: any) {
+      if (!!editor) {
+        editor.titleLocation = "left";
+        editor.title = getLocString("creatortheme.--sjs-secondary-background-500");
+      }
+    },
   }, {
     name: "--ctr-font-unit",
     default: "8px",
