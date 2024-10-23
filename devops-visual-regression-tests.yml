@@ -33,7 +33,7 @@ jobs:
 
   - task: NodeTool@0
     inputs:
-      versionSpec: '14.x'
+      versionSpec: '16.x'
     displayName: 'Install Node.js'
 
   - task: CopyFiles@2
@@ -94,6 +94,11 @@ jobs:
 
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
+      npm run build:themes
+    displayName: 'Build Creator V2 Core themes'
+
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
       npm run build:i18n
     displayName: 'Build Creator V2 Core i18n'
 
@@ -129,7 +134,7 @@ jobs:
 
   - task: NodeTool@0
     inputs:
-      versionSpec: '14.x'
+      versionSpec: '16.x'
     displayName: 'Install Node.js'
 
   - task: CopyFiles@2
@@ -222,6 +227,11 @@ jobs:
       verbose: false
       workingDir: $(Build.SourcesDirectory)/survey-creator
     condition: ne(variables.NPM_CACHE_RESTORED_ROOT, 'true')
+
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
+      npx puppeteer browsers install chrome
+    displayName: "install chrome"
   
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator
@@ -345,7 +355,7 @@ jobs:
 
   - task: NodeTool@0
     inputs:
-      versionSpec: '14.x'
+      versionSpec: '16.x'
     displayName: 'Install Node.js'
 
   - task: CopyFiles@2
@@ -429,6 +439,11 @@ jobs:
       verbose: false
       workingDir: $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
     condition: ne(variables.NPM_CACHE_RESTORED, 'true')
+
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
+      npx puppeteer browsers install chrome
+    displayName: "install chrome"
 
   - task: DownloadBuildArtifacts@0
     inputs:
@@ -533,7 +548,7 @@ jobs:
 
   - task: NodeTool@0
     inputs:
-      versionSpec: '14.x'
+      versionSpec: '16.x'
     displayName: 'Install Node.js'
 
   - task: DownloadBuildArtifacts@0
@@ -593,6 +608,11 @@ jobs:
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
       npm i
     displayName: 'npm install'
+
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
+      npx puppeteer browsers install chrome
+    displayName: "install chrome"
     
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
@@ -721,6 +741,11 @@ jobs:
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue
       npm i
     displayName: 'npm install'
+
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue
+      npx puppeteer browsers install chrome
+    displayName: "install chrome"
     
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue
@@ -788,7 +813,7 @@ jobs:
 
   - task: NodeTool@0
     inputs:
-      versionSpec: '14.x'
+      versionSpec: '16.x'
     displayName: 'Install Node.js'
 
   - task: CopyFiles@2
@@ -894,6 +919,11 @@ jobs:
       verbose: false
       workingDir: $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js
     condition: ne(variables.NPM_CACHE_RESTORED, 'true')
+
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js
+      npx puppeteer browsers install chrome
+    displayName: "install chrome"
 
   - task: DownloadBuildArtifacts@0
     inputs:

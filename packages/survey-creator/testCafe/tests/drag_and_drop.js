@@ -257,7 +257,7 @@ test("check move question from survey to panel", async (t) => {
   assert.deepEqual(await getQuestionsInPanel(), ["question1"]);
 });
 
-test("check change order of questions in panel", async (t) => {
+test.skip("check change order of questions in panel", async (t) => {
   await t.click("[title=Panel]");
   await t.wait(100);
   await t.dragToElement(

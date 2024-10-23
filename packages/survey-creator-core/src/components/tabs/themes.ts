@@ -1,4 +1,5 @@
-import { ITheme } from "survey-core";
+import { ItemValue, ITheme, Trigger } from "survey-core";
+import { getLocString } from "../../editorLocalization";
 
 export const Themes: { [index: string]: ITheme } = {};
 export const PredefinedThemes: string[] = ["default", "sharp", "borderless", "flat", "plain", "doubleborder", "layered", "solid", "threedimensional", "contrast"];
@@ -23,3 +24,9 @@ export const PredefinedColors = {
     green: "rgba(140, 204, 90, 1)"
   }
 };
+
+export function getPredefinedColorsItemValues(colorPalette: string = "light") {
+  return Object.keys(PredefinedColors[colorPalette]).map(colorName =>
+    new ItemValue(PredefinedColors[colorPalette][colorName], getLocString("theme.colors." + colorName))
+  );
+}

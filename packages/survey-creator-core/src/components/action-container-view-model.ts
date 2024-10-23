@@ -297,11 +297,11 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
 
   protected detachElement(surveyElement: T): void {
     if (surveyElement) {
-      if (surveyElement.getPropertyValue(SurveyElementAdornerBase.AdornerValueName) === this) {
+      if (surveyElement.getPropertyValue(SurveyElementAdornerBase.AdornerValueName) === this && !surveyElement.isDisposed) {
         surveyElement.setPropertyValue(SurveyElementAdornerBase.AdornerValueName, null);
       }
       surveyElement.onPropertyChanged.remove(this.selectedPropPageFunc);
-      this.updateActionsContainer(surveyElement, true);
+      this.cleanActionsContainer();
     }
   }
   protected attachElement(surveyElement: T): void {
@@ -366,15 +366,16 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       }
     };
   }
-  protected updateActionsContainer(surveyElement: SurveyElement, clear: boolean = false) {
-    if(clear) {
-      this.actionContainer.actions.forEach(action => action.dispose && action.dispose());
-    } else {
-      const actions: Array<Action> = [];
-      this.buildActions(actions);
-      this.creator.onElementMenuItemsChanged(surveyElement, actions);
-      this.actionContainer.setItems(actions);
-    }
+  protected cleanActionsContainer() {
+    const actions = this.actionContainer.actions;
+    this.actionContainer.setItems([]);
+    actions.forEach(action => action.dispose && action.dispose());
+  }
+  protected updateActionsContainer(surveyElement: SurveyElement) {
+    const actions: Array<Action> = [];
+    this.buildActions(actions);
+    this.creator.onElementMenuItemsChanged(surveyElement, actions);
+    this.actionContainer.setItems(actions);
   }
   protected updateActionsProperties(): void {
     if (this.isDisposed) return;

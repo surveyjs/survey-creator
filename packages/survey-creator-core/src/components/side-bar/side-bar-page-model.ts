@@ -11,6 +11,8 @@ export class SidebarPageModel extends Base {
   @property() componentData: any;
   @property() componentName: string;
 
+  deactivateCallback: () => void;
+
   constructor(public id: string, public sidePanel: SidebarModel, componentName?: string, componentData?: any) {
     super();
     !!componentName && (this.componentName = componentName);
