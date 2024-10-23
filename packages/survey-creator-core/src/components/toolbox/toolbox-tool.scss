@@ -151,11 +151,11 @@
     //   padding-inline-start: calcSize(4);
     // }
   }
-  .svc-toolbox__item-submenu-button {
-    background: var(--ctr-toolbox-item-submenu-button-background-color, $background-dim);
-    &:hover {
-      background: var(--ctr-toolbox-item-submenu-button-background-color-hovered, $background);
-    }
+}
+.svc-toolbox__item-submenu-button {
+  background: var(--ctr-toolbox-item-submenu-button-background-color, $background-dim);
+  &:hover {
+    background: var(--ctr-toolbox-item-submenu-button-background-color-hovered, $background);
   }
 }
 
@@ -218,7 +218,7 @@
 .svc-toolbox__item-submenu-button {
   position: absolute;
   inset-inline-end: var(--ctr-toolbox-item-submenu-button-right, calcSize(1.5));
-  top: calcSize(1.5);
+  top: var(--ctr-toolbox-item-submenu-button-top, calcSize(1.5));
   display: inline-flex;
   padding: var(--ctr-toolbox-item-submenu-button-padding-top, 4px)
     var(--ctr-toolbox-item-submenu-button-padding-right, 4px) var(--ctr-toolbox-item-submenu-button-padding-bottom, 4px)
@@ -228,7 +228,7 @@
   box-sizing: border-box;
   align-items: center;
   border-radius: var(--ctr-toolbox-item-submenu-button-corner-radius, 1024px);
-  z-index: 20;
+  z-index: 40;
   svg {
     fill: var(--ctr-toolbox-item-submenu-button-icon-color, $layer-1-foreground-50);
   }
@@ -276,8 +276,9 @@
 
 .svc-toolbox-subtypes {
   .sv-popup__container {
+    margin-top: calc(0px - var(--ctr-toolbox-submenu-group-margin-top, 0px) - var(--ctr-toolbox-item-padding-top, calcSize(1)));
     padding: 0;
-    padding-inline-start: var(--ctr-toolbox-submenu-offset, calcSize(0.5));
+    padding-inline-start: var(--ctr-toolbox-submenu-offset, calcSize(3.5));
     box-shadow: unset;
     background: unset;
   }
@@ -301,10 +302,10 @@
   }
 
   .sv-popup__scrolling-content {
-    padding-top: calc(var(--ctr-toolbox-submenu-group-margin-top, 12px));
-    padding-inline-end: var(--ctr-toolbox-submenu-group-margin-right, 12px);
-    padding-bottom: var(--ctr-toolbox-submenu-group-margin-bottom-last, 12px);
-    padding-inline-start: var(--ctr-toolbox-submenu-group-margin-left, 12px);
+    padding-top: calc(var(--ctr-toolbox-submenu-group-margin-top, 0px));
+    padding-inline-end: var(--ctr-toolbox-submenu-group-margin-right, 0px);
+    padding-bottom: var(--ctr-toolbox-submenu-group-margin-bottom-last, 0px);
+    padding-inline-start: var(--ctr-toolbox-submenu-group-margin-left, 0px);
     overflow: visible;
   }
 
