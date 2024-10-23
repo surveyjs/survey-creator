@@ -337,11 +337,8 @@ export function scrollElementIntoView(elementId: string) {
 
 export function ingectAlpha(baseColor: any, alpha: number): any {
   if (!!baseColor && alpha !== undefined) {
-    const r = parseInt(baseColor.slice(1, 3), 16);
-    const g = parseInt(baseColor.slice(3, 5), 16);
-    const b = parseInt(baseColor.slice(5, 7), 16);
-
-    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+    const rgbValue = HEXToRGB(baseColor);
+    return `rgba(${rgbValue[0]}, ${rgbValue[1]}, ${rgbValue[2]}, ${rgbValue[3] || alpha})`;
   }
 }
 
@@ -374,6 +371,17 @@ export function parseColor(value: string = ""): { color: string, opacity: number
   else {
     return { color: value, opacity: 100 };
   }
+}
+export function HEXToRGB(baseColor: any): any {
+  if (!!baseColor) {
+    const r = parseInt(baseColor.slice(1, 3), 16);
+    const g = parseInt(baseColor.slice(3, 5), 16);
+    const b = parseInt(baseColor.slice(5, 7), 16);
+    const alpha = roundTo2Decimals(parseInt(baseColor.slice(7, 9), 16) / 255);
+
+    return [r, g, b, alpha];
+  }
+  return [];
 }
 
 export function HSBToRGB(h, s, b) {
@@ -421,9 +429,18 @@ export class ColorCalculator {
   colorSettings = { baseColorAlpha: 1, darkColorAlpha: 1, lightColorAlpha: 1, deltaDarkColor: 0, deltaLightColor: 0, newColorLight: "", newColorDark: "" };
 
   initialize(baseColor: string, lightColor: string, darkColor: string) {
-    const primaryColorRgba = parseRgbaFromString(baseColor);
-    const primaryColorDarkRgba = parseRgbaFromString(darkColor);
-    const primaryColorLightRgba = parseRgbaFromString(lightColor);
+    let primaryColorRgba = parseRgbaFromString(baseColor);
+    if (primaryColorRgba.length === 0) {
+      primaryColorRgba = parseRgbaFromString(ingectAlpha(baseColor, 1));
+    }
+    let primaryColorDarkRgba = parseRgbaFromString(darkColor);
+    if (primaryColorDarkRgba.length === 0) {
+      primaryColorDarkRgba = parseRgbaFromString(ingectAlpha(darkColor, 1));
+    }
+    let primaryColorLightRgba = parseRgbaFromString(lightColor);
+    if (primaryColorLightRgba.length === 0) {
+      primaryColorLightRgba = parseRgbaFromString(ingectAlpha(lightColor, 1));
+    }
     this.colorSettings.baseColorAlpha = primaryColorRgba[3];
     this.colorSettings.darkColorAlpha = primaryColorDarkRgba[3];
     this.colorSettings.lightColorAlpha = primaryColorLightRgba[3];

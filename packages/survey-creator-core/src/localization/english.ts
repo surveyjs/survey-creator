@@ -789,6 +789,7 @@ export var enStrings = {
       panel: {
         layout: "Panel Layout"
       },
+
       general: "General",
       fileOptions: "Options",
       html: "HTML Editor",
@@ -831,6 +832,8 @@ export var enStrings = {
       header: "Header",
       background: "Background",
       appearance: "Appearance",
+      accentColors: "Accent colors",
+      scaling: "Scaling",
       others: "Others"
     },
     editProperty: "Edit property '{0}'",
@@ -1713,7 +1716,8 @@ export var enStrings = {
   },
   creatortheme: {
     "--sjs-special-background": "Surface background",
-    "--sjs-primary-background-500": "Accent colors",
+    "--sjs-primary-background-500": "Primary",
+    "--sjs-secondary-background-500": "Secondary",
     "surfaceScale": "Surface",
     "userInterfaceBaseUnit": "User interface",
     "fontScale": "Font",

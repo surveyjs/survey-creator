@@ -1,6 +1,6 @@
 import { createScreenshotsComparer, ScreenshotsComparer } from "devextreme-screenshot-comparer";
 import { ClientFunction, Selector } from "testcafe";
-export * from "../testCafe/helper";
+export * from "../functionalTests/helper";
 
 export const getSurveyJSFramework = ClientFunction(() => {
   return window["surveyJSFramework"];
