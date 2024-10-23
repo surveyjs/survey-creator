@@ -170,7 +170,7 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
   }
 
   private blockThemeChangedNotifications = 0;
-  public loadTheme(theme: ICreatorTheme = {}) {
+  public loadTheme(theme: ICreatorTheme = { themeName: CreatorThemeModel.defautlThemeName }) {
     this.blockThemeChangedNotifications += 1;
     try {
       const baseTheme = CreatorThemes[theme.themeName] || {};
