@@ -458,7 +458,7 @@ export class QuestionToolbox
   private getAnimationOptions(): IAnimationConsumer {
     return {
       getAnimatedElement: () => {
-        return this.rootElement.querySelector(".svc-toolbox__panel");
+        return this.rootElement?.querySelector(".svc-toolbox__panel");
       },
       isAnimationEnabled: () => this.animationAllowed,
       getRerenderEvent: () => this.onElementRerendered,
