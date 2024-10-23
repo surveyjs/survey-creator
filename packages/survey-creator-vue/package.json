@@ -21,8 +21,8 @@
     "lint": "eslint ./src --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "visual-regression-tests:ci": "testcafe --disable-font-subpixel-positioning ../../visualRegressionTests/  --app \"npm run serve:example:prod\" --screenshots ../../ --selector-timeout 1500 --reporter minimal",
     "visual-regression-tests": "testcafe ../../visualRegressionTests/  --app \"npm run serve:example:prod\" --screenshots ../../ --selector-timeout 1500 --config-file .testcaferc.dev.js",
-    "testcafe:ci": "testcafe '../../testCafe/**' --app \"npm run serve:example:prod\" --selector-timeout 1500 --reporter minimal",
-    "testcafe": "testcafe '../../testCafe/**' --app \"npm run serve:example:prod\" --selector-timeout 1500 --config-file .testcaferc.dev.js"
+    "testcafe:ci": "testcafe ../../functionalTests/ --app \"npm run serve:example:prod\" --selector-timeout 1500 --reporter minimal",
+    "testcafe": "testcafe ../../functionalTests/ --app \"npm run serve:example:prod\" --selector-timeout 1500 --config-file .testcaferc.dev.js"
   },
   "devDependencies": {
     "testcafe": "3.3.0",

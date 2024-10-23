@@ -10,7 +10,7 @@
     "version": "0.0.1",
     "scripts": {
         "dev": "concurrently \"npm run dev --prefix ../survey-library\" \"http-server -p 7777 --silent\" \"npm run watch:dev --prefix packages/survey-creator-core\" \"npm run watch:prod --prefix packages/survey-creator-core\" \"npm run watch:dev --prefix packages/survey-creator-knockout\" \"npm run watch:prod --prefix packages/survey-creator-knockout\" \"npm run watch:dev --prefix packages/survey-creator-react\" \"npm run watch:prod --prefix packages/survey-creator-react\" ",
-        "lint": "eslint ./packages --quiet && eslint ./testCafe --quiet && eslint ./visualRegressionTests --quiet",
+        "lint": "eslint ./packages --quiet && eslint ./functionalTests --quiet && eslint ./visualRegressionTests --quiet",
         "pre-push-check": "npm run lint",
         "prepare": "husky install"
     },
