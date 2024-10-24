@@ -47,7 +47,7 @@
 }
 
 .sv-action-bar--small-size-mode .sv-action-bar-item {
-  font-weight: 600;
+  @include ctrSmallBoldFont;
   align-items: center;
 }
 
@@ -84,12 +84,13 @@
   }
 
   .sv-action-bar-item {
+    @include ctrDefaultFont;
     border-radius: var(--ctr-menu-toolbar-button-corner-radius, 2px);
     background-color: transparent;
     color: var(--ctr-menu-toolbar-button-text-color, $foreground);
     transition: background-color $creator-transition-duration;
+    height: auto;
   }
-
 
   .sv-action-bar-item__icon {
     use {

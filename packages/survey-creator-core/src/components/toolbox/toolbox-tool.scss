@@ -59,6 +59,7 @@
 
 //is visible only on hover
 .svc-toolbox__item-banner {
+  @include ctrSmallBoldFont;
   opacity: 0;
   box-sizing: border-box;
   align-items: center;
@@ -71,7 +72,6 @@
   padding-inline-start: var(--ctr-tooltip-padding-left, calcSize(5.5));
   margin-inline-end: calcSize(-2);
   white-space: nowrap;
-  @include smallBold;
   color: var(--ctr-toolbox-item-text-color, $foreground);
   transition: opacity $creator-transition-duration;
   background-color: $background;
@@ -131,7 +131,7 @@
 }
 
 .svc-toolbox__item-title {
-  @include smallBold;
+  @include ctrSmallBoldFont;
 
   display: block;
   padding-inline-start: calcSize(1);
