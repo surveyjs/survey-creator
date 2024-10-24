@@ -56,6 +56,9 @@ export class MatrixCellWrapperEditSurvey {
         questionJSON[key] = !columnJSON[key];
       }
     }
+    if(column.cellType === "default") {
+      column.cellType = qType;
+    }
     for(let key in questionJSON) {
       if(!Helpers.isTwoValueEquals(questionJSON[key], columnJSON[key])) {
         column[key] = questionJSON[key];
