@@ -2,6 +2,8 @@
   background: $background-dim;
 }
 .spg-panel__title {
+  @include ctrDefaultFont;
+
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -14,9 +16,6 @@
   cursor: pointer;
   background-color: var(--ctr-property-grid-chapter-caption-background-color, $background);
   box-shadow: inset 0px -1px 0px var(--ctr-property-grid-chapter-caption-border-color, $border);
-  font-family: $font-family;
-  font-size: calcSize(2);
-  font-weight: 400;
   margin: 0;
   transition: color $creator-transition-duration, background-color $creator-transition-duration, opacity $creator-transition-duration;
 }
@@ -37,8 +36,8 @@
 }
 
 .spg-panel__title--expanded {
+  @include ctrDefaultBoldFont;
   color: var(--ctr-property-grid-chapter-caption-text-color-selected, $foreground);
-  font-weight: 600;
 }
 
 .spg-panel__content {
@@ -130,5 +129,22 @@
   .spg-panel__content--enter,
   .spg-panel__content--leave {
     animation: none;
+  }
+}
+.spg-panel.spg-panel--group {
+  &>.spg-panel__content {
+    padding: 0;
+    box-shadow: none;
+  }
+  .spg-panel__title {
+    @include question_tile;
+    box-shadow: none;
+    background-color: transparent;
+  }
+  .spg-row {
+    margin-top: calcSize(1)
+  }
+  .spg-row:first-of-type {
+    margin-top: 0;
   }
 }

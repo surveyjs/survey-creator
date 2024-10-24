@@ -277,10 +277,7 @@ svc-toolbox {
 }
 
 .svc-toolbox__category-title {
-  font-family: $font-family;
-  font-size: calcSize(1.5);
-  font-weight: bold;
-  line-height: calcSize(2);
+  @include ctrSmallBoldFont;
   color: $foreground;
   vertical-align: middle;
   display: block;
@@ -316,10 +313,9 @@ svc-toolbox {
 }
 
 .svc-toolbox__placeholder {
+  @include ctrSmallFont;
   padding-top: calcSize(12);
   margin-inline-start: auto;
   margin-inline-end: auto;
   color: var(--ctr-property-grid-placeholder-text-description-color, $foreground-light);
-  @include defaultFont;
-  font-size: 12px;
 }

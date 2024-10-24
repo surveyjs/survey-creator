@@ -7,8 +7,8 @@ export class QuestionLinkValueModel extends Question {
   public linkClickCallback: () => void;
   public resetClickCallback: () => void;
   public isClickableCallback: () => boolean;
-  @property({ defaultValue: "svc-link-value-button svc-question-link__set-button" }) public linkSetButtonCssClasses: string;
-  @property({ defaultValue: "svc-question-link__clear-button" }) public linkClearButtonCssClasses: string;
+  @property({ defaultValue: "svc-link__button svc-link-value-button svc-question-link__set-button" }) public linkSetButtonCssClasses: string;
+  @property({ defaultValue: "svc-link__button svc-question-link__clear-button" }) public linkClearButtonCssClasses: string;
 
   @property({ defaultValue: false }) isSelected: boolean;
   @property() linkValueText: string;

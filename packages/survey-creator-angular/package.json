@@ -1,6 +1,6 @@
 {
   "name": "survey-creator-angular",
-  "version": "1.12.6",
+  "version": "1.12.7",
   "description": "Use SurveyJS Creator to create or edit JSON for SurveyJS Form Library.",
   "homepage": "https://surveyjs.io/Overview/Survey-Creator",
   "license": "https://surveyjs.io/Licenses#SurveyCreator",
@@ -72,8 +72,8 @@
   "scripts": {
     "build": "ng build && node ./update-version.js",
     "serve:example": "ng serve",
-    "testcafe": "testcafe ../../testCafe/ --app \"http-server ./dist/angular-ui --proxy http://localhost:8080? -p 8080\" --selector-timeout 1500 --env=angular --config-file .testcaferc.dev.js",
-    "testcafe:ci": "testcafe ../../testCafe/ --app \"http-server ./dist/angular-ui --proxy http://localhost:8080? -p 8080\" --selector-timeout 1500 --reporter minimal --env=angular",
+    "testcafe": "testcafe ../../functionalTests/ --app \"http-server ./dist/angular-ui --proxy http://localhost:8080? -p 8080\" --selector-timeout 1500 --env=angular --config-file .testcaferc.dev.js",
+    "testcafe:ci": "testcafe ../../functionalTests/ --app \"http-server ./dist/angular-ui --proxy http://localhost:8080? -p 8080\" --selector-timeout 1500 --reporter minimal --env=angular",
     "serve:example:aot": "http-server ./dist/angular-ui --proxy http://localhost:8080? -p 8080",
     "build:example": "ng build  angular-ui",
     "test": "ng test survey-creator-angular",

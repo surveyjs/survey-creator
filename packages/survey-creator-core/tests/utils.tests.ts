@@ -26,7 +26,7 @@ test("RGBToHSB HSBToRGB", (): any => {
   expect(newPrimaryColorLightRGB).toEqual([25, 179, 148]);
 });
 
-test("ColorCalculator", (): any => {
+test("ColorCalculator rgba", (): any => {
   const primaryColor = "rgba(25, 179, 148, 1)";
   const primaryColorLight = "rgba(25, 179, 148, 0.1)";
   const primaryColorDark = "rgba(20, 164, 139, 1)";
@@ -40,7 +40,8 @@ test("ColorCalculator", (): any => {
     deltaDarkColor: 5.882352941176464,
     deltaLightColor: 0,
     newColorDark: "",
-    newColorLight: "" }
+    newColorLight: ""
+  }
   );
 
   colorCalculator.calculateColors(primaryColor);
@@ -51,6 +52,36 @@ test("ColorCalculator", (): any => {
     deltaDarkColor: 5.882352941176464,
     deltaLightColor: 0,
     newColorDark: "rgba(23, 164, 136, 1)",
-    newColorLight: "rgba(25, 179, 148, 0.1)" }
+    newColorLight: "rgba(25, 179, 148, 0.1)"
+  }
   );
+});
+
+test("ColorCalculator hex", (): any => {
+  const primaryColor = "#19B394FF";
+  const primaryColorLight = "#19B3941A";
+  const primaryColorDark = "#14A48BFF";
+  const colorCalculator = new ColorCalculator();
+
+  colorCalculator.initialize(primaryColor, primaryColorLight, primaryColorDark);
+  expect(colorCalculator.colorSettings).toEqual({
+    baseColorAlpha: 1,
+    darkColorAlpha: 1,
+    lightColorAlpha: 0.1,
+    deltaDarkColor: 5.882352941176464,
+    deltaLightColor: 0,
+    newColorDark: "",
+    newColorLight: ""
+  });
+
+  colorCalculator.calculateColors(primaryColor);
+  expect(colorCalculator.colorSettings).toEqual({
+    baseColorAlpha: 1,
+    darkColorAlpha: 1,
+    lightColorAlpha: 0.1,
+    deltaDarkColor: 5.882352941176464,
+    deltaLightColor: 0,
+    newColorDark: "rgba(23, 164, 136, 1)",
+    newColorLight: "rgba(25, 179, 148, 0.1)"
+  });
 });

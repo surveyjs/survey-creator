@@ -29,6 +29,15 @@
     const creator = new SurveyCreator.SurveyCreator({ showLogicTab: true, showTranslationTab: true });
     window.creator = creator;
     ko.applyBindings({ creator: creator });
+    window.updateCreatorModel = (options, json) => {
+      window.prevCreator = window.creator;
+      window.creator.dispose();
+      ko.cleanNode(document.body);
+      const creator = new SurveyCreator.SurveyCreator(options);
+      creator.JSON = json;
+      window.creator = creator;
+      ko.applyBindings({ creator: creator });
+    }
   </script>
 </body>
 
