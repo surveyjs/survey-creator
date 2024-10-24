@@ -85,12 +85,6 @@ export class SurveyCreatorToolboxTool extends CreatorModelElement<
             event.persist();
             this.model.onPointerDown(event);
           }}
-          onMouseOver={(event: any) => {
-            this.model.onMouseOverTool(item, event);
-          }}
-          onMouseLeave={(event: any) => {
-            this.model.onMouseLeave(item, event);
-          }}
         >
           {itemComponent}
         </div>

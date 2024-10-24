@@ -2,9 +2,7 @@
     <div [class]="itemCssClasses">
         <div class="svc-toolbox__category-separator" *ngIf="item.needSeparator && !creator.toolbox.showCategoryTitles">
         </div>
-        <div class="svc-toolbox__tool-content sv-action__content" (pointerdown)="model.onPointerDown($event)"
-            (mouseover)="model.onMouseOverTool(item, $event)"
-        (mouseleave)="model.onMouseLeave(item, $event)">
+        <div class="svc-toolbox__tool-content sv-action__content" (pointerdown)="model.onPointerDown($event)">
             <ng-template [component]="{ name: model.itemComponent, default: 'svc-toolbox-item', 
             data: { model: item, viewModel: model, creator: creator, isCompact: isCompact } }"></ng-template>
         </div>

@@ -7,16 +7,6 @@
     <div
       class="svc-toolbox__tool-content sv-action__content"
       @pointerdown="model?.onPointerDown"
-      @mousemove="
-        (e) => {
-          model?.onMouseOverTool(item, e);
-        }
-      "
-      @mouseleave="
-        (e) => {
-          model?.onMouseLeave(item, e);
-        }
-      "
     >
       <SvComponent
         :viewModel="model"

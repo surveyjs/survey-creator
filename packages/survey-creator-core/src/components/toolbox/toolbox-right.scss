@@ -12,7 +12,9 @@
     }
   }
   .svc-toolbox__item-submenu-button {
+    svg {
       transform: rotate(180deg);
+    }  
   }
 }
 .svc-creator__toolbox--right {
