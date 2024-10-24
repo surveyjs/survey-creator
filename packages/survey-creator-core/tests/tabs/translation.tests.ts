@@ -772,6 +772,33 @@ test("stringsSurvey - text question dataList property, several locales", () => {
 
   settings.translation.sortByName = oldValue;
 });
+test("acceptCarriageReturn for text properties", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "text",
+        name: "question1",
+        title: { default: "title-en", de: "title-de" },
+        placeholder: { default: "placeholder-en", de: "placeholder-de" }
+      }
+    ]
+  });
+  const translation = new Translation(survey);
+  translation.reset();
+  expect(translation.stringsSurvey.pages).toHaveLength(1);
+  const page = translation.stringsSurvey.pages[0];
+  expect(page.elements).toHaveLength(1);
+  const pagePanel = <PanelModel>page.elements[0];
+  expect(pagePanel.elements).toHaveLength(1);
+  expect(pagePanel.elements[0].name).toEqual("question1");
+  const question1 = <PanelModel>pagePanel.elements[0];
+  let rows = (<QuestionMatrixDropdownModel>question1.elements[0]).visibleRows;
+  expect((<QuestionCommentModel>rows[0].cells[0].question).acceptCarriageReturn).toBeTruthy();
+  expect((<QuestionCommentModel>rows[0].cells[1].question).acceptCarriageReturn).toBeTruthy();
+  rows = (<QuestionMatrixDropdownModel>question1.elements[1]).visibleRows;
+  expect((<QuestionCommentModel>rows[0].cells[0].question).acceptCarriageReturn).toBeFalsy();
+  expect((<QuestionCommentModel>rows[0].cells[1].question).acceptCarriageReturn).toBeFalsy();
+});
 test("Respect property maxLength attrigute in stringsSurvey comment questions", () => {
   Serializer.findProperty("question", "title").maxLength = 10;
   Serializer.findProperty("page", "title").maxLength = 20;
