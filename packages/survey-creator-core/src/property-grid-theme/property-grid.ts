@@ -186,6 +186,7 @@ export var propertyGridCss = {
     popup: "spg-dropdown-popup svc-creator-popup",
     small: "spg-row__question--small sd-row__question--small",
     control: "spg-input spg-dropdown sd-input sd-dropdown",
+    controlValue: "sd-dropdown__value spg-dropdown__value",
     filterStringInput: "sd-dropdown__filter-string-input spg-dropdown__filter-string-input",
     other: "spg-comment spg-question__other",
     onError: "spg-input--error",

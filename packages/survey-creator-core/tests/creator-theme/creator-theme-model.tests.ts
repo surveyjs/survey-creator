@@ -133,3 +133,78 @@ test("Creator theme check scale", (): any => {
   expect(themeModelJsonCssVariables["--ctr-spacing-unit"]).toEqual("18px");
   expect(themeModelJsonCssVariables["--ctr-corner-radius-unit"]).toEqual("18px");
 });
+
+test("Update --sjs-primary-background-10 && --sjs-primary-background-400", (): any => {
+  const fefefeColor = "#fefefe"; // rgba(254, 254, 254, 1)
+  const themeModel = new CreatorThemeModel();
+  themeModel.loadTheme({
+    themeName: "custom",
+    cssVariables: {
+      "--sjs-primary-background-500": "#19B394FF",
+      "--sjs-primary-background-400": "#14A48BFF",
+      "--sjs-primary-background-10": "#19B3941A",
+    }
+  });
+
+  expect(themeModel["--sjs-primary-background-500"]).toEqual("#19B394FF");
+  expect(themeModel["--sjs-primary-background-10"]).toEqual("#19B3941A");
+  expect(themeModel["--sjs-primary-background-400"]).toEqual("#14A48BFF");
+  expect(themeModel.themeCssVariablesChanges).toStrictEqual({});
+
+  themeModel["--sjs-primary-background-500"] = fefefeColor;
+  expect(themeModel.themeCssVariablesChanges).toStrictEqual({
+    "--sjs-primary-background-500": fefefeColor,
+    "--sjs-primary-background-400": "rgba(239, 239, 239, 1)",
+    "--sjs-primary-background-10": "rgba(254, 254, 254, 0.1)",
+  });
+});
+
+test("Update --sjs-secondary-background-25 && --sjs-secondary-background-10", (): any => {
+  const fefefeColor = "#fefefe"; // rgba(254, 254, 254, 1)
+  const themeModel = new CreatorThemeModel();
+  themeModel.loadTheme({
+    themeName: "custom",
+    cssVariables: {
+      "--sjs-secondary-background-500": "#FF9814FF",
+      "--sjs-secondary-background-25": "#FF981440",
+      "--sjs-secondary-background-10": "#FF98141A",
+    }
+  });
+
+  expect(themeModel["--sjs-secondary-background-500"]).toEqual("#FF9814FF"); // rgba(255, 152, 20, 1)
+  expect(themeModel["--sjs-secondary-background-25"]).toEqual("#FF981440"); // rgba(255, 152, 20, 0.25)
+  expect(themeModel["--sjs-secondary-background-10"]).toEqual("#FF98141A"); //rgba(255, 152, 20, 0.1)
+  expect(themeModel.themeCssVariablesChanges).toStrictEqual({});
+
+  themeModel["--sjs-secondary-background-500"] = fefefeColor;
+  expect(themeModel.themeCssVariablesChanges).toStrictEqual({
+    "--sjs-secondary-background-500": fefefeColor,
+    "--sjs-secondary-background-25": "rgba(254, 254, 254, 0.25)",
+    "--sjs-secondary-background-10": "rgba(254, 254, 254, 0.1)",
+  });
+});
+
+test("Update --sjs-special-haze && --sjs-special-glow", (): any => {
+  const fefefeColor = "#fefefe"; // rgba(254, 254, 254, 1)
+  const themeModel = new CreatorThemeModel();
+  themeModel.loadTheme({
+    themeName: "custom",
+    cssVariables: {
+      "--sjs-special-background": "#EDF9F7FF",
+      "--sjs-special-haze": "#CCEEEE59",
+      "--sjs-special-glow": "#004C441A",
+    }
+  });
+
+  expect(themeModel["--sjs-special-background"]).toEqual("#EDF9F7FF"); // rgba(237, 249, 247, 1)
+  expect(themeModel["--sjs-special-haze"]).toEqual("#CCEEEE59"); // rgba(204, 238, 238, 0.35)
+  expect(themeModel["--sjs-special-glow"]).toEqual("#004C441A"); // rgba(0, 76, 68, 0.1)
+  expect(themeModel.themeCssVariablesChanges).toStrictEqual({});
+
+  themeModel["--sjs-special-background"] = fefefeColor;
+  expect(themeModel.themeCssVariablesChanges).toStrictEqual({
+    "--sjs-special-background": fefefeColor,
+    "--sjs-special-haze": "rgba(243, 243, 243, 0.35)",
+    "--sjs-special-glow": "rgba(81, 81, 81, 0.1)",
+  });
+});

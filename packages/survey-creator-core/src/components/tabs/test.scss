@@ -39,6 +39,14 @@ svc-tab-test {
     margin-bottom: calcSize(12);
     margin-top: 8px;
   }
+  .svc-preview-test-again__text {
+    @include ctrDefaultBoldFont;
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    justify-content: center;
+    color: var(--ctr-button-text-color, $primary);
+  }
 }
 
 .svc-creator-tab__content--with-toolbar.svc-test-tab__content .svc-plugin-tab__content {
@@ -69,11 +77,33 @@ svc-tab-test {
 
     .sv-action-bar-item {
       margin: 0;
+
+      use {
+        fill: var(--ctr-survey-question-panel-toolbar-item-icon-color, $foreground-light);
+      }
+    }
+
+    .sv-action-bar-item:not(.sv-action-bar-item--pressed):enabled {
+      &:focus {
+        background: var(--ctr-survey-question-panel-toolbar-item-background-color-selected, $background-dim);
+      }
+
+      &:hover {
+        background: var(--ctr-survey-question-panel-toolbar-item-background-color-hovered, $background-dim);
+      }
+    }
+
+    .sv-action-bar-item--pressed:not(.sv-action-bar-item--active) {
+      background: var(--ctr-survey-question-panel-toolbar-item-background-color-selected, $background-dim);
+    }
+
+    .sv-action-bar-item__title {
+      color: var(--ctr-survey-question-panel-toolbar-item-text-color, $foreground);
     }
   }
 
   .sv-action-bar-item {
-    @include smallBold;
+    @include ctrSmallBoldFont;
     width: 100%;
     height: calcSize(4);
     transition: background-color $creator-transition-duration;
@@ -100,10 +130,7 @@ svc-tab-test {
 }
 
 .svc-test-tab__content .sd-body--empty {
-  font-family: $font-family;
-  font-style: normal;
-  font-weight: 400;
-  font-size: calcSize(2);
+  @include ctrDefaultFont;
   color: $foreground;
   text-align: center;
   overflow: hidden;

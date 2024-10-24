@@ -836,3 +836,16 @@ test("popup overlay in property grid", async (t) => {
     await takeElementScreenshot("pg-overlay-popup.png", getVisibleElement(".sv-popup .sv-popup__container"), t, comparer);
   });
 });
+fixture`${title}`.page`${url}`.beforeEach(async (t) => { });
+test("Check creator theme settings", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 1080);
+    await ClientFunction(() => {
+      (window as any).updateCreatorModel({ showCreatorThemeSettings: true }, {});
+      (window as any).creator.showOneCategoryInPropertyGrid = true;
+    })();
+    await t.drag(Selector(".svc-resizer-west"), -60, 0);
+    await t.click(Selector(".svc-sidebar-tabs__bottom-container .svc-menu-action__button"));
+    await takeElementScreenshot("creator-theme-settings.png", getVisibleElement(".spg-body"), t, comparer);
+  });
+});
