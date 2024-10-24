@@ -140,6 +140,7 @@
     @include ctrDefaultFont;
     box-shadow: none;
     background-color: transparent;
+    padding: calcSize(1) 0;
   }
   .spg-row {
     margin-top: calcSize(1)
