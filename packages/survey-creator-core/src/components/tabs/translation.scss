@@ -36,6 +36,7 @@
     }
 
     .spg-table__question-wrapper {
+      @include ctrDefaultFont;
       padding: calcSize(1.5) calcSize(1);
 
       .spg-checkbox {
@@ -57,17 +58,12 @@
   }
 }
 
-.st-no-strings {
-  @include centerText;
-}
-
 .st-content {
   display: flex;
   height: 100%;
 }
 
 .st-strings {
-  height: calc(100% - calc(6 * #{$base-unit}));
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -104,7 +100,7 @@
 
 .st-title.st-panel__title,
 .st-table__cell.st-table__cell--header {
-  @include smallBold;
+  @include ctrSmallBoldFont;
   text-align: left;
 }
 
@@ -113,13 +109,13 @@
 }
 
 .st-title.st-panel__title {
-  height: calcSize(4);
-  line-height: calcSize(4);
-  padding-left: calcSize(3);
   margin: 0;
   color: var(--ctr-string-table-group-header-text-color, $foreground-light);
   background-color: var(--ctr-string-table-group-header-background-color, $background-dim-light);
   border-bottom: 1px solid var(--ctr-string-table-row-border-color, $border-light);
+  padding: var(--ctr-string-table-row-padding-top, #{calcSize(1)})
+    var(--ctr-string-table-row-padding-right, #{calcSize(3)}) var(--ctr-string-table-row-padding-bottom, #{calcSize(1)})
+    var(--ctr-string-table-row-padding-left, #{calcSize(3)});
 }
 
 .st-table {
@@ -139,7 +135,7 @@
 }
 
 td.st-table__cell:first-of-type {
-  @include defaultBold;
+  @include ctrDefaultBoldFont;
   color: var(--ctr-string-table-row-text-color-title, $foreground);
   max-width: 300px;
   padding-right: calcSize(3);
@@ -164,7 +160,7 @@ td.st-table__cell:first-of-type {
 }
 
 .st-comment {
-  @include defaultFont;
+  @include ctrDefaultFont;
   display: block;
   width: calc(100% - 3 * #{$base-unit});
   border: unset;
@@ -181,6 +177,7 @@ td.st-table__cell:first-of-type {
 }
 
 .st-navigation-btn {
+  @include ctrDefaultBoldFont;
   padding-left: calcSize(1.5);
   padding-right: calcSize(2);
   white-space: nowrap;
@@ -251,11 +248,8 @@ td.st-table__cell:first-of-type {
 
 .st-translation-machine-from__btn:disabled .sd-action__title,
 .st-translation-machine-from__title {
+  @include ctrDefaultFont;
   color: $foreground-dim-light;
-  font-family: $font-family;
-  font-size: calcSize(2);
-  line-height: calcSize(3);
-  font-weight: 400;
 }
 
 .st-body__footer {

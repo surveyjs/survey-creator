@@ -6,6 +6,8 @@
 }
 
 .svc-notifier {
+  @include ctrSmallBoldFont;
+
   position: absolute;
   bottom: calcSize(1);
   left: calcSize(1);
@@ -20,8 +22,6 @@
   z-index: 1600; //todo: should overlap popup
 
   visibility: hidden;
-
-  @include smallBold;
 }
 
 .svc-notifier.svc-notifier--error {
