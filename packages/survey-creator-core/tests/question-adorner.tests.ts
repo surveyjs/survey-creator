@@ -131,10 +131,10 @@ test("Check question adorners expand-collapse - save state", (): any => {
 
   let action = questionAdorner.topActionContainer.getActionById("collapse");
   expect(questionAdorner.collapsed).toBeFalsy();
-  expect(action.iconName).toBe("icon-collapse-detail-light_16x16");
+  expect(action.iconName).toBe("icon-collapsepanel-16x16");
   action.action();
   expect(questionAdorner.collapsed).toBeTruthy();
-  expect(action.iconName).toBe("icon-restore_16x16");
+  expect(action.iconName).toBe("icon-expandpanel-16x16");
 
   let questionAdorner2 = new QuestionAdornerViewModel(
     creator,
