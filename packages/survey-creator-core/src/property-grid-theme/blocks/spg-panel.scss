@@ -137,7 +137,7 @@
     box-shadow: none;
   }
   .spg-panel__title {
-    @include question_tile;
+    @include ctrDefaultFont;
     box-shadow: none;
     background-color: transparent;
   }
