@@ -112,7 +112,7 @@
 }
 
   .spg-theme-group-caption {
-    @include defaultBold;
+    @include ctrDefaultBoldFont;
     color: var(--ctr-property-grid-group-caption-text-color, $foreground-dim);
 
     position: relative;

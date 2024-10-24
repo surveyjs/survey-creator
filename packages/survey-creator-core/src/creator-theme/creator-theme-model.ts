@@ -167,8 +167,8 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
   private updateScaleProperties() {
     this.blockThemeChangedNotifications += 1;
     try {
-      this.fontScale = this.getScaleFactor(/*this.isDefaultTheme ? "--ctr-font-size" :*/ "--ctr-font-unit");
-      this.scale = this.getScaleFactor(/*this.isDefaultTheme ? "--sjs-base-unit" :*/ "--ctr-size-unit");
+      this.fontScale = this.getScaleFactor("--ctr-font-unit");
+      this.scale = this.getScaleFactor("--ctr-size-unit");
       this.surfaceScale = this.getScaleFactor("--ctr-surface-base-unit");
     } finally {
       this.blockThemeChangedNotifications -= 1;

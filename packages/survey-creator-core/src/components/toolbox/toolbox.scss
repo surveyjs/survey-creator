@@ -95,12 +95,12 @@ svc-toolbox {
   margin-inline-start: calcSize(-0.5);
   display: var(--ctr-toolbox-scrollbar-display, none);
   z-index: 30;
+  padding: var(--ctr-toolbox-padding-top, calcSize(1)) 0
+  var(--ctr-toolbox-padding-bottom, calcSize(2)) 0;
   @-moz-document url-prefix() {
     scrollbar-width: thin;
     scrollbar-color: $border transparent;
   }
-  padding: var(--ctr-toolbox-padding-top, calcSize(1)) 0
-  var(--ctr-toolbox-padding-bottom, calcSize(2)) 0;
   // &::-webkit-scrollbar-track {
   //   background: var(--ctr-toolbox-background-color, $background-dim);
   // }
@@ -264,10 +264,7 @@ svc-toolbox {
 }
 
 .svc-toolbox__category-title {
-  font-family: $font-family;
-  font-size: calcSize(1.5);
-  font-weight: bold;
-  line-height: calcSize(2);
+  @include ctrSmallBoldFont;
   color: $foreground;
   vertical-align: middle;
   display: block;
@@ -303,10 +300,9 @@ svc-toolbox {
 }
 
 .svc-toolbox__placeholder {
+  @include ctrSmallFont;
   padding-top: calcSize(12);
   margin-inline-start: auto;
   margin-inline-end: auto;
   color: var(--ctr-property-grid-placeholder-text-description-color, $foreground-light);
-  @include defaultFont;
-  font-size: 12px;
 }

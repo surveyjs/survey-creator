@@ -2,8 +2,6 @@ import { ITheme } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
 import { PreviewViewModel } from "./preview";
 
-require("./theme-builder.scss");
-
 export class ThemeTabViewModel extends PreviewViewModel {
   constructor(surveyProvider: SurveyCreatorModel, startThemeClasses: any) {
     super(surveyProvider, startThemeClasses);
