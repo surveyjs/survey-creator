@@ -7,7 +7,7 @@
 
   border-radius: var(--ctr-button-group-corner-radius, 0px);
   box-shadow: inset 0 0 0 var(--ctr-button-group-border-width, 0px) var(--ctr-button-group-border-color, $border);
-  background: var(--ctr-button-group-background-color, $background);
+  background-color: var(--ctr-button-group-background-color, $background);
   
   &::after {
     content: "";
@@ -31,7 +31,7 @@
   color: var(--ctr-button-group-item-text-color, rgba(0, 0, 0, 0.91));
 
   display: flex;
-  padding: var(--ctr-button-group-item-padding-vertical, 12px) var(--ctr-button-group-item-padding-horizontal, 16px);
+  padding: var(--ctr-button-group-item-padding-vertical, calcSize(1.5)) var(--ctr-button-group-item-padding-horizontal, calcSize(2));
   justify-content: center;
   align-items: center;
   align-self: stretch;
@@ -40,7 +40,7 @@
 
   border-radius: var(--ctr-button-group-item-corner-radius, 0px);
   box-shadow: inset 0 0 0 var(--ctr-button-group-item-border-width, 1px) var(--ctr-button-group-item-border-color, $border);
-  background: var(--ctr-button-group-item-background-color, $background);
+  background-color: var(--ctr-button-group-item-background-color, $background);
 
   transition: background $creator-transition-duration, background-color $creator-transition-duration, color $creator-transition-duration;
 
@@ -75,12 +75,14 @@
 
 .spg-button-group__item--disabled {
   color: var(--ctr-button-group-item-text-color-disabled, $foreground);
-
+  background: var(--ctr-button-group-item-background-color-disabled, $background-dim);
   .spg-button-group__item-icon use {
     fill: var(--ctr-button-group-item-text-color-disabled, $foreground);
   }
-
+  .spg-button-group__item-caption {
+    opacity: var(--ctr-button-group-item-text-opacity-disabled, 0.25);
+  }
   &:hover {
-    background-color: var(--ctr-button-group-item-background-color-disabled, $background);
+    background-color: var(--ctr-button-group-item-background-color-disabled, $background-dim);
   }
 }
