@@ -11,14 +11,14 @@
             :parentModel="toolbox"
             :isCompact="toolbox.isCompactRendered"
           ></SvComponent>
-          <div
-            class="svc-toolbox__category-separator svc-toolbox__category-separator--search"
-          ></div>
         </template>
         <SvComponent
             :is="'svc-search'"
             :model="toolbox.searchManager"
         ></SvComponent>
+        <div
+            class="svc-toolbox__category-separator svc-toolbox__category-separator--search"
+          ></div>
       </div>
       <div @focusout="(e) => toolbox.focusOut(e)" class="svc-toolbox__scroll-wrapper">
         <div

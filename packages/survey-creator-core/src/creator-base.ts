@@ -2777,9 +2777,6 @@ export class SurveyCreatorModel extends Base
     if (!selEl) return;
     clearInterval(this.currentFocusInterval);
     clearTimeout(this.currentFocusTimeout);
-    if (this.animationEnabled && this.survey.isLazyRendering) {
-      this.survey.disableLazyRenderingBeforeElement(selEl);
-    }
     this.currentFocusTimeout = setTimeout(() => {
       this.currentFocusInterval = setInterval(() => {
         const el = document.getElementById(selEl.id);
