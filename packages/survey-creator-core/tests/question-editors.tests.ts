@@ -315,3 +315,27 @@ test("Edit matrix cell question & showInMultipleColumns, #5750", (): any => {
   expect(creator.propertyGrid.getQuestionByName("showNoneItem").value).toBeFalsy();
   expect(matrix.columns[0].choices).toHaveLength(2);
 });
+test("Edit matrix cell question & default cellType, #5976", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    "elements": [
+      {
+        "type": "matrixdropdown",
+        "name": "q1",
+        "columns": [{ name: "column1" }],
+        "rows": ["row1", "row2"],
+        choices: [1, 2, 3, 4]
+      }
+    ]
+  };
+  const matrix = <QuestionMatrixDropdownModel>creator.survey.getQuestionByName("q1");
+  creator.selectElement(matrix.columns[0]);
+  let question = matrix.visibleRows[0].cells[0].question;
+  let editSurvey = new MatrixCellWrapperEditSurvey(creator, question, matrix.columns[0]);
+  let editQuestion = <QuestionCheckboxModel>editSurvey.question;
+  expect(editQuestion.getType()).toEqual("dropdown");
+  editQuestion.choices = [1, 2];
+  editSurvey.apply();
+  expect(matrix.columns[0].cellType).toBe("dropdown");
+  expect(matrix.columns[0].choices).toHaveLength(2);
+});

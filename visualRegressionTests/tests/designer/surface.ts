@@ -852,7 +852,7 @@ test("Matrix dynamic with detail two questions + select", async (t) => {
       ],
     };
     await setJSON(json);
-    await t.click(Selector(".sd-table__cell--detail-panel .svc-row").nth(0), { offsetX: -5, offsetY: -5 })
+    await t.click(Selector(".sd-table__cell--detail-panel .svc-row").nth(0), { offsetX: -25, offsetY: -25 })
       .expect(Selector(".svc-question__content--selected").visible).ok();
     await takeElementScreenshot("surface-matrix-detail-two-questions-select.png", Selector(".svc-question__content"), t, comparer);
   });
