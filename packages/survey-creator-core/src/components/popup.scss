@@ -60,8 +60,8 @@
     color: var(--ctr-popup-title-color, $foreground);
   }
 
-  .sv-popup__container,
-  .sv-popup--dropdown-overlay.sv-popup--tablet .sv-popup__body-content {
+  &.sv-popup--dropdown-overlay.sv-popup--tablet .sv-popup__body-content,
+  .sv-popup__body-content {
     border-radius: var(--ctr-popup-menu-corner-radius, calcSize(0.5));
   }
 
