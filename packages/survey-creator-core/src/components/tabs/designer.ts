@@ -221,6 +221,7 @@ export class TabDesignerViewModel extends Base {
 
   private pagesAnimation = new AnimationGroup(this.getPagesAnimationOptions(), (val) => {
     this._pages = val;
+    this._pages.forEach(page => delete page["droppedFrom"]);
   }, () => this._pages)
 
   private getPagesAnimationOptions(): IAnimationGroupConsumer<PageModel> {
@@ -242,7 +243,23 @@ export class TabDesignerViewModel extends Base {
         return this.animationAllowed;
       },
       getAnimatedElement: (item) => SurveyElementAdornerBase.GetAdorner(item)?.rootElement.parentElement,
-      getRerenderEvent: () => this.onElementRerendered
+      getRerenderEvent: () => this.onElementRerendered,
+      onCompareArrays(addedItems, deletedItems, reorderedItems, mergedItems) {
+        const droppedPage = mergedItems.filter(page => page["droppedFrom"] !== undefined)[0];
+        if(droppedPage) {
+          addedItems.splice(0, addedItems.length);
+          deletedItems.splice(0, addedItems.length);
+          reorderedItems.splice(0, reorderedItems.length);
+          addedItems.push(droppedPage);
+          const ghostPage = new PageModel();
+          ghostPage.setSurveyImpl(droppedPage.survey as SurveyModel);
+          ghostPage.title = droppedPage.title;
+          ghostPage.num = droppedPage.num;
+          ghostPage["isGhost"] = true;
+          deletedItems.push(ghostPage);
+          mergedItems.splice(droppedPage["droppedFrom"], 0, ghostPage);
+        }
+      },
     };
   }
 

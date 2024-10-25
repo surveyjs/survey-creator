@@ -393,12 +393,12 @@ svc-page {
   }
 }
 
-$svc-page-fade-in-duration: var(--sjs-svc-page-fade-in-duration, 250ms);
-$svc-page-move-in-duration: var(--sjs-svc-page-move-in-duration, 250ms);
-$svc-page-fade-in-delay: var(--sjs-svc-page-fade-in-delay, 100ms);
-$svc-page-fade-out-duration: var(--sjs-svc-page-fade-out-duration, 250ms);
-$svc-page-move-out-duration: var(--sjs-svc-page-move-out-duration, 250ms);
-$svc-page-move-out-delay: var(--sjs-svc-page-move-out-delay, 100ms);
+$svc-page-fade-in-duration: var(--sjs-svc-page-fade-in-duration, 2500ms);
+$svc-page-move-in-duration: var(--sjs-svc-page-move-in-duration, 2500ms);
+$svc-page-fade-in-delay: var(--sjs-svc-page-fade-in-delay, 1000ms);
+$svc-page-fade-out-duration: var(--sjs-svc-page-fade-out-duration, 2500ms);
+$svc-page-move-out-duration: var(--sjs-svc-page-move-out-duration, 2500ms);
+$svc-page-move-out-delay: var(--sjs-svc-page-move-out-delay, 1000ms);
 
 .svc-page--enter,
 .svc-page--leave {
