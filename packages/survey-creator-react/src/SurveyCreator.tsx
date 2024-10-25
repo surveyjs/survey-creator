@@ -15,7 +15,8 @@ import {
   SurveyElementBase,
   SurveyLocStringViewer,
   Survey,
-  SvgBundleComponent
+  SvgBundleComponent,
+  PopupModal
 } from "survey-react-ui";
 import {
   ICreatorOptions,
@@ -91,6 +92,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
     return (
       <div className={this.creator.getRootCss()} ref={this.rootNode} style={creatorStyles}>
         <SvgBundleComponent></SvgBundleComponent>
+        <PopupModal></PopupModal>
         <div className={areaClassName}>
           <div className={fullContainerClassName}>
             <div className="svc-flex-column svc-flex-row__element svc-flex-row__element--growing">
