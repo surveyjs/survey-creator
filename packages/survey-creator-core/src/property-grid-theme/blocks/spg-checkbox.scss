@@ -13,6 +13,11 @@
   .spg-checkbox__caption {
     color: var(--ctr-checkbox-text-color-disabled, $foreground-light);
   }
+
+  .spg-checkbox__rectangle {
+    border: var(--ctr-checkbox-border-width, 1px) solid var(--ctr-checkbox-border-color-disabled, rgba(0, 0, 0, 0.16));
+    background: var(--ctr-checkbox-background-color-disabled, #f3f3f3);
+  }
 }
 
 .spg-checkbox__caption {
@@ -40,12 +45,6 @@
 .spg-checkbox:hover {
   .spg-checkbox__rectangle {
     background-color: var(--ctr-checkbox-background-color-hovered, $background-dim);
-  }
-}
-
-.spg-checkbox--disabled {
-  .spg-checkbox__rectangle:hover {
-    background: var(--ctr-checkbox-background-color-disabled, $background);
   }
 }
 

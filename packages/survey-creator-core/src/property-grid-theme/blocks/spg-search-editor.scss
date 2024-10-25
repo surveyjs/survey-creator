@@ -99,14 +99,9 @@
 }
 
 .spg-search-editor_bar-item:not(.sv-action-bar-item--pressed) {
-
   &:hover:enabled,
   &:focus:enabled {
-    background: var(--ctr-search-button-background-color-clear-hovered, $background-dim);
-
-    .sv-action-bar-item__icon use {
-      fill: var(--ctr-search-button-icon-color-clear-hovered, $foreground-light)
-    }
+    background-color: var(--ctr-property-grid-search-button-background-color-hovered, $background-dim);
   }
 }
 

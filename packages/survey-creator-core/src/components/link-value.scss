@@ -9,7 +9,7 @@
 }
 .svc-link-value-button {
   margin-left: calcSize(-2);
-  border-radius: var(--ctr-actionbar-button-corner-radius);
+  border-radius: var(--ctr-actionbar-button-corner-radius, calcSize(12.5));
 }
 .svc-question-link__clear-button {
   color: $red;

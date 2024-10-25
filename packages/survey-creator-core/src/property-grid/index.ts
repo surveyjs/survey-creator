@@ -372,7 +372,7 @@ export class PropertyGridTitleActionsCreator {
     var helpAction = this.createPropertyHelpAction(question);
     if (!!helpAction) {
       actions.unshift(helpAction);
-      question.getTitleToolbar().containerCss += " spg-title-toolobar--single-help-action";
+      question.getTitleToolbar().containerCss += " spg-title-toolbar--single-help-action";
       helpAction.iconSize = 16;
     }
     if (actions.length > 0) {

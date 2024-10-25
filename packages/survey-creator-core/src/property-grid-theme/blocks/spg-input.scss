@@ -41,6 +41,7 @@
 .spg-input:disabled::placeholder {
   color: var(--ctr-editor-content-text-color-disabled, $foreground);
   opacity: var(--ctr-editor-content-text-opacity-disabled, 0.25);
+  background-color: var(--ctr-editor-background-color-disabled, $background);
 }
 
 input.spg-input:read-only,
@@ -77,16 +78,20 @@ input.spg-input:read-only::placeholder {
     opacity: var(--ctr-editor-button-icon-opacity-pressed, 0.5);
   }
 
-  &.spg-input__edit-button--disabled,
-  &:disabled {
-    opacity: var(--ctr-editor-button-icon-opacity-disabled, 0.25);
-    background: var(--ctr-editor-background-color, $background);
-  }
-
   svg {
     width: var(--ctr-editor-button-icon-width, 24px);
     height: var(--ctr-editor-button-icon-height, 24px);
     fill: var(--ctr-editor-button-icon-color, $foreground-dim-light);
+  }
+}
+
+.spg-input__edit-button--disabled,
+.spg-input__edit-button:disabled {
+  opacity: var(--ctr-editor-button-icon-opacity-disabled, 0.25);
+  background: var(--ctr-editor-background-color-disabled, $background);
+
+  svg {
+    fill: var(--ctr-editor-button-icon-color-disabled, $foreground-dim-light);
   }
 }
 

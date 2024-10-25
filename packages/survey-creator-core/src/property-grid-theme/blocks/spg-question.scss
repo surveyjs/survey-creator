@@ -6,6 +6,10 @@
   border-radius: var(--ctr-editor-corner-radius);
 }
 
+.spg-question.spg-question--disabled {
+  background-color: var(--ctr-editor-background-color-disabled);
+}
+
 .spg-question__header {
   width: 100%;
 }
@@ -17,6 +21,10 @@
   padding: calcSize(1) 0;
   color: var(--ctr-label-text-color, $foreground-light);
   box-sizing: border-box;
+}
+.spg-question__title.sd-element__title--disabled {
+  opacity: var(--ctr-editor-label-opacity-disabled, 0.25);
+  color: var(--ctr-editor-label-color-disabled, $foreground-dim);
 }
 
 .spg-question__content {
