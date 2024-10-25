@@ -60,6 +60,11 @@
     color: var(--ctr-popup-title-color, $foreground);
   }
 
+  .sv-popup__container,
+  .sv-popup--dropdown-overlay.sv-popup--tablet .sv-popup__body-content {
+    border-radius: var(--ctr-popup-menu-corner-radius, calcSize(0.5));
+  }
+
   &.sv-popup--dropdown {
     .sv-popup__body-content {
       background-color: var(--ctr-contextual-menu-background-color, $background);
@@ -70,6 +75,11 @@
     .sv-popup__body-content {
       background: unset;
     }
+  }
+
+  .sv-list {
+    padding-inline-start: var(--ctr-list-padding-left);
+    padding-inline-end: var(--ctr-list-padding-right);
   }
 
   .sv-list__filter {
@@ -95,6 +105,7 @@
     @include ctrDefaultFont;
     color: var(--ctr-list-item-text-color, $foreground-dim);
     transition: background-color $creator-transition-duration, color $creator-transition-duration;
+    border-radius: var(--ctr-list-item-corner-radius);
   }
 
   .sv-list__item-icon use {
@@ -139,11 +150,18 @@
   &.sv-popup--dropdown-overlay {
     .sv-popup__button.sv-popup__button {
       color: var(--ctr-actionbar-button-text-color, $primary);
+      border-radius: var(--ctr-actionbar-button-corner-radius, calcSize(1));
+      padding: var(--ctr-actionbar-button-padding-top-medium-text, calcSize(0.5))
+        var(--ctr-actionbar-button-padding-right-medium-text, calcSize(2))
+        var(--ctr-actionbar-button-padding-bottom-medium-text, calcSize(0.5))
+        var(--ctr-actionbar-button-padding-left-medium-text, calcSize(2));
     }
 
     .sv-popup__body-footer {
-      background-color: var(--ctr-contextual-menu-footer-background-color, $background-dim);
-      border-top: 1px solid var(--ctr-contextual-menu-footer-border-color, $border-light);
+      background-color: var(--ctr-popup-menu-footer-background-color, $background-dim);
+      border-top: 1px solid var(--ctr-popup-menu-footer-border-color, $border-light);
+      padding: var(--ctr-popup-menu-footer-padding-top, calcSize(1)) var(--ctr-popup-menu-footer-padding-right, 0)
+        var(--ctr-popup-menu-footer-padding-bottom, calcSize(1)) var(--ctr-popup-menu-footer-padding-left, 0);
     }
 
     .sv-list__empty-container {
@@ -195,10 +213,6 @@
           fill: var(--ctr-list-item-icon-color-hovered, $foreground-light);
         }
       }
-    }
-
-    .sd-btn {
-      background: var(--ctr-button-background-color, rgba(0, 0, 0, 0));
     }
   }
 

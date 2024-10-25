@@ -38,7 +38,7 @@
   @include ctrDefaultFont;
   appearance: none;
   box-shadow: none;
-  border-radius: calcSize(0.5);
+  border-radius: var(--ctr-data-table-cell-corner-radius-focused, calcSize(0.5));
   background-color: var(--ctr-data-table-row-background-color, transparent);
   padding: calcSize(1);
   height: auto;

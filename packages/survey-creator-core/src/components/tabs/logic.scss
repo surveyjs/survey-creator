@@ -183,11 +183,13 @@
   button.sl-panel__done-button {
     @include ctrDefaultBoldFont;
     width: auto;
-    padding: calcSize(1) calcSize(4);
     margin: calcSize(2) 0 0 0;
     color: var(--ctr-expression-item-text-color-button, $primary);
     background-color: var(--ctr-expression-item-background-color-button, $primary-light);
-    border-radius: calcSize(12.5);
+    border-radius: var(--ctr-expression-item-corner-radius, calcSize(12.5));
+    padding: var(--ctr-expression-item-padding-top, calcSize(1))
+      var(--ctr-expression-item-padding-right-button, calcSize(4))
+      var(--ctr-expression-item-padding-bottom, calcSize(1)) var(--ctr-expression-item-padding-left-button, calcSize(4));
 
     display: flex;
     align-items: center;

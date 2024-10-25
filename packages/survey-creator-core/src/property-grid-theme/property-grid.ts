@@ -192,7 +192,7 @@ export var propertyGridCss = {
     onError: "spg-input--error",
     selectWrapper: "sv-dropdown_select-wrapper spg-dropdown_select-wrapper",
     chevronButton: "sd-dropdown_chevron-button spg-dropdown_chevron-button",
-    chevronButtonSvg: "sd-dropdown_chevron-button-svg",
+    chevronButtonSvg: "sd-dropdown_chevron-button-svg spg-dropdown_chevron-button-svg",
     chevronButtonIconId: "icon-chevron",
   },
   imagepicker: {
