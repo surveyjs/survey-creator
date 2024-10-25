@@ -113,12 +113,19 @@ SurveyJS Team follows the [GitHub flow](https://docs.github.com/en/get-started/u
 1. Fork the repository and create a branch from `master`.
 2. Change the code as required and add a test to ensure that your code works as expected.
 3. If you're implementing a UI feature, make sure to do this for the following frontend frameworks supported by SurveyJS: React, Angular, Vue 2, Vue 3, and Knockout.
-4. Run our test suite from within folders nested in the [`packages`](./packages/) directory and ensure all tests are successfully passed:
+4. Open folders in the [`packages`](./packages/) directory and follow the instructions from README files to build Survey Creator from sources:
+   - [Survey Creator Model](./packages/survey-creator-core/README.md#build-the-survey-creator-model-from-sources)
+   - [React](./packages/survey-creator-react/README.md#build-survey-creator--form-builder-for-react-from-sources)
+   - [Angular](./packages/survey-creator-angular/README.md#build-survey-creator--form-builder-for-angular-from-sources)
+   - [Vue 3](./packages/survey-creator-vue/README.md#build-survey-creator--form-builder-for-vue-3-from-sources)
+   - [Knockout](./packages/survey-creator-knockout/README.md#build-survey-creator--form-builder-for-knockout-from-sources)
+   - [HTML/CSS/JavaScript](./packages/survey-creator-js/README.md#build-survey-creator--form-builder-for-htmlcssjavascript-applications-from-sources)
+5. Run our test suite from within the `packages` folders and ensure all tests are successfully passed:
      - Unit tests: `npm run test`
      - Functional tests: `npm run testcafe`
      - Screenshot tests: `npm run visual-regression-tests`
      - Lint checks: `npm run lint`
-5. Push your branch to our repository and create a pull request.
+6. Push your branch to our repository and create a pull request.
 
 ## Style Guides
 
