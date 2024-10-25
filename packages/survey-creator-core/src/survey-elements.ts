@@ -430,7 +430,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       const indexOfDraggedPage = survey.pages.indexOf(dragged);
       const indexOfDropTarget = survey.pages.indexOf(this.dropTarget) + (this.dragOverLocation === DragTypeOverMeEnum.Top ? 0 : 1);
       if(indexOfDraggedPage !== indexOfDropTarget) {
-        dragged["droppedFrom"] = indexOfDraggedPage < indexOfDropTarget ? indexOfDraggedPage : indexOfDraggedPage + 1;
+        dragged["draggedFrom"] = indexOfDraggedPage < indexOfDropTarget ? indexOfDraggedPage : indexOfDraggedPage + 1;
       }
       survey.pages.splice(indexOfDraggedPage, 1);
       survey.pages.splice(indexOfDropTarget, 0, dragged);

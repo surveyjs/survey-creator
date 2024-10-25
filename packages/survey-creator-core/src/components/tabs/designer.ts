@@ -221,7 +221,7 @@ export class TabDesignerViewModel extends Base {
 
   private pagesAnimation = new AnimationGroup(this.getPagesAnimationOptions(), (val) => {
     this._pages = val;
-    this._pages.forEach(page => delete page["droppedFrom"]);
+    this._pages.forEach(page => delete page["draggedFrom"]);
   }, () => this._pages)
 
   private getPagesAnimationOptions(): IAnimationGroupConsumer<PageModel> {
@@ -244,20 +244,18 @@ export class TabDesignerViewModel extends Base {
       },
       getAnimatedElement: (item) => SurveyElementAdornerBase.GetAdorner(item)?.rootElement.parentElement,
       getRerenderEvent: () => this.onElementRerendered,
-      onCompareArrays(addedItems, deletedItems, reorderedItems, mergedItems) {
-        const droppedPage = mergedItems.filter(page => page["droppedFrom"] !== undefined)[0];
+      onCompareArrays(options) {
+        const droppedPage = options.mergedItems.filter(page => page["draggedFrom"] !== undefined)[0];
         if(droppedPage) {
-          addedItems.splice(0, addedItems.length);
-          deletedItems.splice(0, addedItems.length);
-          reorderedItems.splice(0, reorderedItems.length);
-          addedItems.push(droppedPage);
+          options.reorderedItems = [];
+          options.addedItems = [droppedPage];
           const ghostPage = new PageModel();
           ghostPage.setSurveyImpl(droppedPage.survey as SurveyModel);
           ghostPage.title = droppedPage.title;
           ghostPage.num = droppedPage.num;
           ghostPage["isGhost"] = true;
-          deletedItems.push(ghostPage);
-          mergedItems.splice(droppedPage["droppedFrom"], 0, ghostPage);
+          options.deletedItems = [ghostPage];
+          options.mergedItems.splice(droppedPage["draggedFrom"], 0, ghostPage);
         }
       },
     };
