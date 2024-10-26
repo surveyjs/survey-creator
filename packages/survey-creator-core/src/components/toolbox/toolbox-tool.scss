@@ -276,7 +276,8 @@
 
 .svc-toolbox-subtypes {
   .sv-popup__container {
-    margin-top: calc(0px - var(--ctr-toolbox-submenu-group-margin-top, 0px) - var(--ctr-toolbox-item-padding-top, calcSize(1)));
+    --toolbox-item-padding-top: calc(1 * #{$base-unit});
+    margin-top: calc(0px - var(--ctr-toolbox-submenu-group-margin-top, 0px) - var(--ctr-toolbox-item-padding-top, --toolbox-item-padding-top));
     padding: 0;
     padding-inline-start: var(--ctr-toolbox-submenu-offset, calcSize(3.5));
     box-shadow: unset;
