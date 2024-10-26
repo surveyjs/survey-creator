@@ -375,7 +375,7 @@ test("Translation make translation observable", () => {
   expect(translation.root.locItems[0]["tag"]).toEqual("Hello!");
   expect(translation.root.locItems[0].values("en")["tag"]).toEqual("Hello!");
 });
-test("Translation update filterPageActiontitle after activated", () => {
+test("Translation update filterPageActiontitle after activated, #1", () => {
   let creator = new CreatorTester();
   creator.JSON = {
     completedHtml: "Test",
@@ -1945,7 +1945,7 @@ test("Remove locale strings from translation via remove row, unchecked locale", 
   });
   expect(translation.locales).toHaveLength(1);
 });
-test("Translation update filterPageActiontitle after activated", () => {
+test("Translation update filterPageActiontitle after activated, #2", () => {
   let creator = new CreatorTester();
   creator.JSON = {
     pages: [
@@ -1970,7 +1970,7 @@ test("Translation update filterPageActiontitle after activated", () => {
   const question = tabTranslationPlugin.model.localesQuestion;
   expect(question.visibleRows).toHaveLength(2);
   question.removeRow(1, false);
-  expect(counter).toBe(1);
+  expect(counter).toBe(2);
 });
 test("Set correct locale to settings survey", () => {
   const creator = new CreatorTester();

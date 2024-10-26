@@ -7,10 +7,13 @@ svc-toolbox {
 }
 
 .svc-toolbox {
+  --toolbox-width: var(--ctr-toolbox-min-width, 224.984375px /*calcSize(28)*/);
+  --toolbox-width-compact: var(--ctr-toolbox-width-compact, calc(9 *#{$base-unit}));
+
+  width: auto;
   height: 100%;
   display: flex;
   flex-direction: column;
-  width: var(--ctr-toolbox-min-width, 224.984375px /*calcSize(28)*/);
   .spg-search-editor_container {
     background: var(--ctr-toolbox-background-color, $background-dim);
     padding-top: var(--ctr-toolbox-search-padding-top, calcSize(2.5));
@@ -53,6 +56,7 @@ svc-toolbox {
   flex-direction: column;
   border-inline-end: var(--ctr-toolbox-border-width-right, 0px) solid var(--ctr-toolbox-border-color, transparent);
   background: var(--ctr-toolbox-background-color, $background-dim);
+  width: var(--toolbox-width);
 }
 
 .svc-toolbox__scroll-wrapper {
@@ -93,10 +97,9 @@ svc-toolbox {
   overflow-x: hidden;
   width: calcSize(2);
   margin-inline-start: calcSize(-0.5);
-  display: var(--ctr-toolbox-scrollbar-display, none);
+  display: none;
   z-index: 30;
-  padding: var(--ctr-toolbox-padding-top, calcSize(1)) 0
-  var(--ctr-toolbox-padding-bottom, calcSize(2)) 0;
+  padding: var(--ctr-toolbox-padding-top, calcSize(1)) 0 var(--ctr-toolbox-padding-bottom, calcSize(2)) 0;
   @-moz-document url-prefix() {
     scrollbar-width: thin;
     scrollbar-color: $border transparent;
@@ -113,57 +116,42 @@ svc-toolbox {
     direction: initial;
   }
 }
-
 .svc-toolbox--scrollable {
-  width: var(--ctr-toolbox-min-width, 236.984375px);
+  --toolbox-width: var(--ctr-toolbox-min-width, 236.984375px);
 }
-
 .svc-toolbox--compact {
-  width: var(--ctr-toolbox-width-compact, calcSize(10.5));
+  margin-inline-end: var(--ctr-toolbox-margin-left-compact, calcSize(1.5));
   .svc-toolbox__panel {
     overflow: visible;
+    width: var(--toolbox-width-compact);
   }
   .svc-toolbox__scroller {
     width: 100vw;
     padding: var(--ctr-toolbox-padding-top, calcSize(1.5)) var(--ctr-toolbox-group-padding-right-compact, calcSize(1.5))
       var(--ctr-toolbox-padding-bottom, calcSize(2)) var(--ctr-toolbox-group-padding-left-compact, calcSize(1.5));
+    pointer-events: none;
   }
   .spg-search-editor_container {
     opacity: 0;
     position: absolute;
   }
   .svc-toolbox__search-container {
-    border-bottom: 0;
     padding-top: var(--ctr-toolbox-padding-top, calcSize(1.5));
     padding-inline-start: var(--ctr-toolbox-group-padding-left, calcSize(1.5));
-    padding-inline-end: var(--ctr-toolbox-group-padding-left, calcSize(1));
+    padding-inline-end: var(--ctr-toolbox-group-padding-left, calcSize(1.5));
+    padding-bottom: calc(var(--ctr-toolbox-separator-padding-top, 8px) + var(--ctr-toolbox-gap, 4px));
   }
   .svc-toolbox__category-separator {
     margin-top: calc(var(--ctr-toolbox-separator-padding-top, 8px) + var(--ctr-toolbox-gap, 4px));
     width: var(--ctr-toolbox-separator-width-compact, calcSize(5));
     margin-inline-end: calc(
-      var(--ctr-toolbox-separator-padding-right-compact, 16px) -
-        var(--ctr-toolbox-group-padding-left-compact, 12px) -
+      var(--ctr-toolbox-separator-padding-right-compact, 16px) - var(--ctr-toolbox-group-padding-left-compact, 12px) -
         var(--ctr-toolbox-item-margin-horizontal-no-text, 0px)
     );
-    margin-bottom: var(--ctr-toolbox-separator-padding-bottom, 8px);
     margin-inline-start: calc(
-      var(--ctr-toolbox-separator-padding-left-compact, 16px) -
-        var(--ctr-toolbox-group-padding-left-compact, 12px) -
+      var(--ctr-toolbox-separator-padding-left-compact, 16px) - var(--ctr-toolbox-group-padding-left-compact, 12px) -
         var(--ctr-toolbox-item-margin-horizontal-no-text, 0px)
     );
-  }
-  .svc-toolbox__category-separator--search {
-    margin-inline-end: calc(
-      var(--ctr-toolbox-separator-padding-right-compact, 16px) -
-        var(--ctr-toolbox-group-padding-left-compact, 12px)
-    );
-    margin-bottom: 0;
-    margin-inline-start: calc(
-      var(--ctr-toolbox-separator-padding-left-compact, 16px) -
-        var(--ctr-toolbox-group-padding-left-compact, 12px)
-    );
-    min-height: 1px;
   }
 }
 
@@ -175,9 +163,15 @@ svc-toolbox {
 }
 
 .svc-toolbox--flyout {
+  --toolbox-width: var(--ctr-toolbox-min-width, calc(32 *#{$base-unit}));
+  margin-inline-end: var(--ctr-toolbox-margin-left-compact, calcSize(1.5));
   overflow: visible;
   max-width: var(--ctr-toolbox-width-compact, calcSize(10.5));
   overflow: visible;
+  width: var(--toolbox-width-compact);
+  max-width: var(--ctr-toolbox-width-compact, calcSize(10.5));
+  overflow: visible;
+  border-inline-end: var(--ctr-toolbox-border-width-right, 0px) solid transparent;
 
   .spg-search-editor_container {
     opacity: 1;
@@ -188,8 +182,14 @@ svc-toolbox {
     z-index: 200;
     width: var(--ctr-toolbox-min-width, calcSize(32));
     position: relative;
-    box-shadow: var(--ctr-toolbox-shadow-floating-2-offset-x, 0px) var(--ctr-toolbox-shadow-floating-2-offset-y, 8px) var(--ctr-toolbox-shadow-floating-2-blur, 16px) var(--ctr-toolbox-shadow-floating-2-spread, 0px) var(--ctr-toolbox-shadow-floating-2-color, rgba(0, 0, 0, 0.10)), 
-                var(--ctr-toolbox-shadow-floating-1-offset-x, 0px) var(--ctr-toolbox-shadow-floating-1-offset-y, 2px) var(--ctr-toolbox-shadow-floating-1-blur, 6px) var(--ctr-toolbox-shadow-floating-1-spread, 0px) var(--ctr-toolbox-shadow-floating-1-color, rgba(0, 0, 0, 0.10));
+    box-shadow:
+      var(--ctr-toolbox-shadow-floating-2-offset-x, 0px) var(--ctr-toolbox-shadow-floating-2-offset-y, 8px)
+        var(--ctr-toolbox-shadow-floating-2-blur, 16px) var(--ctr-toolbox-shadow-floating-2-spread, 0px)
+        var(--ctr-toolbox-shadow-floating-2-color, rgba(0, 0, 0, 0.1)),
+      var(--ctr-toolbox-shadow-floating-1-offset-x, 0px) var(--ctr-toolbox-shadow-floating-1-offset-y, 2px)
+        var(--ctr-toolbox-shadow-floating-1-blur, 6px) var(--ctr-toolbox-shadow-floating-1-spread, 0px)
+        var(--ctr-toolbox-shadow-floating-1-color, rgba(0, 0, 0, 0.1));
+    transition: box-shadow $creator-transition-duration;
   }
 }
 .svc-toolbox--searchable {
@@ -197,8 +197,6 @@ svc-toolbox {
     display: flex;
   }
 }
-
-
 
 .svc-toolbox__container {
   width: 100%;
@@ -211,11 +209,11 @@ svc-toolbox {
   flex-direction: column;
   box-sizing: border-box;
   background: var(--ctr-toolbox-background-color, $background-dim);
-  border-bottom: var(--ctr-toolbox-search-border-width-bottom, 1px) solid var(--ctr-toolbox-search-border-color, $border);
+  border-bottom: var(--ctr-toolbox-search-border-width-bottom, 1px) solid transparent;
 
   svg {
     pointer-events: none;
-  } 
+  }
 }
 
 .svc-toolbox__category {
@@ -231,26 +229,40 @@ svc-toolbox {
   margin: calcSize(1.5) calcSize(0.5) calcSize(1);
 }
 
+.svc-toolbox__category-separator--search {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: -1px;
+  min-height: 1px;
+  width: var(--toolbox-width);
+  align-self: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .svc-toolbox--no-separators {
   .svc-toolbox__category-separator {
     display: none;
   }
+  .svc-toolbox__category-separator--search {
+    display: block;
+  }
 }
 
-
 .svc-toolbox__category-header-wrapper {
-  padding: var(--ctr-toolbox-group-header-margin-top, 0px) var(--ctr-toolbox-group-header-margin-left, 0px) var(--ctr-toolbox-group-header-margin-bottom, 0px) var(--ctr-toolbox-group-header-margin-left, 0px);
+  padding: var(--ctr-toolbox-group-header-margin-top, 0px) var(--ctr-toolbox-group-header-margin-left, 0px)
+    var(--ctr-toolbox-group-header-margin-bottom, 0px) var(--ctr-toolbox-group-header-margin-left, 0px);
   margin-inline-start: calc(0px - var(--ctr-toolbox-group-padding-left, 0px));
   margin-inline-end: calc(0px - var(--ctr-toolbox-group-padding-right, 0px));
   align-self: stretch;
 }
 .svc-toolbox__category-header {
   height: calcSize(5);
-  padding-top: var(--ctr-toolbox-group-header-padding-top, calcSize(1.5)); 
-  padding-inline-end: var(--ctr-toolbox-group-header-padding-right, calcSize(1.5)); 
-  padding-bottom: var(--ctr-toolbox-group-header-padding-bottom, calcSize(1.5)); 
+  padding-top: var(--ctr-toolbox-group-header-padding-top, calcSize(1.5));
+  padding-inline-end: var(--ctr-toolbox-group-header-padding-right, calcSize(1.5));
+  padding-bottom: var(--ctr-toolbox-group-header-padding-bottom, calcSize(1.5));
   padding-inline-start: var(--ctr-toolbox-group-header-padding-left, calcSize(1.5));
-  
+
   // box-shadow: 0px 1px 0px $border;
   border-bottom: 1px solid $border;
   box-sizing: border-box;

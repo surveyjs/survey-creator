@@ -5,9 +5,9 @@
         <ng-container *ngIf="model.isCompactRendered">
           <svc-toolbox-tool [creator]="creator" [item]="searchItem" [parentModel]="model"
             [isCompact]="model.isCompactRendered"></svc-toolbox-tool>
-          <div class="svc-toolbox__category-separator svc-toolbox__category-separator--search"></div>
         </ng-container>
         <svc-search [model]="model.searchManager"></svc-search>
+        <div class="svc-toolbox__category-separator svc-toolbox__category-separator--search"></div>
       </div>
       <div class="svc-toolbox__scroll-wrapper">
         <div class="svc-toolbox__scroller sv-drag-target-skipped" (scroll)="model.onScroll(model, $event)">
