@@ -278,7 +278,7 @@
     --toolbox-item-padding-top: calc(1 * #{$base-unit});
     margin-top: calc(
       0px - var(--ctr-toolbox-submenu-group-margin-top, 0px) -
-        var(--ctr-toolbox-item-padding-top, --toolbox-item-padding-top)
+        var(--ctr-toolbox-item-padding-top, var(--toolbox-item-padding-top))
     );
     padding: 0;
     padding-inline-start: var(--ctr-toolbox-submenu-offset, calcSize(0.5));
