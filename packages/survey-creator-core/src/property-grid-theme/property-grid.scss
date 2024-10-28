@@ -31,12 +31,26 @@
 .spg-container {
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
-.spg-container_search .spg-root-modern {
-  height: calc(100% - 1px - calcSize(7));
+.spg-root-modern {
+  height: 0;
+  flex-grow: 1;
   overflow: auto;
 }
+
+.spg-root-modern.spg-root--one-category {
+  background-color: var(--ctr-property-grid-form-background-color, $background-dim);
+  border-right: unset;
+
+  .spg-page.spg-body__page {
+    box-shadow: unset;
+  }
+}
+
+
 
 .sv-popup--modal {
   &.sv-property-editor .sv-popup__container {
