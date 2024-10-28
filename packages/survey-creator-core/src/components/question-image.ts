@@ -8,27 +8,30 @@ import { getLocString } from "../editorLocalization";
 require("./question-image.scss");
 
 export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
+  private editorSurveyModel: SurveyModel;
   public filePresentationModel: QuestionFileModel;
 
   private initFilePresentationModel(): void {
     this.filePresentationModel = Serializer.createClass("file", { name: this.question.name });
-    const surveyModel = new SurveyModel();
-    this.filePresentationModel.setSurveyImpl(surveyModel);
+    this.editorSurveyModel = new SurveyModel();
+    this.filePresentationModel.setSurveyImpl(this.editorSurveyModel);
     this.filePresentationModel.forceIsInputReadOnly = !this.creator.isCanModifyProperty(this.question, "imageLink");
     this.filePresentationModel.filePlaceholder = this.placeholderText;
     this.filePresentationModel.chooseButtonCaption = this.chooseImageText;
     this.filePresentationModel.acceptedTypes = "image/*";
     this.filePresentationModel.storeDataAsText = false;
     this.filePresentationModel.cssClasses.chooseFileIconId = "icon-choosefile";
-    surveyModel.onOpenFileChooser.add((s, o: any) => {
+    this.editorSurveyModel.onOpenFileChooser.add((s, o: any) => {
       this.creator.chooseFiles(o.input, o.callback, o.context);
     });
-    surveyModel.onUploadFiles.add((s, o) => {
+    this.editorSurveyModel.onUploadFiles.add((s, o) => {
       const fileToUpload = o.files[0];
       if (!!fileToUpload) {
+        this.isUploading = true;
         this.creator.uploadFiles(o.files, this.question, (status, link) => {
           this.question.imageLink = link;
           o.callback(status, [{ content: link, file: o.files[0] }]);
+          this.isUploading = false;
         }, { element: this.question, elementType: this.question.getType(), propertyName: "imageLink" });
       }
     });
@@ -51,14 +54,9 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
 
   chooseFile(model: QuestionImageAdornerViewModel) {
     const fileInput = <HTMLInputElement>model.rootElement.getElementsByClassName("svc-choose-file-input")[0];
-    const context = { element: model.question, elementType: model.question.getType(), propertyName: "imageLink" };
-    model.creator.chooseFiles(fileInput, (files: File[]) => {
-      model.isUploading = true;
-      model.creator.uploadFiles(files, model.surveyElement as QuestionImageModel, (_, link) => {
-        (<QuestionImageModel>model.surveyElement).imageLink = link;
-        model.isUploading = false;
-      }, context);
-    }, context);
+    this.editorSurveyModel.chooseFiles(fileInput, (files: File[]) => {
+      model.filePresentationModel.loadFiles(files);
+    });
   }
   public get acceptedTypes(): string {
     return getAcceptedTypesByContentMode((this.surveyElement as QuestionImageModel).contentMode);
