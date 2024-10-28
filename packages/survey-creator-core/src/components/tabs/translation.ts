@@ -1483,7 +1483,7 @@ export class TranslationEditor {
         onHide: () => {
           this.dispose();
         },
-        cssClass: "sv-property-editor st-translation-dialog svc-creator-popup",
+        cssClass: "svc-property-editor st-translation-dialog svc-creator-popup",
         title: dialogTitle,
         displayMode: this.options.isMobileView ? "overlay" : "popup"
       }, this.options.rootElement);

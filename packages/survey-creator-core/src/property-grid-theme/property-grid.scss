@@ -53,7 +53,7 @@
 
 
 .sv-popup--modal {
-  &.sv-property-editor .sv-popup__container {
+  &.svc-property-editor .sv-popup__container {
     .sv-popup_shadow {
       background-color: transparent;
     }
@@ -82,7 +82,7 @@
   }
 }
 
-.sv-popup.sv-property-editor .sd-root-modern {
+.sv-popup.svc-property-editor .sd-root-modern {
   --sd-mobile-width: 0;
 }
 

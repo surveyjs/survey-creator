@@ -65,6 +65,10 @@
     border-radius: var(--ctr-popup-menu-corner-radius, calcSize(0.5));
   }
 
+  &.svc-property-editor.sv-popup--overlay:not(.sv-popup--dropdown-overlay) .sv-popup__body-content {
+    background-color: var(--ctr-popup-background-color, $background-dim);
+  }
+
   &.sv-popup--dropdown {
     .sv-popup__body-content {
       background-color: var(--ctr-contextual-menu-background-color, $background);
@@ -105,7 +109,7 @@
     @include ctrDefaultFont;
     color: var(--ctr-list-item-text-color, $foreground-dim);
     transition: background-color $creator-transition-duration, color $creator-transition-duration;
-    border-radius: var(--ctr-list-item-corner-radius);
+    border-radius: var(--ctr-list-item-corner-radius, 4px);
   }
 
   .sv-list__item-icon use {
@@ -150,7 +154,7 @@
   &.sv-popup--dropdown-overlay {
     .sv-popup__button.sv-popup__button {
       color: var(--ctr-actionbar-button-text-color, $primary);
-      border-radius: var(--ctr-actionbar-button-corner-radius, calcSize(1));
+      border-radius: var(--ctr-actionbar-button-corner-radius, calcSize(12.5));
       padding: var(--ctr-actionbar-button-padding-top-medium-text, calcSize(0.5))
         var(--ctr-actionbar-button-padding-right-medium-text, calcSize(2))
         var(--ctr-actionbar-button-padding-bottom-medium-text, calcSize(0.5))
