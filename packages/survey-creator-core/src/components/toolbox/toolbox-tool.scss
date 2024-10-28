@@ -16,7 +16,7 @@
 .svc-toolbox__item-icon {
   display: block;
   height: var(--ctr-toolbox-item-icon-height, calcSize(3));
-  width: var(--ctr-toolbox-item-icon-width, unset);
+  width: var(--ctr-toolbox-item-icon-width, calcSize(3));
   pointer-events: none;
 }
 .svc-toolbox__tool {
@@ -151,12 +151,6 @@
     // }
   }
 }
-.svc-toolbox__item-submenu-button {
-  background: var(--ctr-toolbox-item-submenu-button-background-color, $background-dim);
-  &:hover {
-    background: var(--ctr-toolbox-item-submenu-button-background-color-hovered, $background);
-  }
-}
 
 .svc-toolbox__tool--disabled {
   pointer-events: none;
@@ -216,20 +210,26 @@
 }
 .svc-toolbox__item-submenu-button {
   position: absolute;
-  inset-inline-end: var(--ctr-toolbox-item-submenu-button-right, calcSize(1.5));
-  top: var(--ctr-toolbox-item-submenu-button-top, calcSize(1.5));
+  inset-inline-end: var(--ctr-toolbox-item-padding-right, calcSize(1.5));
+  margin-inline-end: var(--ctr-toolbox-item-submenu-button-margin-right, 0);
+  top: calc(var(--ctr-toolbox-item-padding-top, var(--dft-toolbox-item-padding-top)) + var(--ctr-toolbox-gap, var(--dft-toolbox-gap)));
   display: inline-flex;
-  padding: var(--ctr-toolbox-item-submenu-button-padding-top, 4px)
-    var(--ctr-toolbox-item-submenu-button-padding-right, 4px) var(--ctr-toolbox-item-submenu-button-padding-bottom, 4px)
-    var(--ctr-toolbox-item-submenu-button-padding-left, 4px);
-  width: calcSize(3);
-  height: calcSize(3);
+  padding: var(--ctr-toolbox-item-submenu-button-padding-top, calcSize(0.5))
+    var(--ctr-toolbox-item-submenu-button-padding-right, calcSize(0.5)) 
+    var(--ctr-toolbox-item-submenu-button-padding-bottom, calcSize(0.5))
+    var(--ctr-toolbox-item-submenu-button-padding-left, calcSize(0.5));
   box-sizing: border-box;
   align-items: center;
   border-radius: var(--ctr-toolbox-item-submenu-button-corner-radius, 1024px);
   z-index: 40;
+  background: var(--ctr-toolbox-item-submenu-button-background-color, $background-dim);
+  &:hover {
+    background: var(--ctr-toolbox-item-submenu-button-background-color-hovered, $background);
+  }
   svg {
     fill: var(--ctr-toolbox-item-submenu-button-icon-color, $layer-1-foreground-50);
+    width: var(--ctr-toolbox-item-submenu-button-icon-width, calcSize(2));
+    height: var(--ctr-toolbox-item-submenu-button-icon-height, calcSize(2));
   }
 }
 
@@ -275,13 +275,18 @@
 
 .svc-toolbox-subtypes {
   .sv-popup__container {
-    --toolbox-item-padding-top: calc(1 * #{$base-unit});
     margin-top: calc(
       0px - var(--ctr-toolbox-submenu-group-margin-top, 0px) -
-        var(--ctr-toolbox-item-padding-top, var(--toolbox-item-padding-top))
+        var(--ctr-toolbox-item-padding-top, var(--dft-toolbox-item-padding-top))
     );
     padding: 0;
-    padding-inline-start: var(--ctr-toolbox-submenu-offset, calcSize(3.5));
+
+    padding-inline-start: calc(
+      var(--ctr-toolbox-item-padding-right, var(--dft-toolbox-item-padding-right)) + 
+      var(--ctr-toolbox-item-submenu-button-margin-right, 0px) + 
+      var(--ctr-toolbox-group-padding-right, var(--dft-toolbox-group-padding-right)) +
+      var(--ctr-toolbox-border-width-right, 0px));
+
     box-shadow: unset;
     background: unset;
   }

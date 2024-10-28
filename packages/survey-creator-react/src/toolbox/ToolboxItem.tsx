@@ -122,7 +122,7 @@ export class SurveyCreatorToolboxItem extends CreatorModelElement<
           event.persist();
           this.model.click(event);
         }}>
-        <SvgIcon size={24} iconName={this.item.iconName} className="svc-toolbox__item-icon" title={this.item.tooltip}></SvgIcon>
+        <SvgIcon size={"auto"} iconName={this.item.iconName} className="svc-toolbox__item-icon" title={this.item.tooltip}></SvgIcon>
         <span>{this.item.title}</span>
       </span>
       :
@@ -140,7 +140,7 @@ export class SurveyCreatorToolboxItem extends CreatorModelElement<
         }}
       >
         <span className="svc-toolbox__item-container">
-          {!!this.item.iconName ? <SvgIcon size={24} iconName={this.item.iconName}></SvgIcon> : null}
+          {!!this.item.iconName ? <SvgIcon size={"auto"} iconName={this.item.iconName} className="svc-toolbox__item-icon"></SvgIcon> : null}
         </span>
         {(this.props.isCompact ?
           null

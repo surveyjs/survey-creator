@@ -7,8 +7,23 @@ svc-toolbox {
 }
 
 .svc-toolbox {
+  --dft-toolbox-item-padding-top: calc(1 * #{$base-unit});
+  --dft-toolbox-group-padding-right: calc(2 * #{$base-unit});
+  --dft-toolbox-item-padding-right: calc(1.5 * #{$base-unit});
+  --dft-toolbox-gap: calc(0.5 * #{$base-unit});
+  --dft-toolbox-width-compact: calc(9 *#{$base-unit});
+
+  --thm-toolbox-width-compact: calc(
+    var(--ctr-toolbox-item-icon-width) +
+    var(--ctr-toolbox-item-padding-right-no-text) +
+    var(--ctr-toolbox-item-padding-left-no-text) +
+    var(--ctr-toolbox-item-margin-horizontal-no-text) +
+    var(--ctr-toolbox-group-padding-right) +
+    var(--ctr-toolbox-group-padding-left)
+  );
+
   --toolbox-width: var(--ctr-toolbox-min-width, 224.984375px /*calcSize(28)*/);
-  --toolbox-width-compact: var(--ctr-toolbox-width-compact, calc(9 *#{$base-unit}));
+  --toolbox-width-compact: var(--ctr-toolbox-width-compact, var(--dft-toolbox-width-compact));
 
   width: auto;
   height: 100%;
@@ -95,8 +110,8 @@ svc-toolbox {
   inset-inline-start: var(--ctr-toolbox-scrollbar-left, 0);
   overflow-y: scroll;
   overflow-x: hidden;
-  width: calcSize(2);
-  margin-inline-start: calcSize(-0.5);
+  width: fit-content;
+  margin-inline-start: -1px;
   display: none;
   z-index: 30;
   padding: var(--ctr-toolbox-padding-top, calcSize(1)) 0 var(--ctr-toolbox-padding-bottom, calcSize(2)) 0;
@@ -104,10 +119,11 @@ svc-toolbox {
     scrollbar-width: thin;
     scrollbar-color: $border transparent;
   }
-  // &::-webkit-scrollbar-track {
-  //   background: var(--ctr-toolbox-background-color, $background-dim);
-  // }
 }
+.svc-toolbox__scrollbar-sizer {
+  width: 1px;
+}
+
 .svc-toolbox:hover .svc-toolbox__scrollbar {
   display: block;
 }
