@@ -109,7 +109,7 @@
     @include ctrDefaultFont;
     color: var(--ctr-list-item-text-color, $foreground-dim);
     transition: background-color $creator-transition-duration, color $creator-transition-duration;
-    border-radius: var(--ctr-list-item-corner-radius, 4px);
+    border-radius: var(--ctr-list-item-corner-radius);
   }
 
   .sv-list__item-icon use {

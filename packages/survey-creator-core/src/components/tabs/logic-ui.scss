@@ -328,6 +328,7 @@
 
 .sl-list__item-body {
   padding-block: calcSize(1.5);
+  border-radius: var(--ctr-list-item-corner-radius, 4px);
 }
 
 .svc-logic-placeholder {

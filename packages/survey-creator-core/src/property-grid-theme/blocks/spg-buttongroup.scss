@@ -81,8 +81,16 @@
   }
   .spg-button-group__item-caption {
     opacity: var(--ctr-button-group-item-text-opacity-disabled, 0.25);
+    color: var(--ctr-button-group-item-text-color-disabled, rgba(0, 0, 0, 0.91));
   }
   &:hover {
     background-color: var(--ctr-button-group-item-background-color-disabled, $background-dim);
   }
+}
+
+.spg-button-group__item--selected.spg-button-group__item--disabled {
+  @include ctrDefaultFont;
+  box-shadow: inset 0 0 0 var(--ctr-button-group-item-border-width-selected-disabled, 1px)
+    var(--ctr-button-group-item-border-color, $border);
+  background: var(--ctr-button-group-item-background-color-selected-disabled, #f3f3f3);
 }

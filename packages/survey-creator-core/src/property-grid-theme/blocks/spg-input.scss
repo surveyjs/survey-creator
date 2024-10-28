@@ -12,16 +12,10 @@
   box-shadow: inset 0 0 0 var(--ctr-editor-border-width, 1px) var(--ctr-editor-border-color, $border-inside);
   transition: box-shadow $creator-transition-duration;
 
-  padding-top: calc(var(--ctr-editor-padding-top, calcSize(0.5)) + var(--ctr-editor-content-margin-top, calcSize(1)));
-  padding-right: calc(
-    var(--ctr-editor-padding-right, calcSize(0.5)) + var(--ctr-editor-content-margin-right, calcSize(1.5))
-  );
-  padding-bottom: calc(
-    var(--ctr-editor-padding-bottom, calcSize(0.5)) + var(--ctr-editor-content-margin-bottom, calcSize(1))
-  );
-  padding-left: calc(
-    var(--ctr-editor-padding-left, calcSize(0.5)) + var(--ctr-editor-content-margin-left, calcSize(1.5))
-  );
+  padding-top: calc(var(--ctr-editor-padding-top, 4px) + var(--ctr-editor-content-margin-top, 8px));
+  padding-right: calc(var(--ctr-editor-padding-right, 4px) + var(--ctr-editor-content-margin-right, 12px));
+  padding-bottom: calc(var(--ctr-editor-padding-bottom, 4px) + var(--ctr-editor-content-margin-bottom, 8px));
+  padding-left: calc(var(--ctr-editor-padding-left, 4px) + var(--ctr-editor-content-margin-left, 12px));
   outline: none;
   color: var(--ctr-editor-content-text-color, $foreground);
 }
