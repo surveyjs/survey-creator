@@ -40,7 +40,6 @@
   box-shadow: none;
   border-radius: var(--ctr-data-table-cell-corner-radius-focused, calcSize(0.5));
   background-color: var(--ctr-data-table-row-background-color, transparent);
-  padding: calcSize(1);
   height: auto;
 
   &[type="color"] {
@@ -113,7 +112,6 @@
 }
 .spg-table__question-wrapper {
   box-sizing: border-box;
-  padding: calcSize(0.5) 0;
 }
 
 .spg-table__row--leave,

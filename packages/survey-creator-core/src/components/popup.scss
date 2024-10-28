@@ -67,6 +67,8 @@
 
   &.svc-property-editor.sv-popup--overlay:not(.sv-popup--dropdown-overlay) .sv-popup__body-content {
     background-color: var(--ctr-popup-background-color, $background-dim);
+    border-radius: calc(4 * (var(--ctr-popup-menu-corner-radius, 4px)))
+      calc(4 * (var(--ctr-popup-menu-corner-radius, 4px))) 0px 0px;
   }
 
   &.sv-popup--dropdown {
