@@ -10,10 +10,12 @@
   border-collapse: collapse;
 
   tr {
-    border-bottom: 1px solid var(--ctr-data-table-row-border-color, $border);
+    border-bottom: var(--ctr-data-table-row-border-width, 1px) solid var(--ctr-data-table-row-border-color, $border);
     background-color: var(--ctr-data-table-row-background-color, $background);
   }
-  margin-bottom: calc(0px - var(--ctr-data-table-border-width, 1px));
+  tbody > tr:last-of-type {
+    border-bottom: var(--ctr-data-table-row-border-width-last-row, 0px);
+  }
 }
 
 .spg-table__cell {
