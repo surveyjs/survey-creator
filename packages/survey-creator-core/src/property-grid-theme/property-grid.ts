@@ -195,6 +195,17 @@ export var propertyGridCss = {
     chevronButtonSvg: "sd-dropdown_chevron-button-svg",
     chevronButtonIconId: "icon-chevron",
   },
+  buttongroup: {
+    root: "spg-button-group",
+    item: "spg-button-group__item",
+    itemIcon: "spg-button-group__item-icon",
+    itemDecorator: "spg-button-group__item-decorator",
+    itemCaption: "spg-button-group__item-caption",
+    itemHover: "spg-button-group__item--hover",
+    itemSelected: "spg-button-group__item--selected",
+    itemDisabled: "spg-button-group__item--disabled",
+    itemControl: "sv-visuallyhidden",
+  },
   imagepicker: {
     root: "spg-imagepicker",
     item: "spg-imagepicker__item",

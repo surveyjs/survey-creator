@@ -48,8 +48,8 @@ test("Change rating auto-generate", async (t) => {
     .click(question1)
     .click(choicesTab)
     .expect(items.visible).notOk()
-    .click(Selector(".sv-button-group__item-caption").withExactText("Manual"))
+    .click(Selector(".spg-button-group__item-caption").withExactText("Manual"))
     .expect(items.visible).ok()
-    .click(Selector(".sv-button-group__item-caption").withExactText("Auto-generate"))
+    .click(Selector(".spg-button-group__item-caption").withExactText("Auto-generate"))
     .expect(items.visible).notOk();
 });
