@@ -1,6 +1,7 @@
 .spg-table-wrapper {
-  border: 1px solid var(--ctr-data-table-border-color, $border);
-  border-bottom: none;
+  border: var(--ctr-data-table-border-width, 1px) solid var(--ctr-data-table-border-color, $border);
+  border-radius: var(--ctr-data-table-corner-radius, 0px);
+  overflow: hidden;
 }
 
 .spg-table {
@@ -12,6 +13,7 @@
     border-bottom: 1px solid var(--ctr-data-table-row-border-color, $border);
     background-color: var(--ctr-data-table-row-background-color, $background);
   }
+  margin-bottom: calc(0px - var(--ctr-data-table-border-width, 1px));
 }
 
 .spg-table__cell {
@@ -100,9 +102,10 @@
     var(--ctr-data-table-row-padding-bottom-header, #{calcSize(0.5)})
     var(--ctr-data-table-cell-padding-left, #{calcSize(1)});
 
+  @include ctrSmallFont;
+  color: var(--ctr-data-table-cell-text-color-header, $foreground-light);
+  
   span {
-    @include ctrSmallFont;
-    color: var(--ctr-data-table-cell-text-color-header, $foreground-light);
     display: none;
   }
 
