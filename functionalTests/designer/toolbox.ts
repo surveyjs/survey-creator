@@ -355,6 +355,12 @@ test("toolbox subTypes: add items by drag-n-drop", async (t) => {
     .hover(getToolboxItemByText("Rating Scale").parent(".svc-toolbox__tool").find(".svc-toolbox__item-submenu-button"))
     .wait(400)
     .expect(toolboxSubTypesPopup.visible).ok()
+    .hover(getToolboxItemByText("Rating Scale").parent(".svc-toolbox__tool"))
+    .wait(400)
+    .expect(toolboxSubTypesPopup.visible).notOk()
+    .hover(getToolboxItemByText("Rating Scale").parent(".svc-toolbox__tool").find(".svc-toolbox__item-submenu-button"))
+    .wait(400)
+    .expect(toolboxSubTypesPopup.visible).ok()
 
     .hover(getSubToolboxItemByText("Smileys"), { speed: 0.1 })
     .wait(400)

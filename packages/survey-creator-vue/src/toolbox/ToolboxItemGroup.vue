@@ -6,14 +6,14 @@
     :creator="creator"
     :isCompact="isCompact"
   ></SvComponent>
-  <div class="svc-toolbox__item-submenu-button" @mouseover="hover">
+  <div class="svc-toolbox__item-submenu-button" @mouseover="hover" @mouseleave="leave">
     <SvComponent :is="'sv-svg-icon'" :iconName="item.subitemsButtonIcon" :size="item.iconSize"></SvComponent>
+    <SvComponent
+      :is="'sv-popup'"
+      :model="item.popupModel"
+      :getArea="item.getArea"
+    ></SvComponent>
   </div>
-  <SvComponent
-    :is="'sv-popup'"
-    :model="item.popupModel"
-    :getArea="item.getArea"
-  ></SvComponent>
 </template>
 <script lang="ts" setup>
 import { SvComponent } from "survey-vue3-ui";
@@ -31,5 +31,8 @@ const props = defineProps<{
 }>();
 const hover = (event: MouseEvent) => {
   props.viewModel.onMouseOver(props.item as QuestionToolboxItem, event);
+};
+const leave = (event: MouseEvent) => {
+  props.viewModel.onMouseLeave(props.item as QuestionToolboxItem, event);
 };
 </script>
