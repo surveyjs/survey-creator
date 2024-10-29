@@ -17,7 +17,9 @@ import {
   CssClassBuilder,
   HashTable,
   surveyLocalization,
-  ComputedUpdater
+  ComputedUpdater,
+  AnimationBoolean,
+  IAnimationConsumer
 } from "survey-core";
 import { SurveyCreatorModel, toolboxLocationType } from "./creator-base";
 import { editorLocalization, getLocString } from "./editorLocalization";
@@ -446,11 +448,44 @@ export class QuestionToolbox
     defaultValue: false,
     onSet: (val: boolean, target: QuestionToolbox) => {
       target.updateResponsiveness(val, target.overflowBehavior);
+      target.compactAnimation.sync(!(val && !target.isFocused));
     }
   }) isCompact: boolean;
 
+  @property({ defaultValue: false }) isCompactRendered: boolean;
+  @property({ defaultValue: false }) isFlyoutToCompactRunning: boolean;
+
+  private getAnimationOptions(): IAnimationConsumer {
+    return {
+      getAnimatedElement: () => {
+        return this.rootElement?.querySelector(".svc-toolbox__panel");
+      },
+      isAnimationEnabled: () => this.animationAllowed,
+      getRerenderEvent: () => this.onElementRerendered,
+      getLeaveOptions: () => {
+        return {
+          cssClass: "svc-toolbox__panel--leave",
+          onAfterRunAnimation: () => { this.isFlyoutToCompactRunning = false; }
+        };
+      },
+      getEnterOptions: () => {
+        return {
+          cssClass: "svc-toolbox__panel--enter"
+        };
+      }
+    };
+  }
+
+  public compactAnimation = new AnimationBoolean(this.getAnimationOptions(), (val: boolean) => {
+    this.isCompactRendered = !val;
+  }, () => !this.isCompactRendered);
+
   @property({
     defaultValue: false,
+    onSet: (val: boolean, target: QuestionToolbox) => {
+      if (target.animationAllowed) target.isFlyoutToCompactRunning = target.isCompact && !val;
+      target.compactAnimation.sync(!(target.isCompact && !val));
+    }
   }) isFocused: boolean;
   /**
    * Specifies how the Toolbox behaves when it contains more items than can fit on the screen.
@@ -582,10 +617,6 @@ export class QuestionToolbox
     //}
   }
 
-  public get isCompactRendered() {
-    return this.isCompact && !this.isFocused;
-  }
-
   public get showSearch() {
     return this.searchEnabled && this.items.length > QuestionToolbox.MINELEMENTCOUNT;
   }
@@ -638,6 +669,7 @@ export class QuestionToolbox
       .append("svc-toolbox")
       .append("svc-toolbox--searchable", this.searchEnabled)
       .append("svc-toolbox--no-separators", !this.showSeparators)
+      .append("svc-toolbox--flyout-to-compact-running", this.isFlyoutToCompactRunning)
       .append("svc-toolbox--compact", this.isCompactRendered)
       .append("svc-toolbox--flyout", this.isCompact && this.isFocused)
       .append("svc-toolbox--scrollable", this.overflowBehavior == "scroll").toString();
@@ -1318,12 +1350,12 @@ export class QuestionToolbox
     return this.getOrCreateToolboxItem(item);
   }
   private getTitleFromJsonTitle(title: any, name: string): string {
-    if(!title) return title;
-    if(typeof title === "string") return title;
-    if(typeof title !== "object") return title;
-    for(let key in title) {
+    if (!title) return title;
+    if (typeof title === "string") return title;
+    if (typeof title !== "object") return title;
+    for (let key in title) {
       const loc = editorLocalization.locales[key];
-      if(title[key] && loc && loc.qt) {
+      if (title[key] && loc && loc.qt) {
         loc.qt[name] = title[key];
       }
     }

@@ -1914,6 +1914,53 @@ test("Drag Drop indicator - rows", async (t) => {
     .expect(Selector(".svc-row").nth(1).hasClass("svc-row--drag-over-bottom")).notOk();
 });
 
+test("Drag Drop indicator - between questions", async (t) => {
+  await t.resizeWindow(1600, 1000);
+  const json = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          },
+          {
+            "type": "text",
+            "name": "question2",
+            "startWithNewLine": false
+          },
+          {
+            "type": "text",
+            "name": "question3"
+          }
+        ]
+      }
+    ]
+  };
+  await setJSON(json);
+
+  const toolboxToolAction = Selector(".svc-toolbox__tool > .sv-action__content");
+
+  await t.expect(Selector(".svc-question__adorner").visible).ok();
+
+  const questionRectRight = await Selector(".svc-question__adorner").getBoundingClientRectProperty("right");
+  const questionRectBottom = await Selector(".svc-question__adorner").getBoundingClientRectProperty("bottom");
+  await t
+    .hover(toolboxToolAction)
+    .dispatchEvent(toolboxToolAction, "pointerdown")
+    .hover(Selector("#survey-creator"), { offsetX: Math.round(questionRectRight) + 8, offsetY: Math.round(questionRectBottom) - 100 })
+    .expect(Selector(".svc-question__content").nth(1).hasClass("svc-question__content--drag-over-left")).ok();
+
+  await t
+    .hover(toolboxToolAction)
+    .dispatchEvent(toolboxToolAction, "pointerdown")
+    .hover(Selector("#survey-creator"), { offsetX: Math.round(questionRectRight) - 100, offsetY: Math.round(questionRectBottom) + 8 })
+    .expect(Selector(".svc-question__content").nth(2).hasClass("svc-question__content--drag-over-top")).ok();
+
+});
+
 test("Drag Drop page with other pages collapsed on start drag", async (t) => {
   await ClientFunction(() => {
     window["creator"].expandCollapseButtonVisibility = "always";

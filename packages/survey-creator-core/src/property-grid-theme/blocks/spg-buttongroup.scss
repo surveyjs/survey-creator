@@ -1,69 +1,88 @@
-.spg-root-modern {
-  .sv-button-group {
-    border: 1px solid var(--ctr-button-group-item-border-color, $border);
-    transition: box-shadow $creator-transition-duration, border-color $creator-transition-duration, border $creator-transition-duration;
-  }
+.spg-button-group {
+  position: relative;
+  display: flex;
+  padding: var(--ctr-button-group-padding, 0px);
+  align-items: center;
+  align-self: stretch;
 
-  .sv-button-group:focus-within {
-    box-shadow: 0 0 0 1px var(--ctr-button-group-border-color-focused, $primary);
-    border-color: var(--ctr-button-group-border-color-focused, $primary);
-  }
-
-  .sv-button-group__item {
-    background: var(--ctr-button-group-item-background-color, $background);
-    transition: background $creator-transition-duration, background-color $creator-transition-duration, color $creator-transition-duration;
-
-    &:not(:last-of-type) {
-      border-right: 1px solid var(--ctr-button-group-item-border-color, $border);
-    }
-  }
-
-  .sv-button-group__item--hover:hover {
-    background-color: var(--ctr-button-group-item-background-color-hovered, $background-dim);
-  }
-
-  .sv-button-group__item-icon {
-    use {
-      fill: var(--ctr-button-group-item-icon-color, $foreground-light);
-    }
-  }
-
-  .sv-button-group__item--selected {
-    color: var(--ctr-button-group-item-text-color-selected, $primary);
-
-    .sv-button-group__item-icon use {
-      fill: var(--ctr-button-group-item-icon-color-selected, $primary);
-    }
-
-    &:hover {
-      background-color: var(--ctr-button-group-item-background-color-hovered, $background);
-    }
-  }
-
-  .sv-button-group__item--disabled {
-    color: var(--ctr-button-group-item-text-color-disabled, $foreground);
-
-    .sv-button-group__item-icon use {
-      fill: var(--ctr-button-group-item-text-color-disabled, $foreground);
-    }
-
-    &:hover {
-      background-color: var(--ctr-button-group-item-background-color-disabled, $background);
-    }
-  }
-
-  .sv-button-group:focus-within {
-    box-shadow: 0 0 0 1px var(--ctr-button-group-border-color-focused, $primary);
-    border-color: var(--ctr-button-group-border-color-focused, $primary);
+  border-radius: var(--ctr-button-group-corner-radius, 0px);
+  box-shadow: inset 0 0 0 var(--ctr-button-group-border-width, 0px) var(--ctr-button-group-border-color, $border);
+  background-color: var(--ctr-button-group-background-color, $background);
+  
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    box-shadow: inset 0 0 0 var(--ctr-button-group-border-width-focused, 2px) transparent;
+    pointer-events: none;
+    transition: box-shadow $creator-transition-duration;
   }
 }
 
-.spg-root-modern.spg-root--one-category {
-  height: 100%;
-  background-color: var(--ctr-property-grid-form-background-color, $background-dim);
-  border-right: unset;
+.spg-button-group:focus-within::after {
+  box-shadow: inset 0 0 0 var(--ctr-button-group-border-width-focused, 2px) var(--ctr-button-group-border-color-focused, $primary);
+}
 
-  .spg-page.spg-body__page {
-    box-shadow: unset;
+.spg-button-group__item {
+  @include ctrDefaultFont;
+  color: var(--ctr-button-group-item-text-color, rgba(0, 0, 0, 0.91));
+
+  display: flex;
+  padding: var(--ctr-button-group-item-padding-vertical, calcSize(1.5)) var(--ctr-button-group-item-padding-horizontal, calcSize(2));
+  justify-content: center;
+  align-items: center;
+  align-self: stretch;
+  flex-basis: 0;
+  flex-grow: 1;
+
+  border-radius: var(--ctr-button-group-item-corner-radius, 0px);
+  box-shadow: inset 0 0 0 var(--ctr-button-group-item-border-width, 1px) var(--ctr-button-group-item-border-color, $border);
+  background-color: var(--ctr-button-group-item-background-color, $background);
+
+  transition: background $creator-transition-duration, background-color $creator-transition-duration, color $creator-transition-duration;
+
+  &:not(:last-of-type) {
+    margin-right: var(--ctr-button-group-gap, -1px);
+  }
+}
+
+.spg-button-group__item--hover:hover {
+  background-color: var(--ctr-button-group-item-background-color-hovered, $background-dim);
+}
+
+.spg-button-group__item-icon {
+  use {
+    fill: var(--ctr-button-group-item-icon-color, $foreground-light);
+  }
+}
+
+.spg-button-group__item--selected {
+  @include ctrDefaultBoldFont;
+  color: var(--ctr-button-group-item-text-color-selected, $primary);
+  box-shadow: inset 0 0 0 var(--ctr-button-group-item-border-width-selected, 1px) var(--ctr-button-group-item-border-color, $border);
+  background: var(--ctr-button-group-item-background-color-selected, $background);
+  .spg-button-group__item-icon use {
+    fill: var(--ctr-button-group-item-icon-color-selected, $primary);
+  }
+
+  &:hover {
+    background-color: var(--ctr-button-group-item-background-color-hovered, $background);
+  }
+}
+
+.spg-button-group__item--disabled {
+  color: var(--ctr-button-group-item-text-color-disabled, $foreground);
+  background: var(--ctr-button-group-item-background-color-disabled, $background-dim);
+  .spg-button-group__item-icon use {
+    fill: var(--ctr-button-group-item-text-color-disabled, $foreground);
+  }
+  .spg-button-group__item-caption {
+    opacity: var(--ctr-button-group-item-text-opacity-disabled, 0.25);
+  }
+  &:hover {
+    background-color: var(--ctr-button-group-item-background-color-disabled, $background-dim);
   }
 }

@@ -56,6 +56,7 @@
   }
 
   .sv-popup__body-header {
+    @include ctrMediumBoldFont;
     color: var(--ctr-popup-title-color, $foreground);
   }
 
@@ -76,6 +77,7 @@
     border-bottom: 1px solid var(--ctr-list-search-border-color, $border-inside);
 
     .sv-list__input {
+      @include ctrDefaultFont;
       color: var(--ctr-list-search-text-color-placeholder, $foreground-dim-light);
       background-color: transparent;
 
@@ -90,6 +92,7 @@
   }
 
   .sv-list__item-body {
+    @include ctrDefaultFont;
     color: var(--ctr-list-item-text-color, $foreground-dim);
     transition: background-color $creator-transition-duration, color $creator-transition-duration;
   }
@@ -110,6 +113,7 @@
   .sv-list__item--selected,
   .sv-list__item.sv-list__item--selected:hover {
     & > .sv-list__item-body {
+      @include ctrDefaultBoldFont;
       color: var(--ctr-list-item-text-color-selected, $primary-foreground);
       background: var(--ctr-list-item-background-color-selected, $primary);
     }
@@ -185,7 +189,6 @@
         & > .sv-list__item-body {
           background: var(--ctr-list-item-background-color-selected, $primary-light);
           color: var(--ctr-list-item-text-color-selected, $foreground);
-          font-weight: 400;
         }
 
         .sv-list__item-icon use {
@@ -206,6 +209,7 @@
   }
 
   .sv-popup__content {
+    @include ctrDefaultFont;
     color: var(--ctr-popup-message-color, #404040);
   }
 }

@@ -1,7 +1,10 @@
 @import "../variables.scss";
 
+.svc-link__button {
+  @include ctrDefaultBoldFont;
+}
+
 .svc-question-link__set-button {
-  font-weight: 600;
   cursor: pointer;
 }
 .svc-link-value-button {
@@ -9,7 +12,6 @@
 }
 .svc-question-link__clear-button {
   color: $red;
-  font-weight: 600;
   cursor: pointer;
 }
 .svc-question-link__clear-button:focus,
