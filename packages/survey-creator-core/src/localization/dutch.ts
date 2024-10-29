@@ -69,6 +69,7 @@ export var nlStrings = {
     surveySettingsTooltip: "Enquête instellingen",
     themeSettings: "Thema-instellingen",
     themeSettingsTooltip: "Thema-instellingen",
+    creatorSettingTitle: "Creator-instellingen",
     showPanel: "Toon paneel",
     hidePanel: "Verberg paneel",
     prevSelected: "Selecteer vorige",
@@ -301,7 +302,7 @@ export var nlStrings = {
       width: "Inline paneelbreedte",
       minWidth: "Minimale paneelbreedte",
       maxWidth: "Maximale paneelbreedte",
-      showNumber: "Nummerpanelen"
+      showNumber: "Nummer dit paneel"
     },
     paneldynamic: {
       name: "Naam van het paneel",
@@ -828,6 +829,8 @@ export var nlStrings = {
       header: "Rubriek",
       background: "Achtergrond",
       appearance: "Uiterlijk",
+      accentColors: "Accent kleuren",
+      scaling: "Schalen",
       others: "Anderen"
     },
     editProperty: "Eigenschap '{0}' bewerken",
@@ -1289,7 +1292,8 @@ export var nlStrings = {
       innerIndent: "Hiermee voegt u ruimte of marge toe tussen de inhoud van het deelvenster en de linkerrand van het deelvenstervak.",
       startWithNewLine: "Schakel de optie uit om het deelvenster op één regel weer te geven met de vorige vraag of het vorige deelvenster. De instelling is niet van toepassing als het deelvenster het eerste element in uw formulier is.",
       state: "Kies uit: \"Uitgevouwen\" - het paneel wordt volledig weergegeven en kan worden ingeklapt; \"Samengevouwen\" - het paneel toont alleen de titel en beschrijving en kan worden uitgevouwen; \"Vergrendeld\" - het paneel wordt volledig weergegeven en kan niet worden ingeklapt.",
-      width: "Hiermee stelt u de breedte van het paneel in verhouding tot andere enquête-elementen in dezelfde lijn. Accepteert CSS-waarden (px, %, in, pt, enz.)."
+      width: "Hiermee stelt u de breedte van het paneel in verhouding tot andere enquête-elementen in dezelfde lijn. Accepteert CSS-waarden (px, %, in, pt, enz.).",
+      showQuestionNumbers: "Wijst nummers toe aan vragen die in dit deelvenster zijn genest."
     },
     paneldynamic: {
       name: "Een panel-ID die niet zichtbaar is voor respondenten.",
@@ -1694,6 +1698,20 @@ export var nlStrings = {
       tulip: "Tulp",
       brown: "Bruin",
       green: "Groen"
+    }
+  },
+  creatortheme: {
+    "--sjs-special-background": "Oppervlakte achtergrond",
+    "--sjs-primary-background-500": "Primair",
+    "--sjs-secondary-background-500": "Secundair",
+    surfaceScale: "Oppervlak",
+    userInterfaceBaseUnit: "Gebruikersinterface",
+    fontScale: "Lettertype",
+    names: {
+      sc2020: "Enquête maken 2020",
+      "default-light": "Licht",
+      "default-dark": "Donker",
+      "default-contrast": "Tegenstelling"
     }
   }
 };
@@ -2289,7 +2307,6 @@ editorLocalization.locales["nl"] = nlStrings;
 // panel.width: "Inline panel width" => "Inline paneelbreedte"
 // panel.minWidth: "Minimum panel width" => "Minimale paneelbreedte"
 // panel.maxWidth: "Maximum panel width" => "Maximale paneelbreedte"
-// panel.showNumber: "Number panels" => "Nummerpanelen"
 // paneldynamic.name: "Panel name" => "Naam van het paneel"
 // paneldynamic.title: "Panel title" => "Titel van het paneel"
 // paneldynamic.description: "Panel description" => "Beschrijving van het paneel"
@@ -2801,3 +2818,18 @@ editorLocalization.locales["nl"] = nlStrings;
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Als deze optie is ingesteld op 0, wordt de hoogte automatisch berekend om de inhoud van de koptekst te accommoderen."
 // p.mobileHeight: "Height on smartphones" => "Hoogte op smartphones"
 // header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Als deze optie is ingeschakeld, overlapt de bovenkant van de enquête de onderkant van de koptekst."
+// ed.creatorSettingTitle: "Creator Settings" => "Creator-instellingen"
+// tabs.accentColors: "Accent colors" => "Accent kleuren"
+// tabs.scaling: "Scaling" => "Schalen"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "Wijst nummers toe aan vragen die in dit deelvenster zijn genest."
+// creatortheme.--sjs-special-background: "Surface background" => "Oppervlakte achtergrond"
+// creatortheme.--sjs-primary-background-500: "Primary" => "Primair"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "Secundair"
+// creatortheme.surfaceScale: "Surface" => "Oppervlak"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "Gebruikersinterface"
+// creatortheme.fontScale: "Font" => "Lettertype"
+// names.sc2020: "Survey Creator 2020" => "Enquête maken 2020"
+// names.default-light: "Light" => "Licht"
+// names.default-dark: "Dark" => "Donker"
+// names.default-contrast: "Contrast" => "Tegenstelling"
+// panel.showNumber: "Number this panel" => "Nummer dit paneel"

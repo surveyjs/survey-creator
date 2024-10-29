@@ -69,6 +69,7 @@ export let svStrings = {
     surveySettingsTooltip: "Inställningar för undersökning",
     themeSettings: "Tema Inställningar",
     themeSettingsTooltip: "Inställningar för tema",
+    creatorSettingTitle: "Inställningar för kreatör",
     showPanel: "Visa panel",
     hidePanel: "Dölj panel",
     prevSelected: "Välj föregående",
@@ -301,7 +302,7 @@ export let svStrings = {
       width: "Bredd på infogad panel",
       minWidth: "Minsta panelbredd",
       maxWidth: "Maximal panelbredd",
-      showNumber: "Sifferpaneler"
+      showNumber: "Numrera den här panelen"
     },
     paneldynamic: {
       name: "Panelens namn",
@@ -828,6 +829,8 @@ export let svStrings = {
       header: "Rubrik",
       background: "Bakgrund",
       appearance: "Utseende",
+      accentColors: "Accentfärger",
+      scaling: "Skalning",
       others: "Andra"
     },
     editProperty: "Redigera egenskap '{0}'",
@@ -1289,7 +1292,8 @@ export let svStrings = {
       innerIndent: "Lägger till utrymme eller marginal mellan panelinnehållet och panelrutans vänstra kant.",
       startWithNewLine: "Avmarkera om du vill visa panelen på en rad med föregående fråga eller panel. Inställningen gäller inte om panelen är det första elementet i formuläret.",
       state: "Välj mellan: \"Expanderad\" - panelen visas i sin helhet och kan fällas ihop; \"Komprimerad\" - panelen visar endast titel och beskrivning och kan expanderas; \"Låst\" - panelen visas i sin helhet och kan inte fällas ihop.",
-      width: "Ställer in panelens bredd i proportion till andra undersökningselement på samma rad. Accepterar CSS-värden (px, %, in, pt, etc.)."
+      width: "Ställer in panelens bredd i proportion till andra undersökningselement på samma rad. Accepterar CSS-värden (px, %, in, pt, etc.).",
+      showQuestionNumbers: "Tilldelar nummer till frågor som är kapslade i den här panelen."
     },
     paneldynamic: {
       name: "Ett panel-ID som inte är synligt för svarande.",
@@ -1694,6 +1698,20 @@ export let svStrings = {
       tulip: "Tulpan",
       brown: "Brun",
       green: "Grön"
+    }
+  },
+  creatortheme: {
+    "--sjs-special-background": "Bakgrund på ytan",
+    "--sjs-primary-background-500": "Primär",
+    "--sjs-secondary-background-500": "Sekundär",
+    surfaceScale: "Yta",
+    userInterfaceBaseUnit: "Användargränssnitt",
+    fontScale: "Teckensnitt",
+    names: {
+      sc2020: "Enkät skapare 2020",
+      "default-light": "Ljus",
+      "default-dark": "Mörk",
+      "default-contrast": "Kontrast"
     }
   }
 };
@@ -2486,7 +2504,6 @@ editorLocalization.locales["sv"] = svStrings;
 // panel.width: "Inline panel width" => "Bredd på infogad panel"
 // panel.minWidth: "Minimum panel width" => "Minsta panelbredd"
 // panel.maxWidth: "Maximum panel width" => "Maximal panelbredd"
-// panel.showNumber: "Number panels" => "Sifferpaneler"
 // paneldynamic.name: "Panel name" => "Panelens namn"
 // paneldynamic.title: "Panel title" => "Panelens titel"
 // paneldynamic.description: "Panel description" => "Beskrivning av panelen"
@@ -2997,3 +3014,18 @@ editorLocalization.locales["sv"] = svStrings;
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "När värdet är 0 beräknas höjden automatiskt för att passa rubrikens innehåll."
 // p.mobileHeight: "Height on smartphones" => "Höjd på smartphones"
 // header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "När det här alternativet är aktiverat täcker den övre delen av undersökningen den nedre delen av sidhuvudet."
+// ed.creatorSettingTitle: "Creator Settings" => "Inställningar för kreatör"
+// tabs.accentColors: "Accent colors" => "Accentfärger"
+// tabs.scaling: "Scaling" => "Skalning"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "Tilldelar nummer till frågor som är kapslade i den här panelen."
+// creatortheme.--sjs-special-background: "Surface background" => "Bakgrund på ytan"
+// creatortheme.--sjs-primary-background-500: "Primary" => "Primär"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "Sekundär"
+// creatortheme.surfaceScale: "Surface" => "Yta"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "Användargränssnitt"
+// creatortheme.fontScale: "Font" => "Teckensnitt"
+// names.sc2020: "Survey Creator 2020" => "Enkät skapare 2020"
+// names.default-light: "Light" => "Ljus"
+// names.default-dark: "Dark" => "Mörk"
+// names.default-contrast: "Contrast" => "Kontrast"
+// panel.showNumber: "Number this panel" => "Numrera den här panelen"

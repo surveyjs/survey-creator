@@ -69,6 +69,7 @@ var italianTranslation = {
     surveySettingsTooltip: "Impostazioni dell'indagine",
     themeSettings: "Impostazioni del tema",
     themeSettingsTooltip: "Impostazioni del tema",
+    creatorSettingTitle: "Impostazioni autore",
     showPanel: "Mostra Pannello",
     hidePanel: "Nascondi Pannello",
     prevSelected: "Seleziona precedente",
@@ -301,7 +302,7 @@ var italianTranslation = {
       width: "Larghezza del pannello in linea",
       minWidth: "Larghezza minima del pannello",
       maxWidth: "Larghezza massima del pannello",
-      showNumber: "Pannelli numerici"
+      showNumber: "Numera questo pannello"
     },
     paneldynamic: {
       name: "Nome del pannello",
@@ -828,6 +829,8 @@ var italianTranslation = {
       header: "Intestazione",
       background: "Sfondo",
       appearance: "Apparenza",
+      accentColors: "Colori d'accento",
+      scaling: "Scalata",
       others: "Altri"
     },
     editProperty: "Modifica propietà '{0}'",
@@ -1289,7 +1292,8 @@ var italianTranslation = {
       innerIndent: "Aggiunge spazio o margine tra il contenuto del pannello e il bordo sinistro del riquadro del pannello.",
       startWithNewLine: "Deselezionare questa opzione per visualizzare il pannello in una riga con la domanda o il pannello precedente. L'impostazione non si applica se il pannello è il primo elemento del modulo.",
       state: "Scegli tra: \"Espanso\" - il pannello viene visualizzato per intero e può essere compresso; \"Compresso\" - il pannello visualizza solo il titolo e la descrizione e può essere espanso; \"Bloccato\": il pannello viene visualizzato per intero e non può essere compresso.",
-      width: "Imposta la larghezza del pannello in proporzione agli altri elementi di rilievo nella stessa linea. Accetta valori CSS (px, %, in, pt, ecc.)."
+      width: "Imposta la larghezza del pannello in proporzione agli altri elementi di rilievo nella stessa linea. Accetta valori CSS (px, %, in, pt, ecc.).",
+      showQuestionNumbers: "Assegna numeri alle domande nidificate all'interno di questo pannello."
     },
     paneldynamic: {
       name: "Un ID pannello che non è visibile ai rispondenti.",
@@ -1695,6 +1699,20 @@ var italianTranslation = {
       brown: "Marrone",
       green: "Verde"
     }
+  },
+  creatortheme: {
+    "--sjs-special-background": "Sfondo della superficie",
+    "--sjs-primary-background-500": "Primario",
+    "--sjs-secondary-background-500": "Secondario",
+    surfaceScale: "Superficie",
+    userInterfaceBaseUnit: "Interfaccia utente",
+    fontScale: "Font",
+    names: {
+      sc2020: "Creatore di sondaggi 2020",
+      "default-light": "Leggero",
+      "default-dark": "Oscuro",
+      "default-contrast": "Contrasto"
+    }
   }
 };
 
@@ -2067,7 +2085,6 @@ editorLocalization.locales["it"] = italianTranslation;
 // panel.width: "Inline panel width" => "Larghezza del pannello in linea"
 // panel.minWidth: "Minimum panel width" => "Larghezza minima del pannello"
 // panel.maxWidth: "Maximum panel width" => "Larghezza massima del pannello"
-// panel.showNumber: "Number panels" => "Pannelli numerici"
 // paneldynamic.name: "Panel name" => "Nome del pannello"
 // paneldynamic.title: "Panel title" => "Titolo del panel"
 // paneldynamic.description: "Panel description" => "Descrizione del pannello"
@@ -2578,3 +2595,18 @@ editorLocalization.locales["it"] = italianTranslation;
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Se impostata su 0, l'altezza viene calcolata automaticamente per adattarsi al contenuto dell'intestazione."
 // p.mobileHeight: "Height on smartphones" => "Altezza su smartphone"
 // header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Se abilitata, la parte superiore del sondaggio si sovrappone alla parte inferiore dell'intestazione."
+// ed.creatorSettingTitle: "Creator Settings" => "Impostazioni autore"
+// tabs.accentColors: "Accent colors" => "Colori d'accento"
+// tabs.scaling: "Scaling" => "Scalata"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "Assegna numeri alle domande nidificate all'interno di questo pannello."
+// creatortheme.--sjs-special-background: "Surface background" => "Sfondo della superficie"
+// creatortheme.--sjs-primary-background-500: "Primary" => "Primario"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "Secondario"
+// creatortheme.surfaceScale: "Surface" => "Superficie"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "Interfaccia utente"
+// creatortheme.fontScale: "Font" => "Font"
+// names.sc2020: "Survey Creator 2020" => "Creatore di sondaggi 2020"
+// names.default-light: "Light" => "Leggero"
+// names.default-dark: "Dark" => "Oscuro"
+// names.default-contrast: "Contrast" => "Contrasto"
+// panel.showNumber: "Number this panel" => "Numera questo pannello"

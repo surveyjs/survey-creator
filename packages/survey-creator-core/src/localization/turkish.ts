@@ -69,6 +69,7 @@ export var turkishStrings = {
     surveySettingsTooltip: "Anket ayarları",
     themeSettings: "Tema Ayarları",
     themeSettingsTooltip: "Tema ayarları",
+    creatorSettingTitle: "İçerik Oluşturucu Ayarları",
     showPanel: "Paneli Göster",
     hidePanel: "Paneli Gizle",
     prevSelected: "Öncekini seç",
@@ -301,7 +302,7 @@ export var turkishStrings = {
       width: "Satır içi panel genişliği",
       minWidth: "Minimum panel genişliği",
       maxWidth: "Maksimum panel genişliği",
-      showNumber: "Sayı panelleri"
+      showNumber: "Bu paneli numaralandırın"
     },
     paneldynamic: {
       name: "Panel adı",
@@ -828,6 +829,8 @@ export var turkishStrings = {
       header: "Üstbilgi",
       background: "Arka plan",
       appearance: "Görünüş",
+      accentColors: "Vurgu renkleri",
+      scaling: "Ölçekleme",
       others: "Diğer"
     },
     editProperty: "Özelliği düzenle '{0}'",
@@ -1289,7 +1292,8 @@ export var turkishStrings = {
       innerIndent: "Panel içeriği ile panel kutusunun sol kenarlığı arasına boşluk veya kenar boşluğu ekler.",
       startWithNewLine: "Panelin önceki soru veya panelle aynı satırda görüntülenmesi için seçimi kaldırın. Panel formunuzdaki ilk öğeyse bu ayar uygulanmaz.",
       state: "Şunlar arasından seçim yapın: \"Genişletilmiş\" - panel tam olarak görüntülenir ve daraltılabilir; \"Daraltılmış\" - panel yalnızca başlığı ve açıklamayı görüntüler ve genişletilebilir; \"Kilitli\" - panel tam olarak görüntülenir ve daraltılamaz.",
-      width: "Panelin genişliğini aynı satırdaki diğer anket öğeleriyle orantılı olarak ayarlar. CSS değerlerini (px, %, in, pt, vb.) kabul eder."
+      width: "Panelin genişliğini aynı satırdaki diğer anket öğeleriyle orantılı olarak ayarlar. CSS değerlerini (px, %, in, pt, vb.) kabul eder.",
+      showQuestionNumbers: "Bu panelde iç içe yerleştirilmiş sorulara numaralar atar."
     },
     paneldynamic: {
       name: "Yanıtlayanlar tarafından görülemeyen bir panel kimliği.",
@@ -1694,6 +1698,20 @@ export var turkishStrings = {
       tulip: "Lale",
       brown: "Kahverengi",
       green: "Yeşil"
+    }
+  },
+  creatortheme: {
+    "--sjs-special-background": "Yüzey arka planı",
+    "--sjs-primary-background-500": "Birincil",
+    "--sjs-secondary-background-500": "İkincil",
+    surfaceScale: "Yüzey",
+    userInterfaceBaseUnit: "Kullanıcı arayüzü",
+    fontScale: "Yazı tipi",
+    names: {
+      sc2020: "Anket Oluşturucu 2020",
+      "default-light": "Işık",
+      "default-dark": "Koyu",
+      "default-contrast": "Karşıtlık"
     }
   }
 };
@@ -2304,7 +2322,6 @@ editorLocalization.locales["tr"] = turkishStrings;
 // panel.width: "Inline panel width" => "Satır içi panel genişliği"
 // panel.minWidth: "Minimum panel width" => "Minimum panel genişliği"
 // panel.maxWidth: "Maximum panel width" => "Maksimum panel genişliği"
-// panel.showNumber: "Number panels" => "Sayı panelleri"
 // paneldynamic.name: "Panel name" => "Panel adı"
 // paneldynamic.title: "Panel title" => "Panel başlığı"
 // paneldynamic.description: "Panel description" => "Panel açıklaması"
@@ -2815,3 +2832,18 @@ editorLocalization.locales["tr"] = turkishStrings;
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "0 olarak ayarlandığında, üstbilginin içeriğine uyum sağlamak için yükseklik otomatik olarak hesaplanır."
 // p.mobileHeight: "Height on smartphones" => "Akıllı telefonlarda yükseklik"
 // header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Etkinleştirildiğinde, anketin üst kısmı başlığın alt kısmıyla kaplanır."
+// ed.creatorSettingTitle: "Creator Settings" => "İçerik Oluşturucu Ayarları"
+// tabs.accentColors: "Accent colors" => "Vurgu renkleri"
+// tabs.scaling: "Scaling" => "Ölçekleme"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "Bu panelde iç içe yerleştirilmiş sorulara numaralar atar."
+// creatortheme.--sjs-special-background: "Surface background" => "Yüzey arka planı"
+// creatortheme.--sjs-primary-background-500: "Primary" => "Birincil"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "İkincil"
+// creatortheme.surfaceScale: "Surface" => "Yüzey"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "Kullanıcı arayüzü"
+// creatortheme.fontScale: "Font" => "Yazı tipi"
+// names.sc2020: "Survey Creator 2020" => "Anket Oluşturucu 2020"
+// names.default-light: "Light" => "Işık"
+// names.default-dark: "Dark" => "Koyu"
+// names.default-contrast: "Contrast" => "Karşıtlık"
+// panel.showNumber: "Number this panel" => "Bu paneli numaralandırın"

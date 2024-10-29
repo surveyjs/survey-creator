@@ -69,6 +69,7 @@ var germanTranslation = {
     surveySettingsTooltip: "Einstellungen für Umfragen",
     themeSettings: "Theme-Einstellungen",
     themeSettingsTooltip: "Theme-Einstellungen",
+    creatorSettingTitle: "Creator-Einstellungen",
     showPanel: "Panel anzeigen",
     hidePanel: "Panel verstecken",
     prevSelected: "Vorheriges auswählen",
@@ -301,7 +302,7 @@ var germanTranslation = {
       width: "Breite des Inline-Panels",
       minWidth: "Minimale Breite des Panels",
       maxWidth: "Maximale Breite des Panels",
-      showNumber: "Nummernfelder"
+      showNumber: "Nummerieren Sie dieses Feld"
     },
     paneldynamic: {
       name: "Name des Panels",
@@ -828,6 +829,8 @@ var germanTranslation = {
       header: "Titelzeile",
       background: "Hintergrund",
       appearance: "Erscheinungsbild",
+      accentColors: "Akzentfarben",
+      scaling: "Skalierung",
       others: "Weiteres"
     },
     editProperty: "Eigenschaft bearbeiten '{0}'",
@@ -1289,7 +1292,8 @@ var germanTranslation = {
       innerIndent: "Fügt Abstand oder Rand zwischen dem Inhalt des Panels und dem linken Rand des Panels hinzu.",
       startWithNewLine: "Deaktivieren Sie diese Option, um den Bereich in einer Zeile mit der vorherigen Frage oder dem vorherigen Bereich anzuzeigen. Die Einstellung gilt nicht, wenn der Bereich das erste Element in Ihrem Formular ist.",
       state: "Wählen Sie aus: \"Erweitert\" - das Panel wird vollständig angezeigt und kann eingeklappt werden; \"Reduziert\" - das Panel zeigt nur den Titel und die Beschreibung an und kann erweitert werden; \"Gesperrt\" - das Panel wird vollständig angezeigt und kann nicht eingeklappt werden.",
-      width: "Legt die Breite des Fensters im Verhältnis zu anderen Vermessungselementen in derselben Linie fest. Akzeptiert CSS-Werte (px, %, in, pt usw.)."
+      width: "Legt die Breite des Fensters im Verhältnis zu anderen Vermessungselementen in derselben Linie fest. Akzeptiert CSS-Werte (px, %, in, pt usw.).",
+      showQuestionNumbers: "Weist Fragen, die in diesem Bereich verschachtelt sind, Nummern zu."
     },
     paneldynamic: {
       name: "Eine Panel-ID, die für die Befragten nicht sichtbar ist.",
@@ -1695,6 +1699,20 @@ var germanTranslation = {
       brown: "Braun",
       green: "Grün"
     }
+  },
+  creatortheme: {
+    "--sjs-special-background": "Oberflächenhintergrund",
+    "--sjs-primary-background-500": "Primär",
+    "--sjs-secondary-background-500": "Sekundär",
+    surfaceScale: "Oberfläche",
+    userInterfaceBaseUnit: "Benutzeroberfläche",
+    fontScale: "Schriftart",
+    names: {
+      sc2020: "Ersteller von Umfragen 2020",
+      "default-light": "Licht",
+      "default-dark": "Dunkel",
+      "default-contrast": "Kontrast"
+    }
   }
 };
 
@@ -2017,7 +2035,6 @@ editorLocalization.locales["de"] = germanTranslation;
 // panel.width: "Inline panel width" => "Breite des Inline-Panels"
 // panel.minWidth: "Minimum panel width" => "Minimale Breite der Platte"
 // panel.maxWidth: "Maximum panel width" => "Maximale Breite des Paneels"
-// panel.showNumber: "Number panels" => "Nummernfelder"
 // paneldynamic.name: "Panel name" => "Name des Panels"
 // paneldynamic.title: "Panel title" => "Titel des Panels"
 // paneldynamic.description: "Panel description" => "Beschreibung des Panels"
@@ -2529,3 +2546,18 @@ editorLocalization.locales["de"] = germanTranslation;
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Wenn der Wert auf 0 gesetzt ist, wird die Höhe automatisch berechnet, um den Inhalt der Kopfzeile aufzunehmen."
 // p.mobileHeight: "Height on smartphones" => "Höhe auf Smartphones"
 // header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Wenn diese Option aktiviert ist, überlagert der obere Rand der Umfrage den unteren Rand der Kopfzeile."
+// ed.creatorSettingTitle: "Creator Settings" => "Creator-Einstellungen"
+// tabs.accentColors: "Accent colors" => "Akzentfarben"
+// tabs.scaling: "Scaling" => "Skalierung"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "Weist Fragen, die in diesem Bereich verschachtelt sind, Nummern zu."
+// creatortheme.--sjs-special-background: "Surface background" => "Oberflächenhintergrund"
+// creatortheme.--sjs-primary-background-500: "Primary" => "Primär"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "Sekundär"
+// creatortheme.surfaceScale: "Surface" => "Oberfläche"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "Benutzeroberfläche"
+// creatortheme.fontScale: "Font" => "Schriftart"
+// names.sc2020: "Survey Creator 2020" => "Ersteller von Umfragen 2020"
+// names.default-light: "Light" => "Licht"
+// names.default-dark: "Dark" => "Dunkel"
+// names.default-contrast: "Contrast" => "Kontrast"
+// panel.showNumber: "Number this panel" => "Nummerieren Sie dieses Feld"

@@ -69,6 +69,7 @@ export var danishStrings = {
     surveySettingsTooltip: "Indstillinger for undersøgelse",
     themeSettings: "Temaindstillinger",
     themeSettingsTooltip: "Temaindstillinger",
+    creatorSettingTitle: "Indstillinger for skabere",
     showPanel: "Vis panel",
     hidePanel: "Skjul panel",
     prevSelected: "Vælg forrige",
@@ -301,7 +302,7 @@ export var danishStrings = {
       width: "Indlejret panelbredde",
       minWidth: "Mindste panelbredde",
       maxWidth: "Maksimal panelbredde",
-      showNumber: "Paneler med tal"
+      showNumber: "Nummerer dette panel"
     },
     paneldynamic: {
       name: "Panelets navn",
@@ -828,6 +829,8 @@ export var danishStrings = {
       header: "Header",
       background: "Baggrund",
       appearance: "Udseende",
+      accentColors: "Accentfarver",
+      scaling: "Skalering",
       others: "Andre"
     },
     editProperty: "Rediger egenskab '{0}'",
@@ -1289,7 +1292,8 @@ export var danishStrings = {
       innerIndent: "Tilføjer mellemrum eller margen mellem panelindholdet og panelboksens venstre kant.",
       startWithNewLine: "Fjern markeringen for at få vist panelet på én linje med det forrige spørgsmål eller panel. Indstillingen gælder ikke, hvis panelet er det første element i formularen.",
       state: "Vælg mellem: \"Udvidet\" - panelet vises fuldt ud og kan skjules; \"Skjult\" - panelet viser kun titlen og beskrivelsen og kan udvides; \"Låst\" - panelet vises fuldt ud og kan ikke skjules.",
-      width: "Indstiller panelets bredde i forhold til andre undersøgelseselementer på samme linje. Accepterer CSS-værdier (px, %, in, pt osv.)."
+      width: "Indstiller panelets bredde i forhold til andre undersøgelseselementer på samme linje. Accepterer CSS-værdier (px, %, in, pt osv.).",
+      showQuestionNumbers: "Tildeler numre til spørgsmål, der er indlejret i dette panel."
     },
     paneldynamic: {
       name: "Et panel-id, der ikke er synligt for svarpersonerne.",
@@ -1694,6 +1698,20 @@ export var danishStrings = {
       tulip: "Tulipan",
       brown: "Brun",
       green: "Grøn"
+    }
+  },
+  creatortheme: {
+    "--sjs-special-background": "Overflade baggrund",
+    "--sjs-primary-background-500": "Primær",
+    "--sjs-secondary-background-500": "Sekundær",
+    surfaceScale: "Overflade",
+    userInterfaceBaseUnit: "Brugergrænseflade",
+    fontScale: "Skrifttype",
+    names: {
+      sc2020: "Skaberen af spørgeundersøgelsen 2020",
+      "default-light": "Lys",
+      "default-dark": "Mørk",
+      "default-contrast": "Kontrast"
     }
   }
 };
@@ -2494,7 +2512,6 @@ editorLocalization.locales["da"] = danishStrings;
 // panel.width: "Inline panel width" => "Indlejret panelbredde"
 // panel.minWidth: "Minimum panel width" => "Mindste panelbredde"
 // panel.maxWidth: "Maximum panel width" => "Maksimal panelbredde"
-// panel.showNumber: "Number panels" => "Paneler med tal"
 // paneldynamic.name: "Panel name" => "Panelets navn"
 // paneldynamic.title: "Panel title" => "Panelets titel"
 // paneldynamic.description: "Panel description" => "Beskrivelse af panelet"
@@ -3005,3 +3022,18 @@ editorLocalization.locales["da"] = danishStrings;
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Når den er indstillet til 0, beregnes højden automatisk for at rumme sidehovedets indhold."
 // p.mobileHeight: "Height on smartphones" => "Højde på smartphones"
 // header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Når den er aktiveret, overlejres toppen af undersøgelsen bunden af sidehovedet."
+// ed.creatorSettingTitle: "Creator Settings" => "Indstillinger for skabere"
+// tabs.accentColors: "Accent colors" => "Accentfarver"
+// tabs.scaling: "Scaling" => "Skalering"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "Tildeler numre til spørgsmål, der er indlejret i dette panel."
+// creatortheme.--sjs-special-background: "Surface background" => "Overflade baggrund"
+// creatortheme.--sjs-primary-background-500: "Primary" => "Primær"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "Sekundær"
+// creatortheme.surfaceScale: "Surface" => "Overflade"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "Brugergrænseflade"
+// creatortheme.fontScale: "Font" => "Skrifttype"
+// names.sc2020: "Survey Creator 2020" => "Skaberen af spørgeundersøgelsen 2020"
+// names.default-light: "Light" => "Lys"
+// names.default-dark: "Dark" => "Mørk"
+// names.default-contrast: "Contrast" => "Kontrast"
+// panel.showNumber: "Number this panel" => "Nummerer dette panel"

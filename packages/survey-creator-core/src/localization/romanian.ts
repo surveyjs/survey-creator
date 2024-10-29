@@ -69,6 +69,7 @@ export const roStrings = {
     surveySettingsTooltip: "Setările chestionarului",
     themeSettings: "Setările temei",
     themeSettingsTooltip: "Setările temei",
+    creatorSettingTitle: "Setările creatorului",
     showPanel: "Afișează panoul",
     hidePanel: "Ascunde panoul",
     prevSelected: "Selectează precedentul",
@@ -301,7 +302,7 @@ export const roStrings = {
       width: "Lățimea panoului inline",
       minWidth: "Lățimea minimă a panoului",
       maxWidth: "Lățimea maximă a panoului",
-      showNumber: "Numerotează panourile"
+      showNumber: "Numerotați acest panou"
     },
     paneldynamic: {
       name: "Numele panoului",
@@ -828,6 +829,8 @@ export const roStrings = {
       header: "Antet",
       background: "Fundal",
       appearance: "Aspect",
+      accentColors: "Culori de accent",
+      scaling: "Scalare",
       others: "Altele"
     },
     editProperty: "Editează proprietatea '{0}'",
@@ -1289,7 +1292,8 @@ export const roStrings = {
       innerIndent: "Adaugă spațiu sau margine între conținutul panoului și marginea stângă a casetei panoului.",
       startWithNewLine: "Deselectați pentru a afișa panoul pe un rând cu întrebarea sau panoul anterior. Setarea nu se aplică dacă panoul este primul element din formular.",
       state: "Alegeți dintre: „Extins” - panoul este afișat complet și poate fi colapsat; „Colapsat” - panoul afișează doar titlul și descrierea și poate fi extins; „Blocat” - panoul este afișat complet și nu poate fi colapsat.",
-      width: "Setează lățimea panoului în proporție cu alte elemente ale chestionarului de pe același rând. Acceptă valori CSS (px, %, in, pt etc.)."
+      width: "Setează lățimea panoului în proporție cu alte elemente ale chestionarului de pe același rând. Acceptă valori CSS (px, %, in, pt etc.).",
+      showQuestionNumbers: "Atribuie numere întrebărilor imbricate în acest panou."
     },
     paneldynamic: {
       name: "Un ID al panoului care nu este vizibil pentru respondenți.",
@@ -1695,6 +1699,20 @@ export const roStrings = {
       brown: "Maro",
       green: "Verde"
     }
+  },
+  creatortheme: {
+    "--sjs-special-background": "Fundal de suprafață",
+    "--sjs-primary-background-500": "Primar",
+    "--sjs-secondary-background-500": "Secundar",
+    surfaceScale: "Suprafață",
+    userInterfaceBaseUnit: "Interfață cu utilizatorul",
+    fontScale: "Font",
+    names: {
+      sc2020: "Creator de sondaje 2020",
+      "default-light": "Lumină",
+      "default-dark": "Întunecat",
+      "default-contrast": "Contrast"
+    }
   }
 };
 
@@ -1755,3 +1773,18 @@ editorLocalization.locales["ro"] = roStrings;
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Când este setată la 0, înălțimea este calculată automat pentru a găzdui conținutul antetului."
 // p.mobileHeight: "Height on smartphones" => "Înălțimea pe smartphone-uri"
 // header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Când este activată, partea de sus a chestionarului se suprapune cu partea de jos a antetului."
+// ed.creatorSettingTitle: "Creator Settings" => "Setările creatorului"
+// tabs.accentColors: "Accent colors" => "Culori de accent"
+// tabs.scaling: "Scaling" => "Scalare"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "Atribuie numere întrebărilor imbricate în acest panou."
+// creatortheme.--sjs-special-background: "Surface background" => "Fundal de suprafață"
+// creatortheme.--sjs-primary-background-500: "Primary" => "Primar"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "Secundar"
+// creatortheme.surfaceScale: "Surface" => "Suprafață"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "Interfață cu utilizatorul"
+// creatortheme.fontScale: "Font" => "Font"
+// names.sc2020: "Survey Creator 2020" => "Creator de sondaje 2020"
+// names.default-light: "Light" => "Lumină"
+// names.default-dark: "Dark" => "Întunecat"
+// names.default-contrast: "Contrast" => "Contrast"
+// panel.showNumber: "Number this panel" => "Numerotați acest panou"

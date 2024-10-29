@@ -69,6 +69,7 @@ export var czStrings = {
     surveySettingsTooltip: "Nastavení průzkumu",
     themeSettings: "Nastavení motivu",
     themeSettingsTooltip: "Nastavení motivu",
+    creatorSettingTitle: "Nastavení tvůrce",
     showPanel: "Zobrazit panel",
     hidePanel: "Skrýt panel",
     prevSelected: "Vybrat předchozí",
@@ -301,7 +302,7 @@ export var czStrings = {
       width: "Šířka vloženého panelu",
       minWidth: "Minimální šířka panelu",
       maxWidth: "Maximální šířka panelu",
-      showNumber: "Číselné panely"
+      showNumber: "Očíslujte tento panel"
     },
     paneldynamic: {
       name: "Název panelu",
@@ -828,6 +829,8 @@ export var czStrings = {
       header: "Záhlaví",
       background: "Pozadí",
       appearance: "Vzhled",
+      accentColors: "Zvýraznění barev",
+      scaling: "Změna velikosti",
       others: "Ostatní"
     },
     editProperty: "Upravit vlastnost „{0}“",
@@ -1289,7 +1292,8 @@ export var czStrings = {
       innerIndent: "Přidá mezeru nebo okraj mezi obsah panelu a levý okraj rámečku panelu.",
       startWithNewLine: "Zrušte výběr, chcete-li panel zobrazit v jednom řádku s předchozí otázkou nebo panelem. Nastavení se nepoužije, pokud je panel prvním prvkem ve formuláři.",
       state: "Vyberte si z: \"Rozbalený\" - panel se zobrazí celý a lze jej sbalit; \"Sbaleno\" - panel zobrazuje pouze název a popis a lze jej rozbalit; \"Zamčeno\" - obraz je zobrazen celý a nelze jej sbalit.",
-      width: "Nastaví šířku panelu v poměru k ostatním prvkům zaměření ve stejném řádku. Přijímá hodnoty CSS (px, %, in, pt atd.)."
+      width: "Nastaví šířku panelu v poměru k ostatním prvkům zaměření ve stejném řádku. Přijímá hodnoty CSS (px, %, in, pt atd.).",
+      showQuestionNumbers: "Přiřadí čísla otázkám vnořeným v tomto panelu."
     },
     paneldynamic: {
       name: "ID panelu, které není viditelné pro respondenty.",
@@ -1695,6 +1699,20 @@ export var czStrings = {
       brown: "Hnědý",
       green: "Zelený"
     }
+  },
+  creatortheme: {
+    "--sjs-special-background": "Pozadí Surface",
+    "--sjs-primary-background-500": "Primární",
+    "--sjs-secondary-background-500": "Sekundární",
+    surfaceScale: "Povrch",
+    userInterfaceBaseUnit: "Uživatelské rozhraní",
+    fontScale: "Písmo",
+    names: {
+      sc2020: "Tvůrce průzkumu 2020",
+      "default-light": "Světlo",
+      "default-dark": "Temný",
+      "default-contrast": "Kontrast"
+    }
   }
 };
 
@@ -1883,7 +1901,6 @@ editorLocalization.locales["cs"] = czStrings;
 // panel.width: "Inline panel width" => "Šířka vloženého panelu"
 // panel.minWidth: "Minimum panel width" => "Minimální šířka panelu"
 // panel.maxWidth: "Maximum panel width" => "Maximální šířka panelu"
-// panel.showNumber: "Number panels" => "Číselné panely"
 // paneldynamic.name: "Panel name" => "Název panelu"
 // paneldynamic.title: "Panel title" => "Název panelu"
 // paneldynamic.description: "Panel description" => "Popis panelu"
@@ -2394,3 +2411,18 @@ editorLocalization.locales["cs"] = czStrings;
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Při nastavení na 0 se výška vypočítá automaticky tak, aby se přizpůsobila obsahu záhlaví."
 // p.mobileHeight: "Height on smartphones" => "Výška na chytrých telefonech"
 // header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Pokud je tato možnost povolena, horní část průzkumu překrývá spodní část záhlaví."
+// ed.creatorSettingTitle: "Creator Settings" => "Nastavení tvůrce"
+// tabs.accentColors: "Accent colors" => "Zvýraznění barev"
+// tabs.scaling: "Scaling" => "Změna velikosti"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "Přiřadí čísla otázkám vnořeným v tomto panelu."
+// creatortheme.--sjs-special-background: "Surface background" => "Pozadí Surface"
+// creatortheme.--sjs-primary-background-500: "Primary" => "Primární"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "Sekundární"
+// creatortheme.surfaceScale: "Surface" => "Povrch"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "Uživatelské rozhraní"
+// creatortheme.fontScale: "Font" => "Písmo"
+// names.sc2020: "Survey Creator 2020" => "Tvůrce průzkumu 2020"
+// names.default-light: "Light" => "Světlo"
+// names.default-dark: "Dark" => "Temný"
+// names.default-contrast: "Contrast" => "Kontrast"
+// panel.showNumber: "Number this panel" => "Očíslujte tento panel"

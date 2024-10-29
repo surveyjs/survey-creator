@@ -69,6 +69,7 @@ export var bgStrings = {
     surveySettingsTooltip: "Настройки на проучването",
     themeSettings: "Настройки на тема",
     themeSettingsTooltip: "Настройки на тема",
+    creatorSettingTitle: "Настройки на създателя",
     showPanel: "Показване на панела",
     hidePanel: "Скриване на панела",
     prevSelected: "Избиране на предишен",
@@ -301,7 +302,7 @@ export var bgStrings = {
       width: "Ширина на вградения панел",
       minWidth: "Минимална ширина на панела",
       maxWidth: "Максимална ширина на панела",
-      showNumber: "Числени панели"
+      showNumber: "Номерирайте този панел"
     },
     paneldynamic: {
       name: "Име на панела",
@@ -828,6 +829,8 @@ export var bgStrings = {
       header: "Заглавка",
       background: "Фон",
       appearance: "Външен вид",
+      accentColors: "Акцентни цветове",
+      scaling: "Мащабиране",
       others: "Други"
     },
     editProperty: "Редактиране на свойства '{0}'",
@@ -1289,7 +1292,8 @@ export var bgStrings = {
       innerIndent: "Добавя интервал или поле между съдържанието на панела и лявата граница на панелното поле.",
       startWithNewLine: "Премахнете отметката, за да покажете панела в един ред с предишния въпрос или панел. Настройката не се прилага, ако панелът е първият елемент във вашия формуляр.",
       state: "Изберете от: \"Разширен\" - панелът се показва изцяло и може да бъде свит; \"Свит\" - панелът показва само заглавието и описанието и може да бъде разширен; \"Заключен\" - панелът се показва изцяло и не може да се свива.",
-      width: "Задава ширината на панела пропорционално на другите елементи на изследването в същия ред. Приема CSS стойности (px, %, in, pt и т.н.)."
+      width: "Задава ширината на панела пропорционално на другите елементи на изследването в същия ред. Приема CSS стойности (px, %, in, pt и т.н.).",
+      showQuestionNumbers: "Присвоява номера на въпроси, вложени в този панел."
     },
     paneldynamic: {
       name: "ИД на панел, който не е видим за респондентите.",
@@ -1695,6 +1699,20 @@ export var bgStrings = {
       brown: "Кафяв",
       green: "Зелен"
     }
+  },
+  creatortheme: {
+    "--sjs-special-background": "Повърхностен фон",
+    "--sjs-primary-background-500": "Първичен",
+    "--sjs-secondary-background-500": "Вторичен",
+    surfaceScale: "Повърхност",
+    userInterfaceBaseUnit: "Потребителски интерфейс",
+    fontScale: "Шрифт",
+    names: {
+      sc2020: "Създател на анкета 2020",
+      "default-light": "Светлина",
+      "default-dark": "Тъмен",
+      "default-contrast": "Контраст"
+    }
   }
 };
 
@@ -1872,7 +1890,6 @@ editorLocalization.locales["bg"] = bgStrings;
 // panel.width: "Inline panel width" => "Ширина на вградения панел"
 // panel.minWidth: "Minimum panel width" => "Минимална ширина на панела"
 // panel.maxWidth: "Maximum panel width" => "Максимална ширина на панела"
-// panel.showNumber: "Number panels" => "Числени панели"
 // paneldynamic.name: "Panel name" => "Име на панела"
 // paneldynamic.title: "Panel title" => "Заглавие на панела"
 // paneldynamic.description: "Panel description" => "Описание на панела"
@@ -2383,3 +2400,18 @@ editorLocalization.locales["bg"] = bgStrings;
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Когато е зададена на 0, височината се изчислява автоматично, за да побере съдържанието на заглавката."
 // p.mobileHeight: "Height on smartphones" => "Височина на смартфони"
 // header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Когато е разрешено, горната част на проучването се наслагва върху долната част на заглавката."
+// ed.creatorSettingTitle: "Creator Settings" => "Настройки на създателя"
+// tabs.accentColors: "Accent colors" => "Акцентни цветове"
+// tabs.scaling: "Scaling" => "Мащабиране"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "Присвоява номера на въпроси, вложени в този панел."
+// creatortheme.--sjs-special-background: "Surface background" => "Повърхностен фон"
+// creatortheme.--sjs-primary-background-500: "Primary" => "Първичен"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "Вторичен"
+// creatortheme.surfaceScale: "Surface" => "Повърхност"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "Потребителски интерфейс"
+// creatortheme.fontScale: "Font" => "Шрифт"
+// names.sc2020: "Survey Creator 2020" => "Създател на анкета 2020"
+// names.default-light: "Light" => "Светлина"
+// names.default-dark: "Dark" => "Тъмен"
+// names.default-contrast: "Contrast" => "Контраст"
+// panel.showNumber: "Number this panel" => "Номерирайте този панел"

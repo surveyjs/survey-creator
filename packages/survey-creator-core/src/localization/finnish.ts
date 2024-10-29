@@ -69,6 +69,7 @@ export var fiStrings = {
     surveySettingsTooltip: "Kyselyn asetukset",
     themeSettings: "Teeman asetukset",
     themeSettingsTooltip: "Teeman asetukset",
+    creatorSettingTitle: "Sisällöntuottajan asetukset",
     showPanel: "Näytä Paneeli",
     hidePanel: "Piilota Paneeli",
     prevSelected: "Valitse edellinen",
@@ -301,7 +302,7 @@ export var fiStrings = {
       width: "Tekstiin sidotun paneelin leveys",
       minWidth: "Paneelin vähimmäisleveys",
       maxWidth: "Paneelin enimmäisleveys",
-      showNumber: "Numeropaneelit"
+      showNumber: "Numeroi tämä paneeli"
     },
     paneldynamic: {
       name: "Paneelin nimi",
@@ -828,6 +829,8 @@ export var fiStrings = {
       header: "Otsikko",
       background: "Tausta",
       appearance: "Ulkonäkö",
+      accentColors: "Korostusvärit",
+      scaling: "Skaalaus",
       others: "Muut"
     },
     editProperty: "Muokkaa ominaisuutta'{0}'",
@@ -1289,7 +1292,8 @@ export var fiStrings = {
       innerIndent: "Lisää tilaa tai reunuksen paneelin sisällön ja paneeliruudun vasemman reunan väliin.",
       startWithNewLine: "Poista valinta, jos haluat näyttää paneelin yhdellä rivillä edellisen kysymyksen tai paneelin kanssa. Asetusta ei käytetä, jos paneeli on lomakkeen ensimmäinen elementti.",
       state: "Valitse seuraavista: \"Laajennettu\" - paneeli näytetään kokonaisuudessaan ja se voidaan kutistaa; \"Tiivistetty\" - paneeli näyttää vain otsikon ja kuvauksen ja sitä voidaan laajentaa; \"Lukittu\" - paneeli näkyy kokonaisuudessaan eikä sitä voi kutistaa.",
-      width: "Asettaa paneelin leveyden suhteessa muihin saman rivin mittauselementteihin. Hyväksyy CSS-arvot (px, %, in, pt jne.)."
+      width: "Asettaa paneelin leveyden suhteessa muihin saman rivin mittauselementteihin. Hyväksyy CSS-arvot (px, %, in, pt jne.).",
+      showQuestionNumbers: "Määrittää numerot tässä paneelissa sisäkkäisille kysymyksille."
     },
     paneldynamic: {
       name: "Paneelin tunnus, joka ei näy vastaajille.",
@@ -1694,6 +1698,20 @@ export var fiStrings = {
       tulip: "Tulppaani",
       brown: "Ruskea",
       green: "Vihreä"
+    }
+  },
+  creatortheme: {
+    "--sjs-special-background": "Pinnan tausta",
+    "--sjs-primary-background-500": "Ensisijainen",
+    "--sjs-secondary-background-500": "Toissijainen",
+    surfaceScale: "Pinta",
+    userInterfaceBaseUnit: "Käyttöliittymä",
+    fontScale: "Fontti",
+    names: {
+      sc2020: "Kyselyn laatija 2020",
+      "default-light": "Valo",
+      "default-dark": "Tumma",
+      "default-contrast": "Kontrasti"
     }
   }
 };
@@ -2287,7 +2305,6 @@ editorLocalization.locales["fi"] = fiStrings;
 // panel.width: "Inline panel width" => "Tekstiin sidotun paneelin leveys"
 // panel.minWidth: "Minimum panel width" => "Paneelin vähimmäisleveys"
 // panel.maxWidth: "Maximum panel width" => "Paneelin enimmäisleveys"
-// panel.showNumber: "Number panels" => "Numeropaneelit"
 // paneldynamic.name: "Panel name" => "Paneelin nimi"
 // paneldynamic.title: "Panel title" => "Paneelin otsikko"
 // paneldynamic.description: "Panel description" => "Paneelin kuvaus"
@@ -2792,3 +2809,19 @@ editorLocalization.locales["fi"] = fiStrings;
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Kun arvoksi on määritetty 0, korkeus lasketaan automaattisesti otsikon sisällön mukaan."
 // p.mobileHeight: "Height on smartphones" => "Korkeus älypuhelimissa"
 // header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Kun tämä asetus on käytössä, kyselyn yläosa peittää otsikon alaosan."
+
+// ed.creatorSettingTitle: "Creator Settings" => "Sisällöntuottajan asetukset"
+// tabs.accentColors: "Accent colors" => "Korostusvärit"
+// tabs.scaling: "Scaling" => "Skaalaus"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "Määrittää numerot tässä paneelissa sisäkkäisille kysymyksille."
+// creatortheme.--sjs-special-background: "Surface background" => "Pinnan tausta"
+// creatortheme.--sjs-primary-background-500: "Primary" => "Ensisijainen"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "Toissijainen"
+// creatortheme.surfaceScale: "Surface" => "Pinta"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "Käyttöliittymä"
+// creatortheme.fontScale: "Font" => "Fontti"
+// names.sc2020: "Survey Creator 2020" => "Kyselyn laatija 2020"
+// names.default-light: "Light" => "Valo"
+// names.default-dark: "Dark" => "Tumma"
+// names.default-contrast: "Contrast" => "Kontrasti"
+// panel.showNumber: "Number this panel" => "Numeroi tämä paneeli"

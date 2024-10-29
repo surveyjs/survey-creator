@@ -69,6 +69,7 @@ export var indonesianStrings = {
     surveySettingsTooltip: "Pengaturan survei",
     themeSettings: "Pengaturan Tema",
     themeSettingsTooltip: "Pengaturan tema",
+    creatorSettingTitle: "Pengaturan Kreator",
     showPanel: "Tampilkan Panel",
     hidePanel: "Sembunyikan Panel",
     prevSelected: "Pilih sebelumnya",
@@ -301,7 +302,7 @@ export var indonesianStrings = {
       width: "Lebar panel sejajar",
       minWidth: "Lebar panel minimum",
       maxWidth: "Lebar panel maksimum",
-      showNumber: "Panel angka"
+      showNumber: "Nomor panel ini"
     },
     paneldynamic: {
       name: "Nama panel",
@@ -828,6 +829,8 @@ export var indonesianStrings = {
       header: "Header",
       background: "Latar",
       appearance: "Rupa",
+      accentColors: "Warna aksen",
+      scaling: "Scaling",
       others: "Lain"
     },
     editProperty: "Ubah properti '{0}'",
@@ -1289,7 +1292,8 @@ export var indonesianStrings = {
       innerIndent: "Menambahkan spasi atau margin antara konten panel dan batas kiri kotak panel.",
       startWithNewLine: "Batalkan pilihan untuk menampilkan panel dalam satu baris dengan pertanyaan atau panel sebelumnya. Pengaturan tidak berlaku jika panel adalah elemen pertama dalam formulir Anda.",
       state: "Pilih dari: \"Diperluas\" - panel ditampilkan secara penuh dan dapat diciutkan; \"Collapsed\" - panel hanya menampilkan judul dan deskripsi dan dapat diperluas; \"Terkunci\" - panel ditampilkan secara penuh dan tidak dapat diciutkan.",
-      width: "Mengatur lebar panel secara proporsional dengan elemen survei lainnya di baris yang sama. Menerima nilai CSS (px, %, in, pt, dll.)."
+      width: "Mengatur lebar panel secara proporsional dengan elemen survei lainnya di baris yang sama. Menerima nilai CSS (px, %, in, pt, dll.).",
+      showQuestionNumbers: "Menetapkan nomor untuk pertanyaan yang bersarang dalam panel ini."
     },
     paneldynamic: {
       name: "ID panel yang tidak terlihat oleh responden.",
@@ -1694,6 +1698,20 @@ export var indonesianStrings = {
       tulip: "Tulip",
       brown: "Coklat",
       green: "Hijau"
+    }
+  },
+  creatortheme: {
+    "--sjs-special-background": "Latar belakang permukaan",
+    "--sjs-primary-background-500": "Utama",
+    "--sjs-secondary-background-500": "Sekunder",
+    surfaceScale: "Permukaan",
+    userInterfaceBaseUnit: "Antarmuka pengguna",
+    fontScale: "Font",
+    names: {
+      sc2020: "Pembuat Survei 2020",
+      "default-light": "Ringan",
+      "default-dark": "Gelap",
+      "default-contrast": "Kontras"
     }
   }
 };
@@ -2463,7 +2481,6 @@ editorLocalization.locales["id"] = indonesianStrings;
 // panel.width: "Inline panel width" => "Lebar panel sejajar"
 // panel.minWidth: "Minimum panel width" => "Lebar panel minimum"
 // panel.maxWidth: "Maximum panel width" => "Lebar panel maksimum"
-// panel.showNumber: "Number panels" => "Panel angka"
 // paneldynamic.name: "Panel name" => "Nama panel"
 // paneldynamic.title: "Panel title" => "Judul panel"
 // paneldynamic.description: "Panel description" => "Deskripsi panel"
@@ -2974,3 +2991,18 @@ editorLocalization.locales["id"] = indonesianStrings;
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Saat diatur ke 0, tinggi dihitung secara otomatis untuk mengakomodasi konten header."
 // p.mobileHeight: "Height on smartphones" => "Tinggi di smartphone"
 // header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Saat diaktifkan, bagian atas survei melapisi bagian bawah header."
+// ed.creatorSettingTitle: "Creator Settings" => "Pengaturan Kreator"
+// tabs.accentColors: "Accent colors" => "Warna aksen"
+// tabs.scaling: "Scaling" => "Scaling"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "Menetapkan nomor untuk pertanyaan yang bersarang dalam panel ini."
+// creatortheme.--sjs-special-background: "Surface background" => "Latar belakang permukaan"
+// creatortheme.--sjs-primary-background-500: "Primary" => "Utama"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "Sekunder"
+// creatortheme.surfaceScale: "Surface" => "Permukaan"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "Antarmuka pengguna"
+// creatortheme.fontScale: "Font" => "Font"
+// names.sc2020: "Survey Creator 2020" => "Pembuat Survei 2020"
+// names.default-light: "Light" => "Ringan"
+// names.default-dark: "Dark" => "Gelap"
+// names.default-contrast: "Contrast" => "Kontras"
+// panel.showNumber: "Number this panel" => "Nomor panel ini"

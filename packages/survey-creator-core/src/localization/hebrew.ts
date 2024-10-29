@@ -69,6 +69,7 @@ export var hebrewStrings = {
     surveySettingsTooltip: "הגדרות סקר",
     themeSettings: "הגדרות ערכת העיצוב",
     themeSettingsTooltip: "הגדרות ערכת נושא",
+    creatorSettingTitle: "הגדרות יוצר",
     showPanel: "הצג לוח",
     hidePanel: "הסתר לוח",
     prevSelected: "בחר קודם",
@@ -301,7 +302,7 @@ export var hebrewStrings = {
       width: "רוחב החלונית בתוך שורה",
       minWidth: "רוחב לוח מינימלי",
       maxWidth: "רוחב לוח מרבי",
-      showNumber: "חלוניות מספרים"
+      showNumber: "מספר חלונית זו"
     },
     paneldynamic: {
       name: "שם החלונית",
@@ -828,6 +829,8 @@ export var hebrewStrings = {
       header: "כותרת",
       background: "רקע",
       appearance: "מראה",
+      accentColors: "צבעי הדגשה",
+      scaling: "שינוי גודל",
       others: "אחרים"
     },
     editProperty: "עריכת מאפיין '{0}'",
@@ -1289,7 +1292,8 @@ export var hebrewStrings = {
       innerIndent: "מוסיף רווח או שוליים בין תוכן החלונית לגבול השמאלי של תיבת החלונית.",
       startWithNewLine: "בטל את הבחירה כדי להציג את החלונית בשורה אחת עם השאלה או החלונית הקודמת. ההגדרה אינה חלה אם החלונית היא הרכיב הראשון בטופס.",
       state: "בחר מתוך: \"מורחב\" - הלוח מוצג במלואו וניתן לכווץ; \"מכווץ\" - הלוח מציג רק את הכותרת והתיאור וניתן להרחיבו; \"נעול\" - הלוח מוצג במלואו ולא ניתן לכווץ.",
-      width: "קובע את רוחב החלונית ביחס לרכיבי סקר אחרים באותה שורה. מקבל ערכי CSS (px, %, in, pt וכו')."
+      width: "קובע את רוחב החלונית ביחס לרכיבי סקר אחרים באותה שורה. מקבל ערכי CSS (px, %, in, pt וכו').",
+      showQuestionNumbers: "מקצה מספרים לשאלות המקוננות בלוח זה."
     },
     paneldynamic: {
       name: "מזהה חלונית שאינו גלוי למשיבים.",
@@ -1695,6 +1699,20 @@ export var hebrewStrings = {
       brown: "חום",
       green: "ירוק"
     }
+  },
+  creatortheme: {
+    "--sjs-special-background": "רקע פני השטח",
+    "--sjs-primary-background-500": "הראשי",
+    "--sjs-secondary-background-500": "משני",
+    surfaceScale: "משטח",
+    userInterfaceBaseUnit: "ממשק משתמש",
+    fontScale: "גופן",
+    names: {
+      sc2020: "יוצר הסקר 2020",
+      "default-light": "אור",
+      "default-dark": "חשוך",
+      "default-contrast": "ניגוד"
+    }
   }
 };
 
@@ -1877,7 +1895,6 @@ editorLocalization.locales["he"] = hebrewStrings;
 // panel.width: "Inline panel width" => "רוחב החלונית בתוך שורה"
 // panel.minWidth: "Minimum panel width" => "רוחב לוח מינימלי"
 // panel.maxWidth: "Maximum panel width" => "רוחב לוח מרבי"
-// panel.showNumber: "Number panels" => "חלוניות מספרים"
 // paneldynamic.name: "Panel name" => "שם החלונית"
 // paneldynamic.title: "Panel title" => "כותרת הפאנל"
 // paneldynamic.description: "Panel description" => "תיאור הלוח"
@@ -2388,3 +2405,18 @@ editorLocalization.locales["he"] = hebrewStrings;
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "כאשר הוא מוגדר ל- 0, הגובה מחושב באופן אוטומטי כדי להתאים לתוכן הכותרת."
 // p.mobileHeight: "Height on smartphones" => "גובה בסמארטפונים"
 // header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "כאשר אפשרות זו מופעלת, החלק העליון של הסקר מכסה את החלק התחתון של הכותרת."
+// ed.creatorSettingTitle: "Creator Settings" => "הגדרות יוצר"
+// tabs.accentColors: "Accent colors" => "צבעי הדגשה"
+// tabs.scaling: "Scaling" => "שינוי גודל"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "מקצה מספרים לשאלות המקוננות בלוח זה."
+// creatortheme.--sjs-special-background: "Surface background" => "רקע פני השטח"
+// creatortheme.--sjs-primary-background-500: "Primary" => "הראשי"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "משני"
+// creatortheme.surfaceScale: "Surface" => "משטח"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "ממשק משתמש"
+// creatortheme.fontScale: "Font" => "גופן"
+// names.sc2020: "Survey Creator 2020" => "יוצר הסקר 2020"
+// names.default-light: "Light" => "אור"
+// names.default-dark: "Dark" => "חשוך"
+// names.default-contrast: "Contrast" => "ניגוד"
+// panel.showNumber: "Number this panel" => "מספר חלונית זו"

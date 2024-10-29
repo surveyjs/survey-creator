@@ -304,7 +304,7 @@ export var enStrings = {
       width: "Inline panel width",
       minWidth: "Minimum panel width",
       maxWidth: "Maximum panel width",
-      showNumber: "Number panels"
+      showNumber: "Number this panel"
     },
     paneldynamic: {
       name: "Panel name",
@@ -1297,7 +1297,8 @@ export var enStrings = {
       innerIndent: "Adds space or margin between the panel content and the left border of the panel box.",
       startWithNewLine: "Unselect to display the panel in one line with the previous question or panel. The setting doesn't apply if the panel is the first element in your form.",
       state: "Choose from: \"Expanded\" - the panel is displayed in full and can be collapsed; \"Collapsed\" - the panel displays only the title and description and can be expanded; \"Locked\" - the panel is displayed in full and cannot be collapsed.",
-      width: "Sets the width of the panel in proportion to other survey elements in the same line. Accepts CSS values (px, %, in, pt, etc.)."
+      width: "Sets the width of the panel in proportion to other survey elements in the same line. Accepts CSS values (px, %, in, pt, etc.).",
+      showQuestionNumbers: "Assigns numbers to questions nested within this panel."
     },
     paneldynamic: {
       name: "A panel ID that is not visible to respondents.",

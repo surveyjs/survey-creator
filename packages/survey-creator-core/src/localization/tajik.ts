@@ -303,7 +303,6 @@ export var tgStrings = {
       // width: "Inline panel width",
       // minWidth: "Minimum panel width",
       // maxWidth: "Maximum panel width",
-      // showNumber: "Number panels"
     },
     paneldynamic: {
       // name: "Panel name",

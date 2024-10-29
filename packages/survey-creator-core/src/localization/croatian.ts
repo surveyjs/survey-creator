@@ -69,6 +69,7 @@ export var hrStrings = {
     surveySettingsTooltip: "Postavke upitnika",
     themeSettings: "Postavke teme",
     themeSettingsTooltip: "Postavke teme",
+    creatorSettingTitle: "Postavke autora",
     showPanel: "Pokaži ploču",
     hidePanel: "Sakrij ploču",
     prevSelected: "Odaberi prethodno",
@@ -301,7 +302,7 @@ export var hrStrings = {
       width: "Širina umetnute ploče",
       minWidth: "Minimalna širina ploče",
       maxWidth: "Maksimalna širina ploče",
-      showNumber: "Brojčane ploče"
+      showNumber: "Numerirajte ovu ploču"
     },
     paneldynamic: {
       name: "Naziv ploče",
@@ -828,6 +829,8 @@ export var hrStrings = {
       header: "Zaglavlje",
       background: "Pozadina",
       appearance: "Izgled",
+      accentColors: "Naglašavajuće boje",
+      scaling: "Skaliranje",
       others: "Drugi"
     },
     editProperty: "Uređivanje objekta '{0}'",
@@ -1289,7 +1292,8 @@ export var hrStrings = {
       innerIndent: "Dodaje razmak ili marginu između sadržaja ploče i lijevog obruba okvira ploče.",
       startWithNewLine: "Poništite odabir za prikaz ploče u jednom retku s prethodnim pitanjem ili pločom. Postavka se ne primjenjuje ako je ploča prvi element u obrascu.",
       state: "Odaberite između: \"Prošireno\" - ploča je prikazana u cijelosti i može se sažeti; \"Sažeto\" - ploča prikazuje samo naslov i opis i može se proširiti; \"Zaključano\" - ploča je prikazana u cijelosti i ne može se sažeti.",
-      width: "Postavlja širinu ploče proporcionalno ostalim elementima istraživanja u istoj liniji. Prihvaća CSS vrijednosti (px, %, in, pt itd.)."
+      width: "Postavlja širinu ploče proporcionalno ostalim elementima istraživanja u istoj liniji. Prihvaća CSS vrijednosti (px, %, in, pt itd.).",
+      showQuestionNumbers: "Dodjeljuje brojeve pitanjima ugniježđenim unutar ove ploče."
     },
     paneldynamic: {
       name: "ID ploče koji nije vidljiv ispitanicima.",
@@ -1694,6 +1698,20 @@ export var hrStrings = {
       tulip: "Lala",
       brown: "Smeđ",
       green: "Zelen"
+    }
+  },
+  creatortheme: {
+    "--sjs-special-background": "Pozadina površine",
+    "--sjs-primary-background-500": "Glavni",
+    "--sjs-secondary-background-500": "Sekundaran",
+    surfaceScale: "Površina",
+    userInterfaceBaseUnit: "Korisničko sučelje",
+    fontScale: "Krstionica",
+    names: {
+      sc2020: "Kreator ankete 2020",
+      "default-light": "Svjetlo",
+      "default-dark": "Mračan",
+      "default-contrast": "Razlika"
     }
   }
 };
@@ -2303,7 +2321,6 @@ editorLocalization.locales["hr"] = hrStrings;
 // panel.width: "Inline panel width" => "Širina umetnute ploče"
 // panel.minWidth: "Minimum panel width" => "Minimalna širina ploče"
 // panel.maxWidth: "Maximum panel width" => "Maksimalna širina ploče"
-// panel.showNumber: "Number panels" => "Brojčane ploče"
 // paneldynamic.name: "Panel name" => "Naziv ploče"
 // paneldynamic.title: "Panel title" => "Naslov ploče"
 // paneldynamic.description: "Panel description" => "Opis ploče"
@@ -2814,3 +2831,18 @@ editorLocalization.locales["hr"] = hrStrings;
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Kada je postavljena na 0, visina se automatski izračunava kako bi se prilagodio sadržaju zaglavlja."
 // p.mobileHeight: "Height on smartphones" => "Visina na pametnim telefonima"
 // header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Kada je omogućeno, vrh upitnika prekriva dno zaglavlja."
+// ed.creatorSettingTitle: "Creator Settings" => "Postavke autora"
+// tabs.accentColors: "Accent colors" => "Naglašavajuće boje"
+// tabs.scaling: "Scaling" => "Skaliranje"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "Dodjeljuje brojeve pitanjima ugniježđenim unutar ove ploče."
+// creatortheme.--sjs-special-background: "Surface background" => "Pozadina površine"
+// creatortheme.--sjs-primary-background-500: "Primary" => "Glavni"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "Sekundaran"
+// creatortheme.surfaceScale: "Surface" => "Površina"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "Korisničko sučelje"
+// creatortheme.fontScale: "Font" => "Krstionica"
+// names.sc2020: "Survey Creator 2020" => "Kreator ankete 2020"
+// names.default-light: "Light" => "Svjetlo"
+// names.default-dark: "Dark" => "Mračan"
+// names.default-contrast: "Contrast" => "Razlika"
+// panel.showNumber: "Number this panel" => "Numerirajte ovu ploču"

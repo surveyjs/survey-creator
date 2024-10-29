@@ -69,6 +69,7 @@ var simplifiedChineseTranslation = {
     surveySettingsTooltip: "调查设置",
     themeSettings: "主题设置",
     themeSettingsTooltip: "主题设置",
+    creatorSettingTitle: "Creator 设置",
     showPanel: "显示面板",
     hidePanel: "“隐藏”面板",
     prevSelected: "选择上一个",
@@ -301,7 +302,7 @@ var simplifiedChineseTranslation = {
       width: "内嵌面板宽度",
       minWidth: "最小面板宽度",
       maxWidth: "最大面板宽度",
-      showNumber: "数字面板"
+      showNumber: "为此面板编号"
     },
     paneldynamic: {
       name: "面板名称",
@@ -828,6 +829,8 @@ var simplifiedChineseTranslation = {
       header: "页眉",
       background: "背景",
       appearance: "外观",
+      accentColors: "强调色",
+      scaling: "缩放",
       others: "别人"
     },
     editProperty: "编辑属性: '{0}'",
@@ -1289,7 +1292,8 @@ var simplifiedChineseTranslation = {
       innerIndent: "在面板内容和面板框的左边框之间添加空格或边距。",
       startWithNewLine: "取消选择以将面板与上一个问题或面板显示在一行中。如果面板是窗体中的第一个元素，则该设置不适用。",
       state: "从中选择：“展开” - 面板完整显示，可以折叠;“已折叠” - 面板仅显示标题和描述，可以展开;“已锁定” - 面板完整显示，无法折叠。",
-      width: "设置面板的宽度，使其与同一行中的其他测量图元成比例。接受 CSS 值（px、%、in、pt 等）。"
+      width: "设置面板的宽度，使其与同一行中的其他测量图元成比例。接受 CSS 值（px、%、in、pt 等）。",
+      showQuestionNumbers: "为嵌套在此面板中的问题分配编号。"
     },
     paneldynamic: {
       name: "受访者不可见的面板 ID。",
@@ -1694,6 +1698,20 @@ var simplifiedChineseTranslation = {
       tulip: "郁金香",
       brown: "棕色",
       green: "绿"
+    }
+  },
+  creatortheme: {
+    "--sjs-special-background": "表面背景",
+    "--sjs-primary-background-500": "主要",
+    "--sjs-secondary-background-500": "二 次",
+    surfaceScale: "表面",
+    userInterfaceBaseUnit: "用户界面",
+    fontScale: "字体",
+    names: {
+      sc2020: "调查创建者 2020",
+      "default-light": "光",
+      "default-dark": "黑暗",
+      "default-contrast": "反差"
     }
   }
 };
@@ -2451,7 +2469,6 @@ editorLocalization.locales["zh-cn"] = simplifiedChineseTranslation;
 // panel.width: "Inline panel width" => "内嵌面板宽度"
 // panel.minWidth: "Minimum panel width" => "最小面板宽度"
 // panel.maxWidth: "Maximum panel width" => "最大面板宽度"
-// panel.showNumber: "Number panels" => "数字面板"
 // paneldynamic.name: "Panel name" => "面板名称"
 // paneldynamic.title: "Panel title" => "面板标题"
 // paneldynamic.description: "Panel description" => "面板说明"
@@ -2962,3 +2979,18 @@ editorLocalization.locales["zh-cn"] = simplifiedChineseTranslation;
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "设置为 0 时，将自动计算高度以适应标题的内容。"
 // p.mobileHeight: "Height on smartphones" => "智能手机上的身高"
 // header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "启用后，调查的顶部将覆盖页眉的底部。"
+// ed.creatorSettingTitle: "Creator Settings" => "Creator 设置"
+// tabs.accentColors: "Accent colors" => "强调色"
+// tabs.scaling: "Scaling" => "缩放"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "为嵌套在此面板中的问题分配编号。"
+// creatortheme.--sjs-special-background: "Surface background" => "表面背景"
+// creatortheme.--sjs-primary-background-500: "Primary" => "主要"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "二 次"
+// creatortheme.surfaceScale: "Surface" => "表面"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "用户界面"
+// creatortheme.fontScale: "Font" => "字体"
+// names.sc2020: "Survey Creator 2020" => "调查创建者 2020"
+// names.default-light: "Light" => "光"
+// names.default-dark: "Dark" => "黑暗"
+// names.default-contrast: "Contrast" => "反差"
+// panel.showNumber: "Number this panel" => "为此面板编号"

@@ -69,6 +69,7 @@ export var arStrings = {
     surveySettingsTooltip: "إعدادات الاستطلاع",
     themeSettings: "إعدادات النسق",
     themeSettingsTooltip: "إعدادات النسق",
+    creatorSettingTitle: "إعدادات منشئي المحتوى",
     showPanel: "إظهار اللوحة",
     hidePanel: "إخفاء اللوحة",
     prevSelected: "Select previous",
@@ -301,7 +302,7 @@ export var arStrings = {
       width: "عرض اللوحة المضمنة",
       minWidth: "الحد الأدنى لعرض اللوحة",
       maxWidth: "الحد الأقصى لعرض اللوحة",
-      showNumber: "لوحات الأرقام"
+      showNumber: "رقم هذه اللوحة"
     },
     paneldynamic: {
       name: "اسم اللوحة",
@@ -828,6 +829,8 @@ export var arStrings = {
       header: "راس",
       background: "خلفية",
       appearance: "مظهر",
+      accentColors: "ألوان مميزة",
+      scaling: "القياس",
       others: "غير ذلك"
     },
     editProperty: "Edit property '{0}'",
@@ -1289,7 +1292,8 @@ export var arStrings = {
       innerIndent: "يضيف مسافة أو هامش بين محتوى اللوحة والحد الأيسر لمربع اللوحة.",
       startWithNewLine: "قم بإلغاء التحديد لعرض اللوحة في سطر واحد مع السؤال أو اللوحة السابقة. لا ينطبق الإعداد إذا كانت اللوحة هي العنصر الأول في النموذج الخاص بك.",
       state: "اختر من بين: \"موسعة\" - يتم عرض اللوحة بالكامل ويمكن طيها ؛ \"مطوي\" - تعرض اللوحة العنوان والوصف فقط ويمكن توسيعها ؛ \"مغلق\" - يتم عرض اللوحة بالكامل ولا يمكن طيها.",
-      width: "يضبط عرض اللوحة بما يتناسب مع عناصر الاستطلاع الأخرى في نفس السطر. يقبل قيم CSS (px ، ٪ ، in ، pt ، إلخ)."
+      width: "يضبط عرض اللوحة بما يتناسب مع عناصر الاستطلاع الأخرى في نفس السطر. يقبل قيم CSS (px ، ٪ ، in ، pt ، إلخ).",
+      showQuestionNumbers: "يعين الأرقام للأسئلة المتداخلة داخل هذه اللوحة."
     },
     paneldynamic: {
       name: "معرف لوحة غير مرئي للمستجيبين.",
@@ -1694,6 +1698,20 @@ export var arStrings = {
       tulip: "توليب",
       brown: "أسمر",
       green: "أخضر"
+    }
+  },
+  creatortheme: {
+    "--sjs-special-background": "خلفية السطح",
+    "--sjs-primary-background-500": "ابتدائي",
+    "--sjs-secondary-background-500": "ثانوي",
+    surfaceScale: "سطح",
+    userInterfaceBaseUnit: "واجهة المستخدم",
+    fontScale: "الخط",
+    names: {
+      sc2020: "منشئ الاستطلاع 2020",
+      "default-light": "ضوء",
+      "default-dark": "داكن",
+      "default-contrast": "تباين"
     }
   }
 };
@@ -2220,7 +2238,6 @@ editorLocalization.locales["ar"] = arStrings;
 // panel.width: "Inline panel width" => "عرض اللوحة المضمنة"
 // panel.minWidth: "Minimum panel width" => "الحد الأدنى لعرض اللوحة"
 // panel.maxWidth: "Maximum panel width" => "الحد الأقصى لعرض اللوحة"
-// panel.showNumber: "Number panels" => "لوحات الأرقام"
 // paneldynamic.name: "Panel name" => "اسم اللوحة"
 // paneldynamic.title: "Panel title" => "عنوان اللوحة"
 // paneldynamic.description: "Panel description" => "وصف اللوحة"
@@ -2731,3 +2748,21 @@ editorLocalization.locales["ar"] = arStrings;
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "عند التعيين إلى 0 ، يتم حساب الارتفاع تلقائيا لاستيعاب محتوى الرأس."
 // p.mobileHeight: "Height on smartphones" => "الارتفاع على الهواتف الذكية"
 // header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "عند التمكين، يقوم الجزء العلوي من الاستطلاع بتراكب الجزء السفلي من الرأس."
+// ed.creatorSettingTitle: "Creator Settings" => "إعدادات منشئي المحتوى"
+// tabs.accentColors: "Accent colors" => "ألوان مميزة"
+// tabs.scaling: "Scaling" => "القياس"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "يعين الأرقام للأسئلة المتداخلة داخل هذه اللوحة."
+// creatortheme.--sjs-special-background: "Surface background" => "خلفية السطح"
+// creatortheme.--sjs-primary-background-500: "Primary" => "ابتدائي"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "ثانوي"
+// creatortheme.surfaceScale: "Surface" => "سطح"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "واجهة المستخدم"
+// creatortheme.fontScale: "Font" => "الخط"
+// names.sc2020: "Survey Creator 2020" => "منشئ الاستطلاع 2020"
+// names.default-light: "Light" => "ضوء"
+// names.default-dark: "Dark" => "داكن"
+// names.default-contrast: "Contrast" => "تباين"
+// panel.showNumber: "Number this panel" => "رقم هذه اللوحة"
+// ed.creatorSettingTitle: "Creator Settings" => "إعدادات منشئي المحتوى"
+// tabs.accentColors: "Accent colors" => "ألوان مميزة"
+// tabs.scaling: "Scaling" => "القياس"

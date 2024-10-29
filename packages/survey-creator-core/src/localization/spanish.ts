@@ -69,6 +69,7 @@ var spanishTranslation = {
     surveySettingsTooltip: "Configuración de la encuesta",
     themeSettings: "Configuración del tema",
     themeSettingsTooltip: "Configuración del tema",
+    creatorSettingTitle: "Configuración del creador",
     showPanel: "Mostrar panel",
     hidePanel: "Ocultar panel",
     prevSelected: "Seleccionar anterior",
@@ -301,7 +302,7 @@ var spanishTranslation = {
       width: "Ancho del panel en línea",
       minWidth: "Anchura mínima del panel",
       maxWidth: "Anchura máxima del panel",
-      showNumber: "Paneles numéricos"
+      showNumber: "Numerar este panel"
     },
     paneldynamic: {
       name: "Nombre del panel",
@@ -828,6 +829,8 @@ var spanishTranslation = {
       header: "Encabezado",
       background: "Fondo",
       appearance: "Apariencia",
+      accentColors: "Colores de acento",
+      scaling: "Escalada",
       others: "Otras"
     },
     editProperty: "Editar propiedad '{0}'",
@@ -1289,7 +1292,8 @@ var spanishTranslation = {
       innerIndent: "Añade espacio o margen entre el contenido del panel y el borde izquierdo del cuadro del panel.",
       startWithNewLine: "Anule la selección para mostrar el panel en una línea con la pregunta o el panel anterior. La configuración no se aplica si el panel es el primer elemento del formulario.",
       state: "Elija entre: \"Expandido\": el panel se muestra en su totalidad y se puede contraer; \"Contraído\": el panel muestra solo el título y la descripción y se puede expandir; \"Bloqueado\": el panel se muestra en su totalidad y no se puede contraer.",
-      width: "Define la anchura del panel en proporción a otros elementos topográficos de la misma línea. Acepta valores CSS (px, %, in, pt, etc.)."
+      width: "Define la anchura del panel en proporción a otros elementos topográficos de la misma línea. Acepta valores CSS (px, %, in, pt, etc.).",
+      showQuestionNumbers: "Asigna números a las preguntas anidadas dentro de este panel."
     },
     paneldynamic: {
       name: "Un ID de panel que no es visible para los encuestados.",
@@ -1695,6 +1699,20 @@ var spanishTranslation = {
       brown: "Marrón",
       green: "Verde"
     }
+  },
+  creatortheme: {
+    "--sjs-special-background": "Fondo de superficie",
+    "--sjs-primary-background-500": "Primario",
+    "--sjs-secondary-background-500": "Secundario",
+    surfaceScale: "Superficie",
+    userInterfaceBaseUnit: "Interfaz de usuario",
+    fontScale: "Fuente",
+    names: {
+      sc2020: "Creador de encuestas 2020",
+      "default-light": "Luz",
+      "default-dark": "Oscuro",
+      "default-contrast": "Contraste"
+    }
   }
 };
 
@@ -2083,7 +2101,6 @@ editorLocalization.locales["es"] = spanishTranslation;
 // panel.width: "Inline panel width" => "Ancho del panel en línea"
 // panel.minWidth: "Minimum panel width" => "Anchura mínima del panel"
 // panel.maxWidth: "Maximum panel width" => "Anchura máxima del panel"
-// panel.showNumber: "Number panels" => "Paneles numéricos"
 // paneldynamic.name: "Panel name" => "Nombre del panel"
 // paneldynamic.title: "Panel title" => "Título de la viñeta"
 // paneldynamic.description: "Panel description" => "Descripción del panel"
@@ -2594,3 +2611,18 @@ editorLocalization.locales["es"] = spanishTranslation;
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Cuando se establece en 0, la altura se calcula automáticamente para acomodar el contenido del encabezado."
 // p.mobileHeight: "Height on smartphones" => "Altura en smartphones"
 // header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Cuando se habilita, la parte superior de la encuesta se superpone a la parte inferior del encabezado."
+// ed.creatorSettingTitle: "Creator Settings" => "Configuración del creador"
+// tabs.accentColors: "Accent colors" => "Colores de acento"
+// tabs.scaling: "Scaling" => "Escalada"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "Asigna números a las preguntas anidadas dentro de este panel."
+// creatortheme.--sjs-special-background: "Surface background" => "Fondo de superficie"
+// creatortheme.--sjs-primary-background-500: "Primary" => "Primario"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "Secundario"
+// creatortheme.surfaceScale: "Surface" => "Superficie"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "Interfaz de usuario"
+// creatortheme.fontScale: "Font" => "Fuente"
+// names.sc2020: "Survey Creator 2020" => "Creador de encuestas 2020"
+// names.default-light: "Light" => "Luz"
+// names.default-dark: "Dark" => "Oscuro"
+// names.default-contrast: "Contrast" => "Contraste"
+// panel.showNumber: "Number this panel" => "Numerar este panel"

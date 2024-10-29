@@ -69,6 +69,7 @@ export var huStrings = {
     surveySettingsTooltip: "Földmérési beállítások",
     themeSettings: "Téma beállítások",
     themeSettingsTooltip: "Téma beállításai",
+    creatorSettingTitle: "Alkotói beállítások",
     showPanel: "Panel megjelenítése",
     hidePanel: "Panel elrejtése",
     prevSelected: "Előző kiválasztása",
@@ -301,7 +302,7 @@ export var huStrings = {
       width: "Szövegközi panel szélessége",
       minWidth: "Minimális panelszélesség",
       maxWidth: "Maximális panelszélesség",
-      showNumber: "Szám panelek"
+      showNumber: "A panel számozása"
     },
     paneldynamic: {
       name: "Panel neve",
@@ -828,6 +829,8 @@ export var huStrings = {
       header: "Fejléc",
       background: "Háttér",
       appearance: "Megjelenés",
+      accentColors: "Kiemelő színek",
+      scaling: "Rétegképződés",
       others: "Mások"
     },
     editProperty: "Tulajdonság szerkesztése '{0}'",
@@ -1289,7 +1292,8 @@ export var huStrings = {
       innerIndent: "Térközt vagy margót ad a panel tartalma és a paneldoboz bal szegélye közé.",
       startWithNewLine: "Törölje a jelölést, ha a panel egy sorban jelenik meg az előző kérdéssel vagy panellel. A beállítás nem érvényes, ha a panel az űrlap első eleme.",
       state: "Válasszon a következők közül: \"Kibontott\" - a panel teljes egészében megjelenik és összecsukható; \"Összecsukott\" - a panel csak a címet és a leírást jeleníti meg, és bővíthető; \"Zárolva\" - a panel teljes egészében megjelenik, és nem csukható össze.",
-      width: "A panel szélességét az ugyanabban a sorban lévő többi földmérési elemhez viszonyítva állítja be. CSS-értékeket fogad el (px, %, in, pt stb.)."
+      width: "A panel szélességét az ugyanabban a sorban lévő többi földmérési elemhez viszonyítva állítja be. CSS-értékeket fogad el (px, %, in, pt stb.).",
+      showQuestionNumbers: "Számokat rendel a panelbe ágyazott kérdésekhez."
     },
     paneldynamic: {
       name: "Olyan panelazonosító, amely nem látható a válaszadók számára.",
@@ -1694,6 +1698,20 @@ export var huStrings = {
       tulip: "Tulipán",
       brown: "Barna",
       green: "Zöld"
+    }
+  },
+  creatortheme: {
+    "--sjs-special-background": "Felület háttér",
+    "--sjs-primary-background-500": "Elsődleges",
+    "--sjs-secondary-background-500": "Másodlagos",
+    surfaceScale: "Felület",
+    userInterfaceBaseUnit: "Felhasználói felület",
+    fontScale: "Betűkészlet",
+    names: {
+      sc2020: "Felmérés készítője 2020",
+      "default-light": "Fény",
+      "default-dark": "Sötét",
+      "default-contrast": "Kontraszt"
     }
   }
 };
@@ -2462,7 +2480,6 @@ editorLocalization.locales["hu"] = huStrings;
 // panel.width: "Inline panel width" => "Szövegközi panel szélessége"
 // panel.minWidth: "Minimum panel width" => "Minimális panelszélesség"
 // panel.maxWidth: "Maximum panel width" => "Maximális panelszélesség"
-// panel.showNumber: "Number panels" => "Szám panelek"
 // paneldynamic.name: "Panel name" => "Panel neve"
 // paneldynamic.title: "Panel title" => "Panel címe"
 // paneldynamic.description: "Panel description" => "Panel leírása"
@@ -2973,3 +2990,18 @@ editorLocalization.locales["hu"] = huStrings;
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Ha 0-ra van állítva, a magasság automatikusan kiszámításra kerül, hogy elférjen a fejléc tartalma."
 // p.mobileHeight: "Height on smartphones" => "Magasság az okostelefonokon"
 // header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Ha engedélyezve van, a felmérés teteje átfedi a fejléc alját."
+// ed.creatorSettingTitle: "Creator Settings" => "Alkotói beállítások"
+// tabs.accentColors: "Accent colors" => "Kiemelő színek"
+// tabs.scaling: "Scaling" => "Rétegképződés"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "Számokat rendel a panelbe ágyazott kérdésekhez."
+// creatortheme.--sjs-special-background: "Surface background" => "Felület háttér"
+// creatortheme.--sjs-primary-background-500: "Primary" => "Elsődleges"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "Másodlagos"
+// creatortheme.surfaceScale: "Surface" => "Felület"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "Felhasználói felület"
+// creatortheme.fontScale: "Font" => "Betűkészlet"
+// names.sc2020: "Survey Creator 2020" => "Felmérés készítője 2020"
+// names.default-light: "Light" => "Fény"
+// names.default-dark: "Dark" => "Sötét"
+// names.default-contrast: "Contrast" => "Kontraszt"
+// panel.showNumber: "Number this panel" => "A panel számozása"

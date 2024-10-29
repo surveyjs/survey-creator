@@ -69,6 +69,7 @@ var persianStrings = {
     surveySettingsTooltip: "تنظیمات نظرسنجی",
     themeSettings: "تنظیمات تم",
     themeSettingsTooltip: "تنظیمات تم",
+    creatorSettingTitle: "تنظیمات سازنده",
     showPanel: "نمایش پنل",
     hidePanel: "پنهان سازی پنل",
     prevSelected: "قبلی",
@@ -301,7 +302,7 @@ var persianStrings = {
       width: "عرض پانل درون خطی",
       minWidth: "حداقل عرض پانل",
       maxWidth: "حداکثر عرض پانل",
-      showNumber: "پانل های شماره"
+      showNumber: "شماره گذاری این پانل"
     },
     paneldynamic: {
       name: "نام تابلو",
@@ -828,6 +829,8 @@ var persianStrings = {
       header: "هدر",
       background: "پس زمینه",
       appearance: "ظاهر",
+      accentColors: "رنگ های تاکیدی",
+      scaling: "توزین",
       others: "باقی موارد"
     },
     editProperty: "ویرایش خصوصیت '{0}'",
@@ -1289,7 +1292,8 @@ var persianStrings = {
       innerIndent: "اضافه کردن فضا یا حاشیه بین محتوای پانل و مرز سمت چپ جعبه پانل.",
       startWithNewLine: "عدم انتخاب برای نمایش پانل در یک خط با سوال قبلی یا پانل. تنظیمات اعمال نمی شود اگر پانل اولین عنصر در فرم شما باشد.",
       state: "را انتخاب کنید از: \"گسترش یافته\" - پانل به طور کامل نمایش داده می شود و می تواند سقوط کند؛ \"سقوط\" - پانل تنها عنوان و توضیحات را نمایش می دهد و می تواند گسترش یابد. \"Locked\" - پانل به طور کامل نمایش داده می شود و نمی تواند سقوط کند.",
-      width: "عرض پانل را متناسب با سایر عناصر بررسی در همان خط تنظیم می کند. مقادیر CSS را می پذیرد (px، ٪، in، pt و غیره)."
+      width: "عرض پانل را متناسب با سایر عناصر بررسی در همان خط تنظیم می کند. مقادیر CSS را می پذیرد (px، ٪، in، pt و غیره).",
+      showQuestionNumbers: "اعداد را به سؤالات تودرتو در این پانل اختصاص می دهد."
     },
     paneldynamic: {
       name: "یک شناسه پانل که برای پاسخ دهندگان قابل مشاهده نیست.",
@@ -1694,6 +1698,20 @@ var persianStrings = {
       tulip: "لاله",
       brown: "قهوه ای",
       green: "سبز"
+    }
+  },
+  creatortheme: {
+    "--sjs-special-background": "زمینه سطح",
+    "--sjs-primary-background-500": "اولیه",
+    "--sjs-secondary-background-500": "ثانویه",
+    surfaceScale: "سطح",
+    userInterfaceBaseUnit: "رابط کاربری",
+    fontScale: "فونت",
+    names: {
+      sc2020: "خالق نظرسنجی 2020",
+      "default-light": "نور",
+      "default-dark": "تاریک",
+      "default-contrast": "کنتراست"
     }
   }
 };
@@ -2264,7 +2282,6 @@ editorLocalization.locales["fa"] = persianStrings;
 // panel.width: "Inline panel width" => "عرض پانل درون خطی"
 // panel.minWidth: "Minimum panel width" => "حداقل عرض پانل"
 // panel.maxWidth: "Maximum panel width" => "حداکثر عرض پانل"
-// panel.showNumber: "Number panels" => "پانل های شماره"
 // paneldynamic.name: "Panel name" => "نام تابلو"
 // paneldynamic.title: "Panel title" => "عنوان پنل"
 // paneldynamic.description: "Panel description" => "توضیحات پنل"
@@ -2775,3 +2792,18 @@ editorLocalization.locales["fa"] = persianStrings;
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "هنگامی که روی 0 تنظیم می شود، ارتفاع به طور خودکار محاسبه می شود تا محتوای هدر را در خود جای دهد."
 // p.mobileHeight: "Height on smartphones" => "ارتفاع در گوشی های هوشمند"
 // header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "هنگامی که فعال باشد، بالای نظرسنجی پایین هدر را همپوشانی می کند."
+// ed.creatorSettingTitle: "Creator Settings" => "تنظیمات سازنده"
+// tabs.accentColors: "Accent colors" => "رنگ های تاکیدی"
+// tabs.scaling: "Scaling" => "توزین"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "اعداد را به سؤالات تودرتو در این پانل اختصاص می دهد."
+// creatortheme.--sjs-special-background: "Surface background" => "زمینه سطح"
+// creatortheme.--sjs-primary-background-500: "Primary" => "اولیه"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "ثانویه"
+// creatortheme.surfaceScale: "Surface" => "سطح"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "رابط کاربری"
+// creatortheme.fontScale: "Font" => "فونت"
+// names.sc2020: "Survey Creator 2020" => "خالق نظرسنجی 2020"
+// names.default-light: "Light" => "نور"
+// names.default-dark: "Dark" => "تاریک"
+// names.default-contrast: "Contrast" => "کنتراست"
+// panel.showNumber: "Number this panel" => "شماره گذاری این پانل"

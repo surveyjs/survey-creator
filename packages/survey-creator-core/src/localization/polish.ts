@@ -69,6 +69,7 @@ var polishStrings = {
     surveySettingsTooltip: "Ustawienia ankiety",
     themeSettings: "Ustawienia motywu",
     themeSettingsTooltip: "Ustawienia motywu",
+    creatorSettingTitle: "Ustawienia twórcy",
     showPanel: "Pokaż panel",
     hidePanel: "Panel Ukryj",
     prevSelected: "Wybierz poprzedni",
@@ -301,7 +302,7 @@ var polishStrings = {
       width: "Szerokość panelu w linii",
       minWidth: "Minimalna szerokość panelu",
       maxWidth: "Maksymalna szerokość panelu",
-      showNumber: "Panele numeryczne"
+      showNumber: "Numeruj ten panel"
     },
     paneldynamic: {
       name: "Nazwa panelu",
@@ -828,6 +829,8 @@ var polishStrings = {
       header: "Nagłówek",
       background: "Tło",
       appearance: "Wygląd",
+      accentColors: "Akcenty kolorystyczne",
+      scaling: "Skalowanie",
       others: "Inni"
     },
     editProperty: "Edit property '{0}'",
@@ -1289,7 +1292,8 @@ var polishStrings = {
       innerIndent: "Dodaje odstęp lub margines między zawartością panelu a lewą krawędzią ramki panelu.",
       startWithNewLine: "Usuń zaznaczenie, aby wyświetlić panel w jednym wierszu z poprzednim pytaniem lub panelem. To ustawienie nie ma zastosowania, jeśli panel jest pierwszym elementem formularza.",
       state: "Do wyboru: \"Rozwinięty\" - panel wyświetla się w całości i można go zwinąć; \"Zwinięty\" - panel wyświetla tylko tytuł i opis i można go rozwinąć; \"Zablokowany\" - panel jest wyświetlany w całości i nie można go zwinąć.",
-      width: "Ustawia szerokość panelu proporcjonalnie do innych elementów pomiarowych w tej samej linii. Akceptuje wartości CSS (px, %, in, pt itp.)."
+      width: "Ustawia szerokość panelu proporcjonalnie do innych elementów pomiarowych w tej samej linii. Akceptuje wartości CSS (px, %, in, pt itp.).",
+      showQuestionNumbers: "Przypisuje numery pytaniom zagnieżdżonym w tym panelu."
     },
     paneldynamic: {
       name: "Identyfikator panelu, który nie jest widoczny dla respondentów.",
@@ -1694,6 +1698,20 @@ var polishStrings = {
       tulip: "Tulipan",
       brown: "Brązowy",
       green: "Zielony"
+    }
+  },
+  creatortheme: {
+    "--sjs-special-background": "Tło powierzchni",
+    "--sjs-primary-background-500": "Podstawowy",
+    "--sjs-secondary-background-500": "Wtórny",
+    surfaceScale: "Powierzchnia",
+    userInterfaceBaseUnit: "Interfejs użytkownika",
+    fontScale: "Czcionka",
+    names: {
+      sc2020: "Kreator ankiet 2020",
+      "default-light": "Światło",
+      "default-dark": "Ciemny",
+      "default-contrast": "Kontrast"
     }
   }
 };
@@ -2576,7 +2594,6 @@ editorLocalization.locales["pl"] = polishStrings;
 // panel.width: "Inline panel width" => "Szerokość panelu w linii"
 // panel.minWidth: "Minimum panel width" => "Minimalna szerokość panelu"
 // panel.maxWidth: "Maximum panel width" => "Maksymalna szerokość panelu"
-// panel.showNumber: "Number panels" => "Panele numeryczne"
 // paneldynamic.name: "Panel name" => "Nazwa panelu"
 // paneldynamic.title: "Panel title" => "Tytuł panelu"
 // paneldynamic.description: "Panel description" => "Opis panelu"
@@ -3087,3 +3104,18 @@ editorLocalization.locales["pl"] = polishStrings;
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Po ustawieniu wartości 0 wysokość jest obliczana automatycznie, aby pomieścić zawartość nagłówka."
 // p.mobileHeight: "Height on smartphones" => "Wysokość na smartfonach"
 // header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Gdy ta opcja jest włączona, górna krawędź ankiety nakłada się na dolną część nagłówka."
+// ed.creatorSettingTitle: "Creator Settings" => "Ustawienia twórcy"
+// tabs.accentColors: "Accent colors" => "Akcenty kolorystyczne"
+// tabs.scaling: "Scaling" => "Skalowanie"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "Przypisuje numery pytaniom zagnieżdżonym w tym panelu."
+// creatortheme.--sjs-special-background: "Surface background" => "Tło powierzchni"
+// creatortheme.--sjs-primary-background-500: "Primary" => "Podstawowy"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "Wtórny"
+// creatortheme.surfaceScale: "Surface" => "Powierzchnia"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "Interfejs użytkownika"
+// creatortheme.fontScale: "Font" => "Czcionka"
+// names.sc2020: "Survey Creator 2020" => "Kreator ankiet 2020"
+// names.default-light: "Light" => "Światło"
+// names.default-dark: "Dark" => "Ciemny"
+// names.default-contrast: "Contrast" => "Kontrast"
+// panel.showNumber: "Number this panel" => "Numeruj ten panel"
