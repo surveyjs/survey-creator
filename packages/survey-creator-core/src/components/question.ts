@@ -661,6 +661,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       visibleIndex: 20,
       iconName: "icon-required",
       iconSize: 16,
+      active: <any>new ComputedUpdater<boolean>(() => this.isRequired),
       action: () => {
         if (
           this.creator.isCanModifyProperty(
@@ -672,7 +673,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
         }
       }
     });
-    requiredAction.innerCss = <string>(new ComputedUpdater<string>(() => new CssClassBuilder().append("svc-required-action").append("svc-required-action--active", this.isRequired).toString()) as any);
     requiredAction.innerItem.title = <string>(new ComputedUpdater<string>(() => {
       return this.isRequired ? this.creator.getLocString("pe.removeRequiredMark") : this.creator.getLocString("pe.markRequired");
     }) as any);
