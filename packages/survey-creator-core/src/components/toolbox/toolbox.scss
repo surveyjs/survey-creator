@@ -22,6 +22,12 @@ svc-toolbox {
     var(--ctr-toolbox-group-padding-left)
   );
 
+  --thm-toolbox-separator-width-compact: calc(
+    var(--ctr-toolbox-item-icon-width) +
+    var(--ctr-toolbox-item-padding-right-no-text) +
+    var(--ctr-toolbox-item-padding-left-no-text)
+  );
+
   --toolbox-width: var(--ctr-toolbox-min-width, 224.984375px /*calcSize(28)*/);
   --toolbox-width-compact: var(--thm-toolbox-width-compact, var(--dft-toolbox-width-compact));
 
@@ -35,6 +41,7 @@ svc-toolbox {
     padding-inline-end: var(--ctr-toolbox-search-padding-right, calcSize(2));
     padding-bottom: var(--ctr-toolbox-search-padding-bottom, calcSize(2.5));
     padding-inline-start: var(--ctr-toolbox-search-padding-left, calcSize(3));
+    height: unset;
 
     width: unset;
     flex-grow: 1;
@@ -158,16 +165,22 @@ svc-toolbox {
     padding-bottom: calc(var(--ctr-toolbox-separator-padding-top, 8px) + var(--ctr-toolbox-gap, 4px));
   }
   .svc-toolbox__category-separator {
-    margin-top: calc(var(--ctr-toolbox-separator-padding-top, 8px) + var(--ctr-toolbox-gap, 4px));
-    width: var(--ctr-toolbox-separator-width-compact, calcSize(5));
-    margin-inline-end: calc(
-      var(--ctr-toolbox-separator-padding-right-compact, 16px) - var(--ctr-toolbox-group-padding-left-compact, 12px) -
-        var(--ctr-toolbox-item-margin-horizontal-no-text, 0px)
-    );
-    margin-inline-start: calc(
-      var(--ctr-toolbox-separator-padding-left-compact, 16px) - var(--ctr-toolbox-group-padding-left-compact, 12px) -
-        var(--ctr-toolbox-item-margin-horizontal-no-text, 0px)
-    );
+    //margin-top: calc(var(--ctr-toolbox-separator-padding-top, 8px) + var(--ctr-toolbox-gap, 4px));
+    width: var(--thm-toolbox-separator-width-compact, calcSize(5));
+
+    padding-inline-end: var(--ctr-toolbox-separator-padding-right-compact, calcSize(2));
+    padding-inline-start: var(--ctr-toolbox-separator-padding-left-compact, calcSize(2));
+    margin-inline-end: calc(0px - var(--ctr-toolbox-group-padding-right-compact, calcSize(1.5)) - var(--ctr-toolbox-item-margin-horizontal-no-text, 4px));
+    margin-inline-start: calc(0px - var(--ctr-toolbox-group-padding-left-compact, calcSize(1.5)) - var(--ctr-toolbox-item-margin-horizontal-no-text, 4px));
+
+    // margin-inline-end: calc(
+    //   var(--ctr-toolbox-separator-padding-right-compact, 16px) - var(--ctr-toolbox-group-padding-left-compact, 12px) -
+    //     var(--ctr-toolbox-item-margin-horizontal-no-text, 0px)
+    // );
+    // margin-inline-start: calc(
+    //   var(--ctr-toolbox-separator-padding-left-compact, 16px) - var(--ctr-toolbox-group-padding-left-compact, 12px) -
+    //     var(--ctr-toolbox-item-margin-horizontal-no-text, 0px)
+    // );
   }
 }
 
@@ -186,10 +199,9 @@ svc-toolbox {
   --toolbox-width: var(--ctr-toolbox-min-width, calc(32 *#{$base-unit}));
   margin-inline-end: var(--ctr-toolbox-margin-left-compact, calcSize(1.5));
   overflow: visible;
-  max-width: var(--ctr-toolbox-width-compact, calcSize(10.5));
   overflow: visible;
   width: var(--toolbox-width-compact);
-  max-width: var(--ctr-toolbox-width-compact, calcSize(10.5));
+  max-width: var(--thm-toolbox-width-compact, calcSize(10.5));
   overflow: visible;
   border-inline-end: var(--ctr-toolbox-border-width-right, 0px) solid transparent;
 
@@ -243,21 +255,29 @@ svc-toolbox {
 }
 
 .svc-toolbox__category-separator {
-  height: 1px;
   width: var(--ctr-toolbox-separator-width, calcSize(5));
-  background-color: var(--ctr-toolbox-separator-color, $border);
-  margin: calcSize(1.5) calcSize(0.5) calcSize(1);
+  padding-top: var(--ctr-toolbox-separator-padding-top, calcSize(1.5));
+  padding-inline-end: var(--ctr-toolbox-separator-padding-right, calcSize(2));
+  padding-bottom: var(--ctr-toolbox-separator-padding-bottom, calcSize(1));
+  padding-inline-start: var(--ctr-toolbox-separator-padding-left, calcSize(2));
+  margin-inline-end: calc(0px - var(--ctr-toolbox-group-padding-right, calcSize(1.5)));
+  margin-inline-start: calc(0px - var(--ctr-toolbox-group-padding-left, calcSize(1.5)));
+  &:after {
+    content: "";
+    display: block;
+    height: var(--ctr-toolbox-separator-height, 1px);
+    background-color: var(--ctr-toolbox-separator-color, $border);
+  }
 }
 
 .svc-toolbox__category-separator--search {
   position: absolute;
-  bottom: 0;
-  margin-bottom: -1px;
-  min-height: 1px;
+  top: 100%;
   width: var(--toolbox-width);
   align-self: center;
   margin-left: auto;
   margin-right: auto;
+  padding: 0;
 }
 
 .svc-toolbox--no-separators {
