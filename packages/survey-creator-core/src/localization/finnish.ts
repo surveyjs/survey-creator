@@ -933,18 +933,18 @@ export var fiStrings = {
     file: "Paikalliset tiedostot",
     camera: "Kamera",
     "file-camera": "Paikalliset tiedostot tai kamera",
-    inherit: "peri",
-    show: "näytä",
-    hide: "piilota",
-    default: "oletus",
-    initial: "alkuperäinen",
-    random: "satunnainen",
-    collapsed: "pienennetty",
-    expanded: "laajennettu",
-    none: "none",
-    asc: "nouseva",
-    desc: "laskeva",
-    indeterminate: "määrittämätön",
+    inherit: "Peri",
+    show: "Näytä",
+    hide: "Piilota",
+    default: "Oletus",
+    initial: "Alkuperäinen",
+    random: "Satunnainen",
+    collapsed: "Pienennetty",
+    expanded: "Laajennettu",
+    none: "None",
+    asc: "Nouseva",
+    desc: "Laskeva",
+    indeterminate: "Määrittämätön",
     selected: "Valittu",
     unselected: "Valitsematta",
     decimal: "desimaali",
@@ -958,8 +958,8 @@ export var fiStrings = {
     progressTop: "progressTop",
     progressBottom: "progressBottom",
     progressTopBottom: "progressTopBottom",
-    horizontal: "vaaka",
-    vertical: "pysty",
+    horizontal: "Vaaka",
+    vertical: "Pysty",
     top: "top",
     bottom: "bottom",
     topBottom: "top and bottom",
@@ -983,9 +983,9 @@ export var fiStrings = {
     time: "Aika",
     url: "URL",
     week: "viikko",
-    hidden: "piilotettu",
-    edit: "muokkaa",
-    display: "näytä",
+    hidden: "Piilotettu",
+    edit: "Muokkaa",
+    display: "Näytä",
     contain: "Sisältää",
     cover: "Kansi",
     fill: "Täyttää",
@@ -1027,9 +1027,9 @@ export var fiStrings = {
       left: "Vasen",
       right: "Oikea"
     },
-    all: "kaikki",
-    page: "sivu",
-    survey: "kysely",
+    all: "Kaikki",
+    page: "Sivu",
+    survey: "Kysely",
     onNextPage: "Seuraavalla sivulla",
     onValueChanged: "Vastauksen muuttuessa",
     onValueChanging: "Ennen vastauksen muuttamista",
@@ -1038,9 +1038,9 @@ export var fiStrings = {
       singlePage: "Näytä kaikki kysymykset yhdellä sivulla",
       questionPerPage: "Näytä yksittäinen kysymys sivua kohden"
     },
-    noPreview: "ei esikatselua",
-    showAllQuestions: "näytä esikatselu kaikilla kysymyksillä",
-    showAnsweredQuestions: "näytä esikatselu vastatuilla kysymyksillä",
+    noPreview: "Ei esikatselua",
+    showAllQuestions: "Näytä esikatselu kaikilla kysymyksillä",
+    showAnsweredQuestions: "Näytä esikatselu vastatuilla kysymyksillä",
     pages: "Valmiit sivut",
     questions: "Vastatut kysymykset",
     requiredQuestions: "Vastatut vaaditut kysymykset",
@@ -1544,11 +1544,11 @@ export var fiStrings = {
     sourceType: "Lähteen tyyppi",
     fitToContainer: "Sovita konttiin",
     setValueExpression: "Arvolausekkeen määrittäminen",
-    description: "kuvaus",
+    description: "Kuvaus",
     logoFit: "Logon sopivuus",
     pages: "Sivut",
     questions: "Kysymyksiä",
-    triggers: "triggerit",
+    triggers: "Triggerit",
     calculatedValues: "Lasketut arvot",
     surveyId: "Kyselyn tunnus",
     surveyPostId: "Kyselyn viestin tunnus",
@@ -1561,25 +1561,25 @@ export var fiStrings = {
     widthMode: "Leveys-tila",
     showBrandInfo: "Näytä brändin tiedot",
     useDisplayValuesInDynamicTexts: "Näyttöarvojen käyttäminen dynaamisissa teksteissä",
-    visibleIf: "näkyvissä jos",
+    visibleIf: "Näkyvissä jos",
     defaultValueExpression: "Oletusarvon lauseke",
-    requiredIf: "vaadittu jos",
+    requiredIf: "Vaadittu jos",
     resetValueIf: "Nollaa arvo, jos",
     setValueIf: "Aseta arvo, jos",
-    validators: "validoijat",
+    validators: "Validoijat",
     bindings: "Siteet",
     renderAs: "Hahmonna muodossa",
     attachOriginalItems: "Alkuperäisten kohteiden liittäminen",
-    choices: "valinnat",
+    choices: "Valinnat",
     choicesByUrl: "choicesByUrl",
-    currency: "valuutta",
+    currency: "Valuutta",
     cellHint: "Solun vihje",
     totalMaximumFractionDigits: "Murtolukujen enimmäismäärä yhteensä",
     totalMinimumFractionDigits: "Murtolukujen vähimmäismäärä",
-    columns: "sarakkeet",
+    columns: "Sarakkeet",
     detailElements: "Yksityiskohtaiset elementit",
     allowAdaptiveActions: "Salli mukautuvat toiminnot",
-    defaultRowValue: "rivin oletusarvo",
+    defaultRowValue: "Rivin oletusarvo",
     detailPanelShowOnAdding: "Tietopaneeli näyttää lisäyksen yhteydessä",
     choicesLazyLoadEnabled: "Valinnat laiska kuorma käytössä",
     choicesLazyLoadPageSize: "Valinnat laiska lataussivun koko",
@@ -1605,7 +1605,7 @@ export var fiStrings = {
     acceptCarriageReturn: "Hyväksy vaunun palautus",
     displayMode: "Näyttötila",
     rateType: "Hinnan tyyppi",
-    label: "merkintä",
+    label: "Merkintä",
     contentMode: "Sisältö-tila",
     imageFit: "Kuva sopii",
     altText: "Vaihtoehtoinen teksti",
@@ -1708,13 +1708,11 @@ editorLocalization.locales["fi"] = fiStrings;
 // ed.surveySettingsTooltip: "Open survey settings" => "Avaa kyselyn asetukset"
 // ed.prevSelected: "Select previous" => "Valitse edellinen"
 // ed.nextSelected: "Select next" => "Valitse seuraava"
-// ed.surveyTypeName: "Survey" => "Tutkimus"
 // ed.pageTypeName: "Page" => "Sivu"
 // ed.panelTypeName: "Panel" => "Paneeli"
 // ed.questionTypeName: "Question" => "Kysymys"
 // ed.columnTypeName: "Column" => "Sarake"
 // ed.themeSurvey: "Themes" => "Teemoja"
-// ed.defaultV2Theme: "Default" => "Laiminlyönti"
 // ed.modernTheme: "Modern" => "Nykyaikainen"
 // ed.defaultTheme: "Default (legacy)" => "Oletus (vanha)"
 // ed.jsonHideErrors: "Hide errors" => "Piilota virheet"
@@ -2002,11 +2000,8 @@ editorLocalization.locales["fi"] = fiStrings;
 // displayMode.auto: "Auto" => "Auto"
 // displayMode.buttons: "Buttons" => "Painikkeet"
 // displayMode.dropdown: "Dropdown" => "Avattava valikko"
-// rateColorMode.default: "Default" => "Laiminlyönti"
-// autoGenerate.true: "Generate" => "Synnyttää"
 // autoGenerate.false: "Enter manually" => "Kirjoita manuaalisesti"
 // rateType.labels: "Labels" => "Otsikot"
-// rateType.stars: "Stars" => "Tähteä"
 // rateType.smileys: "Smileys" => "Hymiöt"
 // op.and: "and" => "ja"
 // op.or: "or" => "tai"
@@ -2108,15 +2103,10 @@ editorLocalization.locales["fi"] = fiStrings;
 // theme.groupAdvanced: "Advanced" => "Edistynyt"
 // theme.themeName: "Theme" => "Teema"
 // theme.isPanellessss: "Question appearance" => "Kysymyksen ulkonäkö"
-// theme.isPanellessPanels: "Default" => "Laiminlyönti"
 // theme.isPanellessLightweight: "Without Panels" => "Ilman paneeleja"
 // theme.themePaletteLight: "Light" => "Valo"
 // theme.themePaletteDark: "Dark" => "Tumma"
 // theme.primaryColor: "Accent color" => "Korostusväri"
-// theme.primaryDefaultColor: "Default" => "Laiminlyönti"
-// theme.primaryDarkColor: "Hover" => "Häilyä"
-// theme.primaryLightColor: "Selected" => "Valittu"
-// theme.backgroundDimColor: "Background color" => "Taustaväri"
 // theme.backgroundImage: "Background image" => "Taustakuvan"
 // theme.backgroundImageFitAuto: "Auto" => "Auto"
 // theme.backgroundImageFitCover: "Cover" => "Kansi"
@@ -2131,24 +2121,16 @@ editorLocalization.locales["fi"] = fiStrings;
 // theme.questionDescription: "Question description font" => "Kysymyksen kuvauksen fontti"
 // theme.editorPanel: "Input element" => "Syötä elementti"
 // theme.editorFont: "Input element font" => "Syöttöelementin fontti"
-// theme.backcolor: "Default background" => "Oletustausta"
 // theme.hovercolor: "Hover background" => "Vie hiiri taustalle"
 // theme.borderDecoration: "Border decoration" => "Reunusten koristelu"
 // theme.accentBackground: "Accent background" => "Aksentti tausta"
 // theme.accentForeground: "Accent foreground" => "Aksentti etualalla"
-// theme.primaryForecolor: "Default color" => "Oletusväri"
-// theme.primaryForecolorLight: "Disabled color" => "Käytöstä poistettu väri"
 // theme.linesColors: "Minor line colors" => "Pienet viivan värit"
-// theme.borderDefault: "Darker" => "Tummempi"
-// theme.borderLight: "Lighter" => "Sytytin"
 // theme.fontFamily: "Font family" => "Fonttiperhe"
 // theme.fontSize: "Font size" => "Kirjasinkoko"
 // theme.color: "Color" => "Väri"
 // theme.size: "Size" => "Koko"
-// theme.fontWeightRegular: "Regular" => "Säännöllinen"
-// theme.fontWeightHeavy: "Heavy" => "Raskas"
 // theme.fontWeightSemiBold: "Semi-bold" => "Puoliksi lihavoitu"
-// theme.fontWeightBold: "Bold" => "Rohkea"
 // theme.scale: "Scale" => "Mittakaava"
 // theme.cornerRadius: "Corner radius" => "Kulman säde"
 // theme.surveyTitleFont: "Survey title font" => "Kyselyn otsikon fontti"
@@ -2157,16 +2139,13 @@ editorLocalization.locales["fi"] = fiStrings;
 // theme.boxShadowX: "X" => "X"
 // theme.boxShadowY: "Y" => "Y"
 // theme.boxShadowAddRule: "Add Shadow Effect" => "Lisää varjotehoste"
-// theme.opacity: "Opacity" => "Läpikuultamattomuus"
 // theme.boxShadowBlur: "Blur" => "Hämärtyä"
 // theme.boxShadowSpread: "Spread" => "Leviäminen"
 // theme.boxShadowDrop: "Drop" => "Pisara"
 // theme.boxShadowInner: "Inner" => "Sisäinen"
 // theme.questionShadow: "Shadow effects" => "Varjo-tehosteet"
 // theme.editorShadow: "Input element shadow effects" => "Syöttöelementin varjotehosteet"
-// names.default: "Default" => "Laiminlyönti"
 // names.contrast: "Contrast" => "Kontrasti"
-// names.plain: "Plain" => "Tasanko"
 // names.simple: "Simple" => "Yksinkertainen"
 // names.blank: "Blank" => "Aihio"
 // names.double: "Double" => "Kaksinkertainen"
@@ -2174,7 +2153,6 @@ editorLocalization.locales["fi"] = fiStrings;
 // names.pseudo-3d: "Pseudo 3D" => "Pseudo 3D"
 // names.playful: "Playful" => "Leikkisä"
 // names.ultra: "Ultra" => "Ultra"
-// colors.teal: "Teal" => "Tavi"
 // colors.blue: "Blue" => "Sininen"
 // colors.purple: "Purple" => "Purppura"
 // colors.orchid: "Orchid" => "Orkidea"
@@ -2406,12 +2384,10 @@ editorLocalization.locales["fi"] = fiStrings;
 // pv.center: "Center" => "Keskus"
 // pv.middle: "Middle" => "Keskus"
 // pv.next: "Next" => "Seuraava"
-// pv.last: "Last" => "Viime"
 // clearIfInvisible.none: "Never" => "Koskaan"
 // questionsOnPageMode.standard: "Original structure" => "Alkuperäinen rakenne"
 // questionsOnPageMode.singlePage: "Show all questions on one page" => "Näytä kaikki kysymykset yhdellä sivulla"
 // questionsOnPageMode.questionPerPage: "Show single question per page" => "Näytä yksittäinen kysymys sivua kohden"
-// pv.auto: "Auto" => "Auto"
 // panelsState.firstExpanded: "First expanded" => "Ensimmäinen laajennettu"
 // rateColorMode.scale: "Scale" => "Mittakaava"
 // scaleColorMode.monochrome: "Monochrome" => "Yksivärinen"
@@ -2441,7 +2417,6 @@ editorLocalization.locales["fi"] = fiStrings;
 // showProgressBar.aboveheader: "Above the header" => "Otsikon yläpuolella"
 // showProgressBar.belowheader: "Below the header" => "Otsikon alapuolella"
 // pv.sum: "Sum" => "Summa"
-// pv.count: "Count" => "Kreivi"
 // pv.min: "Min" => "Min"
 // pv.max: "Max" => "Max"
 // pv.avg: "Avg" => "Avg"
@@ -2714,7 +2689,6 @@ editorLocalization.locales["fi"] = fiStrings;
 // backgroundImageFit.tile: "Tile" => "Laatta"
 // backgroundImageAttachment.fixed: "Fixed" => "Kiinteä"
 // backgroundImageAttachment.scroll: "Scroll" => "Vierittää"
-// headerView.basic: "Basic" => "Emäksinen"
 // headerView.advanced: "Advanced" => "Edistynyt"
 // inheritWidthFrom.survey: "Same as survey" => "Sama kuin kyselyssä"
 // inheritWidthFrom.container: "Fit to container" => "Sovita konttiin"
@@ -2723,7 +2697,6 @@ editorLocalization.locales["fi"] = fiStrings;
 // backgroundColorSwitch.custom: "Custom" => "Tapa"
 // colorPalette.light: "Light" => "Valo"
 // colorPalette.dark: "Dark" => "Tumma"
-// isPanelless.false: "Default" => "Laiminlyönti"
 // isPanelless.true: "Without Panels" => "Ilman paneeleja"
 // theme.cornerRadius: "Corner radius" => "Kulman säde"
 // theme.fontFamily: "Font family" => "Fonttiperhe"
@@ -2750,7 +2723,6 @@ editorLocalization.locales["fi"] = fiStrings;
 // pe.commentAreaRows: "Comment area height (in lines)" => "Kommenttialueen korkeus (riveinä)"
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "Määrittää tekstialueilla näytettävien rivien määrän kysymyskommentteja varten. Tulossa vie enemmän rivejä, vierityspalkki tulee näkyviin."
 // pe.enabled: "Enabled" => "Käytössä"
-// pe.disabled: "Disabled" => "Vammainen"
 // pe.inherit: "Inherit" => "Periä"
 // pe.validateVisitedEmptyFields: "Validate empty fields on lost focus" => "Vahvista tyhjät kentät, kun kohdistus on kadonnut"
 // panellayoutcolumn.effectiveWidth: "Ex.: 30%" => "Esimerkki: 30 %"
