@@ -17,13 +17,13 @@ svc-toolbox {
     var(--ctr-toolbox-item-icon-width) +
     var(--ctr-toolbox-item-padding-right-no-text) +
     var(--ctr-toolbox-item-padding-left-no-text) +
-    var(--ctr-toolbox-item-margin-horizontal-no-text) +
+    var(--ctr-toolbox-item-margin-horizontal-no-text) * 2 +
     var(--ctr-toolbox-group-padding-right) +
     var(--ctr-toolbox-group-padding-left)
   );
 
   --toolbox-width: var(--ctr-toolbox-min-width, 224.984375px /*calcSize(28)*/);
-  --toolbox-width-compact: var(--ctr-toolbox-width-compact, var(--dft-toolbox-width-compact));
+  --toolbox-width-compact: var(--thm-toolbox-width-compact, var(--dft-toolbox-width-compact));
 
   width: auto;
   height: 100%;
@@ -176,6 +176,10 @@ svc-toolbox {
   justify-content: center;
   align-items: center;
   width: fit-content;
+  svg {
+    height: var(--ctr-toolbox-item-icon-height, calcSize(3));
+    width: var(--ctr-toolbox-item-icon-width, calcSize(3));
+  }
 }
 
 .svc-toolbox--flyout {
