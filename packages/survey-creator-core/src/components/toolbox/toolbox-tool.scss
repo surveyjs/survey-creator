@@ -63,8 +63,7 @@
   opacity: 0;
   box-sizing: border-box;
   align-items: center;
-  margin-inline-end: 0;
-  inset-inline-start: var(--ctr-toolbox-item-banner-left, calcSize(-0.5));
+  inset-inline-start: var(--thm-toolbox-item-banner-left, calcSize(-0.5));
   max-width: calcSize(100);
   padding-top: var(--ctr-tooltip-padding-top, calcSize(1.5));
   padding-inline-end: var(--ctr-tooltip-padding-right, calcSize(3.5));
@@ -104,9 +103,9 @@
   &:after {
     content: " ";
     display: var(--ctr-toolbox-item-banner-beak-display, none);
-    width: 0;
-    height: 0;
-    border: calcSize(0.35) solid var(--ctr-tooltip-background-color, $background);
+    width: calc(var(--ctr-tooltip-pointer-height) * 1.41);
+    height: calc(var(--ctr-tooltip-pointer-height) * 1.41);
+    background: var(--ctr-tooltip-background-color, $background);
     border-top-color: transparent;
     border-inline-end-color: transparent;
     box-shadow:
@@ -120,7 +119,8 @@
     position: absolute;
     inset-inline-end: 100%;
     top: 50%;
-    transform: translate(3px, -3px) rotate(45deg);
+    z-index: 300;
+    transform: translate(calc(var(--ctr-tooltip-pointer-height) / 1.41), calc(var(--ctr-tooltip-pointer-height) / -1.41)) rotate(45deg);
     clip-path: polygon(-100% -100%, -100% 200%, 200% 200%);
   }
 
@@ -335,7 +335,11 @@
         var(--ctr-toolbox-item-shadow-hovered-2-blur, 2px) var(--ctr-toolbox-item-shadow-hovered-2-spread, 0px)
         var(--ctr-toolbox-item-shadow-hovered-2-color, rgba(0, 0, 0, 0));
     transition: 0.1s ease-in-out;
-    padding: calcSize(1.5) calcSize(2);
+    padding: 
+      var(--ctr-toolbox-item-padding-top-submenu, calcSize(1.5))
+      var(--ctr-toolbox-item-padding-right, calcSize(2))
+      var(--ctr-toolbox-item-padding-bottom-submenu, calcSize(1.5))
+      var(--ctr-toolbox-item-padding-left-submenu, calcSize(2));
     align-self: flex-start;
     min-width: var(--ctr-toolbox-submenu-item-min-width, initial);
     box-sizing: border-box;

@@ -23,10 +23,8 @@ var themeConstants = {
     "--ctr-toolbox-scroller-align-items": "flex-start",
     "--ctr-toolbox-item-align": "stretch",
     "--ctr-toolbox-margin-left-compact": "0px",
-    "--ctr-toolbox-separator-width": "240px",
     "--ctr-toolbox-item-banner-icon-display": "none",
     "--ctr-toolbox-item-banner-beak-display": "block",
-    "--ctr-toolbox-item-banner-left": "64px",
     "--ctr-toolbox-submenu-item-min-width": "calc(17 * 8px)",
   }
 };
