@@ -100,6 +100,7 @@
 }
 
 .spg-action-title-bar {
+  margin-inline-end: var(--ctr-data-table-border-width, 1px);
   padding-inline-end: var(--ctr-caption-with-actions-actionbar-padding-right, calcSize(0.5));
 }
 

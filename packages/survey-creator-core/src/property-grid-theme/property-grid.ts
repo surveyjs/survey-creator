@@ -23,6 +23,7 @@ export var propertyGridCss = {
   panel: {
     expandableAnimating: "",
     title: "spg-title spg-panel__title",
+    titleBar: "sd-action-title-bar spg-action-title-bar",
     contentEnter: "spg-panel__content--enter",
     contentLeave: "spg-panel__content--leave",
     titleExpandable: "spg-panel__title--expandable",

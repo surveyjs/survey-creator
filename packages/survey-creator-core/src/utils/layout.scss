@@ -49,7 +49,7 @@
 .sv-action-bar--small-size-mode .sv-action-bar-item {
   @include ctrSmallBoldFont;
   align-items: center;
-  border-radius: var(--ctr-survey-question-panel-toolbar-item-corner-radius, 4px);
+  border-radius: var(--ctr-survey-question-panel-toolbar-item-corner-radius, 2px);
 }
 
 .svc-top-bar {

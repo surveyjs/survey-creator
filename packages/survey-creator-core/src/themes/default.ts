@@ -375,6 +375,7 @@ const Theme = {
     "--ctr-expression-item-text-color-function": "var(--sjs-layer-3-foreground-100)",
     "--ctr-data-table-background-color": "var(--sjs-layer-1-background-400)",
     "--ctr-data-table-border-color": "var(--sjs-border-25)",
+    "--ctr-data-table-border-width": "var(--sjs-stroke-x1)",
     "--ctr-separator-width": "var(--sjs-size-x0125)",
     "--ctr-separator-color": "var(--sjs-border-25)",
     "--ctr-popup-padding-left": "var(--sjs-spacing-x4)",
