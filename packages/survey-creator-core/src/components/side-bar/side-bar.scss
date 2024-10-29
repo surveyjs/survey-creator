@@ -92,6 +92,8 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
   }
   
   .sv-action-bar-item:not(.sv-action-bar-item--pressed):enabled {
+    border-radius: var(--ctr-menu-toolbar-button-corner-radius, 0);
+
     &:focus {
       background: var(--ctr-menu-toolbar-button-background-color-pressed, $background-dim);
     }

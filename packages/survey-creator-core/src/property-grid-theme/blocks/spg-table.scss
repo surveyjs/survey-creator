@@ -35,12 +35,13 @@
 }
 
 .spg-table__cell:not(.spg-table__cell--detail-panel) .spg-input {
-  @include ctrDefaultFont;
   appearance: none;
   box-shadow: none;
   border-radius: var(--ctr-data-table-cell-corner-radius-focused, calcSize(0.5));
   background-color: var(--ctr-data-table-row-background-color, transparent);
   height: auto;
+  padding: var(--ctr-data-table-cell-padding-top, calcSize(1)) var(--ctr-data-table-cell-padding-right, calcSize(1))
+    var(--ctr-data-table-cell-padding-bottom, calcSize(1)) var(--ctr-data-table-cell-padding-left, calcSize(1));
 
   &[type="color"] {
     padding-right: 0;
@@ -78,6 +79,7 @@
 .spg-table__cell--actions:last-of-type {
   .spg-action-bar {
     justify-content: flex-end;
+    padding-inline-end: var(--ctr-data-table-row-padding-right, calcSize(0.5));
   }
 }
 
@@ -112,6 +114,8 @@
 }
 .spg-table__question-wrapper {
   box-sizing: border-box;
+  padding: var(--ctr-data-table-row-padding-top, calcSize(0.5)) var(--ctr-data-table-row-padding-right, 0)
+    var(--ctr-data-table-row-padding-bottom, calcSize(0.5)) var(--ctr-data-table-row-padding-left, 0);
 }
 
 .spg-table__row--leave,

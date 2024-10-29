@@ -99,12 +99,8 @@
   flex-direction: column;
 }
 
-.spg-title {
-  .spg-action-bar {
-    margin-top: calcSize(-1);
-    margin-bottom: calcSize(-1);
-    margin-right: 1px;
-  }
+.spg-action-title-bar {
+  padding-inline-end: var(--ctr-caption-with-actions-actionbar-padding-right, calcSize(0.5));
 }
 
 .spg-body {

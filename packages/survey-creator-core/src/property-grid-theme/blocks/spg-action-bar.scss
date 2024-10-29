@@ -1,16 +1,12 @@
 .spg-action-bar {
   display: flex;
   box-sizing: content-box;
-  padding-right: calcSize(0.5);
   position: relative;
   align-items: center;
   margin-left: auto;
   overflow: hidden;
   white-space: nowrap;
 
-  .sv-action:not(.sv-action--hidden):not(:last-of-type)>.sv-action__content {
-    padding-right: 0;
-  }
 }
 
 .spg-action-button {

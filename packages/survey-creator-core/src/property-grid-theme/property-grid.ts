@@ -90,6 +90,7 @@ export var propertyGridCss = {
     titleOnAnswer: "spg-question__title--answer",
     titleOnError: "spg-question__title--error",
     title: "spg-title spg-question__title",
+    titleBar: "sd-action-title-bar spg-action-title-bar",
     requiredText: "spg-question__required-text",
     number: "spg-question__num",
     description: "spg-description spg-question__description",
