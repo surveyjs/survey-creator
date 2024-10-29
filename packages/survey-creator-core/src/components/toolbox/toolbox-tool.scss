@@ -222,9 +222,10 @@
   align-items: center;
   border-radius: var(--ctr-toolbox-item-submenu-button-corner-radius, 1024px);
   z-index: 40;
-  background: var(--ctr-toolbox-item-submenu-button-background-color, $background-dim);
+  background-color: var(--ctr-toolbox-item-submenu-button-background-color, $background-dim);
+  transition: background-color $creator-transition-duration;
   &:hover {
-    background: var(--ctr-toolbox-item-submenu-button-background-color-hovered, $background);
+    background-color: var(--ctr-toolbox-item-submenu-button-background-color-hovered, $background);
   }
   svg {
     fill: var(--ctr-toolbox-item-submenu-button-icon-color, $layer-1-foreground-50);
