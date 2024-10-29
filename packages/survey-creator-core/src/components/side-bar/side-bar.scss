@@ -42,8 +42,8 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
   box-shadow: inset 0px -2px 0px var(--ctr-property-grid-header-border-color, $primary);
   // text-align: right;
   display: flex;
-  padding: var(--ctr-property-grid-header-padding-top, 12px) var(--ctr-property-grid-header-padding-right, 16px)
-  var(--ctr-property-grid-header-padding-bottom, 12px) var(--ctr-property-grid-header-padding-left, 16px);
+  padding: var(--ctr-property-grid-header-padding-top, calcSize(1.5)) var(--ctr-property-grid-header-padding-right, calcSize(1))
+  var(--ctr-property-grid-header-padding-bottom, calcSize(1.5)) var(--ctr-property-grid-header-padding-left, calcSize(1));
 }
 
 .svc-side-bar__container-content {

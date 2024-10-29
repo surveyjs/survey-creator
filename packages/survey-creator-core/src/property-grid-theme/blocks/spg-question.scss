@@ -18,7 +18,7 @@
   @include ctrDefaultFont;
   width: 100%;
   margin: 0;
-  padding: calcSize(1) 0;
+  padding: var(--ctr-label-padding-top, calcSize(1)) var(--ctr-label-padding-right, 0px) var(--ctr-label-padding-bottom, calcSize(1)) var(--ctr-label-padding-left, 0px);
   color: var(--ctr-label-text-color, $foreground-light);
   box-sizing: border-box;
 }
