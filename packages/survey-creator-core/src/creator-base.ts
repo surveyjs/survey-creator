@@ -3669,7 +3669,7 @@ export class SurveyCreatorModel extends Base
       iconName: "icon-more",
       title: this.getLocString("ed.addNewQuestion"),
     }, {
-      items: getActions(),
+      items: [],
       onShow: () => {
         const listModel = newAction.popupModel.contentComponentData.model;
         listModel.setItems(getActions());

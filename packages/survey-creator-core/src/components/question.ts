@@ -182,7 +182,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     if (this.surveyElement.isDescendantOf("rating")) {
       cssContent = "svc-rating-question-content";
     }
-    if(this.isTitleLeft) {
+    if (this.isTitleLeft) {
       return this.rootElement?.querySelector(`:scope ${classesToSelector((this.surveyElement as Question).getRootCss())}`);
     }
     if (cssContent) {
@@ -279,7 +279,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   get isDraggable() {
     return true;
   }
-  get hoverDelay():number {
+  get hoverDelay(): number {
     if (this.creator["animationEnabled"]) {
       return this.creator.pageHoverDelay;
     }
@@ -300,7 +300,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   }
   public getActionById(id: string): Action {
     let res = super.getActionById(id);
-    if(!res) {
+    if (!res) {
       res = this.topActionContainer.getActionById(id);
     }
     return res;
@@ -460,21 +460,23 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   }
 
   private createConvertToAction() {
-    const actions = this.getConvertToTypesActions();
-    const allowChangeType: boolean = actions.length > 0;
-    const selItem = this.getSelectedItem(actions, this.currentType);
-    let actionTitle = !!selItem ? selItem.title : editorLocalization.getString("qt." + this.currentType);
+    // const actions = this.getConvertToTypesActions();
+    // const allowChangeType: boolean = actions.length > 0;
+    // const selItem = this.getSelectedItem(actions, this.currentType);
+    // let actionTitle = !!selItem ? selItem.title : editorLocalization.getString("qt." + this.currentType);
+    const availableItems = this.creator.getAvailableToolboxItems(this.element, false);
+    const currItem = availableItems.filter(item => item.name === this.currentType)[0];
 
     const actionData: IAction = {
       id: "convertTo",
-      enabled: allowChangeType,
+      enabled: true,
       visibleIndex: 0,
-      title: actionTitle,
+      title: !!currItem ? currItem.title : editorLocalization.getString("qt." + this.currentType),
       iconName: "icon-chevron_16x16"
     };
     const newAction = this.createDropdownModel({
       actionData: actionData,
-      items: actions,
+      items: [],
       updateListModel: (listModel: ListModel) => {
         this.updateQuestionTypeOrSubtypeListModel(listModel, false);
       }
@@ -583,6 +585,9 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   }
 
   private createConvertInputType() {
+    if (!this.surveyElement || this.surveyElement.isPanel) {
+      return null;
+    }
     const listModel = new ListModel([]);
     this.updateQuestionTypeOrSubtypeListModel(listModel, true);
     if (listModel.actions.length == 0) return null;
@@ -590,7 +595,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     const actionData: IAction = {
       id: "convertInputType",
       visibleIndex: 1,
-      title: "SUBTYPE",
+      title: listModel.selectedItem?.title || "SUBTYPE",
       disableShrink: true,
       iconName: "icon-chevron_16x16"
     };
@@ -633,7 +638,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       action: (newType) => {
       },
     }, {
-      items: options.items,
+      items: [],
       allowSelection: true,
       horizontalPosition: "center",
       cssClass: "svc-creator-popup",
@@ -643,7 +648,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       },
     });
     const listModel = newAction.popupModel.contentComponentData.model;
-    options.updateListModel(listModel);
+    // options.updateListModel(listModel);
     if (listModel.selectedItem) newAction.title = listModel.selectedItem.title;
     newAction.popupModel.displayMode = this.creator.isTouch ? "overlay" : "popup";
     newAction.data.locOwner = this.creator;
