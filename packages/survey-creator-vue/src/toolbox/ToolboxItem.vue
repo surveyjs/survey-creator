@@ -14,6 +14,7 @@
         v-if="item.iconName"
         :iconName="item.iconName"
         :size="'auto'"
+        class="svc-toolbox__item-icon"
       ></SvComponent>
     </span>
     <span v-if="!isCompact" class="svc-toolbox__item-title">
