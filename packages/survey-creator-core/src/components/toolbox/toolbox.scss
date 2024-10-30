@@ -300,18 +300,22 @@ svc-toolbox {
   align-self: stretch;
 }
 .svc-toolbox__category-header {
-  height: calcSize(5);
   padding-top: var(--ctr-toolbox-group-header-padding-top, calcSize(1.5));
   padding-inline-end: var(--ctr-toolbox-group-header-padding-right, calcSize(1.5));
   padding-bottom: var(--ctr-toolbox-group-header-padding-bottom, calcSize(1.5));
   padding-inline-start: var(--ctr-toolbox-group-header-padding-left, calcSize(1.5));
 
-  // box-shadow: 0px 1px 0px $border;
-  border-bottom: 1px solid $border;
+  box-shadow: 
+    inset 0 var(--ctr-toolbox-group-header-border-width-top, 0px) var(--ctr-toolbox-group-header-border-color, $border),
+    inset calc(0px - var(--ctr-toolbox-group-header-border-width-right, 0px)) 0 var(--ctr-toolbox-group-header-border-color, $border),
+    inset 0 calc(0px - var(--ctr-toolbox-group-header-border-width-bottom, 1px)) var(--ctr-toolbox-group-header-border-color, $border),
+    inset var(--ctr-toolbox-group-header-border-width-left, 0px) 0 var(--ctr-toolbox-group-header-border-color, $border);
+
   box-sizing: border-box;
   width: 100%;
   min-width: calcSize(20);
   position: relative;
+  display: flex;
 }
 
 .svc-toolbox__category-header--collapsed {
@@ -323,22 +327,27 @@ svc-toolbox {
   color: $foreground;
   vertical-align: middle;
   display: block;
+  flex-grow: 1;
 }
 
 .svc-toolbox__category-header__controls {
-  position: absolute;
   inset-inline-end: calcSize(1);
   top: var(--ctr-category-header-controls-top, calcSize(1));
   display: none;
+  align-self: center;
+  margin-top: -50%;
+  margin-bottom: -50%;
 }
 
 .svc-toolbox__category-header__button {
   fill: $foreground-light;
+  height: var(--ctr-toolbox-item-icon-height, calcSize(3));
+  width: var(--ctr-toolbox-item-icon-width, calcSize(3));
 }
 
 .svc-toolbox__category-header:hover {
   .svc-toolbox__category-header__controls {
-    display: block;
+    display: flex;
   }
 }
 
