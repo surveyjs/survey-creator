@@ -6,8 +6,7 @@ import {
   dxSurveyService, ISurveyElement, PanelModelBase, surveyLocalization, QuestionMatrixDropdownModelBase, ITheme, Helpers,
   chooseFiles, createDropdownActionModel,
   CssClassBuilder,
-  SvgRegistry,
-  renamedIcons
+  SvgRegistry
 } from "survey-core";
 import { ICreatorPlugin, ISurveyCreatorOptions, settings, ICollectionItemAllowOperations } from "./creator-settings";
 import { editorLocalization } from "./editorLocalization";
@@ -1580,11 +1579,6 @@ export class SurveyCreatorModel extends Base
     }
 
     SvgRegistry.registerIconsFromFolder(path);
-
-    // path.keys().forEach((key: string) => {
-    //   const iconId = key.substring(2, key.length - 4).toLowerCase();
-    //   SvgRegistry.registerIconFromSvg(renamedIcons[iconId] || iconId, path(key));
-    // });
   }
   protected setOptions(options: ICreatorOptions): void {
     if (!options) options = {};
