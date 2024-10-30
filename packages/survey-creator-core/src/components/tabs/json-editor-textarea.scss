@@ -98,6 +98,8 @@ svc-tab-json-editor-textarea {
 
 .svc-json-error__icon {
   fill: $red;
+  width: var(--ctr-code-viewer-code-error-row-icon-width, calcSize(2));
+  height: var(--ctr-code-viewer-code-error-row-icon-height, calcSize(2));
 }
 
 .svc-json-error__container {

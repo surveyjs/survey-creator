@@ -23,7 +23,7 @@
   box-sizing: border-box;
   border: none;
   color: var(--ctr-actionbar-button-text-color, $primary);
-  border-radius: calcSize(12.5);
+  border-radius: var(--ctr-actionbar-button-corner-radius, calcSize(12.5));
   background-color: transparent;
   cursor: pointer;
   transition: background-color $creator-transition-duration, opacity $creator-transition-duration;
@@ -40,8 +40,16 @@
   }
 }
 
+.spg-action-button--icon {
+  padding: var(--ctr-actionbar-button-padding-top-large-icon, calcSize(1))
+    var(--ctr-actionbar-button-padding-right-large-icon, calcSize(1))
+    var(--ctr-actionbar-button-padding-bottom-large-icon, calcSize(1))
+    var(--ctr-actionbar-button-padding-left-large-icon, calcSize(1));
+}
 .spg-action-button__icon {
   display: block;
+  width: var(--ctr-actionbar-button-icon-width, calcSize(3));
+  height: var(--ctr-actionbar-button-icon-height, calcSize(3));
 
   use {
     fill: var(--ctr-actionbar-button-icon-color, $foreground-light);

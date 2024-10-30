@@ -92,7 +92,18 @@
     height: auto;
   }
 
+  .sv-action-bar-item--icon {
+    padding: var(--ctr-menu-toolbar-button-padding-top, calcSize(1))
+      var(--ctr-menu-toolbar-button-padding-right, calcSize(1))
+      var(--ctr-menu-toolbar-button-padding-bottom, calcSize(1))
+      var(--ctr-menu-toolbar-button-padding-left, calcSize(1));
+    border-radius: var(--ctr-menu-toolbar-button-corner-radius, 0);
+  }
+
   .sv-action-bar-item__icon {
+    width: var(--ctr-menu-toolbar-button-icon-width, calcSize(3));
+    height: var(--ctr-menu-toolbar-button-icon-height, calcSize(3));
+
     use {
       fill: var(--ctr-menu-toolbar-button-icon-color, $foreground-light);
     }
