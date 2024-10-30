@@ -83,7 +83,7 @@
     "webpack": "^5.93.0",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.0.4",
-    "puppeteer": "23.5.3"
+    "puppeteer": "22.13.1"
   },
   "dependencies": {
     "react": "^17.0.1",
