@@ -78,6 +78,9 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     q.obj = rowObj;
     this.initializePlaceholder(rowObj, q, options.columnName);
     q.property = Serializer.findProperty(rowObj.getType(), options.columnName);
+    if(q.getType() === "boolean" && q.renderAs === "checkbox") {
+      q.titleLocation = "default";
+    }
   }
   public onGetMatrixRowAction(
     obj: Base,
