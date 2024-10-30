@@ -1,9 +1,6 @@
-import { CalculatedValue, ExpressionValidator, HtmlConditionItem, QuestionCheckboxBase, QuestionDropdownModel, QuestionMatrixDropdownModel, QuestionMatrixDynamicModel, QuestionMatrixModel, QuestionMultipleTextModel, QuestionRatingModel, QuestionTextModel,
-  Serializer,
-  SurveyModel,
-  SurveyTriggerRunExpression,
-  UrlConditionItem,
-  settings as surveySettings } from "survey-core";
+import { CalculatedValue, ExpressionValidator, HtmlConditionItem, QuestionCheckboxBase, QuestionDropdownModel, QuestionMatrixDropdownModel, QuestionMatrixDynamicModel,
+  QuestionMatrixModel, QuestionMultipleTextModel, QuestionRatingModel, QuestionTextModel, QuestionBooleanModel, Serializer, SurveyModel,
+  SurveyTriggerRunExpression, UrlConditionItem, settings as surveySettings } from "survey-core";
 import { PropertyGridModelTester } from "./property-grid.base";
 import { PropertyGridEditorMatrixMutlipleTextItems } from "../../src/property-grid/matrices";
 import { EmptySurveyCreatorOptions } from "../../src/creator-settings";
@@ -574,4 +571,21 @@ test("Hide text column in itemvalue (matrix.columns) if inplaceEditForValues is 
   const qProperty = <QuestionMatrixDynamicModel>propertyGrid.survey.getQuestionByName("columns");
   expect(qProperty.columns).toHaveLength(1);
   expect(qProperty.columns[0].name).toBe("value");
+});
+test("Add custom boolean property to choices, Bug#6004", () => {
+  Serializer.addProperty("itemvalue", "isDeleted:boolean");
+
+  const q = new QuestionMatrixModel("q1");
+  q.columns = ["item1", "item2", "item3"];
+  const propertyGrid = new PropertyGridModelTester(q);
+  const qProperty = <QuestionMatrixDynamicModel>propertyGrid.survey.getQuestionByName("columns");
+  expect(qProperty.columns).toHaveLength(3);
+  expect(qProperty.columns[2].name).toBe("isDeleted");
+  const qCell = <QuestionBooleanModel>qProperty.visibleRows[0].getQuestionByName("isDeleted");
+  expect(qCell).toBeTruthy();
+  expect(qCell.name).toBe("isDeleted");
+  expect(qCell.getType()).toBe("boolean");
+  expect(qCell.isLabelRendered).toBeFalsy();
+
+  Serializer.removeProperty("itemvalue", "isDeleted");
 });
