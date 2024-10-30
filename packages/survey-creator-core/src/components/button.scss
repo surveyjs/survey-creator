@@ -18,11 +18,9 @@
       var(--ctr-button-shadow-color, rgba(0, 0, 0, 0.15));
 
     span {
+      @include ctrDefaultBoldFont;
+
       text-align: center;
-      font-family: var(--ctr-default-bold-font-family, $font-family);
-      font-size: var(--ctr-default-bold-font-size, $font-size);
-      line-height: var(--ctr-default-bold-line-height, calc(1.5 * var(--default-font-size)));
-      font-weight: var(--ctr-default-bold-font-weight, 600);
       position: relative;
       display: flex;
       align-items: center;

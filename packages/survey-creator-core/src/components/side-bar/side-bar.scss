@@ -9,7 +9,6 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
   flex-direction: column;
   display: flex;
   position: relative;
-  font-family: $font-family;
   min-width: 370px;
   width: 450px;
   height: 100%;
@@ -19,7 +18,6 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
 .svc-side-bar__wrapper {
   height: 100%;
 }
-
 
 .svc-side-bar__container .svc-resizer {
   width: 3px;
@@ -69,6 +67,8 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
 }
 
 .svc-side-bar__container-title {
+  @include ctrDefaultFont;
+
   display: flex;
   line-height: calcSize(4.5);
   flex-grow: 1;
@@ -279,9 +279,11 @@ $tabs-width: calc(var(--ctr-menu-toolbar-button-padding-left, 8px) + var(--ctr-m
 
   .sv-action-bar-item {
     flex-shrink: 1;
+    height: auto;
   }
 
   .sv-action-bar-item__title {
+    @include ctrDefaultFont;
     overflow: hidden;
     text-overflow: ellipsis;
   }
@@ -331,6 +333,7 @@ $tabs-width: calc(var(--ctr-menu-toolbar-button-padding-left, 8px) + var(--ctr-m
 
 .svc-side-bar {
   .svc-toolbox {
+    padding-top: calcSize(0.5);
     width: 100%;
   }
 }

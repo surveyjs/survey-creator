@@ -5,15 +5,13 @@
   container-type: inline-size;
 }
 .svc-carry-forward-panel {
+  @include ctrDefaultFont;
   box-sizing: border-box;
   width: 100%;
   padding: calcSize(4) calcSize(8);
   border-radius: calcSize(1);
   background-color: $background-dim-light;
   text-align: center;
-  font-weight: 400;
-  font-size: calcSize(2);
-  line-height: calcSize(3);
   color: $foreground-dim-light;
 }
   

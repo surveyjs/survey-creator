@@ -895,3 +895,22 @@ test("Preset edit model, save creator JSON on applying new preset", () => {
   const creator = editor.creator;
   expect(creator.survey.getAllQuestions()).toHaveLength(2);
 });
+test("Preset edit model, set json property", () => {
+  const editor = new CreatorPresetEditorModel({});
+  editor.activeTab = "results";
+  const jsonQuestion = editor.resultModel.getQuestionByName("json");
+  expect(jsonQuestion.value).toBe("{}");
+  const json = {
+    "tabs": {
+      "items": [
+        "designer",
+        "preview"
+      ],
+      "activeTab": "preview"
+    }
+  };
+  editor.json = json;
+  expect(JSON.parse(jsonQuestion.value)).toMatchObject(json);
+  expect(editor.creator.tabs).toHaveLength(2);
+  expect(editor.creator.activeTab).toBe("test");
+});

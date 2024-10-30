@@ -46,8 +46,8 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   protected updateActionVisibility(id: string, isVisible: boolean) {
     super.updateActionVisibility(id, !this.isGhost && isVisible);
   }
-  protected updateActionsContainer(surveyElement: SurveyElement, clear?: boolean): void {
-    super.updateActionsContainer(surveyElement, clear);
+  protected updateActionsContainer(surveyElement: SurveyElement): void {
+    super.updateActionsContainer(surveyElement);
     if (this.creator.expandCollapseButtonVisibility != "never") this.actionContainer.addAction(this.expandCollapseAction);
   }
   protected get dragInsideCollapsedContainer(): boolean {
@@ -128,10 +128,6 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       delete page["_addGhostPageViewModel"];
       addGhostPage();
     };
-  }
-  public dispose(): void {
-    this.detachElement(this.page);
-    super.dispose();
   }
   protected calcIsGhostPage(page: PageModel) {
     return this.creator.survey.pages.indexOf(page) < 0;
@@ -270,7 +266,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       this._footerActionsBar.containerCss = "svc-page__footer";
       this._footerActionsBar.cssClasses = {
         item: "svc-btn",
-        itemTitle: "svc-text svc-text--normal svc-text--bold"
+        itemTitle: "svc-add-new-item-button__text"
       };
       let footerActions: Array<IAction> = [{
         css: "svc-add-new-question-action",

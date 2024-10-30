@@ -30,6 +30,7 @@ export class AdaptiveToolbox extends Toolbox {
   }
   componentWillUnmount() {
     this.manager && (this.manager.dispose());
+    this.toolbox.unsubscribeRootElement();
     super.componentWillUnmount();
   }
 
@@ -37,12 +38,12 @@ export class AdaptiveToolbox extends Toolbox {
     const searchButton = this.toolbox.isCompactRendered ?
       <>
         <SurveyCreatorToolboxTool item={this.toolbox.searchItem as any} creator={this.creator} parentModel={this.toolbox} isCompact={this.toolbox.isCompactRendered} key={"searchitem"} ></SurveyCreatorToolboxTool>
-        <div className="svc-toolbox__category-separator svc-toolbox__category-separator--search"></div>
       </> :
       null;
     return (<div className="svc-toolbox__search-container">
       {searchButton}
       <SearchComponent model={this.toolbox.searchManager}></SearchComponent>
+      <div className="svc-toolbox__category-separator svc-toolbox__category-separator--search"></div>
     </div>);
   }
 
@@ -53,16 +54,22 @@ export class AdaptiveToolbox extends Toolbox {
     return (
       <div ref={this.rootRef} className={this.toolbox.classNames}>
         <div onBlur={(e) => this.toolbox.focusOut(e)} className="svc-toolbox__panel">
-          <div className="svc-toolbox__scroller sv-drag-target-skipped" onScroll={(event) => this.toolbox.onScroll(this.toolbox, event)}>
-            {search}
-            {placeholder}
-            <div className="svc-toolbox__container">
-              {(this.toolbox.showInSingleCategory) ?
-                (<div className="svc-toolbox__category">
-                  {this.renderItems(this.toolbox.renderedActions, this.toolbox.isCompactRendered)}
-                </div>)
-                : this.renderCategories()
-              }
+          {search}
+          <div onBlur={(e) => this.toolbox.focusOut(e)} className="svc-toolbox__scroll-wrapper">
+            <div className="svc-toolbox__scroller sv-drag-target-skipped" onScroll={(event) => this.toolbox.onScroll(this.toolbox, event)}>
+              {placeholder}
+              <div className="svc-toolbox__container">
+                {(this.toolbox.showInSingleCategory) ?
+                  (<div className="svc-toolbox__category">
+                    {this.renderItems(this.toolbox.renderedActions, this.toolbox.isCompactRendered)}
+                  </div>)
+                  : this.renderCategories()
+                }
+              </div>
+            </div>
+            <div className="svc-toolbox__scrollbar" onScroll={(event) => this.toolbox.onScrollbarScroll(event.nativeEvent)}>
+              <div className="svc-toolbox__scrollbar-sizer">
+              </div>
             </div>
           </div>
         </div>

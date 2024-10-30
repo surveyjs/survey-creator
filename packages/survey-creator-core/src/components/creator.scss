@@ -142,8 +142,8 @@ survey-creator,
 }
 
 .svc-creator__non-commercial-text {
+  @include ctrDefaultBoldFont;
   color: var(--ctr-page-banner-text-color, $primary-foreground);
-  @include defaultBold;
   vertical-align: middle;
   padding: calcSize(1.5) calcSize(16);
   display: block;

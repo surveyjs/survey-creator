@@ -15,7 +15,7 @@ import { IsTouch } from "survey-core";
 import { QuestionConverter } from "./questionconverter";
 import { SurveyTextWorker } from "./textWorker";
 import { QuestionToolbox, QuestionToolboxItem } from "./toolbox";
-import { getNextItemValue, getNextItemText } from "./utils/utils";
+import { getNextItemValue, getNextItemText, assign } from "./utils/utils";
 import { PropertyGridModel } from "./property-grid";
 import { ObjType, SurveyHelper } from "./survey-helper";
 import { ICreatorSelectionOwner } from "./selection-owner";
@@ -54,6 +54,7 @@ import {
 } from "./creator-events-api";
 import { ExpandCollapseManager } from "./expand-collapse-manager";
 import designTabSurveyThemeJSON from "./designTabSurveyThemeJSON";
+import { ICreatorTheme } from "./creator-theme/creator-themes";
 import { SurveyElementAdornerBase } from "./components/action-container-view-model";
 import { TabbedMenuContainer, TabbedMenuItem } from "./tabbed-menu";
 
@@ -141,6 +142,7 @@ export class SurveyCreatorModel extends Base
    * @see saveThemeFunc
    */
   @property({ defaultValue: false }) showThemeTab: boolean;
+  @property({ defaultValue: false }) showCreatorThemeSettings: boolean;
   /**
    * Specifies whether to display the Translation tab.
    *
@@ -1803,6 +1805,12 @@ export class SurveyCreatorModel extends Base
     }
   }
   private existingPages: {};
+  private getSurfaceCss() {
+    const result = JSON.parse(JSON.stringify(defaultV2Css));
+    result.header += " svc-surface-header";
+
+    return result;
+  }
   /**
    * Returns true if initial survey was empty. It was not set via JSON property and default new survey is empty as well.
    * @returns true if initial survey doesn't have any elements or properties
@@ -1814,7 +1822,7 @@ export class SurveyCreatorModel extends Base
     this.existingPages = {};
     const survey = this.createSurvey({}, "designer", undefined, (survey: SurveyModel) => {
       survey.skeletonHeight = 188;
-      survey.css = defaultV2Css;
+      survey.css = this.getSurfaceCss();
       survey.setIsMobile(!!this.isMobileView);
       survey.setDesignMode(true);
       survey.lazyRendering = true;
@@ -2159,7 +2167,9 @@ export class SurveyCreatorModel extends Base
   }
 
   public get designTabSurveyThemeVariables(): {} {
-    return designTabSurveyThemeJSON.cssVariables;
+    const cssVariables = {};
+    assign(cssVariables, designTabSurveyThemeJSON.cssVariables, { "--sjs-base-unit": "var(--ctr-surface-base-unit)" });
+    return cssVariables;
   }
 
   public getSurveyJSON(): any {
@@ -2791,7 +2801,7 @@ export class SurveyCreatorModel extends Base
 
   //#region Obsolete designerPropertyGrid
   protected get designerPropertyGrid(): PropertyGridModel {
-    const propertyGridTab = this.sidebar.getPageById(this.sidebar.activePage);
+    const propertyGridTab = this.sidebar.getPageById("propertyGrid");
     if (!propertyGridTab) return null;
     return propertyGridTab.componentData ? (propertyGridTab.componentData.propertyGridModel as any as PropertyGridModel) : null;
   }
@@ -2888,23 +2898,9 @@ export class SurveyCreatorModel extends Base
       this.designerPropertyGrid.setPropertyGridDefinition(val);
     }
   }
-  private getPropertyGridExpandedCategory(): string {
-    if (!this.designerPropertyGrid) return undefined;
-    const panels = this.designerPropertyGrid.survey.getAllPanels();
-    for (var i = 0; i < panels.length; i++) {
-      if ((<PanelModel>panels[i]).isExpanded) return panels[i].name;
-    }
-    return "";
-  }
   public expandCategoryIfNeeded(): void {
-    const expandedTabName = settings.propertyGrid.defaultExpandedTabName;
-    if (!!expandedTabName && !this.getPropertyGridExpandedCategory() && !this.survey.isEmpty) {
-      const panel = <PanelModel>this.designerPropertyGrid.survey.getPanelByName(expandedTabName);
-      if (!!panel) {
-        panel.blockAnimations();
-        panel.expand();
-        panel.releaseAnimations();
-      }
+    if (!this.survey.isEmpty) {
+      this.designerPropertyGrid.expandCategoryIfNeeded();
     }
   }
   private selectionChanged(element: Base, propertyName?: string, focus = true) {
@@ -3908,6 +3904,26 @@ export class SurveyCreatorModel extends Base
       .append("svc-creator--disable-animations", !this.animationEnabled)
       .toString();
   }
+
+  @property({ defaultValue: {} }) themeVariables: { [index: string]: string } = {};
+  @property() creatorTheme: ICreatorTheme;
+
+  public applyTheme(theme: ICreatorTheme): void {
+    this.syncTheme(theme);
+    const designerPlugin = this.getPlugin("designer") as TabDesignerPlugin;
+    if (designerPlugin) {
+      designerPlugin.updateThemeSettings();
+    }
+  }
+  public syncTheme(theme: ICreatorTheme): void {
+    if (!theme) return;
+    this.creatorTheme = theme;
+
+    const newCssVariable = {};
+    assign(newCssVariable, theme?.cssVariables);
+    this.themeVariables = newCssVariable;
+  }
+
   public allowDragPages = false;
   public collapsePagesOnDrag = false;
 }

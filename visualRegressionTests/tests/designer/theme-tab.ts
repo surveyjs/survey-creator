@@ -79,7 +79,7 @@ test("theme setting property grid", async (t) => {
     await ClientFunction(() => document.body.focus())();
     await takeElementScreenshot("theme-editor-property-grid-header-group.png", expandedGroup, t, comparer);
 
-    await t.click(expandedGroup.find(".sv-button-group__item-caption").withText("Advanced"));
+    await t.click(expandedGroup.find(".spg-button-group__item-caption").withText("Advanced"));
     await takeElementScreenshot("theme-editor-property-grid-header-group-advanced.png", expandedGroup, t, comparer);
 
     await t.click(getPropertyGridCategory("Header"));

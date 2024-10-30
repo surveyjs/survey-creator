@@ -15,12 +15,14 @@ import {
   SurveyElementBase,
   SurveyLocStringViewer,
   Survey,
-  SvgBundleComponent
+  SvgBundleComponent,
+  PopupModal
 } from "survey-react-ui";
 import {
   ICreatorOptions,
   SurveyCreatorModel,
-  ITabbedMenuItem
+  ITabbedMenuItem,
+  assign
 } from "survey-creator-core";
 import { TabbedMenuComponent } from "./TabbedMenu";
 
@@ -75,6 +77,8 @@ export class SurveyCreatorComponent extends SurveyElementBase<
     const areaClassName = "svc-full-container svc-creator__area svc-flex-column" + (this.props.creator.haveCommercialLicense ? "" : " svc-creator__area--with-banner");
     const contentWrapperClassName = "svc-creator__content-wrapper svc-flex-row" + (this.props.creator.isMobileView ? " svc-creator__content-wrapper--footer-toolbar" : "");
     const fullContainerClassName = "svc-flex-row svc-full-container" + (" svc-creator__side-bar--" + this.creator.sidebarLocation);
+    const creatorStyles = {};
+    assign(creatorStyles, this.style, this.props.creator.themeVariables);
     let licenseBanner = null;
     if (!this.props.creator.haveCommercialLicense) {
       const htmlValue = { __html: this.props.creator.licenseText };
@@ -86,8 +90,9 @@ export class SurveyCreatorComponent extends SurveyElementBase<
     }
     //AM: width unrecognized by react
     return (
-      <div className={this.creator.getRootCss()} ref={this.rootNode} style={this.style}>
+      <div className={this.creator.getRootCss()} ref={this.rootNode} style={creatorStyles}>
         <SvgBundleComponent></SvgBundleComponent>
+        <PopupModal></PopupModal>
         <div className={areaClassName}>
           <div className={fullContainerClassName}>
             <div className="svc-flex-column svc-flex-row__element svc-flex-row__element--growing">

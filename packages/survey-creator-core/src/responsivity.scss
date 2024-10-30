@@ -93,9 +93,8 @@
       }
 
       h3 {
+        @include ctrMediumBoldFont;
         margin: 0;
-        font-size: calcSize(3);
-        line-height: calcSize(4);
       }
 
       h5 {

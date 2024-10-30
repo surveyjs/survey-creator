@@ -130,6 +130,10 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   private hoverTimeout: any;
   @property({ defaultValue: false }) private isHovered: boolean;
 
+  protected get hoverDelay():number {
+    return this.creator.pageHoverDelay;
+  }
+
   public hover(e: MouseEvent, element: HTMLElement | any) {
     const processedFlagName = "__svc_question_processed";
     if (!e[processedFlagName] && e.type === "mouseover") {
@@ -137,7 +141,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
         this.hoverTimeout = setTimeout(() => {
           this.isHovered = true;
           this.hoverTimeout = undefined;
-        }, this.creator.pageHoverDelay);
+        }, this.hoverDelay);
       }
       e[processedFlagName] = true;
     } else {
@@ -293,11 +297,11 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
 
   protected detachElement(surveyElement: T): void {
     if (surveyElement) {
-      if (surveyElement.getPropertyValue(SurveyElementAdornerBase.AdornerValueName) === this) {
+      if (surveyElement.getPropertyValue(SurveyElementAdornerBase.AdornerValueName) === this && !surveyElement.isDisposed) {
         surveyElement.setPropertyValue(SurveyElementAdornerBase.AdornerValueName, null);
       }
       surveyElement.onPropertyChanged.remove(this.selectedPropPageFunc);
-      this.updateActionsContainer(surveyElement, true);
+      this.cleanActionsContainer();
     }
   }
   protected attachElement(surveyElement: T): void {
@@ -362,15 +366,16 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       }
     };
   }
-  protected updateActionsContainer(surveyElement: SurveyElement, clear: boolean = false) {
-    if(clear) {
-      this.actionContainer.actions.forEach(action => action.dispose && action.dispose());
-    } else {
-      const actions: Array<Action> = [];
-      this.buildActions(actions);
-      this.creator.onElementMenuItemsChanged(surveyElement, actions);
-      this.actionContainer.setItems(actions);
-    }
+  protected cleanActionsContainer() {
+    const actions = this.actionContainer.actions;
+    this.actionContainer.setItems([]);
+    actions.forEach(action => action.dispose && action.dispose());
+  }
+  protected updateActionsContainer(surveyElement: SurveyElement) {
+    const actions: Array<Action> = [];
+    this.buildActions(actions);
+    this.creator.onElementMenuItemsChanged(surveyElement, actions);
+    this.actionContainer.setItems(actions);
   }
   protected updateActionsProperties(): void {
     if (this.isDisposed) return;

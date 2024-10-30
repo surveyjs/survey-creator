@@ -1,26 +1,35 @@
 <ng-template #template>
   <div [class]="model.classNames" #container>
     <div (focusout)="model.focusOut($event)" class="svc-toolbox__panel">
-      <div class="svc-toolbox__scroller sv-drag-target-skipped" (scroll)="model.onScroll(model, $event)">
-        <div *ngIf="model.showSearch" class="svc-toolbox__search-container">
-          <ng-container *ngIf="model.isCompactRendered">
-          <svc-toolbox-tool [creator]="creator" [item]="searchItem" [parentModel]="model" [isCompact]="model.isCompactRendered"></svc-toolbox-tool>
-          <div class="svc-toolbox__category-separator svc-toolbox__category-separator--search"></div>
-          </ng-container>
-          <svc-search [model]="model.searchManager"></svc-search>
+      <div *ngIf="model.showSearch" class="svc-toolbox__search-container">
+        <ng-container *ngIf="model.isCompactRendered">
+          <svc-toolbox-tool [creator]="creator" [item]="searchItem" [parentModel]="model"
+            [isCompact]="model.isCompactRendered"></svc-toolbox-tool>
+        </ng-container>
+        <svc-search [model]="model.searchManager"></svc-search>
+        <div class="svc-toolbox__category-separator svc-toolbox__category-separator--search"></div>
+      </div>
+      <div class="svc-toolbox__scroll-wrapper">
+        <div class="svc-toolbox__scroller sv-drag-target-skipped" (scroll)="model.onScroll(model, $event)">
+          <div *ngIf="model.showPlaceholder" class="svc-toolbox__placeholder">{{model.toolboxNoResultsFound}}</div>
+          <div class="svc-toolbox__container">
+            <ng-container *ngIf="!model.showInSingleCategory">
+              <svc-toolbox-category *ngFor="let category of model.categories" [category]="category"
+                [toolbox]="model"></svc-toolbox-category>
+            </ng-container>
+            <ng-container *ngIf="model.showInSingleCategory">
+              <div class="svc-toolbox__category">
+                <ng-container *ngFor="let item of model.renderedActions">
+                  <svc-toolbox-tool [creator]="creator" [item]="item" [parentModel]="model"
+                    [isCompact]="model.isCompactRendered"></svc-toolbox-tool>
+                </ng-container>
+              </div>
+            </ng-container>
+          </div>
         </div>
-        <div *ngIf="model.showPlaceholder" class="svc-toolbox__placeholder">{{model.toolboxNoResultsFound}}</div>
-        <div class="svc-toolbox__container">
-          <ng-container *ngIf="!model.showInSingleCategory">
-            <svc-toolbox-category *ngFor="let category of model.categories" [category]="category" [toolbox]="model"></svc-toolbox-category>
-          </ng-container>
-          <ng-container *ngIf="model.showInSingleCategory">
-            <div class="svc-toolbox__category">
-              <ng-container *ngFor="let item of model.renderedActions">
-                <svc-toolbox-tool [creator]="creator" [item]="item" [parentModel]="model" [isCompact]="model.isCompactRendered"></svc-toolbox-tool>
-              </ng-container>
-            </div>
-          </ng-container>
+        <div class="svc-toolbox__scrollbar" (scroll)="model.onScrollbarScroll($event)">
+          <div class="svc-toolbox__scrollbar-sizer">
+          </div>
         </div>
       </div>
     </div>
