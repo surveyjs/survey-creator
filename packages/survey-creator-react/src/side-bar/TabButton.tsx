@@ -23,7 +23,7 @@ export class TabButtonComponent extends SurveyElementBase<{ model: MenuButton },
         >
           <div className="svc-menu-action__icon">
             <div className="svc-menu-action__icon-container">
-              <SvgIcon iconName={this.props.model.iconName} size={24}></SvgIcon>
+              <SvgIcon iconName={this.props.model.iconName} size={"auto"}></SvgIcon>
             </div>
           </div>
         </div>

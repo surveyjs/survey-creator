@@ -37,7 +37,7 @@ export class LogoImageComponent extends CreatorModelElement<ILogoImageComponentP
       className="svc-context-button"
       onClick={() => this.model.chooseFile(this.model)}
     >
-      <SvgIcon size={24} iconName={"icon-file"}></SvgIcon>
+      <SvgIcon size={"auto"} iconName={"icon-file"}></SvgIcon>
     </span>);
   }
   renderClearButton() {
@@ -45,7 +45,7 @@ export class LogoImageComponent extends CreatorModelElement<ILogoImageComponentP
       className="svc-context-button svc-context-button--danger"
       onClick={() => this.model.remove(this.model)}
     >
-      <SvgIcon size={24} iconName={"icon-clear"}></SvgIcon>
+      <SvgIcon size={"auto"} iconName={"icon-clear"}></SvgIcon>
     </span>);
   }
   renderButtons() {

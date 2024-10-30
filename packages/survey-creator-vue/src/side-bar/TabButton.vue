@@ -10,7 +10,7 @@
           <SvComponent
             :is="'sv-svg-icon'"
             :iconName="model.iconName"
-            :size="24"
+            :size="'auto'"
           ></SvComponent>
         </div>
       </div>

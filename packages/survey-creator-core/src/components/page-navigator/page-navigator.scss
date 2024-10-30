@@ -8,12 +8,17 @@ svc-page-navigator,
 
 .svc-page-navigator__navigator-icon {
   display: block;
-  height: calcSize(3);
-  width: calcSize(3);
-  padding: calcSize(1.25);
-  border-radius: 50%;
+  width: var(--ctr-page-navigator-button-icon-width, calcSize(3));
+  height: var(--ctr-page-navigator-button-icon-height, calcSize(3));
+  padding: var(--ctr-page-navigator-button-padding, calcSize(1.25));
+  border-radius: var(--ctr-page-navigator-button-corner-radius, 50%);
   cursor: pointer;
   transition: background-color $creator-transition-duration;
+
+  .sv-svg-icon {
+    width: var(--ctr-page-navigator-button-icon-width, calcSize(3));
+    height: var(--ctr-page-navigator-button-icon-height, calcSize(3));
+  }
 
   use {
     fill: var(--ctr-page-navigator-button-icon-color, $foreground-light);

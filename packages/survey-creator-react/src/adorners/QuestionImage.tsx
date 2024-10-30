@@ -53,7 +53,7 @@ export class QuestionImageAdornerComponent extends QuestionAdornerComponent {
         className="svc-context-button"
         onClick={() => this.imageModel.chooseFile(this.imageModel)}
       >
-        <SvgIcon size={24} iconName={"icon-file"}></SvgIcon>
+        <SvgIcon size={"auto"} iconName={"icon-file"}></SvgIcon>
       </span>) : null}
     </div>);
   }

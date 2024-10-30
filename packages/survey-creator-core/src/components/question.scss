@@ -736,11 +736,11 @@ svc-question,
 // EO reset styles for drag-drop-ghost-survey-element to avoid layout jumping while dragging
 
 .svc-hovered > .svc-question__content > .svc-question__drag-area > .svc-question__drag-element {
-  opacity: 0.5;
+  opacity: var(--ctr-survey-question-panel-drag-area-drag-indicator-opacity, 0.5);
 }
 
 .svc-question__content.svc-question__content--selected > .svc-question__drag-area > .svc-question__drag-element {
-  opacity: 0.5;
+  opacity: var(--ctr-survey-question-panel-drag-area-drag-indicator-opacity, 0.5);
   z-index: 1;
 }
 .svc-element__header--hidden {
@@ -868,9 +868,10 @@ svc-question,
 
 .svc-question__drag-element {
   width: 100%;
-  height: calcSize(4);
   opacity: 0;
   transition: opacity $creator-transition-duration;
+  width: var(--ctr-survey-question-panel-drag-area-drag-indicator-width, calcSize(3));
+  height: var(--ctr-survey-question-panel-drag-area-drag-indicator-height, calcSize(2));
 
   use {
     fill: var(--ctr-survey-question-panel-drag-area-drag-indicator-color, $foreground-light);

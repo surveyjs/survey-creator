@@ -20,7 +20,7 @@
         <SvComponent
           :is="'sv-svg-icon'"
           :iconName="'icon-file'"
-          :size="24"
+          :size="'auto'"
           @click="model.chooseFile(model)"
         ></SvComponent>
       </span>
