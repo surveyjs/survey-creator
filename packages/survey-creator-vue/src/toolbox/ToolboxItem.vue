@@ -13,7 +13,7 @@
         :is="'sv-svg-icon'"
         v-if="item.iconName"
         :iconName="item.iconName"
-        :size="24"
+        :size="'auto'"
       ></SvComponent>
     </span>
     <span v-if="!isCompact" class="svc-toolbox__item-title">
