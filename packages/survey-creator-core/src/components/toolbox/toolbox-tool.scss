@@ -392,4 +392,12 @@
     box-sizing: border-box;
     align-self: flex-start;
   }
+  .svc-toolbox__tool--dots {
+    padding-inline-end: 0;
+    padding-inline-start: 0;
+  }
+  .svc-toolbox__item--dots {
+    padding-inline-end: var(--ctr-toolbox-item-padding-right, calcSize(1.5));
+    padding-inline-start: var(--ctr-toolbox-item-padding-left, calcSize(1.5));
+  }
 }
