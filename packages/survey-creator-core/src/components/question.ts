@@ -657,10 +657,12 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       ariaChecked: <any>new ComputedUpdater<boolean>(() => this.isRequired),
       ariaRole: "checkbox",
       css: "svc-action-bar-item--right sv-action-bar-item--secondary",
+      innerCss: "svc-required-action",
       title: this.creator.getLocString("pe.isRequired"),
       visibleIndex: 20,
       iconName: "icon-required",
       iconSize: 16,
+      active: <any>new ComputedUpdater<boolean>(() => this.isRequired),
       action: () => {
         if (
           this.creator.isCanModifyProperty(
@@ -672,7 +674,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
         }
       }
     });
-    requiredAction.innerCss = <string>(new ComputedUpdater<string>(() => new CssClassBuilder().append("svc-required-action").append("svc-required-action--active", this.isRequired).toString()) as any);
     requiredAction.innerItem.title = <string>(new ComputedUpdater<string>(() => {
       return this.isRequired ? this.creator.getLocString("pe.removeRequiredMark") : this.creator.getLocString("pe.markRequired");
     }) as any);
