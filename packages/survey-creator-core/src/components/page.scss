@@ -440,3 +440,7 @@ $svc-page-move-out-delay: var(--sjs-svc-page-move-out-delay, 100ms);
     background-color: transparent;
   }
 }
+
+.svc-page {
+  scroll-margin-top: calcSize(1);
+}
