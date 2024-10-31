@@ -29,7 +29,8 @@ svc-page {
   box-sizing: border-box;
   width: 100%;
   outline: none;
-  transition: background $creator-transition-duration, box-shadow $creator-transition-duration;
+  transition-property: background-color, box-shadow, outline-color;
+  transition-duration: $creator-transition-duration;
 
   .sd-page {
     margin: 0;
@@ -175,7 +176,6 @@ svc-page {
 }
 .svc-page__content--collapse-onhover, .svc-page__content--collapse-always {
   outline: 2px transparent dashed;
-  transition: outline-color $creator-transition-duration;
   &.svc-page__content--selected,
   &.svc-page__content.svc-hovered {
     outline-color: transparent;
