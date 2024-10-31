@@ -1,6 +1,6 @@
 .spg-checkbox {
   cursor: pointer;
-  margin-top: calcSize(2);
+  margin-top: var(--ctr-checkbox-list-gap-vertical, calcSize(2));
 }
 
 .spg-checkbox--disabled {
@@ -13,6 +13,11 @@
   .spg-checkbox__caption {
     color: var(--ctr-checkbox-text-color-disabled, $foreground-light);
   }
+
+  .spg-checkbox__rectangle {
+    border: var(--ctr-checkbox-border-width, 1px) solid var(--ctr-checkbox-border-color-disabled, rgba(0, 0, 0, 0.16));
+    background: var(--ctr-checkbox-background-color-disabled, #f3f3f3);
+  }
 }
 
 .spg-checkbox__caption {
@@ -22,10 +27,14 @@
 
 .spg-checkbox__rectangle {
   background: var(--ctr-checkbox-background-color, $background);
-  border: 1px solid var(--ctr-checkbox-border-color, $border);
+  border: var(--ctr-checkbox-border-width, 1px) solid var(--ctr-checkbox-border-color, $border);
+  border-radius: var(--ctr-checkbox-corner-radius);
   box-sizing: border-box;
-  width: calcSize(3);
-  height: calcSize(3);
+  width: var(--ctr-checkbox-button-width, calcSize(3));
+  height: var(--ctr-checkbox-button-height, calcSize(3));
+  display: flex;
+  justify-content: center;
+  align-items: center;
   flex-shrink: 0;
   // padding: calcSize(0.5);
   padding: 1px 1px;
@@ -39,12 +48,6 @@
   }
 }
 
-.spg-checkbox--disabled {
-  .spg-checkbox__rectangle:hover {
-    background: var(--ctr-checkbox-background-color-disabled, $background);
-  }
-}
-
 .spg-checkbox:active .spg-checkbox__rectangle,
 .spg-checkbox__control:focus+.spg-checkbox__rectangle {
   outline: 2px solid var(--ctr-checkbox-border-color-focused, $primary);
@@ -55,10 +58,8 @@
   display: block;
   opacity: 0;
   fill: transparent;
-  width: calcSize(2.5);
-  height: calcSize(2.5);
-  background-repeat: no-repeat;
-  background-size: calcSize(2) calcSize(2);
+  width: var(--ctr-checkbox-button-check-mark-width, calcSize(2.5));
+  height: var(--ctr-checkbox-button-check-mark-height, calcSize(2.5));
   transition: opacity $creator-transition-duration, fill $creator-transition-duration;
 }
 
@@ -94,12 +95,14 @@
 .spg-selectbase__label {
   display: flex;
   align-items: flex-start;
-  gap: calcSize(1);
+  gap: var(--ctr-checkbox-gap, calcSize(1));
 }
 
 .spg-checkbox {
   .spg-question__description {
-    padding: calcSize(1) 0 0 calcSize(4);
+    padding: 0;
+    padding-inline-start: var(--ctr-checkbox-description-text-margin-left, calcSize(4));
+    color: var(--ctr-checkbox-description-text-color, $foreground-dim-light);
   }
 
   .spg-help-action {

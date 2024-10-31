@@ -21,7 +21,8 @@
   height: calcSize(6);
 
   box-sizing: border-box;
-  border-radius: calcSize(12.5);
+  border-radius: var(--ctr-collapse-button-corner-radius, calcSize(12.5));
+
   padding: 0;
   transition: background-color $creator-transition-duration;
 
@@ -183,11 +184,13 @@
   button.sl-panel__done-button {
     @include ctrDefaultBoldFont;
     width: auto;
-    padding: calcSize(1) calcSize(4);
-    margin: calcSize(2) 0 0 0;
+    margin: var(--ctr-expression-rows-gap, calcSize(2)) 0 0 0;
     color: var(--ctr-expression-item-text-color-button, $primary);
     background-color: var(--ctr-expression-item-background-color-button, $primary-light);
-    border-radius: calcSize(12.5);
+    border-radius: var(--ctr-expression-item-corner-radius, calcSize(12.5));
+    padding: var(--ctr-expression-item-padding-top, calcSize(1))
+      var(--ctr-expression-item-padding-right-button, calcSize(4))
+      var(--ctr-expression-item-padding-bottom, calcSize(1)) var(--ctr-expression-item-padding-left-button, calcSize(4));
 
     display: flex;
     align-items: center;
@@ -221,7 +224,7 @@
 .sl-question {
   display: flex;
   align-items: center;
-  margin-top: calcSize(2);
+  margin-top: var(--ctr-expression-rows-gap, calcSize(2));
 }
 
 .sl-row {
@@ -262,25 +265,25 @@
   padding-right: calcSize(1);
 }
 .svc-logic-question-text-editor {
-  margin-top: calcSize(2);
+  margin-top: var(--ctr-expression-rows-gap, calcSize(2));
 }
 .svc-logic-question-value {
   --sd-base-padding: calc(5 * #{$base-unit});
   --sd-base-vertical-padding: calc(4 * #{$base-unit});
   --sd-page-vertical-padding: calc(3 * #{$base-unit});
   padding-right: calcSize(5);
-  margin-top: calcSize(2);
+  margin-top: var(--ctr-expression-rows-gap, calcSize(2));
 }
 
 .svc-logic_trigger-editor {
-  margin-top: calcSize(2);
+  margin-top: var(--ctr-expression-rows-gap, calcSize(2));
 }
 
 .svc-logic_trigger-editor .svc-logic-question-value {
   margin-top: 0;
 }
 
-.sv-popup.sv-property-editor {
+.sv-popup.svc-property-editor {
   .sl-row {
     flex-flow: nowrap;
   }

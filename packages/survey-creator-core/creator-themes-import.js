@@ -125,7 +125,9 @@ Object.keys(themeNameMap).forEach(themeName => {
     const distinctions = themeConstants[themeNameMap[themeName]] || {};
     Object.keys(curThemeCssVariables || {}).forEach(variableKey => {
       const variableValue = curThemeCssVariables[variableKey];
-      if(variableValue !== baseThemeCssVariable[variableKey] || usedCssVariablesList.indexOf(variableKey) !== -1) {
+      if(variableKey.indexOf("--ctr-shadow-") > -1 || variableKey.indexOf("--lbr-shadow-") > -1 || variableKey.indexOf("-unit") > -1) {
+        distinctions[variableKey] = variableValue;
+      } else if(variableValue !== baseThemeCssVariable[variableKey] || usedCssVariablesList.indexOf(variableKey) !== -1) {
         distinctions[variableKey] = getCorrectValue(variableKey, variableValue);
       }
     });
