@@ -37,8 +37,12 @@ svc-page {
     padding: calcSize(1) calcSize(3) 0;
   }
 
-  &>.svc-question__drag-area {
+  & > .svc-question__drag-area {
     padding-top: calcSize(1.25);
+
+    .svc-question__drag-element {
+      transition: opacity $creator-transition-duration;
+    }
   }
 }
 
@@ -126,6 +130,7 @@ svc-page {
   box-shadow: 0 0 0 2px $secondary-light;
   background: var(--ctr-survey-page-background-color-hovered, $secondary-backcolor-semi-light);
 }
+
 .svc-page__content--new.svc-page__content--new {
   box-shadow: none;
   background-color: transparent;
@@ -137,7 +142,7 @@ svc-page {
     opacity: 1;
   }
 
-  &>.svc-question__drag-area {
+  & > .svc-question__drag-area {
     z-index: 1;
 
     .svc-question__drag-element {
@@ -151,12 +156,12 @@ svc-page {
   background: $secondary-backcolor-semi-light;
 }
 
-
 .svc-page__content--animation-running {
   .svc-row {
     .svc-question--enter {
       animation: none;
-    }  
+    }
+
     .svc-question--leave {
       animation-name: moveInWithOverflow;
       animation-direction: reverse;
@@ -165,28 +170,34 @@ svc-page {
       animation-duration: $svc-collapse-move-out-duration;
       animation-delay: $svc-collapse-move-out-delay;
     }
-  } 
+  }
 }
+
 .svc-creator--disable-animations {
   .svc-row {
     .svc-question--leave {
       animation: none;
-     }
+    }
   }
 }
-.svc-page__content--collapse-onhover, .svc-page__content--collapse-always {
+
+.svc-page__content--collapse-onhover,
+.svc-page__content--collapse-always {
   outline: 2px transparent dashed;
+
   &.svc-page__content--selected,
   &.svc-page__content.svc-hovered {
     outline-color: transparent;
   }
+
   &.svc-page__content--collapsed-drag-over-inside {
     box-shadow: 0 0 0 2px $primary;
     background: $primary-light;
     animation: collapsed-drag-over-inside-blinking 1s infinite;
     outline-color: transparent;
   }
-} 
+}
+
 .svc-page__content--collapsed {
   outline-color: $border;
 }
@@ -321,20 +332,20 @@ svc-page {
       pointer-events: none;
     }
 
-    .sv-list__item.sv-list__item--selected.sv-list__item--group>.sv-list__item-body {
+    .sv-list__item.sv-list__item--selected.sv-list__item--group > .sv-list__item-body {
       @include ctrDefaultBoldFont;
       background-color: $primary;
       color: $primary-foreground;
     }
 
-    .sv-list__item.sv-list__item--selected.sv-list__item--group>.sv-list__item-body use {
+    .sv-list__item.sv-list__item--selected.sv-list__item--group > .sv-list__item-body use {
       fill: $background;
     }
   }
 }
 
 .svc-page__content--collapsed {
-  &>.sv-action-bar {
+  & > .sv-action-bar {
     display: none;
   }
 
@@ -349,7 +360,7 @@ svc-page {
   .sd-page {
     display: flex;
 
-    &>* {
+    & > * {
       display: none;
     }
 
@@ -414,6 +425,7 @@ $svc-page-move-out-delay: var(--sjs-svc-page-move-out-delay, 100ms);
   animation-timing-function: var(--animation-timing-function);
   animation-delay: var(--fade-animation-delay), var(--move-animation-delay);
 }
+
 .svc-page--enter {
   opacity: 0;
   --animation-direction: normal;
@@ -423,6 +435,7 @@ $svc-page-move-out-delay: var(--sjs-svc-page-move-out-delay, 100ms);
   --fade-animation-delay: #{$svc-page-fade-in-delay};
   --move-animation-delay: 0s;
 }
+
 .svc-page--leave {
   --animation-direction: reverse;
   --animation-timing-function: #{$reverse-ease-out};
@@ -431,13 +444,21 @@ $svc-page-move-out-delay: var(--sjs-svc-page-move-out-delay, 100ms);
   --fade-animation-delay: 0s;
   --move-animation-delay: #{$svc-page-move-out-delay};
 }
-.svc-page--enter {
+
+.svc-page--enter.svc-page--enter {
   .svc-page__content-actions {
     opacity: 0;
   }
-  .svc-page__content--selected {
+
+  .svc-page__content {
     box-shadow: 0 0 0 2px transparent;
     background-color: transparent;
+
+    & > .svc-question__drag-area {
+      .svc-question__drag-element {
+        opacity: 0;
+      }
+    }
   }
 }
 
