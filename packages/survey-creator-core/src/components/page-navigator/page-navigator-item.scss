@@ -48,8 +48,8 @@ svc-page-navigator-item,
   border-radius: 50%;
   width: var(--ctr-page-navigator-item-dot-radius-small, 6px);
   height: var(--ctr-page-navigator-item-dot-radius-small, 6px);
-  right: calc(50% - 6px / 2);
-  top: calc(50% - 6px / 2);
+  right: calc(50% - var(--ctr-page-navigator-item-dot-radius-small, 6px) / 2);
+  top: calc(50% - var(--ctr-page-navigator-item-dot-radius-small, 6px) / 2);
   background: var(--ctr-page-navigator-item-dot-color-default, $border);
 }
 
@@ -75,9 +75,7 @@ svc-page-navigator-item,
   right: calcSize(0.5);
   display: flex;
   align-items: center;
-  line-height: calcSize(4);
   animation: 0.5s ease-in;
-  padding: 0;
   opacity: 0;
   max-width: 0;
   z-index: 20;
@@ -85,9 +83,14 @@ svc-page-navigator-item,
   top: 0;
   height: 100%;
   background-color: var(--ctr-page-navigator-item-background-color-hovered, $background);
-  border-radius: calcSize(12.5);
   box-shadow: $shadow-medium;
   transition: opacity $creator-transition-duration;
+
+  border-radius: var(--ctr-page-navigator-item-corner-radius, calcSize(12.5));
+  padding: var(--ctr-page-navigator-item-padding-top, 0) var(--ctr-page-navigator-item-padding-right, 0)
+    var(--ctr-page-navigator-item-padding-bottom, 0) var(--ctr-page-navigator-item-padding-left-hovered, 0);
+  flex-direction: row;
+  gap: var(--ctr-page-navigator-item-gap, 8px);
 
   .svc-page-navigator-item__dot {
     position: absolute;
@@ -112,17 +115,6 @@ svc-page-navigator-item,
   }
 }
 
-.svc-page-navigator-item-content:not(.svc-page-navigator-item--disabled) {
-  .svc-page-navigator-item__banner {
-    .svc-page-navigator-item__dot {
-      width: calcSize(1);
-      height: calcSize(1);
-      border: none;
-      background: var(--ctr-page-navigator-item-dot-color-hovered, $primary);
-    }
-  }
-}
-
 .svc-page-navigator-item-content:not(.svc-page-navigator-item--selected):hover,
 .svc-page-navigator-item-content:not(.svc-page-navigator-item--selected):focus {
   .svc-page-navigator-item__banner {
@@ -130,6 +122,13 @@ svc-page-navigator-item,
     max-width: calcSize(25);
     opacity: 1;
     background: var(--ctr-page-navigator-item-background-color-hovered, $background);
+  }
+
+  .svc-page-navigator-item__dot {
+    border: none;
+    width: var(--ctr-page-navigator-item-dot-radius-large, calcSize(1));
+    height: var(--ctr-page-navigator-item-dot-radius-large, calcSize(1));
+    background: var(--ctr-page-navigator-item-dot-color-hovered, $primary);
   }
 }
 
