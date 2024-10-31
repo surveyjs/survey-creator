@@ -553,8 +553,9 @@ export class QuestionToolbox
     this.searchItem = new Action({
       id: "searchItem-id",
       css: "svc-toolbox__tool svc-toolbox__search-button",
-      innerCss: "sv-dots__item",
+      innerCss: "svc-toolbox__item sv-dots__item",
       iconName: "icon-search",
+      iconSize: "auto",
       component: "sv-action-bar-item",
       tooltip: surveyLocalization.getString("search"),
       action: () => {

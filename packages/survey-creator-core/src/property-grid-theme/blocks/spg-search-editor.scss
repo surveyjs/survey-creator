@@ -1,5 +1,4 @@
 .spg-editor--highlighted {
-
   .spg-input,
   .spg-input-container,
   .spg-question--location--left,
@@ -7,7 +6,7 @@
     box-shadow: 0 0 0 2px $secondary;
   }
 
-  .spg-checkbox__control:focus+.spg-checkbox__rectangle,
+  .spg-checkbox__control:focus + .spg-checkbox__rectangle,
   .spg-matrixdynamic__content.spg-text__content {
     outline: 2px solid $secondary;
     outline-offset: -2px;
@@ -26,7 +25,7 @@
     border-color: $secondary;
   }
 
-  .spg-checkbox__control+.spg-checkbox__rectangle {
+  .spg-checkbox__control + .spg-checkbox__rectangle {
     outline: 2px solid $secondary;
     outline-offset: -2px;
   }
@@ -113,7 +112,7 @@
 }
 
 .spg-search-editor_toolbar .sv-action-bar-item__icon use {
-  fill: var(--ctr-property-grid-search-button-icon-color, $foreground-light)
+  fill: var(--ctr-property-grid-search-button-icon-color, $foreground-light);
 }
 
 .spg-search-editor_toolbar-counter {

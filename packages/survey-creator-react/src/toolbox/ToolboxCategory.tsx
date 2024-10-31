@@ -60,7 +60,7 @@ export class SurveyCreatorToolboxCategory extends SurveyElementBase<ISurveyCreat
     const suffixName = this.category.collapsed ? "expand" : "collapse";
     const svgIconClassName = "svc-toolbox__category-header__button svc-string-editor__button--" + suffixName;
     return (<div className="svc-toolbox__category-header__controls">
-      <SvgIcon className={svgIconClassName} iconName={"icon-" + iconName} size={24}></SvgIcon>
+      <SvgIcon className={svgIconClassName} iconName={"icon-" + iconName} size={"auto"}></SvgIcon>
     </div>);
   }
 
