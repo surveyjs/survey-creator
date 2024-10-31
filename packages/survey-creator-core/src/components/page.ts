@@ -156,6 +156,14 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   protected createActionContainer(): ActionContainer<Action> {
     const container = new ActionContainer();
     container.sizeMode = "small";
+    container.cssClasses = {
+      root: "svc-page-toolbar sv-action-bar",
+      item: "svc-page-toolbar__item",
+      itemWithTitle: "svc-page-toolbar__item--with-text",
+      itemActive: "svc-page-toolbar__item--active",
+      itemPressed: "svc-page-toolbar__item--pressed",
+      itemIcon: "svc-page-toolbar__item-icon",
+    };
     return container;
   }
   protected getExpandCollapseAction(): IAction {

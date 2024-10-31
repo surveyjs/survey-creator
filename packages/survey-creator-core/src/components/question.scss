@@ -85,6 +85,16 @@ svc-question {
   }
 
   .sv-action-bar-item--secondary {
+    .sv-svg-icon {
+      box-sizing: border-box;
+      width: var(--ctr-survey-question-panel-toolbar-item-icon-container-width, calcSize(3));
+      height: var(--ctr-survey-question-panel-toolbar-item-icon-container-height, calcSize(3));
+      padding: var(--ctr-survey-question-panel-toolbar-item-icon-padding-top, calcSize(0.5))
+        var(--ctr-survey-question-panel-toolbar-item-icon-padding-right, calcSize(0.5))
+        var(--ctr-survey-question-panel-toolbar-item-icon-padding-bottom, calcSize(0.5))
+        var(--ctr-survey-question-panel-toolbar-item-icon-padding-left, calcSize(0.5));
+    }
+
     .sv-action-bar-item__icon use {
       fill: var(--ctr-survey-question-panel-toolbar-item-icon-color, $secondary);
     }
@@ -1168,6 +1178,8 @@ svc-question,
   .svc-panel__add-new-question-container {
     .svc-panel__add-new-question-icon {
       display: block;
+      width: var(--ctr-button-contextual-button-icon-width, calcSize(3));
+      height: var(--ctr-button-contextual-button-icon-height, calcSize(3));
     }
 
     .svc-element__question-type-selector {

@@ -470,7 +470,8 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       enabled: allowChangeType,
       visibleIndex: 0,
       title: actionTitle,
-      iconName: "icon-chevron_16x16"
+      iconName: "icon-chevron_16x16",
+      iconSize: "auto"
     };
     const newAction = this.createDropdownModel({
       actionData: actionData,
@@ -484,9 +485,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
         return this.creator.toolbox.getItemByName(this.element.getType())?.iconName;
       }
       return "icon-chevron_16x16";
-    });
-    newAction.iconSize = <any>new ComputedUpdater(() => {
-      return newAction.mode === "small" ? 24 : 16;
     });
     newAction.disableHide = true;
     return newAction;
@@ -624,7 +622,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       id: options.actionData.id,
       css: "sv-action--convertTo sv-action-bar-item--secondary",
       iconName: options.actionData.iconName,
-      iconSize: 16,
+      iconSize: "auto",
       title: options.actionData.title,
       enabled: options.actionData.enabled,
       visibleIndex: options.actionData.visibleIndex,
@@ -660,7 +658,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       title: this.creator.getLocString("pe.isRequired"),
       visibleIndex: 20,
       iconName: "icon-required",
-      iconSize: 16,
+      iconSize: "auto",
       action: () => {
         if (
           this.creator.isCanModifyProperty(

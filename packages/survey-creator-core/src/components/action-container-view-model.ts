@@ -360,7 +360,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       id: "collapse",
       css: "sv-action-bar-item--secondary sv-action-bar-item--collapse",
       iconName: new ComputedUpdater<string>(() => this.collapsed ? expandIcon : collapseIcon) as any,
-      iconSize: 16,
+      iconSize: "auto",
       action: () => {
         this.collapsed = !this.collapsed;
       }
@@ -425,7 +425,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
         css: "svc-action-bar-item--right sv-action-bar-item--secondary",
         title: this.creator.getLocString("survey.duplicate"),
         visibleIndex: 10,
-        iconSize: 16,
+        iconSize: "auto",
         action: () => this.duplicate(),
         onFocus: (isMouse: boolean, event: any) => this.disableActionFocusing(isMouse, event)
       })
@@ -439,7 +439,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
         title: this.creator.getLocString("ed.settings"),
         locTooltipName: "ed.settingsTooltip",
         visibleIndex: 20,
-        iconSize: 16,
+        iconSize: "auto",
         action: () => {
           this.creator.setShowSidebar(true, true);
           if (!this.creator.isMobileView) {
@@ -459,7 +459,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
         //needSeparator: items.length > 0,
         title: this.creator.getLocString("pe.delete"),
         visibleIndex: 30,
-        iconSize: 16,
+        iconSize: "auto",
         action: () => {
           this.delete();
         },
