@@ -7,7 +7,7 @@
   text-align: center;
   background-color: var(--ctr-button-background-color, $background);
   box-shadow: $shadow-small;
-  border-radius: calcSize(0.5);
+  border-radius: var(--ctr-button-corner-radius, calcSize(0.5));
   cursor: pointer;
   user-select: none;
   outline: solid calcSize(0.25) transparent;

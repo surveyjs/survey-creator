@@ -49,6 +49,7 @@
 .sv-action-bar--small-size-mode .sv-action-bar-item {
   @include ctrSmallBoldFont;
   align-items: center;
+  border-radius: var(--ctr-survey-question-panel-toolbar-item-corner-radius, 2px);
 }
 
 .svc-top-bar {
@@ -62,7 +63,7 @@
     display: flex;
 
     .sv-action-bar {
-      padding: 0 calcSize(1);
+      padding: var(--ctr-menu-toolbar-padding-vertical, 0) var(--ctr-menu-toolbar-padding-horizontal, calcSize(1));
       justify-content: flex-end;
     }
 
@@ -70,12 +71,25 @@
       display: none;
     }
 
-    .sv-action-bar>.sv-action:not(.sv-action--hidden)~.sv-action .sv-action-bar-separator {
+    .sv-action-bar > .sv-action:not(.sv-action--hidden) ~ .sv-action .sv-action-bar-separator {
+      --ctr-menu-toolbar-button-gap: calc(var(--ctr-menu-toolbar-gap) / 2);
+      --ctr-menu-toolbar-button-height: calc(
+        var(--ctr-menu-toolbar-button-padding-top) + var(--ctr-menu-toolbar-button-padding-bottom) +
+          var(--ctr-menu-toolbar-button-icon-width)
+      );
+
       display: inline-block;
+      margin: 0 var(--ctr-menu-toolbar-button-gap, calcSize(1));
+      height: var(--ctr-menu-toolbar-button-height, calcSize(5));
     }
 
     .sv-action .sv-action-bar-item {
-      margin: 0 calcSize(1);
+      --ctr-menu-toolbar-button-gap: calc(var(--ctr-menu-toolbar-gap) / 2);
+      margin: 0 var(--ctr-menu-toolbar-button-gap, calcSize(1));
+      padding: var(--ctr-menu-toolbar-button-padding-top, calcSize(1))
+        var(--ctr-menu-toolbar-button-padding-right, calcSize(1))
+        var(--ctr-menu-toolbar-button-padding-bottom, calcSize(1))
+        var(--ctr-menu-toolbar-button-padding-left, calcSize(1));
     }
   }
 

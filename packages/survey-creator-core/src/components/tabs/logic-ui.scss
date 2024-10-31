@@ -44,8 +44,12 @@
   @include ctrDefaultBoldFont;
   -webkit-appearance: none;
   appearance: none;
-  padding: calcSize(1) calcSize(2);
-  border-radius: calcSize(12.5);
+  border-radius: var(--ctr-expression-item-corner-radius, calcSize(12.5));
+  padding: var(--ctr-expression-item-padding-top, calcSize(1))
+    var(--ctr-expression-item-padding-right, calcSize(2))
+    var(--ctr-expression-item-padding-bottom, calcSize(1))
+    var(--ctr-expression-item-padding-left, calcSize(2));
+
   border: none;
   outline: none;
   color: var(--ctr-expression-item-text-color-parameter-empty, $foreground-light);
@@ -329,6 +333,7 @@
 
 .sl-list__item-body {
   padding-block: calcSize(1.5);
+  border-radius: var(--ctr-list-item-corner-radius, 4px);
 }
 
 .svc-logic-placeholder {

@@ -372,7 +372,7 @@ export class PropertyGridTitleActionsCreator {
     var helpAction = this.createPropertyHelpAction(question);
     if (!!helpAction) {
       actions.unshift(helpAction);
-      question.getTitleToolbar().containerCss += " spg-title-toolobar--single-help-action";
+      question.getTitleToolbar().containerCss += " spg-title-toolbar--single-help-action";
     }
     if (actions.length > 0) {
       options.titleActions = actions;
@@ -1444,7 +1444,7 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
           this.onModalPropertyEditorClosed(editor, property, question, options, "cancel");
           onClose && onClose("cancel");
         },
-        cssClass: "sv-property-editor svc-creator-popup",
+        cssClass: "svc-property-editor svc-creator-popup",
         title: question.title,
         displayMode: options.isMobileView ? "overlay" : "popup"
       }, options.rootElement);

@@ -13,6 +13,8 @@ svc-tab-json-editor-textarea {
 
 .svc-json-editor-tab__content-area {
   @include ctrCodeFont;
+  color: var(--ctr-code-viewer-text-color, #505050);
+  background: var(--ctr-code-viewer-background-color, $background);
   width: 100%;
   height: 100%;
   border: none;
