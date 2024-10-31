@@ -3673,6 +3673,9 @@ export class SurveyCreatorModel extends Base
       onShow: () => {
         const listModel = newAction.popupModel.contentComponentData.model;
         listModel.setItems(getActions());
+        setTimeout(() => {
+          newAction.popupModel.recalculatePosition(true);
+        }, 1);
       },
       allowSelection: false,
       cssClass: "svc-creator-popup",
