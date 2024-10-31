@@ -8,10 +8,14 @@
   box-sizing: border-box;
   width: 100%;
   border: none;
+  border-radius: var(--ctr-editor-corner-radius);
   box-shadow: inset 0 0 0 var(--ctr-editor-border-width, 1px) var(--ctr-editor-border-color, $border-inside);
   transition: box-shadow $creator-transition-duration;
 
-  padding: calcSize(1.5) calcSize(2);
+  padding-top: calc(var(--ctr-editor-padding-top, 4px) + var(--ctr-editor-content-margin-top, 8px));
+  padding-right: calc(var(--ctr-editor-padding-right, 4px) + var(--ctr-editor-content-margin-right, 12px));
+  padding-bottom: calc(var(--ctr-editor-padding-bottom, 4px) + var(--ctr-editor-content-margin-bottom, 8px));
+  padding-left: calc(var(--ctr-editor-padding-left, 4px) + var(--ctr-editor-content-margin-left, 12px));
   outline: none;
   color: var(--ctr-editor-content-text-color, $foreground);
 }
@@ -31,6 +35,7 @@
 .spg-input:disabled::placeholder {
   color: var(--ctr-editor-content-text-color-disabled, $foreground);
   opacity: var(--ctr-editor-content-text-opacity-disabled, 0.25);
+  background-color: var(--ctr-editor-background-color-disabled, $background);
 }
 
 input.spg-input:read-only,
@@ -52,9 +57,9 @@ input.spg-input:read-only::placeholder {
   background: var(--ctr-editor-background-color, $background);
   border: none;
   outline: none;
-  width: calcSize(5);
-  height: calcSize(5);
-  padding: calcSize(1);
+  border-radius: var(--ctr-editor-button-corner-radius);
+  padding: var(--ctr-editor-button-padding-top, calcSize(1)) var(--ctr-editor-button-padding-right, calcSize(1))
+    var(--ctr-editor-button-padding-bottom, calcSize(1)) var(--ctr-editor-button-padding-left, calcSize(1));
   line-height: 0;
   transition: background $creator-transition-duration, opacity $creator-transition-duration;
 
@@ -67,16 +72,20 @@ input.spg-input:read-only::placeholder {
     opacity: var(--ctr-editor-button-icon-opacity-pressed, 0.5);
   }
 
-  &.spg-input__edit-button--disabled,
-  &:disabled {
-    opacity: var(--ctr-editor-button-icon-opacity-disabled, 0.25);
-    background: var(--ctr-editor-background-color, $background);
+  svg {
+    width: var(--ctr-editor-button-icon-width, 24px);
+    height: var(--ctr-editor-button-icon-height, 24px);
+    fill: var(--ctr-editor-button-icon-color, $foreground-dim-light);
   }
+}
+
+.spg-input__edit-button--disabled,
+.spg-input__edit-button:disabled {
+  opacity: var(--ctr-editor-button-icon-opacity-disabled, 0.25);
+  background: var(--ctr-editor-background-color-disabled, $background);
 
   svg {
-    height: 24px;
-    width: 24px;
-    fill: var(--ctr-editor-button-icon-color, $foreground-dim-light);
+    fill: var(--ctr-editor-button-icon-color-disabled, $foreground-dim-light);
   }
 }
 
@@ -88,9 +97,10 @@ input.spg-input:read-only::placeholder {
   display: flex;
   justify-content: space-between;
   cursor: default;
-  padding: calcSize(0.5);
+  padding: var(--ctr-editor-padding-top, calcSize(0.5)) var(--ctr-editor-padding-right, calcSize(0.5))
+    var(--ctr-editor-padding-bottom, calcSize(0.5)) var(--ctr-editor-padding-left, calcSize(0.5));
   align-items: center;
-  gap: calcSize(0.5);
+  gap: var(--ctr-editor-gap, calcSize(0.5));
   box-shadow: inset 0 0 0 var(--ctr-editor-border-width, 1px) var(--ctr-editor-border-color, $border-inside);
 }
 
@@ -114,7 +124,9 @@ input.spg-input:read-only::placeholder {
   @include ctrDefaultFont;
   flex-grow: 1;
   width: 100%;
-  padding: calcSize(1) calcSize(1.5);
+  padding: var(--ctr-editor-content-margin-top, calcSize(1)) var(--ctr-editor-content-margin-right, calcSize(1.5))
+    var(--ctr-editor-content-margin-bottom, calcSize(1)) var(--ctr-editor-content-margin-left, calcSize(1.5));
+
   color: var(--ctr-editor-content-text-color, $foreground);
   outline: none;
   border: none;
@@ -131,5 +143,5 @@ input.spg-input:read-only::placeholder {
 
 .spg-input-container__buttons-container {
   display: flex;
-  gap: calcSize(0.5);
+  gap: var(--ctr-editor-buttons-gap, calcSize(0.5));
 }

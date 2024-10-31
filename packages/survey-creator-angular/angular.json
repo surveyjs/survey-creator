@@ -71,6 +71,10 @@
               "./example/angular-ui/src/assets",
               "./example/angular-ui/src/testCafe"
             ],
+            "styles": [
+              "./node_modules/survey-core/defaultV2.css",
+              "./node_modules/survey-creator-core/survey-creator-core.css"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -78,8 +82,8 @@
               "buildOptimizer": true,
               "budgets": [
                 {
-                  "type": "initial",
-                  "maximumWarning": "500kb",
+                  "type": "allScript",
+                  "maximumWarning": "10mb",
                   "maximumError": "10mb"
                 },
                 {

@@ -33,6 +33,7 @@
 }
 
 .spg-search-editor_container {
+  // TODO remove v2
   --sjs-general-forecolor: rgba(0, 0, 0, 0.91);
   --sjs-general-forecolor-light: rgba(0, 0, 0, 0.45);
 }
@@ -40,11 +41,14 @@
 .spg-search-editor_container {
   border-bottom: 1px solid var(--ctr-property-grid-search-border-color, $border);
   background: var(--ctr-property-grid-search-background-color, $background-dim);
-  padding: calcSize(2);
-  height: calcSize(3);
-  width: calc(100% - calc(4 * #{$base-unit}));
   display: flex;
   align-items: center;
+  gap: var(--ctr-property-grid-search-gap, calcSize(1));
+
+  padding: var(--ctr-property-grid-search-padding-top, calcSize(2))
+    var(--ctr-property-grid-search-padding-right, calcSize(2))
+    var(--ctr-property-grid-search-padding-bottom, calcSize(2))
+    var(--ctr-property-grid-search-padding-left, calcSize(2));
 }
 
 .spg-search-editor_input {
@@ -62,8 +66,7 @@
   box-sizing: border-box;
   width: 100%;
   outline: none;
-  padding-inline-start: calcSize(1);
-  padding-inline-end: calcSize(1);
+  padding: 0;
 }
 
 .svc-creator--mobile .spg-search-editor_input {
@@ -77,14 +80,14 @@
 
 .spg-search-editor_toolbar {
   display: flex;
-  gap: calcSize(1.5);
+  gap: var(--ctr-search-toolbar-gap, calcSize(1.5));
   justify-content: flex-end;
   align-items: center;
   flex-shrink: 0;
 }
 
 .spg-search-editor_toolbar .sv-action-bar {
-  gap: calcSize(0.5);
+  gap: var(--ctr-search-toolbar-gap, calcSize(0.5));
   margin: 0;
   flex-shrink: 0;
 }
@@ -94,20 +97,18 @@
 }
 
 .spg-search-editor_toolbar .spg-search-editor_bar-item {
-  padding: calcSize(0.5);
   height: min-content;
   margin: 0;
+  border-radius: var(--ctr-search-button-corner-radius);
+  padding: var(--ctr-search-button-padding-vertical, calcSize(0.5))
+    var(--ctr-search-button-padding-horizontal, calcSize(0.5)) var(--ctr-search-button-padding-vertical, calcSize(0.5))
+    var(--ctr-search-button-padding-horizontal, calcSize(0.5));
 }
 
 .spg-search-editor_bar-item:not(.sv-action-bar-item--pressed) {
-
   &:hover:enabled,
   &:focus:enabled {
-    background: var(--ctr-search-button-background-color-clear-hovered, $background-dim);
-
-    .sv-action-bar-item__icon use {
-      fill: var(--ctr-search-button-icon-color-clear-hovered, $foreground-light)
-    }
+    background-color: var(--ctr-property-grid-search-button-background-color-hovered, $background-dim);
   }
 }
 
@@ -123,12 +124,12 @@
 }
 
 .spg-search-editor_search-icon {
-  width: calcSize(3);
-  height: calcSize(3);
+  width: var(--ctr-property-grid-search-icon-width, calcSize(3));
+  height: var(--ctr-property-grid-search-icon-height, calcSize(3));
 
   .sv-svg-icon {
-    width: calcSize(3);
-    height: calcSize(3);
+    width: var(--ctr-property-grid-search-icon-width, calcSize(3));
+    height: var(--ctr-property-grid-search-icon-height, calcSize(3));
 
     use {
       fill: var(--ctr-property-grid-search-icon-color, $foreground-light);
