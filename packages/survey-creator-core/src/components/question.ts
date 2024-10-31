@@ -657,6 +657,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       ariaChecked: <any>new ComputedUpdater<boolean>(() => this.isRequired),
       ariaRole: "checkbox",
       css: "svc-action-bar-item--right sv-action-bar-item--secondary",
+      innerCss: "svc-required-action",
       title: this.creator.getLocString("pe.isRequired"),
       visibleIndex: 20,
       iconName: "icon-required",
