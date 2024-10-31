@@ -164,6 +164,7 @@ export class TabDesignerViewModel extends Base {
     this.survey.registerFunctionOnPropertyValueChanged("pages", () => {
       this.pages = this.survey.pages;
     });
+    this.pages = this.survey.pages;
     this.pagesController.onSurveyChanged();
   }
   private checkNewPage(updatePageController: boolean) {
