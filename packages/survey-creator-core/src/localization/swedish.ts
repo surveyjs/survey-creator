@@ -1391,7 +1391,7 @@ export let svStrings = {
     logoWidth: "Anger en logotypbredd i CSS-enheter (px, %, in, pt, etc.).",
     logoHeight: "Anger en logotyphöjd i CSS-enheter (px, %, in, pt, etc.).",
     logoFit: "Välj mellan: \"Ingen\" - bilden behåller sin ursprungliga storlek; \"Innehåll\" - bildens storlek ändras så att den passar samtidigt som bildförhållandet bibehålls. \"Cover\" - bilden fyller hela rutan samtidigt som bildförhållandet bibehålls; \"Fyll\" - bilden sträcks ut för att fylla rutan utan att behålla bildförhållandet.",
-    goNextPageAutomatic: "Välj om du vill att undersökningen ska gå vidare till nästa sida automatiskt efter att en svarande har svarat på alla frågor på den aktuella sidan.",
+    goNextPageAutomatic: "Välj om du vill att undersökningen automatiskt ska gå vidare till nästa sida när en svarande har svarat på alla frågor på den aktuella sidan. Den här funktionen gäller inte om den sista frågan på sidan är öppen eller tillåter flera svar.",
     allowCompleteSurveyAutomatic: "Välj om du vill att undersökningen ska slutföras automatiskt efter att en svarande har svarat på alla frågor.",
     showNavigationButtons: "Anger synlighet och placering av navigeringsknappar på en sida.",
     showProgressBar: "Anger synlighet och plats för en förloppsindikator. Värdet \"Auto\" visar förloppsindikatorn ovanför eller under undersökningshuvudet.",
@@ -2719,7 +2719,6 @@ editorLocalization.locales["sv"] = svStrings;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "Anger en logotypbredd i CSS-enheter (px, %, in, pt, etc.)."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "Anger en logotyphöjd i CSS-enheter (px, %, in, pt, etc.)."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Välj mellan: \"Ingen\" - bilden behåller sin ursprungliga storlek; \"Innehåll\" - bildens storlek ändras så att den passar samtidigt som bildförhållandet bibehålls. \"Cover\" - bilden fyller hela rutan samtidigt som bildförhållandet bibehålls; \"Fyll\" - bilden sträcks ut för att fylla rutan utan att behålla bildförhållandet."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "Välj om du vill att undersökningen ska gå vidare till nästa sida automatiskt efter att en svarande har svarat på alla frågor på den aktuella sidan."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "Anger synlighet och placering av navigeringsknappar på en sida."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Anger synlighet och plats för en förloppsindikator. Värdet \"Auto\" visar förloppsindikatorn ovanför eller under undersökningshuvudet."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "Aktivera förhandsgranskningssidan med alla eller endast besvarade frågor."
@@ -3029,3 +3028,4 @@ editorLocalization.locales["sv"] = svStrings;
 // names.default-dark: "Dark" => "Mörk"
 // names.default-contrast: "Contrast" => "Kontrast"
 // panel.showNumber: "Number this panel" => "Numrera den här panelen"
+// pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Välj om du vill att undersökningen automatiskt ska gå vidare till nästa sida när en svarande har svarat på alla frågor på den aktuella sidan. Den här funktionen gäller inte om den sista frågan på sidan är öppen eller tillåter flera svar."

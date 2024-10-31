@@ -1391,7 +1391,7 @@ export const thStrings = {
     logoWidth: "ตั้งค่าความกว้างโลโก้ในหน่วย CSS (px, %, in, pt, ฯลฯ)",
     logoHeight: "ตั้งค่าความสูงโลโก้ในหน่วย CSS (px, %, in, pt, ฯลฯ)",
     logoFit: "เลือกจาก: \"ไม่มี\" - ภาพคงขนาดเดิม; \"พอดี\" - ภาพถูกปรับขนาดให้พอดีขณะที่รักษาสัดส่วน; \"ครอบคลุม\" - ภาพเติมเต็มกล่องทั้งหมดขณะที่รักษาสัดส่วน; \"เติม\" - ภาพถูกยืดให้เต็มกล่องโดยไม่รักษาสัดส่วน",
-    goNextPageAutomatic: "เลือกถ้าคุณต้องการให้แบบสำรวจเปลี่ยนไปหน้าถัดไปโดยอัตโนมัติหลังจากผู้ตอบตอบคำถามทั้งหมดในหน้าปัจจุบัน",
+    goNextPageAutomatic: "เลือกว่าคุณต้องการให้แบบสํารวจเลื่อนไปยังหน้าถัดไปโดยอัตโนมัติเมื่อผู้ตอบคําถามทั้งหมดในหน้าปัจจุบันแล้ว ฟีเจอร์นี้จะไม่มีผลหากคําถามสุดท้ายในหน้าเป็นคําถามปลายเปิดหรืออนุญาตให้มีคําตอบหลายข้อ",
     allowCompleteSurveyAutomatic: "เลือกถ้าคุณต้องการให้แบบสำรวจเสร็จสิ้นโดยอัตโนมัติหลังจากผู้ตอบตอบคำถามทั้งหมด",
     showNavigationButtons: "ตั้งการมองเห็นและตำแหน่งของปุ่มนำทางในหน้า",
     showProgressBar: "ตั้งการมองเห็นและตำแหน่งของแถบความคืบหน้า ตัวเลือก \"อัตโนมัติ\" จะแสดงแถบความคืบหน้าเหนือหรือใต้หัวเรื่องแบบสำรวจ",
@@ -1788,3 +1788,4 @@ editorLocalization.locales["th"] = thStrings;
 // names.default-dark: "Dark" => "มืด"
 // names.default-contrast: "Contrast" => "ความแตกต่าง"
 // panel.showNumber: "Number this panel" => "หมายเลขแผงนี้"
+// pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "เลือกว่าคุณต้องการให้แบบสํารวจเลื่อนไปยังหน้าถัดไปโดยอัตโนมัติเมื่อผู้ตอบคําถามทั้งหมดในหน้าปัจจุบันแล้ว ฟีเจอร์นี้จะไม่มีผลหากคําถามสุดท้ายในหน้าเป็นคําถามปลายเปิดหรืออนุญาตให้มีคําตอบหลายข้อ"

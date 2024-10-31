@@ -1391,7 +1391,7 @@ export var turkishStrings = {
     logoWidth: "CSS birimlerinde bir logo genişliği ayarlar (px, %, in, pt, vb.).",
     logoHeight: "CSS birimlerinde (px, %, in, pt, vb.) bir logo yüksekliği ayarlar.",
     logoFit: "Şunlar arasından seçim yapın: \"Yok\" - görüntü orijinal boyutunu korur; \"İçer\" - görüntü, en boy oranı korunurken sığacak şekilde yeniden boyutlandırılır; \"Kapak\" - görüntü, en boy oranını korurken tüm kutuyu doldurur; \"Doldur\" - görüntü, en boy oranını korumadan kutuyu dolduracak şekilde uzatılır.",
-    goNextPageAutomatic: "Yanıtlayan geçerli sayfadaki tüm soruları yanıtladıktan sonra anketin otomatik olarak bir sonraki sayfaya ilerlemesini isteyip istemediğinizi seçin.",
+    goNextPageAutomatic: "Yanıtlayan geçerli sayfadaki tüm soruları yanıtladıktan sonra anketin otomatik olarak sonraki sayfaya ilerlemesini isteyip istemediğinizi seçin. Bu özellik, sayfadaki son soru açık uçluysa veya birden fazla yanıta izin veriyorsa uygulanmaz.",
     allowCompleteSurveyAutomatic: "Yanıtlayan tüm soruları yanıtladıktan sonra anketin otomatik olarak tamamlanmasını isteyip istemediğinizi seçin.",
     showNavigationButtons: "Sayfadaki gezinme düğmelerinin görünürlüğünü ve konumunu ayarlar.",
     showProgressBar: "İlerleme çubuğunun görünürlüğünü ve konumunu ayarlar. \"Otomatik\" değeri, anket başlığının üstünde veya altında ilerleme çubuğunu görüntüler.",
@@ -2537,7 +2537,6 @@ editorLocalization.locales["tr"] = turkishStrings;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "CSS birimlerinde bir logo genişliği ayarlar (px, %, in, pt, vb.)."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "CSS birimlerinde (px, %, in, pt, vb.) bir logo yüksekliği ayarlar."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Şunlar arasından seçim yapın: \"Yok\" - görüntü orijinal boyutunu korur; \"İçer\" - görüntü, en boy oranı korunurken sığacak şekilde yeniden boyutlandırılır; \"Kapak\" - görüntü, en boy oranını korurken tüm kutuyu doldurur; \"Doldur\" - görüntü, en boy oranını korumadan kutuyu dolduracak şekilde uzatılır."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "Yanıtlayan geçerli sayfadaki tüm soruları yanıtladıktan sonra anketin otomatik olarak bir sonraki sayfaya ilerlemesini isteyip istemediğinizi seçin."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "Sayfadaki gezinme düğmelerinin görünürlüğünü ve konumunu ayarlar."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "İlerleme çubuğunun görünürlüğünü ve konumunu ayarlar. \"Otomatik\" değeri, anket başlığının üstünde veya altında ilerleme çubuğunu görüntüler."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "Önizleme sayfasını tüm sorularla veya yalnızca yanıtlanmış sorularla etkinleştirin."
@@ -2847,3 +2846,4 @@ editorLocalization.locales["tr"] = turkishStrings;
 // names.default-dark: "Dark" => "Koyu"
 // names.default-contrast: "Contrast" => "Karşıtlık"
 // panel.showNumber: "Number this panel" => "Bu paneli numaralandırın"
+// pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Yanıtlayan geçerli sayfadaki tüm soruları yanıtladıktan sonra anketin otomatik olarak sonraki sayfaya ilerlemesini isteyip istemediğinizi seçin. Bu özellik, sayfadaki son soru açık uçluysa veya birden fazla yanıta izin veriyorsa uygulanmaz."

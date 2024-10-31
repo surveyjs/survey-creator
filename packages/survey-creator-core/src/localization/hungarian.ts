@@ -1391,7 +1391,7 @@ export var huStrings = {
     logoWidth: "Beállítja az embléma szélességét CSS egységekben (px, %, in, pt stb.).",
     logoHeight: "Beállítja az embléma magasságát CSS egységekben (px, %, in, pt stb.).",
     logoFit: "Válasszon a következők közül: \"Nincs\" - a kép megőrzi eredeti méretét; \"Tartalmaz\" - a kép átméreteződik, hogy illeszkedjen, miközben megtartja képarányát; \"Borító\" - a kép kitölti az egész dobozt, miközben megtartja képarányát; \"Kitöltés\" - a kép a doboz kitöltéséhez nyúlik a képarány megtartása nélkül.",
-    goNextPageAutomatic: "Válassza ki, hogy a felmérés automatikusan továbblépjen-e a következő oldalra, miután a válaszadó megválaszolta az aktuális oldalon található összes kérdést.",
+    goNextPageAutomatic: "Válassza ki, hogy szeretné-e, hogy a felmérés automatikusan továbblépjen a következő oldalra, miután a válaszadó megválaszolta az aktuális oldalon található összes kérdést. Ez a funkció nem érvényes, ha az oldal utolsó kérdése nyitott végű, vagy több választ is lehetővé tesz.",
     allowCompleteSurveyAutomatic: "Válassza ki, hogy szeretné-e, hogy a felmérés automatikusan kitöltődjön, miután a válaszadó megválaszolta az összes kérdést.",
     showNavigationButtons: "Beállítja a navigációs gombok láthatóságát és helyét az oldalon.",
     showProgressBar: "Beállítja a folyamatjelző sáv láthatóságát és helyét. Az \"Automatikus\" érték megjeleníti a folyamatjelző sávot a felmérés fejléce felett vagy alatt.",
@@ -2695,7 +2695,6 @@ editorLocalization.locales["hu"] = huStrings;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "Beállítja az embléma szélességét CSS egységekben (px, %, in, pt stb.)."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "Beállítja az embléma magasságát CSS egységekben (px, %, in, pt stb.)."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Válasszon a következők közül: \"Nincs\" - a kép megőrzi eredeti méretét; \"Tartalmaz\" - a kép átméreteződik, hogy illeszkedjen, miközben megtartja képarányát; \"Borító\" - a kép kitölti az egész dobozt, miközben megtartja képarányát; \"Kitöltés\" - a kép a doboz kitöltéséhez nyúlik a képarány megtartása nélkül."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "Válassza ki, hogy a felmérés automatikusan továbblépjen-e a következő oldalra, miután a válaszadó megválaszolta az aktuális oldalon található összes kérdést."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "Beállítja a navigációs gombok láthatóságát és helyét az oldalon."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Beállítja a folyamatjelző sáv láthatóságát és helyét. Az \"Automatikus\" érték megjeleníti a folyamatjelző sávot a felmérés fejléce felett vagy alatt."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "Engedélyezze az előnézeti oldalt csak az összes vagy megválaszolt kérdéssel."
@@ -3005,3 +3004,4 @@ editorLocalization.locales["hu"] = huStrings;
 // names.default-dark: "Dark" => "Sötét"
 // names.default-contrast: "Contrast" => "Kontraszt"
 // panel.showNumber: "Number this panel" => "A panel számozása"
+// pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Válassza ki, hogy szeretné-e, hogy a felmérés automatikusan továbblépjen a következő oldalra, miután a válaszadó megválaszolta az aktuális oldalon található összes kérdést. Ez a funkció nem érvényes, ha az oldal utolsó kérdése nyitott végű, vagy több választ is lehetővé tesz."

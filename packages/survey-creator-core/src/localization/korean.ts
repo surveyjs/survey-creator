@@ -1391,7 +1391,7 @@ export var koreanStrings = {
     logoWidth: "로고 너비를 CSS 단위(px, %, in, pt 등)로 설정합니다.",
     logoHeight: "로고 높이를 CSS 단위(px, %, in, pt 등)로 설정합니다.",
     logoFit: "다음 중에서 선택: \"없음\" - 이미지가 원래 크기를 유지합니다. \"Contain\" - 가로 세로 비율을 유지하면서 이미지의 크기가 조정됩니다. \"표지\" - 이미지가 종횡비를 유지하면서 전체 상자를 채웁니다. \"채우기\" - 가로 세로 비율을 유지하지 않고 상자를 채우기 위해 이미지가 늘어납니다.",
-    goNextPageAutomatic: "응답자가 현재 페이지의 모든 질문에 답변한 후 설문조사가 자동으로 다음 페이지로 넘어가도록 하려면 선택합니다.",
+    goNextPageAutomatic: "응답자가 현재 페이지의 모든 질문에 답변한 후 설문조사가 다음 페이지로 자동 진행되도록 하려면 선택합니다. 페이지의 마지막 질문이 서술형이거나 여러 답변을 허용하는 경우에는 이 기능이 적용되지 않습니다.",
     allowCompleteSurveyAutomatic: "응답자가 모든 질문에 답변한 후 설문조사가 자동으로 완료되도록 하려면 선택합니다.",
     showNavigationButtons: "페이지에서 탐색 단추의 표시 여부와 위치를 설정합니다.",
     showProgressBar: "진행률 표시줄의 표시 여부와 위치를 설정합니다. \"자동\" 값은 설문조사 헤더 위 또는 아래에 진행률 표시줄을 표시합니다.",
@@ -2746,7 +2746,6 @@ editorLocalization.locales["ko"] = koreanStrings;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "로고 너비를 CSS 단위(px, %, in, pt 등)로 설정합니다."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "로고 높이를 CSS 단위(px, %, in, pt 등)로 설정합니다."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "다음 중에서 선택: \"없음\" - 이미지가 원래 크기를 유지합니다. \"Contain\" - 가로 세로 비율을 유지하면서 이미지의 크기가 조정됩니다. \"표지\" - 이미지가 종횡비를 유지하면서 전체 상자를 채웁니다. \"채우기\" - 가로 세로 비율을 유지하지 않고 상자를 채우기 위해 이미지가 늘어납니다."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "응답자가 현재 페이지의 모든 질문에 답변한 후 설문조사가 자동으로 다음 페이지로 넘어가도록 하려면 선택합니다."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "페이지에서 탐색 단추의 표시 여부와 위치를 설정합니다."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "진행률 표시줄의 표시 여부와 위치를 설정합니다. \"자동\" 값은 설문조사 헤더 위 또는 아래에 진행률 표시줄을 표시합니다."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "모든 질문 또는 답변된 질문만 있는 미리보기 페이지를 활성화합니다."
@@ -3056,3 +3055,4 @@ editorLocalization.locales["ko"] = koreanStrings;
 // names.default-dark: "Dark" => "어둠"
 // names.default-contrast: "Contrast" => "대조"
 // panel.showNumber: "Number this panel" => "이 패널에 번호 매기기"
+// pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "응답자가 현재 페이지의 모든 질문에 답변한 후 설문조사가 다음 페이지로 자동 진행되도록 하려면 선택합니다. 페이지의 마지막 질문이 서술형이거나 여러 답변을 허용하는 경우에는 이 기능이 적용되지 않습니다."

@@ -1391,7 +1391,7 @@ export var nbStrings = {
     logoWidth: "Setter en logo bredde i CSS enheter (px, %, i, pt, etc.).",
     logoHeight: "Angir en logo høyde i CSS enheter (px, %, i, pt, etc.).",
     logoFit: "Velg mellom: \"Ingen\" - bildet opprettholder sin opprinnelige størrelse; \"Innehold\" - bildet endres for å passe samtidig som størrelsesforholdet opprettholdes; \"Cover\" - bildet fyller hele boksen mens du opprettholder størrelsesforholdet; \"Fyll\" - bildet strekkes for å fylle boksen uten å opprettholde størrelsesforholdet.",
-    goNextPageAutomatic: "Velg om du vil at evalueringen skal gå automatisk til neste side etter at en svarperson har svart på alle spørsmålene på gjeldende side.",
+    goNextPageAutomatic: "Velg om du vil at evalueringen automatisk skal gå videre til neste side når en respondent har svart på alle spørsmålene på gjeldende side. Denne funksjonen gjelder ikke hvis det siste spørsmålet på siden er åpent eller tillater flere svar.",
     allowCompleteSurveyAutomatic: "Velg om du vil at evalueringen skal fullføres automatisk etter at en svarperson har svart på alle spørsmålene.",
     showNavigationButtons: "Angir synligheten og plasseringen av navigasjonsknapper på en side.",
     showProgressBar: "Angir synligheten og plasseringen til en fremdriftsindikator. \"Auto\"-verdien viser fremdriftslinjen over eller under undersøkelseshodet.",
@@ -2545,7 +2545,6 @@ editorLocalization.locales["nb"] = nbStrings;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "Setter en logo bredde i CSS enheter (px, %, i, pt, etc.)."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "Angir en logo høyde i CSS enheter (px, %, i, pt, etc.)."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Velg mellom: \"Ingen\" - bildet opprettholder sin opprinnelige størrelse; \"Innehold\" - bildet endres for å passe samtidig som størrelsesforholdet opprettholdes; \"Cover\" - bildet fyller hele boksen mens du opprettholder størrelsesforholdet; \"Fyll\" - bildet strekkes for å fylle boksen uten å opprettholde størrelsesforholdet."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "Velg om du vil at evalueringen skal gå automatisk til neste side etter at en svarperson har svart på alle spørsmålene på gjeldende side."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "Angir synligheten og plasseringen av navigasjonsknapper på en side."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Angir synligheten og plasseringen til en fremdriftsindikator. \"Auto\"-verdien viser fremdriftslinjen over eller under undersøkelseshodet."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "Aktiver forhåndsvisningssiden med alle eller besvarte spørsmål."
@@ -2855,3 +2854,4 @@ editorLocalization.locales["nb"] = nbStrings;
 // names.default-dark: "Dark" => "Mørk"
 // names.default-contrast: "Contrast" => "Kontrast"
 // panel.showNumber: "Number this panel" => "Nummerer dette panelet"
+// pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Velg om du vil at evalueringen automatisk skal gå videre til neste side når en respondent har svart på alle spørsmålene på gjeldende side. Denne funksjonen gjelder ikke hvis det siste spørsmålet på siden er åpent eller tillater flere svar."

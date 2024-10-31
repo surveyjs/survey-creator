@@ -1391,7 +1391,7 @@ export var hebrewStrings = {
     logoWidth: "הגדרת רוחב לוגו ביחידות CSS (px, %, in, pt וכו').",
     logoHeight: "הגדרת גובה סמל ביחידות CSS (px, %, in, pt וכו').",
     logoFit: "בחר מתוך: \"ללא\" - התמונה שומרת על גודלה המקורי; \"להכיל\" - גודל התמונה משתנה כדי להתאים תוך שמירה על יחס גובה-רוחב שלה; \"כיסוי\" - התמונה ממלאת את התיבה כולה תוך שמירה על יחס הגובה-רוחב שלה; \"מילוי\" - התמונה נמתחת כדי למלא את התיבה מבלי לשמור על יחס הגובה-רוחב שלה.",
-    goNextPageAutomatic: "בחר אם ברצונך שהסקר יתקדם לדף הבא באופן אוטומטי לאחר שמשיב יענה על כל השאלות בדף הנוכחי.",
+    goNextPageAutomatic: "בחר אם ברצונך שהסקר יתקדם אוטומטית לדף הבא לאחר שהמשיב ענה על כל השאלות בדף הנוכחי. תכונה זו לא תחול אם השאלה האחרונה בדף פתוחה או מאפשרת תשובות מרובות.",
     allowCompleteSurveyAutomatic: "בחר אם ברצונך שהסקר יושלם באופן אוטומטי לאחר שמשיב עונה על כל השאלות.",
     showNavigationButtons: "מגדיר את התצוגה והמיקום של לחצני ניווט בעמוד.",
     showProgressBar: "הגדרת הניראות והמיקום של מד התקדמות. הערך \"אוטומטי\" מציג את מד ההתקדמות מעל או מתחת לכותרת הסקר.",
@@ -2110,7 +2110,6 @@ editorLocalization.locales["he"] = hebrewStrings;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "הגדרת רוחב לוגו ביחידות CSS (px, %, in, pt וכו')."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "הגדרת גובה סמל ביחידות CSS (px, %, in, pt וכו')."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "בחר מתוך: \"ללא\" - התמונה שומרת על גודלה המקורי; \"להכיל\" - גודל התמונה משתנה כדי להתאים תוך שמירה על יחס גובה-רוחב שלה; \"כיסוי\" - התמונה ממלאת את התיבה כולה תוך שמירה על יחס הגובה-רוחב שלה; \"מילוי\" - התמונה נמתחת כדי למלא את התיבה מבלי לשמור על יחס הגובה-רוחב שלה."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "בחר אם ברצונך שהסקר יתקדם לדף הבא באופן אוטומטי לאחר שמשיב יענה על כל השאלות בדף הנוכחי."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "מגדיר את התצוגה והמיקום של לחצני ניווט בעמוד."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "הגדרת הניראות והמיקום של מד התקדמות. הערך \"אוטומטי\" מציג את מד ההתקדמות מעל או מתחת לכותרת הסקר."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "הפעל את דף התצוגה המקדימה עם כל השאלות או שאלות שנענו בלבד."
@@ -2420,3 +2419,4 @@ editorLocalization.locales["he"] = hebrewStrings;
 // names.default-dark: "Dark" => "חשוך"
 // names.default-contrast: "Contrast" => "ניגוד"
 // panel.showNumber: "Number this panel" => "מספר חלונית זו"
+// pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "בחר אם ברצונך שהסקר יתקדם אוטומטית לדף הבא לאחר שהמשיב ענה על כל השאלות בדף הנוכחי. תכונה זו לא תחול אם השאלה האחרונה בדף פתוחה או מאפשרת תשובות מרובות."

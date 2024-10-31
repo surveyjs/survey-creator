@@ -1391,7 +1391,7 @@ export var czStrings = {
     logoWidth: "Nastaví šířku loga v jednotkách CSS (px, %, in, pt atd.).",
     logoHeight: "Nastaví výšku loga v jednotkách CSS (px, %, in, pt atd.).",
     logoFit: "Vyberte si z těchto možností: \"Žádné\" - obrázek si zachová svou původní velikost; \"Obsahovat\" - velikost obrázku se změní tak, aby se vešel při zachování poměru stran; \"Obálka\" - obrázek vyplní celý rámeček při zachování poměru stran; \"Výplň\" - obrázek je roztažen tak, aby vyplnil rámeček bez zachování poměru stran.",
-    goNextPageAutomatic: "Vyberte, zda chcete, aby průzkum automaticky postoupil na další stránku poté, co respondent odpoví na všechny otázky na aktuální stránce.",
+    goNextPageAutomatic: "Vyberte, zda chcete, aby průzkum automaticky přešel na další stránku, jakmile respondent odpoví na všechny otázky na aktuální stránce. Tato funkce se nepoužije, pokud je poslední otázka na stránce otevřená nebo umožňuje více odpovědí.",
     allowCompleteSurveyAutomatic: "Vyberte, zda chcete, aby se průzkum vyplnil automaticky poté, co respondent odpoví na všechny otázky.",
     showNavigationButtons: "Nastaví viditelnost a umístění navigačních tlačítek na stránce.",
     showProgressBar: "Nastaví viditelnost a umístění indikátoru průběhu. Hodnota \"Auto\" zobrazuje indikátor průběhu nad nebo pod záhlavím průzkumu.",
@@ -2116,7 +2116,6 @@ editorLocalization.locales["cs"] = czStrings;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "Nastaví šířku loga v jednotkách CSS (px, %, in, pt atd.)."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "Nastaví výšku loga v jednotkách CSS (px, %, in, pt atd.)."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Vyberte si z těchto možností: \"Žádné\" - obrázek si zachová svou původní velikost; \"Obsahovat\" - velikost obrázku se změní tak, aby se vešel při zachování poměru stran; \"Obálka\" - obrázek vyplní celý rámeček při zachování poměru stran; \"Výplň\" - obrázek je roztažen tak, aby vyplnil rámeček bez zachování poměru stran."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "Vyberte, zda chcete, aby průzkum automaticky postoupil na další stránku poté, co respondent odpoví na všechny otázky na aktuální stránce."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "Nastaví viditelnost a umístění navigačních tlačítek na stránce."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Nastaví viditelnost a umístění indikátoru průběhu. Hodnota \"Auto\" zobrazuje indikátor průběhu nad nebo pod záhlavím průzkumu."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "Povolte stránku náhledu pouze se všemi nebo zodpovězenými otázkami."
@@ -2426,3 +2425,4 @@ editorLocalization.locales["cs"] = czStrings;
 // names.default-dark: "Dark" => "Temný"
 // names.default-contrast: "Contrast" => "Kontrast"
 // panel.showNumber: "Number this panel" => "Očíslujte tento panel"
+// pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Vyberte, zda chcete, aby průzkum automaticky přešel na další stránku, jakmile respondent odpoví na všechny otázky na aktuální stránce. Tato funkce se nepoužije, pokud je poslední otázka na stránce otevřená nebo umožňuje více odpovědí."

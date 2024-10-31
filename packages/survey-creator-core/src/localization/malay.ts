@@ -1391,7 +1391,7 @@ export var msStrings = {
     logoWidth: "Menetapkan lebar logo dalam unit CSS (px, %, in, pt, dll.).",
     logoHeight: "Menetapkan ketinggian logo dalam unit CSS (px, %, in, pt, dll.).",
     logoFit: "Pilih daripada: \"Tiada\" - imej mengekalkan saiz asalnya; \"Mengandungi\" - imej diubah saiznya agar sesuai sambil mengekalkan nisbah aspeknya; \"Cover\" - imej mengisi keseluruhan kotak sambil mengekalkan nisbah aspeknya; \"Isian\" - imej diregangkan untuk mengisi kotak tanpa mengekalkan nisbah aspeknya.",
-    goNextPageAutomatic: "Pilih jika anda ingin tinjauan diteruskan ke halaman berikut secara automatik selepas responden menjawab semua soalan pada halaman semasa.",
+    goNextPageAutomatic: "Pilih jika anda mahu tinjauan maju secara automatik ke halaman seterusnya sebaik sahaja responden telah menjawab semua soalan pada halaman semasa. Ciri ini tidak akan digunakan jika soalan terakhir pada halaman adalah terbuka atau membenarkan berbilang jawapan.",
     allowCompleteSurveyAutomatic: "Pilih jika anda mahu tinjauan selesai secara automatik selepas responden menjawab semua soalan.",
     showNavigationButtons: "Mengesetkan kebolehlihatan dan lokasi butang navigasi pada halaman.",
     showProgressBar: "Menetapkan kebolehlihatan dan lokasi bar kemajuan. Nilai \"Auto\" memaparkan bar kemajuan di atas atau di bawah pengepala tinjauan.",
@@ -2495,7 +2495,6 @@ editorLocalization.locales["ms"] = msStrings;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "Menetapkan lebar logo dalam unit CSS (px, %, in, pt, dll.)."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "Menetapkan ketinggian logo dalam unit CSS (px, %, in, pt, dll.)."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Pilih daripada: \"Tiada\" - imej mengekalkan saiz asalnya; \"Mengandungi\" - imej diubah saiznya agar sesuai sambil mengekalkan nisbah aspeknya; \"Cover\" - imej mengisi keseluruhan kotak sambil mengekalkan nisbah aspeknya; \"Isian\" - imej diregangkan untuk mengisi kotak tanpa mengekalkan nisbah aspeknya."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "Pilih jika anda ingin tinjauan diteruskan ke halaman berikut secara automatik selepas responden menjawab semua soalan pada halaman semasa."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "Mengesetkan kebolehlihatan dan lokasi butang navigasi pada halaman."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Menetapkan kebolehlihatan dan lokasi bar kemajuan. Nilai \"Auto\" memaparkan bar kemajuan di atas atau di bawah pengepala tinjauan."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "Dayakan halaman pratonton dengan semua atau menjawab soalan sahaja."
@@ -2805,3 +2804,4 @@ editorLocalization.locales["ms"] = msStrings;
 // names.default-dark: "Dark" => "Gelap"
 // names.default-contrast: "Contrast" => "Sebaliknya"
 // panel.showNumber: "Number this panel" => "Nombor panel ini"
+// pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Pilih jika anda mahu tinjauan maju secara automatik ke halaman seterusnya sebaik sahaja responden telah menjawab semua soalan pada halaman semasa. Ciri ini tidak akan digunakan jika soalan terakhir pada halaman adalah terbuka atau membenarkan berbilang jawapan."

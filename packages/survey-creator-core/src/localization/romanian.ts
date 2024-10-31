@@ -1391,7 +1391,7 @@ export const roStrings = {
     logoWidth: "Setează o lățime a logo-ului în unități CSS (px, %, in, pt etc.).",
     logoHeight: "Setează o înălțime a logo-ului în unități CSS (px, %, in, pt etc.).",
     logoFit: "Alegeți dintre: „Niciunul” - imaginea își menține dimensiunea originală; „Conține” - imaginea este redimensionată pentru a se potrivi păstrând aspectul său; „Acoperă” - imaginea umple întreaga casetă păstrând aspectul său; „Umple” - imaginea este întinsă pentru a umple caseta fără a păstra aspectul său.",
-    goNextPageAutomatic: "Selectați dacă doriți ca chestionarul să avanseze automat la pagina următoare după ce un respondent răspunde la toate întrebările de pe pagina curentă.",
+    goNextPageAutomatic: "Selectați dacă doriți ca chestionarul să avanseze automat la pagina următoare după ce un respondent a răspuns la toate întrebările de pe pagina curentă. Această funcție nu se va aplica dacă ultima întrebare de pe pagină este deschisă sau permite răspunsuri multiple.",
     allowCompleteSurveyAutomatic: "Selectați dacă doriți ca chestionarul să se completeze automat după ce un respondent răspunde la toate întrebările.",
     showNavigationButtons: "Setează vizibilitatea și locația butoanelor de navigare pe o pagină.",
     showProgressBar: "Setează vizibilitatea și locația unei bare de progres. Valoarea „Auto” afișează bara de progres deasupra sau dedesubtul antetului chestionarului.",
@@ -1788,3 +1788,4 @@ editorLocalization.locales["ro"] = roStrings;
 // names.default-dark: "Dark" => "Întunecat"
 // names.default-contrast: "Contrast" => "Contrast"
 // panel.showNumber: "Number this panel" => "Numerotați acest panou"
+// pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Selectați dacă doriți ca chestionarul să avanseze automat la pagina următoare după ce un respondent a răspuns la toate întrebările de pe pagina curentă. Această funcție nu se va aplica dacă ultima întrebare de pe pagină este deschisă sau permite răspunsuri multiple."
