@@ -48,17 +48,22 @@
 }
 
 .spg-matrixdynamic__placeholder {
-  padding: calcSize(6) 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background: var(--ctr-property-grid-background-color, $background);
   border: 1px solid var(--ctr-survey-placeholder-border-color, $border);
+  border-radius: var(--ctr-data-table-placeholder-corner-radius);
   box-sizing: border-box;
+  padding: var(--ctr-survey-placeholder-padding-top-with-button, calcSize(6))
+    var(--ctr-survey-placeholder-padding-right, 0) var(--ctr-survey-placeholder-padding-bottom-with-button, calcSize(6))
+    var(--ctr-survey-placeholder-padding-left, 0);
+  gap: var(--ctr-survey-placeholder-gap, calcSize(0.5));
 
   .spg-matrixdynamic__add-btn {
     display: initial;
+    margin: 0;
   }
 }
 
@@ -93,5 +98,28 @@
     width: calcSize(1.5);
     height: calcSize(1.5);
     fill: var(--ctr-actionbar-button-icon-color, $foreground);
+  }
+}
+
+.spg-matrixdynamic__dragged-row {
+  cursor: grabbing;
+  position: absolute;
+  z-index: 10000;
+
+  .spg-table__row {
+    display: flex;
+    align-items: center;
+    flex: 1 0 0;
+    border-radius: var(--ctr-data-table-row-corner-radius-floating, 0px);
+    background: var(--ctr-data-table-row-background-color, $background);
+    box-shadow:
+      var(--ctr-data-table-row-shadow-floating-1-offset-x, 0px)
+        var(--ctr-data-table-row-shadow-floating-1-offset-y, 2px) var(--ctr-data-table-row-shadow-floating-1-blur, 6px)
+        var(--ctr-data-table-row-shadow-floating-1-spread, 0px)
+        var(--ctr-data-table-row-shadow-floating-1-color, rgba(0, 0, 0, 0.1)),
+      var(--ctr-data-table-row-shadow-floating-2-offset-x, 0px)
+        var(--ctr-data-table-row-shadow-floating-2-offset-y, 8px) var(--ctr-data-table-row-shadow-floating-2-blur, 16px)
+        var(--ctr-data-table-row-shadow-floating-2-spread, 0px)
+        var(--ctr-data-table-row-shadow-floating-2-color, rgba(0, 0, 0, 0.1));
   }
 }

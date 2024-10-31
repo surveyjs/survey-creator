@@ -34,6 +34,10 @@
   &:focus-visible {
     box-shadow: 0px 0px 0px 2px var(--ctr-toggle-button-border-color-focused, #19b394);
   }
+
+  &:hover {
+    background: var(--ctr-toggle-button-background-color-hovered, #f8f8f8);
+  }
 }
 
 .spg-boolean-switch__button--checked {
@@ -70,6 +74,7 @@
 
 .spg-boolean-switch__thumb-circle {
   border-radius: var(--ctr-toggle-button-thumb-corner-radius, 1024px);
+  border: var(--ctr-toggle-button-thumb-border-width, 0px) solid var(--ctr-toggle-button-thumb-border-color, rgba(0, 0, 0, 0.16));
   display: flex;
   flex-direction: row;
   gap: 0px;
