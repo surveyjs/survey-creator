@@ -69,6 +69,7 @@ export var koreanStrings = {
     surveySettingsTooltip: "설문조사 설정",
     themeSettings: "테마 설정",
     themeSettingsTooltip: "테마 설정",
+    creatorSettingTitle: "크리에이터 설정",
     showPanel: "패널 표시",
     hidePanel: "패널 숨기기",
     prevSelected: "이전 선택",
@@ -301,7 +302,7 @@ export var koreanStrings = {
       width: "인라인 패널 너비",
       minWidth: "최소 패널 너비",
       maxWidth: "최대 패널 너비",
-      showNumber: "숫자 패널"
+      showNumber: "이 패널에 번호 매기기"
     },
     paneldynamic: {
       name: "패널 이름",
@@ -828,6 +829,8 @@ export var koreanStrings = {
       header: "머리글",
       background: "배경",
       appearance: "외관",
+      accentColors: "강조 색상",
+      scaling: "스케일링",
       others: "다른"
     },
     editProperty: "편집 속성 '{0}'",
@@ -1289,7 +1292,8 @@ export var koreanStrings = {
       innerIndent: "패널 내용과 패널 상자의 왼쪽 테두리 사이에 공백 또는 여백을 추가합니다.",
       startWithNewLine: "이전 질문 또는 패널과 함께 한 줄로 패널을 표시하려면 선택을 취소합니다. 패널이 양식의 첫 번째 요소인 경우에는 설정이 적용되지 않습니다.",
       state: "다음 중에서 선택: \"확장\" - 패널이 전체적으로 표시되며 축소할 수 있습니다. \"축소됨\" - 패널에 제목과 설명만 표시되며 확장할 수 있습니다. \"잠김\" - 패널이 완전히 표시되며 축소할 수 없습니다.",
-      width: "패널의 폭을 같은 줄에 있는 다른 측량 요소에 비례하여 설정합니다. CSS 값(px, %, in, pt 등)을 허용합니다."
+      width: "패널의 폭을 같은 줄에 있는 다른 측량 요소에 비례하여 설정합니다. CSS 값(px, %, in, pt 등)을 허용합니다.",
+      showQuestionNumbers: "이 패널 내에 중첩된 질문에 번호를 할당합니다."
     },
     paneldynamic: {
       name: "응답자에게 표시되지 않는 패널 ID입니다.",
@@ -1387,7 +1391,7 @@ export var koreanStrings = {
     logoWidth: "로고 너비를 CSS 단위(px, %, in, pt 등)로 설정합니다.",
     logoHeight: "로고 높이를 CSS 단위(px, %, in, pt 등)로 설정합니다.",
     logoFit: "다음 중에서 선택: \"없음\" - 이미지가 원래 크기를 유지합니다. \"Contain\" - 가로 세로 비율을 유지하면서 이미지의 크기가 조정됩니다. \"표지\" - 이미지가 종횡비를 유지하면서 전체 상자를 채웁니다. \"채우기\" - 가로 세로 비율을 유지하지 않고 상자를 채우기 위해 이미지가 늘어납니다.",
-    goNextPageAutomatic: "응답자가 현재 페이지의 모든 질문에 답변한 후 설문조사가 자동으로 다음 페이지로 넘어가도록 하려면 선택합니다.",
+    goNextPageAutomatic: "응답자가 현재 페이지의 모든 질문에 답변한 후 설문조사가 다음 페이지로 자동 진행되도록 하려면 선택합니다. 페이지의 마지막 질문이 서술형이거나 여러 답변을 허용하는 경우에는 이 기능이 적용되지 않습니다.",
     allowCompleteSurveyAutomatic: "응답자가 모든 질문에 답변한 후 설문조사가 자동으로 완료되도록 하려면 선택합니다.",
     showNavigationButtons: "페이지에서 탐색 단추의 표시 여부와 위치를 설정합니다.",
     showProgressBar: "진행률 표시줄의 표시 여부와 위치를 설정합니다. \"자동\" 값은 설문조사 헤더 위 또는 아래에 진행률 표시줄을 표시합니다.",
@@ -1694,6 +1698,20 @@ export var koreanStrings = {
       tulip: "튤립",
       brown: "갈색",
       green: "녹색"
+    }
+  },
+  creatortheme: {
+    "--sjs-special-background": "표면 배경",
+    "--sjs-primary-background-500": "본래의",
+    "--sjs-secondary-background-500": "보조",
+    surfaceScale: "표면",
+    userInterfaceBaseUnit: "사용자 인터페이스",
+    fontScale: "글꼴",
+    names: {
+      sc2020: "설문조사 작성기 2020",
+      "default-light": "광",
+      "default-dark": "어둠",
+      "default-contrast": "대조"
     }
   }
 };
@@ -2513,7 +2531,6 @@ editorLocalization.locales["ko"] = koreanStrings;
 // panel.width: "Inline panel width" => "인라인 패널 너비"
 // panel.minWidth: "Minimum panel width" => "최소 패널 너비"
 // panel.maxWidth: "Maximum panel width" => "최대 패널 너비"
-// panel.showNumber: "Number panels" => "숫자 패널"
 // paneldynamic.name: "Panel name" => "패널 이름"
 // paneldynamic.title: "Panel title" => "패널 제목"
 // paneldynamic.description: "Panel description" => "패널 설명"
@@ -2729,7 +2746,6 @@ editorLocalization.locales["ko"] = koreanStrings;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "로고 너비를 CSS 단위(px, %, in, pt 등)로 설정합니다."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "로고 높이를 CSS 단위(px, %, in, pt 등)로 설정합니다."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "다음 중에서 선택: \"없음\" - 이미지가 원래 크기를 유지합니다. \"Contain\" - 가로 세로 비율을 유지하면서 이미지의 크기가 조정됩니다. \"표지\" - 이미지가 종횡비를 유지하면서 전체 상자를 채웁니다. \"채우기\" - 가로 세로 비율을 유지하지 않고 상자를 채우기 위해 이미지가 늘어납니다."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "응답자가 현재 페이지의 모든 질문에 답변한 후 설문조사가 자동으로 다음 페이지로 넘어가도록 하려면 선택합니다."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "페이지에서 탐색 단추의 표시 여부와 위치를 설정합니다."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "진행률 표시줄의 표시 여부와 위치를 설정합니다. \"자동\" 값은 설문조사 헤더 위 또는 아래에 진행률 표시줄을 표시합니다."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "모든 질문 또는 답변된 질문만 있는 미리보기 페이지를 활성화합니다."
@@ -3024,3 +3040,19 @@ editorLocalization.locales["ko"] = koreanStrings;
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "0으로 설정하면 헤더의 내용을 수용하기 위해 높이가 자동으로 계산됩니다."
 // p.mobileHeight: "Height on smartphones" => "스마트폰의 높이"
 // header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "활성화하면 설문조사의 상단이 헤더의 하단에 오버레이됩니다."
+// ed.creatorSettingTitle: "Creator Settings" => "크리에이터 설정"
+// tabs.accentColors: "Accent colors" => "강조 색상"
+// tabs.scaling: "Scaling" => "스케일링"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "이 패널 내에 중첩된 질문에 번호를 할당합니다."
+// creatortheme.--sjs-special-background: "Surface background" => "표면 배경"
+// creatortheme.--sjs-primary-background-500: "Primary" => "본래의"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "보조"
+// creatortheme.surfaceScale: "Surface" => "표면"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "사용자 인터페이스"
+// creatortheme.fontScale: "Font" => "글꼴"
+// names.sc2020: "Survey Creator 2020" => "설문조사 작성기 2020"
+// names.default-light: "Light" => "광"
+// names.default-dark: "Dark" => "어둠"
+// names.default-contrast: "Contrast" => "대조"
+// panel.showNumber: "Number this panel" => "이 패널에 번호 매기기"
+// pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "응답자가 현재 페이지의 모든 질문에 답변한 후 설문조사가 다음 페이지로 자동 진행되도록 하려면 선택합니다. 페이지의 마지막 질문이 서술형이거나 여러 답변을 허용하는 경우에는 이 기능이 적용되지 않습니다."

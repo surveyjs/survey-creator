@@ -69,6 +69,7 @@ export var huStrings = {
     surveySettingsTooltip: "Földmérési beállítások",
     themeSettings: "Téma beállítások",
     themeSettingsTooltip: "Téma beállításai",
+    creatorSettingTitle: "Alkotói beállítások",
     showPanel: "Panel megjelenítése",
     hidePanel: "Panel elrejtése",
     prevSelected: "Előző kiválasztása",
@@ -301,7 +302,7 @@ export var huStrings = {
       width: "Szövegközi panel szélessége",
       minWidth: "Minimális panelszélesség",
       maxWidth: "Maximális panelszélesség",
-      showNumber: "Szám panelek"
+      showNumber: "A panel számozása"
     },
     paneldynamic: {
       name: "Panel neve",
@@ -828,6 +829,8 @@ export var huStrings = {
       header: "Fejléc",
       background: "Háttér",
       appearance: "Megjelenés",
+      accentColors: "Kiemelő színek",
+      scaling: "Rétegképződés",
       others: "Mások"
     },
     editProperty: "Tulajdonság szerkesztése '{0}'",
@@ -1289,7 +1292,8 @@ export var huStrings = {
       innerIndent: "Térközt vagy margót ad a panel tartalma és a paneldoboz bal szegélye közé.",
       startWithNewLine: "Törölje a jelölést, ha a panel egy sorban jelenik meg az előző kérdéssel vagy panellel. A beállítás nem érvényes, ha a panel az űrlap első eleme.",
       state: "Válasszon a következők közül: \"Kibontott\" - a panel teljes egészében megjelenik és összecsukható; \"Összecsukott\" - a panel csak a címet és a leírást jeleníti meg, és bővíthető; \"Zárolva\" - a panel teljes egészében megjelenik, és nem csukható össze.",
-      width: "A panel szélességét az ugyanabban a sorban lévő többi földmérési elemhez viszonyítva állítja be. CSS-értékeket fogad el (px, %, in, pt stb.)."
+      width: "A panel szélességét az ugyanabban a sorban lévő többi földmérési elemhez viszonyítva állítja be. CSS-értékeket fogad el (px, %, in, pt stb.).",
+      showQuestionNumbers: "Számokat rendel a panelbe ágyazott kérdésekhez."
     },
     paneldynamic: {
       name: "Olyan panelazonosító, amely nem látható a válaszadók számára.",
@@ -1387,7 +1391,7 @@ export var huStrings = {
     logoWidth: "Beállítja az embléma szélességét CSS egységekben (px, %, in, pt stb.).",
     logoHeight: "Beállítja az embléma magasságát CSS egységekben (px, %, in, pt stb.).",
     logoFit: "Válasszon a következők közül: \"Nincs\" - a kép megőrzi eredeti méretét; \"Tartalmaz\" - a kép átméreteződik, hogy illeszkedjen, miközben megtartja képarányát; \"Borító\" - a kép kitölti az egész dobozt, miközben megtartja képarányát; \"Kitöltés\" - a kép a doboz kitöltéséhez nyúlik a képarány megtartása nélkül.",
-    goNextPageAutomatic: "Válassza ki, hogy a felmérés automatikusan továbblépjen-e a következő oldalra, miután a válaszadó megválaszolta az aktuális oldalon található összes kérdést.",
+    goNextPageAutomatic: "Válassza ki, hogy szeretné-e, hogy a felmérés automatikusan továbblépjen a következő oldalra, miután a válaszadó megválaszolta az aktuális oldalon található összes kérdést. Ez a funkció nem érvényes, ha az oldal utolsó kérdése nyitott végű, vagy több választ is lehetővé tesz.",
     allowCompleteSurveyAutomatic: "Válassza ki, hogy szeretné-e, hogy a felmérés automatikusan kitöltődjön, miután a válaszadó megválaszolta az összes kérdést.",
     showNavigationButtons: "Beállítja a navigációs gombok láthatóságát és helyét az oldalon.",
     showProgressBar: "Beállítja a folyamatjelző sáv láthatóságát és helyét. Az \"Automatikus\" érték megjeleníti a folyamatjelző sávot a felmérés fejléce felett vagy alatt.",
@@ -1694,6 +1698,20 @@ export var huStrings = {
       tulip: "Tulipán",
       brown: "Barna",
       green: "Zöld"
+    }
+  },
+  creatortheme: {
+    "--sjs-special-background": "Felület háttér",
+    "--sjs-primary-background-500": "Elsődleges",
+    "--sjs-secondary-background-500": "Másodlagos",
+    surfaceScale: "Felület",
+    userInterfaceBaseUnit: "Felhasználói felület",
+    fontScale: "Betűkészlet",
+    names: {
+      sc2020: "Felmérés készítője 2020",
+      "default-light": "Fény",
+      "default-dark": "Sötét",
+      "default-contrast": "Kontraszt"
     }
   }
 };
@@ -2462,7 +2480,6 @@ editorLocalization.locales["hu"] = huStrings;
 // panel.width: "Inline panel width" => "Szövegközi panel szélessége"
 // panel.minWidth: "Minimum panel width" => "Minimális panelszélesség"
 // panel.maxWidth: "Maximum panel width" => "Maximális panelszélesség"
-// panel.showNumber: "Number panels" => "Szám panelek"
 // paneldynamic.name: "Panel name" => "Panel neve"
 // paneldynamic.title: "Panel title" => "Panel címe"
 // paneldynamic.description: "Panel description" => "Panel leírása"
@@ -2678,7 +2695,6 @@ editorLocalization.locales["hu"] = huStrings;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "Beállítja az embléma szélességét CSS egységekben (px, %, in, pt stb.)."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "Beállítja az embléma magasságát CSS egységekben (px, %, in, pt stb.)."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Válasszon a következők közül: \"Nincs\" - a kép megőrzi eredeti méretét; \"Tartalmaz\" - a kép átméreteződik, hogy illeszkedjen, miközben megtartja képarányát; \"Borító\" - a kép kitölti az egész dobozt, miközben megtartja képarányát; \"Kitöltés\" - a kép a doboz kitöltéséhez nyúlik a képarány megtartása nélkül."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "Válassza ki, hogy a felmérés automatikusan továbblépjen-e a következő oldalra, miután a válaszadó megválaszolta az aktuális oldalon található összes kérdést."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "Beállítja a navigációs gombok láthatóságát és helyét az oldalon."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Beállítja a folyamatjelző sáv láthatóságát és helyét. Az \"Automatikus\" érték megjeleníti a folyamatjelző sávot a felmérés fejléce felett vagy alatt."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "Engedélyezze az előnézeti oldalt csak az összes vagy megválaszolt kérdéssel."
@@ -2973,3 +2989,19 @@ editorLocalization.locales["hu"] = huStrings;
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Ha 0-ra van állítva, a magasság automatikusan kiszámításra kerül, hogy elférjen a fejléc tartalma."
 // p.mobileHeight: "Height on smartphones" => "Magasság az okostelefonokon"
 // header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Ha engedélyezve van, a felmérés teteje átfedi a fejléc alját."
+// ed.creatorSettingTitle: "Creator Settings" => "Alkotói beállítások"
+// tabs.accentColors: "Accent colors" => "Kiemelő színek"
+// tabs.scaling: "Scaling" => "Rétegképződés"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "Számokat rendel a panelbe ágyazott kérdésekhez."
+// creatortheme.--sjs-special-background: "Surface background" => "Felület háttér"
+// creatortheme.--sjs-primary-background-500: "Primary" => "Elsődleges"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "Másodlagos"
+// creatortheme.surfaceScale: "Surface" => "Felület"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "Felhasználói felület"
+// creatortheme.fontScale: "Font" => "Betűkészlet"
+// names.sc2020: "Survey Creator 2020" => "Felmérés készítője 2020"
+// names.default-light: "Light" => "Fény"
+// names.default-dark: "Dark" => "Sötét"
+// names.default-contrast: "Contrast" => "Kontraszt"
+// panel.showNumber: "Number this panel" => "A panel számozása"
+// pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Válassza ki, hogy szeretné-e, hogy a felmérés automatikusan továbblépjen a következő oldalra, miután a válaszadó megválaszolta az aktuális oldalon található összes kérdést. Ez a funkció nem érvényes, ha az oldal utolsó kérdése nyitott végű, vagy több választ is lehetővé tesz."

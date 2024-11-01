@@ -69,6 +69,7 @@ export var mnStrings = {
     surveySettingsTooltip: "Судалгааны тохиргоо",
     themeSettings: "Сэдвийн тохиргоо",
     themeSettingsTooltip: "Сэдвийн тохиргоо",
+    creatorSettingTitle: "Зохион бүтээгчийн тохиргуулууд",
     showPanel: "Панел харуулах",
     hidePanel: "Панел нуух",
     prevSelected: "Өмнөхийг сонгох",
@@ -301,7 +302,7 @@ export var mnStrings = {
       width: "Инлин хавтан өргөн",
       minWidth: "Хамгийн бага хавтан өргөн",
       maxWidth: "Хамгийн их хавтан өргөн",
-      showNumber: "Тооны тавиур"
+      showNumber: "Энэ хавсралтыг дугаарлах"
     },
     paneldynamic: {
       name: "Панелийн нэр",
@@ -828,6 +829,8 @@ export var mnStrings = {
       header: "Толгойлогч",
       background: "Ар талын",
       appearance: "Харагдах байдал",
+      accentColors: "Акцентын өнгө",
+      scaling: "Масштаблах",
       others: "Бусад"
     },
     editProperty: "Шинж чанарыг засварлах '{0}'",
@@ -1289,7 +1292,8 @@ export var mnStrings = {
       innerIndent: "Панелийн агуулга болон панелийн хайрцагны зүүн хилийн хооронд зай эсвэл зай нэмнэ.",
       startWithNewLine: "Өмнөх асуулт эсвэл панелтай нэг мөрт үзүүлэхээр сонгогдоогүй. Хэрэв панел нь таны маягт дахь анхны элемент бол тохиргоо хамаарахгүй.",
       state: "Сонголтоос: \"Өргөтгөсөн\" - хавтанг бүрэн харуулж, нурааж болно; \"Нурсан\" - панел нь зөвхөн гарчиг, тодорхойлолтыг харуулж, өргөтгөх боломжтой; \"Цоожтой\" - панелыг бүрэн харуулсан бөгөөд нурааж болохгүй.",
-      width: "Панелийн өргөнийг ижил шугамаар бусад судалгааны элементүүдтэй тэнцүү тогтооно. CSS-ийн үнэт зүйлсийг (px, %, in, pt г.м) хүлээн зөвшөөрдөг."
+      width: "Панелийн өргөнийг ижил шугамаар бусад судалгааны элементүүдтэй тэнцүү тогтооно. CSS-ийн үнэт зүйлсийг (px, %, in, pt г.м) хүлээн зөвшөөрдөг.",
+      showQuestionNumbers: "Энэ самбарт байрлуулсан асуултуудад дугаар өгнө."
     },
     paneldynamic: {
       name: "Хариулагчдад харагдахгүй панелийн ID.",
@@ -1387,7 +1391,7 @@ export var mnStrings = {
     logoWidth: "CSS нэгж (px, %, in, pt, гэх мэт) дээр логоны өргөнийг тогтооно.",
     logoHeight: "CSS нэгж (px, %, in, pt г.м) дээр логоны өндрийг тогтооно.",
     logoFit: "Сонгоно уу: \"None\" - зураг анхны хэмжээгээ хадгалдаг; \"Агуулах\" - дүрсийг тал харьцаагаа хадгалахын зэрэгцээ тохируулахын тулд дахин тохируулдаг; \"Cover\" - дүрс нь тал харьцаагаа хадгалахын зэрэгцээ хайрцгийг бүхэлд нь дүүргэдэг; \"Fill\" - дүрс нь тал харьцаагаа хадгалахгүйгээр хайрцгийг дүүргэхийн тулд сунаж тогтсон.",
-    goNextPageAutomatic: "Тухайн хуудас дээрх бүх асуултад хариулагч хариулсны дараа судалгааг автоматаар дараагийн хуудас руу урагшлуулахыг хүсвэл сонгоно уу.",
+    goNextPageAutomatic: "Оролцогч одоогийн хуудсан дээрх бүх асуултад хариулсны дараа судалгааг дараагийн хуудас руу автоматаар шилжүүлэхийг хүсч байгаа эсэхээ сонго. Хуудасны хамгийн сүүлийн асуулт нээлттэй эсвэл олон хариулт өгөх боломж олгодог бол энэ онцлог хэрэгжихгүй.",
     allowCompleteSurveyAutomatic: "Асуултад хариулсан хүн бүх асуултанд хариулсны дараа судалгааг автоматаар дуусгахыг хүсвэл сонго.",
     showNavigationButtons: "Хуудас дээр навигацийн товчны харагдах байдал, байршлыг тогтооно.",
     showProgressBar: "Хэмжилтийн тавцангийн харагдах байдал, байршлыг тогтооно. \"Авто\" үнэ цэнэ нь судалгааны толгой гарчгийн дээр эсвэл түүнээс доош хөгжил дэвшлийн барыг харуулдаг.",
@@ -1695,6 +1699,20 @@ export var mnStrings = {
       brown: "Браун",
       green: "Ногоон"
     }
+  },
+  creatortheme: {
+    "--sjs-special-background": "Гадаргуугийн фон",
+    "--sjs-primary-background-500": "Хүүхдийн хэсэг",
+    "--sjs-secondary-background-500": "Хоёрдугаар зэргийн",
+    surfaceScale: "Гадаргуу",
+    userInterfaceBaseUnit: "Хэрэглэгчийн интерфейс",
+    fontScale: "Фонт",
+    names: {
+      sc2020: "Судалгаа зохион байгуулагч 2020",
+      "default-light": "Гэрэл",
+      "default-dark": "Харанхуй",
+      "default-contrast": "Эсрэг тэсрэг байдал"
+    }
   }
 };
 
@@ -1965,7 +1983,6 @@ editorLocalization.locales["mn"] = mnStrings;
 // panel.width: "Inline panel width" => "Инлин хавтан өргөн"
 // panel.minWidth: "Minimum panel width" => "Хамгийн бага хавтан өргөн"
 // panel.maxWidth: "Maximum panel width" => "Хамгийн их хавтан өргөн"
-// panel.showNumber: "Number panels" => "Тооны тавиур"
 // paneldynamic.name: "Panel name" => "Панелийн нэр"
 // paneldynamic.title: "Panel title" => "Панел цол"
 // paneldynamic.description: "Panel description" => "Панел дүрслэл"
@@ -2181,7 +2198,6 @@ editorLocalization.locales["mn"] = mnStrings;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "CSS нэгж (px, %, in, pt, гэх мэт) дээр логоны өргөнийг тогтооно."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "CSS нэгж (px, %, in, pt г.м) дээр логоны өндрийг тогтооно."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Сонгоно уу: \"None\" - зураг анхны хэмжээгээ хадгалдаг; \"Агуулах\" - дүрсийг тал харьцаагаа хадгалахын зэрэгцээ тохируулахын тулд дахин тохируулдаг; \"Cover\" - дүрс нь тал харьцаагаа хадгалахын зэрэгцээ хайрцгийг бүхэлд нь дүүргэдэг; \"Fill\" - дүрс нь тал харьцаагаа хадгалахгүйгээр хайрцгийг дүүргэхийн тулд сунаж тогтсон."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "Тухайн хуудас дээрх бүх асуултад хариулагч хариулсны дараа судалгааг автоматаар дараагийн хуудас руу урагшлуулахыг хүсвэл сонгоно уу."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "Хуудас дээр навигацийн товчны харагдах байдал, байршлыг тогтооно."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Хэмжилтийн тавцангийн харагдах байдал, байршлыг тогтооно. \"Авто\" үнэ цэнэ нь судалгааны толгой гарчгийн дээр эсвэл түүнээс доош хөгжил дэвшлийн барыг харуулдаг."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "Зөвхөн бүх асуултаар эсвэл хариулт бүхий урьдчилан харах хуудсыг боломжтой болго."
@@ -2476,3 +2492,19 @@ editorLocalization.locales["mn"] = mnStrings;
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "0 гэж тохируулбал өндөрийг гарчгийн агуулгад тохируулахын тулд автоматаар тооцоолдог."
 // p.mobileHeight: "Height on smartphones" => "Ухаалаг гар утасны өндөр"
 // header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Идэвхжүүлбэл судалгааны дээд хэсэг нь header-ийн доод хэсгийг давхарладаг."
+// ed.creatorSettingTitle: "Creator Settings" => "Зохион бүтээгчийн тохиргуулууд"
+// tabs.accentColors: "Accent colors" => "Акцентын өнгө"
+// tabs.scaling: "Scaling" => "Масштаблах"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "Энэ самбарт байрлуулсан асуултуудад дугаар өгнө."
+// creatortheme.--sjs-special-background: "Surface background" => "Гадаргуугийн фон"
+// creatortheme.--sjs-primary-background-500: "Primary" => "Хүүхдийн хэсэг"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "Хоёрдугаар зэргийн"
+// creatortheme.surfaceScale: "Surface" => "Гадаргуу"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "Хэрэглэгчийн интерфейс"
+// creatortheme.fontScale: "Font" => "Фонт"
+// names.sc2020: "Survey Creator 2020" => "Судалгаа зохион байгуулагч 2020"
+// names.default-light: "Light" => "Гэрэл"
+// names.default-dark: "Dark" => "Харанхуй"
+// names.default-contrast: "Contrast" => "Эсрэг тэсрэг байдал"
+// panel.showNumber: "Number this panel" => "Энэ хавсралтыг дугаарлах"
+// pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Оролцогч одоогийн хуудсан дээрх бүх асуултад хариулсны дараа судалгааг дараагийн хуудас руу автоматаар шилжүүлэхийг хүсч байгаа эсэхээ сонго. Хуудасны хамгийн сүүлийн асуулт нээлттэй эсвэл олон хариулт өгөх боломж олгодог бол энэ онцлог хэрэгжихгүй."

@@ -69,6 +69,7 @@ export var danishStrings = {
     surveySettingsTooltip: "Indstillinger for undersøgelse",
     themeSettings: "Temaindstillinger",
     themeSettingsTooltip: "Temaindstillinger",
+    creatorSettingTitle: "Indstillinger for skabere",
     showPanel: "Vis panel",
     hidePanel: "Skjul panel",
     prevSelected: "Vælg forrige",
@@ -301,7 +302,7 @@ export var danishStrings = {
       width: "Indlejret panelbredde",
       minWidth: "Mindste panelbredde",
       maxWidth: "Maksimal panelbredde",
-      showNumber: "Paneler med tal"
+      showNumber: "Nummerer dette panel"
     },
     paneldynamic: {
       name: "Panelets navn",
@@ -828,6 +829,8 @@ export var danishStrings = {
       header: "Header",
       background: "Baggrund",
       appearance: "Udseende",
+      accentColors: "Accentfarver",
+      scaling: "Skalering",
       others: "Andre"
     },
     editProperty: "Rediger egenskab '{0}'",
@@ -1289,7 +1292,8 @@ export var danishStrings = {
       innerIndent: "Tilføjer mellemrum eller margen mellem panelindholdet og panelboksens venstre kant.",
       startWithNewLine: "Fjern markeringen for at få vist panelet på én linje med det forrige spørgsmål eller panel. Indstillingen gælder ikke, hvis panelet er det første element i formularen.",
       state: "Vælg mellem: \"Udvidet\" - panelet vises fuldt ud og kan skjules; \"Skjult\" - panelet viser kun titlen og beskrivelsen og kan udvides; \"Låst\" - panelet vises fuldt ud og kan ikke skjules.",
-      width: "Indstiller panelets bredde i forhold til andre undersøgelseselementer på samme linje. Accepterer CSS-værdier (px, %, in, pt osv.)."
+      width: "Indstiller panelets bredde i forhold til andre undersøgelseselementer på samme linje. Accepterer CSS-værdier (px, %, in, pt osv.).",
+      showQuestionNumbers: "Tildeler numre til spørgsmål, der er indlejret i dette panel."
     },
     paneldynamic: {
       name: "Et panel-id, der ikke er synligt for svarpersonerne.",
@@ -1387,7 +1391,7 @@ export var danishStrings = {
     logoWidth: "Indstiller en logobredde i CSS-enheder (px, %, in, pt osv.).",
     logoHeight: "Indstiller en logohøjde i CSS-enheder (px, %, i, pt osv.).",
     logoFit: "Vælg mellem: \"Ingen\" - billedet bevarer sin oprindelige størrelse; \"Contain\" - billedet ændres til at passe, samtidig med at dets billedformat opretholdes; \"Cover\" - billedet fylder hele kassen, samtidig med at billedformatet opretholdes; \"Fyld\" - billedet strækkes for at udfylde boksen uden at opretholde dets billedformat.",
-    goNextPageAutomatic: "Vælg, om undersøgelsen automatisk skal gå videre til næste side, når en svarperson har besvaret alle spørgsmål på den aktuelle side.",
+    goNextPageAutomatic: "Vælg, om undersøgelsen automatisk skal gå videre til næste side, når en svarperson har besvaret alle spørgsmål på den aktuelle side. Denne funktion gælder ikke, hvis det sidste spørgsmål på siden er åbent eller tillader flere svar.",
     allowCompleteSurveyAutomatic: "Vælg, om undersøgelsen skal fuldføres automatisk, når svarpersonen har besvaret alle spørgsmål.",
     showNavigationButtons: "Angiver synligheden og placeringen af navigationsknapper på en side.",
     showProgressBar: "Indstiller synligheden og placeringen af en statuslinje. Værdien \"Auto\" viser statuslinjen over eller under undersøgelsesoverskriften.",
@@ -1694,6 +1698,20 @@ export var danishStrings = {
       tulip: "Tulipan",
       brown: "Brun",
       green: "Grøn"
+    }
+  },
+  creatortheme: {
+    "--sjs-special-background": "Overflade baggrund",
+    "--sjs-primary-background-500": "Primær",
+    "--sjs-secondary-background-500": "Sekundær",
+    surfaceScale: "Overflade",
+    userInterfaceBaseUnit: "Brugergrænseflade",
+    fontScale: "Skrifttype",
+    names: {
+      sc2020: "Skaberen af spørgeundersøgelsen 2020",
+      "default-light": "Lys",
+      "default-dark": "Mørk",
+      "default-contrast": "Kontrast"
     }
   }
 };
@@ -2494,7 +2512,6 @@ editorLocalization.locales["da"] = danishStrings;
 // panel.width: "Inline panel width" => "Indlejret panelbredde"
 // panel.minWidth: "Minimum panel width" => "Mindste panelbredde"
 // panel.maxWidth: "Maximum panel width" => "Maksimal panelbredde"
-// panel.showNumber: "Number panels" => "Paneler med tal"
 // paneldynamic.name: "Panel name" => "Panelets navn"
 // paneldynamic.title: "Panel title" => "Panelets titel"
 // paneldynamic.description: "Panel description" => "Beskrivelse af panelet"
@@ -2710,7 +2727,6 @@ editorLocalization.locales["da"] = danishStrings;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "Indstiller en logobredde i CSS-enheder (px, %, in, pt osv.)."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "Indstiller en logohøjde i CSS-enheder (px, %, i, pt osv.)."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Vælg mellem: \"Ingen\" - billedet bevarer sin oprindelige størrelse; \"Contain\" - billedet ændres til at passe, samtidig med at dets billedformat opretholdes; \"Cover\" - billedet fylder hele kassen, samtidig med at billedformatet opretholdes; \"Fyld\" - billedet strækkes for at udfylde boksen uden at opretholde dets billedformat."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "Vælg, om undersøgelsen automatisk skal gå videre til næste side, når en svarperson har besvaret alle spørgsmål på den aktuelle side."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "Angiver synligheden og placeringen af navigationsknapper på en side."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Indstiller synligheden og placeringen af en statuslinje. Værdien \"Auto\" viser statuslinjen over eller under undersøgelsesoverskriften."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "Aktivér eksempelsiden med alle eller kun besvarede spørgsmål."
@@ -3005,3 +3021,19 @@ editorLocalization.locales["da"] = danishStrings;
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Når den er indstillet til 0, beregnes højden automatisk for at rumme sidehovedets indhold."
 // p.mobileHeight: "Height on smartphones" => "Højde på smartphones"
 // header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Når den er aktiveret, overlejres toppen af undersøgelsen bunden af sidehovedet."
+// ed.creatorSettingTitle: "Creator Settings" => "Indstillinger for skabere"
+// tabs.accentColors: "Accent colors" => "Accentfarver"
+// tabs.scaling: "Scaling" => "Skalering"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "Tildeler numre til spørgsmål, der er indlejret i dette panel."
+// creatortheme.--sjs-special-background: "Surface background" => "Overflade baggrund"
+// creatortheme.--sjs-primary-background-500: "Primary" => "Primær"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "Sekundær"
+// creatortheme.surfaceScale: "Surface" => "Overflade"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "Brugergrænseflade"
+// creatortheme.fontScale: "Font" => "Skrifttype"
+// names.sc2020: "Survey Creator 2020" => "Skaberen af spørgeundersøgelsen 2020"
+// names.default-light: "Light" => "Lys"
+// names.default-dark: "Dark" => "Mørk"
+// names.default-contrast: "Contrast" => "Kontrast"
+// panel.showNumber: "Number this panel" => "Nummerer dette panel"
+// pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Vælg, om undersøgelsen automatisk skal gå videre til næste side, når en svarperson har besvaret alle spørgsmål på den aktuelle side. Denne funktion gælder ikke, hvis det sidste spørgsmål på siden er åbent eller tillader flere svar."

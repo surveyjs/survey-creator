@@ -69,6 +69,7 @@ export var fiStrings = {
     surveySettingsTooltip: "Kyselyn asetukset",
     themeSettings: "Teeman asetukset",
     themeSettingsTooltip: "Teeman asetukset",
+    creatorSettingTitle: "Sisällöntuottajan asetukset",
     showPanel: "Näytä Paneeli",
     hidePanel: "Piilota Paneeli",
     prevSelected: "Valitse edellinen",
@@ -301,7 +302,7 @@ export var fiStrings = {
       width: "Tekstiin sidotun paneelin leveys",
       minWidth: "Paneelin vähimmäisleveys",
       maxWidth: "Paneelin enimmäisleveys",
-      showNumber: "Numeropaneelit"
+      showNumber: "Numeroi tämä paneeli"
     },
     paneldynamic: {
       name: "Paneelin nimi",
@@ -828,6 +829,8 @@ export var fiStrings = {
       header: "Otsikko",
       background: "Tausta",
       appearance: "Ulkonäkö",
+      accentColors: "Korostusvärit",
+      scaling: "Skaalaus",
       others: "Muut"
     },
     editProperty: "Muokkaa ominaisuutta'{0}'",
@@ -1289,7 +1292,8 @@ export var fiStrings = {
       innerIndent: "Lisää tilaa tai reunuksen paneelin sisällön ja paneeliruudun vasemman reunan väliin.",
       startWithNewLine: "Poista valinta, jos haluat näyttää paneelin yhdellä rivillä edellisen kysymyksen tai paneelin kanssa. Asetusta ei käytetä, jos paneeli on lomakkeen ensimmäinen elementti.",
       state: "Valitse seuraavista: \"Laajennettu\" - paneeli näytetään kokonaisuudessaan ja se voidaan kutistaa; \"Tiivistetty\" - paneeli näyttää vain otsikon ja kuvauksen ja sitä voidaan laajentaa; \"Lukittu\" - paneeli näkyy kokonaisuudessaan eikä sitä voi kutistaa.",
-      width: "Asettaa paneelin leveyden suhteessa muihin saman rivin mittauselementteihin. Hyväksyy CSS-arvot (px, %, in, pt jne.)."
+      width: "Asettaa paneelin leveyden suhteessa muihin saman rivin mittauselementteihin. Hyväksyy CSS-arvot (px, %, in, pt jne.).",
+      showQuestionNumbers: "Määrittää numerot tässä paneelissa sisäkkäisille kysymyksille."
     },
     paneldynamic: {
       name: "Paneelin tunnus, joka ei näy vastaajille.",
@@ -1387,7 +1391,7 @@ export var fiStrings = {
     logoWidth: "Määrittää logon leveyden CSS-yksiköissä (px, %, in, pt jne.).",
     logoHeight: "Asettaa logon korkeuden CSS-yksiköinä (px, %, in, pt jne.).",
     logoFit: "Valitse seuraavista: \"Ei mitään\" - kuva säilyttää alkuperäisen kokonsa; \"Sisältää\" - kuvan kokoa muutetaan sopivaksi säilyttäen samalla kuvasuhteensa; \"Kansi\" - kuva täyttää koko laatikon säilyttäen samalla kuvasuhteensa; \"Täytä\" - kuva venytetään täyttämään laatikko säilyttämättä sen kuvasuhdetta.",
-    goNextPageAutomatic: "Valitse, haluatko kyselyn siirtyvän seuraavalle sivulle automaattisesti, kun vastaaja on vastannut kaikkiin nykyisen sivun kysymyksiin.",
+    goNextPageAutomatic: "Valitse tämä, jos haluat, että kysely siirtyy automaattisesti seuraavalle sivulle, kun vastaaja on vastannut kaikkiin nykyisen sivun kysymyksiin. Tätä ominaisuutta ei käytetä, jos sivun viimeinen kysymys on avoin tai sallii useita vastauksia.",
     allowCompleteSurveyAutomatic: "Valitse, haluatko kyselyn täyttyvän automaattisesti, kun vastaaja on vastannut kaikkiin kysymyksiin.",
     showNavigationButtons: "Määrittää sivun navigointipainikkeiden näkyvyyden ja sijainnin.",
     showProgressBar: "Määrittää edistymispalkin näkyvyyden ja sijainnin. \"Auto\"-arvo näyttää edistymispalkin kyselyn otsikon ylä- tai alapuolella.",
@@ -1694,6 +1698,20 @@ export var fiStrings = {
       tulip: "Tulppaani",
       brown: "Ruskea",
       green: "Vihreä"
+    }
+  },
+  creatortheme: {
+    "--sjs-special-background": "Pinnan tausta",
+    "--sjs-primary-background-500": "Ensisijainen",
+    "--sjs-secondary-background-500": "Toissijainen",
+    surfaceScale: "Pinta",
+    userInterfaceBaseUnit: "Käyttöliittymä",
+    fontScale: "Fontti",
+    names: {
+      sc2020: "Kyselyn laatija 2020",
+      "default-light": "Valo",
+      "default-dark": "Tumma",
+      "default-contrast": "Kontrasti"
     }
   }
 };
@@ -2287,7 +2305,6 @@ editorLocalization.locales["fi"] = fiStrings;
 // panel.width: "Inline panel width" => "Tekstiin sidotun paneelin leveys"
 // panel.minWidth: "Minimum panel width" => "Paneelin vähimmäisleveys"
 // panel.maxWidth: "Maximum panel width" => "Paneelin enimmäisleveys"
-// panel.showNumber: "Number panels" => "Numeropaneelit"
 // paneldynamic.name: "Panel name" => "Paneelin nimi"
 // paneldynamic.title: "Panel title" => "Paneelin otsikko"
 // paneldynamic.description: "Panel description" => "Paneelin kuvaus"
@@ -2500,7 +2517,6 @@ editorLocalization.locales["fi"] = fiStrings;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "Määrittää logon leveyden CSS-yksiköissä (px, %, in, pt jne.)."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "Asettaa logon korkeuden CSS-yksiköinä (px, %, in, pt jne.)."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Valitse seuraavista: \"Ei mitään\" - kuva säilyttää alkuperäisen kokonsa; \"Sisältää\" - kuvan kokoa muutetaan sopivaksi säilyttäen samalla kuvasuhteensa; \"Kansi\" - kuva täyttää koko laatikon säilyttäen samalla kuvasuhteensa; \"Täytä\" - kuva venytetään täyttämään laatikko säilyttämättä sen kuvasuhdetta."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "Valitse, haluatko kyselyn siirtyvän seuraavalle sivulle automaattisesti, kun vastaaja on vastannut kaikkiin nykyisen sivun kysymyksiin."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "Määrittää sivun navigointipainikkeiden näkyvyyden ja sijainnin."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Määrittää edistymispalkin näkyvyyden ja sijainnin. \"Auto\"-arvo näyttää edistymispalkin kyselyn otsikon ylä- tai alapuolella."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "Ota esikatselusivu käyttöön vain kaikilla kysymyksillä tai vastatuilla kysymyksillä."
@@ -2792,3 +2808,20 @@ editorLocalization.locales["fi"] = fiStrings;
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Kun arvoksi on määritetty 0, korkeus lasketaan automaattisesti otsikon sisällön mukaan."
 // p.mobileHeight: "Height on smartphones" => "Korkeus älypuhelimissa"
 // header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Kun tämä asetus on käytössä, kyselyn yläosa peittää otsikon alaosan."
+
+// ed.creatorSettingTitle: "Creator Settings" => "Sisällöntuottajan asetukset"
+// tabs.accentColors: "Accent colors" => "Korostusvärit"
+// tabs.scaling: "Scaling" => "Skaalaus"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "Määrittää numerot tässä paneelissa sisäkkäisille kysymyksille."
+// creatortheme.--sjs-special-background: "Surface background" => "Pinnan tausta"
+// creatortheme.--sjs-primary-background-500: "Primary" => "Ensisijainen"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "Toissijainen"
+// creatortheme.surfaceScale: "Surface" => "Pinta"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "Käyttöliittymä"
+// creatortheme.fontScale: "Font" => "Fontti"
+// names.sc2020: "Survey Creator 2020" => "Kyselyn laatija 2020"
+// names.default-light: "Light" => "Valo"
+// names.default-dark: "Dark" => "Tumma"
+// names.default-contrast: "Contrast" => "Kontrasti"
+// panel.showNumber: "Number this panel" => "Numeroi tämä paneeli"
+// pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Valitse tämä, jos haluat, että kysely siirtyy automaattisesti seuraavalle sivulle, kun vastaaja on vastannut kaikkiin nykyisen sivun kysymyksiin. Tätä ominaisuutta ei käytetä, jos sivun viimeinen kysymys on avoin tai sallii useita vastauksia."
