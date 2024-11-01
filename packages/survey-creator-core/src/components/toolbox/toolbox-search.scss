@@ -14,6 +14,10 @@
     border-bottom: none;
   }
 
+  .svc-search__input {
+    color: var(--ctr-toolbox-search-text-color, $foreground);
+  }
+
   .svc-search__bar-item {
     &:hover:enabled {
       background-color: var(--ctr-toolbox-search-clear-button-background-color-hovered, $red-light);
