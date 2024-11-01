@@ -71,28 +71,26 @@ svc-page {
   @include defaultActionButtonSettings;
   --ctr-survey-question-panel-toolbar-button-gap: calc(var(--ctr-survey-question-panel-toolbar-gap) / 2);
   margin: 0 var(--ctr-survey-question-panel-toolbar-button-gap, calcSize(0.5));
-
-  justify-content: center;
-  align-items: center;
-
   border-radius: var(--ctr-survey-page-toolbar-item-corner-radius, calcSize(0.5));
-  background-color: transparent;
-  transition: background-color $creator-transition-duration;
-
   padding: var(--ctr-survey-question-panel-toolbar-item-padding-top, calcSize(0.5))
     var(--ctr-survey-question-panel-toolbar-item-padding-right, calcSize(0.5))
     var(--ctr-survey-question-panel-toolbar-item-padding-bottom, calcSize(0.5))
     var(--ctr-survey-question-panel-toolbar-item-padding-left, calcSize(0.5));
+  justify-content: center;
+  align-items: center;
+
+  background-color: transparent;
+  transition: background-color $creator-transition-duration;
 }
 
 .svc-page-toolbar__item--with-text {
-  color: var(--ctr-survey-page-toolbar-item-text-color, $foreground);
   padding: var(--ctr-survey-question-panel-toolbar-item-padding-top, calcSize(0.5))
     var(--ctr-survey-question-panel-toolbar-item-padding-right-with-text, calcSize(1))
     var(--ctr-survey-question-panel-toolbar-item-padding-bottom, calcSize(0.5))
     var(--ctr-survey-question-panel-toolbar-item-padding-left, calcSize(0.5));
   gap: var(--ctr-survey-question-panel-toolbar-item-gap, calcSize(0.5));
 }
+
 //hovered state
 .svc-page-toolbar__item:not(.svc-page-toolbar__item--pressed):hover:enabled,
 .svc-page-toolbar__item:not(.svc-page-toolbar__item--pressed):focus:enabled {
@@ -109,8 +107,15 @@ svc-page {
   opacity: var(--ctr-survey-question-panel-toolbar-item-opacity-disabled, 0.25);
 }
 
-.svc-page-toolbar-item__title {
-  @include ctrSmallBoldFont;
+.svc-page-toolbar__item--active {
+  .svc-page-toolbar-item__icon use {
+    fill: var(--ctr-survey-question-panel-toolbar-item-icon-color, $secondary);
+  }
+}
+
+.svc-page-toolbar__item--pressed:not(.svc-page-toolbar__item--active) {
+  background-color: var(--ctr-survey-page-toolbar-item-background-color-selected, $background-dim);
+  opacity: var(--ctr-survey-question-panel-toolbar-item-opacity-pressed, 50%);
 }
 
 .svc-page-toolbar-item__icon {
@@ -127,15 +132,9 @@ svc-page {
   fill: var(--ctr-survey-question-panel-toolbar-item-icon-color, $secondary);
 }
 
-.svc-page-toolbar__item--active {
-  .svc-page-toolbar-item__icon use {
-    fill: var(--ctr-survey-question-panel-toolbar-item-icon-color, $secondary);
-  }
-}
-
-.svc-page-toolbar__item--pressed:not(.svc-page-toolbar__item--active) {
-  background-color: var(--ctr-survey-page-toolbar-item-background-color-selected, $background-dim);
-  opacity: var(--ctr-survey-question-panel-toolbar-item-opacity-pressed, 50%);
+.svc-page-toolbar-item__title {
+  @include ctrSmallBoldFont;
+  color: var(--ctr-survey-page-toolbar-item-text-color, $foreground);
 }
 
 .svc-page__content-actions {
@@ -294,6 +293,7 @@ svc-page {
   cursor: pointer;
   margin: var(--ctr-button-contextual-button-margin-vertical, calcSize(1))
     var(--ctr-button-contextual-button-margin-horizontal, calcSize(1));
+  margin-inline-start: 0; // TODO
   outline: none;
   transition: background-color $creator-transition-duration;
 

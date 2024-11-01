@@ -1577,7 +1577,7 @@ export class TranslationEditor {
     navigationBar.cssClasses = survey.css.actionBar;
     navigationBar.containerCss = survey.css.footer;
     survey.addNavigationItem(this.createLocaleFromAction());
-    const actionCss = "svc-action-bar-item--right sv-action-bar-item--secondary";
+    const actionCss = "svc-action-bar-item--right";
     if (this.options.getHasMachineTranslation()) {
       survey.addNavigationItem(new Action({
         id: "svc-translation-machine",

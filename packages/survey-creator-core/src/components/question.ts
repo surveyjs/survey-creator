@@ -293,8 +293,24 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   }
   protected createActionContainers(): void {
     super.createActionContainers();
+    const defaultCssClasses = {
+      root: "svc-survey-element-toolbar sv-action-bar",
+      // defaultSizeMode: "sv-action-bar--default-size-mode",
+      // smallSizeMode: "sv-action-bar--small-size-mode",
+      item: "svc-survey-element-toolbar__item",
+      itemWithTitle: "svc-survey-element-toolbar__item--with-text",
+      // itemAsIcon: "sv-action-bar-item--icon",
+      itemActive: "svc-survey-element-toolbar__item--active",
+      itemPressed: "svc-survey-element-toolbar__item--pressed",
+      itemIcon: "svc-survey-element-toolbar-item__icon",
+      itemTitle: "svc-survey-element-toolbar-item__title",
+      itemTitleWithIcon: "svc-survey-element-toolbar-item__title--with-icon",
+    };
+
     this.actionContainer.sizeMode = "small";
+    this.actionContainer.cssClasses = defaultCssClasses;
     this.topActionContainer = new ActionContainer();
+    this.topActionContainer.cssClasses = defaultCssClasses;
     this.topActionContainer.sizeMode = "small";
     this.topActionContainer.setItems([this.expandCollapseAction]);
   }
@@ -625,7 +641,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   private createDropdownModel(options: { actionData: IAction, items: Array<IAction>, updateListModel: (listModel: ListModel) => void }): Action {
     const newAction = createDropdownActionModel({
       id: options.actionData.id,
-      css: "sv-action--convertTo sv-action-bar-item--secondary",
+      css: "svc-dropdown-action--convertTo",
       iconName: options.actionData.iconName,
       iconSize: "auto",
       title: options.actionData.title,
@@ -662,7 +678,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       id: "isrequired",
       ariaChecked: <any>new ComputedUpdater<boolean>(() => this.isRequired),
       ariaRole: "checkbox",
-      css: "svc-action-bar-item--right sv-action-bar-item--secondary",
+      css: "svc-action-bar-item--right",
       innerCss: "svc-required-action",
       title: this.creator.getLocString("pe.isRequired"),
       visibleIndex: 20,
@@ -704,7 +720,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     if (!!inputTypeConverter) {
       items.push(inputTypeConverter);
     }
-    items[items.length - 1].css += " sv-action--convertTo-last";
+    items[items.length - 1].css += " svc-dropdown-action--convertTo-last";
     if (
       typeof element["isRequired"] !== "undefined" &&
       propertyExists(element, "isRequired") &&

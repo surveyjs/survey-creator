@@ -220,7 +220,6 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
 
   protected createActionContainer(): ActionContainer {
     const actionContainer = new SurveyElementActionContainer();
-    actionContainer.dotsItem.iconSize = 16;
     actionContainer.dotsItem.popupModel.horizontalPosition = "center";
     return actionContainer;
   }
@@ -358,7 +357,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     const expandIcon = "icon-restore_16x16";
     return {
       id: "collapse",
-      css: "sv-action-bar-item--secondary sv-action-bar-item--collapse",
+      css: "sv-action-bar-item--collapse",
       iconName: new ComputedUpdater<string>(() => this.collapsed ? expandIcon : collapseIcon) as any,
       iconSize: "auto",
       action: () => {
@@ -422,7 +421,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       new Action({
         id: "duplicate",
         iconName: "icon-duplicate_16x16",
-        css: "svc-action-bar-item--right sv-action-bar-item--secondary",
+        css: "svc-action-bar-item--right",
         title: this.creator.getLocString("survey.duplicate"),
         visibleIndex: 10,
         iconSize: "auto",
@@ -435,7 +434,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       new Action({
         id: "settings",
         iconName: "icon-settings_16x16",
-        css: "svc-action-bar-item--right sv-action-bar-item--secondary",
+        css: "svc-action-bar-item--right",
         title: this.creator.getLocString("ed.settings"),
         locTooltipName: "ed.settingsTooltip",
         visibleIndex: 20,
@@ -455,7 +454,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       new Action({
         id: "delete",
         iconName: "icon-delete_16x16",
-        css: "svc-action-bar-item--right sv-action-bar-item--secondary",
+        css: "svc-action-bar-item--right",
         //needSeparator: items.length > 0,
         title: this.creator.getLocString("pe.delete"),
         visibleIndex: 30,
