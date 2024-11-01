@@ -18,7 +18,7 @@ export let svStrings = {
   },
   // Creator tabs
   tabs: {
-    preview: "Test enkät",
+    preview: "Testa enkät",
     theme: "Teman",
     translation: "Översättning",
     designer: "Enkät Designer",
@@ -439,7 +439,7 @@ export let svStrings = {
     size: "Inmatningsfältets storlek (i tecken)",
     cellErrorLocation: "Justering av cellfelmeddelande",
     enabled: "Aktiverat",
-    disabled: "Handikappad",
+    disabled: "Inaktiverad",
     inherit: "Ärva",
     apply: "Faställ",
     ok: "OK",
@@ -1026,15 +1026,15 @@ export let svStrings = {
       currency: "Valuta"
     },
     inputTextAlignment: {
-      auto: "Bil",
+      auto: "Automatisk",
       left: "Vänster",
       right: "Höger"
     },
-    all: "all",
-    page: "page",
-    survey: "survey",
-    onNextPage: "onNextPage",
-    onValueChanged: "onValueChanged",
+    all: "Alla",
+    page: "Sidan",
+    survey: "Enkät",
+    onNextPage: "På nästa sida",
+    onValueChanged: "På värdeförändring",
     onValueChanging: "Innan ett svar ändras",
     questionsOnPageMode: {
       standard: "Ursprunglig struktur",
@@ -1055,7 +1055,7 @@ export let svStrings = {
     onTyping: "Medan du skriver",
     underRow: "Under raden",
     underRowSingle: "Under raden syns bara en panel",
-    auto: "Bil",
+    auto: "Automatisk",
     showNavigationButtons: {
       none: "Dold"
     },
@@ -1160,7 +1160,7 @@ export let svStrings = {
       startsWith: "Börjar med"
     },
     backgroundImageFit: {
-      auto: "Bil",
+      auto: "Automatisk",
       cover: "Täcka",
       contain: "Innehålla",
       fill: "Tänja",
@@ -1691,7 +1691,7 @@ export let svStrings = {
       contrast: "Kontrast"
     },
     colors: {
-      teal: "Kricka",
+      teal: "Turkos",
       blue: "Blå",
       purple: "Lila",
       orchid: "Orkidé",
