@@ -237,8 +237,15 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
     return this.title.toLowerCase().indexOf(textLowerCase) >= 0 || this.name.toLowerCase().indexOf(textLowerCase) >= 0;
   }
 
-  public getSubitemByName(id: string): QuestionToolboxItem {
-    return this.items?.filter(i => i.id === id)[0];
+  /**
+   * Finds a subitem with a specified name in the collection of subitems belonging to this toolbox item.
+   * 
+   * [Manage Toolbox Subitems](https://surveyjs.io/survey-creator/documentation/toolbox-customization#manage-toolbox-subitems (linkStyle))
+   * @param name A subitem [`name`](https://surveyjs.io/survey-creator/documentation/api-reference/iquestiontoolboxitem#name).
+   * @returns A [`QuestionToolboxItem`](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolboxitem) object that represents the subitem instance.
+   */
+  public getSubitem(name: string): QuestionToolboxItem {
+    return this.items?.filter(i => i.id === name)[0];
   }
 
   public addSubitems(items: Array<QuestionToolboxItem>) {
@@ -270,9 +277,9 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
    * @see removeSubitem
    * @see clearSubitems
    */
-  public addSubitem(item: IQuestionToolboxItem, index: number = -1): void {
-    if (!item) return;
-    const newItem: QuestionToolboxItem = new QuestionToolboxItem(item);
+  public addSubitem(subitem: IQuestionToolboxItem, index: number = -1): void {
+    if (!subitem) return;
+    const newItem: QuestionToolboxItem = new QuestionToolboxItem(subitem);
     newItem.iconName = "";
     if (!newItem.className) newItem.className = QuestionToolboxItem.getItemClassNames(newItem.iconName);
     newItem.className = new CssClassBuilder().append(newItem.className).append("svc-toolbox__item-subtype").toString();
@@ -292,13 +299,13 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
    * @see clearSubitems
    * @see addSubitem
    */
-  public removeSubitem(item: IQuestionToolboxItem | string): void {
-    if (!this.hasSubItems || !item) return;
+  public removeSubitem(subitem: IQuestionToolboxItem | string): void {
+    if (!this.hasSubItems || !subitem) return;
 
-    const id: string = (item as IQuestionToolboxItem)?.id || item as string;
+    const id: string = (subitem as IQuestionToolboxItem)?.id || subitem as string;
     if (!id) return;
 
-    const removedItem = this.getSubitemByName(id);
+    const removedItem = this.getSubitem(id);
     let array: Array<QuestionToolboxItem> = (this.items || []).slice();
     const removedIndex = array.indexOf(removedItem);
     if (removedIndex > -1) {
