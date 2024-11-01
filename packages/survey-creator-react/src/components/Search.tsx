@@ -31,17 +31,17 @@ export class SearchComponent extends SurveyElementBase<ISearchComponentProps, an
       }
     };
     return (
-      <div className="spg-search-editor_container">
-        <div className="spg-search-editor_search-icon">
+      <div className="svc-search__container">
+        <div className="svc-search__search-icon">
           <SvgIcon iconName="icon-search" size={"auto"}></SvgIcon>
         </div>
-        <input type="text" className="spg-search-editor_input"
+        <input type="text" className="svc-search__input"
           aria-label={this.model.filterStringPlaceholder}
           placeholder={this.model.filterStringPlaceholder}
           value={this.state.filterString}
           onChange={onChange}></input>
-        <div className="spg-search-editor_toolbar">
-          <div className="spg-search-editor_toolbar-counter">{(this.model as any).matchCounterText}</div>
+        <div className="svc-search__toolbar">
+          <div className="svc-search__toolbar-counter">{(this.model as any).matchCounterText}</div>
           <SurveyActionBar model={this.model.searchActionBar}></SurveyActionBar>
         </div>
       </div>);

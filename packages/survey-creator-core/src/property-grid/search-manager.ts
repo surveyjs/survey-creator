@@ -1,80 +1,9 @@
-import { Action, ActionContainer, Base, ComputedUpdater, IElement, Question, SurveyModel, property, settings } from "survey-core";
+import { Action, ComputedUpdater, IElement, Question, SurveyModel, property, settings } from "survey-core";
 import { getLocString } from "../editorLocalization";
 import { scrollElementIntoView } from "../utils/utils";
-import { QuestionToolbox } from "../toolbox";
-
-export abstract class SearchManager extends Base {
-  public searchActionBar: ActionContainer = new ActionContainer();
-  public filterStringPlaceholder;
-  @property() filterString: string;
-  @property() isVisible: boolean;
-  @property() matchCounterText: string;
-
-  protected getSearchActions() {
-    return [new Action({
-      id: "svd-grid-search-close",
-      iconName: "icon-clear_16x16",
-      component: "sv-action-bar-item",
-      title: getLocString("ed.clear"),
-      showTitle: false,
-      iconSize: 16,
-      disableTabStop: true,
-      innerCss: "spg-search-editor_bar-item",
-      visible: <any>new ComputedUpdater(() => !!this.filterString),
-      action: () => {
-        this.clearFilterString();
-      }
-    })];
-  }
-  initActionBar() {
-    this.searchActionBar.setItems(this.getSearchActions());
-  }
-  public clearFilterString(): void {
-    this.filterString = "";
-  }
-
-  protected abstract setFiterString(newValue: string, oldValue: string);
-
-  protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
-    super.onPropertyValueChanged(name, oldValue, newValue);
-
-    if (name === "filterString") {
-      this.setFiterString(newValue, oldValue);
-    }
-  }
-
-  constructor() {
-    super();
-    this.initActionBar();
-  }
-
-  dispose(): void {
-    this.searchActionBar.dispose();
-    super.dispose();
-  }
-}
-
-export class SearchManagerToolbox extends SearchManager {
-  @property() toolbox: QuestionToolbox;
-  public filterStringPlaceholder = getLocString("ed.toolboxFilteredTextPlaceholder");
-  protected setFiterString(newValue: string, oldValue: string) {
-    this.toolbox.showSeparators = !newValue;
-    this.toolbox.items.forEach(item => item.visible = item.hasText(newValue));
-    this.toolbox.showPlaceholder = !this.toolbox.items.filter(i => i.visible).length;
-    this.toolbox.categories.forEach(category => {
-      category.forceExpand = !!newValue;
-      category.empty = category.items.filter(item => item.visible).length == 0;
-    });
-  }
-
-  public clearFilterString(): void {
-    this.filterString = "";
-    this.toolbox.rootElement.querySelector("input").focus();
-  }
-}
-
+import { SearchManager } from "../components/search-manager";
 export class SearchManagerPropertyGrid extends SearchManager {
-  private highlightedEditorClass = " spg-editor--highlighted";
+  private highlightedEditorClass = " spg-question--highlighted";
 
   private currentMatchIndex: number;
   private currentMatch: Question;
@@ -179,7 +108,7 @@ export class SearchManagerPropertyGrid extends SearchManager {
       title: getLocString("ed.nextFocus"),
       showTitle: false,
       iconSize: 16,
-      innerCss: "spg-search-editor_bar-item",
+      innerCss: "svc-search__bar-item",
       visible: <any>new ComputedUpdater(() => this.allMatches.length > 1),
       action: () => {
         if (this.allMatches.length > 0) {
@@ -195,7 +124,7 @@ export class SearchManagerPropertyGrid extends SearchManager {
       title: getLocString("ed.prevFocus"),
       showTitle: false,
       iconSize: 16,
-      innerCss: "spg-search-editor_bar-item",
+      innerCss: "svc-search__bar-item",
       visible: <any>new ComputedUpdater(() => this.allMatches.length > 1),
       action: () => {
         if (this.allMatches.length > 0) {

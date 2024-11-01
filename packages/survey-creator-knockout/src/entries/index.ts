@@ -45,7 +45,7 @@ export * from "../custom-questions/boolean-switch";
 export * from "../page-navigator/page-navigator";
 export * from "../page-navigator/page-navigator-item";
 export * from "../side-bar/object-selector";
-export * from "../side-bar/search";
+export * from "../components/search";
 export * from "../side-bar/property-grid";
 export * from "../side-bar/side-bar";
 export * from "../side-bar/side-bar-default-header";

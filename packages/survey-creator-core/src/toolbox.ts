@@ -25,7 +25,7 @@ import { SurveyCreatorModel, toolboxLocationType } from "./creator-base";
 import { editorLocalization, getLocString } from "./editorLocalization";
 import { settings } from "./creator-settings";
 import { DragDropSurveyElements } from "./survey-elements";
-import { SearchManagerToolbox } from "./property-grid/search-manager";
+import { SearchManagerToolbox } from "./components/toolbox/toolbox-search-manager";
 
 export type overflowBehaviorType = "hideInMenu" | "scroll";
 

@@ -1,6 +1,6 @@
 <template>
-  <div v-if="model.isVisible" class="spg-search-editor_container">
-    <div class="spg-search-editor_search-icon">
+  <div v-if="model.isVisible" class="svc-search__container">
+    <div class="svc-search__search-icon">
       <SvComponent
         :is="'sv-svg-icon'"
         :iconName="'icon-search'"
@@ -9,13 +9,13 @@
     </div>
     <input
       type="text"
-      class="spg-search-editor_input"
+      class="svc-search__input"
       v-model="filterString"
       :aria-label="model.filterStringPlaceholder"
       :placeholder="model.filterStringPlaceholder"
     />
-    <div class="spg-search-editor_toolbar">
-      <div class="spg-search-editor_toolbar-counter">
+    <div class="svc-search__toolbar">
+      <div class="svc-search__toolbar-counter">
         {{ model.matchCounterText }}
       </div>
       <SvComponent

@@ -75,7 +75,7 @@ import ItemValue from "./adorners/ItemValue.vue";
 import ImageItemValue from "./adorners/ImageItemValue.vue";
 import QuestionEditor from "./QuestionEditor.vue";
 import Logo from "./header/Logo.vue";
-import Search from "./side-bar/Search.vue";
+import Search from "./components/Search.vue";
 import PageNavigator from "./page-navigator/PageNavigator.vue";
 import PageNavigatorItem from "./page-navigator/PageNavigatorItem.vue";
 import Dropdown from "./adorners/Dropdown.vue";
