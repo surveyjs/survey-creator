@@ -16,6 +16,7 @@
     left: 0;
     right: 0;
     bottom: 0;
+    border-radius: var(--ctr-button-group-corner-radius, 0px);
     box-shadow: inset 0 0 0 var(--ctr-button-group-border-width-focused, 2px) transparent;
     pointer-events: none;
     transition: box-shadow $creator-transition-duration;
