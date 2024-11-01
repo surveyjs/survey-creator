@@ -5,6 +5,7 @@ import { IAction, ListModel, Question, QuestionDropdownModel, SurveyModel, Style
 import { TabTestPlugin } from "../../src/components/tabs/test-plugin";
 import { SurveySimulatorModel, simulatorDevices } from "../../src/components/simulator";
 import { editorLocalization } from "../../src/editorLocalization";
+import "../../src/localization/german";
 
 import "survey-core/survey.i18n";
 
@@ -1096,4 +1097,13 @@ test("Suppress NavigateToUrl notification using allow option", (): any => {
   model.survey.doComplete();
   expect(onNavigateToUrlLog).toBe("->javascript:alert(2)->javascript:alert(2)");
   expect(notificationsLog).toBe("->You had to navigate to 'javascript:alert(2)'.");
+});
+test("The Preview Survey button text is not translated Bug#6016", (): any => {
+  const creator: CreatorTester = new CreatorTester();
+  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
+  creator.locale = "de";
+  testPlugin.activate();
+  const model: TestSurveyTabViewModel = testPlugin.model;
+  expect(model.testAgainAction.locTitle.renderedHtml).toBe("Testumfrage wiederholen");
+  creator.locale = "en";
 });
