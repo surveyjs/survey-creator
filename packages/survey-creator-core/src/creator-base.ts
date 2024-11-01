@@ -2140,7 +2140,7 @@ export class SurveyCreatorModel extends Base
     if (!value) {
       this.initSurveyWithJSON(undefined, clearState);
     } else {
-      let jsonText = trustJSON ? value : undefined;
+      let jsonText = trustJSON ? JSON.parse(value) : undefined;
       if(!trustJSON) {
         const textWorker = new SurveyTextWorker(value);
         if(textWorker.isJsonCorrect) {
