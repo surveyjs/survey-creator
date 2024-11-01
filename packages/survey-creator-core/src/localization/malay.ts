@@ -69,6 +69,7 @@ export var msStrings = {
     surveySettingsTooltip: "Seting tinjauan",
     themeSettings: "Seting Tema",
     themeSettingsTooltip: "Seting tema",
+    creatorSettingTitle: "Tetapan Pencipta",
     showPanel: "Tunjukkan Panel",
     hidePanel: "Sembunyikan Panel",
     prevSelected: "Pilih sebelumnya",
@@ -301,7 +302,7 @@ export var msStrings = {
       width: "Lebar panel sebaris",
       minWidth: "Lebar panel minimum",
       maxWidth: "Lebar panel maksimum",
-      showNumber: "Panel nombor"
+      showNumber: "Nombor panel ini"
     },
     paneldynamic: {
       name: "Nama panel",
@@ -828,6 +829,8 @@ export var msStrings = {
       header: "Pengepala",
       background: "Latar belakang",
       appearance: "Penampilan",
+      accentColors: "Warna aksen",
+      scaling: "Penskalaan",
       others: "Lain-lain"
     },
     editProperty: "Edit ciri '{0}'",
@@ -1289,7 +1292,8 @@ export var msStrings = {
       innerIndent: "Menambah ruang atau jidar antara kandungan panel dan sempadan kiri kotak panel.",
       startWithNewLine: "Nyahpilih untuk memaparkan panel dalam satu baris dengan soalan atau panel sebelumnya. Seting tidak digunakan jika panel ialah elemen pertama dalam borang anda.",
       state: "Pilih daripada: \"Diperluaskan\" - panel dipaparkan sepenuhnya dan boleh runtuh; \"Runtuh\" - panel hanya memaparkan tajuk dan keterangan dan boleh diperluaskan; \"Dikunci\" - panel dipaparkan sepenuhnya dan tidak boleh runtuh.",
-      width: "Mengesetkan lebar panel mengikut kadar unsur tinjauan lain dalam baris yang sama. Menerima nilai CSS (px, %, dalam, pt, dll.)."
+      width: "Mengesetkan lebar panel mengikut kadar unsur tinjauan lain dalam baris yang sama. Menerima nilai CSS (px, %, dalam, pt, dll.).",
+      showQuestionNumbers: "Memberikan nombor kepada soalan yang bersarang dalam panel ini."
     },
     paneldynamic: {
       name: "ID panel yang tidak kelihatan kepada responden.",
@@ -1387,7 +1391,7 @@ export var msStrings = {
     logoWidth: "Menetapkan lebar logo dalam unit CSS (px, %, in, pt, dll.).",
     logoHeight: "Menetapkan ketinggian logo dalam unit CSS (px, %, in, pt, dll.).",
     logoFit: "Pilih daripada: \"Tiada\" - imej mengekalkan saiz asalnya; \"Mengandungi\" - imej diubah saiznya agar sesuai sambil mengekalkan nisbah aspeknya; \"Cover\" - imej mengisi keseluruhan kotak sambil mengekalkan nisbah aspeknya; \"Isian\" - imej diregangkan untuk mengisi kotak tanpa mengekalkan nisbah aspeknya.",
-    goNextPageAutomatic: "Pilih jika anda ingin tinjauan diteruskan ke halaman berikut secara automatik selepas responden menjawab semua soalan pada halaman semasa.",
+    goNextPageAutomatic: "Pilih jika anda mahu tinjauan maju secara automatik ke halaman seterusnya sebaik sahaja responden telah menjawab semua soalan pada halaman semasa. Ciri ini tidak akan digunakan jika soalan terakhir pada halaman adalah terbuka atau membenarkan berbilang jawapan.",
     allowCompleteSurveyAutomatic: "Pilih jika anda mahu tinjauan selesai secara automatik selepas responden menjawab semua soalan.",
     showNavigationButtons: "Mengesetkan kebolehlihatan dan lokasi butang navigasi pada halaman.",
     showProgressBar: "Menetapkan kebolehlihatan dan lokasi bar kemajuan. Nilai \"Auto\" memaparkan bar kemajuan di atas atau di bawah pengepala tinjauan.",
@@ -1694,6 +1698,20 @@ export var msStrings = {
       tulip: "Tulip",
       brown: "Brown",
       green: "Hijau"
+    }
+  },
+  creatortheme: {
+    "--sjs-special-background": "Latar belakang permukaan",
+    "--sjs-primary-background-500": "Utama",
+    "--sjs-secondary-background-500": "Menengah",
+    surfaceScale: "Permukaansurface",
+    userInterfaceBaseUnit: "Antara muka pengguna",
+    fontScale: "Fon",
+    names: {
+      sc2020: "Pencipta Tinjauan 2020",
+      "default-light": "Cahaya",
+      "default-dark": "Gelap",
+      "default-contrast": "Sebaliknya"
     }
   }
 };
@@ -2262,7 +2280,6 @@ editorLocalization.locales["ms"] = msStrings;
 // panel.width: "Inline panel width" => "Lebar panel sebaris"
 // panel.minWidth: "Minimum panel width" => "Lebar panel minimum"
 // panel.maxWidth: "Maximum panel width" => "Lebar panel maksimum"
-// panel.showNumber: "Number panels" => "Panel nombor"
 // paneldynamic.name: "Panel name" => "Nama panel"
 // paneldynamic.title: "Panel title" => "Tajuk panel"
 // paneldynamic.description: "Panel description" => "Penerangan panel"
@@ -2478,7 +2495,6 @@ editorLocalization.locales["ms"] = msStrings;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "Menetapkan lebar logo dalam unit CSS (px, %, in, pt, dll.)."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "Menetapkan ketinggian logo dalam unit CSS (px, %, in, pt, dll.)."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Pilih daripada: \"Tiada\" - imej mengekalkan saiz asalnya; \"Mengandungi\" - imej diubah saiznya agar sesuai sambil mengekalkan nisbah aspeknya; \"Cover\" - imej mengisi keseluruhan kotak sambil mengekalkan nisbah aspeknya; \"Isian\" - imej diregangkan untuk mengisi kotak tanpa mengekalkan nisbah aspeknya."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "Pilih jika anda ingin tinjauan diteruskan ke halaman berikut secara automatik selepas responden menjawab semua soalan pada halaman semasa."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "Mengesetkan kebolehlihatan dan lokasi butang navigasi pada halaman."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Menetapkan kebolehlihatan dan lokasi bar kemajuan. Nilai \"Auto\" memaparkan bar kemajuan di atas atau di bawah pengepala tinjauan."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "Dayakan halaman pratonton dengan semua atau menjawab soalan sahaja."
@@ -2773,3 +2789,19 @@ editorLocalization.locales["ms"] = msStrings;
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Apabila ditetapkan kepada 0, ketinggian dikira secara automatik untuk menampung kandungan pengepala."
 // p.mobileHeight: "Height on smartphones" => "Ketinggian pada telefon pintar"
 // header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Apabila didayakan, bahagian atas tinjauan menindih bahagian bawah pengepala."
+// ed.creatorSettingTitle: "Creator Settings" => "Tetapan Pencipta"
+// tabs.accentColors: "Accent colors" => "Warna aksen"
+// tabs.scaling: "Scaling" => "Penskalaan"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "Memberikan nombor kepada soalan yang bersarang dalam panel ini."
+// creatortheme.--sjs-special-background: "Surface background" => "Latar belakang permukaan"
+// creatortheme.--sjs-primary-background-500: "Primary" => "Utama"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "Menengah"
+// creatortheme.surfaceScale: "Surface" => "Permukaansurface"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "Antara muka pengguna"
+// creatortheme.fontScale: "Font" => "Fon"
+// names.sc2020: "Survey Creator 2020" => "Pencipta Tinjauan 2020"
+// names.default-light: "Light" => "Cahaya"
+// names.default-dark: "Dark" => "Gelap"
+// names.default-contrast: "Contrast" => "Sebaliknya"
+// panel.showNumber: "Number this panel" => "Nombor panel ini"
+// pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Pilih jika anda mahu tinjauan maju secara automatik ke halaman seterusnya sebaik sahaja responden telah menjawab semua soalan pada halaman semasa. Ciri ini tidak akan digunakan jika soalan terakhir pada halaman adalah terbuka atau membenarkan berbilang jawapan."

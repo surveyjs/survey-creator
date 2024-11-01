@@ -304,7 +304,7 @@ export var enStrings = {
       width: "Inline panel width",
       minWidth: "Minimum panel width",
       maxWidth: "Maximum panel width",
-      showNumber: "Number panels"
+      showNumber: "Number this panel"
     },
     paneldynamic: {
       name: "Panel name",
@@ -1297,7 +1297,8 @@ export var enStrings = {
       innerIndent: "Adds space or margin between the panel content and the left border of the panel box.",
       startWithNewLine: "Unselect to display the panel in one line with the previous question or panel. The setting doesn't apply if the panel is the first element in your form.",
       state: "Choose from: \"Expanded\" - the panel is displayed in full and can be collapsed; \"Collapsed\" - the panel displays only the title and description and can be expanded; \"Locked\" - the panel is displayed in full and cannot be collapsed.",
-      width: "Sets the width of the panel in proportion to other survey elements in the same line. Accepts CSS values (px, %, in, pt, etc.)."
+      width: "Sets the width of the panel in proportion to other survey elements in the same line. Accepts CSS values (px, %, in, pt, etc.).",
+      showQuestionNumbers: "Assigns numbers to questions nested within this panel."
     },
     paneldynamic: {
       name: "A panel ID that is not visible to respondents.",
@@ -1397,7 +1398,7 @@ export var enStrings = {
     logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.).",
     logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.).",
     logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio.",
-    goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page.",
+    goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers.",
     allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions.",
     showNavigationButtons: "Sets the visibility and location of navigation buttons on a page.",
     showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header.",
