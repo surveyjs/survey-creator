@@ -1018,6 +1018,61 @@ export var skStrings = {
       url: "URL adresa",
       week: "Týždeň"
     },
+    autocomplete: {
+      name: "Celé meno",
+      "honorific-prefix": "Predpona",
+      "given-name": "Krstné meno",
+      "additional-name": "Stredné meno",
+      "family-name": "Priezvisko",
+      "honorific-suffix": "Prípona",
+      nickname: "Prezývka",
+      "organization-title": "Pracovná pozícia",
+      username: "Používateľské meno",
+      "new-password": "Nové heslo",
+      "current-password": "Aktuálne heslo",
+      organization: "Názov organizácie",
+      "street-address": "Celá adresa",
+      "address-line1": "Riadok adresy 1",
+      "address-line2": "Riadok adresy 2",
+      "address-line3": "Riadok adresy 3",
+      "address-level4": "Adresa úrovne 4",
+      "address-level3": "Adresa úrovne 3",
+      "address-level2": "Adresa úrovne 2",
+      "address-level1": "Adresa úrovne 1",
+      country: "Kód krajiny",
+      "country-name": "Názov krajiny",
+      "postal-code": "Psč",
+      "cc-name": "Meno držiteľa karty",
+      "cc-given-name": "Krstné meno držiteľa karty",
+      "cc-additional-name": "Stredné meno držiteľa karty",
+      "cc-family-name": "Priezvisko držiteľa karty",
+      "cc-number": "Číslo kreditnej karty",
+      "cc-exp": "Dátum vypršania platnosti",
+      "cc-exp-month": "Mesiac vypršania platnosti",
+      "cc-exp-year": "Rok vypršania platnosti",
+      "cc-csc": "Bezpečnostný kód karty",
+      "cc-type": "Typ kreditnej karty",
+      "transaction-currency": "Mena transakcie",
+      "transaction-amount": "Suma transakcie",
+      language: "Preferovaný jazyk",
+      bday: "Narodeniny",
+      "bday-day": "Deň narodenín",
+      "bday-month": "Mesiac narodenín",
+      "bday-year": "Rok narodenín",
+      sex: "Pohlavie",
+      url: "URL adresa webovej stránky",
+      photo: "Profilová fotka",
+      tel: "Telefónne číslo",
+      "tel-country-code": "Kód krajiny pre telefón",
+      "tel-national": "Národné telefónne číslo",
+      "tel-area-code": "Telefónna Predvoľba",
+      "tel-local": "Miestne telefónne číslo",
+      "tel-local-prefix": "Lokálna predvoľba telefónu",
+      "tel-local-suffix": "Prípona miestneho telefónu",
+      "tel-extension": "Rozšírenie telefónu",
+      email: "E-mailová adresa",
+      impp: "Protokol okamžitých správ"
+    },
     maskType: {
       none: "Žiadny",
       pattern: "Vzorka",
@@ -2805,3 +2860,56 @@ editorLocalization.locales["sk"] = skStrings;
 // names.default-contrast: "Contrast" => "Kontrast"
 // panel.showNumber: "Number this panel" => "Očíslujte tento panel"
 // pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Vyberte, či chcete, aby sa prieskum automaticky posunul na ďalšiu stránku, keď respondent odpovie na všetky otázky na aktuálnej stránke. Táto funkcia sa nepoužije, ak je posledná otázka na stránke otvorená alebo umožňuje viacero odpovedí."
+// autocomplete.name: "Full Name" => "Celé meno"
+// autocomplete.honorific-prefix: "Prefix" => "Predpona"
+// autocomplete.given-name: "First Name" => "Krstné meno"
+// autocomplete.additional-name: "Middle Name" => "Stredné meno"
+// autocomplete.family-name: "Last Name" => "Priezvisko"
+// autocomplete.honorific-suffix: "Suffix" => "Prípona"
+// autocomplete.nickname: "Nickname" => "Prezývka"
+// autocomplete.organization-title: "Job Title" => "Pracovná pozícia"
+// autocomplete.username: "User Name" => "Používateľské meno"
+// autocomplete.new-password: "New Password" => "Nové heslo"
+// autocomplete.current-password: "Current Password" => "Aktuálne heslo"
+// autocomplete.organization: "Organization Name" => "Názov organizácie"
+// autocomplete.street-address: "Full Street Address" => "Celá adresa"
+// autocomplete.address-line1: "Address Line 1" => "Riadok adresy 1"
+// autocomplete.address-line2: "Address Line 2" => "Riadok adresy 2"
+// autocomplete.address-line3: "Address Line 3" => "Riadok adresy 3"
+// autocomplete.address-level4: "Level 4 Address" => "Adresa úrovne 4"
+// autocomplete.address-level3: "Level 3 Address" => "Adresa úrovne 3"
+// autocomplete.address-level2: "Level 2 Address" => "Adresa úrovne 2"
+// autocomplete.address-level1: "Level 1 Address" => "Adresa úrovne 1"
+// autocomplete.country: "Country Code" => "Kód krajiny"
+// autocomplete.country-name: "Country Name" => "Názov krajiny"
+// autocomplete.postal-code: "Postal Code" => "Psč"
+// autocomplete.cc-name: "Cardholder Name" => "Meno držiteľa karty"
+// autocomplete.cc-given-name: "Cardholder First Name" => "Krstné meno držiteľa karty"
+// autocomplete.cc-additional-name: "Cardholder Middle Name" => "Stredné meno držiteľa karty"
+// autocomplete.cc-family-name: "Cardholder Last Name" => "Priezvisko držiteľa karty"
+// autocomplete.cc-number: "Credit Card Number" => "Číslo kreditnej karty"
+// autocomplete.cc-exp: "Expiration Date" => "Dátum vypršania platnosti"
+// autocomplete.cc-exp-month: "Expiration Month" => "Mesiac vypršania platnosti"
+// autocomplete.cc-exp-year: "Expiration Year" => "Rok vypršania platnosti"
+// autocomplete.cc-csc: "Card Security Code" => "Bezpečnostný kód karty"
+// autocomplete.cc-type: "Credit Card Type" => "Typ kreditnej karty"
+// autocomplete.transaction-currency: "Transaction Currency" => "Mena transakcie"
+// autocomplete.transaction-amount: "Transaction Amount" => "Suma transakcie"
+// autocomplete.language: "Preferred Language" => "Preferovaný jazyk"
+// autocomplete.bday: "Birthday" => "Narodeniny"
+// autocomplete.bday-day: "Birthday Day" => "Deň narodenín"
+// autocomplete.bday-month: "Birthday Month" => "Mesiac narodenín"
+// autocomplete.bday-year: "Birthday Year" => "Rok narodenín"
+// autocomplete.sex: "Gender" => "Pohlavie"
+// autocomplete.url: "Website URL" => "URL adresa webovej stránky"
+// autocomplete.photo: "Profile Photo" => "Profilová fotka"
+// autocomplete.tel: "Telephone Number" => "Telefónne číslo"
+// autocomplete.tel-country-code: "Country Code for Phone" => "Kód krajiny pre telefón"
+// autocomplete.tel-national: "National Telephone Number" => "Národné telefónne číslo"
+// autocomplete.tel-area-code: "Area Code" => "Telefónna Predvoľba"
+// autocomplete.tel-local: "Local Phone Number" => "Miestne telefónne číslo"
+// autocomplete.tel-local-prefix: "Local Phone Prefix" => "Lokálna predvoľba telefónu"
+// autocomplete.tel-local-suffix: "Local Phone Suffix" => "Prípona miestneho telefónu"
+// autocomplete.tel-extension: "Phone Extension" => "Rozšírenie telefónu"
+// autocomplete.email: "Email Address" => "E-mailová adresa"
+// autocomplete.impp: "Instant Messaging Protocol" => "Protokol okamžitých správ"

@@ -1018,6 +1018,61 @@ export let svStrings = {
       url: "URL",
       week: "Vecka"
     },
+    autocomplete: {
+      name: "Fullständigt namn",
+      "honorific-prefix": "Prefix",
+      "given-name": "Förnamn",
+      "additional-name": "Mellannamn",
+      "family-name": "Efternamn",
+      "honorific-suffix": "Suffix",
+      nickname: "Smeknamn",
+      "organization-title": "Befattning",
+      username: "Användarnamn",
+      "new-password": "Nytt lösenord",
+      "current-password": "Aktuellt lösenord",
+      organization: "Organisationens namn",
+      "street-address": "Fullständig gatuadress",
+      "address-line1": "Adress, rad 1",
+      "address-line2": "Adress Rad 2",
+      "address-line3": "Adress: Rad 3",
+      "address-level4": "Nivå 4 Adress",
+      "address-level3": "Nivå 3 Adress",
+      "address-level2": "Nivå 2 Adress",
+      "address-level1": "Nivå 1 Adress",
+      country: "Landskod",
+      "country-name": "Landets namn",
+      "postal-code": "Postnummer",
+      "cc-name": "Kortinnehavarens namn",
+      "cc-given-name": "Kortinnehavarens förnamn",
+      "cc-additional-name": "Kortinnehavarens mellannamn",
+      "cc-family-name": "Kortinnehavarens efternamn",
+      "cc-number": "Kreditkortsnummer",
+      "cc-exp": "Utgångsdatum",
+      "cc-exp-month": "Förfallomånad",
+      "cc-exp-year": "Utgångsdatum",
+      "cc-csc": "Kortets säkerhetskod",
+      "cc-type": "Typ av kreditkort",
+      "transaction-currency": "Transaktionsvalutan",
+      "transaction-amount": "Transaktionens belopp",
+      language: "Önskat språk",
+      bday: "Födelsedag",
+      "bday-day": "Födelsedag",
+      "bday-month": "Födelsedag Månad",
+      "bday-year": "Födelsedag År",
+      sex: "Genus",
+      url: "Webbadress",
+      photo: "Profilbild",
+      tel: "Telefonnummer",
+      "tel-country-code": "Landskod för telefon",
+      "tel-national": "Nationellt telefonnummer",
+      "tel-area-code": "Riktnummer",
+      "tel-local": "Lokalt telefonnummer",
+      "tel-local-prefix": "Prefix för lokal telefon",
+      "tel-local-suffix": "Suffix för lokal telefon",
+      "tel-extension": "Telefonanknytning",
+      email: "E-postadress",
+      impp: "Protokoll för snabbmeddelanden"
+    },
     maskType: {
       none: "Ingen",
       pattern: "Mönster",
@@ -3029,3 +3084,56 @@ editorLocalization.locales["sv"] = svStrings;
 // names.default-contrast: "Contrast" => "Kontrast"
 // panel.showNumber: "Number this panel" => "Numrera den här panelen"
 // pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Välj om du vill att undersökningen automatiskt ska gå vidare till nästa sida när en svarande har svarat på alla frågor på den aktuella sidan. Den här funktionen gäller inte om den sista frågan på sidan är öppen eller tillåter flera svar."
+// autocomplete.name: "Full Name" => "Fullständigt namn"
+// autocomplete.honorific-prefix: "Prefix" => "Prefix"
+// autocomplete.given-name: "First Name" => "Förnamn"
+// autocomplete.additional-name: "Middle Name" => "Mellannamn"
+// autocomplete.family-name: "Last Name" => "Efternamn"
+// autocomplete.honorific-suffix: "Suffix" => "Suffix"
+// autocomplete.nickname: "Nickname" => "Smeknamn"
+// autocomplete.organization-title: "Job Title" => "Befattning"
+// autocomplete.username: "User Name" => "Användarnamn"
+// autocomplete.new-password: "New Password" => "Nytt lösenord"
+// autocomplete.current-password: "Current Password" => "Aktuellt lösenord"
+// autocomplete.organization: "Organization Name" => "Organisationens namn"
+// autocomplete.street-address: "Full Street Address" => "Fullständig gatuadress"
+// autocomplete.address-line1: "Address Line 1" => "Adress, rad 1"
+// autocomplete.address-line2: "Address Line 2" => "Adress Rad 2"
+// autocomplete.address-line3: "Address Line 3" => "Adress: Rad 3"
+// autocomplete.address-level4: "Level 4 Address" => "Nivå 4 Adress"
+// autocomplete.address-level3: "Level 3 Address" => "Nivå 3 Adress"
+// autocomplete.address-level2: "Level 2 Address" => "Nivå 2 Adress"
+// autocomplete.address-level1: "Level 1 Address" => "Nivå 1 Adress"
+// autocomplete.country: "Country Code" => "Landskod"
+// autocomplete.country-name: "Country Name" => "Landets namn"
+// autocomplete.postal-code: "Postal Code" => "Postnummer"
+// autocomplete.cc-name: "Cardholder Name" => "Kortinnehavarens namn"
+// autocomplete.cc-given-name: "Cardholder First Name" => "Kortinnehavarens förnamn"
+// autocomplete.cc-additional-name: "Cardholder Middle Name" => "Kortinnehavarens mellannamn"
+// autocomplete.cc-family-name: "Cardholder Last Name" => "Kortinnehavarens efternamn"
+// autocomplete.cc-number: "Credit Card Number" => "Kreditkortsnummer"
+// autocomplete.cc-exp: "Expiration Date" => "Utgångsdatum"
+// autocomplete.cc-exp-month: "Expiration Month" => "Förfallomånad"
+// autocomplete.cc-exp-year: "Expiration Year" => "Utgångsdatum"
+// autocomplete.cc-csc: "Card Security Code" => "Kortets säkerhetskod"
+// autocomplete.cc-type: "Credit Card Type" => "Typ av kreditkort"
+// autocomplete.transaction-currency: "Transaction Currency" => "Transaktionsvalutan"
+// autocomplete.transaction-amount: "Transaction Amount" => "Transaktionens belopp"
+// autocomplete.language: "Preferred Language" => "Önskat språk"
+// autocomplete.bday: "Birthday" => "Födelsedag"
+// autocomplete.bday-day: "Birthday Day" => "Födelsedag"
+// autocomplete.bday-month: "Birthday Month" => "Födelsedag Månad"
+// autocomplete.bday-year: "Birthday Year" => "Födelsedag År"
+// autocomplete.sex: "Gender" => "Genus"
+// autocomplete.url: "Website URL" => "Webbadress"
+// autocomplete.photo: "Profile Photo" => "Profilbild"
+// autocomplete.tel: "Telephone Number" => "Telefonnummer"
+// autocomplete.tel-country-code: "Country Code for Phone" => "Landskod för telefon"
+// autocomplete.tel-national: "National Telephone Number" => "Nationellt telefonnummer"
+// autocomplete.tel-area-code: "Area Code" => "Riktnummer"
+// autocomplete.tel-local: "Local Phone Number" => "Lokalt telefonnummer"
+// autocomplete.tel-local-prefix: "Local Phone Prefix" => "Prefix för lokal telefon"
+// autocomplete.tel-local-suffix: "Local Phone Suffix" => "Suffix för lokal telefon"
+// autocomplete.tel-extension: "Phone Extension" => "Telefonanknytning"
+// autocomplete.email: "Email Address" => "E-postadress"
+// autocomplete.impp: "Instant Messaging Protocol" => "Protokoll för snabbmeddelanden"
