@@ -14,6 +14,7 @@ export class ActionButtonComponent extends EmbeddedViewContentComponent {
   @Input() disabled: boolean = false;
   @Input() text: string = "";
   @Input() title: string = "";
+  @Input() iconName: string = "";
   @Input() allowBubble: boolean = false;
   onClick(event: any) {
     this.click();
