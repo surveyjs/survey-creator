@@ -220,6 +220,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
 
   protected createActionContainer(): ActionContainer {
     const actionContainer = new SurveyElementActionContainer();
+    actionContainer.dotsItem.iconSize = "auto" as any;
     actionContainer.dotsItem.popupModel.horizontalPosition = "center";
     return actionContainer;
   }

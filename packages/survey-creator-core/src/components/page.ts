@@ -164,6 +164,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       itemPressed: "svc-page-toolbar__item--pressed",
       itemIcon: "svc-page-toolbar-item__icon",
       itemTitle: "svc-page-toolbar-item__title",
+      itemTitleWithIcon: "svc-page-toolbar-item__title--with-icon",
     };
     return container;
   }

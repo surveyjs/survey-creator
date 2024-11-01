@@ -34,7 +34,7 @@ import {
   propertyExists,
   toggleHovered
 } from "../utils/utils";
-import { SurveyElementAdornerBase } from "./action-container-view-model";
+import { SurveyElementActionContainer, SurveyElementAdornerBase } from "./action-container-view-model";
 require("./question.scss");
 import { settings } from "../creator-settings";
 import { StringEditorConnector, StringItemsNavigatorBase } from "./string-editor";
@@ -309,6 +309,8 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
 
     this.actionContainer.sizeMode = "small";
     this.actionContainer.cssClasses = defaultCssClasses;
+    (<SurveyElementActionContainer>this.actionContainer).dotsItem.css += " svc-survey-element-toolbar__dots-item";
+    (<SurveyElementActionContainer>this.actionContainer).dotsItem.innerCss += " svc-survey-element-toolbar__item";
     this.topActionContainer = new ActionContainer();
     this.topActionContainer.cssClasses = defaultCssClasses;
     this.topActionContainer.sizeMode = "small";
