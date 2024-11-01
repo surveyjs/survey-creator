@@ -69,6 +69,7 @@ var traditionalChineseTranslation = {
     surveySettingsTooltip: "調查設置",
     themeSettings: "主題設置",
     themeSettingsTooltip: "主題設置",
+    creatorSettingTitle: "Creator 設置",
     showPanel: "顯示面板",
     hidePanel: "“隱藏”面板",
     prevSelected: "選擇上一個",
@@ -301,7 +302,7 @@ var traditionalChineseTranslation = {
       width: "內嵌面板寬度",
       minWidth: "最小面板寬度",
       maxWidth: "最大面板寬度",
-      showNumber: "數字面板"
+      showNumber: "為此面板編號"
     },
     paneldynamic: {
       name: "面板名稱",
@@ -828,6 +829,8 @@ var traditionalChineseTranslation = {
       header: "頁眉",
       background: "背景",
       appearance: "外觀",
+      accentColors: "強調色",
+      scaling: "縮放",
       others: "別人"
     },
     editProperty: "編輯屬性: '{0}'",
@@ -1289,7 +1292,8 @@ var traditionalChineseTranslation = {
       innerIndent: "在面板內容和面板框的左邊框之間添加空格或邊距。",
       startWithNewLine: "取消選擇以將面板與上一個問題或面板顯示在一行中。如果面板是表單中的第一個元素，則該設置不適用。",
       state: "從中選擇：「展開」 - 面板完整顯示，可以摺疊;“已摺疊” - 面板僅顯示標題和描述，可以展開;“已鎖定” - 面板完整顯示，無法摺疊。",
-      width: "設置面板的寬度，使其與同一行中的其他測量圖元成比例。接受 CSS 值（px、%、in、pt 等）。"
+      width: "設置面板的寬度，使其與同一行中的其他測量圖元成比例。接受 CSS 值（px、%、in、pt 等）。",
+      showQuestionNumbers: "為嵌套在此面板中的問題分配編號。"
     },
     paneldynamic: {
       name: "受訪者不可見的面板ID。",
@@ -1387,7 +1391,7 @@ var traditionalChineseTranslation = {
     logoWidth: "以 CSS 單位（px、%、in、pt 等）設置徽標寬度。",
     logoHeight: "以 CSS 單位（px、%、in、pt 等）設置徽標高度。",
     logoFit: "從以下選項中選擇：「無」 - 影像保持其原始大小;“包含” - 調整圖像大小以適應其縱橫比;“封面” - 圖像填充整個框，同時保持其縱橫比;“填充” - 拉伸圖像以填充框，而不保持其縱橫比。",
-    goNextPageAutomatic: "選擇是否希望調查在受訪者回答當前頁面上的所有問題後自動前進到下一頁。",
+    goNextPageAutomatic: "選擇是否希望調查在受訪者回答了當前頁面上的所有問題後自動前進到下一頁。如果頁面上的最後一個問題是開放式的或允許多個答案，則此功能將不適用。",
     allowCompleteSurveyAutomatic: "選擇是否希望在受訪者回答所有問題後自動完成調查。",
     showNavigationButtons: "設置導航按鈕在頁面上的可見性和位置。",
     showProgressBar: "設置進度條的可見性和位置。“自動”值顯示測量標題上方或下方的進度條。",
@@ -1694,6 +1698,20 @@ var traditionalChineseTranslation = {
       tulip: "鬱金香",
       brown: "棕色",
       green: "綠"
+    }
+  },
+  creatortheme: {
+    "--sjs-special-background": "表面背景",
+    "--sjs-primary-background-500": "主要",
+    "--sjs-secondary-background-500": "二 次",
+    surfaceScale: "表面",
+    userInterfaceBaseUnit: "用戶介面",
+    fontScale: "字體",
+    names: {
+      sc2020: "調查建立者 2020",
+      "default-light": "光",
+      "default-dark": "黑暗",
+      "default-contrast": "反差"
     }
   }
 };
@@ -2581,7 +2599,6 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // panel.width: "Inline panel width" => "內嵌面板寬度"
 // panel.minWidth: "Minimum panel width" => "最小面板寬度"
 // panel.maxWidth: "Maximum panel width" => "最大面板寬度"
-// panel.showNumber: "Number panels" => "數字面板"
 // paneldynamic.name: "Panel name" => "面板名稱"
 // paneldynamic.title: "Panel title" => "面板標題"
 // paneldynamic.description: "Panel description" => "面板說明"
@@ -2797,7 +2814,6 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "以 CSS 單位（px、%、in、pt 等）設置徽標寬度。"
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "以 CSS 單位（px、%、in、pt 等）設置徽標高度。"
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "從以下選項中選擇：「無」 - 影像保持其原始大小;“包含” - 調整圖像大小以適應其縱橫比;“封面” - 圖像填充整個框，同時保持其縱橫比;“填充” - 拉伸圖像以填充框，而不保持其縱橫比。"
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "選擇是否希望調查在受訪者回答當前頁面上的所有問題後自動前進到下一頁。"
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "設置導航按鈕在頁面上的可見性和位置。"
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "設置進度條的可見性和位置。“自動”值顯示測量標題上方或下方的進度條。"
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "啟用僅包含所有問題或已回答問題的預覽頁面。"
@@ -3092,3 +3108,19 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "設置為 0 時，將自動計算高度以適應標題的內容。"
 // p.mobileHeight: "Height on smartphones" => "智能手機上的身高"
 // header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "啟用后，調查的頂部將覆蓋頁眉的底部。"
+// ed.creatorSettingTitle: "Creator Settings" => "Creator 設置"
+// tabs.accentColors: "Accent colors" => "強調色"
+// tabs.scaling: "Scaling" => "縮放"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "為嵌套在此面板中的問題分配編號。"
+// creatortheme.--sjs-special-background: "Surface background" => "表面背景"
+// creatortheme.--sjs-primary-background-500: "Primary" => "主要"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "二 次"
+// creatortheme.surfaceScale: "Surface" => "表面"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "用戶介面"
+// creatortheme.fontScale: "Font" => "字體"
+// names.sc2020: "Survey Creator 2020" => "調查建立者 2020"
+// names.default-light: "Light" => "光"
+// names.default-dark: "Dark" => "黑暗"
+// names.default-contrast: "Contrast" => "反差"
+// panel.showNumber: "Number this panel" => "為此面板編號"
+// pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "選擇是否希望調查在受訪者回答了當前頁面上的所有問題後自動前進到下一頁。如果頁面上的最後一個問題是開放式的或允許多個答案，則此功能將不適用。"

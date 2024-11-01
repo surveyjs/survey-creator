@@ -105,7 +105,7 @@ export class SearchManagerPropertyGrid extends SearchManager {
       this.currentMatch.updateElementCss();
       this.expandAllParents(this.currentMatch);
       setTimeout(() => {
-        const elementId = this.currentMatch.id;
+        const elementId = this.currentMatch?.id;
         scrollElementIntoView(elementId);
       }, 10);
     }

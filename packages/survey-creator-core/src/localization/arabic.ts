@@ -69,6 +69,7 @@ export var arStrings = {
     surveySettingsTooltip: "إعدادات الاستطلاع",
     themeSettings: "إعدادات النسق",
     themeSettingsTooltip: "إعدادات النسق",
+    creatorSettingTitle: "إعدادات منشئي المحتوى",
     showPanel: "إظهار اللوحة",
     hidePanel: "إخفاء اللوحة",
     prevSelected: "Select previous",
@@ -301,7 +302,7 @@ export var arStrings = {
       width: "عرض اللوحة المضمنة",
       minWidth: "الحد الأدنى لعرض اللوحة",
       maxWidth: "الحد الأقصى لعرض اللوحة",
-      showNumber: "لوحات الأرقام"
+      showNumber: "رقم هذه اللوحة"
     },
     paneldynamic: {
       name: "اسم اللوحة",
@@ -828,6 +829,8 @@ export var arStrings = {
       header: "راس",
       background: "خلفية",
       appearance: "مظهر",
+      accentColors: "ألوان مميزة",
+      scaling: "القياس",
       others: "غير ذلك"
     },
     editProperty: "Edit property '{0}'",
@@ -1289,7 +1292,8 @@ export var arStrings = {
       innerIndent: "يضيف مسافة أو هامش بين محتوى اللوحة والحد الأيسر لمربع اللوحة.",
       startWithNewLine: "قم بإلغاء التحديد لعرض اللوحة في سطر واحد مع السؤال أو اللوحة السابقة. لا ينطبق الإعداد إذا كانت اللوحة هي العنصر الأول في النموذج الخاص بك.",
       state: "اختر من بين: \"موسعة\" - يتم عرض اللوحة بالكامل ويمكن طيها ؛ \"مطوي\" - تعرض اللوحة العنوان والوصف فقط ويمكن توسيعها ؛ \"مغلق\" - يتم عرض اللوحة بالكامل ولا يمكن طيها.",
-      width: "يضبط عرض اللوحة بما يتناسب مع عناصر الاستطلاع الأخرى في نفس السطر. يقبل قيم CSS (px ، ٪ ، in ، pt ، إلخ)."
+      width: "يضبط عرض اللوحة بما يتناسب مع عناصر الاستطلاع الأخرى في نفس السطر. يقبل قيم CSS (px ، ٪ ، in ، pt ، إلخ).",
+      showQuestionNumbers: "يعين الأرقام للأسئلة المتداخلة داخل هذه اللوحة."
     },
     paneldynamic: {
       name: "معرف لوحة غير مرئي للمستجيبين.",
@@ -1387,7 +1391,7 @@ export var arStrings = {
     logoWidth: "يضبط عرض الشعار بوحدات CSS (px ، ٪ ، in ، pt ، إلخ).",
     logoHeight: "يضبط ارتفاع الشعار في وحدات CSS (px ، ٪ ، in ، pt ، إلخ).",
     logoFit: "اختر من بين: \"لا شيء\" - تحافظ الصورة على حجمها الأصلي ؛ \"احتواء\" - يتم تغيير حجم الصورة لتلائم مع الحفاظ على نسبة العرض إلى الارتفاع ؛ \"الغلاف\" - تملأ الصورة المربع بأكمله مع الحفاظ على نسبة العرض إلى الارتفاع ؛ \"تعبئة\" - يتم تمديد الصورة لملء المربع دون الحفاظ على نسبة العرض إلى الارتفاع.",
-    goNextPageAutomatic: "حدد ما إذا كنت تريد أن يتقدم الاستطلاع إلى الصفحة التالية تلقائيا بعد أن يجيب المستجيب على جميع الأسئلة في الصفحة الحالية.",
+    goNextPageAutomatic: "حدد ما إذا كنت تريد أن يتقدم الاستطلاع تلقائيا إلى الصفحة التالية بمجرد إجابة المستجيب على جميع الأسئلة في الصفحة الحالية. لن يتم تطبيق هذه الميزة إذا كان السؤال الأخير على الصفحة مفتوحا أو يسمح بإجابات متعددة.",
     allowCompleteSurveyAutomatic: "حدد ما إذا كنت تريد إكمال الاستطلاع تلقائيا بعد أن يجيب المستجيب على جميع الأسئلة.",
     showNavigationButtons: "يضبط رؤية وموقع أزرار التنقل على الصفحة.",
     showProgressBar: "يضبط رؤية شريط التقدم وموقعه. تعرض القيمة \"تلقائي\" شريط التقدم أعلى رأس الاستطلاع أو أسفله.",
@@ -1694,6 +1698,20 @@ export var arStrings = {
       tulip: "توليب",
       brown: "أسمر",
       green: "أخضر"
+    }
+  },
+  creatortheme: {
+    "--sjs-special-background": "خلفية السطح",
+    "--sjs-primary-background-500": "ابتدائي",
+    "--sjs-secondary-background-500": "ثانوي",
+    surfaceScale: "سطح",
+    userInterfaceBaseUnit: "واجهة المستخدم",
+    fontScale: "الخط",
+    names: {
+      sc2020: "منشئ الاستطلاع 2020",
+      "default-light": "ضوء",
+      "default-dark": "داكن",
+      "default-contrast": "تباين"
     }
   }
 };
@@ -2220,7 +2238,6 @@ editorLocalization.locales["ar"] = arStrings;
 // panel.width: "Inline panel width" => "عرض اللوحة المضمنة"
 // panel.minWidth: "Minimum panel width" => "الحد الأدنى لعرض اللوحة"
 // panel.maxWidth: "Maximum panel width" => "الحد الأقصى لعرض اللوحة"
-// panel.showNumber: "Number panels" => "لوحات الأرقام"
 // paneldynamic.name: "Panel name" => "اسم اللوحة"
 // paneldynamic.title: "Panel title" => "عنوان اللوحة"
 // paneldynamic.description: "Panel description" => "وصف اللوحة"
@@ -2436,7 +2453,6 @@ editorLocalization.locales["ar"] = arStrings;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "يضبط عرض الشعار بوحدات CSS (px ، ٪ ، in ، pt ، إلخ)."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "يضبط ارتفاع الشعار في وحدات CSS (px ، ٪ ، in ، pt ، إلخ)."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "اختر من بين: \"لا شيء\" - تحافظ الصورة على حجمها الأصلي ؛ \"احتواء\" - يتم تغيير حجم الصورة لتلائم مع الحفاظ على نسبة العرض إلى الارتفاع ؛ \"الغلاف\" - تملأ الصورة المربع بأكمله مع الحفاظ على نسبة العرض إلى الارتفاع ؛ \"تعبئة\" - يتم تمديد الصورة لملء المربع دون الحفاظ على نسبة العرض إلى الارتفاع."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "حدد ما إذا كنت تريد أن يتقدم الاستطلاع إلى الصفحة التالية تلقائيا بعد أن يجيب المستجيب على جميع الأسئلة في الصفحة الحالية."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "يضبط رؤية وموقع أزرار التنقل على الصفحة."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "يضبط رؤية شريط التقدم وموقعه. تعرض القيمة \"تلقائي\" شريط التقدم أعلى رأس الاستطلاع أو أسفله."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "قم بتمكين صفحة المعاينة مع جميع الأسئلة أو الإجابة عليها فقط."
@@ -2731,3 +2747,22 @@ editorLocalization.locales["ar"] = arStrings;
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "عند التعيين إلى 0 ، يتم حساب الارتفاع تلقائيا لاستيعاب محتوى الرأس."
 // p.mobileHeight: "Height on smartphones" => "الارتفاع على الهواتف الذكية"
 // header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "عند التمكين، يقوم الجزء العلوي من الاستطلاع بتراكب الجزء السفلي من الرأس."
+// ed.creatorSettingTitle: "Creator Settings" => "إعدادات منشئي المحتوى"
+// tabs.accentColors: "Accent colors" => "ألوان مميزة"
+// tabs.scaling: "Scaling" => "القياس"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "يعين الأرقام للأسئلة المتداخلة داخل هذه اللوحة."
+// creatortheme.--sjs-special-background: "Surface background" => "خلفية السطح"
+// creatortheme.--sjs-primary-background-500: "Primary" => "ابتدائي"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "ثانوي"
+// creatortheme.surfaceScale: "Surface" => "سطح"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "واجهة المستخدم"
+// creatortheme.fontScale: "Font" => "الخط"
+// names.sc2020: "Survey Creator 2020" => "منشئ الاستطلاع 2020"
+// names.default-light: "Light" => "ضوء"
+// names.default-dark: "Dark" => "داكن"
+// names.default-contrast: "Contrast" => "تباين"
+// panel.showNumber: "Number this panel" => "رقم هذه اللوحة"
+// ed.creatorSettingTitle: "Creator Settings" => "إعدادات منشئي المحتوى"
+// tabs.accentColors: "Accent colors" => "ألوان مميزة"
+// tabs.scaling: "Scaling" => "القياس"
+// pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "حدد ما إذا كنت تريد أن يتقدم الاستطلاع تلقائيا إلى الصفحة التالية بمجرد إجابة المستجيب على جميع الأسئلة في الصفحة الحالية. لن يتم تطبيق هذه الميزة إذا كان السؤال الأخير على الصفحة مفتوحا أو يسمح بإجابات متعددة."

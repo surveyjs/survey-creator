@@ -69,6 +69,7 @@ var spanishTranslation = {
     surveySettingsTooltip: "Configuración de la encuesta",
     themeSettings: "Configuración del tema",
     themeSettingsTooltip: "Configuración del tema",
+    creatorSettingTitle: "Configuración del creador",
     showPanel: "Mostrar panel",
     hidePanel: "Ocultar panel",
     prevSelected: "Seleccionar anterior",
@@ -301,7 +302,7 @@ var spanishTranslation = {
       width: "Ancho del panel en línea",
       minWidth: "Anchura mínima del panel",
       maxWidth: "Anchura máxima del panel",
-      showNumber: "Paneles numéricos"
+      showNumber: "Numerar este panel"
     },
     paneldynamic: {
       name: "Nombre del panel",
@@ -828,6 +829,8 @@ var spanishTranslation = {
       header: "Encabezado",
       background: "Fondo",
       appearance: "Apariencia",
+      accentColors: "Colores de acento",
+      scaling: "Escalada",
       others: "Otras"
     },
     editProperty: "Editar propiedad '{0}'",
@@ -1289,7 +1292,8 @@ var spanishTranslation = {
       innerIndent: "Añade espacio o margen entre el contenido del panel y el borde izquierdo del cuadro del panel.",
       startWithNewLine: "Anule la selección para mostrar el panel en una línea con la pregunta o el panel anterior. La configuración no se aplica si el panel es el primer elemento del formulario.",
       state: "Elija entre: \"Expandido\": el panel se muestra en su totalidad y se puede contraer; \"Contraído\": el panel muestra solo el título y la descripción y se puede expandir; \"Bloqueado\": el panel se muestra en su totalidad y no se puede contraer.",
-      width: "Define la anchura del panel en proporción a otros elementos topográficos de la misma línea. Acepta valores CSS (px, %, in, pt, etc.)."
+      width: "Define la anchura del panel en proporción a otros elementos topográficos de la misma línea. Acepta valores CSS (px, %, in, pt, etc.).",
+      showQuestionNumbers: "Asigna números a las preguntas anidadas dentro de este panel."
     },
     paneldynamic: {
       name: "Un ID de panel que no es visible para los encuestados.",
@@ -1387,7 +1391,7 @@ var spanishTranslation = {
     logoWidth: "Establece el ancho del logotipo en unidades CSS (px, %, in, pt, etc.).",
     logoHeight: "Establece la altura del logotipo en unidades CSS (px, %, in, pt, etc.).",
     logoFit: "Elija entre: \"Ninguno\": la imagen mantiene su tamaño original; \"Contener\": se cambia el tamaño de la imagen para que se ajuste manteniendo su relación de aspecto; \"Portada\": la imagen llena toda la caja manteniendo su relación de aspecto; \"Relleno\": la imagen se estira para llenar el cuadro sin mantener su relación de aspecto.",
-    goNextPageAutomatic: "Seleccione si desea que la encuesta avance a la página siguiente automáticamente después de que un encuestado responda todas las preguntas de la página actual.",
+    goNextPageAutomatic: "Seleccione si desea que la encuesta avance automáticamente a la página siguiente una vez que un encuestado haya respondido todas las preguntas en la página actual. Esta función no se aplicará si la última pregunta de la página es abierta o permite varias respuestas.",
     allowCompleteSurveyAutomatic: "Seleccione si desea que la encuesta se complete automáticamente después de que un encuestado responda todas las preguntas.",
     showNavigationButtons: "Establece la visibilidad y la ubicación de los botones de navegación en una página.",
     showProgressBar: "Establece la visibilidad y la ubicación de una barra de progreso. El valor \"Auto\" muestra la barra de progreso por encima o por debajo del encabezado de la encuesta.",
@@ -1694,6 +1698,20 @@ var spanishTranslation = {
       tulip: "Tulipán",
       brown: "Marrón",
       green: "Verde"
+    }
+  },
+  creatortheme: {
+    "--sjs-special-background": "Fondo de superficie",
+    "--sjs-primary-background-500": "Primario",
+    "--sjs-secondary-background-500": "Secundario",
+    surfaceScale: "Superficie",
+    userInterfaceBaseUnit: "Interfaz de usuario",
+    fontScale: "Fuente",
+    names: {
+      sc2020: "Creador de encuestas 2020",
+      "default-light": "Luz",
+      "default-dark": "Oscuro",
+      "default-contrast": "Contraste"
     }
   }
 };
@@ -2083,7 +2101,6 @@ editorLocalization.locales["es"] = spanishTranslation;
 // panel.width: "Inline panel width" => "Ancho del panel en línea"
 // panel.minWidth: "Minimum panel width" => "Anchura mínima del panel"
 // panel.maxWidth: "Maximum panel width" => "Anchura máxima del panel"
-// panel.showNumber: "Number panels" => "Paneles numéricos"
 // paneldynamic.name: "Panel name" => "Nombre del panel"
 // paneldynamic.title: "Panel title" => "Título de la viñeta"
 // paneldynamic.description: "Panel description" => "Descripción del panel"
@@ -2299,7 +2316,6 @@ editorLocalization.locales["es"] = spanishTranslation;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "Establece el ancho del logotipo en unidades CSS (px, %, in, pt, etc.)."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "Establece la altura del logotipo en unidades CSS (px, %, in, pt, etc.)."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Elija entre: \"Ninguno\": la imagen mantiene su tamaño original; \"Contener\": se cambia el tamaño de la imagen para que se ajuste manteniendo su relación de aspecto; \"Portada\": la imagen llena toda la caja manteniendo su relación de aspecto; \"Relleno\": la imagen se estira para llenar el cuadro sin mantener su relación de aspecto."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "Seleccione si desea que la encuesta avance a la página siguiente automáticamente después de que un encuestado responda todas las preguntas de la página actual."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "Establece la visibilidad y la ubicación de los botones de navegación en una página."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Establece la visibilidad y la ubicación de una barra de progreso. El valor \"Auto\" muestra la barra de progreso por encima o por debajo del encabezado de la encuesta."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "Habilite la página de vista previa con todas las preguntas o solo las respondidas."
@@ -2594,3 +2610,19 @@ editorLocalization.locales["es"] = spanishTranslation;
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Cuando se establece en 0, la altura se calcula automáticamente para acomodar el contenido del encabezado."
 // p.mobileHeight: "Height on smartphones" => "Altura en smartphones"
 // header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Cuando se habilita, la parte superior de la encuesta se superpone a la parte inferior del encabezado."
+// ed.creatorSettingTitle: "Creator Settings" => "Configuración del creador"
+// tabs.accentColors: "Accent colors" => "Colores de acento"
+// tabs.scaling: "Scaling" => "Escalada"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "Asigna números a las preguntas anidadas dentro de este panel."
+// creatortheme.--sjs-special-background: "Surface background" => "Fondo de superficie"
+// creatortheme.--sjs-primary-background-500: "Primary" => "Primario"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "Secundario"
+// creatortheme.surfaceScale: "Surface" => "Superficie"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "Interfaz de usuario"
+// creatortheme.fontScale: "Font" => "Fuente"
+// names.sc2020: "Survey Creator 2020" => "Creador de encuestas 2020"
+// names.default-light: "Light" => "Luz"
+// names.default-dark: "Dark" => "Oscuro"
+// names.default-contrast: "Contrast" => "Contraste"
+// panel.showNumber: "Number this panel" => "Numerar este panel"
+// pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Seleccione si desea que la encuesta avance automáticamente a la página siguiente una vez que un encuestado haya respondido todas las preguntas en la página actual. Esta función no se aplicará si la última pregunta de la página es abierta o permite varias respuestas."
