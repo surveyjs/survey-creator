@@ -1,7 +1,7 @@
 @import "../../variables.scss";
 
 .svc-toolbox {
-  .svc-search__container {
+  .svc-search {
     background: var(--ctr-toolbox-background-color, $background-dim);
     padding-top: var(--ctr-toolbox-search-padding-top, calcSize(2.5));
     padding-inline-end: var(--ctr-toolbox-search-padding-right, calcSize(2));

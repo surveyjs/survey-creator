@@ -31,7 +31,7 @@ export class SearchComponent extends SurveyElementBase<ISearchComponentProps, an
       }
     };
     return (
-      <div className="svc-search__container">
+      <div className="svc-search">
         <div className="svc-search__search-icon">
           <SvgIcon iconName="icon-search" size={"auto"}></SvgIcon>
         </div>

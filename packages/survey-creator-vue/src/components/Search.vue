@@ -1,5 +1,5 @@
 <template>
-  <div v-if="model.isVisible" class="svc-search__container">
+  <div v-if="model.isVisible" class="svc-search">
     <div class="svc-search__search-icon">
       <SvComponent
         :is="'sv-svg-icon'"

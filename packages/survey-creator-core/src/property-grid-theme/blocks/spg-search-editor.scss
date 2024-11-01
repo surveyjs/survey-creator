@@ -1,12 +1,12 @@
 @import "../variables.scss";
 .svc-side-bar {
-  .svc-search__container {
+  .svc-search {
     // TODO remove v2
     --sjs-general-forecolor: rgba(0, 0, 0, 0.91);
     --sjs-general-forecolor-light: rgba(0, 0, 0, 0.45);
   }
   
-  .svc-search__container {
+  .svc-search {
     border-bottom: 1px solid var(--ctr-property-grid-search-border-color, $border);
     background: var(--ctr-property-grid-search-background-color, $background-dim);
     gap: var(--ctr-property-grid-search-gap, calcSize(1));

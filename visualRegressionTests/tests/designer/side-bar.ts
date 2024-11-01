@@ -78,7 +78,7 @@ test("property grid search", async (t) => {
     await takeElementScreenshot("side-bar-search-empty.png", Selector(".spg-container_search"), t, comparer);
 
     await t.typeText(".svc-search__input", "des");
-    await takeElementScreenshot("side-bar-search-editor.png", ".spg-container_search .svc-search__container", t, comparer);
+    await takeElementScreenshot("side-bar-search-editor.png", ".spg-container_search .svc-search", t, comparer);
     await takeElementScreenshot("side-bar-search-general-group.png", Selector(".spg-container_search"), t, comparer);
 
     await t.click(".svc-search__bar-item"); // prev

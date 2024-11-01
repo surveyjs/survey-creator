@@ -1,11 +1,11 @@
 @import "../variables.scss";
-.svc-search__container {
+.svc-search {
   // TODO remove v2
   --sjs-general-forecolor: rgba(0, 0, 0, 0.91);
   --sjs-general-forecolor-light: rgba(0, 0, 0, 0.45);
 }
 
-.svc-search__container {
+.svc-search {
   display: flex;
   align-items: center;
 }
