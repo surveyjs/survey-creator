@@ -69,6 +69,7 @@ export var jaStrings = {
     surveySettingsTooltip: "アンケート設定",
     themeSettings: "テーマ設定",
     themeSettingsTooltip: "テーマ設定",
+    creatorSettingTitle: "クリエイター設定",
     showPanel: "パネルを表示する",
     hidePanel: "パネルを非表示にする",
     prevSelected: "前を選択",
@@ -301,7 +302,7 @@ export var jaStrings = {
       width: "インラインパネルの幅",
       minWidth: "最小パネル幅",
       maxWidth: "最大パネル幅",
-      showNumber: "番号パネル"
+      showNumber: "このパネルに番号を付ける"
     },
     paneldynamic: {
       name: "パネル名",
@@ -828,6 +829,8 @@ export var jaStrings = {
       header: "ヘッダ",
       background: "バックグラウンド",
       appearance: "様子",
+      accentColors: "アクセントカラー",
+      scaling: "スケーリング",
       others: "その他"
     },
     editProperty: "プロパティ'{0}'を編集",
@@ -1289,7 +1292,8 @@ export var jaStrings = {
       innerIndent: "パネルの内容とパネルボックスの左の境界線の間にスペースまたは余白を追加します。",
       startWithNewLine: "選択を解除すると、前の質問またはパネルと 1 行でパネルが表示されます。パネルがフォームの最初の要素である場合、この設定は適用されません。",
       state: "次から選択します: 「展開」 - パネルは完全に表示され、折りたたむことができます。「折りたたまれた」 - パネルにはタイトルと説明のみが表示され、展開できます。「ロック」 - パネルは完全に表示され、折りたたむことはできません。",
-      width: "パネルの幅を、同じ行内の他の調査要素に比例して設定します。CSS 値 (px、%、in、pt など) を受け入れます。"
+      width: "パネルの幅を、同じ行内の他の調査要素に比例して設定します。CSS 値 (px、%、in、pt など) を受け入れます。",
+      showQuestionNumbers: "このパネル内にネストされた質問に番号を割り当てます。"
     },
     paneldynamic: {
       name: "回答者には表示されないパネルID。",
@@ -1387,7 +1391,7 @@ export var jaStrings = {
     logoWidth: "ロゴの幅をCSS単位(px、%、in、ptなど)で設定します。",
     logoHeight: "ロゴの高さを CSS 単位 (px、%、in、pt など) で設定します。",
     logoFit: "次から選択: 「なし」 - 画像は元のサイズを維持します。\"Contain\" - 画像はアスペクト比を維持しながらサイズ変更されます。「表紙」-画像は縦横比を維持しながらボックス全体を埋めます。\"Fill\" - 画像は、アスペクト比を維持せずにボックスを埋めるように引き伸ばされます。",
-    goNextPageAutomatic: "回答者が現在のページのすべての質問に回答した後、アンケートを自動的に次のページに進めるかどうかを選択します。",
+    goNextPageAutomatic: "回答者が現在のページのすべての質問に答えると、アンケートが自動的に次のページに進むようにする場合に選択します。この機能は、ページの最後の質問が自由回答形式の場合、または複数の回答が許可されている場合には適用されません。",
     allowCompleteSurveyAutomatic: "回答者がすべての質問に回答した後にアンケートを自動的に完了する場合に選択します。",
     showNavigationButtons: "ページ上のナビゲーションボタンの表示と位置を設定します。",
     showProgressBar: "プログレスバーの表示と位置を設定します。「自動」の値は、アンケートヘッダーの上または下に進行状況バーを表示します。",
@@ -1694,6 +1698,20 @@ export var jaStrings = {
       tulip: "チューリップ",
       brown: "褐色",
       green: "緑"
+    }
+  },
+  creatortheme: {
+    "--sjs-special-background": "サーフェスの背景",
+    "--sjs-primary-background-500": "原発",
+    "--sjs-secondary-background-500": "付帯",
+    surfaceScale: "表面",
+    userInterfaceBaseUnit: "ユーザーインターフェース",
+    fontScale: "フォント",
+    names: {
+      sc2020: "サーベイクリエーター2020",
+      "default-light": "光",
+      "default-dark": "暗い",
+      "default-contrast": "対照"
     }
   }
 };
@@ -2308,7 +2326,6 @@ editorLocalization.locales["ja"] = jaStrings;
 // panel.width: "Inline panel width" => "インラインパネルの幅"
 // panel.minWidth: "Minimum panel width" => "最小パネル幅"
 // panel.maxWidth: "Maximum panel width" => "最大パネル幅"
-// panel.showNumber: "Number panels" => "番号パネル"
 // paneldynamic.name: "Panel name" => "パネル名"
 // paneldynamic.title: "Panel title" => "パネルタイトル"
 // paneldynamic.description: "Panel description" => "パネルの説明"
@@ -2524,7 +2541,6 @@ editorLocalization.locales["ja"] = jaStrings;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "ロゴの幅をCSS単位(px、%、in、ptなど)で設定します。"
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "ロゴの高さを CSS 単位 (px、%、in、pt など) で設定します。"
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "次から選択: 「なし」 - 画像は元のサイズを維持します。\"Contain\" - 画像はアスペクト比を維持しながらサイズ変更されます。「表紙」-画像は縦横比を維持しながらボックス全体を埋めます。\"Fill\" - 画像は、アスペクト比を維持せずにボックスを埋めるように引き伸ばされます。"
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "回答者が現在のページのすべての質問に回答した後、アンケートを自動的に次のページに進めるかどうかを選択します。"
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "ページ上のナビゲーションボタンの表示と位置を設定します。"
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "プログレスバーの表示と位置を設定します。「自動」の値は、アンケートヘッダーの上または下に進行状況バーを表示します。"
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "すべての質問または回答済みの質問のみを含むプレビューページを有効にします。"
@@ -2819,3 +2835,19 @@ editorLocalization.locales["ja"] = jaStrings;
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "0 に設定すると、ヘッダーのコンテンツに合わせて高さが自動的に計算されます。"
 // p.mobileHeight: "Height on smartphones" => "スマートフォンでの高さ"
 // header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "有効にすると、調査の上部がヘッダーの下部に重なります。"
+// ed.creatorSettingTitle: "Creator Settings" => "クリエイター設定"
+// tabs.accentColors: "Accent colors" => "アクセントカラー"
+// tabs.scaling: "Scaling" => "スケーリング"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "このパネル内にネストされた質問に番号を割り当てます。"
+// creatortheme.--sjs-special-background: "Surface background" => "サーフェスの背景"
+// creatortheme.--sjs-primary-background-500: "Primary" => "原発"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "付帯"
+// creatortheme.surfaceScale: "Surface" => "表面"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "ユーザーインターフェース"
+// creatortheme.fontScale: "Font" => "フォント"
+// names.sc2020: "Survey Creator 2020" => "サーベイクリエーター2020"
+// names.default-light: "Light" => "光"
+// names.default-dark: "Dark" => "暗い"
+// names.default-contrast: "Contrast" => "対照"
+// panel.showNumber: "Number this panel" => "このパネルに番号を付ける"
+// pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "回答者が現在のページのすべての質問に答えると、アンケートが自動的に次のページに進むようにする場合に選択します。この機能は、ページの最後の質問が自由回答形式の場合、または複数の回答が許可されている場合には適用されません。"

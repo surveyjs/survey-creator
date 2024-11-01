@@ -69,6 +69,7 @@ export const thStrings = {
     surveySettingsTooltip: "การตั้งค่าแบบสำรวจ",
     themeSettings: "การตั้งค่าธีม",
     themeSettingsTooltip: "การตั้งค่าธีม",
+    creatorSettingTitle: "การตั้งค่าครีเอเตอร์",
     showPanel: "แสดงแผง",
     hidePanel: "ซ่อนแผง",
     prevSelected: "เลือกก่อนหน้า",
@@ -301,7 +302,7 @@ export const thStrings = {
       width: "ความกว้างของแผงแบบอินไลน์",
       minWidth: "ความกว้างขั้นต่ำของแผง",
       maxWidth: "ความกว้างสูงสุดของแผง",
-      showNumber: "หมายเลขแผง"
+      showNumber: "หมายเลขแผงนี้"
     },
     paneldynamic: {
       name: "ชื่อแผง",
@@ -828,6 +829,8 @@ export const thStrings = {
       header: "หัวเรื่อง",
       background: "พื้นหลัง",
       appearance: "การปรากฏ",
+      accentColors: "สีเน้นเสียง",
+      scaling: "มาตรา ส่วน",
       others: "อื่นๆ"
     },
     editProperty: "แก้ไขคุณสมบัติ '{0}'",
@@ -1289,7 +1292,8 @@ export const thStrings = {
       innerIndent: "เพิ่มพื้นที่หรือมาร์จิ้นระหว่างเนื้อหาแผงและขอบซ้ายของกล่องแผง",
       startWithNewLine: "ยกเลิกการเลือกเพื่อแสดงแผงในบรรทัดเดียวกับคำถามหรือแผงก่อนหน้า การตั้งค่านี้จะไม่ใช้ถ้าแผงเป็นองค์ประกอบแรกในแบบฟอร์มของคุณ",
       state: "เลือกจาก: \"ขยาย\" - แผงแสดงเต็มและสามารถยุบได้; \"ยุบ\" - แผงแสดงเพียงชื่อเรื่องและคำอธิบายและสามารถขยายได้; \"ล็อก\" - แผงแสดงเต็มและไม่สามารถยุบได้",
-      width: "ตั้งความกว้างของแผงให้สัมพันธ์กับองค์ประกอบแบบสำรวจอื่นๆ ในบรรทัดเดียวกัน รับค่าของ CSS (px, %, in, pt, ฯลฯ)"
+      width: "ตั้งความกว้างของแผงให้สัมพันธ์กับองค์ประกอบแบบสำรวจอื่นๆ ในบรรทัดเดียวกัน รับค่าของ CSS (px, %, in, pt, ฯลฯ)",
+      showQuestionNumbers: "กําหนดตัวเลขให้กับคําถามที่ซ้อนกันภายในแผงนี้"
     },
     paneldynamic: {
       name: "ID แผงที่ไม่มองเห็นได้สำหรับผู้ตอบแบบสำรวจ",
@@ -1387,7 +1391,7 @@ export const thStrings = {
     logoWidth: "ตั้งค่าความกว้างโลโก้ในหน่วย CSS (px, %, in, pt, ฯลฯ)",
     logoHeight: "ตั้งค่าความสูงโลโก้ในหน่วย CSS (px, %, in, pt, ฯลฯ)",
     logoFit: "เลือกจาก: \"ไม่มี\" - ภาพคงขนาดเดิม; \"พอดี\" - ภาพถูกปรับขนาดให้พอดีขณะที่รักษาสัดส่วน; \"ครอบคลุม\" - ภาพเติมเต็มกล่องทั้งหมดขณะที่รักษาสัดส่วน; \"เติม\" - ภาพถูกยืดให้เต็มกล่องโดยไม่รักษาสัดส่วน",
-    goNextPageAutomatic: "เลือกถ้าคุณต้องการให้แบบสำรวจเปลี่ยนไปหน้าถัดไปโดยอัตโนมัติหลังจากผู้ตอบตอบคำถามทั้งหมดในหน้าปัจจุบัน",
+    goNextPageAutomatic: "เลือกว่าคุณต้องการให้แบบสํารวจเลื่อนไปยังหน้าถัดไปโดยอัตโนมัติเมื่อผู้ตอบคําถามทั้งหมดในหน้าปัจจุบันแล้ว ฟีเจอร์นี้จะไม่มีผลหากคําถามสุดท้ายในหน้าเป็นคําถามปลายเปิดหรืออนุญาตให้มีคําตอบหลายข้อ",
     allowCompleteSurveyAutomatic: "เลือกถ้าคุณต้องการให้แบบสำรวจเสร็จสิ้นโดยอัตโนมัติหลังจากผู้ตอบตอบคำถามทั้งหมด",
     showNavigationButtons: "ตั้งการมองเห็นและตำแหน่งของปุ่มนำทางในหน้า",
     showProgressBar: "ตั้งการมองเห็นและตำแหน่งของแถบความคืบหน้า ตัวเลือก \"อัตโนมัติ\" จะแสดงแถบความคืบหน้าเหนือหรือใต้หัวเรื่องแบบสำรวจ",
@@ -1695,6 +1699,20 @@ export const thStrings = {
       brown: "น้ำตาล",
       green: "เขียว"
     }
+  },
+  creatortheme: {
+    "--sjs-special-background": "พื้นหลังพื้นผิว",
+    "--sjs-primary-background-500": "ประถม",
+    "--sjs-secondary-background-500": "รอง",
+    surfaceScale: "พื้นผิว",
+    userInterfaceBaseUnit: "ส่วนติดต่อผู้ใช้",
+    fontScale: "แบบอักษร",
+    names: {
+      sc2020: "ผู้สร้างแบบสํารวจ 2020",
+      "default-light": "แสง",
+      "default-dark": "มืด",
+      "default-contrast": "ความแตกต่าง"
+    }
   }
 };
 
@@ -1755,3 +1773,19 @@ editorLocalization.locales["th"] = thStrings;
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "เมื่อตั้งค่าเป็น 0 ความสูงจะถูกคํานวณโดยอัตโนมัติเพื่อรองรับเนื้อหาของส่วนหัว"
 // p.mobileHeight: "Height on smartphones" => "ความสูงบนสมาร์ทโฟน"
 // header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "เมื่อเปิดใช้งาน ด้านบนของแบบสํารวจจะซ้อนทับด้านล่างของส่วนหัว"
+// ed.creatorSettingTitle: "Creator Settings" => "การตั้งค่าครีเอเตอร์"
+// tabs.accentColors: "Accent colors" => "สีเน้นเสียง"
+// tabs.scaling: "Scaling" => "มาตรา ส่วน"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "กําหนดตัวเลขให้กับคําถามที่ซ้อนกันภายในแผงนี้"
+// creatortheme.--sjs-special-background: "Surface background" => "พื้นหลังพื้นผิว"
+// creatortheme.--sjs-primary-background-500: "Primary" => "ประถม"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "รอง"
+// creatortheme.surfaceScale: "Surface" => "พื้นผิว"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "ส่วนติดต่อผู้ใช้"
+// creatortheme.fontScale: "Font" => "แบบอักษร"
+// names.sc2020: "Survey Creator 2020" => "ผู้สร้างแบบสํารวจ 2020"
+// names.default-light: "Light" => "แสง"
+// names.default-dark: "Dark" => "มืด"
+// names.default-contrast: "Contrast" => "ความแตกต่าง"
+// panel.showNumber: "Number this panel" => "หมายเลขแผงนี้"
+// pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "เลือกว่าคุณต้องการให้แบบสํารวจเลื่อนไปยังหน้าถัดไปโดยอัตโนมัติเมื่อผู้ตอบคําถามทั้งหมดในหน้าปัจจุบันแล้ว ฟีเจอร์นี้จะไม่มีผลหากคําถามสุดท้ายในหน้าเป็นคําถามปลายเปิดหรืออนุญาตให้มีคําตอบหลายข้อ"

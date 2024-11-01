@@ -69,6 +69,7 @@ export var ruStrings = {
     surveySettingsTooltip: "Настройки съемки",
     themeSettings: "Настройки темы",
     themeSettingsTooltip: "Настройки темы",
+    creatorSettingTitle: "Настройки создателя контента",
     showPanel: "Панель «Показать»",
     hidePanel: "Скрыть панель",
     prevSelected: "Выберите предыдущую",
@@ -301,7 +302,7 @@ export var ruStrings = {
       width: "Встроенная ширина панели",
       minWidth: "Минимальная ширина панели",
       maxWidth: "Максимальная ширина панели",
-      showNumber: "Номерные панели"
+      showNumber: "Пронумеруйте эту панель"
     },
     paneldynamic: {
       name: "Название панели",
@@ -828,6 +829,8 @@ export var ruStrings = {
       header: "Заголовок",
       background: "Фон",
       appearance: "Внешний вид",
+      accentColors: "Акцентные цвета",
+      scaling: "Масштабирование",
       others: "Другие"
     },
     editProperty: "Редактировать свойство '{0}'",
@@ -1289,7 +1292,8 @@ export var ruStrings = {
       innerIndent: "Добавляет пространство или поле между содержимым панели и левой границей рамки панели.",
       startWithNewLine: "Снимите флажок, чтобы отобразить панель в одной строке с предыдущим вопросом или панелью. Этот параметр не применяется, если панель является первым элементом формы.",
       state: "Выберите из: «Развернутая» - панель отображается полностью и может быть свернута; «Свернутая» - панель отображает только заголовок и описание и может быть развернута; «Заблокировано» - панель отображается полностью и не может быть свернута.",
-      width: "Устанавливает ширину панели пропорционально другим элементам съемки в той же линии. Принимает значения CSS (px, %, in, pt и т. д.)."
+      width: "Устанавливает ширину панели пропорционально другим элементам съемки в той же линии. Принимает значения CSS (px, %, in, pt и т. д.).",
+      showQuestionNumbers: "Присваивает номера вопросам, вложенным в эту панель."
     },
     paneldynamic: {
       name: "Идентификатор панели, который не виден респондентам.",
@@ -1387,7 +1391,7 @@ export var ruStrings = {
     logoWidth: "Задает ширину логотипа в единицах CSS (px, %, in, pt и т. д.).",
     logoHeight: "Задает высоту логотипа в единицах CSS (px, %, in, pt и т. д.).",
     logoFit: "Выберите один из следующих вариантов: \"Нет\" - изображение сохраняет свой первоначальный размер; \"Contain\" - размер изображения изменяется по размеру с сохранением его пропорций; «Обложка» - изображение заполняет всю коробку, сохраняя при этом соотношение сторон; \"Заливка\" - изображение растягивается для заполнения поля без сохранения его пропорций.",
-    goNextPageAutomatic: "Выберите, хотите ли вы, чтобы опрос автоматически переходил на следующую страницу после того, как респондент ответит на все вопросы на текущей странице.",
+    goNextPageAutomatic: "Выберите, хотите ли вы, чтобы опрос автоматически переходил на следующую страницу после того, как респондент ответил на все вопросы на текущей странице. Эта функция не будет работать, если последний вопрос на странице является открытым или допускает несколько ответов.",
     allowCompleteSurveyAutomatic: "Выберите, хотите ли Вы, чтобы опрос завершался автоматически после того, как респондент ответит на все вопросы.",
     showNavigationButtons: "Задает видимость и расположение кнопок навигации на странице.",
     showProgressBar: "Задает видимость и расположение индикатора выполнения. Значение «Авто» отображает индикатор выполнения над или под заголовком опроса.",
@@ -1694,6 +1698,20 @@ export var ruStrings = {
       tulip: "Тюльпан",
       brown: "Коричневый",
       green: "Зеленый"
+    }
+  },
+  creatortheme: {
+    "--sjs-special-background": "Фон поверхности",
+    "--sjs-primary-background-500": "Первичный",
+    "--sjs-secondary-background-500": "Вторичный",
+    surfaceScale: "Поверхность",
+    userInterfaceBaseUnit: "Пользовательский интерфейс",
+    fontScale: "Шрифт",
+    names: {
+      sc2020: "Создатель опросов 2020",
+      "default-light": "Свет",
+      "default-dark": "Темный",
+      "default-contrast": "Контраст"
     }
   }
 };
@@ -2369,7 +2387,6 @@ editorLocalization.locales["ru"] = ruStrings;
 // panel.width: "Inline panel width" => "Встроенная ширина панели"
 // panel.minWidth: "Minimum panel width" => "Минимальная ширина панели"
 // panel.maxWidth: "Maximum panel width" => "Максимальная ширина панели"
-// panel.showNumber: "Number panels" => "Номерные панели"
 // paneldynamic.name: "Panel name" => "Название панели"
 // paneldynamic.title: "Panel title" => "Заголовок панели"
 // paneldynamic.description: "Panel description" => "Описание панели"
@@ -2585,7 +2602,6 @@ editorLocalization.locales["ru"] = ruStrings;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "Задает ширину логотипа в единицах CSS (px, %, in, pt и т. д.)."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "Задает высоту логотипа в единицах CSS (px, %, in, pt и т. д.)."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Выберите один из следующих вариантов: \"Нет\" - изображение сохраняет свой первоначальный размер; \"Contain\" - размер изображения изменяется по размеру с сохранением его пропорций; «Обложка» - изображение заполняет всю коробку, сохраняя при этом соотношение сторон; \"Заливка\" - изображение растягивается для заполнения поля без сохранения его пропорций."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "Выберите, хотите ли вы, чтобы опрос автоматически переходил на следующую страницу после того, как респондент ответит на все вопросы на текущей странице."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "Задает видимость и расположение кнопок навигации на странице."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Задает видимость и расположение индикатора выполнения. Значение «Авто» отображает индикатор выполнения над или под заголовком опроса."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "Включите страницу предварительного просмотра, на которой отображаются все вопросы или только ответы на них."
@@ -2880,3 +2896,19 @@ editorLocalization.locales["ru"] = ruStrings;
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Если задано значение 0, высота вычисляется автоматически для размещения содержимого заголовка."
 // p.mobileHeight: "Height on smartphones" => "Высота на смартфонах"
 // header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Когда этот параметр включен, верхняя часть опроса накладывается на нижнюю часть заголовка."
+// ed.creatorSettingTitle: "Creator Settings" => "Настройки создателя контента"
+// tabs.accentColors: "Accent colors" => "Акцентные цвета"
+// tabs.scaling: "Scaling" => "Масштабирование"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "Присваивает номера вопросам, вложенным в эту панель."
+// creatortheme.--sjs-special-background: "Surface background" => "Фон поверхности"
+// creatortheme.--sjs-primary-background-500: "Primary" => "Первичный"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "Вторичный"
+// creatortheme.surfaceScale: "Surface" => "Поверхность"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "Пользовательский интерфейс"
+// creatortheme.fontScale: "Font" => "Шрифт"
+// names.sc2020: "Survey Creator 2020" => "Создатель опросов 2020"
+// names.default-light: "Light" => "Свет"
+// names.default-dark: "Dark" => "Темный"
+// names.default-contrast: "Contrast" => "Контраст"
+// panel.showNumber: "Number this panel" => "Пронумеруйте эту панель"
+// pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Выберите, хотите ли вы, чтобы опрос автоматически переходил на следующую страницу после того, как респондент ответил на все вопросы на текущей странице. Эта функция не будет работать, если последний вопрос на странице является открытым или допускает несколько ответов."
