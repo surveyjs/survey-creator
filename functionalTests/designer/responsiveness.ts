@@ -245,17 +245,13 @@ test("test tab for mobile devices", async (t) => {
     .expect(creatorFooterToolbarActions.nth(1).id).eql("svd-preview")
     .expect(creatorFooterToolbarActions.nth(2).id).eql("prevPage")
     .expect(creatorFooterToolbarActions.find(".sv-action-bar-item").nth(2).hasAttribute("disabled")).eql(true)
-    //.expect(creatorFooterToolbarActions.nth(2).hasClass("sv-action-bar-item--secondary")).notOk()
     .expect(creatorFooterToolbarActions.nth(3).id).eql("nextPage")
     .expect(creatorFooterToolbarActions.find(".sv-action-bar-item").nth(3).hasAttribute("disabled")).eql(false)
-    //.expect(creatorFooterToolbarActions.nth(3).hasClass("sv-action-bar-item--secondary")).ok()
     .expect(creatorFooterToolbarActions.nth(4).id).eql("showInvisible")
 
     .click(creatorFooterToolbarActions.nth(3))
     .expect(creatorFooterToolbarActions.find(".sv-action-bar-item").nth(2).hasAttribute("disabled")).eql(false)
-    //.expect(creatorFooterToolbarActions.nth(2).hasClass("sv-action-bar-item--secondary")).ok()
     .expect(creatorFooterToolbarActions.find(".sv-action-bar-item").nth(3).hasAttribute("disabled")).eql(true)
-    //.expect(creatorFooterToolbarActions.nth(3).hasClass("sv-action-bar-item--secondary")).notOk()
 
     .resizeWindow(1920, 900)
     .expect(testTabToolbar.exists).ok()

@@ -67,7 +67,6 @@ svc-question {
   background-color: transparent;
   transition:
     background $creator-transition-duration,
-    color $creator-transition-duration,
     opacity $creator-transition-duration;
 }
 
@@ -137,6 +136,7 @@ svc-question {
 .svc-survey-element-toolbar-item__title {
   @include ctrSmallBoldFont;
   color: var(--ctr-survey-question-panel-toolbar-item-text-color, $foreground);
+  transition: color $creator-transition-duration,
 }
 
 .svc-question__adorner {

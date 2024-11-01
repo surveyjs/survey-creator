@@ -139,11 +139,6 @@
     opacity: var(--ctr-menu-toolbar-button-opacity-disabled, 0.25);
   }
 
-  .sv-action-bar-item--secondary {
-    .sv-action-bar-item__icon use {
-      fill: $secondary;
-    }
-  }
 
   .sv-action-bar-item--active {
     .sv-action-bar-item__icon use {
