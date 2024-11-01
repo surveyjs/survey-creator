@@ -278,7 +278,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     this.creator.focusElement(undefined, true);
   }
 
-  public deactivate(): boolean {
+  public deactivate(): void {
     if (this.model) {
       this.model.dispose();
     }
@@ -291,7 +291,6 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     this.creator.sidebar.sideAreaComponentName = undefined;
     this.creator.sidebar.sideAreaComponentData = undefined;
     this.creator.sidebar.header.reset();
-    return true;
   }
   public onDesignerSurveyPropertyChanged(obj: Base, propName: string): void {
     if (!!this.model) {

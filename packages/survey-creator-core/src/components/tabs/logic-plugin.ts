@@ -71,9 +71,8 @@ export class TabLogicPlugin implements ICreatorPlugin {
     }
     onSuccess();
   }
-  public deactivate(): boolean {
+  public deactivate(): void {
     this.disposeObjs();
-    return true;
   }
   public dispose(): void {
     this.disposeObjs();

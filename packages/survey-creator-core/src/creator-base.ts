@@ -1197,15 +1197,13 @@ export class SurveyCreatorModel extends Base
     const chaningOptions = { tabName: viewName, allow: allow, model: this.currentPlugin?.model };
     this.onActiveTabChanging.fire(this, chaningOptions);
     if (!chaningOptions.allow) return;
-    if (!this.canSwitchViewType()) return false;
+    if(!!this.currentPlugin && this.currentPlugin.deactivate) {
+      this.currentPlugin.deactivate();
+    }
     const plugin = this.activatePlugin(viewName);
     this.viewType = viewName;
     this.onActiveTabChanged.fire(this, { tabName: viewName, plugin: plugin, model: !!plugin ? plugin.model : undefined });
     return true;
-  }
-  private canSwitchViewType(): boolean {
-    const plugin: ICreatorPlugin = this.currentPlugin;
-    return !plugin || !plugin.deactivate || plugin.deactivate();
   }
   private activatePlugin(newType: string): ICreatorPlugin {
     const plugin: ICreatorPlugin = this.getPlugin(newType);
@@ -2137,14 +2135,23 @@ export class SurveyCreatorModel extends Base
     }
   }
 
-  public changeText(value: string, clearState = false): void {
+  public changeText(value: string, clearState = false, trustJSON?: boolean): void {
     this.setTextValue(value);
     if (!value) {
       this.initSurveyWithJSON(undefined, clearState);
     } else {
-      const textWorker = new SurveyTextWorker(value);
-      if (textWorker.isJsonCorrect || !!textWorker.survey) {
-        this.initSurveyWithJSON(textWorker.survey.toJSON(), clearState);
+      let jsonText = trustJSON ? value : undefined;
+      if(!trustJSON) {
+        const textWorker = new SurveyTextWorker(value);
+        if(textWorker.isJsonCorrect) {
+          jsonText = value;
+        }
+        else if(!!textWorker.survey) {
+          jsonText = textWorker.survey.toJSON();
+        }
+      }
+      if (!!jsonText) {
+        this.initSurveyWithJSON(jsonText, clearState);
       } else {
         this.viewType = "editor";
       }

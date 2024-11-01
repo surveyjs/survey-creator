@@ -189,7 +189,7 @@ export interface ICollectionItemAllowOperations {
 export interface ICreatorPlugin {
   activate: () => void;
   update?: () => void;
-  deactivate?: () => boolean;
+  deactivate?: () => void;
   canDeactivateAsync?: (onSuccess: () => void) => void;
   defaultAllowingDeactivate?: () => boolean | undefined;
   dispose?: () => void;
