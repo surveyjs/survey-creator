@@ -72,10 +72,10 @@ svc-page {
   --ctr-survey-question-panel-toolbar-button-gap: calc(var(--ctr-survey-question-panel-toolbar-gap) / 2);
   margin: 0 var(--ctr-survey-question-panel-toolbar-button-gap, calcSize(0.5));
   border-radius: var(--ctr-survey-page-toolbar-item-corner-radius, calcSize(0.5));
-  padding: var(--ctr-survey-question-panel-toolbar-item-padding-top, calcSize(0.5))
-    var(--ctr-survey-question-panel-toolbar-item-padding-right, calcSize(0.5))
-    var(--ctr-survey-question-panel-toolbar-item-padding-bottom, calcSize(0.5))
-    var(--ctr-survey-question-panel-toolbar-item-padding-left, calcSize(0.5));
+  padding: var(--ctr-survey-question-panel-toolbar-item-padding-top, calcSize(1))
+    var(--ctr-survey-question-panel-toolbar-item-padding-right, calcSize(1))
+    var(--ctr-survey-question-panel-toolbar-item-padding-bottom, calcSize(1))
+    var(--ctr-survey-question-panel-toolbar-item-padding-left, calcSize(1));
   justify-content: center;
   align-items: center;
 
@@ -86,9 +86,9 @@ svc-page {
 .svc-page-toolbar__item--with-text {
   padding: var(--ctr-survey-question-panel-toolbar-item-padding-top, calcSize(0.5))
     var(--ctr-survey-question-panel-toolbar-item-padding-right-with-text, calcSize(1))
-    var(--ctr-survey-question-panel-toolbar-item-padding-bottom, calcSize(0.5))
-    var(--ctr-survey-question-panel-toolbar-item-padding-left, calcSize(0.5));
-  gap: var(--ctr-survey-question-panel-toolbar-item-gap, calcSize(0.5));
+    var(--ctr-survey-question-panel-toolbar-item-padding-bottom, calcSize(1))
+    var(--ctr-survey-question-panel-toolbar-item-padding-left, calcSize(1));
+  gap: var(--ctr-survey-question-panel-toolbar-item-gap, calcSize(1));
 }
 
 //hovered state
