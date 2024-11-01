@@ -12,7 +12,7 @@
             }}</span>
           </div>
         </div>
-        <SvComponent :is="'sv-popup'" :model="model.popupModel"></SvComponent>
+        <SvComponent :is="'sv-popup'"></SvComponent>
       </div>
     </div>
   </div>

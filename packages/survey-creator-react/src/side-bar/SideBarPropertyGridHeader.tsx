@@ -27,7 +27,7 @@ class SideBarPropertyGridHeader extends SurveyElementBase<ISideBarPropertyGridHe
                 <span className="svc-sidebar__header-subtitle">{this.objectSelectionAction.tooltip}</span>
               </div>
             </div>
-            <Popup model={this.objectSelectionAction.popupModel} getTarget={getActionDropdownButtonTarget}></Popup>
+            <Popup model={this.objectSelectionAction.popupModel}></Popup>
           </div>
         </div>
       </div>

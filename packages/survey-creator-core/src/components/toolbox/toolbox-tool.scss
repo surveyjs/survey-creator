@@ -311,10 +311,10 @@
   }
 
   .sv-popup__scrolling-content {
-    padding-top: calc(var(--ctr-toolbox-submenu-group-margin-top, 0px));
-    padding-inline-end: var(--ctr-toolbox-submenu-group-margin-right, 0px);
-    padding-bottom: var(--ctr-toolbox-submenu-group-margin-bottom-last, 0px);
-    padding-inline-start: var(--ctr-toolbox-submenu-group-margin-left, 0px);
+    padding-top: calc(var(--ctr-toolbox-submenu-group-margin-top, 12px));
+    padding-inline-end: var(--ctr-toolbox-submenu-group-margin-right, 12px);
+    padding-bottom: var(--ctr-toolbox-submenu-group-margin-bottom-last, 12px);
+    padding-inline-start: var(--ctr-toolbox-submenu-group-margin-left, 12px);
     overflow: visible;
   }
 

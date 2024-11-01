@@ -245,6 +245,7 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
     if (!items || items.length < 1) return;
 
     this.setSubItems({ items: items });
+    this.popupModel.getAreaCallback = this.getArea;
     this.component = QuestionToolbox.defaultItemGroupComponent;
   }
   /**
