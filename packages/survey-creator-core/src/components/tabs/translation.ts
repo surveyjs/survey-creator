@@ -902,12 +902,14 @@ export class Translation extends Base implements ITranslationLocales {
         const cellQuestion = <QuestionCommentModel>options.cell.question;
         const item = getTransationItem(options.question, options.row.name);
         this.setPlaceHolder(cellQuestion, item, options.columnName);
+        let isMultiLine = false;
         if (!!item) {
           cellQuestion.maxLength = item.maxLength;
           const loc = item.locString;
-          cellQuestion.acceptCarriageReturn = loc.getIsMultiple() || (<LocalizableString>loc).allowLineBreaks;
+          isMultiLine = loc.getIsMultiple();
+          cellQuestion.acceptCarriageReturn = isMultiLine || (<LocalizableString>loc).allowLineBreaks;
         }
-        if (!cellQuestion.acceptCarriageReturn) {
+        if (!isMultiLine) {
           cellQuestion.rows = 1;
         }
       }
