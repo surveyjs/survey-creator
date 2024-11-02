@@ -23,7 +23,7 @@ export var fiStrings = {
     translation: "Käännös",
     designer: "Kyselyn suunnittelija",
     editor: "JSON Editori",
-    logic: "Kysely logiikka"
+    logic: "Kyselyn logiikka"
   },
   // Question types
   qt: {
@@ -87,12 +87,12 @@ export var fiStrings = {
     deletePage: "Poista sivu",
     editPage: "Muokkaa sivua",
     edit: "Muokkaa",
-    newPageName: "sivu",
+    newPageName: "Sivu",
     newQuestionName: "kysymys",
-    newPanelName: "paneeli",
-    newTextItemName: "teksti",
+    newPanelName: "Paneeli",
+    newTextItemName: "Teksti",
     defaultV2Theme: "Oletus",
-    modernTheme: "Nykyaikainen",
+    modernTheme: "Moderni",
     defaultTheme: "Oletus (vanha)",
     testSurveyAgain: "Testaa kysely uudestaan",
     testSurveyWidth: "Kyselyn leveys: ",
@@ -121,7 +121,7 @@ export var fiStrings = {
     generateValidJSON: "Luo kelvollinen JSON",
     generateReadableJSON: "Luo luettava JSON",
     toolbox: "Työkalupakki",
-    "property-grid": "Properties",
+    "property-grid": "Ominaisuudet",
     toolboxFilteredTextPlaceholder: "Kirjoita etsiäksesi...",
     toolboxNoResultsFound: "Tuloksia ei löytynyt",
     propertyGridFilteredTextPlaceholder: "Kirjoita etsiäksesi...",
@@ -243,8 +243,8 @@ export var fiStrings = {
       trigger_setvalueDescription: "Kun loogisessa lausekkeessa käytettyjä kysymysarvoja muutetaan ja looginen lauseke palauttaa arvon tosi, arvo asetetaan valitulle kysymykselle.",
       trigger_copyvalueDescription: "Kun loogisessa lausekkeessa käytettyjä kysymysarvoja muutetaan ja looginen lauseke palauttaa arvon tosi, yhden valitun kysymyksen arvo kopioidaan toiseen valittuun kysymykseen.",
       trigger_skipDescription: "Kun looginen lauseke palauttaa arvon tosi, kysely siirtyy valittuun kysymykseen / kohdista valittu kysymys.",
-      trigger_runExpressionDescription: "When the logic expression returns true, then the custom expression is performed. You may optionally set this expression result into the selected question",
-      completedHtmlOnConditionDescription: "If the logic expression returns true, then the default text for the 'Thank you page' is changed to the given one.",
+      trigger_runExpressionDescription: "Kun looginen lauseke palauttaa arvon tosi, mukautettu lauseke suoritetaan. Voit valinnaisesti asettaa tämän lausekkeen tuloksen valittuun kysymykseen.",
+      completedHtmlOnConditionDescription: "Jos looginen lauseke palauttaa arvon tosi, 'Kiitos-sivun' oletusteksti muutetaan annetuksi tekstiksi.",
       itemExpressionText: "Kun lauseke: '{0}' palauttaa arvon tosi:", //{0} - the expression
       itemEmptyExpressionText: "Uusi sääntö",
       page_visibilityText: "Tee sivu {0} näkyväksi", //{0} page name
@@ -253,7 +253,7 @@ export var fiStrings = {
       question_visibilityText: "Tee kysymys {0} näkyväksi", //{0} question name
       question_enableText: "Ota kysymys {0} käyttöön", //{0} question name
       question_requireText: "Tee kysymyksestä {0} pakollinen", //{0} question name
-      question_resetValueText: "nollaa kysymyksen arvo: {0}", //{0} question name.
+      question_resetValueText: "Nollaa kysymyksen arvo: {0}", //{0} question name.
       question_setValueText: "Määritä arvo: {1} kysymykseen: {0}",
       column_visibilityText: "Tee kysymyksen {1} sarakkeesta {0} näkyvä", //{0} column name, {1} question name
       column_enableText: "Ota kysymyksen sarake {0} {1} käyttöön", //{0} column name, {1} question name
@@ -362,7 +362,7 @@ export var fiStrings = {
       allowClear: "Näytä Tyhjennä-painike allekirjoitusalueella",
       penMinWidth: "Kynän vähimmäisleveys",
       penMaxWidth: "Kynän enimmäisleveys",
-      penColor: "Iskun väri"
+      penColor: "Kynän väri"
     },
     comment: {
       rows: "Syöttökentän korkeus (viivoina)"
@@ -383,12 +383,12 @@ export var fiStrings = {
     },
     // survey templates
     survey: {
-      title: "Nimike",
-      description: "Tutkimuksen kuvaus"
+      title: "Kyselyn otsikko",
+      description: "Kyselyn kuvaus"
     },
     page: {
       name: "Sivun nimi",
-      title: "Nimike",
+      title: "Sivun otsikko",
       description: "Sivun kuvaus",
       visibleIf: "Tee sivusta näkyvä, jos",
       requiredIf: "Tee sivusta pakollinen, jos",
@@ -408,10 +408,10 @@ export var fiStrings = {
     },
     multipletextitem: {
       name: "Nimi",
-      title: "Nimike"
+      title: "Otsikko"
     },
     masksettings: {
-      saveMaskedValue: "Peitetyn arvon tallentaminen kyselyn tuloksiin"
+      saveMaskedValue: "Peittoarvon tallentaminen kyselyn tuloksiin"
     },
     patternmask: {
       pattern: "Arvon kuvio"
@@ -440,7 +440,7 @@ export var fiStrings = {
     cellErrorLocation: "Solun virhesanoman tasaus",
     enabled: "Käytössä",
     disabled: "Pois käytöstä",
-    inherit: "Periä",
+    inherit: "Peri",
     apply: "Käytä",
     ok: "OK",
     save: "Tallenna",
@@ -451,7 +451,7 @@ export var fiStrings = {
     reset: "Nollaa",
     change: "Muuttaa",
     refresh: "Päivitä",
-    close: "Sulkea",
+    close: "Sulje",
     delete: "Poista",
     add: "Lisää",
     addNew: "Lisää uusi",
@@ -517,7 +517,7 @@ export var fiStrings = {
     expressionIsEmpty: "Lauseke on tyhjä",
     value: "Arvo",
     text: "Teksti",
-    rowid: "Rivi ID",
+    rowid: "Rivin ID",
     imageLink: "Kuvalinkki",
     columnEdit: "Muokkaa saraketta: {0}",
     itemEdit: "Muokkaa kohdetta: {0}",
@@ -661,7 +661,7 @@ export var fiStrings = {
     allowDigits: "Salli numerot",
     minCount: "Vähimmäismäärä",
     maxCount: "Enimmäismäärä",
-    regex: "Regular expression",
+    regex: "Säännöllinen lauseke",
     surveyvalidator: {
       text: "Virheviesti",
       expression: "Vahvistuksen lauseke"
@@ -692,8 +692,8 @@ export var fiStrings = {
     loadingHtml: "Merkintä, joka näkyy, kun kyselymalli latautuu",
     commentText: "Kommenttialueen teksti",
     autocomplete: "Automaattisen täydennyksen tyyppi",
-    labelTrue: "\"True\"-merkintä",
-    labelFalse: "Epätosi-tunniste",
+    labelTrue: "Tosi-merkintä",
+    labelFalse: "Epätosi-merkintä",
     allowClear: "Näytä Tyhjennä-painike",
     searchMode: "Hakutila",
     displayStyle: "Arvon näyttötyyli",
@@ -731,7 +731,7 @@ export var fiStrings = {
     horizontalScroll: "Näytä vaakasuora vierityspalkki",
     columnMinWidth: "Sarakkeen vähimmäisleveys (CSS-hyväksytyissä arvoissa)",
     rowTitleWidth: "Riviotsikon leveys (CSS-hyväksytyissä arvoissa)",
-    valueTrue: "\"Tosi\"-arvo",
+    valueTrue: "Tosi-arvo",
     valueFalse: "Epätosi-arvo",
     minErrorText: "Arvo on alle minimin -virhesanoma",
     maxErrorText: "\"Arvo ylittää maksimin\" -virhesanoma",
@@ -931,8 +931,8 @@ export var fiStrings = {
   },
   // Property values
   pv: {
-    "true": "tosi",
-    "false": "väärä",
+    "true": "Tosi",
+    "false": "Epätosi",
     file: "Paikalliset tiedostot",
     camera: "Kamera",
     "file-camera": "Paikalliset tiedostot tai kamera",
@@ -944,64 +944,64 @@ export var fiStrings = {
     random: "Satunnainen",
     collapsed: "Pienennetty",
     expanded: "Laajennettu",
-    none: "None",
+    none: "Ei mitään",
     asc: "Nouseva",
     desc: "Laskeva",
     indeterminate: "Määrittämätön",
     selected: "Valittu",
     unselected: "Valitsematta",
-    decimal: "desimaali",
-    currency: "valuutta",
-    percent: "prosentti",
-    firstExpanded: "firstExpanded",
-    off: "off",
-    list: "list",
+    decimal: "Desimaali",
+    currency: "Valuutta",
+    percent: "Prosentti",
+    firstExpanded: "Ensimmäinen laajennettu",
+    off: "Pois",
+    list: "Lista",
     carousel: "Karuselli",
     tab: "Välilehdet",
-    progressTop: "progressTop",
-    progressBottom: "progressBottom",
-    progressTopBottom: "progressTopBottom",
+    progressTop: "Edistyminen ylhäällä",
+    progressBottom: "Edistyminen alhaalla",
+    progressTopBottom: "Edistyminen ylhäällä ja alhaalla",
     horizontal: "Vaaka",
     vertical: "Pysty",
-    top: "top",
-    bottom: "bottom",
-    topBottom: "top and bottom",
-    both: "both",
-    left: "left",
+    top: "Ylhäällä",
+    bottom: "Alhaalla",
+    topBottom: "Ylhäällä ja alhaalla",
+    both: "Molemmat",
+    left: "Vasen",
     right: "Oikea",
-    center: "Keskus",
+    center: "Keskellä",
     leftRight: "Vasen ja oikea",
-    middle: "Keskus",
-    color: "väri",
-    date: "päivämäärä",
-    datetime: "päivämäärä ja aika",
+    middle: "Keskimmäinen",
+    color: "Väri",
+    date: "Päivämäärä",
+    datetime: "Päivämäärä ja aika",
     "datetime-local": "datetime-local",
     email: "Sähköposti",
-    month: "kuukausi",
-    number: "numero",
-    password: "salasana",
-    range: "etäisyys",
-    tel: "puh",
+    month: "Kuukausi",
+    number: "Numero",
+    password: "Salasana",
+    range: "Etäisyys",
+    tel: "Puh",
     text: "Tekstiviesti",
     time: "Aika",
     url: "URL",
-    week: "viikko",
+    week: "Viikko",
     hidden: "Piilotettu",
     edit: "Muokkaa",
     display: "Näytä",
     contain: "Sisältää",
-    cover: "Kansi",
+    cover: "Peittää",
     fill: "Täyttää",
     next: "Seuraava",
     last: "Viimeinen",
-    onComplete: "onComplete",
-    onHidden: "onHidden",
+    onComplete: "Valmistuessa",
+    onHidden: "Piilotettaessa",
     onHiddenContainer: "Kun kysymys tai sen paneeli/sivu piilotetaan",
     clearInvisibleValues: {
-      none: "Koskaan"
+      none: "Ei mitään"
     },
     clearIfInvisible: {
-      none: "Koskaan"
+      none: "Ei mitään"
     },
     inputType: {
       color: "Väri",
@@ -1019,14 +1019,14 @@ export var fiStrings = {
       week: "Viikko"
     },
     maskType: {
-      none: "Ei lainkaan",
+      none: "Ei mitään",
       pattern: "Kuvio",
       numeric: "Numeerinen",
       datetime: "Päivämäärä ja kellonaika",
       currency: "Valuutta"
     },
     inputTextAlignment: {
-      auto: "Auto",
+      auto: "Automaattinen",
       left: "Vasen",
       right: "Oikea"
     },
@@ -1047,7 +1047,7 @@ export var fiStrings = {
     pages: "Valmiit sivut",
     questions: "Vastatut kysymykset",
     requiredQuestions: "Vastatut vaaditut kysymykset",
-    correctQuestions: "Kelvolliset vastaukset",
+    correctQuestions: "Oikeat vastaukset",
     buttons: "Valmiit sivut (painike Käyttöliittymä)",
     underInput: "Tulon alla",
     underTitle: "Otsikon alla",
@@ -1057,7 +1057,7 @@ export var fiStrings = {
     underRowSingle: "Rivin alla näkyy vain yksi paneeli",
     auto: "Automaattinen",
     showNavigationButtons: {
-      none: "Piilevä"
+      none: "Ei mitään"
     },
     timerInfoMode: {
       combined: "Molemmat"
@@ -1073,7 +1073,7 @@ export var fiStrings = {
     },
     widthMode: {
       static: "Staattinen",
-      responsive: "Reagoiva"
+      responsive: "Responsiivinen"
     },
     contentMode: {
       image: "Kuva",
@@ -1161,7 +1161,7 @@ export var fiStrings = {
     },
     backgroundImageFit: {
       auto: "Auto",
-      cover: "Kansi",
+      cover: "Peittää",
       contain: "Sisältää",
       fill: "Venyä",
       tile: "Laatta"
@@ -1179,12 +1179,12 @@ export var fiStrings = {
       container: "Sovita konttiin"
     },
     backgroundColorSwitch: {
-      none: "Ei lainkaan",
+      none: "Ei mitään",
       accentColor: "Korostusväri",
       custom: "Tapa"
     },
     colorPalette: {
-      light: "Valo",
+      light: "Vaalea",
       dark: "Tumma"
     },
     isPanelless: {
@@ -1588,15 +1588,15 @@ export var fiStrings = {
     choicesLazyLoadEnabled: "Valinnat laiska kuorma käytössä",
     choicesLazyLoadPageSize: "Valinnat laiska lataussivun koko",
     inputFieldComponent: "Syöttökentän komponentti",
-    itemComponent: "Nimikkeen osa",
+    itemComponent: "Kohteen osa",
     min: "Min",
     max: "Max",
     minValueExpression: "Pienin arvon lauseke",
     maxValueExpression: "Enimmäisarvon lauseke",
     step: "Askel",
     dataList: "Tietoluettelo",
-    itemSize: "itemSize",
-    itemTitleWidth: "Nimikkeen otsikon leveys (px)",
+    itemSize: "Kohteen koko",
+    itemTitleWidth: "Kohteen otsikon leveys (px)",
     inputTextAlignment: "Syöttöarvon tasaus",
     elements: "Elementit",
     content: "Sisältö",
@@ -1606,7 +1606,7 @@ export var fiStrings = {
     longTap: "Pitkä napautus",
     autoGrow: "Automaattinen kasvu",
     allowResize: "Salli koon muuttaminen",
-    acceptCarriageReturn: "Hyväksy vaunun palautus",
+    acceptCarriageReturn: "Hyväksy kursorin palautus",
     displayMode: "Näyttötila",
     rateType: "Hinnan tyyppi",
     label: "Merkintä",
