@@ -2140,24 +2140,26 @@ export class SurveyCreatorModel extends Base
     if (!value) {
       this.initSurveyWithJSON(undefined, clearState);
     } else {
-      let jsonText = trustJSON ? JSON.parse(value) : undefined;
+      let jsonValue = trustJSON ? this.parseJSON(value) : undefined;
       if(!trustJSON) {
         const textWorker = new SurveyTextWorker(value);
         if(textWorker.isJsonCorrect) {
-          jsonText = value;
+          jsonValue = this.parseJSON(value);
         }
         else if(!!textWorker.survey) {
-          jsonText = textWorker.survey.toJSON();
+          jsonValue = textWorker.survey.toJSON();
         }
       }
-      if (!!jsonText) {
-        this.initSurveyWithJSON(jsonText, clearState);
+      if (!!jsonValue) {
+        this.initSurveyWithJSON(jsonValue, clearState);
       } else {
         this.viewType = "editor";
       }
     }
   }
-
+  private parseJSON(val: string): any {
+    return new SurveyJSON5().parse(val);
+  }
   /**
    * A survey JSON schema as a string.
    * 
