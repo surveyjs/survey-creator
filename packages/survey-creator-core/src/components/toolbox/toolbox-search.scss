@@ -17,7 +17,9 @@
   .svc-search__input {
     color: var(--ctr-toolbox-search-text-color, $foreground);
   }
-
+  .svc-search__input::placeholder {
+    color: var(--ctr-toolbox-search-text-color-placeholder, $foreground-light);
+  }
   .svc-search__bar-item {
     &:hover:enabled {
       background-color: var(--ctr-toolbox-search-clear-button-background-color-hovered, $red-light);
