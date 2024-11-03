@@ -127,6 +127,8 @@ export class QuestionToolboxCategory extends Base {
  * An object of this class is returned by the `QuestionToolbox`'s [`getItemByName(name)`](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolbox#getItemByName) method.
  */
 export class QuestionToolboxItem extends Action implements IQuestionToolboxItem {
+  public propName: string;
+  public propValue: string;
   static getItemClassNames(iconName?: string): string {
     return new CssClassBuilder()
       .append("svc-toolbox__item")
@@ -400,7 +402,7 @@ export class QuestionToolbox
   @property({ defaultValue: false }) private showCategoryTitlesValue: boolean;
   private dragOrClickHelper: DragOrClickHelper;
 
-  public toolboxNoResultsFound = getLocString("ed.toolboxNoResultsFound");
+  public get toolboxNoResultsFound() { return getLocString("ed.toolboxNoResultsFound"); }
 
   //koItems = ko.observableArray();
   /**
@@ -804,11 +806,12 @@ export class QuestionToolbox
         isCopied: false,
         component: QuestionToolbox.defaultItemComponent
       });
+      innerItem.propName = propName;
+      innerItem.propValue = ch;
       return innerItem;
     });
     return newItems;
   }
-
   /**
    * Adds a new item to the Toolbox.
    * @param item A [toolbox item configuration](https://surveyjs.io/survey-creator/documentation/api-reference/iquestiontoolboxitem).
@@ -934,14 +937,25 @@ export class QuestionToolbox
   }
   public updateTitles(): void {
     this.actions.forEach(action => {
-      this.updateActionTitle(action);
-      this.updateActionTitle(action.innerItem);
+      this.updateToolboxItemTitle(action);
     });
     if (Array.isArray(this.categories)) {
       this.categories.forEach(category => {
         category.title = this.getCategoryTitle(category.name);
       });
     }
+  }
+  private updateToolboxItemTitle(item: QuestionToolboxItem): void {
+    this.updateActionTitle(item);
+    this.updateActionTitle(item.innerItem);
+    if(!Array.isArray(item.items)) return;
+    item.items.forEach(subItem => {
+      const propName = subItem.propName;
+      const propValue = subItem.propValue;
+      if(!!propName && !!propValue) {
+        subItem.title = editorLocalization.getPropertyValueInEditor(propName, propValue);
+      }
+    });
   }
   private updateActionTitle(action: IAction): void {
     const newTitle = editorLocalization.getString("qt." + action.id);
