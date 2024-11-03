@@ -1018,6 +1018,61 @@ export var fiStrings = {
       url: "URL",
       week: "Viikko"
     },
+    autocomplete: {
+      name: "Koko nimi",
+      "honorific-prefix": "Etuliite",
+      "given-name": "Etunimi",
+      "additional-name": "Toinen nimi",
+      "family-name": "Sukunimi",
+      "honorific-suffix": "Suffiksi",
+      nickname: "Lempinimi",
+      "organization-title": "Tehtävänimike",
+      username: "Käyttäjänimi",
+      "new-password": "Uusi salasana",
+      "current-password": "Nykyinen salasana",
+      organization: "Organisaation nimi",
+      "street-address": "Koko kadun osoite",
+      "address-line1": "Osoite, rivi 1",
+      "address-line2": "Osoite, rivi 2",
+      "address-line3": "Osoite, rivi 3",
+      "address-level4": "Tason 4 osoite",
+      "address-level3": "Tason 3 osoite",
+      "address-level2": "Tason 2 osoite",
+      "address-level1": "Tason 1 osoite",
+      country: "Maakoodi",
+      "country-name": "Maan nimi",
+      "postal-code": "Postinumero",
+      "cc-name": "Kortinhaltijan nimi",
+      "cc-given-name": "Kortinhaltijan etunimi",
+      "cc-additional-name": "Kortinhaltijan toinen nimi",
+      "cc-family-name": "Kortinhaltijan sukunimi",
+      "cc-number": "Luottokortin numero",
+      "cc-exp": "Vanhentumispäivä",
+      "cc-exp-month": "Viimeinen voimassaolokuukausi",
+      "cc-exp-year": "Vanhentumisvuosi",
+      "cc-csc": "Kortin turvakoodi",
+      "cc-type": "Luottokortin tyyppi",
+      "transaction-currency": "Tapahtuman valuutta",
+      "transaction-amount": "Tapahtuman summa",
+      language: "Ensisijainen kieli",
+      bday: "Syntymäpäivä",
+      "bday-day": "Syntymäpäivä",
+      "bday-month": "Syntymäpäivä kuukausi",
+      "bday-year": "Syntymäpäivä vuosi",
+      sex: "Sukupuoli",
+      url: "Verkkosivuston URL-osoite",
+      photo: "Profiilikuva",
+      tel: "Puhelinnumero",
+      "tel-country-code": "Puhelimen maakoodi",
+      "tel-national": "Kansallinen puhelinnumero",
+      "tel-area-code": "Suuntanumero",
+      "tel-local": "Paikallinen puhelinnumero",
+      "tel-local-prefix": "Paikallisen puhelimen etuliite",
+      "tel-local-suffix": "Paikallisen puhelimen pääte",
+      "tel-extension": "Puhelimen laajennus",
+      email: "Sähköpostiosoite",
+      impp: "Pikaviestiprotokolla"
+    },
     maskType: {
       none: "Ei mitään",
       pattern: "Kuvio",
@@ -2825,3 +2880,56 @@ editorLocalization.locales["fi"] = fiStrings;
 // names.default-contrast: "Contrast" => "Kontrasti"
 // panel.showNumber: "Number this panel" => "Numeroi tämä paneeli"
 // pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Valitse tämä, jos haluat, että kysely siirtyy automaattisesti seuraavalle sivulle, kun vastaaja on vastannut kaikkiin nykyisen sivun kysymyksiin. Tätä ominaisuutta ei käytetä, jos sivun viimeinen kysymys on avoin tai sallii useita vastauksia."
+// autocomplete.name: "Full Name" => "Koko nimi"
+// autocomplete.honorific-prefix: "Prefix" => "Etuliite"
+// autocomplete.given-name: "First Name" => "Etunimi"
+// autocomplete.additional-name: "Middle Name" => "Toinen nimi"
+// autocomplete.family-name: "Last Name" => "Sukunimi"
+// autocomplete.honorific-suffix: "Suffix" => "Suffiksi"
+// autocomplete.nickname: "Nickname" => "Lempinimi"
+// autocomplete.organization-title: "Job Title" => "Tehtävänimike"
+// autocomplete.username: "User Name" => "Käyttäjänimi"
+// autocomplete.new-password: "New Password" => "Uusi salasana"
+// autocomplete.current-password: "Current Password" => "Nykyinen salasana"
+// autocomplete.organization: "Organization Name" => "Organisaation nimi"
+// autocomplete.street-address: "Full Street Address" => "Koko kadun osoite"
+// autocomplete.address-line1: "Address Line 1" => "Osoite, rivi 1"
+// autocomplete.address-line2: "Address Line 2" => "Osoite, rivi 2"
+// autocomplete.address-line3: "Address Line 3" => "Osoite, rivi 3"
+// autocomplete.address-level4: "Level 4 Address" => "Tason 4 osoite"
+// autocomplete.address-level3: "Level 3 Address" => "Tason 3 osoite"
+// autocomplete.address-level2: "Level 2 Address" => "Tason 2 osoite"
+// autocomplete.address-level1: "Level 1 Address" => "Tason 1 osoite"
+// autocomplete.country: "Country Code" => "Maakoodi"
+// autocomplete.country-name: "Country Name" => "Maan nimi"
+// autocomplete.postal-code: "Postal Code" => "Postinumero"
+// autocomplete.cc-name: "Cardholder Name" => "Kortinhaltijan nimi"
+// autocomplete.cc-given-name: "Cardholder First Name" => "Kortinhaltijan etunimi"
+// autocomplete.cc-additional-name: "Cardholder Middle Name" => "Kortinhaltijan toinen nimi"
+// autocomplete.cc-family-name: "Cardholder Last Name" => "Kortinhaltijan sukunimi"
+// autocomplete.cc-number: "Credit Card Number" => "Luottokortin numero"
+// autocomplete.cc-exp: "Expiration Date" => "Vanhentumispäivä"
+// autocomplete.cc-exp-month: "Expiration Month" => "Viimeinen voimassaolokuukausi"
+// autocomplete.cc-exp-year: "Expiration Year" => "Vanhentumisvuosi"
+// autocomplete.cc-csc: "Card Security Code" => "Kortin turvakoodi"
+// autocomplete.cc-type: "Credit Card Type" => "Luottokortin tyyppi"
+// autocomplete.transaction-currency: "Transaction Currency" => "Tapahtuman valuutta"
+// autocomplete.transaction-amount: "Transaction Amount" => "Tapahtuman summa"
+// autocomplete.language: "Preferred Language" => "Ensisijainen kieli"
+// autocomplete.bday: "Birthday" => "Syntymäpäivä"
+// autocomplete.bday-day: "Birthday Day" => "Syntymäpäivä"
+// autocomplete.bday-month: "Birthday Month" => "Syntymäpäivä kuukausi"
+// autocomplete.bday-year: "Birthday Year" => "Syntymäpäivä vuosi"
+// autocomplete.sex: "Gender" => "Sukupuoli"
+// autocomplete.url: "Website URL" => "Verkkosivuston URL-osoite"
+// autocomplete.photo: "Profile Photo" => "Profiilikuva"
+// autocomplete.tel: "Telephone Number" => "Puhelinnumero"
+// autocomplete.tel-country-code: "Country Code for Phone" => "Puhelimen maakoodi"
+// autocomplete.tel-national: "National Telephone Number" => "Kansallinen puhelinnumero"
+// autocomplete.tel-area-code: "Area Code" => "Suuntanumero"
+// autocomplete.tel-local: "Local Phone Number" => "Paikallinen puhelinnumero"
+// autocomplete.tel-local-prefix: "Local Phone Prefix" => "Paikallisen puhelimen etuliite"
+// autocomplete.tel-local-suffix: "Local Phone Suffix" => "Paikallisen puhelimen pääte"
+// autocomplete.tel-extension: "Phone Extension" => "Puhelimen laajennus"
+// autocomplete.email: "Email Address" => "Sähköpostiosoite"
+// autocomplete.impp: "Instant Messaging Protocol" => "Pikaviestiprotokolla"
