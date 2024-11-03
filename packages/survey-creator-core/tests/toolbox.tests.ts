@@ -883,6 +883,6 @@ test("Update subitems on locale change, Bug#6014", (): any => {
   const checkbox = creator.toolbox.getItemByName("checkbox") as QuestionToolboxItem;
   expect(checkbox.locTitle.renderedHtml).toBe("Auswahl");
   const text = creator.toolbox.getItemByName("text") as QuestionToolboxItem;
-  expect(text.getSubitemByName("color").locTitle.renderedHtml).toBe("Farbe");
+  expect(text.getSubitem("color").locTitle.renderedHtml).toBe("Farbe");
   creator.locale = "en";
 });
