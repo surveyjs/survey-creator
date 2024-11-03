@@ -55,23 +55,14 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
     return [this.model, this.model.survey, this.model.pagesController];
   }
 
-  private renderedPagesCache: any = {};
   protected getRenderedPages(): JSX.Element[] {
-    if (this.changedStatePropName !== "pages") {
-      this.renderedPagesCache = {};
-    }
     const renderedPages = [];
 
     if (this.creator.pageEditMode !== "bypage") {
       const pages = this.creator.survey.pages;
 
-      pages.forEach((page, index) => {
-        let cachedPage = this.renderedPagesCache[page.id];
-        if (!cachedPage) {
-          cachedPage = this.createRenderedPage(page, index);
-          this.renderedPagesCache[page.id] = cachedPage;
-        }
-        renderedPages.push(cachedPage);
+      pages.forEach((page) => {
+        renderedPages.push(this.createRenderedPage(page));
       });
 
       if (this.model.showNewPage) {
@@ -80,24 +71,19 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
     } else {
       const page2Display = this.model.pagesController.page2Display;
       if (!!page2Display) {
-        let cachedPage = this.renderedPagesCache[page2Display.id];
-        if (!cachedPage) {
-          cachedPage = this.createRenderedPage(page2Display, 0, this.model.newPage === page2Display);
-          this.renderedPagesCache[page2Display.id] = cachedPage;
-        }
-        renderedPages.push(cachedPage);
+        renderedPages.push(this.createRenderedPage(page2Display, this.model.newPage === page2Display));
       }
     }
 
     return renderedPages;
   }
-  protected createRenderedPage(page: PageModel, index: number, isGhostPage?: boolean): any {
+  protected createRenderedPage(page: PageModel, isGhostPage?: boolean): any {
     return (
       <div
         className={"svc-page"}
         data-sv-drop-target-page={page.name}
         data-sv-drop-target-survey-element={isGhostPage ? "newGhostPage" : page.name}
-        key={page.id + "-" + index}
+        key={page.id}
       >
         {this.renderPage(page)}
       </div>
