@@ -16,9 +16,6 @@ export class DesignerSurveyComponent extends BaseAngular<SurveyModel> {
   public get creator() {
     return this.model.creator;
   }
-  public get pages() {
-    return this.model.pages.concat(this.model.showNewPage ? this.model.newPage : []);
-  }
   public get survey() {
     return this.creator.survey;
   }

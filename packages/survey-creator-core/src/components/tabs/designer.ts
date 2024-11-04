@@ -143,9 +143,6 @@ export class TabDesignerViewModel extends Base {
       }
       this.checkNewPage(updatePageController);
     }
-    if (propName === "pages" && obj.isDescendantOf("survey")) {
-      this.checkNewPage(true);
-    }
     this.isUpdatingNewPage = false;
   }
   private calculateDesignerCss() {
@@ -156,15 +153,16 @@ export class TabDesignerViewModel extends Base {
     this.showNewPage = false;
     this.newPage = undefined;
     this.checkNewPage(false);
+    this.updatePages();
     this.cssUpdater && this.cssUpdater.dispose();
     this.cssUpdater = new ComputedUpdater<string>(() => {
       return this.calculateDesignerCss();
     });
-    this.designerCss = <any>this.cssUpdater;
     this.survey.registerFunctionOnPropertyValueChanged("pages", () => {
-      this.pages = this.survey.pages;
+      this.checkNewPage(true);
+      this.updatePages();
     });
-    this.pages = this.survey.pages;
+    this.designerCss = <any>this.cssUpdater;
     this.pagesController.onSurveyChanged();
   }
   private checkNewPage(updatePageController: boolean) {
@@ -194,6 +192,9 @@ export class TabDesignerViewModel extends Base {
       }
       this.pagesController.raisePagesChanged();
     }
+  }
+  private updatePages() {
+    this.pages = this.survey.pages.concat(this.showNewPage ? [this.newPage] : []);
   }
   public dispose(): void {
     super.dispose();
@@ -242,6 +243,9 @@ export class TabDesignerViewModel extends Base {
       },
       isAnimationEnabled: () => {
         return this.animationAllowed;
+      },
+      getKey(page) {
+        return page.id;
       },
       getAnimatedElement: (item) => SurveyElementAdornerBase.GetAdorner(item)?.rootElement.parentElement,
       getRerenderEvent: () => this.onElementRerendered,

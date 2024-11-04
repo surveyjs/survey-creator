@@ -6,7 +6,7 @@
     </div>
 
     <ng-container *ngIf="creator.pageEditMode !== 'bypage'">
-      <ng-container *ngFor="let page of pages; trackBy: trackPageBy ">
+      <ng-container *ngFor="let page of model.pages; trackBy: trackPageBy ">
         <ng-container>
           <ng-container
             *ngTemplateOutlet="pageContainer; context: { page, isGhost: model.newPage == page }"></ng-container>

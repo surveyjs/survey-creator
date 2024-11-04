@@ -64,7 +64,7 @@
           </div>
           <template v-if="model.creator.pageEditMode !== 'bypage'">
             <div
-              v-for="page in pages"
+              v-for="page in model.pages"
               :key="page.id"
               class="svc-page"
               :data-sv-drop-target-survey-element="
@@ -123,8 +123,4 @@ const props = defineProps<{ model: TabDesignerViewModel }>();
 const survey = computed(() => props.model.survey);
 useBase(() => props.model);
 useBase(() => survey.value);
-const pages = computed(() => {
-  const model = props.model;
-  return model.pages.concat(model.showNewPage ? [model.newPage] : []);
-});
 </script>

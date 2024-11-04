@@ -60,14 +60,9 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
 
     if (this.creator.pageEditMode !== "bypage") {
       const pages = this.model.pages;
-
       pages.forEach((page) => {
-        renderedPages.push(this.createRenderedPage(page));
+        renderedPages.push(this.createRenderedPage(page, page == this.model.newPage));
       });
-
-      if (this.model.showNewPage) {
-        renderedPages.push(this.renderNewPage("svc-page", this.model.newPage.id + "-ghost-new-page"));
-      }
     } else {
       const page2Display = this.model.pagesController.page2Display;
       if (!!page2Display) {

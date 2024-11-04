@@ -1,4 +1,4 @@
-import { Action, ActionContainer, classesToSelector, ComputedUpdater, DragOrClickHelper, DragTypeOverMeEnum, IAction, IElement, PageModel, property, SurveyElement } from "survey-core";
+import { Action, ActionContainer, classesToSelector, ComputedUpdater, DragOrClickHelper, DragTypeOverMeEnum, IAction, IElement, PageModel, property, QuestionRowModel, SurveyElement } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { IPortableMouseEvent } from "../utils/events";
 import { SurveyElementAdornerBase } from "./action-container-view-model";
@@ -28,8 +28,8 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       this.isDragMe = this.page?.isDragMe;
     }
   }
-  private updateShowPlaceholder(elements?: Array<IElement>) {
-    this.showPlaceholder = !this.isGhost && (elements || this.page.elements).length === 0;
+  private updateShowPlaceholder(visibleRows?: Array<QuestionRowModel>) {
+    this.showPlaceholder = !this.isGhost && (visibleRows || this.page.visibleRows).length === 0;
   }
 
   constructor(creator: SurveyCreatorModel, page: PageModel) {
@@ -88,7 +88,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
           this.updateIsDragMe();
         }
       );
-      surveyElement.registerFunctionOnPropertiesValueChanged(["elements"], (newValue: Array<IElement>) => {
+      surveyElement.registerFunctionOnPropertiesValueChanged(["visibleRows"], (newValue: Array<QuestionRowModel>) => {
         this.updateShowPlaceholder(newValue);
       });
       this.updateShowPlaceholder();
@@ -184,12 +184,10 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   addNewQuestion = (model: PageAdorner, event: IPortableMouseEvent, type?: string) => {
     const isGhost = this.isGhost;
     const page = this.page;
-    if(isGhost) page?.blockAnimations();
     this.creator.addNewQuestionInPage((type) => {
       this.addGhostPage(false);
       this.creator.survey.currentPage = this.page;
     }, null, type || this.currentAddQuestionType || settings.designer.defaultAddQuestionType);
-    if(isGhost) page?.releaseAnimations();
   }
   select(model: PageAdorner, event: IPortableMouseEvent) {
     if (!model.isGhost) {
