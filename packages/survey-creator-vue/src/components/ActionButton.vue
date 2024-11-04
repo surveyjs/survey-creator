@@ -20,14 +20,12 @@
   <template v-if="iconName">
     <span
       v-if="disabled"
-      class="svc-action-button svc-action-button--disabled"
-      :class="classes"
+      :class="getButtonCss()"
       :title="title"
       ><SvComponent :is="'sv-svg-icon'" :iconName="iconName" :size="'auto'"></SvComponent
     ></span>
     <span
       role="button"
-      class="svc-action-button"
       @click="onClick"
       v-key2click
       :class="getButtonCss()"
@@ -37,7 +35,8 @@
   </template>
 </template>
 <script lang="ts" setup>
-import { key2ClickDirective as vKey2click } from "survey-vue3-ui";
+import { key2ClickDirective as vKey2click, SvComponent } from "survey-vue3-ui";
+import { CssClassBuilder } from "survey-core";
 const props = defineProps<{
   classes?: string;
   selected?: boolean;
@@ -56,6 +55,13 @@ const onClick = (event: Event) => {
   }
 };
 const getButtonCss = () => {
-  return props.classes + (props.selected ? " svc-action-button--selected" : "");
+  const buttonClasses = new CssClassBuilder()
+      .append(props.classes || "")
+      .append("svc-action-button")
+      .append("svc-action-button--icon", !!props.iconName)
+      .append("svc-action-button--selected", !!props.selected)
+      .append("svc-action-button--disabled", !!props.disabled)
+      .toString();
+  return buttonClasses;
 };
 </script>

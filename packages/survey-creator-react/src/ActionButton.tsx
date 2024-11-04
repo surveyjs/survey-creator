@@ -17,8 +17,8 @@ export class ActionButton extends SurveyElementBase<IActionButtonProps, any> {
     const classes = new CssClassBuilder()
       .append(this.props.classes)
       .append("svc-action-button")
-      .append("svc-action-button--selected", this.props.selected)
-      .append("svc-action-button--disabled", this.props.disabled)
+      .append("svc-action-button--selected", !!this.props.selected)
+      .append("svc-action-button--disabled", !!this.props.disabled)
       .toString();
     if (this.props.iconName) {
       return this.renderIcon(classes);
