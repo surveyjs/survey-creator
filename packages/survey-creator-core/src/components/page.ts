@@ -296,11 +296,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     if (cssClasses.pageRow) return [].slice.call(this.rootElement?.querySelectorAll(`:scope .svc-page__footer, :scope ${classesToSelector(this.surveyElement.cssRoot)} > .svc-row`));
     return null;
   }
-  public onPageSelected() {
-    if (this.rootElement) {
-      SurveyHelper.scrollIntoViewIfNeeded(this.rootElement);
-    }
-  }
+  public onPageSelected() {}
   protected getAllowDragging(options: any): boolean {
     return this.creator.allowDragPages && super.getAllowDragging(options);
   }
