@@ -69,6 +69,7 @@ export var bgStrings = {
     surveySettingsTooltip: "Настройки на проучването",
     themeSettings: "Настройки на тема",
     themeSettingsTooltip: "Настройки на тема",
+    creatorSettingTitle: "Настройки на създателя",
     showPanel: "Показване на панела",
     hidePanel: "Скриване на панела",
     prevSelected: "Избиране на предишен",
@@ -301,7 +302,7 @@ export var bgStrings = {
       width: "Ширина на вградения панел",
       minWidth: "Минимална ширина на панела",
       maxWidth: "Максимална ширина на панела",
-      showNumber: "Числени панели"
+      showNumber: "Номерирайте този панел"
     },
     paneldynamic: {
       name: "Име на панела",
@@ -828,6 +829,8 @@ export var bgStrings = {
       header: "Заглавка",
       background: "Фон",
       appearance: "Външен вид",
+      accentColors: "Акцентни цветове",
+      scaling: "Мащабиране",
       others: "Други"
     },
     editProperty: "Редактиране на свойства '{0}'",
@@ -1014,6 +1017,61 @@ export var bgStrings = {
       time: "Време",
       url: "URL",
       week: "Седмица"
+    },
+    autocomplete: {
+      name: "Пълно име",
+      "honorific-prefix": "Префикс",
+      "given-name": "Собствено име",
+      "additional-name": "Бащино име",
+      "family-name": "Презиме",
+      "honorific-suffix": "Наставка",
+      nickname: "Прякор",
+      "organization-title": "Длъжност",
+      username: "Потребителско име",
+      "new-password": "Нова парола",
+      "current-password": "Текуща парола",
+      organization: "Име на организацията",
+      "street-address": "Пълен адрес на улицата",
+      "address-line1": "Адресен ред 1",
+      "address-line2": "Адресен ред 2",
+      "address-line3": "Адресен ред 3",
+      "address-level4": "Адрес на ниво 4",
+      "address-level3": "Адрес от ниво 3",
+      "address-level2": "Адрес от ниво 2",
+      "address-level1": "Адрес от ниво 1",
+      country: "Код на държавата",
+      "country-name": "Име на държавата",
+      "postal-code": "Пощенски код",
+      "cc-name": "Име на картодържателя",
+      "cc-given-name": "Име на картодържателя",
+      "cc-additional-name": "Бащино име на картодържателя",
+      "cc-family-name": "Фамилия на картодържателя",
+      "cc-number": "Номер на кредитна карта",
+      "cc-exp": "Срок на годност",
+      "cc-exp-month": "Месец на изтичане",
+      "cc-exp-year": "Година на изтичане",
+      "cc-csc": "Код за сигурност на картата",
+      "cc-type": "Тип кредитна карта",
+      "transaction-currency": "Валута на транзакцията",
+      "transaction-amount": "Сума на транзакцията",
+      language: "Предпочитан език",
+      bday: "Рожден ден",
+      "bday-day": "Рожден ден",
+      "bday-month": "Месец на рождения ден",
+      "bday-year": "Година на рождения ден",
+      sex: "Пол",
+      url: "URL адрес на уебсайта",
+      photo: "Профилна снимка",
+      tel: "Телефонен номер",
+      "tel-country-code": "Код на държавата за телефон",
+      "tel-national": "Национален телефонен номер",
+      "tel-area-code": "Регионален код",
+      "tel-local": "Местен телефонен номер",
+      "tel-local-prefix": "Префикс на местен телефон",
+      "tel-local-suffix": "Суфикс за местен телефон",
+      "tel-extension": "Разширение на телефона",
+      email: "Имейл адрес",
+      impp: "Протокол за незабавни съобщения"
     },
     maskType: {
       none: "Никой",
@@ -1289,7 +1347,8 @@ export var bgStrings = {
       innerIndent: "Добавя интервал или поле между съдържанието на панела и лявата граница на панелното поле.",
       startWithNewLine: "Премахнете отметката, за да покажете панела в един ред с предишния въпрос или панел. Настройката не се прилага, ако панелът е първият елемент във вашия формуляр.",
       state: "Изберете от: \"Разширен\" - панелът се показва изцяло и може да бъде свит; \"Свит\" - панелът показва само заглавието и описанието и може да бъде разширен; \"Заключен\" - панелът се показва изцяло и не може да се свива.",
-      width: "Задава ширината на панела пропорционално на другите елементи на изследването в същия ред. Приема CSS стойности (px, %, in, pt и т.н.)."
+      width: "Задава ширината на панела пропорционално на другите елементи на изследването в същия ред. Приема CSS стойности (px, %, in, pt и т.н.).",
+      showQuestionNumbers: "Присвоява номера на въпроси, вложени в този панел."
     },
     paneldynamic: {
       name: "ИД на панел, който не е видим за респондентите.",
@@ -1387,7 +1446,7 @@ export var bgStrings = {
     logoWidth: "Задава ширина на логото в CSS единици (px, %, in, pt и т.н.).",
     logoHeight: "Задава височина на логото в CSS единици (px, %, in, pt и т.н.).",
     logoFit: "Изберете от: \"Няма\" - изображението запазва оригиналния си размер; \"Съдържа\" - изображението се преоразмерява, за да се побере, като същевременно се запазва съотношението на страните; \"Cover\" - изображението запълва цялата кутия, като същевременно запазва съотношението на страните; \"Fill\" - изображението се разтяга, за да запълни кутията, без да се поддържа съотношението на страните.",
-    goNextPageAutomatic: "Изберете дали искате проучването да премине автоматично към следващата страница, след като респондентът отговори на всички въпроси на текущата страница.",
+    goNextPageAutomatic: "Изберете дали искате проучването автоматично да премине към следващата страница, след като респондентът отговори на всички въпроси на текущата страница. Тази функция няма да се прилага, ако последният въпрос на страницата е отворен или позволява множество отговори.",
     allowCompleteSurveyAutomatic: "Изберете дали искате проучването да завърши автоматично, след като респондентът отговори на всички въпроси.",
     showNavigationButtons: "Задава видимостта и местоположението на бутоните за навигация на дадена страница.",
     showProgressBar: "Задава видимостта и местоположението на лентата за напредъка. Стойността \"Автоматично\" показва лентата за напредъка над или под заглавката на проучването.",
@@ -1695,6 +1754,20 @@ export var bgStrings = {
       brown: "Кафяв",
       green: "Зелен"
     }
+  },
+  creatortheme: {
+    "--sjs-special-background": "Повърхностен фон",
+    "--sjs-primary-background-500": "Първичен",
+    "--sjs-secondary-background-500": "Вторичен",
+    surfaceScale: "Повърхност",
+    userInterfaceBaseUnit: "Потребителски интерфейс",
+    fontScale: "Шрифт",
+    names: {
+      sc2020: "Създател на анкета 2020",
+      "default-light": "Светлина",
+      "default-dark": "Тъмен",
+      "default-contrast": "Контраст"
+    }
   }
 };
 
@@ -1872,7 +1945,6 @@ editorLocalization.locales["bg"] = bgStrings;
 // panel.width: "Inline panel width" => "Ширина на вградения панел"
 // panel.minWidth: "Minimum panel width" => "Минимална ширина на панела"
 // panel.maxWidth: "Maximum panel width" => "Максимална ширина на панела"
-// panel.showNumber: "Number panels" => "Числени панели"
 // paneldynamic.name: "Panel name" => "Име на панела"
 // paneldynamic.title: "Panel title" => "Заглавие на панела"
 // paneldynamic.description: "Panel description" => "Описание на панела"
@@ -2088,7 +2160,6 @@ editorLocalization.locales["bg"] = bgStrings;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "Задава ширина на логото в CSS единици (px, %, in, pt и т.н.)."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "Задава височина на логото в CSS единици (px, %, in, pt и т.н.)."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Изберете от: \"Няма\" - изображението запазва оригиналния си размер; \"Съдържа\" - изображението се преоразмерява, за да се побере, като същевременно се запазва съотношението на страните; \"Cover\" - изображението запълва цялата кутия, като същевременно запазва съотношението на страните; \"Fill\" - изображението се разтяга, за да запълни кутията, без да се поддържа съотношението на страните."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "Изберете дали искате проучването да премине автоматично към следващата страница, след като респондентът отговори на всички въпроси на текущата страница."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "Задава видимостта и местоположението на бутоните за навигация на дадена страница."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Задава видимостта и местоположението на лентата за напредъка. Стойността \"Автоматично\" показва лентата за напредъка над или под заглавката на проучването."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "Разрешете страницата за визуализация само с всички въпроси или само с отговор."
@@ -2383,3 +2454,72 @@ editorLocalization.locales["bg"] = bgStrings;
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Когато е зададена на 0, височината се изчислява автоматично, за да побере съдържанието на заглавката."
 // p.mobileHeight: "Height on smartphones" => "Височина на смартфони"
 // header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Когато е разрешено, горната част на проучването се наслагва върху долната част на заглавката."
+// ed.creatorSettingTitle: "Creator Settings" => "Настройки на създателя"
+// tabs.accentColors: "Accent colors" => "Акцентни цветове"
+// tabs.scaling: "Scaling" => "Мащабиране"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "Присвоява номера на въпроси, вложени в този панел."
+// creatortheme.--sjs-special-background: "Surface background" => "Повърхностен фон"
+// creatortheme.--sjs-primary-background-500: "Primary" => "Първичен"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "Вторичен"
+// creatortheme.surfaceScale: "Surface" => "Повърхност"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "Потребителски интерфейс"
+// creatortheme.fontScale: "Font" => "Шрифт"
+// names.sc2020: "Survey Creator 2020" => "Създател на анкета 2020"
+// names.default-light: "Light" => "Светлина"
+// names.default-dark: "Dark" => "Тъмен"
+// names.default-contrast: "Contrast" => "Контраст"
+// panel.showNumber: "Number this panel" => "Номерирайте този панел"
+// pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Изберете дали искате проучването автоматично да премине към следващата страница, след като респондентът отговори на всички въпроси на текущата страница. Тази функция няма да се прилага, ако последният въпрос на страницата е отворен или позволява множество отговори."
+// autocomplete.name: "Full Name" => "Пълно име"
+// autocomplete.honorific-prefix: "Prefix" => "Префикс"
+// autocomplete.given-name: "First Name" => "Собствено име"
+// autocomplete.additional-name: "Middle Name" => "Бащино име"
+// autocomplete.family-name: "Last Name" => "Презиме"
+// autocomplete.honorific-suffix: "Suffix" => "Наставка"
+// autocomplete.nickname: "Nickname" => "Прякор"
+// autocomplete.organization-title: "Job Title" => "Длъжност"
+// autocomplete.username: "User Name" => "Потребителско име"
+// autocomplete.new-password: "New Password" => "Нова парола"
+// autocomplete.current-password: "Current Password" => "Текуща парола"
+// autocomplete.organization: "Organization Name" => "Име на организацията"
+// autocomplete.street-address: "Full Street Address" => "Пълен адрес на улицата"
+// autocomplete.address-line1: "Address Line 1" => "Адресен ред 1"
+// autocomplete.address-line2: "Address Line 2" => "Адресен ред 2"
+// autocomplete.address-line3: "Address Line 3" => "Адресен ред 3"
+// autocomplete.address-level4: "Level 4 Address" => "Адрес на ниво 4"
+// autocomplete.address-level3: "Level 3 Address" => "Адрес от ниво 3"
+// autocomplete.address-level2: "Level 2 Address" => "Адрес от ниво 2"
+// autocomplete.address-level1: "Level 1 Address" => "Адрес от ниво 1"
+// autocomplete.country: "Country Code" => "Код на държавата"
+// autocomplete.country-name: "Country Name" => "Име на държавата"
+// autocomplete.postal-code: "Postal Code" => "Пощенски код"
+// autocomplete.cc-name: "Cardholder Name" => "Име на картодържателя"
+// autocomplete.cc-given-name: "Cardholder First Name" => "Име на картодържателя"
+// autocomplete.cc-additional-name: "Cardholder Middle Name" => "Бащино име на картодържателя"
+// autocomplete.cc-family-name: "Cardholder Last Name" => "Фамилия на картодържателя"
+// autocomplete.cc-number: "Credit Card Number" => "Номер на кредитна карта"
+// autocomplete.cc-exp: "Expiration Date" => "Срок на годност"
+// autocomplete.cc-exp-month: "Expiration Month" => "Месец на изтичане"
+// autocomplete.cc-exp-year: "Expiration Year" => "Година на изтичане"
+// autocomplete.cc-csc: "Card Security Code" => "Код за сигурност на картата"
+// autocomplete.cc-type: "Credit Card Type" => "Тип кредитна карта"
+// autocomplete.transaction-currency: "Transaction Currency" => "Валута на транзакцията"
+// autocomplete.transaction-amount: "Transaction Amount" => "Сума на транзакцията"
+// autocomplete.language: "Preferred Language" => "Предпочитан език"
+// autocomplete.bday: "Birthday" => "Рожден ден"
+// autocomplete.bday-day: "Birthday Day" => "Рожден ден"
+// autocomplete.bday-month: "Birthday Month" => "Месец на рождения ден"
+// autocomplete.bday-year: "Birthday Year" => "Година на рождения ден"
+// autocomplete.sex: "Gender" => "Пол"
+// autocomplete.url: "Website URL" => "URL адрес на уебсайта"
+// autocomplete.photo: "Profile Photo" => "Профилна снимка"
+// autocomplete.tel: "Telephone Number" => "Телефонен номер"
+// autocomplete.tel-country-code: "Country Code for Phone" => "Код на държавата за телефон"
+// autocomplete.tel-national: "National Telephone Number" => "Национален телефонен номер"
+// autocomplete.tel-area-code: "Area Code" => "Регионален код"
+// autocomplete.tel-local: "Local Phone Number" => "Местен телефонен номер"
+// autocomplete.tel-local-prefix: "Local Phone Prefix" => "Префикс на местен телефон"
+// autocomplete.tel-local-suffix: "Local Phone Suffix" => "Суфикс за местен телефон"
+// autocomplete.tel-extension: "Phone Extension" => "Разширение на телефона"
+// autocomplete.email: "Email Address" => "Имейл адрес"
+// autocomplete.impp: "Instant Messaging Protocol" => "Протокол за незабавни съобщения"

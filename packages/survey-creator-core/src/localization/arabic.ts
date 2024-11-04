@@ -69,6 +69,7 @@ export var arStrings = {
     surveySettingsTooltip: "إعدادات الاستطلاع",
     themeSettings: "إعدادات النسق",
     themeSettingsTooltip: "إعدادات النسق",
+    creatorSettingTitle: "إعدادات منشئي المحتوى",
     showPanel: "إظهار اللوحة",
     hidePanel: "إخفاء اللوحة",
     prevSelected: "Select previous",
@@ -301,7 +302,7 @@ export var arStrings = {
       width: "عرض اللوحة المضمنة",
       minWidth: "الحد الأدنى لعرض اللوحة",
       maxWidth: "الحد الأقصى لعرض اللوحة",
-      showNumber: "لوحات الأرقام"
+      showNumber: "رقم هذه اللوحة"
     },
     paneldynamic: {
       name: "اسم اللوحة",
@@ -828,6 +829,8 @@ export var arStrings = {
       header: "راس",
       background: "خلفية",
       appearance: "مظهر",
+      accentColors: "ألوان مميزة",
+      scaling: "القياس",
       others: "غير ذلك"
     },
     editProperty: "Edit property '{0}'",
@@ -1014,6 +1017,61 @@ export var arStrings = {
       time: "الوقت",
       url: "الرابط",
       week: "أسبوع"
+    },
+    autocomplete: {
+      name: "الاسم الكامل",
+      "honorific-prefix": "بادئه",
+      "given-name": "الاسم الأول",
+      "additional-name": "الاسم الأوسط",
+      "family-name": "اسم العائلة",
+      "honorific-suffix": "لاحقه",
+      nickname: "لقب",
+      "organization-title": "المسمى الوظيفي",
+      username: "اسم المستخدم",
+      "new-password": "كلمة مرور جديدة",
+      "current-password": "كلمة المرور الحالية",
+      organization: "اسم المنظمة",
+      "street-address": "عنوان الشارع بالكامل",
+      "address-line1": "سطر العنوان 1",
+      "address-line2": "سطر العنوان 2",
+      "address-line3": "سطر العنوان 3",
+      "address-level4": "عنوان المستوى 4",
+      "address-level3": "عنوان المستوى 3",
+      "address-level2": "عنوان المستوى 2",
+      "address-level1": "عنوان المستوى 1",
+      country: "رمز البلد",
+      "country-name": "اسم البلد",
+      "postal-code": "الرمز البريدي",
+      "cc-name": "اسم حامل البطاقة",
+      "cc-given-name": "الاسم الأول لحامل البطاقة",
+      "cc-additional-name": "الاسم الأوسط لحامل البطاقة",
+      "cc-family-name": "الاسم الأخير لحامل البطاقة",
+      "cc-number": "رقم بطاقة الائتمان",
+      "cc-exp": "تاريخ انتهاء الصلاحية",
+      "cc-exp-month": "شهر انتهاء الصلاحية",
+      "cc-exp-year": "سنة انتهاء الصلاحية",
+      "cc-csc": "رمز أمان البطاقة",
+      "cc-type": "نوع بطاقة الائتمان",
+      "transaction-currency": "عملة المعاملة",
+      "transaction-amount": "مبلغ المعاملة",
+      language: "اللغة المفضلة",
+      bday: "عيد ميلاد",
+      "bday-day": "عيد ميلاد",
+      "bday-month": "شهر عيد الميلاد",
+      "bday-year": "سنة الميلاد",
+      sex: "جنس",
+      url: "رابط الموقع",
+      photo: "صورة الملف الشخصي",
+      tel: "رقم الهاتف",
+      "tel-country-code": "رمز البلد للهاتف",
+      "tel-national": "رقم الهاتف الوطني",
+      "tel-area-code": "رمز المنطقة",
+      "tel-local": "رقم الهاتف المحلي",
+      "tel-local-prefix": "بادئة الهاتف المحلي",
+      "tel-local-suffix": "لاحقة الهاتف المحلي",
+      "tel-extension": "تحويلة الهاتف",
+      email: "عنوان البريد الإلكتروني",
+      impp: "بروتوكول المراسلة الفورية"
     },
     maskType: {
       none: "اي",
@@ -1289,7 +1347,8 @@ export var arStrings = {
       innerIndent: "يضيف مسافة أو هامش بين محتوى اللوحة والحد الأيسر لمربع اللوحة.",
       startWithNewLine: "قم بإلغاء التحديد لعرض اللوحة في سطر واحد مع السؤال أو اللوحة السابقة. لا ينطبق الإعداد إذا كانت اللوحة هي العنصر الأول في النموذج الخاص بك.",
       state: "اختر من بين: \"موسعة\" - يتم عرض اللوحة بالكامل ويمكن طيها ؛ \"مطوي\" - تعرض اللوحة العنوان والوصف فقط ويمكن توسيعها ؛ \"مغلق\" - يتم عرض اللوحة بالكامل ولا يمكن طيها.",
-      width: "يضبط عرض اللوحة بما يتناسب مع عناصر الاستطلاع الأخرى في نفس السطر. يقبل قيم CSS (px ، ٪ ، in ، pt ، إلخ)."
+      width: "يضبط عرض اللوحة بما يتناسب مع عناصر الاستطلاع الأخرى في نفس السطر. يقبل قيم CSS (px ، ٪ ، in ، pt ، إلخ).",
+      showQuestionNumbers: "يعين الأرقام للأسئلة المتداخلة داخل هذه اللوحة."
     },
     paneldynamic: {
       name: "معرف لوحة غير مرئي للمستجيبين.",
@@ -1387,7 +1446,7 @@ export var arStrings = {
     logoWidth: "يضبط عرض الشعار بوحدات CSS (px ، ٪ ، in ، pt ، إلخ).",
     logoHeight: "يضبط ارتفاع الشعار في وحدات CSS (px ، ٪ ، in ، pt ، إلخ).",
     logoFit: "اختر من بين: \"لا شيء\" - تحافظ الصورة على حجمها الأصلي ؛ \"احتواء\" - يتم تغيير حجم الصورة لتلائم مع الحفاظ على نسبة العرض إلى الارتفاع ؛ \"الغلاف\" - تملأ الصورة المربع بأكمله مع الحفاظ على نسبة العرض إلى الارتفاع ؛ \"تعبئة\" - يتم تمديد الصورة لملء المربع دون الحفاظ على نسبة العرض إلى الارتفاع.",
-    goNextPageAutomatic: "حدد ما إذا كنت تريد أن يتقدم الاستطلاع إلى الصفحة التالية تلقائيا بعد أن يجيب المستجيب على جميع الأسئلة في الصفحة الحالية.",
+    goNextPageAutomatic: "حدد ما إذا كنت تريد أن يتقدم الاستطلاع تلقائيا إلى الصفحة التالية بمجرد إجابة المستجيب على جميع الأسئلة في الصفحة الحالية. لن يتم تطبيق هذه الميزة إذا كان السؤال الأخير على الصفحة مفتوحا أو يسمح بإجابات متعددة.",
     allowCompleteSurveyAutomatic: "حدد ما إذا كنت تريد إكمال الاستطلاع تلقائيا بعد أن يجيب المستجيب على جميع الأسئلة.",
     showNavigationButtons: "يضبط رؤية وموقع أزرار التنقل على الصفحة.",
     showProgressBar: "يضبط رؤية شريط التقدم وموقعه. تعرض القيمة \"تلقائي\" شريط التقدم أعلى رأس الاستطلاع أو أسفله.",
@@ -1694,6 +1753,20 @@ export var arStrings = {
       tulip: "توليب",
       brown: "أسمر",
       green: "أخضر"
+    }
+  },
+  creatortheme: {
+    "--sjs-special-background": "خلفية السطح",
+    "--sjs-primary-background-500": "ابتدائي",
+    "--sjs-secondary-background-500": "ثانوي",
+    surfaceScale: "سطح",
+    userInterfaceBaseUnit: "واجهة المستخدم",
+    fontScale: "الخط",
+    names: {
+      sc2020: "منشئ الاستطلاع 2020",
+      "default-light": "ضوء",
+      "default-dark": "داكن",
+      "default-contrast": "تباين"
     }
   }
 };
@@ -2220,7 +2293,6 @@ editorLocalization.locales["ar"] = arStrings;
 // panel.width: "Inline panel width" => "عرض اللوحة المضمنة"
 // panel.minWidth: "Minimum panel width" => "الحد الأدنى لعرض اللوحة"
 // panel.maxWidth: "Maximum panel width" => "الحد الأقصى لعرض اللوحة"
-// panel.showNumber: "Number panels" => "لوحات الأرقام"
 // paneldynamic.name: "Panel name" => "اسم اللوحة"
 // paneldynamic.title: "Panel title" => "عنوان اللوحة"
 // paneldynamic.description: "Panel description" => "وصف اللوحة"
@@ -2436,7 +2508,6 @@ editorLocalization.locales["ar"] = arStrings;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "يضبط عرض الشعار بوحدات CSS (px ، ٪ ، in ، pt ، إلخ)."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "يضبط ارتفاع الشعار في وحدات CSS (px ، ٪ ، in ، pt ، إلخ)."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "اختر من بين: \"لا شيء\" - تحافظ الصورة على حجمها الأصلي ؛ \"احتواء\" - يتم تغيير حجم الصورة لتلائم مع الحفاظ على نسبة العرض إلى الارتفاع ؛ \"الغلاف\" - تملأ الصورة المربع بأكمله مع الحفاظ على نسبة العرض إلى الارتفاع ؛ \"تعبئة\" - يتم تمديد الصورة لملء المربع دون الحفاظ على نسبة العرض إلى الارتفاع."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "حدد ما إذا كنت تريد أن يتقدم الاستطلاع إلى الصفحة التالية تلقائيا بعد أن يجيب المستجيب على جميع الأسئلة في الصفحة الحالية."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "يضبط رؤية وموقع أزرار التنقل على الصفحة."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "يضبط رؤية شريط التقدم وموقعه. تعرض القيمة \"تلقائي\" شريط التقدم أعلى رأس الاستطلاع أو أسفله."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "قم بتمكين صفحة المعاينة مع جميع الأسئلة أو الإجابة عليها فقط."
@@ -2731,3 +2802,75 @@ editorLocalization.locales["ar"] = arStrings;
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "عند التعيين إلى 0 ، يتم حساب الارتفاع تلقائيا لاستيعاب محتوى الرأس."
 // p.mobileHeight: "Height on smartphones" => "الارتفاع على الهواتف الذكية"
 // header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "عند التمكين، يقوم الجزء العلوي من الاستطلاع بتراكب الجزء السفلي من الرأس."
+// ed.creatorSettingTitle: "Creator Settings" => "إعدادات منشئي المحتوى"
+// tabs.accentColors: "Accent colors" => "ألوان مميزة"
+// tabs.scaling: "Scaling" => "القياس"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "يعين الأرقام للأسئلة المتداخلة داخل هذه اللوحة."
+// creatortheme.--sjs-special-background: "Surface background" => "خلفية السطح"
+// creatortheme.--sjs-primary-background-500: "Primary" => "ابتدائي"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "ثانوي"
+// creatortheme.surfaceScale: "Surface" => "سطح"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "واجهة المستخدم"
+// creatortheme.fontScale: "Font" => "الخط"
+// names.sc2020: "Survey Creator 2020" => "منشئ الاستطلاع 2020"
+// names.default-light: "Light" => "ضوء"
+// names.default-dark: "Dark" => "داكن"
+// names.default-contrast: "Contrast" => "تباين"
+// panel.showNumber: "Number this panel" => "رقم هذه اللوحة"
+// ed.creatorSettingTitle: "Creator Settings" => "إعدادات منشئي المحتوى"
+// tabs.accentColors: "Accent colors" => "ألوان مميزة"
+// tabs.scaling: "Scaling" => "القياس"
+// pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "حدد ما إذا كنت تريد أن يتقدم الاستطلاع تلقائيا إلى الصفحة التالية بمجرد إجابة المستجيب على جميع الأسئلة في الصفحة الحالية. لن يتم تطبيق هذه الميزة إذا كان السؤال الأخير على الصفحة مفتوحا أو يسمح بإجابات متعددة."
+// autocomplete.name: "Full Name" => "الاسم الكامل"
+// autocomplete.honorific-prefix: "Prefix" => "بادئه"
+// autocomplete.given-name: "First Name" => "الاسم الأول"
+// autocomplete.additional-name: "Middle Name" => "الاسم الأوسط"
+// autocomplete.family-name: "Last Name" => "اسم العائلة"
+// autocomplete.honorific-suffix: "Suffix" => "لاحقه"
+// autocomplete.nickname: "Nickname" => "لقب"
+// autocomplete.organization-title: "Job Title" => "المسمى الوظيفي"
+// autocomplete.username: "User Name" => "اسم المستخدم"
+// autocomplete.new-password: "New Password" => "كلمة مرور جديدة"
+// autocomplete.current-password: "Current Password" => "كلمة المرور الحالية"
+// autocomplete.organization: "Organization Name" => "اسم المنظمة"
+// autocomplete.street-address: "Full Street Address" => "عنوان الشارع بالكامل"
+// autocomplete.address-line1: "Address Line 1" => "سطر العنوان 1"
+// autocomplete.address-line2: "Address Line 2" => "سطر العنوان 2"
+// autocomplete.address-line3: "Address Line 3" => "سطر العنوان 3"
+// autocomplete.address-level4: "Level 4 Address" => "عنوان المستوى 4"
+// autocomplete.address-level3: "Level 3 Address" => "عنوان المستوى 3"
+// autocomplete.address-level2: "Level 2 Address" => "عنوان المستوى 2"
+// autocomplete.address-level1: "Level 1 Address" => "عنوان المستوى 1"
+// autocomplete.country: "Country Code" => "رمز البلد"
+// autocomplete.country-name: "Country Name" => "اسم البلد"
+// autocomplete.postal-code: "Postal Code" => "الرمز البريدي"
+// autocomplete.cc-name: "Cardholder Name" => "اسم حامل البطاقة"
+// autocomplete.cc-given-name: "Cardholder First Name" => "الاسم الأول لحامل البطاقة"
+// autocomplete.cc-additional-name: "Cardholder Middle Name" => "الاسم الأوسط لحامل البطاقة"
+// autocomplete.cc-family-name: "Cardholder Last Name" => "الاسم الأخير لحامل البطاقة"
+// autocomplete.cc-number: "Credit Card Number" => "رقم بطاقة الائتمان"
+// autocomplete.cc-exp: "Expiration Date" => "تاريخ انتهاء الصلاحية"
+// autocomplete.cc-exp-month: "Expiration Month" => "شهر انتهاء الصلاحية"
+// autocomplete.cc-exp-year: "Expiration Year" => "سنة انتهاء الصلاحية"
+// autocomplete.cc-csc: "Card Security Code" => "رمز أمان البطاقة"
+// autocomplete.cc-type: "Credit Card Type" => "نوع بطاقة الائتمان"
+// autocomplete.transaction-currency: "Transaction Currency" => "عملة المعاملة"
+// autocomplete.transaction-amount: "Transaction Amount" => "مبلغ المعاملة"
+// autocomplete.language: "Preferred Language" => "اللغة المفضلة"
+// autocomplete.bday: "Birthday" => "عيد ميلاد"
+// autocomplete.bday-day: "Birthday Day" => "عيد ميلاد"
+// autocomplete.bday-month: "Birthday Month" => "شهر عيد الميلاد"
+// autocomplete.bday-year: "Birthday Year" => "سنة الميلاد"
+// autocomplete.sex: "Gender" => "جنس"
+// autocomplete.url: "Website URL" => "رابط الموقع"
+// autocomplete.photo: "Profile Photo" => "صورة الملف الشخصي"
+// autocomplete.tel: "Telephone Number" => "رقم الهاتف"
+// autocomplete.tel-country-code: "Country Code for Phone" => "رمز البلد للهاتف"
+// autocomplete.tel-national: "National Telephone Number" => "رقم الهاتف الوطني"
+// autocomplete.tel-area-code: "Area Code" => "رمز المنطقة"
+// autocomplete.tel-local: "Local Phone Number" => "رقم الهاتف المحلي"
+// autocomplete.tel-local-prefix: "Local Phone Prefix" => "بادئة الهاتف المحلي"
+// autocomplete.tel-local-suffix: "Local Phone Suffix" => "لاحقة الهاتف المحلي"
+// autocomplete.tel-extension: "Phone Extension" => "تحويلة الهاتف"
+// autocomplete.email: "Email Address" => "عنوان البريد الإلكتروني"
+// autocomplete.impp: "Instant Messaging Protocol" => "بروتوكول المراسلة الفورية"

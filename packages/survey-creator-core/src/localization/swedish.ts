@@ -18,7 +18,7 @@ export let svStrings = {
   },
   // Creator tabs
   tabs: {
-    preview: "Test enkät",
+    preview: "Testa enkät",
     theme: "Teman",
     translation: "Översättning",
     designer: "Enkät Designer",
@@ -69,6 +69,7 @@ export let svStrings = {
     surveySettingsTooltip: "Inställningar för undersökning",
     themeSettings: "Tema Inställningar",
     themeSettingsTooltip: "Inställningar för tema",
+    creatorSettingTitle: "Inställningar för kreatör",
     showPanel: "Visa panel",
     hidePanel: "Dölj panel",
     prevSelected: "Välj föregående",
@@ -301,7 +302,7 @@ export let svStrings = {
       width: "Bredd på infogad panel",
       minWidth: "Minsta panelbredd",
       maxWidth: "Maximal panelbredd",
-      showNumber: "Sifferpaneler"
+      showNumber: "Numrera den här panelen"
     },
     paneldynamic: {
       name: "Panelens namn",
@@ -438,7 +439,7 @@ export let svStrings = {
     size: "Inmatningsfältets storlek (i tecken)",
     cellErrorLocation: "Justering av cellfelmeddelande",
     enabled: "Aktiverat",
-    disabled: "Handikappad",
+    disabled: "Inaktiverad",
     inherit: "Ärva",
     apply: "Faställ",
     ok: "OK",
@@ -828,6 +829,8 @@ export let svStrings = {
       header: "Rubrik",
       background: "Bakgrund",
       appearance: "Utseende",
+      accentColors: "Accentfärger",
+      scaling: "Skalning",
       others: "Andra"
     },
     editProperty: "Redigera egenskap '{0}'",
@@ -1015,6 +1018,61 @@ export let svStrings = {
       url: "URL",
       week: "Vecka"
     },
+    autocomplete: {
+      name: "Fullständigt namn",
+      "honorific-prefix": "Prefix",
+      "given-name": "Förnamn",
+      "additional-name": "Mellannamn",
+      "family-name": "Efternamn",
+      "honorific-suffix": "Suffix",
+      nickname: "Smeknamn",
+      "organization-title": "Befattning",
+      username: "Användarnamn",
+      "new-password": "Nytt lösenord",
+      "current-password": "Aktuellt lösenord",
+      organization: "Organisationens namn",
+      "street-address": "Fullständig gatuadress",
+      "address-line1": "Adress, rad 1",
+      "address-line2": "Adress Rad 2",
+      "address-line3": "Adress: Rad 3",
+      "address-level4": "Nivå 4 Adress",
+      "address-level3": "Nivå 3 Adress",
+      "address-level2": "Nivå 2 Adress",
+      "address-level1": "Nivå 1 Adress",
+      country: "Landskod",
+      "country-name": "Landets namn",
+      "postal-code": "Postnummer",
+      "cc-name": "Kortinnehavarens namn",
+      "cc-given-name": "Kortinnehavarens förnamn",
+      "cc-additional-name": "Kortinnehavarens mellannamn",
+      "cc-family-name": "Kortinnehavarens efternamn",
+      "cc-number": "Kreditkortsnummer",
+      "cc-exp": "Utgångsdatum",
+      "cc-exp-month": "Förfallomånad",
+      "cc-exp-year": "Utgångsdatum",
+      "cc-csc": "Kortets säkerhetskod",
+      "cc-type": "Typ av kreditkort",
+      "transaction-currency": "Transaktionsvalutan",
+      "transaction-amount": "Transaktionens belopp",
+      language: "Önskat språk",
+      bday: "Födelsedag",
+      "bday-day": "Födelsedag",
+      "bday-month": "Födelsedag Månad",
+      "bday-year": "Födelsedag År",
+      sex: "Genus",
+      url: "Webbadress",
+      photo: "Profilbild",
+      tel: "Telefonnummer",
+      "tel-country-code": "Landskod för telefon",
+      "tel-national": "Nationellt telefonnummer",
+      "tel-area-code": "Riktnummer",
+      "tel-local": "Lokalt telefonnummer",
+      "tel-local-prefix": "Prefix för lokal telefon",
+      "tel-local-suffix": "Suffix för lokal telefon",
+      "tel-extension": "Telefonanknytning",
+      email: "E-postadress",
+      impp: "Protokoll för snabbmeddelanden"
+    },
     maskType: {
       none: "Ingen",
       pattern: "Mönster",
@@ -1023,15 +1081,15 @@ export let svStrings = {
       currency: "Valuta"
     },
     inputTextAlignment: {
-      auto: "Bil",
+      auto: "Automatisk",
       left: "Vänster",
       right: "Höger"
     },
-    all: "all",
-    page: "page",
-    survey: "survey",
-    onNextPage: "onNextPage",
-    onValueChanged: "onValueChanged",
+    all: "Alla",
+    page: "Sidan",
+    survey: "Enkät",
+    onNextPage: "På nästa sida",
+    onValueChanged: "På värdeförändring",
     onValueChanging: "Innan ett svar ändras",
     questionsOnPageMode: {
       standard: "Ursprunglig struktur",
@@ -1052,7 +1110,7 @@ export let svStrings = {
     onTyping: "Medan du skriver",
     underRow: "Under raden",
     underRowSingle: "Under raden syns bara en panel",
-    auto: "Bil",
+    auto: "Automatisk",
     showNavigationButtons: {
       none: "Dold"
     },
@@ -1157,7 +1215,7 @@ export let svStrings = {
       startsWith: "Börjar med"
     },
     backgroundImageFit: {
-      auto: "Bil",
+      auto: "Automatisk",
       cover: "Täcka",
       contain: "Innehålla",
       fill: "Tänja",
@@ -1289,7 +1347,8 @@ export let svStrings = {
       innerIndent: "Lägger till utrymme eller marginal mellan panelinnehållet och panelrutans vänstra kant.",
       startWithNewLine: "Avmarkera om du vill visa panelen på en rad med föregående fråga eller panel. Inställningen gäller inte om panelen är det första elementet i formuläret.",
       state: "Välj mellan: \"Expanderad\" - panelen visas i sin helhet och kan fällas ihop; \"Komprimerad\" - panelen visar endast titel och beskrivning och kan expanderas; \"Låst\" - panelen visas i sin helhet och kan inte fällas ihop.",
-      width: "Ställer in panelens bredd i proportion till andra undersökningselement på samma rad. Accepterar CSS-värden (px, %, in, pt, etc.)."
+      width: "Ställer in panelens bredd i proportion till andra undersökningselement på samma rad. Accepterar CSS-värden (px, %, in, pt, etc.).",
+      showQuestionNumbers: "Tilldelar nummer till frågor som är kapslade i den här panelen."
     },
     paneldynamic: {
       name: "Ett panel-ID som inte är synligt för svarande.",
@@ -1387,7 +1446,7 @@ export let svStrings = {
     logoWidth: "Anger en logotypbredd i CSS-enheter (px, %, in, pt, etc.).",
     logoHeight: "Anger en logotyphöjd i CSS-enheter (px, %, in, pt, etc.).",
     logoFit: "Välj mellan: \"Ingen\" - bilden behåller sin ursprungliga storlek; \"Innehåll\" - bildens storlek ändras så att den passar samtidigt som bildförhållandet bibehålls. \"Cover\" - bilden fyller hela rutan samtidigt som bildförhållandet bibehålls; \"Fyll\" - bilden sträcks ut för att fylla rutan utan att behålla bildförhållandet.",
-    goNextPageAutomatic: "Välj om du vill att undersökningen ska gå vidare till nästa sida automatiskt efter att en svarande har svarat på alla frågor på den aktuella sidan.",
+    goNextPageAutomatic: "Välj om du vill att undersökningen automatiskt ska gå vidare till nästa sida när en svarande har svarat på alla frågor på den aktuella sidan. Den här funktionen gäller inte om den sista frågan på sidan är öppen eller tillåter flera svar.",
     allowCompleteSurveyAutomatic: "Välj om du vill att undersökningen ska slutföras automatiskt efter att en svarande har svarat på alla frågor.",
     showNavigationButtons: "Anger synlighet och placering av navigeringsknappar på en sida.",
     showProgressBar: "Anger synlighet och plats för en förloppsindikator. Värdet \"Auto\" visar förloppsindikatorn ovanför eller under undersökningshuvudet.",
@@ -1687,13 +1746,27 @@ export let svStrings = {
       contrast: "Kontrast"
     },
     colors: {
-      teal: "Kricka",
+      teal: "Turkos",
       blue: "Blå",
       purple: "Lila",
       orchid: "Orkidé",
       tulip: "Tulpan",
       brown: "Brun",
       green: "Grön"
+    }
+  },
+  creatortheme: {
+    "--sjs-special-background": "Bakgrund på ytan",
+    "--sjs-primary-background-500": "Primär",
+    "--sjs-secondary-background-500": "Sekundär",
+    surfaceScale: "Yta",
+    userInterfaceBaseUnit: "Användargränssnitt",
+    fontScale: "Teckensnitt",
+    names: {
+      sc2020: "Enkät skapare 2020",
+      "default-light": "Ljus",
+      "default-dark": "Mörk",
+      "default-contrast": "Kontrast"
     }
   }
 };
@@ -2486,7 +2559,6 @@ editorLocalization.locales["sv"] = svStrings;
 // panel.width: "Inline panel width" => "Bredd på infogad panel"
 // panel.minWidth: "Minimum panel width" => "Minsta panelbredd"
 // panel.maxWidth: "Maximum panel width" => "Maximal panelbredd"
-// panel.showNumber: "Number panels" => "Sifferpaneler"
 // paneldynamic.name: "Panel name" => "Panelens namn"
 // paneldynamic.title: "Panel title" => "Panelens titel"
 // paneldynamic.description: "Panel description" => "Beskrivning av panelen"
@@ -2702,7 +2774,6 @@ editorLocalization.locales["sv"] = svStrings;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "Anger en logotypbredd i CSS-enheter (px, %, in, pt, etc.)."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "Anger en logotyphöjd i CSS-enheter (px, %, in, pt, etc.)."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Välj mellan: \"Ingen\" - bilden behåller sin ursprungliga storlek; \"Innehåll\" - bildens storlek ändras så att den passar samtidigt som bildförhållandet bibehålls. \"Cover\" - bilden fyller hela rutan samtidigt som bildförhållandet bibehålls; \"Fyll\" - bilden sträcks ut för att fylla rutan utan att behålla bildförhållandet."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "Välj om du vill att undersökningen ska gå vidare till nästa sida automatiskt efter att en svarande har svarat på alla frågor på den aktuella sidan."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "Anger synlighet och placering av navigeringsknappar på en sida."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Anger synlighet och plats för en förloppsindikator. Värdet \"Auto\" visar förloppsindikatorn ovanför eller under undersökningshuvudet."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "Aktivera förhandsgranskningssidan med alla eller endast besvarade frågor."
@@ -2997,3 +3068,72 @@ editorLocalization.locales["sv"] = svStrings;
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "När värdet är 0 beräknas höjden automatiskt för att passa rubrikens innehåll."
 // p.mobileHeight: "Height on smartphones" => "Höjd på smartphones"
 // header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "När det här alternativet är aktiverat täcker den övre delen av undersökningen den nedre delen av sidhuvudet."
+// ed.creatorSettingTitle: "Creator Settings" => "Inställningar för kreatör"
+// tabs.accentColors: "Accent colors" => "Accentfärger"
+// tabs.scaling: "Scaling" => "Skalning"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "Tilldelar nummer till frågor som är kapslade i den här panelen."
+// creatortheme.--sjs-special-background: "Surface background" => "Bakgrund på ytan"
+// creatortheme.--sjs-primary-background-500: "Primary" => "Primär"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "Sekundär"
+// creatortheme.surfaceScale: "Surface" => "Yta"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "Användargränssnitt"
+// creatortheme.fontScale: "Font" => "Teckensnitt"
+// names.sc2020: "Survey Creator 2020" => "Enkät skapare 2020"
+// names.default-light: "Light" => "Ljus"
+// names.default-dark: "Dark" => "Mörk"
+// names.default-contrast: "Contrast" => "Kontrast"
+// panel.showNumber: "Number this panel" => "Numrera den här panelen"
+// pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Välj om du vill att undersökningen automatiskt ska gå vidare till nästa sida när en svarande har svarat på alla frågor på den aktuella sidan. Den här funktionen gäller inte om den sista frågan på sidan är öppen eller tillåter flera svar."
+// autocomplete.name: "Full Name" => "Fullständigt namn"
+// autocomplete.honorific-prefix: "Prefix" => "Prefix"
+// autocomplete.given-name: "First Name" => "Förnamn"
+// autocomplete.additional-name: "Middle Name" => "Mellannamn"
+// autocomplete.family-name: "Last Name" => "Efternamn"
+// autocomplete.honorific-suffix: "Suffix" => "Suffix"
+// autocomplete.nickname: "Nickname" => "Smeknamn"
+// autocomplete.organization-title: "Job Title" => "Befattning"
+// autocomplete.username: "User Name" => "Användarnamn"
+// autocomplete.new-password: "New Password" => "Nytt lösenord"
+// autocomplete.current-password: "Current Password" => "Aktuellt lösenord"
+// autocomplete.organization: "Organization Name" => "Organisationens namn"
+// autocomplete.street-address: "Full Street Address" => "Fullständig gatuadress"
+// autocomplete.address-line1: "Address Line 1" => "Adress, rad 1"
+// autocomplete.address-line2: "Address Line 2" => "Adress Rad 2"
+// autocomplete.address-line3: "Address Line 3" => "Adress: Rad 3"
+// autocomplete.address-level4: "Level 4 Address" => "Nivå 4 Adress"
+// autocomplete.address-level3: "Level 3 Address" => "Nivå 3 Adress"
+// autocomplete.address-level2: "Level 2 Address" => "Nivå 2 Adress"
+// autocomplete.address-level1: "Level 1 Address" => "Nivå 1 Adress"
+// autocomplete.country: "Country Code" => "Landskod"
+// autocomplete.country-name: "Country Name" => "Landets namn"
+// autocomplete.postal-code: "Postal Code" => "Postnummer"
+// autocomplete.cc-name: "Cardholder Name" => "Kortinnehavarens namn"
+// autocomplete.cc-given-name: "Cardholder First Name" => "Kortinnehavarens förnamn"
+// autocomplete.cc-additional-name: "Cardholder Middle Name" => "Kortinnehavarens mellannamn"
+// autocomplete.cc-family-name: "Cardholder Last Name" => "Kortinnehavarens efternamn"
+// autocomplete.cc-number: "Credit Card Number" => "Kreditkortsnummer"
+// autocomplete.cc-exp: "Expiration Date" => "Utgångsdatum"
+// autocomplete.cc-exp-month: "Expiration Month" => "Förfallomånad"
+// autocomplete.cc-exp-year: "Expiration Year" => "Utgångsdatum"
+// autocomplete.cc-csc: "Card Security Code" => "Kortets säkerhetskod"
+// autocomplete.cc-type: "Credit Card Type" => "Typ av kreditkort"
+// autocomplete.transaction-currency: "Transaction Currency" => "Transaktionsvalutan"
+// autocomplete.transaction-amount: "Transaction Amount" => "Transaktionens belopp"
+// autocomplete.language: "Preferred Language" => "Önskat språk"
+// autocomplete.bday: "Birthday" => "Födelsedag"
+// autocomplete.bday-day: "Birthday Day" => "Födelsedag"
+// autocomplete.bday-month: "Birthday Month" => "Födelsedag Månad"
+// autocomplete.bday-year: "Birthday Year" => "Födelsedag År"
+// autocomplete.sex: "Gender" => "Genus"
+// autocomplete.url: "Website URL" => "Webbadress"
+// autocomplete.photo: "Profile Photo" => "Profilbild"
+// autocomplete.tel: "Telephone Number" => "Telefonnummer"
+// autocomplete.tel-country-code: "Country Code for Phone" => "Landskod för telefon"
+// autocomplete.tel-national: "National Telephone Number" => "Nationellt telefonnummer"
+// autocomplete.tel-area-code: "Area Code" => "Riktnummer"
+// autocomplete.tel-local: "Local Phone Number" => "Lokalt telefonnummer"
+// autocomplete.tel-local-prefix: "Local Phone Prefix" => "Prefix för lokal telefon"
+// autocomplete.tel-local-suffix: "Local Phone Suffix" => "Suffix för lokal telefon"
+// autocomplete.tel-extension: "Phone Extension" => "Telefonanknytning"
+// autocomplete.email: "Email Address" => "E-postadress"
+// autocomplete.impp: "Instant Messaging Protocol" => "Protokoll för snabbmeddelanden"

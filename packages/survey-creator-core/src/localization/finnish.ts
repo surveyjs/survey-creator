@@ -23,7 +23,7 @@ export var fiStrings = {
     translation: "Käännös",
     designer: "Kyselyn suunnittelija",
     editor: "JSON Editori",
-    logic: "Kysely logiikka"
+    logic: "Kyselyn logiikka"
   },
   // Question types
   qt: {
@@ -69,6 +69,7 @@ export var fiStrings = {
     surveySettingsTooltip: "Kyselyn asetukset",
     themeSettings: "Teeman asetukset",
     themeSettingsTooltip: "Teeman asetukset",
+    creatorSettingTitle: "Sisällöntuottajan asetukset",
     showPanel: "Näytä Paneeli",
     hidePanel: "Piilota Paneeli",
     prevSelected: "Valitse edellinen",
@@ -86,12 +87,12 @@ export var fiStrings = {
     deletePage: "Poista sivu",
     editPage: "Muokkaa sivua",
     edit: "Muokkaa",
-    newPageName: "sivu",
+    newPageName: "Sivu",
     newQuestionName: "kysymys",
-    newPanelName: "paneeli",
-    newTextItemName: "teksti",
+    newPanelName: "Paneeli",
+    newTextItemName: "Teksti",
     defaultV2Theme: "Oletus",
-    modernTheme: "Nykyaikainen",
+    modernTheme: "Moderni",
     defaultTheme: "Oletus (vanha)",
     testSurveyAgain: "Testaa kysely uudestaan",
     testSurveyWidth: "Kyselyn leveys: ",
@@ -120,7 +121,7 @@ export var fiStrings = {
     generateValidJSON: "Luo kelvollinen JSON",
     generateReadableJSON: "Luo luettava JSON",
     toolbox: "Työkalupakki",
-    "property-grid": "Properties",
+    "property-grid": "Ominaisuudet",
     toolboxFilteredTextPlaceholder: "Kirjoita etsiäksesi...",
     toolboxNoResultsFound: "Tuloksia ei löytynyt",
     propertyGridFilteredTextPlaceholder: "Kirjoita etsiäksesi...",
@@ -242,8 +243,8 @@ export var fiStrings = {
       trigger_setvalueDescription: "Kun loogisessa lausekkeessa käytettyjä kysymysarvoja muutetaan ja looginen lauseke palauttaa arvon tosi, arvo asetetaan valitulle kysymykselle.",
       trigger_copyvalueDescription: "Kun loogisessa lausekkeessa käytettyjä kysymysarvoja muutetaan ja looginen lauseke palauttaa arvon tosi, yhden valitun kysymyksen arvo kopioidaan toiseen valittuun kysymykseen.",
       trigger_skipDescription: "Kun looginen lauseke palauttaa arvon tosi, kysely siirtyy valittuun kysymykseen / kohdista valittu kysymys.",
-      trigger_runExpressionDescription: "When the logic expression returns true, then the custom expression is performed. You may optionally set this expression result into the selected question",
-      completedHtmlOnConditionDescription: "If the logic expression returns true, then the default text for the 'Thank you page' is changed to the given one.",
+      trigger_runExpressionDescription: "Kun looginen lauseke palauttaa arvon tosi, mukautettu lauseke suoritetaan. Voit valinnaisesti asettaa tämän lausekkeen tuloksen valittuun kysymykseen.",
+      completedHtmlOnConditionDescription: "Jos looginen lauseke palauttaa arvon tosi, 'Kiitos-sivun' oletusteksti muutetaan annetuksi tekstiksi.",
       itemExpressionText: "Kun lauseke: '{0}' palauttaa arvon tosi:", //{0} - the expression
       itemEmptyExpressionText: "Uusi sääntö",
       page_visibilityText: "Tee sivu {0} näkyväksi", //{0} page name
@@ -252,7 +253,7 @@ export var fiStrings = {
       question_visibilityText: "Tee kysymys {0} näkyväksi", //{0} question name
       question_enableText: "Ota kysymys {0} käyttöön", //{0} question name
       question_requireText: "Tee kysymyksestä {0} pakollinen", //{0} question name
-      question_resetValueText: "nollaa kysymyksen arvo: {0}", //{0} question name.
+      question_resetValueText: "Nollaa kysymyksen arvo: {0}", //{0} question name.
       question_setValueText: "Määritä arvo: {1} kysymykseen: {0}",
       column_visibilityText: "Tee kysymyksen {1} sarakkeesta {0} näkyvä", //{0} column name, {1} question name
       column_enableText: "Ota kysymyksen sarake {0} {1} käyttöön", //{0} column name, {1} question name
@@ -301,7 +302,7 @@ export var fiStrings = {
       width: "Tekstiin sidotun paneelin leveys",
       minWidth: "Paneelin vähimmäisleveys",
       maxWidth: "Paneelin enimmäisleveys",
-      showNumber: "Numeropaneelit"
+      showNumber: "Numeroi tämä paneeli"
     },
     paneldynamic: {
       name: "Paneelin nimi",
@@ -361,7 +362,7 @@ export var fiStrings = {
       allowClear: "Näytä Tyhjennä-painike allekirjoitusalueella",
       penMinWidth: "Kynän vähimmäisleveys",
       penMaxWidth: "Kynän enimmäisleveys",
-      penColor: "Iskun väri"
+      penColor: "Kynän väri"
     },
     comment: {
       rows: "Syöttökentän korkeus (viivoina)"
@@ -382,12 +383,12 @@ export var fiStrings = {
     },
     // survey templates
     survey: {
-      title: "Nimike",
-      description: "Tutkimuksen kuvaus"
+      title: "Kyselyn otsikko",
+      description: "Kyselyn kuvaus"
     },
     page: {
       name: "Sivun nimi",
-      title: "Nimike",
+      title: "Sivun otsikko",
       description: "Sivun kuvaus",
       visibleIf: "Tee sivusta näkyvä, jos",
       requiredIf: "Tee sivusta pakollinen, jos",
@@ -407,10 +408,10 @@ export var fiStrings = {
     },
     multipletextitem: {
       name: "Nimi",
-      title: "Nimike"
+      title: "Otsikko"
     },
     masksettings: {
-      saveMaskedValue: "Peitetyn arvon tallentaminen kyselyn tuloksiin"
+      saveMaskedValue: "Peittoarvon tallentaminen kyselyn tuloksiin"
     },
     patternmask: {
       pattern: "Arvon kuvio"
@@ -439,7 +440,7 @@ export var fiStrings = {
     cellErrorLocation: "Solun virhesanoman tasaus",
     enabled: "Käytössä",
     disabled: "Pois käytöstä",
-    inherit: "Periä",
+    inherit: "Peri",
     apply: "Käytä",
     ok: "OK",
     save: "Tallenna",
@@ -450,7 +451,7 @@ export var fiStrings = {
     reset: "Nollaa",
     change: "Muuttaa",
     refresh: "Päivitä",
-    close: "Sulkea",
+    close: "Sulje",
     delete: "Poista",
     add: "Lisää",
     addNew: "Lisää uusi",
@@ -516,7 +517,7 @@ export var fiStrings = {
     expressionIsEmpty: "Lauseke on tyhjä",
     value: "Arvo",
     text: "Teksti",
-    rowid: "Rivi ID",
+    rowid: "Rivin ID",
     imageLink: "Kuvalinkki",
     columnEdit: "Muokkaa saraketta: {0}",
     itemEdit: "Muokkaa kohdetta: {0}",
@@ -660,7 +661,7 @@ export var fiStrings = {
     allowDigits: "Salli numerot",
     minCount: "Vähimmäismäärä",
     maxCount: "Enimmäismäärä",
-    regex: "Regular expression",
+    regex: "Säännöllinen lauseke",
     surveyvalidator: {
       text: "Virheviesti",
       expression: "Vahvistuksen lauseke"
@@ -691,8 +692,8 @@ export var fiStrings = {
     loadingHtml: "Merkintä, joka näkyy, kun kyselymalli latautuu",
     commentText: "Kommenttialueen teksti",
     autocomplete: "Automaattisen täydennyksen tyyppi",
-    labelTrue: "\"True\"-merkintä",
-    labelFalse: "Epätosi-tunniste",
+    labelTrue: "Tosi-merkintä",
+    labelFalse: "Epätosi-merkintä",
     allowClear: "Näytä Tyhjennä-painike",
     searchMode: "Hakutila",
     displayStyle: "Arvon näyttötyyli",
@@ -730,7 +731,7 @@ export var fiStrings = {
     horizontalScroll: "Näytä vaakasuora vierityspalkki",
     columnMinWidth: "Sarakkeen vähimmäisleveys (CSS-hyväksytyissä arvoissa)",
     rowTitleWidth: "Riviotsikon leveys (CSS-hyväksytyissä arvoissa)",
-    valueTrue: "\"Tosi\"-arvo",
+    valueTrue: "Tosi-arvo",
     valueFalse: "Epätosi-arvo",
     minErrorText: "Arvo on alle minimin -virhesanoma",
     maxErrorText: "\"Arvo ylittää maksimin\" -virhesanoma",
@@ -828,6 +829,8 @@ export var fiStrings = {
       header: "Otsikko",
       background: "Tausta",
       appearance: "Ulkonäkö",
+      accentColors: "Korostusvärit",
+      scaling: "Skaalaus",
       others: "Muut"
     },
     editProperty: "Muokkaa ominaisuutta'{0}'",
@@ -928,8 +931,8 @@ export var fiStrings = {
   },
   // Property values
   pv: {
-    "true": "tosi",
-    "false": "väärä",
+    "true": "Tosi",
+    "false": "Epätosi",
     file: "Paikalliset tiedostot",
     camera: "Kamera",
     "file-camera": "Paikalliset tiedostot tai kamera",
@@ -941,64 +944,64 @@ export var fiStrings = {
     random: "Satunnainen",
     collapsed: "Pienennetty",
     expanded: "Laajennettu",
-    none: "None",
+    none: "Ei mitään",
     asc: "Nouseva",
     desc: "Laskeva",
     indeterminate: "Määrittämätön",
     selected: "Valittu",
     unselected: "Valitsematta",
-    decimal: "desimaali",
-    currency: "valuutta",
-    percent: "prosentti",
-    firstExpanded: "firstExpanded",
-    off: "off",
-    list: "list",
+    decimal: "Desimaali",
+    currency: "Valuutta",
+    percent: "Prosentti",
+    firstExpanded: "Ensimmäinen laajennettu",
+    off: "Pois",
+    list: "Lista",
     carousel: "Karuselli",
     tab: "Välilehdet",
-    progressTop: "progressTop",
-    progressBottom: "progressBottom",
-    progressTopBottom: "progressTopBottom",
+    progressTop: "Edistyminen ylhäällä",
+    progressBottom: "Edistyminen alhaalla",
+    progressTopBottom: "Edistyminen ylhäällä ja alhaalla",
     horizontal: "Vaaka",
     vertical: "Pysty",
-    top: "top",
-    bottom: "bottom",
-    topBottom: "top and bottom",
-    both: "both",
-    left: "left",
+    top: "Ylhäällä",
+    bottom: "Alhaalla",
+    topBottom: "Ylhäällä ja alhaalla",
+    both: "Molemmat",
+    left: "Vasen",
     right: "Oikea",
-    center: "Keskus",
+    center: "Keskellä",
     leftRight: "Vasen ja oikea",
-    middle: "Keskus",
-    color: "väri",
-    date: "päivämäärä",
-    datetime: "päivämäärä ja aika",
+    middle: "Keskimmäinen",
+    color: "Väri",
+    date: "Päivämäärä",
+    datetime: "Päivämäärä ja aika",
     "datetime-local": "datetime-local",
     email: "Sähköposti",
-    month: "kuukausi",
-    number: "numero",
-    password: "salasana",
-    range: "etäisyys",
-    tel: "puh",
+    month: "Kuukausi",
+    number: "Numero",
+    password: "Salasana",
+    range: "Etäisyys",
+    tel: "Puh",
     text: "Tekstiviesti",
     time: "Aika",
     url: "URL",
-    week: "viikko",
+    week: "Viikko",
     hidden: "Piilotettu",
     edit: "Muokkaa",
     display: "Näytä",
     contain: "Sisältää",
-    cover: "Kansi",
+    cover: "Peittää",
     fill: "Täyttää",
     next: "Seuraava",
     last: "Viimeinen",
-    onComplete: "onComplete",
-    onHidden: "onHidden",
+    onComplete: "Valmistuessa",
+    onHidden: "Piilotettaessa",
     onHiddenContainer: "Kun kysymys tai sen paneeli/sivu piilotetaan",
     clearInvisibleValues: {
-      none: "Koskaan"
+      none: "Ei mitään"
     },
     clearIfInvisible: {
-      none: "Koskaan"
+      none: "Ei mitään"
     },
     inputType: {
       color: "Väri",
@@ -1015,15 +1018,70 @@ export var fiStrings = {
       url: "URL",
       week: "Viikko"
     },
+    autocomplete: {
+      name: "Koko nimi",
+      "honorific-prefix": "Etuliite",
+      "given-name": "Etunimi",
+      "additional-name": "Toinen nimi",
+      "family-name": "Sukunimi",
+      "honorific-suffix": "Suffiksi",
+      nickname: "Lempinimi",
+      "organization-title": "Tehtävänimike",
+      username: "Käyttäjänimi",
+      "new-password": "Uusi salasana",
+      "current-password": "Nykyinen salasana",
+      organization: "Organisaation nimi",
+      "street-address": "Koko kadun osoite",
+      "address-line1": "Osoite, rivi 1",
+      "address-line2": "Osoite, rivi 2",
+      "address-line3": "Osoite, rivi 3",
+      "address-level4": "Tason 4 osoite",
+      "address-level3": "Tason 3 osoite",
+      "address-level2": "Tason 2 osoite",
+      "address-level1": "Tason 1 osoite",
+      country: "Maakoodi",
+      "country-name": "Maan nimi",
+      "postal-code": "Postinumero",
+      "cc-name": "Kortinhaltijan nimi",
+      "cc-given-name": "Kortinhaltijan etunimi",
+      "cc-additional-name": "Kortinhaltijan toinen nimi",
+      "cc-family-name": "Kortinhaltijan sukunimi",
+      "cc-number": "Luottokortin numero",
+      "cc-exp": "Vanhentumispäivä",
+      "cc-exp-month": "Viimeinen voimassaolokuukausi",
+      "cc-exp-year": "Vanhentumisvuosi",
+      "cc-csc": "Kortin turvakoodi",
+      "cc-type": "Luottokortin tyyppi",
+      "transaction-currency": "Tapahtuman valuutta",
+      "transaction-amount": "Tapahtuman summa",
+      language: "Ensisijainen kieli",
+      bday: "Syntymäpäivä",
+      "bday-day": "Syntymäpäivä",
+      "bday-month": "Syntymäpäivä kuukausi",
+      "bday-year": "Syntymäpäivä vuosi",
+      sex: "Sukupuoli",
+      url: "Verkkosivuston URL-osoite",
+      photo: "Profiilikuva",
+      tel: "Puhelinnumero",
+      "tel-country-code": "Puhelimen maakoodi",
+      "tel-national": "Kansallinen puhelinnumero",
+      "tel-area-code": "Suuntanumero",
+      "tel-local": "Paikallinen puhelinnumero",
+      "tel-local-prefix": "Paikallisen puhelimen etuliite",
+      "tel-local-suffix": "Paikallisen puhelimen pääte",
+      "tel-extension": "Puhelimen laajennus",
+      email: "Sähköpostiosoite",
+      impp: "Pikaviestiprotokolla"
+    },
     maskType: {
-      none: "Ei lainkaan",
+      none: "Ei mitään",
       pattern: "Kuvio",
       numeric: "Numeerinen",
       datetime: "Päivämäärä ja kellonaika",
       currency: "Valuutta"
     },
     inputTextAlignment: {
-      auto: "Auto",
+      auto: "Automaattinen",
       left: "Vasen",
       right: "Oikea"
     },
@@ -1044,7 +1102,7 @@ export var fiStrings = {
     pages: "Valmiit sivut",
     questions: "Vastatut kysymykset",
     requiredQuestions: "Vastatut vaaditut kysymykset",
-    correctQuestions: "Kelvolliset vastaukset",
+    correctQuestions: "Oikeat vastaukset",
     buttons: "Valmiit sivut (painike Käyttöliittymä)",
     underInput: "Tulon alla",
     underTitle: "Otsikon alla",
@@ -1054,7 +1112,7 @@ export var fiStrings = {
     underRowSingle: "Rivin alla näkyy vain yksi paneeli",
     auto: "Automaattinen",
     showNavigationButtons: {
-      none: "Piilevä"
+      none: "Ei mitään"
     },
     timerInfoMode: {
       combined: "Molemmat"
@@ -1070,7 +1128,7 @@ export var fiStrings = {
     },
     widthMode: {
       static: "Staattinen",
-      responsive: "Reagoiva"
+      responsive: "Responsiivinen"
     },
     contentMode: {
       image: "Kuva",
@@ -1158,7 +1216,7 @@ export var fiStrings = {
     },
     backgroundImageFit: {
       auto: "Auto",
-      cover: "Kansi",
+      cover: "Peittää",
       contain: "Sisältää",
       fill: "Venyä",
       tile: "Laatta"
@@ -1176,12 +1234,12 @@ export var fiStrings = {
       container: "Sovita konttiin"
     },
     backgroundColorSwitch: {
-      none: "Ei lainkaan",
+      none: "Ei mitään",
       accentColor: "Korostusväri",
       custom: "Tapa"
     },
     colorPalette: {
-      light: "Valo",
+      light: "Vaalea",
       dark: "Tumma"
     },
     isPanelless: {
@@ -1289,7 +1347,8 @@ export var fiStrings = {
       innerIndent: "Lisää tilaa tai reunuksen paneelin sisällön ja paneeliruudun vasemman reunan väliin.",
       startWithNewLine: "Poista valinta, jos haluat näyttää paneelin yhdellä rivillä edellisen kysymyksen tai paneelin kanssa. Asetusta ei käytetä, jos paneeli on lomakkeen ensimmäinen elementti.",
       state: "Valitse seuraavista: \"Laajennettu\" - paneeli näytetään kokonaisuudessaan ja se voidaan kutistaa; \"Tiivistetty\" - paneeli näyttää vain otsikon ja kuvauksen ja sitä voidaan laajentaa; \"Lukittu\" - paneeli näkyy kokonaisuudessaan eikä sitä voi kutistaa.",
-      width: "Asettaa paneelin leveyden suhteessa muihin saman rivin mittauselementteihin. Hyväksyy CSS-arvot (px, %, in, pt jne.)."
+      width: "Asettaa paneelin leveyden suhteessa muihin saman rivin mittauselementteihin. Hyväksyy CSS-arvot (px, %, in, pt jne.).",
+      showQuestionNumbers: "Määrittää numerot tässä paneelissa sisäkkäisille kysymyksille."
     },
     paneldynamic: {
       name: "Paneelin tunnus, joka ei näy vastaajille.",
@@ -1387,7 +1446,7 @@ export var fiStrings = {
     logoWidth: "Määrittää logon leveyden CSS-yksiköissä (px, %, in, pt jne.).",
     logoHeight: "Asettaa logon korkeuden CSS-yksiköinä (px, %, in, pt jne.).",
     logoFit: "Valitse seuraavista: \"Ei mitään\" - kuva säilyttää alkuperäisen kokonsa; \"Sisältää\" - kuvan kokoa muutetaan sopivaksi säilyttäen samalla kuvasuhteensa; \"Kansi\" - kuva täyttää koko laatikon säilyttäen samalla kuvasuhteensa; \"Täytä\" - kuva venytetään täyttämään laatikko säilyttämättä sen kuvasuhdetta.",
-    goNextPageAutomatic: "Valitse, haluatko kyselyn siirtyvän seuraavalle sivulle automaattisesti, kun vastaaja on vastannut kaikkiin nykyisen sivun kysymyksiin.",
+    goNextPageAutomatic: "Valitse tämä, jos haluat, että kysely siirtyy automaattisesti seuraavalle sivulle, kun vastaaja on vastannut kaikkiin nykyisen sivun kysymyksiin. Tätä ominaisuutta ei käytetä, jos sivun viimeinen kysymys on avoin tai sallii useita vastauksia.",
     allowCompleteSurveyAutomatic: "Valitse, haluatko kyselyn täyttyvän automaattisesti, kun vastaaja on vastannut kaikkiin kysymyksiin.",
     showNavigationButtons: "Määrittää sivun navigointipainikkeiden näkyvyyden ja sijainnin.",
     showProgressBar: "Määrittää edistymispalkin näkyvyyden ja sijainnin. \"Auto\"-arvo näyttää edistymispalkin kyselyn otsikon ylä- tai alapuolella.",
@@ -1584,15 +1643,15 @@ export var fiStrings = {
     choicesLazyLoadEnabled: "Valinnat laiska kuorma käytössä",
     choicesLazyLoadPageSize: "Valinnat laiska lataussivun koko",
     inputFieldComponent: "Syöttökentän komponentti",
-    itemComponent: "Nimikkeen osa",
+    itemComponent: "Kohteen osa",
     min: "Min",
     max: "Max",
     minValueExpression: "Pienin arvon lauseke",
     maxValueExpression: "Enimmäisarvon lauseke",
     step: "Askel",
     dataList: "Tietoluettelo",
-    itemSize: "itemSize",
-    itemTitleWidth: "Nimikkeen otsikon leveys (px)",
+    itemSize: "Kohteen koko",
+    itemTitleWidth: "Kohteen otsikon leveys (px)",
     inputTextAlignment: "Syöttöarvon tasaus",
     elements: "Elementit",
     content: "Sisältö",
@@ -1602,7 +1661,7 @@ export var fiStrings = {
     longTap: "Pitkä napautus",
     autoGrow: "Automaattinen kasvu",
     allowResize: "Salli koon muuttaminen",
-    acceptCarriageReturn: "Hyväksy vaunun palautus",
+    acceptCarriageReturn: "Hyväksy kursorin palautus",
     displayMode: "Näyttötila",
     rateType: "Hinnan tyyppi",
     label: "Merkintä",
@@ -1694,6 +1753,20 @@ export var fiStrings = {
       tulip: "Tulppaani",
       brown: "Ruskea",
       green: "Vihreä"
+    }
+  },
+  creatortheme: {
+    "--sjs-special-background": "Pinnan tausta",
+    "--sjs-primary-background-500": "Ensisijainen",
+    "--sjs-secondary-background-500": "Toissijainen",
+    surfaceScale: "Pinta",
+    userInterfaceBaseUnit: "Käyttöliittymä",
+    fontScale: "Fontti",
+    names: {
+      sc2020: "Kyselyn laatija 2020",
+      "default-light": "Valo",
+      "default-dark": "Tumma",
+      "default-contrast": "Kontrasti"
     }
   }
 };
@@ -2287,7 +2360,6 @@ editorLocalization.locales["fi"] = fiStrings;
 // panel.width: "Inline panel width" => "Tekstiin sidotun paneelin leveys"
 // panel.minWidth: "Minimum panel width" => "Paneelin vähimmäisleveys"
 // panel.maxWidth: "Maximum panel width" => "Paneelin enimmäisleveys"
-// panel.showNumber: "Number panels" => "Numeropaneelit"
 // paneldynamic.name: "Panel name" => "Paneelin nimi"
 // paneldynamic.title: "Panel title" => "Paneelin otsikko"
 // paneldynamic.description: "Panel description" => "Paneelin kuvaus"
@@ -2500,7 +2572,6 @@ editorLocalization.locales["fi"] = fiStrings;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "Määrittää logon leveyden CSS-yksiköissä (px, %, in, pt jne.)."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "Asettaa logon korkeuden CSS-yksiköinä (px, %, in, pt jne.)."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Valitse seuraavista: \"Ei mitään\" - kuva säilyttää alkuperäisen kokonsa; \"Sisältää\" - kuvan kokoa muutetaan sopivaksi säilyttäen samalla kuvasuhteensa; \"Kansi\" - kuva täyttää koko laatikon säilyttäen samalla kuvasuhteensa; \"Täytä\" - kuva venytetään täyttämään laatikko säilyttämättä sen kuvasuhdetta."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "Valitse, haluatko kyselyn siirtyvän seuraavalle sivulle automaattisesti, kun vastaaja on vastannut kaikkiin nykyisen sivun kysymyksiin."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "Määrittää sivun navigointipainikkeiden näkyvyyden ja sijainnin."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Määrittää edistymispalkin näkyvyyden ja sijainnin. \"Auto\"-arvo näyttää edistymispalkin kyselyn otsikon ylä- tai alapuolella."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "Ota esikatselusivu käyttöön vain kaikilla kysymyksillä tai vastatuilla kysymyksillä."
@@ -2792,3 +2863,73 @@ editorLocalization.locales["fi"] = fiStrings;
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Kun arvoksi on määritetty 0, korkeus lasketaan automaattisesti otsikon sisällön mukaan."
 // p.mobileHeight: "Height on smartphones" => "Korkeus älypuhelimissa"
 // header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Kun tämä asetus on käytössä, kyselyn yläosa peittää otsikon alaosan."
+
+// ed.creatorSettingTitle: "Creator Settings" => "Sisällöntuottajan asetukset"
+// tabs.accentColors: "Accent colors" => "Korostusvärit"
+// tabs.scaling: "Scaling" => "Skaalaus"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "Määrittää numerot tässä paneelissa sisäkkäisille kysymyksille."
+// creatortheme.--sjs-special-background: "Surface background" => "Pinnan tausta"
+// creatortheme.--sjs-primary-background-500: "Primary" => "Ensisijainen"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "Toissijainen"
+// creatortheme.surfaceScale: "Surface" => "Pinta"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "Käyttöliittymä"
+// creatortheme.fontScale: "Font" => "Fontti"
+// names.sc2020: "Survey Creator 2020" => "Kyselyn laatija 2020"
+// names.default-light: "Light" => "Valo"
+// names.default-dark: "Dark" => "Tumma"
+// names.default-contrast: "Contrast" => "Kontrasti"
+// panel.showNumber: "Number this panel" => "Numeroi tämä paneeli"
+// pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Valitse tämä, jos haluat, että kysely siirtyy automaattisesti seuraavalle sivulle, kun vastaaja on vastannut kaikkiin nykyisen sivun kysymyksiin. Tätä ominaisuutta ei käytetä, jos sivun viimeinen kysymys on avoin tai sallii useita vastauksia."
+// autocomplete.name: "Full Name" => "Koko nimi"
+// autocomplete.honorific-prefix: "Prefix" => "Etuliite"
+// autocomplete.given-name: "First Name" => "Etunimi"
+// autocomplete.additional-name: "Middle Name" => "Toinen nimi"
+// autocomplete.family-name: "Last Name" => "Sukunimi"
+// autocomplete.honorific-suffix: "Suffix" => "Suffiksi"
+// autocomplete.nickname: "Nickname" => "Lempinimi"
+// autocomplete.organization-title: "Job Title" => "Tehtävänimike"
+// autocomplete.username: "User Name" => "Käyttäjänimi"
+// autocomplete.new-password: "New Password" => "Uusi salasana"
+// autocomplete.current-password: "Current Password" => "Nykyinen salasana"
+// autocomplete.organization: "Organization Name" => "Organisaation nimi"
+// autocomplete.street-address: "Full Street Address" => "Koko kadun osoite"
+// autocomplete.address-line1: "Address Line 1" => "Osoite, rivi 1"
+// autocomplete.address-line2: "Address Line 2" => "Osoite, rivi 2"
+// autocomplete.address-line3: "Address Line 3" => "Osoite, rivi 3"
+// autocomplete.address-level4: "Level 4 Address" => "Tason 4 osoite"
+// autocomplete.address-level3: "Level 3 Address" => "Tason 3 osoite"
+// autocomplete.address-level2: "Level 2 Address" => "Tason 2 osoite"
+// autocomplete.address-level1: "Level 1 Address" => "Tason 1 osoite"
+// autocomplete.country: "Country Code" => "Maakoodi"
+// autocomplete.country-name: "Country Name" => "Maan nimi"
+// autocomplete.postal-code: "Postal Code" => "Postinumero"
+// autocomplete.cc-name: "Cardholder Name" => "Kortinhaltijan nimi"
+// autocomplete.cc-given-name: "Cardholder First Name" => "Kortinhaltijan etunimi"
+// autocomplete.cc-additional-name: "Cardholder Middle Name" => "Kortinhaltijan toinen nimi"
+// autocomplete.cc-family-name: "Cardholder Last Name" => "Kortinhaltijan sukunimi"
+// autocomplete.cc-number: "Credit Card Number" => "Luottokortin numero"
+// autocomplete.cc-exp: "Expiration Date" => "Vanhentumispäivä"
+// autocomplete.cc-exp-month: "Expiration Month" => "Viimeinen voimassaolokuukausi"
+// autocomplete.cc-exp-year: "Expiration Year" => "Vanhentumisvuosi"
+// autocomplete.cc-csc: "Card Security Code" => "Kortin turvakoodi"
+// autocomplete.cc-type: "Credit Card Type" => "Luottokortin tyyppi"
+// autocomplete.transaction-currency: "Transaction Currency" => "Tapahtuman valuutta"
+// autocomplete.transaction-amount: "Transaction Amount" => "Tapahtuman summa"
+// autocomplete.language: "Preferred Language" => "Ensisijainen kieli"
+// autocomplete.bday: "Birthday" => "Syntymäpäivä"
+// autocomplete.bday-day: "Birthday Day" => "Syntymäpäivä"
+// autocomplete.bday-month: "Birthday Month" => "Syntymäpäivä kuukausi"
+// autocomplete.bday-year: "Birthday Year" => "Syntymäpäivä vuosi"
+// autocomplete.sex: "Gender" => "Sukupuoli"
+// autocomplete.url: "Website URL" => "Verkkosivuston URL-osoite"
+// autocomplete.photo: "Profile Photo" => "Profiilikuva"
+// autocomplete.tel: "Telephone Number" => "Puhelinnumero"
+// autocomplete.tel-country-code: "Country Code for Phone" => "Puhelimen maakoodi"
+// autocomplete.tel-national: "National Telephone Number" => "Kansallinen puhelinnumero"
+// autocomplete.tel-area-code: "Area Code" => "Suuntanumero"
+// autocomplete.tel-local: "Local Phone Number" => "Paikallinen puhelinnumero"
+// autocomplete.tel-local-prefix: "Local Phone Prefix" => "Paikallisen puhelimen etuliite"
+// autocomplete.tel-local-suffix: "Local Phone Suffix" => "Paikallisen puhelimen pääte"
+// autocomplete.tel-extension: "Phone Extension" => "Puhelimen laajennus"
+// autocomplete.email: "Email Address" => "Sähköpostiosoite"
+// autocomplete.impp: "Instant Messaging Protocol" => "Pikaviestiprotokolla"

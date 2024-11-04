@@ -69,6 +69,7 @@ var polishStrings = {
     surveySettingsTooltip: "Ustawienia ankiety",
     themeSettings: "Ustawienia motywu",
     themeSettingsTooltip: "Ustawienia motywu",
+    creatorSettingTitle: "Ustawienia twórcy",
     showPanel: "Pokaż panel",
     hidePanel: "Panel Ukryj",
     prevSelected: "Wybierz poprzedni",
@@ -301,7 +302,7 @@ var polishStrings = {
       width: "Szerokość panelu w linii",
       minWidth: "Minimalna szerokość panelu",
       maxWidth: "Maksymalna szerokość panelu",
-      showNumber: "Panele numeryczne"
+      showNumber: "Numeruj ten panel"
     },
     paneldynamic: {
       name: "Nazwa panelu",
@@ -828,6 +829,8 @@ var polishStrings = {
       header: "Nagłówek",
       background: "Tło",
       appearance: "Wygląd",
+      accentColors: "Akcenty kolorystyczne",
+      scaling: "Skalowanie",
       others: "Inni"
     },
     editProperty: "Edit property '{0}'",
@@ -1014,6 +1017,61 @@ var polishStrings = {
       time: "Godzina",
       url: "Adres URL",
       week: "Tydzień"
+    },
+    autocomplete: {
+      name: "Imię i nazwisko",
+      "honorific-prefix": "Przedrostek",
+      "given-name": "Imię",
+      "additional-name": "Drugie imię",
+      "family-name": "Nazwisko",
+      "honorific-suffix": "Przyrostek",
+      nickname: "Przydomek",
+      "organization-title": "Stanowisko",
+      username: "Nazwa użytkownika",
+      "new-password": "Nowe hasło",
+      "current-password": "Aktualne hasło",
+      organization: "Nazwa organizacji",
+      "street-address": "Pełna ulica i numer domu",
+      "address-line1": "Adres (wiersz 1)",
+      "address-line2": "Wiersz adresu 2",
+      "address-line3": "Adres (wiersz 3)",
+      "address-level4": "Adres poziomu 4",
+      "address-level3": "Adres poziomu 3",
+      "address-level2": "Adres poziomu 2",
+      "address-level1": "Adres poziomu 1",
+      country: "Kod kraju",
+      "country-name": "Nazwa kraju",
+      "postal-code": "Kod pocztowy",
+      "cc-name": "Imię i nazwisko posiadacza karty",
+      "cc-given-name": "Imię posiadacza karty",
+      "cc-additional-name": "Drugie imię posiadacza karty",
+      "cc-family-name": "Nazwisko posiadacza karty",
+      "cc-number": "Numer karty kredytowej",
+      "cc-exp": "Data ważności",
+      "cc-exp-month": "Miesiąc wygaśnięcia",
+      "cc-exp-year": "Rok wygaśnięcia",
+      "cc-csc": "Kod zabezpieczający karty",
+      "cc-type": "Rodzaj karty kredytowej",
+      "transaction-currency": "Waluta transakcji",
+      "transaction-amount": "Kwota transakcji",
+      language: "Preferowany język",
+      bday: "Urodziny",
+      "bday-day": "Dzień urodzin",
+      "bday-month": "Miesiąc urodzin",
+      "bday-year": "Rok urodzin",
+      sex: "Płeć",
+      url: "Adres URL strony internetowej",
+      photo: "Zdjęcie profilowe",
+      tel: "Numer telefonu",
+      "tel-country-code": "Numer kierunkowy kraju do telefonu",
+      "tel-national": "Krajowy numer telefonu",
+      "tel-area-code": "Numer kierunkowy",
+      "tel-local": "Lokalny numer telefonu",
+      "tel-local-prefix": "Prefiks telefonu lokalnego",
+      "tel-local-suffix": "Sufiks telefonu lokalnego",
+      "tel-extension": "Rozszerzenie telefonu",
+      email: "Adres e-mail",
+      impp: "Protokół wiadomości błyskawicznych"
     },
     maskType: {
       none: "Żaden",
@@ -1289,7 +1347,8 @@ var polishStrings = {
       innerIndent: "Dodaje odstęp lub margines między zawartością panelu a lewą krawędzią ramki panelu.",
       startWithNewLine: "Usuń zaznaczenie, aby wyświetlić panel w jednym wierszu z poprzednim pytaniem lub panelem. To ustawienie nie ma zastosowania, jeśli panel jest pierwszym elementem formularza.",
       state: "Do wyboru: \"Rozwinięty\" - panel wyświetla się w całości i można go zwinąć; \"Zwinięty\" - panel wyświetla tylko tytuł i opis i można go rozwinąć; \"Zablokowany\" - panel jest wyświetlany w całości i nie można go zwinąć.",
-      width: "Ustawia szerokość panelu proporcjonalnie do innych elementów pomiarowych w tej samej linii. Akceptuje wartości CSS (px, %, in, pt itp.)."
+      width: "Ustawia szerokość panelu proporcjonalnie do innych elementów pomiarowych w tej samej linii. Akceptuje wartości CSS (px, %, in, pt itp.).",
+      showQuestionNumbers: "Przypisuje numery pytaniom zagnieżdżonym w tym panelu."
     },
     paneldynamic: {
       name: "Identyfikator panelu, który nie jest widoczny dla respondentów.",
@@ -1387,7 +1446,7 @@ var polishStrings = {
     logoWidth: "Ustawia szerokość logo w jednostkach CSS (px, %, in, pt itd.).",
     logoHeight: "Ustawia wysokość logo w jednostkach CSS (px, %, in, pt itd.).",
     logoFit: "Do wyboru: \"Brak\" - obraz zachowuje swój oryginalny rozmiar; \"Zawieraj\" - rozmiar obrazu jest zmieniany tak, aby pasował przy zachowaniu proporcji; \"Okładka\" - obraz wypełnia całe pole z zachowaniem proporcji; \"Wypełnij\" - obraz jest rozciągany w celu wypełnienia pola bez zachowania jego proporcji.",
-    goNextPageAutomatic: "Wybierz, czy chcesz, aby ankieta automatycznie przechodziła do następnej strony po udzieleniu przez respondenta odpowiedzi na wszystkie pytania na bieżącej stronie.",
+    goNextPageAutomatic: "Wybierz, czy chcesz, aby ankieta automatycznie przechodziła do następnej strony, gdy respondent odpowie na wszystkie pytania na bieżącej stronie. Ta funkcja nie będzie miała zastosowania, jeśli ostatnie pytanie na stronie jest otwarte lub umożliwia udzielenie wielu odpowiedzi.",
     allowCompleteSurveyAutomatic: "Wybierz, jeśli chcesz, aby ankieta była wypełniana automatycznie po udzieleniu odpowiedzi respondenta na wszystkie pytania.",
     showNavigationButtons: "Ustawia widoczność i położenie przycisków nawigacyjnych na stronie.",
     showProgressBar: "Ustawia widoczność i położenie paska postępu. Wartość \"Auto\" wyświetla pasek postępu nad lub pod nagłówkiem ankiety.",
@@ -1694,6 +1753,20 @@ var polishStrings = {
       tulip: "Tulipan",
       brown: "Brązowy",
       green: "Zielony"
+    }
+  },
+  creatortheme: {
+    "--sjs-special-background": "Tło powierzchni",
+    "--sjs-primary-background-500": "Podstawowy",
+    "--sjs-secondary-background-500": "Wtórny",
+    surfaceScale: "Powierzchnia",
+    userInterfaceBaseUnit: "Interfejs użytkownika",
+    fontScale: "Czcionka",
+    names: {
+      sc2020: "Kreator ankiet 2020",
+      "default-light": "Światło",
+      "default-dark": "Ciemny",
+      "default-contrast": "Kontrast"
     }
   }
 };
@@ -2576,7 +2649,6 @@ editorLocalization.locales["pl"] = polishStrings;
 // panel.width: "Inline panel width" => "Szerokość panelu w linii"
 // panel.minWidth: "Minimum panel width" => "Minimalna szerokość panelu"
 // panel.maxWidth: "Maximum panel width" => "Maksymalna szerokość panelu"
-// panel.showNumber: "Number panels" => "Panele numeryczne"
 // paneldynamic.name: "Panel name" => "Nazwa panelu"
 // paneldynamic.title: "Panel title" => "Tytuł panelu"
 // paneldynamic.description: "Panel description" => "Opis panelu"
@@ -2792,7 +2864,6 @@ editorLocalization.locales["pl"] = polishStrings;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "Ustawia szerokość logo w jednostkach CSS (px, %, in, pt itd.)."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "Ustawia wysokość logo w jednostkach CSS (px, %, in, pt itd.)."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Do wyboru: \"Brak\" - obraz zachowuje swój oryginalny rozmiar; \"Zawieraj\" - rozmiar obrazu jest zmieniany tak, aby pasował przy zachowaniu proporcji; \"Okładka\" - obraz wypełnia całe pole z zachowaniem proporcji; \"Wypełnij\" - obraz jest rozciągany w celu wypełnienia pola bez zachowania jego proporcji."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "Wybierz, czy chcesz, aby ankieta automatycznie przechodziła do następnej strony po udzieleniu przez respondenta odpowiedzi na wszystkie pytania na bieżącej stronie."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "Ustawia widoczność i położenie przycisków nawigacyjnych na stronie."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Ustawia widoczność i położenie paska postępu. Wartość \"Auto\" wyświetla pasek postępu nad lub pod nagłówkiem ankiety."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "Włącz stronę podglądu ze wszystkimi pytaniami lub tylko odpowiedziami."
@@ -3087,3 +3158,72 @@ editorLocalization.locales["pl"] = polishStrings;
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Po ustawieniu wartości 0 wysokość jest obliczana automatycznie, aby pomieścić zawartość nagłówka."
 // p.mobileHeight: "Height on smartphones" => "Wysokość na smartfonach"
 // header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Gdy ta opcja jest włączona, górna krawędź ankiety nakłada się na dolną część nagłówka."
+// ed.creatorSettingTitle: "Creator Settings" => "Ustawienia twórcy"
+// tabs.accentColors: "Accent colors" => "Akcenty kolorystyczne"
+// tabs.scaling: "Scaling" => "Skalowanie"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "Przypisuje numery pytaniom zagnieżdżonym w tym panelu."
+// creatortheme.--sjs-special-background: "Surface background" => "Tło powierzchni"
+// creatortheme.--sjs-primary-background-500: "Primary" => "Podstawowy"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "Wtórny"
+// creatortheme.surfaceScale: "Surface" => "Powierzchnia"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "Interfejs użytkownika"
+// creatortheme.fontScale: "Font" => "Czcionka"
+// names.sc2020: "Survey Creator 2020" => "Kreator ankiet 2020"
+// names.default-light: "Light" => "Światło"
+// names.default-dark: "Dark" => "Ciemny"
+// names.default-contrast: "Contrast" => "Kontrast"
+// panel.showNumber: "Number this panel" => "Numeruj ten panel"
+// pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Wybierz, czy chcesz, aby ankieta automatycznie przechodziła do następnej strony, gdy respondent odpowie na wszystkie pytania na bieżącej stronie. Ta funkcja nie będzie miała zastosowania, jeśli ostatnie pytanie na stronie jest otwarte lub umożliwia udzielenie wielu odpowiedzi."
+// autocomplete.name: "Full Name" => "Imię i nazwisko"
+// autocomplete.honorific-prefix: "Prefix" => "Przedrostek"
+// autocomplete.given-name: "First Name" => "Imię"
+// autocomplete.additional-name: "Middle Name" => "Drugie imię"
+// autocomplete.family-name: "Last Name" => "Nazwisko"
+// autocomplete.honorific-suffix: "Suffix" => "Przyrostek"
+// autocomplete.nickname: "Nickname" => "Przydomek"
+// autocomplete.organization-title: "Job Title" => "Stanowisko"
+// autocomplete.username: "User Name" => "Nazwa użytkownika"
+// autocomplete.new-password: "New Password" => "Nowe hasło"
+// autocomplete.current-password: "Current Password" => "Aktualne hasło"
+// autocomplete.organization: "Organization Name" => "Nazwa organizacji"
+// autocomplete.street-address: "Full Street Address" => "Pełna ulica i numer domu"
+// autocomplete.address-line1: "Address Line 1" => "Adres (wiersz 1)"
+// autocomplete.address-line2: "Address Line 2" => "Wiersz adresu 2"
+// autocomplete.address-line3: "Address Line 3" => "Adres (wiersz 3)"
+// autocomplete.address-level4: "Level 4 Address" => "Adres poziomu 4"
+// autocomplete.address-level3: "Level 3 Address" => "Adres poziomu 3"
+// autocomplete.address-level2: "Level 2 Address" => "Adres poziomu 2"
+// autocomplete.address-level1: "Level 1 Address" => "Adres poziomu 1"
+// autocomplete.country: "Country Code" => "Kod kraju"
+// autocomplete.country-name: "Country Name" => "Nazwa kraju"
+// autocomplete.postal-code: "Postal Code" => "Kod pocztowy"
+// autocomplete.cc-name: "Cardholder Name" => "Imię i nazwisko posiadacza karty"
+// autocomplete.cc-given-name: "Cardholder First Name" => "Imię posiadacza karty"
+// autocomplete.cc-additional-name: "Cardholder Middle Name" => "Drugie imię posiadacza karty"
+// autocomplete.cc-family-name: "Cardholder Last Name" => "Nazwisko posiadacza karty"
+// autocomplete.cc-number: "Credit Card Number" => "Numer karty kredytowej"
+// autocomplete.cc-exp: "Expiration Date" => "Data ważności"
+// autocomplete.cc-exp-month: "Expiration Month" => "Miesiąc wygaśnięcia"
+// autocomplete.cc-exp-year: "Expiration Year" => "Rok wygaśnięcia"
+// autocomplete.cc-csc: "Card Security Code" => "Kod zabezpieczający karty"
+// autocomplete.cc-type: "Credit Card Type" => "Rodzaj karty kredytowej"
+// autocomplete.transaction-currency: "Transaction Currency" => "Waluta transakcji"
+// autocomplete.transaction-amount: "Transaction Amount" => "Kwota transakcji"
+// autocomplete.language: "Preferred Language" => "Preferowany język"
+// autocomplete.bday: "Birthday" => "Urodziny"
+// autocomplete.bday-day: "Birthday Day" => "Dzień urodzin"
+// autocomplete.bday-month: "Birthday Month" => "Miesiąc urodzin"
+// autocomplete.bday-year: "Birthday Year" => "Rok urodzin"
+// autocomplete.sex: "Gender" => "Płeć"
+// autocomplete.url: "Website URL" => "Adres URL strony internetowej"
+// autocomplete.photo: "Profile Photo" => "Zdjęcie profilowe"
+// autocomplete.tel: "Telephone Number" => "Numer telefonu"
+// autocomplete.tel-country-code: "Country Code for Phone" => "Numer kierunkowy kraju do telefonu"
+// autocomplete.tel-national: "National Telephone Number" => "Krajowy numer telefonu"
+// autocomplete.tel-area-code: "Area Code" => "Numer kierunkowy"
+// autocomplete.tel-local: "Local Phone Number" => "Lokalny numer telefonu"
+// autocomplete.tel-local-prefix: "Local Phone Prefix" => "Prefiks telefonu lokalnego"
+// autocomplete.tel-local-suffix: "Local Phone Suffix" => "Sufiks telefonu lokalnego"
+// autocomplete.tel-extension: "Phone Extension" => "Rozszerzenie telefonu"
+// autocomplete.email: "Email Address" => "Adres e-mail"
+// autocomplete.impp: "Instant Messaging Protocol" => "Protokół wiadomości błyskawicznych"

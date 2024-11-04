@@ -69,6 +69,7 @@ export var hrStrings = {
     surveySettingsTooltip: "Postavke upitnika",
     themeSettings: "Postavke teme",
     themeSettingsTooltip: "Postavke teme",
+    creatorSettingTitle: "Postavke autora",
     showPanel: "Pokaži ploču",
     hidePanel: "Sakrij ploču",
     prevSelected: "Odaberi prethodno",
@@ -301,7 +302,7 @@ export var hrStrings = {
       width: "Širina umetnute ploče",
       minWidth: "Minimalna širina ploče",
       maxWidth: "Maksimalna širina ploče",
-      showNumber: "Brojčane ploče"
+      showNumber: "Numerirajte ovu ploču"
     },
     paneldynamic: {
       name: "Naziv ploče",
@@ -828,6 +829,8 @@ export var hrStrings = {
       header: "Zaglavlje",
       background: "Pozadina",
       appearance: "Izgled",
+      accentColors: "Naglašavajuće boje",
+      scaling: "Skaliranje",
       others: "Drugi"
     },
     editProperty: "Uređivanje objekta '{0}'",
@@ -1014,6 +1017,61 @@ export var hrStrings = {
       time: "Vrijeme",
       url: "URL",
       week: "Tjedan"
+    },
+    autocomplete: {
+      name: "Puno ime i prezime",
+      "honorific-prefix": "Prefiks",
+      "given-name": "Ime",
+      "additional-name": "Srednje ime",
+      "family-name": "Prezime",
+      "honorific-suffix": "Sufiks",
+      nickname: "Nadimak",
+      "organization-title": "Naziv radnog mjesta",
+      username: "Korisničko ime",
+      "new-password": "Nova lozinka",
+      "current-password": "Trenutna lozinka",
+      organization: "Naziv tvrtke ili ustanove",
+      "street-address": "Puna adresa",
+      "address-line1": "Redak adrese 1",
+      "address-line2": "Redak adrese 2",
+      "address-line3": "Redak adrese 3",
+      "address-level4": "Adresa razine 4",
+      "address-level3": "Adresa razine 3",
+      "address-level2": "Adresa razine 2",
+      "address-level1": "Adresa razine 1",
+      country: "Pozivni broj zemlje",
+      "country-name": "Naziv zemlje",
+      "postal-code": "Poštanski broj",
+      "cc-name": "Ime vlasnika kartice",
+      "cc-given-name": "Ime vlasnika kartice",
+      "cc-additional-name": "Srednje ime vlasnika kartice",
+      "cc-family-name": "Prezime vlasnika kartice",
+      "cc-number": "Broj kreditne kartice",
+      "cc-exp": "Isteka",
+      "cc-exp-month": "Mjesec isteka",
+      "cc-exp-year": "Godina isteka",
+      "cc-csc": "Sigurnosni kod kartice",
+      "cc-type": "Vrsta kreditne kartice",
+      "transaction-currency": "Valuta transakcije",
+      "transaction-amount": "Iznos transakcije",
+      language: "Preferirani jezik",
+      bday: "Rođendan",
+      "bday-day": "Rođendanski dan",
+      "bday-month": "Rođendanski mjesec",
+      "bday-year": "Godina rođenja",
+      sex: "Spol",
+      url: "URL web stranice",
+      photo: "Profilna fotografija",
+      tel: "Telefonski broj",
+      "tel-country-code": "Pozivni broj za telefon",
+      "tel-national": "Nacionalni telefonski broj",
+      "tel-area-code": "Pozivni broj",
+      "tel-local": "Lokalni telefonski broj",
+      "tel-local-prefix": "Prefiks lokalnog telefona",
+      "tel-local-suffix": "Sufiks lokalnog telefona",
+      "tel-extension": "Proširenje telefona",
+      email: "Adresa e-pošte",
+      impp: "Protokol za razmjenu izravnih poruka"
     },
     maskType: {
       none: "Nijedan",
@@ -1289,7 +1347,8 @@ export var hrStrings = {
       innerIndent: "Dodaje razmak ili marginu između sadržaja ploče i lijevog obruba okvira ploče.",
       startWithNewLine: "Poništite odabir za prikaz ploče u jednom retku s prethodnim pitanjem ili pločom. Postavka se ne primjenjuje ako je ploča prvi element u obrascu.",
       state: "Odaberite između: \"Prošireno\" - ploča je prikazana u cijelosti i može se sažeti; \"Sažeto\" - ploča prikazuje samo naslov i opis i može se proširiti; \"Zaključano\" - ploča je prikazana u cijelosti i ne može se sažeti.",
-      width: "Postavlja širinu ploče proporcionalno ostalim elementima istraživanja u istoj liniji. Prihvaća CSS vrijednosti (px, %, in, pt itd.)."
+      width: "Postavlja širinu ploče proporcionalno ostalim elementima istraživanja u istoj liniji. Prihvaća CSS vrijednosti (px, %, in, pt itd.).",
+      showQuestionNumbers: "Dodjeljuje brojeve pitanjima ugniježđenim unutar ove ploče."
     },
     paneldynamic: {
       name: "ID ploče koji nije vidljiv ispitanicima.",
@@ -1387,7 +1446,7 @@ export var hrStrings = {
     logoWidth: "Postavlja širinu logotipa u CSS jedinicama (px, %, in, pt itd.).",
     logoHeight: "Postavlja visinu logotipa u CSS jedinicama (px, %, in, pt itd.).",
     logoFit: "Odaberite između: \"Nema\" - slika zadržava svoju izvornu veličinu; \"Sadrži\" - slika se mijenja kako bi stala uz zadržavanje omjera slike; \"Poklopac\" - slika ispunjava cijelu kutiju zadržavajući omjer slike; \"Ispuna\" - slika se rasteže kako bi ispunila kutiju bez zadržavanja omjera slike.",
-    goNextPageAutomatic: "Odaberite želite li da anketa automatski prijeđe na sljedeću stranicu nakon što ispitanik odgovori na sva pitanja na trenutnoj stranici.",
+    goNextPageAutomatic: "Odaberite želite li da se upitnik automatski prijeđe na sljedeću stranicu nakon što ispitanik odgovori na sva pitanja na trenutnoj stranici. Ova se značajka neće primijeniti ako je posljednje pitanje na stranici otvoreno ili dopušta više odgovora.",
     allowCompleteSurveyAutomatic: "Odaberite želite li da se anketa automatski dovrši nakon što ispitanik odgovori na sva pitanja.",
     showNavigationButtons: "Postavlja vidljivost i mjesto navigacijskih gumba na stranici.",
     showProgressBar: "Postavlja vidljivost i mjesto trake napretka. Vrijednost \"Automatski\" prikazuje traku napretka iznad ili ispod zaglavlja upitnika.",
@@ -1694,6 +1753,20 @@ export var hrStrings = {
       tulip: "Lala",
       brown: "Smeđ",
       green: "Zelen"
+    }
+  },
+  creatortheme: {
+    "--sjs-special-background": "Pozadina površine",
+    "--sjs-primary-background-500": "Glavni",
+    "--sjs-secondary-background-500": "Sekundaran",
+    surfaceScale: "Površina",
+    userInterfaceBaseUnit: "Korisničko sučelje",
+    fontScale: "Krstionica",
+    names: {
+      sc2020: "Kreator ankete 2020",
+      "default-light": "Svjetlo",
+      "default-dark": "Mračan",
+      "default-contrast": "Razlika"
     }
   }
 };
@@ -2303,7 +2376,6 @@ editorLocalization.locales["hr"] = hrStrings;
 // panel.width: "Inline panel width" => "Širina umetnute ploče"
 // panel.minWidth: "Minimum panel width" => "Minimalna širina ploče"
 // panel.maxWidth: "Maximum panel width" => "Maksimalna širina ploče"
-// panel.showNumber: "Number panels" => "Brojčane ploče"
 // paneldynamic.name: "Panel name" => "Naziv ploče"
 // paneldynamic.title: "Panel title" => "Naslov ploče"
 // paneldynamic.description: "Panel description" => "Opis ploče"
@@ -2519,7 +2591,6 @@ editorLocalization.locales["hr"] = hrStrings;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "Postavlja širinu logotipa u CSS jedinicama (px, %, in, pt itd.)."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "Postavlja visinu logotipa u CSS jedinicama (px, %, in, pt itd.)."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Odaberite između: \"Nema\" - slika zadržava svoju izvornu veličinu; \"Sadrži\" - slika se mijenja kako bi stala uz zadržavanje omjera slike; \"Poklopac\" - slika ispunjava cijelu kutiju zadržavajući omjer slike; \"Ispuna\" - slika se rasteže kako bi ispunila kutiju bez zadržavanja omjera slike."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "Odaberite želite li da anketa automatski prijeđe na sljedeću stranicu nakon što ispitanik odgovori na sva pitanja na trenutnoj stranici."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "Postavlja vidljivost i mjesto navigacijskih gumba na stranici."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Postavlja vidljivost i mjesto trake napretka. Vrijednost \"Automatski\" prikazuje traku napretka iznad ili ispod zaglavlja upitnika."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "Omogućite stranicu pretpregleda samo sa svim ili odgovorenim pitanjima."
@@ -2814,3 +2885,72 @@ editorLocalization.locales["hr"] = hrStrings;
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Kada je postavljena na 0, visina se automatski izračunava kako bi se prilagodio sadržaju zaglavlja."
 // p.mobileHeight: "Height on smartphones" => "Visina na pametnim telefonima"
 // header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Kada je omogućeno, vrh upitnika prekriva dno zaglavlja."
+// ed.creatorSettingTitle: "Creator Settings" => "Postavke autora"
+// tabs.accentColors: "Accent colors" => "Naglašavajuće boje"
+// tabs.scaling: "Scaling" => "Skaliranje"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "Dodjeljuje brojeve pitanjima ugniježđenim unutar ove ploče."
+// creatortheme.--sjs-special-background: "Surface background" => "Pozadina površine"
+// creatortheme.--sjs-primary-background-500: "Primary" => "Glavni"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "Sekundaran"
+// creatortheme.surfaceScale: "Surface" => "Površina"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "Korisničko sučelje"
+// creatortheme.fontScale: "Font" => "Krstionica"
+// names.sc2020: "Survey Creator 2020" => "Kreator ankete 2020"
+// names.default-light: "Light" => "Svjetlo"
+// names.default-dark: "Dark" => "Mračan"
+// names.default-contrast: "Contrast" => "Razlika"
+// panel.showNumber: "Number this panel" => "Numerirajte ovu ploču"
+// pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Odaberite želite li da se upitnik automatski prijeđe na sljedeću stranicu nakon što ispitanik odgovori na sva pitanja na trenutnoj stranici. Ova se značajka neće primijeniti ako je posljednje pitanje na stranici otvoreno ili dopušta više odgovora."
+// autocomplete.name: "Full Name" => "Puno ime i prezime"
+// autocomplete.honorific-prefix: "Prefix" => "Prefiks"
+// autocomplete.given-name: "First Name" => "Ime"
+// autocomplete.additional-name: "Middle Name" => "Srednje ime"
+// autocomplete.family-name: "Last Name" => "Prezime"
+// autocomplete.honorific-suffix: "Suffix" => "Sufiks"
+// autocomplete.nickname: "Nickname" => "Nadimak"
+// autocomplete.organization-title: "Job Title" => "Naziv radnog mjesta"
+// autocomplete.username: "User Name" => "Korisničko ime"
+// autocomplete.new-password: "New Password" => "Nova lozinka"
+// autocomplete.current-password: "Current Password" => "Trenutna lozinka"
+// autocomplete.organization: "Organization Name" => "Naziv tvrtke ili ustanove"
+// autocomplete.street-address: "Full Street Address" => "Puna adresa"
+// autocomplete.address-line1: "Address Line 1" => "Redak adrese 1"
+// autocomplete.address-line2: "Address Line 2" => "Redak adrese 2"
+// autocomplete.address-line3: "Address Line 3" => "Redak adrese 3"
+// autocomplete.address-level4: "Level 4 Address" => "Adresa razine 4"
+// autocomplete.address-level3: "Level 3 Address" => "Adresa razine 3"
+// autocomplete.address-level2: "Level 2 Address" => "Adresa razine 2"
+// autocomplete.address-level1: "Level 1 Address" => "Adresa razine 1"
+// autocomplete.country: "Country Code" => "Pozivni broj zemlje"
+// autocomplete.country-name: "Country Name" => "Naziv zemlje"
+// autocomplete.postal-code: "Postal Code" => "Poštanski broj"
+// autocomplete.cc-name: "Cardholder Name" => "Ime vlasnika kartice"
+// autocomplete.cc-given-name: "Cardholder First Name" => "Ime vlasnika kartice"
+// autocomplete.cc-additional-name: "Cardholder Middle Name" => "Srednje ime vlasnika kartice"
+// autocomplete.cc-family-name: "Cardholder Last Name" => "Prezime vlasnika kartice"
+// autocomplete.cc-number: "Credit Card Number" => "Broj kreditne kartice"
+// autocomplete.cc-exp: "Expiration Date" => "Isteka"
+// autocomplete.cc-exp-month: "Expiration Month" => "Mjesec isteka"
+// autocomplete.cc-exp-year: "Expiration Year" => "Godina isteka"
+// autocomplete.cc-csc: "Card Security Code" => "Sigurnosni kod kartice"
+// autocomplete.cc-type: "Credit Card Type" => "Vrsta kreditne kartice"
+// autocomplete.transaction-currency: "Transaction Currency" => "Valuta transakcije"
+// autocomplete.transaction-amount: "Transaction Amount" => "Iznos transakcije"
+// autocomplete.language: "Preferred Language" => "Preferirani jezik"
+// autocomplete.bday: "Birthday" => "Rođendan"
+// autocomplete.bday-day: "Birthday Day" => "Rođendanski dan"
+// autocomplete.bday-month: "Birthday Month" => "Rođendanski mjesec"
+// autocomplete.bday-year: "Birthday Year" => "Godina rođenja"
+// autocomplete.sex: "Gender" => "Spol"
+// autocomplete.url: "Website URL" => "URL web stranice"
+// autocomplete.photo: "Profile Photo" => "Profilna fotografija"
+// autocomplete.tel: "Telephone Number" => "Telefonski broj"
+// autocomplete.tel-country-code: "Country Code for Phone" => "Pozivni broj za telefon"
+// autocomplete.tel-national: "National Telephone Number" => "Nacionalni telefonski broj"
+// autocomplete.tel-area-code: "Area Code" => "Pozivni broj"
+// autocomplete.tel-local: "Local Phone Number" => "Lokalni telefonski broj"
+// autocomplete.tel-local-prefix: "Local Phone Prefix" => "Prefiks lokalnog telefona"
+// autocomplete.tel-local-suffix: "Local Phone Suffix" => "Sufiks lokalnog telefona"
+// autocomplete.tel-extension: "Phone Extension" => "Proširenje telefona"
+// autocomplete.email: "Email Address" => "Adresa e-pošte"
+// autocomplete.impp: "Instant Messaging Protocol" => "Protokol za razmjenu izravnih poruka"

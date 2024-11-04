@@ -69,16 +69,16 @@
       ]
     },
     {
-      "Name": "Troubleshooting",
-      "Title": "Troubleshooting"
-    },
-    {
       "Name": "End-User-Guide",
       "Title": "End-User Documentation",
       "Items": [
         {
           "Name": "end-user-guide-user-interface",
           "Title": "UI Overview"
+        },
+        {
+          "Name": "end-user-guide-general-survey-layout-settings",
+          "Title": "Survey Layout"
         },
         {
           "Name": "end-user-guide-skip-logic-in-forms",
@@ -91,6 +91,10 @@
         {
           "Name": "end-user-guide-branching-logic",
           "Title": "Branching Logic"
+        },
+        {
+          "Name": "end-user-guide-numbering-within-form",
+          "Title": "Numbering"
         },
         {
           "Name": "end-user-guide-survey-theming",

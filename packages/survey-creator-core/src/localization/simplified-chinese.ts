@@ -69,6 +69,7 @@ var simplifiedChineseTranslation = {
     surveySettingsTooltip: "调查设置",
     themeSettings: "主题设置",
     themeSettingsTooltip: "主题设置",
+    creatorSettingTitle: "Creator 设置",
     showPanel: "显示面板",
     hidePanel: "“隐藏”面板",
     prevSelected: "选择上一个",
@@ -301,7 +302,7 @@ var simplifiedChineseTranslation = {
       width: "内嵌面板宽度",
       minWidth: "最小面板宽度",
       maxWidth: "最大面板宽度",
-      showNumber: "数字面板"
+      showNumber: "为此面板编号"
     },
     paneldynamic: {
       name: "面板名称",
@@ -828,6 +829,8 @@ var simplifiedChineseTranslation = {
       header: "页眉",
       background: "背景",
       appearance: "外观",
+      accentColors: "强调色",
+      scaling: "缩放",
       others: "别人"
     },
     editProperty: "编辑属性: '{0}'",
@@ -1014,6 +1017,61 @@ var simplifiedChineseTranslation = {
       time: "时间",
       url: "网址",
       week: "周"
+    },
+    autocomplete: {
+      name: "全名",
+      "honorific-prefix": "前缀",
+      "given-name": "名字",
+      "additional-name": "中间名",
+      "family-name": "姓",
+      "honorific-suffix": "后缀",
+      nickname: "昵称",
+      "organization-title": "职称",
+      username: "用户名",
+      "new-password": "新密码",
+      "current-password": "当前密码",
+      organization: "组织名称",
+      "street-address": "全街地址",
+      "address-line1": "地址行 1",
+      "address-line2": "地址行 2",
+      "address-line3": "地址行 3",
+      "address-level4": "4 级地址",
+      "address-level3": "3 级地址",
+      "address-level2": "2 级地址",
+      "address-level1": "1 级地址",
+      country: "国家代码",
+      "country-name": "国家/地区名称",
+      "postal-code": "邮政编码",
+      "cc-name": "持卡人姓名",
+      "cc-given-name": "持卡人名字",
+      "cc-additional-name": "持卡人中间名",
+      "cc-family-name": "持卡人姓氏",
+      "cc-number": "信用卡号",
+      "cc-exp": "有效期",
+      "cc-exp-month": "到期月份",
+      "cc-exp-year": "到期年份",
+      "cc-csc": "卡安全码",
+      "cc-type": "信用卡类型",
+      "transaction-currency": "交易货币",
+      "transaction-amount": "交易金额",
+      language: "首选语言",
+      bday: "生日",
+      "bday-day": "生日",
+      "bday-month": "生日月份",
+      "bday-year": "生日年份",
+      sex: "性",
+      url: "网站 URL",
+      photo: "个人头像",
+      tel: "电话号码",
+      "tel-country-code": "电话的国家代码",
+      "tel-national": "全国电话号码",
+      "tel-area-code": "区号",
+      "tel-local": "本地电话号码",
+      "tel-local-prefix": "本地电话前缀",
+      "tel-local-suffix": "本地电话后缀",
+      "tel-extension": "电话分机",
+      email: "电子邮件地址",
+      impp: "即时通讯协议"
     },
     maskType: {
       none: "没有",
@@ -1289,7 +1347,8 @@ var simplifiedChineseTranslation = {
       innerIndent: "在面板内容和面板框的左边框之间添加空格或边距。",
       startWithNewLine: "取消选择以将面板与上一个问题或面板显示在一行中。如果面板是窗体中的第一个元素，则该设置不适用。",
       state: "从中选择：“展开” - 面板完整显示，可以折叠;“已折叠” - 面板仅显示标题和描述，可以展开;“已锁定” - 面板完整显示，无法折叠。",
-      width: "设置面板的宽度，使其与同一行中的其他测量图元成比例。接受 CSS 值（px、%、in、pt 等）。"
+      width: "设置面板的宽度，使其与同一行中的其他测量图元成比例。接受 CSS 值（px、%、in、pt 等）。",
+      showQuestionNumbers: "为嵌套在此面板中的问题分配编号。"
     },
     paneldynamic: {
       name: "受访者不可见的面板 ID。",
@@ -1387,7 +1446,7 @@ var simplifiedChineseTranslation = {
     logoWidth: "以 CSS 单位（px、%、in、pt 等）设置徽标宽度。",
     logoHeight: "以 CSS 单位（px、%、in、pt 等）设置徽标高度。",
     logoFit: "从以下选项中选择：“无” - 图像保持其原始大小;“包含” - 调整图像大小以适应其纵横比;“封面” - 图像填充整个框，同时保持其纵横比;“填充” - 拉伸图像以填充框，而不保持其纵横比。",
-    goNextPageAutomatic: "选择是否希望调查在受访者回答当前页面上的所有问题后自动前进到下一页。",
+    goNextPageAutomatic: "选择是否希望调查在受访者回答了当前页面上的所有问题后自动前进到下一页。如果页面上的最后一个问题是开放式的或允许多个答案，则此功能将不适用。",
     allowCompleteSurveyAutomatic: "选择是否希望在受访者回答所有问题后自动完成调查。",
     showNavigationButtons: "设置导航按钮在页面上的可见性和位置。",
     showProgressBar: "设置进度条的可见性和位置。“自动”值显示测量标题上方或下方的进度条。",
@@ -1694,6 +1753,20 @@ var simplifiedChineseTranslation = {
       tulip: "郁金香",
       brown: "棕色",
       green: "绿"
+    }
+  },
+  creatortheme: {
+    "--sjs-special-background": "表面背景",
+    "--sjs-primary-background-500": "主要",
+    "--sjs-secondary-background-500": "二 次",
+    surfaceScale: "表面",
+    userInterfaceBaseUnit: "用户界面",
+    fontScale: "字体",
+    names: {
+      sc2020: "调查创建者 2020",
+      "default-light": "光",
+      "default-dark": "黑暗",
+      "default-contrast": "反差"
     }
   }
 };
@@ -2451,7 +2524,6 @@ editorLocalization.locales["zh-cn"] = simplifiedChineseTranslation;
 // panel.width: "Inline panel width" => "内嵌面板宽度"
 // panel.minWidth: "Minimum panel width" => "最小面板宽度"
 // panel.maxWidth: "Maximum panel width" => "最大面板宽度"
-// panel.showNumber: "Number panels" => "数字面板"
 // paneldynamic.name: "Panel name" => "面板名称"
 // paneldynamic.title: "Panel title" => "面板标题"
 // paneldynamic.description: "Panel description" => "面板说明"
@@ -2667,7 +2739,6 @@ editorLocalization.locales["zh-cn"] = simplifiedChineseTranslation;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "以 CSS 单位（px、%、in、pt 等）设置徽标宽度。"
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "以 CSS 单位（px、%、in、pt 等）设置徽标高度。"
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "从以下选项中选择：“无” - 图像保持其原始大小;“包含” - 调整图像大小以适应其纵横比;“封面” - 图像填充整个框，同时保持其纵横比;“填充” - 拉伸图像以填充框，而不保持其纵横比。"
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "选择是否希望调查在受访者回答当前页面上的所有问题后自动前进到下一页。"
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "设置导航按钮在页面上的可见性和位置。"
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "设置进度条的可见性和位置。“自动”值显示测量标题上方或下方的进度条。"
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "启用仅包含所有问题或已回答问题的预览页面。"
@@ -2962,3 +3033,72 @@ editorLocalization.locales["zh-cn"] = simplifiedChineseTranslation;
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "设置为 0 时，将自动计算高度以适应标题的内容。"
 // p.mobileHeight: "Height on smartphones" => "智能手机上的身高"
 // header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "启用后，调查的顶部将覆盖页眉的底部。"
+// ed.creatorSettingTitle: "Creator Settings" => "Creator 设置"
+// tabs.accentColors: "Accent colors" => "强调色"
+// tabs.scaling: "Scaling" => "缩放"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "为嵌套在此面板中的问题分配编号。"
+// creatortheme.--sjs-special-background: "Surface background" => "表面背景"
+// creatortheme.--sjs-primary-background-500: "Primary" => "主要"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "二 次"
+// creatortheme.surfaceScale: "Surface" => "表面"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "用户界面"
+// creatortheme.fontScale: "Font" => "字体"
+// names.sc2020: "Survey Creator 2020" => "调查创建者 2020"
+// names.default-light: "Light" => "光"
+// names.default-dark: "Dark" => "黑暗"
+// names.default-contrast: "Contrast" => "反差"
+// panel.showNumber: "Number this panel" => "为此面板编号"
+// pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "选择是否希望调查在受访者回答了当前页面上的所有问题后自动前进到下一页。如果页面上的最后一个问题是开放式的或允许多个答案，则此功能将不适用。"
+// autocomplete.name: "Full Name" => "全名"
+// autocomplete.honorific-prefix: "Prefix" => "前缀"
+// autocomplete.given-name: "First Name" => "名字"
+// autocomplete.additional-name: "Middle Name" => "中间名"
+// autocomplete.family-name: "Last Name" => "姓"
+// autocomplete.honorific-suffix: "Suffix" => "后缀"
+// autocomplete.nickname: "Nickname" => "昵称"
+// autocomplete.organization-title: "Job Title" => "职称"
+// autocomplete.username: "User Name" => "用户名"
+// autocomplete.new-password: "New Password" => "新密码"
+// autocomplete.current-password: "Current Password" => "当前密码"
+// autocomplete.organization: "Organization Name" => "组织名称"
+// autocomplete.street-address: "Full Street Address" => "全街地址"
+// autocomplete.address-line1: "Address Line 1" => "地址行 1"
+// autocomplete.address-line2: "Address Line 2" => "地址行 2"
+// autocomplete.address-line3: "Address Line 3" => "地址行 3"
+// autocomplete.address-level4: "Level 4 Address" => "4 级地址"
+// autocomplete.address-level3: "Level 3 Address" => "3 级地址"
+// autocomplete.address-level2: "Level 2 Address" => "2 级地址"
+// autocomplete.address-level1: "Level 1 Address" => "1 级地址"
+// autocomplete.country: "Country Code" => "国家代码"
+// autocomplete.country-name: "Country Name" => "国家/地区名称"
+// autocomplete.postal-code: "Postal Code" => "邮政编码"
+// autocomplete.cc-name: "Cardholder Name" => "持卡人姓名"
+// autocomplete.cc-given-name: "Cardholder First Name" => "持卡人名字"
+// autocomplete.cc-additional-name: "Cardholder Middle Name" => "持卡人中间名"
+// autocomplete.cc-family-name: "Cardholder Last Name" => "持卡人姓氏"
+// autocomplete.cc-number: "Credit Card Number" => "信用卡号"
+// autocomplete.cc-exp: "Expiration Date" => "有效期"
+// autocomplete.cc-exp-month: "Expiration Month" => "到期月份"
+// autocomplete.cc-exp-year: "Expiration Year" => "到期年份"
+// autocomplete.cc-csc: "Card Security Code" => "卡安全码"
+// autocomplete.cc-type: "Credit Card Type" => "信用卡类型"
+// autocomplete.transaction-currency: "Transaction Currency" => "交易货币"
+// autocomplete.transaction-amount: "Transaction Amount" => "交易金额"
+// autocomplete.language: "Preferred Language" => "首选语言"
+// autocomplete.bday: "Birthday" => "生日"
+// autocomplete.bday-day: "Birthday Day" => "生日"
+// autocomplete.bday-month: "Birthday Month" => "生日月份"
+// autocomplete.bday-year: "Birthday Year" => "生日年份"
+// autocomplete.sex: "Gender" => "性"
+// autocomplete.url: "Website URL" => "网站 URL"
+// autocomplete.photo: "Profile Photo" => "个人头像"
+// autocomplete.tel: "Telephone Number" => "电话号码"
+// autocomplete.tel-country-code: "Country Code for Phone" => "电话的国家代码"
+// autocomplete.tel-national: "National Telephone Number" => "全国电话号码"
+// autocomplete.tel-area-code: "Area Code" => "区号"
+// autocomplete.tel-local: "Local Phone Number" => "本地电话号码"
+// autocomplete.tel-local-prefix: "Local Phone Prefix" => "本地电话前缀"
+// autocomplete.tel-local-suffix: "Local Phone Suffix" => "本地电话后缀"
+// autocomplete.tel-extension: "Phone Extension" => "电话分机"
+// autocomplete.email: "Email Address" => "电子邮件地址"
+// autocomplete.impp: "Instant Messaging Protocol" => "即时通讯协议"

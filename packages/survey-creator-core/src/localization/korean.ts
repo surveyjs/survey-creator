@@ -69,6 +69,7 @@ export var koreanStrings = {
     surveySettingsTooltip: "설문조사 설정",
     themeSettings: "테마 설정",
     themeSettingsTooltip: "테마 설정",
+    creatorSettingTitle: "크리에이터 설정",
     showPanel: "패널 표시",
     hidePanel: "패널 숨기기",
     prevSelected: "이전 선택",
@@ -301,7 +302,7 @@ export var koreanStrings = {
       width: "인라인 패널 너비",
       minWidth: "최소 패널 너비",
       maxWidth: "최대 패널 너비",
-      showNumber: "숫자 패널"
+      showNumber: "이 패널에 번호 매기기"
     },
     paneldynamic: {
       name: "패널 이름",
@@ -828,6 +829,8 @@ export var koreanStrings = {
       header: "머리글",
       background: "배경",
       appearance: "외관",
+      accentColors: "강조 색상",
+      scaling: "스케일링",
       others: "다른"
     },
     editProperty: "편집 속성 '{0}'",
@@ -1014,6 +1017,61 @@ export var koreanStrings = {
       time: "시간",
       url: "URL (영문)",
       week: "주"
+    },
+    autocomplete: {
+      name: "성명",
+      "honorific-prefix": "접두사",
+      "given-name": "이름",
+      "additional-name": "중간 이름",
+      "family-name": "성",
+      "honorific-suffix": "접미사",
+      nickname: "별명",
+      "organization-title": "직책",
+      username: "사용자 이름",
+      "new-password": "새 비밀번호",
+      "current-password": "현재 비밀번호",
+      organization: "조직 이름",
+      "street-address": "전체 주소",
+      "address-line1": "주소란 1",
+      "address-line2": "주소란 2",
+      "address-line3": "주소란 3",
+      "address-level4": "레벨 4 주소",
+      "address-level3": "레벨 3 주소",
+      "address-level2": "레벨 2 주소",
+      "address-level1": "레벨 1 주소",
+      country: "국가 코드",
+      "country-name": "국가 이름",
+      "postal-code": "우편번호",
+      "cc-name": "카드 소지자 이름",
+      "cc-given-name": "카드 소지자 이름",
+      "cc-additional-name": "카드 소지자 중간 이름",
+      "cc-family-name": "카드 소지자의 성",
+      "cc-number": "신용 카드 번호",
+      "cc-exp": "만료 날짜",
+      "cc-exp-month": "만료 월",
+      "cc-exp-year": "만료 연도",
+      "cc-csc": "카드 보안 코드",
+      "cc-type": "신용 카드 유형",
+      "transaction-currency": "거래 통화(Transaction Currency)",
+      "transaction-amount": "거래 금액",
+      language: "선호 언어",
+      bday: "생일",
+      "bday-day": "생일 날",
+      "bday-month": "생일의 달",
+      "bday-year": "생일 연도",
+      sex: "성별",
+      url: "웹 사이트 URL",
+      photo: "프로필 사진",
+      tel: "전화번호",
+      "tel-country-code": "전화의 국가 코드",
+      "tel-national": "국내 전화번호",
+      "tel-area-code": "지역 번호",
+      "tel-local": "현지 전화번호",
+      "tel-local-prefix": "로컬 전화 접두사",
+      "tel-local-suffix": "지역 전화 접미사",
+      "tel-extension": "전화 내선 번호",
+      email: "이메일 주소",
+      impp: "인스턴트 메시징 프로토콜"
     },
     maskType: {
       none: "없음",
@@ -1289,7 +1347,8 @@ export var koreanStrings = {
       innerIndent: "패널 내용과 패널 상자의 왼쪽 테두리 사이에 공백 또는 여백을 추가합니다.",
       startWithNewLine: "이전 질문 또는 패널과 함께 한 줄로 패널을 표시하려면 선택을 취소합니다. 패널이 양식의 첫 번째 요소인 경우에는 설정이 적용되지 않습니다.",
       state: "다음 중에서 선택: \"확장\" - 패널이 전체적으로 표시되며 축소할 수 있습니다. \"축소됨\" - 패널에 제목과 설명만 표시되며 확장할 수 있습니다. \"잠김\" - 패널이 완전히 표시되며 축소할 수 없습니다.",
-      width: "패널의 폭을 같은 줄에 있는 다른 측량 요소에 비례하여 설정합니다. CSS 값(px, %, in, pt 등)을 허용합니다."
+      width: "패널의 폭을 같은 줄에 있는 다른 측량 요소에 비례하여 설정합니다. CSS 값(px, %, in, pt 등)을 허용합니다.",
+      showQuestionNumbers: "이 패널 내에 중첩된 질문에 번호를 할당합니다."
     },
     paneldynamic: {
       name: "응답자에게 표시되지 않는 패널 ID입니다.",
@@ -1387,7 +1446,7 @@ export var koreanStrings = {
     logoWidth: "로고 너비를 CSS 단위(px, %, in, pt 등)로 설정합니다.",
     logoHeight: "로고 높이를 CSS 단위(px, %, in, pt 등)로 설정합니다.",
     logoFit: "다음 중에서 선택: \"없음\" - 이미지가 원래 크기를 유지합니다. \"Contain\" - 가로 세로 비율을 유지하면서 이미지의 크기가 조정됩니다. \"표지\" - 이미지가 종횡비를 유지하면서 전체 상자를 채웁니다. \"채우기\" - 가로 세로 비율을 유지하지 않고 상자를 채우기 위해 이미지가 늘어납니다.",
-    goNextPageAutomatic: "응답자가 현재 페이지의 모든 질문에 답변한 후 설문조사가 자동으로 다음 페이지로 넘어가도록 하려면 선택합니다.",
+    goNextPageAutomatic: "응답자가 현재 페이지의 모든 질문에 답변한 후 설문조사가 다음 페이지로 자동 진행되도록 하려면 선택합니다. 페이지의 마지막 질문이 서술형이거나 여러 답변을 허용하는 경우에는 이 기능이 적용되지 않습니다.",
     allowCompleteSurveyAutomatic: "응답자가 모든 질문에 답변한 후 설문조사가 자동으로 완료되도록 하려면 선택합니다.",
     showNavigationButtons: "페이지에서 탐색 단추의 표시 여부와 위치를 설정합니다.",
     showProgressBar: "진행률 표시줄의 표시 여부와 위치를 설정합니다. \"자동\" 값은 설문조사 헤더 위 또는 아래에 진행률 표시줄을 표시합니다.",
@@ -1694,6 +1753,20 @@ export var koreanStrings = {
       tulip: "튤립",
       brown: "갈색",
       green: "녹색"
+    }
+  },
+  creatortheme: {
+    "--sjs-special-background": "표면 배경",
+    "--sjs-primary-background-500": "본래의",
+    "--sjs-secondary-background-500": "보조",
+    surfaceScale: "표면",
+    userInterfaceBaseUnit: "사용자 인터페이스",
+    fontScale: "글꼴",
+    names: {
+      sc2020: "설문조사 작성기 2020",
+      "default-light": "광",
+      "default-dark": "어둠",
+      "default-contrast": "대조"
     }
   }
 };
@@ -2513,7 +2586,6 @@ editorLocalization.locales["ko"] = koreanStrings;
 // panel.width: "Inline panel width" => "인라인 패널 너비"
 // panel.minWidth: "Minimum panel width" => "최소 패널 너비"
 // panel.maxWidth: "Maximum panel width" => "최대 패널 너비"
-// panel.showNumber: "Number panels" => "숫자 패널"
 // paneldynamic.name: "Panel name" => "패널 이름"
 // paneldynamic.title: "Panel title" => "패널 제목"
 // paneldynamic.description: "Panel description" => "패널 설명"
@@ -2729,7 +2801,6 @@ editorLocalization.locales["ko"] = koreanStrings;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "로고 너비를 CSS 단위(px, %, in, pt 등)로 설정합니다."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "로고 높이를 CSS 단위(px, %, in, pt 등)로 설정합니다."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "다음 중에서 선택: \"없음\" - 이미지가 원래 크기를 유지합니다. \"Contain\" - 가로 세로 비율을 유지하면서 이미지의 크기가 조정됩니다. \"표지\" - 이미지가 종횡비를 유지하면서 전체 상자를 채웁니다. \"채우기\" - 가로 세로 비율을 유지하지 않고 상자를 채우기 위해 이미지가 늘어납니다."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "응답자가 현재 페이지의 모든 질문에 답변한 후 설문조사가 자동으로 다음 페이지로 넘어가도록 하려면 선택합니다."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "페이지에서 탐색 단추의 표시 여부와 위치를 설정합니다."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "진행률 표시줄의 표시 여부와 위치를 설정합니다. \"자동\" 값은 설문조사 헤더 위 또는 아래에 진행률 표시줄을 표시합니다."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "모든 질문 또는 답변된 질문만 있는 미리보기 페이지를 활성화합니다."
@@ -3024,3 +3095,72 @@ editorLocalization.locales["ko"] = koreanStrings;
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "0으로 설정하면 헤더의 내용을 수용하기 위해 높이가 자동으로 계산됩니다."
 // p.mobileHeight: "Height on smartphones" => "스마트폰의 높이"
 // header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "활성화하면 설문조사의 상단이 헤더의 하단에 오버레이됩니다."
+// ed.creatorSettingTitle: "Creator Settings" => "크리에이터 설정"
+// tabs.accentColors: "Accent colors" => "강조 색상"
+// tabs.scaling: "Scaling" => "스케일링"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "이 패널 내에 중첩된 질문에 번호를 할당합니다."
+// creatortheme.--sjs-special-background: "Surface background" => "표면 배경"
+// creatortheme.--sjs-primary-background-500: "Primary" => "본래의"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "보조"
+// creatortheme.surfaceScale: "Surface" => "표면"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "사용자 인터페이스"
+// creatortheme.fontScale: "Font" => "글꼴"
+// names.sc2020: "Survey Creator 2020" => "설문조사 작성기 2020"
+// names.default-light: "Light" => "광"
+// names.default-dark: "Dark" => "어둠"
+// names.default-contrast: "Contrast" => "대조"
+// panel.showNumber: "Number this panel" => "이 패널에 번호 매기기"
+// pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "응답자가 현재 페이지의 모든 질문에 답변한 후 설문조사가 다음 페이지로 자동 진행되도록 하려면 선택합니다. 페이지의 마지막 질문이 서술형이거나 여러 답변을 허용하는 경우에는 이 기능이 적용되지 않습니다."
+// autocomplete.name: "Full Name" => "성명"
+// autocomplete.honorific-prefix: "Prefix" => "접두사"
+// autocomplete.given-name: "First Name" => "이름"
+// autocomplete.additional-name: "Middle Name" => "중간 이름"
+// autocomplete.family-name: "Last Name" => "성"
+// autocomplete.honorific-suffix: "Suffix" => "접미사"
+// autocomplete.nickname: "Nickname" => "별명"
+// autocomplete.organization-title: "Job Title" => "직책"
+// autocomplete.username: "User Name" => "사용자 이름"
+// autocomplete.new-password: "New Password" => "새 비밀번호"
+// autocomplete.current-password: "Current Password" => "현재 비밀번호"
+// autocomplete.organization: "Organization Name" => "조직 이름"
+// autocomplete.street-address: "Full Street Address" => "전체 주소"
+// autocomplete.address-line1: "Address Line 1" => "주소란 1"
+// autocomplete.address-line2: "Address Line 2" => "주소란 2"
+// autocomplete.address-line3: "Address Line 3" => "주소란 3"
+// autocomplete.address-level4: "Level 4 Address" => "레벨 4 주소"
+// autocomplete.address-level3: "Level 3 Address" => "레벨 3 주소"
+// autocomplete.address-level2: "Level 2 Address" => "레벨 2 주소"
+// autocomplete.address-level1: "Level 1 Address" => "레벨 1 주소"
+// autocomplete.country: "Country Code" => "국가 코드"
+// autocomplete.country-name: "Country Name" => "국가 이름"
+// autocomplete.postal-code: "Postal Code" => "우편번호"
+// autocomplete.cc-name: "Cardholder Name" => "카드 소지자 이름"
+// autocomplete.cc-given-name: "Cardholder First Name" => "카드 소지자 이름"
+// autocomplete.cc-additional-name: "Cardholder Middle Name" => "카드 소지자 중간 이름"
+// autocomplete.cc-family-name: "Cardholder Last Name" => "카드 소지자의 성"
+// autocomplete.cc-number: "Credit Card Number" => "신용 카드 번호"
+// autocomplete.cc-exp: "Expiration Date" => "만료 날짜"
+// autocomplete.cc-exp-month: "Expiration Month" => "만료 월"
+// autocomplete.cc-exp-year: "Expiration Year" => "만료 연도"
+// autocomplete.cc-csc: "Card Security Code" => "카드 보안 코드"
+// autocomplete.cc-type: "Credit Card Type" => "신용 카드 유형"
+// autocomplete.transaction-currency: "Transaction Currency" => "거래 통화(Transaction Currency)"
+// autocomplete.transaction-amount: "Transaction Amount" => "거래 금액"
+// autocomplete.language: "Preferred Language" => "선호 언어"
+// autocomplete.bday: "Birthday" => "생일"
+// autocomplete.bday-day: "Birthday Day" => "생일 날"
+// autocomplete.bday-month: "Birthday Month" => "생일의 달"
+// autocomplete.bday-year: "Birthday Year" => "생일 연도"
+// autocomplete.sex: "Gender" => "성별"
+// autocomplete.url: "Website URL" => "웹 사이트 URL"
+// autocomplete.photo: "Profile Photo" => "프로필 사진"
+// autocomplete.tel: "Telephone Number" => "전화번호"
+// autocomplete.tel-country-code: "Country Code for Phone" => "전화의 국가 코드"
+// autocomplete.tel-national: "National Telephone Number" => "국내 전화번호"
+// autocomplete.tel-area-code: "Area Code" => "지역 번호"
+// autocomplete.tel-local: "Local Phone Number" => "현지 전화번호"
+// autocomplete.tel-local-prefix: "Local Phone Prefix" => "로컬 전화 접두사"
+// autocomplete.tel-local-suffix: "Local Phone Suffix" => "지역 전화 접미사"
+// autocomplete.tel-extension: "Phone Extension" => "전화 내선 번호"
+// autocomplete.email: "Email Address" => "이메일 주소"
+// autocomplete.impp: "Instant Messaging Protocol" => "인스턴트 메시징 프로토콜"

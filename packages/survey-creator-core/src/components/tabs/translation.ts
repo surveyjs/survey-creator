@@ -902,10 +902,12 @@ export class Translation extends Base implements ITranslationLocales {
         const cellQuestion = <QuestionCommentModel>options.cell.question;
         const item = getTransationItem(options.question, options.row.name);
         this.setPlaceHolder(cellQuestion, item, options.columnName);
-        const isMultiLine = !!item ? item.locString.getIsMultiple() : false;
-        cellQuestion.acceptCarriageReturn = isMultiLine;
+        let isMultiLine = false;
         if (!!item) {
           cellQuestion.maxLength = item.maxLength;
+          const loc = item.locString;
+          isMultiLine = loc.getIsMultiple();
+          cellQuestion.acceptCarriageReturn = isMultiLine || (<LocalizableString>loc).allowLineBreaks;
         }
         if (!isMultiLine) {
           cellQuestion.rows = 1;
@@ -1483,7 +1485,7 @@ export class TranslationEditor {
         onHide: () => {
           this.dispose();
         },
-        cssClass: "sv-property-editor st-translation-dialog svc-creator-popup",
+        cssClass: "svc-property-editor st-translation-dialog svc-creator-popup",
         title: dialogTitle,
         displayMode: this.options.isMobileView ? "overlay" : "popup"
       }, this.options.rootElement);

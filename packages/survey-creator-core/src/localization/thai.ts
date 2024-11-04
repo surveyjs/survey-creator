@@ -69,6 +69,7 @@ export const thStrings = {
     surveySettingsTooltip: "การตั้งค่าแบบสำรวจ",
     themeSettings: "การตั้งค่าธีม",
     themeSettingsTooltip: "การตั้งค่าธีม",
+    creatorSettingTitle: "การตั้งค่าครีเอเตอร์",
     showPanel: "แสดงแผง",
     hidePanel: "ซ่อนแผง",
     prevSelected: "เลือกก่อนหน้า",
@@ -301,7 +302,7 @@ export const thStrings = {
       width: "ความกว้างของแผงแบบอินไลน์",
       minWidth: "ความกว้างขั้นต่ำของแผง",
       maxWidth: "ความกว้างสูงสุดของแผง",
-      showNumber: "หมายเลขแผง"
+      showNumber: "หมายเลขแผงนี้"
     },
     paneldynamic: {
       name: "ชื่อแผง",
@@ -828,6 +829,8 @@ export const thStrings = {
       header: "หัวเรื่อง",
       background: "พื้นหลัง",
       appearance: "การปรากฏ",
+      accentColors: "สีเน้นเสียง",
+      scaling: "มาตรา ส่วน",
       others: "อื่นๆ"
     },
     editProperty: "แก้ไขคุณสมบัติ '{0}'",
@@ -1014,6 +1017,61 @@ export const thStrings = {
       time: "เวลา",
       url: "URL",
       week: "สัปดาห์"
+    },
+    autocomplete: {
+      name: "ชื่อ-นามสกุล",
+      "honorific-prefix": "อุปสรรค",
+      "given-name": "ชื่อ",
+      "additional-name": "ชื่อกลาง",
+      "family-name": "นามสกุล",
+      "honorific-suffix": "ปัจจัย",
+      nickname: "ชื่อเล่น",
+      "organization-title": "ตําแหน่งงาน",
+      username: "ชื่อผู้ใช้",
+      "new-password": "รหัสผ่านใหม่",
+      "current-password": "รหัสผ่านปัจจุบัน",
+      organization: "ชื่อองค์กร",
+      "street-address": "ที่อยู่แบบเต็ม",
+      "address-line1": "บรรทัดที่อยู่ 1",
+      "address-line2": "บรรทัดที่อยู่ 2",
+      "address-line3": "บรรทัดที่อยู่ 3",
+      "address-level4": "ที่อยู่ระดับ 4",
+      "address-level3": "ที่อยู่ระดับ 3",
+      "address-level2": "ที่อยู่ระดับ 2",
+      "address-level1": "ที่อยู่ระดับ 1",
+      country: "รหัสประเทศ",
+      "country-name": "ชื่อประเทศ",
+      "postal-code": "รหัสไปรษณีย์",
+      "cc-name": "ชื่อผู้ถือบัตร",
+      "cc-given-name": "ชื่อผู้ถือบัตร",
+      "cc-additional-name": "ชื่อกลางของผู้ถือบัตร",
+      "cc-family-name": "นามสกุลของผู้ถือบัตร",
+      "cc-number": "หมายเลขบัตรเครดิต",
+      "cc-exp": "วันหมดอายุ",
+      "cc-exp-month": "เดือนหมดอายุ",
+      "cc-exp-year": "ปีหมดอายุ",
+      "cc-csc": "รหัสความปลอดภัยของบัตร",
+      "cc-type": "ประเภทบัตรเครดิต",
+      "transaction-currency": "สกุลเงินของธุรกรรม",
+      "transaction-amount": "จํานวนเงินที่ทําธุรกรรม",
+      language: "ภาษาที่ต้องการ",
+      bday: "วันเกิด",
+      "bday-day": "วันเกิด",
+      "bday-month": "เดือนเกิด",
+      "bday-year": "ปีเกิด",
+      sex: "เพศ",
+      url: "URL ของเว็บไซต์",
+      photo: "รูปโปรไฟล์",
+      tel: "หมายเลขโทรศัพท์",
+      "tel-country-code": "รหัสประเทศสําหรับโทรศัพท์",
+      "tel-national": "หมายเลขโทรศัพท์ในประเทศ",
+      "tel-area-code": "รหัสพื้นที่",
+      "tel-local": "หมายเลขโทรศัพท์ท้องถิ่น",
+      "tel-local-prefix": "คํานําหน้าโทรศัพท์ท้องถิ่น",
+      "tel-local-suffix": "คําต่อท้ายโทรศัพท์ท้องถิ่น",
+      "tel-extension": "ส่วนขยายโทรศัพท์",
+      email: "ที่อยู่อีเมล",
+      impp: "โปรโตคอลการส่งข้อความโต้ตอบแบบทันที"
     },
     maskType: {
       none: "ไม่มีใคร",
@@ -1289,7 +1347,8 @@ export const thStrings = {
       innerIndent: "เพิ่มพื้นที่หรือมาร์จิ้นระหว่างเนื้อหาแผงและขอบซ้ายของกล่องแผง",
       startWithNewLine: "ยกเลิกการเลือกเพื่อแสดงแผงในบรรทัดเดียวกับคำถามหรือแผงก่อนหน้า การตั้งค่านี้จะไม่ใช้ถ้าแผงเป็นองค์ประกอบแรกในแบบฟอร์มของคุณ",
       state: "เลือกจาก: \"ขยาย\" - แผงแสดงเต็มและสามารถยุบได้; \"ยุบ\" - แผงแสดงเพียงชื่อเรื่องและคำอธิบายและสามารถขยายได้; \"ล็อก\" - แผงแสดงเต็มและไม่สามารถยุบได้",
-      width: "ตั้งความกว้างของแผงให้สัมพันธ์กับองค์ประกอบแบบสำรวจอื่นๆ ในบรรทัดเดียวกัน รับค่าของ CSS (px, %, in, pt, ฯลฯ)"
+      width: "ตั้งความกว้างของแผงให้สัมพันธ์กับองค์ประกอบแบบสำรวจอื่นๆ ในบรรทัดเดียวกัน รับค่าของ CSS (px, %, in, pt, ฯลฯ)",
+      showQuestionNumbers: "กําหนดตัวเลขให้กับคําถามที่ซ้อนกันภายในแผงนี้"
     },
     paneldynamic: {
       name: "ID แผงที่ไม่มองเห็นได้สำหรับผู้ตอบแบบสำรวจ",
@@ -1387,7 +1446,7 @@ export const thStrings = {
     logoWidth: "ตั้งค่าความกว้างโลโก้ในหน่วย CSS (px, %, in, pt, ฯลฯ)",
     logoHeight: "ตั้งค่าความสูงโลโก้ในหน่วย CSS (px, %, in, pt, ฯลฯ)",
     logoFit: "เลือกจาก: \"ไม่มี\" - ภาพคงขนาดเดิม; \"พอดี\" - ภาพถูกปรับขนาดให้พอดีขณะที่รักษาสัดส่วน; \"ครอบคลุม\" - ภาพเติมเต็มกล่องทั้งหมดขณะที่รักษาสัดส่วน; \"เติม\" - ภาพถูกยืดให้เต็มกล่องโดยไม่รักษาสัดส่วน",
-    goNextPageAutomatic: "เลือกถ้าคุณต้องการให้แบบสำรวจเปลี่ยนไปหน้าถัดไปโดยอัตโนมัติหลังจากผู้ตอบตอบคำถามทั้งหมดในหน้าปัจจุบัน",
+    goNextPageAutomatic: "เลือกว่าคุณต้องการให้แบบสํารวจเลื่อนไปยังหน้าถัดไปโดยอัตโนมัติเมื่อผู้ตอบคําถามทั้งหมดในหน้าปัจจุบันแล้ว ฟีเจอร์นี้จะไม่มีผลหากคําถามสุดท้ายในหน้าเป็นคําถามปลายเปิดหรืออนุญาตให้มีคําตอบหลายข้อ",
     allowCompleteSurveyAutomatic: "เลือกถ้าคุณต้องการให้แบบสำรวจเสร็จสิ้นโดยอัตโนมัติหลังจากผู้ตอบตอบคำถามทั้งหมด",
     showNavigationButtons: "ตั้งการมองเห็นและตำแหน่งของปุ่มนำทางในหน้า",
     showProgressBar: "ตั้งการมองเห็นและตำแหน่งของแถบความคืบหน้า ตัวเลือก \"อัตโนมัติ\" จะแสดงแถบความคืบหน้าเหนือหรือใต้หัวเรื่องแบบสำรวจ",
@@ -1695,6 +1754,20 @@ export const thStrings = {
       brown: "น้ำตาล",
       green: "เขียว"
     }
+  },
+  creatortheme: {
+    "--sjs-special-background": "พื้นหลังพื้นผิว",
+    "--sjs-primary-background-500": "ประถม",
+    "--sjs-secondary-background-500": "รอง",
+    surfaceScale: "พื้นผิว",
+    userInterfaceBaseUnit: "ส่วนติดต่อผู้ใช้",
+    fontScale: "แบบอักษร",
+    names: {
+      sc2020: "ผู้สร้างแบบสํารวจ 2020",
+      "default-light": "แสง",
+      "default-dark": "มืด",
+      "default-contrast": "ความแตกต่าง"
+    }
   }
 };
 
@@ -1755,3 +1828,72 @@ editorLocalization.locales["th"] = thStrings;
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "เมื่อตั้งค่าเป็น 0 ความสูงจะถูกคํานวณโดยอัตโนมัติเพื่อรองรับเนื้อหาของส่วนหัว"
 // p.mobileHeight: "Height on smartphones" => "ความสูงบนสมาร์ทโฟน"
 // header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "เมื่อเปิดใช้งาน ด้านบนของแบบสํารวจจะซ้อนทับด้านล่างของส่วนหัว"
+// ed.creatorSettingTitle: "Creator Settings" => "การตั้งค่าครีเอเตอร์"
+// tabs.accentColors: "Accent colors" => "สีเน้นเสียง"
+// tabs.scaling: "Scaling" => "มาตรา ส่วน"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "กําหนดตัวเลขให้กับคําถามที่ซ้อนกันภายในแผงนี้"
+// creatortheme.--sjs-special-background: "Surface background" => "พื้นหลังพื้นผิว"
+// creatortheme.--sjs-primary-background-500: "Primary" => "ประถม"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "รอง"
+// creatortheme.surfaceScale: "Surface" => "พื้นผิว"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "ส่วนติดต่อผู้ใช้"
+// creatortheme.fontScale: "Font" => "แบบอักษร"
+// names.sc2020: "Survey Creator 2020" => "ผู้สร้างแบบสํารวจ 2020"
+// names.default-light: "Light" => "แสง"
+// names.default-dark: "Dark" => "มืด"
+// names.default-contrast: "Contrast" => "ความแตกต่าง"
+// panel.showNumber: "Number this panel" => "หมายเลขแผงนี้"
+// pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "เลือกว่าคุณต้องการให้แบบสํารวจเลื่อนไปยังหน้าถัดไปโดยอัตโนมัติเมื่อผู้ตอบคําถามทั้งหมดในหน้าปัจจุบันแล้ว ฟีเจอร์นี้จะไม่มีผลหากคําถามสุดท้ายในหน้าเป็นคําถามปลายเปิดหรืออนุญาตให้มีคําตอบหลายข้อ"
+// autocomplete.name: "Full Name" => "ชื่อ-นามสกุล"
+// autocomplete.honorific-prefix: "Prefix" => "อุปสรรค"
+// autocomplete.given-name: "First Name" => "ชื่อ"
+// autocomplete.additional-name: "Middle Name" => "ชื่อกลาง"
+// autocomplete.family-name: "Last Name" => "นามสกุล"
+// autocomplete.honorific-suffix: "Suffix" => "ปัจจัย"
+// autocomplete.nickname: "Nickname" => "ชื่อเล่น"
+// autocomplete.organization-title: "Job Title" => "ตําแหน่งงาน"
+// autocomplete.username: "User Name" => "ชื่อผู้ใช้"
+// autocomplete.new-password: "New Password" => "รหัสผ่านใหม่"
+// autocomplete.current-password: "Current Password" => "รหัสผ่านปัจจุบัน"
+// autocomplete.organization: "Organization Name" => "ชื่อองค์กร"
+// autocomplete.street-address: "Full Street Address" => "ที่อยู่แบบเต็ม"
+// autocomplete.address-line1: "Address Line 1" => "บรรทัดที่อยู่ 1"
+// autocomplete.address-line2: "Address Line 2" => "บรรทัดที่อยู่ 2"
+// autocomplete.address-line3: "Address Line 3" => "บรรทัดที่อยู่ 3"
+// autocomplete.address-level4: "Level 4 Address" => "ที่อยู่ระดับ 4"
+// autocomplete.address-level3: "Level 3 Address" => "ที่อยู่ระดับ 3"
+// autocomplete.address-level2: "Level 2 Address" => "ที่อยู่ระดับ 2"
+// autocomplete.address-level1: "Level 1 Address" => "ที่อยู่ระดับ 1"
+// autocomplete.country: "Country Code" => "รหัสประเทศ"
+// autocomplete.country-name: "Country Name" => "ชื่อประเทศ"
+// autocomplete.postal-code: "Postal Code" => "รหัสไปรษณีย์"
+// autocomplete.cc-name: "Cardholder Name" => "ชื่อผู้ถือบัตร"
+// autocomplete.cc-given-name: "Cardholder First Name" => "ชื่อผู้ถือบัตร"
+// autocomplete.cc-additional-name: "Cardholder Middle Name" => "ชื่อกลางของผู้ถือบัตร"
+// autocomplete.cc-family-name: "Cardholder Last Name" => "นามสกุลของผู้ถือบัตร"
+// autocomplete.cc-number: "Credit Card Number" => "หมายเลขบัตรเครดิต"
+// autocomplete.cc-exp: "Expiration Date" => "วันหมดอายุ"
+// autocomplete.cc-exp-month: "Expiration Month" => "เดือนหมดอายุ"
+// autocomplete.cc-exp-year: "Expiration Year" => "ปีหมดอายุ"
+// autocomplete.cc-csc: "Card Security Code" => "รหัสความปลอดภัยของบัตร"
+// autocomplete.cc-type: "Credit Card Type" => "ประเภทบัตรเครดิต"
+// autocomplete.transaction-currency: "Transaction Currency" => "สกุลเงินของธุรกรรม"
+// autocomplete.transaction-amount: "Transaction Amount" => "จํานวนเงินที่ทําธุรกรรม"
+// autocomplete.language: "Preferred Language" => "ภาษาที่ต้องการ"
+// autocomplete.bday: "Birthday" => "วันเกิด"
+// autocomplete.bday-day: "Birthday Day" => "วันเกิด"
+// autocomplete.bday-month: "Birthday Month" => "เดือนเกิด"
+// autocomplete.bday-year: "Birthday Year" => "ปีเกิด"
+// autocomplete.sex: "Gender" => "เพศ"
+// autocomplete.url: "Website URL" => "URL ของเว็บไซต์"
+// autocomplete.photo: "Profile Photo" => "รูปโปรไฟล์"
+// autocomplete.tel: "Telephone Number" => "หมายเลขโทรศัพท์"
+// autocomplete.tel-country-code: "Country Code for Phone" => "รหัสประเทศสําหรับโทรศัพท์"
+// autocomplete.tel-national: "National Telephone Number" => "หมายเลขโทรศัพท์ในประเทศ"
+// autocomplete.tel-area-code: "Area Code" => "รหัสพื้นที่"
+// autocomplete.tel-local: "Local Phone Number" => "หมายเลขโทรศัพท์ท้องถิ่น"
+// autocomplete.tel-local-prefix: "Local Phone Prefix" => "คํานําหน้าโทรศัพท์ท้องถิ่น"
+// autocomplete.tel-local-suffix: "Local Phone Suffix" => "คําต่อท้ายโทรศัพท์ท้องถิ่น"
+// autocomplete.tel-extension: "Phone Extension" => "ส่วนขยายโทรศัพท์"
+// autocomplete.email: "Email Address" => "ที่อยู่อีเมล"
+// autocomplete.impp: "Instant Messaging Protocol" => "โปรโตคอลการส่งข้อความโต้ตอบแบบทันที"

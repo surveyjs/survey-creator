@@ -69,6 +69,7 @@ var persianStrings = {
     surveySettingsTooltip: "تنظیمات نظرسنجی",
     themeSettings: "تنظیمات تم",
     themeSettingsTooltip: "تنظیمات تم",
+    creatorSettingTitle: "تنظیمات سازنده",
     showPanel: "نمایش پنل",
     hidePanel: "پنهان سازی پنل",
     prevSelected: "قبلی",
@@ -301,7 +302,7 @@ var persianStrings = {
       width: "عرض پانل درون خطی",
       minWidth: "حداقل عرض پانل",
       maxWidth: "حداکثر عرض پانل",
-      showNumber: "پانل های شماره"
+      showNumber: "شماره گذاری این پانل"
     },
     paneldynamic: {
       name: "نام تابلو",
@@ -828,6 +829,8 @@ var persianStrings = {
       header: "هدر",
       background: "پس زمینه",
       appearance: "ظاهر",
+      accentColors: "رنگ های تاکیدی",
+      scaling: "توزین",
       others: "باقی موارد"
     },
     editProperty: "ویرایش خصوصیت '{0}'",
@@ -1014,6 +1017,61 @@ var persianStrings = {
       time: "زمان",
       url: "آدرس",
       week: "هفته"
+    },
+    autocomplete: {
+      name: "نام و نام خانوادگی",
+      "honorific-prefix": "پیشوند",
+      "given-name": "نام و نام خانوادگی",
+      "additional-name": "نام میانی",
+      "family-name": "نام خانوادگی",
+      "honorific-suffix": "پسوند",
+      nickname: "نام مستعار",
+      "organization-title": "عنوان شغلی",
+      username: "نام کاربری",
+      "new-password": "رمز عبور جدید",
+      "current-password": "رمز عبور فعلی",
+      organization: "نام سازمان",
+      "street-address": "آدرس کامل خیابان",
+      "address-line1": "خط آدرس 1",
+      "address-line2": "خط آدرس 2",
+      "address-line3": "خط آدرس 3",
+      "address-level4": "آدرس سطح 4",
+      "address-level3": "آدرس سطح 3",
+      "address-level2": "آدرس سطح 2",
+      "address-level1": "آدرس سطح 1",
+      country: "کد کشور",
+      "country-name": "نام کشور",
+      "postal-code": "کد پستی",
+      "cc-name": "نام دارنده کارت",
+      "cc-given-name": "نام دارنده کارت",
+      "cc-additional-name": "نام میانی دارنده کارت",
+      "cc-family-name": "نام خانوادگی دارنده کارت",
+      "cc-number": "شماره کارت اعتباری",
+      "cc-exp": "تاریخ انقضا",
+      "cc-exp-month": "ماه انقضا",
+      "cc-exp-year": "سال انقضا",
+      "cc-csc": "کد امنیتی کارت",
+      "cc-type": "نوع کارت اعتباری",
+      "transaction-currency": "ارز تراکنش",
+      "transaction-amount": "مبلغ تراکنش",
+      language: "زبان ترجیحی",
+      bday: "تولد",
+      "bday-day": "روز تولد",
+      "bday-month": "ماه تولد",
+      "bday-year": "سال تولد",
+      sex: "جنسیت",
+      url: "آدرس وب سایت",
+      photo: "عکس پروفایل",
+      tel: "شماره تلفن",
+      "tel-country-code": "کد کشور برای تلفن",
+      "tel-national": "شماره تلفن ملی",
+      "tel-area-code": "کد منطقه",
+      "tel-local": "شماره تلفن محلی",
+      "tel-local-prefix": "پیشوند تلفن محلی",
+      "tel-local-suffix": "پسوند تلفن محلی",
+      "tel-extension": "پسوند تلفن",
+      email: "آدرس ایمیل",
+      impp: "پروتکل پیام رسانی فوری"
     },
     maskType: {
       none: "هیچ کدام",
@@ -1289,7 +1347,8 @@ var persianStrings = {
       innerIndent: "اضافه کردن فضا یا حاشیه بین محتوای پانل و مرز سمت چپ جعبه پانل.",
       startWithNewLine: "عدم انتخاب برای نمایش پانل در یک خط با سوال قبلی یا پانل. تنظیمات اعمال نمی شود اگر پانل اولین عنصر در فرم شما باشد.",
       state: "را انتخاب کنید از: \"گسترش یافته\" - پانل به طور کامل نمایش داده می شود و می تواند سقوط کند؛ \"سقوط\" - پانل تنها عنوان و توضیحات را نمایش می دهد و می تواند گسترش یابد. \"Locked\" - پانل به طور کامل نمایش داده می شود و نمی تواند سقوط کند.",
-      width: "عرض پانل را متناسب با سایر عناصر بررسی در همان خط تنظیم می کند. مقادیر CSS را می پذیرد (px، ٪، in، pt و غیره)."
+      width: "عرض پانل را متناسب با سایر عناصر بررسی در همان خط تنظیم می کند. مقادیر CSS را می پذیرد (px، ٪، in، pt و غیره).",
+      showQuestionNumbers: "اعداد را به سؤالات تودرتو در این پانل اختصاص می دهد."
     },
     paneldynamic: {
       name: "یک شناسه پانل که برای پاسخ دهندگان قابل مشاهده نیست.",
@@ -1387,7 +1446,7 @@ var persianStrings = {
     logoWidth: "عرض لوگو را در واحدهای CSS تنظیم می کند (px، ٪، in، pt و غیره).",
     logoHeight: "ارتفاع لوگو را در واحدهای CSS تنظیم می کند (px، ٪، in، pt و غیره).",
     logoFit: "انتخاب از: \"هیچ\" - تصویر اندازه اصلی خود را حفظ می کند؛ \"شامل\" - تصویر تغییر اندازه به جا در حالی که حفظ نسبت ابعاد ان؛ \"Cover\" - تصویر کل جعبه را پر می کند در حالی که نسبت ابعاد ان را حفظ می کند. \"Fill\" - تصویر برای پر کردن جعبه بدون حفظ نسبت ابعاد ان کشیده می شود.",
-    goNextPageAutomatic: "انتخاب کنید که ایا می خواهید نظرسنجی به طور خودکار به صفحه بعدی پیش رود پس از اینکه یک پاسخ دهنده به تمام سوالات در صفحه فعلی پاسخ داد.",
+    goNextPageAutomatic: "انتخاب کنید که آیا می خواهید نظرسنجی به طور خودکار به صفحه بعدی پیش برود پس از اینکه پاسخ دهنده به همه سؤالات موجود در صفحه فعلی پاسخ داد. اگر آخرین سؤال در صفحه باز باشد یا اجازه پاسخ های متعدد را بدهد، این ویژگی اعمال نمی شود.",
     allowCompleteSurveyAutomatic: "انتخاب کنید که ایا می خواهید نظرسنجی به طور خودکار پس از پاسخ دادن به تمام سوالات پاسخ دهد.",
     showNavigationButtons: "قابلیت مشاهده و مکان دکمه های پیمایش را در یک صفحه تنظیم می کند.",
     showProgressBar: "دید و مکان یک نوار پیشرفت را تنظیم می کند. مقدار \"Auto\" نوار پیشرفت را در بالا یا پایین هدر نظرسنجی نشان می دهد.",
@@ -1694,6 +1753,20 @@ var persianStrings = {
       tulip: "لاله",
       brown: "قهوه ای",
       green: "سبز"
+    }
+  },
+  creatortheme: {
+    "--sjs-special-background": "زمینه سطح",
+    "--sjs-primary-background-500": "اولیه",
+    "--sjs-secondary-background-500": "ثانویه",
+    surfaceScale: "سطح",
+    userInterfaceBaseUnit: "رابط کاربری",
+    fontScale: "فونت",
+    names: {
+      sc2020: "خالق نظرسنجی 2020",
+      "default-light": "نور",
+      "default-dark": "تاریک",
+      "default-contrast": "کنتراست"
     }
   }
 };
@@ -2264,7 +2337,6 @@ editorLocalization.locales["fa"] = persianStrings;
 // panel.width: "Inline panel width" => "عرض پانل درون خطی"
 // panel.minWidth: "Minimum panel width" => "حداقل عرض پانل"
 // panel.maxWidth: "Maximum panel width" => "حداکثر عرض پانل"
-// panel.showNumber: "Number panels" => "پانل های شماره"
 // paneldynamic.name: "Panel name" => "نام تابلو"
 // paneldynamic.title: "Panel title" => "عنوان پنل"
 // paneldynamic.description: "Panel description" => "توضیحات پنل"
@@ -2480,7 +2552,7 @@ editorLocalization.locales["fa"] = persianStrings;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "عرض لوگو را در واحدهای CSS تنظیم می کند (px، ٪، in، pt و غیره)."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "ارتفاع لوگو را در واحدهای CSS تنظیم می کند (px، ٪، in، pt و غیره)."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "انتخاب از: \"هیچ\" - تصویر اندازه اصلی خود را حفظ می کند؛ \"شامل\" - تصویر تغییر اندازه به جا در حالی که حفظ نسبت ابعاد ان؛ \"Cover\" - تصویر کل جعبه را پر می کند در حالی که نسبت ابعاد ان را حفظ می کند. \"Fill\" - تصویر برای پر کردن جعبه بدون حفظ نسبت ابعاد ان کشیده می شود."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "انتخاب کنید که ایا می خواهید نظرسنجی به طور خودکار به صفحه بعدی پیش رود پس از اینکه یک پاسخ دهنده به تمام سوالات در صفحه فعلی پاسخ داد."
+// pehelp.: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "انتخاب کنید که ایا می خواهید نظرسنجی به طور خودکار به صفحه بعدی پیش رود پس از اینکه یک پاسخ دهنده به تمام سوالات در صفحه فعلی پاسخ داد."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "قابلیت مشاهده و مکان دکمه های پیمایش را در یک صفحه تنظیم می کند."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "دید و مکان یک نوار پیشرفت را تنظیم می کند. مقدار \"Auto\" نوار پیشرفت را در بالا یا پایین هدر نظرسنجی نشان می دهد."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "صفحه پیش نمایش را فقط با تمام سوالات یا پاسخ داده شده فعال کنید."
@@ -2775,3 +2847,72 @@ editorLocalization.locales["fa"] = persianStrings;
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "هنگامی که روی 0 تنظیم می شود، ارتفاع به طور خودکار محاسبه می شود تا محتوای هدر را در خود جای دهد."
 // p.mobileHeight: "Height on smartphones" => "ارتفاع در گوشی های هوشمند"
 // header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "هنگامی که فعال باشد، بالای نظرسنجی پایین هدر را همپوشانی می کند."
+// ed.creatorSettingTitle: "Creator Settings" => "تنظیمات سازنده"
+// tabs.accentColors: "Accent colors" => "رنگ های تاکیدی"
+// tabs.scaling: "Scaling" => "توزین"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "اعداد را به سؤالات تودرتو در این پانل اختصاص می دهد."
+// creatortheme.--sjs-special-background: "Surface background" => "زمینه سطح"
+// creatortheme.--sjs-primary-background-500: "Primary" => "اولیه"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "ثانویه"
+// creatortheme.surfaceScale: "Surface" => "سطح"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "رابط کاربری"
+// creatortheme.fontScale: "Font" => "فونت"
+// names.sc2020: "Survey Creator 2020" => "خالق نظرسنجی 2020"
+// names.default-light: "Light" => "نور"
+// names.default-dark: "Dark" => "تاریک"
+// names.default-contrast: "Contrast" => "کنتراست"
+// panel.showNumber: "Number this panel" => "شماره گذاری این پانل"
+// pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "انتخاب کنید که آیا می خواهید نظرسنجی به طور خودکار به صفحه بعدی پیش برود پس از اینکه پاسخ دهنده به همه سؤالات موجود در صفحه فعلی پاسخ داد. اگر آخرین سؤال در صفحه باز باشد یا اجازه پاسخ های متعدد را بدهد، این ویژگی اعمال نمی شود."
+// autocomplete.name: "Full Name" => "نام و نام خانوادگی"
+// autocomplete.honorific-prefix: "Prefix" => "پیشوند"
+// autocomplete.given-name: "First Name" => "نام و نام خانوادگی"
+// autocomplete.additional-name: "Middle Name" => "نام میانی"
+// autocomplete.family-name: "Last Name" => "نام خانوادگی"
+// autocomplete.honorific-suffix: "Suffix" => "پسوند"
+// autocomplete.nickname: "Nickname" => "نام مستعار"
+// autocomplete.organization-title: "Job Title" => "عنوان شغلی"
+// autocomplete.username: "User Name" => "نام کاربری"
+// autocomplete.new-password: "New Password" => "رمز عبور جدید"
+// autocomplete.current-password: "Current Password" => "رمز عبور فعلی"
+// autocomplete.organization: "Organization Name" => "نام سازمان"
+// autocomplete.street-address: "Full Street Address" => "آدرس کامل خیابان"
+// autocomplete.address-line1: "Address Line 1" => "خط آدرس 1"
+// autocomplete.address-line2: "Address Line 2" => "خط آدرس 2"
+// autocomplete.address-line3: "Address Line 3" => "خط آدرس 3"
+// autocomplete.address-level4: "Level 4 Address" => "آدرس سطح 4"
+// autocomplete.address-level3: "Level 3 Address" => "آدرس سطح 3"
+// autocomplete.address-level2: "Level 2 Address" => "آدرس سطح 2"
+// autocomplete.address-level1: "Level 1 Address" => "آدرس سطح 1"
+// autocomplete.country: "Country Code" => "کد کشور"
+// autocomplete.country-name: "Country Name" => "نام کشور"
+// autocomplete.postal-code: "Postal Code" => "کد پستی"
+// autocomplete.cc-name: "Cardholder Name" => "نام دارنده کارت"
+// autocomplete.cc-given-name: "Cardholder First Name" => "نام دارنده کارت"
+// autocomplete.cc-additional-name: "Cardholder Middle Name" => "نام میانی دارنده کارت"
+// autocomplete.cc-family-name: "Cardholder Last Name" => "نام خانوادگی دارنده کارت"
+// autocomplete.cc-number: "Credit Card Number" => "شماره کارت اعتباری"
+// autocomplete.cc-exp: "Expiration Date" => "تاریخ انقضا"
+// autocomplete.cc-exp-month: "Expiration Month" => "ماه انقضا"
+// autocomplete.cc-exp-year: "Expiration Year" => "سال انقضا"
+// autocomplete.cc-csc: "Card Security Code" => "کد امنیتی کارت"
+// autocomplete.cc-type: "Credit Card Type" => "نوع کارت اعتباری"
+// autocomplete.transaction-currency: "Transaction Currency" => "ارز تراکنش"
+// autocomplete.transaction-amount: "Transaction Amount" => "مبلغ تراکنش"
+// autocomplete.language: "Preferred Language" => "زبان ترجیحی"
+// autocomplete.bday: "Birthday" => "تولد"
+// autocomplete.bday-day: "Birthday Day" => "روز تولد"
+// autocomplete.bday-month: "Birthday Month" => "ماه تولد"
+// autocomplete.bday-year: "Birthday Year" => "سال تولد"
+// autocomplete.sex: "Gender" => "جنسیت"
+// autocomplete.url: "Website URL" => "آدرس وب سایت"
+// autocomplete.photo: "Profile Photo" => "عکس پروفایل"
+// autocomplete.tel: "Telephone Number" => "شماره تلفن"
+// autocomplete.tel-country-code: "Country Code for Phone" => "کد کشور برای تلفن"
+// autocomplete.tel-national: "National Telephone Number" => "شماره تلفن ملی"
+// autocomplete.tel-area-code: "Area Code" => "کد منطقه"
+// autocomplete.tel-local: "Local Phone Number" => "شماره تلفن محلی"
+// autocomplete.tel-local-prefix: "Local Phone Prefix" => "پیشوند تلفن محلی"
+// autocomplete.tel-local-suffix: "Local Phone Suffix" => "پسوند تلفن محلی"
+// autocomplete.tel-extension: "Phone Extension" => "پسوند تلفن"
+// autocomplete.email: "Email Address" => "آدرس ایمیل"
+// autocomplete.impp: "Instant Messaging Protocol" => "پروتکل پیام رسانی فوری"
