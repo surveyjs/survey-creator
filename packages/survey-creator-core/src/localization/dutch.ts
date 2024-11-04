@@ -1018,6 +1018,61 @@ export var nlStrings = {
       url: "Url",
       week: "Week"
     },
+    autocomplete: {
+      name: "Voor- en achternaam",
+      "honorific-prefix": "Voorvoegsel",
+      "given-name": "Voornaam",
+      "additional-name": "Middelste naam",
+      "family-name": "Achternaam",
+      "honorific-suffix": "Achtervoegsel",
+      nickname: "Bijnaam",
+      "organization-title": "Functietitel",
+      username: "Gebruikersnaam",
+      "new-password": "Nieuw wachtwoord",
+      "current-password": "Huidig wachtwoord",
+      organization: "Naam van de organisatie",
+      "street-address": "Volledig adres",
+      "address-line1": "Adres Regel 1",
+      "address-line2": "Adres Regel 2",
+      "address-line3": "Adres Regel 3",
+      "address-level4": "Niveau 4 Adres",
+      "address-level3": "Niveau 3 Adres",
+      "address-level2": "Niveau 2 Adres",
+      "address-level1": "Niveau 1 Adres",
+      country: "Landcode",
+      "country-name": "Naam van het land",
+      "postal-code": "Postcode",
+      "cc-name": "Naam kaarthouder",
+      "cc-given-name": "Voornaam kaarthouder",
+      "cc-additional-name": "Middelste naam kaarthouder",
+      "cc-family-name": "Achternaam kaarthouder",
+      "cc-number": "Creditcardnummer",
+      "cc-exp": "Vervaldatum",
+      "cc-exp-month": "Vervaldatum maand",
+      "cc-exp-year": "Vervaldatum jaar",
+      "cc-csc": "Beveiligingscode van de kaart",
+      "cc-type": "Type creditcard",
+      "transaction-currency": "Valuta van de transactie",
+      "transaction-amount": "Transactiebedrag",
+      language: "Voorkeurstaal",
+      bday: "Verjaardag",
+      "bday-day": "Verjaardag Dag",
+      "bday-month": "Verjaardag Maand",
+      "bday-year": "Verjaardag Jaar",
+      sex: "Geslacht",
+      url: "Website URL",
+      photo: "Profielfoto",
+      tel: "Telefoonnummer",
+      "tel-country-code": "Landcode voor telefoon",
+      "tel-national": "Nationaal telefoonnummer",
+      "tel-area-code": "Netnummer",
+      "tel-local": "Lokaal telefoonnummer",
+      "tel-local-prefix": "Lokaal telefoonvoorvoegsel",
+      "tel-local-suffix": "Lokaal telefoonnummer achtervoegsel",
+      "tel-extension": "Telefoon extensie",
+      email: "E-mailadres",
+      impp: "Instant Messaging Protocol"
+    },
     maskType: {
       none: "Geen",
       pattern: "Patroon",
@@ -2833,3 +2888,56 @@ editorLocalization.locales["nl"] = nlStrings;
 // names.default-contrast: "Contrast" => "Tegenstelling"
 // panel.showNumber: "Number this panel" => "Nummer dit paneel"
 // pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Selecteer of u wilt dat de enquête automatisch naar de volgende pagina gaat zodra een respondent alle vragen op de huidige pagina heeft beantwoord. Deze functie is niet van toepassing als de laatste vraag op de pagina een open einde heeft of meerdere antwoorden toestaat."
+// autocomplete.name: "Full Name" => "Voor- en achternaam"
+// autocomplete.honorific-prefix: "Prefix" => "Voorvoegsel"
+// autocomplete.given-name: "First Name" => "Voornaam"
+// autocomplete.additional-name: "Middle Name" => "Middelste naam"
+// autocomplete.family-name: "Last Name" => "Achternaam"
+// autocomplete.honorific-suffix: "Suffix" => "Achtervoegsel"
+// autocomplete.nickname: "Nickname" => "Bijnaam"
+// autocomplete.organization-title: "Job Title" => "Functietitel"
+// autocomplete.username: "User Name" => "Gebruikersnaam"
+// autocomplete.new-password: "New Password" => "Nieuw wachtwoord"
+// autocomplete.current-password: "Current Password" => "Huidig wachtwoord"
+// autocomplete.organization: "Organization Name" => "Naam van de organisatie"
+// autocomplete.street-address: "Full Street Address" => "Volledig adres"
+// autocomplete.address-line1: "Address Line 1" => "Adres Regel 1"
+// autocomplete.address-line2: "Address Line 2" => "Adres Regel 2"
+// autocomplete.address-line3: "Address Line 3" => "Adres Regel 3"
+// autocomplete.address-level4: "Level 4 Address" => "Niveau 4 Adres"
+// autocomplete.address-level3: "Level 3 Address" => "Niveau 3 Adres"
+// autocomplete.address-level2: "Level 2 Address" => "Niveau 2 Adres"
+// autocomplete.address-level1: "Level 1 Address" => "Niveau 1 Adres"
+// autocomplete.country: "Country Code" => "Landcode"
+// autocomplete.country-name: "Country Name" => "Naam van het land"
+// autocomplete.postal-code: "Postal Code" => "Postcode"
+// autocomplete.cc-name: "Cardholder Name" => "Naam kaarthouder"
+// autocomplete.cc-given-name: "Cardholder First Name" => "Voornaam kaarthouder"
+// autocomplete.cc-additional-name: "Cardholder Middle Name" => "Middelste naam kaarthouder"
+// autocomplete.cc-family-name: "Cardholder Last Name" => "Achternaam kaarthouder"
+// autocomplete.cc-number: "Credit Card Number" => "Creditcardnummer"
+// autocomplete.cc-exp: "Expiration Date" => "Vervaldatum"
+// autocomplete.cc-exp-month: "Expiration Month" => "Vervaldatum maand"
+// autocomplete.cc-exp-year: "Expiration Year" => "Vervaldatum jaar"
+// autocomplete.cc-csc: "Card Security Code" => "Beveiligingscode van de kaart"
+// autocomplete.cc-type: "Credit Card Type" => "Type creditcard"
+// autocomplete.transaction-currency: "Transaction Currency" => "Valuta van de transactie"
+// autocomplete.transaction-amount: "Transaction Amount" => "Transactiebedrag"
+// autocomplete.language: "Preferred Language" => "Voorkeurstaal"
+// autocomplete.bday: "Birthday" => "Verjaardag"
+// autocomplete.bday-day: "Birthday Day" => "Verjaardag Dag"
+// autocomplete.bday-month: "Birthday Month" => "Verjaardag Maand"
+// autocomplete.bday-year: "Birthday Year" => "Verjaardag Jaar"
+// autocomplete.sex: "Gender" => "Geslacht"
+// autocomplete.url: "Website URL" => "Website URL"
+// autocomplete.photo: "Profile Photo" => "Profielfoto"
+// autocomplete.tel: "Telephone Number" => "Telefoonnummer"
+// autocomplete.tel-country-code: "Country Code for Phone" => "Landcode voor telefoon"
+// autocomplete.tel-national: "National Telephone Number" => "Nationaal telefoonnummer"
+// autocomplete.tel-area-code: "Area Code" => "Netnummer"
+// autocomplete.tel-local: "Local Phone Number" => "Lokaal telefoonnummer"
+// autocomplete.tel-local-prefix: "Local Phone Prefix" => "Lokaal telefoonvoorvoegsel"
+// autocomplete.tel-local-suffix: "Local Phone Suffix" => "Lokaal telefoonnummer achtervoegsel"
+// autocomplete.tel-extension: "Phone Extension" => "Telefoon extensie"
+// autocomplete.email: "Email Address" => "E-mailadres"
+// autocomplete.impp: "Instant Messaging Protocol" => "Instant Messaging Protocol"

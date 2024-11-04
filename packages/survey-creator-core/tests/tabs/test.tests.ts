@@ -4,7 +4,8 @@ import { SurveyResultsItemModel, SurveyResultsModel } from "../../src/components
 import { IAction, ListModel, Question, QuestionDropdownModel, SurveyModel, StylesManager, _setIsTouch } from "survey-core";
 import { TabTestPlugin } from "../../src/components/tabs/test-plugin";
 import { SurveySimulatorModel, simulatorDevices } from "../../src/components/simulator";
-import { editorLocalization } from "../../src/editorLocalization";
+import { editorLocalization, getLocString } from "../../src/editorLocalization";
+export * from "../../src/localization/german";
 
 import "survey-core/survey.i18n";
 
@@ -1096,4 +1097,23 @@ test("Suppress NavigateToUrl notification using allow option", (): any => {
   model.survey.doComplete();
   expect(onNavigateToUrlLog).toBe("->javascript:alert(2)->javascript:alert(2)");
   expect(notificationsLog).toBe("->You had to navigate to 'javascript:alert(2)'.");
+});
+test("The Preview Survey button text is not translated Bug#6016", (): any => {
+  const deText = "Testumfrage wiederholen";
+  const loc: any = editorLocalization.getLocale("de");
+  expect(loc).toBeTruthy();
+  if(!loc.ed) loc.ed = {};
+  loc.ed.testSurveyAgain = deText;
+  editorLocalization.currentLocale = "en";
+  const creator: CreatorTester = new CreatorTester();
+  expect(creator.locale).toBe("en");
+  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
+  expect(testPlugin.model).toBeFalsy();
+  creator.locale = "de";
+  creator.activeTab = "test";
+  expect(creator.locale).toBe("de");
+  expect(editorLocalization.currentLocale).toBe("de");
+  expect(getLocString("ed.testSurveyAgain")).toBe(deText);
+  expect(testPlugin.model.testAgainAction.title).toBe(deText);
+  creator.locale = "";
 });

@@ -5,7 +5,7 @@ import { QuestionToolbox } from "../toolbox";
 
 export abstract class SearchManager extends Base {
   public searchActionBar: ActionContainer = new ActionContainer();
-  public filterStringPlaceholder;
+  public get filterStringPlaceholder(): string { return this.getFilterStringPlaceholder(); }
   @property() filterString: string;
   @property() isVisible: boolean;
   @property() matchCounterText: string;
@@ -34,6 +34,7 @@ export abstract class SearchManager extends Base {
   }
 
   protected abstract setFiterString(newValue: string, oldValue: string);
+  protected abstract getFilterStringPlaceholder(): string;
 
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
     super.onPropertyValueChanged(name, oldValue, newValue);
@@ -56,7 +57,6 @@ export abstract class SearchManager extends Base {
 
 export class SearchManagerToolbox extends SearchManager {
   @property() toolbox: QuestionToolbox;
-  public filterStringPlaceholder = getLocString("ed.toolboxFilteredTextPlaceholder");
   protected setFiterString(newValue: string, oldValue: string) {
     this.toolbox.showSeparators = !newValue;
     this.toolbox.items.forEach(item => item.visible = item.hasText(newValue));
@@ -66,7 +66,7 @@ export class SearchManagerToolbox extends SearchManager {
       category.empty = category.items.filter(item => item.visible).length == 0;
     });
   }
-
+  protected getFilterStringPlaceholder(): string { return getLocString("ed.toolboxFilteredTextPlaceholder"); }
   public clearFilterString(): void {
     this.filterString = "";
     this.toolbox.rootElement.querySelector("input").focus();
@@ -78,8 +78,8 @@ export class SearchManagerPropertyGrid extends SearchManager {
 
   private currentMatchIndex: number;
   private currentMatch: Question;
-  public filterStringPlaceholder = getLocString("ed.propertyGridFilteredTextPlaceholder");
-  public propertyGridNoResultsFound = getLocString("ed.propertyGridNoResultsFound");
+  protected getFilterStringPlaceholder(): string { return getLocString("ed.propertyGridFilteredTextPlaceholder"); }
+  public get propertyGridNoResultsFound(): string { return getLocString("ed.propertyGridNoResultsFound"); }
 
   @property() survey: SurveyModel;
   @property() isVisible: boolean;

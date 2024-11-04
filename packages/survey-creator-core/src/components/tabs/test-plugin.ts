@@ -90,6 +90,7 @@ export class TabTestPlugin implements ICreatorPlugin {
     const options = {
       showPagesInTestSurveyTab: this.creator.showPagesInTestSurveyTab,
     };
+    this.testAgainAction.locStrsChanged();
     this.model.testAgainAction = this.testAgainAction;
     this.model.prevPageAction = this.prevPageAction;
     this.model.nextPageAction = this.nextPageAction;
