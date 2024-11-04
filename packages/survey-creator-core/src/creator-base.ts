@@ -1578,6 +1578,8 @@ export class SurveyCreatorModel extends Base
       path = svgBundle.V2;
     }
 
+    if (!path) return;
+
     SvgRegistry.registerIconsFromFolder(path);
   }
   protected setOptions(options: ICreatorOptions): void {
