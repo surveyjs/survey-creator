@@ -1018,6 +1018,61 @@ export var turkishStrings = {
       url: "URL",
       week: "Hafta"
     },
+    autocomplete: {
+      name: "Adınız ve Soyadınız",
+      "honorific-prefix": "Önek",
+      "given-name": "Ad",
+      "additional-name": "İkinci İsim",
+      "family-name": "Soyadı",
+      "honorific-suffix": "Sonek",
+      nickname: "Lakap",
+      "organization-title": "İş Ünvanı",
+      username: "Kullanıcı Adı",
+      "new-password": "Yeni Şifre",
+      "current-password": "Mevcut Şifre",
+      organization: "Kuruluş Adı",
+      "street-address": "Açık Adres",
+      "address-line1": "Adres Satırı 1",
+      "address-line2": "Adres Satırı 2",
+      "address-line3": "Adres Satırı 3",
+      "address-level4": "Seviye 4 Adres",
+      "address-level3": "Seviye 3 Adres",
+      "address-level2": "Seviye 2 Adres",
+      "address-level1": "Seviye 1 Adres",
+      country: "Ülke Kodu",
+      "country-name": "Ülke Adı",
+      "postal-code": "Posta Kodu",
+      "cc-name": "Kart Sahibinin Adı",
+      "cc-given-name": "Kart Sahibinin Adı",
+      "cc-additional-name": "Kart Sahibinin İkinci Adı",
+      "cc-family-name": "Kart Sahibinin Soyadı",
+      "cc-number": "Kredi Kartı Numarası",
+      "cc-exp": "Son kullanma tarihi",
+      "cc-exp-month": "Son kullanma ayı",
+      "cc-exp-year": "Son kullanma yılı",
+      "cc-csc": "Kart Güvenlik Kodu",
+      "cc-type": "Kredi Kartı Türü",
+      "transaction-currency": "İşlem Para Birimi",
+      "transaction-amount": "İşlem Tutarı",
+      language: "Tercih Edilen Dil",
+      bday: "Doğum günü",
+      "bday-day": "Doğum Günü",
+      "bday-month": "Doğum Günü Ayı",
+      "bday-year": "Doğum Günü Yılı",
+      sex: "Cinsiyet",
+      url: "Web Sitesi URL'si",
+      photo: "Profil Fotoğrafı",
+      tel: "Telefon numarası",
+      "tel-country-code": "Telefon için Ülke Kodu",
+      "tel-national": "Ulusal Telefon Numarası",
+      "tel-area-code": "Alan kodu",
+      "tel-local": "Yerel Telefon Numarası",
+      "tel-local-prefix": "Yerel Telefon Öneki",
+      "tel-local-suffix": "Yerel Telefon Soneki",
+      "tel-extension": "Telefon Uzantısı",
+      email: "E-posta Adresi",
+      impp: "Anlık Mesajlaşma Protokolü"
+    },
     maskType: {
       none: "Hiç kimse",
       pattern: "Desen",
@@ -2847,3 +2902,56 @@ editorLocalization.locales["tr"] = turkishStrings;
 // names.default-contrast: "Contrast" => "Karşıtlık"
 // panel.showNumber: "Number this panel" => "Bu paneli numaralandırın"
 // pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Yanıtlayan geçerli sayfadaki tüm soruları yanıtladıktan sonra anketin otomatik olarak sonraki sayfaya ilerlemesini isteyip istemediğinizi seçin. Bu özellik, sayfadaki son soru açık uçluysa veya birden fazla yanıta izin veriyorsa uygulanmaz."
+// autocomplete.name: "Full Name" => "Adınız ve Soyadınız"
+// autocomplete.honorific-prefix: "Prefix" => "Önek"
+// autocomplete.given-name: "First Name" => "Ad"
+// autocomplete.additional-name: "Middle Name" => "İkinci İsim"
+// autocomplete.family-name: "Last Name" => "Soyadı"
+// autocomplete.honorific-suffix: "Suffix" => "Sonek"
+// autocomplete.nickname: "Nickname" => "Lakap"
+// autocomplete.organization-title: "Job Title" => "İş Ünvanı"
+// autocomplete.username: "User Name" => "Kullanıcı Adı"
+// autocomplete.new-password: "New Password" => "Yeni Şifre"
+// autocomplete.current-password: "Current Password" => "Mevcut Şifre"
+// autocomplete.organization: "Organization Name" => "Kuruluş Adı"
+// autocomplete.street-address: "Full Street Address" => "Açık Adres"
+// autocomplete.address-line1: "Address Line 1" => "Adres Satırı 1"
+// autocomplete.address-line2: "Address Line 2" => "Adres Satırı 2"
+// autocomplete.address-line3: "Address Line 3" => "Adres Satırı 3"
+// autocomplete.address-level4: "Level 4 Address" => "Seviye 4 Adres"
+// autocomplete.address-level3: "Level 3 Address" => "Seviye 3 Adres"
+// autocomplete.address-level2: "Level 2 Address" => "Seviye 2 Adres"
+// autocomplete.address-level1: "Level 1 Address" => "Seviye 1 Adres"
+// autocomplete.country: "Country Code" => "Ülke Kodu"
+// autocomplete.country-name: "Country Name" => "Ülke Adı"
+// autocomplete.postal-code: "Postal Code" => "Posta Kodu"
+// autocomplete.cc-name: "Cardholder Name" => "Kart Sahibinin Adı"
+// autocomplete.cc-given-name: "Cardholder First Name" => "Kart Sahibinin Adı"
+// autocomplete.cc-additional-name: "Cardholder Middle Name" => "Kart Sahibinin İkinci Adı"
+// autocomplete.cc-family-name: "Cardholder Last Name" => "Kart Sahibinin Soyadı"
+// autocomplete.cc-number: "Credit Card Number" => "Kredi Kartı Numarası"
+// autocomplete.cc-exp: "Expiration Date" => "Son kullanma tarihi"
+// autocomplete.cc-exp-month: "Expiration Month" => "Son kullanma ayı"
+// autocomplete.cc-exp-year: "Expiration Year" => "Son kullanma yılı"
+// autocomplete.cc-csc: "Card Security Code" => "Kart Güvenlik Kodu"
+// autocomplete.cc-type: "Credit Card Type" => "Kredi Kartı Türü"
+// autocomplete.transaction-currency: "Transaction Currency" => "İşlem Para Birimi"
+// autocomplete.transaction-amount: "Transaction Amount" => "İşlem Tutarı"
+// autocomplete.language: "Preferred Language" => "Tercih Edilen Dil"
+// autocomplete.bday: "Birthday" => "Doğum günü"
+// autocomplete.bday-day: "Birthday Day" => "Doğum Günü"
+// autocomplete.bday-month: "Birthday Month" => "Doğum Günü Ayı"
+// autocomplete.bday-year: "Birthday Year" => "Doğum Günü Yılı"
+// autocomplete.sex: "Gender" => "Cinsiyet"
+// autocomplete.url: "Website URL" => "Web Sitesi URL'si"
+// autocomplete.photo: "Profile Photo" => "Profil Fotoğrafı"
+// autocomplete.tel: "Telephone Number" => "Telefon numarası"
+// autocomplete.tel-country-code: "Country Code for Phone" => "Telefon için Ülke Kodu"
+// autocomplete.tel-national: "National Telephone Number" => "Ulusal Telefon Numarası"
+// autocomplete.tel-area-code: "Area Code" => "Alan kodu"
+// autocomplete.tel-local: "Local Phone Number" => "Yerel Telefon Numarası"
+// autocomplete.tel-local-prefix: "Local Phone Prefix" => "Yerel Telefon Öneki"
+// autocomplete.tel-local-suffix: "Local Phone Suffix" => "Yerel Telefon Soneki"
+// autocomplete.tel-extension: "Phone Extension" => "Telefon Uzantısı"
+// autocomplete.email: "Email Address" => "E-posta Adresi"
+// autocomplete.impp: "Instant Messaging Protocol" => "Anlık Mesajlaşma Protokolü"

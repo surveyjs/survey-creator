@@ -1018,6 +1018,61 @@ var portugueseTranslation = {
       url: "URL",
       week: "Semana"
     },
+    autocomplete: {
+      name: "Nome completo",
+      "honorific-prefix": "Prefixo",
+      "given-name": "Nome próprio",
+      "additional-name": "Nome do meio",
+      "family-name": "Apelido",
+      "honorific-suffix": "Sufixo",
+      nickname: "Apelido",
+      "organization-title": "Cargo",
+      username: "Nome de usuário",
+      "new-password": "Nova senha",
+      "current-password": "Senha atual",
+      organization: "Nome da organização",
+      "street-address": "Endereço completo",
+      "address-line1": "Linha de endereço 1",
+      "address-line2": "Linha de endereço 2",
+      "address-line3": "Linha de endereço 3",
+      "address-level4": "Endereço de nível 4",
+      "address-level3": "Endereço de Nível 3",
+      "address-level2": "Endereço de Nível 2",
+      "address-level1": "Endereço de Nível 1",
+      country: "Código do país",
+      "country-name": "Nome do país",
+      "postal-code": "Código postal",
+      "cc-name": "Nome do titular do cartão",
+      "cc-given-name": "Nome do titular do cartão",
+      "cc-additional-name": "Nome do meio do titular do cartão",
+      "cc-family-name": "Sobrenome do titular do cartão",
+      "cc-number": "Número do cartão de crédito",
+      "cc-exp": "Data de validade",
+      "cc-exp-month": "Mês de Expiração",
+      "cc-exp-year": "Ano de validade",
+      "cc-csc": "Código de segurança do cartão",
+      "cc-type": "Tipo de cartão de crédito",
+      "transaction-currency": "Moeda da transação",
+      "transaction-amount": "Valor da transação",
+      language: "Idioma preferido",
+      bday: "Aniversário",
+      "bday-day": "Dia de aniversário",
+      "bday-month": "Mês de aniversário",
+      "bday-year": "Ano de aniversário",
+      sex: "Gênero",
+      url: "URL do site",
+      photo: "Foto do perfil",
+      tel: "Número telefônico",
+      "tel-country-code": "Código do país para telefone",
+      "tel-national": "Número de telefone nacional",
+      "tel-area-code": "Código de área",
+      "tel-local": "Número de telefone local",
+      "tel-local-prefix": "Prefixo de telefone local",
+      "tel-local-suffix": "Sufixo de telefone local",
+      "tel-extension": "Ramal telefônico",
+      email: "Endereço eletrônico",
+      impp: "Protocolo de mensagens instantâneas"
+    },
     maskType: {
       none: "Nenhum",
       pattern: "Padrão",
@@ -2518,3 +2573,56 @@ editorLocalization.locales["pt"] = portugueseTranslation;
 // names.default-contrast: "Contrast" => "Contraste"
 // panel.showNumber: "Number this panel" => "Numerar este painel"
 // pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Selecione se deseja que o questionário avance automaticamente para a próxima página depois que o respondente responder a todas as perguntas na página atual. Esse recurso não se aplicará se a última pergunta da página for aberta ou permitir várias respostas."
+// autocomplete.name: "Full Name" => "Nome completo"
+// autocomplete.honorific-prefix: "Prefix" => "Prefixo"
+// autocomplete.given-name: "First Name" => "Nome próprio"
+// autocomplete.additional-name: "Middle Name" => "Nome do meio"
+// autocomplete.family-name: "Last Name" => "Apelido"
+// autocomplete.honorific-suffix: "Suffix" => "Sufixo"
+// autocomplete.nickname: "Nickname" => "Apelido"
+// autocomplete.organization-title: "Job Title" => "Cargo"
+// autocomplete.username: "User Name" => "Nome de usuário"
+// autocomplete.new-password: "New Password" => "Nova senha"
+// autocomplete.current-password: "Current Password" => "Senha atual"
+// autocomplete.organization: "Organization Name" => "Nome da organização"
+// autocomplete.street-address: "Full Street Address" => "Endereço completo"
+// autocomplete.address-line1: "Address Line 1" => "Linha de endereço 1"
+// autocomplete.address-line2: "Address Line 2" => "Linha de endereço 2"
+// autocomplete.address-line3: "Address Line 3" => "Linha de endereço 3"
+// autocomplete.address-level4: "Level 4 Address" => "Endereço de nível 4"
+// autocomplete.address-level3: "Level 3 Address" => "Endereço de Nível 3"
+// autocomplete.address-level2: "Level 2 Address" => "Endereço de Nível 2"
+// autocomplete.address-level1: "Level 1 Address" => "Endereço de Nível 1"
+// autocomplete.country: "Country Code" => "Código do país"
+// autocomplete.country-name: "Country Name" => "Nome do país"
+// autocomplete.postal-code: "Postal Code" => "Código postal"
+// autocomplete.cc-name: "Cardholder Name" => "Nome do titular do cartão"
+// autocomplete.cc-given-name: "Cardholder First Name" => "Nome do titular do cartão"
+// autocomplete.cc-additional-name: "Cardholder Middle Name" => "Nome do meio do titular do cartão"
+// autocomplete.cc-family-name: "Cardholder Last Name" => "Sobrenome do titular do cartão"
+// autocomplete.cc-number: "Credit Card Number" => "Número do cartão de crédito"
+// autocomplete.cc-exp: "Expiration Date" => "Data de validade"
+// autocomplete.cc-exp-month: "Expiration Month" => "Mês de Expiração"
+// autocomplete.cc-exp-year: "Expiration Year" => "Ano de validade"
+// autocomplete.cc-csc: "Card Security Code" => "Código de segurança do cartão"
+// autocomplete.cc-type: "Credit Card Type" => "Tipo de cartão de crédito"
+// autocomplete.transaction-currency: "Transaction Currency" => "Moeda da transação"
+// autocomplete.transaction-amount: "Transaction Amount" => "Valor da transação"
+// autocomplete.language: "Preferred Language" => "Idioma preferido"
+// autocomplete.bday: "Birthday" => "Aniversário"
+// autocomplete.bday-day: "Birthday Day" => "Dia de aniversário"
+// autocomplete.bday-month: "Birthday Month" => "Mês de aniversário"
+// autocomplete.bday-year: "Birthday Year" => "Ano de aniversário"
+// autocomplete.sex: "Gender" => "Gênero"
+// autocomplete.url: "Website URL" => "URL do site"
+// autocomplete.photo: "Profile Photo" => "Foto do perfil"
+// autocomplete.tel: "Telephone Number" => "Número telefônico"
+// autocomplete.tel-country-code: "Country Code for Phone" => "Código do país para telefone"
+// autocomplete.tel-national: "National Telephone Number" => "Número de telefone nacional"
+// autocomplete.tel-area-code: "Area Code" => "Código de área"
+// autocomplete.tel-local: "Local Phone Number" => "Número de telefone local"
+// autocomplete.tel-local-prefix: "Local Phone Prefix" => "Prefixo de telefone local"
+// autocomplete.tel-local-suffix: "Local Phone Suffix" => "Sufixo de telefone local"
+// autocomplete.tel-extension: "Phone Extension" => "Ramal telefônico"
+// autocomplete.email: "Email Address" => "Endereço eletrônico"
+// autocomplete.impp: "Instant Messaging Protocol" => "Protocolo de mensagens instantâneas"

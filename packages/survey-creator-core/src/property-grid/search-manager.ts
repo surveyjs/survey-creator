@@ -7,8 +7,8 @@ export class SearchManagerPropertyGrid extends SearchManager {
 
   private currentMatchIndex: number;
   private currentMatch: Question;
-  public filterStringPlaceholder = getLocString("ed.propertyGridFilteredTextPlaceholder");
-  public propertyGridNoResultsFound = getLocString("ed.propertyGridNoResultsFound");
+  protected getFilterStringPlaceholder(): string { return getLocString("ed.propertyGridFilteredTextPlaceholder"); }
+  public get propertyGridNoResultsFound(): string { return getLocString("ed.propertyGridNoResultsFound"); }
 
   @property() survey: SurveyModel;
   @property() isVisible: boolean;
@@ -16,7 +16,7 @@ export class SearchManagerPropertyGrid extends SearchManager {
 
   private expandAllParents(element: IElement) {
     if (!element) return;
-    if((<any>element).page && (<any>element).survey) {
+    if ((<any>element).page && (<any>element).survey) {
       (<any>element).survey.currentPage = (<any>element).page;
     }
     if (element.isCollapsed) {
@@ -42,9 +42,9 @@ export class SearchManagerPropertyGrid extends SearchManager {
   }
   private updatedMatchCounterText(index: number) {
     const count = this.allMatches.length;
-    if(count === 1) {
+    if (count === 1) {
       this.matchCounterText = "";
-    } else if(this.currentMatch) {
+    } else if (this.currentMatch) {
       const value = index + 1;
       this.matchCounterText = [value, count].join("/");
     } else {
@@ -67,7 +67,7 @@ export class SearchManagerPropertyGrid extends SearchManager {
     const visibleQuestions = this.survey.getAllQuestions().filter(q => q.isVisible);
     return visibleQuestions.filter(q => {
       let srcString = q.name + "|" + q.title + "|" + q.description;
-      if(!!srcString) {
+      if (!!srcString) {
         srcString = normalize(srcString, "search");
         srcString = srcString.toLocaleLowerCase().trim();
       }
@@ -75,13 +75,13 @@ export class SearchManagerPropertyGrid extends SearchManager {
     });
   }
   protected setFiterString(newValue: string, oldValue: string) {
-    if(!newValue) {
+    if (!newValue) {
       this.reset();
       return;
     }
 
     this.allMatches = this.getAllMatches(newValue);
-    if(this.allMatches.length === 0) {
+    if (this.allMatches.length === 0) {
       this.reset();
       return;
     }

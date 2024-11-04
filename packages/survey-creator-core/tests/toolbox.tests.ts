@@ -877,3 +877,12 @@ test("Check toolbox getAnimatedElement methods", (): any => {
   expect(toolbox.classNames.indexOf(isFlyoutToCompactRunningClass) >= 0).toBeFalsy();
   surveySettings.animationEnabled = false;
 });
+test("Update subitems on locale change, Bug#6014", (): any => {
+  const creator = new CreatorTester({ questionTypes: ["text", "checkbox"] });
+  creator.locale = "de";
+  const checkbox = creator.toolbox.getItemByName("checkbox") as QuestionToolboxItem;
+  expect(checkbox.locTitle.renderedHtml).toBe("Auswahl");
+  const text = creator.toolbox.getItemByName("text") as QuestionToolboxItem;
+  expect(text.getSubitem("color").locTitle.renderedHtml).toBe("Farbe");
+  creator.locale = "en";
+});

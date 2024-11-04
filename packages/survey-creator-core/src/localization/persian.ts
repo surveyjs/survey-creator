@@ -1018,6 +1018,61 @@ var persianStrings = {
       url: "آدرس",
       week: "هفته"
     },
+    autocomplete: {
+      name: "نام و نام خانوادگی",
+      "honorific-prefix": "پیشوند",
+      "given-name": "نام و نام خانوادگی",
+      "additional-name": "نام میانی",
+      "family-name": "نام خانوادگی",
+      "honorific-suffix": "پسوند",
+      nickname: "نام مستعار",
+      "organization-title": "عنوان شغلی",
+      username: "نام کاربری",
+      "new-password": "رمز عبور جدید",
+      "current-password": "رمز عبور فعلی",
+      organization: "نام سازمان",
+      "street-address": "آدرس کامل خیابان",
+      "address-line1": "خط آدرس 1",
+      "address-line2": "خط آدرس 2",
+      "address-line3": "خط آدرس 3",
+      "address-level4": "آدرس سطح 4",
+      "address-level3": "آدرس سطح 3",
+      "address-level2": "آدرس سطح 2",
+      "address-level1": "آدرس سطح 1",
+      country: "کد کشور",
+      "country-name": "نام کشور",
+      "postal-code": "کد پستی",
+      "cc-name": "نام دارنده کارت",
+      "cc-given-name": "نام دارنده کارت",
+      "cc-additional-name": "نام میانی دارنده کارت",
+      "cc-family-name": "نام خانوادگی دارنده کارت",
+      "cc-number": "شماره کارت اعتباری",
+      "cc-exp": "تاریخ انقضا",
+      "cc-exp-month": "ماه انقضا",
+      "cc-exp-year": "سال انقضا",
+      "cc-csc": "کد امنیتی کارت",
+      "cc-type": "نوع کارت اعتباری",
+      "transaction-currency": "ارز تراکنش",
+      "transaction-amount": "مبلغ تراکنش",
+      language: "زبان ترجیحی",
+      bday: "تولد",
+      "bday-day": "روز تولد",
+      "bday-month": "ماه تولد",
+      "bday-year": "سال تولد",
+      sex: "جنسیت",
+      url: "آدرس وب سایت",
+      photo: "عکس پروفایل",
+      tel: "شماره تلفن",
+      "tel-country-code": "کد کشور برای تلفن",
+      "tel-national": "شماره تلفن ملی",
+      "tel-area-code": "کد منطقه",
+      "tel-local": "شماره تلفن محلی",
+      "tel-local-prefix": "پیشوند تلفن محلی",
+      "tel-local-suffix": "پسوند تلفن محلی",
+      "tel-extension": "پسوند تلفن",
+      email: "آدرس ایمیل",
+      impp: "پروتکل پیام رسانی فوری"
+    },
     maskType: {
       none: "هیچ کدام",
       pattern: "الگوی",
@@ -2808,3 +2863,56 @@ editorLocalization.locales["fa"] = persianStrings;
 // names.default-contrast: "Contrast" => "کنتراست"
 // panel.showNumber: "Number this panel" => "شماره گذاری این پانل"
 // pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "انتخاب کنید که آیا می خواهید نظرسنجی به طور خودکار به صفحه بعدی پیش برود پس از اینکه پاسخ دهنده به همه سؤالات موجود در صفحه فعلی پاسخ داد. اگر آخرین سؤال در صفحه باز باشد یا اجازه پاسخ های متعدد را بدهد، این ویژگی اعمال نمی شود."
+// autocomplete.name: "Full Name" => "نام و نام خانوادگی"
+// autocomplete.honorific-prefix: "Prefix" => "پیشوند"
+// autocomplete.given-name: "First Name" => "نام و نام خانوادگی"
+// autocomplete.additional-name: "Middle Name" => "نام میانی"
+// autocomplete.family-name: "Last Name" => "نام خانوادگی"
+// autocomplete.honorific-suffix: "Suffix" => "پسوند"
+// autocomplete.nickname: "Nickname" => "نام مستعار"
+// autocomplete.organization-title: "Job Title" => "عنوان شغلی"
+// autocomplete.username: "User Name" => "نام کاربری"
+// autocomplete.new-password: "New Password" => "رمز عبور جدید"
+// autocomplete.current-password: "Current Password" => "رمز عبور فعلی"
+// autocomplete.organization: "Organization Name" => "نام سازمان"
+// autocomplete.street-address: "Full Street Address" => "آدرس کامل خیابان"
+// autocomplete.address-line1: "Address Line 1" => "خط آدرس 1"
+// autocomplete.address-line2: "Address Line 2" => "خط آدرس 2"
+// autocomplete.address-line3: "Address Line 3" => "خط آدرس 3"
+// autocomplete.address-level4: "Level 4 Address" => "آدرس سطح 4"
+// autocomplete.address-level3: "Level 3 Address" => "آدرس سطح 3"
+// autocomplete.address-level2: "Level 2 Address" => "آدرس سطح 2"
+// autocomplete.address-level1: "Level 1 Address" => "آدرس سطح 1"
+// autocomplete.country: "Country Code" => "کد کشور"
+// autocomplete.country-name: "Country Name" => "نام کشور"
+// autocomplete.postal-code: "Postal Code" => "کد پستی"
+// autocomplete.cc-name: "Cardholder Name" => "نام دارنده کارت"
+// autocomplete.cc-given-name: "Cardholder First Name" => "نام دارنده کارت"
+// autocomplete.cc-additional-name: "Cardholder Middle Name" => "نام میانی دارنده کارت"
+// autocomplete.cc-family-name: "Cardholder Last Name" => "نام خانوادگی دارنده کارت"
+// autocomplete.cc-number: "Credit Card Number" => "شماره کارت اعتباری"
+// autocomplete.cc-exp: "Expiration Date" => "تاریخ انقضا"
+// autocomplete.cc-exp-month: "Expiration Month" => "ماه انقضا"
+// autocomplete.cc-exp-year: "Expiration Year" => "سال انقضا"
+// autocomplete.cc-csc: "Card Security Code" => "کد امنیتی کارت"
+// autocomplete.cc-type: "Credit Card Type" => "نوع کارت اعتباری"
+// autocomplete.transaction-currency: "Transaction Currency" => "ارز تراکنش"
+// autocomplete.transaction-amount: "Transaction Amount" => "مبلغ تراکنش"
+// autocomplete.language: "Preferred Language" => "زبان ترجیحی"
+// autocomplete.bday: "Birthday" => "تولد"
+// autocomplete.bday-day: "Birthday Day" => "روز تولد"
+// autocomplete.bday-month: "Birthday Month" => "ماه تولد"
+// autocomplete.bday-year: "Birthday Year" => "سال تولد"
+// autocomplete.sex: "Gender" => "جنسیت"
+// autocomplete.url: "Website URL" => "آدرس وب سایت"
+// autocomplete.photo: "Profile Photo" => "عکس پروفایل"
+// autocomplete.tel: "Telephone Number" => "شماره تلفن"
+// autocomplete.tel-country-code: "Country Code for Phone" => "کد کشور برای تلفن"
+// autocomplete.tel-national: "National Telephone Number" => "شماره تلفن ملی"
+// autocomplete.tel-area-code: "Area Code" => "کد منطقه"
+// autocomplete.tel-local: "Local Phone Number" => "شماره تلفن محلی"
+// autocomplete.tel-local-prefix: "Local Phone Prefix" => "پیشوند تلفن محلی"
+// autocomplete.tel-local-suffix: "Local Phone Suffix" => "پسوند تلفن محلی"
+// autocomplete.tel-extension: "Phone Extension" => "پسوند تلفن"
+// autocomplete.email: "Email Address" => "آدرس ایمیل"
+// autocomplete.impp: "Instant Messaging Protocol" => "پروتکل پیام رسانی فوری"
