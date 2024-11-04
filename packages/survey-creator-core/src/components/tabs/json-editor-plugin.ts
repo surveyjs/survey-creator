@@ -220,7 +220,7 @@ export abstract class TabJsonEditorBasePlugin implements ICreatorPlugin {
   public activate(): void {
     this.model = this.createModel(this.creator);
   }
-  public deactivate(): void {
+  public deactivate(): boolean {
     if (this.model) {
       if (!this.model.readOnly && this.model.isJSONChanged) {
         this.creator.selectedElement = undefined;
@@ -231,6 +231,7 @@ export abstract class TabJsonEditorBasePlugin implements ICreatorPlugin {
       this.model.dispose();
       this.model = undefined;
     }
+    return true;
   }
   public defaultAllowingDeactivate(): boolean {
     if (!this.model) return true;

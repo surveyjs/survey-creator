@@ -105,7 +105,7 @@ export class TabTestPlugin implements ICreatorPlugin {
       }
     });
   }
-  public deactivate(): void {
+  public deactivate(): boolean {
     if (this.model) {
       this.simulatorTheme = this.model.simulator.survey.css;
       this.model.onSurveyCreatedCallback = undefined;
@@ -115,6 +115,7 @@ export class TabTestPlugin implements ICreatorPlugin {
     this.languageSelectorAction.visible = false;
     this.testAgainAction.visible = false;
     this.invisibleToggleAction && (this.invisibleToggleAction.visible = false);
+    return true;
   }
   private getAvailableThemes(themeMapper: Array<any>): Array<Action> {
     const availableThemesToItems = [];

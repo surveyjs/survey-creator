@@ -91,7 +91,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.model.filteredPage = null;
     this.updateFilterPageAction(true);
   }
-  public deactivate(): void {
+  public deactivate(): boolean {
     if (!!this.model) {
       this.model.dispose();
     }
@@ -104,6 +104,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.mergeLocaleWithDefaultAction.visible = false;
     this.importCsvAction.visible = false;
     this.exportCsvAction.visible = false;
+    return true;
   }
   private createMergeLocaleWithDefaultActionTitleUpdater(): any {
     return <any>new ComputedUpdater<string>(() => {

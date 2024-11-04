@@ -1197,9 +1197,7 @@ export class SurveyCreatorModel extends Base
     const chaningOptions = { tabName: viewName, allow: allow, model: this.currentPlugin?.model };
     this.onActiveTabChanging.fire(this, chaningOptions);
     if (!chaningOptions.allow) return;
-    if(!!this.currentPlugin && this.currentPlugin.deactivate) {
-      this.currentPlugin.deactivate();
-    }
+    if(!!this.currentPlugin?.deactivate && !this.currentPlugin.deactivate()) return;
     const plugin = this.activatePlugin(viewName);
     this.viewType = viewName;
     this.onActiveTabChanged.fire(this, { tabName: viewName, plugin: plugin, model: !!plugin ? plugin.model : undefined });

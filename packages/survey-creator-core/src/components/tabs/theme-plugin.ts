@@ -451,7 +451,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       }
     });
   }
-  public deactivate(): void {
+  public deactivate(): boolean {
     if (this.model) {
       this.simulatorCssClasses = this.model.survey.css;
       this.model.onPropertyChanged.clear();
@@ -470,6 +470,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.propertyGridTab.visible = false;
     this.testAgainAction.visible = false;
     this.invisibleToggleAction && (this.invisibleToggleAction.visible = false);
+    return true;
   }
 
   public saveToFileHandler = saveToFileHandler;

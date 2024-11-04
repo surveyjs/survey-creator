@@ -34,7 +34,7 @@ export class UndoRedoPlugin implements ICreatorPlugin {
   }
   public model: any = undefined;
   public activate(): void {}
-  public deactivate(): void {}
+  public deactivate(): boolean { return true; }
   public update(): void {}
   public addFooterActions() {
     this.model.undoAction && (this.creator.footerToolbar.actions.splice(2, 0, this.model.undoAction));
