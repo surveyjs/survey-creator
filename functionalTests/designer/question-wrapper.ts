@@ -420,6 +420,30 @@ test("Question adorner - collapse button in differen modes", async (t) => {
   await ClientFunction(() => { window["creator"].expandCollapseButtonVisibility = "never"; })();
 });
 
+test("Question adorner - do not render content when initially collapsed", async (t) => {
+  await t.resizeWindow(1920, 1080);
+  const json = {
+    elements: [
+      {
+        type: "text",
+        name: "question1"
+      }
+    ]
+  };
+  await setJSON(json);
+  await ClientFunction(() => { window["creator"].expandCollapseButtonVisibility = "onhover"; })();
+  const qContent = Selector(".svc-question__content");
+  const qCollapseButton = Selector(".svc-question__content #collapse");
+  await t.hover(qContent, { offsetX: 10, offsetY: 10 });
+  await t.expect(Selector(".svc-question__adorner").hasClass("svc-hovered")).ok();
+  await t.expect(qCollapseButton.visible).notOk();
+  await t.click(qContent, { offsetX: 10, offsetY: 10 });
+  await t.expect(qContent.hasClass("svc-question__content--selected")).ok();
+  await t.expect(qCollapseButton.visible).notOk();
+
+  await ClientFunction(() => { window["creator"].expandCollapseButtonVisibility = "never"; })();
+});
+
 test("Question adorner - collapse button visibility inside panels", async (t) => {
   await t.resizeWindow(1920, 1080);
   const json = {
@@ -436,33 +460,22 @@ test("Question adorner - collapse button visibility inside panels", async (t) =>
       }
     ]
   };
-  await ClientFunction(() => { window["creator"].expandCollapseButtonVisibility = "onhover"; })();
+  await ClientFunction(() => { window["creator"].expandCollapseButtonVisibility = "always"; })();
   await setJSON(json);
   await t.hover(getToolboxItemByText("Single-Line Input"));
   const qContent = Selector(".svc-question__content--text");
-  const pContent = Selector(".svc-question__content--panel");
   const qCollapseButton = Selector(".svc-question__content--text #collapse");
-  const pCollapseButton = Selector(".svc-question__content--panel #collapse");
-
-  await t.hover(qContent, { offsetX: 10, offsetY: 10 });
-  await t.expect(Selector(".svc-question__adorner.svc-hovered > .svc-question__content--text").exists).ok();
   await t.expect(qCollapseButton.visible).ok();
-  await t.expect(pCollapseButton.visible).notOk();
+  await t.click(qCollapseButton);
 
-  await t.hover(pContent, { offsetX: 10, offsetY: 10 });
-  await t.expect(Selector(".svc-question__adorner.svc-hovered > .svc-question__content--panel").exists).ok();
-  await t.expect(qCollapseButton.visible).notOk();
-  await t.expect(pCollapseButton.visible).ok();
+  await t.click(Selector(".svc-tabbed-menu-item").withText("Preview"));
+  await t.click(Selector(".svc-tabbed-menu-item").withText("Designer"));
 
-  await t.click(qContent, { offsetX: 10, offsetY: 10 });
-  await t.expect(qContent.hasClass("svc-question__content--selected")).ok();
-  await t.expect(qCollapseButton.visible).ok();
-  await t.expect(pCollapseButton.visible).notOk();
-
-  await t.click(pContent, { offsetX: 10, offsetY: 10 });
-  await t.expect(pContent.hasClass("svc-question__content--selected")).ok();
-  await t.expect(qCollapseButton.visible).notOk();
-  await t.expect(pCollapseButton.visible).ok();
+  await t.expect(qContent.find(".sd-element").exists).notOk();
+  await t.click(qCollapseButton);
+  await t.expect(qContent.find(".sd-element").exists).ok();
+  await t.click(qCollapseButton);
+  await t.expect(qContent.find(".sd-element").exists).ok();
 });
 
 test("Question adorner - doubleclick", async (t) => {
