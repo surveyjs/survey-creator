@@ -1,4 +1,5 @@
 import * as React from "react";
+import { CssClassBuilder } from "survey-core";
 import { attachKey2click, ReactElementFactory, SurveyElementBase, SvgIcon, } from "survey-react-ui";
 
 interface IActionButtonProps {
@@ -13,13 +14,12 @@ interface IActionButtonProps {
 }
 export class ActionButton extends SurveyElementBase<IActionButtonProps, any> {
   renderElement(): JSX.Element {
-    let classes = this.props.classes + " svc-action-button";
-    if (this.props.selected) {
-      classes += " svc-action-button--selected";
-    }
-    if (this.props.disabled) {
-      classes += " svc-action-button--disabled";
-    }
+    const classes = new CssClassBuilder()
+      .append(this.props.classes)
+      .append("svc-action-button")
+      .append("svc-action-button--selected", this.props.selected)
+      .append("svc-action-button--disabled", this.props.disabled)
+      .toString();
     if (this.props.iconName) {
       return this.renderIcon(classes);
     }
