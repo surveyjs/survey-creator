@@ -84,11 +84,19 @@ svc-page {
 }
 
 .svc-page-toolbar__item--with-text {
-  padding: var(--ctr-survey-question-panel-toolbar-item-padding-top, calcSize(0.5))
+  padding: var(--ctr-survey-question-panel-toolbar-item-padding-top, calcSize(1))
     var(--ctr-survey-question-panel-toolbar-item-padding-right-with-text, calcSize(1))
     var(--ctr-survey-question-panel-toolbar-item-padding-bottom, calcSize(1))
     var(--ctr-survey-question-panel-toolbar-item-padding-left, calcSize(1));
-  gap: var(--ctr-survey-question-panel-toolbar-item-gap, calcSize(1));
+  gap: var(--ctr-survey-question-panel-toolbar-item-gap, calcSize(0.5));
+}
+
+.svc-page-toolbar .sv-action:last-of-type .svc-page-toolbar__item--with-text {
+  margin-inline-end: 0;
+}
+
+.svc-page-toolbar .sv-action:first-of-type .svc-page-toolbar__item--with-text {
+  margin-inline-start: 0;
 }
 
 //hovered state

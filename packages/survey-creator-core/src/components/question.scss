@@ -53,10 +53,10 @@ svc-question {
 }
 
 .svc-survey-element-toolbar__item,
-.svc-survey-element-toolbar__dots-item {
+.svc-survey-element-toolbar__dots-item .sv-dots__item {
   @include defaultActionButtonSettings;
   --ctr-survey-question-panel-toolbar-button-gap: calc(var(--ctr-survey-question-panel-toolbar-gap) / 2);
-  margin: 0 var(--ctr-survey-question-panel-toolbar-item-gap, calcSize(0.25));
+  margin: 0 var(--ctr-survey-question-panel-toolbar-button-gap, calcSize(0.5));
   border-radius: var(--ctr-survey-question-panel-toolbar-item-corner-radius, calcSize(0.5));
   padding: var(--ctr-survey-question-panel-toolbar-item-padding-top, calcSize(1))
     var(--ctr-survey-question-panel-toolbar-item-padding-right, calcSize(1))
@@ -76,7 +76,15 @@ svc-question {
     var(--ctr-survey-question-panel-toolbar-item-padding-right-with-text, calcSize(1))
     var(--ctr-survey-question-panel-toolbar-item-padding-bottom, calcSize(1))
     var(--ctr-survey-question-panel-toolbar-item-padding-left, calcSize(1));
-  gap: var(--ctr-survey-question-panel-toolbar-item-gap, calcSize(1));
+  gap: var(--ctr-survey-question-panel-toolbar-item-gap, calcSize(0.5));
+}
+
+.svc-survey-element-toolbar .sv-action:last-of-type .svc-survey-element-toolbar__item--with-text {
+  margin-inline-end: 0;
+}
+
+.svc-survey-element-toolbar .sv-action:first-of-type .svc-survey-element-toolbar__item--with-text {
+  margin-inline-start: 0;
 }
 
 .svc-dropdown-action--convertTo .svc-survey-element-toolbar__item--with-text {
@@ -371,8 +379,6 @@ svc-question {
   }
 
   .svc-survey-element-toolbar-item__icon {
-    margin-inline-start: calcSize(0.5);
-
     &:last-child {
       margin-inline-start: 0;
     }
