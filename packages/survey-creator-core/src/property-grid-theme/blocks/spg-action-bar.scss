@@ -1,16 +1,12 @@
 .spg-action-bar {
   display: flex;
   box-sizing: content-box;
-  padding-right: calcSize(0.5);
   position: relative;
   align-items: center;
   margin-left: auto;
   overflow: hidden;
   white-space: nowrap;
 
-  .sv-action:not(.sv-action--hidden):not(:last-of-type)>.sv-action__content {
-    padding-right: 0;
-  }
 }
 
 .spg-action-button {
@@ -19,11 +15,14 @@
   -moz-appearance: none;
   appearance: none;
   display: flex;
-  padding: calcSize(1);
+  padding: var(--ctr-actionbar-button-padding-top-large-icon, calcSize(1))
+    var(--ctr-actionbar-button-padding-right-large-icon, calcSize(1))
+    var(--ctr-actionbar-button-padding-bottom-large-icon, calcSize(1))
+    var(--ctr-actionbar-button-padding-left-large-icon, calcSize(1));
   box-sizing: border-box;
   border: none;
   color: var(--ctr-actionbar-button-text-color, $primary);
-  border-radius: calcSize(12.5);
+  border-radius: var(--ctr-actionbar-button-corner-radius, calcSize(12.5));
   background-color: transparent;
   cursor: pointer;
   transition: background-color $creator-transition-duration, opacity $creator-transition-duration;

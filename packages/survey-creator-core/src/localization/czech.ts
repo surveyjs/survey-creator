@@ -69,6 +69,7 @@ export var czStrings = {
     surveySettingsTooltip: "Nastavení průzkumu",
     themeSettings: "Nastavení motivu",
     themeSettingsTooltip: "Nastavení motivu",
+    creatorSettingTitle: "Nastavení tvůrce",
     showPanel: "Zobrazit panel",
     hidePanel: "Skrýt panel",
     prevSelected: "Vybrat předchozí",
@@ -301,7 +302,7 @@ export var czStrings = {
       width: "Šířka vloženého panelu",
       minWidth: "Minimální šířka panelu",
       maxWidth: "Maximální šířka panelu",
-      showNumber: "Číselné panely"
+      showNumber: "Očíslujte tento panel"
     },
     paneldynamic: {
       name: "Název panelu",
@@ -828,6 +829,8 @@ export var czStrings = {
       header: "Záhlaví",
       background: "Pozadí",
       appearance: "Vzhled",
+      accentColors: "Zvýraznění barev",
+      scaling: "Změna velikosti",
       others: "Ostatní"
     },
     editProperty: "Upravit vlastnost „{0}“",
@@ -1014,6 +1017,61 @@ export var czStrings = {
       time: "Čas",
       url: "URL",
       week: "Týden"
+    },
+    autocomplete: {
+      name: "Celé jméno",
+      "honorific-prefix": "Předpona",
+      "given-name": "Křestní jméno",
+      "additional-name": "Druhé jméno",
+      "family-name": "Příjmení",
+      "honorific-suffix": "Přípona",
+      nickname: "Přezdívka",
+      "organization-title": "Pracovní pozice",
+      username: "Uživatelské jméno",
+      "new-password": "Nové heslo",
+      "current-password": "Aktuální heslo",
+      organization: "Název organizace",
+      "street-address": "Úplná adresa",
+      "address-line1": "Řádek adresy 1",
+      "address-line2": "Řádek adresy 2",
+      "address-line3": "Řádek adresy 3",
+      "address-level4": "Adresa úrovně 4",
+      "address-level3": "Adresa úrovně 3",
+      "address-level2": "Adresa úrovně 2",
+      "address-level1": "Adresa úrovně 1",
+      country: "Kód země",
+      "country-name": "Název země",
+      "postal-code": "Psč",
+      "cc-name": "Jméno držitele karty",
+      "cc-given-name": "Křestní jméno držitele karty",
+      "cc-additional-name": "Prostřední jméno držitele karty",
+      "cc-family-name": "Příjmení držitele karty",
+      "cc-number": "Číslo kreditní karty",
+      "cc-exp": "Datum vypršení",
+      "cc-exp-month": "Měsíc vypršení platnosti",
+      "cc-exp-year": "Rok vypršení platnosti",
+      "cc-csc": "Bezpečnostní kód karty",
+      "cc-type": "Typ kreditní karty",
+      "transaction-currency": "Měna transakce",
+      "transaction-amount": "Částka transakce",
+      language: "Preferovaný jazyk",
+      bday: "Narozeniny",
+      "bday-day": "Den narozenin",
+      "bday-month": "Měsíc narozenin",
+      "bday-year": "Narozeniny Rok",
+      sex: "Pohlaví",
+      url: "Adresa URL webu",
+      photo: "Profilová fotografie",
+      tel: "Telefonní číslo",
+      "tel-country-code": "Předvolba země pro telefon",
+      "tel-national": "Národní telefonní číslo",
+      "tel-area-code": "Směrové číslo",
+      "tel-local": "Místní telefonní číslo",
+      "tel-local-prefix": "Předvolba místního telefonu",
+      "tel-local-suffix": "Přípona místního telefonu",
+      "tel-extension": "Telefonní linka",
+      email: "E-mailová adresa",
+      impp: "Protokol pro rychlé zasílání zpráv"
     },
     maskType: {
       none: "Žádný",
@@ -1289,7 +1347,8 @@ export var czStrings = {
       innerIndent: "Přidá mezeru nebo okraj mezi obsah panelu a levý okraj rámečku panelu.",
       startWithNewLine: "Zrušte výběr, chcete-li panel zobrazit v jednom řádku s předchozí otázkou nebo panelem. Nastavení se nepoužije, pokud je panel prvním prvkem ve formuláři.",
       state: "Vyberte si z: \"Rozbalený\" - panel se zobrazí celý a lze jej sbalit; \"Sbaleno\" - panel zobrazuje pouze název a popis a lze jej rozbalit; \"Zamčeno\" - obraz je zobrazen celý a nelze jej sbalit.",
-      width: "Nastaví šířku panelu v poměru k ostatním prvkům zaměření ve stejném řádku. Přijímá hodnoty CSS (px, %, in, pt atd.)."
+      width: "Nastaví šířku panelu v poměru k ostatním prvkům zaměření ve stejném řádku. Přijímá hodnoty CSS (px, %, in, pt atd.).",
+      showQuestionNumbers: "Přiřadí čísla otázkám vnořeným v tomto panelu."
     },
     paneldynamic: {
       name: "ID panelu, které není viditelné pro respondenty.",
@@ -1387,7 +1446,7 @@ export var czStrings = {
     logoWidth: "Nastaví šířku loga v jednotkách CSS (px, %, in, pt atd.).",
     logoHeight: "Nastaví výšku loga v jednotkách CSS (px, %, in, pt atd.).",
     logoFit: "Vyberte si z těchto možností: \"Žádné\" - obrázek si zachová svou původní velikost; \"Obsahovat\" - velikost obrázku se změní tak, aby se vešel při zachování poměru stran; \"Obálka\" - obrázek vyplní celý rámeček při zachování poměru stran; \"Výplň\" - obrázek je roztažen tak, aby vyplnil rámeček bez zachování poměru stran.",
-    goNextPageAutomatic: "Vyberte, zda chcete, aby průzkum automaticky postoupil na další stránku poté, co respondent odpoví na všechny otázky na aktuální stránce.",
+    goNextPageAutomatic: "Vyberte, zda chcete, aby průzkum automaticky přešel na další stránku, jakmile respondent odpoví na všechny otázky na aktuální stránce. Tato funkce se nepoužije, pokud je poslední otázka na stránce otevřená nebo umožňuje více odpovědí.",
     allowCompleteSurveyAutomatic: "Vyberte, zda chcete, aby se průzkum vyplnil automaticky poté, co respondent odpoví na všechny otázky.",
     showNavigationButtons: "Nastaví viditelnost a umístění navigačních tlačítek na stránce.",
     showProgressBar: "Nastaví viditelnost a umístění indikátoru průběhu. Hodnota \"Auto\" zobrazuje indikátor průběhu nad nebo pod záhlavím průzkumu.",
@@ -1695,6 +1754,20 @@ export var czStrings = {
       brown: "Hnědý",
       green: "Zelený"
     }
+  },
+  creatortheme: {
+    "--sjs-special-background": "Pozadí Surface",
+    "--sjs-primary-background-500": "Primární",
+    "--sjs-secondary-background-500": "Sekundární",
+    surfaceScale: "Povrch",
+    userInterfaceBaseUnit: "Uživatelské rozhraní",
+    fontScale: "Písmo",
+    names: {
+      sc2020: "Tvůrce průzkumu 2020",
+      "default-light": "Světlo",
+      "default-dark": "Temný",
+      "default-contrast": "Kontrast"
+    }
   }
 };
 
@@ -1883,7 +1956,6 @@ editorLocalization.locales["cs"] = czStrings;
 // panel.width: "Inline panel width" => "Šířka vloženého panelu"
 // panel.minWidth: "Minimum panel width" => "Minimální šířka panelu"
 // panel.maxWidth: "Maximum panel width" => "Maximální šířka panelu"
-// panel.showNumber: "Number panels" => "Číselné panely"
 // paneldynamic.name: "Panel name" => "Název panelu"
 // paneldynamic.title: "Panel title" => "Název panelu"
 // paneldynamic.description: "Panel description" => "Popis panelu"
@@ -2099,7 +2171,6 @@ editorLocalization.locales["cs"] = czStrings;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "Nastaví šířku loga v jednotkách CSS (px, %, in, pt atd.)."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "Nastaví výšku loga v jednotkách CSS (px, %, in, pt atd.)."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Vyberte si z těchto možností: \"Žádné\" - obrázek si zachová svou původní velikost; \"Obsahovat\" - velikost obrázku se změní tak, aby se vešel při zachování poměru stran; \"Obálka\" - obrázek vyplní celý rámeček při zachování poměru stran; \"Výplň\" - obrázek je roztažen tak, aby vyplnil rámeček bez zachování poměru stran."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "Vyberte, zda chcete, aby průzkum automaticky postoupil na další stránku poté, co respondent odpoví na všechny otázky na aktuální stránce."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "Nastaví viditelnost a umístění navigačních tlačítek na stránce."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Nastaví viditelnost a umístění indikátoru průběhu. Hodnota \"Auto\" zobrazuje indikátor průběhu nad nebo pod záhlavím průzkumu."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "Povolte stránku náhledu pouze se všemi nebo zodpovězenými otázkami."
@@ -2394,3 +2465,72 @@ editorLocalization.locales["cs"] = czStrings;
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Při nastavení na 0 se výška vypočítá automaticky tak, aby se přizpůsobila obsahu záhlaví."
 // p.mobileHeight: "Height on smartphones" => "Výška na chytrých telefonech"
 // header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Pokud je tato možnost povolena, horní část průzkumu překrývá spodní část záhlaví."
+// ed.creatorSettingTitle: "Creator Settings" => "Nastavení tvůrce"
+// tabs.accentColors: "Accent colors" => "Zvýraznění barev"
+// tabs.scaling: "Scaling" => "Změna velikosti"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "Přiřadí čísla otázkám vnořeným v tomto panelu."
+// creatortheme.--sjs-special-background: "Surface background" => "Pozadí Surface"
+// creatortheme.--sjs-primary-background-500: "Primary" => "Primární"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "Sekundární"
+// creatortheme.surfaceScale: "Surface" => "Povrch"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "Uživatelské rozhraní"
+// creatortheme.fontScale: "Font" => "Písmo"
+// names.sc2020: "Survey Creator 2020" => "Tvůrce průzkumu 2020"
+// names.default-light: "Light" => "Světlo"
+// names.default-dark: "Dark" => "Temný"
+// names.default-contrast: "Contrast" => "Kontrast"
+// panel.showNumber: "Number this panel" => "Očíslujte tento panel"
+// pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Vyberte, zda chcete, aby průzkum automaticky přešel na další stránku, jakmile respondent odpoví na všechny otázky na aktuální stránce. Tato funkce se nepoužije, pokud je poslední otázka na stránce otevřená nebo umožňuje více odpovědí."
+// autocomplete.name: "Full Name" => "Celé jméno"
+// autocomplete.honorific-prefix: "Prefix" => "Předpona"
+// autocomplete.given-name: "First Name" => "Křestní jméno"
+// autocomplete.additional-name: "Middle Name" => "Druhé jméno"
+// autocomplete.family-name: "Last Name" => "Příjmení"
+// autocomplete.honorific-suffix: "Suffix" => "Přípona"
+// autocomplete.nickname: "Nickname" => "Přezdívka"
+// autocomplete.organization-title: "Job Title" => "Pracovní pozice"
+// autocomplete.username: "User Name" => "Uživatelské jméno"
+// autocomplete.new-password: "New Password" => "Nové heslo"
+// autocomplete.current-password: "Current Password" => "Aktuální heslo"
+// autocomplete.organization: "Organization Name" => "Název organizace"
+// autocomplete.street-address: "Full Street Address" => "Úplná adresa"
+// autocomplete.address-line1: "Address Line 1" => "Řádek adresy 1"
+// autocomplete.address-line2: "Address Line 2" => "Řádek adresy 2"
+// autocomplete.address-line3: "Address Line 3" => "Řádek adresy 3"
+// autocomplete.address-level4: "Level 4 Address" => "Adresa úrovně 4"
+// autocomplete.address-level3: "Level 3 Address" => "Adresa úrovně 3"
+// autocomplete.address-level2: "Level 2 Address" => "Adresa úrovně 2"
+// autocomplete.address-level1: "Level 1 Address" => "Adresa úrovně 1"
+// autocomplete.country: "Country Code" => "Kód země"
+// autocomplete.country-name: "Country Name" => "Název země"
+// autocomplete.postal-code: "Postal Code" => "Psč"
+// autocomplete.cc-name: "Cardholder Name" => "Jméno držitele karty"
+// autocomplete.cc-given-name: "Cardholder First Name" => "Křestní jméno držitele karty"
+// autocomplete.cc-additional-name: "Cardholder Middle Name" => "Prostřední jméno držitele karty"
+// autocomplete.cc-family-name: "Cardholder Last Name" => "Příjmení držitele karty"
+// autocomplete.cc-number: "Credit Card Number" => "Číslo kreditní karty"
+// autocomplete.cc-exp: "Expiration Date" => "Datum vypršení"
+// autocomplete.cc-exp-month: "Expiration Month" => "Měsíc vypršení platnosti"
+// autocomplete.cc-exp-year: "Expiration Year" => "Rok vypršení platnosti"
+// autocomplete.cc-csc: "Card Security Code" => "Bezpečnostní kód karty"
+// autocomplete.cc-type: "Credit Card Type" => "Typ kreditní karty"
+// autocomplete.transaction-currency: "Transaction Currency" => "Měna transakce"
+// autocomplete.transaction-amount: "Transaction Amount" => "Částka transakce"
+// autocomplete.language: "Preferred Language" => "Preferovaný jazyk"
+// autocomplete.bday: "Birthday" => "Narozeniny"
+// autocomplete.bday-day: "Birthday Day" => "Den narozenin"
+// autocomplete.bday-month: "Birthday Month" => "Měsíc narozenin"
+// autocomplete.bday-year: "Birthday Year" => "Narozeniny Rok"
+// autocomplete.sex: "Gender" => "Pohlaví"
+// autocomplete.url: "Website URL" => "Adresa URL webu"
+// autocomplete.photo: "Profile Photo" => "Profilová fotografie"
+// autocomplete.tel: "Telephone Number" => "Telefonní číslo"
+// autocomplete.tel-country-code: "Country Code for Phone" => "Předvolba země pro telefon"
+// autocomplete.tel-national: "National Telephone Number" => "Národní telefonní číslo"
+// autocomplete.tel-area-code: "Area Code" => "Směrové číslo"
+// autocomplete.tel-local: "Local Phone Number" => "Místní telefonní číslo"
+// autocomplete.tel-local-prefix: "Local Phone Prefix" => "Předvolba místního telefonu"
+// autocomplete.tel-local-suffix: "Local Phone Suffix" => "Přípona místního telefonu"
+// autocomplete.tel-extension: "Phone Extension" => "Telefonní linka"
+// autocomplete.email: "Email Address" => "E-mailová adresa"
+// autocomplete.impp: "Instant Messaging Protocol" => "Protokol pro rychlé zasílání zpráv"

@@ -7,7 +7,7 @@
     :isCompact="isCompact"
   ></SvComponent>
   <div class="svc-toolbox__item-submenu-button" @mouseover="hover" @mouseleave="leave">
-    <SvComponent :is="'sv-svg-icon'" :iconName="item.subitemsButtonIcon" :size="item.iconSize"></SvComponent>
+    <SvComponent :is="'sv-svg-icon'" :iconName="item.subitemsButtonIcon" :size="'auto'"></SvComponent>
     <SvComponent
       :is="'sv-popup'"
       :model="item.popupModel"

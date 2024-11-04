@@ -69,6 +69,7 @@ export var ruStrings = {
     surveySettingsTooltip: "Настройки съемки",
     themeSettings: "Настройки темы",
     themeSettingsTooltip: "Настройки темы",
+    creatorSettingTitle: "Настройки создателя контента",
     showPanel: "Панель «Показать»",
     hidePanel: "Скрыть панель",
     prevSelected: "Выберите предыдущую",
@@ -301,7 +302,7 @@ export var ruStrings = {
       width: "Встроенная ширина панели",
       minWidth: "Минимальная ширина панели",
       maxWidth: "Максимальная ширина панели",
-      showNumber: "Номерные панели"
+      showNumber: "Пронумеруйте эту панель"
     },
     paneldynamic: {
       name: "Название панели",
@@ -828,6 +829,8 @@ export var ruStrings = {
       header: "Заголовок",
       background: "Фон",
       appearance: "Внешний вид",
+      accentColors: "Акцентные цвета",
+      scaling: "Масштабирование",
       others: "Другие"
     },
     editProperty: "Редактировать свойство '{0}'",
@@ -1014,6 +1017,61 @@ export var ruStrings = {
       time: "Время",
       url: "URL-адрес",
       week: "Неделя"
+    },
+    autocomplete: {
+      name: "Полное имя",
+      "honorific-prefix": "Приставка",
+      "given-name": "Имя",
+      "additional-name": "Отчество",
+      "family-name": "Фамилия",
+      "honorific-suffix": "Суффикс",
+      nickname: "Прозвище",
+      "organization-title": "Должность",
+      username: "Имя пользователя",
+      "new-password": "Новый пароль",
+      "current-password": "Текущий пароль",
+      organization: "Название организации",
+      "street-address": "Полный адрес улицы",
+      "address-line1": "Адресная строка 1",
+      "address-line2": "Адресная строка 2",
+      "address-line3": "Адресная строка 3",
+      "address-level4": "Адрес 4-го уровня",
+      "address-level3": "Адрес 3-го уровня",
+      "address-level2": "Адрес 2-го уровня",
+      "address-level1": "Адрес 1-го уровня",
+      country: "Код страны",
+      "country-name": "Название страны",
+      "postal-code": "Почтовый индекс",
+      "cc-name": "Имя владельца карты",
+      "cc-given-name": "Имя владельца карты",
+      "cc-additional-name": "Второе имя владельца карты",
+      "cc-family-name": "Фамилия владельца карты",
+      "cc-number": "Номер кредитной карты",
+      "cc-exp": "Срок годности",
+      "cc-exp-month": "Срок действия",
+      "cc-exp-year": "Год экспирации",
+      "cc-csc": "Код безопасности карты",
+      "cc-type": "Тип кредитной карты",
+      "transaction-currency": "Валюта транзакции",
+      "transaction-amount": "Сумма транзакции",
+      language: "Предпочитаемый язык",
+      bday: "День рождения",
+      "bday-day": "День рождения",
+      "bday-month": "Месяц Дня Рождения",
+      "bday-year": "Год рождения",
+      sex: "Род",
+      url: "URL-адрес сайта",
+      photo: "Фото профиля",
+      tel: "Номер телефона",
+      "tel-country-code": "Код страны для телефона",
+      "tel-national": "Национальный номер телефона",
+      "tel-area-code": "Код города",
+      "tel-local": "Местный номер телефона",
+      "tel-local-prefix": "Префикс местного телефона",
+      "tel-local-suffix": "Суффикс местного телефона",
+      "tel-extension": "Добавочный номер телефона",
+      email: "Адрес электронной почты",
+      impp: "Протокол обмена мгновенными сообщениями"
     },
     maskType: {
       none: "Никакой",
@@ -1289,7 +1347,8 @@ export var ruStrings = {
       innerIndent: "Добавляет пространство или поле между содержимым панели и левой границей рамки панели.",
       startWithNewLine: "Снимите флажок, чтобы отобразить панель в одной строке с предыдущим вопросом или панелью. Этот параметр не применяется, если панель является первым элементом формы.",
       state: "Выберите из: «Развернутая» - панель отображается полностью и может быть свернута; «Свернутая» - панель отображает только заголовок и описание и может быть развернута; «Заблокировано» - панель отображается полностью и не может быть свернута.",
-      width: "Устанавливает ширину панели пропорционально другим элементам съемки в той же линии. Принимает значения CSS (px, %, in, pt и т. д.)."
+      width: "Устанавливает ширину панели пропорционально другим элементам съемки в той же линии. Принимает значения CSS (px, %, in, pt и т. д.).",
+      showQuestionNumbers: "Присваивает номера вопросам, вложенным в эту панель."
     },
     paneldynamic: {
       name: "Идентификатор панели, который не виден респондентам.",
@@ -1387,7 +1446,7 @@ export var ruStrings = {
     logoWidth: "Задает ширину логотипа в единицах CSS (px, %, in, pt и т. д.).",
     logoHeight: "Задает высоту логотипа в единицах CSS (px, %, in, pt и т. д.).",
     logoFit: "Выберите один из следующих вариантов: \"Нет\" - изображение сохраняет свой первоначальный размер; \"Contain\" - размер изображения изменяется по размеру с сохранением его пропорций; «Обложка» - изображение заполняет всю коробку, сохраняя при этом соотношение сторон; \"Заливка\" - изображение растягивается для заполнения поля без сохранения его пропорций.",
-    goNextPageAutomatic: "Выберите, хотите ли вы, чтобы опрос автоматически переходил на следующую страницу после того, как респондент ответит на все вопросы на текущей странице.",
+    goNextPageAutomatic: "Выберите, хотите ли вы, чтобы опрос автоматически переходил на следующую страницу после того, как респондент ответил на все вопросы на текущей странице. Эта функция не будет работать, если последний вопрос на странице является открытым или допускает несколько ответов.",
     allowCompleteSurveyAutomatic: "Выберите, хотите ли Вы, чтобы опрос завершался автоматически после того, как респондент ответит на все вопросы.",
     showNavigationButtons: "Задает видимость и расположение кнопок навигации на странице.",
     showProgressBar: "Задает видимость и расположение индикатора выполнения. Значение «Авто» отображает индикатор выполнения над или под заголовком опроса.",
@@ -1694,6 +1753,20 @@ export var ruStrings = {
       tulip: "Тюльпан",
       brown: "Коричневый",
       green: "Зеленый"
+    }
+  },
+  creatortheme: {
+    "--sjs-special-background": "Фон поверхности",
+    "--sjs-primary-background-500": "Первичный",
+    "--sjs-secondary-background-500": "Вторичный",
+    surfaceScale: "Поверхность",
+    userInterfaceBaseUnit: "Пользовательский интерфейс",
+    fontScale: "Шрифт",
+    names: {
+      sc2020: "Создатель опросов 2020",
+      "default-light": "Свет",
+      "default-dark": "Темный",
+      "default-contrast": "Контраст"
     }
   }
 };
@@ -2369,7 +2442,6 @@ editorLocalization.locales["ru"] = ruStrings;
 // panel.width: "Inline panel width" => "Встроенная ширина панели"
 // panel.minWidth: "Minimum panel width" => "Минимальная ширина панели"
 // panel.maxWidth: "Maximum panel width" => "Максимальная ширина панели"
-// panel.showNumber: "Number panels" => "Номерные панели"
 // paneldynamic.name: "Panel name" => "Название панели"
 // paneldynamic.title: "Panel title" => "Заголовок панели"
 // paneldynamic.description: "Panel description" => "Описание панели"
@@ -2585,7 +2657,6 @@ editorLocalization.locales["ru"] = ruStrings;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "Задает ширину логотипа в единицах CSS (px, %, in, pt и т. д.)."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "Задает высоту логотипа в единицах CSS (px, %, in, pt и т. д.)."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Выберите один из следующих вариантов: \"Нет\" - изображение сохраняет свой первоначальный размер; \"Contain\" - размер изображения изменяется по размеру с сохранением его пропорций; «Обложка» - изображение заполняет всю коробку, сохраняя при этом соотношение сторон; \"Заливка\" - изображение растягивается для заполнения поля без сохранения его пропорций."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "Выберите, хотите ли вы, чтобы опрос автоматически переходил на следующую страницу после того, как респондент ответит на все вопросы на текущей странице."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "Задает видимость и расположение кнопок навигации на странице."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Задает видимость и расположение индикатора выполнения. Значение «Авто» отображает индикатор выполнения над или под заголовком опроса."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "Включите страницу предварительного просмотра, на которой отображаются все вопросы или только ответы на них."
@@ -2880,3 +2951,72 @@ editorLocalization.locales["ru"] = ruStrings;
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Если задано значение 0, высота вычисляется автоматически для размещения содержимого заголовка."
 // p.mobileHeight: "Height on smartphones" => "Высота на смартфонах"
 // header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Когда этот параметр включен, верхняя часть опроса накладывается на нижнюю часть заголовка."
+// ed.creatorSettingTitle: "Creator Settings" => "Настройки создателя контента"
+// tabs.accentColors: "Accent colors" => "Акцентные цвета"
+// tabs.scaling: "Scaling" => "Масштабирование"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "Присваивает номера вопросам, вложенным в эту панель."
+// creatortheme.--sjs-special-background: "Surface background" => "Фон поверхности"
+// creatortheme.--sjs-primary-background-500: "Primary" => "Первичный"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "Вторичный"
+// creatortheme.surfaceScale: "Surface" => "Поверхность"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "Пользовательский интерфейс"
+// creatortheme.fontScale: "Font" => "Шрифт"
+// names.sc2020: "Survey Creator 2020" => "Создатель опросов 2020"
+// names.default-light: "Light" => "Свет"
+// names.default-dark: "Dark" => "Темный"
+// names.default-contrast: "Contrast" => "Контраст"
+// panel.showNumber: "Number this panel" => "Пронумеруйте эту панель"
+// pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Выберите, хотите ли вы, чтобы опрос автоматически переходил на следующую страницу после того, как респондент ответил на все вопросы на текущей странице. Эта функция не будет работать, если последний вопрос на странице является открытым или допускает несколько ответов."
+// autocomplete.name: "Full Name" => "Полное имя"
+// autocomplete.honorific-prefix: "Prefix" => "Приставка"
+// autocomplete.given-name: "First Name" => "Имя"
+// autocomplete.additional-name: "Middle Name" => "Отчество"
+// autocomplete.family-name: "Last Name" => "Фамилия"
+// autocomplete.honorific-suffix: "Suffix" => "Суффикс"
+// autocomplete.nickname: "Nickname" => "Прозвище"
+// autocomplete.organization-title: "Job Title" => "Должность"
+// autocomplete.username: "User Name" => "Имя пользователя"
+// autocomplete.new-password: "New Password" => "Новый пароль"
+// autocomplete.current-password: "Current Password" => "Текущий пароль"
+// autocomplete.organization: "Organization Name" => "Название организации"
+// autocomplete.street-address: "Full Street Address" => "Полный адрес улицы"
+// autocomplete.address-line1: "Address Line 1" => "Адресная строка 1"
+// autocomplete.address-line2: "Address Line 2" => "Адресная строка 2"
+// autocomplete.address-line3: "Address Line 3" => "Адресная строка 3"
+// autocomplete.address-level4: "Level 4 Address" => "Адрес 4-го уровня"
+// autocomplete.address-level3: "Level 3 Address" => "Адрес 3-го уровня"
+// autocomplete.address-level2: "Level 2 Address" => "Адрес 2-го уровня"
+// autocomplete.address-level1: "Level 1 Address" => "Адрес 1-го уровня"
+// autocomplete.country: "Country Code" => "Код страны"
+// autocomplete.country-name: "Country Name" => "Название страны"
+// autocomplete.postal-code: "Postal Code" => "Почтовый индекс"
+// autocomplete.cc-name: "Cardholder Name" => "Имя владельца карты"
+// autocomplete.cc-given-name: "Cardholder First Name" => "Имя владельца карты"
+// autocomplete.cc-additional-name: "Cardholder Middle Name" => "Второе имя владельца карты"
+// autocomplete.cc-family-name: "Cardholder Last Name" => "Фамилия владельца карты"
+// autocomplete.cc-number: "Credit Card Number" => "Номер кредитной карты"
+// autocomplete.cc-exp: "Expiration Date" => "Срок годности"
+// autocomplete.cc-exp-month: "Expiration Month" => "Срок действия"
+// autocomplete.cc-exp-year: "Expiration Year" => "Год экспирации"
+// autocomplete.cc-csc: "Card Security Code" => "Код безопасности карты"
+// autocomplete.cc-type: "Credit Card Type" => "Тип кредитной карты"
+// autocomplete.transaction-currency: "Transaction Currency" => "Валюта транзакции"
+// autocomplete.transaction-amount: "Transaction Amount" => "Сумма транзакции"
+// autocomplete.language: "Preferred Language" => "Предпочитаемый язык"
+// autocomplete.bday: "Birthday" => "День рождения"
+// autocomplete.bday-day: "Birthday Day" => "День рождения"
+// autocomplete.bday-month: "Birthday Month" => "Месяц Дня Рождения"
+// autocomplete.bday-year: "Birthday Year" => "Год рождения"
+// autocomplete.sex: "Gender" => "Род"
+// autocomplete.url: "Website URL" => "URL-адрес сайта"
+// autocomplete.photo: "Profile Photo" => "Фото профиля"
+// autocomplete.tel: "Telephone Number" => "Номер телефона"
+// autocomplete.tel-country-code: "Country Code for Phone" => "Код страны для телефона"
+// autocomplete.tel-national: "National Telephone Number" => "Национальный номер телефона"
+// autocomplete.tel-area-code: "Area Code" => "Код города"
+// autocomplete.tel-local: "Local Phone Number" => "Местный номер телефона"
+// autocomplete.tel-local-prefix: "Local Phone Prefix" => "Префикс местного телефона"
+// autocomplete.tel-local-suffix: "Local Phone Suffix" => "Суффикс местного телефона"
+// autocomplete.tel-extension: "Phone Extension" => "Добавочный номер телефона"
+// autocomplete.email: "Email Address" => "Адрес электронной почты"
+// autocomplete.impp: "Instant Messaging Protocol" => "Протокол обмена мгновенными сообщениями"

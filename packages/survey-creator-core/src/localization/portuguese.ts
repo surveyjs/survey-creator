@@ -69,6 +69,7 @@ var portugueseTranslation = {
     surveySettingsTooltip: "Configurações do questionário",
     themeSettings: "Configurações do tema",
     themeSettingsTooltip: "Configurações do tema",
+    creatorSettingTitle: "Configurações do criador",
     showPanel: "Mostrar Painel",
     hidePanel: "Esconder Painel",
     prevSelected: "Selecionar anterior",
@@ -301,7 +302,7 @@ var portugueseTranslation = {
       width: "Largura do painel embutido",
       minWidth: "Largura mínima do painel",
       maxWidth: "Largura máxima do painel",
-      showNumber: "Painéis numéricos"
+      showNumber: "Numerar este painel"
     },
     paneldynamic: {
       name: "Nome do painel",
@@ -828,6 +829,8 @@ var portugueseTranslation = {
       header: "Cabeçalho",
       background: "Fundo",
       appearance: "Aparência",
+      accentColors: "Cores de destaque",
+      scaling: "Escala",
       others: "Outros"
     },
     editProperty: "Editar propriedade '{0}'",
@@ -1014,6 +1017,61 @@ var portugueseTranslation = {
       time: "Hora",
       url: "URL",
       week: "Semana"
+    },
+    autocomplete: {
+      name: "Nome completo",
+      "honorific-prefix": "Prefixo",
+      "given-name": "Nome próprio",
+      "additional-name": "Nome do meio",
+      "family-name": "Apelido",
+      "honorific-suffix": "Sufixo",
+      nickname: "Apelido",
+      "organization-title": "Cargo",
+      username: "Nome de usuário",
+      "new-password": "Nova senha",
+      "current-password": "Senha atual",
+      organization: "Nome da organização",
+      "street-address": "Endereço completo",
+      "address-line1": "Linha de endereço 1",
+      "address-line2": "Linha de endereço 2",
+      "address-line3": "Linha de endereço 3",
+      "address-level4": "Endereço de nível 4",
+      "address-level3": "Endereço de Nível 3",
+      "address-level2": "Endereço de Nível 2",
+      "address-level1": "Endereço de Nível 1",
+      country: "Código do país",
+      "country-name": "Nome do país",
+      "postal-code": "Código postal",
+      "cc-name": "Nome do titular do cartão",
+      "cc-given-name": "Nome do titular do cartão",
+      "cc-additional-name": "Nome do meio do titular do cartão",
+      "cc-family-name": "Sobrenome do titular do cartão",
+      "cc-number": "Número do cartão de crédito",
+      "cc-exp": "Data de validade",
+      "cc-exp-month": "Mês de Expiração",
+      "cc-exp-year": "Ano de validade",
+      "cc-csc": "Código de segurança do cartão",
+      "cc-type": "Tipo de cartão de crédito",
+      "transaction-currency": "Moeda da transação",
+      "transaction-amount": "Valor da transação",
+      language: "Idioma preferido",
+      bday: "Aniversário",
+      "bday-day": "Dia de aniversário",
+      "bday-month": "Mês de aniversário",
+      "bday-year": "Ano de aniversário",
+      sex: "Gênero",
+      url: "URL do site",
+      photo: "Foto do perfil",
+      tel: "Número telefônico",
+      "tel-country-code": "Código do país para telefone",
+      "tel-national": "Número de telefone nacional",
+      "tel-area-code": "Código de área",
+      "tel-local": "Número de telefone local",
+      "tel-local-prefix": "Prefixo de telefone local",
+      "tel-local-suffix": "Sufixo de telefone local",
+      "tel-extension": "Ramal telefônico",
+      email: "Endereço eletrônico",
+      impp: "Protocolo de mensagens instantâneas"
     },
     maskType: {
       none: "Nenhum",
@@ -1289,7 +1347,8 @@ var portugueseTranslation = {
       innerIndent: "Adiciona espaço ou margem entre o conteúdo do painel e a borda esquerda da caixa do painel.",
       startWithNewLine: "Desmarque para exibir o painel em uma linha com a pergunta ou painel anterior. A configuração não se aplica se o painel for o primeiro elemento do formulário.",
       state: "Escolha entre: \"Expandido\" - o painel é exibido na íntegra e pode ser recolhido; \"Recolhido\" - o painel exibe apenas o título e a descrição e pode ser expandido; \"Bloqueado\" - o painel é exibido na íntegra e não pode ser recolhido.",
-      width: "Define a largura do painel proporcionalmente a outros elementos de pesquisa na mesma linha. Aceita valores CSS (px, %, in, pt, etc.)."
+      width: "Define a largura do painel proporcionalmente a outros elementos de pesquisa na mesma linha. Aceita valores CSS (px, %, in, pt, etc.).",
+      showQuestionNumbers: "Atribui números a perguntas aninhadas neste painel."
     },
     paneldynamic: {
       name: "Um ID de painel que não está visível para os respondentes.",
@@ -1387,7 +1446,7 @@ var portugueseTranslation = {
     logoWidth: "Define a largura de um logotipo em unidades CSS (px, %, in, pt, etc.).",
     logoHeight: "Define a altura do logotipo em unidades CSS (px, %, in, pt, etc.).",
     logoFit: "Escolha entre: \"Nenhum\" - a imagem mantém seu tamanho original; \"Conter\" - a imagem é redimensionada para se ajustar, mantendo sua proporção; \"Capa\" - a imagem preenche toda a caixa, mantendo sua proporção; \"Preencher\" - a imagem é esticada para preencher a caixa sem manter sua proporção.",
-    goNextPageAutomatic: "Selecione se você deseja que o questionário avance para a próxima página automaticamente depois que um respondente responder a todas as perguntas na página atual.",
+    goNextPageAutomatic: "Selecione se deseja que o questionário avance automaticamente para a próxima página depois que o respondente responder a todas as perguntas na página atual. Esse recurso não se aplicará se a última pergunta da página for aberta ou permitir várias respostas.",
     allowCompleteSurveyAutomatic: "Selecione se você deseja que o questionário seja concluído automaticamente depois que um respondente responder a todas as perguntas.",
     showNavigationButtons: "Define a visibilidade e a localização dos botões de navegação em uma página.",
     showProgressBar: "Define a visibilidade e o local de uma barra de progresso. O valor \"Auto\" exibe a barra de progresso acima ou abaixo do cabeçalho do questionário.",
@@ -1695,6 +1754,20 @@ var portugueseTranslation = {
       brown: "Marrom",
       green: "Verde"
     }
+  },
+  creatortheme: {
+    "--sjs-special-background": "Fundo da superfície",
+    "--sjs-primary-background-500": "Primário",
+    "--sjs-secondary-background-500": "Secundário",
+    surfaceScale: "Superfície",
+    userInterfaceBaseUnit: "Interface de usuário",
+    fontScale: "Fonte",
+    names: {
+      sc2020: "Criador de pesquisas 2020",
+      "default-light": "Luz",
+      "default-dark": "Escuro",
+      "default-contrast": "Contraste"
+    }
   }
 };
 
@@ -1975,7 +2048,6 @@ editorLocalization.locales["pt"] = portugueseTranslation;
 // panel.width: "Inline panel width" => "Largura do painel embutido"
 // panel.minWidth: "Minimum panel width" => "Largura mínima do painel"
 // panel.maxWidth: "Maximum panel width" => "Largura máxima do painel"
-// panel.showNumber: "Number panels" => "Painéis numéricos"
 // paneldynamic.name: "Panel name" => "Nome do painel"
 // paneldynamic.title: "Panel title" => "Título do painel"
 // paneldynamic.description: "Panel description" => "Descrição do painel"
@@ -2191,7 +2263,6 @@ editorLocalization.locales["pt"] = portugueseTranslation;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "Define a largura de um logotipo em unidades CSS (px, %, in, pt, etc.)."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "Define a altura do logotipo em unidades CSS (px, %, in, pt, etc.)."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Escolha entre: \"Nenhum\" - a imagem mantém seu tamanho original; \"Conter\" - a imagem é redimensionada para se ajustar, mantendo sua proporção; \"Capa\" - a imagem preenche toda a caixa, mantendo sua proporção; \"Preencher\" - a imagem é esticada para preencher a caixa sem manter sua proporção."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "Selecione se você deseja que o questionário avance para a próxima página automaticamente depois que um respondente responder a todas as perguntas na página atual."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "Define a visibilidade e a localização dos botões de navegação em uma página."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Define a visibilidade e o local de uma barra de progresso. O valor \"Auto\" exibe a barra de progresso acima ou abaixo do cabeçalho do questionário."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "Habilite a página de visualização apenas com todas as perguntas ou com as respostas respondidas."
@@ -2486,3 +2557,72 @@ editorLocalization.locales["pt"] = portugueseTranslation;
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Quando definido como 0, a altura é calculada automaticamente para acomodar o conteúdo do cabeçalho."
 // p.mobileHeight: "Height on smartphones" => "Altura em smartphones"
 // header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Quando ativado, a parte superior da pesquisa se sobrepõe à parte inferior do cabeçalho."
+// ed.creatorSettingTitle: "Creator Settings" => "Configurações do criador"
+// tabs.accentColors: "Accent colors" => "Cores de destaque"
+// tabs.scaling: "Scaling" => "Escala"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "Atribui números a perguntas aninhadas neste painel."
+// creatortheme.--sjs-special-background: "Surface background" => "Fundo da superfície"
+// creatortheme.--sjs-primary-background-500: "Primary" => "Primário"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "Secundário"
+// creatortheme.surfaceScale: "Surface" => "Superfície"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "Interface de usuário"
+// creatortheme.fontScale: "Font" => "Fonte"
+// names.sc2020: "Survey Creator 2020" => "Criador de pesquisas 2020"
+// names.default-light: "Light" => "Luz"
+// names.default-dark: "Dark" => "Escuro"
+// names.default-contrast: "Contrast" => "Contraste"
+// panel.showNumber: "Number this panel" => "Numerar este painel"
+// pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Selecione se deseja que o questionário avance automaticamente para a próxima página depois que o respondente responder a todas as perguntas na página atual. Esse recurso não se aplicará se a última pergunta da página for aberta ou permitir várias respostas."
+// autocomplete.name: "Full Name" => "Nome completo"
+// autocomplete.honorific-prefix: "Prefix" => "Prefixo"
+// autocomplete.given-name: "First Name" => "Nome próprio"
+// autocomplete.additional-name: "Middle Name" => "Nome do meio"
+// autocomplete.family-name: "Last Name" => "Apelido"
+// autocomplete.honorific-suffix: "Suffix" => "Sufixo"
+// autocomplete.nickname: "Nickname" => "Apelido"
+// autocomplete.organization-title: "Job Title" => "Cargo"
+// autocomplete.username: "User Name" => "Nome de usuário"
+// autocomplete.new-password: "New Password" => "Nova senha"
+// autocomplete.current-password: "Current Password" => "Senha atual"
+// autocomplete.organization: "Organization Name" => "Nome da organização"
+// autocomplete.street-address: "Full Street Address" => "Endereço completo"
+// autocomplete.address-line1: "Address Line 1" => "Linha de endereço 1"
+// autocomplete.address-line2: "Address Line 2" => "Linha de endereço 2"
+// autocomplete.address-line3: "Address Line 3" => "Linha de endereço 3"
+// autocomplete.address-level4: "Level 4 Address" => "Endereço de nível 4"
+// autocomplete.address-level3: "Level 3 Address" => "Endereço de Nível 3"
+// autocomplete.address-level2: "Level 2 Address" => "Endereço de Nível 2"
+// autocomplete.address-level1: "Level 1 Address" => "Endereço de Nível 1"
+// autocomplete.country: "Country Code" => "Código do país"
+// autocomplete.country-name: "Country Name" => "Nome do país"
+// autocomplete.postal-code: "Postal Code" => "Código postal"
+// autocomplete.cc-name: "Cardholder Name" => "Nome do titular do cartão"
+// autocomplete.cc-given-name: "Cardholder First Name" => "Nome do titular do cartão"
+// autocomplete.cc-additional-name: "Cardholder Middle Name" => "Nome do meio do titular do cartão"
+// autocomplete.cc-family-name: "Cardholder Last Name" => "Sobrenome do titular do cartão"
+// autocomplete.cc-number: "Credit Card Number" => "Número do cartão de crédito"
+// autocomplete.cc-exp: "Expiration Date" => "Data de validade"
+// autocomplete.cc-exp-month: "Expiration Month" => "Mês de Expiração"
+// autocomplete.cc-exp-year: "Expiration Year" => "Ano de validade"
+// autocomplete.cc-csc: "Card Security Code" => "Código de segurança do cartão"
+// autocomplete.cc-type: "Credit Card Type" => "Tipo de cartão de crédito"
+// autocomplete.transaction-currency: "Transaction Currency" => "Moeda da transação"
+// autocomplete.transaction-amount: "Transaction Amount" => "Valor da transação"
+// autocomplete.language: "Preferred Language" => "Idioma preferido"
+// autocomplete.bday: "Birthday" => "Aniversário"
+// autocomplete.bday-day: "Birthday Day" => "Dia de aniversário"
+// autocomplete.bday-month: "Birthday Month" => "Mês de aniversário"
+// autocomplete.bday-year: "Birthday Year" => "Ano de aniversário"
+// autocomplete.sex: "Gender" => "Gênero"
+// autocomplete.url: "Website URL" => "URL do site"
+// autocomplete.photo: "Profile Photo" => "Foto do perfil"
+// autocomplete.tel: "Telephone Number" => "Número telefônico"
+// autocomplete.tel-country-code: "Country Code for Phone" => "Código do país para telefone"
+// autocomplete.tel-national: "National Telephone Number" => "Número de telefone nacional"
+// autocomplete.tel-area-code: "Area Code" => "Código de área"
+// autocomplete.tel-local: "Local Phone Number" => "Número de telefone local"
+// autocomplete.tel-local-prefix: "Local Phone Prefix" => "Prefixo de telefone local"
+// autocomplete.tel-local-suffix: "Local Phone Suffix" => "Sufixo de telefone local"
+// autocomplete.tel-extension: "Phone Extension" => "Ramal telefônico"
+// autocomplete.email: "Email Address" => "Endereço eletrônico"
+// autocomplete.impp: "Instant Messaging Protocol" => "Protocolo de mensagens instantâneas"

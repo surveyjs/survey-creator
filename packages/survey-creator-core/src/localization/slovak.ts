@@ -69,6 +69,7 @@ export var skStrings = {
     surveySettingsTooltip: "Nastavenia prieskumu",
     themeSettings: "Nastavenia motívu",
     themeSettingsTooltip: "Nastavenia motívu",
+    creatorSettingTitle: "Nastavenia tvorcu",
     showPanel: "Zobraziť panel",
     hidePanel: "Skryť panel",
     prevSelected: "Výber predchádzajúceho",
@@ -301,7 +302,7 @@ export var skStrings = {
       width: "Šírka vnoreného panela",
       minWidth: "Minimálna šírka panela",
       maxWidth: "Maximálna šírka panela",
-      showNumber: "Číselné panely"
+      showNumber: "Očíslujte tento panel"
     },
     paneldynamic: {
       name: "Názov panela",
@@ -828,6 +829,8 @@ export var skStrings = {
       header: "Hlavička",
       background: "Pozadie",
       appearance: "Vzhľad",
+      accentColors: "Akcentové farby",
+      scaling: "Škálovanie",
       others: "Iné"
     },
     editProperty: "Upraviť vlastnosť „{0}“",
@@ -1014,6 +1017,61 @@ export var skStrings = {
       time: "Čas",
       url: "URL adresa",
       week: "Týždeň"
+    },
+    autocomplete: {
+      name: "Celé meno",
+      "honorific-prefix": "Predpona",
+      "given-name": "Krstné meno",
+      "additional-name": "Stredné meno",
+      "family-name": "Priezvisko",
+      "honorific-suffix": "Prípona",
+      nickname: "Prezývka",
+      "organization-title": "Pracovná pozícia",
+      username: "Používateľské meno",
+      "new-password": "Nové heslo",
+      "current-password": "Aktuálne heslo",
+      organization: "Názov organizácie",
+      "street-address": "Celá adresa",
+      "address-line1": "Riadok adresy 1",
+      "address-line2": "Riadok adresy 2",
+      "address-line3": "Riadok adresy 3",
+      "address-level4": "Adresa úrovne 4",
+      "address-level3": "Adresa úrovne 3",
+      "address-level2": "Adresa úrovne 2",
+      "address-level1": "Adresa úrovne 1",
+      country: "Kód krajiny",
+      "country-name": "Názov krajiny",
+      "postal-code": "Psč",
+      "cc-name": "Meno držiteľa karty",
+      "cc-given-name": "Krstné meno držiteľa karty",
+      "cc-additional-name": "Stredné meno držiteľa karty",
+      "cc-family-name": "Priezvisko držiteľa karty",
+      "cc-number": "Číslo kreditnej karty",
+      "cc-exp": "Dátum vypršania platnosti",
+      "cc-exp-month": "Mesiac vypršania platnosti",
+      "cc-exp-year": "Rok vypršania platnosti",
+      "cc-csc": "Bezpečnostný kód karty",
+      "cc-type": "Typ kreditnej karty",
+      "transaction-currency": "Mena transakcie",
+      "transaction-amount": "Suma transakcie",
+      language: "Preferovaný jazyk",
+      bday: "Narodeniny",
+      "bday-day": "Deň narodenín",
+      "bday-month": "Mesiac narodenín",
+      "bday-year": "Rok narodenín",
+      sex: "Pohlavie",
+      url: "URL adresa webovej stránky",
+      photo: "Profilová fotka",
+      tel: "Telefónne číslo",
+      "tel-country-code": "Kód krajiny pre telefón",
+      "tel-national": "Národné telefónne číslo",
+      "tel-area-code": "Telefónna Predvoľba",
+      "tel-local": "Miestne telefónne číslo",
+      "tel-local-prefix": "Lokálna predvoľba telefónu",
+      "tel-local-suffix": "Prípona miestneho telefónu",
+      "tel-extension": "Rozšírenie telefónu",
+      email: "E-mailová adresa",
+      impp: "Protokol okamžitých správ"
     },
     maskType: {
       none: "Žiadny",
@@ -1289,7 +1347,8 @@ export var skStrings = {
       innerIndent: "Pridá medzeru alebo okraj medzi obsah panela a ľavý okraj panela.",
       startWithNewLine: "Zrušte výber výberu, ak chcete panel zobraziť v jednom riadku s predchádzajúcou otázkou alebo panelom. Toto nastavenie sa neuplatňuje, ak je panel prvým prvkom vo formulári.",
       state: "Vyberte si z: \"Rozšírené\" - panel je zobrazený v plnom rozsahu a môže byť zbalený; \"Zbalené\" - panel zobrazuje iba názov a popis a je možné ho rozšíriť; \"Zamknutý\" - panel sa zobrazuje v plnom rozsahu a nedá sa zbaliť.",
-      width: "Nastaví šírku panela v pomere k ostatným prvkom prieskumu v tej istej čiare. Akceptuje hodnoty CSS (px, %, in, pt atď.)."
+      width: "Nastaví šírku panela v pomere k ostatným prvkom prieskumu v tej istej čiare. Akceptuje hodnoty CSS (px, %, in, pt atď.).",
+      showQuestionNumbers: "Priradí čísla otázkam vnoreným do tohto panela."
     },
     paneldynamic: {
       name: "ID panela, ktoré respondenti nevidia.",
@@ -1387,7 +1446,7 @@ export var skStrings = {
     logoWidth: "Nastavuje šírku loga v jednotkách CSS (px, %, in, pt atď.).",
     logoHeight: "Nastavuje výšku loga v jednotkách CSS (px, %, in, pt atď.).",
     logoFit: "Vyberte si z: \"Žiadne\" - obrázok si zachováva svoju pôvodnú veľkosť; \"Obsahovať\" - veľkosť obrázka sa zmení tak, aby sa zmestil pri zachovaní pomeru strán; \"Obal\" - obrázok vyplní celé pole pri zachovaní pomeru strán; \"Vyplniť\" - obrázok je natiahnutý tak, aby vyplnil pole bez zachovania pomeru strán.",
-    goNextPageAutomatic: "Vyberte, či chcete, aby prieskum automaticky postúpil na ďalšiu stranu po tom, čo respondent odpovie na všetky otázky na aktuálnej stránke.",
+    goNextPageAutomatic: "Vyberte, či chcete, aby sa prieskum automaticky posunul na ďalšiu stránku, keď respondent odpovie na všetky otázky na aktuálnej stránke. Táto funkcia sa nepoužije, ak je posledná otázka na stránke otvorená alebo umožňuje viacero odpovedí.",
     allowCompleteSurveyAutomatic: "Vyberte, či chcete, aby sa prieskum dokončil automaticky po tom, čo respondent odpovie na všetky otázky.",
     showNavigationButtons: "Nastavuje viditeľnosť a umiestnenie navigačných tlačidiel na stránke.",
     showProgressBar: "Nastavuje viditeľnosť a umiestnenie indikátora priebehu. Hodnota \"Auto\" zobrazuje indikátor priebehu nad alebo pod hlavičkou prieskumu.",
@@ -1694,6 +1753,20 @@ export var skStrings = {
       tulip: "Tulipán",
       brown: "Hnedý",
       green: "Zelený"
+    }
+  },
+  creatortheme: {
+    "--sjs-special-background": "Povrchové pozadie",
+    "--sjs-primary-background-500": "Prvotný",
+    "--sjs-secondary-background-500": "Sekundárny",
+    surfaceScale: "Povrch",
+    userInterfaceBaseUnit: "Používateľské rozhranie",
+    fontScale: "Písmo",
+    names: {
+      sc2020: "Tvorca prieskumu 2020",
+      "default-light": "Svetlo",
+      "default-dark": "Tmavý",
+      "default-contrast": "Kontrast"
     }
   }
 };
@@ -2262,7 +2335,6 @@ editorLocalization.locales["sk"] = skStrings;
 // panel.width: "Inline panel width" => "Šírka vnoreného panela"
 // panel.minWidth: "Minimum panel width" => "Minimálna šírka panela"
 // panel.maxWidth: "Maximum panel width" => "Maximálna šírka panela"
-// panel.showNumber: "Number panels" => "Číselné panely"
 // paneldynamic.name: "Panel name" => "Názov panela"
 // paneldynamic.title: "Panel title" => "Názov panelu"
 // paneldynamic.description: "Panel description" => "Popis panelu"
@@ -2478,7 +2550,6 @@ editorLocalization.locales["sk"] = skStrings;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "Nastavuje šírku loga v jednotkách CSS (px, %, in, pt atď.)."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "Nastavuje výšku loga v jednotkách CSS (px, %, in, pt atď.)."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Vyberte si z: \"Žiadne\" - obrázok si zachováva svoju pôvodnú veľkosť; \"Obsahovať\" - veľkosť obrázka sa zmení tak, aby sa zmestil pri zachovaní pomeru strán; \"Obal\" - obrázok vyplní celé pole pri zachovaní pomeru strán; \"Vyplniť\" - obrázok je natiahnutý tak, aby vyplnil pole bez zachovania pomeru strán."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "Vyberte, či chcete, aby prieskum automaticky postúpil na ďalšiu stranu po tom, čo respondent odpovie na všetky otázky na aktuálnej stránke."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "Nastavuje viditeľnosť a umiestnenie navigačných tlačidiel na stránke."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Nastavuje viditeľnosť a umiestnenie indikátora priebehu. Hodnota \"Auto\" zobrazuje indikátor priebehu nad alebo pod hlavičkou prieskumu."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "Povoľte stránku ukážky so všetkými alebo iba zodpovedanými otázkami."
@@ -2773,3 +2844,72 @@ editorLocalization.locales["sk"] = skStrings;
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Ak je nastavená hodnota 0, výška sa vypočíta automaticky, aby sa prispôsobila obsahu hlavičky."
 // p.mobileHeight: "Height on smartphones" => "Výška na smartfónoch"
 // header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Ak je táto možnosť povolená, horná časť prieskumu prekrýva spodnú časť hlavičky."
+// ed.creatorSettingTitle: "Creator Settings" => "Nastavenia tvorcu"
+// tabs.accentColors: "Accent colors" => "Akcentové farby"
+// tabs.scaling: "Scaling" => "Škálovanie"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "Priradí čísla otázkam vnoreným do tohto panela."
+// creatortheme.--sjs-special-background: "Surface background" => "Povrchové pozadie"
+// creatortheme.--sjs-primary-background-500: "Primary" => "Prvotný"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "Sekundárny"
+// creatortheme.surfaceScale: "Surface" => "Povrch"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "Používateľské rozhranie"
+// creatortheme.fontScale: "Font" => "Písmo"
+// names.sc2020: "Survey Creator 2020" => "Tvorca prieskumu 2020"
+// names.default-light: "Light" => "Svetlo"
+// names.default-dark: "Dark" => "Tmavý"
+// names.default-contrast: "Contrast" => "Kontrast"
+// panel.showNumber: "Number this panel" => "Očíslujte tento panel"
+// pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Vyberte, či chcete, aby sa prieskum automaticky posunul na ďalšiu stránku, keď respondent odpovie na všetky otázky na aktuálnej stránke. Táto funkcia sa nepoužije, ak je posledná otázka na stránke otvorená alebo umožňuje viacero odpovedí."
+// autocomplete.name: "Full Name" => "Celé meno"
+// autocomplete.honorific-prefix: "Prefix" => "Predpona"
+// autocomplete.given-name: "First Name" => "Krstné meno"
+// autocomplete.additional-name: "Middle Name" => "Stredné meno"
+// autocomplete.family-name: "Last Name" => "Priezvisko"
+// autocomplete.honorific-suffix: "Suffix" => "Prípona"
+// autocomplete.nickname: "Nickname" => "Prezývka"
+// autocomplete.organization-title: "Job Title" => "Pracovná pozícia"
+// autocomplete.username: "User Name" => "Používateľské meno"
+// autocomplete.new-password: "New Password" => "Nové heslo"
+// autocomplete.current-password: "Current Password" => "Aktuálne heslo"
+// autocomplete.organization: "Organization Name" => "Názov organizácie"
+// autocomplete.street-address: "Full Street Address" => "Celá adresa"
+// autocomplete.address-line1: "Address Line 1" => "Riadok adresy 1"
+// autocomplete.address-line2: "Address Line 2" => "Riadok adresy 2"
+// autocomplete.address-line3: "Address Line 3" => "Riadok adresy 3"
+// autocomplete.address-level4: "Level 4 Address" => "Adresa úrovne 4"
+// autocomplete.address-level3: "Level 3 Address" => "Adresa úrovne 3"
+// autocomplete.address-level2: "Level 2 Address" => "Adresa úrovne 2"
+// autocomplete.address-level1: "Level 1 Address" => "Adresa úrovne 1"
+// autocomplete.country: "Country Code" => "Kód krajiny"
+// autocomplete.country-name: "Country Name" => "Názov krajiny"
+// autocomplete.postal-code: "Postal Code" => "Psč"
+// autocomplete.cc-name: "Cardholder Name" => "Meno držiteľa karty"
+// autocomplete.cc-given-name: "Cardholder First Name" => "Krstné meno držiteľa karty"
+// autocomplete.cc-additional-name: "Cardholder Middle Name" => "Stredné meno držiteľa karty"
+// autocomplete.cc-family-name: "Cardholder Last Name" => "Priezvisko držiteľa karty"
+// autocomplete.cc-number: "Credit Card Number" => "Číslo kreditnej karty"
+// autocomplete.cc-exp: "Expiration Date" => "Dátum vypršania platnosti"
+// autocomplete.cc-exp-month: "Expiration Month" => "Mesiac vypršania platnosti"
+// autocomplete.cc-exp-year: "Expiration Year" => "Rok vypršania platnosti"
+// autocomplete.cc-csc: "Card Security Code" => "Bezpečnostný kód karty"
+// autocomplete.cc-type: "Credit Card Type" => "Typ kreditnej karty"
+// autocomplete.transaction-currency: "Transaction Currency" => "Mena transakcie"
+// autocomplete.transaction-amount: "Transaction Amount" => "Suma transakcie"
+// autocomplete.language: "Preferred Language" => "Preferovaný jazyk"
+// autocomplete.bday: "Birthday" => "Narodeniny"
+// autocomplete.bday-day: "Birthday Day" => "Deň narodenín"
+// autocomplete.bday-month: "Birthday Month" => "Mesiac narodenín"
+// autocomplete.bday-year: "Birthday Year" => "Rok narodenín"
+// autocomplete.sex: "Gender" => "Pohlavie"
+// autocomplete.url: "Website URL" => "URL adresa webovej stránky"
+// autocomplete.photo: "Profile Photo" => "Profilová fotka"
+// autocomplete.tel: "Telephone Number" => "Telefónne číslo"
+// autocomplete.tel-country-code: "Country Code for Phone" => "Kód krajiny pre telefón"
+// autocomplete.tel-national: "National Telephone Number" => "Národné telefónne číslo"
+// autocomplete.tel-area-code: "Area Code" => "Telefónna Predvoľba"
+// autocomplete.tel-local: "Local Phone Number" => "Miestne telefónne číslo"
+// autocomplete.tel-local-prefix: "Local Phone Prefix" => "Lokálna predvoľba telefónu"
+// autocomplete.tel-local-suffix: "Local Phone Suffix" => "Prípona miestneho telefónu"
+// autocomplete.tel-extension: "Phone Extension" => "Rozšírenie telefónu"
+// autocomplete.email: "Email Address" => "E-mailová adresa"
+// autocomplete.impp: "Instant Messaging Protocol" => "Protokol okamžitých správ"

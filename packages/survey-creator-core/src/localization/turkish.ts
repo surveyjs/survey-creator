@@ -69,6 +69,7 @@ export var turkishStrings = {
     surveySettingsTooltip: "Anket ayarları",
     themeSettings: "Tema Ayarları",
     themeSettingsTooltip: "Tema ayarları",
+    creatorSettingTitle: "İçerik Oluşturucu Ayarları",
     showPanel: "Paneli Göster",
     hidePanel: "Paneli Gizle",
     prevSelected: "Öncekini seç",
@@ -301,7 +302,7 @@ export var turkishStrings = {
       width: "Satır içi panel genişliği",
       minWidth: "Minimum panel genişliği",
       maxWidth: "Maksimum panel genişliği",
-      showNumber: "Sayı panelleri"
+      showNumber: "Bu paneli numaralandırın"
     },
     paneldynamic: {
       name: "Panel adı",
@@ -828,6 +829,8 @@ export var turkishStrings = {
       header: "Üstbilgi",
       background: "Arka plan",
       appearance: "Görünüş",
+      accentColors: "Vurgu renkleri",
+      scaling: "Ölçekleme",
       others: "Diğer"
     },
     editProperty: "Özelliği düzenle '{0}'",
@@ -1014,6 +1017,61 @@ export var turkishStrings = {
       time: "Saat",
       url: "URL",
       week: "Hafta"
+    },
+    autocomplete: {
+      name: "Adınız ve Soyadınız",
+      "honorific-prefix": "Önek",
+      "given-name": "Ad",
+      "additional-name": "İkinci İsim",
+      "family-name": "Soyadı",
+      "honorific-suffix": "Sonek",
+      nickname: "Lakap",
+      "organization-title": "İş Ünvanı",
+      username: "Kullanıcı Adı",
+      "new-password": "Yeni Şifre",
+      "current-password": "Mevcut Şifre",
+      organization: "Kuruluş Adı",
+      "street-address": "Açık Adres",
+      "address-line1": "Adres Satırı 1",
+      "address-line2": "Adres Satırı 2",
+      "address-line3": "Adres Satırı 3",
+      "address-level4": "Seviye 4 Adres",
+      "address-level3": "Seviye 3 Adres",
+      "address-level2": "Seviye 2 Adres",
+      "address-level1": "Seviye 1 Adres",
+      country: "Ülke Kodu",
+      "country-name": "Ülke Adı",
+      "postal-code": "Posta Kodu",
+      "cc-name": "Kart Sahibinin Adı",
+      "cc-given-name": "Kart Sahibinin Adı",
+      "cc-additional-name": "Kart Sahibinin İkinci Adı",
+      "cc-family-name": "Kart Sahibinin Soyadı",
+      "cc-number": "Kredi Kartı Numarası",
+      "cc-exp": "Son kullanma tarihi",
+      "cc-exp-month": "Son kullanma ayı",
+      "cc-exp-year": "Son kullanma yılı",
+      "cc-csc": "Kart Güvenlik Kodu",
+      "cc-type": "Kredi Kartı Türü",
+      "transaction-currency": "İşlem Para Birimi",
+      "transaction-amount": "İşlem Tutarı",
+      language: "Tercih Edilen Dil",
+      bday: "Doğum günü",
+      "bday-day": "Doğum Günü",
+      "bday-month": "Doğum Günü Ayı",
+      "bday-year": "Doğum Günü Yılı",
+      sex: "Cinsiyet",
+      url: "Web Sitesi URL'si",
+      photo: "Profil Fotoğrafı",
+      tel: "Telefon numarası",
+      "tel-country-code": "Telefon için Ülke Kodu",
+      "tel-national": "Ulusal Telefon Numarası",
+      "tel-area-code": "Alan kodu",
+      "tel-local": "Yerel Telefon Numarası",
+      "tel-local-prefix": "Yerel Telefon Öneki",
+      "tel-local-suffix": "Yerel Telefon Soneki",
+      "tel-extension": "Telefon Uzantısı",
+      email: "E-posta Adresi",
+      impp: "Anlık Mesajlaşma Protokolü"
     },
     maskType: {
       none: "Hiç kimse",
@@ -1289,7 +1347,8 @@ export var turkishStrings = {
       innerIndent: "Panel içeriği ile panel kutusunun sol kenarlığı arasına boşluk veya kenar boşluğu ekler.",
       startWithNewLine: "Panelin önceki soru veya panelle aynı satırda görüntülenmesi için seçimi kaldırın. Panel formunuzdaki ilk öğeyse bu ayar uygulanmaz.",
       state: "Şunlar arasından seçim yapın: \"Genişletilmiş\" - panel tam olarak görüntülenir ve daraltılabilir; \"Daraltılmış\" - panel yalnızca başlığı ve açıklamayı görüntüler ve genişletilebilir; \"Kilitli\" - panel tam olarak görüntülenir ve daraltılamaz.",
-      width: "Panelin genişliğini aynı satırdaki diğer anket öğeleriyle orantılı olarak ayarlar. CSS değerlerini (px, %, in, pt, vb.) kabul eder."
+      width: "Panelin genişliğini aynı satırdaki diğer anket öğeleriyle orantılı olarak ayarlar. CSS değerlerini (px, %, in, pt, vb.) kabul eder.",
+      showQuestionNumbers: "Bu panelde iç içe yerleştirilmiş sorulara numaralar atar."
     },
     paneldynamic: {
       name: "Yanıtlayanlar tarafından görülemeyen bir panel kimliği.",
@@ -1387,7 +1446,7 @@ export var turkishStrings = {
     logoWidth: "CSS birimlerinde bir logo genişliği ayarlar (px, %, in, pt, vb.).",
     logoHeight: "CSS birimlerinde (px, %, in, pt, vb.) bir logo yüksekliği ayarlar.",
     logoFit: "Şunlar arasından seçim yapın: \"Yok\" - görüntü orijinal boyutunu korur; \"İçer\" - görüntü, en boy oranı korunurken sığacak şekilde yeniden boyutlandırılır; \"Kapak\" - görüntü, en boy oranını korurken tüm kutuyu doldurur; \"Doldur\" - görüntü, en boy oranını korumadan kutuyu dolduracak şekilde uzatılır.",
-    goNextPageAutomatic: "Yanıtlayan geçerli sayfadaki tüm soruları yanıtladıktan sonra anketin otomatik olarak bir sonraki sayfaya ilerlemesini isteyip istemediğinizi seçin.",
+    goNextPageAutomatic: "Yanıtlayan geçerli sayfadaki tüm soruları yanıtladıktan sonra anketin otomatik olarak sonraki sayfaya ilerlemesini isteyip istemediğinizi seçin. Bu özellik, sayfadaki son soru açık uçluysa veya birden fazla yanıta izin veriyorsa uygulanmaz.",
     allowCompleteSurveyAutomatic: "Yanıtlayan tüm soruları yanıtladıktan sonra anketin otomatik olarak tamamlanmasını isteyip istemediğinizi seçin.",
     showNavigationButtons: "Sayfadaki gezinme düğmelerinin görünürlüğünü ve konumunu ayarlar.",
     showProgressBar: "İlerleme çubuğunun görünürlüğünü ve konumunu ayarlar. \"Otomatik\" değeri, anket başlığının üstünde veya altında ilerleme çubuğunu görüntüler.",
@@ -1694,6 +1753,20 @@ export var turkishStrings = {
       tulip: "Lale",
       brown: "Kahverengi",
       green: "Yeşil"
+    }
+  },
+  creatortheme: {
+    "--sjs-special-background": "Yüzey arka planı",
+    "--sjs-primary-background-500": "Birincil",
+    "--sjs-secondary-background-500": "İkincil",
+    surfaceScale: "Yüzey",
+    userInterfaceBaseUnit: "Kullanıcı arayüzü",
+    fontScale: "Yazı tipi",
+    names: {
+      sc2020: "Anket Oluşturucu 2020",
+      "default-light": "Işık",
+      "default-dark": "Koyu",
+      "default-contrast": "Karşıtlık"
     }
   }
 };
@@ -2304,7 +2377,6 @@ editorLocalization.locales["tr"] = turkishStrings;
 // panel.width: "Inline panel width" => "Satır içi panel genişliği"
 // panel.minWidth: "Minimum panel width" => "Minimum panel genişliği"
 // panel.maxWidth: "Maximum panel width" => "Maksimum panel genişliği"
-// panel.showNumber: "Number panels" => "Sayı panelleri"
 // paneldynamic.name: "Panel name" => "Panel adı"
 // paneldynamic.title: "Panel title" => "Panel başlığı"
 // paneldynamic.description: "Panel description" => "Panel açıklaması"
@@ -2520,7 +2592,6 @@ editorLocalization.locales["tr"] = turkishStrings;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "CSS birimlerinde bir logo genişliği ayarlar (px, %, in, pt, vb.)."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "CSS birimlerinde (px, %, in, pt, vb.) bir logo yüksekliği ayarlar."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Şunlar arasından seçim yapın: \"Yok\" - görüntü orijinal boyutunu korur; \"İçer\" - görüntü, en boy oranı korunurken sığacak şekilde yeniden boyutlandırılır; \"Kapak\" - görüntü, en boy oranını korurken tüm kutuyu doldurur; \"Doldur\" - görüntü, en boy oranını korumadan kutuyu dolduracak şekilde uzatılır."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "Yanıtlayan geçerli sayfadaki tüm soruları yanıtladıktan sonra anketin otomatik olarak bir sonraki sayfaya ilerlemesini isteyip istemediğinizi seçin."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "Sayfadaki gezinme düğmelerinin görünürlüğünü ve konumunu ayarlar."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "İlerleme çubuğunun görünürlüğünü ve konumunu ayarlar. \"Otomatik\" değeri, anket başlığının üstünde veya altında ilerleme çubuğunu görüntüler."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "Önizleme sayfasını tüm sorularla veya yalnızca yanıtlanmış sorularla etkinleştirin."
@@ -2815,3 +2886,72 @@ editorLocalization.locales["tr"] = turkishStrings;
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "0 olarak ayarlandığında, üstbilginin içeriğine uyum sağlamak için yükseklik otomatik olarak hesaplanır."
 // p.mobileHeight: "Height on smartphones" => "Akıllı telefonlarda yükseklik"
 // header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Etkinleştirildiğinde, anketin üst kısmı başlığın alt kısmıyla kaplanır."
+// ed.creatorSettingTitle: "Creator Settings" => "İçerik Oluşturucu Ayarları"
+// tabs.accentColors: "Accent colors" => "Vurgu renkleri"
+// tabs.scaling: "Scaling" => "Ölçekleme"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "Bu panelde iç içe yerleştirilmiş sorulara numaralar atar."
+// creatortheme.--sjs-special-background: "Surface background" => "Yüzey arka planı"
+// creatortheme.--sjs-primary-background-500: "Primary" => "Birincil"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "İkincil"
+// creatortheme.surfaceScale: "Surface" => "Yüzey"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "Kullanıcı arayüzü"
+// creatortheme.fontScale: "Font" => "Yazı tipi"
+// names.sc2020: "Survey Creator 2020" => "Anket Oluşturucu 2020"
+// names.default-light: "Light" => "Işık"
+// names.default-dark: "Dark" => "Koyu"
+// names.default-contrast: "Contrast" => "Karşıtlık"
+// panel.showNumber: "Number this panel" => "Bu paneli numaralandırın"
+// pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Yanıtlayan geçerli sayfadaki tüm soruları yanıtladıktan sonra anketin otomatik olarak sonraki sayfaya ilerlemesini isteyip istemediğinizi seçin. Bu özellik, sayfadaki son soru açık uçluysa veya birden fazla yanıta izin veriyorsa uygulanmaz."
+// autocomplete.name: "Full Name" => "Adınız ve Soyadınız"
+// autocomplete.honorific-prefix: "Prefix" => "Önek"
+// autocomplete.given-name: "First Name" => "Ad"
+// autocomplete.additional-name: "Middle Name" => "İkinci İsim"
+// autocomplete.family-name: "Last Name" => "Soyadı"
+// autocomplete.honorific-suffix: "Suffix" => "Sonek"
+// autocomplete.nickname: "Nickname" => "Lakap"
+// autocomplete.organization-title: "Job Title" => "İş Ünvanı"
+// autocomplete.username: "User Name" => "Kullanıcı Adı"
+// autocomplete.new-password: "New Password" => "Yeni Şifre"
+// autocomplete.current-password: "Current Password" => "Mevcut Şifre"
+// autocomplete.organization: "Organization Name" => "Kuruluş Adı"
+// autocomplete.street-address: "Full Street Address" => "Açık Adres"
+// autocomplete.address-line1: "Address Line 1" => "Adres Satırı 1"
+// autocomplete.address-line2: "Address Line 2" => "Adres Satırı 2"
+// autocomplete.address-line3: "Address Line 3" => "Adres Satırı 3"
+// autocomplete.address-level4: "Level 4 Address" => "Seviye 4 Adres"
+// autocomplete.address-level3: "Level 3 Address" => "Seviye 3 Adres"
+// autocomplete.address-level2: "Level 2 Address" => "Seviye 2 Adres"
+// autocomplete.address-level1: "Level 1 Address" => "Seviye 1 Adres"
+// autocomplete.country: "Country Code" => "Ülke Kodu"
+// autocomplete.country-name: "Country Name" => "Ülke Adı"
+// autocomplete.postal-code: "Postal Code" => "Posta Kodu"
+// autocomplete.cc-name: "Cardholder Name" => "Kart Sahibinin Adı"
+// autocomplete.cc-given-name: "Cardholder First Name" => "Kart Sahibinin Adı"
+// autocomplete.cc-additional-name: "Cardholder Middle Name" => "Kart Sahibinin İkinci Adı"
+// autocomplete.cc-family-name: "Cardholder Last Name" => "Kart Sahibinin Soyadı"
+// autocomplete.cc-number: "Credit Card Number" => "Kredi Kartı Numarası"
+// autocomplete.cc-exp: "Expiration Date" => "Son kullanma tarihi"
+// autocomplete.cc-exp-month: "Expiration Month" => "Son kullanma ayı"
+// autocomplete.cc-exp-year: "Expiration Year" => "Son kullanma yılı"
+// autocomplete.cc-csc: "Card Security Code" => "Kart Güvenlik Kodu"
+// autocomplete.cc-type: "Credit Card Type" => "Kredi Kartı Türü"
+// autocomplete.transaction-currency: "Transaction Currency" => "İşlem Para Birimi"
+// autocomplete.transaction-amount: "Transaction Amount" => "İşlem Tutarı"
+// autocomplete.language: "Preferred Language" => "Tercih Edilen Dil"
+// autocomplete.bday: "Birthday" => "Doğum günü"
+// autocomplete.bday-day: "Birthday Day" => "Doğum Günü"
+// autocomplete.bday-month: "Birthday Month" => "Doğum Günü Ayı"
+// autocomplete.bday-year: "Birthday Year" => "Doğum Günü Yılı"
+// autocomplete.sex: "Gender" => "Cinsiyet"
+// autocomplete.url: "Website URL" => "Web Sitesi URL'si"
+// autocomplete.photo: "Profile Photo" => "Profil Fotoğrafı"
+// autocomplete.tel: "Telephone Number" => "Telefon numarası"
+// autocomplete.tel-country-code: "Country Code for Phone" => "Telefon için Ülke Kodu"
+// autocomplete.tel-national: "National Telephone Number" => "Ulusal Telefon Numarası"
+// autocomplete.tel-area-code: "Area Code" => "Alan kodu"
+// autocomplete.tel-local: "Local Phone Number" => "Yerel Telefon Numarası"
+// autocomplete.tel-local-prefix: "Local Phone Prefix" => "Yerel Telefon Öneki"
+// autocomplete.tel-local-suffix: "Local Phone Suffix" => "Yerel Telefon Soneki"
+// autocomplete.tel-extension: "Phone Extension" => "Telefon Uzantısı"
+// autocomplete.email: "Email Address" => "E-posta Adresi"
+// autocomplete.impp: "Instant Messaging Protocol" => "Anlık Mesajlaşma Protokolü"

@@ -69,6 +69,7 @@ export var indonesianStrings = {
     surveySettingsTooltip: "Pengaturan survei",
     themeSettings: "Pengaturan Tema",
     themeSettingsTooltip: "Pengaturan tema",
+    creatorSettingTitle: "Pengaturan Kreator",
     showPanel: "Tampilkan Panel",
     hidePanel: "Sembunyikan Panel",
     prevSelected: "Pilih sebelumnya",
@@ -301,7 +302,7 @@ export var indonesianStrings = {
       width: "Lebar panel sejajar",
       minWidth: "Lebar panel minimum",
       maxWidth: "Lebar panel maksimum",
-      showNumber: "Panel angka"
+      showNumber: "Nomor panel ini"
     },
     paneldynamic: {
       name: "Nama panel",
@@ -828,6 +829,8 @@ export var indonesianStrings = {
       header: "Header",
       background: "Latar",
       appearance: "Rupa",
+      accentColors: "Warna aksen",
+      scaling: "Scaling",
       others: "Lain"
     },
     editProperty: "Ubah properti '{0}'",
@@ -1014,6 +1017,61 @@ export var indonesianStrings = {
       time: "Waktu",
       url: "URL",
       week: "Minggu"
+    },
+    autocomplete: {
+      name: "Nama lengkap",
+      "honorific-prefix": "Awalan",
+      "given-name": "Nama depan",
+      "additional-name": "Nama tengah",
+      "family-name": "Nama Belakang",
+      "honorific-suffix": "Akhiran",
+      nickname: "Nickname",
+      "organization-title": "Judul Pekerjaan",
+      username: "Nama pengguna",
+      "new-password": "Kata sandi baru",
+      "current-password": "Kata Sandi Saat Ini",
+      organization: "Nama Organisasi",
+      "street-address": "Alamat Jalan Lengkap",
+      "address-line1": "Baris Alamat 1",
+      "address-line2": "Baris Alamat 2",
+      "address-line3": "Baris Alamat 3",
+      "address-level4": "Alamat Level 4",
+      "address-level3": "Alamat Level 3",
+      "address-level2": "Alamat Level 2",
+      "address-level1": "Alamat Level 1",
+      country: "Kode Negara",
+      "country-name": "Nama Negara",
+      "postal-code": "Kode Pos",
+      "cc-name": "Nama Pemegang Kartu",
+      "cc-given-name": "Nama Depan Pemegang Kartu",
+      "cc-additional-name": "Nama Tengah Pemegang Kartu",
+      "cc-family-name": "Nama Belakang Pemegang Kartu",
+      "cc-number": "Nomor Kartu Kredit",
+      "cc-exp": "Tanggal kedaluwarsa",
+      "cc-exp-month": "Bulan Kedaluwarsa",
+      "cc-exp-year": "Tahun Kedaluwarsa",
+      "cc-csc": "Kode Keamanan Kartu",
+      "cc-type": "Jenis Kartu Kredit",
+      "transaction-currency": "Mata Uang Transaksi",
+      "transaction-amount": "Jumlah Transaksi",
+      language: "Bahasa Pilihan",
+      bday: "Ulang tahun",
+      "bday-day": "Hari Ulang Tahun",
+      "bday-month": "Bulan Ulang Tahun",
+      "bday-year": "Tahun Ulang Tahun",
+      sex: "Jenis kelamin",
+      url: "URL situs web",
+      photo: "Foto Profil",
+      tel: "Nomor Telepon",
+      "tel-country-code": "Kode Negara untuk Telepon",
+      "tel-national": "Nomor Telepon Nasional",
+      "tel-area-code": "Kode Area",
+      "tel-local": "Nomor Telepon Lokal",
+      "tel-local-prefix": "Awalan Telepon Lokal",
+      "tel-local-suffix": "Akhiran Telepon Lokal",
+      "tel-extension": "Ekstensi Telepon",
+      email: "Alamat Email",
+      impp: "Protokol Pesan Instan"
     },
     maskType: {
       none: "Tidak",
@@ -1289,7 +1347,8 @@ export var indonesianStrings = {
       innerIndent: "Menambahkan spasi atau margin antara konten panel dan batas kiri kotak panel.",
       startWithNewLine: "Batalkan pilihan untuk menampilkan panel dalam satu baris dengan pertanyaan atau panel sebelumnya. Pengaturan tidak berlaku jika panel adalah elemen pertama dalam formulir Anda.",
       state: "Pilih dari: \"Diperluas\" - panel ditampilkan secara penuh dan dapat diciutkan; \"Collapsed\" - panel hanya menampilkan judul dan deskripsi dan dapat diperluas; \"Terkunci\" - panel ditampilkan secara penuh dan tidak dapat diciutkan.",
-      width: "Mengatur lebar panel secara proporsional dengan elemen survei lainnya di baris yang sama. Menerima nilai CSS (px, %, in, pt, dll.)."
+      width: "Mengatur lebar panel secara proporsional dengan elemen survei lainnya di baris yang sama. Menerima nilai CSS (px, %, in, pt, dll.).",
+      showQuestionNumbers: "Menetapkan nomor untuk pertanyaan yang bersarang dalam panel ini."
     },
     paneldynamic: {
       name: "ID panel yang tidak terlihat oleh responden.",
@@ -1387,7 +1446,7 @@ export var indonesianStrings = {
     logoWidth: "Mengatur lebar logo dalam satuan CSS (px, %, in, pt, dll.).",
     logoHeight: "Mengatur tinggi logo dalam satuan CSS (px, %, in, pt, dll.).",
     logoFit: "Pilih dari: \"Tidak ada\" - gambar mempertahankan ukuran aslinya; \"Berisi\" - gambar diubah ukurannya agar pas dengan tetap mempertahankan rasio aspeknya; \"Cover\" - gambar mengisi seluruh kotak sambil mempertahankan rasio aspeknya; \"Isi\" - gambar direntangkan untuk mengisi kotak tanpa mempertahankan rasio aspeknya.",
-    goNextPageAutomatic: "Pilih apakah Anda ingin survei maju ke halaman berikutnya secara otomatis setelah responden menjawab semua pertanyaan di halaman saat ini.",
+    goNextPageAutomatic: "Pilih apakah Anda ingin survei maju secara otomatis ke halaman berikutnya setelah responden menjawab semua pertanyaan di halaman saat ini. Fitur ini tidak akan berlaku jika pertanyaan terakhir di halaman bersifat terbuka atau mengizinkan banyak jawaban.",
     allowCompleteSurveyAutomatic: "Pilih apakah Anda ingin survei selesai secara otomatis setelah responden menjawab semua pertanyaan.",
     showNavigationButtons: "Mengatur visibilitas dan lokasi tombol navigasi pada halaman.",
     showProgressBar: "Mengatur visibilitas dan lokasi bilah kemajuan. Nilai \"Otomatis\" menampilkan bilah kemajuan di atas atau di bawah header survei.",
@@ -1694,6 +1753,20 @@ export var indonesianStrings = {
       tulip: "Tulip",
       brown: "Coklat",
       green: "Hijau"
+    }
+  },
+  creatortheme: {
+    "--sjs-special-background": "Latar belakang permukaan",
+    "--sjs-primary-background-500": "Utama",
+    "--sjs-secondary-background-500": "Sekunder",
+    surfaceScale: "Permukaan",
+    userInterfaceBaseUnit: "Antarmuka pengguna",
+    fontScale: "Font",
+    names: {
+      sc2020: "Pembuat Survei 2020",
+      "default-light": "Ringan",
+      "default-dark": "Gelap",
+      "default-contrast": "Kontras"
     }
   }
 };
@@ -2463,7 +2536,6 @@ editorLocalization.locales["id"] = indonesianStrings;
 // panel.width: "Inline panel width" => "Lebar panel sejajar"
 // panel.minWidth: "Minimum panel width" => "Lebar panel minimum"
 // panel.maxWidth: "Maximum panel width" => "Lebar panel maksimum"
-// panel.showNumber: "Number panels" => "Panel angka"
 // paneldynamic.name: "Panel name" => "Nama panel"
 // paneldynamic.title: "Panel title" => "Judul panel"
 // paneldynamic.description: "Panel description" => "Deskripsi panel"
@@ -2679,7 +2751,6 @@ editorLocalization.locales["id"] = indonesianStrings;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "Mengatur lebar logo dalam satuan CSS (px, %, in, pt, dll.)."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "Mengatur tinggi logo dalam satuan CSS (px, %, in, pt, dll.)."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Pilih dari: \"Tidak ada\" - gambar mempertahankan ukuran aslinya; \"Berisi\" - gambar diubah ukurannya agar pas dengan tetap mempertahankan rasio aspeknya; \"Cover\" - gambar mengisi seluruh kotak sambil mempertahankan rasio aspeknya; \"Isi\" - gambar direntangkan untuk mengisi kotak tanpa mempertahankan rasio aspeknya."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "Pilih apakah Anda ingin survei maju ke halaman berikutnya secara otomatis setelah responden menjawab semua pertanyaan di halaman saat ini."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "Mengatur visibilitas dan lokasi tombol navigasi pada halaman."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Mengatur visibilitas dan lokasi bilah kemajuan. Nilai \"Otomatis\" menampilkan bilah kemajuan di atas atau di bawah header survei."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "Aktifkan halaman pratinjau hanya dengan semua atau pertanyaan yang dijawab."
@@ -2974,3 +3045,72 @@ editorLocalization.locales["id"] = indonesianStrings;
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Saat diatur ke 0, tinggi dihitung secara otomatis untuk mengakomodasi konten header."
 // p.mobileHeight: "Height on smartphones" => "Tinggi di smartphone"
 // header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Saat diaktifkan, bagian atas survei melapisi bagian bawah header."
+// ed.creatorSettingTitle: "Creator Settings" => "Pengaturan Kreator"
+// tabs.accentColors: "Accent colors" => "Warna aksen"
+// tabs.scaling: "Scaling" => "Scaling"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "Menetapkan nomor untuk pertanyaan yang bersarang dalam panel ini."
+// creatortheme.--sjs-special-background: "Surface background" => "Latar belakang permukaan"
+// creatortheme.--sjs-primary-background-500: "Primary" => "Utama"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "Sekunder"
+// creatortheme.surfaceScale: "Surface" => "Permukaan"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "Antarmuka pengguna"
+// creatortheme.fontScale: "Font" => "Font"
+// names.sc2020: "Survey Creator 2020" => "Pembuat Survei 2020"
+// names.default-light: "Light" => "Ringan"
+// names.default-dark: "Dark" => "Gelap"
+// names.default-contrast: "Contrast" => "Kontras"
+// panel.showNumber: "Number this panel" => "Nomor panel ini"
+// pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Pilih apakah Anda ingin survei maju secara otomatis ke halaman berikutnya setelah responden menjawab semua pertanyaan di halaman saat ini. Fitur ini tidak akan berlaku jika pertanyaan terakhir di halaman bersifat terbuka atau mengizinkan banyak jawaban."
+// autocomplete.name: "Full Name" => "Nama lengkap"
+// autocomplete.honorific-prefix: "Prefix" => "Awalan"
+// autocomplete.given-name: "First Name" => "Nama depan"
+// autocomplete.additional-name: "Middle Name" => "Nama tengah"
+// autocomplete.family-name: "Last Name" => "Nama Belakang"
+// autocomplete.honorific-suffix: "Suffix" => "Akhiran"
+// autocomplete.nickname: "Nickname" => "Nickname"
+// autocomplete.organization-title: "Job Title" => "Judul Pekerjaan"
+// autocomplete.username: "User Name" => "Nama pengguna"
+// autocomplete.new-password: "New Password" => "Kata sandi baru"
+// autocomplete.current-password: "Current Password" => "Kata Sandi Saat Ini"
+// autocomplete.organization: "Organization Name" => "Nama Organisasi"
+// autocomplete.street-address: "Full Street Address" => "Alamat Jalan Lengkap"
+// autocomplete.address-line1: "Address Line 1" => "Baris Alamat 1"
+// autocomplete.address-line2: "Address Line 2" => "Baris Alamat 2"
+// autocomplete.address-line3: "Address Line 3" => "Baris Alamat 3"
+// autocomplete.address-level4: "Level 4 Address" => "Alamat Level 4"
+// autocomplete.address-level3: "Level 3 Address" => "Alamat Level 3"
+// autocomplete.address-level2: "Level 2 Address" => "Alamat Level 2"
+// autocomplete.address-level1: "Level 1 Address" => "Alamat Level 1"
+// autocomplete.country: "Country Code" => "Kode Negara"
+// autocomplete.country-name: "Country Name" => "Nama Negara"
+// autocomplete.postal-code: "Postal Code" => "Kode Pos"
+// autocomplete.cc-name: "Cardholder Name" => "Nama Pemegang Kartu"
+// autocomplete.cc-given-name: "Cardholder First Name" => "Nama Depan Pemegang Kartu"
+// autocomplete.cc-additional-name: "Cardholder Middle Name" => "Nama Tengah Pemegang Kartu"
+// autocomplete.cc-family-name: "Cardholder Last Name" => "Nama Belakang Pemegang Kartu"
+// autocomplete.cc-number: "Credit Card Number" => "Nomor Kartu Kredit"
+// autocomplete.cc-exp: "Expiration Date" => "Tanggal kedaluwarsa"
+// autocomplete.cc-exp-month: "Expiration Month" => "Bulan Kedaluwarsa"
+// autocomplete.cc-exp-year: "Expiration Year" => "Tahun Kedaluwarsa"
+// autocomplete.cc-csc: "Card Security Code" => "Kode Keamanan Kartu"
+// autocomplete.cc-type: "Credit Card Type" => "Jenis Kartu Kredit"
+// autocomplete.transaction-currency: "Transaction Currency" => "Mata Uang Transaksi"
+// autocomplete.transaction-amount: "Transaction Amount" => "Jumlah Transaksi"
+// autocomplete.language: "Preferred Language" => "Bahasa Pilihan"
+// autocomplete.bday: "Birthday" => "Ulang tahun"
+// autocomplete.bday-day: "Birthday Day" => "Hari Ulang Tahun"
+// autocomplete.bday-month: "Birthday Month" => "Bulan Ulang Tahun"
+// autocomplete.bday-year: "Birthday Year" => "Tahun Ulang Tahun"
+// autocomplete.sex: "Gender" => "Jenis kelamin"
+// autocomplete.url: "Website URL" => "URL situs web"
+// autocomplete.photo: "Profile Photo" => "Foto Profil"
+// autocomplete.tel: "Telephone Number" => "Nomor Telepon"
+// autocomplete.tel-country-code: "Country Code for Phone" => "Kode Negara untuk Telepon"
+// autocomplete.tel-national: "National Telephone Number" => "Nomor Telepon Nasional"
+// autocomplete.tel-area-code: "Area Code" => "Kode Area"
+// autocomplete.tel-local: "Local Phone Number" => "Nomor Telepon Lokal"
+// autocomplete.tel-local-prefix: "Local Phone Prefix" => "Awalan Telepon Lokal"
+// autocomplete.tel-local-suffix: "Local Phone Suffix" => "Akhiran Telepon Lokal"
+// autocomplete.tel-extension: "Phone Extension" => "Ekstensi Telepon"
+// autocomplete.email: "Email Address" => "Alamat Email"
+// autocomplete.impp: "Instant Messaging Protocol" => "Protokol Pesan Instan"

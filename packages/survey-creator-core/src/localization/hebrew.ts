@@ -69,6 +69,7 @@ export var hebrewStrings = {
     surveySettingsTooltip: "הגדרות סקר",
     themeSettings: "הגדרות ערכת העיצוב",
     themeSettingsTooltip: "הגדרות ערכת נושא",
+    creatorSettingTitle: "הגדרות יוצר",
     showPanel: "הצג לוח",
     hidePanel: "הסתר לוח",
     prevSelected: "בחר קודם",
@@ -301,7 +302,7 @@ export var hebrewStrings = {
       width: "רוחב החלונית בתוך שורה",
       minWidth: "רוחב לוח מינימלי",
       maxWidth: "רוחב לוח מרבי",
-      showNumber: "חלוניות מספרים"
+      showNumber: "מספר חלונית זו"
     },
     paneldynamic: {
       name: "שם החלונית",
@@ -828,6 +829,8 @@ export var hebrewStrings = {
       header: "כותרת",
       background: "רקע",
       appearance: "מראה",
+      accentColors: "צבעי הדגשה",
+      scaling: "שינוי גודל",
       others: "אחרים"
     },
     editProperty: "עריכת מאפיין '{0}'",
@@ -1014,6 +1017,61 @@ export var hebrewStrings = {
       time: "שעה",
       url: "כתובת URL",
       week: "שבוע"
+    },
+    autocomplete: {
+      name: "שם מלא",
+      "honorific-prefix": "קידומת",
+      "given-name": "שם פרטי",
+      "additional-name": "שם אמצעי",
+      "family-name": "שם משפחה",
+      "honorific-suffix": "סיומת",
+      nickname: "כינוי",
+      "organization-title": "תפקיד",
+      username: "שם משתמש",
+      "new-password": "סיסמה חדשה",
+      "current-password": "סיסמה נוכחית",
+      organization: "שם הארגון",
+      "street-address": "כתובת הרחוב המלאה",
+      "address-line1": "כתובת שורה 1",
+      "address-line2": "כתובת שורה 2",
+      "address-line3": "כתובת שורה 3",
+      "address-level4": "כתובת ברמה 4",
+      "address-level3": "כתובת ברמה 3",
+      "address-level2": "כתובת ברמה 2",
+      "address-level1": "כתובת ברמה 1",
+      country: "קוד מדינה",
+      "country-name": "שם מדינה",
+      "postal-code": "מיקוד",
+      "cc-name": "שם בעל הכרטיס",
+      "cc-given-name": "שם פרטי של בעל הכרטיס",
+      "cc-additional-name": "שם אמצעי של בעל הכרטיס",
+      "cc-family-name": "שם משפחה של בעל הכרטיס",
+      "cc-number": "מספר כרטיס אשראי",
+      "cc-exp": "תאריך תפוגה",
+      "cc-exp-month": "חודש תפוגה",
+      "cc-exp-year": "שנת תפוגה",
+      "cc-csc": "קוד אבטחה של כרטיס",
+      "cc-type": "סוג כרטיס אשראי",
+      "transaction-currency": "מטבע עסקה",
+      "transaction-amount": "סכום העסקה",
+      language: "שפה מועדפת",
+      bday: "יום הולדת",
+      "bday-day": "יום הולדת",
+      "bday-month": "חודש יום הולדת",
+      "bday-year": "שנת יום הולדת",
+      sex: "מין",
+      url: "כתובת אתר אינטרנט",
+      photo: "תמונת פרופיל",
+      tel: "מספר טלפון",
+      "tel-country-code": "קידומת מדינה לטלפון",
+      "tel-national": "מספר טלפון ארצי",
+      "tel-area-code": "אזור חיוג",
+      "tel-local": "מספר טלפון מקומי",
+      "tel-local-prefix": "קידומת טלפון מקומי",
+      "tel-local-suffix": "סיומת טלפון מקומי",
+      "tel-extension": "שלוחת טלפון",
+      email: "כתובת דוא\"ל",
+      impp: "פרוטוקול העברת הודעות מיידיות"
     },
     maskType: {
       none: "ללא",
@@ -1289,7 +1347,8 @@ export var hebrewStrings = {
       innerIndent: "מוסיף רווח או שוליים בין תוכן החלונית לגבול השמאלי של תיבת החלונית.",
       startWithNewLine: "בטל את הבחירה כדי להציג את החלונית בשורה אחת עם השאלה או החלונית הקודמת. ההגדרה אינה חלה אם החלונית היא הרכיב הראשון בטופס.",
       state: "בחר מתוך: \"מורחב\" - הלוח מוצג במלואו וניתן לכווץ; \"מכווץ\" - הלוח מציג רק את הכותרת והתיאור וניתן להרחיבו; \"נעול\" - הלוח מוצג במלואו ולא ניתן לכווץ.",
-      width: "קובע את רוחב החלונית ביחס לרכיבי סקר אחרים באותה שורה. מקבל ערכי CSS (px, %, in, pt וכו')."
+      width: "קובע את רוחב החלונית ביחס לרכיבי סקר אחרים באותה שורה. מקבל ערכי CSS (px, %, in, pt וכו').",
+      showQuestionNumbers: "מקצה מספרים לשאלות המקוננות בלוח זה."
     },
     paneldynamic: {
       name: "מזהה חלונית שאינו גלוי למשיבים.",
@@ -1387,7 +1446,7 @@ export var hebrewStrings = {
     logoWidth: "הגדרת רוחב לוגו ביחידות CSS (px, %, in, pt וכו').",
     logoHeight: "הגדרת גובה סמל ביחידות CSS (px, %, in, pt וכו').",
     logoFit: "בחר מתוך: \"ללא\" - התמונה שומרת על גודלה המקורי; \"להכיל\" - גודל התמונה משתנה כדי להתאים תוך שמירה על יחס גובה-רוחב שלה; \"כיסוי\" - התמונה ממלאת את התיבה כולה תוך שמירה על יחס הגובה-רוחב שלה; \"מילוי\" - התמונה נמתחת כדי למלא את התיבה מבלי לשמור על יחס הגובה-רוחב שלה.",
-    goNextPageAutomatic: "בחר אם ברצונך שהסקר יתקדם לדף הבא באופן אוטומטי לאחר שמשיב יענה על כל השאלות בדף הנוכחי.",
+    goNextPageAutomatic: "בחר אם ברצונך שהסקר יתקדם אוטומטית לדף הבא לאחר שהמשיב ענה על כל השאלות בדף הנוכחי. תכונה זו לא תחול אם השאלה האחרונה בדף פתוחה או מאפשרת תשובות מרובות.",
     allowCompleteSurveyAutomatic: "בחר אם ברצונך שהסקר יושלם באופן אוטומטי לאחר שמשיב עונה על כל השאלות.",
     showNavigationButtons: "מגדיר את התצוגה והמיקום של לחצני ניווט בעמוד.",
     showProgressBar: "הגדרת הניראות והמיקום של מד התקדמות. הערך \"אוטומטי\" מציג את מד ההתקדמות מעל או מתחת לכותרת הסקר.",
@@ -1695,6 +1754,20 @@ export var hebrewStrings = {
       brown: "חום",
       green: "ירוק"
     }
+  },
+  creatortheme: {
+    "--sjs-special-background": "רקע פני השטח",
+    "--sjs-primary-background-500": "הראשי",
+    "--sjs-secondary-background-500": "משני",
+    surfaceScale: "משטח",
+    userInterfaceBaseUnit: "ממשק משתמש",
+    fontScale: "גופן",
+    names: {
+      sc2020: "יוצר הסקר 2020",
+      "default-light": "אור",
+      "default-dark": "חשוך",
+      "default-contrast": "ניגוד"
+    }
   }
 };
 
@@ -1877,7 +1950,6 @@ editorLocalization.locales["he"] = hebrewStrings;
 // panel.width: "Inline panel width" => "רוחב החלונית בתוך שורה"
 // panel.minWidth: "Minimum panel width" => "רוחב לוח מינימלי"
 // panel.maxWidth: "Maximum panel width" => "רוחב לוח מרבי"
-// panel.showNumber: "Number panels" => "חלוניות מספרים"
 // paneldynamic.name: "Panel name" => "שם החלונית"
 // paneldynamic.title: "Panel title" => "כותרת הפאנל"
 // paneldynamic.description: "Panel description" => "תיאור הלוח"
@@ -2093,7 +2165,6 @@ editorLocalization.locales["he"] = hebrewStrings;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "הגדרת רוחב לוגו ביחידות CSS (px, %, in, pt וכו')."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "הגדרת גובה סמל ביחידות CSS (px, %, in, pt וכו')."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "בחר מתוך: \"ללא\" - התמונה שומרת על גודלה המקורי; \"להכיל\" - גודל התמונה משתנה כדי להתאים תוך שמירה על יחס גובה-רוחב שלה; \"כיסוי\" - התמונה ממלאת את התיבה כולה תוך שמירה על יחס הגובה-רוחב שלה; \"מילוי\" - התמונה נמתחת כדי למלא את התיבה מבלי לשמור על יחס הגובה-רוחב שלה."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "בחר אם ברצונך שהסקר יתקדם לדף הבא באופן אוטומטי לאחר שמשיב יענה על כל השאלות בדף הנוכחי."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "מגדיר את התצוגה והמיקום של לחצני ניווט בעמוד."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "הגדרת הניראות והמיקום של מד התקדמות. הערך \"אוטומטי\" מציג את מד ההתקדמות מעל או מתחת לכותרת הסקר."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "הפעל את דף התצוגה המקדימה עם כל השאלות או שאלות שנענו בלבד."
@@ -2388,3 +2459,72 @@ editorLocalization.locales["he"] = hebrewStrings;
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "כאשר הוא מוגדר ל- 0, הגובה מחושב באופן אוטומטי כדי להתאים לתוכן הכותרת."
 // p.mobileHeight: "Height on smartphones" => "גובה בסמארטפונים"
 // header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "כאשר אפשרות זו מופעלת, החלק העליון של הסקר מכסה את החלק התחתון של הכותרת."
+// ed.creatorSettingTitle: "Creator Settings" => "הגדרות יוצר"
+// tabs.accentColors: "Accent colors" => "צבעי הדגשה"
+// tabs.scaling: "Scaling" => "שינוי גודל"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "מקצה מספרים לשאלות המקוננות בלוח זה."
+// creatortheme.--sjs-special-background: "Surface background" => "רקע פני השטח"
+// creatortheme.--sjs-primary-background-500: "Primary" => "הראשי"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "משני"
+// creatortheme.surfaceScale: "Surface" => "משטח"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "ממשק משתמש"
+// creatortheme.fontScale: "Font" => "גופן"
+// names.sc2020: "Survey Creator 2020" => "יוצר הסקר 2020"
+// names.default-light: "Light" => "אור"
+// names.default-dark: "Dark" => "חשוך"
+// names.default-contrast: "Contrast" => "ניגוד"
+// panel.showNumber: "Number this panel" => "מספר חלונית זו"
+// pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "בחר אם ברצונך שהסקר יתקדם אוטומטית לדף הבא לאחר שהמשיב ענה על כל השאלות בדף הנוכחי. תכונה זו לא תחול אם השאלה האחרונה בדף פתוחה או מאפשרת תשובות מרובות."
+// autocomplete.name: "Full Name" => "שם מלא"
+// autocomplete.honorific-prefix: "Prefix" => "קידומת"
+// autocomplete.given-name: "First Name" => "שם פרטי"
+// autocomplete.additional-name: "Middle Name" => "שם אמצעי"
+// autocomplete.family-name: "Last Name" => "שם משפחה"
+// autocomplete.honorific-suffix: "Suffix" => "סיומת"
+// autocomplete.nickname: "Nickname" => "כינוי"
+// autocomplete.organization-title: "Job Title" => "תפקיד"
+// autocomplete.username: "User Name" => "שם משתמש"
+// autocomplete.new-password: "New Password" => "סיסמה חדשה"
+// autocomplete.current-password: "Current Password" => "סיסמה נוכחית"
+// autocomplete.organization: "Organization Name" => "שם הארגון"
+// autocomplete.street-address: "Full Street Address" => "כתובת הרחוב המלאה"
+// autocomplete.address-line1: "Address Line 1" => "כתובת שורה 1"
+// autocomplete.address-line2: "Address Line 2" => "כתובת שורה 2"
+// autocomplete.address-line3: "Address Line 3" => "כתובת שורה 3"
+// autocomplete.address-level4: "Level 4 Address" => "כתובת ברמה 4"
+// autocomplete.address-level3: "Level 3 Address" => "כתובת ברמה 3"
+// autocomplete.address-level2: "Level 2 Address" => "כתובת ברמה 2"
+// autocomplete.address-level1: "Level 1 Address" => "כתובת ברמה 1"
+// autocomplete.country: "Country Code" => "קוד מדינה"
+// autocomplete.country-name: "Country Name" => "שם מדינה"
+// autocomplete.postal-code: "Postal Code" => "מיקוד"
+// autocomplete.cc-name: "Cardholder Name" => "שם בעל הכרטיס"
+// autocomplete.cc-given-name: "Cardholder First Name" => "שם פרטי של בעל הכרטיס"
+// autocomplete.cc-additional-name: "Cardholder Middle Name" => "שם אמצעי של בעל הכרטיס"
+// autocomplete.cc-family-name: "Cardholder Last Name" => "שם משפחה של בעל הכרטיס"
+// autocomplete.cc-number: "Credit Card Number" => "מספר כרטיס אשראי"
+// autocomplete.cc-exp: "Expiration Date" => "תאריך תפוגה"
+// autocomplete.cc-exp-month: "Expiration Month" => "חודש תפוגה"
+// autocomplete.cc-exp-year: "Expiration Year" => "שנת תפוגה"
+// autocomplete.cc-csc: "Card Security Code" => "קוד אבטחה של כרטיס"
+// autocomplete.cc-type: "Credit Card Type" => "סוג כרטיס אשראי"
+// autocomplete.transaction-currency: "Transaction Currency" => "מטבע עסקה"
+// autocomplete.transaction-amount: "Transaction Amount" => "סכום העסקה"
+// autocomplete.language: "Preferred Language" => "שפה מועדפת"
+// autocomplete.bday: "Birthday" => "יום הולדת"
+// autocomplete.bday-day: "Birthday Day" => "יום הולדת"
+// autocomplete.bday-month: "Birthday Month" => "חודש יום הולדת"
+// autocomplete.bday-year: "Birthday Year" => "שנת יום הולדת"
+// autocomplete.sex: "Gender" => "מין"
+// autocomplete.url: "Website URL" => "כתובת אתר אינטרנט"
+// autocomplete.photo: "Profile Photo" => "תמונת פרופיל"
+// autocomplete.tel: "Telephone Number" => "מספר טלפון"
+// autocomplete.tel-country-code: "Country Code for Phone" => "קידומת מדינה לטלפון"
+// autocomplete.tel-national: "National Telephone Number" => "מספר טלפון ארצי"
+// autocomplete.tel-area-code: "Area Code" => "אזור חיוג"
+// autocomplete.tel-local: "Local Phone Number" => "מספר טלפון מקומי"
+// autocomplete.tel-local-prefix: "Local Phone Prefix" => "קידומת טלפון מקומי"
+// autocomplete.tel-local-suffix: "Local Phone Suffix" => "סיומת טלפון מקומי"
+// autocomplete.tel-extension: "Phone Extension" => "שלוחת טלפון"
+// autocomplete.email: "Email Address" => "כתובת דוא\"ל"
+// autocomplete.impp: "Instant Messaging Protocol" => "פרוטוקול העברת הודעות מיידיות"

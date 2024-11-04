@@ -69,6 +69,7 @@ export var jaStrings = {
     surveySettingsTooltip: "アンケート設定",
     themeSettings: "テーマ設定",
     themeSettingsTooltip: "テーマ設定",
+    creatorSettingTitle: "クリエイター設定",
     showPanel: "パネルを表示する",
     hidePanel: "パネルを非表示にする",
     prevSelected: "前を選択",
@@ -301,7 +302,7 @@ export var jaStrings = {
       width: "インラインパネルの幅",
       minWidth: "最小パネル幅",
       maxWidth: "最大パネル幅",
-      showNumber: "番号パネル"
+      showNumber: "このパネルに番号を付ける"
     },
     paneldynamic: {
       name: "パネル名",
@@ -828,6 +829,8 @@ export var jaStrings = {
       header: "ヘッダ",
       background: "バックグラウンド",
       appearance: "様子",
+      accentColors: "アクセントカラー",
+      scaling: "スケーリング",
       others: "その他"
     },
     editProperty: "プロパティ'{0}'を編集",
@@ -1014,6 +1017,61 @@ export var jaStrings = {
       time: "時間",
       url: "リンク",
       week: "週"
+    },
+    autocomplete: {
+      name: "フルネーム",
+      "honorific-prefix": "接頭辞",
+      "given-name": "名前",
+      "additional-name": "ミドルネーム",
+      "family-name": "名字",
+      "honorific-suffix": "接尾辞",
+      nickname: "ニックネーム",
+      "organization-title": "役職",
+      username: "ユーザー名",
+      "new-password": "新しいパスワード",
+      "current-password": "現在のパスワード",
+      organization: "組織名",
+      "street-address": "フルストリートアドレス",
+      "address-line1": "住所1",
+      "address-line2": "住所2",
+      "address-line3": "住所3",
+      "address-level4": "レベル4アドレス",
+      "address-level3": "レベル3アドレス",
+      "address-level2": "レベル2アドレス",
+      "address-level1": "レベル1アドレス",
+      country: "国コード",
+      "country-name": "国名",
+      "postal-code": "郵便番号",
+      "cc-name": "カード名義人氏名",
+      "cc-given-name": "カード所有者の名",
+      "cc-additional-name": "カード名義人のミドルネーム",
+      "cc-family-name": "カード名義人の姓",
+      "cc-number": "クレジットカード番号",
+      "cc-exp": "有効期限",
+      "cc-exp-month": "有効期限月",
+      "cc-exp-year": "有効期限",
+      "cc-csc": "カードセキュリティコード",
+      "cc-type": "クレジットカードの種類",
+      "transaction-currency": "取引通貨",
+      "transaction-amount": "取引金額",
+      language: "優先言語",
+      bday: "誕生日",
+      "bday-day": "誕生日",
+      "bday-month": "誕生日月",
+      "bday-year": "誕生日の年",
+      sex: "ジェンダー",
+      url: "ウェブサイトURL",
+      photo: "プロフィール写真",
+      tel: "電話番号",
+      "tel-country-code": "電話の国番号",
+      "tel-national": "国内電話番号",
+      "tel-area-code": "市外局番",
+      "tel-local": "市内電話番号",
+      "tel-local-prefix": "ローカル電話プレフィックス",
+      "tel-local-suffix": "ローカル電話サフィックス",
+      "tel-extension": "内線",
+      email: "アドレス",
+      impp: "インスタントメッセージングプロトコル"
     },
     maskType: {
       none: "何一つ",
@@ -1289,7 +1347,8 @@ export var jaStrings = {
       innerIndent: "パネルの内容とパネルボックスの左の境界線の間にスペースまたは余白を追加します。",
       startWithNewLine: "選択を解除すると、前の質問またはパネルと 1 行でパネルが表示されます。パネルがフォームの最初の要素である場合、この設定は適用されません。",
       state: "次から選択します: 「展開」 - パネルは完全に表示され、折りたたむことができます。「折りたたまれた」 - パネルにはタイトルと説明のみが表示され、展開できます。「ロック」 - パネルは完全に表示され、折りたたむことはできません。",
-      width: "パネルの幅を、同じ行内の他の調査要素に比例して設定します。CSS 値 (px、%、in、pt など) を受け入れます。"
+      width: "パネルの幅を、同じ行内の他の調査要素に比例して設定します。CSS 値 (px、%、in、pt など) を受け入れます。",
+      showQuestionNumbers: "このパネル内にネストされた質問に番号を割り当てます。"
     },
     paneldynamic: {
       name: "回答者には表示されないパネルID。",
@@ -1387,7 +1446,7 @@ export var jaStrings = {
     logoWidth: "ロゴの幅をCSS単位(px、%、in、ptなど)で設定します。",
     logoHeight: "ロゴの高さを CSS 単位 (px、%、in、pt など) で設定します。",
     logoFit: "次から選択: 「なし」 - 画像は元のサイズを維持します。\"Contain\" - 画像はアスペクト比を維持しながらサイズ変更されます。「表紙」-画像は縦横比を維持しながらボックス全体を埋めます。\"Fill\" - 画像は、アスペクト比を維持せずにボックスを埋めるように引き伸ばされます。",
-    goNextPageAutomatic: "回答者が現在のページのすべての質問に回答した後、アンケートを自動的に次のページに進めるかどうかを選択します。",
+    goNextPageAutomatic: "回答者が現在のページのすべての質問に答えると、アンケートが自動的に次のページに進むようにする場合に選択します。この機能は、ページの最後の質問が自由回答形式の場合、または複数の回答が許可されている場合には適用されません。",
     allowCompleteSurveyAutomatic: "回答者がすべての質問に回答した後にアンケートを自動的に完了する場合に選択します。",
     showNavigationButtons: "ページ上のナビゲーションボタンの表示と位置を設定します。",
     showProgressBar: "プログレスバーの表示と位置を設定します。「自動」の値は、アンケートヘッダーの上または下に進行状況バーを表示します。",
@@ -1694,6 +1753,20 @@ export var jaStrings = {
       tulip: "チューリップ",
       brown: "褐色",
       green: "緑"
+    }
+  },
+  creatortheme: {
+    "--sjs-special-background": "サーフェスの背景",
+    "--sjs-primary-background-500": "原発",
+    "--sjs-secondary-background-500": "付帯",
+    surfaceScale: "表面",
+    userInterfaceBaseUnit: "ユーザーインターフェース",
+    fontScale: "フォント",
+    names: {
+      sc2020: "サーベイクリエーター2020",
+      "default-light": "光",
+      "default-dark": "暗い",
+      "default-contrast": "対照"
     }
   }
 };
@@ -2308,7 +2381,6 @@ editorLocalization.locales["ja"] = jaStrings;
 // panel.width: "Inline panel width" => "インラインパネルの幅"
 // panel.minWidth: "Minimum panel width" => "最小パネル幅"
 // panel.maxWidth: "Maximum panel width" => "最大パネル幅"
-// panel.showNumber: "Number panels" => "番号パネル"
 // paneldynamic.name: "Panel name" => "パネル名"
 // paneldynamic.title: "Panel title" => "パネルタイトル"
 // paneldynamic.description: "Panel description" => "パネルの説明"
@@ -2524,7 +2596,6 @@ editorLocalization.locales["ja"] = jaStrings;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "ロゴの幅をCSS単位(px、%、in、ptなど)で設定します。"
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "ロゴの高さを CSS 単位 (px、%、in、pt など) で設定します。"
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "次から選択: 「なし」 - 画像は元のサイズを維持します。\"Contain\" - 画像はアスペクト比を維持しながらサイズ変更されます。「表紙」-画像は縦横比を維持しながらボックス全体を埋めます。\"Fill\" - 画像は、アスペクト比を維持せずにボックスを埋めるように引き伸ばされます。"
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "回答者が現在のページのすべての質問に回答した後、アンケートを自動的に次のページに進めるかどうかを選択します。"
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "ページ上のナビゲーションボタンの表示と位置を設定します。"
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "プログレスバーの表示と位置を設定します。「自動」の値は、アンケートヘッダーの上または下に進行状況バーを表示します。"
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "すべての質問または回答済みの質問のみを含むプレビューページを有効にします。"
@@ -2819,3 +2890,72 @@ editorLocalization.locales["ja"] = jaStrings;
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "0 に設定すると、ヘッダーのコンテンツに合わせて高さが自動的に計算されます。"
 // p.mobileHeight: "Height on smartphones" => "スマートフォンでの高さ"
 // header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "有効にすると、調査の上部がヘッダーの下部に重なります。"
+// ed.creatorSettingTitle: "Creator Settings" => "クリエイター設定"
+// tabs.accentColors: "Accent colors" => "アクセントカラー"
+// tabs.scaling: "Scaling" => "スケーリング"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "このパネル内にネストされた質問に番号を割り当てます。"
+// creatortheme.--sjs-special-background: "Surface background" => "サーフェスの背景"
+// creatortheme.--sjs-primary-background-500: "Primary" => "原発"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "付帯"
+// creatortheme.surfaceScale: "Surface" => "表面"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "ユーザーインターフェース"
+// creatortheme.fontScale: "Font" => "フォント"
+// names.sc2020: "Survey Creator 2020" => "サーベイクリエーター2020"
+// names.default-light: "Light" => "光"
+// names.default-dark: "Dark" => "暗い"
+// names.default-contrast: "Contrast" => "対照"
+// panel.showNumber: "Number this panel" => "このパネルに番号を付ける"
+// pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "回答者が現在のページのすべての質問に答えると、アンケートが自動的に次のページに進むようにする場合に選択します。この機能は、ページの最後の質問が自由回答形式の場合、または複数の回答が許可されている場合には適用されません。"
+// autocomplete.name: "Full Name" => "フルネーム"
+// autocomplete.honorific-prefix: "Prefix" => "接頭辞"
+// autocomplete.given-name: "First Name" => "名前"
+// autocomplete.additional-name: "Middle Name" => "ミドルネーム"
+// autocomplete.family-name: "Last Name" => "名字"
+// autocomplete.honorific-suffix: "Suffix" => "接尾辞"
+// autocomplete.nickname: "Nickname" => "ニックネーム"
+// autocomplete.organization-title: "Job Title" => "役職"
+// autocomplete.username: "User Name" => "ユーザー名"
+// autocomplete.new-password: "New Password" => "新しいパスワード"
+// autocomplete.current-password: "Current Password" => "現在のパスワード"
+// autocomplete.organization: "Organization Name" => "組織名"
+// autocomplete.street-address: "Full Street Address" => "フルストリートアドレス"
+// autocomplete.address-line1: "Address Line 1" => "住所1"
+// autocomplete.address-line2: "Address Line 2" => "住所2"
+// autocomplete.address-line3: "Address Line 3" => "住所3"
+// autocomplete.address-level4: "Level 4 Address" => "レベル4アドレス"
+// autocomplete.address-level3: "Level 3 Address" => "レベル3アドレス"
+// autocomplete.address-level2: "Level 2 Address" => "レベル2アドレス"
+// autocomplete.address-level1: "Level 1 Address" => "レベル1アドレス"
+// autocomplete.country: "Country Code" => "国コード"
+// autocomplete.country-name: "Country Name" => "国名"
+// autocomplete.postal-code: "Postal Code" => "郵便番号"
+// autocomplete.cc-name: "Cardholder Name" => "カード名義人氏名"
+// autocomplete.cc-given-name: "Cardholder First Name" => "カード所有者の名"
+// autocomplete.cc-additional-name: "Cardholder Middle Name" => "カード名義人のミドルネーム"
+// autocomplete.cc-family-name: "Cardholder Last Name" => "カード名義人の姓"
+// autocomplete.cc-number: "Credit Card Number" => "クレジットカード番号"
+// autocomplete.cc-exp: "Expiration Date" => "有効期限"
+// autocomplete.cc-exp-month: "Expiration Month" => "有効期限月"
+// autocomplete.cc-exp-year: "Expiration Year" => "有効期限"
+// autocomplete.cc-csc: "Card Security Code" => "カードセキュリティコード"
+// autocomplete.cc-type: "Credit Card Type" => "クレジットカードの種類"
+// autocomplete.transaction-currency: "Transaction Currency" => "取引通貨"
+// autocomplete.transaction-amount: "Transaction Amount" => "取引金額"
+// autocomplete.language: "Preferred Language" => "優先言語"
+// autocomplete.bday: "Birthday" => "誕生日"
+// autocomplete.bday-day: "Birthday Day" => "誕生日"
+// autocomplete.bday-month: "Birthday Month" => "誕生日月"
+// autocomplete.bday-year: "Birthday Year" => "誕生日の年"
+// autocomplete.sex: "Gender" => "ジェンダー"
+// autocomplete.url: "Website URL" => "ウェブサイトURL"
+// autocomplete.photo: "Profile Photo" => "プロフィール写真"
+// autocomplete.tel: "Telephone Number" => "電話番号"
+// autocomplete.tel-country-code: "Country Code for Phone" => "電話の国番号"
+// autocomplete.tel-national: "National Telephone Number" => "国内電話番号"
+// autocomplete.tel-area-code: "Area Code" => "市外局番"
+// autocomplete.tel-local: "Local Phone Number" => "市内電話番号"
+// autocomplete.tel-local-prefix: "Local Phone Prefix" => "ローカル電話プレフィックス"
+// autocomplete.tel-local-suffix: "Local Phone Suffix" => "ローカル電話サフィックス"
+// autocomplete.tel-extension: "Phone Extension" => "内線"
+// autocomplete.email: "Email Address" => "アドレス"
+// autocomplete.impp: "Instant Messaging Protocol" => "インスタントメッセージングプロトコル"

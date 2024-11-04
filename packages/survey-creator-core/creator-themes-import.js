@@ -21,17 +21,10 @@ var themeConstants = {
     "--ctr-toolbox-scrollbar-left": "auto",
     "--ctr-toolbox-scrollbar-right": "0",
     "--ctr-toolbox-scroller-align-items": "flex-start",
-    "--ctr-toolbox-item-submenu-button-right": "8px",
-    "--ctr-toolbox-item-submenu-button-top": "12px",
     "--ctr-toolbox-item-align": "stretch",
-    "--ctr-toolbox-submenu-offset": "20px",
-    "--ctr-toolbox-width-compact": "72px",
     "--ctr-toolbox-margin-left-compact": "0px",
-    "--ctr-toolbox-separator-width": "208px",
-    "--ctr-toolbox-separator-width-compact": "40px",
     "--ctr-toolbox-item-banner-icon-display": "none",
     "--ctr-toolbox-item-banner-beak-display": "block",
-    "--ctr-toolbox-item-banner-left": "64px",
     "--ctr-toolbox-submenu-item-min-width": "calc(17 * 8px)",
   }
 };
@@ -125,7 +118,9 @@ Object.keys(themeNameMap).forEach(themeName => {
     const distinctions = themeConstants[themeNameMap[themeName]] || {};
     Object.keys(curThemeCssVariables || {}).forEach(variableKey => {
       const variableValue = curThemeCssVariables[variableKey];
-      if(variableValue !== baseThemeCssVariable[variableKey] || usedCssVariablesList.indexOf(variableKey) !== -1) {
+      if(variableKey.indexOf("--ctr-shadow-") > -1 || variableKey.indexOf("--lbr-shadow-") > -1 || variableKey.indexOf("-unit") > -1) {
+        distinctions[variableKey] = variableValue;
+      } else if(variableValue !== baseThemeCssVariable[variableKey] || usedCssVariablesList.indexOf(variableKey) !== -1) {
         distinctions[variableKey] = getCorrectValue(variableKey, variableValue);
       }
     });

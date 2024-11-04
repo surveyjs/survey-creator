@@ -69,6 +69,7 @@ export var nbStrings = {
     surveySettingsTooltip: "Innstillinger for undersøkelse",
     themeSettings: "Tema innstillinger",
     themeSettingsTooltip: "Temainnstillinger",
+    creatorSettingTitle: "Innstillinger for skapere",
     showPanel: "Vis panel",
     hidePanel: "Skjul panel",
     prevSelected: "Velg forrige",
@@ -301,7 +302,7 @@ export var nbStrings = {
       width: "Innebygd panelbredde",
       minWidth: "Minimum panelbredde",
       maxWidth: "Maksimal panelbredde",
-      showNumber: "Nummerpaneler"
+      showNumber: "Nummerer dette panelet"
     },
     paneldynamic: {
       name: "Navn på panel",
@@ -828,6 +829,8 @@ export var nbStrings = {
       header: "Topptekst",
       background: "Bakgrunn",
       appearance: "Utseende",
+      accentColors: "Aksentfarger",
+      scaling: "Skalering",
       others: "Andre"
     },
     editProperty: "Rediger verdi '{0}'",
@@ -1014,6 +1017,61 @@ export var nbStrings = {
       time: "Tid",
       url: "URL",
       week: "Uke"
+    },
+    autocomplete: {
+      name: "Fullt navn",
+      "honorific-prefix": "Prefiks",
+      "given-name": "Fornavn",
+      "additional-name": "Mellomnavn",
+      "family-name": "Etternavn",
+      "honorific-suffix": "Endelse",
+      nickname: "Kallenavn",
+      "organization-title": "Stillingstittel",
+      username: "Brukernavn",
+      "new-password": "Nytt passord",
+      "current-password": "Nåværende passord",
+      organization: "Organisasjonens navn",
+      "street-address": "Full gateadresse",
+      "address-line1": "Adresselinje 1",
+      "address-line2": "Adresselinje 2",
+      "address-line3": "Adresselinje 3",
+      "address-level4": "Adresse på nivå 4",
+      "address-level3": "Nivå 3-adresse",
+      "address-level2": "Nivå 2-adresse",
+      "address-level1": "Adresse på nivå 1",
+      country: "Landkode",
+      "country-name": "Navn på land",
+      "postal-code": "Postnummer",
+      "cc-name": "Kortinnehaverens navn",
+      "cc-given-name": "Kortinnehaverens fornavn",
+      "cc-additional-name": "Kortinnehaverens mellomnavn",
+      "cc-family-name": "Kortinnehaverens etternavn",
+      "cc-number": "Kredittkortnummer",
+      "cc-exp": "Utløpsdato",
+      "cc-exp-month": "Utløpsmåned",
+      "cc-exp-year": "Utløpsår",
+      "cc-csc": "Sikkerhetskode for kort",
+      "cc-type": "Type kredittkort",
+      "transaction-currency": "Transaksjonens valuta",
+      "transaction-amount": "Transaksjonsbeløp",
+      language: "Foretrukket språk",
+      bday: "Fødselsdag",
+      "bday-day": "Bursdag",
+      "bday-month": "Bursdag måned",
+      "bday-year": "Bursdag år",
+      sex: "Kjønn",
+      url: "URL-adresse til nettsted",
+      photo: "Profilbilde",
+      tel: "Telefonnummer",
+      "tel-country-code": "Landskode for telefon",
+      "tel-national": "Nasjonalt telefonnummer",
+      "tel-area-code": "Retningsnummer",
+      "tel-local": "Lokalt telefonnummer",
+      "tel-local-prefix": "Lokalt telefonprefiks",
+      "tel-local-suffix": "Lokalt telefonsuffiks",
+      "tel-extension": "Utvidelse av telefon",
+      email: "E-postadresse",
+      impp: "Protokoll for direktemeldinger"
     },
     maskType: {
       none: "Ingen",
@@ -1289,7 +1347,8 @@ export var nbStrings = {
       innerIndent: "Legger til mellomrom eller marg mellom panelinnholdet og venstre kant på panelboksen.",
       startWithNewLine: "Fjern merket for å vise panelet på én linje med forrige spørsmål eller panel. Innstillingen gjelder ikke hvis panelet er det første elementet i skjemaet.",
       state: "Velg mellom: \"Utvidet\" - panelet vises i sin helhet og kan skjules; \"Kollapset\" - panelet viser bare tittelen og beskrivelsen og kan utvides; \"Låst\" - panelet vises i sin helhet og kan ikke skjules.",
-      width: "Angir bredden på panelet i forhold til andre undersøkelseselementer på samme linje. Godtar CSS-verdier (px, %, i, pt osv.)."
+      width: "Angir bredden på panelet i forhold til andre undersøkelseselementer på samme linje. Godtar CSS-verdier (px, %, i, pt osv.).",
+      showQuestionNumbers: "Tildeler numre til spørsmål som er nestet i dette panelet."
     },
     paneldynamic: {
       name: "En panel-ID som ikke er synlig for respondentene.",
@@ -1387,7 +1446,7 @@ export var nbStrings = {
     logoWidth: "Setter en logo bredde i CSS enheter (px, %, i, pt, etc.).",
     logoHeight: "Angir en logo høyde i CSS enheter (px, %, i, pt, etc.).",
     logoFit: "Velg mellom: \"Ingen\" - bildet opprettholder sin opprinnelige størrelse; \"Innehold\" - bildet endres for å passe samtidig som størrelsesforholdet opprettholdes; \"Cover\" - bildet fyller hele boksen mens du opprettholder størrelsesforholdet; \"Fyll\" - bildet strekkes for å fylle boksen uten å opprettholde størrelsesforholdet.",
-    goNextPageAutomatic: "Velg om du vil at evalueringen skal gå automatisk til neste side etter at en svarperson har svart på alle spørsmålene på gjeldende side.",
+    goNextPageAutomatic: "Velg om du vil at evalueringen automatisk skal gå videre til neste side når en respondent har svart på alle spørsmålene på gjeldende side. Denne funksjonen gjelder ikke hvis det siste spørsmålet på siden er åpent eller tillater flere svar.",
     allowCompleteSurveyAutomatic: "Velg om du vil at evalueringen skal fullføres automatisk etter at en svarperson har svart på alle spørsmålene.",
     showNavigationButtons: "Angir synligheten og plasseringen av navigasjonsknapper på en side.",
     showProgressBar: "Angir synligheten og plasseringen til en fremdriftsindikator. \"Auto\"-verdien viser fremdriftslinjen over eller under undersøkelseshodet.",
@@ -1694,6 +1753,20 @@ export var nbStrings = {
       tulip: "Tulipan",
       brown: "Brun",
       green: "Grønn"
+    }
+  },
+  creatortheme: {
+    "--sjs-special-background": "Overflate bakgrunn",
+    "--sjs-primary-background-500": "Primær",
+    "--sjs-secondary-background-500": "Sekundær",
+    surfaceScale: "Flate",
+    userInterfaceBaseUnit: "Brukergrensesnitt",
+    fontScale: "Font",
+    names: {
+      sc2020: "Skaperen av spørreundersøkelsen 2020",
+      "default-light": "Lys",
+      "default-dark": "Mørk",
+      "default-contrast": "Kontrast"
     }
   }
 };
@@ -2312,7 +2385,6 @@ editorLocalization.locales["nb"] = nbStrings;
 // panel.width: "Inline panel width" => "Innebygd panelbredde"
 // panel.minWidth: "Minimum panel width" => "Minimum panelbredde"
 // panel.maxWidth: "Maximum panel width" => "Maksimal panelbredde"
-// panel.showNumber: "Number panels" => "Nummerpaneler"
 // paneldynamic.name: "Panel name" => "Navn på panel"
 // paneldynamic.title: "Panel title" => "Panelets tittel"
 // paneldynamic.description: "Panel description" => "Beskrivelse av panelet"
@@ -2528,7 +2600,6 @@ editorLocalization.locales["nb"] = nbStrings;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "Setter en logo bredde i CSS enheter (px, %, i, pt, etc.)."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "Angir en logo høyde i CSS enheter (px, %, i, pt, etc.)."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Velg mellom: \"Ingen\" - bildet opprettholder sin opprinnelige størrelse; \"Innehold\" - bildet endres for å passe samtidig som størrelsesforholdet opprettholdes; \"Cover\" - bildet fyller hele boksen mens du opprettholder størrelsesforholdet; \"Fyll\" - bildet strekkes for å fylle boksen uten å opprettholde størrelsesforholdet."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "Velg om du vil at evalueringen skal gå automatisk til neste side etter at en svarperson har svart på alle spørsmålene på gjeldende side."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "Angir synligheten og plasseringen av navigasjonsknapper på en side."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Angir synligheten og plasseringen til en fremdriftsindikator. \"Auto\"-verdien viser fremdriftslinjen over eller under undersøkelseshodet."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "Aktiver forhåndsvisningssiden med alle eller besvarte spørsmål."
@@ -2823,3 +2894,72 @@ editorLocalization.locales["nb"] = nbStrings;
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Når den er satt til 0, beregnes høyden automatisk for å få plass til overskriftens innhold."
 // p.mobileHeight: "Height on smartphones" => "Høyde på smarttelefoner"
 // header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Når den er aktivert, overlapper toppen av evalueringen bunnen av overskriften."
+// ed.creatorSettingTitle: "Creator Settings" => "Innstillinger for skapere"
+// tabs.accentColors: "Accent colors" => "Aksentfarger"
+// tabs.scaling: "Scaling" => "Skalering"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "Tildeler numre til spørsmål som er nestet i dette panelet."
+// creatortheme.--sjs-special-background: "Surface background" => "Overflate bakgrunn"
+// creatortheme.--sjs-primary-background-500: "Primary" => "Primær"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "Sekundær"
+// creatortheme.surfaceScale: "Surface" => "Flate"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "Brukergrensesnitt"
+// creatortheme.fontScale: "Font" => "Font"
+// names.sc2020: "Survey Creator 2020" => "Skaperen av spørreundersøkelsen 2020"
+// names.default-light: "Light" => "Lys"
+// names.default-dark: "Dark" => "Mørk"
+// names.default-contrast: "Contrast" => "Kontrast"
+// panel.showNumber: "Number this panel" => "Nummerer dette panelet"
+// pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Velg om du vil at evalueringen automatisk skal gå videre til neste side når en respondent har svart på alle spørsmålene på gjeldende side. Denne funksjonen gjelder ikke hvis det siste spørsmålet på siden er åpent eller tillater flere svar."
+// autocomplete.name: "Full Name" => "Fullt navn"
+// autocomplete.honorific-prefix: "Prefix" => "Prefiks"
+// autocomplete.given-name: "First Name" => "Fornavn"
+// autocomplete.additional-name: "Middle Name" => "Mellomnavn"
+// autocomplete.family-name: "Last Name" => "Etternavn"
+// autocomplete.honorific-suffix: "Suffix" => "Endelse"
+// autocomplete.nickname: "Nickname" => "Kallenavn"
+// autocomplete.organization-title: "Job Title" => "Stillingstittel"
+// autocomplete.username: "User Name" => "Brukernavn"
+// autocomplete.new-password: "New Password" => "Nytt passord"
+// autocomplete.current-password: "Current Password" => "Nåværende passord"
+// autocomplete.organization: "Organization Name" => "Organisasjonens navn"
+// autocomplete.street-address: "Full Street Address" => "Full gateadresse"
+// autocomplete.address-line1: "Address Line 1" => "Adresselinje 1"
+// autocomplete.address-line2: "Address Line 2" => "Adresselinje 2"
+// autocomplete.address-line3: "Address Line 3" => "Adresselinje 3"
+// autocomplete.address-level4: "Level 4 Address" => "Adresse på nivå 4"
+// autocomplete.address-level3: "Level 3 Address" => "Nivå 3-adresse"
+// autocomplete.address-level2: "Level 2 Address" => "Nivå 2-adresse"
+// autocomplete.address-level1: "Level 1 Address" => "Adresse på nivå 1"
+// autocomplete.country: "Country Code" => "Landkode"
+// autocomplete.country-name: "Country Name" => "Navn på land"
+// autocomplete.postal-code: "Postal Code" => "Postnummer"
+// autocomplete.cc-name: "Cardholder Name" => "Kortinnehaverens navn"
+// autocomplete.cc-given-name: "Cardholder First Name" => "Kortinnehaverens fornavn"
+// autocomplete.cc-additional-name: "Cardholder Middle Name" => "Kortinnehaverens mellomnavn"
+// autocomplete.cc-family-name: "Cardholder Last Name" => "Kortinnehaverens etternavn"
+// autocomplete.cc-number: "Credit Card Number" => "Kredittkortnummer"
+// autocomplete.cc-exp: "Expiration Date" => "Utløpsdato"
+// autocomplete.cc-exp-month: "Expiration Month" => "Utløpsmåned"
+// autocomplete.cc-exp-year: "Expiration Year" => "Utløpsår"
+// autocomplete.cc-csc: "Card Security Code" => "Sikkerhetskode for kort"
+// autocomplete.cc-type: "Credit Card Type" => "Type kredittkort"
+// autocomplete.transaction-currency: "Transaction Currency" => "Transaksjonens valuta"
+// autocomplete.transaction-amount: "Transaction Amount" => "Transaksjonsbeløp"
+// autocomplete.language: "Preferred Language" => "Foretrukket språk"
+// autocomplete.bday: "Birthday" => "Fødselsdag"
+// autocomplete.bday-day: "Birthday Day" => "Bursdag"
+// autocomplete.bday-month: "Birthday Month" => "Bursdag måned"
+// autocomplete.bday-year: "Birthday Year" => "Bursdag år"
+// autocomplete.sex: "Gender" => "Kjønn"
+// autocomplete.url: "Website URL" => "URL-adresse til nettsted"
+// autocomplete.photo: "Profile Photo" => "Profilbilde"
+// autocomplete.tel: "Telephone Number" => "Telefonnummer"
+// autocomplete.tel-country-code: "Country Code for Phone" => "Landskode for telefon"
+// autocomplete.tel-national: "National Telephone Number" => "Nasjonalt telefonnummer"
+// autocomplete.tel-area-code: "Area Code" => "Retningsnummer"
+// autocomplete.tel-local: "Local Phone Number" => "Lokalt telefonnummer"
+// autocomplete.tel-local-prefix: "Local Phone Prefix" => "Lokalt telefonprefiks"
+// autocomplete.tel-local-suffix: "Local Phone Suffix" => "Lokalt telefonsuffiks"
+// autocomplete.tel-extension: "Phone Extension" => "Utvidelse av telefon"
+// autocomplete.email: "Email Address" => "E-postadresse"
+// autocomplete.impp: "Instant Messaging Protocol" => "Protokoll for direktemeldinger"

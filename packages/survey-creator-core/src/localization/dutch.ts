@@ -69,6 +69,7 @@ export var nlStrings = {
     surveySettingsTooltip: "Enquête instellingen",
     themeSettings: "Thema-instellingen",
     themeSettingsTooltip: "Thema-instellingen",
+    creatorSettingTitle: "Creator-instellingen",
     showPanel: "Toon paneel",
     hidePanel: "Verberg paneel",
     prevSelected: "Selecteer vorige",
@@ -301,7 +302,7 @@ export var nlStrings = {
       width: "Inline paneelbreedte",
       minWidth: "Minimale paneelbreedte",
       maxWidth: "Maximale paneelbreedte",
-      showNumber: "Nummerpanelen"
+      showNumber: "Nummer dit paneel"
     },
     paneldynamic: {
       name: "Naam van het paneel",
@@ -828,6 +829,8 @@ export var nlStrings = {
       header: "Rubriek",
       background: "Achtergrond",
       appearance: "Uiterlijk",
+      accentColors: "Accent kleuren",
+      scaling: "Schalen",
       others: "Anderen"
     },
     editProperty: "Eigenschap '{0}' bewerken",
@@ -1014,6 +1017,61 @@ export var nlStrings = {
       time: "Tijd",
       url: "Url",
       week: "Week"
+    },
+    autocomplete: {
+      name: "Voor- en achternaam",
+      "honorific-prefix": "Voorvoegsel",
+      "given-name": "Voornaam",
+      "additional-name": "Middelste naam",
+      "family-name": "Achternaam",
+      "honorific-suffix": "Achtervoegsel",
+      nickname: "Bijnaam",
+      "organization-title": "Functietitel",
+      username: "Gebruikersnaam",
+      "new-password": "Nieuw wachtwoord",
+      "current-password": "Huidig wachtwoord",
+      organization: "Naam van de organisatie",
+      "street-address": "Volledig adres",
+      "address-line1": "Adres Regel 1",
+      "address-line2": "Adres Regel 2",
+      "address-line3": "Adres Regel 3",
+      "address-level4": "Niveau 4 Adres",
+      "address-level3": "Niveau 3 Adres",
+      "address-level2": "Niveau 2 Adres",
+      "address-level1": "Niveau 1 Adres",
+      country: "Landcode",
+      "country-name": "Naam van het land",
+      "postal-code": "Postcode",
+      "cc-name": "Naam kaarthouder",
+      "cc-given-name": "Voornaam kaarthouder",
+      "cc-additional-name": "Middelste naam kaarthouder",
+      "cc-family-name": "Achternaam kaarthouder",
+      "cc-number": "Creditcardnummer",
+      "cc-exp": "Vervaldatum",
+      "cc-exp-month": "Vervaldatum maand",
+      "cc-exp-year": "Vervaldatum jaar",
+      "cc-csc": "Beveiligingscode van de kaart",
+      "cc-type": "Type creditcard",
+      "transaction-currency": "Valuta van de transactie",
+      "transaction-amount": "Transactiebedrag",
+      language: "Voorkeurstaal",
+      bday: "Verjaardag",
+      "bday-day": "Verjaardag Dag",
+      "bday-month": "Verjaardag Maand",
+      "bday-year": "Verjaardag Jaar",
+      sex: "Geslacht",
+      url: "Website URL",
+      photo: "Profielfoto",
+      tel: "Telefoonnummer",
+      "tel-country-code": "Landcode voor telefoon",
+      "tel-national": "Nationaal telefoonnummer",
+      "tel-area-code": "Netnummer",
+      "tel-local": "Lokaal telefoonnummer",
+      "tel-local-prefix": "Lokaal telefoonvoorvoegsel",
+      "tel-local-suffix": "Lokaal telefoonnummer achtervoegsel",
+      "tel-extension": "Telefoon extensie",
+      email: "E-mailadres",
+      impp: "Instant Messaging Protocol"
     },
     maskType: {
       none: "Geen",
@@ -1289,7 +1347,8 @@ export var nlStrings = {
       innerIndent: "Hiermee voegt u ruimte of marge toe tussen de inhoud van het deelvenster en de linkerrand van het deelvenstervak.",
       startWithNewLine: "Schakel de optie uit om het deelvenster op één regel weer te geven met de vorige vraag of het vorige deelvenster. De instelling is niet van toepassing als het deelvenster het eerste element in uw formulier is.",
       state: "Kies uit: \"Uitgevouwen\" - het paneel wordt volledig weergegeven en kan worden ingeklapt; \"Samengevouwen\" - het paneel toont alleen de titel en beschrijving en kan worden uitgevouwen; \"Vergrendeld\" - het paneel wordt volledig weergegeven en kan niet worden ingeklapt.",
-      width: "Hiermee stelt u de breedte van het paneel in verhouding tot andere enquête-elementen in dezelfde lijn. Accepteert CSS-waarden (px, %, in, pt, enz.)."
+      width: "Hiermee stelt u de breedte van het paneel in verhouding tot andere enquête-elementen in dezelfde lijn. Accepteert CSS-waarden (px, %, in, pt, enz.).",
+      showQuestionNumbers: "Wijst nummers toe aan vragen die in dit deelvenster zijn genest."
     },
     paneldynamic: {
       name: "Een panel-ID die niet zichtbaar is voor respondenten.",
@@ -1387,7 +1446,7 @@ export var nlStrings = {
     logoWidth: "Hiermee stelt u de breedte van het logo in CSS-eenheden in (px, %, in, pt, enz.).",
     logoHeight: "Hiermee stelt u de hoogte van een logo in CSS-eenheden in (px, %, in, pt, enz.).",
     logoFit: "Kies uit: \"Geen\" - afbeelding behoudt zijn oorspronkelijke grootte; \"Bevatten\" - het formaat van de afbeelding wordt aangepast aan de beeldverhouding met behoud van de beeldverhouding; \"Omslag\" - afbeelding vult het hele vak met behoud van de beeldverhouding; \"Vullen\" - de afbeelding wordt uitgerekt om het vak te vullen zonder de beeldverhouding te behouden.",
-    goNextPageAutomatic: "Selecteer of u wilt dat de enquête automatisch naar de volgende pagina wordt verplaatst nadat een respondent alle vragen op de huidige pagina heeft beantwoord.",
+    goNextPageAutomatic: "Selecteer of u wilt dat de enquête automatisch naar de volgende pagina gaat zodra een respondent alle vragen op de huidige pagina heeft beantwoord. Deze functie is niet van toepassing als de laatste vraag op de pagina een open einde heeft of meerdere antwoorden toestaat.",
     allowCompleteSurveyAutomatic: "Selecteer of u wilt dat de enquête automatisch wordt ingevuld nadat een respondent alle vragen heeft beantwoord.",
     showNavigationButtons: "Hiermee stelt u de zichtbaarheid en locatie van navigatieknoppen op een pagina in.",
     showProgressBar: "Hiermee stelt u de zichtbaarheid en locatie van een voortgangsbalk in. De waarde \"Auto\" geeft de voortgangsbalk boven of onder de kop van de enquête weer.",
@@ -1694,6 +1753,20 @@ export var nlStrings = {
       tulip: "Tulp",
       brown: "Bruin",
       green: "Groen"
+    }
+  },
+  creatortheme: {
+    "--sjs-special-background": "Oppervlakte achtergrond",
+    "--sjs-primary-background-500": "Primair",
+    "--sjs-secondary-background-500": "Secundair",
+    surfaceScale: "Oppervlak",
+    userInterfaceBaseUnit: "Gebruikersinterface",
+    fontScale: "Lettertype",
+    names: {
+      sc2020: "Enquête maken 2020",
+      "default-light": "Licht",
+      "default-dark": "Donker",
+      "default-contrast": "Tegenstelling"
     }
   }
 };
@@ -2289,7 +2362,6 @@ editorLocalization.locales["nl"] = nlStrings;
 // panel.width: "Inline panel width" => "Inline paneelbreedte"
 // panel.minWidth: "Minimum panel width" => "Minimale paneelbreedte"
 // panel.maxWidth: "Maximum panel width" => "Maximale paneelbreedte"
-// panel.showNumber: "Number panels" => "Nummerpanelen"
 // paneldynamic.name: "Panel name" => "Naam van het paneel"
 // paneldynamic.title: "Panel title" => "Titel van het paneel"
 // paneldynamic.description: "Panel description" => "Beschrijving van het paneel"
@@ -2505,7 +2577,6 @@ editorLocalization.locales["nl"] = nlStrings;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "Hiermee stelt u de breedte van het logo in CSS-eenheden in (px, %, in, pt, enz.)."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "Hiermee stelt u de hoogte van een logo in CSS-eenheden in (px, %, in, pt, enz.)."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Kies uit: \"Geen\" - afbeelding behoudt zijn oorspronkelijke grootte; \"Bevatten\" - het formaat van de afbeelding wordt aangepast aan de beeldverhouding met behoud van de beeldverhouding; \"Omslag\" - afbeelding vult het hele vak met behoud van de beeldverhouding; \"Vullen\" - de afbeelding wordt uitgerekt om het vak te vullen zonder de beeldverhouding te behouden."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "Selecteer of u wilt dat de enquête automatisch naar de volgende pagina wordt verplaatst nadat een respondent alle vragen op de huidige pagina heeft beantwoord."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "Hiermee stelt u de zichtbaarheid en locatie van navigatieknoppen op een pagina in."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Hiermee stelt u de zichtbaarheid en locatie van een voortgangsbalk in. De waarde \"Auto\" geeft de voortgangsbalk boven of onder de kop van de enquête weer."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "Schakel de voorbeeldpagina in met alleen alle of beantwoorde vragen."
@@ -2801,3 +2872,72 @@ editorLocalization.locales["nl"] = nlStrings;
 // header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Als deze optie is ingesteld op 0, wordt de hoogte automatisch berekend om de inhoud van de koptekst te accommoderen."
 // p.mobileHeight: "Height on smartphones" => "Hoogte op smartphones"
 // header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Als deze optie is ingeschakeld, overlapt de bovenkant van de enquête de onderkant van de koptekst."
+// ed.creatorSettingTitle: "Creator Settings" => "Creator-instellingen"
+// tabs.accentColors: "Accent colors" => "Accent kleuren"
+// tabs.scaling: "Scaling" => "Schalen"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "Wijst nummers toe aan vragen die in dit deelvenster zijn genest."
+// creatortheme.--sjs-special-background: "Surface background" => "Oppervlakte achtergrond"
+// creatortheme.--sjs-primary-background-500: "Primary" => "Primair"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "Secundair"
+// creatortheme.surfaceScale: "Surface" => "Oppervlak"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "Gebruikersinterface"
+// creatortheme.fontScale: "Font" => "Lettertype"
+// names.sc2020: "Survey Creator 2020" => "Enquête maken 2020"
+// names.default-light: "Light" => "Licht"
+// names.default-dark: "Dark" => "Donker"
+// names.default-contrast: "Contrast" => "Tegenstelling"
+// panel.showNumber: "Number this panel" => "Nummer dit paneel"
+// pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Selecteer of u wilt dat de enquête automatisch naar de volgende pagina gaat zodra een respondent alle vragen op de huidige pagina heeft beantwoord. Deze functie is niet van toepassing als de laatste vraag op de pagina een open einde heeft of meerdere antwoorden toestaat."
+// autocomplete.name: "Full Name" => "Voor- en achternaam"
+// autocomplete.honorific-prefix: "Prefix" => "Voorvoegsel"
+// autocomplete.given-name: "First Name" => "Voornaam"
+// autocomplete.additional-name: "Middle Name" => "Middelste naam"
+// autocomplete.family-name: "Last Name" => "Achternaam"
+// autocomplete.honorific-suffix: "Suffix" => "Achtervoegsel"
+// autocomplete.nickname: "Nickname" => "Bijnaam"
+// autocomplete.organization-title: "Job Title" => "Functietitel"
+// autocomplete.username: "User Name" => "Gebruikersnaam"
+// autocomplete.new-password: "New Password" => "Nieuw wachtwoord"
+// autocomplete.current-password: "Current Password" => "Huidig wachtwoord"
+// autocomplete.organization: "Organization Name" => "Naam van de organisatie"
+// autocomplete.street-address: "Full Street Address" => "Volledig adres"
+// autocomplete.address-line1: "Address Line 1" => "Adres Regel 1"
+// autocomplete.address-line2: "Address Line 2" => "Adres Regel 2"
+// autocomplete.address-line3: "Address Line 3" => "Adres Regel 3"
+// autocomplete.address-level4: "Level 4 Address" => "Niveau 4 Adres"
+// autocomplete.address-level3: "Level 3 Address" => "Niveau 3 Adres"
+// autocomplete.address-level2: "Level 2 Address" => "Niveau 2 Adres"
+// autocomplete.address-level1: "Level 1 Address" => "Niveau 1 Adres"
+// autocomplete.country: "Country Code" => "Landcode"
+// autocomplete.country-name: "Country Name" => "Naam van het land"
+// autocomplete.postal-code: "Postal Code" => "Postcode"
+// autocomplete.cc-name: "Cardholder Name" => "Naam kaarthouder"
+// autocomplete.cc-given-name: "Cardholder First Name" => "Voornaam kaarthouder"
+// autocomplete.cc-additional-name: "Cardholder Middle Name" => "Middelste naam kaarthouder"
+// autocomplete.cc-family-name: "Cardholder Last Name" => "Achternaam kaarthouder"
+// autocomplete.cc-number: "Credit Card Number" => "Creditcardnummer"
+// autocomplete.cc-exp: "Expiration Date" => "Vervaldatum"
+// autocomplete.cc-exp-month: "Expiration Month" => "Vervaldatum maand"
+// autocomplete.cc-exp-year: "Expiration Year" => "Vervaldatum jaar"
+// autocomplete.cc-csc: "Card Security Code" => "Beveiligingscode van de kaart"
+// autocomplete.cc-type: "Credit Card Type" => "Type creditcard"
+// autocomplete.transaction-currency: "Transaction Currency" => "Valuta van de transactie"
+// autocomplete.transaction-amount: "Transaction Amount" => "Transactiebedrag"
+// autocomplete.language: "Preferred Language" => "Voorkeurstaal"
+// autocomplete.bday: "Birthday" => "Verjaardag"
+// autocomplete.bday-day: "Birthday Day" => "Verjaardag Dag"
+// autocomplete.bday-month: "Birthday Month" => "Verjaardag Maand"
+// autocomplete.bday-year: "Birthday Year" => "Verjaardag Jaar"
+// autocomplete.sex: "Gender" => "Geslacht"
+// autocomplete.url: "Website URL" => "Website URL"
+// autocomplete.photo: "Profile Photo" => "Profielfoto"
+// autocomplete.tel: "Telephone Number" => "Telefoonnummer"
+// autocomplete.tel-country-code: "Country Code for Phone" => "Landcode voor telefoon"
+// autocomplete.tel-national: "National Telephone Number" => "Nationaal telefoonnummer"
+// autocomplete.tel-area-code: "Area Code" => "Netnummer"
+// autocomplete.tel-local: "Local Phone Number" => "Lokaal telefoonnummer"
+// autocomplete.tel-local-prefix: "Local Phone Prefix" => "Lokaal telefoonvoorvoegsel"
+// autocomplete.tel-local-suffix: "Local Phone Suffix" => "Lokaal telefoonnummer achtervoegsel"
+// autocomplete.tel-extension: "Phone Extension" => "Telefoon extensie"
+// autocomplete.email: "Email Address" => "E-mailadres"
+// autocomplete.impp: "Instant Messaging Protocol" => "Instant Messaging Protocol"

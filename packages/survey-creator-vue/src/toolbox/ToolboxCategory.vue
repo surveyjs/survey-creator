@@ -25,7 +25,7 @@
             :is="'sv-svg-icon'"
             :iconName="'icon-arrow-down'"
             class="svc-toolbox__category-header__button svc-string-editor__button--expand"
-            :size="24"
+            :size="'auto'"
             v-show="category.collapsed"
           ></SvComponent>
         </div>
@@ -33,7 +33,7 @@
           :is="'sv-svg-icon'"
           :iconName="'icon-arrow-up'"
           class="svc-toolbox__category-header__button svc-string-editor__button--collapse"
-          :size="24"
+          :size="'auto'"
           v-show="!category.collapsed"
         ></SvComponent>
       </div>
