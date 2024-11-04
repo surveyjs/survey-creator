@@ -119,6 +119,9 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     if (isSelected && this.creator.pageEditMode === "bypage") {
       this.setSurveyElement(<PageModel>this.creator.selectedElement);
     }
+    if (isSelected) {
+      this.onPageSelected();
+    }
   }
   private patchPageForDragDrop(page: PageModel, addGhostPage: () => void) {
     // need for the drag drop see https://github.com/surveyjs/survey-library/blob/871492817561de11f934ebdf50481770300a396a/src/dragdrop/survey-elements.ts#L266
@@ -192,6 +195,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     if (!model.isGhost) {
       if (model.creator.pageEditMode !== "single") {
         model.creator.selectElement(model.page, undefined, false);
+        this.onPageSelected();
       }
       else {
         model.creator.selectElement(model.creator.survey, undefined, false);
@@ -291,6 +295,11 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     const cssClasses = this.surveyElement.cssClasses;
     if (cssClasses.pageRow) return [].slice.call(this.rootElement?.querySelectorAll(`:scope .svc-page__footer, :scope ${classesToSelector(this.surveyElement.cssRoot)} > .svc-row`));
     return null;
+  }
+  public onPageSelected() {
+    if (this.rootElement) {
+      SurveyHelper.scrollIntoViewIfNeeded(this.rootElement);
+    }
   }
   protected getAllowDragging(options: any): boolean {
     return this.creator.allowDragPages && super.getAllowDragging(options);
