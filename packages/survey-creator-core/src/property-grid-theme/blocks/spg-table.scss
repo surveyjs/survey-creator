@@ -76,6 +76,12 @@
   .spg-dropdown_chevron-button {
     width: calcSize(3);
     margin-left: calcSize(-3);
+    padding-left: 0;
+    padding-right: 0;
+
+    &:hover, &:focus {
+      background: transparent;
+    }
   }
 
   .sd-dropdown_chevron-button-svg {
