@@ -3922,7 +3922,7 @@ export class SurveyCreatorModel extends Base
     this.syncTheme(theme);
     const designerPlugin = this.getPlugin("designer") as TabDesignerPlugin;
     if (designerPlugin) {
-      designerPlugin.updateThemeSettings();
+      designerPlugin.setTheme();
     }
   }
   public syncTheme(theme: ICreatorTheme): void {
