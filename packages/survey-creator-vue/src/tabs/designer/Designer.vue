@@ -43,6 +43,7 @@
               :survey="model.creator.survey"
               :creator="model.creator"
               :page="model.newPage"
+              :isGhost="true"
             />
           </div>
         </div>
@@ -77,6 +78,7 @@
                 :survey="model.creator.survey"
                 :creator="model.creator"
                 :page="page"
+                :isGhost="page == model.newPage"
               />
             </div>
           </template>
@@ -93,6 +95,7 @@
               :is="'svc-page'"
               :page="model.pagesController.page2Display"
               :creator="model.creator"
+              :isGhost="model.pagesController.page2Display == model.newPage"
             />
           </div>
         </div>

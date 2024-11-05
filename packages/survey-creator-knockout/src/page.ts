@@ -49,6 +49,7 @@ ko.components.register("svc-page", {
       const creator: SurveyCreator = params.creator;
 
       const pageAdornerViewModel = new CreatorSurveyPageComponent(creator, params.page);
+      pageAdornerViewModel.isGhost = params.isGhost;
       pageAdornerViewModel.rootElement = componentInfo.element;
       ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
         pageAdornerViewModel.fixedDispose();

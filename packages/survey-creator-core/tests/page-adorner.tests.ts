@@ -121,6 +121,7 @@ test("Check ghost page adorner actions visibility", (): any => {
     creator,
     newPage
   );
+  pageAdornerGhost.isGhost = true;
   expect(pageAdorner.getActionById("settings").visible).toBeTruthy();
   expect(pageAdornerGhost.getActionById("settings").visible).toBeFalsy();
 });

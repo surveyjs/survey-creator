@@ -64,17 +64,8 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       surveyElement["surveyChangedCallback"] = () => {
         this.isPageLive = !!surveyElement.survey;
       };
-      if (this.calcIsGhostPage(surveyElement)) {
-        this.updateActionsProperties();
-        surveyElement.registerFunctionOnPropertiesValueChanged(
-          ["title", "description"],
-          () => {
-            this.addGhostPage();
-            this.updateShowPlaceholder();
-          },
-          "add_ghost"
-        );
-        this.patchPageForDragDrop(surveyElement, this.addGhostPage);
+      if (this.isGhost) {
+        this.addGhostPageSubsribes(surveyElement);
       }
       surveyElement.registerFunctionOnPropertiesValueChanged(
         ["dragTypeOverMe"],
@@ -132,11 +123,27 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       addGhostPage();
     };
   }
-  protected calcIsGhostPage(page: PageModel) {
-    return this.creator.survey.pages.indexOf(page) < 0;
-  }
-  public get isGhost(): boolean {
-    return this.calcIsGhostPage(this.page);
+  @property({
+    onSet(val, target: PageAdorner, prevVal) {
+      if(val != prevVal) {
+        target.updateShowPlaceholder();
+        target.updateActionsProperties();
+        if(val && target.surveyElement) {
+          target.addGhostPageSubsribes(target.surveyElement);
+        }
+      }
+    },
+  }) isGhost: boolean;
+  private addGhostPageSubsribes(surveyElement: PageModel) {
+    surveyElement.registerFunctionOnPropertiesValueChanged(
+      ["title", "description"],
+      () => {
+        this.addGhostPage();
+        this.updateShowPlaceholder();
+      },
+      "add_ghost"
+    );
+    this.patchPageForDragDrop(this.surveyElement, this.addGhostPage);
   }
   public get placeholderText(): string {
     if (this.creator.isMobileView)
