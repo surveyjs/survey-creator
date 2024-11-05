@@ -90,7 +90,7 @@ export class QuestionAdornerComponent extends CreatorModelElement<
         <div className="svc-question__drop-indicator svc-question__drop-indicator--bottom"></div>
         {allowInteractions ? this.renderHeader() : null}
         {content}
-        {this.renderFooter()}
+        {this.model.needToRenderContent ? this.renderFooter() : null}
       </div>,
       undefined, { disableTabStop: this.disableTabStop() });
   }
@@ -108,8 +108,8 @@ export class QuestionAdornerComponent extends CreatorModelElement<
   }
 
   protected renderQuestionTitle(): JSX.Element {
-    const element = this.model.element as Question | PanelModel;
     if (!this.model.showHiddenTitle) return null;
+    const element = this.model.element as Question | PanelModel;
     return (
       <div
         ref={node => node && (!this.model.renderedCollapsed ?

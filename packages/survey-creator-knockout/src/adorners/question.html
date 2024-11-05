@@ -2,14 +2,15 @@
   data-bind="css: rootCss(), attr: { 'data-sv-drop-target-survey-element': element.name || null }, event: { dblclick: (d, e) => dblclick(e), mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }">
   <!-- ko if: $data.showHiddenTitle -->
   <div data-bind="css: $data.cssCollapsedHiddenHeader">
-    <div data-bind="css: $data.cssCollapsedHiddenTitle">
-      <!-- ko if: !!$data.element.hasTitle -->
-      <!-- ko template: { name: 'survey-string', data: $data.element.locTitle } --><!-- /ko -->
+    <!-- ko if: !!$data.element.hasTitle -->
+      <!-- ko component: { name: 'survey-element-title', params: { element: $data.element } } -->
       <!-- /ko -->
-      <!-- ko ifnot: !!$data.element.hasTitle -->
-      <span class="svc-fake-title" data-bind="text: element.name"></span>
-      <!-- /ko -->
-    </div>
+    <!-- /ko -->
+    <!-- ko ifnot: !!$data.element.hasTitle -->
+      <div data-bind="css: $data.cssCollapsedHiddenTitle">
+        <span class="svc-fake-title" data-bind="text: element.name"></span>
+      </div>
+    <!-- /ko -->
   </div>
   <!-- /ko -->
   <div data-bind="click: koSelect, key2click: { disableTabStop: true }, clickBubble: false, css: css()">
@@ -28,6 +29,7 @@
       </div>
     </div>
     <!-- /ko -->
+    <!-- ko if: $data.needToRenderContent -->
     <!-- ko component: { name: 'sv-template-renderer', params: { componentData: null, templateData: templateData } } -->
     <!-- /ko -->
     <!-- ko if: koIsEmptyElement() && !$data.placeholderComponentData -->
@@ -57,5 +59,6 @@
       <!-- ko component: { name: 'sv-action-bar', params: { model: actionContainer, handleClick: false } } -->
       <!-- /ko -->
     </div>
+    <!-- /ko -->
   </div>
 </div>

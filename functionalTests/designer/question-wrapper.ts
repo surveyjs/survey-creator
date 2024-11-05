@@ -426,6 +426,10 @@ test("Question adorner - do not render content when initially collapsed", async 
       {
         type: "text",
         name: "question1"
+      },
+      {
+        type: "panel",
+        name: "panel1"
       }
     ]
   };
@@ -434,8 +438,12 @@ test("Question adorner - do not render content when initially collapsed", async 
   await t.hover(getToolboxItemByText("Single-Line Input"));
   const qContent = Selector(".svc-question__content--text");
   const qCollapseButton = Selector(".svc-question__content--text #collapse");
+  const pContent = Selector(".svc-question__content--panel");
+  const pCollapseButton = Selector(".svc-question__content--panel #collapse");
   await t.expect(qCollapseButton.visible).ok();
   await t.click(qCollapseButton);
+  await t.expect(pCollapseButton.visible).ok();
+  await t.click(pCollapseButton);
 
   await t.click(Selector(".svc-tabbed-menu-item").withText("Preview"));
   await t.click(Selector(".svc-tabbed-menu-item").withText("Designer"));
@@ -445,6 +453,13 @@ test("Question adorner - do not render content when initially collapsed", async 
   await t.expect(qContent.find(".sd-element").exists).ok();
   await t.click(qCollapseButton);
   await t.expect(qContent.find(".sd-element").exists).ok();
+
+  await t.expect(pContent.find(".sd-element").exists).notOk();
+  await t.click(pCollapseButton);
+  await t.expect(pContent.find(".sd-element").exists).ok();
+  await t.click(pCollapseButton);
+  await t.expect(pContent.find(".sd-element").exists).ok();
+
   await ClientFunction(() => { window["creator"].expandCollapseButtonVisibility = "never"; })();
 });
 
