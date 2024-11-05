@@ -169,6 +169,7 @@ export class SurveyTextWorkerJsonError extends SurveyTextWorkerError {
 }
 
 export class SurveyTextWorker {
+  public static onProcessJson: ((json: any) => void) | undefined;
   public static newLineChar: string = "\n";
   public errors: Array<SurveyTextWorkerError>;
   private surveyValue: SurveyModel;
@@ -198,6 +199,9 @@ export class SurveyTextWorker {
     }
     if (this.jsonValue != null) {
       this.updateJsonPositions(this.jsonValue);
+      if(!!SurveyTextWorker.onProcessJson) {
+        SurveyTextWorker.onProcessJson(this.jsonValue);
+      }
       this.surveyValue = new SurveyForTextWorker(this.jsonValue);
       const jsonErrors = this.surveyValue.jsonErrors;
       if (Array.isArray(jsonErrors)) {
