@@ -444,6 +444,12 @@ $svc-page-move-out-delay: var(--sjs-svc-page-move-out-delay, 100ms);
   --fade-animation-delay: 0s;
   --move-animation-delay: #{$svc-page-move-out-delay};
 }
+.svc-creator--disable-animations {
+  .svc-page--enter,
+  .svc-page--leave {
+    animation: none;
+  }
+}
 
 .svc-page--enter.svc-page--enter {
   .svc-page__content-actions {
