@@ -1,4 +1,6 @@
-import { SvgRegistry } from "survey-core";
-export var svgBundle;
-const path = (<any>require).context("./images", true, /\.svg$/);
-SvgRegistry.registerIconsFromFolder(path);
+export var svgBundle: {V1?: string, V2?: string} = {};
+
+if (typeof jest === "undefined") {
+  svgBundle.V1 = (<any>require).context("./images-v1", true, /\.svg$/);
+  svgBundle.V2 = (<any>require).context("./images-v2", true, /\.svg$/);
+}

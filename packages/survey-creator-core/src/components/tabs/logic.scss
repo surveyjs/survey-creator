@@ -19,11 +19,9 @@
 .sl-table .sl-table__detail-button.sl-table__detail-button {
   width: calcSize(6);
   height: calcSize(6);
-
   box-sizing: border-box;
   border-radius: var(--ctr-collapse-button-corner-radius, calcSize(12.5));
-
-  padding: 0;
+  padding: calcSize(1.5);
   transition: background-color $creator-transition-duration;
 
   &:hover:enabled,
