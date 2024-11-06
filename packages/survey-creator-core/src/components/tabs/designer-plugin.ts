@@ -156,8 +156,8 @@ export class TabDesignerPlugin implements ICreatorPlugin {
 
     const settingsAction = new MenuButton({
       id: "theme-settings",
-      locTooltipName: "pe.tabs.creatorSettingTitle",
-      iconName: "icon-config",
+      locTooltipName: "ed.creatorSettingTitle",
+      iconName: "gear-24x24",
       pressed: false,
       action: () => {
         this.creator.sidebar.expandSidebar();

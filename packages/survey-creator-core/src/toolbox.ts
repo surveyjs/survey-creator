@@ -599,7 +599,7 @@ export class QuestionToolbox
         this.dragOrClickHelper.onPointerDown(pointerDownEvent, item);
       }
     };
-    this.dotsItem.popupModel.cssClass = "svc-toolbox-popup";
+    this.dotsItem.popupModel.cssClass += " svc-toolbox-popup svc-creator-popup";
   }
   private getDefaultQuestionCategories() {
     const questionCategoryMap = {};

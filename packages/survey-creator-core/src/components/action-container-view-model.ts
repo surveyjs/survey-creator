@@ -222,6 +222,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     const actionContainer = new SurveyElementActionContainer();
     actionContainer.dotsItem.iconSize = 16;
     actionContainer.dotsItem.popupModel.horizontalPosition = "center";
+    actionContainer.dotsItem.popupModel.cssClass += " svc-creator-popup";
     return actionContainer;
   }
   private dragCollapsedTimer;
