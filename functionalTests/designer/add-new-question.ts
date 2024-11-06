@@ -137,8 +137,8 @@ test("Add New Question with sub type", async t => {
     .wait(400)
     .click(getListItemByText("Stars").nth(1))
     .expect(getVisibleElement(".svc-question__content").count).eql(1)
-    .expect(getVisibleElement(".svc-question__content-actions .sv-action-bar-item__title").nth(0).textContent).eql("Rating Scale")
-    .expect(getVisibleElement(".svc-question__content-actions .sv-action-bar-item__title").nth(1).textContent).eql("Stars");
+    .expect(getVisibleElement(".svc-question__content-actions .svc-survey-element-toolbar-item__title").nth(0).textContent).eql("Rating Scale")
+    .expect(getVisibleElement(".svc-question__content-actions .svc-survey-element-toolbar-item__title").nth(1).textContent).eql("Stars");
 
   let expectedJson = {
     "logoPosition": "right",

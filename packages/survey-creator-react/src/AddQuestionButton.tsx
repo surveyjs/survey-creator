@@ -29,7 +29,7 @@ export class AddQuestionButtonComponent extends SurveyElementBase<{ item: Action
       <span className="svc-element__question-type-selector-icon">
         <SvgIcon
           iconName={questionTypeSelectorModel.iconName}
-          size={24}
+          size={"auto"}
           title={this.model.addNewQuestionText}
         ></SvgIcon>
       </span>
@@ -52,7 +52,7 @@ export class AddQuestionButtonComponent extends SurveyElementBase<{ item: Action
         <SvgIcon
           className={"svc-panel__add-new-question-icon"}
           iconName={"icon-add_24x24"}
-          size={24}
+          size={"auto"}
         ></SvgIcon>
         <span className="svc-add-new-item-button__text">
           {this.model.addNewQuestionText}

@@ -239,9 +239,6 @@ export class PreviewViewModel extends Base {
       this.prevPageAction.iconName = <any>new ComputedUpdater<string>(() => {
         return this.surveyProvider.isMobileView ? "icon-arrow-left" : "icon-arrow-left_16x16";
       });
-      this.prevPageAction.iconSize = <any>new ComputedUpdater<number>(() => {
-        return this.surveyProvider.isMobileView ? 24 : 16;
-      });
       this.prevPageAction.action = () => setNearPage(false);
       pageActions.push(this.prevPageAction);
     }
@@ -277,9 +274,6 @@ export class PreviewViewModel extends Base {
       });
       this.nextPageAction.iconName = <any>new ComputedUpdater<string>(() => {
         return this.surveyProvider.isMobileView ? "icon-arrow-right" : "icon-arrow-right_16x16";
-      });
-      this.nextPageAction.iconSize = <any>new ComputedUpdater<number>(() => {
-        return this.surveyProvider.isMobileView ? 24 : 16;
       });
       this.nextPageAction.action = () => setNearPage(true);
       pageActions.push(this.nextPageAction);

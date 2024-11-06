@@ -3745,6 +3745,7 @@ export class SurveyCreatorModel extends Base
       title: item.title,
       id: item.name,
       iconName: item.iconName,
+      iconSize: "auto",
       visible: item.visible,
       enabled: item.enabled,
       needSeparator: needSeparator

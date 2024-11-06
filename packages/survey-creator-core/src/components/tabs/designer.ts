@@ -95,11 +95,13 @@ export class TabDesignerViewModel extends Base {
       id: "collapseAll",
       locTooltipName: "ed.collapseAllTooltip",
       iconName: "icon-collapseall-24x24",
+      iconSize: "auto",
       action: action
     }, {
       id: "expandAll",
       locTooltipName: "ed.expandAllTooltip",
       iconName: "icon-expandall-24x24",
+      iconSize: "auto",
       action: action
     }]);
   }

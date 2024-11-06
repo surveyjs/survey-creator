@@ -195,7 +195,7 @@ test("property grid for mobile devices", async (t) => {
 
     .click(Selector(".svd-grid-hide"))
     .click(getAddNewQuestionButton())
-    .click(getBarItemByTitle("Open settings").filterVisible().nth(0))
+    .click(Selector(".svc-survey-element-toolbar__item[title=\"Open settings\"]").filterVisible().nth(0))
     .expect(Selector(selectedObjectTextSelector).innerText).eql("question1")
 
     .resizeWindow(1920, 900)
@@ -244,18 +244,14 @@ test("test tab for mobile devices", async (t) => {
     .expect(creatorFooterToolbarActions.nth(0).id).eql("svd-designer")
     .expect(creatorFooterToolbarActions.nth(1).id).eql("svd-preview")
     .expect(creatorFooterToolbarActions.nth(2).id).eql("prevPage")
-    .expect(creatorFooterToolbarActions.find(".sv-action-bar-item").nth(2).hasAttribute("disabled")).eql(true)
-    //.expect(creatorFooterToolbarActions.nth(2).hasClass("sv-action-bar-item--secondary")).notOk()
+    .expect(creatorFooterToolbarActions.find(".svc-survey-element-toolbar__item").nth(2).hasAttribute("disabled")).eql(true)
     .expect(creatorFooterToolbarActions.nth(3).id).eql("nextPage")
-    .expect(creatorFooterToolbarActions.find(".sv-action-bar-item").nth(3).hasAttribute("disabled")).eql(false)
-    //.expect(creatorFooterToolbarActions.nth(3).hasClass("sv-action-bar-item--secondary")).ok()
+    .expect(creatorFooterToolbarActions.find(".svc-survey-element-toolbar__item").nth(3).hasAttribute("disabled")).eql(false)
     .expect(creatorFooterToolbarActions.nth(4).id).eql("showInvisible")
 
     .click(creatorFooterToolbarActions.nth(3))
-    .expect(creatorFooterToolbarActions.find(".sv-action-bar-item").nth(2).hasAttribute("disabled")).eql(false)
-    //.expect(creatorFooterToolbarActions.nth(2).hasClass("sv-action-bar-item--secondary")).ok()
-    .expect(creatorFooterToolbarActions.find(".sv-action-bar-item").nth(3).hasAttribute("disabled")).eql(true)
-    //.expect(creatorFooterToolbarActions.nth(3).hasClass("sv-action-bar-item--secondary")).notOk()
+    .expect(creatorFooterToolbarActions.find(".svc-survey-element-toolbar__item").nth(2).hasAttribute("disabled")).eql(false)
+    .expect(creatorFooterToolbarActions.find(".svc-survey-element-toolbar__item").nth(3).hasAttribute("disabled")).eql(true)
 
     .resizeWindow(1920, 900)
     .expect(testTabToolbar.exists).ok()
@@ -295,10 +291,10 @@ test("Property grid editor popup", async (t) => {
     .expect(Selector(".sv-popup--modal").visible).ok()
     .click(Selector("button").withExactText("Cancel"))
     .resizeWindow(380, 600)
-    .click(Selector(".sv-action-bar-item[title=\"Open settings\"]").filterVisible())
+    .click(Selector(".svc-survey-element-toolbar__item[title=\"Open settings\"]").filterVisible())
     .click(Selector(".svd-grid-hide"))
     .click(question1, { offsetX: 5, offsetY: 5 })
-    .click(Selector(".svc-question__content-actions .sv-action-bar-item[title=\"Open settings\"]").filterVisible())
+    .click(Selector(".svc-question__content-actions .svc-survey-element-toolbar__item[title=\"Open settings\"]").filterVisible())
     .click(Selector("span").withExactText("Set Default Answer"))
     .expect(Selector(".sv-popup--overlay").visible).ok();
 });

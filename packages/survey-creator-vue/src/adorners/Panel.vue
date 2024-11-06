@@ -54,7 +54,7 @@
           :is="'sv-svg-icon'"
           class="svc-question__drag-element"
           :iconName="'icon-drag-area-indicator_24x16'"
-          :size="24"
+          :size="'auto'"
         ></SvComponent>
         <div class="svc-question__top-actions">
           <SvComponent
@@ -83,7 +83,7 @@
               :is="'sv-svg-icon'"
               class="svc-panel__add-new-question-icon"
               :iconName="'icon-add_24x24'"
-              :size="24"
+              :size="'auto'"
             ></SvComponent>
             <span class="svc-add-new-item-button__text">
               {{ adorner.addNewQuestionText }}

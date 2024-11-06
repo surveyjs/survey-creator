@@ -163,13 +163,13 @@ test("Single input question wrapper action change require", async (t) => {
   let title = await questionTitle.innerText;
   await t
     .expect(normalize(title)).eql("1. question1")
-    .expect(requiredActionButton.hasClass("sv-action-bar-item--active")).notOk()
+    .expect(requiredActionButton.hasClass("svc-survey-element-toolbar__item--active")).notOk()
 
     .click(requiredActionButton);
   title = await questionTitle.innerText;
   await t
     .expect(normalize(title)).eql("1. question1 *")
-    .expect(requiredActionButton.hasClass("sv-action-bar-item--active")).ok();
+    .expect(requiredActionButton.hasClass("svc-survey-element-toolbar__item--active")).ok();
 });
 
 test("Single input question wrapper action delete", async (t) => {
@@ -243,9 +243,9 @@ test("Rating question required property", async (t) => {
     .hover(getToolboxItemByText("Rating Scale"))
     .click(getToolboxItemByText("Rating Scale"))
     .expect(isrequiredButton.visible).ok()
-    .expect(isrequiredButton.find(".svc-required-action").classNames).notContains("sv-action-bar-item--active")
+    .expect(isrequiredButton.find(".svc-required-action").classNames).notContains("svc-survey-element-toolbar__item--active")
     .click(isrequiredButton)
-    .expect(isrequiredButton.find(".svc-required-action").classNames).contains("sv-action-bar-item--active");
+    .expect(isrequiredButton.find(".svc-required-action").classNames).contains("svc-survey-element-toolbar__item--active");
 });
 
 fixture`${title}`.page`${urlDropdownCollapseView}`.beforeEach(async (t) => {

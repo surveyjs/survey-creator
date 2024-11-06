@@ -6,7 +6,7 @@
   <!-- ko if: allowDragging && !isGhost -->
   <div class="svc-question__drag-area"
     data-bind="event: { pointerdown: (model, event)=>{ onPointerDown(event); return true; } }">
-    <!-- ko component: { name: 'sv-svg-icon', params: { css: 'svc-question__drag-element', iconName: 'icon-drag-area-indicator_24x16', size: 24 } } -->
+    <!-- ko component: { name: 'sv-svg-icon', params: { css: 'svc-question__drag-element', iconName: 'icon-drag-area-indicator_24x16', size: 'auto' } } -->
     <!-- /ko -->
     <div class="svc-page__content-actions">
       <!-- ko component: { name: 'sv-action-bar', params: { model: actionContainer } } -->

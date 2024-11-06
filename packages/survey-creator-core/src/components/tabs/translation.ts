@@ -771,6 +771,7 @@ export class Translation extends Base implements ITranslationLocales {
           const locale = q.value[rowIndex].name;
           options.actions.splice(0, 0, new Action({
             iconName: "icon-language",
+            iconSize: "auto",
             locTooltipName: "ed.translateUsigAI",
             location: "end",
             action: () => this.showTranslationEditor(locale)
@@ -1087,6 +1088,7 @@ export class Translation extends Base implements ITranslationLocales {
     this.addLanguageAction = createDropdownActionModel({
       id: "svc-translation-choose-language",
       iconName: "icon-add",
+      iconSize: "auto",
       enabled: <any>(new ComputedUpdater(() => this.isChooseLanguageEnabled && !this.readOnly)),
     }, {
       items: this.chooseLanguageActions,
@@ -1577,11 +1579,12 @@ export class TranslationEditor {
     navigationBar.cssClasses = survey.css.actionBar;
     navigationBar.containerCss = survey.css.footer;
     survey.addNavigationItem(this.createLocaleFromAction());
-    const actionCss = "svc-action-bar-item--right sv-action-bar-item--secondary";
+    const actionCss = "svc-action-bar-item--right";
     if (this.options.getHasMachineTranslation()) {
       survey.addNavigationItem(new Action({
         id: "svc-translation-machine",
         iconName: "icon-language",
+        iconSize: "auto",
         css: actionCss,
         locTitleName: "ed.translateUsigAI",
         component: "sv-action-bar-item",
@@ -1646,7 +1649,6 @@ export class TranslationEditor {
       css: "st-translation-machine-from",
       location: "start",
       title: defaultLocaleTitle,
-      iconSize: "auto",
       innerCss: "st-translation-machine-from__btn",
       data: {
         additionalTitleCss: "st-translation-machine-from__title",
@@ -1680,6 +1682,7 @@ export function createImportCSVAction(action: () => void, needSeparator: boolean
   return new Action({
     id: "svc-translation-import",
     iconName: "icon-load",
+    iconSize: "auto",
     locTitleName: "ed.translationImportFromSCVButton",
     locTooltipName: "ed.translationImportFromSCVButton",
     mode: isInEditor ? "large" : "small",
@@ -1692,6 +1695,7 @@ export function createExportCSVAction(action: () => void, isInEditor: boolean = 
   return new Action({
     id: "svc-translation-export",
     iconName: "icon-download",
+    iconSize: "auto",
     locTitleName: "ed.translationExportToSCVButton",
     locTooltipName: "ed.translationExportToSCVButton",
     mode: isInEditor ? "large" : "small",

@@ -156,6 +156,10 @@
       .sv-list__item-icon use {
         fill: var(--ctr-list-item-icon-color-selected-submenu, $foreground-light);
       }
+
+      .sv-list-item__marker-icon use {
+        fill: var(--ctr-list-item-submenu-arrow-color-selected-item-submenu, $foreground-light);
+      }
     }
   }
 
