@@ -100,7 +100,7 @@ export class ImageItemValueAdornerComponent extends CreatorModelElement<
               <span className="svc-context-button svc-image-item-value-controls__drag-area-indicator"
                 onPointerDown={(event: any) => this.model.onPointerDown(event)}
               >
-                <SvgIcon size={"auto"} iconName={"icon-drag-area-indicator"}></SvgIcon>
+                <SvgIcon size={"auto"} iconName={"icon-drag-24x24"}></SvgIcon>
               </span>
               : null
           }
@@ -112,7 +112,7 @@ export class ImageItemValueAdornerComponent extends CreatorModelElement<
                   className="svc-context-button"
                   onClick={() => this.model.chooseFile(this.model)}
                 >
-                  <SvgIcon role="button" size={"auto"} iconName={"icon-file"} title={this.model.selectFileTitle}></SvgIcon>
+                  <SvgIcon role="button" size={"auto"} iconName={"icon-choosefile"} title={this.model.selectFileTitle}></SvgIcon>
                 </span>) : null}
                 {this.model.allowRemove && !this.model.isUploading ? attachKey2click(<span
                   className="svc-context-button svc-context-button--danger"

@@ -14,14 +14,13 @@
         <span *ngIf="adorner.isDraggable && adorner.canRenderControls"
           class="svc-context-button svc-image-item-value-controls__drag-area-indicator"
           (pointerdown)="adorner.onPointerDown($event)" [attr.title]="undefined" [attr.aria-label]="undefined">
-          <svg [iconName]="'icon-drag-area-indicator'" [size]="'auto'" sv-ng-svg-icon></svg>
+          <svg [iconName]="'icon-drag-24x24'" [size]="'auto'" sv-ng-svg-icon></svg>
         </span>
         <div *ngIf="adorner.canRenderControls" class="svc-context-container svc-image-item-value-controls">
           <ng-container *ngIf="adorner.allowRemove && !adorner.isUploading">
             <span class="svc-context-button" (click)="adorner.chooseFile(adorner)" [key2click] [attr.title]="undefined"
               [attr.aria-label]="undefined">
-              <svg role="button" [iconName]="'icon-file'" [size]="'auto'" [title]="adorner.selectFileTitle"
-                sv-ng-svg-icon></svg>
+              <svg role="button" [iconName]="'icon-choosefile'" [size]="'auto'" [title]="adorner.selectFileTitle" sv-ng-svg-icon></svg>
             </span>
             <span class="svc-context-button svc-context-button--danger" (click)="adorner.remove(adorner)" [key2click]
               [attr.title]="undefined" [attr.aria-label]="undefined">
