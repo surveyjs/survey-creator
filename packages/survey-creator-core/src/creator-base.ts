@@ -5,7 +5,8 @@ import {
   EventBase, hasLicense, slk, settings as SurveySettings, Event, Helpers as SurveyHelpers, MatrixDropdownColumn, JsonObject,
   dxSurveyService, ISurveyElement, PanelModelBase, surveyLocalization, QuestionMatrixDropdownModelBase, ITheme, Helpers,
   chooseFiles, createDropdownActionModel,
-  CssClassBuilder
+  CssClassBuilder,
+  SvgRegistry
 } from "survey-core";
 import { ICreatorPlugin, ISurveyCreatorOptions, settings, ICollectionItemAllowOperations } from "./creator-settings";
 import { editorLocalization } from "./editorLocalization";
@@ -57,6 +58,7 @@ import designTabSurveyThemeJSON from "./designTabSurveyThemeJSON";
 import { ICreatorTheme } from "./creator-theme/creator-themes";
 import { SurveyElementAdornerBase } from "./components/action-container-view-model";
 import { TabbedMenuContainer, TabbedMenuItem } from "./tabbed-menu";
+import { svgBundle } from "./svgbundle";
 
 require("./components/creator.scss");
 require("./components/string-editor.scss");
@@ -1197,15 +1199,11 @@ export class SurveyCreatorModel extends Base
     const chaningOptions = { tabName: viewName, allow: allow, model: this.currentPlugin?.model };
     this.onActiveTabChanging.fire(this, chaningOptions);
     if (!chaningOptions.allow) return;
-    if (!this.canSwitchViewType()) return false;
+    if(!!this.currentPlugin?.deactivate && !this.currentPlugin.deactivate()) return;
     const plugin = this.activatePlugin(viewName);
     this.viewType = viewName;
     this.onActiveTabChanged.fire(this, { tabName: viewName, plugin: plugin, model: !!plugin ? plugin.model : undefined });
     return true;
-  }
-  private canSwitchViewType(): boolean {
-    const plugin: ICreatorPlugin = this.currentPlugin;
-    return !plugin || !plugin.deactivate || plugin.deactivate();
   }
   private activatePlugin(newType: string): ICreatorPlugin {
     const plugin: ICreatorPlugin = this.getPlugin(newType);
@@ -1248,6 +1246,7 @@ export class SurveyCreatorModel extends Base
     this.tabbedMenu.locOwner = this;
     this.selectionHistoryControllerValue = new SelectionHistory(this);
     this.sidebar = new SidebarModel(this);
+    this.registerIcons();
     this.setOptions(this.options);
     this.patchMetadata();
     this.initSurveyWithJSON(undefined, false);
@@ -1564,6 +1563,20 @@ export class SurveyCreatorModel extends Base
   }
   public getOptions(): ICreatorOptions {
     return this.options || {};
+  }
+  protected registerIcons() {
+    let path;
+    if (settings.useLegacyIcons) {
+      SurveySettings.useLegacyIcons = true;
+      path = svgBundle.V1;
+    } else {
+      SurveySettings.useLegacyIcons = false;
+      path = svgBundle.V2;
+    }
+
+    if (!path) return;
+
+    SvgRegistry.registerIconsFromFolder(path);
   }
   protected setOptions(options: ICreatorOptions): void {
     if (!options) options = {};
@@ -2137,20 +2150,31 @@ export class SurveyCreatorModel extends Base
     }
   }
 
-  public changeText(value: string, clearState = false): void {
+  public changeText(value: string, clearState = false, trustJSON?: boolean): void {
     this.setTextValue(value);
     if (!value) {
       this.initSurveyWithJSON(undefined, clearState);
     } else {
-      const textWorker = new SurveyTextWorker(value);
-      if (textWorker.isJsonCorrect || !!textWorker.survey) {
-        this.initSurveyWithJSON(textWorker.survey.toJSON(), clearState);
+      let jsonValue = trustJSON ? this.parseJSON(value) : undefined;
+      if(!trustJSON) {
+        const textWorker = new SurveyTextWorker(value);
+        if(textWorker.isJsonCorrect) {
+          jsonValue = this.parseJSON(value);
+        }
+        else if(!!textWorker.survey) {
+          jsonValue = textWorker.survey.toJSON();
+        }
+      }
+      if (!!jsonValue) {
+        this.initSurveyWithJSON(jsonValue, clearState);
       } else {
         this.viewType = "editor";
       }
     }
   }
-
+  private parseJSON(val: string): any {
+    return new SurveyJSON5().parse(val);
+  }
   /**
    * A survey JSON schema as a string.
    * 

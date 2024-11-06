@@ -356,8 +356,8 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this.updateActionsProperties();
   }
   protected getExpandCollapseAction(): IAction {
-    const collapseIcon = "icon-collapse-detail-light_16x16";
-    const expandIcon = "icon-restore_16x16";
+    const collapseIcon = "icon-collapsepanel-16x16";
+    const expandIcon = "icon-expandpanel-16x16";
     return {
       id: "collapse",
       css: "sv-action-bar-item--secondary sv-action-bar-item--collapse",
