@@ -137,7 +137,7 @@ svc-page {
       var(--ctr-survey-question-panel-toolbar-item-icon-padding-top) -
       var(--ctr-survey-question-panel-toolbar-item-icon-padding-bottom)
   );
-  width: var(----ctr-survey-page-toolbar-item-icon-width, calcSize(2));
+  width: var(--ctr-survey-page-toolbar-item-icon-width, calcSize(2));
   height: var(--ctr-survey-page-toolbar-item-icon-height, calcSize(2));
   padding: var(--ctr-survey-question-panel-toolbar-item-icon-padding-top, 0)
     var(--ctr-survey-question-panel-toolbar-item-icon-padding-right, 0)
