@@ -44,7 +44,6 @@ export class RowWrapper extends CreatorModelElement<
     super.componentWillUnmount();
   }
 
-
   render(): JSX.Element {
     return (
       <div
