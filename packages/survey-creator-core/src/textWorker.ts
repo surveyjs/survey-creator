@@ -12,8 +12,6 @@ class SurveyForTextWorker extends SurveyModel {
   //Do nothing on end loading
   endLoadingFromJson(): void { }
   getSurveyData(): ISurveyData { return null; }
-  getSurvey(): ISurvey { return this; }
-
 }
 
 class SurveyTextWorkerJsonErrorFixerBase {
