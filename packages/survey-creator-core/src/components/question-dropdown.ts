@@ -70,13 +70,17 @@ export class QuestionDropdownAdornerViewModel extends QuestionAdornerViewModel {
 
   public attachElement(surveyElement: SurveyElement) {
     super.attachElement(surveyElement);
-    this.surveyElement.registerFunctionOnPropertyValueChanged("isSelectedInDesigner",
-      () => {
-        this.leftFocus();
-      }, "dropdownCollapseChecker");
+    if (!!surveyElement) {
+      surveyElement.registerFunctionOnPropertyValueChanged("isSelectedInDesigner",
+        () => {
+          this.leftFocus();
+        }, "dropdownCollapseChecker");
+    }
   }
   public detachElement(surveyElement: SurveyElement): void {
-    this.surveyElement.unRegisterFunctionOnPropertyValueChanged("isSelectedInDesigner", "dropdownCollapseChecker");
+    if (!!surveyElement) {
+      surveyElement.unRegisterFunctionOnPropertyValueChanged("isSelectedInDesigner", "dropdownCollapseChecker");
+    }
     super.detachElement(surveyElement);
   }
 
