@@ -5,7 +5,6 @@
   display: flex;
   position: relative;
   align-items: center;
-  z-index: 20;
   outline: none;
   padding-top: var(--ctr-toolbox-item-padding-top, calcSize(1));
   padding-bottom: var(--ctr-toolbox-item-padding-bottom, calcSize(1));
@@ -221,7 +220,6 @@
   box-sizing: border-box;
   align-items: center;
   border-radius: var(--ctr-toolbox-item-submenu-button-corner-radius, 1024px);
-  z-index: 40;
   background-color: var(--ctr-toolbox-item-submenu-button-background-color, $background-dim);
   transition: background-color $creator-transition-duration;
   &:hover {
