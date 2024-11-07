@@ -167,7 +167,7 @@
   .sv-list__item.sv-action-bar-item--secondary:hover,
   .sv-list__item.sv-action-bar-item--secondary {
     .sv-list__item-icon use {
-      fill: $secondary;
+      fill: var(--ctr-survey-question-panel-toolbar-item-icon-color, $secondary);
     }
   }
 
