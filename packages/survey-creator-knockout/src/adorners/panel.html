@@ -2,14 +2,14 @@
   data-bind="css: rootCss(), attr: { 'data-sv-drop-target-survey-element': element.name || null }, event: { dblclick: (d, e) => dblclick(e), mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }">
   <!-- ko if: $data.showHiddenTitle -->
   <div data-bind="css: $data.cssCollapsedHiddenHeader">
-    <div data-bind="css: $data.cssCollapsedHiddenTitle">
-      <!-- ko if: !!$data.element.hasTitle -->
-      <!-- ko template: { name: 'survey-string', data: $data.element.locTitle } --><!-- /ko -->
+    <!-- ko if: !!$data.element.hasTitle -->
+      <!-- ko component: { name: 'survey-element-title', params: { element: $data.element } } --><!-- /ko -->
       <!-- /ko -->
       <!-- ko ifnot: !!$data.element.hasTitle -->
-      <span class="svc-fake-title" data-bind="text: element.name"></span>
-      <!-- /ko -->
-    </div>
+      <div data-bind="css: $data.cssCollapsedHiddenTitle">
+        <span class="svc-fake-title" data-bind="text: element.name"></span>
+      </div>
+    <!-- /ko -->
   </div>
   <!-- /ko -->
   <div
@@ -28,6 +28,7 @@
       </div>
     </div>
     <!-- /ko -->
+    <!-- ko if: $data.needToRenderContent -->
     <!-- ko component: { name: 'sv-template-renderer', params: { componentData: null, templateData: templateData } } -->
     <!-- /ko -->
     <!-- ko if: koIsEmptyElement() -->
@@ -62,12 +63,12 @@
       </div>
     </div>
     <!-- /ko -->
-
     <!-- ko if: $data.element.isInteractiveDesignElement -->
     <div class="svc-question__content-actions" data-bind="event: {focusin: koSelect}">
       <!-- ko component: { name: 'sv-action-bar', params: { model: actionContainer, handleClick: false } } -->
       <!-- /ko -->
     </div>
+    <!-- /ko -->
     <!-- /ko -->
   </div>
 </div>

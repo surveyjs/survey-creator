@@ -13,13 +13,13 @@
       v-if="adorner.showHiddenTitle"
       :class="adorner.cssCollapsedHiddenHeader"
     >
-      <div :class="adorner.cssCollapsedHiddenTitle">
-        <SvComponent
+      <SvComponent
           v-if="!!adorner.element.hasTitle"
-          :is="'survey-string'"
-          :locString="adorner.element.locTitle"
-        />
-        <span v-else class="svc-fake-title">{{ adorner.element.name }}</span>
+          :is="'survey-element-title'"
+          :element="adorner.element"
+      />
+      <div v-else :class="adorner.cssCollapsedHiddenTitle">
+        <span  class="svc-fake-title">{{ adorner.element.name }}</span>
       </div>
     </div>
     <div
@@ -64,6 +64,7 @@
           ></SvComponent>
         </div>
       </div>
+      <template v-if="adorner.needToRenderContent">
       <SvComponent :is="componentName" v-bind="componentData"></SvComponent>
       <div
         v-if="adorner.isEmptyElement"
@@ -122,6 +123,7 @@
           :handleClick="false"
         ></SvComponent>
       </div>
+      </template>
     </div>
   </div>
 </template>

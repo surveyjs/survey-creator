@@ -227,7 +227,12 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     return (this.element)?.getPropertyValue("isMessagePanelVisible");
   }
   get cssCollapsedHiddenHeader(): string {
-    return (this.element as PanelModel | Question).cssHeader + " svc-element__header--hidden";
+    const css = new CssClassBuilder()
+      .append((this.element as PanelModel | Question).cssHeader)
+      .append("svc-element__header--hidden")
+      .append("svc-element__header--lazy", !this.needToRenderContent)
+      .toString();
+    return css;
   }
   get cssCollapsedHiddenTitle(): string {
     return this.element.cssTitle + " svc-element__title--hidden";
@@ -372,7 +377,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   }
 
   public get showHiddenTitle() {
-    return (!this.element.hasTitle || this.isTitleLeft) && this.element.isInteractiveDesignElement;
+    return (!this.element.hasTitle || this.isTitleLeft || !this.needToRenderContent) && this.element.isInteractiveDesignElement;
   }
   public get placeholderText(): string {
     if (this.surveyElement instanceof QuestionHtmlModel) {

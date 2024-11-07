@@ -23,7 +23,7 @@ function createSurvey(): SurveyModel {
   });
 }
 function getHighlightedEditors(survey: SurveyModel) {
-  const highlightedEditorClass = "spg-editor--highlighted";
+  const highlightedEditorClass = "spg-question--highlighted";
   return survey.getAllQuestions().filter(q => q.getRootCss().indexOf(highlightedEditorClass) !== -1);
 }
 test("SearchManager init state", () => {

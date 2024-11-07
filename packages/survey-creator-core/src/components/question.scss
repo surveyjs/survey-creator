@@ -840,6 +840,7 @@ svc-question,
     transition: opacity 150ms;
   }
 }
+.svc-element__header--lazy,
 .svc-element__header--hidden.sd-question__header--location--left {
   .svc-string-editor,
   sv-ng-string > .svc-string-editor {
@@ -848,7 +849,6 @@ svc-question,
       content: none;
     }
   }
-
 }
 
 .svc-question__adorner {
