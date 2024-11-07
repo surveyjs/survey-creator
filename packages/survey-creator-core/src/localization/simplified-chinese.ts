@@ -1018,6 +1018,61 @@ var simplifiedChineseTranslation = {
       url: "网址",
       week: "周"
     },
+    autocomplete: {
+      name: "全名",
+      "honorific-prefix": "前缀",
+      "given-name": "名字",
+      "additional-name": "中间名",
+      "family-name": "姓",
+      "honorific-suffix": "后缀",
+      nickname: "昵称",
+      "organization-title": "职称",
+      username: "用户名",
+      "new-password": "新密码",
+      "current-password": "当前密码",
+      organization: "组织名称",
+      "street-address": "全街地址",
+      "address-line1": "地址行 1",
+      "address-line2": "地址行 2",
+      "address-line3": "地址行 3",
+      "address-level4": "4 级地址",
+      "address-level3": "3 级地址",
+      "address-level2": "2 级地址",
+      "address-level1": "1 级地址",
+      country: "国家代码",
+      "country-name": "国家/地区名称",
+      "postal-code": "邮政编码",
+      "cc-name": "持卡人姓名",
+      "cc-given-name": "持卡人名字",
+      "cc-additional-name": "持卡人中间名",
+      "cc-family-name": "持卡人姓氏",
+      "cc-number": "信用卡号",
+      "cc-exp": "有效期",
+      "cc-exp-month": "到期月份",
+      "cc-exp-year": "到期年份",
+      "cc-csc": "卡安全码",
+      "cc-type": "信用卡类型",
+      "transaction-currency": "交易货币",
+      "transaction-amount": "交易金额",
+      language: "首选语言",
+      bday: "生日",
+      "bday-day": "生日",
+      "bday-month": "生日月份",
+      "bday-year": "生日年份",
+      sex: "性",
+      url: "网站 URL",
+      photo: "个人头像",
+      tel: "电话号码",
+      "tel-country-code": "电话的国家代码",
+      "tel-national": "全国电话号码",
+      "tel-area-code": "区号",
+      "tel-local": "本地电话号码",
+      "tel-local-prefix": "本地电话前缀",
+      "tel-local-suffix": "本地电话后缀",
+      "tel-extension": "电话分机",
+      email: "电子邮件地址",
+      impp: "即时通讯协议"
+    },
     maskType: {
       none: "没有",
       pattern: "模式",
@@ -2994,3 +3049,56 @@ editorLocalization.locales["zh-cn"] = simplifiedChineseTranslation;
 // names.default-contrast: "Contrast" => "反差"
 // panel.showNumber: "Number this panel" => "为此面板编号"
 // pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "选择是否希望调查在受访者回答了当前页面上的所有问题后自动前进到下一页。如果页面上的最后一个问题是开放式的或允许多个答案，则此功能将不适用。"
+// autocomplete.name: "Full Name" => "全名"
+// autocomplete.honorific-prefix: "Prefix" => "前缀"
+// autocomplete.given-name: "First Name" => "名字"
+// autocomplete.additional-name: "Middle Name" => "中间名"
+// autocomplete.family-name: "Last Name" => "姓"
+// autocomplete.honorific-suffix: "Suffix" => "后缀"
+// autocomplete.nickname: "Nickname" => "昵称"
+// autocomplete.organization-title: "Job Title" => "职称"
+// autocomplete.username: "User Name" => "用户名"
+// autocomplete.new-password: "New Password" => "新密码"
+// autocomplete.current-password: "Current Password" => "当前密码"
+// autocomplete.organization: "Organization Name" => "组织名称"
+// autocomplete.street-address: "Full Street Address" => "全街地址"
+// autocomplete.address-line1: "Address Line 1" => "地址行 1"
+// autocomplete.address-line2: "Address Line 2" => "地址行 2"
+// autocomplete.address-line3: "Address Line 3" => "地址行 3"
+// autocomplete.address-level4: "Level 4 Address" => "4 级地址"
+// autocomplete.address-level3: "Level 3 Address" => "3 级地址"
+// autocomplete.address-level2: "Level 2 Address" => "2 级地址"
+// autocomplete.address-level1: "Level 1 Address" => "1 级地址"
+// autocomplete.country: "Country Code" => "国家代码"
+// autocomplete.country-name: "Country Name" => "国家/地区名称"
+// autocomplete.postal-code: "Postal Code" => "邮政编码"
+// autocomplete.cc-name: "Cardholder Name" => "持卡人姓名"
+// autocomplete.cc-given-name: "Cardholder First Name" => "持卡人名字"
+// autocomplete.cc-additional-name: "Cardholder Middle Name" => "持卡人中间名"
+// autocomplete.cc-family-name: "Cardholder Last Name" => "持卡人姓氏"
+// autocomplete.cc-number: "Credit Card Number" => "信用卡号"
+// autocomplete.cc-exp: "Expiration Date" => "有效期"
+// autocomplete.cc-exp-month: "Expiration Month" => "到期月份"
+// autocomplete.cc-exp-year: "Expiration Year" => "到期年份"
+// autocomplete.cc-csc: "Card Security Code" => "卡安全码"
+// autocomplete.cc-type: "Credit Card Type" => "信用卡类型"
+// autocomplete.transaction-currency: "Transaction Currency" => "交易货币"
+// autocomplete.transaction-amount: "Transaction Amount" => "交易金额"
+// autocomplete.language: "Preferred Language" => "首选语言"
+// autocomplete.bday: "Birthday" => "生日"
+// autocomplete.bday-day: "Birthday Day" => "生日"
+// autocomplete.bday-month: "Birthday Month" => "生日月份"
+// autocomplete.bday-year: "Birthday Year" => "生日年份"
+// autocomplete.sex: "Gender" => "性"
+// autocomplete.url: "Website URL" => "网站 URL"
+// autocomplete.photo: "Profile Photo" => "个人头像"
+// autocomplete.tel: "Telephone Number" => "电话号码"
+// autocomplete.tel-country-code: "Country Code for Phone" => "电话的国家代码"
+// autocomplete.tel-national: "National Telephone Number" => "全国电话号码"
+// autocomplete.tel-area-code: "Area Code" => "区号"
+// autocomplete.tel-local: "Local Phone Number" => "本地电话号码"
+// autocomplete.tel-local-prefix: "Local Phone Prefix" => "本地电话前缀"
+// autocomplete.tel-local-suffix: "Local Phone Suffix" => "本地电话后缀"
+// autocomplete.tel-extension: "Phone Extension" => "电话分机"
+// autocomplete.email: "Email Address" => "电子邮件地址"
+// autocomplete.impp: "Instant Messaging Protocol" => "即时通讯协议"

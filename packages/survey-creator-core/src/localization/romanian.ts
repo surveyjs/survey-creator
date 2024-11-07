@@ -1018,6 +1018,61 @@ export const roStrings = {
       url: "URL",
       week: "Săptămână"
     },
+    autocomplete: {
+      name: "Nume complet",
+      "honorific-prefix": "Prefix",
+      "given-name": "Prenume",
+      "additional-name": "Al doilea nume",
+      "family-name": "Nume de familie",
+      "honorific-suffix": "Sufix",
+      nickname: "Poreclă",
+      "organization-title": "Titlul postului",
+      username: "Nume de utilizator",
+      "new-password": "Parolă nouă",
+      "current-password": "Parolă curentă",
+      organization: "Numele organizației",
+      "street-address": "Adresa stradală completă",
+      "address-line1": "Linia de adresă 1",
+      "address-line2": "Linia de adresă 2",
+      "address-line3": "Linia de adresă 3",
+      "address-level4": "Adresa de nivel 4",
+      "address-level3": "Nivel 3 Adresă",
+      "address-level2": "Nivel 2 Adresă",
+      "address-level1": "Adresa de nivel 1",
+      country: "Codul țării",
+      "country-name": "Numele țării",
+      "postal-code": "Cod poștal",
+      "cc-name": "Numele titularului cardului",
+      "cc-given-name": "Prenumele titularului cardului",
+      "cc-additional-name": "Al doilea prenume al deținătorului cardului",
+      "cc-family-name": "Numele de familie al titularului cardului",
+      "cc-number": "Numărul cardului de credit",
+      "cc-exp": "Data de expirare",
+      "cc-exp-month": "Luna de expirare",
+      "cc-exp-year": "Anul de expirare",
+      "cc-csc": "Codul de securitate al cardului",
+      "cc-type": "Tip card de credit",
+      "transaction-currency": "Moneda tranzacției",
+      "transaction-amount": "Suma tranzacției",
+      language: "Limba preferată",
+      bday: "Aniversare",
+      "bday-day": "Ziua zilei de naștere",
+      "bday-month": "Luna zilei de naștere",
+      "bday-year": "Anul zilei de naștere",
+      sex: "Gen",
+      url: "Adresa URL a site-ului web",
+      photo: "Fotografie de profil",
+      tel: "Număr telefonic",
+      "tel-country-code": "Codul de țară pentru telefon",
+      "tel-national": "Număr de telefon național",
+      "tel-area-code": "Prefix",
+      "tel-local": "Număr de telefon local",
+      "tel-local-prefix": "Prefix telefon local",
+      "tel-local-suffix": "Sufixul telefonului local",
+      "tel-extension": "Extensie de telefon",
+      email: "Adresa de e-mail",
+      impp: "Protocol de mesagerie instantanee"
+    },
     maskType: {
       none: "Niciunul",
       pattern: "Model",
@@ -1789,3 +1844,56 @@ editorLocalization.locales["ro"] = roStrings;
 // names.default-contrast: "Contrast" => "Contrast"
 // panel.showNumber: "Number this panel" => "Numerotați acest panou"
 // pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Selectați dacă doriți ca chestionarul să avanseze automat la pagina următoare după ce un respondent a răspuns la toate întrebările de pe pagina curentă. Această funcție nu se va aplica dacă ultima întrebare de pe pagină este deschisă sau permite răspunsuri multiple."
+// autocomplete.name: "Full Name" => "Nume complet"
+// autocomplete.honorific-prefix: "Prefix" => "Prefix"
+// autocomplete.given-name: "First Name" => "Prenume"
+// autocomplete.additional-name: "Middle Name" => "Al doilea nume"
+// autocomplete.family-name: "Last Name" => "Nume de familie"
+// autocomplete.honorific-suffix: "Suffix" => "Sufix"
+// autocomplete.nickname: "Nickname" => "Poreclă"
+// autocomplete.organization-title: "Job Title" => "Titlul postului"
+// autocomplete.username: "User Name" => "Nume de utilizator"
+// autocomplete.new-password: "New Password" => "Parolă nouă"
+// autocomplete.current-password: "Current Password" => "Parolă curentă"
+// autocomplete.organization: "Organization Name" => "Numele organizației"
+// autocomplete.street-address: "Full Street Address" => "Adresa stradală completă"
+// autocomplete.address-line1: "Address Line 1" => "Linia de adresă 1"
+// autocomplete.address-line2: "Address Line 2" => "Linia de adresă 2"
+// autocomplete.address-line3: "Address Line 3" => "Linia de adresă 3"
+// autocomplete.address-level4: "Level 4 Address" => "Adresa de nivel 4"
+// autocomplete.address-level3: "Level 3 Address" => "Nivel 3 Adresă"
+// autocomplete.address-level2: "Level 2 Address" => "Nivel 2 Adresă"
+// autocomplete.address-level1: "Level 1 Address" => "Adresa de nivel 1"
+// autocomplete.country: "Country Code" => "Codul țării"
+// autocomplete.country-name: "Country Name" => "Numele țării"
+// autocomplete.postal-code: "Postal Code" => "Cod poștal"
+// autocomplete.cc-name: "Cardholder Name" => "Numele titularului cardului"
+// autocomplete.cc-given-name: "Cardholder First Name" => "Prenumele titularului cardului"
+// autocomplete.cc-additional-name: "Cardholder Middle Name" => "Al doilea prenume al deținătorului cardului"
+// autocomplete.cc-family-name: "Cardholder Last Name" => "Numele de familie al titularului cardului"
+// autocomplete.cc-number: "Credit Card Number" => "Numărul cardului de credit"
+// autocomplete.cc-exp: "Expiration Date" => "Data de expirare"
+// autocomplete.cc-exp-month: "Expiration Month" => "Luna de expirare"
+// autocomplete.cc-exp-year: "Expiration Year" => "Anul de expirare"
+// autocomplete.cc-csc: "Card Security Code" => "Codul de securitate al cardului"
+// autocomplete.cc-type: "Credit Card Type" => "Tip card de credit"
+// autocomplete.transaction-currency: "Transaction Currency" => "Moneda tranzacției"
+// autocomplete.transaction-amount: "Transaction Amount" => "Suma tranzacției"
+// autocomplete.language: "Preferred Language" => "Limba preferată"
+// autocomplete.bday: "Birthday" => "Aniversare"
+// autocomplete.bday-day: "Birthday Day" => "Ziua zilei de naștere"
+// autocomplete.bday-month: "Birthday Month" => "Luna zilei de naștere"
+// autocomplete.bday-year: "Birthday Year" => "Anul zilei de naștere"
+// autocomplete.sex: "Gender" => "Gen"
+// autocomplete.url: "Website URL" => "Adresa URL a site-ului web"
+// autocomplete.photo: "Profile Photo" => "Fotografie de profil"
+// autocomplete.tel: "Telephone Number" => "Număr telefonic"
+// autocomplete.tel-country-code: "Country Code for Phone" => "Codul de țară pentru telefon"
+// autocomplete.tel-national: "National Telephone Number" => "Număr de telefon național"
+// autocomplete.tel-area-code: "Area Code" => "Prefix"
+// autocomplete.tel-local: "Local Phone Number" => "Număr de telefon local"
+// autocomplete.tel-local-prefix: "Local Phone Prefix" => "Prefix telefon local"
+// autocomplete.tel-local-suffix: "Local Phone Suffix" => "Sufixul telefonului local"
+// autocomplete.tel-extension: "Phone Extension" => "Extensie de telefon"
+// autocomplete.email: "Email Address" => "Adresa de e-mail"
+// autocomplete.impp: "Instant Messaging Protocol" => "Protocol de mesagerie instantanee"

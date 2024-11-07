@@ -1018,6 +1018,61 @@ export var indonesianStrings = {
       url: "URL",
       week: "Minggu"
     },
+    autocomplete: {
+      name: "Nama lengkap",
+      "honorific-prefix": "Awalan",
+      "given-name": "Nama depan",
+      "additional-name": "Nama tengah",
+      "family-name": "Nama Belakang",
+      "honorific-suffix": "Akhiran",
+      nickname: "Nickname",
+      "organization-title": "Judul Pekerjaan",
+      username: "Nama pengguna",
+      "new-password": "Kata sandi baru",
+      "current-password": "Kata Sandi Saat Ini",
+      organization: "Nama Organisasi",
+      "street-address": "Alamat Jalan Lengkap",
+      "address-line1": "Baris Alamat 1",
+      "address-line2": "Baris Alamat 2",
+      "address-line3": "Baris Alamat 3",
+      "address-level4": "Alamat Level 4",
+      "address-level3": "Alamat Level 3",
+      "address-level2": "Alamat Level 2",
+      "address-level1": "Alamat Level 1",
+      country: "Kode Negara",
+      "country-name": "Nama Negara",
+      "postal-code": "Kode Pos",
+      "cc-name": "Nama Pemegang Kartu",
+      "cc-given-name": "Nama Depan Pemegang Kartu",
+      "cc-additional-name": "Nama Tengah Pemegang Kartu",
+      "cc-family-name": "Nama Belakang Pemegang Kartu",
+      "cc-number": "Nomor Kartu Kredit",
+      "cc-exp": "Tanggal kedaluwarsa",
+      "cc-exp-month": "Bulan Kedaluwarsa",
+      "cc-exp-year": "Tahun Kedaluwarsa",
+      "cc-csc": "Kode Keamanan Kartu",
+      "cc-type": "Jenis Kartu Kredit",
+      "transaction-currency": "Mata Uang Transaksi",
+      "transaction-amount": "Jumlah Transaksi",
+      language: "Bahasa Pilihan",
+      bday: "Ulang tahun",
+      "bday-day": "Hari Ulang Tahun",
+      "bday-month": "Bulan Ulang Tahun",
+      "bday-year": "Tahun Ulang Tahun",
+      sex: "Jenis kelamin",
+      url: "URL situs web",
+      photo: "Foto Profil",
+      tel: "Nomor Telepon",
+      "tel-country-code": "Kode Negara untuk Telepon",
+      "tel-national": "Nomor Telepon Nasional",
+      "tel-area-code": "Kode Area",
+      "tel-local": "Nomor Telepon Lokal",
+      "tel-local-prefix": "Awalan Telepon Lokal",
+      "tel-local-suffix": "Akhiran Telepon Lokal",
+      "tel-extension": "Ekstensi Telepon",
+      email: "Alamat Email",
+      impp: "Protokol Pesan Instan"
+    },
     maskType: {
       none: "Tidak",
       pattern: "Pola",
@@ -3006,3 +3061,56 @@ editorLocalization.locales["id"] = indonesianStrings;
 // names.default-contrast: "Contrast" => "Kontras"
 // panel.showNumber: "Number this panel" => "Nomor panel ini"
 // pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Pilih apakah Anda ingin survei maju secara otomatis ke halaman berikutnya setelah responden menjawab semua pertanyaan di halaman saat ini. Fitur ini tidak akan berlaku jika pertanyaan terakhir di halaman bersifat terbuka atau mengizinkan banyak jawaban."
+// autocomplete.name: "Full Name" => "Nama lengkap"
+// autocomplete.honorific-prefix: "Prefix" => "Awalan"
+// autocomplete.given-name: "First Name" => "Nama depan"
+// autocomplete.additional-name: "Middle Name" => "Nama tengah"
+// autocomplete.family-name: "Last Name" => "Nama Belakang"
+// autocomplete.honorific-suffix: "Suffix" => "Akhiran"
+// autocomplete.nickname: "Nickname" => "Nickname"
+// autocomplete.organization-title: "Job Title" => "Judul Pekerjaan"
+// autocomplete.username: "User Name" => "Nama pengguna"
+// autocomplete.new-password: "New Password" => "Kata sandi baru"
+// autocomplete.current-password: "Current Password" => "Kata Sandi Saat Ini"
+// autocomplete.organization: "Organization Name" => "Nama Organisasi"
+// autocomplete.street-address: "Full Street Address" => "Alamat Jalan Lengkap"
+// autocomplete.address-line1: "Address Line 1" => "Baris Alamat 1"
+// autocomplete.address-line2: "Address Line 2" => "Baris Alamat 2"
+// autocomplete.address-line3: "Address Line 3" => "Baris Alamat 3"
+// autocomplete.address-level4: "Level 4 Address" => "Alamat Level 4"
+// autocomplete.address-level3: "Level 3 Address" => "Alamat Level 3"
+// autocomplete.address-level2: "Level 2 Address" => "Alamat Level 2"
+// autocomplete.address-level1: "Level 1 Address" => "Alamat Level 1"
+// autocomplete.country: "Country Code" => "Kode Negara"
+// autocomplete.country-name: "Country Name" => "Nama Negara"
+// autocomplete.postal-code: "Postal Code" => "Kode Pos"
+// autocomplete.cc-name: "Cardholder Name" => "Nama Pemegang Kartu"
+// autocomplete.cc-given-name: "Cardholder First Name" => "Nama Depan Pemegang Kartu"
+// autocomplete.cc-additional-name: "Cardholder Middle Name" => "Nama Tengah Pemegang Kartu"
+// autocomplete.cc-family-name: "Cardholder Last Name" => "Nama Belakang Pemegang Kartu"
+// autocomplete.cc-number: "Credit Card Number" => "Nomor Kartu Kredit"
+// autocomplete.cc-exp: "Expiration Date" => "Tanggal kedaluwarsa"
+// autocomplete.cc-exp-month: "Expiration Month" => "Bulan Kedaluwarsa"
+// autocomplete.cc-exp-year: "Expiration Year" => "Tahun Kedaluwarsa"
+// autocomplete.cc-csc: "Card Security Code" => "Kode Keamanan Kartu"
+// autocomplete.cc-type: "Credit Card Type" => "Jenis Kartu Kredit"
+// autocomplete.transaction-currency: "Transaction Currency" => "Mata Uang Transaksi"
+// autocomplete.transaction-amount: "Transaction Amount" => "Jumlah Transaksi"
+// autocomplete.language: "Preferred Language" => "Bahasa Pilihan"
+// autocomplete.bday: "Birthday" => "Ulang tahun"
+// autocomplete.bday-day: "Birthday Day" => "Hari Ulang Tahun"
+// autocomplete.bday-month: "Birthday Month" => "Bulan Ulang Tahun"
+// autocomplete.bday-year: "Birthday Year" => "Tahun Ulang Tahun"
+// autocomplete.sex: "Gender" => "Jenis kelamin"
+// autocomplete.url: "Website URL" => "URL situs web"
+// autocomplete.photo: "Profile Photo" => "Foto Profil"
+// autocomplete.tel: "Telephone Number" => "Nomor Telepon"
+// autocomplete.tel-country-code: "Country Code for Phone" => "Kode Negara untuk Telepon"
+// autocomplete.tel-national: "National Telephone Number" => "Nomor Telepon Nasional"
+// autocomplete.tel-area-code: "Area Code" => "Kode Area"
+// autocomplete.tel-local: "Local Phone Number" => "Nomor Telepon Lokal"
+// autocomplete.tel-local-prefix: "Local Phone Prefix" => "Awalan Telepon Lokal"
+// autocomplete.tel-local-suffix: "Local Phone Suffix" => "Akhiran Telepon Lokal"
+// autocomplete.tel-extension: "Phone Extension" => "Ekstensi Telepon"
+// autocomplete.email: "Email Address" => "Alamat Email"
+// autocomplete.impp: "Instant Messaging Protocol" => "Protokol Pesan Instan"

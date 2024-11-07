@@ -2930,12 +2930,12 @@ test("rating smileys - icon column", () => {
   );
   expect(rateValuesQuestion).toBeTruthy();
 
-  expect(rateValuesQuestion.visibleRows[0].cells[0].question.html).toContain("#icon-not-good");
-  expect(rateValuesQuestion.visibleRows[1].cells[0].question.html).toContain("#icon-very-good");
+  expect(rateValuesQuestion.visibleRows[0].cells[0].question.html).toContain("#icon-smiley-rate4-24x24");
+  expect(rateValuesQuestion.visibleRows[1].cells[0].question.html).toContain("#icon-smiley-rate8-24x24");
 
   question.rateCount = 3;
-  expect(rateValuesQuestion.visibleRows[0].cells[0].question.html).toContain("#icon-not-good");
-  expect(rateValuesQuestion.visibleRows[2].cells[0].question.html).toContain("#icon-very-good");
+  expect(rateValuesQuestion.visibleRows[0].cells[0].question.html).toContain("#icon-smiley-rate4-24x24");
+  expect(rateValuesQuestion.visibleRows[2].cells[0].question.html).toContain("#icon-smiley-rate8-24x24");
 });
 test("Check rateValues position in tab", () => {
   var question = new QuestionRatingModel("q1");

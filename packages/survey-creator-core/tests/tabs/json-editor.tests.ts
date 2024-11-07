@@ -1,7 +1,7 @@
 import { TabJsonEditorTextareaPlugin, TextareaJsonEditorModel } from "../../src/components/tabs/json-editor-textarea";
 import { CreatorTester } from "../creator-tester";
-import { JsonEditorBaseModel } from "../../src/components/tabs/json-editor-plugin";
 import { settings } from "../../src/creator-settings";
+import { SurveyTextWorker } from "../../src/textWorker";
 
 test("JsonEditor & showErrors/errorList", () => {
   const creator = new CreatorTester();
@@ -247,4 +247,20 @@ test("Put elements into end of the JSON", () => {
   const elementsPos = text.indexOf("elements");
   const titlePos = text.indexOf("title");
   expect(elementsPos > titlePos).toBeTruthy();
+});
+test("We should have one SurveyTextWorker.fromJSON/toJSON", () => {
+  const json = { requiredText: "###" };
+  const creator = new CreatorTester();
+  creator.activeTab ="editor";
+  const editorPlugin: TabJsonEditorTextareaPlugin = <TabJsonEditorTextareaPlugin>creator.getPlugin("editor");
+  editorPlugin.model.text = JSON.stringify(json);
+  let counter = 0;
+  SurveyTextWorker.onProcessJson = (json: any): void => {
+    if(json?.requiredText === "###") {
+      counter ++;
+    }
+  };
+  creator.activeTab = "designer";
+  expect(counter).toBe(1);
+  SurveyTextWorker.onProcessJson = undefined;
 });

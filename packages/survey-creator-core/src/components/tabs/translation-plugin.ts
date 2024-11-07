@@ -104,7 +104,6 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.mergeLocaleWithDefaultAction.visible = false;
     this.importCsvAction.visible = false;
     this.exportCsvAction.visible = false;
-
     return true;
   }
   private createMergeLocaleWithDefaultActionTitleUpdater(): any {
