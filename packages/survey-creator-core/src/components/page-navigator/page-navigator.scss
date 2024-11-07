@@ -6,13 +6,12 @@ svc-page-navigator,
   flex-direction: column;
 }
 
-.svc-page-navigator__navigator-icon {
+.svc-page-navigator__button-icon {
   display: block;
   width: var(--ctr-page-navigator-button-icon-width, calcSize(3));
   height: var(--ctr-page-navigator-button-icon-height, calcSize(3));
   padding: var(--ctr-page-navigator-button-padding, calcSize(1.25));
   border-radius: var(--ctr-page-navigator-button-corner-radius, 50%);
-  cursor: pointer;
   transition: background-color $creator-transition-duration;
 
   .sv-svg-icon {
@@ -26,36 +25,38 @@ svc-page-navigator,
   }
 }
 
-.svc-page-navigator__selector {
-  width: calcSize(5.5);
-  height: calcSize(5.5);
-  min-height: calcSize(5.5);
-}
+.svc-page-navigator__button {
+  --ctr-page-navigator-button-double-padding: calc(2 * var(--ctr-page-navigator-button-padding));
+  --ctr-page-navigator-button-width: calc(
+    var(--ctr-page-navigator-button-icon-width) + var(--ctr-page-navigator-button-double-padding)
+  );
+  --ctr-page-navigator-button-height: calc(
+    var(--ctr-page-navigator-button-icon-height) + var(--ctr-page-navigator-button-double-padding)
+  );
+  width: var(--ctr-page-navigator-button-width, calcSize(5.5));
+  height: var(--ctr-page-navigator-button-height, calcSize(5.5));
 
-survey-creator,
-.svc-creator {
-  .svc-page-navigator__selector {
-    padding: 0;
-    border: none;
-    background-color: transparent;
-    &:hover,
-    &:focus {
-      outline: none;
+  padding: 0;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  &:hover,
+  &:focus {
+    outline: none;
 
-      .svc-page-navigator__navigator-icon {
-        background-color: var(--ctr-page-navigator-button-background-color-hovered, $primary-light);
+    .svc-page-navigator__button-icon {
+      background-color: var(--ctr-page-navigator-button-background-color-hovered, $primary-light);
 
-        use {
-          fill: var(--ctr-page-navigator-button-icon-color-hovered, $primary);
-        }
+      use {
+        fill: var(--ctr-page-navigator-button-icon-color-hovered, $primary);
       }
     }
   }
 }
 
-.svc-page-navigator__selector--opened {
-  .svc-page-navigator__navigator-icon {
-    background-color: $primary-light;
+.svc-page-navigator__button--pressed {
+  .svc-page-navigator__button-icon {
+    background: var(--ctr-page-navigator-button-background-color-pressed, $primary-light);
     opacity: var(--ctr-page-navigator-button-opacity-pressed, 0.5);
 
     use {
@@ -80,13 +81,12 @@ survey-creator,
   padding: calcSize(16.5) 0;
   top: 0;
   bottom: 0;
-  right: calcSize(1.5);
+  right: var(--ctr-page-navigator-padding-right, calcSize(1.5));
 }
 
 .svc-page-navigator {
-  padding: calcSize(1.5);
-  padding-right: 0;
-  width: calcSize(5.5);
+  padding: var(--ctr-page-navigator-padding-top, calcSize(1.5)) 0
+    var(--ctr-page-navigator-padding-bottom, calcSize(1.5)) var(--ctr-page-navigator-padding-left, calcSize(1.5));
 }
 
 .svc-creator__toolbox--right,
@@ -102,12 +102,12 @@ survey-creator,
 
   .svc-tab-designer__page-navigator {
     right: unset;
-    left: calcSize(1.5);
+    left: var(--ctr-page-navigator-padding-left, calcSize(1.5));
   }
 
   .svc-page-navigator {
-    padding: calcSize(1.5);
-    padding-left: 0;
+    padding: var(--ctr-page-navigator-padding-top, calcSize(1.5)) var(--ctr-page-navigator-padding-right, calcSize(1.5))
+      var(--ctr-page-navigator-padding-bottom, calcSize(1.5)) 0;
   }
 }
 
