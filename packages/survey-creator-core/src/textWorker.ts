@@ -1,4 +1,4 @@
-import { SurveyModel, JsonError, Base, ISurveyElement } from "survey-core";
+import { SurveyModel, JsonError, Base, ISurveyElement, ISurveyData, ISurvey } from "survey-core";
 import { SurveyHelper } from "./survey-helper";
 import { SurveyJSON5 } from "./json5";
 import { settings } from "./creator-settings";
@@ -9,6 +9,11 @@ class SurveyForTextWorker extends SurveyModel {
     this.setDesignMode(true);
     this.fromJSON(jsonObj);
   }
+  //Do nothing on end loading
+  endLoadingFromJson(): void { }
+  getSurveyData(): ISurveyData { return null; }
+  getSurvey(): ISurvey { return this; }
+
 }
 
 class SurveyTextWorkerJsonErrorFixerBase {
