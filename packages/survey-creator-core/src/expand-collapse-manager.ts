@@ -26,4 +26,7 @@ export class ExpandCollapseManager {
   public remove(adorner: SurveyElementAdornerBase) {
     this.adorners.splice(this.adorners.indexOf(adorner), 1);
   }
+  public clear() {
+    this.adorners.length = 0;
+  }
 }

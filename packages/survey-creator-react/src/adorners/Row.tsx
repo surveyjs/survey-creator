@@ -19,6 +19,9 @@ export class RowWrapper extends CreatorModelElement<
     super(props);
   }
   protected createModel(props: any): void {
+    if (!!this.model) {
+      this.model.dispose();
+    }
     this.model = new RowViewModel(
       props.componentData.creator,
       props.row,
@@ -31,6 +34,16 @@ export class RowWrapper extends CreatorModelElement<
   protected getStateElement(): Base {
     return this.model;
   }
+
+  componentDidMount(): void {
+    super.componentDidMount();
+    this.model.subscribeElementChanges();
+  }
+  componentWillUnmount(): void {
+    this.model.unsubscribeElementChanges();
+    super.componentWillUnmount();
+  }
+
 
   render(): JSX.Element {
     return (

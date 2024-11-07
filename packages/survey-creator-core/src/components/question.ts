@@ -275,6 +275,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     if (!!this.surveyElement["setCanShowOptionItemCallback"]) {
       (<any>this.surveyElement).setCanShowOptionItemCallback(undefined);
     }
+    super.detachFromUI();
   }
   get isDraggable() {
     return true;
