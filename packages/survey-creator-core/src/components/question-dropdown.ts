@@ -16,10 +16,6 @@ export class QuestionDropdownAdornerViewModel extends QuestionAdornerViewModel {
     templateData: SurveyTemplateRendererTemplateData,
   ) {
     super(creator, surveyElement, templateData);
-    this.surveyElement.registerFunctionOnPropertyValueChanged("isSelectedInDesigner",
-      () => {
-        this.leftFocus();
-      }, "dropdownCollapseChecker");
     this.visibleCount = creator.maxVisibleChoices;
     this.isCollapsed = this.isCollapsed && this.needToCollapse;
   }
@@ -72,9 +68,16 @@ export class QuestionDropdownAdornerViewModel extends QuestionAdornerViewModel {
     this.isCollapsed = !this.isCollapsed;
   }
 
-  public dispose(): void {
-    super.dispose();
+  public attachElement(surveyElement: SurveyElement) {
+    super.attachElement(surveyElement);
+    this.surveyElement.registerFunctionOnPropertyValueChanged("isSelectedInDesigner",
+      () => {
+        this.leftFocus();
+      }, "dropdownCollapseChecker");
+  }
+  public detachElement(surveyElement: SurveyElement): void {
     this.surveyElement.unRegisterFunctionOnPropertyValueChanged("isSelectedInDesigner", "dropdownCollapseChecker");
+    super.detachElement(surveyElement);
   }
 
 }

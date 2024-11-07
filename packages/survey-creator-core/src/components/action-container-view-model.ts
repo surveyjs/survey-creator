@@ -349,6 +349,8 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     }
     super.dispose();
     this.sidebarFlyoutModeChangedFunc = undefined;
+    this.selectedPropPageFunc = undefined;
+    this.animationCollapsed = undefined;
   }
   protected onElementSelectedChanged(isSelected: boolean): void {
     if (!isSelected) return;
