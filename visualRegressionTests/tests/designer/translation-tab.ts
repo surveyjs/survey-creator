@@ -77,7 +77,7 @@ test("tranlation property grid", async (t) => {
   });
 });
 
-test("tranlation property grid", async (t) => {
+test("tranlation property grid + onMachineTranslate", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(2560, 1440);
     await ClientFunction(() => {

@@ -295,11 +295,9 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     super.createActionContainers();
     const defaultCssClasses = {
       root: "svc-survey-element-toolbar sv-action-bar",
-      // defaultSizeMode: "sv-action-bar--default-size-mode",
-      // smallSizeMode: "sv-action-bar--small-size-mode",
       item: "svc-survey-element-toolbar__item",
       itemWithTitle: "svc-survey-element-toolbar__item--with-text",
-      // itemAsIcon: "sv-action-bar-item--icon",
+      itemAsIcon: "svc-survey-element-toolbar__item--icon",
       itemActive: "svc-survey-element-toolbar__item--active",
       itemPressed: "svc-survey-element-toolbar__item--pressed",
       itemIcon: "svc-survey-element-toolbar-item__icon",
@@ -312,7 +310,13 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     (<SurveyElementActionContainer>this.actionContainer).dotsItem.css += " svc-survey-element-toolbar__dots-item";
     (<SurveyElementActionContainer>this.actionContainer).dotsItem.innerCss += " svc-survey-element-toolbar__item";
     this.topActionContainer = new ActionContainer();
-    this.topActionContainer.cssClasses = defaultCssClasses;
+    this.topActionContainer.cssClasses = {
+      root: "svc-survey-element-top-toolbar sv-action-bar",
+      item: "svc-survey-element-top-toolbar__item",
+      itemIcon: "svc-survey-element-toolbar-item__icon",
+      itemTitle: "svc-survey-element-toolbar-item__title",
+      itemTitleWithIcon: "svc-survey-element-toolbar-item__title--with-icon",
+    };
     this.topActionContainer.sizeMode = "small";
     this.topActionContainer.setItems([this.expandCollapseAction]);
   }

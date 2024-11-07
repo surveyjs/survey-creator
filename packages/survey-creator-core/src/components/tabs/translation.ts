@@ -1667,6 +1667,7 @@ export class TranslationEditor {
     if(!!action) {
       action.enabled = this.fromLocales.length > 0;
       action.iconName = action.enabled ? "icon-chevron_16x16" : undefined;
+      action.iconSize = "auto";
       action.data.containerCss = new CssClassBuilder()
         .append("st-translation-machine-from__container")
         .append("st-translation-machine-from__container--disabled", !action.enabled)

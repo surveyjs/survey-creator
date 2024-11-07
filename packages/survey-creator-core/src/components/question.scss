@@ -52,8 +52,7 @@ svc-question {
   }
 }
 
-.svc-survey-element-toolbar__item,
-.svc-survey-element-toolbar__dots-item .sv-dots__item {
+.svc-survey-element-toolbar__item {
   @include defaultActionButtonSettings;
   --ctr-survey-question-panel-toolbar-button-gap: calc(var(--ctr-survey-question-panel-toolbar-gap) / 2);
   margin: 0 var(--ctr-survey-question-panel-toolbar-button-gap, calcSize(0.5));
@@ -62,6 +61,7 @@ svc-question {
     var(--ctr-survey-question-panel-toolbar-item-padding-right, calcSize(1))
     var(--ctr-survey-question-panel-toolbar-item-padding-bottom, calcSize(1))
     var(--ctr-survey-question-panel-toolbar-item-padding-left, calcSize(1));
+
   justify-content: center;
   align-items: center;
 
@@ -72,27 +72,43 @@ svc-question {
 }
 
 .svc-survey-element-toolbar__item--with-text {
-  padding: var(--ctr-survey-question-panel-toolbar-item-padding-top, calcSize(1))
+  padding: var(--ctr-survey-question-panel-toolbar-item-padding-top, calcSize(0.5))
     var(--ctr-survey-question-panel-toolbar-item-padding-right-with-text, calcSize(1))
-    var(--ctr-survey-question-panel-toolbar-item-padding-bottom, calcSize(1))
-    var(--ctr-survey-question-panel-toolbar-item-padding-left, calcSize(1));
-  gap: var(--ctr-survey-question-panel-toolbar-item-gap, calcSize(0.5));
+    var(--ctr-survey-question-panel-toolbar-item-padding-bottom, calcSize(0.5))
+    var(--ctr-survey-question-panel-toolbar-item-padding-left, calcSize(0.5));
+  gap: var(--ctr-survey-question-panel-toolbar-item-gap, 0);
 }
 
-.svc-survey-element-toolbar .sv-action:last-of-type .svc-survey-element-toolbar__item--with-text {
+.sv-dots__item.svc-survey-element-toolbar__item,
+.svc-survey-element-toolbar__item--icon {
+  padding: var(--ctr-survey-question-panel-toolbar-item-padding-top, calcSize(0.5))
+    var(--ctr-survey-question-panel-toolbar-item-padding-right, calcSize(0.5))
+    var(--ctr-survey-question-panel-toolbar-item-padding-bottom, calcSize(0.5))
+    var(--ctr-survey-question-panel-toolbar-item-padding-left, calcSize(0.5));
+}
+
+.svc-survey-element-toolbar .sv-action:last-of-type .svc-survey-element-toolbar__item {
   margin-inline-end: 0;
 }
 
-.svc-survey-element-toolbar .sv-action:first-of-type .svc-survey-element-toolbar__item--with-text {
+.svc-survey-element-toolbar .sv-action:first-of-type .svc-survey-element-toolbar__item {
   margin-inline-start: 0;
 }
 
 .svc-dropdown-action--convertTo .svc-survey-element-toolbar__item--with-text {
   flex-direction: row-reverse;
-  padding: var(--ctr-survey-question-panel-toolbar-item-padding-top, calcSize(1))
-    var(--ctr-survey-question-panel-toolbar-item-padding-right, calcSize(1))
-    var(--ctr-survey-question-panel-toolbar-item-padding-bottom, calcSize(1))
+  padding: var(--ctr-survey-question-panel-toolbar-item-padding-top, calcSize(0.5))
+    var(--ctr-survey-question-panel-toolbar-item-padding-right, calcSize(0.5))
+    var(--ctr-survey-question-panel-toolbar-item-padding-bottom, calcSize(0.5))
     var(--ctr-survey-question-panel-toolbar-item-padding-left-with-text, calcSize(1));
+}
+
+.svc-dropdown-action--convertTo .svc-survey-element-toolbar__item--icon {
+  .svc-survey-element-toolbar-item__icon {
+    padding: 0;
+    width: var(--ctr-survey-question-panel-toolbar-item-icon-container-width, calcSize(3));
+    height: var(--ctr-survey-question-panel-toolbar-item-icon-container-height, calcSize(3));
+  }
 }
 
 //hovered state
@@ -129,7 +145,7 @@ svc-question {
 }
 
 .svc-survey-element-toolbar-item__icon,
-.svc-survey-element-toolbar__dots-item .sv-svg-icon {
+.svc-survey-element-toolbar__dots-item .sv-svg-icon.sv-action-bar-item__icon {
   --ctr-survey-question-toolbar-item-icon-width: calc(
     var(--ctr-survey-question-panel-toolbar-item-icon-container-width) -
       var(--ctr-survey-question-panel-toolbar-item-icon-padding-right) -
@@ -143,13 +159,13 @@ svc-question {
 
   width: var(--ctr-survey-question-toolbar-item-icon-width, calcSize(2));
   height: var(--ctr-survey-question-toolbar-item-icon-height, calcSize(2));
-  padding: var(--ctr-survey-question-panel-toolbar-item-icon-padding-top, 0)
-    var(--ctr-survey-question-panel-toolbar-item-icon-padding-right, 0)
-    var(--ctr-survey-question-panel-toolbar-item-icon-padding-bottom, 0)
-    var(--ctr-survey-question-panel-toolbar-item-icon-padding-left, 0);
+  padding: var(--ctr-survey-question-panel-toolbar-item-icon-padding-top, calcSize(0.5))
+    var(--ctr-survey-question-panel-toolbar-item-icon-padding-right, calcSize(0.5))
+    var(--ctr-survey-question-panel-toolbar-item-icon-padding-bottom, calcSize(0.5))
+    var(--ctr-survey-question-panel-toolbar-item-icon-padding-left, calcSize(0.5));
 }
 
-.svc-survey-element-toolbar-item__icon use {
+.svc-survey-element-toolbar .svc-survey-element-toolbar-item__icon use {
   fill: var(--ctr-survey-question-panel-toolbar-item-icon-color, $secondary);
 }
 
@@ -416,10 +432,26 @@ svc-question {
   .sv-dots__item {
     margin-left: 0;
   }
-}
 
-.svc-survey-element-toolbar__dots-item use {
-  fill: $secondary;
+  .sv-list__item-icon {
+    --ctr-survey-question-toolbar-item-icon-width: calc(
+      var(--ctr-survey-question-panel-toolbar-item-icon-container-width) -
+        var(--ctr-survey-question-panel-toolbar-item-icon-padding-right) -
+        var(--ctr-survey-question-panel-toolbar-item-icon-padding-left)
+    );
+    --ctr-survey-question-toolbar-item-icon-height: calc(
+      var(--ctr-survey-question-panel-toolbar-item-icon-container-height) -
+        var(--ctr-survey-question-panel-toolbar-item-icon-padding-top) -
+        var(--ctr-survey-question-panel-toolbar-item-icon-padding-bottom)
+    );
+
+    width: var(--ctr-survey-question-toolbar-item-icon-width, calcSize(2));
+    height: var(--ctr-survey-question-toolbar-item-icon-height, calcSize(2));
+  }
+
+  use {
+    fill: $secondary;
+  }
 }
 
 .svc-question__content:focus,
@@ -1372,21 +1404,21 @@ svc-question,
   top: 0;
   right: 0;
   visibility: hidden;
+}
 
-  .sv-action-bar-item {
-    margin: 0;
-    padding: calcSize(0.5);
-    opacity: 0.5;
-    height: 24px;
+.svc-survey-element-top-toolbar__item {
+  @include defaultActionButtonSettings;
+  padding: 0;
+  border-radius: var(--ctr-survey-question-panel-toolbar-item-corner-radius, 4px);
+  opacity: var(--ctr-survey-question-panel-toolbar-item-opacity-muted, 0.5);
 
-    &:hover,
-    &:focus {
-      opacity: initial;
-    }
+  &:hover,
+  &:focus {
+    opacity: initial;
+  }
 
-    .sv-action-bar-item__icon use {
-      fill: $foreground-dim-light;
-    }
+  use {
+    fill: $foreground-dim-light;
   }
 }
 

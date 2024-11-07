@@ -60,6 +60,7 @@ const Theme = {
     "--ctr-toolbox-separator-padding-right": "0px",
     "--ctr-survey-question-panel-toolbar-item-opacity-pressed": 0.5,
     "--ctr-survey-question-panel-toolbar-item-opacity-disabled": 0.25,
+    "--ctr-survey-question-panel-toolbar-item-opacity-muted": 0.5,
     "--ctr-survey-question-panel-drag-area-drag-indicator-opacity": 0.5,
     "--ctr-label-padding-left": "0px",
     "--ctr-label-padding-right": "0px",

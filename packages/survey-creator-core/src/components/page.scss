@@ -91,11 +91,11 @@ svc-page {
   gap: var(--ctr-survey-question-panel-toolbar-item-gap, calcSize(0.5));
 }
 
-.svc-page-toolbar .sv-action:last-of-type .svc-page-toolbar__item--with-text {
+.svc-page-toolbar .sv-action:last-of-type .svc-page-toolbar__item {
   margin-inline-end: 0;
 }
 
-.svc-page-toolbar .sv-action:first-of-type .svc-page-toolbar__item--with-text {
+.svc-page-toolbar .sv-action:first-of-type .svc-page-toolbar__item {
   margin-inline-start: 0;
 }
 
