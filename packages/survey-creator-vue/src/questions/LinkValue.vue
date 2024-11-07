@@ -7,6 +7,7 @@
     :disabled="!question.isClickable"
     :classes="question.linkSetButtonCssClasses"
     :title="question.tooltip"
+    :iconName="question.iconName"
   >
   </SvComponent>
   <SvComponent
