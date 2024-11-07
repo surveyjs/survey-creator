@@ -94,11 +94,12 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   protected get dragInsideCollapsedContainer(): boolean {
     return this.collapsed && this.creator.dragDropSurveyElements.insideContainer;
   }
-
+  @property({ defaultValue: true }) needToRenderContent: boolean;
   @property({ defaultValue: true }) allowExpandCollapse: boolean;
   @property({
     onSet: (val, target: SurveyElementAdornerBase<T>) => {
       target.renderedCollapsed = val;
+      if (!val) target.needToRenderContent = true;
       if (target.creator.designerStateManager && !target.creator.designerStateManager.isSuspended && target.surveyElement) {
         target.creator.designerStateManager.getElementState(target.surveyElement).collapsed = val;
       }
@@ -293,6 +294,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       const state = this.creator.designerStateManager?.getElementState(this.surveyElement);
       this.collapsed = state.collapsed;
     }
+    this.needToRenderContent = !this.collapsed;
   }
 
   protected detachElement(surveyElement: T): void {

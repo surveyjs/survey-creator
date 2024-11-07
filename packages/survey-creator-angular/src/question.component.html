@@ -3,9 +3,9 @@
     (mouseover)="adorner.hover($event, $event.currentTarget)" (mouseleave)="adorner.hover($event, $event.currentTarget)"
     [attr.data-sv-drop-target-survey-element]="adorner.element.name || null" #container>
     <div *ngIf="adorner.showHiddenTitle" [class]="adorner.cssCollapsedHiddenHeader">
-      <div [class]="adorner.cssCollapsedHiddenTitle">
-        <sv-ng-string *ngIf="!!model.hasTitle" [model]="model.locTitle"></sv-ng-string>
-        <span *ngIf="!model.hasTitle" class="svc-fake-title">{{model.name}}</span>
+      <sv-ng-element-title *ngIf="!!model.hasTitle" [element]="model"></sv-ng-element-title>
+        <div *ngIf="!model.hasTitle" [class]="adorner.cssCollapsedHiddenTitle">
+          <span class="svc-fake-title">{{model.name}}</span>
       </div>
     </div>
     <div [class]="adorner.css()" [key2click]="{ disableTabStop: true }" (click)="adorner.select(adorner, $event)">
@@ -20,6 +20,7 @@
           <sv-action-bar [model]="adorner.topActionContainer" [handleClick]="false"></sv-action-bar>
         </div>
       </div>
+      <ng-container *ngIf="adorner.needToRenderContent">
       <ng-template [component]="{ name: componentName, data: componentData }"></ng-template>
       <div *ngIf="adorner.isEmptyElement && !showPlaceholderComponent" class="svc-panel__placeholder_frame-wrapper">
         <div class="svc-panel__placeholder_frame">
@@ -37,6 +38,7 @@
       <div class="svc-question__content-actions" (focusin)="adorner.select(adorner, $event)">
         <sv-action-bar [model]="adorner.actionContainer" [handleClick]="false"></sv-action-bar>
       </div>
+      </ng-container>
     </div>
   </div>
 </ng-template>

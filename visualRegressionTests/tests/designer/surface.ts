@@ -2156,6 +2156,11 @@ test("Question adorner - collapsed", async (t) => {
     await t.click(qContent.nth(1), { offsetX: 10, offsetY: 10 });
     await t.click(qCollapseButton.filterVisible());
     await takeElementScreenshot("panel-adorner-collapsed.png", qContent.nth(1), t, comparer);
+
+    await t.click(Selector(".svc-tabbed-menu-item").withText("Preview"));
+    await t.click(Selector(".svc-tabbed-menu-item").withText("Designer"));
+    await takeElementScreenshot("question-adorner-collapsed-first-render.png", qContent.nth(0), t, comparer);
+    await takeElementScreenshot("panel-adorner-collapsed-first-render.png", qContent.nth(1), t, comparer);
   });
 });
 
