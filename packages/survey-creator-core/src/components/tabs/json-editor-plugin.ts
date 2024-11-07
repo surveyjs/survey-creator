@@ -222,13 +222,9 @@ export abstract class TabJsonEditorBasePlugin implements ICreatorPlugin {
   }
   public deactivate(): boolean {
     if (this.model) {
-      const textWorker: SurveyTextWorker = new SurveyTextWorker(this.model.text);
-      if (!textWorker.isJsonCorrect) {
-        return false;
-      }
       if (!this.model.readOnly && this.model.isJSONChanged) {
         this.creator.selectedElement = undefined;
-        this.creator.text = this.model.text;
+        this.creator.changeText(this.model.text, false, true);
         this.creator.selectedElement = this.creator.survey;
         this.creator.setModified({ type: "JSON_EDITOR" });
       }

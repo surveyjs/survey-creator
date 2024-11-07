@@ -37,7 +37,7 @@ export class LogoImageComponent extends CreatorModelElement<ILogoImageComponentP
       className="svc-context-button"
       onClick={() => this.model.chooseFile(this.model)}
     >
-      <SvgIcon size={24} iconName={"icon-file"}></SvgIcon>
+      <SvgIcon size={24} iconName={"icon-choosefile"}></SvgIcon>
     </span>);
   }
   renderClearButton() {
@@ -61,7 +61,7 @@ export class LogoImageComponent extends CreatorModelElement<ILogoImageComponentP
     </div>;
   }
   renderPlaceHolder() {
-    return this.model.allowEdit && !this.model.isUploading ? attachKey2click(<div className="svc-logo-image-placeholder" onClick={() => this.model.chooseFile(this.model)}><svg><use xlinkHref="#icon-logo"></use></svg></div>) : null;
+    return this.model.allowEdit && !this.model.isUploading ? attachKey2click(<div className="svc-logo-image-placeholder" onClick={() => this.model.chooseFile(this.model)}><svg><use xlinkHref="#icon-image-48x48"></use></svg></div>) : null;
   }
   renderInput() {
     return <input aria-hidden="true" type="file" tabIndex={-1} accept={this.model.acceptedTypes} className="svc-choose-file-input" />;
