@@ -61,7 +61,7 @@ export * from "../tabs/SurveySimulator";
 export * from "../events";
 export * from "../side-bar/ObjectSelector";
 export * from "../side-bar/PropertyGrid";
-export * from "../side-bar/Search";
+export * from "../components/Search";
 export * from "../Switcher";
 
 export * from "../tabs/JsonErrorItem";
