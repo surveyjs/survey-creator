@@ -3,7 +3,7 @@ import { getLocString } from "../editorLocalization";
 
 export abstract class SearchManager extends Base {
   public searchActionBar: ActionContainer = new ActionContainer();
-  public filterStringPlaceholder;
+  public get filterStringPlaceholder(): string { return this.getFilterStringPlaceholder(); }
   @property() filterString: string;
   @property() isVisible: boolean;
   @property() matchCounterText: string;
@@ -32,6 +32,7 @@ export abstract class SearchManager extends Base {
   }
 
   protected abstract setFiterString(newValue: string, oldValue: string);
+  protected abstract getFilterStringPlaceholder(): string;
 
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
     super.onPropertyValueChanged(name, oldValue, newValue);
