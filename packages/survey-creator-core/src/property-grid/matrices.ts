@@ -1,4 +1,4 @@
-import { Base, ComputedUpdater, IAction, ISurveyData, ItemValue, JsonMetadata, JsonMetadataClass, JsonObjectProperty, MatrixDropdownColumn, MatrixDropdownRowModelBase, MatrixDynamicRowModel, PanelModel, Question, QuestionHtmlModel, QuestionMatrixDropdownModelBase, QuestionMatrixDropdownRenderedRow, QuestionMatrixDynamicModel, QuestionRatingModel, Serializer, SurveyElement } from "survey-core";
+import { Base, ComputedUpdater, IAction, ISurveyData, ItemValue, JsonMetadata, JsonMetadataClass, JsonObjectProperty, MatrixDropdownColumn, MatrixDropdownRowModelBase, MatrixDynamicRowModel, PanelModel, Question, QuestionHtmlModel, QuestionMatrixDropdownModelBase, QuestionMatrixDropdownRenderedRow, QuestionMatrixDynamicModel, QuestionRatingModel, renamedIcons, Serializer, SurveyElement } from "survey-core";
 import { editorLocalization } from "../editorLocalization";
 import { SurveyQuestionProperties } from "../question-editor/properties";
 import { ISurveyCreatorOptions } from "../creator-settings";
@@ -559,7 +559,8 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
   public onMatrixCellCreated(obj: Base, options: any): void {
     super.onMatrixCellCreated(obj, options);
     function updateHtml(question, value) {
-      question.html = "<div class=\"spg-smiley-icon\"><svg><use xlink:href=\"#icon-" + value + "\"></use></svg></div>";
+      const newValue = renamedIcons[value] || value;
+      question.html = "<div class=\"spg-smiley-icon\"><svg><use xlink:href=\"#icon-" + newValue + "\"></use></svg></div>";
     }
     function changeValueCallback(sender, options) {
       if (options.name != "value") return;
