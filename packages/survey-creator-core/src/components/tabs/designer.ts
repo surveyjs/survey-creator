@@ -247,7 +247,7 @@ export class TabDesignerViewModel extends Base {
       getKey(page) {
         return page.id;
       },
-      getAnimatedElement: (item) => SurveyElementAdornerBase.GetAdorner(item)?.rootElement.parentElement,
+      getAnimatedElement: (item) => SurveyElementAdornerBase.GetAdorner(item)?.rootElement?.parentElement,
       getRerenderEvent: () => this.onElementRerendered,
       onCompareArrays(options) {
         const droppedPage = options.mergedItems.filter(page => page["draggedFrom"] !== undefined)[0];
