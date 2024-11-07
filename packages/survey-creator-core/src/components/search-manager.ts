@@ -15,7 +15,7 @@ export abstract class SearchManager extends Base {
       component: "sv-action-bar-item",
       title: getLocString("ed.clear"),
       showTitle: false,
-      iconSize: 16,
+      iconSize: "auto",
       disableTabStop: true,
       innerCss: "svc-search__bar-item",
       visible: <any>new ComputedUpdater(() => !!this.filterString),

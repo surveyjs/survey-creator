@@ -60,6 +60,11 @@
     var(--ctr-search-button-padding-horizontal, calcSize(0.5)) var(--ctr-search-button-padding-vertical, calcSize(0.5))
     var(--ctr-search-button-padding-horizontal, calcSize(0.5));
   border-radius: 100px;
+
+  .sv-svg-icon {
+    width: var(--ctr-search-button-icon-width, calcSize(2));
+    height: var(--ctr-search-button-icon-height, calcSize(2));
+  }
 }
 
 .svc-search__toolbar-counter {
