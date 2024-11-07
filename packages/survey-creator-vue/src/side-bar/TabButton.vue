@@ -4,6 +4,7 @@
       :class="model.buttonClassName"
       :title="model.tooltip"
       @click="model.action()"
+      v-key2click="{ processEsc: false, disableTabStop: model.disableTabStop }"
     >
       <div class="svc-menu-action__icon">
         <div class="svc-menu-action__icon-container">
