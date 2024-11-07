@@ -4,13 +4,20 @@ import { SurveyJSON5 } from "./json5";
 import { settings } from "./creator-settings";
 
 class SurveyForTextWorker extends SurveyModel {
+  private isRunEndLoadingFromJson: boolean;
   constructor(jsonObj: any) {
     super();
     this.setDesignMode(true);
     this.fromJSON(jsonObj);
   }
+  //Run endLoading before fixing issues with unique names
+  public runEndLoadingFromJson(): void {
+    if(this.isRunEndLoadingFromJson) return;
+    this.isRunEndLoadingFromJson = true;
+    super.endLoadingFromJson();
+  }
   //Do nothing on end loading
-  endLoadingFromJson(): void { }
+  endLoadingFromJson(): void {}
   getSurveyData(): ISurveyData { return null; }
 }
 
@@ -116,7 +123,11 @@ class SurveyTextWorkerJsonDuplicateNameErrorFixer extends SurveyTextWorkerJsonEr
     return this.getNewIndex(text, "\"name\":", at, end);
   }
   protected updatedJsonObjOnFix(json: any): void {
-    json["name"] = SurveyHelper.getNewElementName(<ISurveyElement><any>this.element);
+    const el: any = this.element;
+    if(el.survey?.runEndLoadingFromJson) {
+      el.survey.runEndLoadingFromJson();
+    }
+    json["name"] = SurveyHelper.getNewElementName(el);
   }
 }
 class SurveyTextWorkerJsonRequiredPropertyErrorFixer extends SurveyTextWorkerJsonErrorFixer {
