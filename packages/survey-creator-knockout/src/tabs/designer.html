@@ -52,7 +52,7 @@
       <!-- ko if: pagesController.page2Display && creator.pageEditMode === 'bypage' -->
       <svc-page class="svc-page"
         data-bind="attr: { 'data-sv-drop-target-survey-element': displayPageDropTarget, 'data-sv-drop-target-page': pagesController.page2Display.name }"
-        params="survey: survey, page: pagesController.page2Display, creator: creator, isGhost: pagesController.page2Display == model.newPage"></svc-page>
+        params="survey: survey, page: pagesController.page2Display, creator: creator, isGhost: pagesController.page2Display == newPage"></svc-page>
       <!-- /ko -->
 
       <!-- ko if: false && survey.isShowProgressBarOnBottom -->

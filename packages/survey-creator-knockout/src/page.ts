@@ -8,9 +8,10 @@ const template = require("./page.html");
 
 export class CreatorSurveyPageComponent extends PageAdorner {
   private pageUpdater;
+  private isGhostUpdater;
   private currPage: PageModel;
 
-  constructor(creator: SurveyCreatorModel, private _page: PageModel | ko.Observable<PageModel>) {
+  constructor(creator: SurveyCreatorModel, private _page: PageModel | ko.Observable<PageModel>, private _isGhost: boolean | ko.Observable<boolean>) {
     super(creator, ko.unwrap(_page));
 
     if (ko.isSubscribable(_page)) {
@@ -18,11 +19,18 @@ export class CreatorSurveyPageComponent extends PageAdorner {
         this.detachElement(this.currPage);
         this.currPage = newPage;
         this.attachElement(newPage);
+        this.isGhost = ko.unwrap(this._isGhost);
+      });
+    }
+    if (ko.isSubscribable(this._isGhost)) {
+      this.isGhostUpdater = this._isGhost.subscribe((newValue: boolean) => {
+        this.isGhost = newValue;
       });
     }
     this.currPage = ko.unwrap(_page);
     this._page = _page;
     this.attachElement(this.page);
+    this.isGhost = ko.unwrap(this._isGhost);
     new ImplementorBase(this);
   }
 
@@ -32,6 +40,7 @@ export class CreatorSurveyPageComponent extends PageAdorner {
 
   fixedDispose(): void {
     this.pageUpdater && this.pageUpdater.dispose();
+    this.isGhostUpdater && this.isGhostUpdater.dispose();
     super.dispose();
     if (ko.isWritableObservable(this._page)) {
       (this._page as ko.Observable<PageModel>)(undefined);
@@ -47,9 +56,7 @@ ko.components.register("svc-page", {
   viewModel: {
     createViewModel: (params: any, componentInfo: any) => {
       const creator: SurveyCreator = params.creator;
-
-      const pageAdornerViewModel = new CreatorSurveyPageComponent(creator, params.page);
-      pageAdornerViewModel.isGhost = params.isGhost;
+      const pageAdornerViewModel = new CreatorSurveyPageComponent(creator, params.page, params.isGhost);
       pageAdornerViewModel.rootElement = componentInfo.element;
       ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
         pageAdornerViewModel.fixedDispose();
