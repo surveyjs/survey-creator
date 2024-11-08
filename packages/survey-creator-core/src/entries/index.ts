@@ -39,6 +39,7 @@ export * from "../components/tabs/logic-plugin";
 export * from "../components/tabs/logic-theme";
 
 export * from "../components/toolbox/toolbox-tool";
+export * from "../components/toolbox/toolbox-search-manager";
 export * from "../components/page-navigator/page-navigator";
 export * from "../components/page";
 export * from "../components/row";
@@ -55,6 +56,7 @@ export * from "../components/header/logo-image";
 export * from "../components/string-editor";
 export * from "../components/embedded-survey";
 export * from "../components/link-value";
+export * from "../components/search-manager";
 export * from "../editorLocalization";
 export * from "../json5";
 
@@ -105,6 +107,7 @@ export * from "../presets/presets-tabs";
 export * from "../presets/presets-toolbox";
 export * from "../survey-elements";
 
+require("../components/search.scss");
 require("../components/property-panel/property-panel-item.scss");
 require("../components/property-panel/property-panel.scss");
 require("../components/tabbed-menu/tabbed-menu-item.scss");
@@ -112,6 +115,7 @@ require("../components/tabbed-menu/tabbed-menu.scss");
 require("../components/toolbox/toolbox-tool.scss");
 require("../components/question-dropdown.scss");
 require("../components/toolbox/toolbox.scss");
+require("../components/toolbox/toolbox-search.scss");
 require("../components/toolbox/toolbox-right.scss");
 require("../components/toolbox/toolbox-animation.scss");
 require("../components/side-bar/side-bar.scss");

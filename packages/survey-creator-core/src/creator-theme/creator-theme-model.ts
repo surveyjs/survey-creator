@@ -196,6 +196,22 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
     }
   }
 
+  public setTheme(theme: ICreatorTheme) {
+    this.themeCssVariablesChanges = {};
+
+    try {
+      this.blockThemeChangedNotifications += 1;
+      this.iteratePropertiesHash((hash, key) => {
+        this.setPropertyValue(key, undefined);
+      });
+    } finally {
+      this.blockThemeChangedNotifications -= 1;
+    }
+
+    this.loadTheme(theme);
+    this.onThemeSelected.fire(this, { theme: this.toJSON() });
+  }
+
   fromJSON(json: ICreatorTheme, options?: ILoadFromJSONOptions): void {
     if (!json) return;
 
