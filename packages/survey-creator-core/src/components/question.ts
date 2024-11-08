@@ -681,12 +681,11 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
 
   private createRequiredAction() {
     (<Question>this.surveyElement).isRequired;
-    const requiredAction = new Action({
+    const actionSetup = {
       id: "isrequired",
       ariaRole: "checkbox",
       css: "svc-action-bar-item--right sv-action-bar-item--secondary",
       innerCss: "svc-required-action",
-      title: this.creator.getLocString("pe.isRequired"),
       visibleIndex: 20,
       iconName: "icon-required",
       iconSize: 16,
@@ -700,7 +699,11 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
           (this.surveyElement as Question).isRequired = this.getUpdatedPropertyValue("isRequired", !(this.surveyElement as Question)?.isRequired);
         }
       }
-    });
+    };
+    const innerAction = new Action(actionSetup);
+    const requiredAction = new Action(actionSetup);
+    requiredAction.title = this.creator.getLocString("pe.isRequired");
+    requiredAction.innerItem = innerAction;
     this.updateRequiredAction(requiredAction);
     return requiredAction;
   }
