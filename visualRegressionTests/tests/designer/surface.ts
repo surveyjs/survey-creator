@@ -1714,7 +1714,7 @@ test("Question adorners for different sizes", async (t) => {
               "type": "text",
               "name": "question1",
               "minWidth": "100px",
-              "maxWidth": "300px",
+              "maxWidth": "250px",
               "title": "Q"
             },
             {
