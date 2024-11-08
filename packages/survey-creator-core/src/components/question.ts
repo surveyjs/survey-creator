@@ -269,9 +269,23 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     res.text = res.messageText;
     return res;
   }
+  protected detachElement(surveyElement: SurveyElement): void {
+    if (surveyElement) {
+      surveyElement.unRegisterFunctionOnPropertyValueChanged("isRequired", "isRequiredAdorner");
+    }
+    super.detachElement(this.element);
+  }
+  protected attachElement(surveyElement: SurveyElement): void {
+    super.attachElement(surveyElement);
+    if (surveyElement) {
+      surveyElement.registerFunctionOnPropertyValueChanged("isRequired", (newValue: any) => {
+        const requiredAction = this.actionContainer.getActionById("isrequired");
+        this.updateRequiredAction(requiredAction);
+      }, "isRequiredAdorner");
+    }
+  }
   public detachFromUI(): void {
-    this.surveyElement.unRegisterFunctionOnPropertyValueChanged("isRequired", "isRequiredAdorner");
-    this.surveyElement.unRegisterFunctionOnPropertyValueChanged("inputType", "inputTypeAdorner");
+    this.surveyElement.unRegisterFunctionOnPropertiesValueChanged(["inputType", "rateType"], "inputTypeAdorner");
     if (!!this.surveyElement["setCanShowOptionItemCallback"]) {
       (<any>this.surveyElement).setCanShowOptionItemCallback(undefined);
     }
@@ -364,13 +378,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
 
   private get dragDropHelper(): DragDropSurveyElements {
     return this.creator.dragDropSurveyElements;
-  }
-
-  get isRequired() {
-    return (<any>this.surveyElement).isRequired;
-  }
-  set isRequired(newVal) {
-    (<any>this.surveyElement).isRequired = newVal;
   }
 
   onPointerDown(pointerDownEvent: PointerEvent) {
@@ -659,11 +666,18 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     return newAction;
   }
 
+  private updateRequiredAction(requiredAction: Action) {
+    if (!requiredAction) return;
+    const isRequired = (this.surveyElement as Question)?.isRequired;
+    requiredAction.ariaChecked = isRequired;
+    requiredAction.active = isRequired;
+    requiredAction.innerItem.title = isRequired ? this.creator.getLocString("pe.removeRequiredMark") : this.creator.getLocString("pe.markRequired");
+  }
+
   private createRequiredAction() {
     (<Question>this.surveyElement).isRequired;
     const requiredAction = new Action({
       id: "isrequired",
-      ariaChecked: <any>new ComputedUpdater<boolean>(() => this.isRequired),
       ariaRole: "checkbox",
       css: "svc-action-bar-item--right sv-action-bar-item--secondary",
       innerCss: "svc-required-action",
@@ -671,7 +685,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       visibleIndex: 20,
       iconName: "icon-required",
       iconSize: 16,
-      active: <any>new ComputedUpdater<boolean>(() => this.isRequired),
       action: () => {
         if (
           this.creator.isCanModifyProperty(
@@ -679,13 +692,11 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
             "isRequired"
           )
         ) {
-          this.isRequired = this.getUpdatedPropertyValue("isRequired", !this.isRequired);
+          (this.surveyElement as Question).isRequired = this.getUpdatedPropertyValue("isRequired", !(this.surveyElement as Question)?.isRequired);
         }
       }
     });
-    requiredAction.innerItem.title = <string>(new ComputedUpdater<string>(() => {
-      return this.isRequired ? this.creator.getLocString("pe.removeRequiredMark") : this.creator.getLocString("pe.markRequired");
-    }) as any);
+    this.updateRequiredAction(requiredAction);
     return requiredAction;
   }
   protected getUpdatedPropertyValue(propName: string, newValue: any): any {

@@ -257,11 +257,6 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     event.stopPropagation();
   }
   private allowEditOption: boolean;
-  private selectedPropPageFunc: (sender: Base, options: any) => void = (_, options) => {
-    if (options.name === "isSelectedInDesigner") {
-      this.onElementSelectedChanged(options.newValue);
-    }
-  };
   private sidebarFlyoutModeChangedFunc: (sender: Base, options: any) => void = (_, options) => {
     if (options.name === "flyoutMode") {
       this.updateActionsProperties();
@@ -300,14 +295,18 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       if (surveyElement.getPropertyValue(SurveyElementAdornerBase.AdornerValueName) === this && !surveyElement.isDisposed) {
         surveyElement.setPropertyValue(SurveyElementAdornerBase.AdornerValueName, null);
       }
-      surveyElement.onPropertyChanged.remove(this.selectedPropPageFunc);
+      surveyElement.unRegisterFunctionOnPropertyValueChanged("isSelectedInDesigner", "questionSelected");
       this.cleanActionsContainer();
     }
   }
   protected attachElement(surveyElement: T): void {
     if (surveyElement) {
       this.creator?.designerStateManager?.initForElement(surveyElement);
-      surveyElement.onPropertyChanged.add(this.selectedPropPageFunc);
+      surveyElement.registerFunctionOnPropertyValueChanged("isSelectedInDesigner",
+        (newValue: any) => {
+          this.onElementSelectedChanged(newValue);
+        }, "questionSelected"
+      );
       this.restoreState();
       this.updateActionsContainer(surveyElement);
       this.updateActionsProperties();
@@ -349,7 +348,6 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     }
     super.dispose();
     this.sidebarFlyoutModeChangedFunc = undefined;
-    this.selectedPropPageFunc = undefined;
     this.animationCollapsed = undefined;
   }
   protected onElementSelectedChanged(isSelected: boolean): void {
