@@ -132,18 +132,22 @@ class PageAdornerTester extends PageAdorner {
     this.onPageSelectedCallback && this.onPageSelectedCallback();
   }
 }
-test("PageAdorner", (): any => {
+test("PageAdorner and selection", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
     elements: [{ type: "text", name: "question1" }]
   };
+  const getSubscriptions = () => (creator.currentPage as any).onPropChangeFunctions.filter(f => f.name == "isSelectedInDesigner");
   expect(creator.currentPage.onPropertyChanged.isEmpty).toBeTruthy();
+  expect(getSubscriptions().length == 0).toBeTruthy();
   const pageModel = new PageAdornerTester(creator, creator.survey.currentPage);
   let counter = 0;
   pageModel.onPageSelectedCallback = (): any => {
     counter++;
   };
-  expect(creator.currentPage.onPropertyChanged.isEmpty).toBeFalsy();
+  // expect(creator.currentPage.onPropertyChanged.isEmpty).toBeFalsy();
+  expect(creator.currentPage.onPropertyChanged.isEmpty).toBeTruthy();
+  expect(getSubscriptions().length == 0).toBeFalsy();
   expect(pageModel.isSelected).toBeFalsy();
   creator.selectElement(creator.survey.getQuestionByName("question1"));
   expect(pageModel.isSelected).toBeFalsy();
@@ -156,6 +160,7 @@ test("PageAdorner", (): any => {
   expect(counter).toEqual(1);
   pageModel.dispose();
   expect(creator.currentPage.onPropertyChanged.isEmpty).toBeTruthy();
+  expect(getSubscriptions().length == 0).toBeTruthy();
 });
 test("PageAdorner - remove page if: it is the last page, there is no elements and there is no properties set", (): any => {
   const creator = new CreatorTester();
