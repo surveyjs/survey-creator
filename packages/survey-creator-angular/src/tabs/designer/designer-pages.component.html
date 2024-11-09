@@ -2,6 +2,6 @@
   <div class="svc-page" [attr.data-sv-drop-target-survey-element]="model.displayPageDropTarget"
     [attr.data-sv-drop-target-page]="model.pagesController.page2Display.name">
     <ng-template
-      [component]="{ name: 'svc-page', data: { model: model.pagesController.page2Display, creator, survey }}"></ng-template>
+      [component]="{ name: 'svc-page', data: { model: model.pagesController.page2Display, creator, survey, isGhost: model.pagesController.page2Display == model.newPage }}"></ng-template>
   </div>
 </ng-template>

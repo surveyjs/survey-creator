@@ -1,4 +1,4 @@
-import { SurveyModel, ILocalizableOwner, LocalizableString, Serializer, JsonObjectProperty, QuestionMatrixDynamicModel, RegexValidator } from "survey-core";
+import { SurveyModel, ILocalizableOwner, LocalizableString, Serializer, JsonObjectProperty, QuestionMatrixDynamicModel, RegexValidator, IAnimationGroupConsumer, PageModel } from "survey-core";
 import { editorLocalization } from "../../src/editorLocalization";
 import { StringEditorViewModelBase } from "../../src/components/string-editor";
 import { CreatorTester } from "../creator-tester";
@@ -7,6 +7,7 @@ import { LogoImageViewModel } from "../../src/components/header/logo-image";
 import { SurveyLogicUI } from "../../src/components/tabs/logic-ui";
 import { PageAdorner } from "../../src/components/page";
 import { QuestionAdornerViewModel } from "../../src/components/question";
+import { TabDesignerViewModel } from "../../src/components/tabs/designer";
 export * from "../../src/property-grid/matrices";
 
 test("Survey/page title/description placeholders text", () => {
@@ -343,4 +344,91 @@ test("expand all and collapse all", () => {
   expect(page2Adorner.collapsed).toBeFalsy();
   expect(questionAdorner.collapsed).toBeFalsy();
   expect(panelAdorner.collapsed).toBeFalsy();
+});
+
+test("check pages animation", () => {
+  const creator = new CreatorTester();
+  creator.expandCollapseButtonVisibility = "onhover";
+  creator.JSON = {
+    "pages": [
+      {
+        "name": "page1",
+        title: "Test page",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          }
+        ]
+      },
+      {
+        "name": "page2",
+        "elements": [
+          {
+            "type": "panel",
+            "name": "panel1"
+          }
+        ]
+      }
+    ]
+  };
+
+  const designer = new TabDesignerViewModel(creator);
+  const [p1, p2] = creator.survey.pages;
+  const page1Adorner = new PageAdorner(creator, p1);
+  const container = document.createElement("div");
+  const parentContainer = document.createElement("div");
+  parentContainer.appendChild(container);
+  page1Adorner.rootElement = container;
+  const animationOptions = designer["getPagesAnimationOptions"]() as Required<IAnimationGroupConsumer<PageModel>>;
+
+  expect(animationOptions.getAnimatedElement(p1)).toBe(parentContainer);
+
+  const enterOptions = animationOptions.getEnterOptions(p1);
+  expect(enterOptions.cssClass).toBe("svc-page--enter");
+  enterOptions.onBeforeRunAnimation && enterOptions.onBeforeRunAnimation(parentContainer);
+  expect(parentContainer.style.getPropertyValue("--animation-height-from")).toBe("0px");
+  enterOptions.onAfterRunAnimation && enterOptions.onAfterRunAnimation(parentContainer);
+  expect(parentContainer.style.getPropertyValue("--animation-height-from")).toBe("");
+
+  const leaveOptions = animationOptions.getLeaveOptions(p1);
+  expect(leaveOptions.cssClass).toBe("svc-page--leave");
+  leaveOptions.onBeforeRunAnimation && leaveOptions.onBeforeRunAnimation(parentContainer);
+  expect(parentContainer.style.getPropertyValue("--animation-height-from")).toBe("0px");
+  leaveOptions.onAfterRunAnimation && leaveOptions.onAfterRunAnimation(parentContainer);
+  expect(parentContainer.style.getPropertyValue("--animation-height-from")).toBe("");
+
+  p1["draggedFrom"] = 0;
+  let options = { deletedItems: [], reorderedItems: [{ item: p1, movedForward: true }, { item: p2, movedForward: false }], addedItems: [], mergedItems: [p2, p1] };
+  animationOptions.onCompareArrays(options);
+  expect(options.reorderedItems).toEqual([]);
+  expect(options.addedItems).toEqual([p1]);
+  expect(options.deletedItems.length).toEqual(1);
+  let ghostPage = options.deletedItems[0] as PageModel;
+  expect(ghostPage["isGhost"]).toEqual(true);
+  expect(ghostPage !== p1).toBeTruthy();
+  expect(ghostPage.title).toBe("Test page");
+  expect(ghostPage.num).toBe(1);
+  expect(options.mergedItems).toEqual([ghostPage, p2, p1]);
+
+  p1["draggedFrom"] = 2;
+  options = { deletedItems: [], reorderedItems: [{ item: p1, movedForward: false }, { item: p2, movedForward: true }], addedItems: [], mergedItems: [p1, p2] };
+  animationOptions.onCompareArrays(options);
+  expect(options.reorderedItems).toEqual([]);
+  expect(options.addedItems).toEqual([p1]);
+  expect(options.deletedItems.length).toEqual(1);
+  ghostPage = options.deletedItems[0] as PageModel;
+  expect(ghostPage["isGhost"]).toEqual(true);
+  expect(ghostPage).not.toBe(p1);
+  expect(ghostPage.title).toBe("Test page");
+  expect(ghostPage.num).toBe(1);
+  expect(options.mergedItems).toEqual([p1, p2, ghostPage]);
+
+  p1["draggedFrom"] = undefined;
+  options = { deletedItems: [], reorderedItems: [], addedItems: [], mergedItems: [p1, p2] };
+  animationOptions.onCompareArrays(options);
+  expect(options.reorderedItems).toEqual([]);
+  expect(options.addedItems).toEqual([]);
+  expect(options.deletedItems).toEqual([]);
+  expect(options.mergedItems).toEqual([p1, p2]);
 });

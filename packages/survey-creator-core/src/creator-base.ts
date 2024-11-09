@@ -1939,11 +1939,16 @@ export class SurveyCreatorModel extends Base
     });
   }
   public restorePagesState(): void {
-    setTimeout(() => {
-      this.survey.pages.forEach(page => {
+    this.survey.pages.forEach(page => {
+      if(page["draggedFrom"] !== undefined) {
+        const adorner = SurveyElementAdornerBase.GetAdorner(page);
+        adorner?.blockAnimations();
         SurveyElementAdornerBase.RestoreStateFor(page);
-      });
-    }, 10);
+        adorner?.releaseAnimations();
+      } else {
+        SurveyElementAdornerBase.RestoreStateFor(page);
+      }
+    });
   }
   private initDragDropChoices() {
     this.dragDropChoices = new DragDropChoices(null, this);
