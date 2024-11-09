@@ -17,7 +17,7 @@ fixture`${title}`.page`${url}`.clientScripts({ content: `(${explicitErrorHandler
   await t.maximizeWindow();
 });
 
-test.only("Memory leaks between designer/test tabs switch", async (t) => {
+test("Memory leaks between designer/test tabs switch", async (t) => {
   const changeTab = ClientFunction((tabName: string) => { window["creator"].activeTab = tabName; });
   const getMemory = ClientFunction(() => { return (performance as any).memory.usedJSHeapSize; });
 
