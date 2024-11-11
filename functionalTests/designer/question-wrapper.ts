@@ -377,7 +377,7 @@ test("No tab stop in dynamic panel", async (t) => {
     .expect(Selector(".svc-question__content--panel .svc-action-button").withText("Add Question").focused).ok()
     .pressKey("tab")
     .pressKey("tab")
-    .expect(Selector(".svc-question__content--panel .sv-action-bar-item").withText("Panel").focused).ok();
+    .expect(Selector(".svc-question__content--panel .svc-survey-element-toolbar__item").withText("Panel").focused).ok();
 });
 
 test("Question adorner - collapse button in differen modes", async (t) => {
