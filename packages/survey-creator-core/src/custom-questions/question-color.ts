@@ -151,6 +151,7 @@ export class QuestionColorModel extends QuestionTextModel {
     const dropdownAction = this.dropdownAction;
     dropdownAction.cssClasses = { item: classes.colorDropdown };
     dropdownAction.iconName = classes.colorDropdownIcon;
+    dropdownAction.iconSize = "auto" as any;
     const listModel = <ListModel<ItemValue>>dropdownAction.popupModel.contentComponentData.model;
     listModel.cssClasses = {};
     listModel.cssClasses = {

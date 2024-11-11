@@ -11,7 +11,7 @@
         :is="'sv-svg-icon'"
         class="svc-page-navigator__navigator-icon"
         :iconName="model.icon"
-        :size="24"
+        :size="'auto'"
       ></SvComponent>
       <SvComponent :is="'sv-popup'" :model="model.popupModel"></SvComponent>
     </div>

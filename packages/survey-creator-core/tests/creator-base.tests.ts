@@ -2480,16 +2480,16 @@ test("convertInputType, change inputType for a text question", (): any => {
   expect(questionModel.getActionById("convertInputType")).toBeFalsy();
   let action = questionModel.getActionById("convertTo");
   expect(action).toBeTruthy();
-  expect(action.css.indexOf("sv-action--convertTo-last") > -1).toBeTruthy();
+  expect(action.css.indexOf("svc-dropdown-action--convertTo-last") > -1).toBeTruthy();
   question = creator.survey.getQuestionByName("q2");
   creator.selectElement(question);
   questionModel = new QuestionAdornerViewModel(creator, question, undefined);
   action = questionModel.getActionById("convertTo");
   expect(action).toBeTruthy();
-  expect(action.css.indexOf("sv-action--convertTo-last") > -1).toBeFalsy();
+  expect(action.css.indexOf("svc-dropdown-action--convertTo-last") > -1).toBeFalsy();
   action = questionModel.getActionById("convertInputType");
   expect(action).toBeTruthy();
-  expect(action.css.indexOf("sv-action--convertTo-last") > -1).toBeTruthy();
+  expect(action.css.indexOf("svc-dropdown-action--convertTo-last") > -1).toBeTruthy();
   expect(action.title).toBe("Text");
   let popup = action.popupModel;
   let popupViewModel = new PopupDropdownViewModel(popup); // need for popupModel.onShow

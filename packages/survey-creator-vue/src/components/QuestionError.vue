@@ -4,7 +4,7 @@
       :is="'sv-svg-icon'"
       :class="cssClasses.error.icon"
       :iconName="'icon-alert_24x24'"
-      :size="24"
+      :size="'auto'"
     ></SvComponent>
     <span
       :class="

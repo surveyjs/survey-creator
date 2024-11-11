@@ -499,6 +499,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.designerAction = new Action({
       id: "svd-designer",
       iconName: "icon-config",
+      iconSize: "auto",
       action: () => { this.creator.makeNewViewActive("designer"); },
       visible: this.createVisibleUpdater(),
       locTitleName: "ed.designer",
@@ -508,6 +509,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.prevPageAction = new Action({
       id: "prevPage",
       iconName: "icon-arrow-left_16x16",
+      iconSize: "auto",
       needSeparator: <any>new ComputedUpdater<boolean>(() => {
         return this.creator.isMobileView;
       }),
@@ -517,12 +519,14 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.nextPageAction = new Action({
       id: "nextPage",
       iconName: "icon-arrow-right_16x16",
+      iconSize: "auto",
       visible: false
     });
 
     this.previewAction = new Action({
       id: "svd-preview",
       iconName: "icon-preview",
+      iconSize: "auto",
       active: true,
       visible: this.createVisibleUpdater(),
       locTitleName: "tabs.preview",
@@ -533,6 +537,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.testAgainAction = new Action({
       id: "testSurveyAgain",
       visible: false,
+      iconSize: "auto",
       locTitleName: "ed.testSurveyAgain",
       action: () => {
         this.model.testAgain();
@@ -542,6 +547,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.undoAction = new Action({
       id: "action-undo-theme",
       iconName: "icon-undo",
+      iconSize: "auto",
       locTitleName: "ed.undo",
       showTitle: false,
       visible: this.createVisibleUpdater(),
@@ -550,6 +556,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.redoAction = new Action({
       id: "action-redo-theme",
       iconName: "icon-redo",
+      iconSize: "auto",
       locTitleName: "ed.redo",
       showTitle: false,
       visible: this.createVisibleUpdater(),
@@ -561,6 +568,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.saveThemeAction = new Action({
       id: "svd-save-theme",
       iconName: "icon-save",
+      iconSize: "auto",
       action: () => {
         this.creator.saveThemeActionHandler();
         this.saveThemeAction.enabled = false;
@@ -579,6 +587,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.resetTheme = new Action({
       id: "svc-reset-theme",
       iconName: "icon-reset",
+      iconSize: "auto",
       locTitleName: "ed.themeResetButton",
       locTooltipName: "ed.themeResetButton",
       mode: "small",
@@ -596,6 +605,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.themeSettingsAction = new Action({
       id: "svc-theme-settings",
       iconName: "icon-theme",
+      iconSize: "auto",
       action: () => {
         if (!this.creator.showSidebar) {
           this.creator.setShowSidebar(true, true);
@@ -613,6 +623,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.importAction = new Action({
       id: "svc-theme-import",
       iconName: "icon-load",
+      iconSize: "auto",
       locTitleName: "ed.themeImportButton",
       locTooltipName: "ed.themeImportButton",
       visible: this.createVisibleUpdater(),
@@ -639,6 +650,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.exportAction = new Action({
       id: "svc-theme-export",
       iconName: "icon-download",
+      iconSize: "auto",
       locTitleName: "ed.themeExportButton",
       locTooltipName: "ed.themeExportButton",
       visible: this.createVisibleUpdater(),
@@ -654,6 +666,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       this.invisibleToggleAction = new Action({
         id: "showInvisible",
         iconName: "icon-invisible-items",
+        iconSize: "auto",
         mode: "small",
         locTitleName: "ts.showInvisibleElements",
         visible: false,

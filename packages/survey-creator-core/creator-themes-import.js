@@ -69,7 +69,7 @@ function capitalizedFirstLetter(word) {
 }
 
 function getCorrectValue(variableKey, value) {
-  if(variableKey.indexOf("-opacity-") > -1) {
+  if(variableKey.indexOf("-opacity") > -1) {
     return parseInt(value) / 100;
   } else {
     return value;

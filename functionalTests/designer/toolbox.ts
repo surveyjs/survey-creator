@@ -338,7 +338,7 @@ test("toolbar responsiveness in compact mode", async (t) => {
     .expect(Selector(".svc-toolbox__category>.svc-toolbox__tool").count).eql(22)
 
     .click(".svc-question__content--text", { offsetX: 200, offsetY: 20 })
-    .click(Selector(".sv-action-bar-item__title").withText("Save as Toolbox Item"))
+    .click(Selector(".svc-survey-element-toolbar-item__title").withText("Save as Toolbox Item"))
 
     .expect(Selector(".svc-toolbox .sv-dots__item").visible).ok()
     .expect(Selector(".svc-toolbox__container").clientHeight).lte(510)

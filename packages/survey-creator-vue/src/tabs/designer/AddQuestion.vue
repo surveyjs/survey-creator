@@ -14,7 +14,7 @@
       :is="'sv-svg-icon'"
       class="svc-panel__add-new-question-icon"
       :iconName="'icon-add_24x24'"
-      :size="24"
+      :size="'auto'"
     ></SvComponent>
     <span class="svc-add-new-item-button__text">
       {{ item.data.addNewQuestionText }}

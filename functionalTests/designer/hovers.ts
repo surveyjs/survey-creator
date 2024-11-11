@@ -117,7 +117,7 @@ test("Question hover and events", async t => {
   await t
     .maximizeWindow();
   const questionTitle = Selector(".svc-string-editor").withText("string_editor");
-  const action = Selector(".svc-tab-designer .svc-question__adorner.svc-hovered .sv-action-bar-item[title=Delete]");
+  const action = Selector(".svc-tab-designer .svc-question__adorner.svc-hovered .svc-survey-element-toolbar__item[title=Delete]");
   await t
     .hover(questionTitle, { offsetX: 5, offsetY: 5 })
     .wait(300)

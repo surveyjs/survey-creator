@@ -2,7 +2,7 @@
 <div class="svc-page-navigator">
     <div class="svc-page-navigator__selector"
         data-bind="click: togglePageSelector, key2click, attr: { title: pageSelectorCaption }, css: { 'svc-page-navigator__selector--opened': isPopupOpened }">
-        <sv-svg-icon class="svc-page-navigator__navigator-icon" params="iconName: icon, size: 24"></sv-svg-icon>
+        <sv-svg-icon class="svc-page-navigator__navigator-icon" params="iconName: icon, size: 'auto'"></sv-svg-icon>
         <sv-popup params="model: popupModel, cssClass: 'svc-page-navigator__popup'"></sv-popup>
     </div>
     <div>
