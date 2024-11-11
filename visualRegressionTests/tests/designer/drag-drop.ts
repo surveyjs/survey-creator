@@ -755,3 +755,26 @@ test("Drag Drop to collapsed page", async (t) => {
     await takeElementScreenshot("drag-drop-in-collapsed-page.png", ".svc-tab-designer_content", t, comparer);
   });
 });
+
+fixture`DragDrop custom widget Screenshot`.page`http://127.0.0.1:8080/testCafe/testcafe-widget.html`.beforeEach(async (t) => {
+});
+
+test("Drag indicator for custom widget", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1252, 900);
+
+    const json = {
+      elements: [{ type: "bootstrapdatepicker", name: "q1" }, { type: "bootstrapdatepicker", name: "q2" }]
+    };
+    await setJSON(json);
+
+    await patchDragDropToDisableDrop();
+
+    const q1 = Selector("[data-sv-drop-target-survey-element='q1']");
+    await t
+      .hover(RatingToolboxItem)
+      .dragToElement(RatingToolboxItem, q1, { speed: 0.5, offsetX: 100, offsetY: 10 });
+
+    await takeElementScreenshot("drag-drop-over-custom-widget.png", Selector(".svc-page").nth(0), t, comparer);
+  });
+});
