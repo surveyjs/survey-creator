@@ -2233,6 +2233,8 @@ export class SurveyCreatorModel extends Base
     if (reason === "test" || reason === "theme") {
       this.onPreviewSurveyCreated.fire(this, { survey: survey });
     }
+
+    survey.onPopupVisibleChanged.add((_, options) => options.popup.getAreaCallback = () => this.rootElement);
     return survey;
   }
   private getSurveyInstanceCreatedArea(reason: string): string {
