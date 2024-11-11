@@ -277,6 +277,10 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   protected detachElement(surveyElement: SurveyElement): void {
     if (surveyElement) {
       surveyElement.unRegisterFunctionOnPropertyValueChanged("isRequired", "isRequiredAdorner");
+      surveyElement.unRegisterFunctionOnPropertiesValueChanged(["inputType", "rateType"], "inputTypeAdorner");
+      if (!!surveyElement["setCanShowOptionItemCallback"]) {
+        (<any>surveyElement).setCanShowOptionItemCallback(undefined);
+      }
     }
     super.detachElement(this.element);
   }
@@ -288,13 +292,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
         this.updateRequiredAction(requiredAction);
       }, "isRequiredAdorner");
     }
-  }
-  public detachFromUI(): void {
-    this.surveyElement.unRegisterFunctionOnPropertiesValueChanged(["inputType", "rateType"], "inputTypeAdorner");
-    if (!!this.surveyElement["setCanShowOptionItemCallback"]) {
-      (<any>this.surveyElement).setCanShowOptionItemCallback(undefined);
-    }
-    super.detachFromUI();
   }
   get isDraggable() {
     return true;
