@@ -1428,7 +1428,10 @@ svc-question,
 
 .svc-survey-element-top-toolbar__item {
   @include defaultActionButtonSettings;
-  padding: 0;
+  padding: var(--ctr-survey-question-panel-toolbar-item-padding-top-small, calcSize(0.5))
+    var(--ctr-survey-question-panel-toolbar-item-padding-right-small, calcSize(0.5))
+    var(--ctr-survey-question-panel-toolbar-item-padding-bottom-small, calcSize(0.5))
+    var(--ctr-survey-question-panel-toolbar-item-padding-left-small, calcSize(0.5));
   border-radius: var(--ctr-survey-question-panel-toolbar-item-corner-radius, 2px);
   opacity: var(--ctr-survey-question-panel-toolbar-item-opacity-muted, 0.5);
   background-color: transparent;
