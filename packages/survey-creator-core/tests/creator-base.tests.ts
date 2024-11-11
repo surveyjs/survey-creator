@@ -4658,3 +4658,20 @@ test("check tabResponsivenessMode property", () => {
   creator.tabResponsivenessMode = "menu";
   expect(creator.tabbedMenu.actions.every((action) => action.disableShrink)).toBeTruthy();
 });
+test("onModified options, on adding page and on copying page", () => {
+  const creator = new CreatorTester({
+    pages: [{ elements: [{ type: "text", name: "q1" }] }]
+  });
+  const modifiedOptions = new Array<any>();
+  creator.onModified.add(function (survey, options) {
+    modifiedOptions.push(options);
+  });
+  const newPage = new PageModel();
+  newPage.name = "page2";
+  creator.addPage(newPage);
+  creator.copyPage(creator.survey.pages[0]);
+  expect(modifiedOptions[0].type).toBe("PAGE_ADDED");
+  expect(modifiedOptions[0].newValue.name).toBe("page2");
+  expect(modifiedOptions[2].type).toBe("ELEMENT_COPIED");
+  expect(modifiedOptions[2].newValue.name).toBe("page3");
+});
