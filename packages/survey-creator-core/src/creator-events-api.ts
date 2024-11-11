@@ -87,6 +87,13 @@ export interface HtmlToMarkdownEvent {
   text: string;
 }
 
+export type ElementGetExpandCollapseStateEventReason = "loading" | "collapse-all" | "expand-all" | "drag-start" | "drag-end";
+export interface ElementGetExpandCollapseStateEvent {
+  element: Question | PanelModel | PageModel;
+  expanded: boolean | undefined;
+  reason: ElementGetExpandCollapseStateEventReason;
+}
+
 export interface ElementAllowOperationsEvent {
   /**
    * A survey element (question or panel) for which you can disable user interactions.

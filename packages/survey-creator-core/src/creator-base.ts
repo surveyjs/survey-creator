@@ -51,7 +51,9 @@ import {
   ElementFocusedEvent, OpenFileChooserEvent, UploadFileEvent, TranslationStringVisibilityEvent, TranslationImportItemEvent,
   TranslationImportedEvent, TranslationExportItemEvent, MachineTranslateEvent, TranslationItemChangingEvent, DragDropAllowEvent,
   CreateCustomMessagePanelEvent, ActiveTabChangingEvent, ActiveTabChangedEvent, BeforeUndoEvent, BeforeRedoEvent,
-  PageAddingEvent, DragStartEndEvent
+  PageAddingEvent, DragStartEndEvent,
+  ElementGetExpandCollapseStateEvent,
+  ElementGetExpandCollapseStateEventReason
 } from "./creator-events-api";
 import { ExpandCollapseManager } from "./expand-collapse-manager";
 import designTabSurveyThemeJSON from "./designTabSurveyThemeJSON";
@@ -433,6 +435,10 @@ export class SurveyCreatorModel extends Base
    */
   public onHtmlToMarkdown: EventBase<SurveyCreatorModel, HtmlToMarkdownEvent> = this.addCreatorEvent<SurveyCreatorModel, HtmlToMarkdownEvent>();
 
+  /**
+
+   */
+  public onElementGetExpandCollapseState: EventBase<SurveyCreatorModel, ElementGetExpandCollapseStateEvent> = this.addCreatorEvent<SurveyCreatorModel, ElementGetExpandCollapseStateEvent>();
   /**
    * An event that is raised when Survey Creator obtains permitted operations for a survey element. Use this event to disable user interactions with a question, panel, or page on the design surface.
    *
@@ -1930,23 +1936,51 @@ export class SurveyCreatorModel extends Base
   public get designerStateManager() {
     return (this.getPlugin("designer") as TabDesignerPlugin).designerStateManager;
   }
-  public collapseAllPages(): void {
-    this.survey.pages.forEach(page => {
-      const pageAdorner = SurveyElementAdornerBase.GetAdorner(page);
-      if (pageAdorner) {
-        pageAdorner.collapsed = true;
+
+  private getElements() {
+    const pages: SurveyElement[] = this.survey.pages;
+    const panels: SurveyElement[] = this.survey.getAllPanels() as any;
+    const questions: SurveyElement[] = this.survey.getAllQuestions();
+    return pages.concat(panels).concat(questions);
+  }
+
+  public collapseAllElements(): void {
+    this.getElements().forEach(element => {
+      const elementAdorner = SurveyElementAdornerBase.GetAdorner(element);
+      if (elementAdorner) {
+        const defaultCollapsed = element instanceof PageModel ? true : elementAdorner.collapsed;
+        elementAdorner.collapsed = this.getElementExpandCollapseState(element as Question | PageModel | PanelModel, "drag-start", defaultCollapsed);
       }
     });
   }
-  public restorePagesState(): void {
-    this.survey.pages.forEach(page => {
-      if(page["draggedFrom"] !== undefined) {
-        const adorner = SurveyElementAdornerBase.GetAdorner(page);
+
+  public getElementExpandCollapseState(element: Question | PageModel | PanelModel, reason: ElementGetExpandCollapseStateEventReason, defaultValue: boolean): boolean {
+    const options: ElementGetExpandCollapseStateEvent = {
+      element: element,
+      reason: reason,
+      expanded: undefined
+    };
+    this.onElementGetExpandCollapseState.fire(this, options);
+    if (options.expanded === undefined) return defaultValue;
+    return !options.expanded;
+  }
+
+  private restoreState(element: SurveyElement) {
+    const state = this.getElementExpandCollapseState(element as any, "drag-end", undefined);
+    if (state !== undefined) {
+      SurveyElementAdornerBase.GetAdorner(element).collapsed = state;
+    }
+    SurveyElementAdornerBase.RestoreStateFor(element);
+  }
+  public restoreElementsState(): void {
+    this.getElements().forEach(element => {
+      if (element["draggedFrom"] !== undefined) {
+        const adorner = SurveyElementAdornerBase.GetAdorner(element);
         adorner?.blockAnimations();
-        SurveyElementAdornerBase.RestoreStateFor(page);
+        this.restoreState(element);
         adorner?.releaseAnimations();
       } else {
-        SurveyElementAdornerBase.RestoreStateFor(page);
+        this.restoreState(element);
       }
     });
   }
