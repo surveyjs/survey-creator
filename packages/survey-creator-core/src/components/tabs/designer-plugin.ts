@@ -131,6 +131,11 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       this.updatePredefinedColorChoices();
     }
   }
+  setTheme() {
+    if (this.creator.showCreatorThemeSettings) {
+      this.themeModel.setTheme(this.creator.creatorTheme);
+    }
+  }
   private createCreatorThemeSettingsPage(creator: SurveyCreatorModel) {
     this.themeModel = new CreatorThemeModel();
     this.themePropertyGrid = new PropertyGridModel(undefined, creator, creatorThemeModelPropertyGridDefinition);

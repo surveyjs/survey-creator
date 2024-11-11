@@ -3,13 +3,15 @@
     <div
       class="svc-sidebar__header-container svc-sidebar__header-container--with-subtitle"
     >
-      <div class="svc-sidebar__header-content" @click="model.action()">
-        <div :class="model.buttonClassName">
+      <div class="svc-sidebar__header-content">
+        <div
+          :class="model.buttonClassName"
+          v-key2click="{ processEsc: false }"
+          @click="model.action()"
+        >
           <div class="svc-sidebar__header-caption">
             <span class="svc-sidebar__header-title">{{ model.title }}</span>
-            <span class="svc-sidebar__header-subtitle">{{
-              model.tooltip
-            }}</span>
+            <span class="svc-sidebar__header-subtitle">{{ model.tooltip }}</span>
           </div>
         </div>
         <SvComponent :is="'sv-popup'" :model="model.popupModel"></SvComponent>

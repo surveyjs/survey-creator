@@ -36,6 +36,7 @@ export class SurveyQuestionLinkValue extends SurveyQuestionElementBase {
           disabled={!this.question.isClickable}
           text={this.question.linkValueText}
           title={this.question.tooltip}
+          iconName={this.question.iconName}
         ></ActionButton>
         {this.renderClear()}
       </>

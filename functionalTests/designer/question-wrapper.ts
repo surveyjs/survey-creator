@@ -377,7 +377,7 @@ test("No tab stop in dynamic panel", async (t) => {
     .expect(Selector(".svc-question__content--panel .svc-action-button").withText("Add Question").focused).ok()
     .pressKey("tab")
     .pressKey("tab")
-    .expect(Selector(".svc-question__content--panel .sv-action-bar-item").withText("Panel").focused).ok();
+    .expect(Selector(".svc-question__content--panel .svc-survey-element-toolbar__item").withText("Panel").focused).ok();
 });
 
 test("Question adorner - collapse button in differen modes", async (t) => {
@@ -417,6 +417,49 @@ test("Question adorner - collapse button in differen modes", async (t) => {
   await t.hover(getToolboxItemByText("Single-Line Input"));
   await setJSON(json);
   await t.expect(qCollapseButton.visible).ok();
+  await ClientFunction(() => { window["creator"].expandCollapseButtonVisibility = "never"; })();
+});
+
+test("Question adorner - do not render content when initially collapsed", async (t) => {
+  const json = {
+    elements: [
+      {
+        type: "text",
+        name: "question1"
+      },
+      {
+        type: "panel",
+        name: "panel1"
+      }
+    ]
+  };
+  await ClientFunction(() => { window["creator"].expandCollapseButtonVisibility = "always"; })();
+  await setJSON(json);
+  await t.hover(getToolboxItemByText("Single-Line Input"));
+  const qContent = Selector(".svc-question__content--text");
+  const qCollapseButton = Selector(".svc-question__content--text #collapse");
+  const pContent = Selector(".svc-question__content--panel");
+  const pCollapseButton = Selector(".svc-question__content--panel #collapse");
+  await t.expect(qCollapseButton.visible).ok();
+  await t.click(qCollapseButton);
+  await t.expect(pCollapseButton.visible).ok();
+  await t.click(pCollapseButton);
+
+  await t.click(Selector(".svc-tabbed-menu-item").withText("Preview"));
+  await t.click(Selector(".svc-tabbed-menu-item").withText("Designer"));
+
+  await t.expect(qContent.find(".sd-element").exists).notOk();
+  await t.click(qCollapseButton);
+  await t.expect(qContent.find(".sd-element").exists).ok();
+  await t.click(qCollapseButton);
+  await t.expect(qContent.find(".sd-element").exists).ok();
+
+  await t.expect(pContent.find(".sd-element").exists).notOk();
+  await t.click(pCollapseButton);
+  await t.expect(pContent.find(".sd-element").exists).ok();
+  await t.click(pCollapseButton);
+  await t.expect(pContent.find(".sd-element").exists).ok();
+
   await ClientFunction(() => { window["creator"].expandCollapseButtonVisibility = "never"; })();
 });
 

@@ -73,6 +73,12 @@ export class PreviewViewModel extends Base {
   constructor(protected surveyProvider: SurveyCreatorModel, private startThemeClasses: any = defaultV2Css) {
     super();
     this.simulator = new SurveySimulatorModel(surveyProvider);
+    this.pages.cssClasses = {
+      root: "sv-action-bar svc-pages-toolbar",
+      item: "sv-action-bar-item svc-survey-element-toolbar__item",
+      itemAsIcon: "svc-survey-element-toolbar__item--icon",
+      itemIcon: "sv-action-bar-item__icon svc-survey-element-toolbar-item__icon",
+    };
   }
 
   public get isMobileView() {

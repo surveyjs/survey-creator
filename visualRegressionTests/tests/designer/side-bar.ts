@@ -77,17 +77,17 @@ test("property grid search", async (t) => {
     await t.resizeWindow(1920, 900);
     await takeElementScreenshot("side-bar-search-empty.png", Selector(".spg-container_search"), t, comparer);
 
-    await t.typeText(".spg-search-editor_input", "des");
-    await takeElementScreenshot("side-bar-search-editor.png", ".spg-container_search .spg-search-editor_container", t, comparer);
+    await t.typeText(".svc-search__input", "des");
+    await takeElementScreenshot("side-bar-search-editor.png", ".spg-container_search .svc-search", t, comparer);
     await takeElementScreenshot("side-bar-search-general-group.png", Selector(".spg-container_search"), t, comparer);
 
-    await t.click(".spg-search-editor_bar-item"); // prev
+    await t.click(".svc-search__bar-item"); // prev
     await takeElementScreenshot("side-bar-search-question-group.png", Selector(".spg-container_search"), t, comparer);
 
-    await t.click(Selector(".spg-search-editor_bar-item").nth(1)); // next
+    await t.click(Selector(".svc-search__bar-item").nth(1)); // next
     await takeElementScreenshot("side-bar-search-general-group.png", Selector(".spg-container_search"), t, comparer);
 
-    await t.click(Selector(".spg-search-editor_bar-item").nth(2)); // clear
+    await t.click(Selector(".svc-search__bar-item").nth(2)); // clear
     await takeElementScreenshot("side-bar-search-empty.png", Selector(".spg-container_search"), t, comparer);
   });
 });
@@ -111,7 +111,7 @@ test("property grid search matrix", async (t) => {
     await t.click(".sd-question");
     await t.resizeWindow(1920, 900);
 
-    await t.typeText(".spg-search-editor_input", "choices");
+    await t.typeText(".svc-search__input", "choices");
     await takeElementScreenshot("side-bar-search-matrix.png", ".spg-matrixdynamic__content", t, comparer);
   });
 });
