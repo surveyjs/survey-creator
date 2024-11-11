@@ -1384,3 +1384,32 @@ test("onThemePropertyChanged event for a custom property", (): any => {
 
   Serializer.removeProperty("theme", "paddingTopScale");
 });
+
+test("Theme tab: default device and save current device", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+
+  expect(themePlugin.defaultDevice).toBe("desktop");
+  expect(themePlugin.currentDevice).toBe("");
+
+  themePlugin.activate();
+  expect(themePlugin.model.simulator.device).toBe("desktop");
+
+  themePlugin.model.simulator.device = "iPhone15";
+  expect(themePlugin.currentDevice).toBe("");
+
+  themePlugin.deactivate();
+  expect(themePlugin.currentDevice).toBe("iPhone15");
+
+  themePlugin.activate();
+  expect(themePlugin.model.simulator.device).toBe("iPhone15");
+  expect(themePlugin.defaultDevice).toBe("desktop");
+
+  themePlugin.deactivate();
+  themePlugin.defaultDevice = "iPhone15Plus";
+  themePlugin.currentDevice = "";
+
+  themePlugin.activate();
+  expect(themePlugin.model.simulator.device).toBe("iPhone15Plus");
+});

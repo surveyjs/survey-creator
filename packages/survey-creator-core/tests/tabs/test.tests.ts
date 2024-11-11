@@ -1117,3 +1117,33 @@ test("The Preview Survey button text is not translated Bug#6016", (): any => {
   expect(testPlugin.model.testAgainAction.title).toBe(deText);
   creator.locale = "";
 });
+test("Preview tab: default device and save current device", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
+
+  expect(testPlugin.defaultDevice).toBe("desktop");
+  expect(testPlugin.currentDevice).toBe("");
+
+  testPlugin.activate();
+  expect(testPlugin.model.simulator.device).toBe("desktop");
+
+  testPlugin.model.simulator.device = "iPhone15";
+  expect(testPlugin.currentDevice).toBe("iPhone15");
+
+  testPlugin.deactivate();
+  expect(testPlugin.defaultDevice).toBe("desktop");
+  expect(testPlugin.currentDevice).toBe("iPhone15");
+
+  testPlugin.activate();
+  expect(testPlugin.model.simulator.device).toBe("iPhone15");
+  expect(testPlugin.defaultDevice).toBe("desktop");
+  expect(testPlugin.currentDevice).toBe("iPhone15");
+
+  testPlugin.deactivate();
+  testPlugin.defaultDevice = "iPhone15Plus";
+  testPlugin.currentDevice = "";
+
+  testPlugin.activate();
+  expect(testPlugin.model.simulator.device).toBe("iPhone15Plus");
+});
