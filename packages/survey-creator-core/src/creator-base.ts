@@ -1937,19 +1937,15 @@ export class SurveyCreatorModel extends Base
     return (this.getPlugin("designer") as TabDesignerPlugin).designerStateManager;
   }
 
-  private getElements() {
-    const pages: SurveyElement[] = this.survey.pages;
-    const panels: SurveyElement[] = this.survey.getAllPanels() as any;
-    const questions: SurveyElement[] = this.survey.getAllQuestions();
-    return pages.concat(panels).concat(questions);
+  private getCollapsableElements() {
+    return this.survey.pages;
   }
 
   public collapseAllElements(): void {
-    this.getElements().forEach(element => {
+    this.getCollapsableElements().forEach(element => {
       const elementAdorner = SurveyElementAdornerBase.GetAdorner(element);
       if (elementAdorner) {
-        const defaultCollapsed = element instanceof PageModel ? true : elementAdorner.collapsed;
-        elementAdorner.collapsed = this.getElementExpandCollapseState(element as Question | PageModel | PanelModel, "drag-start", defaultCollapsed);
+        elementAdorner.collapsed = this.getElementExpandCollapseState(element as Question | PageModel | PanelModel, "drag-start", true);
       }
     });
   }
@@ -1973,7 +1969,7 @@ export class SurveyCreatorModel extends Base
     SurveyElementAdornerBase.RestoreStateFor(element);
   }
   public restoreElementsState(): void {
-    this.getElements().forEach(element => {
+    this.getCollapsableElements().forEach(element => {
       if (element["draggedFrom"] !== undefined) {
         const adorner = SurveyElementAdornerBase.GetAdorner(element);
         adorner?.blockAnimations();

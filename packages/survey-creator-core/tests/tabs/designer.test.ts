@@ -518,11 +518,11 @@ test("expand/collapse event - loading", () => {
   expect(page1Adorner.collapsed).toBeTruthy();
   expect(page2Adorner.collapsed).toBeFalsy();
   expect(questionAdorner.collapsed).toBeTruthy();
-  expect(panelAdorner.collapsed).toBeTruthy();
+  expect(panelAdorner.collapsed).toBeFalsy();
 
   creator.restoreElementsState();
   expect(page1Adorner.collapsed).toBeFalsy();
   expect(page2Adorner.collapsed).toBeFalsy();
   expect(questionAdorner.collapsed).toBeTruthy();
-  expect(panelAdorner.collapsed).toBeTruthy();
+  expect(panelAdorner.collapsed).toBeFalsy();
 });
