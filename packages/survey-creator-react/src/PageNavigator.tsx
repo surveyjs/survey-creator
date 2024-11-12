@@ -88,7 +88,7 @@ export class SurveyPageNavigator extends CreatorModelElement<
           <SvgIcon
             className="svc-page-navigator__navigator-icon"
             iconName={this.model.icon}
-            size={24}
+            size={"auto"}
             title={this.model.pageSelectorCaption}
           ></SvgIcon>
 

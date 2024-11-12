@@ -3,7 +3,7 @@
     (click)="addNewQuestion($event)"
     (mouseover)="adorner.hoverStopper && adorner.hoverStopper($event, $event.currentTarget)"
     data-bind="clickBubble: false">
-    <svg class="svc-panel__add-new-question-icon" [iconName]="('icon-add_24x24')" [size]="24" sv-ng-svg-icon></svg>
+    <svg class="svc-panel__add-new-question-icon" [iconName]="('icon-add_24x24')" [size]="'auto'" sv-ng-svg-icon></svg>
     <span class="svc-add-new-item-button__text">
       {{ adorner.addNewQuestionText }}
     </span>

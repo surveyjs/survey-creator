@@ -33,7 +33,7 @@
             <SvComponent
               :is="'sv-svg-icon'"
               :iconName="'icon-choosefile'"
-              :size="24"
+              :size="'auto'"
             ></SvComponent>
           </span>
           <span
@@ -46,7 +46,7 @@
             <SvComponent
               :is="'sv-svg-icon'"
               :iconName="'icon-clear'"
-              :size="24"
+              :size="'auto'"
             ></SvComponent>
           </span>
         </div>

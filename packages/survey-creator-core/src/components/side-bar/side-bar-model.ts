@@ -123,6 +123,7 @@ export class SidebarModel extends Base {
     this._collapseAction = new Action({
       id: "svd-grid-hide",
       iconName: "icon-collapse-panel",
+      iconSize: "auto",
       css: "svd-grid-hide",
       locTitleName: "ed.hidePanel",
       showTitle: false,
@@ -147,6 +148,7 @@ export class SidebarModel extends Base {
       this._expandAction = new Action({
         id: "svd-grid-expand",
         iconName: "icon-expand-panel",
+        iconSize: "auto",
         css: "svd-grid-expand",
         needSeparator: true,
         action: () => {

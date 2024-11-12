@@ -16,14 +16,14 @@
       class="svc-matrix-cell__question-controls"
     >
       <span
-        class="svc-matrix-cell__question-controls-button"
+        class="svc-matrix-cell__question-controls-button svc-context-button"
         @click="adorner.editQuestion(adorner, $event)"
         v-key2click
       >
         <SvComponent
           :is="'sv-svg-icon'"
           :iconName="'icon-edit'"
-          :size="24"
+          :size="'auto'"
         ></SvComponent>
       </span>
     </div>
