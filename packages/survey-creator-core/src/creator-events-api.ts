@@ -90,7 +90,7 @@ export interface HtmlToMarkdownEvent {
 export type ElementGetExpandCollapseStateEventReason = "loading" | "collapse-all" | "expand-all" | "drag-start" | "drag-end";
 export interface ElementGetExpandCollapseStateEvent {
   element: Question | PanelModel | PageModel;
-  expanded: boolean | undefined;
+  collapsed: boolean;
   reason: ElementGetExpandCollapseStateEventReason;
 }
 

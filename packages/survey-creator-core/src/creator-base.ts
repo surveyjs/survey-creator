@@ -1954,11 +1954,10 @@ export class SurveyCreatorModel extends Base
     const options: ElementGetExpandCollapseStateEvent = {
       element: element,
       reason: reason,
-      expanded: undefined
+      collapsed: defaultValue
     };
     this.onElementGetExpandCollapseState.fire(this, options);
-    if (options.expanded === undefined) return defaultValue;
-    return !options.expanded;
+    return options.collapsed;
   }
 
   private restoreState(element: SurveyElement) {

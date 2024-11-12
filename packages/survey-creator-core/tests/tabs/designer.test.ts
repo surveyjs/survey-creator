@@ -464,27 +464,27 @@ test("expand/collapse event - loading", () => {
 
   creator.onElementGetExpandCollapseState.add((_, o) => {
     if (o.reason == "loading") {
-      if (o.element.name == "page2") o.expanded = true;
-      if (o.element.name == "question1") o.expanded = false;
+      if (o.element.name == "page2") o.collapsed = false;
+      if (o.element.name == "question1") o.collapsed = true;
     }
     if (o.reason == "collapse-all") {
-      if (o.element.name == "page2") o.expanded = false;
-      if (o.element.name == "question1") o.expanded = true;
+      if (o.element.name == "page2") o.collapsed = true;
+      if (o.element.name == "question1") o.collapsed = false;
     }
     if (o.reason == "expand-all") {
-      if (o.element.name == "page1") o.expanded = true;
-      if (o.element.name == "page2") o.expanded = true;
-      if (o.element.name == "question1") o.expanded = false;
+      if (o.element.name == "page1") o.collapsed = false;
+      if (o.element.name == "page2") o.collapsed = false;
+      if (o.element.name == "question1") o.collapsed = true;
     }
     if (o.reason == "drag-start") {
-      if (o.element.name == "page1") o.expanded = false;
-      if (o.element.name == "page2") o.expanded = true;
-      if (o.element.name == "panel1") o.expanded = false;
+      if (o.element.name == "page1") o.collapsed = true;
+      if (o.element.name == "page2") o.collapsed = false;
+      if (o.element.name == "panel1") o.collapsed = true;
     }
     if (o.reason == "drag-end") {
-      if (o.element.name == "page1") o.expanded = true;
-      if (o.element.name == "page2") o.expanded = true;
-      if (o.element.name == "panel1") o.expanded = false;
+      if (o.element.name == "page1") o.collapsed = false;
+      if (o.element.name == "page2") o.collapsed = false;
+      if (o.element.name == "panel1") o.collapsed = true;
     }
   });
 
