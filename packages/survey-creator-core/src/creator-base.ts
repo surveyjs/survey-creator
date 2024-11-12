@@ -1929,7 +1929,7 @@ export class SurveyCreatorModel extends Base
       this.stopUndoRedoTransaction();
       if (this.collapsePagesOnDrag) {
         this.designerStateManager?.release();
-        this.restorePagesState();
+        this.restoreElementsState();
       }
     });
   }
