@@ -785,6 +785,18 @@ test("Drag indicator for custom widget", async (t) => {
       };
 
       window["Survey"].CustomWidgetCollection.Instance.addCustomWidget(widget, "customtype");
+
+      const widgetTemplateForKo = document.createElement("script");
+      widgetTemplateForKo.setAttribute("id", "survey-widget-peoplepicker");
+      widgetTemplateForKo.setAttribute("type", "text/html");
+      widgetTemplateForKo.innerHTML = `
+                  <div>
+                    <label class="dds-search">
+                    <input type="text" placeholder="Search by name or email" value="">
+                    </label>
+                  </div>
+                `;
+      document.body.appendChild(widgetTemplateForKo);
     })();
     await t.resizeWindow(1252, 900);
 
