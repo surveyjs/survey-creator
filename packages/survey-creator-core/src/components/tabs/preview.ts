@@ -73,6 +73,12 @@ export class PreviewViewModel extends Base {
   constructor(protected surveyProvider: SurveyCreatorModel, private startThemeClasses: any = defaultV2Css) {
     super();
     this.simulator = new SurveySimulatorModel(surveyProvider);
+    this.pages.cssClasses = {
+      root: "sv-action-bar svc-pages-toolbar",
+      item: "sv-action-bar-item svc-survey-element-toolbar__item",
+      itemAsIcon: "svc-survey-element-toolbar__item--icon",
+      itemIcon: "sv-action-bar-item__icon svc-survey-element-toolbar-item__icon",
+    };
   }
 
   public get isMobileView() {
@@ -239,9 +245,6 @@ export class PreviewViewModel extends Base {
       this.prevPageAction.iconName = <any>new ComputedUpdater<string>(() => {
         return this.surveyProvider.isMobileView ? "icon-arrow-left" : "icon-arrow-left_16x16";
       });
-      this.prevPageAction.iconSize = <any>new ComputedUpdater<number>(() => {
-        return this.surveyProvider.isMobileView ? 24 : 16;
-      });
       this.prevPageAction.action = () => setNearPage(false);
       pageActions.push(this.prevPageAction);
     }
@@ -277,9 +280,6 @@ export class PreviewViewModel extends Base {
       });
       this.nextPageAction.iconName = <any>new ComputedUpdater<string>(() => {
         return this.surveyProvider.isMobileView ? "icon-arrow-right" : "icon-arrow-right_16x16";
-      });
-      this.nextPageAction.iconSize = <any>new ComputedUpdater<number>(() => {
-        return this.surveyProvider.isMobileView ? 24 : 16;
       });
       this.nextPageAction.action = () => setNearPage(true);
       pageActions.push(this.nextPageAction);

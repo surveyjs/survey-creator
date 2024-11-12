@@ -35,9 +35,17 @@
 .sv-action-bar--default-size-mode .sv-action-bar-separator {
   height: calcSize(5);
 }
+.sv-action-bar--default-size-mode .sv-action-bar-item {
+  height: auto;
+  width: auto;
+}
 
 .sv-action-bar--small-size-mode .sv-action-bar-separator {
   height: calcSize(4);
+}
+.sv-action-bar--small-size-mode .sv-action-bar-item {
+  height: auto;
+  width: auto;
 }
 
 .svc-creator--mobile {
@@ -106,9 +114,18 @@
     height: auto;
   }
 
+  .sv-action-bar-item--icon {
+    padding: var(--ctr-menu-toolbar-button-padding-top, calcSize(1))
+      var(--ctr-menu-toolbar-button-padding-right, calcSize(1))
+      var(--ctr-menu-toolbar-button-padding-bottom, calcSize(1))
+      var(--ctr-menu-toolbar-button-padding-left, calcSize(1));
+    border-radius: var(--ctr-menu-toolbar-button-corner-radius, 0);
+  }
+
   .sv-action-bar-item__icon {
     width: var(--ctr-menu-toolbar-button-icon-width, calcSize(3));
     height: var(--ctr-menu-toolbar-button-icon-height, calcSize(3));
+
     use {
       fill: var(--ctr-menu-toolbar-button-icon-color, $foreground-light);
     }
@@ -130,11 +147,6 @@
     opacity: var(--ctr-menu-toolbar-button-opacity-disabled, 0.25);
   }
 
-  .sv-action-bar-item--secondary {
-    .sv-action-bar-item__icon use {
-      fill: $secondary;
-    }
-  }
 
   .sv-action-bar-item--active {
     .sv-action-bar-item__icon use {
@@ -166,6 +178,11 @@
       background: $background;
       border-top: 1px solid $border;
       box-sizing: border-box;
+    }
+
+    .sv-action-bar-item__icon {
+      width: var(--ctr-menu-toolbar-button-icon-width, calcSize(3));
+      height: var(--ctr-menu-toolbar-button-icon-height, calcSize(3));
     }
   }
 }

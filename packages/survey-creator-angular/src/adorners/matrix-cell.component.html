@@ -5,8 +5,9 @@
     <div class="svc-matrix-cell--selected" [class.svc-visible]="adorner.isSelected"></div>
     <ng-container *ngTemplateOutlet="contentTempl"></ng-container>
     <div *ngIf="isSupportCellEditor" class="svc-matrix-cell__question-controls">
-      <span class="svc-matrix-cell__question-controls-button" (click)="adorner.editQuestion(adorner, $event)" [key2click]>
-        <svg [iconName]="'icon-edit'" [size]="24" [size]="24" sv-ng-svg-icon></svg>
+      <span class="svc-matrix-cell__question-controls-button svc-context-button"
+        (click)="adorner.editQuestion(adorner, $event)" [key2click]>
+        <svg [iconName]="'icon-edit'" [size]="'auto'" [size]="'auto'" sv-ng-svg-icon></svg>
       </span>
     </div>
   </div>

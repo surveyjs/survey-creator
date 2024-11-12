@@ -59,15 +59,10 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
     const renderedPages = [];
 
     if (this.creator.pageEditMode !== "bypage") {
-      const pages = this.creator.survey.pages;
-
+      const pages = this.model.pages;
       pages.forEach((page) => {
-        renderedPages.push(this.createRenderedPage(page));
+        renderedPages.push(this.createRenderedPage(page, page == this.model.newPage));
       });
-
-      if (this.model.showNewPage) {
-        renderedPages.push(this.renderNewPage("svc-page", this.model.newPage.id + "-ghost-new-page"));
-      }
     } else {
       const page2Display = this.model.pagesController.page2Display;
       if (!!page2Display) {
@@ -85,7 +80,7 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
         data-sv-drop-target-survey-element={isGhostPage ? "newGhostPage" : page.name}
         key={page.id}
       >
-        {this.renderPage(page)}
+        {this.renderPage(page, isGhostPage)}
       </div>
     );
   }
@@ -96,12 +91,12 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
           className={className}
           data-sv-drop-target-survey-element={"newGhostPage"}
         >
-          {!!this.model.newPage ? this.renderPage(this.model.newPage) : null}
+          {!!this.model.newPage ? this.renderPage(this.model.newPage, true) : null}
         </div>
       </React.Fragment>);
   }
-  protected renderPage(pageV: PageModel): JSX.Element {
-    return ReactElementFactory.Instance.createElement("svc-page", { survey: this.creator.survey, page: pageV, creator: this.creator });
+  protected renderPage(pageV: PageModel, isGhost: boolean): JSX.Element {
+    return ReactElementFactory.Instance.createElement("svc-page", { survey: this.creator.survey, page: pageV, creator: this.creator, isGhost });
   }
   renderElement(): JSX.Element {
     const designerTabClassName = "svc-tab-designer " + this.model.getRootCss();

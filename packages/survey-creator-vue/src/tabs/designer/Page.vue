@@ -35,7 +35,7 @@
         v-bind="{
           css: 'svc-question__drag-element',
           iconName: 'icon-drag-area-indicator_24x16',
-          size: 24,
+          size: 'auto',
         }"
       ></SvComponent>
       <div class="svc-page__content-actions">
@@ -45,7 +45,10 @@
         ></SvComponent>
       </div>
     </div>
-    <div v-if="!model.allowDragging || model.isGhost" class="svc-page__content-actions">
+    <div
+      v-if="!model.allowDragging || model.isGhost"
+      class="svc-page__content-actions"
+    >
       <SvComponent
         :is="'sv-action-bar'"
         :model="model.actionContainer"
@@ -74,18 +77,31 @@ import { useCreatorModel } from "@/creator-model";
 import type { SurveyModel, PageModel } from "survey-core";
 import type { SurveyCreatorModel } from "survey-creator-core";
 import { PageAdorner } from "survey-creator-core";
-import { onMounted, onUpdated, ref } from "vue";
+import { onMounted, onUpdated, ref, watch } from "vue";
 const props = defineProps<{
   creator: SurveyCreatorModel;
   survey?: SurveyModel;
   page: PageModel;
+  isGhost: boolean;
 }>();
 const root = ref();
 const model = useCreatorModel(
-  () => new PageAdorner(props.creator, props.page),
+  () => {
+    const adorner = new PageAdorner(props.creator, props.page);
+    adorner.isGhost = props.isGhost;
+    return adorner;
+  },
   [() => props.page],
   (value) => {
     value.dispose();
+  }
+);
+watch(
+  () => props.isGhost,
+  () => {
+    if (model.value) {
+      model.value.isGhost = props.isGhost;
+    }
   }
 );
 onUpdated(() => {

@@ -107,17 +107,17 @@ test("undo/redo add new page", (): any => {
   expect(creator.survey.pages[0].name).toEqual("page1");
   expect(designerPlugin.model.newPage.name).toEqual("page2");
   let newPageModel = new PageAdorner(creator, designerPlugin.model.newPage);
-  expect(newPageModel.isGhost).toBeTruthy();
+  newPageModel.isGhost = true;
   newPageModel.addNewQuestion(newPageModel, null);
-  expect(newPageModel.isGhost).toBeFalsy();
+  newPageModel.isGhost = false;
   expect(creator.survey.pageCount).toEqual(2);
   expect(creator.survey.pages[1].name).toEqual("page2");
   expect(designerPlugin.model.newPage.name).toEqual("page3");
 
   newPageModel = new PageAdorner(creator, designerPlugin.model.newPage);
-  expect(newPageModel.isGhost).toBeTruthy();
+  newPageModel.isGhost = true;
   newPageModel.addNewQuestion(newPageModel, null);
-  expect(newPageModel.isGhost).toBeFalsy();
+  newPageModel.isGhost = false;
   expect(creator.survey.pageCount).toEqual(3);
   expect(creator.survey.pages[2].name).toEqual("page3");
   expect(designerPlugin.model.newPage.name).toEqual("page4");
@@ -141,6 +141,7 @@ test("undo/redo add new page, via page model by adding new question", (): any =>
   expect(creator.survey.pages[0].name).toEqual("page1");
   expect(designerPlugin.model.newPage.name).toEqual("page2");
   let pageModel = new PageAdorner(creator, designerPlugin.model.newPage);
+  pageModel.isGhost = true;
   pageModel.addNewQuestion(pageModel, null);
   expect(creator.survey.pageCount).toEqual(2);
   expect(creator.survey.pages[1].name).toEqual("page2");
@@ -149,6 +150,7 @@ test("undo/redo add new page, via page model by adding new question", (): any =>
   expect(designerPlugin.model.newPage.name).toEqual("page3");
 
   pageModel = new PageAdorner(creator, designerPlugin.model.newPage);
+  pageModel.isGhost = true;
   pageModel.addNewQuestion(pageModel, null);
   expect(creator.survey.pageCount).toEqual(3);
   expect(creator.survey.pages[2].name).toEqual("page3");
@@ -388,6 +390,7 @@ test("Undo restore deleted page and question", (): any => {
   const survey = creator.survey;
   expect(survey.pages).toHaveLength(1);
   const pageAdorner = new PageAdorner(creator, designerPlugin.model.newPage);
+  pageAdorner.isGhost = true;
   pageAdorner.addNewQuestion(pageAdorner, undefined, "text");
   expect(survey.pages).toHaveLength(2);
   expect(survey.pages[1].questions).toHaveLength(1);
@@ -410,6 +413,7 @@ test("Undo on removing questions in deleted two pages", (): any => {
   expect(survey.pages).toHaveLength(1);
   creator.clickToolboxItem({ type: "text" });
   const pageAdorner = new PageAdorner(creator, designerPlugin.model.newPage);
+  pageAdorner.isGhost = true;
   pageAdorner.addNewQuestion(pageAdorner, undefined, "text");
   expect(survey.pages).toHaveLength(2);
   creator.selectElement(survey.getQuestionByName("question2"));

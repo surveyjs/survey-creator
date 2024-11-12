@@ -1,5 +1,5 @@
 import { Selector, ClientFunction } from "testcafe";
-import { setJSON, getAddNewQuestionButton, getToolboxItemByText, getVisibleElement, url, RatingToolboxItem, getListItemByText, getBarItemByTitle, getJSON } from "../helper";
+import { setJSON, getAddNewQuestionButton, getToolboxItemByText, getVisibleElement, url, RatingToolboxItem, getListItemByText, getBarItemByTitle, getJSON, getQuestionBarItemByTitle } from "../helper";
 
 const title = "Add new question";
 
@@ -137,8 +137,8 @@ test("Add New Question with sub type", async t => {
     .wait(400)
     .click(getListItemByText("Stars").nth(1))
     .expect(getVisibleElement(".svc-question__content").count).eql(1)
-    .expect(getVisibleElement(".svc-question__content-actions .sv-action-bar-item__title").nth(0).textContent).eql("Rating Scale")
-    .expect(getVisibleElement(".svc-question__content-actions .sv-action-bar-item__title").nth(1).textContent).eql("Stars");
+    .expect(getVisibleElement(".svc-question__content-actions .svc-survey-element-toolbar-item__title").nth(0).textContent).eql("Rating Scale")
+    .expect(getVisibleElement(".svc-question__content-actions .svc-survey-element-toolbar-item__title").nth(1).textContent).eql("Stars");
 
   let expectedJson = {
     "logoPosition": "right",
@@ -159,13 +159,13 @@ test("Add New Question with sub type", async t => {
   await t.expect(resultJson).eql(expectedJson);
 
   await t
-    .click(getBarItemByTitle("Rating Scale"))
+    .click(getQuestionBarItemByTitle("Rating Scale"))
     .hover(getListItemByText("Single-Line Input").filterVisible())
     .wait(400)
     .click(getListItemByText("Password").nth(1))
     .expect(getVisibleElement(".svc-question__content").count).eql(1)
-    .expect(getVisibleElement(".svc-question__content-actions .sv-action-bar-item__title").nth(0).textContent).eql("Single-Line Input")
-    .expect(getVisibleElement(".svc-question__content-actions .sv-action-bar-item__title").nth(1).textContent).eql("Password");
+    .expect(getVisibleElement(".svc-question__content-actions .svc-survey-element-toolbar-item__title").nth(0).textContent).eql("Single-Line Input")
+    .expect(getVisibleElement(".svc-question__content-actions .svc-survey-element-toolbar-item__title").nth(1).textContent).eql("Password");
 
   expectedJson = <any>{
     "logoPosition": "right",
@@ -186,13 +186,13 @@ test("Add New Question with sub type", async t => {
   await t.expect(resultJson).eql(expectedJson);
 
   await t
-    .click(getBarItemByTitle("Single-Line Input"))
+    .click(getQuestionBarItemByTitle("Single-Line Input"))
     .hover(getListItemByText("Single-Line Input").filterVisible())
     .wait(400)
     .click(getListItemByText("Rating Scale"))
     .expect(getVisibleElement(".svc-question__content").count).eql(1)
-    .expect(getVisibleElement(".svc-question__content-actions .sv-action-bar-item__title").nth(0).textContent).eql("Rating Scale")
-    .expect(getVisibleElement(".svc-question__content-actions .sv-action-bar-item__title").nth(1).textContent).eql("Labels");
+    .expect(getVisibleElement(".svc-question__content-actions .svc-survey-element-toolbar-item__title").nth(0).textContent).eql("Rating Scale")
+    .expect(getVisibleElement(".svc-question__content-actions .svc-survey-element-toolbar-item__title").nth(1).textContent).eql("Labels");
 
   expectedJson = <any>{
     "logoPosition": "right",
