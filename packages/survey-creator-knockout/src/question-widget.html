@@ -2,6 +2,10 @@
   data-bind="css: rootCss(), attr: { 'data-sv-drop-target-survey-element': element.name }, event: { mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }">
   <!-- ko if: question.isInteractiveDesignElement -->
   <div class="svc-question__content" data-bind="click: koSelect, key2click, clickBubble: false, css: css()">
+    <div class="svc-question__drop-indicator svc-question__drop-indicator--left"></div>
+    <div class="svc-question__drop-indicator svc-question__drop-indicator--right"></div>
+    <div class="svc-question__drop-indicator svc-question__drop-indicator--top"></div>
+    <div class="svc-question__drop-indicator svc-question__drop-indicator--bottom"></div>
     <!-- ko if: allowDragging -->
     <div class="svc-question__drag-area"
       data-bind="visible:allowDragging, event: {pointerdown: (model, event)=>{onPointerDown(event)}}">
