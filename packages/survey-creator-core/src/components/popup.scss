@@ -32,11 +32,10 @@
     }
   }
 
+  &.sv-popup--overlay .sv-popup__container {
+    background-color: var(--ctr-popup-haze-background-color, $background-semitransparent);
+  }
   &.sv-popup--overlay:not(.sv-popup--dropdown-overlay) {
-    .sv-popup__container {
-      background: var(--ctr-popup-haze-background-color, $background-semitransparent);
-    }
-
     .sv-popup__body-content {
       background-color: var(--ctr-popup-background-color, $background-dim);
     }
