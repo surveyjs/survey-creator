@@ -1939,11 +1939,16 @@ export class SurveyCreatorModel extends Base
     });
   }
   public restorePagesState(): void {
-    setTimeout(() => {
-      this.survey.pages.forEach(page => {
+    this.survey.pages.forEach(page => {
+      if(page["draggedFrom"] !== undefined) {
+        const adorner = SurveyElementAdornerBase.GetAdorner(page);
+        adorner?.blockAnimations();
         SurveyElementAdornerBase.RestoreStateFor(page);
-      });
-    }, 10);
+        adorner?.releaseAnimations();
+      } else {
+        SurveyElementAdornerBase.RestoreStateFor(page);
+      }
+    });
   }
   private initDragDropChoices() {
     this.dragDropChoices = new DragDropChoices(null, this);
@@ -2090,7 +2095,8 @@ export class SurveyCreatorModel extends Base
   private doOnPageAdded(page: PageModel) {
     var options = { page: page };
     this.onPageAdded.fire(this, options);
-    this.setModified({ type: "PAGE_ADDED", newValue: options.page });
+    const pType = this.isCopyingPage ? "ELEMENT_COPIED" : "PAGE_ADDED";
+    this.setModified({ type: pType, newValue: options.page });
   }
   private getPageByElement(obj: Base): PageModel {
     return this.survey.getPageByElement(<IElement>(<any>obj));
@@ -2668,6 +2674,7 @@ export class SurveyCreatorModel extends Base
    * @see onPageAdded
    */
   public copyPage(page: PageModel): PageModel {
+    this.isCopyingPage = true;
     var newPage = <PageModel>(<any>this.copyElement(page));
     var index = this.survey.pages.indexOf(page);
     if (index > -1) {
@@ -2675,6 +2682,7 @@ export class SurveyCreatorModel extends Base
     } else {
       this.survey.pages.push(newPage);
     }
+    this.isCopyingPage = false;
     newPage.questions.forEach(q => {
       this.addNewElementReason = "ELEMENT_COPIED";
       this.doOnQuestionAdded(q, q.parent);
@@ -2684,6 +2692,7 @@ export class SurveyCreatorModel extends Base
     this.addNewElementReason = "";
     return newPage;
   }
+  private isCopyingPage: boolean;
 
   protected deleteObjectCore(obj: any) {
     if (obj.isPage) {

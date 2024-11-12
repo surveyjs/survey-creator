@@ -12,6 +12,7 @@ svc-page-navigator,
   height: var(--ctr-page-navigator-button-icon-height, calcSize(3));
   padding: var(--ctr-page-navigator-button-padding, calcSize(1.25));
   border-radius: var(--ctr-page-navigator-button-corner-radius, 50%);
+  cursor: pointer;
   transition: background-color $creator-transition-duration;
 
   .sv-svg-icon {

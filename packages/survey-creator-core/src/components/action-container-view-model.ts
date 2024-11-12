@@ -165,14 +165,16 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     };
     const afterRunAnimation = (el: HTMLElement, animatingClassName: string) => {
       this.expandCollapseAnimationRunning = false;
-      cleanHtmlElementAfterAnimation(el);
-      const innerAnimatedElements = this.getInnerAnimatedElements();
-      innerAnimatedElements.forEach((elem: HTMLElement) => {
-        cleanHtmlElementAfterAnimation(elem);
-      });
-      innerAnimatedElements.forEach((elem: HTMLElement) => {
-        elem.classList.remove(animatingClassName);
-      });
+      if(this.surveyElement) {
+        cleanHtmlElementAfterAnimation(el);
+        const innerAnimatedElements = this.getInnerAnimatedElements();
+        innerAnimatedElements.forEach((elem: HTMLElement) => {
+          cleanHtmlElementAfterAnimation(elem);
+        });
+        innerAnimatedElements.forEach((elem: HTMLElement) => {
+          elem.classList.remove(animatingClassName);
+        });
+      }
     };
     return {
       getRerenderEvent: () => this.onElementRerendered,

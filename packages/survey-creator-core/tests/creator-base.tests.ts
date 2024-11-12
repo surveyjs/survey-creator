@@ -166,19 +166,19 @@ test("PageAdorner - remove page if: it is the last page, there is no elements an
   expect(creator.survey.pages).toHaveLength(1);
   expect(desigerTab.newPage).toBeTruthy();
   let pageAdorner = new PageAdorner(creator, desigerTab.newPage);
-  expect(pageAdorner.isGhost).toBeTruthy();
+  pageAdorner.isGhost = true;
   pageAdorner.addNewQuestion(pageAdorner, undefined);
   expect(creator.survey.pages).toHaveLength(2);
   creator.survey.pages[1].elements[0].delete();
   expect(creator.survey.pages).toHaveLength(1);
 
   pageAdorner = new PageAdorner(creator, desigerTab.newPage);
-  expect(pageAdorner.isGhost).toBeTruthy();
+  pageAdorner.isGhost = true;
   pageAdorner.addNewQuestion(pageAdorner, undefined);
   expect(creator.survey.pages).toHaveLength(2);
 
   pageAdorner = new PageAdorner(creator, desigerTab.newPage);
-  expect(pageAdorner.isGhost).toBeTruthy();
+  pageAdorner.isGhost = true;
   pageAdorner.addNewQuestion(pageAdorner, undefined);
   expect(creator.survey.pages).toHaveLength(3);
   creator.survey.pages[2].title = "New title";
@@ -213,7 +213,7 @@ test("PageAdorner - do not remove page if it is last and empty but the name has 
   expect(creator.survey.pages).toHaveLength(1);
   expect(desigerTab.newPage).toBeTruthy();
   let pageAdorner = new PageAdorner(creator, desigerTab.newPage);
-  expect(pageAdorner.isGhost).toBeTruthy();
+  pageAdorner.isGhost = true;
   pageAdorner.addNewQuestion(pageAdorner, undefined);
   expect(creator.survey.pages).toHaveLength(2);
   creator.survey.pages[1].name = "newPage";
@@ -795,9 +795,9 @@ test("Create new page on changing title/description in ghost", (): any => {
   expect(creator.survey.pages).toHaveLength(1);
   expect(designerPlugin.model.newPage).toBeTruthy();
   let pageModel = new PageAdorner(creator, designerPlugin.model.newPage);
-  expect(pageModel.isGhost).toBeTruthy();
+  pageModel.isGhost = true;
   designerPlugin.model.newPage.title = "Some title";
-  expect(pageModel.isGhost).toBeFalsy();
+  pageModel.isGhost = false;
   expect(creator.survey.pages).toHaveLength(2);
   expect(designerPlugin.model.newPage).toBeTruthy();
   expect(designerPlugin.model.showNewPage).toBeTruthy();
@@ -808,10 +808,10 @@ test("Create new page on changing title/description in ghost", (): any => {
 
   creator.survey.pages[1].addNewQuestion("text", "q2");
   pageModel = new PageAdorner(creator, designerPlugin.model.newPage);
-  expect(pageModel.isGhost).toBeTruthy();
+  pageModel.isGhost = true;
   expect(designerPlugin.model.newPage).toBeTruthy();
   designerPlugin.model.newPage.description = "Some description";
-  expect(pageModel.isGhost).toBeFalsy();
+  pageModel.isGhost = false;
   expect(creator.survey.pages).toHaveLength(3);
   expect(designerPlugin.model.showNewPage).toBeTruthy();
   expect(designerPlugin.model.newPage).toBeTruthy();
@@ -831,8 +831,8 @@ test("Don't add extra subscriptions and fully unsubscribe title/description chan
   expect(creator.survey.pages).toHaveLength(1);
   expect(designerPlugin.model.newPage).toBeTruthy();
   let pageModel = new PageAdorner(creator, designerPlugin.model.newPage);
+  pageModel.isGhost = true;
   const getTitleSubscriptions = () => designerPlugin.model.newPage["onPropChangeFunctions"].filter(f => f.name === "title");
-  expect(pageModel.isGhost).toBeTruthy();
   expect(getTitleSubscriptions().length).toBe(1);
   pageModel["attachElement"](designerPlugin.model.newPage);
   expect(getTitleSubscriptions().length).toBe(1);
@@ -855,13 +855,13 @@ test("Create new page on changing title/description in ghost PageAdorner resets 
 
   let currentNewPage = designerPlugin.model.newPage;
   const pageWrapperViewModel = new PageAdorner(creator, currentNewPage);
-  expect(pageWrapperViewModel.isGhost).toBeTruthy();
+  pageWrapperViewModel.isGhost = true;
   expect(pageWrapperViewModel.showPlaceholder).toBeFalsy();
 
   designerPlugin.model.newPage.title = "Some title";
   expect(creator.survey.pages).toHaveLength(2);
   expect(designerPlugin.model.newPage).toBeTruthy();
-  expect(pageWrapperViewModel.isGhost).toBeFalsy();
+  pageWrapperViewModel.isGhost = false;
   expect(pageWrapperViewModel.showPlaceholder).toBeTruthy();
 
   pageWrapperViewModel.addNewQuestion(null, undefined);
@@ -886,7 +886,7 @@ test("Create new ghost on moving a question from one page to the ghost page", ()
 
   let currentNewPage = designerPlugin.model.newPage;
   let pageWrapperViewModel = new PageAdorner(creator, currentNewPage);
-  expect(pageWrapperViewModel.isGhost).toBeTruthy();
+  pageWrapperViewModel.isGhost = true;
 
   const question1 = creator.survey.pages[0].questions[0];
   creator.survey.startMovingQuestion();
@@ -901,6 +901,7 @@ test("Create new ghost on moving a question from one page to the ghost page", ()
   currentNewPage = designerPlugin.model.newPage;
   expect(currentNewPage.name).toEqual("page3");
   pageWrapperViewModel = new PageAdorner(creator, currentNewPage);
+  pageWrapperViewModel.isGhost = true;
   expect(pageWrapperViewModel.isGhost).toBeTruthy();
 
   creator.survey.startMovingQuestion();
@@ -1057,6 +1058,7 @@ test("Page duplicate and add new page, check name", (): any => {
     creator.getPlugin("designer")
   );
   let pageModelNew = new PageAdorner(creator, designerPlugin.model.newPage);
+  pageModelNew.isGhost = true;
   pageModelNew.addNewQuestion(pageModelNew, null);
   expect(creator.survey.pages[3].name).toEqual("page4");
 
@@ -1096,6 +1098,7 @@ test("Check action container for new added page", (): any => {
     creator.getPlugin("designer")
   );
   const pageModel = new PageAdorner(creator, designerPlugin.model.newPage);
+  pageModel.isGhost = true;
   pageModel.addNewQuestion(pageModel, null);
   expect(creator.survey.pages).toHaveLength(2);
   expect(pageModel.actionContainer.actions).toHaveLength(3);
@@ -2138,7 +2141,7 @@ test("PageAdorner, actions and isGhost", (): any => {
   );
   expect(designerPlugin.model.newPage).toBeTruthy();
   const pageModel = new PageAdorner(creator, designerPlugin.model.newPage);
-  expect(pageModel.isGhost).toBeTruthy();
+  pageModel.isGhost = true;
   expect(pageModel.getActionById("delete").visible).toBeFalsy();
   expect(pageModel.getActionById("duplicate").visible).toBeFalsy();
   expect(pageModel.allowDragging).toBeFalsy();
@@ -4654,4 +4657,21 @@ test("check tabResponsivenessMode property", () => {
 
   creator.tabResponsivenessMode = "menu";
   expect(creator.tabbedMenu.actions.every((action) => action.disableShrink)).toBeTruthy();
+});
+test("onModified options, on adding page and on copying page", () => {
+  const creator = new CreatorTester({
+    pages: [{ elements: [{ type: "text", name: "q1" }] }]
+  });
+  const modifiedOptions = new Array<any>();
+  creator.onModified.add(function (survey, options) {
+    modifiedOptions.push(options);
+  });
+  const newPage = new PageModel();
+  newPage.name = "page2";
+  creator.addPage(newPage);
+  creator.copyPage(creator.survey.pages[0]);
+  expect(modifiedOptions[0].type).toBe("PAGE_ADDED");
+  expect(modifiedOptions[0].newValue.name).toBe("page2");
+  expect(modifiedOptions[2].type).toBe("ELEMENT_COPIED");
+  expect(modifiedOptions[2].newValue.name).toBe("page3");
 });

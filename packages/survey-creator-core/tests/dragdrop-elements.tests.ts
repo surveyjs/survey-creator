@@ -1448,3 +1448,45 @@ test("drag drop page", () => {
     ]
   });
 });
+
+test("drag drop page check draggedFrom property", () => {
+  const json = {
+    "pages": [
+      { "name": "page1", "elements": [{ "type": "text", "name": "q1" }] },
+      { "name": "page2", "elements": [{ "type": "text", "name": "q2" }] },
+      { "name": "page3", "elements": [{ "type": "text", "name": "q3" }] },
+    ]
+  };
+  const survey = new SurveyModel(json);
+
+  const [p1, p2, p3] = survey.pages;
+
+  const ddHelper: any = new DragDropSurveyElements(survey);
+
+  ddHelper.draggedElement = p3;
+  ddHelper.dragOverCore(p2, DragTypeOverMeEnum.Top);
+  ddHelper.doDrop();
+  expect(p3["draggedFrom"]).toStrictEqual(3);
+
+  ddHelper.draggedElement = p3;
+  ddHelper.dragOverCore(p2, DragTypeOverMeEnum.Bottom);
+  ddHelper.doDrop();
+  expect(p3["draggedFrom"]).toStrictEqual(1);
+
+  ddHelper.draggedElement = p1;
+  ddHelper.dragOverCore(p3, DragTypeOverMeEnum.Bottom);
+  ddHelper.doDrop();
+  expect(p1["draggedFrom"]).toStrictEqual(0);
+
+  ddHelper.draggedElement = p3;
+  p3["draggedFrom"] = undefined;
+  ddHelper.dragOverCore(p2, DragTypeOverMeEnum.Bottom);
+  ddHelper.doDrop();
+  expect(p3["draggedFrom"]).toStrictEqual(undefined);
+
+  ddHelper.draggedElement = p3;
+  p3["draggedFrom"] = undefined;
+  ddHelper.dragOverCore(p2, DragTypeOverMeEnum.Top);
+  ddHelper.doDrop();
+  expect(p3["draggedFrom"]).toStrictEqual(2);
+});
