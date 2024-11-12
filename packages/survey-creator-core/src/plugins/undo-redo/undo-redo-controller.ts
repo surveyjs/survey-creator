@@ -156,6 +156,7 @@ export class UndoRedoController extends Base {
     this.undoAction = new Action({
       id: "action-undo",
       iconName: "icon-undo",
+      iconSize: "auto",
       locTitleName: "ed.undo",
       showTitle: false,
       visible: <any>new ComputedUpdater(() => this.creator.activeTab === "designer"),
@@ -167,6 +168,7 @@ export class UndoRedoController extends Base {
     this.redoAction = new Action({
       id: "action-redo",
       iconName: "icon-redo",
+      iconSize: "auto",
       locTitleName: "ed.redo",
       showTitle: false,
       visible: <any>new ComputedUpdater(() => this.creator.activeTab === "designer"),

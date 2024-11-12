@@ -6,7 +6,7 @@
   <div class="svc-question__drop-indicator svc-question__drop-indicator--bottom"></div>
   <div *ngIf="adorner.allowDragging && !adorner.isGhost" class="svc-question__drag-area"
     (pointerdown)="adorner.onPointerDown($event)">
-    <svg class="svc-question__drag-element" [iconName]="'icon-drag-area-indicator_24x16'" [size]="24"
+    <svg class="svc-question__drag-element" [iconName]="'icon-drag-area-indicator_24x16'" [size]="'auto'"
       sv-ng-svg-icon></svg>
     <div class="svc-page__content-actions">
       <sv-action-bar [model]="adorner.actionContainer"></sv-action-bar>

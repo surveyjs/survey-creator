@@ -37,7 +37,7 @@
           :is="'sv-svg-icon'"
           class="svc-question__drag-element"
           :iconName="'icon-drag-area-indicator_24x16'"
-          :size="24"
+          :size="'auto'"
         ></SvComponent>
       </div>
       <div class="svc-widget__content">

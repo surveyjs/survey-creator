@@ -17,7 +17,7 @@
           <div>{{model.readOnlyText}}</div>
         </div>
         <div *ngIf="model.allowClear && model.cssClasses.cleanButtonIconId" [class]="model.cssClasses.cleanButton" (click)="clear" [visible]="!model.isEmpty()">
-          <svg [class]="model.cssClasses.cleanButtonSvg" [iconName]="model.cssClasses.cleanButtonIconId" [size]="'auto'" [title]="model.clearCaption" [size]="24" sv-ng-svg-icon></svg>
+          <svg [class]="model.cssClasses.cleanButtonSvg" [iconName]="model.cssClasses.cleanButtonIconId" [size]="'auto'" [title]="model.clearCaption" sv-ng-svg-icon></svg>
         </div>
       </div>
         <sv-ng-popup [popupModel]="model.popupModel"></sv-ng-popup>
