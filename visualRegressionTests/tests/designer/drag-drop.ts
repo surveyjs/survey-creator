@@ -756,15 +756,40 @@ test("Drag Drop to collapsed page", async (t) => {
   });
 });
 
-fixture`DragDrop custom widget Screenshot`.page`http://127.0.0.1:8080/testCafe/testcafe-widget.html`.beforeEach(async (t) => {
+fixture`DragDrop custom widget Screenshot`.page`${url}`.beforeEach(async (t) => {
 });
 
 test("Drag indicator for custom widget", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    await ClientFunction(() => {
+      const widget = {
+        name: "peoplepicker",
+        title: "People Picker",
+        iconName: "search",
+        widgetIsLoaded: function () { return true; },
+        isFit: function (question) { return question.getType() === "peoplepicker"; },
+        activatedByChanged: function (activatedBy) { window["Survey"].Serializer.addClass("peoplepicker", [], null, "empty"); },
+        isDefaultRender: false,
+        htmlTemplate: `
+                  <div>
+                    <label class="dds-search">
+                    <input type="text" placeholder="Search by name or email" value="">
+                    </label>
+                  </div>
+                `,
+        afterRender: (question, element) => {
+          const input = element.getElementsByTagName("input")[0];
+          input.style.width = "100%";
+          input.style.padding = "8px auto";
+        },
+      };
+
+      window["Survey"].CustomWidgetCollection.Instance.addCustomWidget(widget, "customtype");
+    })();
     await t.resizeWindow(1252, 900);
 
     const json = {
-      elements: [{ type: "bootstrapdatepicker", name: "q1" }, { type: "bootstrapdatepicker", name: "q2" }]
+      elements: [{ type: "peoplepicker", name: "q1" }, { type: "peoplepicker", name: "q2" }]
     };
     await setJSON(json);
 
