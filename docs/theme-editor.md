@@ -108,6 +108,12 @@ You can also add UI elements that allow users to save, apply, and reuse custom t
 
 [View "Add Reusable Themes" Demo](https://surveyjs.io/survey-creator/examples/save-custom-theme/ (linkStyle))
 
+## Customize the Property Grid
+
+Refer to the following demo for details on Theme Editor's Property Grid customization:
+
+[Manage Theme Settings](/survey-creator/examples/theme-editor-modify-settings-panel/ (linkStyle))
+
 ## See Also
 
 - [Themes & Styles](/form-library/documentation/manage-default-themes-and-styles)

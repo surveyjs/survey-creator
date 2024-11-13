@@ -272,6 +272,9 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     }
   };;
   protected surveyElement: T
+  get element() {
+    return this.surveyElement;
+  }
   constructor(
     public creator: SurveyCreatorModel,
     surveyElement: T
@@ -295,7 +298,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   protected restoreState(): void {
     if (!!this.surveyElement) {
       const state = this.creator.designerStateManager?.getElementState(this.surveyElement);
-      this.collapsed = state.collapsed;
+      this.collapsed = this.creator.getElementExpandCollapseState(this.surveyElement as any, "loading", state.collapsed);
     }
     this.needToRenderContent = !this.collapsed;
   }

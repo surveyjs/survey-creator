@@ -1,4 +1,4 @@
-import { SurveyModel, ILocalizableOwner, LocalizableString, Serializer, JsonObjectProperty, QuestionMatrixDynamicModel, RegexValidator, IAnimationGroupConsumer, PageModel } from "survey-core";
+import { SurveyModel, ILocalizableOwner, LocalizableString, Serializer, JsonObjectProperty, QuestionMatrixDynamicModel, RegexValidator, IAnimationGroupConsumer, PageModel, settings as surveySettings } from "survey-core";
 import { editorLocalization } from "../../src/editorLocalization";
 import { StringEditorViewModelBase } from "../../src/components/string-editor";
 import { CreatorTester } from "../creator-tester";
@@ -431,4 +431,98 @@ test("check pages animation", () => {
   expect(options.addedItems).toEqual([]);
   expect(options.deletedItems).toEqual([]);
   expect(options.mergedItems).toEqual([p1, p2]);
+});
+test("expand/collapse event - loading", () => {
+  surveySettings.animationEnabled = false;
+  const creator = new CreatorTester();
+  creator.expandCollapseButtonVisibility = "onhover";
+  creator.JSON = {
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          }
+        ]
+      },
+      {
+        "name": "page2",
+        "elements": [
+          {
+            "type": "panel",
+            "name": "panel1"
+          }
+        ]
+      }
+    ]
+  };
+  var designerPlugin = <TabDesignerPlugin>(
+    creator.getPlugin("designer")
+  );
+
+  creator.onElementGetExpandCollapseState.add((_, o) => {
+    if (o.reason == "loading") {
+      if (o.element.name == "page2") o.collapsed = false;
+      if (o.element.name == "question1") o.collapsed = true;
+    }
+    if (o.reason == "collapse-all") {
+      if (o.element.name == "page2") o.collapsed = true;
+      if (o.element.name == "question1") o.collapsed = false;
+    }
+    if (o.reason == "expand-all") {
+      if (o.element.name == "page1") o.collapsed = false;
+      if (o.element.name == "page2") o.collapsed = false;
+      if (o.element.name == "question1") o.collapsed = true;
+    }
+    if (o.reason == "drag-start") {
+      if (o.element.name == "page1") o.collapsed = true;
+      if (o.element.name == "page2") o.collapsed = false;
+      if (o.element.name == "panel1") o.collapsed = true;
+    }
+    if (o.reason == "drag-end") {
+      if (o.element.name == "page1") o.collapsed = false;
+      if (o.element.name == "page2") o.collapsed = false;
+      if (o.element.name == "panel1") o.collapsed = true;
+    }
+  });
+
+  const page1Adorner = new PageAdorner(creator, creator.survey.pages[0]);
+  const page2Adorner = new PageAdorner(creator, creator.survey.pages[1]);
+  const questionAdorner = new QuestionAdornerViewModel(creator, creator.survey.getAllQuestions()[0], undefined);
+  const panelAdorner = new QuestionAdornerViewModel(creator, creator.survey.getAllPanels()[0] as any, undefined);
+
+  expect(page1Adorner.collapsed).toBeFalsy();
+  expect(page2Adorner.collapsed).toBeFalsy();
+  expect(questionAdorner.collapsed).toBeTruthy();
+  expect(panelAdorner.collapsed).toBeFalsy();
+
+  const collapseAll = designerPlugin.model.actionContainer.getActionById("collapseAll");
+  collapseAll.action(collapseAll);
+
+  expect(page1Adorner.collapsed).toBeTruthy();
+  expect(page2Adorner.collapsed).toBeTruthy();
+  expect(questionAdorner.collapsed).toBeFalsy();
+  expect(panelAdorner.collapsed).toBeTruthy();
+
+  const expandAll = designerPlugin.model.actionContainer.getActionById("expandAll");
+  expandAll.action(expandAll);
+
+  expect(page1Adorner.collapsed).toBeFalsy();
+  expect(page2Adorner.collapsed).toBeFalsy();
+  expect(questionAdorner.collapsed).toBeTruthy();
+  expect(panelAdorner.collapsed).toBeFalsy();
+
+  creator.collapseAllElements();
+  expect(page1Adorner.collapsed).toBeTruthy();
+  expect(page2Adorner.collapsed).toBeFalsy();
+  expect(questionAdorner.collapsed).toBeTruthy();
+  expect(panelAdorner.collapsed).toBeFalsy();
+
+  creator.restoreElementsState();
+  expect(page1Adorner.collapsed).toBeFalsy();
+  expect(page2Adorner.collapsed).toBeFalsy();
+  expect(questionAdorner.collapsed).toBeTruthy();
+  expect(panelAdorner.collapsed).toBeFalsy();
 });
