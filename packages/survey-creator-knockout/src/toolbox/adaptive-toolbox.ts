@@ -13,6 +13,7 @@ ko.components.register("svc-adaptive-toolbox", {
       ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
         manager.dispose();
         model.toolbox.unsubscribeRootElement();
+        model.toolbox.setRootElement(undefined);
         model.dispose();
       });
       return model;
