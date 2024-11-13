@@ -498,7 +498,7 @@ test("expand/collapse event - loading", () => {
   expect(questionAdorner.collapsed).toBeTruthy();
   expect(panelAdorner.collapsed).toBeFalsy();
 
-  const collapseAll = designerPlugin.model.actionContainer.getActionById("collapseAll");
+  const collapseAll = designerPlugin.model.surfaceToolbar.getActionById("collapseAll");
   collapseAll.action(collapseAll);
 
   expect(page1Adorner.collapsed).toBeTruthy();
@@ -506,7 +506,7 @@ test("expand/collapse event - loading", () => {
   expect(questionAdorner.collapsed).toBeFalsy();
   expect(panelAdorner.collapsed).toBeTruthy();
 
-  const expandAll = designerPlugin.model.actionContainer.getActionById("expandAll");
+  const expandAll = designerPlugin.model.surfaceToolbar.getActionById("expandAll");
   expandAll.action(expandAll);
 
   expect(page1Adorner.collapsed).toBeFalsy();
