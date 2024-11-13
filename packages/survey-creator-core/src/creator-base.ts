@@ -238,17 +238,26 @@ export class SurveyCreatorModel extends Base
   @property({ defaultValue: true }) generateValidJSON: boolean;
   @property({ defaultValue: "" }) currentAddQuestionType: string;
   /**
-   * Specifies the device to show in the Preview tab.
+   * Specifies a default device for survey preview in the Preview tab.
    *
    * Possible values:
+   * 
    * - `"desktop"` (default)
-   * - device name in simulatorDevices table
+   * - `"iPhoneSE"`
+   * - `"iPhone15"`
+   * - `"iPhone15Plus"`
+   * - `"iPad"`
+   * - `"iPadMini"`
+   * - `"androidPhone"`
+   * - `"androidTablet"`
+   * - `"microsoftSurface"`
    */
   previewDevice: string;
   /**
    * Specifies the orientation of the selected device in the Preview tab.
    *
    * Possible values:
+   * 
    * - `"landscape"` (default)
    * - `"portrait"`
    */
@@ -1207,7 +1216,7 @@ export class SurveyCreatorModel extends Base
     const chaningOptions = { tabName: viewName, allow: allow, model: this.currentPlugin?.model };
     this.onActiveTabChanging.fire(this, chaningOptions);
     if (!chaningOptions.allow) return;
-    if(!!this.currentPlugin?.deactivate && !this.currentPlugin.deactivate()) return;
+    if (!!this.currentPlugin?.deactivate && !this.currentPlugin.deactivate()) return;
     const plugin = this.activatePlugin(viewName);
     this.viewType = viewName;
     this.onActiveTabChanged.fire(this, { tabName: viewName, plugin: plugin, model: !!plugin ? plugin.model : undefined });
@@ -1949,7 +1958,7 @@ export class SurveyCreatorModel extends Base
   }
   public restorePagesState(): void {
     this.survey.pages.forEach(page => {
-      if(page["draggedFrom"] !== undefined) {
+      if (page["draggedFrom"] !== undefined) {
         const adorner = SurveyElementAdornerBase.GetAdorner(page);
         adorner?.blockAnimations();
         SurveyElementAdornerBase.RestoreStateFor(page);
@@ -2171,12 +2180,12 @@ export class SurveyCreatorModel extends Base
       this.initSurveyWithJSON(undefined, clearState);
     } else {
       let jsonValue = trustJSON ? this.parseJSON(value) : undefined;
-      if(!trustJSON) {
+      if (!trustJSON) {
         const textWorker = new SurveyTextWorker(value);
-        if(textWorker.isJsonCorrect) {
+        if (textWorker.isJsonCorrect) {
           jsonValue = this.parseJSON(value);
         }
-        else if(!!textWorker.survey) {
+        else if (!!textWorker.survey) {
           jsonValue = textWorker.survey.toJSON();
         }
       }
