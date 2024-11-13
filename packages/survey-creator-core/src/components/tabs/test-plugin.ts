@@ -22,7 +22,7 @@ export class TabTestPlugin implements ICreatorPlugin {
   private simulatorTheme: any = surveyCss[defaultV2ThemeName];
 
   public model: TestSurveyTabViewModel;
-  private _previewDevice: string = "desktop";
+  private _previewDevice: string = "";
   public get previewDevice(): string {
     if (!!this.model) {
       this._previewDevice = this.model.simulator.device;
@@ -34,7 +34,7 @@ export class TabTestPlugin implements ICreatorPlugin {
   }
 
   private setDevice(newValue: string) {
-    this._previewDevice = newValue;
+    this._previewDevice = newValue || "desktop";
     if (!!this.model) {
       this.model.simulator.device = newValue;
       this.model.simulator.resetZoomParameters();
@@ -96,7 +96,7 @@ export class TabTestPlugin implements ICreatorPlugin {
   }
   public activate(): void {
     const tabModel = new TestSurveyTabViewModel(this.creator, this.simulatorTheme);
-    tabModel.simulator.device = this.previewDevice;
+    tabModel.simulator.device = this.previewDevice || this.creator.previewDevice || "desktop";
     tabModel.simulator.landscape = this.creator.previewOrientation != "portrait";
     this.model = tabModel;
     this.update();

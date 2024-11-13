@@ -231,6 +231,14 @@ export interface ICreatorOptions {
    */
   allowChangeThemeInPreview?: boolean;
   /**
+   * Specifies the device to show in the Preview tab.
+   *
+   * Possible values:
+   * - `"desktop"` (default)
+   * - device name in simulatorDevices table
+   */
+  previewDevice?: string;
+  /**
    * Specifies the orientation of the selected device in the Preview tab.
    * 
    * Possible values:

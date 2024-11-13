@@ -1122,9 +1122,11 @@ test("Preview tab: default device and save current device", (): any => {
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
   const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
 
-  expect(testPlugin.previewDevice).toBe("desktop");
+  expect(creator.previewDevice).toBe("desktop");
+  expect(testPlugin.previewDevice).toBe("");
 
   testPlugin.activate();
+  expect(testPlugin.previewDevice).toBe("desktop");
   expect(testPlugin.model.simulator.device).toBe("desktop");
 
   testPlugin.model.simulator.device = "iPhone15";
