@@ -2293,7 +2293,9 @@ export class SurveyCreatorModel extends Base
       this.onPreviewSurveyCreated.fire(this, { survey: survey });
     }
 
-    survey.onPopupVisibleChanged.add((_, options) => options.popup.getAreaCallback = () => this.rootElement);
+    survey.onPopupVisibleChanged.add((_, options) => {
+      if (!options.popup.getAreaCallback) options.popup.getAreaCallback = () => { return this.rootElement; };
+    });
     return survey;
   }
   private getSurveyInstanceCreatedArea(reason: string): string {
