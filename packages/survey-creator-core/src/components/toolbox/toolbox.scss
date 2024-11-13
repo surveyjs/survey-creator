@@ -223,7 +223,7 @@ svc-toolbox {
 }
 
 .svc-toolbox__category-separator {
-  width: var(--thm-toolbox-separator-width, calcSize(5));
+  width: var(--thm-toolbox-separator-width, calcSize(9));
   box-sizing: border-box;
   padding-top: var(--ctr-toolbox-separator-padding-top, calcSize(1.5));
   padding-inline-end: var(--ctr-toolbox-separator-padding-right, calcSize(2));
