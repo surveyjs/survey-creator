@@ -1,9 +1,10 @@
-import { Base, PageModel, property, SurveyModel, ComputedUpdater, settings, IPage, ActionContainer } from "survey-core";
+import { Base, PageModel, property, SurveyModel, ComputedUpdater, settings, IPage, ActionContainer, propertyArray, IAnimationGroupConsumer, AnimationGroup, prepareElementForVerticalAnimation, cleanHtmlElementAfterAnimation } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
 import { getLocString } from "../../editorLocalization";
 import { PagesController } from "../../pages-controller";
 import { SurveyHelper } from "../../survey-helper";
 import { DragDropSurveyElements } from "../../survey-elements";
+import { SurveyElementAdornerBase } from "../action-container-view-model";
 require("./designer.scss");
 
 export const initialSettingsAllowShowEmptyTitleInDesignMode = settings.allowShowEmptyTitleInDesignMode;
@@ -95,11 +96,13 @@ export class TabDesignerViewModel extends Base {
       id: "collapseAll",
       locTooltipName: "ed.collapseAllTooltip",
       iconName: "icon-collapseall-24x24",
+      iconSize: "auto",
       action: action
     }, {
       id: "expandAll",
       locTooltipName: "ed.expandAllTooltip",
       iconName: "icon-expandall-24x24",
+      iconSize: "auto",
       action: action
     }]);
   }
@@ -142,9 +145,6 @@ export class TabDesignerViewModel extends Base {
       }
       this.checkNewPage(updatePageController);
     }
-    if (propName === "pages" && obj.isDescendantOf("survey")) {
-      this.checkNewPage(true);
-    }
     this.isUpdatingNewPage = false;
   }
   private calculateDesignerCss() {
@@ -155,9 +155,14 @@ export class TabDesignerViewModel extends Base {
     this.showNewPage = false;
     this.newPage = undefined;
     this.checkNewPage(false);
+    this.updatePages();
     this.cssUpdater && this.cssUpdater.dispose();
     this.cssUpdater = new ComputedUpdater<string>(() => {
       return this.calculateDesignerCss();
+    });
+    this.survey.registerFunctionOnPropertyValueChanged("pages", () => {
+      this.checkNewPage(true);
+      this.updatePages();
     });
     this.designerCss = <any>this.cssUpdater;
     this.pagesController.onSurveyChanged();
@@ -190,6 +195,9 @@ export class TabDesignerViewModel extends Base {
       this.pagesController.raisePagesChanged();
     }
   }
+  private updatePages() {
+    this.pages = this.survey.pages.concat(this.showNewPage ? [this.newPage] : []);
+  }
   public dispose(): void {
     super.dispose();
     this.cssUpdater && this.cssUpdater.dispose();
@@ -204,6 +212,60 @@ export class TabDesignerViewModel extends Base {
       this.creator.selectElement(this.survey);
     }
     return true;
+  }
+
+  @propertyArray() _pages: Array<PageModel> = [];
+
+  public get pages(): Array<PageModel> {
+    return this._pages;
+  }
+  public set pages(val: Array<PageModel>) {
+    this.pagesAnimation.sync(val);
+  }
+
+  private pagesAnimation = new AnimationGroup(this.getPagesAnimationOptions(), (val) => {
+    this._pages = val;
+    this._pages.forEach(page => delete page["draggedFrom"]);
+  }, () => this._pages)
+
+  private getPagesAnimationOptions(): IAnimationGroupConsumer<PageModel> {
+    return {
+      getEnterOptions: (item, info) => {
+        return {
+          onBeforeRunAnimation: prepareElementForVerticalAnimation,
+          cssClass: "svc-page--enter",
+          onAfterRunAnimation: cleanHtmlElementAfterAnimation
+        };
+      },
+      getLeaveOptions: (item, info) => {
+        return {
+          onBeforeRunAnimation: prepareElementForVerticalAnimation,
+          cssClass: "svc-page--leave",
+          onAfterRunAnimation: cleanHtmlElementAfterAnimation };
+      },
+      isAnimationEnabled: () => {
+        return this.animationAllowed;
+      },
+      getKey(page) {
+        return page.id;
+      },
+      getAnimatedElement: (item) => SurveyElementAdornerBase.GetAdorner(item)?.rootElement?.parentElement,
+      getRerenderEvent: () => this.onElementRerendered,
+      onCompareArrays(options) {
+        const droppedPage = options.mergedItems.filter(page => page["draggedFrom"] !== undefined)[0];
+        if(droppedPage) {
+          options.reorderedItems = [];
+          options.addedItems = [droppedPage];
+          const ghostPage = new PageModel();
+          ghostPage.setSurveyImpl(droppedPage.survey as SurveyModel);
+          ghostPage.title = droppedPage.title;
+          ghostPage.num = droppedPage.num;
+          ghostPage["isGhost"] = true;
+          options.deletedItems = [ghostPage];
+          options.mergedItems.splice(droppedPage["draggedFrom"], 0, ghostPage);
+        }
+      },
+    };
   }
 
   public clickDesigner() {

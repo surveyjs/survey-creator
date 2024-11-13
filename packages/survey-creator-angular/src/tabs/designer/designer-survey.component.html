@@ -6,13 +6,11 @@
     </div>
 
     <ng-container *ngIf="creator.pageEditMode !== 'bypage'">
-      <ng-container *ngFor="let page of survey.pages">
-        <ng-container *ngIf="!model.showNewPage || page !== model.newPage">
-          <ng-container *ngTemplateOutlet="pageContainer; context: { page, isGhost: false }"></ng-container>
+      <ng-container *ngFor="let page of model.pages; trackBy: trackPageBy ">
+        <ng-container>
+          <ng-container
+            *ngTemplateOutlet="pageContainer; context: { page, isGhost: model.newPage == page }"></ng-container>
         </ng-container>
-      </ng-container>
-      <ng-container *ngIf="model.showNewPage && model.newPage">
-        <ng-container *ngTemplateOutlet="pageContainer; context: { page: model.newPage, isGhost: true }"></ng-container>
       </ng-container>
     </ng-container>
     <ng-container *ngIf="model.pagesController.page2Display && creator.pageEditMode === 'bypage'">
@@ -33,6 +31,7 @@
 <ng-template let-page="page" let-isGhost="isGhost" #pageContainer>
   <div class="svc-page" [attr.data-sv-drop-target-survey-element]="isGhost ? 'newGhostPage' : page.name"
     [attr.data-sv-drop-target-page]="page.name">
-    <ng-template [component]="{ name: 'svc-page', data: { model: page, creator, survey, isGhost }}"></ng-template>
+    <ng-template
+      [component]="{ name: 'svc-page', data: { model: page, creator, survey, isGhost: isGhost }}"></ng-template>
   </div>
 </ng-template>

@@ -20,7 +20,7 @@
     <div class="svc-question__drop-indicator svc-question__drop-indicator--bottom"></div>
     <!-- ko if: allowDragging && $data.element.isInteractiveDesignElement -->
     <div class="svc-question__drag-area" data-bind="event: { pointerdown: (model, event)=>{ onPointerDown(event) } }">
-      <!-- ko component: { name: 'sv-svg-icon', params: { css: 'svc-question__drag-element', iconName: 'icon-drag-area-indicator_24x16', size: 24 } } -->
+      <!-- ko component: { name: 'sv-svg-icon', params: { css: 'svc-question__drag-element', iconName: 'icon-drag-area-indicator_24x16', size: 'auto' } } -->
       <!-- /ko -->
       <div class="svc-question__top-actions">
         <!-- ko component: { name: 'sv-action-bar', params: { model: topActionContainer, handleClick: false } } -->
@@ -38,7 +38,7 @@
         <!-- ko if: showAddQuestionButton -->
         <div class="svc-panel__add-new-question svc-action-button"
           data-bind="click: addNewQuestion, key2click, clickBubble: false">
-          <!-- ko component: { name: 'sv-svg-icon', params: { css: 'svc-panel__add-new-question-icon', iconName: 'icon-add_24x24', size: 24 } } -->
+          <!-- ko component: { name: 'sv-svg-icon', params: { css: 'svc-panel__add-new-question-icon', iconName: 'icon-add_24x24', size: 'auto' } } -->
           <!-- /ko -->
           <span class="svc-add-new-item-button__text" data-bind="text: $data.addNewQuestionText">
           </span>

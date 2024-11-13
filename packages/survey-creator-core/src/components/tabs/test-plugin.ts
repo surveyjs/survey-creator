@@ -150,6 +150,7 @@ export class TabTestPlugin implements ICreatorPlugin {
       this.deviceSelectorAction = createDropdownActionModel({
         id: "deviceSelector",
         iconName: "icon-device-desktop",
+        iconSize: "auto",
         mode: "small",
         visible: <any>new ComputedUpdater<boolean>(() => {
           return notShortCircuitAnd(this.creator.activeTab === "test", this.creator.showSimulatorInTestSurveyTab, !this.creator.isTouch);
@@ -168,6 +169,7 @@ export class TabTestPlugin implements ICreatorPlugin {
       this.orientationSelectorAction = new Action({
         id: "orientationSelector",
         iconName: "icon-device-rotate",
+        iconSize: "auto",
         mode: "small",
         visible: <any>new ComputedUpdater<boolean>(() => {
           return notShortCircuitAnd(this.creator.activeTab === "test", this.creator.showSimulatorInTestSurveyTab, !this.creator.isTouch);
@@ -183,6 +185,7 @@ export class TabTestPlugin implements ICreatorPlugin {
       this.invisibleToggleAction = new Action({
         id: "showInvisible",
         iconName: "icon-invisible-items",
+        iconSize: "auto",
         mode: "small",
         needSeparator: <any>new ComputedUpdater<boolean>(() => {
           return !this.creator.isMobileView;
@@ -236,6 +239,7 @@ export class TabTestPlugin implements ICreatorPlugin {
       this.changeThemeAction = new Action({
         id: "themeSwitcher",
         iconName: "icon-theme",
+        iconSize: "auto",
         component: "sv-action-bar-item-dropdown",
         mode: "large",
         locTitleName: this.getThemeLocName(getStartThemeName()),
@@ -276,6 +280,7 @@ export class TabTestPlugin implements ICreatorPlugin {
     this.designerAction = new Action({
       id: "svd-designer",
       iconName: "icon-config",
+      iconSize: "auto",
       action: () => { this.creator.makeNewViewActive("designer"); },
       visible: this.createVisibleUpdater(),
       locTitleName: "ed.designer",
@@ -285,6 +290,7 @@ export class TabTestPlugin implements ICreatorPlugin {
     this.previewAction = new Action({
       id: "svd-preview",
       iconName: "icon-preview",
+      iconSize: "auto",
       active: true,
       visible: this.createVisibleUpdater(),
       locTitleName: "tabs.preview",
@@ -295,6 +301,7 @@ export class TabTestPlugin implements ICreatorPlugin {
     this.prevPageAction = new Action({
       id: "prevPage",
       iconName: "icon-arrow-left_16x16",
+      iconSize: "auto",
       needSeparator: <any>new ComputedUpdater<boolean>(() => {
         return this.creator.isMobileView;
       }),
@@ -304,6 +311,7 @@ export class TabTestPlugin implements ICreatorPlugin {
     this.nextPageAction = new Action({
       id: "nextPage",
       iconName: "icon-arrow-right_16x16",
+      iconSize: "auto",
       visible: false
     });
     return items;

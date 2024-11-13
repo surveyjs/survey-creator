@@ -755,3 +755,63 @@ test("Drag Drop to collapsed page", async (t) => {
     await takeElementScreenshot("drag-drop-in-collapsed-page.png", ".svc-tab-designer_content", t, comparer);
   });
 });
+
+fixture`DragDrop custom widget Screenshot`.page`${url}`.beforeEach(async (t) => {
+});
+
+test("Drag indicator for custom widget", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await ClientFunction(() => {
+      const widget = {
+        name: "peoplepicker",
+        title: "People Picker",
+        iconName: "search",
+        widgetIsLoaded: function () { return true; },
+        isFit: function (question) { return question.getType() === "peoplepicker"; },
+        activatedByChanged: function (activatedBy) { window["Survey"].Serializer.addClass("peoplepicker", [], null, "empty"); },
+        isDefaultRender: false,
+        htmlTemplate: `
+                  <div>
+                    <label class="dds-search">
+                    <input type="text" placeholder="Search by name or email" value="">
+                    </label>
+                  </div>
+                `,
+        afterRender: (question, element) => {
+          const input = element.getElementsByTagName("input")[0];
+          input.style.width = "100%";
+          input.style.padding = "8px auto";
+        },
+      };
+
+      window["Survey"].CustomWidgetCollection.Instance.addCustomWidget(widget, "customtype");
+
+      const widgetTemplateForKo = document.createElement("script");
+      widgetTemplateForKo.setAttribute("id", "survey-widget-peoplepicker");
+      widgetTemplateForKo.setAttribute("type", "text/html");
+      widgetTemplateForKo.innerHTML = `
+                  <div>
+                    <label class="dds-search">
+                    <input type="text" placeholder="Search by name or email" value="">
+                    </label>
+                  </div>
+                `;
+      document.body.appendChild(widgetTemplateForKo);
+    })();
+    await t.resizeWindow(1252, 900);
+
+    const json = {
+      elements: [{ type: "peoplepicker", name: "q1" }, { type: "peoplepicker", name: "q2" }]
+    };
+    await setJSON(json);
+
+    await patchDragDropToDisableDrop();
+
+    const q1 = Selector("[data-sv-drop-target-survey-element='q1']");
+    await t
+      .hover(RatingToolboxItem)
+      .dragToElement(RatingToolboxItem, q1, { speed: 0.5, offsetX: 100, offsetY: 10 });
+
+    await takeElementScreenshot("drag-drop-over-custom-widget.png", Selector(".svc-page").nth(0), t, comparer);
+  });
+});

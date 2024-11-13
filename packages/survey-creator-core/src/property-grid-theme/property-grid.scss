@@ -124,8 +124,11 @@
     flex-grow: 1;
 
     .spg-action-button--icon {
-      opacity: 0.5;
-      padding: calcSize(0.5);
+      padding: var(--ctr-actionbar-button-padding-top-small-icon, calcSize(0.5))
+        var(--ctr-actionbar-button-padding-right-small-icon, calcSize(0.5))
+        var(--ctr-actionbar-button-padding-bottom-small-icon, calcSize(0.5))
+        var(--ctr-actionbar-button-padding-left-small-icon, calcSize(0.5));
+      opacity: var(--ctr-actionbar-button-opacity-muted, 0.5);
     }
 
     .spg-action-button--icon:focus,
@@ -135,6 +138,11 @@
 
     .spg-action-button:active {
       opacity: var(--ctr-actionbar-button-opacity-pressed, 0.5);
+    }
+
+    .spg-action-button__icon {
+      width: var(--ctr-actionbar-button-icon-width-small, calcSize(2));
+      height: var(--ctr-actionbar-button-icon-height-small, calcSize(2));
     }
 
     svg {

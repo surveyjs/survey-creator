@@ -28,16 +28,22 @@ svc-page {
   padding: calcSize(1) calcSize(0) calcSize(3);
   box-sizing: border-box;
   width: 100%;
-  outline: none;
-  transition: background $creator-transition-duration, box-shadow $creator-transition-duration;
+  outline-color: transparent;
+  outline: 2px transparent dashed;
+  transition-property: background-color, box-shadow, outline-color;
+  transition-duration: $creator-transition-duration;
 
   .sd-page {
     margin: 0;
     padding: calcSize(1) calcSize(3) 0;
   }
 
-  &>.svc-question__drag-area {
+  & > .svc-question__drag-area {
     padding-top: calcSize(1.25);
+
+    .svc-question__drag-element {
+      transition: opacity $creator-transition-duration;
+    }
   }
 }
 
@@ -67,56 +73,115 @@ svc-page {
   }
 }
 
+.svc-page-toolbar__item {
+  @include defaultActionButtonSettings;
+  --thm-survey-question-panel-toolbar-item-padding-top: calc(
+    var(--ctr-survey-question-panel-toolbar-item-padding-top) +
+      var(--ctr-survey-question-panel-toolbar-item-icon-padding-top)
+  );
+  --thm-survey-question-panel-toolbar-item-padding-right: calc(
+    var(--ctr-survey-question-panel-toolbar-item-padding-right) +
+      var(--ctr-survey-question-panel-toolbar-item-icon-padding-right)
+  );
+  --thm-survey-question-panel-toolbar-item-padding-bottom: calc(
+    var(--ctr-survey-question-panel-toolbar-item-padding-bottom) +
+      var(--ctr-survey-question-panel-toolbar-item-icon-padding-bottom)
+  );
+  --thm-survey-question-panel-toolbar-item-padding-left: calc(
+    var(--ctr-survey-question-panel-toolbar-item-padding-left) +
+      var(--ctr-survey-question-panel-toolbar-item-icon-padding-left)
+  );
+
+  --thm-survey-question-panel-toolbar-button-gap: calc(var(--ctr-survey-question-panel-toolbar-gap) / 2);
+  margin: 0 var(--thm-survey-question-panel-toolbar-button-gap, calcSize(0.5));
+  border-radius: var(--ctr-survey-page-toolbar-item-corner-radius, calcSize(0.5));
+  padding: var(--thm-survey-question-panel-toolbar-item-padding-top, calcSize(1))
+    var(--thm-survey-question-panel-toolbar-item-padding-right, calcSize(1))
+    var(--thm-survey-question-panel-toolbar-item-padding-bottom, calcSize(1))
+    var(--thm-survey-question-panel-toolbar-item-padding-left, calcSize(1));
+  justify-content: center;
+  align-items: center;
+
+  background-color: transparent;
+  transition: background-color $creator-transition-duration;
+}
+
+.svc-page-toolbar__item--with-text {
+  --thm-survey-question-panel-toolbar-item-padding-right: calc(
+    var(--ctr-survey-question-panel-toolbar-item-padding-right-with-text) +
+      var(--ctr-survey-question-panel-toolbar-item-icon-padding-right)
+  );
+  --thm-survey-question-panel-toolbar-item-gap: calc(
+    var(--ctr-survey-question-panel-toolbar-item-gap) + var(--ctr-survey-question-panel-toolbar-item-icon-padding-right)
+  );
+
+  padding-inline-end: var(--thm-survey-question-panel-toolbar-item-padding-right-with-text, calcSize(1));
+  gap: var(--thm-survey-question-panel-toolbar-item-gap, calcSize(0.5));
+}
+
+.svc-page-toolbar .sv-action:last-of-type .svc-page-toolbar__item {
+  margin-inline-end: 0;
+}
+
+.svc-page-toolbar .sv-action:first-of-type .svc-page-toolbar__item {
+  margin-inline-start: 0;
+}
+
+//hovered state
+.svc-page-toolbar__item:not(.svc-page-toolbar__item--pressed):hover:enabled,
+.svc-page-toolbar__item:not(.svc-page-toolbar__item--pressed):focus:enabled {
+  background-color: var(--ctr-survey-question-panel-toolbar-item-background-color-hovered, $background-dim);
+}
+
+//pressed state
+.svc-page-toolbar__item:not(.svc-page-toolbar__item--pressed):active:enabled {
+  opacity: var(--ctr-survey-question-panel-toolbar-item-opacity-pressed, 0.5);
+}
+
+//disabled state
+.svc-page-toolbar__item:disabled {
+  opacity: var(--ctr-survey-question-panel-toolbar-item-opacity-disabled, 0.25);
+}
+
+.svc-page-toolbar__item--active {
+  .svc-page-toolbar-item__icon use {
+    fill: var(--ctr-survey-question-panel-toolbar-item-icon-color, $secondary);
+  }
+}
+
+.svc-page-toolbar__item--pressed:not(.svc-page-toolbar__item--active) {
+  background-color: var(--ctr-survey-page-toolbar-item-background-color-selected, $background-dim);
+  opacity: var(--ctr-survey-question-panel-toolbar-item-opacity-pressed, 50%);
+}
+
+.svc-page-toolbar-item__icon {
+  --thm-survey-page-toolbar-item-icon-width: calc(
+    var(--ctr-survey-question-panel-toolbar-item-icon-container-width) -
+      var(--ctr-survey-question-panel-toolbar-item-icon-padding-right) -
+      var(--ctr-survey-question-panel-toolbar-item-icon-padding-left)
+  );
+  --thm-survey-page-toolbar-item-icon-height: calc(
+    var(--ctr-survey-question-panel-toolbar-item-icon-container-height) -
+      var(--ctr-survey-question-panel-toolbar-item-icon-padding-top) -
+      var(--ctr-survey-question-panel-toolbar-item-icon-padding-bottom)
+  );
+  width: var(--thm-survey-page-toolbar-item-icon-width, calcSize(2));
+  height: var(--thm-survey-page-toolbar-item-icon-height, calcSize(2));
+}
+
+.svc-page-toolbar-item__icon use {
+  fill: var(--ctr-survey-question-panel-toolbar-item-icon-color, $secondary);
+}
+
+.svc-page-toolbar-item__title {
+  @include ctrSmallBoldFont;
+  color: var(--ctr-survey-page-toolbar-item-text-color, $foreground);
+}
+
 .svc-page__content-actions {
-  .sv-action-bar-item {
-    border-radius: var(--ctr-survey-page-toolbar-item-corner-radius, 4px);
-    background-color: transparent;
-    color: var(--ctr-survey-page-toolbar-item-text-color, $foreground);
-    transition: background-color $creator-transition-duration;
-  }
-
-  .sv-action-bar-item__icon {
-    use {
-      fill: var(--ctr-survey-question-panel-toolbar-item-icon-color, $secondary);
-    }
-  }
-
-  //hovered state
-  .sv-action-bar-item:not(.sv-action-bar-item--pressed):hover:enabled,
-  .sv-action-bar-item:not(.sv-action-bar-item--pressed):focus:enabled {
-    background-color: var(--ctr-survey-question-panel-toolbar-item-background-color-hovered, $background-dim);
-  }
-
-  //pressed state
-  .sv-action-bar-item:not(.sv-action-bar-item--pressed):active:enabled {
-    opacity: var(--ctr-survey-question-panel-toolbar-item-opacity-pressed, 0.5);
-  }
-
-  //disabled state
-  .sv-action-bar-item:disabled {
-    opacity: var(--ctr-survey-question-panel-toolbar-item-opacity-disabled, 0.25);
-  }
-
-  .sv-action-bar-item--secondary {
-    .sv-action-bar-item__icon use {
-      fill: var(--ctr-survey-question-panel-toolbar-item-icon-color, $secondary);
-    }
-  }
-
-  .sv-action-bar-item--active {
-    .sv-action-bar-item__icon use {
-      fill: var(--ctr-survey-question-panel-toolbar-item-icon-color, $secondary);
-    }
-  }
-
   .sv-action-bar-item-dropdown {
     border-radius: calcCornerRadius(0.5);
     background-color: transparent;
-  }
-
-  .sv-action-bar-item--pressed:not(.sv-action-bar-item--active) {
-    background-color: var(--ctr-survey-page-toolbar-item-background-color-selected, $background-dim);
-    opacity: var(--ctr-survey-question-panel-toolbar-item-opacity-pressed, 50%);
   }
 }
 
@@ -125,6 +190,7 @@ svc-page {
   box-shadow: 0 0 0 2px $secondary-light;
   background: var(--ctr-survey-page-background-color-hovered, $secondary-backcolor-semi-light);
 }
+
 .svc-page__content--new.svc-page__content--new {
   box-shadow: none;
   background-color: transparent;
@@ -136,10 +202,12 @@ svc-page {
     opacity: 1;
   }
 
-  &>.svc-question__drag-area {
+  & > .svc-question__drag-area {
     z-index: 1;
 
     .svc-question__drag-element {
+      width: var(--ctr-survey-page-drag-indicator-width, calcSize(3));
+      height: var(--ctr-survey-page-drag-indicator-height, calcSize(2));
       opacity: var(--ctr-survey-page-drag-indicator-opacity, 0.5);
     }
   }
@@ -150,12 +218,12 @@ svc-page {
   background: $secondary-backcolor-semi-light;
 }
 
-
 .svc-page__content--animation-running {
   .svc-row {
     .svc-question--enter {
       animation: none;
-    }  
+    }
+
     .svc-question--leave {
       animation-name: moveInWithOverflow;
       animation-direction: reverse;
@@ -164,29 +232,34 @@ svc-page {
       animation-duration: $svc-collapse-move-out-duration;
       animation-delay: $svc-collapse-move-out-delay;
     }
-  } 
+  }
 }
+
 .svc-creator--disable-animations {
   .svc-row {
     .svc-question--leave {
       animation: none;
-     }
+    }
   }
 }
-.svc-page__content--collapse-onhover, .svc-page__content--collapse-always {
+
+.svc-page__content--collapse-onhover,
+.svc-page__content--collapse-always {
   outline: 2px transparent dashed;
-  transition: outline-color $creator-transition-duration;
+
   &.svc-page__content--selected,
   &.svc-page__content.svc-hovered {
     outline-color: transparent;
   }
+
   &.svc-page__content--collapsed-drag-over-inside {
     box-shadow: 0 0 0 2px $primary;
     background: $primary-light;
     animation: collapsed-drag-over-inside-blinking 1s infinite;
     outline-color: transparent;
   }
-} 
+}
+
 .svc-page__content--collapsed {
   outline-color: $border;
 }
@@ -245,6 +318,7 @@ svc-page {
 
 .svc-element__add-new-question {
   -webkit-tap-highlight-color: transparent;
+  height: auto;
 }
 
 .svc-add-new-item-button__text {
@@ -255,20 +329,20 @@ svc-page {
 .svc-element__question-type-selector {
   appearance: none;
   display: flex;
-  height: calcSize(5);
-  padding: calcSize(1);
+  padding: var(--ctr-button-contextual-button-padding-top, calcSize(1))
+    var(--ctr-button-contextual-button-padding-right, calcSize(1))
+    var(--ctr-button-contextual-button-padding-bottom, calcSize(1))
+    var(--ctr-button-contextual-button-padding-left, calcSize(1));
+  border-radius: var(--ctr-button-contextual-button-corner-radius, 2px);
   box-sizing: border-box;
   border: none;
-  border-radius: 2px;
   background-color: transparent;
   cursor: pointer;
-  margin-inline-end: calcSize(1); // margin-right
+  margin: var(--ctr-button-contextual-button-margin-vertical, calcSize(1))
+    var(--ctr-button-contextual-button-margin-horizontal, calcSize(1));
+  margin-inline-start: 0; // TODO
   outline: none;
   transition: background-color $creator-transition-duration;
-
-  use {
-    fill: var(--ctr-library-contextual-button-icon-color, $foreground-light);
-  }
 
   &:hover {
     background-color: var(--ctr-button-contextual-button-background-color-hovered, $background-dim);
@@ -276,6 +350,20 @@ svc-page {
 
   &:focus {
     background-color: var(--ctr-button-contextual-button-background-color-focused, $primary-light);
+  }
+}
+
+.svc-element__question-type-selector-icon {
+  width: var(--ctr-button-contextual-button-icon-width, calcSize(3));
+  height: var(--ctr-button-contextual-button-icon-height, calcSize(3));
+
+  .sv-svg-icon {
+    width: var(--ctr-button-contextual-button-icon-width, calcSize(3));
+    height: var(--ctr-button-contextual-button-icon-height, calcSize(3));
+  }
+
+  use {
+    fill: var(--ctr-button-contextual-button-icon-color, $foreground-light);
   }
 }
 
@@ -321,20 +409,20 @@ svc-page {
       pointer-events: none;
     }
 
-    .sv-list__item.sv-list__item--selected.sv-list__item--group>.sv-list__item-body {
+    .sv-list__item.sv-list__item--selected.sv-list__item--group > .sv-list__item-body {
       @include ctrDefaultBoldFont;
       background-color: $primary;
       color: $primary-foreground;
     }
 
-    .sv-list__item.sv-list__item--selected.sv-list__item--group>.sv-list__item-body use {
+    .sv-list__item.sv-list__item--selected.sv-list__item--group > .sv-list__item-body use {
       fill: $background;
     }
   }
 }
 
 .svc-page__content--collapsed {
-  &>.sv-action-bar {
+  & > .sv-action-bar {
     display: none;
   }
 
@@ -349,7 +437,7 @@ svc-page {
   .sd-page {
     display: flex;
 
-    &>* {
+    & > * {
       display: none;
     }
 
@@ -396,4 +484,67 @@ svc-page {
       }
     }
   }
+}
+
+$svc-page-fade-in-duration: var(--sjs-svc-page-fade-in-duration, 250ms);
+$svc-page-move-in-duration: var(--sjs-svc-page-move-in-duration, 250ms);
+$svc-page-fade-in-delay: var(--sjs-svc-page-fade-in-delay, 100ms);
+$svc-page-fade-out-duration: var(--sjs-svc-page-fade-out-duration, 250ms);
+$svc-page-move-out-duration: var(--sjs-svc-page-move-out-duration, 250ms);
+$svc-page-move-out-delay: var(--sjs-svc-page-move-out-delay, 100ms);
+
+.svc-page--enter,
+.svc-page--leave {
+  animation-name: fadeIn, moveInWithOverflow;
+  animation-fill-mode: forwards;
+  animation-duration: var(--fade-animation-duration), var(--move-animation-duration);
+  animation-direction: var(--animation-direction);
+  animation-timing-function: var(--animation-timing-function);
+  animation-delay: var(--fade-animation-delay), var(--move-animation-delay);
+}
+
+.svc-page--enter {
+  opacity: 0;
+  --animation-direction: normal;
+  --animation-timing-function: #{$ease-out};
+  --fade-animation-duration: #{$svc-page-fade-in-duration};
+  --move-animation-duration: #{$svc-page-move-in-duration};
+  --fade-animation-delay: #{$svc-page-fade-in-delay};
+  --move-animation-delay: 0s;
+}
+
+.svc-page--leave {
+  --animation-direction: reverse;
+  --animation-timing-function: #{$reverse-ease-out};
+  --fade-animation-duration: #{$svc-page-fade-out-duration};
+  --move-animation-duration: #{$svc-page-move-out-duration};
+  --fade-animation-delay: 0s;
+  --move-animation-delay: #{$svc-page-move-out-delay};
+}
+.svc-creator--disable-animations {
+  .svc-page--enter,
+  .svc-page--leave {
+    animation: none;
+  }
+}
+
+.svc-page--enter.svc-page--enter {
+  .svc-page__content-actions {
+    opacity: 0;
+  }
+
+  .svc-page__content {
+    box-shadow: 0 0 0 2px transparent;
+    background-color: transparent;
+
+    & > .svc-question__drag-area {
+      .svc-question__drag-element {
+        opacity: 0;
+      }
+    }
+  }
+}
+
+.svc-page {
+  scroll-margin-top: calcSize(1);
 }
