@@ -87,6 +87,22 @@ export interface HtmlToMarkdownEvent {
   text: string;
 }
 
+export type ElementGetExpandCollapseStateEventReason = "loading" | "collapse-all" | "expand-all" | "drag-start" | "drag-end";
+export interface ElementGetExpandCollapseStateEvent {
+  /**
+   * A survey element (question, panel, or page) whose expand/collapse state you can switch. 
+   */
+  element: Question | PanelModel | PageModel;
+  /**
+   * Indicates whether the element is currently collapsed or expanded. Set this parameter to `true` if you want to collapse the element or `false` to expand it.
+   */
+  collapsed: boolean;
+  /**
+   * A value that indicates what caused the event to raise: the loading of a survey JSON schema, a click on the Expand All or Collapse All button, or the beginning or end of a drag and drop operation.
+   */
+  reason: ElementGetExpandCollapseStateEventReason;
+}
+
 export interface ElementAllowOperationsEvent {
   /**
    * A survey element (question or panel) for which you can disable user interactions.
