@@ -435,8 +435,8 @@ export class SurveyCreatorModel extends Base
    */
   public onHtmlToMarkdown: EventBase<SurveyCreatorModel, HtmlToMarkdownEvent> = this.addCreatorEvent<SurveyCreatorModel, HtmlToMarkdownEvent>();
 
-  /**
-
+  /*
+   * An event that is raised when Survey Creator obtains the expand/collapse state of a survey element on the design surface. Handle this event to set a required state.
    */
   public onElementGetExpandCollapseState: EventBase<SurveyCreatorModel, ElementGetExpandCollapseStateEvent> = this.addCreatorEvent<SurveyCreatorModel, ElementGetExpandCollapseStateEvent>();
   /**
@@ -1205,7 +1205,7 @@ export class SurveyCreatorModel extends Base
     const chaningOptions = { tabName: viewName, allow: allow, model: this.currentPlugin?.model };
     this.onActiveTabChanging.fire(this, chaningOptions);
     if (!chaningOptions.allow) return;
-    if(!!this.currentPlugin?.deactivate && !this.currentPlugin.deactivate()) return;
+    if (!!this.currentPlugin?.deactivate && !this.currentPlugin.deactivate()) return;
     const plugin = this.activatePlugin(viewName);
     this.viewType = viewName;
     this.onActiveTabChanged.fire(this, { tabName: viewName, plugin: plugin, model: !!plugin ? plugin.model : undefined });
@@ -2191,12 +2191,12 @@ export class SurveyCreatorModel extends Base
       this.initSurveyWithJSON(undefined, clearState);
     } else {
       let jsonValue = trustJSON ? this.parseJSON(value) : undefined;
-      if(!trustJSON) {
+      if (!trustJSON) {
         const textWorker = new SurveyTextWorker(value);
-        if(textWorker.isJsonCorrect) {
+        if (textWorker.isJsonCorrect) {
           jsonValue = this.parseJSON(value);
         }
-        else if(!!textWorker.survey) {
+        else if (!!textWorker.survey) {
           jsonValue = textWorker.survey.toJSON();
         }
       }
