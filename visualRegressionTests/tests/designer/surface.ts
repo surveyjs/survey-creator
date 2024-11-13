@@ -68,7 +68,7 @@ test("Test question type converter", async (t) => {
     await takeElementScreenshot("convert-to-popup.png", Selector(".sv-popup__container").filterVisible(), t, comparer);
   });
 });
-test("Test question type converter on page for panel", async (t) => {
+test.only("Test question type converter on page for panel - 1", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1000, 800);
 
@@ -97,7 +97,7 @@ test("Test question type converter on page for panel", async (t) => {
   });
 });
 
-test("Test question type converter on page for panel", async (t) => {
+test.only("Test question type converter on page for panel - 2", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1000, 800);
 

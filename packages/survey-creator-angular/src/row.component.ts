@@ -24,6 +24,7 @@ export class CreatorRowComponent extends CreatorModelComponent<RowViewModel> {
   }
   createModel() {
     this.model = new RowViewModel(this.creator, this.row, <any>undefined);
+    this.model.subscribeElementChanges();
   }
   getPropertiesToTrack(): string[] {
     return ["creator", "row"];
