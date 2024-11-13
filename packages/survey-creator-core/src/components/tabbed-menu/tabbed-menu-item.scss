@@ -1,6 +1,9 @@
 @import "../../variables.scss";
 
 .svc-tabbed-menu-item {
+  display: flex;
+  align-items: center;
+  min-height: calc(var(--ctr-menu-toolbar-button-icon-height) + var(--ctr-menu-item-padding-top) + var(--ctr-menu-item-padding-bottom));
   padding: var(--ctr-menu-item-padding-top, 20px) var(--ctr-menu-item-padding-right, 24px) var(--ctr-menu-item-padding-bottom, 20px) var(--ctr-menu-item-padding-left, 24px) ;
   box-sizing: border-box;
   cursor: pointer;
@@ -9,7 +12,7 @@
   &:hover,
   &:focus {
     background-color: var(--ctr-menu-item-background-color-hovered, $background-dim);
-    box-shadow: inset 0px -1px 0px $border;
+    box-shadow: inset 0px -1px 0px var(--ctr-menu-border-color, $border);
     outline: none;
   }
 }
