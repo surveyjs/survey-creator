@@ -1,15 +1,15 @@
 <template>
   <div class="svc-page-navigator" v-show="model.visible" ref="root">
     <div
-      class="svc-page-navigator__selector"
+      class="svc-page-navigator__selector svc-page-navigator__button"
       @click="model.togglePageSelector($event)"
       v-key2click
       :title="model.pageSelectorCaption"
-      :class="{ 'svc-page-navigator__selector--opened': model.isPopupOpened }"
+      :class="{ 'svc-page-navigator__button--pressed': model.isPopupOpened }"
     >
       <SvComponent
         :is="'sv-svg-icon'"
-        class="svc-page-navigator__navigator-icon"
+        class="svc-page-navigator__button-icon"
         :iconName="model.icon"
         :size="'auto'"
       ></SvComponent>

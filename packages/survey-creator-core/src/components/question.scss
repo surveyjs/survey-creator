@@ -469,7 +469,8 @@ svc-question {
     height: var(--ctr-survey-question-toolbar-item-icon-height, calcSize(2));
   }
 
-  use {
+  .sv-list__item:hover > .sv-list__item-body .sv-svg-icon use,
+  .sv-svg-icon use {
     fill: $secondary;
   }
 }
@@ -1280,7 +1281,6 @@ svc-question,
     }
   }
 }
-
 
 .sd-panel {
   .svc-row {
